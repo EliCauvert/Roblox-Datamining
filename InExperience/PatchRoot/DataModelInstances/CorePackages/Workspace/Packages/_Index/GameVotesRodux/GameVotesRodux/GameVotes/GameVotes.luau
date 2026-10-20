@@ -2,7 +2,7 @@
 local Immutable = require(GameVotesRodux.Parent.AppCommonLib).Immutable
 local SetGameVotesModule = require(GameVotesRodux.GameVotes.SetGameVotes)
 
-return function(p1, p2) --[[ Line: 15 ]]
+return function(p1, p2)
 	-- upvalues: SetGameVotesModule (copy), Immutable (copy)
 	local P0 = p1 or {}
 	assert(P0, "")

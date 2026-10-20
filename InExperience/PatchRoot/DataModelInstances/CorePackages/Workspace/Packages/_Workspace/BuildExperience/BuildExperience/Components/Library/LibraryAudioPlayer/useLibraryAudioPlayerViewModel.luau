@@ -8,29 +8,29 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(script.Parent.LibraryAudioPlayerView)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 
-return function(p1) --[[ Line: 21 | Named "useLibraryAudioPlayerViewModel" ]]
+return function(p1)
 	-- upvalues: MediaPlaybackModule (copy), NavigationModule (copy), ReactModule (copy), RoactNavigationModule (copy), SignalsReactModule (copy), SendBuildExperienceEventModule (copy)
 	local IsIsActive = p1.isActive ~= false
 	local UseAudioStoreResult = MediaPlaybackModule.useAudioStore(p1.soundId, false)
 	local UseNavigationResult = NavigationModule.useNavigation()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(UseNavigationResult == nil or UseNavigationResult.isFocused())
-	ReactModule.useEffect(function() --[[ Line: 26 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), UseNavigationResult (copy), RoactNavigationModule (upval)
 		UseStateResult2(UseNavigationResult == nil or UseNavigationResult.isFocused())
 		
 		if UseNavigationResult == nil then
 			return nil
 		else
-			local AddListenerResult = UseNavigationResult.addListener(RoactNavigationModule.Events.WillFocus, function() --[[ Line: 31 ]]
+			local AddListenerResult = UseNavigationResult.addListener(RoactNavigationModule.Events.WillFocus, function()
 				-- upvalues: UseStateResult2 (upval)
 				UseStateResult2(true)
 			end)
-			local AddListenerResult1 = UseNavigationResult.addListener(RoactNavigationModule.Events.WillBlur, function() --[[ Line: 34 ]]
+			local AddListenerResult1 = UseNavigationResult.addListener(RoactNavigationModule.Events.WillBlur, function()
 				-- upvalues: UseStateResult2 (upval)
 				UseStateResult2(false)
 			end)
 			
-			return function() --[[ Line: 37 ]]
+			return function()
 				-- upvalues: AddListenerResult (copy), AddListenerResult1 (copy)
 				AddListenerResult.remove()
 				AddListenerResult1.remove()
@@ -42,14 +42,14 @@ return function(p1) --[[ Line: 21 | Named "useLibraryAudioPlayerViewModel" ]]
 	local UseSignalStateResult2 = SignalsReactModule.useSignalState(UseAudioStoreResult.getDuration)
 	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(UseAudioStoreResult.getElapsed)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 48 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2_1 (copy), UseSignalStateResult1 (copy), SendBuildExperienceEventModule (upval)
 		UseStateResult2_1(false)
 		
 		if UseSignalStateResult1 then
 			return nil
 		else
-			local DelayedThread = task.delay(15, function() --[[ Line: 53 ]]
+			local DelayedThread = task.delay(15, function()
 				-- upvalues: UseStateResult2_1 (upval), SendBuildExperienceEventModule (upval)
 				UseStateResult2_1(true)
 				SendBuildExperienceEventModule("LIBRARY_FETCH_FAILED", { universeId = game.GameId, placeId = game.PlaceId }, {
@@ -59,13 +59,13 @@ return function(p1) --[[ Line: 21 | Named "useLibraryAudioPlayerViewModel" ]]
 				})
 			end)
 			
-			return function() --[[ Line: 61 ]]
+			return function()
 				-- upvalues: DelayedThread (copy)
 				task.cancel(DelayedThread)
 			end
 		end
 	end, { UseAudioStoreResult, UseSignalStateResult1 })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 66 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseSignalStateResult1 (copy), UseStateResult (copy), IsIsActive (copy), UseSignalStateResult (copy), UseAudioStoreResult (copy), MediaPlaybackModule (upval), SendBuildExperienceEventModule (upval)
 		if not UseSignalStateResult1 or not UseStateResult or not IsIsActive then return end
 		if UseSignalStateResult then
@@ -87,7 +87,7 @@ return function(p1) --[[ Line: 21 | Named "useLibraryAudioPlayerViewModel" ]]
 		IsIsActive
 	})
 	local UseRefResult = ReactModule.useRef(false)
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 84 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UseSignalStateResult1 (copy), IsIsActive (copy), UseStateResult (copy), UseSignalStateResult (copy), UseAudioStoreResult (copy)
 		UseRefResult.current = UseSignalStateResult1 and (IsIsActive and (UseStateResult and UseSignalStateResult))
 		UseAudioStoreResult.pause()
@@ -98,7 +98,7 @@ return function(p1) --[[ Line: 21 | Named "useLibraryAudioPlayerViewModel" ]]
 		UseStateResult,
 		UseSignalStateResult
 	})
-	local UseResult2 = ReactModule.useCallback(function(Value: number) --[[ Line: 88 ]]
+	local UseResult2 = ReactModule.useCallback(function(Value: number)
 		-- upvalues: UseSignalStateResult1 (copy), IsIsActive (copy), UseStateResult (copy), UseAudioStoreResult (copy), UseSignalStateResult2 (copy)
 		if UseSignalStateResult1 and IsIsActive and UseStateResult then
 			UseAudioStoreResult.seek(math.clamp(Value, 0, 1) * UseSignalStateResult2)
@@ -110,14 +110,14 @@ return function(p1) --[[ Line: 21 | Named "useLibraryAudioPlayerViewModel" ]]
 		IsIsActive,
 		UseStateResult
 	})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 93 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), IsIsActive (copy), UseStateResult (copy), UseAudioStoreResult (copy)
 		if UseRefResult.current and IsIsActive and UseStateResult then
 			UseAudioStoreResult.play()
 		end
 		UseRefResult.current = false
 	end, { UseAudioStoreResult, IsIsActive, UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 100 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseAudioStoreResult (copy), IsIsActive (copy)
 		if not UseStateResult then
 			UseAudioStoreResult.stop()
@@ -128,9 +128,9 @@ return function(p1) --[[ Line: 21 | Named "useLibraryAudioPlayerViewModel" ]]
 			UseAudioStoreResult.pause()
 		end
 	end, { UseAudioStoreResult, UseStateResult, IsIsActive })
-	ReactModule.useEffect(function() --[[ Line: 108 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseAudioStoreResult (copy)
-		return function() --[[ Line: 109 ]]
+		return function()
 			-- upvalues: UseAudioStoreResult (upval)
 			UseAudioStoreResult.stop()
 		end

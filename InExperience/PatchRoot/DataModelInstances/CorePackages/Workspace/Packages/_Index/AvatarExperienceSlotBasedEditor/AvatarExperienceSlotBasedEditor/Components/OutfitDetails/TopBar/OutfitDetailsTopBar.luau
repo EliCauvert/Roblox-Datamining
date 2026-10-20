@@ -4,7 +4,7 @@ local FoundationModule = require(Parent.Foundation)
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local InputSize = FoundationModule.Enums.InputSize
 
-return function(Frame) --[[ Line: 15 | Named "OutfitDetailsTopBar" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), InputSize (copy), ButtonVariant (copy)
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "col size-full-0 auto-y bg-surface-0",

@@ -21,7 +21,7 @@ local config = {
 	JumpSelectLabel = "CoreScripts.InGameMenu.Controls.JumpSelectLabel"
 }
 
-return function(_) --[[ Line: 43 | Named "GamepadControls" ]]
+return function(_)
 	-- upvalues: Roact (copy), ControlLayoutContainerModule (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), ImageSetLabel (copy), AssetsModule (copy), ReactModule (copy), Array (copy), ControlsModule (copy), config (copy), WithLocalizationModule (copy), ThemedTextLabelModule (copy)
 	return Roact.createElement(ControlLayoutContainerModule, {
 		titleText = "CoreScripts.InGameMenu.Controls.GamepadTitle"
@@ -37,9 +37,9 @@ return function(_) --[[ Line: 43 | Named "GamepadControls" ]]
 			testId = if FFlagCoreUiMigrateUIBloxToFoundation then "VRGamepadInstructions" else nil,
 			[ReactModule.Tag] = if FFlagCoreUiMigrateUIBloxToFoundation then nil else "data-testid=VRGamepadInstructions"
 		}, {
-			Array.map(ControlsModule.questGamepadLabels, function(p1, LayoutOrder) --[[ Line: 58 ]]
+			Array.map(ControlsModule.questGamepadLabels, function(p1, LayoutOrder)
 				-- upvalues: config (upval), WithLocalizationModule (upval), Roact (upval), ThemedTextLabelModule (upval)
-				return WithLocalizationModule({ config[p1.labelKey] })(function(Entry) --[[ Line: 61 ]]
+				return WithLocalizationModule({ config[p1.labelKey] })(function(Entry)
 					-- upvalues: Roact (upval), ThemedTextLabelModule (upval), p1 (copy), LayoutOrder (copy)
 					return Roact.createElement(ThemedTextLabelModule, {
 						fontKey = "Header2",

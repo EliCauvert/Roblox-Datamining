@@ -36,7 +36,7 @@ local UseCarouselGamepadInputModule = require(MediaGallery.Hooks.useCarouselGame
 local IsAudioPlaybackAllowedForDeviceModule = require(MediaGallery.isAudioPlaybackAllowedForDevice)
 local SLIDINGWINDOWSIZE = MediaGalleryConstantsModule.SLIDING_WINDOW_SIZE
 
-local function getVisibleIndices(CountItems, CurrentIndex: number) --[[ Line: 58 ]]
+local function getVisibleIndices(CountItems, CurrentIndex: number)
 	-- upvalues: SLIDINGWINDOWSIZE (copy)
 	local List = {}
 	
@@ -50,14 +50,14 @@ local function getVisibleIndices(CountItems, CurrentIndex: number) --[[ Line: 58
 	return List
 end
 
-return ReactModule.memo(function(Frame) --[[ Line: 121 | Named "MediaGalleryCarousel" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseTokensFunction (copy), MediaGalleryConstantsModule (copy), ReactModule (copy), IsValidIdentifierModule (copy), IsYouTubeVideoModule (copy), IsAudioPlaybackAllowedForDeviceModule (copy), EnableAudioPlaybackInApp (copy), UseSnapScrollModule (copy), getVisibleIndices (copy), Signal (copy), VideoPlaybackCoordinator (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), UseAutoAdvanceModule (copy), UseBreakpointXOrSmallerFunction (copy), ResponsiveModule (copy), UseLastInputFunction (copy), AppCommonLibModule (copy), LuaAppMediaGalleryGamepadSupportsPagingIcons (copy), UseGamepadSupportsFunction (copy), List (copy), list (copy), UseCursorFunction (copy), CursorType (copy), UseCarouselGamepadInputModule (copy), UseTouchDragScrollModule (copy), FFlagLuaAppEdpMomentVideo (copy), MediaGalleryVideoItemModule (copy), MediaGalleryImageItemModule (copy), UserInputService (copy), MediaGalleryPageIndicatorsModule (copy), CarouselScrollButtons (copy), RoundIconButton (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ItemPadding = Frame.itemPadding or UseTokensResult.Padding.Medium
 	local AspectRatio = Frame.aspectRatio or MediaGalleryConstantsModule.ITEM_ASPECT_RATIO
 	local CornerRadius = Frame.cornerRadius or UseTokensResult.Radius.Medium
 	local CountItems = #Frame.items
-	local UseMemoResult = ReactModule.useMemo(function(): boolean --[[ Line: 128 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): boolean
 		-- upvalues: Frame (copy), IsValidIdentifierModule (upval), IsYouTubeVideoModule (upval)
 		for _, item in Frame.items do
 			if IsValidIdentifierModule(item.videoId) and not IsYouTubeVideoModule(item.assetTypeId) then
@@ -66,7 +66,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 121 | Named "MediaGalleryCaro
 		end
 		return false
 	end, { Frame.items })
-	ReactModule.useEffect(function() --[[ Line: 137 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy), IsAudioPlaybackAllowedForDeviceModule (upval), EnableAudioPlaybackInApp (upval)
 		if UseMemoResult and IsAudioPlaybackAllowedForDeviceModule() then
 			task.delay(0, EnableAudioPlaybackInApp)
@@ -77,7 +77,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 121 | Named "MediaGalleryCaro
 		itemPadding = ItemPadding,
 		springConfig = MediaGalleryConstantsModule.SPRING_CONFIG,
 		targetIndex = Frame.startIndex,
-		onScrollComplete = ReactModule.useCallback(function(p1, p2) --[[ Line: 143 ]]
+		onScrollComplete = ReactModule.useCallback(function(p1, p2)
 			-- upvalues: Frame (copy)
 			if Frame.onMediaChanged then
 				Frame.onMediaChanged(p1, p2)
@@ -85,17 +85,17 @@ return ReactModule.memo(function(Frame) --[[ Line: 121 | Named "MediaGalleryCaro
 		end, { Frame.onMediaChanged })
 	})
 	local VisibleIndices = getVisibleIndices(CountItems, UseSnapScrollModuleResult.currentIndex)
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 160 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: Signal (upval)
 		return Signal.new()
 	end, {})
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 163 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: Signal (upval)
 		return Signal.new()
 	end, {})
 	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 170 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: VideoPlaybackCoordinator (upval)
 		return VideoPlaybackCoordinator.new()
 	end, {})
@@ -109,16 +109,16 @@ return ReactModule.memo(function(Frame) --[[ Line: 121 | Named "MediaGalleryCaro
 	
 	if FFlagLuaAppMediaGalleryGamepadSupport then
 		v1, UseStateResult2_2 = ReactModule.useState(false)
-		UseResult = ReactModule.useCallback(function(p1) --[[ Line: 183 ]]
+		UseResult = ReactModule.useCallback(function(p1)
 			-- upvalues: UseStateResult2_2 (ref)
 			UseStateResult2_2(p1)
 		end, {})
 		v2, UseStateResult2_3 = ReactModule.useState(false)
-		UseResult1 = ReactModule.useCallback(function(p1) --[[ Line: 190 ]]
+		UseResult1 = ReactModule.useCallback(function(p1)
 			-- upvalues: UseStateResult2_3 (ref)
 			UseStateResult2_3(p1)
 		end, {})
-		ReactModule.useEffect(function() --[[ Line: 195 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseStateResult1 (copy), UseStateResult2_2 (ref), UseStateResult2_3 (ref)
 			if not UseStateResult1 then
 				UseStateResult2_2(false)
@@ -132,12 +132,12 @@ return ReactModule.memo(function(Frame) --[[ Line: 121 | Named "MediaGalleryCaro
 		galleryRef = UseSnapScrollModuleResult.scrollingFrameRef,
 		isMediaGalleryOccluded = Frame.isMediaGalleryOccluded,
 		isAutoAdvanceTimerSuspended = UseStateResult1,
-		scrollRight = ReactModule.useCallback(function() --[[ Line: 202 ]]
+		scrollRight = ReactModule.useCallback(function()
 			-- upvalues: UseSnapScrollModuleResult (copy)
 			UseSnapScrollModuleResult.scrollInDirection("Right", true)
 		end, { UseSnapScrollModuleResult.scrollInDirection })
 	})
-	local UseResult2 = ReactModule.useCallback(function(p1, p2) --[[ Line: 215 ]]
+	local UseResult2 = ReactModule.useCallback(function(p1, p2)
 		-- upvalues: UseAutoAdvanceModuleResult (copy), UseSnapScrollModuleResult (copy)
 		UseAutoAdvanceModuleResult.resetProgress()
 		UseSnapScrollModuleResult.scrollInDirection(p1, p2)
@@ -148,14 +148,14 @@ return ReactModule.memo(function(Frame) --[[ Line: 121 | Named "MediaGalleryCaro
 	local Size200 = UseTokensResult.Size.Size_200
 	local Size400 = if UseBreakpointXOrSmallerFunction(ResponsiveModule.Keys.Small) then UseTokensResult.Size.Size_400 else UseTokensResult.Size.Size_700
 	local GradientOverlayHeight = Frame.gradientOverlayHeight or Size200 + Size400 + UseTokensResult.Size.Size_1000
-	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 229 ]]
+	local UseMemoResult4 = ReactModule.useMemo(function()
 		-- upvalues: Frame (copy), VideoPlaybackCoordinator1 (copy)
 		return {
 			videoAnalyticsData = {
 				source = Frame.analyticsSource or "MediaGallery",
 				sourceId = Frame.analyticsSourceId or nil
 			},
-			getPlaybackSessionId = function() --[[ Line: 240 ]]
+			getPlaybackSessionId = function()
 				-- upvalues: VideoPlaybackCoordinator1 (upval)
 				return VideoPlaybackCoordinator1.currentPlaybackSessionId
 			end
@@ -166,7 +166,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 121 | Named "MediaGalleryCaro
 		VideoPlaybackCoordinator1
 	})
 	local OnFullscreenToggle = if Frame.fullscreenEnabled == false then nil else Frame.onFullscreenToggle
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 248 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: OnFullscreenToggle (copy), UseSnapScrollModuleResult (copy)
 		if OnFullscreenToggle then
 			OnFullscreenToggle(UseSnapScrollModuleResult.currentIndex)
@@ -188,16 +188,16 @@ return ReactModule.memo(function(Frame) --[[ Line: 121 | Named "MediaGalleryCaro
 		local UseGamepadSupportsResult2 = UseGamepadSupportsFunction(list, UseLastInputResult)
 		v3 = IsPointerMatch and UseGamepadSupportsResult2
 	end
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 276 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseResult2 (copy)
 		UseResult2("Left")
 	end, { UseResult2 })
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 280 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseResult2 (copy)
 		UseResult2("Right")
 	end, { UseResult2 })
 	local UseCursorResult = UseCursorFunction(CursorType.Invisible)
-	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 286 ]]
+	local UseResult6 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult1 (copy), UseMemoResult1 (copy)
 		if UseStateResult1 then
 			UseMemoResult1:fire()
@@ -295,7 +295,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 121 | Named "MediaGalleryCaro
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				LayoutOrder = visibleIndice,
-				Size = UseSnapScrollModuleResult.absoluteSizeBinding:map(function(p1): UDim2 --[[ Line: 384 ]]
+				Size = UseSnapScrollModuleResult.absoluteSizeBinding:map(function(p1): UDim2
 					-- upvalues: AspectRatio (copy)
 					return UDim2.new(1, 0, 0, p1.X / AspectRatio)
 				end)
@@ -324,7 +324,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 121 | Named "MediaGalleryCaro
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(0, 0.5),
 				Position = UDim2.fromScale(0, 0.5),
-				Size = UseSnapScrollModuleResult.absoluteSizeBinding:map(function(p1): UDim2 --[[ Line: 414 ]]
+				Size = UseSnapScrollModuleResult.absoluteSizeBinding:map(function(p1): UDim2
 					-- upvalues: AspectRatio (copy)
 					return UDim2.new(1, 0, 0, p1.X / AspectRatio)
 				end),
@@ -401,7 +401,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 121 | Named "MediaGalleryCaro
 				Size = UDim2.fromScale(1, 1)
 			}, { Overlay = Frame.overlay }) else nil,
 			SizeConstraint = ReactModule.createElement("UISizeConstraint", {
-				MinSize = UseSnapScrollModuleResult.absoluteSizeBinding:map(function(p1): Vector2 --[[ Line: 518 ]]
+				MinSize = UseSnapScrollModuleResult.absoluteSizeBinding:map(function(p1): Vector2
 					-- upvalues: AspectRatio (copy)
 					return Vector2.new(0, p1.X / AspectRatio)
 				end)

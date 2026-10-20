@@ -42,7 +42,7 @@ Cell.defaultProps = {
 	horizontalPadding = 24
 }
 
-function Cell.init(p1) --[[ Line: 79 ]]
+function Cell.init(p1)
 	-- upvalues: ControlStateModule (copy)
 	p1:setState({ controlState = ControlStateModule.Initialize })
 	p1.stateStyleMap = {
@@ -51,7 +51,7 @@ function Cell.init(p1) --[[ Line: 79 ]]
 		[ControlStateModule.Pressed] = "BackgroundOnPress"
 	}
 	
-	function p1.getBackgroundStyle(Prop, p2) --[[ Line: 90 ]]
+	function p1.getBackgroundStyle(Prop, p2)
 		-- upvalues: p1 (copy), ControlStateModule (upval)
 		local StateStyle = p1.stateStyleMap[Prop] or p1.stateStyleMap[ControlStateModule.Default]
 		local config = {
@@ -65,7 +65,7 @@ function Cell.init(p1) --[[ Line: 79 ]]
 		return config
 	end
 	
-	function p1.onStateChanged(p2, ControlState) --[[ Line: 106 ]]
+	function p1.onStateChanged(p2, ControlState)
 		-- upvalues: p1 (copy)
 		p1:setState({ controlState = ControlState })
 		
@@ -75,18 +75,18 @@ function Cell.init(p1) --[[ Line: 79 ]]
 	end
 end
 
-function Cell.render(p1) --[[ Line: 116 ]]
+function Cell.render(p1)
 	-- upvalues: WithStyleModule (copy), WithSelectionCursorProviderModule (copy)
-	return WithStyleModule(function(p2) --[[ Line: 117 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: WithSelectionCursorProviderModule (upval), p1 (copy)
-		return WithSelectionCursorProviderModule(function(p3) --[[ Line: 118 ]]
+		return WithSelectionCursorProviderModule(function(p3)
 			-- upvalues: p1 (upval), p2 (copy)
 			return p1:renderWithProviders(p2, p3)
 		end)
 	end)
 end
 
-function Cell.renderWithProviders(p1, p2, _) --[[ Line: 124 ]]
+function Cell.renderWithProviders(p1, p2, _)
 	-- upvalues: Cell (copy), RoactModule (copy), InteractableModule (copy), ControlStateModule (copy)
 	local Size = p1.props.size or UDim2.fromScale(1, 1)
 	local Tail = p1.props.tail
@@ -105,7 +105,7 @@ function Cell.renderWithProviders(p1, p2, _) --[[ Line: 124 ]]
 		SelectionImageObject = p1.props.selectionCursor,
 		isDisabled = p1.props.isDisabled,
 		onStateChanged = p1.onStateChanged,
-		[RoactModule.Event.Activated] = if p1.props.onActivated then function(...) --[[ Line: 139 ]]
+		[RoactModule.Event.Activated] = if p1.props.onActivated then function(...)
 			-- upvalues: p1 (copy)
 			if p1.props.tail and p1.props.userInteractionEnabled and p1.props.onActivated then
 				p1.props.onActivated(...)
@@ -172,7 +172,7 @@ function Cell.renderWithProviders(p1, p2, _) --[[ Line: 124 ]]
 	})
 end
 
-return RoactModule.forwardRef(function(p1, ForwardRef) --[[ Line: 233 ]]
+return RoactModule.forwardRef(function(p1, ForwardRef)
 	-- upvalues: UseCursorByTypeModule (copy), CursorTypeModule (copy), CryoModule (copy), RoactModule (copy), Cell (copy)
 	return RoactModule.createElement(Cell, CryoModule.Dictionary.join(CryoModule.Dictionary.join({
 		selectionCursor = UseCursorByTypeModule(CursorTypeModule.RoundedRectNoInset)

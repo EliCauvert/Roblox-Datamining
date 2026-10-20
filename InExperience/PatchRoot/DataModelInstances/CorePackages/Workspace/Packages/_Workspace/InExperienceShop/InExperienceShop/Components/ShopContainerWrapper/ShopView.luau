@@ -33,7 +33,7 @@ local FFlagShopBlockClickPassThroughModule = require(InExperienceShop.Flags.FFla
 local FFlagShowLargerOfferBannerOnDesktop2Module = require(InExperienceShop.Flags.FFlagShowLargerOfferBannerOnDesktop2)
 local _ = require(InExperienceShop.Hooks.useShopReportOverflow)
 
-return function(p1) --[[ Line: 125 | Named "ShopView" ]]
+return function(p1)
 	-- upvalues: FFlagHideHeaderForBuyRobuxInExperienceShop (copy), FindSectionModule (copy), FFlagEnableUserOffers (copy), FFlagShowLargerOfferBannerOnDesktop2Module (copy), IsSubjectToDesktopPoliciesFunction (copy), ReactModule (copy), View (copy), SearchInputContainerModule (copy), TopBarModule (copy), DesktopOfferBannerModule (copy), FFlagRemoveBottomPaddingInExperienceShopModule (copy), FFlagShopBlockClickPassThroughModule (copy), UseTokensFunction (copy), FFlagEnableCreatorEarlyAccessBannerInShopModule (copy), CreatorEarlyAccessBannerModule (copy), Tabs (copy), FillBehavior (copy), SearchResultsContainerModule (copy), ShopHomePageContainerModule (copy), CategoryPageContainerModule (copy), ItemDetailsContainerModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), UnifiedPurchaseCompletionModal (copy), ShopAbuseReportOverlayModule (copy), OfferDialogStateModule (copy), OfferDetailsDialogModule (copy), OfferTermsDialogModule (copy)
 	local IsSearchOpen = p1.isSearchOpen
 	local NoHideTabs: boolean = not IsSearchOpen and #p1.tabs > 0

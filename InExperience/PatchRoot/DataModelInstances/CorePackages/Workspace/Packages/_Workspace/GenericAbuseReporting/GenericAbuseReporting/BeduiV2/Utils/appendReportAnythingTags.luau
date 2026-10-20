@@ -1,7 +1,7 @@
 ﻿local HttpService = game:GetService("HttpService")
 local GetFFlagReportAnythingEnableAdReportFunction = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.SharedFlags).GetFFlagReportAnythingEnableAdReport
 
-local function transformVectorArray(ConvexHull) --[[ Line: 70 ]]
+local function transformVectorArray(ConvexHull)
 	local t = {}
 	
 	for _, value in ipairs(ConvexHull) do
@@ -10,7 +10,7 @@ local function transformVectorArray(ConvexHull) --[[ Line: 70 ]]
 	return t
 end
 
-local function transformIdentifiedAds(IdentifiedAds) --[[ Line: 78 ]]
+local function transformIdentifiedAds(IdentifiedAds)
 	local t = {}
 	
 	for _, identifiedAd in pairs(IdentifiedAds) do
@@ -31,7 +31,7 @@ local function transformIdentifiedAds(IdentifiedAds) --[[ Line: 78 ]]
 	return t
 end
 
-local function transformIdentifiedAvatars(IdentifiedAvatars) --[[ Line: 98 ]]
+local function transformIdentifiedAvatars(IdentifiedAvatars)
 	-- upvalues: transformVectorArray (copy)
 	local t = {}
 	
@@ -62,14 +62,14 @@ local function transformIdentifiedAvatars(IdentifiedAvatars) --[[ Line: 98 ]]
 	return t
 end
 
-local function _(p1): boolean --[[ Line: 130 | Named "hasIdentifiedAvatars" ]]
+local function _(p1): boolean
 	for _ in pairs(p1.identifiedAvatars) do
 		return true
 	end
 	return false
 end
 
-local _ = function(p2): boolean --[[ Line: 137 | Named "hasIdentifiedAds" ]]
+local _ = function(p2): boolean
 	for _ in pairs(p2.identifiedAds) do
 		return true
 	end
@@ -77,7 +77,7 @@ local _ = function(p2): boolean --[[ Line: 137 | Named "hasIdentifiedAds" ]]
 end
 
 return {
-	appendReportAnythingTags = function(p3, p4) --[[ Line: 144 ]]
+	appendReportAnythingTags = function(p3, p4)
 		-- upvalues: HttpService (copy), transformIdentifiedAvatars (copy), GetFFlagReportAnythingEnableAdReportFunction (copy), transformIdentifiedAds (copy)
 		if not p4 then
 			return p3

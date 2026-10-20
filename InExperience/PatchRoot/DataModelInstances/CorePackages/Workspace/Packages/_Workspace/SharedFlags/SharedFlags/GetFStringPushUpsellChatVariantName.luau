@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("PushUpsellChatVariantName", "pushUpsellChatVariant")
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastString("PushUpsellChatVariantName")
 end

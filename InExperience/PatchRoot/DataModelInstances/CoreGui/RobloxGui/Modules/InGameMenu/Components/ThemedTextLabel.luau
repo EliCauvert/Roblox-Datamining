@@ -39,12 +39,12 @@ local StrictInterfaceResult = T.strictInterface({
 	[Roact.Children] = T.optional(T.table)
 })
 
-return function(p1) --[[ Line: 48 | Named "ThemedTextLabel" ]]
+return function(p1)
 	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), config (copy), NormalizeFontFaceFunction (copy), Cryo (copy), Roact (copy)
 	if GlobalConfigModule.propValidation then
 		assert(StrictInterfaceResult(p1))
 	end
-	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 53 ]]
+	return WithFoundationOrUIBloxStyleFunction(function(p2)
 		-- upvalues: FoundationFontFaceMigration (upval)
 		return {
 			Tokens = if FoundationFontFaceMigration then p2 else nil,
@@ -222,7 +222,7 @@ return function(p1) --[[ Line: 48 | Named "ThemedTextLabel" ]]
 				}
 			}
 		}
-	end, function(p2) --[[ Line: 227 ]]
+	end, function(p2)
 		-- upvalues: p1 (copy), FoundationFontFaceMigration (upval), config (upval), NormalizeFontFaceFunction (upval), Cryo (upval), Roact (upval)
 		local ThemeEntry = p2.Theme[p1.themeKey or "TextDefault"]
 		local v1 = p2.Font[p1.fontKey or "Body"]

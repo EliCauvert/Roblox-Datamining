@@ -22,7 +22,7 @@ local config = {
 	thumbnailRoundedVariant = require(AppChat.Enums.RoundedVariant).Top
 }
 
-function GameCardGroupable(p1) --[[ Line: 60 ]]
+function GameCardGroupable(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), UseAbbreviatedNumberLocalizationFunction (copy), UseScaledValueFunction (copy), ConstantsModule (copy), ReactModule (copy), View (copy), GameCardThumbnailModule (copy), Skeleton (copy), FoundationModule (copy), Text (copy), Icon (copy), IconName (copy), IconSize (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseTokensResult = UseTokensFunction()

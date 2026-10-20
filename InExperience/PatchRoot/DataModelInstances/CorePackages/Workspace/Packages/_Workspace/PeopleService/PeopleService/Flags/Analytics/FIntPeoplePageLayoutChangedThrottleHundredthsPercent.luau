@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("FIntPeoplePageLayoutChangedThrottleHundredthsPercent", 0)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastInt("FIntPeoplePageLayoutChangedThrottleHundredthsPercent")
 end

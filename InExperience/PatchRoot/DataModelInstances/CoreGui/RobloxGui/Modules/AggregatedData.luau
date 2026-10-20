@@ -1,7 +1,7 @@
 ﻿local AggregatedDataModule = {}
 AggregatedDataModule.__index = AggregatedDataModule
 
-function AggregatedDataModule.new() --[[ Line: 4 ]]
+function AggregatedDataModule.new()
 	-- upvalues: AggregatedDataModule (copy)
 	local t = {}
 	setmetatable(t, AggregatedDataModule)
@@ -9,11 +9,11 @@ function AggregatedDataModule.new() --[[ Line: 4 ]]
 	return t
 end
 
-local function _(p1: string): number --[[ Line: 10 | Named "isRbxAssetId" ]]
+local function _(p1: string): number
 	return p1:find("rbxassetid://")
 end
 
-function AggregatedDataModule:addPlay(Text: string, Playtime, Loopcount) --[[ Line: 14 ]]
+function AggregatedDataModule:addPlay(Text: string, Playtime, Loopcount)
 	if not Text:find("rbxassetid://") then return end
 	local Segment: string = Text:sub(14)
 	

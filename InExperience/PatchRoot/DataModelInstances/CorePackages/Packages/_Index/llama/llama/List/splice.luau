@@ -1,4 +1,4 @@
-﻿return function(p1, p2: number, p3: number, ...) --[[ Line: 2 | Named "splice" ]]
+﻿return function(p1, p2: number, p3: number, ...)
 	local ValueType = type(p1)
 	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)
 	local ValueType1 = type(p2)

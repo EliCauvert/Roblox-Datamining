@@ -2,7 +2,7 @@
 local CreateSortAndFiltersStoreModule = require(script.Parent.Parent.Stores.createSortAndFiltersStore)
 local _ = require(script.Parent.Parent.Stores.createThumbnailLatencyStore)
 
-return function() --[[ Line: 26 | Named "createAvatarEditorStores" ]]
+return function()
 	-- upvalues: CreateSortAndFiltersStoreModule (copy)
 	return {
 		categoryInventoryStores = {},

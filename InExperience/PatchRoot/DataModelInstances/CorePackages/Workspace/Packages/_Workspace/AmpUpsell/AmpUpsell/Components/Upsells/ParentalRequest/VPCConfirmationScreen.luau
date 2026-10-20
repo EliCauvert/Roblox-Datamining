@@ -14,11 +14,11 @@ local Dialog = FoundationModule.Dialog
 local DialogSize = FoundationModule.Enums.DialogSize
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
-local function selectScreenSize(p1) --[[ Line: 27 ]]
+local function selectScreenSize(p1)
 	return p1.ScreenSize
 end
 
-return function(p1) --[[ Line: 31 | Named "VPCConfirmationScreen" ]]
+return function(p1)
 	-- upvalues: UseSelectorFunction (copy), selectScreenSize (copy), GetShouldUseFoundationUIVPCUpsellModule (copy), UseLocalizationFunction (copy), CryoModule (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), GetFFlagEnableVPCUpsellFoundationDialogHardeningModule (copy), ButtonVariant (copy), InteractiveAlert (copy), ButtonType (copy)
 	local OnAck = p1.onAck
 	local UseSelectorResult = UseSelectorFunction(selectScreenSize)

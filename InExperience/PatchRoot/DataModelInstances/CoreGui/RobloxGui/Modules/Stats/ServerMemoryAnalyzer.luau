@@ -3,7 +3,7 @@ local BaseMemoryAnalyzerModule = require(CoreGui.RobloxGui.Modules.Stats.BaseMem
 local TreeViewItemModule = require(CoreGui.RobloxGui.Modules.Stats.TreeViewItem)
 local _ = require(CoreGui.RobloxGui.Modules.Common.CommonUtil)
 
-local function __ReadAndSumValues(CoreTreeViewItem, List): number --[[ Line: 25 ]]
+local function __ReadAndSumValues(CoreTreeViewItem, List): number
 	local Total = 0
 	
 	for i, value in pairs(List) do
@@ -18,7 +18,7 @@ local ServerMemoryAnalyzerModule = {}
 setmetatable(ServerMemoryAnalyzerModule, BaseMemoryAnalyzerModule)
 ServerMemoryAnalyzerModule.__index = ServerMemoryAnalyzerModule
 
-function ServerMemoryAnalyzerModule.new(p1) --[[ Line: 52 ]]
+function ServerMemoryAnalyzerModule.new(p1)
 	-- upvalues: BaseMemoryAnalyzerModule (copy), ServerMemoryAnalyzerModule (copy)
 	local NewBaseMemoryAnalyzer = BaseMemoryAnalyzerModule.new(p1)
 	setmetatable(NewBaseMemoryAnalyzer, ServerMemoryAnalyzerModule)
@@ -31,11 +31,11 @@ function ServerMemoryAnalyzerModule.new(p1) --[[ Line: 52 ]]
 	return NewBaseMemoryAnalyzer
 end
 
-function ServerMemoryAnalyzerModule:filterServerMemoryTreeStats(p1) --[[ Line: 78 ]]
+function ServerMemoryAnalyzerModule:filterServerMemoryTreeStats(p1)
 	return if p1.ServerMemoryTree == nil then {} else p1.ServerMemoryTree
 end
 
-function ServerMemoryAnalyzerModule:updateWithTreeStats(List) --[[ Line: 86 ]]
+function ServerMemoryAnalyzerModule:updateWithTreeStats(List)
 	-- upvalues: TreeViewItemModule (copy), __ReadAndSumValues (copy)
 	local v1 = 0
 	
@@ -59,11 +59,11 @@ function ServerMemoryAnalyzerModule:updateWithTreeStats(List) --[[ Line: 86 ]]
 	self:renderUpdates()
 end
 
-function ServerMemoryAnalyzerModule:getMemoryUsageTree() --[[ Line: 123 ]]
+function ServerMemoryAnalyzerModule:getMemoryUsageTree()
 	return self._cachedRootTreeViewItem
 end
 
-function ServerMemoryAnalyzerModule:setVisible(_isVisible) --[[ Line: 127 ]]
+function ServerMemoryAnalyzerModule:setVisible(_isVisible)
 	self._isVisible = _isVisible
 	
 	if self._isVisible then

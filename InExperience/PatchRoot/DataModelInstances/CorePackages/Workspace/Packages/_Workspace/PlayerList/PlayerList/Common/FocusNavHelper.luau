@@ -2,7 +2,7 @@
 local _ = require(Parent.Signals)
 local _ = require(Parent.LeaderboardStore)
 
-local function getSortedPlayerInstances(List) --[[ Line: 43 ]]
+local function getSortedPlayerInstances(List)
 	local List1 = {}
 	
 	for _, value in List do
@@ -15,7 +15,7 @@ local function getSortedPlayerInstances(List) --[[ Line: 43 ]]
 			})
 		end
 	end
-	table.sort(List1, function(A, B): boolean --[[ Line: 57 ]]
+	table.sort(List1, function(A, B): boolean
 		return if A.teamOrder == B.teamOrder then A.playerOrder < B.playerOrder else A.teamOrder < B.teamOrder
 	end)
 	
@@ -23,7 +23,7 @@ local function getSortedPlayerInstances(List) --[[ Line: 43 ]]
 end
 
 return {
-	getNextPlayerInstance = function(p1, p2, TeamId) --[[ Line: 68 ]]
+	getNextPlayerInstance = function(p1, p2, TeamId)
 		-- upvalues: getSortedPlayerInstances (copy)
 		local SortedPlayerInstances = getSortedPlayerInstances(p1)
 		local PlayerInstance = nil
@@ -45,7 +45,7 @@ return {
 		end
 		return PlayerInstance
 	end,
-	getFirstPlayerInstance = function(List) --[[ Line: 104 ]]
+	getFirstPlayerInstance = function(List)
 		local v1 = nil
 		local v2 = 1e999
 		

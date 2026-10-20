@@ -1,19 +1,19 @@
 ﻿local GuiService = game:GetService("GuiService")
 local ReactModule = require(game:GetService("CorePackages").Packages.React)
 
-return function(Callback, p1) --[[ Line: 15 | Named "useSettingsHubCloseButton" ]]
+return function(Callback, p1)
 	-- upvalues: ReactModule (copy), GuiService (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 24 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Callback (copy), UseStateResult2 (copy)
 		local CallbackResult = if Callback then Callback() else nil
 		UseStateResult2(if CallbackResult then CallbackResult.PageTitleCloseButton else nil)
 	end, { Callback, p1 })
-	ReactModule.useEffect(function() --[[ Line: 29 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseStateResult2_1 (copy), GuiService (upval)
 		if UseStateResult then
-			local function updateIsSelected() --[[ Line: 35 ]]
+			local function updateIsSelected()
 				-- upvalues: UseStateResult2_1 (upval), GuiService (upval), UseStateResult (upval)
 				UseStateResult2_1(GuiService.SelectedCoreObject == UseStateResult)
 			end
@@ -21,7 +21,7 @@ return function(Callback, p1) --[[ Line: 15 | Named "useSettingsHubCloseButton" 
 			UseStateResult2_1(GuiService.SelectedCoreObject == UseStateResult)
 			local Connection = GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(updateIsSelected)
 			
-			return function() --[[ Line: 42 ]]
+			return function()
 				-- upvalues: Connection (copy)
 				Connection:Disconnect()
 			end

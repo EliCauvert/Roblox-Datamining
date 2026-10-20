@@ -41,11 +41,11 @@ InformationalDialog.defaultProps = {
 	iconSize = 64
 }
 
-function InformationalDialog.init(p1) --[[ Line: 69 ]]
+function InformationalDialog.init(p1)
 	-- upvalues: Roact (copy)
 	p1.state = { isRooted = false, show = true }
 	
-	function p1.onAncestryChanged(Object) --[[ Line: 75 ]]
+	function p1.onAncestryChanged(Object)
 		-- upvalues: p1 (copy)
 		if Object:IsDescendantOf(game) then
 			p1:setState({ isRooted = true })
@@ -56,11 +56,11 @@ function InformationalDialog.init(p1) --[[ Line: 69 ]]
 	p1.buttonContainerRef = Roact.createRef()
 end
 
-function InformationalDialog.render(p1) --[[ Line: 86 ]]
+function InformationalDialog.render(p1)
 	-- upvalues: WithStyleFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), GetFFlagIGMGamepadSelectionHistoryModule (copy), Roact (copy), CoreGui (copy), ImageSetLabel (copy), AssetsModule (copy), ThemedTextLabelModule (copy), Button (copy), ButtonType (copy), RunService (copy), FocusHandlerModule (copy), ConstantsModule (copy), GuiService (copy)
 	local Props = p1.props
 	
-	return WithStyleFunction(function(p2) --[[ Line: 89 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: Props (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), TextService (upval), GetFFlagIGMGamepadSelectionHistoryModule (upval), p1 (copy), Roact (upval), CoreGui (upval), ImageSetLabel (upval), AssetsModule (upval), ThemedTextLabelModule (upval), Button (upval), ButtonType (upval), RunService (upval), FocusHandlerModule (upval), ConstantsModule (upval), GuiService (upval)
 		local BodyFont = p2.Font.Body.Font
 		local ScaledRelativeSize = p2.Font.Body.RelativeSize * p2.Font.BaseSize
@@ -180,7 +180,7 @@ function InformationalDialog.render(p1) --[[ Line: 86 ]]
 							layoutOrder = 1,
 							size = UDim2.new(1, -5, 1, 0),
 							text = Props.confirmText,
-							onActivated = function() --[[ Line: 256 ]]
+							onActivated = function()
 								-- upvalues: p1 (upval), RunService (upval)
 								p1:setState({ show = false })
 								
@@ -197,7 +197,7 @@ function InformationalDialog.render(p1) --[[ Line: 86 ]]
 			FocusHandler = Roact.createElement(FocusHandlerModule, {
 				isFocused = p1.state.isRooted and (p1.props.visible and p1.props.inputType == ConstantsModule.InputType.Gamepad),
 				shouldForgetPreviousSelection = if GetFFlagIGMGamepadSelectionHistoryModule() then not p1.props.visible else nil,
-				didFocus = function() --[[ Line: 275 ]]
+				didFocus = function()
 					-- upvalues: GuiService (upval), p1 (upval)
 					GuiService:RemoveSelectionGroup("InGameMenuModalButtonsSelectionParent")
 					GuiService:AddSelectionParent("InGameMenuModalButtonsSelectionParent", p1.buttonContainerRef:getValue())
@@ -208,14 +208,14 @@ function InformationalDialog.render(p1) --[[ Line: 86 ]]
 	end)
 end
 
-function InformationalDialog.updateBlur(p1) --[[ Line: 286 ]]
+function InformationalDialog.updateBlur(p1)
 	-- upvalues: RunService (copy)
 	RunService:SetRobloxGuiFocused(p1.props.blurBackground and p1.props.visible)
 end
 
-function InformationalDialog.bindActions(p1) --[[ Line: 291 ]]
+function InformationalDialog.bindActions(p1)
 	-- upvalues: ContextActionService (copy)
-	local function confirmFunc(_, UserInputState, _) --[[ Line: 292 ]]
+	local function confirmFunc(_, UserInputState, _)
 		-- upvalues: p1 (copy)
 		if UserInputState == Enum.UserInputState.Begin then
 			p1.props.onConfirm()
@@ -227,12 +227,12 @@ function InformationalDialog.bindActions(p1) --[[ Line: 291 ]]
 	end
 end
 
-function InformationalDialog:unbindActions() --[[ Line: 303 ]]
+function InformationalDialog:unbindActions()
 	-- upvalues: ContextActionService (copy)
 	ContextActionService:UnbindCoreAction("InGameMenuModalConfirm")
 end
 
-function InformationalDialog.didMount(p1) --[[ Line: 307 ]]
+function InformationalDialog.didMount(p1)
 	p1:updateBlur()
 	
 	if p1.props.visible then
@@ -240,7 +240,7 @@ function InformationalDialog.didMount(p1) --[[ Line: 307 ]]
 	end
 end
 
-function InformationalDialog.didUpdate(p1) --[[ Line: 315 ]]
+function InformationalDialog.didUpdate(p1)
 	p1:updateBlur()
 	
 	if p1.props.visible then
@@ -252,7 +252,7 @@ function InformationalDialog.didUpdate(p1) --[[ Line: 315 ]]
 	end
 end
 
-function InformationalDialog.willUnmount(p1) --[[ Line: 325 ]]
+function InformationalDialog.willUnmount(p1)
 	-- upvalues: RunService (copy)
 	if p1.props.blurBackground then
 		RunService:SetRobloxGuiFocused(false)

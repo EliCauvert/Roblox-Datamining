@@ -36,15 +36,15 @@ local config5 = { [ControlStateModule.Default] = "PlaceHolder" }
 local config6 = { [ControlStateModule.Default] = "PlaceHolder" }
 local config7 = { [ControlStateModule.Default] = "TextEmphasis" }
 
-return function(p1) --[[ Line: 97 | Named "TileSlot" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ControlStateModule (copy), UseStyleModule (copy), GetContentStyleModule (copy), config1 (copy), config (copy), config3 (copy), config2 (copy), config7 (copy), config5 (copy), config4 (copy), config6 (copy), InteractableModule (copy), ImageSetComponentModule (copy), ComponentAssetsCircle9 (copy), ComponentAssetsCircle9Stroke1 (copy), GetIconSizeModule (copy), IconSizeModule (copy), GenericTextLabelModule (copy), Skeleton (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(ControlStateModule.Initialize)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 101 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		p1.onActivated(p1.index)
 	end, { p1.onActivated, p1.index })
-	local UseResult1 = ReactModule.useCallback(function(p2, Hover) --[[ Line: 105 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2, Hover)
 		-- upvalues: UseStateResult2 (copy), ControlStateModule (upval), UseStateResult2_1 (copy), p1 (copy)
 		UseStateResult2(Hover)
 		

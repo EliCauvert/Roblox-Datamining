@@ -21,7 +21,7 @@ local list = {
 	PlayabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser
 }
 
-return function(p1, p2, p3): boolean --[[ Line: 38 | Named "isVideoEligibleForPlayability" ]]
+return function(p1, p2, p3): boolean
 	-- upvalues: FFlagLuaAppUsePrevalidatedVideoGamePlayability (copy), CryoModule (copy), list (copy)
 	return if FFlagLuaAppUsePrevalidatedVideoGamePlayability and p3 then true elseif p1 and p2 ~= nil then p2.isPlayable == true or CryoModule.List.find(list, p2.playabilityStatus) == nil else false
 end

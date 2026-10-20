@@ -16,7 +16,7 @@ local FFlagAXMarketplaceBreakpointMismatchCounter = AvatarExperienceFlagsModule.
 local LANDSCAPEUIWIDTHPERCENTAGE = AvatarExperienceCommonModule.Constants.LANDSCAPE_UI_WIDTH_PERCENTAGE
 local CATALOGRESULTSHORIZONTALMARGIN = ConstantsModule.CATALOG_RESULTS_HORIZONTAL_MARGIN
 
-local function getInitialScreenSizeEstimate() --[[ Line: 71 ]]
+local function getInitialScreenSizeEstimate()
 	-- upvalues: AppCommonLibModule (copy), WidgetListBreakPointEnumModule (copy), LANDSCAPEUIWIDTHPERCENTAGE (copy), CATALOGRESULTSHORIZONTALMARGIN (copy), GetBreakpointFromRowWidthModule (copy)
 	if AppCommonLibModule.isSpatial() then
 		return WidgetListBreakPointEnumModule.XSmall
@@ -33,7 +33,7 @@ local function getInitialScreenSizeEstimate() --[[ Line: 71 ]]
 	end
 end
 
-local function _() --[[ Line: 98 | Named "getSplitPaneCatalogWidthFraction" ]]
+local function _()
 	-- upvalues: FFlagEnableSplitPane (copy), Parent (copy)
 	if FFlagEnableSplitPane then
 		local Store = require(Parent.SplitPane).SplitPaneStore.getStore()
@@ -44,7 +44,7 @@ local function _() --[[ Line: 98 | Named "getSplitPaneCatalogWidthFraction" ]]
 	end
 end
 
-local function getScreenSizeEstimate() --[[ Line: 120 ]]
+local function getScreenSizeEstimate()
 	-- upvalues: AppCommonLibModule (copy), WidgetListBreakPointEnumModule (copy), GetCameraViewportSizeModule (copy), Parent (copy), FFlagEnableSplitPane (copy), LANDSCAPEUIWIDTHPERCENTAGE (copy), CATALOGRESULTSHORIZONTALMARGIN (copy), GetBreakpointFromRowWidthModule (copy)
 	if AppCommonLibModule.isSpatial() then
 		return WidgetListBreakPointEnumModule.XSmall
@@ -68,14 +68,14 @@ local function getScreenSizeEstimate() --[[ Line: 120 ]]
 	return GetBreakpointFromRowWidthModule(math.max((if v1 == nil then if CameraViewportSizeModule.Y < CameraViewportSizeModule.X then XDelta * LANDSCAPEUIWIDTHPERCENTAGE else XDelta else XDelta * v1) - CATALOGRESULTSHORIZONTALMARGIN * 2, 0), DisplayStore.getPlatformScale(false))
 end
 
-local _ = function(): string --[[ Line: 151 | Named "getOrientationDimension" ]]
+local _ = function(): string
 	-- upvalues: GetCameraViewportSizeModule (copy)
 	local CameraViewportSizeModule = GetCameraViewportSizeModule()
 	
 	return if CameraViewportSizeModule == nil then "Unknown" elseif CameraViewportSizeModule.Y < CameraViewportSizeModule.X then "Landscape" else "Portrait"
 end
 
-return function() --[[ Line: 159 | Named "createAXMarketplaceWidgetStore" ]]
+return function()
 	-- upvalues: FFlagAXMarketplaceBreakpointMismatchCounter (copy), GetCameraViewportSizeModule (copy), FFlagAXMarketplaceBreakpointEstimateFix (copy), getScreenSizeEstimate (copy), getInitialScreenSizeEstimate (copy), SignalsModule (copy), DebounceFunction (copy), SendAXCounterV2Function (copy), ConstantsModule (copy)
 	local HasCameraViewportSizeModule = if FFlagAXMarketplaceBreakpointMismatchCounter then GetCameraViewportSizeModule() ~= nil else nil
 	local ScreenSizeEstimate = if FFlagAXMarketplaceBreakpointEstimateFix then getScreenSizeEstimate() else getInitialScreenSizeEstimate()
@@ -84,14 +84,14 @@ return function() --[[ Line: 159 | Named "createAXMarketplaceWidgetStore" ]]
 	local Flag = false
 	local Count = 0
 	local v1 = nil
-	local DebounceResult = DebounceFunction(function(p1) --[[ Line: 176 ]]
+	local DebounceResult = DebounceFunction(function(p1)
 		-- upvalues: Signal2_1 (copy)
 		Signal2_1(p1)
 	end, 0.8)
 	
 	return {
 		getScreenSize = Signal,
-		setScreenSize = function(p1) --[[ Line: 182 ]]
+		setScreenSize = function(p1)
 			-- upvalues: FFlagAXMarketplaceBreakpointEstimateFix (upval), Flag (ref), Signal2 (copy), DebounceResult (copy)
 			if FFlagAXMarketplaceBreakpointEstimateFix then
 				Flag = true
@@ -100,7 +100,7 @@ return function() --[[ Line: 159 | Named "createAXMarketplaceWidgetStore" ]]
 			DebounceResult(p1)
 		end,
 		getDebouncedScreenSize = Signal1,
-		reportMeasuredBreakpoint = function(Measured, Source) --[[ Line: 190 ]]
+		reportMeasuredBreakpoint = function(Measured, Source)
 			-- upvalues: Signal1 (copy), SendAXCounterV2Function (upval), ConstantsModule (upval), GetCameraViewportSizeModule (upval), HasCameraViewportSizeModule (copy), FFlagAXMarketplaceBreakpointEstimateFix (upval)
 			local SignalResult = Signal1(false)
 			local MarketplaceBreakpointMeasured = ConstantsModule.COUNTERS.MarketplaceBreakpointMeasured
@@ -116,7 +116,7 @@ return function() --[[ Line: 159 | Named "createAXMarketplaceWidgetStore" ]]
 				estimateFix = tostring(FFlagAXMarketplaceBreakpointEstimateFix)
 			})
 		end,
-		refreshEstimate = function() --[[ Line: 208 ]]
+		refreshEstimate = function()
 			-- upvalues: Flag (ref), getScreenSizeEstimate (upval), FFlagAXMarketplaceBreakpointEstimateFix (upval), Signal1 (copy), Count (ref), v1 (ref), Signal2 (copy), Signal2_1 (copy)
 			if Flag then return end
 			local ScreenSizeEstimate = getScreenSizeEstimate()
@@ -128,15 +128,15 @@ return function() --[[ Line: 159 | Named "createAXMarketplaceWidgetStore" ]]
 			Signal2(ScreenSizeEstimate)
 			Signal2_1(ScreenSizeEstimate)
 		end,
-		getEstimateWriteId = function() --[[ Line: 234 ]]
+		getEstimateWriteId = function()
 			-- upvalues: Count (ref)
 			return Count
 		end,
-		getEstimateWriteBreakpoint = function() --[[ Line: 237 ]]
+		getEstimateWriteBreakpoint = function()
 			-- upvalues: v1 (ref)
 			return v1
 		end,
-		wasScreenSizePublishedByEstimateWrite = function(Count1, p1): boolean --[[ Line: 221 ]]
+		wasScreenSizePublishedByEstimateWrite = function(Count1, p1): boolean
 			-- upvalues: Count (ref), v1 (ref)
 			return Count ~= Count1 and v1 == p1
 		end

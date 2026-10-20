@@ -11,7 +11,7 @@ local PostPurchaseWarningAcknowledgeModule = {
 }
 require(PurchasePrompt.Utils.addRawValueMethodToEnum)(PostPurchaseWarningAcknowledgeModule.UserActionType, config)
 
-function PostPurchaseWarningAcknowledgeModule.Post(p1, p2) --[[ Line: 21 ]]
+function PostPurchaseWarningAcknowledgeModule.Post(p1, p2)
 	-- upvalues: PostPurchaseWarningAcknowledgeModule (copy)
 	return p1.postPurchaseWarningAcknowledge((PostPurchaseWarningAcknowledgeModule.UserActionType.toRawValue(p2)))
 end

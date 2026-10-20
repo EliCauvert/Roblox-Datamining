@@ -18,7 +18,7 @@ local MapCheckUserPurchaseSettingsFailureReasonToViolationTypeFunction = IAPExpe
 local EconomicRestrictionsViolationType = IAPExperienceModule.Enums.EconomicRestrictionsViolationType
 local list = { AnalyticsModule, NetworkModule, ExternalSettingsModule }
 
-local function _(p1): boolean --[[ Line: 32 | Named "validateResult" ]]
+local function _(p1): boolean
 	-- upvalues: MapCheckUserPurchaseSettingsFailureReasonToViolationTypeFunction (copy), EconomicRestrictionsViolationType (copy)
 	if p1 == nil then
 		return false
@@ -30,15 +30,15 @@ local function _(p1): boolean --[[ Line: 32 | Named "validateResult" ]]
 	end
 end
 
-return function() --[[ Line: 55 | Named "initiateUserPurchaseSettingsPrecheck" ]]
+return function()
 	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), AnalyticsModule (copy), ExternalSettingsModule (copy), InitiatePurchasePrecheckModule (copy), GetUpsellFlowModule (copy), UpsellFlowModule (copy), CheckUserPurchaseSettingsModule (copy), MapCheckUserPurchaseSettingsFailureReasonToViolationTypeFunction (copy), EconomicRestrictionsViolationType (copy), ErrorOccurredModule (copy), PurchaseErrorModule (copy), CheckUserPurchaseSettingsFailureReason (copy), SetPromptStateModule (copy), PromptStateModule (copy), SetEconomicRestrictionErrorModule (copy)
-	return ThunkModule.new(script.Name, list, function(p1, p2) --[[ Line: 56 ]]
+	return ThunkModule.new(script.Name, list, function(p1, p2)
 		-- upvalues: NetworkModule (upval), AnalyticsModule (upval), ExternalSettingsModule (upval), InitiatePurchasePrecheckModule (upval), GetUpsellFlowModule (upval), UpsellFlowModule (upval), CheckUserPurchaseSettingsModule (upval), MapCheckUserPurchaseSettingsFailureReasonToViolationTypeFunction (upval), EconomicRestrictionsViolationType (upval), ErrorOccurredModule (upval), PurchaseErrorModule (upval), CheckUserPurchaseSettingsFailureReason (upval), SetPromptStateModule (upval), PromptStateModule (upval), SetEconomicRestrictionErrorModule (upval)
 		local v1 = p2[NetworkModule]
 		local v2 = p2[AnalyticsModule]
 		local v3 = p2[ExternalSettingsModule]
 		
-		return if v3.isStudio() then p1:dispatch(InitiatePurchasePrecheckModule()) elseif GetUpsellFlowModule(v3.getPlatform()) == UpsellFlowModule.Web then p1:dispatch(InitiatePurchasePrecheckModule()) else CheckUserPurchaseSettingsModule(v1):andThen(function(Result) --[[ Line: 75 ]]
+		return if v3.isStudio() then p1:dispatch(InitiatePurchasePrecheckModule()) elseif GetUpsellFlowModule(v3.getPlatform()) == UpsellFlowModule.Web then p1:dispatch(InitiatePurchasePrecheckModule()) else CheckUserPurchaseSettingsModule(v1):andThen(function(Result)
 			-- upvalues: MapCheckUserPurchaseSettingsFailureReasonToViolationTypeFunction (upval), EconomicRestrictionsViolationType (upval), p1 (copy), ErrorOccurredModule (upval), PurchaseErrorModule (upval), InitiatePurchasePrecheckModule (upval), CheckUserPurchaseSettingsFailureReason (upval), v2 (copy), SetPromptStateModule (upval), PromptStateModule (upval), SetEconomicRestrictionErrorModule (upval)
 			local Enabled = nil
 			if Result == nil then
@@ -71,7 +71,7 @@ return function() --[[ Line: 55 | Named "initiateUserPurchaseSettingsPrecheck" ]
 					return p1:dispatch(ErrorOccurredModule(PurchaseErrorModule.UnknownFailure))
 				end
 			end
-		end):catch(function(_) --[[ Line: 116 ]]
+		end):catch(function(_)
 			-- upvalues: p1 (copy), ErrorOccurredModule (upval), PurchaseErrorModule (upval)
 			return p1:dispatch(ErrorOccurredModule(PurchaseErrorModule.UnknownFailure))
 		end)

@@ -1,7 +1,7 @@
 ﻿local _ = require(script:FindFirstAncestor("NetworkingVirtualEvents").types)
 
 return {
-	mock = function(Id) --[[ Line: 7 ]]
+	mock = function(Id)
 		local _DateTime = DateTime.now()
 		
 		return {
@@ -28,7 +28,7 @@ return {
 			updatedTime = _DateTime
 		}
 	end,
-	fromResponse = function(p1) --[[ Line: 38 ]]
+	fromResponse = function(p1)
 		local _DateTime = DateTime.fromIsoDate(p1.eventTime.startUtc)
 		local _DateTime1 = DateTime.fromIsoDate(p1.eventTime.endUtc)
 		local _DateTime2 = DateTime.fromIsoDate(p1.createdUtc)

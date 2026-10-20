@@ -2,21 +2,21 @@
 local _ = require(Parent.Signals)
 local CreateSessionScopedSignalFunction = require(Parent.SignalsUtils).createSessionScopedSignal
 
-return function() --[[ Line: 19 | Named "createApplyingLayeredClothingStore" ]]
+return function()
 	-- upvalues: CreateSessionScopedSignalFunction (copy)
 	local SessionScopedSignal, SessionScopedSignal2 = CreateSessionScopedSignalFunction(false)
 	
 	return {
 		getApplyingLayeredClothing = SessionScopedSignal,
-		startedApplyingLayeredClothing = function() --[[ Line: 22 ]]
+		startedApplyingLayeredClothing = function()
 			-- upvalues: SessionScopedSignal2 (copy)
 			SessionScopedSignal2(true)
 		end,
-		finishedApplyingLayeredClothing = function() --[[ Line: 26 ]]
+		finishedApplyingLayeredClothing = function()
 			-- upvalues: SessionScopedSignal2 (copy)
 			SessionScopedSignal2(false)
 		end,
-		reset = function() --[[ Line: 30 ]]
+		reset = function()
 			-- upvalues: SessionScopedSignal2 (copy)
 			SessionScopedSignal2(false)
 		end

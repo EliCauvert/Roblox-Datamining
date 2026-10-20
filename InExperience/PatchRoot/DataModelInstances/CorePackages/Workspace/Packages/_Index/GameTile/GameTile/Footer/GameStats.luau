@@ -26,7 +26,7 @@ local FFlagLuaAppGenreRatingFooter = require(Parent.SharedFlags).FFlagLuaAppGenr
 local IconsStatusGamesRatingSmall = Images["icons/status/games/rating_small"]
 local IconsStatusGamesPeoplePlayingSmall = Images["icons/status/games/people-playing_small"]
 local GameStats = RoactModule.PureComponent:extend("GameStats")
-local Callback = if FFlagLuaAppGenreRatingFooter then nil else function(p1: number, p2: number): string --[[ Line: 36 ]]
+local Callback = if FFlagLuaAppGenreRatingFooter then nil else function(p1: number, p2: number): string
 	local v1 = "--"
 	
 	if p1 == nil or p1 < 0 then
@@ -43,14 +43,14 @@ local Callback = if FFlagLuaAppGenreRatingFooter then nil else function(p1: numb
 	return v1
 end
 
-function GameStats.renderSponsored(p1, p2) --[[ Line: 57 ]]
+function GameStats.renderSponsored(p1, p2)
 	-- upvalues: RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), SponsoredTooltipHover (copy), TooltipOrientation (copy), GetUserInputIsSelectionOnlyModule (copy), Interactable (copy), WithLocalizationFunction (copy)
 	local Theme = p2.Theme
 	local _Font = p2.Font
 	local Body = if p1.props.useLargerFont then _Font.Body else _Font.CaptionHeader
 	local ScaledRelativeSize = Body.RelativeSize * _Font.BaseSize
 	
-	return WithLocalizationFunction({ sponsoredText = "Feature.GamePage.Label.Sponsored" })(function(p3) --[[ Line: 64 ]]
+	return WithLocalizationFunction({ sponsoredText = "Feature.GamePage.Label.Sponsored" })(function(p3)
 		-- upvalues: RoactModule (upval), ScaledRelativeSize (copy), Theme (copy), FoundationFontFaceMigration (upval), Body (copy), NormalizeFontFaceFunction (upval), p1 (copy), p2 (copy), SponsoredTooltipHover (upval), TooltipOrientation (upval), GetUserInputIsSelectionOnlyModule (upval), Interactable (upval)
 		return RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
@@ -63,7 +63,7 @@ function GameStats.renderSponsored(p1, p2) --[[ Line: 57 ]]
 			SponsoredBlock = RoactModule.createElement(Interactable, {
 				Size = UDim2.new(1, 0, 1, 0),
 				BackgroundTransparency = 1,
-				onStateChanged = function() --[[ Line: 119 ]] end,
+				onStateChanged = function() end,
 				[RoactModule.Event.Activated] = p1.props.onActivateSponsoredTooltip
 			}, {
 				SponsoredBlockFrame = RoactModule.createElement("Frame", {
@@ -104,7 +104,7 @@ function GameStats.renderSponsored(p1, p2) --[[ Line: 57 ]]
 	end)
 end
 
-function GameStats.renderGameStats(p1, p2, Props, p3) --[[ Line: 132 ]]
+function GameStats.renderGameStats(p1, p2, Props, p3)
 	-- upvalues: FFlagLuaAppGenreRatingFooter (copy), GetGameStatsRatingPercentageTextModule (copy), Callback (ref), RoactModule (copy), GridTileGameStatsModule (copy), FFlagLuaAppNarrowTileHideRating (copy), FFlagLuaAppNarrowTileHidePlayerCount (copy), WithLocalizationFunction (copy), GridTileIconTextFooterModule (copy), Images (copy)
 	local Stats = Props.stats
 	local GameStatsRatingPercentageTextModule = if FFlagLuaAppGenreRatingFooter then GetGameStatsRatingPercentageTextModule(Stats.totalUpVotes, Stats.totalDownVotes) else Callback(Stats.totalUpVotes, Stats.totalDownVotes)
@@ -115,7 +115,7 @@ function GameStats.renderGameStats(p1, p2, Props, p3) --[[ Line: 132 ]]
 				"Feature.GameDetails.RatingPercentOnly",
 				percentRating = GameStatsRatingPercentageTextModule
 			}
-		})(function(p4) --[[ Line: 160 ]]
+		})(function(p4)
 			-- upvalues: RoactModule (upval), GridTileIconTextFooterModule (upval), Images (upval), p1 (copy), Props (copy)
 			return RoactModule.createElement(GridTileIconTextFooterModule, {
 				icon = Images["icons/status/games/rating_small"],
@@ -142,7 +142,7 @@ function GameStats.renderGameStats(p1, p2, Props, p3) --[[ Line: 132 ]]
 	}) else p1:renderFullGameStats(p2, Props, GameStatsRatingPercentageTextModule, p3)
 end
 
-function GameStats:renderFullGameStats(p1, p2, Text, p3) --[[ Line: 175 ]]
+function GameStats:renderFullGameStats(p1, p2, Text, p3)
 	-- upvalues: RoactModule (copy), ImageSetLabel (copy), IconsStatusGamesRatingSmall (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), IconsStatusGamesPeoplePlayingSmall (copy)
 	local PlayerCountText = if p2.stats.playerCount then p2.playerCountText else nil
 	local Theme = p1.Theme
@@ -214,7 +214,7 @@ function GameStats:renderFullGameStats(p1, p2, Text, p3) --[[ Line: 175 ]]
 	})
 end
 
-function GameStats:renderConcurrentUsersPill(p1, Props) --[[ Line: 266 ]]
+function GameStats:renderConcurrentUsersPill(p1, Props)
 	-- upvalues: RoactModule (copy), Colors (copy), ImageSetLabel (copy), IconsStatusGamesPeoplePlayingSmall (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local _Font = p1.Font
 	local FooterFont = _Font.Footer.Font
@@ -268,23 +268,23 @@ function GameStats:renderConcurrentUsersPill(p1, Props) --[[ Line: 266 ]]
 	})
 end
 
-function GameStats.render(p1) --[[ Line: 325 ]]
+function GameStats.render(p1)
 	-- upvalues: WithTextSizeOffsetFunction (copy), WithStyleFunction (copy)
 	local Stats = p1.props.stats
 	
 	if Stats == nil then
 		return nil
 	else
-		local function v42(p2, p3) --[[ Line: 331 ]]
+		local function v42(p2, p3)
 			-- upvalues: Stats (copy), p1 (copy)
 			local IsShowSponsoredLabel = Stats.isSponsored and Stats.isShowSponsoredLabel
 			
 			return if IsShowSponsoredLabel then p1:renderSponsored(p2) elseif Stats.displayConcurrentUsersPill then p1:renderConcurrentUsersPill(p2, p1.props) elseif p1.props.hideGameStats then nil else p1:renderGameStats(p2, p1.props, p3)
 		end
 		
-		return WithTextSizeOffsetFunction(function(p2) --[[ Line: 346 ]]
+		return WithTextSizeOffsetFunction(function(p2)
 			-- upvalues: WithStyleFunction (upval), v42 (copy)
-			return WithStyleFunction(function(p3) --[[ Line: 347 ]]
+			return WithStyleFunction(function(p3)
 				-- upvalues: v42 (upval), p2 (copy)
 				return v42(p3, p2)
 			end)
@@ -292,7 +292,7 @@ function GameStats.render(p1) --[[ Line: 325 ]]
 	end
 end
 
-return function(p1) --[[ Line: 354 ]]
+return function(p1)
 	-- upvalues: UsePlayerCountTextModule (copy), RoactModule (copy), GameStats (copy), CryoModule (copy)
 	return RoactModule.createElement(GameStats, CryoModule.Dictionary.join(p1, {
 		playerCountText = UsePlayerCountTextModule(p1.stats and p1.stats.playerCount or nil)

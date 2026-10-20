@@ -1,4 +1,4 @@
-﻿return function(p1, p2, Frame: Frame): boolean --[[ Line: 1 ]]
+﻿return function(p1, p2, Frame: Frame): boolean
 	local ScaledAbsoluteSize = 0.5 * Frame.AbsoluteSize
 	local Offset = p1 - (Frame.AbsolutePosition + ScaledAbsoluteSize)
 	local AngleDelta = math.atan2(Offset.Y, Offset.X) - math.rad(Frame.AbsoluteRotation)

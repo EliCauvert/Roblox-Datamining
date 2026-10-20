@@ -10,13 +10,13 @@ return ServiceModule:register({
 	initialAvailability = ServiceModule.AvailabilitySignal.Available,
 	id = require(CorePackages.Workspace.Packages.InExperienceSideSheet).Enums.ActionBinding.Leave,
 	sideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement.SessionAction,
-	activated = function(_) --[[ Line: 22 ]]
+	activated = function(_)
 		-- upvalues: InGameMenuIntegrationUtilsModule (copy), LeaveGamePage (copy)
 		InGameMenuIntegrationUtilsModule.toggleIGMPage("LeaveGamePage", LeaveGamePage:get())
 	end,
 	isActivated = LeaveGamePage,
 	components = {
-		Icon = function(_) --[[ Line: 27 ]]
+		Icon = function(_)
 			-- upvalues: CommonIconModule (copy), LeaveGamePage (copy)
 			return CommonIconModule("icons/actions/leave", nil, LeaveGamePage)
 		end

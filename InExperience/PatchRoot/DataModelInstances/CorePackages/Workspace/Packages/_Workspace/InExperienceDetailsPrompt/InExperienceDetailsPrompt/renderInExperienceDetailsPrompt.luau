@@ -14,12 +14,12 @@ local InExperienceDetailsPromptAppModule = require(InExperienceDetailsPrompt.InE
 local FFlagLuaAppIedpOverlayAndNavigationFix = require(Parent.SharedFlags).FFlagLuaAppIedpOverlayAndNavigationFix
 local InExperienceDetailsPromptDisplayOrder = game:DefineFastInt("InExperienceDetailsPromptDisplayOrder", -1)
 
-local function _() --[[ Line: 23 | Named "createFocusNavigationService" ]]
+local function _()
 	-- upvalues: ReactFocusNavigationModule (copy)
 	return ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
 end
 
-return function() --[[ Line: 27 | Named "renderInExperienceDetailsPrompt" ]]
+return function()
 	-- upvalues: FFlagLuaAppIedpOverlayAndNavigationFix (copy), CoreGui (copy), InExperienceDetailsPromptDisplayOrder (copy), ReactFocusNavigationModule (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), FoundationProvider (copy), FoundationModule (copy), Provider (copy), InExperienceDetailsPromptAppModule (copy), ReactRobloxModule (copy)
 	local Folder = Instance.new("Folder")
 	Folder.Name = if FFlagLuaAppIedpOverlayAndNavigationFix then "InExperienceDetailsPromptApp" else "InExperienceDetailsPrompt"

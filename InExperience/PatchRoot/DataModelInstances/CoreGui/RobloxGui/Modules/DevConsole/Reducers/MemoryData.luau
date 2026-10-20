@@ -2,7 +2,7 @@
 local ClientMemoryUpdateSearchFilterModule = require(script.Parent.Parent.Actions.ClientMemoryUpdateSearchFilter)
 local ServerMemoryUpdateSearchFilterModule = require(script.Parent.Parent.Actions.ServerMemoryUpdateSearchFilter)
 
-return function(p1, p2) --[[ Line: 11 ]]
+return function(p1, p2)
 	-- upvalues: ClientMemoryUpdateSearchFilterModule (copy), ImmutableModule (copy), ServerMemoryUpdateSearchFilterModule (copy)
 	local P0 = p1 or { clientSearchTerm = "", serverSearchTerm = "" }
 	

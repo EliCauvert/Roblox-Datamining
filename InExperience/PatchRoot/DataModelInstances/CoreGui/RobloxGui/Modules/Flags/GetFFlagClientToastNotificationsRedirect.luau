@@ -7,10 +7,10 @@ local Flag = false
 local v1 = nil
 local v2 = nil
 
-return function() --[[ Line: 12 ]]
+return function()
 	-- upvalues: EnableClientToastNotificationsRedirectExperiment (copy), Flag (ref), v1 (ref), v2 (ref), IXPServiceWrapper (copy), ClientToastNotificationsRedirectLayerName (copy), ClientToastNotificationsRedirect4 (copy), ClientToastNotificationsRedirectLayerValue (copy)
 	if EnableClientToastNotificationsRedirectExperiment and not Flag then
-		v1, v7 = pcall(function() --[[ Line: 14 ]]
+		v1, v7 = pcall(function()
 			-- upvalues: Flag (upval), IXPServiceWrapper (upval), ClientToastNotificationsRedirectLayerName (upval)
 			Flag = true
 			

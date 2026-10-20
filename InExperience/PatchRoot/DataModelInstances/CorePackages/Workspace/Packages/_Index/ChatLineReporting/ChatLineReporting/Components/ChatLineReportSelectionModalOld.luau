@@ -18,7 +18,7 @@ local RadioGroup = FoundationModule.RadioGroup
 local ScrollView = FoundationModule.ScrollView
 local ScrollBarVisibility = FoundationModule.Enums.ScrollBarVisibility
 
-local function createChildren(Messages, _, LocalizedText, ScrollViewSizeX) --[[ Line: 38 ]]
+local function createChildren(Messages, _, LocalizedText, ScrollViewSizeX)
 	-- upvalues: IsSystemMessageModule (copy), ReactModule (copy), RadioGroup (copy), ChatLineReportSelectableLineModule (copy)
 	local Elements = {}
 	local t = {}
@@ -41,13 +41,13 @@ local function createChildren(Messages, _, LocalizedText, ScrollViewSizeX) --[[ 
 	return Elements, t
 end
 
-local function useAbsoluteSizeListener(Current, UseRefResult) --[[ Line: 65 ]]
+local function useAbsoluteSizeListener(Current, UseRefResult)
 	-- upvalues: ReactModule (copy)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseRefResult2 = ReactModule.useRef(Current)
 	UseRefResult2.current = Current
 	
-	return ReactModule.useCallback(function(Current) --[[ Line: 73 ]]
+	return ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseRefResult2 (copy)
 		if UseRefResult then
 			UseRefResult.current = Current
@@ -57,7 +57,7 @@ local function useAbsoluteSizeListener(Current, UseRefResult) --[[ Line: 65 ]]
 			UseRefResult1.current = nil
 		end
 		if Current then
-			UseRefResult1.current = Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 82 ]]
+			UseRefResult1.current = Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: UseRefResult2 (upval), Current (copy)
 				UseRefResult2.current(Current)
 			end)
@@ -65,7 +65,7 @@ local function useAbsoluteSizeListener(Current, UseRefResult) --[[ Line: 65 ]]
 	end, {})
 end
 
-return function(p1) --[[ Line: 89 | Named "ChatLineReportSelectionModalOld" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), ConstantsModule (copy), createChildren (copy), CryoModule (copy), UseLayerCollectorFunction (copy), FFlagChatLineSelectionModalCleanupSizeListenersModule (copy), useAbsoluteSizeListener (copy), ChatLineReportModalWindowModule (copy), ButtonType (copy), ChatLineReportInfoModule (copy), Empty (copy), ScrollView (copy), ScrollBarVisibility (copy), RadioGroup (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(nil)
@@ -82,36 +82,36 @@ return function(p1) --[[ Line: 89 | Named "ChatLineReportSelectionModalOld" ]]
 	local v2 = nil
 	
 	if FFlagChatLineSelectionModalCleanupSizeListenersModule then
-		v1 = useAbsoluteSizeListener(function(Frame) --[[ Line: 107 ]]
+		v1 = useAbsoluteSizeListener(function(Frame)
 			-- upvalues: UseStateResult2_1 (copy)
 			UseStateResult2_1(Frame.AbsoluteSize.Y)
 		end)
-		v2 = useAbsoluteSizeListener(function(Frame) --[[ Line: 110 ]]
+		v2 = useAbsoluteSizeListener(function(Frame)
 			-- upvalues: UseStateResult2_2 (copy)
 			UseStateResult2_2(Frame.AbsoluteSize.X)
 		end, UseRefResult1)
 	end
-	ReactModule.useEffect(function() --[[ Line: 115 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagChatLineSelectionModalCleanupSizeListenersModule (upval), UseRefResult (copy), UseStateResult2_1 (copy)
 		if FFlagChatLineSelectionModalCleanupSizeListenersModule then return end
 		if UseRefResult.current then
-			UseRefResult.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 121 ]]
+			UseRefResult.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: UseStateResult2_1 (upval), UseRefResult (upval)
 				UseStateResult2_1(UseRefResult.current.AbsoluteSize.Y)
 			end)
 		end
 	end, { UseRefResult.current, AbsoluteSize })
-	ReactModule.useEffect(function() --[[ Line: 127 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagChatLineSelectionModalCleanupSizeListenersModule (upval), UseRefResult1 (copy), UseStateResult2_2 (copy)
 		if FFlagChatLineSelectionModalCleanupSizeListenersModule then return end
 		if UseRefResult1.current then
-			UseRefResult1.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 133 ]]
+			UseRefResult1.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: UseStateResult2_2 (upval), UseRefResult1 (upval)
 				UseStateResult2_2(UseRefResult1.current.AbsoluteSize.X)
 			end)
 		end
 	end, { UseRefResult1.current, AbsoluteSize })
-	ReactModule.useEffect(function() --[[ Line: 140 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), UseRefResult2 (copy), ConstantsModule (upval)
 		if UseRefResult1.current then
 			local ScrollingFrame = UseRefResult1.current:FindFirstChildWhichIsA("ScrollingFrame", true)
@@ -130,7 +130,7 @@ return function(p1) --[[ Line: 89 | Named "ChatLineReportSelectionModalOld" ]]
 		anchorPoint = Vector2.new(0.5, 0),
 		title = UseLocalizationResult.ChatSelectionModalTitle,
 		onCloseClicked = p1.onBack,
-		onInfoClicked = ReactModule.useCallback(function() --[[ Line: 152 ]]
+		onInfoClicked = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
 			UseStateResult2(not UseStateResult)
 		end, { UseStateResult, UseStateResult2 }),
@@ -164,7 +164,7 @@ return function(p1) --[[ Line: 89 | Named "ChatLineReportSelectionModalOld" ]]
 				PaddingBottom = UDim.new(0, 12)
 			}),
 			RadioGroup = ReactModule.createElement(RadioGroup.Root, {
-				onValueChanged = function(p2) --[[ Line: 206 ]]
+				onValueChanged = function(p2)
 					-- upvalues: p1 (copy), ConstantsModule (upval), Children2 (copy)
 					p1.setSelectedMessage(p1.messages[p2])
 					p1.analyticsDispatch({

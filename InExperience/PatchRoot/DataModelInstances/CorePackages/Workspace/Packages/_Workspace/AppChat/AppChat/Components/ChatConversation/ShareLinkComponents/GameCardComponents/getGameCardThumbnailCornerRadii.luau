@@ -6,7 +6,7 @@ local config = {
 	[RoundedVariantModule.TopRight] = { topRight = true }
 }
 
-return function(p1, p2) --[[ Line: 14 | Named "getGameCardThumbnailCornerRadii" ]]
+return function(p1, p2)
 	-- upvalues: config (copy), RoundedVariantModule (copy), GetCornerRadiiModule (copy)
 	return GetCornerRadiiModule(config[p1 or RoundedVariantModule.Top] or config[RoundedVariantModule.Top], p2)
 end

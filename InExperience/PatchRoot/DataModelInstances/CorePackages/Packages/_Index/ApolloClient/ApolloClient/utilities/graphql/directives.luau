@@ -5,11 +5,11 @@ local VisitFunction = require(Parent1.GraphQL).visit
 local InvariantFunction = require(Parent.jsutils.invariant).invariant
 local Callback = nil
 
-local function shouldInclude(p1, p2) --[[ Line: 40 ]]
+local function shouldInclude(p1, p2)
 	-- upvalues: Array (copy), Callback (ref), InvariantFunction (copy)
 	local Directives = p1.directives
 	
-	return not Directives or #Directives == 0 or Array.every(Callback(Directives), function(p3) --[[ Line: 47 ]]
+	return not Directives or #Directives == 0 or Array.every(Callback(Directives), function(p3)
 		-- upvalues: p2 (copy), InvariantFunction (upval)
 		local Directive = p3.directive
 		local IfArgument = p3.ifArgument
@@ -25,11 +25,11 @@ local function shouldInclude(p1, p2) --[[ Line: 40 ]]
 	end)
 end
 
-local function getDirectiveNames(p1) --[[ Line: 68 ]]
+local function getDirectiveNames(p1)
 	-- upvalues: VisitFunction (copy)
 	local List = {}
 	VisitFunction(p1, {
-		Directive = function(_, p2) --[[ Line: 72 ]]
+		Directive = function(_, p2)
 			-- upvalues: List (copy)
 			table.insert(List, p2.name.value)
 		end
@@ -38,18 +38,18 @@ local function getDirectiveNames(p1) --[[ Line: 68 ]]
 	return List
 end
 
-local function _(p1): boolean --[[ Line: 97 | Named "isInclusionDirective" ]]
+local function _(p1): boolean
 	local Value = p1.name.value
 	
 	return Value == "skip" or Value == "include"
 end
 
-Callback = function(Directives) --[[ Line: 102 | Named "getInclusionDirectives" ]]
+Callback = function(Directives)
 	-- upvalues: Array (copy), InvariantFunction (copy)
 	local List = {}
 	
 	if Directives and #Directives > 0 then
-		Array.forEach(Directives, function(Directive) --[[ Line: 108 ]]
+		Array.forEach(Directives, function(Directive)
 			-- upvalues: InvariantFunction (upval), List (copy)
 			local Value = Directive.name.value
 			
@@ -79,27 +79,27 @@ end
 return {
 	shouldInclude = shouldInclude,
 	getDirectiveNames = getDirectiveNames,
-	hasDirectives = function(p1, p2) --[[ Line: 81 ]]
+	hasDirectives = function(p1, p2)
 		-- upvalues: Array (copy), getDirectiveNames (copy)
-		return Array.some(getDirectiveNames(p2), function(p3): boolean --[[ Line: 82 ]]
+		return Array.some(getDirectiveNames(p2), function(p3): boolean
 			-- upvalues: Array (upval), p1 (copy)
 			return Array.indexOf(p1, p3) > -1
 		end)
 	end,
-	hasClientExports = function(p1) --[[ Line: 88 ]]
+	hasClientExports = function(p1)
 		-- upvalues: Array (copy), getDirectiveNames (copy)
 		local SomeResult = false
 		
 		if p1 ~= nil then
 			local list = { "client" }
-			SomeResult = Array.some(getDirectiveNames(p1), function(p2): boolean --[[ Line: 82 ]]
+			SomeResult = Array.some(getDirectiveNames(p1), function(p2): boolean
 				-- upvalues: Array (upval), list (copy)
 				return Array.indexOf(list, p2) > -1
 			end)
 			
 			if SomeResult then
 				local list1 = { "export" }
-				SomeResult = Array.some(getDirectiveNames(p1), function(p2): boolean --[[ Line: 82 ]]
+				SomeResult = Array.some(getDirectiveNames(p1), function(p2): boolean
 					-- upvalues: Array (upval), list1 (copy)
 					return Array.indexOf(list1, p2) > -1
 				end)

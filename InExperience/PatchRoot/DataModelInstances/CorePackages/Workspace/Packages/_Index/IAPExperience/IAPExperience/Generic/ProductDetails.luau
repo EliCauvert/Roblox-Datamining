@@ -18,18 +18,18 @@ local Default = require(Parent1.LoggingProtocol).default
 local VirtualItemBadgeShownCounter = require(Parent.Generic.Events.VirtualItemBadgeCounter).VirtualItemBadgeShownCounter
 local IconsStatusImageunavailable = UIBloxModule.App.ImageSet.Images["icons/status/imageunavailable"]
 
-local function _(Text: string): string --[[ Line: 41 | Named "withMaxLength" ]]
+local function _(Text: string): string
 	return if #Text > 50 then Text:sub(1, 50) .. "..." else Text
 end
 
-return function(p1) --[[ Line: 57 ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), UseTokensFunction (copy), ReactModule (copy), ModelViewportModule (copy), ImageSetLabel (copy), IconsStatusImageunavailable (copy), VirtualItemBadgeTypeModule (copy), YellowBadgeModule (copy), LoggerModule (copy), Default (copy), VirtualItemBadgeShownCounter (copy), View (copy), Text (copy), FormatNumberModule (copy), LocalizationService (copy)
 	local UseLocalizationResult = UseLocalizationFunction({ Popular = "IAPExperience.RobuxUpsell.Text.PopularItem" })
 	local UseTokensResult = UseTokensFunction()
 	local XOffset: number = if p1.isPortrait then 128 else 80
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
 	
-	local function updateComponentWidth(Frame) --[[ Line: 66 ]]
+	local function updateComponentWidth(Frame)
 		-- upvalues: XOffset (copy), UseStateResult (copy), UseStateResult2 (copy)
 		if not Frame then return end
 		local XDelta = Frame.AbsoluteSize.X - XOffset - 6
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 57 ]]
 		Icon = "icons/menu/fire_fill",
 		Text = UseLocalizationResult.Popular
 	}) else nil
-	ReactModule.useEffect(function() --[[ Line: 102 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Element1 (copy), LoggerModule (upval), p1 (copy), Default (upval), VirtualItemBadgeShownCounter (upval)
 		if Element1 then
 			LoggerModule.debug({

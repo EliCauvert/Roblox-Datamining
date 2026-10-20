@@ -6,7 +6,7 @@ local Text = FoundationModule.Text
 local ResponsiveModule = require(Parent.Responsive)
 local FFlagAXAddTextXAlignmentProp = require(Parent.AvatarExperienceFlags).FFlagAXAddTextXAlignmentProp
 
-return function(Label) --[[ Line: 18 | Named "SlotItemCardFooter" ]]
+return function(Label)
 	-- upvalues: UseTokensFunction (copy), ResponsiveModule (copy), ReactModule (copy), Text (copy), FFlagAXAddTextXAlignmentProp (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsUseOrientationResultMatch = ResponsiveModule.useOrientation() == ResponsiveModule.BreakpointConfig.Enum.Portrait

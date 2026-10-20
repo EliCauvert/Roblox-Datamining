@@ -5,9 +5,9 @@ local _ = require(script.Parent.Parent.types)
 local _ = require(TimeToInteractiveTracker.Milestones.types)
 local ConstantsModule = require(TimeToInteractiveTracker.Milestones.constants)
 
-return function(Callback, Callback1) --[[ Line: 35 ]]
+return function(Callback, Callback1)
 	-- upvalues: FFlagDebugTimeToInteractiveTrackerModule (copy), NewResult (copy), ConstantsModule (copy)
-	return function(p1, List) --[[ Line: 36 ]]
+	return function(p1, List)
 		-- upvalues: Callback (copy), FFlagDebugTimeToInteractiveTrackerModule (upval), NewResult (upval), ConstantsModule (upval), Callback1 (copy)
 		if #List == 0 then return end
 		local CallbackResultEntry = Callback(false)[p1]
@@ -19,7 +19,7 @@ return function(Callback, Callback1) --[[ Line: 35 ]]
 		local StartTime = CallbackResultEntry.startTime
 		local Subphase = ConstantsModule.DataProcessingCompleted.Subphase
 		
-		local function materializeSubphases(Subphases) --[[ Line: 63 ]]
+		local function materializeSubphases(Subphases)
 			-- upvalues: StartTime (copy), Subphase (copy)
 			if Subphases == nil then
 				return nil
@@ -52,7 +52,7 @@ return function(Callback, Callback1) --[[ Line: 35 ]]
 				subphases = materializeSubphases(value.subphases)
 			})
 		end
-		Callback1(function(Tbl) --[[ Line: 110 ]]
+		Callback1(function(Tbl)
 			-- upvalues: p1 (copy), List1 (copy)
 			local Entry = Tbl[p1]
 			

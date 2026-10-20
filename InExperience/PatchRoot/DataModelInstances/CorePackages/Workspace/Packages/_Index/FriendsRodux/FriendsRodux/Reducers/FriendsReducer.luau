@@ -17,7 +17,7 @@ local config = {
 	contactNamesByUserId = {}
 }
 
-return function(p1) --[[ Line: 24 ]]
+return function(p1)
 	-- upvalues: ByUserIdModule (copy), CountsByUserIdModule (copy), RequestsModule (copy), RecommendationsModule (copy), FollowingsModule (copy), FriendshipStatusModule (copy), FriendsRankByUserIdModule (copy), ContactNamesByUserIdModule (copy), config (copy)
 	local ByUserIdModuleResult = ByUserIdModule(p1)
 	local CountsByUserIdModuleResult = CountsByUserIdModule(p1)
@@ -28,7 +28,7 @@ return function(p1) --[[ Line: 24 ]]
 	local FriendsRankByUserIdModuleResult = FriendsRankByUserIdModule(p1)
 	local ContactNamesByUserIdModuleResult = ContactNamesByUserIdModule(p1)
 	
-	return function(p2, p3) --[[ Line: 34 ]]
+	return function(p2, p3)
 		-- upvalues: config (upval), ByUserIdModuleResult (copy), CountsByUserIdModuleResult (copy), RequestsModuleResult (copy), RecommendationsModuleResult (copy), FollowingsModuleResult (copy), FriendshipStatusModuleResult (copy), FriendsRankByUserIdModuleResult (copy), ContactNamesByUserIdModuleResult (copy)
 		local P1 = p2 or config
 		

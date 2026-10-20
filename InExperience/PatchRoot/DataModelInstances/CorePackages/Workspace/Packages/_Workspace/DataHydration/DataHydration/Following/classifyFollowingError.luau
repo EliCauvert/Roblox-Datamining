@@ -10,7 +10,7 @@ local config = {
 	[503] = FollowingUpdateErrorTypeEnumModule.Unavailable
 }
 
-return function(p1) --[[ Line: 19 | Named "classifyFollowingError" ]]
+return function(p1)
 	-- upvalues: config (copy), FollowingUpdateErrorTypeEnumModule (copy)
 	local ResponseCode = if type(p1) == "table" then p1.responseCode else nil
 	local Entry = if type(ResponseCode) == "number" then config[ResponseCode] else nil

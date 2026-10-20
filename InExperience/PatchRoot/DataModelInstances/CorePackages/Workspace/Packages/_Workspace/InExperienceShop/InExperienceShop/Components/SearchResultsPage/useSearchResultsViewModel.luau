@@ -7,11 +7,11 @@ local _ = require(script.Parent.SearchResultsView)
 local SearchMatchersModule = require(script.Parent.searchMatchers)
 local t = {}
 
-local function _(p1): string --[[ Line: 37 | Named "compositeKey" ]]
+local function _(p1): string
 	return p1.id .. "|" .. tostring(p1.itemType)
 end
 
-local function collectUniqueItems(Sections) --[[ Line: 41 ]]
+local function collectUniqueItems(Sections)
 	local t = {}
 	local List = {}
 	
@@ -28,20 +28,20 @@ local function collectUniqueItems(Sections) --[[ Line: 41 ]]
 	return List
 end
 
-local _ = function(p1, p2): string --[[ Line: 58 | Named "computeState" ]]
+local _ = function(p1, p2): string
 	return if p1 == "" then "hint" elseif p2 == 0 then "empty" else "results"
 end
 
-return function(Frame) --[[ Line: 68 | Named "useSearchResultsViewModel" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), collectUniqueItems (copy), FFlagShopUseFuzzySearchModule (copy), SearchMatchersModule (copy), ConstantsModule (copy), t (copy)
 	local CommittedQuery = Frame.committedQuery
 	local Sections = Frame.sections
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 72 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CommittedQuery (copy), collectUniqueItems (upval), Sections (copy), FFlagShopUseFuzzySearchModule (upval), SearchMatchersModule (upval), ConstantsModule (upval)
 		return if CommittedQuery == "" then {} else (if FFlagShopUseFuzzySearchModule then SearchMatchersModule.fuzzyMatch else SearchMatchersModule.substringMatch)(collectUniqueItems(Sections), CommittedQuery, ConstantsModule.MAX_SEARCH_RESULTS)
 	end, { Sections, CommittedQuery })
 	local Smallest = math.min(Frame.itemsPerRow, ConstantsModule.ITEMS_PER_SECTION)
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 86 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), t (upval), Smallest (copy)
 		if #UseMemoResult == 0 then
 			return t

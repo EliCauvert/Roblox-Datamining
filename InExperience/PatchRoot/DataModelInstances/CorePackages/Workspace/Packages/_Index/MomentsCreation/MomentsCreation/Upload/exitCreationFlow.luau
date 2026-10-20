@@ -1,4 +1,4 @@
-﻿return function(Callback: () -> ()) --[[ Line: 16 | Named "exitCreationFlow" ]]
+﻿return function(Callback: () -> ())
 	if Callback then
 		Callback()
 	end

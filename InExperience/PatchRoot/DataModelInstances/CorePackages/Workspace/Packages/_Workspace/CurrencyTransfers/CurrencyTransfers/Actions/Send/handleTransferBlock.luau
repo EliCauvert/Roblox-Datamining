@@ -9,7 +9,7 @@ local RobuxTransferFlowEventNameModule = require(CurrencyTransfers.Enums.RobuxTr
 local LogCurrencyTransferCounterModule = require(CurrencyTransfers.Utils.logCurrencyTransferCounter)
 local LogRobuxTransferFlowEventModule = require(CurrencyTransfers.Utils.logRobuxTransferFlowEvent)
 
-return function(p1, p2, p3, p4) --[[ Line: 17 | Named "handleTransferBlock" ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: LogCurrencyTransferCounterModule (copy), CurrencyTransferTelemetryModule (copy), SharedFlagsModule (copy), LogRobuxTransferFlowEventModule (copy), RobuxTransferFlowEventNameModule (copy), PromptStateModule (copy), GetTransferRequestByIdRequestModule (copy)
 	local SetPromptStateFunction = p1.setPromptState
 	local SetAmpRecourseActionsFunction = p1.setAmpRecourseActions
@@ -18,7 +18,7 @@ return function(p1, p2, p3, p4) --[[ Line: 17 | Named "handleTransferBlock" ]]
 	local SetRecipientFunction = p1.setRecipient
 	local GetTransferRequestIdFunction = p1.getTransferRequestId
 	
-	local function applyBlockState() --[[ Line: 31 ]]
+	local function applyBlockState()
 		-- upvalues: LogCurrencyTransferCounterModule (upval), p1 (copy), CurrencyTransferTelemetryModule (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval), p2 (copy), SetAmpRecourseActionsFunction (copy), p3 (copy), SetAmpFeatureCheckFunction (copy), p4 (copy), SetTransferRetryOriginFunction (copy), SetPromptStateFunction (copy), PromptStateModule (upval)
 		LogCurrencyTransferCounterModule(p1, CurrencyTransferTelemetryModule.CurrencyTransferAmpRecourseRequiredCounter)
 		
@@ -45,13 +45,13 @@ return function(p1, p2, p3, p4) --[[ Line: 17 | Named "handleTransferBlock" ]]
 	local TransferRequestId = GetTransferRequestIdFunction(false)
 	
 	if TransferRequestId then
-		GetTransferRequestByIdRequestModule({ transferRequestId = TransferRequestId }, nil, p1.getNetworkImpl()):andThen(function(Result) --[[ Line: 60 ]]
+		GetTransferRequestByIdRequestModule({ transferRequestId = TransferRequestId }, nil, p1.getNetworkImpl()):andThen(function(Result)
 			-- upvalues: SetRecipientFunction (copy), applyBlockState (copy)
 			if Result and Result.transfer and Result.transfer.recipient then
 				SetRecipientFunction(Result.transfer.recipient)
 			end
 			applyBlockState()
-		end):catch(function() --[[ Line: 66 ]]
+		end):catch(function()
 			-- upvalues: applyBlockState (copy)
 			applyBlockState()
 		end)

@@ -13,12 +13,12 @@ local StrictInterfaceResult = T.strictInterface({
 	LayoutOrder = T.optional(T.number)
 })
 
-return function(Frame: Frame) --[[ Line: 22 ]]
+return function(Frame: Frame)
 	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), WithLocalizationModule (copy), Roact (copy), ThemedTextLabelModule (copy)
 	if GlobalConfigModule.propValidation then
 		assert(StrictInterfaceResult(Frame))
 	end
-	return WithLocalizationModule({ text = Frame.localizationKey })(function(p1) --[[ Line: 29 ]]
+	return WithLocalizationModule({ text = Frame.localizationKey })(function(p1)
 		-- upvalues: Roact (upval), ThemedTextLabelModule (upval), Frame (copy)
 		return Roact.createElement(ThemedTextLabelModule, {
 			fontKey = "Body",

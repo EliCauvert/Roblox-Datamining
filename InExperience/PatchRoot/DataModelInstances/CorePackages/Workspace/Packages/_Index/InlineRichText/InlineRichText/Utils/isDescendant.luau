@@ -3,28 +3,28 @@ local NewResult = require(InlineRichText.Logger):new(script.Name)
 local CryoModule = require(InlineRichText.Parent.Cryo)
 local t = {}
 
-local function _(p1, p2): string --[[ Line: 25 | Named "getMemoKey" ]]
+local function _(p1, p2): string
 	return `${p1}___${p2}`
 end
 
-local _ = function(p1, p2, p3) --[[ Line: 29 | Named "getMemo" ]]
+local _ = function(p1, p2, p3)
 	-- upvalues: t (copy)
 	return t[p1][`${p2}___${p3}`]
 end
 
-local _ = function(p1, p2, p3, p4) --[[ Line: 35 | Named "setMemo" ]]
+local _ = function(p1, p2, p3, p4)
 	-- upvalues: t (copy)
 	t[p1][`${p2}___${p3}`] = p4
 end
 
-return function(p1, Key, p2, p3) --[[ Line: 40 | Named "isDescendant" ]]
+return function(p1, Key, p2, p3)
 	-- upvalues: t (copy), NewResult (copy), CryoModule (copy)
 	if not t[Key] then
 		t[Key] = {}
 	end
 	local t1 = {}
 	
-	local function dfs(Key1) --[[ Line: 46 ]]
+	local function dfs(Key1)
 		-- upvalues: t1 (copy), Key (copy), p3 (copy), t (upval), p1 (copy), NewResult (upval), CryoModule (upval), dfs (copy)
 		t1[Key1] = true
 		local Entry = t[Key][`${Key1}___${p3}`]
@@ -47,7 +47,7 @@ return function(p1, Key, p2, p3) --[[ Line: 40 | Named "isDescendant" ]]
 		end
 		local Flag = false
 		
-		for _, value in CryoModule.List.filter(CryoModule.Dictionary.keys(v1.children), function(p4) --[[ Line: 64 ]]
+		for _, value in CryoModule.List.filter(CryoModule.Dictionary.keys(v1.children), function(p4)
 			-- upvalues: t1 (upval), v1 (copy)
 			return not t1[p4] and v1.children[p4]
 		end) do

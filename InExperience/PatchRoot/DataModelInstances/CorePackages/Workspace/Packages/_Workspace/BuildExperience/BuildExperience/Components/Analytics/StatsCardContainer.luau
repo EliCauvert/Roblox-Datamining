@@ -6,7 +6,7 @@ local UseBreakpointFunction = FoundationModule.Hooks.useBreakpoint
 local StatsCardModule = require(script.Parent.StatsCard.StatsCard)
 local GetStatsCardColumnsModule = require(script.Parent.getStatsCardColumns)
 
-return function(p1) --[[ Line: 19 | Named "StatsCardContainer" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseBreakpointFunction (copy), GetStatsCardColumnsModule (copy), View (copy), StatsCardModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local _, UseBreakpointResult2 = UseBreakpointFunction(UseStateResult)

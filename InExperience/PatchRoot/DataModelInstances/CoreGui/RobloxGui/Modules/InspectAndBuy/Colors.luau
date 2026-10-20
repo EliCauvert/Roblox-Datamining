@@ -16,8 +16,8 @@ local ColorsModule = {
 	DisabledGreen = Color.Color3FromHex(10273956)
 }
 setmetatable(ColorsModule, {
-	__newindex = function(_, _, _) --[[ Line: 25 ]] end,
-	__index = function(_, p1) --[[ Line: 26 ]]
+	__newindex = function(_, _, _) end,
+	__index = function(_, p1)
 		error("Colors table has no value: " .. tostring(p1))
 	end
 })

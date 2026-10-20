@@ -5,14 +5,14 @@ local UseCommentsSheetViewModelModule = require(script.Parent.useCommentsSheetVi
 local UseHideTabBarWhileOpenModule = require(Moments.ExperienceDetailsSheet.Sheet.useHideTabBarWhileOpen)
 local FFlagMomentsTabsBehindModalScrimModule = require(Moments.Flags.FFlagMomentsTabsBehindModalScrim)
 
-local function TabBarVisibilityController() --[[ Line: 14 ]]
+local function TabBarVisibilityController()
 	-- upvalues: UseHideTabBarWhileOpenModule (copy)
 	UseHideTabBarWhileOpenModule(true)
 	
 	return nil
 end
 
-return ReactModule.memo(function() --[[ Line: 19 | Named "CommentsSheetContainer" ]]
+return ReactModule.memo(function()
 	-- upvalues: UseCommentsSheetViewModelModule (copy), ReactModule (copy), CommentsSheetViewModule (copy), FFlagMomentsTabsBehindModalScrimModule (copy), TabBarVisibilityController (copy)
 	local UseCommentsSheetViewModelModuleResult = UseCommentsSheetViewModelModule()
 	

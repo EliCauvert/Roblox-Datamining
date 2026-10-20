@@ -6,7 +6,7 @@ local Context = ReactModule.createContext(nil)
 local Context1 = ReactModule.createContext(nil)
 
 return {
-	ElevationProvider = function(p1) --[[ Line: 24 ]]
+	ElevationProvider = function(p1)
 		-- upvalues: ReactModule (copy), ElevationLayerModule (copy), ElevationModule (copy), Context (copy)
 		local UseRefResult = ReactModule.useRef({
 			[ElevationLayerModule.Popover] = 0,
@@ -17,10 +17,10 @@ return {
 		})
 		
 		return ReactModule.createElement(Context.Provider, {
-			value = ReactModule.useMemo(function() --[[ Line: 33 ]]
+			value = ReactModule.useMemo(function()
 				-- upvalues: ElevationModule (upval), UseRefResult (copy)
 				return {
-					acquire = function(Layer, p2) --[[ Line: 35 ]]
+					acquire = function(Layer, p2)
 						-- upvalues: ElevationModule (upval), UseRefResult (upval)
 						local ELEVATIONLAYER = ElevationModule.ELEVATION_LAYERS[Layer]
 						local Index = -1
@@ -44,11 +44,11 @@ return {
 						end
 						return { layer = Layer, index = Index, zIndex = NewZIndex }
 					end,
-					peek = function(p2) --[[ Line: 68 ]]
+					peek = function(p2)
 						-- upvalues: UseRefResult (upval)
 						return UseRefResult.current[p2] or 0
 					end,
-					releaseIfTop = function(p2, p3: number) --[[ Line: 71 ]]
+					releaseIfTop = function(p2, p3: number)
 						-- upvalues: UseRefResult (upval)
 						local CurrentEntry = UseRefResult.current[p2] or 0
 						
@@ -60,11 +60,11 @@ return {
 			end, {})
 		}, p1.children)
 	end,
-	ElevationOwnerScope = function(p1) --[[ Line: 86 ]]
+	ElevationOwnerScope = function(p1)
 		-- upvalues: ReactModule (copy), Context1 (copy)
 		return ReactModule.createElement(Context1.Provider, { value = p1.owner }, p1.children)
 	end,
-	useElevationManager = function() --[[ Line: 90 ]]
+	useElevationManager = function()
 		-- upvalues: ReactModule (copy), Context (copy)
 		local UseContextResult = ReactModule.useContext(Context)
 		
@@ -73,7 +73,7 @@ return {
 		end
 		return UseContextResult
 	end,
-	useOwnerToken = function() --[[ Line: 100 ]]
+	useOwnerToken = function()
 		-- upvalues: ReactModule (copy), Context1 (copy)
 		return (ReactModule.useContext(Context1))
 	end

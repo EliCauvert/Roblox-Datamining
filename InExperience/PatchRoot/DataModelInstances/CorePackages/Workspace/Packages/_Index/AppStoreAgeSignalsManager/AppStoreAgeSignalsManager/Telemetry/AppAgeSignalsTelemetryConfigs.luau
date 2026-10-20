@@ -17,7 +17,7 @@ local config = {
 }
 
 return {
-	reportError = function(p1) --[[ Line: 28 ]]
+	reportError = function(p1)
 		-- upvalues: EnableAppAgeSignalsErrorTelemetry (copy), TelemetryService (copy), config (copy)
 		if EnableAppAgeSignalsErrorTelemetry then
 			TelemetryService:LogCounter(config.ErrorCounter, {

@@ -13,16 +13,16 @@ local FIntEarlyAccessPollIntervalSecondsModule = require(script.Parent.FIntEarly
 local FIntEarlyAccessMaxPollAttemptsModule = require(script.Parent.FIntEarlyAccessMaxPollAttempts)
 local R20UniverseAccessTime = game:DefineFastString("R20UniverseAccessTime", "")
 
-local function _(Text: string, p1: number) --[[ Line: 24 | Named "resolveUnlockTimestamp" ]]
+local function _(Text: string, p1: number)
 	local IsSegmentMatch = string.sub(Text, 1, 1) == "+"
 	local Number: number? = tonumber(if IsSegmentMatch then string.sub(Text, 2) else Text)
 	
 	return if Number == nil or Number == 0 then nil elseif IsSegmentMatch then p1 + Number else Number
 end
 
-return function(p1, p2) --[[ Line: 42 | Named "useGameJoinEarlyAccess" ]]
+return function(p1, p2)
 	-- upvalues: UseAppPolicyFunction (copy), PlayabilityStatusEnum (copy), RobloxSubscriptionSignals (copy), SignalsReactModule (copy), ReactModule (copy), R20UniverseAccessTime (copy), FIntEarlyAccessMaxPollAttemptsModule (copy), FIntEarlyAccessPollIntervalSecondsModule (copy), InitiateRobloxSubscriptionPurchaseFunction (copy), SurfaceName (copy), SurfaceContext (copy)
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p3): boolean --[[ Line: 47 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p3): boolean
 		return not p3.getDisableBlackbirdEntrypoints()
 	end)
 	local IsPlayabilityStatusMatch: boolean = p2 ~= nil and p2.playabilityStatus == PlayabilityStatusEnum.PlusSubscriptionRequired
@@ -42,7 +42,7 @@ return function(p1, p2) --[[ Line: 42 | Named "useGameJoinEarlyAccess" ]]
 		NewCurrent = nil
 	end
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
-	ReactModule.useEffect(function() --[[ Line: 69 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), NewCurrent (copy), FIntEarlyAccessMaxPollAttemptsModule (upval), FIntEarlyAccessPollIntervalSecondsModule (upval)
 		UseStateResult2(0)
 		
@@ -51,7 +51,7 @@ return function(p1, p2) --[[ Line: 42 | Named "useGameJoinEarlyAccess" ]]
 		local DelayedThread = nil
 		local Count = 0
 		
-		local function poll() --[[ Line: 79 ]]
+		local function poll()
 			-- upvalues: Flag (ref), Count (ref), UseStateResult2 (upval), FIntEarlyAccessMaxPollAttemptsModule (upval), DelayedThread (ref), FIntEarlyAccessPollIntervalSecondsModule (upval), poll (copy)
 			if Flag then return end
 			Count += 1
@@ -68,7 +68,7 @@ return function(p1, p2) --[[ Line: 42 | Named "useGameJoinEarlyAccess" ]]
 		
 		DelayedThread = task.delay(math.max(NewCurrent - DateTime.now().UnixTimestamp, 0), poll)
 		
-		return function() --[[ Line: 95 ]]
+		return function()
 			-- upvalues: Flag (ref), DelayedThread (ref)
 			Flag = true
 			
@@ -84,7 +84,7 @@ return function(p1, p2) --[[ Line: 42 | Named "useGameJoinEarlyAccess" ]]
 		unlockRefetchTick = UseStateResult,
 		unlockTimestamp = NewCurrent,
 		showPlusUpsell = IsPlayabilityStatusMatch and UseAppPolicyResult,
-		openUpsell = ReactModule.useCallback(function() --[[ Line: 104 ]]
+		openUpsell = ReactModule.useCallback(function()
 			-- upvalues: InitiateRobloxSubscriptionPurchaseFunction (upval), p1 (copy), SurfaceName (upval), SurfaceContext (upval)
 			InitiateRobloxSubscriptionPurchaseFunction(nil, nil, if p1 then tonumber(p1) else nil, SurfaceName.GameJoinEarlyAccessUpsell, SurfaceContext.InApp)
 		end, { p1 }),

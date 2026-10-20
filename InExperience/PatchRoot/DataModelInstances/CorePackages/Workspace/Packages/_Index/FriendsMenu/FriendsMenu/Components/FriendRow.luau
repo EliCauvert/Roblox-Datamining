@@ -20,7 +20,7 @@ local _ = require(FriendsMenu.friendsMenuModalType)
 local _UDim2 = UDim2.new(1, 0, 0.5, 0)
 local _Vector2 = Vector2.new(1, 0.5)
 
-local function v18() --[[ Line: 42 ]] end
+local function v18() end
 
 local config = {
 	sidePadding = 24,
@@ -28,7 +28,7 @@ local config = {
 	backgroundTransparency = nil
 }
 
-return function(p1) --[[ Line: 62 ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), UseStyleFunction (copy), InviteCallbackContextModule (copy), SelectedUsersContextModule (copy), UseCursorFunction (copy), FoundationModule (copy), GetFFlagFriendsMenuDummyLoadingFriendsFixFunction (copy), FriendMenuTypeModule (copy), v18 (copy), FriendThumbnailModule (copy), FriendInfoModule (copy), FriendsMenuCheckboxModule (copy), _UDim2 (copy), _Vector2 (copy), FriendsMenuButtonModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
@@ -40,7 +40,7 @@ return function(p1) --[[ Line: 62 ]]
 	local SidePadding = JoinResult.sidePadding
 	local UseCursorResult = UseCursorFunction(FoundationModule.Enums.CursorType.RoundedSlot)
 	local NoIsFetchingFriends: boolean = JoinResult.isFullRowActivatable and not JoinResult.isFetchingFriends
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 78 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseContextResult (copy), Friend (copy), JoinResult (copy)
 		if UseContextResult and UseContextResult.inviteSingleFriend and not Friend.isLoadingPlaceholder then
 			UseContextResult.inviteSingleFriend(Friend.id, JoinResult.layoutOrder)
@@ -52,7 +52,7 @@ return function(p1) --[[ Line: 62 ]]
 		Friend.isLoadingPlaceholder,
 		JoinResult.layoutOrder
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 93 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseContextResult1 (copy), JoinResult (copy)
 		if UseContextResult1.isFriendSelected(JoinResult.friend.id) then
 			UseContextResult1.removeFriend(JoinResult.friend.id, JoinResult.friend.displayName)
@@ -67,7 +67,7 @@ return function(p1) --[[ Line: 62 ]]
 		UseContextResult1.addFriend,
 		JoinResult.friend.id
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 109 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: NoIsFetchingFriends (copy), GetFFlagFriendsMenuDummyLoadingFriendsFixFunction (upval), Friend (copy), JoinResult (copy), FriendMenuTypeModule (upval), UseResult (copy), UseResult1 (copy)
 		if not NoIsFetchingFriends or GetFFlagFriendsMenuDummyLoadingFriendsFixFunction() and Friend.isLoadingPlaceholder then return end
 		if JoinResult.menuType == FriendMenuTypeModule.MultiSelect then
@@ -93,13 +93,13 @@ return function(p1) --[[ Line: 62 ]]
 		BorderSizePixel = 0,
 		LayoutOrder = JoinResult.layoutOrder,
 		SelectionImageObject = if JoinResult.isFullRowActivatable then UseCursorResult else nil,
-		[ReactModule.Event.MouseEnter] = function() --[[ Line: 144 ]]
+		[ReactModule.Event.MouseEnter] = function()
 			-- upvalues: JoinResult (copy), UseStateResult2 (copy)
 			if not JoinResult.isFetchingFriends then
 				UseStateResult2(true)
 			end
 		end,
-		[ReactModule.Event.MouseLeave] = function() --[[ Line: 149 ]]
+		[ReactModule.Event.MouseLeave] = function()
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(false)
 		end,

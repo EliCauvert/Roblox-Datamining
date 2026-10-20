@@ -20,7 +20,7 @@ local SocialTabsCtaConfigModule = require(SocialTabsPage.Common.SocialTabsCtaCon
 local TextKeysModule = require(SocialTabsPage.Common.TextKeys)
 local FFlagUserListCtaIntegrationEnabled = require(Parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
 
-return function() --[[ Line: 26 | Named "FriendsTabContent" ]]
+return function()
 	-- upvalues: UseSocialTabsContextModule (copy), UseFriendsListModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), DashModule (copy), EntityType (copy), FFlagUserListCtaIntegrationEnabled (copy), UseUserListCTAsModule (copy), UseCTAActionHandlersModule (copy), RowDataProviderModule (copy), View (copy), Loading (copy), SocialTabsEmptyStateModule (copy), UserListLayoutAdaptor (copy), LayoutMode (copy), SocialTabsCtaConfigModule (copy)
 	local UseSocialTabsContextModuleResult = UseSocialTabsContextModule()
 	local Title = UseSocialTabsContextModuleResult.title
@@ -34,16 +34,16 @@ return function() --[[ Line: 26 | Named "FriendsTabContent" ]]
 	local UseLocalizationResult = UseLocalizationFunction({
 		emptyText = { TextKeysModule.NoFriendsYet, name = Title or "" }
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 46 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: DashModule (upval), Friends (copy), EntityType (upval)
-		return DashModule.map(Friends, function(p1) --[[ Line: 47 ]]
+		return DashModule.map(Friends, function(p1)
 			-- upvalues: EntityType (upval)
 			return { id = tostring(p1.id), type = EntityType.User }
 		end)
 	end, { Friends })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 52 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: DashModule (upval), UseMemoResult (copy)
-		return DashModule.map(UseMemoResult, function(p1) --[[ Line: 53 ]]
+		return DashModule.map(UseMemoResult, function(p1)
 			return p1.id
 		end)
 	end, { UseMemoResult })
@@ -52,7 +52,7 @@ return function() --[[ Line: 26 | Named "FriendsTabContent" ]]
 	if not FFlagUserListCtaIntegrationEnabled then
 		local UseUserListCTAsModuleResult = UseUserListCTAsModule(UseMemoResult1)
 		local UseCTAActionHandlersModuleResult = UseCTAActionHandlersModule()
-		UseResult = ReactModule.useCallback(function(CreateRow, Entity, _) --[[ Line: 63 ]]
+		UseResult = ReactModule.useCallback(function(CreateRow, Entity, _)
 			-- upvalues: ReactModule (upval), RowDataProviderModule (upval), UseUserListCTAsModuleResult (copy), UseCTAActionHandlersModuleResult (copy)
 			return ReactModule.createElement(RowDataProviderModule, {
 				createRow = CreateRow,

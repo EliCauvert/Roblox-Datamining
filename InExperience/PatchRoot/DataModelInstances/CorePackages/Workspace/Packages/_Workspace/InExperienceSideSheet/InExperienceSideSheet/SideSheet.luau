@@ -71,27 +71,27 @@ local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavi
 local MouseIconOverrideService = CoreScriptsCommonModule.MouseIconOverrideService
 local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
 
-local function getDeviceSafePadding(p1) --[[ Line: 128 ]]
+local function getDeviceSafePadding(p1)
 	-- upvalues: DisplayModule (copy)
 	return DisplayModule.GetDisplayStore(p1).getDeviceSafePadding(p1)
 end
 
-local function getAboveFoldIntegrations(p1) --[[ Line: 132 ]]
+local function getAboveFoldIntegrations(p1)
 	-- upvalues: GetIntegrationsStoreModule (copy)
 	return GetIntegrationsStoreModule(p1).getAboveFoldIntegrations(p1)
 end
 
-local function getBelowFoldIntegrations(p1) --[[ Line: 136 ]]
+local function getBelowFoldIntegrations(p1)
 	-- upvalues: GetIntegrationsStoreModule (copy)
 	return GetIntegrationsStoreModule(p1).getBelowFoldIntegrations(p1)
 end
 
-local function getScrollableContentTopWidgetIntegrations(p1) --[[ Line: 140 ]]
+local function getScrollableContentTopWidgetIntegrations(p1)
 	-- upvalues: GetIntegrationsStoreModule (copy)
 	return GetIntegrationsStoreModule(p1).getScrollableContentTopWidgetIntegrations(p1)
 end
 
-local function getScrollableContentBottomWidgetIntegrations(p1) --[[ Line: 144 ]]
+local function getScrollableContentBottomWidgetIntegrations(p1)
 	-- upvalues: GetIntegrationsStoreModule (copy)
 	return GetIntegrationsStoreModule(p1).getScrollableContentBottomWidgetIntegrations(p1)
 end
@@ -99,7 +99,7 @@ end
 local UseFocusGuiObject = if FFlagSideSheetFocusNav then require(Parent.ReactFocusNavigation).useFocusGuiObject else nil
 local Root = nil
 
-local function SideSheetContent(p1) --[[ Line: 154 ]]
+local function SideSheetContent(p1)
 	-- upvalues: UseScaledValueFunction (copy), UseStyleSheetFunction (copy), UseBackgroundStyleModule (copy), SignalsReactModule (copy), getDeviceSafePadding (copy), FFlagMountUnmountSideSheet (copy), UseDrawerShouldMountFunction (copy), FFlagSideSheetOpenPeoplePage (copy), GetSideSheetVisibilityModule (copy), GetIsPeoplePageOpenModule (copy), GetDidSideSheetOpenWithPeoplePageModule (copy), getScrollableContentTopWidgetIntegrations (copy), FFlagEnableSideSheetWidgets (copy), ReactModule (copy), SidesheetAnalyticsModule (copy), FFlagSideSheetFocusNav (copy), UseFocusGuiObject (ref), UseLastInputModeFunction (copy), FFlagSideSheetOpenPeoplePageRestoreChat (copy), UsePreferredInputFunction (copy), SignalsModule (copy), GuiService (copy), ResponsiveModule (copy), MouseIconOverrideService (copy), FFlagShowSwitchServerButton (copy), IsPioneerLaunchFunction (copy), GetSwitchServerStoreFunction (copy), SwitchServerTelemetry (copy), ContextActionService (copy), list (copy), ToggleSideSheetModule (copy), FFlagUseAnimateScrollViewToSelectionHelper (copy), UseSideSheetFocusNavScrollViewAnimationModule (copy), GetSideSheetConfigStoreModule (copy), ClosePeoplePageOpenedWithSideSheetModule (copy), UserProfileRowModule (copy), config (copy), ExperienceDetailsRowModule (copy), View (copy), Divider (copy), SideSheetWidgetListModule (copy), ChromeModule (copy), VerticalListModule (copy), getAboveFoldIntegrations (copy), getBelowFoldIntegrations (copy), getScrollableContentBottomWidgetIntegrations (copy), ScrollView (copy), FooterModule (copy), FFlagEnableWhatsNew (copy), WhatsNewAnchor (copy), DrawerContainer (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
 	local UseScaledValueResult = UseScaledValueFunction(320)
 	local UseStyleSheetResult = UseStyleSheetFunction()
@@ -111,7 +111,7 @@ local function SideSheetContent(p1) --[[ Line: 154 ]]
 	local UseSignalStateResult2_1 = (if FFlagSideSheetOpenPeoplePage then SignalsReactModule.useSignalState(GetDidSideSheetOpenWithPeoplePageModule) else false) and (UseSignalStateResult1 and UseSignalStateResult2)
 	local UseSignalStateResult3 = SignalsReactModule.useSignalState(getScrollableContentTopWidgetIntegrations)
 	local v1: boolean = FFlagEnableSideSheetWidgets and #UseSignalStateResult3 > 0
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 176 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: SidesheetAnalyticsModule (upval)
 		SidesheetAnalyticsModule.logSidesheetClosed(p2.source)
 	end, {})
@@ -124,7 +124,7 @@ local function SideSheetContent(p1) --[[ Line: 154 ]]
 		UseRefResult = ReactModule.useRef(nil)
 		UseFocusGuiObjectResult = UseFocusGuiObject()
 		UseLastInputModeResult = UseLastInputModeFunction()
-		UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 185 ]]
+		UseResult1 = ReactModule.useCallback(function(p2)
 			-- upvalues: UseLastInputModeResult (ref), UseRefResult (ref), UseFocusGuiObjectResult (ref)
 			if UseLastInputModeResult == "Focus" and UseRefResult and UseRefResult.current == false then
 				UseRefResult.current = true
@@ -137,9 +137,9 @@ local function SideSheetContent(p1) --[[ Line: 154 ]]
 	local UseRefResult3 = ReactModule.useRef(false)
 	local UsePreferredInputResult = UsePreferredInputFunction()
 	local UseRefResult4 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 204 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SignalsModule (upval), GetSideSheetVisibilityModule (upval), FFlagSideSheetOpenPeoplePageRestoreChat (upval), UseRefResult2 (copy), p1 (copy), GuiService (upval), UseRefResult1 (copy)
-		local Effect = SignalsModule.createEffect(function(p2) --[[ Line: 205 ]]
+		local Effect = SignalsModule.createEffect(function(p2)
 			-- upvalues: GetSideSheetVisibilityModule (upval), FFlagSideSheetOpenPeoplePageRestoreChat (upval), UseRefResult2 (upval), p1 (upval), GuiService (upval), UseRefResult1 (upval)
 			local SideSheetVisibilityModule = GetSideSheetVisibilityModule(p2)
 			
@@ -165,7 +165,7 @@ local function SideSheetContent(p1) --[[ Line: 154 ]]
 					return
 				else
 					if UseRefResult1.current and not UseRefResult2.current then
-						local function restoreChat() --[[ Line: 241 ]]
+						local function restoreChat()
 							-- upvalues: UseRefResult2 (upval), p1 (upval), UseRefResult1 (upval)
 							if UseRefResult2.current then
 								UseRefResult2.current:Disconnect()
@@ -191,7 +191,7 @@ local function SideSheetContent(p1) --[[ Line: 154 ]]
 			end
 		end)
 		
-		return function() --[[ Line: 261 ]]
+		return function()
 			-- upvalues: Effect (copy), FFlagSideSheetOpenPeoplePageRestoreChat (upval), UseRefResult2 (upval), GuiService (upval)
 			Effect()
 			
@@ -206,9 +206,9 @@ local function SideSheetContent(p1) --[[ Line: 154 ]]
 	end, {
 		if FFlagSideSheetOpenPeoplePageRestoreChat then p1.ChatSelector else nil
 	})
-	ReactModule.useEffect(function() --[[ Line: 280 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SignalsModule (upval), GetSideSheetVisibilityModule (upval), FFlagSideSheetOpenPeoplePageRestoreChat (upval), p1 (copy), UseRefResult1 (copy), UsePreferredInputResult (copy), ResponsiveModule (upval), UseRefResult3 (copy), MouseIconOverrideService (upval), FFlagSideSheetFocusNav (upval), UseRefResult (ref), FFlagShowSwitchServerButton (upval), IsPioneerLaunchFunction (upval), GetSwitchServerStoreFunction (upval), UseRefResult4 (copy), SwitchServerTelemetry (upval)
-		local Effect = SignalsModule.createEffect(function(p2) --[[ Line: 281 ]]
+		local Effect = SignalsModule.createEffect(function(p2)
 			-- upvalues: GetSideSheetVisibilityModule (upval), FFlagSideSheetOpenPeoplePageRestoreChat (upval), p1 (upval), UseRefResult1 (upval), UsePreferredInputResult (upval), ResponsiveModule (upval), UseRefResult3 (upval), MouseIconOverrideService (upval), FFlagSideSheetFocusNav (upval), UseRefResult (upval), FFlagShowSwitchServerButton (upval), IsPioneerLaunchFunction (upval), GetSwitchServerStoreFunction (upval), UseRefResult4 (upval), SwitchServerTelemetry (upval)
 			local SideSheetVisibilityModule = GetSideSheetVisibilityModule(p2)
 			
@@ -242,14 +242,14 @@ local function SideSheetContent(p1) --[[ Line: 154 ]]
 				SwitchServerTelemetry.sendSwitchServerButtonActions({ event_type = "impression" })
 			end
 		end)
-		local VisibilityStateChangedConnection = if p1.ChatSelector then p1.ChatSelector.VisibilityStateChanged:connect(function(p2) --[[ Line: 327 ]]
+		local VisibilityStateChangedConnection = if p1.ChatSelector then p1.ChatSelector.VisibilityStateChanged:connect(function(p2)
 			-- upvalues: GetSideSheetVisibilityModule (upval), UseRefResult1 (upval)
 			if GetSideSheetVisibilityModule() and p2 then
 				UseRefResult1.current = false
 			end
 		end) else nil
 		
-		return function() --[[ Line: 334 ]]
+		return function()
 			-- upvalues: Effect (copy), VisibilityStateChangedConnection (ref)
 			Effect()
 			
@@ -260,17 +260,17 @@ local function SideSheetContent(p1) --[[ Line: 154 ]]
 	end, { p1.ChatSelector, UsePreferredInputResult })
 	
 	if FFlagSideSheetFocusNav then
-		ReactModule.useEffect(function() --[[ Line: 343 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: ContextActionService (upval), UseRefResult (ref), list (upval), GetSideSheetVisibilityModule (upval), FFlagSideSheetOpenPeoplePage (upval), ToggleSideSheetModule (upval)
-			ContextActionService:BindCoreAction("SideSheetBlockInputAction", function(_, UserInputState, _) --[[ Line: 344 ]]
+			ContextActionService:BindCoreAction("SideSheetBlockInputAction", function(_, UserInputState, _)
 				-- upvalues: UseRefResult (upval)
 				return if UserInputState == Enum.UserInputState.Begin then if UseRefResult.current == nil then Enum.ContextActionResult.Pass else Enum.ContextActionResult.Sink else Enum.ContextActionResult.Pass
 			end, false, unpack(list))
-			ContextActionService:BindCoreAction("SideSheetSinkR2Action", function(_, _, _) --[[ Line: 354 ]]
+			ContextActionService:BindCoreAction("SideSheetSinkR2Action", function(_, _, _)
 				-- upvalues: GetSideSheetVisibilityModule (upval)
 				return if GetSideSheetVisibilityModule() then Enum.ContextActionResult.Sink else Enum.ContextActionResult.Pass
 			end, false, Enum.KeyCode.ButtonR2)
-			ContextActionService:BindCoreAction("SideSheetCloseAction", function(_, UserInputState, _) --[[ Line: 361 ]]
+			ContextActionService:BindCoreAction("SideSheetCloseAction", function(_, UserInputState, _)
 				-- upvalues: FFlagSideSheetOpenPeoplePage (upval), GetSideSheetVisibilityModule (upval), ToggleSideSheetModule (upval)
 				if FFlagSideSheetOpenPeoplePage and UserInputState ~= Enum.UserInputState.Begin then
 					return Enum.ContextActionResult.Pass
@@ -283,7 +283,7 @@ local function SideSheetContent(p1) --[[ Line: 154 ]]
 				end
 			end, false, Enum.KeyCode.ButtonB, Enum.KeyCode.ButtonStart)
 			
-			return function() --[[ Line: 375 ]]
+			return function()
 				-- upvalues: ContextActionService (upval)
 				ContextActionService:UnbindCoreAction("SideSheetBlockInputAction")
 				ContextActionService:UnbindCoreAction("SideSheetSinkR2Action")
@@ -295,13 +295,13 @@ local function SideSheetContent(p1) --[[ Line: 154 ]]
 	local Left = UseSignalStateResult.left
 	
 	if FFlagSideSheetOpenPeoplePage then
-		ReactModule.useEffect(function() --[[ Line: 398 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: GetSideSheetConfigStoreModule (upval), UseScaledValueResult (copy)
 			GetSideSheetConfigStoreModule(false).setSideSheetDrawerWidth(UseScaledValueResult)
 		end, { UseScaledValueResult })
-		ReactModule.useEffect(function() --[[ Line: 404 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseSignalStateResult1 (copy), ClosePeoplePageOpenedWithSideSheetModule (upval)
-			return if UseSignalStateResult1 then function() --[[ Line: 408 ]]
+			return if UseSignalStateResult1 then function()
 				-- upvalues: ClosePeoplePageOpenedWithSideSheetModule (upval)
 				ClosePeoplePageOpenedWithSideSheetModule()
 			end else nil
@@ -385,7 +385,7 @@ local function SideSheetContent(p1) --[[ Line: 154 ]]
 end
 
 return {
-	createSideSheet = function(p2, p3, p4) --[[ Line: 547 ]]
+	createSideSheet = function(p2, p3, p4)
 		-- upvalues: Root (ref), CoreGui (copy), WrapWithProvidersModule (copy), ReactModule (copy), SideSheetContent (copy), ReactRobloxModule (copy)
 		if not Root then
 			local InExperienceSideSheet = Instance.new("Folder")

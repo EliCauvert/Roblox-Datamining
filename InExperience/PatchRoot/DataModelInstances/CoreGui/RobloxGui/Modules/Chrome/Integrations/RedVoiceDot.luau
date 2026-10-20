@@ -7,7 +7,7 @@ local v1 = require(script.Parent.Parent.ChromeShared.Utility.GetStyleTokens)()
 local _Color3 = Color3.new(0.918, 0.2, 0.137)
 local _UDim2 = UDim2.new(0, v1.Size.Size_100, 0, v1.Size.Size_100)
 
-return function(p1) --[[ Line: 17 ]]
+return function(p1)
 	-- upvalues: UseVoiceStateModule (copy), Players (copy), ConstantsModule (copy), ReactModule (copy), _UDim2 (copy), _Color3 (copy)
 	local UseVoiceStateModuleResult = UseVoiceStateModule(Players.LocalPlayer and Players.LocalPlayer.UserId or 0)
 	

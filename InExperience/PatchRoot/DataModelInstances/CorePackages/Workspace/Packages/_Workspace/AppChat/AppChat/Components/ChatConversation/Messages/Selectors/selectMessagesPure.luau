@@ -7,7 +7,7 @@ local FilterForLinksWithPolicyModule = require(AppChat.Components.ChatConversati
 local PopulateMessageWithStateModule = require(AppChat.Conversations.populateMessageWithState)
 local _ = require(Parent.AppChatNetworking)
 
-return function(p1, p2) --[[ Line: 83 | Named "selectMessagesPure" ]]
+return function(p1, p2)
 	-- upvalues: GetDeepValueModule (copy), CryoModule (copy), MessageSortPredicateModule (copy), FilterForLinksWithPolicyModule (copy), PopulateMessageWithStateModule (copy)
 	local Conversation = p1.conversation
 	

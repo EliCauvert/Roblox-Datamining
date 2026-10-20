@@ -12,7 +12,7 @@ local DesignTokenProvider = require(Parent.Dev.Style).DesignTokenProvider
 local Localization = require(Parent.Dev.AppLocales).Localization
 local AppStyleProvider1 = require(Parent.Dev.Style).AppStyleProvider
 
-local function createStore() --[[ Line: 19 ]]
+local function createStore()
 	-- upvalues: RoduxModule (copy)
 	return RoduxModule.Store.new(RoduxModule.createReducer({}, {}))
 end
@@ -29,9 +29,9 @@ return {
 	name = "AvatarExperienceCatalog",
 	roact = ReactModule,
 	reactRoblox = require(Parent.Dev.ReactRoblox),
-	mapStory = function(p1) --[[ Line: 48 ]]
+	mapStory = function(p1)
 		-- upvalues: config (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), AppStyleProvider (copy), config2 (copy), AppStyleProvider1 (copy), RoactRoduxModule (copy), createStore (copy), DesignTokenProvider (copy), FoundationProvider (copy), config1 (copy)
-		return function(p2) --[[ Line: 49 ]]
+		return function(p2)
 			-- upvalues: config (upval), ReactModule (upval), LocalizationProvider (upval), Localization (upval), AppStyleProvider (upval), config2 (upval), AppStyleProvider1 (upval), RoactRoduxModule (upval), createStore (upval), DesignTokenProvider (upval), FoundationProvider (upval), config1 (upval), p1 (copy)
 			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,

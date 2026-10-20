@@ -15,26 +15,26 @@ local config1 = {
 	[MarketplaceUnifiedItemType.ROBUX_WITH_BONUS] = true
 }
 local InExperienceShopUnifiedEventFilterModule = {
-	hasItemId = function(p1): boolean --[[ Line: 27 ]]
+	hasItemId = function(p1): boolean
 		local ItemId = p1.itemId
 		
 		return ItemId ~= nil and ItemId ~= ""
 	end,
-	hasValidItemType = function(p1): boolean --[[ Line: 32 ]]
+	hasValidItemType = function(p1): boolean
 		-- upvalues: config1 (copy)
 		return config1[p1.itemType] == true
 	end,
-	hasValidAction = function(p1): boolean --[[ Line: 36 ]]
+	hasValidAction = function(p1): boolean
 		-- upvalues: MarketplaceUnifiedAction (copy)
 		local Action = p1.action
 		
 		return Action ~= nil and Action ~= MarketplaceUnifiedAction.UNDEFINED_ACTION
 	end,
-	hasValidSurface = function(p1): boolean --[[ Line: 41 ]]
+	hasValidSurface = function(p1): boolean
 		-- upvalues: config (copy)
 		return config[p1.surface] == true
 	end,
-	hasValidSizeAndPosition = function(p1): boolean --[[ Line: 45 ]]
+	hasValidSizeAndPosition = function(p1): boolean
 		-- upvalues: MarketplaceUnifiedAction (copy)
 		local Action = p1.action
 		
@@ -50,14 +50,14 @@ local InExperienceShopUnifiedEventFilterModule = {
 			return true
 		end
 	end,
-	hasUniverseId = function(p1): boolean --[[ Line: 71 ]]
+	hasUniverseId = function(p1): boolean
 		local UniverseId: number = p1.universeId
 		
 		return if typeof(UniverseId) == "number" then UniverseId > 0 else typeof(UniverseId) == "string" and UniverseId ~= ""
 	end
 }
 
-function InExperienceShopUnifiedEventFilterModule.filter(p1) --[[ Line: 82 ]]
+function InExperienceShopUnifiedEventFilterModule.filter(p1)
 	-- upvalues: InExperienceShopUnifiedEventFilterModule (copy)
 	local HasItemId = InExperienceShopUnifiedEventFilterModule.hasItemId(p1)
 	local HasValidItemType = InExperienceShopUnifiedEventFilterModule.hasValidItemType(p1)

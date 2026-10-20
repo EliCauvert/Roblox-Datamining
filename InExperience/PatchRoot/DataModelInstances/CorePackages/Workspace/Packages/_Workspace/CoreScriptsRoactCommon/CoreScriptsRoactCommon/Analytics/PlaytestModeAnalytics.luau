@@ -11,7 +11,7 @@ local config = {
 	lastUpdated = { 2026, 7, 23 }
 }
 
-local function _logEventWithStandardizedFields(Config, p1) --[[ Line: 26 ]]
+local function _logEventWithStandardizedFields(Config, p1)
 	-- upvalues: TelemetryServicePlaySessionInfoEnabledEngineFeature (copy), RbxAnalyticsService (copy), TelemetryService (copy)
 	local StandardizedFields = { "addPlaceId", "addUniverseId", "addSessionInfo" }
 	local P1 = p1 or {}
@@ -28,7 +28,7 @@ local function _logEventWithStandardizedFields(Config, p1) --[[ Line: 26 ]]
 end
 
 return {
-	logPlaytestModeEnabled = function(Reason) --[[ Line: 42 ]]
+	logPlaytestModeEnabled = function(Reason)
 		-- upvalues: _logEventWithStandardizedFields (copy), config (copy)
 		_logEventWithStandardizedFields(config, { reason = Reason })
 	end

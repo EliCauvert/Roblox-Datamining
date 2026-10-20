@@ -2,7 +2,7 @@
 local UseCrossExperienceVoiceModule = require(CrossExperienceVoice.Hooks.useCrossExperienceVoice)
 local FFlagEnableCEVForceInitialize = require(CrossExperienceVoice.Flags).FFlagEnableCEVForceInitialize
 
-return function() --[[ Line: 6 | Named "CrossExperienceVoiceComponent" ]]
+return function()
 	-- upvalues: UseCrossExperienceVoiceModule (copy), FFlagEnableCEVForceInitialize (copy)
 	UseCrossExperienceVoiceModule({
 		handleRCCConnectionTimeout = nil,

@@ -17,15 +17,15 @@ local IconName = FoundationModule.Enums.IconName
 local InputSize = FoundationModule.Enums.InputSize
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function _(Text: string): string --[[ Line: 57 | Named "trimMessage" ]]
+local function _(Text: string): string
 	return string.gsub(Text, "^%s*(.-)%s*$", "%1")
 end
 
-return function(Frame) --[[ Line: 61 | Named "ChatComposer" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FFlagBuildExperienceFixChatComposerInitialSendStateModule (copy), SignalsModule (copy), FFlagBuildExperienceLibrary (copy), UseReleaseFocusOnDownSwipeModule (copy), Composer (copy), InputSize (copy), View (copy), IconButton (copy), IconName (copy), ButtonVariant (copy), FFlagComposerControlAlignment (copy), ChatActionsRowModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 64 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FFlagBuildExperienceFixChatComposerInitialSendStateModule (upval), Frame (copy), SignalsModule (upval)
 		local Signal, Signal2 = SignalsModule.createSignal(not FFlagBuildExperienceFixChatComposerInitialSendStateModule or string.gsub(Frame.text:getValue(), "^%s*(.-)%s*$", "%1") == "")
 		
@@ -44,19 +44,19 @@ return function(Frame) --[[ Line: 61 | Named "ChatComposer" ]]
 	local HasComposerErrorText = Frame.composerErrorText ~= nil
 	local HasAttachments: boolean = Frame.images ~= nil and #Frame.images > 0
 	local HasOnOpenCaptureGallery: boolean = Frame.isAttachmentSupported and Frame.onOpenCaptureGallery ~= nil
-	local UseResult = ReactModule.useCallback(function(Text: string) --[[ Line: 85 ]]
+	local UseResult = ReactModule.useCallback(function(Text: string)
 		-- upvalues: UseMemoResult (copy), Frame (copy)
 		UseMemoResult.setIsComposerEmpty(string.gsub(Text, "^%s*(.-)%s*$", "%1") == "")
 		Frame.onChanged(Text)
 	end, { Frame.onChanged, UseMemoResult })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 90 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: v1 (ref), Frame (copy), UseMemoResult (copy)
 		if v1 then return end
 		if Frame.onSend() then
 			UseMemoResult.setIsComposerEmpty(true)
 		end
 	end, { Frame.onSend, UseMemoResult, v1 })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 99 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: Frame (copy)
 		if Frame.textBoxRef ~= nil and Frame.textBoxRef.current ~= nil then
 			Frame.textBoxRef.current.releaseFocus()
@@ -67,10 +67,10 @@ return function(Frame) --[[ Line: 61 | Named "ChatComposer" ]]
 	end, { Frame.textBoxRef, Frame.onOpenCaptureGallery })
 	
 	if FFlagBuildExperienceLibrary then
-		ReactModule.useEffect(function() --[[ Line: 109 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: Frame (copy), UseMemoResult (copy), ReactModule (upval)
 			if Frame.tracksExternalText then
-				local SubscribeToBindingResult = ReactModule.__subscribeToBinding(Frame.text, function(Text: string) --[[ Line: 113 | Named "updateEmptyState" ]]
+				local SubscribeToBindingResult = ReactModule.__subscribeToBinding(Frame.text, function(Text: string)
 					-- upvalues: UseMemoResult (upval)
 					UseMemoResult.setIsComposerEmpty(string.gsub(Text, "^%s*(.-)%s*$", "%1") == "")
 				end)

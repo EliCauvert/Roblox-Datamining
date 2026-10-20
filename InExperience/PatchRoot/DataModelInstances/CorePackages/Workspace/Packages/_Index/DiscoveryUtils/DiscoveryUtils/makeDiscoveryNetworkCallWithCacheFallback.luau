@@ -4,13 +4,13 @@ local _ = require(Parent.LuauPolyfill)
 local PromiseModule = require(Parent.Promise)
 local DiscoveryClientAppStorageModule = require(DiscoveryUtils.DiscoveryClientAppStorage)
 
-return function(Promise, p1, p2) --[[ Line: 20 | Named "makeDiscoveryNetworkCallWithCacheFallback" ]]
+return function(Promise, p1, p2)
 	-- upvalues: DiscoveryClientAppStorageModule (copy), PromiseModule (copy)
-	return Promise:andThen(function(Result) --[[ Line: 26 ]]
+	return Promise:andThen(function(Result)
 		return Result
-	end):catch(function(Err) --[[ Line: 29 ]]
+	end):catch(function(Err)
 		-- upvalues: DiscoveryClientAppStorageModule (upval), p1 (copy), p2 (copy), PromiseModule (upval)
-		local Success, Result = pcall(function() --[[ Line: 30 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: DiscoveryClientAppStorageModule (upval), p1 (upval), p2 (upval)
 			return DiscoveryClientAppStorageModule.getJsonStorageData(p1, p2)
 		end)

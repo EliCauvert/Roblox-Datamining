@@ -27,9 +27,9 @@ local config = {
 	toastType = ToastRoduxModule.Enums.ToastType.InformationMessage
 }
 
-return function(p1, Name, p2, Callback1, Callback) --[[ Line: 40 ]]
+return function(p1, Name, p2, Callback1, Callback)
 	-- upvalues: PerformFetch (copy), AVATAREDITORCONSTANTS (copy), FFlagAXMISSaveWearFix (copy), IsMakeupOrEyebrowEyelashAssetTypeFunction (copy), MutedErrorFunction (copy), PromiseModule (copy), Constants (copy), FIntAXLookOutfitCreationDelayMs (copy), FFlagAXAvatarEditorServiceTelemetryV2 (copy), ReportAvatarEditorServiceCounterFunction (copy), Constants1 (copy), AVATAREDITORSERVICECOUNTERSTATUS (copy), CreateMakeupLookModule (copy), ReportAvatarEventCounterV1Function (copy), SetCurrentToastMessageFunction (copy), config (copy), FFlagAXDeprecateAvatarEditorServiceTelemetryV1 (copy), ReportAvatarEventCounterNoAnalyticsArgumentFunction (copy)
-	return PerformFetch.Single(AVATAREDITORCONSTANTS.CreateMakeupLookKey, function(p3) --[[ Line: 47 ]]
+	return PerformFetch.Single(AVATAREDITORCONSTANTS.CreateMakeupLookKey, function(p3)
 		-- upvalues: FFlagAXMISSaveWearFix (upval), p2 (copy), IsMakeupOrEyebrowEyelashAssetTypeFunction (upval), MutedErrorFunction (upval), PromiseModule (upval), Callback (copy), Constants (upval), Name (copy), FIntAXLookOutfitCreationDelayMs (upval), FFlagAXAvatarEditorServiceTelemetryV2 (upval), ReportAvatarEditorServiceCounterFunction (upval), Constants1 (upval), AVATAREDITORSERVICECOUNTERSTATUS (upval), CreateMakeupLookModule (upval), p1 (copy), Callback1 (copy), ReportAvatarEventCounterV1Function (upval), SetCurrentToastMessageFunction (upval), config (upval), FFlagAXDeprecateAvatarEditorServiceTelemetryV1 (upval), ReportAvatarEventCounterNoAnalyticsArgumentFunction (upval)
 		local State = p3:getState()
 		local AvatarScales = State.AvatarExperience.AvatarEditor.Character.AvatarScales
@@ -87,7 +87,7 @@ return function(p1, Name, p2, Callback1, Callback) --[[ Line: 40 ]]
 			scale = AvatarScales,
 			playerAvatarType = AvatarType
 		}
-		task.spawn(function() --[[ Line: 122 ]]
+		task.spawn(function()
 			-- upvalues: FIntAXLookOutfitCreationDelayMs (upval), FFlagAXAvatarEditorServiceTelemetryV2 (upval), ReportAvatarEditorServiceCounterFunction (upval), Constants1 (upval), AVATAREDITORSERVICECOUNTERSTATUS (upval), CreateMakeupLookModule (upval), p1 (upval), config1 (copy), Callback1 (upval), ReportAvatarEventCounterV1Function (upval), p3 (copy), SetCurrentToastMessageFunction (upval), config (upval), FFlagAXDeprecateAvatarEditorServiceTelemetryV1 (upval), ReportAvatarEventCounterNoAnalyticsArgumentFunction (upval)
 			task.wait(FIntAXLookOutfitCreationDelayMs / 1000)
 			
@@ -96,7 +96,7 @@ return function(p1, Name, p2, Callback1, Callback) --[[ Line: 40 ]]
 			end
 			local MakeupLookModule, _ = CreateMakeupLookModule(p1, config1)
 			
-			return MakeupLookModule:andThen(function(_) --[[ Line: 134 ]]
+			return MakeupLookModule:andThen(function(_)
 				-- upvalues: FFlagAXAvatarEditorServiceTelemetryV2 (upval), ReportAvatarEditorServiceCounterFunction (upval), Constants1 (upval), AVATAREDITORSERVICECOUNTERSTATUS (upval), Callback1 (upval), ReportAvatarEventCounterV1Function (upval)
 				if FFlagAXAvatarEditorServiceTelemetryV2 then
 					ReportAvatarEditorServiceCounterFunction(Constants1.AVATAR_EDITOR_SERVICE_EVENTS.CreateMakeupLook, AVATAREDITORSERVICECOUNTERSTATUS.Success)
@@ -105,7 +105,7 @@ return function(p1, Name, p2, Callback1, Callback) --[[ Line: 40 ]]
 					Callback1()
 				end
 				ReportAvatarEventCounterV1Function(Constants1.AVATAR_EVENT_COUNTER_NAME.AXCreateMakeupLook)
-			end):catch(function(Err) --[[ Line: 147 ]]
+			end):catch(function(Err)
 				-- upvalues: p3 (upval), SetCurrentToastMessageFunction (upval), config (upval), FFlagAXDeprecateAvatarEditorServiceTelemetryV1 (upval), ReportAvatarEventCounterNoAnalyticsArgumentFunction (upval), Constants1 (upval), FFlagAXAvatarEditorServiceTelemetryV2 (upval), ReportAvatarEditorServiceCounterFunction (upval), AVATAREDITORSERVICECOUNTERSTATUS (upval)
 				warn("Failed to create makeup look", Err)
 				p3:dispatch(SetCurrentToastMessageFunction(config))

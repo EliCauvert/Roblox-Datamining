@@ -2,7 +2,7 @@
 local FFlagExpChatUseChannelTabsStore = require(ExpChat.Parent.SharedFlags).FFlagExpChatUseChannelTabsStore
 local GetChannelTabsStoreModule = require(ExpChat.Stores.GetChannelTabsStore)
 
-return function(p1): boolean --[[ Line: 8 ]]
+return function(p1): boolean
 	-- upvalues: FFlagExpChatUseChannelTabsStore (copy), GetChannelTabsStoreModule (copy)
 	if FFlagExpChatUseChannelTabsStore then
 		return GetChannelTabsStoreModule(false).getChannelTabsState(false).hasUserSelectedTab == true

@@ -24,11 +24,11 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local UseLastInputModeFunction = require(Parent.FocusNavigationUtils).useLastInputMode
 local FFlagProfileQRCodeFixFocusNavigationModule = require(ProfileQRCode.Flags.FFlagProfileQRCodeFixFocusNavigation)
 
-local function _(p1): boolean --[[ Line: 42 | Named "getTooltipWasShown" ]]
+local function _(p1): boolean
 	-- upvalues: AppStorageService (copy)
 	local P0 = p1 or AppStorageService
 	assert(P0 ~= nil, "AppStorageService is not nil")
-	local Success, Result = pcall(function() --[[ Line: 46 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: P0 (ref)
 		return P0:GetItem("QrCodeScannerTooltipSeen")
 	end)
@@ -36,18 +36,18 @@ local function _(p1): boolean --[[ Line: 42 | Named "getTooltipWasShown" ]]
 	return if Success and Result ~= nil then Result == "true" else false
 end
 
-local _ = function(p1, p2) --[[ Line: 57 | Named "setTooltipWasShown" ]]
+local _ = function(p1, p2)
 	-- upvalues: AppStorageService (copy)
 	local P1 = p1 or AppStorageService
 	assert(P1 ~= nil, "AppStorageService is not nil")
-	pcall(function() --[[ Line: 61 ]]
+	pcall(function()
 		-- upvalues: P1 (ref), p2 (copy)
 		P1:SetItem("QrCodeScannerTooltipSeen", (tostring(p2)))
 		P1:Flush()
 	end)
 end
 
-return function(p1) --[[ Line: 75 ]]
+return function(p1)
 	-- upvalues: FFlagProfileQRCodeFixFocusNavigationModule (copy), UseLastInputModeFunction (copy), UseAnalyticsModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseAppPolicyFunction (copy), ReactModule (copy), AppStorageService (copy), EventNamesModule (copy), InputUtilities (copy), IXPService (copy), AppUserLayers (copy), CoreGui (copy), TooltipOrientation (copy), WithTooltipFunction (copy), IconButton (copy), Images (copy), IconSize (copy), ExternalEventConnection (copy), UserInputService (copy), MakeBackButtonFunction (copy), HeaderBar (copy)
 	local IsFocus = if FFlagProfileQRCodeFixFocusNavigationModule then UseLastInputModeFunction() == "Focus" else nil
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
@@ -56,15 +56,15 @@ return function(p1) --[[ Line: 75 ]]
 		tooltipBodyText = TextKeysModule.TooltipText,
 		tooltipHeaderText = TextKeysModule.TooltipTitle
 	})
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 84 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2)
 		return p2.getFriendCodeQrCodeScannerEnabled()
 	end)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 89 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), AppStorageService (upval), UseStateResult2 (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval)
 		local AppStorageService1 = p1.appStorageService or AppStorageService
 		assert(AppStorageService1 ~= nil, "AppStorageService is not nil")
-		local Success, Result = pcall(function() --[[ Line: 46 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: AppStorageService1 (ref)
 			return AppStorageService1:GetItem("QrCodeScannerTooltipSeen")
 		end)
@@ -75,21 +75,21 @@ return function(p1) --[[ Line: 75 ]]
 			UseAnalyticsModuleResult.fireEvent(EventNamesModule.QRCodeScannerTooltipShown)
 		end
 	end, {})
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 97 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: InputUtilities (upval), UseStateResult (copy), UseStateResult2 (copy), p1 (copy), AppStorageService (upval)
 		if InputUtilities.isActivationInput(p2) and UseStateResult then
 			UseStateResult2(false)
 			local AppStorageService1 = p1.appStorageService or AppStorageService
 			assert(AppStorageService1 ~= nil, "AppStorageService is not nil")
 			local v1 = true
-			pcall(function() --[[ Line: 61 ]]
+			pcall(function()
 				-- upvalues: AppStorageService1 (ref), v1 (copy)
 				AppStorageService1:SetItem("QrCodeScannerTooltipSeen", (tostring(v1)))
 				AppStorageService1:Flush()
 			end)
 		end
 	end, { UseStateResult })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 106 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: IXPService (upval), AppUserLayers (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval), p1 (copy)
 		IXPService:LogUserLayerExposure(AppUserLayers.ProfileQRCodeScannerLayer)
 		UseAnalyticsModuleResult.fireEvent(EventNamesModule.QRCodeScannerOpened)
@@ -97,7 +97,7 @@ return function(p1) --[[ Line: 75 ]]
 	end, { p1.openQrCodeScanner })
 	local TooltipBodyText = UseLocalizationResult.tooltipBodyText
 	local TooltipHeaderText = UseLocalizationResult.tooltipHeaderText
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 115 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: TooltipBodyText (copy), TooltipHeaderText (copy), UseStateResult (copy), CoreGui (upval), TooltipOrientation (upval), WithTooltipFunction (upval), ReactModule (upval), IconButton (upval), Images (upval), IconSize (upval), UseResult1 (copy), ExternalEventConnection (upval), UserInputService (upval), UseResult (copy)
 		return WithTooltipFunction({
 			bodyText = TooltipBodyText,
@@ -107,7 +107,7 @@ return function(p1) --[[ Line: 75 ]]
 			active = UseStateResult,
 			guiTarget = CoreGui,
 			preferredOrientation = TooltipOrientation.Bottom
-		}, function(OnAbsolutePositionChanged) --[[ Line: 128 ]]
+		}, function(OnAbsolutePositionChanged)
 			-- upvalues: ReactModule (upval), IconButton (upval), Images (upval), IconSize (upval), UseResult1 (upval), ExternalEventConnection (upval), UserInputService (upval), UseResult (upval)
 			return ReactModule.createElement(IconButton, {
 				icon = Images["icons/actions/scan"],

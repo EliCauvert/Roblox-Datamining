@@ -21,7 +21,7 @@ local _ = require(Parent.AvatarExperienceCommon)
 local ItemStatusToItemStatusKeyModule = require(BulkPurchaseApp.Enums.ItemStatusToItemStatusKey)
 local ItemStatusKeyToLocalizationKeyModule = require(BulkPurchaseApp.Enums.ItemStatusKeyToLocalizationKey)
 
-local function _(Tbl, Id) --[[ Line: 32 | Named "toCardPropsWithId" ]]
+local function _(Tbl, Id)
 	local Copy = table.clone(Tbl)
 	Copy.id = Id
 	
@@ -41,7 +41,7 @@ local config = {
 	dismissCTA = "CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.PriceBox.DismissCTA"
 }
 
-local function mapTokens(p1) --[[ Line: 58 ]]
+local function mapTokens(p1)
 	return {
 		boxBackground = p1.Color.Surface.Surface_100.Color3,
 		boxPadding = p1.Size.Size_600,
@@ -57,7 +57,7 @@ local function mapTokens(p1) --[[ Line: 58 ]]
 	}
 end
 
-local function mapBulkPurchasePartialSuccessItemsToRowPresentation(SuccessfulItems, p1, SuccessColor, FailureColor) --[[ Line: 74 ]]
+local function mapBulkPurchasePartialSuccessItemsToRowPresentation(SuccessfulItems, p1, SuccessColor, FailureColor)
 	-- upvalues: ItemStatusToItemStatusKeyModule (copy), ReactModule (copy), ItemCardThumbnail (copy)
 	local List = {}
 	
@@ -79,7 +79,7 @@ local function mapBulkPurchasePartialSuccessItemsToRowPresentation(SuccessfulIte
 	return List
 end
 
-return function(p2) --[[ Line: 111 | Named "BulkPurchasePartialSuccess" ]]
+return function(p2)
 	-- upvalues: UseDesignTokensFunction (copy), mapTokens (copy), UseLocalizationFunction (copy), config (copy), ItemStatusKeyToLocalizationKeyModule (copy), ReactModule (copy), FullPagePromptModule (copy), StyledTextLabel (copy), FullPagePromptTwoPanelLayoutModule (copy), FullPagePromptScrollListModule (copy), ItemListHeaderModule (copy), ItemListModule (copy), mapBulkPurchasePartialSuccessItemsToRowPresentation (copy), DividerModule (copy), BoxModule (copy), PriceBoxLineDEPRECATEDModule (copy), Button (copy), ButtonType (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction(mapTokens)
 	local UseLocalizationResult = UseLocalizationFunction(config)
@@ -100,7 +100,7 @@ return function(p2) --[[ Line: 111 | Named "BulkPurchasePartialSuccess" ]]
 		AutomaticSize = Enum.AutomaticSize.Y,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 137 ]]
+		[ReactModule.Change.AbsoluteSize] = function(Frame)
 			-- upvalues: UseBindingResult2 (copy)
 			UseBindingResult2(Frame.AbsoluteSize)
 		end
@@ -112,7 +112,7 @@ return function(p2) --[[ Line: 111 | Named "BulkPurchasePartialSuccess" ]]
 		automaticSize = Enum.AutomaticSize.XY
 	})), ReactModule.createElement(FullPagePromptTwoPanelLayoutModule, {
 		LayoutOrder = 2,
-		size = UseBindingResult:map(function(p3): UDim2 --[[ Line: 151 ]]
+		size = UseBindingResult:map(function(p3): UDim2
 			-- upvalues: UseDesignTokensResult (copy)
 			return UDim2.new(1, 0, 1, -(p3.Y + UseDesignTokensResult.noticeMarginBottom))
 		end),

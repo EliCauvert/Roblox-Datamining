@@ -13,17 +13,17 @@ local config = {
 	hidden = MotionModule.createState({ groupTransparency = 1, barScale = 0 }, { default = MotionModule.transition({ duration = 0.1 }) })
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 34 | Named "ProgressLoadingAssets" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), MotionModule (copy), config (copy), ReactModule (copy), ComputeSpanModule (copy), ConstantsModule (copy), View (copy), Progress (copy), ProgressShape (copy)
 	local Scale = UseTokensFunction().Config.UI.Scale
 	local UseMotionResult, UseMotionResult2 = MotionModule.useMotion(config.visible)
-	ReactModule.useEffect(function() --[[ Line: 40 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseMotionResult2 (copy), config (upval)
 		local Flag = false
 		
 		if p1.isVisible == false then
 			UseMotionResult2(config.hidden, {
-				onAnimationComplete = function(Enabled) --[[ Line: 44 ]]
+				onAnimationComplete = function(Enabled)
 					-- upvalues: Flag (ref), p1 (upval)
 					if not Flag and Enabled == true and p1.onHideComplete then
 						p1.onHideComplete()
@@ -33,7 +33,7 @@ return ReactModule.memo(function(p1) --[[ Line: 34 | Named "ProgressLoadingAsset
 		else
 			UseMotionResult2(config.visible)
 		end
-		return function() --[[ Line: 53 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end
@@ -43,7 +43,7 @@ return ReactModule.memo(function(p1) --[[ Line: 34 | Named "ProgressLoadingAsset
 	return ReactModule.createElement(View, {
 		tag = "size-full col align-x-center align-y-center bg-surface-0",
 		GroupTransparency = UseMotionResult.groupTransparency,
-		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 69 ]]
+		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
 			-- upvalues: UseBindingResult2 (copy)
 			UseBindingResult2(Frame.AbsoluteSize.X)
 		end, {})
@@ -51,12 +51,12 @@ return ReactModule.memo(function(p1) --[[ Line: 34 | Named "ProgressLoadingAsset
 		ProgressBarContainer = ReactModule.createElement(View, {
 			tag = "auto-y",
 			Size = ReactModule.joinBindings({
-				width = UseBindingResult:map(function(p2) --[[ Line: 59 ]]
+				width = UseBindingResult:map(function(p2)
 					-- upvalues: ComputeSpanModule (upval), Scale (copy), ConstantsModule (upval)
 					return ComputeSpanModule(p2, Scale, ConstantsModule.PROGRESS_BAR_MARGIN, ConstantsModule.PROGRESS_BAR_MAX_WIDTH)
 				end),
 				barScale = UseMotionResult.barScale
-			}):map(function(p2): UDim2 --[[ Line: 65 ]]
+			}):map(function(p2): UDim2
 				return UDim2.fromOffset(p2.width * p2.barScale, 0)
 			end)
 		}, {

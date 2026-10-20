@@ -9,11 +9,11 @@ local GetHumanoidDescriptionFromCostumeIdModule = require(Parent.Thunks.GetHuman
 local GetFFlagDisplayCollectiblesIconModule = require(Parent.Flags.GetFFlagDisplayCollectiblesIcon)
 local TryOnViewport = RoactModule.PureComponent:extend("TryOnViewport")
 
-local function _(p1): boolean --[[ Line: 14 | Named "isPartOfBundleAndOffsale" ]]
+local function _(p1): boolean
 	return p1 and p1.parentBundleId ~= nil and not p1.isForSale or false
 end
 
-local _ = function(p1, p2) --[[ Line: 18 | Named "createDefaultHumanoidDescriptionAccessoryInfo" ]]
+local _ = function(p1, p2)
 	-- upvalues: ConstantsModule (copy)
 	return {
 		AssetId = tonumber(p2),
@@ -23,7 +23,7 @@ local _ = function(p1, p2) --[[ Line: 18 | Named "createDefaultHumanoidDescripti
 	}
 end
 
-function TryOnViewport.init(p1) --[[ Line: 27 ]]
+function TryOnViewport.init(p1)
 	p1.model = p1.props.localPlayerModel
 	p1.model.HumanoidRootPart.Anchored = true
 	p1.humanoidDescriptions = {}
@@ -31,11 +31,11 @@ function TryOnViewport.init(p1) --[[ Line: 27 ]]
 	p1.state = { obtainedHumanoidDescriptions = {} }
 end
 
-function TryOnViewport.didMount(p1) --[[ Line: 37 ]]
+function TryOnViewport.didMount(p1)
 	p1.isMounted = true
 end
 
-function TryOnViewport.didUpdate(p1, p2) --[[ Line: 41 ]]
+function TryOnViewport.didUpdate(p1, p2)
 	-- upvalues: CryoModule (copy)
 	local AssetInfo = p1.props.assetInfo
 	local Bundles = p1.props.bundles
@@ -45,7 +45,7 @@ function TryOnViewport.didUpdate(p1, p2) --[[ Line: 41 ]]
 		local CostumeId = Bundles[AssetInfo.parentBundleId].costumeId
 		
 		if CostumeId then
-			p1.props.getHumanoidDescriptionFromCostumeId(CostumeId, function(p3) --[[ Line: 53 ]]
+			p1.props.getHumanoidDescriptionFromCostumeId(CostumeId, function(p3)
 				-- upvalues: p1 (copy), CostumeId (copy), CryoModule (upval)
 				if p1 and p1.isMounted then
 					p1.humanoidDescriptions[CostumeId] = p3
@@ -58,7 +58,7 @@ function TryOnViewport.didUpdate(p1, p2) --[[ Line: 41 ]]
 	end
 end
 
-function TryOnViewport.tryOnBundleWithoutCostumeId(p1, ParentBundleId, Humanoid: Humanoid) --[[ Line: 72 ]]
+function TryOnViewport.tryOnBundleWithoutCostumeId(p1, ParentBundleId, Humanoid: Humanoid)
 	-- upvalues: ConstantsModule (copy)
 	local t = {}
 	local t1 = {}
@@ -112,7 +112,7 @@ function TryOnViewport.tryOnBundleWithoutCostumeId(p1, ParentBundleId, Humanoid:
 	return Humanoid
 end
 
-function TryOnViewport.render(p2) --[[ Line: 126 ]]
+function TryOnViewport.render(p2)
 	-- upvalues: ConstantsModule (copy), RoactModule (copy), GetFFlagDisplayCollectiblesIconModule (copy), AvatarViewportModule (copy)
 	local AssetInfo = p2.props.assetInfo
 	local Bundles = p2.props.bundles
@@ -183,21 +183,21 @@ function TryOnViewport.render(p2) --[[ Line: 126 ]]
 	})
 end
 
-function TryOnViewport.willUnmount(p3) --[[ Line: 214 ]]
+function TryOnViewport.willUnmount(p3)
 	p3.isMounted = false
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p3, _) --[[ Line: 218 ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p3, _)
 	return {
 		assets = p3.assets,
 		assetInfo = p3.assets[p3.detailsInformation.assetId],
 		bundles = p3.bundles,
 		tryingOnInfo = p3.tryingOnInfo
 	}
-end, function(Callback) --[[ Line: 227 ]]
+end, function(Callback)
 	-- upvalues: GetHumanoidDescriptionFromCostumeIdModule (copy)
 	return {
-		getHumanoidDescriptionFromCostumeId = function(p3, p4) --[[ Line: 229 ]]
+		getHumanoidDescriptionFromCostumeId = function(p3, p4)
 			-- upvalues: Callback (copy), GetHumanoidDescriptionFromCostumeIdModule (upval)
 			return Callback(GetHumanoidDescriptionFromCostumeIdModule(p3, p4))
 		end

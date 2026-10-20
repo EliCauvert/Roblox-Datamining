@@ -20,7 +20,7 @@ local StrictInterfaceResult = T.strictInterface({
 	LayoutOrder = T.optional(T.integer)
 })
 
-return function(Frame: Frame) --[[ Line: 34 | Named "PointerLabel" ]]
+return function(Frame: Frame)
 	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), config (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Roact (copy), Image (copy), ImageSetLabel (copy)
 	if GlobalConfigModule.propValidation then
 		assert(StrictInterfaceResult(Frame))

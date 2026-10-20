@@ -4,7 +4,7 @@ local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FFlagAvatarSwitcherUiFixes = require(Parent.AvatarExperienceFlags).FFlagAvatarSwitcherUiFixes
 
-return function(Frame) --[[ Line: 20 | Named "MessageCard" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FoundationModule (copy), FFlagAvatarSwitcherUiFixes (copy)
 	local Size800 = UseTokensFunction().Size.Size_800
 	

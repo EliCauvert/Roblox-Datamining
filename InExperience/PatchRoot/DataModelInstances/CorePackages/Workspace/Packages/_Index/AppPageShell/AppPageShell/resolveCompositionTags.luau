@@ -3,7 +3,7 @@ local _ = require(AppPageShell.PageTypes)
 local CompositionTags = require(AppPageShell.Parent.AppComposition).CompositionTags
 local Frozen = table.freeze({})
 
-return function(p1) --[[ Line: 20 | Named "resolveCompositionTags" ]]
+return function(p1)
 	-- upvalues: Frozen (copy), CompositionTags (copy)
 	return if p1 and p1.enabled == false then Frozen else {
 		root = `{CompositionTags.ContentRegion.Root} {p1 and p1.layout or CompositionTags.Layout.Discovery}`,

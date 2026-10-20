@@ -25,7 +25,7 @@ local Default = require(Parent1.LoggingProtocol).default
 local PurchaseModalV2ShownCounter = require(Parent.Generic.Events.PurchaseModalCounter).PurchaseModalV2ShownCounter
 local FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule = require(Parent.Flags.FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePrompt)
 
-local function ProductPurchaseModal(p1) --[[ Line: 69 ]]
+local function ProductPurchaseModal(p1)
 	-- upvalues: FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (copy), UseDefaultFocusBehaviorFunction (copy), ReactModule (copy), LoggerModule (copy), GetAppContextModule (copy), Default (copy), PurchaseModalV2ShownCounter (copy), UseLocalizationFunction (copy), FormatNumberModule (copy), LocalizationService (copy), UseTokensFunction (copy), UseTextSizeOffsetFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), InteractiveAlert (copy), ProductDetailsModule (copy), ButtonType (copy), Text (copy)
 	local v1 = nil
 	local v2 = nil
@@ -33,7 +33,7 @@ local function ProductPurchaseModal(p1) --[[ Line: 69 ]]
 	if FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then
 		v1, v23 = UseDefaultFocusBehaviorFunction()
 	end
-	ReactModule.useEffect(function() --[[ Line: 74 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: LoggerModule (upval), p1 (copy), GetAppContextModule (upval), Default (upval), PurchaseModalV2ShownCounter (upval)
 		LoggerModule.debug({
 			message = "Purchase Modal V2 Shown",
@@ -65,13 +65,13 @@ local function ProductPurchaseModal(p1) --[[ Line: 69 ]]
 	UseStateResult, UseStateResult2 = ReactModule.useState(0)
 	local CaptionSmall = UseTokensResult.Typography.CaptionSmall
 	Robux = UseLocalizationResult.RemainingBalance:gsub("{robux}", Text1)
-	UseResult = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 112 ]]
+	UseResult = ReactModule.useCallback(function(Frame: Frame)
 		-- upvalues: UseStateResult (ref), UseStateResult2 (ref)
 		if UseStateResult ~= Frame.AbsoluteSize.X then
 			UseStateResult2(Frame.AbsoluteSize.X)
 		end
 	end, { p1 })
-	UseMemoResult = ReactModule.useMemo(function() --[[ Line: 118 ]]
+	UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CaptionSmall (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Robux (ref), UseStateResult (ref), TextService (upval)
 		return CaptionSmall.LineHeight * (if FoundationFontFaceMigration then GetTextSizeFunction(Robux, CaptionSmall.FontSize, CaptionSmall.Font, Vector2.new(UseStateResult, 1e999), { addTemporaryPadding = false }).Y else TextService:GetTextSize(Robux, CaptionSmall.FontSize, CaptionSmall.Font, Vector2.new(UseStateResult, 1e999)).Y)
 	end, { UseStateResult, UseTextSizeOffsetResult, Robux })
@@ -83,14 +83,14 @@ local function ProductPurchaseModal(p1) --[[ Line: 69 ]]
 		anchorPoint = Vector2.new(0.5, 0.5),
 		position = UDim2.new(0.5, 0, 0.5, 0),
 		title = UseLocalizationResult.BuyItem,
-		onCloseClicked = function() --[[ Line: 145 ]]
+		onCloseClicked = function()
 			-- upvalues: p1 (copy)
 			if not p1.buttons.isDisabled then
 				p1.buttons.cancelActivated()
 			end
 		end,
 		onAbsoluteSizeChanged = UseResult,
-		middleContent = function() --[[ Line: 151 ]]
+		middleContent = function()
 			-- upvalues: ReactModule (upval), ProductDetailsModule (upval), p1 (copy)
 			return ReactModule.createElement(ProductDetailsModule, {
 				isPortrait = false,
@@ -117,7 +117,7 @@ local function ProductPurchaseModal(p1) --[[ Line: 69 ]]
 				}
 			}
 		},
-		footerContent = function() --[[ Line: 179 ]]
+		footerContent = function()
 			-- upvalues: p1 (copy), ReactModule (upval), Text (upval), Robux (ref), UseMemoResult (ref), UseResult (ref)
 			return if p1.balanceAmountValid then ReactModule.createElement(Text, {
 				tag = "content-muted text-caption-small align-x-center text-wrap",
@@ -129,7 +129,7 @@ local function ProductPurchaseModal(p1) --[[ Line: 69 ]]
 	})
 end
 
-return function(p1) --[[ Line: 194 | Named "ProductPurchaseModalContainer" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), ProductPurchaseModal (copy)
 	return ReactModule.createElement(LocalizationProvider, {
 		localization = Localization.new(LocalizationService.RobloxLocaleId)

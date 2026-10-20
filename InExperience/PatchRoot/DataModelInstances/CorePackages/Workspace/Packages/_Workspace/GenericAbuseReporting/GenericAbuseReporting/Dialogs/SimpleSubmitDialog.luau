@@ -35,16 +35,16 @@ local CreateNextOrderFunction = require(Parent.ReactUtils).createNextOrder
 local FFlagAddAbuseReportOffsetForLandscape = SharedFlagsModule.FFlagAddAbuseReportOffsetForLandscape
 local FFlagAddTakeItDownReportLinkToSurfaces = SharedFlagsModule.FFlagAddTakeItDownReportLinkToSurfaces
 
-local function _(Vector): number --[[ Line: 71 | Named "getScreenSizeOffset" ]]
+local function _(Vector): number
 	-- upvalues: FFlagAddAbuseReportOffsetForLandscape (copy)
 	return if FFlagAddAbuseReportOffsetForLandscape and Vector.Y < Vector.X then 180 else 100
 end
 
-local _ = function(p1, p2): number --[[ Line: 80 | Named "getContentRightPadding" ]]
+local _ = function(p1, p2): number
 	return if p2.Y < p1.Y then 16 else 1
 end
 
-return function(p1) --[[ Line: 84 | Named "SubmitDialog" ]]
+return function(p1)
 	-- upvalues: UseAnalyticsDispatchModule (copy), ReactFocusNavigationModule (copy), FocusNavigationUtilsModule (copy), UseTokensFunction (copy), ReactModule (copy), UseLayerCollectorFunction (copy), OnFormReasonSelectedModule (copy), OnFormCommentUpdatedModule (copy), UseLocalizationFunction (copy), UseLocalizedStringsModule (copy), CreateNextOrderFunction (copy), ReasonDropdownModule (copy), UIListLayoutModule (copy), View (copy), Text (copy), IsShowGenericIllegalContentReportingLink (copy), GenericReportLink (copy), FFlagAddTakeItDownReportLinkToSurfaces (copy), GetTakeItDownReportLinkVisibilityFunction (copy), TakeItDownReportLink (copy), PartialPageModal (copy), MODALPOSITIONOFFSETModule (copy), ButtonType (copy), CloseButtonIcon (copy), ScrollView (copy), FFlagAddAbuseReportOffsetForLandscape (copy), ScrollBarVisibility (copy), FrameModule (copy), StyledTextLabel (copy), CommentTextFieldModule (copy)
 	local UseAnalyticsDispatchModuleResult = UseAnalyticsDispatchModule()
 	local UseFocusGuiObjectResult = ReactFocusNavigationModule.useFocusGuiObject()
@@ -66,7 +66,7 @@ return function(p1) --[[ Line: 84 | Named "SubmitDialog" ]]
 	local UseStateResult11, UseStateResult2_10 = ReactModule.useState(96)
 	local UseLayerCollectorResult = UseLayerCollectorFunction()
 	local AbsoluteSize = UseLayerCollectorResult.absoluteSize
-	ReactModule.useEffect(function() --[[ Line: 107 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2_10 (copy), UseStateResult5 (copy), UseStateResult9 (copy), UseStateResult8 (copy), UseStateResult7 (copy)
 		UseStateResult2_10((math.max(96, UseStateResult5.Y - (UseStateResult9 - UseStateResult8) - UseStateResult7 - 20)))
 	end, {
@@ -75,14 +75,14 @@ return function(p1) --[[ Line: 84 | Named "SubmitDialog" ]]
 		UseStateResult8,
 		UseStateResult7
 	})
-	ReactModule.useEffect(function() --[[ Line: 116 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), UseStateResult2_6 (copy), UseStateResult2_8 (copy)
 		if UseRefResult1.current then
 			UseStateResult2_6(UseRefResult1.current.AbsoluteSize.Y)
 			UseStateResult2_8(UseRefResult1.current.AbsolutePosition.Y)
 		end
 	end, { UseRefResult1.current, AbsoluteSize })
-	ReactModule.useEffect(function() --[[ Line: 123 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseStateResult2_5 (copy), UseStateResult2_4 (copy), UseStateResult2_7 (copy)
 		if not UseRefResult.current then
 			UseStateResult2_4(Vector2.zero)
@@ -92,7 +92,7 @@ return function(p1) --[[ Line: 84 | Named "SubmitDialog" ]]
 		local ScrollingFrame = UseRefResult.current:FindFirstChildWhichIsA("ScrollingFrame")
 		
 		if ScrollingFrame then
-			ScrollingFrame:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function() --[[ Line: 127 ]]
+			ScrollingFrame:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
 				-- upvalues: UseStateResult2_5 (upval), ScrollingFrame (copy), UseStateResult2_4 (upval)
 				UseStateResult2_5(ScrollingFrame.AbsoluteWindowSize)
 				UseStateResult2_4(ScrollingFrame.AbsoluteCanvasSize)
@@ -101,13 +101,13 @@ return function(p1) --[[ Line: 84 | Named "SubmitDialog" ]]
 		end
 		UseStateResult2_7(UseRefResult.current.AbsolutePosition.Y)
 	end, { UseRefResult.current, AbsoluteSize })
-	ReactModule.useEffect(function() --[[ Line: 139 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult2 (copy), UseStateResult2_9 (copy)
 		if UseRefResult2.current then
 			UseStateResult2_9(UseRefResult2.current.AbsoluteContentSize.Y)
 		end
 	end, { UseRefResult2.current })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 145 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult1 (copy), p1 (copy), UseStateResult4 (copy), UseStateResult2 (copy)
 		if UseStateResult1 ~= "" then
 			p1.onSubmit(UseStateResult1, UseStateResult4)
@@ -127,7 +127,7 @@ return function(p1) --[[ Line: 84 | Named "SubmitDialog" ]]
 		UseStateResult4,
 		UseStateResult2
 	})
-	local UseResult1 = ReactModule.useCallback(function(Reason_selection) --[[ Line: 157 ]]
+	local UseResult1 = ReactModule.useCallback(function(Reason_selection)
 		-- upvalues: UseStateResult2_1 (copy), UseAnalyticsDispatchModuleResult (copy), OnFormReasonSelectedModule (upval), UseLastInputModeResult (copy), UseRefResult1 (copy), UseFocusGuiObjectResult (copy)
 		UseStateResult2_1(Reason_selection)
 		UseAnalyticsDispatchModuleResult(OnFormReasonSelectedModule({ reason_selection = Reason_selection }))
@@ -144,7 +144,7 @@ return function(p1) --[[ Line: 84 | Named "SubmitDialog" ]]
 		UseFocusGuiObjectResult,
 		UseLastInputModeResult
 	})
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 171 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_3 (copy), UseAnalyticsDispatchModuleResult (copy), OnFormCommentUpdatedModule (upval)
 		UseStateResult2_3(p2)
 		UseAnalyticsDispatchModuleResult(OnFormCommentUpdatedModule({ comment_added = #p2 > 0 }))
@@ -193,9 +193,9 @@ return function(p1) --[[ Line: 84 | Named "SubmitDialog" ]]
 			})
 		})
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 232 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), View (upval), IsShowGenericIllegalContentReportingLink (upval), GenericReportLink (upval)
-		return function() --[[ Line: 233 ]]
+		return function()
 			-- upvalues: ReactModule (upval), View (upval), IsShowGenericIllegalContentReportingLink (upval), GenericReportLink (upval)
 			return ReactModule.createElement(View, {
 				tag = "size-full-0 auto-y col padding-x-xlarge padding-top-small"
@@ -204,9 +204,9 @@ return function(p1) --[[ Line: 84 | Named "SubmitDialog" ]]
 			})
 		end
 	end, {})
-	local UseMemoResult1 = if FFlagAddTakeItDownReportLinkToSurfaces then ReactModule.useMemo(function() --[[ Line: 248 ]]
+	local UseMemoResult1 = if FFlagAddTakeItDownReportLinkToSurfaces then ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), View (upval), IsShowGenericIllegalContentReportingLink (upval), GenericReportLink (upval), GetTakeItDownReportLinkVisibilityFunction (upval), TakeItDownReportLink (upval)
-		return function() --[[ Line: 249 ]]
+		return function()
 			-- upvalues: ReactModule (upval), View (upval), IsShowGenericIllegalContentReportingLink (upval), GenericReportLink (upval), GetTakeItDownReportLinkVisibilityFunction (upval), TakeItDownReportLink (upval)
 			return ReactModule.createElement(View, {
 				tag = "col gap-medium size-full-0 auto-y padding-x-xlarge padding-top-small"

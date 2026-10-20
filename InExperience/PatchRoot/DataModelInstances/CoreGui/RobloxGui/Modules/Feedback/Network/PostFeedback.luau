@@ -5,9 +5,9 @@ local Players = game:GetService("Players")
 local Promise = require(game:GetService("CorePackages").Packages.InGameMenuDependencies).Promise
 local GetFFlagEnableSendImageFeedbackToBackendModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Flags.GetFFlagEnableSendImageFeedbackToBackend)
 
-local function _(Options, p1, p2) --[[ Line: 28 | Named "request" ]]
+local function _(Options, p1, p2)
 	-- upvalues: HttpService (copy)
-	return HttpService:RequestInternal(Options):Start(function(p3, p4) --[[ Line: 29 ]]
+	return HttpService:RequestInternal(Options):Start(function(p3, p4)
 		-- upvalues: p1 (copy), p2 (copy)
 		if p3 then
 			p1()
@@ -19,7 +19,7 @@ local function _(Options, p1, p2) --[[ Line: 28 | Named "request" ]]
 	end)
 end
 
-return function(ContentType, Value, Value1, ExternalId: string, Value2, Comments, ReasonType) --[[ Line: 38 ]]
+return function(ContentType, Value, Value1, ExternalId: string, Value2, Comments, ReasonType)
 	-- upvalues: GetFFlagEnableSendImageFeedbackToBackendModule (copy), Players (copy), ConstantsModule (copy), UrlModule (copy), HttpService (copy), Promise (copy)
 	local config = nil
 	if GetFFlagEnableSendImageFeedbackToBackendModule() then
@@ -79,11 +79,11 @@ return function(ContentType, Value, Value1, ExternalId: string, Value2, Comments
 		}
 	}
 	
-	return Promise.new(function(Callback, Callback1) --[[ Line: 144 ]]
+	return Promise.new(function(Callback, Callback1)
 		-- upvalues: config1 (copy), HttpService (upval)
-		spawn(function() --[[ Line: 145 ]]
+		spawn(function()
 			-- upvalues: config1 (upval), Callback (copy), Callback1 (copy), HttpService (upval)
-			local _ = HttpService:RequestInternal(config1):Start(function(p1, p2) --[[ Line: 29 ]]
+			local _ = HttpService:RequestInternal(config1):Start(function(p1, p2)
 				-- upvalues: Callback (copy), Callback1 (copy)
 				if p1 then
 					Callback()

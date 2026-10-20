@@ -9,17 +9,17 @@ local FFlagExpChatEnableFriendsTab = SharedFlagsModule.FFlagExpChatEnableFriends
 local FFlagAppChatDistinctUnibarEntryPoint = SharedFlagsModule.FFlagAppChatDistinctUnibarEntryPoint
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 
-return function() --[[ Line: 17 ]]
+return function()
 	-- upvalues: ReactModule (copy), ParentContainerContextModule (copy), UseDispatchFunction (copy), SetAppChatVisibleFunction (copy), FFlagExpChatEnableFriendsTab (copy), FFlagAppChatDistinctUnibarEntryPoint (copy), EnteredChatFromEntryPointModule (copy)
 	local UseContextResult = ReactModule.useContext(ParentContainerContextModule)
 	local VisibilitySignal = UseContextResult.visibilitySignal
 	local GetShouldSetAppChatVisibleFunction = UseContextResult.getShouldSetAppChatVisible
 	local EntryPoint = UseContextResult.entryPoint
 	local UseDispatchResult = UseDispatchFunction()
-	ReactModule.useEffect(function() --[[ Line: 24 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: VisibilitySignal (copy), GetShouldSetAppChatVisibleFunction (copy), SetAppChatVisibleFunction (upval), FFlagExpChatEnableFriendsTab (upval), FFlagAppChatDistinctUnibarEntryPoint (upval), EntryPoint (copy), UseDispatchResult (copy), EnteredChatFromEntryPointModule (upval)
 		local Connection = nil
-		Connection = VisibilitySignal:connect(function(p1, p2) --[[ Line: 27 ]]
+		Connection = VisibilitySignal:connect(function(p1, p2)
 			-- upvalues: GetShouldSetAppChatVisibleFunction (upval), SetAppChatVisibleFunction (upval), FFlagExpChatEnableFriendsTab (upval), FFlagAppChatDistinctUnibarEntryPoint (upval), EntryPoint (upval), UseDispatchResult (upval), EnteredChatFromEntryPointModule (upval)
 			if GetShouldSetAppChatVisibleFunction(p1) then
 				SetAppChatVisibleFunction(true)
@@ -31,7 +31,7 @@ return function() --[[ Line: 17 ]]
 			end
 		end)
 		
-		return function() --[[ Line: 39 ]]
+		return function()
 			-- upvalues: Connection (ref)
 			if Connection then
 				Connection:disconnect()

@@ -5,27 +5,27 @@ local ScrollAlignmentModule = require(ViewRecycler.Core.Enums.ScrollAlignment)
 local TypesModule = require(ViewRecycler.Core.Types)
 local Frozen = table.freeze({ firstIndex = 1, lastIndex = 0 })
 
-local function _(p1) --[[ Line: 48 | Named "resolveOverscan" ]]
+local function _(p1)
 	local P0 = p1 or 1
 	assert(P0 >= 0 and P0 % 1 == 0, "Virtualizer: overscan must be a non-negative integer")
 	
 	return P0
 end
 
-local _ = function(Center) --[[ Line: 54 | Named "validateAlignment" ]]
+local _ = function(Center)
 	-- upvalues: ScrollAlignmentModule (copy)
 	assert(Center == ScrollAlignmentModule.Start or (Center == ScrollAlignmentModule.Center or Center == ScrollAlignmentModule.End), "Virtualizer: invalid content alignment")
 end
 
-local _ = function(p1: number) --[[ Line: 61 | Named "validateInset" ]]
+local _ = function(p1: number)
 	assert(p1 >= 0 and p1 < 1e999, "Virtualizer: content insets must be finite non-negative numbers")
 end
 
-local _ = function(p1, p2): boolean --[[ Line: 65 | Named "sameRange" ]]
+local _ = function(p1, p2): boolean
 	return p1.firstIndex == p2.firstIndex and p1.lastIndex == p2.lastIndex
 end
 
-return function(p1) --[[ Line: 69 | Named "createViewport" ]]
+return function(p1)
 	-- upvalues: ScrollAlignmentModule (copy), ReachedThresholdModule (copy), Frozen (copy), TypesModule (copy)
 	local Layout = p1.layout
 	local Overscan = p1.overscan or 1
@@ -51,7 +51,7 @@ return function(p1) --[[ Line: 69 | Named "createViewport" ]]
 	local Frozen1 = Frozen
 	local Frozen2 = Frozen
 	
-	local function _() --[[ Line: 88 | Named "metrics" ]]
+	local function _()
 		-- upvalues: Layout (ref), Size (ref), Insets (ref), Insets1 (ref), ContentAlignment (ref), ScrollAlignmentModule (upval)
 		local ContentLength = Layout.getContentLength()
 		local Largest = math.max(0, Size - Insets - Insets1 - ContentLength)
@@ -59,7 +59,7 @@ return function(p1) --[[ Line: 69 | Named "createViewport" ]]
 		return Insets + ContentLength + Insets1, Insets + (if ContentAlignment == ScrollAlignmentModule.End then Largest elseif ContentAlignment == ScrollAlignmentModule.Center then Largest / 2 else 0)
 	end
 	
-	local function refresh() --[[ Line: 98 ]]
+	local function refresh()
 		-- upvalues: ContentLength (ref), v1 (ref), Layout (ref), Size (ref), Insets (ref), Insets1 (ref), ContentAlignment (ref), ScrollAlignmentModule (upval)
 		local ContentLength1 = Layout.getContentLength()
 		local Largest = math.max(0, Size - Insets - Insets1 - ContentLength1)
@@ -67,7 +67,7 @@ return function(p1) --[[ Line: 69 | Named "createViewport" ]]
 		v1 = Insets + (if ContentAlignment == ScrollAlignmentModule.End then Largest elseif ContentAlignment == ScrollAlignmentModule.Center then Largest / 2 else 0)
 	end
 	
-	local function visibleRangeAt(p2, p3) --[[ Line: 113 ]]
+	local function visibleRangeAt(p2, p3)
 		-- upvalues: Insets (ref), v1 (ref), Insets1 (ref), Layout (ref)
 		local InsetsDelta = p2 + Insets - v1
 		
@@ -80,7 +80,7 @@ return function(p1) --[[ Line: 69 | Named "createViewport" ]]
 	v1 = Insets + (if ContentAlignment == ScrollAlignmentModule.End then Largest elseif ContentAlignment == ScrollAlignmentModule.Center then Largest / 2 else 0)
 	
 	return {
-		setLayout = function(Value) --[[ Line: 122 ]]
+		setLayout = function(Value)
 			-- upvalues: Layout (ref), ContentLength (ref), v1 (ref), Size (ref), Insets (ref), Insets1 (ref), ContentAlignment (ref), ScrollAlignmentModule (upval)
 			Layout = Value
 			local ContentLength1 = Layout.getContentLength()
@@ -88,11 +88,11 @@ return function(p1) --[[ Line: 69 | Named "createViewport" ]]
 			ContentLength = Insets + ContentLength1 + Insets1
 			v1 = Insets + (if ContentAlignment == ScrollAlignmentModule.End then Largest elseif ContentAlignment == ScrollAlignmentModule.Center then Largest / 2 else 0)
 		end,
-		getLayout = function() --[[ Line: 126 ]]
+		getLayout = function()
 			-- upvalues: Layout (ref)
 			return Layout
 		end,
-		setScrollOffset = function(Value): boolean --[[ Line: 129 ]]
+		setScrollOffset = function(Value): boolean
 			-- upvalues: ClampedValue (ref)
 			if ClampedValue == Value then
 				return false
@@ -102,7 +102,7 @@ return function(p1) --[[ Line: 69 | Named "createViewport" ]]
 				return true
 			end
 		end,
-		scrollTo = function(Value: number): number --[[ Line: 107 ]]
+		scrollTo = function(Value: number): number
 			-- upvalues: ClampedValue (ref), Layout (ref), Size (ref), Insets (ref), Insets1 (ref), ContentAlignment (ref), ScrollAlignmentModule (upval)
 			assert(math.abs(Value) < 1e999, "Virtualizer: scroll offset must be finite")
 			local ContentLength = Layout.getContentLength()
@@ -112,7 +112,7 @@ return function(p1) --[[ Line: 69 | Named "createViewport" ]]
 			
 			return ClampedValue
 		end,
-		scrollBy = function(Value: number): number --[[ Line: 137 ]]
+		scrollBy = function(Value: number): number
 			-- upvalues: ClampedValue (ref), Layout (ref), Size (ref), Insets (ref), Insets1 (ref), ContentAlignment (ref), ScrollAlignmentModule (upval)
 			assert(math.abs(Value) < 1e999, "Virtualizer: scroll delta must be finite")
 			local NewClampedValue = ClampedValue + Value
@@ -124,7 +124,7 @@ return function(p1) --[[ Line: 69 | Named "createViewport" ]]
 			
 			return ClampedValue
 		end,
-		clamp = function(Value: number): number --[[ Line: 102 ]]
+		clamp = function(Value: number): number
 			-- upvalues: Layout (ref), Size (ref), Insets (ref), Insets1 (ref), ContentAlignment (ref), ScrollAlignmentModule (upval)
 			local ContentLength = Layout.getContentLength()
 			local Largest = math.max(0, Size - Insets - Insets1 - ContentLength)
@@ -132,7 +132,7 @@ return function(p1) --[[ Line: 69 | Named "createViewport" ]]
 			
 			return (math.clamp(Value, 0, (math.max(0, Insets + ContentLength + Insets1 - Size))))
 		end,
-		setSize = function(Value, Value1): boolean --[[ Line: 142 ]]
+		setSize = function(Value, Value1): boolean
 			-- upvalues: Size (ref), Size1 (ref), ContentLength (ref), v1 (ref), Layout (ref), Insets (ref), Insets1 (ref), ContentAlignment (ref), ScrollAlignmentModule (upval)
 			if Size == Value and Size1 == Value1 then
 				return false
@@ -147,13 +147,13 @@ return function(p1) --[[ Line: 69 | Named "createViewport" ]]
 				return true
 			end
 		end,
-		setOverscan = function(p2) --[[ Line: 151 ]]
+		setOverscan = function(p2)
 			-- upvalues: Overscan1 (ref)
 			local P12 = p2 or 1
 			assert(P12 >= 0 and P12 % 1 == 0, "Virtualizer: overscan must be a non-negative integer")
 			Overscan1 = P12
 		end,
-		setContentAlignment = function(p2): boolean --[[ Line: 154 ]]
+		setContentAlignment = function(p2): boolean
 			-- upvalues: ScrollAlignmentModule (upval), ContentAlignment (ref), ContentLength (ref), v1 (ref), Layout (ref), Size (ref), Insets (ref), Insets1 (ref)
 			local P13 = p2 or ScrollAlignmentModule.Start
 			assert(P13 == ScrollAlignmentModule.Start or (P13 == ScrollAlignmentModule.Center or P13 == ScrollAlignmentModule.End), "Virtualizer: invalid content alignment")
@@ -170,11 +170,11 @@ return function(p1) --[[ Line: 69 | Named "createViewport" ]]
 				return true
 			end
 		end,
-		getContentAlignment = function() --[[ Line: 164 ]]
+		getContentAlignment = function()
 			-- upvalues: ContentAlignment (ref)
 			return ContentAlignment
 		end,
-		setInsets = function(Value: number, Value1: number): boolean --[[ Line: 167 ]]
+		setInsets = function(Value: number, Value1: number): boolean
 			-- upvalues: Insets (ref), Insets1 (ref), ContentLength (ref), v1 (ref), Layout (ref), Size (ref), ContentAlignment (ref), ScrollAlignmentModule (upval)
 			assert(Value >= 0 and Value < 1e999, "Virtualizer: content insets must be finite non-negative numbers")
 			assert(Value1 >= 0 and Value1 < 1e999, "Virtualizer: content insets must be finite non-negative numbers")
@@ -192,7 +192,7 @@ return function(p1) --[[ Line: 69 | Named "createViewport" ]]
 				return true
 			end
 		end,
-		setEndThreshold = function(Value) --[[ Line: 178 ]]
+		setEndThreshold = function(Value)
 			-- upvalues: ReachedThresholdModule (upval), EndThreshold (ref)
 			if Value ~= nil then
 				ReachedThresholdModule.validate(Value, "Virtualizer: end threshold")
@@ -200,7 +200,7 @@ return function(p1) --[[ Line: 69 | Named "createViewport" ]]
 			EndThreshold = Value
 		end,
 		refresh = refresh,
-		updateRanges = function() --[[ Line: 186 ]]
+		updateRanges = function()
 			-- upvalues: ClampedValue (ref), Size (ref), Insets (ref), v1 (ref), Insets1 (ref), Layout (ref), TypesModule (upval), Frozen (upval), Overscan1 (ref), Frozen1 (ref), Frozen2 (ref)
 			local ClampedValueDelta = ClampedValue + Insets - v1
 			local IntersectingIndexRange = Layout.getIntersectingIndexRange(ClampedValueDelta, (math.max(ClampedValueDelta, ClampedValue + Size - Insets1 - v1)))
@@ -224,36 +224,36 @@ return function(p1) --[[ Line: 69 | Named "createViewport" ]]
 			end
 			return Inverted, Inverted1
 		end,
-		getScrollOffset = function() --[[ Line: 201 ]]
+		getScrollOffset = function()
 			-- upvalues: ClampedValue (ref)
 			return ClampedValue
 		end,
-		getLength = function() --[[ Line: 204 ]]
+		getLength = function()
 			-- upvalues: Size (ref)
 			return Size
 		end,
-		getCrossAxisLength = function() --[[ Line: 207 ]]
+		getCrossAxisLength = function()
 			-- upvalues: Size1 (ref)
 			return Size1
 		end,
-		getContentLength = function() --[[ Line: 210 ]]
+		getContentLength = function()
 			-- upvalues: ContentLength (ref)
 			return ContentLength
 		end,
-		getContentStartOffset = function() --[[ Line: 213 ]]
+		getContentStartOffset = function()
 			-- upvalues: v1 (ref)
 			return v1
 		end,
-		getVisibleRange = function() --[[ Line: 216 ]]
+		getVisibleRange = function()
 			-- upvalues: Frozen1 (ref)
 			return Frozen1
 		end,
-		getMountedRange = function() --[[ Line: 219 ]]
+		getMountedRange = function()
 			-- upvalues: Frozen2 (ref)
 			return Frozen2
 		end,
 		visibleRangeAt = visibleRangeAt,
-		placedItemLayout = function(p2) --[[ Line: 223 ]]
+		placedItemLayout = function(p2)
 			-- upvalues: Layout (ref), v1 (ref)
 			local ItemLayout = Layout.getItemLayout(p2)
 			
@@ -264,7 +264,7 @@ return function(p1) --[[ Line: 69 | Named "createViewport" ]]
 				crossAxisCount = ItemLayout.crossAxisCount
 			}
 		end,
-		offsetForItem = function(Value: number, Center): number --[[ Line: 232 ]]
+		offsetForItem = function(Value: number, Center): number
 			-- upvalues: Layout (ref), Size (ref), Insets (ref), Insets1 (ref), ContentAlignment (ref), ScrollAlignmentModule (upval)
 			local ItemCount: number = Layout.getItemCount()
 			
@@ -281,7 +281,7 @@ return function(p1) --[[ Line: 69 | Named "createViewport" ]]
 				return (math.clamp(if Center == ScrollAlignmentModule.Center then NewInsets1 + ItemLayout.startOffset + ItemLayout.length / 2 - Insets - Largest1 / 2 elseif Center == ScrollAlignmentModule.End then NewInsets1 + ItemLayout.startOffset + ItemLayout.length - Size + Insets1 else NewInsets1 + ItemLayout.startOffset - Insets, 0, (math.max(0, NewInsets - Size))))
 			end
 		end,
-		scrollState = function(p2) --[[ Line: 252 ]]
+		scrollState = function(p2)
 			-- upvalues: ContentLength (ref), Size (ref), ClampedValue (ref), ReachedThresholdModule (upval), EndThreshold (ref)
 			local Largest = math.max(0, ContentLength - Size - ClampedValue)
 			local IsClampedValueBelow = ClampedValue <= 0

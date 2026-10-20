@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.Parent.Parent.ES7Types)
 
-return function(p1, p2, p3): number --[[ Line: 27 ]]
+return function(p1, p2, p3): number
 	local Value = p3 or 1
 	local CountP0 = #p1
 	

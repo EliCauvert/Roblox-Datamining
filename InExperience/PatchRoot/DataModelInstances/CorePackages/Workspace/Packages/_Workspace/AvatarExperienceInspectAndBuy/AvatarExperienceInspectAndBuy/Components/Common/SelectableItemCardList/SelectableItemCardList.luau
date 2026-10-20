@@ -9,7 +9,7 @@ local _ = require(AvatarExperienceInspectAndBuy.Utils.getPriceLineContent)
 local SelectableCardRowContainerModule = require(AvatarExperienceInspectAndBuy.Components.Common.SelectableItemCardRow.SelectableCardRowContainer)
 local config = { isShopContext = true }
 
-return function(Frame) --[[ Line: 59 | Named "SelectableItemCardList" ]]
+return function(Frame)
 	-- upvalues: config (copy), ReactModule (copy), SelectableCardRowContainerModule (copy), FoundationModule (copy)
 	local Rows = Frame.rows
 	local PriceStatusLabels = Frame.priceStatusLabels
@@ -22,7 +22,7 @@ return function(Frame) --[[ Line: 59 | Named "SelectableItemCardList" ]]
 		tag = "col gap-medium size-full-0 auto-y",
 		testId = "SelectableItemCardList",
 		LayoutOrder = Frame.LayoutOrder
-	}, (ReactModule.useMemo(function() --[[ Line: 68 ]]
+	}, (ReactModule.useMemo(function()
 		-- upvalues: Rows (copy), ItemSubTypeLabels (copy), PriceStatusLabels (copy), ItemCardWidth (copy), OnSelectionChangedFunction (copy), PriceOptions (copy), ReactModule (upval), SelectableCardRowContainerModule (upval)
 		local Elements = {}
 		
@@ -38,7 +38,7 @@ return function(Frame) --[[ Line: 59 | Named "SelectableItemCardList" ]]
 				itemCardWidth = ItemCardWidth,
 				isSelected = IsEquipped,
 				onSelectionChanged = OnSelectionChangedFunction,
-				onItemCardActivated = function(p1) --[[ Line: 86 ]]
+				onItemCardActivated = function(p1)
 					-- upvalues: OnSelectionChangedFunction (upval), IsEquipped (copy)
 					OnSelectionChangedFunction(p1, not IsEquipped)
 				end,

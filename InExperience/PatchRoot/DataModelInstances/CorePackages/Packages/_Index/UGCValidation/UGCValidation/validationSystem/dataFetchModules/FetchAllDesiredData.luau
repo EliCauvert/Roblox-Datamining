@@ -20,7 +20,7 @@ local list = {
 }
 local FetchAllDesiredDataModule = { DATA_FETCH_FAILURE = {} }
 
-function FetchAllDesiredDataModule.storeDesiredData(DATAFETCHFAILUREs, p1) --[[ Line: 32 ]]
+function FetchAllDesiredDataModule.storeDesiredData(DATAFETCHFAILUREs, p1)
 	-- upvalues: GetFFlagUGCValidationAllowFullVaasModule (copy), ValidationEnumsModule (copy), ResetPhysicsDataModule (copy), list (copy), FetchEditablesModule (copy), FetchAllDesiredDataModule (copy), SharedDataMember (copy), FetchCurveAnimationsModule (copy), FetchCurveAnimComputedFramesModule (copy), FetchContentIdsModule (copy), FetchHSRAssetsModule (copy), FetchCurveAnimBoneDataModule (copy), GetFFlagUGCValidateHeadAboveTorsoModule (copy), FetchFullBodyPartsMetricsModule (copy)
 	local RootInstance = DATAFETCHFAILUREs.rootInstance
 	local PreloadedEditableMeshes = DATAFETCHFAILUREs.consumerConfig.preloadedEditableMeshes or {}
@@ -35,7 +35,7 @@ function FetchAllDesiredDataModule.storeDesiredData(DATAFETCHFAILUREs, p1) --[[ 
 	local IsConsumerEnvMatch = DATAFETCHFAILUREs.consumerConfig.consumerEnv == ValidationEnumsModule.ConsumerEnv.IEC
 	for _, value in list do
 		if p1[value] then
-			local Success, Result = pcall(function() --[[ Line: 49 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: FetchEditablesModule (upval), RootInstance (copy), value (copy), IsConsumerEnvMatch (copy), PreloadedEditableMeshes (copy), PreloadedEditableImages (copy)
 				return (FetchEditablesModule.getDatas(RootInstance, value, IsConsumerEnvMatch, PreloadedEditableMeshes, PreloadedEditableImages))
 			end)

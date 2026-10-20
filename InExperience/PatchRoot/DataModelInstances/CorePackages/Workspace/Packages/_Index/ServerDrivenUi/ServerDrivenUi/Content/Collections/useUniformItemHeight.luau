@@ -1,13 +1,13 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("ServerDrivenUi").Parent.React)
 
-return function(p1) --[[ Line: 21 | Named "useUniformItemHeight" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy)
 	local UseRefResult = ReactModule.useRef({})
 	local UseRefResult1 = ReactModule.useRef(false)
 	local UseRefResult2 = ReactModule.useRef(0)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(nil)
-	local UseResult = ReactModule.useCallback(function(p2, Frame: Frame) --[[ Line: 29 ]]
+	local UseResult = ReactModule.useCallback(function(p2, Frame: Frame)
 		-- upvalues: p1 (copy), UseRefResult2 (copy), UseRefResult (copy), UseStateResult2 (copy), UseBindingResult2 (copy), UseRefResult1 (copy)
 		if not p1 then return end
 		local X = Frame.AbsoluteSize.X
@@ -28,7 +28,7 @@ return function(p1) --[[ Line: 21 | Named "useUniformItemHeight" ]]
 		
 		if not UseRefResult1.current then
 			UseRefResult1.current = true
-			task.defer(function() --[[ Line: 53 ]]
+			task.defer(function()
 				-- upvalues: UseRefResult1 (upval), UseRefResult (upval), UseBindingResult2 (upval), UseStateResult2 (upval)
 				UseRefResult1.current = false
 				local Largest = 0

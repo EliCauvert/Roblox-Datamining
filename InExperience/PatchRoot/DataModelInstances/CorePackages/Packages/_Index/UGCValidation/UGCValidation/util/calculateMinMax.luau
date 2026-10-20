@@ -1,8 +1,8 @@
-﻿local function _(Vector, Vector1, Callback) --[[ Line: 5 | Named "compare" ]]
+﻿local function _(Vector, Vector1, Callback)
 	return if Vector and Vector1 then Vector3.new(Callback(Vector.X, Vector1.X), Callback(Vector.Y, Vector1.Y), Callback(Vector.Z, Vector1.Z)) else Vector or Vector1
 end
 
-return function(Vector, Vector1, Vector2, Vector4) --[[ Line: 14 | Named "calculateMinMax" ]]
+return function(Vector, Vector1, Vector2, Vector4)
 	local MinFunction = math.min
 	local _Vector3 = if Vector and Vector2 then Vector3.new(MinFunction(Vector.X, Vector2.X), MinFunction(Vector.Y, Vector2.Y), (MinFunction(Vector.Z, Vector2.Z))) else Vector or Vector2
 	local MaxFunction = math.max

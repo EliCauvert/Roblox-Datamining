@@ -5,7 +5,7 @@ local UseNineDotActivityIndicatorModule = require(script:FindFirstAncestor("Chro
 local GetOffersStoreFunction = InExperienceOffersModule.getOffersStore
 local NotificationLocation = InExperienceOffersModule.NotificationLocation
 
-return function() --[[ Line: 22 | Named "useOfferNineDotActivityIndicator" ]]
+return function()
 	-- upvalues: SignalsReactModule (copy), GetOffersStoreFunction (copy), UseNineDotActivityIndicatorModule (copy), NotificationLocation (copy)
 	UseNineDotActivityIndicatorModule("in_experience_offers", SignalsReactModule.useSignalState(GetOffersStoreFunction(false).getOfferNotificationShownWithEnum) == NotificationLocation.Hamburger)
 end

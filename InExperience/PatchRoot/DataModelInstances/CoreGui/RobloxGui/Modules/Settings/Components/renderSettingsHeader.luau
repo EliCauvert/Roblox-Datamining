@@ -10,7 +10,7 @@ local SettingsShowSignal = require(CorePackages.Workspace.Packages.CoreScriptsCo
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function HeaderTextContainer(p1) --[[ Line: 26 ]]
+local function HeaderTextContainer(p1)
 	-- upvalues: UseLocalizationFunction (copy), UseTokensFunction (copy), ReactModule (copy), View (copy), HeaderText (copy)
 	return ReactModule.createElement(View, {
 		tag = "auto-xy",
@@ -25,7 +25,7 @@ local function HeaderTextContainer(p1) --[[ Line: 26 ]]
 	})
 end
 
-return function(p1) --[[ Line: 44 | Named "renderSettingsHeader" ]]
+return function(p1)
 	-- upvalues: CreateFunction (copy), SettingsShowSignal (copy), ReactRobloxModule (copy), ReactModule (copy), InExperienceMenuReactModule (copy), HeaderTextContainer (copy)
 	local v1 = CreateFunction("Frame")({
 		Name = "HeaderWrapper",
@@ -36,7 +36,7 @@ return function(p1) --[[ Line: 44 | Named "renderSettingsHeader" ]]
 		Parent = p1.parent
 	})
 	local Root = nil
-	SettingsShowSignal:connect(function(p2) --[[ Line: 55 ]]
+	SettingsShowSignal:connect(function(p2)
 		-- upvalues: Root (ref), v1 (copy), p1 (copy), ReactRobloxModule (upval), ReactModule (upval), InExperienceMenuReactModule (upval), HeaderTextContainer (upval)
 		if p2 then
 			v1.Parent = p1.parent

@@ -8,7 +8,7 @@ local FFlagCapturesVideoBulkManagerStopGapModule = require(Parent.Flags.FFlagCap
 local FFlagUseRbxstorageInGalleryModule = require(Parent.Flags.FFlagUseRbxstorageInGallery)
 local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 
-return function(Entry) --[[ Line: 16 ]]
+return function(Entry)
 	-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), FFlagCapturesVideoBulkManagerStopGapModule (copy), CaptureService (copy), FFlagUseRbxstorageInGalleryModule (copy), CaptureTypeModule (copy), ToastTriggeredModule (copy), CapturesToastTypeModule (copy)
 	local List = {}
 	
@@ -25,7 +25,7 @@ return function(Entry) --[[ Line: 16 ]]
 			table.insert(List, value.filePath)
 		end
 	end
-	return function(p1) --[[ Line: 34 ]]
+	return function(p1)
 		-- upvalues: CaptureService (upval), List (copy), ToastTriggeredModule (upval), CapturesToastTypeModule (upval), Entry (copy)
 		CaptureService:SaveCapturesToExternalStorageAsync(List)
 		p1:dispatch(ToastTriggeredModule(CapturesToastTypeModule.CaptureSavedToDevice, { captureInfo = Entry[1] }))

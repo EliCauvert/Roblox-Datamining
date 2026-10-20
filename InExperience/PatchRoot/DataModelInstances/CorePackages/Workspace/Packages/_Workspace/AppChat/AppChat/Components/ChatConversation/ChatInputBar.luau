@@ -37,23 +37,23 @@ local config = {
 	textChangedFallback = false,
 	moreMenuEnabled = false,
 	userInputService = UserInputService,
-	onDisabledInputBarActivated = function() --[[ Line: 67 ]] end,
+	onDisabledInputBarActivated = function() end,
 	maxCharacterLength = require(script.Parent.MessageCharacterLimit),
-	onHeightChanged = function(_) --[[ Line: 72 ]] end,
-	onPositionChanged = function(_) --[[ Line: 73 ]] end,
-	onFocusLost = function() --[[ Line: 74 ]] end,
-	onSendBtnClicked = function(_) --[[ Line: 77 ]] end,
-	onSendChat = function(_) --[[ Line: 78 ]] end,
-	onTextChanged = function(_) --[[ Line: 79 ]] end,
+	onHeightChanged = function(_) end,
+	onPositionChanged = function(_) end,
+	onFocusLost = function() end,
+	onSendBtnClicked = function(_) end,
+	onSendChat = function(_) end,
+	onTextChanged = function(_) end,
 	eventLoggingFunc = require(Parent.LoggingProtocol).default.logRobloxTelemetryEvent
 }
 
-local function heightOfNLines(p1: number, BodyLargeFont, ScaledBaseSize, p2) --[[ Line: 89 ]]
+local function heightOfNLines(p1: number, BodyLargeFont, ScaledBaseSize, p2)
 	-- upvalues: FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy)
 	return if FoundationFontFaceMigration then GetTextSizeFunction(string.rep("A\n", p1 - 1), ScaledBaseSize, BodyLargeFont, Vector2.new(p2 or 10000, 10000)).Y else Text.GetTextHeight(string.rep("A\n", p1 - 1), BodyLargeFont, ScaledBaseSize, p2)
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 96 | Named "ChatInputBar" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), ReactFocusNavigationModule (copy), FocusNavigationEventNameEnum (copy), UserInputService (copy), UseChatPagePaddingModule (copy), FFlagAppChatConsoleFocusFixesModule (copy), UseChatWideModeFocusModule (copy), FoundationModule (copy), UseStyleFunction (copy), FoundationFontFaceMigration (copy), heightOfNLines (copy), UseKeystrokeCollectionModule (copy), IsMessageValidModule (copy), Text (copy), SendButtonClickActionResultModule (copy), IsKeyCodePressedModule (copy), UseInputConnectionsModule (copy), GetTextSizeFunction (copy), UseIsSpatialFunction (copy), ChatInputBoxDisabledModule (copy), CallbackInputBox (copy), BuilderIconsModule (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
@@ -67,7 +67,7 @@ return ReactModule.memo(function(p1) --[[ Line: 96 | Named "ChatInputBar" ]]
 		UseRefResult = UnionResult.inputBarRef
 	end
 	local UseRefResult2 = ReactModule.useRef(Enum.KeyCode.None)
-	local Bubble = ReactFocusNavigationModule.useEventHandler(FocusNavigationEventNameEnum.NavigateBack, function(p2) --[[ Line: 115 ]]
+	local Bubble = ReactFocusNavigationModule.useEventHandler(FocusNavigationEventNameEnum.NavigateBack, function(p2)
 		-- upvalues: UseRefResult2 (copy)
 		if p2.eventData and UseRefResult2.current == p2.eventData.KeyCode then
 			p2:cancel()
@@ -84,11 +84,11 @@ return ReactModule.memo(function(p1) --[[ Line: 96 | Named "ChatInputBar" ]]
 	local UseStyleResult = UseStyleFunction()
 	local BodyLargeFont = if FoundationFontFaceMigration then UseTokensResult.Typography.BodyLarge.Font else UseStyleResult.Font.Body.Font
 	local ScaledBaseSize = UseStyleResult.Font.BaseSize * UseStyleResult.Font.Body.RelativeSize
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 139 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: heightOfNLines (upval), BodyLargeFont (copy), ScaledBaseSize (copy), UseStateResult (copy)
 		return heightOfNLines(4, BodyLargeFont, ScaledBaseSize, UseStateResult)
 	end, { BodyLargeFont, ScaledBaseSize, UseStateResult })
-	local UseMemoResult1: number = ReactModule.useMemo(function() --[[ Line: 142 ]]
+	local UseMemoResult1: number = ReactModule.useMemo(function()
 		-- upvalues: heightOfNLines (upval), BodyLargeFont (copy), ScaledBaseSize (copy)
 		return heightOfNLines(1, BodyLargeFont, ScaledBaseSize)
 	end, { BodyLargeFont, ScaledBaseSize })
@@ -96,12 +96,12 @@ return ReactModule.memo(function(p1) --[[ Line: 96 | Named "ChatInputBar" ]]
 		eventLoggingFunc = UnionResult.eventLoggingFunc,
 		maxKeystrokeDataLength = UnionResult.maxKeystrokeDataLength
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 151 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult3 (copy), IsMessageValidModule (upval), UnionResult (copy)
 		return UseRefResult3.current and IsMessageValidModule(UseRefResult3.current, UnionResult.maxCharacterLength)
 	end, { UnionResult.maxCharacterLength })
 	local UseContextResult = ReactModule.useContext(ReactFocusNavigationModule.FocusNavigationContext)
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 157 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult3 (copy), InputBoxRef (ref), Text (upval), SendButtonClickActionResultModule (upval), UseResult (copy), IsMessageValidModule (upval), UnionResult (copy), UseContextResult (copy), UseRefResult1 (copy), UseRefResult (ref), UseBindingResult2 (copy), UseKeystrokeCollectionModuleResult (copy)
 		local TrimResult = Text.Trim(if InputBoxRef.current then InputBoxRef.current.Text or "" else UseRefResult3.current)
 		local _ = SendButtonClickActionResultModule.None
@@ -142,7 +142,7 @@ return ReactModule.memo(function(p1) --[[ Line: 96 | Named "ChatInputBar" ]]
 	})
 	local UseInputConnectionsModuleResult = UseInputConnectionsModule({
 		userInputService = UnionResult.userInputService,
-		onInputBegan = ReactModule.useCallback(function(Input, _) --[[ Line: 231 ]]
+		onInputBegan = ReactModule.useCallback(function(Input, _)
 			-- upvalues: UseKeystrokeCollectionModuleResult (copy), UseRefResult5 (copy), IsKeyCodePressedModule (upval), UnionResult (copy), UseResult1 (copy)
 			if UseKeystrokeCollectionModuleResult and not UseRefResult5.current and Input.UserInputType == Enum.UserInputType.Keyboard then
 				UseKeystrokeCollectionModuleResult.recordKeystroke(true, Input.KeyCode)
@@ -156,7 +156,7 @@ return ReactModule.memo(function(p1) --[[ Line: 96 | Named "ChatInputBar" ]]
 			UseKeystrokeCollectionModuleResult.sendKeystrokeEventOnSend,
 			UseResult1
 		}),
-		onInputEnded = ReactModule.useCallback(function(Input, _) --[[ Line: 220 ]]
+		onInputEnded = ReactModule.useCallback(function(Input, _)
 			-- upvalues: UseKeystrokeCollectionModuleResult (copy), UseRefResult5 (copy)
 			if UseKeystrokeCollectionModuleResult and not UseRefResult5.current and Input.UserInputType == Enum.UserInputType.Keyboard then
 				UseKeystrokeCollectionModuleResult.recordKeystroke(false, Input.KeyCode)
@@ -164,7 +164,7 @@ return ReactModule.memo(function(p1) --[[ Line: 96 | Named "ChatInputBar" ]]
 		end, { UseKeystrokeCollectionModuleResult.recordKeystroke }),
 		onFocusLost = UnionResult.onFocusLost
 	})
-	local UseResult2 = ReactModule.useCallback(function(p2, X) --[[ Line: 266 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2, X)
 		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), ScaledBaseSize (copy), UseTokensResult (copy), Text (upval), BodyLargeFont (copy), UseMemoResult (copy), UnionResult (copy)
 		local NewScaledBaseSize = ScaledBaseSize + math.min(if FoundationFontFaceMigration then GetTextSizeFunction(p2, ScaledBaseSize, UseTokensResult.Typography.BodyLarge.Font, Vector2.new(X, 10000)).Y else Text.GetTextHeight(p2, BodyLargeFont, ScaledBaseSize, X), UseMemoResult)
 		
@@ -179,7 +179,7 @@ return ReactModule.memo(function(p1) --[[ Line: 96 | Named "ChatInputBar" ]]
 		BodyLargeFont,
 		ScaledBaseSize
 	})
-	local UseResult3 = ReactModule.useCallback(function(Current) --[[ Line: 282 ]]
+	local UseResult3 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult4 (copy), UseRefResult3 (copy), UseBindingResult2 (copy), UseStateResult2_2 (copy), UseResult (copy), UseKeystrokeCollectionModuleResult (copy), UseRefResult5 (copy), UseResult2 (copy), UseStateResult (copy), UseStateResult2_1 (copy), UnionResult (copy)
 		if not UseRefResult4.current then return end
 		UseRefResult3.current = Current
@@ -200,23 +200,23 @@ return ReactModule.memo(function(p1) --[[ Line: 96 | Named "ChatInputBar" ]]
 		UnionResult.onTextChanged,
 		UseStateResult
 	})
-	local UseResult4 = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 305 ]]
+	local UseResult4 = ReactModule.useCallback(function(Frame: Frame)
 		-- upvalues: UseResult2 (copy), UseRefResult3 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy)
 		local UseResultResult = UseResult2(UseRefResult3.current, Frame.AbsoluteSize.X)
 		UseStateResult2(Frame.AbsoluteSize.X)
 		UseStateResult2_1(UseResultResult)
 	end, { UseResult2 })
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 311 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: InputBoxRef (ref)
 		if InputBoxRef.current then
 			InputBoxRef.current:CaptureFocus()
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 317 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult4 (copy), UnionResult (copy)
 		UseRefResult4.current = true
 		
-		return function() --[[ Line: 319 ]]
+		return function()
 			-- upvalues: UseRefResult4 (upval), UnionResult (upval)
 			UseRefResult4.current = false
 			
@@ -225,18 +225,18 @@ return ReactModule.memo(function(p1) --[[ Line: 96 | Named "ChatInputBar" ]]
 			end
 		end
 	end, { UnionResult.onHeightChanged })
-	ReactModule.useEffect(function() --[[ Line: 328 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: InputBoxRef (ref), UseRefResult2 (copy)
 		local Connection = nil
 		
 		if InputBoxRef and InputBoxRef.current then
 			InputBoxRef.current.Selectable = false
-			Connection = InputBoxRef.current.FocusLost:Connect(function(_, CauseInput) --[[ Line: 333 ]]
+			Connection = InputBoxRef.current.FocusLost:Connect(function(_, CauseInput)
 				-- upvalues: UseRefResult2 (upval)
 				UseRefResult2.current = if CauseInput then CauseInput.KeyCode else Enum.KeyCode.None
 			end)
 		end
-		return function() --[[ Line: 340 ]]
+		return function()
 			-- upvalues: Connection (ref)
 			if Connection then
 				Connection:Disconnect()

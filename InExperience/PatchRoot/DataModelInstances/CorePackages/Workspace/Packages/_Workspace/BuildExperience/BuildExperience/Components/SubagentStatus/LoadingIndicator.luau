@@ -10,7 +10,7 @@ local ProgressShape = FoundationModule.Enums.ProgressShape
 local ProgressSize = FoundationModule.Enums.ProgressSize
 local SubagentTaskStatus = require(Parent.DataHydration.CreatorAgentChat).SubagentTaskStatus
 
-return ReactModule.memo(function(p1) --[[ Line: 29 | Named "LoadingIndicator" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), SubagentTaskStatus (copy), View (copy), Progress (copy), ProgressShape (copy), ProgressSize (copy), Icon (copy), IconName (copy), IconSize (copy)
 	local UseBindingResult = ReactModule.useBinding(0)
 	local TestId = p1.testId or "subagent-status-loading-indicator"

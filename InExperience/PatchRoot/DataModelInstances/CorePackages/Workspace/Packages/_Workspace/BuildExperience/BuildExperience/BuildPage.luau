@@ -81,11 +81,11 @@ local config = {
 	BuildChat = BuildNavigationParamsModule.BUILD_CHAT_SCREEN
 }
 
-local function _(Query, p1) --[[ Line: 129 | Named "shouldShowSearchEmptyState" ]]
+local function _(Query, p1)
 	return Query == "" or (Query ~= p1.query or p1.isSettledNoResults)
 end
 
-local _ = function(p1, Name) --[[ Line: 151 | Named "findGroup" ]]
+local _ = function(p1, Name)
 	if p1 == nil or Name == nil then
 		return nil
 	end
@@ -97,13 +97,13 @@ local _ = function(p1, Name) --[[ Line: 151 | Named "findGroup" ]]
 	return nil
 end
 
-local function useLiveSubagentTaskState(Navigation) --[[ Line: 165 ]]
+local function useLiveSubagentTaskState(Navigation)
 	-- upvalues: BuildNavigationParamsModule (copy), CreatorAgentChatModule (copy), ReactModule (copy), UseSessionSummaryModule (copy)
 	local Target = BuildNavigationParamsModule.getTarget(Navigation)
 	assert(Target ~= nil, "Agent pages require a build target")
 	local CreatorAgentChatStore = CreatorAgentChatModule.getCreatorAgentChatStore()
 	
-	return UseSessionSummaryModule((ReactModule.useMemo(function() --[[ Line: 169 ]]
+	return UseSessionSummaryModule((ReactModule.useMemo(function()
 		-- upvalues: CreatorAgentChatStore (copy), Target (copy)
 		return CreatorAgentChatStore.getSessionForProject(Target.universeId, Target.placeId, Target.sessionId)
 	end, {
@@ -114,21 +114,21 @@ local function useLiveSubagentTaskState(Navigation) --[[ Line: 165 ]]
 	}))).subagentTaskState or BuildNavigationParamsModule.getSubagentTaskState(Navigation)
 end
 
-local _ = function(p2) --[[ Line: 177 | Named "useOpenBuildChat" ]]
+local _ = function(p2)
 	-- upvalues: ReactModule (copy), config (copy)
-	return ReactModule.useCallback(function(Target) --[[ Line: 178 ]]
+	return ReactModule.useCallback(function(Target)
 		-- upvalues: p2 (copy), config (upval)
 		p2.navigate(config.BuildChat, { target = Target })
 	end, { p2 })
 end
 
-local function useHomeConfigurationPages(Navigation) --[[ Line: 194 ]]
+local function useHomeConfigurationPages(Navigation)
 	-- upvalues: ReactModule (copy), FFlagBuildPublishNavigationSheetModule (copy), BuildOverflowMenuScreensModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	
 	return {
-		onOpenConfigurationPage = ReactModule.useCallback(function(p2, Target) --[[ Line: 205 ]]
+		onOpenConfigurationPage = ReactModule.useCallback(function(p2, Target)
 			-- upvalues: FFlagBuildPublishNavigationSheetModule (upval), UseStateResult2 (copy), UseStateResult2_1 (copy), BuildOverflowMenuScreensModule (upval), Navigation (copy)
 			if FFlagBuildPublishNavigationSheetModule and p2 == "publish" then
 				UseStateResult2(Target)
@@ -146,39 +146,39 @@ local function useHomeConfigurationPages(Navigation) --[[ Line: 194 ]]
 		end, { Navigation }),
 		publishSheetTarget = UseStateResult,
 		isPublishSheetOpen = UseStateResult1,
-		onClosePublishSheet = ReactModule.useCallback(function() --[[ Line: 197 ]]
+		onClosePublishSheet = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2_1 (copy)
 			UseStateResult2_1(false)
 		end, {}),
-		navigateToPublishSubPage = ReactModule.useCallback(function(p2, Target) --[[ Line: 200 ]]
+		navigateToPublishSubPage = ReactModule.useCallback(function(p2, Target)
 			-- upvalues: Navigation (copy)
 			Navigation.navigate(p2, { target = Target })
 		end, { Navigation })
 	}
 end
 
-local function BuildMonetizationScreen(p2) --[[ Line: 228 ]]
+local function BuildMonetizationScreen(p2)
 	-- upvalues: BuildNavigationParamsModule (copy), ReactModule (copy), RoactNavigationModule (copy), BuildOverflowMenuScreensModule (copy), ChatSheetModule (copy), FFlagBuildExperienceChatSheetReversedContentModule (copy), list (copy)
 	local Navigation = p2.navigation
 	local Target = BuildNavigationParamsModule.getTarget(Navigation)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local HasTarget = Target ~= nil
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 233 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: HasTarget (copy), UseStateResult2 (copy)
 		if HasTarget then
 			UseStateResult2(true)
 		end
 	end, { HasTarget })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 238 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 242 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), Navigation (copy), RoactNavigationModule (upval), UseResult1 (copy)
 		if not UseStateResult then return end
 		local AddListenerResult = Navigation.addListener(RoactNavigationModule.Events.WillBlur, UseResult1)
 		
-		return function() --[[ Line: 247 ]]
+		return function()
 			-- upvalues: AddListenerResult (copy)
 			AddListenerResult.remove()
 		end
@@ -199,7 +199,7 @@ local function BuildMonetizationScreen(p2) --[[ Line: 228 ]]
 	})
 end
 
-local function BuildSearchResults(p2) --[[ Line: 404 ]]
+local function BuildSearchResults(p2)
 	-- upvalues: ReactModule (copy), SearchEmptyStateModule (copy), ExperienceResultsListModule (copy)
 	local UseDraftQueryResult = p2.searchQueryStore.useDraftQuery()
 	local Current = p2.closingSnapshot.current
@@ -220,7 +220,7 @@ local function BuildSearchResults(p2) --[[ Line: 404 ]]
 	})
 end
 
-local function BuildSearchScreen(p2) --[[ Line: 432 ]]
+local function BuildSearchScreen(p2)
 	-- upvalues: UseBuildPageLayoutModule (copy), UseNavigationFocusFunction (copy), UseOnScreenKeyboardVisibleModule (copy), GetSearchQueryStoreModule (copy), SignalsReactModule (copy), UseLocalizationFunction (copy), ReactModule (copy), config (copy), UseMyCreationsResultsModule (copy), UseScrollPerformanceTrackerModule (copy), ExperienceResultsLoadingSkeletonModule (copy), FullscreenPageWithSafeArea (copy), SearchPageContainerModule (copy), BuildSearchResults (copy)
 	local ScreenProps = p2.screenProps or {}
 	local Navigation = p2.navigation
@@ -230,7 +230,7 @@ local function BuildSearchScreen(p2) --[[ Line: 432 ]]
 	local SearchQueryStoreParam = Navigation.getParam("searchQueryStore") or (ScreenProps.searchQueryStore or GetSearchQueryStoreModule())
 	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(SearchQueryStoreParam.getDraftQuery)
 	local UseLocalizationResult = UseLocalizationFunction({ searchbarPlaceholder = "Feature.Build.Label.SearchGames" })
-	local UseResult = ReactModule.useCallback(function(Target) --[[ Line: 178 ]]
+	local UseResult = ReactModule.useCallback(function(Target)
 		-- upvalues: Navigation (copy), config (upval)
 		Navigation.navigate(config.BuildChat, { target = Target })
 	end, { Navigation })
@@ -243,7 +243,7 @@ local function BuildSearchScreen(p2) --[[ Line: 432 ]]
 	})
 	local UseRefResult = ReactModule.useRef(nil)
 	local Current = UseRefResult.current
-	local MapResult = UseSignalBindingResult:map(function(p3) --[[ Line: 455 ]]
+	local MapResult = UseSignalBindingResult:map(function(p3)
 		-- upvalues: UseRefResult (copy)
 		local Current = UseRefResult.current
 		
@@ -252,11 +252,11 @@ local function BuildSearchScreen(p2) --[[ Line: 432 ]]
 	local UseMyCreationsResultsModuleResult1 = if Current == nil then UseMyCreationsResultsModuleResult else Current.results
 	local UseRefResult1 = ReactModule.useRef(nil)
 	UseScrollPerformanceTrackerModule("LuaApp_Build_Search_Scroll", UseRefResult1)
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 462 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseMyCreationsResultsModuleResult1 (copy), ReactModule (upval), ExperienceResultsLoadingSkeletonModule (upval)
 		return if UseMyCreationsResultsModuleResult1.isLoadingMore then ReactModule.createElement(ExperienceResultsLoadingSkeletonModule, { LayoutOrder = 1, index = 1, testIdPrefix = "SearchPage" }) else nil
 	end, { UseMyCreationsResultsModuleResult1.isLoadingMore })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 473 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: SearchQueryStoreParam (copy), UseRefResult (copy), UseMyCreationsResultsModuleResult (copy), Navigation (copy)
 		local DraftQuery = SearchQueryStoreParam.getDraftQuery()
 		UseRefResult.current = {
@@ -272,7 +272,7 @@ local function BuildSearchScreen(p2) --[[ Line: 432 ]]
 		UseMyCreationsResultsModuleResult,
 		SearchQueryStoreParam
 	})
-	ReactModule.useEffect(function() --[[ Line: 484 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SearchQueryStoreParam (copy)
 		SearchQueryStoreParam.beginSearch()
 		
@@ -312,7 +312,7 @@ local function BuildSearchScreen(p2) --[[ Line: 432 ]]
 	})
 end
 
-local function BuildGetUsersScreen(p2) --[[ Line: 789 ]]
+local function BuildGetUsersScreen(p2)
 	-- upvalues: UseBuildPageLayoutModule (copy), BuildNavigationParamsModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), UseAdsStatsPageViewModelModule (copy), AdsStatsViewModule (copy), View (copy), Button (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), FullscreenPageWithSafeArea (copy), OverflowMenuPageShellModule (copy), AdsManagerMenuButtonModule (copy), FFlagBuildBackButtonChevronModule (copy), OverlayProvider (copy), AdCampaignCreatedToastModule (copy)
 	local Navigation = p2.navigation
 	local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
@@ -321,7 +321,7 @@ local function BuildGetUsersScreen(p2) --[[ Line: 789 ]]
 	local PageTitle = UseLocalizationFunction({
 		pageTitle = LocalizationStringsModule.ADS_STATS_PAGE_TITLE
 	}).pageTitle
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 800 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: Navigation (copy)
 		Navigation.goBack()
 	end, { Navigation })
@@ -389,7 +389,7 @@ end
 local List = {
 	{
 		[config.BuildHome] = {
-			screen = function(p2) --[[ Line: 274 ]]
+			screen = function(p2)
 				-- upvalues: UseBuildPageLayoutModule (copy), UseNavigationFocusFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), config (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), useHomeConfigurationPages (copy), FFlagBuildAdUpsellModule (copy), GetAdsCampaignDeepLinkStoreModule (copy), SendBuildExperienceEventModule (copy), ResumeBuildChatModule (copy), GetSearchQueryStoreModule (copy), FullscreenPageWithSafeArea (copy), View (copy), BuildPageHeaderModule (copy), MyCreationsTabModule (copy), FFlagBuildPublishNavigationSheetModule (copy), PublishSheetControllerModule (copy)
 				local ScreenProps = p2.screenProps or {}
 				local Navigation = p2.navigation
@@ -399,13 +399,13 @@ local List = {
 				local FallbackExperienceName = UseLocalizationFunction({
 					fallbackExperienceName = LocalizationStringsModule.BUILD_ASSISTANT_FALLBACK_NAME
 				}).fallbackExperienceName
-				local UseResult = ReactModule.useCallback(function(Target) --[[ Line: 284 ]]
+				local UseResult = ReactModule.useCallback(function(Target)
 					-- upvalues: Navigation (copy), config (upval)
 					Navigation.navigate(config.BuildChat, { target = Target })
 				end, { Navigation })
 				local UseHomeConfigurationPagesResult = if FFlagBuildExperienceMyCreationsLongPressMenuModule then useHomeConfigurationPages(Navigation) else nil
 				local PublishSheetTarget = if UseHomeConfigurationPagesResult == nil then nil else UseHomeConfigurationPagesResult.publishSheetTarget
-				ReactModule.useEffect(function() --[[ Line: 296 ]]
+				ReactModule.useEffect(function()
 					-- upvalues: FFlagBuildAdUpsellModule (upval), GetAdsCampaignDeepLinkStoreModule (upval), ScreenProps (copy), SendBuildExperienceEventModule (upval), ResumeBuildChatModule (upval), FallbackExperienceName (copy), UseResult (copy)
 					if FFlagBuildAdUpsellModule then
 						local AdsCampaignDeepLinkStoreModule = GetAdsCampaignDeepLinkStoreModule(false)
@@ -452,7 +452,7 @@ local List = {
 							LayoutOrder = 1,
 							height = UseBuildPageLayoutModuleResult.topBarHeight,
 							searchQueryStore = SearchQueryStore,
-							onOpenSearch = ReactModule.useCallback(function() --[[ Line: 338 ]]
+							onOpenSearch = ReactModule.useCallback(function()
 								-- upvalues: SearchQueryStore (copy), Navigation (copy), config (upval)
 								SearchQueryStore.beginSearch()
 								Navigation.navigate(config.BuildSearch, { searchQueryStore = SearchQueryStore })
@@ -489,7 +489,7 @@ local List = {
 	},
 	{
 		[config.BuildChat] = {
-			screen = function(p2) --[[ Line: 522 ]]
+			screen = function(p2)
 				-- upvalues: BuildNavigationParamsModule (copy), FFlagBuildExperienceAnalytics (copy), GetBuildExperienceRefreshStoreModule (copy), UseBuildPageLayoutModule (copy), FFlagBuildAdUpsellModule1 (copy), UseNavigationFocusFunction (copy), UseOnScreenKeyboardVisibleModule (copy), ReactModule (copy), FFlagBuildPublishNavigationSheetModule (copy), BuildOverflowMenuScreensModule (copy), FFlagBuildExperienceLibrary (copy), OpenLibraryModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), config (copy), FFlagEnableBuildAdPromotionModule (copy), BuildChatPageModule (copy), FullscreenPageWithSafeArea (copy), PrivateInvitesPickerHostModule (copy), PublishSheetControllerModule (copy)
 				local Navigation = p2.navigation
 				local Target = BuildNavigationParamsModule.getTarget(Navigation)
@@ -500,15 +500,15 @@ local List = {
 				local UseOnScreenKeyboardVisibleModuleResult = UseOnScreenKeyboardVisibleModule()
 				local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 				local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
-				local UseResult = ReactModule.useCallback(function() --[[ Line: 536 ]]
+				local UseResult = ReactModule.useCallback(function()
 					-- upvalues: Navigation (copy)
 					Navigation.goBack()
 				end, { Navigation })
-				local UseResult1 = ReactModule.useCallback(function() --[[ Line: 540 ]]
+				local UseResult1 = ReactModule.useCallback(function()
 					-- upvalues: UseStateResult2_1 (copy)
 					UseStateResult2_1(false)
 				end, {})
-				local UseResult2 = ReactModule.useCallback(function(p3) --[[ Line: 544 ]]
+				local UseResult2 = ReactModule.useCallback(function(p3)
 					-- upvalues: FFlagBuildPublishNavigationSheetModule (upval), UseStateResult2_1 (copy), BuildOverflowMenuScreensModule (upval), Navigation (copy), Target (copy)
 					if FFlagBuildPublishNavigationSheetModule and p3 == "publish" then
 						UseStateResult2_1(true)
@@ -523,19 +523,19 @@ local List = {
 						return
 					end
 				end, { Navigation, Target })
-				local UseResult3 = ReactModule.useCallback(function() --[[ Line: 560 ]]
+				local UseResult3 = ReactModule.useCallback(function()
 					-- upvalues: UseStateResult2 (copy)
 					UseStateResult2(true)
 				end, {})
-				local UseResult4 = ReactModule.useCallback(function() --[[ Line: 563 ]]
+				local UseResult4 = ReactModule.useCallback(function()
 					-- upvalues: UseStateResult2 (copy)
 					UseStateResult2(false)
 				end, {})
-				local UseResult5 = ReactModule.useCallback(function() --[[ Line: 568 ]]
+				local UseResult5 = ReactModule.useCallback(function()
 					-- upvalues: Navigation (copy), BuildOverflowMenuScreensModule (upval), Target (copy)
 					Navigation.navigate(BuildOverflowMenuScreensModule.Screens.BuildPlaytestInviteManagement, { target = Target })
 				end, { Navigation, Target })
-				local UseResult6 = if FFlagBuildExperienceLibrary then ReactModule.useCallback(function(p3) --[[ Line: 575 ]]
+				local UseResult6 = if FFlagBuildExperienceLibrary then ReactModule.useCallback(function(p3)
 					-- upvalues: Target (copy), OpenLibraryModule (upval)
 					local PlaceId = if Target == nil then nil else Target.placeId
 					
@@ -543,7 +543,7 @@ local List = {
 						OpenLibraryModule(PlaceId, p3)
 					end
 				end, { Target }) else nil
-				local UseResult7 = ReactModule.useCallback(function() --[[ Line: 585 ]]
+				local UseResult7 = ReactModule.useCallback(function()
 					-- upvalues: UseStateResult2 (copy), FFlagBuildExperiencePrivateInvitesModule (upval), UseResult5 (copy)
 					UseStateResult2(false)
 					
@@ -551,23 +551,23 @@ local List = {
 						UseResult5()
 					end
 				end, { UseResult5 })
-				local UseResult8 = ReactModule.useCallback(function() --[[ Line: 591 ]]
+				local UseResult8 = ReactModule.useCallback(function()
 					-- upvalues: Navigation (copy), config (upval), Target (copy)
 					Navigation.navigate(config.BuildAgents, { target = Target })
 				end, { Navigation, Target })
-				local UseResult9 = ReactModule.useCallback(function() --[[ Line: 596 ]]
+				local UseResult9 = ReactModule.useCallback(function()
 					-- upvalues: Navigation (copy), config (upval), Target (copy)
 					Navigation.navigate(config.BuildCreatorCredit, { target = Target })
 				end, { Navigation, Target })
-				local UseResult10 = ReactModule.useCallback(function(p3, Target) --[[ Line: 603 ]]
+				local UseResult10 = ReactModule.useCallback(function(p3, Target)
 					-- upvalues: Navigation (copy)
 					Navigation.navigate(p3, { target = Target })
 				end, { Navigation })
-				local UseResult11 = if FFlagEnableBuildAdPromotionModule then ReactModule.useCallback(function() --[[ Line: 611 ]]
+				local UseResult11 = if FFlagEnableBuildAdPromotionModule then ReactModule.useCallback(function()
 					-- upvalues: Navigation (copy), config (upval), Target (copy)
 					Navigation.navigate(config.BuildGetUsers, { target = Target })
 				end, { Navigation, Target }) else nil
-				local UseResult12 = ReactModule.useCallback(function(Target) --[[ Line: 617 ]]
+				local UseResult12 = ReactModule.useCallback(function(Target)
 					-- upvalues: Navigation (copy), BuildExperienceRefreshStoreModule (copy)
 					Navigation.setParams({ target = Target })
 					BuildExperienceRefreshStoreModule.bumpRefreshTick()
@@ -648,7 +648,7 @@ local List = {
 	},
 	{
 		[config.BuildAgents] = {
-			screen = function(p2) --[[ Line: 674 ]]
+			screen = function(p2)
 				-- upvalues: UseBuildPageLayoutModule (copy), useLiveSubagentTaskState (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), config (copy), BuildNavigationParamsModule (copy), SubagentStatusModule (copy), FullscreenPageWithSafeArea (copy), OverflowMenuPageShellModule (copy), FFlagBuildBackButtonChevronModule (copy), IconName (copy)
 				local Navigation = p2.navigation
 				local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
@@ -666,14 +666,14 @@ local List = {
 						title = UseLocalizationFunction({
 							agents = LocalizationStringsModule.SUBAGENT_STATUS_AGENTS
 						}).agents,
-						onClose = ReactModule.useCallback(function() --[[ Line: 683 ]]
+						onClose = ReactModule.useCallback(function()
 							-- upvalues: Navigation (copy)
 							Navigation.goBack()
 						end, { Navigation }),
 						content = ReactModule.createElement(SubagentStatusModule.AgentsList, {
 							testId = "BuildPage.AgentsList",
 							groups = if UseLiveSubagentTaskStateResult == nil then {} else UseLiveSubagentTaskStateResult.groups,
-							onAgentActivated = ReactModule.useCallback(function(p3) --[[ Line: 686 ]]
+							onAgentActivated = ReactModule.useCallback(function(p3)
 								-- upvalues: Navigation (copy), config (upval), BuildNavigationParamsModule (upval)
 								Navigation.navigate(config.BuildAgentDetails, {
 									target = BuildNavigationParamsModule.getTarget(Navigation),
@@ -689,7 +689,7 @@ local List = {
 	},
 	{
 		[config.BuildAgentDetails] = {
-			screen = function(p2) --[[ Line: 716 ]]
+			screen = function(p2)
 				-- upvalues: UseBuildPageLayoutModule (copy), useLiveSubagentTaskState (copy), BuildNavigationParamsModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), SubagentStatusModule (copy), View (copy), FullscreenPageWithSafeArea (copy), OverflowMenuPageShellModule (copy), FFlagBuildBackButtonChevronModule (copy), IconName (copy)
 				local Navigation = p2.navigation
 				local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
@@ -723,7 +723,7 @@ local List = {
 						scrollPerformanceIntervalName = "LuaApp_Build_AgentDetails_Scroll",
 						testId = "BuildPage.AgentDetailsPage",
 						title = SubagentTaskGroupName or Agents,
-						onClose = ReactModule.useCallback(function() --[[ Line: 727 ]]
+						onClose = ReactModule.useCallback(function()
 							-- upvalues: Navigation (copy)
 							Navigation.goBack()
 						end, { Navigation }),
@@ -736,7 +736,7 @@ local List = {
 	},
 	{
 		[config.BuildCreatorCredit] = {
-			screen = function(p3) --[[ Line: 757 ]]
+			screen = function(p3)
 				-- upvalues: UseBuildPageLayoutModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), CreatorCreditPageContainerModule (copy), FullscreenPageWithSafeArea (copy), OverflowMenuPageShellModule (copy), CreatorCreditBalanceChipContainerModule (copy), FFlagBuildBackButtonChevronModule (copy), IconName (copy)
 				local Navigation = p3.navigation
 				local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
@@ -753,7 +753,7 @@ local List = {
 						title = UseLocalizationFunction({
 							pageTitle = LocalizationStringsModule.CREATOR_CREDIT_PAGE_TITLE
 						}).pageTitle,
-						onClose = ReactModule.useCallback(function() --[[ Line: 765 ]]
+						onClose = ReactModule.useCallback(function()
 							-- upvalues: Navigation (copy)
 							Navigation.goBack()
 						end, { Navigation }),
@@ -785,7 +785,7 @@ end
 table.insert(List, { [config.BuildSearch] = { screen = BuildSearchScreen } })
 local RobloxStackNavigator = RoactNavigationModule.createRobloxStackNavigator(List, { initialRouteName = config.BuildHome })
 
-local function BuildPage(p3) --[[ Line: 973 ]]
+local function BuildPage(p3)
 	-- upvalues: UseTTINavigationTrackingFunction (copy), UseBuildPageEligibilityModule (copy), NoFFlagEnableBuildTabOverride (copy), FFlagBuildExperienceHideNavBarOnSubPages (copy), UseManageBuildNavBarVisibilityModule (copy), config (copy), ReactModule (copy), RobloxStackNavigator (copy), BuildEligibilityDialogModule (copy), View (copy), Loading (copy), IconSize (copy)
 	UseTTINavigationTrackingFunction("NavigateTo_" .. p3.navigation.state.routeName)
 	local ExtraPropsParam = p3.navigation.getParam("extraProps", {})
@@ -816,7 +816,7 @@ end
 
 local BuildPageScreen = ReactModule.Component:extend("BuildPageScreen")
 
-function BuildPageScreen.render(p3) --[[ Line: 1015 ]]
+function BuildPageScreen.render(p3)
 	-- upvalues: ReactModule (copy), BuildPage (copy)
 	return ReactModule.createElement(BuildPage, p3.props)
 end

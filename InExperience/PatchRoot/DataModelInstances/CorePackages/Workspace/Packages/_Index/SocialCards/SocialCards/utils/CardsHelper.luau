@@ -3,11 +3,11 @@ local CreateLazyComponentFunction = require(SocialCards.Parent.RoactUtils).Compo
 
 return {
 	CardComponent = {
-		scheduled_group_up = CreateLazyComponentFunction(function() --[[ Line: 9 ]]
+		scheduled_group_up = CreateLazyComponentFunction(function()
 			-- upvalues: SocialCards (copy)
 			return require(SocialCards.Components).ScheduledSquadCard
 		end),
-		group_up = CreateLazyComponentFunction(function() --[[ Line: 12 ]]
+		group_up = CreateLazyComponentFunction(function()
 			-- upvalues: SocialCards (copy)
 			return require(SocialCards.Components).SquadCard.SquadCard
 		end)

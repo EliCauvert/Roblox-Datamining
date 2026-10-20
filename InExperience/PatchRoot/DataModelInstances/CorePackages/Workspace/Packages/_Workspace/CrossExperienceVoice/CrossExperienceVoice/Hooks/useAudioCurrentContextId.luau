@@ -3,27 +3,27 @@ local React = require(CrossExperienceVoice.dependencies).React
 local Default = require(CrossExperienceVoice.CrossExperienceVoiceManager).default
 local AudioFocusService = Default:getAudioFocusService()
 
-return function() --[[ Line: 8 ]]
+return function()
 	-- upvalues: React (copy), AudioFocusService (copy), Default (copy)
 	local UseStateResult, UseStateResult2 = React.useState(-1)
 	
 	if AudioFocusService then
-		React.useEffect(function() --[[ Line: 12 ]]
+		React.useEffect(function()
 			-- upvalues: UseStateResult2 (copy), Default (upval), AudioFocusService (upval)
 			UseStateResult2(Default:getCurrentAudioContext())
-			AudioFocusService.OnContextRegistered:Connect(function() --[[ Line: 15 ]]
+			AudioFocusService.OnContextRegistered:Connect(function()
 				-- upvalues: UseStateResult2 (upval), Default (upval)
 				UseStateResult2(Default:getCurrentAudioContext())
 			end)
-			AudioFocusService.OnContextUnregistered:Connect(function() --[[ Line: 19 ]]
+			AudioFocusService.OnContextUnregistered:Connect(function()
 				-- upvalues: UseStateResult2 (upval), Default (upval)
 				UseStateResult2(Default:getCurrentAudioContext())
 			end)
-			AudioFocusService.OnDeafenVoiceAudio:Connect(function(_) --[[ Line: 23 ]]
+			AudioFocusService.OnDeafenVoiceAudio:Connect(function(_)
 				-- upvalues: UseStateResult2 (upval), Default (upval)
 				UseStateResult2(Default:getCurrentAudioContext())
 			end)
-			AudioFocusService.OnUndeafenVoiceAudio:Connect(function(_) --[[ Line: 27 ]]
+			AudioFocusService.OnUndeafenVoiceAudio:Connect(function(_)
 				-- upvalues: UseStateResult2 (upval), Default (upval)
 				UseStateResult2(Default:getCurrentAudioContext())
 			end)

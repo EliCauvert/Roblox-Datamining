@@ -13,11 +13,11 @@ local GetSduiPageEntrySnackbarStoreFunction = require(Parent.SduiSharedUtilities
 local GetFFlagEdpPlayerFeedbackEnabledFunction = SharedFlagsModule.GetFFlagEdpPlayerFeedbackEnabled
 local FFlagLuaAppAddUniverseIdToEngagementEvents = SharedFlagsModule.FFlagLuaAppAddUniverseIdToEngagementEvents
 
-local function _(Enabled): string --[[ Line: 28 | Named "convertBooleanToVoteForAnalytics" ]]
+local function _(Enabled): string
 	return if Enabled == true then "UpVoted" elseif Enabled == false then "DownVoted" else "NotVoted"
 end
 
-return function(p1, _, p2, _) --[[ Line: 38 | Named "SduiToggleExperienceVoteAction" ]]
+return function(p1, _, p2, _)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), Game1 (copy), Players (copy), GameVoteFunction (copy), FFlagLuaAppAddUniverseIdToEngagementEvents (copy), GetFFlagEdpPlayerFeedbackEnabledFunction (copy), GetSduiClientPageScopeFunction (copy), SignalsModule (copy), GetSduiPageEntrySnackbarStoreFunction (copy), FoundationModule (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	
@@ -50,7 +50,7 @@ return function(p1, _, p2, _) --[[ Line: 38 | Named "SduiToggleExperienceVoteAct
 		placeId = tostring(PlaceId),
 		vote = if VoteDirection1 == true then "UpVoted" elseif VoteDirection1 == false then "DownVoted" else "NotVoted",
 		prevVote = if UserVote == true then "UpVoted" elseif UserVote == false then "DownVoted" else "NotVoted",
-		universeId = if FFlagLuaAppAddUniverseIdToEngagementEvents then UniverseId else nil
+		targetId = if FFlagLuaAppAddUniverseIdToEngagementEvents then UniverseId else nil
 	}, ActionParams.ctx or "")
 	
 	if GetFFlagEdpPlayerFeedbackEnabledFunction() and PlaceId then
@@ -62,7 +62,7 @@ return function(p1, _, p2, _) --[[ Line: 38 | Named "SduiToggleExperienceVoteAct
 	end
 	local UpdateUserVoteResult = VotesStore.updateUserVote(UniverseId, VoteDirection1)
 	local t = {}
-	t.dispose = SignalsModule.createEffect(function(p3) --[[ Line: 106 ]]
+	t.dispose = SignalsModule.createEffect(function(p3)
 		-- upvalues: UpdateUserVoteResult (copy), p2 (copy), GetSduiPageEntrySnackbarStoreFunction (upval), FoundationModule (upval), GetFFlagEdpPlayerFeedbackEnabledFunction (upval), PlaceId (copy), Game1 (upval), GetSduiClientPageScopeFunction (upval), t (copy)
 		local UpdateUserVoteResultResult = UpdateUserVoteResult(p3)
 		

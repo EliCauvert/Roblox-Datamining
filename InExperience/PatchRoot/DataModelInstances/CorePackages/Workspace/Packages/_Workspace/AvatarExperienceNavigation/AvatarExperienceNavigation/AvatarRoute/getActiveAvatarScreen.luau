@@ -1,6 +1,6 @@
 ﻿local AvatarScreenPropertiesModule = require(script:FindFirstAncestor("AvatarExperienceNavigation").AvatarRoute.AvatarScreenProperties)
 
-return function(p1) --[[ Line: 15 | Named "getActiveAvatarScreen" ]]
+return function(p1)
 	-- upvalues: AvatarScreenPropertiesModule (copy)
 	if not p1 then
 		return nil

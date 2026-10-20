@@ -4,9 +4,9 @@ local SignalsModule = require(Parent1.Signals)
 local NetworkProfiler = require(Parent1.Http).NetworkProfiler
 local _ = require(Parent.HttpStoreTypes)
 
-return function(Callback) --[[ Line: 13 | Named "createNetworkStatsHandler" ]]
+return function(Callback)
 	-- upvalues: SignalsModule (copy), NetworkProfiler (copy)
-	return SignalsModule.createEffect(function(p1) --[[ Line: 14 ]]
+	return SignalsModule.createEffect(function(p1)
 		-- upvalues: Callback (copy), NetworkProfiler (upval)
 		local CallbackResult = Callback(p1)
 		

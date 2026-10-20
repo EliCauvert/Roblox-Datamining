@@ -12,7 +12,7 @@ local BindModule = require(Parent.Utility.bind)
 local UseStyleModule = require(Parent.Core.Style.useStyle)
 local StyleDefaultsModule = require(script.Parent.StyleDefaults)
 
-local function _(p1) --[[ Line: 27 | Named "getCellDataKey" ]]
+local function _(p1)
 	return if p1.key == nil then p1.text else p1.key
 end
 
@@ -59,13 +59,13 @@ DropdownMenu.defaultProps = {
 	defaultKey = nil
 }
 
-function DropdownMenu.didUpdate(p1, _, p2) --[[ Line: 129 ]]
+function DropdownMenu.didUpdate(p1, _, p2)
 	if p1.props.onMenuOpenChange and p1.state.menuOpen ~= p2.menuOpen then
 		p1.props.onMenuOpenChange(p1.state.menuOpen)
 	end
 end
 
-function DropdownMenu.init(p1) --[[ Line: 135 ]]
+function DropdownMenu.init(p1)
 	-- upvalues: CryoModule (copy), BindModule (copy)
 	p1:setState({
 		menuOpen = false,
@@ -73,23 +73,23 @@ function DropdownMenu.init(p1) --[[ Line: 135 ]]
 		absoluteSize = Vector2.new(0, 0)
 	})
 	
-	function p1.openMenu() --[[ Line: 142 ]]
+	function p1.openMenu()
 		-- upvalues: p1 (copy)
 		p1:setState({ menuOpen = true })
 	end
 	
-	function p1.closeMenu() --[[ Line: 148 ]]
+	function p1.closeMenu()
 		-- upvalues: p1 (copy)
 		p1:setState({ menuOpen = false })
 	end
 	
-	function p1.onSelect(SelectedKey) --[[ Line: 154 ]]
+	function p1.onSelect(SelectedKey)
 		-- upvalues: p1 (copy)
 		p1:setState({ menuOpen = false, selectedKey = SelectedKey })
 		p1.props.onChange(SelectedKey)
 	end
 	
-	function p1.mapCellData(p2) --[[ Line: 162 ]]
+	function p1.mapCellData(p2)
 		-- upvalues: CryoModule (upval), BindModule (upval), p1 (copy)
 		local Text = if p2.key == nil then p2.text else p2.key
 		local JoinResult = CryoModule.Dictionary.join(p2, { key = CryoModule.None })
@@ -99,13 +99,13 @@ function DropdownMenu.init(p1) --[[ Line: 135 ]]
 		return JoinResult
 	end
 	
-	function p1.onResize(Frame) --[[ Line: 172 ]]
+	function p1.onResize(Frame)
 		-- upvalues: p1 (copy)
 		p1:setState({ absoluteSize = Frame.AbsoluteSize })
 	end
 end
 
-function DropdownMenu.getDerivedStateFromProps(p1, p2) --[[ Line: 179 ]]
+function DropdownMenu.getDerivedStateFromProps(p1, p2)
 	-- upvalues: RoactModule (copy)
 	local Flag = false
 	
@@ -118,11 +118,11 @@ function DropdownMenu.getDerivedStateFromProps(p1, p2) --[[ Line: 179 ]]
 	return if Flag then nil else { selectedKey = RoactModule.None }
 end
 
-function DropdownMenu.render(p3) --[[ Line: 197 ]]
+function DropdownMenu.render(p3)
 	-- upvalues: CryoModule (copy), ControlStateModule (copy), RoactModule (copy), DropdownMenuCellModule (copy), ImagesModule (copy), DropdownMenuListModule (copy)
 	local MapResult = CryoModule.List.map(p3.props.cellDatas, p3.mapCellData)
 	local SelectionOrder: number = p3.props.selectionOrder
-	local Where = CryoModule.List.findWhere(MapResult, function(p4) --[[ Line: 203 ]]
+	local Where = CryoModule.List.findWhere(MapResult, function(p4)
 		return p4.selected
 	end)
 	local Placeholder = if Where == nil then p3.props.placeholder else MapResult[Where].text
@@ -175,7 +175,7 @@ function DropdownMenu.render(p3) --[[ Line: 197 ]]
 				isDisabled = p3.props.isDisabled,
 				isActivated = p3.state.menuOpen,
 				hasContent = Where ~= nil,
-				onActivated = function() --[[ Line: 276 ]]
+				onActivated = function()
 					-- upvalues: p3 (copy)
 					if p3.state.menuOpen then
 						p3.closeMenu()
@@ -209,7 +209,7 @@ function DropdownMenu.render(p3) --[[ Line: 197 ]]
 	})
 end
 
-return RoactModule.forwardRef(function(p3, p4) --[[ Line: 311 ]]
+return RoactModule.forwardRef(function(p3, p4)
 	-- upvalues: UseStyleModule (copy), StyleDefaultsModule (copy), CryoModule (copy), RoactModule (copy), DropdownMenu (copy)
 	local JoinResult = nil
 	if p3.enableTokenOverride then

@@ -1,10 +1,10 @@
 ﻿local _ = require(script:FindFirstAncestor("BulkPurchaseApp").Store.Types)
 
-local function _(p1) --[[ Line: 8 | Named "getMarketPlaceProductTypeFromItemType" ]]
+local function _(p1)
 	return if p1 == "AvatarBundle" then Enum.MarketplaceProductType.AvatarBundle else Enum.MarketplaceProductType.AvatarAsset
 end
 
-return function(p1) --[[ Line: 16 | Named "selectResultItems" ]]
+return function(p1)
 	local List = {}
 	
 	if p1.itemData then

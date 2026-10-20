@@ -17,7 +17,7 @@ local FIntLuaAppFriendsSortHeaderMaxHiddenPosition = SharedFlagsModule.FIntLuaAp
 local SORTINDEXSELECTIONORDERMULTIPLIER = DiscoveryTypesModule.Constants.SORT_INDEX_SELECTION_ORDER_MULTIPLIER
 local SORTSELECTIONORDERBASE = DiscoveryTypesModule.Constants.SORT_SELECTION_ORDER_BASE
 
-local function _(p1) --[[ Line: 44 | Named "getShouldHideCarouselHeader" ]]
+local function _(p1)
 	-- upvalues: FIntLuaAppFriendsSortHeaderMaxHiddenPosition (copy), FFlagFlyoutHideFriendsHeader (copy), FFlagEnableFlyoutFriendsHeaderFix (copy), FlyoutSidePanelIXP (copy)
 	if FIntLuaAppFriendsSortHeaderMaxHiddenPosition < p1 then
 		return false
@@ -33,7 +33,7 @@ local function _(p1) --[[ Line: 44 | Named "getShouldHideCarouselHeader" ]]
 	return IsFlyoutSidePanelEnabled
 end
 
-return function(p1) --[[ Line: 57 | Named "SduiFriendCarousel" ]]
+return function(p1)
 	-- upvalues: FindAnalyticsFieldFunction (copy), ReactModule (copy), SocialCarouselModule (copy), FFlagLuaAppHomeFriendsRemoveItemImpressions (copy), SORTSELECTIONORDERBASE (copy), SORTINDEXSELECTIONORDERMULTIPLIER (copy), FFlagLuaAppFriendsSortHeaderByPosition (copy), FIntLuaAppFriendsSortHeaderMaxHiddenPosition (copy), FFlagFlyoutHideFriendsHeader (copy), FFlagEnableFlyoutFriendsHeaderFix (copy), FlyoutSidePanelIXP (copy), FFlagLuaAppCompositionAlways (copy), FFlagSocialCarouselShareQREnabled (copy), OpenProfileQRCodePageBridgeModule (copy)
 	local Number: number = tonumber(FindAnalyticsFieldFunction("collectionPosition", p1.analyticsContext.analyticsData or {}, -1)) or -1
 	
@@ -46,7 +46,7 @@ return function(p1) --[[ Line: 57 | Named "SduiFriendCarousel" ]]
 			scrollViewPositionChangedSignal = p1.scrollViewPositionChangedSignal,
 			skipItemImpressionsLog = if FFlagLuaAppHomeFriendsRemoveItemImpressions then true else nil
 		},
-		sortAnalyticsData = ReactModule.useMemo(function() --[[ Line: 62 ]]
+		sortAnalyticsData = ReactModule.useMemo(function()
 			-- upvalues: Number (copy), p1 (copy)
 			return {
 				sortIndex = Number,

@@ -4,23 +4,23 @@ local FFlagBuildAdUpsellPinnedModule = require(BuildExperience.Flags.FFlagBuildA
 local FFlagBuildAgentAdCampaignCardModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignCard)
 local CreateAdCampaignCardStorageModule = require(script.Parent.createAdCampaignCardStorage)
 
-local function _(Value: number): number --[[ Line: 89 | Named "sanitizeCount" ]]
+local function _(Value: number): number
 	return if type(Value) == "number" and Value >= 0 then math.floor(Value) else 0
 end
 
-local _ = function(Value: number): number --[[ Line: 93 | Named "sanitizeDisplayCount" ]]
+local _ = function(Value: number): number
 	return if type(Value) == "number" and Value >= 0 then math.floor(Value) else 0
 end
 
-local _ = function(Text: string): string --[[ Line: 97 | Named "getUtcDate" ]]
+local _ = function(Text: string): string
 	return string.match(Text, "^(%d%d%d%d%-%d%d%-%d%d)")
 end
 
-local _ = function(Text: string, Text1: string): boolean --[[ Line: 101 | Named "isSameUtcDate" ]]
+local _ = function(Text: string, Text1: string): boolean
 	return Text ~= nil and string.match(Text, "^(%d%d%d%d%-%d%d%-%d%d)") == string.match(Text1, "^(%d%d%d%d%-%d%d%-%d%d)")
 end
 
-local function makeEmptyAdUpsellScheduler() --[[ Line: 105 ]]
+local function makeEmptyAdUpsellScheduler()
 	-- upvalues: FFlagBuildAdUpsellPinnedModule (copy)
 	return {
 		nextOrder = 1,
@@ -32,7 +32,7 @@ local function makeEmptyAdUpsellScheduler() --[[ Line: 105 ]]
 	}
 end
 
-local function pruneUniverseCap(EmptyAdUpsellScheduler) --[[ Line: 116 ]]
+local function pruneUniverseCap(EmptyAdUpsellScheduler)
 	local Count = 0
 	local v1 = nil
 	local LastTouchedOrder = 1e999
@@ -64,7 +64,7 @@ local function pruneUniverseCap(EmptyAdUpsellScheduler) --[[ Line: 116 ]]
 	end
 end
 
-local function sanitizeAdUpsellScheduler(Scheduler) --[[ Line: 151 ]]
+local function sanitizeAdUpsellScheduler(Scheduler)
 	-- upvalues: makeEmptyAdUpsellScheduler (copy), pruneUniverseCap (copy)
 	if type(Scheduler) ~= "table" then
 		return (makeEmptyAdUpsellScheduler())
@@ -131,7 +131,7 @@ local function sanitizeAdUpsellScheduler(Scheduler) --[[ Line: 151 ]]
 	for _ = 51, Count do
 		pruneUniverseCap(EmptyAdUpsellScheduler)
 	end
-	table.sort(EmptyAdUpsellScheduler.anchors, function(A, B): boolean --[[ Line: 233 ]]
+	table.sort(EmptyAdUpsellScheduler.anchors, function(A, B): boolean
 		return A.order < B.order
 	end)
 	local t = {}
@@ -147,7 +147,7 @@ local function sanitizeAdUpsellScheduler(Scheduler) --[[ Line: 151 ]]
 			t[Text] = v2 + 1
 		end
 	end
-	table.sort(EmptyAdUpsellScheduler.pendingMilestones, function(A, B): boolean --[[ Line: 247 ]]
+	table.sort(EmptyAdUpsellScheduler.pendingMilestones, function(A, B): boolean
 		return A.order < B.order
 	end)
 	while #EmptyAdUpsellScheduler.anchors > 50 do
@@ -165,7 +165,7 @@ local function sanitizeAdUpsellScheduler(Scheduler) --[[ Line: 151 ]]
 	return EmptyAdUpsellScheduler
 end
 
-local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 263 ]]
+local function createBuildAppStorage(AppStorageService, HttpService)
 	-- upvalues: CreateAdCampaignCardStorageModule (copy), FFlagBuildAdUpsellModule (copy), makeEmptyAdUpsellScheduler (copy), sanitizeAdUpsellScheduler (copy), FFlagBuildAdUpsellPinnedModule (copy), pruneUniverseCap (copy), FFlagBuildAgentAdCampaignCardModule (copy)
 	local v3 = nil
 	local Flag = false
@@ -178,7 +178,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 	local Flag2 = false
 	local v6 = nil
 	
-	local function tryReadData() --[[ Line: 275 ]]
+	local function tryReadData()
 		-- upvalues: AppStorageService (copy), HttpService (copy)
 		local Success, Result = pcall(AppStorageService.GetItem, AppStorageService, "BuildAppStorageKey")
 		
@@ -197,7 +197,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 		end
 	end
 	
-	local function tryReadDataStrict() --[[ Line: 292 ]]
+	local function tryReadDataStrict()
 		-- upvalues: AppStorageService (copy), HttpService (copy)
 		local Success, Result = pcall(AppStorageService.GetItem, AppStorageService, "BuildAppStorageKey")
 		
@@ -216,14 +216,14 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 		end
 	end
 	
-	local function _() --[[ Line: 308 | Named "readData" ]]
+	local function _()
 		-- upvalues: tryReadData (copy)
 		local _, TryReadDataResult2 = tryReadData()
 		
 		return TryReadDataResult2
 	end
 	
-	local function tryReadDataWithRetry(Callback) --[[ Line: 313 ]]
+	local function tryReadDataWithRetry(Callback)
 		local CallbackResult, CallbackResult2 = Callback()
 		
 		if CallbackResult then
@@ -233,18 +233,18 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 		end
 	end
 	
-	local function writeData(p1) --[[ Line: 321 ]]
+	local function writeData(p1)
 		-- upvalues: HttpService (copy), AppStorageService (copy)
 		local Success, Result = pcall(HttpService.JSONEncode, HttpService, p1)
 		
-		return if Success and type(Result) == "string" then pcall(function() --[[ Line: 327 ]]
+		return if Success and type(Result) == "string" then pcall(function()
 			-- upvalues: AppStorageService (upval), Result (copy)
 			AppStorageService:SetItem("BuildAppStorageKey", Result)
 			AppStorageService:Flush()
 		end) else false
 	end
 	
-	local _ = function(Callback: (any) -> ()) --[[ Line: 334 | Named "updateData" ]]
+	local _ = function(Callback: (any) -> ())
 		-- upvalues: tryReadData (copy), HttpService (copy), AppStorageService (copy)
 		local TryReadDataResult, TryReadDataResult2 = tryReadData()
 		local TryReadDataResult1 = nil
@@ -260,7 +260,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 			Callback(TryReadDataResult1)
 			local Success, Result = pcall(HttpService.JSONEncode, HttpService, TryReadDataResult1)
 			
-			return if Success and type(Result) == "string" then pcall(function() --[[ Line: 327 ]]
+			return if Success and type(Result) == "string" then pcall(function()
 				-- upvalues: AppStorageService (upval), Result (copy)
 				AppStorageService:SetItem("BuildAppStorageKey", Result)
 				AppStorageService:Flush()
@@ -270,11 +270,11 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 		end
 	end
 	
-	local function getAdCampaignCardStorage() --[[ Line: 343 ]]
+	local function getAdCampaignCardStorage()
 		-- upvalues: v6 (ref), CreateAdCampaignCardStorageModule (upval), tryReadDataWithRetry (copy), tryReadDataStrict (copy), writeData (copy)
 		if v6 == nil then
 			v6 = CreateAdCampaignCardStorageModule({
-				readData = function() --[[ Line: 346 ]]
+				readData = function()
 					-- upvalues: tryReadDataWithRetry (upval), tryReadDataStrict (upval)
 					return tryReadDataWithRetry(tryReadDataStrict)
 				end,
@@ -284,7 +284,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 		return v6
 	end
 	
-	local function loadAdUpsell() --[[ Line: 436 ]]
+	local function loadAdUpsell()
 		-- upvalues: v5 (ref), Flag1 (ref), tryReadDataStrict (copy), makeEmptyAdUpsellScheduler (upval), sanitizeAdUpsellScheduler (upval)
 		if v5 ~= nil then
 			return true, v5
@@ -317,7 +317,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 		end
 	end
 	
-	local function persistCachedAdUpsell(p1) --[[ Line: 470 ]]
+	local function persistCachedAdUpsell(p1)
 		-- upvalues: v5 (ref), tryReadData (copy), tryReadDataStrict (copy), HttpService (copy), AppStorageService (copy)
 		if v5 == nil then
 			return false
@@ -342,7 +342,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 			TryReadDataResult1.adUpsell = Copy
 			local Success, Result = pcall(HttpService.JSONEncode, HttpService, TryReadDataResult1)
 			
-			return if Success and type(Result) == "string" then pcall(function() --[[ Line: 327 ]]
+			return if Success and type(Result) == "string" then pcall(function()
 				-- upvalues: AppStorageService (upval), Result (copy)
 				AppStorageService:SetItem("BuildAppStorageKey", Result)
 				AppStorageService:Flush()
@@ -352,10 +352,10 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 		end
 	end
 	
-	local function scheduleAdUpsellWriteRetry(p1) --[[ Line: 488 ]]
+	local function scheduleAdUpsellWriteRetry(p1)
 		-- upvalues: DelayedThread (ref), Count (ref), Inverted (ref), persistCachedAdUpsell (copy), Flag2 (ref), scheduleAdUpsellWriteRetry (copy)
 		if DelayedThread == nil and Count < 3 then
-			local function retryWrite() --[[ Line: 492 ]]
+			local function retryWrite()
 				-- upvalues: DelayedThread (upval), Inverted (upval), Count (upval), persistCachedAdUpsell (upval), Flag2 (upval), scheduleAdUpsellWriteRetry (upval)
 				DelayedThread = nil
 				
@@ -379,7 +379,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 		end
 	end
 	
-	local function persistAdUpsellMutation(Enabled, p1) --[[ Line: 511 ]]
+	local function persistAdUpsellMutation(Enabled, p1)
 		-- upvalues: Count (ref), Inverted (ref), Flag2 (ref), scheduleAdUpsellWriteRetry (copy), persistCachedAdUpsell (copy), DelayedThread (ref)
 		Count = 0
 		
@@ -410,7 +410,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 		return PersistCachedAdUpsellResult
 	end
 	
-	local _ = function() --[[ Line: 537 | Named "getAdUpsellScheduler" ]]
+	local _ = function()
 		-- upvalues: loadAdUpsell (copy)
 		local AdUpsell, AdUpsell2 = loadAdUpsell()
 		
@@ -421,7 +421,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 		end
 	end
 	
-	local _ = function(p1, p2) --[[ Line: 545 | Named "getOrCreateUniverseState" ]]
+	local _ = function(p1, p2)
 		local Text = tostring(p2)
 		local Univers = p1.universes[Text]
 		
@@ -436,18 +436,18 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 		return Univers
 	end
 	
-	local _ = function(p1, Value): boolean --[[ Line: 559 | Named "hasRecentEvent" ]]
+	local _ = function(p1, Value): boolean
 		return table.find(p1.recentEventIds, Value) ~= nil
 	end
 	
-	local function rememberEvent(Scheduler, EventId) --[[ Line: 563 ]]
+	local function rememberEvent(Scheduler, EventId)
 		table.insert(Scheduler.recentEventIds, EventId)
 		while #Scheduler.recentEventIds > 50 do
 			table.remove(Scheduler.recentEventIds, 1)
 		end
 	end
 	
-	local function pruneAnchorCaps(Scheduler, UniverseId, SessionId) --[[ Line: 570 ]]
+	local function pruneAnchorCaps(Scheduler, UniverseId, SessionId)
 		local Count = 0
 		
 		for i, anchor in Scheduler.anchors do
@@ -469,7 +469,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 		end
 	end
 	
-	local function addMilestone(EmptyAdUpsellScheduler, Id, UniverseId, SessionId, AfterMessageKey, Order) --[[ Line: 591 ]]
+	local function addMilestone(EmptyAdUpsellScheduler, Id, UniverseId, SessionId, AfterMessageKey, Order)
 		-- upvalues: FFlagBuildAdUpsellPinnedModule (upval), pruneAnchorCaps (copy)
 		if SessionId ~= nil and (FFlagBuildAdUpsellPinnedModule or AfterMessageKey ~= nil) then
 			table.insert(EmptyAdUpsellScheduler.anchors, {
@@ -495,7 +495,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 		end
 	end
 	
-	local function recordAdUpsellEvent(p1) --[[ Line: 622 ]]
+	local function recordAdUpsellEvent(p1)
 		-- upvalues: loadAdUpsell (copy), Inverted (ref), persistAdUpsellMutation (copy), rememberEvent (copy), pruneUniverseCap (upval), addMilestone (copy)
 		local AdUpsell, AdUpsell2 = loadAdUpsell()
 		local Flag = nil
@@ -551,7 +551,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 		STORAGE_KEY = "BuildAppStorageKey",
 		AD_UPSELL_SCHEDULER_VERSION = 4,
 		getAdCampaignCardStorage = if FFlagBuildAgentAdCampaignCardModule then getAdCampaignCardStorage else nil,
-		getChatDraft = function(p1) --[[ Line: 354 ]]
+		getChatDraft = function(p1)
 			-- upvalues: tryReadData (copy)
 			local _, TryReadDataResult2 = tryReadData()
 			local ChatDrafts = TryReadDataResult2.chatDrafts
@@ -564,9 +564,9 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 				return nil
 			end
 		end,
-		setChatDraft = function(Key, p1) --[[ Line: 363 ]]
+		setChatDraft = function(Key, p1)
 			-- upvalues: tryReadData (copy), HttpService (copy), AppStorageService (copy)
-			local function _(p2) --[[ Line: 364 ]]
+			local function _(p2)
 				-- upvalues: Key (copy), p1 (copy)
 				local Copy = if type(p2.chatDrafts) == "table" then table.clone(p2.chatDrafts) else {}
 				Copy[Key] = if p1 == "" then nil else p1
@@ -589,7 +589,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 				TryReadDataResult1.chatDrafts = Copy
 				local Success, Result = pcall(HttpService.JSONEncode, HttpService, TryReadDataResult1)
 				
-				return if Success and type(Result) == "string" then pcall(function() --[[ Line: 327 ]]
+				return if Success and type(Result) == "string" then pcall(function()
 					-- upvalues: AppStorageService (upval), Result (copy)
 					AppStorageService:SetItem("BuildAppStorageKey", Result)
 					AppStorageService:Flush()
@@ -598,14 +598,14 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 				return false
 			end
 		end,
-		getUnpublishedPlaytestModeTooltipDisplayCount = function(): number --[[ Line: 371 ]]
+		getUnpublishedPlaytestModeTooltipDisplayCount = function(): number
 			-- upvalues: tryReadData (copy), v4 (ref)
 			local _, TryReadDataResult2 = tryReadData()
 			local UnpublishedPlaytestModeTooltipDisplayCount: number = TryReadDataResult2.unpublishedPlaytestModeTooltipDisplayCount
 			
 			return (math.max(if type(UnpublishedPlaytestModeTooltipDisplayCount) == "number" and UnpublishedPlaytestModeTooltipDisplayCount >= 0 then math.floor(UnpublishedPlaytestModeTooltipDisplayCount) else 0, v4))
 		end,
-		incrementUnpublishedPlaytestModeTooltipDisplayCount = function() --[[ Line: 376 ]]
+		incrementUnpublishedPlaytestModeTooltipDisplayCount = function()
 			-- upvalues: FFlagBuildAdUpsellModule (upval), v4 (ref), tryReadData (copy), HttpService (copy), AppStorageService (copy)
 			if not FFlagBuildAdUpsellModule then
 				local _, TryReadDataResult2_1 = tryReadData()
@@ -615,7 +615,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 				TryReadDataResult2_1.unpublishedPlaytestModeTooltipDisplayCount = NewLargest
 				local Success, Result = pcall(HttpService.JSONEncode, HttpService, TryReadDataResult2_1)
 				
-				return if Success and type(Result) == "string" then pcall(function() --[[ Line: 327 ]]
+				return if Success and type(Result) == "string" then pcall(function()
 					-- upvalues: AppStorageService (upval), Result (copy)
 					AppStorageService:SetItem("BuildAppStorageKey", Result)
 					AppStorageService:Flush()
@@ -624,7 +624,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 			local v7 = v4 + 1
 			v4 = v7
 			
-			local function _(p1) --[[ Line: 380 ]]
+			local function _(p1)
 				-- upvalues: v7 (copy), v4 (upval)
 				local UnpublishedPlaytestModeTooltipDisplayCount: number = p1.unpublishedPlaytestModeTooltipDisplayCount
 				local Largest = math.max((if type(UnpublishedPlaytestModeTooltipDisplayCount) == "number" and UnpublishedPlaytestModeTooltipDisplayCount >= 0 then math.floor(UnpublishedPlaytestModeTooltipDisplayCount) else 0) + 1, v7)
@@ -649,7 +649,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 				TryReadDataResult1.unpublishedPlaytestModeTooltipDisplayCount = Largest
 				local Success1, Result1 = pcall(HttpService.JSONEncode, HttpService, TryReadDataResult1)
 				
-				return if Success1 and type(Result1) == "string" then pcall(function() --[[ Line: 327 ]]
+				return if Success1 and type(Result1) == "string" then pcall(function()
 					-- upvalues: AppStorageService (upval), Result1 (copy)
 					AppStorageService:SetItem("BuildAppStorageKey", Result1)
 					AppStorageService:Flush()
@@ -658,7 +658,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 				return false
 			end
 		end,
-		wasPushNotificationsUpsellShownToday = function(p1): boolean --[[ Line: 395 ]]
+		wasPushNotificationsUpsellShownToday = function(p1): boolean
 			-- upvalues: v3 (ref), tryReadData (copy)
 			local IsoDate: string = (p1 or DateTime.now()):ToIsoDate()
 			local Text: string = v3
@@ -676,7 +676,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 			end
 			return IsMatchMatch
 		end,
-		markPushNotificationsUpsellShown = function(p1) --[[ Line: 406 ]]
+		markPushNotificationsUpsellShown = function(p1)
 			-- upvalues: v3 (ref), FFlagBuildAdUpsellModule (upval), tryReadData (copy), HttpService (copy), AppStorageService (copy)
 			local IsoDate = (p1 or DateTime.now()):ToIsoDate()
 			v3 = IsoDate
@@ -689,13 +689,13 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 				TryReadDataResult2_1.pushNotificationsUpsell = Copy
 				local Success, Result = pcall(HttpService.JSONEncode, HttpService, TryReadDataResult2_1)
 				
-				return if Success and type(Result) == "string" then pcall(function() --[[ Line: 327 ]]
+				return if Success and type(Result) == "string" then pcall(function()
 					-- upvalues: AppStorageService (upval), Result (copy)
 					AppStorageService:SetItem("BuildAppStorageKey", Result)
 					AppStorageService:Flush()
 				end) else false
 			end
-			local function _(p2) --[[ Line: 411 ]]
+			local function _(p2)
 				-- upvalues: IsoDate (copy)
 				local PushNotificationsUpsell = p2.pushNotificationsUpsell
 				local Copy = if type(PushNotificationsUpsell) == "table" then table.clone(PushNotificationsUpsell) else {}
@@ -720,7 +720,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 				TryReadDataResult1.pushNotificationsUpsell = Copy
 				local Success1, Result1 = pcall(HttpService.JSONEncode, HttpService, TryReadDataResult1)
 				
-				return if Success1 and type(Result1) == "string" then pcall(function() --[[ Line: 327 ]]
+				return if Success1 and type(Result1) == "string" then pcall(function()
 					-- upvalues: AppStorageService (upval), Result1 (copy)
 					AppStorageService:SetItem("BuildAppStorageKey", Result1)
 					AppStorageService:Flush()
@@ -729,13 +729,13 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 				return false
 			end
 		end,
-		retryAdUpsellRead = function() --[[ Line: 464 ]]
+		retryAdUpsellRead = function()
 			-- upvalues: Flag1 (ref), loadAdUpsell (copy)
 			Flag1 = false
 			
 			return (loadAdUpsell())
 		end,
-		getAdUpsellState = function(UniverseId, SessionId) --[[ Line: 740 ]]
+		getAdUpsellState = function(UniverseId, SessionId)
 			-- upvalues: loadAdUpsell (copy)
 			local AdUpsell, AdUpsell2 = loadAdUpsell()
 			local Flag = nil
@@ -785,15 +785,15 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 				pendingMilestoneCount = PendingMilestoneCount
 			}
 		end,
-		recordAdUpsellCompletedTurn = function(p1) --[[ Line: 655 ]]
+		recordAdUpsellCompletedTurn = function(p1)
 			-- upvalues: recordAdUpsellEvent (copy)
 			return recordAdUpsellEvent(p1)
 		end,
-		recordAdUpsellPublish = function(p1) --[[ Line: 659 ]]
+		recordAdUpsellPublish = function(p1)
 			-- upvalues: recordAdUpsellEvent (copy)
 			return recordAdUpsellEvent(p1)
 		end,
-		attachPendingAdUpsellMilestones = function(UniverseId, SessionId, p1) --[[ Line: 663 ]]
+		attachPendingAdUpsellMilestones = function(UniverseId, SessionId, p1)
 			-- upvalues: loadAdUpsell (copy), FFlagBuildAdUpsellPinnedModule (upval), pruneAnchorCaps (copy), persistAdUpsellMutation (copy)
 			local AdUpsell, AdUpsell2 = loadAdUpsell()
 			local Flag = nil
@@ -835,7 +835,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 			end
 			if Flag1 then
 				Scheduler.pendingMilestones = PendingMilestones
-				table.sort(Scheduler.anchors, function(A, B): boolean --[[ Line: 701 ]]
+				table.sort(Scheduler.anchors, function(A, B): boolean
 					return A.order < B.order
 				end)
 				pruneAnchorCaps(Scheduler, UniverseId, SessionId)
@@ -845,7 +845,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 				return true
 			end
 		end,
-		pruneAdUpsellAnchors = function(UniverseId, SessionId, p2) --[[ Line: 708 ]]
+		pruneAdUpsellAnchors = function(UniverseId, SessionId, p2)
 			-- upvalues: FFlagBuildAdUpsellPinnedModule (upval), loadAdUpsell (copy), persistAdUpsellMutation (copy)
 			if FFlagBuildAdUpsellPinnedModule then
 				return true, false
@@ -882,7 +882,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 				return true, false
 			end
 		end,
-		markAdUpsellAnchorImpressed = function(UniverseId, SessionId, Id): boolean --[[ Line: 779 ]]
+		markAdUpsellAnchorImpressed = function(UniverseId, SessionId, Id): boolean
 			-- upvalues: loadAdUpsell (copy), Count (ref), Inverted (ref), Flag2 (ref), scheduleAdUpsellWriteRetry (copy)
 			local AdUpsell, AdUpsell2 = loadAdUpsell()
 			local Flag = nil
@@ -918,7 +918,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 			end
 			return false
 		end,
-		markAdUpsellDismissedPermanently = function(UniverseId): boolean --[[ Line: 797 ]]
+		markAdUpsellDismissedPermanently = function(UniverseId): boolean
 			-- upvalues: loadAdUpsell (copy), tryReadData (copy), sanitizeAdUpsellScheduler (upval), v5 (ref), Flag1 (ref), Count (ref), persistCachedAdUpsell (copy), Inverted (ref), Flag2 (ref), scheduleAdUpsellWriteRetry (copy), DelayedThread (ref)
 			local AdUpsell, AdUpsell2 = loadAdUpsell()
 			
@@ -993,7 +993,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 			end
 			return not Inverted
 		end,
-		isPushNotificationsUpsellDismissedPermanently = function(): boolean --[[ Line: 838 ]]
+		isPushNotificationsUpsellDismissedPermanently = function(): boolean
 			-- upvalues: Flag (ref), tryReadData (copy)
 			if Flag then
 				return true
@@ -1004,7 +1004,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 				return type(PushNotificationsUpsell) == "table" and PushNotificationsUpsell.dismissedPermanently == true
 			end
 		end,
-		markPushNotificationsUpsellDismissedPermanently = function() --[[ Line: 847 ]]
+		markPushNotificationsUpsellDismissedPermanently = function()
 			-- upvalues: Flag (ref), FFlagBuildAdUpsellModule (upval), tryReadData (copy), HttpService (copy), AppStorageService (copy)
 			Flag = true
 			
@@ -1016,13 +1016,13 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 				TryReadDataResult2_1.pushNotificationsUpsell = Copy
 				local Success, Result = pcall(HttpService.JSONEncode, HttpService, TryReadDataResult2_1)
 				
-				return if Success and type(Result) == "string" then pcall(function() --[[ Line: 327 ]]
+				return if Success and type(Result) == "string" then pcall(function()
 					-- upvalues: AppStorageService (upval), Result (copy)
 					AppStorageService:SetItem("BuildAppStorageKey", Result)
 					AppStorageService:Flush()
 				end) else false
 			end
-			local function _(p3) --[[ Line: 851 ]]
+			local function _(p3)
 				local PushNotificationsUpsell = p3.pushNotificationsUpsell
 				local Copy = if type(PushNotificationsUpsell) == "table" then table.clone(PushNotificationsUpsell) else {}
 				Copy.dismissedPermanently = true
@@ -1046,7 +1046,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 				TryReadDataResult1.pushNotificationsUpsell = Copy
 				local Success1, Result1 = pcall(HttpService.JSONEncode, HttpService, TryReadDataResult1)
 				
-				return if Success1 and type(Result1) == "string" then pcall(function() --[[ Line: 327 ]]
+				return if Success1 and type(Result1) == "string" then pcall(function()
 					-- upvalues: AppStorageService (upval), Result1 (copy)
 					AppStorageService:SetItem("BuildAppStorageKey", Result1)
 					AppStorageService:Flush()
@@ -1055,7 +1055,7 @@ local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 
 				return false
 			end
 		end,
-		clearSessionCacheForTests = function() --[[ Line: 876 ]]
+		clearSessionCacheForTests = function()
 			-- upvalues: FFlagBuildAgentAdCampaignCardModule (upval), v6 (ref), v3 (ref), Flag (ref), v4 (ref), v5 (ref), Flag1 (ref), Inverted (ref), Count (ref), DelayedThread (ref), Flag2 (ref)
 			if FFlagBuildAgentAdCampaignCardModule and v6 ~= nil then
 				v6.reset()

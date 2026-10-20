@@ -3,26 +3,26 @@ local Parent = script.Parent.Parent
 local ConstantsModule = require(Parent.Constants)
 local UseSelectorFunction = require(Parent.Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-local function v3() --[[ Line: 19 ]]
+local function v3()
 	-- upvalues: AppStorageService (copy), ConstantsModule (copy)
-	pcall(function() --[[ Line: 20 ]]
+	pcall(function()
 		-- upvalues: AppStorageService (upval), ConstantsModule (upval)
 		AppStorageService:SetItem(ConstantsModule.LastFlashOccurrenceTsLocalStorageKey, (tostring(DateTime.now().UnixTimestampMillis)))
 		AppStorageService:Flush()
 	end)
 end
 
-return function(p1) --[[ Line: 29 ]]
+return function(p1)
 	-- upvalues: AppStorageService (copy), UseSelectorFunction (copy), ConstantsModule (copy), v3 (copy)
 	local AppStorageService1 = if p1 then p1 else AppStorageService
 	
-	if not UseSelectorFunction(function(p2) --[[ Line: 32 ]]
+	if not UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
 		return p2[ConstantsModule.RoduxKey].IsOverlayFlashActive
 	end) then
 		return false, v3
 	end
-	local Success, Result = pcall(function() --[[ Line: 40 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: AppStorageService1 (copy), ConstantsModule (upval)
 		return AppStorageService1:GetItem(ConstantsModule.LastFlashOccurrenceTsLocalStorageKey)
 	end)

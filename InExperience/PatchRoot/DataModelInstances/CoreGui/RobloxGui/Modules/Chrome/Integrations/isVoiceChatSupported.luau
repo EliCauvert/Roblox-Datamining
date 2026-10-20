@@ -1,3 +1,3 @@
-﻿return function() --[[ Line: 1 | Named "isVoiceChatSupported" ]]
+﻿return function()
 	return game:GetEngineFeature("VoiceChatSupported")
 end

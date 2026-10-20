@@ -9,7 +9,7 @@ local Url = UrlBuilderModule.UrlBuilder.new({
 	base = UrlBuilderModule.UrlBase.APIS
 })()
 
-return function(Callback, Callback1) --[[ Line: 22 ]]
+return function(Callback, Callback1)
 	-- upvalues: HttpService (copy), Url (copy), LoggerModule (copy), SerializeTableModule (copy)
 	return HttpService:RequestInternal({
 		Method = "GET",
@@ -18,7 +18,7 @@ return function(Callback, Callback1) --[[ Line: 22 ]]
 			Accept = "application/json"
 		},
 		Url = Url
-	}):Start(function(_, p1) --[[ Line: 35 ]]
+	}):Start(function(_, p1)
 		-- upvalues: Callback (copy), HttpService (upval), LoggerModule (upval), SerializeTableModule (upval), Callback1 (copy)
 		if p1.StatusCode == 200 then
 			local Body = p1.Body

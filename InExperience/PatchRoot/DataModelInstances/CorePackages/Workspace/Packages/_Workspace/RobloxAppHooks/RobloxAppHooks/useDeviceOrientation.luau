@@ -4,7 +4,7 @@ local UseCurrentCameraModule = require(RobloxAppHooks.useCurrentCamera)
 local UsePropertyFunction = require(Parent.GuiObjectUtils).useProperty
 local DeviceOrientationMode = require(Parent.RobloxAppEnums).DeviceOrientationMode
 
-return function() --[[ Line: 10 | Named "useDeviceOrientation" ]]
+return function()
 	-- upvalues: UseCurrentCameraModule (copy), UsePropertyFunction (copy), DeviceOrientationMode (copy)
 	local ViewportSize = UsePropertyFunction(UseCurrentCameraModule(), "ViewportSize")
 	

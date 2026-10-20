@@ -21,11 +21,11 @@ local StreamNotificationSettingsExperimentationModule = require(StreamNotificati
 local StreamNotificationSettingsActivationModule = require(StreamNotifications.StreamNotificationSettingsActivation)
 local FFlagStreamNotificationUXSettingsHeader = require(Parent.SharedFlags).FFlagStreamNotificationUXSettingsHeader
 
-local function _(p1, p2: number): number --[[ Line: 34 | Named "getSettingsButtonSize" ]]
+local function _(p1, p2: number): number
 	return p1 - p2 * 2
 end
 
-return function(p1) --[[ Line: 38 ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), NormalizeFontFaceFunction (copy), UserInputService (copy), UseLocalizationFunction (copy), ConstantsModule (copy), StreamNotificationDropdownExperimentationModule (copy), FFlagStreamNotificationUXSettingsHeader (copy), UseDispatchFunction (copy), StreamNotificationSettingsExperimentationModule (copy), StreamNotificationSettingsActivationModule (copy), ReactModule (copy), IconButton (copy), IconSize (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseTokensResult = if FoundationFontFaceMigration then UseTokensFunction() else nil
@@ -38,7 +38,7 @@ return function(p1) --[[ Line: 38 ]]
 	local DropdownEnabled = StreamNotificationDropdownExperimentationModule.getDropdownEnabled()
 	local SettingsGearEnabled = false
 	
-	local function OnActivated() --[[ Line: 61 ]] end
+	local function OnActivated() end
 	
 	if FFlagStreamNotificationUXSettingsHeader then
 		SettingsGearEnabled = StreamNotificationSettingsExperimentationModule.getSettingsGearEnabled()
@@ -91,7 +91,7 @@ return function(p1) --[[ Line: 38 ]]
 					icon = if p1.isSmallScreen then ConstantsModule.Modal.BackIcon else ConstantsModule.Modal.CloseIcon,
 					size = UDim2.new(0, ConstantsModule.Modal.HeaderHeight - ConstantsModule.Modal.Padding * 2, 0, ConstantsModule.Modal.HeaderHeight - ConstantsModule.Modal.Padding * 2),
 					position = UDim2.fromOffset(ConstantsModule.Modal.Padding, ConstantsModule.Modal.Padding),
-					onActivated = function() --[[ Line: 132 ]]
+					onActivated = function()
 						-- upvalues: p1 (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval)
 						p1.displayStream(false)
 						NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.click, AnalyticsConstantsModule.EventNames.closeContent, {

@@ -31,7 +31,7 @@ local FFlagEnableAEGIS2CommsFAEUpsell = SharedFlagsModule.FFlagEnableAEGIS2Comms
 local AEGISPhase2ShowImageOnFAEOverlay = game:DefineFastFlag("AEGISPhase2ShowImageOnFAEOverlay", false)
 local ForceAegisPhase2Modal = game:DefineFastFlag("ForceAegisPhase2Modal", false)
 
-return function(p1) --[[ Line: 64 ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseSocialUpsellOverlayControllerModule (copy), UseLocalizationFunction (copy), FFlagAddFriendsPageFAEUpsell (copy), FFlagEnableAEGIS2CommsFAEUpsell (copy), ReactModule (copy), ForceAegisPhase2Modal (copy), UpsellEntrySurfaceTypeModule (copy), UpsellComponentModule (copy), StartFacialAgeEstimationModule (copy), SocialUpsellTypeModule (copy), FFlagEnableCountdownBadgeModule (copy), FIntCommsFAELockTimestampModule (copy), UpsellOverlayModule (copy), CreateCommonOverlayPropsModule (copy), AssetId1 (ref), AEGISPhase2ShowImageOnFAEOverlay (copy), AssetId (copy)
 	local P0 = p1 or {}
 	local UseDispatchResult = UseDispatchFunction()
@@ -54,7 +54,7 @@ return function(p1) --[[ Line: 64 ]]
 		UnlockChat = if FFlagEnableAEGIS2CommsFAEUpsell then "Feature.FAE.Action.UnlockChat" else nil
 	})
 	local UseRefResult = ReactModule.useRef(false)
-	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 93 ]]
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: FFlagEnableAEGIS2CommsFAEUpsell (upval), ForceAegisPhase2Modal (upval), P0 (copy), UseLocalizationResult (copy), UpsellEntrySurfaceTypeModule (upval), UpsellComponentModule (upval), FFlagAddFriendsPageFAEUpsell (upval)
 		if FFlagEnableAEGIS2CommsFAEUpsell and (ForceAegisPhase2Modal or P0.isPhase2) then
 			return UseLocalizationResult.LetsCheckYourAgeSoYouCanUseChat, UseLocalizationResult.ThisHelpsYouToChatSafelyItOnlyTakesAMoment
@@ -73,7 +73,7 @@ return function(p1) --[[ Line: 64 ]]
 		UseLocalizationResult,
 		if FFlagAddFriendsPageFAEUpsell then P0.upsellEntryComponent else nil
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 129 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseSocialUpsellOverlayControllerModuleResult (copy), P0 (copy), FFlagEnableAEGIS2CommsFAEUpsell (upval), UseDispatchResult (copy), StartFacialAgeEstimationModule (upval), SocialUpsellTypeModule (upval)
 		UseSocialUpsellOverlayControllerModuleResult.closeSocialOverlay()
 		
@@ -91,20 +91,20 @@ return function(p1) --[[ Line: 64 ]]
 		P0.upsellEntrySurface, P0.entryPointEventCtx, P0.onAccept, P0.onSuccess,
 		P0.onFailure, P0.isInExperience, P0.shouldIncludeVPC
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 171 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: P0 (copy)
 		if P0.onDismiss then
 			P0.onDismiss()
 		end
 	end, { P0.onDismiss })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 177 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: FFlagEnableCountdownBadgeModule (upval), P0 (copy), FIntCommsFAELockTimestampModule (upval)
 		return if FFlagEnableCountdownBadgeModule and P0.countDownBadgeText then {
 			text = P0.countDownBadgeText,
 			deadlineUtcTimestamp = FIntCommsFAELockTimestampModule
 		} else nil
 	end, { P0.countDownBadgeText })
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 187 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: FFlagAddFriendsPageFAEUpsell (upval), P0 (copy), UpsellEntrySurfaceTypeModule (upval), UseLocalizationResult (copy), FFlagEnableAEGIS2CommsFAEUpsell (upval), ForceAegisPhase2Modal (upval), UseResult (copy)
 		return {
 			text = if FFlagAddFriendsPageFAEUpsell and P0.upsellEntrySurface == UpsellEntrySurfaceTypeModule.AddFriendsPage then UseLocalizationResult.Unlock elseif FFlagEnableAEGIS2CommsFAEUpsell and (ForceAegisPhase2Modal or P0.isPhase2) then if P0.isInExperience then UseLocalizationResult.Continue else UseLocalizationResult.UnlockChat else UseLocalizationResult.Continue,
@@ -117,7 +117,7 @@ return function(p1) --[[ Line: 64 ]]
 		UseResult,
 		if FFlagAddFriendsPageFAEUpsell then P0.upsellEntrySurface else nil
 	})
-	ReactModule.useEffect(function() --[[ Line: 211 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), P0 (copy)
 		if not UseRefResult.current and P0.onMounted then
 			P0.onMounted()

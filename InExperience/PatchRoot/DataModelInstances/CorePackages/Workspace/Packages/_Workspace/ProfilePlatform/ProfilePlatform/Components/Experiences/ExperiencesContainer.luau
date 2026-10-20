@@ -16,22 +16,22 @@ local MyRoduxNetworkingImplModule = require(ProfilePlatform.Networking.myRoduxNe
 local FFlagEnableCommunityProfileLoadingSkeletonsModule = require(ProfilePlatform.Flags.FFlagEnableCommunityProfileLoadingSkeletons)
 local t = {}
 
-return function(p1) --[[ Line: 38 | Named "ExperiencesContainer" ]]
+return function(p1)
 	-- upvalues: UseProfileJsonComponentModule (copy), EnumsModule (copy), ReactModule (copy), FFlagEnableCommunityProfileLoadingSkeletonsModule (copy), t (copy), CryoModule (copy), UseDispatchFunction (copy), NetworkingGamesModule (copy), FetchGameVotes (copy), MyRoduxNetworkingImplModule (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), ExperiencesSkeletonModule (copy), ExperiencesModule (copy)
 	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.Experiences)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(if FFlagEnableCommunityProfileLoadingSkeletonsModule then true else false)
 	local Experiences = UseProfileJsonComponentModuleResult.experiences or t
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 44 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CryoModule (upval), Experiences (copy)
-		return CryoModule.List.map(Experiences, function(p2, _): string --[[ Line: 45 ]]
+		return CryoModule.List.map(Experiences, function(p2, _): string
 			return (tostring(p2.universeId))
 		end)
 	end, { Experiences })
 	local UseDispatchResult = UseDispatchFunction()
-	ReactModule.useEffect(function() --[[ Line: 52 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: CryoModule (upval), UseMemoResult (copy), UseDispatchResult (copy), NetworkingGamesModule (upval), FFlagEnableCommunityProfileLoadingSkeletonsModule (upval), UseStateResult2 (copy), FetchGameVotes (upval), MyRoduxNetworkingImplModule (upval)
 		if not CryoModule.isEmpty(UseMemoResult) then
-			UseDispatchResult(NetworkingGamesModule.GetExperiencesDetails.API(UseMemoResult)):catch(function(_) --[[ Line: 55 ]] end):finally(function() --[[ Line: 58 ]]
+			UseDispatchResult(NetworkingGamesModule.GetExperiencesDetails.API(UseMemoResult)):catch(function(_) end):finally(function()
 				-- upvalues: FFlagEnableCommunityProfileLoadingSkeletonsModule (upval), UseStateResult2 (upval)
 				if FFlagEnableCommunityProfileLoadingSkeletonsModule then
 					UseStateResult2(false)
@@ -39,18 +39,18 @@ return function(p1) --[[ Line: 38 | Named "ExperiencesContainer" ]]
 			end)
 			
 			for _, value in UseMemoResult do
-				UseDispatchResult(FetchGameVotes.Fetch(MyRoduxNetworkingImplModule, value)):catch(function(_) --[[ Line: 64 ]] end)
+				UseDispatchResult(FetchGameVotes.Fetch(MyRoduxNetworkingImplModule, value)):catch(function(_) end)
 			end
 			return
 		elseif FFlagEnableCommunityProfileLoadingSkeletonsModule then
 			UseStateResult2(false)
 		end
 	end, { UseMemoResult })
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 74 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: GetDeepValueFunction (upval), t (upval)
 		return GetDeepValueFunction(p2, "ProfilePlatform.Games.byGameId") or t
 	end)
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 78 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), UseSelectorResult (copy)
 		local List = {}
 		

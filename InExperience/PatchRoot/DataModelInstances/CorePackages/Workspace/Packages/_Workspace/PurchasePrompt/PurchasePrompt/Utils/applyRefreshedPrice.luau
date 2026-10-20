@@ -2,7 +2,7 @@
 local RefreshExpectedPriceModule = require(PurchasePrompt.Actions.RefreshExpectedPrice)
 local SetProductPayloadModule = require(PurchasePrompt.Actions.SetProductPayload)
 
-return function(p1, ExpectedPrice) --[[ Line: 6 | Named "applyRefreshedPrice" ]]
+return function(p1, ExpectedPrice)
 	-- upvalues: RefreshExpectedPriceModule (copy), SetProductPayloadModule (copy)
 	p1:dispatch(RefreshExpectedPriceModule(ExpectedPrice))
 	local ProductPayload = p1:getState().productPayload

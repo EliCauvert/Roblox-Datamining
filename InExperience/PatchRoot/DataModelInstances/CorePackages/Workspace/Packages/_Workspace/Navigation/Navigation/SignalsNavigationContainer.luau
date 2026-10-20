@@ -4,10 +4,10 @@ local Context = require(Parent.RoactNavigation).Context
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local _ = require(script.Parent.createSignalsNavigationObject)
 
-return function(p1) --[[ Line: 15 | Named "SignalsNavigationContainer" ]]
+return function(p1)
 	-- upvalues: UseSignalStateFunction (copy), ReactModule (copy), Context (copy)
 	local UseSignalStateResult = UseSignalStateFunction(p1.navigation.getNavigation)
-	ReactModule.useEffect(function() --[[ Line: 19 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy)
 		p1.navigation.notifyEvents()
 	end)

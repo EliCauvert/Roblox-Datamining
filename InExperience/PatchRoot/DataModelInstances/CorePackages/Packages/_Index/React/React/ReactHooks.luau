@@ -6,7 +6,7 @@ local _ = require(Parent.Shared)
 local _ = require(Parent.Shared)
 local ReactCurrentDispatcher = require(Parent.Shared).ReactSharedInternals.ReactCurrentDispatcher
 
-local function _() --[[ Line: 46 | Named "resolveDispatcher" ]]
+local function _()
 	-- upvalues: ReactCurrentDispatcher (copy), ReactGlobalsModule (copy), Console (copy)
 	local Current = ReactCurrentDispatcher.current
 	
@@ -17,7 +17,7 @@ local function _() --[[ Line: 46 | Named "resolveDispatcher" ]]
 end
 
 return {
-	useContext = function(Consumer, p1, ...) --[[ Line: 76 ]]
+	useContext = function(Consumer, p1, ...)
 		-- upvalues: ReactCurrentDispatcher (copy), ReactGlobalsModule (copy), Console (copy), Array (copy)
 		local Current = ReactCurrentDispatcher.current
 		
@@ -40,7 +40,7 @@ return {
 		end
 		return Current.useContext(Consumer, p1)
 	end,
-	useState = function(p1, ...) --[[ Line: 122 ]]
+	useState = function(p1, ...)
 		-- upvalues: ReactCurrentDispatcher (copy), ReactGlobalsModule (copy), Console (copy)
 		local Current = ReactCurrentDispatcher.current
 		
@@ -49,7 +49,7 @@ return {
 		end
 		return Current.useState(p1, ...)
 	end,
-	useReducer = function(p1, p2, p3) --[[ Line: 141 ]]
+	useReducer = function(p1, p2, p3)
 		-- upvalues: ReactCurrentDispatcher (copy), ReactGlobalsModule (copy), Console (copy)
 		local Current = ReactCurrentDispatcher.current
 		
@@ -58,7 +58,7 @@ return {
 		end
 		return Current.useReducer(p1, p2, p3)
 	end,
-	useRef = function(p1) --[[ Line: 163 ]]
+	useRef = function(p1)
 		-- upvalues: ReactCurrentDispatcher (copy), ReactGlobalsModule (copy), Console (copy)
 		local Current = ReactCurrentDispatcher.current
 		
@@ -67,7 +67,7 @@ return {
 		end
 		return Current.useRef(p1)
 	end,
-	useBinding = function(p1) --[[ Line: 175 ]]
+	useBinding = function(p1)
 		-- upvalues: ReactCurrentDispatcher (copy), ReactGlobalsModule (copy), Console (copy)
 		local Current = ReactCurrentDispatcher.current
 		
@@ -76,7 +76,7 @@ return {
 		end
 		return Current.useBinding(p1)
 	end,
-	useEffect = function(p1, p2) --[[ Line: 195 ]]
+	useEffect = function(p1, p2)
 		-- upvalues: ReactCurrentDispatcher (copy), ReactGlobalsModule (copy), Console (copy)
 		local Current = ReactCurrentDispatcher.current
 		
@@ -85,7 +85,7 @@ return {
 		end
 		return Current.useEffect(p1, p2)
 	end,
-	useLayoutEffect = function(p1, p2) --[[ Line: 219 ]]
+	useLayoutEffect = function(p1, p2)
 		-- upvalues: ReactCurrentDispatcher (copy), ReactGlobalsModule (copy), Console (copy)
 		local Current = ReactCurrentDispatcher.current
 		
@@ -94,7 +94,7 @@ return {
 		end
 		return Current.useLayoutEffect(p1, p2)
 	end,
-	useCallback = function(p1, p2) --[[ Line: 235 ]]
+	useCallback = function(p1, p2)
 		-- upvalues: ReactCurrentDispatcher (copy), ReactGlobalsModule (copy), Console (copy)
 		local Current = ReactCurrentDispatcher.current
 		
@@ -103,7 +103,7 @@ return {
 		end
 		return Current.useCallback(p1, p2)
 	end,
-	useMemo = function(p1, p2) --[[ Line: 246 ]]
+	useMemo = function(p1, p2)
 		-- upvalues: ReactCurrentDispatcher (copy), ReactGlobalsModule (copy), Console (copy)
 		local Current = ReactCurrentDispatcher.current
 		
@@ -112,7 +112,7 @@ return {
 		end
 		return Current.useMemo(p1, p2)
 	end,
-	useImperativeHandle = function(p1, p2, p3) --[[ Line: 261 ]]
+	useImperativeHandle = function(p1, p2, p3)
 		-- upvalues: ReactCurrentDispatcher (copy), ReactGlobalsModule (copy), Console (copy)
 		local Current = ReactCurrentDispatcher.current
 		
@@ -121,7 +121,7 @@ return {
 		end
 		return Current.useImperativeHandle(p1, p2, p3)
 	end,
-	useDebugValue = function(p1, p2) --[[ Line: 279 ]]
+	useDebugValue = function(p1, p2)
 		-- upvalues: ReactGlobalsModule (copy), ReactCurrentDispatcher (copy), Console (copy)
 		if not ReactGlobalsModule.__DEV__ then
 			return nil
@@ -134,7 +134,7 @@ return {
 		return Current.useDebugValue(p1, p2)
 	end,
 	emptyObject = {},
-	useOpaqueIdentifier = function() --[[ Line: 304 ]]
+	useOpaqueIdentifier = function()
 		-- upvalues: ReactCurrentDispatcher (copy), ReactGlobalsModule (copy), Console (copy)
 		local Current = ReactCurrentDispatcher.current
 		
@@ -143,7 +143,7 @@ return {
 		end
 		return Current.useOpaqueIdentifier()
 	end,
-	useMutableSource = function(p1, p2, p3) --[[ Line: 309 ]]
+	useMutableSource = function(p1, p2, p3)
 		-- upvalues: ReactCurrentDispatcher (copy), ReactGlobalsModule (copy), Console (copy)
 		local Current = ReactCurrentDispatcher.current
 		

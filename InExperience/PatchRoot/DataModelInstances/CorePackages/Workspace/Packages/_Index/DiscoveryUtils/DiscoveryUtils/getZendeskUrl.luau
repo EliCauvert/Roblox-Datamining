@@ -21,7 +21,7 @@
 	nb_no = "no"
 }
 
-local function v1(Text: string) --[[ Line: 24 ]]
+local function v1(Text: string)
 	-- upvalues: config (copy)
 	if config[Text] then
 		return config[Text]
@@ -34,15 +34,15 @@ local function v1(Text: string) --[[ Line: 24 ]]
 	return if List[1] then List[1] else "en-us"
 end
 
-local function _(Text: string): boolean --[[ Line: 42 ]]
+local function _(Text: string): boolean
 	return Text and string.match(Text, "^[%w%-_]+$") ~= nil
 end
 
-local _ = function(Text: string): boolean --[[ Line: 47 ]]
+local _ = function(Text: string): boolean
 	return Text and string.match(Text, "^[a-zA-Z0-9]+$") ~= nil
 end
 
-return function(p1, Text: string, Text1: string): string --[[ Line: 52 | Named "getZendeskUrl" ]]
+return function(p1, Text: string, Text1: string): string
 	-- upvalues: v1 (copy)
 	local HasMatch: boolean = Text and string.match(Text, "^[%w%-_]+$") ~= nil
 	local HasMatch1: boolean = Text1 and string.match(Text1, "^[a-zA-Z0-9]+$") ~= nil

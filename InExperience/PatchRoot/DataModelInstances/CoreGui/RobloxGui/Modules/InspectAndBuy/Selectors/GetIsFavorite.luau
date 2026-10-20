@@ -2,7 +2,7 @@
 local IsDetailsItemPartOfBundleAndOffsaleModule = require(Parent.Selectors.IsDetailsItemPartOfBundleAndOffsale)
 local UtilityFunctionsModule = require(Parent.UtilityFunctions)
 
-return function(p1) --[[ Line: 8 ]]
+return function(p1)
 	-- upvalues: IsDetailsItemPartOfBundleAndOffsaleModule (copy), UtilityFunctionsModule (copy)
 	local AssetId = p1.detailsInformation.assetId
 	

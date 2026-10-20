@@ -9,12 +9,12 @@ local SurfaceContext = RobloxSubscriptionPurchaseAppModule.SurfaceContext
 local PurchaseClientSessionIdType = RobloxSubscriptionPurchaseAppModule.PurchaseClientSessionIdType
 local ProfileFrameAmpConstantsModule = require(AvatarExperienceProfilePictureEditor.Common.ProfileFrameAmpConstants)
 
-return function(p1) --[[ Line: 24 | Named "openProfileFramesSubscriptionUpsell" ]]
+return function(p1)
 	-- upvalues: SurfaceName (copy), SurfaceContext (copy), PurchaseClientSessionIdType (copy), OpenAmpWizardContainerFunction (copy), ProfileFrameAmpConstantsModule (copy), AccessResponseEnum (copy)
 	local OnGrantedFunction = p1.onGranted
 	local OnDeniedFunction = p1.onDenied
 	local PurchaseFlowUuid = p1.purchaseFlowUuid
-	p1.dispatch(OpenAmpWizardContainerFunction(ProfileFrameAmpConstantsModule.FEATURE_NAME, function(Granted, _) --[[ Line: 46 ]]
+	p1.dispatch(OpenAmpWizardContainerFunction(ProfileFrameAmpConstantsModule.FEATURE_NAME, function(Granted, _)
 		-- upvalues: AccessResponseEnum (upval), OnGrantedFunction (copy), OnDeniedFunction (copy)
 		if Granted == AccessResponseEnum.Granted then
 			if OnGrantedFunction then

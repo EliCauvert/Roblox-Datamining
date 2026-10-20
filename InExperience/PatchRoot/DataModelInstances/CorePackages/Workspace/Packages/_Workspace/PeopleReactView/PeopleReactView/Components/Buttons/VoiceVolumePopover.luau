@@ -26,13 +26,13 @@ local VOICEVOLUME = PeopleServiceModule.getService("Constants").VOICE_CHAT.VOICE
 local ENTRYPOINT = PeopleServiceModule.getService("Constants").ANALYTICS.ENTRY_POINT
 local Signal = require(Parent.Signals).createSignal(false)
 
-return function(p1) --[[ Line: 66 | Named "VoiceVolumePopover" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), PeopleServiceModule (copy), FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), ENTRYPOINT (copy), FFlagVoiceChatVolumePerUserDisableInteractionWhenMutedModule (copy), UseSignalStateFunction (copy), Signal (copy), UseScaledValueFunction (copy), FFlagPeoplePageFlipVolumePopoverToFitViewport (copy), VOICEVOLUME (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy), FFlagVoiceChatVolumePerUserMuteVolumeSyncModule (copy), FFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (copy), UseDismissWhenOutOfViewModule (copy), UsePopoverSideToFitScrollingViewportModule (copy), PopoverSide (copy), Popover (copy), View (copy), PopoverAlign (copy), Radius (copy), Text (copy), FoundationModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
 		voiceChatVolume = "CoreScripts.InGameMenu.VoiceChatVolumeLower"
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 72 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: PeopleServiceModule (upval)
 		return PeopleServiceModule.getService("PeopleVoiceChatStore")
 	end, {})
@@ -42,13 +42,13 @@ return function(p1) --[[ Line: 66 | Named "VoiceVolumePopover" ]]
 	local UseRefResult = nil
 	
 	if FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then
-		UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 81 ]]
+		UseMemoResult1 = ReactModule.useMemo(function()
 			-- upvalues: PeopleServiceModule (upval)
 			return PeopleServiceModule.getService("PeopleAnalyticsManager")
 		end, {})
 		EntryPoint = p1.entryPoint or ENTRYPOINT.PEOPLE_LIST
 		local GetPlayerIsLocalMutedFunction = UseMemoResult.getPlayerIsLocalMuted
-		Callback = ReactModule.useCallback(function() --[[ Line: 86 ]]
+		Callback = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy), GetPlayerIsLocalMutedFunction (copy)
 			return if p1.userId and GetPlayerIsLocalMutedFunction then GetPlayerIsLocalMutedFunction(p1.userId)(false) else false
 		end, { p1.userId, GetPlayerIsLocalMutedFunction })
@@ -59,18 +59,18 @@ return function(p1) --[[ Line: 66 | Named "VoiceVolumePopover" ]]
 	local UseScaledValueResult = UseScaledValueFunction(260)
 	local Size2800 = if FFlagPeoplePageFlipVolumePopoverToFitViewport then UseTokensResult.Size.Size_2800 else nil
 	local UseRefResult1 = ReactModule.useRef(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 109 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), UseMemoResult (copy), VOICEVOLUME (upval)
 		return if p1.userId and UseMemoResult.getPlayerVoiceVolume then UseMemoResult.getPlayerVoiceVolume(p1.userId) else VOICEVOLUME.DEFAULT
 	end, { p1.userId, UseMemoResult })
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UseResult())
-	ReactModule.useEffect(function() --[[ Line: 118 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseRefResult1 (copy), FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (upval), UseRefResult (ref), UseBindingResult2 (copy), UseResult (copy), UseMemoResult (copy)
 		if p1.isOpen and p1.userId then
 			UseBindingResult2(UseResult())
 			
 			if not UseMemoResult.subscribePlayerVoiceVolume then return end
-			return UseMemoResult.subscribePlayerVoiceVolume(p1.userId, function(p2) --[[ Line: 129 ]]
+			return UseMemoResult.subscribePlayerVoiceVolume(p1.userId, function(p2)
 				-- upvalues: UseRefResult1 (upval), UseBindingResult2 (upval)
 				if not UseRefResult1.current then
 					UseBindingResult2(p2)
@@ -84,7 +84,7 @@ return function(p1) --[[ Line: 66 | Named "VoiceVolumePopover" ]]
 			end
 		end
 	end, { p1.isOpen, p1.userId, UseResult, UseMemoResult })
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 138 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseBindingResult2 (copy), p1 (copy), UseMemoResult (copy)
 		UseBindingResult2(p2)
 		
@@ -92,7 +92,7 @@ return function(p1) --[[ Line: 66 | Named "VoiceVolumePopover" ]]
 			UseMemoResult.setPlayerVoiceVolume(p1.userId, p2)
 		end
 	end, { p1.userId, UseMemoResult })
-	local UseResult2 = if FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then ReactModule.useCallback(function() --[[ Line: 147 ]]
+	local UseResult2 = if FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then ReactModule.useCallback(function()
 		-- upvalues: UseRefResult1 (copy), UseMemoResult1 (ref), UseRefResult (ref), Callback (ref), EntryPoint (ref), UseResult (copy)
 		UseRefResult1.current = true
 		
@@ -110,11 +110,11 @@ return function(p1) --[[ Line: 66 | Named "VoiceVolumePopover" ]]
 		UseMemoResult1,
 		EntryPoint,
 		UseRefResult
-	}) else ReactModule.useCallback(function() --[[ Line: 159 ]]
+	}) else ReactModule.useCallback(function()
 		-- upvalues: UseRefResult1 (copy)
 		UseRefResult1.current = true
 	end, {})
-	local UseResult3 = if FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then ReactModule.useCallback(function() --[[ Line: 167 ]]
+	local UseResult3 = if FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then ReactModule.useCallback(function()
 		-- upvalues: UseRefResult1 (copy), UseMemoResult1 (ref), p1 (copy), UseRefResult (ref), EntryPoint (ref), UseResult (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (upval), RbxAnalyticsService (upval), UseMemoResult (copy), FFlagVoiceChatVolumePerUserMuteVolumeSyncModule (upval), UseBindingResult2 (copy)
 		UseRefResult1.current = false
 		
@@ -142,7 +142,7 @@ return function(p1) --[[ Line: 66 | Named "VoiceVolumePopover" ]]
 		end
 	end, {
 		UseResult, UseMemoResult1, p1.userId, EntryPoint, UseRefResult, UseMemoResult
-	}) else ReactModule.useCallback(function() --[[ Line: 211 ]]
+	}) else ReactModule.useCallback(function()
 		-- upvalues: UseRefResult1 (copy), FFlagVoiceChatVolumePerUserMuteVolumeSyncModule (upval), UseBindingResult2 (copy), UseResult (copy)
 		UseRefResult1.current = false
 		
@@ -152,7 +152,7 @@ return function(p1) --[[ Line: 66 | Named "VoiceVolumePopover" ]]
 			return
 		end
 	end, { UseResult })
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 220 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		if p1.onClose then
 			p1.onClose()
@@ -172,7 +172,7 @@ return function(p1) --[[ Line: 66 | Named "VoiceVolumePopover" ]]
 		UseRefResult3 = ReactModule.useRef(nil)
 		local UseStateResult
 		UseStateResult, UseStateResult2 = ReactModule.useState(0)
-		UseResult5 = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 245 ]]
+		UseResult5 = ReactModule.useCallback(function(Frame: Frame)
 			-- upvalues: UseRefResult3 (ref), UseStateResult2 (ref)
 			local UseRefResult = UseRefResult3
 			
@@ -188,15 +188,15 @@ return function(p1) --[[ Line: 66 | Named "VoiceVolumePopover" ]]
 				return
 			else
 				Callback(Frame.AbsoluteSize.Y)
-				UseRefResult.current = Frame:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 259 ]]
+				UseRefResult.current = Frame:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 					-- upvalues: Callback (copy), Frame (copy)
 					Callback(Frame.AbsoluteSize.Y)
 				end)
 			end
 		end, {})
-		ReactModule.useEffect(function() --[[ Line: 264 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRefResult3 (ref)
-			return function() --[[ Line: 265 ]]
+			return function()
 				-- upvalues: UseRefResult3 (upval)
 				local UseRefResult = UseRefResult3
 				

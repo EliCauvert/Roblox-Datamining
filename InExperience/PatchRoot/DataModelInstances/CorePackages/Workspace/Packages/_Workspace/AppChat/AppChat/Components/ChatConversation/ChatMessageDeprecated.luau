@@ -38,7 +38,7 @@ local config1 = {
 	component = require(script.Parent.HiddenMessage)
 }
 
-local function _(p1) --[[ Line: 52 | Named "getMessageComponent" ]]
+local function _(p1)
 	-- upvalues: MessageModelModule (copy), config1 (copy), config (copy)
 	return if p1 and p1.visibility == MessageModelModule.VisibilityTypes.Hidden then config1 else config[p1.messageType]
 end
@@ -51,8 +51,8 @@ ChatMessage.defaultProps = {
 		placeId = nil,
 		universeId = nil,
 		senderUserId = nil,
-		onDetailsOpened = function() --[[ Line: 70 ]] end,
-		openGameDetailsPage = function() --[[ Line: 71 ]] end
+		onDetailsOpened = function() end,
+		openGameDetailsPage = function() end
 	},
 	conversationId = nil,
 	BackgroundColor3 = nil,
@@ -77,7 +77,7 @@ ChatMessage.defaultProps = {
 	Transparency = nil,
 	wideMode = false,
 	viewProfileOnAvatarPressed = true,
-	closeKeyboard = function() --[[ Line: 96 ]] end,
+	closeKeyboard = function() end,
 	inputBoxRef = nil,
 	repliesTo = nil,
 	translatedText = nil,
@@ -88,14 +88,14 @@ ChatMessage.defaultProps = {
 	unknownUserText = "PLACEHOLDER unknown user"
 }
 
-function ChatMessage.init(p1) --[[ Line: 108 ]]
+function ChatMessage.init(p1)
 	-- upvalues: GetModeratedMaskTextModule (copy), TEXTBUBBLEXPADDING (copy), BUBBLEPADDING (copy), TEXTBUBBLEXWIDEADDITIONALPADDING (copy), FFlagAppChatEnableAutotranslationModule (copy), MemoizeFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy)
-	function p1.getModeratedText(p2) --[[ Line: 109 ]]
+	function p1.getModeratedText(p2)
 		-- upvalues: GetModeratedMaskTextModule (upval), p1 (copy)
 		return GetModeratedMaskTextModule(p1.props.messageId or p2)
 	end
 	
-	function p1.messageMaxWidth(WideMode, ParentWidth) --[[ Line: 113 ]]
+	function p1.messageMaxWidth(WideMode, ParentWidth)
 		-- upvalues: TEXTBUBBLEXPADDING (upval), BUBBLEPADDING (upval), TEXTBUBBLEXWIDEADDITIONALPADDING (upval)
 		local ScaledTEXTBUBBLEXPADDING = (TEXTBUBBLEXPADDING + BUBBLEPADDING) * 2
 		
@@ -106,21 +106,21 @@ function ChatMessage.init(p1) --[[ Line: 108 ]]
 	end
 	
 	if FFlagAppChatEnableAutotranslationModule then
-		p1.getBubbleMaxWidth = MemoizeFunction(function(X, p2, p3, p4, p5): number --[[ Line: 124 ]]
+		p1.getBubbleMaxWidth = MemoizeFunction(function(X, p2, p3, p4, p5): number
 			-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), p1 (copy), Text (upval), BUBBLEPADDING (upval)
 			return if p5 then math.max((if FoundationFontFaceMigration then GetTextSizeFunction(p2, p1.props.autotranslationOriginalTextFontSize, p4, Vector2.new(X, 10000)) else Text.GetTextBounds(p2, p4, p1.props.autotranslationOriginalTextFontSize, Vector2.new(X, 10000))).X, (if FoundationFontFaceMigration then GetTextSizeFunction(p5, p3, p4, Vector2.new(X, 10000)) else Text.GetTextBounds(p5, p4, p3, Vector2.new(X, 10000))).X) + BUBBLEPADDING * 2 else (if FoundationFontFaceMigration then GetTextSizeFunction(p2, p3, p4, Vector2.new(X, 10000)) else Text.GetTextBounds(p2, p4, p3, Vector2.new(X, 10000))).X + BUBBLEPADDING * 2
 		end)
 		
 		return
 	else
-		p1.getBubbleMaxWidth = MemoizeFunction(function(X, p2, p3, p4): number --[[ Line: 151 ]]
+		p1.getBubbleMaxWidth = MemoizeFunction(function(X, p2, p3, p4): number
 			-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Text (upval), BUBBLEPADDING (upval)
 			return (if FoundationFontFaceMigration then GetTextSizeFunction(p2, p3, p4, Vector2.new(X, 10000)) else Text.GetTextBounds(p2, p4, p3, Vector2.new(X, 10000))).X + BUBBLEPADDING * 2
 		end)
 	end
 end
 
-function ChatMessage.render(p1) --[[ Line: 160 ]]
+function ChatMessage.render(p1)
 	-- upvalues: MessageModelModule (copy), config1 (copy), config (copy), LoggerModule (copy), PruneConsecutiveNewLinesFunction (copy), WithStyleFunction (copy), RoactModule (copy), ChatMessageContainerModule (copy), CryoModule (copy), ReactModule (copy), FFlagAppChatConsoleFocusFixesModule (copy), FoundationFontFaceMigration (copy), BUBBLEPADDING (copy), FFlagAppChatEnableAutotranslationModule (copy)
 	local Props = p1.props
 	local Config = if Props and Props.visibility == MessageModelModule.VisibilityTypes.Hidden then config1 else config[Props.messageType]
@@ -131,7 +131,7 @@ function ChatMessage.render(p1) --[[ Line: 160 ]]
 		local ModeratedText = p1.props.moderated and p1.getModeratedText(PruneConsecutiveNewLinesResult) or PruneConsecutiveNewLinesResult
 		local Content = p1.props.repliesTo and (p1.props.repliesTo.messageType and p1.props.repliesTo.content)
 		
-		return WithStyleFunction(function(p2) --[[ Line: 179 ]]
+		return WithStyleFunction(function(p2)
 			-- upvalues: RoactModule (upval), ChatMessageContainerModule (upval), CryoModule (upval), p1 (copy), MessageMaxWidthResult (copy), Config (copy), ReactModule (upval), FFlagAppChatConsoleFocusFixesModule (upval), Content (copy), MessageModelModule (upval), config1 (upval), config (upval), FoundationFontFaceMigration (upval), BUBBLEPADDING (upval), FFlagAppChatEnableAutotranslationModule (upval), ModeratedText (copy)
 			local Body = p2.Font.Body
 			local ScaledBaseSize = p2.Font.BaseSize * Body.RelativeSize
@@ -143,7 +143,7 @@ function ChatMessage.render(p1) --[[ Line: 160 ]]
 				messageId = p1.props.messageId,
 				isPending = p1.props.isSending or (p1.props.moderated or p1.props.failed),
 				visibility = p1.props.visibility,
-				renderMessage = function(p3, p4) --[[ Line: 199 ]]
+				renderMessage = function(p3, p4)
 					-- upvalues: ReactModule (upval), CryoModule (upval), FFlagAppChatConsoleFocusFixesModule (upval), p1 (upval), Content (upval), RoactModule (upval), MessageModelModule (upval), config1 (upval), config (upval), FoundationFontFaceMigration (upval), p2 (copy), Body (copy), BUBBLEPADDING (upval), MessageMaxWidthResult (upval), ScaledBaseSize1 (copy), Config (upval), FFlagAppChatEnableAutotranslationModule (upval), ModeratedText (upval), ScaledBaseSize (copy)
 					local CreateElementFunction = ReactModule.createElement
 					local v1 = "ImageButton"
@@ -240,7 +240,7 @@ function ChatMessage.render(p1) --[[ Line: 160 ]]
 	end
 end
 
-return if FFlagAppChatEnableAutotranslationModule then function(p1) --[[ Line: 312 ]]
+return if FFlagAppChatEnableAutotranslationModule then function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ChatMessage (copy), CryoModule (copy)
 	return ReactModule.createElement(ChatMessage, CryoModule.Dictionary.union(p1, {
 		autotranslationOriginalTextFontSize = UseTokensFunction().Typography.BodySmall.FontSize

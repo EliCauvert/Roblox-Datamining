@@ -18,7 +18,7 @@ local config1 = {
 }
 
 return {
-	logAction = function(Action, p1) --[[ Line: 43 ]]
+	logAction = function(Action, p1)
 		-- upvalues: TelemetryService (ref), config (copy), config1 (copy)
 		local StandardizedFields = {
 			"addPlaceId",
@@ -44,7 +44,7 @@ return {
 		TelemetryService:LogEvent(config, config2)
 		TelemetryService:LogCounter(config1, config2, 1)
 	end,
-	_setServicesForTesting = function(p1) --[[ Line: 65 ]]
+	_setServicesForTesting = function(p1)
 		-- upvalues: TelemetryService (ref)
 		TelemetryService = p1
 	end

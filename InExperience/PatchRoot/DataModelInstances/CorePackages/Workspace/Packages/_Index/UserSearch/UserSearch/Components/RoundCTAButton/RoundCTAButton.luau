@@ -6,7 +6,7 @@ local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local _ = require(script.Parent.Parent.UserSearchTile.useSearchTileButtons)
 
-return function(p1) --[[ Line: 22 ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), ImageSetButton (copy), ImageSetLabel (copy)
 	local UseStyleResult = UseStyleFunction()
 	local SearchTileButtonProps = p1.searchTileButtonProps

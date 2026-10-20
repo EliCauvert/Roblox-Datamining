@@ -9,11 +9,11 @@ local StateLayer = {
 	affordance = FoundationModule.Enums.StateLayerAffordance.None
 }
 
-local function getHoverTransparency(p1): number --[[ Line: 17 ]]
+local function getHoverTransparency(p1): number
 	return if p1 then 0 else 0.2
 end
 
-return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 32 | Named "ColorItem" ]]
+return ReactModule.forwardRef(function(Frame, Ref)
 	-- upvalues: UseSemanticTokensModule (copy), UseHoverBindingModule (copy), ReactModule (copy), FoundationModule (copy), StateLayer (copy), getHoverTransparency (copy), ColorGradientCircle (copy)
 	local UseSemanticTokensModuleResult = UseSemanticTokensModule()
 	local UseHoverBindingModuleResult, UseHoverBindingModuleResult2 = UseHoverBindingModule()
@@ -34,7 +34,7 @@ return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 32 | Named "ColorI
 			tag = "padding-small radius-circle clip auto-xy",
 			Size = UDim2.fromOffset(Size, Size),
 			GroupTransparency = UseHoverBindingModuleResult:map(getHoverTransparency),
-			backgroundStyle = UseHoverBindingModuleResult:map(function(p1) --[[ Line: 51 ]]
+			backgroundStyle = UseHoverBindingModuleResult:map(function(p1)
 				-- upvalues: UseSemanticTokensModuleResult (copy), Frame (copy)
 				return if p1 then UseSemanticTokensModuleResult.hoverIconBackgroundStyle elseif Frame.isActive then UseSemanticTokensModuleResult.activeIconBackgroundStyle else {
 					Transparency = 1,

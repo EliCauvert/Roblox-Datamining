@@ -8,18 +8,18 @@ local InExperienceInterventionAnalyticsModule = require(InExperienceIntervention
 
 return {
 	configName = "ChatDialogNudge",
-	shouldTriggerVisualTreatment = function(p1): boolean --[[ Line: 14 ]]
+	shouldTriggerVisualTreatment = function(p1): boolean
 		-- upvalues: Constants (copy)
 		return p1.type == Constants.NotificationDialogType.ChatNudge and (p1.modalType == Constants.NotificationModalType.Dialog and p1.abuseVector == Constants.AbuseVectorType.ExperienceChat) and not p1.acknowledgeable
 	end,
-	shouldTriggerBehavioralTreatment = function(_): boolean --[[ Line: 20 ]]
+	shouldTriggerBehavioralTreatment = function(_): boolean
 		return false
 	end,
-	shouldTriggerEventReceived = function(p1): boolean --[[ Line: 23 ]]
+	shouldTriggerEventReceived = function(p1): boolean
 		-- upvalues: Constants (copy)
 		return p1.type == Constants.NotificationDialogType.ChatNudge and p1.modalType == Constants.NotificationModalType.Dialog and p1.abuseVector == Constants.AbuseVectorType.ExperienceChat
 	end,
-	onTriggerVisualTreatment = function(Callback: (any) -> (), Detail) --[[ Line: 28 ]]
+	onTriggerVisualTreatment = function(Callback: (any) -> (), Detail)
 		-- upvalues: Constants (copy), FFlagExpChatDictationStopOnSafetyIntervention (copy), ExperienceChatInterventionShownSignal (copy)
 		Callback({
 			isShown = true,
@@ -32,8 +32,8 @@ return {
 			ExperienceChatInterventionShownSignal:fire()
 		end
 	end,
-	onTriggerBehavioralTreatment = function(_) --[[ Line: 39 ]] end,
-	onTriggerEventReceived = function(p1) --[[ Line: 40 ]]
+	onTriggerBehavioralTreatment = function(_) end,
+	onTriggerEventReceived = function(p1)
 		-- upvalues: InExperienceInterventionAnalyticsModule (copy)
 		InExperienceInterventionAnalyticsModule.sendAnalyticsEvent(InExperienceInterventionAnalyticsModule.Constants.EventTypes.ModalMessageReceived, InExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Nudge, DateTime.now().UnixTimestampMillis, p1.decisionEventId, p1.evidence, p1.timeoutDurationSeconds)
 	end

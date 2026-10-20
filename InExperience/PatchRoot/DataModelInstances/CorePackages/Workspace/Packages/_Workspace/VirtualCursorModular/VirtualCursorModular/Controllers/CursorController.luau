@@ -8,7 +8,7 @@ local CursorController = {}
 CursorController.__index = CursorController
 local config = { Default = 2, Hover = 2, Pressed = 1.7, Arrow = 2 }
 
-function CursorController.new() --[[ Line: 43 ]]
+function CursorController.new()
 	-- upvalues: PropertiesModule (copy), CoreGui (copy), TweenService (copy), CursorController (copy)
 	local CursorContainer = Instance.new("ScreenGui")
 	CursorContainer.Enabled = false
@@ -42,7 +42,7 @@ function CursorController.new() --[[ Line: 43 ]]
 	}, CursorController))
 end
 
-function CursorController:Destroy() --[[ Line: 92 ]]
+function CursorController:Destroy()
 	self._cursorContainer:Destroy()
 	self._activeSelectionTweenIn:Destroy()
 	self._activeSelectionTweenOut:Destroy()
@@ -58,21 +58,21 @@ function CursorController:Destroy() --[[ Line: 92 ]]
 	end
 end
 
-function CursorController:SetCursorSize(p1) --[[ Line: 109 ]]
+function CursorController:SetCursorSize(p1)
 	-- upvalues: config (copy), PropertiesModule (copy)
 	local ScaledEntry = config[p1] * PropertiesModule.CursorRadius
 	self._cursor.Size = UDim2.fromOffset(ScaledEntry, ScaledEntry)
 end
 
-function CursorController:PlayTweenActivate() --[[ Line: 114 ]]
+function CursorController:PlayTweenActivate()
 	self._activeSelectionTweenIn:Play()
 end
 
-function CursorController:PlayTweenDefault() --[[ Line: 118 ]]
+function CursorController:PlayTweenDefault()
 	self._activeSelectionTweenOut:Play()
 end
 
-function CursorController:SetHighlight(p1) --[[ Line: 122 ]]
+function CursorController:SetHighlight(p1)
 	if p1 then
 		self._cursor.Image = "rbxasset://textures/ui/VirtualCursor/cursorHover.png"
 		
@@ -82,21 +82,21 @@ function CursorController:SetHighlight(p1) --[[ Line: 122 ]]
 	end
 end
 
-function CursorController:SetPosition(Vector) --[[ Line: 130 ]]
+function CursorController:SetPosition(Vector)
 	self._cursor.Position = UDim2.fromOffset(Vector.X, Vector.Y)
 end
 
-function CursorController:GetCursorScreenGuiOffset() --[[ Line: 134 ]]
+function CursorController:GetCursorScreenGuiOffset()
 	return self._cursorContainer.AbsolutePosition
 end
 
-function CursorController:TweenPosition(Vector) --[[ Line: 138 ]]
+function CursorController:TweenPosition(Vector)
 	-- upvalues: TweenService (copy)
 	self._activePreviewPositionTween = TweenService:Create(self._cursor, TweenInfo.new(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0), { Position = UDim2.fromOffset(Vector.X, Vector.Y) })
 	self._activePreviewPositionTween:Play()
 end
 
-function CursorController:TweenOpacity(Enabled) --[[ Line: 145 ]]
+function CursorController:TweenOpacity(Enabled)
 	-- upvalues: TweenService (copy)
 	local ActiveOpacityTweenCompletedConnection = self._activeOpacityTweenCompletedConnection
 	
@@ -105,7 +105,7 @@ function CursorController:TweenOpacity(Enabled) --[[ Line: 145 ]]
 		self._activeOpacityTweenCompletedConnection = nil
 	end
 	local Tween = TweenService:Create(self._cursor, TweenInfo.new(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0), { ImageTransparency = if Enabled then 0 else 1 })
-	self._activeOpacityTweenCompletedConnection = Tween.Completed:Connect(function() --[[ Line: 158 ]]
+	self._activeOpacityTweenCompletedConnection = Tween.Completed:Connect(function()
 		-- upvalues: self (copy), Enabled (copy)
 		self._cursor.Visible = Enabled
 		self._cursorContainer.Enabled = Enabled
@@ -113,7 +113,7 @@ function CursorController:TweenOpacity(Enabled) --[[ Line: 145 ]]
 	Tween:Play()
 end
 
-function CursorController:SetArrow(p1, p2) --[[ Line: 166 ]]
+function CursorController:SetArrow(p1, p2)
 	if p1 == -1 and p2 == 0 then
 		self._cursor.Rotation = 90
 	elseif p2 == 0 then
@@ -127,11 +127,11 @@ function CursorController:SetArrow(p1, p2) --[[ Line: 166 ]]
 	self._cursor.Image = "rbxasset://textures/ui/VirtualCursor/cursorArrow.png"
 end
 
-function CursorController:GetEnabled() --[[ Line: 182 ]]
+function CursorController:GetEnabled()
 	return self._enabled
 end
 
-function CursorController:Enable(p1) --[[ Line: 186 ]]
+function CursorController:Enable(p1)
 	-- upvalues: VRService (copy)
 	if not VRService.VREnabled then
 		local NoVREnabled = not VRService.VREnabled
@@ -146,7 +146,7 @@ function CursorController:Enable(p1) --[[ Line: 186 ]]
 	end
 end
 
-function CursorController:Disable() --[[ Line: 202 ]]
+function CursorController:Disable()
 	self:SetHighlight(false)
 	self:TweenOpacity(false)
 	self._enabled = false

@@ -4,7 +4,7 @@ local RequestMultiplePlaceInfos = require(PlaceInfoRodux.Actions).RequestMultipl
 local FailedToFetchMultiplePlaceInfos = require(PlaceInfoRodux.Actions).FailedToFetchMultiplePlaceInfos
 local ReceivedMultiplePlaceInfos = require(PlaceInfoRodux.Actions).ReceivedMultiplePlaceInfos
 
-return function(p1, p2) --[[ Line: 10 ]]
+return function(p1, p2)
 	-- upvalues: RequestMultiplePlaceInfos (copy), Immutable (copy), ReceivedMultiplePlaceInfos (copy), FailedToFetchMultiplePlaceInfos (copy)
 	local P0 = p1 or {}
 	

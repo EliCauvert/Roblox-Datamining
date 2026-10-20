@@ -11,7 +11,7 @@ local _ = require(Parent.Flags.GetFFlagEnableTopBarAnalytics)()
 local AnalyticsModule = {}
 AnalyticsModule.__index = AnalyticsModule
 
-function AnalyticsModule.new() --[[ Line: 42 ]]
+function AnalyticsModule.new()
 	-- upvalues: RbxAnalyticsService (copy), AnalyticsModule (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), CryoModule (copy), ConstantsModule (copy)
 	local self = setmetatable({
 		_target = "client",
@@ -26,14 +26,14 @@ function AnalyticsModule.new() --[[ Line: 42 ]]
 	if RbxAnalyticsServiceExposePlaySessionIdEngineFeature then
 		self._defaultProps.playsessionid = RbxAnalyticsService:GetPlaySessionId()
 	end
-	function self._sendEvent(DismissGamepadNavigationDialog, p1) --[[ Line: 59 ]]
+	function self._sendEvent(DismissGamepadNavigationDialog, p1)
 		-- upvalues: CryoModule (upval), self (copy), RbxAnalyticsService (upval)
 		RbxAnalyticsService:SendEventDeferred(self._target, self._context, DismissGamepadNavigationDialog, (CryoModule.Dictionary.join(self._defaultProps, p1 or {})))
 		
 		return nil
 	end
 	
-	function self._onButtonActivated(Button, p1) --[[ Line: 65 ]]
+	function self._onButtonActivated(Button, p1)
 		-- upvalues: self (copy), ConstantsModule (upval)
 		return self._sendEvent(ConstantsModule.Analytics.EventNameTopBarButtonActivated, {
 			button = Button,
@@ -44,37 +44,37 @@ function AnalyticsModule.new() --[[ Line: 42 ]]
 	return self
 end
 
-function AnalyticsModule:onChatButtonActivated(p1) --[[ Line: 75 ]]
+function AnalyticsModule:onChatButtonActivated(p1)
 	-- upvalues: ConstantsModule (copy)
 	return self._onButtonActivated(ConstantsModule.Analytics.ChatButtonName, p1)
 end
 
-function AnalyticsModule:onMoreMenuActivated() --[[ Line: 79 ]]
+function AnalyticsModule:onMoreMenuActivated()
 	-- upvalues: ConstantsModule (copy)
 	return self._onButtonActivated(ConstantsModule.Analytics.MoreMenuButtonName, true)
 end
 
-function AnalyticsModule:onInventoryActivated(p1) --[[ Line: 84 ]]
+function AnalyticsModule:onInventoryActivated(p1)
 	-- upvalues: ConstantsModule (copy)
 	return self._onButtonActivated(ConstantsModule.Analytics.InventoryButtonName, p1)
 end
 
-function AnalyticsModule:onLeaderboardActivated(p1) --[[ Line: 88 ]]
+function AnalyticsModule:onLeaderboardActivated(p1)
 	-- upvalues: ConstantsModule (copy)
 	return self._onButtonActivated(ConstantsModule.Analytics.LeaderboardButtonName, p1)
 end
 
-function AnalyticsModule:onEmotesActivated(p1) --[[ Line: 92 ]]
+function AnalyticsModule:onEmotesActivated(p1)
 	-- upvalues: ConstantsModule (copy)
 	return self._onButtonActivated(ConstantsModule.Analytics.EmotesButtonName, p1)
 end
 
-function AnalyticsModule:onShowGamepadNavigationDialog() --[[ Line: 96 ]]
+function AnalyticsModule:onShowGamepadNavigationDialog()
 	-- upvalues: ConstantsModule (copy)
 	return self._sendEvent(ConstantsModule.Analytics.ShowGamepadNavigationDialog)
 end
 
-function AnalyticsModule:onDismissGamepadNavigationDialog() --[[ Line: 100 ]]
+function AnalyticsModule:onDismissGamepadNavigationDialog()
 	-- upvalues: ConstantsModule (copy)
 	return self._sendEvent(ConstantsModule.Analytics.DismissGamepadNavigationDialog)
 end

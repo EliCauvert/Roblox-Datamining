@@ -18,7 +18,7 @@ local ServiceOverrideContextModule = require(Groups.Components.CoreUI.ServiceOve
 local _ = require(Groups.Common.Types)
 local THUMBNAILSIZE = require(Groups.Common.constants).THUMBNAIL_SIZE
 
-local function parseMembershipStatusFromActions(Actions) --[[ Line: 40 ]]
+local function parseMembershipStatusFromActions(Actions)
 	-- upvalues: EnumsModule (copy)
 	local Buttons = Actions.buttons or {}
 	local Type = nil
@@ -36,7 +36,7 @@ local function parseMembershipStatusFromActions(Actions) --[[ Line: 40 ]]
 	}
 end
 
-local function buildGroupJoinPromptData(p1) --[[ Line: 73 ]]
+local function buildGroupJoinPromptData(p1)
 	-- upvalues: parseMembershipStatusFromActions (copy)
 	if p1 then
 		local Components = p1.components or {}
@@ -61,7 +61,7 @@ local function buildGroupJoinPromptData(p1) --[[ Line: 73 ]]
 	end
 end
 
-return function(p1) --[[ Line: 99 ]]
+return function(p1)
 	-- upvalues: UseRoactServiceFunction (copy), RoactNetworking (copy), UseContextFunction (copy), ServiceOverrideContextModule (copy), UseLocalizationFunction (copy), FFlagAddCommunityDeactivatedToJoinPrompt (copy), ReactModule (copy), PostJoinGroupModule (copy), FetchGroupActionsModule (copy), parseMembershipStatusFromActions (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), THUMBNAILSIZE (copy), FetchGroupDetailsModule (copy), buildGroupJoinPromptData (copy), UseEventConnectionFunction (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
 	local UseContextResult = UseContextFunction(ServiceOverrideContextModule)
@@ -80,13 +80,13 @@ return function(p1) --[[ Line: 99 ]]
 	})
 	local UseRefResult = ReactModule.useRef(nil)
 	
-	local function _() --[[ Line: 129 | Named "closePrompt" ]]
+	local function _()
 		-- upvalues: UseRefResult (copy), p1 (copy)
 		UseRefResult.current = nil
 		p1.closePrompt()
 	end
 	
-	local UseResult = ReactModule.useCallback(function(GroupId, ErrorMessage, Title) --[[ Line: 136 ]]
+	local UseResult = ReactModule.useCallback(function(GroupId, ErrorMessage, Title)
 		-- upvalues: GroupService (copy), GuiService (copy), UseRefResult (copy), p1 (copy)
 		GroupService:PromptJoinCompleted(GroupId, false, Enum.GroupMembershipStatus.None, ErrorMessage)
 		GuiService:SendNotification({
@@ -96,19 +96,19 @@ return function(p1) --[[ Line: 99 ]]
 		UseRefResult.current = nil
 		p1.closePrompt()
 	end, { GroupService, GuiService, p1.closePrompt })
-	local UseResult1 = ReactModule.useCallback(function(p2, p3, p4, p5) --[[ Line: 154 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2, p3, p4, p5)
 		-- upvalues: UseLocalizationResult (copy), UseResult (copy)
 		UseResult(p2, p4, if p5 then UseLocalizationResult.notificationFailedToLoad elseif p3 then UseLocalizationResult.notificationFailedToJoin else UseLocalizationResult.notificationFailedToFollow)
 	end, { UseResult })
-	local UseResult2 = ReactModule.useCallback(function(GroupId, GroupJoinPromptData) --[[ Line: 169 ]]
+	local UseResult2 = ReactModule.useCallback(function(GroupId, GroupJoinPromptData)
 		-- upvalues: PostJoinGroupModule (upval), UseRoactServiceResult (copy), FetchGroupActionsModule (upval), UseResult1 (copy), parseMembershipStatusFromActions (upval), UseLocalizationResult (copy), GroupService (copy), UseRefResult (copy), p1 (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (upval), Constants (upval), THUMBNAILSIZE (upval), GuiService (copy)
-		return function() --[[ Line: 170 ]]
+		return function()
 			-- upvalues: GroupJoinPromptData (copy), PostJoinGroupModule (upval), UseRoactServiceResult (upval), GroupId (copy), FetchGroupActionsModule (upval), UseResult1 (upval), parseMembershipStatusFromActions (upval), UseLocalizationResult (upval), GroupService (upval), UseRefResult (upval), p1 (upval), GetRbxthumbWithTypeSizeAndOptionsFunction (upval), Constants (upval), THUMBNAILSIZE (upval), GuiService (upval)
 			local NoGroupJoinPromptData = not GroupJoinPromptData or GroupJoinPromptData.hasSocialModules == nil or GroupJoinPromptData.hasSocialModules
 			local GroupName = GroupJoinPromptData and GroupJoinPromptData.groupName or ""
-			PostJoinGroupModule(UseRoactServiceResult, GroupId):andThen(function() --[[ Line: 178 ]]
+			PostJoinGroupModule(UseRoactServiceResult, GroupId):andThen(function()
 				-- upvalues: FetchGroupActionsModule (upval), UseRoactServiceResult (upval), GroupId (upval), UseResult1 (upval), NoGroupJoinPromptData (copy), parseMembershipStatusFromActions (upval), UseLocalizationResult (upval), GroupService (upval), UseRefResult (upval), p1 (upval), GroupName (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (upval), Constants (upval), THUMBNAILSIZE (upval), GuiService (upval)
-				return FetchGroupActionsModule(UseRoactServiceResult, GroupId):andThen(function(Result) --[[ Line: 179 ]]
+				return FetchGroupActionsModule(UseRoactServiceResult, GroupId):andThen(function(Result)
 					-- upvalues: UseResult1 (upval), GroupId (upval), NoGroupJoinPromptData (upval), parseMembershipStatusFromActions (upval), UseLocalizationResult (upval), GroupService (upval), UseRefResult (upval), p1 (upval), GroupName (upval), GetRbxthumbWithTypeSizeAndOptionsFunction (upval), Constants (upval), THUMBNAILSIZE (upval), GuiService (upval)
 					if Result.errors then
 						UseResult1(GroupId, NoGroupJoinPromptData, "Network error on join prompt: Some group components failed to load", false)
@@ -138,11 +138,11 @@ return function(p1) --[[ Line: 99 ]]
 						Title = string.gsub(Text, "{groupName}", GroupName),
 						Icon = GetRbxthumbWithTypeSizeAndOptionsFunction(tostring(GroupId), Constants.RbxthumbTypes.GroupIcon, THUMBNAILSIZE)
 					})
-				end, function(p2) --[[ Line: 233 ]]
+				end, function(p2)
 					-- upvalues: UseResult1 (upval), GroupId (upval), NoGroupJoinPromptData (upval)
 					UseResult1(GroupId, NoGroupJoinPromptData, "Network error on join prompt: " .. p2.StatusMessage, false)
 				end)
-			end, function(p2) --[[ Line: 241 ]]
+			end, function(p2)
 				-- upvalues: UseResult1 (upval), GroupId (upval), NoGroupJoinPromptData (copy)
 				UseResult1(GroupId, NoGroupJoinPromptData, "Network error on join prompt: " .. p2.StatusMessage, false)
 			end)
@@ -151,9 +151,9 @@ return function(p1) --[[ Line: 99 ]]
 		UseRoactServiceResult, UseResult1, UseLocalizationResult, GroupService,
 		GuiService, p1.closePrompt
 	})
-	local UseResult3 = ReactModule.useCallback(function(GroupId, GroupJoinPromptData) --[[ Line: 253 ]]
+	local UseResult3 = ReactModule.useCallback(function(GroupId, GroupJoinPromptData)
 		-- upvalues: GroupService (copy), UseRefResult (copy), p1 (copy)
-		return function() --[[ Line: 254 ]]
+		return function()
 			-- upvalues: GroupJoinPromptData (copy), GroupService (upval), GroupId (copy), UseRefResult (upval), p1 (upval)
 			local v1: boolean = if GroupJoinPromptData and GroupJoinPromptData.isAlreadyMember then true else false
 			local v2: boolean = if GroupJoinPromptData and GroupJoinPromptData.hasPendingRequest then true else false
@@ -162,7 +162,7 @@ return function(p1) --[[ Line: 99 ]]
 			p1.closePrompt()
 		end
 	end, { GroupService, p1.closePrompt })
-	UseEventConnectionFunction(GroupService.ShowJoinPrompt, (ReactModule.useCallback(function(p2) --[[ Line: 282 ]]
+	UseEventConnectionFunction(GroupService.ShowJoinPrompt, (ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult (copy), UseResult2 (copy), UseResult3 (copy), p1 (copy), FetchGroupDetailsModule (upval), UseRoactServiceResult (copy), FFlagAddCommunityDeactivatedToJoinPrompt (upval), UseResult1 (copy), UseResult (copy), UseLocalizationResult (copy), buildGroupJoinPromptData (upval)
 		local Current = {}
 		UseRefResult.current = Current
@@ -170,7 +170,7 @@ return function(p1) --[[ Line: 99 ]]
 			onJoin = UseResult2(p2, nil),
 			onClose = UseResult3(p2, nil)
 		})
-		FetchGroupDetailsModule(UseRoactServiceResult, p2):andThen(function(Result) --[[ Line: 298 ]]
+		FetchGroupDetailsModule(UseRoactServiceResult, p2):andThen(function(Result)
 			-- upvalues: UseRefResult (upval), Current (copy), FFlagAddCommunityDeactivatedToJoinPrompt (upval), UseResult1 (upval), p2 (copy), UseResult (upval), UseLocalizationResult (upval), buildGroupJoinPromptData (upval), UseResult2 (upval), UseResult3 (upval), p1 (upval)
 			if UseRefResult.current ~= Current then return end
 			local Components = Result.components or {}
@@ -219,7 +219,7 @@ return function(p1) --[[ Line: 99 ]]
 				return
 			else
 			end
-		end, function(p3) --[[ Line: 357 ]]
+		end, function(p3)
 			-- upvalues: UseRefResult (upval), Current (copy), UseResult (upval), p2 (copy), UseLocalizationResult (upval)
 			if UseRefResult.current == Current then
 				UseResult(p2, "Network error on join prompt: " .. p3.StatusMessage, UseLocalizationResult.notificationFailedToLoad)

@@ -6,7 +6,7 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local GetScrollingFrameStoreModule = require(PeopleReactView.Stores.GetScrollingFrameStore)
 local PopoverSide = require(Parent.Foundation).Enums.PopoverSide
 
-local function choosePopoverSideForViewport(p1, p2, Y, NewY, AbsolutePositionY, p3, p4: number, p5: number) --[[ Line: 16 ]]
+local function choosePopoverSideForViewport(p1, p2, Y, NewY, AbsolutePositionY, p3, p4: number, p5: number)
 	-- upvalues: PopoverSide (copy)
 	if p4 <= 0 then
 		return p1
@@ -15,12 +15,12 @@ local function choosePopoverSideForViewport(p1, p2, Y, NewY, AbsolutePositionY, 
 	local YDelta = Y - AbsolutePositionY
 	local v2 = p3 - NewY
 	
-	local function _(Top) --[[ Line: 34 | Named "spaceFor" ]]
+	local function _(Top)
 		-- upvalues: PopoverSide (upval), YDelta (copy), v2 (copy)
 		return if Top == PopoverSide.Top then YDelta else v2
 	end
 	
-	local _ = function(Top): boolean --[[ Line: 38 | Named "fits" ]]
+	local _ = function(Top): boolean
 		-- upvalues: PopoverSide (upval), YDelta (copy), v2 (copy), v1 (copy)
 		return v1 <= (if Top == PopoverSide.Top then YDelta else v2)
 	end
@@ -36,18 +36,18 @@ local function choosePopoverSideForViewport(p1, p2, Y, NewY, AbsolutePositionY, 
 	end
 end
 
-return function(p1, p2, p3, p4, p5) --[[ Line: 55 | Named "usePopoverSideToFitScrollingViewport" ]]
+return function(p1, p2, p3, p4, p5)
 	-- upvalues: SignalsReactModule (copy), GetScrollingFrameStoreModule (copy), ReactModule (copy), choosePopoverSideForViewport (copy), SignalsModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetScrollingFrameStoreModule)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-	ReactModule.useEffect(function() --[[ Line: 65 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult2 (copy), p3 (copy), UseSignalStateResult (copy), choosePopoverSideForViewport (upval), p2 (copy), p4 (copy), p5 (copy), SignalsModule (upval)
 		if not p1 then
 			UseStateResult2(nil)
 			
 			return
 		end
-		local function updateSide() --[[ Line: 71 ]]
+		local function updateSide()
 			-- upvalues: p3 (upval), UseSignalStateResult (upval), UseStateResult2 (upval), choosePopoverSideForViewport (upval), p2 (upval), p4 (upval), p5 (upval)
 			local Current = p3.current
 			
@@ -59,7 +59,7 @@ return function(p1, p2, p3, p4, p5) --[[ Line: 55 | Named "usePopoverSideToFitSc
 				local Y = Current.AbsolutePosition.Y
 				local NewY = Y + Current.AbsoluteSize.Y
 				local NewAbsolutePositionY = AbsolutePositionY + AbsoluteSizeY
-				UseStateResult2(function(p6) --[[ Line: 87 ]]
+				UseStateResult2(function(p6)
 					-- upvalues: choosePopoverSideForViewport (upval), p2 (upval), Y (copy), NewY (copy), AbsolutePositionY (copy), NewAbsolutePositionY (copy), p4 (upval), p5 (upval)
 					return (choosePopoverSideForViewport(p2, p6, Y, NewY, AbsolutePositionY, NewAbsolutePositionY, p4, p5))
 				end)
@@ -68,7 +68,7 @@ return function(p1, p2, p3, p4, p5) --[[ Line: 55 | Named "usePopoverSideToFitSc
 			end
 		end
 		
-		local Effect = SignalsModule.createEffect(function(p6) --[[ Line: 101 ]]
+		local Effect = SignalsModule.createEffect(function(p6)
 			-- upvalues: UseSignalStateResult (upval), updateSide (copy)
 			local _ = UseSignalStateResult.getCanvasPositionY(p6)
 			local _ = UseSignalStateResult.getAbsolutePositionY(p6)
@@ -81,7 +81,7 @@ return function(p1, p2, p3, p4, p5) --[[ Line: 55 | Named "usePopoverSideToFitSc
 			table.insert(List, p3.current:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateSide))
 			table.insert(List, p3.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateSide))
 		end
-		return function() --[[ Line: 121 ]]
+		return function()
 			-- upvalues: Effect (copy), List (copy)
 			Effect()
 			

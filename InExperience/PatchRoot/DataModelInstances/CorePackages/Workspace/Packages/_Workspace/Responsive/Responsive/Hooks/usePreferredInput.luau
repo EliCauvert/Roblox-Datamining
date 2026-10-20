@@ -2,18 +2,18 @@
 local ReactModule = require(Responsive.Parent.React)
 local InputModeModule = require(Responsive.InputMode)
 
-return function() --[[ Line: 6 | Named "usePreferredInput" ]]
+return function()
 	-- upvalues: ReactModule (copy), InputModeModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(InputModeModule.preferred)
-	ReactModule.useEffect(function() --[[ Line: 8 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), InputModeModule (upval)
 		UseStateResult2(InputModeModule.preferred)
-		local ConnectResult = InputModeModule.connect(function() --[[ Line: 10 ]]
+		local ConnectResult = InputModeModule.connect(function()
 			-- upvalues: UseStateResult2 (upval), InputModeModule (upval)
 			UseStateResult2(InputModeModule.preferred)
 		end)
 		
-		return function() --[[ Line: 13 ]]
+		return function()
 			-- upvalues: ConnectResult (copy)
 			ConnectResult:disconnect()
 		end

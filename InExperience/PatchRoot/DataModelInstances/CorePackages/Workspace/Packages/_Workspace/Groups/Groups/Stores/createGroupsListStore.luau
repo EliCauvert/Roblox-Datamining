@@ -11,7 +11,7 @@ local config = {
 	canCreateGroup = true
 }
 
-local function translateResultToGroup(p1, p2) --[[ Line: 38 ]]
+local function translateResultToGroup(p1, p2)
 	local Group = p1.group or {}
 	local Role = p1.role or {}
 	local Owner = Group.owner
@@ -32,7 +32,7 @@ local function translateResultToGroup(p1, p2) --[[ Line: 38 ]]
 	}
 end
 
-local function compareNames(Text: string, Text1: string): boolean --[[ Line: 62 ]]
+local function compareNames(Text: string, Text1: string): boolean
 	local Lowered = string.lower(Text)
 	local Lowered1 = string.lower(Text1)
 	local Segment = string.sub(Lowered, 1, 1)
@@ -43,10 +43,10 @@ local function compareNames(Text: string, Text1: string): boolean --[[ Line: 62 
 	return not IsSegmentBelow and IsSegmentBelow1 or (not IsSegmentBelow or IsSegmentBelow1) and Lowered < Lowered1
 end
 
-local function _(Tbl) --[[ Line: 82 | Named "sortGroups" ]]
+local function _(Tbl)
 	-- upvalues: compareNames (copy)
 	local Copy = table.clone(Tbl)
-	table.sort(Copy, function(A, B) --[[ Line: 84 ]]
+	table.sort(Copy, function(A, B)
 		-- upvalues: compareNames (upval)
 		local IsOwner = A.isOwner or false
 		local IsOwner1 = B.isOwner or false
@@ -59,7 +59,7 @@ local function _(Tbl) --[[ Line: 82 | Named "sortGroups" ]]
 	return Copy
 end
 
-local function getVisibleGroups(MapResult, p1) --[[ Line: 107 ]]
+local function getVisibleGroups(MapResult, p1)
 	if not p1 or not p1.groups then
 		return {}
 	end
@@ -82,7 +82,7 @@ local function getVisibleGroups(MapResult, p1) --[[ Line: 107 ]]
 	return List
 end
 
-local function movePrimaryGroupToFront(List) --[[ Line: 133 ]]
+local function movePrimaryGroupToFront(List)
 	local v1 = nil
 	
 	for i, value in ipairs(List) do
@@ -105,7 +105,7 @@ local function movePrimaryGroupToFront(List) --[[ Line: 133 ]]
 	return List1
 end
 
-local _ = function(p2): boolean --[[ Line: 159 | Named "deriveCanCreateGroup" ]]
+local _ = function(p2): boolean
 	if p2 then
 		local GroupLimit = p2.groupLimit
 		local CurrentGroupCount = p2.currentGroupCount
@@ -116,7 +116,7 @@ local _ = function(p2): boolean --[[ Line: 159 | Named "deriveCanCreateGroup" ]]
 	end
 end
 
-local function collectGroupIds(List) --[[ Line: 171 ]]
+local function collectGroupIds(List)
 	if not List then
 		return {}
 	end
@@ -130,13 +130,13 @@ local function collectGroupIds(List) --[[ Line: 171 ]]
 	return Ids
 end
 
-return function() --[[ Line: 184 | Named "createGroupsListStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy), config (copy), GroupsWebApiModule (copy), collectGroupIds (copy), CryoModule (copy), translateResultToGroup (copy), getVisibleGroups (copy), compareNames (copy), movePrimaryGroupToFront (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(config)
 	local Effects = {}
 	local List = {}
 	
-	local function cleanup() --[[ Line: 190 ]]
+	local function cleanup()
 		-- upvalues: Effects (ref), List (ref)
 		for _, effect in Effects do
 			effect()
@@ -150,7 +150,7 @@ return function() --[[ Line: 184 | Named "createGroupsListStore" ]]
 	
 	return {
 		getState = Signal,
-		fetchGroups = function(p2) --[[ Line: 201 ]]
+		fetchGroups = function(p2)
 			-- upvalues: cleanup (copy), Signal2 (copy), GroupsWebApiModule (upval), List (ref), SignalsModule (upval), collectGroupIds (upval), CryoModule (upval), translateResultToGroup (upval), getVisibleGroups (upval), compareNames (upval), movePrimaryGroupToFront (upval), Effects (ref)
 			cleanup()
 			Signal2({
@@ -164,7 +164,7 @@ return function() --[[ Line: 184 | Named "createGroupsListStore" ]]
 			table.insert(List, UserGroupsWithRoles2)
 			table.insert(List, GroupsMetadata2)
 			local Flag = false
-			table.insert(Effects, (SignalsModule.createEffect(function(p3) --[[ Line: 220 ]]
+			table.insert(Effects, (SignalsModule.createEffect(function(p3)
 				-- upvalues: Flag (ref), UserGroupsWithRoles (copy), Signal2 (upval), collectGroupIds (upval), GroupsWebApiModule (upval), List (upval), SignalsModule (upval), GroupsMetadata (copy), CryoModule (upval), translateResultToGroup (upval), p2 (copy), getVisibleGroups (upval), compareNames (upval), movePrimaryGroupToFront (upval), Effects (upval)
 				if Flag then return end
 				local UserGroupsWithRolesResult = UserGroupsWithRoles(p3)
@@ -196,7 +196,7 @@ return function() --[[ Line: 184 | Named "createGroupsListStore" ]]
 				else
 					local GroupPolicies, GroupPolicies2 = GroupsWebApiModule.GetGroupPolicies((collectGroupIds(Data)))
 					table.insert(List, GroupPolicies2)
-					table.insert(Effects, (SignalsModule.createEffect(function(p4) --[[ Line: 260 ]]
+					table.insert(Effects, (SignalsModule.createEffect(function(p4)
 						-- upvalues: Flag (upval), GroupPolicies (copy), GroupsMetadata (upval), CryoModule (upval), Data (copy), translateResultToGroup (upval), p2 (upval), getVisibleGroups (upval), compareNames (upval), Signal2 (upval), movePrimaryGroupToFront (upval)
 						if Flag then return end
 						local GroupPoliciesResult = GroupPolicies(p4)
@@ -206,12 +206,12 @@ return function() --[[ Line: 184 | Named "createGroupsListStore" ]]
 						local Data1 = if GroupsMetadataResult.status == "Success" then GroupsMetadataResult.data else nil
 						Flag = true
 						local Data2 = if GroupPoliciesResult.status == "Success" then GroupPoliciesResult.data else nil
-						local MapResult = CryoModule.List.map(Data, function(p5) --[[ Line: 278 ]]
+						local MapResult = CryoModule.List.map(Data, function(p5)
 							-- upvalues: translateResultToGroup (upval), p2 (upval)
 							return (translateResultToGroup(p5, p2))
 						end)
 						local Copy = table.clone(if Data2 then getVisibleGroups(MapResult, Data2) else {})
-						table.sort(Copy, function(A, B) --[[ Line: 84 ]]
+						table.sort(Copy, function(A, B)
 							-- upvalues: compareNames (upval)
 							local IsOwner = A.isOwner or false
 							local IsOwner1 = B.isOwner or false
@@ -258,7 +258,7 @@ return function() --[[ Line: 184 | Named "createGroupsListStore" ]]
 				end
 			end)))
 		end,
-		reset = function() --[[ Line: 311 ]]
+		reset = function()
 			-- upvalues: cleanup (copy), Signal2 (copy), config (upval)
 			cleanup()
 			Signal2(config)

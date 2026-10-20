@@ -2,7 +2,7 @@
 local Rodux = DependenciesModule.Rodux
 local RoduxNetworking = DependenciesModule.RoduxNetworking
 
-return function() --[[ Line: 7 ]]
+return function()
 	-- upvalues: Rodux (copy), RoduxNetworking (copy)
 	return Rodux.combineReducers({
 		Friends = require(script.Friends)(),

@@ -8,13 +8,13 @@ local UseRecommendedEmotesModule = require(AvatarExperienceProfilePictureEditor.
 local TextKeysModule = require(AvatarExperienceProfilePictureEditor.Common.TextKeys)
 local UseEditProfileImageActionsFunction = require(AvatarExperienceProfilePictureEditor.Context.EditProfileImageActionsContext).useEditProfileImageActions
 
-return function(p1) --[[ Line: 35 | Named "useEditProfileImageEmotes" ]]
+return function(p1)
 	-- upvalues: UseEditProfileImageActionsFunction (copy), UseOwnedEmotesModule (copy), UseRecommendedEmotesModule (copy), ReactModule (copy), UseRealtimeEventFunction (copy), LocalizationModule (copy), TextKeysModule (copy)
 	local UseEditProfileImageActionsResult = UseEditProfileImageActionsFunction()
 	local UseOwnedEmotesModuleResult = UseOwnedEmotesModule()
 	local EmoteItems = UseOwnedEmotesModuleResult.emoteItems
 	local RecommendedEmotes = UseRecommendedEmotesModule().recommendedEmotes
-	local UseResult = ReactModule.useCallback(function(Id) --[[ Line: 43 ]]
+	local UseResult = ReactModule.useCallback(function(Id)
 		-- upvalues: RecommendedEmotes (copy), UseOwnedEmotesModuleResult (copy)
 		local Label = nil
 		
@@ -29,13 +29,13 @@ return function(p1) --[[ Line: 35 | Named "useEditProfileImageEmotes" ]]
 		RecommendedEmotes,
 		UseOwnedEmotesModuleResult.markEmoteOwned
 	})
-	UseRealtimeEventFunction("AvatarAssetOwnershipNotifications", "Grant", function(p2) --[[ Line: 60 ]]
+	UseRealtimeEventFunction("AvatarAssetOwnershipNotifications", "Grant", function(p2)
 		-- upvalues: UseResult (copy)
 		if tostring(p2.AssetTypeId) == tostring(Enum.AvatarAssetType.EmoteAnimation.Value) then
 			UseResult((tostring(p2.AssetId)))
 		end
 	end, { UseResult })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 66 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: EmoteItems (copy)
 		local t = {}
 		
@@ -44,7 +44,7 @@ return function(p1) --[[ Line: 35 | Named "useEditProfileImageEmotes" ]]
 		end
 		return t
 	end, { EmoteItems })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 73 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: RecommendedEmotes (copy)
 		local t = {}
 		
@@ -55,7 +55,7 @@ return function(p1) --[[ Line: 35 | Named "useEditProfileImageEmotes" ]]
 	end, { RecommendedEmotes })
 	local SelectedEmoteId = p1.selectedEmoteId
 	local IsUseMemoResultEntry: boolean = if SelectedEmoteId then UseMemoResult[SelectedEmoteId] ~= true and UseMemoResult1[SelectedEmoteId] == true else false
-	ReactModule.useEffect(function() --[[ Line: 85 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SelectedEmoteId (copy), IsUseMemoResultEntry (copy), UseEditProfileImageActionsResult (copy)
 		if SelectedEmoteId and IsUseMemoResultEntry then
 			UseEditProfileImageActionsResult.onPrepareRecommendedEmotePurchase(SelectedEmoteId)

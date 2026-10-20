@@ -3,7 +3,7 @@ local FoundationModule = require(Parent.Foundation)
 local RoactModule = require(Parent.Roact)
 local BackgroundFill = RoactModule.PureComponent:extend("BackgroundFill")
 
-function BackgroundFill.render(p1) --[[ Line: 8 ]]
+function BackgroundFill.render(p1)
 	-- upvalues: RoactModule (copy), FoundationModule (copy)
 	return RoactModule.createElement(FoundationModule.Image, {
 		BorderSizePixel = 0,

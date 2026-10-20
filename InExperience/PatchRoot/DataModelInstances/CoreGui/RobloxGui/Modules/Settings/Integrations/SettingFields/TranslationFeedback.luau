@@ -8,10 +8,10 @@ local SettingEnum = SettingsServiceModule.SettingEnum
 local IsEnabled = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.TenFootInterface):IsEnabled()
 local LAYOUTORDER = require(script:FindFirstAncestor("Settings").Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER
 
-local function _() --[[ Line: 24 | Named "TranslationFeedbackValue" ]]
+local function _()
 	-- upvalues: ValueChangedSignal (copy), ExperienceStateCaptureService (copy), SafetyService (copy)
 	local NewValueChangedSignal = ValueChangedSignal.new()
-	NewValueChangedSignal:connect(function() --[[ Line: 27 ]]
+	NewValueChangedSignal:connect(function()
 		-- upvalues: ExperienceStateCaptureService (upval), SafetyService (upval)
 		if game:GetEngineFeature("ExperienceStateCaptureMinMemEnabled") and not ExperienceStateCaptureService:CanEnterCaptureMode() then return end
 		local SettingsHubModule = require(script.Parent.Parent.Parent.SettingsHub)
@@ -30,7 +30,7 @@ local function _() --[[ Line: 24 | Named "TranslationFeedbackValue" ]]
 	return NewValueChangedSignal
 end
 
-local _ = function() --[[ Line: 53 | Named "TranslationFeedbackAvailability" ]]
+local _ = function()
 	-- upvalues: AvailabilitySignal (copy), RunService (copy), IsEnabled (copy)
 	local NewAvailabilitySignal = AvailabilitySignal.new(true)
 	
@@ -41,7 +41,7 @@ local _ = function() --[[ Line: 53 | Named "TranslationFeedbackAvailability" ]]
 end
 
 local NewValueChangedSignal = ValueChangedSignal.new()
-NewValueChangedSignal:connect(function() --[[ Line: 27 ]]
+NewValueChangedSignal:connect(function()
 	-- upvalues: ExperienceStateCaptureService (copy), SafetyService (copy)
 	if game:GetEngineFeature("ExperienceStateCaptureMinMemEnabled") and not ExperienceStateCaptureService:CanEnterCaptureMode() then return end
 	local SettingsHubModule = require(script.Parent.Parent.Parent.SettingsHub)

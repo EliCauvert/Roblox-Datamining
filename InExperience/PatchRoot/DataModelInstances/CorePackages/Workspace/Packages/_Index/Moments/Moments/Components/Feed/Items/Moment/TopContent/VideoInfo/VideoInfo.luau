@@ -16,7 +16,7 @@ local View = require(Parent.Foundation).View
 local GetMomentsCapabilitiesFunction = MomentsCommonModule.Stores.GetMomentsCapabilities
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
-return ReactModule.memo(function(Frame) --[[ Line: 46 | Named "VideoInfo" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: MomentContextModule (copy), UseSignalStateFunction (copy), FFlagMomentsServeEDPVideos (copy), FFlagMomentsEngagementMetricsFeature (copy), GetMomentsCapabilitiesFunction (copy), UseMomentsSessionFunction (copy), ReactModule (copy), DebugInfoModule (copy), CreatorAttributionModule (copy), DescriptionModule (copy), ReactionsModule (copy), StatusChipModule (copy), View (copy)
 	local IsExperience = UseSignalStateFunction(MomentContextModule.useMoment().store.getData).kind == "experience"
 	local IsEdpVideo = if FFlagMomentsServeEDPVideos then Frame.moment ~= nil and Frame.moment.entityType == "edpVideo" else nil

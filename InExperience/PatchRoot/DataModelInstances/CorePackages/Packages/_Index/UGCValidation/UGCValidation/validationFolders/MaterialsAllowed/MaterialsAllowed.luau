@@ -4,7 +4,7 @@ local _ = require(Parent.util.Types)
 local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
-local function buildAcceptedMaterialList(): string --[[ Line: 22 ]]
+local function buildAcceptedMaterialList(): string
 	-- upvalues: ConstantsModule (copy)
 	local List = {}
 	
@@ -24,7 +24,7 @@ return {
 	},
 	requiredData = { ValidationEnumsModule.SharedDataMember.rootInstance },
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 30 ]]
+	run = function(p1, p2)
 		-- upvalues: ConstantsModule (copy), buildAcceptedMaterialList (copy), ErrorSourceStringsModule (copy)
 		local RootInstance = p2.rootInstance
 		local Descendants = RootInstance:GetDescendants()

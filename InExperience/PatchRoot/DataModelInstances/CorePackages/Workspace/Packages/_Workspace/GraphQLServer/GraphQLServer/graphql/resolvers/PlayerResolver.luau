@@ -4,7 +4,7 @@ local _ = require(script.Parent.Parent.generatedTypes)
 return {
 	default = {
 		Player = {
-			avatarHeadshot = function(p1, _, p2, _) --[[ Line: 9 ]]
+			avatarHeadshot = function(p1, _, p2, _)
 				-- upvalues: FindAvatarHeadshotByIdFunction (copy)
 				return FindAvatarHeadshotByIdFunction(p1.id, p2.fetchImpl)
 			end

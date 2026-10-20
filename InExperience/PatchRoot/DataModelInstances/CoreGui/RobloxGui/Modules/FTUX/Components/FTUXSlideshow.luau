@@ -10,7 +10,7 @@ local DescriptionModule = require(Parent.Components.Slideshow.Description)
 local EndItemModule = require(Parent.Components.Slideshow.EndItem)
 local EventHandlerModule = require(Parent.Events.EventHandler)
 
-return function(p1) --[[ Line: 24 | Named "FTUXSlideshow" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FTUXSlideshowDataModule (copy), FTUXConstantsModule (copy), EventHandlerModule (copy), HeaderModule (copy), TitleModule (copy), DescriptionModule (copy), StepperModule (copy), EndItemModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(1)
 	local Platform = p1.platform
@@ -21,15 +21,15 @@ return function(p1) --[[ Line: 24 | Named "FTUXSlideshow" ]]
 	local FOOTERHEIGHTRATIO = PanelConstants.FOOTER_HEIGHT_RATIO
 	local CONTENTPADDINGRatio = PanelConstants.CONTENT_PADDING / PanelConstants.SLIDESHOW_FRAME_WIDTH
 	local XScale = 1 - 2 * CONTENTPADDINGRatio
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 37 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
 		UseStateResult2(UseStateResult + 1)
 	end, { UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 41 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: EventHandlerModule (upval), Platform (copy), UseStateResult (copy), UseResult (copy)
 		EventHandlerModule.StartEvents(Platform, UseStateResult, UseResult)
 		
-		return function() --[[ Line: 44 ]]
+		return function()
 			-- upvalues: EventHandlerModule (upval), Platform (upval), UseStateResult (upval)
 			EventHandlerModule.StopEvents(Platform, UseStateResult)
 		end

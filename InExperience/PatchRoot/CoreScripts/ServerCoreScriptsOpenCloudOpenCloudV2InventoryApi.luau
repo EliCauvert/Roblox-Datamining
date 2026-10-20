@@ -4,7 +4,7 @@ local OpenCloudService = game:GetService("OpenCloudService")
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 
-function returnInvalidArgumentError(Message) --[[ Line: 23 ]]
+function returnInvalidArgumentError(Message)
 	-- upvalues: HttpService (copy)
 	return {
 		StatusCode = 400,
@@ -12,7 +12,7 @@ function returnInvalidArgumentError(Message) --[[ Line: 23 ]]
 	}
 end
 
-function verifyPlayerOnServer(Player) --[[ Line: 33 ]]
+function verifyPlayerOnServer(Player)
 	-- upvalues: Players (copy)
 	local VerifyPlayerResult = verifyPlayer(Player)
 	
@@ -27,24 +27,24 @@ function verifyPlayerOnServer(Player) --[[ Line: 33 ]]
 	return returnInvalidArgumentError("Player not found on server.")
 end
 
-function verifyPlayer(Player: Player) --[[ Line: 49 ]]
+function verifyPlayer(Player: Player)
 	return if typeof(Player) == "Instance" and Player.ClassName == "Player" then nil else returnInvalidArgumentError("user argument not a Player instance.")
 end
 
-function verifyString(p1) --[[ Line: 56 ]]
+function verifyString(p1)
 	return if typeof(p1) == "string" then nil else returnInvalidArgumentError("Argument not a string.")
 end
 
-function verifyNumber(p1) --[[ Line: 63 ]]
+function verifyNumber(p1)
 	return if typeof(p1) == "number" then nil else returnInvalidArgumentError("Argument not a number.")
 end
 
-function getUrlPrefix(): string --[[ Line: 70 ]]
+function getUrlPrefix(): string
 	-- upvalues: RunService (copy)
 	return if RunService:IsStudio() then "user" else "rcc"
 end
 
-function createListInventoryItemsUrl(p1, p2, p3, p4): string --[[ Line: 77 ]]
+function createListInventoryItemsUrl(p1, p2, p3, p4): string
 	-- upvalues: ContentProvider (copy)
 	local Formatted = string.format("%s%s/cloud/v2/users/%d/inventory-items", string.gsub(string.gsub(ContentProvider.BaseUrl:lower(), "http:", "https:"), "www", "apis"), getUrlPrefix(), p1)
 	
@@ -65,7 +65,7 @@ function createListInventoryItemsUrl(p1, p2, p3, p4): string --[[ Line: 77 ]]
 	return (string.format("%s?%s", Formatted, table.concat(List, "&")))
 end
 
-function listInventoryItems(p1) --[[ Line: 102 ]]
+function listInventoryItems(p1)
 	-- upvalues: OpenCloudService (copy)
 	if p1.user == nil then
 		return returnInvalidArgumentError("user argument was not provided.")

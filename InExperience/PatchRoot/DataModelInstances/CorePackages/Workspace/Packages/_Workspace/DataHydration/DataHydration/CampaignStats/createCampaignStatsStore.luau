@@ -6,7 +6,7 @@ local _ = require(DataHydration.DataHydrationTypes)
 local FetchCampaignStatsModule = require(script.Parent.fetchCampaignStats)
 local _ = require(script.Parent.CampaignStatsTypes)
 
-return function(p1) --[[ Line: 32 | Named "createCampaignStatsStore" ]]
+return function(p1)
 	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), FetchCampaignStatsModule (copy)
 	local P0 = p1 or {}
 	local config = {
@@ -19,30 +19,30 @@ return function(p1) --[[ Line: 32 | Named "createCampaignStatsStore" ]]
 		supportsMultiGet = false,
 		replaceItems = true,
 		cache = DataCacheModule,
-		fetchFn = function(p2, _) --[[ Line: 46 ]]
+		fetchFn = function(p2, _)
 			-- upvalues: FetchCampaignStatsModule (upval), config (copy)
 			return FetchCampaignStatsModule.fetchCampaignStats(tonumber(p2), config)
 		end
 	})
 	
 	return {
-		getCampaignStats = function(p2) --[[ Line: 56 ]]
+		getCampaignStats = function(p2)
 			-- upvalues: DataResolverModule (copy)
 			return DataResolverModule.getCachedItem((tostring(p2)))
 		end,
-		fetchCampaignStats = function(Number) --[[ Line: 59 ]]
+		fetchCampaignStats = function(Number)
 			-- upvalues: DataResolverModule (copy)
 			return DataResolverModule.fetchItem((tostring(Number)))
 		end,
-		getAndFetchCampaignStats = function(p2, p3) --[[ Line: 62 ]]
+		getAndFetchCampaignStats = function(p2, p3)
 			-- upvalues: DataResolverModule (copy)
 			return DataResolverModule.getAndFetchItem(tostring(p2), p3)
 		end,
-		isCampaignStatsRequestInQueueOrInFlight = function(p2) --[[ Line: 65 ]]
+		isCampaignStatsRequestInQueueOrInFlight = function(p2)
 			-- upvalues: DataResolverModule (copy)
 			return DataResolverModule.isRequestInQueueOrInFlight((tostring(p2)))
 		end,
-		updateCampaignStats = function(p2, ByCampaign) --[[ Line: 68 ]]
+		updateCampaignStats = function(p2, ByCampaign)
 			-- upvalues: DataCacheModule (copy)
 			DataCacheModule.replaceItem(tostring(p2), {
 				byCampaign = ByCampaign,

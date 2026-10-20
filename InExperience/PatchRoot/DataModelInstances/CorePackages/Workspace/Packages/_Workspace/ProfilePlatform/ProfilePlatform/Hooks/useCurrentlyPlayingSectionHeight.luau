@@ -2,7 +2,7 @@
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local FFlagJoinabilityCTARefactor = require(Parent.SharedFlags).FFlagJoinabilityCTARefactor
 
-return function(p1) --[[ Line: 10 ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), FFlagJoinabilityCTARefactor (copy)
 	local UseTokensResult = UseTokensFunction()
 	

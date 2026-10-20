@@ -5,9 +5,9 @@ local DiscountType = require(Parent.IAPExperience).DiscountType
 local _ = require(BulkPurchaseApp.Store.Types)
 local FFlagAXAddOffersToBulkPurchaseModule = require(BulkPurchaseApp.Flags.FFlagAXAddOffersToBulkPurchase)
 
-return function(p1, PriceInRobux, p2) --[[ Line: 16 | Named "useDiscountSummaryProps" ]]
+return function(p1, PriceInRobux, p2)
 	-- upvalues: ReactModule (copy), DiscountType (copy), FFlagAXAddOffersToBulkPurchaseModule (copy)
-	return ReactModule.useMemo(function() --[[ Line: 21 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), DiscountType (upval), PriceInRobux (copy), FFlagAXAddOffersToBulkPurchaseModule (upval), p2 (copy)
 		if not p1 then
 			return nil

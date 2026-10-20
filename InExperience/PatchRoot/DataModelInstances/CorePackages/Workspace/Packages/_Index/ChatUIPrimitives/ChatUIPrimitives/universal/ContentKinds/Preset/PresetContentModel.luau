@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.Parent.Parent.Types)
 local _ = require(script.Parent.PresetTypes)
 local PresetContentModelModule = {
-	detailFromPreset = function(PresetId, DisplayText, PresetVersion) --[[ Line: 12 ]]
+	detailFromPreset = function(PresetId, DisplayText, PresetVersion)
 		return {
 			fallbackText = DisplayText,
 			presetId = PresetId,
@@ -11,28 +11,28 @@ local PresetContentModelModule = {
 	end
 }
 
-function PresetContentModelModule.fromPreset(PresetId, DisplayText, PresetVersion) --[[ Line: 26 ]]
+function PresetContentModelModule.fromPreset(PresetId, DisplayText, PresetVersion)
 	-- upvalues: PresetContentModelModule (copy)
 	return {
 		preset = PresetContentModelModule.detailFromPreset(PresetId, DisplayText, PresetVersion)
 	}
 end
 
-function PresetContentModelModule.draftFromPreset(PresetId, DisplayText) --[[ Line: 38 ]]
+function PresetContentModelModule.draftFromPreset(PresetId, DisplayText)
 	return {
 		preset = { presetId = PresetId, displayText = DisplayText }
 	}
 end
 
-function PresetContentModelModule.getDetail(p1) --[[ Line: 49 ]]
+function PresetContentModelModule.getDetail(p1)
 	return p1.preset
 end
 
-function PresetContentModelModule.getDraft(p1) --[[ Line: 53 ]]
+function PresetContentModelModule.getDraft(p1)
 	return p1.preset
 end
 
-function PresetContentModelModule.fromDraft(p1) --[[ Line: 60 ]]
+function PresetContentModelModule.fromDraft(p1)
 	-- upvalues: PresetContentModelModule (copy)
 	local Draft = PresetContentModelModule.getDraft(p1)
 	

@@ -2,7 +2,7 @@
 local ExperienceMenuSessionManager = {}
 ExperienceMenuSessionManager.__index = ExperienceMenuSessionManager
 
-function ExperienceMenuSessionManager.new(_sessionService) --[[ Line: 37 ]]
+function ExperienceMenuSessionManager.new(_sessionService)
 	-- upvalues: ExperienceMenuSessionManager (copy)
 	local self = setmetatable({}, ExperienceMenuSessionManager)
 	
@@ -16,11 +16,11 @@ function ExperienceMenuSessionManager.new(_sessionService) --[[ Line: 37 ]]
 	return self
 end
 
-function ExperienceMenuSessionManager:_setMetadata(p1, p2, p3) --[[ Line: 50 ]]
+function ExperienceMenuSessionManager:_setMetadata(p1, p2, p3)
 	self._sessionService:SetMetadata(p1, p2, p3)
 end
 
-function ExperienceMenuSessionManager:OpenExperienceMenu(List) --[[ Line: 54 ]]
+function ExperienceMenuSessionManager:OpenExperienceMenu(List)
 	-- upvalues: SessionTypeModule (copy)
 	self._sessionService:SetSession(SessionTypeModule.StructuralIdentifier.Level2a, SessionTypeModule.StructuralIdentifier.ExperienceMenu, SessionTypeModule.Tag.level3.ExperienceMenu)
 	
@@ -31,20 +31,20 @@ function ExperienceMenuSessionManager:OpenExperienceMenu(List) --[[ Line: 54 ]]
 	end
 end
 
-function ExperienceMenuSessionManager:CloseExperienceMenu() --[[ Line: 67 ]]
+function ExperienceMenuSessionManager:CloseExperienceMenu()
 	-- upvalues: SessionTypeModule (copy)
 	self:CloseOpenedMenuTab()
 	self._sessionService:RemoveSession(SessionTypeModule.StructuralIdentifier.ExperienceMenu)
 end
 
-function ExperienceMenuSessionManager:CloseOpenedMenuTab() --[[ Line: 72 ]]
+function ExperienceMenuSessionManager:CloseOpenedMenuTab()
 	if self._currentMenuTab then
 		self._sessionService:RemoveSession(self._currentMenuTab)
 		self._currentMenuTab = nil
 	end
 end
 
-function ExperienceMenuSessionManager:OpenPeopleTab(p1, List) --[[ Line: 79 ]]
+function ExperienceMenuSessionManager:OpenPeopleTab(p1, List)
 	-- upvalues: SessionTypeModule (copy)
 	self._sessionService:SetSession(if p1 then p1 else SessionTypeModule.StructuralIdentifier.ExperienceMenu, SessionTypeModule.StructuralIdentifier.PeopleTab, SessionTypeModule.Tag.level3.PeopleTab)
 	
@@ -56,7 +56,7 @@ function ExperienceMenuSessionManager:OpenPeopleTab(p1, List) --[[ Line: 79 ]]
 	self._currentMenuTab = SessionTypeModule.StructuralIdentifier.PeopleTab
 end
 
-function ExperienceMenuSessionManager:OpenSettingsTab(p2, List) --[[ Line: 91 ]]
+function ExperienceMenuSessionManager:OpenSettingsTab(p2, List)
 	-- upvalues: SessionTypeModule (copy)
 	self._sessionService:SetSession(if p2 then p2 else SessionTypeModule.StructuralIdentifier.ExperienceMenu, SessionTypeModule.StructuralIdentifier.SettingsTab, SessionTypeModule.Tag.level3.SettingsTab)
 	
@@ -68,7 +68,7 @@ function ExperienceMenuSessionManager:OpenSettingsTab(p2, List) --[[ Line: 91 ]]
 	self._currentMenuTab = SessionTypeModule.StructuralIdentifier.SettingsTab
 end
 
-function ExperienceMenuSessionManager:OpenCapturesTab(p3, List) --[[ Line: 107 ]]
+function ExperienceMenuSessionManager:OpenCapturesTab(p3, List)
 	-- upvalues: SessionTypeModule (copy)
 	self._sessionService:SetSession(if p3 then p3 else SessionTypeModule.StructuralIdentifier.ExperienceMenu, SessionTypeModule.StructuralIdentifier.CapturesTab, SessionTypeModule.Tag.level3.CapturesTab)
 	
@@ -80,7 +80,7 @@ function ExperienceMenuSessionManager:OpenCapturesTab(p3, List) --[[ Line: 107 ]
 	self._currentMenuTab = SessionTypeModule.StructuralIdentifier.CapturesTab
 end
 
-function ExperienceMenuSessionManager:OpenReportTab(p4, List) --[[ Line: 123 ]]
+function ExperienceMenuSessionManager:OpenReportTab(p4, List)
 	-- upvalues: SessionTypeModule (copy)
 	self._sessionService:SetSession(if p4 then p4 else SessionTypeModule.StructuralIdentifier.ExperienceMenu, SessionTypeModule.StructuralIdentifier.ReportTab, SessionTypeModule.Tag.level3.ReportTab)
 	
@@ -92,7 +92,7 @@ function ExperienceMenuSessionManager:OpenReportTab(p4, List) --[[ Line: 123 ]]
 	self._currentMenuTab = SessionTypeModule.StructuralIdentifier.ReportTab
 end
 
-function ExperienceMenuSessionManager:OpenHelpTab(p5, List) --[[ Line: 135 ]]
+function ExperienceMenuSessionManager:OpenHelpTab(p5, List)
 	-- upvalues: SessionTypeModule (copy)
 	self._sessionService:SetSession(if p5 then p5 else SessionTypeModule.StructuralIdentifier.ExperienceMenu, SessionTypeModule.StructuralIdentifier.HelpTab, SessionTypeModule.Tag.level3.HelpTab)
 	
@@ -104,7 +104,7 @@ function ExperienceMenuSessionManager:OpenHelpTab(p5, List) --[[ Line: 135 ]]
 	self._currentMenuTab = SessionTypeModule.StructuralIdentifier.HelpTab
 end
 
-function ExperienceMenuSessionManager:OpenLeaveExperience(p6, List) --[[ Line: 147 ]]
+function ExperienceMenuSessionManager:OpenLeaveExperience(p6, List)
 	-- upvalues: SessionTypeModule (copy)
 	self._sessionService:SetSession(if p6 then p6 else SessionTypeModule.StructuralIdentifier.ExperienceMenu, SessionTypeModule.StructuralIdentifier.LeaveExperience, SessionTypeModule.Tag.level3.LeaveExperience)
 	
@@ -116,7 +116,7 @@ function ExperienceMenuSessionManager:OpenLeaveExperience(p6, List) --[[ Line: 1
 	self._currentMenuTab = SessionTypeModule.StructuralIdentifier.LeaveExperience
 end
 
-function ExperienceMenuSessionManager:OpenResetCharacter(p7, List) --[[ Line: 163 ]]
+function ExperienceMenuSessionManager:OpenResetCharacter(p7, List)
 	-- upvalues: SessionTypeModule (copy)
 	self._sessionService:SetSession(if p7 then p7 else SessionTypeModule.StructuralIdentifier.ExperienceMenu, SessionTypeModule.StructuralIdentifier.ResetCharacter, SessionTypeModule.Tag.level3.ResetCharacter)
 	
@@ -128,7 +128,7 @@ function ExperienceMenuSessionManager:OpenResetCharacter(p7, List) --[[ Line: 16
 	self._currentMenuTab = SessionTypeModule.StructuralIdentifier.ResetCharacter
 end
 
-function ExperienceMenuSessionManager:MenuSwitchToPage(p8) --[[ Line: 179 ]]
+function ExperienceMenuSessionManager:MenuSwitchToPage(p8)
 	if p8 == nil then return end
 	self:CloseOpenedMenuTab()
 	local Name = p8.Name

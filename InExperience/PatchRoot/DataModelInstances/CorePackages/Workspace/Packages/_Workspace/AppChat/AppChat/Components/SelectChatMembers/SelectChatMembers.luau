@@ -13,7 +13,7 @@ local SelectedMembersBarModule = require(script.Parent.SelectedMembersBar)
 local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
 local DomLocatorsModule = require(AppChat.Utils.DomLocators)
 
-local function renderUserEntry(Text, p1, p2, Style, _) --[[ Line: 31 ]]
+local function renderUserEntry(Text, p1, p2, Style, _)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), UserCellWithCheckboxModule (copy)
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "size-full-0 auto-y",
@@ -27,14 +27,14 @@ local function renderUserEntry(Text, p1, p2, Style, _) --[[ Line: 31 ]]
 	})
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 57 | Named "SelectChatMembers" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseLocalizationFunction (copy), UseStyleFunction (copy), UseTextSizeOffsetFunction (copy), UseDebouncedUserSearchModule (copy), ReactModule (copy), renderUserEntry (copy), FoundationModule (copy), SelectedMembersBarModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), PaginatedChatMembersModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({ suggested = "Feature.Friends.Label.Suggested" })
 	local UseStyleResult = UseStyleFunction()
 	local UseTextSizeOffsetResult = UseTextSizeOffsetFunction()
 	local UseDebouncedUserSearchModuleResult, UseDebouncedUserSearchModuleResult2, UseDebouncedUserSearchModuleResult3 = UseDebouncedUserSearchModule(p1.conversation)
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 65 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseDebouncedUserSearchModuleResult2 (copy), UseRefResult (copy)
 		UseDebouncedUserSearchModuleResult2("")
 		
@@ -70,7 +70,7 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "SelectChatMembers" ]
 		friendsList = ReactModule.createElement(FoundationModule.View, { LayoutOrder = 3, tag = "size-full-0 fill" }, {
 			paginatedFriendsList = ReactModule.createElement(PaginatedChatMembersModule, {
 				userIds = if IsNotUseDebouncedUserSearchModuleResultMatch then UseDebouncedUserSearchModuleResult else p1.friendIds,
-				renderItem = ReactModule.useCallback(function(p2) --[[ Line: 75 ]]
+				renderItem = ReactModule.useCallback(function(p2)
 					-- upvalues: renderUserEntry (upval), IsNotUseDebouncedUserSearchModuleResultMatch (copy), p1 (copy), UseStyleResult (copy), UseTextSizeOffsetResult (copy)
 					return renderUserEntry(p2.item, IsNotUseDebouncedUserSearchModuleResultMatch, { isDebugEnabled = p1.isDebugEnabled }, UseStyleResult, UseTextSizeOffsetResult)
 				end, {

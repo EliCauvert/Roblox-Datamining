@@ -10,7 +10,7 @@ local Text = FoundationModule.Text
 local View = FoundationModule.View
 local InlineSurveyLocalizationKeysModule = require(OnPlatformSurveys.Constants.InlineSurveyLocalizationKeys)
 
-return ReactModule.memo(function(p1) --[[ Line: 21 | Named "InviteBanner" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseLocalizationFunction (copy), InlineSurveyLocalizationKeysModule (copy), ReactModule (copy), View (copy), Text (copy), Icon (copy), IconName (copy), IconSize (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		title = InlineSurveyLocalizationKeysModule.inviteTitle,

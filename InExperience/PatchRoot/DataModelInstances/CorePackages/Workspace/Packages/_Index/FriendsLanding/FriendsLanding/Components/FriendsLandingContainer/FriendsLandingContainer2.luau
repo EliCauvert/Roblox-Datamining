@@ -34,9 +34,9 @@ local config1 = {
 	[PresenceType1.InStudio] = PresenceType.InStudio
 }
 
-function FriendsLandingContainer(_) --[[ Line: 53 ]]
+function FriendsLandingContainer(_)
 	-- upvalues: ReactModule (copy), IXPServiceWrapper (copy), AppUserLayers (copy), FFlagFriendsLandingLayerExposureModule (copy), UseLocalUserIdFunction (copy), FFlagFriendsCountDataHydrationMigrationEnabled (copy), UseGetFriendsCountByUserIdFunction (copy), config (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), UseAppPolicyFunction (copy), FriendsLandingContextModule (copy), UseFriendsListOrderedByPresenceFunction (copy), FriendsLandingPageSize (copy), FFlagConnectionManagementChips (copy), UseDecoratedTrustedConnectionsFunction (copy), FilterStatesModule (copy), CryoModule (copy), PresenceType1 (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), UserLibConstants (copy), config1 (copy), PresenceType (copy), FFlagFriendsPageUserListCtaEnabledModule (copy), EntityType (copy), FriendsLandingPageModule (copy)
-	ReactModule.useEffect(function() --[[ Line: 54 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IXPServiceWrapper (upval), AppUserLayers (upval), FFlagFriendsLandingLayerExposureModule (upval)
 		IXPServiceWrapper:LogFlagLinkedUserLayerExposure(AppUserLayers.ConnectionsHubExposureLayer)
 		
@@ -45,7 +45,7 @@ function FriendsLandingContainer(_) --[[ Line: 53 ]]
 		end
 	end, {})
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p1) --[[ Line: 74 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p1)
 		return p1.getShowDisplayName()
 	end)
 	local UseContextResult = ReactModule.useContext(FriendsLandingContextModule.Context)
@@ -54,7 +54,7 @@ function FriendsLandingContainer(_) --[[ Line: 53 ]]
 		pageSize = FriendsLandingPageSize
 	})
 	local UseDecoratedTrustedConnectionsResult = if FFlagConnectionManagementChips then UseDecoratedTrustedConnectionsFunction(UseFriendsListOrderedByPresenceResult.onlineFriends) else nil
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 92 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseFriendsListOrderedByPresenceResult (copy), UseContextResult (copy), FilterStatesModule (upval), CryoModule (upval), FFlagConnectionManagementChips (upval), UseDecoratedTrustedConnectionsResult (ref), PresenceType1 (upval)
 		local FilterResult = {}
 		
@@ -71,7 +71,7 @@ function FriendsLandingContainer(_) --[[ Line: 53 ]]
 			if FFlagConnectionManagementChips and UseContextResult.filter == FilterStatesModule.Trusted then
 				return UseDecoratedTrustedConnectionsResult or {}
 			end
-			FilterResult = CryoModule.List.filter(UseFriendsListOrderedByPresenceResult.onlineFriends, function(p1): boolean --[[ Line: 105 ]]
+			FilterResult = CryoModule.List.filter(UseFriendsListOrderedByPresenceResult.onlineFriends, function(p1): boolean
 				-- upvalues: PresenceType1 (upval)
 				return p1.presence and p1.presence.userPresenceType == PresenceType1.InGame
 			end)
@@ -87,9 +87,9 @@ function FriendsLandingContainer(_) --[[ Line: 53 ]]
 		UseFriendsListOrderedByPresenceResult.onlineFriends,
 		UseFriendsListOrderedByPresenceResult.offlineFriends
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 118 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: CryoModule (upval), UseMemoResult (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (upval), UserLibConstants (upval), config1 (upval), PresenceType (upval), FFlagFriendsPageUserListCtaEnabledModule (upval), EntityType (upval)
-		return CryoModule.List.map(UseMemoResult, function(p1, _) --[[ Line: 119 ]]
+		return CryoModule.List.map(UseMemoResult, function(p1, _)
 			-- upvalues: GetRbxthumbWithTypeSizeAndOptionsFunction (upval), UserLibConstants (upval), config1 (upval), PresenceType (upval), FFlagFriendsPageUserListCtaEnabledModule (upval), EntityType (upval)
 			return {
 				username = "",
@@ -104,7 +104,7 @@ function FriendsLandingContainer(_) --[[ Line: 53 ]]
 	end, { UseMemoResult })
 	
 	return ReactModule.createElement(FriendsLandingPageModule, {
-		totalFriendCount = if FFlagFriendsCountDataHydrationMigrationEnabled then UseGetFriendsCountByUserIdFunction(if UseLocalUserIdResult then tostring(UseLocalUserIdResult) else nil, config) or 0 else UseSelectorFunction(function(p1) --[[ Line: 69 ]]
+		totalFriendCount = if FFlagFriendsCountDataHydrationMigrationEnabled then UseGetFriendsCountByUserIdFunction(if UseLocalUserIdResult then tostring(UseLocalUserIdResult) else nil, config) or 0 else UseSelectorFunction(function(p1)
 			-- upvalues: GetDeepValueFunction (upval), UseLocalUserIdResult (copy)
 			return GetDeepValueFunction(p1, `FriendsLanding.Friends.countsByUserId.{UseLocalUserIdResult}`)
 		end),

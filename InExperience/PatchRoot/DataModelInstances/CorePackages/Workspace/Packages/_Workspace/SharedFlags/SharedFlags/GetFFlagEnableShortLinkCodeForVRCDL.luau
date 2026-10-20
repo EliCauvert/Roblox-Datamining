@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableShortLinkCodeForVRCDLv2", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("EnableShortLinkCodeForVRCDLv2")
 end

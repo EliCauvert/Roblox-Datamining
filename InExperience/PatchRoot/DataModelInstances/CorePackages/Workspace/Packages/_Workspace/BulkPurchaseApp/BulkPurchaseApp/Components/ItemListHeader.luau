@@ -4,7 +4,7 @@ local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 local StyledTextLabel = require(Parent.UIBlox).App.Text.StyledTextLabel
 local LineItemLayoutModule = require(script.Parent.LineItemLayout)
 
-return function(Frame) --[[ Line: 17 | Named "ItemListHeader" ]]
+return function(Frame)
 	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy), LineItemLayoutModule (copy), StyledTextLabel (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local FontStyle = {

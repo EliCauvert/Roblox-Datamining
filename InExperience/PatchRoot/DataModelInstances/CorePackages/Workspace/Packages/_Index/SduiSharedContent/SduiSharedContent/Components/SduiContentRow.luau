@@ -11,14 +11,14 @@ local ControlState = FoundationModule.Enums.ControlState
 local CursorType = FoundationModule.Enums.CursorType
 local UseCursorFunction = FoundationModule.Hooks.useCursor
 
-return ReactModule.memo(function(p1) --[[ Line: 44 | Named "SduiContentRow" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FFlagSduiContentRowTrailingHover (copy), ReactModule (copy), ControlState (copy), FFlagSDUIContentRowSelectableModule (copy), UseCursorFunction (copy), CursorType (copy), View (copy), FFlagSduiContentRowStateLayerModule (copy), FoundationModule (copy)
 	local UseResult = nil
 	local Trailing = nil
 	
 	if FFlagSduiContentRowTrailingHover then
 		local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-		UseResult = ReactModule.useCallback(function(Hover) --[[ Line: 51 ]]
+		UseResult = ReactModule.useCallback(function(Hover)
 			-- upvalues: UseStateResult2 (copy), ControlState (upval)
 			UseStateResult2(Hover == ControlState.Hover or Hover == ControlState.Pressed)
 		end, {})

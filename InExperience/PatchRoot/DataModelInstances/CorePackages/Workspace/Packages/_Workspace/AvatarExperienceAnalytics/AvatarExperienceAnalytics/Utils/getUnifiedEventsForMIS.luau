@@ -3,11 +3,11 @@ local CartIdServiceModule = require(AvatarExperienceAnalytics.Lib.CartIdService)
 local UnifiedEventLogEnumsModule = require(AvatarExperienceAnalytics.UnifiedEventLogEnums)
 local AXAddAttributionToCheckoutCartPurchases = game:DefineFastFlag("AXAddAttributionToCheckoutCartPurchases", false)
 
-local function _(Text): string --[[ Line: 10 | Named "appendMISPrefixToCartId" ]]
+local function _(Text): string
 	return "MIS_" .. Text
 end
 
-return function(List, List1, p1, p2, Action) --[[ Line: 20 ]]
+return function(List, List1, p1, p2, Action)
 	-- upvalues: AXAddAttributionToCheckoutCartPurchases (copy), CartIdServiceModule (copy), UnifiedEventLogEnumsModule (copy)
 	local NewPriceInRobux = 0
 	local List2 = {}

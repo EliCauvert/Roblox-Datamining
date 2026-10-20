@@ -12,7 +12,7 @@ local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFon
 local UseTextSizeOffsetFunction = UIBloxModule.Core.Style.useTextSizeOffset
 local GameTileTypesModule = require(GameTile.GameTileTypes)
 
-return function(p1) --[[ Line: 51 | Named "GridTileIconTextFooter" ]]
+return function(p1)
 	-- upvalues: UseDesignTokensFunction (copy), UseTextSizeOffsetFunction (copy), UseTokensFunction (copy), GameTileTypesModule (copy), GetGameTileMetadataFontModule (copy), ReactModule (copy), ImageSetLabel (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local UseTextSizeOffsetResult: number = UseTextSizeOffsetFunction()

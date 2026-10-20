@@ -14,18 +14,18 @@ local Divider = FoundationModule.Divider
 local IconsNavigationClose = UIBloxModule.App.ImageSet.Images["icons/navigation/close"]
 local NewUSERPROFILEHEADERHEIGHT = ConstantsModule.USER_PROFILE_HEADER_HEIGHT + ConstantsModule.CTA_BUTTON_HEIGHT + ConstantsModule.PAGE_PADDING
 
-return function(p1) --[[ Line: 35 ]]
+return function(p1)
 	-- upvalues: UseLastInputModeFunction (copy), UseStyleFunction (copy), UseProfileScrollContextModule (copy), ReactModule (copy), FFlagProfilePlatformNewProfileHeader (copy), NewUSERPROFILEHEADERHEIGHT (copy), View (copy), ImageSetLabel (copy), IconsNavigationClose (copy), Divider (copy)
 	local IsFocus = UseLastInputModeFunction() == "Focus"
 	local UseStyleResult = UseStyleFunction()
 	local UseProfileScrollContextModuleResult = UseProfileScrollContextModule()
 	local ScrollY = if UseProfileScrollContextModuleResult then UseProfileScrollContextModuleResult.scrollY else 0
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 43 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		p1.navigateBack()
 	end, { p1.navigateBack })
 	local YOffset = if FFlagProfilePlatformNewProfileHeader then nil else 10
-	local UseMemoResult: number = ReactModule.useMemo(function() --[[ Line: 49 ]]
+	local UseMemoResult: number = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), NewUSERPROFILEHEADERHEIGHT (upval), ScrollY (copy)
 		if p1.backgroundTransparency == nil then
 			local NewUSERPROFILEHEADERHEIGHTDelta = NewUSERPROFILEHEADERHEIGHT - 50

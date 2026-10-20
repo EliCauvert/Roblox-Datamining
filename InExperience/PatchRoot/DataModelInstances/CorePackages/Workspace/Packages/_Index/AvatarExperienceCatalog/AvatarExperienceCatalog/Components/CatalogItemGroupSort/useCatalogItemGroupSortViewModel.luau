@@ -31,13 +31,13 @@ local UseOpenInformationPopoverModule = require(script.Parent.Parent.Hooks.useOp
 local UseCatalogSortSeeAllLoggingModule = require(script.Parent.Parent.Hooks.useCatalogSortSeeAllLogging)
 local _ = require(script.Parent.CatalogItemGroupSortView)
 
-local function _(p1, p2: number, p3): number --[[ Line: 115 | Named "computeItemWidth" ]]
+local function _(p1, p2: number, p3): number
 	local v1 = if p2 > 0 then p2 else 1
 	
 	return (math.floor(math.max(0, p1 - (v1 - 1) * p3) / v1))
 end
 
-return function(p1) --[[ Line: 122 | Named "useCatalogItemGroupSortViewModel" ]]
+return function(p1)
 	-- upvalues: UseCatalogPageMonolithDependenciesModule (copy), UseTokensFunction (copy), ReactModule (copy), UseOnRequestImpressionsSignalModule (copy), FFlagAXSduiSeeAllClickLogging (copy), UseCatalogSortSeeAllLoggingModule (copy), UseFirstSeenImpressionFilterModule (copy), FFlagAXSduiSortSessionImpressionDedup (copy), UseSessionSeenImpressionFilterModule (copy), UseDeferLooksWithoutHydrationFilterModule (copy), UseComposedImpressionFilterModule (copy), FFlagAXDeferLookImpressionsForHydration (copy), UseStoreFunction (copy), UseHydrateCatalogSortOnDemandEffectModule (copy), UseLocalizationFunction (copy), FFlagAXCatalogItemInformationPopover (copy), UseOpenInformationPopoverModule (copy), GetFooterVisibilityFromItemFootersModule (copy), UnifiedEventLogEnums (copy), UseAddUnifiedLoggingToCatalogSortEffectModule (copy), ItemTypeEnum (copy), SelectHydratedLookTypeModule (copy), CryoModule (copy), WidgetConstantsModule (copy), FFlagAXSduiSponsoredItemClickTracking (copy), UseOnCatalogSortImpressionsDetectedCallbackModule (copy)
 	local WidgetTileWithImpressionsTagging = UseCatalogPageMonolithDependenciesModule().WidgetTileWithImpressionsTagging
 	local UseTokensResult = UseTokensFunction()
@@ -61,10 +61,10 @@ return function(p1) --[[ Line: 122 | Named "useCatalogItemGroupSortViewModel" ]]
 		UseSessionSeenImpressionFilterModuleResult
 	})
 	local UseComposedImpressionFilterModuleResult1 = if FFlagAXDeferLookImpressionsForHydration then UseComposedImpressionFilterModuleResult else UseSessionSeenImpressionFilterModuleResult
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 177 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval)
 		return (setmetatable({}, {
-			__index = function(p2, p3) --[[ Line: 179 ]]
+			__index = function(p2, p3)
 				-- upvalues: ReactModule (upval)
 				local Ref = ReactModule.createRef()
 				rawset(p2, p3, Ref)
@@ -107,7 +107,7 @@ return function(p1) --[[ Line: 122 | Named "useCatalogItemGroupSortViewModel" ]]
 		seeAllCallback = if FFlagAXSduiSeeAllClickLogging then p1.onSeeAll else nil
 	})
 	
-	local function buildPerTileAnalyticsInfo(p2, GridPositionColumn) --[[ Line: 233 ]]
+	local function buildPerTileAnalyticsInfo(p2, GridPositionColumn)
 		-- upvalues: FFlagAXDeferLookImpressionsForHydration (upval), ItemTypeEnum (upval), SelectHydratedLookTypeModule (upval), UseStoreResult (copy), CryoModule (upval), p1 (copy), WidgetInfo (copy), ITEMGROUP (copy)
 		return CryoModule.Dictionary.join(p1.widgetAnalyticsInfo, {
 			itemPosition = GridPositionColumn,
@@ -133,11 +133,11 @@ return function(p1) --[[ Line: 122 | Named "useCatalogItemGroupSortViewModel" ]]
 		seeAllRef = if FFlagAXSduiSeeAllClickLogging then v1 else nil,
 		itemsPerRow = ItemsPerRow,
 		itemGap = Medium,
-		gridItems = ReactModule.useMemo(function() --[[ Line: 296 ]]
+		gridItems = ReactModule.useMemo(function()
 			-- upvalues: CryoModule (upval), Content (copy), RowCount (copy), ItemsPerRow (copy)
 			return CryoModule.List.getRange(Content or {}, 1, RowCount * ItemsPerRow)
 		end, { Content, RowCount, ItemsPerRow }),
-		renderTile = function(p2, Index) --[[ Line: 266 ]]
+		renderTile = function(p2, Index)
 			-- upvalues: buildPerTileAnalyticsInfo (copy), ReactModule (upval), WidgetTileWithImpressionsTagging (copy), Floored (copy), WidgetInfo (copy), WidgetConstantsModule (upval), UseMemoResult (copy), p1 (copy), ItemsPerRow (copy), FooterVisibilityFromItemFootersModule (copy), Text (copy), FFlagAXSduiSponsoredItemClickTracking (upval), AdTrackingDataByItemId (copy)
 			return ReactModule.createElement(WidgetTileWithImpressionsTagging, {
 				size = UDim2.new(0, Floored, 0, 0),

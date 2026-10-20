@@ -37,7 +37,7 @@ local config = {
 	}
 }
 
-return function(p1) --[[ Line: 60 | Named "getPlatformConfig" ]]
+return function(p1)
 	-- upvalues: config (copy), DeviceType (copy)
 	local Entry = config[p1]
 	

@@ -6,7 +6,7 @@ local IconButton = FoundationModule.IconButton
 local UseTextAlignmentButtonStateModule = require(MomentsCreation.Components.TextOverlay.useTextAlignmentButtonState)
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
 
-return function(Frame) --[[ Line: 25 | Named "TextAlignmentButton" ]]
+return function(Frame)
 	-- upvalues: UseTextAlignmentButtonStateModule (copy), ReactModule (copy), IconButton (copy), FoundationModule (copy)
 	local UseTextAlignmentButtonStateModuleResult = UseTextAlignmentButtonStateModule(Frame.controller)
 	

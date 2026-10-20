@@ -18,9 +18,9 @@ NativeCloseEventConnector.validateProps = T.strictInterface({
 	openEducationalPopup = T.optional(T.callback)
 })
 
-function NativeCloseEventConnector.init(p1) --[[ Line: 26 ]]
+function NativeCloseEventConnector.init(p1)
 	-- upvalues: RbxAnalyticsService (copy), UserLocalStoreModule (copy), GuiService (copy), SendAnalyticsModule (copy), ConstantsModule (copy)
-	function p1.onNativeCloseConnect() --[[ Line: 27 ]]
+	function p1.onNativeCloseConnect()
 		-- upvalues: p1 (copy), RbxAnalyticsService (upval), UserLocalStoreModule (upval), GuiService (upval), SendAnalyticsModule (upval), ConstantsModule (upval)
 		if p1.props.isEducationalPopupEnabled then
 			RbxAnalyticsService:ReportCounter("LeaveGame_NativeClose", 1)
@@ -30,7 +30,7 @@ function NativeCloseEventConnector.init(p1) --[[ Line: 26 ]]
 	end
 end
 
-function NativeCloseEventConnector.render(p1) --[[ Line: 39 ]]
+function NativeCloseEventConnector.render(p1)
 	-- upvalues: Roact (copy), ExternalEventConnectionModule (copy), GuiService (copy)
 	return Roact.createElement(ExternalEventConnectionModule, {
 		event = GuiService.NativeClose,
@@ -38,15 +38,15 @@ function NativeCloseEventConnector.render(p1) --[[ Line: 39 ]]
 	})
 end
 
-return RoactRodux.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 53 ]]
+return RoactRodux.UNSTABLE_connect2(nil, function(Callback)
 	-- upvalues: OpenEducationalPopupModule (copy)
 	return {
-		openEducationalPopup = function(p1, p2, p3) --[[ Line: 55 ]]
+		openEducationalPopup = function(p1, p2, p3)
 			-- upvalues: Callback (copy), OpenEducationalPopupModule (upval)
 			return Callback(OpenEducationalPopupModule(p1, p2, p3))
 		end
 	}
-end)((InGameMenuPolicyModule.connect(function(p1, _) --[[ Line: 46 ]]
+end)((InGameMenuPolicyModule.connect(function(p1, _)
 	return {
 		isEducationalPopupEnabled = p1.enableEducationalPopup(),
 		maxDisplayCount = p1.educationalPopupMaxDisplayCount()

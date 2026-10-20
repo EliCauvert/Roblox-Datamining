@@ -1,22 +1,22 @@
 ﻿local AnalyticsFeedNoopShimModule = require(script.AnalyticsFeedNoopShim)
 
-local function NoopComponent() --[[ Line: 23 ]]
+local function NoopComponent()
 	return nil
 end
 
-local function v2() --[[ Line: 27 ]] end
+local function v2() end
 
-local function noopRegisterSection(_) --[[ Line: 28 ]]
+local function noopRegisterSection(_)
 	-- upvalues: v2 (copy)
 	return v2
 end
 
-local function noopRegisterSections(_) --[[ Line: 31 ]]
+local function noopRegisterSections(_)
 	-- upvalues: v2 (copy)
 	return v2
 end
 
-local function noopGetRootSignal() --[[ Line: 36 ]]
+local function noopGetRootSignal()
 	return {
 		title = "root",
 		leafId = nil,

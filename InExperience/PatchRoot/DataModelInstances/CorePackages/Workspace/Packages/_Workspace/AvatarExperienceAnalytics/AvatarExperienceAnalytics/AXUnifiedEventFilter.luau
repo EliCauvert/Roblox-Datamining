@@ -24,19 +24,19 @@ end
 for _, enumItem1 in Enum.AvatarAssetType:GetEnumItems() do
 	config.AssetTypeIdStringToName[tostring(enumItem1.Value)] = enumItem1.Name
 end
-function AXUnifiedEventFilterModule.hasOrganicData(p1): boolean --[[ Line: 110 ]]
+function AXUnifiedEventFilterModule.hasOrganicData(p1): boolean
 	return if p1.assetType or p1.bundleType or p1.organicItemPrice or p1.organicItemWearAfterPurchase or p1.organicItemSaveToMyAvatars or p1.organicAssetIds or p1.organicBundleIds then true else false
 end
 
-function AXUnifiedEventFilterModule.hasWidgetData(p1): boolean --[[ Line: 126 ]]
+function AXUnifiedEventFilterModule.hasWidgetData(p1): boolean
 	return if p1.widgetId or p1.widgetType or p1.assetIds or p1.bundleIds or p1.widgetItemIds or p1.organicResultIds or p1.widgetItemPrice or p1.uiTreatmentType or p1.themeId or p1.widgetItemWearAfterPurchase or p1.widgetItemSaveToMyAvatars then true else false
 end
 
-function AXUnifiedEventFilterModule.hasUiElementData(p1): boolean --[[ Line: 147 ]]
+function AXUnifiedEventFilterModule.hasUiElementData(p1): boolean
 	return if p1.elementName then true else false
 end
 
-function AXUnifiedEventFilterModule.hasItemId(p1): boolean --[[ Line: 155 ]]
+function AXUnifiedEventFilterModule.hasItemId(p1): boolean
 	-- upvalues: FFlagAXEnableUnifiedLoggingAvatarMoment (copy), MarketplaceUnifiedAction (copy), AXUnifiedFilterWidgetLoadedAndUIImpression (copy)
 	local Action = p1.action
 	local ItemId = p1.itemId
@@ -44,7 +44,7 @@ function AXUnifiedEventFilterModule.hasItemId(p1): boolean --[[ Line: 155 ]]
 	return FFlagAXEnableUnifiedLoggingAvatarMoment and Action == MarketplaceUnifiedAction.PAGE_EXIT or (Action == MarketplaceUnifiedAction.UNDEFINED_ACTION or Action == MarketplaceUnifiedAction.UI_ELEMENT_CLICK or Action == MarketplaceUnifiedAction.PAGE_VIEW or Action == MarketplaceUnifiedAction.WIDGET_IMPRESSION or AXUnifiedFilterWidgetLoadedAndUIImpression and (Action == MarketplaceUnifiedAction.UI_ELEMENT_IMPRESSION or Action == MarketplaceUnifiedAction.WIDGET_LOADED) or ItemId ~= nil and ItemId ~= "")
 end
 
-function AXUnifiedEventFilterModule.hasValidItemType(p1): boolean --[[ Line: 182 ]]
+function AXUnifiedEventFilterModule.hasValidItemType(p1): boolean
 	-- upvalues: MarketplaceUnifiedItemType (copy), FFlagAXEnableUnifiedLoggingAvatarMoment (copy), MarketplaceUnifiedAction (copy), AXUnifiedFilterWidgetLoadedAndUIImpression (copy)
 	local ItemType = p1.itemType
 	
@@ -57,26 +57,26 @@ function AXUnifiedEventFilterModule.hasValidItemType(p1): boolean --[[ Line: 182
 	end
 end
 
-function AXUnifiedEventFilterModule.hasValidAction(p1): boolean --[[ Line: 208 ]]
+function AXUnifiedEventFilterModule.hasValidAction(p1): boolean
 	-- upvalues: MarketplaceUnifiedAction (copy)
 	local Action = p1.action
 	
 	return Action ~= nil and Action ~= MarketplaceUnifiedAction.UNDEFINED_ACTION
 end
 
-function AXUnifiedEventFilterModule.hasValidSurface(p1): boolean --[[ Line: 213 ]]
+function AXUnifiedEventFilterModule.hasValidSurface(p1): boolean
 	-- upvalues: UnifiedLoggingSurface (copy)
 	local Surface = p1.surface
 	
 	return Surface ~= nil and Surface ~= UnifiedLoggingSurface.UNDEFINED_SURFACE
 end
 
-function AXUnifiedEventFilterModule.hasRequestIdForWidgetLog(p1): boolean --[[ Line: 218 ]]
+function AXUnifiedEventFilterModule.hasRequestIdForWidgetLog(p1): boolean
 	-- upvalues: AXUnifiedEventFilterModule (copy)
 	return not AXUnifiedEventFilterModule.hasWidgetData(p1) or p1.requestId ~= nil and p1.requestId ~= ""
 end
 
-function AXUnifiedEventFilterModule.hasValidSizeAndPosition(p1): boolean --[[ Line: 228 ]]
+function AXUnifiedEventFilterModule.hasValidSizeAndPosition(p1): boolean
 	-- upvalues: FFlagAXFixHomeAvatarsUnifiedPurchase (copy), MarketplaceUnifiedAction (copy), UnifiedLoggingSurface (copy), FFlagAXEnableUnifiedLoggingAvatarMoment (copy)
 	local Action = p1.action
 	
@@ -101,7 +101,7 @@ function AXUnifiedEventFilterModule.hasValidSizeAndPosition(p1): boolean --[[ Li
 	end
 end
 
-function AXUnifiedEventFilterModule.hasValidFilter(p1): boolean --[[ Line: 279 ]]
+function AXUnifiedEventFilterModule.hasValidFilter(p1): boolean
 	-- upvalues: AXAlignUnifiedFilterSearchKeyword (copy), MarketplaceUnifiedAction (copy), UnifiedLoggingSurface (copy), FFlagAXUnifiedImpressionsOnThumbnail (copy), FFlagAXEnableUnifiedLoggingAvatarMoment (copy), UnifiedEventLogEnumsModule (copy)
 	local Surface = p1.surface
 	local Keyword = p1.keyword
@@ -131,13 +131,13 @@ function AXUnifiedEventFilterModule.hasValidFilter(p1): boolean --[[ Line: 279 ]
 	return (if AXAlignUnifiedFilterSearchKeyword or not Keyword and Surface ~= UnifiedLoggingSurface.SEARCH_RESULTS then true else Surface == UnifiedLoggingSurface.SEARCH_RESULTS and (Keyword ~= nil and Keyword ~= "")) and (IsActionMatch and (IsFilterPriceMatch and NoFilterCreatorsName))
 end
 
-local function _(p1): boolean --[[ Line: 352 | Named "isValidPrice" ]]
+local function _(p1): boolean
 	local Number: number? = tonumber(p1)
 	
 	return Number ~= nil and Number >= 0
 end
 
-function AXUnifiedEventFilterModule.hasValidEntityData(p1): boolean --[[ Line: 357 ]]
+function AXUnifiedEventFilterModule.hasValidEntityData(p1): boolean
 	-- upvalues: UnifiedLoggingSurface (copy), AXSendPurchaseAttempt (copy), MarketplaceUnifiedAction (copy), AXUnifiedEventFilterModule (copy), FFlagAXUnifiedEventCounters (copy), MarketplaceUnifiedItemType (copy), config (copy), WidgetUiTreatment (copy)
 	if p1.surface == UnifiedLoggingSurface.CUSTOMIZE then
 		return true
@@ -212,7 +212,7 @@ function AXUnifiedEventFilterModule.hasValidEntityData(p1): boolean --[[ Line: 3
 	end
 end
 
-function AXUnifiedEventFilterModule.filter(p1, p2) --[[ Line: 479 ]]
+function AXUnifiedEventFilterModule.filter(p1, p2)
 	-- upvalues: AXUnifiedEventFilterModule (copy), FFlagAXUnifiedEventCounters (copy), MarketplaceUnifiedAction (copy), SendAXCounterV2Module (copy), UnifiedLoggingSurface (copy)
 	local HasItemId = AXUnifiedEventFilterModule.hasItemId(p1)
 	local HasValidItemType = AXUnifiedEventFilterModule.hasValidItemType(p1)

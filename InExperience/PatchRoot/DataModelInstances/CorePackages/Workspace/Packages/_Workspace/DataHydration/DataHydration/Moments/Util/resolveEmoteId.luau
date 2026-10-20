@@ -2,7 +2,7 @@
 local IsCanonicalNonzeroUuidModule = require(script.Parent.isCanonicalNonzeroUuid)
 
 return {
-	resolveEmoteIdForReaction = function(List, Text: string) --[[ Line: 23 ]]
+	resolveEmoteIdForReaction = function(List, Text: string)
 		local Replaced = string.gsub(string.lower(Text), "%-", "")
 		local Cry: string = if Replaced == "crying" then "cry" else Replaced
 		for _, value in List do
@@ -17,7 +17,7 @@ return {
 		end
 		return Text
 	end,
-	resolveOptionalEmoteIdForReaction = function(List, Text: string) --[[ Line: 37 ]]
+	resolveOptionalEmoteIdForReaction = function(List, Text: string)
 		-- upvalues: IsCanonicalNonzeroUuidModule (copy)
 		local Replaced = string.gsub(string.lower(Text), "%-", "")
 		local Cry: string = if Replaced == "crying" then "cry" else Replaced
@@ -30,7 +30,7 @@ return {
 		end
 		return nil
 	end,
-	reactionTypeForEmoteId = function(List, Id) --[[ Line: 47 ]]
+	reactionTypeForEmoteId = function(List, Id)
 		for _, value in List do
 			if value.id == Id then
 				local Replaced = string.gsub(string.lower(value.name), "%-", "")
@@ -40,7 +40,7 @@ return {
 		end
 		return Id
 	end,
-	normalizeName = function(Text: string): string --[[ Line: 13 ]]
+	normalizeName = function(Text: string): string
 		local Replaced = string.gsub(string.lower(Text), "%-", "")
 		
 		return if Replaced == "crying" then "cry" else Replaced

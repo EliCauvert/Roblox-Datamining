@@ -5,7 +5,7 @@ local PickedUserRowModule = require(script.Parent.PickedUserRow)
 local List = FoundationModule.List
 local InputSize = FoundationModule.Enums.InputSize
 
-return function(p1) --[[ Line: 31 | Named "PickedUserList" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), PickedUserRowModule (copy), List (copy), InputSize (copy)
 	local TestId = p1.testId or "picked-user-list"
 	local OnRemove = p1.onRemove

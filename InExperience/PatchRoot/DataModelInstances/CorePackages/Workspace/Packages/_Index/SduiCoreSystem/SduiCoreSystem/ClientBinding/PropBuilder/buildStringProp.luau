@@ -7,7 +7,7 @@ local _ = require(SduiCoreSystem.ClientBinding.SduiDataBindingContentType)
 local SduiPropUtilsModule = require(SduiCoreSystem.ClientBinding.PropBuilder.SduiPropUtils)
 local SduiClientBindingParsersModule = require(SduiCoreSystem.ClientBinding.PropBuilder.SduiClientBindingParsers)
 
-local function buildStringProp(p1, p2, p3, p4, p5, p6, p7) --[[ Line: 19 ]]
+local function buildStringProp(p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: SduiClientBindingParsersModule (copy), PropResultCategory (copy), SduiPropUtilsModule (copy), BuildDefaultPropModule (copy), buildStringProp (copy)
 	local Callback = p7 or SduiClientBindingParsersModule.parseToString
 	

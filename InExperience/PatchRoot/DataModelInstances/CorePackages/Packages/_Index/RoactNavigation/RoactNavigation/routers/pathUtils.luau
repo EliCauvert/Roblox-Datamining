@@ -16,14 +16,14 @@ local ChildIsScreenRouterSymbolRobloxModule = require(Parent:FindFirstChild("Chi
 local NullPathSymbolRobloxModule = require(Parent:FindFirstChild("NullPathSymbol.roblox"))
 local DecodeURIComponentModule = require(Parent.decodeURIComponent)
 
-local function _(p1, p2) --[[ Line: 59 | Named "getRestOfPath" ]]
+local function _(p1, p2)
 	-- upvalues: Array (copy)
-	return p1[Array.findIndex(p2, function(p3): boolean --[[ Line: 62 ]]
+	return p1[Array.findIndex(p2, function(p3): boolean
 		return p3.pattern == ".*"
 	end) + 1]
 end
 
-local function determineDelimiter(p1, Entry) --[[ Line: 69 ]]
+local function determineDelimiter(p1, Entry)
 	-- upvalues: Array (copy), String1 (copy)
 	if not Array.isArray(Entry) then
 		return Entry
@@ -40,9 +40,9 @@ local function determineDelimiter(p1, Entry) --[[ Line: 69 ]]
 end
 
 local PathUtils = {
-	getParamsFromPath = function(Tbl, ExecResult, ExactReKeys) --[[ Line: 27 ]]
+	getParamsFromPath = function(Tbl, ExecResult, ExactReKeys)
 		-- upvalues: Array (copy), DecodeURIComponentModule (copy)
-		return (Array.reduce(Array.slice(ExecResult, 2), function(p2, p3, p4) --[[ Line: 31 ]]
+		return (Array.reduce(Array.slice(ExecResult, 2), function(p2, p3, p4)
 			-- upvalues: ExactReKeys (copy), DecodeURIComponentModule (upval)
 			local ExactReKey = ExactReKeys[p4]
 			
@@ -64,7 +64,7 @@ local PathUtils = {
 			return p2
 		end, table.clone(Tbl)))
 	end,
-	urlToPathAndParams = function(p2, p3) --[[ Line: 85 ]]
+	urlToPathAndParams = function(p2, p3)
 		-- upvalues: RegExpModule (copy), QueryStringModule (copy), determineDelimiter (copy)
 		local ExecResult = RegExpModule("^(.*)\\?(.*)$"):exec(p2)
 		local Text = if ExecResult then ExecResult[2] else p2
@@ -89,7 +89,7 @@ local PathUtils = {
 	end
 }
 
-function PathUtils.createPathParser(List, p2, p3) --[[ Line: 112 ]]
+function PathUtils.createPathParser(List, p2, p3)
 	-- upvalues: NullPathSymbolRobloxModule (copy), InvariantModule (copy), PathToRegexpFunction (copy), CompileFunction (copy), Object (copy), Array (copy), NavigationActionsModule (copy), PathUtils (copy), ChildIsScreenRouterSymbolRobloxModule (copy)
 	local Paths = p3.paths or {}
 	local DisableRouteNamePaths = p3.disableRouteNamePaths
@@ -120,7 +120,7 @@ function PathUtils.createPathParser(List, p2, p3) --[[ Line: 112 ]]
 			extendedPathRe = PathToRegexpFunction(if IsNullPathSymbolRobloxModuleMatch then "(.*)" else ("%s/(.*)"):format(NullPathSymbolRobloxModule1), ExtendedPathReKeys),
 			extendedPathReKeys = ExtendedPathReKeys,
 			isWildcard = IsNullPathSymbolRobloxModuleMatch,
-			toPath = NullPathSymbolRobloxModule1 == NullPathSymbolRobloxModule and function(): string --[[ Line: 172 ]]
+			toPath = NullPathSymbolRobloxModule1 == NullPathSymbolRobloxModule and function(): string
 				return ""
 			end or CompileFunction(NullPathSymbolRobloxModule1)
 		}
@@ -128,7 +128,7 @@ function PathUtils.createPathParser(List, p2, p3) --[[ Line: 112 ]]
 	EntriesResult = Object.entries(t)
 	
 	return {
-		getActionForPathAndParams = function(p4: string, p5) --[[ Line: 180 ]]
+		getActionForPathAndParams = function(p4: string, p5)
 			-- upvalues: EntriesResult (ref), List (copy), Array (upval), NavigationActionsModule (upval), PathUtils (upval)
 			if p4 == nil then
 				p4 = ""
@@ -158,7 +158,7 @@ function PathUtils.createPathParser(List, p2, p3) --[[ Line: 112 ]]
 					return NavigationActionsModule.navigate({
 						routeName = RouteName,
 						params = PathUtils.getParamsFromPath(p5, ExecResult, ExactReKeys),
-						action = if ExecResult1 and Entry then Entry.getActionForPathAndParams(ExecResult1[Array.findIndex(ExtendedPathReKeys, function(p6): boolean --[[ Line: 62 ]]
+						action = if ExecResult1 and Entry then Entry.getActionForPathAndParams(ExecResult1[Array.findIndex(ExtendedPathReKeys, function(p6): boolean
 							return p6.pattern == ".*"
 						end) + 1], p5) else nil
 					})
@@ -177,7 +177,7 @@ function PathUtils.createPathParser(List, p2, p3) --[[ Line: 112 ]]
 				ExecResult2 = ExtendedPathRe1 and ExtendedPathRe1:exec(p4)
 				
 				if ExecResult2 and ExecResult2.n ~= 0 then
-					local ExecResultEntry = ExecResult2[Array.findIndex(ExtendedPathReKeys1, function(p6): boolean --[[ Line: 62 ]]
+					local ExecResultEntry = ExecResult2[Array.findIndex(ExtendedPathReKeys1, function(p6): boolean
 						return p6.pattern == ".*"
 					end) + 1]
 					ActionForPathAndParams = if Entry1 then Entry1.getActionForPathAndParams(ExecResultEntry, p5) else nil
@@ -193,7 +193,7 @@ function PathUtils.createPathParser(List, p2, p3) --[[ Line: 112 ]]
 			end
 			return nil
 		end,
-		getPathAndParamsForRoute = function(p6) --[[ Line: 247 ]]
+		getPathAndParamsForRoute = function(p6)
 			-- upvalues: List (copy), t (copy), Array (upval), Object (upval), ChildIsScreenRouterSymbolRobloxModule (upval)
 			local RouteName = p6.routeName
 			local Params = p6.params
@@ -204,9 +204,9 @@ function PathUtils.createPathParser(List, p2, p3) --[[ Line: 112 ]]
 			local Params1 = {}
 			
 			if Params then
-				for _, value in Array.filter(Object.keys(Params), function(Name): boolean --[[ Line: 257 ]]
+				for _, value in Array.filter(Object.keys(Params), function(Name): boolean
 					-- upvalues: Array (upval), ExactReKeys (copy)
-					return not Array.find(ExactReKeys, function(p7): boolean --[[ Line: 258 ]]
+					return not Array.find(ExactReKeys, function(p7): boolean
 						-- upvalues: Name (copy)
 						return p7.name == Name
 					end)

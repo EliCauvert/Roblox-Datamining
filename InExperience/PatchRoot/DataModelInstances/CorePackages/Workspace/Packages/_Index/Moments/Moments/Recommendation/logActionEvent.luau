@@ -1,1 +1,1 @@
-﻿return function(_, _, _, _) --[[ Line: 6 | Named "logActionEvent" ]] end
+﻿return function(_, _, _, _) end

@@ -5,7 +5,7 @@ local _ = require(Parent.SduiCompat)
 local SduiViewModule = require(script.Parent.SduiView)
 local SduiIconModule = require(script.Parent.SduiIcon)
 
-return ReactModule.memo(function(p1) --[[ Line: 33 | Named "SduiCircleIcon" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), SduiViewModule (copy), SduiIconModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	

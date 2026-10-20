@@ -95,7 +95,7 @@ local config2 = {
 	VoiceChat = {
 		layoutOrder = 13,
 		tab = MainViewVoiceChatModule,
-		isEnabled = function() --[[ Line: 172 ]]
+		isEnabled = function()
 			-- upvalues: GetFFlagVoiceDebugConsoleV2Module (copy), Default (copy)
 			return not GetFFlagVoiceDebugConsoleV2Module() and (game:GetEngineFeature("VoiceChatDevConsoleTabEnabled") and (Default ~= nil and Default:canUseService()))
 		end
@@ -103,7 +103,7 @@ local config2 = {
 	RequestOrchestrator = {
 		layoutOrder = 100,
 		tab = require(Components.RequestOrchestrator.MainViewRequestOrchestrator),
-		isEnabled = function() --[[ Line: 184 ]]
+		isEnabled = function()
 			-- upvalues: DevConsoleRequestOrchestratorTab2 (copy)
 			return DevConsoleRequestOrchestratorTab2
 		end
@@ -134,12 +134,12 @@ local config3 = {
 	[Enum.Platform.None] = ConstantsModule.FormFactor.Large
 }
 
-local function _() --[[ Line: 216 | Named "isAdminAsync" ]]
+local function _()
 	-- upvalues: PlayerPermissionsModule (copy), Players (copy)
 	return PlayerPermissionsModule.IsPlayerAdminAsync(Players.LocalPlayer)
 end
 
-local function getAdminTabList() --[[ Line: 223 ]]
+local function getAdminTabList()
 	-- upvalues: config (copy), config2 (copy)
 	local Copy = table.clone(config)
 	
@@ -151,7 +151,7 @@ local function getAdminTabList() --[[ Line: 223 ]]
 	return Copy
 end
 
-function Module.new() --[[ Line: 238 ]]
+function Module.new()
 	-- upvalues: Module (copy)
 	local t = {}
 	setmetatable(t, Module)
@@ -160,7 +160,7 @@ function Module.new() --[[ Line: 238 ]]
 	t.isEmployee = false
 	t.waitForStart = true
 	t.waitForStartBindable = Instance.new("BindableEvent")
-	coroutine.wrap(function() --[[ Line: 249 ]]
+	coroutine.wrap(function()
 		-- upvalues: t (copy)
 		t:SetupDevConsole()
 	end)()
@@ -168,7 +168,7 @@ function Module.new() --[[ Line: 238 ]]
 	return t
 end
 
-function Module:SetupDevConsole() --[[ Line: 256 ]]
+function Module:SetupDevConsole()
 	-- upvalues: UserInputService (copy), config3 (copy), MainViewModule (copy), SetTabListModule (copy), TabList (copy), DevConsoleAnalyticsModule (copy), RoduxModule (copy), DevConsoleReducerModule (copy), RoactModule (copy), RoactRoduxModule (copy), DataProviderModule (copy), DevConsoleWindowModule (copy), ConstantsModule (copy), RCCProfilerDataCompleteListenerModule (copy)
 	local Entry = config3[UserInputService:GetPlatform()]
 	self.store = RoduxModule.Store.new(DevConsoleReducerModule, {
@@ -185,7 +185,7 @@ function Module:SetupDevConsole() --[[ Line: 256 ]]
 					position = ConstantsModule.MainWindowInit.Position,
 					size = ConstantsModule.MainWindowInit.Size,
 					tabList = TabList,
-					onCloseCallback = function(p1) --[[ Line: 291 ]]
+					onCloseCallback = function(p1)
 						-- upvalues: self (copy)
 						self:SetServerStatsConnection(p1)
 					end
@@ -200,7 +200,7 @@ end
 
 local NewModule = Module.new()
 
-function Module:refreshTabList() --[[ Line: 310 ]]
+function Module:refreshTabList()
 	-- upvalues: SetTabListModule (copy), getAdminTabList (copy), config (copy)
 	if self.isEmployee then
 		self.store:dispatch(SetTabListModule(getAdminTabList(), "Log", true))
@@ -212,11 +212,11 @@ function Module:refreshTabList() --[[ Line: 310 ]]
 	end
 end
 
-function Module.refreshVoiceDevConsoleAvailability(p1) --[[ Line: 318 ]]
+function Module.refreshVoiceDevConsoleAvailability(p1)
 	-- upvalues: GetFFlagVoiceDebugConsoleV2Module (copy), Default (copy), v1 (ref), config (copy), MainViewVoiceDebugModule (copy)
 	if not GetFFlagVoiceDebugConsoleV2Module() then return end
 	if game:GetEngineFeature("VoiceChatDevConsoleTabEnabled") and Default then
-		local function apply() --[[ Line: 333 ]]
+		local function apply()
 			-- upvalues: Default (upval), v1 (upval), config (upval), MainViewVoiceDebugModule (upval), p1 (copy)
 			local VoiceChatAvailableResult = Default:VoiceChatAvailable()
 			
@@ -235,7 +235,7 @@ function Module.refreshVoiceDevConsoleAvailability(p1) --[[ Line: 318 ]]
 	end
 end
 
-function Module:Start() --[[ Line: 353 ]]
+function Module:Start()
 	-- upvalues: RoactModule (copy), CoreGui (copy), GetClientReplicatorModule (copy), DevConsoleAdminSeesDevTabs (copy), PlayerPermissionsModule (copy), Players (copy), SetTabListModule (copy), config1 (copy), config (copy)
 	if not self.init then
 		if self.waitForStart then
@@ -244,7 +244,7 @@ function Module:Start() --[[ Line: 353 ]]
 		self.init = true
 		self.element = RoactModule.mount(self.root, CoreGui, "DevConsoleMaster")
 		local ClientReplicatorModule = GetClientReplicatorModule()
-		task.spawn(function() --[[ Line: 363 ]]
+		task.spawn(function()
 			-- upvalues: DevConsoleAdminSeesDevTabs (upval), PlayerPermissionsModule (upval), Players (upval), self (copy), SetTabListModule (upval), config1 (upval)
 			if DevConsoleAdminSeesDevTabs then
 				if PlayerPermissionsModule.IsPlayerAdminAsync(Players.LocalPlayer) then
@@ -257,13 +257,13 @@ function Module:Start() --[[ Line: 353 ]]
 				self.store:dispatch(SetTabListModule(config1, "Log", false))
 			end
 		end)
-		task.spawn(function() --[[ Line: 377 ]]
+		task.spawn(function()
 			-- upvalues: self (copy)
 			self:refreshVoiceDevConsoleAvailability()
 		end)
 		
 		if ClientReplicatorModule then
-			self._statsConnector = ClientReplicatorModule.StatsReceived:connect(function(_) --[[ Line: 382 ]]
+			self._statsConnector = ClientReplicatorModule.StatsReceived:connect(function(_)
 				-- upvalues: self (copy), DevConsoleAdminSeesDevTabs (upval), SetTabListModule (upval), config (upval)
 				if not self._statsConnector then return end
 				self._statsConnector:Disconnect()
@@ -283,7 +283,7 @@ function Module:Start() --[[ Line: 353 ]]
 	end
 end
 
-function Module:ToggleVisibility() --[[ Line: 403 ]]
+function Module:ToggleVisibility()
 	-- upvalues: GetFFlagVoiceDebugConsoleV2Module (copy), NewModule (copy)
 	if not self.init then
 		if GetFFlagVoiceDebugConsoleV2Module() then
@@ -295,7 +295,7 @@ function Module:ToggleVisibility() --[[ Line: 403 ]]
 	self:SetVisibility(not self.store:getState().DisplayOptions.isVisible)
 end
 
-function Module:GetVisibility(): boolean --[[ Line: 416 ]]
+function Module:GetVisibility(): boolean
 	if self.init then
 		local State = self.store:getState()
 		
@@ -305,7 +305,7 @@ function Module:GetVisibility(): boolean --[[ Line: 416 ]]
 	end
 end
 
-function Module:SetServerStatsConnection(Request) --[[ Line: 431 ]]
+function Module:SetServerStatsConnection(Request)
 	-- upvalues: GetClientReplicatorModule (copy)
 	local ClientReplicatorModule = GetClientReplicatorModule()
 	
@@ -314,7 +314,7 @@ function Module:SetServerStatsConnection(Request) --[[ Line: 431 ]]
 	end
 end
 
-function Module:SetVisibility(NoIsVisible) --[[ Line: 438 ]]
+function Module:SetVisibility(NoIsVisible)
 	-- upvalues: GetFFlagVoiceDebugConsoleV2Module (copy), NewModule (copy), SetDevConsoleVisibilityModule (copy)
 	if type(NoIsVisible) == "boolean" then
 		if self.init or not NoIsVisible then
@@ -331,11 +331,11 @@ function Module:SetVisibility(NoIsVisible) --[[ Line: 438 ]]
 	end
 end
 
-StarterGui:RegisterGetCore("DevConsoleVisible", function() --[[ Line: 456 ]]
+StarterGui:RegisterGetCore("DevConsoleVisible", function()
 	-- upvalues: NewModule (copy)
 	return NewModule:GetVisibility()
 end)
-StarterGui:RegisterSetCore("DevConsoleVisible", function(p1: boolean) --[[ Line: 460 ]]
+StarterGui:RegisterSetCore("DevConsoleVisible", function(p1: boolean)
 	-- upvalues: NewModule (copy)
 	if type(p1) ~= "boolean" then
 		error("DevConsoleVisible must be given a boolean value.")

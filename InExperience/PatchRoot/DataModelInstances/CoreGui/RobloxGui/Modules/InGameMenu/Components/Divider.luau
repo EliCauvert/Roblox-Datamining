@@ -13,12 +13,12 @@ local StrictInterfaceResult = T.strictInterface({
 	Visible = T.optional(T.boolean)
 })
 
-return function(p1) --[[ Line: 22 | Named "Divider" ]]
+return function(p1)
 	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), WithFoundationOrUIBloxStyleFunction (copy), Roact (copy), Cryo (copy)
 	if GlobalConfigModule.propValidation then
 		assert(StrictInterfaceResult(p1))
 	end
-	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 27 ]]
+	return WithFoundationOrUIBloxStyleFunction(function(p2)
 		return {
 			Theme = {
 				Divider = {
@@ -27,7 +27,7 @@ return function(p1) --[[ Line: 22 | Named "Divider" ]]
 				}
 			}
 		}
-	end, function(p2) --[[ Line: 33 ]]
+	end, function(p2)
 		-- upvalues: Roact (upval), Cryo (upval), p1 (copy)
 		return Roact.createElement("Frame", Cryo.Dictionary.join({ Size = UDim2.new(1, 0, 0, 1) }, p1, {
 			BorderSizePixel = 0,

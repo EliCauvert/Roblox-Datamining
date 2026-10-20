@@ -6,7 +6,7 @@ local CreatePauseFunction = require(RoduxSquads.Persists.Actions).createPause
 local CreatePersistAndUpdateStateFunction = require(RoduxSquads.Persists.Actions).createPersistAndUpdateState
 local config = { isPaused = false }
 
-return function(p1, Callback) --[[ Line: 13 ]]
+return function(p1, Callback)
 	-- upvalues: CreatePauseFunction (copy), CreatePersistAndUpdateStateFunction (copy), CreateInternalPersistManagerFunction (copy), CreatePersistManagerFunction (copy), config (copy), RoduxModule (copy)
 	local Flag = false
 	local Pause = CreatePauseFunction(p1)
@@ -17,13 +17,13 @@ return function(p1, Callback) --[[ Line: 13 ]]
 	local GetResult = nil
 	
 	if InternalPersistManager then
-		local _ = InternalPersistManager.bindToStorage(function(p2) --[[ Line: 27 ]]
+		local _ = InternalPersistManager.bindToStorage(function(p2)
 			-- upvalues: GetResult (ref)
 			GetResult = p2
 		end)
 		GetResult = InternalPersistManager.get()
 	end
-	return function(p2, p3) --[[ Line: 33 ]]
+	return function(p2, p3)
 		-- upvalues: InternalPersistManager (copy), Flag (ref), GetResult (ref), PersistAndUpdateState (copy), IsPaused (ref), Callback (copy)
 		if InternalPersistManager and not Flag then
 			p2 = GetResult or p2
@@ -45,13 +45,13 @@ return function(p1, Callback) --[[ Line: 13 ]]
 		end
 		return v1
 	end, RoduxModule.createReducer(config, {
-		[PersistAndUpdateState.name] = function(_, _) --[[ Line: 55 ]]
+		[PersistAndUpdateState.name] = function(_, _)
 			-- upvalues: IsPaused (ref)
 			IsPaused = false
 			
 			return { isPaused = IsPaused }
 		end,
-		[Pause.name] = function(_, _) --[[ Line: 59 ]]
+		[Pause.name] = function(_, _)
 			-- upvalues: IsPaused (ref)
 			IsPaused = true
 			

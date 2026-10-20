@@ -10,16 +10,16 @@ local _ = require(script.Parent.usePeoplePickerListViewModel)
 local _ = require(ShareSheet.Components.PeoplePicker.usePeoplePickerPagination)
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 
-local function PeoplePickerListItem(p1) --[[ Line: 42 ]]
+local function PeoplePickerListItem(p1)
 	-- upvalues: UsePeoplePickerListItemViewModelModule (copy), ReactModule (copy), PeoplePickerListViewModule (copy)
 	return ReactModule.createElement(PeoplePickerListViewModule.Item, (UsePeoplePickerListItemViewModelModule(p1)))
 end
 
-local function getItemKey(p1): string --[[ Line: 48 ]]
+local function getItemKey(p1): string
 	return if p1.kind == "conversation" then `item--{p1.item.id}` else `skeleton--{p1.index}`
 end
 
-local RecyclableView = ViewRecyclerModule.createRecyclableView(function(p1) --[[ Line: 56 | Named "ConversationRowView" ]]
+local RecyclableView = ViewRecyclerModule.createRecyclableView(function(p1)
 	-- upvalues: SignalsReactModule (copy), ReactModule (copy), PeoplePickerListItem (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
 	local Item = UseSignalStateResult.item
@@ -31,14 +31,14 @@ local RecyclableView = ViewRecyclerModule.createRecyclableView(function(p1) --[[
 		primaryUserId = Item.primaryUserId,
 		secondUserId = Item.secondUserId,
 		title = Item.displayName,
-		onActivated = function() --[[ Line: 67 ]]
+		onActivated = function()
 			-- upvalues: UseSignalStateResult (copy), Item (copy)
 			UseSignalStateResult.onConversationActivated(Item.id)
 		end,
 		testId = `share-sheet-people-picker-row--{Item.id}`
 	})
 end)
-local RecyclableView1 = ViewRecyclerModule.createRecyclableView(function(p1) --[[ Line: 74 | Named "SkeletonRowView" ]]
+local RecyclableView1 = ViewRecyclerModule.createRecyclableView(function(p1)
 	-- upvalues: SignalsReactModule (copy), ReactModule (copy), PeoplePickerListItem (copy)
 	return ReactModule.createElement(PeoplePickerListItem, {
 		description = "",
@@ -46,25 +46,25 @@ local RecyclableView1 = ViewRecyclerModule.createRecyclableView(function(p1) --[
 		isSelected = false,
 		primaryUserId = "",
 		title = "",
-		onActivated = function() --[[ Line: 83 ]] end,
+		onActivated = function() end,
 		testId = `share-sheet-people-picker-skeleton--{SignalsReactModule.useSignalState(p3.itemSignal).index}`
 	})
 end)
 
-local function getItemType(p1) --[[ Line: 91 ]]
+local function getItemType(p1)
 	-- upvalues: RecyclableView (copy), RecyclableView1 (copy)
 	return if p1.kind == "conversation" then RecyclableView else RecyclableView1
 end
 
-local function useMeasuredLayout(EstimatedItemLength) --[[ Line: 95 ]]
+local function useMeasuredLayout(EstimatedItemLength)
 	-- upvalues: ReactModule (copy), ViewRecyclerModule (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 96 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ViewRecyclerModule (upval), EstimatedItemLength (copy)
 		return ViewRecyclerModule.Layout.measured({ estimatedItemLength = EstimatedItemLength })
 	end, { EstimatedItemLength })
-	ReactModule.useEffect(function() --[[ Line: 102 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy)
-		return function() --[[ Line: 103 ]]
+		return function()
 			-- upvalues: UseMemoResult (upval)
 			UseMemoResult.destroy()
 		end
@@ -73,9 +73,9 @@ local function useMeasuredLayout(EstimatedItemLength) --[[ Line: 95 ]]
 	return UseMemoResult
 end
 
-return function(p1) --[[ Line: 111 | Named "PeoplePickerVirtualizedList" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), getItemKey (copy), PeoplePickerListViewModule (copy), useMeasuredLayout (copy), ViewRecyclerModule (copy), getItemType (copy), ShareSheetConstantsModule (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 113 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		local CountItems = #p1.items
 		local Buffer = table.create(CountItems + p1.skeletonCount)
@@ -92,14 +92,14 @@ return function(p1) --[[ Line: 111 | Named "PeoplePickerVirtualizedList" ]]
 		end
 		return Buffer
 	end, { p1.items, p1.onConversationActivated, p1.skeletonCount })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 131 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), getItemKey (upval)
 		return { items = UseMemoResult, getItemKey = getItemKey }
 	end, { UseMemoResult })
 	local UseMeasuredLayoutResult = useMeasuredLayout(PeoplePickerListViewModule.getItemLayoutMetrics((UseTokensFunction())).estimatedRowHeight)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(p1.debouncedQuery)
-	ReactModule.useEffect(function() --[[ Line: 141 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), p1 (copy), UseRefResult (copy)
 		if UseRefResult1.current == p1.debouncedQuery then return end
 		UseRefResult1.current = p1.debouncedQuery

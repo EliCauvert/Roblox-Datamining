@@ -13,7 +13,7 @@ local config = {
 	[StatusCodes.GATEWAY_TIMEOUT] = "Feature.Toast.NetworkingError.Timeout"
 }
 
-return function(HttpError, p1) --[[ Line: 30 | Named "getLocalizedToastStringFromHttpError" ]]
+return function(HttpError, p1)
 	-- upvalues: config (copy)
 	return if HttpError == Enum.HttpError.DnsResolve or HttpError == Enum.HttpError.ConnectFail or HttpError == Enum.HttpError.NetFail or HttpError == Enum.HttpError.SslConnectFail then "Feature.Toast.NetworkingError.UnableToConnect" elseif HttpError == Enum.HttpError.TimedOut then "Feature.Toast.NetworkingError.Timeout" elseif HttpError == Enum.HttpError.Aborted then nil elseif HttpError == Enum.HttpError.OK and p1 ~= nil and config[p1] ~= nil then config[p1] else "Feature.Toast.NetworkingError.SomethingIsWrong"
 end

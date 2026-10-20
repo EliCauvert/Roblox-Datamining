@@ -12,7 +12,7 @@ local InterfaceResult = TModule.interface({
 	}))
 })
 
-return function(p1) --[[ Line: 26 | Named "normalizePresetCatalog" ]]
+return function(p1)
 	-- upvalues: EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy), UnionResult (copy), InterfaceResult (copy)
 	if type(p1) ~= "table" then
 		return nil

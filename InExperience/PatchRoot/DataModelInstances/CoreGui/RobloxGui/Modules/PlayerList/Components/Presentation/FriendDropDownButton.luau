@@ -23,7 +23,7 @@ FriendDropDownButton.validateProps = TModule.strictInterface({
 	contentVisible = TModule.optional(TModule.boolean)
 })
 
-local function getFriendTextAndIcon(FriendStatus) --[[ Line: 41 ]]
+local function getFriendTextAndIcon(FriendStatus)
 	-- upvalues: Images (copy), Localization (copy), LocalizationService (copy), RobloxTranslatorModule (copy)
 	local IconsActionsFriendsFriendAdd = Images["icons/actions/friends/friendAdd"]
 	local IconsActionsFriendsFriendRemove = Images["icons/actions/friends/friendRemove"]
@@ -42,18 +42,18 @@ local function getFriendTextAndIcon(FriendStatus) --[[ Line: 41 ]]
 	end
 end
 
-function FriendDropDownButton.init(p1) --[[ Line: 59 ]]
+function FriendDropDownButton.init(p1)
 	p1.state = { unfriendConfirm = false }
 end
 
-function FriendDropDownButton.render(p1) --[[ Line: 65 ]]
+function FriendDropDownButton.render(p1)
 	-- upvalues: LocalPlayer (copy), RbxAnalyticsService (copy), getFriendTextAndIcon (copy), RoactModule (copy), DropDownButtonAnimatorModule (copy)
 	local PlayerRelationship = p1.props.playerRelationship
 	local SelectedPlayer = p1.props.selectedPlayer
-	local OnActivated = if PlayerRelationship.friendStatus == Enum.FriendStatus.Friend and not p1.state.unfriendConfirm then function() --[[ Line: 70 ]]
+	local OnActivated = if PlayerRelationship.friendStatus == Enum.FriendStatus.Friend and not p1.state.unfriendConfirm then function()
 		-- upvalues: p1 (copy)
 		p1:setState({ unfriendConfirm = true })
-	end else function() --[[ Line: 76 ]]
+	end else function()
 		-- upvalues: PlayerRelationship (copy), LocalPlayer (upval), SelectedPlayer (copy), p1 (copy), RbxAnalyticsService (upval)
 		if PlayerRelationship.friendStatus == Enum.FriendStatus.Friend then
 			LocalPlayer:RevokeFriendship(SelectedPlayer)
@@ -78,11 +78,11 @@ function FriendDropDownButton.render(p1) --[[ Line: 65 ]]
 			p1.props.requestFriendship(SelectedPlayer, true)
 		end
 	end
-	local OnDecline = if PlayerRelationship.friendStatus == Enum.FriendStatus.FriendRequestReceived then function() --[[ Line: 98 ]]
+	local OnDecline = if PlayerRelationship.friendStatus == Enum.FriendStatus.FriendRequestReceived then function()
 		-- upvalues: LocalPlayer (upval), SelectedPlayer (copy)
 		LocalPlayer:RevokeFriendship(SelectedPlayer)
 	end else nil
-	local OnDismiss = if p1.state.unfriendConfirm then function() --[[ Line: 104 ]]
+	local OnDismiss = if p1.state.unfriendConfirm then function()
 		-- upvalues: p1 (copy)
 		p1:setState({ unfriendConfirm = false })
 	end else nil
@@ -101,7 +101,7 @@ function FriendDropDownButton.render(p1) --[[ Line: 65 ]]
 	})
 end
 
-function FriendDropDownButton.didUpdate(p1, p2, _) --[[ Line: 125 ]]
+function FriendDropDownButton.didUpdate(p1, p2, _)
 	if p2.playerRelationship.friendStatus ~= p1.props.playerRelationship.friendStatus then
 		p1:setState({ unfriendConfirm = false })
 	end

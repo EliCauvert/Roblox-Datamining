@@ -4,7 +4,7 @@ local FFlagHttpClientMrRouterHeadersModule = require(script.Parent.Flags.FFlagHt
 local FFlagHttpClientRetryExtensionsModule = require(script.Parent.Flags.FFlagHttpClientRetryExtensions)
 local MrRouterHeadersModule = if FFlagHttpClientMrRouterHeadersModule then require(script:FindFirstAncestor("HttpClient").Parent.MrRouterHeaders) else nil
 
-local function toLowerKeyedHeaders(Headers) --[[ Line: 22 ]]
+local function toLowerKeyedHeaders(Headers)
 	if typeof(Headers) ~= "table" then
 		return nil
 	end
@@ -16,12 +16,12 @@ local function toLowerKeyedHeaders(Headers) --[[ Line: 22 ]]
 	return t
 end
 
-return function(p1) --[[ Line: 33 | Named "createRequestInternalNetwork" ]]
+return function(p1)
 	-- upvalues: FFlagHttpClientRetryExtensionsModule (copy), FFlagHttpClientMrRouterHeadersModule (copy), MrRouterHeadersModule (ref), HttpService (copy), toLowerKeyedHeaders (copy)
 	local TransportFailuresAsResponses = if FFlagHttpClientRetryExtensionsModule then p1 ~= nil and p1.transportFailuresAsResponses else nil
 	
 	return {
-		request = function(p2, Callback) --[[ Line: 38 ]]
+		request = function(p2, Callback)
 			-- upvalues: FFlagHttpClientMrRouterHeadersModule (upval), MrRouterHeadersModule (upval), HttpService (upval), FFlagHttpClientRetryExtensionsModule (upval), TransportFailuresAsResponses (copy), toLowerKeyedHeaders (upval)
 			local RequestInternalResult = HttpService:RequestInternal({
 				Url = p2.url,
@@ -32,7 +32,7 @@ return function(p1) --[[ Line: 33 | Named "createRequestInternalNetwork" ]]
 				Priority = if FFlagHttpClientRetryExtensionsModule then p2.priority else nil
 			})
 			local Flag = false
-			RequestInternalResult:Start(function(p3, p4) --[[ Line: 61 ]]
+			RequestInternalResult:Start(function(p3, p4)
 				-- upvalues: Flag (ref), FFlagHttpClientRetryExtensionsModule (upval), TransportFailuresAsResponses (upval), Callback (copy), toLowerKeyedHeaders (upval)
 				if Flag then return end
 				Flag = true
@@ -70,11 +70,11 @@ return function(p1) --[[ Line: 33 | Named "createRequestInternalNetwork" ]]
 				end
 			end)
 			
-			return function() --[[ Line: 102 ]]
+			return function()
 				-- upvalues: Flag (ref), RequestInternalResult (copy)
 				if not Flag then
 					Flag = true
-					pcall(function() --[[ Line: 107 ]]
+					pcall(function()
 						-- upvalues: RequestInternalResult (upval)
 						RequestInternalResult:Cancel()
 					end)

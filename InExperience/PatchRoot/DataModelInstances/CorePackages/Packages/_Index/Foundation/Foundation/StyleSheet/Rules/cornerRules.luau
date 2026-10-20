@@ -32,7 +32,7 @@ local config1 = {
 	}
 }
 
-local function _(p1, List) --[[ Line: 44 | Named "cornerProperties" ]]
+local function _(p1, List)
 	local t = {}
 	
 	for _, value in List do
@@ -41,7 +41,7 @@ local function _(p1, List) --[[ Line: 44 | Named "cornerProperties" ]]
 	return t
 end
 
-local _ = function(Tag) --[[ Line: 54 | Named "zeroedBaseline" ]]
+local _ = function(Tag)
 	-- upvalues: _UDim (copy), list (copy)
 	local config = { pseudo = "UICorner", priority = 0, tag = Tag }
 	local Properties = {}
@@ -54,7 +54,7 @@ local _ = function(Tag) --[[ Line: 54 | Named "zeroedBaseline" ]]
 	return config
 end
 
-return function(List, Callback) --[[ Line: 63 | Named "cornerRules" ]]
+return function(List, Callback)
 	-- upvalues: list (copy), config1 (copy), _UDim (copy), config (copy)
 	local List1 = {}
 	

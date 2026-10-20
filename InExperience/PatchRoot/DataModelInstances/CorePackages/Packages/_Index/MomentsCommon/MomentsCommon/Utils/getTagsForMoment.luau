@@ -2,7 +2,7 @@
 local _ = require(MomentsCommon.Types)
 local ConstantsModule = require(MomentsCommon.Constants)
 
-return function(p1) --[[ Line: 8 | Named "getTagsForMoment" ]]
+return function(p1)
 	-- upvalues: ConstantsModule (copy)
 	local List = {}
 	

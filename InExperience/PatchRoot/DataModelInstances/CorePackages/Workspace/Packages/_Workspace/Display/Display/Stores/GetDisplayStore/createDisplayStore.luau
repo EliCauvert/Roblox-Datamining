@@ -15,7 +15,7 @@ local FFlagDebugForceConsoleSafeInsets = require(Parent1.SharedFlags).FFlagDebug
 local v1: number = if FFlagDisableLuaAppConsoleScaleModule then 1 else 1.5
 local IsTenFootInterface = AppCommonLibModule.isTenFootInterface()
 
-local function forceConsoleSafeInsets(Vector) --[[ Line: 43 ]]
+local function forceConsoleSafeInsets(Vector)
 	-- upvalues: Parent1 (copy), v1 (copy)
 	local MessageBus = require(Parent1.MessageBus).MessageBus
 	local TModule = require(Parent1.t)
@@ -35,22 +35,22 @@ local function forceConsoleSafeInsets(Vector) --[[ Line: 43 ]]
 	})
 end
 
-return function() --[[ Line: 67 ]]
+return function()
 	-- upvalues: SignalsModule (copy), AppCommonLibModule (copy), GuiService (copy), VrCompatibilityModule (copy), FFlagDebugForceConsoleSafeInsets (copy), forceConsoleSafeInsets (copy), EnableDisplaySizeEngineFeature (copy), GetGlobalGuiInsetModule (copy), DebugLuaAppEnableScale (copy), FIntLuaAppSmallScreenDesignWidthModule (copy), DebugLuaAppEnableScale1 (copy), IsTenFootInterface (copy), v1 (copy)
 	local Connection = nil
 	local Signal, Signal2 = SignalsModule.createSignal(workspace.CurrentCamera)
-	Connection = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function() --[[ Line: 70 ]]
+	Connection = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
 		-- upvalues: Signal2 (copy)
 		Signal2(workspace.CurrentCamera)
 	end)
 	local ConnectToIsSpatialChangedResult = nil
 	local Signal1, Signal2_1 = SignalsModule.createSignal(AppCommonLibModule.isSpatial())
-	ConnectToIsSpatialChangedResult = AppCommonLibModule.connectToIsSpatialChanged(function(p1) --[[ Line: 76 ]]
+	ConnectToIsSpatialChangedResult = AppCommonLibModule.connectToIsSpatialChanged(function(p1)
 		-- upvalues: Signal2_1 (copy)
 		Signal2_1(p1)
 	end)
 	
-	local function calculateDeviceSafePadding() --[[ Line: 80 ]]
+	local function calculateDeviceSafePadding()
 		-- upvalues: GuiService (upval)
 		local InsetArea = GuiService:GetInsetArea(Enum.ScreenInsets.None)
 		local InsetArea1 = GuiService:GetInsetArea(Enum.ScreenInsets.DeviceSafeInsets)
@@ -72,7 +72,7 @@ return function() --[[ Line: 67 ]]
 	end
 	local Signal4, Signal2_3 = SignalsModule.createSignal(_Vector2)
 	local Connection1 = nil
-	local Effect = SignalsModule.createEffect(function(p1) --[[ Line: 100 ]]
+	local Effect = SignalsModule.createEffect(function(p1)
 		-- upvalues: Signal (copy), Connection1 (ref), Signal1 (copy), Signal2_3 (copy), VrCompatibilityModule (upval), Signal2_2 (copy), calculateDeviceSafePadding (copy), FFlagDebugForceConsoleSafeInsets (upval), forceConsoleSafeInsets (upval), Signal4 (copy)
 		local SignalResult = Signal(p1)
 		
@@ -86,7 +86,7 @@ return function() --[[ Line: 67 ]]
 				
 				return
 			end
-			Connection1 = SignalResult:GetPropertyChangedSignal("ViewportSize"):Connect(function() --[[ Line: 111 ]]
+			Connection1 = SignalResult:GetPropertyChangedSignal("ViewportSize"):Connect(function()
 				-- upvalues: Signal2_3 (upval), SignalResult (copy), Signal2_2 (upval), calculateDeviceSafePadding (upval), FFlagDebugForceConsoleSafeInsets (upval), forceConsoleSafeInsets (upval), Signal4 (upval), p1 (copy)
 				Signal2_3(SignalResult.ViewportSize)
 				Signal2_2((calculateDeviceSafePadding()))
@@ -98,14 +98,14 @@ return function() --[[ Line: 67 ]]
 		end
 	end)
 	local Signal5, Signal2_4 = SignalsModule.createSignal(if EnableDisplaySizeEngineFeature then GuiService.ViewportDisplaySize else nil)
-	local Connection2 = if EnableDisplaySizeEngineFeature then GuiService:GetPropertyChangedSignal("ViewportDisplaySize"):Connect(function() --[[ Line: 130 ]]
+	local Connection2 = if EnableDisplaySizeEngineFeature then GuiService:GetPropertyChangedSignal("ViewportDisplaySize"):Connect(function()
 		-- upvalues: Signal2_4 (copy), GuiService (upval)
 		Signal2_4(GuiService.ViewportDisplaySize)
 	end) else nil
 	local GlobalGuiInsetModule = GetGlobalGuiInsetModule()
 	local Signal6, Signal2_5 = SignalsModule.createSignal(GlobalGuiInsetModule)
 	local Signal7, Signal2_6 = SignalsModule.createSignal(GlobalGuiInsetModule.top)
-	local Computed = SignalsModule.createComputed(function(p1) --[[ Line: 139 ]]
+	local Computed = SignalsModule.createComputed(function(p1)
 		-- upvalues: Signal5 (copy), Signal4 (copy), DebugLuaAppEnableScale (upval), FIntLuaAppSmallScreenDesignWidthModule (upval), DebugLuaAppEnableScale1 (upval)
 		local SignalResult = Signal5(p1)
 		local SignalResult1 = Signal4(p1)
@@ -119,7 +119,7 @@ return function() --[[ Line: 67 ]]
 			return if DebugLuaAppEnableScale1 and IsSignalResultMatch and IsXAbove then SignalResult1.X / FIntLuaAppSmallScreenDesignWidthModule else 1
 		end
 	end)
-	local Computed1 = SignalsModule.createComputed(function(p1) --[[ Line: 157 ]]
+	local Computed1 = SignalsModule.createComputed(function(p1)
 		-- upvalues: IsTenFootInterface (upval), v1 (upval), Computed (copy)
 		return if IsTenFootInterface then v1 else Computed(p1)
 	end)
@@ -131,7 +131,7 @@ return function() --[[ Line: 67 ]]
 		getTopBarHeight = Signal7,
 		getUIScale = Computed,
 		getPlatformScale = Computed1,
-		getDesignSpaceViewportWidth = SignalsModule.createComputed(function(p1) --[[ Line: 166 ]]
+		getDesignSpaceViewportWidth = SignalsModule.createComputed(function(p1)
 			-- upvalues: Signal4 (copy), Computed1 (copy)
 			local SignalResult = Signal4(p1)
 			local ComputedResult = Computed1(p1)
@@ -145,7 +145,7 @@ return function() --[[ Line: 67 ]]
 		setGuiInset = Signal2_5,
 		setTopBarHeight = Signal2_6,
 		getDeviceSafePadding = Signal3,
-		cleanUp = function() --[[ Line: 187 ]]
+		cleanUp = function()
 			-- upvalues: Connection2 (ref), Connection1 (ref), Connection (ref), ConnectToIsSpatialChangedResult (ref), Effect (copy)
 			if Connection2 then
 				Connection2:Disconnect()
@@ -167,7 +167,7 @@ return function() --[[ Line: 67 ]]
 				Effect()
 			end
 		end,
-		forceConsoleSafeInsets = if FFlagDebugForceConsoleSafeInsets then function() --[[ Line: 209 ]]
+		forceConsoleSafeInsets = if FFlagDebugForceConsoleSafeInsets then function()
 			-- upvalues: forceConsoleSafeInsets (upval), Signal4 (copy)
 			forceConsoleSafeInsets(Signal4())
 		end else nil

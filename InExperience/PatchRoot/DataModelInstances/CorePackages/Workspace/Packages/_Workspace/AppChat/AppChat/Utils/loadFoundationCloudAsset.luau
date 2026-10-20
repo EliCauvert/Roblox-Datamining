@@ -4,7 +4,7 @@ local Assets = FoundationCloudAssetsModule.Assets
 local PreloadAssetFunction = FoundationCloudAssetsModule.preloadAsset
 local LoadFoundationCloudAsset = require(AppChat.Logger):new("loadFoundationCloudAsset")
 
-return function(p1) --[[ Line: 12 | Named "loadFoundationCloudAsset" ]]
+return function(p1)
 	-- upvalues: PreloadAssetFunction (copy), Assets (copy), LoadFoundationCloudAsset (copy)
 	PreloadAssetFunction(p1)
 	local Asset = Assets[p1]

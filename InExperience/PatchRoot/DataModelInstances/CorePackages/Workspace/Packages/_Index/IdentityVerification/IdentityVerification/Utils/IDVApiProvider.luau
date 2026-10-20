@@ -27,11 +27,11 @@ local v1 = UrlBuilder.new({
 	base = UrlBase.APIS
 })()
 
-local function _(p1) --[[ Line: 46 | Named "getHttpStatusFromWrappedNetworkingError" ]]
+local function _(p1)
 	return if type(p1) == "table" then p1.StatusCode or (p1.responseCode or (p1.status or p1.statusCode)) else nil
 end
 
-local _ = function(p1) --[[ Line: 59 | Named "maybeShowAgeVerificationFeatureRestriction" ]]
+local _ = function(p1)
 	-- upvalues: FFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (copy), ShowFeatureRestrictionFunction (copy), AbuseVector (copy), BuildAgeVerificationFeatureRestrictionOverridesModule (copy)
 	if FFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule and p1 == 403 then
 		ShowFeatureRestrictionFunction(AbuseVector.AgeVerification, BuildAgeVerificationFeatureRestrictionOverridesModule())
@@ -40,12 +40,12 @@ local _ = function(p1) --[[ Line: 59 | Named "maybeShowAgeVerificationFeatureRes
 	end
 end
 
-local function startVerification(p1, p2) --[[ Line: 152 ]]
+local function startVerification(p1, p2)
 	-- upvalues: NewUrlBuilder1 (copy), v1 (copy), FetchFunction (copy), PromiseModule (copy), HttpService (copy), CryoModule (copy), Response (copy), FFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (copy), ShowFeatureRestrictionFunction (copy), AbuseVector (copy), BuildAgeVerificationFeatureRestrictionOverridesModule (copy)
 	local P6 = p2 or NewUrlBuilder1()
 	local IsNotPMatch = P6 ~= v1
 	
-	return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 157 ]]
+	return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 		-- upvalues: FetchFunction (copy), P6 (copy), HttpService (upval), CryoModule (upval), p1 (copy), Response (upval), IsNotPMatch (copy), FFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (upval), ShowFeatureRestrictionFunction (upval), AbuseVector (upval), BuildAgeVerificationFeatureRestrictionOverridesModule (upval)
 		local v2 = FetchFunction(P6, {
 			method = "POST",
@@ -54,13 +54,13 @@ local function startVerification(p1, p2) --[[ Line: 152 ]]
 				["Content-Type"] = "application/json",
 				Accept = "application/json"
 			}
-		}):catch(function() --[[ Line: 166 ]]
+		}):catch(function()
 			-- upvalues: Response (upval)
 			return Response.error()
 		end):expect()
 		
 		if v2.ok then
-			local v3 = v2:json():catch(function() --[[ Line: 182 ]]
+			local v3 = v2:json():catch(function()
 				return nil
 			end):expect()
 			
@@ -94,13 +94,13 @@ end
 
 return {
 	startVerification = startVerification,
-	startVerificationWithWrappedNetworking = function(Callback, p1) --[[ Line: 114 ]]
+	startVerificationWithWrappedNetworking = function(Callback, p1)
 		-- upvalues: PromiseModule (copy), NewUrlBuilder1 (copy), CryoModule (copy), HttpService (copy), FFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (copy), ShowFeatureRestrictionFunction (copy), AbuseVector (copy), BuildAgeVerificationFeatureRestrictionOverridesModule (copy)
-		return PromiseModule.new(function(Callback2, Callback1) --[[ Line: 115 ]]
+		return PromiseModule.new(function(Callback2, Callback1)
 			-- upvalues: NewUrlBuilder1 (upval), CryoModule (upval), p1 (copy), Callback (copy), HttpService (upval), FFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (upval), ShowFeatureRestrictionFunction (upval), AbuseVector (upval), BuildAgeVerificationFeatureRestrictionOverridesModule (upval)
 			Callback(NewUrlBuilder1(), "POST", {
 				postBody = HttpService:JSONEncode((CryoModule.Dictionary.join({ generatedLink = true }, p1 or {})))
-			}):catch(function(Err) --[[ Line: 123 ]]
+			}):catch(function(Err)
 				-- upvalues: FFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (upval), ShowFeatureRestrictionFunction (upval), AbuseVector (upval), BuildAgeVerificationFeatureRestrictionOverridesModule (upval), Callback1 (copy)
 				local StatusCode = if type(Err) == "table" then Err.StatusCode or (Err.responseCode or (Err.status or Err.statusCode)) else nil
 				
@@ -108,7 +108,7 @@ return {
 					ShowFeatureRestrictionFunction(AbuseVector.AgeVerification, BuildAgeVerificationFeatureRestrictionOverridesModule())
 				end
 				Callback1("Got error on start-verificatin")
-			end):andThen(function(Entry) --[[ Line: 129 ]]
+			end):andThen(function(Entry)
 				-- upvalues: Callback1 (copy), Callback2 (copy)
 				if not Entry or not Entry[1] then
 					Callback1("Got start-verification HTTP with no valid response")
@@ -133,15 +133,15 @@ return {
 			end)
 		end)
 	end,
-	startLivenessVerification = function(p1) --[[ Line: 203 ]]
+	startLivenessVerification = function(p1)
 		-- upvalues: startVerification (copy), v1 (copy)
 		return startVerification(p1, v1)
 	end,
-	getVerifiedStatus = function(Token) --[[ Line: 71 ]]
+	getVerifiedStatus = function(Token)
 		-- upvalues: FetchFunction (copy), PromiseModule (copy), NewUrlBuilder (copy), Response (copy)
-		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 73 ]]
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 			-- upvalues: NewUrlBuilder (upval), Token (copy), FetchFunction (copy), Response (upval)
-			local v2 = FetchFunction(NewUrlBuilder({ token = Token }), { method = "GET" }):catch(function() --[[ Line: 76 ]]
+			local v2 = FetchFunction(NewUrlBuilder({ token = Token }), { method = "GET" }):catch(function()
 				-- upvalues: Response (upval)
 				return Response.error()
 			end):expect()
@@ -151,7 +151,7 @@ return {
 				
 				return
 			end
-			local v3 = v2:json():catch(function() --[[ Line: 90 ]]
+			local v3 = v2:json():catch(function()
 				return nil
 			end):expect()
 			

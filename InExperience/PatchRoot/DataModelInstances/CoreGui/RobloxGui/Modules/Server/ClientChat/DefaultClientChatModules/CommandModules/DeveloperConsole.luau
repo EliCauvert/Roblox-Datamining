@@ -1,18 +1,18 @@
 ﻿local StarterGui = game:GetService("StarterGui")
 local UtilModule = require(script.Parent:WaitForChild("Util"))
 
-function ProcessMessage(Text: string, _, _): boolean --[[ Line: 9 ]]
+function ProcessMessage(Text: string, _, _): boolean
 	-- upvalues: StarterGui (copy)
 	if string.sub(Text, 1, 8):lower() ~= "/console" and string.sub(Text, 1, 11):lower() ~= "/newconsole" then
 		return false
 	end
-	local Success, Result = pcall(function() --[[ Line: 11 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: StarterGui (upval)
 		return StarterGui:GetCore("DevConsoleVisible")
 	end)
 	
 	if Success then
-		local Success1, Result1 = pcall(function() --[[ Line: 13 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: StarterGui (upval), Result (copy)
 			StarterGui:SetCore("DevConsoleVisible", not Result)
 		end)

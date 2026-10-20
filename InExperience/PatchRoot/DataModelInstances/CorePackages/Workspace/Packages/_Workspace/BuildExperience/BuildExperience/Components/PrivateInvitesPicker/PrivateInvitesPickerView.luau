@@ -14,7 +14,7 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local IconName = FoundationModule.Enums.IconName
 local InputSize = FoundationModule.Enums.InputSize
 
-return function(p1) --[[ Line: 64 | Named "PrivateInvitesPickerView" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), Button (copy), ButtonVariant (copy), InputSize (copy), Sheet (copy), IconButton (copy), IconName (copy), SearchInput (copy), UserPickerListModule (copy), PrivateInviteAddErrorDialogModule (copy), PrivateInviteAddRejectedDialogModule (copy)
 	local TestId = p1.testId or "private-invites-picker"
 	

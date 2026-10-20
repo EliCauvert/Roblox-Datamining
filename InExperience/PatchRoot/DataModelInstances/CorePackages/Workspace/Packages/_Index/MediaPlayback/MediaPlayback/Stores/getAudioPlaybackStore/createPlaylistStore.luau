@@ -2,12 +2,12 @@
 local _ = require(MediaPlayback.Stores.getAudioPlaybackStore.types)
 local CreateSignalFunction = require(MediaPlayback.Parent.Signals).createSignal
 
-return function() --[[ Line: 9 | Named "createPlaylistStore" ]]
+return function()
 	-- upvalues: CreateSignalFunction (copy)
 	local Signal, Signal2 = CreateSignalFunction({})
 	local Signal1, Signal2_1 = CreateSignalFunction({})
 	
-	local function _(p1, p2) --[[ Line: 13 | Named "getRelativeIndex" ]]
+	local function _(p1, p2)
 		-- upvalues: Signal1 (copy), Signal (copy)
 		local SignalResultEntry = Signal1(false)[tostring(p1)]
 		
@@ -16,7 +16,7 @@ return function() --[[ Line: 9 | Named "createPlaylistStore" ]]
 	
 	return {
 		get = Signal,
-		set = function(List) --[[ Line: 22 ]]
+		set = function(List)
 			-- upvalues: Signal2 (copy), Signal2_1 (copy)
 			Signal2(List)
 			local t = {}
@@ -26,13 +26,13 @@ return function() --[[ Line: 9 | Named "createPlaylistStore" ]]
 			end
 			Signal2_1(t)
 		end,
-		getNext = function(p1) --[[ Line: 32 ]]
+		getNext = function(p1)
 			-- upvalues: Signal1 (copy), Signal (copy)
 			local SignalResultEntry: number = Signal1(false)[tostring(p1)]
 			
 			return if SignalResultEntry then Signal(false)[SignalResultEntry + 1] else nil
 		end,
-		getPrev = function(p1) --[[ Line: 36 ]]
+		getPrev = function(p1)
 			-- upvalues: Signal1 (copy), Signal (copy)
 			local SignalResultEntry: number = Signal1(false)[tostring(p1)]
 			

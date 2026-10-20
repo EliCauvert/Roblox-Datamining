@@ -5,7 +5,7 @@ local ProgressTileModule = require(script.Parent.ProgressTile)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local IDVStep = require(AmpUpsell.Common.Enums).IDVStep
 
-return function(p1) --[[ Line: 15 | Named "ProgressChecklist" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), IDVStep (copy), ReactModule (copy), ProgressTileModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		connectedMobile = "Verification.Identity.Label.ConnectingToMobile",

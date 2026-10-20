@@ -3,11 +3,11 @@ local _ = require(script.Parent.Types)
 local _ = require(script.Parent.Parent.UniversalMessage.Types)
 local PresetMessageToContentModule = require(script.Parent.presetMessageToContent)
 
-local function _(p1): string --[[ Line: 23 | Named "accessLevelToStatus" ]]
+local function _(p1): string
 	return if p1 == "Enabled" then "enabled" else "disabled"
 end
 
-local function presetCategoryToExpressionCategory(p1) --[[ Line: 30 ]]
+local function presetCategoryToExpressionCategory(p1)
 	-- upvalues: EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy), PresetMessageToContentModule (copy)
 	local Items = {}
 	
@@ -25,7 +25,7 @@ local function presetCategoryToExpressionCategory(p1) --[[ Line: 30 ]]
 	}
 end
 
-local function presetCategoryGroupToExpressionGroup(p2) --[[ Line: 50 ]]
+local function presetCategoryGroupToExpressionGroup(p2)
 	-- upvalues: presetCategoryToExpressionCategory (copy)
 	local Categories = {}
 	
@@ -39,7 +39,7 @@ local function presetCategoryGroupToExpressionGroup(p2) --[[ Line: 50 ]]
 	}
 end
 
-return function(p3) --[[ Line: 62 | Named "presetCatalogToExpressionCatalog" ]]
+return function(p3)
 	-- upvalues: presetCategoryGroupToExpressionGroup (copy)
 	local CategoryGroups = {}
 	

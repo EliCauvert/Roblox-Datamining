@@ -9,7 +9,7 @@ local QuickStartSquadInviteFriendsScreenModule = require(AppChat.Components.Squa
 local FFlagEnablePartyQuickStartButton = require(Parent.SharedFlags).FFlagEnablePartyQuickStartButton
 local GetFFlagAppChatEnableRootedNavigationModule = require(AppChat.Flags.getFFlagAppChatEnableRootedNavigation)
 
-local function getChatDetailsNavigationOptions(p1) --[[ Line: 23 ]]
+local function getChatDetailsNavigationOptions(p1)
 	-- upvalues: ChatDetailsNavigationOptionsModule (copy)
 	return ChatDetailsNavigationOptionsModule.getNavigationOptions(p1, { tabBarVisible = false })
 end
@@ -18,7 +18,7 @@ local List = {
 	{
 		[EnumScreensModule.ChatLanding] = {
 			screen = require(AppChat.Components.ChatLanding.ChatLandingScreen),
-			navigationOptions = if require(AppChat.Flags.getFFlagAppChatRemoveDynamicRequires)() then function() --[[ Line: 34 ]]
+			navigationOptions = if require(AppChat.Flags.getFFlagAppChatRemoveDynamicRequires)() then function()
 				return {
 					isRoot = true,
 					backButtonEnabled = false,

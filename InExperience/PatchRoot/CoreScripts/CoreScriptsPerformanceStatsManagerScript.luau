@@ -24,19 +24,19 @@ if not v1 then
 		NewResults[allStatType] = StatsButtonModule.new(allStatType)
 	end
 end
-function ShowMasterFrame() --[[ Line: 48 ]]
+function ShowMasterFrame()
 	-- upvalues: PerformanceStats (ref), CoreGui (copy)
 	PerformanceStats.Visible = true
 	PerformanceStats.Parent = CoreGui.RobloxGui
 end
 
-function HideMasterFrame() --[[ Line: 53 ]]
+function HideMasterFrame()
 	-- upvalues: PerformanceStats (ref)
 	PerformanceStats.Visible = false
 	PerformanceStats.Parent = nil
 end
 
-function ConfigureMasterFrame() --[[ Line: 59 ]]
+function ConfigureMasterFrame()
 	-- upvalues: PerformanceStats (ref)
 	PerformanceStats.Position = UDim2.new(0, 0, 0, 0)
 	PerformanceStats.Size = UDim2.new(1, 0, 1, 0)
@@ -47,28 +47,28 @@ function ConfigureMasterFrame() --[[ Line: 59 ]]
 	HideMasterFrame()
 end
 
-function ConfigureStatButtonsInMasterFrame() --[[ Line: 77 ]]
+function ConfigureStatButtonsInMasterFrame()
 	-- upvalues: StatsUtilsModule (copy)
 	for i, allStatType in ipairs(StatsUtilsModule.AllStatTypes) do
 		AddButton(allStatType, i)
 	end
 end
 
-function OnButtonToggled(p1) --[[ Line: 84 ]]
+function OnButtonToggled(p1)
 	-- upvalues: NewResults (ref), Label (ref)
 	Label = if not NewResults[p1]._isSelected then p1 else nil
 	UpdateButtonSelectedStates()
 	UpdateViewerVisibility()
 end
 
-function UpdateButtonSelectedStates() --[[ Line: 99 ]]
+function UpdateButtonSelectedStates()
 	-- upvalues: StatsUtilsModule (copy), NewResults (ref), Label (ref)
 	for _, allStatType in ipairs(StatsUtilsModule.AllStatTypes) do
 		NewResults[allStatType]:SetIsSelected(allStatType == Label)
 	end
 end
 
-function UpdateViewerVisibility() --[[ Line: 106 ]]
+function UpdateViewerVisibility()
 	-- upvalues: Label (ref), NewResult (ref), Singleton (ref), RbxAnalyticsService (copy)
 	if Label ~= nil then
 		local Flag = false
@@ -93,7 +93,7 @@ function UpdateViewerVisibility() --[[ Line: 106 ]]
 	end
 end
 
-function AddButton(p1, p2: number) --[[ Line: 135 ]]
+function AddButton(p1, p2: number)
 	-- upvalues: NewResults (ref), PerformanceStats (ref), Singleton (ref), StatsUtilsModule (copy)
 	local NewResult = NewResults[p1]
 	NewResult:SetParent(PerformanceStats)
@@ -103,14 +103,14 @@ function AddButton(p1, p2: number) --[[ Line: 135 ]]
 	NewResult:SetToggleCallbackFunction(OnButtonToggled)
 end
 
-function ConfigureStatViewerInMasterFrame() --[[ Line: 154 ]]
+function ConfigureStatViewerInMasterFrame()
 	-- upvalues: NewResult (ref), PerformanceStats (ref), StatsUtilsModule (copy)
 	NewResult:SetParent(PerformanceStats)
 	NewResult:SetSizeAndPosition(UDim2.new(0, StatsUtilsModule.ViewerWidth, 0, StatsUtilsModule.ViewerHeight), (UDim2.new(1, -StatsUtilsModule.ViewerWidth, 0, StatsUtilsModule.ButtonHeight + StatsUtilsModule.ViewerTopMargin)))
 end
 
 if v1 then
-	function CreatePerformanceStatsUI() --[[ Line: 166 ]]
+	function CreatePerformanceStatsUI()
 		-- upvalues: Singleton (ref), StatsAggregatorManagerModule (copy), PerformanceStats (ref), NewResults (ref), StatsUtilsModule (copy), StatsButtonModule (copy), NewResult (ref), StatsViewerModule (copy), Label (ref)
 		Singleton = StatsAggregatorManagerModule.getSingleton()
 		Singleton:StartListening()
@@ -131,7 +131,7 @@ if v1 then
 		ShowMasterFrame()
 	end
 	
-	function DestroyPerformanceStatsUI() --[[ Line: 192 ]]
+	function DestroyPerformanceStatsUI()
 		-- upvalues: NewResult (ref), StatsUtilsModule (copy), NewResults (ref), PerformanceStats (ref), Label (ref), Singleton (ref)
 		if NewResult then
 			NewResult:OnPerformanceStatsShouldBeVisibleChanged()
@@ -156,7 +156,7 @@ if v1 then
 		end
 	end
 	
-	function UpdatePerformanceStatsVisibility() --[[ Line: 218 ]]
+	function UpdatePerformanceStatsVisibility()
 		-- upvalues: StatsUtilsModule (copy), PerformanceStats (ref), RbxAnalyticsService (copy), CurrentTime (ref)
 		local PerformanceStatsShouldBeVisibleResult = StatsUtilsModule.PerformanceStatsShouldBeVisible()
 		
@@ -179,7 +179,7 @@ if v1 then
 		end
 	end
 else
-	function UpdatePerformanceStatsVisibility() --[[ Line: 251 ]]
+	function UpdatePerformanceStatsVisibility()
 		-- upvalues: StatsUtilsModule (copy), PerformanceStats (ref), NewResult (ref), NewResults (ref), RbxAnalyticsService (copy), CurrentTime (ref)
 		local PerformanceStatsShouldBeVisibleResult = StatsUtilsModule.PerformanceStatsShouldBeVisible()
 		
@@ -217,7 +217,7 @@ if not v1 then
 	UpdateViewerVisibility()
 	UpdatePerformanceStatsVisibility()
 end
-spawn(function() --[[ Line: 305 ]]
+spawn(function()
 	-- upvalues: Players (copy)
 	local LocalPlayer = Players.LocalPlayer
 	while not LocalPlayer do

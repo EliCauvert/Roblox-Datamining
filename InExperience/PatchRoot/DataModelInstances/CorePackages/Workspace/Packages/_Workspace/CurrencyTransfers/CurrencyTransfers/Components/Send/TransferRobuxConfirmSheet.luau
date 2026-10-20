@@ -33,11 +33,11 @@ local GetFIntCurrencyTransferPlatformFeeRateModule = require(CurrencyTransfers.F
 local GetFFlagCurrencyTransferFocusNavigationModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferFocusNavigation)
 local UseTransferSheetFocusModule = require(CurrencyTransfers.Hooks.useTransferSheetFocus)
 
-return function(_) --[[ Line: 59 | Named "TransferRobuxConfirmSheet" ]]
+return function(_)
 	-- upvalues: UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), UseTransferStoreModule (copy), ReactModule (copy), LogCurrencyTransferCounterModule (copy), CurrencyTransferTelemetryModule (copy), SharedFlagsModule (copy), LogRobuxTransferFlowEventModule (copy), RobuxTransferFlowEventNameModule (copy), SignalsReactModule (copy), TransferOriginationModule (copy), GetFFlagCurrencyTransferFocusNavigationModule (copy), UseTransferSheetFocusModule (copy), GetFFlagCurrencyTransferFlowUIImprovementFixModule (copy), GetFIntCurrencyTransferDeveloperCommissionRateModule (copy), GetFIntCurrencyTransferPlatformFeeRateModule (copy), Sheet (copy), TransferRobuxHeaderModule (copy), View (copy), TransferProfileThumbnailModule (copy), Text (copy), GetIconRichTextFunction (copy), Enums (copy), IconVariant (copy), RobuxTextModule (copy), Button (copy), SetTransferPromptStateModule (copy), PromptStateModule (copy), ProcessTransferModule (copy), ButtonVariant (copy), FillBehavior (copy), FoundationModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction(TransferLocalizationKeysModule.Presets.TransferRobuxConfirmSheet)
 	local UseTransferStoreModuleResult = UseTransferStoreModule()
-	ReactModule.useEffect(function() --[[ Line: 64 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: LogCurrencyTransferCounterModule (upval), UseTransferStoreModuleResult (copy), CurrencyTransferTelemetryModule (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval)
 		LogCurrencyTransferCounterModule(UseTransferStoreModuleResult, CurrencyTransferTelemetryModule.CurrencyTransferConfirmSheetShownCounter)
 		
@@ -61,19 +61,19 @@ return function(_) --[[ Line: 59 | Named "TransferRobuxConfirmSheet" ]]
 	local Year = os.date("*t").year
 	local UseStateResult, UseStateResult2 = ReactModule.useState(UserRelationshipDetail)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Recipient)
-	ReactModule.useEffect(function() --[[ Line: 88 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UserRelationshipDetail (copy), UseStateResult2 (copy)
 		if UserRelationshipDetail then
 			UseStateResult2(UserRelationshipDetail)
 		end
 	end, { UserRelationshipDetail })
-	ReactModule.useEffect(function() --[[ Line: 94 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Recipient (copy), UseStateResult2_1 (copy)
 		if Recipient then
 			UseStateResult2_1(Recipient)
 		end
 	end, { Recipient })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 101 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: GetFFlagCurrencyTransferFlowUIImprovementFixModule (upval), UseStateResult (copy), UseLocalizationResult (copy), Year (copy)
 		if GetFFlagCurrencyTransferFlowUIImprovementFixModule() then
 			if not UseStateResult or not UseStateResult.friendSinceDate then
@@ -115,7 +115,7 @@ return function(_) --[[ Line: 59 | Named "TransferRobuxConfirmSheet" ]]
 		UseLocalizationResult.ConnectedDaysSingular,
 		UseLocalizationResult.NewConnection
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function(): string --[[ Line: 164 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function(): string
 		-- upvalues: UseStateResult (copy), GetFFlagCurrencyTransferFlowUIImprovementFixModule (upval), UseLocalizationResult (copy)
 		local MutualFriendsCount: number = UseStateResult.mutualFriendsCount
 		
@@ -126,11 +126,11 @@ return function(_) --[[ Line: 59 | Named "TransferRobuxConfirmSheet" ]]
 		UseLocalizationResult.MutualConnection,
 		UseLocalizationResult.MutualConnectionSingular
 	})
-	local UseMemoResult2 = ReactModule.useMemo(function(): string --[[ Line: 183 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function(): string
 		-- upvalues: UseLocalizationResult (copy), UseStateResult (copy)
 		return string.gsub(UseLocalizationResult.JoinedInYear, "{year}", (tostring(UseStateResult.userAccountSinceYear)))
 	end, { UseStateResult.userAccountSinceYear })
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 188 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: GetFFlagCurrencyTransferFlowUIImprovementFixModule (upval), IsTransferOriginationMatch (copy), UseSignalStateResult1 (copy), GetFIntCurrencyTransferDeveloperCommissionRateModule (upval), GetFIntCurrencyTransferPlatformFeeRateModule (upval), UseLocalizationResult (copy)
 		return if GetFFlagCurrencyTransferFlowUIImprovementFixModule() then if IsTransferOriginationMatch and UseSignalStateResult1 then string.gsub(string.gsub(UseLocalizationResult.RecipientWillGetInGame, "{amount}", (tostring((math.ceil(UseSignalStateResult1 * (1 - (GetFIntCurrencyTransferDeveloperCommissionRateModule() + GetFIntCurrencyTransferPlatformFeeRateModule()) / 100)))))), "{commissionPercentage}", (tostring((GetFIntCurrencyTransferDeveloperCommissionRateModule())))) elseif UseSignalStateResult1 then string.gsub(UseLocalizationResult.RecipientWillGetInApp, "{amount}", (tostring(UseSignalStateResult1))) else nil elseif IsTransferOriginationMatch and UseSignalStateResult1 then string.gsub(UseLocalizationResult.RecipientWillGet, "{amount}", (tostring((math.ceil(UseSignalStateResult1 * (1 - (GetFIntCurrencyTransferDeveloperCommissionRateModule() + GetFIntCurrencyTransferPlatformFeeRateModule()) / 100)))))) else nil
 	end, {
@@ -240,7 +240,7 @@ return function(_) --[[ Line: 59 | Named "TransferRobuxConfirmSheet" ]]
 						LayoutOrder = 1,
 						ref = Ref1,
 						text = UseLocalizationResult.Send,
-						onActivated = function() --[[ Line: 369 ]]
+						onActivated = function()
 							-- upvalues: UseSignalStateResult1 (copy), UseSignalStateResult (copy), SetTransferPromptStateModule (upval), UseTransferStoreModuleResult (copy), PromptStateModule (upval), ProcessTransferModule (upval)
 							if UseSignalStateResult1 and UseSignalStateResult < UseSignalStateResult1 then
 								SetTransferPromptStateModule(UseTransferStoreModuleResult, PromptStateModule.TransferInsufficientBalance)
@@ -257,7 +257,7 @@ return function(_) --[[ Line: 59 | Named "TransferRobuxConfirmSheet" ]]
 					EditButton = if IsTransferOriginationMatch then nil else ReactModule.createElement(Button, {
 						LayoutOrder = 2,
 						text = UseLocalizationResult.Edit,
-						onActivated = function() --[[ Line: 384 ]]
+						onActivated = function()
 							-- upvalues: SetTransferPromptStateModule (upval), UseTransferStoreModuleResult (copy), PromptStateModule (upval)
 							SetTransferPromptStateModule(UseTransferStoreModuleResult, PromptStateModule.TransferInput)
 						end,

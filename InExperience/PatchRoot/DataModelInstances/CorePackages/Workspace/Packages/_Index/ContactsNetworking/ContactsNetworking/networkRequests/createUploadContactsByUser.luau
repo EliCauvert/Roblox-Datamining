@@ -2,9 +2,9 @@
 local APIURLModule = require(Parent.API_URL)
 local _ = require(Parent.Types.networkRequestsTypes)
 
-return function(p1) --[[ Line: 7 ]]
+return function(p1)
 	-- upvalues: APIURLModule (copy)
-	return p1.roduxNetworking.POST("UploadContactsByUser", function(Callback, p2) --[[ Line: 12 ]]
+	return p1.roduxNetworking.POST("UploadContactsByUser", function(Callback, p2)
 		-- upvalues: APIURLModule (upval)
 		return Callback(APIURLModule):path("contacts-api"):path("v1"):path("contacts"):body({
 			countryCode = p2.countryCode,

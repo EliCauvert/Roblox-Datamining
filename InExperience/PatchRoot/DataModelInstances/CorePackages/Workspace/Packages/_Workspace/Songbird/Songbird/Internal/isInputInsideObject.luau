@@ -1,4 +1,4 @@
-﻿return function(Vector, Frame: Frame): boolean --[[ Line: 1 | Named "isInputInsideObject" ]]
+﻿return function(Vector, Frame: Frame): boolean
 	if Frame then
 		local AbsolutePosition = Frame.AbsolutePosition
 		local _Rect = Rect.new(AbsolutePosition, AbsolutePosition + Frame.AbsoluteSize)

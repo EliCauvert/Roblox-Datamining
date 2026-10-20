@@ -11,7 +11,7 @@ local SignalsModule = require(ViewRecyclerReact.Parent.Signals)
 local SignalsExperimentalModule = require(ViewRecyclerReact.Parent.SignalsExperimental)
 local SignalsSchedulerModule = require(ViewRecyclerReact.Parent.SignalsScheduler)
 
-return function(Id, ItemViewType, p1, p2, p3) --[[ Line: 74 | Named "RecyclableView" ]]
+return function(Id, ItemViewType, p1, p2, p3)
 	-- upvalues: RecyclableViewRegistryModule (copy), SignalsModule (copy), ReactModule (copy), RecyclableViewReadinessModule (copy), ReparentableHost (copy), PlacementKindModule (copy), HostPresentationPhase (copy), SignalsSchedulerModule (copy), SignalsExperimentalModule (copy)
 	local Metadata = RecyclableViewRegistryModule.getMetadata(ItemViewType)
 	assert(Metadata ~= nil, "RecyclableView: unknown Recyclable view type")
@@ -29,12 +29,12 @@ return function(Id, ItemViewType, p1, p2, p3) --[[ Line: 74 | Named "RecyclableV
 		local Signal5
 		Signal5, Signal2_4 = SignalsModule.createSignal(Count)
 	else
-		local function Signal5(_) --[[ Line: 98 ]]
+		local function Signal5(_)
 			-- upvalues: Count (ref)
 			return Count
 		end
 		
-		Signal2_4 = function(_) --[[ Line: 101 ]] end
+		Signal2_4 = function(_) end
 	end
 	local Frame = Instance.new("Frame")
 	Frame.Name = `ListItemViewFrame{Id}`
@@ -56,7 +56,7 @@ return function(Id, ItemViewType, p1, p2, p3) --[[ Line: 74 | Named "RecyclableV
 	local Flag1 = false
 	local v5 = nil
 	
-	local function _() --[[ Line: 125 | Named "resetCompositionHost" ]]
+	local function _()
 		-- upvalues: ReparentableHost (upval), Frame (copy)
 		ReparentableHost.detach(Frame)
 		Frame.AnchorPoint = Vector2.zero
@@ -65,21 +65,21 @@ return function(Id, ItemViewType, p1, p2, p3) --[[ Line: 74 | Named "RecyclableV
 		Frame.AutomaticSize = Enum.AutomaticSize.None
 	end
 	
-	local function measurementDependencies(CompositionPlacement) --[[ Line: 133 ]]
+	local function measurementDependencies(CompositionPlacement)
 		-- upvalues: Signal (copy), SignalsModule (upval)
 		return {
-			get = function() --[[ Line: 136 ]]
+			get = function()
 				-- upvalues: Signal (upval), CompositionPlacement (copy)
 				local SignalResult = Signal(false)
 				
 				return if SignalResult == nil then {} else CompositionPlacement.getMeasurementDependencies(SignalResult)
 			end,
-			subscribe = function(Callback) --[[ Line: 140 ]]
+			subscribe = function(Callback)
 				-- upvalues: SignalsModule (upval), Signal (upval), CompositionPlacement (copy)
 				local v6 = nil
 				local SubscribeMeasurementDependenciesResult = nil
 				local Flag = true
-				local Effect = SignalsModule.createEffect(function(p4) --[[ Line: 144 ]]
+				local Effect = SignalsModule.createEffect(function(p4)
 					-- upvalues: Signal (upval), v6 (ref), SubscribeMeasurementDependenciesResult (ref), CompositionPlacement (upval), Callback (copy), Flag (ref)
 					local SignalResult = Signal(p4)
 					
@@ -100,7 +100,7 @@ return function(Id, ItemViewType, p1, p2, p3) --[[ Line: 74 | Named "RecyclableV
 					Flag = false
 				end)
 				
-				return function() --[[ Line: 161 ]]
+				return function()
 					-- upvalues: Effect (copy), SubscribeMeasurementDependenciesResult (ref)
 					Effect()
 					
@@ -112,7 +112,7 @@ return function(Id, ItemViewType, p1, p2, p3) --[[ Line: 74 | Named "RecyclableV
 		}
 	end
 	
-	local _ = function() --[[ Line: 172 | Named "unregisterListDependencies" ]]
+	local _ = function()
 		-- upvalues: Sink (ref), v4 (ref), CompositionPlacement (ref)
 		if Sink ~= nil and Sink.setMeasurementDependencies ~= nil then
 			Sink.setMeasurementDependencies(nil)
@@ -122,7 +122,7 @@ return function(Id, ItemViewType, p1, p2, p3) --[[ Line: 74 | Named "RecyclableV
 		CompositionPlacement = nil
 	end
 	
-	local function registerListDependencies(Destination) --[[ Line: 181 ]]
+	local function registerListDependencies(Destination)
 		-- upvalues: Sink (ref), v4 (ref), CompositionPlacement (ref), measurementDependencies (copy)
 		local Sink1 = Destination.sink
 		local CompositionPlacement1 = Destination.compositionPlacement
@@ -143,7 +143,7 @@ return function(Id, ItemViewType, p1, p2, p3) --[[ Line: 74 | Named "RecyclableV
 		end
 	end
 	
-	local _ = function(p4) --[[ Line: 202 | Named "detachState" ]]
+	local _ = function(p4)
 		-- upvalues: PlacementKindModule (upval), Sink (ref), v4 (ref), CompositionPlacement (ref), Frame (copy), ReparentableHost (upval)
 		if p4 == nil then return end
 		local Destination = p4.destination
@@ -168,12 +168,12 @@ return function(Id, ItemViewType, p1, p2, p3) --[[ Line: 74 | Named "RecyclableV
 		CompositionPlacement = nil
 	end
 	
-	local _ = function() --[[ Line: 217 | Named "resolvePhase" ]]
+	local _ = function()
 		-- upvalues: v2 (ref), HostPresentationPhase (upval), ContentMounted (ref), P3 (copy), RecyclableViewReadinessModule (upval), IsReadyOnAssignmentMatch (ref), HideWhilePending (copy)
 		return if v2 == nil then HostPresentationPhase.Hidden elseif ContentMounted and (P3 == RecyclableViewReadinessModule.ReadyOnAssignment or IsReadyOnAssignmentMatch) then HostPresentationPhase.Presented elseif HideWhilePending then HostPresentationPhase.Hidden else HostPresentationPhase.Pending
 	end
 	
-	v5 = function() --[[ Line: 227 ]]
+	v5 = function()
 		-- upvalues: Flag1 (ref), v2 (ref), Flag (ref), HostPresentationPhase (upval), ContentMounted (ref), P3 (copy), RecyclableViewReadinessModule (upval), IsReadyOnAssignmentMatch (ref), HideWhilePending (copy), v3 (ref), Hidden (ref), PlacementKindModule (upval), registerListDependencies (copy), Frame (copy), ReparentableHost (upval)
 		Flag1 = false
 		local v6 = v2
@@ -198,7 +198,7 @@ return function(Id, ItemViewType, p1, p2, p3) --[[ Line: 74 | Named "RecyclableV
 		Hidden = Hidden1
 	end
 	
-	local function requestPublication() --[[ Line: 261 ]]
+	local function requestPublication()
 		-- upvalues: Flag1 (ref), SignalsSchedulerModule (upval), v5 (ref)
 		if not Flag1 then
 			Flag1 = true
@@ -212,25 +212,25 @@ return function(Id, ItemViewType, p1, p2, p3) --[[ Line: 74 | Named "RecyclableV
 		itemViewType = ItemViewType,
 		signal = Signal,
 		indexSignal = Signal1,
-		itemSignal = function(p4) --[[ Line: 281 ]]
+		itemSignal = function(p4)
 			-- upvalues: Signal3 (copy), Composition (ref), PlacementKindModule (upval)
 			local SignalResult = Signal3(p4)
 			assert(SignalResult ~= nil, "RecyclableView: item read before first Assignment")
 			
 			return if Composition == PlacementKindModule.Composition then SignalResult.value(p4) else SignalResult.value
 		end,
-		itemKeySignal = function(p4) --[[ Line: 287 ]]
+		itemKeySignal = function(p4)
 			-- upvalues: Signal3 (copy)
 			local SignalResult = Signal3(p4)
 			assert(SignalResult ~= nil, "RecyclableView: item key read before first Assignment")
 			
 			return SignalResult.key
 		end,
-		hasItem = function(p4): boolean --[[ Line: 414 ]]
+		hasItem = function(p4): boolean
 			-- upvalues: Signal3 (copy)
 			return Signal3(p4) ~= nil
 		end,
-		transition = function(p4) --[[ Line: 293 ]]
+		transition = function(p4)
 			-- upvalues: Flag (ref), v2 (ref), PlacementKindModule (upval), Sink (ref), v4 (ref), CompositionPlacement (ref), Frame (copy), ReparentableHost (upval), v3 (ref), Hidden (ref), v1 (ref), HostPresentationPhase (upval), Composition (ref), P3 (copy), RecyclableViewReadinessModule (upval), IsReadyOnAssignmentMatch (ref), Count (ref), SignalsExperimentalModule (upval), Signal2_2 (copy), Signal2_4 (ref), Signal2_1 (copy), Signal2 (copy), Signal2_3 (copy), Binding2 (copy), Flag1 (ref), SignalsSchedulerModule (upval), v5 (ref)
 			if Flag then
 				assert(p4 == nil, "RecyclableView: cannot transition an occupied state after destroy")
@@ -300,7 +300,7 @@ return function(Id, ItemViewType, p1, p2, p3) --[[ Line: 74 | Named "RecyclableV
 				Count += 1
 			end
 			IsReadyOnAssignmentMatch = Assignment1 ~= nil and (P3 == RecyclableViewReadinessModule.ReadyOnAssignment or not IsNotAssignmentMatch1 and IsReadyOnAssignmentMatch)
-			SignalsExperimentalModule.batch(function() --[[ Line: 357 ]]
+			SignalsExperimentalModule.batch(function()
 				-- upvalues: IsNotAssignmentMatch (copy), Composition (upval), Kind (copy), Signal2_2 (upval), Assignment1 (copy), IsNotAssignmentMatch1 (copy), Signal2_4 (upval), Count (upval), Signal2_1 (upval), p4 (copy), Signal2 (upval), Signal2_3 (upval), P3 (upval), RecyclableViewReadinessModule (upval), Binding2 (upval), Flag1 (upval), SignalsSchedulerModule (upval), v5 (upval)
 				if IsNotAssignmentMatch then
 					Composition = Kind
@@ -324,13 +324,13 @@ return function(Id, ItemViewType, p1, p2, p3) --[[ Line: 74 | Named "RecyclableV
 		end,
 		pending = Binding,
 		contentRevision = Signal5,
-		commitContent = function(Count1): boolean --[[ Line: 379 ]]
+		commitContent = function(Count1): boolean
 			-- upvalues: Flag (ref), P3 (copy), RecyclableViewReadinessModule (upval), v2 (ref), Count (ref), IsReadyOnAssignmentMatch (ref), SignalsExperimentalModule (upval), Binding2 (copy), Flag1 (ref), SignalsSchedulerModule (upval), v5 (ref)
 			if Flag or P3 ~= RecyclableViewReadinessModule.ReadyOnCommit or v2 == nil or Count1 ~= Count then
 				return false
 			else
 				IsReadyOnAssignmentMatch = true
-				SignalsExperimentalModule.batch(function() --[[ Line: 387 ]]
+				SignalsExperimentalModule.batch(function()
 					-- upvalues: Binding2 (upval), Flag1 (upval), SignalsSchedulerModule (upval), v5 (upval)
 					Binding2(false)
 					
@@ -343,7 +343,7 @@ return function(Id, ItemViewType, p1, p2, p3) --[[ Line: 74 | Named "RecyclableV
 				return true
 			end
 		end,
-		setContentMounted = function(Value) --[[ Line: 396 ]]
+		setContentMounted = function(Value)
 			-- upvalues: Flag (ref), ContentMounted (ref), v2 (ref), SignalsExperimentalModule (upval), requestPublication (copy)
 			if Flag or ContentMounted == Value then return end
 			ContentMounted = Value
@@ -355,18 +355,18 @@ return function(Id, ItemViewType, p1, p2, p3) --[[ Line: 74 | Named "RecyclableV
 		readiness = P3,
 		hideWhilePending = HideWhilePending,
 		compositionPlacement = Signal4,
-		portalFrame = function(_) --[[ Line: 425 ]]
+		portalFrame = function(_)
 			-- upvalues: Flag (ref), Frame (copy)
 			return if Flag then nil else Frame
 		end,
-		bindHost = function(p4) --[[ Line: 268 ]]
+		bindHost = function(p4)
 			-- upvalues: Flag (ref), v1 (ref)
 			assert(not Flag, "RecyclableView: cannot bind a destroyed host")
 			assert(v1 == nil, "RecyclableView: host is already bound")
 			v1 = p4
 			local Flag1 = true
 			
-			return function() --[[ Line: 273 ]]
+			return function()
 				-- upvalues: Flag1 (ref), v1 (upval), p4 (copy)
 				if Flag1 and v1 == p4 then
 					Flag1 = false
@@ -374,7 +374,7 @@ return function(Id, ItemViewType, p1, p2, p3) --[[ Line: 74 | Named "RecyclableV
 				end
 			end
 		end,
-		clearSelection = function() --[[ Line: 429 ]]
+		clearSelection = function()
 			-- upvalues: v1 (ref)
 			local v6 = v1
 			
@@ -382,7 +382,7 @@ return function(Id, ItemViewType, p1, p2, p3) --[[ Line: 74 | Named "RecyclableV
 				v6.clearSelection()
 			end
 		end,
-		detachFromPlaceholder = function(p4) --[[ Line: 435 ]]
+		detachFromPlaceholder = function(p4)
 			-- upvalues: v1 (ref)
 			local v6 = v1
 			
@@ -390,7 +390,7 @@ return function(Id, ItemViewType, p1, p2, p3) --[[ Line: 74 | Named "RecyclableV
 				v6.detachFromPlaceholder(p4)
 			end
 		end,
-		destroy = function() --[[ Line: 441 ]]
+		destroy = function()
 			-- upvalues: Flag (ref), v2 (ref), PlacementKindModule (upval), Sink (ref), v4 (ref), CompositionPlacement (ref), Frame (copy), ReparentableHost (upval), v1 (ref), Binding2 (copy)
 			if Flag then return end
 			Flag = true

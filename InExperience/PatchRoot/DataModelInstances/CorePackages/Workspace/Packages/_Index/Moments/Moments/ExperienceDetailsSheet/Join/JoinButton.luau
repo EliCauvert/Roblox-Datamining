@@ -14,7 +14,7 @@ local NavigationDestinationTypeModule = require(Moments.Enums.NavigationDestinat
 local FFlagMomentsNavigationEventModule = require(Moments.Flags.FFlagMomentsNavigationEvent)
 local FFlagMomentsPlayEventModule = require(Moments.Flags.FFlagMomentsPlayEvent)
 
-return ReactModule.memo(function(Frame) --[[ Line: 42 | Named "JoinButton" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseJoinExperienceModule (copy), UseSignalStateFunction (copy), GetMomentsPreferencesStoreModule (copy), UseJoinCtaImpressionModule (copy), FFlagMomentsFixRecommendationImpressionLifecycleModule (copy), FeedContextModule (copy), ReactModule (copy), Button (copy), FoundationModule (copy), FFlagMomentsNavigationEventModule (copy), NavigationDestinationTypeModule (copy), FFlagMomentsPlayEventModule (copy)
 	local UseJoinExperienceModuleResult = UseJoinExperienceModule()
 	local UseSignalStateResult = UseSignalStateFunction(GetMomentsPreferencesStoreModule(false).getIsTeleporting)
@@ -29,7 +29,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 42 | Named "JoinButton" ]]
 		variant = FoundationModule.Enums.ButtonVariant.Emphasis,
 		isDisabled = Frame.isDisabled == true or UseSignalStateResult,
 		testId = Frame.testId,
-		onActivated = function() --[[ Line: 64 ]]
+		onActivated = function()
 			-- upvalues: FFlagMomentsFixRecommendationImpressionLifecycleModule (upval), UseFeedOptionalResult (ref), FFlagMomentsNavigationEventModule (upval), NavigationDestinationTypeModule (upval), UseJoinExperienceModuleResult (copy), Context (copy), FFlagMomentsPlayEventModule (upval)
 			local FlushViewResult = if FFlagMomentsFixRecommendationImpressionLifecycleModule and UseFeedOptionalResult ~= nil then UseFeedOptionalResult.flushView(if FFlagMomentsNavigationEventModule then NavigationDestinationTypeModule.ExperienceJoin else nil) else nil
 			UseJoinExperienceModuleResult(Context, nil, if FFlagMomentsPlayEventModule then FlushViewResult else nil)

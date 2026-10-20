@@ -17,7 +17,7 @@ local config1 = {
 	plural = "Feature.RobloxSubscription.Label.months"
 }
 
-return function(Text: string, p1) --[[ Line: 37 | Named "getPeriodTypeDisplayLabel" ]]
+return function(Text: string, p1)
 	-- upvalues: config (copy), config1 (copy)
 	local Entry = config[string.lower(Text)] or config1
 	

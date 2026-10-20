@@ -2,25 +2,25 @@
 local Array = require(Parent.LuauPolyfill).Array
 local RegExpModule = require(Parent.RegExp)
 
-local function _(p1) --[[ Line: 35 | Named "TypeError" ]]
+local function _(p1)
 	return p1
 end
 
 local Callback = nil
 local Callback1 = nil
 
-local function lexer(Text: string) --[[ Line: 65 ]]
+local function lexer(Text: string)
 	local List1 = {}
 	local StartIndex1 = 1
 	
-	local function _(p1) --[[ Line: 72 | Named "preIncrement_i" ]]
+	local function _(p1)
 		-- upvalues: StartIndex1 (ref)
 		StartIndex1 += 1
 		
 		return p1
 	end
 	
-	local _ = function(StartIndex: number): string --[[ Line: 77 | Named "getChar" ]]
+	local _ = function(StartIndex: number): string
 		-- upvalues: Text (copy)
 		return (string.sub(Text, StartIndex, StartIndex))
 	end
@@ -68,7 +68,7 @@ local function lexer(Text: string) --[[ Line: 65 ]]
 			local Text1 = ""
 			local NewStartIndex = StartIndex1 + 1
 			
-			local _ = function(p1) --[[ Line: 129 | Named "preIncrement_j" ]]
+			local _ = function(p1)
 				-- upvalues: NewStartIndex (ref)
 				NewStartIndex += 1
 				
@@ -96,7 +96,7 @@ local function lexer(Text: string) --[[ Line: 65 ]]
 			if string.sub(Text, StartIndex11, StartIndex11) == "?" then
 				error((("Pattern cannot start with \"?\" at %d"):format(Count)))
 			end
-			local _ = function(p1) --[[ Line: 179 | Named "preIncrement_j" ]]
+			local _ = function(p1)
 				-- upvalues: Count (ref)
 				Count += 1
 				
@@ -168,7 +168,7 @@ local function lexer(Text: string) --[[ Line: 65 ]]
 end
 
 local PathToRegexpModule = {
-	parse = function(p1, p2) --[[ Line: 252 ]]
+	parse = function(p1, p2)
 		-- upvalues: lexer (copy), Callback (ref)
 		local P5 = p2 or {}
 		local LexerResult = lexer(p1)
@@ -179,21 +179,21 @@ local PathToRegexpModule = {
 		local Count1 = 1
 		local Text = ""
 		
-		local function _(p3) --[[ Line: 269 | Named "preIncrement_i" ]]
+		local function _(p3)
 			-- upvalues: Count1 (ref)
 			Count1 += 1
 			
 			return p3
 		end
 		
-		local _ = function(p3) --[[ Line: 277 | Named "preIncrement_key" ]]
+		local _ = function(p3)
 			-- upvalues: Count (ref)
 			Count += 1
 			
 			return p3
 		end
 		
-		local _ = function(Type1) --[[ Line: 282 | Named "tryConsume" ]]
+		local _ = function(Type1)
 			-- upvalues: Count1 (ref), LexerResult (copy)
 			if Count1 <= #LexerResult and LexerResult[Count1].type == Type1 then
 				local Count: number = Count1
@@ -205,7 +205,7 @@ local PathToRegexpModule = {
 			end
 		end
 		
-		local function mustConsume(Type1) --[[ Line: 290 ]]
+		local function mustConsume(Type1)
 			-- upvalues: Count1 (ref), LexerResult (copy)
 			local v1 = nil
 			if Count1 <= #LexerResult and LexerResult[Count1].type == Type1 then
@@ -226,7 +226,7 @@ local PathToRegexpModule = {
 			error((("Unexpected %s at %d, expected %s"):format(LexerResultEntry.type, LexerResultEntry.index, Type1)))
 		end
 		
-		local function consumeText(): string --[[ Line: 304 ]]
+		local function consumeText(): string
 			-- upvalues: Count1 (ref), LexerResult (copy)
 			local Text = ""
 			local Value = nil
@@ -418,18 +418,18 @@ local PathToRegexpModule = {
 	end
 }
 
-function PathToRegexpModule.compile(p3, p4) --[[ Line: 416 ]]
+function PathToRegexpModule.compile(p3, p4)
 	-- upvalues: PathToRegexpModule (copy)
 	return PathToRegexpModule.tokensToFunction(PathToRegexpModule.parse(p3, p4), p4)
 end
 
-function PathToRegexpModule.tokensToFunction(ParseResult, p3) --[[ Line: 425 ]]
+function PathToRegexpModule.tokensToFunction(ParseResult, p3)
 	-- upvalues: Callback1 (ref), Array (copy), RegExpModule (copy)
 	if p3 == nil then
 		p3 = {}
 	end
 	local CallbackResult = Callback1(p3)
-	local Encode = p3.encode or function(p4) --[[ Line: 431 ]]
+	local Encode = p3.encode or function(p4)
 		return p4
 	end
 	local Validate = p3.validate
@@ -437,12 +437,12 @@ function PathToRegexpModule.tokensToFunction(ParseResult, p3) --[[ Line: 425 ]]
 	if Validate == nil then
 		Validate = true
 	end
-	local MapResult = Array.map(ParseResult, function(p4) --[[ Line: 440 ]]
+	local MapResult = Array.map(ParseResult, function(p4)
 		-- upvalues: RegExpModule (upval), CallbackResult (copy)
 		return if type(p4) == "table" then RegExpModule(("^(?:%s)$"):format(p4.pattern), CallbackResult) else nil
 	end)
 	
-	return function(p4): string --[[ Line: 447 ]]
+	return function(p4): string
 		-- upvalues: ParseResult (copy), Array (upval), Encode (copy), Validate (ref), MapResult (copy)
 		local Text = ""
 		
@@ -494,23 +494,23 @@ function PathToRegexpModule.tokensToFunction(ParseResult, p3) --[[ Line: 425 ]]
 	end
 end
 
-function PathToRegexpModule.match(p5, p6) --[[ Line: 554 ]]
+function PathToRegexpModule.match(p5, p6)
 	-- upvalues: PathToRegexpModule (copy)
 	local t = {}
 	
 	return PathToRegexpModule.regexpToFunction(PathToRegexpModule.pathToRegexp(p5, t, p6), t, p6)
 end
 
-function PathToRegexpModule.regexpToFunction(PathToRegexpResult, p5, p6) --[[ Line: 563 ]]
+function PathToRegexpModule.regexpToFunction(PathToRegexpResult, p5, p6)
 	-- upvalues: Array (copy)
 	if p6 == nil then
 		p6 = {}
 	end
-	local Decode = p6.decode or function(p7) --[[ Line: 567 ]]
+	local Decode = p6.decode or function(p7)
 		return p7
 	end
 	
-	return function(p7) --[[ Line: 571 ]]
+	return function(p7)
 		-- upvalues: PathToRegexpResult (copy), p5 (copy), Array (upval), Decode (copy)
 		local ExecResult = PathToRegexpResult:exec(p7)
 		
@@ -526,7 +526,7 @@ function PathToRegexpModule.regexpToFunction(PathToRegexpResult, p5, p6) --[[ Li
 				local v10 = p5[i - 1]
 				
 				if v10.modifier == "*" or v10.modifier == "+" then
-					Params[v10.name] = Array.map(string.split(ExecResult[i], v10.prefix .. v10.suffix), function(p8) --[[ Line: 592 ]]
+					Params[v10.name] = Array.map(string.split(ExecResult[i], v10.prefix .. v10.suffix), function(p8)
 						-- upvalues: Decode (upval), v10 (copy)
 						return Decode(p8, v10)
 					end)
@@ -539,30 +539,30 @@ function PathToRegexpModule.regexpToFunction(PathToRegexpResult, p5, p6) --[[ Li
 	end
 end
 
-Callback = function(Text: string): string --[[ Line: 611 | Named "escapeString" ]]
-	return string.gsub(Text, "[%.%+%*%?=%^!:${}%(%)%[%]|/\\]", function(Match): string --[[ Line: 612 ]]
+Callback = function(Text: string): string
+	return string.gsub(Text, "[%.%+%*%?=%^!:${}%(%)%[%]|/\\]", function(Match): string
 		return "\\" .. Match
 	end)
 end
 
-Callback1 = function(p7): string --[[ Line: 620 | Named "flags" ]]
+Callback1 = function(p7): string
 	return if p7 and p7.sensitive then "" else "i"
 end
 
-local function arrayToRegexp(p7, p8, p9) --[[ Line: 686 ]]
+local function arrayToRegexp(p7, p8, p9)
 	-- upvalues: Array (copy), PathToRegexpModule (copy), RegExpModule (copy), Callback1 (ref)
-	return RegExpModule(("(?:%s)"):format(table.concat(Array.map(p7, function(p10) --[[ Line: 691 ]]
+	return RegExpModule(("(?:%s)"):format(table.concat(Array.map(p7, function(p10)
 		-- upvalues: PathToRegexpModule (upval), p8 (copy), p9 (copy)
 		return PathToRegexpModule.pathToRegexp(p10, p8, p9).source
 	end), "|")), Callback1(p9))
 end
 
-local function stringToRegexp(p7, p8, p9) --[[ Line: 701 ]]
+local function stringToRegexp(p7, p8, p9)
 	-- upvalues: PathToRegexpModule (copy)
 	return PathToRegexpModule.tokensToRegexp(PathToRegexpModule.parse(p7, p9), p8, p9)
 end
 
-function PathToRegexpModule.tokensToRegexp(ParseResult, List, p7) --[[ Line: 739 ]]
+function PathToRegexpModule.tokensToRegexp(ParseResult, List, p7)
 	-- upvalues: Callback (ref), RegExpModule (copy), Callback1 (ref)
 	local T = if p7 == nil then {} else p7
 	local Strict = T.strict
@@ -580,7 +580,7 @@ function PathToRegexpModule.tokensToRegexp(ParseResult, List, p7) --[[ Line: 739
 	if End == nil then
 		End = true
 	end
-	local Encode = T.encode or function(p8) --[[ Line: 756 ]]
+	local Encode = T.encode or function(p8)
 		return p8
 	end
 	local Text: string = if T.endsWith then ("[%s]|$"):format(Callback(T.endsWith or "")) else "$"
@@ -632,7 +632,7 @@ function PathToRegexpModule.tokensToRegexp(ParseResult, List, p7) --[[ Line: 739
 	return RegExpModule(Text2, Callback1(T))
 end
 
-function PathToRegexpModule.pathToRegexp(p8, p9, p10) --[[ Line: 841 ]]
+function PathToRegexpModule.pathToRegexp(p8, p9, p10)
 	-- upvalues: Array (copy), arrayToRegexp (copy), stringToRegexp (copy)
 	return if Array.isArray(p8) then arrayToRegexp(p8, p9, p10) else stringToRegexp(p8, p9, p10)
 end

@@ -37,7 +37,7 @@ local NewResult1 = nil
 local BindableEvent = Instance.new("BindableEvent")
 local BindableEvent1 = Instance.new("BindableEvent")
 
-local function createStore() --[[ Line: 58 ]]
+local function createStore()
 	-- upvalues: ABTestModule (copy), NetworkModule (copy), NewResult1 (ref), AnalyticsModule (copy), PlatformInterfaceModule (copy), ExternalSettingsModule (copy), PublicBindablesModule (copy), BindableEvent (copy), NewResult (ref), Rodux (copy), ReducerModule (copy), ThunkModule (copy), WindowStateModule (copy), PromptStateModule (copy), BindableEvent1 (copy), PurchasePromptLiteModule (copy)
 	NewResult1 = NetworkModule.new()
 	NewResult = Rodux.Store.new(ReducerModule, {}, {
@@ -50,7 +50,7 @@ local function createStore() --[[ Line: 58 ]]
 			[PublicBindablesModule] = PublicBindablesModule.new({ windowStateChangedBindable = BindableEvent })
 		})
 	})
-	NewResult.changed:connect(function(Value, p1) --[[ Line: 82 ]]
+	NewResult.changed:connect(function(Value, p1)
 		-- upvalues: BindableEvent (upval), WindowStateModule (upval), PromptStateModule (upval), BindableEvent1 (upval), PurchasePromptLiteModule (upval)
 		if p1.windowState ~= Value.windowState then
 			BindableEvent:Fire({
@@ -68,7 +68,7 @@ local function createStore() --[[ Line: 58 ]]
 end
 
 return {
-	mountPurchasePrompt = function() --[[ Line: 110 ]]
+	mountPurchasePrompt = function()
 		-- upvalues: RunService (copy), PurchasePromptApp (ref), createStore (copy), PurchasePromptElevateDisplayOrder (copy), Roact (copy), PurchasePromptAppModule (copy), NewResult (ref), NewResult1 (ref), CoreGui (copy)
 		if RunService:IsStudio() and RunService:IsEdit() or PurchasePromptApp then
 			return nil
@@ -85,14 +85,14 @@ return {
 		
 		return PurchasePromptApp
 	end,
-	initiateAvatarCreationFeePurchase = function(p1, p2, p3, p4) --[[ Line: 144 ]]
+	initiateAvatarCreationFeePurchase = function(p1, p2, p3, p4)
 		-- upvalues: NewResult (ref), InitiateAvatarCreationFeePurchaseModule (copy)
 		if not NewResult then
 			error("initiateAvatarCreationFeePurchase cannot be called when the PurchasePrompt has not been mounted")
 		end
 		NewResult:dispatch(InitiateAvatarCreationFeePurchaseModule(p1, p2, p3, p4))
 	end,
-	initiatePurchaseForProductPayload = function(p1, p2) --[[ Line: 171 ]]
+	initiatePurchaseForProductPayload = function(p1, p2)
 		-- upvalues: NewResult (ref), FFlagEnablePurchasePayloadInExperienceShop (copy), FFlagSkipBuyDelayForExperienceShopModule (copy), SetProductPayloadModule (copy), FFlagPassShopPurchaseSurfaceToBuyModal (copy), SetPurchaseAnalyticsMetadataModule (copy), DispatchPurchaseForProductPayloadModule (copy)
 		if not NewResult then
 			warn("initiatePurchaseForProductPayload called before mountPurchasePrompt; ignoring.")
@@ -108,7 +108,7 @@ return {
 				productUniverseId = p2.productUniverseId
 			}))
 		end
-		DispatchPurchaseForProductPayloadModule(function(p3) --[[ Line: 197 ]]
+		DispatchPurchaseForProductPayloadModule(function(p3)
 			-- upvalues: NewResult (upval)
 			NewResult:dispatch(p3)
 		end, p1, nil, false)
@@ -119,7 +119,7 @@ return {
 		getBlackbirdUpsellBannerProductInfo = require(v1.Utils.getBlackbirdUpsellBannerProductInfo)
 	} else {},
 	PublishAssetAnalytics = require(v1.Utils.PublishAssetAnalytics),
-	UnifiedPurchasePromptContainer = function(p1) --[[ Line: 216 ]]
+	UnifiedPurchasePromptContainer = function(p1)
 		-- upvalues: createStore (copy), Roact (copy), UnifiedPurchasePromptModule (copy), NewResult (ref), NewResult1 (ref), FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), FFlagPurchasePromptSubtitleForTimedOptions (copy)
 		createStore()
 		

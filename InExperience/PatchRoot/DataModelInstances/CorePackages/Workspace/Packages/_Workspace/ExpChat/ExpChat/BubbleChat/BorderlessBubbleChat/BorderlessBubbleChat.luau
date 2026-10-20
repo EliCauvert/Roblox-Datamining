@@ -14,11 +14,11 @@ local list = {
 	require(ExpChat.MessageEffects.MessageEffect).BorderlessBubbleChat
 }
 
-local function getScale(p1): number --[[ Line: 23 ]]
+local function getScale(p1): number
 	return if p1 then 0.75 else 1
 end
 
-local function _(p1: number, p2: number): number --[[ Line: 27 | Named "combineTransparencies" ]]
+local function _(p1: number, p2: number): number
 	return 1 - (1 - p1) * (1 - p2)
 end
 
@@ -30,25 +30,25 @@ BorderlessBubbleChat.defaultProps = {
 	distanceTransparency = 0
 }
 
-function BorderlessBubbleChat.init(p1) --[[ Line: 39 ]]
+function BorderlessBubbleChat.init(p1)
 	-- upvalues: RoactModule (copy), OtterModule (copy)
 	p1.animation, p1.updateAnimation = RoactModule.createBinding(p1:getAnimation())
 	p1.animationConnection = nil
 	p1.transparency, p1.updateTransparency = RoactModule.createBinding(0)
 	p1.transparencyMotor = OtterModule.createSingleMotor(0)
 	p1.transparencyMotor:onStep(p1.updateTransparency)
-	p1.animatedTransparency = RoactModule.joinBindings({ p1.transparency, p1.animation }):map(function(Entry): number --[[ Line: 48 ]]
+	p1.animatedTransparency = RoactModule.joinBindings({ p1.transparency, p1.animation }):map(function(Entry): number
 		return 1 - (1 - Entry[1]) * (1 - Entry[2].transparency)
 	end)
-	p1.textPosition = p1.animation:map(function(p2): UDim2 --[[ Line: 51 ]]
+	p1.textPosition = p1.animation:map(function(p2): UDim2
 		return UDim2.new(0.5, 0, 1, p2.yOffset)
 	end)
-	p1.animationScale = p1.animation:map(function(p2) --[[ Line: 54 ]]
+	p1.animationScale = p1.animation:map(function(p2)
 		return p2.scale
 	end)
 end
 
-function BorderlessBubbleChat.getAnimation(p1) --[[ Line: 60 ]]
+function BorderlessBubbleChat.getAnimation(p1)
 	-- upvalues: GetBorderlessBubbleChatAnimationModule (copy), GetServerTimeNowMillisModule (copy), UserGameSettings (copy)
 	local BorderlessBubbleChatAnimationModule = GetBorderlessBubbleChatAnimationModule((GetServerTimeNowMillisModule() - p1.props.receivedAtMillis) / 1000)
 	
@@ -59,14 +59,14 @@ function BorderlessBubbleChat.getAnimation(p1) --[[ Line: 60 ]]
 	return BorderlessBubbleChatAnimationModule
 end
 
-function BorderlessBubbleChat.stopAnimating(p1) --[[ Line: 70 ]]
+function BorderlessBubbleChat.stopAnimating(p1)
 	if p1.animationConnection then
 		p1.animationConnection:Disconnect()
 		p1.animationConnection = nil
 	end
 end
 
-function BorderlessBubbleChat.render(p1) --[[ Line: 77 ]]
+function BorderlessBubbleChat.render(p1)
 	-- upvalues: SendBubbleChatRenderedTelemetryModule (copy), list (copy), ReactIsModule (copy), RoactModule (copy), getScale (copy)
 	if p1.props.textChatMessageInstance then
 		SendBubbleChatRenderedTelemetryModule(p1.props.textChatMessageInstance, list)
@@ -94,9 +94,9 @@ function BorderlessBubbleChat.render(p1) --[[ Line: 77 ]]
 			AutomaticSize = Enum.AutomaticSize.XY,
 			Size = UDim2.fromOffset(0, 0),
 			Text = p1.props.text,
-			TextTransparency = if ReactIsModule.isBinding(DistanceTransparency) then RoactModule.joinBindings({ p1.animatedTransparency, DistanceTransparency }):map(function(Entry): number --[[ Line: 84 ]]
+			TextTransparency = if ReactIsModule.isBinding(DistanceTransparency) then RoactModule.joinBindings({ p1.animatedTransparency, DistanceTransparency }):map(function(Entry): number
 				return 1 - (1 - Entry[1]) * (1 - Entry[2])
-			end) else p1.animatedTransparency:map(function(p2: number): number --[[ Line: 87 ]]
+			end) else p1.animatedTransparency:map(function(p2: number): number
 				-- upvalues: DistanceTransparency (copy)
 				return 1 - (1 - p2) * (1 - DistanceTransparency)
 			end)
@@ -106,13 +106,13 @@ function BorderlessBubbleChat.render(p1) --[[ Line: 77 ]]
 	})
 end
 
-function BorderlessBubbleChat.reportFadeOut(p1) --[[ Line: 124 ]]
+function BorderlessBubbleChat.reportFadeOut(p1)
 	if p1.props.onFadeOut then
 		p1.props.onFadeOut(p1.props.messageId)
 	end
 end
 
-function BorderlessBubbleChat.fadeOut(p1) --[[ Line: 130 ]]
+function BorderlessBubbleChat.fadeOut(p1)
 	-- upvalues: GetSpringFromSettingsModule (copy)
 	if p1.isFadingOut then return end
 	p1.isFadingOut = true
@@ -122,7 +122,7 @@ function BorderlessBubbleChat.fadeOut(p1) --[[ Line: 130 ]]
 		
 		return
 	else
-		p1.transparencyMotor:onComplete(function() --[[ Line: 142 ]]
+		p1.transparencyMotor:onComplete(function()
 			-- upvalues: p1 (copy)
 			p1:reportFadeOut()
 		end)
@@ -130,10 +130,10 @@ function BorderlessBubbleChat.fadeOut(p1) --[[ Line: 130 ]]
 	end
 end
 
-function BorderlessBubbleChat.didMount(p1) --[[ Line: 150 ]]
+function BorderlessBubbleChat.didMount(p1)
 	-- upvalues: RunService (copy)
 	if not p1.animation:getValue().isComplete then
-		p1.animationConnection = RunService.RenderStepped:Connect(function() --[[ Line: 152 ]]
+		p1.animationConnection = RunService.RenderStepped:Connect(function()
 			-- upvalues: p1 (copy)
 			local Animation = p1:getAnimation()
 			p1.updateAnimation(Animation)
@@ -148,13 +148,13 @@ function BorderlessBubbleChat.didMount(p1) --[[ Line: 150 ]]
 	end
 end
 
-function BorderlessBubbleChat.didUpdate(p1) --[[ Line: 166 ]]
+function BorderlessBubbleChat.didUpdate(p1)
 	if p1.props.fadingOut then
 		p1:fadeOut()
 	end
 end
 
-function BorderlessBubbleChat.willUnmount(p1) --[[ Line: 172 ]]
+function BorderlessBubbleChat.willUnmount(p1)
 	p1:stopAnimating()
 	p1.transparencyMotor:destroy()
 end

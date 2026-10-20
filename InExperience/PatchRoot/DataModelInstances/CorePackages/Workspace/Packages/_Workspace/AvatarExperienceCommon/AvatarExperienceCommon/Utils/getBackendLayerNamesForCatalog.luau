@@ -1,6 +1,6 @@
 ﻿local FStringAXBackendDrivenCatalogLayersNamesFunction = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.AvatarExperienceFlags).FStringAXBackendDrivenCatalogLayersNames
 
-return function() --[[ Line: 6 ]]
+return function()
 	-- upvalues: FStringAXBackendDrivenCatalogLayersNamesFunction (copy)
 	local FStringAXBackendDrivenCatalogLayersNamesResult: string = FStringAXBackendDrivenCatalogLayersNamesFunction()
 	

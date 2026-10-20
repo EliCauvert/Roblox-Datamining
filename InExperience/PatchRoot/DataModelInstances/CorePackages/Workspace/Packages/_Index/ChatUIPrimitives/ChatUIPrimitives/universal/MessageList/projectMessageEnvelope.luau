@@ -2,14 +2,14 @@
 local PlainTextContentModelModule = require(script.Parent.Parent.ContentKinds.PlainText.PlainTextContentModel)
 local PresetContentModelModule = require(script.Parent.Parent.ContentKinds.Preset.PresetContentModel)
 
-local function _(p1) --[[ Line: 21 | Named "contentFromDraft" ]]
+local function _(p1)
 	-- upvalues: PlainTextContentModelModule (copy), PresetContentModelModule (copy)
 	local FromDraftResult = PlainTextContentModelModule.fromDraft(p1)
 	
 	return if FromDraftResult == nil then PresetContentModelModule.fromDraft(p1) else FromDraftResult
 end
 
-return function(p1) --[[ Line: 29 | Named "projectMessageEnvelope" ]]
+return function(p1)
 	-- upvalues: PlainTextContentModelModule (copy), PresetContentModelModule (copy)
 	local Payload = p1.payload
 	

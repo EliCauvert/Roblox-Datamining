@@ -4,7 +4,7 @@ local _ = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListBreak
 local WidgetPanelViewModule = require(script.Parent.WidgetPanelView)
 local UseWidgetPanelViewModelModule = require(script.Parent.useWidgetPanelViewModel)
 
-return ReactModule.memo(function(p1) --[[ Line: 20 | Named "WidgetPanelContainer" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseWidgetPanelViewModelModule (copy), ReactModule (copy), WidgetPanelViewModule (copy)
 	local UseWidgetPanelViewModelModuleResult = UseWidgetPanelViewModelModule(p1)
 	

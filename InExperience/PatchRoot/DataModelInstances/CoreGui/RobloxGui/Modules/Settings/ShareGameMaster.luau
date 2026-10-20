@@ -10,7 +10,7 @@ local InviteStoreModule = require(ShareGame.InviteStore)
 local GetFFlagEnableSharedInviteStoreModule = require(Modules.Flags.GetFFlagEnableSharedInviteStore)
 
 return {
-	createApp = function(PageTarget, Analytics) --[[ Line: 17 ]]
+	createApp = function(PageTarget, Analytics)
 		-- upvalues: GetFFlagEnableSharedInviteStoreModule (copy), InviteStoreModule (copy), RoduxModule (copy), AppReducerModule (copy), RoactModule (copy), RoactRoduxModule (copy), AppModule (copy)
 		local config = {
 			store = if GetFFlagEnableSharedInviteStoreModule() then InviteStoreModule else RoduxModule.Store.new(AppReducerModule, nil, { RoduxModule.thunkMiddleware })

@@ -4,22 +4,22 @@ local ScheduleFunction = SignalsSchedulerModule.schedule
 local CallUserSpaceModule = require(script.Parent.callUserSpace)
 local Frozen = table.freeze({ __mode = "k" })
 
-local function _(p1) --[[ Line: 29 | Named "createWeakSet" ]]
+local function _(p1)
 	-- upvalues: Frozen (copy)
 	return (setmetatable(p1, Frozen))
 end
 
-local function defaultEquals(p1, p2): boolean --[[ Line: 33 ]]
+local function defaultEquals(p1, p2): boolean
 	return p1 == p2
 end
 
-local function handleError(p1, ...) --[[ Line: 37 ]]
+local function handleError(p1, ...)
 	if not p1 then
 		error((...))
 	end
 end
 
-local function handleScopeValidation(Callback: () -> (), Success, ...) --[[ Line: 44 ]]
+local function handleScopeValidation(Callback: () -> (), Success, ...)
 	-- upvalues: handleError (copy)
 	Callback()
 	handleError(Success, ...)
@@ -27,14 +27,14 @@ local function handleScopeValidation(Callback: () -> (), Success, ...) --[[ Line
 	return ...
 end
 
-local function callUserSpaceWithScopeValidation(p1, Callback) --[[ Line: 50 ]]
+local function callUserSpaceWithScopeValidation(p1, Callback)
 	-- upvalues: handleScopeValidation (copy), CallUserSpaceModule (copy)
 	local Flag = true
 	
-	return handleScopeValidation(function() --[[ Line: 60 | Named "kill" ]]
+	return handleScopeValidation(function()
 		-- upvalues: Flag (ref)
 		Flag = false
-	end, pcall(CallUserSpaceModule, p1, function(p2) --[[ Line: 53 | Named "wrappedScope" ]]
+	end, pcall(CallUserSpaceModule, p1, function(p2)
 		-- upvalues: Flag (ref), Callback (copy)
 		if not Flag then
 			error("attempted to use scope beyond scope's lifetime")
@@ -47,7 +47,7 @@ local SIGNALSVALIDATIONENABLED = _G.__SIGNALS_VALIDATION_ENABLED__ or _G.__DEV__
 local Callback = if SIGNALSVALIDATIONENABLED then callUserSpaceWithScopeValidation else CallUserSpaceModule
 
 return {
-	createSignal = function(p1, p2) --[[ Line: 70 ]]
+	createSignal = function(p1, p2)
 		-- upvalues: defaultEquals (copy), CallUserSpaceModule (copy), Frozen (copy), FlushFunction (copy)
 		local Flag = false
 		local ClockTime = 0
@@ -55,7 +55,7 @@ return {
 		local self = nil
 		local DefaultEquals = if p2 == nil then defaultEquals else p2
 		
-		local function ensureInitialized() --[[ Line: 79 ]]
+		local function ensureInitialized()
 			-- upvalues: Flag (ref), v1 (ref), p1 (copy), CallUserSpaceModule (upval), ClockTime (ref), self (ref), Frozen (upval)
 			if not Flag then
 				Flag = true
@@ -65,7 +65,7 @@ return {
 			end
 		end
 		
-		local function source(Key, p3) --[[ Line: 88 ]]
+		local function source(Key, p3)
 			-- upvalues: self (ref), ClockTime (ref)
 			if Key == nil then
 				return ClockTime
@@ -78,14 +78,14 @@ return {
 			return 0
 		end
 		
-		local function _(Callback) --[[ Line: 101 | Named "connectToScope" ]]
+		local function _(Callback)
 			-- upvalues: source (copy), self (ref)
 			if Callback then
 				self[Callback(source)] = true
 			end
 		end
 		
-		local _ = function() --[[ Line: 108 | Named "notifyObservers" ]]
+		local _ = function()
 			-- upvalues: self (ref)
 			for i in self do
 				i()
@@ -93,7 +93,7 @@ return {
 			table.clear(self)
 		end
 		
-		return function(Callback) --[[ Line: 115 | Named "getter" ]]
+		return function(Callback)
 			-- upvalues: ensureInitialized (copy), source (copy), self (ref), v1 (ref)
 			ensureInitialized()
 			
@@ -101,7 +101,7 @@ return {
 				self[Callback(source)] = true
 			end
 			return v1
-		end, function(p3) --[[ Line: 121 | Named "setter" ]]
+		end, function(p3)
 			-- upvalues: ensureInitialized (copy), CallUserSpaceModule (upval), v1 (ref), DefaultEquals (copy), ClockTime (ref), self (ref), FlushFunction (upval)
 			ensureInitialized()
 			local CallUserSpaceModuleResult = if typeof(p3) == "function" then CallUserSpaceModule(p3, v1) else p3
@@ -118,7 +118,7 @@ return {
 			end
 		end
 	end,
-	createComputed = function(p3, p4) --[[ Line: 135 ]]
+	createComputed = function(p3, p4)
 		-- upvalues: defaultEquals (copy), Frozen (copy), Callback (copy), CallUserSpaceModule (copy)
 		local Flag = false
 		local Flag1 = false
@@ -129,7 +129,7 @@ return {
 		local self = nil
 		local DefaultEquals = if p4 == nil then defaultEquals else p4
 		
-		local function _() --[[ Line: 147 | Named "notifyObservers" ]]
+		local function _()
 			-- upvalues: self (ref)
 			for i in self do
 				i()
@@ -137,7 +137,7 @@ return {
 			table.clear(self)
 		end
 		
-		local function observer() --[[ Line: 154 ]]
+		local function observer()
 			-- upvalues: Flag1 (ref), self (ref)
 			if not Flag1 then
 				Flag1 = true
@@ -149,14 +149,14 @@ return {
 			end
 		end
 		
-		local function scope(Key) --[[ Line: 161 ]]
+		local function scope(Key)
 			-- upvalues: T (ref), observer (copy)
 			T[Key] = true
 			
 			return observer
 		end
 		
-		local function ensureInitialized() --[[ Line: 166 ]]
+		local function ensureInitialized()
 			-- upvalues: Flag (ref), self (ref), Frozen (upval), T (ref), v3 (ref), Callback (upval), p3 (copy), scope (copy), ClockTime (ref), v2 (ref)
 			if not Flag then
 				Flag = true
@@ -168,7 +168,7 @@ return {
 			end
 		end
 		
-		local _ = function() --[[ Line: 177 | Named "disconnectSources" ]]
+		local _ = function()
 			-- upvalues: T (ref), observer (copy)
 			for i in T do
 				i(observer, true)
@@ -176,7 +176,7 @@ return {
 			table.clear(T)
 		end
 		
-		local function flushNotifications() --[[ Line: 184 ]]
+		local function flushNotifications()
 			-- upvalues: Flag1 (ref), T (ref), ClockTime (ref), observer (copy), Callback (upval), p3 (copy), scope (copy), CallUserSpaceModule (upval), DefaultEquals (copy), v3 (ref), v2 (ref)
 			if Flag1 then
 				Flag1 = false
@@ -203,7 +203,7 @@ return {
 			end
 		end
 		
-		local function source(Key, p5) --[[ Line: 206 ]]
+		local function source(Key, p5)
 			-- upvalues: self (ref), flushNotifications (copy), v2 (ref)
 			if Key == nil then
 				flushNotifications()
@@ -218,14 +218,14 @@ return {
 			return 0
 		end
 		
-		local _ = function(Callback) --[[ Line: 220 | Named "connectToScope" ]]
+		local _ = function(Callback)
 			-- upvalues: source (copy), self (ref)
 			if Callback then
 				self[Callback(source)] = true
 			end
 		end
 		
-		return function(Callback) --[[ Line: 227 | Named "getter" ]]
+		return function(Callback)
 			-- upvalues: ensureInitialized (copy), flushNotifications (copy), source (copy), self (ref), v3 (ref)
 			ensureInitialized()
 			flushNotifications()
@@ -236,7 +236,7 @@ return {
 			return v3
 		end
 	end,
-	createEffect = function(p5) --[[ Line: 237 ]]
+	createEffect = function(p5)
 		-- upvalues: Callback (copy), ScheduleFunction (copy)
 		local Flag = false
 		local Flag1 = false
@@ -244,7 +244,7 @@ return {
 		local Tbl = {}
 		local Observer = nil
 		
-		local function _() --[[ Line: 246 | Named "disconnectSources" ]]
+		local function _()
 			-- upvalues: Tbl (copy), Observer (ref)
 			for i in Tbl do
 				i(Observer, true)
@@ -252,7 +252,7 @@ return {
 			table.clear(Tbl)
 		end
 		
-		local function dispose() --[[ Line: 253 ]]
+		local function dispose()
 			-- upvalues: Flag1 (ref), Tbl (copy), Observer (ref)
 			Flag1 = true
 			
@@ -262,14 +262,14 @@ return {
 			table.clear(Tbl)
 		end
 		
-		local function scope(Key) --[[ Line: 258 ]]
+		local function scope(Key)
 			-- upvalues: Tbl (copy), Observer (ref)
 			Tbl[Key] = true
 			
 			return Observer
 		end
 		
-		local function processNotification() --[[ Line: 263 ]]
+		local function processNotification()
 			-- upvalues: Flag1 (ref), Flag (ref), Tbl (copy), ClockTime (ref), Observer (ref), Callback (upval), p5 (copy), scope (copy)
 			if not Flag1 then
 				Flag = false
@@ -292,7 +292,7 @@ return {
 			end
 		end
 		
-		Observer = function() --[[ Line: 281 | Named "observer" ]]
+		Observer = function()
 			-- upvalues: Flag1 (ref), Flag (ref), ScheduleFunction (upval), processNotification (copy)
 			if not Flag1 and not Flag then
 				Flag = true

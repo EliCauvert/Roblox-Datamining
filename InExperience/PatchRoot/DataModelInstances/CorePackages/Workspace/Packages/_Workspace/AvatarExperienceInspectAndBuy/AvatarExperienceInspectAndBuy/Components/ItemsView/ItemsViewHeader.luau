@@ -9,7 +9,7 @@ local _ = require(AvatarExperienceInspectAndBuy.Components.Common.BuyActionBar)
 local SubheaderLabelPriceModule = require(AvatarExperienceInspectAndBuy.Components.Common.SubheaderLabelPrice)
 local _ = require(AvatarExperienceInspectAndBuy.Types)
 
-return function(p1) --[[ Line: 50 | Named "ItemsViewHeader" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ViewTypeModule (copy), ReactModule (copy), FoundationModule (copy), BackButtonModule (copy), SubheaderLabelPriceModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsViewMatch = p1.view == ViewTypeModule.WideLandscape

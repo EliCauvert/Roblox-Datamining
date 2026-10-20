@@ -1,15 +1,15 @@
 ﻿local AppChat = script:FindFirstAncestor("AppChat")
 local GetUnreadMessageCountStoreModule = require(AppChat.Stores.GetUnreadMessageCountStore)
 local config = {
-	[require(AppChat.Parent.AppChatNetworking).rodux.GetConversationMetadata.Succeeded.name] = function(p1) --[[ Line: 8 ]]
+	[require(AppChat.Parent.AppChatNetworking).rodux.GetConversationMetadata.Succeeded.name] = function(p1)
 		-- upvalues: GetUnreadMessageCountStoreModule (copy)
 		GetUnreadMessageCountStoreModule(false).receivedConversationMetadata(p1.responseBody)
 	end
 }
 
-return function(Callback, _) --[[ Line: 16 | Named "SignalsUnreadMessageCountMiddleware" ]]
+return function(Callback, _)
 	-- upvalues: config (copy)
-	return function(p1) --[[ Line: 17 ]]
+	return function(p1)
 		-- upvalues: Callback (copy), config (upval)
 		local CallbackResult = Callback(p1)
 		local Entry: (any) -> () = config[p1.type]

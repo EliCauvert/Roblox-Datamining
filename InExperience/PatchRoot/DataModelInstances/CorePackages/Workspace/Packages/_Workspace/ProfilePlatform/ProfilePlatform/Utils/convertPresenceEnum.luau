@@ -12,7 +12,7 @@ local config = {
 	InStudio = EnumsModule.PresenceTypes.InStudio
 }
 
-return function(p1, p2) --[[ Line: 18 ]]
+return function(p1, p2)
 	-- upvalues: config (copy), EnumsModule (copy)
 	local Entry = config[p1] or EnumsModule.PresenceTypes.Offline
 	

@@ -8,7 +8,7 @@ local VirtualListModule = require(Components.VirtualList)
 local CollapsibleSectionModule = require(script.Parent.CollapsibleSection)
 local VoiceDebugOperationLabelsModule = require(script.Parent.VoiceDebugOperationLabels)
 
-local function mergeChronologically(Sent, Received) --[[ Line: 19 ]]
+local function mergeChronologically(Sent, Received)
 	local Buffer = table.create(#Sent + #Received)
 	local Count = 1
 	local Count1 = 1
@@ -38,7 +38,7 @@ end
 
 local RemoteOperationsPanel = RoactModule.Component:extend("RemoteOperationsPanel")
 
-function RemoteOperationsPanel.init(p1) --[[ Line: 38 ]]
+function RemoteOperationsPanel.init(p1)
 	-- upvalues: MergeObservedNamesModule (copy)
 	local ObservedNames = {}
 	local RemoteOperations = p1.props.remoteOperations or {}
@@ -46,9 +46,9 @@ function RemoteOperationsPanel.init(p1) --[[ Line: 38 ]]
 	MergeObservedNamesModule(RemoteOperations.received or {}, ObservedNames, "name")
 	p1.state = { observedNames = ObservedNames, excludedNames = {} }
 	
-	function p1.onChipActivated(p2) --[[ Line: 49 ]]
+	function p1.onChipActivated(p2)
 		-- upvalues: p1 (copy)
-		p1:setState(function(p3) --[[ Line: 50 ]]
+		p1:setState(function(p3)
 			-- upvalues: p2 (copy)
 			local Copy = table.clone(p3.excludedNames)
 			Copy[p2] = not Copy[p2] or nil
@@ -58,7 +58,7 @@ function RemoteOperationsPanel.init(p1) --[[ Line: 38 ]]
 	end
 end
 
-function RemoteOperationsPanel.didUpdate(p1, p2) --[[ Line: 58 ]]
+function RemoteOperationsPanel.didUpdate(p1, p2)
 	-- upvalues: MergeObservedNamesModule (copy)
 	if p2.remoteOperations == p1.props.remoteOperations then return end
 	local RemoteOperations = p1.props.remoteOperations or {}
@@ -71,7 +71,7 @@ function RemoteOperationsPanel.didUpdate(p1, p2) --[[ Line: 58 ]]
 	end
 end
 
-function RemoteOperationsPanel.render(p1) --[[ Line: 71 ]]
+function RemoteOperationsPanel.render(p1)
 	-- upvalues: mergeChronologically (copy), RoactModule (copy), FilterChipModule (copy), VoiceDebugOperationLabelsModule (copy), CollapsibleSectionModule (copy), InfoBannerModule (copy), VirtualListModule (copy), OperationRowModule (copy)
 	local RemoteOperations = p1.props.remoteOperations or {}
 	local LayoutOrder = p1.props.layoutOrder
@@ -95,7 +95,7 @@ function RemoteOperationsPanel.render(p1) --[[ Line: 71 ]]
 			name = VoiceDebugOperationLabelsModule.labelForEventName(observedName),
 			isOn = not ExcludedNames[observedName],
 			layoutOrder = LayoutOrder1,
-			onActivated = function() --[[ Line: 93 ]]
+			onActivated = function()
 				-- upvalues: p1 (copy), observedName (copy)
 				p1.onChipActivated(observedName)
 			end
@@ -131,7 +131,7 @@ function RemoteOperationsPanel.render(p1) --[[ Line: 71 ]]
 			rowHeight = 22,
 			layoutOrder = 3,
 			items = Items,
-			renderItem = function(p2, LayoutOrder) --[[ Line: 133 ]]
+			renderItem = function(p2, LayoutOrder)
 				-- upvalues: RoactModule (upval), OperationRowModule (upval), VoiceDebugOperationLabelsModule (upval)
 				return RoactModule.createElement(OperationRowModule, {
 					timestampText = p2.timestampText,

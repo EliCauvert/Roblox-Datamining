@@ -44,13 +44,13 @@ local LogCurrencyTransferCounterModule = require(CurrencyTransfers.Utils.logCurr
 local LogRobuxTransferFlowEventModule = require(CurrencyTransfers.Utils.logRobuxTransferFlowEvent)
 local FormatNumberModule = require(CurrencyTransfers.Utils.formatNumber)
 
-return function(_) --[[ Line: 71 | Named "TransferRobuxInputSheet" ]]
+return function(_)
 	-- upvalues: UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), UseTokensFunction (copy), GetFFlagCurrencyTransferFixDesktopInputModule (copy), UserInputService (copy), UseTransferStoreModule (copy), ReactModule (copy), LogCurrencyTransferCounterModule (copy), CurrencyTransferTelemetryModule (copy), SharedFlagsModule (copy), LogRobuxTransferFlowEventModule (copy), RobuxTransferFlowEventNameModule (copy), SignalsReactModule (copy), GetFFlagCurrencyTransferUseBackendTransferLimitsModule (copy), GetFIntCurrencyTransferMinAmountModule (copy), GetFIntCurrencyTransferMaxAmountModule (copy), SetTransferPromptStateModule (copy), PromptStateModule (copy), ProceedToConfirmModule (copy), UseTextBoxOnChangeRefModule (copy), GetFFlagCurrencyTransferFocusNavigationModule (copy), UseTransferSheetFocusModule (copy), UseAutoFocusTextBoxOnMountModule (copy), GetFFlagCurrencyTransferFlowUIImprovementFixModule (copy), FormatNumberModule (copy), LocalizationService (copy), TransferLocaleFormatModule (copy), UseScaledValueFunction (copy), Sheet (copy), TransferRobuxHeaderModule (copy), View (copy), GetFFlagCurrencyTransferFixTextBoxInputModule (copy), TransferProfileThumbnailModule (copy), RobuxTextModule (copy), Icon (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), Text (copy), TransferAmountOptionChipsModule (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
 	local UseLocalizationResult = UseLocalizationFunction(TransferLocalizationKeysModule.Presets.TransferRobuxInputSheet)
 	local UseTokensResult = UseTokensFunction()
 	local NoTouchEnabled: boolean = GetFFlagCurrencyTransferFixDesktopInputModule() and not UserInputService.TouchEnabled
 	local UseTransferStoreModuleResult = UseTransferStoreModule()
-	ReactModule.useEffect(function() --[[ Line: 79 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: LogCurrencyTransferCounterModule (upval), UseTransferStoreModuleResult (copy), CurrencyTransferTelemetryModule (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval)
 		LogCurrencyTransferCounterModule(UseTransferStoreModuleResult, CurrencyTransferTelemetryModule.CurrencyTransferInputSheetShownCounter)
 		
@@ -69,7 +69,7 @@ return function(_) --[[ Line: 71 | Named "TransferRobuxInputSheet" ]]
 	local UseSignalStateResult3 = SignalsReactModule.useSignalState(UseTransferStoreModuleResult.getMaximumTransferAmount)
 	local UseSignalStateResult4 = if GetFFlagCurrencyTransferUseBackendTransferLimitsModule() and UseSignalStateResult2 then UseSignalStateResult2 else GetFIntCurrencyTransferMinAmountModule()
 	local UseSignalStateResult5 = if GetFFlagCurrencyTransferUseBackendTransferLimitsModule() and UseSignalStateResult3 then UseSignalStateResult3 else GetFIntCurrencyTransferMaxAmountModule()
-	ReactModule.useEffect(function() --[[ Line: 102 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult (copy), UseSignalStateResult4 (copy), UseSignalStateResult5 (copy), UseStateResult2 (copy)
 		if UseSignalStateResult == 0 or UseSignalStateResult4 <= UseSignalStateResult and UseSignalStateResult <= UseSignalStateResult5 then
 			UseStateResult2(false)
@@ -79,7 +79,7 @@ return function(_) --[[ Line: 71 | Named "TransferRobuxInputSheet" ]]
 		UseSignalStateResult4,
 		UseSignalStateResult5
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 108 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseSignalStateResult (copy), UseSignalStateResult4 (copy), UseSignalStateResult5 (copy), UseStateResult2 (copy), UseSignalStateResult1 (copy), SetTransferPromptStateModule (upval), UseTransferStoreModuleResult (copy), PromptStateModule (upval), ProceedToConfirmModule (upval)
 		if UseSignalStateResult and (UseSignalStateResult < UseSignalStateResult4 or UseSignalStateResult5 < UseSignalStateResult) then
 			UseStateResult2(true)
@@ -101,10 +101,10 @@ return function(_) --[[ Line: 71 | Named "TransferRobuxInputSheet" ]]
 		UseSignalStateResult5
 	})
 	local TriggerOnClose = UseTransferStoreModuleResult.triggerOnClose
-	local UseAutoFocusTextBoxOnMountModuleResult = UseAutoFocusTextBoxOnMountModule(UseTextBoxOnChangeRefModule(ReactModule.useCallback(function(p1) --[[ Line: 122 ]]
+	local UseAutoFocusTextBoxOnMountModuleResult = UseAutoFocusTextBoxOnMountModule(UseTextBoxOnChangeRefModule(ReactModule.useCallback(function(p1)
 		-- upvalues: SetSelectedAmountFunction (copy)
 		SetSelectedAmountFunction(p1 or 0)
-	end, { SetSelectedAmountFunction }), (ReactModule.useCallback(function(p1, p2) --[[ Line: 126 ]]
+	end, { SetSelectedAmountFunction }), (ReactModule.useCallback(function(p1, p2)
 		-- upvalues: UseSignalStateResult (copy), UseSignalStateResult4 (copy), UseSignalStateResult5 (copy), UseStateResult2 (copy), UseResult (copy)
 		if not p1 and p2 then
 			if UseSignalStateResult and UseSignalStateResult > 0 and (UseSignalStateResult < UseSignalStateResult4 or UseSignalStateResult5 < UseSignalStateResult) then
@@ -120,14 +120,14 @@ return function(_) --[[ Line: 71 | Named "TransferRobuxInputSheet" ]]
 		UseSignalStateResult4,
 		UseSignalStateResult5
 	}))), 0.05)
-	local UseResult1 = ReactModule.useCallback(function(Current) --[[ Line: 149 ]]
+	local UseResult1 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), UseAutoFocusTextBoxOnMountModuleResult (copy)
 		if Current then
 			UseRefResult.current = Current
 			UseAutoFocusTextBoxOnMountModuleResult(Current)
 		end
 	end, { UseAutoFocusTextBoxOnMountModuleResult })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 156 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		return {
 			{ amount = 25, text = "25" },
 			{ amount = 50, text = "50" },
@@ -135,7 +135,7 @@ return function(_) --[[ Line: 71 | Named "TransferRobuxInputSheet" ]]
 			{ amount = 200, text = "200" }
 		}
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function(p1) --[[ Line: 165 ]]
+	local UseResult2 = ReactModule.useCallback(function(p1)
 		-- upvalues: SetSelectedAmountFunction (copy), GetFFlagCurrencyTransferFlowUIImprovementFixModule (upval), UseRefResult (copy)
 		SetSelectedAmountFunction(p1)
 		
@@ -148,7 +148,7 @@ return function(_) --[[ Line: 71 | Named "TransferRobuxInputSheet" ]]
 		end
 	end, { SetSelectedAmountFunction })
 	local IsUseSignalStateResultBelow: boolean = UseStateResult and (UseSignalStateResult > 0 and (UseSignalStateResult < UseSignalStateResult4 or UseSignalStateResult5 < UseSignalStateResult))
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 181 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: IsUseSignalStateResultBelow (copy), UseSignalStateResult (copy), UseSignalStateResult4 (copy), FormatNumberModule (upval), LocalizationService (upval), TransferLocaleFormatModule (upval), UseLocalizationResult (copy), UseSignalStateResult5 (copy)
 		return if IsUseSignalStateResultBelow and UseSignalStateResult and UseSignalStateResult > 0 then if UseSignalStateResult < UseSignalStateResult4 then TransferLocaleFormatModule.substituteAmount(UseLocalizationResult.LowerThanMinAmount or "", (tostring((FormatNumberModule(LocalizationService.RobloxLocaleId, UseSignalStateResult4))))) elseif UseSignalStateResult5 < UseSignalStateResult then TransferLocaleFormatModule.substituteAmount(UseLocalizationResult.GreaterThanMaxAmount or "", (tostring((FormatNumberModule(LocalizationService.RobloxLocaleId, UseSignalStateResult5))))) else nil else nil
 	end, {
@@ -156,7 +156,7 @@ return function(_) --[[ Line: 71 | Named "TransferRobuxInputSheet" ]]
 		UseSignalStateResult5, UseLocalizationResult.LowerThanMinAmount,
 		UseLocalizationResult.GreaterThanMaxAmount
 	})
-	local UseMemoResult2 = ReactModule.useMemo(function(): boolean --[[ Line: 204 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function(): boolean
 		-- upvalues: UseSignalStateResult (copy)
 		return not UseSignalStateResult or UseSignalStateResult <= 0
 	end, { UseSignalStateResult })
@@ -164,7 +164,7 @@ return function(_) --[[ Line: 71 | Named "TransferRobuxInputSheet" ]]
 	
 	return ReactModule.createElement(Sheet.Root, {
 		preferCenterSheet = true,
-		snapPoints = ReactModule.useMemo(function() --[[ Line: 214 ]]
+		snapPoints = ReactModule.useMemo(function()
 			-- upvalues: UseScaledValueResult (copy)
 			return { UseScaledValueResult, 0.62 }
 		end, { UseScaledValueResult }),
@@ -287,7 +287,7 @@ return function(_) --[[ Line: 71 | Named "TransferRobuxInputSheet" ]]
 										Text = "",
 										BackgroundTransparency = 1,
 										ZIndex = 2,
-										[ReactModule.Event.Activated] = function() --[[ Line: 384 ]]
+										[ReactModule.Event.Activated] = function()
 											-- upvalues: UseRefResult (copy)
 											if UseRefResult.current then
 												UseRefResult.current:CaptureFocus()
@@ -315,7 +315,7 @@ return function(_) --[[ Line: 71 | Named "TransferRobuxInputSheet" ]]
 						Text = "",
 						BackgroundTransparency = 1,
 						ZIndex = 2,
-						[ReactModule.Event.Activated] = function() --[[ Line: 417 ]]
+						[ReactModule.Event.Activated] = function()
 							-- upvalues: UseRefResult (copy)
 							if UseRefResult.current then
 								UseRefResult.current:CaptureFocus()

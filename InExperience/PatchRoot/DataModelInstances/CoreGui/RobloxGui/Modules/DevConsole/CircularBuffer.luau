@@ -2,7 +2,7 @@
 local CircularBufferModule = {}
 CircularBufferModule.__index = CircularBufferModule
 
-function CircularBufferModule.new(_maxSize: number) --[[ Line: 7 ]]
+function CircularBufferModule.new(_maxSize: number)
 	-- upvalues: CircularBufferModule (copy)
 	assert(_maxSize, "Cannot initialize CircularBuffer with nil")
 	assert(_maxSize > 0, "Cannot initialize CircularBuffer to size < 1")
@@ -15,20 +15,20 @@ function CircularBufferModule.new(_maxSize: number) --[[ Line: 7 ]]
 	return t
 end
 
-function CircularBufferModule:reset() --[[ Line: 21 ]]
+function CircularBufferModule:reset()
 	self._data = {}
 	self._backIndex = 0
 end
 
-function CircularBufferModule:getSize(): number --[[ Line: 26 ]]
+function CircularBufferModule:getSize(): number
 	return #self._data
 end
 
-function CircularBufferModule:getMaxSize() --[[ Line: 30 ]]
+function CircularBufferModule:getMaxSize()
 	return self._maxSize
 end
 
-function CircularBufferModule:setSize(_maxSize: number) --[[ Line: 34 ]]
+function CircularBufferModule:setSize(_maxSize: number)
 	assert(_maxSize, "Cannot set CircularBuffer with nil")
 	assert(_maxSize > 0, "Cannot set CircularBuffer to size < 1")
 	
@@ -52,26 +52,26 @@ function CircularBufferModule:setSize(_maxSize: number) --[[ Line: 34 ]]
 	self._maxSize = _maxSize
 end
 
-function CircularBufferModule:getFrontIndex(): number --[[ Line: 65 ]]
+function CircularBufferModule:getFrontIndex(): number
 	local NewBackIndex = self._backIndex + 1
 	
 	return if self._data[NewBackIndex] then NewBackIndex else 1
 end
 
-function CircularBufferModule:front() --[[ Line: 73 ]]
+function CircularBufferModule:front()
 	local FrontIndex = self:getFrontIndex()
 	
 	return if self._data[FrontIndex] then self._data[FrontIndex].entry else nil
 end
 
-function CircularBufferModule.back(p1) --[[ Line: 81 ]]
+function CircularBufferModule.back(p1)
 	return if p1._data[p1._backIndex] then p1._data[p1._backIndex].entry else nil
 end
 
-function CircularBufferModule:iterator() --[[ Line: 88 ]]
+function CircularBufferModule:iterator()
 	return {
 		data = self._data[self:getFrontIndex()],
-		next = function(p1) --[[ Line: 93 ]]
+		next = function(p1)
 			local Data = p1.data
 			
 			if Data then
@@ -82,12 +82,12 @@ function CircularBufferModule:iterator() --[[ Line: 88 ]]
 	}
 end
 
-function CircularBufferModule:getData() --[[ Line: 105 ]]
+function CircularBufferModule:getData()
 	return self._data
 end
 
 if GetFFlagVoiceDebugConsoleV2Module() then
-	function CircularBufferModule:clone() --[[ Line: 114 ]]
+	function CircularBufferModule:clone()
 		-- upvalues: CircularBufferModule (copy)
 		local NewCircularBuffer = CircularBufferModule.new(self._maxSize)
 		local _data = {}
@@ -106,20 +106,20 @@ if GetFFlagVoiceDebugConsoleV2Module() then
 		return NewCircularBuffer
 	end
 end
-function CircularBufferModule:at(p1) --[[ Line: 132 ]]
+function CircularBufferModule:at(p1)
 	assert(p1, "Cannot index CircularBuffer with nil")
 	local NewFrontIndex = (self:getFrontIndex() + p1 - 2) % self._maxSize + 1
 	
 	return if self._data[NewFrontIndex] then self._data[NewFrontIndex].entry else nil
 end
 
-function CircularBufferModule:reverseAt(p1) --[[ Line: 143 ]]
+function CircularBufferModule:reverseAt(p1)
 	local NewBackIndex = (self._backIndex - p1) % self._maxSize + 1
 	
 	return if self._data[NewBackIndex] then self._data[NewBackIndex].entry else nil
 end
 
-function CircularBufferModule:push_back(Entry) --[[ Line: 154 ]]
+function CircularBufferModule:push_back(Entry)
 	local BackIndex: number = self._backIndex
 	local NewBackIndex = self._backIndex + 1
 	

@@ -11,7 +11,7 @@ local IconSize = FoundationModule.Enums.IconSize
 local IconVariant = FoundationModule.Enums.IconVariant
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function renderDetail(Text1, Name, Default, TestId, LayoutOrder) --[[ Line: 32 ]]
+local function renderDetail(Text1, Name, Default, TestId, LayoutOrder)
 	-- upvalues: ReactModule (copy), View (copy), Icon (copy), IconVariant (copy), IconSize (copy), Text (copy)
 	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-xsmall auto-xy",
@@ -34,7 +34,7 @@ local function renderDetail(Text1, Name, Default, TestId, LayoutOrder) --[[ Line
 	})
 end
 
-return ReactModule.memo(function(Frame) --[[ Line: 60 | Named "UserInfoPanelView" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Avatar (copy), AvatarSize (copy), Text (copy), renderDetail (copy), IconName (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Number: number? = tonumber(Frame.userId)

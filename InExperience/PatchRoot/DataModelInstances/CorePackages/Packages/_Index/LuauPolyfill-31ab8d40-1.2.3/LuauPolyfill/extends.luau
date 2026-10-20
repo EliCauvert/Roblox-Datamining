@@ -1,15 +1,15 @@
-﻿return function(p1, p2, Callback) --[[ Line: 30 ]]
+﻿return function(p1, p2, Callback)
 	local Module = {}
 	Module.__index = Module
 	
-	function Module.__tostring(p3) --[[ Line: 33 ]]
+	function Module.__tostring(p3)
 		-- upvalues: p1 (copy)
 		return getmetatable(p1).__tostring(p3)
 	end
 	
 	local t = {}
 	
-	function Module.new(...) --[[ Line: 39 ]]
+	function Module.new(...)
 		-- upvalues: Callback (copy), Module (copy)
 		local t = {}
 		Callback(t, ...)
@@ -18,14 +18,14 @@
 	end
 	
 	if typeof((getmetatable(p1))) == "table" and getmetatable(p1).__call then
-		function t:__call(...) --[[ Line: 46 ]]
+		function t:__call(...)
 			-- upvalues: Module (copy)
 			return Module.new(...)
 		end
 	end
 	t.__index = p1
 	
-	function t.__tostring(p3) --[[ Line: 52 ]]
+	function t.__tostring(p3)
 		-- upvalues: Module (copy), p2 (copy), p1 (copy)
 		return if p3 == Module then tostring(p2) else getmetatable(p1).__tostring(p3)
 	end

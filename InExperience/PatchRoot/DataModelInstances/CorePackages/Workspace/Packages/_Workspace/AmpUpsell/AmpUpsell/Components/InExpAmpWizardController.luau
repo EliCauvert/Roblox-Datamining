@@ -21,7 +21,7 @@ local FFlagRouteStandaloneAmpThroughUniversalApp = require(Parent.SharedFlags).F
 local ApolloProvider = require(Parent.ApolloClient).ApolloProvider
 local Root = nil
 
-local function WizardScreenGui(ExtraProps) --[[ Line: 35 ]]
+local function WizardScreenGui(ExtraProps)
 	-- upvalues: UseDispatchFunction (copy), InExpAmpWizardDisplayOrder (copy), ReactModule (copy), RoactModule (copy), SetScreenSizeFunction (copy), InExpWizardNavigatorModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	
@@ -32,7 +32,7 @@ local function WizardScreenGui(ExtraProps) --[[ Line: 35 ]]
 		DisplayOrder = if ExtraProps and ExtraProps.displayOrder then ExtraProps.displayOrder else InExpAmpWizardDisplayOrder,
 		Enabled = true,
 		OnTopOfCoreBlur = if ExtraProps and ExtraProps.onTopOfCoreBlur then true else nil,
-		[RoactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 52 ]]
+		[RoactModule.Change.AbsoluteSize] = function(Frame)
 			-- upvalues: UseDispatchResult (copy), SetScreenSizeFunction (upval)
 			UseDispatchResult(SetScreenSizeFunction(Frame.AbsoluteSize))
 		end
@@ -41,7 +41,7 @@ local function WizardScreenGui(ExtraProps) --[[ Line: 35 ]]
 	})
 end
 
-local function renderAmpWizard(p1, Client) --[[ Line: 64 ]]
+local function renderAmpWizard(p1, Client)
 	-- upvalues: Root (ref), ReactRobloxModule (copy), ReactModule (copy), InExperienceProviderContainer (copy), WizardScreenGui (copy), ApolloProvider (copy)
 	if Root == nil then
 		local AmpWizard = Instance.new("Folder")
@@ -61,17 +61,17 @@ local function renderAmpWizard(p1, Client) --[[ Line: 64 ]]
 end
 
 return {
-	OpenAmpWizardContainerInExp = function(FeatureName, Callback, RecourseData, EntryPointEventCtx, ExtraParameters, NameSpace, Client, DisplayOrder, OnTopOfCoreBlur, UsePrologue, PrologueOptions) --[[ Line: 84 ]]
+	OpenAmpWizardContainerInExp = function(FeatureName, Callback, RecourseData, EntryPointEventCtx, ExtraParameters, NameSpace, Client, DisplayOrder, OnTopOfCoreBlur, UsePrologue, PrologueOptions)
 		-- upvalues: GetFFlagEnableDummyAMPWizardModule (copy), HttpService (copy), FFlagRouteStandaloneAmpThroughUniversalApp (copy), AppAmpWizardLaunchBridgeModule (copy), GetFFlagInExperienceContainerScreenSizeReducerFunction (copy), GetFFlagMoveAmpUpsellOffNavigateDownFunction (copy), Root (ref), renderAmpWizard (copy)
 		if GetFFlagEnableDummyAMPWizardModule() then
-			task.delay(0.5, function() --[[ Line: 98 ]]
+			task.delay(0.5, function()
 				-- upvalues: Callback (copy), HttpService (upval)
 				if Callback then
 					local DummyAMPWizardAccessResponseFastString = game:GetFastString("DummyAMPWizardAccessResponse")
 					local DummyAMPWizardActionsTakenJSONFastString = game:GetFastString("DummyAMPWizardActionsTakenJSON")
 					local t = {}
 					
-					if not pcall(function() --[[ Line: 104 ]]
+					if not pcall(function()
 						-- upvalues: HttpService (upval), DummyAMPWizardActionsTakenJSONFastString (copy)
 						HttpService:JSONDecode(DummyAMPWizardActionsTakenJSONFastString)
 					end) then
@@ -101,7 +101,7 @@ return {
 				isInExperienceEntry = true,
 				nameSpace = NameSpace,
 				featureName = FeatureName,
-				completionCallback = function(p1, p2) --[[ Line: 140 ]]
+				completionCallback = function(p1, p2)
 					-- upvalues: Root (upval), Callback (copy)
 					if Root then
 						Root:render(nil)

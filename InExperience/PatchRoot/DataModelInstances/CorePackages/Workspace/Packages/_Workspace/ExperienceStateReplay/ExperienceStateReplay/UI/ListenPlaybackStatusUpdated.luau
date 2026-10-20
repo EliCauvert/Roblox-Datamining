@@ -2,9 +2,9 @@
 local SecondsToTimeStrModule = require(script.Parent.SecondsToTimeStr)
 
 return {
-	setupListener = function(p1) --[[ Line: 9 ]]
+	setupListener = function(p1)
 		-- upvalues: ExperienceStateRecordingService (copy), SecondsToTimeStrModule (copy)
-		ExperienceStateRecordingService.PlaybackStatusUpdated:Connect(function(XScale, _) --[[ Line: 10 ]]
+		ExperienceStateRecordingService.PlaybackStatusUpdated:Connect(function(XScale, _)
 			-- upvalues: p1 (copy), SecondsToTimeStrModule (upval)
 			p1.ScrubberPlayProgress.Size = UDim2.new(XScale, 0, 1, 0)
 			

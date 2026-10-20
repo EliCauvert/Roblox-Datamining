@@ -1,7 +1,7 @@
 ﻿local config = { minimumItemsPerRow = 4, minimumItemWidth = 140 }
 local CustomMetricsGetter = require(script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent.UIBlox).App.Grid.GridMetrics.makeCustomMetricsGetter(config)
 
-return function(p1) --[[ Line: 28 | Named "getGridMetrics" ]]
+return function(p1)
 	-- upvalues: config (copy), CustomMetricsGetter (copy)
 	local Largest = math.max(0, math.max(0, p1.containerWidth - p1.horizontalPadding * 2) - p1.strokeInset * 2)
 	

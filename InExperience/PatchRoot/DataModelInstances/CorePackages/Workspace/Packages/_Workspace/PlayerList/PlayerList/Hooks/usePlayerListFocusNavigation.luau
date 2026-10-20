@@ -8,13 +8,13 @@ local FocusNavHelperModule = require(Parent.Common.FocusNavHelper)
 local _ = require(Parent1.LeaderboardStore)
 local ConstantsModule = require(Parent.Common.Constants)
 
-return function() --[[ Line: 57 | Named "usePlayerListFocusNavigation" ]]
+return function()
 	-- upvalues: UseFocusGuiObjectFunction (copy), ReactModule (copy), FocusNavHelperModule (copy), ConstantsModule (copy), GuiService (copy)
 	local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseRefResult2 = ReactModule.useRef({})
-	local UseResult = ReactModule.useCallback(function(p1, p2) --[[ Line: 66 ]]
+	local UseResult = ReactModule.useCallback(function(p1, p2)
 		-- upvalues: FocusNavHelperModule (upval), UseRefResult2 (copy), UseFocusGuiObjectResult (copy), UseRefResult (copy)
 		local NextPlayerInstance = FocusNavHelperModule.getNextPlayerInstance(UseRefResult2.current, p1, p2)
 		
@@ -26,7 +26,7 @@ return function() --[[ Line: 57 | Named "usePlayerListFocusNavigation" ]]
 			UseFocusGuiObjectResult(UseRefResult.current)
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 78 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult1 (copy), ConstantsModule (upval), UseRefResult2 (copy), UseFocusGuiObjectResult (copy), UseRefResult (copy), FocusNavHelperModule (upval)
 		if UseRefResult1.current and UseRefResult1.current ~= ConstantsModule.SELECTED_TITLE_PLAYER_ID then
 			for _, value in UseRefResult2.current do
@@ -50,9 +50,9 @@ return function() --[[ Line: 57 | Named "usePlayerListFocusNavigation" ]]
 			UseFocusGuiObjectResult(FirstPlayerInstance.object)
 		end
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function(p1) --[[ Line: 104 ]]
+	local UseResult2 = ReactModule.useCallback(function(p1)
 		-- upvalues: UseRefResult2 (copy)
-		return function(UserId, Object, Order) --[[ Line: 105 ]]
+		return function(UserId, Object, Order)
 			-- upvalues: UseRefResult2 (upval), p1 (copy)
 			if Object and UseRefResult2.current[p1] then
 				UseRefResult2.current[p1].players[UserId] = { userId = UserId, object = Object, order = Order }
@@ -61,9 +61,9 @@ return function() --[[ Line: 57 | Named "usePlayerListFocusNavigation" ]]
 			end
 		end
 	end, {})
-	local UseResult3 = ReactModule.useCallback(function(p1) --[[ Line: 118 ]]
+	local UseResult3 = ReactModule.useCallback(function(p1)
 		-- upvalues: UseRefResult2 (copy), GuiService (upval), UseResult (copy)
-		return function(p2) --[[ Line: 119 ]]
+		return function(p2)
 			-- upvalues: UseRefResult2 (upval), p1 (copy), GuiService (upval), UseResult (upval)
 			local CurrentEntry = UseRefResult2.current[p1]
 			
@@ -77,7 +77,7 @@ return function() --[[ Line: 57 | Named "usePlayerListFocusNavigation" ]]
 			UseRefResult2.current[p1].players[p2] = nil
 		end
 	end, {})
-	local UseResult4 = ReactModule.useCallback(function(TeamId, Order) --[[ Line: 138 ]]
+	local UseResult4 = ReactModule.useCallback(function(TeamId, Order)
 		-- upvalues: UseResult2 (copy), UseResult3 (copy), UseRefResult2 (copy)
 		local config = {
 			teamId = TeamId,
@@ -90,19 +90,19 @@ return function() --[[ Line: 57 | Named "usePlayerListFocusNavigation" ]]
 		
 		return config
 	end, {})
-	local UseResult5 = ReactModule.useCallback(function(p1) --[[ Line: 152 ]]
+	local UseResult5 = ReactModule.useCallback(function(p1)
 		-- upvalues: UseRefResult2 (copy)
 		UseRefResult2.current[p1] = nil
 	end, {})
-	local UseResult6 = ReactModule.useCallback(function(Current) --[[ Line: 156 ]]
+	local UseResult6 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy)
 		UseRefResult.current = Current
 	end, {})
-	local UseResult7 = ReactModule.useCallback(function(Current) --[[ Line: 160 ]]
+	local UseResult7 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult1 (copy)
 		UseRefResult1.current = Current
 	end, {})
-	local UseResult8 = ReactModule.useCallback(function(p1) --[[ Line: 164 ]]
+	local UseResult8 = ReactModule.useCallback(function(p1)
 		-- upvalues: UseFocusGuiObjectResult (copy), UseRefResult (copy), UseRefResult1 (copy), UseRefResult2 (copy)
 		if p1 then
 			UseFocusGuiObjectResult(nil)
@@ -112,7 +112,7 @@ return function() --[[ Line: 57 | Named "usePlayerListFocusNavigation" ]]
 		UseRefResult2.current = {}
 	end, {})
 	
-	return ReactModule.useMemo(function() --[[ Line: 175 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: UseResult1 (copy), UseResult4 (copy), UseResult5 (copy), UseResult6 (copy), UseResult7 (copy), UseResult8 (copy)
 		return {
 			getFocus = UseResult1,

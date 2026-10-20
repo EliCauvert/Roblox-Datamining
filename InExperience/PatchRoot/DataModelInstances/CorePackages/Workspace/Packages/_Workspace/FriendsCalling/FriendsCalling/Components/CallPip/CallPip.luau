@@ -15,7 +15,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local _UDim2 = UDim2.fromOffset(120, 160)
 local Frozen = table.freeze({ Compact = "Compact", Expanded = "Expanded" })
 
-local function CallPipWindow(p1) --[[ Line: 56 ]]
+local function CallPipWindow(p1)
 	-- upvalues: UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseDeviceOrientationFunction (copy), DeviceOrientationMode (copy), ReactModule (copy), Frozen (copy), ResolveGeometryModule (copy), PlaceholderExpandedModule (copy), PlaceholderCollapsedModule (copy), FloatingWindowModule (copy), _UDim2 (copy)
 	local Host = p1.host
 	local UseTokensResult = UseTokensFunction()
@@ -23,15 +23,15 @@ local function CallPipWindow(p1) --[[ Line: 56 ]]
 	local IsNotUseDeviceOrientationResultMatch = UseDeviceOrientationFunction() ~= DeviceOrientationMode.Landscape
 	local UseStateResult, UseStateResult2 = ReactModule.useState(p1.initialPresentation or Frozen.Compact)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 65 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(p2)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 68 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), Frozen (upval)
 		UseStateResult2(Frozen.Expanded)
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 71 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), Frozen (upval)
 		UseStateResult2(Frozen.Compact)
 	end, {})
@@ -63,7 +63,7 @@ local function CallPipWindow(p1) --[[ Line: 56 ]]
 	})
 end
 
-return function(p1) --[[ Line: 111 | Named "CallPip" ]]
+return function(p1)
 	-- upvalues: UseSelectedThemeFunction (copy), ColorMode (copy), ReactModule (copy), FoundationProvider (copy), CallPipWindow (copy)
 	local UseSelectedThemeResult = UseSelectedThemeFunction()
 	

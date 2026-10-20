@@ -6,9 +6,9 @@ local FFlagAppChatIncrementalPaginationProjectionModule = require(AppChat.Flags.
 local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
 local GetConversationMessageViewModelStoreModule = require(AppChat.Stores.GetConversationMessageViewModelStore)
 
-return function(ConversationId, _, p1) --[[ Line: 11 ]]
+return function(ConversationId, _, p1)
 	-- upvalues: FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), FFlagAppChatIncrementalPaginationProjectionModule (copy), GetConversationMessageViewModelStoreModule (copy), AppChatNetworkingModule (copy)
-	return function(p2) --[[ Line: 12 ]]
+	return function(p2)
 		-- upvalues: FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), p1 (copy), ConversationId (copy), AppChatPerfTrackerModule (upval), FFlagAppChatIncrementalPaginationProjectionModule (upval), GetConversationMessageViewModelStoreModule (upval), AppChatNetworkingModule (upval)
 		local v1: boolean = FFlagAppChatPerfTrackingModule and (FFlagAppChatMessageTTIMilestonesModule and p1 == nil)
 		
@@ -24,7 +24,7 @@ return function(ConversationId, _, p1) --[[ Line: 11 ]]
 		local DispatchResult = p2:dispatch(AppChatNetworkingModule.rodux.GetOlderMessages.API(ConversationId, p1))
 		
 		if v1 then
-			DispatchResult = DispatchResult:tap(function() --[[ Line: 44 ]]
+			DispatchResult = DispatchResult:tap(function()
 				-- upvalues: ConversationId (upval), AppChatPerfTrackerModule (upval)
 				local config = { conversationId = ConversationId }
 				AppChatPerfTrackerModule.trackMilestone(AppChatPerfTrackerModule.Events.ChatConversationTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataReady.Name, config)
@@ -32,12 +32,12 @@ return function(ConversationId, _, p1) --[[ Line: 11 ]]
 			end)
 		end
 		if FFlagAppChatIncrementalPaginationProjectionModule then
-			DispatchResult = DispatchResult:finally(function() --[[ Line: 61 ]]
+			DispatchResult = DispatchResult:finally(function()
 				-- upvalues: GetConversationMessageViewModelStoreModule (upval), ConversationId (upval)
 				GetConversationMessageViewModelStoreModule(false).conversationMessageListStore.setLoading(ConversationId, false)
 			end)
 		end
-		return DispatchResult:catch(function(Err) --[[ Line: 66 ]]
+		return DispatchResult:catch(function(Err)
 			warn("AppChatNetworking failure in getOlderMessages, Status: " .. tostring(Err))
 		end)
 	end

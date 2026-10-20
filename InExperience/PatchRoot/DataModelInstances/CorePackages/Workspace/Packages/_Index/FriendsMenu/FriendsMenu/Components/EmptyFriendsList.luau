@@ -9,7 +9,7 @@ local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local GetLocalizedStringsFunction = require(Parent.NotificationsCommon).LocalizationHelper.getLocalizedStrings
 local IconsMenuFriendsLarge = UIBloxModule.App.ImageSet.Images["icons/menu/friends_large"]
 
-return function() --[[ Line: 21 ]]
+return function()
 	-- upvalues: UseStyleFunction (copy), GetLocalizedStringsFunction (copy), ReactModule (copy), ImageSetLabel (copy), IconsMenuFriendsLarge (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseStyleResult = UseStyleFunction()
 	local Theme = UseStyleResult.Theme

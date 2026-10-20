@@ -4,11 +4,11 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local GameGetGameInfoStoreModule = require(Parent.DataHydration.GameGetGameInfoStore)
 local DataStatus = require(Parent.DataHydration).DataStatus
 local FFlagAppChatMomentShareCardLoadingSkeletonsModule = require(AppChat.Flags.FFlagAppChatMomentShareCardLoadingSkeletons)
-local Computed = require(Parent.Signals).createComputed(function() --[[ Line: 12 ]]
+local Computed = require(Parent.Signals).createComputed(function()
 	return nil
 end)
 
-return function(p1, p2) --[[ Line: 21 | Named "useExperienceName" ]]
+return function(p1, p2)
 	-- upvalues: GameGetGameInfoStoreModule (copy), SignalsReactModule (copy), Computed (copy), FFlagAppChatMomentShareCardLoadingSkeletonsModule (copy), DataStatus (copy)
 	local Text = if p1 and p1 ~= 0 then tostring(p1) else nil
 	local AndFetchGameInfo = if p2 and Text then GameGetGameInfoStoreModule(false).getAndFetchGameInfo(Text) else nil

@@ -1,4 +1,4 @@
-﻿return function(p1, Text: string) --[[ Line: 1 ]]
+﻿return function(p1, Text: string)
 	local v1 = p1
 	
 	for _, value in ipairs(Text:split(".")) do

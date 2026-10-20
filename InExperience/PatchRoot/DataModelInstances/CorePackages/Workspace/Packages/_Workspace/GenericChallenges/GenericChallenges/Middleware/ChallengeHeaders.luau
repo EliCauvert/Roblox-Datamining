@@ -6,7 +6,7 @@ local HttpService = game:GetService("HttpService")
 local ChallengeHeadersModule = {}
 ChallengeHeadersModule.__index = ChallengeHeadersModule
 
-function ChallengeHeadersModule.new(p1) --[[ Line: 41 ]]
+function ChallengeHeadersModule.new(p1)
 	-- upvalues: ConstantsModule (copy), Base64 (copy), HttpService (copy), GenericTypeModule (copy), ChallengeHeadersModule (copy)
 	local DecodeResult = Base64.Decode(p1[ConstantsModule.challengeMetadataHeader])
 	

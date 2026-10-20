@@ -8,20 +8,20 @@ local RenderWithCoreScriptsStyleProviderModule = require(game:GetService("CoreGu
 local LuobuWarningToastComponent = RoactModule.PureComponent:extend("LuobuWarningToastComponent")
 local InGameCommonUIMessageLuobuGameJoinWarning = require(CorePackages.Workspace.Packages.RobloxTranslator):FormatByKey("InGame.CommonUI.Message.LuobuGameJoinWarning")
 
-function LuobuWarningToastComponent.init(p1) --[[ Line: 18 ]]
+function LuobuWarningToastComponent.init(p1)
 	-- upvalues: Images (copy), ContentProvider (copy), InGameCommonUIMessageLuobuGameJoinWarning (copy)
 	p1.state = { isLoaded = false }
-	task.spawn(function() --[[ Line: 23 ]]
+	task.spawn(function()
 		-- upvalues: Images (upval), ContentProvider (upval), p1 (copy)
 		local Image = Images["icons/status/alert"].Image
-		pcall(function() --[[ Line: 25 ]]
+		pcall(function()
 			-- upvalues: ContentProvider (upval), Image (copy)
 			ContentProvider:PreloadAsync({ Image })
 		end)
 		p1:setState({ isLoaded = true })
 	end)
 	
-	function p1.getToastContent() --[[ Line: 33 ]]
+	function p1.getToastContent()
 		-- upvalues: Images (upval), InGameCommonUIMessageLuobuGameJoinWarning (upval)
 		return {
 			iconImage = Images["icons/status/alert"],
@@ -31,7 +31,7 @@ function LuobuWarningToastComponent.init(p1) --[[ Line: 18 ]]
 	end
 end
 
-function LuobuWarningToastComponent.render(p1) --[[ Line: 45 ]]
+function LuobuWarningToastComponent.render(p1)
 	-- upvalues: RoactModule (copy), Toast (copy), RenderWithCoreScriptsStyleProviderModule (copy)
 	return if p1.state.isLoaded then RenderWithCoreScriptsStyleProviderModule({
 		RobloxCaptureNotificationGui = RoactModule.createElement("ScreenGui", {

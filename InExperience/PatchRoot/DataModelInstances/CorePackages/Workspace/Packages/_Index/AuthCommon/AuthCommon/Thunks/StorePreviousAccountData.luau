@@ -5,7 +5,7 @@ local Parent = AuthCommon.Parent
 local CryoModule = require(Parent.Cryo)
 local FFlagFixPreviousAccountsListEntries = require(Parent.SharedFlags).FFlagFixPreviousAccountsListEntries
 
-return function() --[[ Line: 8 ]]
+return function()
 	-- upvalues: UserModule (copy), AppStorageUtilitiesModule (copy), FFlagFixPreviousAccountsListEntries (copy), CryoModule (copy)
 	local FromLocalStorageResult = UserModule.fromLocalStorage()
 	

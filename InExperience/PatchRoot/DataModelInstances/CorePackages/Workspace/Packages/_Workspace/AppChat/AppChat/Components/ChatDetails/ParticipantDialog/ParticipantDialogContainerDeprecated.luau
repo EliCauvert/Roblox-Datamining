@@ -38,14 +38,14 @@ local config = {
 	openChat = nil,
 	openReportUser = nil,
 	openRemoveUserDialog = nil,
-	onDismiss = function() --[[ Line: 71 ]] end
+	onDismiss = function() end
 }
 local config1 = { skipFetch = true }
 
-function ParticipantDialogContainerDeprecated(p1) --[[ Line: 77 ]]
+function ParticipantDialogContainerDeprecated(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseAppPolicyModule (copy), FFlagEnableChatDetailsOpenChatModule (copy), UseSelectorFunction (copy), ConversationModule (copy), UseDispatchFunction (copy), FFlagAppChatMigrateFriendshipStatusesModule (copy), UseGetFriendshipStatusFunction (copy), config1 (copy), ReactModule (copy), NetworkingFriendsModule (copy), UseLocalizationFunction (copy), UseIsExternalNavigationAvailableModule (copy), EnumScreensModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), AppFocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), PlayerContextualMenuWrapperModule (copy), FocusNavigableSurfaceWrapper (copy), ParticipantDialogDeprecatedModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
-	local UseAppPolicyModuleResult = UseAppPolicyModule(function(p2) --[[ Line: 79 ]]
+	local UseAppPolicyModuleResult = UseAppPolicyModule(function(p2)
 		return p2.getChatViewProfileOption()
 	end)
 	local UseSelectorResult = nil
@@ -53,7 +53,7 @@ function ParticipantDialogContainerDeprecated(p1) --[[ Line: 77 ]]
 	local ShowChatButton = false
 	
 	if FFlagEnableChatDetailsOpenChatModule then
-		UseSelectorResult = UseSelectorFunction(function(p2): boolean --[[ Line: 89 ]]
+		UseSelectorResult = UseSelectorFunction(function(p2): boolean
 			-- upvalues: JoinResult (copy), ConversationModule (upval)
 			local Conversations = p2.ChatAppReducer and p2.ChatAppReducer.Conversations
 			local Conversation = Conversations and Conversations[JoinResult.conversationId]
@@ -66,14 +66,14 @@ function ParticipantDialogContainerDeprecated(p1) --[[ Line: 77 ]]
 		if FFlagAppChatMigrateFriendshipStatusesModule then
 			IsUseGetFriendshipStatusResultMatch = UseGetFriendshipStatusFunction(JoinResult.participantId, if UseSelectorResult then nil else config1) == Enum.FriendStatus.Friend
 		else
-			IsUseGetFriendshipStatusResultMatch = UseSelectorFunction(function(p2): boolean --[[ Line: 104 ]]
+			IsUseGetFriendshipStatusResultMatch = UseSelectorFunction(function(p2): boolean
 				-- upvalues: JoinResult (copy)
 				local Friends = p2.ChatAppReducer and p2.ChatAppReducer.Friends
 				local FriendshipStatus = Friends and Friends.friendshipStatus
 				
 				return FriendshipStatus and FriendshipStatus[JoinResult.participantId] == Enum.FriendStatus.Friend
 			end)
-			ReactModule.useEffect(function() --[[ Line: 110 ]]
+			ReactModule.useEffect(function()
 				-- upvalues: UseSelectorResult (ref), UseDispatchResult (ref), NetworkingFriendsModule (upval), JoinResult (copy)
 				if UseSelectorResult then
 					UseDispatchResult(NetworkingFriendsModule.GetExtendedFriendshipStatus.API({ targetUserId = JoinResult.participantId }))
@@ -93,11 +93,11 @@ function ParticipantDialogContainerDeprecated(p1) --[[ Line: 77 ]]
 		removeFromGroupText = JoinResult.removeFromGroupText,
 		cancelText = JoinResult.cancelText
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 134 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), JoinResult (copy)
 		return {
 			[FocusNavigationEventNameEnum.NavigateBack] = {
-				handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 137 ]]
+				handler = InputHandlersModule.onRelease(function(p2)
 					-- upvalues: JoinResult (upval)
 					JoinResult.onDismiss()
 					p2:cancel()

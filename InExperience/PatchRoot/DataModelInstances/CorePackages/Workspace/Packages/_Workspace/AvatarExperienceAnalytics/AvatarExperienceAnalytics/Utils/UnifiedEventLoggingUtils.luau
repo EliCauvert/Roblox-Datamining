@@ -4,7 +4,7 @@ local DashModule = require(Parent.Dash)
 local UnifiedEventLogConstantsModule = require(script.Parent.Parent.UnifiedEventLogConstants)
 local FFlagCleanupTenFootUiPaddingAndAnalytics = require(Parent.SharedFlags).FFlagCleanupTenFootUiPaddingAndAnalytics
 
-local function getParentScrollingFrames(ScrollingFrame, List) --[[ Line: 15 ]]
+local function getParentScrollingFrames(ScrollingFrame, List)
 	-- upvalues: getParentScrollingFrames (copy)
 	if not List then
 		List = {}
@@ -21,21 +21,21 @@ local function getParentScrollingFrames(ScrollingFrame, List) --[[ Line: 15 ]]
 end
 
 local UnifiedEventLoggingUtils = {
-	getUnifiedLoggingFieldName = function(Text: string) --[[ Line: 29 ]]
+	getUnifiedLoggingFieldName = function(Text: string)
 		-- upvalues: UnifiedEventLogConstantsModule (copy)
 		return Text.sub(Text, string.len(UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX) + 1, (string.len(Text)))
 	end,
-	isUnifiedLoggingAttribute = function(p1) --[[ Line: 34 ]]
+	isUnifiedLoggingAttribute = function(p1)
 		-- upvalues: DashModule (copy), UnifiedEventLogConstantsModule (copy)
 		return DashModule.startsWith(p1, UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX)
 	end,
-	formatLookTypeAttribute = function(Text): string --[[ Line: 38 ]]
+	formatLookTypeAttribute = function(Text): string
 		return string.upper("LOOK_TYPE_" .. Text)
 	end
 }
 
 if require(Parent.AvatarExperienceFlags).FFlagAXMISEnableMultiShoppingUnifiedEvents then
-	function UnifiedEventLoggingUtils.getFieldsToSendFromInstanceAttributes(List) --[[ Line: 43 ]]
+	function UnifiedEventLoggingUtils.getFieldsToSendFromInstanceAttributes(List)
 		-- upvalues: UnifiedEventLoggingUtils (copy)
 		local t = {}
 		
@@ -49,7 +49,7 @@ if require(Parent.AvatarExperienceFlags).FFlagAXMISEnableMultiShoppingUnifiedEve
 		return t
 	end
 end
-function UnifiedEventLoggingUtils.getElementSizeAndPosition(Frame: Frame) --[[ Line: 58 ]]
+function UnifiedEventLoggingUtils.getElementSizeAndPosition(Frame: Frame)
 	-- upvalues: getParentScrollingFrames (copy)
 	local X = Frame.AbsolutePosition.X
 	local Y = Frame.AbsolutePosition.Y
@@ -79,7 +79,7 @@ function UnifiedEventLoggingUtils.getElementSizeAndPosition(Frame: Frame) --[[ L
 	}
 end
 
-function UnifiedEventLoggingUtils.getScreenSize(p1) --[[ Line: 79 ]]
+function UnifiedEventLoggingUtils.getScreenSize(p1)
 	-- upvalues: CoreGui (copy), FFlagCleanupTenFootUiPaddingAndAnalytics (copy)
 	local Frame = nil
 	local ScreenGui = p1:FindFirstAncestorOfClass("ScreenGui")

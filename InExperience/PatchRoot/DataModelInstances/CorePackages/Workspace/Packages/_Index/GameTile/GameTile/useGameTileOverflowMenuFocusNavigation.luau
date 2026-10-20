@@ -18,15 +18,15 @@ local config1 = {
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p1, Current, p2, Callback) --[[ Line: 32 | Named "useGameTileOverflowMenuFocusNavigation" ]]
+return function(p1, Current, p2, Callback)
 	-- upvalues: ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), GetOverflowMenuSignalStoreFunction (copy), FFlagLuaAppFixExplicitFeedbackConsoleTelemetry (copy), ReactFocusNavigationModule (copy), config (copy), config1 (copy), GetInputModeStoreFunction (copy), ResponsiveModule (copy), GuiService (copy), FFlagLuaAppGameTileOverflowMenuFocusTransferFix (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseRefResult = ReactModule.useRef(false)
-	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 41 ]]
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), GetOverflowMenuSignalStoreFunction (upval), p1 (copy), FFlagLuaAppFixExplicitFeedbackConsoleTelemetry (upval), Callback (copy)
 		return {
 			[FocusNavigationEventNameEnum.OpenQuickMenu] = {
-				handler = InputHandlersModule.onRelease(function() --[[ Line: 44 ]]
+				handler = InputHandlersModule.onRelease(function()
 					-- upvalues: GetOverflowMenuSignalStoreFunction (upval), p1 (upval), FFlagLuaAppFixExplicitFeedbackConsoleTelemetry (upval), Callback (upval)
 					GetOverflowMenuSignalStoreFunction().openMenu(p1)
 					
@@ -37,7 +37,7 @@ return function(p1, Current, p2, Callback) --[[ Line: 32 | Named "useGameTileOve
 			}
 		}, {
 			[FocusNavigationEventNameEnum.NavigateBack] = {
-				handler = InputHandlersModule.onRelease(function() --[[ Line: 54 ]]
+				handler = InputHandlersModule.onRelease(function()
 					-- upvalues: GetOverflowMenuSignalStoreFunction (upval), p1 (upval), FFlagLuaAppFixExplicitFeedbackConsoleTelemetry (upval), Callback (upval)
 					GetOverflowMenuSignalStoreFunction().closeMenu(p1)
 					
@@ -53,26 +53,26 @@ return function(p1, Current, p2, Callback) --[[ Line: 32 | Named "useGameTileOve
 	})
 	local UseEventHandlerMapResult = ReactFocusNavigationModule.useEventHandlerMap(UseMemoResult, (ReactFocusNavigationModule.useEventMap(config)))
 	local UseEventHandlerMapResult1 = ReactFocusNavigationModule.useEventHandlerMap(UseMemoResult2, (ReactFocusNavigationModule.useEventMap(config1)))
-	ReactModule.useEffect(function() --[[ Line: 71 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseEventHandlerMapResult (copy), p2 (copy)
 		if UseEventHandlerMapResult and p2 then
 			UseEventHandlerMapResult(p2.current)
 		end
 	end, { UseEventHandlerMapResult, p2 })
-	ReactModule.useEffect(function() --[[ Line: 77 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseEventHandlerMapResult1 (copy), UseStateResult (copy)
 		if UseEventHandlerMapResult1 then
 			UseEventHandlerMapResult1(UseStateResult)
 		end
 	end, { UseEventHandlerMapResult1, UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 84 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: GetInputModeStoreFunction (upval), ResponsiveModule (upval), Current (copy), UseStateResult (copy), GuiService (upval)
 		if GetInputModeStoreFunction(false).getLastInputType(false) == ResponsiveModule.Input.Directional and Current and UseStateResult then
 			GuiService:Select(UseStateResult)
 		end
 	end, { UseStateResult })
 	local UseRefResult1 = ReactModule.useRef(Current)
-	ReactModule.useEffect(function() --[[ Line: 93 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), Current (copy), UseRefResult (copy), GetOverflowMenuSignalStoreFunction (upval), p1 (copy), GuiService (upval), FFlagLuaAppGameTileOverflowMenuFocusTransferFix (upval), UseStateResult (copy), p2 (copy)
 		if UseRefResult1.current ~= Current then
 			UseRefResult1.current = Current
@@ -99,7 +99,7 @@ return function(p1, Current, p2, Callback) --[[ Line: 32 | Named "useGameTileOve
 		p2,
 		if FFlagLuaAppGameTileOverflowMenuFocusTransferFix then UseStateResult else nil
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 128 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult (copy), GuiService (upval), UseRefResult (copy), GetOverflowMenuSignalStoreFunction (upval), p1 (copy)
 		if UseStateResult and GuiService.SelectedCoreObject and GuiService.SelectedCoreObject:IsDescendantOf(UseStateResult) then
 			UseRefResult.current = true
@@ -111,12 +111,12 @@ return function(p1, Current, p2, Callback) --[[ Line: 32 | Named "useGameTileOve
 			GetOverflowMenuSignalStoreFunction().closeMenu(p1)
 		end
 	end, { UseStateResult, p1 })
-	ReactModule.useLayoutEffect(function() --[[ Line: 139 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: GuiService (upval), UseResult (copy)
 		local Connection = GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(UseResult)
 		UseResult()
 		
-		return function() --[[ Line: 143 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			if Connection then
 				Connection:Disconnect()

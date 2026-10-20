@@ -10,12 +10,12 @@ local v2 = -1
 local v3 = -1
 local v4 = -1
 
-function getCommitTime() --[[ Line: 43 ]]
+function getCommitTime()
 	-- upvalues: v1 (ref)
 	return v1
 end
 
-function recordCommitTime() --[[ Line: 47 ]]
+function recordCommitTime()
 	-- upvalues: EnableProfilerTimer (copy), v1 (ref), UnstableNowFunction (copy)
 	if EnableProfilerTimer then
 		v1 = UnstableNowFunction()
@@ -24,7 +24,7 @@ function recordCommitTime() --[[ Line: 47 ]]
 	end
 end
 
-function startProfilerTimer(p1) --[[ Line: 54 ]]
+function startProfilerTimer(p1)
 	-- upvalues: EnableProfilerTimer (copy), v3 (ref), UnstableNowFunction (copy)
 	if not EnableProfilerTimer then return end
 	v3 = UnstableNowFunction()
@@ -34,7 +34,7 @@ function startProfilerTimer(p1) --[[ Line: 54 ]]
 	end
 end
 
-function stopProfilerTimerIfRunning(_) --[[ Line: 67 ]]
+function stopProfilerTimerIfRunning(_)
 	-- upvalues: EnableProfilerTimer (copy), v3 (ref)
 	if EnableProfilerTimer then
 		v3 = -1
@@ -43,7 +43,7 @@ function stopProfilerTimerIfRunning(_) --[[ Line: 67 ]]
 	end
 end
 
-function stopProfilerTimerIfRunningAndRecordDelta(p1, p2) --[[ Line: 74 ]]
+function stopProfilerTimerIfRunningAndRecordDelta(p1, p2)
 	-- upvalues: EnableProfilerTimer (copy), v3 (ref), UnstableNowFunction (copy)
 	if not EnableProfilerTimer then return end
 	if v3 >= 0 then
@@ -57,7 +57,7 @@ function stopProfilerTimerIfRunningAndRecordDelta(p1, p2) --[[ Line: 74 ]]
 	end
 end
 
-function recordLayoutEffectDuration(p1) --[[ Line: 92 ]]
+function recordLayoutEffectDuration(p1)
 	-- upvalues: EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), v2 (ref), UnstableNowFunction (copy), Profiler (copy)
 	if not EnableProfilerTimer or not EnableProfilerCommitHooks then return end
 	if v2 >= 0 then
@@ -75,7 +75,7 @@ function recordLayoutEffectDuration(p1) --[[ Line: 92 ]]
 	end
 end
 
-function recordPassiveEffectDuration(p2) --[[ Line: 115 ]]
+function recordPassiveEffectDuration(p2)
 	-- upvalues: EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), v4 (ref), UnstableNowFunction (copy), Profiler (copy)
 	if not EnableProfilerTimer or not EnableProfilerCommitHooks then return end
 	if v4 >= 0 then
@@ -96,7 +96,7 @@ function recordPassiveEffectDuration(p2) --[[ Line: 115 ]]
 	end
 end
 
-function startLayoutEffectTimer() --[[ Line: 143 ]]
+function startLayoutEffectTimer()
 	-- upvalues: EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), v2 (ref), UnstableNowFunction (copy)
 	if EnableProfilerTimer and EnableProfilerCommitHooks then
 		v2 = UnstableNowFunction()
@@ -105,7 +105,7 @@ function startLayoutEffectTimer() --[[ Line: 143 ]]
 	end
 end
 
-function startPassiveEffectTimer() --[[ Line: 150 ]]
+function startPassiveEffectTimer()
 	-- upvalues: EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), v4 (ref), UnstableNowFunction (copy)
 	if EnableProfilerTimer and EnableProfilerCommitHooks then
 		v4 = UnstableNowFunction()
@@ -114,7 +114,7 @@ function startPassiveEffectTimer() --[[ Line: 150 ]]
 	end
 end
 
-function transferActualDuration(p3) --[[ Line: 157 ]]
+function transferActualDuration(p3)
 	local Child = p3.child
 	while Child do
 		p3.actualDuration += Child.actualDuration

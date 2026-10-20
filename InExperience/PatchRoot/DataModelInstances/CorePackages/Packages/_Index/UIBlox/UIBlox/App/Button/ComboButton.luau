@@ -44,33 +44,33 @@ ComboButton.defaultProps = {
 	size = UDim2.fromScale(1, 1)
 }
 
-function ComboButton.init(p1) --[[ Line: 77 ]]
+function ComboButton.init(p1)
 	-- upvalues: ControlStateModule (copy)
 	p1:setState({
 		buttonControlState = ControlStateModule.Initialize,
 		overflowControlState = ControlStateModule.Initialize
 	})
 	
-	function p1:onButtonStateChanged(ButtonControlState) --[[ Line: 80 ]]
+	function p1:onButtonStateChanged(ButtonControlState)
 		-- upvalues: p1 (copy)
 		p1:setState({ buttonControlState = ButtonControlState })
 	end
 	
-	function p1:onOverflowStateChanged(OverflowControlState) --[[ Line: 84 ]]
+	function p1:onOverflowStateChanged(OverflowControlState)
 		-- upvalues: p1 (copy)
 		p1:setState({ overflowControlState = OverflowControlState })
 	end
 end
 
-function ComboButton.render(p1) --[[ Line: 89 ]]
+function ComboButton.render(p1)
 	-- upvalues: WithStyleModule (copy)
-	return WithStyleModule(function(p2) --[[ Line: 90 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithProviders(p2, nil, nil)
 	end)
 end
 
-function ComboButton.renderWithProviders(p1, _, _, _) --[[ Line: 95 ]]
+function ComboButton.renderWithProviders(p1, _, _, _)
 	-- upvalues: RoactModule (copy), ReactModule (copy), GenericButtonModule (copy), ImagesModule (copy), ButtonStateColorMap (copy), ContentStateColorMap (copy)
 	return RoactModule.createElement("Frame", {
 		LayoutOrder = p1.props.layoutOrder,
@@ -114,7 +114,7 @@ function ComboButton.renderWithProviders(p1, _, _, _) --[[ Line: 95 ]]
 	})
 end
 
-function ComboButtonFunctionalWrapper(p1) --[[ Line: 142 ]]
+function ComboButtonFunctionalWrapper(p1)
 	-- upvalues: UseCursorModule (copy), _UDim (copy), RoactModule (copy), ComboButton (copy), CryoModule (copy)
 	return RoactModule.createElement(ComboButton, CryoModule.Dictionary.join(p1, { cursor = UseCursorModule(_UDim) }))
 end
@@ -122,7 +122,7 @@ end
 local ComboButtonOuterWrapper = RoactModule.PureComponent:extend("ComboButtonOuterWrapper")
 ComboButtonOuterWrapper.validateProps = ComboButton.validateProps
 
-function ComboButtonOuterWrapper.render(p1) --[[ Line: 156 ]]
+function ComboButtonOuterWrapper.render(p1)
 	-- upvalues: RoactModule (copy)
 	return RoactModule.createElement(ComboButtonFunctionalWrapper, p1.props)
 end

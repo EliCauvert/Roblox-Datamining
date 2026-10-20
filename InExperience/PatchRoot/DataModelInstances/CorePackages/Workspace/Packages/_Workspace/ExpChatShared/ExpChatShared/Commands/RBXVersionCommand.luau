@@ -4,7 +4,7 @@ local _ = require(script.Parent.types)
 return {
 	name = script.Name,
 	alias = { "/version", "/v" },
-	clientRun = function() --[[ Line: 8 ]]
+	clientRun = function()
 		-- upvalues: VersionModule (copy)
 		return {
 			key = "CoreScripts.TextChat.Version.Success",

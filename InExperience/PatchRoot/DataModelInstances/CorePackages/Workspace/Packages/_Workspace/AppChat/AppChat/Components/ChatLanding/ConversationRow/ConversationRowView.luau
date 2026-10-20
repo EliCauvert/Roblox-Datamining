@@ -20,7 +20,7 @@ local SquadComponentAccessWrapper = SquadsModule.SquadComponentAccessWrapper
 local SquadJoinButton = SquadsModule.SquadJoinButton
 local MemoResult = ReactModule.memo((require(AppChat.Components.Cells.ConversationFacePile)))
 
-local function SubscriptionBadge(p1) --[[ Line: 70 ]]
+local function SubscriptionBadge(p1)
 	-- upvalues: FoundationModule (copy), ReactModule (copy)
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "size-400-400",
@@ -37,14 +37,14 @@ local function SubscriptionBadge(p1) --[[ Line: 70 ]]
 	})
 end
 
-local function LegacySubscriptionBadgeHost(p1) --[[ Line: 88 ]]
+local function LegacySubscriptionBadgeHost(p1)
 	-- upvalues: SignalsReactModule (copy), UseGetOneToOneFriendIdFromConversationIdModule (copy), UseIsRobloxSubscriberBindingFunction (copy), ReactModule (copy), SubscriptionBadge (copy)
 	return ReactModule.createElement(SubscriptionBadge, {
 		visible = UseIsRobloxSubscriberBindingFunction((UseGetOneToOneFriendIdFromConversationIdModule(SignalsReactModule.useSignalState(p1.itemSignal).id)))
 	})
 end
 
-local function LegacyConversationFacePileHost(p1) --[[ Line: 100 ]]
+local function LegacyConversationFacePileHost(p1)
 	-- upvalues: SignalsReactModule (copy), ReactModule (copy), MemoResult (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
 	
@@ -56,7 +56,7 @@ local function LegacyConversationFacePileHost(p1) --[[ Line: 100 ]]
 	})
 end
 
-local function SquadButtonHost(p1) --[[ Line: 115 ]]
+local function SquadButtonHost(p1)
 	-- upvalues: SignalsReactModule (copy), ReactModule (copy), FoundationModule (copy), SquadComponentAccessWrapper (copy), SquadJoinButton (copy), SquadButtonSourceEnum (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
 	
@@ -81,7 +81,7 @@ local function SquadButtonHost(p1) --[[ Line: 115 ]]
 	})
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 148 | Named "ConversationRowView" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), FFlagAppChatExtendConversationListRowDividersModule (copy), FFlagAppChatUseBindingConversationFacePileModule (copy), ConversationFacePileBindingModule (copy), LegacyConversationFacePileHost (copy), SubscriptionBadge (copy), LegacySubscriptionBadgeHost (copy), FFlagAppChatTimestampInSubtitleConversationRowModule (copy), ConversationRowSubtitleModule (copy), SquadButtonHost (copy), FFlagAppChatRemoveConversationListDividerModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local _UDim = UDim.new(0, p1.pagePaddingRight)

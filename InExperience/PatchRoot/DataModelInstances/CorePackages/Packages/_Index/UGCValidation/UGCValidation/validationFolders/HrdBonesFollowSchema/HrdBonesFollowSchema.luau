@@ -8,7 +8,7 @@ local GetEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule = require(P
 local ShouldValidateR15LegacyDuplicateModule = require(Parent.util.shouldValidateR15LegacyDuplicate)
 local UGCValidationRemoveHRDBlocker = game:DefineFastFlag("UGCValidationRemoveHRDBlocker", false)
 
-local function fillBoneTreeFlatList(Bone, p1, List) --[[ Line: 23 ]]
+local function fillBoneTreeFlatList(Bone, p1, List)
 	-- upvalues: fillBoneTreeFlatList (copy)
 	for _, Bone1 in Bone:GetChildren() do
 		local v1 = if Bone1:IsA("Bone") then true else p1
@@ -20,7 +20,7 @@ local function fillBoneTreeFlatList(Bone, p1, List) --[[ Line: 23 ]]
 	end
 end
 
-local function nameIsMappedInRigDescriptions(p2, HumanoidRigDescription, DigitsRigDescription): boolean --[[ Line: 38 ]]
+local function nameIsMappedInRigDescriptions(p2, HumanoidRigDescription, DigitsRigDescription): boolean
 	-- upvalues: R15plusUtilsModule (copy)
 	for _, value in R15plusUtilsModule.getHrdJointLabels() do
 		if p2.Name == value.Name then
@@ -41,7 +41,7 @@ local function nameIsMappedInRigDescriptions(p2, HumanoidRigDescription, DigitsR
 	return false
 end
 
-local function validateBonesForRoot(R15LegacyDuplicateRoot, p3) --[[ Line: 64 ]]
+local function validateBonesForRoot(R15LegacyDuplicateRoot, p3)
 	-- upvalues: GetAllInstancesIsAModule (copy), UGCValidationRemoveHRDBlocker (copy), ErrorSourceStringsModule (copy), R15plusUtilsModule (copy), fillBoneTreeFlatList (copy), nameIsMappedInRigDescriptions (copy)
 	for _, Object in GetAllInstancesIsAModule(R15LegacyDuplicateRoot, "MeshPart") do
 		local Name = Object.Name
@@ -123,7 +123,7 @@ return {
 		ValidationEnumsModule.SharedDataMember.consumerConfig
 	},
 	fflag = R15plusUtilsModule.checkFlagEnabledForAllowHrd,
-	run = function(p4, p5) --[[ Line: 159 ]]
+	run = function(p4, p5)
 		-- upvalues: validateBonesForRoot (copy), GetEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (copy), ShouldValidateR15LegacyDuplicateModule (copy), ErrorSourceStringsModule (copy)
 		validateBonesForRoot(p5.rootInstance, p4)
 		

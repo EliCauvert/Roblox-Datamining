@@ -1,4 +1,4 @@
-﻿local function _(Value1: number, Value2: number): number --[[ Line: 29 | Named "imul32" ]]
+﻿local function _(Value1: number, Value2: number): number
 	local Shifted = bit32.rshift(Value1, 16)
 	local Bits = bit32.band(Value1, 65535)
 	local Shifted1 = bit32.rshift(Value2, 16)
@@ -10,7 +10,7 @@
 end
 
 return {
-	textEncode = function(Text: string) --[[ Line: 10 ]]
+	textEncode = function(Text: string)
 		local List = {}
 		
 		for i = 1, #Text do
@@ -18,7 +18,7 @@ return {
 		end
 		return List
 	end,
-	hashStringWithFnv1a32 = function(Text: string): string --[[ Line: 50 ]]
+	hashStringWithFnv1a32 = function(Text: string): string
 		local List = {}
 		
 		for i = 1, #Text do

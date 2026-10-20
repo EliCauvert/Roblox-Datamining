@@ -1,6 +1,6 @@
 ﻿local GqlFunction = require(script:FindFirstAncestor("ApolloFriends").Parent.ApolloClient).gql
 
-return function(p1, p2) --[[ Line: 13 | Named "createFriendInCache" ]]
+return function(p1, p2)
 	-- upvalues: GqlFunction (copy)
 	return (p1.cache:writeFragment({
 		data = {

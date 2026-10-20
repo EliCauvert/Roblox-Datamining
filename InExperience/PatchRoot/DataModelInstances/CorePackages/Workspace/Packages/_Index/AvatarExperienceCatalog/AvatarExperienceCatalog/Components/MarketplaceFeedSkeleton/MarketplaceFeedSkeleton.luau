@@ -7,7 +7,7 @@ local Radius = FoundationModule.Enums.Radius
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local CompositionTags = require(Parent.AppComposition).CompositionTags
 
-return ReactModule.memo(function(p1) --[[ Line: 44 | Named "MarketplaceFeedSkeleton" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), CompositionTags (copy)
 	local UseTokensResult = UseTokensFunction()
 	local RowHeight = p1.rowHeight or UseTokensResult.Size.Size_3000 * 2

@@ -26,8 +26,8 @@ local RefreshAllUnfilteredThreadsDetailsModule = require(AppChat.Conversations.T
 local UnfilteredThreadsAMPFeatureNameModule = require(AppChat.Components.UnfilteredThreadsAMPFeatureName)
 local ConversationModalModule = require(script.Parent.Parent.ConversationModal.ConversationModal)
 local config = {
-	showNetworkErrorToast = function() --[[ Line: 46 ]] end,
-	onHeightChanged = function() --[[ Line: 47 ]] end
+	showNetworkErrorToast = function() end,
+	onHeightChanged = function() end
 }
 local config1 = {
 	pending_state_phone_verify = true,
@@ -38,7 +38,7 @@ local config2 = {
 	pending_state_ineligible = "ConversationIneligibleModal"
 }
 
-function PendingStateModalContainer(p1) --[[ Line: 61 ]]
+function PendingStateModalContainer(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseLocalUserIdFunction (copy), UseAnalyticsModule (copy), UseContextFunction (copy), LuaAppNavigationContextModule (copy), UseNavigationFunction (copy), UseDispatchFunction (copy), UseSelectorFunction (copy), GetDeepValue2Module (copy), config2 (copy), config1 (copy), UseEffectOnMountFunction (copy), UseEffectFunction (copy), AppChatNetworkingModule (copy), UseCallbackFunction (copy), AppPage (copy), UnfilteredThreadsAMPFeatureNameModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), AccessResponseEnum (copy), RefreshAllUnfilteredThreadsDetailsModule (copy), NavigateDownFunction (copy), ReactModule (copy), ConversationModalModule (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
@@ -46,7 +46,7 @@ function PendingStateModalContainer(p1) --[[ Line: 61 ]]
 	local UseContextResult = UseContextFunction(LuaAppNavigationContextModule)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseDispatchResult = UseDispatchFunction()
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 70 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: GetDeepValue2Module (upval), UnionResult (copy)
 		return GetDeepValue2Module(p2, `ChatAppReducer.Modals.pendingStateModals.{UnionResult.conversationId}`)
 	end) or {}
@@ -58,16 +58,16 @@ function PendingStateModalContainer(p1) --[[ Line: 61 ]]
 	local ModalLayoutButtons = GetDeepValue2Module(UseSelectorResult, "modal_layout.buttons")
 	local ModalLayoutButton = ModalLayoutButtons and ModalLayoutButtons[1]
 	local ModalLayoutButton1 = ModalLayoutButtons and ModalLayoutButtons[2]
-	UseEffectOnMountFunction(function() --[[ Line: 83 ]]
+	UseEffectOnMountFunction(function()
 		-- upvalues: UseAnalyticsModuleResult (copy), Entry1 (copy), Entry (copy), UnionResult (copy)
 		if UseAnalyticsModuleResult and Entry1 and Entry then
 			UseAnalyticsModuleResult.fireAnalyticsEvent(`{Entry}Rendered`, { conversationId = UnionResult.conversationId })
 		end
 	end)
-	UseEffectFunction(function() --[[ Line: 92 ]]
+	UseEffectFunction(function()
 		-- upvalues: Entry1 (copy), UseDispatchResult (copy), AppChatNetworkingModule (upval), ModalLayoutSeenRecordAction (copy), ModalLayoutId (copy)
 		if Entry1 then
-			UseDispatchResult(AppChatNetworkingModule.rodux.RecordModalSequenceResponse.API(ModalLayoutSeenRecordAction, "pending_state_modal", ModalLayoutId)):catch(function(Err) --[[ Line: 100 ]]
+			UseDispatchResult(AppChatNetworkingModule.rodux.RecordModalSequenceResponse.API(ModalLayoutSeenRecordAction, "pending_state_modal", ModalLayoutId)):catch(function(Err)
 				warn("Error in PendingStateModalContainer -> RecordModalSequenceResponse seen: " .. tostring(Err))
 			end)
 		end
@@ -78,11 +78,11 @@ function PendingStateModalContainer(p1) --[[ Line: 61 ]]
 		ModalLayoutId,
 		UnionResult.conversationId
 	})
-	local UseCallbackResult = UseCallbackFunction(function(p2, p3) --[[ Line: 114 ]]
+	local UseCallbackResult = UseCallbackFunction(function(p2, p3)
 		-- upvalues: UseDispatchResult (copy), AppChatNetworkingModule (upval)
 		return UseDispatchResult(AppChatNetworkingModule.rodux.RemoveUserFromConversation.API(p3, p2))
 	end, { UseDispatchResult })
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 118 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: UseAnalyticsModuleResult (copy), Entry (copy), UnionResult (copy), UseNavigationResult (copy), UseContextResult (copy)
 		if UseAnalyticsModuleResult and Entry then
 			UseAnalyticsModuleResult.fireAnalyticsEvent(`{Entry}LearnMoreClicked`, { conversationId = UnionResult.conversationId })
@@ -101,7 +101,7 @@ function PendingStateModalContainer(p1) --[[ Line: 61 ]]
 		UnionResult.conversationId,
 		UseNavigationResult
 	})
-	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 130 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function()
 		-- upvalues: UseAnalyticsModuleResult (copy), Entry (copy), UnionResult (copy), AppPage (upval), UnfilteredThreadsAMPFeatureNameModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval), AccessResponseEnum (upval), RefreshAllUnfilteredThreadsDetailsModule (upval), NavigateDownFunction (upval)
 		if UseAnalyticsModuleResult and Entry then
 			UseAnalyticsModuleResult.fireAnalyticsEvent(`{Entry}ContinueClicked`, { conversationId = UnionResult.conversationId })
@@ -110,7 +110,7 @@ function PendingStateModalContainer(p1) --[[ Line: 61 ]]
 			name = AppPage.AmpWizardContainer,
 			extraProps = {
 				featureName = UnfilteredThreadsAMPFeatureNameModule,
-				completionCallback = function(Granted, _) --[[ Line: 140 ]]
+				completionCallback = function(Granted, _)
 					-- upvalues: FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateBackFunction (upval), AccessResponseEnum (upval), UseAnalyticsModuleResult (upval), Entry (upval), UnionResult (upval), RefreshAllUnfilteredThreadsDetailsModule (upval)
 					if FFlagSignalsNavP3Dispatch then
 						NavigationCommands.back(true)
@@ -144,13 +144,13 @@ function PendingStateModalContainer(p1) --[[ Line: 61 ]]
 		UseAnalyticsModuleResult,
 		UnionResult.conversationId
 	})
-	local UseCallbackResult3 = UseCallbackFunction(function() --[[ Line: 171 ]]
+	local UseCallbackResult3 = UseCallbackFunction(function()
 		-- upvalues: UseAnalyticsModuleResult (copy), Entry (copy), UnionResult (copy), UseCallbackResult (copy), UseLocalUserIdResult (copy)
 		if UseAnalyticsModuleResult and Entry then
 			UseAnalyticsModuleResult.fireAnalyticsEvent(`{Entry}LeftGroup`, { conversationId = UnionResult.conversationId })
 		end
 		if UnionResult.conversationId then
-			UseCallbackResult(UseLocalUserIdResult, UnionResult.conversationId):catch(function() --[[ Line: 179 ]]
+			UseCallbackResult(UseLocalUserIdResult, UnionResult.conversationId):catch(function()
 				-- upvalues: UnionResult (upval)
 				UnionResult.showNetworkErrorToast()
 			end)

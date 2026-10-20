@@ -10,7 +10,7 @@ local ValidateInterfaceModule = require(SduiCoreSystem.validateInterface)
 local AnalyticsConstantsModule = require(SduiCoreSystem.Analytics.analyticsConstants)
 local FFlagSduiSkipFeedAnalyticsPosition = require(Parent.SharedFlags).FFlagSduiSkipFeedAnalyticsPosition
 local t = {}
-local Callback = if FFlagSduiSkipFeedAnalyticsPosition then function(p1) --[[ Line: 26 ]]
+local Callback = if FFlagSduiSkipFeedAnalyticsPosition then function(p1)
 	-- upvalues: AnalyticsConstantsModule (copy)
 	p1[AnalyticsConstantsModule.DoesNotAdvanceStartRow] = nil
 end else nil
@@ -31,7 +31,7 @@ local config1 = {
 }
 
 return {
-	buildAndValidateCollectionAnalyticsData = function(p1, p2, p3, CollectionComponentType, ItemsPerRow, TotalNumberOfItems, _, Name, StartRowNumber) --[[ Line: 49 ]]
+	buildAndValidateCollectionAnalyticsData = function(p1, p2, p3, CollectionComponentType, ItemsPerRow, TotalNumberOfItems, _, Name, StartRowNumber)
 		-- upvalues: CryoModule (copy), t (copy), FFlagSduiSkipFeedAnalyticsPosition (copy), Callback (copy), UnifiedLoggingModule (copy), ValidateInterfaceModule (copy), SduiErrorsModule (copy), config1 (copy)
 		local JoinResult = CryoModule.Dictionary.join(p2 or t, p3 or t)
 		
@@ -56,7 +56,7 @@ return {
 		end
 		return JoinResult
 	end,
-	buildAndValidateItemAnalyticsData = function(p1, p2, p3, p4, Name, Callback1: (any) -> ()) --[[ Line: 85 ]]
+	buildAndValidateItemAnalyticsData = function(p1, p2, p3, p4, Name, Callback1: (any) -> ())
 		-- upvalues: CryoModule (copy), t (copy), FFlagSduiSkipFeedAnalyticsPosition (copy), Callback (copy), UnifiedLoggingModule (copy), ValidateInterfaceModule (copy), SduiErrorsModule (copy), config (copy)
 		local JoinResult = CryoModule.Dictionary.join(p3 or t, p2 or t, p4 or t)
 		

@@ -7,7 +7,7 @@ local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local SessionActionButtonsModule = require(InExperienceSideSheet.Components.SessionActionButtons)
 
-return ReactModule.memo(function(p1) --[[ Line: 17 | Named "Footer" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Divider (copy), SessionActionButtonsModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	

@@ -27,17 +27,17 @@ local config = {
 	size = require(Foundation.Enums.InputSize).Medium
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 50 | Named "Knob" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UsePresentationContextFunction (copy), UseKnobVariantsModule (copy), ColorNamespaceModule (copy), FlagsModule (copy), MapBindableModule (copy), ReactModule (copy), UseBindableModule (copy), ReactIsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), IconModule (copy), BlendTransparenciesModule (copy), ConstantsModule (copy), DashModule (copy), ImageModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
 	local UsePresentationContextResult = UsePresentationContextFunction()
 	local UseKnobVariantsModuleResult = UseKnobVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size, UsePresentationContextResult and UsePresentationContextResult.colorNamespace == ColorNamespaceModule.Inverse)
 	local Style = WithDefaultsModuleResult.style or UseKnobVariantsModuleResult.knob.style
-	local MapBindableModuleResult = if FlagsModule.FoundationKnobRaisedShadow then MapBindableModule(Style, function(p2) --[[ Line: 61 ]]
+	local MapBindableModuleResult = if FlagsModule.FoundationKnobRaisedShadow then MapBindableModule(Style, function(p2)
 		return p2.Transparency or 0
 	end) else nil
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 66 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseTokensModuleResult (copy)
 		return {
 			Color3 = UseTokensModuleResult.Color.Extended.White.White_100.Color3,
@@ -47,13 +47,13 @@ return ReactModule.memo(function(p1) --[[ Line: 50 | Named "Knob" ]]
 	local UseBindableModuleResult = UseBindableModule(if WithDefaultsModuleResult.stroke then WithDefaultsModuleResult.stroke.Transparency else nil)
 	local UseBindableModuleResult1 = UseBindableModule(Style)
 	local UseBindableModuleResult2 = UseBindableModule(UseKnobVariantsModuleResult.knob.style)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 77 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseKnobVariantsModuleResult (copy), WithDefaultsModuleResult (copy), ReactIsModule (upval)
 		local Size = UseKnobVariantsModuleResult.knob.size
 		
 		if WithDefaultsModuleResult.stroke and WithDefaultsModuleResult.stroke.Thickness then
 			if ReactIsModule.isBinding(WithDefaultsModuleResult.stroke.Thickness) then
-				return WithDefaultsModuleResult.stroke.Thickness:map(function(p2: number): UDim2 --[[ Line: 81 ]]
+				return WithDefaultsModuleResult.stroke.Thickness:map(function(p2: number): UDim2
 					-- upvalues: Size (ref)
 					return Size - UDim2.fromOffset(p2 * 2, p2 * 2)
 				end)
@@ -79,7 +79,7 @@ return ReactModule.memo(function(p1) --[[ Line: 50 | Named "Knob" ]]
 		}, ReactModule.createElement(IconModule, {
 			name = WithDefaultsModuleResult.icon.name,
 			variant = WithDefaultsModuleResult.icon.variant,
-			style = if WithDefaultsModuleResult.isDisabled then UseBindableModuleResult2:map(function(p2) --[[ Line: 113 ]]
+			style = if WithDefaultsModuleResult.isDisabled then UseBindableModuleResult2:map(function(p2)
 				-- upvalues: BlendTransparenciesModule (upval), ConstantsModule (upval)
 				return {
 					Color3 = p2.Color3,
@@ -91,7 +91,7 @@ return ReactModule.memo(function(p1) --[[ Line: 50 | Named "Knob" ]]
 		})) else ReactModule.createElement(ViewModule, {
 			ZIndex = 4,
 			tag = UseKnobVariantsModuleResult.knob.tag,
-			backgroundStyle = if WithDefaultsModuleResult.isDisabled then UseBindableModuleResult1:map(function(p2) --[[ Line: 130 ]]
+			backgroundStyle = if WithDefaultsModuleResult.isDisabled then UseBindableModuleResult1:map(function(p2)
 				-- upvalues: BlendTransparenciesModule (upval), ConstantsModule (upval)
 				return {
 					Color3 = p2.Color3,
@@ -99,7 +99,7 @@ return ReactModule.memo(function(p1) --[[ Line: 50 | Named "Knob" ]]
 				}
 			end) else Style,
 			Size = UseMemoResult,
-			stroke = UseBindableModuleResult:map(function(p2) --[[ Line: 139 ]]
+			stroke = UseBindableModuleResult:map(function(p2)
 				-- upvalues: WithDefaultsModuleResult (copy), DashModule (upval), BlendTransparenciesModule (upval), ConstantsModule (upval)
 				local Stroke = WithDefaultsModuleResult.stroke
 				
@@ -117,7 +117,7 @@ return ReactModule.memo(function(p1) --[[ Line: 50 | Named "Knob" ]]
 			ZIndex = 3,
 			GroupTransparency = MapBindableModuleResult,
 			Size = UseMemoResult,
-			Visible = MapBindableModule(MapBindableModuleResult, function(p2: number): boolean --[[ Line: 163 ]]
+			Visible = MapBindableModule(MapBindableModuleResult, function(p2: number): boolean
 				return p2 < 1
 			end),
 			testId = `{WithDefaultsModuleResult.testId}--shadow`

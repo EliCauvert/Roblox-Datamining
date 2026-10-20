@@ -10,9 +10,9 @@ local InputSize = FoundationModule.Enums.InputSize
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 
-local function noop() --[[ Line: 19 ]] end
+local function noop() end
 
-return function(p1) --[[ Line: 31 | Named "PlaceholderExpanded" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), HeaderBar (copy), IconName (copy), Text (copy), AvatarPlaceholderModule (copy), IconButton (copy), noop (copy), InputSize (copy), ButtonVariant (copy)
 	return ReactModule.createElement(View, {
 		padding = { top = UDim.new(0, p1.topPadding) },

@@ -20,12 +20,12 @@ local FlagsModule = require(CrossExperienceVoice.Flags)
 local FFlagFireErrorRCCTimeoutSignal = FlagsModule.FFlagFireErrorRCCTimeoutSignal
 local FFlagEnableCEVForceInitialize = FlagsModule.FFlagEnableCEVForceInitialize
 
-local function _() --[[ Line: 31 ]]
+local function _()
 	-- upvalues: CrossExperience (copy)
 	return if game.PlaceId == 0 then CrossExperience.Constants.EXPERIENCE_TYPE_LUAAPP else CrossExperience.Constants.EXPERIENCE_TYPE_UGC
 end
 
-return function(p1) --[[ Line: 42 | Named "useCrossExperienceVoice" ]]
+return function(p1)
 	-- upvalues: UseStoreFunction (copy), UseDispatchFunction (copy), React (copy), CrossExperience (copy), LoggerModule (copy), Default (copy), VoiceStatusChangedFunction (copy), Default1 (copy), Players (copy), FIntPartyVoiceJoinRequestPulseCheckTimeout (copy), FFlagFireErrorRCCTimeoutSignal (copy), GetFFlagEnableCrossExpVoiceMemoryCheckFunction (copy), CevReadinessSyncEngineFeature (copy), ExperienceService (copy), FFlagEnableCEVForceInitialize (copy), UseEffectFunction (copy)
 	local UseStoreResult = UseStoreFunction()
 	local UseDispatchResult = UseDispatchFunction()
@@ -38,13 +38,13 @@ return function(p1) --[[ Line: 42 | Named "useCrossExperienceVoice" ]]
 	local UseRefResult6 = React.useRef(nil)
 	local UseRefResult7 = React.useRef(nil)
 	local UseRefResult8 = React.useRef(nil)
-	local UseMemoResult = React.useMemo(function() --[[ Line: 55 ]]
+	local UseMemoResult = React.useMemo(function()
 		-- upvalues: CrossExperience (upval)
 		return CrossExperience.EventManager.new(if game.PlaceId == 0 then CrossExperience.Constants.EXPERIENCE_TYPE_LUAAPP else CrossExperience.Constants.EXPERIENCE_TYPE_UGC, true)
 	end, {})
 	local UseRefResult9 = React.useRef(false)
 	
-	local function _() --[[ Line: 61 ]]
+	local function _()
 		-- upvalues: UseRefResult9 (copy), UseMemoResult (copy), UseStoreResult (copy), LoggerModule (upval)
 		if not UseRefResult9.current then
 			UseRefResult9.current = true
@@ -54,7 +54,7 @@ return function(p1) --[[ Line: 42 | Named "useCrossExperienceVoice" ]]
 		end
 	end
 	
-	local _ = function() --[[ Line: 71 ]]
+	local _ = function()
 		-- upvalues: UseRefResult9 (copy), UseMemoResult (copy), UseStoreResult (copy), LoggerModule (upval)
 		if UseRefResult9.current then
 			UseRefResult9.current = false
@@ -64,7 +64,7 @@ return function(p1) --[[ Line: 42 | Named "useCrossExperienceVoice" ]]
 		end
 	end
 	
-	local function v32() --[[ Line: 80 ]]
+	local function v32()
 		-- upvalues: UseRefResult9 (copy), UseMemoResult (copy), UseStoreResult (copy), LoggerModule (upval), UseRefResult1 (copy), UseRefResult2 (copy), UseRefResult3 (copy), UseRefResult6 (copy), UseRefResult7 (copy), UseRefResult8 (copy), UseRefResult (copy)
 		if UseRefResult9.current then
 			UseRefResult9.current = false
@@ -100,9 +100,9 @@ return function(p1) --[[ Line: 42 | Named "useCrossExperienceVoice" ]]
 		end
 	end
 	
-	local function v33() --[[ Line: 112 ]]
+	local function v33()
 		-- upvalues: UseRefResult6 (copy), Default (upval), UseDispatchResult (copy), VoiceStatusChangedFunction (upval), CrossExperience (upval), Default1 (upval), Players (upval), FIntPartyVoiceJoinRequestPulseCheckTimeout (upval), UseRefResult (copy), UseStoreResult (copy), FFlagFireErrorRCCTimeoutSignal (upval), UseMemoResult (copy), p1 (copy), UseRefResult7 (copy), GetFFlagEnableCrossExpVoiceMemoryCheckFunction (upval), UseRefResult8 (copy), UseRefResult1 (copy), UseRefResult9 (copy), LoggerModule (upval), CevReadinessSyncEngineFeature (upval), UseRefResult2 (copy), UseRefResult3 (copy), ExperienceService (upval), UseRefResult4 (copy), UseRefResult5 (copy), FFlagEnableCEVForceInitialize (upval)
-		UseRefResult6.current = Default.JoinRequested.Event:Connect(function() --[[ Line: 113 ]]
+		UseRefResult6.current = Default.JoinRequested.Event:Connect(function()
 			-- upvalues: UseDispatchResult (upval), VoiceStatusChangedFunction (upval), CrossExperience (upval), Default1 (upval), Players (upval)
 			UseDispatchResult(VoiceStatusChangedFunction({
 				status = CrossExperience.Constants.VOICE_STATUS.RCC_CONNECTING
@@ -116,7 +116,7 @@ return function(p1) --[[ Line: 42 | Named "useCrossExperienceVoice" ]]
 		end)
 		
 		if FIntPartyVoiceJoinRequestPulseCheckTimeout > 0 then
-			UseRefResult.current = Default.JoinRequestPulseCheck.Event:Connect(function() --[[ Line: 128 ]]
+			UseRefResult.current = Default.JoinRequestPulseCheck.Event:Connect(function()
 				-- upvalues: UseStoreResult (upval), CrossExperience (upval), FFlagFireErrorRCCTimeoutSignal (upval), UseMemoResult (upval), Players (upval), UseDispatchResult (upval), VoiceStatusChangedFunction (upval), p1 (upval), Default (upval)
 				local State = UseStoreResult:getState()
 				
@@ -140,7 +140,7 @@ return function(p1) --[[ Line: 42 | Named "useCrossExperienceVoice" ]]
 				end
 			end)
 		end
-		UseRefResult7.current = Default.JoinRequestSubmitted.Event:Connect(function(p2) --[[ Line: 157 ]]
+		UseRefResult7.current = Default.JoinRequestSubmitted.Event:Connect(function(p2)
 			-- upvalues: UseDispatchResult (upval), VoiceStatusChangedFunction (upval), CrossExperience (upval), Default1 (upval), Players (upval)
 			if not p2 then
 				UseDispatchResult(VoiceStatusChangedFunction({
@@ -156,7 +156,7 @@ return function(p1) --[[ Line: 42 | Named "useCrossExperienceVoice" ]]
 		end)
 		
 		if GetFFlagEnableCrossExpVoiceMemoryCheckFunction() then
-			UseRefResult8.current = Default.JoinFeasibilityCheckPerformed.Event:Connect(function(p2) --[[ Line: 174 ]]
+			UseRefResult8.current = Default.JoinFeasibilityCheckPerformed.Event:Connect(function(p2)
 				-- upvalues: UseDispatchResult (upval), VoiceStatusChangedFunction (upval), CrossExperience (upval), Default1 (upval), Players (upval)
 				if not p2 then
 					UseDispatchResult(VoiceStatusChangedFunction({
@@ -171,7 +171,7 @@ return function(p1) --[[ Line: 42 | Named "useCrossExperienceVoice" ]]
 				end
 			end)
 		end
-		UseRefResult1.current = Default.ExperienceJoined.Event:Connect(function() --[[ Line: 190 ]]
+		UseRefResult1.current = Default.ExperienceJoined.Event:Connect(function()
 			-- upvalues: UseRefResult9 (upval), UseMemoResult (upval), UseStoreResult (upval), LoggerModule (upval), CevReadinessSyncEngineFeature (upval), Default (upval)
 			if not UseRefResult9.current then
 				UseRefResult9.current = true
@@ -181,7 +181,7 @@ return function(p1) --[[ Line: 42 | Named "useCrossExperienceVoice" ]]
 				Default:signalCevReadinessSync()
 			end
 		end)
-		UseRefResult2.current = Default.ExperienceJoinFailed.Event:Connect(function() --[[ Line: 198 ]]
+		UseRefResult2.current = Default.ExperienceJoinFailed.Event:Connect(function()
 			-- upvalues: UseRefResult9 (upval), UseMemoResult (upval), UseStoreResult (upval), LoggerModule (upval)
 			if UseRefResult9.current then
 				UseRefResult9.current = false
@@ -190,7 +190,7 @@ return function(p1) --[[ Line: 42 | Named "useCrossExperienceVoice" ]]
 				return
 			end
 		end)
-		UseRefResult3.current = Default.ExperienceLeft.Event:Connect(function() --[[ Line: 202 ]]
+		UseRefResult3.current = Default.ExperienceLeft.Event:Connect(function()
 			-- upvalues: UseRefResult9 (upval), UseMemoResult (upval), UseStoreResult (upval), LoggerModule (upval)
 			if UseRefResult9.current then
 				UseRefResult9.current = false
@@ -201,7 +201,7 @@ return function(p1) --[[ Line: 42 | Named "useCrossExperienceVoice" ]]
 		end)
 		
 		if ExperienceService then
-			UseRefResult4.current = ExperienceService:RegisterForExperienceJoin(function() --[[ Line: 208 ]]
+			UseRefResult4.current = ExperienceService:RegisterForExperienceJoin(function()
 				-- upvalues: UseRefResult9 (upval), UseMemoResult (upval), UseStoreResult (upval), LoggerModule (upval)
 				if game.PlaceId == 0 then
 					if not UseRefResult9.current then return end
@@ -209,7 +209,7 @@ return function(p1) --[[ Line: 42 | Named "useCrossExperienceVoice" ]]
 					UseMemoResult:unsubscribe(UseStoreResult, LoggerModule)
 				end
 			end)
-			UseRefResult5.current = ExperienceService:RegisterForExperienceLeave(function() --[[ Line: 214 ]]
+			UseRefResult5.current = ExperienceService:RegisterForExperienceLeave(function()
 				-- upvalues: UseMemoResult (upval), UseStoreResult (upval), LoggerModule (upval)
 				if game.PlaceId == 0 then
 					UseMemoResult:restoreStateFromBackground(UseStoreResult, LoggerModule)
@@ -223,11 +223,11 @@ return function(p1) --[[ Line: 42 | Named "useCrossExperienceVoice" ]]
 		end
 	end
 	
-	UseEffectFunction(function() --[[ Line: 229 ]]
+	UseEffectFunction(function()
 		-- upvalues: v33 (copy), v32 (copy)
 		v33()
 		
-		return function() --[[ Line: 231 ]]
+		return function()
 			-- upvalues: v32 (upval)
 			v32()
 		end

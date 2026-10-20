@@ -11,13 +11,13 @@ local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
 	base = require(Parent.UrlBuilder).UrlBase.new("users", 1)
 })
 
-local function findUserById(Id, p1) --[[ Line: 23 ]]
+local function findUserById(Id, p1)
 	-- upvalues: Fetch (copy), PromiseModule (copy), NewResult (copy), Response (copy), GraphQLError (copy)
 	local Fetch1 = if p1 then p1 else Fetch
 	
-	return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 25 ]]
+	return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 		-- upvalues: NewResult (upval), Id (copy), Fetch1 (copy), Response (upval), GraphQLError (upval)
-		local v1 = Fetch1(NewResult({ id = Id }), { method = "GET" }):catch(function() --[[ Line: 33 ]]
+		local v1 = Fetch1(NewResult({ id = Id }), { method = "GET" }):catch(function()
 			-- upvalues: Response (upval)
 			return Response.error()
 		end):expect()
@@ -27,7 +27,7 @@ local function findUserById(Id, p1) --[[ Line: 23 ]]
 			
 			return
 		end
-		local v2 = v1:json():catch(function() --[[ Line: 45 ]]
+		local v2 = v1:json():catch(function()
 			return nil
 		end):expect()
 		
@@ -43,7 +43,7 @@ end
 
 return {
 	findUserById = findUserById,
-	findMe = function(p1, p2) --[[ Line: 66 ]]
+	findMe = function(p1, p2)
 		-- upvalues: Players (copy), PromiseModule (copy), GraphQLError (copy), findUserById (copy)
 		local LocalPlayer = if p2 then p2 else Players.LocalPlayer
 		

@@ -29,17 +29,17 @@ local FFlagLuaAppSduiEventDetailsActionBarInFeed = require(Parent.SharedFlags).F
 local FStringLuaAppSduiEventDetailsIxpLayer = require(Parent.SharedFlags).FStringLuaAppSduiEventDetailsIxpLayer
 local FFlagSduiPageEntryUseSharedHooks = require(Parent.SharedFlags).FFlagSduiPageEntryUseSharedHooks
 
-local function _(p1, p2) --[[ Line: 48 | Named "getFromPropsOrNavigationParams" ]]
+local function _(p1, p2)
 	local ExtraPropsParam = p1.navigation and p1.navigation.getParam("extraProps")
 	
 	return p1[p2] or ExtraPropsParam and ExtraPropsParam[p2]
 end
 
-local _ = function(Text, Text1): string --[[ Line: 58 ]]
+local _ = function(Text, Text1): string
 	return Text .. "_" .. Text1
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 65 | Named "SduiEventDetailsPage" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), GetEventDetailsPageKeyModule (copy), ReactModule (copy), SduiLoadTimer (copy), AppPage (copy), UseNavigationFunction (copy), UseRouteNameFunction (copy), UseNavigationFocusFunction (copy), FFlagLuaAppSduiEventDetailsCenterSheet (copy), UseDeviceTypeFunction (copy), DeviceType (copy), FetchEventDetailsPageModule (copy), FFlagLuaAppSduiEventDetailsLogExposure (copy), IXPService (copy), FStringLuaAppSduiEventDetailsIxpLayer (copy), FireEventDetailsPageVisitModule (copy), FoundationModule (copy), SduiFeatureEntryPoint (copy), FFlagLuaAppSduiEventDetailsLoadingSlot (copy), EventDetailsFullBleedSkeletonModule (copy), SduiPageEntryPoint (copy), FFlagSduiPageEntryUseSharedHooks (copy), EventDetailsFeedSkeletonModule (copy), FFlagLuaAppSduiEventDetailsActionBarInFeed (copy), EventDetailsActionBarSkeletonModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ExtraPropsParam = p1.navigation and p1.navigation.getParam("extraProps")
@@ -49,7 +49,7 @@ return ReactModule.memo(function(p1) --[[ Line: 65 | Named "SduiEventDetailsPage
 	local ExtraPropsParam2 = p1.navigation and p1.navigation.getParam("extraProps")
 	local ReferralSource = p1.referralSource or ExtraPropsParam2 and ExtraPropsParam2.referralSource
 	local EventDetailsPageKeyModule = GetEventDetailsPageKeyModule(EventId)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 75 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), SduiLoadTimer (upval), AppPage (upval)
 		local ExtraPropsParam = p1.navigation and p1.navigation.getParam("extraProps")
 		
@@ -64,7 +64,7 @@ return ReactModule.memo(function(p1) --[[ Line: 65 | Named "SduiEventDetailsPage
 		local UseDeviceTypeResult = UseDeviceTypeFunction()
 		IsDesktopMatch = UseDeviceTypeResult == DeviceType.Desktop or UseDeviceTypeResult == DeviceType.Tablet
 	end
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 88 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRouteNameResult (copy), AppPage (upval), UseNavigationFocusResult (copy), UseNavigationResult (copy)
 		if UseRouteNameResult == AppPage.EventDetails and UseNavigationFocusResult then
 			UseNavigationResult.goBack()
@@ -74,19 +74,19 @@ return ReactModule.memo(function(p1) --[[ Line: 65 | Named "SduiEventDetailsPage
 		UseRouteNameResult,
 		UseNavigationFocusResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 94 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: EventId (copy), FetchEventDetailsPageModule (upval), UseMemoResult (copy)
 		if EventId then
 			FetchEventDetailsPageModule(EventId, UseMemoResult)
 		end
 	end, { EventId, UseMemoResult })
-	ReactModule.useEffect(function() --[[ Line: 100 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: EventId (copy), FFlagLuaAppSduiEventDetailsLogExposure (upval), IXPService (upval), FStringLuaAppSduiEventDetailsIxpLayer (upval)
 		if EventId and FFlagLuaAppSduiEventDetailsLogExposure then
 			IXPService:LogFlagLinkedUserLayerExposure(FStringLuaAppSduiEventDetailsIxpLayer)
 		end
 	end, { EventId })
-	ReactModule.useEffect(function() --[[ Line: 106 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: EventId (copy), FireEventDetailsPageVisitModule (upval), UniverseId (copy), ReferralSource (copy)
 		if EventId then
 			FireEventDetailsPageVisitModule({

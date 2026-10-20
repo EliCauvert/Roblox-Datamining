@@ -11,7 +11,7 @@ local LocalizationProvider = require(Parent.Localization).LocalizationProvider
 local NavigationRoduxModule = require(Parent.NavigationRodux)
 local config = { withUiModeSupport = false }
 
-return function(p1) --[[ Line: 31 | Named "MockProviders" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), FoundationProvider (copy), RoactRoduxModule (copy), RoduxModule (copy), NavigationRoduxModule (copy), StyleProviderWithDefaultTheme (copy), StyleModule (copy), LocalizationProvider (copy), ReactModule (copy), ProviderContainer (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local List = {}
@@ -22,11 +22,11 @@ return function(p1) --[[ Line: 31 | Named "MockProviders" ]]
 	table.insert(List, {
 		class = RoactRoduxModule.StoreProvider,
 		props = {
-			store = RoduxModule.Store.new(function(p2, _) --[[ Line: 47 ]]
+			store = RoduxModule.Store.new(function(p2, _)
 				return p2
 			end, { Navigation = { lockNavigationActions = false } }, {
 				RoduxModule.thunkMiddleware,
-				NavigationRoduxModule.Thunks.RNAdapterThunk.middleware(function(p2) --[[ Line: 55 ]]
+				NavigationRoduxModule.Thunks.RNAdapterThunk.middleware(function(p2)
 					print(`[Mock Providers Debug] Navigating to {p2.routeName} with detail {p2.params.detail}`)
 				end)
 			})
@@ -47,7 +47,7 @@ return function(p1) --[[ Line: 31 | Named "MockProviders" ]]
 		class = LocalizationProvider,
 		props = {
 			localization = {
-				Format = function(_, p2) --[[ Line: 81 ]]
+				Format = function(_, p2)
 					return p2
 				end
 			}

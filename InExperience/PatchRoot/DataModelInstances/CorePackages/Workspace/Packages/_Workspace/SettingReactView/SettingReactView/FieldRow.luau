@@ -13,7 +13,7 @@ local Enums = FoundationModule.Enums
 local ControlState = Enums.ControlState
 local StateLayerAffordance = Enums.StateLayerAffordance
 
-return function(p1) --[[ Line: 26 ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), CreateNextOrderFunction (copy), ReactModule (copy), ControlState (copy), SignalsReactModule (copy), View (copy), StateLayerAffordance (copy), Text (copy), FieldModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local NextOrder = CreateNextOrderFunction()
@@ -29,7 +29,7 @@ return function(p1) --[[ Line: 26 ]]
 	return ReactModule.createElement(View, {
 		tag = "auto-y row size-full-1300 radius-medium",
 		backgroundStyle = UseBindingResult,
-		onStateChanged = ReactModule.useCallback(function(Default) --[[ Line: 36 ]]
+		onStateChanged = ReactModule.useCallback(function(Default)
 			-- upvalues: UseBindingResult2 (copy), ControlState (upval), config1 (copy), config (copy)
 			UseBindingResult2(if Default == ControlState.Default then config1 else config)
 		end, { UseBindingResult2 }),

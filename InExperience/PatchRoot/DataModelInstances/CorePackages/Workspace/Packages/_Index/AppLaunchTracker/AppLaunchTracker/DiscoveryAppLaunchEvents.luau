@@ -21,7 +21,7 @@ local config1 = {
 }
 
 return {
-	reportStatsforMilestone = function(p1, Milestone, p2, DurationMs, List, NumTilesInit, NumTileRenders, NumFeedItems, NumFeedRenders, TotalSduiDurationMs) --[[ Line: 37 ]]
+	reportStatsforMilestone = function(p1, Milestone, p2, DurationMs, List, NumTilesInit, NumTileRenders, NumFeedItems, NumFeedRenders, TotalSduiDurationMs)
 		-- upvalues: DiscoveryAppLaunchMilestonesHundredthsPercent (copy), config (copy)
 		assert(p1, "LoggingProtocol must exist")
 		
@@ -43,7 +43,7 @@ return {
 			p1:logRobloxTelemetryEvent(config, { p1.StandardizedFields.addOsInfo }, config1)
 		end
 	end,
-	reportError = function(p3, ErrorTag) --[[ Line: 72 ]]
+	reportError = function(p3, ErrorTag)
 		-- upvalues: config1 (copy)
 		p3:logRobloxTelemetryCounter(config1, 1, { errorTag = ErrorTag })
 	end

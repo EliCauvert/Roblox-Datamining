@@ -6,11 +6,11 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(script.Parent.groupMessages)
 local FormatTimestampModule = require(script.Parent.formatTimestamp)
 
-return function(p1) --[[ Line: 15 | Named "TimestampItem" ]]
+return function(p1)
 	-- upvalues: SignalsReactModule (copy), FormatTimestampModule (copy), ReactModule (copy), FoundationModule (copy)
 	return ReactModule.createElement(FoundationModule.Text, {
 		tag = "size-full-0 auto-y text-align-x-center",
-		Text = SignalsReactModule.useSignalBinding(function(p2) --[[ Line: 16 ]]
+		Text = SignalsReactModule.useSignalBinding(function(p2)
 			-- upvalues: p1 (copy), FormatTimestampModule (upval)
 			local ItemSignalResult = p1.itemSignal(p2)
 			

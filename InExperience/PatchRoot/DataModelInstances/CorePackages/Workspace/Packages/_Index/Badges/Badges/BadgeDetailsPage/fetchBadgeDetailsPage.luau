@@ -9,7 +9,7 @@ local GetBadgeDetailsUrlModule = require(Badges.BadgesSeeAllPage.getBadgeDetails
 local GetBadgeDetailsPageKeyModule = require(script.Parent.getBadgeDetailsPageKey)
 local FFlagSduiExtendedCapabilitiesDiscovery = require(Parent.SharedFlags).FFlagSduiExtendedCapabilitiesDiscovery
 
-local function _() --[[ Line: 15 | Named "getLocalPlayerUserId" ]]
+local function _()
 	-- upvalues: Players (copy)
 	local LocalPlayer = Players.LocalPlayer
 	
@@ -22,7 +22,7 @@ local function _() --[[ Line: 15 | Named "getLocalPlayerUserId" ]]
 	end
 end
 
-return function(p1, LoadTimer) --[[ Line: 27 | Named "fetchBadgeDetailsPage" ]]
+return function(p1, LoadTimer)
 	-- upvalues: Players (copy), FFlagSduiExtendedCapabilitiesDiscovery (copy), Parent (copy), Badges (copy), SduiSharedUtilitiesModule (copy), GetSduiApiStoreFunction (copy), SduiResponseType (copy), AppPage (copy), GetBadgeDetailsPageKeyModule (copy), GetBadgeDetailsUrlModule (copy)
 	local LocalPlayer = Players.LocalPlayer
 	local v1 = nil

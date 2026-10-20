@@ -3,7 +3,7 @@ local UIBloxModule = require(ExpChat.Parent.UIBlox)
 local SummaryMessageRichTextModule = require(ExpChat.summaryMessageRichText)
 local ExpChatAlignSystemMessageStyling = game:DefineFastFlag("ExpChatAlignSystemMessageStyling", false)
 
-return function(p1, p2, Callback) --[[ Line: 10 | Named "generateRichSystemMessageTextFormat" ]]
+return function(p1, p2, Callback)
 	-- upvalues: ExpChatAlignSystemMessageStyling (copy), SummaryMessageRichTextModule (copy), UIBloxModule (copy)
 	if ExpChatAlignSystemMessageStyling and not p2 and Callback == nil then
 		return SummaryMessageRichTextModule.wrapInSummaryMutedStyle(p1)

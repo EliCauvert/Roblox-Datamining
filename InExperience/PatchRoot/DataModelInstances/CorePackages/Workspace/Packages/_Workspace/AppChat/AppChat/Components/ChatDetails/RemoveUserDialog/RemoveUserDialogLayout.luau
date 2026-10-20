@@ -9,7 +9,7 @@ local ResponseIndicator = require(AppChat.SocialLibraries).Components.ResponseIn
 local RemoveUserDialogModule = require(script.Parent.RemoveUserDialog)
 local t = {}
 
-function RemoveUserDialogLayout(p1) --[[ Line: 42 ]]
+function RemoveUserDialogLayout(p1)
 	-- upvalues: CryoModule (copy), t (copy), UseStyleFunction (copy), ReactModule (copy), RemoveUserDialogModule (copy), ResponseIndicator (copy)
 	local JoinResult = CryoModule.Dictionary.join(t, p1)
 	local UseStyleResult = UseStyleFunction()

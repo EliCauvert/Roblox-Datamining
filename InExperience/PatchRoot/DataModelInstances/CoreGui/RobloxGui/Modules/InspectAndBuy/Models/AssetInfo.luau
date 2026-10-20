@@ -12,17 +12,17 @@ local GetRawItemLicensingInfoFunction = AvatarExperienceCommonModule.Utils.getRa
 local ParseItemLicensingFunction = AvatarExperienceCommonModule.Utils.parseItemLicensing
 local GetFFlagIBEnableCollectiblesSystemSupportModule = require(Parent.Flags.GetFFlagIBEnableCollectiblesSystemSupport)
 
-local function _(p1: number): number --[[ Line: 56 ]]
+local function _(p1: number): number
 	return math.round(p1 * 100) / 100
 end
 
 local AssetInfoModule = {
-	new = function() --[[ Line: 60 ]]
+	new = function()
 		return {}
 	end
 }
 
-function AssetInfoModule.mock() --[[ Line: 66 ]]
+function AssetInfoModule.mock()
 	-- upvalues: AssetInfoModule (copy), MockIdModule (copy), GetFFlagIBEnableCollectiblesSystemSupportModule (copy)
 	local NewAssetInfo = AssetInfoModule.new()
 	NewAssetInfo.name = ""
@@ -55,7 +55,7 @@ function AssetInfoModule.mock() --[[ Line: 66 ]]
 	return NewAssetInfo
 end
 
-function AssetInfoModule.fromBulkPurchaseResult(p1, p2) --[[ Line: 108 ]]
+function AssetInfoModule.fromBulkPurchaseResult(p1, p2)
 	-- upvalues: AssetInfoModule (copy), ItemRestrictions (copy)
 	local NewAssetInfo = AssetInfoModule.new()
 	local ItemRestrictions1 = if p2 and p2.itemRestrictions then p2.itemRestrictions else {}
@@ -71,7 +71,7 @@ function AssetInfoModule.fromBulkPurchaseResult(p1, p2) --[[ Line: 108 ]]
 	return NewAssetInfo
 end
 
-function AssetInfoModule.fromAvatarPreviewItem(p1) --[[ Line: 130 ]]
+function AssetInfoModule.fromAvatarPreviewItem(p1)
 	-- upvalues: AssetInfoModule (copy), FFlagAXMarketplaceLicensing (copy), ParseItemLicensingFunction (copy), GetRawItemLicensingInfoFunction (copy)
 	local NewAssetInfo = AssetInfoModule.new()
 	NewAssetInfo.name = p1.name
@@ -105,7 +105,7 @@ function AssetInfoModule.fromAvatarPreviewItem(p1) --[[ Line: 130 ]]
 	return NewAssetInfo
 end
 
-function AssetInfoModule.fromGetProductInfo(p2) --[[ Line: 164 ]]
+function AssetInfoModule.fromGetProductInfo(p2)
 	-- upvalues: AssetInfoModule (copy), ConstantsModule (copy), GetFFlagIBEnableCollectiblesSystemSupportModule (copy)
 	local NewAssetInfo = AssetInfoModule.new()
 	NewAssetInfo.name = p2.Name
@@ -149,7 +149,7 @@ function AssetInfoModule.fromGetProductInfo(p2) --[[ Line: 164 ]]
 	end
 end
 
-function AssetInfoModule.fromHumanoidDescription(p2) --[[ Line: 209 ]]
+function AssetInfoModule.fromHumanoidDescription(p2)
 	-- upvalues: AssetInfoModule (copy)
 	local NewAssetInfo = AssetInfoModule.new()
 	NewAssetInfo.assetId = tostring(p2)
@@ -157,7 +157,7 @@ function AssetInfoModule.fromHumanoidDescription(p2) --[[ Line: 209 ]]
 	return NewAssetInfo
 end
 
-function AssetInfoModule.fromHumanoidDescriptionAccessory(p2) --[[ Line: 217 ]]
+function AssetInfoModule.fromHumanoidDescriptionAccessory(p2)
 	-- upvalues: AssetInfoModule (copy)
 	local NewAssetInfo = AssetInfoModule.new()
 	NewAssetInfo.assetId = tostring(p2.AssetId)
@@ -184,7 +184,7 @@ function AssetInfoModule.fromHumanoidDescriptionAccessory(p2) --[[ Line: 217 ]]
 	return NewAssetInfo
 end
 
-function AssetInfoModule.fromGetAssetBundles(p2, BundlesAssetIsIn) --[[ Line: 247 ]]
+function AssetInfoModule.fromGetAssetBundles(p2, BundlesAssetIsIn)
 	-- upvalues: AssetInfoModule (copy)
 	local NewAssetInfo = AssetInfoModule.new()
 	NewAssetInfo.assetId = tostring(p2)
@@ -193,7 +193,7 @@ function AssetInfoModule.fromGetAssetBundles(p2, BundlesAssetIsIn) --[[ Line: 24
 	return NewAssetInfo
 end
 
-function AssetInfoModule.fromGetFavoriteForAsset(p2, IsFavorited) --[[ Line: 257 ]]
+function AssetInfoModule.fromGetFavoriteForAsset(p2, IsFavorited)
 	-- upvalues: AssetInfoModule (copy)
 	local NewAssetInfo = AssetInfoModule.new()
 	NewAssetInfo.assetId = tostring(p2)
@@ -202,7 +202,7 @@ function AssetInfoModule.fromGetFavoriteForAsset(p2, IsFavorited) --[[ Line: 257
 	return NewAssetInfo
 end
 
-function AssetInfoModule.fromBundleInfo(p2, p3) --[[ Line: 264 ]]
+function AssetInfoModule.fromBundleInfo(p2, p3)
 	-- upvalues: AssetInfoModule (copy), ConstantsModule (copy)
 	local NewAssetInfo = AssetInfoModule.new()
 	NewAssetInfo.assetId = tostring(p2)
@@ -231,7 +231,7 @@ function AssetInfoModule.fromBundleInfo(p2, p3) --[[ Line: 264 ]]
 	return NewAssetInfo
 end
 
-function AssetInfoModule.fromGetAssetFavoriteCount(p2, NumFavorites) --[[ Line: 306 ]]
+function AssetInfoModule.fromGetAssetFavoriteCount(p2, NumFavorites)
 	-- upvalues: AssetInfoModule (copy)
 	local NewAssetInfo = AssetInfoModule.new()
 	NewAssetInfo.assetId = tostring(p2)
@@ -240,7 +240,7 @@ function AssetInfoModule.fromGetAssetFavoriteCount(p2, NumFavorites) --[[ Line: 
 	return NewAssetInfo
 end
 
-function AssetInfoModule.fromGetEconomyProductInfo(p2, Owned, Price, IsForSale, PremiumPricing) --[[ Line: 315 ]]
+function AssetInfoModule.fromGetEconomyProductInfo(p2, Owned, Price, IsForSale, PremiumPricing)
 	-- upvalues: AssetInfoModule (copy)
 	local NewAssetInfo = AssetInfoModule.new()
 	NewAssetInfo.assetId = tostring(p2.assetId)
@@ -255,7 +255,7 @@ function AssetInfoModule.fromGetEconomyProductInfo(p2, Owned, Price, IsForSale, 
 	return NewAssetInfo
 end
 
-function AssetInfoModule.fromGetItemDetailsV2(p2) --[[ Line: 329 ]]
+function AssetInfoModule.fromGetItemDetailsV2(p2)
 	-- upvalues: AssetInfoModule (copy), GetRawItemLicensingInfoFunction (copy), FFlagAXMarketplaceLicensing (copy), ParseItemLicensingFunction (copy), CryoModule (copy)
 	local NewAssetInfo = AssetInfoModule.new()
 	NewAssetInfo.assetId = tostring(p2.id)
@@ -288,7 +288,7 @@ function AssetInfoModule.fromGetItemDetailsV2(p2) --[[ Line: 329 ]]
 	return NewAssetInfo
 end
 
-function AssetInfoModule.fromGetItemDetails(p3) --[[ Line: 364 ]]
+function AssetInfoModule.fromGetItemDetails(p3)
 	-- upvalues: AssetInfoModule (copy)
 	local NewAssetInfo = AssetInfoModule.new()
 	NewAssetInfo.assetId = tostring(p3.Id)
@@ -318,7 +318,7 @@ function AssetInfoModule.fromGetItemDetails(p3) --[[ Line: 364 ]]
 	return NewAssetInfo
 end
 
-function AssetInfoModule.fromPurchaseSuccess(p4) --[[ Line: 396 ]]
+function AssetInfoModule.fromPurchaseSuccess(p4)
 	-- upvalues: AssetInfoModule (copy)
 	local NewAssetInfo = AssetInfoModule.new()
 	NewAssetInfo.assetId = tostring(p4)
@@ -327,7 +327,7 @@ function AssetInfoModule.fromPurchaseSuccess(p4) --[[ Line: 396 ]]
 	return NewAssetInfo
 end
 
-function AssetInfoModule.fromGetVersionInfo(p4, p5) --[[ Line: 409 ]]
+function AssetInfoModule.fromGetVersionInfo(p4, p5)
 	-- upvalues: AssetInfoModule (copy)
 	local NewAssetInfo = AssetInfoModule.new()
 	NewAssetInfo.assetId = tostring(p4)
@@ -336,7 +336,7 @@ function AssetInfoModule.fromGetVersionInfo(p4, p5) --[[ Line: 409 ]]
 	return NewAssetInfo
 end
 
-function AssetInfoModule.getSaleDetailsForCollectibles(p4) --[[ Line: 420 ]]
+function AssetInfoModule.getSaleDetailsForCollectibles(p4)
 	-- upvalues: DashModule (copy), ConstantsModule (copy)
 	local JoinDeepResult = DashModule.joinDeep({}, p4)
 	local SaleLocation = p4.saleLocation

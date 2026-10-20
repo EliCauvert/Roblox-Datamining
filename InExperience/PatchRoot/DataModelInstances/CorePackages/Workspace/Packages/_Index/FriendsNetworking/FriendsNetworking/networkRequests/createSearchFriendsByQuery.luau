@@ -1,9 +1,9 @@
 ﻿local FRIENDSURLModule = require(script.Parent.Parent.FRIENDS_URL)
 local _ = require(script.Parent.Parent.networkingFriendsTypes)
 
-return function(p1) --[[ Line: 11 ]]
+return function(p1)
 	-- upvalues: FRIENDSURLModule (copy)
-	return p1.roduxNetworking.GET("SearchFriendsByQuery", function(Callback, p2, p3) --[[ Line: 16 ]]
+	return p1.roduxNetworking.GET("SearchFriendsByQuery", function(Callback, p2, p3)
 		-- upvalues: FRIENDSURLModule (upval)
 		return Callback(FRIENDSURLModule):path("v1"):path("users"):id(p2):path("friends"):path("search"):queryArgs({
 			query = if p3 then p3.query else nil,

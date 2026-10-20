@@ -9,7 +9,7 @@ local IconSize = FoundationModule.Enums.IconSize
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1) --[[ Line: 23 | Named "EditProfileHeaderBar" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), IconButton (copy), IconName (copy), IconSize (copy), ButtonVariant (copy), Text (copy)
 	return ReactModule.createElement(View, {
 		tag = "row flex-between align-y-center gap-small size-full-0 auto-y padding-x-xlarge padding-bottom-xlarge",

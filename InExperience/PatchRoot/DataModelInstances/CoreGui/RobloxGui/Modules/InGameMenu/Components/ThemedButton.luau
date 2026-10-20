@@ -36,16 +36,16 @@ ThemedButton.defaultProps = {
 	imageProps = AssetsModule.Images.RoundedRect
 }
 
-function ThemedButton.init(p1) --[[ Line: 74 ]]
+function ThemedButton.init(p1)
 	p1:setState({ hover = false, press = false })
 end
 
-function ThemedButton.renderWithSelectionCursor(p1, Callback) --[[ Line: 81 ]]
+function ThemedButton.renderWithSelectionCursor(p1, Callback)
 	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), DivideTransparencyModule (copy), Roact (copy), ImageSetButton (copy), CursorType (copy)
 	local Props = p1.props
 	local HoverThemeKey = if Props.enabled and p1.state.hover then Props.hoverThemeKey else Props.normalThemeKey
 	
-	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 89 ]]
+	return WithFoundationOrUIBloxStyleFunction(function(p2)
 		return {
 			Theme = {
 				BackgroundDefault = {
@@ -186,7 +186,7 @@ function ThemedButton.renderWithSelectionCursor(p1, Callback) --[[ Line: 81 ]]
 				}
 			}
 		}
-	end, function(p2) --[[ Line: 230 ]]
+	end, function(p2)
 		-- upvalues: HoverThemeKey (ref), DivideTransparencyModule (upval), p1 (copy), Props (copy), Roact (upval), ImageSetButton (upval), Callback (copy), CursorType (upval)
 		local ThemeEntry = p2.Theme[HoverThemeKey]
 		assert(ThemeEntry ~= nil, "theme key " .. HoverThemeKey .. " is nil")
@@ -205,27 +205,27 @@ function ThemedButton.renderWithSelectionCursor(p1, Callback) --[[ Line: 81 ]]
 			SliceCenter = Props.imageProps.SliceCenter,
 			Image = Props.imageProps.Image,
 			SelectionImageObject = Callback(CursorType.RoundedRectNoInset),
-			[Roact.Event.Activated] = function() --[[ Line: 250 ]]
+			[Roact.Event.Activated] = function()
 				-- upvalues: Props (upval)
 				if Props.enabled then
 					Props.onActivated()
 				end
 			end,
-			[Roact.Event.MouseEnter] = function() --[[ Line: 255 ]]
+			[Roact.Event.MouseEnter] = function()
 				-- upvalues: p1 (upval)
 				p1:setState({ hover = true })
 			end,
-			[Roact.Event.MouseLeave] = function() --[[ Line: 260 ]]
+			[Roact.Event.MouseLeave] = function()
 				-- upvalues: p1 (upval)
 				p1:setState({ hover = false, press = false })
 			end,
-			[Roact.Event.InputBegan] = function(_, Input) --[[ Line: 266 ]]
+			[Roact.Event.InputBegan] = function(_, Input)
 				-- upvalues: p1 (upval)
 				if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
 					p1:setState({ press = true })
 				end
 			end,
-			[Roact.Event.InputEnded] = function(_, Input) --[[ Line: 276 ]]
+			[Roact.Event.InputEnded] = function(_, Input)
 				-- upvalues: p1 (upval)
 				if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
 					p1:setState({ press = false })
@@ -236,9 +236,9 @@ function ThemedButton.renderWithSelectionCursor(p1, Callback) --[[ Line: 81 ]]
 	end)
 end
 
-function ThemedButton.render(p1) --[[ Line: 291 ]]
+function ThemedButton.render(p1)
 	-- upvalues: WithCursorMigration (copy)
-	return WithCursorMigration(function(p2) --[[ Line: 292 ]]
+	return WithCursorMigration(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithSelectionCursor(p2)
 	end)

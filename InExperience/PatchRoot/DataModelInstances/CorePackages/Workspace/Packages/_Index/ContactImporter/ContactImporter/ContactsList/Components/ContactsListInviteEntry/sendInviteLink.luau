@@ -11,23 +11,23 @@ local Promise = DependenciesModule.Promise
 local UseAnalyticsModule = require(ContactImporter.Analytics.useAnalytics)
 local EventNamesModule = require(ContactImporter.Analytics.Enums.EventNames)
 
-local function _(p1) --[[ Line: 20 ]]
+local function _(p1)
 	-- upvalues: Promise (copy)
-	return function(Result) --[[ Line: 21 ]]
+	return function(Result)
 		-- upvalues: p1 (copy), Promise (upval)
-		return p1.smsProtocol:supportsSMS():andThen(function(Result1) --[[ Line: 22 ]]
+		return p1.smsProtocol:supportsSMS():andThen(function(Result1)
 			-- upvalues: p1 (upval), Result (copy), Promise (upval)
 			return if Result1 then p1.smsProtocol:sendSMS({ address = p1.address, message = Result }) else Promise.reject()
 		end)
 	end
 end
 
-return function(p1) --[[ Line: 32 ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), React (copy), UseAnalyticsModule (copy), EventNamesModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ShareLinksNetworking (copy), ShareLinksRodux (copy), Promise (copy), RoduxContacts (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseStateResult, UseStateResult2 = React.useState(false)
 	
-	local function v14() --[[ Line: 35 ]]
+	local function v14()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end
@@ -35,7 +35,7 @@ return function(p1) --[[ Line: 32 ]]
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local LinkId = nil
 	
-	local function v17() --[[ Line: 41 ]]
+	local function v17()
 		-- upvalues: UseAnalyticsModuleResult (copy), EventNamesModule (upval), LinkId (ref), UseStateResult2 (copy)
 		UseAnalyticsModuleResult.fireAnalyticsEvent(EventNamesModule.InviteContact, { offNetworkFriendRequestLinkId = LinkId })
 		UseStateResult2(false)
@@ -43,9 +43,9 @@ return function(p1) --[[ Line: 32 ]]
 	
 	local UseLocalizationResult = UseLocalizationFunction({ rootMessage = TextKeysModule.SMS_DEFAULT_MESSAGE })
 	
-	local function _(p2) --[[ Line: 51 ]]
+	local function _(p2)
 		-- upvalues: LinkId (ref)
-		return function(Result): string --[[ Line: 52 ]]
+		return function(Result): string
 			-- upvalues: LinkId (upval), p2 (copy)
 			LinkId = Result.responseBody.linkId
 			
@@ -54,20 +54,20 @@ return function(p1) --[[ Line: 32 ]]
 	end
 	
 	return {
-		sendInvite = function() --[[ Line: 61 ]]
+		sendInvite = function()
 			-- upvalues: UseStateResult2 (copy), UseDispatchResult (copy), ShareLinksNetworking (upval), ShareLinksRodux (upval), UseLocalizationResult (copy), LinkId (ref), p1 (copy), Promise (upval), RoduxContacts (upval), v17 (copy), v14 (copy)
 			UseStateResult2(true)
 			
 			return UseDispatchResult(ShareLinksNetworking.GenerateLink.API({
 				linkType = ShareLinksRodux.Enums.LinkType.FriendInvite.rawValue()
-			})):andThen(function(Result): string --[[ Line: 52 ]]
+			})):andThen(function(Result): string
 				-- upvalues: LinkId (upval), UseLocalizationResult (copy)
 				LinkId = Result.responseBody.linkId
 				
 				return Result.responseBody.shortUrl .. "\n\n" .. UseLocalizationResult.rootMessage
-			end):andThen(function(Result) --[[ Line: 21 ]]
+			end):andThen(function(Result)
 				-- upvalues: p1 (copy), Promise (upval)
-				return p1.smsProtocol:supportsSMS():andThen(function(Result1) --[[ Line: 22 ]]
+				return p1.smsProtocol:supportsSMS():andThen(function(Result1)
 					-- upvalues: p1 (upval), Result (copy), Promise (upval)
 					return if Result1 then p1.smsProtocol:sendSMS({ address = p1.address, message = Result }) else Promise.reject()
 				end)

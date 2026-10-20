@@ -6,7 +6,7 @@ local FFlagCreateConnectionsHub = require(Parent.SharedFlags).FFlagCreateConnect
 local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(_, _, p1, _) --[[ Line: 18 ]]
+return function(_, _, p1, _)
 	-- upvalues: FFlagCreateConnectionsHub (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
 	if FFlagCreateConnectionsHub then
 		p1.dependencies.getNavigation().navigate(AppPage.CoHubAddConnections)

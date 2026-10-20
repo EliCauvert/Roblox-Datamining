@@ -6,19 +6,19 @@ local FoundationProvider = require(Parent1.Foundation).FoundationProvider
 local RoactModule = require(Parent1.Roact)
 local DumpInstanceTreeModule = require(Parent.dumpInstanceTree)
 
-local function TestApp(p1) --[[ Line: 34 ]]
+local function TestApp(p1)
 	-- upvalues: RoactModule (copy)
 	return RoactModule.createElement("ScreenGui", { ZIndexBehavior = Enum.ZIndexBehavior.Sibling }, p1[RoactModule.Children])
 end
 
-return function(TestComponent, Callback) --[[ Line: 40 | Named "testWithComponent" ]]
+return function(TestComponent, Callback)
 	-- upvalues: RoactModule (copy), TestApp (copy), FoundationProvider (copy), HttpService (copy), CoreGui (copy), DumpInstanceTreeModule (copy)
 	local TestAppName: string = ("TestApp-%s"):format(HttpService:GenerateGUID(false))
 	local MountResult = RoactModule.mount(RoactModule.createElement(TestApp, nil, {
 		FoundationProvider = RoactModule.createElement(FoundationProvider, { theme = "Dark" }, { TestComponent = TestComponent })
 	}), CoreGui, TestAppName)
 	local TestComponentName: string = ("game.CoreGui.%s.TestComponent"):format(TestAppName)
-	local Success, Result = pcall(function() --[[ Line: 51 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: Callback (copy), TestComponentName (copy)
 		Callback(TestComponentName)
 	end)

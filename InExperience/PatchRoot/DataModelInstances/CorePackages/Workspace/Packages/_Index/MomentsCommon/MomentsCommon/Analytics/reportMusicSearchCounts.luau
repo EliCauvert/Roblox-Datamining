@@ -16,12 +16,12 @@ local config1 = {
 	lastUpdated = { 2026, 8, 27 }
 }
 
-local function defaultEmit(p1, p2, p3) --[[ Line: 60 ]]
+local function defaultEmit(p1, p2, p3)
 	-- upvalues: LoggingProtocolModule (copy)
 	LoggingProtocolModule.default:logRobloxTelemetryStat(p1, p2, p3)
 end
 
-return function(p1, p2, p3, p4) --[[ Line: 72 | Named "reportMusicSearchCounts" ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: FFlagMomentsCreationMusicSearchCountTelemetryModule (copy), defaultEmit (copy), config (copy), config1 (copy)
 	if FFlagMomentsCreationMusicSearchCountTelemetryModule then
 		local config2 = { queryPresent = tostring(p3.queryPresent) }

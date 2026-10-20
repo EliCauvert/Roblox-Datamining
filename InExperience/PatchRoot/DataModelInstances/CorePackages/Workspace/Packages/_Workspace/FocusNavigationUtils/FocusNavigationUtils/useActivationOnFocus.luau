@@ -4,7 +4,7 @@ local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
 local v1 = nil
 local v2 = nil
 
-return function(p1, p2, Current, Current1, Current2, Enabled) --[[ Line: 15 | Named "useActivationOnFocus" ]]
+return function(p1, p2, Current, Current1, Current2, Enabled)
 	-- upvalues: ReactModule (copy), ReactFocusNavigationModule (copy), v1 (ref), v2 (ref)
 	local HasCurrent = Current ~= nil
 	local IsEnabled = Enabled == true
@@ -15,10 +15,10 @@ return function(p1, p2, Current, Current1, Current2, Enabled) --[[ Line: 15 | Na
 	UseRefResult1.current = Current1
 	UseRefResult2.current = Current2
 	local UseContextResult = ReactModule.useContext(ReactFocusNavigationModule.FocusNavigationContext)
-	ReactModule.useEffect(function() --[[ Line: 35 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), HasCurrent (copy), UseContextResult (copy), p2 (copy), UseRefResult1 (copy), IsEnabled (copy), UseRefResult2 (copy), v1 (upval), v2 (upval), UseRefResult (copy)
 		if p1 and HasCurrent and UseContextResult then
-			local SubscribeResult = UseContextResult.focusedGuiObject:subscribe(function(p3) --[[ Line: 40 ]]
+			local SubscribeResult = UseContextResult.focusedGuiObject:subscribe(function(p3)
 				-- upvalues: p2 (upval), UseRefResult1 (upval), IsEnabled (upval), UseRefResult2 (upval), v1 (upval), v2 (upval), UseRefResult (upval)
 				local Current = p2.current
 				local CurrentFunction = UseRefResult1.current
@@ -41,12 +41,12 @@ return function(p1, p2, Current, Current1, Current2, Enabled) --[[ Line: 15 | Na
 				end
 			end)
 			
-			return function() --[[ Line: 61 ]]
+			return function()
 				-- upvalues: SubscribeResult (copy)
 				SubscribeResult:unsubscribe()
 			end
 		else
-			return function() --[[ Line: 37 ]] end
+			return function() end
 		end
 	end, {
 		p1,

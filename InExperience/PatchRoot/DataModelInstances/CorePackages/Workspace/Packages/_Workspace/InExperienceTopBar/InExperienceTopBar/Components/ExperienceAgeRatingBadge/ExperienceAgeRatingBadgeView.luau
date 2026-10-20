@@ -7,7 +7,7 @@ local BadgeShape = FoundationModule.Enums.BadgeShape
 local BadgeSize = FoundationModule.Enums.BadgeSize
 local View = FoundationModule.View
 
-return function(p1) --[[ Line: 20 | Named "ExperienceAgeRatingBadgeView" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), Badge (copy), BadgeVariant (copy), BadgeShape (copy), BadgeSize (copy)
 	return ReactModule.createElement(View, {
 		tag = "row align-x-center align-y-center auto-xy",

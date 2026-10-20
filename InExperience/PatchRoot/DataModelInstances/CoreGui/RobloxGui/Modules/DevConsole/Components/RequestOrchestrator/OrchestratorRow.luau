@@ -21,15 +21,15 @@ local config = {
 	rowBackground = Color3.fromRGB(28, 28, 28)
 }
 
-local function _(p1, p2, p3) --[[ Line: 66 | Named "lerp" ]]
+local function _(p1, p2, p3)
 	return p1 + (p2 - p1) * p3
 end
 
-local _ = function(p1: number): number --[[ Line: 71 | Named "smooth" ]]
+local _ = function(p1: number): number
 	return p1 * p1 * (3 - 2 * p1)
 end
 
-local function renderTypeLabel(Text) --[[ Line: 75 ]]
+local function renderTypeLabel(Text)
 	-- upvalues: RoactModule (copy), config (copy), Mono (copy)
 	return RoactModule.createElement("TextLabel", {
 		BackgroundTransparency = 1,
@@ -44,13 +44,13 @@ local function renderTypeLabel(Text) --[[ Line: 75 ]]
 	})
 end
 
-local _ = function(p1) --[[ Line: 90 | Named "resolveMaxSize" ]]
+local _ = function(p1)
 	local ObservedMaxBatchSize: number = p1.observedMaxBatchSize
 	
 	return if ObservedMaxBatchSize and ObservedMaxBatchSize > 0 then ObservedMaxBatchSize else nil
 end
 
-local function renderBatchOutline(Props, p1: number) --[[ Line: 99 ]]
+local function renderBatchOutline(Props, p1: number)
 	-- upvalues: RoactModule (copy), config (copy), Mono (copy)
 	local Smallest = math.min(p1, 30)
 	local PanelWidth: number = Props.panelWidth
@@ -88,7 +88,7 @@ local function renderBatchOutline(Props, p1: number) --[[ Line: 99 ]]
 	})
 end
 
-local function renderIdleQueue() --[[ Line: 143 ]]
+local function renderIdleQueue()
 	-- upvalues: RoactModule (copy), config (copy), Mono (copy)
 	return RoactModule.createElement("TextLabel", {
 		BackgroundTransparency = 1,
@@ -101,7 +101,7 @@ local function renderIdleQueue() --[[ Line: 143 ]]
 	})
 end
 
-local function renderCacheChildren(Cache, Now) --[[ Line: 155 ]]
+local function renderCacheChildren(Cache, Now)
 	-- upvalues: RoactModule (copy), config (copy), Mono (copy)
 	local Items = if Cache then Cache.items else {}
 	local CountItems = #Items
@@ -142,7 +142,7 @@ local function renderCacheChildren(Cache, Now) --[[ Line: 155 ]]
 	return Frames
 end
 
-local function renderTimelineChildren(Batches, Now: number) --[[ Line: 207 ]]
+local function renderTimelineChildren(Batches, Now: number)
 	-- upvalues: config (copy), RoactModule (copy)
 	local NowDelta = Now - 30
 	local Frames = {}
@@ -184,11 +184,11 @@ end
 
 local OrchestratorRow = RoactModule.Component:extend("OrchestratorRow")
 
-function OrchestratorRow.init(p1) --[[ Line: 255 ]]
+function OrchestratorRow.init(p1)
 	p1.opAnim = {}
 end
 
-function OrchestratorRow.renderQueueChildren(p1, Queue, p2, Start: number) --[[ Line: 260 ]]
+function OrchestratorRow.renderQueueChildren(p1, Queue, p2, Start: number)
 	-- upvalues: RoactModule (copy), config (copy), Mono (copy)
 	local Frames = {}
 	local List = {}
@@ -271,7 +271,7 @@ function OrchestratorRow.renderQueueChildren(p1, Queue, p2, Start: number) --[[ 
 	return Frames
 end
 
-function OrchestratorRow.render(p3) --[[ Line: 346 ]]
+function OrchestratorRow.render(p3)
 	-- upvalues: renderTypeLabel (copy), RoactModule (copy), renderCacheChildren (copy), renderBatchOutline (copy), renderIdleQueue (copy), config (copy), renderTimelineChildren (copy)
 	local Batches = p3.props.batches
 	local Queue = p3.props.queue

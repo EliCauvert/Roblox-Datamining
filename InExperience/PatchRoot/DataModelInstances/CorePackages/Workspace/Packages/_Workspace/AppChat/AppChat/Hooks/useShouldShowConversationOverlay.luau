@@ -11,9 +11,9 @@ local config = {
 	[ConversationOverlay.TrustedConnectionRequestU18] = FFlagAppChatEnableDoubleOptIn
 }
 
-return function(p1): boolean --[[ Line: 20 ]]
+return function(p1): boolean
 	-- upvalues: UseSelectorFunction (copy), GetDeepValue2Module (copy), config (copy), ConversationOverlay (copy), LoggerModule (copy)
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 21 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: GetDeepValue2Module (upval), p1 (copy)
 		return GetDeepValue2Module(p2, `ChatAppReducer.Modals.conversationOverlays.{p1}.modal_variant`) or ""
 	end)

@@ -36,7 +36,7 @@ for i, Vector in ipairs(List) do
 end
 local NetworkSummary = RoactModule.Component:extend("NetworkSummary")
 
-function NetworkSummary.render(p1) --[[ Line: 50 ]]
+function NetworkSummary.render(p1)
 	-- upvalues: RoactModule (copy), LineWidth (copy), LineColor (copy), t (copy), HeaderFrameHeight (copy), SummaryHeaderNames (copy), HeaderButtonModule (copy), List1 (copy), List (copy), CellLabelModule (copy), EntryFrameHeight (copy), Text (copy)
 	local Width = p1.props.width
 	local HttpSummaryTable = p1.props.httpSummaryTable or {}

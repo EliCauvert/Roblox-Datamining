@@ -5,7 +5,7 @@ local FFlagUseRbxstorageInGalleryModule = require(Parent.Flags.FFlagUseRbxstorag
 local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 local DontAssertOnUserIDInCaptureMetadata = game:DefineFastFlag("DontAssertOnUserIDInCaptureMetadata", false)
 
-return function(Capture) --[[ Line: 11 ]]
+return function(Capture)
 	-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), FFlagUseRbxstorageInGalleryModule (copy), CaptureTypeModule (copy), DontAssertOnUserIDInCaptureMetadata (copy)
 	if FFlagEnableCapturesGalleryRetrievalCoreScriptModule and Capture.CaptureTime ~= nil then
 		return {

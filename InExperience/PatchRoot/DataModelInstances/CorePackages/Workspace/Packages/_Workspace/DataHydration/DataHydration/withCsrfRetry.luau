@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("DataHydration").Parent.HttpClient)
 
-local function getCsrfToken(p1) --[[ Line: 14 ]]
+local function getCsrfToken(p1)
 	local Headers = p1.headers
 	
 	if Headers == nil then
@@ -14,7 +14,7 @@ local function getCsrfToken(p1) --[[ Line: 14 ]]
 	return nil
 end
 
-local function _(List, List1) --[[ Line: 27 | Named "mergeHeaders" ]]
+local function _(List, List1)
 	local t = {}
 	
 	if List then
@@ -28,14 +28,14 @@ local function _(List, List1) --[[ Line: 27 | Named "mergeHeaders" ]]
 	return t
 end
 
-return function(p2) --[[ Line: 40 | Named "withCsrfRetry" ]]
+return function(p2)
 	-- upvalues: getCsrfToken (copy)
 	return {
-		request = function(p3, Callback) --[[ Line: 41 ]]
+		request = function(p3, Callback)
 			-- upvalues: p2 (copy), getCsrfToken (upval)
 			local Flag = false
 			local RequestResult = nil
-			RequestResult = p2.request(p3, function(p4, p5) --[[ Line: 48 ]]
+			RequestResult = p2.request(p3, function(p4, p5)
 				-- upvalues: Flag (ref), Callback (copy), getCsrfToken (upval), p3 (copy), RequestResult (ref), p2 (upval)
 				if Flag then return end
 				if not p4 or typeof(p5) ~= "table" then
@@ -69,7 +69,7 @@ return function(p2) --[[ Line: 40 | Named "withCsrfRetry" ]]
 					Headers1[i1] = value
 				end
 				config.headers = Headers1
-				RequestResult = p2.request(config, function(p6, p7) --[[ Line: 73 ]]
+				RequestResult = p2.request(config, function(p6, p7)
 					-- upvalues: Flag (upval), Callback (upval)
 					if not Flag then
 						Callback(p6, p7)
@@ -79,7 +79,7 @@ return function(p2) --[[ Line: 40 | Named "withCsrfRetry" ]]
 				end)
 			end)
 			
-			return function() --[[ Line: 81 ]]
+			return function()
 				-- upvalues: Flag (ref), RequestResult (ref)
 				if Flag then return end
 				Flag = true

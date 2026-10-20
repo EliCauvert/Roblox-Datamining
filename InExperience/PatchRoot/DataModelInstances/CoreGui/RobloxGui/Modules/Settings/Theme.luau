@@ -90,7 +90,7 @@ local config2 = {
 	Bold_Font = { Font = AppFonts.default:getMedium() }
 }
 setmetatable(config1, {
-	__index = function(_, p1) --[[ Line: 163 ]]
+	__index = function(_, p1)
 		-- upvalues: DarkTheme (copy)
 		return DarkTheme[p1]
 	end
@@ -146,7 +146,7 @@ local config3 = {
 	ButtonNonInteractable = "IGM_ButtonNonInteractable"
 }
 
-local function getViewportSize() --[[ Line: 235 ]]
+local function getViewportSize()
 	return if _G.__TESTEZ_RUNNING_TEST__ then Vector2.new(1024, 1024) elseif workspace.CurrentCamera then if workspace.CurrentCamera.ViewportSize == Vector2.new(0, 0) or workspace.CurrentCamera.ViewportSize == Vector2.new(1, 1) then nil else workspace.CurrentCamera.ViewportSize else nil
 end
 
@@ -189,18 +189,18 @@ return {
 	platformNameTextSize = 18,
 	DefaultCornerRadius = UDim.new(0, 8),
 	MenuContainerCornerRadius = UDim.new(0, 10),
-	AlwaysShowBottomBar = function(): boolean --[[ Line: 292 ]]
+	AlwaysShowBottomBar = function(): boolean
 		-- upvalues: IsYBelow (ref)
 		return not IsYBelow
 	end,
-	UseInspectAndBuyPanel = function() --[[ Line: 296 ]]
+	UseInspectAndBuyPanel = function()
 		-- upvalues: IsYBelow (ref)
 		return IsYBelow
 	end,
-	HubPadding = function() --[[ Line: 300 ]]
+	HubPadding = function()
 		-- upvalues: FFlagRelocateMobileMenuButtonsModule (copy), FIntRelocateMobileMenuButtonsVariantModule (copy), getViewportSize (copy), UserInputService (copy), config5 (copy), config4 (copy), IsYBelow (ref)
 		if FFlagRelocateMobileMenuButtonsModule and FIntRelocateMobileMenuButtonsVariantModule ~= 0 then
-			local function _(): boolean --[[ Line: 303 ]]
+			local function _(): boolean
 				-- upvalues: getViewportSize (upval), UserInputService (upval)
 				local ViewportSize = getViewportSize()
 				
@@ -215,7 +215,7 @@ return {
 			return if IsYBelow then config5 else config4
 		end
 	end,
-	MenuContainerPosition = function(p1) --[[ Line: 323 ]]
+	MenuContainerPosition = function(p1)
 		-- upvalues: IsInExperienceUIVREnabled (copy), IsYBelow (ref), config7 (copy), config6 (copy)
 		if IsInExperienceUIVREnabled and p1 then
 			local MenuContainerPositionOverride = p1:getMenuContainerPositionOverride()
@@ -230,24 +230,24 @@ return {
 	getIconSize = GetIconSize,
 	IconSize = IconSize,
 	SHIELD_INACTIVE_POSITION = UDim2.new(0, 0, 1, 36),
-	viewportResized = function() --[[ Line: 344 ]]
+	viewportResized = function()
 		-- upvalues: ViewportSize (ref), getViewportSize (copy), IsYBelow (ref), UserInputService (copy)
 		ViewportSize = getViewportSize()
 		IsYBelow = ViewportSize and (UserInputService.TouchEnabled and (ViewportSize.Y < 500 or ViewportSize.X < 700))
 	end,
-	color = function(p1, p2) --[[ Line: 350 ]]
+	color = function(p1, p2)
 		-- upvalues: config3 (copy), config1 (copy), _Color3 (copy)
 		local Entry = config3[p1] or p1
 		
 		return if config1[Entry] then config1[Entry].Color else p2 or _Color3
 	end,
-	transparency = function(p1, p2) --[[ Line: 354 ]]
+	transparency = function(p1, p2)
 		-- upvalues: config3 (copy), config1 (copy)
 		local Entry = config3[p1] or p1
 		
 		return if config1[Entry] then config1[Entry].Transparency else p2 or 0
 	end,
-	font = function(p1, p2) --[[ Line: 358 ]]
+	font = function(p1, p2)
 		-- upvalues: Default (copy), config3 (copy), config2 (copy)
 		if p2 then
 			local Entry = config3[p2] or p2
@@ -257,7 +257,7 @@ return {
 			return Default
 		end
 	end,
-	fontSize = function(p1, p2) --[[ Line: 365 ]]
+	fontSize = function(p1, p2)
 		-- upvalues: config (copy), config3 (copy), config2 (copy), Entry (copy)
 		if p2 then
 			local Entry1 = config3[p2] or p2
@@ -267,7 +267,7 @@ return {
 			return config[p1]
 		end
 	end,
-	textSize = function(p1: number, p2: string) --[[ Line: 372 ]]
+	textSize = function(p1: number, p2: string)
 		-- upvalues: GetUIScaleFunction (copy), IsYBelow (ref), config3 (copy), config2 (copy)
 		local UIScale = GetUIScaleFunction(false)
 		
@@ -283,7 +283,7 @@ return {
 		
 		return if p1 == nil then if config2[Entry] and config2[Entry].TextSize then config2[Entry].TextSize else p1 * 0.794 or 19 elseif config2[Entry] and config2[Entry].TextSize then config2[Entry].TextSize * UIScale else p1 * 0.794 * UIScale
 	end,
-	hydrateLabel = function(Label, p1, p2) --[[ Line: 393 ]]
+	hydrateLabel = function(Label, p1, p2)
 		-- upvalues: config3 (copy), config1 (copy), config2 (copy)
 		local Entry = config3[p1] or p1
 		

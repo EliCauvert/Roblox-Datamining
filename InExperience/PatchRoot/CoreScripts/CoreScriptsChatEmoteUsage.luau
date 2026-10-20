@@ -10,7 +10,7 @@ while Players.LocalPlayer == nil do
 end
 local LocalPlayer = Players.LocalPlayer
 
-local function reportEmoteUsed(EmoteFromEquippedEmote) --[[ Line: 30 ]]
+local function reportEmoteUsed(EmoteFromEquippedEmote)
 	-- upvalues: RbxAnalyticsService (copy), LocalPlayer (copy), StatsService (copy)
 	RbxAnalyticsService:SetRBXEventStream("client", "chat", "emoteTriggered", {
 		pid = tostring(game.PlaceId),
@@ -21,7 +21,7 @@ local function reportEmoteUsed(EmoteFromEquippedEmote) --[[ Line: 30 ]]
 	})
 end
 
-local function reportEmoteFailed(ErrorType, EmoteFromEquippedEmote) --[[ Line: 40 ]]
+local function reportEmoteFailed(ErrorType, EmoteFromEquippedEmote)
 	-- upvalues: RbxAnalyticsService (copy), LocalPlayer (copy), StatsService (copy)
 	RbxAnalyticsService:SendEventDeferred("client", "chat", "emoteTriggerFailed", {
 		invokedByCoreGui = false,
@@ -34,24 +34,24 @@ local function reportEmoteFailed(ErrorType, EmoteFromEquippedEmote) --[[ Line: 4
 	})
 end
 
-local function _(Player) --[[ Line: 52 | Named "getHumanoidFromPlayer" ]]
+local function _(Player)
 	local Character = Player.Character
 	
 	return if Character then Character:FindFirstChildOfClass("Humanoid") else nil
 end
 
-local _ = function(Player) --[[ Line: 61 | Named "getHumanoidDescriptionFromPlayer" ]]
+local _ = function(Player)
 	local Character = Player.Character
 	local Humanoid = if Character then Character:FindFirstChildOfClass("Humanoid") else nil
 	
 	return if Humanoid then Humanoid:FindFirstChildOfClass("HumanoidDescription") else nil
 end
 
-local _ = function(Text: string) --[[ Line: 70 | Named "getEmoteFromMessage" ]]
+local _ = function(Text: string)
 	return if string.sub(Text, 1, 3) == "/e " then string.sub(Text, 4):lower() elseif string.sub(Text, 1, 7) == "/emote " then string.sub(Text, 8):lower() else nil
 end
 
-local _ = function(HumanoidDescription, Slot) --[[ Line: 80 | Named "getEquippedEmoteFromSlot" ]]
+local _ = function(HumanoidDescription, Slot)
 	for _, equippedEmote in ipairs((HumanoidDescription:GetEquippedEmotes())) do
 		if equippedEmote.Slot == Slot then
 			return equippedEmote
@@ -60,7 +60,7 @@ local _ = function(HumanoidDescription, Slot) --[[ Line: 80 | Named "getEquipped
 	return nil
 end
 
-local function getEmoteFromEquippedEmote(HumanoidDescription, EmoteFromEquippedEmote) --[[ Line: 91 ]]
+local function getEmoteFromEquippedEmote(HumanoidDescription, EmoteFromEquippedEmote)
 	for Name, emote in pairs((HumanoidDescription:GetEmotes())) do
 		if string.lower(EmoteFromEquippedEmote.Name) == string.lower(Name) then
 			return {
@@ -73,7 +73,7 @@ local function getEmoteFromEquippedEmote(HumanoidDescription, EmoteFromEquippedE
 	return nil
 end
 
-local function getEmoteFromName(HumanoidDescription, Text: string) --[[ Line: 106 ]]
+local function getEmoteFromName(HumanoidDescription, Text: string)
 	for Name, emote in pairs((HumanoidDescription:GetEmotes())) do
 		if string.lower(Text) == string.lower(Name) then
 			return { Slot = nil, Name = Name, AssetId = emote[1] }
@@ -82,7 +82,7 @@ local function getEmoteFromName(HumanoidDescription, Text: string) --[[ Line: 10
 	return nil
 end
 
-local _ = function(HumanoidDescription, p1) --[[ Line: 121 | Named "getEmoteUsed" ]]
+local _ = function(HumanoidDescription, p1)
 	-- upvalues: getEmoteFromEquippedEmote (copy), getEmoteFromName (copy)
 	local Number: number? = tonumber(p1)
 	
@@ -114,7 +114,7 @@ local config = {
 	cheer = { R6 = 129423030, R15 = 507770677 }
 }
 
-local _ = function(Humanoid, Name, p2) --[[ Line: 166 | Named "getLegacyEmoteUsed" ]]
+local _ = function(Humanoid, Name, p2)
 	local IsRigTypeMatch = Humanoid.RigType == Enum.HumanoidRigType.R15
 	
 	return {
@@ -124,7 +124,7 @@ local _ = function(Humanoid, Name, p2) --[[ Line: 166 | Named "getLegacyEmoteUse
 	}
 end
 
-LocalPlayer.Chatted:Connect(function(Text: string, _) --[[ Line: 175 ]]
+LocalPlayer.Chatted:Connect(function(Text: string, _)
 	-- upvalues: config (copy), LocalPlayer (copy), getEmoteFromEquippedEmote (copy), getEmoteFromName (copy), reportEmoteUsed (copy), MaybeSendEmoteFailureAnalyticsFromPlayerModule (copy), reportEmoteFailed (copy), ConstantsModule (copy), RbxAnalyticsService (copy), StatsService (copy)
 	local Lowered = if string.sub(Text, 1, 3) == "/e " then string.sub(Text, 4):lower() elseif string.sub(Text, 1, 7) == "/emote " then string.sub(Text, 8):lower() else nil
 	
@@ -169,7 +169,7 @@ LocalPlayer.Chatted:Connect(function(Text: string, _) --[[ Line: 175 ]]
 		end
 		if v2 then
 			reportEmoteUsed(v2)
-			MaybeSendEmoteFailureAnalyticsFromPlayerModule(LocalPlayer, function(ErrorType) --[[ Line: 195 ]]
+			MaybeSendEmoteFailureAnalyticsFromPlayerModule(LocalPlayer, function(ErrorType)
 				-- upvalues: reportEmoteFailed (upval), v2 (ref)
 				reportEmoteFailed(ErrorType, v2)
 			end)

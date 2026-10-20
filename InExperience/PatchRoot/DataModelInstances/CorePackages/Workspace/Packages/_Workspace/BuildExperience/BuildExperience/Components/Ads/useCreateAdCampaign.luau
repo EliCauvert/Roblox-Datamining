@@ -14,7 +14,7 @@ local FFlagEnablePaidAdsModule = require(BuildExperience.Flags.FFlagEnablePaidAd
 local AsPromiseFunction = require(Parent.HttpClient).asPromise
 local ClassifyAdCampaignFailureFunction = CreatorAgentChatModule.classifyAdCampaignFailure
 
-return function(UniverseId, ConversationId, p1) --[[ Line: 70 | Named "useCreateAdCampaign" ]]
+return function(UniverseId, ConversationId, p1)
 	-- upvalues: SendBuildExperienceEventModule (copy), ReactModule (copy), FFlagEnablePaidAdsModule (copy), UseRefreshAdsDataModule (copy), FFlagBuildAgentAdCampaignCardModule (copy), HttpService (copy), FFlagBuildAgentAdCampaignToolCallStatusFallbackModule (copy), AsPromiseFunction (copy), CreatorAgentChatModule (copy), ClassifyAdCampaignFailureFunction (copy)
 	local P2 = p1 or {}
 	local SendEvent = P2.sendEvent or SendBuildExperienceEventModule
@@ -33,16 +33,16 @@ return function(UniverseId, ConversationId, p1) --[[ Line: 70 | Named "useCreate
 	end
 	local UseRefResult3 = ReactModule.useRef(false)
 	local UseRefResult4 = ReactModule.useRef(true)
-	ReactModule.useEffect(function() --[[ Line: 101 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult4 (copy)
 		UseRefResult4.current = true
 		
-		return function() --[[ Line: 103 ]]
+		return function()
 			-- upvalues: UseRefResult4 (upval)
 			UseRefResult4.current = false
 		end
 	end, {})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 110 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy), FFlagEnablePaidAdsModule (upval), Callback (copy)
 		UseStateResult2_1(false)
 		
@@ -50,7 +50,7 @@ return function(UniverseId, ConversationId, p1) --[[ Line: 70 | Named "useCreate
 			Callback(nil)
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 117 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), FFlagEnablePaidAdsModule (upval), UseRefResult1 (copy), UseRefResult2 (copy), UseResult (copy)
 		UseRefResult.current = nil
 		
@@ -68,7 +68,7 @@ return function(UniverseId, ConversationId, p1) --[[ Line: 70 | Named "useCreate
 	})
 	
 	return {
-		createCampaign = ReactModule.useCallback(function(Current, p2, ToolCallId, p3) --[[ Line: 138 ]]
+		createCampaign = ReactModule.useCallback(function(Current, p2, ToolCallId, p3)
 			-- upvalues: UniverseId (copy), UseRefResult3 (copy), FFlagEnablePaidAdsModule (upval), FFlagBuildAgentAdCampaignCardModule (upval), UseRefResult (copy), UseRefResult1 (copy), UseRefResult2 (copy), P2 (copy), HttpService (upval), UseStateResult2 (copy), UseStateResult2_1 (copy), FFlagBuildAgentAdCampaignToolCallStatusFallbackModule (upval), AsPromiseFunction (upval), CreatorAgentChatModule (upval), SendEvent (copy), ConversationId (copy), UseRefreshAdsDataModuleResult (copy), UseRefResult4 (copy), ClassifyAdCampaignFailureFunction (upval), Callback (copy)
 			if UniverseId == nil or UniverseId == 0 or UseRefResult3.current then return end
 			if FFlagEnablePaidAdsModule and Current == nil then return end
@@ -105,10 +105,10 @@ return function(UniverseId, ConversationId, p1) --[[ Line: 70 | Named "useCreate
 			end
 			local IdempotencyKey = config.idempotencyKey
 			local Copy = if FFlagBuildAgentAdCampaignCardModule and config.selectedOption ~= nil then table.clone(config.selectedOption) else nil;
-			(P2.createCampaignAsync or function(p4) --[[ Line: 198 ]]
+			(P2.createCampaignAsync or function(p4)
 				-- upvalues: AsPromiseFunction (upval), CreatorAgentChatModule (upval)
 				return AsPromiseFunction(CreatorAgentChatModule.getCreatorAgentChatStore(false).adCampaignCreate(p4))
-			end)(config):andThen(function(Result) --[[ Line: 207 ]]
+			end)(config):andThen(function(Result)
 				-- upvalues: SendEvent (upval), UniverseId (upval), ConversationId (upval), UseRefResult (upval), FFlagEnablePaidAdsModule (upval), UseRefResult1 (upval), UseRefResult2 (upval), UseRefreshAdsDataModuleResult (upval), UseRefResult3 (upval), UseRefResult4 (upval), UseStateResult2 (upval), FFlagBuildAgentAdCampaignCardModule (upval), p2 (copy), IdempotencyKey (copy), Copy (copy)
 				SendEvent("AD_CAMPAIGN_CREATE_SUCCESS", { universeId = UniverseId, conversationId = ConversationId }, { campaignId = Result.campaignId })
 				UseRefResult.current = nil
@@ -126,7 +126,7 @@ return function(UniverseId, ConversationId, p1) --[[ Line: 70 | Named "useCreate
 				if FFlagBuildAgentAdCampaignCardModule and p2 ~= nil then
 					pcall(p2, Result.campaignId, IdempotencyKey, Copy)
 				end
-			end):catch(function(Err) --[[ Line: 227 ]]
+			end):catch(function(Err)
 				-- upvalues: SendEvent (upval), UniverseId (upval), ConversationId (upval), UseRefResult3 (upval), FFlagEnablePaidAdsModule (upval), ClassifyAdCampaignFailureFunction (upval), UseRefResult2 (upval), UseRefResult4 (upval), UseStateResult2_1 (upval), Callback (upval), UseStateResult2 (upval), FFlagBuildAgentAdCampaignCardModule (upval), p3 (copy)
 				SendEvent("AD_CAMPAIGN_CREATE_FAILURE", { universeId = UniverseId, conversationId = ConversationId }, { error = tostring(Err) })
 				UseRefResult3.current = false

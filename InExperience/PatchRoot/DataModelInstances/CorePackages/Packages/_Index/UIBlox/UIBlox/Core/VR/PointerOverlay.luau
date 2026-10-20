@@ -11,7 +11,7 @@ local config = {
 	UpdateEvent = game:GetService("RunService").Heartbeat
 }
 
-local function setLaserPointerModeBasedOnUserCFrame(UseRefResult, VRService) --[[ Line: 45 ]]
+local function setLaserPointerModeBasedOnUserCFrame(UseRefResult, VRService)
 	if VRService:GetUserCFrameEnabled(Enum.UserCFrame.RightHand) and VRService:GetUserCFrameEnabled(Enum.UserCFrame.LeftHand) then
 		UseRefResult.current:setMode(UseRefResult.current.Mode.DualPointer)
 		
@@ -26,7 +26,7 @@ local function setLaserPointerModeBasedOnUserCFrame(UseRefResult, VRService) --[
 	end
 end
 
-return function(p1) --[[ Line: 61 | Named "PointerOverlay" ]]
+return function(p1)
 	-- upvalues: Object (copy), config (copy), ReactModule (copy), setLaserPointerModeBasedOnUserCFrame (copy), ContextActionService (copy), RoactModule (copy), EventConnection (copy)
 	local AssignResult = Object.assign({}, config, p1)
 	local LaserPointer = AssignResult.LaserPointer
@@ -35,11 +35,11 @@ return function(p1) --[[ Line: 61 | Named "PointerOverlay" ]]
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseRefResult2 = ReactModule.useRef(nil)
-	local Success, Result = pcall(function() --[[ Line: 74 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: VRService (copy)
 		return VRService:GetPropertyChangedSignal("VRSessionState")
 	end)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 78 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), LaserPointer (copy), setLaserPointerModeBasedOnUserCFrame (upval), VRService (copy), UseRefResult1 (copy), VRControllerModel (copy), UseRefResult2 (copy), ContextActionService (upval)
 		if not UseRefResult.current then
 			UseRefResult.current = LaserPointer.new()
@@ -62,7 +62,7 @@ return function(p1) --[[ Line: 61 | Named "PointerOverlay" ]]
 		VRControllerModel
 	})
 	local UseResult1 = nil
-	UseResult1 = ReactModule.useCallback(function() --[[ Line: 101 ]]
+	UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult1 (copy), UseRefResult2 (copy), UseRefResult (copy), ContextActionService (upval)
 		if UseRefResult1.current then
 			UseRefResult1.current:setEnabled(false)
@@ -82,7 +82,7 @@ return function(p1) --[[ Line: 61 | Named "PointerOverlay" ]]
 		LaserPointer,
 		VRControllerModel
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 115 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: VRService (copy), UseRefResult (copy), setLaserPointerModeBasedOnUserCFrame (upval), UseRefResult1 (copy), UseRefResult2 (copy)
 		local Inverted = not (VRService.VRSessionState == Enum.VRSessionState.Idle or VRService.VRSessionState == Enum.VRSessionState.Visible)
 		
@@ -106,11 +106,11 @@ return function(p1) --[[ Line: 61 | Named "PointerOverlay" ]]
 		LaserPointer,
 		VRControllerModel
 	})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 135 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: setLaserPointerModeBasedOnUserCFrame (upval), UseRefResult (copy), VRService (copy)
 		setLaserPointerModeBasedOnUserCFrame(UseRefResult, VRService)
 	end, { UseRefResult })
-	ReactModule.useEffect(function() --[[ Line: 140 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: VRService (copy), UseResult (copy), UseResult1 (ref)
 		if VRService.VREnabled then
 			UseResult()
@@ -121,7 +121,7 @@ return function(p1) --[[ Line: 61 | Named "PointerOverlay" ]]
 	return ReactModule.createElement(RoactModule.Portal, { target = workspace }, {
 		UserCFrameChangedConnection = ReactModule.createElement(EventConnection, {
 			event = AssignResult.UpdateEvent,
-			callback = function() --[[ Line: 152 ]]
+			callback = function()
 				-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseRefResult2 (copy)
 				if UseRefResult.current then
 					UseRefResult.current:update()

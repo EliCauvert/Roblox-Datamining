@@ -17,7 +17,7 @@ local SduiParseHelpersModule = require(SduiCoreSystem.SduiParseHelpers)
 local _ = require(SduiCoreSystem.SduiComponentType)
 local t = {}
 
-local function buildItemList(ResolveTemplateFromDataResult, List, Inputs, Callback, p1, p2, PropSignal, p3, p4, Enabled) --[[ Line: 37 ]]
+local function buildItemList(ResolveTemplateFromDataResult, List, Inputs, Callback, p1, p2, PropSignal, p3, p4, Enabled)
 	-- upvalues: SduiPropUtilsModule (copy), SignalsModule (copy), CryoModule (copy), t (copy), BuildInputsForNestedComponentModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), SduiParseHelpersModule (copy), BuildConfigForComponentFunction (copy)
 	local List1 = {}
 	
@@ -42,7 +42,7 @@ local function buildItemList(ResolveTemplateFromDataResult, List, Inputs, Callba
 				table.insert(List1, PropSignalEntry)
 			end
 		else
-			local ConfigForComponent = BuildConfigForComponentFunction(InlineComponent, SignalsModule.createComputed(function(p5) --[[ Line: 79 ]]
+			local ConfigForComponent = BuildConfigForComponentFunction(InlineComponent, SignalsModule.createComputed(function(p5)
 				-- upvalues: Flag (ref), CryoModule (upval), Callback (copy), value (copy), t (upval), Inputs (copy), BuildInputsForNestedComponentModule (upval), p3 (copy), p1 (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), SduiParseHelpersModule (upval)
 				if Flag then
 					return CryoModule.Dictionary.join(Callback(p5), value or t)
@@ -51,7 +51,7 @@ local function buildItemList(ResolveTemplateFromDataResult, List, Inputs, Callba
 				
 				if Inputs then
 					Copy = table.clone(value)
-					local Success, Result = pcall(function() --[[ Line: 91 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: BuildInputsForNestedComponentModule (upval), Callback (upval), Inputs (upval), p3 (upval), p5 (copy), Copy (ref), p1 (upval)
 						BuildInputsForNestedComponentModule(Callback, Inputs, p3, p5, Copy, p1)
 					end)
@@ -78,7 +78,7 @@ local function buildItemList(ResolveTemplateFromDataResult, List, Inputs, Callba
 	return List1
 end
 
-local function buildOrderedTemplateDataList(p5, p6, Callback, p7, p8) --[[ Line: 136 ]]
+local function buildOrderedTemplateDataList(p5, p6, Callback, p7, p8)
 	-- upvalues: SplitDottedPathModule (copy), SignalsModule (copy), SduiPropUtilsModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), BuildInputsForNestedComponentModule (copy), BuildConfigForComponentFunction (copy), SduiParseHelpersModule (copy), PropResultCategory (copy)
 	local EntryMapPath = p5.entry_map_path
 	local EntryOrder = p5.entry_order
@@ -94,9 +94,9 @@ local function buildOrderedTemplateDataList(p5, p6, Callback, p7, p8) --[[ Line:
 	local Kind = if EntryOrder then EntryOrder.kind else nil
 	local SplitDottedPathModuleResult1 = if Kind and Kind.type == "binding_path" then SplitDottedPathModule(Kind.value) else nil
 	
-	return SignalsModule.createComputed(function(p9) --[[ Line: 163 ]]
+	return SignalsModule.createComputed(function(p9)
 		-- upvalues: SplitDottedPathModuleResult1 (copy), SduiPropUtilsModule (upval), p6 (copy), Callback (copy), p7 (copy), Kind (copy), SplitDottedPathModuleResult (copy), TemplateDataMap (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), SignalsModule (upval), BuildInputsForNestedComponentModule (upval), BuildConfigForComponentFunction (upval), p8 (copy), SduiParseHelpersModule (upval)
-		local Success, Result = pcall(function() --[[ Line: 164 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: SplitDottedPathModuleResult1 (upval), SduiPropUtilsModule (upval), p9 (copy), p6 (upval), Callback (upval), p7 (upval), Kind (upval), SplitDottedPathModuleResult (upval), TemplateDataMap (upval), SduiLoggerModule (upval), SduiErrorsModule (upval), SignalsModule (upval), BuildInputsForNestedComponentModule (upval), BuildConfigForComponentFunction (upval), p8 (upval), SduiParseHelpersModule (upval)
 			local Items = nil
 			
@@ -128,12 +128,12 @@ local function buildOrderedTemplateDataList(p5, p6, Callback, p7, p8) --[[ Line:
 							parserName = p7.currentParserName
 						}, p7.appPage)
 					else
-						local Success, Result = pcall(function() --[[ Line: 232 ]]
+						local Success, Result = pcall(function()
 							-- upvalues: SduiPropUtilsModule (upval), RobloxComponent (copy), InlineComponent (copy), p7 (upval), TemplateData (copy), SignalsModule (upval), Callback (upval), BuildInputsForNestedComponentModule (upval), p6 (upval), ResolveBindingPathValueResultEntry (copy), BuildConfigForComponentFunction (upval), p8 (upval)
 							local HasInlineComponent = InlineComponent ~= nil
 							local Inputs = if TemplateData then TemplateData.inputs else nil
 							
-							return BuildConfigForComponentFunction(SduiPropUtilsModule.resolveTemplate(RobloxComponent, InlineComponent, p7), SignalsModule.createComputed(function(p10) --[[ Line: 242 ]]
+							return BuildConfigForComponentFunction(SduiPropUtilsModule.resolveTemplate(RobloxComponent, InlineComponent, p7), SignalsModule.createComputed(function(p10)
 								-- upvalues: HasInlineComponent (copy), Callback (upval), Inputs (copy), BuildInputsForNestedComponentModule (upval), p6 (upval), p7 (upval), ResolveBindingPathValueResultEntry (upval)
 								local Copy = nil
 								if HasInlineComponent then
@@ -189,7 +189,7 @@ local function buildOrderedTemplateDataList(p5, p6, Callback, p7, p8) --[[ Line:
 	end), PropResultCategory.PropSignal
 end
 
-local function buildLazyNestedComponentListProp(p10, p11, p12, p13, p14, p15) --[[ Line: 348 ]]
+local function buildLazyNestedComponentListProp(p10, p11, p12, p13, p14, p15)
 	-- upvalues: SduiPropUtilsModule (copy), buildItemList (copy), PropResultCategory (copy), SignalsModule (copy), BuildInputsForNestedComponentModule (copy), SduiParseHelpersModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), BuildConfigForComponentFunction (copy), buildOrderedTemplateDataList (copy), buildLazyNestedComponentListProp (copy), BuildComponentListModule (copy)
 	local CurrentComponentType = p14.currentComponentType
 	local CurrentParserName = p14.currentParserName
@@ -204,7 +204,7 @@ local function buildLazyNestedComponentListProp(p10, p11, p12, p13, p14, p15) --
 		local HasInlineComponent = p11.inline_component ~= nil
 		local PropSignal = nil
 		
-		return SduiPropUtilsModule.generateDynamicBindingPropValue(BindingPath, p12, p14, p13, function(p16, p17) --[[ Line: 379 ]]
+		return SduiPropUtilsModule.generateDynamicBindingPropValue(BindingPath, p12, p14, p13, function(p16, p17)
 			-- upvalues: PropSignal (ref), buildItemList (upval), ResolveTemplateFromDataResult (copy), p11 (copy), p13 (copy), p14 (copy), p15 (copy), p12 (copy), HasInlineComponent (copy)
 			PropSignal = buildItemList(ResolveTemplateFromDataResult, p16, p11.inputs, p13, p14, p15, PropSignal, p12, p17, HasInlineComponent)
 			
@@ -224,21 +224,21 @@ local function buildLazyNestedComponentListProp(p10, p11, p12, p13, p14, p15) --
 		local PropSignal = PropResultCategory
 		PropSignal = PropSignal.PropSignal
 		
-		return SignalsModule.createComputed(function(p16) --[[ Line: 409 ]]
+		return SignalsModule.createComputed(function(p16)
 			-- upvalues: Items (copy), SduiPropUtilsModule (upval), p14 (copy), p13 (copy), SignalsModule (upval), BuildInputsForNestedComponentModule (upval), p12 (copy), SduiParseHelpersModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval), CurrentComponentType (copy), CurrentParserName (copy), BuildConfigForComponentFunction (upval), p15 (copy)
-			local Success, Result = pcall(function() --[[ Line: 410 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: Items (upval), SduiPropUtilsModule (upval), p14 (upval), p13 (upval), SignalsModule (upval), BuildInputsForNestedComponentModule (upval), p12 (upval), SduiParseHelpersModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval), CurrentComponentType (upval), CurrentParserName (upval), BuildConfigForComponentFunction (upval), p15 (upval), p16 (copy)
 				local List = {}
 				
 				for _, item in Items do
 					local HasInlineComponent = item.inline_component ~= nil
 					local Inputs = item.inputs
-					local ConfigForComponent = BuildConfigForComponentFunction(SduiPropUtilsModule.resolveTemplateFromData(item, p14), if HasInlineComponent then p13 else SignalsModule.createComputed(function(p17) --[[ Line: 424 ]]
+					local ConfigForComponent = BuildConfigForComponentFunction(SduiPropUtilsModule.resolveTemplateFromData(item, p14), if HasInlineComponent then p13 else SignalsModule.createComputed(function(p17)
 						-- upvalues: Inputs (copy), BuildInputsForNestedComponentModule (upval), p13 (upval), p12 (upval), p14 (upval), SduiParseHelpersModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval), CurrentComponentType (upval), CurrentParserName (upval)
 						local t = {}
 						
 						if Inputs then
-							local Success, Result = pcall(function() --[[ Line: 427 ]]
+							local Success, Result = pcall(function()
 								-- upvalues: BuildInputsForNestedComponentModule (upval), p13 (upval), Inputs (upval), p12 (upval), p17 (copy), t (copy), p14 (upval)
 								BuildInputsForNestedComponentModule(p13, Inputs, p12, p17, t, p14)
 							end)

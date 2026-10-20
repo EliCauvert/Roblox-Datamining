@@ -2,10 +2,10 @@
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 
-return function(p1) --[[ Line: 23 | Named "SystemScrim" ]]
+return function(p1)
 	-- upvalues: SignalsReactModule (copy), ReactModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.store.autoDismiss)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 26 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), UseSignalStateResult (copy)
 		p1.store.backgroundScrimActivated:Fire()
 		

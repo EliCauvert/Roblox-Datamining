@@ -13,7 +13,7 @@ ExtendResult.defaultProps = {
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function ExtendResult:getMessage(p1, ModalType) --[[ Line: 36 ]]
+function ExtendResult:getMessage(p1, ModalType)
 	-- upvalues: U13ConfirmTypeModule (copy)
 	if ModalType == U13ConfirmTypeModule.U13PaymentModal then
 		return p1.u13PaymentModal
@@ -25,7 +25,7 @@ function ExtendResult:getMessage(p1, ModalType) --[[ Line: 36 ]]
 	return p1.parentalConsentWarningPaymentModal13To17
 end
 
-function ExtendResult.render(p1) --[[ Line: 48 ]]
+function ExtendResult.render(p1)
 	-- upvalues: RoactModule (copy), MultiTextLocalizerModule (copy)
 	return RoactModule.createElement(MultiTextLocalizerModule, {
 		keys = {
@@ -43,14 +43,14 @@ function ExtendResult.render(p1) --[[ Line: 48 ]]
 			confirm = { key = "IAPExperience.U13Confirm.Action.Confirm" },
 			cancel = { key = "IAPExperience.U13Confirm.Action.Cancel" }
 		},
-		render = function(p2) --[[ Line: 73 ]]
+		render = function(p2)
 			-- upvalues: p1 (copy)
 			return p1:renderAlert(p2)
 		end
 	})
 end
 
-function ExtendResult.renderAlert(p1, p2) --[[ Line: 79 ]]
+function ExtendResult.renderAlert(p1, p2)
 	-- upvalues: RoactModule (copy), InteractiveAlert (copy), ButtonType (copy)
 	local Props = p1.props
 	

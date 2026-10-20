@@ -8,7 +8,7 @@ local SplashScreenManager = require(Parent.SplashScreenManager).SplashScreenMana
 local LoadingRemoveRemoteCallErrorPrint = game:DefineFastFlag("LoadingRemoveRemoteCallErrorPrint", false)
 local CreateFunction = require(Parent.AppCommonLib).Create
 
-local function FadeElements(Target, BackgroundTransparency, Duration1) --[[ Line: 22 ]]
+local function FadeElements(Target, BackgroundTransparency, Duration1)
 	-- upvalues: TweenService (copy), FadeElements (copy)
 	local Duration = Duration1 or 0.5
 	
@@ -34,23 +34,23 @@ local config = {
 	Finished = false,
 	GameAssetInfo = nil,
 	LoadingFinishedEvent = BindableEvent.Event,
-	GetGameName = function(p1) --[[ Line: 51 ]]
+	GetGameName = function(p1)
 		return if p1.GameAssetInfo == nil then "" else p1.GameAssetInfo.Name
 	end,
-	GetCreatorName = function(p1) --[[ Line: 59 ]]
+	GetCreatorName = function(p1)
 		return if p1.GameAssetInfo == nil then "" else p1.GameAssetInfo.Creator.Name
 	end,
-	IsReady = function(p1) --[[ Line: 67 ]]
+	IsReady = function(p1)
 		return p1.Finished
 	end,
-	LoadAssetsAsync = function(p1) --[[ Line: 71 ]]
+	LoadAssetsAsync = function(p1)
 		-- upvalues: MarketplaceService (copy), LoadingRemoveRemoteCallErrorPrint (copy), BindableEvent (copy)
-		spawn(function() --[[ Line: 72 ]]
+		spawn(function()
 			-- upvalues: p1 (copy), MarketplaceService (upval), LoadingRemoveRemoteCallErrorPrint (upval), BindableEvent (upval)
 			while game.PlaceId <= 0 do
 				wait()
 			end
-			local Success, Result = pcall(function() --[[ Line: 78 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: p1 (upval), MarketplaceService (upval)
 				p1.GameAssetInfo = MarketplaceService:GetProductInfoAsync(game.PlaceId)
 			end)
@@ -133,12 +133,12 @@ local Target1 = CreateFunction("TextLabel")({
 })
 local Flag = false
 local Flag1 = true
-delay(2.5, function() --[[ Line: 169 ]]
+delay(2.5, function()
 	-- upvalues: Flag1 (ref)
 	Flag1 = false
 end)
 
-local function UpdateLayout(p2: number) --[[ Line: 172 ]]
+local function UpdateLayout(p2: number)
 	-- upvalues: Target1 (copy), Frame (copy), Flag1 (ref), XOffset (ref), TweenService (copy), Flag (ref), Label (copy), v1 (copy), v2 (copy)
 	if Target1.TextBounds.X < Frame.AbsoluteSize.X then
 		Target1.Position = UDim2.new(0, 0, 0, 0)
@@ -151,7 +151,7 @@ local function UpdateLayout(p2: number) --[[ Line: 172 ]]
 			
 			if XOffsetDelta + Target1.AbsoluteSize.X < Frame.AbsoluteSize.X then
 				Flag1 = true
-				spawn(function() --[[ Line: 182 ]]
+				spawn(function()
 					-- upvalues: TweenService (upval), Target1 (upval), Flag (upval), XOffset (upval), Flag1 (upval)
 					local _TweenInfo = TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut)
 					TweenService:Create(Target1, _TweenInfo, { TextTransparency = 1 }):Play()
@@ -182,7 +182,7 @@ local function UpdateLayout(p2: number) --[[ Line: 172 ]]
 	end
 end
 
-local function _() --[[ Line: 213 | Named "CleanUp" ]]
+local function _()
 	-- upvalues: Flag (ref), FadeElements (copy), Target (copy), RunService (copy)
 	if not Flag then
 		Flag = true
@@ -195,7 +195,7 @@ local function _() --[[ Line: 213 | Named "CleanUp" ]]
 	end
 end
 
-local function OnGameInfoLoaded() --[[ Line: 226 ]]
+local function OnGameInfoLoaded()
 	-- upvalues: config (copy), Label (copy), Target1 (copy)
 	local CreatorName = config:GetCreatorName()
 	
@@ -206,7 +206,7 @@ local function OnGameInfoLoaded() --[[ Line: 226 ]]
 	Target1.Text = CreatorName
 end
 
-local function OnDefaultLoadingGuiRemoved() --[[ Line: 235 ]]
+local function OnDefaultLoadingGuiRemoved()
 	-- upvalues: Flag (ref), FadeElements (copy), Target (copy), RunService (copy)
 	if not Flag then
 		Flag = true
@@ -220,7 +220,7 @@ local function OnDefaultLoadingGuiRemoved() --[[ Line: 235 ]]
 end
 
 local CurrentTime = tick()
-RunService:BindToRenderStep("LoadingGui3D", Enum.RenderPriority.Last.Value, function() --[[ Line: 241 ]]
+RunService:BindToRenderStep("LoadingGui3D", Enum.RenderPriority.Last.Value, function()
 	-- upvalues: CurrentTime (ref), UpdateLayout (copy), Rotation (ref), v1 (copy)
 	local CurrentTime1 = tick()
 	local CurrentTimeDelta = CurrentTime1 - CurrentTime
@@ -254,9 +254,9 @@ if ReplicatedFirst:IsDefaultLoadingGuiRemoved() then
 else
 	ReplicatedFirst.RemoveDefaultLoadingGuiSignal:connect(OnDefaultLoadingGuiRemoved)
 end
-GuiService.ErrorMessageChanged:connect(function() --[[ Line: 268 ]] end)
-GuiService.UiMessageChanged:connect(function(_, _) --[[ Line: 272 ]] end)
-SplashScreenManager.addStatusChangeListener(function(p2) --[[ Line: 276 ]]
+GuiService.ErrorMessageChanged:connect(function() end)
+GuiService.UiMessageChanged:connect(function(_, _) end)
+SplashScreenManager.addStatusChangeListener(function(p2)
 	-- upvalues: Flag (ref), FadeElements (copy), Target (copy), RunService (copy)
 	if p2 then
 		if Flag then return end

@@ -17,12 +17,12 @@ local ToMediaItemModule = require(Moments.Components.Feed.Media.toMediaItem)
 local CommentsModule = require(Moments.Components.Comments)
 local MomentMediaView = require(Parent.MomentsCommon).Media.MomentMediaView
 
-local function momentAttribution(Moment) --[[ Line: 52 ]]
+local function momentAttribution(Moment)
 	-- upvalues: MakeRecommendationAttributionModule (copy)
 	return if Moment == nil then nil else MakeRecommendationAttributionModule(Moment.recommendationMetadata)
 end
 
-local function createMediaSurface(Moment) --[[ Line: 61 ]]
+local function createMediaSurface(Moment)
 	-- upvalues: ToMediaItemModule (copy), ReactModule (copy), MomentMediaView (copy), GetMomentsPreferencesStoreModule (copy)
 	local MediaItemModule = ToMediaItemModule({ kind = "moment", moment = Moment })
 	
@@ -38,17 +38,17 @@ end
 return {
 	{
 		kind = "moment",
-		getKey = function(p1) --[[ Line: 87 ]]
+		getKey = function(p1)
 			local Moment = p1.moment
 			local RecommendationMetadata = Moment.recommendationMetadata
 			
 			return if RecommendationMetadata and RecommendationMetadata.feedItemId and RecommendationMetadata.feedItemId ~= "" then RecommendationMetadata.feedItemId else Moment.momentId
 		end,
-		getAttribution = function(p1) --[[ Line: 103 ]]
+		getAttribution = function(p1)
 			-- upvalues: momentAttribution (copy)
 			return momentAttribution(p1.moment)
 		end,
-		render = function(p1, _) --[[ Line: 107 ]]
+		render = function(p1, _)
 			-- upvalues: GetFFlagMomentsRenderPostAssetsModule (copy), ToMediaItemModule (copy), ReactModule (copy), MomentMediaView (copy), GetMomentsPreferencesStoreModule (copy), FFlagMomentsAvatarLookTryOn (copy), FFlagMomentsOptimisticProfilePending (copy), MomentsTypesModule (copy), SharedFlagsModule (copy), CommentsModule (copy), MomentItemModule (copy), createMediaSurface (copy), FFlagMomentsServeEDPVideos (copy), MomentItemSkeletonModule (copy)
 			local Moment = p1.moment
 			
@@ -103,13 +103,13 @@ return {
 	},
 	{
 		kind = "skeleton",
-		getKey = function(_): string --[[ Line: 199 ]]
+		getKey = function(_): string
 			return "__feed_skeleton__"
 		end,
-		getAttribution = function(_) --[[ Line: 204 ]]
+		getAttribution = function(_)
 			return nil
 		end,
-		render = function(_, _) --[[ Line: 208 ]]
+		render = function(_, _)
 			-- upvalues: ReactModule (copy), MomentItemSkeletonModule (copy)
 			return ReactModule.createElement(MomentItemSkeletonModule)
 		end

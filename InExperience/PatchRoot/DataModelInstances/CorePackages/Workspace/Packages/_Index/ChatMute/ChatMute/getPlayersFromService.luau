@@ -1,4 +1,4 @@
-﻿return function(Text: string) --[[ Line: 7 | Named "getPlayersFromService" ]]
+﻿return function(Text: string)
 	local Players = game:GetService("Players")
 	
 	if not Text then

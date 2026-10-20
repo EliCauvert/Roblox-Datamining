@@ -2,12 +2,12 @@
 local Success = nil
 local Result = nil
 local NewResult = nil
-Success, Result = pcall(function() --[[ Line: 7 ]]
+Success, Result = pcall(function()
 	return game:GetService("LocalizationService").RobloxLocaleId
 end)
 
 return {
-	LocStringUA = function(_, p1) --[[ Line: 11 ]]
+	LocStringUA = function(_, p1)
 		-- upvalues: Success (ref), NewResult (ref), Localization (copy), Result (ref)
 		NewResult = if Success and not NewResult then Localization.new(Result) else Localization.new("en-us")
 		

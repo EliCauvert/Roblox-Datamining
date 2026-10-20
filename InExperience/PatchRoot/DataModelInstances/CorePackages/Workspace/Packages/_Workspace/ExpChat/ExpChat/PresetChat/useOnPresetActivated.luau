@@ -11,20 +11,20 @@ local FFlagExpChatPresetTrayDismissAnalyticsModule = require(ExpChat.Flags.FFlag
 local FIntPresetChatCooldownLuaMsRatio = ExpChatSharedModule.Flags.FIntPresetChatCooldownLuaMs / 1000
 local UseOnPresetActivated = ExpChatSharedModule.Logger:new("ExpChat/PresetChat/useOnPresetActivated")
 
-local function _() --[[ Line: 31 | Named "getRBXGeneralChannel" ]]
+local function _()
 	-- upvalues: TextChatService (copy)
 	local RBXGeneral = TextChatService:FindFirstChild("RBXGeneral", true)
 	
 	return if RBXGeneral and RBXGeneral:IsA("TextChannel") then RBXGeneral else nil
 end
 
-return function(p1) --[[ Line: 39 | Named "useOnPresetActivated" ]]
+return function(p1)
 	-- upvalues: GetPresetChatStoreModule (copy), ReactModule (copy), FFlagExpChatPresetTrayDismissAnalyticsModule (copy), FFlagExpChatPresetChatAutocompleteEnabledModule (copy), FIntPresetChatCooldownLuaMsRatio (copy), SendPresetModule (copy), UseOnPresetActivated (copy), TextChatService (copy), FFlagExpChatUniverseChatPresetEnabledModule (copy)
 	local PresetChatStoreModule = GetPresetChatStoreModule(false)
 	local TextChannel = p1.textChannel
 	local ClosePresetTrayFunction = p1.closePresetTray
 	
-	return ReactModule.useCallback(function(PresetId) --[[ Line: 44 ]]
+	return ReactModule.useCallback(function(PresetId)
 		-- upvalues: FFlagExpChatPresetTrayDismissAnalyticsModule (upval), PresetChatStoreModule (copy), FFlagExpChatPresetChatAutocompleteEnabledModule (upval), FIntPresetChatCooldownLuaMsRatio (upval), SendPresetModule (upval), TextChannel (copy), UseOnPresetActivated (upval), ClosePresetTrayFunction (copy), TextChatService (upval), FFlagExpChatUniverseChatPresetEnabledModule (upval)
 		if FFlagExpChatPresetTrayDismissAnalyticsModule and PresetChatStoreModule.getIsTrayOpen(false) then
 			PresetChatStoreModule.incrementPresetClickCount(PresetId)
@@ -58,7 +58,7 @@ return function(p1) --[[ Line: 39 | Named "useOnPresetActivated" ]]
 			PresetChatStoreModule.setPresetCooldownEndsAt(os.clock() + FIntPresetChatCooldownLuaMsRatio)
 			
 			if TextChannel1 then
-				if not pcall(function() --[[ Line: 105 ]]
+				if not pcall(function()
 					-- upvalues: TextChannel1 (ref), PresetId (copy)
 					TextChannel1:SendPresetAsync(PresetId)
 				end) then
@@ -72,7 +72,7 @@ return function(p1) --[[ Line: 39 | Named "useOnPresetActivated" ]]
 					
 					return
 				end
-				if not pcall(function() --[[ Line: 98 ]]
+				if not pcall(function()
 					-- upvalues: TextChatService (upval), PresetId (copy)
 					TextChatService:SendUniverseChatPresetAsync(PresetId)
 				end) then

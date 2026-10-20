@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.Parent.Types)
 local _ = require(script.Parent.Parent.Enums.Categories)
 
-return function(List) --[[ Line: 8 | Named "buildSlotCategoryLocalizationKeys" ]]
+return function(List)
 	local NameTranslationKeys = {}
 	
 	for _, value in List do

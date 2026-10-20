@@ -10,7 +10,7 @@ local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
 local _ = require(script.Parent.CheckboxFeedbackFormModal)
 local SnackbarWrapperModule = require(script.Parent.SnackbarWrapper)
 
-return ReactModule.memo(function(p1) --[[ Line: 36 | Named "ProvideFeedbackToast" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), CloseCentralOverlayFunction (copy), SnackbarWrapperModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -23,7 +23,7 @@ return ReactModule.memo(function(p1) --[[ Line: 36 | Named "ProvideFeedbackToast
 		titleText = p1.toastTitle or UseLocalizationResult.helpUsImprove,
 		icon = p1.toastIcon,
 		buttonText = p1.toastButtonText or UseLocalizationResult.giveFeedback,
-		onButtonActivated = ReactModule.useCallback(function() --[[ Line: 43 ]]
+		onButtonActivated = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy), UseDispatchResult (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval)
 			if p1.onToastActivated then
 				task.spawn(p1.onToastActivated)
@@ -34,7 +34,7 @@ return ReactModule.memo(function(p1) --[[ Line: 36 | Named "ProvideFeedbackToast
 			UseDispatchResult,
 			p1.feedbackFormProps
 		}),
-		closeSnackbar = ReactModule.useCallback(function() --[[ Line: 50 ]]
+		closeSnackbar = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy), UseDispatchResult (copy), CloseCentralOverlayFunction (upval)
 			if p1.onToastDismissed then
 				task.spawn(p1.onToastDismissed)

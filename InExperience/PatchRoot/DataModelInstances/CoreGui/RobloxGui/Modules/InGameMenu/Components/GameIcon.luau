@@ -21,7 +21,7 @@ GameIcon.validateProps = T.strictInterface({
 	AnchorPoint = T.optional(T.Vector2)
 })
 
-function GameIcon.render(p1) --[[ Line: 38 ]]
+function GameIcon.render(p1)
 	-- upvalues: GetGameIconRequestSizeModule (copy), WithFoundationOrUIBloxStyleFunction (copy), Roact (copy), AssetImageModule (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), ImageSetLabel (copy), Images (copy)
 	local IconSize: number = p1.props.iconSize
 	local GameIconRequestSizeModule = GetGameIconRequestSizeModule(IconSize)
@@ -32,7 +32,7 @@ function GameIcon.render(p1) --[[ Line: 38 ]]
 	if GameId == 0 then
 		local XOffset = if IconSize <= 44 then IconSize else 44
 		
-		return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 54 ]]
+		return WithFoundationOrUIBloxStyleFunction(function(p2)
 			return {
 				Theme = {
 					PlaceHolder = {
@@ -45,7 +45,7 @@ function GameIcon.render(p1) --[[ Line: 38 ]]
 					}
 				}
 			}
-		end, function(p2) --[[ Line: 61 ]]
+		end, function(p2)
 			-- upvalues: Roact (upval), AssetImageModule (upval), IconSize (copy), p1 (copy), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), XOffset (ref), CornerRadius (copy), ImageSetLabel (upval), Images (upval)
 			return Roact.createElement(AssetImageModule.Label, {
 				imageKey = "RoundedRect",

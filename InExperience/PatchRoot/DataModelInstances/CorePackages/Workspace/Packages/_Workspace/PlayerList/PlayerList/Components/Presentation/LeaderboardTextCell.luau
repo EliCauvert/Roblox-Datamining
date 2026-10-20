@@ -4,7 +4,7 @@ local FoundationModule = require(Parent.Foundation)
 local View = FoundationModule.View
 local Text = FoundationModule.Text
 
-return ReactModule.memo(function(p1) --[[ Line: 19 | Named "LeaderboardTextCell" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), View (copy), Text (copy)
 	return ReactModule.createElement(View, {
 		tag = "clip",

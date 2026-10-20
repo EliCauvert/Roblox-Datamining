@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.SheetShimTypes)
 local _ = require(script.Parent.getSheetStructure)
 
-return function(p1) --[[ Line: 7 | Named "readSheetContentInsets" ]]
+return function(p1)
 	local Sheet = p1.sheet
 	local Scroller = p1.scroller
 	local Container = p1.container

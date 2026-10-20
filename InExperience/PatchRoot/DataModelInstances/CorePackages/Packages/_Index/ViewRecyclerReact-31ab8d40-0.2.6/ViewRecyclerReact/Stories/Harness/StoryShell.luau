@@ -4,7 +4,7 @@ local ScenarioBannerModule = require(script.Parent.ScenarioBanner)
 local CreateElementFunction = require(ViewRecyclerReact.Parent.React).createElement
 local _UDim2 = UDim2.fromOffset(1280, 720)
 
-local function Component(p1) --[[ Line: 12 ]]
+local function Component(p1)
 	-- upvalues: CreateElementFunction (copy), _UDim2 (copy), ScenarioBannerModule (copy)
 	local IsCaptureMode = p1.captureMode == true
 	local BannerHeight = if IsCaptureMode then 44 else p1.bannerHeight or 140
@@ -66,9 +66,9 @@ end
 
 return {
 	Component = Component,
-	createStory = function(p1, p2) --[[ Line: 83 ]]
+	createStory = function(p1, p2)
 		-- upvalues: CreateElementFunction (copy), Component (copy)
-		return function(p3) --[[ Line: 84 ]]
+		return function(p3)
 			-- upvalues: CreateElementFunction (upval), Component (upval), p1 (copy), p2 (copy)
 			return CreateElementFunction(Component, {
 				acceptanceCriteria = p1.acceptanceCriteria,

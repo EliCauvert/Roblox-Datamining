@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("MobilePopularItemBadgingLayer", "Optimization.InExperienceUpsell.Mobile.UI")
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastString("MobilePopularItemBadgingLayer")
 end

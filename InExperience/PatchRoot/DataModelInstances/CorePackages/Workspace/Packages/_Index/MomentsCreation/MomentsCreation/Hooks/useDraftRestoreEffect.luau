@@ -20,12 +20,12 @@ local EventNames = MomentsCommonModule.Analytics.EventNames
 local SessionManager = MomentsCommonModule.Analytics.SessionManager
 local FunnelEventNames = MomentsCommonModule.Analytics.FunnelEventNames
 
-local function withCreationSession(p1) --[[ Line: 48 ]]
+local function withCreationSession(p1)
 	-- upvalues: SessionManager (copy), FunnelEventNames (copy), CryoModule (copy), MakeCreationEventFieldsModule (copy)
 	return CryoModule.Dictionary.join(p1, MakeCreationEventFieldsModule.makeCreationBaseFields((SessionManager.getSessionId(FunnelEventNames.FunnelTypes.CreationFlow))))
 end
 
-local function _(Tbl) --[[ Line: 55 | Named "withAvailableVoice" ]]
+local function _(Tbl)
 	-- upvalues: FFlagMomentsTTSVoiceSelectorModule (copy), VoiceCatalogModule (copy)
 	if FFlagMomentsTTSVoiceSelectorModule and VoiceCatalogModule.getVoiceById(Tbl.voiceId) ~= nil then
 		return Tbl
@@ -37,10 +37,10 @@ local function _(Tbl) --[[ Line: 55 | Named "withAvailableVoice" ]]
 	end
 end
 
-return function(p1, p2) --[[ Line: 64 | Named "useDraftRestoreEffect" ]]
+return function(p1, p2)
 	-- upvalues: GetCreationFlowStoreModule (copy), ReactModule (copy), MomentsDraftStorageModule (copy), FireAnalyticsEventModule (copy), EventNames (copy), FailureReasonModule (copy), FFlagMomentsCommentsCreatorControlModule (copy), FFlagMomentsTTSDraftRestoreModule (copy), DefaultCreationToolsModule (copy), VoiceToolModule (copy), FFlagMomentsTTSVoiceSelectorModule (copy), VoiceCatalogModule (copy), CreationFlowStateModule (copy), withCreationSession (copy)
 	local CreationFlowStoreModule = GetCreationFlowStoreModule(false)
-	ReactModule.useEffect(function() --[[ Line: 67 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p2 (copy), CreationFlowStoreModule (copy), p1 (copy), MomentsDraftStorageModule (upval), FireAnalyticsEventModule (upval), EventNames (upval), FailureReasonModule (upval), FFlagMomentsCommentsCreatorControlModule (upval), FFlagMomentsTTSDraftRestoreModule (upval), DefaultCreationToolsModule (upval), VoiceToolModule (upval), FFlagMomentsTTSVoiceSelectorModule (upval), VoiceCatalogModule (upval), CreationFlowStateModule (upval), withCreationSession (upval)
 		if p2 then return end
 		if CreationFlowStoreModule.getSelectedCapture(false) ~= nil or next(CreationFlowStoreModule.getEditsMap(false)) ~= nil then return end

@@ -8,14 +8,14 @@ local _ = require(Types.ReducerTypes)
 local GetDeepValueFunction = require(Parent1.LuaSocialLibrariesDeps).SocialLibraries.config({}).Dictionary.getDeepValue
 local t = {}
 
-return function(p1) --[[ Line: 12 ]]
+return function(p1)
 	-- upvalues: RoduxModule (copy), t (copy), GetDeepValueFunction (copy), DashModule (copy)
 	return RoduxModule.createReducer(t, {
-		[p1.networkingContacts.UploadContactsByUser.Succeeded.name] = function(_, p2) --[[ Line: 16 ]]
+		[p1.networkingContacts.UploadContactsByUser.Succeeded.name] = function(_, p2)
 			-- upvalues: GetDeepValueFunction (upval), DashModule (upval)
 			if GetDeepValueFunction(p2, "responseBody.matchedContactFields") then
 				local t = {}
-				DashModule.forEach(p2.responseBody.matchedContactFields, function(p3) --[[ Line: 27 ]]
+				DashModule.forEach(p2.responseBody.matchedContactFields, function(p3)
 					-- upvalues: t (copy)
 					if not t[p3.idAssignedByFE] then
 						t[p3.idAssignedByFE] = {}

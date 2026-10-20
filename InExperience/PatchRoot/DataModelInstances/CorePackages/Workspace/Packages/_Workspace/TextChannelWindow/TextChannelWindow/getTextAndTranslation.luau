@@ -1,7 +1,7 @@
 ﻿local GetFFlagExpChatProtectedChatInternalAPIsFunction = require(script.Parent.Parent.SharedFlags).getFFlagExpChatProtectedChatInternalAPIs
 local IsWhitespaceOnlyModule = require(script.Parent.isWhitespaceOnly)
 
-return function(TextChatMessage) --[[ Line: 5 | Named "getTextAndTranslation" ]]
+return function(TextChatMessage)
 	-- upvalues: GetFFlagExpChatProtectedChatInternalAPIsFunction (copy), IsWhitespaceOnlyModule (copy)
 	local TextInternal = if GetFFlagExpChatProtectedChatInternalAPIsFunction() then TextChatMessage.TextInternal else TextChatMessage.Text
 	local TranslationInternal = if GetFFlagExpChatProtectedChatInternalAPIsFunction() then TextChatMessage.TranslationInternal else TextChatMessage.Translation

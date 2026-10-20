@@ -2,7 +2,7 @@
 local AgeCheckUpsellDismissedDataModule = require(script.Parent.AgeCheckUpsellDismissedData)
 local t = {}
 
-local function _(Key) --[[ Line: 15 | Named "getOrCreate" ]]
+local function _(Key)
 	-- upvalues: t (copy), SignalsModule (copy)
 	local Entry = t[Key]
 	
@@ -15,7 +15,7 @@ local function _(Key) --[[ Line: 15 | Named "getOrCreate" ]]
 end
 
 return {
-	getIsAgeCheckUpsellRendered = function(p1, Key) --[[ Line: 32 ]]
+	getIsAgeCheckUpsellRendered = function(p1, Key)
 		-- upvalues: AgeCheckUpsellDismissedDataModule (copy), t (copy), SignalsModule (copy)
 		if Key == nil or Key == "" then
 			return false
@@ -32,7 +32,7 @@ return {
 		end
 		return Entry.get(p1)
 	end,
-	setAgeCheckUpsellRendered = function(Key, p1) --[[ Line: 25 ]]
+	setAgeCheckUpsellRendered = function(Key, p1)
 		-- upvalues: t (copy), SignalsModule (copy)
 		if Key == nil or Key == "" then return end
 		local Entry = t[Key]

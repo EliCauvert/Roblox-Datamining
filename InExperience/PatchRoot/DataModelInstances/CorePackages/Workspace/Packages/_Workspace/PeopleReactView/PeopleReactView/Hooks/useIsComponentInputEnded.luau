@@ -1,24 +1,24 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("PeopleReactView").Parent.React)
 
-return function(p1) --[[ Line: 10 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 13 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult2 (copy)
 		local Connection = nil
 		local Connection1 = nil
 		
 		if p1.current then
-			Connection = p1.current.InputBegan:Connect(function() --[[ Line: 18 ]]
+			Connection = p1.current.InputBegan:Connect(function()
 				-- upvalues: UseStateResult2 (upval)
 				UseStateResult2(false)
 			end)
-			Connection1 = p1.current.InputEnded:Connect(function() --[[ Line: 21 ]]
+			Connection1 = p1.current.InputEnded:Connect(function()
 				-- upvalues: UseStateResult2 (upval)
 				UseStateResult2(true)
 			end)
 		end
-		return function() --[[ Line: 26 ]]
+		return function()
 			-- upvalues: Connection (ref), Connection1 (ref)
 			if Connection then
 				Connection:Disconnect()

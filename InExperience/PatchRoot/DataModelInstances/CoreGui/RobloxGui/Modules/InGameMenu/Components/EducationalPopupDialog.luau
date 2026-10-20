@@ -32,9 +32,9 @@ EducationalPopupDialog.validateProps = T.strictInterface({
 })
 EducationalPopupDialog.defaultProps = { blurBackground = false }
 
-function EducationalPopupDialog.render(p1) --[[ Line: 47 ]]
+function EducationalPopupDialog.render(p1)
 	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), Roact (copy), CoreGui (copy), EducationalModal (copy)
-	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 48 ]]
+	return WithFoundationOrUIBloxStyleFunction(function(p2)
 		return {
 			Theme = {
 				Overlay = {
@@ -43,7 +43,7 @@ function EducationalPopupDialog.render(p1) --[[ Line: 47 ]]
 				}
 			}
 		}
-	end, function(p2) --[[ Line: 54 ]]
+	end, function(p2)
 		-- upvalues: Roact (upval), CoreGui (upval), p1 (copy), EducationalModal (upval)
 		return Roact.createElement(Roact.Portal, { target = CoreGui }, {
 			InGameMenuEducationalPopupDialog = Roact.createElement("ScreenGui", {
@@ -76,9 +76,9 @@ function EducationalPopupDialog.render(p1) --[[ Line: 47 ]]
 	end)
 end
 
-function EducationalPopupDialog.bindActions(p1) --[[ Line: 89 ]]
+function EducationalPopupDialog.bindActions(p1)
 	-- upvalues: ContextActionService (copy)
-	ContextActionService:BindCoreAction("EducationalPopupConfirm", function(_, UserInputState, _) --[[ Line: 90 | Named "dismissFunc" ]]
+	ContextActionService:BindCoreAction("EducationalPopupConfirm", function(_, UserInputState, _)
 		-- upvalues: p1 (copy)
 		if UserInputState == Enum.UserInputState.Begin then
 			p1.props.onDismiss()
@@ -86,17 +86,17 @@ function EducationalPopupDialog.bindActions(p1) --[[ Line: 89 ]]
 	end, false, Enum.KeyCode.Escape)
 end
 
-function EducationalPopupDialog:unbindActions() --[[ Line: 99 ]]
+function EducationalPopupDialog:unbindActions()
 	-- upvalues: ContextActionService (copy)
 	ContextActionService:UnbindCoreAction("EducationalPopupConfirm")
 end
 
-function EducationalPopupDialog.updateBlur(p1) --[[ Line: 103 ]]
+function EducationalPopupDialog.updateBlur(p1)
 	-- upvalues: RunService (copy)
 	RunService:SetRobloxGuiFocused(p1.props.blurBackground and p1.props.visible and not game:GetService("VRService").VREnabled)
 end
 
-function EducationalPopupDialog.didMount(p1) --[[ Line: 110 ]]
+function EducationalPopupDialog.didMount(p1)
 	p1:updateBlur()
 	
 	if p1.props.visible then
@@ -104,7 +104,7 @@ function EducationalPopupDialog.didMount(p1) --[[ Line: 110 ]]
 	end
 end
 
-function EducationalPopupDialog.didUpdate(p1) --[[ Line: 118 ]]
+function EducationalPopupDialog.didUpdate(p1)
 	p1:updateBlur()
 	
 	if p1.props.visible then
@@ -116,7 +116,7 @@ function EducationalPopupDialog.didUpdate(p1) --[[ Line: 118 ]]
 	end
 end
 
-function EducationalPopupDialog.willUnmount(p1) --[[ Line: 128 ]]
+function EducationalPopupDialog.willUnmount(p1)
 	-- upvalues: RunService (copy)
 	if p1.props.blurBackground then
 		RunService:SetRobloxGuiFocused(false)

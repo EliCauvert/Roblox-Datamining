@@ -10,11 +10,11 @@ local NavProps = require(AppChat.Constants).NavProps
 local QuickStartSquadInviteFriendsContainerModule = require(Parent.Squads.QuickStartSquadInviteFriendsContainer)
 local QuickStartSquadInviteFriendsScreen = ReactModule.PureComponent:extend("QuickStartSquadInviteFriendsScreen")
 
-function QuickStartSquadInviteFriendsScreen:navigationOptions() --[[ Line: 19 ]]
+function QuickStartSquadInviteFriendsScreen:navigationOptions()
 	return { backButtonEnabled = true }
 end
 
-function QuickStartSquadInviteFriendsScreen.init(p1) --[[ Line: 25 ]]
+function QuickStartSquadInviteFriendsScreen.init(p1)
 	-- upvalues: NavProps (copy), GetTopBarStoreModule (copy), EnumScreensModule (copy), ResetForSquadLobbyForWideModeModule (copy), ResetForSquadLobbyForCompactModeModule (copy)
 	p1.wideMode = p1.props.navigation.getScreenProps(NavProps.WIDE_MODE, false)
 	GetTopBarStoreModule(false).setScreenTopBar(EnumScreensModule.QuickStartSquadInviteFriends, {
@@ -26,7 +26,7 @@ function QuickStartSquadInviteFriendsScreen.init(p1) --[[ Line: 25 ]]
 		}
 	})
 	
-	function p1.navigateIntoSquadLobby(p2) --[[ Line: 37 ]]
+	function p1.navigateIntoSquadLobby(p2)
 		-- upvalues: p1 (copy), NavProps (upval), ResetForSquadLobbyForWideModeModule (upval), ResetForSquadLobbyForCompactModeModule (upval)
 		local PartyAttemptIdParam = p1.props.navigation.getParam("partyAttemptId", nil)
 		
@@ -39,7 +39,7 @@ function QuickStartSquadInviteFriendsScreen.init(p1) --[[ Line: 25 ]]
 		end
 	end
 	
-	function p1.onSelectedFriendsChanged(SystemButtonEnabled, SystemButtonActivated) --[[ Line: 51 ]]
+	function p1.onSelectedFriendsChanged(SystemButtonEnabled, SystemButtonActivated)
 		-- upvalues: p1 (copy), GetTopBarStoreModule (upval), EnumScreensModule (upval)
 		if p1.wideMode then
 			GetTopBarStoreModule(false).setScreenTopBar(EnumScreensModule.QuickStartSquadInviteFriends, {
@@ -52,7 +52,7 @@ function QuickStartSquadInviteFriendsScreen.init(p1) --[[ Line: 25 ]]
 	end
 end
 
-function QuickStartSquadInviteFriendsScreen.render(p1) --[[ Line: 63 ]]
+function QuickStartSquadInviteFriendsScreen.render(p1)
 	-- upvalues: ArgCheckModule (copy), ReactModule (copy), QuickStartSquadInviteFriendsContainerModule (copy)
 	local NavigationInCreateNewChatScreen = ArgCheckModule.isNotNil(p1.props.navigation, "navigation in CreateNewChatScreen")
 	local TopBarHeightScreenProps = NavigationInCreateNewChatScreen.getScreenProps("topBarHeight", 0)
@@ -70,7 +70,7 @@ function QuickStartSquadInviteFriendsScreen.render(p1) --[[ Line: 63 ]]
 	})
 end
 
-function QuickStartSquadInviteFriendsScreen.didMount(p1) --[[ Line: 81 ]]
+function QuickStartSquadInviteFriendsScreen.didMount(p1)
 	if p1.wideMode then
 		p1.onSelectedFriendsChanged(false, nil)
 	end

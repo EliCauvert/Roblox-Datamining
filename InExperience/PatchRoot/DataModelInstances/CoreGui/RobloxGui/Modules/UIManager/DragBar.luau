@@ -2,15 +2,15 @@
 local DragBarModule = {}
 DragBarModule.__index = DragBarModule
 
-function DragBarModule:getCFrame() --[[ Line: 33 ]]
+function DragBarModule:getCFrame()
 	return self.part.CFrame
 end
 
-function DragBarModule:setCFrame(p1) --[[ Line: 37 ]]
+function DragBarModule:setCFrame(p1)
 	self.part.CFrame = p1
 end
 
-function DragBarModule:updateTransparency() --[[ Line: 41 ]]
+function DragBarModule:updateTransparency()
 	if self.dragBarState == "Hovering" then
 		self.dragBarImage.ImageTransparency = 0.2
 		
@@ -25,7 +25,7 @@ function DragBarModule:updateTransparency() --[[ Line: 41 ]]
 	end
 end
 
-function DragBarModule:updateState() --[[ Line: 51 ]]
+function DragBarModule:updateState()
 	if self.dragging then
 		self.dragBarState = "Dragging"
 	elseif self.hovering and not self.dragging then
@@ -36,36 +36,36 @@ function DragBarModule:updateState() --[[ Line: 51 ]]
 	self:updateTransparency()
 end
 
-function DragBarModule:startDrag(UiGroupOffSet) --[[ Line: 62 ]]
+function DragBarModule:startDrag(UiGroupOffSet)
 	self.dragging = true
 	self.uiGroupOffSet = UiGroupOffSet
 	self:updateState()
 end
 
-function DragBarModule:dragEnd() --[[ Line: 68 ]]
+function DragBarModule:dragEnd()
 	self.dragging = false
 	self:updateState()
 end
 
-function DragBarModule:startHover() --[[ Line: 73 ]]
+function DragBarModule:startHover()
 	self.hovering = true
 	self:updateState()
 end
 
-function DragBarModule:hoverEnd() --[[ Line: 78 ]]
+function DragBarModule:hoverEnd()
 	self.hovering = false
 	self:updateState()
 end
 
-function DragBarModule:show() --[[ Line: 83 ]]
+function DragBarModule:show()
 	self.part.Parent = self.partsParent
 end
 
-function DragBarModule:hide() --[[ Line: 87 ]]
+function DragBarModule:hide()
 	self.part.Parent = nil
 end
 
-function DragBarModule:rescale(p1) --[[ Line: 91 ]]
+function DragBarModule:rescale(p1)
 	-- upvalues: UtilsModule (copy)
 	self.part.Size *= p1
 	
@@ -74,7 +74,7 @@ function DragBarModule:rescale(p1) --[[ Line: 91 ]]
 	end
 end
 
-function DragBarModule.new(Part, DragBarImage) --[[ Line: 98 ]]
+function DragBarModule.new(Part, DragBarImage)
 	-- upvalues: DragBarModule (copy)
 	local config = {
 		hovering = false,

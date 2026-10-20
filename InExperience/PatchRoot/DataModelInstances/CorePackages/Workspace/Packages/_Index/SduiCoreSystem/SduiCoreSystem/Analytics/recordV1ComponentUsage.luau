@@ -1,6 +1,6 @@
 ﻿local SduiUsageRecorderModule = require(script:FindFirstAncestor("SduiCoreSystem").Analytics.SduiUsageRecorder)
 
-local function recordV1ComponentUsage(p1, p2) --[[ Line: 21 ]]
+local function recordV1ComponentUsage(p1, p2)
 	-- upvalues: SduiUsageRecorderModule (copy), recordV1ComponentUsage (copy)
 	if not p2 then return end
 	local IsTypeSamplingEnabled = SduiUsageRecorderModule.isTypeSamplingEnabled()
@@ -15,7 +15,7 @@ local function recordV1ComponentUsage(p1, p2) --[[ Line: 21 ]]
 	end
 	local Callback = nil
 	
-	local function visitValueForActions(List) --[[ Line: 45 ]]
+	local function visitValueForActions(List)
 		-- upvalues: Callback (ref), visitValueForActions (copy)
 		if typeof(List) ~= "table" then return end
 		if typeof(List.actionType) == "string" then
@@ -30,7 +30,7 @@ local function recordV1ComponentUsage(p1, p2) --[[ Line: 21 ]]
 		end
 	end
 	
-	Callback = function(p3) --[[ Line: 60 | Named "recordActionConfig" ]]
+	Callback = function(p3)
 		-- upvalues: IsTypeSamplingEnabled (copy), SduiUsageRecorderModule (upval), p1 (copy), IsParamSamplingEnabled (copy), visitValueForActions (copy)
 		local ActionType = p3.actionType
 		
@@ -49,7 +49,7 @@ local function recordV1ComponentUsage(p1, p2) --[[ Line: 21 ]]
 		end
 	end
 	
-	local function walkProps(PropOverrides) --[[ Line: 80 ]]
+	local function walkProps(PropOverrides)
 		-- upvalues: IsParamSamplingEnabled (copy), SduiUsageRecorderModule (upval), p1 (copy), ComponentType (copy), visitValueForActions (copy)
 		if typeof(PropOverrides) ~= "table" then return end
 		for i, propOverride in PropOverrides do

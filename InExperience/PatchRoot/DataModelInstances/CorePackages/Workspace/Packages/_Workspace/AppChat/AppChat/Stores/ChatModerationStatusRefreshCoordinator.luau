@@ -6,13 +6,13 @@ local Flag = false
 local Generation = 0
 local Callback = nil
 
-local function _() --[[ Line: 30 | Named "completeRequest" ]]
+local function _()
 	-- upvalues: Flag (ref), Callback (ref)
 	Flag = false
 	Callback()
 end
 
-Callback = function() --[[ Line: 40 ]]
+Callback = function()
 	-- upvalues: Flag (ref), List (copy), Callback (ref), PromiseModule (copy)
 	if Flag then return end
 	local Removed = table.remove(List, 1)
@@ -22,12 +22,12 @@ Callback = function() --[[ Line: 40 ]]
 	end
 	if Removed then
 		Flag = true
-		PromiseModule.try(Removed.request):andThen(function(Result) --[[ Line: 58 ]]
+		PromiseModule.try(Removed.request):andThen(function(Result)
 			-- upvalues: Removed (copy), Flag (upval), Callback (upval)
 			Removed.resolve(Result)
 			Flag = false
 			Callback()
-		end, function(p1) --[[ Line: 63 ]]
+		end, function(p1)
 			-- upvalues: Removed (copy), Flag (upval), Callback (upval)
 			Removed.reject(p1)
 			Flag = false
@@ -39,19 +39,19 @@ Callback = function() --[[ Line: 40 ]]
 end
 
 return {
-	createOwner = function() --[[ Line: 77 ]]
+	createOwner = function()
 		return { cancelled = false }
 	end,
-	cancelOwner = function(p1) --[[ Line: 82 ]]
+	cancelOwner = function(p1)
 		p1.cancelled = true
 	end,
-	enqueue = function(Owner, Request) --[[ Line: 85 ]]
+	enqueue = function(Owner, Request)
 		-- upvalues: Generation (ref), PromiseModule (copy), List (copy), Callback (ref)
 		Generation += 1
 		
 		return {
 			generation = Generation,
-			promise = PromiseModule.new(function(Resolve, Reject) --[[ Line: 89 ]]
+			promise = PromiseModule.new(function(Resolve, Reject)
 				-- upvalues: List (upval), Owner (copy), Request (copy), Callback (upval)
 				table.insert(List, {
 					owner = Owner,
@@ -63,7 +63,7 @@ return {
 			end)
 		}
 	end,
-	isLatestGeneration = function(Generation1): boolean --[[ Line: 105 ]]
+	isLatestGeneration = function(Generation1): boolean
 		-- upvalues: Generation (ref)
 		return Generation1 == Generation
 	end

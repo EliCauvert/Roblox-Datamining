@@ -8,7 +8,7 @@ local RemovedConversationModule = require(AppChat.Conversations.Actions.RemovedC
 local EnumScreensModule = require(AppChat.EnumScreens)
 local GroupOSADialogModule = require(script.Parent.GroupOSADialog)
 
-return function() --[[ Line: 15 | Named "GroupOSADialogScreen" ]]
+return function()
 	-- upvalues: UseNavigationFunction (copy), UseDispatchFunction (copy), ReactModule (copy), APIFunction (copy), EnumScreensModule (copy), RemovedConversationModule (copy), GroupOSADialogModule (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseDispatchResult = UseDispatchFunction()
@@ -16,13 +16,13 @@ return function() --[[ Line: 15 | Named "GroupOSADialogScreen" ]]
 	
 	return ReactModule.createElement(GroupOSADialogModule, {
 		conversationId = ConversationIdParam,
-		onClose = ReactModule.useCallback(function() --[[ Line: 22 ]]
+		onClose = ReactModule.useCallback(function()
 			-- upvalues: UseNavigationResult (copy)
 			if UseNavigationResult.isFocused() then
 				UseNavigationResult.goBack()
 			end
 		end, { UseNavigationResult }),
-		onJoin = ReactModule.useCallback(function() --[[ Line: 28 ]]
+		onJoin = ReactModule.useCallback(function()
 			-- upvalues: ConversationIdParam (copy), UseDispatchResult (copy), APIFunction (upval), UseNavigationResult (copy), EnumScreensModule (upval)
 			if ConversationIdParam then
 				UseDispatchResult(APIFunction(ConversationIdParam))
@@ -36,7 +36,7 @@ return function() --[[ Line: 15 | Named "GroupOSADialogScreen" ]]
 			ConversationIdParam,
 			UseDispatchResult
 		}),
-		onDecline = ReactModule.useCallback(function() --[[ Line: 39 ]]
+		onDecline = ReactModule.useCallback(function()
 			-- upvalues: ConversationIdParam (copy), UseDispatchResult (copy), RemovedConversationModule (upval), UseNavigationResult (copy)
 			if ConversationIdParam then
 				UseDispatchResult(RemovedConversationModule(ConversationIdParam))

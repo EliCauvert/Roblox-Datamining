@@ -23,16 +23,16 @@ local StateLayer = {
 	affordance = FoundationModule.Enums.StateLayerAffordance.None
 }
 
-local function v20() --[[ Line: 35 ]] end
+local function v20() end
 
-local function _(Frame: Frame, Vector): boolean --[[ Line: 37 | Named "isPositionInsideGuiObject" ]]
+local function _(Frame: Frame, Vector): boolean
 	local AbsolutePosition = Frame.AbsolutePosition
 	local AbsoluteSize = Frame.AbsoluteSize
 	
 	return AbsolutePosition.X <= Vector.X and (Vector.X <= AbsolutePosition.X + AbsoluteSize.X and AbsolutePosition.Y <= Vector.Y) and Vector.Y <= AbsolutePosition.Y + AbsoluteSize.Y
 end
 
-local function isPositionOnMenu(Frame: Frame, Vector): boolean --[[ Line: 47 ]]
+local function isPositionOnMenu(Frame: Frame, Vector): boolean
 	local AbsolutePosition = Frame.AbsolutePosition
 	local AbsoluteSize = Frame.AbsoluteSize
 	
@@ -52,7 +52,7 @@ local function isPositionOnMenu(Frame: Frame, Vector): boolean --[[ Line: 47 ]]
 	return false
 end
 
-local function isPositionOnRow(Frame: Frame, Vector): boolean --[[ Line: 64 ]]
+local function isPositionOnRow(Frame: Frame, Vector): boolean
 	local AbsolutePosition = Frame.AbsolutePosition
 	local AbsoluteSize = Frame.AbsoluteSize
 	
@@ -76,12 +76,12 @@ local function isPositionOnRow(Frame: Frame, Vector): boolean --[[ Line: 64 ]]
 	return true
 end
 
-local _ = function(): boolean --[[ Line: 82 | Named "isGamepad" ]]
+local _ = function(): boolean
 	-- upvalues: UserInputService (copy)
 	return UserInputService:GetLastInputType().Name:find("Gamepad") ~= nil
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 86 | Named "PlayerContextualMenuView" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: SignalsReactModule (copy), PlayerContextualMenuStoreModule (copy), UseTokensFunction (copy), UsePreferredBackgroundStyleModule (copy), ReactModule (copy), UseSlideOpenCloseAnimationFunction (copy), MENUSLIDECONFIG (copy), UserInputService (copy), ContextActionService (copy), isPositionOnMenu (copy), isPositionOnRow (copy), GuiService (copy), MENUZOOMCLOSEDSCALE (copy), PlayerContextMenuHeaderModule (copy), Divider (copy), MenuActionRowModule (copy), ConstantsModule (copy), View (copy), BackgroundStyle (copy), v20 (copy), StateLayer (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(PlayerContextualMenuStoreModule.getMenuData)
 	local UseTokensResult = UseTokensFunction()
@@ -97,11 +97,11 @@ return ReactModule.memo(function(p1) --[[ Line: 86 | Named "PlayerContextualMenu
 	local UseRefResult2 = ReactModule.useRef(nil)
 	local ContextActionServiceOverride = p1.contextActionServiceOverride
 	local HasGamepad = if p1.isGamepadOverride == nil then UserInputService:GetLastInputType().Name:find("Gamepad") ~= nil else p1.isGamepadOverride
-	ReactModule.useEffect(function() --[[ Line: 124 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), HasUseSignalStateResult (copy), ContextActionServiceOverride (copy), ContextActionService (upval), PlayerContextualMenuStoreModule (upval)
 		if p1.isSmallTouchDevice and HasUseSignalStateResult then
 			local ContextActionServiceOverride1 = ContextActionServiceOverride or ContextActionService
-			ContextActionServiceOverride1:BindCoreAction("RbxPlayerListReskinGamepadMenuClose", function(_, UserInputState, _) --[[ Line: 129 ]]
+			ContextActionServiceOverride1:BindCoreAction("RbxPlayerListReskinGamepadMenuClose", function(_, UserInputState, _)
 				-- upvalues: PlayerContextualMenuStoreModule (upval)
 				if UserInputState == Enum.UserInputState.Begin then
 					PlayerContextualMenuStoreModule.closeContextMenu()
@@ -112,12 +112,12 @@ return ReactModule.memo(function(p1) --[[ Line: 86 | Named "PlayerContextualMenu
 				end
 			end, false, Enum.KeyCode.ButtonB)
 			
-			return function() --[[ Line: 136 ]]
+			return function()
 				-- upvalues: ContextActionServiceOverride1 (copy)
 				ContextActionServiceOverride1:UnbindCoreAction("RbxPlayerListReskinGamepadMenuClose")
 			end
 		else
-			return function() --[[ Line: 126 ]] end
+			return function() end
 		end
 	end, {
 		HasUseSignalStateResult,
@@ -125,10 +125,10 @@ return ReactModule.memo(function(p1) --[[ Line: 86 | Named "PlayerContextualMenu
 		ContextActionServiceOverride
 	})
 	local UserInputServiceOverride = p1.userInputServiceOverride
-	ReactModule.useEffect(function() --[[ Line: 144 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: HasUseSignalStateResult (copy), UserInputServiceOverride (copy), UserInputService (upval), UseRefResult1 (copy), isPositionOnMenu (upval), p1 (copy), PlayerContextualMenuStoreModule (upval), isPositionOnRow (upval)
 		if HasUseSignalStateResult then
-			local InputBeganConnection = (UserInputServiceOverride or UserInputService).InputBegan:Connect(function(Input) --[[ Line: 149 ]]
+			local InputBeganConnection = (UserInputServiceOverride or UserInputService).InputBegan:Connect(function(Input)
 				-- upvalues: UseRefResult1 (upval), isPositionOnMenu (upval), p1 (upval), PlayerContextualMenuStoreModule (upval), isPositionOnRow (upval)
 				local UserInputType = Input.UserInputType
 				
@@ -144,35 +144,35 @@ return ReactModule.memo(function(p1) --[[ Line: 86 | Named "PlayerContextualMenu
 				PlayerContextualMenuStoreModule.closeContextMenu()
 			end)
 			
-			return function() --[[ Line: 169 ]]
+			return function()
 				-- upvalues: InputBeganConnection (copy)
 				InputBeganConnection:Disconnect()
 			end
 		else
-			return function() --[[ Line: 146 ]] end
+			return function() end
 		end
 	end, {
 		HasUseSignalStateResult,
 		UserInputServiceOverride,
 		p1.isSmallTouchDevice
 	})
-	ReactModule.useEffect(function() --[[ Line: 174 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), HasUseSignalStateResult (copy), HasGamepad (copy), UseRefResult2 (copy), GuiService (upval)
 		if not p1.isSmallTouchDevice or not HasUseSignalStateResult or not HasGamepad then
-			return function() --[[ Line: 176 ]] end
+			return function() end
 		end
 		if UseRefResult2.current then
 			GuiService.SelectedCoreObject = UseRefResult2.current
 		end
-		return function() --[[ Line: 181 ]] end
+		return function() end
 	end, {
 		HasUseSignalStateResult,
 		p1.isSmallTouchDevice,
 		HasGamepad
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 184 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), UseSlideOpenCloseAnimationResult (copy), MENUZOOMCLOSEDSCALE (upval)
-		return if p1.isSmallTouchDevice then UseSlideOpenCloseAnimationResult.offset:map(function(p2): number --[[ Line: 188 ]]
+		return if p1.isSmallTouchDevice then UseSlideOpenCloseAnimationResult.offset:map(function(p2): number
 			-- upvalues: MENUZOOMCLOSEDSCALE (upval)
 			return 1 + (MENUZOOMCLOSEDSCALE - 1) * p2
 		end) else nil
@@ -180,12 +180,12 @@ return ReactModule.memo(function(p1) --[[ Line: 86 | Named "PlayerContextualMenu
 		p1.isSmallTouchDevice,
 		UseSlideOpenCloseAnimationResult.offset
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 193 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), UseTokensResult (copy), UseSlideOpenCloseAnimationResult (copy)
 		if p1.isSmallTouchDevice then
 			local Transparency = UseTokensResult.Color.Stroke.Default.Transparency
 			
-			return UseSlideOpenCloseAnimationResult.offset:map(function(p2): number --[[ Line: 198 ]]
+			return UseSlideOpenCloseAnimationResult.offset:map(function(p2): number
 				-- upvalues: Transparency (copy)
 				return Transparency + (1 - Transparency) * p2
 			end)

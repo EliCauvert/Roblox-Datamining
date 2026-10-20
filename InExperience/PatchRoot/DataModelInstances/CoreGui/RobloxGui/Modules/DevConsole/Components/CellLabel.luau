@@ -5,7 +5,7 @@ local Text = ConstantsModule.Color.Text
 local MainWindow1 = ConstantsModule.Font.MainWindow
 local MainWindowBold = ConstantsModule.Font.MainWindowBold
 
-return function(p1) --[[ Line: 21 | Named "CellLabel" ]]
+return function(p1)
 	-- upvalues: RoactModule (copy), MainWindow (copy), Text (copy), MainWindowBold (copy), MainWindow1 (copy)
 	return RoactModule.createElement("TextLabel", {
 		BackgroundTransparency = 1,

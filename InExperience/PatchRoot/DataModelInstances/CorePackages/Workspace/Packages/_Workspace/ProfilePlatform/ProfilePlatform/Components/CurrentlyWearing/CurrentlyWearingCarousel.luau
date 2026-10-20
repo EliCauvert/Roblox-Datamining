@@ -34,7 +34,7 @@ local SocialProfileCurrentlyWearingClickThroughLayer = game:DefineFastString("So
 local FFlagProfilePlatformEnableBundlesInAssetsCarousel = require(Parent.SharedFlags).FFlagProfilePlatformEnableBundlesInAssetsCarousel
 local AssetsCarouselModule = require(ProfilePlatform.Components.AssetsCarousel)
 
-return function(p1) --[[ Line: 53 | Named "CurrentlyWearingCarousel" ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), FFlagProfilePlatformEnableInventory (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseMarketplaceAnalyticsContextModule (copy), FFlagAddIEMProfilePage (copy), FFlagProfileInspectAvatarCWEntryModule (copy), UseLocalUserIdFunction (copy), EnumsModule (copy), UseNavigationFunction (copy), ReactModule (copy), GetInspectAvatarTooltipStoreModule (copy), FFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module (copy), EventNamesModule (copy), FFlagProfilePlatformEnableBundlesInAssetsCarousel (copy), IXPService (copy), SocialProfileCurrentlyWearingClickThroughLayer (copy), FFlagProfilePlatformEnableStore (copy), FFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule (copy), UseProfileJsonComponentModule (copy), ConstantsModule (copy), UseSelectorFunction (copy), NetworkingCatalogModule (copy), CryoModule (copy), UseEffectOnMountFunction (copy), NetworkingCurrentlyWearingModule (copy), SortCurrentlyWearingModule (copy), AssetsCarouselModule (copy), FFlagAXEnableProfileTab (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
@@ -46,7 +46,7 @@ return function(p1) --[[ Line: 53 | Named "CurrentlyWearingCarousel" ]]
 	local IsTextMatch = if FFlagProfileInspectAvatarCWEntryModule then tostring(UseProfileWrapperContextModuleResult.profileId) == tostring(UseLocalUserIdResult) else nil
 	local IsNotSourceMatch: boolean = FFlagProfileInspectAvatarCWEntryModule and (not IsTextMatch and Source ~= EnumsModule.Sources.InExperienceProfile)
 	local UseNavigationResult = if FFlagProfileInspectAvatarCWEntryModule then UseNavigationFunction() else nil
-	local UseResult = if FFlagProfileInspectAvatarCWEntryModule then ReactModule.useCallback(function() --[[ Line: 78 ]]
+	local UseResult = if FFlagProfileInspectAvatarCWEntryModule then ReactModule.useCallback(function()
 		-- upvalues: GetInspectAvatarTooltipStoreModule (upval), FFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module (upval), UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), UseNavigationResult (copy), EnumsModule (upval)
 		GetInspectAvatarTooltipStoreModule(false).permanentlyDismiss()
 		
@@ -58,7 +58,7 @@ return function(p1) --[[ Line: 53 | Named "CurrentlyWearingCarousel" ]]
 		UseNavigationResult,
 		if FFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then UseProfileAnalyticsContextModuleResult else nil
 	}) else nil
-	local UseResult1 = ReactModule.useCallback(function(p2, p3, _, _, p4) --[[ Line: 93 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2, p3, _, _, p4)
 		-- upvalues: FFlagAddIEMProfilePage (upval), Source (copy), EnumsModule (upval), UseProfileWrapperContextModuleResult (copy), FFlagProfilePlatformEnableBundlesInAssetsCarousel (upval), IXPService (upval), SocialProfileCurrentlyWearingClickThroughLayer (upval), FFlagProfilePlatformEnableStore (upval), UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), FFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule (upval), UseMarketplaceAnalyticsContextModuleResult (copy)
 		if FFlagAddIEMProfilePage and Source == EnumsModule.Sources.InExperienceProfile then
 			UseProfileWrapperContextModuleResult.navigateTo.inspectAvatar()
@@ -102,7 +102,7 @@ return function(p1) --[[ Line: 53 | Named "CurrentlyWearingCarousel" ]]
 	local UseMemoResult = nil
 	
 	if FFlagProfilePlatformEnableBundlesInAssetsCarousel then
-		v1 = UseSelectorFunction((ReactModule.useCallback(function(p2) --[[ Line: 151 ]]
+		v1 = UseSelectorFunction((ReactModule.useCallback(function(p2)
 			-- upvalues: ConstantsModule (upval), Assets (copy), EnumsModule (upval)
 			local BundleDetails = p2[ConstantsModule.RODUX_KEY].BundleDetails or {}
 			local AssetDetails = p2[ConstantsModule.RODUX_KEY].AssetDetails or {}
@@ -120,28 +120,28 @@ return function(p1) --[[ Line: 53 | Named "CurrentlyWearingCarousel" ]]
 			end
 			return t
 		end, { Assets })))
-		ReactModule.useEffect(function() --[[ Line: 174 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: Assets (copy), UseDispatchResult (copy), NetworkingCatalogModule (upval)
 			if #Assets > 0 then
 				UseDispatchResult(NetworkingCatalogModule.GetItemAndBundleDetails.API(Assets))
 			end
 		end, { Assets, UseDispatchResult })
 	else
-		local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 180 ]]
+		local UseMemoResult1 = ReactModule.useMemo(function()
 			-- upvalues: CryoModule (upval), Assets (copy)
-			return CryoModule.List.map(Assets, function(p3) --[[ Line: 181 ]]
+			return CryoModule.List.map(Assets, function(p3)
 				return p3.assetId
 			end)
 		end, { Assets })
-		UseEffectOnMountFunction(function() --[[ Line: 186 ]]
+		UseEffectOnMountFunction(function()
 			-- upvalues: UseDispatchResult (copy), NetworkingCurrentlyWearingModule (upval), UseMemoResult1 (copy)
-			UseDispatchResult(NetworkingCurrentlyWearingModule.GetItemDetails.API(UseMemoResult1)):andThen(function(_) --[[ Line: 188 ]] end):catch(function(_) --[[ Line: 189 ]] end)
+			UseDispatchResult(NetworkingCurrentlyWearingModule.GetItemDetails.API(UseMemoResult1)):andThen(function(_) end):catch(function(_) end)
 		end)
-		local UseSelectorResult = UseSelectorFunction(function(p3) --[[ Line: 194 ]]
+		local UseSelectorResult = UseSelectorFunction(function(p3)
 			-- upvalues: ConstantsModule (upval)
 			return p3[ConstantsModule.RODUX_KEY].ItemAssets or {}
 		end)
-		UseMemoResult = ReactModule.useMemo(function() --[[ Line: 198 ]]
+		UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: UseMemoResult1 (copy), UseSelectorResult (copy), CryoModule (upval), SortCurrentlyWearingModule (upval)
 			local t = {}
 			local Count = 1
@@ -154,7 +154,7 @@ return function(p1) --[[ Line: 53 | Named "CurrentlyWearingCarousel" ]]
 					Count += 1
 				end
 			end
-			return CryoModule.List.sort(t, function(p3, p4) --[[ Line: 211 ]]
+			return CryoModule.List.sort(t, function(p3, p4)
 				-- upvalues: SortCurrentlyWearingModule (upval)
 				return SortCurrentlyWearingModule(p3, p4)
 			end)

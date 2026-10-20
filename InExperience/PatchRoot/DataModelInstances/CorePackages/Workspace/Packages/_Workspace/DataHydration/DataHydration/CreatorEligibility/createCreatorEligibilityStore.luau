@@ -4,11 +4,11 @@ local CreateSingleEntityResolverModule = require(DataHydration.createSingleEntit
 local FetchCreatorEligibilityModule = require(script.Parent.fetchCreatorEligibility)
 local _ = require(script.Parent.CreatorEligibilityStoreTypes)
 
-return function(p1) --[[ Line: 18 | Named "createCreatorEligibilityStore" ]]
+return function(p1)
 	-- upvalues: CreateSingleEntityResolverModule (copy), FetchCreatorEligibilityModule (copy)
 	local P0 = p1 or {}
 	local config = { network = P0.network, baseUrl = P0.baseUrl }
-	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p2) --[[ Line: 22 ]]
+	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p2)
 		-- upvalues: FetchCreatorEligibilityModule (upval), config (copy)
 		return FetchCreatorEligibilityModule.fetchEligibility(p2, config)
 	end)

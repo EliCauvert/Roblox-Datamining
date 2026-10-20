@@ -3,11 +3,11 @@ local CryoModule = require(SocialLuaAnalytics.Parent.Cryo)
 local CreateFireEventModule = require(SocialLuaAnalytics.Analytics.FireEvent.createFireEvent)
 local _ = require(script.Parent.Parent.Types)
 
-return function(p1) --[[ Line: 34 | Named "AnalyticsFactory" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), CreateFireEventModule (copy)
 	local InfoForAllEvents = p1.infoForAllEvents or {}
 	
-	local function GetInfoForAllEvents() --[[ Line: 42 ]]
+	local function GetInfoForAllEvents()
 		-- upvalues: InfoForAllEvents (ref)
 		return InfoForAllEvents
 	end
@@ -26,7 +26,7 @@ return function(p1) --[[ Line: 34 | Named "AnalyticsFactory" ]]
 			getInfoForAllEvents = GetInfoForAllEvents,
 			loggerImpl = p1.loggerImpl
 		}),
-		updateInfoForAllEvents = function(p2) --[[ Line: 37 ]]
+		updateInfoForAllEvents = function(p2)
 			-- upvalues: InfoForAllEvents (ref), CryoModule (upval)
 			InfoForAllEvents = CryoModule.Dictionary.join(InfoForAllEvents, p2)
 			

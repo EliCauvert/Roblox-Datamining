@@ -3,7 +3,7 @@ local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.pro
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 47 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		can_join = p1 ~= nil and p1.can_join ~= nil and p1.can_join,
@@ -11,7 +11,7 @@ function Module.new(p1) --[[ Line: 47 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 58 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -30,7 +30,7 @@ function Module:encode() --[[ Line: 58 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 77 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -67,7 +67,7 @@ function Module.decode(Buf) --[[ Line: 77 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 125 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.can_join then
@@ -79,7 +79,7 @@ function Module:jsonEncode() --[[ Line: 125 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 139 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy)
 	local NewModule = Module.new()
 	

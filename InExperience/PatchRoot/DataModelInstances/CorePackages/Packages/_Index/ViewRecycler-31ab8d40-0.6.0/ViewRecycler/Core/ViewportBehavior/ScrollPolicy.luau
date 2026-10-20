@@ -7,7 +7,7 @@ local ScrollAlignmentModule = require(ViewRecycler.Core.Enums.ScrollAlignment)
 local _ = require(ViewRecycler.Core.Types)
 local InitialScrollPositionModule = require(script.Parent.InitialScrollPosition)
 
-local function _(p1) --[[ Line: 47 | Named "validate" ]]
+local function _(p1)
 	-- upvalues: ReachedThresholdModule (copy)
 	if p1.autoScrollThreshold ~= nil then
 		ReachedThresholdModule.validate(p1.autoScrollThreshold, "Virtualizer: autoScrollThreshold")
@@ -17,7 +17,7 @@ local function _(p1) --[[ Line: 47 | Named "validate" ]]
 	end
 end
 
-return function(p1) --[[ Line: 56 | Named "createScrollPolicy" ]]
+return function(p1)
 	-- upvalues: ReachedThresholdModule (copy), InitialScrollPositionModule (copy), AutoScrollModule (copy), PaginationEdgesModule (copy), ScrollAlignmentModule (copy), AutoScrollTargetModule (copy)
 	if p1.autoScrollThreshold ~= nil then
 		ReachedThresholdModule.validate(p1.autoScrollThreshold, "Virtualizer: autoScrollThreshold")
@@ -30,7 +30,7 @@ return function(p1) --[[ Line: 56 | Named "createScrollPolicy" ]]
 	local NewAutoScroll = AutoScrollModule.create()
 	local NewPaginationEdges = PaginationEdgesModule.create()
 	
-	local function _(p2, p3: number) --[[ Line: 65 | Named "settleInitialEnd" ]]
+	local function _(p2, p3: number)
 		-- upvalues: v1 (ref), ScrollAlignmentModule (upval), NewAutoScroll (copy), AutoScrollTargetModule (upval)
 		if p2 ~= nil and p3 > 0 and v1.initialScrollAlignment == ScrollAlignmentModule.End then
 			NewAutoScroll.settleAt(AutoScrollTargetModule.End)
@@ -38,13 +38,13 @@ return function(p1) --[[ Line: 56 | Named "createScrollPolicy" ]]
 		return p2
 	end
 	
-	local function followThreshold(ViewportLength) --[[ Line: 72 ]]
+	local function followThreshold(ViewportLength)
 		-- upvalues: ReachedThresholdModule (upval), v1 (ref)
 		return ReachedThresholdModule.resolve(v1.autoScrollThreshold, ViewportLength, 1)
 	end
 	
 	return {
-		configure = function(p2) --[[ Line: 77 ]]
+		configure = function(p2)
 			-- upvalues: ReachedThresholdModule (upval), v1 (ref)
 			if p2.autoScrollThreshold ~= nil then
 				ReachedThresholdModule.validate(p2.autoScrollThreshold, "Virtualizer: autoScrollThreshold")
@@ -54,11 +54,11 @@ return function(p1) --[[ Line: 56 | Named "createScrollPolicy" ]]
 			end
 			v1 = p2
 		end,
-		contentLengthChanged = function(p2) --[[ Line: 81 ]]
+		contentLengthChanged = function(p2)
 			-- upvalues: NewAutoScroll (copy)
 			return NewAutoScroll.getSettleOffset(p2.contentLength, p2.viewportLength)
 		end,
-		dataChanged = function(p2, p3, p4) --[[ Line: 84 ]]
+		dataChanged = function(p2, p3, p4)
 			-- upvalues: InitialScrollPositionModuleResult (copy), v1 (ref), NewAutoScroll (copy), AutoScrollModule (upval), followThreshold (copy), ScrollAlignmentModule (upval), AutoScrollTargetModule (upval)
 			local OnDataSourceChangeResult = InitialScrollPositionModuleResult.onDataSourceChange(p2.itemCount, v1.initialScrollAlignment, p2.getScrollOffsetForItem)
 			local OnDataSourceChangedResult = NewAutoScroll.onDataSourceChanged(AutoScrollModule.resolveTarget(v1.autoScrollOnChange, p3, p4, followThreshold(p4.viewportLength)))
@@ -73,7 +73,7 @@ return function(p1) --[[ Line: 56 | Named "createScrollPolicy" ]]
 			end
 			return OnDataSourceChangeResult
 		end,
-		dataReplaced = function(p2) --[[ Line: 107 ]]
+		dataReplaced = function(p2)
 			-- upvalues: InitialScrollPositionModuleResult (copy), v1 (ref), ScrollAlignmentModule (upval), NewAutoScroll (copy), AutoScrollTargetModule (upval)
 			local OnDataSourceReplacedResult = InitialScrollPositionModuleResult.onDataSourceReplaced(p2.itemCount, v1.initialScrollAlignment, p2.getScrollOffsetForItem)
 			local ItemCount: number = p2.itemCount
@@ -83,7 +83,7 @@ return function(p1) --[[ Line: 56 | Named "createScrollPolicy" ]]
 			end
 			return OnDataSourceReplacedResult
 		end,
-		viewportChanged = function(p2) --[[ Line: 117 ]]
+		viewportChanged = function(p2)
 			-- upvalues: InitialScrollPositionModuleResult (copy), v1 (ref), ScrollAlignmentModule (upval), NewAutoScroll (copy), AutoScrollTargetModule (upval)
 			local ScrollState = p2.scrollState
 			
@@ -98,12 +98,12 @@ return function(p1) --[[ Line: 56 | Named "createScrollPolicy" ]]
 			end
 			return if OnViewportChangedResult == nil then NewAutoScroll.getSettleOffset(ScrollState.contentLength, ScrollState.viewportLength) else OnViewportChangedResult
 		end,
-		observe = function(p2) --[[ Line: 139 ]]
+		observe = function(p2)
 			-- upvalues: NewAutoScroll (copy), ReachedThresholdModule (upval), v1 (ref), AutoScrollModule (upval)
 			NewAutoScroll.onScrollOffsetChanged(p2, ReachedThresholdModule.resolve(v1.autoScrollThreshold, p2.viewportLength, 1), AutoScrollModule.followedEdge(v1.autoScrollOnChange))
 		end,
 		pin = NewAutoScroll.pin,
-		checkEdges = function(p2, p3: number, RearmAfterStructureChange) --[[ Line: 147 ]]
+		checkEdges = function(p2, p3: number, RearmAfterStructureChange)
 			-- upvalues: v1 (ref), NewPaginationEdges (copy), ReachedThresholdModule (upval)
 			if not v1.startReachedEnabled and not v1.endReachedEnabled then
 				return false, false
@@ -127,7 +127,7 @@ return function(p1) --[[ Line: 56 | Named "createScrollPolicy" ]]
 				return CheckResult.startReached, CheckResult.endReached
 			end
 		end,
-		reachesEdges = function() --[[ Line: 167 ]]
+		reachesEdges = function()
 			-- upvalues: v1 (ref)
 			return v1.startReachedEnabled or v1.endReachedEnabled
 		end

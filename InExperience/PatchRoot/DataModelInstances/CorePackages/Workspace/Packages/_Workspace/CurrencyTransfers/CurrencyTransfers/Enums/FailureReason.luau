@@ -43,7 +43,7 @@ local config = {
 	[19] = FailureReasonModule.ReceiveLimitExceeded
 }
 
-function FailureReasonModule.fromValue(p1) --[[ Line: 71 ]]
+function FailureReasonModule.fromValue(p1)
 	-- upvalues: config (copy), FailureReasonModule (copy)
 	if p1 == nil then
 		return nil

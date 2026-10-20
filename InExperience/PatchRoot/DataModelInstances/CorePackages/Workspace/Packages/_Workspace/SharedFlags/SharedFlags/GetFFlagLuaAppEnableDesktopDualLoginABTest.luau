@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("LuaAppEnableDesktopDualLoginABTest", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("LuaAppEnableDesktopDualLoginABTest")
 end

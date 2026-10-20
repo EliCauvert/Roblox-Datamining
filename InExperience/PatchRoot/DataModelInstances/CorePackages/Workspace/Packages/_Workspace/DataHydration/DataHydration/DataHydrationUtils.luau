@@ -4,17 +4,17 @@ local FFlagAddFriendsPageTrustedFriendRequestSection = require(Parent.SharedFlag
 local FFlagFriendsRequestsMergeListsWithoutDuplicates = require(Parent.SharedFlags).FFlagFriendsRequestsMergeListsWithoutDuplicates
 local CryoModule = if FFlagAddFriendsPageTrustedFriendRequestSection or FFlagFriendsRequestsMergeListsWithoutDuplicates then require(Parent.Cryo) else nil
 
-local function mergeListsWithoutDuplicates(Tbl, p1, p2) --[[ Line: 86 ]]
+local function mergeListsWithoutDuplicates(Tbl, p1, p2)
 	-- upvalues: CryoModule (copy)
 	if not p1 or #p1 == 0 then
 		return if Tbl then Tbl else {}
 	elseif Tbl and #Tbl ~= 0 then
-		local Set = CryoModule.List.toSet(CryoModule.List.map(Tbl, function(p3) --[[ Line: 94 ]]
+		local Set = CryoModule.List.toSet(CryoModule.List.map(Tbl, function(p3)
 			-- upvalues: p2 (copy)
 			return if p2 then p3[p2] else p3
 		end))
 		
-		return CryoModule.List.join(table.clone(Tbl), (CryoModule.List.filter(p1, function(p3): boolean --[[ Line: 99 ]]
+		return CryoModule.List.join(table.clone(Tbl), (CryoModule.List.filter(p1, function(p3): boolean
 			-- upvalues: p2 (copy), Set (copy)
 			return not Set[if p2 then p3[p2] else p3]
 		end)))
@@ -24,7 +24,7 @@ local function mergeListsWithoutDuplicates(Tbl, p1, p2) --[[ Line: 86 ]]
 end
 
 return {
-	areAllKeysPresent = function(p3, List): boolean --[[ Line: 74 ]]
+	areAllKeysPresent = function(p3, List): boolean
 		if p3 == nil or type(p3) ~= "table" then
 			return #List == 0
 		end
@@ -35,13 +35,13 @@ return {
 		end
 		return true
 	end,
-	getLocalPlayerUserId = function() --[[ Line: 15 ]]
+	getLocalPlayerUserId = function()
 		-- upvalues: Players (copy)
 		local UserId = Players.LocalPlayer and Players.LocalPlayer.UserId or nil
 		
 		return if UserId == nil or UserId <= 0 then nil else UserId
 	end,
-	observeLocalPlayerUserId = function(Callback) --[[ Line: 24 ]]
+	observeLocalPlayerUserId = function(Callback)
 		-- upvalues: Players (copy)
 		local UserId = Players.LocalPlayer and Players.LocalPlayer.UserId or nil
 		local UserId1 = if UserId == nil or UserId <= 0 then nil else UserId
@@ -49,7 +49,7 @@ return {
 		local Connection1 = nil
 		local Flag = false
 		
-		local function notifyIfChanged() --[[ Line: 30 ]]
+		local function notifyIfChanged()
 			-- upvalues: Players (upval), UserId1 (ref), Callback (copy)
 			local UserId = Players.LocalPlayer and Players.LocalPlayer.UserId or nil
 			local UserId2 = if UserId == nil or UserId <= 0 then nil else UserId
@@ -62,7 +62,7 @@ return {
 			end
 		end
 		
-		local function _() --[[ Line: 39 | Named "bindLocalPlayer" ]]
+		local function _()
 			-- upvalues: Connection (ref), Players (upval), notifyIfChanged (copy)
 			if Connection ~= nil then
 				Connection:Disconnect()
@@ -84,7 +84,7 @@ return {
 		if LocalPlayer ~= nil then
 			Connection = LocalPlayer:GetPropertyChangedSignal("UserId"):Connect(notifyIfChanged)
 		end
-		Connection1 = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function() --[[ Line: 52 ]]
+		Connection1 = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
 			-- upvalues: Connection (ref), Players (upval), notifyIfChanged (copy), UserId1 (ref), Callback (copy)
 			if Connection ~= nil then
 				Connection:Disconnect()
@@ -106,7 +106,7 @@ return {
 			end
 		end)
 		
-		return function() --[[ Line: 57 ]]
+		return function()
 			-- upvalues: Flag (ref), Connection (ref), Connection1 (ref)
 			if Flag then return end
 			Flag = true

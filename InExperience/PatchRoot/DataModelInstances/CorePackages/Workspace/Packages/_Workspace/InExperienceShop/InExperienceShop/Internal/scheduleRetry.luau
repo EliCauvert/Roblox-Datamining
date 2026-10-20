@@ -1,5 +1,5 @@
-﻿return function(Delay, Callback) --[[ Line: 4 | Named "scheduleRetry" ]]
-	task.delay(Delay, function() --[[ Line: 5 | Named "guardedCallback" ]]
+﻿return function(Delay, Callback)
+	task.delay(Delay, function()
 		-- upvalues: Callback (copy)
 		if game:IsLoaded() then
 			Callback()

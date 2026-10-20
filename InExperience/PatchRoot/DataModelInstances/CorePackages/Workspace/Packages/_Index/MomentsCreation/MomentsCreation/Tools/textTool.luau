@@ -21,19 +21,19 @@ return {
 		cancelAnalyticsEvent = EventNames.EditingFlowTextOverlayBackButtonPressed
 	},
 	supportedCaptureTypes = if require(MomentsCreation.Flags.FFlagMomentsTextOverlayOnPhotos) then { Enum.CaptureType.Video, Enum.CaptureType.Screenshot } else { Enum.CaptureType.Video },
-	createSession = function() --[[ Line: 43 ]]
+	createSession = function()
 		-- upvalues: CreateEditSessionModule (copy)
 		return CreateEditSessionModule()
 	end,
-	renderEditor = function(Controller) --[[ Line: 46 ]]
+	renderEditor = function(Controller)
 		-- upvalues: ReactModule (copy), TextOverlayControlsModule (copy)
 		return ReactModule.createElement(TextOverlayControlsModule, { layoutOrder = 2, controller = Controller })
 	end,
-	renderPreviewLayer = function(Controller, Ctx) --[[ Line: 51 ]]
+	renderPreviewLayer = function(Controller, Ctx)
 		-- upvalues: ReactModule (copy), TextOverlayLayerModule (copy)
 		return ReactModule.createElement(TextOverlayLayerModule, { zIndex = 3, controller = Controller, ctx = Ctx })
 	end,
-	toEdits = function(Entry) --[[ Line: 54 ]]
+	toEdits = function(Entry)
 		local Entry1 = Entry and Entry[1]
 		
 		return if Entry1 == nil or Entry1.text == "" then {} else { textOverlays = Entry }

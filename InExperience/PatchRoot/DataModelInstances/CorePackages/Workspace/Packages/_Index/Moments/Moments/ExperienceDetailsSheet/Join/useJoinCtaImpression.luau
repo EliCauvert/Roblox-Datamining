@@ -13,21 +13,21 @@ local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local UseVerticalPagerFunction = VerticalPagerModule.useVerticalPager
 local UsePagerItemFunction = VerticalPagerModule.usePagerItem
 
-return function(p1, p2) --[[ Line: 51 | Named "useJoinCtaImpression" ]]
+return function(p1, p2)
 	-- upvalues: UseVerticalPagerFunction (copy), UsePagerItemFunction (copy), UseMomentsSessionFunction (copy), ReactModule (copy), SignalsModule (copy), UseSignalStateFunction (copy), FFlagMomentsFixOverlayRemountImpressionsModule (copy), MomentImpressionMemoryModule (copy), MakeJoinImpressionFieldsModule (copy), Analytics (copy), EventNames (copy)
 	local UseVerticalPagerResult = UseVerticalPagerFunction()
 	local UsePagerItemResult = UsePagerItemFunction()
 	local UseMomentsSessionResult = UseMomentsSessionFunction()
 	local Item = UsePagerItemResult.item
-	local UseSignalStateResult = UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 58 ]]
+	local UseSignalStateResult = UseSignalStateFunction((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), Item (copy), UseVerticalPagerResult (copy)
-		return SignalsModule.createComputed(function(p3): boolean --[[ Line: 59 ]]
+		return SignalsModule.createComputed(function(p3): boolean
 			-- upvalues: Item (upval), UseVerticalPagerResult (upval)
 			return Item ~= nil and UseVerticalPagerResult.store.getCurrentItem(p3) == Item
 		end)
 	end, { UseVerticalPagerResult, Item })))
 	local JoinCta = if FFlagMomentsFixOverlayRemountImpressionsModule then MomentImpressionMemoryModule.useImpressionRef("joinCta") else ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 77 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: JoinCta (copy), UseSignalStateResult (copy), p2 (copy), p1 (copy), Item (copy), MakeJoinImpressionFieldsModule (upval), UseMomentsSessionResult (copy), Analytics (upval), EventNames (upval)
 		local Current = JoinCta.current
 		JoinCta.current = UseSignalStateResult

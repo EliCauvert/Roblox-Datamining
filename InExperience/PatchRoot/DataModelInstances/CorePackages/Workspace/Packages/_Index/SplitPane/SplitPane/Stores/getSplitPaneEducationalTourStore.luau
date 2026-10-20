@@ -1,7 +1,7 @@
 ﻿local SignalsModule = require(script:FindFirstAncestor("SplitPane").Parent.Signals)
 local FFlagSplitPaneEducationalTourSkipOnDeepLinkModule = require(script.Parent.Parent.Flags.FFlagSplitPaneEducationalTourSkipOnDeepLink)
 
-return SignalsModule.createComputed(function() --[[ Line: 35 ]]
+return SignalsModule.createComputed(function()
 	-- upvalues: SignalsModule (copy), FFlagSplitPaneEducationalTourSkipOnDeepLinkModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(0)
 	local Signal1, Signal2_1 = SignalsModule.createSignal(false)
@@ -10,12 +10,12 @@ return SignalsModule.createComputed(function() --[[ Line: 35 ]]
 	local TourVisibleCallback = nil
 	local Signal4, Signal2_3 = SignalsModule.createSignal(false)
 	
-	local function setTourVisibleCallback(Value) --[[ Line: 47 ]]
+	local function setTourVisibleCallback(Value)
 		-- upvalues: TourVisibleCallback (ref)
 		TourVisibleCallback = Value
 	end
 	
-	local Computed = SignalsModule.createComputed(function(p1): boolean --[[ Line: 51 ]]
+	local Computed = SignalsModule.createComputed(function(p1): boolean
 		-- upvalues: Signal (copy)
 		return Signal(p1) > 0
 	end)
@@ -29,16 +29,16 @@ return SignalsModule.createComputed(function() --[[ Line: 35 ]]
 		setIsOpen = Signal2_1,
 		getPendingUserId = Signal3,
 		setPendingUserId = Signal2_2,
-		hasHandledCustomPromptForUser = function(p1): boolean --[[ Line: 69 ]]
+		hasHandledCustomPromptForUser = function(p1): boolean
 			-- upvalues: t (copy)
 			return t[p1] == true
 		end,
-		setHasHandledCustomPromptForUser = function(Key, p1) --[[ Line: 72 ]]
+		setHasHandledCustomPromptForUser = function(Key, p1)
 			-- upvalues: t (copy)
 			t[Key] = p1
 		end,
 		setOnTourVisible = setTourVisibleCallback,
-		notifyTourVisible = function() --[[ Line: 76 ]]
+		notifyTourVisible = function()
 			-- upvalues: FFlagSplitPaneEducationalTourSkipOnDeepLinkModule (upval), Signal2_3 (copy), TourVisibleCallback (ref)
 			if FFlagSplitPaneEducationalTourSkipOnDeepLinkModule then
 				Signal2_3(true)
@@ -50,12 +50,12 @@ return SignalsModule.createComputed(function() --[[ Line: 35 ]]
 				Callback()
 			end
 		end,
-		clearOnTourVisible = function() --[[ Line: 86 ]]
+		clearOnTourVisible = function()
 			-- upvalues: TourVisibleCallback (ref)
 			TourVisibleCallback = nil
 		end,
 		getHasShownTour = Signal4,
-		discardPendingTour = function() --[[ Line: 90 ]]
+		discardPendingTour = function()
 			-- upvalues: FFlagSplitPaneEducationalTourSkipOnDeepLinkModule (upval), Signal2_3 (copy), Signal2_1 (copy), Signal2_2 (copy), TourVisibleCallback (ref), Signal2 (copy)
 			if FFlagSplitPaneEducationalTourSkipOnDeepLinkModule then
 				Signal2_3(false)
@@ -70,7 +70,7 @@ return SignalsModule.createComputed(function() --[[ Line: 35 ]]
 		setCollapsedExpandButtonRect = Signal2_4,
 		getCollapsedExpandButtonInstance = Signal6,
 		setCollapsedExpandButtonInstance = Signal2_5,
-		reset = function() --[[ Line: 58 ]]
+		reset = function()
 			-- upvalues: Signal2 (copy)
 			Signal2(0)
 		end

@@ -6,8 +6,8 @@ local GetChildRouterModule = require(script.Parent.getChildRouter)
 local GetNavigationActionCreatorsModule = require(script.Parent.routers.getNavigationActionCreators)
 local GetChildrenNavigationCacheModule = require(script.Parent.getChildrenNavigationCache)
 
-local function _(State) --[[ Line: 12 | Named "createParamGetter" ]]
-	return function(p1, p2) --[[ Line: 13 ]]
+local function _(State)
+	return function(p1, p2)
 		-- upvalues: State (copy)
 		local Params = State.params
 		
@@ -15,10 +15,10 @@ local function _(State) --[[ Line: 12 | Named "createParamGetter" ]]
 	end
 end
 
-local function getChildNavigation(AssignResult, Key, Callback) --[[ Line: 24 ]]
+local function getChildNavigation(AssignResult, Key, Callback)
 	-- upvalues: GetChildrenNavigationCacheModule (copy), Array (copy), GetChildRouterModule (copy), Object (copy), GetNavigationActionCreatorsModule (copy), getChildNavigation (copy), GetEventManagerModule (copy)
 	local ChildrenNavigationCacheModule = GetChildrenNavigationCacheModule(AssignResult)
-	local Index: number = Array.findIndex(AssignResult.state.routes, function(p1): boolean --[[ Line: 27 ]]
+	local Index: number = Array.findIndex(AssignResult.state.routes, function(p1): boolean
 		-- upvalues: Key (copy)
 		return p1.key == Key
 	end)
@@ -38,7 +38,7 @@ local function getChildNavigation(AssignResult, Key, Callback) --[[ Line: 24 ]]
 	local Tbl1 = {}
 	
 	for i, value in AssignResult1 do
-		Tbl1[i] = function(...) --[[ Line: 66 ]]
+		Tbl1[i] = function(...)
 			-- upvalues: value (copy), AssignResult (copy)
 			return AssignResult.dispatch((value(...)))
 		end
@@ -55,15 +55,15 @@ local function getChildNavigation(AssignResult, Key, Callback) --[[ Line: 24 ]]
 			state = Route,
 			router = ChildRouterModule,
 			actions = AssignResult1,
-			getParam = function(p1, p2) --[[ Line: 13 ]]
+			getParam = function(p1, p2)
 				-- upvalues: Route (copy)
 				local Params = Route.params
 				
 				return if Params and Params[p1] ~= nil then Params[p1] else p2
 			end,
-			getChildNavigation = function(Key1) --[[ Line: 88 ]]
+			getChildNavigation = function(Key1)
 				-- upvalues: getChildNavigation (upval), AssignResult3 (ref), Callback (copy), Key (copy)
-				return getChildNavigation(AssignResult3, Key1, function() --[[ Line: 89 ]]
+				return getChildNavigation(AssignResult3, Key1, function()
 					-- upvalues: Callback (upval), Key (upval)
 					local CallbackResult = Callback()
 					
@@ -82,22 +82,22 @@ local function getChildNavigation(AssignResult, Key, Callback) --[[ Line: 24 ]]
 			state = Route,
 			router = ChildRouterModule,
 			actions = AssignResult1,
-			getParam = function(p1, p2) --[[ Line: 13 ]]
+			getParam = function(p1, p2)
 				-- upvalues: Route (copy)
 				local Params = Route.params
 				
 				return if Params and Params[p1] ~= nil then Params[p1] else p2
 			end,
-			getChildNavigation = function(Key1) --[[ Line: 109 ]]
+			getChildNavigation = function(Key1)
 				-- upvalues: getChildNavigation (upval), AssignResult2 (ref), Callback (copy), Key (copy)
-				return getChildNavigation(AssignResult2, Key1, function() --[[ Line: 110 ]]
+				return getChildNavigation(AssignResult2, Key1, function()
 					-- upvalues: Callback (upval), Key (upval)
 					local CallbackResult = Callback()
 					
 					return if CallbackResult then CallbackResult.getChildNavigation(Key) else nil
 				end)
 			end,
-			isFocused = function(): boolean --[[ Line: 115 ]]
+			isFocused = function(): boolean
 				-- upvalues: Callback (copy), Key (copy)
 				local CallbackResult = Callback()
 				
@@ -111,7 +111,7 @@ local function getChildNavigation(AssignResult, Key, Callback) --[[ Line: 24 ]]
 					return false
 				end
 			end,
-			isFirstRouteInParent = function() --[[ Line: 135 ]]
+			isFirstRouteInParent = function()
 				-- upvalues: IsIndexOfResultMatch (ref)
 				return IsIndexOfResultMatch
 			end,

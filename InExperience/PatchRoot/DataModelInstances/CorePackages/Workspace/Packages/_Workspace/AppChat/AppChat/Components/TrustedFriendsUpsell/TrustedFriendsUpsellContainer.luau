@@ -18,7 +18,7 @@ local FFlagAppChatEnableDoubleOptIn = require(Parent.SharedFlags).FFlagAppChatEn
 local FFlagAppChatEnableTrustedFriendEntryPointModule = require(AppChat.Flags.FFlagAppChatEnableTrustedFriendEntryPoint)
 local FIntUnfilteredThreadsPvDelayMsModule = require(AppChat.Flags.FIntUnfilteredThreadsPvDelayMs)
 
-return function(p1) --[[ Line: 50 ]]
+return function(p1)
 	-- upvalues: UseIsAppChatVerticallyConstrainedModule (copy), UseDispatchFunction (copy), FFlagAppChatEnableDoubleOptIn (copy), UseIsInExperienceModule (copy), UseTelemetryModule (copy), AppTelemetryLayerModule (copy), ReactModule (copy), ConversationOverlayTelemetryModule (copy), FFlagAppChatEnableTrustedFriendEntryPointModule (copy), SetTabBarVisibleFromChatFunction (copy), PromiseModule (copy), FIntUnfilteredThreadsPvDelayMsModule (copy), RefreshConversationUnfilteredThreadsDetailsModule (copy), ModalTelemetryModule (copy), TrustedFriendsModalEntry (copy)
 	local UseIsAppChatVerticallyConstrainedModuleResult = UseIsAppChatVerticallyConstrainedModule()
 	local UseDispatchResult = UseDispatchFunction()
@@ -26,7 +26,7 @@ return function(p1) --[[ Line: 50 ]]
 	local AnalyticsModalVariant = p1.analyticsModalVariant
 	local ConversationId = p1.conversationId
 	local UseTelemetryModuleResult = UseTelemetryModule(AppTelemetryLayerModule.Context)
-	ReactModule.useEffect(function() --[[ Line: 58 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: AnalyticsModalVariant (copy), UseTelemetryModuleResult (copy), ConversationOverlayTelemetryModule (upval)
 		if AnalyticsModalVariant ~= nil then
 			UseTelemetryModuleResult.emit(ConversationOverlayTelemetryModule.Events.ModalRendered, { modalVariant = AnalyticsModalVariant })
@@ -34,22 +34,22 @@ return function(p1) --[[ Line: 50 ]]
 			return
 		end
 	end, { AnalyticsModalVariant })
-	ReactModule.useEffect(function() --[[ Line: 70 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagAppChatEnableTrustedFriendEntryPointModule (upval), UseDispatchResult (copy), SetTabBarVisibleFromChatFunction (upval)
 		if not FFlagAppChatEnableTrustedFriendEntryPointModule then return end
 		UseDispatchResult(SetTabBarVisibleFromChatFunction(false))
 		
-		return function() --[[ Line: 75 ]]
+		return function()
 			-- upvalues: UseDispatchResult (upval), SetTabBarVisibleFromChatFunction (upval)
 			UseDispatchResult(SetTabBarVisibleFromChatFunction(true))
 		end
 	end, { UseDispatchResult })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 80 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), ConversationId (copy), FFlagAppChatEnableDoubleOptIn (upval), PromiseModule (upval), FIntUnfilteredThreadsPvDelayMsModule (upval), UseDispatchResult (copy), RefreshConversationUnfilteredThreadsDetailsModule (upval), UseIsInExperienceModuleResult (copy)
 		p1.dismissModal()
 		
 		if ConversationId ~= nil and FFlagAppChatEnableDoubleOptIn then
-			PromiseModule.delay(FIntUnfilteredThreadsPvDelayMsModule / 1000):andThen(function() --[[ Line: 83 ]]
+			PromiseModule.delay(FIntUnfilteredThreadsPvDelayMsModule / 1000):andThen(function()
 				-- upvalues: UseDispatchResult (upval), RefreshConversationUnfilteredThreadsDetailsModule (upval), ConversationId (upval), UseIsInExperienceModuleResult (upval)
 				UseDispatchResult(RefreshConversationUnfilteredThreadsDetailsModule(ConversationId, UseIsInExperienceModuleResult))
 			end)
@@ -68,7 +68,7 @@ return function(p1) --[[ Line: 50 ]]
 		modalVariantOverride = p1.modalVariantOverride,
 		onRequestSent = p1.onRequestSent,
 		onRequestAccepted = p1.onRequestAccepted,
-		onAcknowledged = ReactModule.useCallback(function() --[[ Line: 97 ]]
+		onAcknowledged = ReactModule.useCallback(function()
 			-- upvalues: AnalyticsModalVariant (copy), UseTelemetryModuleResult (copy), ConversationOverlayTelemetryModule (upval), ModalTelemetryModule (upval), p1 (copy)
 			if AnalyticsModalVariant ~= nil then
 				UseTelemetryModuleResult.emit(ConversationOverlayTelemetryModule.Events.ModalAction, {
@@ -84,7 +84,7 @@ return function(p1) --[[ Line: 50 ]]
 			AnalyticsModalVariant,
 			p1.onAcknowledged
 		}),
-		onClosed = ReactModule.useCallback(function() --[[ Line: 88 ]]
+		onClosed = ReactModule.useCallback(function()
 			-- upvalues: AnalyticsModalVariant (copy), UseTelemetryModuleResult (copy), ConversationOverlayTelemetryModule (upval), ModalTelemetryModule (upval), UseResult (copy)
 			if AnalyticsModalVariant ~= nil then
 				UseTelemetryModuleResult.emit(ConversationOverlayTelemetryModule.Events.ModalAction, {

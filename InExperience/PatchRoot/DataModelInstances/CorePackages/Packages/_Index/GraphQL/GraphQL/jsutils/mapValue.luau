@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.ObjMap)
 
 return {
-	mapValue = function(List, Callback) --[[ Line: 15 ]]
+	mapValue = function(List, Callback)
 		local t = {}
 		
 		for i, value in pairs(List) do

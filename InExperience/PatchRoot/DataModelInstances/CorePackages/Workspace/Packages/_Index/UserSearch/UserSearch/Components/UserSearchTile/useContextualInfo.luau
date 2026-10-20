@@ -16,7 +16,7 @@ local FFlagUserSearchClassmatesInsight = require(Parent.SharedFlags).FFlagUserSe
 local IconsStatusPlayerFriend = Images["icons/status/player/friend"]
 local IconsStatusPlayerFollowing = Images["icons/status/player/following"]
 
-local function v15(PreviousUsernames, Text: string) --[[ Line: 34 ]]
+local function v15(PreviousUsernames, Text: string)
 	if not PreviousUsernames or #PreviousUsernames == 0 then
 		return false
 	end
@@ -28,7 +28,7 @@ local function v15(PreviousUsernames, Text: string) --[[ Line: 34 ]]
 	return false
 end
 
-return function(p1) --[[ Line: 62 ]]
+return function(p1)
 	-- upvalues: UseRelationshipSelectorModule (copy), UseLocalizationFunction (copy), FFlagUserSearchUseThisIsYou (copy), FFlagUserSearchClassmatesInsight (copy), UseMutualFriendsTextFunction (copy), ContextualInfoTypes (copy), v15 (copy), FFlagUserSearchPresenceStoreMigrationModule (copy), PresenceType1 (copy), PresenceType (copy), IconsStatusPlayerFriend (copy), IconsStatusPlayerFollowing (copy)
 	local UseRelationshipSelectorModuleResult = UseRelationshipSelectorModule(p1.userId)
 	local ShouldUseCompactTiles = p1.shouldUseCompactTiles

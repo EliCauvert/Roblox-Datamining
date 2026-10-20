@@ -2,7 +2,7 @@
 local PromiseModule = require(Parent.Promise)
 local SignalsModule = require(Parent.Signals)
 
-return function(p1) --[[ Line: 28 | Named "createVoiceRestrictionController" ]]
+return function(p1)
 	-- upvalues: SignalsModule (copy), PromiseModule (copy)
 	local Normal, Normal2 = SignalsModule.createSignal("normal")
 	local Count = 0
@@ -12,7 +12,7 @@ return function(p1) --[[ Line: 28 | Named "createVoiceRestrictionController" ]]
 	local Flag1 = false
 	local DelayedThread = nil
 	
-	local function _() --[[ Line: 39 | Named "cancelExpiry" ]]
+	local function _()
 		-- upvalues: DelayedThread (ref)
 		if DelayedThread then
 			task.cancel(DelayedThread)
@@ -20,7 +20,7 @@ return function(p1) --[[ Line: 28 | Named "createVoiceRestrictionController" ]]
 		end
 	end
 	
-	local _ = function() --[[ Line: 47 | Named "expireRestriction" ]]
+	local _ = function()
 		-- upvalues: Flag (ref), DelayedThread (ref), Count (ref), Normal2 (copy)
 		if Flag then return end
 		if DelayedThread then
@@ -31,7 +31,7 @@ return function(p1) --[[ Line: 28 | Named "createVoiceRestrictionController" ]]
 		Normal2("hiddenUntilRejoin")
 	end
 	
-	local function scheduleExpiry(Settings) --[[ Line: 58 ]]
+	local function scheduleExpiry(Settings)
 		-- upvalues: DelayedThread (ref), Flag (ref), Count (ref), Normal2 (copy)
 		if DelayedThread then
 			task.cancel(DelayedThread)
@@ -43,7 +43,7 @@ return function(p1) --[[ Line: 28 | Named "createVoiceRestrictionController" ]]
 		local SecondsDelta = BannedUntil.Seconds - DateTime.now().UnixTimestamp
 		
 		if SecondsDelta > 0 then
-			DelayedThread = task.delay(SecondsDelta, function() --[[ Line: 71 ]]
+			DelayedThread = task.delay(SecondsDelta, function()
 				-- upvalues: DelayedThread (upval), Flag (upval), Count (upval), Normal2 (upval)
 				DelayedThread = nil
 				
@@ -60,7 +60,7 @@ return function(p1) --[[ Line: 28 | Named "createVoiceRestrictionController" ]]
 		end
 	end
 	
-	local function updateRestrictionPresentation(p2, Settings, Callback) --[[ Line: 78 ]]
+	local function updateRestrictionPresentation(p2, Settings, Callback)
 		-- upvalues: p1 (copy), DelayedThread (ref), Normal2 (copy), scheduleExpiry (copy), Flag1 (ref)
 		local Settings1 = Settings
 		
@@ -109,7 +109,7 @@ return function(p1) --[[ Line: 28 | Named "createVoiceRestrictionController" ]]
 	
 	return {
 		getPresentationState = Normal,
-		refresh = function(p2, p3) --[[ Line: 127 ]]
+		refresh = function(p2, p3)
 			-- upvalues: Flag (ref), PromiseModule (upval), DelayedThread (ref), Count (ref), Normal2 (copy), Promise (ref), v1 (ref), Flag1 (ref), updateRestrictionPresentation (copy), p1 (copy)
 			if Flag then
 				return PromiseModule.resolve()
@@ -138,7 +138,7 @@ return function(p1) --[[ Line: 28 | Named "createVoiceRestrictionController" ]]
 				Count += 1
 				local Count1: number = Count
 				
-				local function isCurrent(): boolean --[[ Line: 152 ]]
+				local function isCurrent(): boolean
 					-- upvalues: Flag (upval), Count (upval), Count1 (copy)
 					return not Flag and Count == Count1
 				end
@@ -146,11 +146,11 @@ return function(p1) --[[ Line: 28 | Named "createVoiceRestrictionController" ]]
 				if p2 ~= "mic" then
 					Normal2("restricted")
 				end
-				local Promise1 = PromiseModule.defer(function(Callback: () -> ()) --[[ Line: 163 ]]
+				local Promise1 = PromiseModule.defer(function(Callback: () -> ())
 					-- upvalues: updateRestrictionPresentation (upval), p2 (copy), p3 (copy), isCurrent (copy)
 					updateRestrictionPresentation(p2, p3, isCurrent)
 					Callback()
-				end):catch(function() --[[ Line: 166 ]]
+				end):catch(function()
 					-- upvalues: Flag (upval), Count (upval), Count1 (copy), p1 (upval)
 					if not Flag and Count == Count1 then
 						p1.onError("RestrictionRequestFailed")
@@ -158,7 +158,7 @@ return function(p1) --[[ Line: 28 | Named "createVoiceRestrictionController" ]]
 				end)
 				Promise = Promise1
 				v1 = p2
-				Promise1:finally(function() --[[ Line: 174 ]]
+				Promise1:finally(function()
 					-- upvalues: Promise (upval), Promise1 (copy), v1 (upval), Flag1 (upval)
 					if Promise == Promise1 then
 						Promise = nil
@@ -170,7 +170,7 @@ return function(p1) --[[ Line: 28 | Named "createVoiceRestrictionController" ]]
 				return Promise1
 			end
 		end,
-		dispose = function() --[[ Line: 187 ]]
+		dispose = function()
 			-- upvalues: Flag (ref), Count (ref), Promise (ref), v1 (ref), Flag1 (ref), DelayedThread (ref), Normal2 (copy)
 			Flag = true
 			Count += 1

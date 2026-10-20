@@ -15,7 +15,7 @@ local UseEffectOnceFunction = require(Parent.RoactUtils).Hooks.useEffectOnce
 local EventNamesModule = require(ProfileQRCode.Analytics.EventNames)
 local UseHasFailedToLoadModule = require(script.Parent.useHasFailedToLoad)
 
-return function(p1) --[[ Line: 30 ]]
+return function(p1)
 	-- upvalues: UseAnalyticsModule (copy), UseLoadingStateModule (copy), UseGetProfileShareUrlModule (copy), UseRefreshQrSessionModule (copy), UseShortUrlModule (copy), NetworkStatus (copy), ReactModule (copy), EventNamesModule (copy), UseEffectOnceFunction (copy), UseHasLoadedSuccessfullyModule (copy), UseHasFailedToLoadModule (copy), QRCodeSucceededViewModule (copy), QRCodeFailedViewModule (copy), QRCodeLoadingViewModule (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseLoadingStateModuleResult = UseLoadingStateModule()
@@ -24,9 +24,9 @@ return function(p1) --[[ Line: 30 ]]
 	local UseShortUrlModuleResult = UseShortUrlModule()
 	local HasUseShortUrlModuleResult = UseShortUrlModuleResult ~= nil
 	local IsUseLoadingStateModuleResultMatch = UseLoadingStateModuleResult == NetworkStatus.Failed
-	ReactModule.useEffect(function() --[[ Line: 40 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefreshQrSessionModuleResult (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval)
-		UseRefreshQrSessionModuleResult():andThen(function(Result) --[[ Line: 41 ]]
+		UseRefreshQrSessionModuleResult():andThen(function(Result)
 			-- upvalues: UseAnalyticsModuleResult (upval), EventNamesModule (upval)
 			UseAnalyticsModuleResult.fireEvent(EventNamesModule.RefreshQrSession, {
 				success = (Result and Result.responseBody or {}).Success,

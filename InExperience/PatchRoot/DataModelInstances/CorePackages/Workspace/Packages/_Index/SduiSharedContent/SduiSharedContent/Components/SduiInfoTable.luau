@@ -4,7 +4,7 @@ local InfoTable = require(Parent.AppBlox).InfoTable
 local View = require(Parent.Foundation).View
 local GetSduiComponentWrapperFunction = require(Parent.SduiCoreSystem).getSduiComponentWrapper
 
-return ReactModule.memo(function(p1) --[[ Line: 30 | Named "SduiInfoTable" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: GetSduiComponentWrapperFunction (copy), ReactModule (copy), View (copy), InfoTable (copy)
 	local LayoutOrder = p1.layoutOrder
 	local Items = {}

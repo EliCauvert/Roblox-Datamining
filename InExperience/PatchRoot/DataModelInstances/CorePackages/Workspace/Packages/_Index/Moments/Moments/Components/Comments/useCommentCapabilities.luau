@@ -5,7 +5,7 @@ local GetMomentsCapabilitiesFunction = require(Parent.MomentsCommon).Stores.GetM
 local FFlagMomentsCommentsIxpEnabled = SharedFlagsModule.FFlagMomentsCommentsIxpEnabled
 local Frozen = table.freeze({ canRead = true, canWrite = true, canReact = true })
 
-local function useGuacCommentCapabilities() --[[ Line: 25 ]]
+local function useGuacCommentCapabilities()
 	-- upvalues: GetMomentsCapabilitiesFunction (copy), SignalsReactModule (copy)
 	local MomentsCapabilities = GetMomentsCapabilitiesFunction(false)
 	
@@ -16,7 +16,7 @@ local function useGuacCommentCapabilities() --[[ Line: 25 ]]
 	}
 end
 
-local function useAllowedCommentCapabilities() --[[ Line: 33 ]]
+local function useAllowedCommentCapabilities()
 	-- upvalues: Frozen (copy)
 	return Frozen
 end

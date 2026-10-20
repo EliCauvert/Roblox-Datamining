@@ -31,7 +31,7 @@ local config1 = {
 	[AppPage.SearchPage] = UnifiedLoggingSurface.DISCOVERY_SEARCH_RESULTS
 }
 
-local function _(p1, Message, PropName) --[[ Line: 52 | Named "reportOpenMarketplaceTryOnPropError" ]]
+local function _(p1, Message, PropName)
 	-- upvalues: SduiActionType (copy), SduiErrorType (copy)
 	local config = {
 		name = SduiActionType.OpenMarketplaceTryOn,
@@ -44,7 +44,7 @@ local function _(p1, Message, PropName) --[[ Line: 52 | Named "reportOpenMarketp
 	p1.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, config, p1.appPage)
 end
 
-return function(p1, p2, p3) --[[ Line: 65 ]]
+return function(p1, p2, p3)
 	-- upvalues: SduiActionType (copy), SduiErrorType (copy), UnifiedEventLogEnums (copy), FFlagAXUnifiedEventCounters (copy), config1 (copy), FFlagAXFixHomeAvatarsUnifiedPurchase (copy), FindAnalyticsFieldInAncestorsFunction (copy), config (copy), ImpressionEnums (copy), AXFixHomepageTryOnScreenAnalytics (copy), AppPage (copy), AnalyticsService (copy), UnifiedLoggingSurface (copy), FFlagAXDiscoveryItemPurchaseAttribution (copy), SendUnifiedEventLogFunction (copy), UnifiedEventCounterAggregator (copy), AXUnifiedEventFilter (copy), UnifiedEventLogConstants (copy), AvatarScreen (copy), FFlagAXEnableHomeTryOnComplexView (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	

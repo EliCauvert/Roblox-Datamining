@@ -13,16 +13,16 @@ local SeedHomeOmniSduiV2PayloadModule = require(ServerDrivenUi.Migration.seedHom
 local FStringLuaEnabledSduiTreatmentTypes = require(Parent.SharedFlags).FStringLuaEnabledSduiTreatmentTypes
 local t = {}
 
-local function _(p1, p2, p3): string --[[ Line: 39 | Named "getRefreshRequestKey" ]]
+local function _(p1, p2, p3): string
 	return `{p1}:{p2}:{p3}`
 end
 
-local _ = function(p1, p2): boolean --[[ Line: 43 | Named "isCurrentRequest" ]]
+local _ = function(p1, p2): boolean
 	-- upvalues: t (copy)
 	return t[p1] == p2
 end
 
-local function getSupportedSduiTreatmentTypes() --[[ Line: 47 ]]
+local function getSupportedSduiTreatmentTypes()
 	-- upvalues: RunService (copy), FStringLuaEnabledSduiTreatmentTypes (copy)
 	local Number: number? = tonumber(string.match(RunService:GetRobloxVersion(), ".(%d+)."))
 	local List = {}
@@ -40,7 +40,7 @@ local function getSupportedSduiTreatmentTypes() --[[ Line: 47 ]]
 	return List
 end
 
-local function findSortByTopicId(Sorts, p1) --[[ Line: 65 ]]
+local function findSortByTopicId(Sorts, p1)
 	for _, sort in Sorts do
 		if typeof(sort) == "table" and sort.topicId and tostring(sort.topicId) == p1 then
 			return sort
@@ -49,7 +49,7 @@ local function findSortByTopicId(Sorts, p1) --[[ Line: 65 ]]
 	return nil
 end
 
-local function hasPageEntryForFeedItemKey(Sduiv, FeedItemKey): boolean --[[ Line: 74 ]]
+local function hasPageEntryForFeedItemKey(Sduiv, FeedItemKey): boolean
 	local PageEntries = Sduiv.pageEntries
 	
 	if typeof(PageEntries) ~= "table" then
@@ -63,14 +63,14 @@ local function hasPageEntryForFeedItemKey(Sduiv, FeedItemKey): boolean --[[ Line
 	return false
 end
 
-local _ = function(Callback: (any, any) -> (), p2, p3) --[[ Line: 94 | Named "reportValidationError" ]]
+local _ = function(Callback: (any, any) -> (), p2, p3)
 	Callback(p3.errorType, {
 		name = "discovery-api/omni-recommendation/sduiv2",
 		message = `{p3.message}, topicIds: {p2}`
 	})
 end
 
-local _ = function(Callback: (any, any) -> (), p2, p3) --[[ Line: 101 | Named "reportNetworkError" ]]
+local _ = function(Callback: (any, any) -> (), p2, p3)
 	-- upvalues: SduiErrors (copy), SduiParseHelpers (copy)
 	Callback(SduiErrors.SduiErrorType.FailedToFetchPage, {
 		name = "discovery-api/omni-recommendation/sduiv2",
@@ -78,7 +78,7 @@ local _ = function(Callback: (any, any) -> (), p2, p3) --[[ Line: 101 | Named "r
 	})
 end
 
-local function validateResponseBody(ResponseBody, p2, FeedItemKey) --[[ Line: 108 ]]
+local function validateResponseBody(ResponseBody, p2, FeedItemKey)
 	-- upvalues: SduiErrors (copy), findSortByTopicId (copy), OmniFeedTypes (copy), hasPageEntryForFeedItemKey (copy)
 	if ResponseBody == nil or typeof(ResponseBody) ~= "table" then
 		return false, {
@@ -133,7 +133,7 @@ local function validateResponseBody(ResponseBody, p2, FeedItemKey) --[[ Line: 10
 	end
 end
 
-return function(p2, p3, p4, p5, p6, Callback, p7) --[[ Line: 180 | Named "refreshOmniRecommendationFeedItem" ]]
+return function(p2, p3, p4, p5, p6, Callback, p7)
 	-- upvalues: SduiLoadTimer (copy), OmniFeedTypes (copy), getSupportedSduiTreatmentTypes (copy), HttpService (copy), t (copy), MakeOmniRecommendationsRequestFunction (copy), validateResponseBody (copy), SeedHomeOmniSduiV2PayloadModule (copy), SduiErrors (copy), SduiParseHelpers (copy)
 	local LoadTimer = p7.loadTimer or SduiLoadTimer.createLoadTimer(p3)
 	LoadTimer.start("feed-item-refresh")
@@ -152,7 +152,7 @@ return function(p2, p3, p4, p5, p6, Callback, p7) --[[ Line: 180 | Named "refres
 	local Lowered = HttpService:GenerateGUID(false):lower()
 	t[Text] = Lowered
 	
-	return MakeOmniRecommendationsRequestFunction(p2, p3, HttpService:GenerateGUID(false):lower(), nil, List, p6, { p4 }, v1, p7.contextFeatures):andThen(function(Result) --[[ Line: 218 ]]
+	return MakeOmniRecommendationsRequestFunction(p2, p3, HttpService:GenerateGUID(false):lower(), nil, List, p6, { p4 }, v1, p7.contextFeatures):andThen(function(Result)
 		-- upvalues: Text (copy), Lowered (copy), t (upval), validateResponseBody (upval), p4 (copy), p5 (copy), Callback (copy), SeedHomeOmniSduiV2PayloadModule (upval), p3 (copy), LoadTimer (copy), SduiErrors (upval)
 		if t[Text] ~= Lowered then return end
 		local ResponseBody = if typeof(Result) == "table" then Result.responseBody else nil
@@ -167,7 +167,7 @@ return function(p2, p3, p4, p5, p6, Callback, p7) --[[ Line: 180 | Named "refres
 			
 			return
 		end
-		local Success, Result1 = pcall(function() --[[ Line: 233 ]]
+		local Success, Result1 = pcall(function()
 			-- upvalues: SeedHomeOmniSduiV2PayloadModule (upval), ResponseBody (copy), p3 (upval), LoadTimer (upval)
 			SeedHomeOmniSduiV2PayloadModule(ResponseBody.sduiv2, p3, LoadTimer)
 		end)
@@ -180,7 +180,7 @@ return function(p2, p3, p4, p5, p6, Callback, p7) --[[ Line: 180 | Named "refres
 			
 			return
 		end
-	end):catch(function(Err) --[[ Line: 246 ]]
+	end):catch(function(Err)
 		-- upvalues: Text (copy), Lowered (copy), t (upval), Callback (copy), p4 (copy), SduiErrors (upval), SduiParseHelpers (upval)
 		if t[Text] == Lowered then
 			Callback(SduiErrors.SduiErrorType.FailedToFetchPage, {
@@ -190,7 +190,7 @@ return function(p2, p3, p4, p5, p6, Callback, p7) --[[ Line: 180 | Named "refres
 			
 			return
 		end
-	end):finally(function() --[[ Line: 253 ]]
+	end):finally(function()
 		-- upvalues: Text (copy), Lowered (copy), t (upval), LoadTimer (copy)
 		if t[Text] == Lowered then
 			LoadTimer.logRefreshComplete()

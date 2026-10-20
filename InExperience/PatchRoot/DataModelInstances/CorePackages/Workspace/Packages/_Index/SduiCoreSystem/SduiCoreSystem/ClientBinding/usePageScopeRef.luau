@@ -2,7 +2,7 @@
 local ReactModule = require(SduiCoreSystem.Parent.React)
 local GetSduiClientPageScopeModule = require(SduiCoreSystem.ClientBinding.getSduiClientPageScope)
 
-return function(p1) --[[ Line: 17 | Named "usePageScopeRef" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), GetSduiClientPageScopeModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	

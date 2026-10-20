@@ -2,7 +2,7 @@
 local MathUtilModule = require(Graphing.Util.MathUtil)
 local TypesModule = require(Graphing.Types)
 local GridUtil = {
-	getUniformValues = function(Direction, X, X1, p1) --[[ Line: 12 ]]
+	getUniformValues = function(Direction, X, X1, p1)
 		if X1 < X then
 			local X2 = X
 			X = X1
@@ -21,7 +21,7 @@ local GridUtil = {
 		end
 		return List
 	end,
-	getLogarithmicValues = function(Direction, X, X1, p2) --[[ Line: 41 ]]
+	getLogarithmicValues = function(Direction, X, X1, p2)
 		-- upvalues: MathUtilModule (copy)
 		if X1 < X then
 			local X2 = X
@@ -50,7 +50,7 @@ local GridUtil = {
 		end
 		return List
 	end,
-	getValuesValues = function(Direction, X, X1, p3) --[[ Line: 85 ]]
+	getValuesValues = function(Direction, X, X1, p3)
 		local List = {}
 		
 		for _, value in Direction.Values do
@@ -62,7 +62,7 @@ local GridUtil = {
 	end
 }
 
-function GridUtil.getValues(AXISX, Direction, p4, List) --[[ Line: 100 ]]
+function GridUtil.getValues(AXISX, Direction, p4, List)
 	-- upvalues: TypesModule (copy), GridUtil (copy)
 	local LogarithmicValues = {}
 	local t = {}
@@ -95,7 +95,7 @@ function GridUtil.getValues(AXISX, Direction, p4, List) --[[ Line: 100 ]]
 	end
 end
 
-function GridUtil.trimRoundingError(p5) --[[ Line: 136 ]]
+function GridUtil.trimRoundingError(p5)
 	local _00 = string.format("%.10f", p5):gsub("^0*(.-)%.?0*$", "%1")
 	
 	if _00 == "" or _00:sub(1, 1) == "." then
@@ -104,7 +104,7 @@ function GridUtil.trimRoundingError(p5) --[[ Line: 136 ]]
 	return _00
 end
 
-function GridUtil.getAnchorPointForSide(SIDEBOTTOM): Vector2? --[[ Line: 146 ]]
+function GridUtil.getAnchorPointForSide(SIDEBOTTOM): Vector2?
 	-- upvalues: TypesModule (copy)
 	if SIDEBOTTOM == TypesModule.SIDE_LEFT then
 		return Vector2.new(1, 0.5)
@@ -119,7 +119,7 @@ function GridUtil.getAnchorPointForSide(SIDEBOTTOM): Vector2? --[[ Line: 146 ]]
 	end
 end
 
-function GridUtil.getTextAlignmentsFromAnchorPoint(Vector) --[[ Line: 160 ]]
+function GridUtil.getTextAlignmentsFromAnchorPoint(Vector)
 	local Left = if Vector.X == 0 then Enum.TextXAlignment.Left elseif Vector.X == 1 then Enum.TextXAlignment.Right else Enum.TextXAlignment.Center
 	
 	if Vector.Y == 0 then

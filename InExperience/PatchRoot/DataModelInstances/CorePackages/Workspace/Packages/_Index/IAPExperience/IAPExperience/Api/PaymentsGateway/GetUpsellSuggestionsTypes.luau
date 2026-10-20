@@ -4,7 +4,7 @@ local ExperimentVariant = { PlusPromotion = "plusPromotion" }
 
 return {
 	ExperimentVariant = ExperimentVariant,
-	normalizeExperimentVariant = function(PlusPromotion) --[[ Line: 25 ]]
+	normalizeExperimentVariant = function(PlusPromotion)
 		-- upvalues: ExperimentVariant (copy)
 		return if PlusPromotion == ExperimentVariant.PlusPromotion then "plusPromotion" else nil
 	end

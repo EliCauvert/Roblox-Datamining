@@ -2,7 +2,7 @@
 local DateTimePickerVariantModule = require(script:FindFirstAncestor("Foundation").Enums.DateTimePickerVariant)
 local DateTimeUtilitiesModule = require(script.Parent.Parent.DateTimeUtilities)
 
-local function parseTimeFromText(Text: string) --[[ Line: 18 ]]
+local function parseTimeFromText(Text: string)
 	local S: string = Text:gsub("%s+", "")
 	local Match: string? = string.match(S, "^%d%d?:%d%d[AP]M$")
 	
@@ -35,13 +35,13 @@ local function parseTimeFromText(Text: string) --[[ Line: 18 ]]
 	end
 end
 
-local function adjustForDaylightSaving(p1) --[[ Line: 68 ]]
+local function adjustForDaylightSaving(p1)
 	local DateInfo = os.date("*t", p1.UnixTimestamp)
 	
 	return if DateInfo and DateInfo.isdst then DateTime.fromUnixTimestamp(p1.UnixTimestamp - 3600) else p1
 end
 
-local function parseDateTimeFromText(Text: string) --[[ Line: 83 ]]
+local function parseDateTimeFromText(Text: string)
 	-- upvalues: parseTimeFromText (copy), adjustForDaylightSaving (copy)
 	local S = nil
 	local S2 = nil
@@ -61,7 +61,7 @@ local function parseDateTimeFromText(Text: string) --[[ Line: 83 ]]
 		return nil
 	else
 		local v1 = S1:find("[/%.%-]")
-		local Success, Result = pcall(function() --[[ Line: 105 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: v1 (copy), S1 (copy), ParseTimeFromTextResult (copy), ParseTimeFromTextResult2 (copy)
 			if v1 == 3 then
 				local DDDD, DDDD2, DDDD3 = S1:match("^(%d%d)[/%.%-](%d%d)[/%.%-](%d%d%d%d)$")
@@ -84,7 +84,7 @@ end
 
 return {
 	adjustForDaylightSaving = adjustForDaylightSaving,
-	formatInputText = function(p1) --[[ Line: 176 ]]
+	formatInputText = function(p1)
 		-- upvalues: DateTimePickerVariantModule (copy), DateTimeUtilitiesModule (copy)
 		local Date = p1.dates[1]
 		
@@ -99,7 +99,7 @@ return {
 		end
 	end,
 	parseDateTimeFromText = parseDateTimeFromText,
-	parseDualInputEndpoints = function(Text: string) --[[ Line: 132 ]]
+	parseDualInputEndpoints = function(Text: string)
 		-- upvalues: parseDateTimeFromText (copy)
 		local v1 = Text:split(" - ")
 		local ParseDateTimeFromTextResult = if v1[1] then parseDateTimeFromText((v1[1]:gsub("^%s*(.-)%s*$", "%1"))) else nil
@@ -110,7 +110,7 @@ return {
 			return ParseDateTimeFromTextResult, nil
 		end
 	end,
-	parseInputToDraftDates = function(Text: string, p2) --[[ Line: 145 ]]
+	parseInputToDraftDates = function(Text: string, p2)
 		-- upvalues: parseDateTimeFromText (copy), DateTimeUtilitiesModule (copy), DateTimeEqualityUtilitiesModule (copy)
 		if #Text:split(" - ") ~= 2 then
 			return nil
@@ -135,7 +135,7 @@ return {
 			ParseDateTimeFromTextResult1
 		}
 	end,
-	trimInputText = function(Text: string): string --[[ Line: 124 ]]
+	trimInputText = function(Text: string): string
 		return (Text:gsub("^%s*(.-)%s*$", "%1"))
 	end
 }

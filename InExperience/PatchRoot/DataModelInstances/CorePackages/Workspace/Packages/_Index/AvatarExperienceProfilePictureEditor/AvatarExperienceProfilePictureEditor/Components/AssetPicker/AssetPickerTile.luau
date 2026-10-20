@@ -7,7 +7,7 @@ local IconSize = FoundationModule.Enums.IconSize
 local CatalogItemCard = require(Parent.AvatarExperienceCommon).Components.CatalogItemCard.CatalogItemCard
 local ItemCardThumbnail = require(Parent.AvatarExperienceUIKit).ItemCardComponents.ItemCardThumbnail
 
-local function buildPresentationSlot(Name, Url) --[[ Line: 40 ]]
+local function buildPresentationSlot(Name, Url)
 	-- upvalues: ReactModule (copy), Icon (copy), IconSize (copy), ItemCardThumbnail (copy), View (copy)
 	local Element = nil
 	local Flag = false
@@ -26,7 +26,7 @@ local function buildPresentationSlot(Name, Url) --[[ Line: 40 ]]
 	}, { Content = Element })
 end
 
-return function(p1) --[[ Line: 73 | Named "AssetPickerTile" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), CatalogItemCard (copy), buildPresentationSlot (copy)
 	local Item = p1.item
 	local IsIdMatch = Item.id == p1.selectedId
@@ -39,11 +39,11 @@ return function(p1) --[[ Line: 73 | Named "AssetPickerTile" ]]
 		presentationSlot = buildPresentationSlot(Item.iconName, Item.image),
 		priceLineContent = Item.priceLineContent,
 		isSelected = IsIdMatch,
-		onActivated = function() --[[ Line: 84 ]]
+		onActivated = function()
 			-- upvalues: p1 (copy), Item (copy)
 			p1.onSelect(Item.id)
 		end,
-		onOverlayButtonActivated = if HasOnDetailsActivatedFunction and OnDetailsActivatedFunction then function() --[[ Line: 88 ]]
+		onOverlayButtonActivated = if HasOnDetailsActivatedFunction and OnDetailsActivatedFunction then function()
 			-- upvalues: OnDetailsActivatedFunction (copy), Item (copy)
 			OnDetailsActivatedFunction(Item.id)
 		end else nil,

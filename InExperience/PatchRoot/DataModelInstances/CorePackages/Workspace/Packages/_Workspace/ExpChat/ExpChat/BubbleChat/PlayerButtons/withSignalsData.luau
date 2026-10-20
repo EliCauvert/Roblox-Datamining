@@ -6,9 +6,9 @@ local _ = require(ExpChat.Stores.GetVoiceStore.createVoiceStore)
 local v1 = require(ExpChat.Stores.GetVoiceStore)(false)
 local Signal = require(Parent.Signals).createSignal(nil)
 
-return function(p1) --[[ Line: 24 | Named "withSignalsData" ]]
+return function(p1)
 	-- upvalues: v1 (copy), UseSignalStateFunction (copy), Signal (copy), ReactModule (copy)
-	return function(Tbl) --[[ Line: 25 ]]
+	return function(Tbl)
 		-- upvalues: v1 (upval), UseSignalStateFunction (upval), Signal (upval), ReactModule (upval), p1 (copy)
 		local UserId = Tbl.userId
 		local Copy = table.clone(Tbl)

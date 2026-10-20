@@ -8,7 +8,7 @@ local Button = FoundationModule.Button
 local InputSize = Enums.InputSize
 local FFlagUserListFooterViewMore = require(Parent.SharedFlags).FFlagUserListFooterViewMore
 
-return function(p1) --[[ Line: 21 | Named "UserListFooter" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), FFlagUserListFooterViewMore (copy), ReactModule (copy), View (copy), Button (copy), InputSize (copy), Enums (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		showMore = if FFlagUserListFooterViewMore then "Feature.Friends.Action.ViewMore" else "Feature.Friends.Action.ShowMore"

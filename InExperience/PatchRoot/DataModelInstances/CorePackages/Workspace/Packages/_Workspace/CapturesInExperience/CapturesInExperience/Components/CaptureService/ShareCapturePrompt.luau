@@ -16,7 +16,7 @@ local ShareCapturePromptFinishedModule = require(Parent.Thunks.ShareCapturePromp
 local _ = require(Parent.Types)
 local FFlagCapturePermissionsPromptFreeMouseModule = require(Parent.Flags.FFlagCapturePermissionsPromptFreeMouse)
 
-return function(p1) --[[ Line: 40 ]]
+return function(p1)
 	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseScreenSizeFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), UsePinInputStateWhileOpenModule (copy), FFlagCapturePermissionsPromptFreeMouseModule (copy), EventNamesModule (copy), ShareCapturePromptFinishedModule (copy), ButtonType (copy), View (copy), CapturePromptItemModule (copy), InteractiveAlert (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
@@ -41,7 +41,7 @@ return function(p1) --[[ Line: 40 ]]
 	local SaveTitle = if IsU13LocalSavePrompt then UseLocalizationResult.saveTitle else UseLocalizationResult.shareTitle
 	local SaveYes = if IsU13LocalSavePrompt then UseLocalizationResult.saveYes else UseLocalizationResult.shareYes
 	UsePinInputStateWhileOpenModule(FFlagCapturePermissionsPromptFreeMouseModule)
-	ReactModule.useEffect(function() --[[ Line: 71 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsU13LocalSavePrompt (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval), IsVideoCapture (copy)
 		if not IsU13LocalSavePrompt then
 			UseAnalyticsModuleResult.fireEvent(EventNamesModule.ShareCapturePromptViewed)
@@ -55,11 +55,11 @@ return function(p1) --[[ Line: 40 ]]
 		IsU13LocalSavePrompt,
 		IsVideoCapture
 	})
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 84 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(Frame.AbsoluteSize)
 	end, { UseStateResult2_1 })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 89 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: IsU13LocalSavePrompt (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval), IsVideoCapture (copy), UseDispatchResult (copy), ShareCapturePromptFinishedModule (upval), p1 (copy)
 		if not IsU13LocalSavePrompt then
 			UseAnalyticsModuleResult.fireEvent(EventNamesModule.ShareCapturePromptAccepted)
@@ -73,7 +73,7 @@ return function(p1) --[[ Line: 40 ]]
 		UseAnalyticsModuleResult.fireEvent, UseDispatchResult, IsU13LocalSavePrompt,
 		IsVideoCapture, p1.promptData, p1.promptId
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 103 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: IsU13LocalSavePrompt (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval), IsVideoCapture (copy), UseDispatchResult (copy), ShareCapturePromptFinishedModule (upval), p1 (copy)
 		if not IsU13LocalSavePrompt then
 			UseAnalyticsModuleResult.fireEvent(EventNamesModule.ShareCapturePromptRejected)
@@ -91,7 +91,7 @@ return function(p1) --[[ Line: 40 ]]
 	return ReactModule.createElement(InteractiveAlert, {
 		isMiddleContentFocusable = false,
 		bodyText = SaveBodyText,
-		buttonStackInfo = ReactModule.useMemo(function() --[[ Line: 120 ]]
+		buttonStackInfo = ReactModule.useMemo(function()
 			-- upvalues: UseResult2 (copy), UseLocalizationResult (copy), ButtonType (upval), NoEnableInputDelayed (copy), UseResult1 (copy), SaveYes (copy)
 			return {
 				buttons = {
@@ -122,7 +122,7 @@ return function(p1) --[[ Line: 40 ]]
 			UseResult2,
 			SaveYes
 		}),
-		middleContent = ReactModule.useCallback(function() --[[ Line: 146 ]]
+		middleContent = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult (copy), UseStateResult1 (copy), UseScreenSizeResult (copy), ReactModule (upval), View (upval), UseResult (copy), CapturePromptItemModule (upval), Content (copy)
 			return ReactModule.createElement(View, {
 				Size = UDim2.new(1, 0, 0, 200),
@@ -135,20 +135,20 @@ return function(p1) --[[ Line: 40 ]]
 					isSelected = true,
 					showCheckbox = false,
 					content = Content,
-					updateSelected = function() --[[ Line: 161 ]] end
+					updateSelected = function() end
 				})
 			})
 		end, {
 			UseStateResult,
 			Content,
 			UseStateResult1,
-			ReactModule.useCallback(function(p2) --[[ Line: 116 ]]
+			ReactModule.useCallback(function(p2)
 				-- upvalues: UseStateResult2_2 (copy)
 				UseStateResult2_2(p2.Resolution)
 			end, { UseStateResult2_2 }),
 			UseStateResult3
 		}),
-		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 80 ]]
+		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(Frame.AbsoluteSize)
 		end, { UseStateResult2 }),

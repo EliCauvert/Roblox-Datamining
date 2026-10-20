@@ -20,7 +20,7 @@ local ConstantsModule = require(Moments.Constants)
 local FFlagMomentsFtuxTooltipCreateCopyModule = require(Moments.Flags.FFlagMomentsFtuxTooltipCreateCopy)
 local FFlagMomentsCreationFeatureGate = require(Parent.SharedFlags).FFlagMomentsCreationFeatureGate
 
-local function renderAction(p1, Icon, OnActivated, LayoutOrder) --[[ Line: 67 ]]
+local function renderAction(p1, Icon, OnActivated, LayoutOrder)
 	-- upvalues: ReactModule (copy), IconButton (copy), ButtonVariant (copy), InputSize (copy)
 	return ReactModule.createElement(IconButton, {
 		isCircular = true,
@@ -34,13 +34,13 @@ local function renderAction(p1, Icon, OnActivated, LayoutOrder) --[[ Line: 67 ]]
 	})
 end
 
-return function(p1) --[[ Line: 80 | Named "MomentsHeaderView" ]]
+return function(p1)
 	-- upvalues: renderAction (copy), ChevronLargeLeft (copy), PlusLarge (copy), ReactModule (copy), IconButton (copy), ButtonVariant (copy), InputSize (copy), NavigationMenuModule (copy), View (copy), FlyoutSidePanelIXP (copy), FlyoutLeftHeader (copy), Text (copy), FFlagMomentsCreationFeatureGate (copy), FoundationModule (copy), FFlagMomentsFtuxTooltipCreateCopyModule (copy), Coachmark (copy), HeaderBar (copy), GradientBackdrop (copy), ConstantsModule (copy)
 	local RenderLeft: (() -> any)? = nil
 	local RenderRight: (() -> any)? = nil
 	
 	if p1.variant == "back" then
-		RenderLeft = function() --[[ Line: 85 ]]
+		RenderLeft = function()
 			-- upvalues: renderAction (upval), ChevronLargeLeft (upval), p1 (copy)
 			return renderAction("back", ChevronLargeLeft, p1.onBack, 1)
 		end
@@ -68,12 +68,12 @@ return function(p1) --[[ Line: 80 | Named "MomentsHeaderView" ]]
 				onNavigateToMyMoments = p1.onNavigateToMyMoments
 			})
 			
-			RenderRight = function() --[[ Line: 104 ]]
+			RenderRight = function()
 				-- upvalues: ReactModule (upval), View (upval), t (copy)
 				return ReactModule.createElement(View, { tag = "row align-y-center gap-xsmall auto-xy" }, t)
 			end
 		elseif p1.showInteractiveButtons and p1.showCreateButton then
-			RenderRight = function() --[[ Line: 110 ]]
+			RenderRight = function()
 				-- upvalues: renderAction (upval), PlusLarge (upval), p1 (copy)
 				return renderAction("create", PlusLarge, p1.onCreateMomentButtonPressed, 1)
 			end
@@ -82,7 +82,7 @@ return function(p1) --[[ Line: 80 | Named "MomentsHeaderView" ]]
 		local IsFlyoutSidePanelEnabled = FlyoutSidePanelIXP.isFlyoutSidePanelEnabled()
 		local IsFlyoutSidePanelEnabled1 = p1.showInteractiveButtons and (p1.showHamburger and IsFlyoutSidePanelEnabled)
 		
-		RenderLeft = function() --[[ Line: 120 ]]
+		RenderLeft = function()
 			-- upvalues: IsFlyoutSidePanelEnabled1 (copy), ReactModule (upval), FlyoutLeftHeader (upval), p1 (copy), IsFlyoutSidePanelEnabled (copy), FlyoutSidePanelIXP (upval), View (upval), Text (upval)
 			return if IsFlyoutSidePanelEnabled1 then ReactModule.createElement(FlyoutLeftHeader, {
 				isRobloxLogoEnabled = false,
@@ -122,7 +122,7 @@ return function(p1) --[[ Line: 80 | Named "MomentsHeaderView" ]]
 					align = FoundationModule.Enums.PopoverAlign.End
 				}, Element1) else ReactModule.createElement(View, { LayoutOrder = 1, tag = "auto-xy" }, { Action = Element1 })
 			end
-			RenderRight = function() --[[ Line: 178 ]]
+			RenderRight = function()
 				-- upvalues: ReactModule (upval), View (upval), Element (ref), NavigationMenuModule (upval), ButtonVariant (upval), p1 (copy)
 				return ReactModule.createElement(View, { tag = "row align-y-center gap-xsmall auto-xy" }, {
 					CreateMomentButton = Element,
@@ -137,7 +137,7 @@ return function(p1) --[[ Line: 80 | Named "MomentsHeaderView" ]]
 			end
 		end
 	elseif p1.variant == "close" then
-		RenderRight = function() --[[ Line: 194 ]]
+		RenderRight = function()
 			-- upvalues: renderAction (upval), p1 (copy)
 			return renderAction("close", "icons/navigation/close_small", p1.onClose, 1)
 		end

@@ -1,4 +1,4 @@
-﻿local function _(List, p1): boolean --[[ Line: 3 | Named "checkName" ]]
+﻿local function _(List, p1): boolean
 	if type(List) == "table" then
 		for _, value in pairs(List) do
 			if value == p1 then
@@ -11,11 +11,11 @@
 	return false
 end
 
-local _ = function(List) --[[ Line: 16 | Named "getReadableName" ]]
+local _ = function(List)
 	return if type(List) == "table" then table.concat(List, " or ") elseif type(List) == "string" then List else "*"
 end
 
-local function validateWithSchemaHelper(p2, Key, p3) --[[ Line: 25 ]]
+local function validateWithSchemaHelper(p2, Key, p3)
 	-- upvalues: validateWithSchemaHelper (copy)
 	repeat
 		if Key.ClassName ~= p2.ClassName then break end
@@ -91,7 +91,7 @@ local function validateWithSchemaHelper(p2, Key, p3) --[[ Line: 25 ]]
 	return { success = false }
 end
 
-return function(p2, Key, _) --[[ Line: 82 | Named "validateWithSchema" ]]
+return function(p2, Key, _)
 	-- upvalues: validateWithSchemaHelper (copy)
 	repeat
 		if Key.ClassName ~= p2.ClassName then break end

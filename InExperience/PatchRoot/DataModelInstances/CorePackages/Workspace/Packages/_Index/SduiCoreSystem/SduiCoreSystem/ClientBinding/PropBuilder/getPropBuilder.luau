@@ -17,8 +17,8 @@ local FFlagSduiSystemBannerComponent = require(Parent.SharedFlags).FFlagSduiSyst
 local FFlagSduiBannerContextComponent = require(Parent.SharedFlags).FFlagSduiBannerContextComponent
 local FFlagSduiListComponents = require(Parent.SharedFlags).FFlagSduiListComponents
 
-local function _(p1, p2) --[[ Line: 62 | Named "applyParser" ]]
-	return function(p3, p4, p5, p6, p7, p8) --[[ Line: 66 ]]
+local function _(p1, p2)
+	return function(p3, p4, p5, p6, p7, p8)
 		-- upvalues: p1 (copy), p2 (copy)
 		local v1, v2 = p1(p3, p4, p5, p6, p7, p8, p2)
 		
@@ -26,14 +26,14 @@ local function _(p1, p2) --[[ Line: 62 | Named "applyParser" ]]
 	end
 end
 
-local _ = function(p1, p2) --[[ Line: 87 | Named "createEngineEnumProtoBuilder" ]]
+local _ = function(p1, p2)
 	-- upvalues: BuildDefaultPropModule (copy), SduiParsersModule (copy), ProtoVariableMapperModule (copy)
-	local function v80(p3) --[[ Line: 88 ]]
+	local function v80(p3)
 		-- upvalues: SduiParsersModule (upval), p1 (copy), ProtoVariableMapperModule (upval), p2 (copy)
 		return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p3, p2, (SduiParsersModule.getEngineEnumParser(p1)))
 	end
 	
-	return function(p3, p4, p5, p6, p7, p8) --[[ Line: 66 ]]
+	return function(p3, p4, p5, p6, p7, p8)
 		-- upvalues: BuildDefaultPropModule (copy), v80 (copy)
 		local v1, v2 = BuildDefaultPropModule(p3, p4, p5, p6, p7, p8, v80)
 		
@@ -43,7 +43,7 @@ end
 
 local ParseStruct = SduiClientBindingParsersModule.parseStruct
 
-local function StructProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+local function StructProp(p1, p2, p3, p4, p5, p6)
 	-- upvalues: BuildDefaultPropModule (copy), ParseStruct (copy)
 	local v1, v2 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseStruct)
 	
@@ -52,7 +52,7 @@ end
 
 local ParseImageStringProp = SduiParsersModule.parseImageStringProp_
 
-local function ImageStringProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+local function ImageStringProp(p1, p2, p3, p4, p5, p6)
 	-- upvalues: BuildStringPropModule (copy), ParseImageStringProp (copy)
 	local v1, v2 = BuildStringPropModule(p1, p2, p3, p4, p5, p6, ParseImageStringProp)
 	
@@ -61,7 +61,7 @@ end
 
 local ParseImageSetOrImageProp = SduiParsersModule.parseImageSetOrImageProp_
 
-local function ImageSetProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+local function ImageSetProp(p1, p2, p3, p4, p5, p6)
 	-- upvalues: BuildStringPropModule (copy), ParseImageSetOrImageProp (copy)
 	local v1, v2 = BuildStringPropModule(p1, p2, p3, p4, p5, p6, ParseImageSetOrImageProp)
 	
@@ -70,7 +70,7 @@ end
 
 local ParseColorPropLegacy = SduiClientBindingParsersModule.parseColorPropLegacy
 
-local function ColorProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+local function ColorProp(p1, p2, p3, p4, p5, p6)
 	-- upvalues: BuildDefaultPropModule (copy), ParseColorPropLegacy (copy)
 	local v1, v2 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseColorPropLegacy)
 	
@@ -79,7 +79,7 @@ end
 
 local ParseColor3 = SduiClientBindingParsersModule.parseColor3
 
-local function Color3Prop(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+local function Color3Prop(p1, p2, p3, p4, p5, p6)
 	-- upvalues: BuildDefaultPropModule (copy), ParseColor3 (copy)
 	local v1, v2 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseColor3)
 	
@@ -88,7 +88,7 @@ end
 
 local ParseUDim = SduiClientBindingParsersModule.parseUDim
 
-local function UDimProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+local function UDimProp(p1, p2, p3, p4, p5, p6)
 	-- upvalues: BuildDefaultPropModule (copy), ParseUDim (copy)
 	local v1, v2 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseUDim)
 	
@@ -97,7 +97,7 @@ end
 
 local ParseUDim2 = SduiClientBindingParsersModule.parseUDim2
 
-local function UDim2Prop(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+local function UDim2Prop(p1, p2, p3, p4, p5, p6)
 	-- upvalues: BuildDefaultPropModule (copy), ParseUDim2 (copy)
 	local v1, v2 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseUDim2)
 	
@@ -106,7 +106,7 @@ end
 
 local ParseVector2Prop = SduiParsersModule.parseVector2Prop_
 
-local function Vector2Prop(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+local function Vector2Prop(p1, p2, p3, p4, p5, p6)
 	-- upvalues: BuildDefaultPropModule (copy), ParseVector2Prop (copy)
 	local v1, v2 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseVector2Prop)
 	
@@ -115,7 +115,7 @@ end
 
 local ParseStringArray = SduiClientBindingParsersModule.parseStringArray
 
-local function StringArrayProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+local function StringArrayProp(p1, p2, p3, p4, p5, p6)
 	-- upvalues: BuildDefaultPropModule (copy), ParseStringArray (copy)
 	local v1, v2 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseStringArray)
 	
@@ -147,19 +147,19 @@ local config = {
 	NestedComponentListProp = require(SduiCoreSystem.ClientBinding.PropBuilder.buildNestedComponentListProp),
 	LazyNestedComponentListProp = require(SduiCoreSystem.ClientBinding.PropBuilder.buildLazyNestedComponentListProp),
 	StringArrayProp = StringArrayProp,
-	IconProp = function(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	IconProp = function(p1, p2, p3, p4, p5, p6)
 		-- upvalues: BuildDefaultPropModule (copy), ParseIconProp (copy)
 		local v1, v2 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseIconProp)
 		
 		return v1, v2
 	end,
-	GradientProp = function(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	GradientProp = function(p1, p2, p3, p4, p5, p6)
 		-- upvalues: BuildDefaultPropModule (copy), ParseGradient (copy)
 		local v1, v2 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseGradient)
 		
 		return v1, v2
 	end,
-	ArrayOfStructProp = function(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	ArrayOfStructProp = function(p1, p2, p3, p4, p5, p6)
 		-- upvalues: BuildDefaultPropModule (copy), ParseArrayOfStruct (copy)
 		local v1, v2 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseArrayOfStruct)
 		
@@ -170,7 +170,7 @@ local config = {
 if require(Parent.SharedFlags).FFlagLuaAppSduiHomePageSupport then
 	local ParsePymkItems = SduiClientBindingParsersModule.parsePymkItems
 	
-	local function ArrayOfPymkItemDataProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+	local function ArrayOfPymkItemDataProp(p1, p2, p3, p4, p5, p6)
 		-- upvalues: BuildDefaultPropModule (copy), ParsePymkItems (copy)
 		local v1, v2 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParsePymkItems)
 		
@@ -220,12 +220,12 @@ config.AnalyticsDataField = BuildDefaultPropModule
 local AutomaticSize = Enum.AutomaticSize
 local v1 = "AUTOMATIC_SIZE_"
 
-local function v46(p1) --[[ Line: 88 ]]
+local function v46(p1)
 	-- upvalues: SduiParsersModule (copy), AutomaticSize (copy), ProtoVariableMapperModule (copy), v1 (copy)
 	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v1, (SduiParsersModule.getEngineEnumParser(AutomaticSize)))
 end
 
-function config.AutomaticSizeProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+function config.AutomaticSizeProp(p1, p2, p3, p4, p5, p6)
 	-- upvalues: BuildDefaultPropModule (copy), v46 (copy)
 	local v2, v3 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v46)
 	
@@ -235,12 +235,12 @@ end
 local TextTruncate = Enum.TextTruncate
 local v2 = "TEXT_TRUNCATE_"
 
-local function v49(p1) --[[ Line: 88 ]]
+local function v49(p1)
 	-- upvalues: SduiParsersModule (copy), TextTruncate (copy), ProtoVariableMapperModule (copy), v2 (copy)
 	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v2, (SduiParsersModule.getEngineEnumParser(TextTruncate)))
 end
 
-function config.TextTruncateProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+function config.TextTruncateProp(p1, p2, p3, p4, p5, p6)
 	-- upvalues: BuildDefaultPropModule (copy), v49 (copy)
 	local v3, v4 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v49)
 	
@@ -250,12 +250,12 @@ end
 local TextXAlignment = Enum.TextXAlignment
 local v3 = "TEXT_X_ALIGNMENT_"
 
-local function v52(p1) --[[ Line: 88 ]]
+local function v52(p1)
 	-- upvalues: SduiParsersModule (copy), TextXAlignment (copy), ProtoVariableMapperModule (copy), v3 (copy)
 	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v3, (SduiParsersModule.getEngineEnumParser(TextXAlignment)))
 end
 
-function config.TextXAlignmentProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+function config.TextXAlignmentProp(p1, p2, p3, p4, p5, p6)
 	-- upvalues: BuildDefaultPropModule (copy), v52 (copy)
 	local v4, v5 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v52)
 	
@@ -265,12 +265,12 @@ end
 local TextYAlignment = Enum.TextYAlignment
 local v4 = "TEXT_Y_ALIGNMENT_"
 
-local function v55(p1) --[[ Line: 88 ]]
+local function v55(p1)
 	-- upvalues: SduiParsersModule (copy), TextYAlignment (copy), ProtoVariableMapperModule (copy), v4 (copy)
 	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v4, (SduiParsersModule.getEngineEnumParser(TextYAlignment)))
 end
 
-function config.TextYAlignmentProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+function config.TextYAlignmentProp(p1, p2, p3, p4, p5, p6)
 	-- upvalues: BuildDefaultPropModule (copy), v55 (copy)
 	local v5, v6 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v55)
 	
@@ -280,12 +280,12 @@ end
 local UIFlexMode = Enum.UIFlexMode
 local v5 = "UI_FLEX_MODE_"
 
-local function v58(p1) --[[ Line: 88 ]]
+local function v58(p1)
 	-- upvalues: SduiParsersModule (copy), UIFlexMode (copy), ProtoVariableMapperModule (copy), v5 (copy)
 	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v5, (SduiParsersModule.getEngineEnumParser(UIFlexMode)))
 end
 
-function config.UIFlexModeProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+function config.UIFlexModeProp(p1, p2, p3, p4, p5, p6)
 	-- upvalues: BuildDefaultPropModule (copy), v58 (copy)
 	local v6, v7 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v58)
 	
@@ -295,12 +295,12 @@ end
 local ScaleType = Enum.ScaleType
 local v6 = "SCALE_TYPE_"
 
-local function v61(p1) --[[ Line: 88 ]]
+local function v61(p1)
 	-- upvalues: SduiParsersModule (copy), ScaleType (copy), ProtoVariableMapperModule (copy), v6 (copy)
 	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v6, (SduiParsersModule.getEngineEnumParser(ScaleType)))
 end
 
-function config.ScaleTypeProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+function config.ScaleTypeProp(p1, p2, p3, p4, p5, p6)
 	-- upvalues: BuildDefaultPropModule (copy), v61 (copy)
 	local v7, v8 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v61)
 	
@@ -310,12 +310,12 @@ end
 local ResamplerMode = Enum.ResamplerMode
 local v7 = "RESAMPLER_MODE_"
 
-local function v64(p1) --[[ Line: 88 ]]
+local function v64(p1)
 	-- upvalues: SduiParsersModule (copy), ResamplerMode (copy), ProtoVariableMapperModule (copy), v7 (copy)
 	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v7, (SduiParsersModule.getEngineEnumParser(ResamplerMode)))
 end
 
-function config.ResamplerModeProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+function config.ResamplerModeProp(p1, p2, p3, p4, p5, p6)
 	-- upvalues: BuildDefaultPropModule (copy), v64 (copy)
 	local v8, v9 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v64)
 	
@@ -325,12 +325,12 @@ end
 local SizeConstraint = Enum.SizeConstraint
 local v8 = "SIZE_CONSTRAINT_"
 
-local function v67(p1) --[[ Line: 88 ]]
+local function v67(p1)
 	-- upvalues: SduiParsersModule (copy), SizeConstraint (copy), ProtoVariableMapperModule (copy), v8 (copy)
 	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v8, (SduiParsersModule.getEngineEnumParser(SizeConstraint)))
 end
 
-function config.SizeConstraintProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+function config.SizeConstraintProp(p1, p2, p3, p4, p5, p6)
 	-- upvalues: BuildDefaultPropModule (copy), v67 (copy)
 	local v9, v10 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v67)
 	
@@ -340,12 +340,12 @@ end
 local SelectionBehavior = Enum.SelectionBehavior
 local v9 = "SELECTION_BEHAVIOR_"
 
-local function v70(p1) --[[ Line: 88 ]]
+local function v70(p1)
 	-- upvalues: SduiParsersModule (copy), SelectionBehavior (copy), ProtoVariableMapperModule (copy), v9 (copy)
 	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v9, (SduiParsersModule.getEngineEnumParser(SelectionBehavior)))
 end
 
-function config.SelectionBehaviorProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+function config.SelectionBehaviorProp(p1, p2, p3, p4, p5, p6)
 	-- upvalues: BuildDefaultPropModule (copy), v70 (copy)
 	local v10, v11 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v70)
 	
@@ -355,12 +355,12 @@ end
 local KeyCode = Enum.KeyCode
 local v10 = "KEY_CODE_"
 
-local function v73(p1) --[[ Line: 88 ]]
+local function v73(p1)
 	-- upvalues: SduiParsersModule (copy), KeyCode (copy), ProtoVariableMapperModule (copy), v10 (copy)
 	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v10, (SduiParsersModule.getEngineEnumParser(KeyCode)))
 end
 
-function config.KeyCodeProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+function config.KeyCodeProp(p1, p2, p3, p4, p5, p6)
 	-- upvalues: BuildDefaultPropModule (copy), v73 (copy)
 	local v11, v12 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v73)
 	
@@ -369,7 +369,7 @@ end
 
 local ParseFocusNavActions = SduiClientBindingParsersModule.parseFocusNavActions
 
-function config.FocusNavActionsProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+function config.FocusNavActionsProp(p1, p2, p3, p4, p5, p6)
 	-- upvalues: BuildTablePropModule (copy), ParseFocusNavActions (copy)
 	local v11, v12 = BuildTablePropModule(p1, p2, p3, p4, p5, p6, ParseFocusNavActions)
 	
@@ -379,7 +379,7 @@ end
 config.ColorStyleProp = BuildDefaultPropModule
 local ParseUiScaledUDim2 = SduiClientBindingParsersModule.parseUiScaledUDim2
 
-function config.UiScaledUDim2Prop(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+function config.UiScaledUDim2Prop(p1, p2, p3, p4, p5, p6)
 	-- upvalues: BuildDefaultPropModule (copy), ParseUiScaledUDim2 (copy)
 	local v11, v12 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseUiScaledUDim2)
 	
@@ -388,7 +388,7 @@ end
 
 local ParseUiScaledUDim = SduiClientBindingParsersModule.parseUiScaledUDim
 
-function config.UiScaledUDimProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+function config.UiScaledUDimProp(p1, p2, p3, p4, p5, p6)
 	-- upvalues: BuildDefaultPropModule (copy), ParseUiScaledUDim (copy)
 	local v11, v12 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseUiScaledUDim)
 	
@@ -397,7 +397,7 @@ end
 
 local ParseUiScaledNumber = SduiClientBindingParsersModule.parseUiScaledNumber
 
-function config.UiScaledFloatProp(p1, p2, p3, p4, p5, p6) --[[ Line: 66 ]]
+function config.UiScaledFloatProp(p1, p2, p3, p4, p5, p6)
 	-- upvalues: BuildDefaultPropModule (copy), ParseUiScaledNumber (copy)
 	local v11, v12 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseUiScaledNumber)
 	
@@ -411,7 +411,7 @@ config.LaunchExperienceAction_ExperienceJoinData = BuildTablePropModule
 config.AvatarConfigProp = BuildTablePropModule
 config.ArrayOfAvatarProp = BuildRepeatedPropModule
 
-return function(p1) --[[ Line: 218 | Named "getPropBuilder" ]]
+return function(p1)
 	-- upvalues: config (copy), BuildDefaultPropModule (copy)
 	if not p1 then
 		error("Failed to find prop builder -- missing propDescriptorName")

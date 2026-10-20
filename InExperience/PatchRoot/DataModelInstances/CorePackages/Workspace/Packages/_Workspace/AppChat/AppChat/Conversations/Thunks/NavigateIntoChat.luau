@@ -8,9 +8,9 @@ local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3D
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 local list = { { name = require(Parent.RobloxAppEnums).AppPage.Chat } }
 
-return function(Params, p1) --[[ Line: 25 ]]
+return function(Params, p1)
 	-- upvalues: FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), list (copy), NavigateToRouteFunction (copy), NavigateIntoChatModule (copy), GetFFlagEnableStandaloneAppChatModule (copy), EnumScreensModule (copy)
-	return function(p2) --[[ Line: 26 ]]
+	return function(p2)
 		-- upvalues: FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), list (upval), p1 (copy), NavigateToRouteFunction (upval), NavigateIntoChatModule (upval), GetFFlagEnableStandaloneAppChatModule (upval), EnumScreensModule (upval), Params (copy)
 		if FFlagSignalsNavP3Dispatch then
 			NavigationCommands.to(NavigationCommands.fromLegacyPage(list[#list]), p1)

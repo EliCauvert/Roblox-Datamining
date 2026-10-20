@@ -3,7 +3,7 @@ local CryoModule = require(VerifiedBadges.Parent.Cryo)
 local FFlagLuaAppEdpBackendV2HydrateLegacyIxp = require(VerifiedBadges.Parent.SharedFlags).FFlagLuaAppEdpBackendV2HydrateLegacyIxp
 
 return require(VerifiedBadges.Parent.Rodux).createReducer({}, {
-	AddGameDetails = function(p1, p2) --[[ Line: 16 ]]
+	AddGameDetails = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		local Nones = {}
 		
@@ -17,7 +17,7 @@ return require(VerifiedBadges.Parent.Rodux).createReducer({}, {
 		end
 		return CryoModule.Dictionary.join(p1, Nones)
 	end,
-	AddGameDetailsV2 = if require(VerifiedBadges.Parent.SharedFlags).FFlagLuaAppEdpBackendV2HydrateLegacyDefault or FFlagLuaAppEdpBackendV2HydrateLegacyIxp then function(p3, p4) --[[ Line: 33 ]]
+	AddGameDetailsV2 = if require(VerifiedBadges.Parent.SharedFlags).FFlagLuaAppEdpBackendV2HydrateLegacyDefault or FFlagLuaAppEdpBackendV2HydrateLegacyIxp then function(p3, p4)
 		-- upvalues: CryoModule (copy)
 		local Nones = {}
 		
@@ -31,7 +31,7 @@ return require(VerifiedBadges.Parent.Rodux).createReducer({}, {
 		end
 		return CryoModule.Dictionary.join(p3, Nones)
 	end else nil,
-	SetAssetInfoFromCatalogItemAction = function(p5, p6) --[[ Line: 48 ]]
+	SetAssetInfoFromCatalogItemAction = function(p5, p6)
 		-- upvalues: CryoModule (copy)
 		return if p6.assetData.creatorType == Enum.CreatorType.Group.Name then CryoModule.Dictionary.join(p5, {
 			[tostring(p6.assetData.creatorTargetId)] = if p6.assetData.creatorHasVerifiedBadge then true else CryoModule.None

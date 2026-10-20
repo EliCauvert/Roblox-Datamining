@@ -4,7 +4,7 @@ local TooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
 local WithTooltipFunction = UIBloxModule.App.Dialog.TooltipV2.withTooltip
 local ReactModule = require(CorePackages.Packages.React)
 
-return function(p1) --[[ Line: 11 | Named "Tooltip" ]]
+return function(p1)
 	-- upvalues: WithTooltipFunction (copy), TooltipOrientation (copy), ReactModule (copy)
 	local ControllerPart = p1.controllerPart
 	
@@ -15,7 +15,7 @@ return function(p1) --[[ Line: 11 | Named "Tooltip" ]]
 		DEBUG_useTargetDirectly = true,
 		preferredOrientation = TooltipOrientation.Bottom,
 		guiTarget = ControllerPart:WaitForChild("BillboardGui")
-	}, function(p2) --[[ Line: 24 ]]
+	}, function(p2)
 		-- upvalues: ReactModule (upval), ControllerPart (copy)
 		return ReactModule.createElement("BillboardGui", {
 			AlwaysOnTop = true,

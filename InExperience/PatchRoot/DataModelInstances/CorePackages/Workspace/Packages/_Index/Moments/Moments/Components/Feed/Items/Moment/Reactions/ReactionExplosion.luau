@@ -6,26 +6,26 @@ local ReactionExplosionTickerModule = require(script.Parent.reactionExplosionTic
 local ReactionExplosionMathModule = require(script.Parent.reactionExplosionMath)
 local Medium = MomentsCommonModule.Enums.ReactionSize.Medium
 local _Color3 = Color3.new(1, 1, 1)
-local MemoResult = ReactModule.memo(function(p1) --[[ Line: 38 ]]
+local MemoResult = ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), ReactionExplosionMathModule (copy), _Color3 (copy), Reaction (copy), Medium (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 41 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), ReactionExplosionMathModule (upval), _Color3 (upval)
-		local MapResult = p1.progress:map(function(p2) --[[ Line: 42 ]]
+		local MapResult = p1.progress:map(function(p2)
 			-- upvalues: ReactionExplosionMathModule (upval), p1 (upval)
 			return ReactionExplosionMathModule.solveParticle(p2, p1.particle)
 		end)
 		
 		return {
-			position = MapResult:map(function(Vector): UDim2 --[[ Line: 46 ]]
+			position = MapResult:map(function(Vector): UDim2
 				return UDim2.fromOffset(Vector.x, Vector.y)
 			end),
-			rotation = MapResult:map(function(p2) --[[ Line: 49 ]]
+			rotation = MapResult:map(function(p2)
 				return p2.rotation
 			end),
-			scale = MapResult:map(function(p2) --[[ Line: 52 ]]
+			scale = MapResult:map(function(p2)
 				return p2.scale
 			end),
-			imageStyle = MapResult:map(function(p2) --[[ Line: 55 ]]
+			imageStyle = MapResult:map(function(p2)
 				-- upvalues: _Color3 (upval)
 				return { Color3 = _Color3, Transparency = p2.transparency }
 			end)
@@ -50,14 +50,14 @@ local MemoResult = ReactModule.memo(function(p1) --[[ Line: 38 ]]
 	})
 end)
 
-return ReactModule.memo(function(p1) --[[ Line: 93 | Named "ReactionExplosion" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactionExplosionTickerModule (copy), ReactModule (copy), ReactionExplosionMathModule (copy), MemoResult (copy)
 	local Ticker = p1.ticker or ReactionExplosionTickerModule.shared
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 96 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), ReactionExplosionMathModule (upval)
 		return p1.particleCount or math.random(ReactionExplosionMathModule.MIN_PARTICLES, ReactionExplosionMathModule.MAX_PARTICLES)
 	end, { p1.particleCount })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 102 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), ReactionExplosionMathModule (upval)
 		local t = {}
 		
@@ -74,12 +74,12 @@ return ReactModule.memo(function(p1) --[[ Line: 93 | Named "ReactionExplosion" ]
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	local UseRefResult = ReactModule.useRef(p1.onComplete)
 	UseRefResult.current = p1.onComplete
-	ReactModule.useLayoutEffect(function() --[[ Line: 122 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: Ticker (copy), ReactionExplosionMathModule (upval), UseBindingResult2 (copy), UseRefResult (copy)
 		local v1 = nil
 		local Flag = false
 		local Callback = nil
-		Callback = Ticker.add(function(p2) --[[ Line: 128 ]]
+		Callback = Ticker.add(function(p2)
 			-- upvalues: v1 (ref), ReactionExplosionMathModule (upval), UseBindingResult2 (upval), Flag (ref), Callback (ref), UseRefResult (upval)
 			if v1 == nil then
 				v1 = p2

@@ -8,7 +8,7 @@ local View = FoundationModule.View
 local LayoutToggleButtonModule = require(PeopleReactView.Components.Buttons.LayoutToggleButton)
 local ConstantsModule = require(PeopleReactView.Constants)
 
-return ReactModule.memo(function(Frame) --[[ Line: 23 | Named "TitleBar" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseLocalizationFunction (copy), ConstantsModule (copy), ReactModule (copy), View (copy), Text (copy), LayoutToggleButtonModule (copy)
 	return ReactModule.createElement(View, {
 		tag = "row size-full-0 auto-y align-y-center flex-x-between",

@@ -6,7 +6,7 @@ local ConstantsModule = require(script.Parent.Parent.Constants)
 local ComputeCutoutFieldOfViewDegModule = require(script.Parent.computeCutoutFieldOfViewDeg)
 local ComputeFocusAngleAboveCenterRadModule = require(script.Parent.computeFocusAngleAboveCenterRad)
 
-return function(p1): CFrame? --[[ Line: 32 | Named "frameCloseupPreviewCamera" ]]
+return function(p1): CFrame?
 	-- upvalues: ConstantsModule (copy), ComputeCutoutFieldOfViewDegModule (copy), ComputeFocusAngleAboveCenterRadModule (copy), CFrameUtility (copy), CharacterUtility (copy), CameraUtility (copy)
 	local Character = p1.character
 	local Head = Character:FindFirstChild("Head")

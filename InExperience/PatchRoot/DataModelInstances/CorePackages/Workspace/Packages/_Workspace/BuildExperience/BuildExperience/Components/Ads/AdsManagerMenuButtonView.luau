@@ -8,7 +8,7 @@ local IconName = FoundationModule.Enums.IconName
 local PopoverAlign = FoundationModule.Enums.PopoverAlign
 local PopoverSide = FoundationModule.Enums.PopoverSide
 
-return function(p1) --[[ Line: 28 | Named "AdsManagerMenuButtonView" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), Menu (copy), PopoverAlign (copy), PopoverSide (copy), IconButton (copy), IconName (copy), ButtonVariant (copy)
 	return ReactModule.createElement(Menu, {
 		LayoutOrder = p1.layoutOrder,

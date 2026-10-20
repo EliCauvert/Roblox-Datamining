@@ -12,12 +12,12 @@ local HammerCode = BuilderIconModule("hammer-code", "Filled")
 local PersonCheck = BuilderIconModule("person-check", "Filled")
 local Premium = BuilderIconModule("premium")
 
-local function _(p1) --[[ Line: 20 | Named "getSocialIcon" ]]
+local function _(p1)
 	-- upvalues: CircleSlash (copy), config (copy)
 	return if p1 then if p1.isBlocked then CircleSlash else config[p1.friendStatus] else nil
 end
 
-return function(p1, Player: Player, p2, p3) --[[ Line: 30 | Named "getPlayerBadgeIcon" ]]
+return function(p1, Player: Player, p2, p3)
 	-- upvalues: CircleSlash (copy), config (copy), HammerCode (copy), PersonCheck (copy), FFlagEnableBlackbirdCheck (copy), FFlagHidePremiumIconography (copy), Premium (copy)
 	if not p1 then
 		return nil

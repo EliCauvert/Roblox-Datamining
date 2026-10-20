@@ -13,7 +13,7 @@ local ConstantsModule = require(FriendsMenu.Constants)
 local FriendsMenuUserCardModule = require(script.Parent.FriendsMenuUserCard)
 local SelectedUsersContextModule = require(FriendsMenu.Context.SelectedUsersContext)
 
-return function(p1) --[[ Line: 28 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), SelectedUsersContextModule (copy), ResponsiveModule (copy), UseLastInputModeFunction (copy), UseFocusGuiObjectFunction (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), FriendsMenuUserCardModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ConstantsModule (copy)
 	local UseContextResult = ReactModule.useContext(SelectedUsersContextModule)
 	local UseBreakpointYOrLargerResult = ResponsiveModule.useBreakpointYOrLarger(ResponsiveModule.Keys.Medium)
@@ -35,7 +35,7 @@ return function(p1) --[[ Line: 28 ]]
 			selectedCount = UseContextResult.selectedFriendsSize
 		}
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 54 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseRefResult (copy), ReactModule (upval), UseContextResult (copy), FriendsMenuUserCardModule (upval), UseRefResult1 (copy)
 		UseRefResult.current = {}
 		local config = {
@@ -50,7 +50,7 @@ return function(p1) --[[ Line: 28 ]]
 		for UserId, selectedFriend in pairs(UseContextResult.selectedFriends) do
 			table.insert(List, { userId = UserId, userData = selectedFriend })
 		end
-		table.sort(List, function(A, B): boolean --[[ Line: 68 ]]
+		table.sort(List, function(A, B): boolean
 			return A.userData.layoutOrder < B.userData.layoutOrder
 		end)
 		
@@ -62,11 +62,11 @@ return function(p1) --[[ Line: 28 ]]
 				layoutOrder = UserData.layoutOrder,
 				userId = UserId1,
 				unremovable = UserData.unremovable,
-				onRemoved = function() --[[ Line: 81 ]]
+				onRemoved = function()
 					-- upvalues: UseRefResult1 (upval), Current (copy)
 					UseRefResult1.current = Current
 				end,
-				ref = function(p2) --[[ Line: 84 ]]
+				ref = function(p2)
 					-- upvalues: UseRefResult (upval), Current (copy)
 					UseRefResult.current[Current] = p2
 				end
@@ -74,7 +74,7 @@ return function(p1) --[[ Line: 28 ]]
 		end
 		return config
 	end, { UseContextResult.selectedFriends })
-	ReactModule.useEffect(function() --[[ Line: 93 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), UseLastInputModeResult (copy), UseRefResult (copy), UseFocusGuiObjectResult (copy)
 		if not UseRefResult1.current or UseLastInputModeResult ~= "Focus" then return end
 		local Current = UseRefResult.current

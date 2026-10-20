@@ -7,11 +7,11 @@ local _ = require(SocialUpsell.Enum.SocialUpsellType)
 local _ = require(SocialUpsell.Types)
 local v1 = nil
 
-local function createUpsellSignalStore() --[[ Line: 37 ]]
+local function createUpsellSignalStore()
 	-- upvalues: SignalsModule (copy), CryoModule (copy)
 	local t = {}
 	
-	local function _(Key) --[[ Line: 40 | Named "getOrCreateUpsellBannerDataStore" ]]
+	local function _(Key)
 		-- upvalues: t (copy), SignalsModule (upval)
 		local Entry = t[Key]
 		
@@ -24,7 +24,7 @@ local function createUpsellSignalStore() --[[ Line: 37 ]]
 	end
 	
 	return {
-		getUpsellBannerDataGetter = function(Key) --[[ Line: 53 ]]
+		getUpsellBannerDataGetter = function(Key)
 			-- upvalues: t (copy), SignalsModule (upval)
 			local Entry = t[Key]
 			
@@ -35,7 +35,7 @@ local function createUpsellSignalStore() --[[ Line: 37 ]]
 			end
 			return Entry.getBannerData
 		end,
-		setUpsellBannerData = function(Key, p1, p2) --[[ Line: 57 ]]
+		setUpsellBannerData = function(Key, p1, p2)
 			-- upvalues: t (copy), SignalsModule (upval), CryoModule (upval)
 			local Entry = t[Key]
 			
@@ -44,7 +44,7 @@ local function createUpsellSignalStore() --[[ Line: 37 ]]
 				Entry = { getBannerData = Signal, setBannerData = Signal2 }
 				t[Key] = Entry
 			end
-			Entry.setBannerData(function(p3) --[[ Line: 62 ]]
+			Entry.setBannerData(function(p3)
 				-- upvalues: p2 (copy), CryoModule (upval), p1 (copy)
 				local JoinResult = CryoModule.Dictionary.join(p3 or {}, {
 					[p1] = if p2 == nil then CryoModule.None else { isVisible = true }
@@ -56,7 +56,7 @@ local function createUpsellSignalStore() --[[ Line: 37 ]]
 	}
 end
 
-return function() --[[ Line: 75 ]]
+return function()
 	-- upvalues: v1 (ref), SignalsModule (copy), createUpsellSignalStore (copy)
 	if v1 == nil then
 		v1 = SignalsModule.createComputed(createUpsellSignalStore)(false)

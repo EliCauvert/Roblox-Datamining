@@ -8,10 +8,10 @@ local SettingEnum = SettingsServiceModule.SettingEnum
 local DevConsoleMasterModule = require(script.Parent.Parent.Parent.Parent.DevConsoleMaster)
 local LAYOUTORDER = require(script:FindFirstAncestor("Settings").Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER
 
-local function _() --[[ Line: 22 | Named "DeveloperConsoleValue" ]]
+local function _()
 	-- upvalues: ValueChangedSignal (copy), DevConsoleMasterModule (copy)
 	local NewValueChangedSignal = ValueChangedSignal.new()
-	NewValueChangedSignal:connect(function() --[[ Line: 25 ]]
+	NewValueChangedSignal:connect(function()
 		-- upvalues: DevConsoleMasterModule (upval)
 		if DevConsoleMasterModule then
 			DevConsoleMasterModule:SetVisibility(true)
@@ -26,7 +26,7 @@ local function _() --[[ Line: 22 | Named "DeveloperConsoleValue" ]]
 	return NewValueChangedSignal
 end
 
-local function DeveloperConsoleAvailability() --[[ Line: 40 ]]
+local function DeveloperConsoleAvailability()
 	-- upvalues: AvailabilitySignal (copy), RunService (copy), PlayerPermissionsModule (copy), Players (copy)
 	local NewAvailabilitySignal = AvailabilitySignal.new(false)
 	
@@ -35,7 +35,7 @@ local function DeveloperConsoleAvailability() --[[ Line: 40 ]]
 		
 		return NewAvailabilitySignal
 	else
-		spawn(function() --[[ Line: 46 ]]
+		spawn(function()
 			-- upvalues: PlayerPermissionsModule (upval), Players (upval), NewAvailabilitySignal (copy)
 			NewAvailabilitySignal:set((PlayerPermissionsModule.CanPlayerManagePlaceAsync(Players.LocalPlayer)))
 		end)
@@ -45,7 +45,7 @@ local function DeveloperConsoleAvailability() --[[ Line: 40 ]]
 end
 
 local NewValueChangedSignal = ValueChangedSignal.new()
-NewValueChangedSignal:connect(function() --[[ Line: 25 ]]
+NewValueChangedSignal:connect(function()
 	-- upvalues: DevConsoleMasterModule (copy)
 	if DevConsoleMasterModule then
 		DevConsoleMasterModule:SetVisibility(true)

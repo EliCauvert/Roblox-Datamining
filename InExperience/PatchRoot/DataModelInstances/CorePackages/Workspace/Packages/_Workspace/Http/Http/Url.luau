@@ -1,10 +1,10 @@
 ﻿local ContentProvider = game:GetService("ContentProvider")
 
-local function preventTableModification(_, _, _) --[[ Line: 34 ]]
+local function preventTableModification(_, _, _)
 	error("Attempt to modify read-only table")
 end
 
-local function _(p1) --[[ Line: 37 | Named "createReadOnlyTable" ]]
+local function _(p1)
 	-- upvalues: preventTableModification (copy)
 	return (setmetatable({}, {
 		__metatable = false,
@@ -13,7 +13,7 @@ local function _(p1) --[[ Line: 37 | Named "createReadOnlyTable" ]]
 	}))
 end
 
-local Text1, v1, Pattern = (function() --[[ Line: 12 | Named "parseBaseUrlInformation" ]]
+local Text1, v1, Pattern = (function()
 	-- upvalues: ContentProvider (copy)
 	local BaseUrl = ContentProvider.BaseUrl
 	
@@ -128,22 +128,22 @@ return (setmetatable({}, {
 		TRANSLATIONS_URL = Formatted40,
 		TWOSTEPVERIFICATION_URL = Formatted41,
 		PRIVATEMESSAGES_URL = Formatted42,
-		getUserProfileUrl = function(p1, p2): string --[[ Line: 155 ]]
+		getUserProfileUrl = function(p1, p2): string
 			return string.format("%susers/%s/profile", p1.BASE_URL, p2)
 		end,
-		getUserFriendsUrl = function(p1, p2): string --[[ Line: 159 ]]
+		getUserFriendsUrl = function(p1, p2): string
 			return string.format("%susers/%s/friends", p1.BASE_URL, p2)
 		end,
-		getUserInventoryUrl = function(p1, p2): string --[[ Line: 163 ]]
+		getUserInventoryUrl = function(p1, p2): string
 			return string.format("%susers/%s/inventory", p1.BASE_URL, p2)
 		end,
-		getPlaceDefaultThumbnailUrl = function(p1, p2, p3, p4): string --[[ Line: 167 ]]
+		getPlaceDefaultThumbnailUrl = function(p1, p2, p3, p4): string
 			return string.format("%sThumbs/Asset.ashx?width=%d&height=%d&assetId=%s&ignorePlaceMediaItems=true", p1.BASE_URL, p3, p4, (tostring(p2)))
 		end,
-		isVanitySite = function(p1): boolean --[[ Line: 177 ]]
+		isVanitySite = function(p1): boolean
 			return p1.PREFIX ~= "www"
 		end,
-		makeQueryString = function(_, List): string --[[ Line: 182 ]]
+		makeQueryString = function(_, List): string
 			local List1 = {}
 			
 			for i, value in pairs(List) do
@@ -159,7 +159,7 @@ return (setmetatable({}, {
 			end
 			return table.concat(List1, "&")
 		end,
-		stripHttpsAndTrailingSlash = function(Text: string): string --[[ Line: 205 ]]
+		stripHttpsAndTrailingSlash = function(Text: string): string
 			return (string.gsub(string.gsub(Text, "^https://", ""), "/*$", ""))
 		end
 	},

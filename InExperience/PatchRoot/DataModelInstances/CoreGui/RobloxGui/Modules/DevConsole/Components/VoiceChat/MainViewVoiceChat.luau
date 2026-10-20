@@ -7,14 +7,14 @@ local MainRowPadding = ConstantsModule.GeneralFormatting.MainRowPadding
 local UtilAndTabModule = require(Components.UtilAndTab)
 local MainViewVoiceChat = RoactModule.PureComponent:extend("MainViewVoiceChat")
 
-function MainViewVoiceChat.init(p1) --[[ Line: 14 ]]
+function MainViewVoiceChat.init(p1)
 	-- upvalues: RoactModule (copy)
-	function p1.onUtilTabHeightChanged(UtilTabHeight) --[[ Line: 15 ]]
+	function p1.onUtilTabHeightChanged(UtilTabHeight)
 		-- upvalues: p1 (copy)
 		p1:setState({ utilTabHeight = UtilTabHeight })
 	end
 	
-	function p1.onStatsUpdated(Stats) --[[ Line: 21 ]]
+	function p1.onStatsUpdated(Stats)
 		-- upvalues: p1 (copy)
 		p1:setState({ stats = Stats })
 	end
@@ -24,11 +24,11 @@ function MainViewVoiceChat.init(p1) --[[ Line: 14 ]]
 	p1.state = { utilTabHeight = 0, stats = {} }
 end
 
-function MainViewVoiceChat.didMount(p1) --[[ Line: 38 ]]
+function MainViewVoiceChat.didMount(p1)
 	p1:setState({ utilTabHeight = p1.utilRef.current.Size.Y.Offset })
 end
 
-function MainViewVoiceChat.didUpdate(p1) --[[ Line: 45 ]]
+function MainViewVoiceChat.didUpdate(p1)
 	local Size = p1.utilRef.current.Size
 	
 	if Size.Y.Offset ~= p1.state.utilTabHeight then
@@ -36,14 +36,14 @@ function MainViewVoiceChat.didUpdate(p1) --[[ Line: 45 ]]
 	end
 end
 
-function MainViewVoiceChat.willUnmount(p1) --[[ Line: 54 ]]
+function MainViewVoiceChat.willUnmount(p1)
 	if p1._statsUpdatedConnection then
 		p1._statsUpdatedConnection:Disconnect()
 		p1._statsUpdatedConnection = nil
 	end
 end
 
-function MainViewVoiceChat.render(p1) --[[ Line: 61 ]]
+function MainViewVoiceChat.render(p1)
 	-- upvalues: RoactModule (copy), ConstantsModule (copy), MainRowPadding (copy), UtilAndTabModule (copy)
 	local Size = p1.props.size
 	local list = {
@@ -92,7 +92,7 @@ function MainViewVoiceChat.render(p1) --[[ Line: 61 ]]
 		}),
 		StatsContainer = RoactModule.createElement("Frame", { LayoutOrder = 2, BackgroundTransparency = 1 }, {
 			UIListLayout = RoactModule.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),
-			Labels = (function() --[[ Line: 74 | Named "renderStatLabels" ]]
+			Labels = (function()
 				-- upvalues: list (copy), RoactModule (upval), p1 (copy), ConstantsModule (upval)
 				local TextLabels = {}
 				

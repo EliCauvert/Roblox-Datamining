@@ -19,23 +19,23 @@ local config = {
 	restingVelocityLimit = 0.1
 }
 
-local function _(p1: number): boolean --[[ Line: 53 | Named "isFullWidth" ]]
+local function _(p1: number): boolean
 	return p1 < 540
 end
 
-local function getAnchorPoint(ScreenSize): Vector2 --[[ Line: 57 ]]
+local function getAnchorPoint(ScreenSize): Vector2
 	return if ScreenSize.X < 540 then Vector2.new(0.5, 1) else Vector2.new(0, 0)
 end
 
-local function getSize(ScreenSize, XOffset, YOffset): UDim2 --[[ Line: 65 ]]
+local function getSize(ScreenSize, XOffset, YOffset): UDim2
 	return if ScreenSize.X < 540 then UDim2.new(0, ScreenSize.X, 0, YOffset) else UDim2.new(0, XOffset, 0, ScreenSize.Y)
 end
 
-local function getPosition(ScreenSize, Width): UDim2 --[[ Line: 73 ]]
+local function getPosition(ScreenSize, Width): UDim2
 	return if ScreenSize.X < 540 then UDim2.new(0.5, 0, 1, 0) else UDim2.new(1, -Width, 0, 0)
 end
 
-return function(p1) --[[ Line: 81 | Named "SideModal" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), getAnchorPoint (copy), getSize (copy), getPosition (copy), ReactOtterModule (copy), config (copy), View (copy), IconButton (copy), IconSize (copy), Text (copy), Button (copy), ButtonVariant (copy), ButtonSize (copy), FillBehavior (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(getAnchorPoint(p1.screenSize))
@@ -43,12 +43,12 @@ return function(p1) --[[ Line: 81 | Named "SideModal" ]]
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(getPosition(p1.screenSize, p1.width))
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(true)
 	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(false)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 90 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		return if p1.footerContent then p1.footerContent() else nil
 	end, { p1.footerContent })
 	local v1: number = if UseMemoResult then 35 else 0
-	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1, function() --[[ Line: 95 ]]
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1, function()
 		-- upvalues: UseStateResult4 (copy), UseStateResult5 (copy), p1 (copy)
 		if not UseStateResult4 then
 			if UseStateResult5 then
@@ -62,31 +62,31 @@ return function(p1) --[[ Line: 81 | Named "SideModal" ]]
 			end
 		end
 	end)
-	local UseMemoResult1 = ReactModule.useMemo(function(): number --[[ Line: 110 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function(): number
 		-- upvalues: UseStateResult4 (copy)
 		return if UseStateResult4 then 0 else 1
 	end, { UseStateResult4 })
-	ReactModule.useEffect(function() --[[ Line: 114 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult2_3 (copy)
 		if p1.closeWithAnimation then
 			UseStateResult2_3(false)
 		end
 	end, { p1.closeWithAnimation })
-	ReactModule.useEffect(function() --[[ Line: 120 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseMemoResult1 (copy), config (upval)
 		UseAnimatedBindingResult2(ReactOtterModule.spring(UseMemoResult1, config))
 	end, { UseMemoResult1 })
-	ReactModule.useEffect(function() --[[ Line: 124 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), getAnchorPoint (upval), p1 (copy), UseStateResult2_1 (copy), getSize (upval), UseStateResult2_2 (copy), getPosition (upval)
 		UseStateResult2(getAnchorPoint(p1.screenSize))
 		UseStateResult2_1(getSize(p1.screenSize, p1.width, p1.height))
 		UseStateResult2_2(getPosition(p1.screenSize, p1.width))
 	end, { p1.screenSize })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 130 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_3 (copy)
 		UseStateResult2_3(false)
 	end, { UseStateResult2_3 })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 134 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), UseStateResult2_4 (copy), UseStateResult2_3 (copy)
 		if not p1.buttonProps or not p1.buttonProps.validateState or p1.buttonProps.validateState() then
 			UseStateResult2_4(true)
@@ -99,7 +99,7 @@ return function(p1) --[[ Line: 81 | Named "SideModal" ]]
 	return ReactModule.createElement("TextButton", {
 		AutoButtonColor = false,
 		BorderSizePixel = 0,
-		BackgroundTransparency = UseAnimatedBindingResult:map(function(p2: number): number --[[ Line: 148 ]]
+		BackgroundTransparency = UseAnimatedBindingResult:map(function(p2: number): number
 			return p2 + 0.3
 		end),
 		BackgroundColor3 = Color3.fromHex("#000000"),
@@ -112,7 +112,7 @@ return function(p1) --[[ Line: 81 | Named "SideModal" ]]
 		SideModalContainer = ReactModule.createElement(View, {
 			tag = "size-full",
 			AnchorPoint = Vector2.new(1, 0),
-			Position = UseAnimatedBindingResult:map(function(p2): UDim2 --[[ Line: 160 ]]
+			Position = UseAnimatedBindingResult:map(function(p2): UDim2
 				-- upvalues: p1 (copy)
 				return if p1.screenSize.X < 540 then UDim2.new(1, 0, 0, p1.height * p2) else UDim2.new(1, p1.width * p2, 0, 0)
 			end)

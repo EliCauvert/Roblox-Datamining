@@ -19,12 +19,12 @@ local FFlagEnableAbuseReportRevampFlow = SharedFlagsModule.FFlagEnableAbuseRepor
 local FFlagEnableAbuseReportRevampProfileAndGroupModule = require(ProfilePlatform.Flags.FFlagEnableAbuseReportRevampProfileAndGroup)
 
 return {
-	[EnumsModule.ProfileActions.Report] = function(p1) --[[ Line: 35 ]]
+	[EnumsModule.ProfileActions.Report] = function(p1)
 		-- upvalues: EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), FFlagEnableAbuseReportRevampFlow (copy), FFlagEnableAbuseReportRevampProfileAndGroupModule (copy), OpenDynamicAbuseReportModule (copy), AbuseVectorModule (copy), CloseCentralOverlayFunction (copy), RefreshProfilePlatformActionInfoModule (copy), AppPage (copy), Url (copy), TextKeysModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
 		return {
 			text = p1.localized[EnumsModule.ProfileActions.Report],
 			onActivated = {
-				[ProfileTypes.User] = function() --[[ Line: 39 ]]
+				[ProfileTypes.User] = function()
 					-- upvalues: p1 (copy), EventNamesModule (upval), FFlagEnableAbuseReportRevampFlow (upval), FFlagEnableAbuseReportRevampProfileAndGroupModule (upval), OpenDynamicAbuseReportModule (upval), AbuseVectorModule (upval), CloseCentralOverlayFunction (upval), RefreshProfilePlatformActionInfoModule (upval), AppPage (upval), Url (upval), TextKeysModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval)
 					p1.analytics.fireAnalyticsEvent(EventNamesModule.ContextualMenuButtonReport, { buttonSurface = p1.buttonSurface })
 					
@@ -32,7 +32,7 @@ return {
 						p1.dispatch(OpenDynamicAbuseReportModule({
 							abuseVector = AbuseVectorModule.UserProfile,
 							targetId = p1.profileId,
-							onClose = function() --[[ Line: 48 ]]
+							onClose = function()
 								-- upvalues: p1 (upval), CloseCentralOverlayFunction (upval), RefreshProfilePlatformActionInfoModule (upval)
 								p1.dispatch(CloseCentralOverlayFunction())
 								p1.dispatch(RefreshProfilePlatformActionInfoModule(p1.profileId, p1.actionsComponentRequest))
@@ -55,7 +55,7 @@ return {
 						p1.dispatch(NavigateDownFunction(config))
 					end
 				end,
-				[ProfileTypes.Community] = function() --[[ Line: 70 ]]
+				[ProfileTypes.Community] = function()
 					-- upvalues: p1 (copy), EventNamesModule (upval), FFlagEnableAbuseReportRevampFlow (upval), FFlagEnableAbuseReportRevampProfileAndGroupModule (upval), OpenDynamicAbuseReportModule (upval), AbuseVectorModule (upval), CloseCentralOverlayFunction (upval), RefreshProfilePlatformActionInfoModule (upval), AppPage (upval), Url (upval), TextKeysModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval)
 					p1.analytics.fireAnalyticsEvent(EventNamesModule.ContextualMenuButtonReport, { buttonSurface = p1.buttonSurface })
 					
@@ -63,7 +63,7 @@ return {
 						p1.dispatch(OpenDynamicAbuseReportModule({
 							abuseVector = AbuseVectorModule.Group,
 							targetId = p1.profileId,
-							onClose = function() --[[ Line: 79 ]]
+							onClose = function()
 								-- upvalues: p1 (upval), CloseCentralOverlayFunction (upval), RefreshProfilePlatformActionInfoModule (upval)
 								p1.dispatch(CloseCentralOverlayFunction())
 								p1.dispatch(RefreshProfilePlatformActionInfoModule(p1.profileId, p1.actionsComponentRequest))

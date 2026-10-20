@@ -4,10 +4,10 @@ local _ = require(script.Parent.Parent.types)
 local FFlagBuildExperiencePromptFailureTelemetry = require(Parent.SharedFlags).FFlagBuildExperiencePromptFailureTelemetry
 
 return {
-	createSendPrompt = function(p1) --[[ Line: 33 ]]
+	createSendPrompt = function(p1)
 		-- upvalues: SignalsModule (copy), FFlagBuildExperiencePromptFailureTelemetry (copy)
 		return {
-			sendPrompt = function(p2) --[[ Line: 34 ]]
+			sendPrompt = function(p2)
 				-- upvalues: p1 (copy), SignalsModule (upval), FFlagBuildExperiencePromptFailureTelemetry (upval)
 				local IncrementAssistantTurnSequenceResult = p1.incrementAssistantTurnSequence()
 				local Signal, Signal2 = SignalsModule.createSignal(nil)
@@ -20,7 +20,7 @@ return {
 				local Callback1: (() -> ())? = nil
 				local Callback: (() -> ())? = nil
 				
-				local function fireCompleted(StateResult) --[[ Line: 48 ]]
+				local function fireCompleted(StateResult)
 					-- upvalues: Flag1 (ref), IncrementAssistantTurnSequenceResult (copy), p1 (upval), Callback (ref), Callback1 (ref), v1 (ref), p2 (copy)
 					if Flag1 then return end
 					if IncrementAssistantTurnSequenceResult ~= p1.getAssistantTurnSequence() then return end
@@ -43,11 +43,11 @@ return {
 					end
 				end
 				
-				local function start() --[[ Line: 73 ]]
+				local function start()
 					-- upvalues: Flag (ref), Flag3 (ref), fireCompleted (copy), p1 (upval), Signal2_1 (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), p2 (copy), v1 (ref), Signal2 (copy), Callback1 (ref), Callback (ref), SignalsModule (upval), Flag2 (ref)
 					if not Flag then
 						Flag = true
-						task.spawn(function() --[[ Line: 79 ]]
+						task.spawn(function()
 							-- upvalues: Flag3 (upval), fireCompleted (upval), p1 (upval), Signal2_1 (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), p2 (upval), v1 (upval), Signal2 (upval), Callback1 (upval), Callback (upval), SignalsModule (upval), Flag2 (upval)
 							if Flag3 then
 								fireCompleted(nil)
@@ -98,7 +98,7 @@ return {
 								afterSequenceId = p1.getLatestObservedHistorySequenceId(),
 								onDroppedChatMessage = p2.onDroppedChatMessage
 							})
-							Callback = SignalsModule.createEffect(function(p3) --[[ Line: 131 ]]
+							Callback = SignalsModule.createEffect(function(p3)
 								-- upvalues: SessionPromptResult (copy), p2 (upval), Flag2 (upval), fireCompleted (upval)
 								local StateResult = SessionPromptResult.state(p3)
 								
@@ -116,7 +116,7 @@ return {
 					end
 				end
 				
-				local function stop() --[[ Line: 148 ]]
+				local function stop()
 					-- upvalues: Flag1 (ref), Flag3 (ref), v1 (ref), Callback (ref), Callback1 (ref), fireCompleted (copy)
 					if Flag1 then return end
 					Flag3 = true

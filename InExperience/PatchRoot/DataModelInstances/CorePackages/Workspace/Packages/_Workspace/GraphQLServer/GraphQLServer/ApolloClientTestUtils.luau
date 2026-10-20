@@ -11,15 +11,15 @@ local Object = require(Parent.LuauPolyfill).Object
 local _ = require(script.ApolloClientTestUtilsTypes)
 
 return {
-	mockApolloClient = function(p1) --[[ Line: 53 ]]
+	mockApolloClient = function(p1)
 		-- upvalues: HttpService (copy), ServerModule (copy), BuildFetchFunction (copy), ApolloClient (copy), InMemoryCache (copy), TypePolicies (copy), HttpLink (copy)
 		local NewServer = ServerModule.new({
 			mockResolvers = p1.mockResolvers,
 			fetchImpl = BuildFetchFunction({
-				RequestInternal = function(_, p2) --[[ Line: 25 ]]
+				RequestInternal = function(_, p2)
 					-- upvalues: p1 (copy), HttpService (upval)
 					return {
-						Start = function(_, Callback: (any, any) -> ()) --[[ Line: 27 ]]
+						Start = function(_, Callback: (any, any) -> ())
 							-- upvalues: p1 (upval), p2 (copy), HttpService (upval)
 							local Response = if p1.responseMap and p1.responseMap[p2.Url] then p1.responseMap[p2.Url] else p1.defaultResponse or {}
 							Callback(true, {
@@ -43,20 +43,20 @@ return {
 			cache = InMemoryCache.new({ typePolicies = TypePolicies }),
 			link = HttpLink.new({
 				uri = "/api",
-				fetch = function(_, p2) --[[ Line: 65 ]]
+				fetch = function(_, p2)
 					-- upvalues: NewServer (copy)
 					return NewServer:fetchLocal(p2)
 				end
 			})
 		}))
 	end,
-	mockHttpService = function(p1) --[[ Line: 23 ]]
+	mockHttpService = function(p1)
 		-- upvalues: HttpService (copy)
 		return {
-			RequestInternal = function(_, p2) --[[ Line: 25 ]]
+			RequestInternal = function(_, p2)
 				-- upvalues: p1 (copy), HttpService (upval)
 				return {
-					Start = function(_, Callback: (any, any) -> ()) --[[ Line: 27 ]]
+					Start = function(_, Callback: (any, any) -> ())
 						-- upvalues: p1 (upval), p2 (copy), HttpService (upval)
 						local Response = if p1.responseMap and p1.responseMap[p2.Url] then p1.responseMap[p2.Url] else p1.defaultResponse or {}
 						Callback(true, {
@@ -75,9 +75,9 @@ return {
 			end
 		}
 	end,
-	appendApolloClientToReducer = function(Callback, ApolloClient) --[[ Line: 74 ]]
+	appendApolloClientToReducer = function(Callback, ApolloClient)
 		-- upvalues: Object (copy)
-		return function(p1, p2) --[[ Line: 75 ]]
+		return function(p1, p2)
 			-- upvalues: Callback (copy), Object (upval), ApolloClient (copy)
 			return (Object.assign(table.clone((Callback(p1 or {}, p2))), { ApolloClient = { apolloClient = ApolloClient } }))
 		end

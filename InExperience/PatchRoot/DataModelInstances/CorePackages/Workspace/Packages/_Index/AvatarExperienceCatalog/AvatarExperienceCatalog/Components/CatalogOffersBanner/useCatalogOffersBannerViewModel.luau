@@ -28,13 +28,13 @@ local FFlagAXCatalogOffersAutoOpenFTUXSheet = AvatarExperienceFlagsModule.FFlagA
 local FFlagAXOfferBannerImpressionOnlyOnStartup = AvatarExperienceFlagsModule.FFlagAXOfferBannerImpressionOnlyOnStartup
 local FFlagAXUpdateOffersEndsUIWithBadge = AvatarExperienceFlagsModule.FFlagAXUpdateOffersEndsUIWithBadge
 
-local function blendShiftFillForOpaqueGuiObject(Shift, SurfaceColor): Color3 --[[ Line: 70 ]]
+local function blendShiftFillForOpaqueGuiObject(Shift, SurfaceColor): Color3
 	local v1 = 1 - math.clamp(Shift.Transparency, 0, 1)
 	
 	return Color3.new(Shift.Color3.R * v1 + SurfaceColor.R * (1 - v1), Shift.Color3.G * v1 + SurfaceColor.G * (1 - v1), Shift.Color3.B * v1 + SurfaceColor.B * (1 - v1))
 end
 
-return function(p1) --[[ Line: 96 | Named "useCatalogOffersBannerViewModel" ]]
+return function(p1)
 	-- upvalues: UseAXCatalogStoreContextModule (copy), UseNetworkingFunction (copy), UseTokensFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), CatalogOffersBannerAppStorageModule (copy), GetMarketplaceOffersBannerOfferDisplayIdFunction (copy), UseSignalStateFunction (copy), FFlagAXCatalogOffersAutoOpenFTUXSheet (copy), UseCatalogOffersBannerDismissHydrationModule (copy), UseCatalogOffersBannerOffersFetchModule (copy), GetMarketplaceOffersBannerOfferDisplayTitleFunction (copy), FFlagAXOfferBannerImpressionOnlyOnStartup (copy), CatalogOffersBannerImpressionsStoreModule (copy), SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), UnifiedLoggingElementNameEnums (copy), HttpService (copy), CatalogOffersBannerOfferModalsModule (copy), FFlagAXUpdateOffersEndsUIWithBadge (copy), blendShiftFillForOpaqueGuiObject (copy)
 	local CatalogOffersBannerStore = UseAXCatalogStoreContextModule().catalogOffersBannerStore
 	local UseNetworkingResult = UseNetworkingFunction()
@@ -44,13 +44,13 @@ return function(p1) --[[ Line: 96 | Named "useCatalogOffersBannerViewModel" ]]
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
 	local UseLocalizationResult = UseLocalizationFunction({ okModalButton = "CommonUI.Controls.Action.OK" })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 118 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_3 (copy), UseStateResult2_2 (copy), UseStateResult2_1 (copy)
 		UseStateResult2_3(false)
 		UseStateResult2_2(false)
 		UseStateResult2_1(nil)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 124 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult (copy), CatalogOffersBannerAppStorageModule (upval), GetMarketplaceOffersBannerOfferDisplayIdFunction (upval), UseStateResult2_1 (copy), UseStateResult2_2 (copy)
 		if UseStateResult and UseStateResult.modal then
 			CatalogOffersBannerAppStorageModule.writeSeenOfferSheetForCurrentOffer(GetMarketplaceOffersBannerOfferDisplayIdFunction(UseStateResult))
@@ -58,21 +58,21 @@ return function(p1) --[[ Line: 96 | Named "useCatalogOffersBannerViewModel" ]]
 			UseStateResult2_2(true)
 		end
 	end, { UseStateResult })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 132 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_3 (copy)
 		UseStateResult2_3(true)
 	end, {})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 136 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_3 (copy)
 		UseStateResult2_3(false)
 	end, {})
 	local UseSignalStateResult = UseSignalStateFunction(CatalogOffersBannerStore.getPayload)
 	local UseSignalStateResult1 = UseSignalStateFunction(CatalogOffersBannerStore.getDismissed)
-	ReactModule.useLayoutEffect(function() --[[ Line: 143 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseSignalStateResult (copy), CatalogOffersBannerAppStorageModule (upval), UseStateResult2 (copy)
 		UseStateResult2(if UseSignalStateResult == nil then nil else CatalogOffersBannerAppStorageModule.resolveVisibleOffer(UseSignalStateResult))
 	end, { UseSignalStateResult })
-	ReactModule.useEffect(function() --[[ Line: 151 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseStateResult1 (copy), GetMarketplaceOffersBannerOfferDisplayIdFunction (upval), FFlagAXCatalogOffersAutoOpenFTUXSheet (upval), CatalogOffersBannerAppStorageModule (upval), UseStateResult2_1 (copy), UseStateResult2_2 (copy)
 		if UseStateResult == nil or UseStateResult.modal == nil then return end
 		if UseStateResult1 ~= nil then return end
@@ -91,7 +91,7 @@ return function(p1) --[[ Line: 96 | Named "useCatalogOffersBannerViewModel" ]]
 	UseCatalogOffersBannerDismissHydrationModule(CatalogOffersBannerStore, UseSignalStateResult)
 	UseCatalogOffersBannerOffersFetchModule(CatalogOffersBannerStore, UseNetworkingResult)
 	local MarketplaceOffersBannerOfferDisplayTitle = if UseStateResult == nil then nil else GetMarketplaceOffersBannerOfferDisplayTitleFunction(UseStateResult)
-	ReactModule.useEffect(function() --[[ Line: 175 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), MarketplaceOffersBannerOfferDisplayTitle (copy), UseSignalStateResult1 (copy)
 		local OnBannerVisibleChangedFunction: (any) -> () = p1.onBannerVisibleChanged
 		
@@ -103,7 +103,7 @@ return function(p1) --[[ Line: 96 | Named "useCatalogOffersBannerViewModel" ]]
 		MarketplaceOffersBannerOfferDisplayTitle,
 		p1.onBannerVisibleChanged
 	})
-	ReactModule.useEffect(function() --[[ Line: 183 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult1 (copy), UseStateResult (copy), MarketplaceOffersBannerOfferDisplayTitle (copy), FFlagAXOfferBannerImpressionOnlyOnStartup (upval), CatalogOffersBannerImpressionsStoreModule (upval), SendUnifiedEventLogFunction (upval), UnifiedEventLogEnums (upval), UnifiedLoggingSurface (upval), UnifiedLoggingElementNameEnums (upval), HttpService (upval)
 		if not UseSignalStateResult1 and UseStateResult and MarketplaceOffersBannerOfferDisplayTitle and (not FFlagAXOfferBannerImpressionOnlyOnStartup or UseStateResult.offerId and not CatalogOffersBannerImpressionsStoreModule.hasSeenOfferId(UseStateResult.offerId)) then
 			CatalogOffersBannerImpressionsStoreModule.addOfferId(UseStateResult.offerId)
@@ -141,7 +141,7 @@ return function(p1) --[[ Line: 96 | Named "useCatalogOffersBannerViewModel" ]]
 				iconEmphasisStyle = UseTokensResult.Color.System.Emphasis,
 				titleContentEmphasisStyle = UseTokensResult.Color.Content.Emphasis,
 				titleText = MarketplaceOffersBannerOfferDisplayTitle,
-				onCloseActivated = function() --[[ Line: 225 ]]
+				onCloseActivated = function()
 					-- upvalues: CatalogOffersBannerAppStorageModule (upval), GetMarketplaceOffersBannerOfferDisplayIdFunction (upval), UseStateResult (copy), UseSignalStateResult (copy), UseStateResult2 (copy), CatalogOffersBannerStore (copy)
 					CatalogOffersBannerAppStorageModule.writeDismissedForCurrentOffer(GetMarketplaceOffersBannerOfferDisplayIdFunction(UseStateResult))
 					local ResolveVisibleOfferResult = CatalogOffersBannerAppStorageModule.resolveVisibleOffer(UseSignalStateResult)

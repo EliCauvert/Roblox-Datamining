@@ -2,7 +2,7 @@
 local _ = require(AvatarExperienceCatalog.Parent.AvatarExperienceRodux)
 local _ = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListInfoViewModel)
 
-return function(List, List1) --[[ Line: 18 | Named "buildHydrationReduxPayload" ]]
+return function(List, List1)
 	local t = {}
 	
 	for _, value in List do

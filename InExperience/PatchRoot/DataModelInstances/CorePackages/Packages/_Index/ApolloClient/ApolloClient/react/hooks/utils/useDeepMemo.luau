@@ -3,7 +3,7 @@ local UseRefFunction = require(Parent.Parent.React).useRef
 local EqualModule = require(Parent.jsutils.equal)
 
 return {
-	useDeepMemo = function(Callback, Key) --[[ Line: 26 ]]
+	useDeepMemo = function(Callback, Key)
 		-- upvalues: UseRefFunction (copy), EqualModule (copy)
 		local UseRefResult = UseRefFunction(nil)
 		

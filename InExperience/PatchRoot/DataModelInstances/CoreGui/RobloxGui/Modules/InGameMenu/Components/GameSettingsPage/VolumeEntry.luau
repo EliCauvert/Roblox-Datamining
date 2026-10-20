@@ -28,9 +28,9 @@ VolumeEntry.validateProps = T.strictInterface({
 	buttonRef = T.optional(T.table)
 })
 
-function VolumeEntry.init(p1) --[[ Line: 41 ]]
+function VolumeEntry.init(p1)
 	-- upvalues: UserGameSettings (copy)
-	function p1.onVolumeChanged() --[[ Line: 42 ]]
+	function p1.onVolumeChanged()
 		-- upvalues: p1 (copy), UserGameSettings (upval)
 		p1:setState({
 			volume = math.floor(UserGameSettings.MasterVolume * 10 + 0.5)
@@ -40,7 +40,7 @@ function VolumeEntry.init(p1) --[[ Line: 41 ]]
 	p1.onVolumeChanged()
 end
 
-function VolumeEntry.render(p1) --[[ Line: 51 ]]
+function VolumeEntry.render(p1)
 	-- upvalues: Roact (copy), SliderEntryModule (copy), FFlagRenameVolumeToMainVolumeModule (copy), UserGameSettings (copy), VolumeChangeSound (copy), SendAnalyticsModule (copy), ConstantsModule (copy), ExternalEventConnectionModule (copy), MasterVolumePropertyChangedSignal (copy)
 	return Roact.createFragment({
 		VolumeSlider = Roact.createElement(SliderEntryModule, {
@@ -50,7 +50,7 @@ function VolumeEntry.render(p1) --[[ Line: 51 ]]
 			labelKey = if FFlagRenameVolumeToMainVolumeModule then "CoreScripts.InGameMenu.GameSettings.MainVolume" else "CoreScripts.InGameMenu.GameSettings.Volume",
 			LayoutOrder = p1.props.LayoutOrder,
 			value = p1.state.volume,
-			valueChanged = function(p2: number) --[[ Line: 62 ]]
+			valueChanged = function(p2: number)
 				-- upvalues: UserGameSettings (upval), VolumeChangeSound (upval), SendAnalyticsModule (upval), ConstantsModule (upval)
 				UserGameSettings.MasterVolume = p2 / 10
 				VolumeChangeSound:Play()

@@ -17,7 +17,7 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagDesktopGameJoinCardGamepadSupport = SharedFlagsModule.FFlagDesktopGameJoinCardGamepadSupport
 local FFlagMobileGameJoinCardGamepadSupport = SharedFlagsModule.FFlagMobileGameJoinCardGamepadSupport or FFlagDesktopGameJoinCardGamepadSupport
 
-return function(Frame) --[[ Line: 32 | Named "AgeCheckUpsellCTA" ]]
+return function(Frame)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), View (copy), Divider (copy), DividerVariant (copy), Icon (copy), IconName (copy), IconSize (copy), IconVariant (copy), Text (copy), Button (copy), FFlagMobileGameJoinCardGamepadSupport (copy), ButtonVariant (copy), InputSize (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		unlock = "Feature.ExperienceDetails.PlayButtonText.Unlock",

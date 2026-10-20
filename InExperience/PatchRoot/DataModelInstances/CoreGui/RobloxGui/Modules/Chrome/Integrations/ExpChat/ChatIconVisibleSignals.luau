@@ -8,7 +8,7 @@ local ExpChatOnShowIconChatAvailabilityStatus = game:DefineFastFlag("ExpChatOnSh
 local GetChatStatusStore = if ExpChatOnShowIconChatAvailabilityStatus then require(CorePackages.Workspace.Packages.ExpChat).Stores.GetChatStatusStore else nil
 local UniversalAppPolicyModule = if GetFFlagExpChatGuacChatDisabledReasonFunction() then require(CorePackages.Workspace.Packages.UniversalAppPolicy) else nil
 
-local function new(p1) --[[ Line: 23 ]]
+local function new(p1)
 	-- upvalues: SignalsModule (copy), FFlagExpChatWindowSyncUnibar (copy), GetFFlagExpChatGuacChatDisabledReasonFunction (copy), UniversalAppPolicyModule (ref), FFlagEnableAEGIS2CommsFAEUpsell (copy), ExpChatOnShowIconChatAvailabilityStatus (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(true)
 	local Signal1, Signal2_1 = SignalsModule.createSignal(false)
@@ -22,14 +22,14 @@ local function new(p1) --[[ Line: 23 ]]
 	end
 	local IsRegionLocked: boolean = if GetFFlagExpChatGuacChatDisabledReasonFunction() and UniversalAppPolicyModule then UniversalAppPolicyModule.getAppFeaturePolicies().getExperienceChatAvailability() == "regionLocked" else false
 	local ExpChatOnShowIconChatAvailabilityStatus1 = FFlagEnableAEGIS2CommsFAEUpsell and ExpChatOnShowIconChatAvailabilityStatus
-	local Computed = SignalsModule.createComputed(function(p2) --[[ Line: 41 ]]
+	local Computed = SignalsModule.createComputed(function(p2)
 		-- upvalues: Signal (copy), ExpChatOnShowIconChatAvailabilityStatus1 (copy), Signal1 (copy), FFlagExpChatWindowSyncUnibar (upval), Signal4 (copy), Signal3 (copy), Callback (ref), p1 (copy), GetFFlagExpChatGuacChatDisabledReasonFunction (upval), IsRegionLocked (ref)
 		return if Signal(p2) then not ExpChatOnShowIconChatAvailabilityStatus1 and Signal1(p2) or (not FFlagExpChatWindowSyncUnibar and Signal4(p2) or not FFlagExpChatWindowSyncUnibar and Signal3(p2)) or (if FFlagExpChatWindowSyncUnibar and Callback(p2) then true else ExpChatOnShowIconChatAvailabilityStatus1 and p1.getChatStatus(p2) ~= "NoOne" or (if GetFFlagExpChatGuacChatDisabledReasonFunction() and IsRegionLocked then true else false)) else false
 	end)
 	
 	return {
 		getIsChatIconVisible = Computed,
-		getIsChatWindowVisible = if FFlagExpChatWindowSyncUnibar then SignalsModule.createComputed(function(p2): boolean --[[ Line: 73 ]]
+		getIsChatWindowVisible = if FFlagExpChatWindowSyncUnibar then SignalsModule.createComputed(function(p2): boolean
 			-- upvalues: Computed (copy), Callback (ref)
 			return if Computed(p2) and Callback(p2) then true else false
 		end) else nil,

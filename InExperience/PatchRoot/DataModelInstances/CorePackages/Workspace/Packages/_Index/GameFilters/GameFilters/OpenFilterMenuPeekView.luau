@@ -4,9 +4,9 @@ local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
 local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(Filter, OnFilterApplied, OnFilterMenuClosed, SendFilterClick) --[[ Line: 12 | Named "OpenFilterMenuPeekView" ]]
+return function(Filter, OnFilterApplied, OnFilterMenuClosed, SendFilterClick)
 	-- upvalues: AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
-	return function(p1) --[[ Line: 13 ]]
+	return function(p1)
 		-- upvalues: AppPage (upval), Filter (copy), OnFilterApplied (copy), OnFilterMenuClosed (copy), SendFilterClick (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval)
 		local config = {
 			name = AppPage.GameFilterMenuPeekView,

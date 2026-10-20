@@ -1,4 +1,4 @@
-﻿return function(p1, p2) --[[ Line: 5 | Named "consumeEntrySource" ]]
+﻿return function(p1, p2)
 	if not p1 or not p1.getParam then
 		return "watch_tab"
 	end

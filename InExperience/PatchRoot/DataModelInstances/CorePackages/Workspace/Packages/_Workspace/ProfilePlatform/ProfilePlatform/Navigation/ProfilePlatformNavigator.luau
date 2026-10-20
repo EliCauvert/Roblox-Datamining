@@ -32,17 +32,17 @@ local config = {
 	renderUnderlyingPage = true
 }
 
-local function _(p1, p2) --[[ Line: 57 | Named "makeFullBleedNavigationOptions" ]]
+local function _(p1, p2)
 	-- upvalues: config (copy)
 	local P1 = p2 or config
 	
-	return function(p3) --[[ Line: 62 ]]
+	return function(p3)
 		-- upvalues: P1 (copy), p1 (copy)
 		return if p3.navigation.getParam("fullBleed") then P1 else p1
 	end
 end
 
-local function LazyEditProfileImageContainer(p1) --[[ Line: 72 ]]
+local function LazyEditProfileImageContainer(p1)
 	-- upvalues: ProfilePlatform (copy), ReactModule (copy)
 	return ReactModule.createElement(require(ProfilePlatform.Components.EditProfileImage.EditProfileImageContainer), p1)
 end
@@ -54,7 +54,7 @@ local List = {
 	{
 		[EnumsModule.Screens.EditProfilePage] = {
 			screen = require(Parent.EditProfile.EditProfileLanding),
-			navigationOptions = if FFlagAXEnableProfileTab then function(p1) --[[ Line: 62 ]]
+			navigationOptions = if FFlagAXEnableProfileTab then function(p1)
 				-- upvalues: config (copy), NavigationOptions (copy)
 				return if p1.navigation.getParam("fullBleed") then config else NavigationOptions
 			end else NavigationOptions
@@ -121,7 +121,7 @@ if FFlagAXEnableProfileTab then
 		absorbInput = false
 	}
 	
-	local function NavigationOptions1(p1) --[[ Line: 62 ]]
+	local function NavigationOptions1(p1)
 		-- upvalues: config (copy), config2 (copy)
 		return if p1.navigation.getParam("fullBleed") then config else config2
 	end
@@ -170,7 +170,7 @@ if FFlagEditProfileImageV2Enabled then
 	if FFlagAXEnableProfileTab then
 		local Config4 = config4 or config
 		
-		local function NavigationOptions2(p1) --[[ Line: 62 ]]
+		local function NavigationOptions2(p1)
 			-- upvalues: Config4 (copy), config3 (copy)
 			return if p1.navigation.getParam("fullBleed") then Config4 else config3
 		end

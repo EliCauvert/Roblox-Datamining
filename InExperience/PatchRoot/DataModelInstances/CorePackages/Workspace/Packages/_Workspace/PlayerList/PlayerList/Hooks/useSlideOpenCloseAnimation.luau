@@ -2,7 +2,7 @@
 local ReactModule = require(Parent.React)
 local ReactOtterModule = require(Parent.ReactOtter)
 
-local function _(p1, StartingValue) --[[ Line: 53 | Named "springOptions" ]]
+local function _(p1, StartingValue)
 	return {
 		dampingRatio = p1.dampingRatio,
 		frequency = p1.frequency,
@@ -14,7 +14,7 @@ return {
 	MENU_ZOOM_CLOSED_SCALE = 1.25,
 	PANEL_RECESS_SCALE = 0.95,
 	PANEL_RECESS_TRANSPARENCY = 0.6,
-	useSlideOpenCloseAnimation = function(Current, p1, p2) --[[ Line: 61 ]]
+	useSlideOpenCloseAnimation = function(Current, p1, p2)
 		-- upvalues: ReactModule (copy), ReactOtterModule (copy)
 		local UseStateResult, UseStateResult2 = ReactModule.useState(Current)
 		local UseRefResult = ReactModule.useRef(Current)
@@ -24,19 +24,19 @@ return {
 		if Current and not UseStateResult then
 			UseStateResult2(true)
 		end
-		local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(if Current then 0 else p1.hiddenOffset, (ReactModule.useCallback(function() --[[ Line: 78 ]]
+		local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(if Current then 0 else p1.hiddenOffset, (ReactModule.useCallback(function()
 			-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
 			if not UseRefResult.current then
 				UseStateResult2(false)
 			end
 		end, {})))
-		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 86 ]]
+		local UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: UseAnimatedBindingResult (copy)
-			return UseAnimatedBindingResult:map(function(XScale): UDim2 --[[ Line: 87 ]]
+			return UseAnimatedBindingResult:map(function(XScale): UDim2
 				return UDim2.new(XScale, 0, 0, 0)
 			end)
 		end, { UseAnimatedBindingResult })
-		ReactModule.useEffect(function() --[[ Line: 94 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRefResult1 (copy), Current (copy), UseStateResult2 (copy), p1 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
 			local Current1 = UseRefResult1.current
 			UseRefResult1.current = false

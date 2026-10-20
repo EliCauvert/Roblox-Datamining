@@ -1,7 +1,7 @@
 ﻿local _ = require(script:FindFirstAncestor("Moments").Parent.MomentsTypes)
 local _ = require(script.Parent.FeedTypes)
 
-local function _(p1, p2): boolean --[[ Line: 17 | Named "matches" ]]
+local function _(p1, p2): boolean
 	if p2 == nil then
 		return false
 	else
@@ -11,11 +11,11 @@ local function _(p1, p2): boolean --[[ Line: 17 | Named "matches" ]]
 	end
 end
 
-return function() --[[ Line: 26 | Named "createPendingFeedOverlay" ]]
+return function()
 	local t = {}
 	local t1 = {}
 	
-	local function identity(p1) --[[ Line: 55 ]]
+	local function identity(p1)
 		-- upvalues: t (copy)
 		if p1.kind ~= "moment" then
 			return nil
@@ -42,7 +42,7 @@ return function() --[[ Line: 26 | Named "createPendingFeedOverlay" ]]
 	end
 	
 	return {
-		update = function(p2, List): boolean --[[ Line: 30 ]]
+		update = function(p2, List): boolean
 			-- upvalues: t1 (ref), t (copy)
 			local Flag = false
 			t1 = p2
@@ -67,7 +67,7 @@ return function() --[[ Line: 26 | Named "createPendingFeedOverlay" ]]
 			end
 			return Flag
 		end,
-		retireMissing = function(List) --[[ Line: 68 ]]
+		retireMissing = function(List)
 			-- upvalues: identity (copy), t (copy)
 			local t2 = {}
 			
@@ -84,7 +84,7 @@ return function() --[[ Line: 26 | Named "createPendingFeedOverlay" ]]
 				end
 			end
 		end,
-		merge = function(List) --[[ Line: 83 ]]
+		merge = function(List)
 			-- upvalues: t (copy), t2 (ref), identity (copy)
 			for _, value in t do
 				value.admitted = false
@@ -113,7 +113,7 @@ return function() --[[ Line: 26 | Named "createPendingFeedOverlay" ]]
 			local List1 = {}
 			local t5 = {}
 			
-			local function _(p3) --[[ Line: 106 | Named "append" ]]
+			local function _(p3)
 				-- upvalues: identity (upval), t5 (copy), List1 (copy)
 				local IdentityResult = identity(p3)
 				

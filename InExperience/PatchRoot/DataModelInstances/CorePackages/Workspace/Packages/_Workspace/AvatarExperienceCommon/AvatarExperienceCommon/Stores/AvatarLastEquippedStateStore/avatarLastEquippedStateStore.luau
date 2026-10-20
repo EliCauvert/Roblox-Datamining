@@ -3,27 +3,27 @@ local ChangedLayeredMakeupSorting = false
 local ShouldRevertLastEquippedState = true
 
 return {
-	getAvatarLastEquippedState = function() --[[ Line: 25 ]]
+	getAvatarLastEquippedState = function()
 		-- upvalues: AvatarLastEquippedState (ref)
 		return AvatarLastEquippedState
 	end,
-	setAvatarLastEquippedState = function(Value) --[[ Line: 29 ]]
+	setAvatarLastEquippedState = function(Value)
 		-- upvalues: AvatarLastEquippedState (ref)
 		AvatarLastEquippedState = Value
 	end,
-	getChangedLayeredMakeupSorting = function() --[[ Line: 33 ]]
+	getChangedLayeredMakeupSorting = function()
 		-- upvalues: ChangedLayeredMakeupSorting (ref)
 		return ChangedLayeredMakeupSorting
 	end,
-	setChangedLayeredMakeupSorting = function(Value) --[[ Line: 37 ]]
+	setChangedLayeredMakeupSorting = function(Value)
 		-- upvalues: ChangedLayeredMakeupSorting (ref)
 		ChangedLayeredMakeupSorting = Value
 	end,
-	getShouldRevertLastEquippedState = function() --[[ Line: 41 ]]
+	getShouldRevertLastEquippedState = function()
 		-- upvalues: ShouldRevertLastEquippedState (ref)
 		return ShouldRevertLastEquippedState
 	end,
-	setShouldRevertLastEquippedState = function(Value) --[[ Line: 45 ]]
+	setShouldRevertLastEquippedState = function(Value)
 		-- upvalues: ShouldRevertLastEquippedState (ref)
 		ShouldRevertLastEquippedState = Value
 	end

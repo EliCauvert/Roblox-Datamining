@@ -20,7 +20,7 @@ local config1 = {
 	groupTransparency = ReactModule.createBinding(0)
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 30 | Named "TiltKeyart" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), config (copy), config1 (copy), TILTDEGREES (copy), FFlagLoadingScreenMilestones (copy), View (copy), Skeleton (copy), Image (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
@@ -28,7 +28,7 @@ return ReactModule.memo(function(p1) --[[ Line: 30 | Named "TiltKeyart" ]]
 	local Frame = p1.frame or config1
 	local ScaledSize = UseTokensResult.Size.Size_2400 * 2
 	local ScaledSizeRatio = ScaledSize / (math.cos((math.rad(TILTDEGREES))) + math.sin((math.rad(TILTDEGREES))))
-	local UseResult = ReactModule.useCallback(function(AssetFetchStatus) --[[ Line: 39 ]]
+	local UseResult = ReactModule.useCallback(function(AssetFetchStatus)
 		-- upvalues: UseStateResult2 (copy)
 		if AssetFetchStatus == Enum.AssetFetchStatus.Success then
 			UseStateResult2(true)
@@ -36,7 +36,7 @@ return ReactModule.memo(function(p1) --[[ Line: 30 | Named "TiltKeyart" ]]
 	end, {})
 	
 	if FFlagLoadingScreenMilestones then
-		ReactModule.useEffect(function() --[[ Line: 46 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p1 (copy), UseStateResult (copy)
 			local OnThumbnailLoadedFunction: (any) -> () = p1.onThumbnailLoaded
 			
@@ -44,7 +44,7 @@ return ReactModule.memo(function(p1) --[[ Line: 30 | Named "TiltKeyart" ]]
 			if UseStateResult and p1.thumbnailUrl ~= "" then
 				OnThumbnailLoadedFunction(p1.thumbnailUrl)
 			end
-			return function() --[[ Line: 54 ]]
+			return function()
 				-- upvalues: OnThumbnailLoadedFunction (copy)
 				OnThumbnailLoadedFunction(nil)
 			end
@@ -58,13 +58,13 @@ return ReactModule.memo(function(p1) --[[ Line: 30 | Named "TiltKeyart" ]]
 			tag = "position-center-center anchor-center-center stroke-standard stroke-system-neutral",
 			testId = "tilt-keyart-frame",
 			ZIndex = 1,
-			Size = Frame.sizeScale:map(function(p2): UDim2 --[[ Line: 67 ]]
+			Size = Frame.sizeScale:map(function(p2): UDim2
 				-- upvalues: ScaledSizeRatio (copy)
 				return UDim2.fromOffset(ScaledSizeRatio * p2, ScaledSizeRatio * p2)
 			end),
 			Rotation = Frame.rotation,
 			GroupTransparency = Frame.groupTransparency,
-			Visible = Frame.groupTransparency:map(function(p2: number): boolean --[[ Line: 72 ]]
+			Visible = Frame.groupTransparency:map(function(p2: number): boolean
 				return p2 < 1
 			end)
 		}),
@@ -72,7 +72,7 @@ return ReactModule.memo(function(p1) --[[ Line: 30 | Named "TiltKeyart" ]]
 			tag = "position-center-center anchor-center-center",
 			testId = "tilt-keyart-card",
 			ZIndex = 2,
-			Size = Keyart.sizeScale:map(function(p2): UDim2 --[[ Line: 80 ]]
+			Size = Keyart.sizeScale:map(function(p2): UDim2
 				-- upvalues: ScaledSizeRatio (copy)
 				return UDim2.fromOffset(ScaledSizeRatio * p2, ScaledSizeRatio * p2)
 			end),
@@ -95,7 +95,7 @@ return ReactModule.memo(function(p1) --[[ Line: 30 | Named "TiltKeyart" ]]
 			RevealCover = ReactModule.createElement(View, {
 				tag = "size-full",
 				ZIndex = 3,
-				backgroundStyle = Keyart.coverTransparency:map(function(Transparency) --[[ Line: 106 ]]
+				backgroundStyle = Keyart.coverTransparency:map(function(Transparency)
 					-- upvalues: UseTokensResult (copy)
 					return {
 						Color3 = UseTokensResult.Color.Extended.Black.Black_100.Color3,

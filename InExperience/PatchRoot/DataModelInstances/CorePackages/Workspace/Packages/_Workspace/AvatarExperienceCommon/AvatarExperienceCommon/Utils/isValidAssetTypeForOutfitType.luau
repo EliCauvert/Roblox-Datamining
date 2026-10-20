@@ -4,7 +4,7 @@ local IsMakeupAssetTypeModule = require(AvatarExperienceCommon.Utils.isMakeupAss
 local _ = require(AvatarExperienceCommon.Types.CategoryTypes.CategoryTypes)
 local OutfitTypesModule = require(AvatarExperienceCommon.Enums.OutfitTypes)
 
-return function(EyebrowAccessory, Avatar) --[[ Line: 11 | Named "isValidAssetTypeForOutfitType" ]]
+return function(EyebrowAccessory, Avatar)
 	-- upvalues: OutfitTypesModule (copy), IsMakeupAssetTypeModule (copy), ASSETTYPENAMETOIDSTRING (copy)
 	return not Avatar or (if Avatar == OutfitTypesModule.Makeup then IsMakeupAssetTypeModule(EyebrowAccessory) or (EyebrowAccessory == ASSETTYPENAMETOIDSTRING.EyebrowAccessory or EyebrowAccessory == ASSETTYPENAMETOIDSTRING.EyelashAccessory) else Avatar == OutfitTypesModule.Avatar or Avatar == OutfitTypesModule.EditableAvatar or true)
 end

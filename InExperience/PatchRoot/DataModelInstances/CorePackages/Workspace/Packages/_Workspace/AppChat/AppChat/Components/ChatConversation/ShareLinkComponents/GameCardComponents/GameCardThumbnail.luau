@@ -16,7 +16,7 @@ local list = {
 	NumberSequenceKeypoint.new(1, 0)
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 38 | Named "GameCardThumbnail" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), FFlagAppChatNativeFoundationCornerRadiiModule (copy), ReactModule (copy), Image (copy), GetGameCardThumbnailCornerRadiiModule (copy), RoundedVariantModule (copy), list (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local Size500 = UseTokensFunction().Size.Size_500
@@ -37,7 +37,7 @@ return ReactModule.memo(function(p1) --[[ Line: 38 | Named "GameCardThumbnail" ]
 			Visible = UnionResult.Visible
 		})
 	else
-		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 63 ]]
+		local UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: UnionResult (copy), RoundedVariantModule (upval)
 			local Degrees = math.deg((math.atan(UnionResult.aspectRatio)))
 			
@@ -67,7 +67,7 @@ return ReactModule.memo(function(p1) --[[ Line: 38 | Named "GameCardThumbnail" ]
 				Image = UnionResult.gameThumbnail,
 				Visible = UnionResult.Visible
 			}, {
-				TransparencyGradient = ReactModule.useMemo(function() --[[ Line: 73 ]]
+				TransparencyGradient = ReactModule.useMemo(function()
 					-- upvalues: ReactModule (upval), UnionResult (copy), UseMemoResult (copy), list (upval)
 					return ReactModule.createElement("UIGradient", {
 						Rotation = if UnionResult.roundedVariant then UseMemoResult[UnionResult.roundedVariant] else 0,

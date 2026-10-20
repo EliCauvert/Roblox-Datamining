@@ -5,11 +5,11 @@ local Actions = ExpChat.Actions
 local LegacyDefaultSettingsModule = require(script.Parent.LegacyDefaultSettings)
 
 return require(Parent.Rodux).createReducer(LegacyDefaultSettingsModule, {
-	[require(Actions.LegacyBubbleChatEnabledChanged).name] = function(p1, p2) --[[ Line: 14 ]]
+	[require(Actions.LegacyBubbleChatEnabledChanged).name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
 		return Dictionary.join(p1, { Enabled = p2.value })
 	end,
-	[require(Actions.LegacyBubbleChatSettingsChanged).name] = function(_, p1) --[[ Line: 20 ]]
+	[require(Actions.LegacyBubbleChatSettingsChanged).name] = function(_, p1)
 		-- upvalues: Dictionary (copy), LegacyDefaultSettingsModule (copy)
 		local ChatSettings = p1.chatSettings
 		

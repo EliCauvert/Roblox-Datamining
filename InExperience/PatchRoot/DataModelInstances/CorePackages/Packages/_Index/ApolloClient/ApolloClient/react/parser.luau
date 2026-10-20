@@ -10,7 +10,7 @@ local NewResult = LuauPolyfillModule.Map.new(nil)
 
 return {
 	DocumentType = DocumentType,
-	operationName = function(Mutation): string --[[ Line: 36 ]]
+	operationName = function(Mutation): string
 		-- upvalues: DocumentType (copy)
 		local v1: string? = nil
 		
@@ -29,22 +29,22 @@ return {
 		end
 		return v1
 	end,
-	parser = function(p1) --[[ Line: 51 ]]
+	parser = function(p1)
 		-- upvalues: NewResult (copy), InvariantFunction (copy), Boolean (copy), Array (copy), DocumentType (copy)
 		local GetResult = NewResult:get(p1)
 		
 		if GetResult == nil then
 			InvariantFunction(Boolean.toJSBoolean(p1) and Boolean.toJSBoolean(p1.kind), ("Argument of %s passed to parser was not a valid GraphQL "):format((tostring(p1))) .. "DocumentNode. You may need to use 'graphql-tag' or another method " .. "to convert your operation into a document")
-			local FilterResult = Array.filter(p1.definitions, function(p2): boolean --[[ Line: 67 ]]
+			local FilterResult = Array.filter(p1.definitions, function(p2): boolean
 				return p2.kind == "OperationDefinition" and p2.operation == "query"
 			end)
-			local FilterResult1 = Array.filter(p1.definitions, function(p2): boolean --[[ Line: 72 ]]
+			local FilterResult1 = Array.filter(p1.definitions, function(p2): boolean
 				return p2.kind == "OperationDefinition" and p2.operation == "mutation"
 			end)
-			local FilterResult2 = Array.filter(p1.definitions, function(p2): boolean --[[ Line: 77 ]]
+			local FilterResult2 = Array.filter(p1.definitions, function(p2): boolean
 				return p2.kind == "OperationDefinition" and p2.operation == "subscription"
 			end)
-			InvariantFunction(#Array.filter(p1.definitions, function(p2): boolean --[[ Line: 63 ]]
+			InvariantFunction(#Array.filter(p1.definitions, function(p2): boolean
 				return p2.kind == "FragmentDefinition"
 			end) == 0 or (#FilterResult ~= 0 or #FilterResult1 ~= 0 or #FilterResult2 ~= 0), "Passing only a fragment to 'graphql' is not yet supported. You must include a query, subscription or mutation as well")
 			InvariantFunction(#FilterResult + #FilterResult1 + #FilterResult2 <= 1, "react-apollo only supports a query, subscription, or a mutation per HOC. " .. ("%s had %s queries, %s "):format(tostring(p1), tostring(#FilterResult), (tostring(#FilterResult2))) .. ("subscriptions and %s mutations. "):format((tostring(#FilterResult1))) .. "You can use 'compose' to join multiple operation types to a component")

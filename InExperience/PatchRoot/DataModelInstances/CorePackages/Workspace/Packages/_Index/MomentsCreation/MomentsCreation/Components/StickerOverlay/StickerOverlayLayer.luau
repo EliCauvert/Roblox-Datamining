@@ -15,15 +15,15 @@ local CreationFlowStateModule = require(MomentsCreation.Enums.CreationFlowState)
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
 local _ = require(Parent.MomentsTypes)
 
-return function(p1) --[[ Line: 43 | Named "StickerOverlayLayer" ]]
+return function(p1)
 	-- upvalues: UseSignalStateFunction (copy), UseMemoFunction (copy), SignalsModule (copy), CreationFlowStateModule (copy), UseCallbackFunction (copy), ReactModule (copy), View (copy), FoundationModule (copy), StickerOverlay (copy), DashModule (copy), OverlayDisplay (copy)
 	local Controller = p1.controller
 	local UseSignalStateResult = UseSignalStateFunction(Controller.getStep)
 	local UseSignalStateResult1 = UseSignalStateFunction(p1.ctx.getItemSize)
 	local StickerOverlays = UseSignalStateFunction(Controller.getComposedEdits).stickerOverlays
-	local UseSignalStateResult2 = UseSignalStateFunction((UseMemoFunction(function() --[[ Line: 52 ]]
+	local UseSignalStateResult2 = UseSignalStateFunction((UseMemoFunction(function()
 		-- upvalues: SignalsModule (upval), Controller (copy)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 53 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: Controller (upval)
 			local ActiveSession = Controller.getActiveSession(p2)
 			
@@ -32,11 +32,11 @@ return function(p1) --[[ Line: 43 | Named "StickerOverlayLayer" ]]
 	end, { Controller })))
 	local IsUseSignalStateResultMatch = UseSignalStateResult == CreationFlowStateModule.StickerOverlay
 	local UseSignalStateResultEntry = UseSignalStateResult2 and UseSignalStateResult2[1]
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 63 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: Controller (copy)
 		Controller.beginTool("sticker")
 	end, { Controller })
-	local UseCallbackResult1 = UseCallbackFunction(function(p2) --[[ Line: 67 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function(p2)
 		-- upvalues: Controller (copy)
 		Controller.updateCommittedEdit("sticker", p2)
 	end, { Controller })

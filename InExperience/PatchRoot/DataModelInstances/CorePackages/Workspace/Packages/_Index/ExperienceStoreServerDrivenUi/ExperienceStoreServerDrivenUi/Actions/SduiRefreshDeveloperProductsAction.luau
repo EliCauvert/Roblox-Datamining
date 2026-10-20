@@ -5,7 +5,7 @@ local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local SduiActionType = SduiCoreSystemModule.SduiActionType
 local Players = game:GetService("Players")
 
-return function(p1, _, p2) --[[ Line: 16 | Named "SduiRefreshDeveloperProductsAction" ]]
+return function(p1, _, p2)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), Players (copy), DataHydrationModule (copy)
 	local ActionParams = p1 and p1.actionParams
 	

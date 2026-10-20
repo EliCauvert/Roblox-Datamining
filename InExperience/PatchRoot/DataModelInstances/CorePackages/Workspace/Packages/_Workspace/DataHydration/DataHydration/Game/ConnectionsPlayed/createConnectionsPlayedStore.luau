@@ -3,7 +3,7 @@ local CreateDataCacheModule = require(DataHydration.createDataCache)
 local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.ConnectionsPlayedStoreTypes)
 
-return function() --[[ Line: 11 | Named "createConnectionsPlayedStore" ]]
+return function()
 	-- upvalues: CreateDataCacheModule (copy)
 	local DataCacheModule = CreateDataCacheModule()
 	

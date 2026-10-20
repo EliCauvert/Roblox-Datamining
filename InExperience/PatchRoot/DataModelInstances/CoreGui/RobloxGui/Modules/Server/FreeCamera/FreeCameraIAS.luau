@@ -10,7 +10,7 @@ local StarterPlayer = game:GetService("StarterPlayer")
 local UserInputService = game:GetService("UserInputService")
 local Workspace = game:GetService("Workspace")
 local Lighting = game:GetService("Lighting")
-local Success, Result = pcall(function() --[[ Line: 48 ]]
+local Success, Result = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserFreecamIASRefactor1")
 end)
 local Result1 = Success and Result
@@ -295,7 +295,7 @@ if not LocalPlayer then
 end
 local Freecam = nil
 local CurrentCamera = Workspace.CurrentCamera
-Workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function() --[[ Line: 276 ]]
+Workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
 	-- upvalues: Workspace (copy), CurrentCamera (ref)
 	local CurrentCamera1 = Workspace.CurrentCamera
 	
@@ -341,43 +341,43 @@ local v7 = nil
 local Config = nil
 local v8 = nil
 local Result2_1 = nil
-local Success1, Result2 = pcall(function() --[[ Line: 305 ]]
+local Success1, Result2 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserShowGuiHideToggles")
 end)
 Result2_1 = Success1 and Result2
 local Result3_1 = nil
-local Success2, Result3 = pcall(function() --[[ Line: 313 ]]
+local Success2, Result3 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserPlayerScriptsRefactor4")
 end)
 Result3_1 = Success2 and Result3
 local Result4_1 = nil
-local Success3, Result4 = pcall(function() --[[ Line: 321 ]]
+local Success3, Result4 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserPlayerScriptsRefactor5")
 end)
 Result4_1 = Success3 and Result4
 local Result5_1 = nil
-local Success4, Result5 = pcall(function() --[[ Line: 329 ]]
+local Success4, Result5 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserFreecamIASRefactor2")
 end)
 Result5_1 = Success4 and Result5
 local Result6_1 = nil
-local Success5, Result6 = pcall(function() --[[ Line: 337 ]]
+local Success5, Result6 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserFreecamIASRefactor3")
 end)
 Result6_1 = Success5 and Result6
 local Result7_1 = nil
-local Success6, Result7 = pcall(function() --[[ Line: 345 ]]
+local Success6, Result7 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserFreecamIASRefactor4")
 end)
 Result7_1 = Success6 and Result7
 local Inverted = false
-local PostEffect, PostEffect2 = (function(ClassName, Callback) --[[ Line: 354 | Named "makeEffectOverride" ]]
+local PostEffect, PostEffect2 = (function(ClassName, Callback)
 	-- upvalues: CurrentCamera (ref), Lighting (copy)
 	local T = {}
 	local ChildAddedConnection = nil
 	local ChildAddedConnection1 = nil
 	
-	local function _(Object) --[[ Line: 367 | Named "trySuppress" ]]
+	local function _(Object)
 		-- upvalues: ClassName (copy), Callback (copy), T (ref)
 		if Object:IsA(ClassName) and Object.Enabled and (not Callback or not Callback(Object)) then
 			T[#T + 1] = Object
@@ -385,7 +385,7 @@ local PostEffect, PostEffect2 = (function(ClassName, Callback) --[[ Line: 354 | 
 		end
 	end
 	
-	return function() --[[ Line: 374 | Named "enable" ]]
+	return function()
 		-- upvalues: T (ref), CurrentCamera (upval), ClassName (copy), Callback (copy), Lighting (upval), ChildAddedConnection (ref), ChildAddedConnection1 (ref)
 		T = {}
 		
@@ -401,21 +401,21 @@ local PostEffect, PostEffect2 = (function(ClassName, Callback) --[[ Line: 354 | 
 				child1.Enabled = false
 			end
 		end
-		ChildAddedConnection = CurrentCamera.ChildAdded:Connect(function(Child) --[[ Line: 378 ]]
+		ChildAddedConnection = CurrentCamera.ChildAdded:Connect(function(Child)
 			-- upvalues: ClassName (upval), Callback (upval), T (upval)
 			if Child:IsA(ClassName) and Child.Enabled and (not Callback or not Callback(Child)) then
 				T[#T + 1] = Child
 				Child.Enabled = false
 			end
 		end)
-		ChildAddedConnection1 = Lighting.ChildAdded:Connect(function(Child) --[[ Line: 379 ]]
+		ChildAddedConnection1 = Lighting.ChildAdded:Connect(function(Child)
 			-- upvalues: ClassName (upval), Callback (upval), T (upval)
 			if Child:IsA(ClassName) and Child.Enabled and (not Callback or not Callback(Child)) then
 				T[#T + 1] = Child
 				Child.Enabled = false
 			end
 		end)
-	end, function() --[[ Line: 358 | Named "disable" ]]
+	end, function()
 		-- upvalues: T (ref), ChildAddedConnection (ref), ChildAddedConnection1 (ref)
 		for _, value in ipairs(T) do
 			if value.Parent then
@@ -432,12 +432,12 @@ local PostEffect, PostEffect2 = (function(ClassName, Callback) --[[ Line: 354 | 
 		end
 		T = {}
 	end
-end)("PostEffect", function(p1): boolean --[[ Line: 387 ]]
+end)("PostEffect", function(p1): boolean
 	return p1.Name:sub(1, 7) == "Freecam"
 end)
 local v9 = nil
 
-local function doToggleMasterEffects() --[[ Line: 393 ]]
+local function doToggleMasterEffects()
 	-- upvalues: Inverted (ref), PostEffect (copy), PostEffect2 (copy), v9 (ref)
 	Inverted = not Inverted
 	
@@ -457,7 +457,7 @@ local function doToggleMasterEffects() --[[ Line: 393 ]]
 	end
 end
 
-local function doToggleDoF() --[[ Line: 406 ]]
+local function doToggleDoF()
 	-- upvalues: Result3_1 (ref), Inverted (ref), v1 (ref)
 	if Result3_1 and not Inverted then return end
 	local v10 = v1
@@ -467,7 +467,7 @@ local function doToggleDoF() --[[ Line: 406 ]]
 	end
 end
 
-local function doToggleBloom() --[[ Line: 407 ]]
+local function doToggleBloom()
 	-- upvalues: Result3_1 (ref), Inverted (ref), v2 (ref)
 	if Result3_1 and not Inverted then return end
 	local v10 = v2
@@ -477,7 +477,7 @@ local function doToggleBloom() --[[ Line: 407 ]]
 	end
 end
 
-local function doToggleBlur() --[[ Line: 408 ]]
+local function doToggleBlur()
 	-- upvalues: Result3_1 (ref), Inverted (ref), v3 (ref)
 	if Result3_1 and not Inverted then return end
 	local v10 = v3
@@ -487,7 +487,7 @@ local function doToggleBlur() --[[ Line: 408 ]]
 	end
 end
 
-local function doToggleColorCorrection() --[[ Line: 409 ]]
+local function doToggleColorCorrection()
 	-- upvalues: Result3_1 (ref), Inverted (ref), v4 (ref)
 	if Result3_1 and not Inverted then return end
 	local v10 = v4
@@ -497,7 +497,7 @@ local function doToggleColorCorrection() --[[ Line: 409 ]]
 	end
 end
 
-local function doToggleSunRays() --[[ Line: 410 ]]
+local function doToggleSunRays()
 	-- upvalues: Result3_1 (ref), Inverted (ref), v5 (ref)
 	if Result3_1 and not Inverted then return end
 	local v10 = v5
@@ -507,7 +507,7 @@ local function doToggleSunRays() --[[ Line: 410 ]]
 	end
 end
 
-local function doToggleColorGrading() --[[ Line: 411 ]]
+local function doToggleColorGrading()
 	-- upvalues: Result3_1 (ref), Inverted (ref), v6 (ref)
 	if Result3_1 and not Inverted then return end
 	local v10 = v6
@@ -521,11 +521,11 @@ v9 = {
 	{
 		key = "DepthOfField",
 		class = "DepthOfFieldEffect",
-		get = function() --[[ Line: 415 ]]
+		get = function()
 			-- upvalues: v1 (ref)
 			return v1
 		end,
-		set = function(p1) --[[ Line: 416 ]]
+		set = function(p1)
 			-- upvalues: v1 (ref)
 			v1 = p1
 		end,
@@ -539,11 +539,11 @@ v9 = {
 	{
 		key = "Bloom",
 		class = "BloomEffect",
-		get = function() --[[ Line: 419 ]]
+		get = function()
 			-- upvalues: v2 (ref)
 			return v2
 		end,
-		set = function(p1) --[[ Line: 420 ]]
+		set = function(p1)
 			-- upvalues: v2 (ref)
 			v2 = p1
 		end,
@@ -552,11 +552,11 @@ v9 = {
 	{
 		key = "Blur",
 		class = "BlurEffect",
-		get = function() --[[ Line: 423 ]]
+		get = function()
 			-- upvalues: v3 (ref)
 			return v3
 		end,
-		set = function(p1) --[[ Line: 424 ]]
+		set = function(p1)
 			-- upvalues: v3 (ref)
 			v3 = p1
 		end,
@@ -565,11 +565,11 @@ v9 = {
 	{
 		key = "ColorCorrection",
 		class = "ColorCorrectionEffect",
-		get = function() --[[ Line: 427 ]]
+		get = function()
 			-- upvalues: v4 (ref)
 			return v4
 		end,
-		set = function(p1) --[[ Line: 428 ]]
+		set = function(p1)
 			-- upvalues: v4 (ref)
 			v4 = p1
 		end,
@@ -578,11 +578,11 @@ v9 = {
 	{
 		key = "SunRays",
 		class = "SunRaysEffect",
-		get = function() --[[ Line: 431 ]]
+		get = function()
 			-- upvalues: v5 (ref)
 			return v5
 		end,
-		set = function(p1) --[[ Line: 432 ]]
+		set = function(p1)
 			-- upvalues: v5 (ref)
 			v5 = p1
 		end,
@@ -592,11 +592,11 @@ v9 = {
 		key = "ColorGrading",
 		class = "ColorGradingEffect",
 		parent = Result4_1 and Lighting or nil,
-		get = function() --[[ Line: 435 ]]
+		get = function()
 			-- upvalues: v6 (ref)
 			return v6
 		end,
-		set = function(p1) --[[ Line: 436 ]]
+		set = function(p1)
 			-- upvalues: v6 (ref)
 			v6 = p1
 		end,
@@ -626,7 +626,7 @@ local Humanoid = nil
 local Module = {}
 Module.__index = Module
 
-function Module.new(Fov, Vector: number) --[[ Line: 472 ]]
+function Module.new(Fov, Vector: number)
 	-- upvalues: Module (copy)
 	local self = setmetatable({}, Module)
 	self.f = Fov
@@ -636,7 +636,7 @@ function Module.new(Fov, Vector: number) --[[ Line: 472 ]]
 	return self
 end
 
-function Module:Update(p1, FovResult) --[[ Line: 480 ]]
+function Module:Update(p1, FovResult)
 	-- upvalues: ExpFunction (copy)
 	local ScaledF = self.f * 2 * 3.141592653589793
 	local V = self.v
@@ -649,11 +649,11 @@ function Module:Update(p1, FovResult) --[[ Line: 480 ]]
 	return NewFovResult
 end
 
-function Module:SetFreq(p1) --[[ Line: 493 ]]
+function Module:SetFreq(p1)
 	self.f = p1
 end
 
-function Module:Reset(Vector: number) --[[ Line: 495 ]]
+function Module:Reset(Vector: number)
 	self.p = Vector
 	self.v = Vector * 0
 end
@@ -676,7 +676,7 @@ local List1 = {}
 local Flag2 = false
 local Flag3 = false
 
-local function findPlayerLockRootPart(p1: number) --[[ Line: 534 ]]
+local function findPlayerLockRootPart(p1: number)
 	-- upvalues: List (ref), Index (ref), Inverted1 (ref)
 	if not List or #List < 1 then
 		return nil
@@ -720,13 +720,13 @@ local list = {
 local Index1 = 1
 local _Color3 = Color3.new(1, 1, 1)
 
-local function makeEffectGroup(Name, Toggle, Callback, p2, p3) --[[ Line: 600 ]]
+local function makeEffectGroup(Name, Toggle, Callback, p2, p3)
 	local Modes = {
 		{
 			type = "toggle",
 			name = "Enable",
 			toggle = Toggle,
-			isEnabled = function() --[[ Line: 604 ]]
+			isEnabled = function()
 				-- upvalues: Callback (copy)
 				local CallbackResult = Callback()
 				
@@ -743,13 +743,13 @@ local function makeEffectGroup(Name, Toggle, Callback, p2, p3) --[[ Line: 600 ]]
 			adj = value.adjCfg.Adj,
 			min = value.adjCfg.Min,
 			max = value.adjCfg.Max,
-			get = function() --[[ Line: 610 ]]
+			get = function()
 				-- upvalues: Callback (copy), value (copy)
 				local CallbackResult = Callback()
 				
 				return CallbackResult and CallbackResult[value.prop] or 0
 			end,
-			set = function(p4) --[[ Line: 611 ]]
+			set = function(p4)
 				-- upvalues: Callback (copy), value (copy)
 				local CallbackResult = Callback()
 				
@@ -767,7 +767,7 @@ local function makeEffectGroup(Name, Toggle, Callback, p2, p3) --[[ Line: 600 ]]
 	return { type = "group", name = Name, modes = Modes }
 end
 
-local function makeTintChannel(Text) --[[ Line: 620 ]]
+local function makeTintChannel(Text)
 	-- upvalues: Result5_1 (ref), v4 (ref), _Color3 (ref), Index1 (ref)
 	return if Result5_1 then {
 		type = "axis",
@@ -776,11 +776,11 @@ local function makeTintChannel(Text) --[[ Line: 620 ]]
 		max = 255,
 		format = "%.0f",
 		name = "Tint " .. Text,
-		get = function() --[[ Line: 623 ]]
+		get = function()
 			-- upvalues: v4 (upval), _Color3 (upval), Text (copy)
 			return (v4 and v4.TintColor or _Color3)[Text] * 255
 		end,
-		set = function(p4: number) --[[ Line: 627 ]]
+		set = function(p4: number)
 			-- upvalues: v4 (upval), _Color3 (upval), Text (copy), Index1 (upval)
 			local TintColor = v4 and v4.TintColor or _Color3
 			local R = TintColor.R
@@ -807,11 +807,11 @@ local function makeTintChannel(Text) --[[ Line: 620 ]]
 		min = 0,
 		max = 1,
 		name = "Tint " .. Text,
-		get = function() --[[ Line: 637 ]]
+		get = function()
 			-- upvalues: _Color3 (upval), Text (copy)
 			return _Color3[Text]
 		end,
-		set = function(p4) --[[ Line: 638 ]]
+		set = function(p4)
 			-- upvalues: _Color3 (upval), Text (copy), Index1 (upval), v4 (upval)
 			local R = _Color3.R
 			local G = _Color3.G
@@ -834,7 +834,7 @@ local function makeTintChannel(Text) --[[ Line: 620 ]]
 	}
 end
 
-local function makeSpeedStiffnessGroup(Name, Fov, p4, p5, NewResult) --[[ Line: 733 ]]
+local function makeSpeedStiffnessGroup(Name, Fov, p4, p5, NewResult)
 	-- upvalues: config3 (copy), config2 (copy)
 	return {
 		type = "group",
@@ -846,11 +846,11 @@ local function makeSpeedStiffnessGroup(Name, Fov, p4, p5, NewResult) --[[ Line: 
 				adj = Fov.AdjSpeed,
 				min = Fov.MinSpeed,
 				max = Fov.MaxSpeed,
-				get = function() --[[ Line: 737 ]]
+				get = function()
 					-- upvalues: config3 (upval), p4 (copy)
 					return config3[p4]
 				end,
-				set = function(p6) --[[ Line: 738 ]]
+				set = function(p6)
 					-- upvalues: config3 (upval), p4 (copy)
 					config3[p4] = p6
 				end
@@ -861,11 +861,11 @@ local function makeSpeedStiffnessGroup(Name, Fov, p4, p5, NewResult) --[[ Line: 
 				adj = Fov.AdjStiffness,
 				min = Fov.MinStiffness,
 				max = Fov.MaxStiffness,
-				get = function() --[[ Line: 741 ]]
+				get = function()
 					-- upvalues: config2 (upval), p5 (copy)
 					return config2[p5]
 				end,
-				set = function(p6) --[[ Line: 742 ]]
+				set = function(p6)
 					-- upvalues: config2 (upval), p5 (copy), NewResult (copy)
 					config2[p5] = p6
 					NewResult:SetFreq(p6)
@@ -876,7 +876,7 @@ local function makeSpeedStiffnessGroup(Name, Fov, p4, p5, NewResult) --[[ Line: 
 end
 
 local _modes = {
-	(function() --[[ Line: 648 | Named "buildCustomEffectsGroup" ]]
+	(function()
 		-- upvalues: doToggleMasterEffects (copy), Inverted (ref), makeEffectGroup (copy), doToggleDoF (copy), v1 (ref), config (copy), doToggleBloom (copy), v2 (ref), doToggleBlur (copy), v3 (ref), doToggleColorCorrection (copy), v4 (ref), list (copy), Index1 (ref), _Color3 (ref), Result5_1 (ref), makeTintChannel (copy), doToggleSunRays (copy), v5 (ref), doToggleColorGrading (copy), v6 (ref), Result3_1 (ref)
 		local config1 = {
 			type = "group",
@@ -886,12 +886,12 @@ local _modes = {
 					type = "toggle",
 					name = "Enable",
 					toggle = doToggleMasterEffects,
-					isEnabled = function() --[[ Line: 654 ]]
+					isEnabled = function()
 						-- upvalues: Inverted (upval)
 						return Inverted
 					end
 				},
-				makeEffectGroup("Depth of Field", doToggleDoF, function() --[[ Line: 655 ]]
+				makeEffectGroup("Depth of Field", doToggleDoF, function()
 					-- upvalues: v1 (upval)
 					return v1
 				end, {
@@ -916,7 +916,7 @@ local _modes = {
 						adjCfg = config.DoF.FocusRadius
 					}
 				}),
-				makeEffectGroup("Bloom", doToggleBloom, function() --[[ Line: 661 ]]
+				makeEffectGroup("Bloom", doToggleBloom, function()
 					-- upvalues: v2 (upval)
 					return v2
 				end, {
@@ -932,13 +932,13 @@ local _modes = {
 						adjCfg = config.Bloom.Threshold
 					}
 				}),
-				makeEffectGroup("Blur", doToggleBlur, function() --[[ Line: 666 ]]
+				makeEffectGroup("Blur", doToggleBlur, function()
 					-- upvalues: v3 (upval)
 					return v3
 				end, {
 					{ name = "Size", prop = "Size", adjCfg = config.Blur.Size }
 				}),
-				makeEffectGroup("Color Correction", doToggleColorCorrection, function() --[[ Line: 669 ]]
+				makeEffectGroup("Color Correction", doToggleColorCorrection, function()
 					-- upvalues: v4 (upval)
 					return v4
 				end, {
@@ -961,15 +961,15 @@ local _modes = {
 					{
 						type = "cycle",
 						name = "Tint",
-						items = function() --[[ Line: 677 ]]
+						items = function()
 							-- upvalues: list (upval)
 							return list
 						end,
-						getIndex = function() --[[ Line: 678 ]]
+						getIndex = function()
 							-- upvalues: Index1 (upval)
 							return Index1
 						end,
-						setIndex = function(Value) --[[ Line: 679 ]]
+						setIndex = function(Value)
 							-- upvalues: Index1 (upval), v4 (upval), _Color3 (upval), list (upval), Result5_1 (upval)
 							Index1 = Value
 							
@@ -987,7 +987,7 @@ local _modes = {
 								end
 							end
 						end,
-						displayItem = function(p4) --[[ Line: 693 ]]
+						displayItem = function(p4)
 							return p4.name
 						end
 					},
@@ -995,7 +995,7 @@ local _modes = {
 					makeTintChannel("G"),
 					(makeTintChannel("B"))
 				}),
-				makeEffectGroup("Sun Rays", doToggleSunRays, function() --[[ Line: 699 ]]
+				makeEffectGroup("Sun Rays", doToggleSunRays, function()
 					-- upvalues: v5 (upval)
 					return v5
 				end, {
@@ -1010,24 +1010,24 @@ local _modes = {
 						adjCfg = config.SunRays.Spread
 					}
 				}),
-				(makeEffectGroup("Color Grading", doToggleColorGrading, function() --[[ Line: 703 ]]
+				(makeEffectGroup("Color Grading", doToggleColorGrading, function()
 					-- upvalues: v6 (upval)
 					return v6
 				end, nil, {
 					{
 						type = "cycle",
 						name = "Tonemap",
-						items = function() --[[ Line: 707 ]]
+						items = function()
 							return {
 								Enum.TonemapperPreset.Default,
 								Enum.TonemapperPreset.Retro
 							}
 						end,
-						getIndex = function(): number --[[ Line: 708 ]]
+						getIndex = function(): number
 							-- upvalues: v6 (upval)
 							return if v6 and v6.TonemapperPreset == Enum.TonemapperPreset.Retro then 2 else 1
 						end,
-						setIndex = function(p4) --[[ Line: 714 ]]
+						setIndex = function(p4)
 							-- upvalues: v6 (upval)
 							if v6 then
 								v6.TonemapperPreset = ({
@@ -1036,7 +1036,7 @@ local _modes = {
 								})[p4]
 							end
 						end,
-						displayItem = function(p4) --[[ Line: 720 ]]
+						displayItem = function(p4)
 							return p4.Name
 						end
 					}
@@ -1046,7 +1046,7 @@ local _modes = {
 		
 		if Result3_1 then
 			for i = 2, #config1.modes do
-				config1.modes[i].disabled = function(): boolean --[[ Line: 727 ]]
+				config1.modes[i].disabled = function(): boolean
 					-- upvalues: Inverted (upval)
 					return not Inverted
 				end
@@ -1062,7 +1062,7 @@ local _modes = {
 			{
 				type = "toggle",
 				name = "Enable",
-				toggle = function() --[[ Line: 568 ]]
+				toggle = function()
 					-- upvalues: Inverted1 (ref), DefaultZoom (ref), config (copy), DefaultHeight (ref), RootPart (ref), findPlayerLockRootPart (copy)
 					Inverted1 = not Inverted1
 					
@@ -1072,7 +1072,7 @@ local _modes = {
 						RootPart = findPlayerLockRootPart(0)
 					end
 				end,
-				isEnabled = function() --[[ Line: 753 ]]
+				isEnabled = function()
 					-- upvalues: Inverted1 (ref)
 					return Inverted1
 				end
@@ -1080,15 +1080,15 @@ local _modes = {
 			{
 				type = "cycle",
 				name = "Target",
-				items = function() --[[ Line: 755 ]]
+				items = function()
 					-- upvalues: List (ref)
 					return List
 				end,
-				getIndex = function() --[[ Line: 756 ]]
+				getIndex = function()
 					-- upvalues: Index (ref)
 					return Index
 				end,
-				setIndex = function(Value) --[[ Line: 757 ]]
+				setIndex = function(Value)
 					-- upvalues: Index (ref), List (ref), RootPart (ref)
 					Index = Value
 					local Entry = List[Value]
@@ -1103,7 +1103,7 @@ local _modes = {
 						RootPart = nil
 					end
 				end,
-				displayItem = function(p4) --[[ Line: 768 ]]
+				displayItem = function(p4)
 					return p4.Name
 				end
 			}
@@ -1116,7 +1116,7 @@ local _modes = {
 			{
 				type = "toggle",
 				name = "Screen GUIs",
-				toggle = function() --[[ Line: 577 ]]
+				toggle = function()
 					-- upvalues: Inverted2 (ref), v8 (ref), Freecam (ref)
 					Inverted2 = not Inverted2
 					
@@ -1128,7 +1128,7 @@ local _modes = {
 						end
 					end
 				end,
-				isEnabled = function() --[[ Line: 774 ]]
+				isEnabled = function()
 					-- upvalues: Inverted2 (ref)
 					return Inverted2
 				end
@@ -1136,12 +1136,12 @@ local _modes = {
 			{
 				type = "toggle",
 				name = "Leaderboard",
-				toggle = function() --[[ Line: 588 ]]
+				toggle = function()
 					-- upvalues: Inverted3 (ref), StarterGui (copy)
 					Inverted3 = not Inverted3
 					StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList, Inverted3)
 				end,
-				isEnabled = function() --[[ Line: 777 ]]
+				isEnabled = function()
 					-- upvalues: Inverted3 (ref)
 					return Inverted3
 				end
@@ -1163,11 +1163,11 @@ local Callback: ((any) -> any)? = nil
 local Callback1: ((any, number, any) -> number)? = nil
 
 if Result3_1 then
-	Callback = function(Mode) --[[ Line: 791 | Named "isDisabled" ]]
+	Callback = function(Mode)
 		return Mode.disabled and Mode.disabled()
 	end
 	
-	Callback1 = function(Modes, Index: number, p4): number --[[ Line: 795 | Named "nextEnabledIndex" ]]
+	Callback1 = function(Modes, Index: number, p4): number
 		-- upvalues: Callback (ref)
 		local CountModes = #Modes
 		
@@ -1181,7 +1181,7 @@ if Result3_1 then
 		return Index
 	end
 end
-local function _() --[[ Line: 805 | Named "currentMode" ]]
+local function _()
 	-- upvalues: List1 (ref), _modes (ref), v10 (ref)
 	if #List1 > 0 then
 		local Entry = List1[#List1]
@@ -1192,7 +1192,7 @@ local function _() --[[ Line: 805 | Named "currentMode" ]]
 	end
 end
 
-local function createBinding(Parent, p4) --[[ Line: 816 ]]
+local function createBinding(Parent, p4)
 	local InputBinding = Instance.new("InputBinding")
 	
 	if p4.keyCode then
@@ -1227,7 +1227,7 @@ local function createBinding(Parent, p4) --[[ Line: 816 ]]
 	return InputBinding
 end
 
-local function createAction(InputContext, Fov) --[[ Line: 831 ]]
+local function createAction(InputContext, Fov)
 	-- upvalues: createBinding (copy)
 	local InputAction = Instance.new("InputAction")
 	InputAction.Name = Fov.name
@@ -1240,11 +1240,11 @@ local function createAction(InputContext, Fov) --[[ Line: 831 ]]
 	return InputAction
 end
 
-local _ = function(p4, p5, p6) --[[ Line: 843 | Named "makeDoubleTapHandler" ]]
+local _ = function(p4, p5, p6)
 	local v11 = nil
 	local v12 = 0
 	
-	return function(Value: number) --[[ Line: 845 | Named "detect" ]]
+	return function(Value: number)
 		-- upvalues: v11 (ref), p4 (copy), v12 (ref), p5 (copy), p6 (copy)
 		if math.abs(Value) > 0.01 then
 			local ClockTime = os.clock()
@@ -1261,13 +1261,13 @@ local _ = function(p4, p5, p6) --[[ Line: 843 | Named "makeDoubleTapHandler" ]]
 				return
 			end
 		end
-	end, function() --[[ Line: 859 | Named "reset" ]]
+	end, function()
 		-- upvalues: v11 (ref)
 		v11 = nil
 	end
 end
 
-;(function() --[[ Line: 863 | Named "createIASContexts" ]]
+;(function()
 	-- upvalues: config (copy), Result7_1 (ref), StarterPlayer (copy), Humanoid (ref), createAction (copy), t (copy), t1 (copy), Reset (ref), _Vector3_1 (ref), NewModule3 (copy), Flag (ref), Result3_1 (ref), Flag1 (ref), Flag3 (ref), List1 (ref), Callback1 (ref), _modes (ref), v10 (ref), Flag2 (ref), Callback (ref)
 	local Actions = config.Actions
 	local Folder = nil
@@ -1276,7 +1276,7 @@ end
 		local FreecamInput = Instance.new("Folder")
 		FreecamInput.Name = "FreecamInput"
 		FreecamInput.Parent = StarterPlayer
-		script.Destroying:Connect(function() --[[ Line: 871 ]]
+		script.Destroying:Connect(function()
 			-- upvalues: FreecamInput (copy)
 			FreecamInput:Destroy()
 		end)
@@ -1309,7 +1309,7 @@ end
 	local Threshold = config.DoubleTap.Threshold
 	local Debounce = config.DoubleTap.Debounce
 	
-	local function v188() --[[ Line: 909 ]]
+	local function v188()
 		-- upvalues: _Vector3_1 (upval), NewModule3 (upval), Flag (upval)
 		_Vector3_1 = Vector3.new(_Vector3_1.x, _Vector3_1.y, 0)
 		NewModule3:Reset(0)
@@ -1319,12 +1319,12 @@ end
 	local v11 = nil
 	local v12 = 0
 	
-	Reset = function() --[[ Line: 859 | Named "reset" ]]
+	Reset = function()
 		-- upvalues: v11 (ref)
 		v11 = nil
 	end
 	
-	detect = function(Value: number) --[[ Line: 845 | Named "detect" ]]
+	detect = function(Value: number)
 		-- upvalues: v11 (ref), Threshold (copy), v12 (ref), Debounce (copy), v188 (copy)
 		if math.abs(Value) > 0.01 then
 			local ClockTime = os.clock()
@@ -1343,7 +1343,7 @@ end
 		end
 	end
 	
-	Action.StateChanged:Connect(function(Value: number) --[[ Line: 915 ]]
+	Action.StateChanged:Connect(function(Value: number)
 		-- upvalues: Flag (upval), detect (ref)
 		if not Flag then
 			detect(Value)
@@ -1354,7 +1354,7 @@ end
 			Flag = false
 		end
 	end)
-	createAction(FreecamInputContext, Actions.ModeToggle).StateChanged:Connect(function(OldState) --[[ Line: 924 ]]
+	createAction(FreecamInputContext, Actions.ModeToggle).StateChanged:Connect(function(OldState)
 		-- upvalues: Result3_1 (upval), Flag1 (upval), Flag3 (upval), List1 (upval), Callback1 (upval), _modes (upval), v10 (upval), Flag2 (upval)
 		if not OldState then return end
 		if Result3_1 then
@@ -1413,7 +1413,7 @@ end
 			end
 		end
 	end)
-	createAction(FreecamInputContext, Actions.ModeNext).StateChanged:Connect(function(OldState) --[[ Line: 965 ]]
+	createAction(FreecamInputContext, Actions.ModeNext).StateChanged:Connect(function(OldState)
 		-- upvalues: Result3_1 (upval), Flag1 (upval), Flag3 (upval), List1 (upval), Callback1 (upval), v10 (upval), _modes (upval), Flag2 (upval)
 		if not OldState then return end
 		if Result3_1 then
@@ -1476,7 +1476,7 @@ end
 		end
 	end)
 	local Action1 = createAction(FreecamInputContext, Actions.ModeAxis)
-	Action1.StateChanged:Connect(function(OldState: number) --[[ Line: 1004 ]]
+	Action1.StateChanged:Connect(function(OldState: number)
 		-- upvalues: Flag1 (upval), Result3_1 (upval), List1 (upval), _modes (upval), v10 (upval), Flag3 (upval), Callback (upval), Flag2 (upval)
 		if not Flag1 or OldState == 0 then return end
 		if Result3_1 then
@@ -1596,31 +1596,31 @@ end
 	t1.ModeAxis = Action1
 end)()
 
-function t.Movement(): Vector3 --[[ Line: 1079 ]]
+function t.Movement(): Vector3
 	-- upvalues: t1 (copy), config3 (copy), config (copy)
 	local State = t1.MovementMove:GetState()
 	
 	return Vector3.new(State.X, t1.MovementElevate:GetState(), State.Y) * (config3.movement * (t1.Shift:GetState() and config.Movement.ShiftMul or 1))
 end
 
-function t.Pan(): Vector2 --[[ Line: 1085 ]]
+function t.Pan(): Vector2
 	-- upvalues: t1 (copy), config3 (copy)
 	local State = t1.Pan:GetState()
 	
 	return Vector2.new(State.Y, -State.X) * config3.pan
 end
 
-function t.Fov() --[[ Line: 1090 ]]
+function t.Fov()
 	-- upvalues: t1 (copy), config3 (copy)
 	return t1.Fov:GetState() * config3.fov
 end
 
-function t.Roll() --[[ Line: 1094 ]]
+function t.Roll()
 	-- upvalues: Flag (ref), t1 (copy), config3 (copy)
 	return (if Flag then 0 else t1.Tilt:GetState()) * config3.roll
 end
 
-function t.ModeControl(p4) --[[ Line: 1098 ]]
+function t.ModeControl(p4)
 	-- upvalues: Flag1 (ref), Result3_1 (ref), Flag3 (ref), List1 (ref), Flag2 (ref), _modes (ref), v10 (ref), t1 (copy), ClampFunction (copy)
 	if not Flag1 then return end
 	if Result3_1 then
@@ -1641,12 +1641,12 @@ function t.ModeControl(p4) --[[ Line: 1098 ]]
 	end
 end
 
-function t.StartCapture() --[[ Line: 1113 ]]
+function t.StartCapture()
 	-- upvalues: t (copy)
 	t._sinkContext.Enabled = true
 end
 
-function t.StopCapture() --[[ Line: 1117 ]]
+function t.StopCapture()
 	-- upvalues: t (copy), Flag (ref), Reset (ref), Flag1 (ref), Result3_1 (ref), List1 (ref), Flag3 (ref), Flag2 (ref)
 	t._sinkContext.Enabled = false
 	Flag = false
@@ -1665,12 +1665,12 @@ function t.StopCapture() --[[ Line: 1117 ]]
 	Flag2 = false
 end
 
-function t.getModeActive() --[[ Line: 1131 ]]
+function t.getModeActive()
 	-- upvalues: Flag1 (ref)
 	return Flag1
 end
 
-function t.getModeName() --[[ Line: 1133 ]]
+function t.getModeName()
 	-- upvalues: List1 (ref), _modes (ref), v10 (ref)
 	local Mode = nil
 	if #List1 > 0 then
@@ -1682,7 +1682,7 @@ function t.getModeName() --[[ Line: 1133 ]]
 	return Mode.name
 end
 
-function t.getModeBreadcrumb(): string --[[ Line: 1137 ]]
+function t.getModeBreadcrumb(): string
 	-- upvalues: List1 (ref)
 	if #List1 == 0 then
 		return ""
@@ -1695,7 +1695,7 @@ function t.getModeBreadcrumb(): string --[[ Line: 1137 ]]
 	return table.concat(List, " › ")
 end
 
-function t.getModeDisplay() --[[ Line: 1145 ]]
+function t.getModeDisplay()
 	-- upvalues: List1 (ref), _modes (ref), v10 (ref), Result5_1 (ref)
 	local Mode = nil
 	if #List1 > 0 then
@@ -1725,11 +1725,11 @@ function t.getModeDisplay() --[[ Line: 1145 ]]
 	end
 end
 
-function t.getModeHint() --[[ Line: 1164 ]]
+function t.getModeHint()
 	-- upvalues: _modes (ref), v10 (ref), List1 (ref), Flag2 (ref)
 	local Mode = _modes[v10]
 	
-	local function _(p4) --[[ Line: 1167 | Named "lrVerb" ]]
+	local function _(p4)
 		return if p4 == "axis" then "Hold to adjust" elseif p4 == "toggle" then "Tap to flip" elseif p4 == "cycle" then "Tap to cycle" elseif p4 == "action" then "Tap to fire" elseif p4 == "group" then "Enter" else nil
 	end
 	
@@ -1769,12 +1769,12 @@ function t.getModeHint() --[[ Line: 1164 ]]
 	end
 end
 
-function t.getTintColorName() --[[ Line: 1206 ]]
+function t.getTintColorName()
 	-- upvalues: Index1 (ref), list (copy)
 	return if Index1 >= 1 and Index1 <= #list then list[Index1].name else "Custom"
 end
 
-function t.getActiveGroupName() --[[ Line: 1212 ]]
+function t.getActiveGroupName()
 	-- upvalues: Flag1 (ref), List1 (ref)
 	return if Flag1 and #List1 ~= 0 then List1[1].groupName else nil
 end
@@ -1783,12 +1783,12 @@ if Result3_1 then
 	t._navigationStack = List1
 	t._modes = _modes
 	
-	function t._getModeIndex() --[[ Line: 1220 ]]
+	function t._getModeIndex()
 		-- upvalues: v10 (ref)
 		return v10
 	end
 	
-	function t._isMonitorItemSelected() --[[ Line: 1221 ]]
+	function t._isMonitorItemSelected()
 		-- upvalues: Flag3 (ref)
 		return Flag3
 	end
@@ -1797,33 +1797,33 @@ local list1 = {
 	{
 		key = "bloom",
 		group = "Custom Post Processing",
-		get = function() --[[ Line: 1228 ]]
+		get = function()
 			-- upvalues: v2 (ref)
 			return v2
 		end,
-		fmt = function(p4): string --[[ Line: 1229 ]]
+		fmt = function(p4): string
 			return string.format("Intensity: %.2f  Size: %.1f\nThreshold: %.2f", p4.Intensity, p4.Size, p4.Threshold)
 		end
 	},
 	{
 		key = "blur",
 		group = "Custom Post Processing",
-		get = function() --[[ Line: 1231 ]]
+		get = function()
 			-- upvalues: v3 (ref)
 			return v3
 		end,
-		fmt = function(p4): string --[[ Line: 1232 ]]
+		fmt = function(p4): string
 			return string.format("Size: %.1f", p4.Size)
 		end
 	},
 	{
 		key = "cc",
 		group = "Custom Post Processing",
-		get = function() --[[ Line: 1233 ]]
+		get = function()
 			-- upvalues: v4 (ref)
 			return v4
 		end,
-		fmt = function(ColorCorrectionEffect): string --[[ Line: 1234 ]]
+		fmt = function(ColorCorrectionEffect): string
 			-- upvalues: t (copy)
 			return string.format("Brightness: %.2f  Contrast: %.2f\nSaturation: %.2f  Tint: %s", ColorCorrectionEffect.Brightness, ColorCorrectionEffect.Contrast, ColorCorrectionEffect.Saturation, t.getTintColorName())
 		end
@@ -1831,39 +1831,39 @@ local list1 = {
 	{
 		key = "sunrays",
 		group = "Custom Post Processing",
-		get = function() --[[ Line: 1236 ]]
+		get = function()
 			-- upvalues: v5 (ref)
 			return v5
 		end,
-		fmt = function(p4): string --[[ Line: 1237 ]]
+		fmt = function(p4): string
 			return string.format("Intensity: %.2f  Spread: %.2f", p4.Intensity, p4.Spread)
 		end
 	},
 	{
 		key = "colorgrading",
 		group = "Custom Post Processing",
-		get = function() --[[ Line: 1239 ]]
+		get = function()
 			-- upvalues: v6 (ref)
 			return v6
 		end,
-		fmt = function(p4): string --[[ Line: 1240 ]]
+		fmt = function(p4): string
 			return string.format("Color Grading: %s", p4.TonemapperPreset.Name)
 		end
 	},
 	{
 		key = "dof",
 		group = "Custom Post Processing",
-		get = function() --[[ Line: 1241 ]]
+		get = function()
 			-- upvalues: v1 (ref)
 			return v1
 		end,
-		fmt = function(DepthOfFieldEffect): string --[[ Line: 1242 ]]
+		fmt = function(DepthOfFieldEffect): string
 			return string.format("Far: %.2f  Near: %.2f\nDistance: %.1f  Radius: %.1f", DepthOfFieldEffect.FarIntensity, DepthOfFieldEffect.NearIntensity, DepthOfFieldEffect.FocusDistance, DepthOfFieldEffect.InFocusRadius)
 		end
 	}
 }
 
-local _ = function(p4, Text) --[[ Line: 1246 | Named "setBubble" ]]
+local _ = function(p4, Text)
 	p4.bubble.Visible = Text ~= ""
 	
 	if Text ~= "" then
@@ -1883,7 +1883,7 @@ if Result3_1 then
 	T = {}
 	v11 = 12
 	
-	Callback3 = function(Parent) --[[ Line: 1256 ]]
+	Callback3 = function(Parent)
 		-- upvalues: T (ref), v11 (ref), Config1 (ref)
 		local FreecamMonitorPanel = Instance.new("Frame")
 		FreecamMonitorPanel.Name = "FreecamMonitorPanel"
@@ -1979,7 +1979,7 @@ if Result3_1 then
 		}
 	end
 	
-	v12 = function(p4) --[[ Line: 1361 ]]
+	v12 = function(p4)
 		-- upvalues: Result5_1 (ref)
 		if p4.type == "group" then
 			return "›"
@@ -2002,11 +2002,11 @@ if Result3_1 then
 		end
 	end
 	
-	v13 = function(p4, p5, IsMonitorItemSelected): Color3 --[[ Line: 1379 ]]
+	v13 = function(p4, p5, IsMonitorItemSelected): Color3
 		return if p4.type == "toggle" then if p4.isEnabled() then Color3.fromRGB(0, 176, 111) else Color3.fromRGB(150, 150, 150) elseif p5 and IsMonitorItemSelected then Color3.new(1, 1, 1) else Color3.fromRGB(180, 180, 180)
 	end
 	
-	Callback2 = function() --[[ Line: 1393 ]]
+	Callback2 = function()
 		-- upvalues: Config1 (ref), t (copy), v11 (ref), T (ref), v12 (ref), v13 (ref), Result6_1 (ref)
 		if not Config1 then return end
 		local Panel = Config1.panel
@@ -2079,7 +2079,7 @@ if Result3_1 then
 		end
 	end
 end
-local function StepFreecam(DeltaTime: number) --[[ Line: 1467 ]]
+local function StepFreecam(DeltaTime: number)
 	-- upvalues: t (copy), NewModule (copy), NewModule1 (copy), NewModule2 (copy), NewModule3 (copy), FieldOfView (ref), RadFunction (copy), TanFunction (copy), SqrtFunction (copy), config (copy), ClampFunction (copy), ClockTime (ref), ClockTime1 (ref), _Vector3_1 (ref), _Vector3 (ref), Inverted1 (ref), RootPart (ref), DefaultZoom (ref), DefaultHeight (ref), Result3_1 (ref), Callback2 (ref), v7 (ref), Config (ref), Freecam (ref), List (ref), Index (ref), list1 (copy), CurrentCamera (ref)
 	t.ModeControl(DeltaTime)
 	local UpdateResult = NewModule:Update(DeltaTime, t.Movement())
@@ -2099,7 +2099,7 @@ local function StepFreecam(DeltaTime: number) --[[ Line: 1467 ]]
 	local ScaledUpdateResult = UpdateResult1 * config.Pan.Gain * (DeltaTime / SqrtResult)
 	_Vector3_1 += Vector3.new(ScaledUpdateResult.X, ScaledUpdateResult.Y, UpdateResult3 * config.Roll.Gain * (DeltaTime / SqrtResult))
 	
-	local function _(p4: number): number --[[ Line: 1489 | Named "wrapAngle" ]]
+	local function _(p4: number): number
 		local v14 = p4 % 6.283185307179586
 		
 		return v14 > 3.141592653589793 and v14 - 6.283185307179586 or v14
@@ -2218,7 +2218,7 @@ local config5 = {
 	PointsNotificationsActive = true
 }
 v8 = {
-	Push = function() --[[ Line: 1600 ]]
+	Push = function()
 		-- upvalues: config4 (copy), StarterGui (copy), config5 (copy), LocalPlayer (ref), ScreenGuis (ref), ChildAddedConnection (ref), Inverted2 (ref), FieldOfView1 (ref), CurrentCamera (ref), CameraType (ref), _CFrame (ref), Focus (ref), MouseIconEnabled (ref), UserInputService (copy), Default (ref)
 		for i in pairs(config4) do
 			config4[i] = StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType[i])
@@ -2237,7 +2237,7 @@ v8 = {
 					ScreenGui.Enabled = false
 				end
 			end
-			ChildAddedConnection = PlayerGui.ChildAdded:Connect(function(Child) --[[ Line: 1617 ]]
+			ChildAddedConnection = PlayerGui.ChildAdded:Connect(function(Child)
 				-- upvalues: ScreenGuis (upval), Inverted2 (upval)
 				if Child:IsA("ScreenGui") and Child.Enabled then
 					ScreenGuis[#ScreenGuis + 1] = Child
@@ -2256,7 +2256,7 @@ v8 = {
 		Default = Enum.MouseBehavior.Default
 		UserInputService.MouseBehavior = Enum.MouseBehavior.Default
 	end,
-	Pop = function() --[[ Line: 1641 ]]
+	Pop = function()
 		-- upvalues: config4 (copy), StarterGui (copy), config5 (copy), ScreenGuis (ref), Freecam (ref), ChildAddedConnection (ref), CurrentCamera (ref), FieldOfView1 (ref), CameraType (ref), _CFrame (ref), Focus (ref), UserInputService (copy), MouseIconEnabled (ref), Default (ref)
 		for i, value in pairs(config4) do
 			StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType[i], value)
@@ -2287,13 +2287,13 @@ v8 = {
 		UserInputService.MouseBehavior = Default
 		Default = nil
 	end,
-	getScreenGuis = function() --[[ Line: 1666 ]]
+	getScreenGuis = function()
 		-- upvalues: ScreenGuis (ref)
 		return ScreenGuis
 	end
 }
 
-local function removePlayerFromList(Player) --[[ Line: 1669 ]]
+local function removePlayerFromList(Player)
 	-- upvalues: List (ref), Index (ref), Inverted1 (ref)
 	for Index1, value in ipairs(List) do
 		if value == Player then
@@ -2315,7 +2315,7 @@ local function removePlayerFromList(Player) --[[ Line: 1669 ]]
 	end
 end
 
-local function initializePlayerList() --[[ Line: 1684 ]]
+local function initializePlayerList()
 	-- upvalues: List (ref), Players (copy), LocalPlayer (ref), Index (ref), PlayerAddedConnection (ref), PlayerRemovingConnection (ref), removePlayerFromList (copy)
 	List = Players:GetPlayers()
 	
@@ -2325,14 +2325,14 @@ local function initializePlayerList() --[[ Line: 1684 ]]
 			break
 		end
 	end
-	PlayerAddedConnection = Players.PlayerAdded:Connect(function(Player) --[[ Line: 1689 ]]
+	PlayerAddedConnection = Players.PlayerAdded:Connect(function(Player)
 		-- upvalues: List (upval)
 		table.insert(List, Player)
 	end)
 	PlayerRemovingConnection = Players.PlayerRemoving:Connect(removePlayerFromList)
 end
 
-local function StartFreecam() --[[ Line: 1693 ]]
+local function StartFreecam()
 	-- upvalues: initializePlayerList (copy), CurrentCamera (ref), _Vector3_1 (ref), _Vector3 (ref), FieldOfView (ref), NewModule (copy), NewModule1 (copy), NewModule2 (copy), NewModule3 (copy), Freecam (ref), LocalPlayer (ref), Result3_1 (ref), Config1 (ref), Callback3 (ref), v7 (ref), Config (ref), v8 (ref), v9 (ref), config1 (copy), Result4_1 (ref), RunService (copy), StepFreecam (copy), t (copy)
 	initializePlayerList()
 	local CurrentCameraCFrame = CurrentCamera.CFrame
@@ -2366,7 +2366,7 @@ local function StartFreecam() --[[ Line: 1693 ]]
 		ListLayout.Padding = UDim.new(0, 6)
 		ListLayout.Parent = FreecamCustomGui
 		
-		local function makeBubble(Name, LayoutOrder) --[[ Line: 1729 ]]
+		local function makeBubble(Name, LayoutOrder)
 			-- upvalues: FreecamCustomGui (copy)
 			local Frame = Instance.new("Frame")
 			Frame.Name = Name
@@ -2433,7 +2433,7 @@ local function StartFreecam() --[[ Line: 1693 ]]
 		ListLayout1.Padding = UDim.new(0, 2)
 		ListLayout1.Parent = ModeBubble
 		
-		local function makeModeLabel(Name, LayoutOrder, Gotham, TextSize, Color) --[[ Line: 1794 ]]
+		local function makeModeLabel(Name, LayoutOrder, Gotham, TextSize, Color)
 			-- upvalues: ModeBubble (copy)
 			local Label = Instance.new("TextLabel")
 			Label.Name = Name
@@ -2478,7 +2478,7 @@ local function StartFreecam() --[[ Line: 1693 ]]
 	v8.Push()
 	Freecam.Enabled = true
 	
-	local function _(p4, Name) --[[ Line: 1833 | Named "makeEffect" ]]
+	local function _(p4, Name)
 		-- upvalues: CurrentCamera (upval)
 		local NewInstance = Instance.new(p4)
 		NewInstance.Name = Name
@@ -2506,7 +2506,7 @@ local function StartFreecam() --[[ Line: 1693 ]]
 	t.StartCapture()
 end
 
-local function StopFreecam() --[[ Line: 1854 ]]
+local function StopFreecam()
 	-- upvalues: PlayerAddedConnection (ref), PlayerRemovingConnection (ref), Inverted1 (ref), Index (ref), List (ref), PostEffect2 (copy), Inverted (ref), v9 (ref), config1 (copy), Result3_1 (ref), Config1 (ref), Freecam (ref), Inverted2 (ref), Inverted3 (ref), t (copy), RunService (copy), v8 (ref)
 	if PlayerAddedConnection then
 		PlayerAddedConnection:Disconnect()
@@ -2551,7 +2551,7 @@ end
 
 local Inverted4 = false
 
-local _ = function() --[[ Line: 1889 | Named "ToggleFreecam" ]]
+local _ = function()
 	-- upvalues: Inverted4 (ref), StopFreecam (copy), StartFreecam (copy), Result2_1 (ref), config (copy)
 	if Inverted4 then
 		StopFreecam()
@@ -2565,7 +2565,7 @@ local _ = function() --[[ Line: 1889 | Named "ToggleFreecam" ]]
 	end
 end
 
-Humanoid.StateChanged:Connect(function(OldState) --[[ Line: 1897 ]]
+Humanoid.StateChanged:Connect(function(OldState)
 	-- upvalues: Inverted4 (ref), StopFreecam (copy), StartFreecam (copy), Result2_1 (ref), config (copy)
 	if OldState then
 		if Inverted4 then
@@ -2583,7 +2583,7 @@ end)
 
 if Result2_1 then
 	script:SetAttribute(config.AttributeName, Inverted4)
-	script:GetAttributeChangedSignal(config.AttributeName):Connect(function() --[[ Line: 1903 ]]
+	script:GetAttributeChangedSignal(config.AttributeName):Connect(function()
 		-- upvalues: config (copy), Inverted4 (ref), StartFreecam (copy), StopFreecam (copy)
 		local Attribute = script:GetAttribute(config.AttributeName)
 		

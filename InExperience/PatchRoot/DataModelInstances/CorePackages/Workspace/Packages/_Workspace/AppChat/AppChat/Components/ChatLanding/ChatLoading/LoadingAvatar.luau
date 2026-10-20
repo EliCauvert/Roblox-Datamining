@@ -15,11 +15,11 @@ LoadingAvatar.defaultProps = {
 	avatarImage = UIBloxModule.App.ImageSet.Images["component_assets/circle_49_mask"]
 }
 
-function LoadingAvatar.render(p1) --[[ Line: 25 ]]
+function LoadingAvatar.render(p1)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy), Skeleton (copy), Radius (copy), AppChatLoadingIndicatorTransparency (copy), ImageSetLabel (copy)
 	local CellHeightDelta = p1.props.cellHeight / 2 - p1.props.avatarSize / 2
 	
-	return WithStyleFunction(function(p2) --[[ Line: 28 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: RoactModule (upval), p1 (copy), Skeleton (upval), CellHeightDelta (copy), Radius (upval), AppChatLoadingIndicatorTransparency (upval), ImageSetLabel (upval)
 		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,

@@ -1,4 +1,4 @@
-﻿local function v0(A, B): boolean --[[ Line: 1 ]]
+﻿local function v0(A, B): boolean
 	if A.eventDate == "" or A.eventDate == nil or B.eventDate == "" or B.eventDate == nil then
 		return true
 	else
@@ -9,9 +9,9 @@
 	end
 end
 
-return function(Tbl) --[[ Line: 16 ]]
+return function(Tbl)
 	-- upvalues: v0 (copy)
-	local Success, Result = pcall(function() --[[ Line: 17 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: Tbl (copy), v0 (upval)
 		local Copy = table.clone(Tbl)
 		table.sort(Copy, v0)

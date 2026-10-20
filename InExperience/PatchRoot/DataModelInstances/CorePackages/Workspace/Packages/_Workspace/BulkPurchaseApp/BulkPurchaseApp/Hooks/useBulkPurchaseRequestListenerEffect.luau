@@ -26,15 +26,15 @@ local AXAddPlusUpsellToBulkPurchaseExposure = game:DefineFastFlag("AXAddPlusUpse
 local AXAddPlusUpsellToBulkPurchaseLayerName = game:DefineFastString("AXAddPlusUpsellToBulkPurchaseLayerName", "AvatarExperience.UA.MarketplaceView")
 local _ = require(BulkPurchaseApp.Store.Types)
 
-local function _(Text: string): string --[[ Line: 52 | Named "decodeLuauUnicodeEscapes" ]]
-	return (Text:gsub("\\u{(%x+)}", function(p1): string --[[ Line: 54 ]]
+local function _(Text: string): string
+	return (Text:gsub("\\u{(%x+)}", function(p1): string
 		local Number: number? = tonumber(p1, 16)
 		
 		return if Number == nil or Number < 0 or Number > 1114111 then "" else utf8.char(Number)
 	end))
 end
 
-local function getOffersAvailableMap(AvailableOffers) --[[ Line: 64 ]]
+local function getOffersAvailableMap(AvailableOffers)
 	local t = {}
 	
 	if AvailableOffers ~= nil then
@@ -42,7 +42,7 @@ local function getOffersAvailableMap(AvailableOffers) --[[ Line: 64 ]]
 			t[availableOffer.offerId] = availableOffer
 			
 			if availableOffer.localizedDescription then
-				availableOffer.localizedDescription = availableOffer.localizedDescription:gsub("\\u{(%x+)}", function(p1): string --[[ Line: 54 ]]
+				availableOffer.localizedDescription = availableOffer.localizedDescription:gsub("\\u{(%x+)}", function(p1): string
 					local Number: number? = tonumber(p1, 16)
 					
 					return if Number == nil or Number < 0 or Number > 1114111 then "" else utf8.char(Number)
@@ -53,7 +53,7 @@ local function getOffersAvailableMap(AvailableOffers) --[[ Line: 64 ]]
 	return t
 end
 
-local function transformItemDataToBulkPurchaseItemData(DisplayData) --[[ Line: 79 ]]
+local function transformItemDataToBulkPurchaseItemData(DisplayData)
 	-- upvalues: PurchasableStateEnumModule (copy), FFlagBulkPurchaseEnablePurchaseOptionsModule (copy)
 	local List = {}
 	
@@ -75,21 +75,21 @@ local function transformItemDataToBulkPurchaseItemData(DisplayData) --[[ Line: 7
 	return List
 end
 
-return function() --[[ Line: 102 | Named "useBulkPurchaseRequestListenerEffect" ]]
+return function()
 	-- upvalues: UseDispatchFunction (copy), UseNetworkFunction (copy), FFlagAXAddPlusUpsellToBulkPurchaseModule (copy), UseSelectorFunction (copy), SelectPromptStateModule (copy), BulkPurchasePromptStateEnumModule (copy), FFlagAXAddOffersToBulkPurchaseModule (copy), ReactModule (copy), MarketplaceService (copy), Players (copy), FFlagBulkPurchaseEnablePurchaseOptionsModule (copy), BulkPurchaseApp (copy), AXAddPlusUpsellToBulkPurchaseExposure (copy), IXPServiceWrapper (copy), AXAddPlusUpsellToBulkPurchaseLayerName (copy), getOffersAvailableMap (copy), InitiateBulkPurchaseFlowModule (copy), transformItemDataToBulkPurchaseItemData (copy), ConvertToDiscountInformationOrNilModule (copy), BulkPurchaseRefreshedModule (copy), FFlagBulkPurchaseReportCountersModule (copy), ReportBulkPurchaseRequestCountersModule (copy), BulkPurchaseCountersEnumModule (copy), BulkPurchaseFailedModule (copy), ErrorCodeEnumModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseNetworkResult = UseNetworkFunction()
 	local IsUseSelectorResultMatch = if FFlagAXAddPlusUpsellToBulkPurchaseModule then UseSelectorFunction(SelectPromptStateModule) == BulkPurchasePromptStateEnumModule.Request else nil
 	
 	if FFlagAXAddOffersToBulkPurchaseModule then
-		ReactModule.useEffect(function() --[[ Line: 113 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseDispatchResult (copy), UseNetworkResult (copy), MarketplaceService (upval), Players (upval), FFlagBulkPurchaseEnablePurchaseOptionsModule (upval), BulkPurchaseApp (upval), AXAddPlusUpsellToBulkPurchaseExposure (upval), IXPServiceWrapper (upval), AXAddPlusUpsellToBulkPurchaseLayerName (upval), getOffersAvailableMap (upval), InitiateBulkPurchaseFlowModule (upval), transformItemDataToBulkPurchaseItemData (upval), ConvertToDiscountInformationOrNilModule (upval)
 			local Connection = nil
 			
 			if UseDispatchResult and UseNetworkResult then
-				local Success, Result = pcall(function() --[[ Line: 116 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: MarketplaceService (upval), Players (upval), FFlagBulkPurchaseEnablePurchaseOptionsModule (upval), BulkPurchaseApp (upval), AXAddPlusUpsellToBulkPurchaseExposure (upval), IXPServiceWrapper (upval), AXAddPlusUpsellToBulkPurchaseLayerName (upval), getOffersAvailableMap (upval), UseDispatchResult (upval), InitiateBulkPurchaseFlowModule (upval), UseNetworkResult (upval), transformItemDataToBulkPurchaseItemData (upval), ConvertToDiscountInformationOrNilModule (upval)
-					return MarketplaceService.PromptBulkPurchaseRequestedV3:Connect(function(Player, _, Response) --[[ Line: 118 ]]
+					return MarketplaceService.PromptBulkPurchaseRequestedV3:Connect(function(Player, _, Response)
 						-- upvalues: Players (upval), FFlagBulkPurchaseEnablePurchaseOptionsModule (upval), BulkPurchaseApp (upval), AXAddPlusUpsellToBulkPurchaseExposure (upval), IXPServiceWrapper (upval), AXAddPlusUpsellToBulkPurchaseLayerName (upval), getOffersAvailableMap (upval), UseDispatchResult (upval), InitiateBulkPurchaseFlowModule (upval), UseNetworkResult (upval), transformItemDataToBulkPurchaseItemData (upval), ConvertToDiscountInformationOrNilModule (upval)
 						local OrderRequest = Response.orderRequest
 						local PurchaserRobuxBalance = Response.purchaserRobuxBalance
@@ -106,7 +106,7 @@ return function() --[[ Line: 102 | Named "useBulkPurchaseRequestListenerEffect" 
 							end
 							UseDispatchResult(InitiateBulkPurchaseFlowModule(UseNetworkResult, transformItemDataToBulkPurchaseItemData(Response.displayData), OrderRequest, PurchaserRobuxBalance, OrderTotalRobux, Options, ConvertToDiscountInformationOrNilModule(DiscountInformation), {
 								offersAvailable = getOffersAvailableMap(Response.availableOffers),
-								savingsSummary = if Response.savingsSummary then Response.savingsSummary:gsub("\\u{(%x+)}", function(p1): string --[[ Line: 54 ]]
+								savingsSummary = if Response.savingsSummary then Response.savingsSummary:gsub("\\u{(%x+)}", function(p1): string
 									local Number: number? = tonumber(p1, 16)
 									
 									return if Number == nil or Number < 0 or Number > 1114111 then "" else utf8.char(Number)
@@ -120,7 +120,7 @@ return function() --[[ Line: 102 | Named "useBulkPurchaseRequestListenerEffect" 
 					Connection = Result
 				end
 			end
-			return function() --[[ Line: 170 ]]
+			return function()
 				-- upvalues: Connection (ref)
 				if Connection then
 					Connection:Disconnect()
@@ -129,9 +129,9 @@ return function() --[[ Line: 102 | Named "useBulkPurchaseRequestListenerEffect" 
 			end
 		end, { UseDispatchResult, UseNetworkResult })
 	else
-		ReactModule.useEffect(function() --[[ Line: 178 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseDispatchResult (copy), UseNetworkResult (copy), MarketplaceService (upval), Players (upval), FFlagBulkPurchaseEnablePurchaseOptionsModule (upval), BulkPurchaseApp (upval), AXAddPlusUpsellToBulkPurchaseExposure (upval), IXPServiceWrapper (upval), AXAddPlusUpsellToBulkPurchaseLayerName (upval), InitiateBulkPurchaseFlowModule (upval), transformItemDataToBulkPurchaseItemData (upval), ConvertToDiscountInformationOrNilModule (upval)
-			local PromptBulkPurchaseRequestedV2Connection = if UseDispatchResult and UseNetworkResult then MarketplaceService.PromptBulkPurchaseRequestedV2:Connect(function(Player, DisplayData, OrderRequest, PurchaserRobuxBalance, OrderTotalRobux, Options, DiscountInformation) --[[ Line: 182 ]]
+			local PromptBulkPurchaseRequestedV2Connection = if UseDispatchResult and UseNetworkResult then MarketplaceService.PromptBulkPurchaseRequestedV2:Connect(function(Player, DisplayData, OrderRequest, PurchaserRobuxBalance, OrderTotalRobux, Options, DiscountInformation)
 				-- upvalues: Players (upval), FFlagBulkPurchaseEnablePurchaseOptionsModule (upval), BulkPurchaseApp (upval), AXAddPlusUpsellToBulkPurchaseExposure (upval), IXPServiceWrapper (upval), AXAddPlusUpsellToBulkPurchaseLayerName (upval), UseDispatchResult (upval), InitiateBulkPurchaseFlowModule (upval), UseNetworkResult (upval), transformItemDataToBulkPurchaseItemData (upval), ConvertToDiscountInformationOrNilModule (upval)
 				if Player == Players.LocalPlayer then
 					if FFlagBulkPurchaseEnablePurchaseOptionsModule and require(BulkPurchaseApp.Flags.FFlagBulkPurchaseReportsMissingPurchaseOptions) then
@@ -144,7 +144,7 @@ return function() --[[ Line: 102 | Named "useBulkPurchaseRequestListenerEffect" 
 				end
 			end) else nil
 			
-			return function() --[[ Line: 223 ]]
+			return function()
 				-- upvalues: PromptBulkPurchaseRequestedV2Connection (ref)
 				if PromptBulkPurchaseRequestedV2Connection then
 					PromptBulkPurchaseRequestedV2Connection:Disconnect()
@@ -154,18 +154,18 @@ return function() --[[ Line: 102 | Named "useBulkPurchaseRequestListenerEffect" 
 		end, { UseDispatchResult, UseNetworkResult })
 	end
 	if FFlagAXAddPlusUpsellToBulkPurchaseModule then
-		ReactModule.useEffect(function() --[[ Line: 233 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: IsUseSelectorResultMatch (ref), MarketplaceService (upval), FFlagAXAddOffersToBulkPurchaseModule (upval), getOffersAvailableMap (upval), Players (upval), UseDispatchResult (copy), BulkPurchaseRefreshedModule (upval), transformItemDataToBulkPurchaseItemData (upval), ConvertToDiscountInformationOrNilModule (upval), FFlagBulkPurchaseReportCountersModule (upval), ReportBulkPurchaseRequestCountersModule (upval), BulkPurchaseCountersEnumModule (upval), BulkPurchaseFailedModule (upval), ErrorCodeEnumModule (upval)
 			local Connection = nil
 			
 			if IsUseSelectorResultMatch then
-				local Success, Result = pcall(function() --[[ Line: 237 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: MarketplaceService (upval), FFlagAXAddOffersToBulkPurchaseModule (upval), getOffersAvailableMap (upval), Players (upval), UseDispatchResult (upval), BulkPurchaseRefreshedModule (upval), transformItemDataToBulkPurchaseItemData (upval), ConvertToDiscountInformationOrNilModule (upval), FFlagBulkPurchaseReportCountersModule (upval), ReportBulkPurchaseRequestCountersModule (upval), BulkPurchaseCountersEnumModule (upval), BulkPurchaseFailedModule (upval), ErrorCodeEnumModule (upval)
-					return MarketplaceService.PromptBulkPurchaseRefreshed:Connect(function(Player, Status, Response) --[[ Line: 239 ]]
+					return MarketplaceService.PromptBulkPurchaseRefreshed:Connect(function(Player, Status, Response)
 						-- upvalues: FFlagAXAddOffersToBulkPurchaseModule (upval), getOffersAvailableMap (upval), Players (upval), UseDispatchResult (upval), BulkPurchaseRefreshedModule (upval), transformItemDataToBulkPurchaseItemData (upval), ConvertToDiscountInformationOrNilModule (upval), FFlagBulkPurchaseReportCountersModule (upval), ReportBulkPurchaseRequestCountersModule (upval), BulkPurchaseCountersEnumModule (upval), BulkPurchaseFailedModule (upval), ErrorCodeEnumModule (upval)
 						local Config = if FFlagAXAddOffersToBulkPurchaseModule then {
 							offersAvailable = getOffersAvailableMap(Response.availableOffers),
-							savingsSummary = if Response.savingsSummary then Response.savingsSummary:gsub("\\u{(%x+)}", function(p1): string --[[ Line: 54 ]]
+							savingsSummary = if Response.savingsSummary then Response.savingsSummary:gsub("\\u{(%x+)}", function(p1): string
 								local Number: number? = tonumber(p1, 16)
 								
 								return if Number == nil or Number < 0 or Number > 1114111 then "" else utf8.char(Number)
@@ -193,7 +193,7 @@ return function() --[[ Line: 102 | Named "useBulkPurchaseRequestListenerEffect" 
 					Connection = Result
 				end
 			end
-			return function() --[[ Line: 299 ]]
+			return function()
 				-- upvalues: Connection (ref)
 				if Connection then
 					Connection:Disconnect()

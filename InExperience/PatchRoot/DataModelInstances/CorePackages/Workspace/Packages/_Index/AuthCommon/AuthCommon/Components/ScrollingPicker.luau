@@ -34,12 +34,12 @@ local self = setmetatable({
 	[Enum.UserInputType.MouseButton1] = true,
 	[Enum.UserInputType.Touch] = true
 }, {
-	__index = function(_, _): boolean --[[ Line: 82 ]]
+	__index = function(_, _): boolean
 		return false
 	end
 })
 
-function ScrollingPicker.init(p1) --[[ Line: 87 ]]
+function ScrollingPicker.init(p1)
 	-- upvalues: config (copy), config1 (copy), RoactModule (copy), OtterModule (copy), self (copy), ScrollingPickerMaximumPickerChangePerInput (copy), ScrollingPicker (copy), ScrollingPickerSmallInputDecayFactor (copy), ScrollingPickerSlowScrollStepWaitMs (copy)
 	local ParentSpecifiedTarget = p1.props.parentSpecifiedTarget
 	local ScrollDirection = p1.props.scrollDirection
@@ -65,17 +65,17 @@ function ScrollingPicker.init(p1) --[[ Line: 87 ]]
 	p1.tapTargetExpansionSize = p1.props.tapTargetExpansionSize
 	p1.scrollDeltaAccumulator = 0
 	
-	function p1.getCenterIndexByPosition(p2): number --[[ Line: 136 ]]
+	function p1.getCenterIndexByPosition(p2): number
 		-- upvalues: p1 (copy)
 		return math.floor(-p2 / p1.props.entrySizeOnScrollingAxis) + 1
 	end
 	
-	function p1.getCenterIndexByScrollPosition(Offset) --[[ Line: 142 ]]
+	function p1.getCenterIndexByScrollPosition(Offset)
 		-- upvalues: p1 (copy)
 		return p1.getCenterIndexByPosition(Offset - p1.props.entrySizeOnScrollingAxis / 2)
 	end
 	
-	function p1.updateParent() --[[ Line: 153 ]]
+	function p1.updateParent()
 		-- upvalues: p1 (copy)
 		local OnCurrentIndexChangedFunction: (any) -> () = p1.props.onCurrentIndexChanged
 		local OnSelectedIndexChangedFunction: (any, any) -> () = p1.props.onSelectedIndexChanged
@@ -88,7 +88,7 @@ function ScrollingPicker.init(p1) --[[ Line: 87 ]]
 		end
 	end
 	
-	function p1.onScrollPositionChanged() --[[ Line: 166 ]]
+	function p1.onScrollPositionChanged()
 		-- upvalues: p1 (copy)
 		if p1.scrollRef.current then
 			local CenterIndexByScrollPosition = p1.getCenterIndexByScrollPosition(p1.scrollRef.current.Position[p1.state.scrollingAxis].Offset)
@@ -100,7 +100,7 @@ function ScrollingPicker.init(p1) --[[ Line: 87 ]]
 		end
 	end
 	
-	function p1.updateTargetIndex(p2) --[[ Line: 181 ]]
+	function p1.updateTargetIndex(p2)
 		-- upvalues: p1 (copy), OtterModule (upval)
 		local NewTargetIndex: number = p2.newTargetIndex
 		local IsSetByUserInput = p2.isSetByUserInput
@@ -120,7 +120,7 @@ function ScrollingPicker.init(p1) --[[ Line: 87 ]]
 		end
 	end
 	
-	function p1.updateIndexByInputPosition(Vector) --[[ Line: 216 ]]
+	function p1.updateIndexByInputPosition(Vector)
 		-- upvalues: p1 (copy)
 		if p1.scrollRef.current then
 			local ScrollingAxis = p1.state.scrollingAxis
@@ -134,7 +134,7 @@ function ScrollingPicker.init(p1) --[[ Line: 87 ]]
 		end
 	end
 	
-	function p1.updateIndexByScrollPositionAndOffset(DeltaEntryRatio) --[[ Line: 247 ]]
+	function p1.updateIndexByScrollPositionAndOffset(DeltaEntryRatio)
 		-- upvalues: p1 (copy)
 		local DeltaEntryRatio1 = DeltaEntryRatio or 0
 		
@@ -146,7 +146,7 @@ function ScrollingPicker.init(p1) --[[ Line: 87 ]]
 		end
 	end
 	
-	function p1:onInputBegan(Input) --[[ Line: 266 ]]
+	function p1:onInputBegan(Input)
 		-- upvalues: p1 (copy), self (upval)
 		local Entries = p1.props.entries
 		local ScrollingAxis = p1.state.scrollingAxis
@@ -160,7 +160,7 @@ function ScrollingPicker.init(p1) --[[ Line: 87 ]]
 		end
 	end
 	
-	function ScrollingPicker:restrictInputChangeDelta(Value: number) --[[ Line: 292 ]]
+	function ScrollingPicker:restrictInputChangeDelta(Value: number)
 		-- upvalues: ScrollingPickerMaximumPickerChangePerInput (upval), ScrollingPicker (upval), ScrollingPickerSmallInputDecayFactor (upval)
 		local v1: number = if Value > 0 then 1 else -1
 		local Smallest = math.min(math.abs(Value), ScrollingPickerMaximumPickerChangePerInput * ScrollingPicker.MOUSE_WHEEL_STEP_THRESHOLD)
@@ -168,7 +168,7 @@ function ScrollingPicker.init(p1) --[[ Line: 87 ]]
 		return if Smallest < ScrollingPicker.MOUSE_WHEEL_STEP_THRESHOLD then math.pow(Smallest / ScrollingPicker.MOUSE_WHEEL_STEP_THRESHOLD, ScrollingPickerSmallInputDecayFactor) * ScrollingPicker.MOUSE_WHEEL_STEP_THRESHOLD else Smallest * v1
 	end
 	
-	function p1:onInputChanged(Input) --[[ Line: 313 ]]
+	function p1:onInputChanged(Input)
 		-- upvalues: p1 (copy), ScrollingPicker (upval), ScrollingPickerSlowScrollStepWaitMs (upval), OtterModule (upval)
 		local Entries = p1.props.entries
 		local EntrySizeOnScrollingAxis = p1.props.entrySizeOnScrollingAxis
@@ -210,7 +210,7 @@ function ScrollingPicker.init(p1) --[[ Line: 87 ]]
 		end
 	end
 	
-	function p1:onInputEnded(p2) --[[ Line: 369 ]]
+	function p1:onInputEnded(p2)
 		-- upvalues: p1 (copy)
 		local ScrollingAxis = p1.state.scrollingAxis
 		
@@ -233,7 +233,7 @@ function ScrollingPicker.init(p1) --[[ Line: 87 ]]
 		p1.inputChanged = false
 	end
 	
-	function p1.onSelectionGained(NewTargetIndex) --[[ Line: 395 ]]
+	function p1.onSelectionGained(NewTargetIndex)
 		-- upvalues: p1 (copy)
 		p1.isEntrySelected = true
 		p1.updateTargetIndex({
@@ -243,17 +243,17 @@ function ScrollingPicker.init(p1) --[[ Line: 87 ]]
 		})
 	end
 	
-	function p1.onSelectionLost() --[[ Line: 404 ]]
+	function p1.onSelectionLost()
 		-- upvalues: p1 (copy)
 		p1.isEntrySelected = false
 	end
 end
 
-function ScrollingPicker.didMount(p2) --[[ Line: 409 ]]
+function ScrollingPicker.didMount(p2)
 	-- upvalues: OtterModule (copy), ScrollingPickerDirectionModule (copy)
 	p2.updateParent()
 	p2.motor = OtterModule.createSingleMotor(0)
-	p2.motor:onStep(function(Offset) --[[ Line: 413 ]]
+	p2.motor:onStep(function(Offset)
 		-- upvalues: p2 (copy), ScrollingPickerDirectionModule (upval)
 		if p2.scrollRef.current then
 			local ScrollingAxis = p2.state.scrollingAxis
@@ -262,7 +262,7 @@ function ScrollingPicker.didMount(p2) --[[ Line: 409 ]]
 			p2.scrollRef.current.Position = if p2.state.scrollDirection == ScrollingPickerDirectionModule.Horizontal then UDim2.new(UDim.new(Position[ScrollingAxis].Scale, Offset), Position[SubAxis]) else UDim2.new(Position[SubAxis], UDim.new(Position[ScrollingAxis].Scale, Offset))
 		end
 	end)
-	p2.motor:onComplete(function() --[[ Line: 431 ]]
+	p2.motor:onComplete(function()
 		-- upvalues: p2 (copy)
 		if p2.props.onAnimationComplete then
 			p2.props.onAnimationComplete()
@@ -276,12 +276,12 @@ function ScrollingPicker.didMount(p2) --[[ Line: 409 ]]
 	p2.isMounted = true
 end
 
-function ScrollingPicker.willUnmount(p2) --[[ Line: 446 ]]
+function ScrollingPicker.willUnmount(p2)
 	p2.isMounted = false
 	p2.motor:destroy()
 end
 
-function ScrollingPicker.didUpdate(p2, DefaultProps) --[[ Line: 451 ]]
+function ScrollingPicker.didUpdate(p2, DefaultProps)
 	local ParentSpecifiedTarget = p2.props.parentSpecifiedTarget
 	
 	if p2.props.entrySizeOnScrollingAxis ~= DefaultProps.entrySizeOnScrollingAxis or ParentSpecifiedTarget ~= p2.targetIndex and ParentSpecifiedTarget ~= DefaultProps.parentSpecifiedTarget then
@@ -292,9 +292,9 @@ function ScrollingPicker.didUpdate(p2, DefaultProps) --[[ Line: 451 ]]
 	end
 end
 
-function ScrollingPicker.render(p2) --[[ Line: 473 ]]
+function ScrollingPicker.render(p2)
 	-- upvalues: WithStyleFunction (copy), ScrollingPickerDirectionModule (copy), FitChildrenModule (copy), RoactModule (copy), CryoModule (copy)
-	return WithStyleFunction(function(_) --[[ Line: 474 ]]
+	return WithStyleFunction(function(_)
 		-- upvalues: p2 (copy), ScrollingPickerDirectionModule (upval), FitChildrenModule (upval), RoactModule (upval), CryoModule (upval)
 		local LayoutOrder = p2.props.layoutOrder
 		local Size = p2.props.size
@@ -331,7 +331,7 @@ function ScrollingPicker.render(p2) --[[ Line: 473 ]]
 				Text = "",
 				Selectable = math.abs(p2.targetIndex - LayoutOrder1) < 2,
 				[RoactModule.Ref] = if LayoutOrder1 == p2.targetIndex then p2.targetEntryRef else nil,
-				[RoactModule.Event.SelectionGained] = function() --[[ Line: 514 ]]
+				[RoactModule.Event.SelectionGained] = function()
 					-- upvalues: p2 (upval), LayoutOrder1 (copy)
 					p2.onSelectionGained(LayoutOrder1)
 				end,

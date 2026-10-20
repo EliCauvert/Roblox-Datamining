@@ -1,9 +1,9 @@
 ﻿local AvatarEditorService = game:GetService("AvatarEditorService")
 local CloseOpenPromptModule = require(script.Parent.Parent.Actions.CloseOpenPrompt)
 
-return function(Name) --[[ Line: 6 ]]
+return function(Name)
 	-- upvalues: AvatarEditorService (copy), CloseOpenPromptModule (copy)
-	return function(p1) --[[ Line: 7 ]]
+	return function(p1)
 		-- upvalues: AvatarEditorService (upval), Name (copy), CloseOpenPromptModule (upval)
 		AvatarEditorService:PerformRenameOutfit(Name)
 		p1:dispatch(CloseOpenPromptModule())

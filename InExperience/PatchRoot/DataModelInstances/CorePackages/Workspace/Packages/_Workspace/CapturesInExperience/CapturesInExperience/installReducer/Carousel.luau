@@ -6,9 +6,9 @@ local _ = require(Parent.Types)
 local FFlagUseRbxstorageInGalleryModule = require(Parent.Flags.FFlagUseRbxstorageInGallery)
 local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 
-local function findNewSelectedCaptureIndex(Captures, SelectedCaptureIndex, SelectedCapture) --[[ Line: 32 ]]
+local function findNewSelectedCaptureIndex(Captures, SelectedCaptureIndex, SelectedCapture)
 	-- upvalues: FFlagUseRbxstorageInGalleryModule (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CryoModule (copy), CaptureTypeModule (copy)
-	return if FFlagUseRbxstorageInGalleryModule or Captures[SelectedCaptureIndex] == nil or Captures[SelectedCaptureIndex].filePath ~= SelectedCapture.filePath or FFlagEnableCapturesGalleryRetrievalCoreScriptModule then CryoModule.List.findWhere(Captures, function(p1): boolean --[[ Line: 47 ]]
+	return if FFlagUseRbxstorageInGalleryModule or Captures[SelectedCaptureIndex] == nil or Captures[SelectedCaptureIndex].filePath ~= SelectedCapture.filePath or FFlagEnableCapturesGalleryRetrievalCoreScriptModule then CryoModule.List.findWhere(Captures, function(p1): boolean
 		-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (upval), SelectedCapture (copy), FFlagUseRbxstorageInGalleryModule (upval), CaptureTypeModule (upval)
 		return if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then tostring(p1.CaptureTime.UnixTimestampMillis) == tostring(SelectedCapture.CaptureTime.UnixTimestampMillis) elseif FFlagUseRbxstorageInGalleryModule and p1.type == CaptureTypeModule.Video and SelectedCapture.type == CaptureTypeModule.Video then p1.thumbnailKey == SelectedCapture.thumbnailKey elseif FFlagUseRbxstorageInGalleryModule and p1.type == CaptureTypeModule.Screenshot and SelectedCapture.type == CaptureTypeModule.Screenshot then p1.filePath == SelectedCapture.filePath else not FFlagUseRbxstorageInGalleryModule and p1.filePath == SelectedCapture.filePath
 	end) else SelectedCaptureIndex
@@ -19,7 +19,7 @@ return require(Parent1.Rodux).createReducer({
 	IsDeleteWarningModalOpen = false,
 	SelectedCaptureIndex = 0
 }, {
-	[require(Parent.Actions.CapturesRetrieved).name] = function(p1, p2) --[[ Line: 72 ]]
+	[require(Parent.Actions.CapturesRetrieved).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy), findNewSelectedCaptureIndex (copy)
 		if p1.IsOpen == false then
 			return p1
@@ -38,23 +38,23 @@ return require(Parent1.Rodux).createReducer({
 			}) else CryoModule.Dictionary.join(p1, { SelectedCaptureIndex = NewSelectedCaptureIndex })
 		end
 	end,
-	[require(Parent.Actions.CarouselClosed).name] = function(p1, _) --[[ Line: 117 ]]
+	[require(Parent.Actions.CarouselClosed).name] = function(p1, _)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, { IsOpen = false, SelectedCaptureIndex = 0 })
 	end,
-	[require(Parent.Actions.CarouselIndexSelected).name] = function(p1, p2) --[[ Line: 124 ]]
+	[require(Parent.Actions.CarouselIndexSelected).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, { SelectedCaptureIndex = p2.index })
 	end,
-	[require(Parent.Actions.CarouselOpened).name] = function(p1, p2) --[[ Line: 130 ]]
+	[require(Parent.Actions.CarouselOpened).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, { IsOpen = true, SelectedCaptureIndex = p2.index })
 	end,
-	[require(Parent.Actions.DeleteWarningModalClosed).name] = function(p1, _) --[[ Line: 137 ]]
+	[require(Parent.Actions.DeleteWarningModalClosed).name] = function(p1, _)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, { IsDeleteWarningModalOpen = false })
 	end,
-	[require(Parent.Actions.DeleteWarningModalOpened).name] = function(p1, _) --[[ Line: 143 ]]
+	[require(Parent.Actions.DeleteWarningModalOpened).name] = function(p1, _)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, { IsDeleteWarningModalOpen = true })
 	end

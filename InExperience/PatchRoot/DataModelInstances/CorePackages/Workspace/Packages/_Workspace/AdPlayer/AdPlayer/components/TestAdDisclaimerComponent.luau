@@ -9,7 +9,7 @@ local config = {
 	ineligibleDisclaimer = "CoreScripts.Ads.Label.RewardedVideoIneligibleDisclaimer"
 }
 
-return function(p1) --[[ Line: 18 | Named "TestAdDisclaimerComponent" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), UseTokensFunction (copy), ReactModule (copy), Text (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	

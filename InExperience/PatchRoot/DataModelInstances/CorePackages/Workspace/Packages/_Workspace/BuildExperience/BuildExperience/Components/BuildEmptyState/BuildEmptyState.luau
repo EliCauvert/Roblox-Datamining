@@ -11,7 +11,7 @@ local View = FoundationModule.View
 local IconName = FoundationModule.Enums.IconName
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(Frame) --[[ Line: 25 | Named "BuildEmptyState" ]]
+return function(Frame)
 	-- upvalues: Players (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseTokensFunction (copy), ReactModule (copy), View (copy), Icon (copy), IconName (copy), Text (copy)
 	local LocalPlayer = Players.LocalPlayer
 	local DisplayName = if LocalPlayer then LocalPlayer.DisplayName else ""

@@ -9,13 +9,13 @@ local DashModule = require(Parent1.Dash)
 local DeviceContactModule = require(Parent.Models.DeviceContact)
 local t = {}
 
-return function(_) --[[ Line: 14 ]]
+return function(_)
 	-- upvalues: RoduxModule (copy), t (copy), DeviceContactsReceived (copy), DashModule (copy), DeviceContactModule (copy)
 	return RoduxModule.createReducer(t, {
-		[DeviceContactsReceived.name] = function(_, p1) --[[ Line: 16 ]]
+		[DeviceContactsReceived.name] = function(_, p1)
 			-- upvalues: DashModule (upval), DeviceContactModule (upval)
 			local FormatFromDeviceResults = {}
-			DashModule.forEach(p1.payload, function(p2) --[[ Line: 22 ]]
+			DashModule.forEach(p1.payload, function(p2)
 				-- upvalues: DeviceContactModule (upval), FormatFromDeviceResults (copy)
 				local FormatFromDeviceResult = DeviceContactModule.formatFromDevice(p2)
 				FormatFromDeviceResults[FormatFromDeviceResult.id] = FormatFromDeviceResult

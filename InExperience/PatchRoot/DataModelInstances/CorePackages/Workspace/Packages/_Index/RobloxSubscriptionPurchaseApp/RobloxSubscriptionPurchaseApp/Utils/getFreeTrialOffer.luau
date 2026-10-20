@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("RobloxSubscriptionPurchaseApp").Models.GetRobloxSubscriptionProductsModel)
 
-return function(p1) --[[ Line: 8 | Named "getFreeTrialOffer" ]]
+return function(p1)
 	if p1 then
 		local EligibleOffers = p1.EligibleOffers
 		local EligibleOffer = EligibleOffers and EligibleOffers[1]

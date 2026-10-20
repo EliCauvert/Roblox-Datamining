@@ -10,7 +10,7 @@ local InputSize = FoundationModule.Enums.InputSize
 local PopoverAlign = FoundationModule.Enums.PopoverAlign
 local PopoverSide = FoundationModule.Enums.PopoverSide
 
-return ReactModule.memo(function(Frame) --[[ Line: 27 | Named "InfoTooltip" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: ReactModule (copy), View (copy), Text (copy), IconButton (copy), IconName (copy), InputSize (copy), Coachmark (copy), PopoverSide (copy), PopoverAlign (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(nil)
@@ -29,9 +29,9 @@ return ReactModule.memo(function(Frame) --[[ Line: 27 | Named "InfoTooltip" ]]
 			LayoutOrder = 2,
 			icon = IconName.CircleI,
 			size = InputSize.XSmall,
-			onActivated = ReactModule.useCallback(function() --[[ Line: 35 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: UseStateResult2 (copy)
-				UseStateResult2(function(p1): boolean --[[ Line: 36 ]]
+				UseStateResult2(function(p1): boolean
 					return not p1
 				end)
 			end, {}),
@@ -43,7 +43,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 27 | Named "InfoTooltip" ]]
 			text = Frame.tooltipText,
 			isOpen = UseStateResult,
 			anchorRef = UseRefResult,
-			onPressedOutside = ReactModule.useCallback(function() --[[ Line: 31 ]]
+			onPressedOutside = ReactModule.useCallback(function()
 				-- upvalues: UseStateResult2 (copy)
 				UseStateResult2(false)
 			end, {}),

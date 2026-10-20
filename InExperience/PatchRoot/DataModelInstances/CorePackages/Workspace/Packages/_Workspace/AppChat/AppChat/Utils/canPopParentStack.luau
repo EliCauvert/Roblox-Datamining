@@ -1,4 +1,4 @@
-﻿return function(p1): boolean --[[ Line: 6 | Named "canPopParentStack" ]]
+﻿return function(p1): boolean
 	if p1 and p1._dangerouslyGetParent then
 		local DangerouslyGetParentResult = p1._dangerouslyGetParent()
 		local State = DangerouslyGetParentResult and DangerouslyGetParentResult.state

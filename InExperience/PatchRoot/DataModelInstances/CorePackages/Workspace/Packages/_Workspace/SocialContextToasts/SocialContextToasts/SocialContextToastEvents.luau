@@ -9,7 +9,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 	actionType = TModule.string
 })
 
-return function(p1, p2) --[[ Line: 15 ]]
+return function(p1, p2)
 	-- upvalues: StrictInterfaceResult (copy), MutedErrorFunction (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(p2)
 	

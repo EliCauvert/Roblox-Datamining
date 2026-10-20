@@ -1,7 +1,7 @@
 ﻿local ChatTypesModule = require(script:FindFirstAncestor("BuildExperience").Chat.chatTypes)
 
 return {
-	getMessageKey = function(p1) --[[ Line: 5 ]]
+	getMessageKey = function(p1)
 		-- upvalues: ChatTypesModule (copy)
 		if p1.kind == "assistant_turn" then
 			local AssistantTurnAnchorKey = ChatTypesModule.makeAssistantTurnAnchorKey(p1.sessionId, p1.endSequenceId)
@@ -14,7 +14,7 @@ return {
 		end
 		return if p1.id == nil then nil else `message:{p1.id}`
 	end,
-	getMessageIndexByKey = function(List) --[[ Line: 21 ]]
+	getMessageIndexByKey = function(List)
 		-- upvalues: ChatTypesModule (copy)
 		local t = {}
 		
@@ -39,7 +39,7 @@ return {
 		end
 		return t
 	end,
-	getLastMessageKey = function(p1) --[[ Line: 32 ]]
+	getLastMessageKey = function(p1)
 		-- upvalues: ChatTypesModule (copy)
 		local v1 = nil
 		local AssistantTurnAnchorKey = nil

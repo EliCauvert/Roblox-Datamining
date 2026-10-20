@@ -183,7 +183,7 @@ if FFlagIEMSettingsGroupsModule then
 		InformationFrame = NextOrder()
 	}
 end
-local function _() --[[ Line: 230 | Named "getLayoutOrder" ]]
+local function _()
 	-- upvalues: FFlagIEMSettingsGroupsModule (copy), v1 (ref), config (copy)
 	return if FFlagIEMSettingsGroupsModule then v1 else config
 end

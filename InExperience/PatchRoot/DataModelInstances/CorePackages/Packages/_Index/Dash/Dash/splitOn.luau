@@ -1,6 +1,6 @@
 ﻿local InsertFunction = table.insert
 
-return function(Text: string, p1) --[[ Line: 10 | Named "splitOn" ]]
+return function(Text: string, p1)
 	-- upvalues: InsertFunction (copy)
 	local t = {}
 	local t1 = {}

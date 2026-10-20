@@ -53,13 +53,13 @@ local config = {
 	onDevProductRejectedByToolCallId = {}
 }
 
-local function constantSource(): number --[[ Line: 122 ]]
+local function constantSource(): number
 	return 0
 end
 
-local function useReactiveValue(Callback) --[[ Line: 126 ]]
+local function useReactiveValue(Callback)
 	-- upvalues: ReactModule (copy), constantSource (copy), SignalsReactModule (copy)
-	return (SignalsReactModule.useSignalState((ReactModule.useCallback(function(Callback1: (any) -> ()) --[[ Line: 127 ]]
+	return (SignalsReactModule.useSignalState((ReactModule.useCallback(function(Callback1: (any) -> ())
 		-- upvalues: Callback (copy), constantSource (upval)
 		if typeof(Callback) == "function" then
 			return (Callback(Callback1))
@@ -71,11 +71,11 @@ local function useReactiveValue(Callback) --[[ Line: 126 ]]
 	end, { Callback }))))
 end
 
-local function _(p1): boolean --[[ Line: 140 | Named "hasSelectedOptions" ]]
+local function _(p1): boolean
 	return typeof(p1) == "string" or typeof(p1) == "table" and #p1 > 0
 end
 
-local function AnswerStackSection(Frame) --[[ Line: 150 ]]
+local function AnswerStackSection(Frame)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), View (copy), Text (copy), OptionSelectorModule (copy), AnswerStackModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		customAnswer = LocalizationStringsModule.ANSWER_STACK_CUSTOM_ANSWER,
@@ -115,7 +115,7 @@ local function AnswerStackSection(Frame) --[[ Line: 150 ]]
 				isConfirmDisabled = not (typeof(SelectedOptionId) == "string" or typeof(SelectedOptionId) == "table" and #SelectedOptionId > 0),
 				onConfirm = if IsMultiSelect and IsIsActive then Frame.onAnswerConfirmed else nil,
 				testId = `AnswerStack.{Question.id}`,
-				onOptionSelected = function(p1) --[[ Line: 190 ]]
+				onOptionSelected = function(p1)
 					-- upvalues: Frame (copy), IsMultiSelect (copy), IsIsActive (copy), Question (copy), Prompt (copy)
 					if Frame.onAnswerSelected == nil then return end
 					if IsMultiSelect then
@@ -138,7 +138,7 @@ local function AnswerStackSection(Frame) --[[ Line: 150 ]]
 			title = UseLocalizationResult.customAnswer,
 			description = CustomResponseText,
 			testId = `AnswerStack.{Question.id}.CustomAnswer`,
-			onActivated = function() --[[ Line: 179 ]] end
+			onActivated = function() end
 		})
 	end
 	config1.Answers = Element
@@ -146,7 +146,7 @@ local function AnswerStackSection(Frame) --[[ Line: 150 ]]
 	return CreateElementFunction(View, config, config1)
 end
 
-local function PlanProposalSection(Frame: Frame) --[[ Line: 209 ]]
+local function PlanProposalSection(Frame: Frame)
 	-- upvalues: ReactModule (copy), AgentPlanCardModule (copy), View (copy), ChatUserMessageModule (copy)
 	local PlanProposal = Frame.planProposal
 	local Element = ReactModule.createElement(AgentPlanCardModule, {
@@ -155,7 +155,7 @@ local function PlanProposalSection(Frame: Frame) --[[ Line: 209 ]]
 		title = PlanProposal.title,
 		textContent = PlanProposal.textContent,
 		summary = PlanProposal.summary,
-		onBuild = Frame.onPlanAccepted or function() --[[ Line: 217 ]] end,
+		onBuild = Frame.onPlanAccepted or function() end,
 		isBuildDisabled = not (PlanProposal.isAccepted ~= true and PlanProposal.feedbackText == nil)
 	})
 	
@@ -174,7 +174,7 @@ local function PlanProposalSection(Frame: Frame) --[[ Line: 209 ]]
 	})
 end
 
-local function AgentMessageSegment(Frame: Frame) --[[ Line: 246 ]]
+local function AgentMessageSegment(Frame: Frame)
 	-- upvalues: useReactiveValue (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationRoactContext (copy), FoundationModule (copy), GetMarkdownRendererPropsModule (copy), View (copy), Icon (copy), IconName (copy), IconVariant (copy), IconSize (copy), Text (copy), MarkdownViewer (copy)
 	local UseReactiveValueResult = useReactiveValue(Frame.segment.text)
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -191,7 +191,7 @@ local function AgentMessageSegment(Frame: Frame) --[[ Line: 246 ]]
 		})
 	end
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 265 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: GetMarkdownRendererPropsModule (upval), UseTokensResult (copy), Frame (copy)
 		return GetMarkdownRendererPropsModule(UseTokensResult, Frame.markdownTextStyle)
 	end, { UseTokensResult, Frame.markdownTextStyle })
@@ -224,7 +224,7 @@ local function AgentMessageSegment(Frame: Frame) --[[ Line: 246 ]]
 	})
 end
 
-local function PlaytestCardSection(Frame) --[[ Line: 316 ]]
+local function PlaytestCardSection(Frame)
 	-- upvalues: UseIsPlaceVersionLiveModule (copy), ReactModule (copy), PlaytestCompletedCardModule (copy)
 	return ReactModule.createElement(PlaytestCompletedCardModule, {
 		LayoutOrder = Frame.LayoutOrder,
@@ -235,7 +235,7 @@ local function PlaytestCardSection(Frame) --[[ Line: 316 ]]
 	})
 end
 
-local function DevProductProposalSection(Frame) --[[ Line: 335 ]]
+local function DevProductProposalSection(Frame)
 	-- upvalues: ReactModule (copy), View (copy), AgentDevProductCardModule (copy)
 	local DevProductProposal = Frame.devProductProposal
 	
@@ -256,8 +256,8 @@ local function DevProductProposalSection(Frame) --[[ Line: 335 ]]
 			itemKind = DevProductProposal.itemKind,
 			itemId = DevProductProposal.itemId,
 			cancelRenewals = DevProductProposal.cancelRenewals,
-			onApprove = Frame.onApprove or function() --[[ Line: 354 ]] end,
-			onReject = Frame.onReject or function() --[[ Line: 355 ]] end,
+			onApprove = Frame.onApprove or function() end,
+			onReject = Frame.onReject or function() end,
 			isActionDisabled = not (DevProductProposal.isApproved ~= true and DevProductProposal.isRejected ~= true),
 			isPending = DevProductProposal.isPending,
 			hasError = DevProductProposal.hasError,
@@ -266,7 +266,7 @@ local function DevProductProposalSection(Frame) --[[ Line: 335 ]]
 	})
 end
 
-local function renderClientToolSegment(Segment, LayoutOrder, p1) --[[ Line: 365 ]]
+local function renderClientToolSegment(Segment, LayoutOrder, p1)
 	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), ReactModule (copy), AnswersCardContainerModule (copy), AnswerStackSection (copy), PlanProposalSection (copy), FFlagBuildExperienceManageDevProductModule (copy), DevProductProposalSection (copy)
 	return if FFlagBuildExperienceAnswerFormModule and Segment.answeredPrompts ~= nil then ReactModule.createElement(AnswersCardContainerModule, {
 		LayoutOrder = LayoutOrder,
@@ -289,7 +289,7 @@ local function renderClientToolSegment(Segment, LayoutOrder, p1) --[[ Line: 365 
 	})
 end
 
-local function renderWorkSegment(Segment, LayoutOrder, MarkdownTextStyle, ClockBinding, LocalToolActions) --[[ Line: 415 ]]
+local function renderWorkSegment(Segment, LayoutOrder, MarkdownTextStyle, ClockBinding, LocalToolActions)
 	-- upvalues: ReactModule (copy), AgentMessageSegment (copy), TurnActivitySummaryModule (copy), renderClientToolSegment (copy)
 	return if Segment.kind == "agent_message" then ReactModule.createElement(AgentMessageSegment, {
 		LayoutOrder = LayoutOrder,
@@ -302,7 +302,7 @@ local function renderWorkSegment(Segment, LayoutOrder, MarkdownTextStyle, ClockB
 	}) elseif Segment.kind == "client_tool" then renderClientToolSegment(Segment, LayoutOrder, LocalToolActions) else nil
 end
 
-local function TurnWorkSegment(Frame) --[[ Line: 441 ]]
+local function TurnWorkSegment(Frame)
 	-- upvalues: useReactiveValue (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FoundationModule (copy), renderWorkSegment (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ChatCardEmphasisPositionProviderModule (copy), View (copy), StateLayerAffordance (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy)
 	local UseReactiveValueResult = useReactiveValue(Frame.segment.label or "")
 	local WorkedDurationSeconds: number = Frame.segment.workedDurationSeconds
@@ -335,12 +335,12 @@ local function TurnWorkSegment(Frame) --[[ Line: 441 ]]
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local IsDone = Frame.isDone
 	local NoIsDone = not Frame.isDone or UseStateResult
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 487 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FFlagBuildExperienceChatAccordionScrollAnchorModule (upval), Callback (ref), UseRefResult (ref), UseStateResult2 (copy)
 		if FFlagBuildExperienceChatAccordionScrollAnchorModule and Callback ~= nil and UseRefResult ~= nil then
 			Callback(UseRefResult.current)
 		end
-		UseStateResult2(function(p1): boolean --[[ Line: 491 ]]
+		UseStateResult2(function(p1): boolean
 			return not p1
 		end)
 	end, { Callback })
@@ -397,7 +397,7 @@ local function TurnWorkSegment(Frame) --[[ Line: 441 ]]
 	})
 end
 
-return ReactModule.memo(function(Frame: Frame) --[[ Line: 559 | Named "ChatTurnBlock" ]]
+return ReactModule.memo(function(Frame: Frame)
 	-- upvalues: ReactModule (copy), TurnProjectionModule (copy), ReportTurnActivityGapModule (copy), useReactiveValue (copy), t (copy), FFlagBuildAgentAdCampaignCardModule (copy), UseAgentAdCampaignTurnCardsModule (copy), config (copy), FoundationModule (copy), FFlagBuildExperienceCopyChatMessagesModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), renderWorkSegment (copy), TurnWorkSegment (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), PlaytestCardSection (copy), PlaytestCompletedCardModule (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (copy), AdCampaignIsActiveCardModule (copy), AdUpsellCardModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ChatCardEmphasisPositionProviderModule (copy), View (copy), AgentTurnFeedbackModule (copy)
 	local Turn = Frame.turn
 	local TurnState = Turn.turnState
@@ -410,7 +410,7 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 559 | Named "ChatTurnB
 	local SessionId = Turn.sessionId
 	local IsDone = Turn.isDone
 	local IsLatestPublishTurn = Turn.isLatestPublishTurn
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 574 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: TurnState (copy), TurnProjectionModule (upval), TurnKey (copy), UniverseId (copy), SessionId (copy), StartSequenceId (copy), EndSequenceId (copy), OptimisticLocalTools (copy), IsLatestPublishTurn (copy), SetupErrorText (copy)
 		return if TurnState == nil then if SetupErrorText == nil then TurnProjectionModule.projectLoadingTurnSegments({ turnKey = TurnKey }) else TurnProjectionModule.projectSetupErrorSegments(SetupErrorText, { turnKey = TurnKey }) else TurnProjectionModule.projectActiveTurnSegments(TurnState, {
 			turnKey = TurnKey,
@@ -426,7 +426,7 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 559 | Named "ChatTurnB
 		SetupErrorText, UniverseId, SessionId, IsLatestPublishTurn
 	})
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 605 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsDone (copy), UseRefResult (copy), ReportTurnActivityGapModule (upval), UniverseId (copy)
 		if IsDone then
 			UseRefResult.current = nil
@@ -453,7 +453,7 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 559 | Named "ChatTurnB
 	local Emphasis = FoundationModule.Hooks.useTokens().Color.Content.Emphasis
 	local FinalAssistantMessageText = if FFlagBuildExperienceCopyChatMessagesModule and TurnState ~= nil then TurnProjectionModule.getFinalAssistantMessageText(TurnState) else nil
 	local OnPlaytestFunction = Frame.onPlaytest
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 640 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: SendBuildExperienceEventModule (upval), UseReactiveValueResult (copy), FFlagBuildEventsUpdate1Module (upval), OnPlaytestFunction (copy)
 		SendBuildExperienceEventModule("PLAYTEST_CLICK", {
 			universeId = UseReactiveValueResult.universeId,
@@ -467,7 +467,7 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 559 | Named "ChatTurnB
 		end
 	end, { OnPlaytestFunction, UseReactiveValueResult })
 	local UseRefResult1 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 653 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), OnPlaytestFunction (copy), UseMemoResult (copy), SendBuildExperienceEventModule (upval), UseReactiveValueResult (copy)
 		if UseRefResult1.current or OnPlaytestFunction == nil then return end
 		local Flag = false
@@ -552,7 +552,7 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 559 | Named "ChatTurnB
 					campaignStartDate = State1.campaignStartDate,
 					campaignEndDate = State1.campaignEndDate,
 					isDisabled = Frame.onAgentAdCampaignActive == nil,
-					onActivated = function() --[[ Line: 726 ]]
+					onActivated = function()
 						-- upvalues: Frame (copy)
 						if Frame.onAgentAdCampaignActive ~= nil then
 							Frame.onAgentAdCampaignActive()

@@ -13,7 +13,7 @@ local ExtractShareInfoByMomentIdModule = require(DataHydration.Moments.Util.extr
 local ConstructApiUrlModule = require(DataHydration.Moments.Util.constructApiUrl)
 local FFlagMomentsComments = require(Parent.SharedFlags).FFlagMomentsComments
 local MockNetwork = HttpClientModule.createMockNetwork({
-	fallback = function() --[[ Line: 28 ]]
+	fallback = function()
 		-- upvalues: HttpService (copy)
 		return {
 			statusCode = 200,
@@ -22,7 +22,7 @@ local MockNetwork = HttpClientModule.createMockNetwork({
 	end
 })
 
-return function(MomentsSessionId, PaginationContext, p1, Input) --[[ Line: 35 | Named "fetchTrendingMoments" ]]
+return function(MomentsSessionId, PaginationContext, p1, Input)
 	-- upvalues: ConstructApiUrlModule (copy), HttpModule (copy), HttpService (copy), FFlagArgusUseMockFeedItemsModule (copy), HttpClientModule (copy), MockNetwork (copy), MockTrendingMomentsModule (copy), FFlagMomentsComments (copy), ConvertApiMomentsToMomentItemsModule (copy), ExtractReactionsByMomentIdModule (copy), ExtractShareInfoByMomentIdModule (copy), ExtractCommentsByFeedItemIdModule (copy)
 	local GetMomentRecommendations, GetMomentRecommendations2 = ConstructApiUrlModule("content-captures-api/v2/moments/get-moment-recommendations")
 	local Text: string = `{GetMomentRecommendations}?{HttpModule.Url:makeQueryString({
@@ -38,7 +38,7 @@ return function(MomentsSessionId, PaginationContext, p1, Input) --[[ Line: 35 | 
 		url = Text,
 		headers = GetMomentRecommendations2,
 		network = if FFlagArgusUseMockFeedItemsModuleResult then MockNetwork else p1,
-		decode = function(p2) --[[ Line: 56 ]]
+		decode = function(p2)
 			-- upvalues: FFlagArgusUseMockFeedItemsModuleResult (copy), MockTrendingMomentsModule (upval), FFlagMomentsComments (upval), ConvertApiMomentsToMomentItemsModule (upval), PaginationContext (copy), ExtractReactionsByMomentIdModule (upval), ExtractShareInfoByMomentIdModule (upval), ExtractCommentsByFeedItemIdModule (upval)
 			return if FFlagArgusUseMockFeedItemsModuleResult then {
 				nextCursor = nil,

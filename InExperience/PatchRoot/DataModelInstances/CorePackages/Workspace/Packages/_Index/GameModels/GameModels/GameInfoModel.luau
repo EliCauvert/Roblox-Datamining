@@ -5,7 +5,7 @@ local _ = require(Parent.DiscoveryTypes)
 local FFlagSearchOmniAutocompletePage = require(Parent.SharedFlags).FFlagSearchOmniAutocompletePage
 local FFlagEnableTopSongsSort = require(Parent.SharedFlags).FFlagEnableTopSongsSort
 local GameInfoModelModule = {
-	new = function(UniverseId, PlaceId, Name) --[[ Line: 14 ]]
+	new = function(UniverseId, PlaceId, Name)
 		-- upvalues: TrimFunction (copy)
 		return {
 			universeId = UniverseId,
@@ -13,7 +13,7 @@ local GameInfoModelModule = {
 			name = TrimFunction(Name)
 		}
 	end,
-	_fromSharedJson = function(NewResult, p1) --[[ Line: 24 ]]
+	_fromSharedJson = function(NewResult, p1)
 		NewResult.ageRecommendationDisplayName = p1.ageRecommendationDisplayName
 		NewResult.minimumAge = p1.minimumAge
 		NewResult.contentMaturity = p1.contentMaturity
@@ -27,7 +27,7 @@ local GameInfoModelModule = {
 	end
 }
 
-function GameInfoModelModule.mock() --[[ Line: 41 ]]
+function GameInfoModelModule.mock()
 	-- upvalues: GameInfoModelModule (copy)
 	local _149757 = GameInfoModelModule.new("149757", "10395446", "test")
 	GameInfoModelModule._fromSharedJson(_149757, {
@@ -50,7 +50,7 @@ function GameInfoModelModule.mock() --[[ Line: 41 ]]
 	return _149757
 end
 
-function GameInfoModelModule.fromGamesApi(p1) --[[ Line: 73 ]]
+function GameInfoModelModule.fromGamesApi(p1)
 	-- upvalues: ResultModule (copy), GameInfoModelModule (copy)
 	if type(p1.universeId) ~= "number" and type(p1.universeId) ~= "string" then
 		return ResultModule.error("GameInfoModel.fromGamesApi expects universeId to be a number or a string")
@@ -68,7 +68,7 @@ function GameInfoModelModule.fromGamesApi(p1) --[[ Line: 73 ]]
 	end
 end
 
-function GameInfoModelModule.fromExperienceApi(p1) --[[ Line: 92 ]]
+function GameInfoModelModule.fromExperienceApi(p1)
 	-- upvalues: ResultModule (copy), GameInfoModelModule (copy)
 	if type(p1.universeId) ~= "number" and type(p1.universeId) ~= "string" then
 		return ResultModule.error("Game.fromJsonData expects universeId to be a number or a string")
@@ -82,7 +82,7 @@ function GameInfoModelModule.fromExperienceApi(p1) --[[ Line: 92 ]]
 	end
 end
 
-function GameInfoModelModule.fromOmniApi(p1) --[[ Line: 106 ]]
+function GameInfoModelModule.fromOmniApi(p1)
 	-- upvalues: ResultModule (copy), GameInfoModelModule (copy)
 	if type(p1.universeId) ~= "number" and type(p1.universeId) ~= "string" then
 		return ResultModule.error("DiscoveryGame.fromJsonData expects universeId to be a number or a string")
@@ -101,7 +101,7 @@ function GameInfoModelModule.fromOmniApi(p1) --[[ Line: 106 ]]
 end
 
 if FFlagSearchOmniAutocompletePage then
-	function GameInfoModelModule.fromOmniAutocompleteApi(p1) --[[ Line: 125 ]]
+	function GameInfoModelModule.fromOmniAutocompleteApi(p1)
 		-- upvalues: ResultModule (copy), GameInfoModelModule (copy)
 		if type(p1.universeId) ~= "number" and type(p1.universeId) ~= "string" then
 			return ResultModule.error("GameInfoModel.fromOmniAutocompleteApi expects universeId to be a number or a string")
@@ -115,7 +115,7 @@ if FFlagSearchOmniAutocompletePage then
 		end
 	end
 end
-function GameInfoModelModule.fromSearchApi(p1) --[[ Line: 140 ]]
+function GameInfoModelModule.fromSearchApi(p1)
 	-- upvalues: ResultModule (copy), GameInfoModelModule (copy)
 	if type(p1.universeId) ~= "number" and type(p1.universeId) ~= "string" then
 		return ResultModule.error("GameInfoModel.fromSearchApi expects universeId to be a number or a string")
@@ -134,7 +134,7 @@ function GameInfoModelModule.fromSearchApi(p1) --[[ Line: 140 ]]
 end
 
 if FFlagEnableTopSongsSort then
-	function GameInfoModelModule.fromMusicDiscoveryApi(p1) --[[ Line: 160 ]]
+	function GameInfoModelModule.fromMusicDiscoveryApi(p1)
 		-- upvalues: ResultModule (copy), GameInfoModelModule (copy)
 		if type(p1.universeId) ~= "number" and type(p1.universeId) ~= "string" then
 			return ResultModule.error("GameInfoModel.fromMusicDiscoveryApi expects universeId to be a number or a string")

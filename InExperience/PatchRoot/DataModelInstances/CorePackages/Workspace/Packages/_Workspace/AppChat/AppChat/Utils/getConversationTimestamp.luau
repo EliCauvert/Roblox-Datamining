@@ -2,7 +2,7 @@
 local _ = require(Parent.Time).DateTime
 local NewResult = require(Parent.RobloxAppLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
 
-return function(p1) --[[ Line: 20 ]]
+return function(p1)
 	-- upvalues: NewResult (copy)
 	local UnixTimestampDelta = DateTime.now().UnixTimestamp - p1.dateTime.UnixTimestamp
 	

@@ -3,7 +3,7 @@ local DragBarModule = require(VrSpatialUi.DragBar)
 local ConstantsModule = require(VrSpatialUi.Constants)
 local CoreGui = game:GetService("CoreGui")
 
-return function(p1) --[[ Line: 9 ]]
+return function(p1)
 	-- upvalues: CoreGui (copy), ConstantsModule (copy), DragBarModule (copy)
 	local Part = Instance.new("Part")
 	Part.Size = if p1.dragBarPartSize then Vector3.new(p1.dragBarPartSize.X, p1.dragBarPartSize.Y, 0.00001) else vector.create(0.6000000238418579, 0.11999999731779099, 9.999999747378752e-06)

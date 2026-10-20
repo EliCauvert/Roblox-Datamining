@@ -16,7 +16,7 @@ local FFlagExpChatPresetChatBadgeExperimentCleanup = require(CorePackages.Worksp
 local ExpChatShowPresetTooltipToNonAgeChecked2 = game:DefineFastFlag("ExpChatShowPresetTooltipToNonAgeChecked2", false)
 local _ = require(CorePackages.Workspace.Packages.Chrome)
 
-return function(p1) --[[ Line: 44 | Named "ChatNotificationBadge" ]]
+return function(p1)
 	-- upvalues: TextChatService (copy), FFlagExpChatUseUnifiedTooltipStore (copy), GetChatTooltipStoreFunction (copy), SignalsReactModule (copy), FFlagExpChatPresetChatEnabled (copy), ReactModule (copy), ExpChatShowPresetTooltipToNonAgeChecked2 (copy), GetGlobalChatTooltipStoreFunction (copy), GetChatStatusStoreFunction (copy), IsUserChatEnabledFunction (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), FFlagExpChatPresetChatBadgeExperimentCleanup (copy), ExpChatPresetChatBadgeFTUXExperimentation (copy)
 	local IconHostProps = p1.iconHostProps
 	local IsChat = IconHostProps.integration.id == "chat"
@@ -36,7 +36,7 @@ return function(p1) --[[ Line: 44 | Named "ChatNotificationBadge" ]]
 		local NoChatWindowConfiguration1: boolean = IsChat and (UseSignalStateResult3 and NoChatWindowConfiguration)
 		local NoChatWindowConfiguration1_1: boolean = UseSignalStateResult1 == "GlobalChatTooltip" and NoChatWindowConfiguration1
 		v1 = FFlagExpChatPresetChatEnabled and (UseSignalStateResult1 == "PresetChatTooltip" and NoChatWindowConfiguration1)
-		ReactModule.useEffect(function() --[[ Line: 72 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: IsChat (copy), ExpChatShowPresetTooltipToNonAgeChecked2 (upval), v1 (ref), UseSignalStateResult2 (copy), UseSignalStateResult (ref), ChatTooltipStore (ref), NoChatWindowConfiguration1_1 (copy), FFlagExpChatPresetChatEnabled (upval)
 			if not IsChat then return end
 			local UseSignalStateResult2_1 = if ExpChatShowPresetTooltipToNonAgeChecked2 then v1 and (UseSignalStateResult2 or UseSignalStateResult) else v1 and UseSignalStateResult2
@@ -59,27 +59,27 @@ return function(p1) --[[ Line: 44 | Named "ChatNotificationBadge" ]]
 		local UseSignalStateResult5 = SignalsReactModule.useSignalState(ChatTooltipStore.getIsGlobalChatTooltipEligible)
 		local UseSignalStateResult6 = SignalsReactModule.useSignalState(ChatTooltipStore.getIsScreenWideEnough)
 		local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-		ReactModule.useEffect(function() --[[ Line: 114 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: GetFFlagTextChatEnableUniverseChatTabsFunction (upval), TextChatService (upval), UseStateResult2 (copy)
 			if not GetFFlagTextChatEnableUniverseChatTabsFunction() then return end
 			if TextChatService:HasAllocatedUniverseChatContext("global") then
 				UseStateResult2(true)
 			end
-			local UniverseChatChannelAllocatedConnection = TextChatService.UniverseChatChannelAllocated:Connect(function(Context) --[[ Line: 123 ]]
+			local UniverseChatChannelAllocatedConnection = TextChatService.UniverseChatChannelAllocated:Connect(function(Context)
 				-- upvalues: UseStateResult2 (upval)
 				if Context == "global" then
 					UseStateResult2(true)
 				end
 			end)
 			
-			return function() --[[ Line: 129 ]]
+			return function()
 				-- upvalues: UniverseChatChannelAllocatedConnection (copy)
 				UniverseChatChannelAllocatedConnection:Disconnect()
 			end
 		end, {})
 		NoChatWindowConfiguration1_1_1 = IsChat and (IsUserChatEnabled and (UseSignalStateResult5 and (UseStateResult and (NoChatWindowConfiguration and (UseSignalStateResult6 and not UseSignalStateResult4)))))
 		local SetShouldShowGlobalChatTooltipFunction = ChatTooltipStore.setShouldShowGlobalChatTooltip
-		ReactModule.useEffect(function() --[[ Line: 143 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: IsChat (copy), SetShouldShowGlobalChatTooltipFunction (copy), NoChatWindowConfiguration1_1_1 (ref), UseSignalStateResult (ref)
 			if IsChat then
 				SetShouldShowGlobalChatTooltipFunction(NoChatWindowConfiguration1_1_1 and UseSignalStateResult)
@@ -92,7 +92,7 @@ return function(p1) --[[ Line: 44 | Named "ChatNotificationBadge" ]]
 		})
 	end
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 151 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: NoChatWindowConfiguration1_1_1 (ref), UseSignalStateResult (ref), UseStateResult2_1 (copy)
 		if NoChatWindowConfiguration1_1_1 and UseSignalStateResult then
 			UseStateResult2_1(true)
@@ -102,7 +102,7 @@ return function(p1) --[[ Line: 44 | Named "ChatNotificationBadge" ]]
 	
 	if FFlagExpChatPresetChatBadgeExperimentCleanup then
 		local NoUseSignalStateResult: boolean = NoUseStateResult1 and (v1 and not UseSignalStateResult)
-		ReactModule.useEffect(function() --[[ Line: 162 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: NoUseSignalStateResult (copy), ExpChatPresetChatBadgeFTUXExperimentation (upval)
 			if NoUseSignalStateResult and ExpChatPresetChatBadgeFTUXExperimentation.isExperimentEnabled then
 				ExpChatPresetChatBadgeFTUXExperimentation.logExposure()

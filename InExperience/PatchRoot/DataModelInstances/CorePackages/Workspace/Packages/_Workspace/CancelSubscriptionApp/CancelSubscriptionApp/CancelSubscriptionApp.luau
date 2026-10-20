@@ -12,12 +12,12 @@ local SelectPromptStateModule = require(CancelSubscriptionApp.Store.Selectors.se
 local CancelUserSubscriptionAsyncPromptStateEnumModule = require(CancelSubscriptionApp.Enums.CancelUserSubscriptionAsyncPromptStateEnum)
 local FocusNavigationModalSurface = require(Parent.EconomyCommonCoreScriptHooks).FocusNavigationModalSurface
 
-return function() --[[ Line: 20 | Named "CancelSubscriptionApp" ]]
+return function()
 	-- upvalues: ReactModule (copy), UseSelectorFunction (copy), SelectPromptStateModule (copy), UseCancelSubscriptionRequestedListenerEffectModule (copy), CancelUserSubscriptionAsyncPromptStateEnumModule (copy), GuiService (copy), ScreenSizeContext (copy), FocusNavigationModalSurface (copy), CancelUserSubscriptionErrorContainerModule (copy), CancelUserSubscriptionSuccessContainerModule (copy), CancelUserSubscriptionRequestContainerModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
 	local UseSelectorResult = UseSelectorFunction(SelectPromptStateModule)
 	UseCancelSubscriptionRequestedListenerEffectModule(UseSelectorResult)
-	ReactModule.useEffect(function() --[[ Line: 26 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSelectorResult (copy), CancelUserSubscriptionAsyncPromptStateEnumModule (upval), GuiService (upval)
 		if UseSelectorResult == CancelUserSubscriptionAsyncPromptStateEnumModule.None then
 			GuiService.SelectedCoreObject = nil
@@ -25,7 +25,7 @@ return function() --[[ Line: 20 | Named "CancelSubscriptionApp" ]]
 	end, { UseSelectorResult })
 	
 	return if UseSelectorResult == CancelUserSubscriptionAsyncPromptStateEnumModule.None then nil else ReactModule.createElement(ScreenSizeContext.Provider, { value = UseStateResult }, ReactModule.createElement("ScreenGui", {
-		[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 37 ]]
+		[ReactModule.Change.AbsoluteSize] = function(Frame)
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(Frame.AbsoluteSize)
 		end,

@@ -34,9 +34,9 @@ local EventMap = {
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-local function sinkPress() --[[ Line: 51 ]] end
+local function sinkPress() end
 
-local function OverlayPageLayer(p1) --[[ Line: 60 ]]
+local function OverlayPageLayer(p1)
 	-- upvalues: ReactRobloxModule (copy), ReactModule (copy), View (copy), StateLayerAffordance (copy), sinkPress (copy)
 	return ReactRobloxModule.createPortal(ReactModule.createElement(View, {
 		tag = "size-full",
@@ -56,7 +56,7 @@ local function OverlayPageLayer(p1) --[[ Line: 60 ]]
 	}), p1.overlay)
 end
 
-return function(Form) --[[ Line: 85 | Named "AccountUpgradePageView" ]]
+return function(Form)
 	-- upvalues: FoundationModule (copy), UseLastInputModeFunction (copy), ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), FFlagAccountUpgradeFullPageInOverlayModule (copy), FullscreenPageWithSafeArea (copy), OverlayPageLayer (copy), View (copy), HeaderBar (copy), Text (copy), IconName (copy), ScrollView (copy), ScrollBarVisibility (copy), AccountUpgradeFieldsModule (copy), InputSize (copy), Button (copy), ButtonVariant (copy), AccountUpgradeFieldErrorModule (copy), FFlagAccountUpgradeOAuthDialogFitsContentModule (copy), LegalTextWithLinks (copy), AccountUpgradeFieldModule (copy), BirthdaySheetModule (copy), FFlagAccountUpgradeOAuthTelemetryModule (copy), CloseConfirmationDialogModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local NoIsSubmitting: boolean = not Form.isSaveEnabled and not Form.isSubmitting
@@ -68,11 +68,11 @@ return function(Form) --[[ Line: 85 | Named "AccountUpgradePageView" ]]
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
 		isFocusable = not (Form.isBirthdayPickerOpen or Form.isCloseConfirmationOpen),
 		eventMap = EventMap,
-		eventHandlers = ReactModule.useMemo(function() --[[ Line: 93 ]]
+		eventHandlers = ReactModule.useMemo(function()
 			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), OnCloseFunction (copy)
 			return {
 				[FocusNavigationEventNameEnum.NavigateBack] = {
-					handler = InputHandlersModule.onRelease(function(p1) --[[ Line: 96 ]]
+					handler = InputHandlersModule.onRelease(function(p1)
 						-- upvalues: OnCloseFunction (upval)
 						if OnCloseFunction then
 							OnCloseFunction()

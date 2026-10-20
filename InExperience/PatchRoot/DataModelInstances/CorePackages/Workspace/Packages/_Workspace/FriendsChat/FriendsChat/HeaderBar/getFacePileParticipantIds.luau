@@ -1,4 +1,4 @@
-﻿return function(List, p1) --[[ Line: 13 | Named "getFacePileParticipantIds" ]]
+﻿return function(List, p1)
 	if #List <= 1 then
 		return { p1 }
 	end

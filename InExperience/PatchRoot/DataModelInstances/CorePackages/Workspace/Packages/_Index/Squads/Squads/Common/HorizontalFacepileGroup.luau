@@ -7,7 +7,7 @@ local UseTokensFunction = Foundation.Hooks.useTokens
 local Image = Foundation.Image
 local View = Foundation.View
 
-function HorizontalFacepileGroup(UnionResult) --[[ Line: 26 ]]
+function HorizontalFacepileGroup(UnionResult)
 	-- upvalues: UseTokensFunction (copy), CryoModule (copy), React (copy), Image (copy), View (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UnionResult1 = UnionResult
@@ -24,7 +24,7 @@ function HorizontalFacepileGroup(UnionResult) --[[ Line: 26 ]]
 	
 	return React.createElement(View, {
 		BackgroundTransparency = 1,
-		Size = UDim2.fromOffset(React.useMemo(function() --[[ Line: 44 ]]
+		Size = UDim2.fromOffset(React.useMemo(function()
 			-- upvalues: UnionResult1 (ref)
 			local CountImages = #UnionResult1.images
 			
@@ -41,7 +41,7 @@ function HorizontalFacepileGroup(UnionResult) --[[ Line: 26 ]]
 		LayoutOrder = if UnionResult1.layoutOrder then UnionResult1.layoutOrder else nil,
 		testId = UnionResult1.testId
 	}, {
-		(React.useMemo(function() --[[ Line: 59 ]]
+		(React.useMemo(function()
 			-- upvalues: UnionResult1 (ref), React (upval), Image (upval), UseTokensResult (copy)
 			local CountImages = #UnionResult1.images
 			local Elements = {}

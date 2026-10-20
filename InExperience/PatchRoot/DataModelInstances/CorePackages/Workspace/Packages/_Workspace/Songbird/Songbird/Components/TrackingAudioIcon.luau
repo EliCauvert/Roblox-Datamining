@@ -6,7 +6,7 @@ local CreateNextOrderFunction = require(Songbird.Parent.ReactUtils).createNextOr
 local MusicPlayingIconModule = require(Songbird.Components.MusicPlayingIcon)
 local config = { isMoving = true }
 
-return function(p1) --[[ Line: 23 | Named "TrackingAudioIcon" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), CreateNextOrderFunction (copy), FoundationModule (copy), ReactModule (copy), MusicPlayingIconModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local NextOrder = CreateNextOrderFunction()

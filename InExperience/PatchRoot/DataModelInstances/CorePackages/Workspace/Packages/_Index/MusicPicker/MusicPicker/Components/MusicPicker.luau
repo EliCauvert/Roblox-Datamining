@@ -6,7 +6,7 @@ local UseMusicPickerViewModelModule = require(MusicPicker.Hooks.useMusicPickerVi
 local UseMusicPickerAnalyticsModule = require(MusicPicker.Hooks.useMusicPickerAnalytics)
 local _ = require(MusicPicker.Types.MusicPickerTypes)
 
-local function MusicPickerBase(p1) --[[ Line: 54 ]]
+local function MusicPickerBase(p1)
 	-- upvalues: UseMusicPickerViewModelModule (copy), ReactModule (copy), MusicPickerViewModule (copy)
 	local UseMusicPickerViewModelModuleResult = UseMusicPickerViewModelModule({
 		tabs = p1.tabs,
@@ -33,14 +33,14 @@ local function MusicPickerBase(p1) --[[ Line: 54 ]]
 	})
 end
 
-return function(p1) --[[ Line: 83 | Named "MusicPicker" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), MusicPickerContextModule (copy), UseMusicPickerAnalyticsModule (copy), MusicPickerBase (copy)
 	local UseContextResult = ReactModule.useContext(MusicPickerContextModule)
 	local UseMusicPickerAnalyticsModuleResult = UseMusicPickerAnalyticsModule({
 		source = p1.source,
 		previewingId = UseContextResult.previewingId,
 		savedIds = UseContextResult.savedIds,
-		itemsById = ReactModule.useMemo(function() --[[ Line: 86 ]]
+		itemsById = ReactModule.useMemo(function()
 			-- upvalues: p1 (copy)
 			local t = {}
 			
@@ -57,11 +57,11 @@ return function(p1) --[[ Line: 83 | Named "MusicPicker" ]]
 	})
 	
 	return ReactModule.createElement(MusicPickerContextModule.Provider, {
-		value = ReactModule.useMemo(function() --[[ Line: 111 ]]
+		value = ReactModule.useMemo(function()
 			-- upvalues: UseContextResult (copy), UseMusicPickerAnalyticsModuleResult (copy)
 			return {
 				previewingId = UseContextResult.previewingId,
-				togglePreview = function(PreviewingId) --[[ Line: 114 ]]
+				togglePreview = function(PreviewingId)
 					-- upvalues: UseContextResult (upval), UseMusicPickerAnalyticsModuleResult (upval)
 					if UseContextResult.previewingId == PreviewingId then
 						UseMusicPickerAnalyticsModuleResult(PreviewingId)

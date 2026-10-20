@@ -10,7 +10,7 @@ local config = {
 	cancel = "Feature.Moments.Action.Cancel"
 }
 
-return function(p1) --[[ Line: 24 | Named "DeletionConfirmationDialog" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), Dialog (copy), FoundationModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	

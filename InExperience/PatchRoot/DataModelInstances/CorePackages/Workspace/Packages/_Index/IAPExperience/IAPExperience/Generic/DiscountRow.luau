@@ -10,15 +10,15 @@ local DiscountType = require(IAPExperience.ProductPurchase.PricingTypes).Discoun
 local FixBlackbirdDiscountStringWithEligibleItems = game:DefineFastFlag("FixBlackbirdDiscountStringWithEligibleItems", false)
 local IconRichText = FoundationModule.Utility.getIconRichText(FoundationModule.Enums.IconName.Robux)
 
-local function _(p1, p2) --[[ Line: 32 | Named "resolveLabel" ]]
+local function _(p1, p2)
 	return if p1 == nil or p1 == "" then p2 else p1
 end
 
-local function RobloxSubscriptionDiscountRow(Frame) --[[ Line: 39 ]]
+local function RobloxSubscriptionDiscountRow(Frame)
 	-- upvalues: LocalizationService (copy), ReactModule (copy), IconRichText (copy), FormatNumberModule (copy), UseLocalizationFunction (copy), FixBlackbirdDiscountStringWithEligibleItems (copy), PriceLineItemModule (copy)
 	local Discount = Frame.discount
 	local RobloxLocaleId = LocalizationService.RobloxLocaleId
-	local UseMemoResult = ReactModule.useMemo(function(): string --[[ Line: 43 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): string
 		-- upvalues: IconRichText (upval), FormatNumberModule (upval), RobloxLocaleId (copy), Discount (copy)
 		return string.format("- %s %s", IconRichText, FormatNumberModule(RobloxLocaleId, Discount.amountInRobux))
 	end, { RobloxLocaleId, Discount.amountInRobux })
@@ -37,11 +37,11 @@ local function RobloxSubscriptionDiscountRow(Frame) --[[ Line: 39 ]]
 	})
 end
 
-local function GenericDiscountRow(Frame) --[[ Line: 65 ]]
+local function GenericDiscountRow(Frame)
 	-- upvalues: LocalizationService (copy), ReactModule (copy), IconRichText (copy), FormatNumberModule (copy), UseLocalizationFunction (copy), PriceLineItemModule (copy)
 	local Discount = Frame.discount
 	local RobloxLocaleId = LocalizationService.RobloxLocaleId
-	local UseMemoResult = ReactModule.useMemo(function(): string --[[ Line: 69 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): string
 		-- upvalues: IconRichText (upval), FormatNumberModule (upval), RobloxLocaleId (copy), Discount (copy)
 		return string.format("- %s %s", IconRichText, FormatNumberModule(RobloxLocaleId, Discount.amountInRobux))
 	end, { RobloxLocaleId, Discount.amountInRobux })
@@ -67,7 +67,7 @@ local config = {
 	[DiscountType.RobloxPlusSubscription] = RobloxSubscriptionDiscountRow
 }
 
-return function(p1) --[[ Line: 94 | Named "DiscountRow" ]]
+return function(p1)
 	-- upvalues: config (copy), GenericDiscountRow (copy), ReactModule (copy)
 	return ReactModule.createElement(config[p1.discount.type] or GenericDiscountRow, p1)
 end

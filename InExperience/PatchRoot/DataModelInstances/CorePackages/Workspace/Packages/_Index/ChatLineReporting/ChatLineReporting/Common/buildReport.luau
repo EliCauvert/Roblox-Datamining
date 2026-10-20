@@ -4,7 +4,7 @@ local FFlagEnableChatReportingTextChannelTag = require(Parent.SharedFlags).FFlag
 local ChangePresetTagName = game:DefineFastFlag("ChangePresetTagName", false)
 local config = { Variant = { CLRv1 = "CLRv1" } }
 
-function buildReport(p1, Data, Data1, Data2, Data3, Data4, Data5, p2) --[[ Line: 15 ]]
+function buildReport(p1, Data, Data1, Data2, Data3, Data4, Data5, p2)
 	-- upvalues: config (copy), FFlagExpChatPresetChatEnabled (copy), ChangePresetTagName (copy), FFlagEnableChatReportingTextChannelTag (copy)
 	local config1 = {
 		tags = {

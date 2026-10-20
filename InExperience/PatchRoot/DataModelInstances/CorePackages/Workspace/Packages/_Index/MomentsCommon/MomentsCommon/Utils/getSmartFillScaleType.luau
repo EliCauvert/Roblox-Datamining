@@ -3,7 +3,7 @@ local ResolveMaxCropFractionModule = require(MomentsCommon.Utils.resolveMaxCropF
 local FFlagMomentsSmartVideoFillLandscapeModule = require(MomentsCommon.Flags.FFlagMomentsSmartVideoFillLandscape)
 local FIntMomentsMaxVideoCropPercentModule = require(MomentsCommon.Flags.FIntMomentsMaxVideoCropPercent)
 
-return function(ScaleType, Vector, Vector1, p1) --[[ Line: 24 | Named "getSmartFillScaleType" ]]
+return function(ScaleType, Vector, Vector1, p1)
 	-- upvalues: ResolveMaxCropFractionModule (copy), FIntMomentsMaxVideoCropPercentModule (copy), FFlagMomentsSmartVideoFillLandscapeModule (copy)
 	if ScaleType ~= Enum.ScaleType.Fit or Vector1 == nil or Vector1.X == 0 or Vector1.Y == 0 then
 		return ScaleType

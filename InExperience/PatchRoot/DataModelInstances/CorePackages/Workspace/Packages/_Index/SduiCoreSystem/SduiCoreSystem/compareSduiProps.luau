@@ -9,7 +9,7 @@ local config = {
 	extraLocalPropSignals = true
 }
 
-return function(p1, p2) --[[ Line: 21 ]]
+return function(p1, p2)
 	-- upvalues: config (copy), TutilsModule (copy)
 	if p1 == p2 then
 		return true

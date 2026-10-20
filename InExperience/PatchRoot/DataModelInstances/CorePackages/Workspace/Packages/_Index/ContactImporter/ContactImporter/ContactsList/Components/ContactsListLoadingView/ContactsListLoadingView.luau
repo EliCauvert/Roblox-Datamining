@@ -11,13 +11,13 @@ local ContactsGlimmerModule = require(Parent.ContactsList.Components.ContactsGli
 local ContactsListLoadingView = Roact.PureComponent:extend("ContactsListLoadingView")
 ContactsListLoadingView.validateProps = T.strictInterface({ screenSize = T.Vector2 })
 
-function ContactsListLoadingView.render(p1) --[[ Line: 29 ]]
+function ContactsListLoadingView.render(p1)
 	-- upvalues: WithLocalizationFunction (copy), TextKeysModule (copy), WithStyleFunction (copy), Roact (copy), FullPageModal (copy), ContactsGlimmerModule (copy)
 	local ScreenSize = p1.props.screenSize
 	
-	return WithLocalizationFunction({ titleText = TextKeysModule.CONTACTS_LIST_TITLE })(function(p2) --[[ Line: 34 ]]
+	return WithLocalizationFunction({ titleText = TextKeysModule.CONTACTS_LIST_TITLE })(function(p2)
 		-- upvalues: WithStyleFunction (upval), Roact (upval), FullPageModal (upval), ScreenSize (copy), ContactsGlimmerModule (upval)
-		return WithStyleFunction(function(_) --[[ Line: 35 ]]
+		return WithStyleFunction(function(_)
 			-- upvalues: Roact (upval), FullPageModal (upval), p2 (copy), ScreenSize (upval), ContactsGlimmerModule (upval)
 			return Roact.createElement(FullPageModal, { title = p2.titleText, screenSize = ScreenSize }, {
 				LoadingViewContainer = Roact.createElement("Frame", {

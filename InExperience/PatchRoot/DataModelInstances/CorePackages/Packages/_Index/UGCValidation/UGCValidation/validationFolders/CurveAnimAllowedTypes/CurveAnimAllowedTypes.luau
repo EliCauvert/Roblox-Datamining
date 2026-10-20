@@ -21,7 +21,7 @@ local List = {
 if require(Parent.flags.getFFlagUGCValidateAddObjectValueToAcceptableTypes)() then
 	table.insert(List, "ObjectValue")
 end
-function CurveAnimAllowedTypesModule.run(p1, p2) --[[ Line: 33 ]]
+function CurveAnimAllowedTypesModule.run(p1, p2)
 	-- upvalues: List (copy), ErrorSourceStringsModule (copy)
 	local Flag = nil
 	for _, curveAnimation in p2.curveAnimations do

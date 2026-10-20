@@ -6,9 +6,9 @@ local DEFAULTFAEENTRYPOINTEVENTCTX = require(SocialUpsell.Constants).DEFAULT_FAE
 local FStringCommsFAEFeatureNameModule = require(SocialUpsell.Flag.FStringCommsFAEFeatureName)
 local FStringCommsFAENamespaceModule = require(SocialUpsell.Flag.FStringCommsFAENamespace)
 
-return function(p1, Callback, Callback1) --[[ Line: 14 ]]
+return function(p1, Callback, Callback1)
 	-- upvalues: DEFAULTFAEENTRYPOINTEVENTCTX (copy), InExpAmpWizardController (copy), FStringCommsFAEFeatureNameModule (copy), AccessResponseEnum (copy), FStringCommsFAENamespaceModule (copy)
-	return InExpAmpWizardController.OpenAmpWizardContainerInExp(FStringCommsFAEFeatureNameModule, function(Granted, _) --[[ Line: 18 ]]
+	return InExpAmpWizardController.OpenAmpWizardContainerInExp(FStringCommsFAEFeatureNameModule, function(Granted, _)
 		-- upvalues: AccessResponseEnum (upval), Callback (copy), Callback1 (copy)
 		if Granted == AccessResponseEnum.Granted then
 			if Callback then

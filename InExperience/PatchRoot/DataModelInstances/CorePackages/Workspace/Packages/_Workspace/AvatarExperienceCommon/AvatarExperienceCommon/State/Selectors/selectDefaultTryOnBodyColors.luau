@@ -1,6 +1,6 @@
 ﻿local ConstantsModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Constants)
 
-return function(p1) --[[ Line: 4 | Named "selectDefaultTryOnBodyColors" ]]
+return function(p1)
 	-- upvalues: ConstantsModule (copy)
 	local OutfitTryOn = p1.AvatarExperience.AvatarScene.OutfitTryOn
 	local OutfitInfos = p1.AvatarExperience.AvatarEditor.OutfitInfos

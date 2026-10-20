@@ -1,4 +1,4 @@
-﻿return function(p1) --[[ Line: 10 | Named "buildProfileConfigurationApplyConfig" ]]
+﻿return function(p1)
 	if p1.BackgroundAssetId == nil and p1.FrameAssetId == nil then
 		error("ProfileConfiguration apply config must include BackgroundAssetId or FrameAssetId")
 	end

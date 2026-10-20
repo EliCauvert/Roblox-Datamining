@@ -5,14 +5,14 @@ local PropTypesModule = require(script.Parent.prop_types)
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 274 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 280 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -28,7 +28,7 @@ function Module:encode() --[[ Line: 280 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 297 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy), t (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -64,7 +64,7 @@ function Module.decode(Buf) --[[ Line: 297 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 343 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.kind ~= nil and self.kind.type == "literal" then
@@ -73,7 +73,7 @@ function Module:jsonEncode() --[[ Line: 343 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 355 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy), t (copy)
 	local NewModule = Module.new()
 	
@@ -95,7 +95,7 @@ TypeRegistryModule.default:register(t.GenericShareLinkData)
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(p1) --[[ Line: 383 ]]
+function Module1.new(p1)
 	-- upvalues: Module1 (copy)
 	return (setmetatable({
 		url = if p1 == nil or p1.url == nil then nil else p1.url,
@@ -103,7 +103,7 @@ function Module1.new(p1) --[[ Line: 383 ]]
 	}, Module1))
 end
 
-function Module1:encode() --[[ Line: 397 ]]
+function Module1:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -124,7 +124,7 @@ function Module1:encode() --[[ Line: 397 ]]
 	return Buf1
 end
 
-function Module1.decode(Buf) --[[ Line: 420 ]]
+function Module1.decode(Buf)
 	-- upvalues: Module1 (copy), ProtoModule (copy), PropTypesModule (copy)
 	local NewModule = Module1.new()
 	local v2 = 0
@@ -161,7 +161,7 @@ function Module1.decode(Buf) --[[ Line: 420 ]]
 	return NewModule
 end
 
-function Module1:jsonEncode() --[[ Line: 470 ]]
+function Module1:jsonEncode()
 	local t = {}
 	
 	if self.url ~= nil then
@@ -173,7 +173,7 @@ function Module1:jsonEncode() --[[ Line: 470 ]]
 	return t
 end
 
-function Module1:jsonDecode() --[[ Line: 486 ]]
+function Module1:jsonDecode()
 	-- upvalues: Module1 (copy), PropTypesModule (copy)
 	local NewModule = Module1.new()
 	
@@ -198,14 +198,14 @@ TypeRegistryModule.default:register(t.GenericShareLinkData_GenericShareLinkLiter
 local Module2 = {}
 Module2.__index = Module2
 
-function Module2.new(p1) --[[ Line: 523 ]]
+function Module2.new(p1)
 	-- upvalues: Module2 (copy)
 	return (setmetatable({
 		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 	}, Module2))
 end
 
-function Module2:encode() --[[ Line: 529 ]]
+function Module2:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -221,7 +221,7 @@ function Module2:encode() --[[ Line: 529 ]]
 	return Buf1
 end
 
-function Module2.decode(Buf) --[[ Line: 546 ]]
+function Module2.decode(Buf)
 	-- upvalues: Module2 (copy), ProtoModule (copy), t (copy)
 	local NewModule = Module2.new()
 	local v3 = 0
@@ -257,7 +257,7 @@ function Module2.decode(Buf) --[[ Line: 546 ]]
 	return NewModule
 end
 
-function Module2:jsonEncode() --[[ Line: 592 ]]
+function Module2:jsonEncode()
 	local t = {}
 	
 	if self.kind ~= nil and self.kind.type == "literal" then
@@ -266,7 +266,7 @@ function Module2:jsonEncode() --[[ Line: 592 ]]
 	return t
 end
 
-function Module2:jsonDecode() --[[ Line: 604 ]]
+function Module2:jsonDecode()
 	-- upvalues: Module2 (copy), t (copy)
 	local NewModule = Module2.new()
 	
@@ -288,7 +288,7 @@ TypeRegistryModule.default:register(t.ShareLinkFetchData)
 local Module3 = {}
 Module3.__index = Module3
 
-function Module3.new(p1) --[[ Line: 631 ]]
+function Module3.new(p1)
 	-- upvalues: Module3 (copy)
 	return (setmetatable({
 		share_url_context = if p1 == nil or p1.share_url_context == nil then nil else p1.share_url_context,
@@ -297,7 +297,7 @@ function Module3.new(p1) --[[ Line: 631 ]]
 	}, Module3))
 end
 
-function Module3:encode() --[[ Line: 641 ]]
+function Module3:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -323,7 +323,7 @@ function Module3:encode() --[[ Line: 641 ]]
 	return Buf1
 end
 
-function Module3.decode(Buf) --[[ Line: 670 ]]
+function Module3.decode(Buf)
 	-- upvalues: Module3 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy)
 	local NewModule = Module3.new()
 	local v4 = 0
@@ -364,7 +364,7 @@ function Module3.decode(Buf) --[[ Line: 670 ]]
 	return NewModule
 end
 
-function Module3:jsonEncode() --[[ Line: 725 ]]
+function Module3:jsonEncode()
 	local t = {}
 	
 	if self.share_url_context ~= nil then
@@ -379,7 +379,7 @@ function Module3:jsonEncode() --[[ Line: 725 ]]
 	return t
 end
 
-function Module3:jsonDecode() --[[ Line: 745 ]]
+function Module3:jsonDecode()
 	-- upvalues: Module3 (copy), PropTypesModule (copy), t (copy)
 	local NewModule = Module3.new()
 	
@@ -413,14 +413,14 @@ TypeRegistryModule.default:register(t.ShareLinkFetchData_ShareLinkFetchLiteralDa
 local Module4 = {}
 Module4.__index = Module4
 
-function Module4.new(p1) --[[ Line: 793 ]]
+function Module4.new(p1)
 	-- upvalues: Module4 (copy)
 	return (setmetatable({
 		oneof_prop = if p1 == nil or p1.oneof_prop == nil then nil else p1.oneof_prop
 	}, Module4))
 end
 
-function Module4:encode() --[[ Line: 799 ]]
+function Module4:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -442,7 +442,7 @@ function Module4:encode() --[[ Line: 799 ]]
 	return Buf1
 end
 
-function Module4.decode(Buf) --[[ Line: 820 ]]
+function Module4.decode(Buf)
 	-- upvalues: Module4 (copy), ProtoModule (copy), t (copy)
 	local NewModule = Module4.new()
 	local v5 = 0
@@ -485,7 +485,7 @@ function Module4.decode(Buf) --[[ Line: 820 ]]
 	return NewModule
 end
 
-function Module4:jsonEncode() --[[ Line: 872 ]]
+function Module4:jsonEncode()
 	local t = {}
 	
 	if self.oneof_prop ~= nil then
@@ -501,7 +501,7 @@ function Module4:jsonEncode() --[[ Line: 872 ]]
 	return t
 end
 
-function Module4:jsonDecode() --[[ Line: 886 ]]
+function Module4:jsonDecode()
 	-- upvalues: Module4 (copy), t (copy)
 	local NewModule = Module4.new()
 	
@@ -541,14 +541,14 @@ TypeRegistryModule.default:register(t.ShareLinkPayload)
 local Module5 = {}
 Module5.__index = Module5
 
-function Module5.new(p1) --[[ Line: 934 ]]
+function Module5.new(p1)
 	-- upvalues: Module5 (copy)
 	return (setmetatable({
 		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 	}, Module5))
 end
 
-function Module5:encode() --[[ Line: 942 ]]
+function Module5:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -564,7 +564,7 @@ function Module5:encode() --[[ Line: 942 ]]
 	return Buf1
 end
 
-function Module5.decode(Buf) --[[ Line: 959 ]]
+function Module5.decode(Buf)
 	-- upvalues: Module5 (copy), ProtoModule (copy), t (copy)
 	local NewModule = Module5.new()
 	local v6 = 0
@@ -600,7 +600,7 @@ function Module5.decode(Buf) --[[ Line: 959 ]]
 	return NewModule
 end
 
-function Module5:jsonEncode() --[[ Line: 1005 ]]
+function Module5:jsonEncode()
 	local t = {}
 	
 	if self.kind ~= nil and self.kind.type == "literal" then
@@ -609,7 +609,7 @@ function Module5:jsonEncode() --[[ Line: 1005 ]]
 	return t
 end
 
-function Module5:jsonDecode() --[[ Line: 1017 ]]
+function Module5:jsonDecode()
 	-- upvalues: Module5 (copy), t (copy)
 	local NewModule = Module5.new()
 	
@@ -631,14 +631,14 @@ TypeRegistryModule.default:register(t.ExperienceShareLinkPayload)
 local Module6 = {}
 Module6.__index = Module6
 
-function Module6.new(p1) --[[ Line: 1045 ]]
+function Module6.new(p1)
 	-- upvalues: Module6 (copy)
 	return (setmetatable({
 		universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id
 	}, Module6))
 end
 
-function Module6:encode() --[[ Line: 1056 ]]
+function Module6:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -654,7 +654,7 @@ function Module6:encode() --[[ Line: 1056 ]]
 	return Buf1
 end
 
-function Module6.decode(Buf) --[[ Line: 1073 ]]
+function Module6.decode(Buf)
 	-- upvalues: Module6 (copy), ProtoModule (copy), PropTypesModule (copy)
 	local NewModule = Module6.new()
 	local v7 = 0
@@ -687,7 +687,7 @@ function Module6.decode(Buf) --[[ Line: 1073 ]]
 	return NewModule
 end
 
-function Module6:jsonEncode() --[[ Line: 1118 ]]
+function Module6:jsonEncode()
 	local t = {}
 	
 	if self.universe_id ~= nil then
@@ -696,7 +696,7 @@ function Module6:jsonEncode() --[[ Line: 1118 ]]
 	return t
 end
 
-function Module6:jsonDecode() --[[ Line: 1130 ]]
+function Module6:jsonDecode()
 	-- upvalues: Module6 (copy), PropTypesModule (copy)
 	local NewModule = Module6.new()
 	
@@ -718,14 +718,14 @@ TypeRegistryModule.default:register(t.ExperienceShareLinkPayload_ExperienceShare
 local Module7 = {}
 Module7.__index = Module7
 
-function Module7.new(p1) --[[ Line: 1162 ]]
+function Module7.new(p1)
 	-- upvalues: Module7 (copy)
 	return (setmetatable({
 		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 	}, Module7))
 end
 
-function Module7:encode() --[[ Line: 1168 ]]
+function Module7:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -741,7 +741,7 @@ function Module7:encode() --[[ Line: 1168 ]]
 	return Buf1
 end
 
-function Module7.decode(Buf) --[[ Line: 1185 ]]
+function Module7.decode(Buf)
 	-- upvalues: Module7 (copy), ProtoModule (copy), t (copy)
 	local NewModule = Module7.new()
 	local v8 = 0
@@ -777,7 +777,7 @@ function Module7.decode(Buf) --[[ Line: 1185 ]]
 	return NewModule
 end
 
-function Module7:jsonEncode() --[[ Line: 1231 ]]
+function Module7:jsonEncode()
 	local t = {}
 	
 	if self.kind ~= nil and self.kind.type == "literal" then
@@ -786,7 +786,7 @@ function Module7:jsonEncode() --[[ Line: 1231 ]]
 	return t
 end
 
-function Module7:jsonDecode() --[[ Line: 1243 ]]
+function Module7:jsonDecode()
 	-- upvalues: Module7 (copy), t (copy)
 	local NewModule = Module7.new()
 	
@@ -808,14 +808,14 @@ TypeRegistryModule.default:register(t.EventShareLinkPayload)
 local Module8 = {}
 Module8.__index = Module8
 
-function Module8.new(p1) --[[ Line: 1271 ]]
+function Module8.new(p1)
 	-- upvalues: Module8 (copy)
 	return (setmetatable({
 		event_id = if p1 == nil or p1.event_id == nil then nil else p1.event_id
 	}, Module8))
 end
 
-function Module8:encode() --[[ Line: 1282 ]]
+function Module8:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -831,7 +831,7 @@ function Module8:encode() --[[ Line: 1282 ]]
 	return Buf1
 end
 
-function Module8.decode(Buf) --[[ Line: 1299 ]]
+function Module8.decode(Buf)
 	-- upvalues: Module8 (copy), ProtoModule (copy), PropTypesModule (copy)
 	local NewModule = Module8.new()
 	local v9 = 0
@@ -864,7 +864,7 @@ function Module8.decode(Buf) --[[ Line: 1299 ]]
 	return NewModule
 end
 
-function Module8:jsonEncode() --[[ Line: 1344 ]]
+function Module8:jsonEncode()
 	local t = {}
 	
 	if self.event_id ~= nil then
@@ -873,7 +873,7 @@ function Module8:jsonEncode() --[[ Line: 1344 ]]
 	return t
 end
 
-function Module8:jsonDecode() --[[ Line: 1356 ]]
+function Module8:jsonDecode()
 	-- upvalues: Module8 (copy), PropTypesModule (copy)
 	local NewModule = Module8.new()
 	

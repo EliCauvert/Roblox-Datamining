@@ -2,10 +2,10 @@
 local ConstantsModule = require(CrossExperience.Constants)
 local ObserveCurrentContextIdModule = require(CrossExperience.Utils.observeCurrentContextId)
 
-return function(Callback) --[[ Line: 6 ]]
+return function(Callback)
 	-- upvalues: ObserveCurrentContextIdModule (copy), ConstantsModule (copy)
 	local IsCONTEXTIDMatch = nil
-	ObserveCurrentContextIdModule(function(CONTEXTID) --[[ Line: 8 ]]
+	ObserveCurrentContextIdModule(function(CONTEXTID)
 		-- upvalues: ConstantsModule (upval), IsCONTEXTIDMatch (ref), Callback (copy)
 		local IsCONTEXTIDMatch1 = CONTEXTID == ConstantsModule.AUDIO_FOCUS_MANAGEMENT.CEV.CONTEXT_ID
 		

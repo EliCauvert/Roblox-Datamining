@@ -7,9 +7,9 @@ local DeriveCartPricingViewModule = require(script.Parent.deriveCartPricingView)
 local UnifiedPurchaseModalTypeEnumModule = require(Parent.Enums.UnifiedPurchaseModalTypeEnum)
 local _ = require(Parent.ProductPurchase.PricingTypes)
 
-return function(p1) --[[ Line: 44 | Named "useCartPricing" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), DeriveCartPricingViewModule (copy), UnifiedPurchaseModalTypeEnumModule (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 47 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: DeriveCartPricingViewModule (upval), p1 (copy)
 		return DeriveCartPricingViewModule(p1.cartPricingResponse)
 	end, { p1.cartPricingResponse })
@@ -21,7 +21,7 @@ return function(p1) --[[ Line: 44 | Named "useCartPricing" ]]
 		itemCount = UseMemoResult.itemCount
 	}
 	local HasConfig: boolean = Config ~= nil or #T > 0
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 80 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: HasConfig (copy), Config (copy), UseMemoResult (copy)
 		return if HasConfig and Config ~= nil and UseMemoResult ~= nil then {
 			basePriceInRobux = Config.subtotalRobux,
@@ -29,7 +29,7 @@ return function(p1) --[[ Line: 44 | Named "useCartPricing" ]]
 			discounts = UseMemoResult.discounts
 		} else nil
 	end, { HasConfig, Config, UseMemoResult })
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 91 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: HasConfig (copy), Config (copy), p1 (copy), UseMemoResult1 (copy)
 		return if HasConfig and Config ~= nil then {
 			model = p1.product.model,
@@ -55,7 +55,7 @@ return function(p1) --[[ Line: 44 | Named "useCartPricing" ]]
 		mergedProductPriceInRobux = if ItemPrice then ItemPrice.priceInRobux else UseMemoResult2.itemRobuxCost,
 		displayItemPriceForMultiItem = HasConfig and UseMemoResult1 or p1.product.itemPrice,
 		cartPricingSavingsSummary = if HasConfig and UseMemoResult ~= nil then UseMemoResult.savingsSummary else nil,
-		toggleCartPricingOffer = ReactModule.useCallback(function(OfferId) --[[ Line: 117 ]]
+		toggleCartPricingOffer = ReactModule.useCallback(function(OfferId)
 			-- upvalues: p1 (copy), T (copy)
 			local OnCartOfferAppliedChangedFunction: (any, any) -> () = p1.onCartOfferAppliedChanged
 			

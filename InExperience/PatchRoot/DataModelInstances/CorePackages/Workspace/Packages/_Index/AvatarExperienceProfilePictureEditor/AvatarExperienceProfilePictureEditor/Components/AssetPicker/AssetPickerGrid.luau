@@ -13,7 +13,7 @@ local _ = require(AvatarExperienceProfilePictureEditor.Utils.getAssetPickerStatu
 local GetGridMetricsModule = require(AvatarExperienceProfilePictureEditor.Utils.getGridMetrics)
 local WidgetHeader = require(Parent.AvatarExperienceUIKit).WidgetComponents.WidgetHeader
 
-return function(p1) --[[ Line: 46 | Named "AssetPickerGrid" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), GetGridMetricsModule (copy), View (copy), AssetPickerGridBodyModule (copy), WidgetHeader (copy), SectionTitleModule (copy)
 	local Status = p1.status or "ready"
 	local UseTokensResult = UseTokensFunction()
@@ -22,11 +22,11 @@ return function(p1) --[[ Line: 46 | Named "AssetPickerGrid" ]]
 	local TileSize = p1.tileSize
 	local Medium = UseTokensResult.Gap.Medium
 	local ShimmerTileCount = p1.shimmerTileCount or 30
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 57 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseLocalizationResult (copy)
 		return { details = UseLocalizationResult.details }
 	end, { UseLocalizationResult.details })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 63 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: GetGridMetricsModule (upval), ContainerWidth (copy), TileSize (copy), Medium (copy), UseTokensResult (copy)
 		return GetGridMetricsModule({
 			containerWidth = ContainerWidth,

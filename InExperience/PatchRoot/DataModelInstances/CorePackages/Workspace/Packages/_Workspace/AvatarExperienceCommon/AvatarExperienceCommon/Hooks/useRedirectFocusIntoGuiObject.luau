@@ -1,14 +1,14 @@
 ﻿local GuiService = game:GetService("GuiService")
 local ReactModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.React)
 
-local function _(Ancestor): boolean --[[ Line: 7 | Named "getSelectionIsOutsideGuiObject" ]]
+local function _(Ancestor): boolean
 	-- upvalues: GuiService (copy)
 	return GuiService.SelectedCoreObject and (not GuiService.SelectedCoreObject:IsDescendantOf(Ancestor) and not (GuiService.SelectedCoreObject == Ancestor))
 end
 
-return function(p1) --[[ Line: 30 | Named "useRedirectFocusIntoGuiObject" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), GuiService (copy)
-	ReactModule.useEffect(function() --[[ Line: 31 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), GuiService (upval)
 		local Current = p1.current
 		
@@ -19,7 +19,7 @@ return function(p1) --[[ Line: 30 | Named "useRedirectFocusIntoGuiObject" ]]
 				Current.Selectable = false
 			end
 		end
-		local ChangedConnection = GuiService.Changed:Connect(function(p2) --[[ Line: 45 ]]
+		local ChangedConnection = GuiService.Changed:Connect(function(p2)
 			-- upvalues: p1 (upval), GuiService (upval)
 			if p2 == "SelectedCoreObject" then
 				local Current = p1.current
@@ -43,7 +43,7 @@ return function(p1) --[[ Line: 30 | Named "useRedirectFocusIntoGuiObject" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 68 ]]
+		return function()
 			-- upvalues: ChangedConnection (copy)
 			return ChangedConnection:Disconnect()
 		end

@@ -3,7 +3,7 @@ local _ = require(script.Parent.ModelPickerTypes)
 local ModelPickerViewModule = require(script.Parent.ModelPickerView)
 local UseModelPickerViewModelModule = require(script.Parent.useModelPickerViewModel)
 
-return function(p1) --[[ Line: 9 | Named "ModelPickerContainer" ]]
+return function(p1)
 	-- upvalues: UseModelPickerViewModelModule (copy), ReactModule (copy), ModelPickerViewModule (copy)
 	return ReactModule.createElement(ModelPickerViewModule, (UseModelPickerViewModelModule(p1)))
 end

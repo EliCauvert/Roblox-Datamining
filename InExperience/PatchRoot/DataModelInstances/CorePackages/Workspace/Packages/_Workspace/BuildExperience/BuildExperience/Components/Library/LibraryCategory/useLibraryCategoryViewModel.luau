@@ -8,7 +8,7 @@ local UseLibraryStringsModule = require(script.Parent.Parent.useLibraryStrings)
 local UseLibraryItemsModule = require(script.Parent.Parent.useLibraryItems)
 local GetFolderPreviewModule = require(script.Parent.Parent.getFolderPreview)
 
-return function(p1) --[[ Line: 31 | Named "useLibraryCategoryViewModel" ]]
+return function(p1)
 	-- upvalues: UseLibraryStringsModule (copy), SignalsReactModule (copy), UseLibraryItemsModule (copy), GetFolderPreviewModule (copy)
 	local UseLibraryStringsModuleResult = UseLibraryStringsModule()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.library.getItems)
@@ -26,7 +26,7 @@ return function(p1) --[[ Line: 31 | Named "useLibraryCategoryViewModel" ]]
 			unavailableText = UseLibraryStringsModuleResult.modelUnavailable,
 			thumbnail = value.image,
 			model = value.model,
-			onActivated = function() --[[ Line: 56 ]]
+			onActivated = function()
 				-- upvalues: value (copy), p1 (copy)
 				if value.className ~= "Folder" then
 					p1.onOpenItem(value.id, value.kind)

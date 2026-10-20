@@ -17,7 +17,7 @@ local config = {
 	})
 }
 
-return function(p1, p2, p3) --[[ Line: 30 | Named "gamesFilterClickEvent" ]]
+return function(p1, p2, p3)
 	-- upvalues: config (copy), MutedErrorFunction (copy)
 	local Entry = config[p2]
 	

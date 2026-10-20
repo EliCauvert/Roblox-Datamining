@@ -2,7 +2,7 @@
 local SessionWithErrorReporterModule = {}
 SessionWithErrorReporterModule.__index = SessionWithErrorReporterModule
 
-function SessionWithErrorReporterModule.new(_eventConfig, p1) --[[ Line: 43 ]]
+function SessionWithErrorReporterModule.new(_eventConfig, p1)
 	-- upvalues: SessionWithErrorReporterModule (copy)
 	local self = setmetatable({
 		_eventConfig = _eventConfig,
@@ -16,11 +16,11 @@ function SessionWithErrorReporterModule.new(_eventConfig, p1) --[[ Line: 43 ]]
 	return self
 end
 
-function SessionWithErrorReporterModule:getCurrentTimeStamp(): number --[[ Line: 67 ]]
+function SessionWithErrorReporterModule:getCurrentTimeStamp(): number
 	return os.time()
 end
 
-function SessionWithErrorReporterModule:reportEvent(Count, CustomFields, Tag_severity) --[[ Line: 80 ]]
+function SessionWithErrorReporterModule:reportEvent(Count, CustomFields, Tag_severity)
 	-- upvalues: TelemetryService (copy)
 	local Flag = false
 	local CurrentTimeStamp = self:getCurrentTimeStamp()

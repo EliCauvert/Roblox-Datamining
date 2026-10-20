@@ -9,7 +9,7 @@ local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFon
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local t = {}
 
-return ReactModule.memo(function(Frame) --[[ Line: 37 | Named "GameTileOverlayBadge" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: t (copy), UseTokensFunction (copy), ReactModule (copy), GetTextSizeFunction (copy), Icon (copy), IconSize (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local Icons = Frame.icons or t
 	local Text = Frame.text or ""
@@ -24,7 +24,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 37 | Named "GameTileOverlayBa
 	local XSmall = UseTokensResult.Padding.XSmall
 	local TitleSmall = UseTokensResult.Typography.TitleSmall
 	local Size400 = UseTokensResult.Size.Size_400
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 62 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: v2 (copy), GetTextSizeFunction (upval), Text (copy), TitleSmall (copy)
 		return if v2 then GetTextSizeFunction(Text, TitleSmall.FontSize, TitleSmall.Font, Vector2.new(1e999, 1e999)) else Vector2.new(0, 0)
 	end, { Text, v2, TitleSmall.FontSize, TitleSmall.Font })
@@ -74,7 +74,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 37 | Named "GameTileOverlayBa
 			TextTruncate = Enum.TextTruncate.AtEnd
 		}, {
 			UISizeConstraint = ReactModule.createElement("UISizeConstraint", {
-				MaxSize = Frame.maxWidthBinding:map(function(p1) --[[ Line: 117 ]]
+				MaxSize = Frame.maxWidthBinding:map(function(p1)
 					-- upvalues: Size200 (copy), Total (ref)
 					local SizeDelta = p1 - 2 * Size200 - Total
 					

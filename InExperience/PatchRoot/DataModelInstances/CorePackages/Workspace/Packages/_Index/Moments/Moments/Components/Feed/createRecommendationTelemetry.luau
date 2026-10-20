@@ -28,17 +28,17 @@ local config1 = {
 	Join = "join"
 }
 
-local function _(p1, p2) --[[ Line: 69 | Named "getSignalValue" ]]
+local function _(p1, p2)
 	return (p1 == "AddReaction" or p1 == "RemoveReaction") and p2.reactionType or ""
 end
 
-return function(p1) --[[ Line: 76 | Named "createRecommendationTelemetry" ]]
+return function(p1)
 	-- upvalues: EmitRecommendationImpressionModule (copy), config (copy), FFlagMomentsRealtimeSessionTelemetry (copy), config1 (copy), Analytics (copy), EmitRecommendationActionModule (copy), FFlagMomentsComments (copy)
 	local GetMomentsSessionIdFunction = p1.getMomentsSessionId
 	local SignalTracker = p1.signalTracker
 	
 	return {
-		logView = function(p2, p3) --[[ Line: 81 ]]
+		logView = function(p2, p3)
 			-- upvalues: EmitRecommendationImpressionModule (upval), GetMomentsSessionIdFunction (copy), SignalTracker (copy)
 			EmitRecommendationImpressionModule({
 				itemId = p2.itemId,
@@ -52,7 +52,7 @@ return function(p1) --[[ Line: 76 | Named "createRecommendationTelemetry" ]]
 				SignalTracker:recordSignal(p2.itemId, "View", string.format("%.1f", p3.durationSeconds))
 			end
 		end,
-		logAction = function(p2, p3, p4) --[[ Line: 95 ]]
+		logAction = function(p2, p3, p4)
 			-- upvalues: config (upval), FFlagMomentsRealtimeSessionTelemetry (upval), config1 (upval), Analytics (upval), EmitRecommendationActionModule (upval), FFlagMomentsComments (upval), GetMomentsSessionIdFunction (copy), SignalTracker (copy)
 			local Entry = config[p2]
 			

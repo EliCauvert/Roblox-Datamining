@@ -13,7 +13,7 @@ local IconSize = FoundationModule.Enums.IconSize
 local StateLayerMode = FoundationModule.Enums.StateLayerMode
 local CursorType = FoundationModule.Enums.CursorType
 
-return ReactModule.memo(function(p1) --[[ Line: 36 | Named "SduiDualActionChip" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseCursorFunction (copy), CursorType (copy), UseTokensFunction (copy), ReactModule (copy), WithCommonPropsFunction (copy), StateLayerMode (copy), View (copy), CryoModule (copy), Icon (copy), IconSize (copy), Text (copy)
 	local LayoutOrder = p1.layoutOrder
 	local AnchorPoint = p1.anchorPoint
@@ -22,8 +22,8 @@ return ReactModule.memo(function(p1) --[[ Line: 36 | Named "SduiDualActionChip" 
 	local UseTokensResult = UseTokensFunction()
 	
 	if p1.leadingIconName or p1.trailingIconName then
-		local LeadingOnActivated = p1.leadingOnActivated or function() --[[ Line: 50 ]] end
-		local TrailingOnActivated = p1.trailingOnActivated or function() --[[ Line: 51 ]] end
+		local LeadingOnActivated = p1.leadingOnActivated or function() end
+		local TrailingOnActivated = p1.trailingOnActivated or function() end
 		
 		return ReactModule.createElement(View, CryoModule.Dictionary.join(WithCommonPropsFunction(p1, {
 			tag = "row size-0-800 auto-x radius-circle align-y-center",

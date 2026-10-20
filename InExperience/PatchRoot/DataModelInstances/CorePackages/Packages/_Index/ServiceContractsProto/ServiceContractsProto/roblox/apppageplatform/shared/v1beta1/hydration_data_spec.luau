@@ -5,7 +5,7 @@ local HydrationContentTypeModule = require(script.Parent.hydration_content_type)
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 75 ]]
+function Module.new(p1)
 	-- upvalues: HydrationContentTypeModule (copy), Module (copy)
 	return (setmetatable({
 		content_type = if p1 == nil or p1.content_type == nil then assert(HydrationContentTypeModule.HydrationContentType.fromNumber(0), "Enum has no 0 default") else p1.content_type,
@@ -18,7 +18,7 @@ function Module.new(p1) --[[ Line: 75 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 92 ]]
+function Module:encode()
 	-- upvalues: HydrationContentTypeModule (copy), ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -62,7 +62,7 @@ function Module:encode() --[[ Line: 92 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 154 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy), HydrationContentTypeModule (copy), t (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -121,7 +121,7 @@ function Module.decode(Buf) --[[ Line: 154 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 231 ]]
+function Module:jsonEncode()
 	-- upvalues: HydrationContentTypeModule (copy)
 	local t = {}
 	
@@ -159,7 +159,7 @@ function Module:jsonEncode() --[[ Line: 231 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 284 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy), HydrationContentTypeModule (copy), t (copy)
 	local NewModule = Module.new()
 	
@@ -231,14 +231,14 @@ TypeRegistryModule.default:register(t.HydrationDataSpec)
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(p1) --[[ Line: 384 ]]
+function Module1.new(p1)
 	-- upvalues: Module1 (copy)
 	return (setmetatable({
 		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 	}, Module1))
 end
 
-function Module1:encode() --[[ Line: 390 ]]
+function Module1:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -258,7 +258,7 @@ function Module1:encode() --[[ Line: 390 ]]
 	return Buf1
 end
 
-function Module1.decode(Buf) --[[ Line: 409 ]]
+function Module1.decode(Buf)
 	-- upvalues: Module1 (copy), ProtoModule (copy)
 	local NewModule = Module1.new()
 	local v2 = 0
@@ -295,7 +295,7 @@ function Module1.decode(Buf) --[[ Line: 409 ]]
 	return NewModule
 end
 
-function Module1:jsonEncode() --[[ Line: 457 ]]
+function Module1:jsonEncode()
 	local t = {}
 	
 	if self.kind ~= nil then
@@ -311,7 +311,7 @@ function Module1:jsonEncode() --[[ Line: 457 ]]
 	return t
 end
 
-function Module1:jsonDecode() --[[ Line: 471 ]]
+function Module1:jsonDecode()
 	-- upvalues: Module1 (copy)
 	local NewModule = Module1.new()
 	

@@ -5,19 +5,19 @@ local View = require(Parent.Foundation).View
 local FFlagEnablePeopleListLazyRender = require(Parent.PeopleService).getService("Flags").FFlagEnablePeopleListLazyRender
 local PeoplePageLazyRenderThreshold = game:DefineFastInt("PeoplePageLazyRenderThreshold", 100)
 
-function LazyScrollingComponent(p1) --[[ Line: 29 ]]
+function LazyScrollingComponent(p1)
 	-- upvalues: ReactModule (copy), PeoplePageLazyRenderThreshold (copy), SignalsModule (copy), View (copy), FFlagEnablePeopleListLazyRender (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function(p2, p3, p4): boolean --[[ Line: 33 ]]
+	local UseResult = ReactModule.useCallback(function(p2, p3, p4): boolean
 		-- upvalues: PeoplePageLazyRenderThreshold (upval)
 		return p2 < p3 + p4 + PeoplePageLazyRenderThreshold
 	end, {})
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 41 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseRefResult (copy), UseStateResult2 (copy), UseResult (copy), p1 (copy), SignalsModule (upval)
 		if UseStateResult or not UseRefResult.current then return end
 		UseStateResult2(UseResult(UseRefResult.current.AbsolutePosition.Y, p1.scrollingFrameAbsolutePositionY(false), p1.scrollingFrameAbsoluteSizeY(false)))
-		local Connection = UseRefResult.current:GetPropertyChangedSignal("AbsolutePosition"):Connect(function() --[[ Line: 59 ]]
+		local Connection = UseRefResult.current:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
 			-- upvalues: UseRefResult (upval), UseStateResult2 (upval), UseResult (upval), p1 (upval)
 			if UseRefResult.current then
 				UseStateResult2(UseResult(UseRefResult.current.AbsolutePosition.Y, p1.scrollingFrameAbsolutePositionY(false), p1.scrollingFrameAbsoluteSizeY(false)))
@@ -25,7 +25,7 @@ function LazyScrollingComponent(p1) --[[ Line: 29 ]]
 				return
 			end
 		end)
-		local Effect = SignalsModule.createEffect(function(p2) --[[ Line: 74 ]]
+		local Effect = SignalsModule.createEffect(function(p2)
 			-- upvalues: p1 (upval), UseRefResult (upval), UseStateResult2 (upval), UseResult (upval)
 			local _ = p1.scrollingFrameCanvasPositionY(p2)
 			local ScrollingFrameAbsolutePositionYResult = p1.scrollingFrameAbsolutePositionY(p2)
@@ -38,7 +38,7 @@ function LazyScrollingComponent(p1) --[[ Line: 29 ]]
 			end
 		end)
 		
-		return function() --[[ Line: 89 ]]
+		return function()
 			-- upvalues: Connection (copy), Effect (copy)
 			if Connection then
 				Connection:Disconnect()

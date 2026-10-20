@@ -11,12 +11,12 @@ local GetFriendsChatNavigationStoreModule = require(FriendsChat.Stores.GetFriend
 local IsInboxInitialLoadingModule = require(FriendsChat.ConversationList.isInboxInitialLoading)
 local AppLevelTelemetryEventsModule = require(script.Parent.AppLevelTelemetryEvents)
 
-local function _() --[[ Line: 27 | Named "getIsChatEnabled" ]]
+local function _()
 	-- upvalues: GetFriendsChatSettingsStoreModule (copy)
 	return GetFriendsChatSettingsStoreModule(false).getChatEnabled(false)
 end
 
-local function getEmittedInfo() --[[ Line: 33 ]]
+local function getEmittedInfo()
 	-- upvalues: GetFriendsChatSettingsStoreModule (copy), FFlagFriendsChatLandingTelemetryFieldsModule (copy), GetFriendsChatNavigationStoreModule (copy), GetConversationListStoreModule (copy), IsInboxInitialLoadingModule (copy), FFlagAppChatVisibleIsInConversationModule (copy)
 	local config = {
 		isChatEnabled = GetFriendsChatSettingsStoreModule(false).getChatEnabled(false)
@@ -35,14 +35,14 @@ local function getEmittedInfo() --[[ Line: 33 ]]
 	return config
 end
 
-return function() --[[ Line: 51 | Named "useFriendsChatVisibilityTelemetry" ]]
+return function()
 	-- upvalues: UseTelemetryModule (copy), AppTelemetryLayerModule (copy), ReactModule (copy), AppLevelTelemetryEventsModule (copy), getEmittedInfo (copy)
 	local EmitFunction = UseTelemetryModule(AppTelemetryLayerModule.Context).emit
-	ReactModule.useEffect(function() --[[ Line: 59 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: EmitFunction (copy), AppLevelTelemetryEventsModule (upval), getEmittedInfo (upval)
 		EmitFunction(AppLevelTelemetryEventsModule.AppChatVisible, (getEmittedInfo()))
 		
-		return function() --[[ Line: 61 ]]
+		return function()
 			-- upvalues: EmitFunction (upval), AppLevelTelemetryEventsModule (upval), getEmittedInfo (upval)
 			EmitFunction(AppLevelTelemetryEventsModule.AppChatClosed, (getEmittedInfo()))
 		end

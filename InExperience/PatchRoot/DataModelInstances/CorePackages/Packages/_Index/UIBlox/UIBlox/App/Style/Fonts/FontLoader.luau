@@ -7,7 +7,7 @@ local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFon
 local ConstantsModule = require(Parent.Constants)
 local _ = require(Parent.StyleTypes)
 
-local function _(Cartoon, p1) --[[ Line: 18 | Named "getOverrideFontFace" ]]
+local function _(Cartoon, p1)
 	-- upvalues: ConstantsModule (copy)
 	return if typeof(Cartoon) == "Font" then Cartoon elseif Cartoon == Enum.Font.Cartoon then Font.new(ConstantsModule.ComicNeueFontFamily, p1.Weight, p1.Style) else Font.fromEnum(Cartoon)
 end
@@ -15,7 +15,7 @@ end
 local FontLoaderModule = {}
 FontLoaderModule.__index = FontLoaderModule
 
-function FontLoaderModule.new(_tokens) --[[ Line: 31 ]]
+function FontLoaderModule.new(_tokens)
 	-- upvalues: FontLoaderModule (copy)
 	local config = { _tokens = _tokens }
 	setmetatable(config, FontLoaderModule)
@@ -23,7 +23,7 @@ function FontLoaderModule.new(_tokens) --[[ Line: 31 ]]
 	return config
 end
 
-function FontLoaderModule:loadFont(Cartoon) --[[ Line: 39 ]]
+function FontLoaderModule:loadFont(Cartoon)
 	-- upvalues: FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ConstantsModule (copy), CryoModule (copy)
 	local Tokens = self._tokens
 	local config = {
@@ -87,7 +87,7 @@ function FontLoaderModule:loadFont(Cartoon) --[[ Line: 39 ]]
 	return CryoModule.Dictionary.join(self:mapLegacyFont(config, 16), config)
 end
 
-function FontLoaderModule:mapLegacyFont(Labels, _) --[[ Line: 125 ]]
+function FontLoaderModule:mapLegacyFont(Labels, _)
 	return {
 		Title = Labels.HeadingLarge,
 		Header1 = Labels.HeadingSmall,

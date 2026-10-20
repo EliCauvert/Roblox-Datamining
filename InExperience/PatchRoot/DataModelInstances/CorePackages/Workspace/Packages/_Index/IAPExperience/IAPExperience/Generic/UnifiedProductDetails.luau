@@ -23,13 +23,13 @@ local FFlagLuaAppsEnablePromptVIPServerPurchase = require(Parent.Parent.SharedFl
 local Default = require(Parent1.LoggingProtocol).default
 local VirtualItemBadgeShownCounter = require(Parent.Generic.Events.VirtualItemBadgeCounter).VirtualItemBadgeShownCounter
 
-local function _(Text: string): string --[[ Line: 52 | Named "withMaxLength" ]]
+local function _(Text: string): string
 	return if #Text > 50 then Text:sub(1, 50) .. "..." else Text
 end
 
 local _ = require(Parent.ProductPurchase.PricingTypes)
 
-return function(p1) --[[ Line: 81 ]]
+return function(p1)
 	-- upvalues: GetFFlagDiscountInfoForSubscriptionPurchaseModalLuaFunction (copy), UseLocalizationFunction (copy), UseTokensFunction (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), UseRobuxTextModule (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), ReactModule (copy), ModelViewportModule (copy), FFlagUnifiedPurchaseAddSkeleton (copy), Skeleton (copy), Radius (copy), Image (copy), VirtualItemBadgeTypeModule (copy), YellowBadgeModule (copy), Default (copy), VirtualItemBadgeShownCounter (copy), View (copy), Text (copy), FormatNumberModule (copy), LocalizationService (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy)
 	local FFlagDiscountInfoForSubscriptionPurchaseModalLua = GetFFlagDiscountInfoForSubscriptionPurchaseModalLuaFunction()
 	local ItemPrice = p1.itemPrice
@@ -69,7 +69,7 @@ return function(p1) --[[ Line: 81 ]]
 		Icon = "icons/menu/fire_fill",
 		Text = UseLocalizationResult.Popular
 	}) else nil
-	ReactModule.useEffect(function() --[[ Line: 144 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Element1 (copy), Default (upval), VirtualItemBadgeShownCounter (upval), p1 (copy)
 		if Element1 then
 			Default:logRobloxTelemetryCounter(VirtualItemBadgeShownCounter, 1, { badgeType = p1.badgeType })

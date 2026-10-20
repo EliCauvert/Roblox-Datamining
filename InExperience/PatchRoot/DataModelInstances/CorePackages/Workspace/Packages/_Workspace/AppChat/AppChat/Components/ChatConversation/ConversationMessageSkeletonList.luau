@@ -65,7 +65,7 @@ local ItemList = {
 }
 local config = { size = UDim2.fromScale(1, 1), itemList = ItemList }
 
-local function renderSkeletonRow(p1, p2, p3, LayoutOrder) --[[ Line: 50 ]]
+local function renderSkeletonRow(p1, p2, p3, LayoutOrder)
 	-- upvalues: ReactModule (copy), View (copy), Skeleton (copy), Radius (copy)
 	local Size900 = p2.Size.Size_900
 	
@@ -97,7 +97,7 @@ local function renderSkeletonRow(p1, p2, p3, LayoutOrder) --[[ Line: 50 ]]
 	})
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 90 | Named "ConversationMessageSkeletonList" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), UseChatPagePaddingModule (copy), ItemList (copy), renderSkeletonRow (copy), ReactModule (copy), View (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseTokensResult = UseTokensFunction()

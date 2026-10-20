@@ -15,7 +15,7 @@ local EditProfileHeaderBarModule = require(EditProfile.BaseComponents.EditProfil
 local TextKeysModule = require(EditProfile.Common.TextKeys)
 local FFlagAXEnableProfileTab = require(Parent.SharedFlags).FFlagAXEnableProfileTab
 
-return function(p1) --[[ Line: 42 | Named "EditProfileLanding" ]]
+return function(p1)
 	-- upvalues: UseProfileCardWidthFunction (copy), FFlagAXEnableProfileTab (copy), TextKeysModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), EditProfileHeaderBarModule (copy), UserTileModule (copy), IconButton (copy), IconName (copy), IconSize (copy), ButtonVariant (copy), EditComponentRowModule (copy)
 	local UseProfileCardWidthResult = UseProfileCardWidthFunction()
 	local IsFullBleed: boolean = FFlagAXEnableProfileTab and p1.fullBleed == true
@@ -74,7 +74,7 @@ return function(p1) --[[ Line: 42 | Named "EditProfileLanding" ]]
 					layoutOrder = 1,
 					label = UseLocalizationResult.DisplayNameLabel,
 					currentValue = p1.displayName,
-					onActivated = if p1.areNamesLoading then function() --[[ Line: 115 ]] end else p1.settingButtonOnActivated.displayName,
+					onActivated = if p1.areNamesLoading then function() end else p1.settingButtonOnActivated.displayName,
 					shouldShimmer = p1.areNamesLoading,
 					forwardRef = p1.firstItemRef
 				}),

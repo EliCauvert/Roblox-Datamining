@@ -2,7 +2,7 @@
 local ParticipantsModule = require(script.Participants)
 local ExperienceModule = require(script.Experience)
 
-return function(p1) --[[ Line: 9 ]]
+return function(p1)
 	-- upvalues: Rodux (copy), ParticipantsModule (copy), ExperienceModule (copy)
 	local Participants = nil
 	local Experience = nil

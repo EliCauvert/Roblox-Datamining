@@ -2,9 +2,9 @@
 local FFlagParseHeadShapeFromAPIResponse = require(Parent.AvatarExperienceFlags).FFlagParseHeadShapeFromAPIResponse
 local Constants = require(Parent.AvatarExperienceCommon).Constants
 
-return function(List) --[[ Line: 16 | Named "getEquippableAssetsFromTryOnItems" ]]
+return function(List)
 	-- upvalues: Constants (copy), FFlagParseHeadShapeFromAPIResponse (copy)
-	table.sort(List, function(A, B): boolean --[[ Line: 29 ]]
+	table.sort(List, function(A, B): boolean
 		return tonumber(A.itemRecency) < tonumber(B.itemRecency)
 	end)
 	local List1 = {}

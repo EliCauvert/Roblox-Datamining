@@ -21,12 +21,12 @@ local GetFFlagAddPeoplePageCardLayoutFunction = FlagsService.GetFFlagAddPeoplePa
 local FFlagStandardizeSafetyIcon = require(Parent.SharedFlags).FFlagStandardizeSafetyIcon
 local FFlagPeopleListButtonOverflowModule = require(PeopleReactView.Flags.FFlagPeopleListButtonOverflow)
 
-local function getPlaySessionId() --[[ Line: 42 ]]
+local function getPlaySessionId()
 	-- upvalues: RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy)
 	return if RbxAnalyticsServiceExposePlaySessionIdEngineFeature then RbxAnalyticsService:GetPlaySessionId() else ""
 end
 
-return function(UserId, Enabled) --[[ Line: 67 | Named "usePersonButtonConfigs" ]]
+return function(UserId, Enabled)
 	-- upvalues: PeopleServiceModule (copy), UseDeviceOrientationFunction (copy), RobloxAppEnumsModule (copy), FFlagPeopleListButtonOverflowModule (copy), UseLocalizationFunction (copy), ConstantsModule (copy), ReactModule (copy), Players (copy), getPlaySessionId (copy), UseSignalStateFunction (copy), GetFFlagAddPeoplePageCardLayoutFunction (copy), ConstantsService (copy), GetFFlagNewPeopleButtonOrderFunction (copy), GetFFlagNewPeoplePageIconsFunction (copy), ButtonVariant (copy), FFlagStandardizeSafetyIcon (copy), GuiService (copy)
 	local PeopleVoiceChatStoreService = PeopleServiceModule.getService("PeopleVoiceChatStore")
 	local PeopleReportAbuseMenuService = PeopleServiceModule.getService("PeopleReportAbuseMenu")
@@ -42,7 +42,7 @@ return function(UserId, Enabled) --[[ Line: 67 | Named "usePersonButtonConfigs" 
 		addFriend = ConstantsModule.PEOPLEPAGE.PERSON_BUTTONS.LOCALIZED_STRINGS.ADD_FRIEND,
 		unblock = ConstantsModule.PEOPLEPAGE.PERSON_BUTTONS.LOCALIZED_STRINGS.UNBLOCK
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 92 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseLocalizationResult (copy)
 		return {
 			isFriend = UseLocalizationResult.friend,
@@ -50,7 +50,7 @@ return function(UserId, Enabled) --[[ Line: 67 | Named "usePersonButtonConfigs" 
 			requestSent = UseLocalizationResult.requestSent
 		}
 	end, { UseLocalizationResult })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 100 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UserId (copy), Players (upval)
 		return if UserId then Players:GetPlayerByUserId(UserId) else nil
 	end, { UserId })
@@ -60,28 +60,28 @@ return function(UserId, Enabled) --[[ Line: 67 | Named "usePersonButtonConfigs" 
 	local PlayerIsLocalMuted = PeopleVoiceChatStoreService.getPlayerIsLocalMuted(UserId)
 	local UseSignalStateResult = UseSignalStateFunction(PeopleVoiceChatStoreService.getPlayerShouldShowMuteButton(UserId))
 	local UseSignalStateResult1 = UseSignalStateFunction(FriendStatusStoreService.getShouldShowFriendButton(UserId, UseMemoResult1))
-	local UseMemoResult3 = if GetFFlagAddPeoplePageCardLayoutFunction() then ReactModule.useMemo(function() --[[ Line: 114 ]]
+	local UseMemoResult3 = if GetFFlagAddPeoplePageCardLayoutFunction() then ReactModule.useMemo(function()
 		-- upvalues: FriendStatusStoreService (copy), UserId (copy)
 		return FriendStatusStoreService.getFriendStatus(UserId)
 	end, { UserId }) else FriendStatusStoreService.getFriendStatus(UserId)
-	local UseMemoResult4 = if GetFFlagAddPeoplePageCardLayoutFunction() then ReactModule.useMemo(function() --[[ Line: 121 ]]
+	local UseMemoResult4 = if GetFFlagAddPeoplePageCardLayoutFunction() then ReactModule.useMemo(function()
 		-- upvalues: FriendStatusStoreService (copy), UserId (copy), UseMemoResult (copy)
 		return FriendStatusStoreService.getFriendButtonText(UserId, UseMemoResult)
 	end, { UserId, UseMemoResult }) else FriendStatusStoreService.getFriendButtonText(UserId, UseMemoResult)
-	local UseMemoResult5 = if GetFFlagAddPeoplePageCardLayoutFunction() then ReactModule.useMemo(function() --[[ Line: 128 ]]
+	local UseMemoResult5 = if GetFFlagAddPeoplePageCardLayoutFunction() then ReactModule.useMemo(function()
 		-- upvalues: FriendStatusStoreService (copy), UserId (copy)
 		return FriendStatusStoreService.getFriendButtonVariant(UserId)
 	end, { UserId }) else FriendStatusStoreService.getFriendButtonVariant(UserId)
-	local UseSignalStateResult2 = UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 134 ]]
+	local UseSignalStateResult2 = UseSignalStateFunction((ReactModule.useMemo(function()
 		-- upvalues: UserId (copy), PeopleBlockStatusStoreService (copy)
 		return if UserId then PeopleBlockStatusStoreService.getPlayerBlockStatus(UserId) else nil
 	end, { UserId })))
-	local UseMemoResult6 = ReactModule.useMemo(function() --[[ Line: 139 ]]
+	local UseMemoResult6 = ReactModule.useMemo(function()
 		-- upvalues: PeopleUtilityService (copy), UseMemoResult1 (copy), UserId (copy)
 		return PeopleUtilityService.showPersonButtons(UseMemoResult1, UserId)
 	end, { UserId })
 	
-	return (ReactModule.useMemo(function() --[[ Line: 144 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: ConstantsService (upval), PlayerAnimatedIcon (copy), PlayerMuteState (copy), UseSignalStateResult (copy), PeopleAnalyticsManagerService (copy), UserId (copy), PlayerIsLocalMuted (copy), GetFFlagAddPeoplePageCardLayoutFunction (upval), PeopleVoiceChatStoreService (copy), GetFFlagNewPeopleButtonOrderFunction (upval), UseSignalStateResult2 (copy), UseLocalizationResult (copy), GetFFlagNewPeoplePageIconsFunction (upval), ConstantsModule (upval), UseMemoResult6 (copy), UseMemoResult1 (copy), PeopleBlockStatusStoreService (copy), ButtonVariant (upval), IsUseDeviceOrientationResultMatch (copy), UseMemoResult4 (copy), UseMemoResult3 (copy), UseMemoResult5 (copy), UseSignalStateResult1 (copy), FriendStatusStoreService (copy), FFlagStandardizeSafetyIcon (upval), PeopleReportAbuseMenuService (copy), GuiService (upval), UseMemoResult2 (copy), SettingsHubService (copy)
 		local List = {}
 		local config = {
@@ -89,11 +89,11 @@ return function(UserId, Enabled) --[[ Line: 67 | Named "usePersonButtonConfigs" 
 			id = ConstantsService.PERSON_BUTTONS.MUTE_PLAYER,
 			animatedIcon = PlayerAnimatedIcon,
 			buttonState = PlayerMuteState,
-			shouldShow = function() --[[ Line: 152 ]]
+			shouldShow = function()
 				-- upvalues: UseSignalStateResult (upval)
 				return UseSignalStateResult
 			end,
-			onActivated = function(p1) --[[ Line: 155 ]]
+			onActivated = function(p1)
 				-- upvalues: PeopleAnalyticsManagerService (upval), UserId (upval), PlayerIsLocalMuted (upval), GetFFlagAddPeoplePageCardLayoutFunction (upval), PeopleVoiceChatStoreService (upval)
 				PeopleAnalyticsManagerService:trackToggleMutePlayer(UserId, PlayerIsLocalMuted(false), if GetFFlagAddPeoplePageCardLayoutFunction() then p1 else nil)
 				PeopleVoiceChatStoreService.togglePlayerMute(UserId)
@@ -111,11 +111,11 @@ return function(UserId, Enabled) --[[ Line: 67 | Named "usePersonButtonConfigs" 
 			id = ConstantsService.PERSON_BUTTONS.BLOCK_PLAYER,
 			text = if UseSignalStateResult2 then UseLocalizationResult.unblock else nil,
 			onIcon = if UseSignalStateResult2 then nil elseif GetFFlagNewPeoplePageIconsFunction() then ConstantsModule.PEOPLEPAGE.PERSON_BUTTONS.ICON.BLOCK_NEW else ConstantsModule.PEOPLEPAGE.PERSON_BUTTONS.ICON.BLOCK_LEGACY,
-			shouldShow = function() --[[ Line: 185 ]]
+			shouldShow = function()
 				-- upvalues: UseMemoResult6 (upval)
 				return UseMemoResult6
 			end,
-			onActivated = function(p1) --[[ Line: 188 ]]
+			onActivated = function(p1)
 				-- upvalues: UseMemoResult1 (upval), UseSignalStateResult2 (upval), PeopleBlockStatusStoreService (upval), GetFFlagAddPeoplePageCardLayoutFunction (upval)
 				if UseMemoResult1 then
 					if UseSignalStateResult2 then
@@ -144,11 +144,11 @@ return function(UserId, Enabled) --[[ Line: 67 | Named "usePersonButtonConfigs" 
 			offIcon = if IsUseDeviceOrientationResultMatch then if GetFFlagNewPeoplePageIconsFunction() then ConstantsModule.PEOPLEPAGE.PERSON_BUTTONS.ICON.FRIEND_NEW else ConstantsModule.PEOPLEPAGE.PERSON_BUTTONS.ICON.FRIEND_LEGACY else nil,
 			buttonState = UseMemoResult3,
 			buttonVariant = if IsUseDeviceOrientationResultMatch then nil else UseMemoResult5,
-			shouldShow = function() --[[ Line: 228 ]]
+			shouldShow = function()
 				-- upvalues: UseSignalStateResult1 (upval)
 				return UseSignalStateResult1
 			end,
-			onActivated = function(p1) --[[ Line: 231 ]]
+			onActivated = function(p1)
 				-- upvalues: PeopleAnalyticsManagerService (upval), GetFFlagAddPeoplePageCardLayoutFunction (upval), FriendStatusStoreService (upval), UseMemoResult1 (upval)
 				PeopleAnalyticsManagerService:trackRequestFriendship(if GetFFlagAddPeoplePageCardLayoutFunction() then p1 else nil)
 				FriendStatusStoreService.sendFriendRequest(UseMemoResult1)
@@ -166,11 +166,11 @@ return function(UserId, Enabled) --[[ Line: 67 | Named "usePersonButtonConfigs" 
 		local config21 = {
 			id = ConstantsService.PERSON_BUTTONS.REPORT_PLAYER,
 			onIcon = if FFlagStandardizeSafetyIcon then ConstantsModule.PEOPLEPAGE.PERSON_BUTTONS.ICON.REPORT_PLAYER_FLAG elseif GetFFlagNewPeoplePageIconsFunction() then ConstantsModule.PEOPLEPAGE.PERSON_BUTTONS.ICON.REPORT_PLAYER_NEW else ConstantsModule.PEOPLEPAGE.PERSON_BUTTONS.ICON.REPORT_PLAYER_LEGACY,
-			shouldShow = function() --[[ Line: 259 ]]
+			shouldShow = function()
 				-- upvalues: UseMemoResult6 (upval)
 				return UseMemoResult6
 			end,
-			onActivated = function(p1) --[[ Line: 262 ]]
+			onActivated = function(p1)
 				-- upvalues: UseMemoResult1 (upval), PeopleReportAbuseMenuService (upval), GetFFlagAddPeoplePageCardLayoutFunction (upval)
 				if UseMemoResult1 then
 					PeopleReportAbuseMenuService:ReportPlayer(UseMemoResult1, if GetFFlagAddPeoplePageCardLayoutFunction() then p1 else "MenuPlayerList")
@@ -189,11 +189,11 @@ return function(UserId, Enabled) --[[ Line: 67 | Named "usePersonButtonConfigs" 
 			layoutOrder = 20,
 			id = ConstantsService.PERSON_BUTTONS.INSPECT,
 			onIcon = if GetFFlagNewPeoplePageIconsFunction() then ConstantsModule.PEOPLEPAGE.PERSON_BUTTONS.ICON.INSPECT_NEW else ConstantsModule.PEOPLEPAGE.PERSON_BUTTONS.ICON.INSPECT_LEGACY,
-			shouldShow = function() --[[ Line: 286 ]]
+			shouldShow = function()
 				-- upvalues: GuiService (upval)
 				return GuiService:GetInspectMenuEnabled()
 			end,
-			onActivated = function(p1) --[[ Line: 289 ]]
+			onActivated = function(p1)
 				-- upvalues: UseMemoResult1 (upval), GetFFlagAddPeoplePageCardLayoutFunction (upval), PeopleAnalyticsManagerService (upval), UseMemoResult2 (upval), GuiService (upval), SettingsHubService (upval)
 				if UseMemoResult1 then
 					if GetFFlagAddPeoplePageCardLayoutFunction() then

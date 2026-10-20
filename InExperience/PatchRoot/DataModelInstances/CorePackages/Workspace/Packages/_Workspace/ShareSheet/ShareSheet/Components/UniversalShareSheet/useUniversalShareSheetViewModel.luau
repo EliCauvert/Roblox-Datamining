@@ -5,7 +5,7 @@ local FFlagShareSheetFriendsSort = require(Parent.SharedFlags).FFlagShareSheetFr
 local _ = require(script.Parent.Parent.useShareSheetViewModel)
 local GetUniversalShareSheetStoreModule = require(ShareSheet.Stores.GetUniversalShareSheetStore)
 
-return function() --[[ Line: 14 | Named "useUniversalShareSheetViewModel" ]]
+return function()
 	-- upvalues: GetUniversalShareSheetStoreModule (copy), SignalsReactModule (copy), FFlagShareSheetFriendsSort (copy)
 	local UniversalShareSheetStoreModule = GetUniversalShareSheetStoreModule()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(UniversalShareSheetStoreModule.getRequest)

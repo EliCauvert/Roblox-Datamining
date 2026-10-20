@@ -8,7 +8,7 @@ local Config = {
 	lastUpdated = { 2026, 10, 8 }
 }
 
-return function(Value: number, Stalled) --[[ Line: 14 | Named "reportPromptFirstResponseLatency" ]]
+return function(Value: number, Stalled)
 	-- upvalues: SendBuildExperienceStatModule (copy), Config (copy), FIntBuildExperiencePromptFirstResponseMsThrottleHundredthsPercentModule (copy)
 	SendBuildExperienceStatModule({
 		config = Config,

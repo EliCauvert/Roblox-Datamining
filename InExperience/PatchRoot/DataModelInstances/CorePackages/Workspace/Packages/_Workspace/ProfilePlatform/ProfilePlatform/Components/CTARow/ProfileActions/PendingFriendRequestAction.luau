@@ -5,13 +5,13 @@ local _ = require(ProfilePlatform.Components.CTARow.Types)
 local ProfileTypes = EnumsModule.ProfileTypes
 
 return {
-	[EnumsModule.ProfileActions.PendingFriendRequest] = function(p1) --[[ Line: 13 ]]
+	[EnumsModule.ProfileActions.PendingFriendRequest] = function(p1)
 		-- upvalues: ButtonVariant (copy), EnumsModule (copy), ProfileTypes (copy)
 		return {
 			isDisabled = true,
 			variant = ButtonVariant.Subtle,
 			text = p1.localized[EnumsModule.ProfileActions.PendingFriendRequest],
-			onActivated = { [ProfileTypes.User] = function() --[[ Line: 18 ]] end }
+			onActivated = { [ProfileTypes.User] = function() end }
 		}
 	end
 }

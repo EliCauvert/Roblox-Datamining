@@ -1,12 +1,12 @@
 ﻿local _ = require(script:FindFirstAncestor("ShareSheet").Parent.AppChat.GetConversationListStore)
 
 return {
-	getDisplayName = function(p1) --[[ Line: 10 ]]
+	getDisplayName = function(p1)
 		local TitleForViewer = p1.titleForViewer
 		
 		return if TitleForViewer and TitleForViewer ~= "" then TitleForViewer else p1.title or ""
 	end,
-	getParticipantUserIds = function(p1, p2) --[[ Line: 15 ]]
+	getParticipantUserIds = function(p1, p2)
 		local List = {}
 		local Participants = p1.participants
 		

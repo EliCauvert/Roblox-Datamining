@@ -6,7 +6,7 @@ local SduiActionParams = SduiCoreSystemModule.SduiActionParams
 local GetStringParamFunction = SduiActionParams.getStringParam
 local GetBooleanParamFunction = SduiActionParams.getBooleanParam
 
-return function(p1, _, p2, _) --[[ Line: 33 | Named "SduiSetPageScopeFieldAction" ]]
+return function(p1, _, p2, _)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), GetStringParamFunction (copy), GetSduiClientPageScopeFunction (copy), GetBooleanParamFunction (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	

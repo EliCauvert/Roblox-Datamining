@@ -6,7 +6,7 @@ local BubbleChatBillboardsModule = require(script.Parent.BubbleChatBillboards)
 local App = RoactModule.Component:extend("App")
 App.validateProps = TModule.strictInterface({ store = TModule.table })
 
-function App.render(p1) --[[ Line: 19 ]]
+function App.render(p1)
 	-- upvalues: RoactModule (copy), RoactRoduxModule (copy), BubbleChatBillboardsModule (copy)
 	return RoactModule.createElement(RoactRoduxModule.StoreProvider, { store = p1.props.store }, {
 		BubbleChatBillboards = RoactModule.createElement(BubbleChatBillboardsModule)

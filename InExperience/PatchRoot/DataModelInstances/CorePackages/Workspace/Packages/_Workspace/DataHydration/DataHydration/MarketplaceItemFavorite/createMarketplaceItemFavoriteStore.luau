@@ -10,11 +10,11 @@ local MarketplaceItemFavoriteUrlBuilderModule = require(script.Parent.Marketplac
 local FetchMarketplaceItemFavoriteModule = require(script.Parent.fetchMarketplaceItemFavorite)
 local RequestMarketplaceItemFavoriteUpdateModule = require(script.Parent.requestMarketplaceItemFavoriteUpdate)
 
-local function _(p1) --[[ Line: 37 | Named "getStatusCode" ]]
+local function _(p1)
 	return if type(p1) == "table" then p1.StatusCode else nil
 end
 
-return function(p1) --[[ Line: 41 | Named "createMarketplaceItemFavoriteStore" ]]
+return function(p1)
 	-- upvalues: MarketplaceItemFavoriteUrlBuilderModule (copy), CreateDataCacheModule (copy), CreateDataResolverModule (copy), LogResponseErrorFunction (copy), FetchMarketplaceItemFavoriteModule (copy), RequestMarketplaceItemFavoriteUpdateModule (copy)
 	local ItemType = p1.itemType
 	local EndpointName = MarketplaceItemFavoriteUrlBuilderModule.getEndpointName(ItemType)
@@ -25,33 +25,33 @@ return function(p1) --[[ Line: 41 | Named "createMarketplaceItemFavoriteStore" ]
 		supportsMultiGet = false,
 		supportsMutations = true,
 		cache = DataCacheModule,
-		logError = function(p2) --[[ Line: 54 ]]
+		logError = function(p2)
 			-- upvalues: LogResponseErrorFunction (upval), EndpointName (copy)
 			LogResponseErrorFunction(EndpointName, p2)
 		end,
-		onClear = function() --[[ Line: 57 ]]
+		onClear = function()
 			-- upvalues: Tbl (copy)
 			table.clear(Tbl)
 		end,
-		fetchFn = function(p2, _) --[[ Line: 60 ]]
+		fetchFn = function(p2, _)
 			-- upvalues: t (copy), FetchMarketplaceItemFavoriteModule (upval), ItemType (copy), DataCacheModule (copy)
 			local Entry = t[p2]
 			
-			return FetchMarketplaceItemFavoriteModule(ItemType, p2):andThen(function(Result) --[[ Line: 65 ]]
+			return FetchMarketplaceItemFavoriteModule(ItemType, p2):andThen(function(Result)
 				-- upvalues: t (upval), p2 (copy), Entry (copy), DataCacheModule (upval)
 				return if t[p2] == Entry then { isFavorited = Result.responseBody ~= nil } else DataCacheModule.getItem(p2).data(false)
 			end)
 		end
 	})
 	
-	local function _(p2) --[[ Line: 77 | Named "getServerFavorited" ]]
+	local function _(p2)
 		-- upvalues: DataCacheModule (copy)
 		local DataResult = DataCacheModule.getItem(p2).data(false)
 		
 		return if DataResult then DataResult.isFavorited else nil
 	end
 	
-	local _ = function(p2, p3, BaselineFavorited) --[[ Line: 82 | Named "showFavoriteCount" ]]
+	local _ = function(p2, p3, BaselineFavorited)
 		-- upvalues: p1 (copy)
 		local BaselineCount = p3.baselineCount
 		
@@ -62,7 +62,7 @@ return function(p1) --[[ Line: 41 | Named "createMarketplaceItemFavoriteStore" ]
 		end
 	end
 	
-	local function finishToggle(Key, p2, p3) --[[ Line: 93 ]]
+	local function finishToggle(Key, p2, p3)
 		-- upvalues: Tbl (copy), DataResolverModule (copy), DataCacheModule (copy), p1 (copy)
 		Tbl[Key] = nil
 		DataResolverModule.clearMutation(Key)
@@ -84,7 +84,7 @@ return function(p1) --[[ Line: 41 | Named "createMarketplaceItemFavoriteStore" ]
 	
 	local Callback = nil
 	
-	local _ = function(p2, p3, p4) --[[ Line: 109 | Named "continueToggle" ]]
+	local _ = function(p2, p3, p4)
 		-- upvalues: DataCacheModule (copy), finishToggle (copy), Callback (ref)
 		local DataResult = DataCacheModule.getItem(p2).data(false)
 		
@@ -97,7 +97,7 @@ return function(p1) --[[ Line: 41 | Named "createMarketplaceItemFavoriteStore" ]
 		end
 	end
 	
-	Callback = function(Key, p2) --[[ Line: 117 | Named "writeDesired" ]]
+	Callback = function(Key, p2)
 		-- upvalues: RequestMarketplaceItemFavoriteUpdateModule (upval), ItemType (copy), Tbl (copy), t (copy), DataCacheModule (copy), finishToggle (copy), Callback (ref), LogResponseErrorFunction (upval), EndpointName (copy)
 		local Desired = p2.desired
 		p2.isWriting = true
@@ -107,7 +107,7 @@ return function(p1) --[[ Line: 41 | Named "createMarketplaceItemFavoriteStore" ]
 		if OnWriteStart then
 			OnWriteStart(Desired)
 		end
-		RequestMarketplaceItemFavoriteUpdateModule(ItemType, Key, Desired):andThen(function() --[[ Line: 127 ]]
+		RequestMarketplaceItemFavoriteUpdateModule(ItemType, Key, Desired):andThen(function()
 			-- upvalues: Tbl (upval), Key (copy), p2 (copy), t (upval), DataCacheModule (upval), Desired (copy), finishToggle (upval), Callback (upval)
 			if Tbl[Key] ~= p2 then return end
 			p2.isWriting = false
@@ -122,7 +122,7 @@ return function(p1) --[[ Line: 41 | Named "createMarketplaceItemFavoriteStore" ]
 			else
 				Callback(Key, p2)
 			end
-		end):catch(function(Err) --[[ Line: 136 ]]
+		end):catch(function(Err)
 			-- upvalues: Tbl (upval), Key (copy), p2 (copy), LogResponseErrorFunction (upval), EndpointName (upval), Desired (copy), finishToggle (upval), DataCacheModule (upval), Callback (upval)
 			if Tbl[Key] ~= p2 then return end
 			p2.isWriting = false
@@ -148,15 +148,15 @@ return function(p1) --[[ Line: 41 | Named "createMarketplaceItemFavoriteStore" ]
 	end
 	
 	return {
-		getFavorite = function(p2) --[[ Line: 184 ]]
+		getFavorite = function(p2)
 			-- upvalues: DataResolverModule (copy)
 			return DataResolverModule.getOptimisticCachedItem(p2)
 		end,
-		getAndFetchFavorite = function(p2) --[[ Line: 188 ]]
+		getAndFetchFavorite = function(p2)
 			-- upvalues: DataResolverModule (copy)
 			return DataResolverModule.getOptimisticAndFetchItem(p2)
 		end,
-		toggleFavorite = function(Key, Callbacks): boolean --[[ Line: 151 ]]
+		toggleFavorite = function(Key, Callbacks): boolean
 			-- upvalues: DataResolverModule (copy), Tbl (copy), p1 (copy), DataCacheModule (copy), finishToggle (copy), Callback (ref)
 			local DataResult = DataResolverModule.getOptimisticCachedItem(Key).data(false)
 			

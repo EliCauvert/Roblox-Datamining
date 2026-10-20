@@ -44,7 +44,7 @@ Alert.defaultProps = {
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function Alert.init(p1) --[[ Line: 79 ]]
+function Alert.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.contentSize, p1.changeContentSize = RoactModule.createBinding(Vector2.new(0, 0))
 	p1.middleContentRef = RoactModule.createRef()
@@ -52,20 +52,20 @@ function Alert.init(p1) --[[ Line: 79 ]]
 	p1.buttonStackRef = RoactModule.createRef()
 end
 
-function Alert.didMount(p1) --[[ Line: 87 ]]
+function Alert.didMount(p1)
 	if p1.props.onMounted then
 		p1.props.onMounted()
 	end
 end
 
-function Alert.render(p1) --[[ Line: 93 ]]
+function Alert.render(p1)
 	-- upvalues: WithStyleModule (copy), AlertTypeModule (copy), CryoModule (copy), RoactModule (copy), RoactGamepadModule (copy), ImageSetComponentModule (copy), ImagesModule (copy), FitFrameOnAxis (copy), AlertTitleModule (copy), ButtonStackModule (copy)
 	local IsMiddleContentFocusable = p1.props.isMiddleContentFocusable
 	local IsFooterContentFocusable = p1.props.isFooterContentFocusable
 	local IsRoactGamepadEnabled = p1.props.isRoactGamepadEnabled
 	local ClampedValue = math.clamp(p1.props.screenSize.X - p1.props.margin.left - p1.props.margin.right, p1.props.minWidth, p1.props.maxWidth)
 	
-	return WithStyleModule(function(p2) --[[ Line: 104 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: p1 (copy), AlertTypeModule (upval), CryoModule (upval), RoactModule (upval), IsRoactGamepadEnabled (copy), IsMiddleContentFocusable (copy), IsFooterContentFocusable (copy), RoactGamepadModule (upval), ImageSetComponentModule (upval), ImagesModule (upval), FitFrameOnAxis (upval), ClampedValue (copy), AlertTitleModule (upval), ButtonStackModule (upval)
 		local Theme = p2.Theme
 		local Color = nil
@@ -93,7 +93,7 @@ function Alert.render(p1) --[[ Line: 93 ]]
 		return RoactModule.createElement(if IsRoactGamepadEnabled then RoactGamepadModule.Focusable[ImageSetComponentModule.Button] else ImageSetComponentModule.Button, {
 			Position = p1.props.position,
 			AnchorPoint = p1.props.anchorPoint,
-			Size = p1.contentSize:map(function(Vector): UDim2 --[[ Line: 138 ]]
+			Size = p1.contentSize:map(function(Vector): UDim2
 				return UDim2.new(0, Vector.X, 0, Vector.Y)
 			end),
 			BackgroundColor3 = Theme.BackgroundUIDefault.Color,
@@ -117,7 +117,7 @@ function Alert.render(p1) --[[ Line: 93 ]]
 				minimumSize = UDim2.new(0, ClampedValue, 0, 0),
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				[RoactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 164 ]]
+				[RoactModule.Change.AbsoluteSize] = function(Frame)
 					-- upvalues: p1 (upval)
 					p1.changeContentSize(Frame.AbsoluteSize)
 				end

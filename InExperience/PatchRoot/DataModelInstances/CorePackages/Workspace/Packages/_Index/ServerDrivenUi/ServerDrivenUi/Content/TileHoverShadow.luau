@@ -5,7 +5,7 @@ local Image = FoundationModule.Image
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local Slice = { center = Rect.new(35, 35, 37, 37) }
 
-return ReactModule.memo(function(p1) --[[ Line: 23 | Named "TileHoverShadow" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Image (copy), Slice (copy)
 	local UseTokensResult = UseTokensFunction()
 	local HoverPadding = p1.hoverPadding or UseTokensResult.Padding.Medium
@@ -13,12 +13,12 @@ return ReactModule.memo(function(p1) --[[ Line: 23 | Named "TileHoverShadow" ]]
 	local NewHoverPadding = HoverPadding + 14
 	local NewHoverPadding1 = HoverPadding + (p1.containmentPadding or UseTokensResult.Padding.Small) + UseTokensResult.Gap.XSmall
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
-	ReactModule.useEffect(function() --[[ Line: 33 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseBindingResult2 (copy), NewHoverPadding1 (copy)
 		local Current = p1.contentRef.current
 		
 		if not Current then return end
-		local function update() --[[ Line: 39 ]]
+		local function update()
 			-- upvalues: Current (copy), UseBindingResult2 (upval), NewHoverPadding1 (upval)
 			UseBindingResult2((math.max(0, Current.AbsoluteSize.Y - NewHoverPadding1)))
 		end
@@ -26,7 +26,7 @@ return ReactModule.memo(function(p1) --[[ Line: 23 | Named "TileHoverShadow" ]]
 		UseBindingResult2((math.max(0, Current.AbsoluteSize.Y - NewHoverPadding1)))
 		local Connection = Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(update)
 		
-		return function() --[[ Line: 47 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end
@@ -35,11 +35,11 @@ return ReactModule.memo(function(p1) --[[ Line: 23 | Named "TileHoverShadow" ]]
 	return ReactModule.createElement(Image, {
 		Image = "component_assets/dropshadow_56_8",
 		ZIndex = -1,
-		Position = UseBindingResult:map(function(p2: number): UDim2 --[[ Line: 53 ]]
+		Position = UseBindingResult:map(function(p2: number): UDim2
 			return UDim2.new(0.5, 0, 0.5, p2 / 2 + 2)
 		end),
 		AnchorPoint = Vector2.new(0.5, 0.5),
-		Size = UseBindingResult:map(function(p2): UDim2 --[[ Line: 57 ]]
+		Size = UseBindingResult:map(function(p2): UDim2
 			-- upvalues: XOffset (copy), NewHoverPadding (copy)
 			return UDim2.new(1, XOffset, 1, NewHoverPadding + p2)
 		end),

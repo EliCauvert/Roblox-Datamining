@@ -31,13 +31,13 @@ return {
 				optional = true
 			}
 		},
-		paramCallback = function(p1) --[[ Line: 17 ]]
+		paramCallback = function(p1)
 			return { placeId = p1.id }
 		end
 	},
 	["/share"] = {
 		queryParams = List,
-		paramCallback = function(p1) --[[ Line: 23 ]]
+		paramCallback = function(p1)
 			-- upvalues: FFlagAppChatResolveShareLinkV2Module (copy)
 			return if FFlagAppChatResolveShareLinkV2Module then if p1.v == "v2" then { shareLink = { version = 2, linkId = p1.code } } elseif p1.type then {
 				shareLink = { version = 1, linkId = p1.code, linkType = p1.type }
@@ -46,7 +46,7 @@ return {
 	},
 	["/plus-referral"] = if FFlagAppChatPlusReferralAssetCardModule then {
 		queryParams = List,
-		paramCallback = function(p1) --[[ Line: 70 ]]
+		paramCallback = function(p1)
 			return if p1.code and p1.code ~= "" then {
 				shareLink = { linkType = "PlusReferral", version = 2, linkId = p1.code }
 			} else nil

@@ -16,12 +16,12 @@ local IconsCommonRobux = Images["icons/common/robux"]
 local IconsStatusImageunavailable = Images["icons/status/imageunavailable"]
 local ExtendResult = RoactModule.Component:extend(script.Name)
 
-function ExtendResult.init(p1) --[[ Line: 39 ]]
+function ExtendResult.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.contentRef = RoactModule.createRef()
 	p1.state = { contentSize = Vector2.new(0, 0) }
 	
-	function p1.changeContentSize(Frame: Frame) --[[ Line: 45 ]]
+	function p1.changeContentSize(Frame: Frame)
 		-- upvalues: p1 (copy)
 		if p1.state.contentSize ~= Frame.AbsoluteSize then
 			p1:setState({ contentSize = Frame.AbsoluteSize })
@@ -29,11 +29,11 @@ function ExtendResult.init(p1) --[[ Line: 39 ]]
 	end
 end
 
-function ExtendResult.render(p1) --[[ Line: 54 ]]
+function ExtendResult.render(p1)
 	-- upvalues: WithStyleFunction (copy), ConstantsModule (copy), IconSize (copy), GetEnableCondenseRobuxUpsellModule (copy), RoactModule (copy), ImageSetLabel (copy), IconsStatusImageunavailable (copy), ModelViewportModule (copy), FitFrameVertical (copy), FitTextLabel (copy), IconsCommonRobux (copy)
 	local Props = p1.props
 	
-	return WithStyleFunction(function(p2) --[[ Line: 57 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: Props (copy), ConstantsModule (upval), IconSize (upval), GetEnableCondenseRobuxUpsellModule (upval), RoactModule (upval), ImageSetLabel (upval), IconsStatusImageunavailable (upval), ModelViewportModule (upval), FitFrameVertical (upval), p1 (copy), FitTextLabel (upval), IconsCommonRobux (upval)
 		local Theme = p2.Theme
 		local _Font = p2.Font

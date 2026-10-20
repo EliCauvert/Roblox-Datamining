@@ -165,7 +165,7 @@ local config = {
 	[ConstantsModule.Context.InstantPlay] = if FFlagLuaAppContinueSortInstantPlay then StrictInterfaceResult else nil
 }
 
-local function _(p1) --[[ Line: 213 | Named "addMobileAdvertisingIdToEventParams" ]]
+local function _(p1)
 	-- upvalues: AppStorageService (copy)
 	local MobileAdvertisingIdItem = AppStorageService:GetItem("MobileAdvertisingId")
 	
@@ -174,7 +174,7 @@ local function _(p1) --[[ Line: 213 | Named "addMobileAdvertisingIdToEventParams
 	end
 end
 
-return function(p1, EventContext, JoinResult) --[[ Line: 220 ]]
+return function(p1, EventContext, JoinResult)
 	-- upvalues: config (copy), DiscoveryEventErrorLogger (copy), HttpService (copy), FFlagLuaAppGamePlayIntentEventMobileAdsId (copy), AppStorageService (copy), FFlagLuaAppMigrateGameEventsTelemetryService (copy), CryoModule (copy), TelemetryService (copy), Config (ref), GetPlatformTargetFunction (copy), FFlagLuaAppGameEventsTelemetryServiceShadowTraffic (copy), Config1 (ref)
 	if config[EventContext] == nil then
 		DiscoveryEventErrorLogger.reportError("GamePlayIntentMissingInterface", `Missing interface for eventContext {EventContext} to type check gamePlayIntent event parameters`, { eventContext = EventContext })

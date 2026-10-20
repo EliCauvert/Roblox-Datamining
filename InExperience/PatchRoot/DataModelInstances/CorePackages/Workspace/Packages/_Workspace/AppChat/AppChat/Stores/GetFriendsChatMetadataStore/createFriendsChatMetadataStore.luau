@@ -6,43 +6,43 @@ local _ = require(Parent.Signals)
 local LocalUserIdStore = require(Parent.LocalUserIdStore).LocalUserIdStore
 local NewResult = require(AppChat.Logger):new(script.Name)
 
-local function resolveLocalUserId(p1) --[[ Line: 24 ]]
+local function resolveLocalUserId(p1)
 	-- upvalues: LocalUserIdStore (copy)
 	return LocalUserIdStore.getCurrentUserId(p1)
 end
 
-return function() --[[ Line: 28 | Named "createFriendsChatMetadataStore" ]]
+return function()
 	-- upvalues: DataHydrationModule (copy), AppChatNetworkingModule (copy), NewResult (copy), resolveLocalUserId (copy), LocalUserIdStore (copy)
 	local DataCache = DataHydrationModule.createDataCache()
 	local DataResolver = DataHydrationModule.createDataResolver({
 		supportsMultiGet = false,
 		cache = DataCache,
-		fetchFn = function(_) --[[ Line: 33 ]]
+		fetchFn = function(_)
 			-- upvalues: AppChatNetworkingModule (upval)
-			return AppChatNetworkingModule.http.GetMetadata():andThen(function(Result) --[[ Line: 34 ]]
+			return AppChatNetworkingModule.http.GetMetadata():andThen(function(Result)
 				return Result.responseBody
 			end)
 		end,
-		logError = function(p1) --[[ Line: 38 ]]
+		logError = function(p1)
 			-- upvalues: NewResult (upval)
 			NewResult:warning(`Failed to fetch Friends Chat metadata: {tostring(p1)}`)
 		end
 	})
 	
 	return {
-		getFriendsChatMetadata = function(p1) --[[ Line: 43 ]]
+		getFriendsChatMetadata = function(p1)
 			-- upvalues: DataResolver (copy), resolveLocalUserId (upval)
 			return DataResolver.getAndFetchItem(resolveLocalUserId(p1))
 		end,
-		getCachedFriendsChatMetadata = function(p1) --[[ Line: 47 ]]
+		getCachedFriendsChatMetadata = function(p1)
 			-- upvalues: DataResolver (copy), resolveLocalUserId (upval)
 			return DataResolver.getCachedItem(resolveLocalUserId(p1))
 		end,
-		fetchFriendsChatMetadata = function() --[[ Line: 51 ]]
+		fetchFriendsChatMetadata = function()
 			-- upvalues: DataResolver (copy), resolveLocalUserId (upval)
 			return DataResolver.fetchItem(resolveLocalUserId(false))
 		end,
-		updateFriendsChatMetadata = function(p1) --[[ Line: 55 ]]
+		updateFriendsChatMetadata = function(p1)
 			-- upvalues: DataCache (copy), LocalUserIdStore (upval)
 			DataCache.replaceItem(LocalUserIdStore.getCurrentUserId(false), p1)
 		end,

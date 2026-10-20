@@ -43,17 +43,17 @@ local config = {
 	restingPositionLimit = 0.1
 }
 
-local function noop() --[[ Line: 67 ]] end
+local function noop() end
 
-local function _(p1) --[[ Line: 69 | Named "isPartyQuickStartEnabled" ]]
+local function _(p1)
 	return p1.isPartyQuickStartEnabled
 end
 
-local _ = function(p1): boolean --[[ Line: 73 | Named "getIsSquadEnabledForRows" ]]
+local _ = function(p1): boolean
 	return p1.canAccessParty == true
 end
 
-local function getConversationRowListItems(ItemList) --[[ Line: 77 ]]
+local function getConversationRowListItems(ItemList)
 	local t = {}
 	
 	for i, value in ItemList do
@@ -62,26 +62,26 @@ local function getConversationRowListItems(ItemList) --[[ Line: 77 ]]
 	return t
 end
 
-local _ = function(Entry) --[[ Line: 87 | Named "getFirstId" ]]
+local _ = function(Entry)
 	return if Entry and Entry[1] then Entry[1].id else nil
 end
 
-local _ = function(p1) --[[ Line: 91 | Named "getLastId" ]]
+local _ = function(p1)
 	return if p1 and p1[#p1] then p1[#p1].id else nil
 end
 
-local _ = function(Entry): string --[[ Line: 95 | Named "getAutoLoadNextRequestKey" ]]
+local _ = function(Entry): string
 	return `{#Entry}:{tostring(if Entry and Entry[1] then Entry[1].id else nil)}:{tostring(if Entry and Entry[#Entry] then Entry[#Entry].id else nil)}`
 end
 
-local function getKey(p1): string --[[ Line: 99 ]]
+local function getKey(p1): string
 	return (tostring(p1.id))
 end
 
-local function MeasuredChatLandingModal(p1) --[[ Line: 103 ]]
+local function MeasuredChatLandingModal(p1)
 	-- upvalues: ReactModule (copy), ChatLandingModalContainerModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 106 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), p1 (copy)
 		local Current = UseRefResult.current
 		
@@ -95,7 +95,7 @@ local function MeasuredChatLandingModal(p1) --[[ Line: 103 ]]
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		ref = UseRefResult,
-		[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 118 ]]
+		[ReactModule.Change.AbsoluteSize] = function(Frame)
 			-- upvalues: p1 (copy)
 			p1.onHeightChanged(p1.itemId, Frame.AbsoluteSize.Y)
 		end
@@ -104,7 +104,7 @@ local function MeasuredChatLandingModal(p1) --[[ Line: 103 ]]
 	})
 end
 
-return ReactModule.memo(function(Frame) --[[ Line: 126 | Named "ConversationListUltimate" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: noop (copy), ReactModule (copy), Signal (copy), FFlagFriendsChatConversationListShowScrollBar (copy), ReactOtterModule (copy), UseTokensFunction (copy), CryoModule (copy), AppChatPerfExperimentation (copy), PartyPageCarouselExperimentation (copy), SquadQuickStartExperimentation (copy), FFlagAppChatRemoveConversationListDividerIxpEnabledModule (copy), IXPService (copy), FStringAppChatRemoveConversationListDividerIxpLayerModule (copy), FocusNavigationService (copy), CoreGui (copy), FFlagAppChatPerfTrackingModule (copy), CreateScrollIntervalTrackerModule (copy), AppChatPerfTrackerModule (copy), AppPage (copy), Constants (copy), Enums (copy), getConversationRowListItems (copy), FFlagAppIaScrollAway (copy), AppChatChatLandingInitialFetchLimit (copy), AppChatChatLandingInitialFetchMinimumConversations (copy), NewResult (copy), AppChatConversationListScrollBarIdleHideMsRatio (copy), config (copy), AppChatPerfChatLandingPaginationOnEndReachedUnits (copy), MeasuredChatLandingModal (copy), ConversationGroupsEntryContainerModule (copy), PartyQuickStartContainerModule (copy), SocialCarouselModule (copy), View (copy), ConversationRowModule (copy), UltimateListModule (copy), getKey (copy), AppChatPerfChatLandingPaginationOnStartReachedUnits (copy)
 	local EntryHeight = Frame.entryHeight or 64
 	local ItemList = Frame.itemList or {}
@@ -118,7 +118,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 126 | Named "ConversationList
 	local FireConversationClickedEvent = Frame.fireConversationClickedEvent or noop
 	local IsShowHeaderEntries = Frame.showHeaderEntries ~= false
 	local RowProps = Frame.rowProps or {}
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 139 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Signal (upval)
 		return Signal.new()
 	end, {})
@@ -134,7 +134,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 126 | Named "ConversationList
 	end
 	local UseRefResult3 = ReactModule.useRef(nil)
 	local UseRefResult4 = ReactModule.useRef(0)
-	local UseMemoResult1 = ReactModule.useMemo(function(): string --[[ Line: 153 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function(): string
 		-- upvalues: ItemList (copy)
 		return `{#ItemList}:{tostring(if ItemList and ItemList[1] then ItemList[1].id else nil)}:{tostring(if ItemList and ItemList[#ItemList] then ItemList[#ItemList].id else nil)}`
 	end, { ItemList })
@@ -144,10 +144,10 @@ return ReactModule.memo(function(Frame) --[[ Line: 126 | Named "ConversationList
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState({})
-	local UseResult = ReactModule.useCallback(function(p1, p2: number) --[[ Line: 162 ]]
+	local UseResult = ReactModule.useCallback(function(p1, p2: number)
 		-- upvalues: UseStateResult2_2 (copy), CryoModule (upval)
 		if p2 >= 0 then
-			UseStateResult2_2(function(p3) --[[ Line: 167 ]]
+			UseStateResult2_2(function(p3)
 				-- upvalues: p1 (copy), p2 (copy), CryoModule (upval)
 				return if p3[p1] == p2 then p3 else CryoModule.Dictionary.join(p3, { [p1] = p2 })
 			end)
@@ -156,14 +156,14 @@ return ReactModule.memo(function(Frame) --[[ Line: 126 | Named "ConversationList
 		end
 	end, {})
 	local NoOldestConversationIsFetched: boolean = Frame.loadNext ~= nil and (not Frame.isLoadingNext and not Frame.oldestConversationIsFetched)
-	ReactModule.useEffect(function() --[[ Line: 178 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult6 (copy), Frame (copy), UseRefResult5 (copy)
 		if UseRefResult6.current and not Frame.isLoadingNext then
 			UseRefResult5.current = nil
 		end
 		UseRefResult6.current = Frame.isLoadingNext == true
 	end, { Frame.isLoadingNext })
-	local UseResult1 = ReactModule.useCallback(function(): boolean --[[ Line: 186 ]]
+	local UseResult1 = ReactModule.useCallback(function(): boolean
 		-- upvalues: NoOldestConversationIsFetched (copy), UseRefResult5 (copy), UseMemoResult1 (copy), Frame (copy)
 		if NoOldestConversationIsFetched and UseRefResult5.current ~= UseMemoResult1 then
 			UseRefResult5.current = UseMemoResult1
@@ -178,7 +178,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 126 | Named "ConversationList
 		UseMemoResult1,
 		Frame.loadNext
 	})
-	ReactModule.useEffect(function() --[[ Line: 198 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: AppChatPerfExperimentation (upval), Frame (copy), PartyPageCarouselExperimentation (upval), SquadQuickStartExperimentation (upval), FFlagAppChatRemoveConversationListDividerIxpEnabledModule (upval), IXPService (upval), FStringAppChatRemoveConversationListDividerIxpLayerModule (upval)
 		AppChatPerfExperimentation.logExposure()
 		
@@ -191,17 +191,17 @@ return ReactModule.memo(function(Frame) --[[ Line: 126 | Named "ConversationList
 			end
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 210 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FocusNavigationService (upval), CoreGui (upval)
 		local NewFocusNavigationService = FocusNavigationService.new(CoreGui)
 		
-		return function() --[[ Line: 212 ]]
+		return function()
 			-- upvalues: NewFocusNavigationService (copy)
 			NewFocusNavigationService:teardown()
 		end
 	end, {})
 	local IsCanAccessParty = Frame.canAccessParty == true
-	ReactModule.useEffect(function() --[[ Line: 219 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult1 (copy), FFlagAppChatPerfTrackingModule (upval), UseRefResult (copy), CreateScrollIntervalTrackerModule (upval), AppChatPerfTrackerModule (upval)
 		if UseStateResult1 == nil then
 			return nil
@@ -211,7 +211,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 126 | Named "ConversationList
 		if FFlagAppChatPerfTrackingModule then
 			UseRefResult.current = CreateScrollIntervalTrackerModule(AppChatPerfTrackerModule.Events.ScrollConversationList, UseStateResult1)
 			
-			return function() --[[ Line: 230 ]]
+			return function()
 				-- upvalues: UseRefResult (upval)
 				if UseRefResult.current then
 					UseRefResult.current.cleanup()
@@ -223,7 +223,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 126 | Named "ConversationList
 		end
 	end, { UseStateResult1 })
 	local IsPartyQuickStartEnabled = Frame.isPartyQuickStartEnabled
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 242 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: AppPage (upval), Frame (copy), Constants (upval), UseMemoResult (copy)
 		return {
 			sortId = 0,
@@ -233,11 +233,11 @@ return ReactModule.memo(function(Frame) --[[ Line: 126 | Named "ConversationList
 			scrollViewPositionChangedSignal = UseMemoResult
 		}
 	end, { Frame.isInExperience, UseMemoResult })
-	local UseResult2 = ReactModule.useCallback(function(p1) --[[ Line: 254 ]]
+	local UseResult2 = ReactModule.useCallback(function(p1)
 		-- upvalues: NavigateToConversationFromUserId (copy)
 		NavigateToConversationFromUserId(p1.id)
 	end, { NavigateToConversationFromUserId })
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 258 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: Enums (upval), NavigateToQuickStartSquadInviteFriends (copy), UseResult2 (copy)
 		return {
 			{
@@ -250,7 +250,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 126 | Named "ConversationList
 			}
 		}
 	end, { NavigateToQuickStartSquadInviteFriends, UseResult2 })
-	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 272 ]]
+	local UseMemoResult4 = ReactModule.useMemo(function()
 		-- upvalues: getConversationRowListItems (upval), ItemList (copy), Frame (copy), IsShowHeaderEntries (copy), CryoModule (upval), PartyPageCarouselExperimentation (upval), IsPartyQuickStartEnabled (copy), FFlagAppIaScrollAway (upval)
 		local ConversationRowListItems = getConversationRowListItems(ItemList)
 		local IsFilterTextMatch: boolean = Frame.filterText == "" or Frame.filterText == nil
@@ -292,7 +292,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 126 | Named "ConversationList
 		Frame.isInExperience, Frame.canvasTopPadding, IsShowHeaderEntries,
 		IsPartyQuickStartEnabled
 	})
-	local UseMemoResult5 = ReactModule.useMemo(function() --[[ Line: 345 ]]
+	local UseMemoResult5 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult4 (copy), UseStateResult3 (copy), FFlagAppIaScrollAway (upval), EntryHeight (copy), CryoModule (upval)
 		local Items = {}
 		local ContentHeight = 0
@@ -304,7 +304,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 126 | Named "ConversationList
 		end
 		return { items = Items, contentHeight = ContentHeight }
 	end, { UseMemoResult4, EntryHeight, UseStateResult3 })
-	ReactModule.useEffect(function() --[[ Line: 368 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: NoOldestConversationIsFetched (copy), UseRefResult4 (copy), AppChatChatLandingInitialFetchLimit (upval), ItemList (copy), AppChatChatLandingInitialFetchMinimumConversations (upval), UseResult1 (copy), NewResult (upval)
 		if NoOldestConversationIsFetched and UseRefResult4.current < AppChatChatLandingInitialFetchLimit and #ItemList < AppChatChatLandingInitialFetchMinimumConversations then
 			local NewCurrent = UseRefResult4.current + 1
@@ -315,7 +315,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 126 | Named "ConversationList
 			end
 		end
 	end, { ItemList, NoOldestConversationIsFetched, UseResult1 })
-	ReactModule.useEffect(function() --[[ Line: 388 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: NoOldestConversationIsFetched (copy), UseMemoResult5 (copy), UseStateResult (copy), UseResult1 (copy), NewResult (upval)
 		if NoOldestConversationIsFetched and UseMemoResult5.contentHeight > 0 and UseStateResult.Y > 0 and UseMemoResult5.contentHeight <= UseStateResult.Y and UseResult1() then
 			NewResult:info("Not enough UltimateList content to fill the view, loading more conversations")
@@ -326,42 +326,42 @@ return ReactModule.memo(function(Frame) --[[ Line: 126 | Named "ConversationList
 		NoOldestConversationIsFetched,
 		UseResult1
 	})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 396 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseResult1 (copy), NewResult (upval)
 		if UseResult1() then
 			NewResult:debug("UltimateList onEndReached - Loading more conversations")
 		end
 	end, { UseResult1 })
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 402 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: Frame (copy), NewResult (upval)
 		if Frame.loadPrevious and not Frame.isLoadingPrevious then
 			NewResult:debug("UltimateList onStartReached - Loading previous conversations")
 			Frame.loadPrevious()
 		end
 	end, { Frame.loadPrevious, Frame.isLoadingPrevious })
-	local UseResult5 = ReactModule.useCallback(function(p1) --[[ Line: 409 ]]
+	local UseResult5 = ReactModule.useCallback(function(p1)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(p1)
 	end, {})
 	local Callback1 = nil
 	
 	if FFlagFriendsChatConversationListShowScrollBar then
-		Callback1 = ReactModule.useCallback(function() --[[ Line: 415 ]]
+		Callback1 = ReactModule.useCallback(function()
 			-- upvalues: UseRefResult2 (ref), Callback (ref), ReactOtterModule (upval), AppChatConversationListScrollBarIdleHideMsRatio (upval), config (upval)
 			if UseRefResult2.current ~= nil then
 				pcall(task.cancel, UseRefResult2.current)
 				UseRefResult2.current = nil
 			end
 			Callback(ReactOtterModule.instant(0))
-			UseRefResult2.current = task.delay(AppChatConversationListScrollBarIdleHideMsRatio, function() --[[ Line: 423 ]]
+			UseRefResult2.current = task.delay(AppChatConversationListScrollBarIdleHideMsRatio, function()
 				-- upvalues: UseRefResult2 (upval), Callback (upval), ReactOtterModule (upval), config (upval)
 				UseRefResult2.current = nil
 				Callback(ReactOtterModule.spring(1, config))
 			end)
 		end, { Callback })
-		ReactModule.useEffect(function() --[[ Line: 429 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRefResult2 (ref)
-			return function() --[[ Line: 430 ]]
+			return function()
 				-- upvalues: UseRefResult2 (upval)
 				if UseRefResult2.current ~= nil then
 					pcall(task.cancel, UseRefResult2.current)
@@ -370,7 +370,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 126 | Named "ConversationList
 			end
 		end, {})
 	end
-	local UseResult6 = ReactModule.useCallback(function(Y) --[[ Line: 439 ]]
+	local UseResult6 = ReactModule.useCallback(function(Y)
 		-- upvalues: FFlagAppChatPerfTrackingModule (upval), UseRefResult (copy), FFlagFriendsChatConversationListShowScrollBar (upval), Frame (copy), Callback1 (ref), UseMemoResult (copy), EntryHeight (copy), AppChatPerfChatLandingPaginationOnEndReachedUnits (upval), UseMemoResult5 (copy), UseStateResult (copy), UseResult1 (copy), OnScrollUpdate (copy)
 		if FFlagAppChatPerfTrackingModule and UseRefResult.current then
 			UseRefResult.current.onScrollTick()
@@ -390,13 +390,13 @@ return ReactModule.memo(function(Frame) --[[ Line: 126 | Named "ConversationList
 		if FFlagFriendsChatConversationListShowScrollBar then Frame.showScrollbarOnScroll else nil,
 		if FFlagFriendsChatConversationListShowScrollBar then Callback1 else nil
 	})
-	local UseResult7 = ReactModule.useCallback(function(Current) --[[ Line: 471 ]]
+	local UseResult7 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult1 (copy), UseStateResult2_1 (copy)
 		UseRefResult1.current = Current
 		UseStateResult2_1(Current)
 	end, {})
 	local Id = if ItemList and ItemList[1] then ItemList[1].id else nil
-	ReactModule.useEffect(function() --[[ Line: 477 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), Id (copy), UseRefResult3 (copy)
 		local Current = UseRefResult1.current
 		
@@ -405,7 +405,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 126 | Named "ConversationList
 		end
 		UseRefResult3.current = Id
 	end, { Id })
-	local UseResult8 = ReactModule.useCallback(function(p1) --[[ Line: 493 ]]
+	local UseResult8 = ReactModule.useCallback(function(p1)
 		-- upvalues: ReactModule (upval), MeasuredChatLandingModal (upval), UseResult (copy), ConversationGroupsEntryContainerModule (upval), EntryHeight (copy), IsPartyQuickStartEnabled (copy), PartyQuickStartContainerModule (upval), PartyPageCarouselExperimentation (upval), SocialCarouselModule (upval), UseMemoResult3 (copy), Frame (copy), Constants (upval), UseMemoResult2 (copy), FFlagAppIaScrollAway (upval), View (upval), UseTokensResult (copy), ConversationRowModule (upval), IsCanAccessParty (copy), NavigateToSquadLobby (copy), FireConversationImpressionEvent (copy), FireConversationClickedEvent (copy), RowProps (copy)
 		return if p1.isChatLandingModal then ReactModule.createElement(MeasuredChatLandingModal, { itemId = p1.id, onHeightChanged = UseResult }) elseif p1.isGroupLink then ReactModule.createElement(ConversationGroupsEntryContainerModule, { entryHeight = EntryHeight }) elseif IsPartyQuickStartEnabled and p1.isQuickStartLink then ReactModule.createElement(PartyQuickStartContainerModule, { entryHeight = EntryHeight }) elseif PartyPageCarouselExperimentation.getPartyPageCarouselEnabled() and p1.isSocialCarousel then ReactModule.createElement(SocialCarouselModule.Entry, {
 			roduxKey = "ChatAppReducer",
@@ -453,7 +453,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 126 | Named "ConversationList
 		scroller = ReactModule.createElement(UltimateListModule.Components.ScrollingFrame, {
 			direction = "y",
 			dataSource = UltimateListModule.DataSources.array(if UseStateResult.X > 0 or UseStateResult.Y > 0 then UseMemoResult5.items else {}),
-			dimensions = UltimateListModule.Dimensions.getter(function(p1) --[[ Line: 604 ]]
+			dimensions = UltimateListModule.Dimensions.getter(function(p1)
 				return {
 					size = UDim2.new(1, 0, 0, p1.height),
 					position = UDim2.fromOffset(0, p1.yOffset)

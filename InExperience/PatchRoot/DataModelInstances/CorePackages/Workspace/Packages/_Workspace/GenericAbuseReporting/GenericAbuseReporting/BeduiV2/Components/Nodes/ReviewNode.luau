@@ -15,7 +15,7 @@ local _ = require(GenericAbuseReporting.BeduiV2.Utils.Translate.translate)
 local UseArTranslationFunction = require(GenericAbuseReporting.BeduiV2.Utils.Translate.arTranslation).useArTranslation
 local UseLayoutSlotsFunction = require(GenericAbuseReporting.BeduiV2.Components.LayoutSlots).useLayoutSlots
 
-return ReactModule.memo(function(p1) --[[ Line: 44 | Named "ReviewNode" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseArTranslationFunction (copy), UseLayoutSlotsFunction (copy), ReactModule (copy), View (copy), EyebrowModule (copy), PreviewBoxModule (copy), DashModule (copy), TextWithTranslationModule (copy), FooterModule (copy), Button (copy), ButtonVariant (copy), FoundationModule (copy)
 	local TranslateIntoStringFunction = UseArTranslationFunction().translateIntoString
 	local UseLayoutSlotsResult = UseLayoutSlotsFunction()
@@ -37,7 +37,7 @@ return ReactModule.memo(function(p1) --[[ Line: 44 | Named "ReviewNode" ]]
 			DetailsContainer = ReactModule.createElement(View, {
 				tag = "col gap-medium size-full-0 auto-y",
 				LayoutOrder = 3
-			}, DashModule.map(p1.details, function(p2) --[[ Line: 78 ]]
+			}, DashModule.map(p1.details, function(p2)
 				-- upvalues: ReactModule (upval), View (upval), TextWithTranslationModule (upval)
 				return ReactModule.createElement(View, { tag = "col gap-xsmall size-full-0 auto-y" }, {
 					Heading = ReactModule.createElement(TextWithTranslationModule, {

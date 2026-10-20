@@ -10,24 +10,24 @@ local FFlagBuildExperienceCreatorCreditUsageBadgeModule = require(BuildExperienc
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local IconName = require(Parent.Foundation).Enums.IconName
 
-local function _(Value: number) --[[ Line: 34 | Named "formatNumber" ]]
+local function _(Value: number)
 	-- upvalues: NumberLocalization (copy), LocalizationService (copy)
 	return NumberLocalization.localize(string.format("%.0f", (math.floor(Value))), LocalizationService.RobloxLocaleId)
 end
 
 return {
 	ITEM_ID = "creator-credit-ai-usage",
-	useCreatorCreditMenuItem = function(p1) --[[ Line: 42 ]]
+	useCreatorCreditMenuItem = function(p1)
 		-- upvalues: ReactModule (copy), GetCreatorCreditStoreFunction (copy), SignalsReactModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperienceCreatorCreditUsageBadgeModule (copy), NumberLocalization (copy), LocalizationService (copy), IconName (copy)
 		local OnOpenCreatorCreditPage = if p1 == nil then nil else p1.onOpenCreatorCreditPage
-		local UseResult = ReactModule.useCallback(function() --[[ Line: 45 ]]
+		local UseResult = ReactModule.useCallback(function()
 			-- upvalues: OnOpenCreatorCreditPage (copy)
 			if OnOpenCreatorCreditPage then
 				OnOpenCreatorCreditPage()
 			end
 		end, { OnOpenCreatorCreditPage })
 		local CreatorCreditStore = GetCreatorCreditStoreFunction(false)
-		local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function() --[[ Line: 56 ]]
+		local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function()
 			-- upvalues: CreatorCreditStore (copy)
 			return CreatorCreditStore.getQuotaSummary()
 		end, { CreatorCreditStore }).data)
@@ -48,7 +48,7 @@ return {
 		local MenuItem = UseLocalizationResult.menuItem
 		
 		return {
-			item = ReactModule.useMemo(function() --[[ Line: 84 ]]
+			item = ReactModule.useMemo(function()
 				-- upvalues: UseSignalStateResult (copy), FFlagBuildExperienceCreatorCreditUsageBadgeModule (upval), IconName (upval), UseLocalizationResult (copy), MenuItem (copy)
 				local Trailing = nil
 				

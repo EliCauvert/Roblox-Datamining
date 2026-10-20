@@ -4,14 +4,14 @@ local LoggerModule = require(script.Parent.Logger)
 local EditChatGroupNameDialogScreen = RoactModule.PureComponent:extend("EditChatGroupNameDialogScreen")
 EditChatGroupNameDialogScreen.defaultProps = { navigation = nil }
 
-function EditChatGroupNameDialogScreen.init(p1) --[[ Line: 14 ]]
-	function p1.onEditChatGroupNameDialogClose() --[[ Line: 15 ]]
+function EditChatGroupNameDialogScreen.init(p1)
+	function p1.onEditChatGroupNameDialogClose()
 		-- upvalues: p1 (copy)
 		p1.props.navigation.goBack()
 	end
 end
 
-function EditChatGroupNameDialogScreen.render(p1) --[[ Line: 20 ]]
+function EditChatGroupNameDialogScreen.render(p1)
 	-- upvalues: LoggerModule (copy), RoactModule (copy), EditChatGroupNameDialogContainerModule (copy)
 	local Navigation = p1.props.navigation
 	assert(type(Navigation) ~= "nil", "EditChatGroupNameDialogScreen should be wrapped with Roact Navigation")
@@ -29,7 +29,7 @@ function EditChatGroupNameDialogScreen.render(p1) --[[ Line: 20 ]]
 	end
 end
 
-function EditChatGroupNameDialogScreen:didMount() --[[ Line: 36 ]]
+function EditChatGroupNameDialogScreen:didMount()
 	-- upvalues: LoggerModule (copy)
 	LoggerModule:info("{screen} mounted")
 end

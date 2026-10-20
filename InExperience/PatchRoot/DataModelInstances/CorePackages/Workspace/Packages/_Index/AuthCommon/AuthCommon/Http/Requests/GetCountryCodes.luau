@@ -4,7 +4,7 @@ local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
 	base = require(Parent.Http).Url.APIS_URL
 })
 
-return function(Callback) --[[ Line: 23 ]]
+return function(Callback)
 	-- upvalues: NewResult (copy)
 	return Callback(NewResult(), "GET")
 end

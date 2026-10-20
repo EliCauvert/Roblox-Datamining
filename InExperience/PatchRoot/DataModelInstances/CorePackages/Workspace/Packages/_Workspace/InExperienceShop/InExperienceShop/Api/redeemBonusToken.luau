@@ -8,19 +8,19 @@ local ShopDebugLoggerModule = require(InExperienceShop.Internal.ShopDebugLogger)
 local FIntRedeemBonusTokenTimeoutMsModule = require(InExperienceShop.Flags.FIntRedeemBonusTokenTimeoutMs)
 local Text = require(Parent.Http).Url.APIS_URL .. "payments-bonus-service/v1/redeem-bonus-token"
 
-local function _(p1): number --[[ Line: 18 | Named "httpStatusCodeFromError" ]]
+local function _(p1): number
 	return (tonumber(string.match(tostring(p1), "HTTP (%d%d%d)")))
 end
 
-return function(BonusJwt, UniverseId) --[[ Line: 22 | Named "redeemBonusToken" ]]
+return function(BonusJwt, UniverseId)
 	-- upvalues: PromiseModule (copy), FIntRedeemBonusTokenTimeoutMsModule (copy), ShopDebugLoggerModule (copy), ErrorsModule (copy), HttpRbxApiService (copy), Text (copy), HttpService (copy)
-	return PromiseModule.new(function(Callback1, Callback) --[[ Line: 23 ]]
+	return PromiseModule.new(function(Callback1, Callback)
 		-- upvalues: FIntRedeemBonusTokenTimeoutMsModule (upval), ShopDebugLoggerModule (upval), ErrorsModule (upval), BonusJwt (copy), UniverseId (copy), HttpRbxApiService (upval), Text (upval), HttpService (upval)
-		task.spawn(function() --[[ Line: 24 ]]
+		task.spawn(function()
 			-- upvalues: Callback1 (copy), Callback (copy), FIntRedeemBonusTokenTimeoutMsModule (upval), ShopDebugLoggerModule (upval), ErrorsModule (upval), BonusJwt (upval), UniverseId (upval), HttpRbxApiService (upval), Text (upval), HttpService (upval)
 			local Flag = false
 			
-			local function _(p1) --[[ Line: 26 | Named "settleResolve" ]]
+			local function _(p1)
 				-- upvalues: Flag (ref), Callback1 (upval)
 				if not Flag then
 					Flag = true
@@ -30,7 +30,7 @@ return function(BonusJwt, UniverseId) --[[ Line: 22 | Named "redeemBonusToken" ]
 				end
 			end
 			
-			local _ = function(p1) --[[ Line: 33 | Named "settleReject" ]]
+			local _ = function(p1)
 				-- upvalues: Flag (ref), Callback (upval)
 				if not Flag then
 					Flag = true
@@ -41,10 +41,10 @@ return function(BonusJwt, UniverseId) --[[ Line: 22 | Named "redeemBonusToken" ]
 			end
 			
 			if FIntRedeemBonusTokenTimeoutMsModule > 0 then
-				task.delay(FIntRedeemBonusTokenTimeoutMsModule / 1000, function() --[[ Line: 42 ]]
+				task.delay(FIntRedeemBonusTokenTimeoutMsModule / 1000, function()
 					-- upvalues: Flag (ref), ShopDebugLoggerModule (upval), FIntRedeemBonusTokenTimeoutMsModule (upval), ErrorsModule (upval), Callback (upval)
 					if Flag then return end
-					ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 46 ]]
+					ShopDebugLoggerModule.logLazy(function(): string
 						-- upvalues: FIntRedeemBonusTokenTimeoutMsModule (upval)
 						return "redeemBonusToken: timed out after " .. FIntRedeemBonusTokenTimeoutMsModule .. "ms"
 					end)
@@ -59,19 +59,19 @@ return function(BonusJwt, UniverseId) --[[ Line: 22 | Named "redeemBonusToken" ]
 				end)
 			end
 			local config = { bonusJwt = BonusJwt, universeId = UniverseId }
-			ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 60 ]]
+			ShopDebugLoggerModule.logLazy(function(): string
 				-- upvalues: UniverseId (upval)
 				return "redeemBonusToken: POST universeId=" .. UniverseId
 			end)
 			local StartTimerResult = ShopDebugLoggerModule.startTimer()
-			local Success, Result = pcall(function() --[[ Line: 65 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: HttpRbxApiService (upval), Text (upval), HttpService (upval), config (copy)
 				return HttpRbxApiService:PostAsyncFullUrl(Text, HttpService:JSONEncode(config))
 			end)
 			
 			if Success then
 				ShopDebugLoggerModule.logElapsed("redeemBonusToken: HTTP response received", StartTimerResult)
-				local Success1, Result1 = pcall(function() --[[ Line: 83 ]]
+				local Success1, Result1 = pcall(function()
 					-- upvalues: HttpService (upval), Result (copy)
 					return HttpService:JSONDecode(Result)
 				end)
@@ -98,7 +98,7 @@ return function(BonusJwt, UniverseId) --[[ Line: 22 | Named "redeemBonusToken" ]
 						return
 					end
 				else
-					ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 87 ]]
+					ShopDebugLoggerModule.logLazy(function(): string
 						-- upvalues: Result1 (copy)
 						return "redeemBonusToken: JSON parse error=" .. tostring(Result1)
 					end)
@@ -112,7 +112,7 @@ return function(BonusJwt, UniverseId) --[[ Line: 22 | Named "redeemBonusToken" ]
 				end
 			else
 				ShopDebugLoggerModule.logElapsed("redeemBonusToken: HTTP error", StartTimerResult)
-				ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 70 ]]
+				ShopDebugLoggerModule.logLazy(function(): string
 					-- upvalues: Result (copy)
 					return "redeemBonusToken: HTTP error detail=" .. tostring(Result)
 				end)

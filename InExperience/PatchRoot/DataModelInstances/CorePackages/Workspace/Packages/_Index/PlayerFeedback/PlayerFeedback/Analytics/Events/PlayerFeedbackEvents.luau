@@ -8,9 +8,9 @@ local OptionalResult = TModule.optional(TModule.strictInterface({
 	value = TModule.optional(TModule.string)
 }))
 
-local function _(p1) --[[ Line: 12 | Named "gamePlayerFeedbackEvent" ]]
+local function _(p1)
 	-- upvalues: OptionalResult (copy), MutedErrorFunction (copy), CryoModule (copy), ConstantsModule (copy)
-	return function(p2, PlaceId, p3) --[[ Line: 13 ]]
+	return function(p2, PlaceId, p3)
 		-- upvalues: OptionalResult (upval), MutedErrorFunction (upval), CryoModule (upval), ConstantsModule (upval), p1 (copy)
 		local OptionalResultResult, OptionalResultResult2 = OptionalResult(p3)
 		
@@ -28,7 +28,7 @@ end
 
 local ClickPlayerFeedbackPromptCta = ConstantsModule.EventNames.ClickPlayerFeedbackPromptCta
 
-local function ClickPlayerFeedbackPromptCta1(p1, PlaceId, p2) --[[ Line: 13 ]]
+local function ClickPlayerFeedbackPromptCta1(p1, PlaceId, p2)
 	-- upvalues: OptionalResult (copy), MutedErrorFunction (copy), CryoModule (copy), ConstantsModule (copy), ClickPlayerFeedbackPromptCta (copy)
 	local OptionalResultResult, OptionalResultResult2 = OptionalResult(p2)
 	
@@ -45,7 +45,7 @@ end
 
 local PlayerFeedbackPromptMounted = ConstantsModule.EventNames.PlayerFeedbackPromptMounted
 
-local function PlayerFeedbackPromptMounted1(p1, PlaceId, p2) --[[ Line: 13 ]]
+local function PlayerFeedbackPromptMounted1(p1, PlaceId, p2)
 	-- upvalues: OptionalResult (copy), MutedErrorFunction (copy), CryoModule (copy), ConstantsModule (copy), PlayerFeedbackPromptMounted (copy)
 	local OptionalResultResult, OptionalResultResult2 = OptionalResult(p2)
 	
@@ -62,7 +62,7 @@ end
 
 local DismissPlayerFeedbackPrompt = ConstantsModule.EventNames.DismissPlayerFeedbackPrompt
 
-local function DismissPlayerFeedbackPrompt1(p1, PlaceId, p2) --[[ Line: 13 ]]
+local function DismissPlayerFeedbackPrompt1(p1, PlaceId, p2)
 	-- upvalues: OptionalResult (copy), MutedErrorFunction (copy), CryoModule (copy), ConstantsModule (copy), DismissPlayerFeedbackPrompt (copy)
 	local OptionalResultResult, OptionalResultResult2 = OptionalResult(p2)
 	
@@ -79,7 +79,7 @@ end
 
 local PlayerFeedbackFormModalMounted = ConstantsModule.EventNames.PlayerFeedbackFormModalMounted
 
-local function PlayerFeedbackFormModalMounted1(p1, PlaceId, p2) --[[ Line: 13 ]]
+local function PlayerFeedbackFormModalMounted1(p1, PlaceId, p2)
 	-- upvalues: OptionalResult (copy), MutedErrorFunction (copy), CryoModule (copy), ConstantsModule (copy), PlayerFeedbackFormModalMounted (copy)
 	local OptionalResultResult, OptionalResultResult2 = OptionalResult(p2)
 	
@@ -96,7 +96,7 @@ end
 
 local DismissPlayerFeedbackFormModal = ConstantsModule.EventNames.DismissPlayerFeedbackFormModal
 
-local function DismissPlayerFeedbackFormModal1(p1, PlaceId, p2) --[[ Line: 13 ]]
+local function DismissPlayerFeedbackFormModal1(p1, PlaceId, p2)
 	-- upvalues: OptionalResult (copy), MutedErrorFunction (copy), CryoModule (copy), ConstantsModule (copy), DismissPlayerFeedbackFormModal (copy)
 	local OptionalResultResult, OptionalResultResult2 = OptionalResult(p2)
 	
@@ -113,7 +113,7 @@ end
 
 local ClickPlayerFeedbackFormModalDisclaimer = ConstantsModule.EventNames.ClickPlayerFeedbackFormModalDisclaimer
 
-local function ClickPlayerFeedbackFormModalDisclaimer1(p1, PlaceId, p2) --[[ Line: 13 ]]
+local function ClickPlayerFeedbackFormModalDisclaimer1(p1, PlaceId, p2)
 	-- upvalues: OptionalResult (copy), MutedErrorFunction (copy), CryoModule (copy), ConstantsModule (copy), ClickPlayerFeedbackFormModalDisclaimer (copy)
 	local OptionalResultResult, OptionalResultResult2 = OptionalResult(p2)
 	
@@ -130,7 +130,7 @@ end
 
 local ClickPlayerFeedbackFormAbuseReportPrompt = ConstantsModule.EventNames.ClickPlayerFeedbackFormAbuseReportPrompt
 
-local function ClickPlayerFeedbackFormAbuseReportPrompt1(p1, PlaceId, p2) --[[ Line: 13 ]]
+local function ClickPlayerFeedbackFormAbuseReportPrompt1(p1, PlaceId, p2)
 	-- upvalues: OptionalResult (copy), MutedErrorFunction (copy), CryoModule (copy), ConstantsModule (copy), ClickPlayerFeedbackFormAbuseReportPrompt (copy)
 	local OptionalResultResult, OptionalResultResult2 = OptionalResult(p2)
 	
@@ -147,7 +147,7 @@ end
 
 local TogglePlayerFeedbackFormModalReason = ConstantsModule.EventNames.TogglePlayerFeedbackFormModalReason
 
-local function TogglePlayerFeedbackFormModalReason1(p1, PlaceId, p2) --[[ Line: 13 ]]
+local function TogglePlayerFeedbackFormModalReason1(p1, PlaceId, p2)
 	-- upvalues: OptionalResult (copy), MutedErrorFunction (copy), CryoModule (copy), ConstantsModule (copy), TogglePlayerFeedbackFormModalReason (copy)
 	local OptionalResultResult, OptionalResultResult2 = OptionalResult(p2)
 	
@@ -164,7 +164,7 @@ end
 
 local FocusPlayerFeedbackFormModalComment = ConstantsModule.EventNames.FocusPlayerFeedbackFormModalComment
 
-local function FocusPlayerFeedbackFormModalComment1(p1, PlaceId, p2) --[[ Line: 13 ]]
+local function FocusPlayerFeedbackFormModalComment1(p1, PlaceId, p2)
 	-- upvalues: OptionalResult (copy), MutedErrorFunction (copy), CryoModule (copy), ConstantsModule (copy), FocusPlayerFeedbackFormModalComment (copy)
 	local OptionalResultResult, OptionalResultResult2 = OptionalResult(p2)
 	
@@ -181,7 +181,7 @@ end
 
 local ClickPlayerFeedbackFormModalSubmit = ConstantsModule.EventNames.ClickPlayerFeedbackFormModalSubmit
 
-local function ClickPlayerFeedbackFormModalSubmit1(p1, PlaceId, p2) --[[ Line: 13 ]]
+local function ClickPlayerFeedbackFormModalSubmit1(p1, PlaceId, p2)
 	-- upvalues: OptionalResult (copy), MutedErrorFunction (copy), CryoModule (copy), ConstantsModule (copy), ClickPlayerFeedbackFormModalSubmit (copy)
 	local OptionalResultResult, OptionalResultResult2 = OptionalResult(p2)
 	
@@ -209,7 +209,7 @@ return {
 	TogglePlayerFeedbackFormModalReason = TogglePlayerFeedbackFormModalReason1,
 	FocusPlayerFeedbackFormModalComment = FocusPlayerFeedbackFormModalComment1,
 	ClickPlayerFeedbackFormModalSubmit = ClickPlayerFeedbackFormModalSubmit1,
-	SubmitPlayerFeedbackFailCommentValidation = function(p1, PlaceId, p2) --[[ Line: 13 ]]
+	SubmitPlayerFeedbackFailCommentValidation = function(p1, PlaceId, p2)
 		-- upvalues: OptionalResult (copy), MutedErrorFunction (copy), CryoModule (copy), ConstantsModule (copy), SubmitPlayerFeedbackFailCommentValidation (copy)
 		local OptionalResultResult, OptionalResultResult2 = OptionalResult(p2)
 		

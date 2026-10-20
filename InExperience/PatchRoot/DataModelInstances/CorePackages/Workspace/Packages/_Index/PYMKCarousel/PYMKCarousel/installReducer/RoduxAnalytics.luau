@@ -7,7 +7,7 @@ local ConvertActionsFunction = DependenciesModule.convertActions
 local RoduxAnalytics = DependenciesModule.RoduxAnalytics
 local InstallReducerResult = RoduxAnalytics.installReducer()
 
-local function v7(p1, _) --[[ Line: 12 ]]
+local function v7(p1, _)
 	-- upvalues: RoduxAnalytics (copy), RECOMMENDATIONSESSIONIDKEY (copy)
 	local RecommendationRequestId = nil
 	
@@ -21,20 +21,20 @@ local function v7(p1, _) --[[ Line: 12 ]]
 	})
 end
 
-local function _(p1) --[[ Line: 34 ]]
+local function _(p1)
 	-- upvalues: TransformOmniRecommendationsToActionsModule (copy), v7 (copy)
 	return {
-		AddOmniRecommendations = function(p2) --[[ Line: 36 ]]
+		AddOmniRecommendations = function(p2)
 			-- upvalues: TransformOmniRecommendationsToActionsModule (upval), p1 (copy), v7 (upval)
 			return TransformOmniRecommendationsToActionsModule(p2.recommendations or {}, p1, nil, v7)
 		end
 	}
 end
 
-return function(p1) --[[ Line: 42 ]]
+return function(p1)
 	-- upvalues: ConvertActionsFunction (copy), InstallReducerResult (copy), TransformOmniRecommendationsToActionsModule (copy), v7 (copy)
 	return ConvertActionsFunction(InstallReducerResult, {
-		AddOmniRecommendations = function(p2) --[[ Line: 36 ]]
+		AddOmniRecommendations = function(p2)
 			-- upvalues: TransformOmniRecommendationsToActionsModule (upval), p1 (copy), v7 (upval)
 			return TransformOmniRecommendationsToActionsModule(p2.recommendations or {}, p1, nil, v7)
 		end

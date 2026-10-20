@@ -2,11 +2,11 @@
 local UserInputService = game:GetService("UserInputService")
 local EventIngestService = game:GetService("EventIngestService")
 local GetPlatformTarget = nil
-GetPlatformTarget = if require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagShareGetPlatformTargetImpl() then require(CorePackages.Workspace.Packages.Analytics).getPlatformTarget else function(): string --[[ Line: 12 | Named "getPlatformTarget" ]]
+GetPlatformTarget = if require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagShareGetPlatformTargetImpl() then require(CorePackages.Workspace.Packages.Analytics).getPlatformTarget else function(): string
 	-- upvalues: UserInputService (copy)
 	local v1 = "unknownLua"
 	local None = Enum.Platform.None
-	pcall(function() --[[ Line: 18 ]]
+	pcall(function()
 		-- upvalues: None (ref), UserInputService (upval)
 		None = UserInputService:GetPlatform()
 	end)
@@ -17,7 +17,7 @@ GetPlatformTarget = if require(CorePackages.Workspace.Packages.SharedFlags).GetF
 	return if IsNoneMatch then "client" elseif IsNoneMatch1 then "mobile" elseif IsNoneMatch2 then "console" else v1 .. tostring(None)
 end
 
-return function(p1, p2, p3) --[[ Line: 49 ]]
+return function(p1, p2, p3)
 	-- upvalues: GetPlatformTarget (ref), EventIngestService (copy)
 	assert(type(p1) == "string", "Expected eventContext to be a string")
 	assert(type(p2) == "string", "Expected eventName to be a string")

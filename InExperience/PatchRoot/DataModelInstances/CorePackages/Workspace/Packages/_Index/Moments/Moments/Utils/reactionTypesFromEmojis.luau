@@ -16,14 +16,14 @@ local list = {
 	ReactionType.Wow, ReactionType.Cry, ReactionType.Fire, ReactionType.Skull
 }
 
-local function _(Text: string): string --[[ Line: 38 | Named "normalizeEmojiName" ]]
+local function _(Text: string): string
 	local Replaced = string.gsub(string.lower(Text), "%-", "")
 	
 	return if Replaced == "crying" then "cry" else Replaced
 end
 
 return {
-	reactionTypesFromEmojis = function(List) --[[ Line: 48 ]]
+	reactionTypesFromEmojis = function(List)
 		-- upvalues: config (copy), MomentsUpdateReactionTrayOrder (copy), list (copy)
 		local List1 = {}
 		local t = {}

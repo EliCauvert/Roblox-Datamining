@@ -14,7 +14,7 @@ local GetPartialPageModalMiddleContentWidthFunction = UIBloxModule.App.Dialog.Mo
 local LinkButton = UIBloxModule.App.Button.LinkButton
 local GetFFlagDisableVerifyPhoneViewOnSuccessModule = require(PhoneUpsell.Flags.GetFFlagDisableVerifyPhoneViewOnSuccess)
 
-return function(p1) --[[ Line: 46 | Named "VerifyPhoneView" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), ButtonType (copy), GetFFlagDisableVerifyPhoneViewOnSuccessModule (copy), GetPartialPageModalMiddleContentWidthFunction (copy), PartialPageModal (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), TextInputBoxWithBorder (copy), LinkButton (copy)
 	local UseStyleResult = UseStyleFunction()
 	local config = {
@@ -34,7 +34,7 @@ return function(p1) --[[ Line: 46 | Named "VerifyPhoneView" ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
 	
-	local function _(Text: string): string --[[ Line: 134 | Named "getBodyText" ]]
+	local function _(Text: string): string
 		-- upvalues: p1 (copy)
 		return Text:gsub("{phoneNumber}", "+" .. p1.prefix .. p1.phoneNumber)
 	end
@@ -42,9 +42,9 @@ return function(p1) --[[ Line: 46 | Named "VerifyPhoneView" ]]
 	return ReactModule.createElement(PartialPageModal, {
 		title = UseLocalizationResult.titleKey,
 		screenSize = p1.screenSize,
-		buttonStackProps = (function(p2, Text, p3, Callback, Text1, OnActivated) --[[ Line: 66 | Named "getButtonStackProps" ]]
+		buttonStackProps = (function(p2, Text, p3, Callback, Text1, OnActivated)
 			-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult (copy), UseStateResult1 (copy), ButtonType (upval), GetFFlagDisableVerifyPhoneViewOnSuccessModule (upval), p1 (copy)
-			local function _() --[[ Line: 95 | Named "getButtonText" ]]
+			local function _()
 				-- upvalues: UseStateResult (upval), Text (copy), UseStateResult1 (upval), p2 (copy)
 				return if UseStateResult then Text .. " (" .. UseStateResult1 .. ")" else p2
 			end
@@ -53,14 +53,14 @@ return function(p1) --[[ Line: 46 | Named "VerifyPhoneView" ]]
 				{
 					buttonType = ButtonType.PrimarySystem,
 					props = {
-						onActivated = function() --[[ Line: 74 ]]
+						onActivated = function()
 							-- upvalues: Callback (copy), UseStateResult2 (upval), UseStateResult2_1 (upval), p3 (copy)
 							Callback()
 							UseStateResult2(true)
 							UseStateResult2_1(p3)
 							local CurrentTime = tick()
 							
-							local function countDown() --[[ Line: 80 ]]
+							local function countDown()
 								-- upvalues: CurrentTime (copy), p3 (upval), UseStateResult2_1 (upval), countDown (copy), UseStateResult2 (upval)
 								local Value = p3 - (tick() - CurrentTime)
 								

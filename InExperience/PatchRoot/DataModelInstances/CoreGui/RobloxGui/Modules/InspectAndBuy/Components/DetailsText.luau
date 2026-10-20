@@ -16,14 +16,14 @@ local InspectAndBuyContextModule = require(Parent.Components.InspectAndBuyContex
 local IconsStatusPremium = UIBloxModule.App.ImageSet.Images["icons/status/premium"]
 local DetailsText = RoactModule.PureComponent:extend("DetailsText")
 
-function DetailsText.init(p1) --[[ Line: 29 ]]
+function DetailsText.init(p1)
 	-- upvalues: GetSelectionImageObjectRegularModule (copy)
 	p1.name = ""
 	p1.creator = ""
 	p1.selectedImage = GetSelectionImageObjectRegularModule()
 end
 
-function DetailsText.setText(p1) --[[ Line: 39 ]]
+function DetailsText.setText(p1)
 	-- upvalues: UtilityFunctionsModule (copy)
 	local AssetInfo = p1.props.assetInfo or {}
 	local BundleInfo = p1.props.bundleInfo or {}
@@ -43,7 +43,7 @@ function DetailsText.setText(p1) --[[ Line: 39 ]]
 	end
 end
 
-function DetailsText.render(p1) --[[ Line: 58 ]]
+function DetailsText.render(p1)
 	-- upvalues: IconSize (copy), ConstantsModule (copy), UtilityFunctionsModule (copy), RoactModule (copy), InspectAndBuyContextModule (copy), NotificationModule (copy), CryoModule (copy), IconsStatusPremium (copy), AppFonts (copy), ColorsModule (copy), FavoritesModule (copy)
 	p1:setText()
 	local View = p1.props.view
@@ -59,7 +59,7 @@ function DetailsText.render(p1) --[[ Line: 58 ]]
 	local MultipleBundleNoticeKey = if v1 then ConstantsModule.NotificationKeys.MultipleBundleNoticeKey elseif HasParentBundleId then ConstantsModule.NotificationKeys.SingleBundleNoticeKey elseif IsLimited1Point0 then ConstantsModule.NotificationKeys.LimitedItemNoticeKey elseif IsRigTypeMatch then ConstantsModule.NotificationKeys.LayeredClothingOnR6Key else nil
 	
 	return RoactModule.createElement(InspectAndBuyContextModule.Consumer, {
-		render = function(p2) --[[ Line: 87 ]]
+		render = function(p2)
 			-- upvalues: View (copy), RoactModule (upval), MultipleBundleNoticeKey (ref), NotificationModule (upval), HasPremiumPricing (copy), CryoModule (upval), IconsStatusPremium (upval), IconSize (upval), NewRegular (copy), p1 (copy), AppFonts (upval), ColorsModule (upval), ShowFavoritesCount (copy), FavoritesModule (upval)
 			return RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -121,7 +121,7 @@ function DetailsText.render(p1) --[[ Line: 58 ]]
 	})
 end
 
-return RoactRoduxModule.connect(function(p1, _) --[[ Line: 158 ]]
+return RoactRoduxModule.connect(function(p1, _)
 	return {
 		view = p1.view,
 		locale = p1.locale,

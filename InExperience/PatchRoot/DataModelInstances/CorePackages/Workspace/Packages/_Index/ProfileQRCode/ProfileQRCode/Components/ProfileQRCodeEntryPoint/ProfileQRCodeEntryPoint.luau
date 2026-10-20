@@ -6,7 +6,7 @@ local ReactModule = require(Parent.React)
 local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
 local ProfileQRCodePageModule = require(ProfileQRCode.Components.ProfileQRCodePage.ProfileQRCodePage)
 
-return function(p1) --[[ Line: 22 ]]
+return function(p1)
 	-- upvalues: AnalyticsModule (copy), AnalyticsServiceModule (copy), UseLocalUserIdFunction (copy), ReactModule (copy), ProfileQRCodePageModule (copy)
 	return ReactModule.createElement(AnalyticsModule.Context.Provider, {
 		value = {

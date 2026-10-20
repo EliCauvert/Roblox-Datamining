@@ -13,7 +13,7 @@ local InputSize = FoundationModule.Enums.InputSize
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local ImmersiveBrandedAdsLearnMoreUrl = game:DefineFastString("ImmersiveBrandedAdsLearnMoreUrl", "www.roblox.com")
 
-return function(p1) --[[ Line: 27 ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), Default (copy), ImmersiveBrandedAdsLearnMoreUrl (copy), AdsInteractivityTelemetryModule (copy), Dialog (copy), DialogSize (copy), View (copy), Button (copy), ButtonVariant (copy), InputSize (copy)
 	local AdvertiserName = p1.advertiserName or ""
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -30,7 +30,7 @@ return function(p1) --[[ Line: 27 ]]
 	return ReactModule.createElement(ReactModule.Fragment, nil, {
 		dialog = ReactModule.createElement(Dialog.Root, {
 			size = DialogSize.Small,
-			onClose = ReactModule.useCallback(function(_) --[[ Line: 53 ]]
+			onClose = ReactModule.useCallback(function(_)
 				-- upvalues: p1 (copy)
 				p1.onDismiss()
 			end, { p1.onDismiss })
@@ -47,9 +47,9 @@ return function(p1) --[[ Line: 27 ]]
 						icon = "icons/navigation/externallink",
 						text = UseLocalizationResult.LearnMoreLinkText,
 						variant = ButtonVariant.Link,
-						onActivated = ReactModule.useCallback(function() --[[ Line: 46 ]]
+						onActivated = ReactModule.useCallback(function()
 							-- upvalues: Default (upval), ImmersiveBrandedAdsLearnMoreUrl (upval), AdsInteractivityTelemetryModule (upval), p1 (copy)
-							Default:openURL(ImmersiveBrandedAdsLearnMoreUrl):catch(function(_) --[[ Line: 47 ]]
+							Default:openURL(ImmersiveBrandedAdsLearnMoreUrl):catch(function(_)
 								-- upvalues: AdsInteractivityTelemetryModule (upval), p1 (upval)
 								AdsInteractivityTelemetryModule.logImmersiveBrandedAdLinkingFailedCounter("whyThisAd.learnMore")
 								p1.onDismiss()

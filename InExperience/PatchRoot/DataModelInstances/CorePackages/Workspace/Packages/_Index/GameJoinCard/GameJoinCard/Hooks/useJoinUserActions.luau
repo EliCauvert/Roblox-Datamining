@@ -6,19 +6,19 @@ local ProfileCTAStore = DataHydrationModule.Profile.ProfileCTAStore
 local DataStatus = DataHydrationModule.DataStatus
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local CreateComputedFunction = require(Parent.Signals).createComputed
-local Computed = CreateComputedFunction(function() --[[ Line: 40 ]]
+local Computed = CreateComputedFunction(function()
 	return nil
 end)
-local Computed1 = CreateComputedFunction(function() --[[ Line: 43 ]]
+local Computed1 = CreateComputedFunction(function()
 	-- upvalues: DataStatus (copy)
 	return DataStatus.NotReady
 end)
 
-return function(UserId, Enabled, p1) --[[ Line: 47 | Named "useJoinUserActions" ]]
+return function(UserId, Enabled, p1)
 	-- upvalues: ReactModule (copy), FFlagJoinabilityCTARefactor (copy), ProfileCTAStore (copy), UseSignalStateFunction (copy), Computed (copy), Computed1 (copy)
 	local IsEnabled = Enabled == true
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 55 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FFlagJoinabilityCTARefactor (upval), UserId (copy), IsEnabled (copy), ProfileCTAStore (upval)
 		if FFlagJoinabilityCTARefactor and UserId ~= "" and IsEnabled then
 			local GetJoinUserActionsFunction = ProfileCTAStore.get().getJoinUserActions

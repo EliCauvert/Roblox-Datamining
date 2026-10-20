@@ -5,7 +5,7 @@ local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
 	path = require(AvatarExperienceCatalog.Sdui.Constants).CatalogSduiUrl
 })
 
-return function() --[[ Line: 13 | Named "getCatalogPageUrl" ]]
+return function()
 	-- upvalues: NewResult (copy)
 	return NewResult()
 end

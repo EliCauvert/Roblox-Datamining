@@ -5,7 +5,7 @@ local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.CollectibleItemStoreTypes)
 local CreateDataResolverModule = require(DataHydration.createDataResolver)
 
-local function normalizeCreator(Creator) --[[ Line: 28 ]]
+local function normalizeCreator(Creator)
 	return {
 		id = Creator.id,
 		name = Creator.name,
@@ -15,7 +15,7 @@ local function normalizeCreator(Creator) --[[ Line: 28 ]]
 	}
 end
 
-local function normalizeExperiences(Experiences) --[[ Line: 40 ]]
+local function normalizeExperiences(Experiences)
 	if not Experiences then
 		return nil
 	end
@@ -31,7 +31,7 @@ local function normalizeExperiences(Experiences) --[[ Line: 40 ]]
 	return Buffer
 end
 
-local function _(Tbl) --[[ Line: 59 | Named "normalizeCollectibleItem" ]]
+local function _(Tbl)
 	-- upvalues: normalizeCreator (copy), normalizeExperiences (copy)
 	if not Tbl.creator and not Tbl.experiences then
 		return Tbl
@@ -47,12 +47,12 @@ local function _(Tbl) --[[ Line: 59 | Named "normalizeCollectibleItem" ]]
 	return Copy
 end
 
-return function() --[[ Line: 73 | Named "createCollectibleItemStore" ]]
+return function()
 	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy), normalizeCreator (copy), normalizeExperiences (copy)
 	local DataCacheModule = CreateDataCacheModule()
 	local DataResolverModule = CreateDataResolverModule({
 		cache = DataCacheModule,
-		fetchFn = function(_) --[[ Line: 77 ]]
+		fetchFn = function(_)
 			-- upvalues: PromiseModule (upval)
 			return PromiseModule.resolve({})
 		end
@@ -61,12 +61,12 @@ return function() --[[ Line: 73 | Named "createCollectibleItemStore" ]]
 	return {
 		getCollectibleItemInfo = DataResolverModule.getCachedItem,
 		getCollectibleItemInfos = DataResolverModule.getCachedItems,
-		getNormalizedCollectibleItemInfo = function(p1) --[[ Line: 85 ]]
+		getNormalizedCollectibleItemInfo = function(p1)
 			-- upvalues: DataResolverModule (copy), normalizeCreator (upval), normalizeExperiences (upval)
 			local CachedItem = DataResolverModule.getCachedItem(p1)
 			
 			return {
-				data = function(p2) --[[ Line: 88 ]]
+				data = function(p2)
 					-- upvalues: CachedItem (copy), normalizeCreator (upval), normalizeExperiences (upval)
 					local DataResult = CachedItem.data(p2)
 					

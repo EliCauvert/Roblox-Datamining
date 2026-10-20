@@ -4,11 +4,11 @@ local SignalsModule = require(Parent.Signals)
 local _ = require(Parent.ServerDrivenUi)
 local _ = require(ServerTriggeredModals.EntryPoint)
 
-return function() --[[ Line: 42 ]]
+return function()
 	-- upvalues: SignalsModule (copy)
 	local t = {}
 	
-	local function getOrCreateEntry(Key) --[[ Line: 45 ]]
+	local function getOrCreateEntry(Key)
 		-- upvalues: t (copy), SignalsModule (upval)
 		local Entry = t[Key]
 		
@@ -27,27 +27,27 @@ return function() --[[ Line: 42 ]]
 	end
 	
 	return {
-		getMetadataGetter = function(p1) --[[ Line: 70 ]]
+		getMetadataGetter = function(p1)
 			-- upvalues: getOrCreateEntry (copy)
 			return getOrCreateEntry(p1).metadata.get
 		end,
-		setMetadata = function(p1, p2) --[[ Line: 74 ]]
+		setMetadata = function(p1, p2)
 			-- upvalues: getOrCreateEntry (copy)
 			getOrCreateEntry(p1).metadata.set(p2)
 		end,
-		getHasShownGetter = function(p1) --[[ Line: 78 ]]
+		getHasShownGetter = function(p1)
 			-- upvalues: getOrCreateEntry (copy)
 			return getOrCreateEntry(p1).hasShown.get
 		end,
-		setHasShown = function(p1, p2) --[[ Line: 82 ]]
+		setHasShown = function(p1, p2)
 			-- upvalues: getOrCreateEntry (copy)
 			getOrCreateEntry(p1).hasShown.set(p2)
 		end,
-		getPrimaryHandlerClaimedGetter = function(p1) --[[ Line: 86 ]]
+		getPrimaryHandlerClaimedGetter = function(p1)
 			-- upvalues: getOrCreateEntry (copy)
 			return getOrCreateEntry(p1).primaryHandlerClaimed.get
 		end,
-		tryClaimPrimaryHandler = function(p1): boolean --[[ Line: 90 ]]
+		tryClaimPrimaryHandler = function(p1): boolean
 			-- upvalues: getOrCreateEntry (copy)
 			local OrCreateEntry = getOrCreateEntry(p1)
 			
@@ -59,7 +59,7 @@ return function() --[[ Line: 42 ]]
 				return true
 			end
 		end,
-		releasePrimaryHandler = function(p1) --[[ Line: 99 ]]
+		releasePrimaryHandler = function(p1)
 			-- upvalues: getOrCreateEntry (copy)
 			getOrCreateEntry(p1).primaryHandlerClaimed.set(false)
 		end

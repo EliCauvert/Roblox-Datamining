@@ -8,7 +8,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseClockFunction = require(Parent.ReactUtils).useClock
 local _Color3 = Color3.new(1, 1, 1)
 
-local function generateShimmerGradient(p1): ColorSequence --[[ Line: 37 ]]
+local function generateShimmerGradient(p1): ColorSequence
 	local Interpolated = p1:Lerp(Color3.new(0, 0, 0), 0.2)
 	
 	return ColorSequence.new({
@@ -20,7 +20,7 @@ local function generateShimmerGradient(p1): ColorSequence --[[ Line: 37 ]]
 	})
 end
 
-return function(p1) --[[ Line: 50 | Named "useShimmerText" ]]
+return function(p1)
 	-- upvalues: UsePreferencesFunction (copy), UseTokensFunction (copy), UseClockFunction (copy), UsePulseBindingFunction (copy), ReactModule (copy), generateShimmerGradient (copy), _Color3 (copy)
 	local UsePreferencesResult = UsePreferencesFunction()
 	local UseTokensResult = UseTokensFunction()
@@ -32,14 +32,14 @@ return function(p1) --[[ Line: 50 | Named "useShimmerText" ]]
 	local TextStyle = p1.textStyle or Default
 	local _Color3_1 = TextStyle.Color3 or Default.Color3
 	local Transparency = TextStyle.Transparency or Default.Transparency
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 67 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: generateShimmerGradient (upval), _Color3_1 (copy)
 		return generateShimmerGradient(_Color3_1)
 	end, { _Color3_1 })
 	
 	return if p1.isShimmerEnabled == false then { children = p1.children, textStyle = p1.textStyle } elseif UsePreferencesResult.reducedMotion then {
 		children = p1.children,
-		textStyle = UsePulseBindingResult:map(function(p2: number) --[[ Line: 81 ]]
+		textStyle = UsePulseBindingResult:map(function(p2: number)
 			-- upvalues: _Color3_1 (copy), Transparency (copy)
 			return {
 				Color3 = _Color3_1,
@@ -52,7 +52,7 @@ return function(p1) --[[ Line: 50 | Named "useShimmerText" ]]
 			ShimmerGradient = ReactModule.createElement("UIGradient", {
 				Rotation = 15,
 				Color = UseMemoResult,
-				Offset = UseClockResult:map(function(p2): Vector2 --[[ Line: 95 ]]
+				Offset = UseClockResult:map(function(p2): Vector2
 					-- upvalues: Largest (copy), GradientOffset (copy)
 					return Vector2.new(p2 * Largest % GradientOffset - GradientOffset / 2, 0)
 				end)

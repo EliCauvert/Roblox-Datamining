@@ -6,7 +6,7 @@ local SendChatMessagePolicyModule = require(script.Parent.SendChatMessagePolicy)
 local self = setmetatable({}, SendChatMessagePolicyModule)
 self.__index = self
 
-function self.new(p1, p2, MessageText, MessageText1, Decorators) --[[ Line: 13 ]]
+function self.new(p1, p2, MessageText, MessageText1, Decorators)
 	-- upvalues: NewResult (copy), SendChatMessagePolicyModule (copy)
 	NewResult:info("New policy constructed for conversationId: {} messageText: {}, replyingToId: {}", p2, MessageText, if MessageText1 then MessageText1.id else nil)
 	local NewResult1 = SendChatMessagePolicyModule:new(p2, MessageText1)
@@ -17,14 +17,14 @@ function self.new(p1, p2, MessageText, MessageText1, Decorators) --[[ Line: 13 ]
 	return NewResult1
 end
 
-function self:sendMessage(_) --[[ Line: 31 ]]
+function self:sendMessage(_)
 	-- upvalues: NewResult (copy), AppChatNetworkingModule (copy)
 	NewResult:info("sendMessage - conversationId: {} messageText: {}, replyingToId: {}", self.conversationId, self.messageText, if self.replyingToMessage then self.replyingToMessage.id else nil)
 	
 	return AppChatNetworkingModule.http.SendChatTextMessage(nil, self.conversationId, self.messageText, if self.replyingToMessage then self.replyingToMessage.id else nil)
 end
 
-function self:sendingMessagePayload() --[[ Line: 47 ]]
+function self:sendingMessagePayload()
 	-- upvalues: MessageModelModule (copy)
 	return {
 		messageType = MessageModelModule.MessageTypes.PlainText,

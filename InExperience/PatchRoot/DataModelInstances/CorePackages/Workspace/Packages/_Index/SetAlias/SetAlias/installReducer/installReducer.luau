@@ -3,7 +3,7 @@ local Rodux = DependenciesModule.Rodux
 local RoduxNetworking = DependenciesModule.RoduxNetworking
 local RoduxAliases = DependenciesModule.RoduxAliases
 
-return function() --[[ Line: 8 ]]
+return function()
 	-- upvalues: Rodux (copy), RoduxAliases (copy), RoduxNetworking (copy)
 	return Rodux.combineReducers({
 		Aliases = RoduxAliases.installReducer(),

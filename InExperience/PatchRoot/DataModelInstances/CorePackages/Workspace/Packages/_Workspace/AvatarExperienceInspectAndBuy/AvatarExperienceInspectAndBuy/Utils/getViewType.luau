@@ -1,7 +1,7 @@
 ﻿local ViewTypeModule = require(script:FindFirstAncestor("AvatarExperienceInspectAndBuy").Enums.ViewType)
 local MobileBreakpointInspectAndBuy = game:DefineFastInt("MobileBreakpointInspectAndBuy", 850)
 
-return function(Vector) --[[ Line: 13 | Named "getViewType" ]]
+return function(Vector)
 	-- upvalues: ViewTypeModule (copy), MobileBreakpointInspectAndBuy (copy)
 	local Wide = ViewTypeModule.Wide
 	

@@ -8,7 +8,7 @@ local Button = FoundationModule.Button
 local View = FoundationModule.View
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
-return ReactModule.memo(function(p1) --[[ Line: 39 | Named "GiftAcceptView" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), GiftStateViewModule (copy), View (copy), UserInfoPanelViewModule (copy), Button (copy), ButtonVariant (copy), GiftSheetLayoutViewModule (copy)
 	return ReactModule.createElement(GiftSheetLayoutViewModule, {
 		isOpen = p1.isOpen,

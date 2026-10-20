@@ -2,7 +2,7 @@
 local PlaytestExperienceModule = require(script.Parent.playtestExperience)
 local ReleaseAnyFocusModule = require(script.Parent.releaseAnyFocus)
 
-return function(p1, p2, IsTeamTest, Callback): boolean --[[ Line: 7 | Named "launchPlaytestWithLoadingState" ]]
+return function(p1, p2, IsTeamTest, Callback): boolean
 	-- upvalues: GetPlaytestLoadingStoreModule (copy), ReleaseAnyFocusModule (copy), PlaytestExperienceModule (copy)
 	local PlaytestLoadingStoreModule = GetPlaytestLoadingStoreModule()
 	
@@ -10,17 +10,17 @@ return function(p1, p2, IsTeamTest, Callback): boolean --[[ Line: 7 | Named "lau
 		return false
 	else
 		PlaytestLoadingStoreModule.setPlaytestStatusForPlaceId(p1, "Loading")
-		task.defer(function() --[[ Line: 21 ]]
+		task.defer(function()
 			-- upvalues: ReleaseAnyFocusModule (upval), PlaytestExperienceModule (upval), p1 (copy), p2 (copy), IsTeamTest (copy), PlaytestLoadingStoreModule (copy), Callback (copy)
 			local Traceback = nil
 			local v1 = "experience_launch"
 			
-			if not xpcall(function() --[[ Line: 24 ]]
+			if not xpcall(function()
 				-- upvalues: ReleaseAnyFocusModule (upval), v1 (ref), PlaytestExperienceModule (upval), p1 (upval), p2 (upval), IsTeamTest (upval), PlaytestLoadingStoreModule (upval), Callback (upval)
 				ReleaseAnyFocusModule()
 				v1 = PlaytestExperienceModule(p1, p2, {
 					isTeamTest = IsTeamTest,
-					onTeleportFailed = function() --[[ Line: 28 ]]
+					onTeleportFailed = function()
 						-- upvalues: PlaytestLoadingStoreModule (upval), p1 (upval), Callback (upval)
 						PlaytestLoadingStoreModule.setPlaytestStatusForPlaceId(p1, "Idle")
 						
@@ -29,7 +29,7 @@ return function(p1, p2, IsTeamTest, Callback): boolean --[[ Line: 7 | Named "lau
 						end
 					end
 				})
-			end, function(Err) --[[ Line: 35 ]]
+			end, function(Err)
 				-- upvalues: Traceback (ref)
 				Traceback = debug.traceback(tostring(Err), 2)
 			end) then

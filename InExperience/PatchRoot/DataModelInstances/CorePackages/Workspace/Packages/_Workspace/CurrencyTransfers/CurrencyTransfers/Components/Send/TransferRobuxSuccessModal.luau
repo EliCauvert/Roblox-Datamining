@@ -25,7 +25,7 @@ local FormatNumberModule = require(CurrencyTransfers.Utils.formatNumber)
 local GetFFlagCurrencyTransferFocusNavigationModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferFocusNavigation)
 local UseTransferSheetFocusModule = require(CurrencyTransfers.Hooks.useTransferSheetFocus)
 
-return function(_) --[[ Line: 49 | Named "TransferRobuxSuccessModal" ]]
+return function(_)
 	-- upvalues: UseTransferStoreModule (copy), UseTokensFunction (copy), UseUpdatedRobuxBalanceModule (copy), SignalsReactModule (copy), UseScaledValueFunction (copy), UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), FormatNumberModule (copy), LocalizationService (copy), ReactModule (copy), TransferLocaleFormatModule (copy), HandleTransferCompleteModule (copy), GetFFlagCurrencyTransferFocusNavigationModule (copy), UseTransferSheetFocusModule (copy), Sheet (copy), TransferRobuxHeaderModule (copy), View (copy), Icon (copy), Enums (copy), Text (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
 	local UseTransferStoreModuleResult = UseTransferStoreModule()
 	local UseTokensResult = UseTokensFunction()
@@ -34,7 +34,7 @@ return function(_) --[[ Line: 49 | Named "TransferRobuxSuccessModal" ]]
 	local UseScaledValueResult = UseScaledValueFunction(300)
 	local UseLocalizationResult = UseLocalizationFunction(TransferLocalizationKeysModule.Presets.TransferRobuxSuccessModal)
 	local FormatNumberModuleResult = if UseSignalStateResult then FormatNumberModule(LocalizationService.RobloxLocaleId, UseSignalStateResult) else "0"
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 63 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: TransferLocaleFormatModule (upval), UseLocalizationResult (copy), FormatNumberModuleResult (copy)
 		return TransferLocaleFormatModule.substituteAmount(UseLocalizationResult.SuccessNotification, (tostring(FormatNumberModuleResult)))
 	end, {
@@ -42,7 +42,7 @@ return function(_) --[[ Line: 49 | Named "TransferRobuxSuccessModal" ]]
 		UseLocalizationResult.SuccessNotification
 	})
 	
-	local function onComplete() --[[ Line: 70 ]]
+	local function onComplete()
 		-- upvalues: HandleTransferCompleteModule (upval), UseTransferStoreModuleResult (copy)
 		HandleTransferCompleteModule(UseTransferStoreModuleResult)
 	end

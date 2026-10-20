@@ -28,16 +28,16 @@ local FormatErrorDetailForAnalyticsFunction = AnalyticsServiceModule.formatError
 local FFlagAbuseReportSubmissionTargetV4 = require(Parent.SharedFlags).FFlagAbuseReportSubmissionTargetV4
 local FFlagAbuseReportImproveErrorEventsModule = require(GenericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
 
-local function getSubmissionTargetTelemetry(Target) --[[ Line: 60 ]]
+local function getSubmissionTargetTelemetry(Target)
 	return if type(Target) == "table" then if Target.type == "default" then { target_type = "default" } elseif Target.type == "clientAction" then {
 		target_type = "clientAction",
 		client_action_name = if type(Target.name) == "string" then Target.name else nil
 	} else {} else {}
 end
 
-local function useAbuseSheetAnalytics(p1, Abuse_vector, Target_id, Config_name) --[[ Line: 76 ]]
+local function useAbuseSheetAnalytics(p1, Abuse_vector, Target_id, Config_name)
 	-- upvalues: ReactModule (copy), DashModule (copy), SendAnalyticsEventFunction (copy)
-	return (ReactModule.useCallback(function(p2) --[[ Line: 85 ]]
+	return (ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy), DashModule (upval), Abuse_vector (copy), Target_id (copy), Config_name (copy), SendAnalyticsEventFunction (upval)
 		local UnixTimestampMillis = DateTime.now().UnixTimestampMillis
 		SendAnalyticsEventFunction({
@@ -46,7 +46,7 @@ local function useAbuseSheetAnalytics(p1, Abuse_vector, Target_id, Config_name) 
 			abuse_vector = Abuse_vector,
 			target_id = Target_id,
 			total_duration = if p1.openTime then UnixTimestampMillis - p1.openTime else 0,
-			path = DashModule.map(p1.stack, function(p3) --[[ Line: 88 ]]
+			path = DashModule.map(p1.stack, function(p3)
 				return p3.nodeId
 			end),
 			config_name = Config_name
@@ -56,24 +56,24 @@ local function useAbuseSheetAnalytics(p1, Abuse_vector, Target_id, Config_name) 
 	}))
 end
 
-return function(p1, p2) --[[ Line: 148 | Named "useAbuseSheetFlow" ]]
+return function(p1, p2)
 	-- upvalues: ReactModule (copy), ResolveStartNodeFunction (copy), Reducer (copy), GetInitialStateFunction (copy), GetNewRunIdFunction (copy), UseOpenLinkModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), useAbuseSheetAnalytics (copy), SelectStoreFunction (copy), ResolveArConfigFunction (copy), TelemetryEventType (copy), DashModule (copy), FFlagAbuseReportImproveErrorEventsModule (copy), LinkOpenedSource (copy), FFlagAbuseReportSubmissionTargetV4 (copy), getSubmissionTargetTelemetry (copy), SendReportModule (copy), PromiseModule (copy), AbuseVectorModule (copy), SubmitSource (copy), FormatErrorDetailForAnalyticsFunction (copy), ContentNodeModule (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 170 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), ResolveStartNodeFunction (upval)
 		return if p1 then ResolveStartNodeFunction(p1) else "root"
 	end, { p1 })
-	local UseReducerResult, UseReducerResult2 = ReactModule.useReducer(Reducer, nil, function() --[[ Line: 173 ]]
+	local UseReducerResult, UseReducerResult2 = ReactModule.useReducer(Reducer, nil, function()
 		-- upvalues: GetInitialStateFunction (upval), GetNewRunIdFunction (upval), UseMemoResult (copy)
 		return GetInitialStateFunction(GetNewRunIdFunction(), DateTime.now().UnixTimestampMillis, UseMemoResult)
 	end)
 	local UseOpenLinkModuleResult = UseOpenLinkModule()
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
 	local UseAbuseSheetAnalyticsResult = useAbuseSheetAnalytics(UseReducerResult, p2.abuseVector, p2.analyticsTargetId, if p1 then p1.name else nil)
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 187 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: SelectStoreFunction (upval), UseReducerResult (copy)
 		return SelectStoreFunction(UseReducerResult)
 	end, { UseReducerResult })
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 192 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), ResolveArConfigFunction (upval), UseMemoResult1 (copy)
 		return if p1 then ResolveArConfigFunction(p1, {
 			attribute = p1.attributes,
@@ -90,16 +90,16 @@ return function(p1, p2) --[[ Line: 148 | Named "useAbuseSheetFlow" ]]
 	local UseRefResult3 = ReactModule.useRef(UseReducerResult.submissionState)
 	UseRefResult3.current = UseReducerResult.submissionState
 	
-	local function _(p3) --[[ Line: 223 | Named "setPendingInlineAlert" ]]
+	local function _(p3)
 		-- upvalues: p2 (copy)
 		if p2.inlineAlertController then
 			p2.inlineAlertController.setInlineAlert(p3)
 		end
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 231 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: None (copy), UseRefResult2 (copy), UseRefResult3 (copy), TelemetryEventType (upval)
-		return function() --[[ Line: 232 ]]
+		return function()
 			-- upvalues: None (upval), UseRefResult2 (upval), UseRefResult3 (upval), TelemetryEventType (upval)
 			if None.current == "started" then
 				None.current = "completed"
@@ -109,7 +109,7 @@ return function(p1, p2) --[[ Line: 148 | Named "useAbuseSheetFlow" ]]
 			end
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 250 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p2 (copy), UseRefResult (copy), GetNewRunIdFunction (upval), UseReducerResult2 (copy), UseMemoResult (copy), UseRefResult1 (copy), IsOnFirstAction (copy), UseAbuseSheetAnalyticsResult (copy), TelemetryEventType (upval), None (copy)
 		if p2.open and not UseRefResult.current then
 			UseReducerResult2({
@@ -133,7 +133,7 @@ return function(p1, p2) --[[ Line: 148 | Named "useAbuseSheetFlow" ]]
 			None.current = "started"
 		end
 	end, { p2.open })
-	ReactModule.useLayoutEffect(function() --[[ Line: 288 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: p1 (copy), UseReducerResult (copy), UseMemoResult (copy), UseReducerResult2 (copy)
 		if not p1 then return end
 		if #UseReducerResult.stack > 1 then return end
@@ -155,7 +155,7 @@ return function(p1, p2) --[[ Line: 148 | Named "useAbuseSheetFlow" ]]
 	end, { p1, UseMemoResult })
 	local LastResult = DashModule.last(UseReducerResult.stack)
 	local Node = UseMemoResult2 and (UseMemoResult2.nodes and (LastResult and UseMemoResult2.nodes[LastResult.nodeId]))
-	ReactModule.useEffect(function() --[[ Line: 313 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p2 (copy), UseRefResult1 (copy), p1 (copy), LastResult (copy), UseAbuseSheetAnalyticsResult (copy), TelemetryEventType (upval), UseMemoResult2 (copy), Node (copy), FFlagAbuseReportImproveErrorEventsModule (upval)
 		if not p2.open or UseRefResult1.current then return end
 		if not p1 then return end
@@ -208,7 +208,7 @@ return function(p1, p2) --[[ Line: 148 | Named "useAbuseSheetFlow" ]]
 		p2.open, p1, UseMemoResult2, LastResult, Node, UseAbuseSheetAnalyticsResult
 	})
 	
-	local function onExternalSubmit(Submit_source) --[[ Line: 366 ]]
+	local function onExternalSubmit(Submit_source)
 		-- upvalues: UseRefResult2 (copy), TelemetryEventType (upval), UseReducerResult2 (copy), UseRefResult3 (copy)
 		UseRefResult2.current({
 			sub_event_type = TelemetryEventType.Submit,
@@ -222,7 +222,7 @@ return function(p1, p2) --[[ Line: 148 | Named "useAbuseSheetFlow" ]]
 		})
 	end
 	
-	local function notifyFinish() --[[ Line: 379 ]]
+	local function notifyFinish()
 		-- upvalues: p2 (copy), UseRefResult3 (copy), None (copy), UseRefResult2 (copy), TelemetryEventType (upval)
 		if p2.onFinish then
 			p2.onFinish({ didSubmit = UseRefResult3.current == "completed" })
@@ -233,13 +233,13 @@ return function(p1, p2) --[[ Line: 148 | Named "useAbuseSheetFlow" ]]
 		end
 	end
 	
-	local function handleClose() --[[ Line: 394 ]]
+	local function handleClose()
 		-- upvalues: notifyFinish (copy), p2 (copy)
 		notifyFinish()
 		p2.onClose()
 	end
 	
-	local function reset(InlineAlert) --[[ Line: 403 ]]
+	local function reset(InlineAlert)
 		-- upvalues: GetNewRunIdFunction (upval), UseReducerResult2 (copy), UseMemoResult (copy), p2 (copy), None (copy)
 		UseReducerResult2({
 			type = "reset",
@@ -256,7 +256,7 @@ return function(p1, p2) --[[ Line: 148 | Named "useAbuseSheetFlow" ]]
 		None.current = "none"
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 429 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult2 (copy), Node (copy), UseReducerResult (copy), DashModule (upval), p2 (copy), UseReducerResult2 (copy), UseRefResult2 (copy), TelemetryEventType (upval), LinkOpenedSource (upval), UseOpenLinkModuleResult (copy), notifyFinish (copy), reset (copy), FFlagAbuseReportSubmissionTargetV4 (upval), getSubmissionTargetTelemetry (upval), SendReportModule (upval), UseRoactServiceResult (copy), PromiseModule (upval), AbuseVectorModule (upval), UseAbuseSheetAnalyticsResult (copy), SubmitSource (upval), UseRefResult3 (copy), FFlagAbuseReportImproveErrorEventsModule (upval), FormatErrorDetailForAnalyticsFunction (upval)
 		if not UseMemoResult2 or not Node then return end
 		if UseReducerResult.navigationState ~= "gotoNext" and UseReducerResult.navigationState ~= "gotoFailure" then return end
@@ -274,7 +274,7 @@ return function(p1, p2) --[[ Line: 148 | Named "useAbuseSheetFlow" ]]
 			
 			return
 		end
-		local function handleNextSimple(NodeId) --[[ Line: 451 ]]
+		local function handleNextSimple(NodeId)
 			-- upvalues: p2 (upval), UseReducerResult2 (upval), UseRefResult2 (upval), TelemetryEventType (upval), LinkOpenedSource (upval), UseOpenLinkModuleResult (upval), notifyFinish (upval), reset (upval)
 			if not NodeId then
 				warn("handleNextSimple called with nil next value")
@@ -354,7 +354,7 @@ return function(p1, p2) --[[ Line: 148 | Named "useAbuseSheetFlow" ]]
 		local SubmissionTargetTelemetry = if FFlagAbuseReportSubmissionTargetV4 then getSubmissionTargetTelemetry(Target) else {}
 		local Target_failure_reason = nil
 		
-		local function onSubmitForm() --[[ Line: 518 ]]
+		local function onSubmitForm()
 			-- upvalues: FFlagAbuseReportSubmissionTargetV4 (upval), Target (copy), SendReportModule (upval), UseRoactServiceResult (upval), Submission (copy), p2 (upval), Target_failure_reason (ref), PromiseModule (upval), AbuseVectorModule (upval)
 			if not FFlagAbuseReportSubmissionTargetV4 then
 				if p2.onCustomSubmit then
@@ -404,10 +404,10 @@ return function(p1, p2) --[[ Line: 148 | Named "useAbuseSheetFlow" ]]
 				}
 			})
 			UseReducerResult2({ type = "startedSubmission" });
-			(if FFlagAbuseReportSubmissionTargetV4 then PromiseModule.try(function() --[[ Line: 574 ]]
+			(if FFlagAbuseReportSubmissionTargetV4 then PromiseModule.try(function()
 				-- upvalues: onSubmitForm (copy)
 				return (onSubmitForm())
-			end) else onSubmitForm()):andThen(function(Result) --[[ Line: 580 ]]
+			end) else onSubmitForm()):andThen(function(Result)
 				-- upvalues: UseReducerResult2 (upval), UseAbuseSheetAnalyticsResult (upval), TelemetryEventType (upval), UnixTimestampMillis (copy), SubmitSource (upval), SubmissionTargetTelemetry (copy), UseRefResult3 (upval), handleNextSimple (copy), NextOnFailure (copy)
 				UseReducerResult2({ type = "completedSubmission" })
 				UseAbuseSheetAnalyticsResult({
@@ -422,7 +422,7 @@ return function(p1, p2) --[[ Line: 148 | Named "useAbuseSheetFlow" ]]
 				})
 				UseRefResult3.current = "completed"
 				handleNextSimple(NextOnFailure.onSuccess)
-			end):catch(function(Err) --[[ Line: 597 ]]
+			end):catch(function(Err)
 				-- upvalues: UseReducerResult2 (upval), UseAbuseSheetAnalyticsResult (upval), TelemetryEventType (upval), UnixTimestampMillis (copy), SubmitSource (upval), SubmissionTargetTelemetry (copy), Target_failure_reason (ref), FFlagAbuseReportImproveErrorEventsModule (upval), FormatErrorDetailForAnalyticsFunction (upval), DashModule (upval), UseRefResult3 (upval), NextOnFailure (copy), handleNextSimple (copy)
 				UseReducerResult2({ type = "submissionFailed" })
 				UseAbuseSheetAnalyticsResult({
@@ -453,7 +453,7 @@ return function(p1, p2) --[[ Line: 148 | Named "useAbuseSheetFlow" ]]
 	end, { UseReducerResult.navigationState })
 	local Inverted: boolean = #UseReducerResult.stack > 1 and not (UseReducerResult.submissionState == "completed")
 	
-	local function goBack() --[[ Line: 628 ]]
+	local function goBack()
 		-- upvalues: UseMemoResult2 (copy), Node (copy), LastResult (copy), Inverted (copy), UseReducerResult2 (copy), p2 (copy), UseAbuseSheetAnalyticsResult (copy), TelemetryEventType (upval)
 		if not UseMemoResult2 or not Node or not LastResult then return end
 		local UnixTimestampMillis = DateTime.now().UnixTimestampMillis
@@ -479,7 +479,7 @@ return function(p1, p2) --[[ Line: 148 | Named "useAbuseSheetFlow" ]]
 	local HasNext: boolean = Node and Node.next ~= nil
 	local HasNextOnFailure: boolean = Node and Node.nextOnFailure ~= nil
 	
-	local function onNext(p3) --[[ Line: 650 ]]
+	local function onNext(p3)
 		-- upvalues: UseMemoResult2 (copy), Node (copy), LastResult (copy), None (copy), UseRefResult2 (copy), TelemetryEventType (upval), UseReducerResult2 (copy), UseAbuseSheetAnalyticsResult (copy)
 		if not UseMemoResult2 or not Node or not LastResult then return end
 		if None.current == "none" then
@@ -505,7 +505,7 @@ return function(p1, p2) --[[ Line: 148 | Named "useAbuseSheetFlow" ]]
 		})
 	end
 	
-	local function onFailure() --[[ Line: 681 ]]
+	local function onFailure()
 		-- upvalues: UseMemoResult2 (copy), Node (copy), LastResult (copy), UseReducerResult2 (copy), UseAbuseSheetAnalyticsResult (copy), TelemetryEventType (upval)
 		if UseMemoResult2 and Node and LastResult then
 			local UnixTimestampMillis = DateTime.now().UnixTimestampMillis
@@ -527,13 +527,13 @@ return function(p1, p2) --[[ Line: 148 | Named "useAbuseSheetFlow" ]]
 		end
 	end
 	
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 704 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p2 (copy)
 		if p2.inlineAlertController then
 			p2.inlineAlertController.setInlineAlert(nil)
 		end
 	end, {})
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 708 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: UseAbuseSheetAnalyticsResult (copy)
 		return { sendEvent = UseAbuseSheetAnalyticsResult }
 	end, { UseAbuseSheetAnalyticsResult })

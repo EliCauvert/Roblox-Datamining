@@ -6,7 +6,7 @@
 	filterUnavailableItems = "filterUnavailableItemsEnumValue"
 }
 
-return function(Tbl) --[[ Line: 21 | Named "aliasSortAndFiltersToLegacyKeys" ]]
+return function(Tbl)
 	-- upvalues: config (copy)
 	if type(Tbl) ~= "table" then
 		return Tbl

@@ -67,7 +67,7 @@ local config1 = {
 if FFlagLuaAppUnifiedLoggingDialogContentTypeModule then
 	config1[ContentTypeModule.Dialog] = InterfaceResult
 end
-return function(p1, EventContext, p2, Tbl) --[[ Line: 115 ]]
+return function(p1, EventContext, p2, Tbl)
 	-- upvalues: config1 (copy), IntersectionResult (ref), DiscoveryEventErrorLogger (copy), HttpService (copy), FFlagLuaAppMigrateItemEventsTelemetryService (copy), TelemetryService (copy), Config (ref), GetPlatformTargetFunction (copy), FFlagLuaAppItemEventsTelemetryServiceShadowTraffic (copy), Config1 (ref)
 	local Entry = config1[p2] or IntersectionResult
 	

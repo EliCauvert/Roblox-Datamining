@@ -4,17 +4,17 @@ local UseUserExperimentFunction = require(Parent.Parent.RoactAppExperiment).useU
 local FStringPVCIAfterSignupLayerModule = require(Parent.Flags.FStringPVCIAfterSignupLayer)
 local FStringPVCIAfterSignupVariantKeyModule = require(Parent.Flags.FStringPVCIAfterSignupVariantKey)
 
-local function v4(p1) --[[ Line: 12 ]]
+local function v4(p1)
 	-- upvalues: FStringPVCIAfterSignupLayerModule (copy), FStringPVCIAfterSignupVariantKeyModule (copy)
 	return (p1[FStringPVCIAfterSignupLayerModule] or {})[FStringPVCIAfterSignupVariantKeyModule]
 end
 
 return {
-	usePVAndCIAfterSignupVariant = function(p1) --[[ Line: 18 ]]
+	usePVAndCIAfterSignupVariant = function(p1)
 		-- upvalues: UseUserExperimentFunction (copy), FStringPVCIAfterSignupLayerModule (copy), v4 (copy)
 		return (UseUserExperimentFunction({ FStringPVCIAfterSignupLayerModule }, v4, (p1 or { isExposureEnabled = false }).isExposureEnabled))
 	end,
-	logExposure = function() --[[ Line: 26 ]]
+	logExposure = function()
 		-- upvalues: IXPService (copy), FStringPVCIAfterSignupLayerModule (copy)
 		IXPService:LogUserLayerExposure(FStringPVCIAfterSignupLayerModule)
 	end

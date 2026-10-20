@@ -2,7 +2,7 @@
 local v1 = nil
 local v2 = nil
 
-local function _() --[[ Line: 15 | Named "getOpenProfileRequested" ]]
+local function _()
 	-- upvalues: v1 (ref), Signal (copy)
 	local v3 = v1
 	
@@ -16,7 +16,7 @@ local function _() --[[ Line: 15 | Named "getOpenProfileRequested" ]]
 	end
 end
 
-local _ = function() --[[ Line: 26 | Named "getOpenAddFriendsRequested" ]]
+local _ = function()
 	-- upvalues: v2 (ref), Signal (copy)
 	local v3 = v2
 	
@@ -31,7 +31,7 @@ local _ = function() --[[ Line: 26 | Named "getOpenAddFriendsRequested" ]]
 end
 
 return {
-	requestOpenProfile = function(UserId, ExtraProps) --[[ Line: 37 ]]
+	requestOpenProfile = function(UserId, ExtraProps)
 		-- upvalues: v1 (ref), Signal (copy)
 		local v3 = v1
 		local v4 = nil
@@ -45,7 +45,7 @@ return {
 		end
 		v4:fire({ userId = UserId, extraProps = ExtraProps })
 	end,
-	subscribeOpenProfile = function(p1) --[[ Line: 44 ]]
+	subscribeOpenProfile = function(p1)
 		-- upvalues: v1 (ref), Signal (copy)
 		local v3 = v1
 		local v4 = nil
@@ -59,7 +59,7 @@ return {
 		end
 		return v4:connect(p1)
 	end,
-	requestOpenAddFriends = function() --[[ Line: 48 ]]
+	requestOpenAddFriends = function()
 		-- upvalues: v2 (ref), Signal (copy)
 		local v3 = v2
 		local v4 = nil
@@ -73,7 +73,7 @@ return {
 		end
 		v4:fire()
 	end,
-	subscribeOpenAddFriends = function(p1) --[[ Line: 52 ]]
+	subscribeOpenAddFriends = function(p1)
 		-- upvalues: v2 (ref), Signal (copy)
 		local v3 = v2
 		local v4 = nil

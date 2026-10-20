@@ -34,23 +34,23 @@ local _UDim2 = UDim2.fromOffset(16, 16)
 local Code = Enum.Font.Code
 local _Font = Font.new("rbxasset://fonts/families/BuilderMono.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
 
-local function v31(p1) --[[ Line: 50 ]]
+local function v31(p1)
 	print(`[Default link callback]: URL [{p1}] is clicked`)
 end
 
 local MarkdownRendererModule = { renderers = {} }
 
-local function _(p1, p2) --[[ Line: 58 | Named "getFontFace" ]]
+local function _(p1, p2)
 	local FontFace = p1.fontFace or p1.font
 	
 	return if typeof(FontFace) == "Font" then FontFace elseif FontFace then Font.fromEnum(FontFace) else Font.fromEnum(p2)
 end
 
-local _ = function(p1): boolean --[[ Line: 68 | Named "shouldUseTopPadding" ]]
+local _ = function(p1): boolean
 	return p1.offset ~= 0
 end
 
-local function render(JoinResult, JoinDeepResult) --[[ Line: 73 ]]
+local function render(JoinResult, JoinDeepResult)
 	-- upvalues: MarkdownRendererModule (copy), GetNodeTypeConfigModule (copy)
 	if not JoinResult then
 		return nil
@@ -71,7 +71,7 @@ local function render(JoinResult, JoinDeepResult) --[[ Line: 73 ]]
 	return RendererResult
 end
 
-local function processChildren(p1, p2) --[[ Line: 93 ]]
+local function processChildren(p1, p2)
 	-- upvalues: GetNodeTypeConfigModule (copy), render (copy)
 	local Children = p1.children
 	
@@ -103,7 +103,7 @@ local function processChildren(p1, p2) --[[ Line: 93 ]]
 	return List
 end
 
-local function computeLineNumbers(Text: string): string --[[ Line: 169 ]]
+local function computeLineNumbers(Text: string): string
 	local CountText = #Text
 	local List = {}
 	local Count = 1
@@ -121,32 +121,32 @@ local function computeLineNumbers(Text: string): string --[[ Line: 169 ]]
 	return table.concat(List, "\n")
 end
 
-local _ = function(p3) --[[ Line: 188 | Named "copyToClipboard" ]]
+local _ = function(p3)
 	-- upvalues: MessageBusService (copy)
-	pcall(function() --[[ Line: 189 ]]
+	pcall(function()
 		-- upvalues: MessageBusService (upval), p3 (copy)
 		return MessageBusService:Publish(MessageBusService:GetMessageId("ExternalContentSharing", "setClipboardText"), { text = p3 })
 	end)
 end
 
-local MemoizeResult = DashModule.memoize(function(Text) --[[ Line: 197 ]]
+local MemoizeResult = DashModule.memoize(function(Text)
 	-- upvalues: MessageBusService (copy)
-	return function() --[[ Line: 198 ]]
+	return function()
 		-- upvalues: Text (copy), MessageBusService (upval)
-		pcall(function() --[[ Line: 189 ]]
+		pcall(function()
 			-- upvalues: MessageBusService (upval), Text (copy)
 			return MessageBusService:Publish(MessageBusService:GetMessageId("ExternalContentSharing", "setClipboardText"), { text = Text })
 		end)
 	end
 end)
 
-local function renderHardBreak() --[[ Line: 467 ]]
+local function renderHardBreak()
 	-- upvalues: HardBreakElement (copy)
 	return HardBreakElement
 end
 
 MarkdownRendererModule.defaultRenderers = {
-	ROOT = function(p3, p4) --[[ Line: 125 ]]
+	ROOT = function(p3, p4)
 		-- upvalues: ReactModule (copy), View (copy)
 		return ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y col",
@@ -154,7 +154,7 @@ MarkdownRendererModule.defaultRenderers = {
 			backgroundStyle = { Transparency = 1 }
 		}, (p4.processChildren(p3, p4)))
 	end,
-	HEADING = function(p3, p4) --[[ Line: 136 ]]
+	HEADING = function(p3, p4)
 		-- upvalues: ReactModule (copy), View (copy), RenderInlineModule (copy), MergeContextsModule (copy)
 		return ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y",
@@ -167,7 +167,7 @@ MarkdownRendererModule.defaultRenderers = {
 			}))
 		})
 	end,
-	PARAGRAPH = function(p3, p4) --[[ Line: 155 ]]
+	PARAGRAPH = function(p3, p4)
 		-- upvalues: ReactModule (copy), View (copy), RenderInlineModule (copy)
 		return ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y",
@@ -178,7 +178,7 @@ MarkdownRendererModule.defaultRenderers = {
 			InlineLayout = RenderInlineModule(p3, p4)
 		})
 	end,
-	CODE_BLOCK = function(p3, p4) --[[ Line: 203 ]]
+	CODE_BLOCK = function(p3, p4)
 		-- upvalues: Highlighter (copy), GetCodeTextStylesFunction (copy), Flags (copy), _Font (copy), Code (copy), computeLineNumbers (copy), ReactModule (copy), View (copy), FoundationModule (copy), MemoizeResult (copy), Text (copy), DashModule (copy)
 		local Text1 = p3.text
 		local HighlightResult = if (if p3.attributes then p3.attributes.language else nil) == "lua" then Highlighter.highlight(Text1, p4.colorScheme) else Text1
@@ -300,7 +300,7 @@ MarkdownRendererModule.defaultRenderers = {
 			})
 		})
 	end,
-	STYLED_TEXT = function(p3, p4) --[[ Line: 425 ]]
+	STYLED_TEXT = function(p3, p4)
 		-- upvalues: DashModule (copy), MergeContextsModule (copy)
 		local Style = if p3.attributes and p3.attributes.style then p3.attributes.style else nil
 		local JoinDeepResult = {}
@@ -316,7 +316,7 @@ MarkdownRendererModule.defaultRenderers = {
 		end
 		return (p4.processChildren(p3, MergeContextsModule(p4, { textStyles = JoinDeepResult })))
 	end,
-	TEXT = function(p3, p4) --[[ Line: 441 ]]
+	TEXT = function(p3, p4)
 		-- upvalues: ProcessSoftBreaksModule (copy), GetBaseTextElementEngineTagsFunction (copy), Flags (copy), BuilderSans (copy), SelectableTextElement (copy), TextElement (copy)
 		local config = {
 			LayoutOrder = p3.index,
@@ -344,21 +344,21 @@ MarkdownRendererModule.defaultRenderers = {
 		
 		return if p4.textStyles.selectable then SelectableTextElement.new(config) else TextElement.new(config)
 	end,
-	LINK = function(p3, p4) --[[ Line: 471 ]]
+	LINK = function(p3, p4)
 		-- upvalues: MergeContextsModule (copy), DashModule (copy), IsInlineElementFunction (copy), HardBreakElement (copy), LinkElement (copy)
 		local Url = p3.attributes and p3.attributes.url or (p3.url or "")
 		
-		return LinkElement.new(DashModule.filter(p4.processChildren(p3, MergeContextsModule(p4, { textStyles = { color = p4.linkStyles.linkColor } })), function(HardBreakElement1): boolean --[[ Line: 481 ]]
+		return LinkElement.new(DashModule.filter(p4.processChildren(p3, MergeContextsModule(p4, { textStyles = { color = p4.linkStyles.linkColor } })), function(HardBreakElement1): boolean
 			-- upvalues: IsInlineElementFunction (upval), HardBreakElement (upval)
 			return IsInlineElementFunction(HardBreakElement1) and HardBreakElement1 ~= HardBreakElement
 		end), {
-			onActivated = function() --[[ Line: 485 ]]
+			onActivated = function()
 				-- upvalues: p4 (copy), Url (copy)
 				p4.linkCallback(Url)
 			end
 		})
 	end,
-	LIST = function(p3, p4) --[[ Line: 346 ]]
+	LIST = function(p3, p4)
 		-- upvalues: ReactModule (copy), View (copy), render (copy), DashModule (copy), BulletList (copy), Flags (copy), BuilderSans (copy)
 		local List = {}
 		local v1 = nil
@@ -418,7 +418,7 @@ MarkdownRendererModule.defaultRenderers = {
 			UIPadding = p3.offset ~= 0 and ReactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 10) })
 		})
 	end,
-	LIST_ITEM = function(p5, p6) --[[ Line: 415 ]]
+	LIST_ITEM = function(p5, p6)
 		-- upvalues: ReactModule (copy), View (copy), RenderInlineModule (copy)
 		return ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y",
@@ -426,7 +426,7 @@ MarkdownRendererModule.defaultRenderers = {
 			LayoutOrder = p5.index
 		}, { InlineLayout = RenderInlineModule(p5, p6) })
 	end,
-	DIVIDER = function(p5) --[[ Line: 491 ]]
+	DIVIDER = function(p5)
 		-- upvalues: ReactModule (copy), View (copy), Divider (copy)
 		return ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y",
@@ -437,7 +437,7 @@ MarkdownRendererModule.defaultRenderers = {
 			Divider = ReactModule.createElement(Divider)
 		})
 	end,
-	QUOTE = function(p5, p6) --[[ Line: 506 ]]
+	QUOTE = function(p5, p6)
 		-- upvalues: ReactModule (copy), View (copy), RenderInlineModule (copy), MergeContextsModule (copy)
 		return ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y padding-small",
@@ -456,7 +456,7 @@ MarkdownRendererModule.defaultRenderers = {
 			})
 		})
 	end,
-	IMAGE = function(p5, p6) --[[ Line: 530 ]]
+	IMAGE = function(p5, p6)
 		-- upvalues: ImageElement (copy)
 		return ImageElement.new({
 			LayoutOrder = p5.index,
@@ -477,7 +477,7 @@ MarkdownRendererModule.defaultRenderers = {
 	LINE_BREAK = renderHardBreak
 }
 
-function MarkdownRendererModule.render(p5, p6) --[[ Line: 575 ]]
+function MarkdownRendererModule.render(p5, p6)
 	-- upvalues: MarkdownRendererModule (copy), Flags (copy), NormalizeStyleFontFunction (copy), DashModule (copy), Flags1 (copy), _Font (copy), BuilderSans (copy), Code (copy), _UDim2 (copy), v31 (copy), processChildren (copy), render (copy)
 	MarkdownRendererModule.renderers = p6.userRenderers
 	local Copy = table.clone(p6.markdownRendererProps or {})

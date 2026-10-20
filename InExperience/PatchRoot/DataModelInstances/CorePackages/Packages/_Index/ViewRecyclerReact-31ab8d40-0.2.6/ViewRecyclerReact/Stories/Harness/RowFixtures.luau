@@ -14,7 +14,7 @@ local list = {
 }
 
 return {
-	SimpleRow = Module.createRecyclableView(function(p1) --[[ Line: 29 | Named "SimpleRowView" ]]
+	SimpleRow = Module.createRecyclableView(function(p1)
 		-- upvalues: SignalsReactModule (copy), RecyclingStatsModule (copy), CreateElementFunction (copy)
 		local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
 		local UseAssignmentResult = RecyclingStatsModule.useAssignment(UseSignalStateResult.id)
@@ -32,7 +32,7 @@ return {
 		hideWhilePending = true,
 		readiness = Module.RecyclableViewReadiness.ReadyOnCommit
 	}),
-	MeasuredRow = Module.createRecyclableView(function(p1) --[[ Line: 44 | Named "MeasuredRowView" ]]
+	MeasuredRow = Module.createRecyclableView(function(p1)
 		-- upvalues: SignalsReactModule (copy), RecyclingStatsModule (copy), CreateElementFunction (copy)
 		local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
 		local UseAssignmentResult = RecyclingStatsModule.useAssignment(UseSignalStateResult.id)
@@ -62,18 +62,18 @@ return {
 		hideWhilePending = true,
 		readiness = Module.RecyclableViewReadiness.ReadyOnCommit
 	}),
-	ImmediateSimpleRow = Module.createRecyclableView(function(p1) --[[ Line: 71 | Named "ImmediateSimpleRowView" ]]
+	ImmediateSimpleRow = Module.createRecyclableView(function(p1)
 		-- upvalues: SignalsReactModule (copy), CreateElementFunction (copy)
 		return CreateElementFunction("TextLabel", {
 			BorderSizePixel = 0,
 			TextSize = 17,
-			BackgroundColor3 = SignalsReactModule.useSignalBinding(function(p2): Color3 --[[ Line: 72 ]]
+			BackgroundColor3 = SignalsReactModule.useSignalBinding(function(p2): Color3
 				-- upvalues: p1 (copy)
 				return Color3.fromHSV((tonumber(p1.itemSignal(p2).id) or 1) % 17 / 17, 0.25, 0.9)
 			end),
 			Font = Enum.Font.BuilderSans,
 			Size = UDim2.fromScale(1, 1),
-			Text = SignalsReactModule.useSignalBinding(function(p2) --[[ Line: 76 ]]
+			Text = SignalsReactModule.useSignalBinding(function(p2)
 				-- upvalues: p1 (copy)
 				return p1.itemSignal(p2).label
 			end),
@@ -82,7 +82,7 @@ return {
 	end, {
 		readiness = Module.RecyclableViewReadiness.ReadyOnAssignment
 	}),
-	ImmediateMeasuredRow = Module.createRecyclableView(function(p1) --[[ Line: 92 | Named "ImmediateMeasuredRowView" ]]
+	ImmediateMeasuredRow = Module.createRecyclableView(function(p1)
 		-- upvalues: SignalsReactModule (copy), CreateElementFunction (copy)
 		return CreateElementFunction("Frame", {
 			BackgroundTransparency = 1,
@@ -97,7 +97,7 @@ return {
 				BackgroundColor3 = Color3.fromRGB(238, 238, 243),
 				Font = Enum.Font.BuilderSans,
 				Size = UDim2.fromScale(1, 0),
-				Text = SignalsReactModule.useSignalBinding(function(p2) --[[ Line: 93 ]]
+				Text = SignalsReactModule.useSignalBinding(function(p2)
 					-- upvalues: p1 (copy)
 					return p1.itemSignal(p2).label
 				end),
@@ -105,7 +105,7 @@ return {
 				TextXAlignment = Enum.TextXAlignment.Left
 			}),
 			Padding = CreateElementFunction("UIPadding", {
-				PaddingBottom = SignalsReactModule.useSignalBinding(function(p2): UDim --[[ Line: 97 ]]
+				PaddingBottom = SignalsReactModule.useSignalBinding(function(p2): UDim
 					-- upvalues: p1 (copy)
 					return UDim.new(0, p1.itemSignal(p2).gap or 0)
 				end)
@@ -114,7 +114,7 @@ return {
 	end, {
 		readiness = Module.RecyclableViewReadiness.ReadyOnAssignment
 	}),
-	buildSimpleRows = function(p1, p2) --[[ Line: 142 ]]
+	buildSimpleRows = function(p1, p2)
 		local Buffer = table.create(p1)
 		
 		for i = 1, p1 do
@@ -122,7 +122,7 @@ return {
 		end
 		return Buffer
 	end,
-	buildLogRows = function(p3) --[[ Line: 153 ]]
+	buildLogRows = function(p3)
 		-- upvalues: list (copy)
 		local Buffer = table.create(p3)
 		
@@ -134,7 +134,7 @@ return {
 		end
 		return Buffer
 	end,
-	buildKnownVariableRows = function(p4, p5, p6) --[[ Line: 164 ]]
+	buildKnownVariableRows = function(p4, p5, p6)
 		local Buffer = table.create(p4)
 		
 		for i = 1, p4 do
@@ -145,7 +145,7 @@ return {
 		end
 		return Buffer
 	end,
-	buildMeasuredRows = function(p7, Gap) --[[ Line: 176 ]]
+	buildMeasuredRows = function(p7, Gap)
 		-- upvalues: Parts (copy)
 		local _Random = Random.new(1337)
 		local Buffer = table.create(p7)
@@ -165,7 +165,7 @@ return {
 		end
 		return Buffer
 	end,
-	getItemKey = function(p8) --[[ Line: 194 ]]
+	getItemKey = function(p8)
 		return p8.id
 	end
 }

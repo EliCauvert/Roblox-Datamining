@@ -17,7 +17,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 	componentType = TModule.string
 })
 
-return function(EventContext, CustomFields) --[[ Line: 35 ]]
+return function(EventContext, CustomFields)
 	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), TelemetryService (copy), config (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	

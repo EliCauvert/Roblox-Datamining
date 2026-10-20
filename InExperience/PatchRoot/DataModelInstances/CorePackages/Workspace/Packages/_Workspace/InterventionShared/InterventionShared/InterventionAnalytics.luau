@@ -33,7 +33,7 @@ local Constants = {
 local Event = {
 	eventName = Constants.EventName,
 	backends = { LoggingProtocolModule.TelemetryBackends.EventIngest },
-	formatCustomFields = function(p1) --[[ Line: 74 ]]
+	formatCustomFields = function(p1)
 		-- upvalues: Players (copy), CryoModule (copy), Constants (copy)
 		local EventType = p1.eventType
 		local RenderedTimestamp = p1.renderedTimestamp
@@ -69,12 +69,12 @@ local Event = {
 	end
 }
 
-local function v7(CounterSuffix) --[[ Line: 137 ]]
+local function v7(CounterSuffix)
 	-- upvalues: LoggingProtocolModule (copy)
 	return {
 		counterSuffix = CounterSuffix,
 		backends = { LoggingProtocolModule.TelemetryBackends.Counter },
-		formatCustomFields = function(p1) --[[ Line: 141 ]]
+		formatCustomFields = function(p1)
 			return {
 				eventType = p1.eventType,
 				interventionType = p1.interventionType,
@@ -85,7 +85,7 @@ local function v7(CounterSuffix) --[[ Line: 137 ]]
 end
 
 return {
-	sendAnalyticsEvent = function(p1, p2) --[[ Line: 214 ]]
+	sendAnalyticsEvent = function(p1, p2)
 		-- upvalues: Default (copy)
 		local LoggingTypes = p1.loggingTypes
 		

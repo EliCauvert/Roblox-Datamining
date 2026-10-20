@@ -6,7 +6,7 @@ local FFlagAddFriendsPageHighlightUnseenRequests = require(Parent.SharedFlags).F
 local FFlagAddFriendsRefreshRequestOrder = require(Parent.SharedFlags).FFlagAddFriendsRefreshRequestOrder
 local t = {}
 
-local function parkTrailingScores(p1, List) --[[ Line: 16 ]]
+local function parkTrailingScores(p1, List)
 	local t = {}
 	
 	for _, value in ipairs(List) do
@@ -20,7 +20,7 @@ local function parkTrailingScores(p1, List) --[[ Line: 16 ]]
 			table.insert(List1, { userId = UserId, score = Score })
 		end
 	end
-	table.sort(List1, function(A, B): boolean --[[ Line: 28 ]]
+	table.sort(List1, function(A, B): boolean
 		return A.score < B.score
 	end)
 	local t1 = {}
@@ -31,10 +31,10 @@ local function parkTrailingScores(p1, List) --[[ Line: 16 ]]
 	return t1, #List1
 end
 
-return function(p2) --[[ Line: 42 ]]
+return function(p2)
 	-- upvalues: RoduxModule (copy), t (copy), FFlagAddFriendsRefreshRequestOrder (copy), parkTrailingScores (copy), FFlagAddFriendsPageHighlightUnseenRequests (copy)
 	return RoduxModule.createReducer(t, {
-		[p2.friendsNetworking.GetFriendRequests.Succeeded.name] = function(p3, p4) --[[ Line: 46 ]]
+		[p2.friendsNetworking.GetFriendRequests.Succeeded.name] = function(p3, p4)
 			-- upvalues: FFlagAddFriendsRefreshRequestOrder (upval), parkTrailingScores (upval), FFlagAddFriendsPageHighlightUnseenRequests (upval)
 			local Amount = 0
 			

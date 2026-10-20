@@ -6,14 +6,14 @@ local _ = require(Foundation.Utility.Plugin.StudioUri)
 local _ = require(Foundation.Components.Types)
 local config = { testId = "--foundation-popover" }
 
-return function(p1) --[[ Line: 25 | Named "Popover" ]]
+return function(p1)
 	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), PopoverContextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
 	
 	return ReactModule.createElement(PopoverContextModule.Provider, {
-		value = ReactModule.useMemo(function() --[[ Line: 30 ]]
+		value = ReactModule.useMemo(function()
 			-- upvalues: UseStateResult (copy), UseStateResult2 (copy), UseStateResult1 (copy), UseStateResult2_1 (copy), WithDefaultsModuleResult (copy)
 			return {
 				anchor = UseStateResult,

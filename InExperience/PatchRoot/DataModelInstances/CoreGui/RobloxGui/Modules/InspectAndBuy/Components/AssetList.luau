@@ -11,7 +11,7 @@ local SetAssetFromBundleInfoModule = require(Parent.Actions.SetAssetFromBundleIn
 local FFlagAddNewPlayerListMobileFocusNav = require(CorePackages.Workspace.Packages.PlayerList).Flags.FFlagAddNewPlayerListMobileFocusNav
 local AssetList = RoactModule.PureComponent:extend("AssetList")
 
-function AssetList.calculateCanvasSize(p1, MaxAssetCardsPerRow, Count, AssetCardSizeY: number) --[[ Line: 25 ]]
+function AssetList.calculateCanvasSize(p1, MaxAssetCardsPerRow, Count, AssetCardSizeY: number)
 	local Current = p1.gridFrameRef.current
 	local View = p1.props.views[p1.props.view]
 	
@@ -20,7 +20,7 @@ function AssetList.calculateCanvasSize(p1, MaxAssetCardsPerRow, Count, AssetCard
 	end
 end
 
-function AssetList.init(p1) --[[ Line: 38 ]]
+function AssetList.init(p1)
 	-- upvalues: RoactModule (copy), FFlagAddNewPlayerListMobileFocusNav (copy)
 	local View = p1.props.views[p1.props.view]
 	p1.gridFrameRef = RoactModule.createRef()
@@ -31,7 +31,7 @@ function AssetList.init(p1) --[[ Line: 38 ]]
 	}
 end
 
-function AssetList.render(p1) --[[ Line: 52 ]]
+function AssetList.render(p1)
 	-- upvalues: RoactModule (copy), AssetCardModule (copy), Skeleton (copy), FFlagAddNewPlayerListMobileFocusNav (copy)
 	local View = p1.props.views[p1.props.view]
 	local MaxAssetCardsPerRow = View.MaxAssetCardsPerRow
@@ -68,9 +68,9 @@ function AssetList.render(p1) --[[ Line: 52 ]]
 		BorderSizePixel = 0,
 		LayoutOrder = 3,
 		[RoactModule.Ref] = p1.gridFrameRef,
-		[RoactModule.Change.AbsoluteSize] = function(_) --[[ Line: 104 ]]
+		[RoactModule.Change.AbsoluteSize] = function(_)
 			-- upvalues: p1 (copy)
-			spawn(function() --[[ Line: 105 ]]
+			spawn(function()
 				-- upvalues: p1 (upval)
 				p1:resize()
 			end)
@@ -78,12 +78,12 @@ function AssetList.render(p1) --[[ Line: 52 ]]
 	}, Elements)
 end
 
-function AssetList.didMount(p2) --[[ Line: 112 ]]
+function AssetList.didMount(p2)
 	p2:resize()
 	p2.mounted = true
 end
 
-function AssetList.updateAssetsFromBundles(p2) --[[ Line: 126 ]]
+function AssetList.updateAssetsFromBundles(p2)
 	-- upvalues: CryoModule (copy)
 	local Bundles = p2.props.bundles
 	local AssetBundles = p2.props.assetBundles
@@ -111,7 +111,7 @@ function AssetList.updateAssetsFromBundles(p2) --[[ Line: 126 ]]
 	end
 end
 
-function AssetList.didUpdate(p3, p4) --[[ Line: 166 ]]
+function AssetList.didUpdate(p3, p4)
 	-- upvalues: FFlagAddNewPlayerListMobileFocusNav (copy), GuiService (copy)
 	if p3.props.view ~= p4.view then
 		p3:resize()
@@ -124,11 +124,11 @@ function AssetList.didUpdate(p3, p4) --[[ Line: 166 ]]
 	end
 end
 
-function AssetList.willUnmount(p3) --[[ Line: 186 ]]
+function AssetList.willUnmount(p3)
 	p3.mounted = false
 end
 
-function AssetList.resize(p3) --[[ Line: 190 ]]
+function AssetList.resize(p3)
 	local Current = p3.gridFrameRef.current
 	local View = p3.props.views[p3.props.view]
 	
@@ -144,7 +144,7 @@ function AssetList.resize(p3) --[[ Line: 190 ]]
 	end
 end
 
-return RoactRoduxModule.connect(function(p3, _) --[[ Line: 221 ]]
+return RoactRoduxModule.connect(function(p3, _)
 	return {
 		view = p3.view,
 		visible = p3.visible,
@@ -154,18 +154,18 @@ return RoactRoduxModule.connect(function(p3, _) --[[ Line: 221 ]]
 		detailsInformation = p3.detailsInformation,
 		gamepadEnabled = p3.gamepadEnabled
 	}
-end, function(Callback) --[[ Line: 231 ]]
+end, function(Callback)
 	-- upvalues: SetAssetFromBundleInfoModule (copy)
 	return {
-		dispatchSetAssetFromBundleInfo = function(p3, p4) --[[ Line: 233 ]]
+		dispatchSetAssetFromBundleInfo = function(p3, p4)
 			-- upvalues: Callback (copy), SetAssetFromBundleInfoModule (upval)
 			Callback(SetAssetFromBundleInfoModule(p3, p4))
 		end
 	}
-end)(function(p3) --[[ Line: 212 | Named "AssetListWrapper" ]]
+end)(function(p3)
 	-- upvalues: RoactModule (copy), InspectAndBuyContextModule (copy), CryoModule (copy), AssetList (copy)
 	return RoactModule.createElement(InspectAndBuyContextModule.Consumer, {
-		render = function(Views) --[[ Line: 214 ]]
+		render = function(Views)
 			-- upvalues: CryoModule (upval), p3 (copy), RoactModule (upval), AssetList (upval)
 			return RoactModule.createElement(AssetList, (CryoModule.Dictionary.join(p3, { views = Views })))
 		end

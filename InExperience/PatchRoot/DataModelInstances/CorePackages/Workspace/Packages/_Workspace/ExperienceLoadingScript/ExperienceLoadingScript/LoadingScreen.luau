@@ -57,12 +57,12 @@ else
 	local v1 = 0
 	local CurrentTime = 1e999
 	
-	local function _(p1) --[[ Line: 110 | Named "getPadding" ]]
+	local function _(p1)
 		-- upvalues: IsPlatformMatch (copy), config (copy), IsTenFootInterface (copy)
 		return if IsPlatformMatch then p1 and config.MOBILE_PORTRAIT or config.MOBILE_LANDSCAPE elseif IsTenFootInterface then config.CONSOLE else config.DESKTOP
 	end
 	
-	local _ = function(Entry, Value: number) --[[ Line: 120 | Named "lerp" ]]
+	local _ = function(Entry, Value: number)
 		if type(Entry) == "table" and #Entry >= 2 then
 			local ClampedValue = math.clamp(Value, 0, 1)
 			
@@ -73,7 +73,7 @@ else
 	end
 	
 	local config1 = {
-		FadeIn = function(p1: number, _, Bindings, Callback: () -> ()) --[[ Line: 129 ]]
+		FadeIn = function(p1: number, _, Bindings, Callback: () -> ())
 			local list = { 1, 1 }
 			local list1 = { 1, 0 }
 			local list2 = { 1, 0.2 }
@@ -173,7 +173,7 @@ else
 			end
 			CreatorTextSizeFunction(v9)
 		end,
-		FadeOut = function(p1: number, _, Bindings, Callback: () -> ()) --[[ Line: 158 ]]
+		FadeOut = function(p1: number, _, Bindings, Callback: () -> ())
 			-- upvalues: RunService (copy)
 			local list = { 1, 0.6 }
 			local list1 = { 0, 1 }
@@ -277,7 +277,7 @@ else
 		end
 	}
 	
-	local _ = function() --[[ Line: 191 | Named "disconnectAndCloseHealthStat" ]]
+	local _ = function()
 		-- upvalues: InputBeganConnection (ref), GuiService (copy)
 		if InputBeganConnection then
 			InputBeganConnection:disconnect()
@@ -288,15 +288,15 @@ else
 	
 	local LoadingScreen = RoactModule.Component:extend("LoadingScreen")
 	
-	function LoadingScreen.playAnimation(p1, AnimationFunction, p2, Callback) --[[ Line: 202 ]]
+	function LoadingScreen.playAnimation(p1, AnimationFunction, p2, Callback)
 		-- upvalues: RunService (copy)
 		p1.animationStartTime = tick()
 		p1.animationFunction = AnimationFunction
 		
 		if not p1.renderSteppedConnection then
-			p1.renderSteppedConnection = RunService.RenderStepped:Connect(function() --[[ Line: 207 ]]
+			p1.renderSteppedConnection = RunService.RenderStepped:Connect(function()
 				-- upvalues: p1 (copy), p2 (copy), Callback (copy)
-				p1.animationFunction(tick() - p1.animationStartTime, p2, p1.updateBindings, function() --[[ Line: 208 ]]
+				p1.animationFunction(tick() - p1.animationStartTime, p2, p1.updateBindings, function()
 					-- upvalues: p1 (upval), Callback (upval)
 					p1:stopAnimation()
 					
@@ -308,14 +308,14 @@ else
 		end
 	end
 	
-	function LoadingScreen.stopAnimation(p1) --[[ Line: 218 ]]
+	function LoadingScreen.stopAnimation(p1)
 		if p1.renderSteppedConnection then
 			p1.renderSteppedConnection:Disconnect()
 			p1.renderSteppedConnection = nil
 		end
 	end
 	
-	function LoadingScreen.renderBackground(p1, p2) --[[ Line: 225 ]]
+	function LoadingScreen.renderBackground(p1, p2)
 		-- upvalues: RoactModule (copy), DisplayOrder (ref), ExternalEventConnection (copy), RunService (copy)
 		return RoactModule.createElement("ScreenGui", {
 			IgnoreGuiInset = true,
@@ -349,7 +349,7 @@ else
 		})
 	end
 	
-	function LoadingScreen:showConnnectionHealthDebugMenu(_) --[[ Line: 267 ]]
+	function LoadingScreen:showConnnectionHealthDebugMenu(_)
 		-- upvalues: v1 (ref), CurrentTime (ref), IsPlatformMatch (copy), GuiService (copy)
 		if v1 == 0 then
 			v1 = 1
@@ -364,7 +364,7 @@ else
 		CurrentTime = 1e999
 	end
 	
-	function LoadingScreen.renderPlaceIcon(p1, p2) --[[ Line: 284 ]]
+	function LoadingScreen.renderPlaceIcon(p1, p2)
 		-- upvalues: RoactModule (copy), _Color3 (copy), ExternalEventConnection (copy), RunService (copy)
 		local ShimPos = p1.state.shimPos
 		local Value: number = p1.bindings.iconTransparency:getValue()
@@ -467,7 +467,7 @@ else
 		return CreateElementFunction(v2, config, t)
 	end
 	
-	function LoadingScreen.renderInfoFrame(p1, p2) --[[ Line: 345 ]]
+	function LoadingScreen.renderInfoFrame(p1, p2)
 		-- upvalues: VerifiedBadgesModule (copy), list (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), IsPlatformMatch (copy)
 		local ProductInfo = p1.props.productInfo
 		local Name = ProductInfo and ProductInfo.Name or ""
@@ -486,7 +486,7 @@ else
 			Position = UDim2.fromScale(0.5, 0.5),
 			Size = p1.isPortrait and UDim2.fromScale(1, 0) or UDim2.fromScale(0.6, 0),
 			Active = true,
-			[RoactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 368 ]]
+			[RoactModule.Change.AbsoluteSize] = function(Frame)
 				-- upvalues: p1 (copy)
 				p1.updateBindings.updateInfoFrameAbsoluteSize(Frame.AbsoluteSize)
 			end
@@ -562,7 +562,7 @@ else
 		})
 	end
 	
-	function LoadingScreen.renderMain(p1, p2) --[[ Line: 447 ]]
+	function LoadingScreen.renderMain(p1, p2)
 		-- upvalues: IsPlatformMatch (copy), config (copy), IsTenFootInterface (copy), RoactModule (copy), DisplayOrder (ref), Loading (copy), IconSize (copy)
 		local IsPortrait = p1.isPortrait
 		local MOBILEPORTRAIT = if IsPlatformMatch then IsPortrait and config.MOBILE_PORTRAIT or config.MOBILE_LANDSCAPE elseif IsTenFootInterface then config.CONSOLE else config.DESKTOP
@@ -622,7 +622,7 @@ else
 		})
 	end
 	
-	function LoadingScreen.renderCloseBtn(p1, _) --[[ Line: 506 ]]
+	function LoadingScreen.renderCloseBtn(p1, _)
 		-- upvalues: ResponsiveModule (copy), RoactModule (copy), GetFFlagReportFirstExperienceCancelledModule (copy), LoggingProtocolModule (copy)
 		if p1.props.preferredInputRef.current ~= ResponsiveModule.Input.Directional and not p1.state.showCloseBtn and tick() - p1.startTime > 5 then
 			p1:setState({ showCloseBtn = true })
@@ -636,7 +636,7 @@ else
 			Size = UDim2.fromOffset(if p1.isQueueTreatmentEnabled then 32 else 32, if p1.isQueueTreatmentEnabled then 32 else 32),
 			Active = false,
 			ZIndex = 10,
-			[RoactModule.Event.MouseButton1Click] = function() --[[ Line: 529 ]]
+			[RoactModule.Event.MouseButton1Click] = function()
 				-- upvalues: GetFFlagReportFirstExperienceCancelledModule (upval), LoggingProtocolModule (upval)
 				if GetFFlagReportFirstExperienceCancelledModule then
 					LoggingProtocolModule.default:logEventOnce("first_experience_cancelled")
@@ -646,7 +646,7 @@ else
 		})
 	end
 	
-	function LoadingScreen.renderServerFrame(p1, p2) --[[ Line: 538 ]]
+	function LoadingScreen.renderServerFrame(p1, p2)
 		-- upvalues: IsTenFootInterface (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), NewResult (copy), CoreGui (copy)
 		local TextSize: number = if IsTenFootInterface then 16 else 12
 		local TextSize1: number = if IsTenFootInterface then 16 else 12
@@ -699,7 +699,7 @@ else
 		})
 	end
 	
-	function LoadingScreen.renderGamepadCancelBtn(p1, p2) --[[ Line: 597 ]]
+	function LoadingScreen.renderGamepadCancelBtn(p1, p2)
 		-- upvalues: ResponsiveModule (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), NewResult (copy)
 		return p1.props.preferredInputRef.current == ResponsiveModule.Input.Directional and (not p1.state.gamepadCancelPressed and RoactModule.createElement("Frame", {
 			Name = "GamepadCancelFrame",
@@ -745,7 +745,7 @@ else
 		}))
 	end
 	
-	function LoadingScreen.init(p1) --[[ Line: 646 ]]
+	function LoadingScreen.init(p1)
 		-- upvalues: _Vector2 (copy), IsTenFootInterface (copy), QueueExperimentation (copy), ContextActionService (copy), config1 (copy), RoactModule (copy), list (copy), IsPlatformMatch (copy), GuiService (copy)
 		p1.thumbnailMoveSpd = 0.05
 		p1.fadeinComplete = false
@@ -767,14 +767,14 @@ else
 		})
 		p1.isQueueTreatmentEnabled = if QueueExperimentation.getIsJoinNewServerButtonEnabled() then p1.props.placeId > 0 else QueueExperimentation.getIsAutoJoinNewServerEnabled() and p1.props.placeId > 0
 		
-		function p1.onAbsoluteSizeChange(Frame: Frame) --[[ Line: 675 ]]
+		function p1.onAbsoluteSizeChange(Frame: Frame)
 			-- upvalues: p1 (copy)
 			p1:setState({ absoluteSize = Frame.AbsoluteSize })
 			p1.isPortrait = Frame.AbsoluteSize.X < Frame.AbsoluteSize.Y
 			p1.updateBindings.iconSize(1)
 		end
 		
-		game.Loaded:Connect(function() --[[ Line: 684 ]]
+		game.Loaded:Connect(function()
 			-- upvalues: IsTenFootInterface (upval), ContextActionService (upval), p1 (copy), config1 (upval)
 			if IsTenFootInterface then
 				ContextActionService:UnbindCoreAction("CancelGameLoad")
@@ -783,7 +783,7 @@ else
 				wait()
 			end
 			p1:stopAnimation()
-			p1:playAnimation(config1.FadeOut, {}, function() --[[ Line: 692 ]]
+			p1:playAnimation(config1.FadeOut, {}, function()
 				-- upvalues: p1 (upval)
 				p1:setState({ visible = false })
 			end)
@@ -800,19 +800,19 @@ else
 		p1.bindings = {
 			thumbnailTransparency = Binding,
 			iconTransparency = Binding1,
-			iconSize = Binding3:map(function(p2): UDim2 --[[ Line: 713 ]]
+			iconSize = Binding3:map(function(p2): UDim2
 				-- upvalues: p1 (copy), list (upval)
 				local ClampedValue = math.clamp(math.max(p1.state.absoluteSize.X, p1.state.absoluteSize.Y) / 1024 * list[1], list[1], list[2])
 				
 				return UDim2.fromOffset(ClampedValue * p2, ClampedValue * p2)
 			end),
 			placeTextTransparency = Binding4,
-			placeTextSize = Binding5:map(function(p2) --[[ Line: 719 ]]
+			placeTextSize = Binding5:map(function(p2)
 				-- upvalues: IsPlatformMatch (upval)
 				return (if IsPlatformMatch then 20 else 36) * p2
 			end),
 			creatorTextTransparency = Binding6,
-			creatorTextSize = Binding7:map(function(p2: number): number --[[ Line: 723 ]]
+			creatorTextSize = Binding7:map(function(p2: number): number
 				return 20 * p2
 			end),
 			infoFrameTransparency = Binding8,
@@ -830,7 +830,7 @@ else
 			updateInfoFrameAbsoluteSize = Binding2_8
 		}
 		
-		function p1.renderBackgroundSteppedCallback(p2) --[[ Line: 743 ]]
+		function p1.renderBackgroundSteppedCallback(p2)
 			-- upvalues: p1 (copy), _Vector2 (upval)
 			local AbsoluteSize = p1.state.absoluteSize
 			local ScaledX = AbsoluteSize.x * 1.5
@@ -856,7 +856,7 @@ else
 			})
 		end
 		
-		function p1.renderShimmerCallback(p2: number) --[[ Line: 770 ]]
+		function p1.renderShimmerCallback(p2: number)
 			-- upvalues: p1 (copy)
 			local NewShimPos = p1.state.shimPos + p2 * 1
 			
@@ -869,14 +869,14 @@ else
 		if GuiService:GetUiMessage() ~= "" then
 			p1:setState({ serverStatusText = GuiService:GetUiMessage() })
 		end
-		GuiService.UiMessageChanged:Connect(function(MsgType, ServerStatusText) --[[ Line: 787 ]]
+		GuiService.UiMessageChanged:Connect(function(MsgType, ServerStatusText)
 			-- upvalues: p1 (copy)
 			if MsgType == Enum.UiMessageType.UiMessageInfo then
 				p1:setState({ serverStatusText = ServerStatusText })
 			end
 		end)
 		local Flag = false
-		ContextActionService:BindCoreAction("CancelGameLoad", function(_, UserInputState, _) --[[ Line: 795 ]]
+		ContextActionService:BindCoreAction("CancelGameLoad", function(_, UserInputState, _)
 			-- upvalues: Flag (ref), p1 (copy), ContextActionService (upval)
 			if UserInputState == Enum.UserInputState.Begin then
 				Flag = true
@@ -895,7 +895,7 @@ else
 		end, false, Enum.KeyCode.ButtonB)
 	end
 	
-	function LoadingScreen.renderAutoTranslate(p2) --[[ Line: 815 ]]
+	function LoadingScreen.renderAutoTranslate(p2)
 		-- upvalues: LoadingScreenTelemetryModule (copy), RoactModule (copy), AutoTranslateBadge (copy)
 		if p2.props.universeId <= 0 then
 			LoadingScreenTelemetryModule.countAutoTranslateZeroUniverseId()
@@ -910,12 +910,12 @@ else
 		end
 	end
 	
-	function LoadingScreen.renderPolicyContainer(p2) --[[ Line: 827 ]]
+	function LoadingScreen.renderPolicyContainer(p2)
 		-- upvalues: ReactModule (copy), PolicyContainer (copy)
 		return if p2.props.isSubjectToChinaPolicies then ReactModule.createElement(PolicyContainer, { position = UDim2.new(0, 0, 0, 32) }) else nil
 	end
 	
-	function LoadingScreen.renderServerStatus(p2) --[[ Line: 836 ]]
+	function LoadingScreen.renderServerStatus(p2)
 		-- upvalues: QueueExperimentation (copy), RoactModule (copy), ServerStatusWithCountdown (copy), ServerStatus (copy)
 		return if QueueExperimentation.getIsAutoJoinNewServerEnabled() then RoactModule.createElement(ServerStatusWithCountdown, {
 			anchorPoint = Vector2.new(0.5, 1),
@@ -934,16 +934,16 @@ else
 		}) else nil
 	end
 	
-	function LoadingScreen.renderMainWithProviders(p2, p3) --[[ Line: 860 ]]
+	function LoadingScreen.renderMainWithProviders(p2, p3)
 		-- upvalues: RoactModule (copy), FoundationProvider (copy), FoundationModule (copy), LocalizationProvider (copy), NewResult (copy)
 		return RoactModule.createElement(FoundationProvider, { colorMode = FoundationModule.Enums.ColorMode.Dark }, {
 			RoactModule.createElement(LocalizationProvider, { localization = NewResult }, p2:renderMain(p3))
 		})
 	end
 	
-	function LoadingScreen.render(p2) --[[ Line: 870 ]]
+	function LoadingScreen.render(p2)
 		-- upvalues: WithStyleFunction (copy), RoactModule (copy)
-		return WithStyleFunction(function(p3) --[[ Line: 873 ]]
+		return WithStyleFunction(function(p3)
 			-- upvalues: p2 (copy), RoactModule (upval)
 			return p2.state.visible and RoactModule.createElement("Folder", {}, {
 				BackgroundScreen = p2:renderBackground(p3),
@@ -952,15 +952,15 @@ else
 		end)
 	end
 	
-	function LoadingScreen:willUpdate(_, _) --[[ Line: 882 ]] end
+	function LoadingScreen:willUpdate(_, _) end
 	
-	function LoadingScreen.didMount(p2) --[[ Line: 884 ]]
+	function LoadingScreen.didMount(p2)
 		-- upvalues: RunService (copy), config1 (copy), QueueExperimentation (copy), ExperienceService (copy), PlaceLauncherState (copy)
 		RunService:SetRobloxGuiFocused(true)
 		p2.props.fetchUniverseId(p2.props.placeId)
 		p2.props.fetchGameProductInfo(p2.props.placeId)
 		p2.props.fetchSubjectToChinaPolicies()
-		p2:playAnimation(config1.FadeIn, {}, function() --[[ Line: 893 ]]
+		p2:playAnimation(config1.FadeIn, {}, function()
 			-- upvalues: p2 (copy)
 			p2.fadeinComplete = true
 		end)
@@ -971,7 +971,7 @@ else
 				
 				return
 			end
-			p2.placeJoinStateConnection = ExperienceService.PlaceJoinStateChanged:Connect(function(Queued) --[[ Line: 901 ]]
+			p2.placeJoinStateConnection = ExperienceService.PlaceJoinStateChanged:Connect(function(Queued)
 				-- upvalues: PlaceLauncherState (upval), QueueExperimentation (upval)
 				if Queued == PlaceLauncherState.Queued then
 					QueueExperimentation.logExposure()
@@ -980,13 +980,13 @@ else
 		end
 	end
 	
-	function LoadingScreen.willUnmount(p2) --[[ Line: 910 ]]
+	function LoadingScreen.willUnmount(p2)
 		-- upvalues: ContextActionService (copy), RunService (copy), InputBeganConnection (ref), UserInputService (copy), GuiService (copy), QueueExperimentation (copy)
 		ContextActionService:UnbindCoreAction("CancelGameLoad")
 		RunService:SetRobloxGuiFocused(false)
 		
 		if not InputBeganConnection then
-			InputBeganConnection = UserInputService.InputBegan:Connect(function() --[[ Line: 914 ]]
+			InputBeganConnection = UserInputService.InputBegan:Connect(function()
 				-- upvalues: InputBeganConnection (upval), GuiService (upval)
 				if InputBeganConnection then
 					InputBeganConnection:disconnect()
@@ -1001,7 +1001,7 @@ else
 		end
 	end
 	
-	local v2 = RoactRoduxModule.connect(function(p2, p3) --[[ Line: 925 ]]
+	local v2 = RoactRoduxModule.connect(function(p2, p3)
 		return {
 			productInfo = p2.productInfo,
 			isSubjectToChinaPolicies = p2.isSubjectToChinaPolicies,
@@ -1009,25 +1009,25 @@ else
 			universeId = p2.gameIds and p2.gameIds.universeId or 0,
 			settings = p2.settings
 		}
-	end, function(Callback) --[[ Line: 933 ]]
+	end, function(Callback)
 		-- upvalues: GetGameProductInfoModule (copy), GetIsSubjectToChinaPoliciesModule (copy), GetUniverseIdModule (copy), CreateNetworking (copy)
 		return {
-			fetchGameProductInfo = function(p2) --[[ Line: 935 ]]
+			fetchGameProductInfo = function(p2)
 				-- upvalues: Callback (copy), GetGameProductInfoModule (upval)
 				Callback(GetGameProductInfoModule(p2))
 			end,
-			fetchSubjectToChinaPolicies = function() --[[ Line: 938 ]]
+			fetchSubjectToChinaPolicies = function()
 				-- upvalues: Callback (copy), GetIsSubjectToChinaPoliciesModule (upval)
 				Callback(GetIsSubjectToChinaPoliciesModule())
 			end,
-			fetchUniverseId = function(p2) --[[ Line: 941 ]]
+			fetchUniverseId = function(p2)
 				-- upvalues: Callback (copy), GetUniverseIdModule (upval), CreateNetworking (upval)
 				Callback(GetUniverseIdModule(CreateNetworking, p2))
 			end
 		}
 	end)(LoadingScreen)
 	
-	return function(p2) --[[ Line: 946 ]]
+	return function(p2)
 		-- upvalues: ReactModule (copy), ResponsiveModule (copy), v2 (ref), CryoModule (copy)
 		local UseRefResult = ReactModule.useRef(nil)
 		UseRefResult.current = ResponsiveModule.usePreferredInput()

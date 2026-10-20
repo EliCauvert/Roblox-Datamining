@@ -6,7 +6,7 @@ local IsRandomValueBelow = math.random(10000) <= game:DefineFastInt("DiscoverySd
 local SduiInstrumentationModule = {}
 SduiInstrumentationModule.__index = SduiInstrumentationModule
 
-function SduiInstrumentationModule.new(p1, p2) --[[ Line: 43 ]]
+function SduiInstrumentationModule.new(p1, p2)
 	-- upvalues: IsRandomValueBelow (copy), SduiInstrumentationModule (copy)
 	local config = {
 		startTime = 0,
@@ -22,7 +22,7 @@ function SduiInstrumentationModule.new(p1, p2) --[[ Line: 43 ]]
 	return config
 end
 
-function SduiInstrumentationModule:startTimerFlow(p1) --[[ Line: 57 ]]
+function SduiInstrumentationModule:startTimerFlow(p1)
 	if not self.enabled then return end
 	local ScaledClockTime = 1000 * os.clock()
 	
@@ -49,7 +49,7 @@ function SduiInstrumentationModule:startTimerFlow(p1) --[[ Line: 57 ]]
 	OpenTimer.openCount += 1
 end
 
-function SduiInstrumentationModule:stopTimerFlow(Name, p1, p2) --[[ Line: 90 ]]
+function SduiInstrumentationModule:stopTimerFlow(Name, p1, p2)
 	-- upvalues: SduiErrorsModule (copy), DiscoveryAppLaunchTracker (copy)
 	if not self.enabled then return end
 	self.openTimerCount -= 1
@@ -91,7 +91,7 @@ function SduiInstrumentationModule:stopTimerFlow(Name, p1, p2) --[[ Line: 90 ]]
 	end
 end
 
-function SduiInstrumentationModule:aggregateClosedTimer(Name, Count, Failed, DurationMs) --[[ Line: 137 ]]
+function SduiInstrumentationModule:aggregateClosedTimer(Name, Count, Failed, DurationMs)
 	local ClosedTimer = self.closedTimers[Name]
 	
 	if ClosedTimer then
@@ -105,9 +105,9 @@ function SduiInstrumentationModule:aggregateClosedTimer(Name, Count, Failed, Dur
 	end
 end
 
-function SduiInstrumentationModule:scheduleFlush(p1) --[[ Line: 158 ]]
+function SduiInstrumentationModule:scheduleFlush(p1)
 	if self.enabled and not self.isFlushScheduled then
-		task.delay(self.flushDelay, function() --[[ Line: 160 ]]
+		task.delay(self.flushDelay, function()
 			-- upvalues: self (copy), p1 (copy)
 			self.isFlushScheduled = false
 			self:reportTimers(p1)
@@ -116,7 +116,7 @@ function SduiInstrumentationModule:scheduleFlush(p1) --[[ Line: 158 ]]
 	end
 end
 
-function SduiInstrumentationModule:reportTimers(p1) --[[ Line: 168 ]]
+function SduiInstrumentationModule:reportTimers(p1)
 	if self.enabled then
 		p1.dependencies.logger.reportTimers(self.closedTimers, p1.appPage)
 		self.closedTimers = {}

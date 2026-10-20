@@ -5,18 +5,18 @@ local Module = {}
 Module.__index = Module
 local FFlagPartyDevAPIToRespectThirdPartySettingsEnabled = require(SquadsCore.Parent.SharedFlags).FFlagPartyDevAPIToRespectThirdPartySettingsEnabled
 
-function Module.new() --[[ Line: 29 ]]
+function Module.new()
 	-- upvalues: Module (copy)
 	return (setmetatable({ isLeaveSquadPending = false, lastFiredSquadId = "" }, Module))
 end
 
-function Module:setLeaveSquadPendingAndFireEvent(IsLeaveSquadPending, p1) --[[ Line: 40 ]]
+function Module:setLeaveSquadPendingAndFireEvent(IsLeaveSquadPending, p1)
 	if self:_setLeaveSquadPending(IsLeaveSquadPending) then
 		self:fireSquadChangeEvent(nil, p1)
 	end
 end
 
-function Module:fireSquadChangeEvent(p1, p2) --[[ Line: 46 ]]
+function Module:fireSquadChangeEvent(p1, p2)
 	-- upvalues: ValidateSquadIdModule (copy), SocialService (copy), FFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy)
 	local P4 = p1 or ""
 	assert(P4 == "" or ValidateSquadIdModule(P4), "Try to fire with wrong squadId")
@@ -30,7 +30,7 @@ function Module:fireSquadChangeEvent(p1, p2) --[[ Line: 46 ]]
 	end
 end
 
-function Module:_setLeaveSquadPending(IsLeaveSquadPending): boolean --[[ Line: 63 ]]
+function Module:_setLeaveSquadPending(IsLeaveSquadPending): boolean
 	if self.isLeaveSquadPending == IsLeaveSquadPending then
 		return false
 	else

@@ -8,7 +8,7 @@ local SetGameStatAddIdModule = require(Actions.SetGameStatAddId)
 local FFlagLeaderstatsWithASideOfClientModule = require(Parent.Flags.FFlagLeaderstatsWithASideOfClient)
 local FormatStatStringModule = require(Parent.FormatStatString)
 
-local function gameStatsComp(A, B) --[[ Line: 17 ]]
+local function gameStatsComp(A, B)
 	-- upvalues: FFlagLeaderstatsWithASideOfClientModule (copy)
 	if A.isPrimary ~= B.isPrimary then
 		return A.isPrimary
@@ -29,7 +29,7 @@ end
 
 local Count = 0
 
-return function(p1, p2) --[[ Line: 35 | Named "GameStats" ]]
+return function(p1, p2)
 	-- upvalues: AddGameStatModule (copy), FormatStatStringModule (copy), FFlagLeaderstatsWithASideOfClientModule (copy), Count (ref), CryoModule (copy), gameStatsComp (copy), RemoveGameStatModule (copy), SetGameStatTextModule (copy), SetGameStatAddIdModule (copy)
 	local P2 = p1 or {}
 	
@@ -66,17 +66,17 @@ return function(p1, p2) --[[ Line: 35 | Named "GameStats" ]]
 		
 		return JoinResult
 	elseif p2.type == RemoveGameStatModule.name then
-		return CryoModule.List.filter(P2, function(p3): boolean --[[ Line: 68 ]]
+		return CryoModule.List.filter(P2, function(p3): boolean
 			-- upvalues: p2 (copy)
 			return p3.name ~= p2.statName
 		end)
 	elseif p2.type == SetGameStatTextModule.name then
-		return CryoModule.List.map(P2, function(p3) --[[ Line: 72 ]]
+		return CryoModule.List.map(P2, function(p3)
 			-- upvalues: p2 (copy), CryoModule (upval)
 			return p3.name == p2.statName and CryoModule.Dictionary.join(p3, { text = p2.text }) or p3
 		end)
 	elseif FFlagLeaderstatsWithASideOfClientModule and p2.type == SetGameStatAddIdModule.name then
-		local MapResult = CryoModule.List.map(P2, function(p3) --[[ Line: 76 ]]
+		local MapResult = CryoModule.List.map(P2, function(p3)
 			-- upvalues: p2 (copy), CryoModule (upval)
 			return p3.name == p2.statName and CryoModule.Dictionary.join(p3, { serverAddId = p2.serverAddId }) or p3
 		end)

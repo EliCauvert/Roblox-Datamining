@@ -1,7 +1,7 @@
 ﻿local HttpService = game:GetService("HttpService")
 local UrlModule = require(script.Parent.Parent.Url)
 
-return function(Callback, ParticipantuserId, _) --[[ Line: 6 ]]
+return function(Callback, ParticipantuserId, _)
 	-- upvalues: HttpService (copy), UrlModule (copy)
 	return Callback(string.format("%s/start-one-to-one-conversation", UrlModule.CHAT_URL), "POST", {
 		postBody = HttpService:JSONEncode({ participantuserId = ParticipantuserId })

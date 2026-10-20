@@ -4,7 +4,7 @@ local ValidateFontModule = require(Parent.Validator.validateFont)
 local FontLoaderModule = require(script.Parent.FontLoader)
 local _ = require(Parent.StyleTypes)
 
-return function(Text: string, p1) --[[ Line: 9 ]]
+return function(Text: string, p1)
 	-- upvalues: FontLoaderModule (copy), ConstantsModule (copy), ValidateFontModule (copy)
 	local NewFontLoader = FontLoaderModule.new(p1)
 	local config = {

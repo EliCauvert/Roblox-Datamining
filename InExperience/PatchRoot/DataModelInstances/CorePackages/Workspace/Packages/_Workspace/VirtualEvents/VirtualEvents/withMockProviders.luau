@@ -20,7 +20,7 @@ local CombineReducersResult = RoduxModule.combineReducers({
 	VirtualEvents = require(VirtualEvents.Parent.VirtualEventsState).installReducer()
 })
 
-return function(p1, p2) --[[ Line: 34 | Named "withMockProviders" ]]
+return function(p1, p2)
 	-- upvalues: RoduxModule (copy), CombineReducersResult (copy), ReactModule (copy), RoactRoduxModule (copy), ContentProvider (copy), MockContentProvider (copy), LocalizationModule (copy), RobloxAppLocalesModule (copy), FoundationProvider (copy), ColorMode (copy), AppStyleProvider (copy), Constants (copy), RoactNavigationModule (copy), DesignTokenProvider (copy), GraphQLServerModule (copy), ApolloClientModule (copy)
 	local config = {
 		StoreProvider = ReactModule.createElement(RoactRoduxModule.StoreProvider, {
@@ -39,12 +39,12 @@ return function(p1, p2) --[[ Line: 34 | Named "withMockProviders" ]]
 						}, {
 							NavigationProvider = ReactModule.createElement(RoactNavigationModule.Provider, {
 								value = {
-									isFocused = function(): boolean --[[ Line: 63 ]]
+									isFocused = function(): boolean
 										return true
 									end,
-									goBack = function() --[[ Line: 66 ]] end,
-									addListener = function() --[[ Line: 67 ]]
-										return { remove = function() --[[ Line: 69 ]] end }
+									goBack = function() end,
+									addListener = function()
+										return { remove = function() end }
 									end
 								}
 							}, {
@@ -68,7 +68,7 @@ return function(p1, p2) --[[ Line: 34 | Named "withMockProviders" ]]
 						cache = ApolloClientModule.InMemoryCache.new({}),
 						link = ApolloClientModule.HttpLink.new({
 							uri = "/api",
-							fetch = function(_, p3) --[[ Line: 97 ]]
+							fetch = function(_, p3)
 								-- upvalues: NewResult (copy)
 								return NewResult:fetchLocal(p3)
 							end

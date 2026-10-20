@@ -1,7 +1,7 @@
 ﻿local HttpService = game:GetService("HttpService")
 local AppStorageService = game:GetService("AppStorageService")
 
-local function get() --[[ Line: 7 ]]
+local function get()
 	-- upvalues: AppStorageService (copy), HttpService (copy)
 	local Success, Result = pcall(AppStorageService.GetItem, AppStorageService, "MomentsLocalStorage")
 	
@@ -16,23 +16,23 @@ end
 
 return {
 	get = get,
-	set = function(p1) --[[ Line: 16 ]]
+	set = function(p1)
 		-- upvalues: AppStorageService (copy), HttpService (copy)
-		pcall(function() --[[ Line: 17 ]]
+		pcall(function()
 			-- upvalues: AppStorageService (upval), HttpService (upval), p1 (copy)
 			AppStorageService:SetItem("MomentsLocalStorage", HttpService:JSONEncode(p1))
 			AppStorageService:Flush()
 		end)
 	end,
-	getField = function(p1) --[[ Line: 23 ]]
+	getField = function(p1)
 		-- upvalues: get (copy)
 		return get()[p1]
 	end,
-	setField = function(Key, p1) --[[ Line: 27 ]]
+	setField = function(Key, p1)
 		-- upvalues: get (copy), AppStorageService (copy), HttpService (copy)
 		local GetResult = get()
 		GetResult[Key] = p1
-		pcall(function() --[[ Line: 17 ]]
+		pcall(function()
 			-- upvalues: AppStorageService (upval), HttpService (upval), GetResult (copy)
 			AppStorageService:SetItem("MomentsLocalStorage", HttpService:JSONEncode(GetResult))
 			AppStorageService:Flush()

@@ -39,22 +39,22 @@ local FFlagLuaAppPlayButtonPrivatePT = require(Parent.SharedFlags).FFlagLuaAppPl
 local FStringR20UniverseIdModule = require(GamePlayButton.Flags.FStringR20UniverseId)
 local UsePlayOnReleaseAfterUnmountModule = require(script.Parent.usePlayOnReleaseAfterUnmount)
 
-local function v33() --[[ Line: 60 ]] end
+local function v33() end
 
-return ReactModule.memo(function(Frame: Frame) --[[ Line: 156 | Named "PlayButton" ]]
+return ReactModule.memo(function(Frame: Frame)
 	-- upvalues: ReactModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UseSelectorFunction (copy), GamesProductInfoReducer (copy), TutilsModule (copy), FFlagLuaAppPlayButtonLoadingDurationTelemetry (copy), UseBreakpointXOrSmallerFunction (copy), ResponsiveModule (copy), UsePlayButtonStateModule (copy), FFlagEnableGameJoinEarlyAccess (copy), PlayButtonStatesModule (copy), UseEarlyAccessCaptionModule (copy), FFlagLuaAppLaunchWhenLoadingForce (copy), FFlagLuaAppLaunchWhenLoadingEdp (copy), UseOnPlayButtonCallbackModule (copy), LuaAppFixPlayButtonDefaultLaunchSource (copy), FFlagLuaAppUnifiedPlayButtonSquadMenuDirection (copy), MenuDirection (copy), UseOnPlaySquadButtonCallbackModule (copy), FFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce (copy), UsePlayOnReleaseAfterUnmountModule (copy), UseLocalizationFunction (copy), FFlagLuaAppUpdatePlayButtonText (copy), FFlagLuaAppPlayButtonPrivatePT (copy), FFlagLuaAppUnifyPlayButtonAllSurfacesIxp (copy), UseUserExperimentFunction (copy), AppUserLayers (copy), FFlagLuaAppLogExposurePlayButtonUX (copy), IXPService (copy), UseTokensFunction (copy), FFlagLuaAppMobileEdpPlayButtonPartialUnificationIXP (copy), FIntLuaAppPlayButtonSecondaryButtonGap (copy), LegacyPlayButtonModule (copy), GetFFlagIsSquadEnabledFunction (copy), v33 (copy), FStringR20UniverseIdModule (copy), LuaAppHidePlayButtonOptionalTextForDualButtons (copy), PlayButtonGroupViewModule (copy)
 	local UseRefResult = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 158 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy)
 		UseRefResult.current = true
 		
-		return function() --[[ Line: 160 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			UseRefResult.current = false
 		end
 	end, {})
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
-	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 166 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p1)
 		-- upvalues: Frame (copy), GamesProductInfoReducer (upval)
 		return if Frame.universeId then p1[GamesProductInfoReducer.key][Frame.universeId] else nil
 	end, TutilsModule.shallowEqual)
@@ -88,7 +88,7 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 156 | Named "PlayButto
 	local SquadButtonMenuDirection = if FFlagLuaAppUnifiedPlayButtonSquadMenuDirection and Frame.squadButtonMenuDirection ~= nil then Frame.squadButtonMenuDirection else MenuDirection.Up
 	local UseOnPlaySquadButtonCallbackModuleResult = UseOnPlaySquadButtonCallbackModule(SquadButtonMenuDirection, PlayButtonState, Frame.referralSource, Frame.universeId)
 	local FFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce1 = FFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce or Frame.launchOnReleaseAfterUnmount == true
-	local UseResult = ReactModule.useCallback(function(FiatPaidAccess) --[[ Line: 241 ]]
+	local UseResult = ReactModule.useCallback(function(FiatPaidAccess)
 		-- upvalues: FFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce1 (copy), UseRefResult (copy), Frame (copy), PlayButtonStatesModule (upval), UseOnPlayButtonCallbackModuleResult (copy)
 		if FiatPaidAccess == nil then return end
 		if not FFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce1 and not UseRefResult.current then return end
@@ -109,11 +109,11 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 156 | Named "PlayButto
 		Frame.onActivated,
 		FFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce1
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 275 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy), PlayButtonState (ref)
 		UseResult(PlayButtonState)
 	end, { UseResult, PlayButtonState })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 279 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy), SecondaryPlayButtonState (ref)
 		UseResult(SecondaryPlayButtonState)
 	end, { UseResult, SecondaryPlayButtonState })
@@ -121,7 +121,7 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 156 | Named "PlayButto
 	local PlayButtonRef = if FFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce1 and UsePlayOnReleaseAfterUnmountModuleResult then UsePlayOnReleaseAfterUnmountModuleResult.playButtonRef else nil
 	local LoadingCaptureRef = if FFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce1 and UsePlayOnReleaseAfterUnmountModuleResult then UsePlayOnReleaseAfterUnmountModuleResult.loadingCaptureRef else nil
 	local OnActivated = if FFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce1 then UsePlayOnReleaseAfterUnmountModuleResult.onActivated else UseResult1
-	local UseResult3 = ReactModule.useCallback(function(p1) --[[ Line: 295 ]]
+	local UseResult3 = ReactModule.useCallback(function(p1)
 		-- upvalues: UseRefResult (copy), Frame (copy), UseOnPlaySquadButtonCallbackModuleResult (copy)
 		if not UseRefResult.current then return end
 		if Frame.onActivated then
@@ -132,7 +132,7 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 156 | Named "PlayButto
 		UseOnPlaySquadButtonCallbackModuleResult,
 		Frame.onActivated
 	})
-	ReactModule.useEffect(function() --[[ Line: 305 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy), OnActivated (copy)
 		local OnRegisterActivationFunction = Frame.onRegisterActivation
 		
@@ -155,7 +155,7 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 156 | Named "PlayButto
 	local HasPlayButtonLoadingSkeletonIxp = nil
 	
 	if FFlagLuaAppUnifyPlayButtonAllSurfacesIxp then
-		HasJoinTextPlayableButtonIxp, HasIconPlayButtonIxp, HasPlayButtonLoadingSkeletonIxp = UseUserExperimentFunction({ AppUserLayers.PlayButtonUXExposureLayer }, function(p1) --[[ Line: 329 ]]
+		HasJoinTextPlayableButtonIxp, HasIconPlayButtonIxp, HasPlayButtonLoadingSkeletonIxp = UseUserExperimentFunction({ AppUserLayers.PlayButtonUXExposureLayer }, function(p1)
 			-- upvalues: AppUserLayers (upval)
 			local v2 = p1[AppUserLayers.PlayButtonUXExposureLayer] or {}
 			
@@ -163,7 +163,7 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 156 | Named "PlayButto
 		end, true)
 	end
 	if FFlagLuaAppLogExposurePlayButtonUX then
-		ReactModule.useEffect(function() --[[ Line: 338 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: IXPService (upval), AppUserLayers (upval)
 			IXPService:LogUserLayerExposure(AppUserLayers.PlayButtonUXExposureLayer)
 		end, {})

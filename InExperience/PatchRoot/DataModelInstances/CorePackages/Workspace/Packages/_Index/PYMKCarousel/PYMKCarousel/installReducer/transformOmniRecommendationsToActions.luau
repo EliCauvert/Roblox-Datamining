@@ -5,10 +5,10 @@ local GetRecommendationsMetadataModule = require(script.Parent.getRecommendation
 local ContextualInfoTypes = require(PYMKCarousel.Parent.SocialCommon).Enums.ContextualInfoTypes
 local GetFFlagTempFixInfiniteHomePYMKModule = require(PYMKCarousel.Flags.getFFlagTempFixInfiniteHomePYMK)
 
-local function v6(p1, TreatmentType) --[[ Line: 25 ]]
+local function v6(p1, TreatmentType)
 	-- upvalues: Llama (copy)
 	local Sorts = p1.sorts or {}
-	local Where = Llama.List.findWhere(Sorts, function(p2): boolean --[[ Line: 30 ]]
+	local Where = Llama.List.findWhere(Sorts, function(p2): boolean
 		-- upvalues: TreatmentType (copy)
 		return p2.treatmentType == TreatmentType
 	end)
@@ -16,7 +16,7 @@ local function v6(p1, TreatmentType) --[[ Line: 25 ]]
 	return if Where then Sorts[Where] else nil
 end
 
-return function(List, p1, Callback1, Callback) --[[ Line: 36 ]]
+return function(List, p1, Callback1, Callback)
 	-- upvalues: GetRecommendationsMetadataModule (copy), v6 (copy), GetFFlagTempFixInfiniteHomePYMKModule (copy), Llama (copy), ContextualInfoTypes (copy)
 	local PushResult = {}
 	local ContentType = p1.contentType
@@ -31,7 +31,7 @@ return function(List, p1, Callback1, Callback) --[[ Line: 36 ]]
 			if Callback then
 				PushResult = Llama.List.push(PushResult, Callback(v1, RecommendationsMetadataModule))
 			end
-			PushResult = Llama.List.reduce(Recommendations, function(p2, p3, p4) --[[ Line: 61 ]]
+			PushResult = Llama.List.reduce(Recommendations, function(p2, p3, p4)
 				-- upvalues: ContextualInfoTypes (upval), RecommendationsMetadataModule (copy), Callback1 (copy), Llama (upval)
 				local RecommendationsMetadataModuleEntry = RecommendationsMetadataModule[if p3.contentMetadata.contextType == ContextualInfoTypes.Contacts then p3.contentStringId else tostring(p3.contentId)]
 				local ContentMetadata = p3.contentMetadata

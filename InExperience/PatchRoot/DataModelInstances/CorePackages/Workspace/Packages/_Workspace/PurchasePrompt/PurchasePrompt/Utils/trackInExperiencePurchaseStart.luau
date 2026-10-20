@@ -7,7 +7,7 @@ local TimeToInteractiveTracker = require(Parent.TimeToInteractiveTracker).TimeTo
 local GetPurchaseSurfaceModule = require(PurchasePrompt.Utils.getPurchaseSurface)
 local GetProductTypeFromRequestTypeModule = require(PurchasePrompt.Utils.getProductTypeFromRequestType)
 
-return function(p1) --[[ Line: 15 | Named "trackInExperiencePurchaseStart" ]]
+return function(p1)
 	-- upvalues: GetPurchaseSurfaceModule (copy), ProductPurchaseSurface (copy), GetTTIEventNameFunction (copy), TimeToInteractiveTracker (copy), GetProductTypeFromRequestTypeModule (copy)
 	local State = p1:getState()
 	

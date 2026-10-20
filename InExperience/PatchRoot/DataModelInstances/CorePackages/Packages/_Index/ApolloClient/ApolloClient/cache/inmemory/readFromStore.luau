@@ -44,12 +44,12 @@ local ObjectCanonModule = require(script.Parent["object-canon"])
 local CanonicalStringifyFunction = ObjectCanonModule.canonicalStringify
 local ObjectCanon = ObjectCanonModule.ObjectCanon
 
-local function missingFromInvariant(NewResult, Context) --[[ Line: 114 ]]
+local function missingFromInvariant(NewResult, Context)
 	-- upvalues: MissingFieldError (copy), Array (copy)
 	return MissingFieldError.new(NewResult.message, Array.slice(Context.path), Context.query, Context.variables)
 end
 
-local function _(p1) --[[ Line: 147 | Named "execSelectionSetKeyArgs" ]]
+local function _(p1)
 	return {
 		p1.selectionSet,
 		p1.objectOrReference,
@@ -61,17 +61,17 @@ end
 local Module = {}
 Module.__index = Module
 
-function Module:resetCanon() --[[ Line: 195 ]]
+function Module:resetCanon()
 	-- upvalues: ObjectCanon (copy)
 	self.canon = ObjectCanon.new()
 end
 
-local function makeSelectionSetCacheKey(_, p1, p2, p3, p4) --[[ Line: 200 ]]
+local function makeSelectionSetCacheKey(_, p1, p2, p3, p4)
 	-- upvalues: SupportsResultCachingFunction (copy), IsReferenceFunction (copy)
 	return if SupportsResultCachingFunction(p3.store) then p3.store:makeCacheKey(p1, IsReferenceFunction(p2) and p2.__ref or p2, p3.varString, p4) else nil
 end
 
-local function makeSubSelectedCacheKey(_, p1) --[[ Line: 212 ]]
+local function makeSubSelectedCacheKey(_, p1)
 	-- upvalues: SupportsResultCachingFunction (copy)
 	local Field = p1.field
 	local Array = p1.array
@@ -80,13 +80,13 @@ local function makeSubSelectedCacheKey(_, p1) --[[ Line: 212 ]]
 	return if SupportsResultCachingFunction(Context.store) then Context.store:makeCacheKey(Field, Array, Context.varString) else nil
 end
 
-function Module.new(Tbl) --[[ Line: 221 ]]
+function Module.new(Tbl)
 	-- upvalues: Module (copy), WeakMap (copy), Object (copy), ObjectCanon (copy), WrapFunction (copy), MaybeDependOnExistenceOfEntityFunction (copy), makeSelectionSetCacheKey (copy), makeSubSelectedCacheKey (copy)
 	local self = setmetatable({}, Module)
 	self.knownResults = WeakMap.new()
 	self.config = Object.assign(table.clone(Tbl), { addTypename = Tbl.addTypename ~= false })
 	self.canon = Tbl.canon or ObjectCanon.new()
-	self.executeSelectionSet = WrapFunction(function(_, p1) --[[ Line: 236 ]]
+	self.executeSelectionSet = WrapFunction(function(_, p1)
 		-- upvalues: self (copy), Object (upval), MaybeDependOnExistenceOfEntityFunction (upval)
 		local CanonizeResults = p1.context.canonizeResults
 		local PeekResult = self.executeSelectionSet:peek(table.unpack({
@@ -106,7 +106,7 @@ function Module.new(Tbl) --[[ Line: 221 ]]
 		end
 	end, {
 		max = self.config.resultCacheMaxSize,
-		keyArgs = function(_, ...) --[[ Line: 271 ]]
+		keyArgs = function(_, ...)
 			local v1 = (...)
 			
 			return {
@@ -118,7 +118,7 @@ function Module.new(Tbl) --[[ Line: 221 ]]
 		end,
 		makeCacheKey = makeSelectionSetCacheKey
 	}, self)
-	self.executeSubSelectedArray = WrapFunction(function(_, p1) --[[ Line: 281 ]]
+	self.executeSubSelectedArray = WrapFunction(function(_, p1)
 		-- upvalues: MaybeDependOnExistenceOfEntityFunction (upval), self (copy)
 		MaybeDependOnExistenceOfEntityFunction(p1.context.store, p1.enclosingRef.__ref)
 		
@@ -131,7 +131,7 @@ function Module.new(Tbl) --[[ Line: 221 ]]
 	return self
 end
 
-function Module:diffQueryAgainstStore(p1) --[[ Line: 301 ]]
+function Module:diffQueryAgainstStore(p1)
 	-- upvalues: Object (copy), GetDefaultValuesFunction (copy), GetQueryDefinitionFunction (copy), MakeReferenceFunction (copy), GetMainDefinitionFunction (copy), CanonicalStringifyFunction (copy), CreateFragmentMapFunction (copy), GetFragmentDefinitionsFunction (copy)
 	local Store = p1.store
 	local Query = p1.query
@@ -179,7 +179,7 @@ function Module:diffQueryAgainstStore(p1) --[[ Line: 301 ]]
 	}
 end
 
-function Module:isFresh(p1, p2, p3, p4): boolean --[[ Line: 349 ]]
+function Module:isFresh(p1, p2, p3, p4): boolean
 	-- upvalues: SupportsResultCachingFunction (copy)
 	if SupportsResultCachingFunction(p4.store) and self.knownResults:get(p1) == p3 then
 		local PeekResult = self.executeSelectionSet:peek(p3, p2, p4, self.canon:isKnown(p1))
@@ -191,7 +191,7 @@ function Module:isFresh(p1, p2, p3, p4): boolean --[[ Line: 349 ]]
 	return false
 end
 
-function Module:execSelectionSetImpl(p1) --[[ Line: 375 ]]
+function Module:execSelectionSetImpl(p1)
 	-- upvalues: missingFromInvariant (copy), InvariantError (copy), NULL (copy), Set (copy), ShouldIncludeFunction (copy), IsFieldFunction (copy), ResultKeyNameFromFieldFunction (copy), AddTypenameToDocument (copy), IsReferenceFunction (copy), HttpService (copy), Array (copy), InvariantFunction (copy), GetFragmentFromSelectionFunction (copy), MergeDeepArrayFunction (copy), MaybeDeepFreezeFunction (copy)
 	local SelectionSet = p1.selectionSet
 	local ObjectOrReference = p1.objectOrReference
@@ -215,7 +215,7 @@ function Module:execSelectionSetImpl(p1) --[[ Line: 375 ]]
 	if self.config.addTypename and type(TypenameFieldValue) == "string" and not Policies.rootIdsByTypename[TypenameFieldValue] then
 		table.insert(List, { __typename = TypenameFieldValue })
 	end
-	local function _() --[[ Line: 412 | Named "getMissing" ]]
+	local function _()
 		-- upvalues: config (copy)
 		if not config.missing then
 			config.missing = {}
@@ -223,7 +223,7 @@ function Module:execSelectionSetImpl(p1) --[[ Line: 375 ]]
 		return config.missing
 	end
 	
-	local _ = function(p2) --[[ Line: 421 | Named "handleMissing" ]]
+	local _ = function(p2)
 		-- upvalues: config (copy)
 		if p2.missing then
 			if not config.missing then
@@ -332,7 +332,7 @@ function Module:execSelectionSetImpl(p1) --[[ Line: 375 ]]
 	return config
 end
 
-function Module.execSubSelectedArrayImpl(p3, p4) --[[ Line: 553 ]]
+function Module.execSubSelectedArrayImpl(p3, p4)
 	-- upvalues: InvariantFunction (copy), Array (copy), NULL (copy), Boolean (copy), IsReferenceFunction (copy), Callback (ref)
 	local Field = p4.field
 	local Array1 = p4.array
@@ -340,7 +340,7 @@ function Module.execSubSelectedArrayImpl(p3, p4) --[[ Line: 553 ]]
 	local Context = p4.context
 	local List = nil
 	
-	local function handleMissing(ExecuteSelectionSetResult, Removed) --[[ Line: 558 ]]
+	local function handleMissing(ExecuteSelectionSetResult, Removed)
 		-- upvalues: List (ref), InvariantFunction (upval), Context (copy)
 		if ExecuteSelectionSetResult.missing then
 			List = List or {}
@@ -356,12 +356,12 @@ function Module.execSubSelectedArrayImpl(p3, p4) --[[ Line: 553 ]]
 	end
 	
 	if Field.selectionSet then
-		Array1 = Array.filter(Array1, function(p5) --[[ Line: 577 ]]
+		Array1 = Array.filter(Array1, function(p5)
 			-- upvalues: Context (copy)
 			return Context.store:canRead(p5)
 		end)
 	end
-	local MapResult = Array.map(Array1, function(Array1, Removed) --[[ Line: 582 ]]
+	local MapResult = Array.map(Array1, function(Array1, Removed)
 		-- upvalues: NULL (upval), Context (copy), Array (upval), handleMissing (copy), p3 (copy), Field (copy), EnclosingRef (copy), Boolean (upval), IsReferenceFunction (upval), Callback (upval), InvariantFunction (upval)
 		if Array1 == NULL then
 			return NULL
@@ -403,7 +403,7 @@ end
 
 ReadFromStore.StoreReader = Module
 
-Callback = function(Store, Field, Array1) --[[ Line: 643 | Named "assertSelectionSetForIdValue" ]]
+Callback = function(Store, Field, Array1)
 	-- upvalues: Set (copy), IsNonNullObjectFunction (copy), InvariantFunction (copy), IsReferenceFunction (copy), GetTypenameFromStoreObjectFunction (copy), Array (copy), Object (copy)
 	if not Field.selectionSet then
 		local NewSet = Set.new({ Array1 })

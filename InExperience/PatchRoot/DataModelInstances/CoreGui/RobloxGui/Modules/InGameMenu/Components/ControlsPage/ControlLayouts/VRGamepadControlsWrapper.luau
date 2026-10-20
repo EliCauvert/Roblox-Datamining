@@ -12,7 +12,7 @@ local HelpReactView = HelpPageModule.HelpReactView
 local FFlagHelpPageMountVR = HelpPageModule.Flags.FFlagHelpPageMountVR
 local Utils = if FFlagHelpPageMountVR then require(Modules.Settings.Integrations).Utils else nil
 
-return if FFlagHelpPageMountVR then ReactModule.memo(function() --[[ Line: 30 | Named "VRGamepadControlsWrapper" ]]
+return if FFlagHelpPageMountVR then ReactModule.memo(function()
 	-- upvalues: ReactModule (copy), ControlLayoutContainerModule (copy), LocalizationProvider (copy), NewResult (copy), FoundationProvider (copy), FoundationModule (copy), Utils (ref), HelpReactView (copy)
 	return ReactModule.createElement(ControlLayoutContainerModule, {
 		titleText = "CoreScripts.InGameMenu.Controls.VrControllerTitle"

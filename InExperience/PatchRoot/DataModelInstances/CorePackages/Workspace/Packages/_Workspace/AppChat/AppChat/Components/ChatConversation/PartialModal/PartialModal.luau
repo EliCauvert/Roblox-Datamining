@@ -18,11 +18,11 @@ local config = {
 	bodyText = "",
 	isButtonDisabled = false,
 	screenSize = Vector2.new(1000, 1000),
-	onActivated = function() --[[ Line: 41 ]] end,
-	onDismissed = function() --[[ Line: 42 ]] end
+	onActivated = function() end,
+	onDismissed = function() end
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 45 | Named "PartialModal" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseIsInExperienceModule (copy), Warning (copy), Info (copy), ReactModule (copy), PartialPageModal (copy), ButtonEnum (copy), StyledTextLabel (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseStyleResult = UseStyleFunction()

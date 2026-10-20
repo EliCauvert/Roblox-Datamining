@@ -13,7 +13,7 @@ local Interpolated: vector = vector.create(0, 0, 0)
 local Vector = nil
 
 return {
-	createSpectatorCamera = function(p1) --[[ Line: 41 ]]
+	createSpectatorCamera = function(p1)
 		-- upvalues: Value (ref), Players (ref), v2 (ref), UserInputService (copy), CF (ref), Interpolated (ref), Vector (ref), Workspace (copy), RunService (copy), DisplayName (ref), CreateTemporaryOverlayModule (copy), CameraSubject (ref), v1 (ref)
 		local InputFrame = Instance.new("Frame")
 		InputFrame.Name = "InputFrame"
@@ -61,7 +61,7 @@ return {
 		ApplyButton.Font = Enum.Font.SourceSansBold
 		ApplyButton.TextScaled = true
 		ApplyButton.Parent = InputFrame
-		ApplyButton.MouseButton1Click:Connect(function() --[[ Line: 106 ]]
+		ApplyButton.MouseButton1Click:Connect(function()
 			-- upvalues: SpeedTextBox (copy), Value (upval), SpeedLabel (copy)
 			local Success, Result = pcall(tonumber, SpeedTextBox.Text)
 			
@@ -77,7 +77,7 @@ return {
 		end)
 		local Inverted = false
 		
-		local function updateHumanoidList() --[[ Line: 126 ]]
+		local function updateHumanoidList()
 			-- upvalues: Players (upval)
 			Players = {}
 			
@@ -88,14 +88,14 @@ return {
 			end
 		end
 		
-		local function _() --[[ Line: 138 | Named "getCurrentHumanoid" ]]
+		local function _()
 			-- upvalues: updateHumanoidList (copy), Players (upval), v2 (upval)
 			updateHumanoidList()
 			
 			return if #Players == 0 then nil else Players[v2]
 		end
 		
-		local _ = function() --[[ Line: 147 | Named "getNextHumanoid" ]]
+		local _ = function()
 			-- upvalues: updateHumanoidList (copy), Players (upval), v2 (upval)
 			updateHumanoidList()
 			
@@ -108,7 +108,7 @@ return {
 			end
 		end
 		
-		local _ = function(DisplayName) --[[ Line: 159 | Named "getHumanoidWithName" ]]
+		local _ = function(DisplayName)
 			-- upvalues: updateHumanoidList (copy), Players (upval)
 			updateHumanoidList()
 			
@@ -123,7 +123,7 @@ return {
 			return nil
 		end
 		
-		local function StepFreecam(DeltaTime: number) --[[ Line: 177 ]]
+		local function StepFreecam(DeltaTime: number)
 			-- upvalues: Value (upval), UserInputService (upval), CF (upval), Interpolated (upval), Vector (upval), Workspace (upval)
 			local ScaledValue = if UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) then Value * 3 else Value
 			local Total = vector.create(0, 0, 0)
@@ -173,7 +173,7 @@ return {
 			Workspace.CurrentCamera.CFrame = CF
 		end
 		
-		local function setCameraMode(p2: number) --[[ Line: 270 ]]
+		local function setCameraMode(p2: number)
 			-- upvalues: RunService (upval), UserInputService (upval), InputFrame (copy), DisplayName (upval), Workspace (upval), updateHumanoidList (copy), Players (upval), setCameraMode (copy), CreateTemporaryOverlayModule (upval), p1 (copy), CF (upval), StepFreecam (copy), Inverted (ref), SpeedTextBox (copy), Value (upval), SpeedLabel (copy), CameraSubject (upval), v2 (upval), v1 (upval)
 			RunService:UnbindFromRenderStep("Freecam")
 			UserInputService.MouseBehavior = Enum.MouseBehavior.Default
@@ -245,13 +245,13 @@ return {
 			end
 		end
 		
-		local _ = function() --[[ Line: 342 | Named "cycleCameraMode" ]]
+		local _ = function()
 			-- upvalues: v1 (upval), setCameraMode (copy)
 			v1 = (v1 + 1) % 3
 			setCameraMode(v1)
 		end
 		
-		local function onInputBegan(Input, GameProcessed) --[[ Line: 348 ]]
+		local function onInputBegan(Input, GameProcessed)
 			-- upvalues: v1 (upval), setCameraMode (copy), updateHumanoidList (copy), Players (upval), v2 (upval), Inverted (ref), InputFrame (copy), SpeedTextBox (copy)
 			if GameProcessed then return end
 			if Input.KeyCode == Enum.KeyCode.C then

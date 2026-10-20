@@ -4,7 +4,7 @@ local PresetCatalogToExpressionCatalogModule = require(ChatUIPrimitives.PresetCh
 local _ = require(ChatUIPrimitives.UniversalMessage.Types)
 local CreateSignalFunction = require(ChatUIPrimitives.Parent.Signals).createSignal
 
-return function(Callback) --[[ Line: 38 | Named "createExpressionCatalogStore" ]]
+return function(Callback)
 	-- upvalues: CreateSignalFunction (copy), NormalizePresetCatalogModule (copy), PresetCatalogToExpressionCatalogModule (copy)
 	local GameSettings = UserSettings().GameSettings
 	local Disabled, Disabled2 = CreateSignalFunction("disabled")
@@ -14,12 +14,12 @@ return function(Callback) --[[ Line: 38 | Named "createExpressionCatalogStore" ]
 	local List = {}
 	local Count1 = 0
 	
-	local function refresh() --[[ Line: 53 ]]
+	local function refresh()
 		-- upvalues: Count1 (ref), Signal2_1 (copy), Callback (copy), NormalizePresetCatalogModule (upval), PresetCatalogToExpressionCatalogModule (upval), Disabled2 (copy), Signal2 (copy)
 		Count1 += 1
 		local Count: number = Count1
 		Signal2_1(true)
-		task.spawn(function() --[[ Line: 57 ]]
+		task.spawn(function()
 			-- upvalues: Callback (upval), Count (copy), Count1 (upval), Signal2_1 (upval), NormalizePresetCatalogModule (upval), PresetCatalogToExpressionCatalogModule (upval), Disabled2 (upval), Signal2 (upval)
 			local v1 = Callback()
 			
@@ -41,7 +41,7 @@ return function(Callback) --[[ Line: 38 | Named "createExpressionCatalogStore" ]
 		getStatus = Disabled,
 		getCategoryGroups = Signal,
 		getIsLoading = Signal1,
-		acquire = function() --[[ Line: 75 ]]
+		acquire = function()
 			-- upvalues: Count (ref), Count1 (ref), Signal2_1 (copy), Callback (copy), NormalizePresetCatalogModule (upval), PresetCatalogToExpressionCatalogModule (upval), Disabled2 (copy), Signal2 (copy), List (copy), GameSettings (copy), refresh (copy)
 			Count += 1
 			
@@ -49,7 +49,7 @@ return function(Callback) --[[ Line: 38 | Named "createExpressionCatalogStore" ]
 				Count1 += 1
 				local Count2: number = Count1
 				Signal2_1(true)
-				task.spawn(function() --[[ Line: 57 ]]
+				task.spawn(function()
 					-- upvalues: Callback (upval), Count2 (copy), Count1 (upval), Signal2_1 (upval), NormalizePresetCatalogModule (upval), PresetCatalogToExpressionCatalogModule (upval), Disabled2 (upval), Signal2 (upval)
 					local v1 = Callback()
 					
@@ -69,7 +69,7 @@ return function(Callback) --[[ Line: 38 | Named "createExpressionCatalogStore" ]
 				table.insert(List, GameSettings:GetPropertyChangedSignal("ChatTranslationEnabled"):Connect(refresh))
 			end
 		end,
-		release = function() --[[ Line: 90 ]]
+		release = function()
 			-- upvalues: Count (ref), List (copy), Count1 (ref), Signal2_1 (copy)
 			Count -= 1
 			
@@ -84,7 +84,7 @@ return function(Callback) --[[ Line: 38 | Named "createExpressionCatalogStore" ]
 				Signal2_1(false)
 			end
 		end,
-		_resetForTesting = function() --[[ Line: 108 ]]
+		_resetForTesting = function()
 			-- upvalues: List (copy), Count (ref), Count1 (ref), Disabled2 (copy), Signal2 (copy), Signal2_1 (copy)
 			for _, Connection in List do
 				Connection:Disconnect()

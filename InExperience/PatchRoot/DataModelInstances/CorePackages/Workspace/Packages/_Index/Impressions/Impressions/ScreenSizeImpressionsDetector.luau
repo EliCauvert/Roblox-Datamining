@@ -21,7 +21,7 @@ ScreenSizeImpressionsDetector.validateProps = TModule.strictInterface({
 	topBarHeight = TModule.number,
 	shortcutBarHeight = if FFlagUnifyShortcutBarFixImpressions then TModule.optional(TModule.number) else nil
 })
-local MemoizeResult = MemoizeFunction(function(Y, Vector, p1, p2) --[[ Line: 34 ]]
+local MemoizeResult = MemoizeFunction(function(Y, Vector, p1, p2)
 	-- upvalues: FFlagUnifyShortcutBarFixImpressions (copy)
 	return {
 		min = Vector2.new(0, Y),
@@ -29,7 +29,7 @@ local MemoizeResult = MemoizeFunction(function(Y, Vector, p1, p2) --[[ Line: 34 
 	}
 end)
 
-function ScreenSizeImpressionsDetector.render(p1) --[[ Line: 47 ]]
+function ScreenSizeImpressionsDetector.render(p1)
 	-- upvalues: RoactModule (copy), ImpressionsDetectorModule (copy), MemoizeResult (copy), FFlagUnifyShortcutBarFixImpressions (copy)
 	return RoactModule.createElement(ImpressionsDetectorModule, {
 		parentRef = p1.props.parentRef,
@@ -42,7 +42,7 @@ function ScreenSizeImpressionsDetector.render(p1) --[[ Line: 47 ]]
 	})
 end
 
-local v1 = RoactRoduxModule.connect(function(p1, _) --[[ Line: 68 ]]
+local v1 = RoactRoduxModule.connect(function(p1, _)
 	return {
 		topBarHeight = p1.TopBar.topBarHeight,
 		globalGuiInset = p1.GlobalGuiInset,
@@ -50,7 +50,7 @@ local v1 = RoactRoduxModule.connect(function(p1, _) --[[ Line: 68 ]]
 	}
 end)(ScreenSizeImpressionsDetector)
 
-return if FFlagUnifyShortcutBarFixImpressions then function(p1) --[[ Line: 78 ]]
+return if FFlagUnifyShortcutBarFixImpressions then function(p1)
 	-- upvalues: SignalsReactModule (copy), GetShortcutBarStatusStoreFunction (copy), RoactModule (copy), v1 (copy), CryoModule (copy)
 	return RoactModule.createElement(v1, CryoModule.Dictionary.join(p1, {
 		shortcutBarHeight = SignalsReactModule.useSignalState(GetShortcutBarStatusStoreFunction(false).getShortcutBarReservedHeight)

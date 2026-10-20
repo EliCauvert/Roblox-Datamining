@@ -2,7 +2,7 @@
 
 return {
 	BindableEvent = BindableEvent,
-	setAppChatVisible = function(p1) --[[ Line: 3 ]]
+	setAppChatVisible = function(p1)
 		-- upvalues: BindableEvent (copy)
 		BindableEvent:Fire(p1)
 	end

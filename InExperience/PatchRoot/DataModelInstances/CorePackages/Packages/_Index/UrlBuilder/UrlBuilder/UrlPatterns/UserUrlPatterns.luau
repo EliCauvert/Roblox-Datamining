@@ -1,4 +1,4 @@
-﻿return function(p1) --[[ Line: 1 ]]
+﻿return function(p1)
 	return {
 		profile = p1.fromString("www:users/{userId}/profile?friendshipSourceType={sourceType|}"),
 		group = p1.fromString("www:communities/{groupId}/{groupName|}#!/about"),
@@ -9,7 +9,7 @@
 		profileWithFriendshipSourceType = p1.fromString("www:users/{userId}/profile?friendshipSourceType={sourceType}"),
 		followers = p1.fromString("www:users/{userId}/friends#!/followers"),
 		following = p1.fromString("www:users/{userId}/friends#!/following"),
-		report = function(p2) --[[ Line: 15 ]]
+		report = function(p2)
 			-- upvalues: p1 (copy)
 			return p1.fromString("www:abusereport/embedded/chat?id={userId}&{actionName}&{conversationId}&{redirecturl}")({
 				actionName = "chat",
@@ -18,7 +18,7 @@
 				redirecturl = p1.fromString("www:home")()
 			})
 		end,
-		appsflyer = function(p2) --[[ Line: 28 ]]
+		appsflyer = function(p2)
 			-- upvalues: p1 (copy)
 			return p1.fromString("appsflyer:Ebh5?pid=share&is_retargeting=true&af_dp={mobileUrl}&af_web_dp={webUrl}")({
 				mobileUrl = p1.fromString("mobilenav:profile?userId={userId}&friendshipSourceType={sourceType}")(p2),

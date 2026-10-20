@@ -7,13 +7,13 @@ local LocalizationProvider = require(Parent.Localization).LocalizationProvider
 local Localization = require(Parent.AppLocales).Localization
 local RoactRoduxModule = require(Parent.RoactRodux)
 local RoduxModule = require(Parent.Rodux)
-pcall(function() --[[ Line: 13 ]]
+pcall(function()
 	-- upvalues: UIBloxModule (copy), Parent (copy)
 	UIBloxModule.init(require(Parent.Dev.RobloxAppUIBloxConfig))
 end)
 local AppStyleProvider = UIBloxModule.App.Style.AppStyleProvider
 
-local function createStore() --[[ Line: 18 ]]
+local function createStore()
 	-- upvalues: RoduxModule (copy)
 	return RoduxModule.Store.new(RoduxModule.createReducer({}, {}), nil, { RoduxModule.makeThunkMiddleware({}) })
 end
@@ -29,9 +29,9 @@ return {
 	storyRoot = script.Parent.Parent,
 	roact = ReactModule,
 	reactRoblox = ReactRobloxModule,
-	mapStory = function(p1) --[[ Line: 45 ]]
+	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), LocalizationProvider (copy), Localization (copy), AppStyleProvider (copy), config (copy), RoactRoduxModule (copy), createStore (copy), DesignTokenProvider (copy)
-		return function(p2) --[[ Line: 46 ]]
+		return function(p2)
 			-- upvalues: ReactModule (upval), LocalizationProvider (upval), Localization (upval), AppStyleProvider (upval), config (upval), RoactRoduxModule (upval), createStore (upval), DesignTokenProvider (upval), p1 (copy)
 			return ReactModule.createElement(LocalizationProvider, { localization = Localization.new("en-us") }, {
 				AppStyleProvider = ReactModule.createElement(AppStyleProvider, { style = p2 and config[p2.theme] or config.Default }, {

@@ -1,8 +1,8 @@
-﻿local function _(Vector): boolean --[[ Line: 14 | Named "isLandscape" ]]
+﻿local function _(Vector): boolean
 	return Vector.Y < Vector.X
 end
 
-return function(Vector, Vector1, p1, p2) --[[ Line: 18 | Named "resolveMaxCropFraction" ]]
+return function(Vector, Vector1, p1, p2)
 	if Vector1 == nil or Vector.X == 0 or Vector.Y == 0 then
 		return 0
 	else

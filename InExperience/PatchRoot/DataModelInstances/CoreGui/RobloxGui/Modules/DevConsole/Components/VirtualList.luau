@@ -2,12 +2,12 @@
 local ConstantsModule = require(script.Parent.Parent.Constants)
 local VirtualList = RoactModule.Component:extend("VirtualList")
 
-function VirtualList.init(p1) --[[ Line: 21 ]]
+function VirtualList.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.scrollingRef = RoactModule.createRef()
 	p1.state = { canvasPosY = 0, absSizeY = 0 }
 	
-	function p1.onScrollPropertyChanged() --[[ Line: 28 ]]
+	function p1.onScrollPropertyChanged()
 		-- upvalues: p1 (copy)
 		local Current = p1.scrollingRef.current
 		
@@ -21,7 +21,7 @@ function VirtualList.init(p1) --[[ Line: 21 ]]
 	end
 end
 
-function VirtualList.connectScrollListenersIfNeeded(p1) --[[ Line: 44 ]]
+function VirtualList.connectScrollListenersIfNeeded(p1)
 	local Current = p1.scrollingRef.current
 	
 	if Current == p1.connectedFrame then return end
@@ -37,7 +37,7 @@ function VirtualList.connectScrollListenersIfNeeded(p1) --[[ Line: 44 ]]
 	end
 end
 
-function VirtualList.disconnectScrollListeners(p1) --[[ Line: 59 ]]
+function VirtualList.disconnectScrollListeners(p1)
 	if p1.canvasPosConnector then
 		p1.canvasPosConnector:Disconnect()
 		p1.canvasPosConnector = nil
@@ -49,15 +49,15 @@ function VirtualList.disconnectScrollListeners(p1) --[[ Line: 59 ]]
 	p1.connectedFrame = nil
 end
 
-function VirtualList.didMount(p1) --[[ Line: 71 ]]
+function VirtualList.didMount(p1)
 	p1:connectScrollListenersIfNeeded()
 end
 
-function VirtualList.willUnmount(p1) --[[ Line: 75 ]]
+function VirtualList.willUnmount(p1)
 	p1:disconnectScrollListeners()
 end
 
-function VirtualList.didUpdate(p1, p2) --[[ Line: 79 ]]
+function VirtualList.didUpdate(p1, p2)
 	p1:connectScrollListenersIfNeeded()
 	local Current = p1.scrollingRef.current
 	
@@ -81,7 +81,7 @@ function VirtualList.didUpdate(p1, p2) --[[ Line: 79 ]]
 	end
 end
 
-function VirtualList.render(p1) --[[ Line: 111 ]]
+function VirtualList.render(p1)
 	-- upvalues: RoactModule (copy), ConstantsModule (copy)
 	local Items = p1.props.items or {}
 	local RowHeight = p1.props.rowHeight

@@ -8,10 +8,10 @@ local CreateGrafanaLoggingHandlerModule = require(Parent.GlobalHandlers.createGr
 local _ = require(Parent.HttpStoreTypes)
 local t = {}
 
-return function() --[[ Line: 31 | Named "createHTTPStore" ]]
+return function()
 	-- upvalues: t (ref), CreateFetchSignalModule (copy), CreateCancelRequestHandlerModule (copy), CreateNetworkStatsHandlerModule (copy), CreateGrafanaLoggingHandlerModule (copy), SignalsModule (copy), HttpSessionTrackerModule (copy)
 	return {
-		fetch = function(Key, p1) --[[ Line: 33 ]]
+		fetch = function(Key, p1)
 			-- upvalues: t (upval), CreateFetchSignalModule (upval), CreateCancelRequestHandlerModule (upval), CreateNetworkStatsHandlerModule (upval), CreateGrafanaLoggingHandlerModule (upval), SignalsModule (upval)
 			if Key and t[Key] then
 				return t[Key].getFetchSignal, t[Key].cancelRequest
@@ -21,7 +21,7 @@ return function() --[[ Line: 31 | Named "createHTTPStore" ]]
 			local NetworkStatsHandlerModule = CreateNetworkStatsHandlerModule(CancelRequestHandlerModule)
 			local GrafanaLoggingHandlerModule = CreateGrafanaLoggingHandlerModule(CancelRequestHandlerModule)
 			
-			local function CancelRequest() --[[ Line: 55 ]]
+			local function CancelRequest()
 				-- upvalues: NetworkStatsHandlerModule (copy), GrafanaLoggingHandlerModule (copy), FetchSignalModule2 (copy)
 				NetworkStatsHandlerModule()
 				GrafanaLoggingHandlerModule()
@@ -29,7 +29,7 @@ return function() --[[ Line: 31 | Named "createHTTPStore" ]]
 			end
 			
 			if Key then
-				local Effect = SignalsModule.createEffect(function(p2) --[[ Line: 62 ]]
+				local Effect = SignalsModule.createEffect(function(p2)
 					-- upvalues: CancelRequestHandlerModule (ref), t (upval), Key (copy)
 					local CancelRequestHandlerModuleResult = CancelRequestHandlerModule(p2)
 					
@@ -38,7 +38,7 @@ return function() --[[ Line: 31 | Named "createHTTPStore" ]]
 					end
 				end)
 				
-				CancelRequest = function() --[[ Line: 69 ]]
+				CancelRequest = function()
 					-- upvalues: Effect (copy), NetworkStatsHandlerModule (copy), GrafanaLoggingHandlerModule (copy), FetchSignalModule2 (copy), t (upval), Key (copy)
 					Effect()
 					NetworkStatsHandlerModule()
@@ -54,7 +54,7 @@ return function() --[[ Line: 31 | Named "createHTTPStore" ]]
 			end
 			return CancelRequestHandlerModule, CancelRequest
 		end,
-		cancelAll = function() --[[ Line: 84 ]]
+		cancelAll = function()
 			-- upvalues: t (upval), HttpSessionTrackerModule (upval)
 			for _, value in t do
 				value.cancelRequest()

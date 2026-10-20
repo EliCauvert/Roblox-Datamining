@@ -10,22 +10,22 @@ local _ = require(script.Parent.FollowingStoreTypes)
 local ClassifyFollowingErrorModule = require(script.Parent.classifyFollowingError)
 game:DefineFastInt("FollowingStoreProcessDelaySec", 1)
 
-local function _() --[[ Line: 35 | Named "getFIntFollowingStoreProcessDelaySec" ]]
+local function _()
 	return game:GetFastInt("FollowingStoreProcessDelaySec")
 end
 
-local _ = function(p1) --[[ Line: 41 | Named "normalizeId" ]]
+local _ = function(p1)
 	return if p1 == nil then nil else tostring(p1)
 end
 
-return function() --[[ Line: 48 | Named "createFollowingStore" ]]
+return function()
 	-- upvalues: CreateDataCacheModule (copy), RequestsModule (copy), CreateDataResolverModule (copy), CryoModule (copy), PromiseModule (copy), ClassifyFollowingErrorModule (copy)
 	local DataCacheModule = CreateDataCacheModule()
 	local DataCacheModule1 = CreateDataCacheModule()
 	
-	local function _(p1) --[[ Line: 58 | Named "fetchFollowingExists" ]]
+	local function _(p1)
 		-- upvalues: RequestsModule (upval)
-		return RequestsModule.GetFollowingExists(p1):andThen(function(Result) --[[ Line: 59 ]]
+		return RequestsModule.GetFollowingExists(p1):andThen(function(Result)
 			-- upvalues: p1 (copy)
 			local IsFollowing = {}
 			local IsFollowed = {}
@@ -56,11 +56,11 @@ return function() --[[ Line: 48 | Named "createFollowingStore" ]]
 		supportsMutations = true,
 		cache = DataCacheModule,
 		queueProcessDelaySec = game:GetFastInt("FollowingStoreProcessDelaySec"),
-		fetchFn = function(p2) --[[ Line: 96 ]]
+		fetchFn = function(p2)
 			-- upvalues: CryoModule (upval), RequestsModule (upval), DataCacheModule1 (copy)
 			local KeysResult = CryoModule.Dictionary.keys(p2)
 			
-			return RequestsModule.GetFollowingExists(KeysResult):andThen(function(Result) --[[ Line: 59 ]]
+			return RequestsModule.GetFollowingExists(KeysResult):andThen(function(Result)
 				-- upvalues: KeysResult (copy)
 				local IsFollowing = {}
 				local IsFollowed = {}
@@ -83,7 +83,7 @@ return function() --[[ Line: 48 | Named "createFollowingStore" ]]
 					end
 				end
 				return { isFollowing = IsFollowing, isFollowed = IsFollowed }
-			end):andThen(function(Result) --[[ Line: 98 ]]
+			end):andThen(function(Result)
 				-- upvalues: DataCacheModule1 (upval)
 				DataCacheModule1.replaceItems(Result.isFollowed)
 				
@@ -96,11 +96,11 @@ return function() --[[ Line: 48 | Named "createFollowingStore" ]]
 		supportsMutations = true,
 		cache = DataCacheModule1,
 		queueProcessDelaySec = game:GetFastInt("FollowingStoreProcessDelaySec"),
-		fetchFn = function(p3) --[[ Line: 111 ]]
+		fetchFn = function(p3)
 			-- upvalues: CryoModule (upval), RequestsModule (upval), DataCacheModule (copy)
 			local KeysResult = CryoModule.Dictionary.keys(p3)
 			
-			return RequestsModule.GetFollowingExists(KeysResult):andThen(function(Result) --[[ Line: 59 ]]
+			return RequestsModule.GetFollowingExists(KeysResult):andThen(function(Result)
 				-- upvalues: KeysResult (copy)
 				local IsFollowing = {}
 				local IsFollowed = {}
@@ -123,7 +123,7 @@ return function() --[[ Line: 48 | Named "createFollowingStore" ]]
 					end
 				end
 				return { isFollowing = IsFollowing, isFollowed = IsFollowed }
-			end):andThen(function(Result) --[[ Line: 113 ]]
+			end):andThen(function(Result)
 				-- upvalues: DataCacheModule (upval)
 				DataCacheModule.replaceItems(Result.isFollowing)
 				
@@ -136,16 +136,16 @@ return function() --[[ Line: 48 | Named "createFollowingStore" ]]
 	local GetOptimisticCachedItemFunction1 = DataResolverModule1.getOptimisticCachedItem
 	local GetOptimisticAndFetchItemFunction = DataResolverModule1.getOptimisticAndFetchItem
 	
-	local function writeFollowing(p4, IsFollowing, Callback, p5) --[[ Line: 147 ]]
+	local function writeFollowing(p4, IsFollowing, Callback, p5)
 		-- upvalues: DataResolverModule (copy), PromiseModule (upval), ClassifyFollowingErrorModule (upval)
 		DataResolverModule.setMutation(p4, IsFollowing)
 		
-		return Callback(p4, p5):andThen(function() --[[ Line: 155 ]]
+		return Callback(p4, p5):andThen(function()
 			-- upvalues: DataResolverModule (upval), p4 (copy), IsFollowing (copy)
 			DataResolverModule.commitMutation(p4)
 			
 			return { type = "success", isFollowing = IsFollowing }
-		end, function(p6) --[[ Line: 158 ]]
+		end, function(p6)
 			-- upvalues: DataResolverModule (upval), p4 (copy), PromiseModule (upval), ClassifyFollowingErrorModule (upval)
 			DataResolverModule.clearMutation(p4)
 			
@@ -154,28 +154,28 @@ return function() --[[ Line: 48 | Named "createFollowingStore" ]]
 	end
 	
 	return {
-		GetIsFollowing = function(p4, p5) --[[ Line: 127 ]]
+		GetIsFollowing = function(p4, p5)
 			-- upvalues: GetOptimisticCachedItemFunction (copy), DataResolverModule1 (copy), GetOptimisticAndFetchItemFunction1 (copy)
 			return if p5 and p5.skipFetch then GetOptimisticCachedItemFunction(p4) elseif DataResolverModule1.isRequestInQueueOrInFlight(p4) then GetOptimisticCachedItemFunction(p4) else GetOptimisticAndFetchItemFunction1(p4)
 		end,
-		GetIsFollowed = function(p4, p5) --[[ Line: 137 ]]
+		GetIsFollowed = function(p4, p5)
 			-- upvalues: GetOptimisticCachedItemFunction1 (copy), DataResolverModule (copy), GetOptimisticAndFetchItemFunction (copy)
 			return if p5 and p5.skipFetch then GetOptimisticCachedItemFunction1(p4) elseif DataResolverModule.isRequestInQueueOrInFlight(p4) then GetOptimisticCachedItemFunction1(p4) else GetOptimisticAndFetchItemFunction(p4)
 		end,
-		Follow = function(p4, p5) --[[ Line: 164 ]]
+		Follow = function(p4, p5)
 			-- upvalues: writeFollowing (copy), RequestsModule (upval)
 			return writeFollowing(p4, true, RequestsModule.FollowUser, p5)
 		end,
-		Unfollow = function(p4, p5) --[[ Line: 168 ]]
+		Unfollow = function(p4, p5)
 			-- upvalues: writeFollowing (copy), RequestsModule (upval)
 			return writeFollowing(p4, false, RequestsModule.UnfollowUser, p5)
 		end,
-		clear = function() --[[ Line: 172 ]]
+		clear = function()
 			-- upvalues: DataResolverModule (copy), DataResolverModule1 (copy)
 			DataResolverModule.clear()
 			DataResolverModule1.clear()
 		end,
-		dispose = function() --[[ Line: 177 ]]
+		dispose = function()
 			-- upvalues: DataResolverModule (copy), DataResolverModule1 (copy)
 			DataResolverModule.dispose()
 			DataResolverModule1.dispose()

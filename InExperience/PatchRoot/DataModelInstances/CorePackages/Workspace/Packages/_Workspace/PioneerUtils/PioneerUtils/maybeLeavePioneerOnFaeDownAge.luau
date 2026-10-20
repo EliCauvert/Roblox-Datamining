@@ -9,17 +9,17 @@ local IsPioneerLaunchModule = require(PioneerUtils.isPioneerLaunch)
 local LeaveExperienceModule = require(PioneerUtils.leaveExperience)
 local Formatted = string.format("%s/users/authenticated/app-launch-info", require(Parent.Http).Url.USERS_URL)
 
-local function _() --[[ Line: 16 | Named "fetchIsConfirmedThirteenPlus" ]]
+local function _()
 	-- upvalues: PromiseModule (copy), FetchFunction (copy), Formatted (copy), Response (copy)
-	return PromiseModule.new(function(Callback: (any) -> ()) --[[ Line: 17 ]]
+	return PromiseModule.new(function(Callback: (any) -> ())
 		-- upvalues: FetchFunction (upval), Formatted (upval), Response (upval)
-		local v1 = FetchFunction(Formatted, { method = "GET" }):catch(function() --[[ Line: 19 ]]
+		local v1 = FetchFunction(Formatted, { method = "GET" }):catch(function()
 			-- upvalues: Response (upval)
 			return Response.error()
 		end):expect()
 		
 		if v1.ok then
-			local v2 = v1:json():catch(function() --[[ Line: 31 ]]
+			local v2 = v1:json():catch(function()
 				return nil
 			end):expect()
 			Callback(typeof(v2) == "table" and typeof(v2.ageBracket) == "number" and v2.ageBracket ~= 1)
@@ -31,9 +31,9 @@ local function _() --[[ Line: 16 | Named "fetchIsConfirmedThirteenPlus" ]]
 	end)
 end
 
-return function(p1, Callback: () -> ()) --[[ Line: 47 | Named "maybeLeavePioneerOnFaeDownAge" ]]
+return function(p1, Callback: () -> ())
 	-- upvalues: IsPioneerLaunchModule (copy), PromiseModule (copy), FetchFunction (copy), Formatted (copy), Response (copy), LeaveExperienceModule (copy), PioneerLeaveReasonModule (copy)
-	local function _() --[[ Line: 48 | Named "stay" ]]
+	local function _()
 		-- upvalues: Callback (copy)
 		if Callback then
 			Callback()
@@ -42,15 +42,15 @@ return function(p1, Callback: () -> ()) --[[ Line: 47 | Named "maybeLeavePioneer
 	
 	if IsPioneerLaunchModule() then
 		if p1 then
-			return PromiseModule.new(function(Callback: (any) -> ()) --[[ Line: 17 ]]
+			return PromiseModule.new(function(Callback: (any) -> ())
 				-- upvalues: FetchFunction (upval), Formatted (upval), Response (upval)
-				local v1 = FetchFunction(Formatted, { method = "GET" }):catch(function() --[[ Line: 19 ]]
+				local v1 = FetchFunction(Formatted, { method = "GET" }):catch(function()
 					-- upvalues: Response (upval)
 					return Response.error()
 				end):expect()
 				
 				if v1.ok then
-					local v2 = v1:json():catch(function() --[[ Line: 31 ]]
+					local v2 = v1:json():catch(function()
 						return nil
 					end):expect()
 					Callback(typeof(v2) == "table" and typeof(v2.ageBracket) == "number" and v2.ageBracket ~= 1)
@@ -59,7 +59,7 @@ return function(p1, Callback: () -> ()) --[[ Line: 47 | Named "maybeLeavePioneer
 				else
 					Callback(false)
 				end
-			end):andThen(function(Result): boolean --[[ Line: 64 ]]
+			end):andThen(function(Result): boolean
 				-- upvalues: Callback (copy), LeaveExperienceModule (upval), PioneerLeaveReasonModule (upval)
 				if Result then
 					if Callback then

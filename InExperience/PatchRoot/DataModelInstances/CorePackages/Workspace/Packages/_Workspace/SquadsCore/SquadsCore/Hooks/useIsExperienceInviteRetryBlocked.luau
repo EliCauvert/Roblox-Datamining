@@ -2,7 +2,7 @@
 local UseSignalStateFunction = require(SquadsCore.Parent.SignalsReact).useSignalState
 local GetExperienceInviteRetryAfterStoreModule = require(SquadsCore.Stores.GetExperienceInviteRetryAfterStore)
 
-return function(p1): boolean --[[ Line: 15 | Named "useIsExperienceInviteRetryBlocked" ]]
+return function(p1): boolean
 	-- upvalues: GetExperienceInviteRetryAfterStoreModule (copy), UseSignalStateFunction (copy)
 	local UseSignalStateResult = UseSignalStateFunction(GetExperienceInviteRetryAfterStoreModule(false).getBlockedSquadId)
 	

@@ -4,7 +4,7 @@ local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local SduiActionType = SduiCoreSystemModule.SduiActionType
 
-return function(p1, _, p2) --[[ Line: 14 | Named "SduiRefreshGamePassesAction" ]]
+return function(p1, _, p2)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), DataHydrationModule (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	

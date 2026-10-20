@@ -9,7 +9,7 @@ local RoduxPresenceModule = require(script.RoduxPresence)
 local _ = require(PYMKCarousel.Common.OmniTypes)
 local FFlagPymkCarouselPresenceStoreMigrationModule = require(PYMKCarousel.Flags.FFlagPymkCarouselPresenceStoreMigration)
 
-return function(p1) --[[ Line: 15 ]]
+return function(p1)
 	-- upvalues: Rodux (copy), UsersModule (copy), FriendsModule (copy), RoduxNetworking (copy), RoduxAnalyticsModule (copy), FFlagPymkCarouselPresenceStoreMigrationModule (copy), RoduxPresenceModule (copy)
 	return if p1.contentType and p1.treatmentType then Rodux.combineReducers({
 		Users = UsersModule(p1),

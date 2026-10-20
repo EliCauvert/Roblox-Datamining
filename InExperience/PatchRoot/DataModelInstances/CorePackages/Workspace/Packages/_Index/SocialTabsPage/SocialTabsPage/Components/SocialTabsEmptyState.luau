@@ -10,7 +10,7 @@ local Assets = FoundationCloudAssetsModule.Assets
 FoundationCloudAssetsModule.preloadAsset("pictograms/collaborators")
 local PictogramsCollaborators = Assets["pictograms/collaborators"] or {}
 
-return function(p1) --[[ Line: 24 | Named "SocialTabsEmptyState" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Image (copy), PictogramsCollaborators (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	

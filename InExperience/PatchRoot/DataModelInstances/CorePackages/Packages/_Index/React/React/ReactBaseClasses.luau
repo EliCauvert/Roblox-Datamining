@@ -13,18 +13,18 @@ if DEV then
 end
 local UninitializedState = require(Parent.Shared).UninitializedState
 
-local function _(Text: string): string --[[ Line: 52 | Named "trimPath" ]]
+local function _(Text: string): string
 	local Match: string? = string.match(Text, "%.%u[%.%w]-$")
 	
 	return if Match then string.gsub(Match, "^%.", "") else Text
 end
 
-local _ = function(p1, p2, p3) --[[ Line: 66 | Named "warnAboutExistingLifecycle" ]]
+local _ = function(p1, p2, p3)
 	-- upvalues: Console (copy)
 	Console.warn("%s already defined '%s', but it also defining the deprecated Roact method '%s'. %s should only implement one of these methods, preferably using the non-deprecated name.", p1, p3, p2, p1)
 end
 
-local _ = function(p1, p2, p3) --[[ Line: 76 | Named "warnAboutDeprecatedLifecycleName" ]]
+local _ = function(p1, p2, p3)
 	-- upvalues: DEV (copy), COMPATWARNINGS (copy), Console (copy)
 	if DEV and COMPATWARNINGS then
 		local DebugInfo, DebugInfo2 = debug.info(3, "sln")
@@ -41,7 +41,7 @@ local config = {
 	willUnmount = "componentWillUnmount"
 }
 
-local function handleNewLifecycle(p1, p2, p3) --[[ Line: 98 ]]
+local function handleNewLifecycle(p1, p2, p3)
 	-- upvalues: config (copy), Console (copy), DEV (copy), COMPATWARNINGS (copy)
 	if config[p2] ~= nil then
 		if p1[config[p2]] == nil then
@@ -71,7 +71,7 @@ end
 local self = setmetatable({ __componentName = "Component" }, {
 	__newindex = handleNewLifecycle,
 	__index = { isReactComponent = true },
-	__tostring = function(p1) --[[ Line: 128 ]]
+	__tostring = function(p1)
 		return p1.__componentName
 	end
 })
@@ -88,7 +88,7 @@ for _ = 1, v1 do
 		__updater = ReactNoopUpdateQueueModule
 	})
 end
-local function setStateInInit(p1, Callback, p2) --[[ Line: 164 ]]
+local function setStateInInit(p1, Callback, p2)
 	-- upvalues: DEV (copy), Console (copy), EnableAllocationTrims (copy), Object (copy)
 	if DEV and p2 ~= nil then
 		Console.warn("Received a `callback` argument to `setState` during initialization of \"%s\". The callback behavior is not supported when using `setState` in `init`.\n\nConsider defining similar behavior in a `compontentDidMount` method instead.", p1.__componentName)
@@ -110,7 +110,7 @@ local function setStateInInit(p1, Callback, p2) --[[ Line: 164 ]]
 	end
 end
 
-function self.extend(p1, p2: string) --[[ Line: 213 ]]
+function self.extend(p1, p2: string)
 	-- upvalues: COMPATWARNINGS (copy), Console (copy), Count (ref), v1 (copy), Buffer (copy), UninitializedState (copy), t (copy), ReactNoopUpdateQueueModule (copy), setStateInInit (copy)
 	if p2 == nil then
 		if COMPATWARNINGS then
@@ -128,7 +128,7 @@ function self.extend(p1, p2: string) --[[ Line: 213 ]]
 	}
 	Module.__index = Module
 	
-	function Module.__ctor(Props, Context, p3) --[[ Line: 247 ]]
+	function Module.__ctor(Props, Context, p3)
 		-- upvalues: Count (upval), v1 (upval), Buffer (upval), UninitializedState (upval), t (upval), ReactNoopUpdateQueueModule (upval), Module (copy), setStateInInit (upval)
 		local BufferEntry = nil
 		if Count <= v1 then
@@ -161,14 +161,14 @@ function self.extend(p1, p2: string) --[[ Line: 213 ]]
 	return Module
 end
 
-function self.setState(p1, Callback, p2) --[[ Line: 339 ]]
+function self.setState(p1, Callback, p2)
 	if Callback ~= nil and type(Callback) ~= "table" and type(Callback) ~= "function" then
 		error("setState(...): takes an object of state variables to update or a function which returns an object of state variables.")
 	end
 	p1.__updater.enqueueSetState(p1, Callback, p2, "setState")
 end
 
-function self.forceUpdate(p1, p2) --[[ Line: 368 ]]
+function self.forceUpdate(p1, p2)
 	p1.__updater.enqueueForceUpdate(p1, p2, "forceUpdate")
 end
 
@@ -184,9 +184,9 @@ if DEV then
 		}
 	}
 	
-	local _ = function(Key, Entry) --[[ Line: 392 ]]
+	local _ = function(Key, Entry)
 		-- upvalues: self (copy), Console (copy)
-		self[Key] = function() --[[ Line: 393 ]]
+		self[Key] = function()
 			-- upvalues: Console (upval), Entry (copy)
 			Console.warn("%s(...) is deprecated in plain JavaScript React classes. %s", Entry[1], Entry[2])
 			
@@ -198,7 +198,7 @@ if DEV then
 		if config1[i] ~= nil then
 			local Entry = config1[i]
 			
-			self[i] = function() --[[ Line: 393 ]]
+			self[i] = function()
 				-- upvalues: Console (copy), Entry (copy)
 				Console.warn("%s(...) is deprecated in plain JavaScript React classes. %s", Entry[1], Entry[2])
 				
@@ -212,7 +212,7 @@ PureComponent.extend = self.extend
 setmetatable(PureComponent, {
 	__newindex = handleNewLifecycle,
 	__index = { isReactComponent = true, isPureReactComponent = true },
-	__tostring = function(p1) --[[ Line: 440 ]]
+	__tostring = function(p1)
 		return p1.__componentName
 	end
 })

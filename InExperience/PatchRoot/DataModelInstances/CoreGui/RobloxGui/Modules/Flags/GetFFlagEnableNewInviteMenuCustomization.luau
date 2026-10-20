@@ -3,7 +3,7 @@ local NewInviteMenuExperimentManagerModule = require(game:GetService("CoreGui").
 game:DefineFastFlag("EnableNewInviteMenuCustomization2", false)
 game:DefineFastFlag("EnableNewInviteMenuCustomizationIXP2", false)
 
-return function() --[[ Line: 10 ]]
+return function()
 	-- upvalues: NewInviteMenuExperimentManagerModule (copy)
 	return game:GetFastFlag("EnableNewInviteMenuCustomization2") or game:GetFastFlag("EnableNewInviteMenuCustomizationIXP2") and NewInviteMenuExperimentManagerModule.default:getCustomizationEnabled()
 end

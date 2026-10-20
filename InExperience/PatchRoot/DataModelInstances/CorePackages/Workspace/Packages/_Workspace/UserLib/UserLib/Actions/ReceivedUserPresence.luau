@@ -1,7 +1,7 @@
 ﻿local Parent = script:FindFirstAncestor("UserLib").Parent
 local _DateTime = require(Parent.Time).DateTime
 
-return require(Parent.Rodux).makeActionCreator(script.Name, function(UserId, Presence, LastLocation, PlaceId, RootPlaceId, GameInstanceId, p1, UniverseId, PreviousUniverseId) --[[ Line: 10 ]]
+return require(Parent.Rodux).makeActionCreator(script.Name, function(UserId, Presence, LastLocation, PlaceId, RootPlaceId, GameInstanceId, p1, UniverseId, PreviousUniverseId)
 	-- upvalues: _DateTime (copy)
 	local UnixTimestamp = 0
 	

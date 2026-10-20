@@ -11,7 +11,7 @@ local UseProfileCompletionDataModule = require(ProfilePlatform.Hooks.useProfileC
 local EnumsModule = require(ProfilePlatform.Common.Enums)
 local UseScreenSizeFunction = require(Parent.RobloxAppHooks).useScreenSize
 
-return ReactModule.memo(function(p1) --[[ Line: 22 | Named "ProfileCompletionContainer" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseProfileAnalyticsContextModule (copy), UseScreenSizeFunction (copy), UseDynamicSizeMarginModule (copy), ReactModule (copy), UseProfileCompletionSduiContextModule (copy), SocialServerDrivenUiModule (copy), UseProfileCompletionDataModule (copy), RoactNavigationModule (copy), SocialSduiComponentWrapper (copy), EnumsModule (copy)
 	local UseProfileAnalyticsContextModuleResult = UseProfileAnalyticsContextModule()
 	local UseScreenSizeResult = UseScreenSizeFunction()
@@ -21,17 +21,17 @@ return ReactModule.memo(function(p1) --[[ Line: 22 | Named "ProfileCompletionCon
 		sideMargin = UseDynamicSizeMarginModuleResult,
 		containerWidth = UseStateResult
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 33 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		return { collectionPosition = p1.layoutOrder }
 	end, { p1.layoutOrder })
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 38 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseDynamicSizeMarginModuleResult2 (copy), UseStateResult2 (copy)
 		UseDynamicSizeMarginModuleResult2(Frame)
 		UseStateResult2(Frame.AbsoluteSize.X)
 	end, { UseDynamicSizeMarginModuleResult2, UseStateResult2 })
-	ReactModule.useEffect(function() --[[ Line: 43 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SocialServerDrivenUiModule (upval)
 		SocialServerDrivenUiModule.registerSocialActions()
 	end, {})

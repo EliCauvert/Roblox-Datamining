@@ -3,7 +3,7 @@ local CreateDataCacheModule = require(DataHydration.createDataCache)
 local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.GameSubscriptionStoreTypes)
 
-return function() --[[ Line: 12 | Named "createGameSubscriptionStore" ]]
+return function()
 	-- upvalues: CreateDataCacheModule (copy)
 	local DataCacheModule = CreateDataCacheModule()
 	

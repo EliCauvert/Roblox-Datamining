@@ -1,7 +1,7 @@
 ﻿local UseLocalizationFunction = require(script:FindFirstAncestor("ShareSheet").Parent.Localization).Hooks.useLocalization
 local _ = require(script.Parent.PeoplePickerHeaderView)
 
-return function(p1) --[[ Line: 18 | Named "usePeoplePickerHeaderViewModel" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy)
 	return {
 		goBack = p1.goBack,

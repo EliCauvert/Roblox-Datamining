@@ -22,7 +22,7 @@ BlockingModalScreen.validateProps = TModule.interface({
 	overlay = TModule.optional(TModule.instanceIsA("GuiBase2d"))
 })
 
-function BlockingModalScreen.render(p1) --[[ Line: 33 ]]
+function BlockingModalScreen.render(p1)
 	-- upvalues: RoactModule (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), BlockingModalContainerModule (copy), CoreGui (copy), RenderWithCoreScriptsStyleProviderModule (copy)
 	local Overlay = p1.props.overlay
 	local Element = RoactModule.createElement(FocusRoot, {
@@ -46,7 +46,7 @@ function BlockingModalScreen.render(p1) --[[ Line: 33 ]]
 	})
 end
 
-return function(Tbl) --[[ Line: 72 | Named "BlockingModalScreenWithFoundationOverlay" ]]
+return function(Tbl)
 	-- upvalues: UseOverlayFunction (copy), RoactModule (copy), BlockingModalScreen (copy)
 	local Copy = table.clone(Tbl)
 	Copy.overlay = UseOverlayFunction()

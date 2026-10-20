@@ -1,5 +1,5 @@
-﻿return function(Plugin) --[[ Line: 5 | Named "isPluginElevated" ]]
-	return (pcall(function() --[[ Line: 6 ]]
+﻿return function(Plugin)
+	return (pcall(function()
 		-- upvalues: Plugin (copy)
 		return Plugin:GetPluginComponent("Panels")
 	end))

@@ -1,4 +1,4 @@
-﻿local function _(p1) --[[ Line: 9 | Named "closeAttempt" ]]
+﻿local function _(p1)
 	local Attempts = p1.attempts
 	local Attempt = Attempts and Attempts[#Attempts]
 	
@@ -8,7 +8,7 @@
 end
 
 local RequestOrchestratorDataModule = {
-	new = function() --[[ Line: 17 ]]
+	new = function()
 		return {
 			now = tick(),
 			allTypes = {},
@@ -20,7 +20,7 @@ local RequestOrchestratorDataModule = {
 			cacheByType = {}
 		}
 	end,
-	observeType = function(p1, p2): number? --[[ Line: 37 ]]
+	observeType = function(p1, p2): number?
 		if p1.typeSeen[p2] then
 			return nil
 		else
@@ -32,7 +32,7 @@ local RequestOrchestratorDataModule = {
 	end
 }
 
-function RequestOrchestratorDataModule.observeTypes(p1, List) --[[ Line: 47 ]]
+function RequestOrchestratorDataModule.observeTypes(p1, List)
 	-- upvalues: RequestOrchestratorDataModule (copy)
 	local List1 = {}
 	
@@ -46,14 +46,14 @@ function RequestOrchestratorDataModule.observeTypes(p1, List) --[[ Line: 47 ]]
 	return List1
 end
 
-function RequestOrchestratorDataModule.batchesFor(p2, p3) --[[ Line: 58 ]]
+function RequestOrchestratorDataModule.batchesFor(p2, p3)
 	if not p2.batchesByType[p3] then
 		p2.batchesByType[p3] = {}
 	end
 	return p2.batchesByType[p3]
 end
 
-function RequestOrchestratorDataModule.registerBatch(p2, p3, p4) --[[ Line: 65 ]]
+function RequestOrchestratorDataModule.registerBatch(p2, p3, p4)
 	-- upvalues: RequestOrchestratorDataModule (copy)
 	RequestOrchestratorDataModule.batchesFor(p2, p3)[tostring(p4.batchId)] = {
 		state = "pending",
@@ -64,7 +64,7 @@ function RequestOrchestratorDataModule.registerBatch(p2, p3, p4) --[[ Line: 65 ]
 	}
 end
 
-function RequestOrchestratorDataModule.openSendAttempt(p2, p3, p4) --[[ Line: 77 ]]
+function RequestOrchestratorDataModule.openSendAttempt(p2, p3, p4)
 	-- upvalues: RequestOrchestratorDataModule (copy)
 	local BatchesForResult = RequestOrchestratorDataModule.batchesFor(p2, p3)
 	local Text = tostring(p4.batchId)
@@ -82,7 +82,7 @@ function RequestOrchestratorDataModule.openSendAttempt(p2, p3, p4) --[[ Line: 77
 	BatchesForResultEntry.operationCount = p4.operationCount or 0
 end
 
-function RequestOrchestratorDataModule.settleBatch(p2, p3, p4) --[[ Line: 93 ]]
+function RequestOrchestratorDataModule.settleBatch(p2, p3, p4)
 	local BatchesByTypeEntry = p2.batchesByType[p3]
 	
 	if not BatchesByTypeEntry then return end
@@ -100,7 +100,7 @@ function RequestOrchestratorDataModule.settleBatch(p2, p3, p4) --[[ Line: 93 ]]
 	BatchesByTypeEntry1.httpStatus = p4.httpStatus
 end
 
-function RequestOrchestratorDataModule.reclassifyOnRetry(p2, p3, p4) --[[ Line: 108 ]]
+function RequestOrchestratorDataModule.reclassifyOnRetry(p2, p3, p4)
 	local BatchesByTypeEntry = p2.batchesByType[p3]
 	
 	if not BatchesByTypeEntry then return end
@@ -124,7 +124,7 @@ function RequestOrchestratorDataModule.reclassifyOnRetry(p2, p3, p4) --[[ Line: 
 	BatchesByTypeEntry1.attemptNumber = p4.attemptNumber
 end
 
-function RequestOrchestratorDataModule.markExhausted(p2, p3, p4) --[[ Line: 130 ]]
+function RequestOrchestratorDataModule.markExhausted(p2, p3, p4)
 	local BatchesByTypeEntry = p2.batchesByType[p3]
 	
 	if not BatchesByTypeEntry then return end
@@ -142,7 +142,7 @@ function RequestOrchestratorDataModule.markExhausted(p2, p3, p4) --[[ Line: 130 
 	end
 end
 
-function RequestOrchestratorDataModule.trackQueueOnCreated(p2, p3, p4) --[[ Line: 143 ]]
+function RequestOrchestratorDataModule.trackQueueOnCreated(p2, p3, p4)
 	if p4.maxBatchSize then
 		p2.observedMaxByType[p3] = p4.maxBatchSize
 	end
@@ -162,7 +162,7 @@ function RequestOrchestratorDataModule.trackQueueOnCreated(p2, p3, p4) --[[ Line
 	end
 end
 
-function RequestOrchestratorDataModule.drainQueueOnSent(p2, p3, p4) --[[ Line: 162 ]]
+function RequestOrchestratorDataModule.drainQueueOnSent(p2, p3, p4)
 	local Queue = p2.queues[p3]
 	local OperationCount = p4.operationCount or (Queue and #Queue.retryOps + #Queue.ops or 0)
 	p2.lastBatchSizeByType[p3] = OperationCount
@@ -182,7 +182,7 @@ function RequestOrchestratorDataModule.drainQueueOnSent(p2, p3, p4) --[[ Line: 1
 	end
 end
 
-function RequestOrchestratorDataModule.requeueRetryOps(p5, p6, p7) --[[ Line: 184 ]]
+function RequestOrchestratorDataModule.requeueRetryOps(p5, p6, p7)
 	local Queue = p5.queues[p6]
 	
 	if not Queue then
@@ -201,7 +201,7 @@ function RequestOrchestratorDataModule.requeueRetryOps(p5, p6, p7) --[[ Line: 18
 	end
 end
 
-function RequestOrchestratorDataModule.clearQueueOnExhausted(p8, p9) --[[ Line: 203 ]]
+function RequestOrchestratorDataModule.clearQueueOnExhausted(p8, p9)
 	local Queue = p8.queues[p9]
 	
 	if Queue then
@@ -213,7 +213,7 @@ function RequestOrchestratorDataModule.clearQueueOnExhausted(p8, p9) --[[ Line: 
 	end
 end
 
-function RequestOrchestratorDataModule.enqueueOperation(p8, p9, p10) --[[ Line: 214 ]]
+function RequestOrchestratorDataModule.enqueueOperation(p8, p9, p10)
 	local Queue = p8.queues[p9]
 	
 	if not Queue then
@@ -228,7 +228,7 @@ function RequestOrchestratorDataModule.enqueueOperation(p8, p9, p10) --[[ Line: 
 	table.insert(Queue.ops, p10.message or "?")
 end
 
-function RequestOrchestratorDataModule.recordCacheItemAdded(p8, p9, p10) --[[ Line: 224 ]]
+function RequestOrchestratorDataModule.recordCacheItemAdded(p8, p9, p10)
 	local CacheByTypeEntry = p8.cacheByType[p9]
 	
 	if not CacheByTypeEntry then
@@ -247,7 +247,7 @@ function RequestOrchestratorDataModule.recordCacheItemAdded(p8, p9, p10) --[[ Li
 	end
 end
 
-function RequestOrchestratorDataModule.recordCacheHit(p11, p12, p13) --[[ Line: 242 ]]
+function RequestOrchestratorDataModule.recordCacheHit(p11, p12, p13)
 	local CacheByTypeEntry = p11.cacheByType[p12]
 	
 	if not CacheByTypeEntry then
@@ -270,7 +270,7 @@ function RequestOrchestratorDataModule.recordCacheHit(p11, p12, p13) --[[ Line: 
 	end
 end
 
-function RequestOrchestratorDataModule.advanceTime(p14) --[[ Line: 263 ]]
+function RequestOrchestratorDataModule.advanceTime(p14)
 	p14.now = tick()
 	local NowDelta = p14.now - 30
 	

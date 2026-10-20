@@ -13,7 +13,7 @@ local GetFFlagLuaUsePhoneNumberTextTypeForPhoneUpsellModule = require(PhoneUpsel
 local GetFFlagPhoneUseParentSizeForScreenSizeModule = require(PhoneUpsell.Flags.GetFFlagPhoneUseParentSizeForScreenSize)
 local GetFFlagFixIosOtpAutofillModule = require(PhoneUpsell.Flags.GetFFlagFixIosOtpAutofill)
 
-local function CloseUpsell() --[[ Line: 85 ]] end
+local function CloseUpsell() end
 
 local config = {
 	origin = "",
@@ -31,10 +31,10 @@ local config = {
 	onCancelled = CloseUpsell,
 	onExtraButtonClick = CloseUpsell,
 	closeUpsell = CloseUpsell,
-	showWebpage = function(_) --[[ Line: 103 ]] end
+	showWebpage = function(_) end
 }
 
-return function(p1) --[[ Line: 106 | Named "InGameUpsellContainer" ]]
+return function(p1)
 	-- upvalues: MergePropsModule (copy), config (copy), UsePhoneVerificationUpsellPropsModule (copy), ReactModule (copy), GetFFlagPhoneUseParentSizeForScreenSizeModule (copy), RoactModule (copy), PhoneVerificationUpsellStateModule (copy), InGameEntryViewModule (copy), InGameAddPhoneViewModule (copy), GetFFlagLuaUsePhoneNumberTextTypeForPhoneUpsellModule (copy), InGameVerifyPhoneViewModule (copy), GetFFlagFixIosOtpAutofillModule (copy)
 	local MergePropsModuleResult = MergePropsModule(config, p1)
 	local UsePhoneVerificationUpsellPropsModuleResult = UsePhoneVerificationUpsellPropsModule(MergePropsModuleResult)
@@ -42,7 +42,7 @@ return function(p1) --[[ Line: 106 | Named "InGameUpsellContainer" ]]
 	return ReactModule.createElement(if GetFFlagPhoneUseParentSizeForScreenSizeModule() then "Frame" else ReactModule.Fragment, if GetFFlagPhoneUseParentSizeForScreenSizeModule() then {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0),
-		[RoactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 117 ]]
+		[RoactModule.Change.AbsoluteSize] = function(Frame)
 			-- upvalues: UsePhoneVerificationUpsellPropsModuleResult (copy)
 			UsePhoneVerificationUpsellPropsModuleResult.setParentSize(Frame.AbsoluteSize)
 		end

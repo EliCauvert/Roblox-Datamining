@@ -1,6 +1,6 @@
 ﻿local SignalsModule = require(script:FindFirstAncestor("SystemScrim").Parent.Signals)
 
-local function createDefaultStates() --[[ Line: 17 ]]
+local function createDefaultStates()
 	-- upvalues: SignalsModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(false)
 	local Signal1, Signal2_1 = SignalsModule.createSignal(1)
@@ -17,7 +17,7 @@ local function createDefaultStates() --[[ Line: 17 ]]
 	}
 end
 
-return SignalsModule.createComputed(function(_) --[[ Line: 35 ]]
+return SignalsModule.createComputed(function(_)
 	-- upvalues: createDefaultStates (copy)
 	return (createDefaultStates())
 end)

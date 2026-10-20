@@ -16,9 +16,9 @@ local GetFeatureKeyForSurfaceModule = require(Parent.Utils.getFeatureKeyForSurfa
 local FFlagRefetchBothOfferKeysAfterPurchaseModule = require(Parent.Flags.FFlagRefetchBothOfferKeysAfterPurchase)
 local InExperienceOffersModule = require(Parent.Parent.InExperienceOffers)
 
-return function(p1) --[[ Line: 33 | Named "completePurchase" ]]
+return function(p1)
 	-- upvalues: ThunkModule (copy), Workspace (copy), PurchaseCompleteRecievedModule (copy), FFlagEnableInExperienceOffersPurchaseFlow (copy), InExperienceOffersModule (copy), FFlagRefetchBothOfferKeysAfterPurchaseModule (copy), GetFeatureKeyForSurfaceModule (copy), LogUnifiedPurchaseTelemetryCounterModule (copy), UnifiedPurchaseTelemetryModule (copy), SendUnifiedPurchaseEventLogModule (copy), UnifiedPurchaseEventNameEnumModule (copy), FFlagSkipCompletionModalForMarketplace (copy), SetPromptStateModule (copy), PromptStateModule (copy), CompleteRequestModule (copy)
-	return ThunkModule.new(script.Name, {}, function(p2, _) --[[ Line: 34 ]]
+	return ThunkModule.new(script.Name, {}, function(p2, _)
 		-- upvalues: Workspace (upval), PurchaseCompleteRecievedModule (upval), FFlagEnableInExperienceOffersPurchaseFlow (upval), InExperienceOffersModule (upval), FFlagRefetchBothOfferKeysAfterPurchaseModule (upval), GetFeatureKeyForSurfaceModule (upval), p1 (copy), LogUnifiedPurchaseTelemetryCounterModule (upval), UnifiedPurchaseTelemetryModule (upval), SendUnifiedPurchaseEventLogModule (upval), UnifiedPurchaseEventNameEnumModule (upval), FFlagSkipCompletionModalForMarketplace (upval), SetPromptStateModule (upval), PromptStateModule (upval), CompleteRequestModule (upval)
 		local DistributedGameTimeDelta = Workspace.DistributedGameTime - p2:getState().purchasingStartTime
 		p2:dispatch(PurchaseCompleteRecievedModule())
@@ -91,7 +91,7 @@ return function(p1) --[[ Line: 33 | Named "completePurchase" ]]
 		if DistributedGameTimeDelta >= 1 then
 			return p2:dispatch(SetPromptStateModule(PromptStateModule.PurchaseComplete))
 		else
-			delay(1 - DistributedGameTimeDelta, function() --[[ Line: 125 ]]
+			delay(1 - DistributedGameTimeDelta, function()
 				-- upvalues: p2 (copy), SetPromptStateModule (upval), PromptStateModule (upval)
 				return p2:dispatch(SetPromptStateModule(PromptStateModule.PurchaseComplete))
 			end)

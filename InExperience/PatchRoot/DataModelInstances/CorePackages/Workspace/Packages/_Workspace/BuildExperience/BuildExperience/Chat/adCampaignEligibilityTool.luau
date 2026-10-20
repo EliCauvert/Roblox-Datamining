@@ -4,10 +4,10 @@ local CreatorAgentChatModule = require(BuildExperience.Parent.DataHydration.Crea
 local AdCampaignEligibilityUtilsModule = require(BuildExperience.Components.Ads.adCampaignEligibilityUtils)
 
 return {
-	isCompletedEligibilityToolCall = function(p1): boolean --[[ Line: 12 ]]
+	isCompletedEligibilityToolCall = function(p1): boolean
 		return p1 ~= nil and (p1.title == "check_ad_campaign_eligibility" and (p1.status == "completed" and type(p1.toolCallId) == "string") and p1.toolCallId ~= "")
 	end,
-	decodeCompletedEligibility = function(p1) --[[ Line: 20 ]]
+	decodeCompletedEligibility = function(p1)
 		-- upvalues: HttpService (copy), CreatorAgentChatModule (copy)
 		if p1 == nil or (p1.title ~= "check_ad_campaign_eligibility" or (p1.status ~= "completed" or (type(p1.toolCallId) ~= "string" or p1.toolCallId == ""))) or p1.content == nil then
 			return nil
@@ -30,7 +30,7 @@ return {
 		end
 		return nil
 	end,
-	getCardOffers = function(p2) --[[ Line: 41 ]]
+	getCardOffers = function(p2)
 		-- upvalues: AdCampaignEligibilityUtilsModule (copy)
 		return if p2 == nil or not p2.userEligible or not p2.universeEligible or p2.cardType == "none" then nil else AdCampaignEligibilityUtilsModule.getSelectableOffers(p2)
 	end

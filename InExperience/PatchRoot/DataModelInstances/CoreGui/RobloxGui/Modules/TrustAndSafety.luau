@@ -22,14 +22,14 @@ local SetVoiceReportingFlowModule = require(script.Actions.SetVoiceReportingFlow
 local SessionUtilityModule = require(script.Utility.SessionUtility)
 local FetchPlaceInfoModule = require(script.Thunks.FetchPlaceInfo)
 local config = {
-	getInstance = function(p1) --[[ Line: 33 ]]
+	getInstance = function(p1)
 		if not p1._initialized then
 			p1:initialize()
 			p1._initialized = true
 		end
 		return p1
 	end,
-	initialize = function(p1) --[[ Line: 42 ]]
+	initialize = function(p1)
 		-- upvalues: GlobalConfigModule (copy), RoactModule (copy), FetchPlaceInfoModule (copy), RoactRoduxModule (copy), TrustAndSafetyAppPolicyModule (copy), LocalizationProviderModule (copy), TrustAndSafetyAppModule (copy), CoreGui (copy)
 		if GlobalConfigModule.propValidation then
 			RoactModule.setGlobalConfig({ propValidation = true })
@@ -49,7 +49,7 @@ local config = {
 		})
 		p1.element = RoactModule.mount(p1.root, CoreGui, "TrustAndSafety")
 	end,
-	createStore = function(_) --[[ Line: 76 ]]
+	createStore = function(_)
 		-- upvalues: ReducersModule (copy), RoduxModule (copy), GlobalConfigModule (copy)
 		local List = { RoduxModule.thunkMiddleware }
 		
@@ -58,22 +58,22 @@ local config = {
 		end
 		return RoduxModule.Store.new(ReducersModule, nil, List)
 	end,
-	createLocalization = function(_) --[[ Line: 87 ]]
+	createLocalization = function(_)
 		-- upvalues: LocalizationService (copy), Localization (copy)
 		local NewLocalization = Localization.new(LocalizationService.RobloxLocaleId)
-		LocalizationService:GetPropertyChangedSignal("RobloxLocaleId"):Connect(function() --[[ Line: 91 ]]
+		LocalizationService:GetPropertyChangedSignal("RobloxLocaleId"):Connect(function()
 			-- upvalues: LocalizationService (upval), NewLocalization (copy)
 			NewLocalization:SetLocale(LocalizationService.RobloxLocaleId)
 		end)
 		
 		return NewLocalization
 	end,
-	openReportDialog = function(p1, p2, p3) --[[ Line: 99 ]]
+	openReportDialog = function(p1, p2, p3)
 		-- upvalues: SetVoiceReportingFlowModule (copy), BeginReportFlowModule (copy)
 		p1.store:dispatch(SetVoiceReportingFlowModule(true))
 		p1.store:dispatch(BeginReportFlowModule(p2, p3))
 	end,
-	openReportMenu = function(p1) --[[ Line: 104 ]]
+	openReportMenu = function(p1)
 		-- upvalues: SetVoiceReportingFlowModule (copy), BeginReportFlowModule (copy)
 		p1.store:dispatch(SetVoiceReportingFlowModule(true))
 		p1.store:dispatch(BeginReportFlowModule())
@@ -81,18 +81,18 @@ local config = {
 }
 
 return {
-	openReportDialogForPlayer = function(p1, p2) --[[ Line: 110 ]]
+	openReportDialogForPlayer = function(p1, p2)
 		-- upvalues: PlayerInterfaceModule (copy), TModule (copy), SessionUtilityModule (copy), config (copy), ConstantsModule (copy)
 		assert(PlayerInterfaceModule(p1) and TModule.instanceIsA("Player")(p1))
 		SessionUtilityModule.startAbuseReportSession(p2)
 		config:getInstance():openReportDialog(ConstantsModule.ReportType.Player, p1)
 	end,
-	openReportDialogForPlace = function(p1) --[[ Line: 115 ]]
+	openReportDialogForPlace = function(p1)
 		-- upvalues: SessionUtilityModule (copy), config (copy), ConstantsModule (copy)
 		SessionUtilityModule.startAbuseReportSession(p1)
 		config:getInstance():openReportDialog(ConstantsModule.ReportType.Place)
 	end,
-	openReportMenu = function(p1) --[[ Line: 119 ]]
+	openReportMenu = function(p1)
 		-- upvalues: SessionUtilityModule (copy), config (copy)
 		SessionUtilityModule.startAbuseReportSession(p1)
 		config:getInstance():openReportMenu()

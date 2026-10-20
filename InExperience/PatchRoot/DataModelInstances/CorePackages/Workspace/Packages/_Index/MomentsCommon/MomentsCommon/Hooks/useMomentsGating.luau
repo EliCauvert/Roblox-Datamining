@@ -13,7 +13,7 @@ local FFlagFlyoutRemoveMomentsForArgoEnabled = SharedFlagsModule.FFlagFlyoutRemo
 local GetMomentsCapabilitiesModule = require(MomentsCommon.Stores.GetMomentsCapabilities)
 local GetIsSupportedOnPlatformModule = if FFlagFlyoutRemoveMomentsForArgoEnabled then require(MomentsCommon.Utils.getIsSupportedOnPlatform) else nil
 
-return function() --[[ Line: 50 | Named "useMomentsGating" ]]
+return function()
 	-- upvalues: FFlagEnableArgus (copy), GetMomentsCapabilitiesModule (copy), UseSignalStateFunction (copy), FFlagMomentsCreationFeatureGate (copy), FFlagFlyoutRemoveMomentsForArgoEnabled (copy), GetIsSupportedOnPlatformModule (copy), ReactModule (copy), FFlagArgoEnableMoments (copy), FFlagEnableArgusTab (copy), DebugMomentsGating (copy), MomentsGating (copy)
 	local MomentsCapabilitiesModule = GetMomentsCapabilitiesModule(false)
 	local UseSignalStateResult = UseSignalStateFunction(MomentsCapabilitiesModule.getHasMomentsAccess)
@@ -21,7 +21,7 @@ return function() --[[ Line: 50 | Named "useMomentsGating" ]]
 	local UseSignalStateResult2 = if FFlagMomentsCreationFeatureGate then UseSignalStateFunction(MomentsCapabilitiesModule.getCanCreateMoments) else nil
 	local IsSupportedOnPlatformModule = if FFlagFlyoutRemoveMomentsForArgoEnabled then GetIsSupportedOnPlatformModule() else false
 	local UseSignalStateResult3 = FFlagEnableArgus and UseSignalStateResult
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 66 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FFlagArgoEnableMoments (upval), UseSignalStateResult3 (copy), FFlagEnableArgus (copy), UseSignalStateResult (copy), IsSupportedOnPlatformModule (copy), FFlagEnableArgusTab (upval), FFlagMomentsCreationFeatureGate (upval), UseSignalStateResult2 (copy), UseSignalStateResult1 (copy)
 		return {
 			isMasterEnabled = FFlagEnableArgus,
@@ -39,7 +39,7 @@ return function() --[[ Line: 50 | Named "useMomentsGating" ]]
 		IsSupportedOnPlatformModule, UseSignalStateResult, UseSignalStateResult1,
 		if FFlagMomentsCreationFeatureGate then UseSignalStateResult2 else false
 	})
-	ReactModule.useEffect(function() --[[ Line: 95 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: DebugMomentsGating (upval), MomentsGating (upval), UseMemoResult (copy), FFlagEnableArgusTab (upval), FFlagArgoEnableMoments (upval)
 		if DebugMomentsGating then
 			MomentsGating:debug("Moments.Gating master={} ampPolicy={} moments={} supportedOnPlatform={} platformIntegration={} influencerUploads={} creation={} flyout={} tab={} forceTab={} forceAll={}", tostring(UseMemoResult.isMasterEnabled), tostring(UseMemoResult.isAmpPolicyEnabled), tostring(UseMemoResult.isMomentsEnabled), tostring(UseMemoResult.isSupportedOnPlatform), tostring(UseMemoResult.platformIntegrationEnabled), tostring(UseMemoResult.influencerUploadsEnabled), tostring(UseMemoResult.isCreationEnabled), tostring(UseMemoResult.isFlyoutEntryEnabled), tostring(UseMemoResult.isTabEnabled), tostring(FFlagEnableArgusTab), (tostring(FFlagArgoEnableMoments)))

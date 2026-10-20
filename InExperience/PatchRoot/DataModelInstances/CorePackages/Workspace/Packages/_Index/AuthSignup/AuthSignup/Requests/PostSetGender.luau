@@ -5,7 +5,7 @@ local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
 	base = require(Parent.Http).Url.USERS_URL
 })
 
-return function(Callback, Gender) --[[ Line: 55 ]]
+return function(Callback, Gender)
 	-- upvalues: NewResult (copy), HttpService (copy)
 	return Callback(NewResult(), "POST", { postBody = HttpService:JSONEncode({ gender = Gender }) })
 end

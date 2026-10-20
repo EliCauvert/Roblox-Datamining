@@ -1,7 +1,7 @@
 ﻿local TelemetryService = game:GetService("TelemetryService")
 local LuaAppItemImpressionsEventThrottlingHundredthsPercent = game:DefineFastInt("LuaAppItemImpressionsEventThrottlingHundredthsPercent", 10000)
 
-return function(EventName, EventContext, CustomFields) --[[ Line: 7 | Named "sduiCustomImpressionsEvent" ]]
+return function(EventName, EventContext, CustomFields)
 	-- upvalues: TelemetryService (copy), LuaAppItemImpressionsEventThrottlingHundredthsPercent (copy)
 	TelemetryService:LogEvent({
 		eventName = EventName,

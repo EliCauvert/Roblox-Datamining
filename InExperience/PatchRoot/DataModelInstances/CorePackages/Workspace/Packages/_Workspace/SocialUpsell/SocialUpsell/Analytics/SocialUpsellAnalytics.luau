@@ -15,16 +15,16 @@ local config = {
 	lastUpdated = { 2025, 9, 26 }
 }
 
-function evaluateUpsellStage(Homepage, Modal, Modal1) --[[ Line: 26 ]]
+function evaluateUpsellStage(Homepage, Modal, Modal1)
 	-- upvalues: UpsellComponentModule (copy), UpsellEntrySurfaceTypeModule (copy), UpsellStageModule (copy)
 	return if Modal == UpsellComponentModule.Modal then if Modal1 == UpsellComponentModule.Modal and (Homepage == UpsellEntrySurfaceTypeModule.Homepage or Homepage == UpsellEntrySurfaceTypeModule.InExperienceChatInputBar or Homepage == UpsellEntrySurfaceTypeModule.InExperienceVoiceChatIcon) then UpsellStageModule.Fae else UpsellStageModule.FaeDetails else UpsellStageModule.Fae
 end
 
-local function _(Text, Text1, Text2) --[[ Line: 52 | Named "generateUpsellIdentifier" ]]
+local function _(Text, Text1, Text2)
 	return if Text and Text1 and Text2 then Text .. Text1 .. Text2 else nil
 end
 
-function logUpsellEvent(EventName, CustomFields) --[[ Line: 63 ]]
+function logUpsellEvent(EventName, CustomFields)
 	-- upvalues: CryoModule (copy), config (copy), RbxAnalyticsService (copy), TelemetryService (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, { eventName = EventName })
 	local PlaySessionId = RbxAnalyticsService:GetPlaySessionId()

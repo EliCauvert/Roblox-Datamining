@@ -1,13 +1,13 @@
 ﻿local HttpRequestModule = require(script:FindFirstAncestor("DataHydration").Parent.HttpRequest)
 local GameDeveloperProductUrlBuilderModule = require(script.Parent.GameDeveloperProductUrlBuilder)
 local ConfigResult = HttpRequestModule.config({
-	requestFunction = function(p1, p2, p3) --[[ Line: 18 ]]
+	requestFunction = function(p1, p2, p3)
 		-- upvalues: HttpRequestModule (copy)
 		return HttpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
 	end
 })
 
-local function parseStatusCounts(ResponseBody) --[[ Line: 23 ]]
+local function parseStatusCounts(ResponseBody)
 	local t = {}
 	
 	if typeof(ResponseBody) ~= "table" then
@@ -26,9 +26,9 @@ local function parseStatusCounts(ResponseBody) --[[ Line: 23 ]]
 end
 
 return {
-	fetch = function(PlayerId, PlaceId) --[[ Line: 40 ]]
+	fetch = function(PlayerId, PlaceId)
 		-- upvalues: GameDeveloperProductUrlBuilderModule (copy), ConfigResult (copy), parseStatusCounts (copy)
-		return ConfigResult(GameDeveloperProductUrlBuilderModule.buildStatusesUrl({ playerId = PlayerId, placeId = PlaceId }), "GET"):andThen(function(Result) --[[ Line: 42 ]]
+		return ConfigResult(GameDeveloperProductUrlBuilderModule.buildStatusesUrl({ playerId = PlayerId, placeId = PlaceId }), "GET"):andThen(function(Result)
 			-- upvalues: PlayerId (copy), PlaceId (copy), parseStatusCounts (upval)
 			return {
 				playerId = PlayerId,

@@ -45,17 +45,17 @@ local Questions = {
 	}
 }
 
-local function _(Text: string): boolean --[[ Line: 77 | Named "isResponseUrl" ]]
+local function _(Text: string): boolean
 	return string.sub(Text, -16) == "/survey/response"
 end
 
-local _ = function(SurveyId, p1) --[[ Line: 82 | Named "makeRequestImplFor" ]]
+local _ = function(SurveyId, p1)
 	-- upvalues: PromiseModule (copy)
-	return function(Text, _, _) --[[ Line: 83 ]]
+	return function(Text, _, _)
 		-- upvalues: PromiseModule (upval), SurveyId (copy), p1 (copy)
-		return PromiseModule.new(function(Callback) --[[ Line: 84 ]]
+		return PromiseModule.new(function(Callback)
 			-- upvalues: Text (copy), SurveyId (upval), p1 (upval)
-			task.delay(0.4, function() --[[ Line: 85 ]]
+			task.delay(0.4, function()
 				-- upvalues: Text (upval), Callback (copy), SurveyId (upval), p1 (upval)
 				if string.sub(Text, -16) == "/survey/response" then
 					Callback({
@@ -83,15 +83,15 @@ return {
 	SURVEY_ID = "dev-survey",
 	BRANCHING_SURVEY_ID = "dev-branching-survey",
 	RESPONSE_DELAY_SECONDS = 0.4,
-	makeRequestImpl = function() --[[ Line: 108 ]]
+	makeRequestImpl = function()
 		-- upvalues: list (copy), PromiseModule (copy)
 		local SurveyId = "dev-survey"
 		
-		return function(Text, _, _) --[[ Line: 83 ]]
+		return function(Text, _, _)
 			-- upvalues: PromiseModule (upval), SurveyId (copy), list (copy)
-			return PromiseModule.new(function(Callback) --[[ Line: 84 ]]
+			return PromiseModule.new(function(Callback)
 				-- upvalues: Text (copy), SurveyId (upval), list (upval)
-				task.delay(0.4, function() --[[ Line: 85 ]]
+				task.delay(0.4, function()
 					-- upvalues: Text (upval), Callback (copy), SurveyId (upval), list (upval)
 					if string.sub(Text, -16) == "/survey/response" then
 						Callback({
@@ -114,15 +114,15 @@ return {
 			end)
 		end
 	end,
-	makeBranchingRequestImpl = function() --[[ Line: 112 ]]
+	makeBranchingRequestImpl = function()
 		-- upvalues: Questions (copy), PromiseModule (copy)
 		local SurveyId = "dev-branching-survey"
 		
-		return function(Text, _, _) --[[ Line: 83 ]]
+		return function(Text, _, _)
 			-- upvalues: PromiseModule (upval), SurveyId (copy), Questions (copy)
-			return PromiseModule.new(function(Callback) --[[ Line: 84 ]]
+			return PromiseModule.new(function(Callback)
 				-- upvalues: Text (copy), SurveyId (upval), Questions (upval)
-				task.delay(0.4, function() --[[ Line: 85 ]]
+				task.delay(0.4, function()
 					-- upvalues: Text (upval), Callback (copy), SurveyId (upval), Questions (upval)
 					if string.sub(Text, -16) == "/survey/response" then
 						Callback({

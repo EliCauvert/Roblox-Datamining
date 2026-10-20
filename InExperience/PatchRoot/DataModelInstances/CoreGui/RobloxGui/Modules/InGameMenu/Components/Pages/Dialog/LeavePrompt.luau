@@ -34,14 +34,14 @@ LeavePrompt.defaultProps = {
 	canKeyboardCaptureFocus = false
 }
 
-function LeavePrompt.init(p1) --[[ Line: 58 ]]
+function LeavePrompt.init(p1)
 	-- upvalues: Roact (copy)
 	p1.leaveButtonRef = Roact.createRef()
 end
 
-function LeavePrompt.render(p1) --[[ Line: 62 ]]
+function LeavePrompt.render(p1)
 	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), Roact (copy), GameIconModule (copy), ThemedTextLabelModule (copy), GetFFlagEnableVRFTUXExperienceModule (copy), IsFTUXExperienceModule (copy), PlatformEnumModule (copy), Button (copy), ButtonType (copy), FocusHandlerModule (copy), GuiService (copy), ZonePortalModule (copy), DirectionModule (copy), ContextActionService (copy)
-	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 63 ]]
+	return WithFoundationOrUIBloxStyleFunction(function(p2)
 		return {
 			Theme = {
 				BackgroundDefault = {
@@ -61,7 +61,7 @@ function LeavePrompt.render(p1) --[[ Line: 62 ]]
 				}
 			}
 		}
-	end, function(p2) --[[ Line: 74 ]]
+	end, function(p2)
 		-- upvalues: Roact (upval), GameIconModule (upval), ThemedTextLabelModule (upval), p1 (copy), GetFFlagEnableVRFTUXExperienceModule (upval), IsFTUXExperienceModule (upval), PlatformEnumModule (upval), Button (upval), ButtonType (upval), FocusHandlerModule (upval), GuiService (upval), ZonePortalModule (upval), DirectionModule (upval), ContextActionService (upval)
 		local _Font = p2.Font
 		
@@ -126,7 +126,7 @@ function LeavePrompt.render(p1) --[[ Line: 62 ]]
 			}),
 			FocusHandler = Roact.createElement(FocusHandlerModule, {
 				isFocused = p1.props.canGamepadCaptureFocus,
-				didFocus = function() --[[ Line: 141 ]]
+				didFocus = function()
 					-- upvalues: GuiService (upval), p1 (upval)
 					GuiService.SelectedCoreObject = p1.leaveButtonRef.current
 				end
@@ -134,9 +134,9 @@ function LeavePrompt.render(p1) --[[ Line: 62 ]]
 			ZonePortal = Roact.createElement(ZonePortalModule, { targetZone = 0, direction = DirectionModule.Left }),
 			KeyboardFocusHandler = Roact.createElement(FocusHandlerModule, {
 				isFocused = p1.props.canKeyboardCaptureFocus,
-				didFocus = function() --[[ Line: 152 ]]
+				didFocus = function()
 					-- upvalues: ContextActionService (upval), p1 (upval)
-					ContextActionService:BindCoreAction("LeavePromptConfirm", function(_, UserInputState) --[[ Line: 153 ]]
+					ContextActionService:BindCoreAction("LeavePromptConfirm", function(_, UserInputState)
 						-- upvalues: p1 (upval)
 						if UserInputState == Enum.UserInputState.End then
 							p1.props.onConfirm()
@@ -147,7 +147,7 @@ function LeavePrompt.render(p1) --[[ Line: 62 ]]
 						end
 					end, false, Enum.KeyCode.Return)
 				end,
-				didBlur = function() --[[ Line: 162 ]]
+				didBlur = function()
 					-- upvalues: ContextActionService (upval)
 					ContextActionService:UnbindCoreAction("LeavePromptConfirm")
 				end

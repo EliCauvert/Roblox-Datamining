@@ -8,15 +8,15 @@ local CryoModule = require(Parent.Cryo)
 local RoactNavigationModule = require(Parent.RoactNavigation)
 local RNAdapterThunkModule = require(NavigationRodux.Thunks.RNAdapterThunk)
 
-return function(p1, p2) --[[ Line: 18 ]]
+return function(p1, p2)
 	-- upvalues: ArgCheckModule (copy), FFlagSignalsNavP2NavigationPrimitives (copy), NavigationCommands (copy), RNAdapterThunkModule (copy), SetNavigationLockedModule (copy), RoactNavigationModule (copy), CryoModule (copy)
 	ArgCheckModule.isType(p1, "table", "route")
 	ArgCheckModule.isTypeOrNil(p2, "boolean", "bypassNavigationLock")
 	
-	return if FFlagSignalsNavP2NavigationPrimitives then function() --[[ Line: 23 ]]
+	return if FFlagSignalsNavP2NavigationPrimitives then function()
 		-- upvalues: NavigationCommands (upval), p1 (copy), p2 (copy)
 		NavigationCommands.to(NavigationCommands.fromLegacyPage(p1[#p1]), p2)
-	end else RNAdapterThunkModule.new("NavigateToRoute", function(p3, Callback: (any) -> ()) --[[ Line: 28 ]]
+	end else RNAdapterThunkModule.new("NavigateToRoute", function(p3, Callback: (any) -> ())
 		-- upvalues: p2 (copy), SetNavigationLockedModule (upval), p1 (copy), RoactNavigationModule (upval), CryoModule (upval)
 		if not p3:getState().Navigation.lockNavigationActions or p2 then
 			p3:dispatch(SetNavigationLockedModule(true))

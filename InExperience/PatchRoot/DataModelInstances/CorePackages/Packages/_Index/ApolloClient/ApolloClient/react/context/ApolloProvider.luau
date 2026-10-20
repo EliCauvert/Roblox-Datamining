@@ -6,11 +6,11 @@ local GetApolloContextFunction = require(script.Parent.ApolloContext).getApolloC
 local InvariantFunction = require(Parent.jsutils.invariant).invariant
 local _ = require(Parent.core.ApolloClient)
 
-function ApolloProvider(p1) --[[ Line: 29 ]]
+function ApolloProvider(p1)
 	-- upvalues: GetApolloContextFunction (copy), ReactModule (copy), InvariantFunction (copy)
 	local ApolloContext = GetApolloContextFunction()
 	
-	return ReactModule.createElement(ApolloContext.Consumer, nil, function(Value) --[[ Line: 31 ]]
+	return ReactModule.createElement(ApolloContext.Consumer, nil, function(Value)
 		-- upvalues: p1 (copy), InvariantFunction (upval), ReactModule (upval), ApolloContext (copy)
 		if Value == nil then
 			Value = {}

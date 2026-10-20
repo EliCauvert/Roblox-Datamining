@@ -1,12 +1,12 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("VideoUtils").Parent.React)
 
-return function(p1) --[[ Line: 20 | Named "VideoFrameWrapper" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy)
-	ReactModule.useEffect(function() --[[ Line: 21 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy)
 		local Current = if p1.videoFrameRef then p1.videoFrameRef.current else nil
 		
-		return function() --[[ Line: 24 ]]
+		return function()
 			-- upvalues: Current (copy)
 			if Current then
 				Current.Video = ""

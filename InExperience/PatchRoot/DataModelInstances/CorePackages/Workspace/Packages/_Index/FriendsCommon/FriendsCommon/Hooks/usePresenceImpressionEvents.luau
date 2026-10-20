@@ -9,7 +9,7 @@ local Emitter = SocialLuaAnalyticsModule.Telemetry.createEmitter({
 		links = "https://docs.google.com/document/d/1uj9vb188k-wC2u3U3-UX3fm7xLffIbbvF7BDq3hs2Ak",
 		throttlingThousandths = game:DefineFastInt("PresenceImpressionLoggingThrottlePerMyriad", 10000)
 	},
-	getSharedInfo = function() --[[ Line: 31 ]]
+	getSharedInfo = function()
 		return {}
 	end
 })
@@ -20,21 +20,21 @@ local PresenceImpression = SocialLuaAnalyticsModule.Telemetry.new({
 	backendsList = {
 		{
 			type = "EventIngest",
-			format = function(p1, _) --[[ Line: 43 ]]
+			format = function(p1, _)
 				return p1
 			end
 		}
 	}
 })
 
-function areEqual(p1, p2): boolean --[[ Line: 50 ]]
+function areEqual(p1, p2): boolean
 	return p1.userPresenceType == p2.userPresenceType and p1.placeId == p2.placeId
 end
 
-function usePresenceImpressionEvents(p1) --[[ Line: 54 ]]
+function usePresenceImpressionEvents(p1)
 	-- upvalues: ReactModule (copy), CryoModule (copy), Emitter (copy), PresenceImpression (copy), FFlagFriendsSignalMigrationTelemetry (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState({})
-	ReactModule.useEffect(function() --[[ Line: 57 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), CryoModule (upval), UseStateResult (copy), Emitter (upval), PresenceImpression (upval), FFlagFriendsSignalMigrationTelemetry (upval), UseStateResult2 (copy)
 		local Presences = {}
 		

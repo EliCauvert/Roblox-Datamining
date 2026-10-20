@@ -2,9 +2,9 @@
 local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
 local SetCentralOverlayFunction = require(Parent.CentralOverlay).Actions.SetCentralOverlay
 
-return function(LandscapeMenuDirection, MenuAnchorPosition, MenuAnchorSize, ReferralSource, UniverseId) --[[ Line: 6 ]]
+return function(LandscapeMenuDirection, MenuAnchorPosition, MenuAnchorSize, ReferralSource, UniverseId)
 	-- upvalues: SetCentralOverlayFunction (copy), CentralOverlayType (copy)
-	return function(p1) --[[ Line: 7 ]]
+	return function(p1)
 		-- upvalues: SetCentralOverlayFunction (upval), CentralOverlayType (upval), LandscapeMenuDirection (copy), MenuAnchorPosition (copy), MenuAnchorSize (copy), ReferralSource (copy), UniverseId (copy)
 		p1:dispatch(SetCentralOverlayFunction(CentralOverlayType.GameDetailsSquad, {
 			landscapeMenuDirection = LandscapeMenuDirection,

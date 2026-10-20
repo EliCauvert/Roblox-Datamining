@@ -18,7 +18,7 @@ return {
 		RBXTeamCommandModule, require(script.Whisper).RBXWhisperCommand,
 		RBXClearCommandModule
 	},
-	getVirtualLocalEnabledCommands = function() --[[ Line: 33 ]]
+	getVirtualLocalEnabledCommands = function()
 		-- upvalues: ExpChatLocalUserCountEnabledEngineFeature (copy), ExpChatEnableVirtualLocalOnlineCommand (copy), RBXOnlineCommandModule (copy)
 		local List = {}
 		

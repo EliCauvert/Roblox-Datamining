@@ -37,15 +37,15 @@ local list = {
 	}
 }
 
-local function _(p1): string --[[ Line: 70 | Named "sizeTokenField" ]]
+local function _(p1): string
 	return `Size_{p1}`
 end
 
-local _ = function(p1, p2): string --[[ Line: 74 | Named "shadowAttributeName" ]]
+local _ = function(p1, p2): string
 	return `Shadow{p1}Size{p2}`
 end
 
-local function layerRule(ShadowName, p1, p2, Size, ShadowColor) --[[ Line: 78 ]]
+local function layerRule(ShadowName, p1, p2, Size, ShadowColor)
 	local ShadowBlurSizeName: string = `ShadowBlurSize{p1.blur}`
 	local Floored = math.floor((tonumber(p1.spread)))
 	local Properties = {
@@ -81,7 +81,7 @@ local function layerRule(ShadowName, p1, p2, Size, ShadowColor) --[[ Line: 78 ]]
 	}
 end
 
-return function(p1) --[[ Line: 124 | Named "shadowRules" ]]
+return function(p1)
 	-- upvalues: list (copy), layerRule (copy)
 	local Size = p1.Size
 	local ShadowColor3 = p1.Color.Common.Shadow.Color3

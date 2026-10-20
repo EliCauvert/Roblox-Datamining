@@ -10,7 +10,7 @@ local ScrollBarVisibility = FoundationModule.Enums.ScrollBarVisibility
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local _ = require(CoreScriptsPlayerFeedback.CaptureTypes)
 local GetCaptureKeyModule = require(CoreScriptsPlayerFeedback.Utils.getCaptureKey)
-local MemoResult = ReactModule.memo(function(Frame) --[[ Line: 28 ]]
+local MemoResult = ReactModule.memo(function(Frame)
 	-- upvalues: ReactModule (copy), Checkbox (copy)
 	local Capture = Frame.capture
 	local IsCaptureTypeMatch = Capture.CaptureType == Enum.CaptureType.Video
@@ -24,7 +24,7 @@ local MemoResult = ReactModule.memo(function(Frame) --[[ Line: 28 ]]
 		Image = "",
 		LayoutOrder = Frame.LayoutOrder,
 		Size = UDim2.fromScale(1, 1),
-		[ReactModule.Event.Activated] = ReactModule.useCallback(function() --[[ Line: 46 ]]
+		[ReactModule.Event.Activated] = ReactModule.useCallback(function()
 			-- upvalues: Frame (copy)
 			Frame.onPreview()
 		end, { Frame.onPreview })
@@ -53,7 +53,7 @@ local MemoResult = ReactModule.memo(function(Frame) --[[ Line: 28 ]]
 				label = "",
 				AnchorPoint = Vector2.new(1, 0),
 				isChecked = Frame.isSelected,
-				onActivated = ReactModule.useCallback(function() --[[ Line: 40 ]]
+				onActivated = ReactModule.useCallback(function()
 					-- upvalues: IsIsDisabled (copy), Frame (copy)
 					if not IsIsDisabled then
 						Frame.onToggle()
@@ -65,7 +65,7 @@ local MemoResult = ReactModule.memo(function(Frame) --[[ Line: 28 ]]
 	})
 end)
 
-return (ReactModule.memo(function(p1) --[[ Line: 107 ]]
+return (ReactModule.memo(function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), GetCaptureKeyModule (copy), MemoResult (copy), View (copy), Text (copy), ScrollView (copy), ScrollBarVisibility (copy)
 	local Count = 0
 	
@@ -106,11 +106,11 @@ return (ReactModule.memo(function(p1) --[[ Line: 107 ]]
 			capture = capture,
 			isSelected = IsSelectedKey,
 			isDisabled = IsMaxSelectionsBelow and not IsSelectedKey,
-			onToggle = function() --[[ Line: 153 ]]
+			onToggle = function()
 				-- upvalues: p1 (copy), capture (copy)
 				p1.onToggle(capture)
 			end,
-			onPreview = function() --[[ Line: 156 ]]
+			onPreview = function()
 				-- upvalues: p1 (copy), capture (copy)
 				p1.onPreview(capture)
 			end,
@@ -135,7 +135,7 @@ return (ReactModule.memo(function(p1) --[[ Line: 107 ]]
 				ScrollingDirection = Enum.ScrollingDirection.Y,
 				scrollBarVisibility = ScrollBarVisibility.Auto
 			},
-			onCanvasPositionChanged = function(ScrollFrame) --[[ Line: 180 ]]
+			onCanvasPositionChanged = function(ScrollFrame)
 				-- upvalues: p1 (copy)
 				if not p1.hasMore or p1.isLoading then return end
 				local Y = ScrollFrame.AbsoluteCanvasSize.Y

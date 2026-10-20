@@ -12,21 +12,21 @@ local Flag = nil
 local Flag1 = nil
 local T = if DEV then {} else nil
 
-local function _(p1): boolean --[[ Line: 60 | Named "hasValidRef" ]]
+local function _(p1): boolean
 	-- upvalues: DEV (copy)
 	return (not DEV or p1.ref == nil or type(p1.ref) ~= "table" or not p1.ref.isReactWarning) and p1.ref ~= nil
 end
 
-local _ = function(p1): boolean --[[ Line: 74 | Named "hasValidKey" ]]
+local _ = function(p1): boolean
 	-- upvalues: DEV (copy)
 	return (not DEV or p1.key == nil or type(p1.key) ~= "table" or not p1.key.isReactWarning) and p1.key ~= nil
 end
 
 local config1 = { isReactWarning = true }
 
-local function defineKeyPropWarningGetter(Props, DebugInfo) --[[ Line: 93 ]]
+local function defineKeyPropWarningGetter(Props, DebugInfo)
 	-- upvalues: DEV (copy), Flag (ref), Console (copy), config1 (copy)
-	local function _() --[[ Line: 94 ]]
+	local function _()
 		-- upvalues: DEV (upval), Flag (upval), Console (upval), DebugInfo (copy)
 		if DEV and not Flag then
 			Flag = true
@@ -36,7 +36,7 @@ local function defineKeyPropWarningGetter(Props, DebugInfo) --[[ Line: 93 ]]
 	
 	Props.key = nil
 	setmetatable(Props, {
-		__index = function(_, p1) --[[ Line: 113 ]]
+		__index = function(_, p1)
 			-- upvalues: DEV (upval), Flag (upval), Console (upval), DebugInfo (copy), config1 (upval)
 			if p1 ~= "key" then
 				return nil
@@ -50,9 +50,9 @@ local function defineKeyPropWarningGetter(Props, DebugInfo) --[[ Line: 93 ]]
 	})
 end
 
-local function defineRefPropWarningGetter(Props, DebugInfo) --[[ Line: 125 ]]
+local function defineRefPropWarningGetter(Props, DebugInfo)
 	-- upvalues: DEV (copy), Flag1 (ref), Console (copy), config1 (copy)
-	local function _() --[[ Line: 128 ]]
+	local function _()
 		-- upvalues: DEV (upval), Flag1 (upval), Console (upval), DebugInfo (copy)
 		if DEV and not Flag1 then
 			Flag1 = true
@@ -62,7 +62,7 @@ local function defineRefPropWarningGetter(Props, DebugInfo) --[[ Line: 125 ]]
 	
 	Props.ref = nil
 	setmetatable(Props, {
-		__index = function(_, p1) --[[ Line: 147 ]]
+		__index = function(_, p1)
 			-- upvalues: DEV (upval), Flag1 (upval), Console (upval), DebugInfo (copy), config1 (upval)
 			if p1 ~= "ref" then
 				return nil
@@ -76,7 +76,7 @@ local function defineRefPropWarningGetter(Props, DebugInfo) --[[ Line: 125 ]]
 	})
 end
 
-local function warnIfStringRefCannotBeAutoConverted(p1) --[[ Line: 159 ]]
+local function warnIfStringRefCannotBeAutoConverted(p1)
 	-- upvalues: DEV (copy), ReactCurrentOwner (copy), GetComponentNameFunction (copy), T (ref)
 	if DEV and type(p1.ref) == "string" and ReactCurrentOwner.current then
 		local ComponentName = GetComponentNameFunction(ReactCurrentOwner.current.type)
@@ -87,7 +87,7 @@ local function warnIfStringRefCannotBeAutoConverted(p1) --[[ Line: 159 ]]
 	end
 end
 
-local function ReactElement(Type1, Key, Ref, _self, Source, Owner, Props) --[[ Line: 210 ]]
+local function ReactElement(Type1, Key, Ref, _self, Source, Owner, Props)
 	-- upvalues: REACTELEMENTTYPE (copy), DEV (copy)
 	local config = {
 		type = Type1,
@@ -102,7 +102,7 @@ local function ReactElement(Type1, Key, Ref, _self, Source, Owner, Props) --[[ L
 		local config1 = { validated = false }
 		config._store = setmetatable({}, {
 			__index = config1,
-			__newindex = function(p1, p2, Validated) --[[ Line: 247 ]]
+			__newindex = function(p1, p2, Validated)
 				-- upvalues: config1 (copy)
 				if p2 == "validated" then
 					config1.validated = Validated
@@ -119,15 +119,15 @@ local function ReactElement(Type1, Key, Ref, _self, Source, Owner, Props) --[[ L
 end
 
 return {
-	jsx = function(_, _, _) --[[ Line: 278 ]]
+	jsx = function(_, _, _)
 		error("JSX is currently unsupported")
 	end,
-	jsxDEV = function(_, _, _, _, _) --[[ Line: 333 ]]
+	jsxDEV = function(_, _, _, _, _)
 		error("JSX is currently unsupported")
 		
 		return nil
 	end,
-	createElement = function(Callback, Tbl, ...) --[[ Line: 409 ]]
+	createElement = function(Callback, Tbl, ...)
 		-- upvalues: DEV (copy), warnIfStringRefCannotBeAutoConverted (copy), defineKeyPropWarningGetter (copy), defineRefPropWarningGetter (copy), ReactElement (copy), ReactCurrentOwner (copy)
 		local T = if Tbl == nil then {} else table.clone(Tbl)
 		local Key = nil
@@ -205,11 +205,11 @@ return {
 		end
 		return (ReactElement(Callback, Key, Ref, nil, Source, ReactCurrentOwner.current, T))
 	end,
-	cloneAndReplaceKey = function(p1, Key) --[[ Line: 587 ]]
+	cloneAndReplaceKey = function(p1, Key)
 		-- upvalues: ReactElement (copy)
 		return (ReactElement(p1.type, Key, p1.ref, p1._self, p1._source, p1._owner, p1.props))
 	end,
-	cloneElement = function(p1, List, ...) --[[ Line: 608 ]]
+	cloneElement = function(p1, List, ...)
 		-- upvalues: Error1 (copy), ReactCurrentOwner (copy), DEV (copy), config (copy), ReactElement (copy)
 		if p1 == nil then
 			error(Error1.new("React.cloneElement(...): The argument must be a React element, but you passed " .. tostring(p1)))
@@ -257,7 +257,7 @@ return {
 		end
 		return (ReactElement(p1.type, Key, Ref, nil, Source, Owner, T))
 	end,
-	isValidElement = function(p2): boolean --[[ Line: 724 ]]
+	isValidElement = function(p2): boolean
 		-- upvalues: REACTELEMENTTYPE (copy)
 		return type(p2) == "table" and p2["$$typeof"] == REACTELEMENTTYPE
 	end

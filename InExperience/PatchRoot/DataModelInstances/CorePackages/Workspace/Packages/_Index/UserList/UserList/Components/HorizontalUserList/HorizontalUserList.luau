@@ -18,7 +18,7 @@ local UseIsWideModeFunction = require(Parent.SocialCommon).Hooks.useIsWideMode
 local AdjustHorizontalUserListSizeForMobile = game:DefineFastFlag("AdjustHorizontalUserListSizeForMobile", false)
 local FFlagLuaAppCompositionAlways = require(Parent.SharedFlags).FFlagLuaAppCompositionAlways
 
-return function(p1) --[[ Line: 50 | Named "HorizontalUserList" ]]
+return function(p1)
 	-- upvalues: FFlagLuaAppCompositionAlways (copy), ReactModule (copy), UseIsWideModeFunction (copy), AdjustHorizontalUserListSizeForMobile (copy), CollectionItemSize (copy), UsePageSideMarginFunction (copy), UseCollectionLayoutParamsFunction (copy), UseCompactTileHeightModule (copy), UseEntitiesModule (copy), UseEntitySelectionHandlerModule (copy), UseRenderEntityModule (copy), EnumsModule (copy), CryoModule (copy), View (copy), CollectionCarousel (copy)
 	local FFlagLuaAppCompositionAlways1 = FFlagLuaAppCompositionAlways or p1.appCompositionEnabled
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
@@ -31,7 +31,7 @@ return function(p1) --[[ Line: 50 | Named "HorizontalUserList" ]]
 		sideMargin = if FFlagLuaAppCompositionAlways1 then nil else UsePageSideMarginResult
 	})
 	local UseCompactTileHeightModuleResult = UseCompactTileHeightModule()
-	local UseResult = ReactModule.useCallback(function(_) --[[ Line: 67 ]]
+	local UseResult = ReactModule.useCallback(function(_)
 		-- upvalues: UseCompactTileHeightModuleResult (copy)
 		return UseCompactTileHeightModuleResult
 	end, { UseCompactTileHeightModuleResult })
@@ -52,7 +52,7 @@ return function(p1) --[[ Line: 50 | Named "HorizontalUserList" ]]
 			onActivateHeader = p1.header and p1.header.onTitleActivated or nil,
 			containerRef = UseStateResult2,
 			scrollingFrameRef = ScrollingFrameRef,
-			items = ReactModule.useMemo(function() --[[ Line: 89 ]]
+			items = ReactModule.useMemo(function()
 				-- upvalues: p1 (copy)
 				local Ids = {}
 				
@@ -61,7 +61,7 @@ return function(p1) --[[ Line: 50 | Named "HorizontalUserList" ]]
 				end
 				return Ids
 			end, { p1.entities }),
-			renderItem = ReactModule.useCallback(function(p2, p3, p4, _) --[[ Line: 82 ]]
+			renderItem = ReactModule.useCallback(function(p2, p3, p4, _)
 				-- upvalues: UseRenderEntityModuleResult (copy)
 				return UseRenderEntityModuleResult(p2, p3, p4), p2
 			end, { UseRenderEntityModuleResult }),

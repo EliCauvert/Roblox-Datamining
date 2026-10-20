@@ -2,7 +2,7 @@
 local Proxy = newproxy(true)
 local NamedResults = {}
 
-local function _(Key) --[[ Line: 32 | Named "addType" ]]
+local function _(Key)
 	-- upvalues: NamedResults (copy), SymbolRobloxModule (copy)
 	NamedResults[Key] = SymbolRobloxModule.named("Roact" .. Key)
 end
@@ -10,14 +10,14 @@ end
 NamedResults.HostChangeEvent = SymbolRobloxModule.named("RoactHostChangeEvent")
 NamedResults.HostEvent = SymbolRobloxModule.named("RoactHostEvent")
 
-function NamedResults.of(p1) --[[ Line: 39 ]]
+function NamedResults.of(p1)
 	-- upvalues: Proxy (copy)
 	return if typeof(p1) == "table" then p1[Proxy] else nil
 end
 
 getmetatable(Proxy).__index = NamedResults
 
-getmetatable(Proxy).__tostring = function(): string --[[ Line: 49 ]]
+getmetatable(Proxy).__tostring = function(): string
 	return "RoactType"
 end
 

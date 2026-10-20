@@ -1,7 +1,7 @@
 ﻿local HttpService = game:GetService("HttpService")
 
 return {
-	isUniverseAllowed = function(Text: string, p1): boolean --[[ Line: 10 ]]
+	isUniverseAllowed = function(Text: string, p1): boolean
 		local Text1 = tostring(p1)
 		
 		for i in string.gmatch(Text, "[^,]+") do
@@ -11,7 +11,7 @@ return {
 		end
 		return false
 	end,
-	parseLaunchData = function(p2) --[[ Line: 20 ]]
+	parseLaunchData = function(p2)
 		-- upvalues: HttpService (copy)
 		if type(p2) ~= "string" or p2 == "" then
 			return nil

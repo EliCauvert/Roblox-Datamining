@@ -7,17 +7,17 @@ local SetFriendStatusModule = require(Parent.Actions.SetFriendStatus)
 local ExternalEventConnectionModule = require(Parent.Utility.ExternalEventConnection)
 local FriendStatusConnector = Roact.PureComponent:extend("FriendStatusConnector")
 
-function FriendStatusConnector.init(p1) --[[ Line: 15 ]]
+function FriendStatusConnector.init(p1)
 	-- upvalues: Players (copy)
 	p1.state = { localPlayer = Players.LocalPlayer }
 end
 
-function FriendStatusConnector.render(p1) --[[ Line: 21 ]]
+function FriendStatusConnector.render(p1)
 	-- upvalues: Roact (copy), ExternalEventConnectionModule (copy), Players (copy)
 	local config = {
 		PlayerAdded = Roact.createElement(ExternalEventConnectionModule, {
 			event = Players.PlayerAdded,
-			callback = function(LocalPlayer) --[[ Line: 25 ]]
+			callback = function(LocalPlayer)
 				-- upvalues: Players (upval), p1 (copy)
 				if LocalPlayer == Players.LocalPlayer then
 					p1:setState({ localPlayer = LocalPlayer })
@@ -30,7 +30,7 @@ function FriendStatusConnector.render(p1) --[[ Line: 21 ]]
 		}),
 		PlayerRemoving = Roact.createElement(ExternalEventConnectionModule, {
 			event = Players.PlayerRemoving,
-			callback = function(Player) --[[ Line: 38 ]]
+			callback = function(Player)
 				-- upvalues: p1 (copy)
 				p1.props.setFriendStatus(Player.UserId, nil)
 			end
@@ -40,7 +40,7 @@ function FriendStatusConnector.render(p1) --[[ Line: 21 ]]
 	if p1.state.localPlayer then
 		config.FriendStatusChanged = Roact.createElement(ExternalEventConnectionModule, {
 			event = Players.LocalPlayer.FriendStatusChanged,
-			callback = function(Player, p2) --[[ Line: 47 ]]
+			callback = function(Player, p2)
 				-- upvalues: p1 (copy)
 				p1.props.setFriendStatus(Player.UserId, p2)
 			end
@@ -49,10 +49,10 @@ function FriendStatusConnector.render(p1) --[[ Line: 21 ]]
 	return Roact.createFragment(config)
 end
 
-return RoactRodux.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 56 ]]
+return RoactRodux.UNSTABLE_connect2(nil, function(Callback)
 	-- upvalues: SetFriendStatusModule (copy)
 	return {
-		setFriendStatus = function(p1, p2) --[[ Line: 58 ]]
+		setFriendStatus = function(p1, p2)
 			-- upvalues: Callback (copy), SetFriendStatusModule (upval)
 			return Callback(SetFriendStatusModule(p1, p2))
 		end

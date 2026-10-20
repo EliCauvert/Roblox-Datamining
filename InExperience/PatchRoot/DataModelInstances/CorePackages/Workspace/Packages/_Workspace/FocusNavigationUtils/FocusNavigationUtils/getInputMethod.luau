@@ -22,7 +22,7 @@
 	[Enum.UserInputType.None] = nil
 }
 
-return function(p1) --[[ Line: 38 | Named "getInputMethod" ]]
+return function(p1)
 	-- upvalues: config (copy)
 	return config[p1]
 end

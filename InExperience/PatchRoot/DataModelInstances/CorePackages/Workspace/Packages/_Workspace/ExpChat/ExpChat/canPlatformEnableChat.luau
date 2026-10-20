@@ -7,7 +7,7 @@ local DeviceMeetsRequirementsForFAEFunction = SocialExperimentsModule.deviceMeet
 local FFlagAEGIS2UseGuacToShowFAEUpsell = require(Parent.SharedFlags).FFlagAEGIS2UseGuacToShowFAEUpsell
 local UniversalAppPolicyModule = if FFlagAEGIS2UseGuacToShowFAEUpsell then require(Parent.UniversalAppPolicy) else nil
 
-return function() --[[ Line: 21 ]]
+return function()
 	-- upvalues: FFlagAEGIS2UseGuacToShowFAEUpsell (copy), UserInputService (copy), AvatarChatService (copy), FFlagTestDeviceForFAEUpsell (copy), DeviceMeetsRequirementsForFAEFunction (copy), UniversalAppPolicyModule (ref)
 	if FFlagAEGIS2UseGuacToShowFAEUpsell then
 		local ShowInExpFAEUpsell = UniversalAppPolicyModule.getAppFeaturePolicies().getShowInExpFAEUpsell()

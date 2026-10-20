@@ -5,7 +5,7 @@ local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local Character = utf8.char(57344)
 
-return function(Frame: Frame) --[[ Line: 18 | Named "CreatorNameMetadata" ]]
+return function(Frame: Frame)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), Character (copy), GridTileTextFooterModule (copy)
 	local CreatorByLabel = UseLocalizationFunction({ creatorByLabel = "Feature.GameDetails.Label.By" }).creatorByLabel
 	
@@ -16,7 +16,7 @@ return function(Frame: Frame) --[[ Line: 18 | Named "CreatorNameMetadata" ]]
 		LayoutOrder = Frame.LayoutOrder,
 		AnchorPoint = Frame.AnchorPoint,
 		Position = Frame.Position,
-		text = ReactModule.useMemo(function(): string --[[ Line: 24 ]]
+		text = ReactModule.useMemo(function(): string
 			-- upvalues: Frame (copy), CreatorByLabel (copy), Character (upval)
 			return if Frame.name == nil or Frame.name == "" then "" else `<b>{CreatorByLabel} {Frame.name}</b>{if Frame.hasVerifiedBadge then Character else ""}`
 		end, { CreatorByLabel, Frame.name, Frame.hasVerifiedBadge })

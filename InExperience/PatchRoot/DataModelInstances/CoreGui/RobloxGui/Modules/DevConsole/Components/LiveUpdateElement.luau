@@ -15,27 +15,27 @@ local ClientMemoryUsageTextSize = TextService:GetTextSize("Client Memory Usage:"
 local AvgDataPingTextSize = TextService:GetTextSize("Avg. Data Ping:", TopBar, TopBar1, Vector2.new(0, 0))
 local LiveUpdateElement = RoactModule.PureComponent:extend("LiveUpdateElement")
 
-function LiveUpdateElement.didMount(p1) --[[ Line: 35 ]]
-	p1.totalMemConnector = p1.props.ClientMemoryData:totalMemSignal():Connect(function(TotalClientMemory) --[[ Line: 37 ]]
+function LiveUpdateElement.didMount(p1)
+	p1.totalMemConnector = p1.props.ClientMemoryData:totalMemSignal():Connect(function(TotalClientMemory)
 		-- upvalues: p1 (copy)
 		p1:setState({ totalClientMemory = TotalClientMemory })
 	end)
-	p1.avgPingConnector = p1.props.ServerStatsData:avgPing():Connect(function(AveragePing) --[[ Line: 41 ]]
+	p1.avgPingConnector = p1.props.ServerStatsData:avgPing():Connect(function(AveragePing)
 		-- upvalues: p1 (copy)
 		p1:setState({ averagePing = AveragePing })
 	end)
-	p1.logWarningErrorConnector = p1.props.ClientLogData:errorWarningSignal():Connect(function(NumErrors, NumWarnings) --[[ Line: 45 ]]
+	p1.logWarningErrorConnector = p1.props.ClientLogData:errorWarningSignal():Connect(function(NumErrors, NumWarnings)
 		-- upvalues: p1 (copy)
 		p1:setState({ numErrors = NumErrors, numWarnings = NumWarnings })
 	end)
 	p1:doSizeCheck()
 end
 
-function LiveUpdateElement.didUpdate(p1) --[[ Line: 55 ]]
+function LiveUpdateElement.didUpdate(p1)
 	p1:doSizeCheck()
 end
 
-function LiveUpdateElement.doSizeCheck(p1) --[[ Line: 59 ]]
+function LiveUpdateElement.doSizeCheck(p1)
 	if p1.ref.current then
 		local IsFormFactorThresholdAbove = p1.state.formFactorThreshold > p1.ref.current.AbsoluteSize.X
 		
@@ -47,7 +47,7 @@ function LiveUpdateElement.doSizeCheck(p1) --[[ Line: 59 ]]
 	end
 end
 
-function LiveUpdateElement.willUnmount(p1) --[[ Line: 72 ]]
+function LiveUpdateElement.willUnmount(p1)
 	p1.totalMemConnector:Disconnect()
 	p1.totalMemConnector = nil
 	p1.avgPingConnector:Disconnect()
@@ -56,11 +56,11 @@ function LiveUpdateElement.willUnmount(p1) --[[ Line: 72 ]]
 	p1.logWarningErrorConnector = nil
 end
 
-function LiveUpdateElement.init(p1) --[[ Line: 83 ]]
+function LiveUpdateElement.init(p1)
 	-- upvalues: MsgTypeNamesOrdered (copy), RoactModule (copy)
 	local ErrorWarningCount, ErrorWarningCount2 = p1.props.ClientLogData:getErrorWarningCount()
 	
-	function p1.onLogWarningButton() --[[ Line: 85 ]]
+	function p1.onLogWarningButton()
 		-- upvalues: MsgTypeNamesOrdered (upval), p1 (copy)
 		local t = {}
 		
@@ -72,7 +72,7 @@ function LiveUpdateElement.init(p1) --[[ Line: 83 ]]
 		p1.props.dispatchChangeTabClientLog()
 	end
 	
-	function p1.onLogErrorButton() --[[ Line: 96 ]]
+	function p1.onLogErrorButton()
 		-- upvalues: MsgTypeNamesOrdered (upval), p1 (copy)
 		local t = {}
 		
@@ -95,7 +95,7 @@ function LiveUpdateElement.init(p1) --[[ Line: 83 ]]
 	}
 end
 
-function LiveUpdateElement.render(p2) --[[ Line: 119 ]]
+function LiveUpdateElement.render(p2)
 	-- upvalues: ClientMemoryUsageTextSize (copy), ConstantsModule (copy), ClientMemTextSize (copy), TextService (copy), TopBar (copy), TopBar1 (copy), AvgDataPingTextSize (copy), RoactModule (copy), _UDim2 (copy), Text (copy)
 	local Size = p2.props.size
 	local Position = p2.props.position
@@ -231,18 +231,18 @@ function LiveUpdateElement.render(p2) --[[ Line: 119 ]]
 	})
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 286 | Named "mapDispatchToProps" ]]
+return RoactRoduxModule.UNSTABLE_connect2(nil, function(Callback)
 	-- upvalues: SetActiveTabModule (copy)
 	return {
-		dispatchChangeTabClientLog = function() --[[ Line: 288 ]]
+		dispatchChangeTabClientLog = function()
 			-- upvalues: Callback (copy), SetActiveTabModule (upval)
 			Callback(SetActiveTabModule("Log", true))
 		end,
-		dispatchChangeTabClientMemory = function() --[[ Line: 291 ]]
+		dispatchChangeTabClientMemory = function()
 			-- upvalues: Callback (copy), SetActiveTabModule (upval)
 			Callback(SetActiveTabModule("Memory", true))
 		end,
-		dispatchChangeTabNetworkPing = function() --[[ Line: 294 ]]
+		dispatchChangeTabNetworkPing = function()
 			-- upvalues: Callback (copy), SetActiveTabModule (upval)
 			Callback(SetActiveTabModule("ServerStats", true))
 		end

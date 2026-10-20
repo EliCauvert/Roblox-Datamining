@@ -1,5 +1,5 @@
-﻿return function(p1, p2) --[[ Line: 1 ]]
-	return function(p3, p4) --[[ Line: 2 ]]
+﻿return function(p1, p2)
+	return function(p3, p4)
 		-- upvalues: p1 (copy), p2 (copy)
 		if p3 == nil then
 			p3 = p1

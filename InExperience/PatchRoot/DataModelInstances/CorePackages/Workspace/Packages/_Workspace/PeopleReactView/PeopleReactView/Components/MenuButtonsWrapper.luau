@@ -5,14 +5,14 @@ local View = require(Parent.Foundation).View
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local MenuButtonsModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui"):WaitForChild("Modules"):WaitForChild("Settings"):WaitForChild("Components"):WaitForChild("MenuButtons"):WaitForChild("MenuButtons"))
 
-return function() --[[ Line: 27 ]]
+return function()
 	-- upvalues: ReactModule (copy), PeopleServiceModule (copy), UseSignalStateFunction (copy), View (copy), MenuButtonsModule (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 28 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: PeopleServiceModule (upval)
 		return PeopleServiceModule.getService("SettingsHubService")
 	end, {})
 	local UseSignalStateResult = UseSignalStateFunction(UseMemoResult.showMenuButtonsContainer)
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 34 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy)
 		local HubRefResult = UseMemoResult.hubRef()
 		
@@ -24,9 +24,9 @@ return function() --[[ Line: 27 ]]
 			onLeaveGame = UseMemoResult1.onLeaveGame,
 			onRespawn = UseMemoResult1.onRespawn,
 			onResume = UseMemoResult1.onResume,
-			setAddMenuKeyBindings = function() --[[ Line: 54 ]] end,
-			setRemoveMenuKeyBindings = function() --[[ Line: 55 ]] end,
-			getVisibility = function(): boolean --[[ Line: 56 ]]
+			setAddMenuKeyBindings = function() end,
+			setRemoveMenuKeyBindings = function() end,
+			getVisibility = function(): boolean
 				return true
 			end,
 			getCanRespawn = UseMemoResult1.getCanRespawn

@@ -13,7 +13,7 @@ local FFlagUseSignalsForCountryCodeList = require(Parent.SharedFlags).FFlagUseSi
 local GetCountryCodeListStoreModule = require(AuthCommon.Stores.GetCountryCodeListStore)
 local _ = require(AuthCommon.Common.Types)
 
-return function(p1) --[[ Line: 23 | Named "CountryCodeDropdownContainer" ]]
+return function(p1)
 	-- upvalues: UseRoactServiceFunction (copy), RoactNetworking (copy), UseDispatchFunction (copy), ApiFetchCountryCodesModule (copy), FFlagUseSignalsForCountryCodeList (copy), UseSignalStateFunction (copy), GetCountryCodeListStoreModule (copy), UseSelectorFunction (copy), ReactModule (copy), CountryCodeDropdownViewModule (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
 	local UseDispatchResult = UseDispatchFunction()
@@ -22,17 +22,17 @@ return function(p1) --[[ Line: 23 | Named "CountryCodeDropdownContainer" ]]
 	local DropdownVisible = p1.dropdownVisible
 	local OnCountryCodeSelected = p1.onCountryCodeSelected
 	
-	local function _(p2) --[[ Line: 31 ]]
+	local function _(p2)
 		-- upvalues: UseDispatchResult (copy), ApiFetchCountryCodesModule (upval)
 		return UseDispatchResult(ApiFetchCountryCodesModule.Fetch(p2))
 	end
 	
-	local UseSignalStateResult = if FFlagUseSignalsForCountryCodeList then UseSignalStateFunction(GetCountryCodeListStoreModule(false).getCountryCodeList) else UseSelectorFunction(function(p2) --[[ Line: 37 ]]
+	local UseSignalStateResult = if FFlagUseSignalsForCountryCodeList then UseSignalStateFunction(GetCountryCodeListStoreModule(false).getCountryCodeList) else UseSelectorFunction(function(p2)
 		return p2.CountryCodeList
 	end)
-	ReactModule.useEffect(function() --[[ Line: 41 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRoactServiceResult (copy), UseDispatchResult (copy), ApiFetchCountryCodesModule (upval)
-		UseDispatchResult(ApiFetchCountryCodesModule.Fetch(UseRoactServiceResult)):catch(function() --[[ Line: 42 ]] end)
+		UseDispatchResult(ApiFetchCountryCodesModule.Fetch(UseRoactServiceResult)):catch(function() end)
 	end, {})
 	
 	return ReactModule.createElement(CountryCodeDropdownViewModule, {

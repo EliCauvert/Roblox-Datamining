@@ -8,7 +8,7 @@ local IconButton = FoundationModule.IconButton
 local ModalWindow = UIBloxModule.App.Dialog.Modal.ModalWindow
 local View = FoundationModule.View
 
-return function(p1) --[[ Line: 38 | Named "ChatLineReportModalWindow" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ModalWindow (copy), View (copy), HeaderBar (copy), IconButton (copy), ButtonStack (copy)
 	local Inverted = not not p1.buttonStackProps
 	
@@ -29,14 +29,14 @@ return function(p1) --[[ Line: 38 | Named "ChatLineReportModalWindow" ]]
 				backgroundTransparency = 1,
 				margin = 10,
 				title = p1.title,
-				renderLeft = function() --[[ Line: 56 ]]
+				renderLeft = function()
 					-- upvalues: ReactModule (upval), IconButton (upval), p1 (copy)
 					return ReactModule.createElement(IconButton, {
 						icon = "icons/navigation/close",
 						onActivated = p1.onCloseClicked
 					})
 				end,
-				renderRight = function() --[[ Line: 62 ]]
+				renderRight = function()
 					-- upvalues: ReactModule (upval), IconButton (upval), p1 (copy)
 					return ReactModule.createElement(IconButton, {
 						icon = "icons/actions/info",

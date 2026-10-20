@@ -9,18 +9,18 @@ local LoggerModule = require(CrossExperience.Logger)
 local _ = require(CrossExperience.Types)
 local FFlagFixCrossExperienceVoiceExecutePrint = require(CrossExperience.dependencies).SharedFlags.FFlagFixCrossExperienceVoiceExecutePrint
 
-local function v9() --[[ Line: 21 ]] end
+local function v9() end
 
-local function Execute(ADDOBSERVER, p1, Callback1, Callback: (any) -> ()) --[[ Line: 23 ]]
+local function Execute(ADDOBSERVER, p1, Callback1, Callback: (any) -> ())
 	-- upvalues: ExperienceService (copy), FFlagFixCrossExperienceVoiceExecutePrint (copy), LoggerModule (copy)
-	local Success, Result = pcall(function() --[[ Line: 24 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: ExperienceService (upval), ADDOBSERVER (copy), p1 (copy), Callback1 (copy), FFlagFixCrossExperienceVoiceExecutePrint (upval), LoggerModule (upval), Callback (copy)
-		ExperienceService:ExecuteCrossExperienceCall(ADDOBSERVER, p1, function(p2) --[[ Line: 25 ]]
+		ExperienceService:ExecuteCrossExperienceCall(ADDOBSERVER, p1, function(p2)
 			-- upvalues: Callback1 (upval)
 			if Callback1 then
 				Callback1(p2)
 			end
-		end, function(p2) --[[ Line: 29 ]]
+		end, function(p2)
 			-- upvalues: FFlagFixCrossExperienceVoiceExecutePrint (upval), LoggerModule (upval), Callback (upval)
 			if FFlagFixCrossExperienceVoiceExecutePrint then
 				LoggerModule:warning("Error executing call: {}", p2)
@@ -45,7 +45,7 @@ local function Execute(ADDOBSERVER, p1, Callback1, Callback: (any) -> ()) --[[ L
 	end
 end
 
-local function NotifyWithCallbacks(p1, p2, p3, p4) --[[ Line: 54 ]]
+local function NotifyWithCallbacks(p1, p2, p3, p4)
 	-- upvalues: GetMemStorageKeyModule (copy), ConstantsModule (copy), LogEventFunction (copy), EventNamesModule (copy), Execute (copy)
 	LogEventFunction(EventNamesModule.NotifyObserver, {
 		eventName = p1.NOTIFY,
@@ -55,7 +55,7 @@ local function NotifyWithCallbacks(p1, p2, p3, p4) --[[ Line: 54 ]]
 	Execute(p1.NOTIFY, p2, p3, p4)
 end
 
-local function AddObserverWithCallbacks(ExperienceType, p1, p2, _, p3) --[[ Line: 74 ]]
+local function AddObserverWithCallbacks(ExperienceType, p1, p2, _, p3)
 	-- upvalues: HttpService (copy), LogEventFunction (copy), EventNamesModule (copy), GetMemStorageKeyModule (copy), ConstantsModule (copy), Execute (copy)
 	local Guid = HttpService:GenerateGUID(false)
 	LogEventFunction(EventNamesModule.AddObserver, {
@@ -68,7 +68,7 @@ local function AddObserverWithCallbacks(ExperienceType, p1, p2, _, p3) --[[ Line
 	return Guid
 end
 
-local function RemoveObserverWithCallbacks(ExperienceType, p1, ObserverId, p2, p3) --[[ Line: 99 ]]
+local function RemoveObserverWithCallbacks(ExperienceType, p1, ObserverId, p2, p3)
 	-- upvalues: LogEventFunction (copy), EventNamesModule (copy), GetMemStorageKeyModule (copy), ConstantsModule (copy), Execute (copy)
 	LogEventFunction(EventNamesModule.RemoveObserver, {
 		eventName = p1.REMOVE_OBSERVER,
@@ -80,17 +80,17 @@ end
 
 return {
 	execute = Execute,
-	notify = function(p1, p2) --[[ Line: 70 ]]
+	notify = function(p1, p2)
 		-- upvalues: NotifyWithCallbacks (copy), v9 (copy)
 		NotifyWithCallbacks(p1, p2, v9, v9)
 	end,
 	notifyWithCallbacks = NotifyWithCallbacks,
-	addObserver = function(ExperienceType, p1, p2) --[[ Line: 95 ]]
+	addObserver = function(ExperienceType, p1, p2)
 		-- upvalues: AddObserverWithCallbacks (copy), v9 (copy)
 		return (AddObserverWithCallbacks(ExperienceType, p1, p2, v9, v9))
 	end,
 	addObserverWithCallbacks = AddObserverWithCallbacks,
-	removeObserver = function(ExperienceType, p1, ObserverId) --[[ Line: 117 ]]
+	removeObserver = function(ExperienceType, p1, ObserverId)
 		-- upvalues: RemoveObserverWithCallbacks (copy), v9 (copy)
 		return RemoveObserverWithCallbacks(ExperienceType, p1, ObserverId, v9, v9)
 	end,

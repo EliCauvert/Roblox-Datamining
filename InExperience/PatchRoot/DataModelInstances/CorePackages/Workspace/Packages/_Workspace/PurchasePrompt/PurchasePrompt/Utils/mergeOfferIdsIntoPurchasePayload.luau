@@ -1,7 +1,7 @@
 ﻿local HttpService = game:GetService("HttpService")
 local _ = require(script:FindFirstAncestor("PurchasePrompt").types)
 
-return function(p1, p2) --[[ Line: 15 | Named "mergeOfferIdsIntoPurchasePayload" ]]
+return function(p1, p2)
 	-- upvalues: HttpService (copy)
 	if p2 == nil or p2.Offers == nil then
 		return p1

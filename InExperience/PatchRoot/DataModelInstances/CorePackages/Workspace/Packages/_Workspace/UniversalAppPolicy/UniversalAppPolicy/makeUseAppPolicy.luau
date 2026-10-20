@@ -5,7 +5,7 @@ local ReactModule = require(Parent.React)
 local CryoModule = require(Parent.Cryo)
 local _ = require(script.Parent.PolicyTypes)
 
-local function mergePolicies(ReadResult, PresentationPolicy) --[[ Line: 15 ]]
+local function mergePolicies(ReadResult, PresentationPolicy)
 	-- upvalues: CryoModule (copy)
 	local JoinResult = {}
 	
@@ -15,15 +15,15 @@ local function mergePolicies(ReadResult, PresentationPolicy) --[[ Line: 15 ]]
 	return JoinResult
 end
 
-return function(p1) --[[ Line: 25 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), PolicyProviderModule (copy), mergePolicies (copy), Logger (copy)
 	assert(p1, "expected getPolicyImpl")
 	
-	return function(Callback) --[[ Line: 28 | Named "useAppPolicy" ]]
+	return function(Callback)
 		-- upvalues: ReactModule (upval), PolicyProviderModule (upval), mergePolicies (upval), p1 (copy), Logger (upval)
 		local UseContextResult = ReactModule.useContext(PolicyProviderModule.AppPolicyContext)
 		assert(UseContextResult, "Not a descendent of PolicyProvider")
-		local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 32 | Named "getInitialPolicy" ]]
+		local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 			-- upvalues: UseContextResult (copy), mergePolicies (upval), p1 (upval), Logger (upval)
 			if UseContextResult.staticExternalPolicy then
 				return (mergePolicies(UseContextResult.staticExternalPolicy, UseContextResult.presentationPolicy))
@@ -38,15 +38,15 @@ return function(p1) --[[ Line: 25 ]]
 				return (mergePolicies({}, UseContextResult.presentationPolicy))
 			end
 		end)
-		ReactModule.useEffect(function() --[[ Line: 50 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseContextResult (copy), p1 (upval), Logger (upval), UseStateResult2 (copy), mergePolicies (upval)
-			local OnPolicyChangedResult = if UseContextResult.staticExternalPolicy then nil else p1.onPolicyChanged(function(p2) --[[ Line: 53 ]]
+			local OnPolicyChangedResult = if UseContextResult.staticExternalPolicy then nil else p1.onPolicyChanged(function(p2)
 				-- upvalues: Logger (upval), UseStateResult2 (upval), mergePolicies (upval), UseContextResult (upval)
 				Logger:trace("Received policy update")
 				UseStateResult2((mergePolicies(p2, UseContextResult.presentationPolicy)))
 			end)
 			
-			return function() --[[ Line: 59 ]]
+			return function()
 				-- upvalues: OnPolicyChangedResult (ref)
 				if OnPolicyChangedResult then
 					OnPolicyChangedResult:Disconnect()

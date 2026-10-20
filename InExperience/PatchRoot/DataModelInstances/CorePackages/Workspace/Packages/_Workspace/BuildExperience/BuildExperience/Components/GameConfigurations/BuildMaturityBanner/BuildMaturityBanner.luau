@@ -7,7 +7,7 @@ local View = FoundationModule.View
 local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 
-return function(p1) --[[ Line: 18 | Named "BuildMaturityBanner" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy)
 	return ReactModule.createElement(View, {
 		LayoutOrder = 2,

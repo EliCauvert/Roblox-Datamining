@@ -1,4 +1,4 @@
-﻿return function(p1) --[[ Line: 6 | Named "toSet" ]]
+﻿return function(p1)
 	local t = {}
 	
 	for i = 1, #p1 do

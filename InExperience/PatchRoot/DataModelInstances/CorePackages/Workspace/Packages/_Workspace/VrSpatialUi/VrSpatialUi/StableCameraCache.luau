@@ -3,11 +3,11 @@ local SpatialUIHeadLookDotNoMovementThresholdRatio = game:DefineFastInt("Spatial
 local StableCameraCache = {}
 StableCameraCache.__index = StableCameraCache
 
-function StableCameraCache:getCurrentStableCameraCFrame() --[[ Line: 18 ]]
+function StableCameraCache:getCurrentStableCameraCFrame()
 	return self.lastCameraCFrame
 end
 
-function StableCameraCache:updateAndCheckCameraMoved(): boolean --[[ Line: 22 ]]
+function StableCameraCache:updateAndCheckCameraMoved(): boolean
 	-- upvalues: VRUtil (copy), SpatialUIHeadLookDotNoMovementThresholdRatio (copy)
 	local UserCFrameWorldSpace = VRUtil.GetUserCFrameWorldSpace(Enum.UserCFrame.Head)
 	
@@ -29,7 +29,7 @@ function StableCameraCache:updateAndCheckCameraMoved(): boolean --[[ Line: 22 ]]
 	end
 end
 
-function StableCameraCache.new() --[[ Line: 44 ]]
+function StableCameraCache.new()
 	-- upvalues: StableCameraCache (copy)
 	local config = { lastUserHeadCFrame = nil, lastCameraCFrame = nil }
 	setmetatable(config, StableCameraCache)

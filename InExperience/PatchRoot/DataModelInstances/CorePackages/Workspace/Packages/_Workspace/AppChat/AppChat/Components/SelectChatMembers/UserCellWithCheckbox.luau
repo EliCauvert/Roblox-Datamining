@@ -14,22 +14,22 @@ local UseIsRobloxSubscriberFunction = require(Parent.UserProfiles).Hooks.useIsRo
 local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
 local DomLocatorsModule = require(AppChat.Utils.DomLocators)
 
-local function noOp() --[[ Line: 32 ]] end
+local function noOp() end
 
 local Repeated = string.rep("W", 20)
 
-return ReactModule.memo(function(p1) --[[ Line: 38 ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseUserDataModule (copy), FoundationModule (copy), UseIsRobloxSubscriberFunction (copy), FFlagEnableBlackbirdCheck (copy), GetSelectedUsersStoreModule (copy), UseSignalStateFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Repeated (copy), Text (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), FFlagAppChatUseProfileFrameThumbnailModule (copy), noOp (copy)
 	local UseUserDataModuleResult = UseUserDataModule(p1.userId)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseIsRobloxSubscriberResult = UseIsRobloxSubscriberFunction(if FFlagEnableBlackbirdCheck then p1.userId else nil)
 	local SelectedUsersStoreModule = GetSelectedUsersStoreModule(false)
 	local UseSignalStateResult = UseSignalStateFunction(SelectedUsersStoreModule.getIsUserSelected(p1.userId))
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 47 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: SelectedUsersStoreModule (copy), p1 (copy)
 		SelectedUsersStoreModule.toggleUserId(p1.userId)
 	end, { p1.userId })
-	local UseMemoResult = ReactModule.useMemo(function(): UDim2 --[[ Line: 51 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): UDim2
 		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Repeated (upval), UseTokensResult (copy), Text (upval)
 		local TextSize = if FoundationFontFaceMigration then GetTextSizeFunction(Repeated, UseTokensResult.Typography.TitleLarge.FontSize, UseTokensResult.Typography.TitleLarge.Font, Vector2.zero) else Text.GetTextBounds(Repeated, UseTokensResult.Typography.TitleLarge.Font, UseTokensResult.Typography.TitleLarge.FontSize, Vector2.zero)
 		
@@ -38,7 +38,7 @@ return ReactModule.memo(function(p1) --[[ Line: 38 ]]
 		UseTokensResult.Typography.TitleLarge.Font,
 		UseTokensResult.Typography.TitleLarge.FontSize
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function(): UDim2 --[[ Line: 68 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function(): UDim2
 		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), UseTokensResult (copy), Text (upval)
 		local RobloxStudio = if FoundationFontFaceMigration then GetTextSizeFunction("Roblox Studio", UseTokensResult.Typography.CaptionMedium.FontSize, UseTokensResult.Typography.CaptionMedium.Font, Vector2.zero) else Text.GetTextBounds("Roblox Studio", UseTokensResult.Typography.CaptionMedium.Font, UseTokensResult.Typography.CaptionMedium.FontSize, Vector2.zero)
 		
@@ -52,7 +52,7 @@ return ReactModule.memo(function(p1) --[[ Line: 38 ]]
 	
 	if FFlagDebugAppChatEnableDomLocatorsModule then
 		v1, UseStateResult2 = ReactModule.useState("")
-		ReactModule.__subscribeToBinding(UseUserDataModuleResult.username, function(p2) --[[ Line: 88 ]]
+		ReactModule.__subscribeToBinding(UseUserDataModuleResult.username, function(p2)
 			-- upvalues: UseStateResult2 (ref)
 			UseStateResult2(p2)
 		end)
@@ -79,7 +79,7 @@ return ReactModule.memo(function(p1) --[[ Line: 38 ]]
 			DisplayNameRow = if FFlagEnableBlackbirdCheck then ReactModule.createElement(FoundationModule.View, {
 				tag = "row auto-xy align-y-center gap-xsmall",
 				LayoutOrder = 1,
-				Visible = UseUserDataModuleResult.isLoading:map(function(p2): boolean --[[ Line: 122 ]]
+				Visible = UseUserDataModuleResult.isLoading:map(function(p2): boolean
 					return not p2
 				end)
 			}, {
@@ -99,7 +99,7 @@ return ReactModule.memo(function(p1) --[[ Line: 38 ]]
 				tag = "auto-xy text-title-large text-truncate-end content-emphasis",
 				LayoutOrder = 1,
 				Text = UseUserDataModuleResult.combinedName,
-				Visible = UseUserDataModuleResult.isLoading:map(function(p2): boolean --[[ Line: 146 ]]
+				Visible = UseUserDataModuleResult.isLoading:map(function(p2): boolean
 					return not p2
 				end)
 			}),
@@ -107,7 +107,7 @@ return ReactModule.memo(function(p1) --[[ Line: 38 ]]
 				tag = "auto-xy text-caption-medium text-truncate-end content-muted",
 				LayoutOrder = 3,
 				Text = UseUserDataModuleResult.presenceText,
-				Visible = UseUserDataModuleResult.isLoading:map(function(p2): boolean --[[ Line: 155 ]]
+				Visible = UseUserDataModuleResult.isLoading:map(function(p2): boolean
 					return not p2
 				end)
 			})

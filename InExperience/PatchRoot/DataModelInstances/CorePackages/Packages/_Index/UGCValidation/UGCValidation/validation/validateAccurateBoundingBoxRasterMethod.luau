@@ -16,20 +16,20 @@ local TryYieldModule = require(Parent.util.tryYield)
 local ValidateAccurateBoundingBoxFlagsModule = require(Parent.flags.validateAccurateBoundingBoxFlags)
 local GetFFlagUGCValidateTinyTrianglesIntersectFixModule = require(Parent.flags.getFFlagUGCValidateTinyTrianglesIntersectFix)
 
-local function _(Object) --[[ Line: 39 | Named "getHeadNeckAttachmentMeshLocalPosition" ]]
+local function _(Object)
 	-- upvalues: GetAttachmentCFrameInPartSpaceModule (copy)
 	local NeckRigAttachment = Object:FindFirstChild("NeckRigAttachment", true)
 	
 	return if NeckRigAttachment then GetAttachmentCFrameInPartSpaceModule(NeckRigAttachment).Position / (Object.Size / Object.MeshSize) else nil
 end
 
-local function projectMeshLocalPointToImageRow(PositionRatio, p1): number --[[ Line: 53 ]]
+local function projectMeshLocalPointToImageRow(PositionRatio, p1): number
 	local ViewSpaceBounds = p1.viewSpaceBounds
 	
 	return (((p1.view:Inverse() * PositionRatio).Y - (ViewSpaceBounds.max.Y + ViewSpaceBounds.min.Y) / 2) / ((ViewSpaceBounds.max.Y - ViewSpaceBounds.min.Y) / 2) * -0.5 + 0.5) * (p1.mask.Size.Y - 1)
 end
 
-local function cloneMaskZeroedBelowRow(Mask, Value: number) --[[ Line: 69 ]]
+local function cloneMaskZeroedBelowRow(Mask, Value: number)
 	-- upvalues: AssetService (copy)
 	local Size = Mask.Size
 	local X = Size.X
@@ -46,15 +46,15 @@ local function cloneMaskZeroedBelowRow(Mask, Value: number) --[[ Line: 69 ]]
 	return EditableImage
 end
 
-local _ = function(p1, X, X1, Y, Y1) --[[ Line: 89 | Named "sampleAreaTable" ]]
+local _ = function(p1, X, X1, Y, Y1)
 	local ScaledVector = Vector2.new(X, Y) * p1.size
 	
 	return (p1:GetAreaDensityContinuous(ScaledVector, Vector2.new(X1, Y1) * p1.size - ScaledVector))
 end
 
-local function shrinkBounds(SimplexEntry, Callback, Size) --[[ Line: 101 ]]
+local function shrinkBounds(SimplexEntry, Callback, Size)
 	-- upvalues: FloatVectorModule (copy)
-	local function _(p1: number): number --[[ Line: 102 ]]
+	local function _(p1: number): number
 		return if p1 % 2 == 0 then p1 - 1 else p1 + 1
 	end
 	
@@ -85,7 +85,7 @@ local function shrinkBounds(SimplexEntry, Callback, Size) --[[ Line: 101 ]]
 	end
 end
 
-local function createSimplex(NewResult, p1) --[[ Line: 146 ]]
+local function createSimplex(NewResult, p1)
 	-- upvalues: FloatVectorModule (copy)
 	local List = {}
 	table.insert(List, NewResult)
@@ -97,12 +97,12 @@ local function createSimplex(NewResult, p1) --[[ Line: 146 ]]
 	return List
 end
 
-local function calculateMinimumBoundsForView(p1, p2) --[[ Line: 156 ]]
+local function calculateMinimumBoundsForView(p1, p2)
 	-- upvalues: FloatVectorModule (copy), createSimplex (copy), SummedAreaTableModule (copy), ValidateAccurateBoundingBoxFlagsModule (copy), NelderMeadModule (copy), TryYieldModule (copy), shrinkBounds (copy)
 	local Simplex = createSimplex(FloatVectorModule.new(0, 1, 0, 1), 0.9)
 	local Mask = p1.mask
 	local Size = Mask.Size
-	local NewSummedAreaTable = SummedAreaTableModule.new(Size, function(p3): number --[[ Line: 165 ]]
+	local NewSummedAreaTable = SummedAreaTableModule.new(Size, function(p3): number
 		return if p3.R > 0 or p3.G > 0 or p3.B > 0 then 1 else 0
 	end)
 	NewSummedAreaTable:BuildSummedAreaTable(Mask)
@@ -116,7 +116,7 @@ local function calculateMinimumBoundsForView(p1, p2) --[[ Line: 156 ]]
 		local TargetPercentageResult = ValidateAccurateBoundingBoxFlagsModule.targetPercentage()
 		local PercentageWeightResult = ValidateAccurateBoundingBoxFlagsModule.percentageWeight()
 		
-		local function v57(Entry) --[[ Line: 189 ]]
+		local function v57(Entry)
 			-- upvalues: NewSummedAreaTable (copy), AreaDensity (copy), TargetPercentageResult (copy), PercentageWeightResult (copy)
 			assert(Entry:getSize() == 4)
 			local AreaDensityContinuous = 0
@@ -132,7 +132,7 @@ local function calculateMinimumBoundsForView(p1, p2) --[[ Line: 156 ]]
 		
 		local MaxIterationsResult = ValidateAccurateBoundingBoxFlagsModule.maxIterations()
 		local ScaledMagnitude = Vector2.new(1 / Size.X, 1 / Size.Y).Magnitude * ValidateAccurateBoundingBoxFlagsModule.convergedLength()
-		local NewNelderMead = NelderMeadModule.new(Simplex, v57, function(p3, p4): boolean --[[ Line: 209 ]]
+		local NewNelderMead = NelderMeadModule.new(Simplex, v57, function(p3, p4): boolean
 			-- upvalues: MaxIterationsResult (copy), NelderMeadModule (upval), ScaledMagnitude (copy), TryYieldModule (upval), p2 (copy)
 			if MaxIterationsResult <= p4 then
 				return true
@@ -152,11 +152,11 @@ local function calculateMinimumBoundsForView(p1, p2) --[[ Line: 156 ]]
 	end
 end
 
-local _ = function(CF, Vector): boolean --[[ Line: 242 | Named "transformIsAlignedWithAxis" ]]
+local _ = function(CF, Vector): boolean
 	return if Vector:FuzzyEq(CF.XVector:Abs()) then true elseif Vector:FuzzyEq(CF.YVector:Abs()) then true else false
 end
 
-local function alignedExtentsFromReprojectedPoint(Vector, CF) --[[ Line: 252 ]]
+local function alignedExtentsFromReprojectedPoint(Vector, CF)
 	-- upvalues: ExtentsModule (copy)
 	local Vector1 = { X = -1e999, Y = -1e999, Z = -1e999 }
 	local Vector4 = { X = 1e999, Y = 1e999, Z = 1e999 }
@@ -176,7 +176,7 @@ local function alignedExtentsFromReprojectedPoint(Vector, CF) --[[ Line: 252 ]]
 	return ExtentsModule.fromMinMax(Vector3.new(Vector4.X, Vector4.Y, Vector4.Z), (Vector3.new(Vector1.X, Vector1.Y, Vector1.Z)))
 end
 
-local function calculateValidBounds(BodyAssetMasks, p1) --[[ Line: 279 ]]
+local function calculateValidBounds(BodyAssetMasks, p1)
 	-- upvalues: ExtentsModule (copy), GetFFlagUGCValidateTinyTrianglesIntersectFixModule (copy), calculateMinimumBoundsForView (copy), BodyAssetMasksRendererModule (copy), alignedExtentsFromReprojectedPoint (copy)
 	local NewExtents = ExtentsModule.new()
 	local T = if GetFFlagUGCValidateTinyTrianglesIntersectFixModule() then {} else nil
@@ -214,11 +214,11 @@ local function calculateValidBounds(BodyAssetMasks, p1) --[[ Line: 279 ]]
 	return true, NewExtents
 end
 
-local _ = function(p2, p3) --[[ Line: 336 | Named "worldSpacePositionFromPointInMeshPart" ]]
+local _ = function(p2, p3)
 	return p3.CFrame * (p2 * (p3.Size / p3.MeshSize))
 end
 
-local function getHighestInflatingPointInEachAxis(p2, AssetMeshesValidationSpaceTransforms, EditableMeshes, Callback, p3) --[[ Line: 353 ]]
+local function getHighestInflatingPointInEachAxis(p2, AssetMeshesValidationSpaceTransforms, EditableMeshes, Callback, p3)
 	-- upvalues: GetMeshVertsModule (copy)
 	local config = {
 		X = {
@@ -275,7 +275,7 @@ local function getHighestInflatingPointInEachAxis(p2, AssetMeshesValidationSpace
 	return true, config
 end
 
-local function getBodyPartAssetEditableMeshes(Part: Part, p4) --[[ Line: 413 ]]
+local function getBodyPartAssetEditableMeshes(Part: Part, p4)
 	-- upvalues: GetEditableMeshFromContextModule (copy)
 	local List = {}
 	
@@ -307,7 +307,7 @@ local function getBodyPartAssetEditableMeshes(Part: Part, p4) --[[ Line: 413 ]]
 	return true, t
 end
 
-local function tryReportInflationError(p5, AssetTypeEnum) --[[ Line: 448 ]]
+local function tryReportInflationError(p5, AssetTypeEnum)
 	-- upvalues: FailureReasonsAccumulatorModule (copy), ValidateAccurateBoundingBoxFlagsModule (copy)
 	local NewFailureReasonsAccumulator = FailureReasonsAccumulatorModule.new()
 	local AssetTypeToAxisThreshold = ValidateAccurateBoundingBoxFlagsModule.AssetTypeToAxisThresholds[AssetTypeEnum]
@@ -345,10 +345,10 @@ end
 
 local Config = nil
 local ValidateAccurateBoundingBoxRasterMethodModule = {
-	getBoundsViewsForAssetType = function(AssetTypeEnum) --[[ Line: 506 ]]
+	getBoundsViewsForAssetType = function(AssetTypeEnum)
 		-- upvalues: Config (ref), BodyAssetMasksRendererModule (copy)
 		if not Config then
-			local function _() --[[ Line: 508 ]]
+			local function _()
 				-- upvalues: BodyAssetMasksRendererModule (upval)
 				local t = {}
 				
@@ -399,12 +399,12 @@ local ValidateAccurateBoundingBoxRasterMethodModule = {
 	end
 }
 
-function ValidateAccurateBoundingBoxRasterMethodModule.validate(Object, p6, p7) --[[ Line: 545 ]]
+function ValidateAccurateBoundingBoxRasterMethodModule.validate(Object, p6, p7)
 	-- upvalues: ValidateAccurateBoundingBoxRasterMethodModule (copy), ValidateAccurateBoundingBoxFlagsModule (copy), GetAttachmentCFrameInPartSpaceModule (copy), BodyAssetMasksRendererModule (copy), projectMeshLocalPointToImageRow (copy), cloneMaskZeroedBelowRow (copy), calculateValidBounds (copy), AssetCalculatorModule (copy), getBodyPartAssetEditableMeshes (copy), getHighestInflatingPointInEachAxis (copy), tryReportInflationError (copy), AnalyticsModule (copy)
 	local AssetTypeEnum = p7.assetTypeEnum
 	assert(AssetTypeEnum)
 	
-	local function findMeshHandle(ChildName) --[[ Line: 553 ]]
+	local function findMeshHandle(ChildName)
 		-- upvalues: AssetTypeEnum (copy), Object (copy)
 		return if AssetTypeEnum == Enum.AssetType.DynamicHead then Object else Object:FindFirstChild(ChildName)
 	end
@@ -450,7 +450,7 @@ function ValidateAccurateBoundingBoxRasterMethodModule.validate(Object, p6, p7) 
 			BodyAssetMasks = t
 		end
 	end
-	local v3, v4 = (function() --[[ Line: 611 ]]
+	local v3, v4 = (function()
 		-- upvalues: calculateValidBounds (upval), BodyAssetMasks (ref), p7 (copy), AssetCalculatorModule (upval), Object (copy), getBodyPartAssetEditableMeshes (upval), getHighestInflatingPointInEachAxis (upval), findMeshHandle (copy), tryReportInflationError (upval), AssetTypeEnum (copy), AnalyticsModule (upval)
 		local ValidBounds, ValidBounds2 = calculateValidBounds(BodyAssetMasks, p7)
 		

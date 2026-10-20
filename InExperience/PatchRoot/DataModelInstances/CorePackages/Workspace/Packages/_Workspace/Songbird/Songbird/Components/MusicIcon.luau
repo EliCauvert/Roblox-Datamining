@@ -4,7 +4,7 @@ local ReactModule = require(Songbird.Parent.React)
 local CreateNextOrderFunction = require(Songbird.Parent.ReactUtils).createNextOrder
 local GetFFlagSongbirdMusicIconThumbnailModule = require(Songbird.Flags.getFFlagSongbirdMusicIconThumbnail)
 
-return function(p1) --[[ Line: 17 | Named "MusicIcon" ]]
+return function(p1)
 	-- upvalues: CreateNextOrderFunction (copy), FoundationModule (copy), GetFFlagSongbirdMusicIconThumbnailModule (copy), ReactModule (copy)
 	local NextOrder = CreateNextOrderFunction()
 	local UseTokensResult = FoundationModule.Hooks.useTokens()

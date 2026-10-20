@@ -26,12 +26,12 @@ local MainWindow1 = ConstantsModule.Font.MainWindow
 local SlimDevConsole2 = game:DefineFastFlag("SlimDevConsole2", false)
 local TextService = SlimDevConsole2 and game:GetService("TextService") or nil
 
-local function _(p1, p2): number --[[ Line: 37 | Named "getDescriptionWidth" ]]
+local function _(p1, p2): number
 	-- upvalues: LearnMoreWidth (copy), CellPadding (copy)
 	return if p2 == nil then p1 - CellPadding * 2 else p1 - LearnMoreWidth - CellPadding * 2
 end
 
-local _ = function(String1, X): number --[[ Line: 43 | Named "getDescriptionHeight" ]]
+local _ = function(String1, X): number
 	-- upvalues: TextService (copy), MainWindow (copy), MainWindow1 (copy), EntryFrameHeight (copy)
 	return (math.max(TextService:GetTextSize(String1, MainWindow, MainWindow1, Vector2.new(X, 1e999)).Y, EntryFrameHeight))
 end
@@ -69,7 +69,7 @@ for i, Vector in ipairs(List) do
 end
 local DebugVisualizationsChart = RoactModule.Component:extend("DebugVisualizationsChart")
 
-local function constructHeader(Sortfunction, XOffset) --[[ Line: 106 ]]
+local function constructHeader(Sortfunction, XOffset)
 	-- upvalues: ChartHeaderNames (copy), RoactModule (copy), HeaderButtonModule (copy), List1 (copy), List (copy), LineWidth (copy), LineColor (copy), t (copy), HeaderFrameHeight (copy)
 	local Elements = {}
 	
@@ -108,7 +108,7 @@ local function constructHeader(Sortfunction, XOffset) --[[ Line: 106 ]]
 	}, Elements)
 end
 
-local function constructEntry(p1, XOffset, YOffset1, YOffset, LayoutOrder, IsExpanded, Callback, Callback1) --[[ Line: 148 ]]
+local function constructEntry(p1, XOffset, YOffset1, YOffset, LayoutOrder, IsExpanded, Callback, Callback1)
 	-- upvalues: t (copy), RoactModule (copy), LineWidth (copy), LineColor (copy), CellLabelModule (copy), List2 (copy), List (copy), SlimDevConsole2 (copy), DropDownModule (copy), CellPadding (copy), EntryFrameHeight (copy), CellCheckboxModule (copy), LearnMoreWidth (copy), BannerButtonModule (copy), BoxButtonModule (copy)
 	local Name = p1.name
 	local SettingInfo = p1.settingInfo
@@ -145,7 +145,7 @@ local function constructEntry(p1, XOffset, YOffset1, YOffset, LayoutOrder, IsExp
 				position = UDim2.new(0, 0, 0, 4),
 				dropDownList = SettingInfo.DropDownList,
 				selectedIndex = SelectedIndex,
-				onSelection = function(p2) --[[ Line: 193 ]]
+				onSelection = function(p2)
 					-- upvalues: p1 (copy), Text (copy), EnumItems (copy)
 					p1.valueChangeCallback(Text, EnumItems[p2])
 				end
@@ -209,7 +209,7 @@ local function constructEntry(p1, XOffset, YOffset1, YOffset, LayoutOrder, IsExp
 	})
 end
 
-function populateEntries(Text, List, List1, p2, p3, p4, p5, Name, p6, p7) --[[ Line: 269 ]]
+function populateEntries(Text, List, List1, p2, p3, p4, p5, Name, p6, p7)
 	-- upvalues: RoactModule (copy), EntryFrameHeight (copy), SlimDevConsole2 (copy), LearnMoreWidth (copy), CellPadding (copy), TextService (copy), MainWindow (copy), MainWindow1 (copy), constructEntry (copy), LineColor (copy)
 	local config = {
 		UIListLayout = RoactModule.createElement("UIListLayout", {
@@ -301,13 +301,13 @@ function populateEntries(Text, List, List1, p2, p3, p4, p5, Name, p6, p7) --[[ L
 	return config, Total
 end
 
-function DebugVisualizationsChart.init(p8, p9) --[[ Line: 393 ]]
+function DebugVisualizationsChart.init(p8, p9)
 	-- upvalues: LinkingProtocol (copy), SlimDevConsole2 (copy), RoactModule (copy)
 	local CurrentData = p9.DebugVisualizationsData:getCurrentData()
 	
-	function p8.getOnButtonPress(ExpandedEntry) --[[ Line: 396 ]]
+	function p8.getOnButtonPress(ExpandedEntry)
 		-- upvalues: p8 (copy)
-		return function(_, _) --[[ Line: 397 ]]
+		return function(_, _)
 			-- upvalues: p8 (upval), ExpandedEntry (copy)
 			p8:setState({
 				expandedEntry = p8.state.expandedEntry ~= ExpandedEntry and ExpandedEntry
@@ -315,18 +315,18 @@ function DebugVisualizationsChart.init(p8, p9) --[[ Line: 393 ]]
 		end
 	end
 	
-	function p8.getLearnMorePress(p10, p11) --[[ Line: 404 ]]
+	function p8.getLearnMorePress(p10, p11)
 		-- upvalues: LinkingProtocol (upval), SlimDevConsole2 (upval)
-		return function(_, _) --[[ Line: 405 ]]
+		return function(_, _)
 			-- upvalues: LinkingProtocol (upval), SlimDevConsole2 (upval), p11 (copy), p10 (copy)
 			LinkingProtocol.default:openURL(if SlimDevConsole2 then p11 else "https://create.roblox.com/docs/reference/engine/classes/PhysicsSettings#" .. p10)
 		end
 	end
 	
-	function p8.onSortChanged(SortType) --[[ Line: 413 ]]
+	function p8.onSortChanged(SortType)
 		-- upvalues: p9 (copy), p8 (copy)
 		if SortType == p9.DebugVisualizationsData:getSortType() then
-			p8:setState(function(p10) --[[ Line: 416 ]]
+			p8:setState(function(p10)
 				return { reverseSort = not p10.reverseSort }
 			end)
 			
@@ -337,7 +337,7 @@ function DebugVisualizationsChart.init(p8, p9) --[[ Line: 393 ]]
 		end
 	end
 	
-	function p8.onCanvasPosChanged() --[[ Line: 430 ]]
+	function p8.onCanvasPosChanged()
 		-- upvalues: p8 (copy)
 		p8:setState({ canvasPos = p8.scrollingRef.current.CanvasPosition })
 	end
@@ -350,7 +350,7 @@ function DebugVisualizationsChart.init(p8, p9) --[[ Line: 393 ]]
 	}
 end
 
-function DebugVisualizationsChart.didUpdate(p8) --[[ Line: 446 ]]
+function DebugVisualizationsChart.didUpdate(p8)
 	if p8.scrollingRef.current then
 		local AbsoluteSize = p8.scrollingRef.current.AbsoluteSize
 		
@@ -360,8 +360,8 @@ function DebugVisualizationsChart.didUpdate(p8) --[[ Line: 446 ]]
 	end
 end
 
-function DebugVisualizationsChart.didMount(p8) --[[ Line: 458 ]]
-	p8.visualizationsUpdated = p8.props.DebugVisualizationsData:Signal():Connect(function(VisualizationEntries) --[[ Line: 459 ]]
+function DebugVisualizationsChart.didMount(p8)
+	p8.visualizationsUpdated = p8.props.DebugVisualizationsData:Signal():Connect(function(VisualizationEntries)
 		-- upvalues: p8 (copy)
 		p8:setState({ visualizationEntries = VisualizationEntries })
 	end)
@@ -375,14 +375,14 @@ function DebugVisualizationsChart.didMount(p8) --[[ Line: 458 ]]
 	end
 end
 
-function DebugVisualizationsChart.willUnmount(p8) --[[ Line: 476 ]]
+function DebugVisualizationsChart.willUnmount(p8)
 	p8.visualizationsUpdated:Disconnect()
 	p8.visualizationsUpdated = nil
 	p8.canvasPosConnector:Disconnect()
 	p8.canvasPosConnector = nil
 end
 
-function DebugVisualizationsChart.render(p8) --[[ Line: 483 ]]
+function DebugVisualizationsChart.render(p8)
 	-- upvalues: MinFrameWidth (copy), RoactModule (copy), constructHeader (copy), HeaderFrameHeight (copy), ConstantsModule (copy)
 	local AbsScrollSize = p8.state.absScrollSize
 	local Largest = AbsScrollSize and math.max(AbsScrollSize.X, MinFrameWidth) or MinFrameWidth

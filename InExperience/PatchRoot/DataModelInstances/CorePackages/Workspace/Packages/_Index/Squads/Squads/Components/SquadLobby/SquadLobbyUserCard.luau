@@ -42,7 +42,7 @@ local FFlagEnablePartyVoiceChangersInLua = SharedFlags.FFlagEnablePartyVoiceChan
 local FFlagEnableBlackbirdCheck = SharedFlags.FFlagEnableBlackbirdCheck
 local UseIsRobloxSubscriberFunction = UserProfilesModule.Hooks.useIsRobloxSubscriber
 
-return function(p1) --[[ Line: 83 ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), UseTokensFunction (copy), UseAnimatedTransparencyFunction (copy), PartyVoiceActivityIndicatorAnimationMs (copy), UseIsRobloxSubscriberFunction (copy), FFlagEnableBlackbirdCheck (copy), UserProfilesModule (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), React (copy), FFlagSquadsPresenceStoreMigration (copy), UseGetPresenceByUserId (copy), UseSelectorFunction (copy), PresenceType1 (copy), PresenceType (copy), UseLocalUserIdFunction (copy), GetFFlagEnableCrossExpVoiceFunction (copy), UseIsVoiceConnectedFunction (copy), UseIsMicPermissionsErrorFunction (copy), UseParticipantFunction (copy), UseIsVoiceConnectingFunction (copy), UseIsActiveParticipantFunction (copy), UseIsLocalPlayerPartyVoiceEligibleFunction (copy), UseIsUserPartyVoiceEligibleFunction (copy), UseIsCurrentSquadPartyVoiceEligibleFunction (copy), UseIsParticipantMutedLocallyFunction (copy), UseIsParticipantMutedFunction (copy), UseIsParticipantInOtherAudioContextFunction (copy), FFlagEnablePartyVoiceChangersInLua (copy), CrossExperienceVoiceModule (copy), PartyVoiceActivityIndicatorDebounceMs (copy), SquadUserPartyStatusModule (copy), Foundation (copy), IconSize (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), BuilderIconsModule (copy), UseSquadUserDropdownMenuButtonsModule (copy), ImageSetLabel (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		connectingText = "Feature.Squads.Label.Connecting",
@@ -61,7 +61,7 @@ return function(p1) --[[ Line: 83 ]]
 	local CombinedNameFromId = if UseUserProfilesFetchResult.data then UserProfilesModule.Selectors.getCombinedNameFromId(UseUserProfilesFetchResult.data, p1.user.userId) else ""
 	local StandardSizeAvatarHeadShotRbxthumb = GetStandardSizeAvatarHeadShotRbxthumbFunction((tostring(p1.user.userId)))
 	local SocialName: string = `--social-squad-lobby-user-card-{p0.user.userId}`
-	local UseResult = React.useCallback(function(p2) --[[ Line: 111 ]]
+	local UseResult = React.useCallback(function(p2)
 		-- upvalues: p1 (copy)
 		return p2.Squad.Presence.byUserId[tostring(p1.user.userId)]
 	end, { p1.user.userId })
@@ -103,14 +103,14 @@ return function(p1) --[[ Line: 83 ]]
 		v3 = IsUseIsCurrentSquadPartyVoiceEligibleResult and (UseIsLocalPlayerPartyVoiceEligibleResult and not UseIsUserPartyVoiceEligibleResult)
 		IsVoiceChangerActive = if FFlagEnablePartyVoiceChangersInLua and UseParticipantResult then UseParticipantResult.isVoiceChangerActive else false
 	end
-	local UseMemoResult = React.useMemo(function() --[[ Line: 186 ]]
+	local UseMemoResult = React.useMemo(function()
 		-- upvalues: CrossExperienceVoiceModule (upval), UseAnimatedTransparencyResult2 (copy), PartyVoiceActivityIndicatorDebounceMs (upval)
-		return CrossExperienceVoiceModule.Utils.debounce(function(p2) --[[ Line: 187 ]]
+		return CrossExperienceVoiceModule.Utils.debounce(function(p2)
 			-- upvalues: UseAnimatedTransparencyResult2 (upval)
 			UseAnimatedTransparencyResult2(p2)
 		end, PartyVoiceActivityIndicatorDebounceMs)
 	end, {})
-	React.useEffect(function() --[[ Line: 192 ]]
+	React.useEffect(function()
 		-- upvalues: GetFFlagEnableCrossExpVoiceFunction (upval), v1 (ref), UseMemoResult (copy), UseAnimatedTransparencyResult2 (copy)
 		if GetFFlagEnableCrossExpVoiceFunction() then
 			if v1 then
@@ -123,7 +123,7 @@ return function(p1) --[[ Line: 83 ]]
 			end
 		end
 	end, { v1 })
-	local UseMemoResult1 = React.useMemo(function() --[[ Line: 204 ]]
+	local UseMemoResult1 = React.useMemo(function()
 		-- upvalues: p1 (copy), SquadUserPartyStatusModule (upval), UseLocalizationResult (copy), IsConnecting (copy), v5 (ref), LastLocation1 (ref)
 		return if p1.user.partyStatus == SquadUserPartyStatusModule.NoResponse then UseLocalizationResult.noResponseText elseif p1.user.partyStatus == SquadUserPartyStatusModule.Invited then UseLocalizationResult.invitedText elseif IsConnecting or v5 then UseLocalizationResult.connectingText else LastLocation1
 	end, {
@@ -131,7 +131,7 @@ return function(p1) --[[ Line: 83 ]]
 		UseLocalizationResult.noResponse, UseLocalizationResult.invitedText,
 		UseLocalizationResult.connectingText
 	})
-	local UseMemoResult2 = React.useMemo(function() --[[ Line: 226 ]]
+	local UseMemoResult2 = React.useMemo(function()
 		-- upvalues: p1 (copy), SquadUserPartyStatusModule (upval), React (upval), Foundation (upval), IconSize (upval), UseTokensResult (copy), FFlagSquadsEnableFoundationTestIdsModule (upval), SocialName (copy), IsConnecting (copy), v5 (ref), IsUserPresenceTypeMatch (copy)
 		return if p1.user.partyStatus == SquadUserPartyStatusModule.Invited then React.createElement(Foundation.View, { tag = "auto-xy" }, {
 			LoadingIcon = React.createElement(Foundation.Loading, {
@@ -161,7 +161,7 @@ return function(p1) --[[ Line: 83 ]]
 		IsUserPresenceTypeMatch,
 		SocialName
 	})
-	local UseMemoResult3 = React.useMemo(function() --[[ Line: 261 ]]
+	local UseMemoResult3 = React.useMemo(function()
 		-- upvalues: CombinedNameFromId (ref), React (upval), UseTokensResult (copy), p1 (copy), Foundation (upval), IconSize (upval), FFlagSquadsEnableFoundationTestIdsModule (upval), SocialName (copy), v6 (ref), v4 (ref), v2 (ref), v3 (ref), FFlagEnablePartyVoiceChangersInLua (upval), IsVoiceChangerActive (ref), BuilderIconsModule (upval), FFlagEnableBlackbirdCheck (upval), UseIsRobloxSubscriberResult (copy)
 		return if CombinedNameFromId == "" then nil else React.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -275,7 +275,7 @@ return function(p1) --[[ Line: 83 ]]
 		if FFlagEnableBlackbirdCheck then UseIsRobloxSubscriberResult else nil,
 		SocialName
 	})
-	local UseMemoResult4 = React.useMemo(function() --[[ Line: 413 ]]
+	local UseMemoResult4 = React.useMemo(function()
 		-- upvalues: React (upval), UseTokensResult (copy), UseMemoResult2 (copy), Foundation (upval), UseMemoResult1 (copy), FFlagSquadsEnableFoundationTestIdsModule (upval), SocialName (copy)
 		return React.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -313,7 +313,7 @@ return function(p1) --[[ Line: 83 ]]
 	})
 	local v7 = #UseSquadUserDropdownMenuButtonsModule(p1.user.userId, p1.isInExperience) < 1
 	local NoV62: boolean = not IsNumberMatch and not v7
-	local UseResult1 = React.useCallback(function() --[[ Line: 461 ]]
+	local UseResult1 = React.useCallback(function()
 		-- upvalues: p1 (copy)
 		if p1.onActivated then
 			p1.onActivated((tostring(p1.user.userId)))
@@ -418,7 +418,7 @@ return function(p1) --[[ Line: 83 ]]
 			UIStroke = React.createElement("UIStroke", {
 				Thickness = 1,
 				Color = UseTokensResult.Color.Stroke.Default.Color3,
-				Transparency = UseAnimatedTransparencyResult:map(function(p2: number) --[[ Line: 586 ]]
+				Transparency = UseAnimatedTransparencyResult:map(function(p2: number)
 					-- upvalues: UseTokensResult (copy)
 					return if p2 < 0.9 then 1 else UseTokensResult.Color.Stroke.Default.Transparency
 				end)

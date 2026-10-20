@@ -3,10 +3,10 @@ local Boolean = LuauPolyfillModule.Boolean
 local Array = LuauPolyfillModule.Array
 local Object = LuauPolyfillModule.Object
 
-local function __rest(p1, p2) --[[ Line: 21 ]]
+local function __rest(p1, p2)
 	-- upvalues: Array (copy), Object (copy)
 	local Nones = {}
-	Array.forEach(p2, function(Key) --[[ Line: 23 ]]
+	Array.forEach(p2, function(Key)
 		-- upvalues: Nones (copy), Object (upval)
 		Nones[Key] = Object.None
 	end)
@@ -21,27 +21,27 @@ local Callback = nil
 local Callback1 = nil
 local v1 = nil
 local PaginationModule = {
-	concatPagination = function(KeyArgs: boolean) --[[ Line: 47 ]]
+	concatPagination = function(KeyArgs: boolean)
 		-- upvalues: Array (copy)
 		if KeyArgs == nil then
 			KeyArgs = false
 		end
 		return {
 			keyArgs = KeyArgs,
-			merge = function(_, p1, p2) --[[ Line: 53 ]]
+			merge = function(_, p1, p2)
 				-- upvalues: Array (upval)
 				return if p1 then Array.concat(p1, p2) else p2
 			end
 		}
 	end,
-	offsetLimitPagination = function(KeyArgs: boolean) --[[ Line: 65 ]]
+	offsetLimitPagination = function(KeyArgs: boolean)
 		-- upvalues: Array (copy)
 		if KeyArgs == nil then
 			KeyArgs = false
 		end
 		return {
 			keyArgs = KeyArgs,
-			merge = function(_, p1, p2, p3) --[[ Line: 72 ]]
+			merge = function(_, p1, p2, p3)
 				-- upvalues: Array (upval)
 				local Args = p3.args
 				local T = if p1 == nil then {} else Array.slice(p1, 1)
@@ -59,20 +59,20 @@ local PaginationModule = {
 			end
 		}
 	end,
-	relayStylePagination = function(KeyArgs: boolean) --[[ Line: 139 ]]
+	relayStylePagination = function(KeyArgs: boolean)
 		-- upvalues: Array (copy), Boolean (copy), Object (copy), Callback (ref), Callback1 (ref), MergeDeepFunction (copy)
 		if KeyArgs == nil then
 			KeyArgs = false
 		end
 		return {
 			keyArgs = KeyArgs,
-			read = function(_, EmptyData, p1) --[[ Line: 146 ]]
+			read = function(_, EmptyData, p1)
 				-- upvalues: Array (upval), Boolean (upval), Object (upval), Callback (upval)
 				if not EmptyData then return end
 				local Edges = {}
 				local v2 = ""
 				local Cursor = ""
-				Array.forEach(EmptyData.edges, function(p2) --[[ Line: 158 ]]
+				Array.forEach(EmptyData.edges, function(p2)
 					-- upvalues: p1 (copy), Edges (copy), v2 (ref), Boolean (upval), Cursor (ref)
 					if p1:canRead(p1:readField("node", p2)) then
 						table.insert(Edges, p2)
@@ -95,14 +95,14 @@ local PaginationModule = {
 					})
 				})
 			end,
-			merge = function(_, p1, EmptyData, p2) --[[ Line: 199 ]]
+			merge = function(_, p1, EmptyData, p2)
 				-- upvalues: Callback1 (upval), Array (upval), Object (upval), MergeDeepFunction (upval), Boolean (upval), Callback (upval)
 				if p1 == nil then
 					p1 = Callback1()
 				end
 				local EmptyData1 = p1
 				local Args = p2.args
-				local MapResult = if EmptyData.edges then Array.map(EmptyData.edges, function(p3) --[[ Line: 210 ]]
+				local MapResult = if EmptyData.edges then Array.map(EmptyData.edges, function(p3)
 					-- upvalues: Object (upval), p2 (copy)
 					local AssignResult = Object.assign({ cursor = "" }, p3)
 					
@@ -145,7 +145,7 @@ local PaginationModule = {
 							Edges = {}
 						end
 					else
-						local Index: number = Array.findIndex(Edges, function(p3): boolean --[[ Line: 273 ]]
+						local Index: number = Array.findIndex(Edges, function(p3): boolean
 							-- upvalues: Args (copy)
 							return p3.cursor == Args.before
 						end)
@@ -153,7 +153,7 @@ local PaginationModule = {
 						Edges = {}
 					end
 				else
-					local Index: number = Array.findIndex(Edges, function(p3): boolean --[[ Line: 262 ]]
+					local Index: number = Array.findIndex(Edges, function(p3): boolean
 						-- upvalues: Args (copy)
 						return p3.cursor == Args.after
 					end)
@@ -201,14 +201,14 @@ local PaginationModule = {
 	end
 }
 
-Callback = function(p1) --[[ Line: 358 | Named "getExtras" ]]
+Callback = function(p1)
 	-- upvalues: __rest (copy), v1 (ref)
 	return __rest(p1, v1)
 end
 
 v1 = { "edges", "pageInfo" }
 
-Callback1 = function() --[[ Line: 363 | Named "makeEmptyData" ]]
+Callback1 = function()
 	return {
 		edges = {},
 		pageInfo = {

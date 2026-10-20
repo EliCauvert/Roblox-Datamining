@@ -99,7 +99,7 @@ local config = {
 	}
 }
 
-return (ReactModule.forwardRef(function(p1, Ref) --[[ Line: 140 ]]
+return (ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: UseTokensModule (copy), CursorTypeModule (copy), ReactModule (copy), config (copy), Images (copy), GetScaledSliceModule (copy), CursorComponentModule (copy)
 	local UseTokensModuleResult = UseTokensModule()
 	local ColorNamespace = p1.colorNamespace

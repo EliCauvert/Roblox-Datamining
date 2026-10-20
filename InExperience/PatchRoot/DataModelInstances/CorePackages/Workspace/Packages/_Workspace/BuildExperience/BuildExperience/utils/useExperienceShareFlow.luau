@@ -12,28 +12,28 @@ local FFlagBuildExperiencePrivateInvitesModule = require(BuildExperience.Flags.F
 local PrivacyType = UniverseConfigurationModule.PrivacyType
 local Signal = require(Parent.Signals).createSignal(nil)
 
-return function(UniverseId, p1) --[[ Line: 57 | Named "useExperienceShareFlow" ]]
+return function(UniverseId, p1)
 	-- upvalues: UseSharePublishedExperienceFunction (copy), ReactModule (copy), Signal (copy), UniverseConfigurationModule (copy), SignalsReactModule (copy), GameConfigurationLabelsModule (copy), PrivacyType (copy), FFlagBuildExperiencePrivateInvitesModule (copy), SendBuildExperienceEventModule (copy), SharePrivateExperienceModule (copy), Logger (copy)
 	local UseSharePublishedExperienceResult = UseSharePublishedExperienceFunction(UniverseId)
-	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 59 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: UniverseId (copy), Signal (upval), UniverseConfigurationModule (upval)
 		return if UniverseId == nil then Signal else UniverseConfigurationModule.getUniverseConfigurationStore().getAndFetchSummary(UniverseId).data
 	end, { UniverseId })))
 	local None, None2 = ReactModule.useState("none")
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 80 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), UseSharePublishedExperienceResult (copy)
 		if p1 ~= nil then
 			UseSharePublishedExperienceResult(p1)
 		end
 	end, { p1, UseSharePublishedExperienceResult })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 89 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: GameConfigurationLabelsModule (upval), UseSignalStateResult (copy)
 		return GameConfigurationLabelsModule.getAudience(UseSignalStateResult)
 	end, { UseSignalStateResult })
 	
 	return {
-		onShare = ReactModule.useCallback(function() --[[ Line: 95 ]]
+		onShare = ReactModule.useCallback(function()
 			-- upvalues: UseMemoResult (copy), PrivacyType (upval), FFlagBuildExperiencePrivateInvitesModule (upval), None2 (copy), UniverseId (copy), SendBuildExperienceEventModule (upval), UseResult (copy)
 			if UseMemoResult == PrivacyType.Private then
 				if FFlagBuildExperiencePrivateInvitesModule then
@@ -58,25 +58,25 @@ return function(UniverseId, p1) --[[ Line: 57 | Named "useExperienceShareFlow" ]
 		audience = UseMemoResult,
 		activeDialog = None,
 		hasShareError = UseStateResult,
-		onCancelDialog = ReactModule.useCallback(function() --[[ Line: 75 ]]
+		onCancelDialog = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (copy), None2 (copy)
 			UseStateResult2(false)
 			None2("none")
 		end, {}),
-		onConfirmFriends = ReactModule.useCallback(function() --[[ Line: 115 ]]
+		onConfirmFriends = ReactModule.useCallback(function()
 			-- upvalues: None2 (copy), UseResult (copy)
 			None2("none")
 			UseResult()
 		end, { UseResult }),
-		onConfirmPlaytesters = ReactModule.useCallback(function() --[[ Line: 120 ]]
+		onConfirmPlaytesters = ReactModule.useCallback(function()
 			-- upvalues: UniverseId (copy), SendBuildExperienceEventModule (upval), UseStateResult2 (copy), SharePrivateExperienceModule (upval), None2 (copy), Logger (upval)
 			if UniverseId ~= nil then
 				SendBuildExperienceEventModule("PLAYTEST_SHARE_CLICK", { universeId = UniverseId }, { source = "playtesters_dialog" })
 				UseStateResult2(false)
-				SharePrivateExperienceModule(UniverseId):andThen(function() --[[ Line: 132 ]]
+				SharePrivateExperienceModule(UniverseId):andThen(function()
 					-- upvalues: None2 (upval)
 					None2("none")
-				end):catch(function(Err) --[[ Line: 135 ]]
+				end):catch(function(Err)
 					-- upvalues: Logger (upval), UniverseId (upval), UseStateResult2 (upval)
 					Logger:warning("useExperienceShareFlow: private share failed for universe {}: {}", UniverseId, Err)
 					UseStateResult2(true)

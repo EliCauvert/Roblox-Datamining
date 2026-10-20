@@ -6,11 +6,11 @@ local ServiceModule = require(Chrome.Service)
 local ConstantsModule = require(Chrome.ChromeShared.Unibar.Constants)
 local GetOffersStoreFunction = require(CorePackages.Workspace.Packages.InExperienceOffers).getOffersStore
 
-return function() --[[ Line: 29 | Named "usePublishShopAvailability" ]]
+return function()
 	-- upvalues: ServiceModule (copy), ConstantsModule (copy), UseMappedSignalFunction (copy), ReactModule (copy), GetOffersStoreFunction (copy)
 	local IntegrationsResultEntry = ServiceModule:integrations()[ConstantsModule.IN_EXPERIENCE_SHOP_ID]
 	local IsUseMappedSignalResultMatch = UseMappedSignalFunction(if IntegrationsResultEntry then IntegrationsResultEntry.availability else nil) == ServiceModule.AvailabilitySignal.Available
-	ReactModule.useEffect(function() --[[ Line: 35 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: GetOffersStoreFunction (upval), IsUseMappedSignalResultMatch (copy)
 		GetOffersStoreFunction(false).setIsShopAvailable(IsUseMappedSignalResultMatch)
 	end, { IsUseMappedSignalResultMatch })

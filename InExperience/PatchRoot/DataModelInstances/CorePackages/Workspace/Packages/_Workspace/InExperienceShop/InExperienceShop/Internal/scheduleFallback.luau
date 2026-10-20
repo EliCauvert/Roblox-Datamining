@@ -1,5 +1,5 @@
-﻿return function(Delay, Callback) --[[ Line: 7 | Named "scheduleFallback" ]]
-	local function guardedCallback() --[[ Line: 11 ]]
+﻿return function(Delay, Callback)
+	local function guardedCallback()
 		-- upvalues: Callback (copy)
 		if game:IsLoaded() then
 			Callback()
@@ -13,7 +13,7 @@
 		
 		return
 	else
-		game.Loaded:Once(function() --[[ Line: 26 ]]
+		game.Loaded:Once(function()
 			-- upvalues: Delay (copy), guardedCallback (copy)
 			task.delay(Delay, guardedCallback)
 		end)

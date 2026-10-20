@@ -7,7 +7,7 @@ local FFlagSduiEdpClientTemplateCache = require(Parent.SharedFlags).FFlagSduiEdp
 local FFlagInfoTableStableItemKeys = require(Parent.SharedFlags).FFlagInfoTableStableItemKeys
 local FFlagLuaAppEdpMomentVideo = require(Parent.SharedFlags).FFlagLuaAppEdpMomentVideo
 
-return function(UniverseId) --[[ Line: 12 | Named "getExperienceDetailsUrl" ]]
+return function(UniverseId)
 	-- upvalues: UrlBuilder (copy), Url (copy), FFlagSduiCapabilityBindings (copy), FFlagSduiEdpClientTemplateCache (copy), Parent (copy), FFlagLuaAppEdpMomentVideo (copy), FFlagInfoTableStableItemKeys (copy), SduiCapabilities (copy)
 	local AddQueryStringResult = UrlBuilder.new({
 		path = "experience-details-api/v2/universes/{universeId}/experience-details",

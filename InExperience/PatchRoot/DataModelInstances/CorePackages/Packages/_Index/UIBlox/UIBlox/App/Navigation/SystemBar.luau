@@ -62,12 +62,12 @@ SystemBar.defaultProps = {
 	lastItemPaddingOffset = UDim.new(0, 0)
 }
 
-function SystemBar.isPortrait(p1) --[[ Line: 145 ]]
+function SystemBar.isPortrait(p1)
 	-- upvalues: PlacementModule (copy)
 	return p1.props.placement ~= PlacementModule.Left and (p1.props.placement == PlacementModule.Bottom or p1.state.portrait)
 end
 
-function SystemBar.renderItem(p1, p2, Hover, Selected, LayoutOrder) --[[ Line: 155 ]]
+function SystemBar.renderItem(p1, p2, Hover, Selected, LayoutOrder)
 	-- upvalues: ControlStateModule (copy), PlacementModule (copy), RoactModule (copy), BadgeStatesModule (copy), TModule (copy), NewXOffsetRatio (copy), NewXOffsetRatio1 (copy), NewXOffsetRatioDelta (copy), NewNewXOffsetRatio (copy), WithAnimationModule (copy), WithStyleModule (copy), ImageSetComponentModule (copy), XOffset (copy), XOffset (copy), StatusIndicator (copy), MigrateBadgeVariantModule (copy), BadgeVariantModule (copy), config (copy)
 	assert((if p2.iconOn == nil then p2.iconImageComponent ~= nil else p2.iconOff ~= nil or p2.iconImageComponent ~= nil) or p2.iconComponent ~= nil, "items must define either iconOn and iconOff or iconImageComponent or iconComponent")
 	local IsHoverMatch = Hover == ControlStateModule.Pressed
@@ -94,9 +94,9 @@ function SystemBar.renderItem(p1, p2, Hover, Selected, LayoutOrder) --[[ Line: 1
 			PositionX = NewNewXOffsetRatio
 		end
 	end
-	return WithAnimationModule({ positionX = PositionX, positionY = PositionY }, function(p3) --[[ Line: 208 ]]
+	return WithAnimationModule({ positionX = PositionX, positionY = PositionY }, function(p3)
 		-- upvalues: WithStyleModule (upval), RoactModule (upval), p2 (copy), ImageSetComponentModule (upval), XOffset (upval), XOffset (upval), p1 (copy), Selected (copy), IsHoverMatch (copy), IsBadgeValueMatch (ref), StatusIndicator (upval), BadgeStatesModule (upval), MigrateBadgeVariantModule (upval), BadgeVariantModule (upval)
-		return WithStyleModule(function(p4) --[[ Line: 209 ]]
+		return WithStyleModule(function(p4)
 			-- upvalues: RoactModule (upval), p2 (upval), ImageSetComponentModule (upval), p3 (copy), XOffset (upval), XOffset (upval), p1 (upval), Selected (upval), IsHoverMatch (upval), IsBadgeValueMatch (upval), StatusIndicator (upval), BadgeStatesModule (upval), MigrateBadgeVariantModule (upval), BadgeVariantModule (upval)
 			return RoactModule.createElement(p2.iconImageComponent or ImageSetComponentModule.Label, {
 				Position = UDim2.fromOffset(math.floor(p3.positionX + 0.5), (math.floor(p3.positionY + 0.5))),
@@ -123,11 +123,11 @@ function SystemBar.renderItem(p1, p2, Hover, Selected, LayoutOrder) --[[ Line: 1
 	end, config), { LayoutOrder = LayoutOrder }
 end
 
-function SystemBar.renderPortrait(p1, p2, p3) --[[ Line: 244 ]]
+function SystemBar.renderPortrait(p1, p2, p3)
 	-- upvalues: WithAnimationModule (copy), RoactModule (copy), CryoModule (copy), NewXOffset (copy), config (copy)
 	return WithAnimationModule({
 		offset = if p1.props.hidden then 0 else -p1.props.experimentalTabSizePortraitY
-	}, function(p4) --[[ Line: 247 ]]
+	}, function(p4)
 		-- upvalues: RoactModule (upval), CryoModule (upval), p2 (copy), p1 (copy), NewXOffset (upval), p3 (copy)
 		return RoactModule.createElement("Frame", CryoModule.Dictionary.join(p2, {
 			ZIndex = 99,
@@ -151,9 +151,9 @@ function SystemBar.renderPortrait(p1, p2, p3) --[[ Line: 244 ]]
 	end, config)
 end
 
-function SystemBar.renderLandscape(p1, p2, FilterResult, p3) --[[ Line: 283 ]]
+function SystemBar.renderLandscape(p1, p2, FilterResult, p3)
 	-- upvalues: WithAnimationModule (copy), RoactModule (copy), CryoModule (copy), Offset (copy), Offset1 (copy), config (copy)
-	return WithAnimationModule({ offset = if p1.props.hidden then -64 else 0 }, function(p4) --[[ Line: 286 ]]
+	return WithAnimationModule({ offset = if p1.props.hidden then -64 else 0 }, function(p4)
 		-- upvalues: RoactModule (upval), CryoModule (upval), p2 (copy), p3 (copy), p1 (copy), Offset (upval), Offset1 (upval), FilterResult (copy)
 		return RoactModule.createElement("Frame", CryoModule.Dictionary.join(p2, {
 			ZIndex = 99,
@@ -176,16 +176,16 @@ function SystemBar.renderLandscape(p1, p2, FilterResult, p3) --[[ Line: 283 ]]
 	end, config)
 end
 
-function SystemBar.renderBackground(p1, p2, MapResult) --[[ Line: 316 ]]
+function SystemBar.renderBackground(p1, p2, MapResult)
 	-- upvalues: CryoModule (copy), RoactModule (copy)
 	if p1:isPortrait() then
 		return p1:renderPortrait(p2, MapResult)
 	end
-	local FilterResult = CryoModule.List.filter(MapResult, function(_, p3) --[[ Line: 323 ]]
+	local FilterResult = CryoModule.List.filter(MapResult, function(_, p3)
 		-- upvalues: p1 (copy)
 		return p1.props.itemList[p3].bottomAligned
 	end)
-	local RenderLandscapeResult = p1:renderLandscape(p2, (CryoModule.List.filter(MapResult, function(_, p3): boolean --[[ Line: 320 ]]
+	local RenderLandscapeResult = p1:renderLandscape(p2, (CryoModule.List.filter(MapResult, function(_, p3): boolean
 		-- upvalues: p1 (copy)
 		return not p1.props.itemList[p3].bottomAligned
 	end)))
@@ -199,7 +199,7 @@ function SystemBar.renderBackground(p1, p2, MapResult) --[[ Line: 316 ]]
 	return RenderLandscapeResult
 end
 
-function SystemBar.renderSafeArea(p1) --[[ Line: 337 ]]
+function SystemBar.renderSafeArea(p1)
 	-- upvalues: RoactModule (copy)
 	local _UDim2 = nil
 	local _UDim2_1 = nil
@@ -222,9 +222,9 @@ function SystemBar.renderSafeArea(p1) --[[ Line: 337 ]]
 	}, p1.props[RoactModule.Children])
 end
 
-function SystemBar.renderList(p1, p2, Callback) --[[ Line: 358 ]]
+function SystemBar.renderList(p1, p2, Callback)
 	-- upvalues: WithStyleModule (copy), CryoModule (copy), RoactModule (copy)
-	return WithStyleModule(function(p3) --[[ Line: 359 ]]
+	return WithStyleModule(function(p3)
 		-- upvalues: CryoModule (upval), p2 (copy), Callback (copy), RoactModule (upval), p1 (copy)
 		local Theme = p3.Theme
 		
@@ -235,7 +235,7 @@ function SystemBar.renderList(p1, p2, Callback) --[[ Line: 358 ]]
 			ClipsDescendants = p1.props.clipsDescendants,
 			LayoutOrder = p1.props.layoutOrder,
 			BackgroundTransparency = p1.props.bgTransparency or 1,
-			[RoactModule.Change.AbsoluteSize] = function(Frame: Frame) --[[ Line: 371 ]]
+			[RoactModule.Change.AbsoluteSize] = function(Frame: Frame)
 				-- upvalues: p1 (upval)
 				if p1.state.portrait and Frame.AbsoluteSize.Y < Frame.AbsoluteSize.X then
 					p1:setState({ portrait = false })
@@ -251,7 +251,7 @@ function SystemBar.renderList(p1, p2, Callback) --[[ Line: 358 ]]
 				BorderSizePixel = 0,
 				BackgroundColor3 = Theme.NavigationBar.Color,
 				BackgroundTransparency = if p1.props.roundCorners then 1 else Theme.NavigationBar.Transparency
-			}, (CryoModule.List.map(p2, function(_, p4) --[[ Line: 361 ]]
+			}, (CryoModule.List.map(p2, function(_, p4)
 				-- upvalues: Callback (upval)
 				return Callback(p4)
 			end))),
@@ -262,10 +262,10 @@ function SystemBar.renderList(p1, p2, Callback) --[[ Line: 358 ]]
 	end)
 end
 
-function SystemBar.init(p1) --[[ Line: 397 ]]
+function SystemBar.init(p1)
 	p1:setState({ portrait = true })
 	
-	function p1.onSelectionChanged(Entry) --[[ Line: 401 ]]
+	function p1.onSelectionChanged(Entry)
 		-- upvalues: p1 (copy)
 		if #Entry > 0 then
 			local Item = p1.props.itemList[Entry[1]]
@@ -276,7 +276,7 @@ function SystemBar.init(p1) --[[ Line: 397 ]]
 		end
 	end
 	
-	function p1.onSafeAreaEvent(Frame: Frame) --[[ Line: 409 ]]
+	function p1.onSafeAreaEvent(Frame: Frame)
 		-- upvalues: p1 (copy)
 		if p1.props.onSafeAreaChanged then
 			p1.props.onSafeAreaChanged({
@@ -289,7 +289,7 @@ function SystemBar.init(p1) --[[ Line: 397 ]]
 	end
 end
 
-function SystemBar.render(p1) --[[ Line: 421 ]]
+function SystemBar.render(p1)
 	-- upvalues: RoactModule (copy), InteractableListModule (copy), NewXOffset (copy), NewXOffset (copy)
 	local ItemList = p1.props.itemList
 	local Selection = p1.props.selection
@@ -305,11 +305,11 @@ function SystemBar.render(p1) --[[ Line: 421 ]]
 		itemList = ItemList,
 		selection = Selection,
 		itemSize = UDim2.fromOffset(NewXOffset, NewXOffset),
-		renderList = function(...) --[[ Line: 437 ]]
+		renderList = function(...)
 			-- upvalues: p1 (copy)
 			return p1:renderList(...)
 		end,
-		renderItem = function(...) --[[ Line: 440 ]]
+		renderItem = function(...)
 			-- upvalues: p1 (copy)
 			return p1:renderItem(...)
 		end,

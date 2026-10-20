@@ -6,21 +6,21 @@ local SignalsModule = require(Parent.Signals)
 local CreateSessionScopedSignalFunction = require(Parent.SignalsUtils).createSessionScopedSignal
 local ExperienceInviteModel = require(SquadsCore.RoduxSquads).Models.ExperienceInviteModel
 
-local function getAndUpdateState(p1, Model) --[[ Line: 34 ]]
+local function getAndUpdateState(p1, Model)
 	-- upvalues: CryoModule (copy)
 	return if p1 and p1.notification.experienceInviteId == Model.experienceInviteId and (p1.model == nil or p1.model.versionId < Model.versionId) then CryoModule.Dictionary.join(p1, { model = Model }) else p1
 end
 
-return function() --[[ Line: 47 ]]
+return function()
 	-- upvalues: CreateSessionScopedSignalFunction (copy), SignalsModule (copy), ExperienceInviteModel (copy), getAndUpdateState (copy)
 	local SessionScopedSignal, SessionScopedSignal2 = CreateSessionScopedSignalFunction(false)
 	local SessionScopedSignal1, SessionScopedSignal2_1 = CreateSessionScopedSignalFunction(nil)
 	
-	local function CurrentExperienceInviteUpdated(p1) --[[ Line: 61 ]]
+	local function CurrentExperienceInviteUpdated(p1)
 		-- upvalues: ExperienceInviteModel (upval), SessionScopedSignal2_1 (copy), getAndUpdateState (upval)
 		assert(p1, "Experience invite must exist.")
 		local FormatResult = ExperienceInviteModel.format(p1)
-		SessionScopedSignal2_1(function(p2) --[[ Line: 64 ]]
+		SessionScopedSignal2_1(function(p2)
 			-- upvalues: getAndUpdateState (upval), FormatResult (copy)
 			return getAndUpdateState(p2, FormatResult)
 		end)
@@ -29,17 +29,17 @@ return function() --[[ Line: 47 ]]
 	return {
 		getIsExperienceInvitePending = SessionScopedSignal,
 		getCurrentExperienceInvite = SessionScopedSignal1,
-		getHasCurrentExperienceInvite = SignalsModule.createComputed(function(p1): boolean --[[ Line: 53 ]]
+		getHasCurrentExperienceInvite = SignalsModule.createComputed(function(p1): boolean
 			-- upvalues: SessionScopedSignal1 (copy)
 			return SessionScopedSignal1(p1) ~= nil
 		end),
-		currentExperienceInviteStatusUpdated = function(p1) --[[ Line: 57 ]]
+		currentExperienceInviteStatusUpdated = function(p1)
 			-- upvalues: SessionScopedSignal2 (copy)
 			SessionScopedSignal2(p1)
 		end,
-		currentExperienceInviteReceived = function(ExperienceInviteId, MembershipEntityId, NotificationId, IsInviter) --[[ Line: 69 ]]
+		currentExperienceInviteReceived = function(ExperienceInviteId, MembershipEntityId, NotificationId, IsInviter)
 			-- upvalues: SessionScopedSignal2_1 (copy)
-			SessionScopedSignal2_1(function(p1) --[[ Line: 76 ]]
+			SessionScopedSignal2_1(function(p1)
 				-- upvalues: ExperienceInviteId (copy), MembershipEntityId (copy), NotificationId (copy), IsInviter (copy)
 				return if p1 == nil or p1.notification.experienceInviteId ~= ExperienceInviteId then {
 					notification = {
@@ -52,16 +52,16 @@ return function() --[[ Line: 47 ]]
 			end)
 		end,
 		currentExperienceInviteUpdated = CurrentExperienceInviteUpdated,
-		currentExperienceInviteDismissed = function(NotificationId) --[[ Line: 91 ]]
+		currentExperienceInviteDismissed = function(NotificationId)
 			-- upvalues: SessionScopedSignal2_1 (copy)
-			SessionScopedSignal2_1(function(p1) --[[ Line: 92 ]]
+			SessionScopedSignal2_1(function(p1)
 				-- upvalues: NotificationId (copy)
 				return if p1 and p1.notification.notificationId == NotificationId then nil else p1
 			end)
 		end,
 		getExperienceInviteSucceeded = CurrentExperienceInviteUpdated,
 		voteForExperienceInviteSucceeded = CurrentExperienceInviteUpdated,
-		reset = function() --[[ Line: 100 ]]
+		reset = function()
 			-- upvalues: SessionScopedSignal2 (copy), SessionScopedSignal2_1 (copy)
 			SessionScopedSignal2(false)
 			SessionScopedSignal2_1(nil)

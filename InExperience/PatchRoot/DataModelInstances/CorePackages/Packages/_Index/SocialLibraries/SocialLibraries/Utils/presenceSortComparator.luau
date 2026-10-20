@@ -6,7 +6,7 @@ local config = {
 	[UserModel.PresenceType.OFFLINE] = 0
 }
 
-return function(p1, p2): boolean --[[ Line: 13 ]]
+return function(p1, p2): boolean
 	-- upvalues: config (copy)
 	local P0 = p1 or {}
 	local P1 = p2 or {}

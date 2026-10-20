@@ -1,10 +1,10 @@
 ﻿local VRService = require(script:FindFirstAncestor("AppCommonLib").Parent.MockableProxyServices).VRService
 local IsSpatialModule = require(script.Parent.isSpatial)
 
-return function(Callback: (any) -> (), p1) --[[ Line: 8 | Named "connectToIsSpatialChanged" ]]
+return function(Callback: (any) -> (), p1)
 	-- upvalues: IsSpatialModule (copy), VRService (copy)
 	local IsSpatialModule1 = IsSpatialModule()
-	local Connection = VRService:GetPropertyChangedSignal("VREnabled"):Connect(function() --[[ Line: 14 ]]
+	local Connection = VRService:GetPropertyChangedSignal("VREnabled"):Connect(function()
 		-- upvalues: IsSpatialModule (upval), IsSpatialModule1 (ref), Callback (copy)
 		local IsSpatialModule2 = IsSpatialModule()
 		

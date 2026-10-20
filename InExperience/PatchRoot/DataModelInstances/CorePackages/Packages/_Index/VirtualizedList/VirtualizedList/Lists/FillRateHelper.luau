@@ -5,7 +5,7 @@ local Object = LuauPolyfillModule.Object
 local Module = {}
 Module.__index = Module
 
-function Module.new() --[[ Line: 34 ]]
+function Module.new()
 	-- upvalues: Module (copy)
 	local self = setmetatable({}, Module)
 	self.any_blank_count = 0
@@ -28,7 +28,7 @@ local SampleRate = nil
 local FillRateHelper = {}
 FillRateHelper.__index = FillRateHelper
 
-function FillRateHelper.new(_getFrameMetrics) --[[ Line: 98 ]]
+function FillRateHelper.new(_getFrameMetrics)
 	-- upvalues: FillRateHelper (copy), Module (copy), SampleRate (ref)
 	local self = setmetatable({}, FillRateHelper)
 	self._anyBlankStartTime = nil
@@ -48,7 +48,7 @@ function FillRateHelper.new(_getFrameMetrics) --[[ Line: 98 ]]
 	return self
 end
 
-function FillRateHelper.addListener(p1) --[[ Line: 115 ]]
+function FillRateHelper.addListener(p1)
 	-- upvalues: SampleRate (ref), Console (copy), FilterResult (ref), Array (copy)
 	if SampleRate == nil then
 		Console.warn("Call `FillRateHelper.setSampleRate` before `addListener`.")
@@ -56,9 +56,9 @@ function FillRateHelper.addListener(p1) --[[ Line: 115 ]]
 	table.insert(FilterResult, p1)
 	
 	return {
-		remove = function() --[[ Line: 121 ]]
+		remove = function()
 			-- upvalues: FilterResult (upval), Array (upval), p1 (copy)
-			FilterResult = Array.filter(FilterResult, function(p2): boolean --[[ Line: 122 ]]
+			FilterResult = Array.filter(FilterResult, function(p2): boolean
 				-- upvalues: p1 (upval)
 				return p1 ~= p2
 			end)
@@ -66,23 +66,23 @@ function FillRateHelper.addListener(p1) --[[ Line: 115 ]]
 	}
 end
 
-function FillRateHelper.setSampleRate(Value) --[[ Line: 129 ]]
+function FillRateHelper.setSampleRate(Value)
 	-- upvalues: SampleRate (ref)
 	SampleRate = Value
 end
 
-function FillRateHelper.setMinSampleCount(Value) --[[ Line: 133 ]]
+function FillRateHelper.setMinSampleCount(Value)
 	-- upvalues: MinSampleCount (ref)
 	MinSampleCount = Value
 end
 
-function FillRateHelper:activate() --[[ Line: 137 ]]
+function FillRateHelper:activate()
 	if self._enabled and self._samplesStartTime == nil then
 		self._samplesStartTime = os.clock()
 	end
 end
 
-function FillRateHelper:deactivateAndFlush() --[[ Line: 146 ]]
+function FillRateHelper:deactivateAndFlush()
 	-- upvalues: MinSampleCount (ref), Object (copy), Array (copy), FilterResult (ref)
 	if not self._enabled then return end
 	local SamplesStartTime = self._samplesStartTime
@@ -94,7 +94,7 @@ function FillRateHelper:deactivateAndFlush() --[[ Line: 146 ]]
 		return
 	else
 		local AssignResult = Object.assign({}, self._info, { total_time_spent = os.clock() - SamplesStartTime })
-		Array.forEach(FilterResult, function(Callback) --[[ Line: 179 ]]
+		Array.forEach(FilterResult, function(Callback)
 			-- upvalues: AssignResult (copy)
 			return Callback(AssignResult)
 		end)
@@ -102,7 +102,7 @@ function FillRateHelper:deactivateAndFlush() --[[ Line: 146 ]]
 	end
 end
 
-function FillRateHelper:computeBlankness(p1, p2, p3): number --[[ Line: 185 ]]
+function FillRateHelper:computeBlankness(p1, p2, p3): number
 	if not self._enabled or p1.getItemCount(p1.data) == 0 or self._samplesStartTime == nil then
 		return 0
 	end
@@ -175,11 +175,11 @@ function FillRateHelper:computeBlankness(p1, p2, p3): number --[[ Line: 185 ]]
 	return RoundedRatio
 end
 
-function FillRateHelper:enabled() --[[ Line: 271 ]]
+function FillRateHelper:enabled()
 	return self._enabled
 end
 
-function FillRateHelper:_resetData() --[[ Line: 275 ]]
+function FillRateHelper:_resetData()
 	-- upvalues: Module (copy)
 	self._anyBlankStartTime = nil
 	self._info = Module.new()

@@ -5,7 +5,7 @@ local ConstantsModule = require(script.Parent.Constants)
 local TryMilestoneOperationModule = require(script.Parent.tryMilestoneOperation)
 local FIntLoadingScreenMilestonesSampleRateModule = require(ProgressLoading.Flags.FIntLoadingScreenMilestonesSampleRate)
 
-local function getAddedWait(p1) --[[ Line: 31 ]]
+local function getAddedWait(p1)
 	-- upvalues: ConstantsModule (copy)
 	local Event = p1.getEvents(false)[ConstantsModule.EVENT_NAME]
 	local DeltaMs = nil
@@ -25,7 +25,7 @@ local function getAddedWait(p1) --[[ Line: 31 ]]
 	return if DeltaMs and DeltaMs1 and DeltaMs <= DeltaMs1 then DeltaMs1 - DeltaMs else nil
 end
 
-local function getHoldGateHit(p2) --[[ Line: 48 ]]
+local function getHoldGateHit(p2)
 	-- upvalues: ConstantsModule (copy)
 	local Event = p2.getEvents(false)[ConstantsModule.EVENT_NAME]
 	local DeltaMs = nil
@@ -46,9 +46,9 @@ local function getHoldGateHit(p2) --[[ Line: 48 ]]
 end
 
 return {
-	startMilestoneTracker = function(p3, p4) --[[ Line: 12 ]]
+	startMilestoneTracker = function(p3, p4)
 		-- upvalues: TryMilestoneOperationModule (copy), ConstantsModule (copy)
-		return TryMilestoneOperationModule(function() --[[ Line: 13 ]]
+		return TryMilestoneOperationModule(function()
 			-- upvalues: p3 (copy), ConstantsModule (upval), p4 (copy)
 			p3.trackStart(ConstantsModule.EVENT_NAME)
 			p3.updateMetadata(ConstantsModule.EVENT_NAME, {
@@ -58,19 +58,19 @@ return {
 			})
 		end)
 	end,
-	recordMilestone = function(p3, p4, Id) --[[ Line: 23 ]]
+	recordMilestone = function(p3, p4, Id)
 		-- upvalues: TryMilestoneOperationModule (copy), ConstantsModule (copy)
-		return TryMilestoneOperationModule(function() --[[ Line: 24 ]]
+		return TryMilestoneOperationModule(function()
 			-- upvalues: p3 (copy), ConstantsModule (upval), p4 (copy), Id (copy)
 			p3.trackMilestone(ConstantsModule.EVENT_NAME, p4, if Id then { id = Id } else nil)
 		end)
 	end,
-	completeMilestoneTracker = function(p3, p4, DismissSource, p5) --[[ Line: 69 ]]
+	completeMilestoneTracker = function(p3, p4, DismissSource, p5)
 		-- upvalues: TryMilestoneOperationModule (copy), getAddedWait (copy), getHoldGateHit (copy), ConstantsModule (copy), FIntLoadingScreenMilestonesSampleRateModule (copy)
 		local v1 = nil
 		local v2 = nil
 		
-		return TryMilestoneOperationModule(function() --[[ Line: 77 ]]
+		return TryMilestoneOperationModule(function()
 			-- upvalues: v1 (ref), p4 (copy), getAddedWait (upval), p3 (copy), v2 (ref), p5 (copy), getHoldGateHit (upval), DismissSource (copy), ConstantsModule (upval), FIntLoadingScreenMilestonesSampleRateModule (upval)
 			v1 = if p4 then getAddedWait(p3) else nil
 			v2 = if p5 then getHoldGateHit(p3) else nil
@@ -83,9 +83,9 @@ return {
 			})
 		end), v1, v2
 	end,
-	discardMilestoneTracker = function(p3) --[[ Line: 91 ]]
+	discardMilestoneTracker = function(p3)
 		-- upvalues: TryMilestoneOperationModule (copy), ConstantsModule (copy)
-		return TryMilestoneOperationModule(function() --[[ Line: 92 ]]
+		return TryMilestoneOperationModule(function()
 			-- upvalues: p3 (copy), ConstantsModule (upval)
 			p3.destroyEvent(ConstantsModule.EVENT_NAME)
 		end)

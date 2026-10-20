@@ -1,7 +1,7 @@
-﻿return function(...) --[[ Line: 4 | Named "composeRefs" ]]
+﻿return function(...)
 	local list = { ... }
 	
-	return function(Current) --[[ Line: 6 ]]
+	return function(Current)
 		-- upvalues: list (copy)
 		for _, value in list do
 			if type(value) == "function" then

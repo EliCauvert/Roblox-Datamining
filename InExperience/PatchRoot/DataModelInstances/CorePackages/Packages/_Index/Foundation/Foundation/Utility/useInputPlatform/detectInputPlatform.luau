@@ -2,9 +2,9 @@
 local UserInputService = require(Foundation.Utility.Wrappers.Services).UserInputService
 local InputPlatformModule = require(Foundation.Enums.InputPlatform)
 
-local function _(): boolean --[[ Line: 22 | Named "hasConnectedGamepad" ]]
+local function _(): boolean
 	-- upvalues: UserInputService (copy)
-	local Success, Result = pcall(function() --[[ Line: 23 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: UserInputService (upval)
 		return UserInputService:GetConnectedGamepads()
 	end)
@@ -20,9 +20,9 @@ local list = {
 	Enum.KeyCode.DPadUp
 }
 
-local function getPlatformFromImage(KeyCode) --[[ Line: 39 ]]
+local function getPlatformFromImage(KeyCode)
 	-- upvalues: UserInputService (copy), InputPlatformModule (copy)
-	local Success, Result = pcall(function() --[[ Line: 40 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: UserInputService (upval), KeyCode (copy)
 		return UserInputService:GetImageForKeyCode(KeyCode)
 	end)
@@ -36,7 +36,7 @@ local function getPlatformFromImage(KeyCode) --[[ Line: 39 ]]
 	end
 end
 
-local _ = function() --[[ Line: 62 | Named "getPlatformFromGamepadAssets" ]]
+local _ = function()
 	-- upvalues: list (copy), getPlatformFromImage (copy)
 	local PlatformFromImage = nil
 	for _, value in list do
@@ -49,9 +49,9 @@ local _ = function() --[[ Line: 62 | Named "getPlatformFromGamepadAssets" ]]
 	return nil
 end
 
-local _ = function(): boolean --[[ Line: 73 | Named "isPlaystation" ]]
+local _ = function(): boolean
 	-- upvalues: UserInputService (copy)
-	local Success, Result = pcall(function() --[[ Line: 74 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: UserInputService (upval)
 		return UserInputService:GetStringForKeyCode(Enum.KeyCode.ButtonA)
 	end)
@@ -59,9 +59,9 @@ local _ = function(): boolean --[[ Line: 73 | Named "isPlaystation" ]]
 	return Success and Result == "ButtonCross"
 end
 
-return function() --[[ Line: 80 | Named "detectInputPlatform" ]]
+return function()
 	-- upvalues: UserInputService (copy), InputPlatformModule (copy), list (copy), getPlatformFromImage (copy)
-	local Success, Result = pcall(function() --[[ Line: 23 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: UserInputService (upval)
 		return UserInputService:GetConnectedGamepads()
 	end)
@@ -86,7 +86,7 @@ return function() --[[ Line: 80 | Named "detectInputPlatform" ]]
 	if v1 ~= nil then
 		return v1
 	end
-	local Success1, Result1 = pcall(function() --[[ Line: 74 ]]
+	local Success1, Result1 = pcall(function()
 		-- upvalues: UserInputService (upval)
 		return UserInputService:GetStringForKeyCode(Enum.KeyCode.ButtonA)
 	end)

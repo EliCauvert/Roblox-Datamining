@@ -7,7 +7,7 @@ local _ = require(SduiCoreSystem.ClientBinding.SduiClientBindingTypes)
 local ProtoVariableMapperModule = require(SduiCoreSystem.ClientBinding.ProtoVariableMapper)
 local DefaultHydrationIdPathsModule = require(SduiCoreSystem.ClientBinding.defaultHydrationIdPaths)
 
-return function(p1, List) --[[ Line: 54 | Named "buildDataBindingSourcesForTemplate" ]]
+return function(p1, List)
 	-- upvalues: ProtoVariableMapperModule (copy), SplitDottedPathModule (copy), TryGetPathFromDataModule (copy), DefaultHydrationIdPathsModule (copy)
 	local t = {}
 	

@@ -22,28 +22,28 @@ local config1 = {
 }
 
 return {
-	makeStepField = function(p1) --[[ Line: 82 ]]
+	makeStepField = function(p1)
 		-- upvalues: config (copy)
 		local Entry = config[p1]
 		
 		return if Entry == nil then {} else { step = Entry }
 	end,
-	makeStepFieldFromState = function(p1) --[[ Line: 92 ]]
+	makeStepFieldFromState = function(p1)
 		-- upvalues: config1 (copy)
 		local Entry = if p1 == nil then nil else config1[p1]
 		
 		return if Entry == nil then {} else { step = Entry }
 	end,
-	makeToolField = function(p1) --[[ Line: 101 ]]
+	makeToolField = function(p1)
 		return if p1 == nil or p1.kind == nil then {} else { tool = p1.kind }
 	end,
-	makeToolFieldFromKind = function(Tool) --[[ Line: 110 ]]
+	makeToolFieldFromKind = function(Tool)
 		return if Tool == nil then {} else { tool = Tool }
 	end,
-	makeCreationBaseFields = function(CreationSessionId) --[[ Line: 124 ]]
+	makeCreationBaseFields = function(CreationSessionId)
 		return if CreationSessionId == nil then {} else { creationSessionId = CreationSessionId }
 	end,
-	makeVoiceEventFields = function(List) --[[ Line: 134 ]]
+	makeVoiceEventFields = function(List)
 		-- upvalues: SessionManager (copy), FunnelEventNames (copy)
 		local config = { tool = "voice" }
 		local SessionId = SessionManager.getSessionId(FunnelEventNames.FunnelTypes.CreationFlow)
@@ -70,7 +70,7 @@ return {
 		end
 		return config
 	end,
-	makeTextOverlayEventFields = function(List) --[[ Line: 151 ]]
+	makeTextOverlayEventFields = function(List)
 		-- upvalues: SessionManager (copy), FunnelEventNames (copy)
 		local config = { tool = "text" }
 		local SessionId = SessionManager.getSessionId(FunnelEventNames.FunnelTypes.CreationFlow)
@@ -97,7 +97,7 @@ return {
 		end
 		return config
 	end,
-	makeTextOverlayPublishSummaryFields = function(p1) --[[ Line: 174 ]]
+	makeTextOverlayPublishSummaryFields = function(p1)
 		if p1 == nil then
 			return {}
 		end
@@ -130,7 +130,7 @@ return {
 		end
 		return if next(t) == nil then {} else t
 	end,
-	makeVoicePublishSummaryFields = function(p1, p2: number, p3: number) --[[ Line: 213 ]]
+	makeVoicePublishSummaryFields = function(p1, p2: number, p3: number)
 		if p1 == nil then
 			return {}
 		end
@@ -154,7 +154,7 @@ return {
 		end
 		return t
 	end,
-	makeCaptureDescriptorFields = function(Capture) --[[ Line: 263 ]]
+	makeCaptureDescriptorFields = function(Capture)
 		local CaptureType = Capture.CaptureType
 		
 		return {
@@ -164,17 +164,17 @@ return {
 			universeId = tostring(Capture.SourceUniverseId)
 		}
 	end,
-	makeGeneratedTextOutcomeFields = function(p1, p2, p3, p4) --[[ Line: 293 ]]
+	makeGeneratedTextOutcomeFields = function(p1, p2, p3, p4)
 		-- upvalues: GetFFlagEnableMomentTextGenerationFunction (copy)
 		return if GetFFlagEnableMomentTextGenerationFunction() then {
 			generatedDescriptionOutcome = if p1 == nil then "none" elseif p2 == p1 then "verbatim" elseif p2 == nil or p2 == "" then "discarded" else "edited",
 			generatedSummaryOutcome = if p3 == nil then "none" elseif p4 == p3 then "verbatim" elseif p4 == nil or p4 == "" then "discarded" else "edited"
 		} else {}
 	end,
-	classifyGeneratedTextOutcome = function(p1, p2): string --[[ Line: 276 ]]
+	classifyGeneratedTextOutcome = function(p1, p2): string
 		return if p1 == nil then "none" elseif p2 == p1 then "verbatim" elseif p2 == nil or p2 == "" then "discarded" else "edited"
 	end,
-	enumName = function(p1) --[[ Line: 245 ]]
+	enumName = function(p1)
 		return if typeof(p1) == "EnumItem" then p1.Name elseif p1 == nil then nil else tostring(p1)
 	end
 }

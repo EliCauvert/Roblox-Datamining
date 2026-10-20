@@ -13,7 +13,7 @@ local FFlagAXSduiFeedPublishesBreakpoint = AvatarExperienceFlagsModule.FFlagAXSd
 local FFlagAXMarketplaceBreakpointMismatchCounter = AvatarExperienceFlagsModule.FFlagAXMarketplaceBreakpointMismatchCounter
 local FFlagAXSduiFeedMaintainScrollOnSeeAll = AvatarExperienceFlagsModule.FFlagAXSduiFeedMaintainScrollOnSeeAll
 
-return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 37 | Named "CatalogSduiFeedEntryPoint" ]]
+return ReactModule.forwardRef(function(Frame, Ref)
 	-- upvalues: FFlagAXMarketplaceLoadingSkeleton (copy), ReactModule (copy), MarketplaceFeedSkeletonModule (copy), CatalogSduiEntryPointModule (copy), GetCatalogPageIdentifierModule (copy), FFlagAXSduiCatalogScrollImpressions (copy), FFlagAXSduiFeedPublishesBreakpoint (copy), FFlagAXMarketplaceBreakpointMismatchCounter (copy), CATALOGRESULTSHORIZONTALMARGIN (copy), FFlagAXSduiFeedMaintainScrollOnSeeAll (copy)
 	return ReactModule.createElement(CatalogSduiEntryPointModule, {
 		context = Frame.context,

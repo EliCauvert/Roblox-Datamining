@@ -15,7 +15,7 @@ return require(Parent.Rodux).createReducer({
 		secondaryAlias = RBXTeamCommandModule.alias[2]
 	}
 }, {
-	[require(ExpChatShared.Actions.CommandAliasChanged).name] = function(p1, p2) --[[ Line: 25 ]]
+	[require(ExpChatShared.Actions.CommandAliasChanged).name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
 		return Dictionary.join(p1, {
 			[p2.name] = {

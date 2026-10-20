@@ -8,7 +8,7 @@ local EnableSquadsUnifyCoplayMultiInvitePartyCreationDev = game:DefineFastFlag("
 local EnableSquadsUnifyCoplayExperimentationDev = game:DefineFastFlag("EnableSquadsUnifyCoplayExperimentation_dev", false)
 local GetFFlagIsSquadEnabledFunction = require(Parent.SharedFlags).GetFFlagIsSquadEnabled
 
-local function _(p1) --[[ Line: 20 | Named "getIsUserInTreatment" ]]
+local function _(p1)
 	-- upvalues: ExperimentCacheManager (copy), SquadsUnifyCoplayExpLayer (copy)
 	local LayerVariables = ExperimentCacheManager.default:getLayerVariables(SquadsUnifyCoplayExpLayer)
 	
@@ -16,7 +16,7 @@ local function _(p1) --[[ Line: 20 | Named "getIsUserInTreatment" ]]
 end
 
 return {
-	getOneOnOnePartyCreationEnabled = function() --[[ Line: 30 ]]
+	getOneOnOnePartyCreationEnabled = function()
 		-- upvalues: EnableSquadsUnifyCoplayOneOnOnePartyCreationDev (copy), EnableSquadsUnifyCoplayExperimentationDev (copy), SquadsUnifyCoplayOneOnOnePartyCreationVariant (copy), ExperimentCacheManager (copy), SquadsUnifyCoplayExpLayer (copy), GetFFlagIsSquadEnabledFunction (copy)
 		local EnableSquadsUnifyCoplayOneOnOnePartyCreationDev1 = EnableSquadsUnifyCoplayOneOnOnePartyCreationDev
 		
@@ -30,7 +30,7 @@ return {
 		end
 		return EnableSquadsUnifyCoplayOneOnOnePartyCreationDev1
 	end,
-	getMultiInvitePartyCreationEnabled = function() --[[ Line: 39 ]]
+	getMultiInvitePartyCreationEnabled = function()
 		-- upvalues: EnableSquadsUnifyCoplayMultiInvitePartyCreationDev (copy), EnableSquadsUnifyCoplayExperimentationDev (copy), SquadsUnifyCoplayMultiInvitePartyCreationVariant (copy), ExperimentCacheManager (copy), SquadsUnifyCoplayExpLayer (copy), GetFFlagIsSquadEnabledFunction (copy)
 		local EnableSquadsUnifyCoplayMultiInvitePartyCreationDev1 = EnableSquadsUnifyCoplayMultiInvitePartyCreationDev
 		
@@ -44,7 +44,7 @@ return {
 		end
 		return EnableSquadsUnifyCoplayMultiInvitePartyCreationDev1
 	end,
-	logExposure = function() --[[ Line: 48 ]]
+	logExposure = function()
 		-- upvalues: EnableSquadsUnifyCoplayExperimentationDev (copy), ExperimentCacheManager (copy), SquadsUnifyCoplayExpLayer (copy)
 		if EnableSquadsUnifyCoplayExperimentationDev and ExperimentCacheManager.default:getLayerVariables(SquadsUnifyCoplayExpLayer) ~= nil then
 			ExperimentCacheManager.default:logLayerExposure(SquadsUnifyCoplayExpLayer)

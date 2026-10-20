@@ -2,22 +2,22 @@
 local CryoModule = require(MediaPlayback.Parent.Cryo)
 local SignalsModule = require(MediaPlayback.Parent.Signals)
 
-return function() --[[ Line: 19 | Named "createConsumerCounterStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy), CryoModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal({})
 	
 	return {
-		subscribe = function(p1) --[[ Line: 22 ]]
+		subscribe = function(p1)
 			-- upvalues: Signal2 (copy), CryoModule (upval)
-			Signal2(function(p2) --[[ Line: 23 ]]
+			Signal2(function(p2)
 				-- upvalues: p1 (copy), CryoModule (upval)
 				return CryoModule.Dictionary.join(p2, { [p1] = (p2[p1] or 0) + 1 })
 			end)
 		end,
-		unsubscribe = function(p1) --[[ Line: 31 ]]
+		unsubscribe = function(p1)
 			-- upvalues: Signal2 (copy), CryoModule (upval)
 			local Largest = nil
-			Signal2(function(p2) --[[ Line: 34 ]]
+			Signal2(function(p2)
 				-- upvalues: p1 (copy), Largest (ref), CryoModule (upval)
 				Largest = math.max(0, (p2[p1] or 0) - 1)
 				

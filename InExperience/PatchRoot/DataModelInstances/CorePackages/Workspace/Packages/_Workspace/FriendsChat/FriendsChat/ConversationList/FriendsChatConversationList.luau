@@ -68,27 +68,27 @@ local config1 = {
 	SomethingWentWrong = "CommonUI.Messages.Response.SomethingWentWrong"
 }
 
-local function _(p1, Transparency) --[[ Line: 117 | Named "getColorStyle" ]]
+local function _(p1, Transparency)
 	return { Color3 = p1, Transparency = Transparency }
 end
 
-local _ = function(p1, p2) --[[ Line: 124 | Named "getTransparencyOrBindingValue" ]]
+local _ = function(p1, p2)
 	-- upvalues: ReactIsModule (copy)
-	return if ReactIsModule.isBinding(p2) then p2:map(function(p3): number --[[ Line: 126 ]]
+	return if ReactIsModule.isBinding(p2) then p2:map(function(p3): number
 		-- upvalues: p1 (copy)
 		return p1 + p3 * (1 - p1)
 	end) else p2
 end
 
-local _ = function(p1, p2) --[[ Line: 134 | Named "getTextTransparency" ]]
+local _ = function(p1, p2)
 	-- upvalues: ReactIsModule (copy)
-	return if ReactIsModule.isBinding(p1) then p1:map(function(p3): number --[[ Line: 136 ]]
+	return if ReactIsModule.isBinding(p1) then p1:map(function(p3): number
 		-- upvalues: p2 (copy)
 		return p2 + p3 * (1 - p2)
 	end) else p2
 end
 
-local function mergeTransparency(Transparency, List) --[[ Line: 144 ]]
+local function mergeTransparency(Transparency, List)
 	-- upvalues: ReactIsModule (copy), ReactModule (copy)
 	local List1 = {}
 	local Total: number = Transparency
@@ -100,7 +100,7 @@ local function mergeTransparency(Transparency, List) --[[ Line: 144 ]]
 			Total += (value or 0) * (1 - Total)
 		end
 	end
-	return if #List1 == 0 then Total else ReactModule.joinBindings(List1):map(function(List): number --[[ Line: 160 ]]
+	return if #List1 == 0 then Total else ReactModule.joinBindings(List1):map(function(List): number
 		-- upvalues: Total (ref)
 		local Total1: number = Total
 		
@@ -111,21 +111,21 @@ local function mergeTransparency(Transparency, List) --[[ Line: 144 ]]
 	end)
 end
 
-local _ = function(p1): string --[[ Line: 169 | Named "normalizeSearchText" ]]
+local _ = function(p1): string
 	return string.lower(p1 or "")
 end
 
-local _ = function(p1, Pattern): boolean --[[ Line: 173 | Named "containsSearchText" ]]
+local _ = function(p1, Pattern): boolean
 	return Pattern == "" or string.find(string.lower(p1 or ""), Pattern, 1, true) ~= nil
 end
 
-return ReactModule.memo(function(Frame) --[[ Line: 180 | Named "FriendsChatConversationList" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseTokensFunction (copy), FFlagFriendsChatScaleConversationRowHeightModule (copy), UseTextSizeOffsetFunction (copy), UseChatPlatformModule (copy), UseChatWindowSettingsModule (copy), ReactModule (copy), UseLocalizationFunction (copy), config1 (copy), UseInterpolatedClientSettingsModule (copy), ReactIsModule (copy), mergeTransparency (copy), GetConversationRowHeightModule (copy), UseChatInputBarSettingsModule (copy), LayoutConstantsModule (copy), FFlagExpChatTabShortcutNav (copy), FoundationModule (copy), UseFocusConversationListModule (copy), UseConversationListFunction (copy), UseConversationListPaginationModule (copy), FFlagFriendsChatServerSideConversationSearchModule (copy), GetConversationTitleFunction (copy), UseConversationSearchModule (copy), FFlagAppChatSearchSessionTelemetryModule (copy), UseChatSearchResultsTelemetryModule (copy), ResolveListStateModule (copy), FFlagFriendsChatLandingTelemetryFieldsModule (copy), GetLandingEmptyStateTypeModule (copy), UseChatSearchSessionModule (copy), UseFriendsChatLandingTelemetryModule (copy), SearchIntroducedConversationIdsModule (copy), TextChatService (copy), NoFFlagAppChatUseUltimateListConversationListModule (copy), ReactOtterModule (copy), FriendsChatConversationListScrollbarIdleHideMsRatio (copy), config (copy), FFlagFriendsChatConversationListFocusNav (copy), ConversationRow (copy), PromiseModule (copy), FFlagAppChatUseUltimateListConversationListModule (copy), ConversationListUltimate (copy), BidirectionalFlatList (copy), FriendsChatConversationListScrollbarThickness (copy), FriendsChatConversationListWindowSize (copy), FriendsChatConversationListInitialNumToRender (copy), FriendsChatConversationListPaginationThresholdRows (copy), FriendsChatConversationListAutoscrollToTopThreshold (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), Text (copy), IconButton (copy), InputSize (copy), ButtonVariant (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseTextSizeOffsetResult = if FFlagFriendsChatScaleConversationRowHeightModule then UseTextSizeOffsetFunction() else nil
 	local GetTransparencyStoreFunction = UseChatPlatformModule().getTransparencyStore
 	local UseChatWindowSettingsModuleResult = UseChatWindowSettingsModule()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 188 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseChatWindowSettingsModuleResult (copy)
 		return {
 			BackgroundColor3 = UseChatWindowSettingsModuleResult.ChatWindowBackgroundColor3,
@@ -144,7 +144,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 180 | Named "FriendsChatConve
 		MapResult = 0
 	elseif ReactIsModule.isBinding(TransparencyValue) then
 		local v1 = 0
-		MapResult = TransparencyValue:map(function(p1): number --[[ Line: 126 ]]
+		MapResult = TransparencyValue:map(function(p1): number
 			-- upvalues: v1 (copy)
 			return v1 + p1 * (1 - v1)
 		end)
@@ -168,7 +168,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 180 | Named "FriendsChatConve
 	local UseConversationListPaginationModuleResult = UseConversationListPaginationModule(IsVisible, UseConversationListResult.listStatus)
 	local ListStatus = UseConversationListResult.listStatus
 	local Items = UseConversationListResult.items
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 246 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: FFlagFriendsChatServerSideConversationSearchModule (upval), Items (copy), UseStateResult (copy), GetConversationTitleFunction (upval)
 		if FFlagFriendsChatServerSideConversationSearchModule then
 			return Items
@@ -230,7 +230,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 180 | Named "FriendsChatConve
 		noFriends = UseLocalizationResult.NoFriends
 	}
 	local LoadingConversations = if ResolveListStateModuleResult.isInitialLoading then config2.loadingConversations elseif ResolveListStateModuleResult.shouldShowBlockingError then config2.loadConversationsError elseif ResolveListStateModuleResult.shouldShowEmptyState then if ResolveListStateModuleResult.hasNoFriends then config2.noFriends else config2.noLoadedConversationsFound else nil
-	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 337 ]]
+	local UseResult = ReactModule.useCallback(function(p1)
 		-- upvalues: Frame (copy), FFlagFriendsChatServerSideConversationSearchModule (upval), SearchIntroducedConversationIdsModule (upval)
 		if Frame.onConversationActivated == nil or p1 == nil or p1.id == nil then return end
 		if FFlagFriendsChatServerSideConversationSearchModule then
@@ -238,7 +238,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 180 | Named "FriendsChatConve
 		end
 		Frame.onConversationActivated(p1.id)
 	end, { Frame.onConversationActivated })
-	local UseResult1 = ReactModule.useCallback(function(p1) --[[ Line: 350 ]]
+	local UseResult1 = ReactModule.useCallback(function(p1)
 		-- upvalues: TextChatService (upval), Frame (copy)
 		local ChatWindowConfiguration = TextChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 		
@@ -246,7 +246,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 180 | Named "FriendsChatConve
 			Frame.onAbsoluteSizeChanged(p1, ChatWindowConfiguration)
 		end
 	end, { Frame.onAbsoluteSizeChanged })
-	local UseResult2 = ReactModule.useCallback(function(p1) --[[ Line: 357 ]]
+	local UseResult2 = ReactModule.useCallback(function(p1)
 		-- upvalues: TextChatService (upval), Frame (copy)
 		local ChatWindowConfiguration = TextChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 		
@@ -254,7 +254,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 180 | Named "FriendsChatConve
 			Frame.onAbsolutePositionChanged(p1, ChatWindowConfiguration)
 		end
 	end, { Frame.onAbsolutePositionChanged })
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 364 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseFriendsChatLandingTelemetryModuleResult (copy), GetTransparencyStoreFunction (copy)
 		UseFriendsChatLandingTelemetryModuleResult.fireSearchActivatedEvent()
 		GetTransparencyStoreFunction(false).setTextboxFocus()
@@ -262,13 +262,13 @@ return ReactModule.memo(function(Frame) --[[ Line: 180 | Named "FriendsChatConve
 		GetTransparencyStoreFunction,
 		UseFriendsChatLandingTelemetryModuleResult.fireSearchActivatedEvent
 	})
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 369 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: GetTransparencyStoreFunction (copy)
 		GetTransparencyStoreFunction(false).clearTextboxFocus()
 	end, { GetTransparencyStoreFunction })
-	ReactModule.useEffect(function() --[[ Line: 373 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: GetTransparencyStoreFunction (copy)
-		return function() --[[ Line: 374 ]]
+		return function()
 			-- upvalues: GetTransparencyStoreFunction (upval)
 			GetTransparencyStoreFunction(false).clearTextboxFocus()
 		end
@@ -280,22 +280,22 @@ return ReactModule.memo(function(Frame) --[[ Line: 180 | Named "FriendsChatConve
 		local UseRefResult1 = ReactModule.useRef(nil)
 		local UseAnimatedBindingResult2 = nil
 		v4, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1)
-		Callback = ReactModule.useCallback(function() --[[ Line: 389 ]]
+		Callback = ReactModule.useCallback(function()
 			-- upvalues: UseRefResult1 (copy), UseAnimatedBindingResult2 (ref), ReactOtterModule (upval), FriendsChatConversationListScrollbarIdleHideMsRatio (upval), config (upval)
 			if UseRefResult1.current ~= nil then
 				pcall(task.cancel, UseRefResult1.current)
 				UseRefResult1.current = nil
 			end
 			UseAnimatedBindingResult2(ReactOtterModule.instant(0))
-			UseRefResult1.current = task.delay(FriendsChatConversationListScrollbarIdleHideMsRatio, function() --[[ Line: 397 ]]
+			UseRefResult1.current = task.delay(FriendsChatConversationListScrollbarIdleHideMsRatio, function()
 				-- upvalues: UseRefResult1 (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval)
 				UseRefResult1.current = nil
 				UseAnimatedBindingResult2((ReactOtterModule.spring(1, config)))
 			end)
 		end, { UseAnimatedBindingResult2 })
-		ReactModule.useEffect(function() --[[ Line: 404 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRefResult1 (copy)
-			return function() --[[ Line: 405 ]]
+			return function()
 				-- upvalues: UseRefResult1 (upval)
 				if UseRefResult1.current ~= nil then
 					pcall(task.cancel, UseRefResult1.current)
@@ -304,7 +304,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 180 | Named "FriendsChatConve
 			end
 		end, {})
 	end
-	local UseResult5 = ReactModule.useCallback(function(_) --[[ Line: 415 ]]
+	local UseResult5 = ReactModule.useCallback(function(_)
 		-- upvalues: NoFFlagAppChatUseUltimateListConversationListModule (upval), Callback (ref), GetTransparencyStoreFunction (copy)
 		if NoFFlagAppChatUseUltimateListConversationListModule then
 			Callback()
@@ -315,7 +315,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 180 | Named "FriendsChatConve
 		if NoFFlagAppChatUseUltimateListConversationListModule then Callback else nil
 	})
 	local Text1 = if FFlagFriendsChatConversationListFocusNav and Items1[1] ~= nil then tostring(Items1[1].id) else nil
-	local UseResult6 = ReactModule.useCallback(function(p1) --[[ Line: 436 ]]
+	local UseResult6 = ReactModule.useCallback(function(p1)
 		-- upvalues: ReactModule (upval), ConversationRow (upval), ConversationRowHeightModule (copy), UseResult (copy), UseFriendsChatLandingTelemetryModuleResult (copy), Frame (copy), FFlagFriendsChatConversationListFocusNav (upval), Text1 (ref), UseFocusConversationListModuleResult2 (copy)
 		local Text = tostring(p1.item.id)
 		
@@ -336,7 +336,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 180 | Named "FriendsChatConve
 		UseFriendsChatLandingTelemetryModuleResult.fireConversationImpressionEvent,
 		UseResult, Frame.localUserId, Text1, UseFocusConversationListModuleResult2
 	})
-	local UseResult7 = ReactModule.useCallback(function(_, Index: number) --[[ Line: 465 ]]
+	local UseResult7 = ReactModule.useCallback(function(_, Index: number)
 		-- upvalues: ConversationRowHeightModule (copy)
 		return {
 			length = ConversationRowHeightModule,
@@ -344,11 +344,11 @@ return ReactModule.memo(function(Frame) --[[ Line: 180 | Named "FriendsChatConve
 			index = Index
 		}
 	end, { ConversationRowHeightModule })
-	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 473 ]]
+	local UseResult8 = ReactModule.useCallback(function()
 		-- upvalues: ResolveListStateModuleResult (copy)
 		ResolveListStateModuleResult.loadNext()
 	end, { ResolveListStateModuleResult.loadNext })
-	local UseResult9 = ReactModule.useCallback(function(_, p1) --[[ Line: 477 ]]
+	local UseResult9 = ReactModule.useCallback(function(_, p1)
 		-- upvalues: UseRefResult (copy), UseResult8 (copy)
 		local Current = UseRefResult.current
 		
@@ -356,13 +356,13 @@ return ReactModule.memo(function(Frame) --[[ Line: 180 | Named "FriendsChatConve
 			UseResult8()
 		end
 	end, { UseResult8 })
-	local UseResult10 = ReactModule.useCallback(function() --[[ Line: 484 ]]
+	local UseResult10 = ReactModule.useCallback(function()
 		-- upvalues: UseResult8 (copy), PromiseModule (upval)
 		UseResult8()
 		
 		return PromiseModule.resolve()
 	end, { UseResult8 })
-	local UseResult11 = ReactModule.useCallback(function() --[[ Line: 493 ]]
+	local UseResult11 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2("")
 	end, {})
@@ -375,7 +375,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 180 | Named "FriendsChatConve
 		Name = "chatWindow",
 		Active = true,
 		BackgroundColor3 = BackgroundColor3,
-		BackgroundTransparency = if ReactIsModule.isBinding(TransparencyValue) then TransparencyValue:map(function(p1): number --[[ Line: 126 ]]
+		BackgroundTransparency = if ReactIsModule.isBinding(TransparencyValue) then TransparencyValue:map(function(p1): number
 			-- upvalues: BackgroundTransparency (copy)
 			return BackgroundTransparency + p1 * (1 - BackgroundTransparency)
 		end) else TransparencyValue,
@@ -458,7 +458,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 180 | Named "FriendsChatConve
 						TextYAlignment = Enum.TextYAlignment.Center,
 						[ReactModule.Event.Focused] = UseResult3,
 						[ReactModule.Event.FocusLost] = UseResult4,
-						[ReactModule.Change.Text] = ReactModule.useCallback(function(p1) --[[ Line: 489 ]]
+						[ReactModule.Change.Text] = ReactModule.useCallback(function(p1)
 							-- upvalues: UseStateResult2 (copy)
 							UseStateResult2(p1.Text)
 						end, {})
@@ -534,10 +534,10 @@ return ReactModule.memo(function(Frame) --[[ Line: 180 | Named "FriendsChatConve
 				data = Items1,
 				renderItem = UseResult6,
 				getItemLayout = UseResult7,
-				keyExtractor = function(p1): string --[[ Line: 535 ]]
+				keyExtractor = function(p1): string
 					return (tostring(p1.id))
 				end,
-				compareItemData = function(p1, p2): boolean --[[ Line: 538 ]]
+				compareItemData = function(p1, p2): boolean
 					return p1.id == p2.id
 				end,
 				style = {
@@ -576,7 +576,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 180 | Named "FriendsChatConve
 				Text = LoadingConversations,
 				textStyle = {
 					Color3 = UseTokensResult.Color.Content.Default.Color3,
-					Transparency = if ReactIsModule.isBinding(TextTransparency) then TextTransparency:map(function(p1): number --[[ Line: 136 ]]
+					Transparency = if ReactIsModule.isBinding(TextTransparency) then TextTransparency:map(function(p1): number
 						-- upvalues: Transparency (copy)
 						return Transparency + p1 * (1 - Transparency)
 					end) else Transparency

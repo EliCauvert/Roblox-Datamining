@@ -37,13 +37,13 @@ local v1 = nil
 local Flag1 = false
 local v2 = nil
 
-local function _() --[[ Line: 55 | Named "getConversationListUltimate" ]]
+local function _()
 	-- upvalues: Flag (ref), v1 (ref)
 	if Flag then
 		return v1
 	end
 	Flag = true
-	local Success, Result = pcall(function() --[[ Line: 61 ]]
+	local Success, Result = pcall(function()
 		return require(script.Parent.ConversationListUltimate)
 	end)
 	
@@ -53,13 +53,13 @@ local function _() --[[ Line: 55 | Named "getConversationListUltimate" ]]
 	return v1
 end
 
-local _ = function() --[[ Line: 71 | Named "getConversationListViewRecycler" ]]
+local _ = function()
 	-- upvalues: Flag1 (ref), v2 (ref)
 	if Flag1 then
 		return v2
 	end
 	Flag1 = true
-	local Success, Result = pcall(function() --[[ Line: 77 ]]
+	local Success, Result = pcall(function()
 		return require(script.Parent.ConversationListViewRecycler)
 	end)
 	
@@ -78,42 +78,42 @@ ConversationListWithTopBar.defaultProps = {
 	isPartyQuickStartEnabled = false,
 	isSearchActive = false,
 	itemList = {},
-	navigateToSquadLobby = function() --[[ Line: 91 ]] end,
+	navigateToSquadLobby = function() end,
 	canvasTopPadding = if FFlagAppIaScrollAway then 0 else nil
 }
 
-function ConversationListWithTopBar.getDerivedStateFromProps(DefaultProps) --[[ Line: 100 ]]
+function ConversationListWithTopBar.getDerivedStateFromProps(DefaultProps)
 	-- upvalues: CryoModule (copy), SearchFilterPredicateFunction (copy)
 	local FilterText = DefaultProps.filterText
 	local ItemList = DefaultProps.itemList
 	
 	return if DefaultProps.isSearchActive then { filteredItemList = ItemList } else {
-		filteredItemList = CryoModule.List.filterMap(ItemList, function(p1) --[[ Line: 113 ]]
+		filteredItemList = CryoModule.List.filterMap(ItemList, function(p1)
 			-- upvalues: SearchFilterPredicateFunction (upval), FilterText (copy)
 			return if SearchFilterPredicateFunction(FilterText, p1.title) then p1 else nil
 		end)
 	}
 end
 
-function ConversationListWithTopBar.init(p1) --[[ Line: 125 ]]
+function ConversationListWithTopBar.init(p1)
 	-- upvalues: MemoizeFunction (copy), RoactPaginator (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), CryoModule (copy), HttpService (copy), ChatLandingTelemetryEventsModule (copy)
-	function p1.showErrorToast(ToastTitle) --[[ Line: 126 ]]
+	function p1.showErrorToast(ToastTitle)
 		-- upvalues: p1 (copy)
 		p1.props.navigateToToast({
 			toastProps = { toastContent = { toastTitle = ToastTitle } }
 		})
 	end
 	
-	function p1.reportAnalytics(p2) --[[ Line: 136 ]]
+	function p1.reportAnalytics(p2)
 		-- upvalues: p1 (copy)
 		if not p1.props.conversationsIsFetching and not p1.props.oldestConversationIsFetched then
 			p2:userFetchedOlderConversations(p1.props.localUserId)
 		end
 	end
 	
-	p1.loadNext = MemoizeFunction(function(p2) --[[ Line: 143 ]]
+	p1.loadNext = MemoizeFunction(function(p2)
 		-- upvalues: p1 (copy), RoactPaginator (upval), FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval)
-		return function(p3) --[[ Line: 144 ]]
+		return function(p3)
 			-- upvalues: p1 (upval), RoactPaginator (upval), p2 (copy), FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval)
 			if p1.props[RoactPaginator.loadNext] then
 				p1.reportAnalytics(p2)
@@ -126,21 +126,21 @@ function ConversationListWithTopBar.init(p1) --[[ Line: 125 ]]
 		end
 	end)
 	p1.isFiltered = p1.props.filterText and p1.props.filterText:match("%S")
-	p1.indexOfList = MemoizeFunction(function(p2, Value): number --[[ Line: 157 ]]
+	p1.indexOfList = MemoizeFunction(function(p2, Value): number
 		-- upvalues: CryoModule (upval)
-		local FoundIndex: number? = table.find(CryoModule.List.map(p2, function(p3) --[[ Line: 159 ]]
+		local FoundIndex: number? = table.find(CryoModule.List.map(p2, function(p3)
 			return p3.id
 		end), Value)
 		
 		return if FoundIndex then FoundIndex else 0
 	end)
 	
-	function p1.formatParticipantIds(Participants) --[[ Line: 170 ]]
+	function p1.formatParticipantIds(Participants)
 		-- upvalues: CryoModule (upval), HttpService (upval)
-		local FilterMapResult = CryoModule.List.filterMap(Participants or {}, function(p2) --[[ Line: 171 ]]
+		local FilterMapResult = CryoModule.List.filterMap(Participants or {}, function(p2)
 			return if p2.id then tonumber(p2.id) else nil
 		end)
-		local Success, Result = pcall(function() --[[ Line: 178 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: HttpService (upval), FilterMapResult (copy)
 			return HttpService:JSONEncode(FilterMapResult)
 		end)
@@ -148,7 +148,7 @@ function ConversationListWithTopBar.init(p1) --[[ Line: 125 ]]
 		return if Success then Result else "[]"
 	end
 	
-	function p1.fireClickEvent(p2, p3, OsaImpressionId) --[[ Line: 184 ]]
+	function p1.fireClickEvent(p2, p3, OsaImpressionId)
 		-- upvalues: ChatLandingTelemetryEventsModule (upval), p1 (copy)
 		local Id = p2.id
 		p3.emit(ChatLandingTelemetryEventsModule.ConversationClicked, {
@@ -168,9 +168,9 @@ function ConversationListWithTopBar.init(p1) --[[ Line: 125 ]]
 		})
 	end
 	
-	p1.fireConversationImpressionEvent = MemoizeFunction(function(p2) --[[ Line: 203 ]]
+	p1.fireConversationImpressionEvent = MemoizeFunction(function(p2)
 		-- upvalues: ChatLandingTelemetryEventsModule (upval), p1 (copy)
-		return function(p3) --[[ Line: 204 ]]
+		return function(p3)
 			-- upvalues: p2 (copy), ChatLandingTelemetryEventsModule (upval), p1 (upval)
 			local Id = p3.id
 			p2.emit(ChatLandingTelemetryEventsModule.ConversationCellRendered, {
@@ -190,7 +190,7 @@ function ConversationListWithTopBar.init(p1) --[[ Line: 125 ]]
 		end
 	end)
 	
-	function p1.onActivated(p2) --[[ Line: 224 ]]
+	function p1.onActivated(p2)
 		-- upvalues: FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), p1 (copy)
 		if FFlagAppChatPerfTrackingModule then
 			AppChatPerfTrackerModule.start(AppChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = tostring(p2.id) })
@@ -199,11 +199,11 @@ function ConversationListWithTopBar.init(p1) --[[ Line: 125 ]]
 	end
 end
 
-function ConversationListWithTopBar.render(p1) --[[ Line: 234 ]]
+function ConversationListWithTopBar.render(p1)
 	-- upvalues: WithAnalyticsModule (copy), WithTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), FFlagEnableStickyShortcutBarOnAllPlatforms (copy), PartyPageCarouselExperimentation (copy), ShouldUseFoundationConversationRow (copy), FFlagAppChatConsoleFocusFixesModule (copy), FFlagAppIaScrollAway (copy), FFlagAppChatUseUltimateListConversationListModule1 (copy), FFlagAppChatUseViewRecyclerConversationListModule1 (copy), ConversationListModule (copy), Flag1 (ref), v2 (ref), Flag (ref), v1 (ref), RoactModule (copy), SearchLoadingModule (copy), SearchNoResultsModule (copy)
-	return WithAnalyticsModule(function(p2) --[[ Line: 235 ]]
+	return WithAnalyticsModule(function(p2)
 		-- upvalues: WithTelemetryModule (upval), ChatLandingTelemetryLayerModule (upval), p1 (copy), FFlagEnableStickyShortcutBarOnAllPlatforms (upval), PartyPageCarouselExperimentation (upval), ShouldUseFoundationConversationRow (upval), FFlagAppChatConsoleFocusFixesModule (upval), FFlagAppIaScrollAway (upval), FFlagAppChatUseUltimateListConversationListModule1 (upval), FFlagAppChatUseViewRecyclerConversationListModule1 (upval), ConversationListModule (upval), Flag1 (upval), v2 (upval), Flag (upval), v1 (upval), RoactModule (upval), SearchLoadingModule (upval), SearchNoResultsModule (upval)
-		return WithTelemetryModule(ChatLandingTelemetryLayerModule.Context)(function(p3) --[[ Line: 236 ]]
+		return WithTelemetryModule(ChatLandingTelemetryLayerModule.Context)(function(p3)
 			-- upvalues: p1 (upval), FFlagEnableStickyShortcutBarOnAllPlatforms (upval), p2 (copy), PartyPageCarouselExperimentation (upval), ShouldUseFoundationConversationRow (upval), FFlagAppChatConsoleFocusFixesModule (upval), FFlagAppIaScrollAway (upval), FFlagAppChatUseUltimateListConversationListModule1 (upval), FFlagAppChatUseViewRecyclerConversationListModule1 (upval), ConversationListModule (upval), Flag1 (upval), v2 (upval), Flag (upval), v1 (upval), RoactModule (upval), SearchLoadingModule (upval), SearchNoResultsModule (upval)
 			local IsShortcutBarVisible = if FFlagEnableStickyShortcutBarOnAllPlatforms then p1.props.isShortcutBarVisible else false
 			local config = {
@@ -250,7 +250,7 @@ function ConversationListWithTopBar.render(p1) --[[ Line: 234 ]]
 					v3 = v2
 				else
 					Flag1 = true
-					local Success, Result = pcall(function() --[[ Line: 77 ]]
+					local Success, Result = pcall(function()
 						return require(script.Parent.ConversationListViewRecycler)
 					end)
 					
@@ -269,7 +269,7 @@ function ConversationListWithTopBar.render(p1) --[[ Line: 234 ]]
 					v4 = v1
 				else
 					Flag = true
-					local Success1, Result1 = pcall(function() --[[ Line: 61 ]]
+					local Success1, Result1 = pcall(function()
 						return require(script.Parent.ConversationListUltimate)
 					end)
 					
@@ -296,28 +296,28 @@ function ConversationListWithTopBar.render(p1) --[[ Line: 234 ]]
 	end)
 end
 
-function ConversationListWithTopBar.didMount(p1) --[[ Line: 334 ]]
+function ConversationListWithTopBar.didMount(p1)
 	p1.isMounted = true
 end
 
-function ConversationListWithTopBar.didUpdate(p1, p2) --[[ Line: 338 ]]
+function ConversationListWithTopBar.didUpdate(p1, p2)
 	-- upvalues: FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy)
 	if FFlagAppChatPerfTrackingModule and #p2.itemList < #p1.props.itemList then
 		AppChatPerfTrackerModule.finish(AppChatPerfTrackerModule.Events.PaginationConversationList)
 	end
 end
 
-function ConversationListWithTopBar.willUnmount(p1) --[[ Line: 344 ]]
+function ConversationListWithTopBar.willUnmount(p1)
 	p1.isMounted = false
 end
 
-local function ConversationListWithTopBarFunctional(Tbl) --[[ Line: 348 ]]
+local function ConversationListWithTopBarFunctional(Tbl)
 	-- upvalues: UseSignalStateFunction (copy), DisplayModule (copy), ReactModule (copy), ResponsiveModule (copy), UseAnimateScrollViewToSelectionFunction (copy), FFlagEnableStickyShortcutBarOnAllPlatforms (copy), GetShortcutBarStatusStore (copy), ConversationListWithTopBar (copy)
 	local UseSignalStateResult = UseSignalStateFunction(DisplayModule.GetDisplayStore().getDeviceSafePadding)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseRefResult = ReactModule.useRef(nil)
 	local IsUseLastInputResultMatch = ResponsiveModule.useLastInput() == ResponsiveModule.Input.Directional
-	ReactModule.useLayoutEffect(function() --[[ Line: 356 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
 		UseStateResult2(UseRefResult.current and (UseRefResult.current._listRef._scrollRef.getNativeScrollRef() and UseRefResult.current._listRef._scrollRef.getNativeScrollRef()._nativeRef))
 	end)

@@ -8,7 +8,7 @@ local MergeEnumValuesFunction = require(script.Parent["enum-values"]).mergeEnumV
 local _ = require(script.Parent["merge-typedefs_types"])
 
 return {
-	mergeEnum = function(p1, p2, p3) --[[ Line: 26 ]]
+	mergeEnum = function(p1, p2, p3)
 		-- upvalues: Boolean (copy), MergeDirectivesFunction (copy), MergeEnumValuesFunction (copy), Object (copy), Kind (copy)
 		return if Boolean.toJSBoolean(p2) then {
 			name = p1.name,

@@ -12,12 +12,12 @@ local WideViewModule = {
 	BorderPaddingSize = 40,
 	AssetTextMaxSize = 18,
 	ContainerBackgroundColor = require(script.Parent.Colors).Black,
-	ContainerSize = function(p1): UDim2 --[[ Line: 10 ]]
+	ContainerSize = function(p1): UDim2
 		-- upvalues: ConstantsModule (copy)
 		return UDim2.new(0.7, 0, 0.95, -ConstantsModule.TopBarHeight * p1)
 	end,
 	ContainerAnchorPoint = Vector2.new(0.5, 0.5),
-	ContainerPosition = function(p1): UDim2 --[[ Line: 15 ]]
+	ContainerPosition = function(p1): UDim2
 		-- upvalues: ConstantsModule (copy)
 		return UDim2.new(0.5, 0, 0.5, ConstantsModule.TopBarHeight * p1)
 	end,
@@ -38,8 +38,8 @@ local WideViewModule = {
 	TryOnSize = UDim2.new(0.4, 0, 1, -30)
 }
 setmetatable(WideViewModule, {
-	__newindex = function(_, _, _) --[[ Line: 44 ]] end,
-	__index = function(_, p1) --[[ Line: 45 ]]
+	__newindex = function(_, _, _) end,
+	__index = function(_, p1)
 		error("WideView table has no value: " .. tostring(p1))
 	end
 })

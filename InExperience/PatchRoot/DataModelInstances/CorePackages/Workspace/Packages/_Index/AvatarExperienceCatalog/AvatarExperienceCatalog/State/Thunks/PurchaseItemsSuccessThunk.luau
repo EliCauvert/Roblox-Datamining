@@ -15,7 +15,7 @@ local FFlagAXBackgroundsCustomizeHydration = AvatarExperienceFlagsModule.FFlagAX
 local ApplyProfileConfigurationFunction = require(Parent.AvatarExperienceRodux).Actions.ApplyProfileConfiguration
 local AvatarBackground = require(Parent.AvatarExperienceCommon).Constants.ASSET_TYPE_NAME_TO_ID_STRING.AvatarBackground
 
-local function maybeApplyPurchasedBackground(p1, EquippableAssets) --[[ Line: 32 ]]
+local function maybeApplyPurchasedBackground(p1, EquippableAssets)
 	-- upvalues: AvatarBackground (copy), ApplyProfileConfigurationFunction (copy)
 	local Number: number? = nil
 	
@@ -32,9 +32,9 @@ end
 local FFlagSignalsNavP3gAvatarExperience = require(Parent.SharedFlags).FFlagSignalsNavP3gAvatarExperience
 local GetLegacyNavigationStoreFunction = require(Parent.NavigationRodux).GetLegacyNavigationStore
 
-return if AvatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents then function(Items, EquippableAssets, ReplaceAllEquippedAssets, BodyColor3s, BodyScales, BodyPartColorRangeIds, p2, Callback1, p3, p4, p5, Callback) --[[ Line: 48 ]]
+return if AvatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents then function(Items, EquippableAssets, ReplaceAllEquippedAssets, BodyColor3s, BodyScales, BodyPartColorRangeIds, p2, Callback1, p3, p4, p5, Callback)
 	-- upvalues: FFlagSignalsNavP3gAvatarExperience (copy), GetLegacyNavigationStoreFunction (copy), AvatarScreenProperties (copy), SendUnifiedEventsForMultiItemShoppingFunction (copy), GetUnifiedEventsForMISFunction (copy), UnifiedEventLogEnums (copy), MutedErrorFunction (copy), CartIdService (copy), UnifiedSelectionListStore (copy), FFlagAXMISSaveWearFix (copy), PurchaseItemsSuccessModule (copy), FFlagAXBackgroundsCustomizeHydration (copy), maybeApplyPurchasedBackground (copy)
-	return function(p6, _) --[[ Line: 62 ]]
+	return function(p6, _)
 		-- upvalues: FFlagSignalsNavP3gAvatarExperience (upval), GetLegacyNavigationStoreFunction (upval), AvatarScreenProperties (upval), p4 (copy), p5 (copy), SendUnifiedEventsForMultiItemShoppingFunction (upval), GetUnifiedEventsForMISFunction (upval), Items (copy), p2 (copy), UnifiedEventLogEnums (upval), MutedErrorFunction (upval), CartIdService (upval), UnifiedSelectionListStore (upval), FFlagAXMISSaveWearFix (upval), Callback (copy), BodyScales (ref), Callback1 (copy), PurchaseItemsSuccessModule (upval), EquippableAssets (copy), ReplaceAllEquippedAssets (copy), p3 (copy), BodyColor3s (copy), BodyPartColorRangeIds (copy), FFlagAXBackgroundsCustomizeHydration (upval), maybeApplyPurchasedBackground (upval)
 		local State = p6:getState()
 		local RouteName = nil
@@ -48,7 +48,7 @@ return if AvatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents
 		local AvatarScreenProperty = AvatarScreenProperties[RouteName]
 		local UnifiedLoggingSurface = if AvatarScreenProperty and AvatarScreenProperty.analyticsData then AvatarScreenProperty.analyticsData.unifiedLoggingSurface else nil
 		
-		if not pcall(function() --[[ Line: 79 ]]
+		if not pcall(function()
 			-- upvalues: p4 (upval), State (copy), p5 (upval), SendUnifiedEventsForMultiItemShoppingFunction (upval), GetUnifiedEventsForMISFunction (upval), Items (upval), p2 (upval), UnifiedEventLogEnums (upval), UnifiedLoggingSurface (copy)
 			if p4 then
 				p4.isOrganicLook = State.AvatarExperience.AvatarScene.OutfitTryOn.LookAnalyticsInfo == nil
@@ -91,9 +91,9 @@ return if AvatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents
 			maybeApplyPurchasedBackground(p6, EquippableAssets)
 		end
 	end
-end else function(Items, EquippableAssets, ReplaceAllEquippedAssets, BodyColor3s, BodyScales, BodyPartColorRangeIds, p6, Callback, ShouldClearEquippedMakeup) --[[ Line: 154 ]]
+end else function(Items, EquippableAssets, ReplaceAllEquippedAssets, BodyColor3s, BodyScales, BodyPartColorRangeIds, p6, Callback, ShouldClearEquippedMakeup)
 	-- upvalues: PurchaseItemsSuccessModule (copy), FFlagAXBackgroundsCustomizeHydration (copy), maybeApplyPurchasedBackground (copy)
-	return function(p7, _) --[[ Line: 165 ]]
+	return function(p7, _)
 		-- upvalues: BodyScales (ref), Callback (copy), p6 (copy), PurchaseItemsSuccessModule (upval), Items (copy), EquippableAssets (copy), ReplaceAllEquippedAssets (copy), ShouldClearEquippedMakeup (copy), BodyColor3s (copy), BodyPartColorRangeIds (copy), FFlagAXBackgroundsCustomizeHydration (upval), maybeApplyPurchasedBackground (upval)
 		local State = p7:getState()
 		

@@ -7,7 +7,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local FFlagScopeBadUtterancePlayerNameToChatDialogsModule = require(InterventionShared.Flags.FFlagScopeBadUtterancePlayerNameToChatDialogs)
 local _ = require(InterventionShared.Utils.Types)
 
-return function(List, p1) --[[ Line: 46 | Named "useParsedBadUtterances" ]]
+return function(List, p1)
 	-- upvalues: FFlagScopeBadUtterancePlayerNameToChatDialogsModule (copy), LocalPlayer (copy), NewResult (copy), UseLocalizationFunction (copy), CryoModule (copy)
 	local LabelTranslationKey = if p1 then p1.labelTranslationKey else nil
 	local ShouldAddPlayerName = if p1 then p1.shouldAddPlayerName else nil

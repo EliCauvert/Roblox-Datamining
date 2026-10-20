@@ -11,14 +11,14 @@ local SerializeChatTimeoutRangeModule = require(AppChat.Utils.serializeChatTimeo
 local FFlagAppChatReactiveFeatureRestrictions = require(Parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
 local config = { status = "none" }
 
-local function _() --[[ Line: 50 | Named "getLocalPlayerUserId" ]]
+local function _()
 	-- upvalues: Players (copy)
 	local UserId = if Players.LocalPlayer then Players.LocalPlayer.UserId else nil
 	
 	return if UserId == nil or UserId <= 0 then nil else UserId
 end
 
-local _ = function(p1) --[[ Line: 55 | Named "toTimeoutStatus" ]]
+local _ = function(p1)
 	-- upvalues: SerializeChatTimeoutRangeModule (copy)
 	local SerializeChatTimeoutRangeModuleResult = SerializeChatTimeoutRangeModule(p1)
 	
@@ -31,7 +31,7 @@ local _ = function(p1) --[[ Line: 55 | Named "toTimeoutStatus" ]]
 	}
 end
 
-local function mapResponseToStatuses(p1, p2) --[[ Line: 66 ]]
+local function mapResponseToStatuses(p1, p2)
 	-- upvalues: GetResponseBodyModule (copy), SerializeChatTimeoutRangeModule (copy), config (copy)
 	local ResponseBodyModule = GetResponseBodyModule(p1)
 	local v1 = nil
@@ -79,7 +79,7 @@ local function mapResponseToStatuses(p1, p2) --[[ Line: 66 ]]
 	return v1, t
 end
 
-local function createChatModerationStatusDataHydrationStore() --[[ Line: 96 ]]
+local function createChatModerationStatusDataHydrationStore()
 	-- upvalues: DataHydrationModule (copy), NewResult (copy), AppChatNetworkingModule (copy), mapResponseToStatuses (copy), Players (copy), PromiseModule (copy), config (copy), FFlagAppChatReactiveFeatureRestrictions (copy)
 	local DataCache = DataHydrationModule.createDataCache()
 	local DataCache1 = DataHydrationModule.createDataCache()
@@ -91,13 +91,13 @@ local function createChatModerationStatusDataHydrationStore() --[[ Line: 96 ]]
 		queueProcessDelaySec = 0,
 		replaceItems = true,
 		cache = DataCache,
-		logError = function(p3) --[[ Line: 109 ]]
+		logError = function(p3)
 			-- upvalues: NewResult (upval)
 			NewResult:warning(`Failed to fetch local-user chat moderation status: {tostring(p3)}`)
 		end,
-		fetchFn = function() --[[ Line: 112 ]]
+		fetchFn = function()
 			-- upvalues: AppChatNetworkingModule (upval), mapResponseToStatuses (upval)
-			return AppChatNetworkingModule.http.GetChatModerationStatuses(nil, nil):andThen(function(Result) --[[ Line: 113 ]]
+			return AppChatNetworkingModule.http.GetChatModerationStatuses(nil, nil):andThen(function(Result)
 				-- upvalues: mapResponseToStatuses (upval)
 				return (mapResponseToStatuses(Result, { includeUser = true, conversationIds = {} }))
 			end)
@@ -107,18 +107,18 @@ local function createChatModerationStatusDataHydrationStore() --[[ Line: 96 ]]
 		queueProcessDelaySec = 0,
 		replaceItems = true,
 		cache = DataCache1,
-		logError = function(p3) --[[ Line: 127 ]]
+		logError = function(p3)
 			-- upvalues: NewResult (upval)
 			NewResult:warning(`Failed to fetch conversation chat moderation status: {tostring(p3)}`)
 		end,
-		fetchFn = function(List) --[[ Line: 130 ]]
+		fetchFn = function(List)
 			-- upvalues: AppChatNetworkingModule (upval), mapResponseToStatuses (upval)
 			local ConversationIds = {}
 			
 			for i in List do
 				table.insert(ConversationIds, i)
 			end
-			return AppChatNetworkingModule.http.GetChatModerationStatuses(nil, ConversationIds):andThen(function(Result) --[[ Line: 136 ]]
+			return AppChatNetworkingModule.http.GetChatModerationStatuses(nil, ConversationIds):andThen(function(Result)
 				-- upvalues: mapResponseToStatuses (upval), ConversationIds (copy)
 				local _, MapResponseToStatusesResult2 = mapResponseToStatuses(Result, { includeUser = false, conversationIds = ConversationIds })
 				
@@ -127,7 +127,7 @@ local function createChatModerationStatusDataHydrationStore() --[[ Line: 96 ]]
 		end
 	})
 	
-	local function _(p3, List) --[[ Line: 156 | Named "releaseRefreshOwnership" ]]
+	local function _(p3, List)
 		-- upvalues: Count1 (ref), Tbl (copy)
 		if Count1 == p3 then
 			Count1 = nil
@@ -140,23 +140,23 @@ local function createChatModerationStatusDataHydrationStore() --[[ Line: 96 ]]
 	end
 	
 	return {
-		getUserStatus = function() --[[ Line: 214 ]]
+		getUserStatus = function()
 			-- upvalues: DataResolver (copy)
 			return DataResolver.getAndFetchItem("__local_user__")
 		end,
-		getCachedUserStatus = function() --[[ Line: 217 ]]
+		getCachedUserStatus = function()
 			-- upvalues: DataCache (copy)
 			return DataCache.getItem("__local_user__")
 		end,
-		getConversationStatus = function(p4) --[[ Line: 220 ]]
+		getConversationStatus = function(p4)
 			-- upvalues: DataResolver1 (copy)
 			return DataResolver1.getAndFetchItem(p4)
 		end,
-		getCachedConversationStatus = function(p4) --[[ Line: 223 ]]
+		getCachedConversationStatus = function(p4)
 			-- upvalues: DataCache1 (copy)
 			return DataCache1.getItem(p4)
 		end,
-		ingestResponse = function(p4, p5) --[[ Line: 146 ]]
+		ingestResponse = function(p4, p5)
 			-- upvalues: mapResponseToStatuses (upval), DataCache (copy), DataCache1 (copy)
 			local MapResponseToStatusesResult, MapResponseToStatusesResult2 = mapResponseToStatuses(p4, p5)
 			
@@ -167,7 +167,7 @@ local function createChatModerationStatusDataHydrationStore() --[[ Line: 96 ]]
 				DataCache1.replaceItems(MapResponseToStatusesResult2)
 			end
 		end,
-		refreshStatuses = function(Tbl1) --[[ Line: 168 ]]
+		refreshStatuses = function(Tbl1)
 			-- upvalues: Count (ref), Count1 (ref), Players (upval), Tbl (copy), AppChatNetworkingModule (upval), mapResponseToStatuses (upval), DataCache (copy), DataCache1 (copy), PromiseModule (upval)
 			Count += 1
 			Count1 = Count
@@ -178,7 +178,7 @@ local function createChatModerationStatusDataHydrationStore() --[[ Line: 96 ]]
 			for _, value in Copy do
 				Tbl[value] = Count2
 			end
-			return AppChatNetworkingModule.http.GetChatModerationStatuses(nil, Tbl1):andThen(function(Result) --[[ Line: 182 ]]
+			return AppChatNetworkingModule.http.GetChatModerationStatuses(nil, Tbl1):andThen(function(Result)
 				-- upvalues: UserId1 (copy), Players (upval), Copy (copy), Tbl (upval), Count2 (copy), Count1 (upval), mapResponseToStatuses (upval), DataCache (upval), DataCache1 (upval)
 				local UserId = if Players.LocalPlayer then Players.LocalPlayer.UserId else nil
 				
@@ -203,7 +203,7 @@ local function createChatModerationStatusDataHydrationStore() --[[ Line: 96 ]]
 					end
 				end
 				return Result
-			end):andThen(function(Result) --[[ Line: 200 | Named "onSuccess" ]]
+			end):andThen(function(Result)
 				-- upvalues: Count2 (copy), Copy (copy), Count1 (upval), Tbl (upval)
 				if Count1 == Count2 then
 					Count1 = nil
@@ -214,7 +214,7 @@ local function createChatModerationStatusDataHydrationStore() --[[ Line: 96 ]]
 					end
 				end
 				return Result
-			end, function(p4) --[[ Line: 205 | Named "onFailure" ]]
+			end, function(p4)
 				-- upvalues: Count2 (copy), Copy (copy), Count1 (upval), Tbl (upval), PromiseModule (upval)
 				if Count1 == Count2 then
 					Count1 = nil
@@ -227,11 +227,11 @@ local function createChatModerationStatusDataHydrationStore() --[[ Line: 96 ]]
 				return PromiseModule.reject(p4)
 			end)
 		end,
-		setConversationStatusNone = function(p4) --[[ Line: 228 ]]
+		setConversationStatusNone = function(p4)
 			-- upvalues: DataCache1 (copy), config (upval)
 			DataCache1.replaceItem(p4, config)
 		end,
-		clear = function() --[[ Line: 231 ]]
+		clear = function()
 			-- upvalues: FFlagAppChatReactiveFeatureRestrictions (upval), Count1 (ref), Tbl (copy), DataResolver (copy), DataResolver1 (copy)
 			if FFlagAppChatReactiveFeatureRestrictions then
 				Count1 = nil
@@ -245,7 +245,7 @@ end
 
 local v2 = nil
 
-return function(_) --[[ Line: 244 | Named "GetChatModerationStatusDataHydration" ]]
+return function(_)
 	-- upvalues: v2 (ref), createChatModerationStatusDataHydrationStore (copy)
 	local v3 = v2
 	

@@ -9,13 +9,13 @@ local AbuseVectorModule = require(GenericAbuseReporting.Enums.AbuseVector)
 local FetchBeduiDataModule = require(GenericAbuseReporting.Bedui.Provider.fetchBeduiData)
 local ValidateBeduiDataModule = require(GenericAbuseReporting.Bedui.Provider.validateBeduiData)
 
-return function(p1) --[[ Line: 33 | Named "AbuseReportBeduiProvider" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), AbuseReportBeduiContextStatus (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), FetchBeduiDataModule (copy), ValidateBeduiDataModule (copy), AbuseVectorModule (copy), AbuseReportBeduiContextModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState({ status = AbuseReportBeduiContextStatus.Loading })
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
-	ReactModule.useEffect(function() --[[ Line: 39 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FetchBeduiDataModule (upval), UseRoactServiceResult (copy), p1 (copy), ValidateBeduiDataModule (upval), AbuseVectorModule (upval), UseStateResult2 (copy), AbuseReportBeduiContextStatus (upval)
-		FetchBeduiDataModule(UseRoactServiceResult, p1.abuseVector):andThen(function(Result) --[[ Line: 41 ]]
+		FetchBeduiDataModule(UseRoactServiceResult, p1.abuseVector):andThen(function(Result)
 			-- upvalues: ValidateBeduiDataModule (upval), FetchBeduiDataModule (upval), UseRoactServiceResult (upval), AbuseVectorModule (upval), UseStateResult2 (upval), AbuseReportBeduiContextStatus (upval)
 			local ValidateBeduiDataModuleResult, ValidateBeduiDataModuleResult2 = ValidateBeduiDataModule(Result.responseBody)
 			
@@ -28,7 +28,7 @@ return function(p1) --[[ Line: 33 | Named "AbuseReportBeduiProvider" ]]
 				return
 			else
 				warn("Invalid Bedui data:", ValidateBeduiDataModuleResult2)
-				FetchBeduiDataModule(UseRoactServiceResult, AbuseVectorModule.Common):andThen(function(Result) --[[ Line: 47 ]]
+				FetchBeduiDataModule(UseRoactServiceResult, AbuseVectorModule.Common):andThen(function(Result)
 					-- upvalues: ValidateBeduiDataModule (upval), UseStateResult2 (upval), AbuseReportBeduiContextStatus (upval)
 					local ValidateBeduiDataModuleResult, ValidateBeduiDataModuleResult2 = ValidateBeduiDataModule(Result.responseBody)
 					
@@ -46,7 +46,7 @@ return function(p1) --[[ Line: 33 | Named "AbuseReportBeduiProvider" ]]
 							error = ValidateBeduiDataModuleResult2
 						})
 					end
-				end):catch(function(Err) --[[ Line: 63 ]]
+				end):catch(function(Err)
 					-- upvalues: UseStateResult2 (upval), AbuseReportBeduiContextStatus (upval)
 					warn("Failed to get Bedui common data")
 					UseStateResult2({
@@ -55,7 +55,7 @@ return function(p1) --[[ Line: 33 | Named "AbuseReportBeduiProvider" ]]
 					})
 				end)
 			end
-		end):catch(function(Err) --[[ Line: 77 ]]
+		end):catch(function(Err)
 			-- upvalues: UseStateResult2 (upval), AbuseReportBeduiContextStatus (upval)
 			warn("Failed to get Bedui data")
 			UseStateResult2({

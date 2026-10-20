@@ -9,7 +9,7 @@ local _ = require(CorePackages.Workspace.Packages.RobloxTranslator)
 local Localization = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization
 local UseSelectorFunction = require(CorePackages.Workspace.Packages.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function(p1) --[[ Line: 27 | Named "QuickMenuControllerBar" ]]
+return function(p1)
 	-- upvalues: Localization (copy), LocalizationService (copy), ReactModule (copy), UseSelectorFunction (copy), RoactModule (copy), CoreGui (copy), InGameMenuConstantsModule (copy), ControllerBar (copy)
 	local NewLocalization = Localization.new(LocalizationService.RobloxLocaleId)
 	local RightHints = {
@@ -25,7 +25,7 @@ return function(p1) --[[ Line: 27 | Named "QuickMenuControllerBar" ]]
 	
 	if p1.chatMenuEnabled then
 		table.insert(RightHints, 1, {
-			text = NewLocalization:Format(if UseSelectorFunction((ReactModule.useCallback(function(p2) --[[ Line: 44 ]]
+			text = NewLocalization:Format(if UseSelectorFunction((ReactModule.useCallback(function(p2)
 				return p2.chat.visible
 			end))) then "CoreScripts.TopBar.HideChat" else "CoreScripts.TopBar.ShowChat"),
 			keyCode = Enum.KeyCode.ButtonR1

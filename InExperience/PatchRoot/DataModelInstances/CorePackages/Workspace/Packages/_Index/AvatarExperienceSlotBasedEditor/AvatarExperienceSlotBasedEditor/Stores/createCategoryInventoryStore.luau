@@ -10,7 +10,7 @@ local FFlagAXInventoryDurablesSupport = require(Parent.AvatarExperienceFlags).FF
 local FFlagAXBackgroundGeneration = require(Parent.AvatarExperienceFlags).FFlagAXBackgroundGeneration
 local FFlagAXRefetchInventoryOnUpdate = require(Parent.AvatarExperienceFlags).FFlagAXRefetchInventoryOnUpdate
 
-return function() --[[ Line: 45 | Named "createCategoryInventoryStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy), HttpService (copy), FFlagAXRefetchInventoryOnUpdate (copy), InventoryItemTypeModule (copy), MutedErrorFunction (copy), FFlagAXInventoryDurablesSupport (copy), FFlagAXBackgroundGeneration (copy)
 	local v1 = nil
 	local Signal, Signal2 = SignalsModule.createSignal(nil)
@@ -22,11 +22,11 @@ return function() --[[ Line: 45 | Named "createCategoryInventoryStore" ]]
 		getItems = Signal,
 		getHasReachedLastPage = Signal1,
 		getSearchUuid = Signal3,
-		isRefreshPending = function(): boolean --[[ Line: 108 ]]
+		isRefreshPending = function(): boolean
 			-- upvalues: Flag (ref)
 			return Flag == true
 		end,
-		startNewSearch = function() --[[ Line: 57 ]]
+		startNewSearch = function()
 			-- upvalues: v1 (ref), FFlagAXRefetchInventoryOnUpdate (upval), Flag (ref), Signal2 (copy), Signal2_1 (copy), Signal2_2 (copy), HttpService (upval)
 			v1.nextPageCursor = nil
 			
@@ -37,14 +37,14 @@ return function() --[[ Line: 45 | Named "createCategoryInventoryStore" ]]
 			Signal2_1(false)
 			Signal2_2(HttpService:GenerateGUID(true))
 		end,
-		startRefresh = function() --[[ Line: 71 ]]
+		startRefresh = function()
 			-- upvalues: v1 (ref), Flag (ref), Signal2_1 (copy), Signal2_2 (copy), HttpService (upval)
 			v1.nextPageCursor = nil
 			Flag = true
 			Signal2_1(false)
 			Signal2_2(HttpService:GenerateGUID(true))
 		end,
-		removeItems = function(List) --[[ Line: 80 ]]
+		removeItems = function(List)
 			-- upvalues: Signal (copy), Signal2 (copy)
 			local SignalResult = Signal(false)
 			
@@ -67,7 +67,7 @@ return function() --[[ Line: 45 | Named "createCategoryInventoryStore" ]]
 				return
 			end
 		end,
-		addResultsPage = function(p1, p2) --[[ Line: 115 ]]
+		addResultsPage = function(p1, p2)
 			-- upvalues: FFlagAXRefetchInventoryOnUpdate (upval), Signal3 (copy), Flag (ref), Signal (copy), InventoryItemTypeModule (upval), MutedErrorFunction (upval), FFlagAXInventoryDurablesSupport (upval), FFlagAXBackgroundGeneration (upval), Signal2 (copy), v1 (ref), Signal2_1 (copy)
 			if FFlagAXRefetchInventoryOnUpdate and p2 ~= nil and p2 ~= Signal3(false) then return end
 			local IsFlag: boolean = FFlagAXRefetchInventoryOnUpdate and Flag == true

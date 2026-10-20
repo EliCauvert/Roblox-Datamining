@@ -11,12 +11,12 @@ local SystemMessageModule = require(AppChat.Components.ChatConversation.SystemMe
 local SystemMessageContainerModule = require(AppChat.Components.ChatConversation.SystemMessageContainer)
 local GetFFlagEnableSocialCardsFunction = require(Parent.SharedFlags).GetFFlagEnableSocialCards
 
-local function _(Custom, System): boolean --[[ Line: 22 | Named "isValidMessageAndSenderType" ]]
+local function _(Custom, System): boolean
 	-- upvalues: MessageModelModule (copy), EnumMessageTypesModule (copy)
 	return if System == MessageModelModule.SenderTypes.System then Custom == EnumMessageTypesModule.System elseif System == MessageModelModule.SenderTypes.User then Custom == EnumMessageTypesModule.PlainText or Custom == EnumMessageTypesModule.Link else Custom == EnumMessageTypesModule.Custom
 end
 
-return function(p1) --[[ Line: 35 | Named "MessageRow" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), MessageListContextModule (copy), MessageModelModule (copy), EnumMessageTypesModule (copy), SystemMessageModule (copy), CustomMessageEntryContainerModule (copy), SystemMessageContainerModule (copy), GetFFlagEnableSocialCardsFunction (copy), CryoModule (copy), ChatMessageModule (copy)
 	local UseContextResult = ReactModule.useContext(MessageListContextModule)
 	assert(UseContextResult ~= nil, "MessageRow must be rendered inside a MessageListContext provider")

@@ -4,7 +4,7 @@ local PagesModule = require(Parent.Components.Pages)
 local NavigateBackModule = require(Parent.Actions.NavigateBack)
 local SetCurrentPageModule = require(Parent.Actions.SetCurrentPage)
 
-return function(p1, p2) --[[ Line: 12 ]]
+return function(p1, p2)
 	-- upvalues: PagesModule (copy), NavigateBackModule (copy), Cryo (copy), SetCurrentPageModule (copy)
 	local PagesByKeyEntry = PagesModule.pagesByKey[p1.menuPage]
 	

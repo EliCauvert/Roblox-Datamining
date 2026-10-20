@@ -10,12 +10,12 @@ local UseDynamicSizeMarginModule = require(ProfilePlatform.Hooks.useDynamicSizeM
 local UseCurrentlyPlayingSectionHeightModule = require(ProfilePlatform.Hooks.useCurrentlyPlayingSectionHeight)
 local FFlagProfilePlatformAddCurrentlyPlayingModule = require(ProfilePlatform.Flags.FFlagProfilePlatformAddCurrentlyPlaying)
 
-return function(p1, p2) --[[ Line: 19 ]]
+return function(p1, p2)
 	-- upvalues: UseTokensFunction (copy), UseDynamicSizeMarginModule (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), ReactModule (copy), UseAboutSectionHeightModule (copy), FFlagProfilePlatformAddCurrentlyPlayingModule (copy), UseCurrentlyPlayingSectionHeightModule (copy), ConstantsModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDynamicSizeMarginModuleResult, _ = UseDynamicSizeMarginModule()
 	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.About)
-	local UseAboutSectionHeightModuleResult, _ = UseAboutSectionHeightModule(ReactModule.useMemo(function() --[[ Line: 25 ]]
+	local UseAboutSectionHeightModuleResult, _ = UseAboutSectionHeightModule(ReactModule.useMemo(function()
 		-- upvalues: UseProfileJsonComponentModuleResult (copy)
 		return UseProfileJsonComponentModuleResult.description
 	end, {
@@ -24,7 +24,7 @@ return function(p1, p2) --[[ Line: 19 ]]
 	}), p1, UseDynamicSizeMarginModuleResult)
 	local UseCurrentlyPlayingSectionHeightModuleResult = if FFlagProfilePlatformAddCurrentlyPlayingModule then UseCurrentlyPlayingSectionHeightModule((UseProfileJsonComponentModule(EnumsModule.Components.CurrentlyPlaying))) else nil
 	
-	return (ReactModule.useMemo(function(): number --[[ Line: 40 ]]
+	return (ReactModule.useMemo(function(): number
 		-- upvalues: ConstantsModule (upval), UseTokensResult (copy), p2 (copy), UseAboutSectionHeightModuleResult (copy), FFlagProfilePlatformAddCurrentlyPlayingModule (upval), UseCurrentlyPlayingSectionHeightModuleResult (ref), p1 (copy)
 		local NewAVATARHEADSHOTHEIGHT = ConstantsModule.AVATAR_HEADSHOT_HEIGHT / 2 + UseTokensResult.Gap.Large
 		local NewCONTEXTUALINFORMATIONHEIGHT = if p2 then ConstantsModule.CONTEXTUAL_INFORMATION_HEIGHT + UseTokensResult.Gap.XXLarge else 0

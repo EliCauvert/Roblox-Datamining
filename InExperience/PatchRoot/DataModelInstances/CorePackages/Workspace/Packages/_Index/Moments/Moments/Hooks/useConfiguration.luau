@@ -1,3 +1,3 @@
-﻿return function(_, p1) --[[ Line: 8 | Named "useConfiguration" ]]
+﻿return function(_, p1)
 	return p1
 end

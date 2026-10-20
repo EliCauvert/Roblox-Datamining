@@ -4,18 +4,18 @@ local ReactModule = require(Parent.React)
 local UseSelectedThemeFunction = require(Parent.RoactUtils).Hooks.useSelectedTheme
 local UserGameSettings = UserSettings():GetService("UserGameSettings")
 
-local function useReducedMotion() --[[ Line: 15 ]]
+local function useReducedMotion()
 	-- upvalues: ReactModule (copy), UserGameSettings (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(UserGameSettings.ReducedMotion)
-	ReactModule.useEffect(function() --[[ Line: 17 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), UserGameSettings (upval)
 		UseStateResult2(UserGameSettings.ReducedMotion)
-		local Connection = UserGameSettings:GetPropertyChangedSignal("ReducedMotion"):Connect(function() --[[ Line: 19 ]]
+		local Connection = UserGameSettings:GetPropertyChangedSignal("ReducedMotion"):Connect(function()
 			-- upvalues: UseStateResult2 (upval), UserGameSettings (upval)
 			UseStateResult2(UserGameSettings.ReducedMotion)
 		end)
 		
-		return function() --[[ Line: 22 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end
@@ -24,7 +24,7 @@ local function useReducedMotion() --[[ Line: 15 ]]
 	return UseStateResult
 end
 
-return function(p1) --[[ Line: 29 | Named "LibraryThemeProvider" ]]
+return function(p1)
 	-- upvalues: UseSelectedThemeFunction (copy), useReducedMotion (copy), ReactModule (copy), FoundationModule (copy)
 	local UseSelectedThemeResult = UseSelectedThemeFunction()
 	

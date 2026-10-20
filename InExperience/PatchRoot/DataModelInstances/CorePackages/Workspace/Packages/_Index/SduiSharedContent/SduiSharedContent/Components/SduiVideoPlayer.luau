@@ -6,7 +6,7 @@ local VideoUtilsModule = require(Parent.VideoUtils)
 local FFlagLuaAppHomeMomentVideoFallback = require(Parent.SharedFlags).FFlagLuaAppHomeMomentVideoFallback
 local config = { PlayWhenReady = "PlayWhenReady" }
 
-local function _(p1, p2) --[[ Line: 22 | Named "resolvePlaybackState" ]]
+local function _(p1, p2)
 	if p2 ~= nil then
 		return p2, true
 	elseif (p1 or "PlayWhenReady") == "PlayWhenReady" then
@@ -16,15 +16,15 @@ local function _(p1, p2) --[[ Line: 22 | Named "resolvePlaybackState" ]]
 	end
 end
 
-local _ = function(p1): string --[[ Line: 66 | Named "asString" ]]
+local _ = function(p1): string
 	return if p1 == nil then "" else tostring(p1)
 end
 
-local _ = function(Text: string) --[[ Line: 70 | Named "normalizeAssetId" ]]
+local _ = function(Text: string)
 	return if Text == nil or Text == "" then nil elseif string.find(Text, "://", 1, true) then Text else `rbxassetid://{Text}`
 end
 
-return function(p1) --[[ Line: 80 | Named "SduiVideoPlayer" ]]
+return function(p1)
 	-- upvalues: config (copy), FindAnalyticsFieldInAncestorsFunction (copy), ReactModule (copy), SduiCoreSystemModule (copy), VideoUtilsModule (copy), FFlagLuaAppHomeMomentVideoFallback (copy)
 	local VideoAssetId: string = p1.videoAssetId
 	local VideoAssetId1 = if VideoAssetId == nil or VideoAssetId == "" then nil elseif string.find(VideoAssetId, "://", 1, true) then VideoAssetId else `rbxassetid://{VideoAssetId}`
@@ -54,18 +54,18 @@ return function(p1) --[[ Line: 80 | Named "SduiVideoPlayer" ]]
 	local SourceId = FindAnalyticsFieldInAncestorsFunction("sourceId", p1.analyticsContext)
 	local Text1: string = if SourceId == nil then "" else tostring(SourceId)
 	local VideoPlaybackContext = p1.sduiContext.videoPlaybackContext
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 95 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Text (copy), Text1 (copy), VideoPlaybackContext (copy)
 		return {
 			videoAnalyticsData = { source = Text, sourceId = Text1 },
-			getPlaybackSessionId = function() --[[ Line: 101 ]]
+			getPlaybackSessionId = function()
 				-- upvalues: VideoPlaybackContext (upval)
 				return if VideoPlaybackContext then VideoPlaybackContext.videoPlaybackCoordinator.currentPlaybackSessionId else nil
 			end
 		}
 	end, { Text, Text1, VideoPlaybackContext })
 	local DefaultLoadingImageComponent = if p1.loadingImage == nil or p1.loadingImage == "" then p1.defaultLoadingImageComponent else nil
-	ReactModule.useEffect(function() --[[ Line: 115 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: VideoAssetId1 (copy), p1 (copy), SduiCoreSystemModule (upval), Flag1 (copy), Text (copy), Text1 (copy)
 		if not VideoAssetId1 then
 			p1.sduiContext.dependencies.logger.reportError(SduiCoreSystemModule.SduiErrors.SduiErrorType.InvalidProps, {

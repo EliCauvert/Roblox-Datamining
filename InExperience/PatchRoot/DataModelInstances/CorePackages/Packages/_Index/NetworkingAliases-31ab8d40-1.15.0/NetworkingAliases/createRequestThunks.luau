@@ -3,7 +3,7 @@ local CreateGetTagsFromUserIdsModule = require(NetworkRequests.createGetTagsFrom
 local CreateSetUserTagModule = require(NetworkRequests.createSetUserTag)
 local _ = require(script.Parent.networkingAliasesTypes)
 
-return function(p1) --[[ Line: 6 ]]
+return function(p1)
 	-- upvalues: CreateGetTagsFromUserIdsModule (copy), CreateSetUserTagModule (copy)
 	return {
 		GetTagsFromUserIds = CreateGetTagsFromUserIdsModule(p1),

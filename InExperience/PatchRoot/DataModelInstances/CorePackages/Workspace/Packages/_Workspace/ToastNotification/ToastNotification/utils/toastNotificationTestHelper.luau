@@ -18,9 +18,9 @@ local config = {
 	SetAlias = { Aliases = { byUserId = { ["1"] = "foo" } } }
 }
 
-local function v12(p1, p2) --[[ Line: 43 ]]
+local function v12(p1, p2)
 	-- upvalues: RoduxModule (copy)
-	return RoduxModule.Store.new(p2 or function(p3) --[[ Line: 44 ]]
+	return RoduxModule.Store.new(p2 or function(p3)
 		return p3
 	end, p1 or {}, { RoduxModule.thunkMiddleware })
 end
@@ -28,7 +28,7 @@ end
 local EnUs = require(Parent.RobloxAppLocales).Localization.new("en-us")
 
 return {
-	mockServices = function(p1) --[[ Line: 53 ]]
+	mockServices = function(p1)
 		-- upvalues: ReactModule (copy), RoactRoduxModule (copy), v12 (copy), config (copy), FoundationProvider (copy), ColorMode (copy), AppStyleProvider (copy), Style (copy), LocalizationProvider (copy), EnUs (copy), RoactServices (copy)
 		return (ReactModule.createElement(RoactServices.ServiceProvider, {}, {
 			storeProvider = ReactModule.createElement(RoactRoduxModule.StoreProvider, { store = v12(config) }, {

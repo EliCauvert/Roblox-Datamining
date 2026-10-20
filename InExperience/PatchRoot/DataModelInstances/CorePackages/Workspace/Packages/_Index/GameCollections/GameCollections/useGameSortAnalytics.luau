@@ -18,7 +18,7 @@ local FFlagLuaAppGameDetailsAttributionFix = require(Parent.SharedFlags).FFlagLu
 local FFlagLuaAppDemoModePlayButtonTelemetry = require(Parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
 local t = {}
 
-local function _(p1, p2) --[[ Line: 29 | Named "mergeAnalyticsData" ]]
+local function _(p1, p2)
 	-- upvalues: CryoModule (copy), t (copy)
 	if p1 or p2 then
 		local JoinResult = CryoModule.Dictionary.join(p1 or t, p2 or t)
@@ -31,19 +31,19 @@ end
 
 local Config = if FFlagLuaAppLogGameAttributionError then { GameDetail = "GameDetail", PlayIntent = "PlayIntent" } else nil
 
-local _ = function(p1, p2, p3) --[[ Line: 50 | Named "getGameSetTypeId" ]]
+local _ = function(p1, p2, p3)
 	return if p1 == nil then nil elseif p2 or p3 then p1.topicId else p1.gameSetTypeId
 end
 
-local _ = function(p1, p2) --[[ Line: 62 | Named "getGameSetTargetId" ]]
+local _ = function(p1, p2)
 	return if p2 or p1 == nil then nil else p1.gameSetTargetId
 end
 
-local _ = function(p1, p2) --[[ Line: 72 | Named "getAppliedFilters" ]]
+local _ = function(p1, p2)
 	return if p2 or not p1 then nil else p1.appliedFilters
 end
 
-return function(p1, p2, SortIndex, PageName, p3, p4, p5, p6) --[[ Line: 85 | Named "useGameSortAnalytics" ]]
+return function(p1, p2, SortIndex, PageName, p3, p4, p5, p6)
 	-- upvalues: UseStoreFunction (copy), UseRoactServiceFunction (copy), RoactAnalyticsCommonGameEvents (copy), AppEventIngestService (copy), AppPage (copy), GameSortLoadSource (copy), ReactModule (copy), FFlagLuaAppGameDetailsAttributionFix (copy), ReportGameAttributionErrorFunction (copy), Config (copy), MutedErrorFunction (copy), CalculateRowPositionFieldsFunction (copy), CryoModule (copy), t (copy), GameCollectionItemTypes (copy), FFlagLuaAppLogGameAttributionError (copy), GamePlayIntentFunction (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy), FeedScrollFunction (copy)
 	local UseStoreResult = UseStoreFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactAnalyticsCommonGameEvents)
@@ -56,7 +56,7 @@ return function(p1, p2, SortIndex, PageName, p3, p4, p5, p6) --[[ Line: 85 | Nam
 	local SortSubId = if p1 then p1.sortSubId else nil
 	local AnalyticsData = if p1 then p1.analyticsData else nil
 	
-	return ReactModule.useCallback(function(p7, ClickedUniverseId) --[[ Line: 115 ]]
+	return ReactModule.useCallback(function(p7, ClickedUniverseId)
 		-- upvalues: FFlagLuaAppGameDetailsAttributionFix (upval), p4 (copy), ReportGameAttributionErrorFunction (upval), PageName (copy), Config (upval), TopicId (copy), GameSetTargetId (copy), SortIndex (copy), MutedErrorFunction (upval), CalculateRowPositionFieldsFunction (upval), p5 (copy), p6 (copy), AnalyticsData (copy), CryoModule (upval), t (upval), UseRoactServiceResult (copy), AppliedFilters (copy), SortLoadSource (copy), GameCollectionItemTypes (upval), SortSubId (copy)
 		if FFlagLuaAppGameDetailsAttributionFix then
 			local v1 = nil
@@ -101,7 +101,7 @@ return function(p1, p2, SortIndex, PageName, p3, p4, p5, p6) --[[ Line: 85 | Nam
 	end, {
 		UseRoactServiceResult, SortIndex, PageName, TopicId, GameSetTargetId, p4, p5,
 		p6, SortLoadSource, SortSubId, AnalyticsData
-	}), ReactModule.useCallback(function(p7, ReferralSource, _, p8, p9, p10) --[[ Line: 193 ]]
+	}), ReactModule.useCallback(function(p7, ReferralSource, _, p8, p9, p10)
 		-- upvalues: FFlagLuaAppLogGameAttributionError (upval), p4 (copy), ReportGameAttributionErrorFunction (upval), Config (upval), TopicId (copy), GameSetTargetId (copy), SortIndex (copy), CalculateRowPositionFieldsFunction (upval), p5 (copy), p6 (copy), AnalyticsData (copy), CryoModule (upval), t (upval), GamePlayIntentFunction (upval), UseRoactServiceResult1 (copy), AppliedFilters (copy), PageName (copy), SortLoadSource (copy), SortSubId (copy), GameCollectionItemTypes (upval), FFlagLuaAppDemoModePlayButtonTelemetry (upval)
 		if FFlagLuaAppLogGameAttributionError then
 			local v1 = nil
@@ -162,7 +162,7 @@ return function(p1, p2, SortIndex, PageName, p3, p4, p5, p6) --[[ Line: 85 | Nam
 		SortIndex, UseRoactServiceResult1, TopicId, GameSetTargetId,
 		if FFlagLuaAppLogGameAttributionError then p4 else nil, PageName, p5, p6,
 		SortLoadSource, SortSubId, AnalyticsData
-	}), ReactModule.useCallback(function() --[[ Line: 274 ]]
+	}), ReactModule.useCallback(function()
 		-- upvalues: UseRoactServiceResult (copy), TopicId (copy), GameSetTargetId (copy), SortIndex (copy)
 		UseRoactServiceResult.reportSeeAllWithId(TopicId, GameSetTargetId, SortIndex)
 	end, {
@@ -170,7 +170,7 @@ return function(p1, p2, SortIndex, PageName, p3, p4, p5, p6) --[[ Line: 85 | Nam
 		TopicId,
 		GameSetTargetId,
 		SortIndex
-	}), (ReactModule.useCallback(function(Distance, ScrollDuration, StartPos) --[[ Line: 287 ]]
+	}), (ReactModule.useCallback(function(Distance, ScrollDuration, StartPos)
 		-- upvalues: p3 (copy), MutedErrorFunction (upval), UseStoreResult (copy), SortIndex (copy), TopicId (copy), GameSetTargetId (copy), FeedScrollFunction (upval), UseRoactServiceResult1 (copy), PageName (copy)
 		if p3 and p3.current ~= nil then
 			local ScrollingDirection = p3.current.ScrollingDirection

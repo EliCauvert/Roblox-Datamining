@@ -14,7 +14,7 @@ local LeaveExperienceModule = require(BuildExperience.utils.leaveExperience)
 local FFlagBuildExperienceRemoveAgentTaskUiModule = require(BuildExperience.Flags.FFlagBuildExperienceRemoveAgentTaskUi)
 local FFlagBuildExperienceMenuImprovementsModule = require(BuildExperience.Flags.FFlagBuildExperienceMenuImprovements)
 
-return function(p1) --[[ Line: 54 | Named "BuildPillMenu" ]]
+return function(p1)
 	-- upvalues: GetBuildOverflowMenuStoreModule (copy), PublishStatusModule (copy), ReactModule (copy), View (copy), FFlagBuildExperienceMenuImprovementsModule (copy), StopPlaytestButtonModule (copy), LeaveExperienceModule (copy), FFlagBuildExperienceRemoveAgentTaskUiModule (copy), AgentDetailMenuModule (copy), BuildOverflowMenuButtonModule (copy), IconName (copy)
 	local UsePublishStatusResult = PublishStatusModule.usePublishStatus(p1.target)
 	
@@ -28,14 +28,14 @@ return function(p1) --[[ Line: 54 | Named "BuildPillMenu" ]]
 		}, {
 			StopPlaytest = if FFlagBuildExperienceMenuImprovementsModule then ReactModule.createElement(StopPlaytestButtonModule, {
 				layoutOrder = 0,
-				onActivated = function() --[[ Line: 101 ]]
+				onActivated = function()
 					-- upvalues: LeaveExperienceModule (upval)
 					LeaveExperienceModule()
 				end
 			}) else nil,
 			AgentDetail = if FFlagBuildExperienceRemoveAgentTaskUiModule then nil else ReactModule.createElement(AgentDetailMenuModule, {
 				layoutOrder = 1,
-				onActivated = p1.onOpenAgentsPage or function() --[[ Line: 109 ]] end
+				onActivated = p1.onOpenAgentsPage or function() end
 			}),
 			Overflow = ReactModule.createElement(BuildOverflowMenuButtonModule, {
 				layoutOrder = 3,
@@ -44,7 +44,7 @@ return function(p1) --[[ Line: 54 | Named "BuildPillMenu" ]]
 				target = p1.target,
 				hasPublishedTurn = UsePublishStatusResult.hasPublishedTurn,
 				hasPublishedVersion = UsePublishStatusResult.hasPublishedVersion,
-				onAction = ReactModule.useCallback(function(p2) --[[ Line: 59 ]]
+				onAction = ReactModule.useCallback(function(p2)
 					-- upvalues: p1 (copy)
 					if p2.type == "openPage" then
 						if p1.onOpenPage then

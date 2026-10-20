@@ -1,33 +1,33 @@
-﻿local function v0() --[[ Line: 11 ]] end
+﻿local function v0() end
 
-local function noopRule(_) --[[ Line: 17 ]]
+local function noopRule(_)
 	return nil
 end
 
-local function noopRuleFactory(...) --[[ Line: 20 ]]
+local function noopRuleFactory(...)
 	-- upvalues: noopRule (copy)
 	return noopRule
 end
 
-local function noopFormatter(_, _, _) --[[ Line: 36 ]]
+local function noopFormatter(_, _, _)
 	return nil
 end
 
-local function noopPreview(_) --[[ Line: 50 ]]
+local function noopPreview(_)
 	return nil
 end
 
-local function noopPreviewFactory(_) --[[ Line: 53 ]]
+local function noopPreviewFactory(_)
 	-- upvalues: noopPreview (copy)
 	return noopPreview
 end
 
 return {
-	register = function(_) --[[ Line: 12 ]]
+	register = function(_)
 		-- upvalues: v0 (copy)
 		return v0
 	end,
-	notify = function(_) --[[ Line: 15 ]] end,
+	notify = function(_) end,
 	Resolvers = {
 		fromEventName = noopRuleFactory,
 		fromCtx = noopRuleFactory,
@@ -35,16 +35,16 @@ return {
 		fromEnum = noopRuleFactory,
 		eventNameAsLabel = noopRuleFactory,
 		fixed = noopRuleFactory,
-		walk = function(_, _) --[[ Line: 31 ]]
+		walk = function(_, _)
 			return nil
 		end
 	},
 	Formatters = {
-		enumLabel = function(_) --[[ Line: 39 ]]
+		enumLabel = function(_)
 			-- upvalues: noopFormatter (copy)
 			return noopFormatter
 		end,
-		invertEnum = function(_) --[[ Line: 45 ]]
+		invertEnum = function(_)
 			return {}
 		end
 	},
@@ -52,7 +52,7 @@ return {
 		rbxthumb = noopPreviewFactory,
 		fromInstance = noopPreviewFactory,
 		chain = noopPreviewFactory,
-		isPlausibleId = function(_): boolean --[[ Line: 61 ]]
+		isPlausibleId = function(_): boolean
 			return false
 		end
 	}

@@ -1,8 +1,8 @@
 ﻿local ReactModule = require(game:GetService("CorePackages").Packages._Index.Foundation.Foundation.Parent.React)
 
-return function(p1, p2) --[[ Line: 16 | Named "useComposerFocusLock" ]]
+return function(p1, p2)
 	-- upvalues: ReactModule (copy)
-	ReactModule.useEffect(function() --[[ Line: 17 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p2 (copy), p1 (copy)
 		for _, value in p2 do
 			local Current = value.current

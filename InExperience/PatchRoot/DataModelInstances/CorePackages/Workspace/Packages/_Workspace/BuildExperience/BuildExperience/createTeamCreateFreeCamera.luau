@@ -1,4 +1,4 @@
-﻿local function createInputAction(Parent, Name, Type, Inputs) --[[ Line: 53 ]]
+﻿local function createInputAction(Parent, Name, Type, Inputs)
 	local InputAction = Instance.new("InputAction")
 	InputAction.Name = Name
 	InputAction.Type = Type
@@ -19,7 +19,7 @@
 	return InputAction
 end
 
-local function getFocusCFrame(Target, Radius: number, p1, Vector, Degrees: number, Model: Model, p2): CFrame? --[[ Line: 77 ]]
+local function getFocusCFrame(Target, Radius: number, p1, Vector, Degrees: number, Model: Model, p2): CFrame?
 	local Rotation = CFrame.lookAt(vector.create(0.5, 0.5, 1), vector.create(0, 0, 0)).Rotation
 	
 	if p1 == nil or Vector.X <= 1 or Vector.Y <= 1 then
@@ -60,7 +60,7 @@ local function getFocusCFrame(Target, Radius: number, p1, Vector, Degrees: numbe
 	return CFrame.new(Target - Rotation:VectorToWorldSpace((Vector3.new(ScaledXRatio * Largest, ScaledYRatio * Largest, -Largest)))) * Rotation
 end
 
-local function getRecenteredCFrame(Position, CF, WorldViewportRect, Vector, Degrees: number): CFrame? --[[ Line: 136 ]]
+local function getRecenteredCFrame(Position, CF, WorldViewportRect, Vector, Degrees: number): CFrame?
 	local Negated = -CF:PointToObjectSpace(Position).Z
 	
 	if Negated <= 0 or WorldViewportRect.Width <= 1 or WorldViewportRect.Height <= 1 or Vector.X <= 1 or Vector.Y <= 1 then
@@ -74,7 +74,7 @@ local function getRecenteredCFrame(Position, CF, WorldViewportRect, Vector, Degr
 	end
 end
 
-return function(Camera: Camera, UserInputService: UserInputService, p3, p4, p5) --[[ Line: 160 | Named "createTeamCreateFreeCamera" ]]
+return function(Camera: Camera, UserInputService: UserInputService, p3, p4, p5)
 	-- upvalues: createInputAction (copy), getRecenteredCFrame (copy), getFocusCFrame (copy)
 	local P16 = p4 or game:GetService("GuiService")
 	local Callback = p5 or createInputAction
@@ -98,12 +98,12 @@ return function(Camera: Camera, UserInputService: UserInputService, p3, p4, p5) 
 	local Tbl = {}
 	local Flag3 = false
 	
-	local function _() --[[ Line: 190 | Named "isInputBlocked" ]]
+	local function _()
 		-- upvalues: p3 (copy), UserInputService (copy)
 		return p3.getIsOpen() or UserInputService:GetFocusedTextBox() ~= nil
 	end
 	
-	local function isChatUsingInput(): boolean --[[ Line: 196 ]]
+	local function isChatUsingInput(): boolean
 		-- upvalues: p3 (copy), P16 (copy), UserInputService (copy)
 		if not p3.getIsChatOpen() then
 			return false
@@ -165,7 +165,7 @@ return function(Camera: Camera, UserInputService: UserInputService, p3, p4, p5) 
 		}
 	})
 	
-	local _ = function(p6) --[[ Line: 248 | Named "isTouchGestureBlocked" ]]
+	local _ = function(p6)
 		-- upvalues: Tbl (copy)
 		for _, value in Tbl do
 			if value then
@@ -175,7 +175,7 @@ return function(Camera: Camera, UserInputService: UserInputService, p3, p4, p5) 
 		return p6
 	end
 	
-	local TouchStartedConnection = UserInputService.TouchStarted:Connect(function(Touch, GameProcessedEvent) --[[ Line: 258 ]]
+	local TouchStartedConnection = UserInputService.TouchStarted:Connect(function(Touch, GameProcessedEvent)
 		-- upvalues: Flag3 (ref), Tbl (copy), p3 (copy), UserInputService (copy), v1 (ref), Config1 (ref)
 		if Flag3 then return end
 		Tbl[Touch] = GameProcessedEvent or (p3.getIsOpen() or UserInputService:GetFocusedTextBox() ~= nil)
@@ -185,11 +185,11 @@ return function(Camera: Camera, UserInputService: UserInputService, p3, p4, p5) 
 			Config1 = nil
 		end
 	end)
-	local TouchEndedConnection = UserInputService.TouchEnded:Connect(function(Hit) --[[ Line: 269 ]]
+	local TouchEndedConnection = UserInputService.TouchEnded:Connect(function(Hit)
 		-- upvalues: Tbl (copy)
 		Tbl[Hit] = nil
 	end)
-	local TouchPanConnection = UserInputService.TouchPan:Connect(function(TouchPositions, TotalTranslation, _, UserInputState, p7) --[[ Line: 274 ]]
+	local TouchPanConnection = UserInputService.TouchPan:Connect(function(TouchPositions, TotalTranslation, _, UserInputState, p7)
 		-- upvalues: Flag3 (ref), Tbl (copy), p3 (copy), UserInputService (copy), Config1 (ref), v1 (ref), Flag (ref), Config (ref), Ry (ref), Rx (ref), Camera (copy)
 		if not Flag3 then
 			local v2 = nil
@@ -224,7 +224,7 @@ return function(Camera: Camera, UserInputService: UserInputService, p3, p4, p5) 
 		end
 		v1 = nil
 	end)
-	local TouchPinchConnection = UserInputService.TouchPinch:Connect(function(_, Scale: number, _, UserInputState, p8) --[[ Line: 310 ]]
+	local TouchPinchConnection = UserInputService.TouchPinch:Connect(function(_, Scale: number, _, UserInputState, p8)
 		-- upvalues: Flag3 (ref), Tbl (copy), p3 (copy), UserInputService (copy), Config1 (ref), v1 (ref), Camera (copy), Position (ref), Flag (ref), Config (ref)
 		if not Flag3 then
 			local v3 = nil
@@ -262,7 +262,7 @@ return function(Camera: Camera, UserInputService: UserInputService, p3, p4, p5) 
 	end)
 	
 	return {
-		step = function(Amount: number) --[[ Line: 353 ]]
+		step = function(Amount: number)
 			-- upvalues: Flag3 (ref), p3 (copy), Camera (copy), P16 (copy), UserInputService (copy), WorldViewportRect (ref), ViewportSize (ref), FieldOfView (ref), Total (ref), Flag2 (ref), Position (ref), Model (ref), Flag (ref), Config (ref), Token (ref), Radius (ref), Flag1 (ref), Config1 (ref), v1 (ref), getRecenteredCFrame (upval), getFocusCFrame (upval), Rx (ref), Ry (ref), TeamCreateFreeCamera (copy), isChatUsingInput (copy), Look (copy), Pan (copy), Sprint (copy), Move (copy), Elevate (copy)
 			if Flag3 then return end
 			local WorldViewportRect1 = p3.getWorldViewportRect()
@@ -379,7 +379,7 @@ return function(Camera: Camera, UserInputService: UserInputService, p3, p4, p5) 
 				UserInputService.MouseBehavior = Enum.MouseBehavior.Default
 			end
 		end,
-		destroy = function() --[[ Line: 519 ]]
+		destroy = function()
 			-- upvalues: Flag3 (ref), TeamCreateFreeCamera (copy), Config (ref), Config1 (ref), v1 (ref), Tbl (copy), TouchStartedConnection (copy), TouchEndedConnection (copy), TouchPanConnection (copy), TouchPinchConnection (copy), UserInputService (copy)
 			Flag3 = true
 			TeamCreateFreeCamera:Destroy()

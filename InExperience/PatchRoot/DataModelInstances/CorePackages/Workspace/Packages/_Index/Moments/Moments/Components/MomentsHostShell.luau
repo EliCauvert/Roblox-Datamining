@@ -16,7 +16,7 @@ local SheetModule = if FFlagMomentsComments then require(Moments.Components.Comm
 local FFlagMomentsCreatorAnalyticsModule = require(Moments.Flags.FFlagMomentsCreatorAnalytics)
 local PostInsightsModule = if FFlagMomentsCreatorAnalyticsModule then require(Moments.Components.PostInsights) else nil
 
-local function closeSheets(p1) --[[ Line: 44 ]]
+local function closeSheets(p1)
 	-- upvalues: GetExperienceDetailsSheetStoreModule (copy), SheetModule (copy), PostInsightsModule (copy)
 	GetExperienceDetailsSheetStoreModule(false).close()
 	
@@ -32,9 +32,9 @@ local function closeSheets(p1) --[[ Line: 44 ]]
 	end
 end
 
-return function(p1) --[[ Line: 83 | Named "MomentsHostShell" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FFlagMomentsAvatarLookTryOn (copy), FFlagMomentsOverlaysInTopShellOnlyModule (copy), UseIsTopMomentsShellModule (copy), closeSheets (copy), MomentsSessionContextModule (copy), MomentsHostContextModule (copy), ExperienceDetailsSheet (copy), FFlagMomentsComments (copy), SheetModule (copy), FFlagMomentsCreatorAnalyticsModule (copy), PostInsightsModule (copy), ToastOverlayModule (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 85 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), FFlagMomentsAvatarLookTryOn (upval)
 		return {
 			openProfile = p1.openProfile,

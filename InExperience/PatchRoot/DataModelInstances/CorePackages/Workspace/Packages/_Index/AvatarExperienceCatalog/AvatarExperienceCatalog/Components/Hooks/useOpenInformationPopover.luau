@@ -7,13 +7,13 @@ local OpenInfoPeekViewFunction = require(Parent.DiscoveryRouting).OpenInfoPeekVi
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseIsSpatialFunction = require(Parent.Responsive).useIsSpatial
 
-return function(TitleText, BodyText) --[[ Line: 41 | Named "useOpenInformationPopover" ]]
+return function(TitleText, BodyText)
 	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), UseIsSpatialFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), AvatarScreen (copy), OpenInfoPeekViewFunction (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseNavigationResult = UseNavigationFunction()
 	local UseIsSpatialResult = UseIsSpatialFunction()
 	local UseLocalizationResult = UseLocalizationFunction({ gotIt = "Feature.Avatar.Action.GotIt" })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 52 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseIsSpatialResult (copy), UseNavigationResult (copy), AvatarScreen (upval), TitleText (copy), BodyText (copy), UseLocalizationResult (copy), UseDispatchResult (copy), OpenInfoPeekViewFunction (upval)
 		if UseIsSpatialResult then
 			UseNavigationResult.navigate(AvatarScreen.GenericPrompt, {

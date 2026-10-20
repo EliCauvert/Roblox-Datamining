@@ -21,21 +21,21 @@ local AdCampaignEligibilityUtilsModule = require(BuildExperience.Components.Ads.
 local FFlagBuildAgentAdCampaignRefreshEligibilityModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignRefreshEligibility)
 local FFlagBuildAgentAdCampaignToolCallStatusFallbackModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignToolCallStatusFallback)
 
-local function _(p1) --[[ Line: 40 | Named "persistenceFor" ]]
+local function _(p1)
 	return {
 		get = p1.getAdCampaignCard,
 		save = p1.recordAdCampaignAttempt
 	}
 end
 
-local _ = function(p1, p2): boolean --[[ Line: 44 | Named "hasFailedBackendAttempt" ]]
+local _ = function(p1, p2): boolean
 	-- upvalues: AdCampaignToolCallStatusModule (copy)
 	local DataResult = AdCampaignToolCallStatusModule.getAdCampaignToolCallStatusStore(false).getToolCallStatus(p1, p2).data(false)
 	
 	return DataResult ~= nil and DataResult.status == "failed"
 end
 
-return function(Current, p1) --[[ Line: 51 | Named "useAgentAdCampaignChatViewModel" ]]
+return function(Current, p1)
 	-- upvalues: GetAdUpsellEventStoreModule (copy), SignalsReactModule (copy), GetAgentAdCampaignStoreModule (copy), AdCampaignsModule (copy), Players (copy), ReactModule (copy), UseCreateAdCampaignModule (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (copy), AdCampaignScheduleUtilsModule (copy), LocalizationStringsModule (copy), FFlagBuildAgentAdCampaignToolCallStatusFallbackModule (copy), AdCampaignToolCallStatusModule (copy), SignalsModule (copy), AdCampaignEligibilityModule (copy), AdCampaignEligibilityUtilsModule (copy), SendBuildExperienceEventModule (copy)
 	local AdUpsellEventStoreModule = GetAdUpsellEventStoreModule(false)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(AdUpsellEventStoreModule.getAdCampaignRevision)
@@ -68,11 +68,11 @@ return function(Current, p1) --[[ Line: 51 | Named "useAgentAdCampaignChatViewMo
 	
 	if FFlagBuildAgentAdCampaignRefreshEligibilityModule then
 		v1, Callback = ReactModule.useState(nil)
-		ReactModule.useEffect(function() --[[ Line: 88 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: Callback (ref), UseRefResult4 (copy)
 			Callback(nil)
 			
-			return function() --[[ Line: 90 ]]
+			return function()
 				-- upvalues: UseRefResult4 (upval)
 				local Current = UseRefResult4.current
 				UseRefResult4.current = nil
@@ -86,27 +86,27 @@ return function(Current, p1) --[[ Line: 51 | Named "useAgentAdCampaignChatViewMo
 			UseRefResult4, Callback
 		})
 	end
-	ReactModule.useEffect(function() --[[ Line: 109 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy)
 		UseRefResult1.current = true
 		
-		return function() --[[ Line: 111 ]]
+		return function()
 			-- upvalues: UseRefResult1 (upval)
 			UseRefResult1.current = false
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 115 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
 		UseRefResult.current = nil
 		UseStateResult2(nil)
 	end, { Current.universeId, Current.sessionId, P4 })
-	ReactModule.useEffect(function() --[[ Line: 119 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Current (copy), AdUpsellEventStoreModule (copy)
 		if Current.isPageVisible then
 			AdUpsellEventStoreModule.retryAdCampaignCardWrites()
 		end
 	end, { Current.isPageVisible, AdUpsellEventStoreModule })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 125 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Current (copy), AdUpsellEventStoreModule (copy), P4 (copy)
 		local t = {}
 		
@@ -125,7 +125,7 @@ return function(Current, p1) --[[ Line: 51 | Named "useAgentAdCampaignChatViewMo
 		UseSignalStateResult,
 		P4
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 139 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy)
 		local t = {}
 		
@@ -136,13 +136,13 @@ return function(Current, p1) --[[ Line: 51 | Named "useAgentAdCampaignChatViewMo
 		end
 		return t
 	end, { UseMemoResult })
-	ReactModule.useEffect(function() --[[ Line: 148 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Current (copy), UseMemoResult1 (copy), AdCampaignsStore (copy)
 		if Current.isPageVisible and next(UseMemoResult1) ~= nil then
 			AdCampaignsStore.getAndFetchAdCampaigns()
 		end
 	end, { UseMemoResult1, Current.isPageVisible, AdCampaignsStore })
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 153 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult2 (copy), Current (copy), UseMemoResult1 (copy), AdCampaignScheduleUtilsModule (upval)
 		local t = {}
 		local UseSignalStateResult2_1 = UseSignalStateResult2 or {}
@@ -178,7 +178,7 @@ return function(Current, p1) --[[ Line: 51 | Named "useAgentAdCampaignChatViewMo
 		UseSignalStateResult2,
 		Current.universeId
 	})
-	ReactModule.useEffect(function() --[[ Line: 178 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult3 (copy), Current (copy), UseStateResult2_2 (copy)
 		local Current1 = UseRefResult3.current
 		UseRefResult3.current = Current.isPageVisible
@@ -187,7 +187,7 @@ return function(Current, p1) --[[ Line: 51 | Named "useAgentAdCampaignChatViewMo
 			UseStateResult2_2(DateTime.now().UnixTimestampMillis)
 		end
 	end, { Current.isPageVisible })
-	ReactModule.useEffect(function() --[[ Line: 185 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Current (copy), UseMemoResult2 (copy), AdCampaignScheduleUtilsModule (upval), UseStateResult3 (copy), UseStateResult2_2 (copy)
 		if not Current.isPageVisible then return end
 		local Smallest = 1e999
@@ -201,20 +201,20 @@ return function(Current, p1) --[[ Line: 51 | Named "useAgentAdCampaignChatViewMo
 		end
 		if Smallest == 1e999 then return end
 		local DelayedThread = nil
-		DelayedThread = task.delay(math.max(0, Smallest - DateTime.now().UnixTimestampMillis) / 1000, function() --[[ Line: 200 ]]
+		DelayedThread = task.delay(math.max(0, Smallest - DateTime.now().UnixTimestampMillis) / 1000, function()
 			-- upvalues: DelayedThread (ref), UseStateResult2_2 (upval)
 			DelayedThread = nil
 			UseStateResult2_2(DateTime.now().UnixTimestampMillis)
 		end)
 		
-		return function() --[[ Line: 204 ]]
+		return function()
 			-- upvalues: DelayedThread (ref)
 			if DelayedThread ~= nil then
 				task.cancel(DelayedThread)
 			end
 		end
 	end, { UseMemoResult2, Current.isPageVisible, UseStateResult3 })
-	local UseResult = ReactModule.useCallback(function(ToolCallId) --[[ Line: 211 ]]
+	local UseResult = ReactModule.useCallback(function(ToolCallId)
 		-- upvalues: UseMemoResult1 (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (upval), v1 (ref), UseMemoResult2 (copy), UseStateResult3 (copy), AdCampaignScheduleUtilsModule (upval), LocalizationStringsModule (upval)
 		local UseMemoResultEntry = UseMemoResult1[ToolCallId]
 		
@@ -231,7 +231,7 @@ return function(Current, p1) --[[ Line: 51 | Named "useAgentAdCampaignChatViewMo
 			}
 		end
 	end, { UseMemoResult1, UseMemoResult2, UseStateResult3, v1 })
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 243 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: FFlagBuildAgentAdCampaignRefreshEligibilityModule (upval), v1 (ref), UseSignalStateResult1 (copy), Current (copy)
 		if FFlagBuildAgentAdCampaignRefreshEligibilityModule and v1 ~= nil and v1.status == "loading" then
 			return true
@@ -241,7 +241,7 @@ return function(Current, p1) --[[ Line: 51 | Named "useAgentAdCampaignChatViewMo
 			return not Current.isPageVisible or UseSignalStateResultEntry ~= nil and UseSignalStateResultEntry.isPending
 		end
 	end, { Current.isPageVisible, UseSignalStateResult1, v1 })
-	local UseResult2 = ReactModule.useCallback(function(Tbl, CampaignId, IdempotencyKey) --[[ Line: 256 ]]
+	local UseResult2 = ReactModule.useCallback(function(Tbl, CampaignId, IdempotencyKey)
 		-- upvalues: AdUpsellEventStoreModule (copy), AgentAdCampaignStoreModule (copy), UseRefResult (copy), UseRefResult2 (copy), UseRefResult1 (copy), UseStateResult2 (copy)
 		if IdempotencyKey ~= nil and IdempotencyKey ~= Tbl.idempotencyKey then
 			return false
@@ -265,7 +265,7 @@ return function(Current, p1) --[[ Line: 51 | Named "useAgentAdCampaignChatViewMo
 		end
 		return RecordAdCampaignCreatedReceiptResult2
 	end, { AgentAdCampaignStoreModule, AdUpsellEventStoreModule })
-	ReactModule.useEffect(function() --[[ Line: 289 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagBuildAgentAdCampaignToolCallStatusFallbackModule (upval), P4 (copy), UseMemoResult (copy), UseSignalStateResult1 (copy), AdCampaignToolCallStatusModule (upval), SignalsModule (upval), UseResult2 (copy), UseCreateAdCampaignModuleResult (copy)
 		if not FFlagBuildAgentAdCampaignToolCallStatusFallbackModule or P4 == nil then return end
 		local Effects = {}
@@ -276,7 +276,7 @@ return function(Current, p1) --[[ Line: 51 | Named "useAgentAdCampaignChatViewMo
 				
 				if UseSignalStateResultEntry == nil or not UseSignalStateResultEntry.isPending then
 					local AndFetchToolCallStatus = AdCampaignToolCallStatusModule.getAdCampaignToolCallStatusStore(false).getAndFetchToolCallStatus(P4, value.toolCallId)
-					table.insert(Effects, SignalsModule.createEffect(function(p2) --[[ Line: 306 ]]
+					table.insert(Effects, SignalsModule.createEffect(function(p2)
 						-- upvalues: AndFetchToolCallStatus (copy), UseResult2 (upval), value (copy), UseCreateAdCampaignModuleResult (upval)
 						local DataResult = AndFetchToolCallStatus.data(p2)
 						
@@ -287,7 +287,7 @@ return function(Current, p1) --[[ Line: 51 | Named "useAgentAdCampaignChatViewMo
 				end
 			end
 		end
-		return function() --[[ Line: 316 ]]
+		return function()
 			-- upvalues: Effects (copy)
 			for _, effect in Effects do
 				effect()
@@ -300,7 +300,7 @@ return function(Current, p1) --[[ Line: 51 | Named "useAgentAdCampaignChatViewMo
 		UseResult2,
 		UseCreateAdCampaignModuleResult.refresh
 	})
-	local UseResult3 = ReactModule.useCallback(function(ToolCallId, Offers): string --[[ Line: 324 ]]
+	local UseResult3 = ReactModule.useCallback(function(ToolCallId, Offers): string
 		-- upvalues: P4 (copy), UseRefResult2 (copy), Current (copy), UseMemoResult1 (copy), UseRefResult (copy), AdUpsellEventStoreModule (copy), AgentAdCampaignStoreModule (copy), UseStateResult2_1 (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (upval), FFlagBuildAgentAdCampaignToolCallStatusFallbackModule (upval), AdCampaignToolCallStatusModule (upval), UseRefResult5 (copy), UseStateResult2 (copy), UseCreateAdCampaignModuleResult (copy)
 		if P4 == nil or UseRefResult2.current.userId ~= P4 then
 			return "ignored"
@@ -374,7 +374,7 @@ return function(Current, p1) --[[ Line: 51 | Named "useAgentAdCampaignChatViewMo
 		UseCreateAdCampaignModuleResult.clearCreateError, P4, UseStateResult2_1,
 		UseRefResult5
 	})
-	local UseResult4 = ReactModule.useCallback(function(ToolCallId, p2) --[[ Line: 427 ]]
+	local UseResult4 = ReactModule.useCallback(function(ToolCallId, p2)
 		-- upvalues: FFlagBuildAgentAdCampaignRefreshEligibilityModule (upval), UseResult3 (copy), UseRefResult2 (copy), UseRefResult1 (copy), P4 (copy), Current (copy), UseRefResult (copy), UseRefResult4 (copy), AdUpsellEventStoreModule (copy), AgentAdCampaignStoreModule (copy), Callback (ref), AdCampaignEligibilityModule (upval), AdCampaignEligibilityUtilsModule (upval)
 		if not FFlagBuildAgentAdCampaignRefreshEligibilityModule then
 			UseResult3(ToolCallId, p2)
@@ -392,14 +392,14 @@ return function(Current, p1) --[[ Line: 51 | Named "useAgentAdCampaignChatViewMo
 			UseRefResult4.current = Current2
 			Callback({ status = "loading", toolCallId = ToolCallId })
 			
-			local function _(): boolean --[[ Line: 457 | Named "isCurrent" ]]
+			local function _(): boolean
 				-- upvalues: UseRefResult2 (upval), UseRefResult1 (upval), UseRefResult4 (upval), Current2 (copy), Current1 (copy)
 				local Current = UseRefResult2.current
 				
 				return UseRefResult1.current and (UseRefResult4.current == Current2 and (Current.isPageVisible and (Current.universeId == Current1.universeId and Current.sessionId == Current1.sessionId and Current.userId == Current1.userId)))
 			end
 			
-			Current2.timer = task.delay(15, function() --[[ Line: 466 ]]
+			Current2.timer = task.delay(15, function()
 				-- upvalues: Current2 (copy), UseRefResult2 (upval), UseRefResult1 (upval), UseRefResult4 (upval), Current1 (copy), Callback (upval), ToolCallId (copy)
 				Current2.timer = nil
 				local Current = UseRefResult2.current
@@ -409,7 +409,7 @@ return function(Current, p1) --[[ Line: 51 | Named "useAgentAdCampaignChatViewMo
 					Callback({ status = "failed", toolCallId = ToolCallId })
 				end
 			end)
-			AdCampaignEligibilityModule.getAdCampaignEligibilityStore(false).fetchEligibility(Current1.universeId, function(p3) --[[ Line: 474 ]]
+			AdCampaignEligibilityModule.getAdCampaignEligibilityStore(false).fetchEligibility(Current1.universeId, function(p3)
 				-- upvalues: UseRefResult2 (upval), UseRefResult1 (upval), UseRefResult4 (upval), Current2 (copy), Current1 (copy), Callback (upval), ToolCallId (copy), AdCampaignEligibilityUtilsModule (upval), UseResult3 (upval)
 				local Current = UseRefResult2.current
 				
@@ -443,7 +443,7 @@ return function(Current, p1) --[[ Line: 51 | Named "useAgentAdCampaignChatViewMo
 		UseResult3, Current.universeId, Current.sessionId, P4,
 		AdUpsellEventStoreModule, AgentAdCampaignStoreModule, UseRefResult4, Callback
 	})
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 515 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseCreateAdCampaignModuleResult (copy), UseStateResult (copy), UseRefResult (copy), UseStateResult2 (copy)
 		if not UseCreateAdCampaignModuleResult.isCreatePending and UseStateResult ~= nil and UseRefResult.current == UseStateResult then
 			UseRefResult.current = nil
@@ -454,7 +454,7 @@ return function(Current, p1) --[[ Line: 51 | Named "useAgentAdCampaignChatViewMo
 		UseStateResult
 	})
 	local IsPageVisible = UseStateResult ~= nil and (UseStateResult.universeId == Current.universeId and UseStateResult.sessionId == Current.sessionId and Current.isPageVisible)
-	local UseResult6 = ReactModule.useCallback(function(p2) --[[ Line: 527 ]]
+	local UseResult6 = ReactModule.useCallback(function(p2)
 		-- upvalues: P4 (copy), UseRefResult2 (copy), UseStateResult (copy), UseRefResult (copy), IsPageVisible (copy), UseCreateAdCampaignModuleResult (copy), UseMemoResult1 (copy), AgentAdCampaignStoreModule (copy), AdUpsellEventStoreModule (copy), UseStateResult2_1 (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (upval), FFlagBuildAgentAdCampaignToolCallStatusFallbackModule (upval), AdCampaignToolCallStatusModule (upval), UseStateResult2 (copy), Callback (ref), SendBuildExperienceEventModule (upval), UseResult2 (copy)
 		if P4 == nil or UseRefResult2.current.userId ~= P4 then return end
 		if UseStateResult == nil or UseRefResult.current ~= UseStateResult or p2 == nil or not IsPageVisible or not UseRefResult2.current.isPageVisible or UseRefResult2.current.universeId ~= UseStateResult.universeId or UseRefResult2.current.sessionId ~= UseStateResult.sessionId or UseCreateAdCampaignModuleResult.isCreatePending or UseMemoResult1[UseStateResult.toolCallId] ~= nil then return end
@@ -533,14 +533,14 @@ return function(Current, p1) --[[ Line: 51 | Named "useAgentAdCampaignChatViewMo
 				fundingType = p2.paymentType,
 				campaignOption = p2.campaignOption
 			})
-			UseCreateAdCampaignModuleResult.createCampaign(p2, function(p3, p4, p5) --[[ Line: 621 ]]
+			UseCreateAdCampaignModuleResult.createCampaign(p2, function(p3, p4, p5)
 				-- upvalues: UseResult2 (upval), AgentAdCampaignStoreModule (upval), StartDurableResult (copy)
 				if p5 ~= nil then
 					UseResult2(AgentAdCampaignStoreModule.toRecord(StartDurableResult), p3, p4)
 				end
 			end, if FFlagBuildAgentAdCampaignToolCallStatusFallbackModule then UseStateResult.toolCallId else nil, {
 				idempotencyKey = StartDurableResult.idempotencyKey,
-				onFailed = function(p3) --[[ Line: 629 ]]
+				onFailed = function(p3)
 					-- upvalues: AgentAdCampaignStoreModule (upval), StartDurableResult (copy), AdUpsellEventStoreModule (upval), FFlagBuildAgentAdCampaignToolCallStatusFallbackModule (upval), P4 (upval), AdCampaignToolCallStatusModule (upval)
 					if AgentAdCampaignStoreModule.finishDurable(StartDurableResult, p3, {
 						get = AdUpsellEventStoreModule.getAdCampaignCard,

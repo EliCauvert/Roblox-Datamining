@@ -1,4 +1,4 @@
-﻿local function parsePath(Text: string) --[[ Line: 4 ]]
+﻿local function parsePath(Text: string)
 	local Parts = string.split(Text, "/")
 	
 	for i = #Parts, 1, -1 do
@@ -9,7 +9,7 @@
 	return Parts
 end
 
-local function _(List, Count): boolean --[[ Line: 14 | Named "isManifestResolved" ]]
+local function _(List, Count): boolean
 	local Count1 = 0
 	
 	for _ in pairs(List) do
@@ -20,7 +20,7 @@ local function _(List, Count): boolean --[[ Line: 14 | Named "isManifestResolved
 	return Count1 == Count
 end
 
-local function unbindNodeDescend(p1, RootInstToManifestIsNil) --[[ Line: 24 ]]
+local function unbindNodeDescend(p1, RootInstToManifestIsNil)
 	-- upvalues: unbindNodeDescend (copy)
 	if p1.instance == nil then return end
 	p1.instance = nil
@@ -47,7 +47,7 @@ end
 local AtomicBindingModule = {}
 AtomicBindingModule.__index = AtomicBindingModule
 
-function AtomicBindingModule.new(List, _boundFn) --[[ Line: 54 ]]
+function AtomicBindingModule.new(List, _boundFn)
 	-- upvalues: parsePath (copy), AtomicBindingModule (copy)
 	local _dtorMap = {}
 	local _connections = {}
@@ -71,7 +71,7 @@ function AtomicBindingModule.new(List, _boundFn) --[[ Line: 54 ]]
 	}, AtomicBindingModule))
 end
 
-function AtomicBindingModule:_startBoundFn(Key, InstanceDoesNotExists) --[[ Line: 80 ]]
+function AtomicBindingModule:_startBoundFn(Key, InstanceDoesNotExists)
 	local BoundFnFunction = self._boundFn
 	local DtorMap = self._dtorMap
 	local Callback: () -> () = DtorMap[Key]
@@ -87,7 +87,7 @@ function AtomicBindingModule:_startBoundFn(Key, InstanceDoesNotExists) --[[ Line
 	end
 end
 
-function AtomicBindingModule:_stopBoundFn(Key) --[[ Line: 96 ]]
+function AtomicBindingModule:_stopBoundFn(Key)
 	local DtorMap = self._dtorMap
 	local Callback: () -> () = DtorMap[Key]
 	
@@ -97,7 +97,7 @@ function AtomicBindingModule:_stopBoundFn(Key) --[[ Line: 96 ]]
 	end
 end
 
-function AtomicBindingModule:bindRoot(Key) --[[ Line: 106 ]]
+function AtomicBindingModule:bindRoot(Key)
 	-- upvalues: unbindNodeDescend (copy)
 	debug.profilebegin("AtomicBinding:BindRoot")
 	local ParsedManifest = self._parsedManifest
@@ -138,7 +138,7 @@ function AtomicBindingModule:bindRoot(Key) --[[ Line: 106 ]]
 	end
 	debug.profileend()
 	
-	local function processNode(p2) --[[ Line: 161 ]]
+	local function processNode(p2)
 		-- upvalues: InstanceDoesNotExists (copy), processNode (copy), self (copy), Key (copy), unbindNodeDescend (upval), ManifestSizeTarget (copy)
 		local InstanceDoesNotExist = assert(p2.instance, "instance does not exist")
 		local Children = p2.children
@@ -149,7 +149,7 @@ function AtomicBindingModule:bindRoot(Key) --[[ Line: 106 ]]
 			InstanceDoesNotExists[Alias] = InstanceDoesNotExist
 		end
 		if not NoChildren then
-			local function processAddChild(Child) --[[ Line: 173 ]]
+			local function processAddChild(Child)
 				-- upvalues: Children (copy), processNode (upval)
 				local Child1 = Children[Child.Name]
 				
@@ -161,7 +161,7 @@ function AtomicBindingModule:bindRoot(Key) --[[ Line: 106 ]]
 				end
 			end
 			
-			local function processDeleteChild(Child) --[[ Line: 184 ]]
+			local function processDeleteChild(Child)
 				-- upvalues: Children (copy), self (upval), Key (upval), unbindNodeDescend (upval), InstanceDoesNotExists (upval), InstanceDoesNotExist (copy), processNode (upval)
 				local Name = Child.Name
 				local Child1 = Children[Name]
@@ -215,7 +215,7 @@ function AtomicBindingModule:bindRoot(Key) --[[ Line: 106 ]]
 	debug.profileend()
 end
 
-function AtomicBindingModule:unbindRoot(Key) --[[ Line: 237 ]]
+function AtomicBindingModule:unbindRoot(Key)
 	-- upvalues: unbindNodeDescend (copy)
 	local RootInstToRootNode = self._rootInstToRootNode
 	local RootInstToManifest = self._rootInstToManifest
@@ -229,7 +229,7 @@ function AtomicBindingModule:unbindRoot(Key) --[[ Line: 237 ]]
 	RootInstToManifest[Key] = nil
 end
 
-function AtomicBindingModule:destroy() --[[ Line: 253 ]]
+function AtomicBindingModule:destroy()
 	-- upvalues: unbindNodeDescend (copy)
 	debug.profilebegin("AtomicBinding:destroy")
 	

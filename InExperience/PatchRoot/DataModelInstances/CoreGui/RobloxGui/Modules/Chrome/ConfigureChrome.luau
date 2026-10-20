@@ -17,17 +17,17 @@ local FFlagAppNavMyStatsTab = SharedFlagsModule.FFlagAppNavMyStatsTab
 local ArgoPartyExperimentation = require(CorePackages.Workspace.Packages.SocialExperiments).ArgoPartyExperimentation
 local IsSpatialFunction = require(CorePackages.Workspace.Packages.AppCommonLib).isSpatial
 
-local function _() --[[ Line: 26 | Named "initializeIntegrations" ]]
+local function _()
 	-- upvalues: Chrome (copy)
 	require(Chrome.Integrations)
 end
 
-local _ = function() --[[ Line: 30 ]]
+local _ = function()
 	-- upvalues: ConfigureShortcutsModule (copy)
 	ConfigureShortcutsModule()
 end
 
-local function configureUnibar() --[[ Line: 34 ]]
+local function configureUnibar()
 	-- upvalues: BuildMenuOrderModule (copy), GetFFlagDebugEnableUnibarDummyIntegrationsFunction (copy), IsConnectUnibarEnabledModule (copy), ArgoPartyExperimentation (copy), ConstantsModule (copy), FFlagAppNavMyStatsTab (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), ServiceModule (copy)
 	local MenuOrderModule = BuildMenuOrderModule()
 	local List = { "nine_dot", "chat", "toggle_mic_mute" }

@@ -9,7 +9,7 @@ local UseLastInputMethodFunction = FocusNavigationUtilsModule.useLastInputMethod
 local UseAutoFocusFunction = FocusNavigationUtilsModule.useAutoFocus
 local UseDescendantHasFocusFunction = FocusNavigationUtilsModule.useDescendantHasFocus
 
-return function(p1) --[[ Line: 22 | Named "useFocusNavigationSurface" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseRegisterFocusNavigableSurfaceFunction (copy), UseDeRegisterFocusNavigableSurfaceFunction (copy), UseAutoFocusFunction (copy), UseDescendantHasFocusFunction (copy), UseLastInputMethodFunction (copy), GuiService (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseRegisterFocusNavigableSurfaceResult = UseRegisterFocusNavigableSurfaceFunction()
@@ -18,7 +18,7 @@ return function(p1) --[[ Line: 22 | Named "useFocusNavigationSurface" ]]
 	local UseDescendantHasFocusResult = UseDescendantHasFocusFunction(UseStateResult)
 	local UseLastInputMethodResult = UseLastInputMethodFunction()
 	local IsGamepad: boolean = UseLastInputMethodResult == "Gamepad" or UseLastInputMethodResult == "Keyboard"
-	ReactModule.useEffect(function() --[[ Line: 31 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseRegisterFocusNavigableSurfaceResult (copy), p1 (copy), GuiService (upval), UseDeRegisterFocusNavigableSurfaceResult (copy)
 		if UseStateResult then
 			UseRegisterFocusNavigableSurfaceResult(p1.focusNavigableSurfaceIdentifier, UseStateResult)
@@ -28,7 +28,7 @@ return function(p1) --[[ Line: 22 | Named "useFocusNavigationSurface" ]]
 			GuiService:RemoveSelectionGroup(p1.selectionGroupName)
 			GuiService.SelectedCoreObject = nil
 		end
-		return function() --[[ Line: 42 ]]
+		return function()
 			-- upvalues: UseDeRegisterFocusNavigableSurfaceResult (upval), p1 (upval), UseStateResult (upval), GuiService (upval)
 			UseDeRegisterFocusNavigableSurfaceResult(p1.focusNavigableSurfaceIdentifier, UseStateResult)
 			GuiService:RemoveSelectionGroup(p1.selectionGroupName)
@@ -40,11 +40,11 @@ return function(p1) --[[ Line: 22 | Named "useFocusNavigationSurface" ]]
 		p1.selectionGroupName
 	})
 	local NoUseDescendantHasFocusResult: boolean = IsGamepad and (UseStateResult and not UseDescendantHasFocusResult)
-	ReactModule.useEffect(function() --[[ Line: 52 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: NoUseDescendantHasFocusResult (copy), UseAutoFocusResult (copy)
 		local UseAutoFocusResultResult = if NoUseDescendantHasFocusResult then UseAutoFocusResult() else nil
 		
-		return function() --[[ Line: 57 ]]
+		return function()
 			-- upvalues: UseAutoFocusResultResult (ref)
 			if UseAutoFocusResultResult then
 				UseAutoFocusResultResult.cancel()

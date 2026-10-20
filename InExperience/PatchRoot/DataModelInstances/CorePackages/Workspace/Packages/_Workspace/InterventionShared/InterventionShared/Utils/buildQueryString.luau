@@ -1,6 +1,6 @@
 ﻿local HttpService = game:GetService("HttpService")
 
-return function(List): string --[[ Line: 10 | Named "buildQueryString" ]]
+return function(List): string
 	-- upvalues: HttpService (copy)
 	local List1 = {}
 	

@@ -2,7 +2,7 @@
 local ReactModule = require(VerifiedParentalConsentDialog.Parent.React)
 local ScreenSizeContextModule = require(VerifiedParentalConsentDialog.Hooks.ScreenSizeContext)
 
-return function() --[[ Line: 6 | Named "useScreenSize" ]]
+return function()
 	-- upvalues: ReactModule (copy), ScreenSizeContextModule (copy)
 	return ReactModule.useContext(ScreenSizeContextModule)
 end

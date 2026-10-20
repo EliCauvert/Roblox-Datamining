@@ -8,7 +8,7 @@ local config = {
 	[ChatBubbleEnumModule.BUBBLE_VARIANTS.BOTTOM] = MessageGroupShapeModule.Position.Last
 }
 
-return function(p1, p2, p3) --[[ Line: 14 | Named "getChatBubbleCornerRadii" ]]
+return function(p1, p2, p3)
 	-- upvalues: GetGroupCornerRadiiModule (copy), MessageGroupShapeModule (copy), config (copy)
 	return GetGroupCornerRadiiModule({
 		direction = if p2 then MessageGroupShapeModule.Direction.Incoming else MessageGroupShapeModule.Direction.Outgoing,

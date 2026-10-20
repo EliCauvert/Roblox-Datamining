@@ -13,11 +13,11 @@ local PopoverAlign = FoundationModule.Enums.PopoverAlign
 local PopoverSide = FoundationModule.Enums.PopoverSide
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-local function _(Vector): boolean --[[ Line: 28 | Named "isRectReady" ]]
+local function _(Vector): boolean
 	return Vector.X > 0 and Vector.Y > 0
 end
 
-return ReactModule.memo(function() --[[ Line: 32 | Named "WhatsNewTourtip" ]]
+return ReactModule.memo(function()
 	-- upvalues: GetWhatsNewStoreModule (copy), UseWhatsNewRuntimeStateModule (copy), EnumsModule (copy), ReactModule (copy), UseLocalizationFunction (copy), WhatsNewTelemetryModule (copy), ButtonVariant (copy), View (copy), EducationalTooltip (copy), PopoverSide (copy), PopoverAlign (copy)
 	local WhatsNewStoreModule = GetWhatsNewStoreModule()
 	local UseWhatsNewRuntimeStateModuleResult = UseWhatsNewRuntimeStateModule()
@@ -43,7 +43,7 @@ return ReactModule.memo(function() --[[ Line: 32 | Named "WhatsNewTourtip" ]]
 		local AbsoluteSize = AnchorRef.AbsoluteSize
 		IsYAbove = AbsoluteSize.X > 0 and AbsoluteSize.Y > 0
 	end
-	ReactModule.useEffect(function() --[[ Line: 62 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: HasGlobalStepIndex (copy), CurrentEntry (copy), UseRefResult (copy), WhatsNewTelemetryModule (upval), WhatsNewStoreModule (copy)
 		if not HasGlobalStepIndex or CurrentEntry == nil then
 			UseRefResult.current = nil
@@ -57,7 +57,7 @@ return ReactModule.memo(function() --[[ Line: 32 | Named "WhatsNewTourtip" ]]
 			return
 		end
 	end, { HasGlobalStepIndex, CurrentEntry, WhatsNewStoreModule })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 79 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: CurrentEntry (copy), WhatsNewStoreModule (copy)
 		if CurrentEntry ~= nil then
 			WhatsNewStoreModule.next()
@@ -65,7 +65,7 @@ return ReactModule.memo(function() --[[ Line: 32 | Named "WhatsNewTourtip" ]]
 			return
 		end
 	end, { WhatsNewStoreModule, CurrentEntry })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 86 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: CurrentEntry (copy), WhatsNewStoreModule (copy)
 		if CurrentEntry ~= nil then
 			WhatsNewStoreModule.back()
@@ -73,7 +73,7 @@ return ReactModule.memo(function() --[[ Line: 32 | Named "WhatsNewTourtip" ]]
 			return
 		end
 	end, { WhatsNewStoreModule, CurrentEntry })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 93 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: CurrentEntry (copy), WhatsNewStoreModule (copy)
 		if CurrentEntry ~= nil then
 			WhatsNewStoreModule.completeTour({ earlyDismiss = true })

@@ -13,7 +13,7 @@ local UseDeviceOrientationFunction = require(Parent.RobloxAppHooks).useDeviceOri
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local HealthBarColors = ConstantsModule.HealthBarColors
 
-local function getHealthBarColor(p1) --[[ Line: 25 ]]
+local function getHealthBarColor(p1)
 	-- upvalues: HealthBarColors (copy)
 	if p1 <= HealthBarColors.Red.Fraction then
 		return HealthBarColors.Red.Color
@@ -41,7 +41,7 @@ local function getHealthBarColor(p1) --[[ Line: 25 ]]
 	return Color3.new(TotalRatio.X, TotalRatio.Y, TotalRatio.Z)
 end
 
-return ReactModule.memo(function(p2) --[[ Line: 54 | Named "HealthBar" ]]
+return ReactModule.memo(function(p2)
 	-- upvalues: StarterGui (copy), UseTokensFunction (copy), UseDeviceOrientationFunction (copy), SignalsReactModule (copy), GetLocalHumanoidStore (copy), ReactModule (copy), ConstantsModule (copy), SignalsModule (copy), View (copy), RobloxAppEnumsModule (copy), getHealthBarColor (copy)
 	local MockStarterGui = p2.mockStarterGui or StarterGui
 	local UseTokensResult = UseTokensFunction()
@@ -51,7 +51,7 @@ return ReactModule.memo(function(p2) --[[ Line: 54 | Named "HealthBar" ]]
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(ConstantsModule.InitialHealth)
 	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(ConstantsModule.InitialHealth)
 	local UseBindingResult3, UseBindingResult2_2 = ReactModule.useBinding(false)
-	local MapResult = ReactModule.joinBindings({ UseBindingResult, UseBindingResult1, UseBindingResult3 }):map(function(Entry): number --[[ Line: 67 ]]
+	local MapResult = ReactModule.joinBindings({ UseBindingResult, UseBindingResult1, UseBindingResult3 }):map(function(Entry): number
 		local Entry1 = Entry[1]
 		local Entry2: number = Entry[2]
 		local ClampedValue = 1
@@ -66,26 +66,26 @@ return ReactModule.memo(function(p2) --[[ Line: 54 | Named "HealthBar" ]]
 		end
 		return ClampedValue
 	end)
-	local MapResult1 = ReactModule.joinBindings({ UseBindingResult, UseBindingResult1 }):map(function(Entry): boolean --[[ Line: 82 ]]
+	local MapResult1 = ReactModule.joinBindings({ UseBindingResult, UseBindingResult1 }):map(function(Entry): boolean
 		return Entry[1] < Entry[2]
 	end)
-	ReactModule.useEffect(function() --[[ Line: 86 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SignalsModule (upval), UseSignalStateResult (copy), UseBindingResult2 (copy), ConstantsModule (upval), UseBindingResult2_1 (copy), UseBindingResult2_2 (copy), MockStarterGui (copy), UseStateResult2 (copy)
-		local Effect = SignalsModule.createEffect(function(p3) --[[ Line: 87 ]]
+		local Effect = SignalsModule.createEffect(function(p3)
 			-- upvalues: UseSignalStateResult (upval), UseBindingResult2 (upval), ConstantsModule (upval), UseBindingResult2_1 (upval), UseBindingResult2_2 (upval)
 			local HealthValue = UseSignalStateResult.getHealthValue(p3)
 			UseBindingResult2(HealthValue.health or ConstantsModule.InitialHealth)
 			UseBindingResult2_1(HealthValue.maxHealth or ConstantsModule.InitialHealth)
 			UseBindingResult2_2(HealthValue.isDead or false)
 		end)
-		local CoreGuiChangedSignalConnection = MockStarterGui.CoreGuiChangedSignal:Connect(function(CoreGuiType, Enabled) --[[ Line: 96 ]]
+		local CoreGuiChangedSignalConnection = MockStarterGui.CoreGuiChangedSignal:Connect(function(CoreGuiType, Enabled)
 			-- upvalues: UseStateResult2 (upval)
 			if CoreGuiType == Enum.CoreGuiType.Health or CoreGuiType == Enum.CoreGuiType.All then
 				UseStateResult2(Enabled)
 			end
 		end)
 		
-		return function() --[[ Line: 103 ]]
+		return function()
 			-- upvalues: Effect (copy), CoreGuiChangedSignalConnection (copy)
 			Effect()
 			CoreGuiChangedSignalConnection:Disconnect()
@@ -116,11 +116,11 @@ return ReactModule.memo(function(p2) --[[ Line: 54 | Named "HealthBar" ]]
 			Fill = ReactModule.createElement(View, {
 				tag = "anchor-left-center radius-medium",
 				testId = "health-bar-fill",
-				backgroundStyle = MapResult:map(function(p3) --[[ Line: 138 ]]
+				backgroundStyle = MapResult:map(function(p3)
 					-- upvalues: getHealthBarColor (upval)
 					return { Transparency = 0, Color3 = getHealthBarColor(p3) }
 				end),
-				Size = MapResult:map(function(XScale): UDim2 --[[ Line: 144 ]]
+				Size = MapResult:map(function(XScale): UDim2
 					return UDim2.fromScale(XScale, 1)
 				end)
 			})

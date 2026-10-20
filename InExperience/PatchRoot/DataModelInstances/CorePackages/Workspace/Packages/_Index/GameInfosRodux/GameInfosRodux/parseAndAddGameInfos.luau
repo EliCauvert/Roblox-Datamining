@@ -8,14 +8,14 @@ local DataHydrationModule = require(Parent.DataHydration)
 local _ = require(Parent.DiscoveryTypes)
 local FFlagMigrateGameInfoToStore = require(Parent.SharedFlags).FFlagMigrateGameInfoToStore
 
-return function(_, p1, List, Callback, Callback2, Callback1) --[[ Line: 12 | Named "parseAndAddGameInfos" ]]
+return function(_, p1, List, Callback, Callback2, Callback1)
 	-- upvalues: GameInfosReducerModule (copy), FFlagMigrateGameInfoToStore (copy), TutilsModule (copy), AddGamesModule (copy), SyncGameInfosToStoreModule (copy), DataHydrationModule (copy)
 	local PersonalizationEntry = p1:getState().Personalization[GameInfosReducerModule.key]
 	local t = {}
 	local List1 = {}
 	local T = if FFlagMigrateGameInfoToStore then {} else nil
 	for _, value in List do
-		Callback(value):match(function(p2) --[[ Line: 33 ]]
+		Callback(value):match(function(p2)
 			-- upvalues: FFlagMigrateGameInfoToStore (upval), T (copy), TutilsModule (upval), PersonalizationEntry (copy), t (copy), Callback1 (copy), List1 (copy), Callback2 (copy), value (copy)
 			local UniverseId = p2.universeId
 			
@@ -32,7 +32,7 @@ return function(_, p1, List, Callback, Callback2, Callback1) --[[ Line: 12 | Nam
 			if Callback2 then
 				Callback2(value, p2)
 			end
-		end):matchError(function(p2) --[[ Line: 52 ]]
+		end):matchError(function(p2)
 			warn(`parseAndAddGameInfos could not parse gameInfo: {p2}`)
 		end)
 	end

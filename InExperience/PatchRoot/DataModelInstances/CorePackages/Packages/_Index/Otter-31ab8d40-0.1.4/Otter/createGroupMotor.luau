@@ -4,7 +4,7 @@ local CreateSignalModule = require(script.Parent.createSignal)
 local config = { prototype = {} }
 config.__index = config.prototype
 
-local function createGroupMotor(List) --[[ Line: 10 ]]
+local function createGroupMotor(List)
 	-- upvalues: CreateSignalModule (copy), config (copy)
 	assert(typeof(List) == "table")
 	local t = {}
@@ -25,10 +25,10 @@ local function createGroupMotor(List) --[[ Line: 10 ]]
 	return config1
 end
 
-function config.prototype.start(p1) --[[ Line: 36 ]]
+function config.prototype.start(p1)
 	-- upvalues: RunService (copy)
 	if not p1.__running then
-		p1.__connection = RunService.Heartbeat:Connect(function(DeltaTime) --[[ Line: 41 ]]
+		p1.__connection = RunService.Heartbeat:Connect(function(DeltaTime)
 			-- upvalues: p1 (copy)
 			p1:step(DeltaTime)
 		end)
@@ -38,14 +38,14 @@ function config.prototype.start(p1) --[[ Line: 36 ]]
 	end
 end
 
-function config.prototype.stop(p1) --[[ Line: 48 ]]
+function config.prototype.stop(p1)
 	if p1.__connection ~= nil then
 		p1.__connection:Disconnect()
 		p1.__running = false
 	end
 end
 
-function config.prototype.step(p1, StepResult) --[[ Line: 55 ]]
+function config.prototype.step(p1, StepResult)
 	assert(typeof(StepResult) == "number")
 	
 	if p1.__allComplete then return end
@@ -82,7 +82,7 @@ function config.prototype.step(p1, StepResult) --[[ Line: 55 ]]
 	end
 end
 
-function config.prototype.setGoal(p2, List) --[[ Line: 102 ]]
+function config.prototype.setGoal(p2, List)
 	-- upvalues: AssignModule (copy)
 	assert(typeof(List) == "table")
 	p2.__goals = AssignModule({}, p2.__goals, List)
@@ -99,19 +99,19 @@ function config.prototype.setGoal(p2, List) --[[ Line: 102 ]]
 	p2:start()
 end
 
-function config.prototype.onStep(p3, p4) --[[ Line: 121 ]]
+function config.prototype.onStep(p3, p4)
 	assert(typeof(p4) == "function")
 	
 	return p3.__onStep:subscribe(p4)
 end
 
-function config.prototype.onComplete(p3, p4) --[[ Line: 127 ]]
+function config.prototype.onComplete(p3, p4)
 	assert(typeof(p4) == "function")
 	
 	return p3.__onComplete:subscribe(p4)
 end
 
-function config.prototype.destroy(p3) --[[ Line: 133 ]]
+function config.prototype.destroy(p3)
 	p3:stop()
 end
 

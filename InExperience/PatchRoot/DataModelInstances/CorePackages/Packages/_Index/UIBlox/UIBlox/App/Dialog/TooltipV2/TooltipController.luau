@@ -11,7 +11,7 @@ local WithAnimationModule = require(Parent2.Core.Animation.withAnimation)
 local TooltipCalloutModule = require(Parent.TooltipCallout)
 local TooltipOrientationModule = require(Parent1.Tooltip.Enum.TooltipOrientation)
 
-local function argmax(List, p1) --[[ Line: 19 ]]
+local function argmax(List, p1)
 	local v1 = nil
 	
 	for i, value in pairs(List) do
@@ -22,7 +22,7 @@ local function argmax(List, p1) --[[ Line: 19 ]]
 	return v1
 end
 
-local function getDistances(Vector, Vector1) --[[ Line: 32 ]]
+local function getDistances(Vector, Vector1)
 	-- upvalues: TooltipOrientationModule (copy), ConstantsModule (copy)
 	return {
 		[TooltipOrientationModule.Top] = Vector.Y - ConstantsModule.SCREEN_MARGIN,
@@ -32,7 +32,7 @@ local function getDistances(Vector, Vector1) --[[ Line: 32 ]]
 	}
 end
 
-function getOrientationAndContentOffset(OPPOSITEORIENTATIONEntry, p2, Vector, Vector1) --[[ Line: 43 ]]
+function getOrientationAndContentOffset(OPPOSITEORIENTATIONEntry, p2, Vector, Vector1)
 	-- upvalues: argmax (copy), TooltipOrientationModule (copy), ConstantsModule (copy)
 	local t = {}
 	local ZeroVector = Vector2.zero
@@ -74,20 +74,20 @@ function getOrientationAndContentOffset(OPPOSITEORIENTATIONEntry, p2, Vector, Ve
 	return OPPOSITEORIENTATIONEntry, ZeroVector
 end
 
-return function(ScreenGui) --[[ Line: 106 | Named "TooltipController" ]]
+return function(ScreenGui)
 	-- upvalues: ReactModule (copy), TooltipOrientationModule (copy), getDistances (copy), ConstantsModule (copy), LuauPolyfillModule (copy), TooltipCalloutModule (copy), Portal (copy), WithAnimationModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.zero)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Vector2.zero)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(Vector2.zero)
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(Vector2.zero)
 	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(Vector2.zero)
-	local UseResult = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 113 ]]
+	local UseResult = ReactModule.useCallback(function(Frame: Frame)
 		-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy)
 		UseStateResult2(Frame.AbsolutePosition)
 		UseStateResult2_1(Frame.AbsoluteSize)
 	end)
 	
-	local function Ref(Frame: Frame) --[[ Line: 119 ]]
+	local function Ref(Frame: Frame)
 		-- upvalues: UseStateResult2_3 (copy), UseStateResult2_2 (copy)
 		if Frame then
 			UseStateResult2_3(Frame.AbsolutePosition)
@@ -98,7 +98,7 @@ return function(ScreenGui) --[[ Line: 106 | Named "TooltipController" ]]
 	local UseStateResultRatio = UseStateResult1 / 2
 	local UseStateResultDelta = UseStateResult + UseStateResultRatio - UseStateResult4
 	local PreferredOrientation = ScreenGui.preferredOrientation or TooltipOrientationModule.Top
-	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 131 ]]
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: getDistances (upval), UseStateResultDelta (copy), UseStateResult3 (copy), PreferredOrientation (copy), UseStateResultRatio (copy), UseStateResult5 (copy)
 		return getOrientationAndContentOffset(PreferredOrientation, getDistances(UseStateResultDelta, UseStateResult3), UseStateResultRatio, UseStateResult5)
 	end, {
@@ -111,7 +111,7 @@ return function(ScreenGui) --[[ Line: 106 | Named "TooltipController" ]]
 	local Active = not ScreenGui.disabled and ScreenGui.active
 	
 	return ReactModule.createElement(ReactModule.Fragment, nil, {
-		Portal = WithAnimationModule(if Active then ConstantsModule.ACTIVE_ANIMATION_TARGETS else ConstantsModule.INACTIVE_ANIMATION_TARGETS, function(p3) --[[ Line: 142 | Named "renderWithAnimation" ]]
+		Portal = WithAnimationModule(if Active then ConstantsModule.ACTIVE_ANIMATION_TARGETS else ConstantsModule.INACTIVE_ANIMATION_TARGETS, function(p3)
 			-- upvalues: UseMemoResult (copy), UseStateResultDelta (copy), UseStateResultRatio (copy), UseMemoResult2 (copy), UseStateResult2_4 (copy), LuauPolyfillModule (upval), ScreenGui (copy), ReactModule (upval), TooltipCalloutModule (upval), Ref (copy), Portal (upval)
 			if p3.transparency == 1 then
 				return nil

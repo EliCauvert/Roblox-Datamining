@@ -18,7 +18,7 @@ local config = {
 	recipients = {}
 }
 
-local function buildItemsSignature(Current): string? --[[ Line: 64 ]]
+local function buildItemsSignature(Current): string?
 	-- upvalues: BuildItemGiftabilityKeyFunction (copy)
 	if Current == nil or #Current == 0 then
 		return nil
@@ -31,10 +31,10 @@ local function buildItemsSignature(Current): string? --[[ Line: 64 ]]
 	return table.concat(List, ",")
 end
 
-local function requestPages(p1, Items, SearchTerm, Cursors, p2) --[[ Line: 77 ]]
+local function requestPages(p1, Items, SearchTerm, Cursors, p2)
 	local List = {}
 	
-	local function requestPage(Cursor) --[[ Line: 85 ]]
+	local function requestPage(Cursor)
 		-- upvalues: p2 (copy), List (copy), Items (copy), SearchTerm (copy), p1 (copy)
 		local v1 = p2[#List + 1]
 		
@@ -56,9 +56,9 @@ local function requestPages(p1, Items, SearchTerm, Cursors, p2) --[[ Line: 77 ]]
 	return List
 end
 
-local function createPagesSignal(UseMemoResult) --[[ Line: 102 ]]
+local function createPagesSignal(UseMemoResult)
 	-- upvalues: SignalsModule (copy), DataStatus (copy)
-	return SignalsModule.createComputed(function(p3) --[[ Line: 103 ]]
+	return SignalsModule.createComputed(function(p3)
 		-- upvalues: UseMemoResult (copy), DataStatus (upval)
 		local Recipients = {}
 		local IsLoading = false
@@ -98,12 +98,12 @@ local function createPagesSignal(UseMemoResult) --[[ Line: 102 ]]
 	end)
 end
 
-local Computed = SignalsModule.createComputed(function() --[[ Line: 145 ]]
+local Computed = SignalsModule.createComputed(function()
 	-- upvalues: config (copy)
 	return config
 end)
 
-return function(Current, p4) --[[ Line: 150 | Named "useGiftRecipients" ]]
+return function(Current, p4)
 	-- upvalues: GetCanGiftStoreModule (copy), ReactModule (copy), buildItemsSignature (copy), t (copy), requestPages (copy), Computed (copy), createPagesSignal (copy), SignalsReactModule (copy), DataStatus (copy)
 	local CanGiftStoreModule = GetCanGiftStoreModule(false)
 	local P10 = p4 or ""
@@ -114,7 +114,7 @@ return function(Current, p4) --[[ Line: 150 | Named "useGiftRecipients" ]]
 	local UseRefResult = ReactModule.useRef(Current)
 	UseRefResult.current = Current
 	local UseRefResult1 = ReactModule.useRef(nil)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 167 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseRefResult (copy), ItemsSignature (copy), UseRefResult1 (copy), Text (copy), requestPages (upval), CanGiftStoreModule (copy), P10 (copy), T (copy)
 		local Current = UseRefResult.current
 		
@@ -128,7 +128,7 @@ return function(Current, p4) --[[ Line: 150 | Named "useGiftRecipients" ]]
 			return RequestPagesResult
 		end
 	end, { CanGiftStoreModule, ItemsSignature, P10, T })
-	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 179 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), Computed (upval), createPagesSignal (upval)
 		return if #UseMemoResult == 0 then Computed else createPagesSignal(UseMemoResult)
 	end, { UseMemoResult })))
@@ -140,7 +140,7 @@ return function(Current, p4) --[[ Line: 150 | Named "useGiftRecipients" ]]
 		isLoadingMore = UseSignalStateResult.isLoadingMore,
 		hasFailed = UseSignalStateResult.hasFailed,
 		hasMore = NextCursor ~= nil,
-		loadMore = ReactModule.useCallback(function() --[[ Line: 189 ]]
+		loadMore = ReactModule.useCallback(function()
 			-- upvalues: NextCursor (copy), T (copy), UseStateResult2 (copy), Text (copy)
 			if NextCursor ~= nil then
 				local Copy = table.clone(T)
@@ -150,7 +150,7 @@ return function(Current, p4) --[[ Line: 150 | Named "useGiftRecipients" ]]
 				return
 			end
 		end, { NextCursor, T, Text }),
-		retry = ReactModule.useCallback(function() --[[ Line: 198 ]]
+		retry = ReactModule.useCallback(function()
 			-- upvalues: UseMemoResult (copy), DataStatus (upval), CanGiftStoreModule (copy)
 			for _, value in UseMemoResult do
 				if value.result.status(false) == DataStatus.Failed then

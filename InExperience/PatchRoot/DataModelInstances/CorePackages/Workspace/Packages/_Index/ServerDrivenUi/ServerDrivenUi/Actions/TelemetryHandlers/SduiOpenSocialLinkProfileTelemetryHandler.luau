@@ -11,7 +11,7 @@ local list = {
 	"socialLinkDisplayType"
 }
 
-return function(p1, p2, p3) --[[ Line: 17 ]]
+return function(p1, p2, p3)
 	-- upvalues: list (copy), GetActionTelemetryFieldValueFunction (copy), SduiErrorType (copy), SendSocialLinkClickEventFunction (copy)
 	local List = {}
 	

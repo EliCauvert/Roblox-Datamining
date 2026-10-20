@@ -14,20 +14,20 @@ local MutationData = require(script.Parent.Parent.data).MutationData
 local GetApolloContextFunction = require(script.Parent.Parent.context).getApolloContext
 
 return {
-	useMutation = function(Mutation, p1) --[[ Line: 40 ]]
+	useMutation = function(Mutation, p1)
 		-- upvalues: UseContextFunction (copy), GetApolloContextFunction (copy), UseStateFunction (copy), Object (copy), UseRefFunction (copy), MutationData (copy), UseEffectFunction (copy)
 		local UseContextResult = UseContextFunction(GetApolloContextFunction())
 		local UseStateResult, UseStateResult2 = UseStateFunction({ called = false, loading = false })
 		local AssignResult = if p1 then Object.assign({}, p1, { mutation = Mutation }) else { mutation = Mutation }
 		local UseRefResult = UseRefFunction(nil)
-		local v1 = (function() --[[ Line: 52 | Named "getMutationDataRef" ]]
+		local v1 = (function()
 			-- upvalues: UseRefResult (copy), MutationData (upval), AssignResult (copy), UseContextResult (copy), UseStateResult (copy), UseStateResult2 (copy)
 			if not UseRefResult.current then
 				UseRefResult.current = MutationData.new({
 					options = AssignResult,
 					context = UseContextResult,
 					result = UseStateResult,
-					setResult = function(_, p2) --[[ Line: 58 ]]
+					setResult = function(_, p2)
 						-- upvalues: UseStateResult2 (upval)
 						UseStateResult2(p2)
 						
@@ -39,7 +39,7 @@ return {
 		end)()
 		v1:setOptions(AssignResult)
 		v1.context = UseContextResult
-		UseEffectFunction(function() --[[ Line: 72 ]]
+		UseEffectFunction(function()
 			-- upvalues: v1 (copy)
 			return v1:afterExecute()
 		end)

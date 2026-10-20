@@ -18,12 +18,12 @@ local TextFontButtonModule = require(MomentsCreation.Components.TextOverlay.Text
 local TextFontRowModule = require(MomentsCreation.Components.TextOverlay.TextFontRow)
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
 
-return function(p1) --[[ Line: 45 | Named "TextOverlayToolbar" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseStateFunction (copy), UseCallbackFunction (copy), FFlagMomentsTextOverlayV2Redesign (copy), FireAnalyticsEventModule (copy), EventNames (copy), MakeCreationEventFieldsModule (copy), ReactModule (copy), View (copy), TextFontButtonModule (copy), TextColorButtonModule (copy), TextAlignmentButtonModule (copy), TextColorSwatchRowModule (copy), TextFontRowModule (copy)
 	local Controller = p1.controller
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = UseStateFunction(nil)
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 57 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: UseStateResult (copy), FFlagMomentsTextOverlayV2Redesign (upval), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval), UseStateResult2 (copy)
 		local Color = if UseStateResult == "Color" then nil else "Color"
 		
@@ -32,7 +32,7 @@ return function(p1) --[[ Line: 45 | Named "TextOverlayToolbar" ]]
 		end
 		UseStateResult2(Color)
 	end, { UseStateResult })
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 70 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: UseStateResult (copy), FFlagMomentsTextOverlayV2Redesign (upval), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval), UseStateResult2 (copy)
 		local v1 = if UseStateResult == "Font" then nil else "Font"
 		

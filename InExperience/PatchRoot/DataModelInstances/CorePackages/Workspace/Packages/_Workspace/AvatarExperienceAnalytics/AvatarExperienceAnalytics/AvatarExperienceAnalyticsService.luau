@@ -7,21 +7,21 @@ local ConstantsModule = require(AvatarExperienceAnalytics.Constants)
 local v1 = nil
 
 return {
-	get = function(_) --[[ Line: 17 ]]
+	get = function(_)
 		-- upvalues: v1 (ref), AnalyticsServiceModule (copy), Open3DFullViewModule (copy), Close3DFullViewModule (copy), ReportAvatarEventCounterV1Module (copy), ConstantsModule (copy)
 		if v1 then
 			return v1
 		else
 			local config = {
-				open3DFullView = function(p1) --[[ Line: 26 ]]
+				open3DFullView = function(p1)
 					-- upvalues: Open3DFullViewModule (upval), AnalyticsServiceModule (copy)
 					Open3DFullViewModule(AnalyticsServiceModule.EventStream, p1)
 				end,
-				close3DFullView = function(p1) --[[ Line: 30 ]]
+				close3DFullView = function(p1)
 					-- upvalues: Close3DFullViewModule (upval), AnalyticsServiceModule (copy)
 					Close3DFullViewModule(AnalyticsServiceModule.EventStream, p1)
 				end,
-				toggleCameraInEditorAndShop = function(p1, PageName) --[[ Line: 35 ]]
+				toggleCameraInEditorAndShop = function(p1, PageName)
 					-- upvalues: AnalyticsServiceModule (copy), ReportAvatarEventCounterV1Module (upval), ConstantsModule (upval)
 					AnalyticsServiceModule.EventStream:sendTelemetryEvent("CameraInEditorAndCatalogButton", "CameraInEditorAndCatalogButton_Toggle", {
 						actionName = if p1 then "Button Enabled" else "Button Disabled",

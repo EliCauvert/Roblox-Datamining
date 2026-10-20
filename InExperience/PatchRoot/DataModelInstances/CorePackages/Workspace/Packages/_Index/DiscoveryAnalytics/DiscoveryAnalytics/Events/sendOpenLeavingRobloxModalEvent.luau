@@ -16,7 +16,7 @@ local config = {
 	lastUpdated = { 25, 12, 9 }
 }
 
-return function(CustomFields) --[[ Line: 27 ]]
+return function(CustomFields)
 	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), TelemetryService (copy), config (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	

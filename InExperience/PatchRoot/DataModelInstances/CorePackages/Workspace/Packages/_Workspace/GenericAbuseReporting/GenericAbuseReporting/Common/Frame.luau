@@ -1,6 +1,6 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
 
-return (ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 15 ]]
+return (ReactModule.forwardRef(function(Frame: Frame, Ref)
 	-- upvalues: ReactModule (copy)
 	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,

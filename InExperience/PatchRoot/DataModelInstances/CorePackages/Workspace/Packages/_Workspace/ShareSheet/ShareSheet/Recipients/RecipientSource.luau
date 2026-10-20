@@ -7,7 +7,7 @@ end
 return {
 	RecipientSource = RecipientSource,
 	DefaultRecipientSource = RecipientSource.ChatInbox,
-	isValidRecipientSource = function(p1): boolean --[[ Line: 14 ]]
+	isValidRecipientSource = function(p1): boolean
 		-- upvalues: t (copy)
 		return t[p1] == true
 	end

@@ -1,3 +1,3 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(PlayerId) --[[ Line: 4 ]]
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(PlayerId)
 	return { playerId = PlayerId }
 end)

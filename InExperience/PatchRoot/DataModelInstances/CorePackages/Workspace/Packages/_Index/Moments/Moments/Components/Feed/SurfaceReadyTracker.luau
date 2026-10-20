@@ -5,7 +5,7 @@ local UseMomentMediaControllerFunction = MomentsCommonModule.Media.useMomentMedi
 local UseMomentsSurfaceReadyTrackingFunction = MomentsCommonModule.Performance.useMomentsSurfaceReadyTracking
 local _ = require(script.Parent.FeedTypes)
 
-return function(p1) --[[ Line: 19 | Named "SurfaceReadyTracker" ]]
+return function(p1)
 	-- upvalues: SignalsReactModule (copy), UseMomentMediaControllerFunction (copy), UseMomentsSurfaceReadyTrackingFunction (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.pager.getCurrentItem)
 	local MomentId = if UseSignalStateResult == nil or UseSignalStateResult.kind ~= "moment" then nil else UseSignalStateResult.moment.momentId

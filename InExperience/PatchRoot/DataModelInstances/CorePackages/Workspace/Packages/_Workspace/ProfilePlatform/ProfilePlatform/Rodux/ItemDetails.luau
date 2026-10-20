@@ -4,7 +4,7 @@ local CryoModule = require(Parent.Cryo)
 local AssetInfoModule = require(ProfilePlatform.Common.AssetInfo)
 
 return require(Parent.Rodux).createReducer({}, {
-	[require(ProfilePlatform.Networking.NetworkingCurrentlyWearing).GetItemDetails.Succeeded.name] = function(p1, p2) --[[ Line: 23 ]]
+	[require(ProfilePlatform.Networking.NetworkingCurrentlyWearing).GetItemDetails.Succeeded.name] = function(p1, p2)
 		-- upvalues: AssetInfoModule (copy), CryoModule (copy)
 		local FromAssetResults = {}
 		

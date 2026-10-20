@@ -22,8 +22,8 @@ BlockPlayerItem.validateProps = TModule.strictInterface({
 })
 BlockPlayerItem.defaultProps = { isDisabled = false, isCheckBoxSelected = false }
 
-function BlockPlayerItem.init(p1) --[[ Line: 39 ]]
-	function p1.onClicked() --[[ Line: 40 ]]
+function BlockPlayerItem.init(p1)
+	function p1.onClicked()
 		-- upvalues: p1 (copy)
 		if p1.props.onCheckBoxActivated and not p1.props.isDisabled then
 			p1.props.onCheckBoxActivated(not p1.props.isCheckBoxSelected)
@@ -31,11 +31,11 @@ function BlockPlayerItem.init(p1) --[[ Line: 39 ]]
 	end
 end
 
-function BlockPlayerItem.render(p1) --[[ Line: 47 ]]
+function BlockPlayerItem.render(p1)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy), ImageSetLabel (copy), Checkbox (copy), ThemedTextLabelModule (copy), DividerModule (copy)
 	local Props = p1.props
 	
-	return WithStyleFunction(function(p2) --[[ Line: 50 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: RoactModule (upval), Props (copy), p1 (copy), ImageSetLabel (upval), Checkbox (upval), ThemedTextLabelModule (upval), DividerModule (upval)
 		local _ = p2.Theme
 		

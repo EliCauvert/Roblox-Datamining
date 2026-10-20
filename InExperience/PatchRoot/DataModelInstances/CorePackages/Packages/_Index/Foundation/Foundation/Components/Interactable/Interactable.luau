@@ -18,7 +18,7 @@ local ControlStateModule = require(Foundation.Enums.ControlState)
 local config = { component = "ImageButton", isDisabled = false }
 local _Color3 = Color3.fromRGB(163, 162, 165)
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 48 | Named "Interactable" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), UseTokensModule (copy), UseCursorModule (copy), ControlStateModule (copy), _Color3 (copy), GetOriginalBackgroundStyleModule (copy), StateLayerAffordanceModule (copy), GetStateLayerStyleModule (copy), BlendColorsModule (copy), JoinBindablesModule (copy), UseGuiControlStateModule (copy), MapBindableModule (copy), DashModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseRefResult = ReactModule.useRef(nil)
@@ -26,14 +26,14 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 48 | 
 	local UseCursorModuleResult = UseCursorModule(WithDefaultsModuleResult.cursor)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(ControlStateModule.Initialize)
 	local UseRefResult1 = ReactModule.useRef(nil)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 73 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: GetOriginalBackgroundStyleModule (upval), WithDefaultsModuleResult (copy)
 		return GetOriginalBackgroundStyleModule(WithDefaultsModuleResult.BackgroundColor3, WithDefaultsModuleResult.BackgroundTransparency)
 	end, {
 		WithDefaultsModuleResult.BackgroundColor3,
 		WithDefaultsModuleResult.BackgroundTransparency
 	})
-	local UseResult = ReactModule.useCallback(function(Default, p3, p4, None) --[[ Line: 78 ]]
+	local UseResult = ReactModule.useCallback(function(Default, p3, p4, None)
 		-- upvalues: ControlStateModule (upval), StateLayerAffordanceModule (upval), UseRefResult1 (copy), GetStateLayerStyleModule (upval), UseTokensModuleResult (copy), BlendColorsModule (upval)
 		if Default == ControlStateModule.Initialize or Default == ControlStateModule.Default or Default == ControlStateModule.Disabled or None == StateLayerAffordanceModule.None then
 			return p3
@@ -52,14 +52,14 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 48 | 
 		WithDefaultsModuleResult.BackgroundColor3,
 		WithDefaultsModuleResult.BackgroundTransparency
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 121 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: JoinBindablesModule (upval), UseBindingResult (copy), UseMemoResult (copy), WithDefaultsModuleResult (copy), UseResult (copy)
 		return JoinBindablesModule({
 			controlState = UseBindingResult,
 			backgroundStyle = UseMemoResult,
 			mode = if WithDefaultsModuleResult.stateLayer then WithDefaultsModuleResult.stateLayer.mode else nil,
 			affordance = if WithDefaultsModuleResult.stateLayer then WithDefaultsModuleResult.stateLayer.affordance else nil
-		}, function(p3) --[[ Line: 127 ]]
+		}, function(p3)
 			-- upvalues: UseResult (upval)
 			return UseResult(p3.controlState, p3.backgroundStyle, p3.mode, p3.affordance)
 		end)
@@ -70,7 +70,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 48 | 
 		if WithDefaultsModuleResult.stateLayer then WithDefaultsModuleResult.stateLayer.mode else nil,
 		if WithDefaultsModuleResult.stateLayer then WithDefaultsModuleResult.stateLayer.affordance else nil
 	})
-	local UseGuiControlStateModuleResult = UseGuiControlStateModule(UseRefResult, (ReactModule.useCallback(function(p3) --[[ Line: 56 ]]
+	local UseGuiControlStateModuleResult = UseGuiControlStateModule(UseRefResult, (ReactModule.useCallback(function(p3)
 		-- upvalues: UseBindingResult (copy), ControlStateModule (upval), UseRefResult (copy), _Color3 (upval), UseRefResult1 (copy), UseBindingResult2 (copy), WithDefaultsModuleResult (copy)
 		if UseBindingResult:getValue() == ControlStateModule.Default and UseRefResult.current ~= nil then
 			local BackgroundColor3Styled = UseRefResult.current:GetStyled("BackgroundColor3")
@@ -89,15 +89,15 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 48 | 
 			WithDefaultsModuleResult.onStateChanged(p3)
 		end
 	end, { WithDefaultsModuleResult.onStateChanged })))
-	ReactModule.useImperativeHandle(p2, function() --[[ Line: 142 ]]
+	ReactModule.useImperativeHandle(p2, function()
 		-- upvalues: UseRefResult (copy)
 		return UseRefResult.current
 	end, {})
 	local UnionResult = DashModule.union(WithDefaultsModuleResult, {
-		BackgroundColor3 = MapBindableModule(UseMemoResult1, function(p3) --[[ Line: 147 ]]
+		BackgroundColor3 = MapBindableModule(UseMemoResult1, function(p3)
 			return p3.Color3
 		end),
-		BackgroundTransparency = MapBindableModule(UseMemoResult1, function(p3) --[[ Line: 150 ]]
+		BackgroundTransparency = MapBindableModule(UseMemoResult1, function(p3)
 			return p3.Transparency
 		end),
 		Active = not WithDefaultsModuleResult.isDisabled,

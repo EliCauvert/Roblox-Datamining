@@ -7,10 +7,14 @@ local SharedFlagsModule = require(script:FindFirstAncestor("VirtualCursorModular
 local FFlagEnableVirtualCursorMoveAssist = SharedFlagsModule.FFlagEnableVirtualCursorMoveAssist
 local FIntVirtualCursorMoveAssistLevel = SharedFlagsModule.FIntVirtualCursorMoveAssistLevel
 local FIntVirtualCursorMoveAssistHoverSpeed = SharedFlagsModule.FIntVirtualCursorMoveAssistHoverSpeed
+local FIntVirtualCursorMoveAssistSpeedSizeMinScale = SharedFlagsModule.FIntVirtualCursorMoveAssistSpeedSizeMinScale
+local FIntVirtualCursorMoveAssistSpeedSizeMaxScale = SharedFlagsModule.FIntVirtualCursorMoveAssistSpeedSizeMaxScale
+local FIntVirtualCursorMoveAssistSpeedSmoothingTimeMs = SharedFlagsModule.FIntVirtualCursorMoveAssistSpeedSmoothingTimeMs
 local PropertiesModule = require(Parent.Properties)
 local UtilModule = require(Parent.Util)
 local GetMaxSpeedFunction = UtilModule.GetMaxSpeed
 local IsCircleContainedInGuiObjectFunction = UtilModule.IsCircleContainedInGuiObject
+local IsScreenSpaceGuiObjectFunction = UtilModule.IsScreenSpaceGuiObject
 local IsSelectableGuiObjectFunction = UtilModule.IsSelectableGuiObject
 local IsSinkingGuiObjectFunction = UtilModule.IsSinkingGuiObject
 local GetPointRotatedAroundObjectFunction = UtilModule.GetPointRotatedAroundObject
@@ -23,11 +27,12 @@ local SignFunction = math.sign
 local SelectionController = {}
 SelectionController.__index = SelectionController
 
-function SelectionController.new(_inputController, _cursorController, _moveAssistController) --[[ Line: 57 ]]
+function SelectionController.new(_inputController, _cursorController, _moveAssistController)
 	-- upvalues: PropertiesModule (copy), SelectionController (copy)
 	return (setmetatable({
 		_isScrolling = false,
 		_selectedObject = nil,
+		_hoverSlowdown = 1,
 		_inputController = _inputController,
 		_cursorController = _cursorController,
 		_moveAssistController = _moveAssistController,
@@ -36,7 +41,7 @@ function SelectionController.new(_inputController, _cursorController, _moveAssis
 	}, SelectionController))
 end
 
-function SelectionController:processScrolling(ScrollFrame, Vector, p1): boolean --[[ Line: 75 ]]
+function SelectionController:processScrolling(ScrollFrame, Vector, p1): boolean
 	-- upvalues: PropertiesModule (copy), AbsFunction (copy), CosFunction (copy), SinFunction (copy), MaxFunction (copy), MinFunction (copy), SignFunction (copy)
 	if not ScrollFrame:IsA("ScrollingFrame") then
 		return false
@@ -86,7 +91,7 @@ function SelectionController:processScrolling(ScrollFrame, Vector, p1): boolean 
 	return false
 end
 
-function SelectionController:getClosestCandidate(Frames, p1, _, p2, p3) --[[ Line: 140 ]]
+function SelectionController:getClosestCandidate(Frames, p1, _, p2, p3)
 	-- upvalues: IsSelectableGuiObjectFunction (copy), GetPointRotatedAroundObjectFunction (copy), IsSinkingGuiObjectFunction (copy), IsCircleContainedInGuiObjectFunction (copy), PropertiesModule (copy)
 	local ClosestCandidate = nil
 	local OccludingCandidate = nil
@@ -126,13 +131,22 @@ function SelectionController:getClosestCandidate(Frames, p1, _, p2, p3) --[[ Lin
 	return ClosestCandidate, OccludingCandidate, ClosestDistance
 end
 
-function SelectionController:processMoving(p4) --[[ Line: 210 ]]
-	-- upvalues: GuiService (copy), GamepadService (copy), FFlagEnableVirtualCursorMoveAssist (copy), FIntVirtualCursorMoveAssistLevel (copy), PropertiesModule (copy), GetMaxSpeedFunction (copy), FIntVirtualCursorMoveAssistHoverSpeed (copy)
+function SelectionController:getSizeAdaptiveHoverSpeed(Frame: Frame, SpeedAdjustmentTarget: number, p4, p5): number
+	-- upvalues: PropertiesModule (copy), MinFunction (copy)
+	local MinResultRatio = MinFunction(Frame.AbsoluteSize.X, Frame.AbsoluteSize.Y) / (PropertiesModule.CursorRadius * 2)
+	local v1 = p5 - p4
+	
+	return SpeedAdjustmentTarget + (1 - SpeedAdjustmentTarget) * (if v1 > 0 then math.clamp((MinResultRatio - p4) / v1, 0, 1) else 1)
+end
+
+function SelectionController:processMoving(p4)
+	-- upvalues: GuiService (copy), GamepadService (copy), FFlagEnableVirtualCursorMoveAssist (copy), FIntVirtualCursorMoveAssistLevel (copy), PropertiesModule (copy), GetMaxSpeedFunction (copy), FIntVirtualCursorMoveAssistHoverSpeed (copy), FIntVirtualCursorMoveAssistSpeedSizeMinScale (copy), FIntVirtualCursorMoveAssistSpeedSizeMaxScale (copy), IsScreenSpaceGuiObjectFunction (copy), FIntVirtualCursorMoveAssistSpeedSmoothingTimeMs (copy)
 	local NewScreenResolution = GuiService:GetScreenResolution() + GuiService:GetGuiInset()
 	local MoveVector = self._inputController:GetMoveVector()
 	local GamepadCursorPosition = GamepadService:GetGamepadCursorPosition()
+	local IsFIntVirtualCursorMoveAssistLevelAbove: boolean = FFlagEnableVirtualCursorMoveAssist and FIntVirtualCursorMoveAssistLevel > 0
 	
-	if FFlagEnableVirtualCursorMoveAssist and not self._isScrolling and FIntVirtualCursorMoveAssistLevel > 0 and PropertiesModule.MoveAssistMinInputMagnitude <= MoveVector.Magnitude then
+	if IsFIntVirtualCursorMoveAssistLevelAbove and not self._isScrolling and PropertiesModule.MoveAssistMinInputMagnitude <= MoveVector.Magnitude then
 		MoveVector = self._moveAssistController:applyMoveAssist(MoveVector, {
 			cursorPosition = GamepadCursorPosition + self._cursorController:GetCursorScreenGuiOffset(),
 			strengthMultiplier = FIntVirtualCursorMoveAssistLevel / 100,
@@ -141,18 +155,39 @@ function SelectionController:processMoving(p4) --[[ Line: 210 ]]
 	elseif FFlagEnableVirtualCursorMoveAssist then
 		self._moveAssistController:clearDebugSnapshot()
 	end
-	local FIntVirtualCursorMoveAssistHoverSpeedRatio = if FFlagEnableVirtualCursorMoveAssist and FIntVirtualCursorMoveAssistLevel > 0 and FIntVirtualCursorMoveAssistHoverSpeed > 0 then FIntVirtualCursorMoveAssistHoverSpeed / 100 else PropertiesModule.SpeedAdjustmentTarget
-	local ScaledMoveVector = MoveVector * GetMaxSpeedFunction() * (if self._selectedObject == nil then 1 elseif self._isScrolling then PropertiesModule.ScrollingSlowDown else FIntVirtualCursorMoveAssistHoverSpeedRatio)
+	local ScaledMoveVector = MoveVector * GetMaxSpeedFunction()
+	local SelectedObject = self._selectedObject
+	local ScaledScaledMoveVector = nil
 	
-	if ScaledMoveVector.Magnitude > 0 then
-		local NewGamepadCursorPosition: Vector2 = GamepadCursorPosition + ScaledMoveVector * p4
+	if IsFIntVirtualCursorMoveAssistLevelAbove then
+		local FIntVirtualCursorMoveAssistHoverSpeedRatio = if FIntVirtualCursorMoveAssistHoverSpeed > 0 then FIntVirtualCursorMoveAssistHoverSpeed / 100 else PropertiesModule.SpeedAdjustmentTarget
+		local FIntVirtualCursorMoveAssistSpeedSizeMinScaleRatio = FIntVirtualCursorMoveAssistSpeedSizeMinScale / 100
+		local FIntVirtualCursorMoveAssistSpeedSizeMaxScaleRatio = FIntVirtualCursorMoveAssistSpeedSizeMaxScale / 100
+		
+		if FIntVirtualCursorMoveAssistSpeedSizeMinScaleRatio < FIntVirtualCursorMoveAssistSpeedSizeMaxScaleRatio and SelectedObject ~= nil and not self._isScrolling and IsScreenSpaceGuiObjectFunction(SelectedObject) then
+			FIntVirtualCursorMoveAssistHoverSpeedRatio = self:getSizeAdaptiveHoverSpeed(SelectedObject, FIntVirtualCursorMoveAssistHoverSpeedRatio, FIntVirtualCursorMoveAssistSpeedSizeMinScaleRatio, FIntVirtualCursorMoveAssistSpeedSizeMaxScaleRatio)
+		end
+		local ScrollingSlowDown = if SelectedObject == nil then 1 elseif self._isScrolling then PropertiesModule.ScrollingSlowDown else FIntVirtualCursorMoveAssistHoverSpeedRatio
+		local FIntVirtualCursorMoveAssistSpeedSmoothingTimeMsRatio = FIntVirtualCursorMoveAssistSpeedSmoothingTimeMs / 1000
+		
+		if FIntVirtualCursorMoveAssistSpeedSmoothingTimeMsRatio > 0 then
+			self._hoverSlowdown += (ScrollingSlowDown - self._hoverSlowdown) * (1 - math.exp(-p4 / FIntVirtualCursorMoveAssistSpeedSmoothingTimeMsRatio))
+			ScaledScaledMoveVector = ScaledMoveVector * self._hoverSlowdown
+		else
+			ScaledScaledMoveVector = ScaledMoveVector * ScrollingSlowDown
+		end
+	else
+		ScaledScaledMoveVector = ScaledMoveVector * (if SelectedObject == nil then 1 elseif self._isScrolling then PropertiesModule.ScrollingSlowDown else PropertiesModule.SpeedAdjustmentTarget)
+	end
+	if ScaledScaledMoveVector.Magnitude > 0 then
+		local NewGamepadCursorPosition: Vector2 = GamepadCursorPosition + ScaledScaledMoveVector * p4
 		GamepadCursorPosition = Vector2.new(math.clamp(NewGamepadCursorPosition.X, 0, NewScreenResolution.X), (math.clamp(NewGamepadCursorPosition.Y, 0, NewScreenResolution.Y)))
 	end
 	self._cursorController:SetPosition(GamepadCursorPosition)
 	GamepadService:SetGamepadCursorPosition(GamepadCursorPosition)
 end
 
-function SelectionController:getCandidates(Position, Radius) --[[ Line: 264 ]]
+function SelectionController:getCandidates(Position, Radius)
 	-- upvalues: Players (copy), CoreGui (copy)
 	local LocalPlayer = Players.LocalPlayer
 	local PlayerGui = if LocalPlayer then LocalPlayer:FindFirstChildOfClass("PlayerGui") else nil
@@ -169,7 +204,7 @@ function SelectionController:getCandidates(Position, Radius) --[[ Line: 264 ]]
 	}
 end
 
-function SelectionController:processAncestors(ClosestCandidate, Parent, p4, p5) --[[ Line: 273 ]]
+function SelectionController:processAncestors(ClosestCandidate, Parent, p4, p5)
 	local Parent1 = ClosestCandidate.Parent
 	while Parent1 and Parent1 ~= Parent do
 		if self:processScrolling(Parent1, p4, p5) then
@@ -180,7 +215,7 @@ function SelectionController:processAncestors(ClosestCandidate, Parent, p4, p5) 
 	end
 end
 
-function SelectionController:processCandidates(GamepadCursorPosition, SelectionRadius, p6) --[[ Line: 284 ]]
+function SelectionController:processCandidates(GamepadCursorPosition, SelectionRadius, p6)
 	-- upvalues: GuiService (copy)
 	local GamepadCursorPositionDelta = GamepadCursorPosition - GuiService:GetGuiInset()
 	local Candidates = self:getCandidates(GamepadCursorPositionDelta, SelectionRadius)
@@ -219,24 +254,53 @@ function SelectionController:processCandidates(GamepadCursorPosition, SelectionR
 	return ClosestCandidate, ClosestDistance
 end
 
-function SelectionController.getAssistCandidateList(p7, GamepadCursorPosition, MoveAssistRadius) --[[ Line: 331 ]]
-	-- upvalues: GuiService (copy), IsSelectableGuiObjectFunction (copy)
+function SelectionController:getAssistCandidateList(GamepadCursorPosition, MoveAssistRadius)
+	-- upvalues: GuiService (copy)
 	local Guis = {}
 	
-	for _, candidate in p7:getCandidates(GamepadCursorPosition - GuiService:GetGuiInset(), MoveAssistRadius) do
+	for _, candidate in self:getCandidates(GamepadCursorPosition - GuiService:GetGuiInset(), MoveAssistRadius) do
 		for _, Gui in candidate[2] do
-			if Gui:IsA("GuiObject") and IsSelectableGuiObjectFunction(Gui) then
+			if Gui:IsA("GuiObject") then
 				table.insert(Guis, Gui)
 			end
 		end
 	end
-	return Guis
+	return self:filterAssistCandidates(Guis)
 end
 
-function SelectionController:onRenderStep(p8) --[[ Line: 350 ]]
+function SelectionController:filterAssistCandidates(Guis)
+	-- upvalues: PropertiesModule (copy), IsSelectableGuiObjectFunction (copy), IsCircleContainedInGuiObjectFunction (copy), IsSinkingGuiObjectFunction (copy)
+	local Frames = {}
+	local Frames1 = {}
+	local ScaledCursorRadius = PropertiesModule.CursorRadius * PropertiesModule.OcclusionRadiusScale
+	local Flag = nil
+	
+	for _, gui in Guis do
+		if IsSelectableGuiObjectFunction(gui) then
+			local NewAbsolutePosition = gui.AbsolutePosition + gui.AbsoluteSize * 0.5
+			Flag = false
+			
+			for _, value in Frames1 do
+				if value ~= gui and IsCircleContainedInGuiObjectFunction(NewAbsolutePosition, ScaledCursorRadius, value) then
+					Flag = true
+					break
+				end
+			end
+			if not Flag then
+				table.insert(Frames, gui)
+			end
+		end
+		if IsSinkingGuiObjectFunction(gui) then
+			table.insert(Frames1, gui)
+		end
+	end
+	return Frames
+end
+
+function SelectionController:onRenderStep(p7)
 	-- upvalues: GamepadService (copy), Players (copy), CoreGui (copy), GuiService (copy)
-	self:processMoving(p8)
-	local ProcessCandidatesResult = self:processCandidates(GamepadService:GetGamepadCursorPosition(), self._selectionRadius, p8)
+	self:processMoving(p7)
+	local ProcessCandidatesResult = self:processCandidates(GamepadService:GetGamepadCursorPosition(), self._selectionRadius, p7)
 	
 	if ProcessCandidatesResult ~= self._selectedObject then
 		local LocalPlayer = Players.LocalPlayer

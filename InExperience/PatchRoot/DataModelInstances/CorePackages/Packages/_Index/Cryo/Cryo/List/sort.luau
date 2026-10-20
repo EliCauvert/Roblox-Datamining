@@ -1,4 +1,4 @@
-﻿return function(p1, p2) --[[ Line: 6 | Named "sort" ]]
+﻿return function(p1, p2)
 	local List = {}
 	
 	for i = 1, #p1 do

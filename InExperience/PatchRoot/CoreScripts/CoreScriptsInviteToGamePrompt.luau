@@ -35,9 +35,9 @@ local WithAnalyticsResult = require(ShareGame.InviteToGamePrompt).new(CoreGui):w
 local ApiGetCanSendAndCanCustomizeInvitesModule = require(ShareGame.Thunks.ApiGetCanSendAndCanCustomizeInvites)
 local GetCustomizedInvitePromptParamsModule = require(ShareGame.getCustomizedInvitePromptParams)
 
-local function _(LocalPlayer) --[[ Line: 57 | Named "canSendGameInviteAsync" ]]
+local function _(LocalPlayer)
 	-- upvalues: SocialService (copy)
-	local Success, Result = pcall(function() --[[ Line: 58 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: SocialService (upval), LocalPlayer (copy)
 		return SocialService:CanSendGameInviteAsync(LocalPlayer)
 	end)
@@ -45,7 +45,7 @@ local function _(LocalPlayer) --[[ Line: 57 | Named "canSendGameInviteAsync" ]]
 	return Success and Result
 end
 
-SocialService.PromptInviteRequested:Connect(function(LocalPlayer, ExperienceInviteOptions) --[[ Line: 64 ]]
+SocialService.PromptInviteRequested:Connect(function(LocalPlayer, ExperienceInviteOptions)
 	-- upvalues: GetFStringGameInviteMenuLayerFunction (copy), GetFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule (copy), LuaEnableGameInviteModalInvitePromptV2 (copy), IXPServiceWrapper (copy), GameInviteInviteExperimentVariant (ref), Players (copy), GetFFlagFixSettingshubImportOrderModule (copy), SettingsHubModule (ref), Settings (copy), SocialService (copy), GameInviteModalManager (ref), GetCustomizedInvitePromptTriggerFunction (ref), GameInviteConstants (ref), GameInviteAnalyticsManager (ref), GetFFlagEnableNewInviteMenuCustomizationModule (copy), GetFFlagEnableInvitePromptLoadingStateModule (copy), WithAnalyticsResult (copy), GetCustomizedInvitePromptParamsModule (copy), ApiGetCanSendAndCanCustomizeInvitesModule (copy)
 	local v1 = false
 	local FStringGameInviteMenuLayer = GetFStringGameInviteMenuLayerFunction()
@@ -101,7 +101,7 @@ SocialService.PromptInviteRequested:Connect(function(LocalPlayer, ExperienceInvi
 			return
 		end
 	elseif LocalPlayer == Players.LocalPlayer then
-		local Success, Result = pcall(function() --[[ Line: 58 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: SocialService (upval), LocalPlayer (copy)
 			return SocialService:CanSendGameInviteAsync(LocalPlayer)
 		end)

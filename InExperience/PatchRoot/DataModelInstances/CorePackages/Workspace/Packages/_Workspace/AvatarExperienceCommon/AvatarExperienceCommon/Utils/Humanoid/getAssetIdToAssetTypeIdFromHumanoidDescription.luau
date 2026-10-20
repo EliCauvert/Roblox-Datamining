@@ -1,6 +1,6 @@
 ﻿local ConstantsModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Constants)
 
-return function(Humanoid: Humanoid) --[[ Line: 5 | Named "getAssetIdToAssetTypeIdFromHumanoidDescription" ]]
+return function(Humanoid: Humanoid)
 	-- upvalues: ConstantsModule (copy)
 	local ACCESSORYTYPETOASSETTYPEEntries = {}
 	

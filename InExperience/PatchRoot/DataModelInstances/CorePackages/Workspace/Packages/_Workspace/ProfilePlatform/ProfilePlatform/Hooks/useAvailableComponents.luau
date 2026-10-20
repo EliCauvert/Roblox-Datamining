@@ -17,7 +17,7 @@ local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
 local FFlagProfilePlatformEnableVRModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableVR)
 local FFlagProfilePlatformEnableCurrencyTransfer = require(Parent.SharedFlags).FFlagProfilePlatformEnableCurrencyTransfer
 
-return function() --[[ Line: 22 ]]
+return function()
 	-- upvalues: UseProfileWrapperContextModule (copy), GetDeepValueModule (copy), UseAreWebViewsSupportedModule (copy), UseIsProfileQrCodeEnabledModule (copy), UseCanRenderTransferOnProfileModule (copy), UseCanSeeChatTabModule (copy), UseLocalUserIdFunction (copy), ReactModule (copy), EnumsModule (copy), GetAvailableUserComponentsModule (copy), FFlagProfilePlatformEnableVRModule (copy), FFlagProfilePlatformEnableCurrencyTransfer (copy), GetAvailableCommunityComponentsModule (copy), GetAvailableContactComponentsModule (copy)
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	local ProfileType = UseProfileWrapperContextModuleResult.profileType
@@ -28,7 +28,7 @@ return function() --[[ Line: 22 ]]
 	local UseCanSeeChatTabModuleResult = UseCanSeeChatTabModule()
 	local IsTextMatch = tostring(UseProfileWrapperContextModuleResult.profileId) == tostring((UseLocalUserIdFunction()))
 	
-	return (ReactModule.useMemo(function() --[[ Line: 35 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: ProfileType (copy), EnumsModule (upval), GetAvailableUserComponentsModule (upval), SourceInfoContextualInfoType (copy), FFlagProfilePlatformEnableVRModule (upval), UseAreWebViewsSupportedModuleResult (copy), UseIsProfileQrCodeEnabledModuleResult (copy), FFlagProfilePlatformEnableCurrencyTransfer (upval), UseCanRenderTransferOnProfileModuleResult (copy), UseCanSeeChatTabModuleResult (copy), IsTextMatch (copy), GetAvailableCommunityComponentsModule (upval), GetAvailableContactComponentsModule (upval)
 		return if ProfileType == EnumsModule.ProfileTypes.User then GetAvailableUserComponentsModule(SourceInfoContextualInfoType, if FFlagProfilePlatformEnableVRModule then {
 			areWebViewsSupported = UseAreWebViewsSupportedModuleResult,

@@ -3,7 +3,7 @@ local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local SduiActionType = SduiCoreSystemModule.SduiActionType
 local SduiParseHelpers = SduiCoreSystemModule.SduiParseHelpers
 
-return function(p1, _, p2, p3) --[[ Line: 25 | Named "SduiActionSequenceAction" ]]
+return function(p1, _, p2, p3)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), SduiParseHelpers (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	

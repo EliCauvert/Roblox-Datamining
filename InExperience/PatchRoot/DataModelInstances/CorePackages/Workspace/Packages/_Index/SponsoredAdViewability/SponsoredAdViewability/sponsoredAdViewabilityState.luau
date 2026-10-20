@@ -15,7 +15,7 @@ local MilestoneLabels = {
 	FullViewVideo = "FullViewVideo"
 }
 
-local function newBand(Threshold, CurrentContinuousMs) --[[ Line: 129 ]]
+local function newBand(Threshold, CurrentContinuousMs)
 	return if CurrentContinuousMs == nil then {
 		enteredAtMs = nil,
 		cumulativeMs = 0,
@@ -31,7 +31,7 @@ local function newBand(Threshold, CurrentContinuousMs) --[[ Line: 129 ]]
 	}
 end
 
-local function _(p1, MaxContinuousMs) --[[ Line: 143 | Named "recordClosedWindow" ]]
+local function _(p1, MaxContinuousMs)
 	p1.cumulativeMs += MaxContinuousMs
 	
 	if p1.maxContinuousMs < MaxContinuousMs then
@@ -40,7 +40,7 @@ local function _(p1, MaxContinuousMs) --[[ Line: 143 | Named "recordClosedWindow
 	p1.enteredAtMs = nil
 end
 
-local _ = function(p1, p2) --[[ Line: 151 | Named "closeWindow" ]]
+local _ = function(p1, p2)
 	local EnteredAtMs = p1.enteredAtMs
 	local CurrentContinuousMs = p1.currentContinuousMs
 	
@@ -68,7 +68,7 @@ local _ = function(p1, p2) --[[ Line: 151 | Named "closeWindow" ]]
 	end
 end
 
-local _ = function(p1, p2, EnteredAtMs) --[[ Line: 171 | Named "updateBandTimer" ]]
+local _ = function(p1, p2, EnteredAtMs)
 	if p1.threshold > p2 then
 		local EnteredAtMs1 = p1.enteredAtMs
 		local CurrentContinuousMs = p1.currentContinuousMs
@@ -102,7 +102,7 @@ local _ = function(p1, p2, EnteredAtMs) --[[ Line: 171 | Named "updateBandTimer"
 	end
 end
 
-local _ = function(p1, p2) --[[ Line: 184 | Named "durationAsOf" ]]
+local _ = function(p1, p2)
 	local CumulativeMs = p1.cumulativeMs
 	local MaxContinuousMs = p1.maxContinuousMs
 	local EnteredAtMs = p1.enteredAtMs
@@ -126,18 +126,18 @@ local _ = function(p1, p2) --[[ Line: 184 | Named "durationAsOf" ]]
 	return CumulativeMs, MaxContinuousMs
 end
 
-local _ = function(p1) --[[ Line: 205 | Named "continuousVideoDurationAsOf" ]]
+local _ = function(p1)
 	return if p1.enteredAtMs == nil then 0 else p1.currentContinuousMs or 0
 end
 
-local _ = function(p1) --[[ Line: 212 | Named "preserveVideoBandAcrossSourceChange" ]]
+local _ = function(p1)
 	if p1.enteredAtMs ~= nil then
 		p1.enteredAtMs = nil
 		p1.pendingContinuity = true
 	end
 end
 
-local function copyGeometry(LatchedGeometry) --[[ Line: 219 ]]
+local function copyGeometry(LatchedGeometry)
 	return {
 		adSize = LatchedGeometry.adSize,
 		viewportBounds = {
@@ -147,15 +147,15 @@ local function copyGeometry(LatchedGeometry) --[[ Line: 219 ]]
 	}
 end
 
-local _ = function(p1): boolean --[[ Line: 229 | Named "audioOn" ]]
+local _ = function(p1): boolean
 	return p1 ~= nil and (p1.isPlaying and p1.audioLevel > 0)
 end
 
-local _ = function(p1: number): boolean --[[ Line: 233 | Named "isNonnegativeInteger" ]]
+local _ = function(p1: number): boolean
 	return typeof(p1) == "number" and p1 >= 0 and p1 % 1 == 0
 end
 
-local function isValidVideoPlaybackSnapshot(LastSnapshot): boolean --[[ Line: 237 ]]
+local function isValidVideoPlaybackSnapshot(LastSnapshot): boolean
 	local PlaybackPositionMs: number = LastSnapshot.playbackPositionMs
 	local LoopCount: number = LastSnapshot.loopCount
 	local EndedCount: number = LastSnapshot.endedCount
@@ -165,7 +165,7 @@ local function isValidVideoPlaybackSnapshot(LastSnapshot): boolean --[[ Line: 23
 	return typeof(LastSnapshot.isPlaying) == "boolean" and (typeof(PlaybackPositionMs) == "number" and PlaybackPositionMs >= 0) and (typeof(LoopCount) == "number" and (LoopCount >= 0 and LoopCount % 1 == 0 and (if EndedCount == nil then typeof(AudioLevel) == "number" and (AudioLevel >= 0 and AudioLevel <= 1) and (VideoLengthMs == nil or typeof(VideoLengthMs) == "number" and VideoLengthMs > 0) else typeof(EndedCount) == "number" and (EndedCount >= 0 and EndedCount % 1 == 0) and (typeof(AudioLevel) == "number" and (AudioLevel >= 0 and AudioLevel <= 1) and (VideoLengthMs == nil or typeof(VideoLengthMs) == "number" and VideoLengthMs > 0)))))
 end
 
-local _ = function(p1, p2) --[[ Line: 254 | Named "realEstateOf" ]]
+local _ = function(p1, p2)
 	if p2 == nil then
 		return 0
 	else
@@ -179,7 +179,7 @@ end
 local SponsoredAdViewabilityStateModule = {}
 SponsoredAdViewabilityStateModule.__index = SponsoredAdViewabilityStateModule
 
-function SponsoredAdViewabilityStateModule.new(StartTimestampMs, Enabled) --[[ Line: 304 ]]
+function SponsoredAdViewabilityStateModule.new(StartTimestampMs, Enabled)
 	-- upvalues: newBand (copy), SponsoredAdViewabilityStateModule (copy)
 	local IsEnabled = Enabled == true
 	
@@ -234,7 +234,7 @@ function SponsoredAdViewabilityStateModule.new(StartTimestampMs, Enabled) --[[ L
 	}, SponsoredAdViewabilityStateModule))
 end
 
-function SponsoredAdViewabilityStateModule:_classifyDisplayOnce(AdSize) --[[ Line: 347 ]]
+function SponsoredAdViewabilityStateModule:_classifyDisplayOnce(AdSize)
 	-- upvalues: MilestoneLabels (copy)
 	if self._displayLabel ~= nil then return end
 	local ScaledX = AdSize.X * AdSize.Y
@@ -246,7 +246,7 @@ function SponsoredAdViewabilityStateModule:_classifyDisplayOnce(AdSize) --[[ Lin
 	end
 end
 
-function SponsoredAdViewabilityStateModule:_tryFire(Band, MilestoneLabel, EnteredAtMs, _latchedGeometry, List, p1) --[[ Line: 360 ]]
+function SponsoredAdViewabilityStateModule:_tryFire(Band, MilestoneLabel, EnteredAtMs, _latchedGeometry, List, p1)
 	-- upvalues: copyGeometry (copy)
 	if self._achieved[MilestoneLabel] then return end
 	local Video = self._video
@@ -387,7 +387,7 @@ function SponsoredAdViewabilityStateModule:_tryFire(Band, MilestoneLabel, Entere
 	table.insert(List, config)
 end
 
-function SponsoredAdViewabilityStateModule:_accumulate(EnteredAtMs, LastRatio: number, LatchedGeometry) --[[ Line: 419 ]]
+function SponsoredAdViewabilityStateModule:_accumulate(EnteredAtMs, LastRatio: number, LatchedGeometry)
 	local LastSampleMs = self._lastSampleMs
 	
 	if LastSampleMs ~= nil and self._lastRatio > 0 then
@@ -422,7 +422,7 @@ function SponsoredAdViewabilityStateModule:_accumulate(EnteredAtMs, LastRatio: n
 	end
 end
 
-local function updateVideoBand(FullscreenBand, p1, p2, p3, p4, Smallest, EnteredAtMs) --[[ Line: 449 ]]
+local function updateVideoBand(FullscreenBand, p1, p2, p3, p4, Smallest, EnteredAtMs)
 	if FullscreenBand.pendingContinuity then
 		if p2 and FullscreenBand.threshold <= p4 then
 			FullscreenBand.pendingContinuity = false
@@ -563,13 +563,13 @@ local function updateVideoBand(FullscreenBand, p1, p2, p3, p4, Smallest, Entered
 	end
 end
 
-local _ = function(p1, p2, p3, p4, p5, p6, p7, EnteredAtMs) --[[ Line: 500 | Named "updateModeBand" ]]
+local _ = function(p1, p2, p3, p4, p5, p6, p7, EnteredAtMs)
 	-- upvalues: updateVideoBand (copy)
 	local P40 = p2 or p1.pendingContinuity == true
 	updateVideoBand(p1, p3 and P40, p4 and P40, p5, p6, p7, EnteredAtMs)
 end
 
-local _ = function(p1, p2, p3, p4, p5: number): number --[[ Line: 522 | Named "observedVideoMovementMs" ]]
+local _ = function(p1, p2, p3, p4, p5: number): number
 	if p1 == nil or p2 == nil or p3 == nil or p4 == nil then
 		return 0
 	elseif p4 < p3 then
@@ -581,11 +581,11 @@ local _ = function(p1, p2, p3, p4, p5: number): number --[[ Line: 522 | Named "o
 	end
 end
 
-local _ = function(p1, p2: number, p3): number --[[ Line: 553 | Named "videoProgressPercent" ]]
+local _ = function(p1, p2: number, p3): number
 	return if p1 then 100 elseif p2 == nil or p2 <= 0 then 0 else math.clamp(p3 / p2 * 100, 0, 100)
 end
 
-function SponsoredAdViewabilityStateModule:_buildVideoProgressMilestone(VideoProgress, p1) --[[ Line: 567 ]]
+function SponsoredAdViewabilityStateModule:_buildVideoProgressMilestone(VideoProgress, p1)
 	-- upvalues: copyGeometry (copy)
 	local Video = self._video
 	local InGridBand50 = self._inGridBand50
@@ -720,7 +720,7 @@ function SponsoredAdViewabilityStateModule:_buildVideoProgressMilestone(VideoPro
 	}
 end
 
-function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio: number, LastRatio1: number, _latchedGeometry, LastSnapshot, IsFullscreen) --[[ Line: 606 ]]
+function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio: number, LastRatio1: number, _latchedGeometry, LastSnapshot, IsFullscreen)
 	-- upvalues: isValidVideoPlaybackSnapshot (copy), updateVideoBand (copy), HighestProgresses (copy)
 	local List = {}
 	
@@ -1141,7 +1141,7 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 	end
 end
 
-function SponsoredAdViewabilityStateModule:transitionVideoSource(p1: number, p2) --[[ Line: 735 ]]
+function SponsoredAdViewabilityStateModule:transitionVideoSource(p1: number, p2)
 	local Video = self._video
 	local InGridBand50 = self._inGridBand50
 	local FullscreenBand50 = self._fullscreenBand50
@@ -1296,7 +1296,7 @@ function SponsoredAdViewabilityStateModule:transitionVideoSource(p1: number, p2)
 	self._lastRealEstate = 0
 end
 
-function SponsoredAdViewabilityStateModule:pause(Largest: number) --[[ Line: 777 ]]
+function SponsoredAdViewabilityStateModule:pause(Largest: number)
 	local HasVideo = self._video ~= nil
 	
 	if HasVideo then
@@ -1519,7 +1519,7 @@ function SponsoredAdViewabilityStateModule:pause(Largest: number) --[[ Line: 777
 	self._pausedAtMs = Largest
 end
 
-function SponsoredAdViewabilityStateModule:resume(_lastSampleMs: number) --[[ Line: 815 ]]
+function SponsoredAdViewabilityStateModule:resume(_lastSampleMs: number)
 	local PausedAtMs: number = self._pausedAtMs
 	
 	if self._video ~= nil then
@@ -1537,7 +1537,7 @@ function SponsoredAdViewabilityStateModule:resume(_lastSampleMs: number) --[[ Li
 	self._lastRealEstate = 0
 end
 
-function SponsoredAdViewabilityStateModule:_advance_deprecated(EnteredAtMs, LastRatio, _latchedGeometry) --[[ Line: 838 ]]
+function SponsoredAdViewabilityStateModule:_advance_deprecated(EnteredAtMs, LastRatio, _latchedGeometry)
 	-- upvalues: MilestoneLabels (copy)
 	assert(not self._finalized, "advance called after finalize")
 	assert(self._pausedAtMs == nil, "advance called while paused")
@@ -1654,7 +1654,7 @@ function SponsoredAdViewabilityStateModule:_advance_deprecated(EnteredAtMs, Last
 	return t
 end
 
-function SponsoredAdViewabilityStateModule:advance(EnteredAtMs, LastRatio, _latchedGeometry, LastSnapshot, Enabled) --[[ Line: 873 ]]
+function SponsoredAdViewabilityStateModule:advance(EnteredAtMs, LastRatio, _latchedGeometry, LastSnapshot, Enabled)
 	-- upvalues: MilestoneLabels (copy)
 	if self._video == nil then
 		return self:_advance_deprecated(EnteredAtMs, LastRatio, _latchedGeometry)
@@ -1808,7 +1808,7 @@ function SponsoredAdViewabilityStateModule:advance(EnteredAtMs, LastRatio, _latc
 	return t, AdvanceVideoResult
 end
 
-function SponsoredAdViewabilityStateModule:_finalize_deprecated(ViewabilitySessionEndTimestampMs) --[[ Line: 933 ]]
+function SponsoredAdViewabilityStateModule:_finalize_deprecated(ViewabilitySessionEndTimestampMs)
 	assert(not self._finalized, "finalize called more than once on the same session")
 	self._finalized = true
 	self:_accumulate(ViewabilitySessionEndTimestampMs, self._lastRatio, self._latchedGeometry)
@@ -1920,7 +1920,7 @@ function SponsoredAdViewabilityStateModule:_finalize_deprecated(ViewabilitySessi
 	}
 end
 
-function SponsoredAdViewabilityStateModule:finalize(ViewabilitySessionEndTimestampMs: number) --[[ Line: 981 ]]
+function SponsoredAdViewabilityStateModule:finalize(ViewabilitySessionEndTimestampMs: number)
 	-- upvalues: copyGeometry (copy)
 	if self._video == nil then
 		return self:_finalize_deprecated(ViewabilitySessionEndTimestampMs)

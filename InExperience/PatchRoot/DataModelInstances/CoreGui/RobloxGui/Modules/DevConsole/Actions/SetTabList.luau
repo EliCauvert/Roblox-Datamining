@@ -1,4 +1,4 @@
-﻿return require(script.Parent.Parent.Action)("SetTabList", function(TabList, InitIndex, IsDeveloperView) --[[ Line: 4 ]]
+﻿return require(script.Parent.Parent.Action)("SetTabList", function(TabList, InitIndex, IsDeveloperView)
 	return {
 		tabList = TabList,
 		initIndex = InitIndex,

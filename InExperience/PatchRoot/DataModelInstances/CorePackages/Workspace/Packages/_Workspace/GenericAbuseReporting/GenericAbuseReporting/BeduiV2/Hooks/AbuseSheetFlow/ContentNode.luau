@@ -14,7 +14,7 @@ local FFlagSupportSubmissionOnAllReportNodes = require(Parent.SharedFlags).FFlag
 local FFlagAbuseReportInExpPlayerListV3 = require(Parent.SharedFlags).FFlagAbuseReportInExpPlayerListV3
 local FFlagAbuseReportImproveErrorEventsModule = require(GenericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
 
-return ReactModule.memo(function(p1) --[[ Line: 44 | Named "ContentNode" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseAbuseReportAnalyticsFunction (copy), ReactModule (copy), ListNodeV2Module (copy), DashModule (copy), CommentNodeModule (copy), ConfirmationNodeModule (copy), FFlagSupportSubmissionOnAllReportNodes (copy), ParagraphNodeModule (copy), ReviewNodeModule (copy), GenericAbuseReporting (copy), FFlagAbuseReportInExpPlayerListV3 (copy), TelemetryEventType (copy), FFlagAbuseReportImproveErrorEventsModule (copy)
 	local SendEventFunction: (any) -> () = UseAbuseReportAnalyticsFunction().sendEvent
 	
@@ -24,7 +24,7 @@ return ReactModule.memo(function(p1) --[[ Line: 44 | Named "ContentNode" ]]
 		return ReactModule.createElement(ListNodeV2Module, DashModule.join(p1.node, {
 			initialValue = if type(StoreEntry) == "table" then StoreEntry.id else nil,
 			isSubmitting = p1.isSubmitting,
-			onNext = function(_, p2) --[[ Line: 55 ]]
+			onNext = function(_, p2)
 				-- upvalues: p1 (copy)
 				if p1.onNext then
 					p1.onNext({
@@ -37,7 +37,7 @@ return ReactModule.memo(function(p1) --[[ Line: 44 | Named "ContentNode" ]]
 		return ReactModule.createElement(CommentNodeModule, DashModule.join(p1.node, {
 			initialValue = if p1.store then p1.store[p1.node.storeAs] else nil,
 			isSubmitting = p1.isSubmitting,
-			onNext = function(p2) --[[ Line: 73 ]]
+			onNext = function(p2)
 				-- upvalues: p1 (copy)
 				if p1.onNext then
 					p1.onNext({
@@ -49,7 +49,7 @@ return ReactModule.memo(function(p1) --[[ Line: 44 | Named "ContentNode" ]]
 	elseif p1.node.type == "confirmation" then
 		return ReactModule.createElement(ConfirmationNodeModule, DashModule.join(p1.node, {
 			isSubmitting = if FFlagSupportSubmissionOnAllReportNodes then p1.isSubmitting else nil,
-			onNext = p1.onNext and function() --[[ Line: 87 ]]
+			onNext = p1.onNext and function()
 				-- upvalues: p1 (copy)
 				p1.onNext({})
 			end or nil
@@ -57,7 +57,7 @@ return ReactModule.memo(function(p1) --[[ Line: 44 | Named "ContentNode" ]]
 	elseif p1.node.type == "paragraph" then
 		return ReactModule.createElement(ParagraphNodeModule, DashModule.join(p1.node, {
 			isSubmitting = if FFlagSupportSubmissionOnAllReportNodes then p1.isSubmitting else nil,
-			onNext = p1.onNext and function() --[[ Line: 97 ]]
+			onNext = p1.onNext and function()
 				-- upvalues: p1 (copy)
 				p1.onNext({})
 			end or nil
@@ -65,7 +65,7 @@ return ReactModule.memo(function(p1) --[[ Line: 44 | Named "ContentNode" ]]
 	elseif p1.node.type == "review" then
 		return ReactModule.createElement(ReviewNodeModule, DashModule.join(p1.node, {
 			isSubmitting = if FFlagSupportSubmissionOnAllReportNodes then p1.isSubmitting else nil,
-			onNext = p1.onNext and function() --[[ Line: 107 ]]
+			onNext = p1.onNext and function()
 				-- upvalues: p1 (copy)
 				p1.onNext({})
 			end or nil
@@ -77,7 +77,7 @@ return ReactModule.memo(function(p1) --[[ Line: 44 | Named "ContentNode" ]]
 			initialValue = if type(StoreEntry) == "table" then StoreEntry.id else nil,
 			isSubmitting = p1.isSubmitting,
 			goBack = p1.goBack,
-			onNext = function(_, p2) --[[ Line: 122 ]]
+			onNext = function(_, p2)
 				-- upvalues: p1 (copy)
 				if p1.onNext then
 					p1.onNext({
@@ -89,7 +89,7 @@ return ReactModule.memo(function(p1) --[[ Line: 44 | Named "ContentNode" ]]
 	elseif p1.node.type == "inExpConfirmation" then
 		return ReactModule.createElement(require(GenericAbuseReporting.BeduiV2.Components.Nodes.InExpConfirmationNode), DashModule.join(p1.node, {
 			isSubmitting = p1.isSubmitting,
-			onNext = p1.onNext and function(p2) --[[ Line: 139 ]]
+			onNext = p1.onNext and function(p2)
 				-- upvalues: p1 (copy)
 				p1.onNext({
 					store = if p1.node.storeAs then {
@@ -101,7 +101,7 @@ return ReactModule.memo(function(p1) --[[ Line: 44 | Named "ContentNode" ]]
 		}))
 	elseif p1.node.type == "inExpSceneSelection" then
 		return ReactModule.createElement(require(GenericAbuseReporting.BeduiV2.Components.Nodes.InExpSceneSelectionNode), DashModule.join(p1.node, {
-			onNext = if p1.onNext then function() --[[ Line: 157 ]]
+			onNext = if p1.onNext then function()
 				-- upvalues: p1 (copy)
 				p1.onNext({})
 			end else nil,
@@ -115,7 +115,7 @@ return ReactModule.memo(function(p1) --[[ Line: 44 | Named "ContentNode" ]]
 		return ReactModule.createElement(require(GenericAbuseReporting.BeduiV2.Components.Nodes.InExpUserSelectionNode), DashModule.join(p1.node, {
 			initialValue = if type(StoreEntry) == "table" then StoreEntry.id else nil,
 			isSubmitting = p1.isSubmitting,
-			onNext = if p1.onNext then function(_, p2) --[[ Line: 176 ]]
+			onNext = if p1.onNext then function(_, p2)
 				-- upvalues: p1 (copy)
 				if p1.onNext then
 					p1.onNext({

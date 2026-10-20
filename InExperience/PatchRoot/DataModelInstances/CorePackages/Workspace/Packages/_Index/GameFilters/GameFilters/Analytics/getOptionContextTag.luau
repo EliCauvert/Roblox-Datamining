@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("GameFilters").Parent.DiscoveryTypes)
 
-return function(p1, OptionId) --[[ Line: 6 ]]
+return function(p1, OptionId)
 	if OptionId == nil then
 		return nil
 	end

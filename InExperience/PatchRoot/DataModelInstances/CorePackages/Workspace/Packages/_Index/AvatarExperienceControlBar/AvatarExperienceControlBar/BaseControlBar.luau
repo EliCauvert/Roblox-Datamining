@@ -8,7 +8,7 @@ local IconTextMenuModule = require(AvatarExperienceControlBar.Components.IconTex
 local ExternalEventConnection = require(Parent.RoactUtils).ExternalEventConnection
 local _ = require(AvatarExperienceControlBar.ControlBarTypes)
 
-return ReactModule.memo(function(Frame) --[[ Line: 14 | Named "BaseControlBar" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), IconOnlyMenuModule (copy), IconTextMenuModule (copy), ExternalEventConnection (copy), UserInputService (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UDim2.new(0, 0, 0, 0))
 	
@@ -23,7 +23,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 14 | Named "BaseControlBar" ]
 			activeItemId = Frame.activeMenuItemId,
 			onItemActivated = Frame.onMenuItemActivated,
 			ref = Frame.iconMenuRef,
-			onAbsoluteSizeChanged = function(Frame: Frame) --[[ Line: 27 ]]
+			onAbsoluteSizeChanged = function(Frame: Frame)
 				-- upvalues: UseBindingResult2 (copy)
 				UseBindingResult2(UDim2.fromOffset(Frame.AbsoluteSize.X, Frame.AbsoluteSize.Y))
 			end

@@ -4,14 +4,14 @@ local ReactModule = require(Parent.React)
 local HooksModule = require(AppShortcutBar.Hooks)
 local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 
-return function(p1) --[[ Line: 12 | Named "AppShortcutBarStatusListener" ]]
+return function(p1)
 	-- upvalues: HooksModule (copy), UseAppPolicyFunction (copy), ReactModule (copy)
 	local UseAppShortcutBarHeightResult = HooksModule.useAppShortcutBarHeight()
 	local UseShortcutBarVisibleResult = HooksModule.useShortcutBarVisible()
-	local UseShortcutBarVisibleResult1 = UseAppPolicyFunction(function(p2) --[[ Line: 15 ]]
+	local UseShortcutBarVisibleResult1 = UseAppPolicyFunction(function(p2)
 		return p2.getStickyShortcutBarEnabled()
 	end) and UseShortcutBarVisibleResult
-	ReactModule.useEffect(function() --[[ Line: 22 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseShortcutBarVisibleResult1 (copy), UseAppShortcutBarHeightResult (copy)
 		if p1.onHeightChanged then
 			p1.onHeightChanged(if UseShortcutBarVisibleResult1 then UseAppShortcutBarHeightResult else 0)

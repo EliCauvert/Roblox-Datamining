@@ -19,12 +19,12 @@ local TableHeaders = {}
 local t2 = {}
 local Flag = true
 
-local function sortInputTypeRows(A, B): boolean --[[ Line: 43 ]]
+local function sortInputTypeRows(A, B): boolean
 	-- upvalues: Keys (copy)
 	return tostring(Keys[A]) < tostring(Keys[B])
 end
 
-local function sortActionRows(A, B): boolean --[[ Line: 49 ]]
+local function sortActionRows(A, B): boolean
 	-- upvalues: t1 (copy), Keys1 (copy)
 	local Entry = t1[A]
 	local Entry1 = t1[B]
@@ -49,7 +49,7 @@ local function sortActionRows(A, B): boolean --[[ Line: 49 ]]
 	end
 end
 
-local function createEmptyRow(Name, p1) --[[ Line: 75 ]]
+local function createEmptyRow(Name, p1)
 	-- upvalues: CreateFunction (copy)
 	local Parent = CreateFunction("Frame")({
 		BackgroundTransparency = 1,
@@ -67,7 +67,7 @@ local function createEmptyRow(Name, p1) --[[ Line: 75 ]]
 	return Parent
 end
 
-local function createButtonRow(Name, p1) --[[ Line: 91 ]]
+local function createButtonRow(Name, p1)
 	-- upvalues: CreateFunction (copy)
 	local Parent = CreateFunction("TextButton")({
 		BackgroundTransparency = 1,
@@ -86,7 +86,7 @@ local function createButtonRow(Name, p1) --[[ Line: 91 ]]
 	return Parent
 end
 
-local function createEmptyColumn(Parent, Name) --[[ Line: 108 ]]
+local function createEmptyColumn(Parent, Name)
 	-- upvalues: CreateFunction (copy)
 	return (CreateFunction("Frame")({
 		BackgroundTransparency = 0.75,
@@ -100,7 +100,7 @@ local function createEmptyColumn(Parent, Name) --[[ Line: 108 ]]
 	}))
 end
 
-local function createImageColumn(BoundInputType, Name, Image, p1, p2) --[[ Line: 123 ]]
+local function createImageColumn(BoundInputType, Name, Image, p1, p2)
 	-- upvalues: createEmptyColumn (copy), CreateFunction (copy)
 	local EmptyColumn = createEmptyColumn(BoundInputType, Name)
 	local _ = CreateFunction("UIAspectRatioConstraint")({ AspectRatio = p1 or 1, Parent = EmptyColumn })
@@ -118,7 +118,7 @@ local function createImageColumn(BoundInputType, Name, Image, p1, p2) --[[ Line:
 	return EmptyColumn
 end
 
-local function createTextColumn(Parent, Name, Text) --[[ Line: 145 ]]
+local function createTextColumn(Parent, Name, Text)
 	-- upvalues: createEmptyColumn (copy), CreateFunction (copy)
 	local EmptyColumn = createEmptyColumn(Parent, Name)
 	local _ = CreateFunction("TextLabel")({
@@ -139,7 +139,7 @@ local function createTextColumn(Parent, Name, Text) --[[ Line: 145 ]]
 	return EmptyColumn
 end
 
-local function createActionColumns(BoundAction, BackgroundColor3) --[[ Line: 166 ]]
+local function createActionColumns(BoundAction, BackgroundColor3)
 	-- upvalues: createEmptyColumn (copy), createTextColumn (copy)
 	local Inset = createEmptyColumn(BoundAction, "Inset")
 	Inset.LayoutOrder = 0
@@ -168,7 +168,7 @@ local function createActionColumns(BoundAction, BackgroundColor3) --[[ Line: 166
 	return Inset, Priority, Security, ActionName, InputTypes
 end
 
-local function updateContainerCanvas() --[[ Line: 203 ]]
+local function updateContainerCanvas()
 	-- upvalues: Flag (ref), BoundInputTypes (copy), sortInputTypeRows (copy), Keys (copy), TableHeaders (copy), t (copy), sortActionRows (copy)
 	debug.profilebegin("updateContainerCanvas")
 	
@@ -212,7 +212,7 @@ local function updateContainerCanvas() --[[ Line: 203 ]]
 	debug.profileend()
 end
 
-local function scrollContainerToRow(Frame) --[[ Line: 245 ]]
+local function scrollContainerToRow(Frame)
 	-- upvalues: Parent (ref), TweenService (copy), _TweenInfo1 (copy)
 	TweenService:Create(Parent, _TweenInfo1, {
 		CanvasPosition = Parent.CanvasPosition + Vector2.new(0, Frame.AbsolutePosition.Y - Parent.AbsolutePosition.Y)
@@ -221,7 +221,7 @@ end
 
 local ActionBindingsTabModule = {}
 
-function ActionBindingsTabModule.initializeGui(Parent1) --[[ Line: 253 ]]
+function ActionBindingsTabModule.initializeGui(Parent1)
 	-- upvalues: CreateFunction (copy), Parent (ref), ActionBindingsTabModule (copy), ContextActionService (copy), Flag (ref), updateContainerCanvas (copy)
 	local Parent2 = CreateFunction("ScrollingFrame")({
 		BorderSizePixel = 0,
@@ -236,19 +236,19 @@ function ActionBindingsTabModule.initializeGui(Parent1) --[[ Line: 253 ]]
 	Parent = Parent2
 	local Object = CreateFunction("UIListLayout")({ Padding = UDim.new(0, 5), Parent = Parent2 })
 	Object.SortOrder = Enum.SortOrder.LayoutOrder
-	Object:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function() --[[ Line: 271 ]]
+	Object:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
 		-- upvalues: Parent (upval), Object (copy)
 		Parent.CanvasSize = UDim2.new(0, 0, 0, Object.AbsoluteContentSize.Y)
 	end)
 	ActionBindingsTabModule.updateGuis()
-	ContextActionService.BoundActionAdded:connect(function(ActionAdded, _, FunctionInfoTable, IsCore) --[[ Line: 275 ]]
+	ContextActionService.BoundActionAdded:connect(function(ActionAdded, _, FunctionInfoTable, IsCore)
 		-- upvalues: ActionBindingsTabModule (upval), Flag (upval), updateContainerCanvas (upval)
 		FunctionInfoTable.isCore = IsCore
 		ActionBindingsTabModule.updateActionRows(ActionAdded, FunctionInfoTable)
 		Flag = true
 		updateContainerCanvas()
 	end)
-	ContextActionService.BoundActionRemoved:connect(function(ActionRemoved, FunctionInfoTable, IsCore) --[[ Line: 282 ]]
+	ContextActionService.BoundActionRemoved:connect(function(ActionRemoved, FunctionInfoTable, IsCore)
 		-- upvalues: ActionBindingsTabModule (upval), Flag (upval), updateContainerCanvas (upval)
 		FunctionInfoTable.isCore = IsCore
 		ActionBindingsTabModule.removeActionRows(ActionRemoved, FunctionInfoTable)
@@ -257,7 +257,7 @@ function ActionBindingsTabModule.initializeGui(Parent1) --[[ Line: 253 ]]
 	end)
 end
 
-function ActionBindingsTabModule.updateBoundInputTypeRow(Key) --[[ Line: 291 ]]
+function ActionBindingsTabModule.updateBoundInputTypeRow(Key)
 	-- upvalues: BoundInputTypes (copy), createButtonRow (copy), createImageColumn (copy), createTextColumn (copy), createEmptyRow (copy), createActionColumns (copy), _Color3_1 (copy), Keys (copy), Keys2 (copy), TableHeaders (copy), Parent (ref), TweenService (copy), _TweenInfo (copy), t2 (copy), t (copy), updateContainerCanvas (copy), scrollContainerToRow (copy)
 	if not BoundInputTypes[Key] then
 		local BoundInputType = createButtonRow("BoundInputType", 30)
@@ -282,7 +282,7 @@ function ActionBindingsTabModule.updateBoundInputTypeRow(Key) --[[ Line: 291 ]]
 		BoundInputType.Parent = Parent
 		TweenService:Create(InputType, _TweenInfo, { BackgroundColor3 = Color3.new(0.5, 0.5, 0.5) }):Play()
 		t2[Key] = false
-		BoundInputType.MouseButton1Click:connect(function() --[[ Line: 323 ]]
+		BoundInputType.MouseButton1Click:connect(function()
 			-- upvalues: t2 (upval), Key (copy), t (upval), ExpandImage (copy), TableHeader (copy), updateContainerCanvas (upval), TweenService (upval), InputType (copy), _TweenInfo (upval), scrollContainerToRow (upval), BoundInputType (copy)
 			t2[Key] = not t2[Key]
 			local Entry = t[Key]
@@ -316,7 +316,7 @@ function ActionBindingsTabModule.updateBoundInputTypeRow(Key) --[[ Line: 291 ]]
 	end
 end
 
-function ActionBindingsTabModule.updateActionRowForInputType(Text, p1, Key) --[[ Line: 354 ]]
+function ActionBindingsTabModule.updateActionRowForInputType(Text, p1, Key)
 	-- upvalues: t (copy), createEmptyRow (copy), t2 (copy), createActionColumns (copy), _Color3 (copy), _Color3_1 (copy), Keys1 (copy), t1 (copy), Parent (ref), TweenService (copy), _TweenInfo (copy), BoundInputTypes (copy)
 	local Entry = t[Key]
 	
@@ -361,7 +361,7 @@ function ActionBindingsTabModule.updateActionRowForInputType(Text, p1, Key) --[[
 	end
 end
 
-function ActionBindingsTabModule.updateActionRows(p2, p3) --[[ Line: 402 ]]
+function ActionBindingsTabModule.updateActionRows(p2, p3)
 	-- upvalues: ActionBindingsTabModule (copy)
 	for _, inputType in pairs(p3.inputTypes) do
 		ActionBindingsTabModule.updateBoundInputTypeRow(inputType)
@@ -369,7 +369,7 @@ function ActionBindingsTabModule.updateActionRows(p2, p3) --[[ Line: 402 ]]
 	end
 end
 
-function ActionBindingsTabModule.removeActionRows(Key, p4) --[[ Line: 409 ]]
+function ActionBindingsTabModule.removeActionRows(Key, p4)
 	-- upvalues: t (copy), BoundInputTypes (copy), TableHeaders (copy), updateContainerCanvas (copy), Parent (ref)
 	local Flag = nil
 	for _, inputType in pairs(p4.inputTypes) do
@@ -405,7 +405,7 @@ function ActionBindingsTabModule.removeActionRows(Key, p4) --[[ Line: 409 ]]
 	Parent.UIListLayout:ApplyLayout()
 end
 
-function ActionBindingsTabModule.updateGuis() --[[ Line: 446 ]]
+function ActionBindingsTabModule.updateGuis()
 	-- upvalues: ContextActionService (copy), ActionBindingsTabModule (copy), Flag (ref), updateContainerCanvas (copy)
 	for i, value in pairs((ContextActionService:GetAllBoundCoreActionInfo())) do
 		value.isCore = true

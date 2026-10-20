@@ -1,18 +1,18 @@
 ﻿local _ = require(script.Parent.VoiceChatServiceManager)
 
-local function _(Player: Player) --[[ Line: 4 | Named "getPlayerPrimaryPart" ]]
+local function _(Player: Player)
 	return Player and (Player.Character and Player.Character.PrimaryPart)
 end
 
-local _ = function(Player: Player, p1) --[[ Line: 8 | Named "getPlayerDistanceFrom" ]]
+local _ = function(Player: Player, p1)
 	local PrimaryPart = Player and (Player.Character and Player.Character.PrimaryPart)
 	
 	return if PrimaryPart then (PrimaryPart.Position - p1).Magnitude else nil
 end
 
 return {
-	getComparator = function(p1) --[[ Line: 19 ]]
-		return function(Player: Player, Player1: Player): boolean --[[ Line: 20 ]]
+	getComparator = function(p1)
+		return function(Player: Player, Player1: Player): boolean
 			-- upvalues: p1 (copy)
 			local PrimaryPart = Player and (Player.Character and Player.Character.PrimaryPart)
 			local PrimaryPart1 = Player1 and (Player1.Character and Player1.Character.PrimaryPart)
@@ -31,10 +31,10 @@ return {
 			end
 		end
 	end,
-	getSortedPlayers = function(Players, p1, p2, p3, p4, Player, p5) --[[ Line: 41 ]]
+	getSortedPlayers = function(Players, p1, p2, p3, p4, Player, p5)
 		local List = {}
 		
-		local function v9(Player: Player, Player1: Player): boolean --[[ Line: 20 ]]
+		local function v9(Player: Player, Player1: Player): boolean
 			-- upvalues: p2 (copy)
 			local PrimaryPart = Player and (Player.Character and Player.Character.PrimaryPart)
 			local PrimaryPart1 = Player1 and (Player1.Character and Player1.Character.PrimaryPart)

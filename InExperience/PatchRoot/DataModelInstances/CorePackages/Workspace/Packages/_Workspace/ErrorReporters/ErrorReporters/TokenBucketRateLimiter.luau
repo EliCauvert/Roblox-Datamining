@@ -1,7 +1,7 @@
 ﻿local TokenBucketRateLimiterModule = {}
 TokenBucketRateLimiterModule.__index = TokenBucketRateLimiterModule
 
-function TokenBucketRateLimiterModule.new(p1) --[[ Line: 36 ]]
+function TokenBucketRateLimiterModule.new(p1)
 	-- upvalues: TokenBucketRateLimiterModule (copy)
 	local self = setmetatable({}, TokenBucketRateLimiterModule)
 	self.maxTokens = p1.maxTokens
@@ -16,7 +16,7 @@ function TokenBucketRateLimiterModule.new(p1) --[[ Line: 36 ]]
 	return self
 end
 
-function TokenBucketRateLimiterModule:refill() --[[ Line: 58 ]]
+function TokenBucketRateLimiterModule:refill()
 	local CurrentTime = tick()
 	local CurrentTimeDelta = CurrentTime - self.lastRefillTime
 	
@@ -33,7 +33,7 @@ function TokenBucketRateLimiterModule:refill() --[[ Line: 58 ]]
 	end
 end
 
-function TokenBucketRateLimiterModule:consume(p1): boolean --[[ Line: 93 ]]
+function TokenBucketRateLimiterModule:consume(p1): boolean
 	local P3 = p1 or 1
 	self:refill()
 	
@@ -46,26 +46,26 @@ function TokenBucketRateLimiterModule:consume(p1): boolean --[[ Line: 93 ]]
 	end
 end
 
-function TokenBucketRateLimiterModule:getAvailableTokens() --[[ Line: 113 ]]
+function TokenBucketRateLimiterModule:getAvailableTokens()
 	self:refill()
 	
 	return self.currentTokens
 end
 
-function TokenBucketRateLimiterModule:getMaxTokens() --[[ Line: 123 ]]
+function TokenBucketRateLimiterModule:getMaxTokens()
 	return self.maxTokens
 end
 
-function TokenBucketRateLimiterModule:hasTokensAvailable(): boolean --[[ Line: 132 ]]
+function TokenBucketRateLimiterModule:hasTokensAvailable(): boolean
 	return self:getAvailableTokens() > 0
 end
 
-function TokenBucketRateLimiterModule:reset() --[[ Line: 139 ]]
+function TokenBucketRateLimiterModule:reset()
 	self.currentTokens = self.maxTokens
 	self.lastRefillTime = tick()
 end
 
-function TokenBucketRateLimiterModule:toString(): string --[[ Line: 149 ]]
+function TokenBucketRateLimiterModule:toString(): string
 	self:refill()
 	
 	return string.format("TokenBucketRateLimiter{tokens=%d/%d, refillRate=%d/%ds, nextRefillIn=%.1fs}", self.currentTokens, self.maxTokens, self.refillRate, self.refillIntervalSeconds, self.refillIntervalSeconds - (tick() - self.lastRefillTime) % self.refillIntervalSeconds)

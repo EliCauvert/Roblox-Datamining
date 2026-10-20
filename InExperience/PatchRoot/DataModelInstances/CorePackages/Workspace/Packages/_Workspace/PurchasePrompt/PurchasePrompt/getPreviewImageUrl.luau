@@ -3,7 +3,7 @@ local Replaced = string.gsub(game:GetService("ContentProvider").BaseUrl:lower(),
 local Text = Replaced .. "thumbs/asset.ashx?assetid="
 local Text1 = Replaced .. "outfit-thumbnail/image?userOutfitId=%s&width=100&height=100&format=png"
 
-return function(p1, Platform) --[[ Line: 14 | Named "getPreviewImageUrl" ]]
+return function(p1, Platform)
 	-- upvalues: ItemTypeModule (copy), Text1 (copy), Text (copy)
 	local AssetId = nil
 	

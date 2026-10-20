@@ -1,6 +1,6 @@
 ﻿local UserModel = require(script:FindFirstAncestor("SocialLibraries").dependencies).UserModel
 
-return function(p1, p2, p3) --[[ Line: 7 ]]
+return function(p1, p2, p3)
 	-- upvalues: UserModel (copy)
 	if p1.pinnedGame and p1.pinnedGame.universeId then
 		return (tostring(p1.pinnedGame.universeId))

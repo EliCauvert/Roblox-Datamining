@@ -9,20 +9,20 @@ local config = {
 	state_change = true
 }
 
-local function _(p1) --[[ Line: 18 | Named "getHistorySequenceId" ]]
+local function _(p1)
 	local SequenceId = p1.sequenceId
 	
 	return if typeof(SequenceId) == "number" then SequenceId else nil
 end
 
-local _ = function(p1): boolean --[[ Line: 23 | Named "isAssistantSessionUpdate" ]]
+local _ = function(p1): boolean
 	-- upvalues: config (copy)
 	local SessionUpdate = p1.sessionUpdate
 	
 	return typeof(SessionUpdate) == "string" and config[SessionUpdate] == true
 end
 
-local function orderHistoryItems(List) --[[ Line: 34 ]]
+local function orderHistoryItems(List)
 	local List1 = {}
 	
 	for OriginalIndex, Update in List do
@@ -33,7 +33,7 @@ local function orderHistoryItems(List) --[[ Line: 34 ]]
 			sequenceId = if typeof(SequenceId) == "number" then SequenceId else nil
 		})
 	end
-	table.sort(List1, function(A, B): boolean --[[ Line: 44 ]]
+	table.sort(List1, function(A, B): boolean
 		return if A.sequenceId == nil or B.sequenceId == nil then A.originalIndex < B.originalIndex else A.sequenceId < B.sequenceId
 	end)
 	
@@ -41,7 +41,7 @@ local function orderHistoryItems(List) --[[ Line: 34 ]]
 end
 
 return {
-	ingestSessionHistory = function(p1, SessionId, p2, p3) --[[ Line: 59 ]]
+	ingestSessionHistory = function(p1, SessionId, p2, p3)
 		-- upvalues: orderHistoryItems (copy), config (copy), AcpProtocolModule (copy)
 		assert(typeof(SessionId) == "string" and SessionId ~= "", "sessionId is required")
 		local ActiveTurnInternals = p1.getActiveTurnInternals(SessionId)

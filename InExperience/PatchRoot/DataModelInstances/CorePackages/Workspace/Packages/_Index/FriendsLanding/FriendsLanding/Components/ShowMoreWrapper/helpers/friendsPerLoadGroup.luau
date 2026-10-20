@@ -9,7 +9,7 @@ local InterfaceResult1 = T.interface({
 	minimumItemsPerRow = T.optional(T.number)
 })
 
-return function(p1, p2) --[[ Line: 17 ]]
+return function(p1, p2)
 	-- upvalues: InterfaceResult (copy), InterfaceResult1 (copy), FriendsPerRowModule (copy), Llama (copy)
 	assert(InterfaceResult(p1))
 	assert(InterfaceResult1(p2))

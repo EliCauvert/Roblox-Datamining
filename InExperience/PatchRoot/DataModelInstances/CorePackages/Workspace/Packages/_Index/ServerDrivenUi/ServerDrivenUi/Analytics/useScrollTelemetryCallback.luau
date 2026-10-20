@@ -5,9 +5,9 @@ local GetDisplayStoreFunction = require(Parent.Display).GetDisplayStore
 local FeedScrollFunction = require(Parent.ScrollTelemetry).feedScroll
 local SduiErrors = require(Parent.SduiCoreSystem).SduiErrors
 
-return function(p1, p2, p3) --[[ Line: 17 | Named "useScrollTelemetryCallback" ]]
+return function(p1, p2, p3)
 	-- upvalues: ReactModule (copy), SduiErrors (copy), GetDisplayStoreFunction (copy), FeedScrollFunction (copy)
-	return (ReactModule.useCallback(function(Distance, ScrollDuration, StartPos) --[[ Line: 23 ]]
+	return (ReactModule.useCallback(function(Distance, ScrollDuration, StartPos)
 		-- upvalues: p1 (copy), p2 (copy), p3 (copy), SduiErrors (upval), GetDisplayStoreFunction (upval), FeedScrollFunction (upval)
 		if p1 and p1.current ~= nil and p2.current then
 			local Current = p2.current

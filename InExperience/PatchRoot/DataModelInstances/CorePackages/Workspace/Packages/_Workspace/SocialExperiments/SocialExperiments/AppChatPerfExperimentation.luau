@@ -1,7 +1,7 @@
 ﻿local ExperimentCacheManager = require(script:FindFirstAncestor("SocialExperiments").Parent.ExperimentCacheManager).ExperimentCacheManager
 local AppChatPerfExperimentLayer = game:DefineFastString("AppChatPerfExperimentLayer", "Party.Chat.Perf")
 
-local function _(p1) --[[ Line: 8 | Named "getIsUserInTreatment" ]]
+local function _(p1)
 	-- upvalues: AppChatPerfExperimentLayer (copy), ExperimentCacheManager (copy)
 	local LayerVariables = ExperimentCacheManager.default:getLayerVariables(AppChatPerfExperimentLayer)
 	
@@ -9,31 +9,31 @@ local function _(p1) --[[ Line: 8 | Named "getIsUserInTreatment" ]]
 end
 
 return {
-	getChatLandingPaginationEnabled = function() --[[ Line: 19 ]]
+	getChatLandingPaginationEnabled = function()
 		-- upvalues: AppChatPerfExperimentLayer (copy), ExperimentCacheManager (copy)
 		local LayerVariables = ExperimentCacheManager.default:getLayerVariables(AppChatPerfExperimentLayer)
 		
 		return if LayerVariables and LayerVariables.IsChatLandingPaginationEnabled ~= nil then LayerVariables.IsChatLandingPaginationEnabled else false
 	end,
-	getChatConversationPaginationEnabled = function() --[[ Line: 23 ]]
+	getChatConversationPaginationEnabled = function()
 		-- upvalues: AppChatPerfExperimentLayer (copy), ExperimentCacheManager (copy)
 		local LayerVariables = ExperimentCacheManager.default:getLayerVariables(AppChatPerfExperimentLayer)
 		
 		return if LayerVariables and LayerVariables.IsChatConversationPaginationEnabled ~= nil then LayerVariables.IsChatConversationPaginationEnabled else false
 	end,
-	getChatMembersPaginationEnabled = function() --[[ Line: 27 ]]
+	getChatMembersPaginationEnabled = function()
 		-- upvalues: AppChatPerfExperimentLayer (copy), ExperimentCacheManager (copy)
 		local LayerVariables = ExperimentCacheManager.default:getLayerVariables(AppChatPerfExperimentLayer)
 		
 		return if LayerVariables and LayerVariables.IsChatMembersPaginationEnabled ~= nil then LayerVariables.IsChatMembersPaginationEnabled else false
 	end,
-	getChatConversationRenderingFixEnabled = function() --[[ Line: 31 ]]
+	getChatConversationRenderingFixEnabled = function()
 		-- upvalues: AppChatPerfExperimentLayer (copy), ExperimentCacheManager (copy)
 		local LayerVariables = ExperimentCacheManager.default:getLayerVariables(AppChatPerfExperimentLayer)
 		
 		return if LayerVariables and LayerVariables.IsChatConversationRenderingFixEnabled ~= nil then LayerVariables.IsChatConversationRenderingFixEnabled else false
 	end,
-	logExposure = function() --[[ Line: 35 ]]
+	logExposure = function()
 		-- upvalues: AppChatPerfExperimentLayer (copy), ExperimentCacheManager (copy)
 		if ExperimentCacheManager.default:getLayerVariables(AppChatPerfExperimentLayer) ~= nil then
 			ExperimentCacheManager.default:logLayerExposure(AppChatPerfExperimentLayer)

@@ -1,4 +1,4 @@
-﻿return function(p1) --[[ Line: 10 | Named "normalizeFaeStatus" ]]
+﻿return function(p1)
 	if type(p1) ~= "table" then
 		return nil, `Type table required, got {type(p1)}.`
 	end

@@ -36,9 +36,9 @@ local GetRobloxSubscriptionProductsFunction = require(Parent.RobloxSubscriptionP
 local PurchaseFlowUUIDTelemetryModule = require(PurchasePrompt.Events.PurchaseFlowUUIDTelemetry)
 local list = { NetworkModule, ExternalSettingsModule }
 
-return function(p1, p2, p3, CollectibleItemId, CollectibleItemInstanceId, p4, p5, p6) --[[ Line: 57 | Named "initiateBundlePurchase" ]]
+return function(p1, p2, p3, CollectibleItemId, CollectibleItemInstanceId, p4, p5, p6)
 	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), ExternalSettingsModule (copy), HasPendingRequestModule (copy), BuildProductPayloadFromInitiateArgsModule (copy), SetProductPayloadModule (copy), FFlagEnablePurchaseFlowUUIDMigrationModule (copy), HttpService (copy), SetPurchaseFlowUUIDModule (copy), LoggingProtocolModule (copy), PurchaseFlowUUIDTelemetryModule (copy), RequestBundlePurchaseModule (copy), ErrorOccurredModule (copy), PurchaseErrorModule (copy), FFlagEnableInExperiencePurchaseModalMetricsModule (copy), TrackInExperiencePurchaseStartModule (copy), FFlagUnifiedPurchaseOptimizeTTIMarketplace (copy), FFlagRefreshPriceOnRetryAfterUpsellModule (copy), FFlagEnableFetchCartPricingDuringInExperience (copy), FetchCartPricingModule (copy), FFlagAXFetchCartPricingDuringInExperienceExposure (copy), IXPServiceWrapper (copy), FStringAXFetchCartPricingDuringInExperienceLayerName (copy), PromiseModule (copy), GetBundleDetailsModule (copy), Players (copy), GetBalanceInfoModule (copy), GetIsAlreadyOwnedModule (copy), GetUnifiedPurchaseFlowEligibilityModule (copy), GetRobloxSubscriptionProductsFunction (copy), ApplyRefreshedPriceModule (copy), ResolveBundlePromptStateModule (copy), GetProductPurchasableDetailsModule (copy)
-	return ThunkModule.new(script.Name, list, function(p7, p8) --[[ Line: 67 ]]
+	return ThunkModule.new(script.Name, list, function(p7, p8)
 		-- upvalues: NetworkModule (upval), ExternalSettingsModule (upval), HasPendingRequestModule (upval), p6 (copy), BuildProductPayloadFromInitiateArgsModule (upval), p1 (copy), p2 (copy), p3 (copy), CollectibleItemId (copy), CollectibleItemInstanceId (copy), p4 (copy), p5 (copy), SetProductPayloadModule (upval), FFlagEnablePurchaseFlowUUIDMigrationModule (upval), HttpService (upval), SetPurchaseFlowUUIDModule (upval), LoggingProtocolModule (upval), PurchaseFlowUUIDTelemetryModule (upval), RequestBundlePurchaseModule (upval), ErrorOccurredModule (upval), PurchaseErrorModule (upval), FFlagEnableInExperiencePurchaseModalMetricsModule (upval), TrackInExperiencePurchaseStartModule (upval), FFlagUnifiedPurchaseOptimizeTTIMarketplace (upval), FFlagRefreshPriceOnRetryAfterUpsellModule (upval), FFlagEnableFetchCartPricingDuringInExperience (upval), FetchCartPricingModule (upval), FFlagAXFetchCartPricingDuringInExperienceExposure (upval), IXPServiceWrapper (upval), FStringAXFetchCartPricingDuringInExperienceLayerName (upval), PromiseModule (upval), GetBundleDetailsModule (upval), Players (upval), GetBalanceInfoModule (upval), GetIsAlreadyOwnedModule (upval), GetUnifiedPurchaseFlowEligibilityModule (upval), GetRobloxSubscriptionProductsFunction (upval), ApplyRefreshedPriceModule (upval), ResolveBundlePromptStateModule (upval), GetProductPurchasableDetailsModule (upval)
 		local v1 = p8[NetworkModule]
 		local v2 = p8[ExternalSettingsModule]
@@ -103,7 +103,7 @@ return function(p1, p2, p3, CollectibleItemId, CollectibleItemInstanceId, p4, p5
 		if FFlagAXFetchCartPricingDuringInExperienceExposure and not p7:getState().purchaseOptions.shouldFetchCartPricing and not p6 then
 			IXPServiceWrapper:LogFlagLinkedUserLayerExposure(FStringAXFetchCartPricingDuringInExperienceLayerName)
 		end
-		local v4 = if FFlagEnableFetchCartPricingDuringInExperience and not p7:getState().purchaseOptions.shouldFetchCartPricing and not p6 then function(p9) --[[ Line: 182 ]]
+		local v4 = if FFlagEnableFetchCartPricingDuringInExperience and not p7:getState().purchaseOptions.shouldFetchCartPricing and not p6 then function(p9)
 			-- upvalues: p7 (copy), FetchCartPricingModule (upval)
 			return p7:dispatch(FetchCartPricingModule(nil, p9))
 		end else nil
@@ -116,11 +116,11 @@ return function(p1, p2, p3, CollectibleItemId, CollectibleItemInstanceId, p4, p5
 			balanceInfo = GetBalanceInfoModule(v1, v2, false, nil, if FFlagUnifiedPurchaseOptimizeTTIMarketplace then ProvidedRobuxBalance else nil),
 			alreadyOwned = GetIsAlreadyOwnedModule(v1, p1, Enum.InfoType.Bundle, if FFlagUnifiedPurchaseOptimizeTTIMarketplace then Flag else nil),
 			isUserEligibleForUnifiedPurchaseFlow = GetUnifiedPurchaseFlowEligibilityModule(v1),
-			robloxSubscriptionProducts = GetRobloxSubscriptionProductsFunction(v1):catch(function() --[[ Line: 215 ]]
+			robloxSubscriptionProducts = GetRobloxSubscriptionProductsFunction(v1):catch(function()
 				return nil
 			end),
 			cartPricingResponse = DispatchResult
-		}):andThen(function(Result) --[[ Line: 221 ]]
+		}):andThen(function(Result)
 			-- upvalues: p5 (upval), FFlagRefreshPriceOnRetryAfterUpsellModule (upval), p6 (upval), ApplyRefreshedPriceModule (upval), p7 (copy), FFlagUnifiedPurchaseOptimizeTTIMarketplace (upval), ResolveBundlePromptStateModule (upval), GetProductPurchasableDetailsModule (upval), v1 (copy), ErrorOccurredModule (upval), PurchaseErrorModule (upval)
 			local v5 = p5
 			
@@ -139,12 +139,12 @@ return function(p1, p2, p3, CollectibleItemId, CollectibleItemInstanceId, p4, p5
 				
 				return
 			else
-				GetProductPurchasableDetailsModule(v1, Result.bundleDetails.product.id):andThen(function(Result1) --[[ Line: 249 ]]
+				GetProductPurchasableDetailsModule(v1, Result.bundleDetails.product.id):andThen(function(Result1)
 					-- upvalues: p7 (upval), ResolveBundlePromptStateModule (upval), Result (copy), v5 (ref)
 					p7:dispatch(ResolveBundlePromptStateModule(Result1, Result.bundleDetails, Result.accountInfo, Result.balanceInfo, v5, Result.alreadyOwned, Result.isUserEligibleForUnifiedPurchaseFlow, Result.robloxSubscriptionProducts))
 				end)
 			end
-		end):catch(function(Err) --[[ Line: 268 ]]
+		end):catch(function(Err)
 			-- upvalues: p7 (copy), ErrorOccurredModule (upval)
 			p7:dispatch(ErrorOccurredModule(Err))
 		end)

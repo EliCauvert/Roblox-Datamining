@@ -7,7 +7,7 @@ local ArrowFrameModule = require(Parent.HorizontalNav.ArrowFrame)
 local UtilsModule = require(Parent.HorizontalNav.Utils)
 local UseIsMouseAndKeyboardModule = require(Parent1.Utility.useIsMouseAndKeyboard)
 
-return function(p1) --[[ Line: 56 | Named "ScrollingListWithArrowsAndGradient" ]]
+return function(p1)
 	-- upvalues: UseIsMouseAndKeyboardModule (copy), ReactModule (copy), UtilsModule (copy), GradientFrameModule (copy), ArrowFrameModule (copy), IntroScrollModule (copy)
 	local ListHeight = p1.listHeight
 	local ChildWidgetIndex = p1.childWidgetIndex
@@ -18,7 +18,7 @@ return function(p1) --[[ Line: 56 | Named "ScrollingListWithArrowsAndGradient" ]
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(false)
 	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(false)
 	local UseBindingResult3, UseBindingResult2_2 = ReactModule.useBinding(Vector2.new(0, 0))
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 70 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult (copy), UtilsModule (upval), p1 (copy), UseIsMouseAndKeyboardModuleResult (copy), UseBindingResult2 (copy), UseBindingResult2_1 (copy)
 		local Value = UseRefResult:getValue()
 		
@@ -39,12 +39,12 @@ return function(p1) --[[ Line: 56 | Named "ScrollingListWithArrowsAndGradient" ]
 		UseBindingResult2(ShouldShowGradientsForScrollingFrame2)
 		UseBindingResult2_1(ShouldShowGradientsForScrollingFrame3)
 	end, { UseRefResult, UseBindingResult2, UseBindingResult2_1 })
-	local UseResult1 = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 92 ]]
+	local UseResult1 = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: UseResult (copy), UseBindingResult2_2 (copy)
 		UseResult(ScrollFrame)
 		UseBindingResult2_2(ScrollFrame.CanvasPosition)
 	end, { UseResult, UseBindingResult2_2 })
-	ReactModule.useEffect(function() --[[ Line: 99 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseResult (copy)
 		local Value = p1.scrollingFrameRef:getValue()
 		

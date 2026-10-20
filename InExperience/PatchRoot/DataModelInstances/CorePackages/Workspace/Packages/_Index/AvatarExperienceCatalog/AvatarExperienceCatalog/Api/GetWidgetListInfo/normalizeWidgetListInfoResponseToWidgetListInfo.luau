@@ -11,7 +11,7 @@ local MakeNormalizeValueFnFunction = Normalize.makeNormalizeValueFn
 local MakeRequiredFunction = Normalize.makeRequired
 local _ = require(AvatarExperienceCatalog.Models.WidgetListInfo)
 
-local function _(Default) --[[ Line: 27 | Named "makeNormalizeResponsiveValueFn" ]]
+local function _(Default)
 	-- upvalues: MakeNormalizeTableFnFunction (copy)
 	return MakeNormalizeTableFnFunction({
 		default = Default,
@@ -26,7 +26,7 @@ local function _(Default) --[[ Line: 27 | Named "makeNormalizeResponsiveValueFn"
 	})
 end
 
-local _ = function(Dark) --[[ Line: 41 | Named "makeNormalizedThemeValueFn" ]]
+local _ = function(Dark)
 	-- upvalues: MakeNormalizeTableFnFunction (copy)
 	return MakeNormalizeTableFnFunction({ default = Dark, light = Dark, dark = Dark })
 end
@@ -108,7 +108,7 @@ local NormalizeTableFn6 = MakeNormalizeTableFnFunction({
 	backgroundLayers = NormalizeTableFn4,
 	thumbnailAspectRatio = MakeNormalizeUnionFnFunction({
 		MakeNormalizeValueFnFunction({ "Wide", "Tall", "Square" }),
-		function(p1) --[[ Line: 102 ]]
+		function(p1)
 			return if p1 then tonumber(p1) else nil
 		end
 	})
@@ -195,7 +195,7 @@ local NormalizeTableFn111 = MakeNormalizeTableFnFunction({
 
 return (MakeNormalizeTableFnFunction({
 	configuration = NormalizeTableFn11,
-	widgets = function(List) --[[ Line: 215 ]]
+	widgets = function(List)
 		-- upvalues: NormalizeTableFn111 (copy)
 		if typeof(List) ~= "table" then
 			return nil, nil

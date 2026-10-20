@@ -35,7 +35,7 @@ local GetFFlagInExperienceContainerRespectUserThemeFunction = require(Parent.Sha
 local FFlagUseSignalsForCountryCodeList = require(Parent.SharedFlags).FFlagUseSignalsForCountryCodeList
 local config = { reducer = {} }
 
-return function(p1) --[[ Line: 54 | Named "InExperienceProviderContainer" ]]
+return function(p1)
 	-- upvalues: UseSelectedThemeFunction (copy), CryoModule (copy), config (copy), ReactModule (copy), RoduxModule (copy), FFlagUseSignalsForCountryCodeList (copy), CountryCodeList (copy), FetchingStatus (copy), GetFFlagInExperienceContainerScreenSizeReducerFunction (copy), SetScreenSizeModule (copy), StyleProviderWithDefaultTheme (copy), GetFFlagInExperienceContainerRespectUserThemeFunction (copy), RoactRoduxModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), RoactAppExperimentModule (copy), IXPService (copy), RoactAppPolicy (copy), AppFeaturePolicies (copy), RoactServices (copy), RoactAnalytics (copy), Analytics (copy), RoactNetworking (copy), RequestInternalWrapperFunction (copy), HttpService (copy), AppLinking (copy), GetFFlagInExperienceContainerAppLinkingFunction (copy), LinkingProtocol (copy), SelectionCursorProvider (copy), CursorProvider (copy), ProviderContainer (copy), OpenWebviewModule (copy)
 	local UseSelectedThemeResult = UseSelectedThemeFunction()
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
@@ -44,10 +44,10 @@ return function(p1) --[[ Line: 54 | Named "InExperienceProviderContainer" ]]
 		CountryCodeList = if FFlagUseSignalsForCountryCodeList then nil else CountryCodeList,
 		FetchingStatus = FetchingStatus,
 		ScreenSize = if GetFFlagInExperienceContainerScreenSizeReducerFunction() then RoduxModule.createReducer(Vector2.new(400, 400), {
-			[SetScreenSizeModule.name] = function(_, p2) --[[ Line: 69 ]]
+			[SetScreenSizeModule.name] = function(_, p2)
 				return p2.screenSize
 			end
-		}) else function(_, _): Vector2 --[[ Line: 73 ]]
+		}) else function(_, _): Vector2
 			return Vector2.new(400, 400)
 		end
 	}, UnionResult.reducer)), nil, { RoduxModule.thunkMiddleware })

@@ -13,12 +13,12 @@ local FFlagEnableLuaAccountSwitch = require(Parent.SharedFlags).FFlagEnableLuaAc
 local FFlagClearAccountBlobForPioneerLoginModule = require(AuthCommon.Flags.FFlagClearAccountBlobForPioneerLogin)
 local IsPioneerLaunchFunction = require(Parent.PioneerUtils).isPioneerLaunch
 
-function getLoginUrl(): string --[[ Line: 30 ]]
+function getLoginUrl(): string
 	-- upvalues: Url (copy)
 	return string.format("%sv2/login", Url.AUTH_URL)
 end
 
-local function _() --[[ Line: 34 | Named "getAccountBlobForLogin" ]]
+local function _()
 	-- upvalues: FFlagClearAccountBlobForPioneerLoginModule (copy), IsPioneerLaunchFunction (copy), AppStorageUtilitiesModule (copy), FFlagEnableLuaAccountSwitch (copy)
 	if FFlagClearAccountBlobForPioneerLoginModule and IsPioneerLaunchFunction() then
 		AppStorageUtilitiesModule.setAccountBlob("")
@@ -28,7 +28,7 @@ local function _() --[[ Line: 34 | Named "getAccountBlobForLogin" ]]
 end
 
 return {
-	logByPasskey = function(Callback, Input, Password) --[[ Line: 42 ]]
+	logByPasskey = function(Callback, Input, Password)
 		-- upvalues: HttpService (copy), FFlagClearAccountBlobForPioneerLoginModule (copy), IsPioneerLaunchFunction (copy), AppStorageUtilitiesModule (copy), FFlagEnableLuaAccountSwitch (copy)
 		local config = {
 			ctype = "Passkey",
@@ -47,7 +47,7 @@ return {
 			postBody = HttpService:JSONEncode(config)
 		})
 	end,
-	logByUsername = function(Callback, Cvalue, Password, Input, p1) --[[ Line: 52 ]]
+	logByUsername = function(Callback, Cvalue, Password, Input, p1)
 		-- upvalues: HttpService (copy), GetFFlagLuaAppUsingSecurityQuestionsForLuaLoginFunction (copy), FFlagClearAccountBlobForPioneerLoginModule (copy), IsPioneerLaunchFunction (copy), AppStorageUtilitiesModule (copy), FFlagEnableLuaAccountSwitch (copy)
 		local config = {
 			ctype = "Username",
@@ -71,7 +71,7 @@ return {
 			postBody = HttpService:JSONEncode(config)
 		})
 	end,
-	logByEmail = function(Callback, Cvalue, Password, Input, p1, p2) --[[ Line: 73 ]]
+	logByEmail = function(Callback, Cvalue, Password, Input, p1, p2)
 		-- upvalues: HttpService (copy), GetFFlagLuaAppUsingSecurityQuestionsForLuaLoginFunction (copy), GetFFlagEnableLoginAccountSelectorFunction (copy), FFlagClearAccountBlobForPioneerLoginModule (copy), IsPioneerLaunchFunction (copy), AppStorageUtilitiesModule (copy), FFlagEnableLuaAccountSwitch (copy)
 		local config = {
 			ctype = "Email",
@@ -96,7 +96,7 @@ return {
 			postBody = HttpService:JSONEncode(config)
 		})
 	end,
-	logByPhone = function(Callback, Cvalue, Password, Input, p1, p2) --[[ Line: 95 ]]
+	logByPhone = function(Callback, Cvalue, Password, Input, p1, p2)
 		-- upvalues: HttpService (copy), GetFFlagLuaAppUsingSecurityQuestionsForLuaLoginFunction (copy), GetFFlagEnableLoginAccountSelectorFunction (copy), FFlagClearAccountBlobForPioneerLoginModule (copy), IsPioneerLaunchFunction (copy), AppStorageUtilitiesModule (copy), FFlagEnableLuaAccountSwitch (copy)
 		local config = {
 			ctype = "PhoneNumber",
@@ -121,7 +121,7 @@ return {
 			postBody = HttpService:JSONEncode(config)
 		})
 	end,
-	loginWithCode = function(Callback, Cvalue, Password, Input, p1) --[[ Line: 117 ]]
+	loginWithCode = function(Callback, Cvalue, Password, Input, p1)
 		-- upvalues: HttpService (copy), GetFFlagLuaAppUsingSecurityQuestionsForLuaLoginFunction (copy), FFlagClearAccountBlobForPioneerLoginModule (copy), IsPioneerLaunchFunction (copy), AppStorageUtilitiesModule (copy), FFlagEnableLuaAccountSwitch (copy)
 		local config = {
 			ctype = "AuthToken",
@@ -145,7 +145,7 @@ return {
 			postBody = HttpService:JSONEncode(config)
 		})
 	end,
-	logByOtp = function(Callback, Cvalue, Password, p1, p2) --[[ Line: 138 ]]
+	logByOtp = function(Callback, Cvalue, Password, p1, p2)
 		-- upvalues: HttpService (copy), GetFFlagLuaAppUsingSecurityQuestionsForLuaLoginFunction (copy), GetFFlagEnableLoginAccountSelectorFunction (copy), FFlagClearAccountBlobForPioneerLoginModule (copy), IsPioneerLaunchFunction (copy), AppStorageUtilitiesModule (copy), FFlagEnableLuaAccountSwitch (copy)
 		local config = {
 			ctype = "EmailOtpSessionToken",
@@ -167,7 +167,7 @@ return {
 			postBody = HttpService:JSONEncode(config)
 		})
 	end,
-	singleSignOnLogin = function(p1) --[[ Line: 157 ]]
+	singleSignOnLogin = function(p1)
 		-- upvalues: GetSingleSignOnUrlsModule (copy), HttpService (copy), ConsoleAuthRequestWrapperFunction (copy), PromiseModule (copy), LoginErrorCodesModule (copy)
 		local SingleSignOnUrlsModule = GetSingleSignOnUrlsModule()
 		local LoginFunction = SingleSignOnUrlsModule.login
@@ -179,7 +179,7 @@ return {
 			}) else "{}"
 		}, true) else PromiseModule.reject({ errorCode = LoginErrorCodesModule.ServiceUnavailable })
 	end,
-	singleSignOnConnectWithCode = function(p1, Cvalue, Password) --[[ Line: 181 ]]
+	singleSignOnConnectWithCode = function(p1, Cvalue, Password)
 		-- upvalues: GetSingleSignOnUrlsModule (copy), HttpService (copy), ConsoleAuthRequestWrapperFunction (copy), PromiseModule (copy), LoginErrorCodesModule (copy)
 		local SingleSignOnUrlsModule = GetSingleSignOnUrlsModule()
 		local ConnectFunction = SingleSignOnUrlsModule.connect
@@ -192,7 +192,7 @@ return {
 		
 		return if ConnectFunction then ConsoleAuthRequestWrapperFunction(p1, ConnectFunction(), "POST", { maxRetryCount = 0, postBody = Json }) else PromiseModule.reject({ errorCode = LoginErrorCodesModule.ServiceUnavailable })
 	end,
-	singleSignOnConnectWithCredential = function(p1, Cvalue, Password, Ctype) --[[ Line: 210 ]]
+	singleSignOnConnectWithCredential = function(p1, Cvalue, Password, Ctype)
 		-- upvalues: GetSingleSignOnUrlsModule (copy), HttpService (copy), ConsoleAuthRequestWrapperFunction (copy), PromiseModule (copy), LoginErrorCodesModule (copy)
 		local SingleSignOnUrlsModule = GetSingleSignOnUrlsModule()
 		local ConnectFunction = SingleSignOnUrlsModule.connect

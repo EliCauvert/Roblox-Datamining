@@ -5,7 +5,7 @@ local LlamaModule = require(FriendsRodux.Parent.llama)
 local RecommendationContextTypeModule = require(FriendsRodux.Enums.RecommendationContextType)
 local RecommendationModule = {}
 
-function RecommendationModule.new(JoinResult) --[[ Line: 10 ]]
+function RecommendationModule.new(JoinResult)
 	-- upvalues: RecommendationModule (copy)
 	assert(RecommendationModule.isValid(JoinResult))
 	RecommendationModule.__index = RecommendationModule
@@ -24,7 +24,7 @@ function RecommendationModule.new(JoinResult) --[[ Line: 10 ]]
 	return config
 end
 
-function RecommendationModule.mock(p1) --[[ Line: 31 ]]
+function RecommendationModule.mock(p1)
 	-- upvalues: MockIdModule (copy), RecommendationContextTypeModule (copy), LlamaModule (copy), RecommendationModule (copy)
 	local JoinResult = LlamaModule.Dictionary.join({
 		id = MockIdModule(),
@@ -40,7 +40,7 @@ function RecommendationModule.mock(p1) --[[ Line: 31 ]]
 	}))
 end
 
-function RecommendationModule.isValid(p1) --[[ Line: 50 ]]
+function RecommendationModule.isValid(p1)
 	-- upvalues: RecommendationContextTypeModule (copy)
 	if not p1 then
 		return false, "Expected recommendation information to be given"
@@ -61,12 +61,12 @@ function RecommendationModule.isValid(p1) --[[ Line: 50 ]]
 	end
 end
 
-function RecommendationModule.isEqual(p1, p2): boolean --[[ Line: 76 ]]
+function RecommendationModule.isEqual(p1, p2): boolean
 	-- upvalues: LlamaModule (copy)
 	return p1.id == p2.id and (LlamaModule.List.equals(p1.mutualFriendsList, p2.mutualFriendsList) and (p1.rank == p2.rank and p1.contextType == p2.contextType and p1.mutualFriendsCount == p2.mutualFriendsCount))
 end
 
-function RecommendationModule.format(p1) --[[ Line: 84 ]]
+function RecommendationModule.format(p1)
 	-- upvalues: RecommendationContextTypeModule (copy), RecommendationModule (copy), LlamaModule (copy)
 	local FromRawValueResult = p1.contextType and RecommendationContextTypeModule.fromRawValue(p1.contextType) or RecommendationContextTypeModule.None
 	

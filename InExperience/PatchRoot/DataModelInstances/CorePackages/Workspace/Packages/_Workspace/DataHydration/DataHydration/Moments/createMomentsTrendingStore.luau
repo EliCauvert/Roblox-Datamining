@@ -9,7 +9,7 @@ local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.MomentsStoreTypes)
 local FetchTrendingMomentsModule = require(script.Parent.Requests.fetchTrendingMoments)
 
-local function _(MomentsSessionId, p1) --[[ Line: 26 | Named "paramsKey" ]]
+local function _(MomentsSessionId, p1)
 	-- upvalues: HttpService (copy)
 	return HttpService:JSONEncode({
 		momentsSessionId = MomentsSessionId,
@@ -18,7 +18,7 @@ local function _(MomentsSessionId, p1) --[[ Line: 26 | Named "paramsKey" ]]
 	})
 end
 
-return function(p1) --[[ Line: 34 | Named "createMomentsTrendingStore" ]]
+return function(p1)
 	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy), HttpClientModule (copy), FetchTrendingMomentsModule (copy), HttpService (copy)
 	local P2 = p1 or {}
 	local T = {}
@@ -26,7 +26,7 @@ return function(p1) --[[ Line: 34 | Named "createMomentsTrendingStore" ]]
 		supportsMultiGet = false,
 		replaceItems = true,
 		cache = CreateDataCacheModule(),
-		fetchFn = function(p2, _) --[[ Line: 42 ]]
+		fetchFn = function(p2, _)
 			-- upvalues: T (ref), PromiseModule (upval), HttpClientModule (upval), FetchTrendingMomentsModule (upval), P2 (copy)
 			local Entry = T[p2]
 			
@@ -34,7 +34,7 @@ return function(p1) --[[ Line: 34 | Named "createMomentsTrendingStore" ]]
 		end
 	})
 	
-	local function _(MomentsSessionId, Cursor) --[[ Line: 56 | Named "setParams" ]]
+	local function _(MomentsSessionId, Cursor)
 		-- upvalues: HttpService (upval), T (ref)
 		local Json = HttpService:JSONEncode({
 			momentsSessionId = MomentsSessionId,
@@ -47,11 +47,11 @@ return function(p1) --[[ Line: 34 | Named "createMomentsTrendingStore" ]]
 	end
 	
 	return {
-		getTrending = function(p3, p4, p5) --[[ Line: 86 ]]
+		getTrending = function(p3, p4, p5)
 			-- upvalues: HttpClientModule (upval), FetchTrendingMomentsModule (upval), P2 (copy)
 			return HttpClientModule.asPromise(FetchTrendingMomentsModule(p3, p4, P2.network, p5))
 		end,
-		getCachedTrending = function(MomentsSessionId, Cursor) --[[ Line: 65 ]]
+		getCachedTrending = function(MomentsSessionId, Cursor)
 			-- upvalues: DataResolverModule (copy), HttpService (upval), T (ref)
 			local GetCachedItemFunction = DataResolverModule.getCachedItem
 			local Json = HttpService:JSONEncode({
@@ -63,7 +63,7 @@ return function(p1) --[[ Line: 34 | Named "createMomentsTrendingStore" ]]
 			
 			return GetCachedItemFunction(Json)
 		end,
-		fetchTrending = function(MomentsSessionId, Cursor) --[[ Line: 72 ]]
+		fetchTrending = function(MomentsSessionId, Cursor)
 			-- upvalues: DataResolverModule (copy), HttpService (upval), T (ref)
 			local FetchItemFunction = DataResolverModule.fetchItem
 			local Json = HttpService:JSONEncode({
@@ -75,7 +75,7 @@ return function(p1) --[[ Line: 34 | Named "createMomentsTrendingStore" ]]
 			
 			return FetchItemFunction(Json)
 		end,
-		getAndFetchTrending = function(MomentsSessionId, Cursor) --[[ Line: 79 ]]
+		getAndFetchTrending = function(MomentsSessionId, Cursor)
 			-- upvalues: DataResolverModule (copy), HttpService (upval), T (ref)
 			local GetAndFetchItemFunction = DataResolverModule.getAndFetchItem
 			local Json = HttpService:JSONEncode({
@@ -87,12 +87,12 @@ return function(p1) --[[ Line: 34 | Named "createMomentsTrendingStore" ]]
 			
 			return GetAndFetchItemFunction(Json)
 		end,
-		clear = function() --[[ Line: 90 ]]
+		clear = function()
 			-- upvalues: T (ref), DataResolverModule (copy)
 			T = {}
 			DataResolverModule.clear()
 		end,
-		dispose = function() --[[ Line: 95 ]]
+		dispose = function()
 			-- upvalues: T (ref), DataResolverModule (copy)
 			T = {}
 			DataResolverModule.dispose()

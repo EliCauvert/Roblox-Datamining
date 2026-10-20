@@ -19,7 +19,7 @@ local CurrentTab = nil
 local Flag = false
 local Flag1 = false
 
-local function log(Action, Tab) --[[ Line: 39 ]]
+local function log(Action, Tab)
 	-- upvalues: TelemetryService (ref), config (copy), config1 (copy)
 	local StandardizedFields = {
 		"addPlaceId",
@@ -42,13 +42,13 @@ local function log(Action, Tab) --[[ Line: 39 ]]
 end
 
 return {
-	logSwitchTab = function(Tab) --[[ Line: 53 ]]
+	logSwitchTab = function(Tab)
 		-- upvalues: CurrentTab (ref), Flag (ref), log (copy)
 		CurrentTab = Tab
 		Flag = true
 		log("switch_tab", Tab)
 	end,
-	logVisibility = function(p1, p2) --[[ Line: 59 ]]
+	logVisibility = function(p1, p2)
 		-- upvalues: Flag (ref), Flag1 (ref), log (copy), CurrentTab (ref)
 		if p1 and p2 and not Flag then
 			Flag1 = true
@@ -59,15 +59,15 @@ return {
 			log(if p1 then "show_leaderboard" else "hide_leaderboard", CurrentTab)
 		end
 	end,
-	logLoadError = function(Tab) --[[ Line: 69 ]]
+	logLoadError = function(Tab)
 		-- upvalues: log (copy)
 		log("load_error", Tab)
 	end,
-	logRetryError = function(Tab) --[[ Line: 73 ]]
+	logRetryError = function(Tab)
 		-- upvalues: log (copy)
 		log("retry_error", Tab)
 	end,
-	setCurrentTab = function(Value) --[[ Line: 77 ]]
+	setCurrentTab = function(Value)
 		-- upvalues: CurrentTab (ref), Flag (ref), Flag1 (ref), log (copy)
 		CurrentTab = Value
 		Flag = true
@@ -77,12 +77,12 @@ return {
 			log("show_leaderboard", CurrentTab)
 		end
 	end,
-	clearCurrentTab = function() --[[ Line: 88 ]]
+	clearCurrentTab = function()
 		-- upvalues: CurrentTab (ref), Flag (ref)
 		CurrentTab = nil
 		Flag = false
 	end,
-	_setServicesForTesting = function(p1) --[[ Line: 101 ]]
+	_setServicesForTesting = function(p1)
 		-- upvalues: TelemetryService (ref), CurrentTab (ref), Flag (ref), Flag1 (ref)
 		TelemetryService = p1
 		CurrentTab = nil

@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("PackagifySettingsShowSignal", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("PackagifySettingsShowSignal")
 end

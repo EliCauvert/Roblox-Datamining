@@ -11,7 +11,7 @@ local config = {
 	server = { active = 0, compare = 0, snapshots = {} }
 }
 
-return function(p1, p2) --[[ Line: 33 ]]
+return function(p1, p2)
 	-- upvalues: config (copy), SetLuauHeapStateModule (copy), ImmutableModule (copy), SetLuauHeapProfileTargetModule (copy), SetLuauHeapActiveSnapshotModule (copy), SetLuauHeapCompareSnapshotModule (copy)
 	local P0 = p1 or config
 	

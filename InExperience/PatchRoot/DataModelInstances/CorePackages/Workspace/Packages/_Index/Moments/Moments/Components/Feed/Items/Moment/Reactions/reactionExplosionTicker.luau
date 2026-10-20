@@ -1,16 +1,16 @@
 ﻿local RunService = game:GetService("RunService")
 
-local function createTicker(p1) --[[ Line: 32 ]]
+local function createTicker(p1)
 	-- upvalues: RunService (copy)
 	local StepSignal = if p1 == nil then nil else p1.stepSignal
 	local Clock = (if p1 == nil then nil else p1.clock) or os.clock
 	local List = {}
 	local Connection = nil
 	
-	local function _() --[[ Line: 48 | Named "connectIfNeeded" ]]
+	local function _()
 		-- upvalues: Connection (ref), List (copy), StepSignal (copy), RunService (upval), Clock (copy)
 		if Connection == nil and #List ~= 0 then
-			Connection = (StepSignal or RunService.PreRender):Connect(function() --[[ Line: 53 ]]
+			Connection = (StepSignal or RunService.PreRender):Connect(function()
 				-- upvalues: Clock (upval), List (upval)
 				local v1 = Clock()
 				
@@ -23,7 +23,7 @@ local function createTicker(p1) --[[ Line: 32 ]]
 		end
 	end
 	
-	local _ = function() --[[ Line: 58 | Named "disconnectIfEmpty" ]]
+	local _ = function()
 		-- upvalues: Connection (ref), List (copy)
 		if Connection ~= nil and #List == 0 then
 			Connection:Disconnect()
@@ -32,12 +32,12 @@ local function createTicker(p1) --[[ Line: 32 ]]
 	end
 	
 	return {
-		add = function(Value) --[[ Line: 65 ]]
+		add = function(Value)
 			-- upvalues: List (copy), Connection (ref), StepSignal (copy), RunService (upval), Clock (copy)
 			table.insert(List, Value)
 			
 			if Connection == nil and #List ~= 0 then
-				Connection = (StepSignal or RunService.PreRender):Connect(function() --[[ Line: 53 ]]
+				Connection = (StepSignal or RunService.PreRender):Connect(function()
 					-- upvalues: Clock (upval), List (upval)
 					local v1 = Clock()
 					
@@ -48,7 +48,7 @@ local function createTicker(p1) --[[ Line: 32 ]]
 			end
 			local Flag = false
 			
-			return function() --[[ Line: 70 ]]
+			return function()
 				-- upvalues: Flag (ref), List (upval), Value (copy), Connection (upval)
 				if Flag then return end
 				Flag = true
@@ -63,18 +63,18 @@ local function createTicker(p1) --[[ Line: 32 ]]
 				end
 			end
 		end,
-		step = function(p2) --[[ Line: 39 ]]
+		step = function(p2)
 			-- upvalues: Clock (copy), List (copy)
 			local P1 = p2 or Clock()
 			for _, value in table.clone(List) do
 				value(P1)
 			end
 		end,
-		getActiveCount = function(): number --[[ Line: 86 ]]
+		getActiveCount = function(): number
 			-- upvalues: List (copy)
 			return #List
 		end,
-		isConnected = function(): boolean --[[ Line: 89 ]]
+		isConnected = function(): boolean
 			-- upvalues: Connection (ref)
 			return Connection ~= nil
 		end

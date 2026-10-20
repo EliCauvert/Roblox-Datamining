@@ -10,11 +10,11 @@ local ScaleSliceToResolutionModule = require(Parent1.App.ImageSet.scaleSliceToRe
 local ImagesInverseModule = require(Parent1.App.ImageSet.ImagesInverse)
 local GetBuilderIconElementModule = require(Parent.getBuilderIconElement)
 
-return function(p1, p2: number) --[[ Line: 16 ]]
+return function(p1, p2: number)
 	-- upvalues: RoactModule (copy), Uiblox (copy), UseTokensFunction (copy), UseTextSizeOffsetFunction (copy), ImagesInverseModule (copy), GetBuilderIconElementModule (copy), ScaleSliceToResolutionModule (copy)
 	assert(p2 > 0, "resolutionScale for ImageSet must be greater than 0! got " .. tostring(p2))
 	
-	return RoactModule.forwardRef(function(List, p3) --[[ Line: 22 ]]
+	return RoactModule.forwardRef(function(List, p3)
 		-- upvalues: RoactModule (upval), Uiblox (upval), UseTokensFunction (upval), UseTextSizeOffsetFunction (upval), ImagesInverseModule (upval), GetBuilderIconElementModule (upval), p1 (copy), p2 (copy), ScaleSliceToResolutionModule (upval)
 		local config = {
 			[RoactModule.Ref] = p3,

@@ -9,13 +9,13 @@ local VideoBlockingHelpersModule = require(VideoUtils.VideoBlockingHelpers)
 local VideoBlockingTelemetryConfig = VideoBlockingHelpersModule.VideoBlockingTelemetryConfig
 local v1 = nil
 
-local function getSystemInfoLazy() --[[ Line: 24 ]]
+local function getSystemInfoLazy()
 	-- upvalues: v1 (ref), SystemInfoProtocol (copy), ReportWarningFunction (copy), LoggingProtocolModule (copy)
 	if v1 then
 		return v1
 	end
 	local config = { manufacturer = nil, deviceName = nil, maxMemory = nil }
-	local Success, Result = pcall(function() --[[ Line: 35 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: SystemInfoProtocol (upval)
 		local SystemInfo = SystemInfoProtocol.default:getSystemInfo({
 			SystemInfoProtocol.InfoNames.MANUFACTURER,
@@ -40,13 +40,13 @@ local function getSystemInfoLazy() --[[ Line: 24 ]]
 	return config
 end
 
-return function(p1, UniverseId, PageContext) --[[ Line: 77 | Named "useCanDevicePlayVideoPreview" ]]
+return function(p1, UniverseId, PageContext)
 	-- upvalues: ReactModule (copy), getSystemInfoLazy (copy), VideoBlockingHelpersModule (copy), SystemInfoProtocol (copy), ReportWarningFunction (copy), LoggingProtocolModule (copy), TelemetryService (copy), VideoBlockingTelemetryConfig (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 83 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: getSystemInfoLazy (upval)
 		return (getSystemInfoLazy())
 	end, {})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 87 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), VideoBlockingHelpersModule (upval), UseMemoResult (copy)
 		return if p1.enableManufacturerDeny and p1.manufacturerDenyList then VideoBlockingHelpersModule.isInPipeDenyList(UseMemoResult.manufacturer, p1.manufacturerDenyList) else false
 	end, {
@@ -54,7 +54,7 @@ return function(p1, UniverseId, PageContext) --[[ Line: 77 | Named "useCanDevice
 		p1.manufacturerDenyList,
 		UseMemoResult.manufacturer
 	})
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 94 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), VideoBlockingHelpersModule (upval), UseMemoResult (copy)
 		return if p1.enableDeviceDeny and p1.deviceDenyList then VideoBlockingHelpersModule.isInPipeDenyList(UseMemoResult.deviceName, p1.deviceDenyList) else false
 	end, {
@@ -62,7 +62,7 @@ return function(p1, UniverseId, PageContext) --[[ Line: 77 | Named "useCanDevice
 		p1.deviceDenyList,
 		UseMemoResult.deviceName
 	})
-	local UseMemoResult3 = ReactModule.useMemo(function(): boolean --[[ Line: 101 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function(): boolean
 		-- upvalues: p1 (copy), UseMemoResult (copy)
 		if not p1.enableMaxMemoryDeny then
 			return false
@@ -83,13 +83,13 @@ return function(p1, UniverseId, PageContext) --[[ Line: 77 | Named "useCanDevice
 		UseMemoResult.maxMemory
 	})
 	
-	return (ReactModule.useCallback(function(): boolean --[[ Line: 118 ]]
+	return (ReactModule.useCallback(function(): boolean
 		-- upvalues: p1 (copy), SystemInfoProtocol (upval), ReportWarningFunction (upval), LoggingProtocolModule (upval), TelemetryService (upval), VideoBlockingTelemetryConfig (upval), PageContext (copy), UniverseId (copy), UseMemoResult1 (copy), UseMemoResult2 (copy), UseMemoResult3 (copy)
 		local v2 = false
 		local Number = nil
 		
 		if p1.enableAvailableRamDeny and p1.availableRamThresholdMb and p1.availableRamThresholdMb > 0 then
-			local Success, Result = pcall(function(): boolean --[[ Line: 127 ]]
+			local Success, Result = pcall(function(): boolean
 				-- upvalues: SystemInfoProtocol (upval), Number (ref), p1 (upval)
 				local SystemInfo = SystemInfoProtocol.default:getSystemInfo({ SystemInfoProtocol.InfoNames.AVAIL_RAM })
 				

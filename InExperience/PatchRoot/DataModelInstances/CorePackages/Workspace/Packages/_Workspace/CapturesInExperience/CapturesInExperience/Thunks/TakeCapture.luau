@@ -21,37 +21,37 @@ local FStringSocialCaptureTakenIXPLayer = require(Parent1.SharedFlags).FStringSo
 local FFlagBuildExperienceInGameCaptureToChat = require(Parent1.SharedFlags).FFlagBuildExperienceInGameCaptureToChat
 local DebugAPPEXP4747B = game:DefineFastFlag("DebugAPPEXP4747B", false)
 
-local function _(GuiType) --[[ Line: 28 | Named "hideGui" ]]
+local function _(GuiType)
 	-- upvalues: GuiService (copy)
 	if GuiService:GetGuiIsVisible(GuiType) then
 		GuiService:ToggleGuiIsVisibleForCaptures(GuiType)
 	end
 end
 
-local _ = function(GuiType) --[[ Line: 34 | Named "showGui" ]]
+local _ = function(GuiType)
 	-- upvalues: GuiService (copy)
 	if not GuiService:GetGuiIsVisible(GuiType) then
 		GuiService:ToggleGuiIsVisibleForCaptures(GuiType)
 	end
 end
 
-local _ = function() --[[ Line: 40 | Named "hidePlayerGui" ]]
+local _ = function()
 	-- upvalues: GuiService (copy)
 	if GuiService:GetGuiIsVisible(Enum.GuiType.Custom) then
 		GuiService:ToggleGuiIsVisibleForCaptures(Enum.GuiType.Custom)
 	end
 end
 
-local _ = function() --[[ Line: 46 | Named "showPlayerGui" ]]
+local _ = function()
 	-- upvalues: GuiService (copy)
 	if not GuiService:GetGuiIsVisible(Enum.GuiType.Custom) then
 		GuiService:ToggleGuiIsVisibleForCaptures(Enum.GuiType.Custom)
 	end
 end
 
-return function(p1) --[[ Line: 52 ]]
+return function(p1)
 	-- upvalues: FFlagBuildExperienceInGameCaptureToChat (copy), PendingCaptureToastActionModule (copy), ToastTriggeredModule (copy), CapturesToastTypeModule (copy), UserInputService (copy), GetScreenshotHudModule (copy), DebugAPPEXP4747B (copy), GuiService (copy), RemoveCoreUIModule (copy), OverlayActivatedModule (copy), CaptureService (copy), GetAvatarAssetsModule (copy), GetUserMetadataModule (copy), HttpService (copy), OverlayFlashActivatedModule (copy), OverlayFlashDeactivatedModule (copy), OverlayDeactivatedModule (copy), IXPServiceWrapper (copy), FStringSocialCaptureTakenIXPLayer (copy)
-	return function(p2) --[[ Line: 53 ]]
+	return function(p2)
 		-- upvalues: FFlagBuildExperienceInGameCaptureToChat (upval), PendingCaptureToastActionModule (upval), p1 (copy), ToastTriggeredModule (upval), CapturesToastTypeModule (upval), UserInputService (upval), GetScreenshotHudModule (upval), DebugAPPEXP4747B (upval), GuiService (upval), RemoveCoreUIModule (upval), OverlayActivatedModule (upval), CaptureService (upval), GetAvatarAssetsModule (upval), GetUserMetadataModule (upval), HttpService (upval), OverlayFlashActivatedModule (upval), OverlayFlashDeactivatedModule (upval), OverlayDeactivatedModule (upval), IXPServiceWrapper (upval), FStringSocialCaptureTakenIXPLayer (upval)
 		local Flag = false
 		local Flag1 = false

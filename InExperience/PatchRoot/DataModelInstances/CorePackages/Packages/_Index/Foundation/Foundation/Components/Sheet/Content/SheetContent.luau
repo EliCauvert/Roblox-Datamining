@@ -16,11 +16,11 @@ local DevAssertModule = require(Foundation.Utility.devAssert)
 local IsScrollingFrameOverflowingYModule = require(Foundation.Utility.isScrollingFrameOverflowingY)
 local UseComposedRefFunction = require(Parent.ReactUtils).useComposedRef
 
-local function _(ScrollFrame): number --[[ Line: 26 | Named "getMaxCanvasPositionY" ]]
+local function _(ScrollFrame): number
 	return (math.max(0, ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y))
 end
 
-return ReactModule.memo(ReactModule.forwardRef(function(Gui, Ref) --[[ Line: 40 | Named "SheetContent" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(Gui, Ref)
 	-- upvalues: UseTokensModule (copy), ReactModule (copy), SheetContextModule (copy), FlagsModule (copy), DevAssertModule (copy), IsScrollingFrameOverflowingYModule (copy), SheetTypeModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), DashModule (copy), UseComposedRefFunction (copy), ConstantsModule (copy), ScrollViewModule (copy)
 	local UseTokensModuleResult = UseTokensModule()
 	local UseContextResult = ReactModule.useContext(SheetContextModule)
@@ -45,12 +45,12 @@ return ReactModule.memo(ReactModule.forwardRef(function(Gui, Ref) --[[ Line: 40 
 	end
 	if FlagsModule.FoundationSheetReversedContent then
 		local SetIsContentReversedFunction = UseContextResult.setIsContentReversed
-		ReactModule.useLayoutEffect(function() --[[ Line: 78 ]]
+		ReactModule.useLayoutEffect(function()
 			-- upvalues: IsIsReversed (copy), SetIsContentReversedFunction (copy)
 			if IsIsReversed and SetIsContentReversedFunction then
 				SetIsContentReversedFunction(true)
 				
-				return function() --[[ Line: 83 ]]
+				return function()
 					-- upvalues: SetIsContentReversedFunction (upval)
 					SetIsContentReversedFunction(false)
 				end
@@ -67,7 +67,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Gui, Ref) --[[ Line: 40 
 	if FlagsModule.FoundationSheetReversedContent then
 		WindowSizeY, Callback = ReactModule.useBinding(0)
 	end
-	local UseResult = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 97 ]]
+	local UseResult = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: IsIsReversed (copy), UseRefResult (copy), SetInnerScrollYFunction (copy), IsScrollingFrameOverflowingYModule (upval), Callback (ref), SetHasActionsDividerFunction (copy), UseBindingResult2 (copy)
 		if IsIsReversed and UseRefResult.current then
 			ScrollFrame.CanvasPosition = Vector2.new(0, (math.max(0, ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y)))
@@ -95,7 +95,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Gui, Ref) --[[ Line: 40 
 		ZIndex = 1,
 		scrollingFrameRef = UseComposedRefFunction(InnerScrollingRef, Gui.scrollingFrameRef),
 		selection = {
-			Selectable = if UseBindingResult then UseBindingResult:map(function(p1) --[[ Line: 143 ]]
+			Selectable = if UseBindingResult then UseBindingResult:map(function(p1)
 				-- upvalues: NoSelectable (copy)
 				return NoSelectable and p1
 			end) else nil,
@@ -107,21 +107,21 @@ return ReactModule.memo(ReactModule.forwardRef(function(Gui, Ref) --[[ Line: 40 
 		scroll = {
 			ScrollingEnabled = InnerScrollingEnabled,
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
-			CanvasSize = if SheetContentHeight then UseBindingResult1:map(function(YOffset): UDim2 --[[ Line: 212 ]]
+			CanvasSize = if SheetContentHeight then UseBindingResult1:map(function(YOffset): UDim2
 				return UDim2.new(1, 0, 0, YOffset)
 			end) else UDim2.fromScale(1, 0),
 			ScrollingDirection = Enum.ScrollingDirection.Y
 		},
 		Size = if SheetContentHeight then UDim2.fromScale(1, 1) else nil,
-		Position = if ContentRevealOffset then ContentRevealOffset:map(function(p1): UDim2 --[[ Line: 220 ]]
+		Position = if ContentRevealOffset then ContentRevealOffset:map(function(p1): UDim2
 			return UDim2.fromOffset(0, -p1)
 		end) else nil,
 		padding = {
-			top = HasHeader:map(function(p1): UDim --[[ Line: 225 ]]
+			top = HasHeader:map(function(p1): UDim
 				-- upvalues: HasFullBleed (copy), IsSheetTypeMatch (copy), UseTokensModuleResult (copy)
 				return if p1 or HasFullBleed then UDim.new(0, 0) else UDim.new(0, if IsSheetTypeMatch then UseTokensModuleResult.Padding.Small else UseTokensModuleResult.Margin.Small)
 			end),
-			bottom = if IsSheetTypeMatch then ActionsHeight:map(function(p1): UDim --[[ Line: 231 ]]
+			bottom = if IsSheetTypeMatch then ActionsHeight:map(function(p1): UDim
 				-- upvalues: BottomPadding (copy), UseTokensModuleResult (copy)
 				return UDim.new(0, p1 + BottomPadding + UseTokensModuleResult.Margin.Small)
 			end) else UDim.new(0, UseTokensModuleResult.Padding.Small),
@@ -129,7 +129,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Gui, Ref) --[[ Line: 40 
 			right = _UDim
 		},
 		ClipsDescendants = not IsSheetTypeMatch or HasHeader,
-		onCanvasPositionChanged = function(ScrollFrame) --[[ Line: 239 ]]
+		onCanvasPositionChanged = function(ScrollFrame)
 			-- upvalues: IsIsReversed (copy), UseRefResult (copy), SetHasActionsDividerFunction (copy), SetInnerScrollYFunction (copy)
 			if IsIsReversed then
 				UseRefResult.current = math.max(0, ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y) - ScrollFrame.CanvasPosition.Y <= 1
@@ -143,19 +143,19 @@ return ReactModule.memo(ReactModule.forwardRef(function(Gui, Ref) --[[ Line: 40 
 		tag = if ContentRevealOffset then "size-full" else "fill size-full-0 auto-y",
 		ref = Ref
 	}, (ReactModule.createElement(ViewModule, {
-		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 115 ]]
+		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
 			-- upvalues: UseBindingResult2_1 (copy)
 			UseBindingResult2_1(Frame.AbsoluteSize.Y)
 		end, {}),
-		Position = if ContentRevealOffset then ContentRevealOffset:map(function(YOffset): UDim2 --[[ Line: 123 ]]
+		Position = if ContentRevealOffset then ContentRevealOffset:map(function(YOffset): UDim2
 			return UDim2.fromOffset(0, YOffset)
 		end) else nil,
 		Size = if ContentRevealOffset then ReactModule.joinBindings({
 			windowSizeY = WindowSizeY,
 			revealOffset = ContentRevealOffset
-		}):map(function(p1): UDim2 --[[ Line: 129 ]]
+		}):map(function(p1): UDim2
 			return UDim2.new(1, 0, 0, (math.max(0, p1.windowSizeY - p1.revealOffset)))
-		end) elseif IsIsReversed then WindowSizeY:map(function(YOffset): UDim2 --[[ Line: 132 ]]
+		end) elseif IsIsReversed then WindowSizeY:map(function(YOffset): UDim2
 			return UDim2.new(1, 0, 0, YOffset)
 		end) else nil,
 		tag = {
@@ -165,7 +165,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Gui, Ref) --[[ Line: 40 
 		}
 	}, {
 		FullBleedSpacer = if HasFullBleed and FullBleedHeight then ReactModule.createElement(ViewModule, {
-			Size = FullBleedHeight:map(function(p1: number): UDim2 --[[ Line: 187 ]]
+			Size = FullBleedHeight:map(function(p1: number): UDim2
 				return UDim2.new(1, 0, 0, (math.max(0, p1)))
 			end),
 			LayoutOrder = ConstantsModule.MIN_LAYOUT_ORDER,

@@ -6,7 +6,7 @@ local PromptStyleModule = require(script.Parent.SduiV2.PromptStyle)
 local UsePromptEntriesModule = require(script.Parent.SduiV2.usePromptEntries)
 local FFlagPromptsActionEventLoggingModule = require(ServerTriggeredModals.Flags.FFlagPromptsActionEventLogging)
 
-return function(p1) --[[ Line: 18 | Named "PromptsSystemBanner" ]]
+return function(p1)
 	-- upvalues: UsePromptEntriesModule (copy), PromptStyleModule (copy), ReactModule (copy), SduiFeatureEntryPoint (copy), FFlagPromptsActionEventLoggingModule (copy)
 	local UsePromptEntriesModuleResultEntry = UsePromptEntriesModule(p1.configKey, PromptStyleModule.SystemBanner)[1]
 	

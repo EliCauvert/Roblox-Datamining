@@ -6,23 +6,23 @@ local WithCsrfRetryModule = require(DataHydration.withCsrfRetry)
 local FetchFunction = HttpClientModule.fetch
 local AsPromiseFunction = HttpClientModule.asPromise
 
-local function _(p1, p2): string --[[ Line: 29 | Named "playtestersUrl" ]]
+local function _(p1, p2): string
 	return ("%s/v1/universes/%d/configuration/playtesters"):format(p1, p2)
 end
 
-local _ = function(p1) --[[ Line: 33 | Named "resolveBase" ]]
+local _ = function(p1)
 	-- upvalues: UrlBase (copy)
 	local P2 = p1 or {}
 	
 	return P2.network, P2.baseUrl or UrlBase.new("develop")
 end
 
-local _ = function(p1) --[[ Line: 39 | Named "resolveMutatingNetwork" ]]
+local _ = function(p1)
 	-- upvalues: WithCsrfRetryModule (copy), HttpClientModule (copy)
 	return (p1 or {}).network or WithCsrfRetryModule(HttpClientModule.createRequestInternalNetwork())
 end
 
-local function decodePlaytesterIds(p1) --[[ Line: 46 ]]
+local function decodePlaytesterIds(p1)
 	local List = {}
 	local Playtesters = if type(p1) == "table" then p1.playtesters else nil
 	
@@ -43,7 +43,7 @@ local function decodePlaytesterIds(p1) --[[ Line: 46 ]]
 end
 
 return {
-	fetchPlaytesters = function(p2, p3) --[[ Line: 66 ]]
+	fetchPlaytesters = function(p2, p3)
 		-- upvalues: UrlBase (copy), FetchFunction (copy), decodePlaytesterIds (copy), AsPromiseFunction (copy)
 		local P6 = p3 or {}
 		
@@ -56,7 +56,7 @@ return {
 			decode = decodePlaytesterIds
 		})))
 	end,
-	addPlaytester = function(p2, Playtesters, p3) --[[ Line: 79 ]]
+	addPlaytester = function(p2, Playtesters, p3)
 		-- upvalues: UrlBase (copy), FetchFunction (copy), WithCsrfRetryModule (copy), HttpClientModule (copy), decodePlaytesterIds (copy), AsPromiseFunction (copy)
 		local P9 = p3 or {}
 		local _ = P9.network
@@ -71,7 +71,7 @@ return {
 			decode = decodePlaytesterIds
 		})))
 	end,
-	removePlaytester = function(p2, p3, p4) --[[ Line: 97 ]]
+	removePlaytester = function(p2, p3, p4)
 		-- upvalues: UrlBase (copy), FetchFunction (copy), WithCsrfRetryModule (copy), HttpClientModule (copy), decodePlaytesterIds (copy), AsPromiseFunction (copy)
 		local P12 = p4 or {}
 		local _ = P12.network

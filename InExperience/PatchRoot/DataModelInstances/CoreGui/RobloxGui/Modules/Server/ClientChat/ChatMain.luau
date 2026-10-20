@@ -5,7 +5,7 @@
 	VisibilityStateChanged = nil
 }
 local v1 = false
-local Success, Result = pcall(function() --[[ Line: 22 ]]
+local Success, Result = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserHandleFriendJoinNotifierOnClient")
 end)
 
@@ -13,11 +13,11 @@ if Success then
 	v1 = Result
 end
 local Result1_1 = false
-local Success1, Result1 = pcall(function() --[[ Line: 32 ]]
+local Success1, Result1 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserIsChatTranslationEnabled2")
 end)
 Result1_1 = Success1 and Result1
-local Success2, Result2 = pcall(function() --[[ Line: 39 ]]
+local Success2, Result2 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserAddBetterConsoleCheckForLegacyChat")
 end)
 local Result2_1 = Success2 and Result2
@@ -33,14 +33,14 @@ local ChatConstantsModule = require(ClientChatModules:WaitForChild("ChatConstant
 local ChatSettingsModule = require(ClientChatModules:WaitForChild("ChatSettings"))
 local UtilModule = require(ClientChatModules:WaitForChild("MessageCreatorModules"):WaitForChild("Util"))
 local ChatLocalizationModule = nil
-pcall(function() --[[ Line: 63 ]]
+pcall(function()
 	-- upvalues: ChatLocalizationModule (ref)
 	ChatLocalizationModule = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
 
 if ChatLocalizationModule == nil then
 	ChatLocalizationModule = {
-		Get = function(_, _, Formatted) --[[ Line: 64 ]]
+		Get = function(_, _, Formatted)
 			return Formatted
 		end
 	}
@@ -52,7 +52,7 @@ if Result1_1 then
 	
 	if ChatTranslationEnabled == nil then
 		local Connection = nil
-		Connection = script.ChildAdded:Connect(function(Child) --[[ Line: 71 ]]
+		Connection = script.ChildAdded:Connect(function(Child)
 			-- upvalues: ChatTranslationEnabled (ref), Connection (ref)
 			if Child.Name == "ChatTranslationEnabled" then
 				ChatTranslationEnabled = Child
@@ -77,7 +77,7 @@ local config = {
 local t = {}
 local BindableEvent = Instance.new("BindableEvent")
 
-function TryRemoveChildWithVerifyingIsCorrectType(Object) --[[ Line: 104 ]]
+function TryRemoveChildWithVerifyingIsCorrectType(Object)
 	-- upvalues: config (copy), t (copy), Count (ref)
 	if config[Object.Name] and Object:IsA(config[Object.Name]) then
 		config[Object.Name] = nil
@@ -90,7 +90,7 @@ for _, child in pairs(DefaultChatSystemChatEvents1:GetChildren()) do
 	TryRemoveChildWithVerifyingIsCorrectType(child)
 end
 if Count > 0 then
-	local ChildAddedConnection = DefaultChatSystemChatEvents1.ChildAdded:connect(function(Child) --[[ Line: 117 ]]
+	local ChildAddedConnection = DefaultChatSystemChatEvents1.ChildAdded:connect(function(Child)
 		-- upvalues: Count (ref), BindableEvent (copy)
 		TryRemoveChildWithVerifyingIsCorrectType(Child)
 		
@@ -143,7 +143,7 @@ if UserInputService.TouchEnabled then
 else
 	NewResult3:SetTextLabelText(ChatLocalizationModule:Get("GameChat_ChatMain_ChatBarText", "To chat click here or press \"/\" key"))
 end
-spawn(function() --[[ Line: 204 ]]
+spawn(function()
 	-- upvalues: Object (copy), ChatSettingsModule (copy), NewResult (copy)
 	local CurveUtilModule = require(Object:WaitForChild("CurveUtil"))
 	local v2 = 1 / (ChatSettingsModule.ChatAnimationFPS or 20)
@@ -159,7 +159,7 @@ spawn(function() --[[ Line: 204 ]]
 	end
 end)
 
-function CheckIfPointIsInSquare(Vector, Vector1, Vector3): boolean --[[ Line: 230 ]]
+function CheckIfPointIsInSquare(Vector, Vector1, Vector3): boolean
 	return Vector1.X <= Vector.X and (Vector.X <= Vector3.X and Vector1.Y <= Vector.Y) and Vector.Y <= Vector3.Y
 end
 
@@ -171,7 +171,7 @@ local BindableEvent1 = Instance.new("BindableEvent")
 local BindableEvent2 = Instance.new("BindableEvent")
 local BindableEvent3 = Instance.new("BindableEvent")
 
-function DoBackgroundFadeIn(p1) --[[ Line: 244 ]]
+function DoBackgroundFadeIn(p1)
 	-- upvalues: CurrentTime1 (ref), Flag1 (ref), BindableEvent1 (copy), NewResult (copy), ChatSettingsModule (copy), NewMessageLogDisplay (copy), MessageLogDisplayModule (copy)
 	CurrentTime1 = tick()
 	Flag1 = false
@@ -185,7 +185,7 @@ function DoBackgroundFadeIn(p1) --[[ Line: 244 ]]
 	end
 end
 
-function DoBackgroundFadeOut(p1) --[[ Line: 259 ]]
+function DoBackgroundFadeOut(p1)
 	-- upvalues: CurrentTime1 (ref), Flag1 (ref), BindableEvent1 (copy), NewResult (copy), ChatSettingsModule (copy), NewMessageLogDisplay (copy)
 	CurrentTime1 = tick()
 	Flag1 = true
@@ -199,7 +199,7 @@ function DoBackgroundFadeOut(p1) --[[ Line: 259 ]]
 	end
 end
 
-function DoTextFadeIn(p1) --[[ Line: 274 ]]
+function DoTextFadeIn(p1)
 	-- upvalues: CurrentTime (ref), Flag2 (ref), BindableEvent1 (copy), NewResult (copy), ChatSettingsModule (copy)
 	CurrentTime = tick()
 	Flag2 = false
@@ -207,7 +207,7 @@ function DoTextFadeIn(p1) --[[ Line: 274 ]]
 	NewResult:FadeInText((p1 or ChatSettingsModule.ChatDefaultFadeDuration) * 0)
 end
 
-function DoTextFadeOut(p1) --[[ Line: 281 ]]
+function DoTextFadeOut(p1)
 	-- upvalues: CurrentTime (ref), Flag2 (ref), BindableEvent1 (copy), NewResult (copy), ChatSettingsModule (copy)
 	CurrentTime = tick()
 	Flag2 = true
@@ -215,7 +215,7 @@ function DoTextFadeOut(p1) --[[ Line: 281 ]]
 	NewResult:FadeOutText(p1 or ChatSettingsModule.ChatDefaultFadeDuration)
 end
 
-function DoFadeInFromNewInformation() --[[ Line: 288 ]]
+function DoFadeInFromNewInformation()
 	-- upvalues: ChatSettingsModule (copy)
 	DoTextFadeIn()
 	
@@ -224,19 +224,19 @@ function DoFadeInFromNewInformation() --[[ Line: 288 ]]
 	end
 end
 
-function InstantFadeIn() --[[ Line: 295 ]]
+function InstantFadeIn()
 	DoBackgroundFadeIn(0)
 	DoTextFadeIn(0)
 end
 
-function InstantFadeOut() --[[ Line: 300 ]]
+function InstantFadeOut()
 	DoBackgroundFadeOut(0)
 	DoTextFadeOut(0)
 end
 
 local v3 = nil
 
-function UpdateFadingForMouseState(p1) --[[ Line: 306 ]]
+function UpdateFadingForMouseState(p1)
 	-- upvalues: v3 (ref), BindableEvent2 (copy), NewResult3 (copy)
 	v3 = p1
 	BindableEvent2:Fire()
@@ -252,7 +252,7 @@ function UpdateFadingForMouseState(p1) --[[ Line: 306 ]]
 	end
 end
 
-spawn(function() --[[ Line: 322 ]]
+spawn(function()
 	-- upvalues: RunService (copy), v3 (ref), NewResult3 (copy), BindableEvent2 (copy), BindableEvent3 (copy), Flag1 (ref), CurrentTime1 (ref), ChatSettingsModule (copy), Flag2 (ref), CurrentTime (ref), BindableEvent1 (copy)
 	while true do
 		RunService.RenderStepped:wait()
@@ -276,21 +276,21 @@ spawn(function() --[[ Line: 322 ]]
 	end
 end)
 
-function getClassicChatEnabled() --[[ Line: 355 ]]
+function getClassicChatEnabled()
 	-- upvalues: ChatSettingsModule (copy), Players (copy)
 	return if ChatSettingsModule.ClassicChatEnabled == nil then Players.ClassicChat else ChatSettingsModule.ClassicChatEnabled
 end
 
-function getBubbleChatEnabled() --[[ Line: 362 ]]
+function getBubbleChatEnabled()
 	-- upvalues: ChatSettingsModule (copy), Players (copy)
 	return if ChatSettingsModule.BubbleChatEnabled == nil then Players.BubbleChat else ChatSettingsModule.BubbleChatEnabled
 end
 
-function bubbleChatOnly() --[[ Line: 369 ]]
+function bubbleChatOnly()
 	return not getClassicChatEnabled() and getBubbleChatEnabled()
 end
 
-function UpdateMousePosition(p1) --[[ Line: 373 ]]
+function UpdateMousePosition(p1)
 	-- upvalues: ChatMainModule (copy), ChatSettingsModule (copy), NewResult (copy), v3 (ref)
 	if not ChatMainModule.Visible or not ChatMainModule.IsCoreGuiEnabled or not ChatMainModule.TopbarEnabled and not ChatSettingsModule.ChatOnWithTopBarOff then return end
 	if bubbleChatOnly() then return end
@@ -302,18 +302,18 @@ function UpdateMousePosition(p1) --[[ Line: 373 ]]
 	end
 end
 
-UserInputService.InputChanged:connect(function(Input, _) --[[ Line: 390 ]]
+UserInputService.InputChanged:connect(function(Input, _)
 	if Input.UserInputType == Enum.UserInputType.MouseMovement then
 		UpdateMousePosition((Vector2.new(Input.Position.X, Input.Position.Y)))
 	end
 end)
-UserInputService.TouchTap:connect(function(Entry, _) --[[ Line: 397 ]]
+UserInputService.TouchTap:connect(function(Entry, _)
 	UpdateMousePosition(Entry[1])
 end)
-UserInputService.TouchMoved:connect(function(Touch, _) --[[ Line: 401 ]]
+UserInputService.TouchMoved:connect(function(Touch, _)
 	UpdateMousePosition((Vector2.new(Touch.Position.X, Touch.Position.Y)))
 end)
-UserInputService.Changed:connect(function(Property) --[[ Line: 406 ]]
+UserInputService.Changed:connect(function(Property)
 	-- upvalues: UserInputService (copy), NewResult (copy), Chat1 (copy)
 	if Property == "MouseBehavior" and UserInputService.MouseBehavior == Enum.MouseBehavior.LockCenter then
 		local AbsolutePosition = NewResult.GuiObject.AbsolutePosition
@@ -326,29 +326,29 @@ end)
 UpdateFadingForMouseState(true)
 UpdateFadingForMouseState(false)
 local config1 = {
-	Signal = function() --[[ Line: 431 ]]
+	Signal = function()
 		local BindableEvent = Instance.new("BindableEvent")
 		local List = nil
 		local Selected = nil
 		
 		return {
-			fire = function(_, ...) --[[ Line: 439 ]]
+			fire = function(_, ...)
 				-- upvalues: List (ref), Selected (ref), BindableEvent (copy)
 				List = { ... }
 				Selected = select("#", ...)
 				BindableEvent:Fire()
 			end,
-			connect = function(_, Callback) --[[ Line: 445 ]]
+			connect = function(_, Callback)
 				-- upvalues: BindableEvent (copy), List (ref), Selected (ref)
 				if not Callback then
 					error("connect(nil)", 2)
 				end
-				return BindableEvent.Event:connect(function() --[[ Line: 447 ]]
+				return BindableEvent.Event:connect(function()
 					-- upvalues: Callback (copy), List (upval), Selected (upval)
 					Callback(unpack(List, 1, Selected))
 				end)
 			end,
-			wait = function(_) --[[ Line: 452 ]]
+			wait = function(_)
 				-- upvalues: BindableEvent (copy), List (ref), Selected (ref)
 				BindableEvent.Event:wait()
 				assert(List, "Missing arg data, likely due to :TweenSize/Position corrupting threadrefs.")
@@ -359,7 +359,7 @@ local config1 = {
 	end
 }
 
-function SetVisibility(Visible) --[[ Line: 463 ]]
+function SetVisibility(Visible)
 	-- upvalues: NewResult (copy), ChatMainModule (copy)
 	NewResult:SetVisible(Visible)
 	ChatMainModule.VisibilityStateChanged:fire(Visible)
@@ -381,43 +381,43 @@ ChatMainModule.MessageCount = 0
 ChatMainModule.Visible = true
 ChatMainModule.IsCoreGuiEnabled = true
 
-function ChatMainModule:ToggleVisibility() --[[ Line: 485 ]]
+function ChatMainModule:ToggleVisibility()
 	-- upvalues: NewResult (copy)
 	SetVisibility(not NewResult:GetVisible())
 end
 
-function ChatMainModule:SetVisible(Visible) --[[ Line: 489 ]]
+function ChatMainModule:SetVisible(Visible)
 	-- upvalues: NewResult (copy)
 	if NewResult:GetVisible() ~= Visible then
 		SetVisibility(Visible)
 	end
 end
 
-function ChatMainModule:FocusChatBar() --[[ Line: 495 ]]
+function ChatMainModule:FocusChatBar()
 	-- upvalues: NewResult3 (copy)
 	NewResult3:CaptureFocus()
 end
 
-function ChatMainModule:EnterWhisperState(p1) --[[ Line: 499 ]]
+function ChatMainModule:EnterWhisperState(p1)
 	-- upvalues: NewResult3 (copy)
 	NewResult3:EnterWhisperState(p1)
 end
 
-function ChatMainModule:GetVisibility() --[[ Line: 503 ]]
+function ChatMainModule:GetVisibility()
 	-- upvalues: NewResult (copy)
 	return NewResult:GetVisible()
 end
 
-function ChatMainModule.GetMessageCount(p1) --[[ Line: 507 ]]
+function ChatMainModule.GetMessageCount(p1)
 	return p1.MessageCount
 end
 
-function ChatMainModule.TopbarEnabledChanged(p1, TopbarEnabled) --[[ Line: 511 ]]
+function ChatMainModule.TopbarEnabledChanged(p1, TopbarEnabled)
 	p1.TopbarEnabled = TopbarEnabled
 	p1.CoreGuiEnabled:fire(game:GetService("StarterGui"):GetCoreGuiEnabled(Enum.CoreGuiType.Chat))
 end
 
-function ChatMainModule:IsFocused(_) --[[ Line: 516 ]]
+function ChatMainModule:IsFocused(_)
 	-- upvalues: NewResult3 (copy)
 	return NewResult3:IsFocused()
 end
@@ -432,29 +432,29 @@ ChatMainModule.ChatWindowPositionEvent = config1.Signal()
 ChatMainModule.ChatWindowSizeEvent = config1.Signal()
 ChatMainModule.ChatBarDisabledEvent = config1.Signal()
 
-function ChatMainModule:fChatWindowPosition() --[[ Line: 534 ]]
+function ChatMainModule:fChatWindowPosition()
 	-- upvalues: NewResult (copy)
 	return NewResult.GuiObject.Position
 end
 
-function ChatMainModule:fChatWindowSize() --[[ Line: 538 ]]
+function ChatMainModule:fChatWindowSize()
 	-- upvalues: NewResult (copy)
 	return NewResult.GuiObject.Size
 end
 
-function ChatMainModule:fChatBarDisabled(): boolean --[[ Line: 542 ]]
+function ChatMainModule:fChatBarDisabled(): boolean
 	-- upvalues: NewResult3 (copy)
 	return not NewResult3:GetEnabled()
 end
 
-function ChatMainModule:SpecialKeyPressed(SpecialKey, _) --[[ Line: 546 ]]
+function ChatMainModule:SpecialKeyPressed(SpecialKey, _)
 	-- upvalues: IsStudio (ref), Callback (ref)
 	if SpecialKey == Enum.SpecialKey.ChatHotkey and IsStudio then
 		Callback()
 	end
 end
 
-ChatMainModule.CoreGuiEnabled:connect(function(IsCoreGuiEnabled) --[[ Line: 555 ]]
+ChatMainModule.CoreGuiEnabled:connect(function(IsCoreGuiEnabled)
 	-- upvalues: ChatMainModule (copy), ChatSettingsModule (copy), NewResult (copy), NewResult3 (copy)
 	ChatMainModule.IsCoreGuiEnabled = IsCoreGuiEnabled
 	local TopbarEnabled = IsCoreGuiEnabled and (ChatMainModule.TopbarEnabled or ChatSettingsModule.ChatOnWithTopBarOff)
@@ -470,7 +470,7 @@ ChatMainModule.CoreGuiEnabled:connect(function(IsCoreGuiEnabled) --[[ Line: 555 
 	end
 end)
 
-function trimTrailingSpaces(Text: string): string --[[ Line: 570 ]]
+function trimTrailingSpaces(Text: string): string
 	local CountText = #Text
 	while CountText > 0 and Text:find("^%s", CountText) do
 		CountText -= 1
@@ -478,7 +478,7 @@ function trimTrailingSpaces(Text: string): string --[[ Line: 570 ]]
 	return Text:sub(1, CountText)
 end
 
-ChatMainModule.ChatMakeSystemMessageEvent:connect(function(ExtraData) --[[ Line: 583 ]]
+ChatMainModule.ChatMakeSystemMessageEvent:connect(function(ExtraData)
 	-- upvalues: Flag (ref), ChatSettingsModule (copy), NewResult (copy), ChatConstantsModule (copy), NewResult1 (copy), ChatMainModule (copy)
 	if ExtraData.Text and type(ExtraData.Text) == "string" then
 		while not Flag do
@@ -507,7 +507,7 @@ ChatMainModule.ChatMakeSystemMessageEvent:connect(function(ExtraData) --[[ Line:
 		end
 	end
 end)
-ChatMainModule.ChatBarDisabledEvent:connect(function(p1) --[[ Line: 613 ]]
+ChatMainModule.ChatBarDisabledEvent:connect(function(p1)
 	-- upvalues: IsStudio (ref), NewResult3 (copy)
 	if IsStudio then
 		NewResult3:SetEnabled(not p1)
@@ -517,16 +517,16 @@ ChatMainModule.ChatBarDisabledEvent:connect(function(p1) --[[ Line: 613 ]]
 		end
 	end
 end)
-ChatMainModule.ChatWindowSizeEvent:connect(function(Size) --[[ Line: 622 ]]
+ChatMainModule.ChatWindowSizeEvent:connect(function(Size)
 	-- upvalues: NewResult (copy)
 	NewResult.GuiObject.Size = Size
 end)
-ChatMainModule.ChatWindowPositionEvent:connect(function(Position) --[[ Line: 626 ]]
+ChatMainModule.ChatWindowPositionEvent:connect(function(Position)
 	-- upvalues: NewResult (copy)
 	NewResult.GuiObject.Position = Position
 end)
 
-Callback = function() --[[ Line: 634 | Named "DoChatBarFocus" ]]
+Callback = function()
 	-- upvalues: NewResult (copy), NewResult3 (copy), ChatMainModule (copy)
 	if not NewResult:GetCoreGuiEnabled() then return end
 	if not NewResult3:GetEnabled() then return end
@@ -538,19 +538,19 @@ Callback = function() --[[ Line: 634 | Named "DoChatBarFocus" ]]
 	end
 end
 
-BindableEvent3.Event:connect(function(p1) --[[ Line: 646 ]]
+BindableEvent3.Event:connect(function(p1)
 	-- upvalues: ChatMainModule (copy)
 	ChatMainModule.ChatBarFocusChanged:fire(p1)
 end)
 
-function DoSwitchCurrentChannel(p1) --[[ Line: 650 ]]
+function DoSwitchCurrentChannel(p1)
 	-- upvalues: NewResult (copy)
 	if NewResult:GetChannel(p1) then
 		NewResult:SwitchCurrentChannel(p1)
 	end
 end
 
-function SendMessageToSelfInTargetChannel(Text: string, OriginalChannel, ExtraData) --[[ Line: 656 ]]
+function SendMessageToSelfInTargetChannel(Text: string, OriginalChannel, ExtraData)
 	-- upvalues: NewResult (copy), ChatConstantsModule (copy)
 	local Channel = NewResult:GetChannel(OriginalChannel)
 	
@@ -571,7 +571,7 @@ function SendMessageToSelfInTargetChannel(Text: string, OriginalChannel, ExtraDa
 	end
 end
 
-function chatBarFocused() --[[ Line: 677 ]]
+function chatBarFocused()
 	-- upvalues: v3 (ref), Flag2 (ref), BindableEvent3 (copy)
 	if not v3 then
 		DoBackgroundFadeIn()
@@ -583,7 +583,7 @@ function chatBarFocused() --[[ Line: 677 ]]
 	BindableEvent3:Fire(true)
 end
 
-function chatBarFocusLost(p1, _) --[[ Line: 689 ]]
+function chatBarFocusLost(p1, _)
 	-- upvalues: BindableEvent3 (copy), NewResult3 (copy), ChatMainModule (copy), NewResult2 (copy), NewResult (copy), ChatSettingsModule (copy), MessageSenderModule (copy)
 	DoBackgroundFadeIn()
 	BindableEvent3:Fire(false)
@@ -633,7 +633,7 @@ end
 
 local List = {}
 
-function setupChatBarConnections() --[[ Line: 740 ]]
+function setupChatBarConnections()
 	-- upvalues: List (ref), NewResult3 (copy)
 	for i = 1, #List do
 		List[i]:Disconnect()
@@ -646,12 +646,12 @@ end
 setupChatBarConnections()
 NewResult3.GuiObjectsChanged:connect(setupChatBarConnections)
 
-function getEchoMessagesInGeneral() --[[ Line: 756 ]]
+function getEchoMessagesInGeneral()
 	-- upvalues: ChatSettingsModule (copy)
 	return ChatSettingsModule.EchoMessagesInGeneralChannel == nil or ChatSettingsModule.EchoMessagesInGeneralChannel
 end
 
-t.OnMessageDoneFiltering.OnClientEvent:connect(function(p2) --[[ Line: 763 ]]
+t.OnMessageDoneFiltering.OnClientEvent:connect(function(p2)
 	-- upvalues: ChatSettingsModule (copy), LocalPlayer (ref), NewResult (copy)
 	if not ChatSettingsModule.ShowUserOwnFilteredMessage and p2.FromSpeaker == LocalPlayer.Name then return end
 	local OriginalChannel = p2.OriginalChannel
@@ -668,7 +668,7 @@ t.OnMessageDoneFiltering.OnClientEvent:connect(function(p2) --[[ Line: 763 ]]
 		end
 	end
 end)
-t.OnNewMessage.OnClientEvent:connect(function(p2, GeneralChannelName) --[[ Line: 784 ]]
+t.OnNewMessage.OnClientEvent:connect(function(p2, GeneralChannelName)
 	-- upvalues: NewResult (copy), LocalPlayer (ref), NewResult1 (copy), ChatSettingsModule (copy), ChatMainModule (copy)
 	local Channel = NewResult:GetChannel(GeneralChannelName)
 	
@@ -690,7 +690,7 @@ t.OnNewMessage.OnClientEvent:connect(function(p2, GeneralChannelName) --[[ Line:
 		DoFadeInFromNewInformation()
 	end
 end)
-t.OnNewSystemMessage.OnClientEvent:connect(function(p2, p3) --[[ Line: 807 ]]
+t.OnNewSystemMessage.OnClientEvent:connect(function(p2, p3)
 	-- upvalues: NewResult (copy), NewResult1 (copy), ChatMainModule (copy), ChatSettingsModule (copy)
 	local P59 = p3 or "System"
 	local Channel = NewResult:GetChannel(P59)
@@ -716,7 +716,7 @@ t.OnNewSystemMessage.OnClientEvent:connect(function(p2, p3) --[[ Line: 807 ]]
 	end
 end)
 
-function HandleChannelJoined(GeneralChannelName, Text: string, p2, p3, p4, p5) --[[ Line: 833 ]]
+function HandleChannelJoined(GeneralChannelName, Text: string, p2, p3, p4, p5)
 	-- upvalues: NewResult (copy), ChatSettingsModule (copy), Flag (ref), NewResult3 (copy), ChatConstantsModule (copy), ChatLocalizationModule (ref), Result1_1 (ref), ChatTranslationEnabled (ref)
 	if NewResult:GetChannel(GeneralChannelName) then
 		NewResult:RemoveChannel(GeneralChannelName)
@@ -791,25 +791,25 @@ function HandleChannelJoined(GeneralChannelName, Text: string, p2, p3, p4, p5) -
 	end
 end
 
-t.OnChannelJoined.OnClientEvent:connect(function(p6, p7, p8, p9) --[[ Line: 925 ]]
+t.OnChannelJoined.OnClientEvent:connect(function(p6, p7, p8, p9)
 	HandleChannelJoined(p6, p7, p8, p9, false, true)
 end)
-t.OnChannelLeft.OnClientEvent:connect(function(p6) --[[ Line: 929 ]]
+t.OnChannelLeft.OnClientEvent:connect(function(p6)
 	-- upvalues: NewResult (copy)
 	NewResult:RemoveChannel(p6)
 	DoFadeInFromNewInformation()
 end)
-t.OnMuted.OnClientEvent:connect(function(_) --[[ Line: 935 ]] end)
-t.OnUnmuted.OnClientEvent:connect(function(_) --[[ Line: 941 ]] end)
-t.OnMainChannelSet.OnClientEvent:connect(function(p6) --[[ Line: 945 ]]
+t.OnMuted.OnClientEvent:connect(function(_) end)
+t.OnUnmuted.OnClientEvent:connect(function(_) end)
+t.OnMainChannelSet.OnClientEvent:connect(function(p6)
 	DoSwitchCurrentChannel(p6)
 end)
-coroutine.wrap(function() --[[ Line: 949 ]]
+coroutine.wrap(function()
 	-- upvalues: DefaultChatSystemChatEvents (copy), NewResult3 (copy)
 	local ChannelNameColorUpdated = DefaultChatSystemChatEvents:WaitForChild("ChannelNameColorUpdated", 5)
 	
 	if ChannelNameColorUpdated then
-		ChannelNameColorUpdated.OnClientEvent:connect(function(p6, p7) --[[ Line: 953 ]]
+		ChannelNameColorUpdated.OnClientEvent:connect(function(p6, p7)
 			-- upvalues: NewResult3 (upval)
 			NewResult3:SetChannelNameColor(p6, p7)
 		end)
@@ -819,7 +819,7 @@ local PlayerBlockedEventCore = nil
 local PlayerMutedEventCore = nil
 local PlayerUnblockedEventCore = nil
 local PlayerUnmutedEventCore = nil
-pcall(function() --[[ Line: 969 ]]
+pcall(function()
 	-- upvalues: PlayerBlockedEventCore (ref), StarterGui (copy), PlayerMutedEventCore (ref), PlayerUnblockedEventCore (ref), PlayerUnmutedEventCore (ref)
 	PlayerBlockedEventCore = StarterGui:GetCore("PlayerBlockedEvent")
 	PlayerMutedEventCore = StarterGui:GetCore("PlayerMutedEvent")
@@ -827,7 +827,7 @@ pcall(function() --[[ Line: 969 ]]
 	PlayerUnmutedEventCore = StarterGui:GetCore("PlayerUnmutedEvent")
 end)
 
-function SendSystemMessageToSelf(Text: string) --[[ Line: 976 ]]
+function SendSystemMessageToSelf(Text: string)
 	-- upvalues: NewResult (copy), ChatConstantsModule (copy)
 	local CurrentChannel = NewResult:GetCurrentChannel()
 	
@@ -848,7 +848,7 @@ function SendSystemMessageToSelf(Text: string) --[[ Line: 976 ]]
 	end
 end
 
-function MutePlayer(p6) --[[ Line: 998 ]]
+function MutePlayer(p6)
 	-- upvalues: DefaultChatSystemChatEvents (copy)
 	local MutePlayerRequest = DefaultChatSystemChatEvents:FindFirstChild("MutePlayerRequest")
 	
@@ -856,7 +856,7 @@ function MutePlayer(p6) --[[ Line: 998 ]]
 end
 
 if PlayerBlockedEventCore then
-	PlayerBlockedEventCore.Event:connect(function(Player) --[[ Line: 1007 ]]
+	PlayerBlockedEventCore.Event:connect(function(Player)
 		-- upvalues: ChatSettingsModule (copy), ChatLocalizationModule (ref)
 		if MutePlayer(Player) then
 			local DisplayName = if ChatSettingsModule.PlayerDisplayNamesEnabled then Player.DisplayName else Player.Name
@@ -865,15 +865,15 @@ if PlayerBlockedEventCore then
 	end)
 end
 if v1 then
-	local function _() --[[ Line: 1029 | Named "ShowFriendJoinNotification" ]]
+	local function _()
 		-- upvalues: ChatSettingsModule (copy)
 		return ChatSettingsModule.ShowFriendJoinNotification ~= nil and ChatSettingsModule.ShowFriendJoinNotification
 	end
 	
 	if ChatSettingsModule.ShowFriendJoinNotification ~= nil and ChatSettingsModule.ShowFriendJoinNotification then
-		Players.PlayerAdded:Connect(function(Player: Player) --[[ Line: 1037 ]]
+		Players.PlayerAdded:Connect(function(Player: Player)
 			-- upvalues: LocalPlayer (ref), ChatSettingsModule (copy), ChatLocalizationModule (ref)
-			local Success, Result = pcall(function() --[[ Line: 1038 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: Player (copy), LocalPlayer (upval)
 				return Player:IsFriendsWith(LocalPlayer.UserId)
 			end)
@@ -886,7 +886,7 @@ if v1 then
 	end
 end
 if PlayerMutedEventCore then
-	PlayerMutedEventCore.Event:connect(function(Player) --[[ Line: 1060 ]]
+	PlayerMutedEventCore.Event:connect(function(Player)
 		-- upvalues: ChatSettingsModule (copy), ChatLocalizationModule (ref)
 		if MutePlayer(Player) then
 			local DisplayName = if ChatSettingsModule.PlayerDisplayNamesEnabled then Player.DisplayName else Player.Name
@@ -894,7 +894,7 @@ if PlayerMutedEventCore then
 		end
 	end)
 end
-function UnmutePlayer(p6) --[[ Line: 1081 ]]
+function UnmutePlayer(p6)
 	-- upvalues: DefaultChatSystemChatEvents (copy)
 	local UnMutePlayerRequest = DefaultChatSystemChatEvents:FindFirstChild("UnMutePlayerRequest")
 	
@@ -902,7 +902,7 @@ function UnmutePlayer(p6) --[[ Line: 1081 ]]
 end
 
 if PlayerUnblockedEventCore then
-	PlayerUnblockedEventCore.Event:connect(function(Player) --[[ Line: 1090 ]]
+	PlayerUnblockedEventCore.Event:connect(function(Player)
 		-- upvalues: ChatSettingsModule (copy), ChatLocalizationModule (ref)
 		if UnmutePlayer(Player) then
 			local DisplayName = if ChatSettingsModule.PlayerDisplayNamesEnabled then Player.DisplayName else Player.Name
@@ -911,7 +911,7 @@ if PlayerUnblockedEventCore then
 	end)
 end
 if PlayerUnmutedEventCore then
-	PlayerUnmutedEventCore.Event:connect(function(Player) --[[ Line: 1112 ]]
+	PlayerUnmutedEventCore.Event:connect(function(Player)
 		-- upvalues: ChatSettingsModule (copy), ChatLocalizationModule (ref)
 		if UnmutePlayer(Player) then
 			local DisplayName = if ChatSettingsModule.PlayerDisplayNamesEnabled then Player.DisplayName else Player.Name
@@ -919,10 +919,10 @@ if PlayerUnmutedEventCore then
 		end
 	end)
 end
-spawn(function() --[[ Line: 1135 ]]
+spawn(function()
 	-- upvalues: LocalPlayer (ref), StarterGui (copy), DefaultChatSystemChatEvents (copy)
 	if LocalPlayer.UserId > 0 then
-		pcall(function() --[[ Line: 1138 ]]
+		pcall(function()
 			-- upvalues: StarterGui (upval), DefaultChatSystemChatEvents (upval)
 			local GetBlockedUserIdsCore = StarterGui:GetCore("GetBlockedUserIds")
 			
@@ -936,9 +936,9 @@ spawn(function() --[[ Line: 1135 ]]
 		end)
 	end
 end)
-spawn(function() --[[ Line: 1150 ]]
+spawn(function()
 	-- upvalues: Chat (copy), LocalPlayer (ref), IsStudio (ref), RunService (copy)
-	local Success, Result = pcall(function() --[[ Line: 1151 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: Chat (upval), LocalPlayer (upval)
 		return Chat:CanUserChatAsync(LocalPlayer.UserId)
 	end)

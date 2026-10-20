@@ -17,7 +17,7 @@ local PlayLarge = BuilderIconsModule.Icon.PlayLarge
 local PauseLarge = BuilderIconsModule.Icon.PauseLarge
 local Bookmark = BuilderIconsModule.Icon.Bookmark
 
-return function(p1) --[[ Line: 43 | Named "MusicPickerRow" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), MusicPickerContextModule (copy), GetRbxThumbFunction (copy), FoundationModule (copy), UseAssetFetchStatusFunction (copy), View (copy), Image (copy), Skeleton (copy), Radius (copy), Text (copy), IconButton (copy), PauseLarge (copy), PlayLarge (copy), Bookmark (copy), BuilderIconsModule (copy)
 	local Item = p1.item
 	local UseContextResult = ReactModule.useContext(MusicPickerContextModule)
@@ -25,7 +25,7 @@ return function(p1) --[[ Line: 43 | Named "MusicPickerRow" ]]
 	local IsSavedId = UseContextResult.savedIds[Item.id] == true
 	local RbxThumb = GetRbxThumbFunction(FoundationModule.Enums.ThumbnailType.Asset, Item.thumbnailAssetId)
 	local IsUseAssetFetchStatusResultMatch = UseAssetFetchStatusFunction(RbxThumb) == Enum.AssetFetchStatus.Success
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 61 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseContextResult (copy), Item (copy)
 		UseContextResult.toggleSaved(Item.id)
 	end, { UseContextResult.toggleSaved, Item.id })
@@ -33,7 +33,7 @@ return function(p1) --[[ Line: 43 | Named "MusicPickerRow" ]]
 	return ReactModule.createElement(View, {
 		tag = "row align-x-left align-y-center gap-medium size-full-0 auto-y padding-x-xsmall padding-y-small radius-medium",
 		LayoutOrder = p1.layoutOrder,
-		onActivated = ReactModule.useCallback(function() --[[ Line: 53 ]]
+		onActivated = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy), Item (copy)
 			p1.onSelect(Item.id)
 		end, { p1.onSelect, Item.id })
@@ -69,7 +69,7 @@ return function(p1) --[[ Line: 43 | Named "MusicPickerRow" ]]
 				isCircular = true,
 				LayoutOrder = 1,
 				icon = if IsPreviewingIdMatch then PauseLarge else PlayLarge,
-				onActivated = ReactModule.useCallback(function() --[[ Line: 57 ]]
+				onActivated = ReactModule.useCallback(function()
 					-- upvalues: UseContextResult (copy), Item (copy)
 					UseContextResult.togglePreview(Item.id)
 				end, { UseContextResult.togglePreview, Item.id }),

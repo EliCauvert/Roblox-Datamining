@@ -6,13 +6,13 @@ local t = {}
 for i in game:DefineFastString("SduiEagerProcessCollectionIds", "400000000"):gmatch("(%w+)") do
 	t[i] = true
 end
-return function(p1, p2, p3) --[[ Line: 21 | Named "processCollectionConfig" ]]
+return function(p1, p2, p3)
 	-- upvalues: t (copy), SduiBuilder (copy), SduiErrors (copy)
 	if not p2 or not t[tostring(p2)] then
 		return p1
 	end
 	local Text: string = `{p3.appPage}-{p2}`
-	local Success, Result = pcall(function() --[[ Line: 30 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: SduiBuilder (upval), p1 (copy), p3 (copy), Text (copy)
 		local TryCreateEagerProcessedComponentConfigResult, TryCreateEagerProcessedComponentConfigResult2 = SduiBuilder.tryCreateEagerProcessedComponentConfig(p1, p3, Text, {}, true)
 		

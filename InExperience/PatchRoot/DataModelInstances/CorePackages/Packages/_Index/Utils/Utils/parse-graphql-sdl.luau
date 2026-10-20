@@ -17,16 +17,16 @@ local String1 = LuauPolyfillModule.String
 local Callback = nil
 local Callback1 = nil
 
-local function _(Text: string) --[[ Line: 51 | Named "removeCommentsAndTrim" ]]
+local function _(Text: string)
 	-- upvalues: String1 (copy)
 	return String1.trim((string.gsub(Text, "(#[^*]*)", "")))
 end
 
-local function parseGraphQLSDL(Location, Text: string, p1) --[[ Line: 56 ]]
+local function parseGraphQLSDL(Location, Text: string, p1)
 	-- upvalues: Boolean (copy), String1 (copy), Callback (ref), ParseFunction (copy), PrintFunction (copy), Source (copy), Kind (copy)
 	local T = if p1 == nil then {} else p1
 	local Document = nil
-	local Success, Result = pcall(function() --[[ Line: 62 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: Boolean (upval), T (copy), String1 (upval), Text (copy), Document (ref), Callback (upval), ParseFunction (upval), PrintFunction (upval), Source (upval), Location (copy)
 		if Boolean.toJSBoolean(T.commentDescriptions) and String1.includes(Text, "#") then
 			Document = Callback(Text, T)
@@ -51,10 +51,10 @@ local function parseGraphQLSDL(Location, Text: string, p1) --[[ Line: 56 ]]
 	return { location = Location, document = Document }
 end
 
-Callback = function(p1, p2) --[[ Line: 122 | Named "transformCommentsToDescriptions" ]]
+Callback = function(p1, p2)
 	-- upvalues: ParseFunction (copy), Object (copy), VisitFunction (copy), Boolean (copy), Callback1 (ref), GetLeadingCommentBlockFunction (copy), DedentBlockStringValueFunction (copy), String1 (copy), Kind (copy)
 	return (VisitFunction(ParseFunction(p1, Object.assign({}, if p2 == nil then {} else p2, { noLocation = false })), {
-		leave = function(_, p3) --[[ Line: 129 ]]
+		leave = function(_, p3)
 			-- upvalues: Boolean (upval), Callback1 (upval), GetLeadingCommentBlockFunction (upval), DedentBlockStringValueFunction (upval), String1 (upval), Object (upval), Kind (upval)
 			if Boolean.toJSBoolean(Callback1(p3)) then
 				local LeadingCommentBlock = GetLeadingCommentBlockFunction(p3)
@@ -81,7 +81,7 @@ Callback = function(p1, p2) --[[ Line: 122 | Named "transformCommentsToDescripti
 	}))
 end
 
-Callback1 = function(p1) --[[ Line: 176 | Named "isDescribable" ]]
+Callback1 = function(p1)
 	-- upvalues: IsTypeSystemDefinitionNodeFunction (copy), Kind (copy)
 	return IsTypeSystemDefinitionNodeFunction(p1) or (p1.kind == Kind.FIELD_DEFINITION or (p1.kind == Kind.INPUT_VALUE_DEFINITION or p1.kind == Kind.ENUM_VALUE_DEFINITION))
 end

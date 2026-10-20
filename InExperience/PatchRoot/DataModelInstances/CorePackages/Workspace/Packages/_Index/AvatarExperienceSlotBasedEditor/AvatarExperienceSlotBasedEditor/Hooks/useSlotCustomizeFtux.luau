@@ -18,11 +18,11 @@ local AXSlotBasedEditorCustomizeFtuxUseMemStorage2 = game:DefineFastFlag("AXSlot
 local AXSlotBasedEditorCustomizeFtuxDelayRatio = game:DefineFastInt("AXSlotBasedEditorCustomizeFtuxDelay2", 3000) / 1000
 local AXSlotBasedEditorAvatarSwitcherFtuxDelayRatio = game:DefineFastInt("AXSlotBasedEditorAvatarSwitcherFtuxDelay2", 1000) / 1000
 
-local function v14(p1) --[[ Line: 42 ]]
+local function v14(p1)
 	return p1.ScreenSize
 end
 
-return function(Callback) --[[ Line: 48 | Named "useSlotCustomizeFtux" ]]
+return function(Callback)
 	-- upvalues: UseNavigationFunction (copy), UseAvatarRouteFunction (copy), UseSlotBasedEditorContextModule (copy), UseSelectorFunction (copy), v14 (copy), UseIsSpatialFunction (copy), ReactModule (copy), SelectIsFullViewFunction (copy), SafeAppStorageService (copy), AXSlotBasedEditorCustomizeFtuxUseMemStorage2 (copy), AvatarScreen (copy), ScreenLayoutModule (copy), AXSlotBasedEditorCustomizeFtuxDelayRatio (copy), SlotBasedEditorAnalytics (copy), AXSlotBasedEditorAvatarSwitcherFtuxDelayRatio (copy), MenuItemEnum (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseAvatarRouteResult = UseAvatarRouteFunction()
@@ -30,46 +30,46 @@ return function(Callback) --[[ Line: 48 | Named "useSlotCustomizeFtux" ]]
 	local ScreenLayout = UseSlotBasedEditorContextModuleResult and UseSlotBasedEditorContextModuleResult.screenLayout
 	local UseSelectorResult = UseSelectorFunction(v14)
 	local Inverted = not UseIsSpatialFunction()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 56 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseAvatarRouteResult (copy)
 		return UseAvatarRouteResult and (UseAvatarRouteResult.opaque and UseAvatarRouteResult.opaque.name)
 	end, { UseAvatarRouteResult })
-	local UseSelectorResult1 = UseSelectorFunction((ReactModule.useCallback(function(p1) --[[ Line: 60 ]]
+	local UseSelectorResult1 = UseSelectorFunction((ReactModule.useCallback(function(p1)
 		-- upvalues: SelectIsFullViewFunction (upval), UseMemoResult (copy)
 		return SelectIsFullViewFunction(p1, UseMemoResult)
 	end, { UseMemoResult })))
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 66 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: Callback (copy), UseSelectorResult1 (copy)
 		return Callback(UseSelectorResult1)
 	end, { UseSelectorResult1 })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 70 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: SafeAppStorageService (upval), AXSlotBasedEditorCustomizeFtuxUseMemStorage2 (upval)
 		return (SafeAppStorageService.getItem("AXSlotBasedEditorCustomizeFtux", AXSlotBasedEditorCustomizeFtuxUseMemStorage2))
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(p1) --[[ Line: 76 ]]
+	local UseResult1 = ReactModule.useCallback(function(p1)
 		-- upvalues: SafeAppStorageService (upval), AXSlotBasedEditorCustomizeFtuxUseMemStorage2 (upval)
 		SafeAppStorageService.setItem("AXSlotBasedEditorCustomizeFtux", p1, AXSlotBasedEditorCustomizeFtuxUseMemStorage2)
 		SafeAppStorageService.flush()
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 81 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult (copy), UseMemoResult (copy), AvatarScreen (upval), Inverted (copy), UseMemoResult1 (copy), ScreenLayout (copy), ScreenLayoutModule (upval), AXSlotBasedEditorCustomizeFtuxDelayRatio (upval), UseNavigationResult (copy), UseSelectorResult (copy), UseResult1 (copy), SlotBasedEditorAnalytics (upval), AXSlotBasedEditorAvatarSwitcherFtuxDelayRatio (upval)
 		local UseResultResult = UseResult()
-		local DelayedThread = if UseResultResult == "" and UseMemoResult == AvatarScreen.AvatarEditor and Inverted and UseMemoResult1 and (ScreenLayout == ScreenLayoutModule.LandscapeSplit or ScreenLayout == ScreenLayoutModule.PortraitSlots) then task.delay(AXSlotBasedEditorCustomizeFtuxDelayRatio, function() --[[ Line: 99 ]]
+		local DelayedThread = if UseResultResult == "" and UseMemoResult == AvatarScreen.AvatarEditor and Inverted and UseMemoResult1 and (ScreenLayout == ScreenLayoutModule.LandscapeSplit or ScreenLayout == ScreenLayoutModule.PortraitSlots) then task.delay(AXSlotBasedEditorCustomizeFtuxDelayRatio, function()
 			-- upvalues: UseNavigationResult (upval), AvatarScreen (upval), UseSelectorResult (upval), UseResult1 (upval), SlotBasedEditorAnalytics (upval)
 			UseNavigationResult.navigate(AvatarScreen.SlotsCustomizeFtuxPrompt, {
 				screenSize = UseSelectorResult,
-				onConfirm = function() --[[ Line: 102 ]]
+				onConfirm = function()
 					-- upvalues: UseResult1 (upval), SlotBasedEditorAnalytics (upval)
 					UseResult1("AVATAR_FOCUS_ICON")
 					SlotBasedEditorAnalytics.trackSlotsCustomizeFtuxPrompt()
 				end
 			})
-		end) elseif UseResultResult == "AVATAR_FOCUS_ICON" and UseMemoResult == AvatarScreen.AvatarSwitcher and Inverted and UseMemoResult1 then task.delay(AXSlotBasedEditorAvatarSwitcherFtuxDelayRatio, function() --[[ Line: 122 ]]
+		end) elseif UseResultResult == "AVATAR_FOCUS_ICON" and UseMemoResult == AvatarScreen.AvatarSwitcher and Inverted and UseMemoResult1 then task.delay(AXSlotBasedEditorAvatarSwitcherFtuxDelayRatio, function()
 			-- upvalues: UseResult1 (upval), UseNavigationResult (upval), AvatarScreen (upval), UseSelectorResult (upval), SlotBasedEditorAnalytics (upval)
 			UseResult1("PROFILE_REDIRECT")
 			UseNavigationResult.navigate(AvatarScreen.SlotsAvatarSwitcherFtuxPrompt, {
 				screenSize = UseSelectorResult,
-				onConfirm = function() --[[ Line: 126 ]]
+				onConfirm = function()
 					-- upvalues: UseResult1 (upval), SlotBasedEditorAnalytics (upval)
 					UseResult1("FINISHED")
 					SlotBasedEditorAnalytics.trackSlotsAvatarSwitcherFtuxPrompt()
@@ -77,7 +77,7 @@ return function(Callback) --[[ Line: 48 | Named "useSlotCustomizeFtux" ]]
 			})
 		end) else nil
 		
-		return function() --[[ Line: 134 ]]
+		return function()
 			-- upvalues: DelayedThread (ref)
 			if DelayedThread then
 				task.cancel(DelayedThread)

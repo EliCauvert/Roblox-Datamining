@@ -6,14 +6,14 @@ local Image = FoundationModule.Image
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local _UDim = UDim.new(0, -8)
 
-return function(p1) --[[ Line: 21 | Named "EventSocialProof" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), CryoModule (copy), _UDim (copy), Image (copy)
 	local UseTokensResult = UseTokensFunction()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 24 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), CryoModule (upval)
 		return if p1.desiredFirstUserId and CryoModule.List.find(p1.userIds, p1.desiredFirstUserId) then p1.desiredFirstUserId else p1.userIds[1]
 	end, { p1.userIds, p1.desiredFirstUserId })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 35 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		return p1.userIds[2] or nil
 	end, { p1.userIds })

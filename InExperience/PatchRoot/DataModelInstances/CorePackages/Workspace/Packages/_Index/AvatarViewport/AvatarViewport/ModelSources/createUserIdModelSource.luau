@@ -2,16 +2,16 @@
 local _ = require(script.Parent.Parent.Types)
 local FinishModelSetupModule = require(script.Parent.finishModelSetup)
 
-return function(p1) --[[ Line: 10 | Named "createUserIdModelSource" ]]
+return function(p1)
 	-- upvalues: Players (copy), FinishModelSetupModule (copy)
-	return function(p2) --[[ Line: 11 ]]
+	return function(p2)
 		-- upvalues: p1 (copy), Players (upval), FinishModelSetupModule (upval)
 		local Number: number? = tonumber(p1)
 		
 		if not Number then
 			return nil
 		end
-		local Success, Result = pcall(function() --[[ Line: 17 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Players (upval), Number (copy)
 			return Players:CreateHumanoidModelFromUserIdAsync(Number)
 		end)

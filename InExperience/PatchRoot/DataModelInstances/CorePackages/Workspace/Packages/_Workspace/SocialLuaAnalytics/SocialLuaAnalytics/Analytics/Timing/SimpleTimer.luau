@@ -1,10 +1,10 @@
 ﻿local LoggerModule = require(script.Parent.Parent.Logger)
 
-local function _(p1, p2) --[[ Line: 3 ]]
+local function _(p1, p2)
 	return (p1.UnixTimestampMillis - p2.UnixTimestampMillis) / 1000
 end
 
-return function(p1) --[[ Line: 23 | Named "SimpleTimer" ]]
+return function(p1)
 	-- upvalues: LoggerModule (copy)
 	local UnixTimestampMillisRatio = nil
 	local ClockTime = nil
@@ -13,22 +13,22 @@ return function(p1) --[[ Line: 23 | Named "SimpleTimer" ]]
 	local TimeoutThreshold = p1 and p1.timeoutThreshold or nil
 	local OnReachingThreshold = p1 and p1.onReachingThreshold or nil
 	
-	local function _() --[[ Line: 33 ]]
+	local function _()
 		-- upvalues: UnixTimestampMillisRatio (ref), ClockTime (ref)
 		return if UnixTimestampMillisRatio and ClockTime then ClockTime - UnixTimestampMillisRatio else -1
 	end
 	
-	local _ = function() --[[ Line: 54 ]]
+	local _ = function()
 		-- upvalues: DelayedThread (ref)
 		if DelayedThread then
 			task.cancel(DelayedThread)
 		end
 	end
 	
-	local _ = function() --[[ Line: 66 ]]
+	local _ = function()
 		-- upvalues: TimeoutThreshold (copy), OnReachingThreshold (copy), DelayedThread (ref)
 		if TimeoutThreshold and OnReachingThreshold then
-			DelayedThread = task.delay(TimeoutThreshold, function() --[[ Line: 73 ]]
+			DelayedThread = task.delay(TimeoutThreshold, function()
 				-- upvalues: DelayedThread (upval), OnReachingThreshold (copy)
 				DelayedThread = nil
 				OnReachingThreshold()
@@ -39,7 +39,7 @@ return function(p1) --[[ Line: 23 | Named "SimpleTimer" ]]
 	end
 	
 	return {
-		start = function(p2) --[[ Line: 79 ]]
+		start = function(p2)
 			-- upvalues: UnixTimestampMillisRatio (ref), v1 (ref), TimeoutThreshold (copy), OnReachingThreshold (copy), DelayedThread (ref), LoggerModule (upval)
 			if UnixTimestampMillisRatio then
 				LoggerModule:warning("Timer has been already started")
@@ -52,7 +52,7 @@ return function(p1) --[[ Line: 23 | Named "SimpleTimer" ]]
 				end
 				if TimeoutThreshold then
 					if OnReachingThreshold then
-						DelayedThread = task.delay(TimeoutThreshold, function() --[[ Line: 73 ]]
+						DelayedThread = task.delay(TimeoutThreshold, function()
 							-- upvalues: DelayedThread (upval), OnReachingThreshold (copy)
 							DelayedThread = nil
 							OnReachingThreshold()
@@ -64,7 +64,7 @@ return function(p1) --[[ Line: 23 | Named "SimpleTimer" ]]
 				end
 			end
 		end,
-		getStartTimestamp = function() --[[ Line: 106 ]]
+		getStartTimestamp = function()
 			-- upvalues: v1 (ref), LoggerModule (upval)
 			if v1 then
 				return v1
@@ -74,7 +74,7 @@ return function(p1) --[[ Line: 23 | Named "SimpleTimer" ]]
 				return nil
 			end
 		end,
-		stop = function(): number --[[ Line: 92 ]]
+		stop = function(): number
 			-- upvalues: DelayedThread (ref), UnixTimestampMillisRatio (ref), ClockTime (ref), LoggerModule (upval)
 			if DelayedThread then
 				task.cancel(DelayedThread)
@@ -88,7 +88,7 @@ return function(p1) --[[ Line: 23 | Named "SimpleTimer" ]]
 			end
 			return if UnixTimestampMillisRatio and ClockTime then ClockTime - UnixTimestampMillisRatio else -1
 		end,
-		clear = function() --[[ Line: 60 ]]
+		clear = function()
 			-- upvalues: UnixTimestampMillisRatio (ref), ClockTime (ref), DelayedThread (ref)
 			UnixTimestampMillisRatio = nil
 			ClockTime = nil
@@ -97,7 +97,7 @@ return function(p1) --[[ Line: 23 | Named "SimpleTimer" ]]
 				task.cancel(DelayedThread)
 			end
 		end,
-		getTime = function(): number --[[ Line: 40 ]]
+		getTime = function(): number
 			-- upvalues: UnixTimestampMillisRatio (ref), ClockTime (ref), LoggerModule (upval)
 			local ClockTime1: number? = nil
 			

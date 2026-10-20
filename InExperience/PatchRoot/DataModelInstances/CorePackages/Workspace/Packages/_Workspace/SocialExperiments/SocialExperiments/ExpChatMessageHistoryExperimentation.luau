@@ -9,7 +9,7 @@ local Config = nil
 local Flag = false
 
 return {
-	getHistoryArm = function(p1) --[[ Line: 25 ]]
+	getHistoryArm = function(p1)
 		-- upvalues: Config (ref), ExperimentCacheManager (copy), ExpChatMessageHistoryLayer (copy), ExpChatHistoryMessageCountVariable (copy), ForceEnableExpChatMessageHistory (copy), DebugExpChatHistoryMessageCount (copy), DebugExpChatHistoryMaxAgeSeconds (copy), ExpChatHistoryMaxAgeSecondsVariable (copy)
 		if not p1 then
 			return nil
@@ -33,14 +33,14 @@ return {
 			end
 		end
 	end,
-	logExposure = function(p1) --[[ Line: 52 ]]
+	logExposure = function(p1)
 		-- upvalues: Flag (ref), ExperimentCacheManager (copy), ExpChatMessageHistoryLayer (copy), ExpChatHistoryMessageCountVariable (copy)
 		if Flag or not p1 then return end
 		local LayerVariables = ExperimentCacheManager.default:getLayerVariables(ExpChatMessageHistoryLayer)
 		
 		if LayerVariables ~= nil and LayerVariables[ExpChatHistoryMessageCountVariable] ~= nil then
 			Flag = true
-			pcall(function() --[[ Line: 63 ]]
+			pcall(function()
 				-- upvalues: ExperimentCacheManager (upval), ExpChatMessageHistoryLayer (upval)
 				ExperimentCacheManager.default:logLayerExposure(ExpChatMessageHistoryLayer)
 			end)

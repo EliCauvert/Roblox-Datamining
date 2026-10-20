@@ -7,7 +7,7 @@ local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SduiActionType = SduiCoreSystemModule.SduiActionType
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 
-return function(p1, _, p2) --[[ Line: 18 ]]
+return function(p1, _, p2)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), SduiPageAnalytics (copy), SduiLoadTimer (copy), GetSduiApiStoreFunction (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	
@@ -37,7 +37,7 @@ return function(p1, _, p2) --[[ Line: 18 ]]
 		SduiPageAnalytics.sendLoadMoreEvent(SurfaceKey)
 		local LoadTimer = SduiLoadTimer.createLoadTimer(SurfaceKey)
 		LoadTimer.start("loadMore")
-		GetSduiApiStoreFunction().loadMoreFromApi({ configKey = ConfigKey, loadTimer = LoadTimer }):finally(function() --[[ Line: 61 ]]
+		GetSduiApiStoreFunction().loadMoreFromApi({ configKey = ConfigKey, loadTimer = LoadTimer }):finally(function()
 			-- upvalues: LoadTimer (copy)
 			LoadTimer.logRefreshComplete()
 		end)

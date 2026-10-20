@@ -27,7 +27,7 @@ local UseEffectFunction = ReactModule.useEffect
 local UseMemoFunction = ReactModule.useMemo
 local UseStateFunction = ReactModule.useState
 
-local function _(p1) --[[ Line: 64 | Named "toItem" ]]
+local function _(p1)
 	return {
 		id = p1.AssetId,
 		title = p1.Title,
@@ -36,20 +36,20 @@ local function _(p1) --[[ Line: 64 | Named "toItem" ]]
 	}
 end
 
-local _ = function(p1): string --[[ Line: 73 | Named "mapStatus" ]]
+local _ = function(p1): string
 	return if p1 == "loading" then "loading" elseif p1 == "error" then "error" else "success"
 end
 
-local function useStoreContent() --[[ Line: 85 ]]
+local function useStoreContent()
 	-- upvalues: GetMusicStoreModule (copy), UseCreationFlowStringsModule (copy), UseStateFunction (copy), UseEffectFunction (copy), SignalsModule (copy), UseMemoFunction (copy)
 	local MusicStoreModule = GetMusicStoreModule()
 	local UseCreationFlowStringsModuleResult = UseCreationFlowStringsModule()
 	local UseStateResult, UseStateResult2 = UseStateFunction(MusicStoreModule.getResults(false))
 	local UseStateResult1, UseStateResult2_1 = UseStateFunction(MusicStoreModule.getSearchStatus(false))
 	local UseStateResult3, UseStateResult2_2 = UseStateFunction(false)
-	UseEffectFunction(function() --[[ Line: 93 ]]
+	UseEffectFunction(function()
 		-- upvalues: SignalsModule (upval), UseStateResult2 (copy), MusicStoreModule (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy)
-		return SignalsModule.createEffect(function(p1) --[[ Line: 94 ]]
+		return SignalsModule.createEffect(function(p1)
 			-- upvalues: UseStateResult2 (upval), MusicStoreModule (upval), UseStateResult2_1 (upval), UseStateResult2_2 (upval)
 			UseStateResult2(MusicStoreModule.getResults(p1))
 			UseStateResult2_1(MusicStoreModule.getSearchStatus(p1))
@@ -57,7 +57,7 @@ local function useStoreContent() --[[ Line: 85 ]]
 		end)
 	end, {})
 	
-	return UseMemoFunction(function() --[[ Line: 101 ]]
+	return UseMemoFunction(function()
 		-- upvalues: UseStateResult (copy), UseStateResult1 (copy), UseCreationFlowStringsModuleResult (copy), MusicStoreModule (copy), UseStateResult3 (copy)
 		local Items = {}
 		
@@ -88,11 +88,11 @@ local function useStoreContent() --[[ Line: 85 ]]
 	})
 end
 
-local _ = function() --[[ Line: 123 | Named "useSavedContent" ]]
+local _ = function()
 	-- upvalues: UseCreationFlowStringsModule (copy), UseMemoFunction (copy), BuilderIconsModule (copy)
 	local UseCreationFlowStringsModuleResult = UseCreationFlowStringsModule()
 	
-	return UseMemoFunction(function() --[[ Line: 125 ]]
+	return UseMemoFunction(function()
 		-- upvalues: UseCreationFlowStringsModuleResult (copy), BuilderIconsModule (upval)
 		return {
 			status = "success",
@@ -106,7 +106,7 @@ local _ = function() --[[ Line: 123 | Named "useSavedContent" ]]
 	end, { UseCreationFlowStringsModuleResult })
 end
 
-return function(p1) --[[ Line: 138 | Named "MusicPickerV2Container" ]]
+return function(p1)
 	-- upvalues: UseCreationFlowStringsModule (copy), GetMusicStoreModule (copy), UseDeviceInsetsFunction (copy), useStoreContent (copy), UseMemoFunction (copy), BuilderIconsModule (copy), UseStateFunction (copy), UseEffectFunction (copy), SignalsModule (copy), UseAudioPlaybackModule (copy), UseCallbackFunction (copy), MakeCreationEventFieldsModule (copy), SessionManager (copy), FunnelEventNames (copy), FireAnalyticsEventModule (copy), EventNames (copy), FFlagMomentsAudioSaveButton (copy), ReactModule (copy), MusicEditorModule (copy), MusicPickerContext (copy), MusicPicker (copy), FFlagMomentsCreationMusicPickerTabsModule (copy)
 	local Controller = p1.controller
 	local Playback = Controller.preview.playback
@@ -115,7 +115,7 @@ return function(p1) --[[ Line: 138 | Named "MusicPickerV2Container" ]]
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseStoreContentResult = useStoreContent()
 	local UseCreationFlowStringsModuleResult1 = UseCreationFlowStringsModule()
-	local UseMemoResult = UseMemoFunction(function() --[[ Line: 125 ]]
+	local UseMemoResult = UseMemoFunction(function()
 		-- upvalues: UseCreationFlowStringsModuleResult1 (copy), BuilderIconsModule (upval)
 		return {
 			status = "success",
@@ -132,41 +132,41 @@ return function(p1) --[[ Line: 138 | Named "MusicPickerV2Container" ]]
 	local UseStateResult3, UseStateResult2_2 = UseStateFunction({})
 	local UseStateResult4, UseStateResult2_3 = UseStateFunction("")
 	local UseStateResult5, UseStateResult2_4 = UseStateFunction(Playback.getTimeLength(false))
-	UseEffectFunction(function() --[[ Line: 154 ]]
+	UseEffectFunction(function()
 		-- upvalues: SignalsModule (upval), UseStateResult2_4 (copy), Playback (copy)
-		return SignalsModule.createEffect(function(p2) --[[ Line: 155 ]]
+		return SignalsModule.createEffect(function(p2)
 			-- upvalues: UseStateResult2_4 (upval), Playback (upval)
 			UseStateResult2_4(Playback.getTimeLength(p2))
 		end)
 	end, { Playback })
 	local UseStateResult6, UseStateResult2_5 = UseStateFunction(nil)
-	UseEffectFunction(function() --[[ Line: 162 ]]
+	UseEffectFunction(function()
 		-- upvalues: SignalsModule (upval), Controller (copy), UseStateResult2_5 (copy)
-		return SignalsModule.createEffect(function(p2) --[[ Line: 163 ]]
+		return SignalsModule.createEffect(function(p2)
 			-- upvalues: Controller (upval), UseStateResult2_5 (upval)
 			local ActiveSession = Controller.getActiveSession(p2)
 			UseStateResult2_5(if ActiveSession == nil then nil else ActiveSession.getDraft(p2))
 		end)
 	end, { Controller })
 	local UseAudioPlaybackModuleResult = UseAudioPlaybackModule(UseStateResult ~= nil, UseStateResult, { autoplay = true, looping = false })
-	UseEffectFunction(function() --[[ Line: 176 ]]
+	UseEffectFunction(function()
 		-- upvalues: Playback (copy), MusicStoreModule (copy), UseStateResult5 (copy)
 		Playback.pause()
 		MusicStoreModule.search("", UseStateResult5)
 	end, { UseStateResult5 })
-	UseEffectFunction(function() --[[ Line: 182 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseAudioPlaybackModuleResult (copy), UseStateResult2 (copy)
 		if not UseAudioPlaybackModuleResult.playback.isPlaying then
 			UseStateResult2(nil)
 		end
 	end, { UseAudioPlaybackModuleResult.playback.isPlaying })
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 188 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: Playback (copy), Controller (copy)
 		Playback.play()
 		Playback.setMuted(false)
 		Controller.discardActiveTool()
 	end, { Controller, Playback })
-	local UseCallbackResult1 = UseCallbackFunction(function(AssetId) --[[ Line: 194 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function(AssetId)
 		-- upvalues: Controller (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), MakeCreationEventFieldsModule (upval), SessionManager (upval), FunnelEventNames (upval), FireAnalyticsEventModule (upval), EventNames (upval)
 		local ActiveSession = Controller.getActiveSession(false)
 		
@@ -185,7 +185,7 @@ return function(p1) --[[ Line: 138 | Named "MusicPickerV2Container" ]]
 		end
 		FireAnalyticsEventModule(EventNames.EditingFlowMusicSelected, config)
 	end, { Controller })
-	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 216 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function()
 		-- upvalues: Controller (copy), UseStateResult2_1 (copy), Playback (copy)
 		local ActiveSession = Controller.getActiveSession(false)
 		
@@ -195,14 +195,14 @@ return function(p1) --[[ Line: 138 | Named "MusicPickerV2Container" ]]
 		UseStateResult2_1(false)
 		Playback.pause()
 	end, { Controller, Playback })
-	local UseCallbackResult3 = UseCallbackFunction(function() --[[ Line: 227 ]]
+	local UseCallbackResult3 = UseCallbackFunction(function()
 		-- upvalues: UseStateResult2_1 (copy), Playback (copy), Controller (copy)
 		UseStateResult2_1(false)
 		Playback.play()
 		Playback.setMuted(false)
 		Controller.commitActiveTool()
 	end, { Controller, Playback })
-	local UseCallbackResult4 = UseCallbackFunction(function(StartTime) --[[ Line: 234 ]]
+	local UseCallbackResult4 = UseCallbackFunction(function(StartTime)
 		-- upvalues: Controller (copy)
 		local ActiveSession = Controller.getActiveSession(false)
 		local Draft = if ActiveSession == nil then nil else ActiveSession.getDraft(false)
@@ -211,7 +211,7 @@ return function(p1) --[[ Line: 138 | Named "MusicPickerV2Container" ]]
 			ActiveSession.update({ assetId = Draft.assetId, startTime = StartTime })
 		end
 	end, { Controller })
-	local UseCallbackResult5 = UseCallbackFunction(function(PreviewingId) --[[ Line: 248 ]]
+	local UseCallbackResult5 = UseCallbackFunction(function(PreviewingId)
 		-- upvalues: UseStateResult (copy), UseStateResult2 (copy), UseAudioPlaybackModuleResult (copy)
 		if UseStateResult == PreviewingId then
 			UseStateResult2(nil)
@@ -222,9 +222,9 @@ return function(p1) --[[ Line: 138 | Named "MusicPickerV2Container" ]]
 			UseAudioPlaybackModuleResult.playback.play()
 		end
 	end, { UseStateResult or 0 })
-	local UseCallbackResult6 = UseCallbackFunction(function(p2) --[[ Line: 257 ]]
+	local UseCallbackResult6 = UseCallbackFunction(function(p2)
 		-- upvalues: UseStateResult2_2 (copy)
-		UseStateResult2_2(function(List) --[[ Line: 258 ]]
+		UseStateResult2_2(function(List)
 			-- upvalues: p2 (copy)
 			local t = {}
 			
@@ -239,17 +239,17 @@ return function(p1) --[[ Line: 138 | Named "MusicPickerV2Container" ]]
 			return t
 		end)
 	end, {})
-	local UseCallbackResult7 = UseCallbackFunction(function(p3) --[[ Line: 275 ]]
+	local UseCallbackResult7 = UseCallbackFunction(function(p3)
 		-- upvalues: UseStateResult2 (copy), UseStateResult2_3 (copy), MusicStoreModule (copy), UseStateResult5 (copy)
 		UseStateResult2(nil)
 		UseStateResult2_3(p3)
 		MusicStoreModule.search(p3, UseStateResult5)
 	end, { MusicStoreModule, UseStateResult5 })
-	local UseCallbackResult8 = UseCallbackFunction(function(_) --[[ Line: 283 ]]
+	local UseCallbackResult8 = UseCallbackFunction(function(_)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(nil)
 	end, {})
-	local UseMemoResult1 = UseMemoFunction(function() --[[ Line: 287 ]]
+	local UseMemoResult1 = UseMemoFunction(function()
 		-- upvalues: UseCreationFlowStringsModuleResult (copy), UseStoreContentResult (copy), FFlagMomentsAudioSaveButton (upval), UseMemoResult (copy)
 		local List = {
 			{
@@ -268,7 +268,7 @@ return function(p1) --[[ Line: 138 | Named "MusicPickerV2Container" ]]
 		UseStoreContentResult,
 		UseMemoResult
 	})
-	local UseMemoResult2 = UseMemoFunction(function() --[[ Line: 306 ]]
+	local UseMemoResult2 = UseMemoFunction(function()
 		-- upvalues: UseStateResult (copy), UseCallbackResult5 (copy), UseStateResult3 (copy), UseCallbackResult6 (copy), FFlagMomentsAudioSaveButton (upval)
 		return {
 			previewingId = UseStateResult,

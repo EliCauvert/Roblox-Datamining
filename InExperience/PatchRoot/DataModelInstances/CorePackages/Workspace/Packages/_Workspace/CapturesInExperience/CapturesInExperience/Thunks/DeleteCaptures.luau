@@ -6,7 +6,7 @@ local _ = require(Parent.Types)
 local FFlagUseRbxstorageInGalleryModule = require(Parent.Flags.FFlagUseRbxstorageInGallery)
 local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 
-return function(List) --[[ Line: 14 ]]
+return function(List)
 	-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), FFlagUseRbxstorageInGalleryModule (copy), CaptureTypeModule (copy), CaptureService (copy), RetrieveCapturesModule (copy)
 	local List1 = {}
 	
@@ -19,7 +19,7 @@ return function(List) --[[ Line: 14 ]]
 			table.insert(List1, value.filePath)
 		end
 	end
-	return function(p1) --[[ Line: 26 ]]
+	return function(p1)
 		-- upvalues: CaptureService (upval), List1 (copy), RetrieveCapturesModule (upval)
 		CaptureService:DeleteCapturesAsync(List1)
 		p1:dispatch(RetrieveCapturesModule())

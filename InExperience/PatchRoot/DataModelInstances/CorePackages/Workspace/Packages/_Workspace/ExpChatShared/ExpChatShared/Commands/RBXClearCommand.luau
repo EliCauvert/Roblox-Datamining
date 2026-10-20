@@ -3,7 +3,7 @@
 return {
 	name = script.Name,
 	alias = { "/clear", "/cls" },
-	clientRun = function(_, _, _, p1) --[[ Line: 6 ]]
+	clientRun = function(_, _, _, p1)
 		if not p1 or not p1.messagesStore then
 			return {
 				key = "CoreScripts.TextChat.MessageStatus.Warning.Unknown",

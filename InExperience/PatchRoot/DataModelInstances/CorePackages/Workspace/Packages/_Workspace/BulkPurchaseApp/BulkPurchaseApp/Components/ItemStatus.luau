@@ -7,7 +7,7 @@ local StyledTextLabel = require(Parent.UIBlox).App.Text.StyledTextLabel
 local ItemStatusToItemStatusKeyModule = require(BulkPurchaseApp.Enums.ItemStatusToItemStatusKey)
 local ItemStatusKeyToLocalizationKeyModule = require(BulkPurchaseApp.Enums.ItemStatusKeyToLocalizationKey)
 
-local function mapTokens(p1) --[[ Line: 12 ]]
+local function mapTokens(p1)
 	return {
 		successColor = p1.Color.System.Success,
 		failureColor = p1.Color.System.Alert,
@@ -15,7 +15,7 @@ local function mapTokens(p1) --[[ Line: 12 ]]
 	}
 end
 
-return function(p1) --[[ Line: 24 | Named "ItemStatus" ]]
+return function(p1)
 	-- upvalues: UseDesignTokensFunction (copy), mapTokens (copy), UseLocalizationFunction (copy), ItemStatusKeyToLocalizationKeyModule (copy), ItemStatusToItemStatusKeyModule (copy), ReactModule (copy), StyledTextLabel (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction(mapTokens)
 	

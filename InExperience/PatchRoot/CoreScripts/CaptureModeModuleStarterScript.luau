@@ -5,7 +5,7 @@ require(CorePackages.Packages.UIBlox).init(require(CorePackages.Workspace.Packag
 local FFlagBuildExperienceInstanceSelection = require(CorePackages.Workspace.Packages.SharedFlags).FFlagBuildExperienceInstanceSelection
 local InstanceSelectionProtocolModule = if FFlagBuildExperienceInstanceSelection then require(CorePackages.Workspace.Packages.BuildExperience.InstanceSelectionProtocol) else nil
 
-local function _(): boolean --[[ Line: 19 | Named "isSelectingInstance" ]]
+local function _(): boolean
 	-- upvalues: FFlagBuildExperienceInstanceSelection (copy), InstanceSelectionProtocolModule (copy)
 	return FFlagBuildExperienceInstanceSelection and InstanceSelectionProtocolModule.getActiveRequest() ~= nil
 end
@@ -21,7 +21,7 @@ if game:DefineFastFlag("FeedbackModuleEarlyFontInitialization", false) then
 end
 local MessageBusService = game:GetService("MessageBusService")
 local CaptureModeMessageId = MessageBusService:GetMessageId("CaptureMode", "sceneSelectionExitReason")
-game:GetService("GuiService").NativeClose:Connect(function() --[[ Line: 37 | Named "handleNativeExit" ]]
+game:GetService("GuiService").NativeClose:Connect(function()
 	-- upvalues: FFlagBuildExperienceInstanceSelection (copy), InstanceSelectionProtocolModule (copy), MessageBusService (copy), CaptureModeMessageId (copy)
 	if FFlagBuildExperienceInstanceSelection and InstanceSelectionProtocolModule.getActiveRequest() ~= nil then
 		InstanceSelectionProtocolModule.finishSelection({ status = "cancelled" })

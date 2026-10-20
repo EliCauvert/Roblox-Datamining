@@ -18,7 +18,7 @@ local config = {
 	[SocialMediaTypes.X] = Images["icons/brands/x"]
 }
 
-return function(p1) --[[ Line: 31 ]]
+return function(p1)
 	-- upvalues: UseProfileJsonComponentModule (copy), EnumsModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), config (copy), ReactModule (copy), SocialLinksCarouselModule (copy)
 	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.SocialLinks)
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -31,7 +31,7 @@ return function(p1) --[[ Line: 31 ]]
 		x = TextKeysModule.X
 	})
 	
-	local function v12(List) --[[ Line: 43 ]]
+	local function v12(List)
 		-- upvalues: UseLocalizationResult (copy), config (upval)
 		local List1 = {}
 		
@@ -51,7 +51,7 @@ return function(p1) --[[ Line: 31 ]]
 		return List1
 	end
 	
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 60 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: v12 (copy), UseProfileJsonComponentModuleResult (copy)
 		return (v12(UseProfileJsonComponentModuleResult))
 	end, {

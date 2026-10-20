@@ -13,7 +13,7 @@ local FTUXEventTypesModuleEntry = require(Parent.Resources.FTUXEventTypes)[requi
 
 return {
 	Name = "VRFTUXEventHandler",
-	StartEvent = function(FirstPersonToggleEvent, p1) --[[ Line: 25 ]]
+	StartEvent = function(FirstPersonToggleEvent, p1)
 		-- upvalues: FTUXEventTypesModuleEntry (copy), FirstPersonToggleEventModule (copy), MoveToGoalEventModule (copy), JumpEventModule (copy), PerspectiveTooltipEventModule (copy), MovementTooltipEventModule (copy), HapticFeedbackEventModule (copy), SoundFeedbackEventModule (copy), HapticFeedbackTwiceEventModule (copy), LeaveGameIconHighlightEventModule (copy)
 		if FirstPersonToggleEvent == FTUXEventTypesModuleEntry.FirstPersonToggleEvent then
 			task.spawn(FirstPersonToggleEventModule.StartEvent, p1)
@@ -63,7 +63,7 @@ return {
 			warn("Unmapped VRFTUX event type: " .. tostring(FirstPersonToggleEvent))
 		end
 	end,
-	StopEvent = function(FirstPersonToggleEvent) --[[ Line: 49 ]]
+	StopEvent = function(FirstPersonToggleEvent)
 		-- upvalues: FTUXEventTypesModuleEntry (copy), FirstPersonToggleEventModule (copy), MoveToGoalEventModule (copy), JumpEventModule (copy), PerspectiveTooltipEventModule (copy), MovementTooltipEventModule (copy), LeaveGameIconHighlightEventModule (copy)
 		if FirstPersonToggleEvent == FTUXEventTypesModuleEntry.FirstPersonToggleEvent then
 			task.spawn(FirstPersonToggleEventModule.StopEvent)

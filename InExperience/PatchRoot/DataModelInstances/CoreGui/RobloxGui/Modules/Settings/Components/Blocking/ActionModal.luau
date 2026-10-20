@@ -20,9 +20,9 @@ ActionModal.validateProps = TModule.interface({
 	screenSize = TModule.optional(TModule.Vector2)
 })
 
-function ActionModal.render(p1) --[[ Line: 35 ]]
+function ActionModal.render(p1)
 	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), RoactModule (copy), InteractiveAlert (copy), FFlagAddNewPlayerListMobileFocusNav (copy), ButtonType (copy)
-	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 36 ]]
+	return WithFoundationOrUIBloxStyleFunction(function(p2)
 		return {
 			Theme = {
 				Overlay = {
@@ -31,7 +31,7 @@ function ActionModal.render(p1) --[[ Line: 35 ]]
 				}
 			}
 		}
-	end, function(p2) --[[ Line: 45 ]]
+	end, function(p2)
 		-- upvalues: RoactModule (upval), p1 (copy), InteractiveAlert (upval), FFlagAddNewPlayerListMobileFocusNav (upval), ButtonType (upval)
 		return RoactModule.createElement("ImageButton", {
 			Size = UDim2.new(1, 0, 1, 0),

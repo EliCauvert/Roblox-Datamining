@@ -29,13 +29,13 @@ local config = {
 	variant = require(Foundation.Enums.InputVariant).Standard
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 64 | Named "DropdownControl" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), ControlStateModule (copy), UseDropdownVariantsModule (copy), InputFieldModule (copy), WithCommonPropsModule (copy), GetInputTextSizeModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), BlendTransparenciesModule (copy), ConstantsModule (copy), TextModule (copy), IconModule (copy), ChevronLargeUp (copy), ChevronLargeDown (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(ControlStateModule.Initialize)
 	local UseDropdownVariantsModuleResult = UseDropdownVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size, WithDefaultsModuleResult.variant, UseStateResult, WithDefaultsModuleResult.item == nil, WithDefaultsModuleResult.hasError or false, WithDefaultsModuleResult.isMenuOpen, UseStateResult == ControlStateModule.Hover)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 80 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseTokensModuleResult (copy)
 		return {
 			radius = UDim.new(0, UseTokensModuleResult.Radius.Small),
@@ -52,7 +52,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 64 |
 		hint = WithDefaultsModuleResult.hint,
 		ref = Ref,
 		width = WithDefaultsModuleResult.width,
-		input = function(_) --[[ Line: 98 ]]
+		input = function(_)
 			-- upvalues: ReactModule (upval), ViewModule (upval), UseStateResult2 (copy), WithDefaultsModuleResult (copy), UseMemoResult (copy), StateLayerAffordanceModule (upval), UseDropdownVariantsModuleResult (copy), BlendTransparenciesModule (upval), ConstantsModule (upval), TextModule (upval), IconModule (upval), ChevronLargeUp (upval), ChevronLargeDown (upval), UseTokensModuleResult (copy)
 			return ReactModule.createElement(ViewModule, {
 				onStateChanged = UseStateResult2,

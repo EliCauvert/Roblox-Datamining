@@ -1,11 +1,11 @@
-﻿local function _(Tbl, Key, p1) --[[ Line: 16 | Named "addToMap" ]]
+﻿local function _(Tbl, Key, p1)
 	local Copy = table.clone(Tbl)
 	Copy[Key] = p1
 	
 	return Copy
 end
 
-local _ = function(List, p1) --[[ Line: 26 | Named "removeFromMap" ]]
+local _ = function(List, p1)
 	local t = {}
 	
 	for i, value in pairs(List) do
@@ -16,11 +16,11 @@ local _ = function(List, p1) --[[ Line: 26 | Named "removeFromMap" ]]
 	return t
 end
 
-return function() --[[ Line: 38 | Named "createSignal" ]]
+return function()
 	local Tbl = {}
 	
 	return {
-		subscribe = function(_, Callback) --[[ Line: 41 ]]
+		subscribe = function(_, Callback)
 			-- upvalues: Tbl (ref)
 			assert(typeof(Callback) == "function", "Can only subscribe to signals with a function.")
 			local config = { disconnected = false, callback = Callback }
@@ -28,7 +28,7 @@ return function() --[[ Line: 38 | Named "createSignal" ]]
 			Copy[Callback] = config
 			Tbl = Copy
 			
-			return function() --[[ Line: 51 | Named "disconnect" ]]
+			return function()
 				-- upvalues: config (copy), Tbl (upval), Callback (copy)
 				assert(not config.disconnected, "Listeners can only be disconnected once.")
 				config.disconnected = true
@@ -42,7 +42,7 @@ return function() --[[ Line: 38 | Named "createSignal" ]]
 				Tbl = t
 			end
 		end,
-		fire = function(_, ...) --[[ Line: 61 ]]
+		fire = function(_, ...)
 			-- upvalues: Tbl (ref)
 			for i, value in pairs(Tbl) do
 				if not value.disconnected then

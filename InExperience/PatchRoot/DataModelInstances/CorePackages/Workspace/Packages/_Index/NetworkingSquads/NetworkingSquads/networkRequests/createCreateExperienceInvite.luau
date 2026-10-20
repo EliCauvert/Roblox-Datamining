@@ -5,9 +5,9 @@ local Packages = script:FindFirstAncestor("Packages")
 local FFlagEnableSquadRegroupExperimentation = require(Packages.SharedFlags).FFlagEnableSquadRegroupExperimentation
 local FFlagEnablePrivatePartyStartJoin = require(Packages.SharedFlags).FFlagEnablePrivatePartyStartJoin
 
-return function(p1) --[[ Line: 11 ]]
+return function(p1)
 	-- upvalues: SQUADURLModule (copy), HttpService (copy), FFlagEnableSquadRegroupExperimentation (copy), FFlagEnablePrivatePartyStartJoin (copy)
-	return (p1.roduxNetworking.POST("CreateExperienceInvite", function(Callback, p2) --[[ Line: 15 ]]
+	return (p1.roduxNetworking.POST("CreateExperienceInvite", function(Callback, p2)
 		-- upvalues: SQUADURLModule (upval), HttpService (upval), FFlagEnableSquadRegroupExperimentation (upval), FFlagEnablePrivatePartyStartJoin (upval)
 		return Callback(SQUADURLModule):path("group-up"):path("v1"):path("invite-to-experience"):body({
 			membershipEntityId = p2.membershipEntityId,

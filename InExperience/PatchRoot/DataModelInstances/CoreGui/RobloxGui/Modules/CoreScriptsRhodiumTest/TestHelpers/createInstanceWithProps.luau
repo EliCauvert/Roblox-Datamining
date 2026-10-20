@@ -2,7 +2,7 @@
 local RoactModule = require(CorePackages.Packages.Roact)
 local UIBloxModule = require(CorePackages.Packages.UIBlox)
 
-return function(p1, p2, Size) --[[ Line: 6 ]]
+return function(p1, p2, Size)
 	-- upvalues: RoactModule (copy), UIBloxModule (copy)
 	local ScreenGui = Instance.new("ScreenGui", game:GetService("CoreGui"))
 	local MountResult = RoactModule.mount(RoactModule.createFragment({
@@ -11,7 +11,7 @@ return function(p1, p2, Size) --[[ Line: 6 ]]
 		})
 	}), ScreenGui)
 	
-	return ScreenGui, function() --[[ Line: 32 ]]
+	return ScreenGui, function()
 		-- upvalues: RoactModule (upval), MountResult (copy), ScreenGui (copy)
 		RoactModule.unmount(MountResult)
 		ScreenGui:Destroy()

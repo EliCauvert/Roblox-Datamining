@@ -6,20 +6,20 @@ local UseSwipeLatencyModule = require(script.Parent.useSwipeLatency)
 local _ = require(Moments.Components.VerticalPager)
 local MediaPreloadProvider = require(Parent.MomentsCommon).Media.MediaPreloadProvider
 
-return function(p1) --[[ Line: 48 | Named "SwipeLatencyTracker" ]]
+return function(p1)
 	-- upvalues: MediaPreloadProvider (copy), ReactModule (copy), UseSwipeLatencyModule (copy)
 	local Pager = p1.pager
 	local UseMediaControllerProviderResult = MediaPreloadProvider.useMediaControllerProvider()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 54 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseMediaControllerProviderResult (copy)
-		return function(p2, p3) --[[ Line: 55 ]]
+		return function(p2, p3)
 			-- upvalues: UseMediaControllerProviderResult (upval)
 			return if UseMediaControllerProviderResult == nil then nil elseif p3 == nil or p3.kind ~= "moment" then nil else UseMediaControllerProviderResult.getControllerMap(p2)[p3.moment.momentId]
 		end
 	end, { UseMediaControllerProviderResult })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 78 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy)
-		return function(p2, p3): boolean --[[ Line: 79 ]]
+		return function(p2, p3): boolean
 			-- upvalues: UseMemoResult (upval)
 			local UseMemoResultResult = UseMemoResult(p2, p3)
 			
@@ -33,27 +33,27 @@ return function(p1) --[[ Line: 48 | Named "SwipeLatencyTracker" ]]
 		end
 	end, { UseMemoResult })
 	local UseSwipeLatencyModuleResult = UseSwipeLatencyModule({
-		getIsSettled = ReactModule.useMemo(function() --[[ Line: 121 ]]
+		getIsSettled = ReactModule.useMemo(function()
 			-- upvalues: p1 (copy)
-			return function(p2): boolean --[[ Line: 122 ]]
+			return function(p2): boolean
 				-- upvalues: p1 (upval)
 				local Current = p1.controllerRef.current
 				
 				return Current == nil or Current.getScrollState(p2) == "Idle"
 			end
 		end, { p1.controllerRef }),
-		getHasPresentedFrame = ReactModule.useMemo(function() --[[ Line: 94 ]]
+		getHasPresentedFrame = ReactModule.useMemo(function()
 			-- upvalues: UseMemoResult1 (copy), Pager (copy)
-			return function(p2) --[[ Line: 95 ]]
+			return function(p2)
 				-- upvalues: UseMemoResult1 (upval), Pager (upval)
 				return UseMemoResult1(p2, Pager.getCurrentItem(p2))
 			end
 		end, { Pager, UseMemoResult1 }),
-		getTargetHasPresentedFrame = ReactModule.useCallback(function(p2) --[[ Line: 100 ]]
+		getTargetHasPresentedFrame = ReactModule.useCallback(function(p2)
 			-- upvalues: UseMemoResult1 (copy)
 			return UseMemoResult1(false, p2)
 		end, { UseMemoResult1 }),
-		getCaptureType = ReactModule.useCallback(function(p2): string --[[ Line: 104 ]]
+		getCaptureType = ReactModule.useCallback(function(p2): string
 			if p2 == nil or p2.kind ~= "moment" then
 				return "unknown"
 			else
@@ -63,11 +63,11 @@ return function(p1) --[[ Line: 48 | Named "SwipeLatencyTracker" ]]
 			end
 		end, {})
 	})
-	ReactModule.useEffect(function() --[[ Line: 138 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseSwipeLatencyModuleResult (copy)
 		p1.onTargetCommittedRef.current = UseSwipeLatencyModuleResult
 		
-		return function() --[[ Line: 140 ]]
+		return function()
 			-- upvalues: p1 (upval), UseSwipeLatencyModuleResult (upval)
 			if p1.onTargetCommittedRef.current == UseSwipeLatencyModuleResult then
 				p1.onTargetCommittedRef.current = nil

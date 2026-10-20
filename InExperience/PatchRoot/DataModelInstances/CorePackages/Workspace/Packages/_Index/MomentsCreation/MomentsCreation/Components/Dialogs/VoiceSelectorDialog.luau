@@ -32,7 +32,7 @@ local EventMap = {
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-local function VoiceRow(Frame) --[[ Line: 79 ]]
+local function VoiceRow(Frame)
 	-- upvalues: ReactModule (copy), View (copy), Loading (copy), IconSize (copy), IconButton (copy), PlaySmall (copy), ButtonVariant (copy), InputSize (copy), Icon (copy), Speaker (copy), Text (copy)
 	local Id = Frame.voice.id
 	local OnAuditionFunction = Frame.onAudition
@@ -40,7 +40,7 @@ local function VoiceRow(Frame) --[[ Line: 79 ]]
 	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-medium size-full-0 auto-y padding-y-small radius-medium",
 		ref = Frame.focusRef,
-		onActivated = function() --[[ Line: 114 ]]
+		onActivated = function()
 			-- upvalues: Frame (copy), Id (copy)
 			Frame.onSelect(Id)
 		end,
@@ -77,7 +77,7 @@ local function VoiceRow(Frame) --[[ Line: 79 ]]
 			icon = PlaySmall,
 			variant = ButtonVariant.Standard,
 			size = InputSize.Small,
-			onActivated = function() --[[ Line: 103 ]]
+			onActivated = function()
 				-- upvalues: OnAuditionFunction (copy), Id (copy)
 				OnAuditionFunction(Id)
 			end,
@@ -86,7 +86,7 @@ local function VoiceRow(Frame) --[[ Line: 79 ]]
 	})
 end
 
-return function(p1) --[[ Line: 144 | Named "VoiceSelectorDialog" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseDefaultFocusBehaviorFunction (copy), UseLastInputModeFunction (copy), SignalsModule (copy), SignalsReactModule (copy), VoiceRow (copy), Sheet (copy), DialogSize (copy), SnapPoints (copy), Text (copy), View (copy)
 	local OnSelect = p1.onSelect
 	local OnAudition = p1.onAudition
@@ -97,11 +97,11 @@ return function(p1) --[[ Line: 144 | Named "VoiceSelectorDialog" ]]
 		shouldRestoreFocus = false,
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
 		eventMap = EventMap,
-		eventHandlers = ReactModule.useMemo(function() --[[ Line: 153 ]]
+		eventHandlers = ReactModule.useMemo(function()
 			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), OnCloseFunction (copy)
 			return {
 				[FocusNavigationEventNameEnum.NavigateBack] = {
-					handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 156 ]]
+					handler = InputHandlersModule.onRelease(function(p2)
 						-- upvalues: OnCloseFunction (upval)
 						OnCloseFunction()
 						p2:cancel()
@@ -111,7 +111,7 @@ return function(p1) --[[ Line: 144 | Named "VoiceSelectorDialog" ]]
 		end, { OnCloseFunction })
 	})))
 	local IsNotFocus = UseLastInputModeFunction() ~= "Focus"
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 175 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval)
 		return (SignalsModule.createSignal(nil))
 	end, {})

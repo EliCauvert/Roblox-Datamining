@@ -7,9 +7,9 @@ local FFlagAXMISWithBlackbird = require(Parent.SharedFlags).FFlagAXMISWithBlackb
 local FFlagAXDurables2Option = require(Parent.AvatarExperienceFlags).FFlagAXDurables2Option
 local _2OptionOfferPillTooltipTimeout = game:DefineFastInt("2OptionOfferPillTooltipTimeout", 5)
 
-return function(p1) --[[ Line: 19 | Named "useCheckoutRowItemCardViewModel" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FFlagAXMISWithBlackbird (copy), FFlagAXDurables2Option (copy), UseTimedOptionsFtuxModule (copy), _2OptionOfferPillTooltipTimeout (copy)
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 20 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 		-- upvalues: p1 (copy)
 		if p1.timedOptions then
 			for _, timedOption in p1.timedOptions do
@@ -20,7 +20,7 @@ return function(p1) --[[ Line: 19 | Named "useCheckoutRowItemCardViewModel" ]]
 		end
 		return nil
 	end)
-	ReactModule.useEffect(function() --[[ Line: 32 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult2 (copy), FFlagAXMISWithBlackbird (upval)
 		if p1.selectedTimedOptionIndexInReducer == nil then
 			if FFlagAXMISWithBlackbird and p1.timedOptions then
@@ -50,15 +50,15 @@ return function(p1) --[[ Line: 19 | Named "useCheckoutRowItemCardViewModel" ]]
 	if FFlagAXDurables2Option then
 		local UseTimedOptionsFtuxModuleResult = UseTimedOptionsFtuxModule()
 		v1, UseStateResult2_1 = ReactModule.useState(UseTimedOptionsFtuxModuleResult.shouldShow2OptionOfferPillTooltip())
-		ReactModule.useEffect(function() --[[ Line: 60 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: v1 (ref), _2OptionOfferPillTooltipTimeout (upval), UseStateResult2_1 (ref), UseTimedOptionsFtuxModuleResult (copy)
-			local DelayedThread = if v1 then task.delay(_2OptionOfferPillTooltipTimeout, function() --[[ Line: 62 ]]
+			local DelayedThread = if v1 then task.delay(_2OptionOfferPillTooltipTimeout, function()
 				-- upvalues: UseStateResult2_1 (upval), UseTimedOptionsFtuxModuleResult (upval)
 				UseStateResult2_1(false)
 				UseTimedOptionsFtuxModuleResult.hide2OptionOfferPillTooltip()
 			end) else nil
 			
-			return function() --[[ Line: 68 ]]
+			return function()
 				-- upvalues: DelayedThread (copy)
 				if DelayedThread then
 					task.cancel(DelayedThread)

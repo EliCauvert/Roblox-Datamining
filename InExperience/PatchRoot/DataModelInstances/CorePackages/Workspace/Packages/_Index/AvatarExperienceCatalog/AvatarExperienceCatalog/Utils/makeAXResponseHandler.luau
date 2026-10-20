@@ -6,13 +6,13 @@ local AnalyticsService = AvatarExperienceAnalyticsModule.AnalyticsService
 local _ = require(Parent.LuauPolyfill)
 local FFlagAXSendModelMismatchCounterModule = require(AvatarExperienceCatalog.Flags.FFlagAXSendModelMismatchCounter)
 
-return function(Promise, Callback, p1) --[[ Line: 11 | Named "makeAXResponseHandler" ]]
+return function(Promise, Callback, p1)
 	-- upvalues: SendAXStatFunction (copy), FFlagAXSendModelMismatchCounterModule (copy), AnalyticsService (copy)
 	local LatencyCounter = if p1 then p1.latencyCounter else nil
 	local ModelMismatchCounter = if p1 then p1.modelMismatchCounter else nil
 	local ClockTime = if LatencyCounter then os.clock() else nil
 	
-	return (Promise:andThen(function(Result) --[[ Line: 23 ]]
+	return (Promise:andThen(function(Result)
 		-- upvalues: LatencyCounter (copy), ClockTime (copy), SendAXStatFunction (upval), Callback (copy), FFlagAXSendModelMismatchCounterModule (upval), ModelMismatchCounter (copy), AnalyticsService (upval)
 		if LatencyCounter and ClockTime then
 			SendAXStatFunction({

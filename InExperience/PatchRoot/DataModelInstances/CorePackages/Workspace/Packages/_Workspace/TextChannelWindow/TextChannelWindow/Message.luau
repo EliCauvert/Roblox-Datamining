@@ -4,7 +4,7 @@ local HttpService = game:GetService("HttpService")
 local GetFFlagExpChatProtectedChatInternalAPIsFunction = require(Parent.SharedFlags).getFFlagExpChatProtectedChatInternalAPIs
 local GetTextAndTranslationModule = require(script.Parent.getTextAndTranslation)
 
-local function createUserMessage(UserMessage) --[[ Line: 88 ]]
+local function createUserMessage(UserMessage)
 	return {
 		messageType = "user",
 		messageId = UserMessage.messageId,
@@ -23,7 +23,7 @@ local function createUserMessage(UserMessage) --[[ Line: 88 ]]
 end
 
 return {
-	createSystemMessage = function(Content, p1) --[[ Line: 38 ]]
+	createSystemMessage = function(Content, p1)
 		-- upvalues: HttpService (copy)
 		return {
 			messageType = "system-roblox",
@@ -32,7 +32,7 @@ return {
 			timestamp = DateTime.now()
 		}
 	end,
-	createExperienceSystemMessage = function(Content, p1, IconName) --[[ Line: 47 ]]
+	createExperienceSystemMessage = function(Content, p1, IconName)
 		-- upvalues: HttpService (copy)
 		return {
 			messageType = "system-experience",
@@ -42,7 +42,7 @@ return {
 			timestamp = DateTime.now()
 		}
 	end,
-	createSystemMessageFromTextChatMessage = function(TextChatMessageInstance) --[[ Line: 63 ]]
+	createSystemMessageFromTextChatMessage = function(TextChatMessageInstance)
 		-- upvalues: GetFFlagExpChatProtectedChatInternalAPIsFunction (copy)
 		return {
 			messageType = "system-roblox",
@@ -53,7 +53,7 @@ return {
 		}
 	end,
 	createUserMessage = createUserMessage,
-	createUserMessageFromTextChatMessage = function(TextChatMessageInstance, p1) --[[ Line: 106 ]]
+	createUserMessageFromTextChatMessage = function(TextChatMessageInstance, p1)
 		-- upvalues: GetTextAndTranslationModule (copy), createUserMessage (copy), GetFFlagExpChatProtectedChatInternalAPIsFunction (copy)
 		local TextSource = TextChatMessageInstance.TextSource
 		local TextAndTranslationModule, TextAndTranslationModule2 = GetTextAndTranslationModule(TextChatMessageInstance)

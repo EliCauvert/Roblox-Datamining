@@ -7,15 +7,15 @@ local PlaceInfoModel = require(Parent.PlaceInfoRodux).Models.PlaceInfoModel
 local ReceivedPlacesInfosFunction = require(Parent.PlaceInfoRodux).Actions.ReceivedPlacesInfos
 local ConvertUniverseIdToStringFunction = require(Parent.SharedFlags).ConvertUniverseIdToString
 
-return function(p1, p2) --[[ Line: 12 ]]
+return function(p1, p2)
 	-- upvalues: GamesMultigetPlaceDetailsModule (copy), Functional (copy), PlaceInfoModel (copy), ConvertUniverseIdToStringFunction (copy), ReceivedPlacesInfosFunction (copy), DataHydrationModule (copy)
-	return function(p3) --[[ Line: 13 ]]
+	return function(p3)
 		-- upvalues: p2 (copy), GamesMultigetPlaceDetailsModule (upval), p1 (copy), Functional (upval), PlaceInfoModel (upval), ConvertUniverseIdToStringFunction (upval), ReceivedPlacesInfosFunction (upval), DataHydrationModule (upval)
 		if not p2 or #p2 == 0 then return end
-		return GamesMultigetPlaceDetailsModule(p1, p2):andThen(function(Result) --[[ Line: 18 ]]
+		return GamesMultigetPlaceDetailsModule(p1, p2):andThen(function(Result)
 			-- upvalues: Functional (upval), PlaceInfoModel (upval), ConvertUniverseIdToStringFunction (upval), p3 (copy), ReceivedPlacesInfosFunction (upval), DataHydrationModule (upval)
 			local List = {}
-			local MapResult = Functional.Map(Result.responseBody, function(p4) --[[ Line: 22 ]]
+			local MapResult = Functional.Map(Result.responseBody, function(p4)
 				-- upvalues: PlaceInfoModel (upval), ConvertUniverseIdToStringFunction (upval), List (copy)
 				local FromWebResult = PlaceInfoModel.fromWeb(p4)
 				table.insert(List, (ConvertUniverseIdToStringFunction(FromWebResult.universeId)))

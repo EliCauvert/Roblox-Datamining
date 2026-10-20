@@ -6,7 +6,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local EmptyState = require(Parent.UIBlox).App.Indicator.EmptyState
 local TextKeysModule = require(AvatarExperienceProfilePictureEditor.Common.TextKeys)
 
-return function(p1) --[[ Line: 24 | Named "AssetPickerErrorBody" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), View (copy), EmptyState (copy)
 	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y padding-bottom-xxlarge",

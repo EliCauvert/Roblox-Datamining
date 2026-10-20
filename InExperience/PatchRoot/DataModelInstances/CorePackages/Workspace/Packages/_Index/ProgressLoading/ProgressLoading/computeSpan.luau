@@ -1,4 +1,4 @@
-﻿return function(p1, p2, p3, p4, p5): number --[[ Line: 1 | Named "computeSpan" ]]
+﻿return function(p1, p2, p3, p4, p5): number
 	local P4 = p5 or 0
 	local Smallest = p1 - p3 * p2 * 2
 	

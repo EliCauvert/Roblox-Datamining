@@ -7,7 +7,7 @@ local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext
 local _ = require(Foundation.Components.Types)
 local FlagsModule = require(Foundation.Utility.Flags)
 
-local function variantsFactory(p1) --[[ Line: 38 ]]
+local function variantsFactory(p1)
 	-- upvalues: SliderVariantModule (copy), FlagsModule (copy), InputSizeModule (copy)
 	return {
 		common = {
@@ -80,7 +80,7 @@ local function variantsFactory(p1) --[[ Line: 38 ]]
 	}
 end
 
-return function(p1, p2, p3, p4) --[[ Line: 134 ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), FlagsModule (copy), ComposeStyleVariantModule (copy)
 	local Slider = VariantsContextModule.useVariants("Slider", variantsFactory, p1)
 	

@@ -12,9 +12,9 @@ local config = {
 	layoutOrder = -1
 }
 
-local function CancelCallback() --[[ Line: 32 ]] end
+local function CancelCallback() end
 
-return function(p1) --[[ Line: 34 ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseLocalizationFunction (copy), ReactModule (copy), SearchTopBarModule (copy), CancelCallback (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseLocalizationResult = UseLocalizationFunction({

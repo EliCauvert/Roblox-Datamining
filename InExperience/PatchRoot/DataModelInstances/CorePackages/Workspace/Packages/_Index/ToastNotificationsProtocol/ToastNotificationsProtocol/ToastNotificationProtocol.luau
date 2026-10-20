@@ -8,12 +8,12 @@ local ToastNotificationProtocolModule = {}
 ToastNotificationProtocolModule.__index = ToastNotificationProtocolModule
 game:DefineFastFlag("LuaAppInitializeToastNotificationEventParams2", false)
 
-function ToastNotificationProtocolModule.new() --[[ Line: 18 ]]
+function ToastNotificationProtocolModule.new()
 	-- upvalues: ToastNotificationProtocolModule (copy)
 	return (setmetatable({}, ToastNotificationProtocolModule))
 end
 
-function ToastNotificationProtocolModule:setupNotifications(Channels) --[[ Line: 23 ]]
+function ToastNotificationProtocolModule:setupNotifications(Channels)
 	-- upvalues: GetPlatformTargetFunction (copy), Players (copy), MessageBusService (copy), ToastNotificationProtocolConstantsModule (copy)
 	if #Channels > 0 then
 		local UserId: string? = nil
@@ -31,33 +31,33 @@ function ToastNotificationProtocolModule:setupNotifications(Channels) --[[ Line:
 	end
 end
 
-function ToastNotificationProtocolModule:updateNotification(NotificationId, StateName) --[[ Line: 39 ]]
+function ToastNotificationProtocolModule:updateNotification(NotificationId, StateName)
 	-- upvalues: MessageBusService (copy), ToastNotificationProtocolConstantsModule (copy)
 	if NotificationId and StateName then
 		MessageBusService:Publish(ToastNotificationProtocolConstantsModule.MESSAGE_UPDATE_TOAST_NOTIF, { notificationId = NotificationId, stateName = StateName })
 	end
 end
 
-function ToastNotificationProtocolModule:voltronBroadcast(Mid, p1) --[[ Line: 48 ]]
+function ToastNotificationProtocolModule:voltronBroadcast(Mid, p1)
 	-- upvalues: MessageBusService (copy)
 	if Mid then
 		MessageBusService:Publish(Mid, p1)
 	end
 end
 
-function ToastNotificationProtocolModule:dismissNotification(NotificationId) --[[ Line: 54 ]]
+function ToastNotificationProtocolModule:dismissNotification(NotificationId)
 	-- upvalues: MessageBusService (copy), ToastNotificationProtocolConstantsModule (copy)
 	if NotificationId then
 		MessageBusService:Publish(ToastNotificationProtocolConstantsModule.MESSAGE_DISMISS_TOAST_NOTIF, { notificationId = NotificationId })
 	end
 end
 
-function ToastNotificationProtocolModule:listenToDisplayNotification(Callback) --[[ Line: 62 ]]
+function ToastNotificationProtocolModule:listenToDisplayNotification(Callback)
 	-- upvalues: MessageBusService (copy), ToastNotificationProtocolConstantsModule (copy)
 	return MessageBusService:Subscribe(ToastNotificationProtocolConstantsModule.MESSAGE_DISPLAY_TOAST_NOTIF, Callback, false, true)
 end
 
-function ToastNotificationProtocolModule:listenToDismissNotification(Callback) --[[ Line: 66 ]]
+function ToastNotificationProtocolModule:listenToDismissNotification(Callback)
 	-- upvalues: MessageBusService (copy), ToastNotificationProtocolConstantsModule (copy)
 	return MessageBusService:Subscribe(ToastNotificationProtocolConstantsModule.MESSAGE_DISMISS_TOAST_NOTIF, Callback, false, true)
 end

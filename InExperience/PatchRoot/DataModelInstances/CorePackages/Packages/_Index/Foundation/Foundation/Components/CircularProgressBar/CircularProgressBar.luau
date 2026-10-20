@@ -8,7 +8,7 @@ local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local config = { testId = "--foundation-circular-progress-bar" }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 22 | Named "CircularProgressBar" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ImageModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
@@ -39,7 +39,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 22 |
 				Gradient = ReactModule.createElement("UIGradient", {
 					Transparency = NumberSequence1,
 					Color = ColorSequence1,
-					Rotation = WithDefaultsModuleResult.progress:map(function(p2: number): number --[[ Line: 60 ]]
+					Rotation = WithDefaultsModuleResult.progress:map(function(p2: number): number
 						return (math.clamp(p2 * 360, 180, 360))
 					end)
 				})
@@ -59,7 +59,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 22 |
 				Gradient = ReactModule.createElement("UIGradient", {
 					Transparency = NumberSequence1,
 					Color = ColorSequence1,
-					Rotation = WithDefaultsModuleResult.progress:map(function(p2: number): number --[[ Line: 80 ]]
+					Rotation = WithDefaultsModuleResult.progress:map(function(p2: number): number
 						return (math.clamp(p2 * 360, 0, 180))
 					end)
 				})

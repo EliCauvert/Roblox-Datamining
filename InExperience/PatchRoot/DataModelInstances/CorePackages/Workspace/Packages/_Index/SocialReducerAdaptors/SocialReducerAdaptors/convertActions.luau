@@ -1,8 +1,8 @@
 ﻿local Llama = require(script:FindFirstAncestor("SocialReducerAdaptors").dependencies).llama
 
-return function(p1, p2, p3) --[[ Line: 14 ]]
+return function(p1, p2, p3)
 	-- upvalues: Llama (copy)
-	return function(p4, p5) --[[ Line: 15 ]]
+	return function(p4, p5)
 		-- upvalues: p3 (copy), p2 (copy), Llama (upval), p1 (copy)
 		local P3 = p4 or p3
 		local list = { p5 }

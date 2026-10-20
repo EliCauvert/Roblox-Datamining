@@ -17,7 +17,7 @@ local MultiTextLocalizerModule = require(Parent1.Locale.MultiTextLocalizer)
 local BulletPointModule = require(Parent.BulletPoint)
 local ExtendResult = RoactModule.Component:extend(script.Name)
 
-function ExtendResult.init(p1) --[[ Line: 50 ]]
+function ExtendResult.init(p1)
 	p1.isCondensed = false
 	p1.contentSize = Vector2.new(0, 0)
 	p1.state = {
@@ -25,7 +25,7 @@ function ExtendResult.init(p1) --[[ Line: 50 ]]
 		iconSize = UDim2.new(1, 0, 0, 80)
 	}
 	
-	function p1.updateContentSizes(ScreenSize, ContentSize) --[[ Line: 59 ]]
+	function p1.updateContentSizes(ScreenSize, ContentSize)
 		-- upvalues: p1 (copy)
 		if ContentSize.X < 200 or ContentSize.Y > 1000 then return end
 		local ContentSize1 = p1.contentSize
@@ -46,13 +46,13 @@ function ExtendResult.init(p1) --[[ Line: 50 ]]
 	end
 end
 
-function ExtendResult.willUpdate(p1, p2) --[[ Line: 101 ]]
+function ExtendResult.willUpdate(p1, p2)
 	if p1.props.screenSize ~= p2.screenSize then
 		p1.updateContentSizes(p2.screenSize, p1.contentSize)
 	end
 end
 
-function ExtendResult.render(p1) --[[ Line: 107 ]]
+function ExtendResult.render(p1)
 	-- upvalues: RoactModule (copy), MultiTextLocalizerModule (copy)
 	local Props = p1.props
 	
@@ -95,16 +95,16 @@ function ExtendResult.render(p1) --[[ Line: 107 ]]
 			headerLocalizedText = { key = "IAPExperience.PremiumUpsell.Label.RobloxPremium" },
 			policyLocalizedText = { key = "IAPExperience.PremiumUpsell.Label.PremiumPolicy" }
 		},
-		render = function(p2) --[[ Line: 161 ]]
+		render = function(p2)
 			-- upvalues: p1 (copy)
 			return p1:renderPrompt(p2)
 		end
 	})
 end
 
-function ExtendResult:renderCondensedPremiumInfo(p1) --[[ Line: 167 ]]
+function ExtendResult:renderCondensedPremiumInfo(p1)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy), ImageSetLabel (copy), Images (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 168 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: RoactModule (upval), ImageSetLabel (upval), Images (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), p1 (copy)
 		local Theme = p2.Theme
 		local _Font = p2.Font
@@ -200,9 +200,9 @@ function ExtendResult:renderCondensedPremiumInfo(p1) --[[ Line: 167 ]]
 	end)
 end
 
-function ExtendResult.renderBulletInfo(p1, p2) --[[ Line: 273 ]]
+function ExtendResult.renderBulletInfo(p1, p2)
 	-- upvalues: WithStyleFunction (copy), GetPartialPageModalMiddleContentWidthFunction (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), FitFrameVertical (copy), BulletPointModule (copy)
-	return WithStyleFunction(function(p3) --[[ Line: 274 ]]
+	return WithStyleFunction(function(p3)
 		-- upvalues: GetPartialPageModalMiddleContentWidthFunction (upval), p1 (copy), RoactModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), p2 (copy), FitFrameVertical (upval), BulletPointModule (upval)
 		local Theme = p3.Theme
 		local _Font = p3.Font
@@ -259,9 +259,9 @@ function ExtendResult.renderBulletInfo(p1, p2) --[[ Line: 273 ]]
 	end)
 end
 
-function ExtendResult:renderDisclosure(p1) --[[ Line: 336 ]]
+function ExtendResult:renderDisclosure(p1)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 337 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: RoactModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), p1 (copy)
 		local Theme = p2.Theme
 		local _Font = p2.Font
@@ -291,11 +291,11 @@ function ExtendResult:renderDisclosure(p1) --[[ Line: 336 ]]
 	end)
 end
 
-function ExtendResult.renderLandscapePrompt(p1, p2) --[[ Line: 370 ]]
+function ExtendResult.renderLandscapePrompt(p1, p2)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy), PartialPageModal (copy), ButtonType (copy)
 	local Props = p1.props
 	
-	return WithStyleFunction(function(_) --[[ Line: 373 ]]
+	return WithStyleFunction(function(_)
 		-- upvalues: RoactModule (upval), PartialPageModal (upval), p2 (copy), Props (copy), ButtonType (upval), p1 (copy)
 		return RoactModule.createElement(PartialPageModal, {
 			title = p2.titleLocalizedText,
@@ -339,11 +339,11 @@ function ExtendResult.renderLandscapePrompt(p1, p2) --[[ Line: 370 ]]
 	end)
 end
 
-function ExtendResult.renderPortraitPrompt(p1, p2) --[[ Line: 421 ]]
+function ExtendResult.renderPortraitPrompt(p1, p2)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy), PartialPageModal (copy), ButtonType (copy)
 	local Props = p1.props
 	
-	return WithStyleFunction(function(_) --[[ Line: 424 ]]
+	return WithStyleFunction(function(_)
 		-- upvalues: RoactModule (upval), PartialPageModal (upval), p2 (copy), Props (copy), ButtonType (upval), p1 (copy)
 		return RoactModule.createElement(PartialPageModal, {
 			title = p2.titleLocalizedText,
@@ -381,11 +381,11 @@ function ExtendResult.renderPortraitPrompt(p1, p2) --[[ Line: 421 ]]
 	end)
 end
 
-function ExtendResult.renderUpdatedPrompt(p1, p2) --[[ Line: 461 ]]
+function ExtendResult.renderUpdatedPrompt(p1, p2)
 	-- upvalues: WithStyleFunction (copy), GetPartialPageModalMiddleContentWidthFunction (copy), RoactModule (copy), PartialPageModal (copy), ButtonType (copy), FitFrameVertical (copy), ImageSetLabel (copy), Images (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), BulletPointModule (copy)
 	local Props = p1.props
 	
-	return WithStyleFunction(function(p3) --[[ Line: 464 ]]
+	return WithStyleFunction(function(p3)
 		-- upvalues: GetPartialPageModalMiddleContentWidthFunction (upval), p1 (copy), RoactModule (upval), PartialPageModal (upval), p2 (copy), Props (copy), ButtonType (upval), FitFrameVertical (upval), ImageSetLabel (upval), Images (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), BulletPointModule (upval)
 		local Theme = p3.Theme
 		local _Font = p3.Font
@@ -414,7 +414,7 @@ function ExtendResult.renderUpdatedPrompt(p1, p2) --[[ Line: 461 ]]
 				width = UDim.new(1, 0),
 				contentPadding = UDim.new(0, 12),
 				margin = { top = 12, bottom = 12 },
-				[RoactModule.Change.AbsoluteSize] = function(Frame: Frame) --[[ Line: 497 ]]
+				[RoactModule.Change.AbsoluteSize] = function(Frame: Frame)
 					-- upvalues: p1 (upval)
 					if p1.contentSize.X ~= Frame.AbsoluteSize.X or p1.contentSize.Y ~= Frame.AbsoluteSize.Y then
 						p1.updateContentSizes(p1.props.screenSize, Frame.AbsoluteSize)
@@ -523,7 +523,7 @@ function ExtendResult.renderUpdatedPrompt(p1, p2) --[[ Line: 461 ]]
 	end)
 end
 
-function ExtendResult.renderPrompt(p1, p2) --[[ Line: 615 ]]
+function ExtendResult.renderPrompt(p1, p2)
 	local Props = p1.props
 	
 	return if Props.screenSize.Y < 450 then p1:renderLandscapePrompt(p2) elseif Props.screenSize.X < 450 then p1:renderPortraitPrompt(p2) else p1:renderUpdatedPrompt(p2)

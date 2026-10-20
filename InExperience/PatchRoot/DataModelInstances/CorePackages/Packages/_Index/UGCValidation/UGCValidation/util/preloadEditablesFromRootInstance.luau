@@ -9,7 +9,7 @@ local config1 = {
 	EmissiveMask = true
 }
 
-return function(Object) --[[ Line: 17 | Named "preloadEditablesFromRootInstance" ]]
+return function(Object)
 	-- upvalues: config (copy), UGCValidationService (copy), config1 (copy)
 	local EditableMeshFromBinaryStringRobloxOnlies = {}
 	local EditableImageFromBinaryStringRobloxOnlies = {}

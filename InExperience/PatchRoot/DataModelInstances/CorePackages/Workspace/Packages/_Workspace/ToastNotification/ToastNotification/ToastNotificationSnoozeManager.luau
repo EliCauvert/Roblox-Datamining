@@ -12,7 +12,7 @@ local LocalStorageKey = DependenciesModule.LocalStorage.Enums.LocalStorageKey
 local ToastNotificationSnoozeManager = {}
 ToastNotificationSnoozeManager.__index = ToastNotificationSnoozeManager
 
-function ToastNotificationSnoozeManager:_batchNotificationAction(p1, Mute) --[[ Line: 31 ]]
+function ToastNotificationSnoozeManager:_batchNotificationAction(p1, Mute)
 	-- upvalues: TypeModule (copy), NotificationSnoozedSignal (copy)
 	local NotificationType = if type(p1.notificationType) == "table" then p1.notificationType else { p1.notificationType }
 	for _, value in ipairs(NotificationType) do
@@ -46,11 +46,11 @@ function ToastNotificationSnoozeManager:_batchNotificationAction(p1, Mute) --[[ 
 	end
 end
 
-function ToastNotificationSnoozeManager:_isExpiredSnooze(): boolean --[[ Line: 90 ]]
+function ToastNotificationSnoozeManager:_isExpiredSnooze(): boolean
 	return self.durationMinutes ~= -1 and self.durationMinutes * 60 <= (DateTime.now().UnixTimestampMillis - self.snoozedTimestampMs) / 1000
 end
 
-function ToastNotificationSnoozeManager:_showNotificationsModal(ToastTitle) --[[ Line: 104 ]]
+function ToastNotificationSnoozeManager:_showNotificationsModal(ToastTitle)
 	-- upvalues: NotificationModalsManager (copy), Images (copy)
 	NotificationModalsManager.SetUIBloxToast({
 		iconImage = Images["icons/common/notificationOn"],
@@ -58,23 +58,23 @@ function ToastNotificationSnoozeManager:_showNotificationsModal(ToastTitle) --[[
 	})
 end
 
-function ToastNotificationSnoozeManager:_updateAppStorage() --[[ Line: 121 ]]
+function ToastNotificationSnoozeManager:_updateAppStorage()
 	-- upvalues: LocalStorageKey (copy), HttpService (copy)
 	self._appStorageService:SetItem(LocalStorageKey.SnoozedNotificationTypesLocalStorageKey, HttpService:JSONEncode(self.snoozedNotificationTypes))
 	self._appStorageService:Flush()
 end
 
-function ToastNotificationSnoozeManager:unmuteNotification(p2) --[[ Line: 138 ]]
+function ToastNotificationSnoozeManager:unmuteNotification(p2)
 	-- upvalues: TypeModule (copy)
 	self:_batchNotificationAction(p2, TypeModule.SnoozeActionEnum.Unmute)
 end
 
-function ToastNotificationSnoozeManager:snoozeNotification(p2) --[[ Line: 156 ]]
+function ToastNotificationSnoozeManager:snoozeNotification(p2)
 	-- upvalues: TypeModule (copy)
 	self:_batchNotificationAction(p2, TypeModule.SnoozeActionEnum.Mute)
 end
 
-function ToastNotificationSnoozeManager:isSnoozedNotificationType(p2): boolean --[[ Line: 173 ]]
+function ToastNotificationSnoozeManager:isSnoozedNotificationType(p2): boolean
 	-- upvalues: Cryo (copy)
 	if not self.snoozedNotificationTypes[p2] then
 		return false
@@ -88,7 +88,7 @@ function ToastNotificationSnoozeManager:isSnoozedNotificationType(p2): boolean -
 	end
 end
 
-function ToastNotificationSnoozeManager.new(_appStorageService) --[[ Line: 191 ]]
+function ToastNotificationSnoozeManager.new(_appStorageService)
 	-- upvalues: AnalyticsServiceModule (copy), ToastNotificationSnoozeManager (copy), LocalStorageKey (copy), HttpService (copy)
 	local config = {
 		_appStorageService = _appStorageService,
@@ -99,13 +99,13 @@ function ToastNotificationSnoozeManager.new(_appStorageService) --[[ Line: 191 ]
 	local t = {}
 	local SnoozedNotificationTypes = {}
 	local Flag = false
-	local Success, Result = pcall(function() --[[ Line: 204 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: config (copy), LocalStorageKey (upval)
 		return config._appStorageService:GetItem(LocalStorageKey.SnoozedNotificationTypesLocalStorageKey)
 	end)
 	
 	if Success and Result ~= "" then
-		local Success1, Result1 = pcall(function() --[[ Line: 209 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: HttpService (upval), Result (copy)
 			return HttpService:JSONDecode(Result)
 		end)

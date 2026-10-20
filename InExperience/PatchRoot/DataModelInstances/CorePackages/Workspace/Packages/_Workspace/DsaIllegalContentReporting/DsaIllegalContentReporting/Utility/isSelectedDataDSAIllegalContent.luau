@@ -1,6 +1,6 @@
 ﻿local ConstantsModule = require(script:FindFirstAncestor("DsaIllegalContentReporting").Utility.Constants)
 
-return function(p1): boolean --[[ Line: 6 | Named "isSelectedDataDSAIllegalContent" ]]
+return function(p1): boolean
 	-- upvalues: ConstantsModule (copy)
 	if p1 == nil then
 		return false

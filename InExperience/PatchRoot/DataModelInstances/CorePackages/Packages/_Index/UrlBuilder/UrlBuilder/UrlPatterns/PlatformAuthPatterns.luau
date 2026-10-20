@@ -1,22 +1,22 @@
-﻿return function(p1) --[[ Line: 1 ]]
+﻿return function(p1)
 	return {
-		account = function(Text) --[[ Line: 4 ]]
+		account = function(Text)
 			-- upvalues: p1 (copy)
 			return p1.fromString("auth:v1/" .. Text .. "/account")
 		end,
-		connect = function(Text) --[[ Line: 8 ]]
+		connect = function(Text)
 			-- upvalues: p1 (copy)
 			return p1.fromString("auth:v1/" .. Text .. "/connect")
 		end,
-		disconnect = function(Text) --[[ Line: 12 ]]
+		disconnect = function(Text)
 			-- upvalues: p1 (copy)
 			return p1.fromString("auth:v1/" .. Text .. "/disconnect")
 		end,
-		login = function(Text) --[[ Line: 16 ]]
+		login = function(Text)
 			-- upvalues: p1 (copy)
 			return p1.fromString("auth:v1/" .. Text .. "/login")
 		end,
-		signup = function(Text) --[[ Line: 20 ]]
+		signup = function(Text)
 			-- upvalues: p1 (copy)
 			return p1.fromString("auth:v1/" .. Text .. "/signup")
 		end

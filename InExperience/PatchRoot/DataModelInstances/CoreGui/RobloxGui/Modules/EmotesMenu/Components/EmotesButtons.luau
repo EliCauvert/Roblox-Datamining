@@ -10,14 +10,14 @@ local HideMenuModule = require(Actions.HideMenu)
 local PlayEmoteModule = require(Parent.Thunks.PlayEmote)
 local EmotesButtons = RoactModule.PureComponent:extend("EmotesButtons")
 
-local function _(Frame, Offset): boolean --[[ Line: 24 | Named "positionInsideOuterCircle" ]]
+local function _(Frame, Offset): boolean
 	-- upvalues: ConstantsModule (copy)
 	local XRatio = Frame.AbsoluteSize.X / 2
 	
 	return XRatio * ConstantsModule.InnerCircleSizeRatio < Offset.Magnitude and Offset.Magnitude < XRatio
 end
 
-local function getSegmentFromInput(Frame: Frame, Input) --[[ Line: 31 ]]
+local function getSegmentFromInput(Frame: Frame, Input)
 	-- upvalues: ConstantsModule (copy), GetSegmentFromPositionModule (copy)
 	local VectorDelta = Vector2.new(Input.Position.X, Input.Position.Y) - Frame.AbsolutePosition - Frame.AbsoluteSize / 2
 	local _Vector2 = Vector2.new(VectorDelta.X, -VectorDelta.Y)
@@ -27,17 +27,17 @@ local function getSegmentFromInput(Frame: Frame, Input) --[[ Line: 31 ]]
 	return if IsXRatioAbove then GetSegmentFromPositionModule(_Vector2) else 0
 end
 
-local _ = function(p1) --[[ Line: 47 | Named "getRandomAssetId" ]]
+local _ = function(p1)
 	if #p1 == 0 then return end
 	return p1[math.random(1, #p1)]
 end
 
-local _ = function(p1) --[[ Line: 56 | Named "getEmoteImage" ]]
+local _ = function(p1)
 	-- upvalues: ConstantsModule (copy)
 	return ConstantsModule.EmotesImage:format(p1)
 end
 
-function EmotesButtons.render(p1) --[[ Line: 60 ]]
+function EmotesButtons.render(p1)
 	-- upvalues: ConstantsModule (copy), RoactModule (copy), getSegmentFromInput (copy)
 	local EmotesInfo = p1.props.emotesPage.emotesInfo
 	local ImageLabels = {}
@@ -74,7 +74,7 @@ function EmotesButtons.render(p1) --[[ Line: 60 ]]
 		Position = UDim2.new(0.5, 0, 0.5, 0),
 		BackgroundTransparency = 1,
 		Text = "",
-		[RoactModule.Event.InputChanged] = function(Frame, Input) --[[ Line: 117 ]]
+		[RoactModule.Event.InputChanged] = function(Frame, Input)
 			-- upvalues: getSegmentFromInput (upval), p1 (copy)
 			local UserInputType = Input.UserInputType
 			
@@ -90,7 +90,7 @@ function EmotesButtons.render(p1) --[[ Line: 60 ]]
 				p1.props.focusSegment(0)
 			end
 		end,
-		[RoactModule.Event.Activated] = function(Frame, p2) --[[ Line: 135 ]]
+		[RoactModule.Event.Activated] = function(Frame, p2)
 			-- upvalues: getSegmentFromInput (upval), p1 (copy)
 			local SegmentFromInput = getSegmentFromInput(Frame, p2)
 			
@@ -110,31 +110,31 @@ function EmotesButtons.render(p1) --[[ Line: 60 ]]
 				return
 			end
 		end,
-		[RoactModule.Event.MouseLeave] = function() --[[ Line: 156 ]]
+		[RoactModule.Event.MouseLeave] = function()
 			-- upvalues: p1 (copy)
 			p1.props.focusSegment(0)
 		end
 	}, ImageLabels)
 end
 
-return RoactRoduxModule.connect(function(p2) --[[ Line: 162 | Named "mapStateToProps" ]]
+return RoactRoduxModule.connect(function(p2)
 	return {
 		displayOptions = p2.displayOptions,
 		emotesPage = p2.emotesPage,
 		emotesWheel = p2.emotesWheel
 	}
-end, function(Callback) --[[ Line: 170 | Named "mapDispatchToProps" ]]
+end, function(Callback)
 	-- upvalues: PlayEmoteModule (copy), FocusSegmentModule (copy), HideMenuModule (copy)
 	return {
-		playEmote = function(p2, p3, p4) --[[ Line: 172 ]]
+		playEmote = function(p2, p3, p4)
 			-- upvalues: Callback (copy), PlayEmoteModule (upval)
 			return Callback(PlayEmoteModule(p2, p3, p4))
 		end,
-		focusSegment = function(p2) --[[ Line: 176 ]]
+		focusSegment = function(p2)
 			-- upvalues: Callback (copy), FocusSegmentModule (upval)
 			return Callback(FocusSegmentModule(p2))
 		end,
-		hideMenu = function() --[[ Line: 180 ]]
+		hideMenu = function()
 			-- upvalues: Callback (copy), HideMenuModule (upval)
 			return Callback(HideMenuModule())
 		end

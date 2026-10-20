@@ -3,7 +3,7 @@ local FFlagPurchasePromptFetchCartPricingForLooks = require(script:FindFirstAnce
 local AXAllowFreeItemsFromOffer = game:DefineFastFlag("AXAllowFreeItemsFromOffer", false)
 local _ = require(script.Parent.Parent.PricingTypes)
 
-return function(p1) --[[ Line: 45 | Named "deriveCartPricingView" ]]
+return function(p1)
 	-- upvalues: CartPricingResponseLineItemModule (copy), AXAllowFreeItemsFromOffer (copy), FFlagPurchasePromptFetchCartPricingForLooks (copy)
 	if type(p1) ~= "table" then
 		return nil

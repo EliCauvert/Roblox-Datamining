@@ -7,16 +7,16 @@ local RetrievalStatus = require(Http.Enum).RetrievalStatus
 local BatchUpdateFetchingStatusFunction = require(Http.Actions).BatchUpdateFetchingStatus
 local NewResults = {}
 
-local function singleFetchKeymapper(p1) --[[ Line: 41 ]]
+local function singleFetchKeymapper(p1)
 	return p1
 end
 
 local PerformFetchModule = {
-	ClearOutstandingPromiseStatus = function() --[[ Line: 37 ]]
+	ClearOutstandingPromiseStatus = function()
 		-- upvalues: NewResults (ref)
 		NewResults = {}
 	end,
-	GetStatus = function(p1, p2) --[[ Line: 50 ]]
+	GetStatus = function(p1, p2)
 		-- upvalues: RetrievalStatus (copy)
 		assert(typeof(p1) == "table")
 		assert(typeof(p2) == "string")
@@ -26,32 +26,32 @@ local PerformFetchModule = {
 	end
 }
 
-function PerformFetchModule.Single(p1, Callback) --[[ Line: 81 ]]
+function PerformFetchModule.Single(p1, Callback)
 	-- upvalues: PerformFetchModule (copy), singleFetchKeymapper (copy), PromiseModule (copy), ResultModule (copy)
 	assert(typeof(p1) == "string")
 	assert(typeof(Callback) == "function")
 	assert(#p1 > 0)
 	
-	return function(p2) --[[ Line: 86 ]]
+	return function(p2)
 		-- upvalues: PerformFetchModule (upval), p1 (copy), singleFetchKeymapper (upval), Callback (copy), PromiseModule (upval), ResultModule (upval)
-		return PerformFetchModule.Batch({ p1 }, singleFetchKeymapper, function(p3, p4) --[[ Line: 88 ]]
+		return PerformFetchModule.Batch({ p1 }, singleFetchKeymapper, function(p3, p4)
 			-- upvalues: Callback (upval), PromiseModule (upval), p1 (upval), ResultModule (upval)
 			assert(#p4 == 1)
 			local CallbackResult = Callback(p3)
 			assert(PromiseModule.is(CallbackResult))
 			
-			return CallbackResult:andThen(function(...) --[[ Line: 94 ]]
+			return CallbackResult:andThen(function(...)
 				-- upvalues: PromiseModule (upval), p1 (upval), ResultModule (upval)
 				assert(#{ ... } <= 1)
 				
 				return PromiseModule.resolve({ [p1] = ResultModule.new(true, (...)) })
-			end, function(...) --[[ Line: 97 ]]
+			end, function(...)
 				-- upvalues: PromiseModule (upval), p1 (upval), ResultModule (upval)
 				assert(#{ ... } <= 1)
 				
 				return PromiseModule.resolve({ [p1] = ResultModule.new(false, (...)) })
 			end)
-		end)(p2):andThen(function(Result) --[[ Line: 101 ]]
+		end)(p2):andThen(function(Result)
 			-- upvalues: p1 (upval), PromiseModule (upval)
 			local UnwrapResult, UnwrapResult2 = Result[p1]:unwrap()
 			
@@ -60,13 +60,13 @@ function PerformFetchModule.Single(p1, Callback) --[[ Line: 81 ]]
 	end
 end
 
-function PerformFetchModule.Batch(p1, Callback, Callback1) --[[ Line: 154 ]]
+function PerformFetchModule.Batch(p1, Callback, Callback1)
 	-- upvalues: NewResults (ref), PromiseModule (copy), RetrievalStatus (copy), BatchUpdateFetchingStatusFunction (copy), PromiseUtilities (copy), ResultModule (copy)
 	assert(typeof(p1) == "table")
 	assert(typeof(Callback) == "function")
 	assert(typeof(Callback1) == "function")
 	
-	return function(p2) --[[ Line: 159 ]]
+	return function(p2)
 		-- upvalues: p1 (copy), Callback (copy), NewResults (upval), PromiseModule (upval), RetrievalStatus (upval), BatchUpdateFetchingStatusFunction (upval), Callback1 (copy), PromiseUtilities (upval), ResultModule (upval)
 		local List = {}
 		local Keys = {}
@@ -84,7 +84,7 @@ function PerformFetchModule.Batch(p1, Callback, Callback1) --[[ Line: 154 ]]
 			end
 		end
 		local Callback2 = nil
-		local NewPromise = PromiseModule.new(function(p3) --[[ Line: 178 ]]
+		local NewPromise = PromiseModule.new(function(p3)
 			-- upvalues: Callback2 (ref)
 			Callback2 = p3
 		end)
@@ -105,11 +105,11 @@ function PerformFetchModule.Batch(p1, Callback, Callback1) --[[ Line: 154 ]]
 		else
 			ResolveResult = PromiseModule.resolve({})
 		end
-		ResolveResult:andThen(function(Result) --[[ Line: 209 ]]
+		ResolveResult:andThen(function(Result)
 			-- upvalues: PromiseUtilities (upval), t (copy)
 			local Result1 = Result or {}
 			
-			return PromiseUtilities.Batch(t):andThen(function(Result) --[[ Line: 212 ]]
+			return PromiseUtilities.Batch(t):andThen(function(Result)
 				-- upvalues: Result1 (ref)
 				local t = {}
 				
@@ -119,9 +119,9 @@ function PerformFetchModule.Batch(p1, Callback, Callback1) --[[ Line: 154 ]]
 				end
 				return Result1, t
 			end)
-		end, function() --[[ Line: 222 ]]
+		end, function()
 			assert(false, "PerformFetch fetchFunctor should never reject")
-		end):andThen(function(Result, p3) --[[ Line: 225 ]]
+		end):andThen(function(Result, p3)
 			-- upvalues: Keys (copy), ResultModule (upval), RetrievalStatus (upval), NewResults (upval), p2 (copy), BatchUpdateFetchingStatusFunction (upval)
 			local List = {}
 			
@@ -143,7 +143,7 @@ function PerformFetchModule.Batch(p1, Callback, Callback1) --[[ Line: 154 ]]
 				p2:dispatch(BatchUpdateFetchingStatusFunction(List))
 			end
 			return p3
-		end):andThen(function(Result) --[[ Line: 255 ]]
+		end):andThen(function(Result)
 			-- upvalues: Callback2 (ref)
 			Callback2(Result)
 		end)

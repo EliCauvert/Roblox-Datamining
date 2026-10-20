@@ -5,7 +5,7 @@ local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local SduiActionType = SduiCoreSystemModule.SduiActionType
 local GetStringParamFunction = SduiCoreSystemModule.SduiActionParams.getStringParam
 
-return function(p1, _, p2, _) --[[ Line: 21 | Named "SduiNavigateAction" ]]
+return function(p1, _, p2, _)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), GetStringParamFunction (copy), AppPage (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	

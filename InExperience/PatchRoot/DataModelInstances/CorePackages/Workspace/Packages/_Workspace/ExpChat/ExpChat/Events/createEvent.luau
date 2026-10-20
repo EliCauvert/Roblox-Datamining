@@ -1,10 +1,10 @@
 ﻿local BindableEventQueueModule = require(script.Parent.bindableEventQueue)
 
-return function(Signal) --[[ Line: 3 ]]
+return function(Signal)
 	-- upvalues: BindableEventQueueModule (copy)
-	return function(Callback) --[[ Line: 4 | Named "createEvent" ]]
+	return function(Callback)
 		-- upvalues: Signal (copy), BindableEventQueueModule (upval)
-		return function(...) --[[ Line: 5 ]]
+		return function(...)
 			-- upvalues: Callback (copy), Signal (upval), BindableEventQueueModule (upval)
 			local CallbackResult = Callback(...)
 			

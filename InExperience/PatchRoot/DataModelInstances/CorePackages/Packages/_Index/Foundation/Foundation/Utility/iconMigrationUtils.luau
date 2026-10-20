@@ -2,15 +2,15 @@
 local IsBuilderIconModule = require(script.Parent.isBuilderIcon)
 
 return {
-	isMigrated = function(p1): boolean --[[ Line: 22 ]]
+	isMigrated = function(p1): boolean
 		-- upvalues: Uiblox (copy)
 		return Uiblox[p1] ~= nil
 	end,
-	isBuilderOrMigratedIcon = function(p1) --[[ Line: 25 ]]
+	isBuilderOrMigratedIcon = function(p1)
 		-- upvalues: IsBuilderIconModule (copy), Uiblox (copy)
 		return IsBuilderIconModule(p1) or Uiblox[p1] ~= nil
 	end,
-	normalizeIconName = function(Name) --[[ Line: 31 ]]
+	normalizeIconName = function(Name)
 		-- upvalues: Uiblox (copy)
 		if Uiblox[Name] ~= nil then
 			local UibloxEntry = Uiblox[Name]

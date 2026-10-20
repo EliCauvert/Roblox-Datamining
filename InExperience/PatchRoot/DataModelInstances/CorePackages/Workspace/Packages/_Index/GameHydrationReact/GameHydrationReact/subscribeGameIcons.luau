@@ -2,7 +2,7 @@
 local SignalsModule = require(Parent.Signals)
 local DataHydrationModule = require(Parent.DataHydration)
 
-local function toIds(UniverseIds) --[[ Line: 28 ]]
+local function toIds(UniverseIds)
 	local List = {}
 	
 	if UniverseIds == nil then
@@ -21,7 +21,7 @@ local function toIds(UniverseIds) --[[ Line: 28 ]]
 	return List
 end
 
-local function sameIds(List, List1): boolean --[[ Line: 45 ]]
+local function sameIds(List, List1): boolean
 	if #List ~= #List1 then
 		return false
 	end
@@ -38,7 +38,7 @@ local function sameIds(List, List1): boolean --[[ Line: 45 ]]
 	return true
 end
 
-return function(p1) --[[ Line: 69 | Named "subscribeGameIcons" ]]
+return function(p1)
 	-- upvalues: DataHydrationModule (copy), SignalsModule (copy), toIds (copy), sameIds (copy)
 	local GameIconStore = DataHydrationModule.Game.getGameIconStore(false)
 	local Signal, Signal2 = SignalsModule.createSignal(toIds(p1.universeIds), sameIds)
@@ -46,15 +46,15 @@ return function(p1) --[[ Line: 69 | Named "subscribeGameIcons" ]]
 	local Flag = true
 	
 	return {
-		getCurrent = function() --[[ Line: 98 ]]
+		getCurrent = function()
 			-- upvalues: t (ref)
 			return t
 		end,
-		update = function(p2) --[[ Line: 101 ]]
+		update = function(p2)
 			-- upvalues: Signal2 (copy), toIds (upval)
 			Signal2((toIds(p2)))
 		end,
-		dispose = SignalsModule.createEffect(function(p2) --[[ Line: 76 ]]
+		dispose = SignalsModule.createEffect(function(p2)
 			-- upvalues: Signal (copy), GameIconStore (copy), p1 (copy), t (ref), Flag (ref)
 			local SignalResult = Signal(p2)
 			local DataResults = {}

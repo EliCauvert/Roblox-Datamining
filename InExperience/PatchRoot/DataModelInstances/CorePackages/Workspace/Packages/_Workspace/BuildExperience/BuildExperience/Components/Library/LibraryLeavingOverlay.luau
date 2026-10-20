@@ -4,14 +4,14 @@ local ReactModule = require(Parent.React)
 local Loading = FoundationModule.Loading
 local View = FoundationModule.View
 
-return function(p1) --[[ Line: 11 | Named "LibraryLeavingOverlay" ]]
+return function(p1)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), View (copy), Loading (copy)
 	return ReactModule.createElement(View, {
 		tag = "size-full row align-x-center align-y-center",
 		testId = "Library.Leaving",
 		ZIndex = p1.ZIndex,
 		backgroundStyle = FoundationModule.Hooks.useTokens().Color.Common.Backdrop,
-		onActivated = function() --[[ Line: 16 ]] end,
+		onActivated = function() end,
 		selection = { Selectable = false },
 		stateLayer = {
 			affordance = FoundationModule.Enums.StateLayerAffordance.None

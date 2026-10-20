@@ -1,6 +1,6 @@
 ﻿local InsertFunction = table.insert
 
-return function(p1, p2, p3) --[[ Line: 19 | Named "slice" ]]
+return function(p1, p2, p3)
 	-- upvalues: InsertFunction (copy)
 	local t = {}
 	local P1 = p2 or 1

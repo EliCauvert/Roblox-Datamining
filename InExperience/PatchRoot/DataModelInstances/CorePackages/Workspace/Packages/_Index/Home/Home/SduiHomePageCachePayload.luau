@@ -4,28 +4,28 @@ local HomeOmniFeedCache = require(Parent.DiscoveryUtils).HomeOmniFeedCache
 local GetSduiTemplateStoreFunction = require(Parent.SduiSharedUtilities).getSduiTemplateStore
 local config = { universe = { "player_count" } }
 
-local function _(Tbl) --[[ Line: 47 | Named "cloneMessage" ]]
+local function _(Tbl)
 	return table.clone(Tbl)
 end
 
-local _ = function(p1) --[[ Line: 52 | Named "readInputValue" ]]
+local _ = function(p1)
 	local Kind = if p1 == nil then nil else p1.kind
 	
 	return if Kind == nil then nil else Kind.value
 end
 
-local _ = function(Tbl, Value) --[[ Line: 58 | Named "replaceInputValue" ]]
+local _ = function(Tbl, Value)
 	local Copy = table.clone(Tbl)
 	Copy.kind = { type = Tbl.kind.type, value = Value }
 	
 	return Copy
 end
 
-local _ = function(p1): boolean --[[ Line: 64 | Named "isFeed" ]]
+local _ = function(p1): boolean
 	return type(p1) == "table" and type(p1.entry_map) == "table"
 end
 
-local function itemListFields(List) --[[ Line: 76 ]]
+local function itemListFields(List)
 	local List1 = {}
 	
 	for i, value in List do
@@ -38,13 +38,13 @@ local function itemListFields(List) --[[ Line: 76 ]]
 	return List1
 end
 
-local _ = function(p1) --[[ Line: 87 | Named "readPoolId" ]]
+local _ = function(p1)
 	local PoolId = p1.pool_id
 	
 	return if type(PoolId) == "string" and PoolId ~= "" then PoolId else nil
 end
 
-local _ = function(p1, p2: number) --[[ Line: 92 | Named "takeItems" ]]
+local _ = function(p1, p2: number)
 	local t = {}
 	
 	if p1 == nil then
@@ -56,7 +56,7 @@ local _ = function(p1, p2: number) --[[ Line: 92 | Named "takeItems" ]]
 	return t
 end
 
-local _ = function(p3, p4) --[[ Line: 106 | Named "readSortId" ]]
+local _ = function(p3, p4)
 	local SortId = p4.sort_id
 	
 	if SortId == nil or SortId == "" then
@@ -68,7 +68,7 @@ local _ = function(p3, p4) --[[ Line: 106 | Named "readSortId" ]]
 	end
 end
 
-local function collectReferencedKeys(List, p3) --[[ Line: 125 ]]
+local function collectReferencedKeys(List, p3)
 	-- upvalues: collectReferencedKeys (copy)
 	local ValueType = type(List)
 	
@@ -82,7 +82,7 @@ local function collectReferencedKeys(List, p3) --[[ Line: 125 ]]
 	end
 end
 
-local function filterOrder(EntryOrder, Entry_map) --[[ Line: 136 ]]
+local function filterOrder(EntryOrder, Entry_map)
 	local List = {}
 	
 	if EntryOrder == nil then
@@ -96,7 +96,7 @@ local function filterOrder(EntryOrder, Entry_map) --[[ Line: 136 ]]
 	return List
 end
 
-local function filterOrderMap(EntryOrderMap, Entry_map) --[[ Line: 149 ]]
+local function filterOrderMap(EntryOrderMap, Entry_map)
 	-- upvalues: filterOrder (copy)
 	local t = {}
 	
@@ -115,7 +115,7 @@ local function filterOrderMap(EntryOrderMap, Entry_map) --[[ Line: 149 ]]
 	return t
 end
 
-local function pruneFeed(Tbl, TopicIdToNumCacheItems) --[[ Line: 166 ]]
+local function pruneFeed(Tbl, TopicIdToNumCacheItems)
 	-- upvalues: itemListFields (copy), filterOrder (copy), filterOrderMap (copy)
 	local Entry_map = {}
 	local Content_pools = {}
@@ -245,7 +245,7 @@ local function pruneFeed(Tbl, TopicIdToNumCacheItems) --[[ Line: 166 ]]
 	return Copy4
 end
 
-local function pruneHydration(Tbl, p4) --[[ Line: 267 ]]
+local function pruneHydration(Tbl, p4)
 	-- upvalues: config (copy)
 	if Tbl == nil then
 		return nil
@@ -275,7 +275,7 @@ local function pruneHydration(Tbl, p4) --[[ Line: 267 ]]
 	return Copy
 end
 
-local function fillMissingTemplatesFromStore(p5) --[[ Line: 303 ]]
+local function fillMissingTemplatesFromStore(p5)
 	-- upvalues: GetSduiTemplateStoreFunction (copy), AppPage (copy), Parent (copy)
 	local SduiTemplateStore = GetSduiTemplateStoreFunction()
 	local CachedRobloxComponentToTemplateId = SduiTemplateStore.getCachedRobloxComponentToTemplateId(AppPage.Home)
@@ -297,7 +297,7 @@ local function fillMissingTemplatesFromStore(p5) --[[ Line: 303 ]]
 end
 
 return {
-	buildSduiHomePageCachePayload = function(Tbl) --[[ Line: 334 ]]
+	buildSduiHomePageCachePayload = function(Tbl)
 		-- upvalues: HomeOmniFeedCache (copy), pruneFeed (copy), collectReferencedKeys (copy), pruneHydration (copy), fillMissingTemplatesFromStore (copy)
 		local TopicIdToNumCacheItems = HomeOmniFeedCache.getTopicIdToNumCacheItems()
 		local t = {}
@@ -334,11 +334,11 @@ return {
 			return Copy
 		end
 	end,
-	serializeSduiHomePageCache = function(p6) --[[ Line: 379 ]]
+	serializeSduiHomePageCache = function(p6)
 		-- upvalues: Parent (copy)
 		return require(Parent.ServiceContractsProto).proto.json.serializeBuffer(p6:encode())
 	end,
-	deserializeSduiHomePageCache = function(p6) --[[ Line: 385 ]]
+	deserializeSduiHomePageCache = function(p6)
 		-- upvalues: Parent (copy)
 		if p6 == nil then
 			return nil
@@ -348,7 +348,7 @@ return {
 			return ServiceContractsProtoModule.apppageplatform.home.home_page.HomePageResponse.decode((ServiceContractsProtoModule.proto.json.deserializeBuffer(p6)))
 		end
 	end,
-	getSduiHomePageItemsForSortId = function(p6) --[[ Line: 398 ]]
+	getSduiHomePageItemsForSortId = function(p6)
 		-- upvalues: HomeOmniFeedCache (copy), Parent (copy), itemListFields (copy)
 		local CachedSduiHomePageData = HomeOmniFeedCache.getCachedSduiHomePageData()
 		local DecodeResult = nil

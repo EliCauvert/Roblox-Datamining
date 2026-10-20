@@ -42,12 +42,12 @@ local config = {
 	joinOrInviteFriends = if FFlagGameInviteInExpJoinCtaModule then "CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends" else nil
 }
 
-local function v31(UseContextResult, IsConsole, p1) --[[ Line: 63 ]]
+local function v31(UseContextResult, IsConsole, p1)
 	-- upvalues: GetFFlagEnableGameInviteModalVRSupportFunction (copy), IsVRAppBuildFunction (copy), IsExperienceOlderThanOneWeekModule (copy)
 	return if GetFFlagEnableGameInviteModalVRSupportFunction() then not IsVRAppBuildFunction() and (p1 and (not IsConsole and (UseContextResult and (UseContextResult.isCoreScript and (UseContextResult.serverType == "StandardServer" and IsExperienceOlderThanOneWeekModule(UseContextResult.gameDetails)))))) else not IsConsole and (p1 and (UseContextResult and (UseContextResult.isCoreScript and (UseContextResult.serverType == "StandardServer" and IsExperienceOlderThanOneWeekModule(UseContextResult.gameDetails)))))
 end
 
-return function(p1) --[[ Line: 92 ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), GameInviteModalLayoutContextModule (copy), GameDetailsContextModule (copy), FriendsListContext (copy), InviteFriendContext (copy), GetLocalizedStringsFunction (copy), config (copy), FFlagGameInviteInExpJoinCtaModule (copy), ShouldShowJoinCtaModule (copy), UseAppPolicyFunction (copy), DeviceInfo (copy), v31 (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TitleIconSize (copy), TextService (copy), GameInviteModalManagerModule (copy), SidePadding (copy), ImageSetButton (copy), IconsNavigationClose (copy), NormalizeFontFaceFunction (copy), IconsMenuSearch (copy), ShareGameInviteLinkModule (copy), FriendsMenuSearch (copy), GameInviteAnalyticsManagerModule (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseContextResult = ReactModule.useContext(GameInviteModalLayoutContextModule)
@@ -61,7 +61,7 @@ return function(p1) --[[ Line: 92 ]]
 	local IsCompact = UseContextResult.modalMode == "compact"
 	local IsFullWidth = UseContextResult.isFullWidth
 	local IsDesktopDevice = DeviceInfo.isDesktopDevice()
-	local v1 = v31(UseContextResult1, DeviceInfo.isConsole(), (UseAppPolicyFunction(function(p2) --[[ Line: 108 ]]
+	local v1 = v31(UseContextResult1, DeviceInfo.isConsole(), (UseAppPolicyFunction(function(p2)
 		return p2.getExperienceInviteShareLinkEnabled()
 	end)))
 	local NoIsFullWidth: boolean = IsDesktopDevice and not IsFullWidth
@@ -87,17 +87,17 @@ return function(p1) --[[ Line: 92 ]]
 	if IsCompact and v1 then
 		XOffset += 4
 	end
-	local function v51() --[[ Line: 157 ]]
+	local function v51()
 		-- upvalues: GameInviteModalManagerModule (upval), UseContextResult3 (copy)
 		GameInviteModalManagerModule:closeModal(UseContextResult3.getMaxRecipientRowNum())
 	end
 	
-	local function v52() --[[ Line: 161 ]]
+	local function v52()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(true)
 	end
 	
-	local function v53() --[[ Line: 165 ]]
+	local function v53()
 		-- upvalues: UseStateResult2 (copy), SearchFriendsFunction (copy)
 		UseStateResult2(false)
 		SearchFriendsFunction("")
@@ -107,7 +107,7 @@ return function(p1) --[[ Line: 92 ]]
 		UseStateResult2(false)
 		SearchFriendsFunction("")
 	end
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 176 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), SidePadding (upval), XOffset (ref), p1 (copy), ImageSetButton (upval), TitleIconSize (upval), v51 (copy), IconsNavigationClose (upval), UseStyleResult (copy), JoinOrInviteFriends (copy), ScaledBaseSize (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), IsCompact (copy), v52 (copy), IconsMenuSearch (upval), v1 (copy), ShareGameInviteLinkModule (upval), IsDesktopDevice (copy), NoIsFullWidth (copy), Size (ref)
 		return {
 			UIPadding = ReactModule.createElement("UIPadding", {
@@ -188,7 +188,7 @@ return function(p1) --[[ Line: 92 ]]
 		UseStateResult, NoIsFullWidth, IsCompact, v1, IsDesktopDevice,
 		JoinOrInviteFriends
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 258 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), FriendsMenuSearch (upval), GameInviteAnalyticsManagerModule (upval), ScaledBaseSize1 (copy), UseStyleResult (copy), LocalizedStrings (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), v53 (copy)
 		return {
 			UIListLayout = ReactModule.createElement("UIListLayout", {
@@ -202,7 +202,7 @@ return function(p1) --[[ Line: 92 ]]
 				layoutOrder = 0,
 				focusElement = true,
 				size = UDim2.new(1, -120, 1, -20),
-				onFocus = function() --[[ Line: 271 ]]
+				onFocus = function()
 					-- upvalues: GameInviteAnalyticsManagerModule (upval)
 					GameInviteAnalyticsManagerModule:onSearchFocused()
 				end

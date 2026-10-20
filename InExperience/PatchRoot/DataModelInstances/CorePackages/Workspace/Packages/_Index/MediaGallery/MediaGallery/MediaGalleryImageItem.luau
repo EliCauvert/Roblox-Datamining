@@ -10,7 +10,7 @@ local Image = FoundationModule.Image
 local _ = require(MediaGallery.MediaGalleryTypes)
 local GetImageUriModule = require(MediaGallery.getImageUri)
 
-return ReactModule.memo(function(p1) --[[ Line: 35 | Named "MediaGalleryImageItem" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), GetImageUriModule (copy), Image (copy), IconButton (copy), FoundationModule (copy), InputSize (copy), ButtonVariant (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ImageId = p1.imageId
@@ -19,10 +19,10 @@ return ReactModule.memo(function(p1) --[[ Line: 35 | Named "MediaGalleryImageIte
 		ImageId = string.format("https://img.youtube.com/vi/%s/hqdefault.jpg", p1.videoHash)
 	end
 	local _UDim = UDim.new(0, p1.cornerRadius or UseTokensResult.Radius.Medium)
-	ReactModule.useEffect(function() --[[ Line: 44 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ImageId (ref), GetImageUriModule (upval)
 		if ImageId then
-			task.spawn(function() --[[ Line: 46 ]]
+			task.spawn(function()
 				-- upvalues: GetImageUriModule (upval), ImageId (upval)
 				local Image = Instance.new("ImageLabel")
 				Image.Image = GetImageUriModule(ImageId)
@@ -31,13 +31,13 @@ return ReactModule.memo(function(p1) --[[ Line: 35 | Named "MediaGalleryImageIte
 			end)
 		end
 	end, { ImageId })
-	local UseResult = ReactModule.useCallback(function(AssetFetchStatus) --[[ Line: 55 ]]
+	local UseResult = ReactModule.useCallback(function(AssetFetchStatus)
 		-- upvalues: p1 (copy)
 		if p1.onMediaResolved then
 			p1.onMediaResolved(AssetFetchStatus == Enum.AssetFetchStatus.Success)
 		end
 	end, { p1.onMediaResolved })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 61 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), ImageId (ref)
 		if p1.onYouTubeVideoPlay then
 			p1.onYouTubeVideoPlay({

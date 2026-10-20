@@ -16,16 +16,16 @@ local UsePreferredTransparencyBindingModule = require(Parent.Hooks.usePreferredT
 local ROWFLEXTAG = ConstantsModule.ROW_FLEX_TAG
 local TEAMLAYOUTMULTIPLIER = ConstantsModule.TEAM_LAYOUT_MULTIPLIER
 
-return ReactModule.memo(function(p1) --[[ Line: 25 | Named "TeamEntryView" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FFlagPlayerListLocalizeGameTextModule (copy), ReactModule (copy), GameTextTranslatorContextModule (copy), SignalsReactModule (copy), UsePreferredTransparencyBindingModule (copy), SignalsModule (copy), TEAMLAYOUTMULTIPLIER (copy), View (copy), Text (copy), StatCellModule (copy), ConstantsModule (copy), ROWFLEXTAG (copy)
 	local UseContextResult = if FFlagPlayerListLocalizeGameTextModule then ReactModule.useContext(GameTextTranslatorContextModule) else nil
 	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(p1.name)
 	local UseSignalBindingResult1 = SignalsReactModule.useSignalBinding(p1.color)
 	local UsePreferredTransparencyBindingModuleResult = UsePreferredTransparencyBindingModule()
 	local RowHeight = p1.rowHeight
-	local UseSignalBindingResult2 = SignalsReactModule.useSignalBinding((ReactModule.useMemo(function() --[[ Line: 50 ]]
+	local UseSignalBindingResult2 = SignalsReactModule.useSignalBinding((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), p1 (copy), TEAMLAYOUTMULTIPLIER (upval)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 51 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: p1 (upval), TEAMLAYOUTMULTIPLIER (upval)
 			return if p1.order then p1.order(p2) * TEAMLAYOUTMULTIPLIER else p1.layoutOrder or 0
 		end)
@@ -34,7 +34,7 @@ return ReactModule.memo(function(p1) --[[ Line: 25 | Named "TeamEntryView" ]]
 		NameLabel = ReactModule.createElement(View, { LayoutOrder = 1, tag = "fill size-0-full clip" }, {
 			Label = ReactModule.createElement(Text, {
 				tag = "size-full text-label-small text-align-x-left content-emphasis",
-				Text = if FFlagPlayerListLocalizeGameTextModule then ReactModule.useMemo(function() --[[ Line: 42 ]]
+				Text = if FFlagPlayerListLocalizeGameTextModule then ReactModule.useMemo(function()
 					-- upvalues: UseContextResult (copy), UseSignalBindingResult (copy)
 					return if UseContextResult then UseSignalBindingResult:map(UseContextResult) else UseSignalBindingResult
 				end, { UseContextResult, UseSignalBindingResult }) else UseSignalBindingResult
@@ -57,12 +57,12 @@ return ReactModule.memo(function(p1) --[[ Line: 25 | Named "TeamEntryView" ]]
 	return ReactModule.createElement(View, {
 		testId = "team-entry-view",
 		Size = UDim2.new(1, 0, 0, RowHeight),
-		backgroundStyle = ReactModule.useMemo(function() --[[ Line: 86 ]]
+		backgroundStyle = ReactModule.useMemo(function()
 			-- upvalues: ReactModule (upval), UseSignalBindingResult1 (copy), UsePreferredTransparencyBindingModuleResult (copy)
 			return ReactModule.joinBindings({
 				color = UseSignalBindingResult1,
 				pt = UsePreferredTransparencyBindingModuleResult
-			}):map(function(p2) --[[ Line: 90 ]]
+			}):map(function(p2)
 				return { Color3 = p2.color, Transparency = 0.5 * p2.pt }
 			end)
 		end, {

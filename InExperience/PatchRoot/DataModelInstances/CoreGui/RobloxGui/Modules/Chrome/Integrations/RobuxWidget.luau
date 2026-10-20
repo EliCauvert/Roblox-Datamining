@@ -9,7 +9,7 @@ local InExperienceSideSheetModule = require(CorePackages.Workspace.Packages.InEx
 local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 local FFlagHideHeaderForBuyRobuxInExperienceShop = require(CorePackages.Workspace.Packages.SharedFlags).FFlagHideHeaderForBuyRobuxInExperienceShop
 
-local function openShop() --[[ Line: 19 ]]
+local function openShop()
 	-- upvalues: ServiceModule (copy), ConstantsModule (copy), FFlagHideHeaderForBuyRobuxInExperienceShop (copy), InExperienceShopModule (copy)
 	if ServiceModule:isIntegrationValid(ConstantsModule.IN_EXPERIENCE_SHOP_ID) or FFlagHideHeaderForBuyRobuxInExperienceShop then
 		if FFlagHideHeaderForBuyRobuxInExperienceShop then
@@ -22,7 +22,7 @@ local function openShop() --[[ Line: 19 ]]
 	end
 end
 
-local function RobuxWidgetIntegration(p1) --[[ Line: 33 ]]
+local function RobuxWidgetIntegration(p1)
 	-- upvalues: ReactModule (copy), InExperienceSideSheetModule (copy), openShop (copy)
 	return ReactModule.createElement(InExperienceSideSheetModule.RobuxWidget, {
 		layoutOrder = p1.layoutOrder,
@@ -35,7 +35,7 @@ end
 return (if require(Chrome.Flags.FFlagEnableSideSheetRobuxWidget) and IsSideSheetEnabledModule then ServiceModule:register({
 	id = "RobuxWidget",
 	label = "Feature.Catalog.Label.BuyRobux",
-	activated = function() --[[ Line: 49 ]] end,
+	activated = function() end,
 	initialAvailability = ServiceModule.AvailabilitySignal.Available,
 	sideSheetPlacement = ChromeModule.Enums.SideSheetPlacement.ScrollableContentTop,
 	components = { Widget = RobuxWidgetIntegration }

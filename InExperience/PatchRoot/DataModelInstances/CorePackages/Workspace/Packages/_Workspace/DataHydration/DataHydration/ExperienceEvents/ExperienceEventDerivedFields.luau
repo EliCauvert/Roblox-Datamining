@@ -5,7 +5,7 @@ local CreateCurrentTimeSignalFunction = require(Parent.SignalsUtils).createCurre
 local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 local EventStatusCheckIntervalSec = game:DefineFastInt("EventStatusCheckIntervalSec", 30)
 
-local function _(p1) --[[ Line: 21 | Named "parseIsoDateTime" ]]
+local function _(p1)
 	if p1 then
 		local Success, Result = pcall(DateTime.fromIsoDate, p1)
 		
@@ -15,7 +15,7 @@ local function _(p1) --[[ Line: 21 | Named "parseIsoDateTime" ]]
 	end
 end
 
-local function deriveFormattedStartDate(p1, p2) --[[ Line: 41 ]]
+local function deriveFormattedStartDate(p1, p2)
 	-- upvalues: LocalizationService (copy)
 	local EventStart = p1.eventStart
 	local v1 = nil
@@ -37,7 +37,7 @@ end
 
 local EventStatus = require(script.Parent.ExperienceEventTypes).EventStatus
 
-local function deriveFormattedRelativeTime(p1, p2, p3) --[[ Line: 69 ]]
+local function deriveFormattedRelativeTime(p1, p2, p3)
 	-- upvalues: CreateCurrentTimeSignalFunction (copy), EventStatusCheckIntervalSec (copy), deriveFormattedStartDate (copy)
 	local EventStartTimestamp = p1.eventStartTimestamp
 	local EventEndTimestamp = p1.eventEndTimestamp
@@ -76,7 +76,7 @@ local function deriveFormattedRelativeTime(p1, p2, p3) --[[ Line: 69 ]]
 	end
 end
 
-local function deriveEventStatus(p1, p2) --[[ Line: 122 ]]
+local function deriveEventStatus(p1, p2)
 	-- upvalues: EventStatus (copy), CreateCurrentTimeSignalFunction (copy), EventStatusCheckIntervalSec (copy)
 	local EventStartTimestamp = p1.eventStartTimestamp
 	
@@ -90,14 +90,14 @@ local function deriveEventStatus(p1, p2) --[[ Line: 122 ]]
 	end
 end
 
-local _ = function(p1, p2): boolean --[[ Line: 145 | Named "deriveIsActive" ]]
+local _ = function(p1, p2): boolean
 	-- upvalues: deriveEventStatus (copy), EventStatus (copy)
 	local DeriveEventStatusResult = deriveEventStatus(p1, p2)
 	
 	return DeriveEventStatusResult == EventStatus.Ongoing or DeriveEventStatusResult == EventStatus.ElapsedImminent
 end
 
-local function deriveShareUrl(p1) --[[ Line: 150 ]]
+local function deriveShareUrl(p1)
 	-- upvalues: UrlBuilder (copy)
 	local Id = p1.id
 	
@@ -105,7 +105,7 @@ local function deriveShareUrl(p1) --[[ Line: 150 ]]
 end
 
 return {
-	enrichWithTimestamps = function(p1) --[[ Line: 32 ]]
+	enrichWithTimestamps = function(p1)
 		local EventStart = p1.eventStart
 		local v1 = nil
 		
@@ -129,7 +129,7 @@ return {
 		
 		return p1
 	end,
-	calculateDerivedField = function(p1, p2, p3, p4) --[[ Line: 159 ]]
+	calculateDerivedField = function(p1, p2, p3, p4)
 		-- upvalues: deriveFormattedStartDate (copy), deriveEventStatus (copy), EventStatus (copy), deriveFormattedRelativeTime (copy), deriveShareUrl (copy)
 		if not p2 then
 			return nil

@@ -7,7 +7,7 @@ local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant
 local _ = require(Foundation.Providers.Style.Tokens)
 local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-local function createSeverityVariant(Alert, Transparency, Style, Emphasis) --[[ Line: 39 ]]
+local function createSeverityVariant(Alert, Transparency, Style, Emphasis)
 	return {
 		container = {
 			backgroundStyle = { Color3 = Alert.Color3, Transparency = Transparency }
@@ -17,7 +17,7 @@ local function createSeverityVariant(Alert, Transparency, Style, Emphasis) --[[ 
 	}
 end
 
-local function variantsFactory(p1) --[[ Line: 57 ]]
+local function variantsFactory(p1)
 	-- upvalues: AlertSeverityModule (copy), createSeverityVariant (copy), AlertVariantModule (copy)
 	local Size500 = p1.Size.Size_500
 	local Link = {
@@ -93,7 +93,7 @@ local function variantsFactory(p1) --[[ Line: 57 ]]
 	}
 end
 
-return function(p1, p2, Feedback, p3) --[[ Line: 175 | Named "useAlertVariants" ]]
+return function(p1, p2, Feedback, p3)
 	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ColorModeModule (copy), ComposeStyleVariantModule (copy), AlertVariantModule (copy)
 	local Alert = VariantsContextModule.useVariants("Alert", variantsFactory, p1)
 	local IsNameMatch = p1.Config.ColorMode.Name == ColorModeModule.Dark

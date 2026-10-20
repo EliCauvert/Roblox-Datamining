@@ -36,7 +36,7 @@ local UGCValidationModule = {
 }
 
 if GetEngineFeatureUGCValidationWithContextEntrypointModule() then
-	function UGCValidationModule.validateWithContext(IsServer) --[[ Line: 55 ]]
+	function UGCValidationModule.validateWithContext(IsServer)
 		-- upvalues: AnalyticsModule (copy), CreateEditableInstancesForContextModule (copy), UnpublishedDependenciesModule (copy), ValidateInternalModule (copy), DestroyEditableInstancesModule (copy)
 		assert(IsServer.instances ~= nil, "instances required in validationContext for validateWithContext")
 		assert(IsServer.assetTypeEnum ~= nil, "assetTypeEnum required in validationContext for validateWithContext")
@@ -80,7 +80,7 @@ if GetEngineFeatureUGCValidationWithContextEntrypointModule() then
 		return ValidateInternalModuleResult, ValidateInternalModuleResult2
 	end
 end
-function UGCValidationModule.validate(Instances, AssetTypeEnum, IsServer, AllowUnreviewedAssets, RestrictedUserIds, Token, UniverseId, AllowEditableInstances, BypassFlags, ShouldYield, p1, p2) --[[ Line: 118 ]]
+function UGCValidationModule.validate(Instances, AssetTypeEnum, IsServer, AllowUnreviewedAssets, RestrictedUserIds, Token, UniverseId, AllowEditableInstances, BypassFlags, ShouldYield, p1, p2)
 	-- upvalues: AnalyticsModule (copy), CreateEditableInstancesForContextModule (copy), ValidateInternalModule (copy), DestroyEditableInstancesModule (copy)
 	local CurrentTime = tick()
 	AnalyticsModule.setMetadata({
@@ -126,7 +126,7 @@ function UGCValidationModule.validate(Instances, AssetTypeEnum, IsServer, AllowU
 	return ValidateInternalModuleResult, ValidateInternalModuleResult2
 end
 
-function UGCValidationModule.validateAsync(Instances, AssetTypeEnum, Callback: (any, any) -> (), IsServer, AllowUnreviewedAssets, RestrictedUserIds) --[[ Line: 189 ]]
+function UGCValidationModule.validateAsync(Instances, AssetTypeEnum, Callback: (any, any) -> (), IsServer, AllowUnreviewedAssets, RestrictedUserIds)
 	-- upvalues: AnalyticsModule (copy), CreateEditableInstancesForContextModule (copy), ValidateInternalModule (copy), DestroyEditableInstancesModule (copy)
 	AnalyticsModule.setMetadata({
 		entrypoint = "validateAsync",
@@ -154,14 +154,14 @@ function UGCValidationModule.validateAsync(Instances, AssetTypeEnum, Callback: (
 		editableMeshes = ProcessAllResult2.editableMeshes,
 		editableImages = ProcessAllResult2.editableImages
 	}
-	coroutine.wrap(function() --[[ Line: 225 ]]
+	coroutine.wrap(function()
 		-- upvalues: Callback (copy), ValidateInternalModule (upval), config (copy), DestroyEditableInstancesModule (upval)
 		Callback(ValidateInternalModule(config))
 		DestroyEditableInstancesModule(config.editableMeshes, config.editableImages)
 	end)()
 end
 
-function UGCValidationModule.validateMeshPartFormat(Instances, AssetTypeEnum, IsServer, AllowUnreviewedAssets, RestrictedUserIds) --[[ Line: 235 ]]
+function UGCValidationModule.validateMeshPartFormat(Instances, AssetTypeEnum, IsServer, AllowUnreviewedAssets, RestrictedUserIds)
 	-- upvalues: AnalyticsModule (copy), CreateEditableInstancesForContextModule (copy), ValidateDynamicHeadMeshPartFormatModule (copy), DestroyEditableInstancesModule (copy)
 	AnalyticsModule.setMetadata({
 		entrypoint = "validateMeshPartFormat",
@@ -193,7 +193,7 @@ function UGCValidationModule.validateMeshPartFormat(Instances, AssetTypeEnum, Is
 	return ValidateDynamicHeadMeshPartFormatModuleResult, ValidateDynamicHeadMeshPartFormatModuleResult2
 end
 
-function UGCValidationModule.validateAsyncMeshPartFormat(Instances, AssetTypeEnum, Callback: (any, any) -> (), IsServer, AllowUnreviewedAssets, RestrictedUserIds) --[[ Line: 282 ]]
+function UGCValidationModule.validateAsyncMeshPartFormat(Instances, AssetTypeEnum, Callback: (any, any) -> (), IsServer, AllowUnreviewedAssets, RestrictedUserIds)
 	-- upvalues: AnalyticsModule (copy), CreateEditableInstancesForContextModule (copy), ValidateDynamicHeadMeshPartFormatModule (copy), DestroyEditableInstancesModule (copy)
 	AnalyticsModule.setMetadata({
 		entrypoint = "validateAsyncMeshPartFormat",
@@ -220,7 +220,7 @@ function UGCValidationModule.validateAsyncMeshPartFormat(Instances, AssetTypeEnu
 		editableMeshes = ProcessAllResult2.editableMeshes,
 		editableImages = ProcessAllResult2.editableImages
 	}
-	coroutine.wrap(function() --[[ Line: 320 ]]
+	coroutine.wrap(function()
 		-- upvalues: Callback (copy), ValidateDynamicHeadMeshPartFormatModule (upval), config (copy), DestroyEditableInstancesModule (upval)
 		Callback(ValidateDynamicHeadMeshPartFormatModule(config))
 		DestroyEditableInstancesModule(config.editableMeshes, config.editableImages)
@@ -228,7 +228,7 @@ function UGCValidationModule.validateAsyncMeshPartFormat(Instances, AssetTypeEnu
 end
 
 if GetEngineFeatureUGCValidationWithContextEntrypointModule() then
-	function UGCValidationModule.validateMeshPartAssetFormatWithContext(IsServer) --[[ Line: 330 ]]
+	function UGCValidationModule.validateMeshPartAssetFormatWithContext(IsServer)
 		-- upvalues: AnalyticsModule (copy), CreateEditableInstancesForContextModule (copy), IsLayeredClothingModule (copy), ValidateLayeredClothingAccessoryMeshPartAssetFormatModule (copy), ValidateLegacyAccessoryMeshPartAssetFormatModule (copy), DestroyEditableInstancesModule (copy)
 		assert(IsServer.assetTypeEnum ~= nil, "assetTypeEnum required in validationContext for validateMeshPartAssetFormatWithContext")
 		assert(IsServer.instances ~= nil, "instances required in validationContext for validateMeshPartAssetFormatWithContext")
@@ -264,7 +264,7 @@ if GetEngineFeatureUGCValidationWithContextEntrypointModule() then
 		return ValidateLayeredClothingAccessoryMeshPartAssetFormatModuleResult, ValidateLayeredClothingAccessoryMeshPartAssetFormatModuleResult2
 	end
 end
-function UGCValidationModule.validateMeshPartAssetFormat2(Entry, p1, AssetTypeEnum, IsServer, AllowUnreviewedAssets, _) --[[ Line: 384 ]]
+function UGCValidationModule.validateMeshPartAssetFormat2(Entry, p1, AssetTypeEnum, IsServer, AllowUnreviewedAssets, _)
 	-- upvalues: AnalyticsModule (copy), CreateEditableInstancesForContextModule (copy), IsLayeredClothingModule (copy), ValidateLayeredClothingAccessoryMeshPartAssetFormatModule (copy), ValidateLegacyAccessoryMeshPartAssetFormatModule (copy), DestroyEditableInstancesModule (copy)
 	AnalyticsModule.setMetadata({
 		entrypoint = "validateMeshPartAssetFormat2",
@@ -313,7 +313,7 @@ UGCValidationModule.util.isLayeredClothingAllowed = RigidOrLayeredAllowedModule.
 UGCValidationModule.util.isRigidAccessoryAllowed = RigidOrLayeredAllowedModule.isRigidAccessoryAllowed
 
 if GetEngineFeatureUGCValidationWithContextEntrypointModule() then
-	function UGCValidationModule.validateFullBodyWithContext(IsServer) --[[ Line: 489 ]]
+	function UGCValidationModule.validateFullBodyWithContext(IsServer)
 		-- upvalues: AnalyticsModule (copy), CreateEditableInstancesForContextModule (copy), UnpublishedDependenciesModule (copy), ValidateFullBodyModule (copy), DestroyEditableInstancesModule (copy)
 		assert(IsServer.fullBodyData ~= nil, "fullBodyData required in validationContext for validateFullBodyWithContext")
 		local IsServer1 = IsServer.isServer
@@ -362,7 +362,7 @@ if GetEngineFeatureUGCValidationWithContextEntrypointModule() then
 		return ValidateFullBodyModuleResult, ValidateFullBodyModuleResult2
 	end
 end
-function UGCValidationModule.validateFullBody(FullBodyData, IsServer, AllowEditableInstances, BypassFlags, ShouldYield, p1) --[[ Line: 555 ]]
+function UGCValidationModule.validateFullBody(FullBodyData, IsServer, AllowEditableInstances, BypassFlags, ShouldYield, p1)
 	-- upvalues: AnalyticsModule (copy), CreateEditableInstancesForContextModule (copy), ValidateFullBodyModule (copy), DestroyEditableInstancesModule (copy)
 	AnalyticsModule.setMetadata({
 		entrypoint = "validateFullBody",
@@ -409,7 +409,7 @@ function UGCValidationModule.validateFullBody(FullBodyData, IsServer, AllowEdita
 	return ValidateFullBodyModuleResult, ValidateFullBodyModuleResult2
 end
 
-function UGCValidationModule.validateShoesWithContext(IsServer) --[[ Line: 617 ]]
+function UGCValidationModule.validateShoesWithContext(IsServer)
 	-- upvalues: AnalyticsModule (copy), CreateEditableInstancesForContextModule (copy), UnpublishedDependenciesModule (copy), ValidateShoesModule (copy), DestroyEditableInstancesModule (copy)
 	assert(IsServer.fullBodyData ~= nil, "fullBodyData required in validationContext for validateShoes")
 	local IsServer1 = IsServer.isServer
@@ -454,7 +454,7 @@ function UGCValidationModule.validateShoesWithContext(IsServer) --[[ Line: 617 ]
 	return ValidateShoesModuleResult, ValidateShoesModuleResult2
 end
 
-function UGCValidationModule.preprocessDataAsync(List, IsServer, AllowEditableInstances, BypassFlags, ShouldYield) --[[ Line: 672 ]]
+function UGCValidationModule.preprocessDataAsync(List, IsServer, AllowEditableInstances, BypassFlags, ShouldYield)
 	-- upvalues: AnalyticsModule (copy), CreateEditableInstancesForContextModule (copy), ValidationHintsModule (copy), DestroyEditableInstancesModule (copy)
 	AnalyticsModule.setMetadata({
 		entrypoint = "preprocessDataAsync",
@@ -495,7 +495,7 @@ function UGCValidationModule.preprocessDataAsync(List, IsServer, AllowEditableIn
 	return PreprocessDataAsyncResult
 end
 
-function UGCValidationModule.isPreprocessDataCached(p2, p3, IsServer) --[[ Line: 731 ]]
+function UGCValidationModule.isPreprocessDataCached(p2, p3, IsServer)
 	-- upvalues: AnalyticsModule (copy), ValidationHintsModule (copy)
 	AnalyticsModule.setMetadata({
 		entrypoint = "isPreprocessDataCached",
@@ -510,7 +510,7 @@ function UGCValidationModule.isPreprocessDataCached(p2, p3, IsServer) --[[ Line:
 	return IsPreprocessDataCached
 end
 
-function UGCValidationModule.calculateScaleToValidateBoundsAsync(List, IsServer, AllowEditableInstances, BypassFlags, ShouldYield, AllowEditableInstances1) --[[ Line: 756 ]]
+function UGCValidationModule.calculateScaleToValidateBoundsAsync(List, IsServer, AllowEditableInstances, BypassFlags, ShouldYield, AllowEditableInstances1)
 	-- upvalues: AnalyticsModule (copy), CreateEditableInstancesForContextModule (copy), ValidationHintsModule (copy), DestroyEditableInstancesModule (copy)
 	AnalyticsModule.setMetadata({
 		entrypoint = "calculateScaleToValidateBoundsAsync",

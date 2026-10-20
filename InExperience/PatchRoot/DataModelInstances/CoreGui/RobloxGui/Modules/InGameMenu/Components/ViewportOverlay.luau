@@ -16,22 +16,22 @@ local StrictInterfaceResult = T.strictInterface({
 	screenSize = T.Vector2
 })
 
-return InGameMenuDependenciesModule.RoactRodux.UNSTABLE_connect2(function(p1, _) --[[ Line: 65 ]]
+return InGameMenuDependenciesModule.RoactRodux.UNSTABLE_connect2(function(p1, _)
 	return {
 		occupiedWidth = 464,
 		currentPage = p1.menuPage,
 		open = p1.isMenuOpen,
 		screenSize = p1.screenSize
 	}
-end, function(Callback) --[[ Line: 74 ]]
+end, function(Callback)
 	-- upvalues: CloseMenuModule (copy)
 	return {
-		onActivated = function() --[[ Line: 76 ]]
+		onActivated = function()
 			-- upvalues: Callback (copy), CloseMenuModule (upval)
 			Callback(CloseMenuModule)
 		end
 	}
-end)(function(p1) --[[ Line: 27 | Named "ViewportOverlay" ]]
+end)(function(p1)
 	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), _Vector2 (copy), ConstantsModule (copy), WithFoundationOrUIBloxStyleFunction (copy), Roact (copy)
 	if GlobalConfigModule.propValidation then
 		assert(StrictInterfaceResult(p1))
@@ -41,7 +41,7 @@ end)(function(p1) --[[ Line: 27 | Named "ViewportOverlay" ]]
 	else
 		local IsCurrentPageMatch = p1.currentPage == ConstantsModule.InitalPageKey
 		
-		return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 38 ]]
+		return WithFoundationOrUIBloxStyleFunction(function(p2)
 			return {
 				Theme = {
 					Overlay = {
@@ -50,7 +50,7 @@ end)(function(p1) --[[ Line: 27 | Named "ViewportOverlay" ]]
 					}
 				}
 			}
-		end, function(p2) --[[ Line: 44 ]]
+		end, function(p2)
 			-- upvalues: Roact (upval), IsCurrentPageMatch (copy), p1 (copy)
 			return Roact.createElement("Frame", {
 				BorderSizePixel = 0,

@@ -8,7 +8,7 @@ local config = {
 	lastUpdated = { 2026, 10, 2 }
 }
 
-return function(EventType, p1, Input) --[[ Line: 77 | Named "sendBuildExperienceEvent" ]]
+return function(EventType, p1, Input)
 	-- upvalues: HttpService (copy), TelemetryService (copy), config (copy)
 	TelemetryService:LogEvent(config, {
 		standardizedFields = { "addUserId", "addSessionId" },

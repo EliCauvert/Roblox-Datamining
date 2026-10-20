@@ -7,7 +7,7 @@ local SduiErrorsModule = require(SduiCoreSystem.SduiErrors)
 local GetSduiImpressionHandlerRegistryModule = require(SduiCoreSystem.getSduiImpressionHandlerRegistry)
 local _ = require(SduiCoreSystem.SduiImpressionEventType)
 
-return function(p1, p2, p3, p4, p5, p6, p7, p8) --[[ Line: 26 | Named "reportUnifiedLoggingImpressions" ]]
+return function(p1, p2, p3, p4, p5, p6, p7, p8)
 	-- upvalues: SduiErrorsModule (copy), SduiCollectionAnalyticsBuilderModule (copy), GetSduiImpressionHandlerRegistryModule (copy), UnifiedLoggingModule (copy)
 	if not p4 then
 		p1.dependencies.logger.reportError(SduiErrorsModule.SduiErrorType.LogImpressionsMissingCollectionData, {}, p1.appPage)

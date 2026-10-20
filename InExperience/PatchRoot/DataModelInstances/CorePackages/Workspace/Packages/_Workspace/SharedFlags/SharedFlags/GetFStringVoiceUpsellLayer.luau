@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("VoiceUpsellLayer", "SocialVoice.VoiceUpsell")
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastString("VoiceUpsellLayer")
 end

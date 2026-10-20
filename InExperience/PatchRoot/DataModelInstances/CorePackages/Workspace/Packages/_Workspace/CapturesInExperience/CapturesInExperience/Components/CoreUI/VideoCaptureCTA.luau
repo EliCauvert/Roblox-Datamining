@@ -13,7 +13,7 @@ local Button = UIBloxModule.App.Button.Button
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local EventNamesModule = require(Parent.Analytics.EventNames)
 
-return function(p1) --[[ Line: 32 ]]
+return function(p1)
 	-- upvalues: UseAnalyticsModule (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), EventNamesModule (copy), CoreGui (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), Button (copy), ButtonType (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseStyleResult = UseStyleFunction()
@@ -24,18 +24,18 @@ return function(p1) --[[ Line: 32 ]]
 		stopRecording = "Feature.Captures.Control.StopRecordingVideo"
 	})
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 45 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy)
 		local VideoRecordingChangeRequestConnection = nil
 		local GameOptions = settings():FindFirstChild("Game Options")
 		
 		if GameOptions then
-			VideoRecordingChangeRequestConnection = GameOptions.VideoRecordingChangeRequest:connect(function(Recording) --[[ Line: 49 ]]
+			VideoRecordingChangeRequestConnection = GameOptions.VideoRecordingChangeRequest:connect(function(Recording)
 				-- upvalues: UseStateResult2 (upval)
 				UseStateResult2(Recording)
 			end)
 		end
-		return function() --[[ Line: 55 ]]
+		return function()
 			-- upvalues: VideoRecordingChangeRequestConnection (ref)
 			if VideoRecordingChangeRequestConnection then
 				VideoRecordingChangeRequestConnection:disconnect()
@@ -96,7 +96,7 @@ return function(p1) --[[ Line: 32 ]]
 		}, {
 			RecordButton = ReactModule.createElement(Button, {
 				buttonType = ButtonType.Secondary,
-				onActivated = ReactModule.useCallback(function() --[[ Line: 62 ]]
+				onActivated = ReactModule.useCallback(function()
 					-- upvalues: UseStateResult (copy), p1 (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval), CoreGui (upval)
 					if UseStateResult then
 						UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesMigratedLegacyVideoRecordDeactivated)

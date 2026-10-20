@@ -18,7 +18,7 @@ VRComfortAutoToggleEntry.validateProps = T.strictInterface({
 })
 VRComfortAutoToggleEntry.defaultProps = { checkedValue = true }
 
-function VRComfortAutoToggleEntry.init(p1, p2) --[[ Line: 45 ]]
+function VRComfortAutoToggleEntry.init(p1, p2)
 	-- upvalues: UserGameSettings (copy), SendAnalyticsModule (copy), ConstantsModule (copy)
 	p1.derivedValueChangeEvent = UserGameSettings:GetPropertyChangedSignal(p2.derivedValueKey)
 	p1:setState({
@@ -26,14 +26,14 @@ function VRComfortAutoToggleEntry.init(p1, p2) --[[ Line: 45 ]]
 		vrComfortSetting = UserGameSettings.VRComfortSetting
 	})
 	
-	function p1.onExternalChange() --[[ Line: 53 ]]
+	function p1.onExternalChange()
 		-- upvalues: UserGameSettings (upval), p2 (copy), p1 (copy)
 		p1:setState({
 			checked = UserGameSettings[p2.derivedValueKey] == p2.checkedValue
 		})
 	end
 	
-	function p1.onToggled() --[[ Line: 60 ]]
+	function p1.onToggled()
 		-- upvalues: p1 (copy), UserGameSettings (upval), p2 (copy), SendAnalyticsModule (upval), ConstantsModule (upval)
 		if p1.state.vrComfortSetting == Enum.VRComfortSetting.Custom then
 			if UserGameSettings[p2.customValueKey] == p2.checkedValue then
@@ -46,7 +46,7 @@ function VRComfortAutoToggleEntry.init(p1, p2) --[[ Line: 45 ]]
 	end
 end
 
-function VRComfortAutoToggleEntry.render(p1) --[[ Line: 73 ]]
+function VRComfortAutoToggleEntry.render(p1)
 	-- upvalues: Roact (copy), ToggleEntryModule (copy), ExternalEventConnectionModule (copy), VRComfortSettingPropertyChangedSignal (copy), UserGameSettings (copy)
 	local Props = p1.props
 	
@@ -64,7 +64,7 @@ function VRComfortAutoToggleEntry.render(p1) --[[ Line: 73 ]]
 		}),
 		VRComfortSettingListener = Roact.createElement(ExternalEventConnectionModule, {
 			event = VRComfortSettingPropertyChangedSignal,
-			callback = function() --[[ Line: 91 ]]
+			callback = function()
 				-- upvalues: p1 (copy), UserGameSettings (upval)
 				p1:setState({ vrComfortSetting = UserGameSettings.VRComfortSetting })
 			end

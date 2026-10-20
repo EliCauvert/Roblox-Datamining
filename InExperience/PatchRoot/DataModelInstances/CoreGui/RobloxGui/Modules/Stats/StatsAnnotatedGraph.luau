@@ -4,7 +4,7 @@ local BarGraphModule = require(CoreGui.RobloxGui.Modules.Stats.BarGraph)
 local StatsAnnotatedGraphModule = {}
 StatsAnnotatedGraphModule.__index = StatsAnnotatedGraphModule
 
-function StatsAnnotatedGraphModule.new(_statType, _isMaximized) --[[ Line: 24 ]]
+function StatsAnnotatedGraphModule.new(_statType, _isMaximized)
 	-- upvalues: StatsAnnotatedGraphModule (copy), StatsUtilsModule (copy), BarGraphModule (copy)
 	local t = {}
 	setmetatable(t, StatsAnnotatedGraphModule)
@@ -39,14 +39,14 @@ function StatsAnnotatedGraphModule.new(_statType, _isMaximized) --[[ Line: 24 ]]
 	return t
 end
 
-function StatsAnnotatedGraphModule:SetZIndex(ZIndex) --[[ Line: 71 ]]
+function StatsAnnotatedGraphModule:SetZIndex(ZIndex)
 	self._frame.ZIndex = ZIndex
 	self._topLabel.ZIndex = ZIndex
 	self._bottomLabel.ZIndex = ZIndex
 	self._graph:SetZIndex(ZIndex)
 end
 
-function StatsAnnotatedGraphModule:_layoutElements() --[[ Line: 78 ]]
+function StatsAnnotatedGraphModule:_layoutElements()
 	local XOffset = nil
 	if self._isMaximized then
 		XOffset = 30
@@ -69,13 +69,13 @@ function StatsAnnotatedGraphModule:_layoutElements() --[[ Line: 78 ]]
 	self._graph:PlaceInParent(self._frame, _UDim2_1, _UDim2)
 end
 
-function StatsAnnotatedGraphModule:PlaceInParent(Parent, Size, Position) --[[ Line: 108 ]]
+function StatsAnnotatedGraphModule:PlaceInParent(Parent, Size, Position)
 	self._frame.Position = Position
 	self._frame.Size = Size
 	self._frame.Parent = Parent
 end
 
-function StatsAnnotatedGraphModule:_getTarget() --[[ Line: 114 ]]
+function StatsAnnotatedGraphModule:_getTarget()
 	if self._performanceStats == nil then
 		return 0
 	else
@@ -85,7 +85,7 @@ function StatsAnnotatedGraphModule:_getTarget() --[[ Line: 114 ]]
 	end
 end
 
-function StatsAnnotatedGraphModule:_render() --[[ Line: 128 ]]
+function StatsAnnotatedGraphModule:_render()
 	self._graph:SetAxisMax(self._axisMax)
 	self._graph:SetValues(self._values)
 	self._graph:SetAverage(self._average)
@@ -95,13 +95,13 @@ function StatsAnnotatedGraphModule:_render() --[[ Line: 128 ]]
 	self._bottomLabel.Text = string.format("%.2f", 0)
 end
 
-function StatsAnnotatedGraphModule:_calculateAxisMax() --[[ Line: 140 ]]
+function StatsAnnotatedGraphModule:_calculateAxisMax()
 	local ScaledTarget = self._target * 2
 	local RecursiveGetOrderOfMagnitudeResult = self:_recursiveGetOrderOfMagnitude(1, ScaledTarget)
 	self._axisMax = math.floor(0.5 + ScaledTarget / RecursiveGetOrderOfMagnitudeResult) * RecursiveGetOrderOfMagnitudeResult
 end
 
-function StatsAnnotatedGraphModule:SetStatsAggregator(_aggregator) --[[ Line: 150 ]]
+function StatsAnnotatedGraphModule:SetStatsAggregator(_aggregator)
 	if self._aggregator then
 		self._aggregator:RemoveListener(self._listenerId)
 		self._listenerId = nil
@@ -111,7 +111,7 @@ function StatsAnnotatedGraphModule:SetStatsAggregator(_aggregator) --[[ Line: 15
 	self:_refreshVisibility()
 end
 
-function StatsAnnotatedGraphModule:_stopListening() --[[ Line: 162 ]]
+function StatsAnnotatedGraphModule:_stopListening()
 	if self._aggregator == nil then return end
 	if self._listenerId ~= nil then
 		self._aggregator:RemoveListener(self._listenerId)
@@ -121,10 +121,10 @@ function StatsAnnotatedGraphModule:_stopListening() --[[ Line: 162 ]]
 	end
 end
 
-function StatsAnnotatedGraphModule:_startListening() --[[ Line: 175 ]]
+function StatsAnnotatedGraphModule:_startListening()
 	if self._aggregator == nil then return end
 	if self._listenerId == nil then
-		self._listenerId = self._aggregator:AddListener(function() --[[ Line: 184 ]]
+		self._listenerId = self._aggregator:AddListener(function()
 			-- upvalues: self (copy)
 			self:_updateValuesAndRender()
 		end)
@@ -133,17 +133,17 @@ function StatsAnnotatedGraphModule:_startListening() --[[ Line: 175 ]]
 	end
 end
 
-function StatsAnnotatedGraphModule._shouldBeVisible(p1) --[[ Line: 189 ]]
+function StatsAnnotatedGraphModule._shouldBeVisible(p1)
 	-- upvalues: StatsUtilsModule (copy)
 	return if StatsUtilsModule.PerformanceStatsShouldBeVisible() then p1._frame.Visible else false
 end
 
-function StatsAnnotatedGraphModule:SetVisible(Visible) --[[ Line: 197 ]]
+function StatsAnnotatedGraphModule:SetVisible(Visible)
 	self._frame.Visible = Visible
 	self:_refreshVisibility()
 end
 
-function StatsAnnotatedGraphModule:_refreshVisibility() --[[ Line: 202 ]]
+function StatsAnnotatedGraphModule:_refreshVisibility()
 	if self:_shouldBeVisible() then
 		self:_startListening()
 		self:_updateValuesAndRender()
@@ -154,15 +154,15 @@ function StatsAnnotatedGraphModule:_refreshVisibility() --[[ Line: 202 ]]
 	end
 end
 
-function StatsAnnotatedGraphModule:OnPerformanceStatsShouldBeVisibleChanged() --[[ Line: 211 ]]
+function StatsAnnotatedGraphModule:OnPerformanceStatsShouldBeVisibleChanged()
 	self:_refreshVisibility()
 end
 
-function StatsAnnotatedGraphModule._recursiveGetOrderOfMagnitude(p1, p2: number, ScaledTarget) --[[ Line: 215 ]]
+function StatsAnnotatedGraphModule._recursiveGetOrderOfMagnitude(p1, p2: number, ScaledTarget)
 	return if ScaledTarget < p2 then p1:_recursiveGetOrderOfMagnitude(p2 / 10, ScaledTarget) elseif ScaledTarget <= p2 * 10 then p2 else p1:_recursiveGetOrderOfMagnitude(p2 * 10, ScaledTarget)
 end
 
-function StatsAnnotatedGraphModule:_updateValuesAndRender() --[[ Line: 227 ]]
+function StatsAnnotatedGraphModule:_updateValuesAndRender()
 	self._values = {}
 	self._average = 0
 	self._target = 0

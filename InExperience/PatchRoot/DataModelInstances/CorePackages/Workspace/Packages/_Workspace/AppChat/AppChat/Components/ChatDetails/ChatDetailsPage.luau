@@ -44,28 +44,28 @@ local config = {
 	createUnfilteredChatSubTitleText = "All members of this conversation will be invited, but some are not eligible to join.",
 	LayoutOrder = 0,
 	participants = {},
-	navigateBack = function() --[[ Line: 83 ]] end,
-	onGroupNameEntryCellActivated = function(_) --[[ Line: 98 ]]
+	navigateBack = function() end,
+	onGroupNameEntryCellActivated = function(_)
 		-- upvalues: LoggerModule (copy)
 		LoggerModule:warning("onGroupNameEntryCellActivated was not passed to ChatDetailsPage")
 	end,
-	onAddFriendsCellActivated = function(_) --[[ Line: 101 ]]
+	onAddFriendsCellActivated = function(_)
 		-- upvalues: LoggerModule (copy)
 		LoggerModule:warning("onAddFriendsCellActivated was not passed to ChatDetailsPage")
 	end,
-	onLeaveGroupCellActivated = function(_) --[[ Line: 104 ]]
+	onLeaveGroupCellActivated = function(_)
 		-- upvalues: LoggerModule (copy)
 		LoggerModule:warning("onLeaveGroupCellActivated was not passed to ChatDetailsPage")
 	end,
-	onParticipantCellActivated = function(_, _) --[[ Line: 107 ]]
+	onParticipantCellActivated = function(_, _)
 		-- upvalues: LoggerModule (copy)
 		LoggerModule:warning("onParticipantCellActivated was not passed to ChatDetailsPage")
 	end,
-	onConversationTypeIconActivated = function(_) --[[ Line: 110 ]]
+	onConversationTypeIconActivated = function(_)
 		-- upvalues: LoggerModule (copy)
 		LoggerModule:warning("onConversationTypeIconActivated was not passed to ChatDetailsPage")
 	end,
-	onCreateUnfilteredChatCellActivated = function(_) --[[ Line: 113 ]]
+	onCreateUnfilteredChatCellActivated = function(_)
 		-- upvalues: LoggerModule (copy)
 		LoggerModule:warning("onCreateUnfilteredChatCellActivated was not passed to ChatDetailsPage")
 	end,
@@ -74,7 +74,7 @@ local config = {
 	})
 }
 
-function ChatDetailsPage(p1) --[[ Line: 132 ]]
+function ChatDetailsPage(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseTextSizeOffsetFunction (copy), UseTokensFunction (copy), UseIsAppChatVerticallyConstrainedModule (copy), LoggerModule (copy), UseCallbackFunction (copy), UseIsChatUserMessagesEnabledModule (copy), ReactModule (copy), AppChatDetailsPageAutomaticCanvasSize (copy), SectionHeaderModule (copy), GroupNameEntryCellModule (copy), Images (copy), AddFriendsEntryModule (copy), ParticipantListModule (copy), LeaveGroupCellModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), ConversationTypeCellModule (copy), CreateUnfilteredChatCellModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local Style = JoinResult.style
@@ -92,22 +92,22 @@ function ChatDetailsPage(p1) --[[ Line: 132 ]]
 		GroupNameEntryCell = { paddingBottom = Style.Tokens.Size.Size_0 }
 	}
 	
-	local function OnActivated() --[[ Line: 155 ]]
+	local function OnActivated()
 		-- upvalues: JoinResult (copy)
 		JoinResult.onGroupNameEntryCellActivated(JoinResult.conversation)
 	end
 	
-	local function OnActivated1() --[[ Line: 159 ]]
+	local function OnActivated1()
 		-- upvalues: JoinResult (copy)
 		JoinResult.onAddFriendsCellActivated(JoinResult.conversation)
 	end
 	
-	local function OnActivated2() --[[ Line: 163 ]]
+	local function OnActivated2()
 		-- upvalues: JoinResult (copy)
 		JoinResult.onLeaveGroupCellActivated(JoinResult.conversation)
 	end
 	
-	local function OnEntryActivated(p2, p3) --[[ Line: 167 ]]
+	local function OnEntryActivated(p2, p3)
 		-- upvalues: LoggerModule (upval), JoinResult (copy)
 		LoggerModule:info("onParticipantCellActivated: {}", p2.id)
 		
@@ -118,11 +118,11 @@ function ChatDetailsPage(p1) --[[ Line: 132 ]]
 		end
 	end
 	
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 176 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: JoinResult (copy)
 		JoinResult.onCreateUnfilteredChatCellActivated(JoinResult.conversation)
 	end, { JoinResult.conversation })
-	local UseCallbackResult1 = UseCallbackFunction(function(_, SwipeDirection, p2) --[[ Line: 181 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function(_, SwipeDirection, p2)
 		-- upvalues: JoinResult (copy)
 		if not JoinResult.wideMode and SwipeDirection == Enum.SwipeDirection.Right and p2 == 1 then
 			JoinResult.navigateBack()

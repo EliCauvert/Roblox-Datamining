@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.Parent.Types)
 
-return function(Object) --[[ Line: 7 | Named "createStaticModelSource" ]]
-	return function(_) --[[ Line: 8 ]]
+return function(Object)
+	return function(_)
 		-- upvalues: Object (copy)
 		local ObjectClone = Object:Clone()
 		local Humanoid = ObjectClone:FindFirstChildOfClass("Humanoid")

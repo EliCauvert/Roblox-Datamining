@@ -2,7 +2,7 @@
 local HttpModule = require(Parent.Http)
 local HttpClientModule = require(Parent.HttpClient)
 
-return function(Network) --[[ Line: 11 | Named "getCurrentlyWearingSavedOutfitId" ]]
+return function(Network)
 	-- upvalues: HttpModule (copy), HttpClientModule (copy)
 	return HttpClientModule.asPromise(HttpClientModule.fetch({
 		method = "GET",
@@ -10,7 +10,7 @@ return function(Network) --[[ Line: 11 | Named "getCurrentlyWearingSavedOutfitId
 		legacy = true,
 		url = `{HttpModule.Url.AVATAR_URL}v1/avatar/currently-wearing-saved-outfit`,
 		network = Network,
-		decode = function(p1) --[[ Line: 20 ]]
+		decode = function(p1)
 			local SavedOutfitId = p1.savedOutfitId
 			
 			return if SavedOutfitId == nil then nil else tostring(SavedOutfitId)

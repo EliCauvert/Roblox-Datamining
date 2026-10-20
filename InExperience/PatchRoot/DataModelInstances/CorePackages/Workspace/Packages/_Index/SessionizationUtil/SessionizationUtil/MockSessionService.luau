@@ -2,7 +2,7 @@
 local Module = {}
 Module.__index = Module
 
-function Module.new(Sid, Tag) --[[ Line: 10 ]]
+function Module.new(Sid, Tag)
 	-- upvalues: Module (copy)
 	local config = {
 		parent = nil,
@@ -17,14 +17,14 @@ function Module.new(Sid, Tag) --[[ Line: 10 ]]
 	return config
 end
 
-function Module:addChild(Sid, Tag) --[[ Line: 27 ]]
+function Module:addChild(Sid, Tag)
 	-- upvalues: Module (copy)
 	local NewModule = Module.new(Sid, Tag)
 	NewModule.parent = self
 	self.children[Sid] = NewModule
 end
 
-function Module:dump(Text, DumpResult) --[[ Line: 34 ]]
+function Module:dump(Text, DumpResult)
 	local Text1 = DumpResult .. `{Text} sid: {self.sid}, tag: {self.tag}\n`
 	local Text2 = Text .. "----"
 	
@@ -34,7 +34,7 @@ function Module:dump(Text, DumpResult) --[[ Line: 34 ]]
 	return Text1
 end
 
-function findSid(p1, Sid) --[[ Line: 44 ]]
+function findSid(p1, Sid)
 	if p1.sid == Sid then
 		return p1
 	end
@@ -52,7 +52,7 @@ end
 local MockSessionService = { MOCK_ROOT_SID = "MOCK_ROOT_SID" }
 MockSessionService.__index = MockSessionService
 
-function MockSessionService.new() --[[ Line: 65 ]]
+function MockSessionService.new()
 	-- upvalues: Module (copy), MockSessionService (copy), Signal (copy)
 	local config = {
 		mockRootNode = Module.new(MockSessionService.MOCK_ROOT_SID, MockSessionService.MOCK_ROOT_SID),
@@ -63,28 +63,28 @@ function MockSessionService.new() --[[ Line: 65 ]]
 	return config
 end
 
-function MockSessionService:_resetMockData() --[[ Line: 78 ]]
+function MockSessionService:_resetMockData()
 	-- upvalues: Module (copy), MockSessionService (copy)
 	self.mockRootNode = Module.new(MockSessionService.MOCK_ROOT_SID, MockSessionService.MOCK_ROOT_SID)
 end
 
-function MockSessionService:_findSid(p2) --[[ Line: 82 ]]
+function MockSessionService:_findSid(p2)
 	return findSid(self.mockRootNode, p2)
 end
 
-function MockSessionService._dumpSessionTree(p2) --[[ Line: 86 ]]
+function MockSessionService._dumpSessionTree(p2)
 	return if p2.mockRootNode == nil then "Root node is nil!" else p2.mockRootNode:dump("", "")
 end
 
-function MockSessionService:GetRootSID() --[[ Line: 94 ]]
+function MockSessionService:GetRootSID()
 	return self.MOCK_ROOT_SID
 end
 
-function MockSessionService:SetSession(p2, p3, p4) --[[ Line: 98 ]]
+function MockSessionService:SetSession(p2, p3, p4)
 	(findSid(self.mockRootNode, p2) or self.mockRootNode):addChild(p3, p4)
 end
 
-function MockSessionService:ReplaceSession(p2, p3) --[[ Line: 104 ]]
+function MockSessionService:ReplaceSession(p2, p3)
 	local Sid = findSid(self.mockRootNode, p2)
 	
 	if Sid ~= nil and Sid.parent ~= nil then
@@ -93,7 +93,7 @@ function MockSessionService:ReplaceSession(p2, p3) --[[ Line: 104 ]]
 	end
 end
 
-function MockSessionService:RemoveSession(Sid) --[[ Line: 114 ]]
+function MockSessionService:RemoveSession(Sid)
 	local Sid1 = findSid(self.mockRootNode, Sid)
 	
 	if Sid1 ~= nil then
@@ -105,13 +105,13 @@ function MockSessionService:RemoveSession(Sid) --[[ Line: 114 ]]
 	end
 end
 
-function MockSessionService:GetMetadata(p2, p3) --[[ Line: 124 ]]
+function MockSessionService:GetMetadata(p2, p3)
 	local Sid = findSid(self.mockRootNode, p2)
 	
 	return if Sid == nil then nil else Sid.metadata[p3]
 end
 
-function MockSessionService:SetMetadata(p2, p3, p4) --[[ Line: 133 ]]
+function MockSessionService:SetMetadata(p2, p3, p4)
 	local Sid = findSid(self.mockRootNode, p2)
 	
 	if Sid ~= nil then
@@ -119,13 +119,13 @@ function MockSessionService:SetMetadata(p2, p3, p4) --[[ Line: 133 ]]
 	end
 end
 
-function MockSessionService:SessionExists(p2): boolean --[[ Line: 140 ]]
+function MockSessionService:SessionExists(p2): boolean
 	return findSid(self.mockRootNode, p2) ~= nil
 end
 
-function MockSessionService:RemoveSessionsWithMetadataKey(p2) --[[ Line: 145 ]]
+function MockSessionService:RemoveSessionsWithMetadataKey(p2)
 	if p2 == nil then return end
-	local function findNodeWithMetadataKey(p3, MockRootNode) --[[ Line: 150 ]]
+	local function findNodeWithMetadataKey(p3, MockRootNode)
 		-- upvalues: findNodeWithMetadataKey (copy)
 		if MockRootNode ~= nil then
 			if MockRootNode.metadata[p3] ~= nil then
@@ -150,11 +150,11 @@ function MockSessionService:RemoveSessionsWithMetadataKey(p2) --[[ Line: 145 ]]
 	end
 end
 
-function MockSessionService:generateSessionInfoString(_, _, _, _): string --[[ Line: 174 ]]
+function MockSessionService:generateSessionInfoString(_, _, _, _): string
 	return ""
 end
 
-function MockSessionService:GetSessionTag(p4) --[[ Line: 183 ]]
+function MockSessionService:GetSessionTag(p4)
 	local Sid = findSid(self.mockRootNode, p4)
 	
 	return if Sid == nil then "" else Sid.tag

@@ -4,7 +4,7 @@ local Parent = script.Parent.Parent
 local CollectibleInstanceModule = require(Parent.Models.CollectibleInstance)
 
 return require(CorePackages.Packages.Rodux).createReducer({}, {
-	[require(Parent.Actions.SetCollectibleResellableInstances).name] = function(p1, p2) --[[ Line: 13 ]]
+	[require(Parent.Actions.SetCollectibleResellableInstances).name] = function(p1, p2)
 		-- upvalues: CollectibleInstanceModule (copy), CryoModule (copy)
 		local CollectibleItemId = p2.collectibleItemId
 		local FromGetCollectibleItemInstancesResults = {}

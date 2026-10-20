@@ -12,7 +12,7 @@ local GetFIntUGCValidationMaxEmissiveStrengthForAreaChecksModule = require(Paren
 local GetFFlagUGCValidateEmissiveFixAreaChecksModule = require(Parent.flags.getFFlagUGCValidateEmissiveFixAreaChecks)
 local GetFFlagUGCValidateEmissiveAreaChecksFixedAlgoModule = require(Parent.flags.getFFlagUGCValidateEmissiveAreaChecksFixedAlgo)
 
-local function _(p1, ChildName) --[[ Line: 44 | Named "getEmissiveStrength" ]]
+local function _(p1, ChildName)
 	local RootInstance = p1.rootInstance
 	
 	if RootInstance.Name ~= ChildName then
@@ -27,7 +27,7 @@ local function _(p1, ChildName) --[[ Line: 44 | Named "getEmissiveStrength" ]]
 	end
 end
 
-local function getWeightedAreaForTextures(p1, Editable, Editable1) --[[ Line: 56 ]]
+local function getWeightedAreaForTextures(p1, Editable, Editable1)
 	local Editable2 = p1.editable
 	local Size = Editable.Size
 	local PixelsBuffer = Editable:ReadPixelsBuffer(Vector2.zero, Size)
@@ -64,7 +64,7 @@ local function getWeightedAreaForTextures(p1, Editable, Editable1) --[[ Line: 56
 	return Total / 255, Total1
 end
 
-local function getTotalEmissiveSurfaceArea(p2, Editable) --[[ Line: 115 ]]
+local function getTotalEmissiveSurfaceArea(p2, Editable)
 	local Editable1 = p2.editable
 	local Size = Editable.Size
 	local PixelsBuffer = Editable:ReadPixelsBuffer(Vector2.zero, Size)
@@ -92,7 +92,7 @@ local function getTotalEmissiveSurfaceArea(p2, Editable) --[[ Line: 115 ]]
 	return NewByteValue / 255, Total
 end
 
-local _ = function(p3, p4, p5, ChildName) --[[ Line: 152 | Named "getEmissiveFraction" ]]
+local _ = function(p3, p4, p5, ChildName)
 	-- upvalues: getTotalEmissiveSurfaceArea (copy), GetFIntUGCValidationMaxEmissiveStrengthForAreaChecksModule (copy)
 	local TotalEmissiveSurfaceArea, TotalEmissiveSurfaceArea2 = getTotalEmissiveSurfaceArea(p3, p4)
 	
@@ -115,14 +115,14 @@ local _ = function(p3, p4, p5, ChildName) --[[ Line: 152 | Named "getEmissiveFra
 	return TotalEmissiveSurfaceAreaRatio * EmissiveStrength / GetFIntUGCValidationMaxEmissiveStrengthForAreaChecksModule()
 end
 
-local _ = function(p3, p4, p5, p6) --[[ Line: 168 | Named "getTotalEmissiveArea" ]]
+local _ = function(p3, p4, p5, p6)
 	-- upvalues: getWeightedAreaForTextures (copy)
 	local ColorMap = p5.meshTextures[p6].ColorMap
 	
 	return getWeightedAreaForTextures(p3, p4.editable, if ColorMap then ColorMap.editable else nil)
 end
 
-local function runEmissiveAreaChecks(p3, p4) --[[ Line: 184 ]]
+local function runEmissiveAreaChecks(p3, p4)
 	-- upvalues: getWeightedAreaForTextures (copy), GetFIntUGCValidationMaxEmissiveStrengthForAreaChecksModule (copy), ValidationEnumsModule (copy), GetFIntUGCValidateMaxEmissiveAreaRigidAccessoryModule (copy), ErrorSourceStringsModule (copy), GetFIntUGCValidateMaxEmissivePercentageBodyModule (copy), GetFIntUGCValidateMaxEmissivePercentageDynamicHeadModule (copy), AssetService (copy), GetFIntUGCValidateEmissiveR15BlockyBoundingBoxVolumeModule (copy), GetFIntUGCValidateMaxEmissiveAreaLayeredClothingModule (copy)
 	for MeshName, value in p4.renderMeshesData do
 		local MeshTexture = p4.meshTextures[MeshName]
@@ -189,7 +189,7 @@ return {
 		ValidationEnumsModule.SharedDataMember.uploadCategory
 	},
 	expectedFailures = {},
-	run = function(p5, p6) --[[ Line: 248 ]]
+	run = function(p5, p6)
 		-- upvalues: GetFFlagUGCValidateEmissiveAreaChecksFixedAlgoModule (copy), runEmissiveAreaChecks (copy), ValidationEnumsModule (copy), getTotalEmissiveSurfaceArea (copy), GetFFlagUGCValidateEmissiveFixAreaChecksModule (copy), GetFIntUGCValidationMaxEmissiveStrengthForAreaChecksModule (copy), GetFIntUGCValidateMaxEmissiveAreaRigidAccessoryModule (copy), ErrorSourceStringsModule (copy), GetFIntUGCValidateMaxEmissivePercentageBodyModule (copy), GetFIntUGCValidateMaxEmissivePercentageDynamicHeadModule (copy), AssetService (copy), GetFIntUGCValidateEmissiveR15BlockyBoundingBoxVolumeModule (copy), GetFIntUGCValidateMaxEmissiveAreaLayeredClothingModule (copy)
 		if GetFFlagUGCValidateEmissiveAreaChecksFixedAlgoModule() then
 			runEmissiveAreaChecks(p5, p6)

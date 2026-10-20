@@ -1,4 +1,4 @@
-﻿local function deepEqual(List, List1, p1): boolean --[[ Line: 7 ]]
+﻿local function deepEqual(List, List1, p1): boolean
 	-- upvalues: deepEqual (copy)
 	if List == List1 then
 		return true

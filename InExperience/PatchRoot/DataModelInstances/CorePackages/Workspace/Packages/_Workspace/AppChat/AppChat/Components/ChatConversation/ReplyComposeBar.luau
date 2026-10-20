@@ -12,10 +12,10 @@ local config = {
 	replyingToUserText = nil,
 	replyingToUserContent = nil,
 	replyingToUserId = nil,
-	onCloseActivated = function() --[[ Line: 32 ]] end
+	onCloseActivated = function() end
 }
 
-function ReplyComposeBar(p1) --[[ Line: 35 ]]
+function ReplyComposeBar(p1)
 	-- upvalues: CryoModule (copy), config (copy), FoundationModule (copy), UseFoundationPresenceModule (copy), ReactModule (copy), FFlagAppChatUseProfileFrameThumbnailModule (copy), ReplyComposeBarTextModule (copy), BuilderIconsModule (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()

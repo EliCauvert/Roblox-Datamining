@@ -22,12 +22,12 @@ local config = {
 	["rbxasset://textures/ui/Controls/PlayStationController/ButtonTriangle@2x.png"] = IconName.PsTriagle
 }
 
-local function getIsSwitchServerButtonHidden(p1): boolean --[[ Line: 43 ]]
+local function getIsSwitchServerButtonHidden(p1): boolean
 	-- upvalues: GetSwitchServerStoreFunction (copy)
 	return not GetSwitchServerStoreFunction(p1).shouldEnableSwitchServer(p1)
 end
 
-local function createRespawnButtonConfig(SessionActionBindings, GetShortcutIcon, SetShortcutIcon) --[[ Line: 47 ]]
+local function createRespawnButtonConfig(SessionActionBindings, GetShortcutIcon, SetShortcutIcon)
 	-- upvalues: IconName (copy), EnumsModule (copy), ButtonWidth (copy)
 	return {
 		name = "RespawnButton",
@@ -42,7 +42,7 @@ local function createRespawnButtonConfig(SessionActionBindings, GetShortcutIcon,
 	}
 end
 
-local function createLeaveButtonConfig(SessionActionBindings, GetShortcutIcon, SetShortcutIcon, p1) --[[ Line: 65 ]]
+local function createLeaveButtonConfig(SessionActionBindings, GetShortcutIcon, SetShortcutIcon, p1)
 	-- upvalues: ConstantsModule (copy), IconName (copy), EnumsModule (copy), ButtonWidth (copy)
 	return {
 		name = "LeaveButton",
@@ -57,7 +57,7 @@ local function createLeaveButtonConfig(SessionActionBindings, GetShortcutIcon, S
 	}
 end
 
-local function _(p1) --[[ Line: 84 | Named "createSwitchServerButtonConfig" ]]
+local function _(p1)
 	-- upvalues: ConstantsModule (copy), EnumsModule (copy), getIsSwitchServerButtonHidden (copy), ButtonWidth (copy)
 	return {
 		label = "CoreScripts.InGameMenu.PeoplePage.SwitchServer",
@@ -69,7 +69,7 @@ local function _(p1) --[[ Line: 84 | Named "createSwitchServerButtonConfig" ]]
 	}
 end
 
-return function() --[[ Line: 95 | Named "createSessionActionButtonsStore" ]]
+return function()
 	-- upvalues: GetActionBindingsStoreModule (copy), IsPioneerLaunchFunction (copy), SignalsModule (copy), createRespawnButtonConfig (copy), ConstantsModule (copy), EnumsModule (copy), getIsSwitchServerButtonHidden (copy), ButtonWidth (copy), createLeaveButtonConfig (copy), GetInputModeStoreFunction (copy), Input (copy), UserInputService (copy), config (copy)
 	local SessionActionBindings = GetActionBindingsStoreModule().sessionActionBindings
 	local IsPioneerLaunch = IsPioneerLaunchFunction()
@@ -91,7 +91,7 @@ return function() --[[ Line: 95 | Named "createSessionActionButtonsStore" ]]
 	end
 	table.insert(List, (createLeaveButtonConfig(SessionActionBindings, Signal, Signal2, IsPioneerLaunch)))
 	local GamepadConnectedConnection = nil
-	local Effect = SignalsModule.createEffect(function(p1) --[[ Line: 117 ]]
+	local Effect = SignalsModule.createEffect(function(p1)
 		-- upvalues: GetInputModeStoreFunction (upval), GamepadConnectedConnection (ref), Input (upval), List (copy), UserInputService (upval), config (upval)
 		local LastInputType = GetInputModeStoreFunction(p1).getLastInputType(p1)
 		
@@ -99,7 +99,7 @@ return function() --[[ Line: 95 | Named "createSessionActionButtonsStore" ]]
 			GamepadConnectedConnection:Disconnect()
 		end
 		if LastInputType == Input.Directional then
-			local function setGamepadIcons() --[[ Line: 125 ]]
+			local function setGamepadIcons()
 				-- upvalues: List (upval), UserInputService (upval), config (upval)
 				for _, RespawnButtonConfig in List do
 					if RespawnButtonConfig.setShortcutIcon and RespawnButtonConfig.gamepadKeyCode then
@@ -108,7 +108,7 @@ return function() --[[ Line: 95 | Named "createSessionActionButtonsStore" ]]
 				end
 			end
 			
-			GamepadConnectedConnection = UserInputService.GamepadConnected:Connect(function(_) --[[ Line: 138 ]]
+			GamepadConnectedConnection = UserInputService.GamepadConnected:Connect(function(_)
 				-- upvalues: setGamepadIcons (copy)
 				setGamepadIcons()
 			end)
@@ -134,7 +134,7 @@ return function() --[[ Line: 95 | Named "createSessionActionButtonsStore" ]]
 	
 	return {
 		sessionActionButtonConfigs = List,
-		cleanUp = function() --[[ Line: 158 ]]
+		cleanUp = function()
 			-- upvalues: GamepadConnectedConnection (ref), Effect (copy)
 			if GamepadConnectedConnection then
 				GamepadConnectedConnection:Disconnect()

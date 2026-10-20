@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("AvatarExperienceCatalog").Components.ResultsList.WidgetListInfoViewModel)
 
-return function(p1, p2: number) --[[ Line: 17 | Named "getWidgetItemIdsFromWidgetInfo" ]]
+return function(p1, p2: number)
 	local List = {}
 	
 	if not p1 or not p1.content then

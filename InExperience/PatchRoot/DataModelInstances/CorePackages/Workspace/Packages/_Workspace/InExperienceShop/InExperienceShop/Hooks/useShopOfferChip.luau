@@ -16,10 +16,10 @@ local UseOfferModalTextModule = require(InExperienceShop.Hooks.useOfferModalText
 local FFlagShopCloseOfferDialogOnCoreMenuModule = require(InExperienceShop.Flags.FFlagShopCloseOfferDialogOnCoreMenu)
 local FFlagShowLargerOfferBannerOnDesktop2Module = require(InExperienceShop.Flags.FFlagShowLargerOfferBannerOnDesktop2)
 
-return function(p1, p2) --[[ Line: 56 | Named "useShopOfferChip" ]]
+return function(p1, p2)
 	-- upvalues: UseOffersForKeyFunction (copy), ReactModule (copy), SelectActiveOfferFunction (copy), UseRemainingTimeTextFunction (copy), FFlagHideOfferNotificationsWhenShopEmpty (copy), UseShopHasItemsFunction (copy), FFlagEnableUserOffers (copy), UseLocalizationFunction (copy), FFlagShowLargerOfferBannerOnDesktop2Module (copy), UseOfferModalTextModule (copy), OfferDialogStateModule (copy), FFlagShopCloseOfferDialogOnCoreMenuModule (copy), UseCloseOnCoreMenuModule (copy)
 	local UseOffersForKeyResult = UseOffersForKeyFunction(p1)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 60 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: SelectActiveOfferFunction (upval), UseOffersForKeyResult (copy)
 		return SelectActiveOfferFunction(UseOffersForKeyResult, "banner")
 	end, { UseOffersForKeyResult })
@@ -48,15 +48,15 @@ return function(p1, p2) --[[ Line: 56 | Named "useShopOfferChip" ]]
 		bodyText = if Modal then Modal.body else ""
 	}
 	local UseStateResult, UseStateResult2 = ReactModule.useState(OfferDialogStateModule.None)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 126 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), OfferDialogStateModule (upval)
 		UseStateResult2(OfferDialogStateModule.Details)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 129 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), OfferDialogStateModule (upval)
 		UseStateResult2(OfferDialogStateModule.Terms)
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 134 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), OfferDialogStateModule (upval)
 		UseStateResult2(OfferDialogStateModule.None)
 	end, {})

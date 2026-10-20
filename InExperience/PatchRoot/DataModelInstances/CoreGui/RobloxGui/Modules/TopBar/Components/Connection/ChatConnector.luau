@@ -19,42 +19,42 @@ else
 		updateChatMessages = TModule.callback
 	})
 	
-	function ChatConnector.didMount(p1) --[[ Line: 35 ]]
+	function ChatConnector.didMount(p1)
 		-- upvalues: GameSettings (copy), ChatSelectorModule (copy)
 		ChatSelectorModule:SetVisible(not p1.props.isSmallTouchScreen and GameSettings.ChatVisible)
 		p1.props.updateChatMessages(ChatSelectorModule:GetMessageCount())
 		p1.props.updateChatVisible(ChatSelectorModule:GetVisibility())
-		p1.chatVisibleConnection = ChatSelectorModule.VisibilityStateChanged:connect(function(p2) --[[ Line: 45 ]]
+		p1.chatVisibleConnection = ChatSelectorModule.VisibilityStateChanged:connect(function(p2)
 			-- upvalues: p1 (copy)
 			p1.props.updateChatVisible(p2)
 		end)
-		p1.chatMessagesConnection = ChatSelectorModule.MessagesChanged:connect(function(p2) --[[ Line: 49 ]]
+		p1.chatMessagesConnection = ChatSelectorModule.MessagesChanged:connect(function(p2)
 			-- upvalues: p1 (copy)
 			p1.props.updateChatMessages(p2)
 		end)
 	end
 	
-	function ChatConnector:render() --[[ Line: 54 ]]
+	function ChatConnector:render()
 		return nil
 	end
 	
-	function ChatConnector.willUnmount(p1) --[[ Line: 58 ]]
+	function ChatConnector.willUnmount(p1)
 		p1.chatVisibleConnection:disconnect()
 		p1.chatMessagesConnection:disconnect()
 	end
 	
-	return RoactRoduxModule.UNSTABLE_connect2(function(p1) --[[ Line: 63 | Named "mapStateToProps" ]]
+	return RoactRoduxModule.UNSTABLE_connect2(function(p1)
 		return {
 			isSmallTouchScreen = p1.displayOptions.isSmallTouchDevice
 		}
-	end, function(Callback) --[[ Line: 69 | Named "mapDispatchToProps" ]]
+	end, function(Callback)
 		-- upvalues: UpdateChatVisibleModule (copy), UpdateChatMessagesModule (copy)
 		return {
-			updateChatVisible = function(p1) --[[ Line: 71 ]]
+			updateChatVisible = function(p1)
 				-- upvalues: Callback (copy), UpdateChatVisibleModule (upval)
 				return Callback(UpdateChatVisibleModule(p1))
 			end,
-			updateChatMessages = function(p1) --[[ Line: 75 ]]
+			updateChatMessages = function(p1)
 				-- upvalues: Callback (copy), UpdateChatMessagesModule (upval)
 				return Callback(UpdateChatMessagesModule(p1))
 			end

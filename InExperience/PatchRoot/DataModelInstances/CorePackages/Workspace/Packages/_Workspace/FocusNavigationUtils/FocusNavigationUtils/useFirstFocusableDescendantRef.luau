@@ -1,22 +1,22 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("FocusNavigationUtils").Parent.React)
 local GetFirstFocusableDescendantModule = require(script.Parent.getFirstFocusableDescendant)
 
-local function _(Connection) --[[ Line: 6 | Named "safeDisconnect" ]]
+local function _(Connection)
 	if Connection then
 		Connection:Disconnect()
 	end
 end
 
-return function(p1) --[[ Line: 23 | Named "useFirstFocusableDescendantRef" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), GetFirstFocusableDescendantModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 26 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: GetFirstFocusableDescendantModule (upval), UseRefResult (copy), p1 (copy)
 		local Connection = nil
 		local DescendantAddedConnection = nil
 		local AncestryChangedConnection = nil
 		
-		local function updateFirstFocusable(p2) --[[ Line: 31 ]]
+		local function updateFirstFocusable(p2)
 			-- upvalues: Connection (ref), AncestryChangedConnection (ref), GetFirstFocusableDescendantModule (upval), updateFirstFocusable (copy), UseRefResult (upval)
 			local Connection1 = Connection
 			
@@ -31,11 +31,11 @@ return function(p1) --[[ Line: 23 | Named "useFirstFocusableDescendantRef" ]]
 			local FirstFocusableDescendantModule = GetFirstFocusableDescendantModule(p2)
 			
 			if FirstFocusableDescendantModule then
-				Connection = FirstFocusableDescendantModule:GetPropertyChangedSignal("Selectable"):Connect(function() --[[ Line: 38 ]]
+				Connection = FirstFocusableDescendantModule:GetPropertyChangedSignal("Selectable"):Connect(function()
 					-- upvalues: updateFirstFocusable (upval), p2 (copy)
 					updateFirstFocusable(p2)
 				end)
-				AncestryChangedConnection = FirstFocusableDescendantModule.AncestryChanged:Connect(function() --[[ Line: 42 ]]
+				AncestryChangedConnection = FirstFocusableDescendantModule.AncestryChanged:Connect(function()
 					-- upvalues: updateFirstFocusable (upval), p2 (copy)
 					updateFirstFocusable(p2)
 				end)
@@ -45,14 +45,14 @@ return function(p1) --[[ Line: 23 | Named "useFirstFocusableDescendantRef" ]]
 		
 		if p1 then
 			updateFirstFocusable(p1)
-			DescendantAddedConnection = p1.DescendantAdded:Connect(function() --[[ Line: 51 ]]
+			DescendantAddedConnection = p1.DescendantAdded:Connect(function()
 				-- upvalues: updateFirstFocusable (copy), p1 (upval)
 				updateFirstFocusable(p1)
 			end)
 		else
 			UseRefResult.current = nil
 		end
-		return function() --[[ Line: 58 ]]
+		return function()
 			-- upvalues: Connection (ref), DescendantAddedConnection (ref), AncestryChangedConnection (ref)
 			local Connection1 = Connection
 			

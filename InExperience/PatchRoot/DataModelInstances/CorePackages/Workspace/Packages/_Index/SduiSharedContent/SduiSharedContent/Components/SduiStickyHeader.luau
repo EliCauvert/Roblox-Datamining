@@ -10,7 +10,7 @@ local _ = require(Parent.SduiCoreSystem)
 local UseScrollAwayHeaderPositionFunction = require(Parent.SduiSharedUtilities).useScrollAwayHeaderPosition
 local BuildSduiFeedChildrenModule = require(SduiSharedContent.Components.buildSduiFeedChildren)
 
-local function buildWrappedItems(p1) --[[ Line: 37 ]]
+local function buildWrappedItems(p1)
 	-- upvalues: BuildSduiFeedChildrenModule (copy)
 	return BuildSduiFeedChildrenModule({
 		componentType = "StickyHeader",
@@ -25,7 +25,7 @@ local function buildWrappedItems(p1) --[[ Line: 37 ]]
 	})
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 51 | Named "SduiStickyHeader" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: buildWrappedItems (copy), ReactModule (copy), UseScrollAwayHeaderPositionFunction (copy), View (copy), Divider (copy), Orientation (copy)
 	local WrappedItems = buildWrappedItems(p1)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UDim2.new(1, 0, 0, 0))
@@ -36,14 +36,14 @@ return ReactModule.memo(function(p1) --[[ Line: 51 | Named "SduiStickyHeader" ]]
 		scrollAwayHeight = ScrollAwayHeight,
 		headerHeightBinding = if ScrollAway then ScrollAway.headerHeightBinding else nil
 	})
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 62 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseBindingResult2 (copy)
 		UseBindingResult2(UDim2.new(1, 0, 0, Frame.AbsoluteSize.Y))
 	end, {})
 	local Largest: number = if ScrollAwayHeight then math.max(0, ScrollAwayHeight) else 0
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 68 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseBindingResult (copy), Largest (copy)
-		return UseBindingResult:map(function(p2): UDim2 --[[ Line: 69 ]]
+		return UseBindingResult:map(function(p2): UDim2
 			-- upvalues: Largest (upval)
 			return UDim2.new(1, 0, 0, p2.Y.Offset + Largest)
 		end)

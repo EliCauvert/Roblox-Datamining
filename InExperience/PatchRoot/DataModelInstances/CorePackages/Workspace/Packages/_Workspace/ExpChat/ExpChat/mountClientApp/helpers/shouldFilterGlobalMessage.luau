@@ -1,4 +1,4 @@
-﻿return function(p1, p2, UserId) --[[ Line: 3 ]]
+﻿return function(p1, p2, UserId)
 	local TextSource = p1.TextSource
 	
 	if not TextSource then

@@ -8,7 +8,7 @@ local Text = FoundationModule.Text
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local FFlagProfileAboutDetailsUseSheet = require(Parent.SharedFlags).FFlagProfileAboutDetailsUseSheet
 
-return function(p1) --[[ Line: 19 | Named "AboutDescription" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), View (copy), FFlagProfileAboutDetailsUseSheet (copy), Text (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		about = TextKeysModule.About,

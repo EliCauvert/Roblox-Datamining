@@ -1,8 +1,8 @@
 ﻿local UseSelectorFunction = require(script:FindFirstAncestor("UserSearch").Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function(p1) --[[ Line: 6 | Named "useIsUserBlocked" ]]
+return function(p1)
 	-- upvalues: UseSelectorFunction (copy)
-	return UseSelectorFunction(function(p2): boolean --[[ Line: 7 ]]
+	return UseSelectorFunction(function(p2): boolean
 		-- upvalues: p1 (copy)
 		local PlayerContextualMenu = p2.PlayerContextualMenu
 		

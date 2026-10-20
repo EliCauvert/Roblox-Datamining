@@ -47,7 +47,7 @@ local StateLayer = {
 	affordance = FoundationModule.Enums.StateLayerAffordance.None
 }
 
-local function createFoundationLink(Text, OnActivated, LayoutOrder, UnderlineLinks, UnderlinedLinkTextTag) --[[ Line: 68 ]]
+local function createFoundationLink(Text, OnActivated, LayoutOrder, UnderlineLinks, UnderlinedLinkTextTag)
 	-- upvalues: RoactModule (copy), FoundationModule (copy), StateLayer (copy)
 	return if UnderlineLinks then RoactModule.createElement(FoundationModule.View, {
 		tag = "auto-xy padding-small",
@@ -71,9 +71,9 @@ end
 
 local DisclaimerLinks = RoactModule.PureComponent:extend("DisclaimerLinks")
 
-function DisclaimerLinks.init(p1) --[[ Line: 94 ]]
+function DisclaimerLinks.init(p1)
 	-- upvalues: OpenExternalBrowserModule (copy), AppPage (copy), TransitionAnimationModule (copy), UrlBuilder (copy), AuthFormInteractionFunction (copy), EventStreamConstants (copy)
-	function p1.openDisclaimerLink(Detail) --[[ Line: 95 ]]
+	function p1.openDisclaimerLink(Detail)
 		-- upvalues: p1 (copy), OpenExternalBrowserModule (upval), AppPage (upval), TransitionAnimationModule (upval)
 		if p1.props.useExternalBrowserForDisclaimerLinks then
 			OpenExternalBrowserModule(p1.props.linking, Detail)
@@ -91,7 +91,7 @@ function DisclaimerLinks.init(p1) --[[ Line: 94 ]]
 		end
 	end
 	
-	function p1.openTermsLink() --[[ Line: 110 ]]
+	function p1.openTermsLink()
 		-- upvalues: UrlBuilder (upval), p1 (copy), AuthFormInteractionFunction (upval), EventStreamConstants (upval)
 		local TermsResult = UrlBuilder.static.about.terms()
 		
@@ -101,7 +101,7 @@ function DisclaimerLinks.init(p1) --[[ Line: 94 ]]
 		p1.openDisclaimerLink(TermsResult)
 	end
 	
-	function p1.openPrivacyLink() --[[ Line: 118 ]]
+	function p1.openPrivacyLink()
 		-- upvalues: UrlBuilder (upval), p1 (copy), AuthFormInteractionFunction (upval), EventStreamConstants (upval)
 		local PrivacyResult = UrlBuilder.static.about.privacy()
 		
@@ -112,7 +112,7 @@ function DisclaimerLinks.init(p1) --[[ Line: 94 ]]
 	end
 end
 
-function DisclaimerLinks.render(p1) --[[ Line: 127 ]]
+function DisclaimerLinks.render(p1)
 	-- upvalues: WithLocalizationFunction (copy), WithStyleFunction (copy), UiMode (copy), FFlagFoundationStylingOnSignUp (copy), config (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), FitChildrenModule (copy), RoactModule (copy), ImageSetLabel (copy), GetFFlagEnableAuditForSinglePageSignUpFunction (copy), RegisterAuditContentModule (copy), RegisterAdditionalAuditContentModule (copy), UrlBuilder (copy), ContextualMenu (copy), MenuDirection (copy), LinkButton (copy), NormalizeFontFaceFunction (copy), DisclaimerLinksVariantModule (copy), CryoModule (copy), createFoundationLink (copy), DisclaimerLinkButtonsModule (copy)
 	local IsDualLayout = p1.props.isDualLayout
 	local LoginView = p1.props.tokens.LuaApps.LoginView
@@ -123,9 +123,9 @@ function DisclaimerLinks.render(p1) --[[ Line: 127 ]]
 		termsOfUseTextLong = "CommonUI.Features.Label.TermsOfUse",
 		privacyPolicyText = "CommonUI.Features.Label.Privacy",
 		privacyPolicyTextLong = "CommonUI.Features.Label.PrivacyPolicy"
-	})(function(p2) --[[ Line: 138 ]]
+	})(function(p2)
 		-- upvalues: WithStyleFunction (upval), p1 (copy), UiMode (upval), FFlagFoundationStylingOnSignUp (upval), config (upval), IsDualLayout (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Text (upval), BoxPadding (copy), FitChildrenModule (upval), RoactModule (upval), ImageSetLabel (upval), LoginView (copy), GetFFlagEnableAuditForSinglePageSignUpFunction (upval), RegisterAuditContentModule (upval), RegisterAdditionalAuditContentModule (upval), UrlBuilder (upval), ContextualMenu (upval), MenuDirection (upval), LinkButton (upval), NormalizeFontFaceFunction (upval), DisclaimerLinksVariantModule (upval), CryoModule (upval), createFoundationLink (upval), DisclaimerLinkButtonsModule (upval)
-		return WithStyleFunction(function(p3) --[[ Line: 139 ]]
+		return WithStyleFunction(function(p3)
 			-- upvalues: p1 (upval), UiMode (upval), FFlagFoundationStylingOnSignUp (upval), config (upval), IsDualLayout (upval), p2 (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Text (upval), BoxPadding (upval), FitChildrenModule (upval), RoactModule (upval), ImageSetLabel (upval), LoginView (upval), GetFFlagEnableAuditForSinglePageSignUpFunction (upval), RegisterAuditContentModule (upval), RegisterAdditionalAuditContentModule (upval), UrlBuilder (upval), ContextualMenu (upval), MenuDirection (upval), LinkButton (upval), NormalizeFontFaceFunction (upval), DisclaimerLinksVariantModule (upval), CryoModule (upval), createFoundationLink (upval), DisclaimerLinkButtonsModule (upval)
 			local IsUiModeMatch = p1.props.uiModeInfo.uiMode == UiMode.TenFoot
 			local LayoutOrder = p1.props.LayoutOrder
@@ -142,7 +142,7 @@ function DisclaimerLinks.render(p1) --[[ Line: 127 ]]
 			local ScaledY = if IsDualLayout then if FoundationFontFaceMigration then 2 * (Y + 2 * BoxPadding) else 2 * (Text.GetTextHeight(p2.privacyPolicyText, HeaderFont, BaseSize) + 2 * BoxPadding) elseif FoundationFontFaceMigration then Y + BoxPadding else Text.GetTextHeight(p2.privacyPolicyText, HeaderFont, BaseSize) + BoxPadding
 			local Frame = if IsDualLayout then "Frame" else FitChildrenModule.FitFrame
 			
-			local function RenderRightSideGadget() --[[ Line: 192 ]]
+			local function RenderRightSideGadget()
 				-- upvalues: RoactModule (upval), ImageSetLabel (upval), LoginView (upval), p3 (copy)
 				return {
 					Image = RoactModule.createElement(ImageSetLabel, {
@@ -158,7 +158,7 @@ function DisclaimerLinks.render(p1) --[[ Line: 127 ]]
 				}
 			end
 			
-			local function v59() --[[ Line: 207 ]]
+			local function v59()
 				-- upvalues: p1 (upval), GetFFlagEnableAuditForSinglePageSignUpFunction (upval), RegisterAuditContentModule (upval), TermsOfUseTextLong (copy), RoactModule (upval), CommonUIFeaturesLabelTermsOfUse (copy), PrivacyPolicyTextLong (copy), CommonUIFeaturesLabelPrivacyPolicy (copy), IsDualLayout (upval), p2 (upval), RegisterAdditionalAuditContentModule (upval), UrlBuilder (upval)
 				return if p1.props.enableAuditContentCapture and GetFFlagEnableAuditForSinglePageSignUpFunction() then {
 					TermsAuditContent = RegisterAuditContentModule and (TermsOfUseTextLong and RoactModule.createElement(RegisterAuditContentModule, {
@@ -180,7 +180,7 @@ function DisclaimerLinks.render(p1) --[[ Line: 127 ]]
 				} else {}
 			end
 			
-			local function v60() --[[ Line: 240 ]]
+			local function v60()
 				-- upvalues: RoactModule (upval), XRatio (copy), IsDualLayout (upval), ContextualMenu (upval), TermsOfUseTextLong (copy), p3 (copy), p1 (upval), LoginView (upval), RenderRightSideGadget (copy), PrivacyPolicyTextLong (copy), MenuDirection (upval), LinkButton (upval), Entry (copy), X (copy), FoundationFontFaceMigration (upval), HeaderFont (copy), NormalizeFontFaceFunction (upval), BaseSize (copy)
 				return {
 					UIListLayout = RoactModule.createElement("UIListLayout", {
@@ -305,23 +305,23 @@ function DisclaimerLinks.render(p1) --[[ Line: 127 ]]
 	end)
 end
 
-local v1 = RoactServices.connect({ linking = AppLinking })((RoactAppPolicy.connect(function(p1) --[[ Line: 433 ]]
+local v1 = RoactServices.connect({ linking = AppLinking })((RoactAppPolicy.connect(function(p1)
 	return {
 		useExternalBrowserForDisclaimerLinks = p1.shouldUseExternalBrowserForDisclaimerLinks()
 	}
-end)((RoactRoduxModule.connect(function(_, _) --[[ Line: 419 ]]
+end)((RoactRoduxModule.connect(function(_, _)
 	return {}
-end, function(Callback) --[[ Line: 421 ]]
+end, function(Callback)
 	-- upvalues: FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
 	return {
-		navigateDown = function(p1) --[[ Line: 423 ]]
+		navigateDown = function(p1)
 			-- upvalues: FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), Callback (copy), NavigateDownFunction (upval)
 			return if FFlagSignalsNavP3Dispatch then NavigationCommands.down(NavigationCommands.fromLegacyPage(p1)) else Callback(NavigateDownFunction(p1))
 		end
 	}
 end)(DisclaimerLinks)))))
 
-return function(p1) --[[ Line: 444 ]]
+return function(p1)
 	-- upvalues: UseDesignTokens (copy), UseUiModeInfo (copy), RoactModule (copy), v1 (copy), CryoModule (copy)
 	return RoactModule.createElement(v1, CryoModule.Dictionary.join({ tokens = UseDesignTokens(), uiModeInfo = UseUiModeInfo() }, p1))
 end

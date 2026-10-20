@@ -9,7 +9,7 @@ local RoactAppPolicy = require(CorePackages.Workspace.Packages.UniversalAppPolic
 local AppFeaturePolicies = require(CorePackages.Workspace.Packages.UniversalAppPolicy).AppFeaturePolicies
 local FFlagTokenizeUnibarConstantsWithStyleProvider = require(ChromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
 
-return function(p1) --[[ Line: 16 | Named "UnibarMenuWrapper" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ReactUtilsModule (copy), RoactAppPolicy (copy), AppFeaturePolicies (copy), TooltipProviderModule (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), UnibarMenuModule (copy)
 	return ReactModule.createElement(ReactUtilsModule.ContextStack, {
 		providers = {

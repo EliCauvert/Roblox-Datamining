@@ -19,11 +19,11 @@ return require(Parent.Rodux).createReducer({
 	pendingStateModals = {},
 	conversationBottomModals = {}
 }, {
-	[AppChatNetworkingModule.rodux.GetChatLandingModal.Succeeded.name] = function(p1, p2) --[[ Line: 45 ]]
+	[AppChatNetworkingModule.rodux.GetChatLandingModal.Succeeded.name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, { chatLandingModal = p2.responseBody })
 	end,
-	[AppChatNetworkingModule.rodux.GetConversationTopModal.Succeeded.name] = if FFlagAppChatEnableDoubleOptIn then nil else function(p1, p2) --[[ Line: 59 ]]
+	[AppChatNetworkingModule.rodux.GetConversationTopModal.Succeeded.name] = if FFlagAppChatEnableDoubleOptIn then nil else function(p1, p2)
 		-- upvalues: ConversationChannelsModule (copy), CryoModule (copy)
 		local ConversationId = p2.postBody and p2.postBody.conversation_id
 		local FriendId = p2.postBody and p2.postBody.friend_id
@@ -35,7 +35,7 @@ return require(Parent.Rodux).createReducer({
 			conversationTopModals = CryoModule.Dictionary.join(p1.conversationTopModals, { [ConversationId] = p2.responseBody })
 		}) else p1
 	end,
-	[AppChatNetworkingModule.rodux.GetModalSequence.Succeeded.name] = function(p1, p2) --[[ Line: 83 ]]
+	[AppChatNetworkingModule.rodux.GetModalSequence.Succeeded.name] = function(p1, p2)
 		-- upvalues: ConversationChannelsModule (copy), ModalSequence (copy), CryoModule (copy), FFlagAppChatEnableDoubleOptIn (copy), LoggerModule (copy)
 		local ConversationId = p2.postBody and p2.postBody.conversation_id
 		local FriendId = p2.postBody and p2.postBody.friend_id
@@ -61,7 +61,7 @@ return require(Parent.Rodux).createReducer({
 			return p1
 		end
 	end,
-	[require(AppChat.Conversations.Actions.DismissedConversationTopModal).name] = if FFlagAppChatEnableDoubleOptIn then nil else function(p1, p2) --[[ Line: 138 ]]
+	[require(AppChat.Conversations.Actions.DismissedConversationTopModal).name] = if FFlagAppChatEnableDoubleOptIn then nil else function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		local ConversationId = p2.conversationId
 		local ModalVariant = p2.modalVariant
@@ -72,7 +72,7 @@ return require(Parent.Rodux).createReducer({
 			})
 		}) else p1
 	end,
-	[require(AppChat.Conversations.Actions.DismissedChatModal).name] = function(p1, p2) --[[ Line: 156 ]]
+	[require(AppChat.Conversations.Actions.DismissedChatModal).name] = function(p1, p2)
 		-- upvalues: ModalSequence (copy), CryoModule (copy), FFlagAppChatEnableDoubleOptIn (copy)
 		local Key = p2.key
 		local ModalSequence1 = p2.modalSequence
@@ -83,7 +83,7 @@ return require(Parent.Rodux).createReducer({
 			conversationTopModals = CryoModule.Dictionary.join(p1.conversationTopModals, { [Key] = CryoModule.None })
 		}) else p1
 	end,
-	[require(AppChat.Conversations.Actions.DismissedAllConversationModalsForSequence).name] = function(p1, p2) --[[ Line: 181 ]]
+	[require(AppChat.Conversations.Actions.DismissedAllConversationModalsForSequence).name] = function(p1, p2)
 		-- upvalues: FFlagEnableAEGIS2AppChatConversationBanner (copy), ModalSequence (copy), LoggerModule (copy), CryoModule (copy)
 		local ModalSequence1 = p2.modalSequence
 		
@@ -102,7 +102,7 @@ return require(Parent.Rodux).createReducer({
 			conversationBottomModals = CryoModule.Dictionary.join(p1.conversationBottomModals, Nones)
 		})
 	end,
-	[AppChatNetworkingModule.rodux.GetPendingStateModal.Succeeded.name] = function(p3, p4) --[[ Line: 202 ]]
+	[AppChatNetworkingModule.rodux.GetPendingStateModal.Succeeded.name] = function(p3, p4)
 		-- upvalues: CryoModule (copy)
 		local ConversationId = p4.postBody and p4.postBody.conversation_id
 		
@@ -110,7 +110,7 @@ return require(Parent.Rodux).createReducer({
 			pendingStateModals = CryoModule.Dictionary.join(p3.pendingStateModals, { [ConversationId] = p4.responseBody })
 		}) else p3
 	end,
-	[require(AppChat.Conversations.Actions.RemovedConversation).name] = function(p3, p4) --[[ Line: 221 ]]
+	[require(AppChat.Conversations.Actions.RemovedConversation).name] = function(p3, p4)
 		-- upvalues: CryoModule (copy)
 		local ConversationId = p4.conversationId
 		
@@ -120,7 +120,7 @@ return require(Parent.Rodux).createReducer({
 			conversationBottomModals = CryoModule.Dictionary.join(p3.conversationBottomModals, { [ConversationId] = CryoModule.None })
 		}) else p3
 	end,
-	[require(AppChat.Conversations.Actions.FriendConversationCreated).name] = function(JoinResult, p3) --[[ Line: 239 ]]
+	[require(AppChat.Conversations.Actions.FriendConversationCreated).name] = function(JoinResult, p3)
 		-- upvalues: CryoModule (copy), FFlagAppChatEnableDoubleOptIn (copy)
 		local OldFriendConversationId = p3.oldFriendConversationId
 		local NewConversationId = p3.newConversationId
@@ -164,7 +164,7 @@ return require(Parent.Rodux).createReducer({
 		end
 		return JoinResult1
 	end,
-	DEBUG_ShowChatLandingAgeVerifiedTimedModal = if FFlagDebugAEGIS1AppChatBannerModule then function(p3) --[[ Line: 288 ]]
+	DEBUG_ShowChatLandingAgeVerifiedTimedModal = if FFlagDebugAEGIS1AppChatBannerModule then function(p3)
 		-- upvalues: CryoModule (copy), AppChatNetworkingModule (copy)
 		return CryoModule.Dictionary.union(p3, {
 			chatLandingModal = {
@@ -203,7 +203,7 @@ return require(Parent.Rodux).createReducer({
 			}
 		})
 	end else nil,
-	DEBUG_ShowAppChatFaeUpsell = if FFlagDebugAppChatFaeModule then function(p3) --[[ Line: 336 ]]
+	DEBUG_ShowAppChatFaeUpsell = if FFlagDebugAppChatFaeModule then function(p3)
 		-- upvalues: CryoModule (copy), AppChatNetworkingModule (copy)
 		return CryoModule.Dictionary.union(p3, {
 			chatLandingModal = {
@@ -228,7 +228,7 @@ return require(Parent.Rodux).createReducer({
 			}
 		})
 	end else nil,
-	DEBUG_ShowNewTCOverlay = if require(Parent.SharedFlags).FFlagTCUpsellModalEnabled_DEV or FFlagDebugEnableTCDoubleOptInDEV then function(p3, p4) --[[ Line: 370 ]]
+	DEBUG_ShowNewTCOverlay = if require(Parent.SharedFlags).FFlagTCUpsellModalEnabled_DEV or FFlagDebugEnableTCDoubleOptInDEV then function(p3, p4)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p3, {
 			conversationOverlays = CryoModule.Dictionary.join(p3.conversationOverlays, {
@@ -243,7 +243,7 @@ return require(Parent.Rodux).createReducer({
 			})
 		})
 	end else nil,
-	DEBUG_ShowNewTopModal = if FFlagDebugEnableTCDoubleOptInDEV then function(p3, p4) --[[ Line: 386 ]]
+	DEBUG_ShowNewTopModal = if FFlagDebugEnableTCDoubleOptInDEV then function(p3, p4)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p3, {
 			conversationTopModals = CryoModule.Dictionary.join(p3.conversationTopModals, {
@@ -260,7 +260,7 @@ return require(Parent.Rodux).createReducer({
 			})
 		})
 	end else nil,
-	DEBUG_DismissChatLandingModal = if FFlagDebugAppChatFaeModule or FFlagDebugAEGIS1AppChatBannerModule then function(p3) --[[ Line: 410 ]]
+	DEBUG_DismissChatLandingModal = if FFlagDebugAppChatFaeModule or FFlagDebugAEGIS1AppChatBannerModule then function(p3)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p3, { chatLandingModal = CryoModule.None })
 	end else nil

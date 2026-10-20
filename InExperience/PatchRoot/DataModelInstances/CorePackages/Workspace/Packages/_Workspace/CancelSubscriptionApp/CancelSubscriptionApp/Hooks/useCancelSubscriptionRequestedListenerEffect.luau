@@ -7,20 +7,20 @@ local InitiateCancelUserSubscriptionFlowModule = require(CancelSubscriptionApp.S
 local UseNetworkFunction = require(Parent.EconomyCommonCoreScriptHooks).useNetwork
 local CancelUserSubscriptionAsyncPromptStateEnumModule = require(CancelSubscriptionApp.Enums.CancelUserSubscriptionAsyncPromptStateEnum)
 
-return function(None) --[[ Line: 11 | Named "useCancelSubscriptionRequestedListenerEffect" ]]
+return function(None)
 	-- upvalues: UseDispatchFunction (copy), UseNetworkFunction (copy), ReactModule (copy), MarketplaceService (copy), CancelUserSubscriptionAsyncPromptStateEnumModule (copy), InitiateCancelUserSubscriptionFlowModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseNetworkResult = UseNetworkFunction()
-	ReactModule.useEffect(function() --[[ Line: 14 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseDispatchResult (copy), UseNetworkResult (copy), MarketplaceService (upval), None (copy), CancelUserSubscriptionAsyncPromptStateEnumModule (upval), InitiateCancelUserSubscriptionFlowModule (upval)
-		local PromptCancelSubscriptionRequestedConnection = if UseDispatchResult and UseNetworkResult then MarketplaceService.PromptCancelSubscriptionRequested:Connect(function(SubscriptionId) --[[ Line: 18 ]]
+		local PromptCancelSubscriptionRequestedConnection = if UseDispatchResult and UseNetworkResult then MarketplaceService.PromptCancelSubscriptionRequested:Connect(function(SubscriptionId)
 			-- upvalues: None (upval), CancelUserSubscriptionAsyncPromptStateEnumModule (upval), UseDispatchResult (upval), InitiateCancelUserSubscriptionFlowModule (upval), UseNetworkResult (upval)
 			if None == CancelUserSubscriptionAsyncPromptStateEnumModule.None then
 				UseDispatchResult(InitiateCancelUserSubscriptionFlowModule(UseNetworkResult, SubscriptionId))
 			end
 		end) else nil
 		
-		return function() --[[ Line: 25 ]]
+		return function()
 			-- upvalues: PromptCancelSubscriptionRequestedConnection (ref)
 			if PromptCancelSubscriptionRequestedConnection then
 				PromptCancelSubscriptionRequestedConnection:Disconnect()

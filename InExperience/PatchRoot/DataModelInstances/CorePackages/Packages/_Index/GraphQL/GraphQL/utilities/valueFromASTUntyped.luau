@@ -12,7 +12,7 @@ local KeyValMapFunction = require(Jsutils.keyValMap).keyValMap
 local Kind = require(Language.kinds).Kind
 local _ = require(Language.ast)
 
-local function valueFromASTUntyped(p1, p2) --[[ Line: 48 ]]
+local function valueFromASTUntyped(p1, p2)
 	-- upvalues: Kind (copy), NullModule (copy), Array (copy), valueFromASTUntyped (copy), CoerceToTableFunction (copy), KeyValMapFunction (copy), InvariantFunction (copy), InspectFunction (copy)
 	if p1.kind == Kind.NULL then
 		return NullModule
@@ -23,14 +23,14 @@ local function valueFromASTUntyped(p1, p2) --[[ Line: 48 ]]
 	elseif p1.kind == Kind.STRING or p1.kind == Kind.ENUM or p1.kind == Kind.BOOLEAN then
 		return p1.value
 	elseif p1.kind == Kind.LIST then
-		return Array.map(p1.values, function(p3) --[[ Line: 66 ]]
+		return Array.map(p1.values, function(p3)
 			-- upvalues: valueFromASTUntyped (upval), p2 (copy)
 			return valueFromASTUntyped(p3, p2)
 		end)
 	elseif p1.kind == Kind.OBJECT then
-		return CoerceToTableFunction(KeyValMapFunction(p1.fields, function(p3) --[[ Line: 71 ]]
+		return CoerceToTableFunction(KeyValMapFunction(p1.fields, function(p3)
 			return p3.name.value
-		end, function(p3) --[[ Line: 73 ]]
+		end, function(p3)
 			-- upvalues: valueFromASTUntyped (upval), p2 (copy)
 			return valueFromASTUntyped(p3.value, p2)
 		end))

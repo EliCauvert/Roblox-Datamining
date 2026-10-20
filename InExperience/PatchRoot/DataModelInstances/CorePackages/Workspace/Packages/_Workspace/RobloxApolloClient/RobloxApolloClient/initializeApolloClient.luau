@@ -6,14 +6,14 @@ local HttpLink = ApolloClientModule.HttpLink
 local InMemoryCache = ApolloClientModule.InMemoryCache
 local TypePolicies = require(Parent.ApolloLocalState).typePolicies
 
-function initalizeApolloClient(p1) --[[ Line: 14 ]]
+function initalizeApolloClient(p1)
 	-- upvalues: GraphQLServer (copy), HttpLink (copy), InMemoryCache (copy), TypePolicies (copy), ApolloClient (copy)
 	local NewGraphQLServer = GraphQLServer.new(p1)
 	
 	return (ApolloClient.new({
 		link = HttpLink.new({
 			uri = "/api",
-			fetch = function(_, p2) --[[ Line: 18 ]]
+			fetch = function(_, p2)
 				-- upvalues: NewGraphQLServer (copy)
 				return NewGraphQLServer:fetchLocal(p2)
 			end

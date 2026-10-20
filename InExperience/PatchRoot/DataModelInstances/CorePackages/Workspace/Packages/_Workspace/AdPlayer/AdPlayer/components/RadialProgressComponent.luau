@@ -3,7 +3,7 @@
 if require(AdPlayer.Flags).GetEnableLuaRewardTimerUI() then
 	local ReactModule = require(AdPlayer.Parent.React)
 	
-	local function transparencyGradient(NewClampedValue: number): NumberSequence --[[ Line: 33 ]]
+	local function transparencyGradient(NewClampedValue: number): NumberSequence
 		return NumberSequence.new({
 			NumberSequenceKeypoint.new(0, 0),
 			NumberSequenceKeypoint.new(NewClampedValue - 0.001, 0),
@@ -12,15 +12,15 @@ if require(AdPlayer.Flags).GetEnableLuaRewardTimerUI() then
 		})
 	end
 	
-	local function rightRotation(p1: number): number --[[ Line: 42 ]]
+	local function rightRotation(p1: number): number
 		return (math.clamp(p1 * 360, 0, 180))
 	end
 	
-	local function _(p1: number): number --[[ Line: 46 | Named "leftRotation" ]]
+	local function _(p1: number): number
 		return (math.clamp(p1 * 360 - 180, 0, 180))
 	end
 	
-	return function(Frame: Frame) --[[ Line: 50 ]]
+	return function(Frame: Frame)
 		-- upvalues: ReactModule (copy), rightRotation (copy), transparencyGradient (copy)
 		local Thickness = Frame.thickness or 3
 		local Copy = if Frame.children then table.clone(Frame.children) else {}
@@ -44,7 +44,7 @@ if require(AdPlayer.Flags).GetEnableLuaRewardTimerUI() then
 					Color = Frame.ImageColor3,
 					Transparency = Frame.ImageTransparency,
 					Thickness = Thickness,
-					Enabled = Frame.alpha:map(function(p1: number): boolean --[[ Line: 76 ]]
+					Enabled = Frame.alpha:map(function(p1: number): boolean
 						return math.clamp(p1 * 360, 0, 180) > 0
 					end)
 				}, {
@@ -75,15 +75,15 @@ if require(AdPlayer.Flags).GetEnableLuaRewardTimerUI() then
 					Color = Frame.ImageColor3,
 					Transparency = Frame.ImageTransparency,
 					Thickness = Thickness,
-					Enabled = Frame.alpha:map(function(p1: number): boolean --[[ Line: 110 ]]
+					Enabled = Frame.alpha:map(function(p1: number): boolean
 						return math.clamp(p1 * 360 - 180, 0, 180) > 0
 					end)
 				}, {
 					gradient = ReactModule.createElement("UIGradient", {
-						Rotation = Frame.alpha:map(function(p1: number): number --[[ Line: 115 ]]
+						Rotation = Frame.alpha:map(function(p1: number): number
 							return math.clamp(p1 * 360 - 180, 0, 180) - 180
 						end),
-						Transparency = Frame.alpha:map(function(p1: number) --[[ Line: 118 ]]
+						Transparency = Frame.alpha:map(function(p1: number)
 							-- upvalues: transparencyGradient (upval)
 							return transparencyGradient(math.clamp(math.clamp(p1 * 360 - 180, 0, 180) / 180, 0, 1) * 0.02 + 0.5)
 						end)

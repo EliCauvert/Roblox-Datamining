@@ -16,32 +16,32 @@ local v1 = nil
 local v2 = nil
 local PlayerRemovingConnection = nil
 
-local function _() --[[ Line: 29 | Named "getVoiceChatServiceManager" ]]
+local function _()
 	-- upvalues: CoreGui (copy)
 	return require(CoreGui:WaitForChild("RobloxGui"):WaitForChild("Modules"):WaitForChild("VoiceChat"):WaitForChild("VoiceChatServiceManager")).default
 end
 
-local _ = function() --[[ Line: 34 | Named "getPlaySessionId" ]]
+local _ = function()
 	-- upvalues: RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy)
 	return if RbxAnalyticsServiceExposePlaySessionIdEngineFeature then RbxAnalyticsService:GetPlaySessionId() else nil
 end
 
-local _ = function(p1) --[[ Line: 41 | Named "getVoiceSessionId" ]]
+local _ = function(p1)
 	local SessionId = nil
 	
-	return if pcall(function() --[[ Line: 43 ]]
+	return if pcall(function()
 		-- upvalues: SessionId (ref), p1 (copy)
 		SessionId = p1:GetSessionId()
 	end) and SessionId ~= nil and SessionId ~= "" then SessionId else nil
 end
 
-local _ = function(p1) --[[ Line: 52 | Named "beginSession" ]]
+local _ = function(p1)
 	-- upvalues: Flag1 (ref), IsVoiceChatVolumeSliderVisible (ref), VoiceVolumeControlsEligibility (copy), VoiceChatService (copy), v1 (ref), PeopleService (copy)
 	if Flag1 then return end
 	Flag1 = true
 	IsVoiceChatVolumeSliderVisible = VoiceVolumeControlsEligibility.isVoiceChatVolumeSliderVisible(true, VoiceChatService.UseNewAudioApi)
 	local SessionId = nil
-	v1 = if pcall(function() --[[ Line: 43 ]]
+	v1 = if pcall(function()
 		-- upvalues: SessionId (ref), p1 (copy)
 		SessionId = p1:GetSessionId()
 	end) and SessionId ~= nil and SessionId ~= "" then SessionId else nil
@@ -51,7 +51,7 @@ local _ = function(p1) --[[ Line: 52 | Named "beginSession" ]]
 	end
 end
 
-local _ = function() --[[ Line: 66 | Named "flushSession" ]]
+local _ = function()
 	-- upvalues: Flag1 (ref), IsVoiceChatVolumeSliderVisible (ref), v1 (ref), PeopleService (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy)
 	if not Flag1 then return end
 	Flag1 = false
@@ -68,7 +68,7 @@ local _ = function() --[[ Line: 66 | Named "flushSession" ]]
 	end
 end
 
-local _ = function(p1) --[[ Line: 85 | Named "tryBeginIfJoined" ]]
+local _ = function(p1)
 	-- upvalues: Flag1 (ref), IsVoiceChatVolumeSliderVisible (ref), VoiceVolumeControlsEligibility (copy), VoiceChatService (copy), v1 (ref), PeopleService (copy)
 	local Service = p1:getService()
 	
@@ -77,7 +77,7 @@ local _ = function(p1) --[[ Line: 85 | Named "tryBeginIfJoined" ]]
 		Flag1 = true
 		IsVoiceChatVolumeSliderVisible = VoiceVolumeControlsEligibility.isVoiceChatVolumeSliderVisible(true, VoiceChatService.UseNewAudioApi)
 		local SessionId = nil
-		v1 = if pcall(function() --[[ Line: 43 ]]
+		v1 = if pcall(function()
 			-- upvalues: SessionId (ref), p1 (copy)
 			SessionId = p1:GetSessionId()
 		end) and SessionId ~= nil and SessionId ~= "" then SessionId else nil
@@ -89,20 +89,20 @@ local _ = function(p1) --[[ Line: 85 | Named "tryBeginIfJoined" ]]
 end
 
 return {
-	ensureStarted = function() --[[ Line: 93 ]]
+	ensureStarted = function()
 		-- upvalues: Flag (ref), FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), FFlagVoiceVolumeControlsPerUserPlayerListButton (copy), FFlagVoiceVolumeControlsPerUserPlayerGridMenu (copy), CoreGui (copy), Players (copy), PlayerRemovingConnection (ref), Flag1 (ref), IsVoiceChatVolumeSliderVisible (ref), v1 (ref), PeopleService (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy), v2 (ref), VoiceVolumeControlsEligibility (copy), VoiceChatService (copy)
 		if Flag then return end
 		if not FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then return end
 		if not FFlagVoiceVolumeControlsPerUserPlayerListButton and not FFlagVoiceVolumeControlsPerUserPlayerGridMenu then return end
 		if game:GetEngineFeature("VoiceChatSupported") then
 			Flag = true
-			task.defer(function() --[[ Line: 111 ]]
+			task.defer(function()
 				-- upvalues: CoreGui (upval), Players (upval), PlayerRemovingConnection (upval), Flag1 (upval), IsVoiceChatVolumeSliderVisible (upval), v1 (upval), PeopleService (upval), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (upval), RbxAnalyticsService (upval), v2 (upval), VoiceVolumeControlsEligibility (upval), VoiceChatService (upval)
 				local Default = require(CoreGui:WaitForChild("RobloxGui"):WaitForChild("Modules"):WaitForChild("VoiceChat"):WaitForChild("VoiceChatServiceManager")).default
 				local LocalPlayer = Players.LocalPlayer
 				
 				if LocalPlayer then
-					PlayerRemovingConnection = Players.PlayerRemoving:Connect(function(Player) --[[ Line: 116 ]]
+					PlayerRemovingConnection = Players.PlayerRemoving:Connect(function(Player)
 						-- upvalues: LocalPlayer (copy), Flag1 (upval), IsVoiceChatVolumeSliderVisible (upval), v1 (upval), PeopleService (upval), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (upval), RbxAnalyticsService (upval)
 						if Player ~= LocalPlayer then return end
 						if not Flag1 then return end
@@ -120,16 +120,16 @@ return {
 						end
 					end)
 				end
-				Default:asyncInit():andThen(function() --[[ Line: 125 ]]
+				Default:asyncInit():andThen(function()
 					-- upvalues: v2 (upval), Default (copy), Flag1 (upval), IsVoiceChatVolumeSliderVisible (upval), VoiceVolumeControlsEligibility (upval), VoiceChatService (upval), v1 (upval), PeopleService (upval), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (upval), RbxAnalyticsService (upval)
-					v2 = function(_, VoiceChatState) --[[ Line: 126 ]]
+					v2 = function(_, VoiceChatState)
 						-- upvalues: Default (upval), Flag1 (upval), IsVoiceChatVolumeSliderVisible (upval), VoiceVolumeControlsEligibility (upval), VoiceChatService (upval), v1 (upval), PeopleService (upval), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (upval), RbxAnalyticsService (upval)
 						if VoiceChatState == Enum.VoiceChatState.Joined then
 							if Flag1 then return end
 							Flag1 = true
 							IsVoiceChatVolumeSliderVisible = VoiceVolumeControlsEligibility.isVoiceChatVolumeSliderVisible(true, VoiceChatService.UseNewAudioApi)
 							local SessionId = nil
-							v1 = if pcall(function() --[[ Line: 43 ]]
+							v1 = if pcall(function()
 								-- upvalues: SessionId (ref), Default (copy)
 								SessionId = Default:GetSessionId()
 							end) and SessionId ~= nil and SessionId ~= "" then SessionId else nil
@@ -163,7 +163,7 @@ return {
 						Flag1 = true
 						IsVoiceChatVolumeSliderVisible = VoiceVolumeControlsEligibility.isVoiceChatVolumeSliderVisible(true, VoiceChatService.UseNewAudioApi)
 						local SessionId = nil
-						v1 = if pcall(function() --[[ Line: 43 ]]
+						v1 = if pcall(function()
 							-- upvalues: SessionId (ref), Default (copy)
 							SessionId = Default:GetSessionId()
 						end) and SessionId ~= nil and SessionId ~= "" then SessionId else nil
@@ -172,7 +172,7 @@ return {
 							require(PeopleService.Analytics.PeopleAnalyticsManager):resetPerUserVoiceVolumeSession()
 						end
 					end
-				end):catch(function() --[[ Line: 140 ]] end)
+				end):catch(function() end)
 			end)
 			
 			return

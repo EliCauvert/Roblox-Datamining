@@ -1,6 +1,6 @@
 ﻿local ResponsiveModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.Responsive)
 
-return function(): boolean --[[ Line: 6 | Named "useIsDirectional" ]]
+return function(): boolean
 	-- upvalues: ResponsiveModule (copy)
 	local UseLastInputResult = ResponsiveModule.useLastInput()
 	

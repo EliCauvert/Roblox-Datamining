@@ -5,13 +5,13 @@ local SetScreenSizeModule = require(script.Parent.Parent.Parent.Actions.SetScree
 local EventConnectionModule = require(script.Parent.EventConnection)
 local ScreenSizeConnector = RoactModule.PureComponent:extend("ScreenSizeConnector")
 
-function ScreenSizeConnector.init(p1) --[[ Line: 15 ]]
+function ScreenSizeConnector.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.state = { layerCollector = nil }
 	p1.folderRef = RoactModule.createRef()
 end
 
-function ScreenSizeConnector.render(p1) --[[ Line: 23 ]]
+function ScreenSizeConnector.render(p1)
 	-- upvalues: RoactModule (copy), EventConnectionModule (copy)
 	if p1.state.layerCollector then
 		local AbsoluteSize = p1.state.layerCollector.AbsoluteSize
@@ -19,7 +19,7 @@ function ScreenSizeConnector.render(p1) --[[ Line: 23 ]]
 		
 		return RoactModule.createElement(EventConnectionModule, {
 			event = p1.state.layerCollector:GetPropertyChangedSignal("AbsoluteSize"),
-			callback = function() --[[ Line: 29 ]]
+			callback = function()
 				-- upvalues: AbsoluteSize (ref), p1 (copy)
 				AbsoluteSize = p1.state.layerCollector.AbsoluteSize
 				p1.props.setScreenSize(AbsoluteSize.X, AbsoluteSize.Y)
@@ -33,14 +33,14 @@ function ScreenSizeConnector.render(p1) --[[ Line: 23 ]]
 	end
 end
 
-function ScreenSizeConnector.watchFolderAncestery(p1) --[[ Line: 41 ]]
+function ScreenSizeConnector.watchFolderAncestery(p1)
 	if p1.folderRef.current and p1.ancesteryConnection == nil then
 		local LayerCollector = p1.folderRef.current:FindFirstAncestorWhichIsA("LayerCollector")
 		
 		if LayerCollector then
 			p1:setState({ layerCollector = LayerCollector })
 		else
-			p1.ancesteryConnection = p1.folderRef.current.AncestryChanged:Connect(function() --[[ Line: 49 ]]
+			p1.ancesteryConnection = p1.folderRef.current.AncestryChanged:Connect(function()
 				-- upvalues: p1 (copy), LayerCollector (ref)
 				if p1.folderRef.current then
 					LayerCollector = p1.folderRef.current:FindFirstAncestorWhichIsA("LayerCollector")
@@ -54,11 +54,11 @@ function ScreenSizeConnector.watchFolderAncestery(p1) --[[ Line: 41 ]]
 	end
 end
 
-function ScreenSizeConnector.didMount(p1) --[[ Line: 63 ]]
+function ScreenSizeConnector.didMount(p1)
 	p1:watchFolderAncestery()
 end
 
-function ScreenSizeConnector.didUpdate(p1) --[[ Line: 67 ]]
+function ScreenSizeConnector.didUpdate(p1)
 	if not p1.state.layerCollector then
 		p1:watchFolderAncestery()
 		
@@ -70,17 +70,17 @@ function ScreenSizeConnector.didUpdate(p1) --[[ Line: 67 ]]
 	end
 end
 
-function ScreenSizeConnector.willUnmount(p1) --[[ Line: 76 ]]
+function ScreenSizeConnector.willUnmount(p1)
 	if p1.ancesteryConnection then
 		p1.ancesteryConnection:Disconnect()
 		p1.ancesteryConnection = nil
 	end
 end
 
-return RoactRoduxModule.connect(nil, function(Callback) --[[ Line: 83 | Named "mapDispatchToProps" ]]
+return RoactRoduxModule.connect(nil, function(Callback)
 	-- upvalues: SetScreenSizeModule (copy)
 	return {
-		setScreenSize = function(p1, p2) --[[ Line: 85 ]]
+		setScreenSize = function(p1, p2)
 			-- upvalues: Callback (copy), SetScreenSizeModule (upval)
 			return Callback(SetScreenSizeModule(p1, p2))
 		end

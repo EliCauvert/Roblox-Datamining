@@ -37,10 +37,10 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local AssetId = if FFlagBuildExperienceMonetizationNativeUIModule then FoundationCloudAssetsModule.Assets["pictograms/robux"].assetId else nil
 local _UDim2 = UDim2.new(0.3333333333333333, -8, 0, 0)
 
-local function ProductActionsMenu(p1) --[[ Line: 185 ]]
+local function ProductActionsMenu(p1)
 	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), IconName (copy), Menu (copy), FoundationModule (copy), IconButton (copy), InputSize (copy), ButtonVariant (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 187 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {})
@@ -50,7 +50,7 @@ local function ProductActionsMenu(p1) --[[ Line: 185 ]]
 		testId = "monetization-product-actions-menu",
 		align = FoundationModule.Enums.PopoverAlign.End,
 		isOpen = UseStateResult,
-		items = ReactModule.useMemo(function() --[[ Line: 191 ]]
+		items = ReactModule.useMemo(function()
 			-- upvalues: p1 (copy), IconName (upval), UseLocalizationResult (copy)
 			return {
 				{
@@ -71,7 +71,7 @@ local function ProductActionsMenu(p1) --[[ Line: 185 ]]
 			p1.editLabel,
 			p1.isDisabled
 		}),
-		onActivated = function(p2) --[[ Line: 206 ]]
+		onActivated = function(p2)
 			-- upvalues: UseResult (copy), p1 (copy)
 			UseResult()
 			
@@ -87,7 +87,7 @@ local function ProductActionsMenu(p1) --[[ Line: 185 ]]
 			testId = "monetization-product-actions",
 			icon = IconName.ThreeDotsHorizontal,
 			isDisabled = p1.isDisabled,
-			onActivated = function() --[[ Line: 220 ]]
+			onActivated = function()
 				-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
 				UseStateResult2(not UseStateResult)
 			end,
@@ -97,7 +97,7 @@ local function ProductActionsMenu(p1) --[[ Line: 185 ]]
 	})
 end
 
-local function ProductCard(Frame) --[[ Line: 230 ]]
+local function ProductCard(Frame)
 	-- upvalues: UseTokensFunction (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), AssetId (copy), ReactModule (copy), View (copy), _UDim2 (copy), StateLayerAffordance (copy), FFlagBuildExperienceMonetizationMultiKindModule (copy), Badge (copy), BadgeShape (copy), BadgeSize (copy), BadgeVariant (copy), Image (copy), Text (copy), Icon (copy), IconName (copy), IconSize (copy)
 	local Product = Frame.product
 	local UseTokensResult = UseTokensFunction()
@@ -189,7 +189,7 @@ local function ProductCard(Frame) --[[ Line: 230 ]]
 	})
 end
 
-local function ProductRow(Frame) --[[ Line: 361 ]]
+local function ProductRow(Frame)
 	-- upvalues: ReactModule (copy), ProductCard (copy), View (copy)
 	local Elements = {}
 	
@@ -199,7 +199,7 @@ local function ProductRow(Frame) --[[ Line: 361 ]]
 		Elements[Identity] = ReactModule.createElement(ProductCard, {
 			LayoutOrder = i - Frame.startIndex + 1,
 			product = Product,
-			onActivated = function() --[[ Line: 369 ]]
+			onActivated = function()
 				-- upvalues: Frame (copy), Identity (copy)
 				Frame.onProductActivated(Identity)
 			end
@@ -211,7 +211,7 @@ local function ProductRow(Frame) --[[ Line: 361 ]]
 	}, Elements)
 end
 
-local function OptionRow(Frame) --[[ Line: 392 ]]
+local function OptionRow(Frame)
 	-- upvalues: ReactModule (copy), View (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), Text (copy), Toggle (copy), InputSize (copy)
 	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-large size-full-0 auto-y padding-x-large padding-y-medium",
@@ -252,7 +252,7 @@ local function OptionRow(Frame) --[[ Line: 392 ]]
 	})
 end
 
-local function OptionsStatusContent(p1) --[[ Line: 436 ]]
+local function OptionsStatusContent(p1)
 	-- upvalues: ReactModule (copy), Text (copy), View (copy), Button (copy), InputSize (copy), ButtonVariant (copy)
 	return if p1.optionsLoadStatus == "NotReady" then ReactModule.createElement(Text, {
 		tag = "size-full-0 auto-y padding-large text-body-medium text-align-x-center content-muted",
@@ -277,7 +277,7 @@ local function OptionsStatusContent(p1) --[[ Line: 436 ]]
 	}) else nil
 end
 
-local function OptionsContent(p1) --[[ Line: 468 ]]
+local function OptionsContent(p1)
 	-- upvalues: OptionsStatusContent (copy), ButtonVariant (copy), ReactModule (copy), View (copy), Text (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), OptionRow (copy), Dialog (copy), DialogSize (copy)
 	local OptionsStatusContentResult = OptionsStatusContent(p1)
 	
@@ -405,7 +405,7 @@ local function OptionsContent(p1) --[[ Line: 468 ]]
 	end
 end
 
-local function CatalogContent(p1) --[[ Line: 615 ]]
+local function CatalogContent(p1)
 	-- upvalues: ReactModule (copy), ProductRow (copy), View (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy)
 	local Elements = {}
 	local LayoutOrder = 0
@@ -425,7 +425,7 @@ local function CatalogContent(p1) --[[ Line: 615 ]]
 	}, Elements)
 end
 
-local function EmptyContent(p2) --[[ Line: 636 ]]
+local function EmptyContent(p2)
 	-- upvalues: FFlagBuildExperienceMonetizationNativeUIModule (copy), UseTokensFunction (copy), ReactModule (copy), View (copy), Image (copy), AssetId (copy), Text (copy), ScrollView (copy)
 	local UseTokensResult = if FFlagBuildExperienceMonetizationNativeUIModule then UseTokensFunction() else nil
 	local Scale = if FFlagBuildExperienceMonetizationNativeUIModule then UseTokensResult.Config.UI.Scale else 1
@@ -469,7 +469,7 @@ local function EmptyContent(p2) --[[ Line: 636 ]]
 	}, { Content = Element }) else Element
 end
 
-local function CatalogStatusContent(p2) --[[ Line: 692 ]]
+local function CatalogStatusContent(p2)
 	-- upvalues: ReactModule (copy), Text (copy), View (copy), Button (copy), InputSize (copy), ButtonVariant (copy)
 	return if p2.catalogStatus == "NotReady" then ReactModule.createElement(Text, {
 		tag = "size-full-0 auto-y padding-large text-body-medium text-align-x-center content-muted",
@@ -504,7 +504,7 @@ local function CatalogStatusContent(p2) --[[ Line: 692 ]]
 	})
 end
 
-local function CatalogRefreshWarning(p2) --[[ Line: 730 ]]
+local function CatalogRefreshWarning(p2)
 	-- upvalues: ReactModule (copy), View (copy), Text (copy), Button (copy), InputSize (copy), ButtonVariant (copy)
 	return ReactModule.createElement(View, {
 		tag = "col align-x-center gap-medium size-full-0 auto-y padding-medium radius-medium bg-surface-100",
@@ -525,7 +525,7 @@ local function CatalogRefreshWarning(p2) --[[ Line: 730 ]]
 	})
 end
 
-local function CatalogSourcesStatus(p2) --[[ Line: 750 ]]
+local function CatalogSourcesStatus(p2)
 	-- upvalues: ReactModule (copy), View (copy), Text (copy), Button (copy), InputSize (copy), ButtonVariant (copy)
 	local Elements = {}
 	local CatalogSources = p2.catalogSources
@@ -552,7 +552,7 @@ local function CatalogSourcesStatus(p2) --[[ Line: 750 ]]
 				}),
 				Retry = if catalogSource.status == "Failed" and p2.onRetryCatalogSource ~= nil then ReactModule.createElement(Button, {
 					LayoutOrder = 3,
-					onActivated = function() --[[ Line: 778 ]]
+					onActivated = function()
 						-- upvalues: p2 (copy), catalogSource (copy)
 						p2.onRetryCatalogSource(catalogSource.kind)
 					end,
@@ -569,7 +569,7 @@ local function CatalogSourcesStatus(p2) --[[ Line: 750 ]]
 	}, Elements)
 end
 
-local function DetailContent(p3) --[[ Line: 795 ]]
+local function DetailContent(p3)
 	-- upvalues: FFlagBuildExperienceMonetizationNativeUIModule (copy), UseTokensFunction (copy), ReactModule (copy), View (copy), Image (copy), AssetId (copy), Text (copy), FFlagBuildExperienceMonetizationMultiKindModule (copy), Icon (copy), IconName (copy), IconSize (copy), Toggle (copy), InputSize (copy)
 	local Emphasis = if FFlagBuildExperienceMonetizationNativeUIModule then UseTokensFunction().Color.Content.Emphasis else nil
 	local SelectedProduct = p3.selectedProduct
@@ -702,7 +702,7 @@ local function DetailContent(p3) --[[ Line: 795 ]]
 	})
 end
 
-local function EditContent(p3) --[[ Line: 967 ]]
+local function EditContent(p3)
 	-- upvalues: FFlagBuildExperienceMonetizationNativeUIModule (copy), UseTokensFunction (copy), ReactModule (copy), View (copy), Image (copy), AssetId (copy), TextInput (copy), TextArea (copy), Text (copy)
 	local UseTokensResult = if FFlagBuildExperienceMonetizationNativeUIModule then UseTokensFunction() else nil
 	local SelectedProduct = p3.selectedProduct
@@ -761,7 +761,7 @@ local function EditContent(p3) --[[ Line: 967 ]]
 	})
 end
 
-return function(p3) --[[ Line: 1028 | Named "MonetizationPageView" ]]
+return function(p3)
 	-- upvalues: FFlagBuildExperienceMonetizationNativeUIModule (copy), ReactModule (copy), ProductActionsMenu (copy), Button (copy), InputSize (copy), ButtonVariant (copy), IconButton (copy), IconName (copy), DetailContent (copy), CatalogSourcesStatus (copy), CatalogStatusContent (copy), EditContent (copy), OptionsContent (copy), EmptyContent (copy), CatalogContent (copy), View (copy), CatalogRefreshWarning (copy), FillBehavior (copy), FFlagBuildExperienceMonetizationMultiKindModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), ChatActionsModule (copy), OverflowMenuPageShellModule (copy)
 	local IsDetail = p3.mode == "detail"
 	local IsEdit = p3.mode == "edit"

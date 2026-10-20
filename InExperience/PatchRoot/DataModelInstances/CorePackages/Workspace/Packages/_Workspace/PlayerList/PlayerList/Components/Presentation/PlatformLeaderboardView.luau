@@ -25,7 +25,7 @@ local EmptyFriendsState = EmptyAndErrorStatesModule.EmptyFriendsState
 local ServiceUnavailableState = EmptyAndErrorStatesModule.ServiceUnavailableState
 local LeaderboardViewChangeTelemetryModule = nil
 
-local function _() --[[ Line: 34 | Named "getLeaderboardViewChangeTelemetry" ]]
+local function _()
 	-- upvalues: LeaderboardViewChangeTelemetryModule (ref), Parent (copy)
 	if LeaderboardViewChangeTelemetryModule == nil then
 		LeaderboardViewChangeTelemetryModule = require(Parent.Common.LeaderboardViewChangeTelemetry)
@@ -37,11 +37,11 @@ local Signal = SignalsModule.createSignal(nil)
 local Signal1 = SignalsModule.createSignal(nil)
 local SignalMap = require(Parent1.CoreScriptsRoactCommon).Utilities.createSignalMap()
 
-local _ = function(p1, p2): string --[[ Line: 56 | Named "formatRelativeTimeLegacy" ]]
+local _ = function(p1, p2): string
 	return if p1 == nil then "Unable to load" else `Last updated {math.max(0, (math.floor((p2 - p1) / 60)))} min ago`
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 73 | Named "PlatformLeaderboardViewImpl" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UsePlatformLeaderboardModule (copy), UseTokensFunction (copy), ConstantsModule (copy), UseReportPanelContentHeightModule (copy), ReactModule (copy), UseGamepadStickScrollModule (copy), SignalMap (copy), Signal (copy), Signal1 (copy), SignalsReactModule (copy), SignalsModule (copy), FFlagPlayerListLocalizeGameTextModule (copy), UseLocalizationFunction (copy), FFlagPlayerListReskinModule (copy), LeaderboardViewChangeTelemetryModule (ref), Parent (copy), Players (copy), ResolveDisplayNameModule (copy), GetPeopleHeaderLabelModule (copy), ServiceUnavailableState (copy), LoadingState (copy), EmptyFriendsState (copy), PlatformEntryViewModule (copy), ScrollView (copy), View (copy), Text (copy)
 	local Tab = p1.tab
 	local IsFriends = Tab == "Friends"
@@ -55,7 +55,7 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "PlatformLeaderboardV
 	local ScaledPLATFORMSCOREWIDTH = ConstantsModule.PLATFORM_SCORE_WIDTH * Scale
 	local UseReportPanelContentHeightModuleResult = UseReportPanelContentHeightModule(ScaledPLATFORMHEADERHEIGHT + ScaledPLATFORMROWHEIGHT + ScaledPLATFORMFOOTERHEIGHT)
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 94 ]]
+	local UseResult = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), UseReportPanelContentHeightModuleResult (copy)
 		UseRefResult.current = Current
 		UseReportPanelContentHeightModuleResult(Current)
@@ -73,9 +73,9 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "PlatformLeaderboardV
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
 	local UseRefResult1 = ReactModule.useRef(false)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(FriendsEntries.getAllData)
-	local UseSignalStateResult1 = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 126 ]]
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), GetFriendsLastRefreshedAt (copy)
-		return SignalsModule.createComputed(function(p2): boolean --[[ Line: 127 ]]
+		return SignalsModule.createComputed(function(p2): boolean
 			-- upvalues: GetFriendsLastRefreshedAt (upval)
 			return GetFriendsLastRefreshedAt(p2) ~= nil
 		end)
@@ -91,30 +91,30 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "PlatformLeaderboardV
 	if FFlagPlayerListLocalizeGameTextModule then
 		local UseSignalStateResult2 = SignalsReactModule.useSignalState(GetFriendsLastRefreshedAt)
 		local _, UseStateResult2_1 = ReactModule.useState(0)
-		ReactModule.useEffect(function() --[[ Line: 144 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseStateResult2_1 (copy)
 			local DelayedThread = nil
 			
-			local function schedule() --[[ Line: 146 ]]
+			local function schedule()
 				-- upvalues: DelayedThread (ref), UseStateResult2_1 (upval), schedule (copy)
-				DelayedThread = task.delay(300, function() --[[ Line: 147 ]]
+				DelayedThread = task.delay(300, function()
 					-- upvalues: UseStateResult2_1 (upval), schedule (upval)
-					UseStateResult2_1(function(p2: number): number --[[ Line: 148 ]]
+					UseStateResult2_1(function(p2: number): number
 						return p2 + 1
 					end)
 					schedule()
 				end)
 			end
 			
-			DelayedThread = task.delay(300, function() --[[ Line: 147 ]]
+			DelayedThread = task.delay(300, function()
 				-- upvalues: UseStateResult2_1 (upval), schedule (copy)
-				UseStateResult2_1(function(p2: number): number --[[ Line: 148 ]]
+				UseStateResult2_1(function(p2: number): number
 					return p2 + 1
 				end)
 				schedule()
 			end)
 			
-			return function() --[[ Line: 155 ]]
+			return function()
 				-- upvalues: DelayedThread (ref)
 				if DelayedThread then
 					task.cancel(DelayedThread)
@@ -135,26 +135,26 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "PlatformLeaderboardV
 	else
 		local UseSignalBindingResult = SignalsReactModule.useSignalBinding(GetFriendsLastRefreshedAt)
 		local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(os.time())
-		ReactModule.useEffect(function() --[[ Line: 177 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseBindingResult2 (copy)
 			local DelayedThread = nil
 			
-			local function schedule() --[[ Line: 179 ]]
+			local function schedule()
 				-- upvalues: DelayedThread (ref), UseBindingResult2 (upval), schedule (copy)
-				DelayedThread = task.delay(300, function() --[[ Line: 180 ]]
+				DelayedThread = task.delay(300, function()
 					-- upvalues: UseBindingResult2 (upval), schedule (upval)
 					UseBindingResult2(os.time())
 					schedule()
 				end)
 			end
 			
-			DelayedThread = task.delay(300, function() --[[ Line: 180 ]]
+			DelayedThread = task.delay(300, function()
 				-- upvalues: UseBindingResult2 (upval), schedule (copy)
 				UseBindingResult2(os.time())
 				schedule()
 			end)
 			
-			return function() --[[ Line: 186 ]]
+			return function()
 				-- upvalues: DelayedThread (ref)
 				if DelayedThread then
 					task.cancel(DelayedThread)
@@ -162,12 +162,12 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "PlatformLeaderboardV
 				end
 			end
 		end, {})
-		FooterUnableToLoad = ReactModule.useMemo(function() --[[ Line: 193 ]]
+		FooterUnableToLoad = ReactModule.useMemo(function()
 			-- upvalues: ReactModule (upval), UseSignalBindingResult (copy), UseBindingResult (copy)
 			return ReactModule.joinBindings({
 				lastRefreshedAt = UseSignalBindingResult,
 				tick = UseBindingResult
-			}):map(function(p2): string --[[ Line: 197 ]]
+			}):map(function(p2): string
 				local LastRefreshedAt: number = p2.lastRefreshedAt
 				local Timestamp = os.time()
 				
@@ -175,37 +175,37 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "PlatformLeaderboardV
 			end)
 		end, { UseSignalBindingResult, UseBindingResult })
 	end
-	ReactModule.useEffect(function() --[[ Line: 203 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UsePlatformLeaderboardModuleResult (copy), Tab (copy)
 		if UsePlatformLeaderboardModuleResult then
 			UsePlatformLeaderboardModuleResult:fireTabOpened(Tab)
 		end
-		return function() --[[ Line: 207 ]]
+		return function()
 			-- upvalues: UsePlatformLeaderboardModuleResult (upval), Tab (upval)
 			if UsePlatformLeaderboardModuleResult then
 				UsePlatformLeaderboardModuleResult:fireTabClosed(Tab)
 			end
 		end
 	end, { UsePlatformLeaderboardModuleResult, Tab })
-	ReactModule.useEffect(function() --[[ Line: 214 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), Loading2 (copy), UseSignalStateResult1 (copy)
 		UseRefResult1.current = false
 		Loading2("loading")
 		
 		if UseSignalStateResult1 then
-			return function() --[[ Line: 218 ]]
+			return function()
 				-- upvalues: UseRefResult1 (upval)
 				UseRefResult1.current = true
 			end
 		else
-			local DelayedThread = task.delay(30, function() --[[ Line: 222 ]]
+			local DelayedThread = task.delay(30, function()
 				-- upvalues: UseRefResult1 (upval), Loading2 (upval)
 				if not UseRefResult1.current then
 					Loading2("error")
 				end
 			end)
 			
-			return function() --[[ Line: 227 ]]
+			return function()
 				-- upvalues: UseRefResult1 (upval), DelayedThread (copy)
 				UseRefResult1.current = true
 				task.cancel(DelayedThread)
@@ -219,7 +219,7 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "PlatformLeaderboardV
 	})
 	
 	if FFlagPlayerListReskinModule then
-		ReactModule.useEffect(function() --[[ Line: 237 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: HasLegacyPanelBackgroundColor (copy), Loading (copy), LeaderboardViewChangeTelemetryModule (upval), Parent (upval), Tab (copy)
 			if HasLegacyPanelBackgroundColor or Loading ~= "error" then return end
 			if LeaderboardViewChangeTelemetryModule == nil then
@@ -229,13 +229,13 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "PlatformLeaderboardV
 		end, { Loading, HasLegacyPanelBackgroundColor })
 	end
 	local LocalPlayer = Players.LocalPlayer
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 246 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: LocalPlayer (copy), ResolveDisplayNameModule (upval)
 		return if LocalPlayer then ResolveDisplayNameModule(LocalPlayer) else nil
 	end, { LocalPlayer })
 	local UseSignalStateResult3 = SignalsReactModule.useSignalState(GetUnit)
 	local PeopleHeaderLabelModule = GetPeopleHeaderLabelModule()
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 254 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: FFlagPlayerListReskinModule (upval), HasLegacyPanelBackgroundColor (copy), LeaderboardViewChangeTelemetryModule (upval), Parent (upval), Tab (copy), UsePlatformLeaderboardModuleResult (copy), Loading2 (copy), UseStateResult2 (copy)
 		if FFlagPlayerListReskinModule and not HasLegacyPanelBackgroundColor then
 			if LeaderboardViewChangeTelemetryModule == nil then
@@ -248,7 +248,7 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "PlatformLeaderboardV
 			UsePlatformLeaderboardModuleResult:fireTabOpened(Tab)
 		end
 		Loading2("loading")
-		UseStateResult2(function(p2: number): number --[[ Line: 263 ]]
+		UseStateResult2(function(p2: number): number
 			return p2 + 1
 		end)
 	end, {

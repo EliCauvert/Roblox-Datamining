@@ -1,3 +1,3 @@
-﻿return function() --[[ Line: 6 | Named "getAppStorageService" ]]
+﻿return function()
 	return game:GetService("AppStorageService")
 end

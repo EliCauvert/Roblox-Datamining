@@ -2,7 +2,7 @@
 local _ = require(Parent.RobloxAppHooks)
 local _ = require(Parent.Style)
 
-return function(_, p1) --[[ Line: 10 ]]
+return function(_, p1)
 	return {
 		robloxLogoTextImageUrl = "rbxasset://textures/ui/LuaApp/graphic/Auth/logo_white_1x.png",
 		containerWidth = 846,

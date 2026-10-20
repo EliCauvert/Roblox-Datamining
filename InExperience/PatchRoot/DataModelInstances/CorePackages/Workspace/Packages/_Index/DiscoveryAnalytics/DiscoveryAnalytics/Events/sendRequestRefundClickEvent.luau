@@ -10,7 +10,7 @@ local config = {
 	lastUpdated = { 26, 4, 24 }
 }
 
-return function(CustomFields, EventContext) --[[ Line: 23 ]]
+return function(CustomFields, EventContext)
 	-- upvalues: DiscoveryEventErrorLogger (copy), StrictInterfaceResult (copy), TelemetryService (copy), config (copy)
 	if type(EventContext) ~= "string" or EventContext == "" then
 		DiscoveryEventErrorLogger.reportError("RequestRefundClickInvalidInterface", `string eventContext expected, got {type(EventContext)} with value {tostring(EventContext)}`)

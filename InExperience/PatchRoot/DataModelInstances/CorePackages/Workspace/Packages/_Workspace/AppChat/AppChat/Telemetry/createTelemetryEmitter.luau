@@ -3,7 +3,7 @@ local SocialLuaAnalyticsModule = require(Parent.SocialLuaAnalytics)
 local LoggingProtocolModule = require(Parent.LoggingProtocol)
 local LoggerModule = require(script.Parent.Logger)
 
-return function(GetSharedInfo) --[[ Line: 8 ]]
+return function(GetSharedInfo)
 	-- upvalues: SocialLuaAnalyticsModule (copy), LoggingProtocolModule (copy), LoggerModule (copy)
 	return SocialLuaAnalyticsModule.Telemetry.createEmitter({
 		shouldUseTelemetryService = true,

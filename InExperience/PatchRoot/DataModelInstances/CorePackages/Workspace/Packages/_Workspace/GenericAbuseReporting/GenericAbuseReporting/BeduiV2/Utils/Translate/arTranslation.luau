@@ -6,17 +6,17 @@ local Context = ReactModule.createContext(nil)
 
 return {
 	ArTranslationContext = Context,
-	ArTranslationProvider = function(p1) --[[ Line: 25 ]]
+	ArTranslationProvider = function(p1)
 		-- upvalues: ReactModule (copy), TranslateIntoStringFunction (copy), TranslateIntoRichTextStringFunction (copy), Context (copy)
 		return ReactModule.createElement(Context.Provider, {
-			value = ReactModule.useMemo(function() --[[ Line: 26 ]]
+			value = ReactModule.useMemo(function()
 				-- upvalues: TranslateIntoStringFunction (upval), p1 (copy), TranslateIntoRichTextStringFunction (upval)
 				return {
-					translateIntoString = function(p2) --[[ Line: 27 ]]
+					translateIntoString = function(p2)
 						-- upvalues: TranslateIntoStringFunction (upval), p1 (upval)
 						return TranslateIntoStringFunction(p1.translations, p2)
 					end,
-					translateIntoRichTextString = function(p2) --[[ Line: 31 ]]
+					translateIntoRichTextString = function(p2)
 						-- upvalues: TranslateIntoRichTextStringFunction (upval), p1 (upval)
 						return TranslateIntoRichTextStringFunction(p1.translations, p2)
 					end
@@ -24,7 +24,7 @@ return {
 			end, { p1.translations })
 		}, p1.children)
 	end,
-	useArTranslation = function() --[[ Line: 46 ]]
+	useArTranslation = function()
 		-- upvalues: ReactModule (copy), Context (copy)
 		local UseContextResult = ReactModule.useContext(Context)
 		

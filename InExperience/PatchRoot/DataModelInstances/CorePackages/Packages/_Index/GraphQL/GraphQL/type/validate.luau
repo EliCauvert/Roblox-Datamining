@@ -46,7 +46,7 @@ local Callback2 = nil
 local Callback13 = nil
 local Callback8 = nil
 
-local function ValidateSchema(Schema) --[[ Line: 78 ]]
+local function ValidateSchema(Schema)
 	-- upvalues: AssertSchemaFunction (copy), Module (ref), Callback1 (ref), Callback (ref), Callback2 (ref)
 	AssertSchemaFunction(Schema)
 	
@@ -64,12 +64,12 @@ local function ValidateSchema(Schema) --[[ Line: 78 ]]
 	end
 end
 
-local function AssertValidSchema(p1) --[[ Line: 106 ]]
+local function AssertValidSchema(p1)
 	-- upvalues: ValidateSchema (copy), Error1 (copy), Array (copy)
 	local ValidateSchemaResult = ValidateSchema(p1)
 	
 	if #ValidateSchemaResult ~= 0 then
-		error(Error1.new(Array.join(Array.map(ValidateSchemaResult, function(p2) --[[ Line: 111 ]]
+		error(Error1.new(Array.join(Array.map(ValidateSchemaResult, function(p2)
 			return p2.message
 		end), "\n\n")))
 	end
@@ -78,7 +78,7 @@ end
 Module = {}
 Module.__index = Module
 
-function Module.new(Schema) --[[ Line: 132 ]]
+function Module.new(Schema)
 	-- upvalues: Module (ref)
 	local self = setmetatable({}, Module)
 	self._errors = {}
@@ -87,20 +87,20 @@ function Module.new(Schema) --[[ Line: 132 ]]
 	return self
 end
 
-function Module:reportError(Message, AstNode) --[[ Line: 141 ]]
+function Module:reportError(Message, AstNode)
 	-- upvalues: Array (copy), Boolean (copy), GraphQLError (copy)
 	self:addError(GraphQLError.new(Message, if Array.isArray(AstNode) then Array.filter(AstNode, Boolean.toJSBoolean) else AstNode))
 end
 
-function Module:addError(NewResult) --[[ Line: 150 ]]
+function Module:addError(NewResult)
 	table.insert(self._errors, NewResult)
 end
 
-function Module:getErrors() --[[ Line: 154 ]]
+function Module:getErrors()
 	return self._errors
 end
 
-Callback1 = function(NewResult) --[[ Line: 158 | Named "validateRootTypes" ]]
+Callback1 = function(NewResult)
 	-- upvalues: IsNotNillishFunction (copy), IsObjectTypeFunction (copy), Callback3 (ref), InspectFunction (copy)
 	local Schema = NewResult.schema
 	local QueryType = Schema:getQueryType()
@@ -127,9 +127,9 @@ Callback1 = function(NewResult) --[[ Line: 158 | Named "validateRootTypes" ]]
 	end
 end
 
-Callback3 = function(Schema, Operation) --[[ Line: 197 | Named "getOperationTypeNode" ]]
+Callback3 = function(Schema, Operation)
 	-- upvalues: Callback4 (ref)
-	for _, value in ipairs((Callback4(Schema, function(p1) --[[ Line: 198 ]]
+	for _, value in ipairs((Callback4(Schema, function(p1)
 		return p1.operationTypes
 	end))) do
 		if value.operation == Operation then
@@ -139,7 +139,7 @@ Callback3 = function(Schema, Operation) --[[ Line: 197 | Named "getOperationType
 	return nil
 end
 
-Callback = function(NewResult) --[[ Line: 211 | Named "validateDirectives" ]]
+Callback = function(NewResult)
 	-- upvalues: IsDirectiveFunction (copy), InspectFunction (copy), Callback5 (ref), IsInputTypeFunction (copy), IsRequiredArgumentFunction (copy), IsNotNillishFunction (copy), Callback6 (ref)
 	for _, directive in ipairs(NewResult.schema:getDirectives()) do
 		if not IsDirectiveFunction(directive) then
@@ -164,7 +164,7 @@ Callback = function(NewResult) --[[ Line: 211 | Named "validateDirectives" ]]
 	end
 end
 
-Callback5 = function(p1, p2) --[[ Line: 255 | Named "validateName" ]]
+Callback5 = function(p1, p2)
 	-- upvalues: IsValidNameErrorFunction (copy), LocatedErrorFunction (copy)
 	local AstNode = nil
 	local Name = nil
@@ -182,7 +182,7 @@ Callback5 = function(p1, p2) --[[ Line: 255 | Named "validateName" ]]
 	end
 end
 
-Callback2 = function(NewResult) --[[ Line: 276 | Named "validateTypes" ]]
+Callback2 = function(NewResult)
 	-- upvalues: IsNamedTypeFunction (copy), InspectFunction (copy), IsIntrospectionTypeFunction (copy), Callback5 (ref), IsObjectTypeFunction (copy), Callback7 (ref), Callback8 (ref), IsInterfaceTypeFunction (copy), IsUnionTypeFunction (copy), IsEnumTypeFunction (copy), Callback9 (ref), IsInputObjectTypeFunction (copy)
 	local InputObjectCircularRefsValidator: (any) -> () = createInputObjectCircularRefsValidator(NewResult)
 	
@@ -213,7 +213,7 @@ Callback2 = function(NewResult) --[[ Line: 276 | Named "validateTypes" ]]
 	end
 end
 
-Callback7 = function(p1, p2) --[[ Line: 329 | Named "validateFields" ]]
+Callback7 = function(p1, p2)
 	-- upvalues: Callback10 (ref), Callback5 (ref), IsOutputTypeFunction (copy), InspectFunction (copy), IsInputTypeFunction (copy), IsRequiredArgumentFunction (copy), IsNotNillishFunction (copy), Callback6 (ref)
 	local ValuesResult = p2:getFields():values()
 	
@@ -243,7 +243,7 @@ Callback7 = function(p1, p2) --[[ Line: 329 | Named "validateFields" ]]
 	end
 end
 
-Callback8 = function(p3, p4) --[[ Line: 394 | Named "validateInterfaces" ]]
+Callback8 = function(p3, p4)
 	-- upvalues: IsInterfaceTypeFunction (copy), InspectFunction (copy), Callback11 (ref), Callback12 (ref), Callback13 (ref)
 	local t = {}
 	
@@ -268,7 +268,7 @@ Callback8 = function(p3, p4) --[[ Line: 394 | Named "validateInterfaces" ]]
 	end
 end
 
-Callback13 = function(p5, p6, p7) --[[ Line: 444 | Named "validateTypeImplementsInterface" ]]
+Callback13 = function(p5, p6, p7)
 	-- upvalues: Array (copy), Callback10 (ref), IsTypeSubTypeOfFunction (copy), InspectFunction (copy), IsEqualTypeFunction (copy), IsRequiredArgumentFunction (copy)
 	local Fields = p6:getFields()
 	
@@ -288,7 +288,7 @@ Callback13 = function(p5, p6, p7) --[[ Line: 444 | Named "validateTypeImplements
 		end
 		for _, arg in ipairs(value.args) do
 			local Name1 = arg.name
-			local FindResult = Array.find(GetResult.args, function(p8): boolean --[[ Line: 492 ]]
+			local FindResult = Array.find(GetResult.args, function(p8): boolean
 				-- upvalues: Name1 (copy)
 				return p8.name == Name1
 			end)
@@ -305,7 +305,7 @@ Callback13 = function(p5, p6, p7) --[[ Line: 444 | Named "validateTypeImplements
 		for _, arg1 in ipairs(GetResult.args) do
 			local Name2 = arg1.name
 			
-			if not Array.find(value.args, function(p8): boolean --[[ Line: 538 ]]
+			if not Array.find(value.args, function(p8): boolean
 				-- upvalues: Name2 (copy)
 				return p8.name == Name2
 			end) and IsRequiredArgumentFunction(arg1) then
@@ -315,7 +315,7 @@ Callback13 = function(p5, p6, p7) --[[ Line: 444 | Named "validateTypeImplements
 	end
 end
 
-Callback12 = function(p8, p9, p10) --[[ Line: 557 | Named "validateTypeImplementsAncestors" ]]
+Callback12 = function(p8, p9, p10)
 	-- upvalues: Array (copy), Callback11 (ref)
 	local Interfaces = p9:getInterfaces()
 	
@@ -326,7 +326,7 @@ Callback12 = function(p8, p9, p10) --[[ Line: 557 | Named "validateTypeImplement
 	end
 end
 
-function validateUnionMembers(p11, p12) --[[ Line: 587 ]]
+function validateUnionMembers(p11, p12)
 	-- upvalues: Callback10 (ref), Callback14 (ref), IsObjectTypeFunction (copy), InspectFunction (copy)
 	local Types = p12:getTypes()
 	
@@ -348,7 +348,7 @@ function validateUnionMembers(p11, p12) --[[ Line: 587 ]]
 	end
 end
 
-Callback9 = function(p13, p14) --[[ Line: 621 | Named "validateEnumValues" ]]
+Callback9 = function(p13, p14)
 	-- upvalues: Callback10 (ref), Callback5 (ref)
 	local Values = p14:getValues()
 	
@@ -365,7 +365,7 @@ Callback9 = function(p13, p14) --[[ Line: 621 | Named "validateEnumValues" ]]
 	end
 end
 
-function validateInputFields(p15, p16) --[[ Line: 646 ]]
+function validateInputFields(p15, p16)
 	-- upvalues: Callback10 (ref), Callback5 (ref), IsInputTypeFunction (copy), InspectFunction (copy), IsRequiredInputFieldFunction (copy), IsNotNillishFunction (copy), Callback6 (ref)
 	local ValuesResult = p16:getFields():values()
 	
@@ -387,13 +387,13 @@ function validateInputFields(p15, p16) --[[ Line: 646 ]]
 	end
 end
 
-function createInputObjectCircularRefsValidator(p17) --[[ Line: 688 ]]
+function createInputObjectCircularRefsValidator(p17)
 	-- upvalues: IsNonNullTypeFunction (copy), IsInputObjectTypeFunction (copy), Array (copy)
 	local t = {}
 	local List = {}
 	local t1 = {}
 	
-	local function detectCycleRecursive(OfType) --[[ Line: 705 ]]
+	local function detectCycleRecursive(OfType)
 		-- upvalues: t (copy), t1 (copy), List (copy), IsNonNullTypeFunction (upval), IsInputObjectTypeFunction (upval), detectCycleRecursive (copy), Array (upval), p17 (copy)
 		if t[tostring(OfType.name)] then return end
 		t[tostring(OfType.name)] = true
@@ -409,9 +409,9 @@ function createInputObjectCircularRefsValidator(p17) --[[ Line: 688 ]]
 					detectCycleRecursive(OfType1)
 				else
 					local SliceResult = Array.slice(List, Entry)
-					p17:reportError(("Cannot reference Input Object \"%s\" within itself through a series of non-null fields: \"%s\"."):format(OfType1.name, (Array.join(Array.map(SliceResult, function(p18) --[[ Line: 733 ]]
+					p17:reportError(("Cannot reference Input Object \"%s\" within itself through a series of non-null fields: \"%s\"."):format(OfType1.name, (Array.join(Array.map(SliceResult, function(p18)
 						return p18.name
-					end), "."))), Array.map(SliceResult, function(p18) --[[ Line: 743 ]]
+					end), "."))), Array.map(SliceResult, function(p18)
 						return p18.astNode
 					end))
 				end
@@ -424,7 +424,7 @@ function createInputObjectCircularRefsValidator(p17) --[[ Line: 688 ]]
 	return detectCycleRecursive
 end
 
-Callback10 = function(p18) --[[ Line: 767 | Named "getAllNodes" ]]
+Callback10 = function(p18)
 	-- upvalues: Array (copy)
 	local AstNode = p18.astNode
 	local ExtensionASTNodes = p18.extensionASTNodes
@@ -432,7 +432,7 @@ Callback10 = function(p18) --[[ Line: 767 | Named "getAllNodes" ]]
 	return if AstNode then if ExtensionASTNodes then Array.concat({ AstNode }, ExtensionASTNodes) else { AstNode } elseif ExtensionASTNodes then ExtensionASTNodes else {}
 end
 
-Callback4 = function(p18, Callback) --[[ Line: 777 | Named "getAllSubNodes" ]]
+Callback4 = function(p18, Callback)
 	-- upvalues: Callback10 (ref), Array (copy)
 	local ConcatResult = {}
 	
@@ -443,30 +443,30 @@ Callback4 = function(p18, Callback) --[[ Line: 777 | Named "getAllSubNodes" ]]
 	return ConcatResult
 end
 
-Callback11 = function(p19, p20) --[[ Line: 793 | Named "getAllImplementsInterfaceNodes" ]]
+Callback11 = function(p19, p20)
 	-- upvalues: Array (copy), Callback4 (ref)
-	return Array.filter(Callback4(p19, function(p21) --[[ Line: 798 ]]
+	return Array.filter(Callback4(p19, function(p21)
 		return p21.interfaces
-	end), function(p21): boolean --[[ Line: 801 ]]
+	end), function(p21): boolean
 		-- upvalues: p20 (copy)
 		return p21.name.value == p20.name
 	end)
 end
 
-Callback14 = function(p19, Name) --[[ Line: 807 | Named "getUnionMemberTypeNodes" ]]
+Callback14 = function(p19, Name)
 	-- upvalues: Array (copy), Callback4 (ref)
-	return Array.filter(Callback4(p19, function(p20) --[[ Line: 809 ]]
+	return Array.filter(Callback4(p19, function(p20)
 		return p20.types
-	end), function(p20): boolean --[[ Line: 812 ]]
+	end), function(p20): boolean
 		-- upvalues: Name (copy)
 		return p20.name.value == Name
 	end)
 end
 
-Callback6 = function(AstNode) --[[ Line: 818 | Named "getDeprecatedDirectiveNode" ]]
+Callback6 = function(AstNode)
 	-- upvalues: Array (copy), GraphQLDeprecatedDirective (copy)
 	if AstNode == nil or AstNode.directives == nil then return end
-	return Array.find(AstNode.directives, function(p19): boolean --[[ Line: 823 ]]
+	return Array.find(AstNode.directives, function(p19): boolean
 		-- upvalues: GraphQLDeprecatedDirective (upval)
 		return p19.name.value == GraphQLDeprecatedDirective.name
 	end)

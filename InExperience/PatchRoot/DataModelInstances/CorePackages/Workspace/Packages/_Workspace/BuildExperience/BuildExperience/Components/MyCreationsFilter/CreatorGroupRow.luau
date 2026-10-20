@@ -8,7 +8,7 @@ local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 local ListItemInputType = FoundationModule.Enums.ListItemInputType
 
-return function(Frame) --[[ Line: 25 | Named "CreatorGroupRow" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Icon (copy), IconName (copy), IconSize (copy), List (copy), ListItemInputType (copy)
 	local UseTokensResult = UseTokensFunction()
 	

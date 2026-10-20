@@ -1,15 +1,15 @@
 ﻿local PreviewSpecsTypesModule = require(script.Parent.PreviewSpecsTypes)
 
-local function _(p1) --[[ Line: 9 | Named "optionalString" ]]
+local function _(p1)
 	return if typeof(p1) == "string" then p1 else nil
 end
 
-local _ = function(Hash) --[[ Line: 14 | Named "decodePinned" ]]
+local _ = function(Hash)
 	-- upvalues: PreviewSpecsTypesModule (copy)
 	return if Hash == PreviewSpecsTypesModule.PreviewSpecPinned.Pr or Hash == PreviewSpecsTypesModule.PreviewSpecPinned.Hash then Hash else nil
 end
 
-local function decodeItem(p1) --[[ Line: 21 ]]
+local function decodeItem(p1)
 	-- upvalues: PreviewSpecsTypesModule (copy)
 	if typeof(p1) ~= "table" then
 		return nil
@@ -38,7 +38,7 @@ local function decodeItem(p1) --[[ Line: 21 ]]
 	end
 end
 
-return function(p1) --[[ Line: 41 | Named "decodePreviewSpecs" ]]
+return function(p1)
 	-- upvalues: decodeItem (copy)
 	if typeof(p1) ~= "table" then
 		error("preview-specs: response is not an object")

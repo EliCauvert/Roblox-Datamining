@@ -11,7 +11,7 @@ local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 local ReactModule = require(CorePackages.Packages.React)
 local CloseOpenPromptModule = require(script.Parent.Parent.Actions.CloseOpenPrompt)
 
-return function(p1) --[[ Line: 29 ]]
+return function(p1)
 	-- upvalues: UseIsGamepadFunction (copy), UseDispatchFunction (copy), CloseOpenPromptModule (copy), ReactModule (copy), Overlay (copy), InteractiveAlert (copy), ButtonType (copy), RobloxTranslatorModule (copy), IconsControlsKeysXboxA (copy)
 	local UseIsGamepadResult = UseIsGamepadFunction()
 	local UseDispatchResult = UseDispatchFunction()
@@ -36,7 +36,7 @@ return function(p1) --[[ Line: 29 ]]
 						{
 							buttonType = ButtonType.PrimarySystem,
 							props = {
-								onActivated = function() --[[ Line: 33 ]]
+								onActivated = function()
 									-- upvalues: UseDispatchResult (copy), CloseOpenPromptModule (upval)
 									UseDispatchResult(CloseOpenPromptModule())
 								end,

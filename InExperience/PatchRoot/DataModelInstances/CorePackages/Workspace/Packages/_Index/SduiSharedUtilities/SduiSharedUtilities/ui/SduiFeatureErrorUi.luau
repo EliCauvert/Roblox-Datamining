@@ -8,7 +8,7 @@ local ButtonSize = FoundationModule.Enums.ButtonSize
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return function(p1) --[[ Line: 17 | Named "SduiFeatureErrorUi" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), Text (copy), Button (copy), ButtonSize (copy), ButtonVariant (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({

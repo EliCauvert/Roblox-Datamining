@@ -29,11 +29,11 @@ local config1 = {
 	[FilterOperation.NotEqual] = "FILTER_OPERATION_NOT_EQUAL"
 }
 
-local function _(p1): string --[[ Line: 82 | Named "toRfc3339" ]]
+local function _(p1): string
 	return (os.date("!%Y-%m-%dT%H:%M:%SZ", p1))
 end
 
-local function toSeries(p1, Granularity) --[[ Line: 86 ]]
+local function toSeries(p1, Granularity)
 	-- upvalues: FFlagBuildExperienceAnalyticsBreakdownsModule (copy)
 	if p1.queryResult == nil then
 		error({
@@ -65,7 +65,7 @@ local function toSeries(p1, Granularity) --[[ Line: 86 ]]
 	}
 end
 
-return function(p2, p3) --[[ Line: 120 | Named "fetchExperienceMetric" ]]
+return function(p2, p3)
 	-- upvalues: UrlBase (copy), PromiseModule (copy), config (copy), FFlagBuildExperienceAnalyticsBreakdownsModule (copy), config1 (copy), PollAnalyticsOperationModule (copy), toSeries (copy)
 	local P4 = p3 or {}
 	local BaseUrl = P4.baseUrl or UrlBase.APIS
@@ -114,7 +114,7 @@ return function(p2, p3) --[[ Line: 120 | Named "fetchExperienceMetric" ]]
 		network = P4.network,
 		url = BaseUrl .. "/analytics-query-gateway/v1/metrics/resource/" .. "RESOURCE_TYPE_UNIVERSE" .. "/id/" .. tostring(p2.universeId),
 		body = { query = Query },
-		mapResult = function(p4) --[[ Line: 177 ]]
+		mapResult = function(p4)
 			-- upvalues: toSeries (upval), p2 (copy)
 			return (toSeries(p4, p2.granularity))
 		end,

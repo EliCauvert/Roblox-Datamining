@@ -2,7 +2,7 @@
 local VoiceAnalyticsModule = {}
 VoiceAnalyticsModule.__index = VoiceAnalyticsModule
 
-function VoiceAnalyticsModule.new(_eventStreamImpl, p1) --[[ Line: 6 ]]
+function VoiceAnalyticsModule.new(_eventStreamImpl, p1)
 	-- upvalues: VoiceAnalyticsModule (copy)
 	local config = {
 		_target = "EventIngest",
@@ -14,7 +14,7 @@ function VoiceAnalyticsModule.new(_eventStreamImpl, p1) --[[ Line: 6 ]]
 	return config
 end
 
-function VoiceAnalyticsModule:onToggleMuteAll(p1) --[[ Line: 17 ]]
+function VoiceAnalyticsModule:onToggleMuteAll(p1)
 	if p1 then
 		self:onMuteAll()
 		
@@ -24,7 +24,7 @@ function VoiceAnalyticsModule:onToggleMuteAll(p1) --[[ Line: 17 ]]
 	end
 end
 
-function VoiceAnalyticsModule:onToggleMuteSelf(p1) --[[ Line: 25 ]]
+function VoiceAnalyticsModule:onToggleMuteSelf(p1)
 	if p1 then
 		self:onMuteSelf()
 		
@@ -34,7 +34,7 @@ function VoiceAnalyticsModule:onToggleMuteSelf(p1) --[[ Line: 25 ]]
 	end
 end
 
-function VoiceAnalyticsModule:onToggleMutePlayer(MutedUserId, p1) --[[ Line: 33 ]]
+function VoiceAnalyticsModule:onToggleMutePlayer(MutedUserId, p1)
 	if p1 then
 		self:onMutePlayer(MutedUserId)
 		
@@ -44,32 +44,32 @@ function VoiceAnalyticsModule:onToggleMutePlayer(MutedUserId, p1) --[[ Line: 33 
 	end
 end
 
-function VoiceAnalyticsModule:onMuteSelf() --[[ Line: 41 ]]
+function VoiceAnalyticsModule:onMuteSelf()
 	-- upvalues: ConstantsModule (copy)
 	self._eventStreamImpl:setRBXEventStream(self._target, self._context, ConstantsModule.VoiceAnalytics.MuteSelf, {})
 end
 
-function VoiceAnalyticsModule:onUnmuteSelf() --[[ Line: 46 ]]
+function VoiceAnalyticsModule:onUnmuteSelf()
 	-- upvalues: ConstantsModule (copy)
 	self._eventStreamImpl:setRBXEventStream(self._target, self._context, ConstantsModule.VoiceAnalytics.UnmuteSelf, {})
 end
 
-function VoiceAnalyticsModule:onMuteAll() --[[ Line: 51 ]]
+function VoiceAnalyticsModule:onMuteAll()
 	-- upvalues: ConstantsModule (copy)
 	self._eventStreamImpl:setRBXEventStream(self._target, self._context, ConstantsModule.VoiceAnalytics.MuteAll, {})
 end
 
-function VoiceAnalyticsModule:onUnmuteAll() --[[ Line: 56 ]]
+function VoiceAnalyticsModule:onUnmuteAll()
 	-- upvalues: ConstantsModule (copy)
 	self._eventStreamImpl:setRBXEventStream(self._target, self._context, ConstantsModule.VoiceAnalytics.UnmuteAll, {})
 end
 
-function VoiceAnalyticsModule:onMutePlayer(MutedUserId) --[[ Line: 61 ]]
+function VoiceAnalyticsModule:onMutePlayer(MutedUserId)
 	-- upvalues: ConstantsModule (copy)
 	self._eventStreamImpl:setRBXEventStream(self._target, self._context, ConstantsModule.VoiceAnalytics.MutePlayer, { mutedUserId = MutedUserId })
 end
 
-function VoiceAnalyticsModule:onUnmutePlayer(MutedUserId) --[[ Line: 68 ]]
+function VoiceAnalyticsModule:onUnmutePlayer(MutedUserId)
 	-- upvalues: ConstantsModule (copy)
 	self._eventStreamImpl:setRBXEventStream(self._target, self._context, ConstantsModule.VoiceAnalytics.UnmutePlayer, { mutedUserId = MutedUserId })
 end

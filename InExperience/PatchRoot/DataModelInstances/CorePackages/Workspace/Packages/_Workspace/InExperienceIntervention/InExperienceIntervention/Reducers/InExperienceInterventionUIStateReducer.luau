@@ -8,7 +8,7 @@ local RateLimitTimeoutToast = game:DefineFastFlag("RateLimitTimeoutToast", false
 local RateLimitNudgeDialog = game:DefineFastFlag("RateLimitNudgeDialog", false)
 local RateLimitTimeoutDialog = game:DefineFastFlag("RateLimitTimeoutDialog", false)
 
-return function(Tbl, p1) --[[ Line: 13 | Named "InExperienceInterventionUIStateReducer" ]]
+return function(Tbl, p1)
 	-- upvalues: ChatInterventionUIRateLimitWindowSec (copy), RateLimitTimeoutToast (copy), Constants (copy), RateLimitNudgeToast (copy), RateLimitNudgeDialog (copy), RateLimitTimeoutDialog (copy), UIStateActions (copy)
 	local Copy = table.clone(Tbl)
 	local Type = p1.type

@@ -5,7 +5,7 @@ local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.MarketplaceBundleStoreTypes)
 local CreateDataResolverModule = require(DataHydration.createDataResolver)
 
-local function normalizeTaxonomy(Taxonomy) --[[ Line: 28 ]]
+local function normalizeTaxonomy(Taxonomy)
 	if not Taxonomy then
 		return nil
 	end
@@ -20,7 +20,7 @@ local function normalizeTaxonomy(Taxonomy) --[[ Line: 28 ]]
 	return Buffer
 end
 
-local function normalizeBundledItems(BundledItems) --[[ Line: 42 ]]
+local function normalizeBundledItems(BundledItems)
 	if not BundledItems then
 		return nil
 	end
@@ -36,7 +36,7 @@ local function normalizeBundledItems(BundledItems) --[[ Line: 42 ]]
 	return Buffer
 end
 
-local function _(Tbl) --[[ Line: 61 | Named "normalizeBundle" ]]
+local function _(Tbl)
 	-- upvalues: normalizeTaxonomy (copy), normalizeBundledItems (copy)
 	if not Tbl.taxonomy and not Tbl.bundledItems then
 		return Tbl
@@ -52,12 +52,12 @@ local function _(Tbl) --[[ Line: 61 | Named "normalizeBundle" ]]
 	return Copy
 end
 
-return function() --[[ Line: 75 | Named "createMarketplaceBundleStore" ]]
+return function()
 	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy), normalizeTaxonomy (copy), normalizeBundledItems (copy)
 	local DataCacheModule = CreateDataCacheModule()
 	local DataResolverModule = CreateDataResolverModule({
 		cache = DataCacheModule,
-		fetchFn = function(_) --[[ Line: 79 ]]
+		fetchFn = function(_)
 			-- upvalues: PromiseModule (upval)
 			return PromiseModule.resolve({})
 		end
@@ -66,12 +66,12 @@ return function() --[[ Line: 75 | Named "createMarketplaceBundleStore" ]]
 	return {
 		getMarketplaceBundleInfo = DataResolverModule.getCachedItem,
 		getMarketplaceBundleInfos = DataResolverModule.getCachedItems,
-		getNormalizedMarketplaceBundleInfo = function(p1) --[[ Line: 87 ]]
+		getNormalizedMarketplaceBundleInfo = function(p1)
 			-- upvalues: DataResolverModule (copy), normalizeTaxonomy (upval), normalizeBundledItems (upval)
 			local CachedItem = DataResolverModule.getCachedItem(p1)
 			
 			return {
-				data = function(p2) --[[ Line: 90 ]]
+				data = function(p2)
 					-- upvalues: CachedItem (copy), normalizeTaxonomy (upval), normalizeBundledItems (upval)
 					local DataResult = CachedItem.data(p2)
 					

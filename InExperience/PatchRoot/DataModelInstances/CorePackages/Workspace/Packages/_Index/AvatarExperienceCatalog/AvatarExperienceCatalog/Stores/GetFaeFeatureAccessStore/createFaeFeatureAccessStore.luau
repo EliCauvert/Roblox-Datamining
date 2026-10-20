@@ -5,7 +5,7 @@ local PromiseModule = require(Parent.Promise)
 local _ = require(Parent.LuauPolyfill)
 local GetFaeStatusFunction = require(AvatarExperienceCatalog.Api.GetFaeStatus.getFaeStatus).getFaeStatus
 
-return function() --[[ Line: 22 | Named "createFaeFeatureAccessStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy), GetFaeStatusFunction (copy), PromiseModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(false)
 	local Signal1, Signal2_1 = SignalsModule.createSignal(false)
@@ -15,12 +15,12 @@ return function() --[[ Line: 22 | Named "createFaeFeatureAccessStore" ]]
 		getCanClaimFaeItem = Signal,
 		getShowFaeUpsell = Signal1,
 		getFetchStatus = Idle,
-		fetch = function(p1) --[[ Line: 28 ]]
+		fetch = function(p1)
 			-- upvalues: Idle2 (copy), GetFaeStatusFunction (upval), PromiseModule (upval), Signal2 (copy), Signal2_1 (copy)
 			Idle2("pending")
 			local FaeStatus, _ = GetFaeStatusFunction(p1)
 			
-			return PromiseModule.resolve(FaeStatus):andThen(function(Result) --[[ Line: 32 ]]
+			return PromiseModule.resolve(FaeStatus):andThen(function(Result)
 				-- upvalues: PromiseModule (upval), Signal2 (upval), Signal2_1 (upval), Idle2 (upval)
 				if not Result then
 					return PromiseModule.reject()
@@ -40,14 +40,14 @@ return function() --[[ Line: 22 | Named "createFaeFeatureAccessStore" ]]
 				Idle2("success")
 				
 				return PromiseModule.resolve()
-			end):catch(function(Err) --[[ Line: 49 ]]
+			end):catch(function(Err)
 				-- upvalues: Idle2 (upval), PromiseModule (upval)
 				Idle2("idle")
 				
 				return PromiseModule.reject(Err)
 			end)
 		end,
-		reset = function() --[[ Line: 55 ]]
+		reset = function()
 			-- upvalues: Signal2 (copy), Signal2_1 (copy), Idle2 (copy)
 			Signal2(false)
 			Signal2_1(false)

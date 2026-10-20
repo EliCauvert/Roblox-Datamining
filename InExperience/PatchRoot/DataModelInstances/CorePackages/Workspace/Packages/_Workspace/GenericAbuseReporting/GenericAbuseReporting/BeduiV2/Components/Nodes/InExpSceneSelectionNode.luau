@@ -10,7 +10,7 @@ local TelemetryEventType = AnalyticsServiceModule.TelemetryEventType
 local UseAbuseReportAnalyticsFunction = require(GenericAbuseReporting.BeduiV2.Analytics.AbuseReportAnalyticsContext).useAbuseReportAnalytics
 local UseLayoutSlotsFunction = require(GenericAbuseReporting.BeduiV2.Components.LayoutSlots).useLayoutSlots
 
-return ReactModule.memo(function(Current) --[[ Line: 37 | Named "InExpSceneSelectionNode" ]]
+return ReactModule.memo(function(Current)
 	-- upvalues: ReactModule (copy), UseAbuseReportAnalyticsFunction (copy), UseLayoutSlotsFunction (copy), GetIsInExpSceneSelectionAvailableModule (copy), TelemetryEventType (copy), InExpSceneSelectionAdapterModule (copy), SubmitSource (copy), TextWithTranslationModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Current.loadingText)
 	local SendEvent = UseAbuseReportAnalyticsFunction().sendEvent
@@ -21,11 +21,11 @@ return ReactModule.memo(function(Current) --[[ Line: 37 | Named "InExpSceneSelec
 	UseRefResult.current = Current
 	local UseRefResult1 = ReactModule.useRef(SendEvent)
 	UseRefResult1.current = SendEvent
-	ReactModule.useEffect(function() --[[ Line: 52 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: GetIsInExpSceneSelectionAvailableModule (upval), UseRefResult1 (copy), TelemetryEventType (upval), UseRefResult (copy), UseStateResult2 (copy), InExpSceneSelectionAdapterModule (upval), SubmitSource (upval)
 		if GetIsInExpSceneSelectionAvailableModule() then
 			local Connection = nil
-			Connection = InExpSceneSelectionAdapterModule.subscribeOnceToExitReason(function(p1) --[[ Line: 75 ]]
+			Connection = InExpSceneSelectionAdapterModule.subscribeOnceToExitReason(function(p1)
 				-- upvalues: Connection (ref), UseRefResult1 (upval), TelemetryEventType (upval), UseRefResult (upval), SubmitSource (upval)
 				Connection = nil
 				UseRefResult1.current({
@@ -66,7 +66,7 @@ return ReactModule.memo(function(Current) --[[ Line: 37 | Named "InExpSceneSelec
 					UseStateResult2(Current.errorText)
 				end
 			end
-			return function() --[[ Line: 120 ]]
+			return function()
 				-- upvalues: Connection (ref)
 				if Connection then
 					Connection:Disconnect()

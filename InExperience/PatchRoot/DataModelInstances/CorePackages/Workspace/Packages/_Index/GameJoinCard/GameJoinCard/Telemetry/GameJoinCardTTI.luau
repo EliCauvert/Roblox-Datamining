@@ -15,7 +15,7 @@ local ScaledCurrentTime = nil
 return {
 	EventName = EventName,
 	Surface = Surface,
-	trackMobileCardClickStart = function() --[[ Line: 51 ]]
+	trackMobileCardClickStart = function()
 		-- upvalues: ScaledCurrentTime (ref), FFlagMobileGameJoinCardTTITracking (copy), TimeToInteractiveTracker (copy), EventName (copy), Surface (copy)
 		ScaledCurrentTime = tick() * 1000
 		
@@ -34,14 +34,14 @@ return {
 			return
 		end
 	end,
-	consumeMobileCardClickStartMs = function() --[[ Line: 71 ]]
+	consumeMobileCardClickStartMs = function()
 		-- upvalues: ScaledCurrentTime (ref)
 		local ScaledCurrentTime1 = ScaledCurrentTime
 		ScaledCurrentTime = nil
 		
 		return ScaledCurrentTime1
 	end,
-	trackCardMounted = function() --[[ Line: 77 ]]
+	trackCardMounted = function()
 		-- upvalues: FFlagMobileGameJoinCardTTITracking (copy), TimeToInteractiveTracker (copy), EventName (copy)
 		if FFlagMobileGameJoinCardTTITracking then
 			TimeToInteractiveTracker.trackEnd(EventName.MobileCardMounted)
@@ -49,7 +49,7 @@ return {
 			return
 		end
 	end,
-	trackBannerLoaded = function() --[[ Line: 85 ]]
+	trackBannerLoaded = function()
 		-- upvalues: FFlagMobileGameJoinCardTTITracking (copy), TimeToInteractiveTracker (copy), EventName (copy)
 		if FFlagMobileGameJoinCardTTITracking then
 			TimeToInteractiveTracker.trackEnd(EventName.MobileBannerMounted)
@@ -57,7 +57,7 @@ return {
 			return
 		end
 	end,
-	trackPeopleListClickStart = function() --[[ Line: 93 ]]
+	trackPeopleListClickStart = function()
 		-- upvalues: FFlagMobileGameJoinCardTTITracking (copy), TimeToInteractiveTracker (copy), EventName (copy), Surface (copy)
 		if FFlagMobileGameJoinCardTTITracking then
 			TimeToInteractiveTracker.trackStart(EventName.PeopleListMounted, true)
@@ -69,7 +69,7 @@ return {
 			return
 		end
 	end,
-	trackPeopleListMounted = function() --[[ Line: 105 ]]
+	trackPeopleListMounted = function()
 		-- upvalues: FFlagMobileGameJoinCardTTITracking (copy), TimeToInteractiveTracker (copy), EventName (copy)
 		if FFlagMobileGameJoinCardTTITracking then
 			TimeToInteractiveTracker.trackEnd(EventName.PeopleListMounted)

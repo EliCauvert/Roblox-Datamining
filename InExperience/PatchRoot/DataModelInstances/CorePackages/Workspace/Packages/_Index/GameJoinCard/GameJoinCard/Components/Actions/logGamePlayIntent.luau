@@ -4,7 +4,7 @@ local GamePlayIntentFunction = DiscoveryAnalyticsModule.Events.gamePlayIntent
 local PeopleListInHomePage = DiscoveryAnalyticsModule.Constants.Context.PeopleListInHomePage
 local _ = require(script.Parent.Types)
 
-return function(p1) --[[ Line: 11 | Named "logGamePlayIntent" ]]
+return function(p1)
 	-- upvalues: GamePlayIntentFunction (copy), PeopleListInHomePage (copy), HttpService (copy)
 	local UserId = p1.userId
 	

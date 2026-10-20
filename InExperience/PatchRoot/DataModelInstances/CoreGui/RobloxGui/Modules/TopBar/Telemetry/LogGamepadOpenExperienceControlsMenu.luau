@@ -11,7 +11,7 @@ local config = {
 	lastUpdated = { 25, 4, 25 }
 }
 
-return function(p1) --[[ Line: 24 ]]
+return function(p1)
 	-- upvalues: FFlagLoggingGamepadOpenExpControlsMenuModule (copy), TelemetryServicePlaySessionInfoEnabledEngineFeature (copy), RbxAnalyticsService (copy), TelemetryService (copy), config (copy)
 	if not FFlagLoggingGamepadOpenExpControlsMenuModule then return end
 	local StandardizedFields = nil

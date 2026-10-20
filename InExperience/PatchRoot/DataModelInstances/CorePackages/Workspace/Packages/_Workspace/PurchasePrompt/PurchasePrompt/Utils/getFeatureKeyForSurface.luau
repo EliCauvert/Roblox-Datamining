@@ -7,7 +7,7 @@ local List = {
 	ProductPurchaseSurface.InExperienceShopDetails
 }
 
-return function(Value): string --[[ Line: 20 | Named "getFeatureKeyForSurface" ]]
+return function(Value): string
 	-- upvalues: FFlagEnforceRobloxShopForAllSurfacesModule (copy), List (copy)
 	return if FFlagEnforceRobloxShopForAllSurfacesModule then "ROBLOX_SHOP" elseif Value == nil or table.find(List, Value) == nil then "DEVELOPER_SHOP" else "ROBLOX_SHOP"
 end

@@ -27,9 +27,9 @@ local Size352x352 = Enum.ThumbnailSize.Size352x352
 local HeadShot = Enum.ThumbnailType.HeadShot
 local AvatarThumbnail = Enum.ThumbnailType.AvatarThumbnail
 
-local function _(p1, p2) --[[ Line: 50 | Named "LocalizedGetString" ]]
+local function _(p1, p2)
 	-- upvalues: RobloxTranslatorModule (copy)
-	pcall(function() --[[ Line: 51 ]]
+	pcall(function()
 		-- upvalues: p2 (ref), RobloxTranslatorModule (upval), p1 (copy)
 		p2 = RobloxTranslatorModule:FormatByKey(p1)
 	end)
@@ -37,13 +37,13 @@ local function _(p1, p2) --[[ Line: 50 | Named "LocalizedGetString" ]]
 	return p2
 end
 
-function createFetchImageFunction(...) --[[ Line: 57 ]]
+function createFetchImageFunction(...)
 	-- upvalues: SocialUtilModule (copy)
 	local list = { ... }
 	
-	return function(p1) --[[ Line: 59 ]]
+	return function(p1)
 		-- upvalues: SocialUtilModule (upval), list (copy)
-		spawn(function() --[[ Line: 60 ]]
+		spawn(function()
 			-- upvalues: SocialUtilModule (upval), list (upval), p1 (copy)
 			local PlayerImage = SocialUtilModule.GetPlayerImage(unpack(list))
 			
@@ -54,18 +54,18 @@ function createFetchImageFunction(...) --[[ Line: 57 ]]
 	end
 end
 
-function SendFriendRequest(Player) --[[ Line: 69 ]]
+function SendFriendRequest(Player)
 	-- upvalues: RbxAnalyticsService (copy), LocalPlayer (ref)
 	RbxAnalyticsService:ReportCounter("FriendPlayerPrompt-RequestFriendship")
 	RbxAnalyticsService:TrackEvent("Game", "RequestFriendship", "FriendPlayerPrompt")
 	
-	return (pcall(function() --[[ Line: 73 ]]
+	return (pcall(function()
 		-- upvalues: LocalPlayer (upval), Player (copy)
 		LocalPlayer:RequestFriendship(Player)
 	end))
 end
 
-function AtFriendLimit(Player): boolean --[[ Line: 79 ]]
+function AtFriendLimit(Player): boolean
 	-- upvalues: FFlagRemoveHardCodedFriendLimitPromptModule (copy), FriendingUtilityModule (copy)
 	assert(not FFlagRemoveHardCodedFriendLimitPromptModule, "Should not call AtFriendLimit when FFlagRemoveHardCodedFriendLimitPrompt is enabled")
 	local FriendCountAsync = FriendingUtilityModule:GetFriendCountAsync(Player.UserId)
@@ -73,7 +73,7 @@ function AtFriendLimit(Player): boolean --[[ Line: 79 ]]
 	return FriendCountAsync ~= nil and FriendingUtilityModule:MaxFriendCount() <= FriendCountAsync
 end
 
-function DoPromptRequestFriendPlayer(Player: Player) --[[ Line: 94 ]]
+function DoPromptRequestFriendPlayer(Player: Player)
 	-- upvalues: LocalPlayer (ref), FriendRequestModalIxpEnabled (copy), IXPService (copy), FriendRequestModalIxpLayer (copy), FriendRequestModalRevampV4 (copy), UserRelationshipModalsModule (copy), FFlagRemoveHardCodedFriendLimitPromptModule (copy), PromptCreatorModule (copy), Size150x150 (copy), HeadShot (copy), Size352x352 (copy), AvatarThumbnail (copy), RobloxTranslatorModule (copy)
 	if LocalPlayer:IsFriendsWithAsync(Player.UserId) then return end
 	if FriendRequestModalIxpEnabled then
@@ -94,7 +94,7 @@ function DoPromptRequestFriendPlayer(Player: Player) --[[ Line: 94 ]]
 			MainText = string.format("Would you like to send %s a Friend Request?", Player.Name),
 			FetchImageFunction = createFetchImageFunction(Player.UserId, Size150x150, HeadShot),
 			FetchImageFunctionConsoleVR = createFetchImageFunction(Player.UserId, Size352x352, AvatarThumbnail),
-			PromptCompletedCallback = function(p1) --[[ Line: 111 ]]
+			PromptCompletedCallback = function(p1)
 				-- upvalues: FFlagRemoveHardCodedFriendLimitPromptModule (upval), LocalPlayer (upval), PromptCreatorModule (upval), Player (copy), Size150x150 (upval), HeadShot (upval), Size352x352 (upval), AvatarThumbnail (upval)
 				if p1 then
 					if not FFlagRemoveHardCodedFriendLimitPromptModule and AtFriendLimit(LocalPlayer) then
@@ -152,7 +152,7 @@ function DoPromptRequestFriendPlayer(Player: Player) --[[ Line: 94 ]]
 	end
 end
 
-function PromptRequestFriendPlayer(Player: Player) --[[ Line: 224 ]]
+function PromptRequestFriendPlayer(Player: Player)
 	-- upvalues: LocalPlayer (ref)
 	if LocalPlayer.UserId < 0 then
 		error("PromptSendFriendRequest can not be called for guests!")
@@ -171,15 +171,15 @@ function PromptRequestFriendPlayer(Player: Player) --[[ Line: 224 ]]
 	DoPromptRequestFriendPlayer(Player)
 end
 
-function UnFriendPlayer(Player) --[[ Line: 241 ]]
+function UnFriendPlayer(Player)
 	-- upvalues: LocalPlayer (ref)
-	return (pcall(function() --[[ Line: 242 ]]
+	return (pcall(function()
 		-- upvalues: LocalPlayer (upval), Player (copy)
 		LocalPlayer:RevokeFriendship(Player)
 	end))
 end
 
-function DoPromptUnfriendPlayer(Player: Player) --[[ Line: 248 ]]
+function DoPromptUnfriendPlayer(Player: Player)
 	-- upvalues: LocalPlayer (ref), PromptCreatorModule (copy), Size150x150 (copy), HeadShot (copy), Size352x352 (copy), AvatarThumbnail (copy)
 	if LocalPlayer:IsFriendsWithAsync(Player.UserId) then
 		PromptCreatorModule:CreatePrompt({
@@ -192,7 +192,7 @@ function DoPromptUnfriendPlayer(Player: Player) --[[ Line: 248 ]]
 			MainText = string.format("Would you like to remove %s from your friends list?", Player.Name),
 			FetchImageFunction = createFetchImageFunction(Player.UserId, Size150x150, HeadShot),
 			FetchImageFunctionConsoleVR = createFetchImageFunction(Player.UserId, Size352x352, AvatarThumbnail),
-			PromptCompletedCallback = function(p1) --[[ Line: 256 ]]
+			PromptCompletedCallback = function(p1)
 				-- upvalues: Player (copy), PromptCreatorModule (upval), Size150x150 (upval), HeadShot (upval), Size352x352 (upval), AvatarThumbnail (upval)
 				if p1 and not UnFriendPlayer(Player) then
 					while PromptCreatorModule:IsCurrentlyPrompting() do
@@ -217,7 +217,7 @@ function DoPromptUnfriendPlayer(Player: Player) --[[ Line: 248 ]]
 	end
 end
 
-function PromptUnfriendPlayer(Player: Player) --[[ Line: 316 ]]
+function PromptUnfriendPlayer(Player: Player)
 	-- upvalues: LocalPlayer (ref)
 	if LocalPlayer.UserId < 0 then
 		error("PromptUnfriend can not be called for guests!")

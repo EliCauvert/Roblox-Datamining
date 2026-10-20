@@ -2,9 +2,9 @@
 local Platform = game:GetService("UserInputService"):GetPlatform()
 local FStringLuaAppEphemeralCounterPrefix = require(script:FindFirstAncestor("AuthCommon").Parent.SharedFlags).FStringLuaAppEphemeralCounterPrefix
 
-return function(CounterName, Amount) --[[ Line: 13 ]]
+return function(CounterName, Amount)
 	-- upvalues: Platform (copy), FStringLuaAppEphemeralCounterPrefix (copy), RbxAnalyticsService (copy)
-	pcall(function() --[[ Line: 14 ]]
+	pcall(function()
 		-- upvalues: CounterName (ref), Amount (ref), Platform (upval), FStringLuaAppEphemeralCounterPrefix (upval), RbxAnalyticsService (upval)
 		assert(type(CounterName) == "string", "Expected counterName to be a string")
 		CounterName = CounterName or ""

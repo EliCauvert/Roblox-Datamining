@@ -4,7 +4,7 @@ local AddPlayerModule = require(Actions.AddPlayer)
 local RemovePlayerModule = require(Actions.RemovePlayer)
 local SetPlayerLeaderstatModule = require(Actions.SetPlayerLeaderstat)
 
-local function createKey(Player: Player, Name, PlayerStats) --[[ Line: 10 ]]
+local function createKey(Player: Player, Name, PlayerStats)
 	local PlayerStatEntry = if Name == nil or PlayerStats == nil or PlayerStats[Player.UserId] == nil then nil else PlayerStats[Player.UserId][Name]
 	
 	return {
@@ -13,7 +13,7 @@ local function createKey(Player: Player, Name, PlayerStats) --[[ Line: 10 ]]
 	}
 end
 
-return function(p1, p2, p3) --[[ Line: 22 | Named "PlayerKeys" ]]
+return function(p1, p2, p3)
 	-- upvalues: createKey (copy), AddPlayerModule (copy), SetPlayerLeaderstatModule (copy), CryoModule (copy), RemovePlayerModule (copy)
 	local Name = p3.gameStats[1] and p3.gameStats[1].name or nil
 	

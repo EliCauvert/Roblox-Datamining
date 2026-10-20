@@ -6,9 +6,9 @@ local ResolveBirthdaySelectVariantFunction = require(Parent.AuthSignup).Util.res
 local GetFFlagSignUpBirthdayPickerRequireManualSelectionFunction = SharedFlagsModule.GetFFlagSignUpBirthdayPickerRequireManualSelection
 local GetFIntSignUpBirthdayPickerManualSelectVariantOverrideFunction = SharedFlagsModule.GetFIntSignUpBirthdayPickerManualSelectVariantOverride
 
-return function() --[[ Line: 17 | Named "useRequireManualSelection" ]]
+return function()
 	-- upvalues: UseBrowserTrackerExperimentFunction (copy), AppBtidLayers (copy), ResolveBirthdaySelectVariantFunction (copy), GetFFlagSignUpBirthdayPickerRequireManualSelectionFunction (copy), GetFIntSignUpBirthdayPickerManualSelectVariantOverrideFunction (copy)
-	return ResolveBirthdaySelectVariantFunction(GetFFlagSignUpBirthdayPickerRequireManualSelectionFunction(), GetFIntSignUpBirthdayPickerManualSelectVariantOverrideFunction(), UseBrowserTrackerExperimentFunction({ AppBtidLayers.SignupLayer }, function(p1) --[[ Line: 23 ]]
+	return ResolveBirthdaySelectVariantFunction(GetFFlagSignUpBirthdayPickerRequireManualSelectionFunction(), GetFIntSignUpBirthdayPickerManualSelectVariantOverrideFunction(), UseBrowserTrackerExperimentFunction({ AppBtidLayers.SignupLayer }, function(p1)
 		-- upvalues: AppBtidLayers (upval)
 		return {
 			birthdayManualSelectVariant = (p1[AppBtidLayers.SignupLayer] or {}).birthdayManualSelectVariant

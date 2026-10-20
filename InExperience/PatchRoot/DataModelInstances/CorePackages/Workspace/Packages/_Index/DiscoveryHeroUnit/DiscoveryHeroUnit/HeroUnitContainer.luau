@@ -19,11 +19,11 @@ local FFlagLuaAppHomePageFirstImageLoadObserver = SharedFlagsModule.FFlagLuaAppH
 local config = { Compact = 0.5625, Square = 1, Tall = 1.25 }
 local SubtitleColor = { Transparency = 0, Color3 = Color3.new(1, 1, 1) }
 
-local function _(p1, p2) --[[ Line: 128 | Named "scaleSizeForPlatform" ]]
+local function _(p1, p2)
 	return p1 * p2.Stroke.Standard
 end
 
-local function useHeroConfiguration(p1, Tokens) --[[ Line: 133 ]]
+local function useHeroConfiguration(p1, Tokens)
 	-- upvalues: ResponsiveModule (copy), HeroNarrowLayout (copy), config (copy), FFlagLuaAppEnableHeroUnitV2 (copy), CryoModule (copy), UserGameSettings (copy)
 	local UseResponsiveResult = ResponsiveModule.useResponsive({
 		{ Key = "Small", maxWidth = 413 },
@@ -93,10 +93,10 @@ local function useHeroConfiguration(p1, Tokens) --[[ Line: 133 ]]
 	}, p1)
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 234 | Named "HeroUnitContainer" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), UseTokensFunction (copy), useHeroConfiguration (copy), FFlagLuaAppEnableHeroUnitV2 (copy), ArgCheckModule (copy), Image (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), CollectionHeader (copy), SubtitleColor (copy), HeroImagesModule (copy), UserGameSettings (copy), MaybeForceDarkThemeFunction (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 236 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseBindingResult2 (copy)
 		if Frame then
 			UseBindingResult2(Frame.AbsoluteSize.X)
@@ -111,13 +111,13 @@ return ReactModule.memo(function(p1) --[[ Line: 234 | Named "HeroUnitContainer" 
 		assert(UseHeroConfigurationResult.minCardHeight ~= nil, "minCardHeight is required")
 		assert(UseHeroConfigurationResult.titleImageAspectRatio ~= nil, "titleImageAspectRatio is required")
 	end
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 258 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), ArgCheckModule (upval), ReactModule (upval), Image (upval), UseBindingResult (copy), NewBackgroundImageFrameHeight (ref), UseHeroConfigurationResult (copy), FFlagLuaAppHomePageFirstImageLoadObserver (upval)
 		if p1.titleImage then
 			return ReactModule.createElement(Image, {
 				ZIndex = 0,
 				Image = p1.titleImage,
-				Size = UseBindingResult:map(function(XOffset): UDim2 --[[ Line: 266 ]]
+				Size = UseBindingResult:map(function(XOffset): UDim2
 					-- upvalues: NewBackgroundImageFrameHeight (upval), UseHeroConfigurationResult (upval)
 					return UDim2.new(0, XOffset, 0, (if UseHeroConfigurationResult.aspectRatio then math.max(UseHeroConfigurationResult.minCardHeight, XOffset * UseHeroConfigurationResult.aspectRatio + UseHeroConfigurationResult.foregroundOverflow) else NewBackgroundImageFrameHeight) * UseHeroConfigurationResult.titleImageHeightPercentage)
 				end),
@@ -144,7 +144,7 @@ return ReactModule.memo(function(p1) --[[ Line: 234 | Named "HeroUnitContainer" 
 		ref = UseResult,
 		[ReactModule.Change.AbsoluteSize] = UseResult,
 		Position = UDim2.new(0, UseHeroConfigurationResult.sideMargin, 0, 0),
-		Size = if UseHeroConfigurationResult.aspectRatio then UseBindingResult:map(function(p2): UDim2 --[[ Line: 315 ]]
+		Size = if UseHeroConfigurationResult.aspectRatio then UseBindingResult:map(function(p2): UDim2
 			-- upvalues: UseHeroConfigurationResult (copy)
 			return UDim2.new(1, -2 * UseHeroConfigurationResult.sideMargin, 0, (math.max(UseHeroConfigurationResult.minCardHeight, p2 * UseHeroConfigurationResult.aspectRatio + UseHeroConfigurationResult.foregroundOverflow)))
 		end) else UDim2.new(1, -2 * UseHeroConfigurationResult.sideMargin, 0, NewBackgroundImageFrameHeight),
@@ -189,7 +189,7 @@ return ReactModule.memo(function(p1) --[[ Line: 234 | Named "HeroUnitContainer" 
 			}),
 			HeroLogo = if FFlagLuaAppEnableHeroUnitV2 and p1.titleImage then ReactModule.createElement(Image, {
 				Image = p1.titleImage,
-				Size = UseBindingResult:map(function(XOffset): UDim2 --[[ Line: 375 ]]
+				Size = UseBindingResult:map(function(XOffset): UDim2
 					-- upvalues: NewBackgroundImageFrameHeight (ref), UseHeroConfigurationResult (copy)
 					return UDim2.new(0, XOffset, 0, (if UseHeroConfigurationResult.aspectRatio then math.max(UseHeroConfigurationResult.minCardHeight, XOffset * UseHeroConfigurationResult.aspectRatio + UseHeroConfigurationResult.foregroundOverflow) else NewBackgroundImageFrameHeight or 0) * UseHeroConfigurationResult.titleImageHeightPercentage)
 				end),

@@ -3,7 +3,7 @@ local GetOffersForKeyModule = require(InExperienceOffers.Utils.getOffersForKey)
 local SelectActiveOfferModule = require(InExperienceOffers.Utils.selectActiveOffer)
 local _ = require(InExperienceOffers.Types)
 
-return function(p1, p2) --[[ Line: 9 | Named "getOfferBadgeText" ]]
+return function(p1, p2)
 	-- upvalues: GetOffersForKeyModule (copy), SelectActiveOfferModule (copy)
 	if p2 == nil then
 		return nil

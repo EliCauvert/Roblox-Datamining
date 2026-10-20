@@ -1,7 +1,7 @@
 ﻿local AvatarEditorService = game:GetService("AvatarEditorService")
 local Players = game:GetService("Players")
 
-return if require(script.Parent.Parent.Flags.FFlagTopBarDeprecateRespawnRodux) then nil else function(p1) --[[ Line: 13 ]]
+return if require(script.Parent.Parent.Flags.FFlagTopBarDeprecateRespawnRodux) then nil else function(p1)
 	-- upvalues: AvatarEditorService (copy), Players (copy)
 	local State = p1:getState()
 	AvatarEditorService:BustAvatarFetchCache()

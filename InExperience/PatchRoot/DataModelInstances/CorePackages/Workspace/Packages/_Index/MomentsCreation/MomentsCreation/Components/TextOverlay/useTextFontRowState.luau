@@ -20,13 +20,13 @@ local FFlagMomentsTextOverlayV2Redesign = MomentsCommonModule.Flags.FFlagMoments
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
 local _ = require(Parent.MomentsTypes)
 
-return function(p1) --[[ Line: 53 | Named "useTextFontRowState" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseFormFactorFunction (copy), FormFactor (copy), UseMemoFunction (copy), SignalsModule (copy), UseSignalStateFunction (copy), UseCallbackFunction (copy), DashModule (copy), FFlagMomentsTextOverlayV2Redesign (copy), FireAnalyticsEventModule (copy), EventNames (copy), MakeCreationEventFieldsModule (copy), UseRefFunction (copy), UseStateFunction (copy), ReactOtterModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsUseFormFactorResultMatch = UseFormFactorFunction() == FormFactor.Wide
-	local UseSignalStateResult = UseSignalStateFunction((UseMemoFunction(function() --[[ Line: 57 ]]
+	local UseSignalStateResult = UseSignalStateFunction((UseMemoFunction(function()
 		-- upvalues: SignalsModule (upval), p1 (copy)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 58 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: p1 (upval)
 			local ActiveSession = p1.getActiveSession(p2)
 			local Draft = if ActiveSession == nil then nil else ActiveSession.getDraft(p2)
@@ -35,7 +35,7 @@ return function(p1) --[[ Line: 53 | Named "useTextFontRowState" ]]
 			return if DraftEntry == nil then Enum.Font.BuilderSansMedium else DraftEntry.textOverlayStyle.font
 		end)
 	end, { p1 })))
-	local UseCallbackResult = UseCallbackFunction(function(p2, p3) --[[ Line: 67 ]]
+	local UseCallbackResult = UseCallbackFunction(function(p2, p3)
 		-- upvalues: p1 (copy), DashModule (upval), FFlagMomentsTextOverlayV2Redesign (upval), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval)
 		local ActiveSession = p1.getActiveSession(false)
 		
@@ -55,7 +55,7 @@ return function(p1) --[[ Line: 53 | Named "useTextFontRowState" ]]
 	local UseRefResult = UseRefFunction(nil)
 	local UseStateResult, UseStateResult2 = UseStateFunction(false)
 	local UseStateResult1, UseStateResult2_1 = UseStateFunction(false)
-	local UseCallbackResult1 = UseCallbackFunction(function(ScrollFrame) --[[ Line: 94 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function(ScrollFrame)
 		-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy)
 		if ScrollFrame.AbsoluteWindowSize.X ~= 0 then
 			UseStateResult2(ScrollFrame.CanvasPosition.X > 0)
@@ -64,7 +64,7 @@ return function(p1) --[[ Line: 53 | Named "useTextFontRowState" ]]
 			return
 		end
 	end, {})
-	local UseMotorResult = ReactOtterModule.useMotor(0, function(X) --[[ Line: 105 ]]
+	local UseMotorResult = ReactOtterModule.useMotor(0, function(X)
 		-- upvalues: UseRefResult (copy)
 		local Current = UseRefResult.current
 		
@@ -74,7 +74,7 @@ return function(p1) --[[ Line: 53 | Named "useTextFontRowState" ]]
 			return
 		end
 	end)
-	local UseCallbackResult2 = UseCallbackFunction(function(p2) --[[ Line: 113 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function(p2)
 		-- upvalues: UseRefResult (copy), UseMotorResult (copy), ReactOtterModule (upval), UseTokensResult (copy)
 		local Current = UseRefResult.current
 		
@@ -96,11 +96,11 @@ return function(p1) --[[ Line: 53 | Named "useTextFontRowState" ]]
 		onScrollViewportChanged = UseCallbackResult1,
 		showLeftChevron = IsUseFormFactorResultMatch and UseStateResult,
 		showRightChevron = IsUseFormFactorResultMatch and UseStateResult1,
-		onLeftChevronActivated = UseCallbackFunction(function() --[[ Line: 129 ]]
+		onLeftChevronActivated = UseCallbackFunction(function()
 			-- upvalues: UseCallbackResult2 (copy)
 			UseCallbackResult2(-1)
 		end, { UseCallbackResult2 }),
-		onRightChevronActivated = UseCallbackFunction(function() --[[ Line: 133 ]]
+		onRightChevronActivated = UseCallbackFunction(function()
 			-- upvalues: UseCallbackResult2 (copy)
 			UseCallbackResult2(1)
 		end, { UseCallbackResult2 })

@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local AvatarGiftInfoPanelViewModule = require(script.Parent.Parent.AvatarGiftInfoPanel.AvatarGiftInfoPanelView)
 local GiftSendView = require(Parent.Gifting).Components.GiftSendView
 
-return ReactModule.memo(function(p1) --[[ Line: 22 | Named "AvatarGiftSendView" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), AvatarGiftInfoPanelViewModule (copy), GiftSendView (copy)
 	local ThumbnailUrl = p1.thumbnailUrl
 	local ItemName = p1.itemName
@@ -17,7 +17,7 @@ return ReactModule.memo(function(p1) --[[ Line: 22 | Named "AvatarGiftSendView" 
 		onBack = p1.onBack,
 		allowance = p1.allowance,
 		userInfoProps = p1.userInfoProps,
-		giftPresentation = ReactModule.useMemo(function() --[[ Line: 29 ]]
+		giftPresentation = ReactModule.useMemo(function()
 			-- upvalues: ReactModule (upval), AvatarGiftInfoPanelViewModule (upval), ThumbnailUrl (copy), ItemName (copy), PriceText (copy), OriginalPriceText (copy), PricingNote (copy)
 			return ReactModule.createElement(AvatarGiftInfoPanelViewModule, {
 				thumbnailUrl = ThumbnailUrl,

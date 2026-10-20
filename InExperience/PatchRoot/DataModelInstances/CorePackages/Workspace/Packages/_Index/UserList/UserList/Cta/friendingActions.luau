@@ -10,12 +10,12 @@ local SetCurrentToastMessageFunction = require(Parent.ToastRodux).Actions.SetCur
 local FriendingErrorCodesModule = require(script.Parent.FriendingErrorCodes)
 local IconsActionsFriendsFriendAdd = require(Parent.UIBlox).App.ImageSet.Images["icons/actions/friends/friendAdd"]
 
-local function _(p1) --[[ Line: 64 | Named "refreshCTA" ]]
+local function _(p1)
 	-- upvalues: ProfileCTAStore (copy)
 	ProfileCTAStore.get().getCTA(p1, true)
 end
 
-local function getErrorToastMessage(p1, StatusCode, FirstErrorCode) --[[ Line: 69 ]]
+local function getErrorToastMessage(p1, StatusCode, FirstErrorCode)
 	-- upvalues: FriendingErrorCodesModule (copy)
 	return if StatusCode == 400 then ({
 		[FriendingErrorCodesModule.INVALID_TARGET_USER] = p1.invalidTargetUserError,
@@ -33,7 +33,7 @@ local function getErrorToastMessage(p1, StatusCode, FirstErrorCode) --[[ Line: 6
 	})[FirstErrorCode] else nil
 end
 
-local function showErrorToast(Callback: (any) -> (), Localized, p1) --[[ Line: 95 ]]
+local function showErrorToast(Callback: (any) -> (), Localized, p1)
 	-- upvalues: getErrorToastMessage (copy), SetCurrentToastMessageFunction (copy)
 	Callback(SetCurrentToastMessageFunction({
 		isLocalized = true,
@@ -42,9 +42,9 @@ local function showErrorToast(Callback: (any) -> (), Localized, p1) --[[ Line: 9
 end
 
 return {
-	executeAddFriend = function(p1) --[[ Line: 106 ]]
+	executeAddFriend = function(p1)
 		-- upvalues: Requests (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FriendsStoreChallengeNetworkModule (copy), ProfileCTAStore (copy), SetCurrentToastMessageFunction (copy), IconsActionsFriendsFriendAdd (copy), showErrorToast (copy)
-		return Requests.RequestFriendshipFromUserId(p1.targetUserId, p1.friendshipOriginSourceType, if FFlagEnableFriendsStoreChallengeInterceptor then FriendsStoreChallengeNetworkModule else nil):andThen(function() --[[ Line: 112 ]]
+		return Requests.RequestFriendshipFromUserId(p1.targetUserId, p1.friendshipOriginSourceType, if FFlagEnableFriendsStoreChallengeInterceptor then FriendsStoreChallengeNetworkModule else nil):andThen(function()
 			-- upvalues: p1 (copy), ProfileCTAStore (upval), SetCurrentToastMessageFunction (upval), IconsActionsFriendsFriendAdd (upval)
 			ProfileCTAStore.get().getCTA(p1.targetUserId, true)
 			p1.dispatch(SetCurrentToastMessageFunction({
@@ -52,14 +52,14 @@ return {
 				toastMessage = p1.localized.friendRequestSent,
 				toastIcon = IconsActionsFriendsFriendAdd
 			}))
-		end):catch(function(Err) --[[ Line: 120 ]]
+		end):catch(function(Err)
 			-- upvalues: showErrorToast (upval), p1 (copy)
 			showErrorToast(p1.dispatch, p1.localized, Err)
 		end)
 	end,
-	executeAcceptFriendRequest = function(p1) --[[ Line: 125 ]]
+	executeAcceptFriendRequest = function(p1)
 		-- upvalues: FriendsStore (copy), ProfileCTAStore (copy), SetCurrentToastMessageFunction (copy), IconsActionsFriendsFriendAdd (copy), showErrorToast (copy)
-		return FriendsStore.get().AcceptFriendRequest(p1.targetUserId):andThen(function() --[[ Line: 128 ]]
+		return FriendsStore.get().AcceptFriendRequest(p1.targetUserId):andThen(function()
 			-- upvalues: p1 (copy), ProfileCTAStore (upval), SetCurrentToastMessageFunction (upval), IconsActionsFriendsFriendAdd (upval)
 			ProfileCTAStore.get().getCTA(p1.targetUserId, true)
 			p1.dispatch(SetCurrentToastMessageFunction({
@@ -67,17 +67,17 @@ return {
 				toastMessage = p1.localized.friendAdded,
 				toastIcon = IconsActionsFriendsFriendAdd
 			}))
-		end):catch(function(Err) --[[ Line: 136 ]]
+		end):catch(function(Err)
 			-- upvalues: showErrorToast (upval), p1 (copy)
 			showErrorToast(p1.dispatch, p1.localized, Err)
 		end)
 	end,
-	executeDeclineFriendRequest = function(p1) --[[ Line: 141 ]]
+	executeDeclineFriendRequest = function(p1)
 		-- upvalues: FriendsStore (copy), ProfileCTAStore (copy), showErrorToast (copy)
-		return FriendsStore.get().DeclineFriendRequest(p1.targetUserId):andThen(function() --[[ Line: 144 ]]
+		return FriendsStore.get().DeclineFriendRequest(p1.targetUserId):andThen(function()
 			-- upvalues: p1 (copy), ProfileCTAStore (upval)
 			ProfileCTAStore.get().getCTA(p1.targetUserId, true)
-		end):catch(function(Err) --[[ Line: 147 ]]
+		end):catch(function(Err)
 			-- upvalues: showErrorToast (upval), p1 (copy)
 			showErrorToast(p1.dispatch, p1.localized, Err)
 		end)

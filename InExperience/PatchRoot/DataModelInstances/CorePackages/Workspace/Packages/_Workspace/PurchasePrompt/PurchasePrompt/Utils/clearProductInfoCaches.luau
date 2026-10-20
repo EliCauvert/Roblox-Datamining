@@ -1,8 +1,8 @@
 ﻿local MarketplaceService = game:GetService("MarketplaceService")
 
-return function() --[[ Line: 12 | Named "clearProductInfoCaches" ]]
+return function()
 	-- upvalues: MarketplaceService (copy)
-	pcall(function() --[[ Line: 14 ]]
+	pcall(function()
 		-- upvalues: MarketplaceService (upval)
 		MarketplaceService:clearProductInfoCaches()
 	end)

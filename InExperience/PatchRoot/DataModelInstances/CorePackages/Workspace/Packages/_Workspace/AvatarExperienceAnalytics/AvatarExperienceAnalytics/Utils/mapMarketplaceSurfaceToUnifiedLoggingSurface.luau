@@ -22,7 +22,7 @@ for _, value1 in UnifiedLoggingSurface do
 		t1[value1] = true
 	end
 end
-return function(p1) --[[ Line: 51 | Named "mapMarketplaceSurfaceToUnifiedLoggingSurface" ]]
+return function(p1)
 	-- upvalues: config (copy), t1 (copy)
 	if p1 == nil then
 		return nil

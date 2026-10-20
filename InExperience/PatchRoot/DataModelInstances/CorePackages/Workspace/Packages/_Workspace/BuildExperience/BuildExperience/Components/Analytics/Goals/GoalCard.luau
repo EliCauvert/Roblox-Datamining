@@ -11,7 +11,7 @@ local _ = require(BuildExperience.Analytics.Goals.GoalTypes)
 local GoalLockedContentModule = require(script.Parent.GoalLockedContent)
 local GoalMetricRowModule = require(script.Parent.GoalMetricRow)
 
-return function(p1) --[[ Line: 37 | Named "GoalCard" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), GoalMetricRowModule (copy), View (copy), Text (copy), GoalLockedContentModule (copy)
 	local TestId = p1.testId or "GoalCard"
 	local Goal = p1.goal

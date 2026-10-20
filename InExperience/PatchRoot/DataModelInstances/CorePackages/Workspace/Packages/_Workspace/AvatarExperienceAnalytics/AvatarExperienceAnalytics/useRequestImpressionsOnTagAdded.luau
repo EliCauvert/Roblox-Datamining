@@ -13,24 +13,24 @@ local config = {
 for _, value in require(Parent.AvatarExperienceNavigation).Enums.AvatarScreen do
 	config[value] = true
 end
-local function _(): boolean --[[ Line: 26 | Named "isAppOnOtherPage" ]]
+local function _(): boolean
 	-- upvalues: UnifiedEventPageStoreModule (copy), config (copy)
 	local NavigationPage = UnifiedEventPageStoreModule.getPageFields().navigationPage
 	
 	return NavigationPage ~= UnifiedEventPageStoreModule.UNKNOWN and not config[NavigationPage]
 end
 
-return function(p1, p2) --[[ Line: 36 | Named "useRequestImpressionsOnTagAdded" ]]
+return function(p1, p2)
 	-- upvalues: ReactModule (copy), CollectionService (copy), UnifiedEventLogConstantsModule (copy), UnifiedEventPageStoreModule (copy), config (copy)
-	ReactModule.useEffect(function() --[[ Line: 37 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: CollectionService (upval), UnifiedEventLogConstantsModule (upval), p1 (copy), UnifiedEventPageStoreModule (upval), config (upval), p2 (copy)
 		local DelayedThread = nil
-		local Connection = CollectionService:GetInstanceAddedSignal(UnifiedEventLogConstantsModule.TAG_NAME):Connect(function(Tagged) --[[ Line: 40 ]]
+		local Connection = CollectionService:GetInstanceAddedSignal(UnifiedEventLogConstantsModule.TAG_NAME):Connect(function(Tagged)
 			-- upvalues: p1 (upval), DelayedThread (ref), UnifiedEventPageStoreModule (upval), config (upval), p2 (upval)
 			local Current = p1.current
 			
 			if not DelayedThread and Current and Tagged:IsDescendantOf(Current) then
-				DelayedThread = task.delay(0, function() --[[ Line: 46 ]]
+				DelayedThread = task.delay(0, function()
 					-- upvalues: DelayedThread (upval), UnifiedEventPageStoreModule (upval), config (upval), p2 (upval)
 					DelayedThread = nil
 					local NavigationPage = UnifiedEventPageStoreModule.getPageFields().navigationPage
@@ -46,7 +46,7 @@ return function(p1, p2) --[[ Line: 36 | Named "useRequestImpressionsOnTagAdded" 
 			end
 		end)
 		
-		return function() --[[ Line: 55 ]]
+		return function()
 			-- upvalues: Connection (copy), DelayedThread (ref)
 			Connection:Disconnect()
 			

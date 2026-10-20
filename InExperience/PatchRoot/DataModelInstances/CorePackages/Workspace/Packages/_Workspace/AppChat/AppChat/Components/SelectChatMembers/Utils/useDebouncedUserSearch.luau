@@ -13,35 +13,35 @@ local SetTimeoutFunction = LuauPolyfillModule.setTimeout
 local IsUserInConversationModule = require(script.Parent.isUserInConversation)
 local LoggerModule = require(script.Parent.Parent.Logger)
 
-return function(p1) --[[ Line: 22 | Named "useDebouncedUserSearch" ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseLocalUserIdFunction (copy), ReactModule (copy), SetTimeoutFunction (copy), NetworkingFriendsModule (copy), List (copy), CryoModule (copy), IsUserInConversationModule (copy), LoggerModule (copy), ClearTimeoutFunction (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
-	local UseRefResult = ReactModule.useRef(SetTimeoutFunction(function() --[[ Line: 25 ]] end, 250))
+	local UseRefResult = ReactModule.useRef(SetTimeoutFunction(function() end, 250))
 	local UseRefResult1 = ReactModule.useRef("")
 	local UseStateResult, UseStateResult2 = ReactModule.useState({})
-	local UseResult = ReactModule.useCallback(function(Query) --[[ Line: 29 ]]
+	local UseResult = ReactModule.useCallback(function(Query)
 		-- upvalues: UseDispatchResult (copy), NetworkingFriendsModule (upval), UseLocalUserIdResult (copy), List (upval), p1 (copy), UseStateResult2 (copy), CryoModule (upval), IsUserInConversationModule (upval), LoggerModule (upval)
-		UseDispatchResult(NetworkingFriendsModule.SearchFriendsByQuery.API(UseLocalUserIdResult, { limit = 20, query = Query })):andThen(function(Result) --[[ Line: 34 ]]
+		UseDispatchResult(NetworkingFriendsModule.SearchFriendsByQuery.API(UseLocalUserIdResult, { limit = 20, query = Query })):andThen(function(Result)
 			-- upvalues: List (upval), p1 (upval), UseStateResult2 (upval), CryoModule (upval), IsUserInConversationModule (upval)
 			local P0 = p1 or { participants = {} }
-			UseStateResult2(CryoModule.List.filter(List.map(Result.responseBody.PageItems, function(p2): string --[[ Line: 35 ]]
+			UseStateResult2(CryoModule.List.filter(List.map(Result.responseBody.PageItems, function(p2): string
 				return (tostring(p2.id))
-			end), function(p2): boolean --[[ Line: 39 ]]
+			end), function(p2): boolean
 				-- upvalues: IsUserInConversationModule (upval), P0 (copy)
 				return not IsUserInConversationModule(p2, P0)
 			end))
-		end):catch(function(Err) --[[ Line: 43 ]]
+		end):catch(function(Err)
 			-- upvalues: LoggerModule (upval), UseStateResult2 (upval)
 			LoggerModule:error("Error searching friends:", Err)
 			UseStateResult2({})
 		end)
 	end, { UseDispatchResult, UseLocalUserIdResult, p1 })
-	local UseResult1 = ReactModule.useCallback(function(Current) --[[ Line: 49 ]]
+	local UseResult1 = ReactModule.useCallback(function(Current)
 		-- upvalues: ClearTimeoutFunction (upval), UseRefResult (copy), UseRefResult1 (copy), SetTimeoutFunction (upval), UseResult (copy), UseStateResult2 (copy)
 		ClearTimeoutFunction(UseRefResult.current)
 		UseRefResult1.current = Current
-		UseRefResult.current = SetTimeoutFunction(function() --[[ Line: 52 ]]
+		UseRefResult.current = SetTimeoutFunction(function()
 			-- upvalues: Current (copy), UseResult (upval), UseStateResult2 (upval)
 			if Current == "" then
 				UseStateResult2({})
@@ -52,9 +52,9 @@ return function(p1) --[[ Line: 22 | Named "useDebouncedUserSearch" ]]
 			end
 		end, 250)
 	end, { UseResult })
-	ReactModule.useEffect(function() --[[ Line: 62 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ClearTimeoutFunction (upval), UseRefResult (copy)
-		return function() --[[ Line: 63 ]]
+		return function()
 			-- upvalues: ClearTimeoutFunction (upval), UseRefResult (upval)
 			ClearTimeoutFunction(UseRefResult.current)
 		end

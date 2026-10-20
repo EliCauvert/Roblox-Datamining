@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.Parent.EventType)
 local TouchedConnection = nil
 
-local function _(Vector, Vector1) --[[ Line: 11 | Named "spawnGoalArea" ]]
+local function _(Vector, Vector1)
 	local Part = Instance.new("Part")
 	Part.Anchored = true
 	Part.CanCollide = false
@@ -15,7 +15,7 @@ end
 
 return {
 	Name = "MoveToGoalEvent",
-	StartEvent = function(Callback) --[[ Line: 24 ]]
+	StartEvent = function(Callback)
 		-- upvalues: TouchedConnection (ref)
 		local Part = Instance.new("Part")
 		Part.Anchored = true
@@ -25,7 +25,7 @@ return {
 		Part.Position = vector.create(0.5, 6.300000190734863, -40)
 		Part.Parent = workspace
 		task.wait(1)
-		TouchedConnection = Part.Touched:Connect(function(Hit) --[[ Line: 32 ]]
+		TouchedConnection = Part.Touched:Connect(function(Hit)
 			-- upvalues: Part (copy), Callback (copy), TouchedConnection (upval)
 			if game.Players:GetPlayerFromCharacter(Hit.Parent) then
 				Part:Destroy()
@@ -39,7 +39,7 @@ return {
 			end
 		end)
 	end,
-	StopEvent = function() --[[ Line: 51 ]]
+	StopEvent = function()
 		-- upvalues: TouchedConnection (ref)
 		if TouchedConnection then
 			TouchedConnection:Disconnect()

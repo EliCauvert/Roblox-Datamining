@@ -4,7 +4,7 @@ local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local AlertPromptModule = require(BulkPurchaseApp.Components.AlertPrompt)
 
-return function(p1) --[[ Line: 13 | Named "BulkPurchaseSuccess" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), AlertPromptModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		title = "CoreScripts.BulkPurchasePrompt.SuccessPrompt.Heading",

@@ -16,7 +16,7 @@ local config1 = {
 	lastUpdated = { 25, 1, 22 }
 }
 
-return function(p1, Category, ExtraMessage, Tbl) --[[ Line: 31 | Named "reportWarning" ]]
+return function(p1, Category, ExtraMessage, Tbl)
 	-- upvalues: RunService (copy), config1 (copy), config (copy)
 	local Copy = Tbl and table.clone(Tbl) or {}
 	Copy.category = Category

@@ -13,7 +13,7 @@ local WidgetConstantsModule = require(AvatarExperienceCatalog.WidgetConstants)
 local WidgetIxpLayerMapModule = require(AvatarExperienceCatalog.Utils.WidgetIxpLayerMap)
 local _ = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListInfoViewModel)
 
-return function(p1) --[[ Line: 84 | Named "useAddUnifiedLoggingToCatalogSortEffect" ]]
+return function(p1)
 	-- upvalues: WidgetIxpLayerMapModule (copy), ReactModule (copy), AddUnifiedEventLoggingFunction (copy), CryoModule (copy), UnifiedEventLogEnums (copy), UnifiedEventLogConstants (copy), WidgetConstantsModule (copy), FFlagAXSduiSeeAllClickLogging (copy), HttpService (copy)
 	local ContainerRef = p1.containerRef
 	local WidgetInfo = p1.widgetInfo
@@ -21,7 +21,7 @@ return function(p1) --[[ Line: 84 | Named "useAddUnifiedLoggingToCatalogSortEffe
 	local WidgetRow = p1.widgetRow
 	local UiTreatmentType = p1.uiTreatmentType
 	local WidgetIxpLayerMapModuleEntry = WidgetIxpLayerMapModule[WidgetInfo.type]
-	ReactModule.useEffect(function() --[[ Line: 93 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: AddUnifiedEventLoggingFunction (upval), ContainerRef (copy), CryoModule (upval), WidgetAnalyticsInfo (copy), UnifiedEventLogEnums (upval), WidgetRow (copy), UiTreatmentType (copy), WidgetInfo (copy), UnifiedEventLogConstants (upval), WidgetIxpLayerMapModuleEntry (copy), WidgetConstantsModule (upval)
 		AddUnifiedEventLoggingFunction(ContainerRef, CryoModule.Dictionary.join(WidgetAnalyticsInfo, {
 			gridPositionColumn = 1,
@@ -53,7 +53,7 @@ return function(p1) --[[ Line: 84 | Named "useAddUnifiedLoggingToCatalogSortEffe
 	if FFlagAXSduiSeeAllClickLogging then
 		local SeeAllRef = p1.seeAllRef
 		local HasSeeAllCallback = p1.seeAllCallback ~= nil
-		ReactModule.useEffect(function() --[[ Line: 122 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: HasSeeAllCallback (copy), SeeAllRef (copy), AddUnifiedEventLoggingFunction (upval), UnifiedEventLogEnums (upval), WidgetAnalyticsInfo (copy), HttpService (upval), WidgetInfo (copy), WidgetRow (copy), UnifiedEventLogConstants (upval)
 			if HasSeeAllCallback and SeeAllRef and SeeAllRef.current then
 				AddUnifiedEventLoggingFunction(SeeAllRef, {

@@ -1,11 +1,11 @@
 ﻿local CreateComputedFunction = require(script.Parent.Parent.Signals).createComputed
 
-return function(Callback1, Callback) --[[ Line: 8 | Named "createReducer" ]]
+return function(Callback1, Callback)
 	-- upvalues: CreateComputedFunction (copy)
 	local Flag = false
 	local v1 = nil
 	
-	local function _() --[[ Line: 12 | Named "ensureInitialized" ]]
+	local function _()
 		-- upvalues: Flag (ref), v1 (ref), Callback (copy)
 		if not Flag then
 			Flag = true
@@ -13,7 +13,7 @@ return function(Callback1, Callback) --[[ Line: 8 | Named "createReducer" ]]
 		end
 	end
 	
-	return CreateComputedFunction(function(p1) --[[ Line: 19 ]]
+	return CreateComputedFunction(function(p1)
 		-- upvalues: Flag (ref), v1 (ref), Callback (copy), Callback1 (copy)
 		if not Flag then
 			Flag = true

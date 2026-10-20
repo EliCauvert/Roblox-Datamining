@@ -22,7 +22,7 @@ if IsInExperienceUIVREnabled then
 	UIManager = VrSpatialUiModule.UIManager
 	PanelType = VrSpatialUiModule.Constants.PanelType
 end
-local function mount(HumanoidDescription, PlayerName, PlayerId, Ctx) --[[ Line: 38 ]]
+local function mount(HumanoidDescription, PlayerName, PlayerId, Ctx)
 	-- upvalues: InspectAndBuy1 (ref), RoactModule (copy), RenderWithCoreScriptsStyleProviderModule (copy), InspectAndBuyModule (copy), FFlagAXEnableNewInspectAndBuyContainerModule (copy), InspectAndBuyFixStyleLink (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (ref), UIManager (ref), PanelType (ref), RobloxGui (copy), GuiService (copy), FFlagTopBarSignalizeMenuOpen (copy), CoreGuiCommonModule (copy), TopBarModule (copy)
 	if InspectAndBuy1 then
 		RoactModule.unmount(InspectAndBuy1)
@@ -57,7 +57,7 @@ local function mount(HumanoidDescription, PlayerName, PlayerId, Ctx) --[[ Line: 
 	end
 end
 
-local function unmountInspectAndBuy() --[[ Line: 82 ]]
+local function unmountInspectAndBuy()
 	-- upvalues: InspectAndBuy1 (ref), RoactModule (copy), GuiService (copy), FFlagTopBarSignalizeMenuOpen (copy), CoreGuiCommonModule (copy), TopBarModule (copy)
 	if InspectAndBuy1 then
 		RoactModule.unmount(InspectAndBuy1)
@@ -73,31 +73,31 @@ local function unmountInspectAndBuy() --[[ Line: 82 ]]
 	end
 end
 
-local function _(HumanoidDescription, PlayerName, Ctx) --[[ Line: 97 | Named "mountInspectAndBuyFromHumanoidDescription" ]]
+local function _(HumanoidDescription, PlayerName, Ctx)
 	-- upvalues: mount (copy)
 	mount(HumanoidDescription, PlayerName, nil, Ctx)
 end
 
-local _ = function(PlayerId, Ctx) --[[ Line: 101 | Named "mountInspectAndBuyFromUserId" ]]
+local _ = function(PlayerId, Ctx)
 	-- upvalues: mount (copy)
 	mount(nil, nil, PlayerId, Ctx)
 end
 
-GuiService.InspectPlayerFromHumanoidDescriptionRequest:Connect(function(HumanoidDescription, PlayerName) --[[ Line: 105 ]]
+GuiService.InspectPlayerFromHumanoidDescriptionRequest:Connect(function(HumanoidDescription, PlayerName)
 	-- upvalues: mount (copy)
 	mount(HumanoidDescription, PlayerName, nil, "developerThroughHumanoidDescription")
 end)
-GuiService.InspectPlayerFromUserIdWithCtxRequest:Connect(function(UserId, Ctx) --[[ Line: 109 ]]
+GuiService.InspectPlayerFromUserIdWithCtxRequest:Connect(function(UserId, Ctx)
 	-- upvalues: mount (copy)
 	mount(nil, nil, UserId, Ctx)
 end)
-GuiService.CloseInspectMenuRequest:Connect(function() --[[ Line: 113 ]]
+GuiService.CloseInspectMenuRequest:Connect(function()
 	-- upvalues: InspectAndBuy1 (ref), unmountInspectAndBuy (copy)
 	if InspectAndBuy1 then
 		unmountInspectAndBuy()
 	end
 end)
-GuiService.InspectMenuEnabledChangedSignal:Connect(function(Enabled) --[[ Line: 119 ]]
+GuiService.InspectMenuEnabledChangedSignal:Connect(function(Enabled)
 	-- upvalues: InspectAndBuy1 (ref), unmountInspectAndBuy (copy)
 	if not Enabled and InspectAndBuy1 then
 		unmountInspectAndBuy()

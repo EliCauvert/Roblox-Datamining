@@ -4,7 +4,7 @@ SetDialogInUse.Name = "SetDialogInUse"
 SetDialogInUse.Parent = game:GetService("RobloxReplicatedStorage")
 local t = {}
 
-local function setDialogInUse(Player: Player, Dialog, IsUsing) --[[ Line: 10 ]]
+local function setDialogInUse(Player: Player, Dialog, IsUsing)
 	-- upvalues: t (copy)
 	if typeof(Dialog) ~= "Instance" or not Dialog:IsA("Dialog") then return end
 	if type(IsUsing) ~= "boolean" then return end
@@ -15,7 +15,7 @@ local function setDialogInUse(Player: Player, Dialog, IsUsing) --[[ Line: 10 ]]
 	end
 end
 
-Players.PlayerRemoving:Connect(function(Player) --[[ Line: 29 ]]
+Players.PlayerRemoving:Connect(function(Player)
 	-- upvalues: t (copy)
 	local Entry = t[Player]
 	

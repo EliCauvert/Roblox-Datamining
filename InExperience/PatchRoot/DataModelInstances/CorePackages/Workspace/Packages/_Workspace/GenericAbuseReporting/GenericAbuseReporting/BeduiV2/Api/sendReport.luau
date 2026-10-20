@@ -5,9 +5,9 @@ local PromiseModule = require(Parent.Promise)
 local Url = require(Parent.Http).Url
 local FFlagAbuseReportImproveErrorEventsModule = require(GenericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
 
-return function(Callback, Text, Input) --[[ Line: 13 ]]
+return function(Callback, Text, Input)
 	-- upvalues: HttpService (copy), FFlagAbuseReportImproveErrorEventsModule (copy), PromiseModule (copy), Url (copy)
-	local Success, Result = pcall(function() --[[ Line: 14 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: HttpService (upval), Input (copy)
 		return HttpService:JSONEncode(Input)
 	end)

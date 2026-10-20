@@ -8,12 +8,12 @@ local EnumMessageTypesModule = require(AppChat.Components.ChatConversation.EnumM
 local MessageModelModule = require(AppChat.Models.MessageModel)
 local GetFFlagEnableSocialCardsFunction = require(Parent.SharedFlags).GetFFlagEnableSocialCards
 
-local function getMessageContent(p1) --[[ Line: 18 ]]
+local function getMessageContent(p1)
 	-- upvalues: MessageModelModule (copy), Localization (copy), LocalizationService (copy), EnumMessageTypesModule (copy), Url (copy), GetFFlagEnableSocialCardsFunction (copy)
 	return if p1.previewContent then p1.previewContent elseif p1.visibility == MessageModelModule.VisibilityTypes.Hidden then Localization.new(LocalizationService.RobloxLocaleId):Format("Feature.Chat.Label.MessageNotAvailable") elseif p1.messageType == EnumMessageTypesModule.Link then Url.WWW_URL .. "games/" .. p1.gameLink.universeId elseif GetFFlagEnableSocialCardsFunction() and p1.messageType == EnumMessageTypesModule.System and p1.cards then p1.cards[1] and p1.cards[1].alt_text else tostring(p1.content)
 end
 
-return function(p1) --[[ Line: 48 ]]
+return function(p1)
 	-- upvalues: GetDeepValueModule (copy), getMessageContent (copy)
 	local MessagesValues = GetDeepValueModule(p1, "messages.values")
 	local PreviewMessageId = p1.previewMessageId

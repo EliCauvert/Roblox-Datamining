@@ -17,16 +17,16 @@ local AwaitRequestStateFunction = ToolControllerUtilsModule.awaitRequestState
 local GetToolCallOrderFunction = ToolControllerUtilsModule.getToolCallOrder
 local v1 = require(script.Parent.createManageDevProductStore)()
 
-local function awaitPromise(Promise) --[[ Line: 77 ]]
+local function awaitPromise(Promise)
 	-- upvalues: ChatConstantsModule (copy)
 	local v2 = nil
 	local v3: string? = nil
 	local Flag = false
-	Promise:andThen(function(Result) --[[ Line: 80 ]]
+	Promise:andThen(function(Result)
 		-- upvalues: v2 (ref), Flag (ref)
 		v2 = Result
 		Flag = true
-	end, function(p1) --[[ Line: 83 ]]
+	end, function(p1)
 		-- upvalues: v3 (ref), Flag (ref)
 		v3 = p1
 		Flag = true
@@ -42,17 +42,17 @@ local function awaitPromise(Promise) --[[ Line: 77 ]]
 	return v2, v3
 end
 
-local function _(p1) --[[ Line: 100 | Named "messageFromRejection" ]]
+local function _(p1)
 	return if typeof(p1) == "table" and typeof(p1.errorMessage) == "string" then p1.errorMessage elseif p1 == nil then "The request timed out." else tostring(p1)
 end
 
-local function detailCodeForFailure(Action, Text: string): string --[[ Line: 110 ]]
+local function detailCodeForFailure(Action, Text: string): string
 	local Lowered = string.lower(Text)
 	
 	return if string.find(Lowered, "outcome is unknown", 1, true) then "outcome_unknown" elseif string.find(Lowered, "universe", 1, true) and string.find(Lowered, "publish", 1, true) then "universe_not_published" else Action .. "_failed"
 end
 
-local function awaitMutation(ActivateResult) --[[ Line: 121 ]]
+local function awaitMutation(ActivateResult)
 	-- upvalues: awaitPromise (copy), FFlagBuildExperienceDevProductModerationReadbackModule (copy)
 	local AwaitPromiseResult, AwaitPromiseResult2 = awaitPromise(ActivateResult)
 	
@@ -66,7 +66,7 @@ local function awaitMutation(ActivateResult) --[[ Line: 121 ]]
 	end
 end
 
-local function proposalFromFlow(p1, IsApproved, IsRejected) --[[ Line: 137 ]]
+local function proposalFromFlow(p1, IsApproved, IsRejected)
 	-- upvalues: FFlagBuildExperienceDevProductRecoveryModule (copy)
 	return {
 		toolCallId = p1.toolCallId,
@@ -85,7 +85,7 @@ local function proposalFromFlow(p1, IsApproved, IsRejected) --[[ Line: 137 ]]
 	}
 end
 
-local function moderationError(p1, Product) --[[ Line: 159 ]]
+local function moderationError(p1, Product)
 	-- upvalues: FFlagBuildExperienceDevProductModerationReadbackModule (copy), WasDeveloperProductTextModeratedModule (copy)
 	if p1.action ~= "create" and p1.action ~= "update" then
 		return nil
@@ -102,7 +102,7 @@ local function moderationError(p1, Product) --[[ Line: 159 ]]
 	return if WasDeveloperProductTextModeratedModuleResult or WasDeveloperProductTextModeratedModuleResult1 then ("Roblox moderation altered this product's text. Product %s already exists; do not create another. Ask the creator for plainer wording and update this product."):format((tostring(Product.productId or (p1.productId or "unknown")))) else nil
 end
 
-return function(p1, p2, p3, Callback) --[[ Line: 186 | Named "createManageDevProductController" ]]
+return function(p1, p2, p3, Callback)
 	-- upvalues: v1 (copy), FFlagBuildExperienceRemoveDevProductPriceCap (copy), awaitMutation (copy), DownloadGeneratedImageAsyncModule (copy), FFlagBuildExperienceDevProductRecoveryModule (copy), FFlagBuildExperienceDevProductModerationReadbackModule (copy), proposalFromFlow (copy), Debug (copy), FFlagBuildExperienceToolResultFailureRecoveryModule (copy), AwaitRequestStateFunction (copy), ChatConstantsModule (copy), moderationError (copy), detailCodeForFailure (copy), StudioManageDevProductTool (copy), GetToolCallOrderFunction (copy)
 	local v4 = nil
 	local t = {}
@@ -110,7 +110,7 @@ return function(p1, p2, p3, Callback) --[[ Line: 186 | Named "createManageDevPro
 	local onApproveImpl = nil
 	local onRejectImpl = nil
 	
-	local function performMutation(p4) --[[ Line: 199 ]]
+	local function performMutation(p4)
 		-- upvalues: FFlagBuildExperienceRemoveDevProductPriceCap (upval), awaitMutation (upval), DownloadGeneratedImageAsyncModule (upval), FFlagBuildExperienceDevProductRecoveryModule (upval), v1 (copy), FFlagBuildExperienceDevProductModerationReadbackModule (upval)
 		local UniverseId = p4.universeId
 		
@@ -161,13 +161,13 @@ return function(p1, p2, p3, Callback) --[[ Line: 186 | Named "createManageDevPro
 		end
 	end
 	
-	local function _(p4) --[[ Line: 252 | Named "clearMutationCard" ]]
+	local function _(p4)
 		-- upvalues: p3 (copy)
 		p3.removeDevProductTool(p4.toolCallId)
 		p3.removeDevProductAction(p4.toolCallId)
 	end
 	
-	local _ = function(p4, p5, p6) --[[ Line: 257 | Named "recoverFailedSubmission" ]]
+	local _ = function(p4, p5, p6)
 		-- upvalues: FFlagBuildExperienceDevProductRecoveryModule (upval), v4 (ref), p3 (copy), Callback (copy), proposalFromFlow (upval)
 		if FFlagBuildExperienceDevProductRecoveryModule and v4 ~= p4 then
 			p3.removeDevProductAction(p4.toolCallId)
@@ -184,7 +184,7 @@ return function(p1, p2, p3, Callback) --[[ Line: 186 | Named "createManageDevPro
 		end
 	end
 	
-	local function submitResult(p4, FormatRejectionContentResult, p5, p6) --[[ Line: 270 ]]
+	local function submitResult(p4, FormatRejectionContentResult, p5, p6)
 		-- upvalues: p1 (copy), Debug (upval), FFlagBuildExperienceToolResultFailureRecoveryModule (upval), FFlagBuildExperienceDevProductRecoveryModule (upval), v4 (ref), p3 (copy), Callback (copy), proposalFromFlow (upval), AwaitRequestStateFunction (upval), ChatConstantsModule (upval), p2 (copy)
 		local SubmitActiveToolResultResult = p1.submitActiveToolResult(FormatRejectionContentResult, p5, p4.turnId, p4.referenceId)
 		
@@ -251,7 +251,7 @@ return function(p1, p2, p3, Callback) --[[ Line: 186 | Named "createManageDevPro
 		end
 	end
 	
-	local function submitApproval(p4) --[[ Line: 317 ]]
+	local function submitApproval(p4)
 		-- upvalues: performMutation (copy), moderationError (upval), detailCodeForFailure (upval), FFlagBuildExperienceDevProductRecoveryModule (upval), v4 (ref), p3 (copy), proposalFromFlow (upval), StudioManageDevProductTool (upval), submitResult (copy)
 		local Result = nil
 		local ResultError = nil
@@ -315,7 +315,7 @@ return function(p1, p2, p3, Callback) --[[ Line: 186 | Named "createManageDevPro
 		submitResult(p4, FormatResultContentResult, v5, nil)
 	end
 	
-	local function submitRejection(p4, p5) --[[ Line: 383 ]]
+	local function submitRejection(p4, p5)
 		-- upvalues: p3 (copy), proposalFromFlow (upval), submitApproval (copy), StudioManageDevProductTool (upval), submitResult (copy)
 		if p4.attempted then
 			p3.setDevProductTool((proposalFromFlow(p4, true, false)))
@@ -327,7 +327,7 @@ return function(p1, p2, p3, Callback) --[[ Line: 186 | Named "createManageDevPro
 		end
 	end
 	
-	onApproveImpl = function() --[[ Line: 396 | Named "onApproveImpl" ]]
+	onApproveImpl = function()
 		-- upvalues: v4 (ref), FFlagBuildExperienceDevProductRecoveryModule (upval), p3 (copy), proposalFromFlow (upval), submitApproval (copy)
 		local v5 = v4
 		
@@ -339,20 +339,20 @@ return function(p1, p2, p3, Callback) --[[ Line: 186 | Named "createManageDevPro
 			v5.canRetry = false
 		end
 		p3.setDevProductTool((proposalFromFlow(v5, true, false)))
-		task.spawn(function() --[[ Line: 407 ]]
+		task.spawn(function()
 			-- upvalues: submitApproval (upval), v5 (copy)
 			submitApproval(v5)
 		end)
 	end
 	
-	onRejectImpl = function() --[[ Line: 413 | Named "onRejectImpl" ]]
+	onRejectImpl = function()
 		-- upvalues: v4 (ref), p3 (copy), proposalFromFlow (upval), submitRejection (copy)
 		local v5 = v4
 		
 		if v5 ~= nil and not v5.submitted then
 			v5.submitted = true
 			p3.setDevProductTool((proposalFromFlow(v5, false, true)))
-			task.spawn(function() --[[ Line: 420 ]]
+			task.spawn(function()
 				-- upvalues: submitRejection (upval), v5 (copy)
 				submitRejection(v5, nil)
 			end)
@@ -361,7 +361,7 @@ return function(p1, p2, p3, Callback) --[[ Line: 186 | Named "createManageDevPro
 		end
 	end
 	
-	local function runListRequest(ToolCallId, TurnId, ReferenceId, SessionId) --[[ Line: 427 ]]
+	local function runListRequest(ToolCallId, TurnId, ReferenceId, SessionId)
 		-- upvalues: p1 (copy), awaitMutation (upval), v1 (copy), StudioManageDevProductTool (upval), t (copy), p2 (copy), AwaitRequestStateFunction (upval), ChatConstantsModule (upval), Debug (upval)
 		local UniverseId = p1.universeId
 		local v5 = nil
@@ -416,7 +416,7 @@ return function(p1, p2, p3, Callback) --[[ Line: 186 | Named "createManageDevPro
 		end
 	end
 	
-	local _ = function() --[[ Line: 477 | Named "clearMutationFlow" ]]
+	local _ = function()
 		-- upvalues: v4 (ref), p3 (copy), ToolCallId (ref)
 		local v5 = v4
 		
@@ -429,7 +429,7 @@ return function(p1, p2, p3, Callback) --[[ Line: 186 | Named "createManageDevPro
 	end
 	
 	return {
-		syncManageDevProductRequests = function(p4): boolean --[[ Line: 486 ]]
+		syncManageDevProductRequests = function(p4): boolean
 			-- upvalues: StudioManageDevProductTool (upval), p2 (copy), v4 (ref), p3 (copy), ToolCallId (ref), t (copy), FFlagBuildExperienceDevProductRecoveryModule (upval), p1 (copy), AwaitRequestStateFunction (upval), ChatConstantsModule (upval), runListRequest (copy), GetToolCallOrderFunction (upval), proposalFromFlow (upval), onApproveImpl (ref), onRejectImpl (ref), Debug (upval)
 			local ManageDevProductRequestInTurnState, ManageDevProductRequestInTurnState2, ManageDevProductRequestInTurnState3, ManageDevProductRequestInTurnState4 = StudioManageDevProductTool.findManageDevProductRequestInTurnState(p4, p2)
 			
@@ -483,7 +483,7 @@ return function(p1, p2, p3, Callback) --[[ Line: 186 | Named "createManageDevPro
 					else
 						p2[ManageDevProductRequestInTurnState] = true
 						t[ManageDevProductRequestInTurnState] = true
-						task.spawn(function() --[[ Line: 539 ]]
+						task.spawn(function()
 							-- upvalues: runListRequest (upval), ManageDevProductRequestInTurnState (copy), ManageDevProductRequestInTurnState3 (copy), ManageDevProductRequestInTurnState4 (copy), p4 (copy)
 							runListRequest(ManageDevProductRequestInTurnState, ManageDevProductRequestInTurnState3, ManageDevProductRequestInTurnState4, p4.sessionId)
 						end)
@@ -494,7 +494,7 @@ return function(p1, p2, p3, Callback) --[[ Line: 186 | Named "createManageDevPro
 					return true
 				else
 					t[ManageDevProductRequestInTurnState] = true
-					task.spawn(function() --[[ Line: 503 ]]
+					task.spawn(function()
 						-- upvalues: FFlagBuildExperienceDevProductRecoveryModule (upval), ManageDevProductRequestInTurnState2 (copy), StudioManageDevProductTool (upval), p1 (upval), ManageDevProductRequestInTurnState3 (copy), ManageDevProductRequestInTurnState4 (copy), t (upval), ManageDevProductRequestInTurnState (copy), AwaitRequestStateFunction (upval), ChatConstantsModule (upval), p2 (upval)
 						local HasImageAssetId: boolean = FFlagBuildExperienceDevProductRecoveryModule and (typeof(ManageDevProductRequestInTurnState2) == "table" and (typeof(ManageDevProductRequestInTurnState2.action) == "string" and string.lower(ManageDevProductRequestInTurnState2.action) == "update") and ManageDevProductRequestInTurnState2.imageAssetId ~= nil)
 						local SubmitActiveToolResultResult = p1.submitActiveToolResult(StudioManageDevProductTool.formatResultContent({
@@ -522,7 +522,7 @@ return function(p1, p2, p3, Callback) --[[ Line: 186 | Named "createManageDevPro
 				end
 			end
 		end,
-		stopPending = function(): boolean --[[ Line: 590 ]]
+		stopPending = function(): boolean
 			-- upvalues: t (copy), p2 (copy), v4 (ref), p3 (copy), ToolCallId (ref)
 			local Flag = false
 			
@@ -543,7 +543,7 @@ return function(p1, p2, p3, Callback) --[[ Line: 186 | Named "createManageDevPro
 			end
 			return Flag
 		end,
-		trySubmitComposerText = function(p4): boolean --[[ Line: 577 ]]
+		trySubmitComposerText = function(p4): boolean
 			-- upvalues: v4 (ref), p3 (copy), proposalFromFlow (upval), submitRejection (copy)
 			local v6 = v4
 			
@@ -552,7 +552,7 @@ return function(p1, p2, p3, Callback) --[[ Line: 186 | Named "createManageDevPro
 			else
 				v6.submitted = true
 				p3.setDevProductTool((proposalFromFlow(v6, false, true)))
-				task.spawn(function() --[[ Line: 584 ]]
+				task.spawn(function()
 					-- upvalues: submitRejection (upval), v6 (copy), p4 (copy)
 					submitRejection(v6, p4)
 				end)

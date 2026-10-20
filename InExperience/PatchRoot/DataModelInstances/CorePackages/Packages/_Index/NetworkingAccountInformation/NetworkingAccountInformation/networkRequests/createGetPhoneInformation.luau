@@ -2,9 +2,9 @@
 local _ = require(Parent.Types.networkRequestsTypes)
 local ACCOUNTINFORMATIONURLModule = require(Parent.ACCOUNT_INFORMATION_URL)
 
-return function(p1) --[[ Line: 7 ]]
+return function(p1)
 	-- upvalues: ACCOUNTINFORMATIONURLModule (copy)
-	return p1.roduxNetworking.GET({ Name = "GetPhoneInformation" }, function(Callback) --[[ Line: 10 ]]
+	return p1.roduxNetworking.GET({ Name = "GetPhoneInformation" }, function(Callback)
 		-- upvalues: ACCOUNTINFORMATIONURLModule (upval)
 		return Callback(ACCOUNTINFORMATIONURLModule):path("v1"):path("phone")
 	end)

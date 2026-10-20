@@ -1,5 +1,5 @@
-﻿return function(p1) --[[ Line: 1 | Named "makeMergeOverlappingArraysPolicy" ]]
-	return function(_, p2, p3, p4) --[[ Line: 2 | Named "mergeOverlappingArraysPolicy" ]]
+﻿return function(p1)
+	return function(_, p2, p3, p4)
 		-- upvalues: p1 (copy)
 		local Tbl = p2 or {}
 		local P3 = p3 or {}

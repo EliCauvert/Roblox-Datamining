@@ -1,4 +1,4 @@
-﻿local function _(Value: number, p1: number, p2: number, p3: number): number --[[ Line: 1 | Named "clampAxis" ]]
+﻿local function _(Value: number, p1: number, p2: number, p3: number): number
 	if p2 <= 0 or p3 <= 0 then
 		return Value
 	else
@@ -9,7 +9,7 @@
 	end
 end
 
-return function(Vector, Vector1, Vector3, p1, p2) --[[ Line: 16 | Named "clampOverlayPosition" ]]
+return function(Vector, Vector1, Vector3, p1, p2)
 	if Vector1.X <= 0 or Vector1.Y <= 0 then
 		return Vector
 	end

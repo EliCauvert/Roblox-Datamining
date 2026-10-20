@@ -17,7 +17,7 @@ local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FFlagHelpPageCCLModule = require(Parent.Flags.FFlagHelpPageCCL)
 
-local function _(p1, p2, p3) --[[ Line: 41 | Named "getGamepadInput" ]]
+local function _(p1, p2, p3)
 	-- upvalues: FFlagHelpPageCCLModule (copy), ConstantsModule (copy)
 	local GamepadInput = p1.gamepadInput
 	
@@ -38,16 +38,16 @@ local function _(p1, p2, p3) --[[ Line: 41 | Named "getGamepadInput" ]]
 	return SpatialGamepadInput
 end
 
-local _ = function(Text: string): number --[[ Line: 69 | Named "getAbilitySlot" ]]
+local _ = function(Text: string): number
 	return (tonumber(string.match(Text, "^AbilityAction(%d+)$")))
 end
 
-local function getResolvedControls(Controls, IsSpatial, Platform) --[[ Line: 73 ]]
+local function getResolvedControls(Controls, IsSpatial, Platform)
 	-- upvalues: FFlagHelpPageCCLModule (copy), ConstantsModule (copy)
 	local t = {}
 	local t1 = {}
 	
-	local function addControl(p1) --[[ Line: 81 ]]
+	local function addControl(p1)
 		-- upvalues: IsSpatial (copy), Platform (copy), FFlagHelpPageCCLModule (upval), ConstantsModule (upval), t (copy)
 		local GamepadInput = p1.gamepadInput
 		local v1 = nil
@@ -104,7 +104,7 @@ local function getResolvedControls(Controls, IsSpatial, Platform) --[[ Line: 73 
 	return t
 end
 
-return ReactModule.memo(function(p2) --[[ Line: 141 | Named "GamepadHelpPage" ]]
+return ReactModule.memo(function(p2)
 	-- upvalues: UserInputService (copy), UseDeviceOrientationFunction (copy), UseKeybindsModule (copy), UseTokensFunction (copy), ReactModule (copy), SignalsReactModule (copy), DisplayModule (copy), ConstantsModule (copy), DeviceOrientationMode (copy), FFlagHelpPageCCLModule (copy), getResolvedControls (copy), DiagramLayoutViewModule (copy), GamepadListModule (copy), View (copy)
 	local Platform = if p2.getPlatform then p2.getPlatform() else UserInputService:GetPlatform()
 	local UseDeviceOrientationResult = UseDeviceOrientationFunction()
@@ -115,7 +115,7 @@ return ReactModule.memo(function(p2) --[[ Line: 141 | Named "GamepadHelpPage" ]]
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(SignalsReactModule.useSignalState(DisplayModule.GetDisplayStore).getViewportSize)
 	local IsUseDeviceOrientationResultMatch: boolean = not p2.isSpatial and (if UseSignalStateResult.X < ConstantsModule.HELP_PAGE.TOUCH_OFFSETS.SMALL_SCREEN_CUTOFF_X then UseDeviceOrientationResult == DeviceOrientationMode.Portrait else UseSignalStateResult.Y < ConstantsModule.HELP_PAGE.TOUCH_OFFSETS.SMALL_SCREEN_CUTOFF_Y and UseDeviceOrientationResult == DeviceOrientationMode.Portrait)
-	local UseMemoResult, UseMemoResult2, UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 156 ]]
+	local UseMemoResult, UseMemoResult2, UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: FFlagHelpPageCCLModule (upval), getResolvedControls (upval), Controls (copy), p2 (copy), Platform (copy), ConstantsModule (upval)
 		local t = {}
 		local t2 = {}
@@ -168,7 +168,7 @@ return ReactModule.memo(function(p2) --[[ Line: 141 | Named "GamepadHelpPage" ]]
 		Position = UDim2.fromScale(0.5, 0.5),
 		Image = if p2.isSpatial then "rbxasset://textures/ui/Gamepad/VRController.png" else "rbxasset://textures/ui/Gamepad/Controller@3x.png"
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function(): UDim --[[ Line: 233 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function(): UDim
 		-- upvalues: p2 (copy), UseSignalStateResult (copy), ConstantsModule (upval), UseTokensResult (copy)
 		return if p2.isSpatial or UseSignalStateResult.X >= ConstantsModule.HELP_PAGE.TOUCH_OFFSETS.SMALL_SCREEN_CUTOFF_X and UseSignalStateResult.Y >= ConstantsModule.HELP_PAGE.GAMEPAD_SIZES.NO_PADDING_CUTOFF_Y then UDim.new(0, UseTokensResult.Size.Size_2400) else UDim.new(0, 0)
 	end, if FFlagHelpPageCCLModule then {
@@ -176,7 +176,7 @@ return ReactModule.memo(function(p2) --[[ Line: 141 | Named "GamepadHelpPage" ]]
 		p2.isSpatial,
 		UseTokensResult.Size.Size_2400
 	} else { UseSignalStateResult })
-	local UseMemoResult4, UseMemoResult2_1, UseMemoResult3_1, UseMemoResult4_1, UseMemoResult5, UseMemoResult6 = ReactModule.useMemo(function() --[[ Line: 254 ]]
+	local UseMemoResult4, UseMemoResult2_1, UseMemoResult3_1, UseMemoResult4_1, UseMemoResult5, UseMemoResult6 = ReactModule.useMemo(function()
 		-- upvalues: p2 (copy), FFlagHelpPageCCLModule (upval), ConstantsModule (upval), UseStateResult (copy), IsUseDeviceOrientationResultMatch (copy), UseStateResult1 (copy), UseStateResult3 (copy)
 		if p2.isSpatial and not FFlagHelpPageCCLModule then
 			return Vector2.new(1, 0.5), UDim2.new(ConstantsModule.HELP_PAGE.GAMEPAD_SIZES.LEFT_COL_SCALE, 0, 0, UseStateResult * ConstantsModule.HELP_PAGE.GAMEPAD_SIZES.IMAGE_MULTIPLIER_VR * 0.5 / ConstantsModule.HELP_PAGE.GAMEPAD_SIZES.IMAGE_ASPECT_RATIO), Vector2.new(0, 0.5), UDim2.new(ConstantsModule.HELP_PAGE.GAMEPAD_SIZES.RIGHT_COL_SCALE_VR, 0, 0, UseStateResult * ConstantsModule.HELP_PAGE.GAMEPAD_SIZES.IMAGE_MULTIPLIER_VR * 0.5 / ConstantsModule.HELP_PAGE.GAMEPAD_SIZES.IMAGE_ASPECT_RATIO), ConstantsModule.HELP_PAGE.GAMEPAD_SIZES.COL_SCALE_VR, ConstantsModule.HELP_PAGE.GAMEPAD_SIZES.IMAGE_MULTIPLIER_VR
@@ -226,17 +226,17 @@ return ReactModule.memo(function(p2) --[[ Line: 141 | Named "GamepadHelpPage" ]]
 			platform = Platform
 		}),
 		diagram = ImageLabel,
-		onSizeChanged = function(Frame) --[[ Line: 368 ]]
+		onSizeChanged = function(Frame)
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(Frame.AbsoluteSize.X)
 		end,
-		onLeftSizeChanged = function(Frame) --[[ Line: 371 ]]
+		onLeftSizeChanged = function(Frame)
 			-- upvalues: UseStateResult1 (copy), UseStateResult2_1 (copy)
 			if UseStateResult1 == nil then
 				UseStateResult2_1(Frame.AbsoluteSize)
 			end
 		end,
-		onRightSizeChanged = function(Frame) --[[ Line: 376 ]]
+		onRightSizeChanged = function(Frame)
 			-- upvalues: UseStateResult3 (copy), UseStateResult2_2 (copy)
 			if UseStateResult3 == nil then
 				UseStateResult2_2(Frame.AbsoluteSize)
@@ -245,7 +245,7 @@ return ReactModule.memo(function(p2) --[[ Line: 141 | Named "GamepadHelpPage" ]]
 	}) else ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y",
 		padding = { top = UseMemoResult1 },
-		onAbsoluteSizeChanged = function(Frame) --[[ Line: 389 ]]
+		onAbsoluteSizeChanged = function(Frame)
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(Frame.AbsoluteSize.X)
 		end
@@ -255,7 +255,7 @@ return ReactModule.memo(function(p2) --[[ Line: 141 | Named "GamepadHelpPage" ]]
 			AnchorPoint = UseMemoResult4,
 			Position = UseMemoResult2_1,
 			scale = UseMemoResult5,
-			onAbsoluteSizeChanged = function(Frame) --[[ Line: 398 ]]
+			onAbsoluteSizeChanged = function(Frame)
 				-- upvalues: UseStateResult1 (copy), UseStateResult2_1 (copy)
 				if UseStateResult1 == nil then
 					UseStateResult2_1(Frame.AbsoluteSize)
@@ -281,7 +281,7 @@ return ReactModule.memo(function(p2) --[[ Line: 141 | Named "GamepadHelpPage" ]]
 			AnchorPoint = UseMemoResult3_1,
 			Position = UseMemoResult4_1,
 			scale = UseMemoResult5,
-			onAbsoluteSizeChanged = function(Frame) --[[ Line: 429 ]]
+			onAbsoluteSizeChanged = function(Frame)
 				-- upvalues: UseStateResult3 (copy), UseStateResult2_2 (copy)
 				if UseStateResult3 == nil then
 					UseStateResult2_2(Frame.AbsoluteSize)

@@ -7,7 +7,7 @@ local Text = FoundationModule.Text
 local AvatarGroup = FoundationModule.AvatarGroup
 local Icon = FoundationModule.Icon
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local MemoResult = ReactModule.memo(function(Frame) --[[ Line: 65 | Named "AccessoryComponent" ]]
+local MemoResult = ReactModule.memo(function(Frame)
 	-- upvalues: ReactModule (copy), AvatarGroup (copy), Icon (copy)
 	local LayoutOrder = Frame.LayoutOrder
 	
@@ -39,7 +39,7 @@ local MemoResult = ReactModule.memo(function(Frame) --[[ Line: 65 | Named "Acces
 	end
 end)
 
-return ReactModule.memo(function(p1) --[[ Line: 96 | Named "SduiTextAccessoryRow" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), FoundationModule (copy), MemoResult (copy), Text (copy)
 	local LayoutOrder = p1.layoutOrder
 	local AnchorPoint = p1.anchorPoint
@@ -53,7 +53,7 @@ return ReactModule.memo(function(p1) --[[ Line: 96 | Named "SduiTextAccessoryRow
 	local TestId = p1.testId or "--sdui-text-accessory-row"
 	
 	return ReactModule.createElement(View, {
-		tag = ReactModule.useMemo(function() --[[ Line: 114 ]]
+		tag = ReactModule.useMemo(function()
 			-- upvalues: p1 (copy)
 			return {
 				["row align-y-center auto-xy"] = true,

@@ -31,7 +31,7 @@ local config = {
 local SHADOWIMAGE = ConstantsModule.SHADOW_IMAGE
 local SHADOWSIZE = ConstantsModule.SHADOW_SIZE
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 50 | Named "CenterSheet" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseOverlayModule (copy), UseTokensModule (copy), UseElevationModule (copy), ElevationLayerModule (copy), UsePreferencesModule (copy), UseScaledValueModule (copy), DIALOGSIZES (copy), ReactModule (copy), UseAnimatedBindingFunction (copy), ChildrenHasFullBleedModule (copy), OtterModule (copy), DashModule (copy), SheetTypeModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), TypesModule (copy), SheetContextModule (copy), ElevationOwnerScope (copy), CloseAffordanceModule (copy), CloseAffordanceVariantModule (copy), ImageModule (copy), SHADOWIMAGE (copy), SHADOWSIZE (copy), ReactRobloxModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseOverlayModuleResult = UseOverlayModule()
@@ -42,7 +42,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 50 |
 	local UseScaledValueModuleResult1 = UseScaledValueModule(600)
 	local Size800 = UseTokensModuleResult.Size.Size_800
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UseScaledValueModuleResult1)
-	local MapResult = if UseBindingResult then UseBindingResult:map(function(p2: number) --[[ Line: 67 ]]
+	local MapResult = if UseBindingResult then UseBindingResult:map(function(p2: number)
 		-- upvalues: WithDefaultsModuleResult (copy)
 		if WithDefaultsModuleResult.centerSheetHeight then
 			if WithDefaultsModuleResult.centerSheetHeight > 0 and WithDefaultsModuleResult.centerSheetHeight <= 1 then
@@ -55,13 +55,13 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 50 |
 	end) else nil
 	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
 	local UseRefResult = ReactModule.useRef(false)
-	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = UseAnimatedBindingFunction(1, function() --[[ Line: 82 ]]
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = UseAnimatedBindingFunction(1, function()
 		-- upvalues: UseRefResult (copy), WithDefaultsModuleResult (copy)
 		if UseRefResult.current then
 			WithDefaultsModuleResult.onClose()
 		end
 	end)
-	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = UseAnimatedBindingFunction(Size800, function() --[[ Line: 88 ]]
+	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = UseAnimatedBindingFunction(Size800, function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end)
@@ -73,7 +73,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 50 |
 	local UseBindingResult6, UseBindingResult2_5 = ReactModule.useBinding(0)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 105 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		local Frame = Instance.new("Frame")
 		Frame.BackgroundTransparency = 1
 		Frame.BorderSizePixel = 0
@@ -81,14 +81,14 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 50 |
 		
 		return Frame
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 113 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy)
-		return function() --[[ Line: 114 ]]
+		return function()
 			-- upvalues: UseMemoResult (upval)
 			UseMemoResult:Destroy()
 		end
 	end, { UseMemoResult })
-	local UseResult = ReactModule.useCallback(function(Parent) --[[ Line: 120 ]]
+	local UseResult = ReactModule.useCallback(function(Parent)
 		-- upvalues: UseMemoResult (copy)
 		if Parent then
 			UseMemoResult.Parent = Parent
@@ -98,7 +98,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 50 |
 			UseMemoResult.Parent = nil
 		end
 	end, { UseMemoResult })
-	ReactModule.useEffect(function() --[[ Line: 131 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ReducedMotion (copy), UseAnimatedBindingResult2_1 (copy), OtterModule (upval), UseAnimatedBindingResult2 (copy), UseTokensModuleResult (copy)
 		if ReducedMotion then
 			UseAnimatedBindingResult2_1((OtterModule.instant(0)))
@@ -113,7 +113,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 50 |
 			UseAnimatedBindingResult2(OtterModule.ease(0, { duration = UseTokensModuleResult.Time.Time_100 }))
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 147 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), ReducedMotion (copy), UseAnimatedBindingResult2_1 (copy), OtterModule (upval), Size800 (copy), UseAnimatedBindingResult2 (copy), UseTokensModuleResult (copy), UseStateResult2 (copy)
 		if UseRefResult.current then return end
 		if ReducedMotion then
@@ -132,24 +132,24 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 50 |
 			UseRefResult.current = true
 		end
 	end, { Size800, ReducedMotion })
-	ReactModule.useImperativeHandle(WithDefaultsModuleResult.sheetRef, function() --[[ Line: 168 ]]
+	ReactModule.useImperativeHandle(WithDefaultsModuleResult.sheetRef, function()
 		-- upvalues: UseResult1 (copy)
 		return { close = UseResult1 }
 	end, {})
 	local Element = ReactModule.createElement(ViewModule, {
 		ClipsDescendants = true,
 		ZIndex = 2,
-		Size = if WithDefaultsModuleResult.centerSheetHeight and MapResult then MapResult:map(function(YOffset) --[[ Line: 210 ]]
+		Size = if WithDefaultsModuleResult.centerSheetHeight and MapResult then MapResult:map(function(YOffset)
 			return if YOffset then UDim2.new(1, 0, 0, YOffset) else nil
 		end) else nil,
 		sizeConstraint = if WithDefaultsModuleResult.centerSheetHeight and UseBindingResult then {
-			MaxSize = UseBindingResult:map(function(Y): Vector2 --[[ Line: 216 ]]
+			MaxSize = UseBindingResult:map(function(Y): Vector2
 				return Vector2.new(1e999, Y)
 			end)
 		} else nil,
 		stateLayer = { affordance = StateLayerAffordanceModule.None },
 		onActivated = DashModule.noop,
-		onAbsoluteSizeChanged = function(Frame) --[[ Line: 227 ]]
+		onAbsoluteSizeChanged = function(Frame)
 			-- upvalues: UseBindingResult2_5 (copy)
 			UseBindingResult2_5(Frame.AbsoluteSize.Y)
 		end,
@@ -164,11 +164,11 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 50 |
 	}, {
 		Content = ReactModule.createElement(ViewModule, {
 			tag = "col items-center size-full-0 auto-y clip",
-			Size = if WithDefaultsModuleResult.centerSheetHeight and MapResult then MapResult:map(function(YOffset) --[[ Line: 243 ]]
+			Size = if WithDefaultsModuleResult.centerSheetHeight and MapResult then MapResult:map(function(YOffset)
 				return if YOffset then UDim2.new(1, 0, 0, YOffset) else nil
 			end) else nil
 		}, ReactModule.createElement(SheetContextModule.Provider, {
-			value = ReactModule.useMemo(function() --[[ Line: 175 ]]
+			value = ReactModule.useMemo(function()
 				-- upvalues: DashModule (upval), UseBindingResult1 (copy), UseBindingResult2_1 (copy), MapResult (copy), UseBindingResult5 (copy), UseBindingResult2_4 (copy), UseBindingResult3 (copy), UseBindingResult2_2 (copy), ChildrenHasFullBleedModuleResult (copy), UseBindingResult4 (copy), UseBindingResult2_3 (copy), UseResult1 (copy), SheetTypeModule (upval), WithDefaultsModuleResult (copy), UseRefResult1 (copy), UseStateResult1 (copy), UseStateResult2_1 (copy)
 				return {
 					actionsHeight = 0,
@@ -209,7 +209,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 50 |
 			variant = if ChildrenHasFullBleedModuleResult then CloseAffordanceVariantModule.OverMedia else CloseAffordanceVariantModule.Utility,
 			Position = UDim2.new(1, -UseTokensModuleResult.Margin.Small, 0, UseTokensModuleResult.Margin.Small),
 			AnchorPoint = Vector2.new(1, 0),
-			Visible = UseBindingResult3:map(function(p2): boolean --[[ Line: 260 ]]
+			Visible = UseBindingResult3:map(function(p2): boolean
 				return not p2
 			end),
 			testId = `{WithDefaultsModuleResult.testId}--close-affordance`
@@ -219,7 +219,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 50 |
 		ZIndex = 1,
 		tag = "anchor-center-left",
 		Image = SHADOWIMAGE,
-		Size = UseBindingResult6:map(function(p2): UDim2 --[[ Line: 269 ]]
+		Size = UseBindingResult6:map(function(p2): UDim2
 			-- upvalues: SHADOWSIZE (upval)
 			return UDim2.new(1, SHADOWSIZE * 2, 0, p2 + SHADOWSIZE * 2)
 		end),
@@ -244,15 +244,15 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 50 |
 				sizeConstraint = {
 					MaxSize = Vector2.new(UseScaledValueModuleResult, UseScaledValueModuleResult1)
 				},
-				Position = UseAnimatedBindingResult1:map(function(YOffset): UDim2 --[[ Line: 296 ]]
+				Position = UseAnimatedBindingResult1:map(function(YOffset): UDim2
 					return UDim2.new(0.5, 0, 0.5, YOffset)
 				end),
 				testId = `{WithDefaultsModuleResult.testId}--center-sheet-container`,
-				GroupTransparency = if UseStateResult then UseAnimatedBindingResult1:map(function(p2) --[[ Line: 302 ]]
+				GroupTransparency = if UseStateResult then UseAnimatedBindingResult1:map(function(p2)
 					-- upvalues: Size800 (copy)
 					return p2 / Size800
 				end) else nil,
-				onAbsoluteSizeChanged = if WithDefaultsModuleResult.centerSheetHeight and UseBindingResult2 then function(Frame) --[[ Line: 307 ]]
+				onAbsoluteSizeChanged = if WithDefaultsModuleResult.centerSheetHeight and UseBindingResult2 then function(Frame)
 					-- upvalues: UseTokensModuleResult (copy), UseBindingResult2 (copy), UseScaledValueModuleResult1 (copy)
 					UseBindingResult2((math.min(Frame.AbsoluteSize.Y - UseTokensModuleResult.Margin.Medium * 2, UseScaledValueModuleResult1)))
 				end else nil
@@ -262,7 +262,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 50 |
 				Size = UDim2.fromScale(2, 2),
 				Position = UDim2.fromScale(-0.5, -0.5),
 				stateLayer = { affordance = StateLayerAffordanceModule.None },
-				backgroundStyle = UseAnimatedBindingResult:map(function(Alpha: number) --[[ Line: 320 ]]
+				backgroundStyle = UseAnimatedBindingResult:map(function(Alpha: number)
 					-- upvalues: UseTokensModuleResult (copy)
 					return {
 						Color3 = UseTokensModuleResult.Color.Common.Backdrop.Color3,

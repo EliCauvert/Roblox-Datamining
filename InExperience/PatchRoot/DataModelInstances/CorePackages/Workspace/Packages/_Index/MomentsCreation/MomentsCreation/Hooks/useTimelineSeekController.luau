@@ -14,7 +14,7 @@ local FFlagMomentsScrubberSeekOnReleaseModule = require(MomentsCreation.Flags.FF
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
 local UIDragDetectorFixEventPositionEnabledEngineFeature = game:GetEngineFeature("UIDragDetectorFixEventPositionEnabled")
 
-return function(p1, Callback, p2, p3) --[[ Line: 37 | Named "useTimelineSeekController" ]]
+return function(p1, Callback, p2, p3)
 	-- upvalues: UseRefFunction (copy), FFlagMomentsTTSScrubberDragInOverlayModule (copy), FFlagMomentsScrubberSeekOnReleaseModule (copy), UseMemoFunction (copy), SignalsModule (copy), UseDeviceInsetsFunction (copy), UseCallbackFunction (copy), ComputeSeekFractionModule (copy), UIDragDetectorFixEventPositionEnabledEngineFeature (copy), GuiService (copy), UseEffectFunction (copy)
 	local UseRefResult = UseRefFunction(nil)
 	local UseRefResult1 = UseRefFunction(nil)
@@ -27,7 +27,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 37 | Named "useTimelineSeekCont
 	
 	if FFlagMomentsScrubberSeekOnReleaseModule then
 		v1 = UseRefFunction(nil)
-		local UseMemoResult = UseMemoFunction(function() --[[ Line: 64 ]]
+		local UseMemoResult = UseMemoFunction(function()
 			-- upvalues: SignalsModule (upval)
 			local Signal, Signal2 = SignalsModule.createSignal(nil)
 			
@@ -37,7 +37,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 37 | Named "useTimelineSeekCont
 		SetFunction = UseMemoResult.set
 	end
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
-	local UseCallbackResult = UseCallbackFunction(function(p4) --[[ Line: 74 ]]
+	local UseCallbackResult = UseCallbackFunction(function(p4)
 		-- upvalues: UseRefResult (copy), ComputeSeekFractionModule (upval), p1 (copy), FFlagMomentsScrubberSeekOnReleaseModule (upval), SetFunction (ref), v1 (ref), Callback (copy)
 		local Current = UseRefResult.current
 		
@@ -57,18 +57,18 @@ return function(p1, Callback, p2, p3) --[[ Line: 37 | Named "useTimelineSeekCont
 			Callback(ScaledSeekFractionModule)
 		end
 	end, { p1, Callback, SetFunction })
-	local UseCallbackResult1 = UseCallbackFunction(function(Vector) --[[ Line: 98 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function(Vector)
 		-- upvalues: UIDragDetectorFixEventPositionEnabledEngineFeature (upval), GuiService (upval), UseDeviceInsetsResult (copy)
 		return if UIDragDetectorFixEventPositionEnabledEngineFeature then Vector.X else Vector.X - (GuiService:GetGuiInset().X + UseDeviceInsetsResult.left)
 	end, { UseDeviceInsetsResult })
-	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 107 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function()
 		-- upvalues: p1 (copy), UseRefResult4 (copy)
 		if p1.getIsPlaying(false) then
 			UseRefResult4.current = true
 			p1.toggle()
 		end
 	end, { p1 })
-	local UseCallbackResult3 = UseCallbackFunction(function(p4) --[[ Line: 114 ]]
+	local UseCallbackResult3 = UseCallbackFunction(function(p4)
 		-- upvalues: UseRefResult3 (copy), p3 (copy), UseCallbackResult2 (copy), UseCallbackResult (copy), UseCallbackResult1 (copy)
 		UseRefResult3.current = true
 		
@@ -84,7 +84,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 37 | Named "useTimelineSeekCont
 		UseCallbackResult1,
 		p3
 	})
-	local UseCallbackResult4 = UseCallbackFunction(function(p4) --[[ Line: 125 ]]
+	local UseCallbackResult4 = UseCallbackFunction(function(p4)
 		-- upvalues: UseRefResult3 (copy), p3 (copy), UseCallbackResult2 (copy), UseCallbackResult (copy), UseCallbackResult1 (copy)
 		if not UseRefResult3.current then return end
 		if p3 then
@@ -97,7 +97,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 37 | Named "useTimelineSeekCont
 		UseCallbackResult1,
 		p3
 	})
-	local UseCallbackResult5 = UseCallbackFunction(function() --[[ Line: 135 ]]
+	local UseCallbackResult5 = UseCallbackFunction(function()
 		-- upvalues: UseRefResult3 (copy), FFlagMomentsScrubberSeekOnReleaseModule (upval), v1 (ref), SetFunction (ref), p1 (copy), Callback (copy), UseRefResult4 (copy)
 		if not UseRefResult3.current then return end
 		UseRefResult3.current = false
@@ -120,7 +120,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 37 | Named "useTimelineSeekCont
 		end
 		UseRefResult4.current = false
 	end, { p1, Callback, SetFunction })
-	UseEffectFunction(function() --[[ Line: 158 ]]
+	UseEffectFunction(function()
 		-- upvalues: p2 (copy), UseRefResult1 (copy), UseCallbackResult3 (copy), UseCallbackResult4 (copy), UseCallbackResult5 (copy), FFlagMomentsTTSScrubberDragInOverlayModule (upval), UseRefResult2 (ref)
 		if not p2 then return end
 		local Current = UseRefResult1.current
@@ -141,7 +141,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 37 | Named "useTimelineSeekCont
 				table.insert(List, Current1.DragEnd:Connect(UseCallbackResult5))
 			end
 		end
-		return function() --[[ Line: 179 ]]
+		return function()
 			-- upvalues: List (copy)
 			for _, Connection in List do
 				Connection:Disconnect()

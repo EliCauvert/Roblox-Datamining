@@ -8,14 +8,14 @@ local LuauPolyfillModule = require(CorePackages.Packages.LuauPolyfill)
 local _ = require(Parent.Enums.PlatformEnum)
 local WithLocalizationFunction = require(CorePackages.Workspace.Packages.Localization).withLocalization
 
-return function(p1) --[[ Line: 19 | Named "Description" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), FTUXSlideshowDataModule (copy), WithLocalizationFunction (copy), ReactModule (copy), LuauPolyfillModule (copy), UIBloxModule (copy)
 	local UseStyleResult = UseStyleFunction()
 	local Theme = UseStyleResult.Theme
 	local UseStyleResultFont = UseStyleResult.Font
 	local Text = FTUXSlideshowDataModule[p1.platform][p1.currentIndex].text
 	
-	return WithLocalizationFunction(Text)(function(p2) --[[ Line: 28 ]]
+	return WithLocalizationFunction(Text)(function(p2)
 		-- upvalues: ReactModule (upval), LuauPolyfillModule (upval), Text (copy), UIBloxModule (upval), UseStyleResultFont (copy), Theme (copy)
 		return ReactModule.createElement("Frame", {
 			LayoutOrder = 2,
@@ -27,7 +27,7 @@ return function(p1) --[[ Line: 19 | Named "Description" ]]
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder
-		}), LuauPolyfillModule.Array.map(Text, function(_, LayoutOrder) --[[ Line: 43 ]]
+		}), LuauPolyfillModule.Array.map(Text, function(_, LayoutOrder)
 			-- upvalues: ReactModule (upval), UIBloxModule (upval), p2 (copy), UseStyleResultFont (upval), Theme (upval), Text (upval)
 			return (ReactModule.createElement(UIBloxModule.App.Text.StyledTextLabel, {
 				text = p2[LayoutOrder],

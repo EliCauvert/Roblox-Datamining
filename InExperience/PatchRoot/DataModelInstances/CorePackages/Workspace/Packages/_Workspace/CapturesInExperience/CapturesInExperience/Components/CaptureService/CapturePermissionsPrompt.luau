@@ -10,7 +10,7 @@ local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalizat
 local UseScreenSizeFunction = require(Parent1.RobloxAppHooks).useScreenSize
 local PermissionPromptFinishedModule = require(Parent.Thunks.PermissionPromptFinished)
 
-return function(p1) --[[ Line: 26 ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseLocalizationFunction (copy), UseScreenSizeFunction (copy), ReactModule (copy), PermissionPromptFinishedModule (copy), ButtonType (copy), Text (copy), InteractiveAlert (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -19,18 +19,18 @@ return function(p1) --[[ Line: 26 ]]
 		allow = "Feature.Captures.Action.Allow",
 		dontAllow = "Feature.Captures.Action.DontAllow"
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 37 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseDispatchResult (copy), PermissionPromptFinishedModule (upval), p1 (copy)
 		UseDispatchResult(PermissionPromptFinishedModule(p1.promptId, true))
 	end, { p1.promptId })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 43 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseDispatchResult (copy), PermissionPromptFinishedModule (upval), p1 (copy)
 		UseDispatchResult(PermissionPromptFinishedModule(p1.promptId, false))
 	end, { p1.promptId })
 	
 	return ReactModule.createElement(InteractiveAlert, {
 		isMiddleContentFocusable = false,
-		buttonStackInfo = ReactModule.useMemo(function() --[[ Line: 49 ]]
+		buttonStackInfo = ReactModule.useMemo(function()
 			-- upvalues: ButtonType (upval), UseResult (copy), UseLocalizationResult (copy), UseResult1 (copy)
 			return {
 				buttons = {
@@ -52,7 +52,7 @@ return function(p1) --[[ Line: 26 ]]
 				}
 			}
 		end, { UseResult, UseResult1 }),
-		middleContent = ReactModule.useCallback(function() --[[ Line: 71 ]]
+		middleContent = ReactModule.useCallback(function()
 			-- upvalues: ReactModule (upval), Text (upval), UseLocalizationResult (copy)
 			return ReactModule.createElement(Text, {
 				tag = "size-full-1200 text-align-x-center text-body-large text-wrap",

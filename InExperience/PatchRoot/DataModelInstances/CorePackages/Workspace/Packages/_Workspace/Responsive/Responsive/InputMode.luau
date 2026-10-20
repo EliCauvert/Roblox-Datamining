@@ -53,7 +53,7 @@ local Config = if FFlagLuaAppResponsiveEnginePreferredInput then {
 if FFlagLuaAppResponsiveEnginePreferredInput and FFlagLuaSupportMicroGamepadPreferredInput then
 	Config[Enum.PreferredInput.MicroGamepad] = config.Directional
 end
-function getPreferredInput() --[[ Line: 75 ]]
+function getPreferredInput()
 	-- upvalues: FFlagLuaAppResponsiveEnginePreferredInput (copy), UserInputService (copy), Config (copy), config (copy), AppCommonLibModule (copy), config3 (copy), config4 (copy)
 	if FFlagLuaAppResponsiveEnginePreferredInput then
 		return Config[UserInputService.PreferredInput or Enum.PreferredInput.KeyboardAndMouse] or config.Pointer
@@ -66,7 +66,7 @@ function getPreferredInput() --[[ Line: 75 ]]
 	end
 end
 
-function updatePreferredInput() --[[ Line: 97 ]]
+function updatePreferredInput()
 	-- upvalues: config2 (copy), NewResult (copy)
 	local PreferredInput = getPreferredInput()
 	
@@ -80,7 +80,7 @@ function updatePreferredInput() --[[ Line: 97 ]]
 	end
 end
 
-function updateLastInput() --[[ Line: 108 ]]
+function updateLastInput()
 	-- upvalues: config1 (copy), UserInputService (copy), config2 (copy), NewResult (copy)
 	local Entry = config1[UserInputService:GetLastInputType()]
 	
@@ -90,7 +90,7 @@ function updateLastInput() --[[ Line: 108 ]]
 	end
 end
 
-function init() --[[ Line: 116 ]]
+function init()
 	-- upvalues: FFlagLuaAppResponsiveEnginePreferredInput (copy), UserInputService (copy), AppCommonLibModule (copy)
 	if FFlagLuaAppResponsiveEnginePreferredInput then
 		UserInputService:GetPropertyChangedSignal("PreferredInput"):Connect(updatePreferredInput)
@@ -123,15 +123,15 @@ return {
 		{ Key = config.Pointer, lastInput = config.Pointer },
 		{ Key = config.Touch, lastInput = config.Touch }
 	},
-	connect = function(p1) --[[ Line: 149 ]]
+	connect = function(p1)
 		-- upvalues: NewResult (copy)
 		return NewResult:connect(p1)
 	end,
-	preferred = function() --[[ Line: 152 ]]
+	preferred = function()
 		-- upvalues: config2 (copy)
 		return config2.preferred
 	end,
-	last = function() --[[ Line: 155 ]]
+	last = function()
 		-- upvalues: config2 (copy)
 		return config2.last
 	end

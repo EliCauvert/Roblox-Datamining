@@ -10,7 +10,7 @@ local config = {
 	SubmittedAbuseType = game:DefineFastString("ChatLineReportingSubmittedAbuseTypeStat", "SubmittedAbuseType")
 }
 
-function submitAnalytics(p1, Interaction_type, Mute_button_clicked) --[[ Line: 17 ]]
+function submitAnalytics(p1, Interaction_type, Mute_button_clicked)
 	-- upvalues: EventIngest (copy), EventIngestService (copy), NewResult (copy), CryoModule (copy), config (copy)
 	local NewEventIngest = EventIngest.new(EventIngestService)
 	local Diag = NewResult.Diag

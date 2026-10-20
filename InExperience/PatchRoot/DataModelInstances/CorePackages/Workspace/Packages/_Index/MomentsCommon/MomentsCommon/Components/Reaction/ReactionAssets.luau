@@ -25,27 +25,27 @@ local config2 = {
 }
 local MomentsUpdateReactionIllustrationQuality = game:DefineFastFlag("MomentsUpdateReactionIllustrationQuality", false)
 
-local function _(p1: number): string --[[ Line: 39 | Named "getScaleSuffix" ]]
+local function _(p1: number): string
 	return if p1 > 2.5 then "@3x" elseif p1 > 1.5 then "@2x" else ""
 end
 
 return {
-	getAssetKey = function(p1) --[[ Line: 48 ]]
+	getAssetKey = function(p1)
 		-- upvalues: config (copy)
 		return config[p1]
 	end,
-	getAnimatedImageUri = function(p1): string --[[ Line: 74 ]]
+	getAnimatedImageUri = function(p1): string
 		return `rbxasset://textures/ui/Moments/Reactions/Animated/{p1}.png`
 	end,
-	getSizeKey = function(p1) --[[ Line: 52 ]]
+	getSizeKey = function(p1)
 		-- upvalues: config1 (copy)
 		return config1[p1]
 	end,
-	getSizePixels = function(p1) --[[ Line: 56 ]]
+	getSizePixels = function(p1)
 		-- upvalues: config2 (copy)
 		return config2[p1]
 	end,
-	getStaticImageUri = function(p1, p2, p3): string? --[[ Line: 60 ]]
+	getStaticImageUri = function(p1, p2, p3): string?
 		-- upvalues: config (copy), config1 (copy), MomentsUpdateReactionIllustrationQuality (copy), GuiService (copy)
 		local Entry = config[p1]
 		local Entry1 = config1[p2]
@@ -62,7 +62,7 @@ return {
 		end
 		return `rbxasset://textures/ui/Moments/Reactions/{Entry}-{Entry1}{v1}.png`
 	end,
-	getStickerImageUri = function(p1) --[[ Line: 80 ]]
+	getStickerImageUri = function(p1)
 		-- upvalues: config (copy)
 		local Entry = config[p1]
 		

@@ -7,7 +7,7 @@ local NodeStackModule = require(InlineRichText.Parser.NodeStack)
 local NodeTypeModule = require(InlineRichText.Enums.NodeType)
 local TokenNameModule = require(InlineRichText.Enums.TokenName)
 local config = {
-	[TokenNameModule.Text] = function(p1, p2, _) --[[ Line: 16 ]]
+	[TokenNameModule.Text] = function(p1, p2, _)
 		-- upvalues: NodeTypeModule (copy), NewResult (copy)
 		local PeekResult = p1:peek()
 		
@@ -23,7 +23,7 @@ local config = {
 		local PeekResult1 = p1:peek()
 		PeekResult1.text = `{PeekResult1.text}{p2.text}`
 	end,
-	[TokenNameModule.Break] = function(p1, _, _) --[[ Line: 30 ]]
+	[TokenNameModule.Break] = function(p1, _, _)
 		-- upvalues: NodeTypeModule (copy), NewResult (copy), CryoModule (copy), NodeConfigModule (copy)
 		local BREAK, BREAK2 = p1:push({
 			name = "BREAK",
@@ -55,7 +55,7 @@ local config = {
 			end
 		end
 	end,
-	[TokenNameModule.Open] = function(p2, p3, p4) --[[ Line: 64 ]]
+	[TokenNameModule.Open] = function(p2, p3, p4)
 		-- upvalues: NewResult (copy)
 		local TagAlias = p4.TagAliases[p3.text] or p3.text
 		local TagConfiguration = p4.TagConfigurations[TagAlias]
@@ -79,7 +79,7 @@ local config = {
 		
 		return nil
 	end,
-	[TokenNameModule.Close] = function(p2, p3, p4) --[[ Line: 87 ]]
+	[TokenNameModule.Close] = function(p2, p3, p4)
 		-- upvalues: NewResult (copy)
 		local TagAlias = p4.TagAliases[p3.text] or p3.text
 		local TagConfiguration = p4.TagConfigurations[TagAlias]
@@ -99,7 +99,7 @@ local config = {
 	end
 }
 
-return function(List, p2) --[[ Line: 106 | Named "buildTree" ]]
+return function(List, p2)
 	-- upvalues: NodeStackModule (copy), config (copy), NewResult (copy)
 	local NewNodeStack = NodeStackModule.new()
 	

@@ -23,12 +23,12 @@ local config = {
 	numItemsShown = 4,
 	itemAspectRatio = 1.7777777777777777,
 	animationConfig = { dampingRatio = 1, frequency = 6.666666666666667 },
-	onActivated = function() --[[ Line: 39 ]] end,
-	onSelectionGained = function() --[[ Line: 40 ]] end,
-	exitFullscreen = function() --[[ Line: 41 ]] end
+	onActivated = function() end,
+	onSelectionGained = function() end,
+	exitFullscreen = function() end
 }
 
-return function(p1) --[[ Line: 79 | Named "MediaGalleryExpandableView" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), FFlagLuaAppEdpConsoleMediaGalleryVideoPlayIcon (copy), UseTokensFunction (copy), ConstantsModule (copy), ReactOtterModule (copy), ReactModule (copy), UseCursorFunction (copy), UseSelectionCursorFunction (copy), CursorKind (copy), View (copy), Icon (copy), IconSize (copy), FFlagLuaAppEdpConsoleMediaGalleryVideo (copy), StyledTextLabel (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseStyleResult = UseStyleFunction()
@@ -41,7 +41,7 @@ return function(p1) --[[ Line: 79 | Named "MediaGalleryExpandableView" ]]
 	local TitleTextColor = JoinResult1.titleTextColor
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.zero)
-	local UseResult = ReactModule.useCallback(function(Frame, _, _, _) --[[ Line: 96 ]]
+	local UseResult = ReactModule.useCallback(function(Frame, _, _, _)
 		-- upvalues: Gutter (copy), JoinResult (copy), UseStateResult2 (copy)
 		local XRatio = (Frame.AbsoluteSize.X - Gutter * (JoinResult.numItemsShown - 1)) / JoinResult.numItemsShown
 		UseStateResult2(Vector2.new(XRatio, XRatio / JoinResult.itemAspectRatio))
@@ -50,7 +50,7 @@ return function(p1) --[[ Line: 79 | Named "MediaGalleryExpandableView" ]]
 		JoinResult.itemAspectRatio,
 		JoinResult.numItemsShown
 	})
-	local UseResult1 = ReactModule.useCallback(function(Ancestor, _, Frame, Frame1) --[[ Line: 110 ]]
+	local UseResult1 = ReactModule.useCallback(function(Ancestor, _, Frame, Frame1)
 		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), JoinResult (copy)
 		if not Ancestor then
 			return nil
@@ -100,7 +100,7 @@ return function(p1) --[[ Line: 79 | Named "MediaGalleryExpandableView" ]]
 		ExpandableArea = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
-			Size = UseAnimatedBindingResult:map(function(YOffset): UDim2 --[[ Line: 229 ]]
+			Size = UseAnimatedBindingResult:map(function(YOffset): UDim2
 				return UDim2.new(1, 0, 0, YOffset)
 			end)
 		}),
@@ -129,7 +129,7 @@ return function(p1) --[[ Line: 79 | Named "MediaGalleryExpandableView" ]]
 				FillDirection = Enum.FillDirection.Horizontal,
 				Padding = UDim.new(0, Gutter)
 			}),
-			Items = ReactModule.createElement(ReactModule.Fragment, {}, (ReactModule.useMemo(function() --[[ Line: 161 ]]
+			Items = ReactModule.createElement(ReactModule.Fragment, {}, (ReactModule.useMemo(function()
 				-- upvalues: JoinResult (copy), ReactModule (upval), UseStateResult (copy), UseCursorResult1 (copy), BorderRadius (copy), FFlagLuaAppEdpConsoleMediaGalleryVideoPlayIcon (upval), View (upval), Icon (upval), IconSize (upval), UseTokensResult (copy)
 				local ImageButtons = {}
 				
@@ -142,11 +142,11 @@ return function(p1) --[[ Line: 79 | Named "MediaGalleryExpandableView" ]]
 						BackgroundTransparency = 1,
 						AutoButtonColor = false,
 						SelectionImageObject = UseCursorResult1,
-						[ReactModule.Event.Activated] = function() --[[ Line: 172 ]]
+						[ReactModule.Event.Activated] = function()
 							-- upvalues: JoinResult (upval), LayoutOrder (copy)
 							JoinResult.onActivated(LayoutOrder)
 						end,
-						[ReactModule.Event.SelectionGained] = function() --[[ Line: 175 ]]
+						[ReactModule.Event.SelectionGained] = function()
 							-- upvalues: JoinResult (upval), LayoutOrder (copy)
 							JoinResult.onSelectionGained(LayoutOrder)
 						end

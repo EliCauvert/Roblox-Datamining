@@ -10,9 +10,9 @@ local VideoLogger = VideoUtilsModule.VideoLogger
 local ReportWarningFunction = DiscoveryAnalyticsModule.Points.reportWarning
 local FFlagLuaAppDiscoveryMomentVideoTelemetry = require(Parent.SharedFlags).FFlagLuaAppDiscoveryMomentVideoTelemetry
 
-return function(SourceId, RootPlaceId, p1) --[[ Line: 29 | Named "useMediaGalleryVideoAnalytics" ]]
+return function(SourceId, RootPlaceId, p1)
 	-- upvalues: ReactModule (copy), ReportWarningFunction (copy), LoggingProtocolModule (copy), DiscoveryVideoPlayEventFunction (copy), FFlagLuaAppDiscoveryMomentVideoTelemetry (copy), VideoLogger (copy), VideoActions (copy), DiscoveryVideoEndEventFunction (copy)
-	local UseResult = ReactModule.useCallback(function(p2, p3) --[[ Line: 30 ]]
+	local UseResult = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: p1 (copy), ReportWarningFunction (upval), LoggingProtocolModule (upval), DiscoveryVideoPlayEventFunction (upval), SourceId (copy), RootPlaceId (copy), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval)
 		if not p2 or not p1 then return end
 		local v1 = p1[p2]
@@ -33,7 +33,7 @@ return function(SourceId, RootPlaceId, p1) --[[ Line: 29 | Named "useMediaGaller
 			isMoment = if FFlagLuaAppDiscoveryMomentVideoTelemetry then v1.isMoment == true else nil
 		})
 	end, { SourceId, RootPlaceId, p1 })
-	local UseResult1 = ReactModule.useCallback(function(p2, p3, _, LoadTime) --[[ Line: 55 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2, p3, _, LoadTime)
 		-- upvalues: p1 (copy), ReportWarningFunction (upval), LoggingProtocolModule (upval), VideoLogger (upval), VideoActions (upval), SourceId (copy)
 		if not p2 or not p1 then return end
 		local v1 = p1[p2]
@@ -53,7 +53,7 @@ return function(SourceId, RootPlaceId, p1) --[[ Line: 29 | Named "useMediaGaller
 			playbackSessionId = p3 or "INVALID_SESSION_ID"
 		}, { loadTime = LoadTime })
 	end, { SourceId, p1 })
-	local UseResult2 = ReactModule.useCallback(function(p2, p3, p4) --[[ Line: 82 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2, p3, p4)
 		-- upvalues: p1 (copy), VideoLogger (upval), VideoActions (upval), SourceId (copy)
 		if not p2 or not p1 then return end
 		local v1 = p1[p2]
@@ -70,7 +70,7 @@ return function(SourceId, RootPlaceId, p1) --[[ Line: 29 | Named "useMediaGaller
 			return
 		end
 	end, { SourceId, p1 })
-	local UseResult3 = ReactModule.useCallback(function(p2, EndReason, p3, PlaybackTime, TargetUniverseId) --[[ Line: 102 ]]
+	local UseResult3 = ReactModule.useCallback(function(p2, EndReason, p3, PlaybackTime, TargetUniverseId)
 		-- upvalues: p1 (copy), ReportWarningFunction (upval), LoggingProtocolModule (upval), DiscoveryVideoEndEventFunction (upval), SourceId (copy), RootPlaceId (copy), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval)
 		if not p2 or not p1 then return end
 		local v1 = p1[p2]
@@ -95,7 +95,7 @@ return function(SourceId, RootPlaceId, p1) --[[ Line: 29 | Named "useMediaGaller
 		})
 	end, { SourceId, RootPlaceId, p1 })
 	
-	return (ReactModule.useMemo(function() --[[ Line: 137 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: UseResult (copy), UseResult1 (copy), UseResult2 (copy), UseResult3 (copy)
 		return {
 			reportVideoPlay = UseResult,

@@ -19,12 +19,12 @@ local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
 local ExtractAndStyleRichTextLinksFunction = require(Parent.DiscoveryUtils).extractAndStyleRichTextLinks
 local FFlagEnablePlayButtonWizardVPCPrologueModule = require(GamePlayButton.Flags.FFlagEnablePlayButtonWizardVPCPrologue)
 
-return function(p1) --[[ Line: 43 | Named "PlayButtonUpsellDialog" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), UseRoactServiceFunction (copy), AppLinking (copy), ReactModule (copy), ExtractAndStyleRichTextLinksFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), CloseCentralOverlayFunction (copy), Dialog (copy), DialogSize (copy), FFlagEnablePlayButtonWizardVPCPrologueModule (copy), PlayButtonUpsellBodyModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ButtonVariant (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(AppLinking)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 48 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ExtractAndStyleRichTextLinksFunction (upval), p1 (copy)
 		local ExtractAndStyleRichTextLinksResult, ExtractAndStyleRichTextLinksResult2 = ExtractAndStyleRichTextLinksFunction(p1.bodyText)
 		
@@ -33,12 +33,12 @@ return function(p1) --[[ Line: 43 | Named "PlayButtonUpsellDialog" ]]
 			styledText = ExtractAndStyleRichTextLinksResult2
 		}
 	end, { p1.bodyText })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 58 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseMemoResult (copy), p1 (copy), UseDispatchResult (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval), UseRoactServiceResult (copy), CloseCentralOverlayFunction (upval)
 		if UseMemoResult.link then
 			p1.onCloseModal()
 			UseDispatchResult(SetCentralOverlayFunction(CentralOverlayType.LeaveRobloxAlert, {
-				continueFunc = function() --[[ Line: 67 ]]
+				continueFunc = function()
 					-- upvalues: UseRoactServiceResult (upval), UseMemoResult (upval), UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
 					UseRoactServiceResult:openURL(UseMemoResult.link)
 					UseDispatchResult(CloseCentralOverlayFunction())

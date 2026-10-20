@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.types)
 local DEV = _G.__DEV__
 
-return function(p1) --[[ Line: 5 | Named "inspectRouteEntry" ]]
+return function(p1)
 	-- upvalues: DEV (copy)
 	local Key, Value = next(p1)
 	

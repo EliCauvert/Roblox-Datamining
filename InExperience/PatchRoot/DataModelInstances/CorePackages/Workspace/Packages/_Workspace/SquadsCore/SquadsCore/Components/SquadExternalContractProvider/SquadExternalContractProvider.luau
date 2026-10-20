@@ -13,13 +13,13 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagEnableSquadTopBannerWideMode = SharedFlagsModule.FFlagEnableSquadTopBannerWideMode
 local FFlagEnableSquadRegroupExperimentation = SharedFlagsModule.FFlagEnableSquadRegroupExperimentation
 
-return function(p1) --[[ Line: 29 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), SquadViewFlagsModule (copy), FFlagEnableSquadTopBannerWideMode (copy), AnalyticsModule (copy), UseCurrentSquadIdFunction (copy), CryoModule (copy), FFlagEnableSquadRegroupExperimentation (copy), SquadExternalContractContextModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(SquadViewFlagsModule.None)
-	local UseSquadTopBannerManagerResult = if FFlagEnableSquadTopBannerWideMode then p1.contract.useSquadTopBannerManager() else ReactModule.useMemo(function() --[[ Line: 34 ]]
+	local UseSquadTopBannerManagerResult = if FFlagEnableSquadTopBannerWideMode then p1.contract.useSquadTopBannerManager() else ReactModule.useMemo(function()
 		return {
-			disableSquadTopBanner = function(_, _) --[[ Line: 36 ]] end,
-			useSquadTopBannerDisabled = function(): boolean --[[ Line: 37 ]]
+			disableSquadTopBanner = function(_, _) end,
+			useSquadTopBannerDisabled = function(): boolean
 				return false
 			end
 		}
@@ -32,7 +32,7 @@ return function(p1) --[[ Line: 29 ]]
 		createConversation = p1.contract.createConversation,
 		disableSquadTopBanner = UseSquadTopBannerManagerResult.disableSquadTopBanner,
 		fetchParentChannelDetails = p1.contract.fetchParentChannelDetails,
-		fireSquadAnalytics = ReactModule.useCallback(function(p2, p3) --[[ Line: 45 ]]
+		fireSquadAnalytics = ReactModule.useCallback(function(p2, p3)
 			-- upvalues: CryoModule (upval), UseCurrentSquadIdResult (copy), p1 (copy), UseMemoResult (copy)
 			UseMemoResult.fireAnalyticsEvent(p2, (CryoModule.Dictionary.join(p3, {
 				squadId = UseCurrentSquadIdResult,
@@ -45,17 +45,17 @@ return function(p1) --[[ Line: 29 ]]
 		setSquadPrompt = p1.contract.setSquadPrompt,
 		showSearchOverlay = p1.contract.showSearchOverlay,
 		squadLocation = p1.squadLocation,
-		updateSquadViewFlags = ReactModule.useCallback(function(Mask, p2) --[[ Line: 68 ]]
+		updateSquadViewFlags = ReactModule.useCallback(function(Mask, p2)
 			-- upvalues: UseStateResult2 (copy)
 			if p2 then
-				UseStateResult2(function(Value: number): number --[[ Line: 70 ]]
+				UseStateResult2(function(Value: number): number
 					-- upvalues: Mask (copy)
 					return (bit32.bor(Value, Mask))
 				end)
 				
 				return
 			else
-				UseStateResult2(function(Value: number): number --[[ Line: 74 ]]
+				UseStateResult2(function(Value: number): number
 					-- upvalues: Mask (copy)
 					return (bit32.band(Value, (bit32.bnot(Mask))))
 				end)
@@ -71,7 +71,7 @@ return function(p1) --[[ Line: 29 ]]
 		useSquadTopBannerDisabled = UseSquadTopBannerManagerResult.useSquadTopBannerDisabled,
 		useIsChatEnabled = p1.contract.useIsChatEnabled,
 		useIsLoadingChatSettings = p1.contract.useIsLoadingChatSettings,
-		useSquadViewFlags = ReactModule.useCallback(function() --[[ Line: 89 ]]
+		useSquadViewFlags = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult (copy)
 			return UseStateResult
 		end, { UseStateResult }),
@@ -80,7 +80,7 @@ return function(p1) --[[ Line: 29 ]]
 	}
 	
 	if FFlagEnableSquadRegroupExperimentation and p1.contract.createExperienceInvite then
-		function config.createExperienceInvite(p2, p3) --[[ Line: 97 ]]
+		function config.createExperienceInvite(p2, p3)
 			-- upvalues: p1 (copy), config (copy)
 			return p1.contract.createExperienceInvite(p2, config, p3)
 		end

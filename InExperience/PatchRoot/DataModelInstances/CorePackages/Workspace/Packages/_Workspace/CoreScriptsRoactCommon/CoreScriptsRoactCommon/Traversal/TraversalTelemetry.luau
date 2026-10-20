@@ -61,7 +61,7 @@ local config = {
 local TraversalTelemetryModule = {}
 TraversalTelemetryModule.__index = TraversalTelemetryModule
 
-function TraversalTelemetryModule.sendBackButtonActionEvent(CustomFields) --[[ Line: 142 ]]
+function TraversalTelemetryModule.sendBackButtonActionEvent(CustomFields)
 	-- upvalues: TelemetryService (copy), config (copy)
 	TelemetryService:LogEvent(config.BackButtonActions, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },
@@ -69,7 +69,7 @@ function TraversalTelemetryModule.sendBackButtonActionEvent(CustomFields) --[[ L
 	})
 end
 
-function TraversalTelemetryModule.sendHistoryMenuButtonActionEvent(CustomFields) --[[ Line: 149 ]]
+function TraversalTelemetryModule.sendHistoryMenuButtonActionEvent(CustomFields)
 	-- upvalues: TelemetryService (copy), config (copy)
 	TelemetryService:LogEvent(config.HistoryMenuButtonActions, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },
@@ -77,7 +77,7 @@ function TraversalTelemetryModule.sendHistoryMenuButtonActionEvent(CustomFields)
 	})
 end
 
-function TraversalTelemetryModule.sendHistoryMenuItemClick(CustomFields) --[[ Line: 156 ]]
+function TraversalTelemetryModule.sendHistoryMenuItemClick(CustomFields)
 	-- upvalues: TelemetryService (copy), config (copy)
 	TelemetryService:LogEvent(config.HistoryMenuItemClick, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },
@@ -85,7 +85,7 @@ function TraversalTelemetryModule.sendHistoryMenuItemClick(CustomFields) --[[ Li
 	})
 end
 
-function TraversalTelemetryModule.sendHistoryMenuHistoryClick(CustomFields) --[[ Line: 163 ]]
+function TraversalTelemetryModule.sendHistoryMenuHistoryClick(CustomFields)
 	-- upvalues: TelemetryService (copy), config (copy)
 	TelemetryService:LogEvent(config.HistoryMenuHistoryClick, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },
@@ -93,7 +93,7 @@ function TraversalTelemetryModule.sendHistoryMenuHistoryClick(CustomFields) --[[
 	})
 end
 
-function TraversalTelemetryModule.sendHistoryPageBackButtonClick(CustomFields) --[[ Line: 170 ]]
+function TraversalTelemetryModule.sendHistoryPageBackButtonClick(CustomFields)
 	-- upvalues: TelemetryService (copy), config (copy)
 	TelemetryService:LogEvent(config.HistoryPageBackButtonClick, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },
@@ -101,7 +101,7 @@ function TraversalTelemetryModule.sendHistoryPageBackButtonClick(CustomFields) -
 	})
 end
 
-function TraversalTelemetryModule.sendHistoryPageExperienceTileClick(CustomFields) --[[ Line: 177 ]]
+function TraversalTelemetryModule.sendHistoryPageExperienceTileClick(CustomFields)
 	-- upvalues: TelemetryService (copy), config (copy)
 	TelemetryService:LogEvent(config.HistoryPageExperienceTileClick, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },
@@ -109,7 +109,7 @@ function TraversalTelemetryModule.sendHistoryPageExperienceTileClick(CustomField
 	})
 end
 
-function TraversalTelemetryModule.sendTeleportConfirmationActions(CustomFields) --[[ Line: 184 ]]
+function TraversalTelemetryModule.sendTeleportConfirmationActions(CustomFields)
 	-- upvalues: TelemetryService (copy), config (copy)
 	TelemetryService:LogEvent(config.TeleportConfirmationActions, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },

@@ -6,7 +6,7 @@ local AppPage = require(Parent.RobloxAppEnums).AppPage
 return (RoactNavigationModule.createRobloxStackNavigator({
 	{
 		[AppPage.TrustedFriendsUserModal] = {
-			getScreen = function() --[[ Line: 15 ]]
+			getScreen = function()
 				-- upvalues: TrustedContacts (copy)
 				return require(TrustedContacts.Components.TrustedContactsModal).Screen
 			end,
@@ -19,7 +19,7 @@ return (RoactNavigationModule.createRobloxStackNavigator({
 	},
 	{
 		[AppPage.TrustedFriendsVPCPrologue] = {
-			getScreen = function() --[[ Line: 27 ]]
+			getScreen = function()
 				-- upvalues: TrustedContacts (copy)
 				return require(TrustedContacts.Components.TrustedFriendsVPCPrologue).Screen
 			end,

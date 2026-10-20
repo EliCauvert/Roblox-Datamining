@@ -4,11 +4,11 @@ local UseCurrentSquadParentChannelIdModule = require(SquadsCore.Hooks.useCurrent
 local ReactModule = require(SquadsCore.Parent.React)
 local GetFFlagEnablePartyVoiceOnlyForUnfilteredThreadsModule = require(SquadsCore.Flags.GetFFlagEnablePartyVoiceOnlyForUnfilteredThreads)
 
-function useIsCurrentSquadPartyVoiceEligible() --[[ Line: 13 ]]
+function useIsCurrentSquadPartyVoiceEligible()
 	-- upvalues: ReactModule (copy), SquadExternalContractContextModule (copy), UseCurrentSquadParentChannelIdModule (copy)
 	return ReactModule.useContext(SquadExternalContractContextModule).useParentChannelIsPartyVoiceEligible(UseCurrentSquadParentChannelIdModule() or "")
 end
 
-return if GetFFlagEnablePartyVoiceOnlyForUnfilteredThreadsModule() then useIsCurrentSquadPartyVoiceEligible else function(): boolean --[[ Line: 22 ]]
+return if GetFFlagEnablePartyVoiceOnlyForUnfilteredThreadsModule() then useIsCurrentSquadPartyVoiceEligible else function(): boolean
 	return true
 end

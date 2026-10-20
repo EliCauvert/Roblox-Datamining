@@ -152,7 +152,7 @@ local ScenarioDetails = {
 	}
 }
 
-local function resolveControls(Controls) --[[ Line: 177 ]]
+local function resolveControls(Controls)
 	-- upvalues: StoryControlsModule (copy), Frozen1 (copy), ScenarioDetails (copy), Module (copy)
 	local MergeResult = StoryControlsModule.merge(Frozen1, Controls)
 	local Scenario = if ScenarioDetails[MergeResult.scenario] == nil then Frozen1.scenario else MergeResult.scenario
@@ -183,7 +183,7 @@ local function resolveControls(Controls) --[[ Line: 177 ]]
 	}
 end
 
-local function mergeControls(...) --[[ Line: 210 ]]
+local function mergeControls(...)
 	-- upvalues: Frozen1 (copy), StoryControlsModule (copy)
 	local Copy = table.clone(Frozen1)
 	
@@ -193,13 +193,13 @@ local function mergeControls(...) --[[ Line: 210 ]]
 	return Copy
 end
 
-local function createLayout(Current) --[[ Line: 218 ]]
+local function createLayout(Current)
 	-- upvalues: Frozen (copy), Module (copy)
 	if Current.scenario == Frozen.KnownVariable then
 		local NewShortLength = Current.shortLength + Current.longLength + 2 * Current.spacing
 		
 		return Module.Layout.create({
-			getItemLayout = function(p1: number) --[[ Line: 222 ]]
+			getItemLayout = function(p1: number)
 				-- upvalues: NewShortLength (copy), Current (copy)
 				local v1 = p1 % 2 == 1
 				
@@ -217,16 +217,16 @@ local function createLayout(Current) --[[ Line: 218 ]]
 	end
 end
 
-local function createItems(Scenario, ItemCount, ShortLength, LongLength, Spacing) --[[ Line: 243 ]]
+local function createItems(Scenario, ItemCount, ShortLength, LongLength, Spacing)
 	-- upvalues: Frozen (copy), RowFixturesModule (copy)
 	return if Scenario == Frozen.KnownVariable then RowFixturesModule.buildKnownVariableRows(ItemCount, ShortLength, LongLength) elseif Scenario == Frozen.Measured then RowFixturesModule.buildMeasuredRows(ItemCount, Spacing) elseif Scenario == Frozen.Fixed then RowFixturesModule.buildLogRows(ItemCount) else RowFixturesModule.buildSimpleRows(ItemCount)
 end
 
-local function LayoutScrollPlayground(p1) --[[ Line: 255 ]]
+local function LayoutScrollPlayground(p1)
 	-- upvalues: resolveControls (copy), ReactModule (copy), UseManagedLayoutModule (copy), createLayout (copy), createItems (copy), RecyclingStatsModule (copy), Frozen (copy), ScenarioDetails (copy), CreateElementFunction (copy), StoryShellModule (copy), JumpControlsModule (copy), Module (copy), RowFixturesModule (copy)
 	local ResolveControlsResult = resolveControls(p1.controls)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
-	local UseManagedLayoutModuleResult = UseManagedLayoutModule(ReactModule, function() --[[ Line: 258 ]]
+	local UseManagedLayoutModuleResult = UseManagedLayoutModule(ReactModule, function()
 		-- upvalues: createLayout (upval), ResolveControlsResult (copy)
 		return createLayout(ResolveControlsResult)
 	end, {
@@ -240,7 +240,7 @@ local function LayoutScrollPlayground(p1) --[[ Line: 255 ]]
 	local ShortLength = ResolveControlsResult.shortLength
 	local LongLength = ResolveControlsResult.longLength
 	local Spacing = ResolveControlsResult.spacing
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 274 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: createItems (upval), Scenario (copy), ItemCount (copy), ShortLength (copy), LongLength (copy), Spacing (copy)
 		return createItems(Scenario, ItemCount, ShortLength, LongLength, Spacing)
 	end, {
@@ -259,7 +259,7 @@ local function LayoutScrollPlayground(p1) --[[ Line: 255 ]]
 	UseRefResult4.current = ResolveControlsResult
 	UseRefResult3.current = RecyclingStatsModule.format(UseStatsResult)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding("")
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 287 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult4 (copy), Frozen (upval), UseRefResult1 (copy), UseBindingResult2 (copy), UseRefResult3 (copy), UseRefResult2 (copy)
 		local Current = UseRefResult4.current
 		local Message = ""
@@ -271,12 +271,12 @@ local function LayoutScrollPlayground(p1) --[[ Line: 255 ]]
 		end
 		UseBindingResult2(`{UseRefResult3.current}   Offset: {math.round(UseRefResult1.current)}px{Message}   Diagnostics: {UseRefResult2.current}`)
 	end, { UseBindingResult2 })
-	local UseResult1 = ReactModule.useCallback(function(Current) --[[ Line: 301 ]]
+	local UseResult1 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult1 (copy), UseResult (copy)
 		UseRefResult1.current = Current
 		UseResult()
 	end, { UseResult })
-	local UseResult2 = ReactModule.useCallback(function(_) --[[ Line: 305 ]]
+	local UseResult2 = ReactModule.useCallback(function(_)
 		-- upvalues: UseRefResult2 (copy), UseResult (copy)
 		UseRefResult2.current += 1
 		UseResult()
@@ -303,9 +303,9 @@ local function LayoutScrollPlayground(p1) --[[ Line: 255 ]]
 					Position = UDim2.fromOffset(424, 6),
 					Size = UDim2.fromOffset(132, 30),
 					Text = "Reset estimate",
-					[ReactModule.Event.Activated] = function() --[[ Line: 337 ]]
+					[ReactModule.Event.Activated] = function()
 						-- upvalues: UseStateResult2 (copy)
-						UseStateResult2(function(p2: number): number --[[ Line: 338 ]]
+						UseStateResult2(function(p2: number): number
 							return p2 + 1
 						end)
 					end
@@ -352,7 +352,7 @@ return {
 	mergeControls = mergeControls,
 	resolveControls = resolveControls,
 	scenarioDetails = ScenarioDetails,
-	createPreset = function(p1) --[[ Line: 381 ]]
+	createPreset = function(p1)
 		-- upvalues: Presets (copy), CreateElementFunction (copy), LayoutScrollPlayground (copy), mergeControls (copy), ReactModule (copy)
 		local Preset = Presets[p1]
 		assert(Preset ~= nil, `Unknown LayoutScrollPlayground preset {p1}`)
@@ -361,7 +361,7 @@ return {
 			name = Preset.name,
 			summary = Preset.summary,
 			roact = ReactModule,
-			story = function(p2) --[[ Line: 385 ]]
+			story = function(p2)
 				-- upvalues: CreateElementFunction (upval), LayoutScrollPlayground (upval), mergeControls (upval), Preset (copy)
 				return CreateElementFunction(LayoutScrollPlayground, {
 					controls = mergeControls(Preset.values, p2 and p2.controls),

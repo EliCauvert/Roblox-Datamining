@@ -11,10 +11,10 @@ local AddTypesFunction = require(script.Parent.addTypes).addTypes
 local Map = LuauPolyfillModule.Map
 
 return {
-	appendObjectFields = function(p1, Name, Fields) --[[ Line: 41 ]]
+	appendObjectFields = function(p1, Name, Fields)
 		-- upvalues: AddTypesFunction (copy), GraphQLObjectType (copy), MapSchemaFunction (copy), MapperKind (copy), Map (copy), CorrectASTNodesFunction (copy), Object (copy)
 		return if p1:getType(Name) == nil then AddTypesFunction(p1, { GraphQLObjectType.new({ name = Name, fields = Fields }) }) else MapSchemaFunction(p1, {
-			[MapperKind.OBJECT_TYPE] = function(p2) --[[ Line: 54 ]]
+			[MapperKind.OBJECT_TYPE] = function(p2)
 				-- upvalues: Name (copy), Map (upval), Fields (copy), CorrectASTNodesFunction (upval), GraphQLObjectType (upval), Object (upval)
 				if p2.name ~= Name then
 					return nil
@@ -35,13 +35,13 @@ return {
 			end
 		})
 	end,
-	removeObjectFields = function(p3, Name, Callback) --[[ Line: 100 ]]
+	removeObjectFields = function(p3, Name, Callback)
 		-- upvalues: Map (copy), MapSchemaFunction (copy), MapperKind (copy), Boolean (copy), CorrectASTNodesFunction (copy), GraphQLObjectType (copy), Object (copy)
 		local NewMap = Map.new()
 		
 		return {
 			MapSchemaFunction(p3, {
-				[MapperKind.OBJECT_TYPE] = function(p4) --[[ Line: 112 ]]
+				[MapperKind.OBJECT_TYPE] = function(p4)
 					-- upvalues: Name (copy), Map (upval), Boolean (upval), Callback (copy), NewMap (copy), CorrectASTNodesFunction (upval), GraphQLObjectType (upval), Object (upval)
 					if p4.name ~= Name then
 						return nil
@@ -66,11 +66,11 @@ return {
 			NewMap
 		}
 	end,
-	selectObjectFields = function(p4, Name, Callback) --[[ Line: 160 ]]
+	selectObjectFields = function(p4, Name, Callback)
 		-- upvalues: Map (copy), MapSchemaFunction (copy), MapperKind (copy), Boolean (copy)
 		local NewMap = Map.new()
 		MapSchemaFunction(p4, {
-			[tostring(MapperKind.OBJECT_TYPE)] = function(p5) --[[ Line: 170 ]]
+			[tostring(MapperKind.OBJECT_TYPE)] = function(p5)
 				-- upvalues: Name (copy), Boolean (upval), Callback (copy), NewMap (copy)
 				if p5.name == Name then
 					local Fields = p5:toConfig().fields
@@ -90,13 +90,13 @@ return {
 		
 		return NewMap
 	end,
-	modifyObjectFields = function(p5, Name, Callback, p6) --[[ Line: 200 ]]
+	modifyObjectFields = function(p5, Name, Callback, p6)
 		-- upvalues: Map (copy), MapSchemaFunction (copy), MapperKind (copy), Boolean (copy), CorrectASTNodesFunction (copy), GraphQLObjectType (copy), Object (copy)
 		local NewMap = Map.new()
 		
 		return {
 			MapSchemaFunction(p5, {
-				[MapperKind.OBJECT_TYPE] = function(p7) --[[ Line: 213 ]]
+				[MapperKind.OBJECT_TYPE] = function(p7)
 					-- upvalues: Name (copy), Map (upval), Boolean (upval), Callback (copy), NewMap (copy), p6 (copy), CorrectASTNodesFunction (upval), GraphQLObjectType (upval), Object (upval)
 					if p7.name ~= Name then
 						return nil

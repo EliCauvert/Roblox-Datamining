@@ -17,10 +17,10 @@ local UnifiedEventLogConstants = AvatarExperienceAnalyticsModule.UnifiedEventLog
 local UnifiedEventLogEnums = AvatarExperienceAnalyticsModule.UnifiedEventLogEnums
 local FFlagAXWearTimeListItemUnifiedLogging = require(Parent.AvatarExperienceFlags).FFlagAXWearTimeListItemUnifiedLogging
 
-return (ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 30 ]]
+return (ReactModule.forwardRef(function(Frame, Ref)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Localization (copy), LocalizationService (copy), UseLocalizationFunction (copy), FFlagAXWearTimeListItemUnifiedLogging (copy), AddUnifiedEventLoggingFunction (copy), UnifiedEventLogEnums (copy), HttpService (copy), UnifiedEventLogConstants (copy), View (copy), Enums (copy), Text (copy), FoundationModule (copy), NumberLocalization (copy)
 	local UseTokensResult = UseTokensFunction()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 32 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Localization (upval), LocalizationService (upval)
 		return Localization.new(LocalizationService.RobloxLocaleId)
 	end, {})
@@ -41,7 +41,7 @@ return (ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 30 ]]
 		Ref = ReactModule.createRef()
 	end
 	if FFlagAXWearTimeListItemUnifiedLogging then
-		ReactModule.useEffect(function() --[[ Line: 55 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: AddUnifiedEventLoggingFunction (upval), Ref (ref), UnifiedEventLogEnums (upval), HttpService (upval), Frame (copy), UnifiedEventLogConstants (upval)
 			AddUnifiedEventLoggingFunction(Ref, {
 				elementName = "TIMED_OPTION_LIST_ITEM",

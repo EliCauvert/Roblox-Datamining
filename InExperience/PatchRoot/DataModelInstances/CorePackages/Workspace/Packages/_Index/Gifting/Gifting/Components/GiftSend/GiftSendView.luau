@@ -9,7 +9,7 @@ local Button = FoundationModule.Button
 local View = FoundationModule.View
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
-return ReactModule.memo(function(p1) --[[ Line: 39 | Named "GiftSendView" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), GiftStateViewModule (copy), View (copy), GiftAllowanceViewModule (copy), UserInfoPanelViewModule (copy), Button (copy), ButtonVariant (copy), GiftSheetLayoutViewModule (copy)
 	local Allowance = p1.allowance
 	local SavingsPresentation = p1.savingsPresentation

@@ -23,12 +23,12 @@ local UseNotificationCardStateModule = require(Context.useNotificationCardState)
 local UseNotificationCardDataModule = require(Context.useNotificationCardData)
 local UseTimeRemainingMapModule = require(Parent.Hooks.useTimeRemainingMap)
 
-local function _(Alert) --[[ Line: 35 ]]
+local function _(Alert)
 	-- upvalues: TypeModule (copy), ButtonType (copy)
 	return if Alert == TypeModule.SENDERButtonStyleEnum.Growth then ButtonType.PrimaryContextual elseif Alert == TypeModule.SENDERButtonStyleEnum.Primary then ButtonType.PrimarySystem elseif Alert == TypeModule.SENDERButtonStyleEnum.Secondary then ButtonType.Secondary elseif Alert == TypeModule.SENDERButtonStyleEnum.Alert then ButtonType.Alert else ButtonType.Secondary
 end
 
-local function v21(List, p1, Callback, UseRefResult) --[[ Line: 49 ]]
+local function v21(List, p1, Callback, UseRefResult)
 	-- upvalues: FoundationFontFaceMigration (copy), UseTokensFunction (copy), UseNotificationCardDataModule (copy), GetTimerFromCardDataFunction (copy), UseTimeRemainingMapModule (copy), TypeModule (copy), ButtonType (copy)
 	local UseTokensResult = if FoundationFontFaceMigration then UseTokensFunction() else nil
 	local UseNotificationCardDataModuleResult = UseNotificationCardDataModule()
@@ -51,7 +51,7 @@ local function v21(List, p1, Callback, UseRefResult) --[[ Line: 49 ]]
 				props = {
 					text = if value1 and value1.timer and value1.timer.showTimeOnElement then `{value1.label.text} ({UseTimeRemainingMapModuleResult[value1.timer.showTimeOnElement]}{p1.secondsAbbreviated})` else value1 and value1.label and value1.label.text or "",
 					fontStyle = if FoundationFontFaceMigration then UseTokensResult.Typography.TitleLarge else nil,
-					onActivated = function() --[[ Line: 85 ]]
+					onActivated = function()
 						-- upvalues: Callback (copy), value1 (copy)
 						if Callback then
 							Callback(value1)
@@ -65,7 +65,7 @@ local function v21(List, p1, Callback, UseRefResult) --[[ Line: 49 ]]
 	return List1
 end
 
-return function(p2) --[[ Line: 103 ]]
+return function(p2)
 	-- upvalues: UseNotificationCardStateModule (copy), UseNotificationCardDataModule (copy), UseLocalizationFunction (copy), ReactModule (copy), UseFocusGuiObjectFunction (copy), v21 (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), ButtonStack (copy), DefaultButtonHeight (copy), DefaultContentPadding (copy)
 	local Button = UseNotificationCardStateModule("button")
 	local HandleActions = UseNotificationCardDataModule().handleActions
@@ -75,7 +75,7 @@ return function(p2) --[[ Line: 103 ]]
 	local ShouldAutoFocus = p2.shouldAutoFocus
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
-	ReactModule.useEffect(function() --[[ Line: 116 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ShouldAutoFocus (copy), UseRefResult (copy), UseFocusGuiObjectResult (copy)
 		if not ShouldAutoFocus then return end
 		local Current = UseRefResult.current
@@ -83,7 +83,7 @@ return function(p2) --[[ Line: 103 ]]
 		if not Current then return end
 		UseFocusGuiObjectResult(Current)
 		
-		return function() --[[ Line: 128 ]]
+		return function()
 			-- upvalues: UseFocusGuiObjectResult (upval)
 			UseFocusGuiObjectResult(nil)
 		end

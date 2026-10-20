@@ -3,7 +3,7 @@ local ReactProfilerContextModule = require(script.Parent.ReactProfilerContext)
 local IsReactProfilingEnabledModule = require(script.Parent.isReactProfilingEnabled)
 local Context = ReactModule.createContext(nil)
 
-local function ReactProfiler(p1) --[[ Line: 20 ]]
+local function ReactProfiler(p1)
 	-- upvalues: ReactModule (copy), Context (copy), ReactProfilerContextModule (copy)
 	local UseRefResult = ReactModule.useRef(0)
 	local UseRefResult1 = ReactModule.useRef(0)
@@ -12,7 +12,7 @@ local function ReactProfiler(p1) --[[ Line: 20 ]]
 	
 	return ReactModule.createElement(ReactModule.Profiler, {
 		id = p1.id,
-		onRender = ReactModule.useCallback(function(ProfilerId, _, Duration, _, StartTime, CommitTime) --[[ Line: 30 ]]
+		onRender = ReactModule.useCallback(function(ProfilerId, _, Duration, _, StartTime, CommitTime)
 			-- upvalues: UseContextResult (copy), UseRefResult (copy), UseContextResult1 (copy)
 			if UseContextResult ~= nil then
 				local ExclusiveRenderDurationRef = UseContextResult.exclusiveRenderDurationRef
@@ -31,7 +31,7 @@ local function ReactProfiler(p1) --[[ Line: 20 ]]
 			end
 			UseRefResult.current = 0
 		end, {}),
-		onCommit = ReactModule.useCallback(function(ProfilerId, _, Duration, CommitTime) --[[ Line: 61 ]]
+		onCommit = ReactModule.useCallback(function(ProfilerId, _, Duration, CommitTime)
 			-- upvalues: UseContextResult (copy), UseRefResult1 (copy), UseContextResult1 (copy)
 			if UseContextResult ~= nil then
 				local ExclusiveEffectDurationRef = UseContextResult.exclusiveEffectDurationRef
@@ -51,7 +51,7 @@ local function ReactProfiler(p1) --[[ Line: 20 ]]
 		end, {})
 	}, ReactModule.createElement(Context.Provider, {
 		key = "ExclusiveDurationsContext",
-		value = ReactModule.useMemo(function() --[[ Line: 83 ]]
+		value = ReactModule.useMemo(function()
 			-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
 			return {
 				exclusiveRenderDurationRef = UseRefResult,
@@ -61,7 +61,7 @@ local function ReactProfiler(p1) --[[ Line: 20 ]]
 	}, p1.children))
 end
 
-return function(p1) --[[ Line: 104 ]]
+return function(p1)
 	-- upvalues: IsReactProfilingEnabledModule (copy), ReactModule (copy), ReactProfiler (copy)
 	return if IsReactProfilingEnabledModule then ReactModule.createElement(ReactProfiler, { id = p1.id }, p1.children) else ReactModule.createElement(ReactModule.Fragment, nil, p1.children)
 end

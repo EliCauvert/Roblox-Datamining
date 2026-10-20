@@ -12,11 +12,11 @@ local UseCursorFunction = UIBloxModule.App.SelectionCursor.useCursor
 local PlayerContextualMenuHeaderModule = require(script.Parent.PlayerContextualMenuHeader)
 local FFlagPlayerContextualMenuFitToViewportModule = require(Parent.Flags.FFlagPlayerContextualMenuFitToViewport)
 
-local function noop() --[[ Line: 19 ]] end
+local function noop() end
 
 local config = { width = UDim.new(1, 0) }
 
-local function getCardLayout(JoinResult, UseMemoResult) --[[ Line: 58 ]]
+local function getCardLayout(JoinResult, UseMemoResult)
 	local ScaleReferenceRatio = if JoinResult.scaleReference > 0 then JoinResult.scaleReference / 100 else 1
 	local ContainerRatio = JoinResult.container / ScaleReferenceRatio
 	local ContentRatio = JoinResult.content / ScaleReferenceRatio
@@ -32,9 +32,9 @@ local function getCardLayout(JoinResult, UseMemoResult) --[[ Line: 58 ]]
 	}
 end
 
-local function useFitToViewport(ViewportMargin, CornerRadius, MinScrollHeight) --[[ Line: 78 ]]
+local function useFitToViewport(ViewportMargin, CornerRadius, MinScrollHeight)
 	-- upvalues: ReactModule (copy), DashModule (copy), getCardLayout (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 79 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ViewportMargin (copy), CornerRadius (copy), MinScrollHeight (copy)
 		return {
 			viewportMargin = ViewportMargin,
@@ -44,15 +44,15 @@ local function useFitToViewport(ViewportMargin, CornerRadius, MinScrollHeight) -
 	end, { ViewportMargin, CornerRadius, MinScrollHeight })
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding({ container = 0, content = 0, scaleReference = 0 })
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 96 ]]
+	local UseResult = ReactModule.useCallback(function(p1)
 		-- upvalues: DashModule (upval), UseBindingResult (copy), UseBindingResult2 (copy), UseStateResult2 (copy), getCardLayout (upval), UseMemoResult (copy)
 		local JoinResult = DashModule.join(UseBindingResult:getValue(), p1)
 		UseBindingResult2(JoinResult)
 		UseStateResult2(getCardLayout(JoinResult, UseMemoResult).isOverflowing)
 	end, { UseBindingResult, UseMemoResult })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 114 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseBindingResult (copy), getCardLayout (upval), UseMemoResult (copy)
-		return UseBindingResult:map(function(p1) --[[ Line: 115 ]]
+		return UseBindingResult:map(function(p1)
 			-- upvalues: getCardLayout (upval), UseMemoResult (upval)
 			return (getCardLayout(p1, UseMemoResult))
 		end)
@@ -60,44 +60,44 @@ local function useFitToViewport(ViewportMargin, CornerRadius, MinScrollHeight) -
 	
 	return {
 		isOverflowing = UseStateResult,
-		automaticSize = ReactModule.useMemo(function() --[[ Line: 121 ]]
+		automaticSize = ReactModule.useMemo(function()
 			-- upvalues: UseMemoResult1 (copy)
-			return UseMemoResult1:map(function(p1) --[[ Line: 122 ]]
+			return UseMemoResult1:map(function(p1)
 				return if p1.isContentMeasured then Enum.AutomaticSize.None else Enum.AutomaticSize.Y
 			end)
 		end, { UseMemoResult1 }),
-		scrollViewSize = ReactModule.useMemo(function() --[[ Line: 127 ]]
+		scrollViewSize = ReactModule.useMemo(function()
 			-- upvalues: UseMemoResult1 (copy)
-			return UseMemoResult1:map(function(CardLayout): UDim2 --[[ Line: 128 ]]
+			return UseMemoResult1:map(function(CardLayout): UDim2
 				return UDim2.new(1, 0, 0, if CardLayout.isContentMeasured then CardLayout.height - CardLayout.inset * 2 else 0)
 			end)
 		end, { UseMemoResult1 }),
-		inset = ReactModule.useMemo(function() --[[ Line: 133 ]]
+		inset = ReactModule.useMemo(function()
 			-- upvalues: UseMemoResult1 (copy)
-			return UseMemoResult1:map(function(p1): UDim --[[ Line: 134 ]]
+			return UseMemoResult1:map(function(p1): UDim
 				return UDim.new(0, p1.inset)
 			end)
 		end, { UseMemoResult1 }),
-		onContainerAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 102 ]]
+		onContainerAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
 			-- upvalues: UseResult (copy)
 			UseResult({ container = Frame.AbsoluteSize.Y })
 		end, { UseResult }),
-		onContentAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 106 ]]
+		onContentAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
 			-- upvalues: UseResult (copy)
 			UseResult({ content = Frame.AbsoluteSize.Y })
 		end, { UseResult }),
-		onScaleReferenceAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 110 ]]
+		onScaleReferenceAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
 			-- upvalues: UseResult (copy)
 			UseResult({ scaleReference = Frame.AbsoluteSize.Y })
 		end, { UseResult })
 	}
 end
 
-return function(p1) --[[ Line: 159 ]]
+return function(p1)
 	-- upvalues: DashModule (copy), config (copy), UseCursorFunction (copy), UseDesignTokensFunction (copy), ReactModule (copy), FFlagPlayerContextualMenuFitToViewportModule (copy), useFitToViewport (copy), PlayerContextualMenuHeaderModule (copy), BaseMenu (copy), ScrollView (copy), View (copy), noop (copy)
 	local JoinResult = DashModule.join(config, p1)
 	local UseCursorResult = UseCursorFunction()
-	local UseDesignTokensResult = UseDesignTokensFunction(function(p2) --[[ Line: 162 ]]
+	local UseDesignTokensResult = UseDesignTokensFunction(function(p2)
 		return {
 			overlayBackgroundColor3 = p2.Color.Common.Scrim.Color3,
 			overlayBackgroundTransparency = p2.Color.Common.Scrim.Transparency,
@@ -110,7 +110,7 @@ return function(p1) --[[ Line: 159 ]]
 	end)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
 	local UseFitToViewportResult = if FFlagPlayerContextualMenuFitToViewportModule then useFitToViewport(UseDesignTokensResult.viewportMargin, UseDesignTokensResult.menuCornerRadius, UseDesignTokensResult.minScrollHeight) else nil
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 183 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: ReactModule (upval), PlayerContextualMenuHeaderModule (upval), DashModule (upval), JoinResult (copy), UseStateResult2 (copy)
 		return ReactModule.createElement(PlayerContextualMenuHeaderModule, DashModule.join(JoinResult.headerProps, { onHeaderHeightChanged = UseStateResult2 }))
 	end, { JoinResult.headerProps })

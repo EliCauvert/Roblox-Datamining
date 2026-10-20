@@ -7,7 +7,7 @@ local TooltipModule = require(AvatarExperienceControlBar.Components.Tooltip)
 local _ = require(AvatarExperienceControlBar.ControlBarTypes)
 local ImageItemModule = require(script.Parent.ImageItem)
 
-return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 15 | Named "ImageItemWithTooltip" ]]
+return ReactModule.forwardRef(function(Frame: Frame, Ref)
 	-- upvalues: FocusNavigationUtilsModule (copy), ReactModule (copy), TooltipModule (copy), ImageItemModule (copy), FoundationModule (copy)
 	local UseRegistryEntryResult = FocusNavigationUtilsModule.FocusNavigableSurfaceRegistry.useRegistryEntry(FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum.Auxiliary)
 	local Copy = table.clone(Frame.toolTipConfig)

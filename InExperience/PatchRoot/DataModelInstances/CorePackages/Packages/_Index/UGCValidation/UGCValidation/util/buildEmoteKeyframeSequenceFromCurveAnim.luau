@@ -1,6 +1,6 @@
 ﻿local CurveAnimationHierarchyUtilsModule = require(script.Parent.Parent.util.CurveAnimationHierarchyUtils)
 
-local function hasFloatCurveKeys(Position): boolean --[[ Line: 33 ]]
+local function hasFloatCurveKeys(Position): boolean
 	for _, FloatCurve in Position:GetChildren() do
 		if FloatCurve:IsA("FloatCurve") and #FloatCurve:GetKeys() > 0 then
 			return true
@@ -9,12 +9,12 @@ local function hasFloatCurveKeys(Position): boolean --[[ Line: 33 ]]
 	return false
 end
 
-local function _(Object) --[[ Line: 42 | Named "rotationCurveHasKeys" ]]
+local function _(Object)
 	-- upvalues: hasFloatCurveKeys (copy)
 	return if Object:IsA("EulerRotationCurve") then hasFloatCurveKeys(Object) elseif Object:IsA("RotationCurve") then Object:GetNumberOfKeys() > 0 else false
 end
 
-local function folderHasTracks(Object) --[[ Line: 51 ]]
+local function folderHasTracks(Object)
 	-- upvalues: hasFloatCurveKeys (copy)
 	local Position = Object:FindFirstChild("Position")
 	local Rotation = Object:FindFirstChild("Rotation")
@@ -39,7 +39,7 @@ local function folderHasTracks(Object) --[[ Line: 51 ]]
 	return Flag
 end
 
-local function subtreeHasTracks(Folder): boolean --[[ Line: 61 ]]
+local function subtreeHasTracks(Folder): boolean
 	-- upvalues: folderHasTracks (copy)
 	if folderHasTracks(Folder) then
 		return true
@@ -52,7 +52,7 @@ local function subtreeHasTracks(Folder): boolean --[[ Line: 61 ]]
 	return false
 end
 
-local _ = function(Object) --[[ Line: 73 | Named "getFolderRoot" ]]
+local _ = function(Object)
 	for _, Folder in Object:GetChildren() do
 		if Folder:IsA("Folder") then
 			return Folder
@@ -61,7 +61,7 @@ local _ = function(Object) --[[ Line: 73 | Named "getFolderRoot" ]]
 	return nil
 end
 
-local function getAnimLength(Object) --[[ Line: 82 ]]
+local function getAnimLength(Object)
 	local Time = 0
 	
 	for _, descendant in Object:GetDescendants() do
@@ -91,7 +91,7 @@ local function getAnimLength(Object) --[[ Line: 82 ]]
 	return Time
 end
 
-local function samplePosition(Object, Time) --[[ Line: 104 ]]
+local function samplePosition(Object, Time)
 	local Position = Object:FindFirstChild("Position")
 	
 	if Position and Position:IsA("Vector3Curve") then
@@ -105,13 +105,13 @@ local function samplePosition(Object, Time) --[[ Line: 104 ]]
 	end
 end
 
-local function sampleRotation(Object, p1) --[[ Line: 119 ]]
+local function sampleRotation(Object, p1)
 	local Rotation = Object:FindFirstChild("Rotation")
 	
 	return if Rotation then if Rotation:IsA("EulerRotationCurve") then Rotation:GetRotationAtTime(p1) elseif Rotation:IsA("RotationCurve") then Rotation:GetRotationAtTime(p1) else CFrame.new() else CFrame.new()
 end
 
-local function buildPoseAtTime(Folder, Smallest, p1) --[[ Line: 134 ]]
+local function buildPoseAtTime(Folder, Smallest, p1)
 	-- upvalues: samplePosition (copy), sampleRotation (copy), CurveAnimationHierarchyUtilsModule (copy), subtreeHasTracks (copy), buildPoseAtTime (copy)
 	local Pose = Instance.new("Pose")
 	Pose.Name = Folder.Name
@@ -142,7 +142,7 @@ local function buildPoseAtTime(Folder, Smallest, p1) --[[ Line: 134 ]]
 	return Pose
 end
 
-return function(Object, p2) --[[ Line: 179 | Named "buildEmoteKeyframeSequenceFromCurveAnim" ]]
+return function(Object, p2)
 	-- upvalues: getAnimLength (copy), buildPoseAtTime (copy)
 	local P14 = p2 or 0.041666666666666664
 	local v1 = nil

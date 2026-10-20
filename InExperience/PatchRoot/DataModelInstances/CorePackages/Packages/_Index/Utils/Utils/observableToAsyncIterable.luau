@@ -1,13 +1,13 @@
 ﻿local Boolean = require((nil).LuauPolyfill).Boolean
 
 return {
-	observableToAsyncIterable = function(p1) --[[ Line: 15 ]]
+	observableToAsyncIterable = function(p1)
 		-- upvalues: Boolean (copy)
 		local List = {}
 		local List1 = {}
 		local Flag = true
 		
-		local function pushValue(Value) --[[ Line: 19 ]]
+		local function pushValue(Value)
 			-- upvalues: List (copy), List1 (copy)
 			if List.length == 0 then
 				table.insert(List1, { done = false, value = Value })
@@ -18,7 +18,7 @@ return {
 			end
 		end
 		
-		local function pushError(p2) --[[ Line: 30 ]]
+		local function pushError(p2)
 			-- upvalues: List (copy), List1 (copy)
 			if List.length == 0 then
 				table.insert(List1, { done = false, value = { errors = { p2 } } })
@@ -29,7 +29,7 @@ return {
 			end
 		end
 		
-		local function pushDone() --[[ Line: 41 ]]
+		local function pushDone()
 			-- upvalues: List (copy), List1 (copy)
 			if List.length == 0 then
 				table.insert(List1, { done = true })
@@ -40,9 +40,9 @@ return {
 			end
 		end
 		
-		local function _() --[[ Line: 49 | Named "pullValue" ]]
+		local function _()
 			-- upvalues: List1 (copy), List (copy)
-			return Promise.new(function(Callback: (any) -> ()) --[[ Line: 50 ]]
+			return Promise.new(function(Callback: (any) -> ())
 				-- upvalues: List1 (upval), List (upval)
 				if List1.length == 0 then
 					table.insert(List, Callback)
@@ -55,21 +55,21 @@ return {
 		end
 		
 		local SubscribeResult = p1:subscribe({
-			next = function(_, p2) --[[ Line: 60 ]]
+			next = function(_, p2)
 				-- upvalues: pushValue (copy)
 				pushValue(p2)
 			end,
-			error = function(_, p2) --[[ Line: 63 ]]
+			error = function(_, p2)
 				-- upvalues: pushError (copy)
 				pushError(p2)
 			end,
-			complete = function(_) --[[ Line: 66 ]]
+			complete = function(_)
 				-- upvalues: pushDone (copy)
 				pushDone()
 			end
 		})
 		
-		local function emptyQueue() --[[ Line: 70 ]]
+		local function emptyQueue()
 			-- upvalues: Boolean (upval), Flag (ref), SubscribeResult (copy), List (copy), List1 (copy)
 			if Boolean.toJSBoolean(Flag) then
 				Flag = false
@@ -84,9 +84,9 @@ return {
 		end
 		
 		return {
-			next = function(p2) --[[ Line: 82 ]]
+			next = function(p2)
 				-- upvalues: Boolean (upval), Flag (ref), List1 (copy), List (copy)
-				return if Boolean.toJSBoolean(Flag) then Promise.new(function(Callback: (any) -> ()) --[[ Line: 50 ]]
+				return if Boolean.toJSBoolean(Flag) then Promise.new(function(Callback: (any) -> ())
 					-- upvalues: List1 (upval), List (upval)
 					if List1.length == 0 then
 						table.insert(List, Callback)
@@ -97,19 +97,19 @@ return {
 					end
 				end) else p2["return"]()
 			end,
-			["return"] = function(_) --[[ Line: 86 ]]
+			["return"] = function(_)
 				-- upvalues: emptyQueue (copy)
 				emptyQueue()
 				
 				return Promise.resolve({ value = nil, done = true })
 			end,
-			throw = function(_, p2) --[[ Line: 90 ]]
+			throw = function(_, p2)
 				-- upvalues: emptyQueue (copy)
 				emptyQueue()
 				
 				return Promise.reject(p2)
 			end,
-			[tostring(Symbol.asyncIterator)] = function(p2) --[[ Line: 94 ]]
+			[tostring(Symbol.asyncIterator)] = function(p2)
 				return p2
 			end
 		}

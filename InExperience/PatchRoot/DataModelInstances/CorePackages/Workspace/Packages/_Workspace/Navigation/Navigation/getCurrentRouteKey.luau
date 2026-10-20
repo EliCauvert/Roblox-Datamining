@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.types)
 local GetCurrentRouteStateModule = require(script.Parent.getCurrentRouteState)
 
-return function(p1) --[[ Line: 7 | Named "getCurrentRouteKey" ]]
+return function(p1)
 	-- upvalues: GetCurrentRouteStateModule (copy)
 	local CurrentRouteStateModule = GetCurrentRouteStateModule(p1)
 	

@@ -14,7 +14,7 @@ local config = {
 }
 local config1 = { query = "", pages = {} }
 
-local function normalizeQuery(Text: string, p1): string --[[ Line: 69 ]]
+local function normalizeQuery(Text: string, p1): string
 	if not p1 or Text == nil then
 		return ""
 	end
@@ -34,33 +34,33 @@ local function normalizeQuery(Text: string, p1): string --[[ Line: 69 ]]
 	return Match
 end
 
-return function(p1, Enabled) --[[ Line: 90 | Named "useConversationSearch" ]]
+return function(p1, Enabled)
 	-- upvalues: GetConversationSearchDataHydrationModule (copy), GetConversationStoreModule (copy), normalizeQuery (copy), ReactModule (copy), config1 (copy), SignalsReactModule (copy), SignalsModule (copy), config (copy)
 	local IsEnabled = Enabled ~= false
 	local ConversationSearchDataHydrationModule = GetConversationSearchDataHydrationModule(false)
 	local ConversationStoreModule = GetConversationStoreModule(false)
 	local NormalizeQueryResult = normalizeQuery(p1, IsEnabled)
 	local UseStateResult, UseStateResult2 = ReactModule.useState("")
-	ReactModule.useEffect(function() --[[ Line: 99 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: NormalizeQueryResult (copy), UseStateResult2 (copy)
 		if NormalizeQueryResult == "" then
 			UseStateResult2("")
 			
 			return
 		end
-		local DelayedThread = task.delay(0.15, function() --[[ Line: 106 ]]
+		local DelayedThread = task.delay(0.15, function()
 			-- upvalues: UseStateResult2 (upval), NormalizeQueryResult (upval)
 			UseStateResult2(NormalizeQueryResult)
 		end)
 		
-		return function() --[[ Line: 110 ]]
+		return function()
 			-- upvalues: DelayedThread (copy)
 			task.cancel(DelayedThread)
 		end
 	end, { NormalizeQueryResult })
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(config1)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(ConversationSearchDataHydrationModule.getInvalidationGeneration)
-	ReactModule.useEffect(function() --[[ Line: 118 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseStateResult2_1 (copy), config1 (upval), ConversationSearchDataHydrationModule (copy)
 		if UseStateResult == "" then
 			UseStateResult2_1(config1)
@@ -78,7 +78,7 @@ return function(p1, Enabled) --[[ Line: 90 | Named "useConversationSearch" ]]
 		end
 	end, { UseStateResult, ConversationSearchDataHydrationModule })
 	local UseRefResult = ReactModule.useRef(UseSignalStateResult)
-	ReactModule.useEffect(function() --[[ Line: 135 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseSignalStateResult (copy), UseStateResult1 (copy), ConversationSearchDataHydrationModule (copy)
 		if UseRefResult.current == UseSignalStateResult then return end
 		UseRefResult.current = UseSignalStateResult
@@ -91,11 +91,11 @@ return function(p1, Enabled) --[[ Line: 90 | Named "useConversationSearch" ]]
 		ConversationSearchDataHydrationModule,
 		UseSignalStateResult
 	})
-	local UseSignalStateResult1 = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 176 ]]
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), ConversationStoreModule (copy), UseStateResult1 (copy), config (upval)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 177 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: ConversationStoreModule (upval), UseStateResult1 (upval), config (upval)
-			local function collectItems(Pages) --[[ Line: 178 ]]
+			local function collectItems(Pages)
 				-- upvalues: p2 (copy), ConversationStoreModule (upval)
 				local List = {}
 				local t = {}
@@ -152,7 +152,7 @@ return function(p1, Enabled) --[[ Line: 90 | Named "useConversationSearch" ]]
 		hasError = UseSignalStateResult1.status == "Failed",
 		hasSearched = UseSignalStateResult1.query ~= "",
 		nextCursor = UseSignalStateResult1.nextCursor,
-		loadNext = ReactModule.useCallback(function() --[[ Line: 145 ]]
+		loadNext = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult1 (copy), ConversationSearchDataHydrationModule (copy), UseStateResult2_1 (copy)
 			local Pages = UseStateResult1.pages
 			local Page = Pages[#Pages]
@@ -166,7 +166,7 @@ return function(p1, Enabled) --[[ Line: 90 | Named "useConversationSearch" ]]
 			local Page1 = ConversationSearchDataHydrationModule.fetchPage(UseStateResult1.query, NextCursor)
 			
 			if Page1 ~= nil then
-				UseStateResult2_1(function(p3) --[[ Line: 166 ]]
+				UseStateResult2_1(function(p3)
 					-- upvalues: UseStateResult1 (upval), Page1 (copy), NextCursor (copy)
 					if p3.query == UseStateResult1.query then
 						local Copy = table.clone(p3.pages)

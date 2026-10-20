@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local FFlagSduiDividerThemeAwareStroke = require(Parent.SharedFlags).FFlagSduiDividerThemeAwareStroke
 
-return ReactModule.memo(function(p1) --[[ Line: 22 | Named "SduiDivider" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FFlagSduiDividerThemeAwareStroke (copy), UseTokensFunction (copy), ReactModule (copy)
 	local UseTokensResult = if FFlagSduiDividerThemeAwareStroke then UseTokensFunction() else nil
 	local BackgroundColor3 = p1.backgroundColor3

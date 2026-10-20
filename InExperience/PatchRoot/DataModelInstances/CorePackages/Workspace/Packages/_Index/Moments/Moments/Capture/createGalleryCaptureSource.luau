@@ -4,11 +4,11 @@ local SignalsModule = require(Parent.Signals)
 local FFlagMomentsCreationEntryOutcomeModule = require(Moments.Flags.FFlagMomentsCreationEntryOutcome)
 local FFlagMyStatsMediaSelector = require(Parent.SharedFlags).FFlagMyStatsMediaSelector
 
-local function _(Sound: Sound): boolean --[[ Line: 47 | Named "isCaptureEligible" ]]
+local function _(Sound: Sound): boolean
 	return Sound.CaptureType ~= Enum.CaptureType.Video or Sound.TimeLength == nil or Sound.TimeLength >= 1
 end
 
-return function(p1, Callback, p2) --[[ Line: 74 | Named "createGalleryCaptureSource" ]]
+return function(p1, Callback, p2)
 	-- upvalues: SignalsModule (copy), FFlagMyStatsMediaSelector (copy), FFlagMomentsCreationEntryOutcomeModule (copy)
 	local P1 = p1 or game:GetService("CaptureService")
 	local P2 = p2 or {}
@@ -16,7 +16,7 @@ return function(p1, Callback, p2) --[[ Line: 74 | Named "createGalleryCaptureSou
 	local Signal1, Signal2_1 = SignalsModule.createSignal(false)
 	local Pages = nil
 	
-	local function appendCurrentPage() --[[ Line: 90 ]]
+	local function appendCurrentPage()
 		-- upvalues: Signal (copy), Pages (ref), Signal2 (copy), Signal2_1 (copy)
 		local Copy = table.clone(Signal(false))
 		
@@ -29,11 +29,11 @@ return function(p1, Callback, p2) --[[ Line: 74 | Named "createGalleryCaptureSou
 		Signal2_1(Pages.IsFinished == true)
 	end
 	
-	local function _() --[[ Line: 101 | Named "fetchInitial" ]]
+	local function _()
 		-- upvalues: P1 (copy), FFlagMyStatsMediaSelector (upval), P2 (copy), Pages (ref), Signal2_1 (copy), Callback (copy), FFlagMomentsCreationEntryOutcomeModule (upval), appendCurrentPage (copy), Signal (copy)
-		task.spawn(function() --[[ Line: 102 ]]
+		task.spawn(function()
 			-- upvalues: P1 (upval), FFlagMyStatsMediaSelector (upval), P2 (upval), Pages (upval), Signal2_1 (upval), Callback (upval), FFlagMomentsCreationEntryOutcomeModule (upval), appendCurrentPage (upval), Signal (upval)
-			local Success, Result = pcall(function() --[[ Line: 103 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: P1 (upval), FFlagMyStatsMediaSelector (upval), P2 (upval), Pages (upval)
 				local CapturesFromGalleryAsync, CapturesFromGalleryAsync2 = P1:ReadCapturesFromGalleryAsync(if FFlagMyStatsMediaSelector then P2 else {}, true)
 				Pages = CapturesFromGalleryAsync2
@@ -59,12 +59,12 @@ return function(p1, Callback, p2) --[[ Line: 74 | Named "createGalleryCaptureSou
 		end)
 	end
 	
-	local function fetchMore() --[[ Line: 137 ]]
+	local function fetchMore()
 		-- upvalues: Pages (ref), appendCurrentPage (copy)
 		if Pages ~= nil and Pages.IsFinished ~= true then
-			task.spawn(function() --[[ Line: 141 ]]
+			task.spawn(function()
 				-- upvalues: Pages (upval), appendCurrentPage (upval)
-				if pcall(function() --[[ Line: 142 ]]
+				if pcall(function()
 					-- upvalues: Pages (upval)
 					Pages:AdvanceToNextPageAsync()
 				end) then
@@ -78,9 +78,9 @@ return function(p1, Callback, p2) --[[ Line: 74 | Named "createGalleryCaptureSou
 		end
 	end
 	
-	task.spawn(function() --[[ Line: 102 ]]
+	task.spawn(function()
 		-- upvalues: P1 (copy), FFlagMyStatsMediaSelector (upval), P2 (copy), Pages (ref), Signal2_1 (copy), Callback (copy), FFlagMomentsCreationEntryOutcomeModule (upval), appendCurrentPage (copy), Signal (copy)
-		local Success, Result = pcall(function() --[[ Line: 103 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: P1 (upval), FFlagMyStatsMediaSelector (upval), P2 (upval), Pages (upval)
 			local CapturesFromGalleryAsync, CapturesFromGalleryAsync2 = P1:ReadCapturesFromGalleryAsync(if FFlagMyStatsMediaSelector then P2 else {}, true)
 			Pages = CapturesFromGalleryAsync2

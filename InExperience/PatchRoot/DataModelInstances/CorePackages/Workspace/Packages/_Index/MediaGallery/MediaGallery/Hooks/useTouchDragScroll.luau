@@ -3,12 +3,12 @@ local MediaGallery = script:FindFirstAncestor("MediaGallery")
 local ReactModule = require(MediaGallery.Parent.React)
 local _ = require(MediaGallery.MediaGalleryTypes)
 
-return function(p1, Callback) --[[ Line: 15 | Named "useTouchDragScroll" ]]
+return function(p1, Callback)
 	-- upvalues: ReactModule (copy), UserInputService (copy)
-	ReactModule.useEffect(function() --[[ Line: 19 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UserInputService (upval), p1 (copy), Callback (copy)
 		local Flag = false
-		local TouchStartedConnection = UserInputService.TouchStarted:Connect(function(Touch) --[[ Line: 22 ]]
+		local TouchStartedConnection = UserInputService.TouchStarted:Connect(function(Touch)
 			-- upvalues: p1 (upval), Flag (ref)
 			local Current = p1.current
 			
@@ -21,11 +21,11 @@ return function(p1, Callback) --[[ Line: 15 | Named "useTouchDragScroll" ]]
 				end
 			end
 		end)
-		local TouchEndedConnection = UserInputService.TouchEnded:Connect(function() --[[ Line: 38 ]]
+		local TouchEndedConnection = UserInputService.TouchEnded:Connect(function()
 			-- upvalues: Flag (ref)
 			Flag = false
 		end)
-		local TouchDragConnection = UserInputService.TouchDrag:Connect(function(SwipeDirection) --[[ Line: 42 ]]
+		local TouchDragConnection = UserInputService.TouchDrag:Connect(function(SwipeDirection)
 			-- upvalues: Flag (ref), Callback (upval)
 			if Flag then
 				if SwipeDirection == Enum.SwipeDirection.Right then
@@ -39,7 +39,7 @@ return function(p1, Callback) --[[ Line: 15 | Named "useTouchDragScroll" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 52 ]]
+		return function()
 			-- upvalues: TouchStartedConnection (copy), TouchEndedConnection (copy), TouchDragConnection (copy)
 			TouchStartedConnection:Disconnect()
 			TouchEndedConnection:Disconnect()

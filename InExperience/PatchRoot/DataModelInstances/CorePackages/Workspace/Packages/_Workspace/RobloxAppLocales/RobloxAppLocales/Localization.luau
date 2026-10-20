@@ -3,7 +3,7 @@ local LocalizationContext = require(Parent.Localization).LocalizationContext
 local Signal = require(Parent.AppCommonLib).Signal
 local Locales = game:GetService("CoreGui").RobloxGui.Modules.Common:FindFirstChild("Locales")
 
-local function loadTables(Locale) --[[ Line: 30 ]]
+local function loadTables(Locale)
 	-- upvalues: Locales (copy), LocalizationContext (copy)
 	if not Locales then
 		error("ERROR: Locales tables does not exist")
@@ -23,7 +23,7 @@ end
 local LocalizationModule = {}
 LocalizationModule.__index = LocalizationModule
 
-function LocalizationModule.new(Locale) --[[ Line: 49 ]]
+function LocalizationModule.new(Locale)
 	-- upvalues: Signal (copy), LocalizationContext (copy), loadTables (copy), LocalizationModule (copy)
 	local config = {
 		locale = Locale,
@@ -35,18 +35,18 @@ function LocalizationModule.new(Locale) --[[ Line: 49 ]]
 	return config
 end
 
-function LocalizationModule:SetLocale(Locale) --[[ Line: 59 ]]
+function LocalizationModule:SetLocale(Locale)
 	-- upvalues: loadTables (copy)
 	self.locale = Locale
 	self.localizationContext:addTranslations((loadTables(Locale)))
 	self.changed:fire()
 end
 
-function LocalizationModule:GetLocale() --[[ Line: 66 ]]
+function LocalizationModule:GetLocale()
 	return self.locale
 end
 
-function LocalizationModule:Format(p1, p2) --[[ Line: 70 ]]
+function LocalizationModule:Format(p1, p2)
 	if not p1 then
 		error("ERROR: NO STRING FOR KEY")
 	end

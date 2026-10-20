@@ -54,7 +54,7 @@ if IsInExperienceUIVREnabled then
 	local BottomBarVisibility = VrSpatialUiModule.UIManager.getInstance():getBottomBarVisibility()
 	
 	if BottomBarVisibility and IsSpatialFunction() then
-		NewResult = MappedSignal.new(BottomBarVisibility, function() --[[ Line: 76 ]]
+		NewResult = MappedSignal.new(BottomBarVisibility, function()
 			-- upvalues: BottomBarVisibility (copy)
 			return BottomBarVisibility:get()
 		end)
@@ -63,7 +63,7 @@ end
 local MenuIconContextModule = if FFlagEnableConsoleExpControls then require(ChromeShared.Parent.Parent.TopBar.Components.MenuIconContext) else nil
 local t = {}
 
-function areTooltipsDisplaying(): boolean --[[ Line: 97 ]]
+function areTooltipsDisplaying(): boolean
 	-- upvalues: t (copy)
 	local CurrentTime = tick()
 	
@@ -75,14 +75,14 @@ function areTooltipsDisplaying(): boolean --[[ Line: 97 ]]
 	return false
 end
 
-function logTooltipState(Key, Displaying) --[[ Line: 109 ]]
+function logTooltipState(Key, Displaying)
 	-- upvalues: t (copy)
 	if not t[Key] or t[Key].displaying ~= Displaying then
 		t[Key] = { displaying = Displaying, time = tick() }
 	end
 end
 
-function NotificationBadge(p1) --[[ Line: 129 ]]
+function NotificationBadge(p1)
 	-- upvalues: ReactModule (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), StatusIndicator (copy), StatusIndicatorVariant (copy), FFlagChromeNineDotActivityIndicator (copy), NineDotActivityIndicatorModule (copy)
 	if not p1.integration then
 		return nil
@@ -94,17 +94,17 @@ function NotificationBadge(p1) --[[ Line: 129 ]]
 	UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Notification and Notification:get().value or 0)
 	local UseStateResult
 	UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 141 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Notification (copy), UseStateResult2 (ref), UseBindingResult2 (ref)
 		if not Notification then return end
-		local Connection = Notification:connect(function() --[[ Line: 146 ]]
+		local Connection = Notification:connect(function()
 			-- upvalues: Notification (upval), UseStateResult2 (upval), UseBindingResult2 (upval)
 			local Value = Notification:get().value or 0
 			UseStateResult2(Value > 0)
 			UseBindingResult2(Value)
 		end)
 		
-		return function() --[[ Line: 151 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:disconnect()
 		end
@@ -122,7 +122,7 @@ function NotificationBadge(p1) --[[ Line: 129 ]]
 	end
 	local MinBadgeCount = p1.minBadgeCount or 0
 	local UseStateResult1 = UseStateResult or MinBadgeCount > 0
-	local MapResult = UseBindingResult:map(function(p2: number): number --[[ Line: 172 ]]
+	local MapResult = UseBindingResult:map(function(p2: number): number
 		-- upvalues: MinBadgeCount (copy)
 		return (math.min(math.max(p2, MinBadgeCount), 99))
 	end)
@@ -131,7 +131,7 @@ function NotificationBadge(p1) --[[ Line: 129 ]]
 		BackgroundTransparency = 1,
 		ZIndex = 2,
 		Size = UDim2.fromScale(1, 1),
-		Visible = p1.toggleTransition and p1.toggleTransition:map(function(_): boolean --[[ Line: 179 ]]
+		Visible = p1.toggleTransition and p1.toggleTransition:map(function(_): boolean
 			return true
 		end) or true
 	}, {
@@ -149,7 +149,7 @@ function NotificationBadge(p1) --[[ Line: 129 ]]
 	})
 end
 
-function NotificationIndicator(p1) --[[ Line: 213 ]]
+function NotificationIndicator(p1)
 	-- upvalues: UseObservableValueModule (copy), ServiceModule (copy), ReactModule (copy)
 	local UseObservableValueModuleResult = UseObservableValueModule(ServiceModule:notificationIndicator())
 	p1.setIconVisible(not UseObservableValueModuleResult)
@@ -169,7 +169,7 @@ function NotificationIndicator(p1) --[[ Line: 213 ]]
 	}))
 end
 
-function HighlightCircle(p1) --[[ Line: 232 ]]
+function HighlightCircle(p1)
 	-- upvalues: FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), ReactModule (copy)
 	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -185,7 +185,7 @@ function HighlightCircle(p1) --[[ Line: 232 ]]
 	})
 end
 
-function TooltipButton(p1) --[[ Line: 262 ]]
+function TooltipButton(p1)
 	-- upvalues: FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), ReactModule (copy), UseTimeHysteresisModule (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (ref), UseObservableValueModule (copy), ServiceModule (copy), NewResult (ref), ControlState (copy), ChromeAnalyticsModule (copy), UserInputService (copy), ShouldRejectMultiTouchModule (copy), FFlagEnableConsoleExpControls (copy), MenuIconContextModule (copy), Interactable (copy), FFlagUnibarMenuOpenHamburger (copy), FFlagUnibarMenuOpenSubmenu (copy), UseCursorFunction (copy), FoundationModule (copy), Panel3DInSpatialUI (ref), PanelType (ref), SPATIALTOOLTIPSPACING (ref), TooltipCallout (ref), TooltipOrientation (ref), WithTooltipFunction (copy), CoreGui (copy)
 	local ICONHIGHLIGHTSIZE = nil
 	ICONHIGHLIGHTSIZE = if FFlagTokenizeUnibarConstantsWithStyleProvider then UnibarStyle.use().ICON_HIGHLIGHT_SIZE else ConstantsModule.ICON_HIGHLIGHT_SIZE
@@ -193,9 +193,9 @@ function TooltipButton(p1) --[[ Line: 262 ]]
 	local SecondaryAction = p1.integration.integration.secondaryAction
 	local Draggable = p1.integration.integration.draggable or false
 	local UseRefResult1 = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 278 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy)
-		return function() --[[ Line: 279 ]]
+		return function()
 			-- upvalues: UseRefResult1 (upval)
 			if UseRefResult1.current then
 				UseRefResult1.current:Disconnect()
@@ -223,7 +223,7 @@ function TooltipButton(p1) --[[ Line: 262 ]]
 		Flag = true
 		Draggable = Draggable and not Flag
 	end
-	local UseResult = ReactModule.useCallback(function(Default, Default1) --[[ Line: 317 ]]
+	local UseResult = ReactModule.useCallback(function(Default, Default1)
 		-- upvalues: IsInExperienceUIVREnabled (upval), Flag (ref), ControlState (upval), ServiceModule (upval), p1 (copy), UseTimeHysteresisModuleResult2 (ref), UseTimeHysteresisModuleResult1 (copy), UseTimeHysteresisModuleResult2_2 (copy)
 		if IsInExperienceUIVREnabled and Flag then return end
 		if Default1 == ControlState.Selected and (Default == ControlState.Default or Default == ControlState.Hover) then
@@ -252,7 +252,7 @@ function TooltipButton(p1) --[[ Line: 262 ]]
 		UseTimeHysteresisModuleResult2_2,
 		UseTimeHysteresisModuleResult1
 	})
-	local UseResult1 = ReactModule.useCallback(function(_, Input) --[[ Line: 353 ]]
+	local UseResult1 = ReactModule.useCallback(function(_, Input)
 		-- upvalues: Draggable (ref), UseTimeHysteresisModuleResult2_2 (copy), ChromeAnalyticsModule (upval), p1 (copy), UseRefResult1 (copy), UserInputService (upval), ShouldRejectMultiTouchModule (upval), ServiceModule (upval), ConstantsModule (upval)
 		if not Draggable then return end
 		if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
@@ -261,7 +261,7 @@ function TooltipButton(p1) --[[ Line: 262 ]]
 			ChromeAnalyticsModule.default:onIconTouchBegan(p1.integration.id)
 			
 			if not UseRefResult1.current then
-				UseRefResult1.current = UserInputService.InputChanged:Connect(function(Input1, _) --[[ Line: 366 ]]
+				UseRefResult1.current = UserInputService.InputChanged:Connect(function(Input1, _)
 					-- upvalues: ShouldRejectMultiTouchModule (upval), Input (copy), ServiceModule (upval), p1 (upval), UseRefResult1 (upval), Position (copy), ConstantsModule (upval), ChromeAnalyticsModule (upval)
 					if ShouldRejectMultiTouchModule(Input, Input1) then return end
 					if ServiceModule:isWindowOpen(p1.integration.id) or not UseRefResult1.current then return end
@@ -275,7 +275,7 @@ function TooltipButton(p1) --[[ Line: 262 ]]
 			end
 		end
 	end, { Draggable })
-	local UseResult2 = ReactModule.useCallback(function(_, Input) --[[ Line: 392 ]]
+	local UseResult2 = ReactModule.useCallback(function(_, Input)
 		-- upvalues: Draggable (ref), UseTimeHysteresisModuleResult2_2 (copy), UseRefResult1 (copy), ServiceModule (upval), p1 (copy)
 		if not Draggable then return end
 		if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
@@ -295,7 +295,7 @@ function TooltipButton(p1) --[[ Line: 262 ]]
 	end
 	logTooltipState(p1.integration.id, NoUseTimeHysteresisModuleResult3)
 	local UseContextResult = if FFlagEnableConsoleExpControls then ReactModule.useContext(MenuIconContextModule) else nil
-	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 420 ]]
+	local UseResult3 = ReactModule.useCallback(function(p2)
 		-- upvalues: FFlagEnableConsoleExpControls (upval), ServiceModule (upval), ReactModule (upval), Interactable (upval), ConstantsModule (upval), p1 (copy), ICONHIGHLIGHTSIZE (ref), UseResult (copy), UseRefResult (copy), FFlagUnibarMenuOpenHamburger (upval), FFlagUnibarMenuOpenSubmenu (upval), UseCursorFunction (upval), FoundationModule (upval), NoUseTimeHysteresisModuleResult3 (ref), SecondaryAction (copy), UseContextResult (copy), UseResult1 (copy), UseResult2 (copy), IsInExperienceUIVREnabled (upval), IsSpatial (copy), Flag (ref), UseTimeHysteresisModuleResult2_2 (copy), UseRefResult1 (copy)
 		local Id = if FFlagEnableConsoleExpControls then ServiceModule:menuList():get()[1].id else nil
 		
@@ -308,14 +308,14 @@ function TooltipButton(p1) --[[ Line: 262 ]]
 			onStateChanged = UseResult,
 			ref = UseRefResult,
 			SelectionOrder = if FFlagUnibarMenuOpenHamburger or FFlagUnibarMenuOpenSubmenu then p1.integration.order else 100 - p1.integration.order,
-			Position = p1.isCurrentlyOpenSubMenu:map(function(p3): UDim2 --[[ Line: 438 ]]
+			Position = p1.isCurrentlyOpenSubMenu:map(function(p3): UDim2
 				-- upvalues: FFlagEnableConsoleExpControls (upval)
 				return UDim2.new(0.5, 0, 0.5, if FFlagEnableConsoleExpControls or not p3 then 0 else 1)
 			end),
 			SelectionImageObject = UseCursorFunction(FoundationModule.Enums.CursorType.SkinToneCircle),
 			SelectionGroup = true,
 			SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
-			SelectionBehaviorDown = p1.isCurrentlyOpenSubMenu:map(function(p3) --[[ Line: 444 ]]
+			SelectionBehaviorDown = p1.isCurrentlyOpenSubMenu:map(function(p3)
 				-- upvalues: NoUseTimeHysteresisModuleResult3 (upval), SecondaryAction (upval)
 				return if NoUseTimeHysteresisModuleResult3 and SecondaryAction or p3 then Enum.SelectionBehavior.Escape else Enum.SelectionBehavior.Stop
 			end),
@@ -324,7 +324,7 @@ function TooltipButton(p1) --[[ Line: 262 ]]
 			[ReactModule.Change.AbsoluteSize] = p2,
 			[ReactModule.Event.InputBegan] = UseResult1,
 			[ReactModule.Event.InputEnded] = UseResult2,
-			[ReactModule.Event.Activated] = function() --[[ Line: 458 ]]
+			[ReactModule.Event.Activated] = function()
 				-- upvalues: IsInExperienceUIVREnabled (upval), IsSpatial (upval), Flag (upval), ServiceModule (upval), UseTimeHysteresisModuleResult2_2 (upval), p1 (upval), UseRefResult1 (upval)
 				if IsInExperienceUIVREnabled and IsSpatial then
 					if Flag then return end
@@ -350,13 +350,13 @@ function TooltipButton(p1) --[[ Line: 262 ]]
 		if FFlagEnableConsoleExpControls then UseContextResult.menuIconRef else nil
 	})
 	local UseRefResult2 = ReactModule.useRef(nil)
-	local UseResult4 = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 495 ]]
+	local UseResult4 = ReactModule.useCallback(function(Frame: Frame)
 		-- upvalues: UseRefResult2 (copy), UseTimeHysteresisModuleResult2_1 (copy)
 		local MouseEnterConnection = nil
 		local MouseLeaveConnection = nil
 		local DestroyingConnection = nil
 		
-		local function v100() --[[ Line: 502 ]]
+		local function v100()
 			-- upvalues: MouseEnterConnection (ref), MouseLeaveConnection (ref), DestroyingConnection (ref)
 			if MouseEnterConnection then
 				MouseEnterConnection:disconnect()
@@ -376,15 +376,15 @@ function TooltipButton(p1) --[[ Line: 262 ]]
 			pcall(v100)
 			
 			if Frame then
-				MouseEnterConnection = Frame.MouseEnter:Connect(function() --[[ Line: 520 ]]
+				MouseEnterConnection = Frame.MouseEnter:Connect(function()
 					-- upvalues: UseTimeHysteresisModuleResult2_1 (upval)
 					UseTimeHysteresisModuleResult2_1(true, true)
 				end)
-				MouseLeaveConnection = Frame.MouseLeave:Connect(function() --[[ Line: 523 ]]
+				MouseLeaveConnection = Frame.MouseLeave:Connect(function()
 					-- upvalues: UseTimeHysteresisModuleResult2_1 (upval)
 					UseTimeHysteresisModuleResult2_1(false)
 				end)
-				DestroyingConnection = Frame.Destroying:Connect(function() --[[ Line: 526 ]]
+				DestroyingConnection = Frame.Destroying:Connect(function()
 					-- upvalues: UseTimeHysteresisModuleResult2_1 (upval)
 					UseTimeHysteresisModuleResult2_1(false)
 				end)
@@ -394,7 +394,7 @@ function TooltipButton(p1) --[[ Line: 262 ]]
 	end, { UseTimeHysteresisModuleResult2_1 })
 	local Config = if SecondaryAction then {
 		text = SecondaryAction.label,
-		onStateChanged = function(_, p2) --[[ Line: 537 ]]
+		onStateChanged = function(_, p2)
 			-- upvalues: ControlState (upval), UseStateResult2 (copy)
 			if p2 == ControlState.Selected then
 				UseStateResult2(true)
@@ -404,7 +404,7 @@ function TooltipButton(p1) --[[ Line: 262 ]]
 				UseStateResult2(false)
 			end
 		end,
-		onActivated = function() --[[ Line: 544 ]]
+		onActivated = function()
 			-- upvalues: SecondaryAction (copy), p1 (copy)
 			SecondaryAction.activated(p1.integration)
 		end,
@@ -421,7 +421,7 @@ function TooltipButton(p1) --[[ Line: 262 ]]
 		return ReactModule.createElement(ReactModule.Fragment, nil, {
 			VRSpatialTooltip = if NoUseTimeHysteresisModuleResult3 and Panel3DInSpatialUI then ReactModule.createElement(Panel3DInSpatialUI, {
 				panelType = PanelType.ToolTipsContainer,
-				renderFunction = function(p2) --[[ Line: 570 ]]
+				renderFunction = function(p2)
 					-- upvalues: UseBindingResult (copy), UseBindingResult1 (copy), SPATIALTOOLTIPSPACING (upval), ReactModule (upval), TooltipCallout (upval), p1 (copy), TooltipOrientation (upval), Config (copy), SecondaryAction (copy), UseResult4 (copy)
 					return ReactModule.createElement(TooltipCallout, {
 						distanceOffset = 0,
@@ -436,7 +436,7 @@ function TooltipButton(p1) --[[ Line: 262 ]]
 					})
 				end
 			}) else nil,
-			UseResult3((ReactModule.useCallback(function(Frame: Frame) --[[ Line: 558 ]]
+			UseResult3((ReactModule.useCallback(function(Frame: Frame)
 				-- upvalues: UseBindingResult2 (copy), UseBindingResult2_1 (copy)
 				UseBindingResult2(Frame.AbsolutePosition)
 				UseBindingResult2_1(Frame.AbsoluteSize)
@@ -457,7 +457,7 @@ function TooltipButton(p1) --[[ Line: 262 ]]
 	end
 end
 
-function IconHost(IconHostProps) --[[ Line: 609 ]]
+function IconHost(IconHostProps)
 	-- upvalues: ReactModule (copy), UseStyleFunction (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), UseMappedObservableValueBindingModule (copy), ServiceModule (copy), ChatNotificationBadgeModule (copy), FFlagChromeNineDotActivityIndicator (copy), NineDotNotificationBadgeModule (copy), FFlagEnableConsoleExpControls (copy), FFlagEnableWhatsNew (copy), WhatsNewAnchor (copy)
 	if not IconHostProps.integration or not IconHostProps.integration.component then
 		warn("IconHost has no component to render")
@@ -466,7 +466,7 @@ function IconHost(IconHostProps) --[[ Line: 609 ]]
 	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(true)
 	local BackgroundOnHover = UseStyleFunction().Theme.BackgroundOnHover
 	local ICONCELLWIDTH = if FFlagTokenizeUnibarConstantsWithStyleProvider then UnibarStyle.use().ICON_CELL_WIDTH else ConstantsModule.ICON_CELL_WIDTH
-	local UseMappedObservableValueBindingModuleResult = UseMappedObservableValueBindingModule(ServiceModule:currentSubMenu(), function(Id): boolean --[[ Line: 632 ]]
+	local UseMappedObservableValueBindingModuleResult = UseMappedObservableValueBindingModule(ServiceModule:currentSubMenu(), function(Id): boolean
 		-- upvalues: IconHostProps (copy)
 		return Id == IconHostProps.integration.id
 	end)

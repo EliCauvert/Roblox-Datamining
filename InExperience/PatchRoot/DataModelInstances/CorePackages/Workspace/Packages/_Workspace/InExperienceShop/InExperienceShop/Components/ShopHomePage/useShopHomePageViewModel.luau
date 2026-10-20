@@ -9,14 +9,14 @@ local FFlagEnableShopRobuxBuyTelemetryModule = require(InExperienceShop.Flags.FF
 local _ = require(InExperienceShop.Types)
 local _ = require(script.Parent.ShopHomePageView)
 
-return function(Frame) --[[ Line: 34 | Named "useShopHomePageViewModel" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (copy), Signal (copy), CategorySectionModule (copy), FFlagEnableCategoryLoggingInShopModule (copy), FFlagEnableShopRobuxBuyTelemetryModule (copy)
 	local ItemsPerRow = Frame.itemsPerRow
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 36 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FFlagEnableInExperienceShopUnifiedLoggingModule (upval), Signal (upval)
 		return if FFlagEnableInExperienceShopUnifiedLoggingModule then Signal.new() else nil
 	end, {})
-	local UseResult = ReactModule.useCallback(function(_) --[[ Line: 43 ]]
+	local UseResult = ReactModule.useCallback(function(_)
 		-- upvalues: FFlagEnableInExperienceShopUnifiedLoggingModule (upval), UseMemoResult (copy)
 		if FFlagEnableInExperienceShopUnifiedLoggingModule and UseMemoResult then
 			UseMemoResult:fire()
@@ -25,7 +25,7 @@ return function(Frame) --[[ Line: 34 | Named "useShopHomePageViewModel" ]]
 	
 	return {
 		data = Frame.sections,
-		renderItem = ReactModule.useCallback(function(p1) --[[ Line: 50 ]]
+		renderItem = ReactModule.useCallback(function(p1)
 			-- upvalues: ReactModule (upval), CategorySectionModule (upval), FFlagEnableCategoryLoggingInShopModule (upval), FFlagEnableShopRobuxBuyTelemetryModule (upval), ItemsPerRow (copy), Frame (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (upval), UseMemoResult (copy)
 			local Item = p1.item
 			
@@ -55,7 +55,7 @@ return function(Frame) --[[ Line: 34 | Named "useShopHomePageViewModel" ]]
 			Frame.Visible,
 			UseMemoResult
 		}),
-		keyExtractor = ReactModule.useCallback(function(p1) --[[ Line: 85 ]]
+		keyExtractor = ReactModule.useCallback(function(p1)
 			return p1.id
 		end, {}),
 		LayoutOrder = Frame.LayoutOrder,

@@ -21,7 +21,7 @@ SlidingContainer.validateProps = TModule.strictInterface({
 })
 SlidingContainer.defaultProps = { springOptions = { dampingRatio = 1, frequency = 4 } }
 
-function SlidingContainer.render(p1) --[[ Line: 45 ]]
+function SlidingContainer.render(p1)
 	-- upvalues: RoactModule (copy), SpringAnimatedItemModule (copy), config (copy)
 	local Show = p1.props.show
 	local SlidingDirection = p1.props.slidingDirection
@@ -29,7 +29,7 @@ function SlidingContainer.render(p1) --[[ Line: 45 ]]
 	return RoactModule.createElement(SpringAnimatedItemModule.AnimatedFrame, {
 		springOptions = p1.props.springOptions,
 		animatedValues = { step = if Show then 0 else 1 },
-		mapValuesToProps = function(p2) --[[ Line: 54 ]]
+		mapValuesToProps = function(p2)
 			-- upvalues: config (upval), SlidingDirection (copy)
 			local Entry = config[SlidingDirection]
 			

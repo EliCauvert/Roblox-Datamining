@@ -3,7 +3,7 @@ local _ = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local _ = require(script.Parent.SearchBarView)
 
-return function(Frame) --[[ Line: 24 | Named "useSearchBarViewModel" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy)
 	local ClearFunction = Frame.clear
 	local OnDismissFunction = Frame.onDismiss
@@ -13,7 +13,7 @@ return function(Frame) --[[ Line: 24 | Named "useSearchBarViewModel" ]]
 	local ShouldFocus = Frame.shouldFocus
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 37 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ShouldFocus (copy), UseRefResult (copy)
 		if ShouldFocus and UseRefResult.current then
 			UseRefResult.current.focus()
@@ -22,7 +22,7 @@ return function(Frame) --[[ Line: 24 | Named "useSearchBarViewModel" ]]
 	
 	return {
 		LayoutOrder = Frame.LayoutOrder,
-		onChanged = ReactModule.useCallback(function(p1) --[[ Line: 57 ]]
+		onChanged = ReactModule.useCallback(function(p1)
 			-- upvalues: ClearFunction (copy), UseRefResult1 (copy), OnDismissFunction (copy), SetQueryFunction (copy)
 			if p1 == "" then
 				ClearFunction()
@@ -36,7 +36,7 @@ return function(Frame) --[[ Line: 24 | Named "useSearchBarViewModel" ]]
 				SetQueryFunction(p1)
 			end
 		end, { ClearFunction, OnDismissFunction, SetQueryFunction }),
-		onFocusGained = ReactModule.useCallback(function() --[[ Line: 43 ]]
+		onFocusGained = ReactModule.useCallback(function()
 			-- upvalues: UseRefResult1 (copy), OnFocusGainedFunction (copy)
 			UseRefResult1.current = true
 			
@@ -44,7 +44,7 @@ return function(Frame) --[[ Line: 24 | Named "useSearchBarViewModel" ]]
 				OnFocusGainedFunction()
 			end
 		end, { OnFocusGainedFunction }),
-		onFocusLost = ReactModule.useCallback(function(p1) --[[ Line: 50 ]]
+		onFocusLost = ReactModule.useCallback(function(p1)
 			-- upvalues: UseRefResult1 (copy), OnFocusLostFunction (copy)
 			UseRefResult1.current = false
 			

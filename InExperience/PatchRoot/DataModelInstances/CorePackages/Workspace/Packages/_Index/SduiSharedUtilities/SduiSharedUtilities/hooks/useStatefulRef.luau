@@ -1,10 +1,10 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("SduiSharedUtilities").Parent.React)
 
-return function(Callback) --[[ Line: 5 | Named "useStatefulRef" ]]
+return function(Callback)
 	-- upvalues: ReactModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	
-	return UseStateResult, (ReactModule.useCallback(function(Current) --[[ Line: 7 ]]
+	return UseStateResult, (ReactModule.useCallback(function(Current)
 		-- upvalues: Callback (copy), UseStateResult2 (copy)
 		if typeof(Callback) == "function" then
 			Callback(Current)

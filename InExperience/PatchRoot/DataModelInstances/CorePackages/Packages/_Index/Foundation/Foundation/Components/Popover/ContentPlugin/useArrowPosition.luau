@@ -7,15 +7,15 @@ local RadiusModule = require(Foundation.Enums.Radius)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local PLUGINSHADOWSIZE = if FlagsModule.FoundationPopoverPluginOverlayMeasurement and FlagsModule.FoundationPluginShadowSize then ConstantsModule.PLUGIN_SHADOW_SIZE else ConstantsModule.SHADOW_SIZE
 
-return function(p1, Top, Circle, p2, p3, Frame) --[[ Line: 19 | Named "useArrowPosition" ]]
+return function(p1, Top, Circle, p2, p3, Frame)
 	-- upvalues: UseTokensModule (copy), ReactModule (copy), RadiusModule (copy), PopoverSideModule (copy), PLUGINSHADOWSIZE (copy)
 	local UseTokensModuleResult = UseTokensModule()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 28 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Circle (copy), RadiusModule (upval), UseTokensModuleResult (copy)
 		return if Circle == RadiusModule.XSmall then UseTokensModuleResult.Size.Size_50 elseif Circle == RadiusModule.Small then UseTokensModuleResult.Size.Size_100 elseif Circle == RadiusModule.Medium then UseTokensModuleResult.Size.Size_200 elseif Circle == RadiusModule.Large then UseTokensModuleResult.Size.Size_300 else 0
 	end, { Circle, UseTokensModuleResult })
 	
-	return p1:map(function(Vector): UDim2 --[[ Line: 42 ]]
+	return p1:map(function(Vector): UDim2
 		-- upvalues: UseMemoResult (copy), Circle (copy), RadiusModule (upval), p3 (copy), Top (copy), PopoverSideModule (upval), Frame (copy), p2 (copy), PLUGINSHADOWSIZE (upval)
 		local Offset: number = Vector.X.Offset
 		local Offset1: number = Vector.Y.Offset

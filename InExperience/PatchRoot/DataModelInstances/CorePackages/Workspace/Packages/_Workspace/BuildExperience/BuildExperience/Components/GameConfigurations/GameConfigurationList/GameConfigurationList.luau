@@ -8,12 +8,12 @@ local View = FoundationModule.View
 local IconSize = FoundationModule.Enums.IconSize
 local InputSize = FoundationModule.Enums.InputSize
 
-local function GameConfigurationListItem(Frame: Frame) --[[ Line: 41 ]]
+local function GameConfigurationListItem(Frame: Frame)
 	-- upvalues: ReactModule (copy), Icon (copy), IconSize (copy), List (copy)
 	local Row = Frame.row
 	local IsIsDisabled = Row.isDisabled == true
 	local OnActivatedFunction = Row.onActivated
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 45 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: OnActivatedFunction (copy)
 		if OnActivatedFunction ~= nil then
 			OnActivatedFunction()
@@ -42,7 +42,7 @@ local function GameConfigurationListItem(Frame: Frame) --[[ Line: 41 ]]
 	}, { Item = Element }) else Element
 end
 
-return function(p1) --[[ Line: 86 | Named "GameConfigurationList" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), GameConfigurationListItem (copy), View (copy), Text (copy), List (copy), InputSize (copy)
 	local TestId = p1.testId or "game-configuration-list"
 	
@@ -73,7 +73,7 @@ return function(p1) --[[ Line: 86 | Named "GameConfigurationList" ]]
 			isContained = true,
 			hasDivider = { hasDivider = true, isInset = false },
 			size = InputSize.Medium
-		}, (ReactModule.useMemo(function() --[[ Line: 88 ]]
+		}, (ReactModule.useMemo(function()
 			-- upvalues: p1 (copy), ReactModule (upval), GameConfigurationListItem (upval), TestId (copy)
 			local Elements = {}
 			

@@ -5,11 +5,11 @@ local PcallDeferredModule = require(Parent.util.pcallDeferred)
 local GetFIntUGCValidationVertexDensityThresholdModule = require(Parent.flags.getFIntUGCValidationVertexDensityThreshold)
 local AnalyticsModule = require(Parent.Analytics)
 
-return function(p1, p2, MeshScale) --[[ Line: 11 | Named "validateMaxCubeDensity" ]]
+return function(p1, p2, MeshScale)
 	-- upvalues: PcallDeferredModule (copy), UGCValidationService (copy), AnalyticsModule (copy), GetFIntUGCValidationVertexDensityThresholdModule (copy)
 	local CurrentTime = tick()
 	local IsServer = p2.isServer
-	local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function() --[[ Line: 19 ]]
+	local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function()
 		-- upvalues: UGCValidationService (upval), p1 (copy), MeshScale (copy)
 		return UGCValidationService:GetEditableMeshMaxNearbyVerticesCollisions(p1.editableMesh, MeshScale)
 	end, p2)

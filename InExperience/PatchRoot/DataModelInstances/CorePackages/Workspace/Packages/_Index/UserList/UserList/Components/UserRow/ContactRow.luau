@@ -7,7 +7,7 @@ local BaseRowModule = require(script.Parent.BaseRow)
 local UseContactsDataModule = require(UserList.Hooks.useContactsData)
 local FFlagUserListSurfaceExtensions = require(Parent.SharedFlags).FFlagUserListSurfaceExtensions
 
-return ReactModule.memo(function(p1) --[[ Line: 36 | Named "ContactRow" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseContactsDataModule (copy), ReactModule (copy), BaseRowModule (copy), FFlagUserListSurfaceExtensions (copy)
 	local UseContactsDataModuleResult = UseContactsDataModule(p1.entityId)
 	

@@ -22,23 +22,23 @@ local config = {
 }
 local UseSduiDependenciesModule = require(ServerDrivenUi.System.useSduiDependencies)
 
-return function(p1) --[[ Line: 58 | Named "useSduiContext" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), SduiInstrumentation (copy), UseSduiDependenciesModule (copy), SduiComponentDefinitionsModule (copy), SduiTemplateRegistry (copy), RecordV1RegisteredTemplatesFunction (copy), SduiUsageRecorder (copy), UseSduiDataStoreModule (copy), FFlagLuaAppLayoutParamsInContext (copy), SignalsModule (copy), config (copy), CollectionItemSize (copy), SduiLogger (copy), SduiErrors (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 59 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: SduiInstrumentation (upval)
 		return SduiInstrumentation.new()
 	end, {})
 	UseMemoResult:startTimerFlow("useSduiContext")
 	local UseSduiDependenciesModuleResult = UseSduiDependenciesModule(UseMemoResult)
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 68 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), SduiComponentDefinitionsModule (upval)
 		return p1.componentDefinitions or SduiComponentDefinitionsModule.new()
 	end, { p1.componentDefinitions })
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 72 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: SduiTemplateRegistry (upval), p1 (copy)
 		return SduiTemplateRegistry.new(p1.templates)
 	end, { p1.templates })
-	ReactModule.useEffect(function() --[[ Line: 75 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: RecordV1RegisteredTemplatesFunction (upval), p1 (copy), SduiUsageRecorder (upval)
 		RecordV1RegisteredTemplatesFunction(p1.appPage, p1.templates)
 		SduiUsageRecorder.scheduleFlush()
@@ -47,13 +47,13 @@ return function(p1) --[[ Line: 58 | Named "useSduiContext" ]]
 	local UseResult = nil
 	
 	if FFlagLuaAppLayoutParamsInContext then
-		local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 84 ]]
+		local UseMemoResult3 = ReactModule.useMemo(function()
 			-- upvalues: SignalsModule (upval), config (upval)
 			return SignalsModule.createSignal(config)
 		end, {})
-		UseResult = ReactModule.useCallback(function(p2) --[[ Line: 88 ]]
+		UseResult = ReactModule.useCallback(function(p2)
 			-- upvalues: SignalsModule (upval), p1 (copy), CollectionItemSize (upval), SduiLogger (upval), SduiErrors (upval), UseMemoResult3 (copy)
-			return SignalsModule.createComputed(function(p3) --[[ Line: 89 ]]
+			return SignalsModule.createComputed(function(p3)
 				-- upvalues: p1 (upval), p2 (copy), CollectionItemSize (upval), SduiLogger (upval), SduiErrors (upval), UseMemoResult3 (upval)
 				if p1.pageLayoutConfig then
 					return (p1.pageLayoutConfig[p2] or p1.pageLayoutConfig[CollectionItemSize.Small])(p3)
@@ -67,7 +67,7 @@ return function(p1) --[[ Line: 58 | Named "useSduiContext" ]]
 			end)
 		end, { p1.pageLayoutConfig })
 	end
-	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 106 ]]
+	local UseMemoResult4 = ReactModule.useMemo(function()
 		-- upvalues: UseSduiDependenciesModuleResult (copy), p1 (copy), UseMemoResult1 (copy), UseMemoResult2 (copy), UseSduiDataStoreModuleResult (copy), FFlagLuaAppLayoutParamsInContext (upval), UseResult (ref)
 		local config = {
 			dependencies = UseSduiDependenciesModuleResult,
@@ -79,7 +79,7 @@ return function(p1) --[[ Line: 58 | Named "useSduiContext" ]]
 			getPageLayoutConfig = if FFlagLuaAppLayoutParamsInContext then UseResult else nil
 		}
 		setmetatable(config, {
-			__tostring = function(): string --[[ Line: 118 ]]
+			__tostring = function(): string
 				return "SduiContext"
 			end
 		})

@@ -11,7 +11,7 @@ local IXPNavigationUtils = {
 		Creator = "Creator"
 	}
 }
-local config = { remove = function() --[[ Line: 102 ]] end }
+local config = { remove = function() end }
 local config1 = {
 	[IXPNavigationUtils.ExposureKind.FlagLinked] = "LogFlagLinkedUserLayerExposure",
 	[IXPNavigationUtils.ExposureKind.BrowserTracker] = "LogBrowserTrackerLayerExposure",
@@ -20,11 +20,11 @@ local config1 = {
 }
 local IXPService1 = IXPService
 
-local function _(p1) --[[ Line: 119 | Named "normalizeLayers" ]]
+local function _(p1)
 	return if type(p1) == "string" then { p1 } else p1
 end
 
-local _ = function(List) --[[ Line: 128 | Named "isAnyFlagEnabled" ]]
+local _ = function(List)
 	if List == nil then
 		return true
 	end
@@ -39,7 +39,7 @@ local _ = function(List) --[[ Line: 128 | Named "isAnyFlagEnabled" ]]
 	return false
 end
 
-local function logExposure(List, Kind) --[[ Line: 146 ]]
+local function logExposure(List, Kind)
 	-- upvalues: IXPNavigationUtils (copy), config1 (copy), IXPService1 (ref)
 	local Kind1 = Kind or IXPNavigationUtils.ExposureKind.FlagLinked
 	for _, value in List do
@@ -52,13 +52,13 @@ local function logExposure(List, Kind) --[[ Line: 146 ]]
 	end
 end
 
-function IXPNavigationUtils.createExposureHandler(p1, p2) --[[ Line: 167 ]]
+function IXPNavigationUtils.createExposureHandler(p1, p2)
 	-- upvalues: logExposure (copy)
 	local List = if type(p1) == "string" then { p1 } else p1
 	local Flags = if p2 then p2.flags else nil
 	local Kind = if p2 then p2.kind else nil
 	
-	return function() --[[ Line: 175 ]]
+	return function()
 		-- upvalues: Flags (copy), logExposure (upval), List (copy), Kind (copy)
 		local Flag = nil
 		if Flags == nil then
@@ -81,12 +81,12 @@ function IXPNavigationUtils.createExposureHandler(p1, p2) --[[ Line: 167 ]]
 	end
 end
 
-function IXPNavigationUtils.useExposureOnFocus(p3, p4) --[[ Line: 193 ]]
+function IXPNavigationUtils.useExposureOnFocus(p3, p4)
 	-- upvalues: UseNavigationFunction (copy), ReactModule (copy), IXPNavigationUtils (copy), RoactNavigationModule (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local Flags = if p4 then p4.flags else nil
 	local Kind = if p4 then p4.kind else nil
-	ReactModule.useEffect(function() --[[ Line: 198 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseNavigationResult (copy), Flags (copy), IXPNavigationUtils (upval), p3 (copy), Kind (copy), RoactNavigationModule (upval)
 		if UseNavigationResult then
 			local Flag = nil
@@ -111,7 +111,7 @@ function IXPNavigationUtils.useExposureOnFocus(p3, p4) --[[ Line: 193 ]]
 				if UseNavigationResult.isFocused and UseNavigationResult.isFocused() then
 					Exposure()
 				end
-				return function() --[[ Line: 213 ]]
+				return function()
 					-- upvalues: AddListenerResult (copy)
 					AddListenerResult.remove()
 				end
@@ -121,7 +121,7 @@ function IXPNavigationUtils.useExposureOnFocus(p3, p4) --[[ Line: 193 ]]
 	end, { UseNavigationResult, p3, Flags, Kind })
 end
 
-function IXPNavigationUtils.registerExposureOnFocus(p5, p6, p7) --[[ Line: 231 ]]
+function IXPNavigationUtils.registerExposureOnFocus(p5, p6, p7)
 	-- upvalues: config (copy), RoactNavigationModule (copy), IXPNavigationUtils (copy)
 	if not p5 then
 		return config
@@ -146,12 +146,12 @@ function IXPNavigationUtils.registerExposureOnFocus(p5, p6, p7) --[[ Line: 231 ]
 	return if Flag then p5.addListener(RoactNavigationModule.Events.WillFocus, IXPNavigationUtils.createExposureHandler(p6, p7)) else config
 end
 
-function IXPNavigationUtils.setMocksForTesting(p8) --[[ Line: 251 ]]
+function IXPNavigationUtils.setMocksForTesting(p8)
 	-- upvalues: IXPService1 (ref)
 	IXPService1 = p8 or IXPService1
 end
 
-function IXPNavigationUtils.restoreDefaultsAfterTesting() --[[ Line: 255 ]]
+function IXPNavigationUtils.restoreDefaultsAfterTesting()
 	-- upvalues: IXPService1 (ref), IXPService (copy)
 	IXPService1 = IXPService
 end

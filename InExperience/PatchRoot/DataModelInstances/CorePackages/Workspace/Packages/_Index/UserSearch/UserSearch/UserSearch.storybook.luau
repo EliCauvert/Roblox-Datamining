@@ -18,9 +18,9 @@ local config = {
 }
 local config1 = { language = "en-us" }
 
-local function v11(State) --[[ Line: 44 ]]
+local function v11(State)
 	-- upvalues: RoduxModule (copy)
-	return RoduxModule.Store.new(function() --[[ Line: 45 ]]
+	return RoduxModule.Store.new(function()
 		-- upvalues: State (copy)
 		return State
 	end, {}, { RoduxModule.thunkMiddleware })
@@ -30,16 +30,16 @@ return {
 	name = "UserSearch",
 	storyRoot = UserSearch,
 	roact = RoactModule,
-	mapDefinition = function(p1) --[[ Line: 54 ]]
+	mapDefinition = function(p1)
 		-- upvalues: DashModule (copy), config1 (copy)
 		return DashModule.join(p1, {
 			controls = DashModule.join(config1, p1.controls or {}),
 			state = p1.state or {}
 		})
 	end,
-	mapStory = function(p1) --[[ Line: 61 ]]
+	mapStory = function(p1)
 		-- upvalues: RoactModule (copy), AppStyleProvider (copy), config (copy), RoactRoduxModule (copy), v11 (copy), ApolloClientModule (copy), MockApolloClientFunction (copy), MockLocaleFunction (copy)
-		return function(p2) --[[ Line: 62 ]]
+		return function(p2)
 			-- upvalues: RoactModule (upval), AppStyleProvider (upval), config (upval), RoactRoduxModule (upval), v11 (upval), ApolloClientModule (upval), MockApolloClientFunction (upval), MockLocaleFunction (upval), p1 (copy)
 			return RoactModule.createElement(AppStyleProvider, { style = p2 and config[p2.theme] or config.Default }, {
 				storeProvider = RoactModule.createElement(RoactRoduxModule.StoreProvider, { store = v11(p2.definition.state or {}) }, {

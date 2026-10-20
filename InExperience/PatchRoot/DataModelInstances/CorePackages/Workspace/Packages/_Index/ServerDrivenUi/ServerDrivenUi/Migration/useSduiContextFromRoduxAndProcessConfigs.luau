@@ -13,10 +13,10 @@ local _ = require(Parent.SduiCoreSystem)
 local FFlagLuaAppLayoutParamsInContext = require(Parent.SharedFlags).FFlagLuaAppLayoutParamsInContext
 local FFlagLuaAppUseEffectInSignalPreprocessing = require(Parent.SharedFlags).FFlagLuaAppUseEffectInSignalPreprocessing
 
-return function(AppPage, p1, p2) --[[ Line: 30 | Named "useSduiContextFromRoduxAndProcessConfigs" ]]
+return function(AppPage, p1, p2)
 	-- upvalues: UseSelectorFunction (copy), SduiConfigReducerModule (copy), TutilsModule (copy), UseSduiContextModule (copy), FFlagLuaAppLayoutParamsInContext (copy), FFlagLuaAppUseEffectInSignalPreprocessing (copy), ReactModule (copy), GetSduiFeedStoreModule (copy), GetItemCollectionKeyModule (copy), ProcessCollectionConfigModule (copy)
 	local P2 = p2 or AppPage
-	local UseSelectorResult = UseSelectorFunction(function(p3) --[[ Line: 37 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p3)
 		-- upvalues: SduiConfigReducerModule (upval), P2 (copy)
 		local t = {}
 		local PersonalizationEntry = p3.Personalization[SduiConfigReducerModule.key][P2]
@@ -34,7 +34,7 @@ return function(AppPage, p1, p2) --[[ Line: 30 | Named "useSduiContextFromRoduxA
 		dataUpdatedTimestamp = UseSelectorResult.dataUpdatedTimestamp,
 		pageLayoutConfig = if FFlagLuaAppLayoutParamsInContext then p1 else nil
 	});
-	(if FFlagLuaAppUseEffectInSignalPreprocessing then ReactModule.useEffect else ReactModule.useLayoutEffect)(function() --[[ Line: 59 ]]
+	(if FFlagLuaAppUseEffectInSignalPreprocessing then ReactModule.useEffect else ReactModule.useLayoutEffect)(function()
 		-- upvalues: GetSduiFeedStoreModule (upval), P2 (copy), UseSelectorResult (copy), GetItemCollectionKeyModule (upval), ProcessCollectionConfigModule (upval), UseSduiContextModuleResult (copy)
 		local SduiFeedStoreModule = GetSduiFeedStoreModule(P2)
 		local ItemCollections = {}
@@ -52,7 +52,7 @@ return function(AppPage, p1, p2) --[[ Line: 30 | Named "useSduiContextFromRoduxA
 				dataUpdatedTimestamp = UseSelectorResult.dataUpdatedTimestamp
 			})
 		end
-		return function() --[[ Line: 77 ]] end
+		return function() end
 	end, {
 		UseSduiContextModuleResult,
 		UseSelectorResult.itemCollections,

@@ -10,7 +10,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseEventConnectionFunction = require(Songbird.Parent.ReactUtils).useEventConnection
 local config = { speed = 20, direction = Enum.TextDirection.LeftToRight }
 
-local function _(p1, p2): number --[[ Line: 31 | Named "calculateInstances" ]]
+local function _(p1, p2): number
 	if p1 == 0 then
 		return 2
 	else
@@ -20,7 +20,7 @@ local function _(p1, p2): number --[[ Line: 31 | Named "calculateInstances" ]]
 	end
 end
 
-return function(p1) --[[ Line: 45 | Named "MarqueeScroller" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), UseBindingFunction (copy), UseStateFunction (copy), UseCallbackFunction (copy), ReactModule (copy), FoundationModule (copy), UseEventConnectionFunction (copy), RunService (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseTokensResult = UseTokensFunction()
@@ -30,11 +30,11 @@ return function(p1) --[[ Line: 45 | Named "MarqueeScroller" ]]
 	local UseStateResult, UseStateResult2 = UseStateFunction(Vector2.new(1e999, 1e999))
 	local UseStateResult1, UseStateResult2_1 = UseStateFunction(Vector2.new(1e999, 1e999))
 	local NewX = UseStateResult.X + Padding
-	local UseCallbackResult = UseCallbackFunction(function(Frame) --[[ Line: 57 ]]
+	local UseCallbackResult = UseCallbackFunction(function(Frame)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(Frame.AbsoluteSize)
 	end, {})
-	local UseCallbackResult1 = UseCallbackFunction(function(Frame) --[[ Line: 61 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function(Frame)
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(Frame.AbsoluteSize)
 	end, {})
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 45 | Named "MarqueeScroller" ]]
 		config1.LayoutOrder = i
 		Elements[`Content{i}`] = ReactModule.createElement(FoundationModule.View, config1, JoinResult.children)
 	end
-	UseEventConnectionFunction(RunService.Heartbeat, function(p2) --[[ Line: 76 ]]
+	UseEventConnectionFunction(RunService.Heartbeat, function(p2)
 		-- upvalues: JoinResult (copy), UseBindingResult (copy), NewX (copy), UseBindingResult2 (copy)
 		if JoinResult.speed > 0 then
 			local NewValue = UseBindingResult:getValue() + JoinResult.speed * p2
@@ -80,7 +80,7 @@ return function(p1) --[[ Line: 45 | Named "MarqueeScroller" ]]
 				FillDirection = Enum.FillDirection.Horizontal,
 				Padding = UDim.new(0, Padding)
 			},
-			Position = UseBindingResult:map(function(XOffset: number): UDim2 --[[ Line: 97 ]]
+			Position = UseBindingResult:map(function(XOffset: number): UDim2
 				-- upvalues: IsDirectionMatch (copy)
 				return if IsDirectionMatch then UDim2.new(0, XOffset * -1, 0, 0) else UDim2.new(-1, XOffset, 0, 0)
 			end)

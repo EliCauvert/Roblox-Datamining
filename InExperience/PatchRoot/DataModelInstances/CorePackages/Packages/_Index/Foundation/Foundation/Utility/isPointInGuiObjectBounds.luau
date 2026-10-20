@@ -1,4 +1,4 @@
-﻿return function(Frame: Frame, Vector): boolean --[[ Line: 1 | Named "isPointInGuiObjectBounds" ]]
+﻿return function(Frame: Frame, Vector): boolean
 	if Frame then
 		local AbsolutePosition = Frame.AbsolutePosition
 		local AbsoluteSize = Frame.AbsoluteSize

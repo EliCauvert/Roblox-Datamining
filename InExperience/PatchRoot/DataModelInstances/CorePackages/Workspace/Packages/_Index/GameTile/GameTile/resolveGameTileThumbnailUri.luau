@@ -3,7 +3,7 @@ local FormatExperienceIconModule = require(GameTile.formatExperienceIcon)
 local FormatExperienceThumbnailModule = require(GameTile.formatExperienceThumbnail)
 local ResolveWideAssetIdModule = require(GameTile.resolveWideAssetId)
 
-return function(p1) --[[ Line: 20 | Named "resolveGameTileThumbnailUri" ]]
+return function(p1)
 	-- upvalues: ResolveWideAssetIdModule (copy), FormatExperienceThumbnailModule (copy), FormatExperienceIconModule (copy)
 	if p1.useGridTile then
 		local ResolveWideAssetIdModuleResult = ResolveWideAssetIdModule(p1.perEntryWideAssetId, p1.game, p1.topicId)

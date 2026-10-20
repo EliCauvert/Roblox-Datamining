@@ -8,7 +8,7 @@ local config = {
 	stopObservingOwner = nil,
 	store = require(script.Parent.createCommentsSheetStore)()
 }
-config.stopObservingOwner = SignalsModule.createEffect(function(p1) --[[ Line: 22 ]]
+config.stopObservingOwner = SignalsModule.createEffect(function(p1)
 	-- upvalues: v1 (copy), OwnerGeneration (ref), config (copy), v2 (copy)
 	local OwnerGeneration1 = v1.getOwnerGeneration(p1)
 	
@@ -21,7 +21,7 @@ config.stopObservingOwner = SignalsModule.createEffect(function(p1) --[[ Line: 2
 	end
 end)
 
-return SignalsModule.createComputed(function(_) --[[ Line: 32 ]]
+return SignalsModule.createComputed(function(_)
 	-- upvalues: config (copy)
 	return config.store
 end)

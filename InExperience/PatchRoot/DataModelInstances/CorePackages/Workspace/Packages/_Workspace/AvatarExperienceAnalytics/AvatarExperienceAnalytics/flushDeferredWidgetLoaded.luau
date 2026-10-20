@@ -1,7 +1,7 @@
 ﻿local GetUnifiedDeferredEventStoreModule = require(script.Parent.Store.getUnifiedDeferredEventStore)
 local WIDGETLOADED = require(script.Parent.UnifiedEventLogEnums).MarketplaceUnifiedAction.WIDGET_LOADED
 
-return function() --[[ Line: 6 | Named "flushDeferredWidgetLoaded" ]]
+return function()
 	-- upvalues: GetUnifiedDeferredEventStoreModule (copy), WIDGETLOADED (copy)
 	local UnifiedDeferredEventStoreModule = GetUnifiedDeferredEventStoreModule(false)
 	UnifiedDeferredEventStoreModule.markEntered()

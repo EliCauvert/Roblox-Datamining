@@ -15,7 +15,7 @@ local TelemetryServicePlaySessionInfoEnabledEngineFeature = game:GetEngineFeatur
 local EnableCorescriptExecutionTime = game:DefineFastFlag("EnableCorescriptExecutionTime", false)
 local ScriptPlusExecutionTimeEnabledEngineFeature = game:GetEngineFeature("ScriptPlusExecutionTimeEnabled")
 
-function applicationId() --[[ Line: 22 ]]
+function applicationId()
 	local AppStorageService = game:GetService("AppStorageService")
 	
 	if AppStorageService then
@@ -53,7 +53,7 @@ local Parts = string.split(ReactSchedulingPercentiles)
 local SchedulingProfiler = require(CorePackages.Packages.ReactRoblox).schedulingProfiler
 local ProfilerEventTypes = SchedulingProfiler.profilerEventTypes
 
-local function _(): number --[[ Line: 98 | Named "getCurrentTimeMs" ]]
+local function _(): number
 	return os.clock() * 1000
 end
 
@@ -61,7 +61,7 @@ local DeviceMemoryTier = require(game:GetService("CorePackages").Workspace.Packa
 local Module = {}
 Module.__index = Module
 
-function Module.new(FrameReporter, RootReporter) --[[ Line: 141 ]]
+function Module.new(FrameReporter, RootReporter)
 	-- upvalues: ReactSchedulingTrackerLayoutEffects (copy), ProfilerEventTypes (copy), MutedErrorFunction (copy), Module (copy)
 	return (setmetatable({
 		currentState = "Idle",
@@ -80,7 +80,7 @@ function Module.new(FrameReporter, RootReporter) --[[ Line: 141 ]]
 		},
 		rootPassiveEffectsTime = { tag = "RootPassiveEffectsTime", PassiveEffectsMs = 0 },
 		states = {
-			Idle = function(p1, CommitStart): string? --[[ Line: 165 ]]
+			Idle = function(p1, CommitStart): string?
 				-- upvalues: ProfilerEventTypes (upval), ReactSchedulingTrackerLayoutEffects (upval)
 				if CommitStart == ProfilerEventTypes.RenderStart then
 					p1.timerStartMs = os.clock() * 1000
@@ -109,7 +109,7 @@ function Module.new(FrameReporter, RootReporter) --[[ Line: 141 ]]
 					return nil
 				end
 			end,
-			Render = function(p1, RenderStop): string --[[ Line: 194 ]]
+			Render = function(p1, RenderStop): string
 				-- upvalues: ProfilerEventTypes (upval), MutedErrorFunction (upval)
 				if RenderStop == ProfilerEventTypes.RenderYield or RenderStop == ProfilerEventTypes.RenderStop then
 					local ClockTimeDelta = os.clock() * 1000 - p1.timerStartMs
@@ -124,7 +124,7 @@ function Module.new(FrameReporter, RootReporter) --[[ Line: 141 ]]
 					return "Idle"
 				end
 			end,
-			Commit = function(p1, CommitStop, p2): string? --[[ Line: 206 ]]
+			Commit = function(p1, CommitStop, p2): string?
 				-- upvalues: ProfilerEventTypes (upval), ReactSchedulingTrackerLayoutEffects (upval), MutedErrorFunction (upval)
 				if CommitStop == ProfilerEventTypes.CommitStop then
 					if p1.renderLevel > 0 then
@@ -171,7 +171,7 @@ function Module.new(FrameReporter, RootReporter) --[[ Line: 141 ]]
 					return nil
 				end
 			end,
-			PassiveEffects = function(p1, PassiveEffectsStop, p2): string --[[ Line: 253 ]]
+			PassiveEffects = function(p1, PassiveEffectsStop, p2): string
 				-- upvalues: ProfilerEventTypes (upval), MutedErrorFunction (upval)
 				if PassiveEffectsStop == ProfilerEventTypes.PassiveEffectsStop then
 					local ClockTimeDelta = os.clock() * 1000 - p1.timerStartMs
@@ -191,7 +191,7 @@ function Module.new(FrameReporter, RootReporter) --[[ Line: 141 ]]
 	}, Module))
 end
 
-function Module:transition(p1, p2) --[[ Line: 276 ]]
+function Module:transition(p1, p2)
 	local CurrentState = self.states[self.currentState](self, p1, p2)
 	
 	if CurrentState then
@@ -290,7 +290,7 @@ local config6 = {
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(Context) --[[ Line: 464 ]]
+function Module1.new(Context)
 	-- upvalues: KllSketch (copy), ReactSchedulingKllSketchMaxSize (copy), DebugReactSchedulingEnableErrorEvents (copy), Module1 (copy), Module (copy), Flag1 (ref)
 	local t = {}
 	local t1 = {}
@@ -346,10 +346,10 @@ function Module1.new(Context) --[[ Line: 464 ]]
 		},
 		context = Context
 	}, Module1)
-	self.schedulerStateMachine = Module.new(function(p1) --[[ Line: 519 ]]
+	self.schedulerStateMachine = Module.new(function(p1)
 		-- upvalues: self (copy)
 		self:addToFrame(p1)
-	end, function(p1, p2) --[[ Line: 521 ]]
+	end, function(p1, p2)
 		-- upvalues: self (copy), Flag1 (upval)
 		self:trackSessionSketches(p1, p2)
 		
@@ -361,15 +361,15 @@ function Module1.new(Context) --[[ Line: 464 ]]
 	return self
 end
 
-function Module1:start() --[[ Line: 531 ]]
+function Module1:start()
 	-- upvalues: SchedulingProfiler (copy), RunService (copy), ReactSchedulingTrackerPeriodMs (copy), Flag (ref)
 	self.started = true
 	self:resetState()
-	SchedulingProfiler.registerProfilerEventCallback(function(p1, p2) --[[ Line: 535 ]]
+	SchedulingProfiler.registerProfilerEventCallback(function(p1, p2)
 		-- upvalues: self (copy)
 		self.schedulerStateMachine:transition(p1, p2)
 	end)
-	RunService.Heartbeat:Connect(function(DeltaTime: number) --[[ Line: 539 ]]
+	RunService.Heartbeat:Connect(function(DeltaTime: number)
 		-- upvalues: self (copy), ReactSchedulingTrackerPeriodMs (upval), Flag (upval)
 		self:processFrame(DeltaTime * 1000)
 		self.reactFrameTimeMs = 0
@@ -383,7 +383,7 @@ function Module1:start() --[[ Line: 531 ]]
 	end)
 end
 
-function Module1:resetState() --[[ Line: 554 ]]
+function Module1:resetState()
 	self.periodStartMs = os.clock() * 1000
 	self.frameMetrics = {
 		totalFrameCount = 0,
@@ -398,7 +398,7 @@ function Module1:resetState() --[[ Line: 554 ]]
 	self.rootsMetrics = {}
 end
 
-function Module1:getRootName(p1) --[[ Line: 571 ]]
+function Module1:getRootName(p1)
 	local Name = "Unknown"
 	
 	if p1 then
@@ -420,11 +420,11 @@ function Module1:getRootName(p1) --[[ Line: 571 ]]
 	return Name
 end
 
-function Module1:addToFrame(p2) --[[ Line: 588 ]]
+function Module1:addToFrame(p2)
 	self.reactFrameTimeMs += p2
 end
 
-function Module1:trackSessionSketches(RootUpdateTime, p2) --[[ Line: 592 ]]
+function Module1:trackSessionSketches(RootUpdateTime, p2)
 	-- upvalues: DebugReactSchedulingEnableErrorEvents (copy), KllSketch (copy), ReactSchedulingKllSketchMaxSize (copy)
 	if not self.sessionMetrics then return end
 	local RootName = self:getRootName(p2)
@@ -486,7 +486,7 @@ function Module1:trackSessionSketches(RootUpdateTime, p2) --[[ Line: 592 ]]
 	end
 end
 
-function Module1:reportRoot(RootUpdateTime, p2) --[[ Line: 652 ]]
+function Module1:reportRoot(RootUpdateTime, p2)
 	-- upvalues: ReactSchedulingTrackerLayoutEffects (copy), ReactSchedulingTrackerDataModelUpdate (copy), TelemetryService (copy), config6 (copy), DeviceMemoryTier (copy)
 	local RootName = self:getRootName(p2)
 	
@@ -617,11 +617,11 @@ function Module1:reportRoot(RootUpdateTime, p2) --[[ Line: 652 ]]
 	end
 end
 
-function Module1:getFrameBucket(p2: number): number --[[ Line: 791 ]]
+function Module1:getFrameBucket(p2: number): number
 	return (math.min(4, math.floor(math.max(0, p2 - 2) / 16.666666666666668) + 1))
 end
 
-function Module1:processFrame(p2: number) --[[ Line: 798 ]]
+function Module1:processFrame(p2: number)
 	-- upvalues: ScriptPlusExecutionTimeEnabledEngineFeature (copy), EnableCorescriptExecutionTime (copy), RunService (copy), DebugReactSchedulingEnableErrorEvents (copy)
 	local FrameMetrics = self.frameMetrics
 	local ReactFrameTimeMs: number = self.reactFrameTimeMs
@@ -662,7 +662,7 @@ function Module1:processFrame(p2: number) --[[ Line: 798 ]]
 	end
 end
 
-function Module1:reportPeriod() --[[ Line: 837 ]]
+function Module1:reportPeriod()
 	-- upvalues: TelemetryService (copy), config1 (copy), List (ref), config2 (copy), DeviceMemoryTier (copy), ScriptPlusExecutionTimeEnabledEngineFeature (copy), EnableCorescriptExecutionTime (copy), config3 (copy), ReactSchedulingTrackerLayoutEffects (copy), ReactSchedulingTrackerDataModelUpdate (copy), config4 (copy), DisableReactSchedulingTimePctStats (copy), Config1 (ref), config5 (copy), DisableReactSchedulingAvgMaxMsStats (copy), Config2 (ref)
 	local FrameMetrics = self.frameMetrics
 	local ClockTimeDelta = os.clock() * 1000 - self.periodStartMs
@@ -941,7 +941,7 @@ function Module1:reportPeriod() --[[ Line: 837 ]]
 	end
 end
 
-function generatePercentilesFromSingleSketch(p2): string --[[ Line: 1141 ]]
+function generatePercentilesFromSingleSketch(p2): string
 	-- upvalues: Parts (copy)
 	local Text = "{"
 	
@@ -955,7 +955,7 @@ function generatePercentilesFromSingleSketch(p2): string --[[ Line: 1141 ]]
 	return Text .. "}"
 end
 
-function generatePercentilesFromSketches(List, p3): string --[[ Line: 1155 ]]
+function generatePercentilesFromSketches(List, p3): string
 	-- upvalues: Parts (copy)
 	local v1 = "{"
 	
@@ -977,7 +977,7 @@ function generatePercentilesFromSketches(List, p3): string --[[ Line: 1155 ]]
 	return v1 .. "}"
 end
 
-function Module1:reportPercentError(List1, p4, Metric, RootName) --[[ Line: 1175 ]]
+function Module1:reportPercentError(List1, p4, Metric, RootName)
 	-- upvalues: Parts (copy), TelemetryService (copy), Config (ref), List (ref)
 	table.sort(List1)
 	local CountList1 = #List1
@@ -1007,7 +1007,7 @@ function Module1:reportPercentError(List1, p4, Metric, RootName) --[[ Line: 1175
 	end
 end
 
-function Module1:reportSession() --[[ Line: 1215 ]]
+function Module1:reportSession()
 	-- upvalues: DebugReactSchedulingEnableErrorEvents (copy), TelemetryService (copy), config (copy), List (ref)
 	if not self.started then return end
 	local CustomFields = {

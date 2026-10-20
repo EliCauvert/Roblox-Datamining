@@ -5,7 +5,7 @@ local StringifyFunction = require(Parent.GraphQL).stringify
 local ResponseModule = {}
 ResponseModule.__index = ResponseModule
 
-function ResponseModule.new(Body) --[[ Line: 19 ]]
+function ResponseModule.new(Body)
 	-- upvalues: ResponseModule (copy)
 	local config = { body = Body }
 	setmetatable(config, ResponseModule)
@@ -13,11 +13,11 @@ function ResponseModule.new(Body) --[[ Line: 19 ]]
 	return config
 end
 
-function ResponseModule.text(p1) --[[ Line: 28 ]]
+function ResponseModule.text(p1)
 	-- upvalues: PromiseModule (copy), StringifyFunction (copy), Error (copy)
-	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ()) --[[ Line: 29 ]]
+	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ())
 		-- upvalues: p1 (copy), StringifyFunction (upval), Error (upval)
-		local Success, Result = pcall(function() --[[ Line: 30 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p1 (upval), StringifyFunction (upval)
 			if p1.body.errors then
 				for i, _error in p1.body.errors do

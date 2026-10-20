@@ -4,7 +4,7 @@ local ItemTypeEnum = require(Parent.AvatarExperienceModel).Enums.ItemTypeEnum
 local FFlagAXMigrateAllTabToSduiDev = require(Parent.AvatarExperienceFlags).FFlagAXMigrateAllTabToSduiDev
 local _ = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListInfoViewModel)
 
-return function(p1, p2, p3: number) --[[ Line: 38 | Named "getCatalogContentToHydrate" ]]
+return function(p1, p2, p3: number)
 	-- upvalues: ItemTypeEnum (copy), FFlagAXMigrateAllTabToSduiDev (copy)
 	local List = {}
 	

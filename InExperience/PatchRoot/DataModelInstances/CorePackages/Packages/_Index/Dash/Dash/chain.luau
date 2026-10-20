@@ -1,9 +1,9 @@
-﻿return function(...) --[[ Line: 14 | Named "chain" ]]
+﻿return function(...)
 	local list = { ... }
 	local CountList = #list
 	local Count = 1
 	
-	return function() --[[ Line: 18 ]]
+	return function()
 		-- upvalues: Count (ref), CountList (copy), list (copy)
 		local list1 = nil
 		while Count <= CountList do

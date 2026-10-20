@@ -6,7 +6,7 @@ local CreateSignalFunction = SignalsModule.createSignal
 local CreateComputedFunction = SignalsModule.createComputed
 local DefaultSettingsModule = require(ExpChat.installReducer.BubbleChat.DefaultSettings)
 
-return function() --[[ Line: 111 | Named "createChatConfigurationStore" ]]
+return function()
 	-- upvalues: DefaultSettingsModule (copy), ExpChat (copy), CreateSignalFunction (copy), TutilsModule (copy), CreateComputedFunction (copy)
 	local ConfigModule = require(ExpChat.Config)
 	local config = {
@@ -59,9 +59,9 @@ return function() --[[ Line: 111 | Named "createChatConfigurationStore" ]]
 		setChatWindowSettings = Signal2_1,
 		setChatInputBarSettings = Signal2_2,
 		setChannelTabsSettings = Signal2_3,
-		mergeBubbleChatSettings = function(p1) --[[ Line: 163 ]]
+		mergeBubbleChatSettings = function(p1)
 			-- upvalues: Signal2 (copy)
-			Signal2(function(Tbl) --[[ Line: 164 ]]
+			Signal2(function(Tbl)
 				-- upvalues: p1 (copy)
 				local Copy = table.clone(Tbl)
 				
@@ -71,9 +71,9 @@ return function() --[[ Line: 111 | Named "createChatConfigurationStore" ]]
 				return Copy
 			end)
 		end,
-		mergeChatWindowSettings = function(p2) --[[ Line: 173 ]]
+		mergeChatWindowSettings = function(p2)
 			-- upvalues: Signal2_1 (copy)
-			Signal2_1(function(Tbl) --[[ Line: 174 ]]
+			Signal2_1(function(Tbl)
 				-- upvalues: p2 (copy)
 				local Copy = table.clone(Tbl)
 				
@@ -83,9 +83,9 @@ return function() --[[ Line: 111 | Named "createChatConfigurationStore" ]]
 				return Copy
 			end)
 		end,
-		mergeChatInputBarSettings = function(p3) --[[ Line: 183 ]]
+		mergeChatInputBarSettings = function(p3)
 			-- upvalues: Signal2_2 (copy)
-			Signal2_2(function(Tbl) --[[ Line: 184 ]]
+			Signal2_2(function(Tbl)
 				-- upvalues: p3 (copy)
 				local Copy = table.clone(Tbl)
 				
@@ -95,9 +95,9 @@ return function() --[[ Line: 111 | Named "createChatConfigurationStore" ]]
 				return Copy
 			end)
 		end,
-		mergeChannelTabsSettings = function(p4) --[[ Line: 193 ]]
+		mergeChannelTabsSettings = function(p4)
 			-- upvalues: Signal2_3 (copy)
-			Signal2_3(function(Tbl) --[[ Line: 194 ]]
+			Signal2_3(function(Tbl)
 				-- upvalues: p4 (copy)
 				local Copy = table.clone(Tbl)
 				
@@ -107,9 +107,9 @@ return function() --[[ Line: 111 | Named "createChatConfigurationStore" ]]
 				return Copy
 			end)
 		end,
-		setBubbleChatProperty = function(p5, p6) --[[ Line: 203 ]]
+		setBubbleChatProperty = function(p5, p6)
 			-- upvalues: Signal2 (copy)
-			Signal2(function(Tbl) --[[ Line: 204 ]]
+			Signal2(function(Tbl)
 				-- upvalues: p5 (copy), p6 (copy)
 				local Copy = table.clone(Tbl)
 				Copy[p5] = p6
@@ -117,9 +117,9 @@ return function() --[[ Line: 111 | Named "createChatConfigurationStore" ]]
 				return Copy
 			end)
 		end,
-		setChatWindowProperty = function(p5, p6) --[[ Line: 211 ]]
+		setChatWindowProperty = function(p5, p6)
 			-- upvalues: Signal2_1 (copy)
-			Signal2_1(function(Tbl) --[[ Line: 212 ]]
+			Signal2_1(function(Tbl)
 				-- upvalues: p5 (copy), p6 (copy)
 				local Copy = table.clone(Tbl)
 				Copy[p5] = p6
@@ -127,9 +127,9 @@ return function() --[[ Line: 111 | Named "createChatConfigurationStore" ]]
 				return Copy
 			end)
 		end,
-		setChatInputBarProperty = function(p5, p6) --[[ Line: 219 ]]
+		setChatInputBarProperty = function(p5, p6)
 			-- upvalues: Signal2_2 (copy)
-			Signal2_2(function(Tbl) --[[ Line: 220 ]]
+			Signal2_2(function(Tbl)
 				-- upvalues: p5 (copy), p6 (copy)
 				local Copy = table.clone(Tbl)
 				Copy[p5] = p6
@@ -137,9 +137,9 @@ return function() --[[ Line: 111 | Named "createChatConfigurationStore" ]]
 				return Copy
 			end)
 		end,
-		setChannelTabsProperty = function(p5, p6) --[[ Line: 227 ]]
+		setChannelTabsProperty = function(p5, p6)
 			-- upvalues: Signal2_3 (copy)
-			Signal2_3(function(Tbl) --[[ Line: 228 ]]
+			Signal2_3(function(Tbl)
 				-- upvalues: p5 (copy), p6 (copy)
 				local Copy = table.clone(Tbl)
 				Copy[p5] = p6
@@ -147,7 +147,7 @@ return function() --[[ Line: 111 | Named "createChatConfigurationStore" ]]
 				return Copy
 			end)
 		end,
-		getIsBubbleChatEnabled = CreateComputedFunction(function(p5) --[[ Line: 157 ]]
+		getIsBubbleChatEnabled = CreateComputedFunction(function(p5)
 			-- upvalues: Signal (copy)
 			return Signal(p5).Enabled or false
 		end)

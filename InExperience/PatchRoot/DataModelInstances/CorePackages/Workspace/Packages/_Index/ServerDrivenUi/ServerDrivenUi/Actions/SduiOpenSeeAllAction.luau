@@ -7,7 +7,7 @@ local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SduiActionType = SduiCoreSystemModule.SduiActionType
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 
-return function(p1, _, p2) --[[ Line: 21 ]]
+return function(p1, _, p2)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	

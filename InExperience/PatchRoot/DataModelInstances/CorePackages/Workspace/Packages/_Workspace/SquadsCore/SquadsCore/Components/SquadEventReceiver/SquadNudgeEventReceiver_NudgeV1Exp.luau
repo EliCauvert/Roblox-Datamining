@@ -17,14 +17,14 @@ local LifecycleEvents = ToastNotificationModule.LifecycleEvents
 local NotificationTypeEnum = ToastNotificationModule.ToastNotificationTypeModule.NotificationTypeEnum
 local Default = require(Parent.ToastNotificationsProtocol).ToastNotificationProtocol.default
 
-return function(p1) --[[ Line: 34 ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), SquadExternalContractContextModule (copy), Default (copy), HttpService (copy), EventNamesModule (copy), SquadToastActionsAndStatesModule (copy), ConstantsModule (copy), NotificationTypeEnum (copy), ActOnPartyNudgeModule (copy), LifecycleEvents (copy), GameParams (copy), ExperienceService (copy), SquadGameJoinOriginModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseContextResult = ReactModule.useContext(SquadExternalContractContextModule)
 	local UseIsChatEnabledResult = UseContextResult.useIsChatEnabled()
 	local UseIsLoadingChatSettingsResult = UseContextResult.useIsLoadingChatSettings()
 	local UseRefResult = ReactModule.useRef({})
-	local UseResult = ReactModule.useCallback(function(p2): boolean --[[ Line: 43 ]]
+	local UseResult = ReactModule.useCallback(function(p2): boolean
 		-- upvalues: UseIsLoadingChatSettingsResult (copy), UseIsChatEnabledResult (copy), Default (upval)
 		if UseIsLoadingChatSettingsResult or UseIsChatEnabledResult then
 			return false
@@ -34,7 +34,7 @@ return function(p1) --[[ Line: 34 ]]
 			return true
 		end
 	end, { UseIsLoadingChatSettingsResult, UseIsChatEnabledResult })
-	local UseResult1 = ReactModule.useCallback(function(p2, p3, p4) --[[ Line: 52 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2, p3, p4)
 		-- upvalues: UseRefResult (copy), HttpService (upval)
 		UseRefResult.current[p2] = {
 			shouldActWhenDismiss = true,
@@ -44,7 +44,7 @@ return function(p1) --[[ Line: 34 ]]
 			nudgeType = p4.nudgeType
 		}
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function(p2, ToastAction) --[[ Line: 64 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2, ToastAction)
 		-- upvalues: UseContextResult (copy), EventNamesModule (upval), UseRefResult (copy)
 		UseContextResult.fireSquadAnalytics(EventNamesModule.SquadToastActions, {
 			toastAction = ToastAction,
@@ -58,9 +58,9 @@ return function(p1) --[[ Line: 34 ]]
 		UseContextResult.fireSquadAnalytics,
 		UseContextResult.squadLocation
 	})
-	ReactModule.useEffect(function() --[[ Line: 83 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Default (upval), UseRefResult (copy), UseResult2 (copy), SquadToastActionsAndStatesModule (upval), ConstantsModule (upval), NotificationTypeEnum (upval), UseDispatchResult (copy), ActOnPartyNudgeModule (upval), UseContextResult (copy), UseIsChatEnabledResult (copy)
-		local ListenToDismissNotificationResult = Default:listenToDismissNotification(function(p2) --[[ Line: 85 ]]
+		local ListenToDismissNotificationResult = Default:listenToDismissNotification(function(p2)
 			-- upvalues: UseRefResult (upval), UseResult2 (upval), SquadToastActionsAndStatesModule (upval), ConstantsModule (upval), NotificationTypeEnum (upval), UseDispatchResult (upval), ActOnPartyNudgeModule (upval), UseContextResult (upval), UseIsChatEnabledResult (upval)
 			if p2.notificationId and UseRefResult.current[p2.notificationId] then
 				UseResult2(p2.notificationId, SquadToastActionsAndStatesModule.PartyNudgeGeneralDismiss)
@@ -78,7 +78,7 @@ return function(p1) --[[ Line: 34 ]]
 			UseRefResult.current[p2.notificationId] = nil
 		end)
 		
-		return function() --[[ Line: 121 ]]
+		return function()
 			-- upvalues: ListenToDismissNotificationResult (copy)
 			if ListenToDismissNotificationResult then
 				ListenToDismissNotificationResult:Disconnect()
@@ -91,9 +91,9 @@ return function(p1) --[[ Line: 34 ]]
 		UseContextResult.fireSquadAnalytics,
 		UseContextResult.squadLocation
 	})
-	ReactModule.useEffect(function() --[[ Line: 134 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: LifecycleEvents (upval), NotificationTypeEnum (upval), UseRefResult (copy), UseResult (copy), HttpService (upval), ConstantsModule (upval), Default (upval), UseResult2 (copy), SquadToastActionsAndStatesModule (upval), GameParams (upval), ExperienceService (upval), SquadGameJoinOriginModule (upval)
-		local RegisterResult = LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.UserAction, NotificationTypeEnum.SquadNudgeInvite, function(p2) --[[ Line: 138 ]]
+		local RegisterResult = LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.UserAction, NotificationTypeEnum.SquadNudgeInvite, function(p2)
 			-- upvalues: UseRefResult (upval), UseResult (upval), HttpService (upval), ConstantsModule (upval)
 			if p2 and p2.userActionType == "click" and p2.notificationData and p2.visualItem and p2.visualItem.actionEventParams and p2.visualItem.visualItemName then
 				local Id = p2.notificationData.id
@@ -110,7 +110,7 @@ return function(p1) --[[ Line: 34 ]]
 				end
 			end
 		end)
-		local RegisterResult1 = LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.UserAction, NotificationTypeEnum.NudgeForInviterSquad, function(p2) --[[ Line: 171 ]]
+		local RegisterResult1 = LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.UserAction, NotificationTypeEnum.NudgeForInviterSquad, function(p2)
 			-- upvalues: UseRefResult (upval), UseResult (upval), HttpService (upval), ConstantsModule (upval), Default (upval), UseResult2 (upval), SquadToastActionsAndStatesModule (upval), GameParams (upval), ExperienceService (upval), SquadGameJoinOriginModule (upval)
 			if p2 and p2.userActionType == "click" and p2.notificationData and p2.visualItem and p2.visualItem.actionEventParams and p2.visualItem.visualItemName then
 				local Id = p2.notificationData.id
@@ -135,7 +135,7 @@ return function(p1) --[[ Line: 34 ]]
 			end
 		end)
 		
-		return function() --[[ Line: 217 ]]
+		return function()
 			-- upvalues: RegisterResult (copy), RegisterResult1 (copy)
 			if RegisterResult then
 				RegisterResult()
@@ -149,9 +149,9 @@ return function(p1) --[[ Line: 34 ]]
 		UseContextResult.fireSquadAnalytics, UseContextResult.squadLocation,
 		p1.currentSquadId
 	})
-	ReactModule.useEffect(function() --[[ Line: 236 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: LifecycleEvents (upval), NotificationTypeEnum (upval), UseResult (copy), HttpService (upval), ConstantsModule (upval), p1 (copy), Default (upval), UseResult1 (copy), UseResult2 (copy), SquadToastActionsAndStatesModule (upval)
-		local RegisterResult = LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.Display, NotificationTypeEnum.SquadNudgeInvite, function(p2) --[[ Line: 240 ]]
+		local RegisterResult = LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.Display, NotificationTypeEnum.SquadNudgeInvite, function(p2)
 			-- upvalues: UseResult (upval), HttpService (upval), ConstantsModule (upval), p1 (upval), Default (upval), UseResult1 (upval), UseResult2 (upval), SquadToastActionsAndStatesModule (upval)
 			local ActionEventParams = p2.state.visualItems.button[1].actionEventParams
 			local Id = p2.id
@@ -168,7 +168,7 @@ return function(p1) --[[ Line: 34 ]]
 				UseResult2(Id, SquadToastActionsAndStatesModule.PartyNudgeDisplay)
 			end
 		end)
-		local RegisterResult1 = LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.Display, NotificationTypeEnum.NudgeForInviterSquad, function(p2) --[[ Line: 269 ]]
+		local RegisterResult1 = LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.Display, NotificationTypeEnum.NudgeForInviterSquad, function(p2)
 			-- upvalues: UseResult (upval), HttpService (upval), ConstantsModule (upval), Default (upval), p1 (upval), UseResult1 (upval), UseResult2 (upval), SquadToastActionsAndStatesModule (upval)
 			local ActionEventParams = p2.state.visualItems.button[1].actionEventParams
 			local Id = p2.id
@@ -191,7 +191,7 @@ return function(p1) --[[ Line: 34 ]]
 			UseResult1(Id, p2, Data)
 			UseResult2(Id, SquadToastActionsAndStatesModule.PartyNudgeDisplay)
 		end)
-		local RegisterResult2 = LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.Display, NotificationTypeEnum.SquadJoinRequestPrompt, function(p2) --[[ Line: 301 ]]
+		local RegisterResult2 = LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.Display, NotificationTypeEnum.SquadJoinRequestPrompt, function(p2)
 			-- upvalues: UseResult (upval), HttpService (upval), UseResult1 (upval), UseResult2 (upval), SquadToastActionsAndStatesModule (upval)
 			local ActionEventParams = p2.state.visualItems.button[1].actionEventParams
 			local Id = p2.id
@@ -203,7 +203,7 @@ return function(p1) --[[ Line: 34 ]]
 				return
 			end
 		end)
-		local RegisterResult3 = LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.Display, NotificationTypeEnum.SquadAcceptJoinRequest, function(p2) --[[ Line: 318 ]]
+		local RegisterResult3 = LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.Display, NotificationTypeEnum.SquadAcceptJoinRequest, function(p2)
 			-- upvalues: UseResult (upval), HttpService (upval), UseResult1 (upval), UseResult2 (upval), SquadToastActionsAndStatesModule (upval)
 			local ActionEventParams = p2.state.visualItems.button[1].actionEventParams
 			local Id = p2.id
@@ -216,7 +216,7 @@ return function(p1) --[[ Line: 34 ]]
 			end
 		end)
 		
-		return function() --[[ Line: 332 ]]
+		return function()
 			-- upvalues: RegisterResult (copy), RegisterResult1 (copy), RegisterResult2 (copy), RegisterResult3 (copy)
 			if RegisterResult then
 				RegisterResult()

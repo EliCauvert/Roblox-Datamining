@@ -2,37 +2,37 @@
 local CryoModule = require(Parent.Cryo)
 local SignalsModule = require(Parent.Signals)
 
-return function() --[[ Line: 56 | Named "createTopBarStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy), CryoModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal({})
 	local t = {}
 	
 	return {
-		getScreenTopBar = function(Key) --[[ Line: 61 ]]
+		getScreenTopBar = function(Key)
 			-- upvalues: t (copy), SignalsModule (upval), Signal (copy)
 			if t[Key] == nil then
-				t[Key] = SignalsModule.createComputed(function(p1) --[[ Line: 63 ]]
+				t[Key] = SignalsModule.createComputed(function(p1)
 					-- upvalues: Signal (upval), Key (copy)
 					return Signal(p1)[Key] or {}
 				end)
 			end
 			return t[Key]
 		end,
-		setScreenTopBar = function(p1, p2) --[[ Line: 71 ]]
+		setScreenTopBar = function(p1, p2)
 			-- upvalues: Signal2 (copy), CryoModule (upval)
-			Signal2(function(p3) --[[ Line: 72 ]]
+			Signal2(function(p3)
 				-- upvalues: CryoModule (upval), p1 (copy), p2 (copy)
 				return CryoModule.Dictionary.union(p3, { [p1] = CryoModule.Dictionary.union(p3[p1] or {}, p2) })
 			end)
 		end,
-		clearScreenTopBar = function(p1) --[[ Line: 80 ]]
+		clearScreenTopBar = function(p1)
 			-- upvalues: Signal2 (copy), CryoModule (upval)
-			Signal2(function(p2) --[[ Line: 81 ]]
+			Signal2(function(p2)
 				-- upvalues: CryoModule (upval), p1 (copy)
 				return CryoModule.Dictionary.union(p2, { [p1] = {} })
 			end)
 		end,
-		resetStore = function() --[[ Line: 88 ]]
+		resetStore = function()
 			-- upvalues: Signal2 (copy)
 			Signal2({})
 		end

@@ -24,7 +24,7 @@ local config = {
 	id = ConstantsModule.HOME_CATEGORY_ID
 }
 
-return function(p1, Callback) --[[ Line: 92 | Named "buildShopDataFromWidgets" ]]
+return function(p1, Callback)
 	-- upvalues: config (copy), ConstantsModule (copy), FFlagIdentifyTopPicksByCategoryTypeModule (copy), FFlagParseStableCategoryIdModule (copy), FFlagEnableRobuxInExperienceShop (copy), FFlagEnableBonusJwtInShop (copy), ToRobuxPackageItemFunction (copy), PromiseModule (copy), FFlagEnableExperienceShopGlobalIconModule (copy), AppendBonusItemRequestsFunction (copy), MakeRequestKeyFunction (copy), ToShopItemFunction (copy), LogCounterModule (copy), ProductInfoFailedItemsCounterModule (copy), MergeBonusItemDetailsIntoSectionsFunction (copy)
 	local List = { config }
 	local t = {}
@@ -101,7 +101,7 @@ return function(p1, Callback) --[[ Line: 92 | Named "buildShopDataFromWidgets" ]
 			end
 		end
 	end
-	local function filterOutput(List1) --[[ Line: 215 ]]
+	local function filterOutput(List1)
 		-- upvalues: t1 (copy), List (copy), ConstantsModule (upval)
 		local List2 = {}
 		local t = {}
@@ -149,7 +149,7 @@ return function(p1, Callback) --[[ Line: 92 | Named "buildShopDataFromWidgets" ]
 		if FFlagEnableRobuxInExperienceShop then
 			AppendBonusItemRequestsFunction(List1, t)
 		end
-		return Callback(List1):andThen(function(Result) --[[ Line: 260 ]]
+		return Callback(List1):andThen(function(Result)
 			-- upvalues: MakeRequestKeyFunction (upval), CountList1 (copy), List1 (copy), List2 (copy), t (copy), ToShopItemFunction (upval), LogCounterModule (upval), ProductInfoFailedItemsCounterModule (upval), FFlagEnableRobuxInExperienceShop (upval), MergeBonusItemDetailsIntoSectionsFunction (upval), filterOutput (copy), FFlagEnableExperienceShopGlobalIconModule (upval), p1 (copy)
 			local t2 = {}
 			

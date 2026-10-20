@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("DynamicHeadBorderSize", 24)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastInt("DynamicHeadBorderSize")
 end

@@ -4,9 +4,9 @@ local ReactModule = require(Parent.React)
 local FFlagLuaSupportMicroGamepadPreferredInput = require(Parent.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
 local ButtonCenter = if game:GetEngineFeature("EnableMicroGamepadKeycodes") then Enum.KeyCode.ButtonCenter else Enum.KeyCode.Return
 
-return function() --[[ Line: 30 | Named "useIsTvRemoteDevice" ]]
+return function()
 	-- upvalues: ReactModule (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy), UserInputService (copy), ButtonCenter (copy)
-	local UseResult = ReactModule.useCallback(function(): boolean --[[ Line: 31 ]]
+	local UseResult = ReactModule.useCallback(function(): boolean
 		-- upvalues: FFlagLuaSupportMicroGamepadPreferredInput (upval), UserInputService (upval), ButtonCenter (upval)
 		local IsPreferredInputMatch: boolean = FFlagLuaSupportMicroGamepadPreferredInput and UserInputService.PreferredInput == Enum.PreferredInput.MicroGamepad
 		
@@ -20,23 +20,23 @@ return function() --[[ Line: 30 | Named "useIsTvRemoteDevice" ]]
 		end
 		return false
 	end, {})
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 47 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 		-- upvalues: UseResult (copy)
 		return UseResult()
 	end)
-	ReactModule.useEffect(function() --[[ Line: 51 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UserInputService (upval), UseStateResult2 (copy), UseResult (copy)
-		local GamepadConnectedConnection = UserInputService.GamepadConnected:Connect(function() --[[ Line: 52 ]]
+		local GamepadConnectedConnection = UserInputService.GamepadConnected:Connect(function()
 			-- upvalues: UseStateResult2 (upval), UseResult (upval)
 			UseStateResult2(UseResult())
 		end)
-		local Connection = UserInputService:GetPropertyChangedSignal("PreferredInput"):Connect(function() --[[ Line: 56 ]]
+		local Connection = UserInputService:GetPropertyChangedSignal("PreferredInput"):Connect(function()
 			-- upvalues: UseStateResult2 (upval), UseResult (upval)
 			UseStateResult2(UseResult())
 		end)
 		UseStateResult2(UseResult())
 		
-		return function() --[[ Line: 62 ]]
+		return function()
 			-- upvalues: GamepadConnectedConnection (copy), Connection (copy)
 			GamepadConnectedConnection:Disconnect()
 			Connection:Disconnect()

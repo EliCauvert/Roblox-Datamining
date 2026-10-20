@@ -33,7 +33,7 @@ local GetFFlagUGCValidateEyebrowEyelashThumbnailSchemaModule = require(Parent.fl
 local ValidateMeshPartOnlySkinnedToR15Module = require(Parent.validation.ValidateMeshPartOnlySkinnedToR15)
 local GetEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule = require(Parent.flags.getEngineFeatureEngineUGCValidationConsolidateAccessorySkinning)
 
-return function(p1) --[[ Line: 47 | Named "validateLayeredClothingAccessory" ]]
+return function(p1)
 	-- upvalues: RigidOrLayeredAllowedModule (copy), AnalyticsModule (copy), ConstantsModule (copy), ValidateSingleInstanceModule (copy), GetFFlagUGCValidateEyebrowEyelashThumbnailSchemaModule (copy), CreateEyebrowEyelashSchemaModule (copy), CreateLayeredClothingSchemaModule (copy), ValidateInstanceTreeModule (copy), GetEngineFeatureEngineUGCValidatePropertiesSensibleModule (copy), ValidatePropertiesSensibleModule (copy), ValidateDependenciesModule (copy), GetEditableMeshFromContextModule (copy), GetEditableImageFromContextModule (copy), PcallDeferredModule (copy), GetMeshSizeModule (copy), GetExpectedPartSizeModule (copy), GetFIntUGCValidationLCHandleScaleOffsetMaximumModule (copy), GetAttachmentModule (copy), ValidateTagsModule (copy), ValidateTotalSurfaceAreaModule (copy), ValidateMeshSizePropertyModule (copy), ValidateMeshBoundsModule (copy), ValidateMeshTrianglesModule (copy), ValidateMeshVertColorsModule (copy), ValidateCoplanarIntersectionModule (copy), ValidateMaxCubeDensityModule (copy), ValidateLCCageQualityModule (copy), GetFFlagUGCValidateTexturePackModule (copy), ValidateTexturePackModule (copy), GetEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule (copy), ValidateSkinningTransferModule (copy), ValidateMeshPartOnlySkinnedToR15Module (copy)
 	local Instances = p1.instances
 	local AssetTypeEnum = p1.assetTypeEnum
@@ -117,7 +117,7 @@ return function(p1) --[[ Line: 47 | Named "validateLayeredClothingAccessory" ]]
 		end
 		config1.editableImage = TextureID2
 	end
-	local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function() --[[ Line: 176 ]]
+	local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function()
 		-- upvalues: GetMeshSizeModule (upval), config (copy)
 		return GetMeshSizeModule(config)
 	end, p1)

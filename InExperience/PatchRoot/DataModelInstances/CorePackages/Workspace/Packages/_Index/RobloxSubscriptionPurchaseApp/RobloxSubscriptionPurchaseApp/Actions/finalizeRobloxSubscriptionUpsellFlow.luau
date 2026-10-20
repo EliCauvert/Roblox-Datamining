@@ -8,12 +8,12 @@ local LogSubscriptionPurchaseFlowEventModule = require(RobloxSubscriptionPurchas
 local RobloxSubscriptionUpsellTelemetryModule = require(RobloxSubscriptionPurchaseApp.Events.RobloxSubscriptionUpsellTelemetry)
 local FFlagEnableSubscriptionPurchaseFlowEventIngestModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagEnableSubscriptionPurchaseFlowEventIngest)
 
-local function _(p1, p2, p3, p4) --[[ Line: 29 ]]
+local function _(p1, p2, p3, p4)
 	-- upvalues: RobloxSubscriptionFlowCompleteReasonModule (copy)
 	return if p1 then if p2 then RobloxSubscriptionFlowCompleteReasonModule.UpsellPurchaseSucceeded elseif p3 and not p4 then RobloxSubscriptionFlowCompleteReasonModule.UpsellPurchaseFailed else RobloxSubscriptionFlowCompleteReasonModule.UpsellPurchaseAttempted else RobloxSubscriptionFlowCompleteReasonModule.UpsellDismissed
 end
 
-local function emitCompletionTelemetry(UpsellPurchaseSucceeded) --[[ Line: 61 ]]
+local function emitCompletionTelemetry(UpsellPurchaseSucceeded)
 	-- upvalues: RobloxSubscriptionFlowCompleteReasonModule (copy), FFlagEnableSubscriptionPurchaseFlowEventIngestModule (copy), LogSubscriptionPurchaseFlowEventModule (copy), LogRobloxSubscriptionUpsellCounterModule (copy), RobloxSubscriptionUpsellTelemetryModule (copy)
 	if UpsellPurchaseSucceeded == RobloxSubscriptionFlowCompleteReasonModule.UpsellDismissed then
 		if FFlagEnableSubscriptionPurchaseFlowEventIngestModule then
@@ -36,7 +36,7 @@ local function emitCompletionTelemetry(UpsellPurchaseSucceeded) --[[ Line: 61 ]]
 	LogRobloxSubscriptionUpsellCounterModule(RobloxSubscriptionUpsellTelemetryModule.RobloxSubscriptionUpsellFlowCompletedCounter)
 end
 
-return function(p1) --[[ Line: 93 | Named "finalizeRobloxSubscriptionUpsellFlow" ]]
+return function(p1)
 	-- upvalues: RobloxSubscriptionStoreModule (copy), RobloxSubscriptionFlowCompleteReasonModule (copy), PromptStateModule (copy), emitCompletionTelemetry (copy), CleanupSubscriptionFlowModule (copy)
 	local GetResult = RobloxSubscriptionStoreModule.get()
 	local IsNativePurchase = GetResult.getIsNativePurchase()

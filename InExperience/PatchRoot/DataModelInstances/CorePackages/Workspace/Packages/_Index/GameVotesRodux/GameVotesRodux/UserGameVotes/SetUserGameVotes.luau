@@ -1,4 +1,4 @@
-﻿return require(script:FindFirstAncestor("GameVotesRodux").Parent.Rodux).makeActionCreator(script.Name, function(UniverseId, CanVote, UserVote, ReasonForNotVoteable) --[[ Line: 12 ]]
+﻿return require(script:FindFirstAncestor("GameVotesRodux").Parent.Rodux).makeActionCreator(script.Name, function(UniverseId, CanVote, UserVote, ReasonForNotVoteable)
 	assert(type(UniverseId) == "string", "SetUserGameVotes: universeId must be a string")
 	assert(type(CanVote) == "boolean", "SetUserGameVotes: canVote must be a boolean")
 	assert(type(UserVote) == "string", "SetUserGameVotes: userVote must be a string")

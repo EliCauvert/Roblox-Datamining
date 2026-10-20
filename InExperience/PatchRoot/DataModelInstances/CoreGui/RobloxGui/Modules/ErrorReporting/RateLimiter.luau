@@ -8,7 +8,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 local RateLimiterModule = {}
 RateLimiterModule.__index = RateLimiterModule
 
-function RateLimiterModule.new(p1) --[[ Line: 16 ]]
+function RateLimiterModule.new(p1)
 	-- upvalues: StrictInterfaceResult (copy), RateLimiterModule (copy)
 	assert(StrictInterfaceResult(p1))
 	
@@ -22,7 +22,7 @@ function RateLimiterModule.new(p1) --[[ Line: 16 ]]
 	}, RateLimiterModule))
 end
 
-function RateLimiterModule:increment(Key, p1) --[[ Line: 29 ]]
+function RateLimiterModule:increment(Key, p1)
 	self._lastOccurrences[Key] = p1 or os.clock()
 	
 	if self._counts[Key] == nil then
@@ -35,21 +35,21 @@ function RateLimiterModule:increment(Key, p1) --[[ Line: 29 ]]
 	end
 end
 
-function RateLimiterModule:isRateLimited(p1): boolean --[[ Line: 40 ]]
+function RateLimiterModule:isRateLimited(p1): boolean
 	local Count = self._counts[p1]
 	
 	return Count ~= nil and self._threshold < Count
 end
 
-function RateLimiterModule:startDecrementClock() --[[ Line: 45 ]]
+function RateLimiterModule:startDecrementClock()
 	-- upvalues: RunService (copy)
-	self._decrementConnection = RunService.Heartbeat:Connect(function() --[[ Line: 46 ]]
+	self._decrementConnection = RunService.Heartbeat:Connect(function()
 		-- upvalues: self (copy)
 		self:stepDecrementClock(os.clock())
 	end)
 end
 
-function RateLimiterModule:stepDecrementClock(_lastProcessed) --[[ Line: 51 ]]
+function RateLimiterModule:stepDecrementClock(_lastProcessed)
 	if self._processInterval < _lastProcessed - self._lastProcessed then
 		for i, lastOccurrence in pairs(self._lastOccurrences) do
 			if self._period < _lastProcessed - lastOccurrence then

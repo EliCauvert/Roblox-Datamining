@@ -5,11 +5,11 @@ local ScreenGui = nil
 local ScreenGui1 = nil
 local config = { left = 0, top = 0, right = 0, bottom = 0 }
 
-function diffInsets(p1, p2): boolean --[[ Line: 27 ]]
+function diffInsets(p1, p2): boolean
 	return p1.top ~= p2.top or (p1.bottom ~= p2.bottom or p1.left ~= p2.left) or p1.right ~= p2.right
 end
 
-function getHardwareSafeAreaInsets() --[[ Line: 31 ]]
+function getHardwareSafeAreaInsets()
 	-- upvalues: ScreenGui (ref), ScreenGui1 (ref)
 	local AbsolutePosition = ScreenGui.AbsolutePosition
 	local AbsolutePosition1 = ScreenGui1.AbsolutePosition
@@ -26,7 +26,7 @@ end
 
 local DeferredThread = nil
 
-function handleSizeChange() --[[ Line: 48 ]]
+function handleSizeChange()
 	-- upvalues: config (ref), DeferredThread (ref), NewResult (copy)
 	local HardwareSafeAreaInsets = getHardwareSafeAreaInsets()
 	
@@ -36,7 +36,7 @@ function handleSizeChange() --[[ Line: 48 ]]
 		if DeferredThread then
 			task.cancel(DeferredThread)
 		end
-		DeferredThread = task.defer(function() --[[ Line: 55 ]]
+		DeferredThread = task.defer(function()
 			-- upvalues: DeferredThread (upval), NewResult (upval), HardwareSafeAreaInsets (copy)
 			DeferredThread = nil
 			NewResult:fire(HardwareSafeAreaInsets)
@@ -44,7 +44,7 @@ function handleSizeChange() --[[ Line: 48 ]]
 	end
 end
 
-function init() --[[ Line: 62 ]]
+function init()
 	-- upvalues: Flag (ref), ScreenGui (ref), LocalPlayer (copy), ScreenGui1 (ref)
 	if Flag then return end
 	if not ScreenGui then
@@ -68,20 +68,20 @@ function init() --[[ Line: 62 ]]
 end
 
 return {
-	connect = function(_, p1) --[[ Line: 90 ]]
+	connect = function(_, p1)
 		-- upvalues: NewResult (copy)
 		init()
 		
 		return NewResult:connect(p1)
 	end,
-	deviceInsets = function() --[[ Line: 94 ]]
+	deviceInsets = function()
 		-- upvalues: config (ref)
 		init()
 		
 		return config
 	end,
 	diffInsets = diffInsets,
-	fullscreenGui = function() --[[ Line: 99 ]]
+	fullscreenGui = function()
 		-- upvalues: ScreenGui (ref)
 		init()
 		

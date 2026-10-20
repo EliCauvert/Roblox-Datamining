@@ -12,7 +12,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local FFlagProfilePlatformFixResaleLimitedPriceModule = require(ProfilePlatform.Flags.FFlagProfilePlatformFixResaleLimitedPrice)
 local IconsCommonRobux = UIBloxModule.App.ImageSet.Images["icons/common/robux"]
 
-return function(p1) --[[ Line: 30 | Named "PriceFooter" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), FFlagProfilePlatformFixResaleLimitedPriceModule (copy), ReactModule (copy), ImageSetLabel (copy), IconsCommonRobux (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseStyleResultFont = UseStyleResult.Font

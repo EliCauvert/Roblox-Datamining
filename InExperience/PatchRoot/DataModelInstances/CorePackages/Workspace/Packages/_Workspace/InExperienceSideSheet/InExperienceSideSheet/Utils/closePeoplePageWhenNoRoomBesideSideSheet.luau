@@ -4,7 +4,7 @@ local GetHasRoomForPeoplePageModule = require(InExperienceSideSheet.Utils.getHas
 local GetSideSheetVisibilityModule = require(InExperienceSideSheet.Utils.getSideSheetVisibility)
 local RegisterInGameMenuPeoplePageActionsModule = require(InExperienceSideSheet.Utils.registerInGameMenuPeoplePageActions)
 
-return function(p1): boolean --[[ Line: 10 ]]
+return function(p1): boolean
 	-- upvalues: GetSideSheetVisibilityModule (copy), GetDidSideSheetOpenWithPeoplePageModule (copy), GetHasRoomForPeoplePageModule (copy), RegisterInGameMenuPeoplePageActionsModule (copy)
 	local SideSheetVisibilityModule = GetSideSheetVisibilityModule(false)
 	local DidSideSheetOpenWithPeoplePageModule = GetDidSideSheetOpenWithPeoplePageModule(false)

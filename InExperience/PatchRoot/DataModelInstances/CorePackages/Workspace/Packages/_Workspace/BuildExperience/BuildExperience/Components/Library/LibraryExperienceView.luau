@@ -29,14 +29,14 @@ local config = {
 	Right = { UDim2.fromScale(1, 0), UDim2.new(0, 10000, 1, 0) }
 }
 
-return function(p1) --[[ Line: 61 | Named "LibraryExperienceView" ]]
+return function(p1)
 	-- upvalues: FoundationModule (copy), UseHardwareInsetsModule (copy), ReactModule (copy), MotionModule (copy), ReleaseFocusWithinModule (copy), UseTypedQueryBindingModule (copy), config (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), Text (copy), SearchBarContainerModule (copy), SegmentedControl (copy), LibraryWorldBackdropViewModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local ReducedMotion = FoundationModule.Hooks.usePreferences().reducedMotion
 	local Bottom = UseHardwareInsetsModule().bottom
 	local UseStateResult, UseStateResult2 = ReactModule.useState(p1.isOpen)
 	local UseMotionResult, UseMotionResult2 = MotionModule.useMotion({ transparency = if p1.isOpen then 0 else 1 })
-	ReactModule.useEffect(function() --[[ Line: 67 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult2 (copy), UseMotionResult2 (copy), MotionModule (upval), ReducedMotion (copy)
 		local Flag = false
 		
@@ -49,7 +49,7 @@ return function(p1) --[[ Line: 61 | Named "LibraryExperienceView" ]]
 				easingStyle = Enum.EasingStyle.Quad
 			})
 		}), {
-			onAnimationComplete = function(p2) --[[ Line: 80 ]]
+			onAnimationComplete = function(p2)
 				-- upvalues: Flag (ref), p1 (upval), UseStateResult2 (upval)
 				if p2 and not Flag and not p1.isOpen then
 					UseStateResult2(false)
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 61 | Named "LibraryExperienceView" ]]
 			end
 		})
 		
-		return function() --[[ Line: 87 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end
@@ -68,7 +68,7 @@ return function(p1) --[[ Line: 61 | Named "LibraryExperienceView" ]]
 		UseMotionResult2
 	})
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 92 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), p1 (copy)
 		local Current = UseRefResult.current
 		
@@ -91,7 +91,7 @@ return function(p1) --[[ Line: 61 | Named "LibraryExperienceView" ]]
 		for Label, textTransparency in TextTransparencies do
 			Label.TextTransparency = 1 - (1 - textTransparency) * 0.5
 		end
-		return function() --[[ Line: 112 ]]
+		return function()
 			-- upvalues: Selectables (copy), TextTransparencies (copy)
 			for i, selectable in Selectables do
 				i.Selectable = selectable
@@ -105,7 +105,7 @@ return function(p1) --[[ Line: 61 | Named "LibraryExperienceView" ]]
 	local IsTransitioning = WorldCutout ~= nil and WorldCutout.isTransitioning
 	local Transparency = if WorldCutout == nil or not IsTransitioning then UseMotionResult.transparency else WorldCutout.progress
 	local IsOpen = p1.isOpen or (UseStateResult or IsTransitioning)
-	local MapResult = Transparency:map(function(Transparency) --[[ Line: 127 ]]
+	local MapResult = Transparency:map(function(Transparency)
 		-- upvalues: UseTokensResult (copy)
 		return {
 			Color3 = UseTokensResult.Color.Surface.Surface_0.Color3,
@@ -118,14 +118,14 @@ return function(p1) --[[ Line: 61 | Named "LibraryExperienceView" ]]
 	local Title = p1.title or p1.assetLabel
 	local IsUseStateResultMatch = UseStateResult1 == Title
 	local IsUseStateResultMatch1: boolean = HasQuery and (IsUseStateResultMatch or p1.query ~= "")
-	ReactModule.useEffect(function() --[[ Line: 137 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(nil)
 	end, { p1.title, p1.isOpen })
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseRefResult2 = ReactModule.useRef(nil)
 	
-	local function v41(p2): boolean --[[ Line: 144 ]]
+	local function v41(p2): boolean
 		-- upvalues: UseRefResult2 (copy)
 		local Current = UseRefResult2.current
 		
@@ -138,14 +138,14 @@ return function(p1) --[[ Line: 61 | Named "LibraryExperienceView" ]]
 		end
 	end
 	
-	local function _() --[[ Line: 155 ]]
+	local function _()
 		-- upvalues: ReleaseFocusWithinModule (upval), UseRefResult1 (copy)
 		ReleaseFocusWithinModule(UseRefResult1.current)
 	end
 	
 	local UseTypedQueryBindingModuleResult, UseTypedQueryBindingModuleResult2 = UseTypedQueryBindingModule(p1.query)
 	
-	local _ = function() --[[ Line: 159 ]]
+	local _ = function()
 		-- upvalues: UseTypedQueryBindingModuleResult2 (copy), p1 (copy)
 		UseTypedQueryBindingModuleResult2("")
 		
@@ -179,7 +179,7 @@ return function(p1) --[[ Line: 61 | Named "LibraryExperienceView" ]]
 			LayoutOrder = 1,
 			testId = "Library.Experience.Header",
 			backgroundStyle = MapResult,
-			onActivated = function() --[[ Line: 190 ]] end,
+			onActivated = function() end,
 			selection = { Selectable = false },
 			stateLayer = {
 				affordance = FoundationModule.Enums.StateLayerAffordance.None
@@ -201,7 +201,7 @@ return function(p1) --[[ Line: 61 | Named "LibraryExperienceView" ]]
 					isCircular = true,
 					icon = if OnBack == nil then IconName.X else IconName.ChevronLargeLeft,
 					ref = UseRefResult2,
-					onActivated = function() --[[ Line: 213 ]]
+					onActivated = function()
 						-- upvalues: OnBack (copy), p1 (copy), ReleaseFocusWithinModule (upval), UseRefResult1 (copy), UseStateResult2_1 (copy), IsUseStateResultMatch1 (copy), UseTypedQueryBindingModuleResult2 (copy)
 						local OnBack1: () -> () = OnBack or p1.onLeave
 						ReleaseFocusWithinModule(UseRefResult1.current)
@@ -236,12 +236,12 @@ return function(p1) --[[ Line: 61 | Named "LibraryExperienceView" ]]
 					key = Title,
 					query = UseTypedQueryBindingModuleResult,
 					placeholder = p1.searchPlaceholder,
-					setQuery = function(p2) --[[ Line: 244 ]]
+					setQuery = function(p2)
 						-- upvalues: UseTypedQueryBindingModuleResult2 (copy), p1 (copy)
 						UseTypedQueryBindingModuleResult2(p2)
 						p1.onQueryChanged(p2)
 					end,
-					clear = function() --[[ Line: 248 ]]
+					clear = function()
 						-- upvalues: ReleaseFocusWithinModule (upval), UseRefResult1 (copy), UseTypedQueryBindingModuleResult2 (copy), p1 (copy)
 						ReleaseFocusWithinModule(UseRefResult1.current)
 						UseTypedQueryBindingModuleResult2("")
@@ -254,12 +254,12 @@ return function(p1) --[[ Line: 61 | Named "LibraryExperienceView" ]]
 							p1.onSearchReset()
 						end
 					end,
-					onDismiss = function() --[[ Line: 252 ]]
+					onDismiss = function()
 						-- upvalues: ReleaseFocusWithinModule (upval), UseRefResult1 (copy), UseStateResult2_1 (copy)
 						ReleaseFocusWithinModule(UseRefResult1.current)
 						UseStateResult2_1(nil)
 					end,
-					onFocusLost = function(p2) --[[ Line: 256 ]]
+					onFocusLost = function(p2)
 						-- upvalues: UseTypedQueryBindingModuleResult (copy), v41 (copy), UseStateResult2_1 (copy)
 						if UseTypedQueryBindingModuleResult:getValue() == "" and not v41(p2) then
 							UseStateResult2_1(nil)
@@ -277,7 +277,7 @@ return function(p1) --[[ Line: 61 | Named "LibraryExperienceView" ]]
 				LayoutOrder = 3,
 				testId = "Library.Experience.Search.Action",
 				icon = IconName.MagnifyingGlass,
-				onActivated = function() --[[ Line: 268 ]]
+				onActivated = function()
 					-- upvalues: UseStateResult2_1 (copy), Title (copy)
 					UseStateResult2_1(Title)
 				end,
@@ -299,7 +299,7 @@ return function(p1) --[[ Line: 61 | Named "LibraryExperienceView" ]]
 					{ id = "World", text = p1.worldLabel, ref = UseRefResult }
 				},
 				value = if p1.isOpen then "Library" else "World",
-				onActivated = function(p2) --[[ Line: 291 ]]
+				onActivated = function(p2)
 					-- upvalues: p1 (copy)
 					if p2 == "Library" then
 						p1.onShowLibrary()
@@ -327,7 +327,7 @@ return function(p1) --[[ Line: 61 | Named "LibraryExperienceView" ]]
 				progress = WorldCutout.progress,
 				cornerRadius = UseTokensResult.Radius.Medium,
 				color = UseTokensResult.Color.Surface.Surface_0.Color3,
-				transparency = if IsTransitioning then WorldCutout.progress:map(function(): number --[[ Line: 318 ]]
+				transparency = if IsTransitioning then WorldCutout.progress:map(function(): number
 					return 0
 				end) else UseMotionResult.transparency,
 				Visible = IsOpen

@@ -9,7 +9,7 @@ local NormalizeCatalogV2SearchItemDetailsModule = require(script.Parent.normaliz
 local ConstantsModule = require(script.Parent.constants)
 local config = { assetTypeIds = true, bundleTypeIds = true }
 
-local function buildQueryStringWithArrayParams(List): string --[[ Line: 20 ]]
+local function buildQueryStringWithArrayParams(List): string
 	-- upvalues: config (copy), HttpService (copy)
 	local List1 = {}
 	
@@ -29,7 +29,7 @@ local function buildQueryStringWithArrayParams(List): string --[[ Line: 20 ]]
 end
 
 return {
-	getCatalogV2SearchItemDetails = function(Callback, p1) --[[ Line: 38 ]]
+	getCatalogV2SearchItemDetails = function(Callback, p1)
 		-- upvalues: buildQueryStringWithArrayParams (copy), Url (copy), MakeAXResponseHandlerModule (copy), NormalizeCatalogV2SearchItemDetailsModule (copy), ConstantsModule (copy)
 		local GET, GET2 = Callback(`{Url.CATALOG_URL}v2/search/items/details?{buildQueryStringWithArrayParams(p1)}`, "GET")
 		

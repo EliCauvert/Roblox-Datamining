@@ -1,6 +1,6 @@
 ﻿local CheckAndSendEventModule = require(script.Parent.Parent.Utils.checkAndSendEvent)
 
-return function(p1, Btn, State, Origin) --[[ Line: 4 ]]
+return function(p1, Btn, State, Origin)
 	-- upvalues: CheckAndSendEventModule (copy)
 	local config = { btn = Btn }
 	

@@ -17,7 +17,7 @@ local FFlagPlayerListReduceRerendersModule = require(Parent.Parent.Flags.FFlagPl
 local FFlagPlayerListFoundationSubscriptionIcon = PlayerListModule.Flags.FFlagPlayerListFoundationSubscriptionIcon
 local ImageSetLabel = require(CorePackages.Packages.UIBlox).Core.ImageSet.ImageSetLabel
 
-local function _(p1): boolean --[[ Line: 34 | Named "isFoundationImage" ]]
+local function _(p1): boolean
 	return p1 ~= nil and (p1 ~= "" and p1:match("^%w+://.*$") == nil)
 end
 
@@ -40,13 +40,13 @@ PlayerIcon.validateProps = TModule.strictInterface({
 	layoutValues = TModule.optional(TModule.table)
 })
 
-local _ = function(p1, p2) --[[ Line: 61 | Named "getSocialIconImage" ]]
+local _ = function(p1, p2)
 	local FriendIcon = p1.FriendIcons[p2.friendStatus]
 	
 	return if p2.isBlocked then p1.BlockedIcon elseif FriendIcon then FriendIcon else nil
 end
 
-local function getIconImage(LayoutValues, Player: Player, PlayerIconInfo, PlayerRelationship) --[[ Line: 73 ]]
+local function getIconImage(LayoutValues, Player: Player, PlayerIconInfo, PlayerRelationship)
 	-- upvalues: FFlagEnableBlackbirdCheck (copy), FFlagHidePremiumIconography (copy)
 	local FriendIcon = LayoutValues.FriendIcons[PlayerRelationship.friendStatus]
 	local BlockedIcon = if PlayerRelationship.isBlocked then LayoutValues.BlockedIcon elseif FriendIcon then FriendIcon else nil
@@ -89,9 +89,9 @@ local function getIconImage(LayoutValues, Player: Player, PlayerIconInfo, Player
 	return ""
 end
 
-function PlayerIcon.render(p1) --[[ Line: 115 ]]
+function PlayerIcon.render(p1)
 	-- upvalues: WithLayoutValuesFunction (copy), RoactModule (copy), getIconImage (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), FFlagPlayerListFoundationSubscriptionIcon (copy), FoundationModule (copy), ImageSetLabel (copy)
-	return WithLayoutValuesFunction(function(_) --[[ Line: 116 ]]
+	return WithLayoutValuesFunction(function(_)
 		-- upvalues: p1 (copy), RoactModule (upval), getIconImage (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), FFlagPlayerListFoundationSubscriptionIcon (upval), FoundationModule (upval), ImageSetLabel (upval)
 		local LayoutValues = p1.props.layoutValues
 		local AvatarIcon = p1.props.playerIconInfo and p1.props.playerIconInfo.avatarIcon
@@ -193,13 +193,13 @@ function PlayerIcon.render(p1) --[[ Line: 115 ]]
 	end)
 end
 
-local function mapStateToProps(p1) --[[ Line: 239 ]]
+local function mapStateToProps(p1)
 	return {
 		isSmallTouchDevice = p1.displayOptions.isSmallTouchDevice
 	}
 end
 
-local function v21(p1) --[[ Line: 245 ]]
+local function v21(p1)
 	-- upvalues: UseLayoutValuesFunction (copy), ReactModule (copy), PlayerIcon (copy), CryoModule (copy)
 	return ReactModule.createElement(PlayerIcon, CryoModule.Dictionary.join(p1, { layoutValues = UseLayoutValuesFunction() }))
 end

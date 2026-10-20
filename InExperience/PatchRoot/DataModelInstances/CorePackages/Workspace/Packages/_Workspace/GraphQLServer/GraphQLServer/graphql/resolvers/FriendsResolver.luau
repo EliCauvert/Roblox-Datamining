@@ -6,86 +6,86 @@ local FriendsConnectorModule = require(GraphQLServer.graphql.connectors.FriendsC
 local GetAllFriendsByUserIdFunction = FriendsConnectorModule.getAllFriendsByUserId
 local GetOnlineFriendsByUserIdFunction = FriendsConnectorModule.getOnlineFriendsByUserId
 
-local function _(p1): string --[[ Line: 20 | Named "convertToStringWithDefault" ]]
+local function _(p1): string
 	return if p1 then tostring(p1) else ""
 end
 
 return {
 	UserPresence = {
-		id = function(p1) --[[ Line: 26 ]]
+		id = function(p1)
 			return p1.id
 		end,
-		userPresenceType = function(p1) --[[ Line: 29 ]]
+		userPresenceType = function(p1)
 			return p1.userPresence.UserPresenceType
 		end,
-		gameId = function(p1): string --[[ Line: 32 ]]
+		gameId = function(p1): string
 			local GameInstanceId = p1.userPresence.gameInstanceId
 			
 			return if GameInstanceId then tostring(GameInstanceId) else ""
 		end,
-		placeId = function(p1): string --[[ Line: 35 ]]
+		placeId = function(p1): string
 			local PlaceId = p1.userPresence.placeId
 			
 			return if PlaceId then tostring(PlaceId) else ""
 		end,
-		rootPlaceId = function(p1): string --[[ Line: 38 ]]
+		rootPlaceId = function(p1): string
 			local RootPlaceId = p1.userPresence.rootPlaceId
 			
 			return if RootPlaceId then tostring(RootPlaceId) else ""
 		end,
-		universeId = function(p1): string --[[ Line: 41 ]]
+		universeId = function(p1): string
 			local UniverseId = p1.userPresence.universeId
 			
 			return if UniverseId then tostring(UniverseId) else ""
 		end,
-		lastLocation = function(p1) --[[ Line: 44 ]]
+		lastLocation = function(p1)
 			return p1.userPresence.lastLocation
 		end,
-		lastOnline = function(p1) --[[ Line: 47 ]]
+		lastOnline = function(p1)
 			return p1.userPresence.lastOnline
 		end
 	},
 	Friend = {
-		targetUserId = function(_, _, _, p1) --[[ Line: 52 ]]
+		targetUserId = function(_, _, _, p1)
 			return p1.variableValues.userId
 		end,
-		displayName = function() --[[ Line: 55 ]]
+		displayName = function()
 			-- upvalues: GraphQLError (copy)
 			return GraphQLError.new("The displayName field is being deprecated, please use UserProfile to retrieve names")
 		end,
-		presence = function(p1) --[[ Line: 60 ]]
+		presence = function(p1)
 			return p1
 		end,
-		hasVerifiedBadge = function(_): boolean --[[ Line: 63 ]]
+		hasVerifiedBadge = function(_): boolean
 			return false
 		end,
-		sortScore = function(p1) --[[ Line: 66 ]]
+		sortScore = function(p1)
 			return p1.sortScore or 0
 		end
 	},
 	AllFriendsPage = {
-		targetUserId = function(_, _, _, p1) --[[ Line: 71 ]]
+		targetUserId = function(_, _, _, p1)
 			return p1.variableValues.userId
 		end,
-		curCursor = function(_, _, _, p1) --[[ Line: 74 ]]
+		curCursor = function(_, _, _, p1)
 			return p1.variableValues.pageCursor or ""
 		end,
-		nextCursor = function(p1) --[[ Line: 77 ]]
+		nextCursor = function(p1)
 			return p1.NextCursor or ""
 		end,
-		prevCursor = function(p1) --[[ Line: 80 ]]
+		prevCursor = function(p1)
 			return p1.PreviousCursor or ""
 		end,
-		friends = function(p1) --[[ Line: 83 ]]
+		friends = function(p1)
 			return p1.PageItems or {}
 		end
 	},
 	Query = {
-		allFriendsByUserId = function(_, p1, p2) --[[ Line: 88 ]]
+		allFriendsByUserId = function(_, p1, p2)
 			-- upvalues: GetAllFriendsByUserIdFunction (copy)
 			return GetAllFriendsByUserIdFunction(p1, p2.fetchImpl)
 		end,
-		onlineFriendsByUserId = function(_, p1, p2) --[[ Line: 91 ]]
+		onlineFriendsByUserId = function(_, p1, p2)
 			-- upvalues: GetOnlineFriendsByUserIdFunction (copy)
 			return GetOnlineFriendsByUserIdFunction(p1, p2.fetchImpl)
 		end

@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableMaquettesShortLinkCDLInstructions", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("EnableMaquettesShortLinkCDLInstructions")
 end

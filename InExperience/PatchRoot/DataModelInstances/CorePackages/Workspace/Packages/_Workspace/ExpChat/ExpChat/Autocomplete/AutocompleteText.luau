@@ -2,7 +2,7 @@
 local AutocompleteTextModule = {}
 AutocompleteTextModule.__index = AutocompleteTextModule
 
-function AutocompleteTextModule.new(Callback) --[[ Line: 11 ]]
+function AutocompleteTextModule.new(Callback)
 	-- upvalues: AutocompleteTextModule (copy), TrieModule (copy)
 	local t = {}
 	setmetatable(t, AutocompleteTextModule)
@@ -12,7 +12,7 @@ function AutocompleteTextModule.new(Callback) --[[ Line: 11 ]]
 	return t
 end
 
-function AutocompleteTextModule:getResults(p1, Callback) --[[ Line: 22 ]]
+function AutocompleteTextModule:getResults(p1, Callback)
 	local AutocompleteResult = self.trie:autocomplete(p1)
 	
 	return if Callback then Callback(AutocompleteResult) else AutocompleteResult

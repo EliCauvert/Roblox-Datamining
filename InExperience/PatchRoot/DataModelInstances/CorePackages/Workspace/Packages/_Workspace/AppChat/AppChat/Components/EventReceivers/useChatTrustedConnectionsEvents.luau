@@ -17,16 +17,16 @@ local CryoModule = require(Parent.Cryo)
 local NewResult = require(AppChat.Logger):new(script.Name)
 local FFlagAppChatConversationTrustedFriendUpsellBanner = require(Parent.SharedFlags).FFlagAppChatConversationTrustedFriendUpsellBanner
 
-return function(p1) --[[ Line: 28 | Named "useChatTrustedConnectionsEvents" ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseSelectorFunction (copy), UseGetConversationFromIdModule (copy), UseIsInExperienceModule (copy), UseLocalUserIdFunction (copy), ReactModule (copy), ConversationChannelsModule (copy), RefreshConversationUnfilteredThreadsDetailsModule (copy), CryoModule (copy), ConversationModerationTypeChangedModule (copy), ReloadMessagesForConversationsModule (copy), RealtimeDeliveryModule (copy), TrustedConnections (copy), NewResult (copy), FFlagAppChatConversationTrustedFriendUpsellBanner (copy)
 	local UseDispatchResult = UseDispatchFunction()
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 30 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		return p2.ChatAppReducer.Conversations
 	end)
 	local UseGetConversationFromIdModuleResult = UseGetConversationFromIdModule(p1.activeConversationId)
 	local UseIsInExperienceModuleResult = UseIsInExperienceModule()
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 38 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseGetConversationFromIdModuleResult (copy), ConversationChannelsModule (upval), UseDispatchResult (copy), RefreshConversationUnfilteredThreadsDetailsModule (upval), UseIsInExperienceModuleResult (copy)
 		if UseGetConversationFromIdModuleResult and UseGetConversationFromIdModuleResult.participants and UseGetConversationFromIdModuleResult.type == ConversationChannelsModule.Type.OneToOne and p2 then
 			for _, participant in UseGetConversationFromIdModuleResult.participants do
@@ -41,7 +41,7 @@ return function(p1) --[[ Line: 28 | Named "useChatTrustedConnectionsEvents" ]]
 		UseGetConversationFromIdModuleResult,
 		UseIsInExperienceModuleResult
 	})
-	local UseResult1 = ReactModule.useCallback(function(p3, p4) --[[ Line: 56 ]]
+	local UseResult1 = ReactModule.useCallback(function(p3, p4)
 		-- upvalues: UseSelectorResult (copy), ConversationChannelsModule (upval), CryoModule (upval), UseDispatchResult (copy), ConversationModerationTypeChangedModule (upval)
 		for _, value in UseSelectorResult do
 			if value.type == ConversationChannelsModule.Type.OneToOne and value.participants and value.source == ConversationChannelsModule.Source.Friends and CryoModule.List.find(value.participants, p3) then
@@ -50,7 +50,7 @@ return function(p1) --[[ Line: 28 | Named "useChatTrustedConnectionsEvents" ]]
 			end
 		end
 	end, { UseDispatchResult, UseSelectorResult })
-	local UseResult2 = ReactModule.useCallback(function(p5) --[[ Line: 71 ]]
+	local UseResult2 = ReactModule.useCallback(function(p5)
 		-- upvalues: UseSelectorResult (copy), CryoModule (upval), UseDispatchResult (copy), ReloadMessagesForConversationsModule (upval)
 		local Ids = {}
 		
@@ -65,7 +65,7 @@ return function(p1) --[[ Line: 28 | Named "useChatTrustedConnectionsEvents" ]]
 			return
 		end
 	end, { UseDispatchResult, UseSelectorResult })
-	RealtimeDeliveryModule.useRealtimeNamespace(TrustedConnections.Namespace, function(Mouse) --[[ Line: 87 ]]
+	RealtimeDeliveryModule.useRealtimeNamespace(TrustedConnections.Namespace, function(Mouse)
 		-- upvalues: NewResult (upval), TrustedConnections (upval), UseLocalUserIdResult (copy), UseResult (copy), UseResult1 (copy), ConversationChannelsModule (upval), UseResult2 (copy), FFlagAppChatConversationTrustedFriendUpsellBanner (upval)
 		NewResult:debug("Received Realtime Event " .. TrustedConnections.Namespace .. " -> Actor: " .. tostring(Mouse.Actor) .. ", Target: " .. tostring(Mouse.Target) .. ", EventType: " .. tostring(Mouse.EventType))
 		local Text = tostring(Mouse.Actor)

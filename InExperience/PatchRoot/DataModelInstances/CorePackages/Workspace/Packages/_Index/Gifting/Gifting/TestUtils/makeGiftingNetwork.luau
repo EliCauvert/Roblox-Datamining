@@ -1,7 +1,7 @@
 ﻿local HttpService = game:GetService("HttpService")
 local HttpClientModule = require(script:FindFirstAncestor("Gifting").Parent.HttpClient)
 
-return function(p1) --[[ Line: 30 | Named "makeGiftingNetwork" ]]
+return function(p1)
 	-- upvalues: HttpClientModule (copy), HttpService (copy)
 	local P0 = p1 or {}
 	local v1 = nil
@@ -9,7 +9,7 @@ return function(p1) --[[ Line: 30 | Named "makeGiftingNetwork" ]]
 	
 	return {
 		network = HttpClientModule.createMockNetwork({
-			fallback = function(p2) --[[ Line: 36 ]]
+			fallback = function(p2)
 				-- upvalues: v1 (ref), Count (ref), P0 (copy), HttpService (upval)
 				v1 = p2
 				Count += 1
@@ -20,17 +20,17 @@ return function(p1) --[[ Line: 30 | Named "makeGiftingNetwork" ]]
 				}
 			end
 		}),
-		getLastRequest = function() --[[ Line: 52 ]]
+		getLastRequest = function()
 			-- upvalues: v1 (ref)
 			return v1
 		end,
-		getLastBody = function() --[[ Line: 55 ]]
+		getLastBody = function()
 			-- upvalues: v1 (ref), HttpService (upval)
 			local v2 = v1
 			
 			return if v2 == nil or v2.body == nil then nil else HttpService:JSONDecode(v2.body)
 		end,
-		getRequestCount = function() --[[ Line: 62 ]]
+		getRequestCount = function()
 			-- upvalues: Count (ref)
 			return Count
 		end

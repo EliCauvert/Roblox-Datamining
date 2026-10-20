@@ -7,9 +7,9 @@ local CreateButtonsTimeModule = {
 	clickColor = Color3.fromRGB(150, 150, 150)
 }
 
-function CreateButtonsTimeModule.createButtonsTime(p1) --[[ Line: 12 ]]
+function CreateButtonsTimeModule.createButtonsTime(p1)
 	-- upvalues: CreateButtonsTimeModule (copy), ButtonAssetsModule (copy), SecondsToTimeStrModule (copy)
-	function p1.createControlBarButton(Image, p2) --[[ Line: 14 ]]
+	function p1.createControlBarButton(Image, p2)
 		-- upvalues: p1 (copy), CreateButtonsTimeModule (upval)
 		local ControlBarButton = Instance.new("ImageButton")
 		ControlBarButton.Name = "ControlBarButton"
@@ -21,25 +21,25 @@ function CreateButtonsTimeModule.createButtonsTime(p1) --[[ Line: 12 ]]
 		ControlBarButton.Size = UDim2.new(0.1, 0, 0.9, 0)
 		ControlBarButton.SizeConstraint = Enum.SizeConstraint.RelativeXY
 		ControlBarButton:SetAttribute("useHoverColor", true)
-		ControlBarButton.MouseEnter:Connect(function() --[[ Line: 26 ]]
+		ControlBarButton.MouseEnter:Connect(function()
 			-- upvalues: ControlBarButton (copy), CreateButtonsTimeModule (upval)
 			if ControlBarButton:GetAttribute("useHoverColor") then
 				ControlBarButton.ImageColor3 = CreateButtonsTimeModule.hoverColor
 			end
 		end)
-		ControlBarButton.MouseLeave:Connect(function() --[[ Line: 31 ]]
+		ControlBarButton.MouseLeave:Connect(function()
 			-- upvalues: ControlBarButton (copy), CreateButtonsTimeModule (upval)
 			if ControlBarButton:GetAttribute("useHoverColor") then
 				ControlBarButton.ImageColor3 = CreateButtonsTimeModule.regularColor
 			end
 		end)
-		ControlBarButton.MouseButton1Down:Connect(function() --[[ Line: 36 ]]
+		ControlBarButton.MouseButton1Down:Connect(function()
 			-- upvalues: ControlBarButton (copy), CreateButtonsTimeModule (upval)
 			ControlBarButton.ImageColor3 = CreateButtonsTimeModule.clickColor
 		end)
 		
 		if p2 then
-			ControlBarButton.MouseButton1Up:Connect(function() --[[ Line: 40 ]]
+			ControlBarButton.MouseButton1Up:Connect(function()
 				-- upvalues: ControlBarButton (copy), CreateButtonsTimeModule (upval)
 				ControlBarButton.ImageColor3 = CreateButtonsTimeModule.hoverColor
 			end)

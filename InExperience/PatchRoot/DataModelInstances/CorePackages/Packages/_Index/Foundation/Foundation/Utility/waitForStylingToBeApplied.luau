@@ -1,4 +1,4 @@
-﻿return function() --[[ Line: 1 | Named "waitForStylingToBeApplied" ]]
+﻿return function()
 	task.wait()
 	task.wait()
 end

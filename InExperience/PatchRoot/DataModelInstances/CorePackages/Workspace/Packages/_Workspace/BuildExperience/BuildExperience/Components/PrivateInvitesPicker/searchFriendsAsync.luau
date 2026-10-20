@@ -7,7 +7,7 @@ local UrlBase = require(Parent.UrlBuilder).UrlBase
 local FetchFunction = HttpClientModule.fetch
 local AsPromiseFunction = HttpClientModule.asPromise
 
-return function(Input, Input1, p1, UserId) --[[ Line: 39 | Named "searchFriendsAsync" ]]
+return function(Input, Input1, p1, UserId)
 	-- upvalues: Players (copy), PromiseModule (copy), UrlBase (copy), HttpService (copy), FetchFunction (copy), AsPromiseFunction (copy)
 	local UserId1 = UserId
 	
@@ -28,10 +28,10 @@ return function(Input, Input1, p1, UserId) --[[ Line: 39 | Named "searchFriendsA
 		method = "GET",
 		analyticsKey = "build-experience.friends-search",
 		url = Formatted,
-		decode = function(p2) --[[ Line: 64 ]]
+		decode = function(p2)
 			return p2
 		end
-	}))):andThen(function(Result) --[[ Line: 69 ]]
+	}))):andThen(function(Result)
 		local Ids = {}
 		local PageItems = Result and Result.PageItems or {}
 		for _, pageItem in PageItems do

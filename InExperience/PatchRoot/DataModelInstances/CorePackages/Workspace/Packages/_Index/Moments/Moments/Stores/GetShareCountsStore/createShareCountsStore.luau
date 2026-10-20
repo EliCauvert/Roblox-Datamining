@@ -5,26 +5,26 @@ local CreateSignalFunction = SignalsModule.createSignal
 local CreateComputedFunction = SignalsModule.createComputed
 local config = { shareCount = 0, hasShared = false }
 
-return function() --[[ Line: 29 | Named "createShareCountsStore" ]]
+return function()
 	-- upvalues: CreateSignalFunction (copy), CreateComputedFunction (copy), config (copy), CryoModule (copy)
 	local Signal, Signal2 = CreateSignalFunction({})
 	local Tbl = {}
 	
 	return {
 		getShareInfoByMomentId = Signal,
-		getShareInfo = function(Key) --[[ Line: 34 ]]
+		getShareInfo = function(Key)
 			-- upvalues: Tbl (copy), CreateComputedFunction (upval), Signal (copy), config (upval)
 			if Tbl[Key] == nil then
-				Tbl[Key] = CreateComputedFunction(function(p1) --[[ Line: 36 ]]
+				Tbl[Key] = CreateComputedFunction(function(p1)
 					-- upvalues: Signal (upval), Key (copy), config (upval)
 					return Signal(p1)[Key] or config
 				end)
 			end
 			return Tbl[Key]
 		end,
-		setBatchShareCounts = function(p1) --[[ Line: 43 ]]
+		setBatchShareCounts = function(p1)
 			-- upvalues: Signal2 (copy)
-			Signal2(function(Tbl) --[[ Line: 44 ]]
+			Signal2(function(Tbl)
 				-- upvalues: p1 (copy)
 				local Copy = table.clone(Tbl)
 				
@@ -43,16 +43,16 @@ return function() --[[ Line: 29 | Named "createShareCountsStore" ]]
 				return Copy
 			end)
 		end,
-		setShareCount = function(p2, ShareCount, HasShared) --[[ Line: 61 ]]
+		setShareCount = function(p2, ShareCount, HasShared)
 			-- upvalues: Signal2 (copy), CryoModule (upval)
-			Signal2(function(p3) --[[ Line: 62 ]]
+			Signal2(function(p3)
 				-- upvalues: CryoModule (upval), p2 (copy), ShareCount (copy), HasShared (copy)
 				return (CryoModule.Dictionary.union(p3, {
 					[p2] = { shareCount = ShareCount, hasShared = HasShared }
 				}))
 			end)
 		end,
-		markShared = function(p2) --[[ Line: 72 ]]
+		markShared = function(p2)
 			-- upvalues: Signal (copy), config (upval), Signal2 (copy), CryoModule (upval)
 			local SignalResult = Signal(false)
 			local SignalResultEntry = SignalResult[p2] or config
@@ -68,7 +68,7 @@ return function() --[[ Line: 29 | Named "createShareCountsStore" ]]
 				return
 			end
 		end,
-		clear = function() --[[ Line: 86 ]]
+		clear = function()
 			-- upvalues: Signal2 (copy), Tbl (copy)
 			Signal2({})
 			table.clear(Tbl)

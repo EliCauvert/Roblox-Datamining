@@ -1,4 +1,4 @@
-﻿return function(p1) --[[ Line: 1 ]]
+﻿return function(p1)
 	return {
 		VerticalTile = p1.strictInterface({
 			Base = p1.strictInterface({

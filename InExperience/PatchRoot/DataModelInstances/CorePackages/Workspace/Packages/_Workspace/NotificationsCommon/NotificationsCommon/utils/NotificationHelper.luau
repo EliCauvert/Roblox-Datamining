@@ -7,7 +7,7 @@ local ConstantsModule = require(NotificationsCommon.constants)
 local FFlagLuaAppFixToastNotificationClosePosition = game:DefineFastFlag("FFlagLuaAppFixToastNotificationClosePosition", false)
 
 return {
-	calculateToastPosition = function(p1, p2, PositionYOffset) --[[ Line: 67 ]]
+	calculateToastPosition = function(p1, p2, PositionYOffset)
 		-- upvalues: FFlagLuaAppFixToastNotificationClosePosition (copy), GuiService (copy)
 		local NewY: number = if FFlagLuaAppFixToastNotificationClosePosition and GuiService then GuiService:GetGuiInset().Y + 20 else 60
 		
@@ -41,15 +41,15 @@ return {
 			positionYOffset = if FFlagLuaAppFixToastNotificationClosePosition then NewY * -1 else -50
 		}
 	end,
-	getDeviceOrientation = function(Vector) --[[ Line: 22 ]]
+	getDeviceOrientation = function(Vector)
 		-- upvalues: TypeModule (copy)
 		return if Vector.Y < Vector.X then TypeModule.DeviceOrientationEnum.Landscape else TypeModule.DeviceOrientationEnum.Portrait
 	end,
-	getNotificationSize = function(p1, p2: number): UDim2 --[[ Line: 28 ]]
+	getNotificationSize = function(p1, p2: number): UDim2
 		-- upvalues: ConstantsModule (copy)
 		return if p2 < ConstantsModule.FullWidthDeviceThreshold then UDim2.new(0, p2 - 24, 0, 0) elseif p1 and p2 < ConstantsModule.CompactCardThreashold then UDim2.new(0, ConstantsModule.InExperienceToastWidth, 0, 0) else UDim2.new(0, ConstantsModule.InAppToastWidth, 0, 0)
 	end,
-	marshalStreamNotificationData = function(p1, _) --[[ Line: 42 ]]
+	marshalStreamNotificationData = function(p1, _)
 		local config = {
 			currentState = p1.content.currentState,
 			notificationType = p1.content.notificationType,
@@ -66,21 +66,21 @@ return {
 		end
 		return config
 	end,
-	isToastToRight = function(Landscape): boolean --[[ Line: 63 ]]
+	isToastToRight = function(Landscape): boolean
 		-- upvalues: TypeModule (copy)
 		return Landscape == TypeModule.DeviceOrientationEnum.Landscape
 	end,
-	isDesktopDevice = function(): boolean --[[ Line: 141 ]]
+	isDesktopDevice = function(): boolean
 		-- upvalues: UserInputService (copy)
 		local None = Enum.Platform.None
-		pcall(function() --[[ Line: 143 ]]
+		pcall(function()
 			-- upvalues: None (ref), UserInputService (upval)
 			None = UserInputService:GetPlatform()
 		end)
 		
 		return None == Enum.Platform.Windows or (None == Enum.Platform.OSX or None == Enum.Platform.UWP)
 	end,
-	fireEvent = function(p1, p2, p3, p4) --[[ Line: 121 ]]
+	fireEvent = function(p1, p2, p3, p4)
 		-- upvalues: ConstantsModule (copy), CryoModule (copy)
 		local config = { streamContext = "InApp" }
 		

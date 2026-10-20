@@ -13,7 +13,7 @@ local FFlagAppChatPerfTrackingModule = require(AppChat.Flags.FFlagAppChatPerfTra
 local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
 local FFlagFixPaginatedChatMembersCutoffModule = require(AppChat.Flags.FFlagFixPaginatedChatMembersCutoff)
 
-local function getActiveRouteName(Navigation) --[[ Line: 25 ]]
+local function getActiveRouteName(Navigation)
 	local State = Navigation and Navigation.state
 	local Route = nil
 	
@@ -32,9 +32,9 @@ local function getActiveRouteName(Navigation) --[[ Line: 25 ]]
 	return nil
 end
 
-local function _(p1) --[[ Line: 52 | Named "wrapInOverlay" ]]
+local function _(p1)
 	-- upvalues: ResponsiveModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), getActiveRouteName (copy), EnumScreensModule (copy), ReactModule (copy), SystemMenuTopBarModule (copy), ConfigureTopBarWithNavigationOptionsModule (copy), FoundationModule (copy)
-	return function(p2) --[[ Line: 53 ]]
+	return function(p2)
 		-- upvalues: ResponsiveModule (upval), FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), getActiveRouteName (upval), EnumScreensModule (upval), ReactModule (upval), SystemMenuTopBarModule (upval), ConfigureTopBarWithNavigationOptionsModule (upval), FoundationModule (upval), p1 (copy)
 		local UseBreakpointYOrSmallerResult = ResponsiveModule.useBreakpointYOrSmaller(ResponsiveModule.Keys.Small)
 		local _UDim2 = UDim2.new(1, if ResponsiveModule.useBreakpointXOrSmaller(ResponsiveModule.Keys.Small) then -24 else -360, 1, if UseBreakpointYOrSmallerResult then -24 else -72)
@@ -65,7 +65,7 @@ local function _(p1) --[[ Line: 52 | Named "wrapInOverlay" ]]
 	end
 end
 
-return function(p1) --[[ Line: 98 ]]
+return function(p1)
 	-- upvalues: RoactNavigationModule (copy), FFlagFixPaginatedChatMembersCutoffModule (copy), ReactModule (copy), IsolatedAutoFocusNavigationModule (copy), ResponsiveModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), getActiveRouteName (copy), EnumScreensModule (copy), SystemMenuTopBarModule (copy), ConfigureTopBarWithNavigationOptionsModule (copy), FoundationModule (copy), FocusNavigableSurfaceIdentifierEnum (copy)
 	local RobloxStackNavigator = RoactNavigationModule.createRobloxStackNavigator(p1, {
 		defaultNavigationOptions = {
@@ -75,7 +75,7 @@ return function(p1) --[[ Line: 98 ]]
 	})
 	local OverlayNavigatorConnector = ReactModule.PureComponent:extend("OverlayNavigatorConnector")
 	OverlayNavigatorConnector.router = RobloxStackNavigator.router
-	local IsolatedAutoFocusNavigationModuleResult = IsolatedAutoFocusNavigationModule(function(p2) --[[ Line: 53 ]]
+	local IsolatedAutoFocusNavigationModuleResult = IsolatedAutoFocusNavigationModule(function(p2)
 		-- upvalues: ResponsiveModule (upval), FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), getActiveRouteName (upval), EnumScreensModule (upval), ReactModule (upval), SystemMenuTopBarModule (upval), ConfigureTopBarWithNavigationOptionsModule (upval), FoundationModule (upval), RobloxStackNavigator (copy)
 		local UseBreakpointYOrSmallerResult = ResponsiveModule.useBreakpointYOrSmaller(ResponsiveModule.Keys.Small)
 		local _UDim2 = UDim2.new(1, if ResponsiveModule.useBreakpointXOrSmaller(ResponsiveModule.Keys.Small) then -24 else -360, 1, if UseBreakpointYOrSmallerResult then -24 else -72)
@@ -105,7 +105,7 @@ return function(p1) --[[ Line: 98 ]]
 		})
 	end, FocusNavigableSurfaceIdentifierEnum.PopUp)
 	
-	function OverlayNavigatorConnector.render(p2) --[[ Line: 112 ]]
+	function OverlayNavigatorConnector.render(p2)
 		-- upvalues: ReactModule (upval), IsolatedAutoFocusNavigationModuleResult (copy)
 		return ReactModule.createElement(IsolatedAutoFocusNavigationModuleResult, p2.props)
 	end

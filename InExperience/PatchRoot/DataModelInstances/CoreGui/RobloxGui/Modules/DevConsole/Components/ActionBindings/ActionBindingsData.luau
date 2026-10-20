@@ -2,26 +2,26 @@
 local SignalModule = require(script.Parent.Parent.Parent.Signal)
 local ChartHeaderNames = require(script.Parent.Parent.Parent.Constants).ActionBindingsFormatting.ChartHeaderNames
 local config = {
-	[ChartHeaderNames[1]] = function(p1, p2): boolean --[[ Line: 9 ]]
+	[ChartHeaderNames[1]] = function(p1, p2): boolean
 		return p1.counter < p2.counter
 	end,
-	[ChartHeaderNames[2]] = function(p1, p2): boolean --[[ Line: 12 ]]
+	[ChartHeaderNames[2]] = function(p1, p2): boolean
 		return if p1.actionInfo.priorityLevel == p2.actionInfo.priorityLevel then p1.counter < p2.counter else p1.actionInfo.priorityLevel < p2.actionInfo.priorityLevel
 	end,
-	[ChartHeaderNames[3]] = function(p1, p2) --[[ Line: 18 ]]
+	[ChartHeaderNames[3]] = function(p1, p2)
 		return if p1.actionInfo.isCore == p2.actionInfo.isCore then p1.counter < p2.counter else p1.actionInfo.isCore
 	end,
-	[ChartHeaderNames[4]] = function(p1, p2): boolean --[[ Line: 25 ]]
+	[ChartHeaderNames[4]] = function(p1, p2): boolean
 		return p1.name:lower() < p2.name:lower()
 	end,
-	[ChartHeaderNames[5]] = function(p1, p2): boolean --[[ Line: 28 ]]
+	[ChartHeaderNames[5]] = function(p1, p2): boolean
 		return tostring(p1.actionInfo.inputTypes[1]) < tostring(p2.actionInfo.inputTypes[1])
 	end
 }
 local ActionBindingsDataModule = {}
 ActionBindingsDataModule.__index = ActionBindingsDataModule
 
-function ActionBindingsDataModule.new() --[[ Line: 36 ]]
+function ActionBindingsDataModule.new()
 	-- upvalues: ActionBindingsDataModule (copy), SignalModule (copy), ChartHeaderNames (copy)
 	local t = {}
 	setmetatable(t, ActionBindingsDataModule)
@@ -35,7 +35,7 @@ function ActionBindingsDataModule.new() --[[ Line: 36 ]]
 	return t
 end
 
-function ActionBindingsDataModule:setSortType(_sortType) --[[ Line: 49 ]]
+function ActionBindingsDataModule:setSortType(_sortType)
 	-- upvalues: config (copy)
 	if config[_sortType] then
 		self._sortType = _sortType
@@ -48,19 +48,19 @@ function ActionBindingsDataModule:setSortType(_sortType) --[[ Line: 49 ]]
 	end
 end
 
-function ActionBindingsDataModule:getSortType() --[[ Line: 59 ]]
+function ActionBindingsDataModule:getSortType()
 	return self._sortType
 end
 
-function ActionBindingsDataModule:Signal() --[[ Line: 63 ]]
+function ActionBindingsDataModule:Signal()
 	return self._bindingsUpdated
 end
 
-function ActionBindingsDataModule:getCurrentData() --[[ Line: 67 ]]
+function ActionBindingsDataModule:getCurrentData()
 	return self._sortedBindingData
 end
 
-function ActionBindingsDataModule:updateBindingDataEntry(Name, p1) --[[ Line: 73 ]]
+function ActionBindingsDataModule:updateBindingDataEntry(Name, p1)
 	if p1 == nil then
 		self._bindingsData[Name] = nil
 		
@@ -86,11 +86,11 @@ function ActionBindingsDataModule:updateBindingDataEntry(Name, p1) --[[ Line: 73
 	end
 end
 
-function ActionBindingsDataModule:isRunning() --[[ Line: 98 ]]
+function ActionBindingsDataModule:isRunning()
 	return self._isRunning
 end
 
-function ActionBindingsDataModule:start() --[[ Line: 102 ]]
+function ActionBindingsDataModule:start()
 	-- upvalues: ContextActionService (copy)
 	for i, value in pairs((ContextActionService:GetAllBoundActionInfo())) do
 		value.isCore = false
@@ -101,7 +101,7 @@ function ActionBindingsDataModule:start() --[[ Line: 102 ]]
 		self:updateBindingDataEntry(i1, value1)
 	end
 	if not self._actionChangedConnection then
-		self._actionChangedConnection = ContextActionService.BoundActionChanged:connect(function(ActionChanged, ChangeName, ChangeTable) --[[ Line: 117 ]]
+		self._actionChangedConnection = ContextActionService.BoundActionChanged:connect(function(ActionChanged, ChangeName, ChangeTable)
 			-- upvalues: self (copy)
 			self:updateBindingDataEntry(ActionChanged, nil)
 			self:updateBindingDataEntry(ChangeName, ChangeTable)
@@ -109,7 +109,7 @@ function ActionBindingsDataModule:start() --[[ Line: 102 ]]
 		end)
 	end
 	if not self._actionAddedConnection then
-		self._actionAddedConnection = ContextActionService.BoundActionAdded:connect(function(ActionAdded, _, FunctionInfoTable, IsCore) --[[ Line: 126 ]]
+		self._actionAddedConnection = ContextActionService.BoundActionAdded:connect(function(ActionAdded, _, FunctionInfoTable, IsCore)
 			-- upvalues: self (copy)
 			FunctionInfoTable.isCore = IsCore
 			self:updateBindingDataEntry(ActionAdded, FunctionInfoTable)
@@ -117,7 +117,7 @@ function ActionBindingsDataModule:start() --[[ Line: 102 ]]
 		end)
 	end
 	if not self._actionRemovedConnection then
-		self._actionRemovedConnection = ContextActionService.BoundActionRemoved:connect(function(ActionRemoved, _, _) --[[ Line: 135 ]]
+		self._actionRemovedConnection = ContextActionService.BoundActionRemoved:connect(function(ActionRemoved, _, _)
 			-- upvalues: self (copy)
 			self:updateBindingDataEntry(ActionRemoved, nil)
 			self._bindingsUpdated:Fire(self._sortedBindingData)
@@ -126,7 +126,7 @@ function ActionBindingsDataModule:start() --[[ Line: 102 ]]
 	self._isRunning = true
 end
 
-function ActionBindingsDataModule:stop() --[[ Line: 143 ]]
+function ActionBindingsDataModule:stop()
 	if self.actionChangedConnector then
 		self.actionChangedConnector:Disconnect()
 		self.actionChangedConnector = nil

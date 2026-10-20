@@ -21,18 +21,18 @@ local FFlagSocialCarouselUnselectableSkeletonModule = require(SocialCarousel.Fla
 local FFlagSocialCarouselRemoveStrokeForAddFriendsModule = require(SocialCarousel.Flags.FFlagSocialCarouselRemoveStrokeForAddFriends)
 local FIntSocalCarouselMaxNewRequestsCountModule = require(SocialCarousel.Flags.FIntSocalCarouselMaxNewRequestsCount)
 
-return function(p1) --[[ Line: 48 | Named "Tile" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseTokensFunction (copy), FFlagSocialCarouselShowLoadingSkeletonModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), View (copy), Image (copy), Enums (copy), Text (copy), StatusIndicator (copy), StatusIndicatorVariant (copy), FIntSocalCarouselMaxNewRequestsCountModule (copy), FFlagSocialCarouselUnselectableSkeletonModule (copy), Skeleton (copy), Radius (copy), FFlagSocialCarouselRemoveStrokeForAddFriendsModule (copy), Icon (copy), IconSize (copy)
 	local TileRef = p1.tileRef or ReactModule.useRef(nil)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local TitleSmall = UseTokensResult.Typography.TitleSmall
 	local IsLoading = FFlagSocialCarouselShowLoadingSkeletonModule and p1.isLoading
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 55 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), TitleSmall (copy), TextService (upval)
 		return if p1.title then if FoundationFontFaceMigration then GetTextSizeFunction(p1.title, TitleSmall.FontSize, TitleSmall.Font, Vector2.new(500, 500), { addTemporaryPadding = false }) else TextService:GetTextSize(p1.title, TitleSmall.FontSize, TitleSmall.Font, Vector2.new(500, 500)) else Vector2.new(0, 0)
 	end, { p1.title })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 76 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), ReactModule (upval), View (upval), Image (upval)
 		return if p1.presenceIconEnabled or p1.titleIcon then if p1.presenceIconEnabled then ReactModule.createElement(View, {
 			tag = "size-300-300 bg-system-success radius-circle",
@@ -43,13 +43,13 @@ return function(p1) --[[ Line: 48 | Named "Tile" ]]
 			Image = p1.titleIcon
 		}) else nil else nil
 	end, { p1.titleIcon, p1.presenceIconEnabled })
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 98 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: TileRef (copy), UseMemoResult1 (copy), ReactModule (upval), UseMemoResult (copy)
 		return if TileRef.current then ReactModule.createElement("UISizeConstraint", {
 			MaxSize = Vector2.new(if UseMemoResult1 then TileRef.current.AbsoluteSize.X - 16 else TileRef.current.AbsoluteSize.X, UseMemoResult.Y)
 		}) else nil
 	end, { UseMemoResult })
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 113 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), ReactModule (upval), Text (upval), UseTokensResult (copy)
 		return if p1.subtitle then ReactModule.createElement(Text, {
 			tag = "size-full-0 auto-y clip text-truncate-end",
@@ -58,7 +58,7 @@ return function(p1) --[[ Line: 48 | Named "Tile" ]]
 			Text = p1.subtitle
 		}) else nil
 	end, { p1.subtitle })
-	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 126 ]]
+	local UseMemoResult4 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), ReactModule (upval), StatusIndicator (upval), StatusIndicatorVariant (upval), FIntSocalCarouselMaxNewRequestsCountModule (upval)
 		return if p1.badge then ReactModule.createElement(StatusIndicator, {
 			Position = UDim2.new(0.9, 0, 0.1, 0),
@@ -74,7 +74,7 @@ return function(p1) --[[ Line: 48 | Named "Tile" ]]
 		Size = p1.itemSize,
 		LayoutOrder = p1.index,
 		ref = TileRef,
-		onStateChanged = ReactModule.useCallback(function(Hover) --[[ Line: 109 ]]
+		onStateChanged = ReactModule.useCallback(function(Hover)
 			-- upvalues: UseStateResult2 (copy), Enums (upval)
 			UseStateResult2(Hover == Enums.ControlState.Hover or Hover == Enums.ControlState.Pressed)
 		end, {}),

@@ -7,7 +7,7 @@ local ConstantsModule = require(ChatLineReporting.Common.Constants)
 local FFlagExpChatUseChatMuteStore = require(Parent.SharedFlags).FFlagExpChatUseChatMuteStore
 local ExpChatMuteByUserIdBeforeUsernameCheck = game:DefineFastFlag("ExpChatMuteByUserIdBeforeUsernameCheck", false)
 
-function mutePlayer(p1, Player: Player, p2) --[[ Line: 23 ]]
+function mutePlayer(p1, Player: Player, p2)
 	-- upvalues: FFlagExpChatUseChatMuteStore (copy), ExpChatMuteByUserIdBeforeUsernameCheck (copy), ConstantsModule (copy), ChatMuteModule (copy), ExpChatSharedModule (copy), RBXMuteCommand (copy)
 	if FFlagExpChatUseChatMuteStore then
 		if p1.username == "" and (not ExpChatMuteByUserIdBeforeUsernameCheck or not tonumber(p1.userId)) then

@@ -32,7 +32,7 @@ local ArgoPartyExperimentation = require(Parent.SocialExperiments).ArgoPartyExpe
 local FlyoutLeftHeader = require(Parent.FlyoutSidePanel).Components.FlyoutLeftHeader
 local FlyoutSidePanelIXP = require(Parent.SharedExperimentDefinition).FlyoutSidePanelIXP
 
-local function SearchTopBarWrapper() --[[ Line: 55 ]]
+local function SearchTopBarWrapper()
 	-- upvalues: GetTopBarStoreModule (copy), EnumScreensModule (copy), UseLocalizationFunction (copy), ReactModule (copy), SearchTopBarModule (copy)
 	local TopBarStoreModule = GetTopBarStoreModule(false)
 	local SetScreenTopBarFunction = TopBarStoreModule.setScreenTopBar
@@ -48,7 +48,7 @@ local function SearchTopBarWrapper() --[[ Line: 55 ]]
 			cancelText = UseLocalizationResult.cancelText,
 			searchPlaceholderText = UseLocalizationResult.searchPlaceholderText,
 			captureFocusOnMount = v1.shouldAutoFocusCenter,
-			onSelectCallback = ReactModule.useCallback(function() --[[ Line: 65 ]]
+			onSelectCallback = ReactModule.useCallback(function()
 				-- upvalues: v1 (copy)
 				local CloseInputBarFunction: () -> () = v1.closeInputBar
 				
@@ -56,15 +56,15 @@ local function SearchTopBarWrapper() --[[ Line: 55 ]]
 					CloseInputBarFunction()
 				end
 			end, { v1.closeInputBar }),
-			resetOnMount = ReactModule.useCallback(function() --[[ Line: 72 ]]
+			resetOnMount = ReactModule.useCallback(function()
 				-- upvalues: SetScreenTopBarFunction (copy), EnumScreensModule (upval)
 				SetScreenTopBarFunction(EnumScreensModule.ChatLanding, { shouldAutoFocusCenter = false })
 			end, { SetScreenTopBarFunction }),
-			cancelCallback = ReactModule.useCallback(function() --[[ Line: 78 ]]
+			cancelCallback = ReactModule.useCallback(function()
 				-- upvalues: SetScreenTopBarFunction (copy), EnumScreensModule (upval)
 				SetScreenTopBarFunction(EnumScreensModule.ChatLanding, { shouldRenderCenter = false, filterText = "" })
 			end, { SetScreenTopBarFunction }),
-			textChangedCallback = ReactModule.useCallback(function(FilterText) --[[ Line: 85 ]]
+			textChangedCallback = ReactModule.useCallback(function(FilterText)
 				-- upvalues: SetScreenTopBarFunction (copy), EnumScreensModule (upval)
 				SetScreenTopBarFunction(EnumScreensModule.ChatLanding, { filterText = FilterText })
 			end, { SetScreenTopBarFunction })
@@ -72,12 +72,12 @@ local function SearchTopBarWrapper() --[[ Line: 55 ]]
 	})
 end
 
-local function v31() --[[ Line: 109 ]]
+local function v31()
 	-- upvalues: ReactModule (copy), SearchTopBarWrapper (copy)
 	return ReactModule.createElement(SearchTopBarWrapper)
 end
 
-return function(p1) --[[ Line: 113 | Named "ChatLandingTopBar" ]]
+return function(p1)
 	-- upvalues: ConstantsModule (copy), GetTopBarStoreModule (copy), UseSignalStateFunction (copy), UseChatLandingVisibilityModule (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), UseLocalizationFunction (copy), ReactModule (copy), ChatLandingSearchRowModule (copy), FFlagAppChatFoundationSearchInputModule (copy), v31 (copy), EnumScreensModule (copy), ChatLandingTelemetryEventsModule (copy), FlyoutLeftHeader (copy), FlyoutSidePanelIXP (copy), FFlagAppChatWideAlwaysVisibleSearchBoxModule (copy), FFlagEnableHeaderBarButtonsUpdate (copy), FoundationModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), ArgoPartyExperimentation (copy), StreamNotificationsBellIcon (copy), FFlagStreamNotificationBellEntryPoint (copy), AppPage (copy), SnoozeToastNotificationsButtonModule (copy), IconButton (copy), Images (copy), GetFFlagIsSquadEnabledFunction (copy), ChatTopBarBaseModule (copy)
 	local ScreenName = p1.screenName
 	local Navigation = p1.navigation
@@ -96,13 +96,13 @@ return function(p1) --[[ Line: 113 | Named "ChatLandingTopBar" ]]
 		headerText = HeaderText.shouldLocalize and HeaderText.raw or nil
 	})
 	local HeaderText1 = HeaderText.shouldLocalize and UseLocalizationResult.headerText or (HeaderText.raw or "")
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 138 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: ReactModule (upval), ChatLandingSearchRowModule (upval), WideModeScreenProps (copy)
 		return ReactModule.createElement(ChatLandingSearchRowModule, {
 			exitVariant = if WideModeScreenProps then "Cancel" else "Chevron"
 		})
 	end, { WideModeScreenProps })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 148 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: SetScreenTopBarFunction (copy), EnumScreensModule (upval), UseTelemetryModuleResult (copy), ChatLandingTelemetryEventsModule (upval)
 		SetScreenTopBarFunction(EnumScreensModule.ChatLanding, {
 			shouldRenderCenter = true,
@@ -111,12 +111,12 @@ return function(p1) --[[ Line: 113 | Named "ChatLandingTopBar" ]]
 		})
 		UseTelemetryModuleResult.emit(ChatLandingTelemetryEventsModule.ChatLandingSearchBtnClicked, {})
 	end, { UseTelemetryModuleResult, SetScreenTopBarFunction })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 157 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: Navigation (copy), EnumScreensModule (upval), UseTelemetryModuleResult (copy), ChatLandingTelemetryEventsModule (upval)
 		Navigation.navigate(EnumScreensModule.CreateNewChat)
 		UseTelemetryModuleResult.emit(ChatLandingTelemetryEventsModule.ChatLandingComposeBtnClicked, {})
 	end, { UseTelemetryModuleResult, Navigation })
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 162 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: ReactModule (upval), FlyoutLeftHeader (upval), HeaderText1 (copy), FlyoutSidePanelIXP (upval)
 		return ReactModule.createElement(FlyoutLeftHeader, {
 			titleText = HeaderText1,
@@ -129,7 +129,7 @@ return function(p1) --[[ Line: 113 | Named "ChatLandingTopBar" ]]
 	local TopBarShowNotifications = UseChatLandingVisibilityModuleResult.topBarShowNotifications
 	local TopBarShowSnoozeNotifications = UseChatLandingVisibilityModuleResult.topBarShowSnoozeNotifications
 	local NotificationCount = UseChatLandingVisibilityModuleResult.notificationCount
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 181 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: RightHidden (copy), FFlagEnableHeaderBarButtonsUpdate (upval), ReactModule (upval), FoundationModule (upval), TopBarShowSearch (ref), FFlagDebugAppChatEnableDomLocatorsModule (upval), DomLocatorsModule (upval), UseResult1 (copy), TopBarShowCreateChatGroup (copy), ArgoPartyExperimentation (upval), UseResult2 (copy), TopBarShowNotifications (copy), StreamNotificationsBellIcon (upval), NotificationCount (copy), FFlagStreamNotificationBellEntryPoint (upval), AppPage (upval), TopBarShowSnoozeNotifications (copy), SnoozeToastNotificationsButtonModule (upval), IconButtonWidth (copy), IconButton (upval), Images (upval), GetFFlagIsSquadEnabledFunction (upval), WideModeScreenProps (copy)
 		return if RightHidden then nil elseif FFlagEnableHeaderBarButtonsUpdate then ReactModule.createElement(FoundationModule.View, {
 			tag = "row align-x-right align-y-center gap-xsmall auto-xy"

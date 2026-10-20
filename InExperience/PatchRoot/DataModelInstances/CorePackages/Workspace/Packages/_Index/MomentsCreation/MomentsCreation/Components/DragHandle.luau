@@ -4,7 +4,7 @@ local ReactModule = require(Parent.React)
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1) --[[ Line: 27 ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy)
 	local UseTokensResult = UseTokensFunction()
 	

@@ -17,19 +17,19 @@ local FFlagAXFixAvatarScreenVR = AvatarExperienceFlagsModule.FFlagAXFixAvatarScr
 local FFlagAXPartialPageModalBackgroundShim = AvatarExperienceFlagsModule.FFlagAXPartialPageModalBackgroundShim
 local AXCatalogPartialPageModalBottomInsetMultiplier = game:DefineFastInt("AXCatalogPartialPageModalBottomInsetMultiplier", 25)
 
-local function selectDeviceOrientation(p1) --[[ Line: 35 ]]
+local function selectDeviceOrientation(p1)
 	return p1.DeviceOrientation
 end
 
-local function v16(p1) --[[ Line: 56 ]]
+local function v16(p1)
 	return p1.ScreenSize
 end
 
-local function v17(p1) --[[ Line: 60 ]]
+local function v17(p1)
 	return p1.GlobalGuiInset and p1.GlobalGuiInset.bottom or 0
 end
 
-return function(p1) --[[ Line: 64 | Named "AXPartialPageModal" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseSelectorFunction (copy), v16 (copy), ReactModule (copy), FFlagAXFixAvatarScreenVR (copy), v17 (copy), UseIsSpatialFunction (copy), UseAXPartialPageModalFocusHandlerModule (copy), AXPartialPageModalDockedPadding (copy), AXCatalogPartialPageModalBottomInsetMultiplier (copy), selectDeviceOrientation (copy), ResponsiveModule (copy), View (copy), Button (copy), FillBehavior (copy), FFlagAXPartialPageModalBackgroundShim (copy), ModalWindow (copy), WrapForReactPortalModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseSelectorResult = UseSelectorFunction(v16)
@@ -48,7 +48,7 @@ return function(p1) --[[ Line: 64 | Named "AXPartialPageModal" ]]
 	local UseAXPartialPageModalFocusHandlerModuleResult = UseAXPartialPageModalFocusHandlerModule(UseRefResult)
 	
 	if FFlagAXFixAvatarScreenVR then
-		ReactModule.useLayoutEffect(function() --[[ Line: 84 ]]
+		ReactModule.useLayoutEffect(function()
 			-- upvalues: UseIsSpatialResult (copy), UseRefResult1 (copy), Callback (ref)
 			if not UseIsSpatialResult then return end
 			local Current = UseRefResult1.current
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 64 | Named "AXPartialPageModal" ]]
 			local SurfaceGui = Current:FindFirstAncestorOfClass("SurfaceGui")
 			
 			if SurfaceGui == nil then return end
-			local function syncSize() --[[ Line: 98 ]]
+			local function syncSize()
 				-- upvalues: Callback (upval), SurfaceGui (copy)
 				Callback(SurfaceGui.AbsoluteSize)
 			end
@@ -65,7 +65,7 @@ return function(p1) --[[ Line: 64 | Named "AXPartialPageModal" ]]
 			Callback(SurfaceGui.AbsoluteSize)
 			local Connection = SurfaceGui:GetPropertyChangedSignal("AbsoluteSize"):Connect(syncSize)
 			
-			return function() --[[ Line: 104 ]]
+			return function()
 				-- upvalues: Connection (copy)
 				Connection:Disconnect()
 			end
@@ -86,7 +86,7 @@ return function(p1) --[[ Line: 64 | Named "AXPartialPageModal" ]]
 	end
 	local Position = if p1.position then p1.position else nil
 	
-	local function v30() --[[ Line: 134 ]]
+	local function v30()
 		-- upvalues: p1 (copy), ReactModule (upval), View (upval), Button (upval), FillBehavior (upval)
 		local Elements = {}
 		
@@ -112,7 +112,7 @@ return function(p1) --[[ Line: 64 | Named "AXPartialPageModal" ]]
 		return Elements
 	end
 	
-	local function v31() --[[ Line: 164 ]]
+	local function v31()
 		-- upvalues: p1 (copy), ReactModule (upval), Button (upval), FillBehavior (upval)
 		local Elements = {}
 		

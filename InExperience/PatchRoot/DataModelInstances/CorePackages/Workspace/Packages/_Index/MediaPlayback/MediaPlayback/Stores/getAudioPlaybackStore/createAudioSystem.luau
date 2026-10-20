@@ -3,7 +3,7 @@ local CoreGui = game:GetService("CoreGui")
 local AssetIdAsContentModule = require(MediaPlayback.Common.assetIdAsContent)
 local GetFFlagAudioPreviewLuaModule = require(MediaPlayback.Flags.getFFlagAudioPreviewLua)
 
-local function getOrCreateInstances(Parent) --[[ Line: 15 ]]
+local function getOrCreateInstances(Parent)
 	local AudioPlayback = Parent:FindFirstChild("AudioPlayback")
 	local AudioDeviceOutput = if AudioPlayback then AudioPlayback:FindFirstChildWhichIsA("AudioDeviceOutput") else nil
 	
@@ -26,7 +26,7 @@ local function getOrCreateInstances(Parent) --[[ Line: 15 ]]
 	end
 end
 
-return function(p1, p2) --[[ Line: 43 | Named "createAudioSystem" ]]
+return function(p1, p2)
 	-- upvalues: getOrCreateInstances (copy), CoreGui (copy), AssetIdAsContentModule (copy), GetFFlagAudioPreviewLuaModule (copy)
 	local OrCreateInstances = getOrCreateInstances(CoreGui)
 	local AudioPlayer = Instance.new("AudioPlayer")
@@ -40,7 +40,7 @@ return function(p1, p2) --[[ Line: 43 | Named "createAudioSystem" ]]
 	AudioPlayer.PlaybackSpeed = 0
 	AudioPlayer:Play()
 	
-	local function destroy() --[[ Line: 78 ]]
+	local function destroy()
 		-- upvalues: AudioPlayer (copy), OrCreateInstances (copy)
 		AudioPlayer:Destroy()
 		

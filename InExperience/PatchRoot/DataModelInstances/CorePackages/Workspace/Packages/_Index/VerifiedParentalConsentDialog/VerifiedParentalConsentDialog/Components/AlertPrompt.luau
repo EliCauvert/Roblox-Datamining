@@ -5,7 +5,7 @@ local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 
-return function(p1) --[[ Line: 21 | Named "AlertPrompt" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), InteractiveAlert (copy), ButtonType (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		GoToSettings = "Common.VerifiedParentalConsent.Action.GoToSettings",

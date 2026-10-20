@@ -9,18 +9,18 @@ local SignalsExperimentalModule = require(Parent.SignalsExperimental)
 local _ = require(script.Parent.types)
 local DEV = _G.__DEV__ or _G.__TESTEZ_RUNNING_TEST__
 
-return function(p1) --[[ Line: 44 | Named "createProjectedNavigationObject" ]]
+return function(p1)
 	-- upvalues: CreateSignalFunction (copy), Actions (copy), SignalsExperimentalModule (copy), DEV (copy), CreateComputedFunction (copy), GetNavigationFunction (copy)
 	local t = {}
 	local Signal, Signal2 = CreateSignalFunction(false)
-	local Signal1, Signal2_1 = CreateSignalFunction(function() --[[ Line: 52 ]]
+	local Signal1, Signal2_1 = CreateSignalFunction(function()
 		-- upvalues: p1 (copy), Actions (upval)
 		return (p1.getStateForAction(Actions.init()))
 	end)
 	local Callback = nil
 	local List = {}
 	
-	local function setDispatch(Callback1: (any) -> ()) --[[ Line: 61 ]]
+	local function setDispatch(Callback1: (any) -> ())
 		-- upvalues: Callback (ref), List (ref)
 		Callback = Callback1
 		
@@ -34,15 +34,15 @@ return function(p1) --[[ Line: 44 | Named "createProjectedNavigationObject" ]]
 		end
 	end
 	
-	local function clearDispatch() --[[ Line: 72 ]]
+	local function clearDispatch()
 		-- upvalues: Callback (ref)
 		Callback = nil
 	end
 	
-	local function update(p2) --[[ Line: 79 ]]
+	local function update(p2)
 		-- upvalues: SignalsExperimentalModule (upval), Signal2_1 (copy), Signal2 (copy)
 		if p2 ~= nil then
-			SignalsExperimentalModule.batch(function() --[[ Line: 83 ]]
+			SignalsExperimentalModule.batch(function()
 				-- upvalues: Signal2_1 (upval), p2 (copy), Signal2 (upval)
 				Signal2_1(p2)
 				Signal2(p2.isTransitioning == true)
@@ -52,10 +52,10 @@ return function(p1) --[[ Line: 44 | Named "createProjectedNavigationObject" ]]
 		end
 	end
 	
-	local function dispatch(p2): boolean --[[ Line: 94 ]]
+	local function dispatch(p2): boolean
 		-- upvalues: DEV (upval), SignalsExperimentalModule (upval), Signal2_1 (copy), p1 (copy), Actions (upval), Signal2 (copy), Callback (ref), Signal1 (copy), List (ref)
 		if DEV and p2.type == "RESET_NAVIGATION_FOR_TESTING_ONLY__DO_NOT_USE_IN_PRODUCTION" then
-			SignalsExperimentalModule.batch(function() --[[ Line: 96 ]]
+			SignalsExperimentalModule.batch(function()
 				-- upvalues: Signal2_1 (upval), p1 (upval), Actions (upval), Signal2 (upval)
 				Signal2_1((p1.getStateForAction(Actions.init())))
 				Signal2(false)
@@ -79,15 +79,15 @@ return function(p1) --[[ Line: 44 | Named "createProjectedNavigationObject" ]]
 		return true
 	end
 	
-	local function v17() --[[ Line: 123 ]]
+	local function v17()
 		return nil
 	end
 	
-	local Computed = CreateComputedFunction(function(p2) --[[ Line: 126 ]]
+	local Computed = CreateComputedFunction(function(p2)
 		-- upvalues: Signal1 (copy), GetNavigationFunction (upval), p1 (copy), dispatch (copy), t (copy), v17 (ref)
-		return GetNavigationFunction(p1, Signal1(p2), dispatch, t, function(_, p3) --[[ Line: 128 ]]
+		return GetNavigationFunction(p1, Signal1(p2), dispatch, t, function(_, p3)
 			return p3
-		end, function() --[[ Line: 130 ]]
+		end, function()
 			-- upvalues: v17 (upval)
 			return v17()
 		end)
@@ -96,7 +96,7 @@ return function(p1) --[[ Line: 44 | Named "createProjectedNavigationObject" ]]
 	
 	return {
 		dispatch = dispatch,
-		notifyEvents = function() --[[ Line: 118 ]] end,
+		notifyEvents = function() end,
 		getState = Signal1,
 		getNavigation = Computed,
 		getIsNavigating = Signal,

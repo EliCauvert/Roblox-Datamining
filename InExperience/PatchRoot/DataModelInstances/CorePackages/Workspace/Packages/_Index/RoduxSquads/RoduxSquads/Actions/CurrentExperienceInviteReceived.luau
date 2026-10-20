@@ -1,4 +1,4 @@
-﻿return require(script:FindFirstAncestor("RoduxSquads").Parent.Rodux).makeActionCreator(script.Name, function(ExperienceInviteId, MembershipEntityId, NotificationId, IsInviter) --[[ Line: 7 ]]
+﻿return require(script:FindFirstAncestor("RoduxSquads").Parent.Rodux).makeActionCreator(script.Name, function(ExperienceInviteId, MembershipEntityId, NotificationId, IsInviter)
 	return {
 		payload = {
 			experienceInviteId = ExperienceInviteId,

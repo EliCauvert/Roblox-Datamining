@@ -7,7 +7,7 @@ local config = {
 	defaultTitle = "Feature.Moments.Label.MomentsExperienceName"
 }
 
-return function(p1) --[[ Line: 30 | Named "TopBar" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), MomentsHeaderContainerModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	

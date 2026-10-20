@@ -16,7 +16,7 @@ local TelemetryEventType = require(GenericAbuseReporting.BeduiV2.Analytics.analy
 local UseAbuseReportAnalyticsFunction = require(GenericAbuseReporting.BeduiV2.Analytics.AbuseReportAnalyticsContext).useAbuseReportAnalytics
 local UseLayoutSlotsFunction = require(GenericAbuseReporting.BeduiV2.Components.LayoutSlots).useLayoutSlots
 
-return ReactModule.memo(function(p1) --[[ Line: 50 | Named "CommentNode" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), TranslateModule (copy), UseArTranslationFunction (copy), UseAbuseReportAnalyticsFunction (copy), UseLayoutSlotsFunction (copy), GetCodePointLengthModule (copy), TelemetryEventType (copy), EyebrowModule (copy), TextArea (copy), FooterModule (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(p1.initialValue or "")
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
@@ -25,7 +25,7 @@ return ReactModule.memo(function(p1) --[[ Line: 50 | Named "CommentNode" ]]
 	local SendEventFunction = UseAbuseReportAnalyticsFunction().sendEvent
 	local UseRefResult = ReactModule.useRef(false)
 	local UseLayoutSlotsResult = UseLayoutSlotsFunction()
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 74 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: SendEventFunction (copy), TelemetryEventType (upval), GetCodePointLengthModule (upval), UseBindingResult (copy), p1 (copy), UseRefResult (copy)
 		SendEventFunction({
 			sub_event_type = TelemetryEventType.CommentInput,
@@ -48,7 +48,7 @@ return ReactModule.memo(function(p1) --[[ Line: 50 | Named "CommentNode" ]]
 		p1.initialValue,
 		p1.maxLength
 	})
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 105 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy), MergeTranslationParamsFunction (copy), TranslateIntoStringFunction (copy), GetCodePointLengthModule (upval)
 		return if p1.helperText and p1.maxLength and MergeTranslationParamsFunction then TranslateIntoStringFunction(MergeTranslationParamsFunction(p1.helperText, {
 			currentLength = tostring(GetCodePointLengthModule(p2)),
@@ -68,11 +68,11 @@ return ReactModule.memo(function(p1) --[[ Line: 50 | Named "CommentNode" ]]
 				numLines = 6,
 				LayoutOrder = 2,
 				text = UseBindingResult,
-				hint = if p1.helperText then UseBindingResult:map(function(p2) --[[ Line: 131 ]]
+				hint = if p1.helperText then UseBindingResult:map(function(p2)
 					-- upvalues: UseResult1 (copy)
 					return UseResult1(p2)
 				end) else nil,
-				onChanged = ReactModule.useCallback(function(p2) --[[ Line: 62 ]]
+				onChanged = ReactModule.useCallback(function(p2)
 					-- upvalues: UseBindingResult2 (copy), p1 (copy), GetCodePointLengthModule (upval), UseStateResult2 (copy), UseRefResult (copy)
 					UseBindingResult2(p2)
 					

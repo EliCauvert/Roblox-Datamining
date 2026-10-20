@@ -1,12 +1,12 @@
 ﻿local GetMutedUsersStoreModule = require(script.GetMutedUsersStore)
 
-local function _() --[[ Line: 3 | Named "store" ]]
+local function _()
 	-- upvalues: GetMutedUsersStoreModule (copy)
 	return GetMutedUsersStoreModule(false)
 end
 
 return {
-	mutePlayer = function(p1) --[[ Line: 16 ]]
+	mutePlayer = function(p1)
 		-- upvalues: GetMutedUsersStoreModule (copy)
 		if p1.userId then
 			GetMutedUsersStoreModule(false).muteGlobalUserId(p1.userId)
@@ -18,7 +18,7 @@ return {
 			GetMutedUsersStoreModule(false).muteGlobalDisplayName(p1.displayName)
 		end
 	end,
-	unmutePlayer = function(p1) --[[ Line: 28 ]]
+	unmutePlayer = function(p1)
 		-- upvalues: GetMutedUsersStoreModule (copy)
 		if p1.userId then
 			GetMutedUsersStoreModule(false).unmuteGlobalUserId(p1.userId)
@@ -30,27 +30,27 @@ return {
 			GetMutedUsersStoreModule(false).unmuteGlobalDisplayName(p1.displayName)
 		end
 	end,
-	isUserIdMuted = function(p1) --[[ Line: 41 ]]
+	isUserIdMuted = function(p1)
 		-- upvalues: GetMutedUsersStoreModule (copy)
 		return GetMutedUsersStoreModule(false).isUserIdMuted(p1)
 	end,
-	isUsernameMuted = function(p1) --[[ Line: 44 ]]
+	isUsernameMuted = function(p1)
 		-- upvalues: GetMutedUsersStoreModule (copy)
 		return GetMutedUsersStoreModule(false).isUsernameMuted(p1)
 	end,
-	isDisplayNameMuted = function(p1) --[[ Line: 47 ]]
+	isDisplayNameMuted = function(p1)
 		-- upvalues: GetMutedUsersStoreModule (copy)
 		return GetMutedUsersStoreModule(false).isDisplayNameMuted(p1)
 	end,
-	getMutedUserIds = function() --[[ Line: 52 ]]
+	getMutedUserIds = function()
 		-- upvalues: GetMutedUsersStoreModule (copy)
 		return GetMutedUsersStoreModule(false).getMutedUserIds
 	end,
-	getMutedUsernames = function() --[[ Line: 55 ]]
+	getMutedUsernames = function()
 		-- upvalues: GetMutedUsersStoreModule (copy)
 		return GetMutedUsersStoreModule(false).getMutedUsernames
 	end,
-	getMutedDisplayNames = function() --[[ Line: 58 ]]
+	getMutedDisplayNames = function()
 		-- upvalues: GetMutedUsersStoreModule (copy)
 		return GetMutedUsersStoreModule(false).getMutedDisplayNames
 	end,

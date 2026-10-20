@@ -8,7 +8,7 @@ local IconButton = FoundationModule.IconButton
 local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
 local FFlagPlayerListLocalizeGameTextModule = require(Parent.Flags.FFlagPlayerListLocalizeGameText)
 
-return ReactModule.memo(function(p1) --[[ Line: 13 | Named "PanelHeader" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FFlagPlayerListLocalizeGameTextModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), Text (copy), IconButton (copy), FoundationModule (copy)
 	local Leaderboard = if FFlagPlayerListLocalizeGameTextModule then UseLocalizationFunction({ leaderboard = "InGame.PlayerList.Leaderboard" }).leaderboard else "Leaderboard"
 	

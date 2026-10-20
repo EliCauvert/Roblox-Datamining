@@ -22,7 +22,7 @@ local config = {
 
 return {
 	PresenceType = PresenceType,
-	GetIcon = function(p1) --[[ Line: 36 ]]
+	GetIcon = function(p1)
 		-- upvalues: config (copy), ReactModule (copy), ImageSetLabel (copy), Images (copy), IconSize (copy)
 		local Entry = config[p1]
 		

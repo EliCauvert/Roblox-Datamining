@@ -7,7 +7,7 @@ local DescribeUnknownElementTypeFrameInDEVFunction = require(script.Parent.React
 local DescribeError = require(script.Parent["ErrorHandling.roblox"]).describeError
 local ReactDebugCurrentFrame = require(script.Parent.ReactSharedInternals).ReactDebugCurrentFrame
 
-local function _(p1) --[[ Line: 34 | Named "setCurrentlyValidatingElement" ]]
+local function _(p1)
 	-- upvalues: ReactGlobalsModule (copy), DescribeUnknownElementTypeFrameInDEVFunction (copy), ReactDebugCurrentFrame (copy)
 	if ReactGlobalsModule.__DEV__ then
 		if p1 then
@@ -21,7 +21,7 @@ local function _(p1) --[[ Line: 34 | Named "setCurrentlyValidatingElement" ]]
 	end
 end
 
-return function(List, Callback, p1, p2, p3, p4) --[[ Line: 51 | Named "checkPropTypes" ]]
+return function(List, Callback, p1, p2, p3, p4)
 	-- upvalues: ReactGlobalsModule (copy), ConsoleModule (copy), Error1 (copy), DescribeError (copy), DescribeUnknownElementTypeFrameInDEVFunction (copy), ReactDebugCurrentFrame (copy), t (copy)
 	if ReactGlobalsModule.__DEV__ or ReactGlobalsModule.__DISABLE_ALL_WARNINGS_EXCEPT_PROP_VALIDATION__ then
 		if List and Callback then
@@ -42,7 +42,7 @@ return function(List, Callback, p1, p2, p3, p4) --[[ Line: 51 | Named "checkProp
 			assert(typeof(List) == "table", "propTypes needs to be a table")
 			
 			for i, _ in List do
-				local _, Result = xpcall(function() --[[ Line: 118 ]]
+				local _, Result = xpcall(function()
 					-- upvalues: List (copy), i (copy), Error1 (upval), p3 (copy), p2 (copy), p1 (copy)
 					if typeof(List[i]) ~= "function" then
 						local NewError = Error1.new((p3 or "React class") .. ": " .. p2 .. " type `" .. i .. "` is invalid; " .. "it must be a function, usually from the `prop-types` package, but received `" .. typeof(List[i]) .. "`." .. "This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.")

@@ -2,7 +2,7 @@
 local _ = require(script.Parent.Interfaces)
 
 return {
-	parseSelectionSet = function(p1, p2) --[[ Line: 17 ]]
+	parseSelectionSet = function(p1, p2)
 		-- upvalues: ParseFunction (copy)
 		return ParseFunction(p1, p2).definitions[1].selectionSet
 	end

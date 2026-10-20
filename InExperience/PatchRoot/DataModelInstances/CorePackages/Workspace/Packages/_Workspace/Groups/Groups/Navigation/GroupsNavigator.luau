@@ -10,7 +10,7 @@ local GroupsRoutesModule = require(script.Parent.GroupsRoutes)
 return RoactNavigationModule.createRobloxStackNavigator({
 	{
 		[GroupsRoutesModule.GroupsPage] = {
-			screen = function(_) --[[ Line: 17 ]]
+			screen = function(_)
 				-- upvalues: ReactModule (copy), GroupsPageModule (copy)
 				return ReactModule.createElement(GroupsPageModule)
 			end
@@ -18,7 +18,7 @@ return RoactNavigationModule.createRobloxStackNavigator({
 	},
 	{
 		[GroupsRoutesModule.GroupDetailPane] = {
-			screen = function(p1) --[[ Line: 21 ]]
+			screen = function(p1)
 				-- upvalues: ReactModule (copy), GroupDetailPaneModule (copy)
 				return ReactModule.createElement(GroupDetailPaneModule, { navigation = p1.navigation })
 			end,

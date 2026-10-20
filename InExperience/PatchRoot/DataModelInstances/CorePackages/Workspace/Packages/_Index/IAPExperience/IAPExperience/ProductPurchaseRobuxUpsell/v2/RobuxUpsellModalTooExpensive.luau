@@ -21,7 +21,7 @@ local GetAppContextModule = require(Parent.Utility.getAppContext)
 local Default = require(Parent1.LoggingProtocol).default
 local TooExpensiveUpsellShownCounter = require(Parent.Generic.Events.TooExpensiveUpsellCounter).TooExpensiveUpsellShownCounter
 
-local function MiddleContent(p1) --[[ Line: 58 ]]
+local function MiddleContent(p1)
 	-- upvalues: UseLocalizationFunction (copy), FormatNumberModule (copy), LocalizationService (copy), ReactModule (copy), View (copy), ProductDetailsModule (copy), Text (copy)
 	return ReactModule.createElement(View, {
 		tag = "col gap-xxlarge auto-y size-full-0 align-x-center align-y-center"
@@ -45,7 +45,7 @@ local function MiddleContent(p1) --[[ Line: 58 ]]
 	})
 end
 
-local function ButtonStackInfo(p1) --[[ Line: 93 ]]
+local function ButtonStackInfo(p1)
 	-- upvalues: UseLocalizationFunction (copy), ButtonType (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		RobuxStoreButton = "IAPExperience.InsufficientRobux.Action.RobuxStore",
@@ -75,9 +75,9 @@ local function ButtonStackInfo(p1) --[[ Line: 93 ]]
 	}
 end
 
-local function RobuxUpsellModalTooExpensive(p1) --[[ Line: 130 ]]
+local function RobuxUpsellModalTooExpensive(p1)
 	-- upvalues: ReactModule (copy), LoggerModule (copy), GetAppContextModule (copy), Default (copy), TooExpensiveUpsellShownCounter (copy), InteractiveAlert (copy), RobuxUpsellModalTitleModule (copy), MiddleContent (copy), ButtonStackInfo (copy), RobuxUpsellModalFooterModule (copy)
-	ReactModule.useEffect(function() --[[ Line: 131 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: LoggerModule (upval), p1 (copy), GetAppContextModule (upval), Default (upval), TooExpensiveUpsellShownCounter (upval)
 		LoggerModule.debug({
 			message = "Too Expensive Upsell Modal Shown",
@@ -99,14 +99,14 @@ local function RobuxUpsellModalTooExpensive(p1) --[[ Line: 130 ]]
 		screenSize = p1.screenSize,
 		anchorPoint = Vector2.new(0.5, 0.5),
 		position = UDim2.new(0.5, 0, 0.5, 0),
-		titleContent = function() --[[ Line: 151 ]]
+		titleContent = function()
 			-- upvalues: ReactModule (upval), RobuxUpsellModalTitleModule (upval), p1 (copy)
 			return ReactModule.createElement(RobuxUpsellModalTitleModule, {
 				balanceAmount = p1.balanceAmount,
 				cancelPurchaseActivated = p1.buttons.cancelPurchaseActivated
 			})
 		end,
-		middleContent = function() --[[ Line: 157 ]]
+		middleContent = function()
 			-- upvalues: ReactModule (upval), MiddleContent (upval), p1 (copy)
 			return ReactModule.createElement(MiddleContent, {
 				product = p1.product,
@@ -116,14 +116,14 @@ local function RobuxUpsellModalTooExpensive(p1) --[[ Line: 130 ]]
 			})
 		end,
 		buttonStackInfo = ButtonStackInfo({ buttons = p1.buttons, isQuest = p1.isQuest }),
-		footerContent = function() --[[ Line: 169 ]]
+		footerContent = function()
 			-- upvalues: ReactModule (upval), RobuxUpsellModalFooterModule (upval)
 			return ReactModule.createElement(RobuxUpsellModalFooterModule)
 		end
 	})
 end
 
-return function(p1) --[[ Line: 175 | Named "RobuxUpsellModalTooExpensiveContainer" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), RobuxUpsellModalTooExpensive (copy)
 	return ReactModule.createElement(LocalizationProvider, {
 		localization = Localization.new(LocalizationService.RobloxLocaleId)

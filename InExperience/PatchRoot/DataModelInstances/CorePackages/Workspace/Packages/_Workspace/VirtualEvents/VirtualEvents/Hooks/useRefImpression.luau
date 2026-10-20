@@ -1,16 +1,16 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("VirtualEvents").Parent.React)
 
-return function(p1, Callback) --[[ Line: 5 | Named "useRefImpression" ]]
+return function(p1, Callback)
 	-- upvalues: ReactModule (copy)
 	local UseRefResult = ReactModule.useRef(false)
-	local UseResult = ReactModule.useCallback(function(Frame, Frame1) --[[ Line: 8 ]]
+	local UseResult = ReactModule.useCallback(function(Frame, Frame1)
 		-- upvalues: UseRefResult (copy), Callback (copy)
 		if Frame.AbsolutePosition.Y <= Frame1.AbsoluteSize.Y then
 			UseRefResult.current = true
 			Callback()
 		end
 	end, { Callback })
-	ReactModule.useEffect(function() --[[ Line: 15 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), p1 (copy), UseResult (copy)
 		if UseRefResult.current then return end
 		local Current = p1.current
@@ -21,7 +21,7 @@ return function(p1, Callback) --[[ Line: 5 | Named "useRefImpression" ]]
 			
 			if ScreenGui then
 				UseResult(Current, ScreenGui)
-				Connection = Current:GetPropertyChangedSignal("AbsolutePosition"):Connect(function() --[[ Line: 29 ]]
+				Connection = Current:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
 					-- upvalues: UseRefResult (upval), UseResult (upval), Current (copy), ScreenGui (copy)
 					if not UseRefResult.current then
 						UseResult(Current, ScreenGui)
@@ -31,7 +31,7 @@ return function(p1, Callback) --[[ Line: 5 | Named "useRefImpression" ]]
 				end)
 			end
 		end
-		return function() --[[ Line: 39 ]]
+		return function()
 			-- upvalues: Connection (ref)
 			if Connection then
 				Connection:Disconnect()

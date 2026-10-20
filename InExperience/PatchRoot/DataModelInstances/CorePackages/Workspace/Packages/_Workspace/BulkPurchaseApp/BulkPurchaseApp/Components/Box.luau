@@ -1,6 +1,6 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("BulkPurchaseApp").Parent.React)
 
-return function(Tbl) --[[ Line: 12 | Named "Box" ]]
+return function(Tbl)
 	-- upvalues: ReactModule (copy)
 	local Copy = if Tbl.children then table.clone(Tbl.children) else {}
 	local Copy1 = table.clone(Tbl)

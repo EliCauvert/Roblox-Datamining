@@ -13,7 +13,7 @@ local CardDensityModule = require(Foundation.Enums.CardDensity)
 local IconSizeModule = require(Foundation.Enums.IconSize)
 local _ = require(Foundation.Enums.UserPresence)
 
-return function(Frame) --[[ Line: 50 | Named "Thumbnail" ]]
+return function(Frame)
 	-- upvalues: UseTokensModule (copy), CardDensityModule (copy), ReactModule (copy), AvatarModule (copy), AvatarSizeModule (copy), ImageModule (copy), IconModule (copy), IconSizeModule (copy), ViewModule (copy)
 	local UseTokensModuleResult = UseTokensModule()
 	local Size1200 = if Frame.density == CardDensityModule.Compact then UseTokensModuleResult.Size.Size_1200 else UseTokensModuleResult.Size.Size_1600

@@ -15,7 +15,7 @@ local EventMap = {
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p1) --[[ Line: 41 | Named "useInputDialogViewModel" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), CountCharsModule (copy), IsOverLengthModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(p1.inputText or "")
 	local MaxCharacters = p1.maxCharacters
@@ -24,7 +24,7 @@ return function(p1) --[[ Line: 41 | Named "useInputDialogViewModel" ]]
 	local IsLoading = p1.isLoading
 	local OnModalCloseFunction = p1.onModalClose
 	local OnActivatedFunction = p1.onActivated
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 52 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: IsLoading (copy), OnModalCloseFunction (copy)
 		if not IsLoading and OnModalCloseFunction then
 			OnModalCloseFunction()
@@ -42,7 +42,7 @@ return function(p1) --[[ Line: 41 | Named "useInputDialogViewModel" ]]
 		isOverLimit = IsOverLengthModule1,
 		isLoading = IsLoading,
 		onTextChanged = UseStateResult2,
-		onConfirm = ReactModule.useCallback(function() --[[ Line: 58 ]]
+		onConfirm = ReactModule.useCallback(function()
 			-- upvalues: IsOverLengthModule1 (copy), IsLoading (copy), OnActivatedFunction (copy), UseStateResult (copy), OnModalCloseFunction (copy)
 			if IsOverLengthModule1 or IsLoading then return end
 			if (not OnActivatedFunction or not OnActivatedFunction({ InputBox = UseStateResult })) and OnModalCloseFunction then
@@ -60,11 +60,11 @@ return function(p1) --[[ Line: 41 | Named "useInputDialogViewModel" ]]
 			isAutoFocusRoot = true,
 			surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
 			eventMap = EventMap,
-			eventHandlers = ReactModule.useMemo(function() --[[ Line: 68 ]]
+			eventHandlers = ReactModule.useMemo(function()
 				-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), UseResult (copy)
 				return {
 					[FocusNavigationEventNameEnum.NavigateBack] = {
-						handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 71 ]]
+						handler = InputHandlersModule.onRelease(function(p2)
 							-- upvalues: UseResult (upval)
 							UseResult()
 							p2:cancel()

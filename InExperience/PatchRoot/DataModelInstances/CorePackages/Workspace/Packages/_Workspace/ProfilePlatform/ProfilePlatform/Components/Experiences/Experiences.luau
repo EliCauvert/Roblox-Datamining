@@ -22,23 +22,23 @@ local AppPage = require(Parent.RobloxAppEnums).AppPage
 local UseTextSizeOffsetFunction = require(Parent.Foundation).Hooks.useTextSizeOffset
 local CommunityProfileAffiliatedExperienceTelemetryThrottlePermyriad = game:DefineFastInt("CommunityProfileAffiliatedExperienceTelemetryThrottlePermyriad", 0)
 
-local function _(p1) --[[ Line: 40 | Named "getTextSizeAdjustedSquareExperienceTileHeight" ]]
-	return function(p2: number): number --[[ Line: 41 ]]
+local function _(p1)
+	return function(p2: number): number
 		-- upvalues: p1 (copy)
 		return p2 + 80 + p1 * 3
 	end
 end
 
-return function(p1) --[[ Line: 46 | Named "Experiences" ]]
+return function(p1)
 	-- upvalues: UseTextSizeOffsetFunction (copy), ReactModule (copy), UseProfileAnalyticsContextModule (copy), UseProfileWrapperContextModule (copy), UseRoactServiceFunction (copy), RoactAnalyticsCommonGameEvents (copy), UseGenerateImpressionsTagModule (copy), EnumsModule (copy), FormatExperienceDetailsForImpressionsModule (copy), UseSendItemImpressionsModule (copy), ContentType (copy), EventNamesModule (copy), CommunityProfileAffiliatedExperienceTelemetryThrottlePermyriad (copy), TelemetryService (copy), AppPage (copy), UseRenderExperienceTileModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), CryoModule (copy), SquareCollectionGridViewModule (copy)
 	local ExperienceDetails = p1.experienceDetails
 	local UseTextSizeOffsetResult = nil
 	UseTextSizeOffsetResult = UseTextSizeOffsetFunction()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 50 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseTextSizeOffsetResult (ref)
 		local UseTextSizeOffsetResult1 = UseTextSizeOffsetResult
 		
-		return function(p2: number): number --[[ Line: 41 ]]
+		return function(p2: number): number
 			-- upvalues: UseTextSizeOffsetResult1 (copy)
 			return p2 + 80 + UseTextSizeOffsetResult1 * 3
 		end
@@ -47,11 +47,11 @@ return function(p1) --[[ Line: 46 | Named "Experiences" ]]
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactAnalyticsCommonGameEvents)
 	local UseGenerateImpressionsTagModuleResult = UseGenerateImpressionsTagModule(EnumsModule.Components.Experiences)
-	local UseSendItemImpressionsModuleResult = UseSendItemImpressionsModule(ReactModule.useMemo(function() --[[ Line: 58 ]]
+	local UseSendItemImpressionsModuleResult = UseSendItemImpressionsModule(ReactModule.useMemo(function()
 		-- upvalues: FormatExperienceDetailsForImpressionsModule (upval), ExperienceDetails (copy)
 		return FormatExperienceDetailsForImpressionsModule(ExperienceDetails)
 	end, { ExperienceDetails }), 3, ContentType.Game, p1.layoutOrder, EnumsModule.Components.Experiences)
-	local ProfileExperienceTile = UseRenderExperienceTileModule(UseGenerateImpressionsTagModuleResult, "ProfileExperienceTile", ReactModule.useCallback(function(p2, PositionInComponent, p3) --[[ Line: 70 ]]
+	local ProfileExperienceTile = UseRenderExperienceTileModule(UseGenerateImpressionsTagModuleResult, "ProfileExperienceTile", ReactModule.useCallback(function(p2, PositionInComponent, p3)
 		-- upvalues: UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), CommunityProfileAffiliatedExperienceTelemetryThrottlePermyriad (upval), UseProfileWrapperContextModuleResult (copy), TelemetryService (upval), ExperienceDetails (copy), UseRoactServiceResult (copy), AppPage (upval), p1 (copy)
 		UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.ExperienceOpened, {
 			experienceId = p2.experienceId,

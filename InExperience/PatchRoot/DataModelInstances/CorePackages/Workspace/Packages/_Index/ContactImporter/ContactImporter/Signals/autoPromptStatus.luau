@@ -2,11 +2,11 @@
 local NewResult = require(script:FindFirstAncestor("ContactImporter").Parent.AppCommonLib).Signal.new()
 
 return {
-	getStatus = function() --[[ Line: 14 ]]
+	getStatus = function()
 		-- upvalues: Status (ref)
 		return Status
 	end,
-	setStatus = function(Value) --[[ Line: 9 ]]
+	setStatus = function(Value)
 		-- upvalues: Status (ref), NewResult (copy)
 		Status = Value
 		NewResult:fire(Value)

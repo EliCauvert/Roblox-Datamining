@@ -10,7 +10,7 @@ local FFlagExpChatExpressionTrayReducedMotionModule = require(ChatUIPrimitives.F
 local UseEventConnectionFunction = require(Parent.ReactUtils).useEventConnection
 local config = { dampingRatio = 1, frequency = 3.5 }
 
-local function getSafeInsets() --[[ Line: 43 ]]
+local function getSafeInsets()
 	-- upvalues: GuiService (copy)
 	local InsetArea = GuiService:GetInsetArea(Enum.ScreenInsets.DeviceSafeInsets)
 	local InsetArea1 = GuiService:GetInsetArea(Enum.ScreenInsets.None)
@@ -22,11 +22,11 @@ local function getSafeInsets() --[[ Line: 43 ]]
 	}
 end
 
-local function _(SafeInsets, SafeInsets1): boolean --[[ Line: 53 | Named "insetsEqual" ]]
+local function _(SafeInsets, SafeInsets1): boolean
 	return SafeInsets.left == SafeInsets1.left and SafeInsets.right == SafeInsets1.right and SafeInsets.bottom == SafeInsets1.bottom
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 57 | Named "ExpressionSheetView" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FoundationModule (copy), FFlagExpChatExpressionTrayReducedMotionModule (copy), ReactModule (copy), getSafeInsets (copy), UseEventConnectionFunction (copy), OtterModule (copy), config (copy), UseDismissOnEscapeOrMenuModule (copy), ReactRobloxModule (copy)
 	local UseOverlayResult = FoundationModule.Hooks.useOverlay()
 	local ReducedMotion = if FFlagExpChatExpressionTrayReducedMotionModule then FoundationModule.Hooks.usePreferences().reducedMotion else false
@@ -36,9 +36,9 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "ExpressionSheetView"
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(1)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(getSafeInsets)
-	UseEventConnectionFunction(if UseOverlayResult == nil then nil else UseOverlayResult:GetPropertyChangedSignal("AbsoluteSize"), (ReactModule.useCallback(function() --[[ Line: 74 ]]
+	UseEventConnectionFunction(if UseOverlayResult == nil then nil else UseOverlayResult:GetPropertyChangedSignal("AbsoluteSize"), (ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy), getSafeInsets (upval)
-		UseStateResult2_1(function(SafeInsets) --[[ Line: 75 ]]
+		UseStateResult2_1(function(SafeInsets)
 			-- upvalues: getSafeInsets (upval)
 			local SafeInsets1 = getSafeInsets()
 			local IsBottomMatch: boolean = SafeInsets.left == SafeInsets1.left and SafeInsets.right == SafeInsets1.right and SafeInsets.bottom == SafeInsets1.bottom
@@ -47,7 +47,7 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "ExpressionSheetView"
 		end)
 	end, {})))
 	local NewHeight = Height + UseStateResult1.bottom
-	ReactModule.useEffect(function() --[[ Line: 87 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ReducedMotion (ref), UseRefResult (copy), UseBindingResult2 (copy), IsOpen (copy), UseStateResult2 (copy), OtterModule (upval), UseBindingResult (copy), config (upval)
 		if ReducedMotion then
 			if UseRefResult.current then
@@ -73,16 +73,16 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "ExpressionSheetView"
 				return
 			elseif UseRefResult.current then
 				UseRefResult.current:setGoal(OtterModule.spring(1, config))
-				UseRefResult.current:onComplete(function() --[[ Line: 106 ]]
+				UseRefResult.current:onComplete(function()
 					-- upvalues: UseStateResult2 (upval)
 					UseStateResult2(false)
 				end)
 			end
 		end
 	end, { IsOpen, ReducedMotion })
-	ReactModule.useEffect(function() --[[ Line: 112 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy)
-		return function() --[[ Line: 113 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			if UseRefResult.current then
 				UseRefResult.current:destroy()
@@ -104,7 +104,7 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "ExpressionSheetView"
 		Tray = ReactModule.createElement(FoundationModule.View, {
 			ZIndex = 2,
 			tag = "anchor-bottom-center stroke-standard stroke-default clip bg-surface-200",
-			Position = UseBindingResult:map(function(p2): UDim2 --[[ Line: 144 ]]
+			Position = UseBindingResult:map(function(p2): UDim2
 				-- upvalues: NewHeight (copy)
 				return UDim2.new(0.5, 0, 1, (math.round(p2 * NewHeight)))
 			end),
@@ -114,7 +114,7 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "ExpressionSheetView"
 				left = UDim.new(0, UseStateResult1.left),
 				right = UDim.new(0, UseStateResult1.right)
 			},
-			onActivated = function() --[[ Line: 155 ]] end,
+			onActivated = function() end,
 			stateLayer = {
 				affordance = FoundationModule.Enums.StateLayerAffordance.None
 			}

@@ -24,7 +24,7 @@ local BuildNavigationParamsModule = require(BuildExperience.utils.BuildNavigatio
 local UseExperienceShareFlowModule = require(BuildExperience.utils.useExperienceShareFlow)
 local DeveloperProducts = require(Parent.UrlBuilder).UrlBuilder.fromString("create:dashboard/creations/experiences/{universeId}/monetization/developer-products")
 
-local function useCreateAdAction(p1) --[[ Line: 45 ]]
+local function useCreateAdAction(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOpenWebViewFunction (copy), UseGetAdCampaignEligibilityModule (copy), FFlagEnablePaidAdsModule (copy), UseCreateAdCampaignModule (copy), ReactModule (copy), AdCampaignEligibilityUtilsModule (copy), GetAdsManagerUrlFunction (copy), CreateAdCampaignSheetContainerModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), AdCampaignScheduleUtilsModule (copy), AdCampaignCreatedToastModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		adsManager = LocalizationStringsModule.ADS_STATS_ADS_MANAGER,
@@ -44,12 +44,12 @@ local function useCreateAdAction(p1) --[[ Line: 45 ]]
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(nil)
 	local CanCreateCampaign = AdCampaignEligibilityUtilsModule.canCreateCampaign(UseGetAdCampaignEligibilityModuleResult)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 71 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult4 (copy), FFlagEnablePaidAdsModule (upval), CanCreateCampaign (copy), UseOpenWebViewResult (copy), GetAdsManagerUrlFunction (upval), p1 (copy), AdsManager (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), HasCreateError (copy), AdCampaignEligibilityUtilsModule (upval), UseGetAdCampaignEligibilityModuleResult (copy), UseStateResult2 (copy)
 		if UseStateResult4 then return end
 		if FFlagEnablePaidAdsModule and CanCreateCampaign then
 			UseStateResult2_1(false)
-			UseStateResult2_2(function(p2) --[[ Line: 83 ]]
+			UseStateResult2_2(function(p2)
 				-- upvalues: HasCreateError (upval), AdCampaignEligibilityUtilsModule (upval), UseGetAdCampaignEligibilityModuleResult (upval)
 				return if HasCreateError and p2 ~= nil then p2 else AdCampaignEligibilityUtilsModule.campaignSheetTerms(UseGetAdCampaignEligibilityModuleResult, DateTime.now().UnixTimestampMillis)
 			end)
@@ -64,12 +64,12 @@ local function useCreateAdAction(p1) --[[ Line: 45 ]]
 		ClearCreateErrorFunction, HasCreateError,
 		UseGetAdCampaignEligibilityModuleResult
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 103 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), ClearCreateErrorFunction (copy)
 		UseStateResult2(false)
 		ClearCreateErrorFunction()
 	end, { ClearCreateErrorFunction })
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 108 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult (copy), UseGetAdCampaignEligibilityModuleResult (copy), CreateCampaignFunction (copy)
 		UseRefResult.current = UseGetAdCampaignEligibilityModuleResult
 		CreateCampaignFunction(p2)
@@ -78,7 +78,7 @@ local function useCreateAdAction(p1) --[[ Line: 45 ]]
 		CreateCampaignFunction
 	})
 	local UseRefResult1 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 114 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), IsCreatePending (copy), HasCreateError (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_3 (copy), UseRefResult (copy)
 		UseRefResult1.current = IsCreatePending
 		
@@ -88,7 +88,7 @@ local function useCreateAdAction(p1) --[[ Line: 45 ]]
 			UseStateResult2_3(UseRefResult.current ~= nil)
 		end
 	end, { IsCreatePending, HasCreateError })
-	ReactModule.useEffect(function() --[[ Line: 124 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseGetAdCampaignEligibilityModuleResult2 (copy), UseGetAdCampaignEligibilityModuleResult (copy), UseRefResult (copy), UseStateResult4 (copy), UseStateResult2_3 (copy)
 		local IsNotUseGetAdCampaignEligibilityModuleResultMatch: boolean = UseGetAdCampaignEligibilityModuleResult2 == "Ready" and (UseGetAdCampaignEligibilityModuleResult ~= nil and UseGetAdCampaignEligibilityModuleResult ~= UseRefResult.current)
 		
@@ -101,13 +101,13 @@ local function useCreateAdAction(p1) --[[ Line: 45 ]]
 		UseGetAdCampaignEligibilityModuleResult2,
 		UseGetAdCampaignEligibilityModuleResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 134 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseStateResult2_3 (copy), UseStateResult2_2 (copy)
 		UseRefResult.current = nil
 		UseStateResult2_3(false)
 		UseStateResult2_2(nil)
 	end, { p1 })
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 140 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(false)
 	end, {})
@@ -137,7 +137,7 @@ local function useCreateAdAction(p1) --[[ Line: 45 ]]
 		}) else nil
 	}) else nil
 	
-	return ReactModule.useMemo(function() --[[ Line: 176 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: UseResult (copy), Element (copy)
 		return {
 			isEligible = true,
@@ -147,14 +147,14 @@ local function useCreateAdAction(p1) --[[ Line: 45 ]]
 	end, { UseResult, Element })
 end
 
-local function useSellItemsAction(UniverseId, UseNavigationResult, Target) --[[ Line: 181 ]]
+local function useSellItemsAction(UniverseId, UseNavigationResult, Target)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOpenWebViewFunction (copy), ReactModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), DeveloperProducts (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		creatorHub = LocalizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB
 	})
 	local UseOpenWebViewResult = UseOpenWebViewFunction()
 	local CreatorHub = UseLocalizationResult.creatorHub
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 190 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FFlagBuildExperienceMonetizationNativeUIModule (upval), UseNavigationResult (copy), Target (copy), UseOpenWebViewResult (copy), DeveloperProducts (upval), UniverseId (copy), CreatorHub (copy)
 		if FFlagBuildExperienceMonetizationNativeUIModule and UseNavigationResult ~= nil and Target ~= nil then
 			UseNavigationResult.navigate("BuildMonetization", { target = Target })
@@ -171,13 +171,13 @@ local function useSellItemsAction(UniverseId, UseNavigationResult, Target) --[[ 
 		CreatorHub
 	})
 	
-	return ReactModule.useMemo(function() --[[ Line: 198 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: UseResult (copy)
 		return { isEligible = true, onActivate = UseResult }
 	end, { UseResult })
 end
 
-local function useShareWithFriendsAction(UniverseId, PlaceId) --[[ Line: 203 ]]
+local function useShareWithFriendsAction(UniverseId, PlaceId)
 	-- upvalues: UseExperienceShareFlowModule (copy), ReactModule (copy), ExperienceShareOverlaysModule (copy)
 	local UseExperienceShareFlowModuleResult = UseExperienceShareFlowModule(UniverseId, PlaceId)
 	local OnShare = UseExperienceShareFlowModuleResult.onShare
@@ -189,7 +189,7 @@ local function useShareWithFriendsAction(UniverseId, PlaceId) --[[ Line: 203 ]]
 		onConfirmPlaytesters = UseExperienceShareFlowModuleResult.onConfirmPlaytesters
 	})
 	
-	return ReactModule.useMemo(function() --[[ Line: 215 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: OnShare (copy), Element (copy)
 		return {
 			isEligible = true,
@@ -199,7 +199,7 @@ local function useShareWithFriendsAction(UniverseId, PlaceId) --[[ Line: 203 ]]
 	end, { OnShare, Element })
 end
 
-return function(UniverseId) --[[ Line: 220 | Named "useGoalLockedActions" ]]
+return function(UniverseId)
 	-- upvalues: NavigationModule (copy), BuildNavigationParamsModule (copy), useCreateAdAction (copy), useSellItemsAction (copy), useShareWithFriendsAction (copy), ReactModule (copy), GoalLockedActionIdModule (copy)
 	local UseNavigationResult = NavigationModule.useNavigation()
 	local Target = if UseNavigationResult == nil then nil else BuildNavigationParamsModule.getTarget(UseNavigationResult)
@@ -208,7 +208,7 @@ return function(UniverseId) --[[ Line: 220 | Named "useGoalLockedActions" ]]
 	local UseShareWithFriendsActionResult = useShareWithFriendsAction(UniverseId, if Target == nil then nil else Target.placeId)
 	
 	return {
-		actions = ReactModule.useMemo(function() --[[ Line: 228 ]]
+		actions = ReactModule.useMemo(function()
 			-- upvalues: GoalLockedActionIdModule (upval), UseCreateAdActionResult (copy), UseSellItemsActionResult (copy), UseShareWithFriendsActionResult (copy)
 			return {
 				[GoalLockedActionIdModule.CreateAd] = UseCreateAdActionResult,

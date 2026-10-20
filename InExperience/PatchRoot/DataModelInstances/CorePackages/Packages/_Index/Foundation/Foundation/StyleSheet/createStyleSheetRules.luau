@@ -9,7 +9,7 @@ local FlagsModule = require(Foundation.Utility.Flags)
 local _ = require(Parent.getOverrideAttributes)
 local ScaleValueModule = require(Foundation.Utility.scaleValue)
 
-local function insertRule(List, p1, Tag) --[[ Line: 23 ]]
+local function insertRule(List, p1, Tag)
 	-- upvalues: FlagsModule (copy), ReactModule (copy), StyleRuleModule (copy)
 	local Properties = p1.properties
 	local Text = "." .. Tag
@@ -34,7 +34,7 @@ local function insertRule(List, p1, Tag) --[[ Line: 23 ]]
 	}))
 end
 
-local function updateRuleAttributes(Object, Attributes, p1, p2, p3) --[[ Line: 56 ]]
+local function updateRuleAttributes(Object, Attributes, p1, p2, p3)
 	-- upvalues: FlagsModule (copy), ScaleValueModule (copy)
 	local Attributes1 = Attributes or {}
 	local P5 = if FlagsModule.FoundationDisableTokenScaling then 1 else p2 or 1
@@ -49,7 +49,7 @@ local function updateRuleAttributes(Object, Attributes, p1, p2, p3) --[[ Line: 5
 	end
 end
 
-return function(p4, List, p5, p6, p7, p8) --[[ Line: 77 | Named "createStyleSheetRules" ]]
+return function(p4, List, p5, p6, p7, p8)
 	-- upvalues: FlagsModule (copy), updateRuleAttributes (copy), insertRule (copy)
 	local t = {}
 	

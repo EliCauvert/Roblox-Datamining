@@ -9,7 +9,7 @@ local list = {
 }
 math.randomseed(os.clock())
 
-local function uuid(): string --[[ Line: 59 ]]
+local function uuid(): string
 	-- upvalues: list (copy)
 	local Text = ""
 	
@@ -21,7 +21,7 @@ end
 
 MakeUniqueIdModule.uuid = uuid
 
-function MakeUniqueIdModule.makeUniqueId(p1): string --[[ Line: 68 ]]
+function MakeUniqueIdModule.makeUniqueId(p1): string
 	-- upvalues: uuid (copy), Boolean (copy), NewResult (copy)
 	local UuidResult = uuid()
 	local GetResult = Boolean.toJSBoolean(NewResult:get(p1)) and NewResult:get(p1) or 1

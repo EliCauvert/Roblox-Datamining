@@ -20,15 +20,15 @@ local config = {
 	voiceStatus = VOICESTATUS.DISCONNECTED
 }
 
-local function _(ERRORVOICEMICREJECTED, ERRORVOICEMICREJECTED1): boolean --[[ Line: 29 | Named "isAllowedVoiceStatusTransition" ]]
+local function _(ERRORVOICEMICREJECTED, ERRORVOICEMICREJECTED1): boolean
 	-- upvalues: SharedFlags (copy), VOICESTATUS (copy)
 	return if SharedFlags.GetFFlagFixPartyVoiceGetPermissions() and ERRORVOICEMICREJECTED == VOICESTATUS.ERROR_VOICE_MIC_REJECTED then ERRORVOICEMICREJECTED1 == VOICESTATUS.VOICE_CONNECTING else ERRORVOICEMICREJECTED ~= ERRORVOICEMICREJECTED1
 end
 
-return function(p1) --[[ Line: 43 ]]
+return function(p1)
 	-- upvalues: Rodux (copy), config (copy), ExperienceJoined (copy), Cryo (copy), ExperienceLeft (copy), ConstantsModule (copy), FStringTimeoutLoadingLocalPlayerInBackgroundDM (copy), RestoreState (copy), VoiceStatusChanged (copy), SharedFlags (copy), VOICESTATUS (copy)
 	return Rodux.createReducer(p1 or config, {
-		[ExperienceJoined.name] = function(p2, p3) --[[ Line: 46 ]]
+		[ExperienceJoined.name] = function(p2, p3)
 			-- upvalues: Cryo (upval)
 			local Payload = p3.payload
 			
@@ -38,7 +38,7 @@ return function(p1) --[[ Line: 43 ]]
 				placeId = Payload.placeId
 			})
 		end,
-		[ExperienceLeft.name] = function(p2) --[[ Line: 55 ]]
+		[ExperienceLeft.name] = function(p2)
 			-- upvalues: ConstantsModule (upval), FStringTimeoutLoadingLocalPlayerInBackgroundDM (upval)
 			local VoiceStatus = p2.voiceStatus
 			
@@ -51,11 +51,11 @@ return function(p1) --[[ Line: 43 ]]
 				voiceStatus = if VoiceStatus == ConstantsModule.VOICE_STATUS.ERROR_VOICE_DISCONNECTED or VoiceStatus == ConstantsModule.VOICE_STATUS.ERROR_START_BACKGROUND_DM or VoiceStatus == ConstantsModule.VOICE_STATUS.ERROR_RCC_CONNECTING or VoiceStatus == ConstantsModule.VOICE_STATUS.ERROR_RCC_TIMEOUT or FStringTimeoutLoadingLocalPlayerInBackgroundDM ~= ConstantsModule.LOCAL_PLAYER_LOADING_TIMEOUT_ENUM.Disable and VoiceStatus == ConstantsModule.VOICE_STATUS.ERROR_BACKGROUND_DM_LOAD_LOCALPLAYER_TIMEOUT then p2.voiceStatus else ConstantsModule.VOICE_STATUS.DISCONNECTED
 			}
 		end,
-		[RestoreState.name] = function(p2, p3) --[[ Line: 84 ]]
+		[RestoreState.name] = function(p2, p3)
 			-- upvalues: Cryo (upval)
 			return if p3.payload.Experience then Cryo.Dictionary.join({}, p3.payload.Experience) else p2
 		end,
-		[VoiceStatusChanged.name] = function(p2, p3) --[[ Line: 91 ]]
+		[VoiceStatusChanged.name] = function(p2, p3)
 			-- upvalues: SharedFlags (upval), VOICESTATUS (upval), Cryo (upval)
 			local VoiceStatus = p2.voiceStatus
 			local Status = p3.payload.status

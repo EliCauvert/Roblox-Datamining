@@ -21,7 +21,7 @@ local FFlagExpChatPerfTrackerTabName = require(Parent.ChatUIPrimitives).Flags.FF
 local _ = require(Parent.SocialLuaAnalytics)
 local ExpChatScrollLockThresholdRatio = game:DefineFastInt("ExpChatScrollLockThreshold", 90) / 100
 
-local function _(ScrollFrame): boolean --[[ Line: 55 | Named "isScrollbarNearBottom" ]]
+local function _(ScrollFrame): boolean
 	-- upvalues: ExpChatScrollLockThresholdRatio (copy)
 	local AbsoluteWindowSize = ScrollFrame.AbsoluteWindowSize
 	local AbsoluteCanvasSize = ScrollFrame.AbsoluteCanvasSize
@@ -30,16 +30,16 @@ local function _(ScrollFrame): boolean --[[ Line: 55 | Named "isScrollbarNearBot
 	return AbsoluteCanvasSize.Y <= AbsoluteWindowSize.Y or ExpChatScrollLockThresholdRatio <= YRatio
 end
 
-local _ = function(PreferredInput): boolean --[[ Line: 70 | Named "isMouseMovementOrTouch" ]]
+local _ = function(PreferredInput): boolean
 	return PreferredInput == Enum.PreferredInput.KeyboardAndMouse or PreferredInput == Enum.PreferredInput.Touch
 end
 
-local Callback = require(ExpChat.ChatWindow.Helpers.debounce)(function() --[[ Line: 74 ]]
+local Callback = require(ExpChat.ChatWindow.Helpers.debounce)(function()
 	-- upvalues: TextChatService (copy)
 	TextChatService:SendExpChatWindowScroll()
 end, (game:DefineFastInt("ExpChatWindowScrollV3Debounce", 0)))
 
-return ReactModule.memo(function(p1) --[[ Line: 81 | Named "BottomLockedScrollViewV3" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), FFlagFriendsChatOsaSystemMessage (copy), SignalsReactModule (copy), UserInputService (copy), ExpChatPerfTracker (copy), FFlagExpChatPerfTrackerTabName (copy), ExpChatScrollLockThresholdRatio (copy), GetFFlagExpChatSendWindowScrollEventModule (copy), Callback (copy), FFlagExpChatEnableFriendsTab (copy), FFlagExpChatRenderHistoricalMessagesModule (copy), AdvanceHistoryScrollModule (copy), ConfigModule (copy), FFlagExpChatScrollbarInsetModule (copy), FFlagExpChatLimitScrollingV2WindowModule (copy), FFlagExpChatFixWarmMountBottomLockModule (copy)
 	local Theme = UseStyleFunction().Theme
 	local UseRefResult = ReactModule.useRef(nil)
@@ -52,7 +52,7 @@ return ReactModule.memo(function(p1) --[[ Line: 81 | Named "BottomLockedScrollVi
 	local UseRefResult5 = ReactModule.useRef(false)
 	local UseRefResult6 = ReactModule.useRef({ canvasHeight = nil, historicalCount = 0 })
 	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.messageComponentsSignal)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 97 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UserInputService (upval), UseBindingResult2 (copy), UseRefResult5 (copy)
 		local PreferredInput = UserInputService.PreferredInput
 		
@@ -63,7 +63,7 @@ return ReactModule.memo(function(p1) --[[ Line: 81 | Named "BottomLockedScrollVi
 			UseRefResult5.current = true
 		end
 	end, { UserInputService.PreferredInput })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 108 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UserInputService (upval), UseBindingResult2 (copy), UseRefResult5 (copy), UseRefResult4 (copy), UseRefResult2 (copy), UseRefResult (copy), UseRefResult3 (copy)
 		local PreferredInput = UserInputService.PreferredInput
 		
@@ -81,9 +81,9 @@ return ReactModule.memo(function(p1) --[[ Line: 81 | Named "BottomLockedScrollVi
 		end
 	end, { UserInputService.PreferredInput })
 	local UseRefResult7 = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 131 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult7 (copy)
-		return function() --[[ Line: 132 ]]
+		return function()
 			-- upvalues: UseRefResult7 (upval)
 			if UseRefResult7.current then
 				UseRefResult7.current.cleanup()
@@ -92,7 +92,7 @@ return ReactModule.memo(function(p1) --[[ Line: 81 | Named "BottomLockedScrollVi
 	end, {})
 	local UseRefResult8 = ReactModule.useRef(p1.selectedChannelName)
 	UseRefResult8.current = p1.selectedChannelName
-	local UseResult2 = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 142 ]]
+	local UseResult2 = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: UseRefResult7 (copy), UseRefResult8 (copy), ExpChatPerfTracker (upval), FFlagExpChatPerfTrackerTabName (upval), UseRefResult1 (copy), ExpChatScrollLockThresholdRatio (upval), GetFFlagExpChatSendWindowScrollEventModule (upval), Callback (upval), FFlagExpChatEnableFriendsTab (upval), p1 (copy)
 		if UseRefResult7.current == nil then
 			local Current = UseRefResult8.current
@@ -115,14 +115,14 @@ return ReactModule.memo(function(p1) --[[ Line: 81 | Named "BottomLockedScrollVi
 	end, {
 		if FFlagExpChatEnableFriendsTab then p1.onCanvasPositionChanged else nil
 	})
-	local UseResult3 = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 165 ]]
+	local UseResult3 = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: UseRefResult1 (copy), UseRefResult5 (copy)
 		if UseRefResult1.current and not UseRefResult5.current then
 			ScrollFrame.CanvasPosition = Vector2.new(0, 9007199254740992)
 		end
 	end, {})
 	local ScrollResetKey = p1.scrollResetKey
-	ReactModule.useEffect(function() --[[ Line: 175 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult2 (copy), ScrollResetKey (copy), UseRefResult3 (copy), UseRefResult4 (copy), IsScrollToTopOnReset (copy), p1 (copy), UseRefResult1 (copy), UseRefResult5 (copy), UseRefResult (copy)
 		if UseRefResult2.current ~= ScrollResetKey then
 			UseRefResult2.current = ScrollResetKey
@@ -157,13 +157,13 @@ return ReactModule.memo(function(p1) --[[ Line: 81 | Named "BottomLockedScrollVi
 		p1.isChannelBarVisible,
 		IsScrollToTopOnReset
 	})
-	ReactModule.useEffect(function() --[[ Line: 205 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), p1 (copy), FFlagExpChatRenderHistoricalMessagesModule (upval), AdvanceHistoryScrollModule (upval), UseRefResult6 (copy), UseRefResult1 (copy), UseRefResult5 (copy)
 		local Current = UseRefResult.current
 		
 		if not Current then return end
 		local HistoricalMessageCountSignalFunction = p1.historicalMessageCountSignal
-		local Connection = Current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function() --[[ Line: 215 ]]
+		local Connection = Current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function()
 			-- upvalues: FFlagExpChatRenderHistoricalMessagesModule (upval), HistoricalMessageCountSignalFunction (copy), AdvanceHistoryScrollModule (upval), UseRefResult6 (upval), Current (copy), UseRefResult1 (upval), UseRefResult5 (upval), UseRefResult (upval)
 			if FFlagExpChatRenderHistoricalMessagesModule and HistoricalMessageCountSignalFunction then
 				local AdvanceHistoryScrollModuleResult: number = AdvanceHistoryScrollModule(UseRefResult6.current, Current.AbsoluteCanvasSize.Y, HistoricalMessageCountSignalFunction(false))
@@ -177,7 +177,7 @@ return ReactModule.memo(function(p1) --[[ Line: 81 | Named "BottomLockedScrollVi
 			end
 		end)
 		
-		return function() --[[ Line: 235 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end
@@ -188,7 +188,7 @@ return ReactModule.memo(function(p1) --[[ Line: 81 | Named "BottomLockedScrollVi
 		ScrollResetKey,
 		p1.historicalMessageCountSignal
 	})
-	local _UDim = if FFlagExpChatEnableFriendsTab and type(p1.contentTopPadding) == "number" then UDim.new(0, p1.contentTopPadding) elseif FFlagExpChatEnableFriendsTab and p1.contentTopPadding ~= nil then p1.contentTopPadding:map(function(Offset): UDim --[[ Line: 250 ]]
+	local _UDim = if FFlagExpChatEnableFriendsTab and type(p1.contentTopPadding) == "number" then UDim.new(0, p1.contentTopPadding) elseif FFlagExpChatEnableFriendsTab and p1.contentTopPadding ~= nil then p1.contentTopPadding:map(function(Offset): UDim
 		return UDim.new(0, Offset)
 	end) else nil
 	
@@ -209,7 +209,7 @@ return ReactModule.memo(function(p1) --[[ Line: 81 | Named "BottomLockedScrollVi
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
 			BorderSizePixel = 0,
 			ScrollBarImageColor3 = Theme.UIEmphasis.Color,
-			ScrollBarImageTransparency = UseBindingResult:map(function(p2): number --[[ Line: 275 ]]
+			ScrollBarImageTransparency = UseBindingResult:map(function(p2): number
 				return if p2 then 0 else 1
 			end),
 			ScrollBarThickness = ConfigModule.ChatWindowScrollBarThickness,

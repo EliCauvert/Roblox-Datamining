@@ -7,7 +7,7 @@ local UseProfileCardWidthFunction = require(Parent.ProfilePlatformCommon).Hooks.
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local FFlagAXEnableProfileTab = require(Parent.SharedFlags).FFlagAXEnableProfileTab
 
-return function(p1) --[[ Line: 24 ]]
+return function(p1)
 	-- upvalues: UseProfileCardWidthFunction (copy), UseLocalizationFunction (copy), FFlagAXEnableProfileTab (copy), ReactModule (copy), View (copy), EditProfileHeaderBarModule (copy)
 	local UseProfileCardWidthResult = UseProfileCardWidthFunction()
 	local IsFullBleed: boolean = FFlagAXEnableProfileTab and p1.fullBleed == true

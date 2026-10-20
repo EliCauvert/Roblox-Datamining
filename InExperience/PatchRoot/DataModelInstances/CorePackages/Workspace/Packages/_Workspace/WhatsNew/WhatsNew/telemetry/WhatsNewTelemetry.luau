@@ -30,7 +30,7 @@ local WhatsNewTelemetryModule = {
 	LifecycleType = { TOUR_STARTED = 1, TOUR_COMPLETED = 2, TOUR_STOPPED = 3 },
 	StopReason = { DISMISS = 1, ABORT = 2 },
 	StartContext = { ROOT = 1, GATEWAY = 2, IDLE = 3 },
-	buildTourSessionFields = function(p1) --[[ Line: 122 ]]
+	buildTourSessionFields = function(p1)
 		local CurrentScopeTour = p1.currentScopeTour
 		
 		return {
@@ -43,7 +43,7 @@ local WhatsNewTelemetryModule = {
 	end
 }
 
-function WhatsNewTelemetryModule.logTourtipInteraction(Interaction_type, Entry_id, Button, p1, Skip_reason) --[[ Line: 133 ]]
+function WhatsNewTelemetryModule.logTourtipInteraction(Interaction_type, Entry_id, Button, p1, Skip_reason)
 	-- upvalues: WhatsNewTelemetryModule (copy), TelemetryService (copy), Events (copy), StandardizedFields (copy)
 	local TourSessionFields = WhatsNewTelemetryModule.buildTourSessionFields(p1)
 	TourSessionFields.entry_id = Entry_id
@@ -63,7 +63,7 @@ function WhatsNewTelemetryModule.logTourtipInteraction(Interaction_type, Entry_i
 	})
 end
 
-function WhatsNewTelemetryModule.logTourLifecycle(Lifecycle_type, p1, Stop_reason, Start_context) --[[ Line: 160 ]]
+function WhatsNewTelemetryModule.logTourLifecycle(Lifecycle_type, p1, Stop_reason, Start_context)
 	-- upvalues: WhatsNewTelemetryModule (copy), TelemetryService (copy), Events (copy), StandardizedFields (copy)
 	local TourSessionFields = WhatsNewTelemetryModule.buildTourSessionFields(p1)
 	TourSessionFields.lifecycle_type = Lifecycle_type

@@ -8,7 +8,7 @@ local UserUpdatedModule = require(Actions.UserUpdated)
 local UserModelModule = require(RoduxUsers.Models.UserModel)
 local t = {}
 
-local function v9(p1, List) --[[ Line: 14 ]]
+local function v9(p1, List)
 	-- upvalues: UserModelModule (copy), CryoModule (copy)
 	local NewResults = {}
 	
@@ -25,39 +25,39 @@ local function v9(p1, List) --[[ Line: 14 ]]
 	return CryoModule.Dictionary.join(p1, NewResults)
 end
 
-return function(p2) --[[ Line: 32 ]]
+return function(p2)
 	-- upvalues: RoduxModule (copy), t (copy), v9 (copy), UserUpdatedModule (copy), UserModelModule (copy), CryoModule (copy), UserRemovedModule (copy)
 	local UsersNetworking = p2.usersNetworking
 	local FriendsNetworking = p2.friendsNetworking
 	
 	return RoduxModule.createReducer(t, {
-		[UsersNetworking.GetUserV2FromUserId.Succeeded.name] = function(p3, p4) --[[ Line: 37 ]]
+		[UsersNetworking.GetUserV2FromUserId.Succeeded.name] = function(p3, p4)
 			-- upvalues: v9 (upval)
 			return v9(p3, { p4.responseBody })
 		end,
-		[UsersNetworking.GetSkinnyUsersFromUserIds.Succeeded.name] = function(p3, p4) --[[ Line: 41 ]]
+		[UsersNetworking.GetSkinnyUsersFromUserIds.Succeeded.name] = function(p3, p4)
 			-- upvalues: v9 (upval)
 			return v9(p3, p4.responseBody.data)
 		end,
-		[FriendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p3, p4) --[[ Line: 45 ]]
+		[FriendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p3, p4)
 			-- upvalues: v9 (upval)
 			return v9(p3, p4.responseBody.data)
 		end,
-		[FriendsNetworking.GetFriendRequests.Succeeded.name] = function(p3, p4) --[[ Line: 49 ]]
+		[FriendsNetworking.GetFriendRequests.Succeeded.name] = function(p3, p4)
 			-- upvalues: v9 (upval)
 			return v9(p3, p4.responseBody.data)
 		end,
-		[FriendsNetworking.GetFriendRecommendationsFromUserId.Succeeded.name] = function(p3, p4) --[[ Line: 53 ]]
+		[FriendsNetworking.GetFriendRecommendationsFromUserId.Succeeded.name] = function(p3, p4)
 			-- upvalues: v9 (upval)
 			return v9(p3, p4.responseBody.data)
 		end,
-		[UserUpdatedModule.name] = function(p3, p4) --[[ Line: 57 ]]
+		[UserUpdatedModule.name] = function(p3, p4)
 			-- upvalues: UserModelModule (upval), CryoModule (upval)
 			assert(UserModelModule.isValid(p4.payload))
 			
 			return CryoModule.Dictionary.join(p3, { [p4.payload.id] = p4.payload })
 		end,
-		[UserRemovedModule.name] = function(p3, p4) --[[ Line: 65 ]]
+		[UserRemovedModule.name] = function(p3, p4)
 			-- upvalues: CryoModule (upval)
 			assert(type(p4.payload.id) == "string", "Expected id to be a string")
 			

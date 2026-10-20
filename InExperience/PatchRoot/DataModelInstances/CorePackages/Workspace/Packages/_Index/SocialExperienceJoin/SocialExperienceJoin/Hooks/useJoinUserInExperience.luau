@@ -43,18 +43,18 @@ local GameJoinCardOnBeforeJoinCallback = game:DefineFastFlag("GameJoinCardOnBefo
 local SocialJoinPassPlaceIdToLaunch = game:DefineFastFlag("SocialJoinPassPlaceIdToLaunch", false)
 local config = { skipFetch = true }
 
-return function(UserId, p1) --[[ Line: 71 ]]
+return function(UserId, p1)
 	-- upvalues: UseDispatchFunction (copy), UseRoactServiceFunction (copy), AppSessionService (copy), AppGame (copy), ReactModule (copy), InitializeSocialExperienceJoinAnalyticsModule (copy), UseLocalUserIdFunction (copy), FFlagSocialExperienceJoinPresenceStoreMigrationModule (copy), UseGetPresenceByUserId (copy), config (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), ConstantsModule (copy), NetworkingGamesModule (copy), NetworkStatus (copy), UseAgeCheckUpsellStateModule (copy), SetGamePlaySessionFunction (copy), SessionType (copy), EventNamesModule (copy), FFlagJoinabilityCTARefactor (copy), FFlagProfilePlatformImproveGameDetailsAnalytics (copy), JoinExperienceStatusModule (copy), PromiseModule (copy), SocialJoinUseUnifiedPurchaseFlow (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), CloseCentralOverlayFunction (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), PlayabilityStatus (copy), GameJoinCardOnBeforeJoinCallback (copy), LaunchGameFunction (copy), SocialJoinPassPlaceIdToLaunch (copy), FFlagGameJoinCardSourceAttribution (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(AppSessionService)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(AppGame)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 91 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: InitializeSocialExperienceJoinAnalyticsModule (upval), p1 (copy)
 		return InitializeSocialExperienceJoinAnalyticsModule(p1.analyticProps)
 	end, {})
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseGetPresenceByUserIdResult = if FFlagSocialExperienceJoinPresenceStoreMigrationModule then UseGetPresenceByUserId(UserId, config) else nil
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 102 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: p1 (copy), FFlagSocialExperienceJoinPresenceStoreMigrationModule (upval), UseGetPresenceByUserIdResult (ref), GetDeepValueFunction (upval), ConstantsModule (upval), UserId (copy), NetworkingGamesModule (upval), NetworkStatus (upval)
 		local Presence = if p1.presence then p1.presence elseif FFlagSocialExperienceJoinPresenceStoreMigrationModule then UseGetPresenceByUserIdResult else GetDeepValueFunction(p2, `{ConstantsModule.RODUX_KEY}.Presence.byUserId.{UserId}`)
 		local Text: string = if Presence and Presence.universeId then tostring(Presence.universeId) else ""
@@ -70,21 +70,21 @@ return function(UserId, p1) --[[ Line: 71 ]]
 		}
 	end)
 	local UseAgeCheckUpsellStateModuleResult = UseAgeCheckUpsellStateModule(UseSelectorResult.universeId, p1.onAgeCheckCompletion)
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 136 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseDispatchResult (copy), NetworkingGamesModule (upval), SetGamePlaySessionFunction (upval), UseRoactServiceResult (copy), SessionType (upval), UseMemoResult (copy), EventNamesModule (upval), UseSelectorResult (copy), UserId (copy), UseLocalUserIdResult (copy), FFlagJoinabilityCTARefactor (upval), p1 (copy), FFlagProfilePlatformImproveGameDetailsAnalytics (upval), JoinExperienceStatusModule (upval), PromiseModule (upval), SocialJoinUseUnifiedPurchaseFlow (upval), SetCentralOverlayFunction (upval), CentralOverlayType (upval), CloseCentralOverlayFunction (upval), UseAgeCheckUpsellStateModuleResult (copy), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval), PlayabilityStatus (upval), GameJoinCardOnBeforeJoinCallback (upval), LaunchGameFunction (upval), SocialJoinPassPlaceIdToLaunch (upval), UseRoactServiceResult1 (copy), FFlagGameJoinCardSourceAttribution (upval), ConstantsModule (upval)
-		local function _(p3) --[[ Line: 137 ]]
+		local function _(p3)
 			-- upvalues: UseDispatchResult (upval), NetworkingGamesModule (upval)
 			return UseDispatchResult(NetworkingGamesModule.GetExperiencesDetails.API({ p3 }))
 		end
 		
-		local function v50(UniverseId) --[[ Line: 141 ]]
+		local function v50(UniverseId)
 			-- upvalues: UseDispatchResult (upval), NetworkingGamesModule (upval)
 			return UseDispatchResult(NetworkingGamesModule.GetExperiencesProductInfo.API({ UniverseId }))
 		end
 		
-		local _ = function(Status) --[[ Line: 145 ]]
+		local _ = function(Status)
 			-- upvalues: SetGamePlaySessionFunction (upval), UseRoactServiceResult (upval), SessionType (upval), UseMemoResult (upval), EventNamesModule (upval), UseSelectorResult (upval), UserId (upval), UseLocalUserIdResult (upval), FFlagJoinabilityCTARefactor (upval), p2 (copy), p1 (upval), FFlagProfilePlatformImproveGameDetailsAnalytics (upval)
-			return function(JoinAttemptId) --[[ Line: 146 ]]
+			return function(JoinAttemptId)
 				-- upvalues: SetGamePlaySessionFunction (upval), UseRoactServiceResult (upval), SessionType (upval), UseMemoResult (upval), EventNamesModule (upval), UseSelectorResult (upval), UserId (upval), UseLocalUserIdResult (upval), Status (copy), FFlagJoinabilityCTARefactor (upval), p2 (upval), p1 (upval), FFlagProfilePlatformImproveGameDetailsAnalytics (upval)
 				SetGamePlaySessionFunction(UseRoactServiceResult, SessionType.StructuralIdentifier.GamePlayFromFriendsList, true)
 				UseMemoResult.fireAnalyticsEvent(EventNamesModule.JoinExperience, {
@@ -103,10 +103,10 @@ return function(UserId, p1) --[[ Line: 71 ]]
 			end
 		end
 		
-		local function v52() --[[ Line: 168 ]]
+		local function v52()
 			-- upvalues: JoinExperienceStatusModule (upval), SetGamePlaySessionFunction (upval), UseRoactServiceResult (upval), SessionType (upval), UseMemoResult (upval), EventNamesModule (upval), UseSelectorResult (upval), UserId (upval), UseLocalUserIdResult (upval), FFlagJoinabilityCTARefactor (upval), p2 (copy), p1 (upval), FFlagProfilePlatformImproveGameDetailsAnalytics (upval), PromiseModule (upval), UseDispatchResult (upval), NetworkingGamesModule (upval), v50 (copy), SocialJoinUseUnifiedPurchaseFlow (upval), SetCentralOverlayFunction (upval), CentralOverlayType (upval), CloseCentralOverlayFunction (upval), UseAgeCheckUpsellStateModuleResult (upval), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval)
 			local PurchaseRequired = JoinExperienceStatusModule.PurchaseRequired;
-			(function(JoinAttemptId) --[[ Line: 146 ]]
+			(function(JoinAttemptId)
 				-- upvalues: SetGamePlaySessionFunction (upval), UseRoactServiceResult (upval), SessionType (upval), UseMemoResult (upval), EventNamesModule (upval), UseSelectorResult (upval), UserId (upval), UseLocalUserIdResult (upval), PurchaseRequired (copy), FFlagJoinabilityCTARefactor (upval), p2 (upval), p1 (upval), FFlagProfilePlatformImproveGameDetailsAnalytics (upval)
 				SetGamePlaySessionFunction(UseRoactServiceResult, SessionType.StructuralIdentifier.GamePlayFromFriendsList, true)
 				UseMemoResult.fireAnalyticsEvent(EventNamesModule.JoinExperience, {
@@ -123,7 +123,7 @@ return function(UserId, p1) --[[ Line: 71 ]]
 					friendId = if FFlagProfilePlatformImproveGameDetailsAnalytics then UserId else nil
 				})
 			end)()
-			PromiseModule.all(UseDispatchResult(NetworkingGamesModule.GetExperiencesDetails.API({ UseSelectorResult.universeId })), v50(UseSelectorResult.universeId)):andThen(function() --[[ Line: 176 ]]
+			PromiseModule.all(UseDispatchResult(NetworkingGamesModule.GetExperiencesDetails.API({ UseSelectorResult.universeId })), v50(UseSelectorResult.universeId)):andThen(function()
 				-- upvalues: SocialJoinUseUnifiedPurchaseFlow (upval), UseSelectorResult (upval), UseDispatchResult (upval), SetCentralOverlayFunction (upval), CentralOverlayType (upval), CloseCentralOverlayFunction (upval), UseAgeCheckUpsellStateModuleResult (upval), AppPage (upval), UserId (upval), p1 (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval)
 				if SocialJoinUseUnifiedPurchaseFlow then
 					UseDispatchResult(SetCentralOverlayFunction(CentralOverlayType.UnifiedProductPurchaseModal, {
@@ -134,11 +134,11 @@ return function(UserId, p1) --[[ Line: 71 ]]
 							experienceIconUrl = string.format("rbxthumb://type=GameIcon&id=%s&w=150&h=150", UseSelectorResult.universeId)
 						},
 						purchaseCallbacks = {
-							onFlowComplete = function() --[[ Line: 190 ]]
+							onFlowComplete = function()
 								-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
 								UseDispatchResult(CloseCentralOverlayFunction())
 							end,
-							onPurchaseSuccess = function() --[[ Line: 193 ]]
+							onPurchaseSuccess = function()
 								-- upvalues: UseAgeCheckUpsellStateModuleResult (upval)
 								if UseAgeCheckUpsellStateModuleResult then
 									UseAgeCheckUpsellStateModuleResult.refetchPlayability()
@@ -166,10 +166,10 @@ return function(UserId, p1) --[[ Line: 71 ]]
 			end)
 		end
 		
-		local function v53() --[[ Line: 221 ]]
+		local function v53()
 			-- upvalues: SocialJoinUseUnifiedPurchaseFlow (upval), JoinExperienceStatusModule (upval), SetGamePlaySessionFunction (upval), UseRoactServiceResult (upval), SessionType (upval), UseMemoResult (upval), EventNamesModule (upval), UseSelectorResult (upval), UserId (upval), UseLocalUserIdResult (upval), FFlagJoinabilityCTARefactor (upval), p2 (copy), p1 (upval), FFlagProfilePlatformImproveGameDetailsAnalytics (upval), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateDownFunction (upval)
 			local Unable = if SocialJoinUseUnifiedPurchaseFlow then JoinExperienceStatusModule.Unable else JoinExperienceStatusModule.PurchaseRequired;
-			(function(JoinAttemptId) --[[ Line: 146 ]]
+			(function(JoinAttemptId)
 				-- upvalues: SetGamePlaySessionFunction (upval), UseRoactServiceResult (upval), SessionType (upval), UseMemoResult (upval), EventNamesModule (upval), UseSelectorResult (upval), UserId (upval), UseLocalUserIdResult (upval), Unable (copy), FFlagJoinabilityCTARefactor (upval), p2 (upval), p1 (upval), FFlagProfilePlatformImproveGameDetailsAnalytics (upval)
 				SetGamePlaySessionFunction(UseRoactServiceResult, SessionType.StructuralIdentifier.GamePlayFromFriendsList, true)
 				UseMemoResult.fireAnalyticsEvent(EventNamesModule.JoinExperience, {
@@ -205,12 +205,12 @@ return function(UserId, p1) --[[ Line: 71 ]]
 			end
 		end
 		
-		;(function(p3) --[[ Line: 247 ]]
+		;(function(p3)
 			-- upvalues: UseAgeCheckUpsellStateModuleResult (upval), PromiseModule (upval), UseDispatchResult (upval), NetworkingGamesModule (upval)
-			return if UseAgeCheckUpsellStateModuleResult and UseAgeCheckUpsellStateModuleResult.cachedPlayabilityStatus then PromiseModule.resolve(UseAgeCheckUpsellStateModuleResult.cachedPlayabilityStatus) else UseDispatchResult(NetworkingGamesModule.GetExperiencesPlayabilityStatus.API({ p3 })):andThen(function(Result) --[[ Line: 252 ]]
+			return if UseAgeCheckUpsellStateModuleResult and UseAgeCheckUpsellStateModuleResult.cachedPlayabilityStatus then PromiseModule.resolve(UseAgeCheckUpsellStateModuleResult.cachedPlayabilityStatus) else UseDispatchResult(NetworkingGamesModule.GetExperiencesPlayabilityStatus.API({ p3 })):andThen(function(Result)
 				return Result.responseBody[1].playabilityStatus
 			end)
-		end)(UseSelectorResult.universeId):andThen(function(Result) --[[ Line: 259 ]]
+		end)(UseSelectorResult.universeId):andThen(function(Result)
 			-- upvalues: PlayabilityStatus (upval), v52 (copy), GameJoinCardOnBeforeJoinCallback (upval), p1 (upval), JoinExperienceStatusModule (upval), SetGamePlaySessionFunction (upval), UseRoactServiceResult (upval), SessionType (upval), UseMemoResult (upval), EventNamesModule (upval), UseSelectorResult (upval), UserId (upval), UseLocalUserIdResult (upval), FFlagJoinabilityCTARefactor (upval), p2 (copy), FFlagProfilePlatformImproveGameDetailsAnalytics (upval), LaunchGameFunction (upval), SocialJoinPassPlaceIdToLaunch (upval), UseRoactServiceResult1 (upval), FFlagGameJoinCardSourceAttribution (upval), ConstantsModule (upval), UseAgeCheckUpsellStateModuleResult (upval), v53 (copy)
 			if Result == PlayabilityStatus.PurchaseRequired.rawValue() then
 				v52()
@@ -222,7 +222,7 @@ return function(UserId, p1) --[[ Line: 71 ]]
 					p1.onBeforeJoin()
 				end
 				local Success = JoinExperienceStatusModule.Success
-				LaunchGameFunction(if FFlagJoinabilityCTARefactor and not p2 then UseSelectorResult.rootPlaceId elseif SocialJoinPassPlaceIdToLaunch and UseSelectorResult.placeId ~= "" then UseSelectorResult.placeId else nil, nil, if p2 then { userId = UserId } else nil, UseRoactServiceResult1, FFlagGameJoinCardSourceAttribution and p1.joinAttemptOrigin or ConstantsModule.AnalyticsContext.PeopleListInHomePage, function(JoinAttemptId) --[[ Line: 146 ]]
+				LaunchGameFunction(if FFlagJoinabilityCTARefactor and not p2 then UseSelectorResult.rootPlaceId elseif SocialJoinPassPlaceIdToLaunch and UseSelectorResult.placeId ~= "" then UseSelectorResult.placeId else nil, nil, if p2 then { userId = UserId } else nil, UseRoactServiceResult1, FFlagGameJoinCardSourceAttribution and p1.joinAttemptOrigin or ConstantsModule.AnalyticsContext.PeopleListInHomePage, function(JoinAttemptId)
 					-- upvalues: SetGamePlaySessionFunction (upval), UseRoactServiceResult (upval), SessionType (upval), UseMemoResult (upval), EventNamesModule (upval), UseSelectorResult (upval), UserId (upval), UseLocalUserIdResult (upval), Success (copy), FFlagJoinabilityCTARefactor (upval), p2 (upval), p1 (upval), FFlagProfilePlatformImproveGameDetailsAnalytics (upval)
 					SetGamePlaySessionFunction(UseRoactServiceResult, SessionType.StructuralIdentifier.GamePlayFromFriendsList, true)
 					UseMemoResult.fireAnalyticsEvent(EventNamesModule.JoinExperience, {
@@ -248,10 +248,10 @@ return function(UserId, p1) --[[ Line: 71 ]]
 			else
 				v53()
 			end
-		end):catch(function() --[[ Line: 289 ]]
+		end):catch(function()
 			-- upvalues: JoinExperienceStatusModule (upval), SetGamePlaySessionFunction (upval), UseRoactServiceResult (upval), SessionType (upval), UseMemoResult (upval), EventNamesModule (upval), UseSelectorResult (upval), UserId (upval), UseLocalUserIdResult (upval), FFlagJoinabilityCTARefactor (upval), p2 (copy), p1 (upval), FFlagProfilePlatformImproveGameDetailsAnalytics (upval)
 			local Failure = JoinExperienceStatusModule.Failure;
-			(function(JoinAttemptId) --[[ Line: 146 ]]
+			(function(JoinAttemptId)
 				-- upvalues: SetGamePlaySessionFunction (upval), UseRoactServiceResult (upval), SessionType (upval), UseMemoResult (upval), EventNamesModule (upval), UseSelectorResult (upval), UserId (upval), UseLocalUserIdResult (upval), Failure (copy), FFlagJoinabilityCTARefactor (upval), p2 (upval), p1 (upval), FFlagProfilePlatformImproveGameDetailsAnalytics (upval)
 				SetGamePlaySessionFunction(UseRoactServiceResult, SessionType.StructuralIdentifier.GamePlayFromFriendsList, true)
 				UseMemoResult.fireAnalyticsEvent(EventNamesModule.JoinExperience, {
@@ -287,23 +287,23 @@ return function(UserId, p1) --[[ Line: 71 ]]
 		if FFlagGameJoinCardSourceAttribution then p1.joinAttemptOrigin else nil,
 		UseAgeCheckUpsellStateModuleResult
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 333 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy)
 		UseResult(true)
 	end, { UseResult })
-	local UseResult2 = if FFlagJoinabilityCTARefactor then ReactModule.useCallback(function() --[[ Line: 339 ]]
+	local UseResult2 = if FFlagJoinabilityCTARefactor then ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy)
 		UseResult(false)
 	end, { UseResult }) else nil
 	local IsNotUniverseIdMatch: boolean = UseSelectorResult.presenceType and UseSelectorResult.lastLocation and UseSelectorResult.universeId ~= "" or false
 	local IsLoading = if UseAgeCheckUpsellStateModuleResult then UseSelectorResult.isLoading or (not UseAgeCheckUpsellStateModuleResult.playabilityChecked or UseAgeCheckUpsellStateModuleResult.pendingParentalControlsResolution) else UseSelectorResult.isLoading
 	
-	return ReactModule.useMemo(function() --[[ Line: 357 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: UseResult1 (copy), FFlagJoinabilityCTARefactor (upval), UseResult2 (ref), UseAgeCheckUpsellStateModuleResult (copy), IsNotUniverseIdMatch (copy), IsLoading (copy)
 		return {
 			joinExperience = UseResult1,
 			playExperience = if FFlagJoinabilityCTARefactor then UseResult2 else nil,
-			joinAgeCheckUpsellFlow = if UseAgeCheckUpsellStateModuleResult then UseAgeCheckUpsellStateModuleResult.joinAgeCheckUpsellFlow else function() --[[ Line: 363 ]] end,
+			joinAgeCheckUpsellFlow = if UseAgeCheckUpsellStateModuleResult then UseAgeCheckUpsellStateModuleResult.joinAgeCheckUpsellFlow else function() end,
 			ageCheckRequired = if UseAgeCheckUpsellStateModuleResult then UseAgeCheckUpsellStateModuleResult.ageCheckRequired else false,
 			cachedPlayabilityStatus = if UseAgeCheckUpsellStateModuleResult then UseAgeCheckUpsellStateModuleResult.cachedPlayabilityStatus else nil,
 			playabilityFromCache = if UseAgeCheckUpsellStateModuleResult then UseAgeCheckUpsellStateModuleResult.playabilityFromCache else false,

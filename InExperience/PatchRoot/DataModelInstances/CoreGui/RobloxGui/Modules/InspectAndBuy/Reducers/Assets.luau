@@ -6,13 +6,13 @@ local ItemTypeEnum = require(CorePackages.Workspace.Packages.AvatarExperienceMod
 local FFlagAXEnableFetchAvatarPreviewModule = require(Parent.Flags.FFlagAXEnableFetchAvatarPreview)
 
 return require(CorePackages.Packages.Rodux).createReducer({}, {
-	[require(Parent.Actions.SetFavoriteAsset).name] = function(JoinResults, p1) --[[ Line: 23 ]]
+	[require(Parent.Actions.SetFavoriteAsset).name] = function(JoinResults, p1)
 		-- upvalues: CryoModule (copy), AssetInfoModule (copy)
 		JoinResults[p1.id] = CryoModule.Dictionary.join(CryoModule.Dictionary.join({}, JoinResults[p1.id] or {}), AssetInfoModule.fromGetFavoriteForAsset(p1.id, p1.isFavorite))
 		
 		return JoinResults
 	end,
-	[require(Parent.Actions.UpdateBulkPuchaseResults).name] = if require(CorePackages.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndBuyBulkPurchase then function(JoinResults, p1) --[[ Line: 34 ]]
+	[require(Parent.Actions.UpdateBulkPuchaseResults).name] = if require(CorePackages.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndBuyBulkPurchase then function(JoinResults, p1)
 		-- upvalues: CryoModule (copy), AssetInfoModule (copy)
 		for _, item in p1.result.Items do
 			if item.type == Enum.MarketplaceProductType.AvatarAsset then
@@ -22,7 +22,7 @@ return require(CorePackages.Packages.Rodux).createReducer({}, {
 		end
 		return JoinResults
 	end else nil,
-	[require(Parent.Actions.SetAssets).name] = function(p2, p3) --[[ Line: 49 ]]
+	[require(Parent.Actions.SetAssets).name] = function(p2, p3)
 		-- upvalues: CryoModule (copy), AssetInfoModule (copy)
 		local JoinResults = {}
 		
@@ -36,7 +36,7 @@ return require(CorePackages.Packages.Rodux).createReducer({}, {
 		end
 		return (CryoModule.Dictionary.join(p2, JoinResults))
 	end,
-	[require(Parent.Actions.SetAvatarPreviewDetails).name] = if FFlagAXEnableFetchAvatarPreviewModule then function(p4, p5) --[[ Line: 70 ]]
+	[require(Parent.Actions.SetAvatarPreviewDetails).name] = if FFlagAXEnableFetchAvatarPreviewModule then function(p4, p5)
 		-- upvalues: ItemTypeEnum (copy), AssetInfoModule (copy), CryoModule (copy)
 		local Look = p5.avatarPreviewDetails.look
 		
@@ -52,7 +52,7 @@ return require(CorePackages.Packages.Rodux).createReducer({}, {
 		end
 		return CryoModule.Dictionary.join(p4, FromAvatarPreviewItemResults)
 	end else nil,
-	[require(Parent.Actions.SetBundlesAssetIsPartOf).name] = function(p6, p7) --[[ Line: 91 ]]
+	[require(Parent.Actions.SetBundlesAssetIsPartOf).name] = function(p6, p7)
 		-- upvalues: AssetInfoModule (copy), CryoModule (copy)
 		local Text = tostring(p7.assetId)
 		
@@ -60,7 +60,7 @@ return require(CorePackages.Packages.Rodux).createReducer({}, {
 			[Text] = CryoModule.Dictionary.join(p6[Text] or {}, (AssetInfoModule.fromGetAssetBundles(Text, p7.bundleIds)))
 		})
 	end,
-	[require(Parent.Actions.SetAssetFromBundleInfo).name] = function(p6, p7) --[[ Line: 100 ]]
+	[require(Parent.Actions.SetAssetFromBundleInfo).name] = function(p6, p7)
 		-- upvalues: AssetInfoModule (copy), CryoModule (copy)
 		local Text = tostring(p7.assetId)
 		

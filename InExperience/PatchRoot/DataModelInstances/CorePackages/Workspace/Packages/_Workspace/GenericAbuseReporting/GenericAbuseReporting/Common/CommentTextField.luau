@@ -7,7 +7,7 @@ local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFon
 local UseCursorFunction = UIBloxModule.App.SelectionCursor.useCursor
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 
-return function(p1) --[[ Line: 26 | Named "CommentTextField" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseCursorFunction (copy), UseStyleFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState("")
 	local UseCursorResult = UseCursorFunction()
@@ -56,7 +56,7 @@ return function(p1) --[[ Line: 26 | Named "CommentTextField" ]]
 			OverlayNativeInput = true,
 			ClipsDescendants = true,
 			Interactable = p1.interactable,
-			[ReactModule.Change.Text] = ReactModule.useCallback(function(p2) --[[ Line: 34 ]]
+			[ReactModule.Change.Text] = ReactModule.useCallback(function(p2)
 				-- upvalues: UseStateResult2 (copy), p1 (copy), UseStateResult (copy)
 				local Text = p2.Text
 				

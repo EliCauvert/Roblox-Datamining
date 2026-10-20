@@ -6,7 +6,7 @@ local LocaleId = nil
 local Connection = nil
 local BindableEvent = Instance.new("BindableEvent")
 
-local function handlePlayerOrLocaleChanged() --[[ Line: 11 ]]
+local function handlePlayerOrLocaleChanged()
 	-- upvalues: LocalPlayer (ref), LocaleId (ref), BindableEvent (copy)
 	if LocalPlayer and LocalPlayer.LocaleId ~= LocaleId then
 		LocaleId = LocalPlayer.LocaleId
@@ -14,7 +14,7 @@ local function handlePlayerOrLocaleChanged() --[[ Line: 11 ]]
 	end
 end
 
-local function _() --[[ Line: 18 | Named "reset" ]]
+local function _()
 	-- upvalues: TranslatorForPlayer (ref), LocalPlayer (ref), Connection (ref)
 	TranslatorForPlayer = nil
 	LocalPlayer = nil
@@ -25,7 +25,7 @@ local function _() --[[ Line: 18 | Named "reset" ]]
 	end
 end
 
-local _ = function() --[[ Line: 28 | Named "getTranslator" ]]
+local _ = function()
 	-- upvalues: TranslatorForPlayer (ref), LocalPlayer (ref), Players (copy), LocalizationService (copy), LocaleId (ref), BindableEvent (copy), Connection (ref), handlePlayerOrLocaleChanged (copy)
 	if not TranslatorForPlayer then
 		LocalPlayer = Players.LocalPlayer
@@ -45,7 +45,7 @@ end
 
 local t = {}
 
-local _ = function(Key) --[[ Line: 43 | Named "unregisterGui" ]]
+local _ = function(Key)
 	-- upvalues: t (copy)
 	local Entry = t[Key]
 	
@@ -57,9 +57,9 @@ local _ = function(Key) --[[ Line: 43 | Named "unregisterGui" ]]
 	end
 end
 
-local _ = function(p1, p2) --[[ Line: 52 | Named "makeAncestryChangedHandler" ]]
+local _ = function(p1, p2)
 	-- upvalues: t (copy)
-	return function(_, _) --[[ Line: 53 ]]
+	return function(_, _)
 		-- upvalues: p1 (copy), p2 (copy), t (upval)
 		if game:IsAncestorOf(p1) then
 			p2.hasBeenAdded = true
@@ -77,19 +77,19 @@ local _ = function(p1, p2) --[[ Line: 52 | Named "makeAncestryChangedHandler" ]]
 	end
 end
 
-local _ = function(p1, Context, Text) --[[ Line: 64 | Named "updateRegistryInfo" ]]
+local _ = function(p1, Context, Text)
 	p1.context = Context
 	p1.text = Text
 end
 
-local function makeRegistryInfo(Key, Context, Text) --[[ Line: 69 ]]
+local function makeRegistryInfo(Key, Context, Text)
 	-- upvalues: t (copy)
 	local config = {
 		hasBeenAdded = game:IsAncestorOf(Key),
 		context = Context,
 		text = Text
 	}
-	config.connection = Key.AncestryChanged:Connect(function(_, _) --[[ Line: 53 ]]
+	config.connection = Key.AncestryChanged:Connect(function(_, _)
 		-- upvalues: Key (copy), config (copy), t (upval)
 		if game:IsAncestorOf(Key) then
 			config.hasBeenAdded = true
@@ -109,7 +109,7 @@ local function makeRegistryInfo(Key, Context, Text) --[[ Line: 69 ]]
 	return config
 end
 
-local _ = function(Key, Context, Text) --[[ Line: 77 | Named "registerGui" ]]
+local _ = function(Key, Context, Text)
 	-- upvalues: t (copy), makeRegistryInfo (copy)
 	if t[Key] == nil then
 		t[Key] = makeRegistryInfo(Key, Context, Text)
@@ -122,7 +122,7 @@ local _ = function(Key, Context, Text) --[[ Line: 77 | Named "registerGui" ]]
 	end
 end
 
-Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function() --[[ Line: 85 ]]
+Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
 	-- upvalues: TranslatorForPlayer (ref), LocalPlayer (ref), Connection (ref), Players (copy), LocalizationService (copy), LocaleId (ref), BindableEvent (copy), handlePlayerOrLocaleChanged (copy)
 	TranslatorForPlayer = nil
 	LocalPlayer = nil
@@ -147,7 +147,7 @@ Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function() --[[ Line: 85
 end)
 local GameTranslatorModule = {
 	LocaleChanged = BindableEvent.Event,
-	TranslateGameText = function(_, Context, p1) --[[ Line: 101 ]]
+	TranslateGameText = function(_, Context, p1)
 		-- upvalues: TranslatorForPlayer (ref), LocalPlayer (ref), Players (copy), LocalizationService (copy), LocaleId (ref), BindableEvent (copy), Connection (ref), handlePlayerOrLocaleChanged (copy)
 		if not TranslatorForPlayer then
 			LocalPlayer = Players.LocalPlayer
@@ -167,14 +167,14 @@ local GameTranslatorModule = {
 		return if TranslatorForPlayer1 then TranslatorForPlayer1:RobloxOnlyTranslate(Context, p1) else p1
 	end
 }
-LocalizationService.AutoTranslateWillRun:Connect(function() --[[ Line: 110 | Named "retranslateAll" ]]
+LocalizationService.AutoTranslateWillRun:Connect(function()
 	-- upvalues: t (copy), GameTranslatorModule (copy)
 	for i, value in pairs(t) do
 		i.Text = GameTranslatorModule:TranslateGameText(value.context, value.text)
 	end
 end)
 
-function GameTranslatorModule.TranslateAndRegister(p1, Key, Context, Text) --[[ Line: 118 ]]
+function GameTranslatorModule.TranslateAndRegister(p1, Key, Context, Text)
 	-- upvalues: t (copy), makeRegistryInfo (copy)
 	Key.Text = p1:TranslateGameText(Context, Text)
 	

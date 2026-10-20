@@ -15,13 +15,13 @@ local FFlagSocialCarouselShowPlusBadgeModule = require(SocialCarousel.Flags.FFla
 local FFlagSocialCarouselInGameTitleMarquee = require(Parent.SharedFlags).FFlagSocialCarouselInGameTitleMarquee
 local MarqueeTextModule = if FFlagSocialCarouselInGameTitleMarquee then require(SocialCarousel.Components.MarqueeText.MarqueeText) else nil
 
-local function UserTileHoverListener(p1) --[[ Line: 54 ]]
+local function UserTileHoverListener(p1)
 	-- upvalues: ReactModule (copy)
 	local TileRef = p1.tileRef
 	local OnMarqueeHoverFunction = p1.onMarqueeHover
 	local OnMarqueeHoverEndFunction = p1.onMarqueeHoverEnd
 	local FriendId = p1.friendId
-	ReactModule.useEffect(function() --[[ Line: 66 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: TileRef (copy), OnMarqueeHoverFunction (copy), FriendId (copy), OnMarqueeHoverEndFunction (copy)
 		local Current = if TileRef == nil then nil else TileRef.current
 		
@@ -36,18 +36,18 @@ local function UserTileHoverListener(p1) --[[ Line: 54 ]]
 				end
 			end
 		end
-		local MouseEnterConnection = Frame.MouseEnter:Connect(function() --[[ Line: 80 ]]
+		local MouseEnterConnection = Frame.MouseEnter:Connect(function()
 			-- upvalues: OnMarqueeHoverFunction (upval), FriendId (upval)
 			OnMarqueeHoverFunction(FriendId)
 		end)
-		local MouseLeaveConnection = Frame.MouseLeave:Connect(function() --[[ Line: 83 ]]
+		local MouseLeaveConnection = Frame.MouseLeave:Connect(function()
 			-- upvalues: OnMarqueeHoverEndFunction (upval), FriendId (upval)
 			if OnMarqueeHoverEndFunction then
 				OnMarqueeHoverEndFunction(FriendId)
 			end
 		end)
 		
-		return function() --[[ Line: 88 ]]
+		return function()
 			-- upvalues: MouseEnterConnection (copy), MouseLeaveConnection (copy), OnMarqueeHoverEndFunction (upval), FriendId (upval)
 			MouseEnterConnection:Disconnect()
 			MouseLeaveConnection:Disconnect()
@@ -66,7 +66,7 @@ local function UserTileHoverListener(p1) --[[ Line: 54 ]]
 	return nil
 end
 
-return function(p2) --[[ Line: 100 | Named "UserTile" ]]
+return function(p2)
 	-- upvalues: UseTokensFunction (copy), FoundationModule (copy), ConvertToFoundationPresenceEnumFunction (copy), FFlagSocialCarouselInGameTitleMarquee (copy), PresenceTypes (copy), MarqueeTextModule (ref), ReactModule (copy), MarqueePlayStatus (copy), View (copy), UserTileHoverListener (copy), UserTile (copy), LayoutMode (copy), FFlagFriendsCarouselProfileFrameEnabledModule (copy), FFlagSocialCarouselShowPlusBadgeModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local None = if p2.item.presence == nil then FoundationModule.Enums.UserPresence.None else FoundationModule.Enums.UserPresence[ConvertToFoundationPresenceEnumFunction(p2.item.presence.userPresenceType)]
@@ -86,7 +86,7 @@ return function(p2) --[[ Line: 100 | Named "UserTile" ]]
 				maxLoops = if OnMarqueeFinishedFunction == nil then nil else 1,
 				runId = p2.marqueeRunId,
 				requiresOverflow = p2.onMarqueeHover ~= nil,
-				onFinished = if OnMarqueeFinishedFunction == nil then nil else function() --[[ Line: 130 ]]
+				onFinished = if OnMarqueeFinishedFunction == nil then nil else function()
 					-- upvalues: OnMarqueeFinishedFunction (copy), p2 (copy)
 					OnMarqueeFinishedFunction(p2.item.id)
 				end

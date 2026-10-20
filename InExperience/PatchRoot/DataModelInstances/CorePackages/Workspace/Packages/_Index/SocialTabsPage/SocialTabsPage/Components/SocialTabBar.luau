@@ -7,19 +7,19 @@ local InputSize = FoundationModule.Enums.InputSize
 local View = FoundationModule.View
 local UseNavigationFunction = require(Parent.Navigation).useNavigation
 
-return function(p1) --[[ Line: 19 | Named "SocialTabBar" ]]
+return function(p1)
 	-- upvalues: UseNavigationFunction (copy), ReactModule (copy), View (copy), Tabs (copy), InputSize (copy), FillBehavior (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local RouteName = UseNavigationResult.state.routes[UseNavigationResult.state.index].routeName
 	local UseStateResult, UseStateResult2 = ReactModule.useState(RouteName)
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 24 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2 (copy), UseNavigationResult (copy)
 		UseStateResult2(p2)
 		UseNavigationResult.navigate(p2)
 	end, { UseNavigationResult })
-	ReactModule.useEffect(function() --[[ Line: 29 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), RouteName (copy)
-		UseStateResult2(function(RouteName1) --[[ Line: 30 ]]
+		UseStateResult2(function(RouteName1)
 			-- upvalues: RouteName (upval)
 			return if RouteName1 == RouteName then RouteName1 else RouteName
 		end)

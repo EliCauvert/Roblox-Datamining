@@ -3,7 +3,7 @@ local config = { __value = "null" }
 
 return {
 	NULL = config,
-	toJSBoolean = function(p1): boolean --[[ Line: 19 ]]
+	toJSBoolean = function(p1): boolean
 		-- upvalues: Boolean (copy), config (copy)
 		return Boolean.toJSBoolean(p1) and p1 ~= config
 	end

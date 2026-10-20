@@ -41,23 +41,23 @@ local list = {
 }
 local IconsNavigationClose = Images["icons/navigation/close"]
 
-function ExtendResult.init(p1) --[[ Line: 83 ]]
+function ExtendResult.init(p1)
 	-- upvalues: RoactGamepadModule (copy), RoactModule (copy), GuiService (copy)
 	p1.state = { selectedPackage = nil, showMessageBanner = false }
 	p1.buttonRefs = RoactGamepadModule.createRefCache()
 	p1.scrollingFrameRef = RoactModule.createRef()
 	
-	function p1.getGamepadNextSelectionLeft(LayoutOrder: number) --[[ Line: 92 ]]
+	function p1.getGamepadNextSelectionLeft(LayoutOrder: number)
 		-- upvalues: p1 (copy)
 		return LayoutOrder > 1 and p1.buttonRefs[LayoutOrder - 1] or nil
 	end
 	
-	function p1.getGamepadNextSelectionRight(LayoutOrder: number) --[[ Line: 96 ]]
+	function p1.getGamepadNextSelectionRight(LayoutOrder: number)
 		-- upvalues: p1 (copy)
 		return LayoutOrder < #p1.buttonRefs and p1.buttonRefs[LayoutOrder + 1] or nil
 	end
 	
-	function p1.initSelectionChangedListener() --[[ Line: 100 ]]
+	function p1.initSelectionChangedListener()
 		-- upvalues: p1 (copy), GuiService (upval)
 		if p1.selectionListener ~= nil then
 			p1.selectionListener:Disconnect()
@@ -67,7 +67,7 @@ function ExtendResult.init(p1) --[[ Line: 83 ]]
 			p1.selectionListener:Disconnect()
 			p1.selectionListener = nil
 		end
-		p1.selectionListener = GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ Line: 111 ]]
+		p1.selectionListener = GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function()
 			-- upvalues: p1 (upval), GuiService (upval)
 			if p1.state.selectedPackage == nil or GuiService.SelectedCoreObject == nil or p1.state.selectedPackage ~= GuiService.SelectedCoreObject then
 				p1:setState({ selectedPackage = GuiService.SelectedCoreObject })
@@ -76,34 +76,34 @@ function ExtendResult.init(p1) --[[ Line: 83 ]]
 	end
 end
 
-function ExtendResult.didMount(p1) --[[ Line: 123 ]]
+function ExtendResult.didMount(p1)
 	p1.initSelectionChangedListener()
 end
 
-function ExtendResult.didUpdate(p1, p2, _) --[[ Line: 127 ]]
+function ExtendResult.didUpdate(p1, p2, _)
 	local Props = p1.props
 	
 	if p2.hasNativePurchaseSucceeded ~= Props.hasNativePurchaseSucceeded and Props.hasNativePurchaseSucceeded then
 		p1:setState({ showMessageBanner = true })
-		task.delay(3, function() --[[ Line: 133 ]]
+		task.delay(3, function()
 			-- upvalues: p1 (copy)
 			p1:setState({ showMessageBanner = false })
 		end)
 	end
 end
 
-function ExtendResult.willUnmount(p1) --[[ Line: 140 ]]
+function ExtendResult.willUnmount(p1)
 	if p1.selectionListener ~= nil then
 		p1.selectionListener:Disconnect()
 		p1.selectionListener = nil
 	end
 end
 
-function ExtendResult.getScale(p1): number --[[ Line: 148 ]]
+function ExtendResult.getScale(p1): number
 	return if p1.props.isConsoleSize then 1 else 0.65
 end
 
-function ExtendResult.render(p1) --[[ Line: 158 ]]
+function ExtendResult.render(p1)
 	-- upvalues: RoactModule (copy), MultiTextLocalizerModule (copy), WithSelectionCursorProviderFunction (copy)
 	return RoactModule.createElement(MultiTextLocalizerModule, {
 		keys = {
@@ -111,9 +111,9 @@ function ExtendResult.render(p1) --[[ Line: 158 ]]
 			BannerTitle = { key = "IAPExperience.BuyRobux.Banner.Title" },
 			SuccessfulMessage = { key = "IAPExperience.BuyRobux.Alert.SuccessfulMessage" }
 		},
-		render = function(p2) --[[ Line: 171 ]]
+		render = function(p2)
 			-- upvalues: WithSelectionCursorProviderFunction (upval), p1 (copy)
-			return WithSelectionCursorProviderFunction(function(p3) --[[ Line: 172 ]]
+			return WithSelectionCursorProviderFunction(function(p3)
 				-- upvalues: p1 (upval), p2 (copy)
 				return p1:renderWithLocale(p2, p3)
 			end)
@@ -121,7 +121,7 @@ function ExtendResult.render(p1) --[[ Line: 158 ]]
 	})
 end
 
-function ExtendResult.movePackageToAttentionArea(p1, Frame: Frame) --[[ Line: 180 ]]
+function ExtendResult.movePackageToAttentionArea(p1, Frame: Frame)
 	-- upvalues: GetEnableCompensatingScrollingFrameModule (copy)
 	if not GetEnableCompensatingScrollingFrameModule() then return end
 	local Current = p1.scrollingFrameRef.current
@@ -145,7 +145,7 @@ function ExtendResult.movePackageToAttentionArea(p1, Frame: Frame) --[[ Line: 18
 	end
 end
 
-function ExtendResult.reportScrollingFrameCompensationHappened(p1) --[[ Line: 209 ]]
+function ExtendResult.reportScrollingFrameCompensationHappened(p1)
 	-- upvalues: GetUserInputEventDataModule (copy)
 	local Props = p1.props
 	
@@ -156,11 +156,11 @@ function ExtendResult.reportScrollingFrameCompensationHappened(p1) --[[ Line: 20
 	end
 end
 
-function ExtendResult.renderWithLocale(p1, p2, Callback) --[[ Line: 220 ]]
+function ExtendResult.renderWithLocale(p1, p2, Callback)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy), RobuxPackageModule (copy), list (copy), FullscreenFrame (copy), ColorMode (copy), ImageSetButton (copy), IconsNavigationClose (copy), CursorKind (copy), AnimatorModule (copy), ImageSetLabel (copy), IconsLogoBlock (copy), FitTextLabel (copy), FitFrameHorizontal (copy), IconsCommonGoldrobux (copy), FormatNumberModule (copy), LocalizationService (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local Props = p1.props
 	
-	return WithStyleFunction(function(p3) --[[ Line: 223 ]]
+	return WithStyleFunction(function(p3)
 		-- upvalues: Props (copy), p1 (copy), RoactModule (upval), RobuxPackageModule (upval), list (upval), FullscreenFrame (upval), ColorMode (upval), ImageSetButton (upval), IconsNavigationClose (upval), Callback (copy), CursorKind (upval), AnimatorModule (upval), ImageSetLabel (upval), IconsLogoBlock (upval), FitTextLabel (upval), p2 (copy), FitFrameHorizontal (upval), IconsCommonGoldrobux (upval), FormatNumberModule (upval), LocalizationService (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 		local Theme = p3.Theme
 		local _Font = p3.Font
@@ -206,17 +206,17 @@ function ExtendResult.renderWithLocale(p1, p2, Callback) --[[ Line: 220 ]]
 			config1.nextSelectionLeft = p1.getGamepadNextSelectionLeft(i)
 			config1.nextSelectionRight = p1.getGamepadNextSelectionRight(i)
 			
-			function config1.onActivated(p4) --[[ Line: 273 ]]
+			function config1.onActivated(p4)
 				-- upvalues: Props (upval)
 				Props.robuxPackageActivated(p4)
 			end
 			
-			function config1.onSelect(p4) --[[ Line: 276 ]]
+			function config1.onSelect(p4)
 				-- upvalues: p1 (upval)
 				p1:movePackageToAttentionArea(p4:getValue())
 			end
 			
-			function config1.onHover(p4, p5) --[[ Line: 279 ]]
+			function config1.onHover(p4, p5)
 				-- upvalues: p1 (upval)
 				if not p5 then
 					p1:setState({ selectedPackage = "" })
@@ -271,7 +271,7 @@ function ExtendResult.renderWithLocale(p1, p2, Callback) --[[ Line: 220 ]]
 				ZIndex = 10,
 				shouldAnimate = Props.shouldAnimate,
 				shouldShow = p1.state.showMessageBanner,
-				renderChildren = function() --[[ Line: 340 ]]
+				renderChildren = function()
 					-- upvalues: RoactModule (upval), Props (upval), ColorMode (upval), p1 (upval), ScaledScale (copy), ImageSetLabel (upval), IconsLogoBlock (upval), Theme (copy), FitTextLabel (upval), p2 (upval), _Font (copy)
 					return RoactModule.createElement("Frame", {
 						BackgroundTransparency = 0,
@@ -389,7 +389,7 @@ function ExtendResult.renderWithLocale(p1, p2, Callback) --[[ Line: 220 ]]
 	end)
 end
 
-return function(p3) --[[ Line: 493 ]]
+return function(p3)
 	-- upvalues: UseStyleMetadataFunction (copy), RoactModule (copy), ExtendResult (copy), CryoModule (copy)
 	return RoactModule.createElement(ExtendResult, CryoModule.Dictionary.join(p3, { themeName = UseStyleMetadataFunction().ThemeName }))
 end

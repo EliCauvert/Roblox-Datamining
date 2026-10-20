@@ -16,7 +16,7 @@ local PopoverAlign = FoundationModule.Enums.PopoverAlign
 local PopoverSide = FoundationModule.Enums.PopoverSide
 local View = FoundationModule.View
 
-return ReactModule.memo(function(p1) --[[ Line: 30 | Named "AssistantBuild" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), GetAssistantBuildStoreModule (copy), GetPlayButtonStoreModule (copy), SignalsReactModule (copy), FFlagBuildExperienceInGameShell (copy), ReactModule (copy), IconButton (copy), IconName (copy), InputSize (copy), View (copy), EducationalTooltip (copy), PopoverAlign (copy), PopoverSide (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		disabledTitle = LocalizationStringsModule.CHAT_ASSISTANT_DISABLED,
@@ -27,7 +27,7 @@ return ReactModule.memo(function(p1) --[[ Line: 30 | Named "AssistantBuild" ]]
 	local UseSignalStateResult = SignalsReactModule.useSignalState(AssistantBuildStoreModule.getIsDisabled)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(AssistantBuildStoreModule.getIsDisabledTooltipOpen)
 	local UseSignalStateResult2 = if FFlagBuildExperienceInGameShell then SignalsReactModule.useSignalState(AssistantBuildStoreModule.getIsOverlayVisible) else nil
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 42 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseSignalStateResult (copy), AssistantBuildStoreModule (copy), UseSignalStateResult1 (copy), PlayButtonStoreModule (copy)
 		if UseSignalStateResult then
 			AssistantBuildStoreModule.setIsDisabledTooltipOpen(not UseSignalStateResult1)
@@ -43,11 +43,11 @@ return ReactModule.memo(function(p1) --[[ Line: 30 | Named "AssistantBuild" ]]
 		UseSignalStateResult1,
 		PlayButtonStoreModule
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 50 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: AssistantBuildStoreModule (copy)
 		AssistantBuildStoreModule.setIsDisabledTooltipOpen(false)
 	end, { AssistantBuildStoreModule })
-	ReactModule.useEffect(function() --[[ Line: 54 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult (copy), PlayButtonStoreModule (copy), AssistantBuildStoreModule (copy)
 		if UseSignalStateResult then
 			PlayButtonStoreModule.setIsActive(false)

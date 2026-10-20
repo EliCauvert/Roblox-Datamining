@@ -27,7 +27,7 @@ local Frozen2 = table.freeze({
 	"startReachedThreshold", "preserveScrollPositionOnChange", "isItemStickyHeader"
 })
 
-local function _(p1) --[[ Line: 169 | Named "pick" ]]
+local function _(p1)
 	-- upvalues: Frozen (copy)
 	local t = {}
 	
@@ -37,27 +37,27 @@ local function _(p1) --[[ Line: 169 | Named "pick" ]]
 	return t
 end
 
-local _ = function(p2, p3) --[[ Line: 177 | Named "samePinnedItem" ]]
+local _ = function(p2, p3)
 	-- upvalues: ShallowTable (copy)
 	return ShallowTable.equal(p2 or {}, p3 or {})
 end
 
-local function samePolicy(p2, p3) --[[ Line: 181 ]]
+local function samePolicy(p2, p3)
 	-- upvalues: ShallowTable (copy), Frozen2 (copy)
 	return ShallowTable.containsEqual(p2, p3, Frozen2) and (p2.onStartReached == nil == (p3.onStartReached == nil) and p2.onEndReached == nil == (p3.onEndReached == nil) and (ShallowTable.equal(p2.pinnedStartItem or {}, p3.pinnedStartItem or {}) and ShallowTable.equal(p2.pinnedEndItem or {}, p3.pinnedEndItem or {})))
 end
 
-local _ = function(p2) --[[ Line: 189 | Named "stackedSpacing" ]]
+local _ = function(p2)
 	local StackedSpacingFunction = p2.layout.stackedSpacing
 	
 	return if StackedSpacingFunction == nil then nil else StackedSpacingFunction()
 end
 
-local _ = function(p2) --[[ Line: 196 | Named "assertPlaceable" ]]
+local _ = function(p2)
 	assert(not p2.requiresItemMeasurement() or p2.stackedSpacing ~= nil, "createVirtualizer: a Layout that requires Item measurement must be a Stacked layout")
 end
 
-local function corePolicy(p2) --[[ Line: 203 ]]
+local function corePolicy(p2)
 	return {
 		overscan = p2.overscan,
 		dataPrefetch = p2.dataPrefetch,
@@ -78,7 +78,7 @@ local function corePolicy(p2) --[[ Line: 203 ]]
 	}
 end
 
-return function(p2) --[[ Line: 224 | Named "createVirtualizer" ]]
+return function(p2)
 	-- upvalues: Axis (copy), Frozen (copy), HostPlacementModule (copy), HostPresentationPhaseModule (copy), corePolicy (copy), ViewRecyclerModule (copy), ScrollHostModule (copy), samePolicy (copy), ShallowTable (copy), Frozen1 (copy)
 	local Flag: boolean = p2.axis == Axis.X or p2.axis == Axis.Y
 	assert(Flag, "createVirtualizer: invalid axis")
@@ -104,12 +104,12 @@ return function(p2) --[[ Line: 224 | Named "createVirtualizer" ]]
 		axis = Tbl.axis,
 		selfSizing = Tbl.layout.requiresItemMeasurement(),
 		stackedSpacing = if StackedSpacingFunction == nil then nil else StackedSpacingFunction(),
-		onItemMeasurements = function(p3) --[[ Line: 243 ]]
+		onItemMeasurements = function(p3)
 			-- upvalues: Virtualizer (ref)
 			Virtualizer.submitMeasurements(p3)
 		end,
 		onItemViewPresentationChanged = p2.onItemViewPresentationChanged,
-		getCanvasOriginOffset = function() --[[ Line: 247 ]]
+		getCanvasOriginOffset = function()
 			-- upvalues: NewResult (ref)
 			return if NewResult == nil then 0 else NewResult.getCanvasOriginOffset()
 		end
@@ -118,7 +118,7 @@ return function(p2) --[[ Line: 224 | Named "createVirtualizer" ]]
 		apply = NewHostPlacement.apply,
 		setMeasurementDependencies = NewHostPlacement.setMeasurementDependencies
 	})
-	local PresentItemView = p2.presentItemView or function(p3, State, p4, p5) --[[ Line: 257 ]]
+	local PresentItemView = p2.presentItemView or function(p3, State, p4, p5)
 		-- upvalues: p2 (copy), HostPresentationPhaseModule (upval)
 		local TransitionFunction: (any, any) -> () = p2.transition
 		
@@ -153,7 +153,7 @@ return function(p2) --[[ Line: 224 | Named "createVirtualizer" ]]
 	end
 	local self = setmetatable({}, { __mode = "k" })
 	
-	local function _(Key, p3) --[[ Line: 290 | Named "present" ]]
+	local function _(Key, p3)
 		-- upvalues: self (copy), PresentItemView (copy), Frozen2 (copy)
 		local Assignment = if p3 == nil then nil else p3.assignment
 		local IsNotSelfEntryMatch = self[Key] ~= Assignment
@@ -166,11 +166,11 @@ return function(p2) --[[ Line: 224 | Named "createVirtualizer" ]]
 	
 	local v1 = nil
 	
-	local function presentChanges() --[[ Line: 301 ]]
+	local function presentChanges()
 		-- upvalues: v1 (ref), NewHostPlacement (copy), self (copy), PresentItemView (copy), Frozen2 (copy)
 		local v2 = v1
 		v1 = nil
-		NewHostPlacement.setMountedWindow(v2, function() --[[ Line: 304 ]]
+		NewHostPlacement.setMountedWindow(v2, function()
 			-- upvalues: v2 (copy), self (upval), PresentItemView (upval), Frozen2 (upval)
 			for _, value in v2.departed do
 				local HasSelfEntry = self[value] ~= nil
@@ -205,7 +205,7 @@ return function(p2) --[[ Line: 224 | Named "createVirtualizer" ]]
 		end)
 	end
 	
-	local function applyRecord(p3, p4) --[[ Line: 317 ]]
+	local function applyRecord(p3, p4)
 		-- upvalues: v1 (ref), NewResult (ref), presentChanges (copy), Flag1 (ref), Flag2 (ref), Flag3 (ref), Tbl (ref), Flag4 (ref)
 		v1 = p4
 		NewResult.applyRecord(p4, presentChanges)
@@ -261,18 +261,18 @@ return function(p2) --[[ Line: 224 | Named "createVirtualizer" ]]
 		observeScrollOffset = Virtualizer.observeScrollOffset,
 		setViewportSize = Virtualizer.setViewportSize,
 		getCurrent = Virtualizer.getCurrent,
-		getInstance = function() --[[ Line: 377 ]]
+		getInstance = function()
 			-- upvalues: Flag (ref), Tbl (ref)
 			return if Flag then nil else Tbl.scrollingFrame
 		end,
-		getConfiguration = function() --[[ Line: 380 ]]
+		getConfiguration = function()
 			-- upvalues: Tbl (ref)
 			return Tbl
 		end,
 		onCanvasOriginMoved = NewHostPlacement.reposition
 	})
 	
-	local function update(p5) --[[ Line: 386 ]]
+	local function update(p5)
 		-- upvalues: Flag (ref), Tbl (ref), Frozen (upval), Axis (upval), NewHostPlacement (copy), Virtualizer (ref), samePolicy (upval), corePolicy (upval), ShallowTable (upval), Frozen1 (upval), NewResult (ref)
 		if Flag then return end
 		local Tbl1 = Tbl
@@ -322,7 +322,7 @@ return function(p2) --[[ Line: 224 | Named "createVirtualizer" ]]
 		end
 	end
 	
-	local _ = function(Callback: (any) -> ()) --[[ Line: 434 | Named "updateWith" ]]
+	local _ = function(Callback: (any) -> ())
 		-- upvalues: Tbl (ref), update (copy)
 		local Copy = table.clone(Tbl)
 		Callback(Copy)
@@ -331,7 +331,7 @@ return function(p2) --[[ Line: 224 | Named "createVirtualizer" ]]
 	
 	local Callback: (() -> ())? = nil
 	
-	local function destroy() --[[ Line: 442 ]]
+	local function destroy()
 		-- upvalues: Flag (ref), Callback (ref), Virtualizer (ref), NewHostPlacement (copy)
 		if Flag then return end
 		Flag = true
@@ -376,41 +376,41 @@ return function(p2) --[[ Line: 224 | Named "createVirtualizer" ]]
 	end
 	return {
 		update = update,
-		setActive = function(p6) --[[ Line: 477 ]]
+		setActive = function(p6)
 			-- upvalues: Flag (ref), Virtualizer (ref)
 			if not Flag then
 				Virtualizer.setActive(p6)
 			end
 		end,
-		setScrollOffset = function(p6) --[[ Line: 482 ]]
+		setScrollOffset = function(p6)
 			-- upvalues: Virtualizer (ref)
 			Virtualizer.setScrollOffset(p6)
 		end,
-		scrollToOffset = function(p6) --[[ Line: 485 ]]
+		scrollToOffset = function(p6)
 			-- upvalues: Virtualizer (ref)
 			return Virtualizer.scrollToOffset(p6).scrollState.scrollOffset
 		end,
-		scrollToStart = function() --[[ Line: 488 ]]
+		scrollToStart = function()
 			-- upvalues: Virtualizer (ref)
 			Virtualizer.scrollToStart()
 		end,
-		scrollToEnd = function() --[[ Line: 491 ]]
+		scrollToEnd = function()
 			-- upvalues: Virtualizer (ref)
 			Virtualizer.scrollToEnd()
 		end,
-		scrollBy = function(p6) --[[ Line: 494 ]]
+		scrollBy = function(p6)
 			-- upvalues: Virtualizer (ref)
 			return Virtualizer.scrollBy(p6).scrollState.scrollOffset
 		end,
-		scrollToIndex = function(p6, Alignment) --[[ Line: 497 ]]
+		scrollToIndex = function(p6, Alignment)
 			-- upvalues: NewResult (ref), Virtualizer (ref)
 			if NewResult.isReady() then
 				Virtualizer.scrollToIndex(p6, Alignment and Alignment.alignment)
 			end
 		end,
-		setDataSource = function(DataSource) --[[ Line: 502 ]]
+		setDataSource = function(DataSource)
 			-- upvalues: Tbl (ref), update (copy)
-			local function _(p6) --[[ Line: 503 ]]
+			local function _(p6)
 				-- upvalues: DataSource (copy)
 				p6.dataSource = DataSource
 			end
@@ -419,9 +419,9 @@ return function(p2) --[[ Line: 224 | Named "createVirtualizer" ]]
 			Copy.dataSource = DataSource
 			update(Copy)
 		end,
-		setLayout = function(Layout) --[[ Line: 507 ]]
+		setLayout = function(Layout)
 			-- upvalues: Tbl (ref), update (copy)
-			local function _(p6) --[[ Line: 508 ]]
+			local function _(p6)
 				-- upvalues: Layout (copy)
 				p6.layout = Layout
 			end
@@ -430,9 +430,9 @@ return function(p2) --[[ Line: 224 | Named "createVirtualizer" ]]
 			Copy.layout = Layout
 			update(Copy)
 		end,
-		setDataSourceAndLayout = function(DataSource, Layout) --[[ Line: 512 ]]
+		setDataSourceAndLayout = function(DataSource, Layout)
 			-- upvalues: Tbl (ref), update (copy)
-			local function _(p6) --[[ Line: 513 ]]
+			local function _(p6)
 				-- upvalues: DataSource (copy), Layout (copy)
 				p6.dataSource = DataSource
 				p6.layout = Layout
@@ -443,9 +443,9 @@ return function(p2) --[[ Line: 224 | Named "createVirtualizer" ]]
 			Copy.layout = Layout
 			update(Copy)
 		end,
-		setOverscan = function(Overscan) --[[ Line: 518 ]]
+		setOverscan = function(Overscan)
 			-- upvalues: Tbl (ref), update (copy)
-			local function _(p6) --[[ Line: 519 ]]
+			local function _(p6)
 				-- upvalues: Overscan (copy)
 				p6.overscan = Overscan
 			end
@@ -454,9 +454,9 @@ return function(p2) --[[ Line: 224 | Named "createVirtualizer" ]]
 			Copy.overscan = Overscan
 			update(Copy)
 		end,
-		setDataPrefetch = function(DataPrefetch) --[[ Line: 523 ]]
+		setDataPrefetch = function(DataPrefetch)
 			-- upvalues: Tbl (ref), update (copy)
-			local function _(p6) --[[ Line: 524 ]]
+			local function _(p6)
 				-- upvalues: DataPrefetch (copy)
 				p6.dataPrefetch = DataPrefetch
 			end
@@ -465,9 +465,9 @@ return function(p2) --[[ Line: 224 | Named "createVirtualizer" ]]
 			Copy.dataPrefetch = DataPrefetch
 			update(Copy)
 		end,
-		setContentAlignment = function(ContentAlignment) --[[ Line: 528 ]]
+		setContentAlignment = function(ContentAlignment)
 			-- upvalues: Tbl (ref), update (copy)
-			local function _(p6) --[[ Line: 529 ]]
+			local function _(p6)
 				-- upvalues: ContentAlignment (copy)
 				p6.contentAlignment = ContentAlignment
 			end
@@ -476,9 +476,9 @@ return function(p2) --[[ Line: 224 | Named "createVirtualizer" ]]
 			Copy.contentAlignment = ContentAlignment
 			update(Copy)
 		end,
-		setPinnedItems = function(p6) --[[ Line: 533 ]]
+		setPinnedItems = function(p6)
 			-- upvalues: Tbl (ref), update (copy)
-			local function _(p7) --[[ Line: 534 ]]
+			local function _(p7)
 				-- upvalues: p6 (copy)
 				p7.isItemStickyHeader = p6.isItemStickyHeader
 				p7.pinnedStartItem = p6.pinnedStartItem
@@ -491,9 +491,9 @@ return function(p2) --[[ Line: 224 | Named "createVirtualizer" ]]
 			Copy.pinnedEndItem = p6.pinnedEndItem
 			update(Copy)
 		end,
-		setPreserveScrollPositionOnChange = function(PreserveScrollPositionOnChange) --[[ Line: 540 ]]
+		setPreserveScrollPositionOnChange = function(PreserveScrollPositionOnChange)
 			-- upvalues: Tbl (ref), update (copy)
-			local function _(p6) --[[ Line: 541 ]]
+			local function _(p6)
 				-- upvalues: PreserveScrollPositionOnChange (copy)
 				p6.preserveScrollPositionOnChange = PreserveScrollPositionOnChange
 			end
@@ -502,28 +502,28 @@ return function(p2) --[[ Line: 224 | Named "createVirtualizer" ]]
 			Copy.preserveScrollPositionOnChange = PreserveScrollPositionOnChange
 			update(Copy)
 		end,
-		refreshItemViews = function() --[[ Line: 545 ]]
+		refreshItemViews = function()
 			-- upvalues: Virtualizer (ref)
 			Virtualizer.refresh()
 		end,
 		isReady = NewResult.isReady,
-		getVisibleRange = function() --[[ Line: 549 ]]
+		getVisibleRange = function()
 			-- upvalues: Virtualizer (ref)
 			return Virtualizer.getCurrent().visibleRange
 		end,
-		getMountedRange = function() --[[ Line: 552 ]]
+		getMountedRange = function()
 			-- upvalues: Virtualizer (ref)
 			return Virtualizer.getCurrent().mountedRange
 		end,
-		getScrollState = function() --[[ Line: 555 ]]
+		getScrollState = function()
 			-- upvalues: Virtualizer (ref)
 			return Virtualizer.getCurrent().scrollState
 		end,
-		captureScrollAnchorSnapshot = function() --[[ Line: 558 ]]
+		captureScrollAnchorSnapshot = function()
 			-- upvalues: Virtualizer (ref)
 			return Virtualizer.captureScrollAnchorSnapshot()
 		end,
-		restoreScrollAnchorSnapshot = function(p6) --[[ Line: 561 ]]
+		restoreScrollAnchorSnapshot = function(p6)
 			-- upvalues: Virtualizer (ref)
 			return Virtualizer.restoreScrollAnchorSnapshot(p6).scrollState.scrollOffset
 		end,

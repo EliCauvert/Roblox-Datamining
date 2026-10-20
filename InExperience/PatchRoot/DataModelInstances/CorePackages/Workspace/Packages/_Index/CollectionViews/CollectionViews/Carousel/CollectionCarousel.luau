@@ -70,16 +70,16 @@ local config = {
 	sideMargin = 0
 }
 
-local function _(p1, _) --[[ Line: 213 | Named "isScrollingEnabled" ]]
+local function _(p1, _)
 	return p1 == nil or p1
 end
 
-local _ = function(Pointer, _, p1, p2, p3) --[[ Line: 222 | Named "areScrollButtonsEnabled" ]]
+local _ = function(Pointer, _, p1, p2, p3)
 	-- upvalues: ResponsiveModule (copy)
 	return if p1 then if p2 == nil then Pointer == ResponsiveModule.Input.Pointer or p3 else p2 else false
 end
 
-return (ReactModule.memo(function(p1) --[[ Line: 242 | Named "CollectionCarousel" ]]
+return (ReactModule.memo(function(p1)
 	-- upvalues: ValidatePropsFunction (copy), StrictInterfaceResult (copy), CryoModule (copy), config (copy), UseCollectionLayoutModule (copy), ArgCheckModule (copy), ReactModule (copy), UseLastInputFunction (copy), UsePreferredInputFunction (copy), UseIsSpatialFunction (copy), ResponsiveModule (copy), UseCollectionSizeBindingsModule (copy), UseScrollButtonHandlersModule (copy), UseCarouselScrollingBindingModule (copy), UseDesignTokensFunction (copy), ScrollingRowOfCollectionItemsModule (copy), CollectionBackgroundMuralModule (copy), MaybeForceDarkThemeModule (copy), CollectionHeaderModule (copy), CompositionTags (copy), CarouselScrollButtonsModule (copy)
 	ValidatePropsFunction(StrictInterfaceResult, p1)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
@@ -93,7 +93,7 @@ return (ReactModule.memo(function(p1) --[[ Line: 242 | Named "CollectionCarousel
 	ArgCheckModule.assert(JoinResult.fractionalItemAmount >= 0)
 	ArgCheckModule.assert(ColumnGap >= 0)
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 260 ]]
+	local UseResult = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), JoinResult (copy)
 		UseRefResult.current = Current
 		
@@ -125,12 +125,12 @@ return (ReactModule.memo(function(p1) --[[ Line: 242 | Named "CollectionCarousel
 	local UseScrollButtonHandlersModuleResult, UseScrollButtonHandlersModuleResult2, UseScrollButtonHandlersModuleResult3, UseScrollButtonHandlersModuleResult4 = UseScrollButtonHandlersModule(UseRefResult, Smallest, IsUseLastInputResultMatch, NumColumns, UseCollectionSizeBindingsModuleResult, ColumnGap, nil)
 	local UseCarouselScrollingBindingModuleResult = UseCarouselScrollingBindingModule(UseRefResult, JoinResult.enableHoverOverflow == true)
 	local ScaledColumnGap = ColumnGap * 0.5
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 328 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: JoinResult (copy), ReactModule (upval), UseCollectionSizeBindingsModuleResult (copy), UseCarouselScrollingBindingModuleResult (copy), ScaledColumnGap (copy)
 		return if JoinResult.enableHoverOverflow then ReactModule.joinBindings({
 			UseCollectionSizeBindingsModuleResult,
 			UseCarouselScrollingBindingModuleResult
-		}):map(function(Entry): UDim2 --[[ Line: 332 ]]
+		}):map(function(Entry): UDim2
 			-- upvalues: ScaledColumnGap (upval)
 			return UDim2.new(1, if Entry[2] then 0 else -ScaledColumnGap * 2, 0, Entry[1].Y)
 		end) else nil
@@ -140,9 +140,9 @@ return (ReactModule.memo(function(p1) --[[ Line: 242 | Named "CollectionCarousel
 		ScaledColumnGap,
 		JoinResult.enableHoverOverflow
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 338 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: JoinResult (copy), UseCarouselScrollingBindingModuleResult (copy), ScaledColumnGap (copy)
-		return if JoinResult.enableHoverOverflow then UseCarouselScrollingBindingModuleResult:map(function(p2): UDim2 --[[ Line: 342 ]]
+		return if JoinResult.enableHoverOverflow then UseCarouselScrollingBindingModuleResult:map(function(p2): UDim2
 			-- upvalues: ScaledColumnGap (upval)
 			return UDim2.new(0, if p2 then 0 else ScaledColumnGap, 0, 500)
 		end) else nil
@@ -228,7 +228,7 @@ return (ReactModule.memo(function(p1) --[[ Line: 242 | Named "CollectionCarousel
 				hideSubtitleChevron = JoinResult.hideSubtitleChevron
 			}), HasBackgroundMuralUrl),
 			Items = ReactModule.createElement("Frame", {
-				Size = if JoinResult.enableHoverOverflow then UseCollectionSizeBindingsModuleResult:map(function(p2): UDim2 --[[ Line: 433 ]]
+				Size = if JoinResult.enableHoverOverflow then UseCollectionSizeBindingsModuleResult:map(function(p2): UDim2
 					return UDim2.new(1, 0, 0, p2.Y)
 				end) else UDim2.new(1, 0, 0, 0),
 				AutomaticSize = if JoinResult.enableHoverOverflow then nil else Enum.AutomaticSize.Y,
@@ -238,11 +238,11 @@ return (ReactModule.memo(function(p1) --[[ Line: 242 | Named "CollectionCarousel
 				[ReactModule.Tag] = if JoinResult.collectionItemSize and not JoinResult.enableHoverOverflow then CompositionTags.Utility.ClipAtMaxWidth else nil
 			}, {
 				CarouselClip = if JoinResult.enableHoverOverflow then ReactModule.createElement("Frame", {
-					Size = UseCarouselScrollingBindingModuleResult:map(function(p2): UDim2 --[[ Line: 447 ]]
+					Size = UseCarouselScrollingBindingModuleResult:map(function(p2): UDim2
 						-- upvalues: ScaledColumnGap (copy)
 						return UDim2.new(1, if p2 then 0 else ScaledColumnGap * 2, 1, 1000)
 					end),
-					Position = UseCarouselScrollingBindingModuleResult:map(function(p2): UDim2 --[[ Line: 455 ]]
+					Position = UseCarouselScrollingBindingModuleResult:map(function(p2): UDim2
 						-- upvalues: ScaledColumnGap (copy)
 						return UDim2.new(0, if p2 then 0 else -ScaledColumnGap, 0, -500)
 					end),

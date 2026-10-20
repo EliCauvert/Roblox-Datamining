@@ -26,7 +26,7 @@ local UseInitialButtonDisableDelayModule = require(Parent.Generic.Hooks.useIniti
 local UNIFIEDROBUXUPSELLMODALTOOEXPENSIVEMINHEIGHTPIXELS = require(Parent.Generic.Constants).UNIFIED_ROBUX_UPSELL_MODAL_TOO_EXPENSIVE_MIN_HEIGHT_PIXELS
 local FFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(Parent.Parent.SharedFlags).FFlagUnifiedPurchaseFlowMarketplaceUIImprovements
 
-local function UnifiedRobuxUpsellModalTooExpensive(p1) --[[ Line: 76 ]]
+local function UnifiedRobuxUpsellModalTooExpensive(p1)
 	-- upvalues: UseLocalizationFunction (copy), UseFocusNavigationRefsModule (copy), UseInitialButtonDisableDelayModule (copy), ReactModule (copy), LoggerModule (copy), GetAppContextModule (copy), Default (copy), TooExpensiveUnifiedUpsellShownCounter (copy), Sheet (copy), UseScaledValueFunction (copy), UNIFIEDROBUXUPSELLMODALTOOEXPENSIVEMINHEIGHTPIXELS (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), UnifiedPurchaseModalHeaderModule (copy), View (copy), UnifiedPurchaseModalTypeEnumModule (copy), PriceSummaryModule (copy), UnifiedProductDetailsModule (copy), Button (copy), FillBehavior (copy), ButtonVariant (copy), FoundationModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		NeedMoreRobux = "IAPExperience.RobuxUpsell.Text.NeedMoreRobux",
@@ -35,7 +35,7 @@ local function UnifiedRobuxUpsellModalTooExpensive(p1) --[[ Line: 76 ]]
 	})
 	local UseFocusNavigationRefsModuleResult, UseFocusNavigationRefsModuleResult2 = UseFocusNavigationRefsModule(p1.buttons.cancelPurchaseActivated, nil)
 	local UseInitialButtonDisableDelayModuleResult = UseInitialButtonDisableDelayModule()
-	ReactModule.useEffect(function() --[[ Line: 86 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: LoggerModule (upval), p1 (copy), GetAppContextModule (upval), Default (upval), TooExpensiveUnifiedUpsellShownCounter (upval)
 		LoggerModule.debug({
 			message = "Too Expensive Unified Upsell Modal Shown",
@@ -103,7 +103,7 @@ local function UnifiedRobuxUpsellModalTooExpensive(p1) --[[ Line: 76 ]]
 	})
 end
 
-return function(p2) --[[ Line: 163 | Named "UnifiedRobuxUpsellModalTooExpensiveContainer" ]]
+return function(p2)
 	-- upvalues: ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), UnifiedRobuxUpsellModalTooExpensive (copy)
 	return ReactModule.createElement(LocalizationProvider, {
 		localization = Localization.new(LocalizationService.RobloxLocaleId)

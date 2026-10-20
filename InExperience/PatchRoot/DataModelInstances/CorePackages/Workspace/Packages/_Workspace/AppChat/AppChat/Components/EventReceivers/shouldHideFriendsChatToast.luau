@@ -1,6 +1,6 @@
 ﻿local HttpService = game:GetService("HttpService")
 
-local function isOneToOneChatToast(p1): boolean --[[ Line: 19 ]]
+local function isOneToOneChatToast(p1): boolean
 	local Content = p1.content
 	
 	if Content == nil or Content.currentState == nil or Content.states == nil then
@@ -21,7 +21,7 @@ local function isOneToOneChatToast(p1): boolean --[[ Line: 19 ]]
 	return Count == 1
 end
 
-return function(p2, ConversationId): boolean --[[ Line: 39 | Named "shouldHideFriendsChatToast" ]]
+return function(p2, ConversationId): boolean
 	-- upvalues: isOneToOneChatToast (copy), HttpService (copy)
 	if p2 == nil or ConversationId == nil then
 		return false
@@ -38,7 +38,7 @@ return function(p2, ConversationId): boolean --[[ Line: 39 | Named "shouldHideFr
 	if ConversationId1 == ConversationId then
 		return true
 	elseif type(ConversationId1) == "string" then
-		local Success, Result = pcall(function() --[[ Line: 63 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: HttpService (upval), ConversationId1 (copy)
 			return HttpService:JSONDecode(ConversationId1)
 		end)

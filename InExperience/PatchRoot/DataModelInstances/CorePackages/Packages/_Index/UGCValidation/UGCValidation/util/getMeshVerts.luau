@@ -3,10 +3,10 @@ local Parent = script.Parent.Parent
 local _ = require(Parent.util.Types)
 local PcallDeferredModule = require(Parent.util.pcallDeferred)
 
-return function(p1, p2) --[[ Line: 12 | Named "getVerts" ]]
+return function(p1, p2)
 	-- upvalues: PcallDeferredModule (copy), UGCValidationService (copy)
 	local IsServer = p2.isServer
-	local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function() --[[ Line: 18 ]]
+	local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function()
 		-- upvalues: UGCValidationService (upval), p1 (copy)
 		return UGCValidationService:GetEditableMeshVerts(p1.editableMesh)
 	end, p2)

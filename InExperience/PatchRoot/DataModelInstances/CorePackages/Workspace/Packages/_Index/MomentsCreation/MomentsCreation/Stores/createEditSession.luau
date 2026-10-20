@@ -3,7 +3,7 @@ local _ = require(MomentsCreation.Types.CreationFlowTypes)
 local GetFFlagMomentsCreationAccurateDirtyTrackingModule = require(MomentsCreation.Flags.GetFFlagMomentsCreationAccurateDirtyTracking)
 local CreateSignalFunction = require(MomentsCreation.Parent.Signals).createSignal
 
-local function draftsEqual(List, List1): boolean --[[ Line: 28 ]]
+local function draftsEqual(List, List1): boolean
 	if List == List1 then
 		return true
 	end
@@ -23,7 +23,7 @@ local function draftsEqual(List, List1): boolean --[[ Line: 28 ]]
 	return true
 end
 
-return function() --[[ Line: 48 | Named "createEditSession" ]]
+return function()
 	-- upvalues: CreateSignalFunction (copy), GetFFlagMomentsCreationAccurateDirtyTrackingModule (copy), draftsEqual (copy)
 	local Signal, Signal2 = CreateSignalFunction(nil)
 	local Signal1, Signal2_1 = CreateSignalFunction(false)
@@ -32,13 +32,13 @@ return function() --[[ Line: 48 | Named "createEditSession" ]]
 	return {
 		getDraft = Signal,
 		getIsDirty = Signal1,
-		begin = function(p1) --[[ Line: 53 ]]
+		begin = function(p1)
 			-- upvalues: v1 (ref), Signal2 (copy), Signal2_1 (copy)
 			v1 = p1
 			Signal2(p1)
 			Signal2_1(false)
 		end,
-		update = function(p1) --[[ Line: 61 ]]
+		update = function(p1)
 			-- upvalues: Signal2 (copy), GetFFlagMomentsCreationAccurateDirtyTrackingModule (upval), Signal2_1 (copy), draftsEqual (upval), v1 (ref)
 			Signal2(p1)
 			
@@ -50,7 +50,7 @@ return function() --[[ Line: 48 | Named "createEditSession" ]]
 				Signal2_1(true)
 			end
 		end,
-		commit = function() --[[ Line: 70 ]]
+		commit = function()
 			-- upvalues: Signal (copy), v1 (ref), Signal2_1 (copy)
 			local SignalResult = Signal(false)
 			v1 = SignalResult
@@ -58,7 +58,7 @@ return function() --[[ Line: 48 | Named "createEditSession" ]]
 			
 			return SignalResult
 		end,
-		discard = function() --[[ Line: 77 ]]
+		discard = function()
 			-- upvalues: Signal2 (copy), v1 (ref), Signal2_1 (copy)
 			Signal2(v1)
 			Signal2_1(false)

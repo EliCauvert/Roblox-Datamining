@@ -1,11 +1,11 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
 local LoaderContextModule = require(script.Parent.LoaderContext)
 
-local function _(p1): boolean --[[ Line: 19 | Named "isLoadDescriptor" ]]
+local function _(p1): boolean
 	return typeof(p1) == "table" and p1["$load"] ~= nil
 end
 
-local function cacheKey(Load, Params): string --[[ Line: 26 ]]
+local function cacheKey(Load, Params): string
 	if not Params then
 		return Load .. "::{}"
 	end
@@ -23,7 +23,7 @@ local function cacheKey(Load, Params): string --[[ Line: 26 ]]
 	return Load .. "::" .. table.concat(List1, ",")
 end
 
-local function useLoader(Data) --[[ Line: 60 ]]
+local function useLoader(Data)
 	-- upvalues: LoaderContextModule (copy), ReactModule (copy), cacheKey (copy)
 	local UseLoaderContextResult = LoaderContextModule.useLoaderContext()
 	local RegistryRef = UseLoaderContextResult.registryRef
@@ -33,7 +33,7 @@ local function useLoader(Data) --[[ Line: 60 ]]
 	local Params = if HasLoad then Data.params else nil
 	local UseStateResult, UseStateResult2 = ReactModule.useState(if HasLoad then { data = nil, loading = true, error = nil } else { loading = false, error = nil, data = Data })
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
-	ReactModule.useEffect(function() --[[ Line: 78 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: HasLoad (copy), UseStateResult2 (copy), Data (copy), RegistryRef (copy), Load (copy), cacheKey (upval), Params (copy), CacheRef (copy)
 		if not HasLoad then
 			UseStateResult2({ loading = false, error = nil, data = Data })
@@ -61,7 +61,7 @@ local function useLoader(Data) --[[ Line: 60 ]]
 		end
 		local Flag = false
 		UseStateResult2({ data = nil, loading = true, error = nil })
-		CurrentEntry.fetch(Params or {}):andThen(function(Result) --[[ Line: 109 ]]
+		CurrentEntry.fetch(Params or {}):andThen(function(Result)
 			-- upvalues: Flag (ref), CacheRef (upval), CacheKeyResult (copy), UseStateResult2 (upval)
 			if not Flag then
 				CacheRef.current[CacheKeyResult] = Result
@@ -69,7 +69,7 @@ local function useLoader(Data) --[[ Line: 60 ]]
 				
 				return
 			end
-		end):catch(function(Err) --[[ Line: 116 ]]
+		end):catch(function(Err)
 			-- upvalues: Flag (ref), UseStateResult2 (upval)
 			if not Flag then
 				UseStateResult2({ data = nil, loading = false, error = tostring(Err) })
@@ -78,7 +78,7 @@ local function useLoader(Data) --[[ Line: 60 ]]
 			end
 		end)
 		
-		return function() --[[ Line: 127 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end
@@ -88,11 +88,11 @@ local function useLoader(Data) --[[ Line: 60 ]]
 		data = UseStateResult.data,
 		loading = UseStateResult.loading,
 		error = UseStateResult.error,
-		retry = ReactModule.useCallback(function() --[[ Line: 132 ]]
+		retry = ReactModule.useCallback(function()
 			-- upvalues: HasLoad (copy), CacheRef (copy), cacheKey (upval), Load (copy), Params (copy), UseStateResult2_1 (copy)
 			if HasLoad then
 				CacheRef.current[cacheKey(Load, Params)] = nil
-				UseStateResult2_1(function(p1: number): number --[[ Line: 137 ]]
+				UseStateResult2_1(function(p1: number): number
 					return p1 + 1
 				end)
 				
@@ -104,7 +104,7 @@ end
 
 return {
 	useLoader = useLoader,
-	useListLoader = function(p1) --[[ Line: 156 ]]
+	useListLoader = function(p1)
 		-- upvalues: useLoader (copy)
 		local UseLoaderResult = useLoader(p1)
 		
@@ -115,7 +115,7 @@ return {
 			retry = UseLoaderResult.retry
 		}
 	end,
-	useGroupedListLoader = function(p1) --[[ Line: 172 ]]
+	useGroupedListLoader = function(p1)
 		-- upvalues: useLoader (copy)
 		local UseLoaderResult = useLoader(p1)
 		

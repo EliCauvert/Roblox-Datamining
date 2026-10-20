@@ -1,4 +1,4 @@
-﻿return function(p1) --[[ Line: 3 ]]
+﻿return function(p1)
 	if not p1 then
 		return {}
 	end

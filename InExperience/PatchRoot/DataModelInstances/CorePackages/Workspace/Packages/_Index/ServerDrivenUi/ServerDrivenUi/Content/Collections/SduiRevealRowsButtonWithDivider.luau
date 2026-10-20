@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local GetSduiComponentWrapperFunction = require(Parent.SduiCoreSystem).getSduiComponentWrapper
 
-return ReactModule.memo(function(p1) --[[ Line: 24 | Named "SduiRevealRowsButtonWithDivider" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), GetSduiComponentWrapperFunction (copy), FoundationModule (copy)
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "row align-y-center gap-xsmall size-full-0 auto-y",

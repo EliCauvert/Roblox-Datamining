@@ -3,9 +3,9 @@ local ReactModule = require(Parent.React)
 local CryoModule = require(Parent.Cryo)
 local _ = require(Parent.AvatarExperienceCommon)
 
-return function(p1) --[[ Line: 32 | Named "useWidgetItemPayload" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), CryoModule (copy)
-	return ReactModule.useMemo(function() --[[ Line: 34 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: CryoModule (upval), p1 (copy)
 		return CryoModule.Dictionary.join(p1.widgetAnalyticsInfo or {}, {
 			action = p1.action,

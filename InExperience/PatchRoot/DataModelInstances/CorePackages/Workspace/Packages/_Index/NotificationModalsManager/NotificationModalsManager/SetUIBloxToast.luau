@@ -8,7 +8,7 @@ local LocalizationProvider = require(Parent.Localization).LocalizationProvider
 local StyleProviderWithDefaultTheme = require(Parent.Style).StyleProviderWithDefaultTheme
 local Root = nil
 
-local function v9(ToastContent) --[[ Line: 17 ]]
+local function v9(ToastContent)
 	-- upvalues: ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), StyleProviderWithDefaultTheme (copy), Toast (copy)
 	return ReactModule.createElement(LocalizationProvider, {
 		localization = Localization.new(LocalizationService.RobloxLocaleId)
@@ -26,7 +26,7 @@ local function v9(ToastContent) --[[ Line: 17 ]]
 	})
 end
 
-return function(p1) --[[ Line: 37 ]]
+return function(p1)
 	-- upvalues: Root (ref), ReactRobloxModule (copy), ReactModule (copy), v9 (copy)
 	if not Root then
 		local UIBloxToast = Instance.new("Folder")

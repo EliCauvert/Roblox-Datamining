@@ -2,13 +2,13 @@
 local ReactModule = require(Parent.React)
 local ImpressionsTagUtility = require(Parent.Impressions).ImpressionsTagUtility
 
-return function(p1, p2, p3) --[[ Line: 8 | Named "useSetupImpressionsTileTagging" ]]
+return function(p1, p2, p3)
 	-- upvalues: ReactModule (copy), ImpressionsTagUtility (copy)
-	ReactModule.useEffect(function() --[[ Line: 9 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ImpressionsTagUtility (upval), p1 (copy), p2 (copy), p3 (copy)
 		ImpressionsTagUtility.AddTag(p1, p2, p3)
 		
-		return function() --[[ Line: 11 ]]
+		return function()
 			-- upvalues: ImpressionsTagUtility (upval), p1 (upval), p2 (upval), p3 (upval)
 			ImpressionsTagUtility.RemoveTag(p1, p2, p3)
 		end

@@ -32,7 +32,7 @@ local VoiceStateContextModule = require(RobloxGui.Modules.VoiceChat.VoiceStateCo
 local ConstantsModule1 = require(RobloxGui.Modules.VoiceChat.Constants)
 local ReactModule = require(CorePackages.Packages.React)
 
-local function v31(p1) --[[ Line: 45 ]]
+local function v31(p1)
 	-- upvalues: ReactModule (copy), VoiceStateContextModule (copy), VoiceIndicatorFuncModule (copy), CryoModule (copy)
 	return if ReactModule.useContext(VoiceStateContextModule.Context).voiceEnabled then ReactModule.createElement(VoiceIndicatorFuncModule, CryoModule.Dictionary.join(p1, {})) else nil
 end
@@ -63,47 +63,47 @@ ReportDialog.validateProps = TModule.strictInterface({
 	reportCategory = TModule.optional(TModule.string)
 })
 
-function ReportDialog.init(p1) --[[ Line: 104 ]]
+function ReportDialog.init(p1)
 	p1.state = { reasonText = nil, descriptionText = "" }
 	
-	function p1.onReasonChanged(ReasonText) --[[ Line: 110 ]]
+	function p1.onReasonChanged(ReasonText)
 		-- upvalues: p1 (copy)
 		p1:setState({ reasonText = ReasonText })
 	end
 	
-	function p1.onTextChanged(DescriptionText) --[[ Line: 116 ]]
+	function p1.onTextChanged(DescriptionText)
 		-- upvalues: p1 (copy)
 		p1:setState({ descriptionText = DescriptionText })
 	end
 	
-	function p1.onReport(ToastDefaultTitle, ToastDefaultDescription) --[[ Line: 122 ]]
+	function p1.onReport(ToastDefaultTitle, ToastDefaultDescription)
 		-- upvalues: p1 (copy)
 		p1.props.sendReport(p1.props.reportType, p1.props.targetPlayer, p1:getReason(), p1.state.descriptionText, p1.props.reportCategory, ToastDefaultTitle, ToastDefaultDescription)
 	end
 	
-	function p1.navigateBack() --[[ Line: 135 ]]
+	function p1.navigateBack()
 		-- upvalues: p1 (copy)
 		p1.props.navigateBack(p1.state.reasonText, p1.state.descriptionText ~= "")
 	end
 	
-	function p1.onCancel() --[[ Line: 139 ]]
+	function p1.onCancel()
 		-- upvalues: p1 (copy)
 		p1.props.closeDialog(p1.state.reasonText, p1.state.descriptionText ~= "")
 	end
 end
 
-function ReportDialog.getReason(p1) --[[ Line: 144 ]]
+function ReportDialog.getReason(p1)
 	-- upvalues: ConstantsModule (copy)
 	return if p1.props.reportType == ConstantsModule.ReportType.Player then p1.state.reasonText elseif p1.props.reportType == ConstantsModule.ReportType.Place then "Inappropriate Content" else nil
 end
 
-function ReportDialog.canReport(p1): boolean --[[ Line: 154 ]]
+function ReportDialog.canReport(p1): boolean
 	local Length = utf8.len(utf8.nfcnormalize(p1.state.descriptionText))
 	
 	return p1:getReason() ~= nil and (Length >= 0 and Length <= 160)
 end
 
-function ReportDialog:renderUKOSALink() --[[ Line: 161 ]]
+function ReportDialog:renderUKOSALink()
 	-- upvalues: IsShowUKOSAIllegalContentReportingLinkFunction (copy), RoactModule (copy), OSAReportLink (copy)
 	return if IsShowUKOSAIllegalContentReportingLinkFunction() then RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -113,11 +113,11 @@ function ReportDialog:renderUKOSALink() --[[ Line: 161 ]]
 	}, { OSALink = RoactModule.createElement(OSAReportLink) }) else nil
 end
 
-function ReportDialog.renderPlayerInfo(p1) --[[ Line: 176 ]]
+function ReportDialog.renderPlayerInfo(p1)
 	-- upvalues: ConstantsModule (copy), WithStyleFunction (copy), CryoModule (copy), config (copy), RoactModule (copy), Provider (copy), PlayerCellModule (copy), IsPlayerVerifiedFunction (copy), v31 (copy), Default (copy), ConstantsModule1 (copy)
 	local IsReportCategoryMatch = p1.props.reportCategory == ConstantsModule.Category.Voice
 	
-	return WithStyleFunction(function(p2) --[[ Line: 179 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: CryoModule (upval), config (upval), IsReportCategoryMatch (copy), p1 (copy), RoactModule (upval), Provider (upval), PlayerCellModule (upval), IsPlayerVerifiedFunction (upval), v31 (upval), Default (upval), ConstantsModule1 (upval)
 		local JoinResult = CryoModule.Dictionary.join(p2, { Theme = CryoModule.Dictionary.join(p2.Theme, config) })
 		local MemoKey = 0
@@ -142,7 +142,7 @@ function ReportDialog.renderPlayerInfo(p1) --[[ Line: 176 ]]
 					iconStyle = "SpeakerLight",
 					userId = tostring(p1.props.targetPlayer.UserId),
 					size = UDim2.fromOffset(36, 36),
-					onClicked = function() --[[ Line: 210 ]]
+					onClicked = function()
 						-- upvalues: Default (upval), p1 (upval), ConstantsModule1 (upval)
 						Default:ToggleMutePlayer(p1.props.targetPlayer.UserId, ConstantsModule1.VOICE_CONTEXT_TYPE.REPORT_MENU)
 					end
@@ -152,7 +152,7 @@ function ReportDialog.renderPlayerInfo(p1) --[[ Line: 176 ]]
 	end)
 end
 
-function ReportDialog.renderDropDownMenu(p1) --[[ Line: 223 ]]
+function ReportDialog.renderDropDownMenu(p1)
 	-- upvalues: IsShowUKOSAIllegalContentReportingLinkFunction (copy), RoactModule (copy), WithLocalizationModule (copy), list (copy), DropdownMenu (copy)
 	local YOffset: number = if IsShowUKOSAIllegalContentReportingLinkFunction() then 64 else 72
 	
@@ -172,7 +172,7 @@ function ReportDialog.renderDropDownMenu(p1) --[[ Line: 223 ]]
 			menu7 = "CoreScripts.InGameMenu.Report.AbusePersonalQuestion",
 			menu8 = "CoreScripts.InGameMenu.Report.AbuseOffsiteLink",
 			placeHolderText = "CoreScripts.InGameMenu.Report.AbuseTypePlaceHolder"
-		})(function(p2) --[[ Line: 245 ]]
+		})(function(p2)
 			-- upvalues: list (upval), p1 (copy), RoactModule (upval), DropdownMenu (upval)
 			local CellDatas = {}
 			local t = {}
@@ -186,7 +186,7 @@ function ReportDialog.renderDropDownMenu(p1) --[[ Line: 223 ]]
 				showDropShadow = true,
 				fixedListHeight = 171,
 				placeholder = p2.placeHolderText,
-				onChange = function(p3) --[[ Line: 256 ]]
+				onChange = function(p3)
 					-- upvalues: t (copy), p1 (upval)
 					p1.onReasonChanged(t[p3])
 				end,
@@ -198,11 +198,11 @@ function ReportDialog.renderDropDownMenu(p1) --[[ Line: 223 ]]
 	}) else nil
 end
 
-function ReportDialog.renderPlayerContents(p2) --[[ Line: 275 ]]
+function ReportDialog.renderPlayerContents(p2)
 	-- upvalues: WithLocalizationModule (copy), IsShowUKOSAIllegalContentReportingLinkFunction (copy), RoactModule (copy), TextEntryFieldModule (copy)
 	return WithLocalizationModule({
 		placeHolderText = "CoreScripts.InGameMenu.Report.AbuseDetailsPlaceHolder"
-	})(function(p3) --[[ Line: 278 ]]
+	})(function(p3)
 		-- upvalues: IsShowUKOSAIllegalContentReportingLinkFunction (upval), RoactModule (upval), p2 (copy), TextEntryFieldModule (upval)
 		return RoactModule.createFragment({
 			PlayerInfo = p2:renderPlayerInfo(),
@@ -222,7 +222,7 @@ function ReportDialog.renderPlayerContents(p2) --[[ Line: 275 ]]
 	end)
 end
 
-function ReportDialog.renderPlaceContents(p2) --[[ Line: 299 ]]
+function ReportDialog.renderPlaceContents(p2)
 	-- upvalues: WithLocalizationModule (copy), IsShowUKOSAIllegalContentReportingLinkFunction (copy), RoactModule (copy), GameIconModule (copy), ThemedTextLabelModule (copy), TextEntryFieldModule (copy)
 	return WithLocalizationModule({
 		placeHolderText = "CoreScripts.InGameMenu.Report.AbuseDetailsPlaceHolder",
@@ -230,7 +230,7 @@ function ReportDialog.renderPlaceContents(p2) --[[ Line: 299 ]]
 			"CoreScripts.InGameMenu.Report.ReportingGame",
 			RBX_NAME = p2.props.placeName
 		}
-	})(function(p3) --[[ Line: 306 ]]
+	})(function(p3)
 		-- upvalues: IsShowUKOSAIllegalContentReportingLinkFunction (upval), RoactModule (upval), GameIconModule (upval), ThemedTextLabelModule (upval), TextEntryFieldModule (upval), p2 (copy)
 		return RoactModule.createFragment({
 			PlaceInfo = RoactModule.createElement("Frame", {
@@ -270,7 +270,7 @@ function ReportDialog.renderPlaceContents(p2) --[[ Line: 299 ]]
 	end)
 end
 
-function ReportDialog.renderContents(p2) --[[ Line: 348 ]]
+function ReportDialog.renderContents(p2)
 	-- upvalues: ConstantsModule (copy)
 	return if p2.props.reportType == ConstantsModule.ReportType.Player then p2:renderPlayerContents() elseif p2.props.reportType == ConstantsModule.ReportType.Place then p2:renderPlaceContents() else nil
 end
@@ -282,12 +282,12 @@ local config1 = {
 	[ConstantsModule.Category.Experience] = "CoreScripts.InGameMenu.Report.Title.Experience"
 }
 
-function ReportDialog.categoryTitle(p2) --[[ Line: 365 ]]
+function ReportDialog.categoryTitle(p2)
 	-- upvalues: ConstantsModule (copy), config1 (copy)
 	return if p2.props.reportType == ConstantsModule.ReportType.Place then config1[ConstantsModule.Category.Experience] else config1[p2.props.reportCategory] or "CoreScripts.InGameMenu.Report.ReportTitle"
 end
 
-function ReportDialog.render(p2) --[[ Line: 372 ]]
+function ReportDialog.render(p2)
 	-- upvalues: WithLocalizationModule (copy), RoactModule (copy), ModalDialogModule (copy), ButtonStack (copy), ButtonType (copy)
 	return WithLocalizationModule({
 		cancelText = "CoreScripts.InGameMenu.Cancel",
@@ -295,7 +295,7 @@ function ReportDialog.render(p2) --[[ Line: 372 ]]
 		toastDefaultTitle = "CoreScripts.InGameMenu.Report.Confirmation.ThanksForReport",
 		toastDefaultDescription = "CoreScripts.InGameMenu.Report.Confirmation.ThanksForReportDescription",
 		titleText = p2:categoryTitle()
-	})(function(p3) --[[ Line: 379 ]]
+	})(function(p3)
 		-- upvalues: RoactModule (upval), ModalDialogModule (upval), p2 (copy), ButtonStack (upval), ButtonType (upval)
 		return RoactModule.createElement(ModalDialogModule, {
 			visible = p2.props.isReportDialogOpen,
@@ -319,7 +319,7 @@ function ReportDialog.render(p2) --[[ Line: 372 ]]
 						buttonType = ButtonType.PrimarySystem,
 						props = {
 							isDisabled = not p2:canReport(),
-							onActivated = function() --[[ Line: 408 ]]
+							onActivated = function()
 								-- upvalues: p2 (upval), p3 (copy)
 								return p2.onReport(p3.toastDefaultTitle, p3.toastDefaultDescription)
 							end,
@@ -334,14 +334,14 @@ function ReportDialog.render(p2) --[[ Line: 372 ]]
 	end)
 end
 
-function ReportDialog.didUpdate(p2, p3) --[[ Line: 422 ]]
+function ReportDialog.didUpdate(p2, p3)
 	-- upvalues: RoactModule (copy)
 	if p3.isReportDialogOpen and not p2.props.isReportDialogOpen then
 		p2:setState({ descriptionText = "", reasonText = RoactModule.None })
 	end
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p2, _) --[[ Line: 432 ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p2, _)
 	-- upvalues: ConstantsModule (copy)
 	return {
 		reportCategory = p2.report.reportCategory,
@@ -352,10 +352,10 @@ return RoactRoduxModule.UNSTABLE_connect2(function(p2, _) --[[ Line: 432 ]]
 		placeName = p2.placeInfo.name,
 		screenSize = p2.displayOptions.screenSize
 	}
-end, function(Callback) --[[ Line: 442 ]]
+end, function(Callback)
 	-- upvalues: NavigateBackModule (copy), SendAnalyticsModule (copy), ConstantsModule (copy), EndReportFlowModule (copy), SessionUtilityModule (copy), SendReportModule (copy)
 	return {
-		navigateBack = function(Reason, DescriptionTextChanged) --[[ Line: 444 ]]
+		navigateBack = function(Reason, DescriptionTextChanged)
 			-- upvalues: Callback (copy), NavigateBackModule (upval), SendAnalyticsModule (upval), ConstantsModule (upval)
 			Callback(NavigateBackModule())
 			SendAnalyticsModule(ConstantsModule.Page.ReportForm, ConstantsModule.Analytics.ReportFlowBack, {
@@ -364,7 +364,7 @@ end, function(Callback) --[[ Line: 442 ]]
 				descriptionTextChanged = DescriptionTextChanged
 			})
 		end,
-		closeDialog = function(Reason, DescriptionTextChanged) --[[ Line: 452 ]]
+		closeDialog = function(Reason, DescriptionTextChanged)
 			-- upvalues: Callback (copy), EndReportFlowModule (upval), SendAnalyticsModule (upval), ConstantsModule (upval), SessionUtilityModule (upval)
 			Callback(EndReportFlowModule())
 			SendAnalyticsModule(ConstantsModule.Page.ReportForm, ConstantsModule.Analytics.ReportFlowAbandoned, {
@@ -374,7 +374,7 @@ end, function(Callback) --[[ Line: 442 ]]
 			})
 			SessionUtilityModule.endAbuseReportSession()
 		end,
-		sendReport = function(p2, p3, p4, p5, p6, p7, p8) --[[ Line: 461 ]]
+		sendReport = function(p2, p3, p4, p5, p6, p7, p8)
 			-- upvalues: Callback (copy), SendReportModule (upval)
 			Callback(SendReportModule(p2, p3, p4, p5, p6, p7, p8))
 		end

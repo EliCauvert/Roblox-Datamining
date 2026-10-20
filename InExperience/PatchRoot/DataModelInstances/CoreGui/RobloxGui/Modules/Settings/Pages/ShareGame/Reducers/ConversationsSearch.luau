@@ -5,7 +5,7 @@ local SetSearchAreaActiveModule = require(ShareGame.Actions.SetSearchAreaActive)
 local SetSearchTextModule = require(ShareGame.Actions.SetSearchText)
 local config = { SearchAreaActive = false, SearchText = "" }
 
-return function(p1, p2) --[[ Line: 19 ]]
+return function(p1, p2)
 	-- upvalues: config (copy), SetSearchAreaActiveModule (copy), Immutable (copy), SetSearchTextModule (copy), ClosePageModule (copy)
 	local P0 = p1 or config
 	

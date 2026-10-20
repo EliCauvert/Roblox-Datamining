@@ -45,13 +45,13 @@ local Callback11 = nil
 local Callback9 = nil
 local Callback8 = nil
 
-function MapSchemaModule.mapSchema(p1, p2) --[[ Line: 172 ]]
+function MapSchemaModule.mapSchema(p1, p2)
 	-- upvalues: Callback (ref), Callback1 (ref), Callback2 (ref), Callback3 (ref), Callback4 (ref), SerializeInputValue (copy), IsLeafTypeFunction (copy), ParseInputValue (copy), Boolean (copy), Callback5 (ref), RewireTypesFunction (copy), GraphQLSchema (copy), Object (copy), GetObjectTypeFromTypeMapFunction (copy)
 	local T = if p2 == nil then {} else p2
-	local CallbackResult = Callback(Callback1(Callback2(Callback3(Callback4(Callback2(Callback3(p1:getTypeMap(), p1, SerializeInputValue), p1, T, function(p3) --[[ Line: 183 ]]
+	local CallbackResult = Callback(Callback1(Callback2(Callback3(Callback4(Callback2(Callback3(p1:getTypeMap(), p1, SerializeInputValue), p1, T, function(p3)
 		-- upvalues: IsLeafTypeFunction (upval)
 		return IsLeafTypeFunction(p3)
-	end), p1, T), p1, ParseInputValue), p1, T, function(p3): boolean --[[ Line: 195 ]]
+	end), p1, T), p1, ParseInputValue), p1, T, function(p3): boolean
 		-- upvalues: Boolean (upval), IsLeafTypeFunction (upval)
 		return not Boolean.toJSBoolean(IsLeafTypeFunction(p3))
 	end), p1, T), p1, T)
@@ -67,9 +67,9 @@ function MapSchemaModule.mapSchema(p1, p2) --[[ Line: 172 ]]
 	}))
 end
 
-Callback2 = function(List, p1, p2, p3) --[[ Line: 241 | Named "mapTypes" ]]
+Callback2 = function(List, p1, p2, p3)
 	-- upvalues: Map (copy), String (copy), Object (copy), Callback6 (ref)
-	local Callback = if p3 == nil then function(): boolean --[[ Line: 256 ]]
+	local Callback = if p3 == nil then function(): boolean
 		return true
 	end else p3
 	local NewMap = Map.new()
@@ -102,12 +102,12 @@ Callback2 = function(List, p1, p2, p3) --[[ Line: 241 | Named "mapTypes" ]]
 	return NewMap
 end
 
-Callback4 = function(p4, p5, p6) --[[ Line: 313 | Named "mapEnumValues" ]]
+Callback4 = function(p4, p5, p6)
 	-- upvalues: Callback7 (ref), Boolean (copy), Callback2 (ref), MapperKind (copy), Map (copy), Array (copy), Object (copy), Callback8 (ref), GraphQLEnumType (copy), IsEnumTypeFunction (copy)
 	local CallbackResult = Callback7(p6)
 	
 	return if Boolean.toJSBoolean(CallbackResult) then Callback2(p4, p5, {
-		[tostring(MapperKind.ENUM_TYPE)] = function(p7) --[[ Line: 337 ]]
+		[tostring(MapperKind.ENUM_TYPE)] = function(p7)
 			-- upvalues: Map (upval), CallbackResult (copy), p5 (copy), Boolean (upval), Array (upval), Object (upval), Callback8 (upval), GraphQLEnumType (upval)
 			local Config = p7:toConfig()
 			local Values = Config.values
@@ -129,16 +129,16 @@ Callback4 = function(p4, p5, p6) --[[ Line: 313 | Named "mapEnumValues" ]]
 			end
 			return (Callback8(GraphQLEnumType.new(Object.assign({}, Config, { values = NewMap }))))
 		end
-	}, function(p8) --[[ Line: 391 ]]
+	}, function(p8)
 		-- upvalues: IsEnumTypeFunction (upval)
 		return IsEnumTypeFunction(p8)
 	end) else p4
 end
 
-Callback3 = function(TypeMap, p7, Callback2) --[[ Line: 399 | Named "mapDefaultValues" ]]
+Callback3 = function(TypeMap, p7, Callback2)
 	-- upvalues: Callback (ref), MapperKind (copy), Callback9 (ref), Object (copy), Callback1 (ref)
 	local CallbackResult = Callback(TypeMap, p7, {
-		[MapperKind.ARGUMENT] = function(p8) --[[ Line: 421 ]]
+		[MapperKind.ARGUMENT] = function(p8)
 			-- upvalues: Callback9 (upval), TypeMap (copy), Object (upval), Callback2 (copy)
 			if p8.defaultValue == nil then
 				return p8
@@ -153,7 +153,7 @@ Callback3 = function(TypeMap, p7, Callback2) --[[ Line: 399 | Named "mapDefaultV
 	})
 	
 	return Callback1(CallbackResult, p7, {
-		[MapperKind.INPUT_OBJECT_FIELD] = function(p8) --[[ Line: 456 ]]
+		[MapperKind.INPUT_OBJECT_FIELD] = function(p8)
 			-- upvalues: Callback9 (upval), CallbackResult (copy), Object (upval), Callback2 (copy)
 			if p8.defaultValue == nil then
 				return p8
@@ -168,7 +168,7 @@ Callback3 = function(TypeMap, p7, Callback2) --[[ Line: 399 | Named "mapDefaultV
 	})
 end
 
-Callback9 = function(p7, OfType) --[[ Line: 487 | Named "getNewType" ]]
+Callback9 = function(p7, OfType)
 	-- upvalues: Boolean (copy), IsListTypeFunction (copy), Callback9 (ref), GraphQLList (copy), IsNonNullTypeFunction (copy), GraphQLNonNull (copy), IsNamedTypeFunction (copy)
 	if Boolean.toJSBoolean(IsListTypeFunction(OfType)) then
 		local CallbackResult = Callback9(p7, OfType.ofType)
@@ -187,7 +187,7 @@ Callback9 = function(p7, OfType) --[[ Line: 487 | Named "getNewType" ]]
 	end
 end
 
-Callback1 = function(List, p7, p8) --[[ Line: 521 | Named "mapFields" ]]
+Callback1 = function(List, p7, p8)
 	-- upvalues: Map (copy), String (copy), Boolean (copy), IsObjectTypeFunction (copy), IsInterfaceTypeFunction (copy), IsInputObjectTypeFunction (copy), Callback10 (ref), Object (copy), Array (copy), Callback8 (ref), GraphQLObjectType (copy), GraphQLInterfaceType (copy), GraphQLInputObjectType (copy)
 	local NewMap = Map.new()
 	
@@ -243,7 +243,7 @@ Callback1 = function(List, p7, p8) --[[ Line: 521 | Named "mapFields" ]]
 	return NewMap
 end
 
-Callback = function(List, p9, p10) --[[ Line: 688 | Named "mapArguments" ]]
+Callback = function(List, p9, p10)
 	-- upvalues: Map (copy), String (copy), Boolean (copy), IsObjectTypeFunction (copy), IsInterfaceTypeFunction (copy), Callback11 (ref), Object (copy), Array (copy), GraphQLObjectType (copy), GraphQLInterfaceType (copy), GraphQLInputObjectType (copy)
 	local NewMap = Map.new()
 	
@@ -311,7 +311,7 @@ Callback = function(List, p9, p10) --[[ Line: 688 | Named "mapArguments" ]]
 	return NewMap
 end
 
-Callback5 = function(Directives, p11, p12) --[[ Line: 884 | Named "mapDirectives" ]]
+Callback5 = function(Directives, p11, p12)
 	-- upvalues: Callback12 (ref), Object (copy), Array (copy)
 	local CallbackResult = Callback12(p12)
 	
@@ -332,7 +332,7 @@ Callback5 = function(Directives, p11, p12) --[[ Line: 884 | Named "mapDirectives
 	return List
 end
 
-local function getTypeSpecifiers(p13, Name) --[[ Line: 916 ]]
+local function getTypeSpecifiers(p13, Name)
 	-- upvalues: MapperKind (copy), Boolean (copy), IsObjectTypeFunction (copy), Array (copy), IsInputObjectTypeFunction (copy), IsInterfaceTypeFunction (copy), IsUnionTypeFunction (copy), IsEnumTypeFunction (copy), IsScalarTypeFunction (copy)
 	local Type = p13:getType(Name)
 	local ConcatResult = { MapperKind.TYPE }
@@ -389,7 +389,7 @@ local function getTypeSpecifiers(p13, Name) --[[ Line: 916 ]]
 	return ConcatResult
 end
 
-Callback6 = function(p13, p14, Name) --[[ Line: 996 | Named "getTypeMapper" ]]
+Callback6 = function(p13, p14, Name)
 	-- upvalues: getTypeSpecifiers (copy), Array (copy), Boolean (copy)
 	local v1 = nil
 	local ConcatResult = Array.concat({}, (getTypeSpecifiers(p13, Name)))
@@ -399,7 +399,7 @@ Callback6 = function(p13, p14, Name) --[[ Line: 996 | Named "getTypeMapper" ]]
 	return if v1 == nil then nil else v1
 end
 
-local function getFieldSpecifiers(p15, Name) --[[ Line: 1023 ]]
+local function getFieldSpecifiers(p15, Name)
 	-- upvalues: MapperKind (copy), Boolean (copy), IsObjectTypeFunction (copy), Array (copy), IsInterfaceTypeFunction (copy), IsInputObjectTypeFunction (copy)
 	local Type = p15:getType(Name)
 	local ConcatResult = { MapperKind.FIELD }
@@ -436,7 +436,7 @@ local function getFieldSpecifiers(p15, Name) --[[ Line: 1023 ]]
 	return ConcatResult
 end
 
-Callback10 = function(p15, p16, Name) --[[ Line: 1102 | Named "getFieldMapper" ]]
+Callback10 = function(p15, p16, Name)
 	-- upvalues: getFieldSpecifiers (copy), Array (copy), Boolean (copy)
 	local v2 = nil
 	local ConcatResult = Array.concat({}, table.unpack((getFieldSpecifiers(p15, Name))))
@@ -446,28 +446,28 @@ Callback10 = function(p15, p16, Name) --[[ Line: 1102 | Named "getFieldMapper" ]
 	return if v2 == nil then nil else v2
 end
 
-Callback11 = function(p17) --[[ Line: 1129 | Named "getArgumentMapper" ]]
+Callback11 = function(p17)
 	-- upvalues: MapperKind (copy)
 	local v3 = p17[tostring(MapperKind.ARGUMENT)]
 	
 	return if v3 == nil then nil else v3
 end
 
-Callback12 = function(p17) --[[ Line: 1140 | Named "getDirectiveMapper" ]]
+Callback12 = function(p17)
 	-- upvalues: MapperKind (copy)
 	local v3 = p17[tostring(MapperKind.DIRECTIVE)]
 	
 	return if v3 == nil then nil else v3
 end
 
-Callback7 = function(p17) --[[ Line: 1151 | Named "getEnumValueMapper" ]]
+Callback7 = function(p17)
 	-- upvalues: MapperKind (copy)
 	local v3 = p17[tostring(MapperKind.ENUM_VALUE)]
 	
 	return if v3 == nil then nil else v3
 end
 
-Callback8 = function(NewResult) --[[ Line: 1175 | Named "correctASTNodes" ]]
+Callback8 = function(NewResult)
 	-- upvalues: Boolean (copy), IsObjectTypeFunction (copy), Object (copy), Kind (copy), Array (copy), GraphQLObjectType (copy), IsInterfaceTypeFunction (copy), GraphQLInterfaceType (copy), IsInputObjectTypeFunction (copy), GraphQLInputObjectType (copy), IsEnumTypeFunction (copy), GraphQLEnumType (copy)
 	if Boolean.toJSBoolean(IsObjectTypeFunction(NewResult)) then
 		local Config = NewResult:toConfig()
@@ -485,7 +485,7 @@ Callback8 = function(NewResult) --[[ Line: 1175 | Named "correctASTNodes" ]]
 			Config.astNode = Object.assign({}, Config.astNode, { kind = Kind.OBJECT_TYPE_DEFINITION, fields = Fields })
 		end
 		if Config.extensionASTNodes ~= nil then
-			Config.extensionASTNodes = Array.map(Config.extensionASTNodes, function(p17) --[[ Line: 1206 ]]
+			Config.extensionASTNodes = Array.map(Config.extensionASTNodes, function(p17)
 				-- upvalues: Object (upval), Kind (upval)
 				return Object.assign({}, p17, { kind = Kind.OBJECT_TYPE_EXTENSION, fields = Object.None })
 			end)
@@ -507,7 +507,7 @@ Callback8 = function(NewResult) --[[ Line: 1175 | Named "correctASTNodes" ]]
 			Config.astNode = Object.assign({}, Config.astNode, { kind = Kind.INTERFACE_TYPE_DEFINITION, fields = Fields })
 		end
 		if Config.extensionASTNodes ~= nil then
-			Config.extensionASTNodes = Array.map(Config.extensionASTNodes, function(p17) --[[ Line: 1239 ]]
+			Config.extensionASTNodes = Array.map(Config.extensionASTNodes, function(p17)
 				-- upvalues: Object (upval), Kind (upval)
 				return Object.assign({}, p17, {
 					kind = Kind.INTERFACE_TYPE_EXTENSION,
@@ -535,7 +535,7 @@ Callback8 = function(NewResult) --[[ Line: 1175 | Named "correctASTNodes" ]]
 			})
 		end
 		if Config.extensionASTNodes ~= nil then
-			Config.extensionASTNodes = Array.map(Config.extensionASTNodes, function(p17) --[[ Line: 1275 ]]
+			Config.extensionASTNodes = Array.map(Config.extensionASTNodes, function(p17)
 				-- upvalues: Object (upval), Kind (upval)
 				return Object.assign({}, p17, {
 					kind = Kind.INPUT_OBJECT_TYPE_EXTENSION,
@@ -563,7 +563,7 @@ Callback8 = function(NewResult) --[[ Line: 1175 | Named "correctASTNodes" ]]
 			Config.astNode = Object.assign({}, Config.astNode, { values = Values })
 		end
 		if Config.extensionASTNodes ~= nil then
-			Config.extensionASTNodes = Array.map(Config.extensionASTNodes, function(p17) --[[ Line: 1307 ]]
+			Config.extensionASTNodes = Array.map(Config.extensionASTNodes, function(p17)
 				-- upvalues: Object (upval)
 				return Object.assign({}, p17, { values = Object.None })
 			end)

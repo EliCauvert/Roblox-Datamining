@@ -2,7 +2,7 @@
 local AddSystemInfoToArgsFunction = require(Charts.Parent.DiscoveryUtils).AddSystemInfoToArgs
 local FFlagSduiChartsAudienceFilterModule = require(Charts.Flags.FFlagSduiChartsAudienceFilter)
 
-return function(p1, p2) --[[ Line: 22 | Named "buildChartsSortDetailRequest" ]]
+return function(p1, p2)
 	-- upvalues: AddSystemInfoToArgsFunction (copy), FFlagSduiChartsAudienceFilterModule (copy)
 	local config = { sort_id = p2.sortId }
 	local t = {}

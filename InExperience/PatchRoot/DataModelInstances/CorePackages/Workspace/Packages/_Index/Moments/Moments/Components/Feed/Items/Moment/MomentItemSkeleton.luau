@@ -18,7 +18,7 @@ local MomentPushedFeedSafeAreaContextModule = require(script.Parent.MomentPushed
 local MomentsFixSkeletonNavBarInset = game:DefineFastFlag("MomentsFixSkeletonNavBarInset", false)
 local FFlagMomentsFeedAboveNavBarModule = require(Moments.Flags.FFlagMomentsFeedAboveNavBar)
 
-return function(p1) --[[ Line: 56 | Named "MomentItemSkeleton" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseFormFactorFunction (copy), UseCompositionLayoutFunction (copy), UseDeviceInsetsFunction (copy), FormFactor (copy), ReactModule (copy), MomentPushedFeedSafeAreaContextModule (copy), MomentOverlayInsetContextModule (copy), MomentsFixSkeletonNavBarInset (copy), FFlagMomentsFeedAboveNavBarModule (copy), View (copy), Skeleton (copy), Radius (copy), MomentLayoutModule (copy), GradientBackdrop (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseFormFactorResult = UseFormFactorFunction()
@@ -28,7 +28,7 @@ return function(p1) --[[ Line: 56 | Named "MomentItemSkeleton" ]]
 	local Margin: number = UseCompositionLayoutResult.margin
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UDim2.fromScale(1, 0))
 	local ScaledXLarge = 2 * UseTokensResult.Padding.XLarge
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 67 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseBindingResult2 (copy), ScaledXLarge (copy)
 		UseBindingResult2(UDim2.new(1, 0, 0, Frame.AbsoluteSize.Y + ScaledXLarge))
 	end, { ScaledXLarge })

@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("ProfilePlatformMeTabStoreItemLimit", 6)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastInt("ProfilePlatformMeTabStoreItemLimit")
 end

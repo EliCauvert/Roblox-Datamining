@@ -4,13 +4,13 @@ local TypesModule = require(script.Parent.Parent.Types)
 local MaybeAssertModule = require(script.Parent.Parent.Helpers.maybeAssert)
 local AddMessageWithTimeoutModule = require(script.Parent.AddMessageWithTimeout)
 
-return function(p1) --[[ Line: 17 | Named "addMessageFromEvent" ]]
+return function(p1)
 	-- upvalues: MaybeAssertModule (copy), TypesModule (copy), Players (copy), ExpChatModule (copy), AddMessageWithTimeoutModule (copy)
 	MaybeAssertModule(TypesModule.IMessageData(p1))
 	
-	return function(p2) --[[ Line: 20 ]]
+	return function(p2)
 		-- upvalues: Players (upval), p1 (copy), ExpChatModule (upval), AddMessageWithTimeoutModule (upval)
-		local Success, Result = pcall(function() --[[ Line: 21 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Players (upval), p1 (upval)
 			return Players:GetPlayerByUserId(p1.SpeakerUserId)
 		end)

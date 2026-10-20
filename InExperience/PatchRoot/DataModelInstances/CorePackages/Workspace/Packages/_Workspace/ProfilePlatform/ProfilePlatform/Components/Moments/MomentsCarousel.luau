@@ -12,7 +12,7 @@ local CollectionCarousel = require(Parent.CollectionViews).CollectionCarousel
 local UseNavigationFocusFunction = require(Parent.Navigation).useNavigationFocus
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 
-return function(p1) --[[ Line: 44 | Named "MomentsCarousel" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), UseNavigationFocusFunction (copy), UseDynamicSizeMarginModule (copy), ReactModule (copy), GetVisibleTileRangeModule (copy), MomentTileModule (copy), CollectionCarousel (copy), MomentsCarouselMediaProviderModule (copy)
 	local Moments = p1.moments
 	local UseTokensResult = UseTokensFunction()
@@ -29,7 +29,7 @@ return function(p1) --[[ Line: 44 | Named "MomentsCarousel" ]]
 	local OnTileImpressionFunction = p1.onTileImpression
 	local UseRefResult3 = ReactModule.useRef({})
 	local UseRefResult4 = ReactModule.useRef(nil)
-	local UseMemoResult = ReactModule.useMemo(function(): boolean --[[ Line: 70 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): boolean
 		-- upvalues: Moments (copy)
 		for _, moment in Moments do
 			if moment.metadata.captureType == Enum.CaptureType.Video then
@@ -40,13 +40,13 @@ return function(p1) --[[ Line: 44 | Named "MomentsCarousel" ]]
 	end, { Moments })
 	local Moment = Moments[UseStateResult1]
 	local IsCaptureTypeMatch: boolean = Moment ~= nil and Moment.metadata.captureType == Enum.CaptureType.Video
-	local UseResult = ReactModule.useCallback(function(p2: number): number --[[ Line: 82 ]]
+	local UseResult = ReactModule.useCallback(function(p2: number): number
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(p2)
 		
 		return p2 * 1.5 + 48
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 91 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: OnTileImpressionFunction (copy), UseStateResult (copy), UseRefResult (copy), GetVisibleTileRangeModule (upval), NumColumns (copy), FractionalItemAmount (copy), Moments (copy), UseRefResult3 (copy)
 		if OnTileImpressionFunction == nil or UseStateResult <= 0 then return end
 		local Current = UseRefResult.current
@@ -65,7 +65,7 @@ return function(p1) --[[ Line: 44 | Named "MomentsCarousel" ]]
 		FractionalItemAmount,
 		#Moments
 	})
-	ReactModule.useEffect(function() --[[ Line: 107 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult4 (copy), Moments (copy), UseRefResult3 (copy), UseResult1 (copy)
 		if UseRefResult4.current ~= Moments then
 			UseRefResult4.current = Moments
@@ -73,13 +73,13 @@ return function(p1) --[[ Line: 44 | Named "MomentsCarousel" ]]
 		end
 		UseResult1()
 	end, { Moments, UseResult1 })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 118 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UseStateResult (copy), UseRefResult1 (copy), Moments (copy), UseStateResult2_1 (copy), UseResult1 (copy)
 		if UseRefResult.current == nil or UseStateResult <= 0 then return end
 		if UseRefResult1.current ~= nil then
 			task.cancel(UseRefResult1.current)
 		end
-		UseRefResult1.current = task.delay(0.2, function() --[[ Line: 126 ]]
+		UseRefResult1.current = task.delay(0.2, function()
 			-- upvalues: UseRefResult1 (upval), UseRefResult (upval), UseStateResult (upval), Moments (upval), UseStateResult2_1 (upval), UseResult1 (upval)
 			UseRefResult1.current = nil
 			local Current = UseRefResult.current
@@ -92,9 +92,9 @@ return function(p1) --[[ Line: 44 | Named "MomentsCarousel" ]]
 			end
 		end)
 	end, { UseStateResult, #Moments, UseResult1 })
-	ReactModule.useEffect(function() --[[ Line: 141 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy)
-		return function() --[[ Line: 142 ]]
+		return function()
 			-- upvalues: UseRefResult1 (upval)
 			if UseRefResult1.current ~= nil then
 				task.cancel(UseRefResult1.current)
@@ -114,14 +114,14 @@ return function(p1) --[[ Line: 44 | Named "MomentsCarousel" ]]
 			title = "Moments",
 			columnGap = 12,
 			items = Moments,
-			renderItem = ReactModule.useCallback(function(Moment, LayoutOrder, ItemSize) --[[ Line: 150 ]]
+			renderItem = ReactModule.useCallback(function(Moment, LayoutOrder, ItemSize)
 				-- upvalues: ReactModule (upval), MomentTileModule (upval), UseNavigationFocusResult (copy), UseStateResult1 (copy), UseRefResult2 (copy), p1 (copy)
 				return ReactModule.createElement(MomentTileModule, {
 					moment = Moment,
 					layoutOrder = LayoutOrder,
 					itemSize = ItemSize,
 					isActive = UseNavigationFocusResult and LayoutOrder == UseStateResult1,
-					onActivated = function() --[[ Line: 156 ]]
+					onActivated = function()
 						-- upvalues: UseRefResult2 (upval), p1 (upval), LayoutOrder (copy)
 						local Current = UseRefResult2.current
 						

@@ -3,7 +3,7 @@ local REACTPORTALTYPE = require(Parent.Shared).ReactSymbols.REACT_PORTAL_TYPE
 local _ = require(Parent.Shared)
 
 return {
-	createPortal = function(Children, ContainerInfo, Implementation, Key: string) --[[ Line: 19 ]]
+	createPortal = function(Children, ContainerInfo, Implementation, Key: string)
 		-- upvalues: REACTPORTALTYPE (copy)
 		if Key ~= nil then
 			Key = tostring(Key)

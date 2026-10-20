@@ -15,14 +15,14 @@ local FFlagLuaAppUseFrameBoundsImpressions = require(Parent.SharedFlags).FFlagLu
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local _ = require(GameFilters.FilterCallbackTypes)
 
-return function(p1) --[[ Line: 42 ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), UseCollectionImpressionsSignalFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), FilterPillModule (copy), CryoModule (copy), VariableItemWidthCarousel (copy), FFlagLuaAppUseFrameBoundsImpressions (copy), FrameBoundsImpressionsTracker (copy), ScreenSizeImpressionsTracker (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState({})
 	local UseRefResult = ReactModule.useRef(nil)
 	local Text = "FilterPillCarousel_" .. p1.sortIndex
 	local UseCollectionImpressionsSignalResult, UseCollectionImpressionsSignalResult2 = UseCollectionImpressionsSignalFunction(p1.scrollViewPositionChangedSignal)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 60 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseTokensResult (copy), ReactModule (upval), p1 (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 		local BodyMedium = UseTokensResult.Typography.BodyMedium
 		local Muted = UseTokensResult.Color.Content.Muted
@@ -49,7 +49,7 @@ return function(p1) --[[ Line: 42 ]]
 			scrollButtonEnabled = true,
 			title = if p1.title and p1.title ~= "" then UseResult else "",
 			items = p1.filters,
-			renderItem = ReactModule.useCallback(function(Filter, Index) --[[ Line: 83 ]]
+			renderItem = ReactModule.useCallback(function(Filter, Index)
 				-- upvalues: ReactModule (upval), FilterPillModule (upval), p1 (copy), Text (copy), UseStateResult2 (copy), CryoModule (upval), UseStateResult (copy)
 				return ReactModule.createElement(FilterPillModule, {
 					analyticsInfo = p1.analyticsInfo,
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 42 ]]
 					impressionsTag = Text,
 					index = Index,
 					onFilterApplied = p1.onFilterApplied,
-					onAbsoluteSizeChanged = function(Frame) --[[ Line: 90 ]]
+					onAbsoluteSizeChanged = function(Frame)
 						-- upvalues: UseStateResult2 (upval), CryoModule (upval), UseStateResult (upval), Index (copy)
 						if Frame then
 							UseStateResult2(CryoModule.Dictionary.join(UseStateResult, { [Index] = Frame.AbsoluteSize.X }))
@@ -71,7 +71,7 @@ return function(p1) --[[ Line: 42 ]]
 				p1.sendFilterClick
 			}),
 			onCanvasPositionChanged = UseCollectionImpressionsSignalResult2,
-			calculateItemWidth = ReactModule.useCallback(function(p2) --[[ Line: 109 ]]
+			calculateItemWidth = ReactModule.useCallback(function(p2)
 				-- upvalues: UseStateResult (copy)
 				return UseStateResult[p2] or 0
 			end, { UseStateResult }),

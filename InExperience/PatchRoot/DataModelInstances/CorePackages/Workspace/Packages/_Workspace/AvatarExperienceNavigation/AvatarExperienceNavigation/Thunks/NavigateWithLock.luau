@@ -8,11 +8,11 @@ local FFlagUseNavigationSelectors = SharedFlagsModule.FFlagUseNavigationSelector
 local FFlagSignalsNavP2NavigationPrimitives = SharedFlagsModule.FFlagSignalsNavP2NavigationPrimitives
 local AppNavigationRegistry = if FFlagSignalsNavP2NavigationPrimitives then require(Parent.RobloxAppNavigation).AppNavigationRegistry else nil
 
-return function(Callback) --[[ Line: 25 ]]
+return function(Callback)
 	-- upvalues: ArgCheckModule (copy), FFlagSignalsNavP2NavigationPrimitives (copy), AppNavigationRegistry (copy), FFlagUseNavigationSelectors (copy), Selectors (copy), ApplySetNavigationLockedFunction (copy)
 	ArgCheckModule.isType(Callback, "function", "navigationCallback")
 	
-	return function(p1) --[[ Line: 27 ]]
+	return function(p1)
 		-- upvalues: FFlagSignalsNavP2NavigationPrimitives (upval), AppNavigationRegistry (upval), Callback (copy), FFlagUseNavigationSelectors (upval), Selectors (upval), ApplySetNavigationLockedFunction (upval)
 		if not FFlagSignalsNavP2NavigationPrimitives then
 			local State = p1:getState()

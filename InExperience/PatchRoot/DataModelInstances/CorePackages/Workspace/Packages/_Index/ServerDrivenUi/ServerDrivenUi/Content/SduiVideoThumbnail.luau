@@ -10,7 +10,7 @@ local GetPlaybackDetectionMethodFunction = VideoUtilsModule.getPlaybackDetection
 local VideoPlaybackDetectionMethod = VideoUtilsModule.VideoPlaybackDetectionMethod
 local UseTagAsViewportAutoplayCandidateFunction = VideoUtilsModule.useTagAsViewportAutoplayCandidate
 
-return function(p1) --[[ Line: 45 | Named "SduiVideoThumbnail" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), UseTagAsViewportAutoplayCandidateFunction (copy), SduiCoreSystemModule (copy), ResponsiveModule (copy), GetPlaybackDetectionMethodFunction (copy), GetSduiComponentWrapperFunction (copy), VideoUtilsModule (copy), VideoPlaybackDetectionMethod (copy)
 	local UseTokensResult = UseTokensFunction()
 	local CornerRadius = p1.cornerRadius or UseTokensResult.Radius.Medium
@@ -35,18 +35,18 @@ return function(p1) --[[ Line: 45 | Named "SduiVideoThumbnail" ]]
 	local IsUsePreferredInputResultMatch = UsePreferredInputResult == ResponsiveModule.Input.Pointer
 	local PlaybackDetectionMethod = GetPlaybackDetectionMethodFunction(UsePreferredInputResult, IsUsePreferredInputResultMatch)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 92 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(p2)
 	end, {})
 	local VideoPlaybackCoordinator = if p1.videoPlaybackContext then p1.videoPlaybackContext.videoPlaybackCoordinator else nil
-	local UseResult1 = ReactModule.useCallback(function(p2, p3) --[[ Line: 100 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: VideoPlaybackCoordinator (copy), p1 (copy)
 		if VideoPlaybackCoordinator and p1.videoAnalytics then
 			p1.videoAnalytics.reportVideoLoad(nil, VideoPlaybackCoordinator.currentPlaybackSessionId, p2, p3)
 		end
 	end, { p1.videoAnalytics, VideoPlaybackCoordinator })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 111 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: VideoPlaybackCoordinator (copy), p1 (copy)
 		if VideoPlaybackCoordinator and p1.videoAnalytics and p1.videoAnalytics.reportVideoLoop then
 			p1.videoAnalytics.reportVideoLoop(nil, VideoPlaybackCoordinator.currentPlaybackSessionId)

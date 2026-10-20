@@ -1,4 +1,4 @@
-﻿return function(p1, p2, p3: number, p4: number, p5: number, p6, p7) --[[ Line: 9 ]]
+﻿return function(p1, p2, p3: number, p4: number, p5: number, p6, p7)
 	if p1 and not p2 and p3 ~= nil and p4 ~= nil then
 		local Largest = math.max(0, p3 - p5 * 2)
 		local v1 = p6 + p7

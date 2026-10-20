@@ -1,6 +1,6 @@
 ﻿local Url = require(script:FindFirstAncestor("GameProductInfoRodux").Parent.Http).Url
 
-return function(Callback, List) --[[ Line: 26 ]]
+return function(Callback, List)
 	-- upvalues: Url (copy)
 	assert(type(List) == "table", "GamesGetProductInfo request expects universeIds to be a table")
 	assert(#List > 0, "GamesGetProductInfo request expects universeIds count to be greater than 0")

@@ -5,7 +5,7 @@ local GetCurrentExperienceProjectModule = require(script.Parent.getCurrentExperi
 local GetDefaultTemplatePlaceIdModule = require(script.Parent.getDefaultTemplatePlaceId)
 local Debug = CreatorAgentChatModule.debug
 
-local function awaitRequestHandle(Callback, NewClockTime) --[[ Line: 35 ]]
+local function awaitRequestHandle(Callback, NewClockTime)
 	while Callback(false).status == "pending" do
 		if NewClockTime <= os.clock() then
 			return Callback(false)
@@ -15,7 +15,7 @@ local function awaitRequestHandle(Callback, NewClockTime) --[[ Line: 35 ]]
 	return Callback(false)
 end
 
-local function runSyncRpc(Method, Callback, Callback1) --[[ Line: 45 ]]
+local function runSyncRpc(Method, Callback, Callback1)
 	-- upvalues: awaitRequestHandle (copy)
 	local AwaitRequestHandleResult = awaitRequestHandle(Callback().state, os.clock() + 30)
 	local Floored = math.floor((os.clock() - os.clock()) * 1000)
@@ -38,7 +38,7 @@ local function runSyncRpc(Method, Callback, Callback1) --[[ Line: 45 ]]
 	}
 end
 
-local function _(Method, Detail) --[[ Line: 83 | Named "skipResult" ]]
+local function _(Method, Detail)
 	return {
 		status = "skip",
 		elapsedMs = nil,
@@ -47,11 +47,11 @@ local function _(Method, Detail) --[[ Line: 83 | Named "skipResult" ]]
 	}
 end
 
-local _ = function(p1): string --[[ Line: 92 | Named "formatResultLine" ]]
+local _ = function(p1): string
 	return `[{if p1.status == "ok" then "OK" elseif p1.status == "skip" then "SKIP" else "FAIL"}] {p1.method}{if p1.elapsedMs then ` ({p1.elapsedMs}ms)` else ""} — {p1.detail}`
 end
 
-local function buildSummary(Url, List): string --[[ Line: 98 ]]
+local function buildSummary(Url, List): string
 	local List1 = { "CAS API smoke test", Url, "" }
 	
 	for _, value in List do
@@ -76,7 +76,7 @@ local function buildSummary(Url, List): string --[[ Line: 98 ]]
 	return table.concat(List1, "\n")
 end
 
-local function runSessionPromptSmoke(p2, SessionId, UniverseId) --[[ Line: 126 ]]
+local function runSessionPromptSmoke(p2, SessionId, UniverseId)
 	if SessionId == nil then
 		return {
 			method = "session/prompt",
@@ -133,7 +133,7 @@ local function runSessionPromptSmoke(p2, SessionId, UniverseId) --[[ Line: 126 ]
 	}
 end
 
-return function(p3, p4, p5) --[[ Line: 200 | Named "runCreatorAgentSmokeTest" ]]
+return function(p3, p4, p5)
 	-- upvalues: CreatorAgentChatModule (copy), GetCurrentExperienceProjectModule (copy), GetDefaultTemplatePlaceIdModule (copy), Debug (copy), runSyncRpc (copy), FFlagBuildExperiencePinForBuild (copy), runSessionPromptSmoke (copy), buildSummary (copy)
 	local ResolveCreatorAgentAcpResult = CreatorAgentChatModule.resolveCreatorAgentAcp()
 	local List = {}
@@ -146,10 +146,10 @@ return function(p3, p4, p5) --[[ Line: 200 | Named "runCreatorAgentSmokeTest" ]]
 		placeId = P12
 	})
 	local SessionId = nil
-	table.insert(List, (runSyncRpc("initialize", function() --[[ Line: 219 ]]
+	table.insert(List, (runSyncRpc("initialize", function()
 		-- upvalues: p3 (copy)
 		return p3.initialize({ protocolVersion = 2 })
-	end, function(p6): string --[[ Line: 221 ]]
+	end, function(p6): string
 		return if typeof(p6) == "table" and typeof(p6.agentInfo) == "table" then `agent={p6.agentInfo.name or "?"} v{p6.agentInfo.version or "?"}` else "succeeded"
 	end)))
 	local Config = if P11 == nil then {
@@ -157,13 +157,13 @@ return function(p3, p4, p5) --[[ Line: 200 | Named "runCreatorAgentSmokeTest" ]]
 		status = "skip",
 		detail = "requires universeId (game.GameId is 0 or not in an experience)",
 		elapsedMs = nil
-	} else runSyncRpc("session/new", function() --[[ Line: 231 ]]
+	} else runSyncRpc("session/new", function()
 		-- upvalues: p3 (copy), P11 (copy), P12 (copy), FFlagBuildExperiencePinForBuild (upval)
 		return p3.sessionNew({
 			project = { universeId = P11, placeId = P12 },
 			application = if FFlagBuildExperiencePinForBuild then "build" else nil
 		})
-	end, function(p6): string --[[ Line: 239 ]]
+	end, function(p6): string
 		-- upvalues: SessionId (ref)
 		if typeof(p6) == "table" and typeof(p6.sessionId) == "string" and p6.sessionId ~= "" then
 			SessionId = p6.sessionId
@@ -185,10 +185,10 @@ return function(p3, p4, p5) --[[ Line: 200 | Named "runCreatorAgentSmokeTest" ]]
 		Config.detail = Debug.rpcFailureMessage("session/new", { status = "failed", error = Config.detail })
 	end
 	table.insert(List, Config)
-	table.insert(List, (runSyncRpc("session/list", function() --[[ Line: 262 ]]
+	table.insert(List, (runSyncRpc("session/list", function()
 		-- upvalues: p3 (copy)
 		return p3.sessionList()
-	end, function(p6): string --[[ Line: 264 ]]
+	end, function(p6): string
 		return `{#(if typeof(p6) == "table" and p6.sessions then p6.sessions else {})} session(s)`
 	end)))
 	
@@ -224,20 +224,20 @@ return function(p3, p4, p5) --[[ Line: 200 | Named "runCreatorAgentSmokeTest" ]]
 			elapsedMs = nil
 		})
 	else
-		table.insert(List, (runSyncRpc("session/load", function() --[[ Line: 277 ]]
+		table.insert(List, (runSyncRpc("session/load", function()
 			-- upvalues: p3 (copy), SessionId (ref)
 			return p3.sessionLoad(SessionId)
 		end)))
-		table.insert(List, (runSyncRpc("_roblox/session/update_info", function() --[[ Line: 282 ]]
+		table.insert(List, (runSyncRpc("_roblox/session/update_info", function()
 			-- upvalues: p3 (copy), SessionId (ref)
 			return p3.sessionUpdateInfo(SessionId, "BuildExperience smoke test")
 		end)))
 		table.insert(List, (runSessionPromptSmoke(p3, SessionId, P11)))
-		table.insert(List, (runSyncRpc("session/cancel", function() --[[ Line: 289 ]]
+		table.insert(List, (runSyncRpc("session/cancel", function()
 			-- upvalues: p3 (copy), SessionId (ref)
 			return p3.sessionCancel(SessionId)
 		end)))
-		table.insert(List, (runSyncRpc("_roblox/session/delete", function() --[[ Line: 294 ]]
+		table.insert(List, (runSyncRpc("_roblox/session/delete", function()
 			-- upvalues: p3 (copy), SessionId (ref)
 			return p3.sessionDelete(SessionId)
 		end)))

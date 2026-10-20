@@ -7,7 +7,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 	universeId = TModule.string
 })
 
-return function(p1, p2) --[[ Line: 16 ]]
+return function(p1, p2)
 	-- upvalues: StrictInterfaceResult (copy), MutedErrorFunction (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(p2)
 	

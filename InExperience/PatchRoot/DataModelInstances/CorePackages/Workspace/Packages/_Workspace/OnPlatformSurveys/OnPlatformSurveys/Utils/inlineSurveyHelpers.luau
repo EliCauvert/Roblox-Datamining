@@ -7,11 +7,11 @@ local InlineSurveyTypesModule = require(OnPlatformSurveys.Types.InlineSurveyType
 local t = {}
 local t1 = {}
 
-local function _(Text: string): string --[[ Line: 25 | Named "trim" ]]
+local function _(Text: string): string
 	return (Text:gsub("^%s*(.-)%s*$", "%1"))
 end
 
-local function buildChoiceTexts(p1) --[[ Line: 42 ]]
+local function buildChoiceTexts(p1)
 	-- upvalues: t1 (copy)
 	local ChoiceTexts = p1.choiceTexts
 	
@@ -32,7 +32,7 @@ local function buildChoiceTexts(p1) --[[ Line: 42 ]]
 	return if Flag then SSes else nil
 end
 
-local function buildResponse(p2, p3) --[[ Line: 60 ]]
+local function buildResponse(p2, p3)
 	-- upvalues: InlineQuestionTypeModule (copy), FFlagInlineSurveyChoiceTextEntry (copy), buildChoiceTexts (copy)
 	if p2.type == InlineQuestionTypeModule.Text then
 		local SS = (p3.text or ""):gsub("^%s*(.-)%s*$", "%1")
@@ -48,7 +48,7 @@ local function buildResponse(p2, p3) --[[ Line: 60 ]]
 	end
 end
 
-local function canSubmitAll(List, p2): boolean --[[ Line: 108 ]]
+local function canSubmitAll(List, p2): boolean
 	-- upvalues: t (copy), InlineQuestionTypeModule (copy)
 	for _, value in List do
 		if value.required == true then
@@ -62,7 +62,7 @@ local function canSubmitAll(List, p2): boolean --[[ Line: 108 ]]
 	return true
 end
 
-local _ = function(List, QuestionId) --[[ Line: 133 | Named "indexOfQuestion" ]]
+local _ = function(List, QuestionId)
 	for i, value in List do
 		if value.questionId == QuestionId then
 			return i
@@ -71,7 +71,7 @@ local _ = function(List, QuestionId) --[[ Line: 133 | Named "indexOfQuestion" ]]
 	return nil
 end
 
-local function resolveNextQuestionId(p3, p4) --[[ Line: 144 ]]
+local function resolveNextQuestionId(p3, p4)
 	local ChoiceIds = p4.choiceIds
 	
 	if p3.choices ~= nil and ChoiceIds ~= nil and #ChoiceIds > 0 then
@@ -86,7 +86,7 @@ local function resolveNextQuestionId(p3, p4) --[[ Line: 144 ]]
 	return p3.next
 end
 
-local function getVisitedQuestions(List, p5) --[[ Line: 184 ]]
+local function getVisitedQuestions(List, p5)
 	-- upvalues: t (copy), resolveNextQuestionId (copy), InlineSurveyTypesModule (copy)
 	local List1 = {}
 	local t2 = {}
@@ -132,11 +132,11 @@ local function getVisitedQuestions(List, p5) --[[ Line: 184 ]]
 end
 
 return {
-	isAnswerComplete = function(p6, p7): boolean --[[ Line: 30 ]]
+	isAnswerComplete = function(p6, p7): boolean
 		-- upvalues: InlineQuestionTypeModule (copy)
 		return p6.type == InlineQuestionTypeModule.Text or (if p6.type == InlineQuestionTypeModule.MultipleChoiceSingle then p7.choiceIds ~= nil and #p7.choiceIds == 1 else p6.type == InlineQuestionTypeModule.MultipleChoiceMulti and (p7.choiceIds ~= nil and #p7.choiceIds >= 1))
 	end,
-	buildSubmitPayload = function(SurveyId, List, p6, IdempotencyKey, p7) --[[ Line: 80 ]]
+	buildSubmitPayload = function(SurveyId, List, p6, IdempotencyKey, p7)
 		-- upvalues: t (copy), buildResponse (copy)
 		local Answers = {}
 		
@@ -159,7 +159,7 @@ return {
 		}
 	end,
 	canSubmitAll = canSubmitAll,
-	canAdvance = function(List, p8: number, Tbl, p9) --[[ Line: 210 ]]
+	canAdvance = function(List, p8: number, Tbl, p9)
 		-- upvalues: FFlagInlineSurveyBranching (copy), resolveNextQuestionId (copy), InlineSurveyTypesModule (copy), getVisitedQuestions (copy), canSubmitAll (copy), InlineQuestionTypeModule (copy)
 		local Entry = List[p8]
 		
@@ -233,7 +233,7 @@ return {
 			return Flag
 		end
 	end,
-	resolveNextIndex = function(List, p10: number, p11) --[[ Line: 162 ]]
+	resolveNextIndex = function(List, p10: number, p11)
 		-- upvalues: resolveNextQuestionId (copy), InlineSurveyTypesModule (copy)
 		local Entry = List[p10]
 		
@@ -263,7 +263,7 @@ return {
 		return if v12 <= #List then v12 else nil
 	end,
 	getVisitedQuestions = getVisitedQuestions,
-	isLastQuestion = function(List, p12: number, p13): boolean --[[ Line: 202 ]]
+	isLastQuestion = function(List, p12: number, p13): boolean
 		-- upvalues: FFlagInlineSurveyBranching (copy), resolveNextQuestionId (copy), InlineSurveyTypesModule (copy)
 		if not FFlagInlineSurveyBranching then
 			return #List <= p12
@@ -298,7 +298,7 @@ return {
 		end
 		return v13 == nil
 	end,
-	mergeCurrentAnswerIntoBatch = function(Tbl, p14, p15) --[[ Line: 121 ]]
+	mergeCurrentAnswerIntoBatch = function(Tbl, p14, p15)
 		local Copy = table.clone(Tbl)
 		
 		if p14 ~= nil then
@@ -306,7 +306,7 @@ return {
 		end
 		return Copy
 	end,
-	toggleChoice = function(p14, p15, p16) --[[ Line: 229 ]]
+	toggleChoice = function(p14, p15, p16)
 		-- upvalues: t2 (copy)
 		if not p16 then
 			return { p15 }

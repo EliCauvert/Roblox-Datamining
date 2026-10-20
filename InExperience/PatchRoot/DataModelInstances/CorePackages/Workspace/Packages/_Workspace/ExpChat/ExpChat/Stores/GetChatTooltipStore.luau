@@ -5,12 +5,12 @@ local PromptsApiModule = require(script.promptsApi)
 local FFlagExpChatPresetChatEnabled = ExpChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
 local FFlagExpChatUseUnifiedTooltipStore = ExpChatSharedModule.Flags.FFlagExpChatUseUnifiedTooltipStore
 
-return require(Parent.Signals).createComputed(function() --[[ Line: 15 ]]
+return require(Parent.Signals).createComputed(function()
 	-- upvalues: CreateChatTooltipStoreModule (copy), FFlagExpChatUseUnifiedTooltipStore (copy), PromptsApiModule (copy), FFlagExpChatPresetChatEnabled (copy)
 	local ChatTooltipStoreModule = CreateChatTooltipStoreModule()
 	
 	if FFlagExpChatUseUnifiedTooltipStore then
-		PromptsApiModule.fetchAllTooltipEligibility(function(p1) --[[ Line: 19 ]]
+		PromptsApiModule.fetchAllTooltipEligibility(function(p1)
 			-- upvalues: ChatTooltipStoreModule (copy), FFlagExpChatPresetChatEnabled (upval)
 			local CustomPrompts = p1.customPrompts
 			ChatTooltipStoreModule.setIsEligible("GlobalChatTooltip", CustomPrompts.GlobalChatTooltip ~= nil)

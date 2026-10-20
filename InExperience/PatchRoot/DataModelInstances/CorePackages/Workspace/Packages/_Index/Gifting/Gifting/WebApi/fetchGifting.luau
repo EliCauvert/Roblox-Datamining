@@ -9,7 +9,7 @@ local FetchFunction = HttpClientModule.fetch
 local AsPromiseFunction = HttpClientModule.asPromise
 local list = { 400, 403, 404, 503 }
 
-local function decodeErrorBody(p1) --[[ Line: 43 ]]
+local function decodeErrorBody(p1)
 	-- upvalues: HttpService (copy)
 	local ResponseBody = p1.responseBody
 	local Text = if typeof(ResponseBody) == "buffer" then buffer.tostring(ResponseBody) else ResponseBody
@@ -23,11 +23,11 @@ local function decodeErrorBody(p1) --[[ Line: 43 ]]
 	end
 end
 
-return function(p1) --[[ Line: 54 | Named "fetchGifting" ]]
+return function(p1)
 	-- upvalues: GiftErrorModelModule (copy), decodeErrorBody (copy), list (copy), FetchFunction (copy), AsPromiseFunction (copy), PromiseModule (copy)
 	local FormatResult = nil
 	
-	local function captureGiftError(p2) --[[ Line: 57 ]]
+	local function captureGiftError(p2)
 		-- upvalues: FormatResult (ref), GiftErrorModelModule (upval), decodeErrorBody (upval)
 		FormatResult = GiftErrorModelModule.format(decodeErrorBody(p2), p2.statusCode)
 	end
@@ -44,7 +44,7 @@ return function(p1) --[[ Line: 54 | Named "fetchGifting" ]]
 		url = p1.url,
 		body = p1.body,
 		analyticsKey = p1.analyticsKey,
-		decode = function(p2) --[[ Line: 66 ]]
+		decode = function(p2)
 			-- upvalues: p1 (copy)
 			local DecodeResult, DecodeResult2 = p1.decode(p2)
 			
@@ -54,7 +54,7 @@ return function(p1) --[[ Line: 54 | Named "fetchGifting" ]]
 			return DecodeResult
 		end,
 		statusCodeActions = StatusCodeActions
-	}))):catch(function(Err) --[[ Line: 86 ]]
+	}))):catch(function(Err)
 		-- upvalues: PromiseModule (upval), FormatResult (ref), GiftErrorModelModule (upval)
 		return PromiseModule.reject(FormatResult or GiftErrorModelModule.format({}, Err.responseCode, Err.errorMessage))
 	end)

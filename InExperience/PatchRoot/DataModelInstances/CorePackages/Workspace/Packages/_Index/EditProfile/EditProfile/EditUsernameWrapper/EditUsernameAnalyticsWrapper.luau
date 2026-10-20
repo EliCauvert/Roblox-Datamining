@@ -7,7 +7,7 @@ local AnalyticsModule = require(EditProfile.Analytics)
 local DefaultAnalyticsService = require(Parent.SocialLuaAnalytics).Analytics.DefaultAnalyticsService
 local EditUsernameWrapperModule = require(script.Parent.EditUsernameWrapper)
 
-return function(p1) --[[ Line: 13 ]]
+return function(p1)
 	-- upvalues: UseLocalUserIdFunction (copy), EditProfileIXPModule (copy), ReactModule (copy), AnalyticsModule (copy), DefaultAnalyticsService (copy), EditUsernameWrapperModule (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	

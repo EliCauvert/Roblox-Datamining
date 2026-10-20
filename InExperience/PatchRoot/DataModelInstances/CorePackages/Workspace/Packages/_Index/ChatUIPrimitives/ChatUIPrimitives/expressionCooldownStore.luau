@@ -1,6 +1,6 @@
 ﻿local Signal, Signal2 = require(script:FindFirstAncestor("ChatUIPrimitives").Parent.Signals).createSignal({})
 
-local function _(Key, p1) --[[ Line: 38 | Named "setDeadline" ]]
+local function _(Key, p1)
 	-- upvalues: Signal (copy), Signal2 (copy)
 	local Copy = table.clone(Signal(false))
 	
@@ -14,11 +14,11 @@ end
 
 return {
 	getCooldownEndsAtByKey = Signal,
-	getCooldownEndsAt = function(p1) --[[ Line: 33 ]]
+	getCooldownEndsAt = function(p1)
 		-- upvalues: Signal (copy)
 		return Signal(false)[p1]
 	end,
-	startCooldown = function(Key, p1) --[[ Line: 50 ]]
+	startCooldown = function(Key, p1)
 		-- upvalues: Signal (copy), Signal2 (copy)
 		local Copy = table.clone(Signal(false))
 		
@@ -28,7 +28,7 @@ return {
 			Copy[Key] = p1
 		end
 		Signal2(Copy)
-		task.delay(math.max(0, p1 - os.clock()), function() --[[ Line: 52 ]]
+		task.delay(math.max(0, p1 - os.clock()), function()
 			-- upvalues: Key (copy), Signal (upval), p1 (copy), Signal2 (upval)
 			if Signal(false)[Key] == p1 then
 				local Copy = table.clone(Signal(false))
@@ -37,13 +37,13 @@ return {
 			end
 		end)
 	end,
-	clearCooldown = function(Key) --[[ Line: 59 ]]
+	clearCooldown = function(Key)
 		-- upvalues: Signal (copy), Signal2 (copy)
 		local Copy = table.clone(Signal(false))
 		Copy[Key] = nil
 		Signal2(Copy)
 	end,
-	_resetForTesting = function() --[[ Line: 65 ]]
+	_resetForTesting = function()
 		-- upvalues: Signal2 (copy)
 		Signal2({})
 	end

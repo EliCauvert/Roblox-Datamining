@@ -2,7 +2,7 @@
 local AppSystemInfo = require(RobloxAppHooks.Parent.RoactServiceTags).AppSystemInfo
 local UseRoactServiceModule = require(RobloxAppHooks.useRoactService)
 
-return function() --[[ Line: 6 | Named "useSystemInfo" ]]
+return function()
 	-- upvalues: UseRoactServiceModule (copy), AppSystemInfo (copy)
 	return UseRoactServiceModule(AppSystemInfo)
 end

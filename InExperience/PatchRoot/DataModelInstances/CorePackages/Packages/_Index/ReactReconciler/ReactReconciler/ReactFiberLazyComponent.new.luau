@@ -1,5 +1,5 @@
 ﻿return {
-	resolveDefaultProps = function(p1, Tbl) --[[ Line: 14 ]]
+	resolveDefaultProps = function(p1, Tbl)
 		if not p1 or typeof(p1) ~= "table" or not p1.defaultProps then
 			return Tbl
 		end

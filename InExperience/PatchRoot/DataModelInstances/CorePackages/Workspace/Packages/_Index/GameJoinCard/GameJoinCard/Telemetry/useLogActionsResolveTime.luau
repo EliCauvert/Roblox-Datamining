@@ -4,11 +4,11 @@ local FFlagJoinabilityCTARefactor = require(Parent.SharedFlags).FFlagJoinability
 local DataStatus = require(Parent.DataHydration).DataStatus
 local GameJoinCardTelemetryModule = require(script.Parent.GameJoinCardTelemetry)
 
-return function(Failed, p1, p2) --[[ Line: 20 | Named "useLogActionsResolveTime" ]]
+return function(Failed, p1, p2)
 	-- upvalues: ReactModule (copy), FFlagJoinabilityCTARefactor (copy), DataStatus (copy), GameJoinCardTelemetryModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 24 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagJoinabilityCTARefactor (upval), p1 (copy), UseRefResult (copy), UseRefResult1 (copy), Failed (copy), DataStatus (upval), GameJoinCardTelemetryModule (upval), p2 (copy)
 		if not FFlagJoinabilityCTARefactor or not p1 then
 			UseRefResult.current = nil

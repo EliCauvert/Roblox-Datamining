@@ -16,12 +16,12 @@ local DefaultButtonHeight = ConstantsModule.DefaultButtonHeight
 local UseNotificationCardStateModule = require(Context.useNotificationCardState)
 local UseNotificationCardDataModule = require(Context.useNotificationCardData)
 
-local function _(Alert) --[[ Line: 20 ]]
+local function _(Alert)
 	-- upvalues: TypeModule (copy), ButtonType (copy)
 	return if Alert == TypeModule.SENDERButtonStyleEnum.Growth then ButtonType.PrimaryContextual elseif Alert == TypeModule.SENDERButtonStyleEnum.Primary then ButtonType.PrimarySystem elseif Alert == TypeModule.SENDERButtonStyleEnum.Secondary then ButtonType.Secondary elseif Alert == TypeModule.SENDERButtonStyleEnum.Alert then ButtonType.Alert else ButtonType.Secondary
 end
 
-local function v16(Button, Callback, NotificationPayload) --[[ Line: 34 ]]
+local function v16(Button, Callback, NotificationPayload)
 	-- upvalues: UseStyleFunction (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), TypeModule (copy), ButtonType (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseTokensResult = if FoundationFontFaceMigration then UseTokensFunction() else nil
@@ -36,7 +36,7 @@ local function v16(Button, Callback, NotificationPayload) --[[ Line: 34 ]]
 				props = {
 					text = value.label.text,
 					fontStyle = CaptionLarge,
-					onActivated = function() --[[ Line: 51 ]]
+					onActivated = function()
 						-- upvalues: Callback (copy), NotificationPayload (copy), value (copy)
 						if Callback and NotificationPayload then
 							Callback(value, NotificationPayload)
@@ -49,7 +49,7 @@ local function v16(Button, Callback, NotificationPayload) --[[ Line: 34 ]]
 	return List
 end
 
-return function() --[[ Line: 64 ]]
+return function()
 	-- upvalues: UseNotificationCardStateModule (copy), UseNotificationCardDataModule (copy), v16 (copy), React (copy), DefaultContentPadding (copy), ButtonStack (copy), DefaultButtonHeight (copy)
 	local Button = UseNotificationCardStateModule("button")
 	local UseNotificationCardDataModuleResult = UseNotificationCardDataModule()

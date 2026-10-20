@@ -40,7 +40,7 @@ local EventMap = {
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-local function ChatSheetContent(p1) --[[ Line: 103 ]]
+local function ChatSheetContent(p1)
 	-- upvalues: ReactModule (copy), FFlagBuildExperienceLibrary (copy), UseScrollPerformanceTrackerModule (copy), FFlagBuildExperienceChatSheetReversedContentModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local v1 = nil
@@ -50,7 +50,7 @@ local function ChatSheetContent(p1) --[[ Line: 103 ]]
 		v1, Callback = ReactModule.useState(nil)
 	end
 	UseScrollPerformanceTrackerModule("LuaApp_Build_Chat_Scroll", UseRefResult)
-	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 118 ]]
+	local UseResult = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), Callback (ref), p1 (copy)
 		UseRefResult.current = Current
 		
@@ -61,7 +61,7 @@ local function ChatSheetContent(p1) --[[ Line: 103 ]]
 	end, { p1.setScrollingFrame, Callback })
 	
 	if FFlagBuildExperienceLibrary then
-		ReactModule.useEffect(function() --[[ Line: 127 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p1 (copy), v1 (ref)
 			if p1.onFramesChanged ~= nil then
 				p1.onFramesChanged(p1.sheet, v1)
@@ -74,7 +74,7 @@ local function ChatSheetContent(p1) --[[ Line: 103 ]]
 	}, p1.children)
 end
 
-return function(p1) --[[ Line: 140 | Named "ChatSheetView" ]]
+return function(p1)
 	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), Sheet (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseTokensFunction (copy), ReactModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), ReactUtilsModule (copy), ChatMessageListModule (copy), BuildEmptyStateModule (copy), AnswerFormContainerModule (copy), ChatConstantsModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), View (copy), FFlagBuildExperienceLibrary (copy), DialogSize (copy), ChatSheetContent (copy), ChatActionsModule (copy), FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), FFlagBuildExperienceInGameShell (copy), BuildPillMenuPortalModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ChatCardEmphasisProviderModule (copy)
 	local HasAnswerForm: boolean = FFlagBuildExperienceAnswerFormModule and p1.answerForm ~= nil
 	local SheetComponent = p1.sheetComponent or Sheet
@@ -91,11 +91,11 @@ return function(p1) --[[ Line: 140 | Named "ChatSheetView" ]]
 			isAutoFocusRoot = true,
 			surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
 			eventMap = EventMap,
-			eventHandlers = ReactModule.useMemo(function() --[[ Line: 152 ]]
+			eventHandlers = ReactModule.useMemo(function()
 				-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), OnCloseFunction (copy)
 				return {
 					[FocusNavigationEventNameEnum.NavigateBack] = {
-						handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 155 ]]
+						handler = InputHandlersModule.onRelease(function(p2)
 							-- upvalues: OnCloseFunction (upval)
 							OnCloseFunction()
 							p2:cancel()

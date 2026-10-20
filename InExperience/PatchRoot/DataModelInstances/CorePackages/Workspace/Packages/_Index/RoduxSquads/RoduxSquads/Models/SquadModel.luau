@@ -7,7 +7,7 @@ local TModule = require(Parent.t)
 local FFlagEnableSquadRegroupExperimentation = require(Parent.SharedFlags).FFlagEnableSquadRegroupExperimentation
 local SquadModelModule = {}
 
-function SquadModelModule.new(p1) --[[ Line: 15 ]]
+function SquadModelModule.new(p1)
 	-- upvalues: SquadModelModule (copy)
 	assert(SquadModelModule.isValid(p1))
 	SquadModelModule.__index = SquadModelModule
@@ -16,11 +16,11 @@ function SquadModelModule.new(p1) --[[ Line: 15 ]]
 	return p1
 end
 
-function tryGetSquadId(p1) --[[ Line: 28 ]]
+function tryGetSquadId(p1)
 	return p1.groupUpId or p1.squadId
 end
 
-function SquadModelModule.mock(p1) --[[ Line: 32 ]]
+function SquadModelModule.mock(p1)
 	-- upvalues: CryoModule (copy), SquadMemberModelModule (copy), SquadInviteeModelModule (copy), SquadModelModule (copy), FFlagEnableSquadRegroupExperimentation (copy)
 	local P2 = p1 or {}
 	local config = {
@@ -35,11 +35,11 @@ function SquadModelModule.mock(p1) --[[ Line: 32 ]]
 		updatedAtTime = P2.updatedAtTime or "2024-07-19T21:02:47.777+00:00",
 		deletedAtTime = P2.deletedAtTime,
 		parentChannelId = P2.parentChannelId or "23456",
-		members = CryoModule.List.map(P2.members or { { userId = 1234 } }, function(p2) --[[ Line: 35 ]]
+		members = CryoModule.List.map(P2.members or { { userId = 1234 } }, function(p2)
 			-- upvalues: SquadMemberModelModule (upval)
 			return SquadMemberModelModule.mock(p2)
 		end),
-		invitees = CryoModule.List.map(P2.invitees or { { userId = 2345, invitedAtTimestampMs = 3333333 } }, function(p2) --[[ Line: 41 ]]
+		invitees = CryoModule.List.map(P2.invitees or { { userId = 2345, invitedAtTimestampMs = 3333333 } }, function(p2)
 			-- upvalues: SquadInviteeModelModule (upval)
 			return SquadInviteeModelModule.mock(p2)
 		end),
@@ -47,17 +47,17 @@ function SquadModelModule.mock(p1) --[[ Line: 32 ]]
 	}))
 end
 
-function SquadModelModule.format(p1) --[[ Line: 68 ]]
+function SquadModelModule.format(p1)
 	-- upvalues: CryoModule (copy), SquadMemberModelModule (copy), SquadInviteeModelModule (copy), SquadModelModule (copy), FFlagEnableSquadRegroupExperimentation (copy)
 	return (SquadModelModule.new({
 		createdAtTime = p1.createdAtTime,
 		deletedAtTime = p1.deletedAtTime,
 		initiatorId = p1.initiatorId,
-		invitees = CryoModule.List.map(p1.invitees, function(p2) --[[ Line: 73 ]]
+		invitees = CryoModule.List.map(p1.invitees, function(p2)
 			-- upvalues: SquadInviteeModelModule (upval)
 			return SquadInviteeModelModule.format(p2)
 		end),
-		members = CryoModule.List.map(p1.members, function(p2) --[[ Line: 69 ]]
+		members = CryoModule.List.map(p1.members, function(p2)
 			-- upvalues: SquadMemberModelModule (upval)
 			return SquadMemberModelModule.format(p2)
 		end),

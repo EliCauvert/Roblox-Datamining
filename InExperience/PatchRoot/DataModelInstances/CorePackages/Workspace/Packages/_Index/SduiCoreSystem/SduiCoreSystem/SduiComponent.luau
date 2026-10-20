@@ -21,7 +21,7 @@ local RecordV1ComponentUsageModule = require(SduiCoreSystem.Analytics.recordV1Co
 local t = {}
 local v1 = nil
 
-local function SduiErrorComponent(_) --[[ Line: 43 ]]
+local function SduiErrorComponent(_)
 	-- upvalues: ReactModule (copy)
 	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -29,7 +29,7 @@ local function SduiErrorComponent(_) --[[ Line: 43 ]]
 	})
 end
 
-local MemoResult = ReactModule.memo(function(p1) --[[ Line: 51 ]]
+local MemoResult = ReactModule.memo(function(p1)
 	-- upvalues: SduiBuilderProcessingPhase (copy), ReactModule (copy), SduiBuilderModule (copy), CompareSduiAnalyticsContextModule (copy), SduiErrorType (copy), SduiErrorComponent (copy), CryoModule (copy), t (copy), MapServerBindingPropsFunction (copy), ServerBindingPropMap (copy), ParsePropsModule (copy), ValidateInterfaceModule (copy), v1 (ref)
 	local Processed = p1.componentConfig.__processed
 	local Render = if Processed then SduiBuilderProcessingPhase.Render else SduiBuilderProcessingPhase.Lazy
@@ -142,7 +142,7 @@ local MemoResult = ReactModule.memo(function(p1) --[[ Line: 51 ]]
 	return ReactModule.createElement(Component, JoinResult, T)
 end, CompareSduiPropsModule)
 
-v1 = function(p2) --[[ Line: 172 ]]
+v1 = function(p2)
 	-- upvalues: SduiErrorType (copy), ReactModule (copy), SduiErrorComponent (copy), ValidateInterfaceModule (copy), UiComponentInterface (copy), SduiErrorsModule (copy), RecordV1ComponentUsageModule (copy), SduiUsageRecorderModule (copy), SduiConditionalPropWrapperModule (copy), MemoResult (copy)
 	if not p2.componentConfig then
 		p2.sduiContext.dependencies.logger.reportError(SduiErrorType.NilComponentConfig, { name = p2.debugName }, p2.sduiContext.appPage)

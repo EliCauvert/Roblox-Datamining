@@ -20,7 +20,7 @@ local Flint = Colors.Flint
 local Obsidian = Colors.Obsidian
 local White = Colors.White
 
-function ListSearchWidget.init(p1) --[[ Line: 40 ]]
+function ListSearchWidget.init(p1)
 	-- upvalues: RoactModule (copy), ImageSetLabel (copy), GetImageDataFunction (copy), Flint (copy), ImageSetButton (copy)
 	p1.state = {
 		fullLoad = false,
@@ -31,12 +31,12 @@ function ListSearchWidget.init(p1) --[[ Line: 40 ]]
 	p1.visibilityTarget = 0
 	p1.baseFrameRef = RoactModule.createRef()
 	
-	function p1.getWidgetPosition(): UDim2 --[[ Line: 51 ]]
+	function p1.getWidgetPosition(): UDim2
 		-- upvalues: p1 (copy)
 		return UDim2.new(0.5, 0, 2 - p1.visibility, 10)
 	end
 	
-	function p1.searchTextChanged(p2) --[[ Line: 55 ]]
+	function p1.searchTextChanged(p2)
 		-- upvalues: p1 (copy)
 		local Lowered = string.lower(p2.Text)
 		
@@ -56,7 +56,7 @@ function ListSearchWidget.init(p1) --[[ Line: 40 ]]
 		end
 	end
 	
-	function p1.renderWidgetBackground(p3) --[[ Line: 76 ]]
+	function p1.renderWidgetBackground(p3)
 		-- upvalues: RoactModule (upval), ImageSetLabel (upval), GetImageDataFunction (upval), Flint (upval), p1 (copy), ImageSetButton (upval)
 		local ScaledCloseButtonSize = 1.4 * p3.closeButtonSize
 		
@@ -122,10 +122,10 @@ function ListSearchWidget.init(p1) --[[ Line: 40 ]]
 	end
 end
 
-function ListSearchWidget.didMount(p2) --[[ Line: 141 ]]
+function ListSearchWidget.didMount(p2)
 	-- upvalues: OtterModule (copy)
 	p2.motor = OtterModule.createSingleMotor(p2.visibility)
-	p2.motor:onStep(function(Visibility) --[[ Line: 143 ]]
+	p2.motor:onStep(function(Visibility)
 		-- upvalues: p2 (copy)
 		p2.visibility = Visibility
 		
@@ -144,7 +144,7 @@ function ListSearchWidget.didMount(p2) --[[ Line: 141 ]]
 	end)
 end
 
-function ListSearchWidget.willUnmount(p2) --[[ Line: 162 ]]
+function ListSearchWidget.willUnmount(p2)
 	if p2.motor then
 		p2.motor:destroy()
 	end
@@ -152,7 +152,7 @@ end
 
 ListSearchWidget.defaultProps = { SearchPlaceholder = "Feature.Chat.Label.SearchWord" }
 
-function ListSearchWidget.render(p2) --[[ Line: 172 ]]
+function ListSearchWidget.render(p2)
 	-- upvalues: FormFactor (copy), WithLocalizationFunction (copy), RoactModule (copy), AppFonts (copy), White (copy), SearchBarModule (copy), Obsidian (copy), Flint (copy), WindowedListFrameModule (copy)
 	local IsFormFactorMatch = p2.props.formFactor == FormFactor.WIDE
 	local CloseButtonSize = 27
@@ -175,7 +175,7 @@ function ListSearchWidget.render(p2) --[[ Line: 172 ]]
 	return WithLocalizationFunction({
 		heading = p2.props.Heading,
 		search = p2.props.SearchPlaceholder
-	})(function(p3) --[[ Line: 197 ]]
+	})(function(p3)
 		-- upvalues: IsVisibilityTargetMatch (copy), RoactModule (upval), p2 (copy), IsFormFactorMatch (copy), CloseButtonSize (ref), YOffset (ref), AppFonts (upval), White (upval), SearchBarModule (upval), YOffset1 (copy), Obsidian (upval), Flint (upval), IconSize (ref), TextSize (ref), WindowedListFrameModule (upval), NewYOffset (copy), NewTextSize (ref)
 		return RoactModule.createElement(if IsVisibilityTargetMatch then "TextButton" else "Frame", {
 			BorderSizePixel = 0,
@@ -230,7 +230,7 @@ function ListSearchWidget.render(p2) --[[ Line: 172 ]]
 	end)
 end
 
-function ListSearchWidget.didUpdate(p2, p3) --[[ Line: 255 ]]
+function ListSearchWidget.didUpdate(p2, p3)
 	-- upvalues: OtterModule (copy)
 	if p2.visibilityTarget ~= p2.props.VisibilityTarget and p2.motor then
 		p2.visibilityTarget = p2.props.VisibilityTarget
@@ -245,6 +245,6 @@ function ListSearchWidget.didUpdate(p2, p3) --[[ Line: 255 ]]
 	end
 end
 
-return RoactServices.connect({ networking = RoactNetworking })((RoactRoduxModule.connect(function(p2, _) --[[ Line: 277 ]]
+return RoactServices.connect({ networking = RoactNetworking })((RoactRoduxModule.connect(function(p2, _)
 	return { formFactor = p2.FormFactor }
 end)(ListSearchWidget)))

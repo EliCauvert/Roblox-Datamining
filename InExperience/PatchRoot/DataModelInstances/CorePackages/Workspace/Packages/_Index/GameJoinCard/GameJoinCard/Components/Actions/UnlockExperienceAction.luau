@@ -10,7 +10,7 @@ local _ = require(script.Parent.Types)
 local GetTelemetryFieldsModule = require(script.Parent.getTelemetryFields)
 
 return {
-	[UserCtaAction.UnlockExperience] = function(p1) --[[ Line: 18 ]]
+	[UserCtaAction.UnlockExperience] = function(p1)
 		-- upvalues: UserCtaAction (copy), InputSize (copy), ReactModule (copy), AgeCheckUpsellCTAModule (copy), UseGameJoinCardAnalyticsModule (copy), GameJoinCardButtonAction (copy), GetTelemetryFieldsModule (copy)
 		return {
 			keepOpenOnActivate = true,
@@ -18,7 +18,7 @@ return {
 			inputSize = InputSize.Medium,
 			width = UDim.new(1, 0),
 			text = p1.localized[UserCtaAction.UnlockExperience],
-			render = function(p2, LayoutOrder) --[[ Line: 27 ]]
+			render = function(p2, LayoutOrder)
 				-- upvalues: ReactModule (upval), AgeCheckUpsellCTAModule (upval)
 				return ReactModule.createElement(AgeCheckUpsellCTAModule, {
 					onUnlockPressed = p2.onActivated,
@@ -26,7 +26,7 @@ return {
 					focusRef = p2.focusRef
 				})
 			end,
-			onActivated = function() --[[ Line: 34 ]]
+			onActivated = function()
 				-- upvalues: UseGameJoinCardAnalyticsModule (upval), GameJoinCardButtonAction (upval), GetTelemetryFieldsModule (upval), p1 (copy)
 				UseGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(GameJoinCardButtonAction.AgeCheckUnlock, GetTelemetryFieldsModule(p1))
 				p1.joinAgeCheckUpsellFlow()

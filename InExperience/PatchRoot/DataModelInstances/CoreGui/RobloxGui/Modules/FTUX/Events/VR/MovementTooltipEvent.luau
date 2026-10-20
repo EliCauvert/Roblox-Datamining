@@ -7,7 +7,7 @@ local MovementTooltip = nil
 
 return {
 	Name = "MovementTooltipEvent",
-	StartEvent = function() --[[ Line: 27 ]]
+	StartEvent = function()
 		-- upvalues: RoactModule (copy), VRFTUXToolTipsModule (copy), RenderWithCoreScriptsStyleProviderModule (copy), MovementTooltip (ref), CoreGui (copy)
 		MovementTooltip = RoactModule.mount(RenderWithCoreScriptsStyleProviderModule({
 			(RoactModule.createElement(VRFTUXToolTipsModule, {
@@ -31,7 +31,7 @@ return {
 			}))
 		}), CoreGui:FindFirstChild("FTUXMenu"), "MovementTooltip")
 	end,
-	StopEvent = function() --[[ Line: 58 ]]
+	StopEvent = function()
 		-- upvalues: MovementTooltip (ref), RoactModule (copy)
 		if MovementTooltip then
 			RoactModule.unmount(MovementTooltip)

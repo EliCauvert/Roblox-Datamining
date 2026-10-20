@@ -17,13 +17,13 @@ MouseOverrideManager.validateProps = T.strictInterface({
 	inputType = T.string
 })
 
-function MouseOverrideManager.render(p1) --[[ Line: 30 ]]
+function MouseOverrideManager.render(p1)
 	-- upvalues: Roact (copy), ExternalEventConnectionModule (copy), UserInputService (copy)
 	local ExitModalOpen = p1.props.exitModalOpen
 	
 	return Roact.createElement(ExternalEventConnectionModule, {
 		event = UserInputService:GetPropertyChangedSignal("OverrideMouseIconBehavior"),
-		callback = function() --[[ Line: 35 ]]
+		callback = function()
 			-- upvalues: p1 (copy), ExitModalOpen (copy), UserInputService (upval)
 			if (p1.props.menuOpen or ExitModalOpen) and UserInputService.OverrideMouseIconBehavior == Enum.OverrideMouseIconBehavior.None then
 				p1:updateMouseIconOverride()
@@ -32,11 +32,11 @@ function MouseOverrideManager.render(p1) --[[ Line: 30 ]]
 	})
 end
 
-function MouseOverrideManager.init(p1) --[[ Line: 48 ]]
+function MouseOverrideManager.init(p1)
 	p1.didOverrideMouse = false
 end
 
-function MouseOverrideManager.updateMouseIconOverride(p1) --[[ Line: 52 ]]
+function MouseOverrideManager.updateMouseIconOverride(p1)
 	-- upvalues: InputType (copy), VRService (copy), MouseIconOverrideService (copy), InGameMenuCursorOverride (copy)
 	local ExitModalOpen = p1.props.exitModalOpen
 	
@@ -58,15 +58,15 @@ function MouseOverrideManager.updateMouseIconOverride(p1) --[[ Line: 52 ]]
 	end
 end
 
-function MouseOverrideManager.didMount(p1) --[[ Line: 68 ]]
+function MouseOverrideManager.didMount(p1)
 	p1:updateMouseIconOverride()
 end
 
-function MouseOverrideManager.didUpdate(p1) --[[ Line: 72 ]]
+function MouseOverrideManager.didUpdate(p1)
 	p1:updateMouseIconOverride()
 end
 
-return RoactRodux.UNSTABLE_connect2(function(p1) --[[ Line: 76 ]]
+return RoactRodux.UNSTABLE_connect2(function(p1)
 	return {
 		menuOpen = p1.isMenuOpen,
 		exitModalOpen = p1.nativeClosePrompt.closingApp,

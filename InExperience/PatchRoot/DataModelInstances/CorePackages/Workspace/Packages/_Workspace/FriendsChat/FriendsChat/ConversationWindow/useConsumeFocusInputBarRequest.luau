@@ -5,13 +5,13 @@ local SignalsModule = require(Parent.Signals)
 local GetFriendsChatNavigationStoreModule = require(FriendsChat.Stores.GetFriendsChatNavigationStore)
 local IsFocusRequestFreshModule = require(FriendsChat.Focus.isFocusRequestFresh)
 
-return function(Callback) --[[ Line: 24 | Named "useConsumeFocusInputBarRequest" ]]
+return function(Callback)
 	-- upvalues: ReactModule (copy), GetFriendsChatNavigationStoreModule (copy), SignalsModule (copy), IsFocusRequestFreshModule (copy)
-	ReactModule.useEffect(function() --[[ Line: 25 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: GetFriendsChatNavigationStoreModule (upval), SignalsModule (upval), IsFocusRequestFreshModule (upval), Callback (copy)
 		local FriendsChatNavigationStoreModule = GetFriendsChatNavigationStoreModule(false)
 		
-		return SignalsModule.createEffect(function(p1) --[[ Line: 27 ]]
+		return SignalsModule.createEffect(function(p1)
 			-- upvalues: FriendsChatNavigationStoreModule (copy), IsFocusRequestFreshModule (upval), Callback (upval)
 			local FocusInputBarRequestTime = FriendsChatNavigationStoreModule.getFocusInputBarRequestTime(p1)
 			

@@ -6,7 +6,7 @@ local UseItemCardRowPropsModule = require(AvatarExperienceInspectAndBuy.Componen
 local _ = require(AvatarExperienceInspectAndBuy.Enums.ViewType)
 local CatalogRowItemCard = require(Parent.AXCommon).Components.CatalogItemCard.CatalogRowItemCard
 
-return function(Frame) --[[ Line: 19 ]]
+return function(Frame)
 	-- upvalues: UseItemCardRowPropsModule (copy), ReactModule (copy), CatalogRowItemCard (copy)
 	return ReactModule.createElement(CatalogRowItemCard, (UseItemCardRowPropsModule(Frame.item, Frame.LayoutOrder, Frame.view, Frame.onItemCardActivated, Frame.itemCardWidth)))
 end

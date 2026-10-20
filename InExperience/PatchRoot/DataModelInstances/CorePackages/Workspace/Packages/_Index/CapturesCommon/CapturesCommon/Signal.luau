@@ -2,7 +2,7 @@
 local SignalModule = {}
 SignalModule.__index = SignalModule
 
-function SignalModule.new() --[[ Line: 34 ]]
+function SignalModule.new()
 	-- upvalues: SignalModule (copy)
 	local config = { _listeners = {} }
 	setmetatable(config, SignalModule)
@@ -10,19 +10,19 @@ function SignalModule.new() --[[ Line: 34 ]]
 	return config
 end
 
-function SignalModule:connect(Callback) --[[ Line: 44 ]]
+function SignalModule:connect(Callback)
 	-- upvalues: ImmutableModule (copy)
 	local config = { isConnected = true, callback = Callback }
 	self._listeners = ImmutableModule.Append(self._listeners, config)
 	
 	return {
-		Disconnect = function() --[[ Line: 57 ]]
+		Disconnect = function()
 			-- upvalues: config (copy), self (copy), ImmutableModule (upval)
 			warn(string.format("Connection:Disconnect() has been deprecated, use Connection:disconnect()\n%s]", debug.traceback()))
 			config.isConnected = false
 			self._listeners = ImmutableModule.RemoveValueFromList(self._listeners, config)
 		end,
-		disconnect = function() --[[ Line: 51 ]]
+		disconnect = function()
 			-- upvalues: config (copy), self (copy), ImmutableModule (upval)
 			config.isConnected = false
 			self._listeners = ImmutableModule.RemoveValueFromList(self._listeners, config)
@@ -30,7 +30,7 @@ function SignalModule:connect(Callback) --[[ Line: 44 ]]
 	}
 end
 
-function SignalModule.fire(p1, ...) --[[ Line: 70 ]]
+function SignalModule.fire(p1, ...)
 	for _, listener in ipairs(p1._listeners) do
 		if listener.isConnected then
 			listener.callback(...)
@@ -38,13 +38,13 @@ function SignalModule.fire(p1, ...) --[[ Line: 70 ]]
 	end
 end
 
-function SignalModule:Connect(...) --[[ Line: 78 ]]
+function SignalModule:Connect(...)
 	warn(string.format("Signal:Connect() has been deprecated, use Signal:connect()\n%s]", debug.traceback()))
 	
 	return self:connect(...)
 end
 
-function SignalModule:Fire(...) --[[ Line: 83 ]]
+function SignalModule:Fire(...)
 	warn(string.format("Signal:Fire() has been deprecated, use Signal:fire()\n%s]", debug.traceback()))
 	self:fire(...)
 end

@@ -1,19 +1,19 @@
-﻿return function(Callback, p1: number) --[[ Line: 1 ]]
+﻿return function(Callback, p1: number)
 	local DelayedThread = nil
 	local Delay = p1 / 1000
 	
 	return {
-		cancel = function() --[[ Line: 5 ]]
+		cancel = function()
 			-- upvalues: DelayedThread (ref)
 			if DelayedThread then
 				task.cancel(DelayedThread)
 				DelayedThread = nil
 			end
 		end,
-		call = function(...) --[[ Line: 11 ]]
+		call = function(...)
 			-- upvalues: DelayedThread (ref), Delay (copy), Callback (copy)
 			local list = { ... }
-			DelayedThread = task.delay(Delay, function() --[[ Line: 13 ]]
+			DelayedThread = task.delay(Delay, function()
 				-- upvalues: Callback (upval), list (copy)
 				Callback(unpack(list))
 			end)

@@ -15,7 +15,7 @@ local RobuxTransferFlowEventNameModule = require(CurrencyTransfers.Enums.RobuxTr
 local LogCurrencyTransferCounterModule = require(CurrencyTransfers.Utils.logCurrencyTransferCounter)
 local LogRobuxTransferFlowEventModule = require(CurrencyTransfers.Utils.logRobuxTransferFlowEvent)
 
-return function(p1) --[[ Line: 25 | Named "acceptTransfer" ]]
+return function(p1)
 	-- upvalues: LogCurrencyTransferCounterModule (copy), CurrencyTransferTelemetryModule (copy), SharedFlagsModule (copy), LogRobuxTransferFlowEventModule (copy), RobuxTransferFlowEventNameModule (copy), HandleReceiveErrorModule (copy), PromptStateModule (copy), AcceptTransferRequestModule (copy), HandleReceiveSuccessModule (copy), FailureReasonModule (copy), HandleReceiveBlockModule (copy), TransferRetryOriginModule (copy)
 	local NetworkImpl = p1.getNetworkImpl()
 	local SetPromptStateFunction: (any) -> () = p1.setPromptState
@@ -31,7 +31,7 @@ return function(p1) --[[ Line: 25 | Named "acceptTransfer" ]]
 		if SharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
 			LogRobuxTransferFlowEventModule(p1, RobuxTransferFlowEventNameModule.accept_attempted)
 		end
-		return AcceptTransferRequestModule(config, nil, NetworkImpl):andThen(function(Result) --[[ Line: 54 ]]
+		return AcceptTransferRequestModule(config, nil, NetworkImpl):andThen(function(Result)
 			-- upvalues: SetPromptStateFunction (copy), PromptStateModule (upval), SetRobuxTransferFunction (copy), SetIsAlreadyAcceptedFunction (copy), LogCurrencyTransferCounterModule (upval), p1 (copy), CurrencyTransferTelemetryModule (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval), HandleReceiveSuccessModule (upval), HandleReceiveErrorModule (upval)
 			SetPromptStateFunction(PromptStateModule.ReceiveStarted)
 			
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 25 | Named "acceptTransfer" ]]
 				end
 				HandleReceiveErrorModule(p1, nil)
 			end
-		end):catch(function(Err) --[[ Line: 80 ]]
+		end):catch(function(Err)
 			-- upvalues: LogCurrencyTransferCounterModule (upval), p1 (copy), CurrencyTransferTelemetryModule (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval), FailureReasonModule (upval), HandleReceiveBlockModule (upval), TransferRetryOriginModule (upval), HandleReceiveErrorModule (upval)
 			LogCurrencyTransferCounterModule(p1, CurrencyTransferTelemetryModule.CurrencyTransferAcceptFailedCounter)
 			

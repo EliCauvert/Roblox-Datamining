@@ -11,18 +11,18 @@ local _ = require(Chrome.ChromeShared.Service.WindowSizeSignal)
 local ConstantsModule = require(Chrome.ChromeShared.Unibar.Constants)
 local AvatarSwitcherContainer = require(CorePackages.Workspace.Packages.AvatarSwitcher).Components.AvatarSwitcherContainer
 
-local function _(Vector): boolean --[[ Line: 27 | Named "shouldUseVerticalLayout" ]]
+local function _(Vector): boolean
 	return Vector.X.Offset / Vector.Y.Offset < 1.2
 end
 
-return function(p1) --[[ Line: 37 | Named "AvatarSwitcherChromeWrapper" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), RobloxGui (copy), GuiService (copy), UseEventConnectionFunction (copy), ViewportUtilModule (copy), FoundationModule (copy), AvatarSwitcherContainer (copy), ServiceModule (copy), ConstantsModule (copy)
 	local WindowSize = p1.windowSize
 	local GetResult = WindowSize:get()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(GetResult.X.Offset / GetResult.Y.Offset < 1.2)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local SettingsHubModule = require(RobloxGui.Modules.Settings.SettingsHub)
-	local UseResult = ReactModule.useCallback(function(Vector) --[[ Line: 45 ]]
+	local UseResult = ReactModule.useCallback(function(Vector)
 		-- upvalues: GuiService (upval), p1 (copy), WindowSize (copy), UseStateResult2_1 (copy)
 		local Y = GuiService.TopbarInset.Max.Y
 		local IsXBelow: boolean = Vector.X < p1.maxWindowWidth or Vector.Y - Y < p1.maxWindowHeight
@@ -39,20 +39,20 @@ return function(p1) --[[ Line: 37 | Named "AvatarSwitcherChromeWrapper" ]]
 		p1.maxWindowHeight,
 		UseStateResult1
 	})
-	UseEventConnectionFunction(GuiService:GetPropertyChangedSignal("TopbarInset"), function() --[[ Line: 60 ]]
+	UseEventConnectionFunction(GuiService:GetPropertyChangedSignal("TopbarInset"), function()
 		-- upvalues: UseResult (copy), ViewportUtilModule (upval)
 		UseResult(ViewportUtilModule.screenSize:get())
 	end)
-	ReactModule.useEffect(function() --[[ Line: 64 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ViewportUtilModule (upval), UseResult (copy), WindowSize (copy), UseStateResult2 (copy)
 		local ScreenSizeConnection = ViewportUtilModule.screenSize:connect(UseResult)
-		local Connection = WindowSize:connect(function(Vector) --[[ Line: 66 ]]
+		local Connection = WindowSize:connect(function(Vector)
 			-- upvalues: UseStateResult2 (upval)
 			UseStateResult2(Vector.X.Offset / Vector.Y.Offset < 1.2)
 		end)
 		UseResult(ViewportUtilModule.screenSize:get())
 		
-		return function() --[[ Line: 70 ]]
+		return function()
 			-- upvalues: ScreenSizeConnection (copy), Connection (copy)
 			ScreenSizeConnection:disconnect()
 			Connection:disconnect()
@@ -65,7 +65,7 @@ return function(p1) --[[ Line: 37 | Named "AvatarSwitcherChromeWrapper" ]]
 		AvatarSwitcherContainer = ReactModule.createElement(AvatarSwitcherContainer, {
 			getRespawnBehaviour = SettingsHubModule.GetRespawnBehaviour,
 			respawnBehaviorChangedEvent = SettingsHubModule.RespawnBehaviourChangedEvent,
-			toggleWindow = function() --[[ Line: 82 ]]
+			toggleWindow = function()
 				-- upvalues: ServiceModule (upval), ConstantsModule (upval)
 				ServiceModule:toggleWindow(ConstantsModule.AVATAR_SWITCHER_ID)
 			end,

@@ -1,4 +1,4 @@
-﻿return function(Callback, ...) --[[ Line: 22 | Named "pipe" ]]
+﻿return function(Callback, ...)
 	local Selected = select("#", ...)
 	
 	if Selected == 0 then
@@ -6,7 +6,7 @@
 	else
 		local list = { ... }
 		
-		return function(...) --[[ Line: 28 ]]
+		return function(...)
 			-- upvalues: Callback (copy), Selected (copy), list (copy)
 			local list1 = { Callback(...) }
 			

@@ -5,7 +5,7 @@ local IsOfferExpiredModule = require(InExperienceOffers.Utils.isOfferExpired)
 local InExperienceOffersNotificationMaxExposureCount = game:DefineFastInt("InExperienceOffersNotificationMaxExposureCount", 3)
 local InExperienceOffersNotificationCooldownSeconds = game:DefineFastInt("InExperienceOffersNotificationCooldownSeconds", 86400)
 
-return function(p1, p2): boolean --[[ Line: 24 | Named "isNotificationEligible" ]]
+return function(p1, p2): boolean
 	-- upvalues: FFlagOffersRespectExpirationModule (copy), IsOfferExpiredModule (copy), InExperienceOffersNotificationMaxExposureCount (copy), InExperienceOffersNotificationCooldownSeconds (copy)
 	if p1.offerStatus ~= "AVAILABLE" then
 		return false

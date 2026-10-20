@@ -9,11 +9,11 @@ local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFon
 local UseTextSizeOffsetFunction = require(Parent.UIBlox).Core.Style.useTextSizeOffset
 local GetGameTileMetadataFontModule = require(GameTile.Footer.getGameTileMetadataFont)
 
-local function _(p1, p2) --[[ Line: 46 ]]
+local function _(p1, p2)
 	return p1 * (p2 or 1)
 end
 
-return function(Frame: Frame) --[[ Line: 50 | Named "GridTileTextFooter" ]]
+return function(Frame: Frame)
 	-- upvalues: UseDesignTokensFunction (copy), UseTextSizeOffsetFunction (copy), UseTokensFunction (copy), GetGameTileMetadataFontModule (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local UseTextSizeOffsetResult = UseTextSizeOffsetFunction()

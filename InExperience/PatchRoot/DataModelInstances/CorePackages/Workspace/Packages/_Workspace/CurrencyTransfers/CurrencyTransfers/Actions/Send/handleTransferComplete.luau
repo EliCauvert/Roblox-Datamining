@@ -6,7 +6,7 @@ local PromptStateModule = require(CurrencyTransfers.Enums.PromptState)
 local TransferOriginationModule = require(CurrencyTransfers.Enums.TransferOrigination)
 local GetFFlagCurrencyTransferSignalRecipientOnCompleteModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferSignalRecipientOnComplete)
 
-return function(p1) --[[ Line: 13 | Named "handleTransferComplete" ]]
+return function(p1)
 	-- upvalues: TransferOriginationModule (copy), Players (copy), MarketplaceService (copy), GetFFlagCurrencyTransferSignalRecipientOnCompleteModule (copy), PromptStateModule (copy)
 	local SetPromptStateFunction: (any) -> () = p1.setPromptState
 	local TriggerOnCloseFunction: () -> () = p1.triggerOnClose
@@ -15,7 +15,7 @@ return function(p1) --[[ Line: 13 | Named "handleTransferComplete" ]]
 		local LocalPlayer = Players.LocalPlayer
 		
 		if LocalPlayer then
-			pcall(function() --[[ Line: 21 ]]
+			pcall(function()
 				-- upvalues: MarketplaceService (upval), LocalPlayer (copy)
 				MarketplaceService:SignalRobuxTransferCompleted(LocalPlayer.UserId)
 			end)
@@ -24,7 +24,7 @@ return function(p1) --[[ Line: 13 | Named "handleTransferComplete" ]]
 			local Recipient = p1.getRecipient(false)
 			
 			if Recipient then
-				pcall(function() --[[ Line: 29 ]]
+				pcall(function()
 					-- upvalues: MarketplaceService (upval), Recipient (copy)
 					MarketplaceService:SignalRobuxTransferCompleted(Recipient.targetId)
 				end)

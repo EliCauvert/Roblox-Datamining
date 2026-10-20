@@ -4,9 +4,9 @@ local InputTypeModule = require(Parent1.Enums.InputType)
 local CryoModule = require(Parent1.Parent.Cryo)
 local _ = require(Parent.ShortcutBar.Types)
 
-local function _(p1) --[[ Line: 10 ]]
+local function _(p1)
 	-- upvalues: InputTypeModule (copy), CryoModule (copy)
-	return function(p2, _) --[[ Line: 11 ]]
+	return function(p2, _)
 		-- upvalues: p1 (copy), InputTypeModule (upval), CryoModule (upval)
 		local Icon = p2.icon
 		
@@ -19,9 +19,9 @@ local function _(p1) --[[ Line: 10 ]]
 end
 
 return {
-	filterItems = function(p1, MouseAndKeyboard) --[[ Line: 35 ]]
+	filterItems = function(p1, MouseAndKeyboard)
 		-- upvalues: CryoModule (copy), InputTypeModule (copy)
-		local FilterResult = CryoModule.List.filter(p1, function(p2, _) --[[ Line: 37 ]]
+		local FilterResult = CryoModule.List.filter(p1, function(p2, _)
 			local Icon = p2.icon
 			
 			return typeof(Icon) == "string" or typeof(Icon) == "table" and Icon.Image
@@ -30,7 +30,7 @@ return {
 		if MouseAndKeyboard then
 			assert(MouseAndKeyboard, "Assert inputType not nil at this point to silence type checker")
 			
-			return (CryoModule.List.join(FilterResult, CryoModule.List.filterMap(p1, function(p2, _) --[[ Line: 11 ]]
+			return (CryoModule.List.join(FilterResult, CryoModule.List.filterMap(p1, function(p2, _)
 				-- upvalues: MouseAndKeyboard (copy), InputTypeModule (upval), CryoModule (upval)
 				local Icon = p2.icon
 				

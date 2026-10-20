@@ -16,7 +16,7 @@ local FFlagAppNavLabelScaling = SharedFlagsModule.FFlagAppNavLabelScaling
 local FFlagShrinkAppNavBar = SharedFlagsModule.FFlagShrinkAppNavBar
 local FFlagEnableNavRailTooltipAndTruncation = SharedFlagsModule.FFlagEnableNavRailTooltipAndTruncation
 
-return ReactModule.memo(function(p1) --[[ Line: 73 | Named "AppNavItem" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseStyleFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), ControlState (copy), FFlagEnableNavRailTooltipAndTruncation (copy), UsePreferredInputFunction (copy), FFlagShrinkAppNavBar (copy), FFlagAppNavLabelScaling (copy), Input (copy), NavigationTab (copy), NavigationTabLayout (copy)
 	local Tokens = UseStyleFunction().Tokens
 	local UseLocalizationResult = UseLocalizationFunction({ labelText = p1.item.labelText })
@@ -26,7 +26,7 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "AppNavItem" ]]
 	local Binding = if FFlagShrinkAppNavBar then nil else p1.systemBarLabelTextSizeBinding.default:getBinding()
 	
 	if not FFlagShrinkAppNavBar then
-		ReactModule.useEffect(function() --[[ Line: 88 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: FFlagAppNavLabelScaling (upval), p1 (copy), UseLocalizationResult (copy), CaptionSmall (copy), Tokens (copy)
 			if FFlagAppNavLabelScaling then
 				p1.systemBarLabelTextSizeBinding.default:setTextToMaxSize(UseLocalizationResult.labelText or "", CaptionSmall.Font, Vector2.new(Tokens.Size.Size_1200, Tokens.Size.Size_1200), Tokens.FontSize.FontSize_300)
@@ -42,7 +42,7 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "AppNavItem" ]]
 	return ReactModule.createElement(NavigationTab, {
 		iconImage = p1.item.iconImage,
 		iconCheckedImage = p1.item.iconCheckedImage,
-		renderIcon = if p1.item.renderIcon then function(p2) --[[ Line: 112 ]]
+		renderIcon = if p1.item.renderIcon then function(p2)
 			-- upvalues: p1 (copy), UseStateResult (copy)
 			return p1.item.renderIcon(p2, UseStateResult)
 		end else nil,
@@ -62,7 +62,7 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "AppNavItem" ]]
 		anchorPoint = if p1.isCenterPositioned then Vector2.new(0.5, 0.5) else nil,
 		position = if p1.isCenterPositioned then UDim2.fromScale(0.5, 0.5) else nil,
 		onActivated = p1.item.onActivated,
-		onStateChanged = if p1.item.renderIcon then function(_, p2) --[[ Line: 135 ]]
+		onStateChanged = if p1.item.renderIcon then function(_, p2)
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(p2)
 		end else nil,
@@ -73,7 +73,7 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "AppNavItem" ]]
 		tooltipAlign = if FFlagEnableNavRailTooltipAndTruncation then p1.tooltipAlign else nil,
 		tooltipOffset = if FFlagEnableNavRailTooltipAndTruncation then p1.tooltipOffset else nil
 	})
-end, function(p1, p2): boolean --[[ Line: 55 | Named "arePropsEqual" ]]
+end, function(p1, p2): boolean
 	-- upvalues: CryoModule (copy), FFlagShrinkAppNavBar (copy), FFlagEnableNavRailTooltipAndTruncation (copy)
 	local IsHasLabelMatch: boolean = CryoModule.Dictionary.equals(p1.item, p2.item) and (if FFlagShrinkAppNavBar then p1.isChecked == p2.isChecked and (p1.isCenterPositioned == p2.isCenterPositioned and p1.hasLabel == p2.hasLabel) else p1.systemBarLabelTextSizeBinding == p2.systemBarLabelTextSizeBinding and (p1.isChecked == p2.isChecked and (p1.isCenterPositioned == p2.isCenterPositioned and p1.hasLabel == p2.hasLabel)))
 	

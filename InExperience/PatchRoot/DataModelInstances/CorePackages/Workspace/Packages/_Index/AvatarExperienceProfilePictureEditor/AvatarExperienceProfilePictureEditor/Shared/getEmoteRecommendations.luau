@@ -8,11 +8,11 @@ local Text = tostring(Enum.AvatarAssetType.EmoteAnimation.Value)
 
 return {
 	EMOTE_ASSET_TYPE_ID = Text,
-	buildEmoteRecommendationsUrl = function(NumItems): string --[[ Line: 34 ]]
+	buildEmoteRecommendationsUrl = function(NumItems): string
 		-- upvalues: Url (copy), Text (copy)
 		return `{Url.CATALOG_URL}v2/recommendations/user-inventory?assetTypeId={Text}&{Url:makeQueryString({ details = true, numItems = NumItems })}`
 	end,
-	parseEmoteRecommendationsResponse = function(p1) --[[ Line: 42 ]]
+	parseEmoteRecommendationsResponse = function(p1)
 		-- upvalues: NormalizeStringFunction (copy), NormalizeNumberFunction (copy)
 		local Data = if p1 then p1.data else nil
 		
@@ -36,7 +36,7 @@ return {
 		end
 		return List
 	end,
-	getEmoteRecommendationsUrl = function(p2): string --[[ Line: 65 ]]
+	getEmoteRecommendationsUrl = function(p2): string
 		-- upvalues: ConstantsModule (copy), Url (copy), Text (copy)
 		return `{Url.CATALOG_URL}v2/recommendations/user-inventory?assetTypeId={Text}&{Url:makeQueryString({
 			details = true,

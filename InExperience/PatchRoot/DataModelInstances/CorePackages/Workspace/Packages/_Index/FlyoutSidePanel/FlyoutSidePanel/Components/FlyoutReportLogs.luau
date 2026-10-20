@@ -10,7 +10,7 @@ local AppEventIngestService = require(Parent.RoactServiceTags).AppEventIngestSer
 local FlyoutContentSettingsModule = require(script.Parent.Parent.Config.FlyoutContentSettings)
 local FFlagCTAChangeMorePageFlyoutButtonText = require(Parent.SharedFlags).FFlagCTAChangeMorePageFlyoutButtonText
 
-return function(p1) --[[ Line: 22 | Named "FlyoutReportLogs" ]]
+return function(p1)
 	-- upvalues: UseRoactServiceFunction (copy), AppEventIngestService (copy), ReactModule (copy), FlyoutContentSettingsModule (copy), FlyoutAnalyticsModule (copy), UseLocalizationFunction (copy), FFlagCTAChangeMorePageFlyoutButtonText (copy), FoundationModule (copy), ButtonVariant (copy), ButtonSize (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(AppEventIngestService)
 	
@@ -24,7 +24,7 @@ return function(p1) --[[ Line: 22 | Named "FlyoutReportLogs" ]]
 		LayoutOrder = p1.layoutOrder,
 		size = ButtonSize.Large,
 		width = UDim.new(1, 0),
-		onActivated = ReactModule.useCallback(function() --[[ Line: 24 ]]
+		onActivated = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy), FlyoutContentSettingsModule (upval), FlyoutAnalyticsModule (upval), UseRoactServiceResult (copy)
 			p1.closeDrawer()
 			

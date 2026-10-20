@@ -18,13 +18,13 @@ local IconName = FoundationModule.Enums.IconName
 local UseSignalBindingFunction = SignalsReactModule.useSignalBinding
 local Signal = SignalsModule.createSignal(nil)
 
-local function noop() --[[ Line: 50 ]] end
+local function noop() end
 
 local config = {
 	affordance = FoundationModule.Enums.StateLayerAffordance.None
 }
 
-local function _(Value: number): number --[[ Line: 54 | Named "ceilToEven" ]]
+local function _(Value: number): number
 	local Ceiled = math.ceil(Value)
 	
 	if Ceiled % 2 == 1 then
@@ -33,7 +33,7 @@ local function _(Value: number): number --[[ Line: 54 | Named "ceilToEven" ]]
 	return (math.max(0, Ceiled))
 end
 
-local _ = function(p1: number): string --[[ Line: 63 | Named "builderIconSize" ]]
+local _ = function(p1: number): string
 	local Ceiled = math.ceil(p1 * 3 / 4)
 	
 	if Ceiled % 2 == 1 then
@@ -42,7 +42,7 @@ local _ = function(p1: number): string --[[ Line: 63 | Named "builderIconSize" ]
 	return (tostring((math.max(0, Ceiled))))
 end
 
-local _ = function(p1: number) --[[ Line: 67 | Named "getPresetBoltIconAttributes" ]]
+local _ = function(p1: number)
 	local config = { weight = "700" }
 	local Ceiled = math.ceil(p1 * 3 / 4)
 	
@@ -54,18 +54,18 @@ local _ = function(p1: number) --[[ Line: 67 | Named "getPresetBoltIconAttribute
 	return config
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 71 | Named "TextLineEntry" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), SignalsModule (copy), UseStableSignalModule (copy), SignalsReactModule (copy), TextChannelWindowPerfTrackerModule (copy), UseSignalBindingFunction (copy), Signal (copy), FFlagTCWTranslationSupportModule (copy), UseTranslateToggleModule (copy), FormatInlineIconModule (copy), IconName (copy), ResolveDisplayTextModule (copy), RewriteToggleModule (copy), SelectableUsernameModule (copy), TranslateHitOverlayModule (copy), noop (copy), config (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
-	local UseMemoResult = ReactModule.useMemo(function(): string --[[ Line: 76 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): string
 		-- upvalues: UseTokensResult (copy)
 		local MutedColor3 = UseTokensResult.DarkMode.Content.Muted.Color3
 		
 		return string.format("<font color=\"rgb(%d,%d,%d)\">", math.round(MutedColor3.R * 255), math.round(MutedColor3.G * 255), (math.round(MutedColor3.B * 255)))
 	end, { UseTokensResult })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 86 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), p1 (copy)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 87 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: p1 (upval)
 			local MessageId = p1.getMessageId(p2)
 			
@@ -74,11 +74,11 @@ return ReactModule.memo(function(p1) --[[ Line: 71 | Named "TextLineEntry" ]]
 	end, { p1.getMessageId, p1.getMessagesMap })
 	local UseStableSignalModuleResult, UseStableSignalModuleResult2 = UseStableSignalModule(false)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.getMessageId)
-	ReactModule.useEffect(function() --[[ Line: 101 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStableSignalModuleResult2 (copy)
 		UseStableSignalModuleResult2(false)
 	end, { UseSignalStateResult, UseStableSignalModuleResult2 })
-	ReactModule.useEffect(function() --[[ Line: 104 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult (copy), TextChannelWindowPerfTrackerModule (upval)
 		if UseSignalStateResult then
 			TextChannelWindowPerfTrackerModule.finishMessageIntervals(UseSignalStateResult)
@@ -94,12 +94,12 @@ return ReactModule.memo(function(p1) --[[ Line: 71 | Named "TextLineEntry" ]]
 	local UseSignalStateResult3 = SignalsReactModule.useSignalState(p1.getLatestMessageId or Signal)
 	local IsUseSignalStateResultMatch: boolean = UseSignalStateResult ~= nil and UseSignalStateResult == UseSignalStateResult3
 	local ReportLatestUsernameFunction = p1.reportLatestUsername
-	ReactModule.useEffect(function() --[[ Line: 126 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ReportLatestUsernameFunction (copy), IsUseSignalStateResultMatch (copy), UseRefResult (copy)
 		if ReportLatestUsernameFunction == nil or not IsUseSignalStateResultMatch then return end
 		ReportLatestUsernameFunction(UseRefResult.current)
 		
-		return function() --[[ Line: 131 ]]
+		return function()
 			-- upvalues: ReportLatestUsernameFunction (upval)
 			ReportLatestUsernameFunction(nil)
 		end
@@ -110,7 +110,7 @@ return ReactModule.memo(function(p1) --[[ Line: 71 | Named "TextLineEntry" ]]
 	local UseTranslateToggleModuleResult = if FFlagTCWTranslationSupportModule then UseTranslateToggleModule(UseSignalStateResult2, UseSignalStateResult, p1.isTranslationSettingEnabled == true) else nil
 	local IsOffered = UseTranslateToggleModuleResult ~= nil and UseTranslateToggleModuleResult.isOffered
 	local ShouldShowTranslation = UseTranslateToggleModuleResult ~= nil and UseTranslateToggleModuleResult.shouldShowTranslation
-	UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 143 ]]
+	UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult2 (ref), FormatInlineIconModule (upval), IconName (upval), UseTokensResult (copy)
 		if not UseSignalStateResult2 or not UseSignalStateResult2.presetId or UseSignalStateResult2.presetId == "" then
 			return ""
@@ -126,7 +126,7 @@ return ReactModule.memo(function(p1) --[[ Line: 71 | Named "TextLineEntry" ]]
 		
 		return FormatInlineIconModule(LightningBolt, config)
 	end, { UseSignalStateResult2, UseTokensResult })
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 153 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult2 (ref), FormatInlineIconModule (upval), UseTokensResult (copy)
 		if not UseSignalStateResult2 or not UseSignalStateResult2.iconName or UseSignalStateResult2.iconName == "" then
 			return ""
@@ -142,7 +142,7 @@ return ReactModule.memo(function(p1) --[[ Line: 71 | Named "TextLineEntry" ]]
 		
 		return FormatInlineIconModule(IconName, config)
 	end, { UseSignalStateResult2, UseTokensResult })
-	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 167 ]]
+	local UseMemoResult4 = ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult2 (ref), FFlagTCWTranslationSupportModule (upval), ResolveDisplayTextModule (upval), IsOffered (copy), ShouldShowTranslation (copy), UseMemoResult2 (ref), UseMemoResult3 (copy), UseMemoResult (copy)
 		if not UseSignalStateResult2 then
 			return ""
@@ -163,14 +163,14 @@ return ReactModule.memo(function(p1) --[[ Line: 71 | Named "TextLineEntry" ]]
 		ShouldShowTranslation, IsOffered
 	})
 	local HasUseSignalStateResult = UseSignalStateResult2 ~= nil
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 195 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStableSignalModuleResult2 (copy), UseStableSignalModuleResult (copy)
 		UseStableSignalModuleResult2(not UseStableSignalModuleResult())
 	end, {
 		UseStableSignalModuleResult,
 		UseStableSignalModuleResult2
 	})
-	local UseMemoResult5 = ReactModule.useMemo(function() --[[ Line: 200 ]]
+	local UseMemoResult5 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		return if p1.fontFace then { Font = p1.fontFace } else nil
 	end, { p1.fontFace or false })

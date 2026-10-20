@@ -14,12 +14,12 @@ local FFlagTokenizeUnibarConstantsWithStyleProvider = require(script.Parent.Pare
 local ImageSetLabel = require(CorePackages.Packages.UIBlox).Core.ImageSet.ImageSetLabel
 local PartyMicVoiceIndicatorFrameBuffer = game:DefineFastInt("PartyMicVoiceIndicatorFrameBuffer", 3)
 
-local function getLoadingIndicatorIcon(p1, p2, p3, Current, p4) --[[ Line: 28 ]]
+local function getLoadingIndicatorIcon(p1, p2, p3, Current, p4)
 	-- upvalues: VoiceChatModule (copy)
 	return if p3 and p1 and not p2 then if Current then VoiceChatModule.Utils.GetIcon("Unmuted", "MicLight", p4) else VoiceChatModule.Utils.GetIcon("Unmuted0", "MicLight") else VoiceChatModule.Utils.GetIcon("Muted", "MicLight")
 end
 
-function PartyMicIcon(p1) --[[ Line: 44 ]]
+function PartyMicIcon(p1)
 	-- upvalues: Players (copy), UseIsVoiceConnectedFunction (copy), UseParticipantFunction (copy), UseIsActiveParticipantFunction (copy), ReactModule (copy), UseIsParticipantMutedFunction (copy), HttpService (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), PartyMicVoiceIndicatorFrameBuffer (copy), RunService (copy), getLoadingIndicatorIcon (copy), ImageSetLabel (copy)
 	local UserId = Players and Players.LocalPlayer and Players.LocalPlayer.UserId or -1
 	local UseIsVoiceConnectedResult = UseIsVoiceConnectedFunction()
@@ -29,22 +29,22 @@ function PartyMicIcon(p1) --[[ Line: 44 ]]
 	local IsUseIsParticipantMutedResult = UseIsParticipantMutedFunction(UserId) == true
 	local UseRefResult1 = ReactModule.useRef(0)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 53 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: HttpService (upval)
 		return HttpService:GenerateGUID()
 	end, {})
 	local ICONSIZE = if FFlagTokenizeUnibarConstantsWithStyleProvider then UnibarStyle.use().ICON_SIZE else 36
-	ReactModule.useEffect(function() --[[ Line: 66 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseParticipantResult (copy), p1 (copy)
 		if UseParticipantResult then
 			p1.isLocalPlayerMutedSignal:fire(UseParticipantResult.isMuted)
 		end
 	end, { UseParticipantResult })
-	ReactModule.useEffect(function() --[[ Line: 72 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseIsVoiceConnectedResult (copy)
 		p1.isVoiceConnectedSignal:fire(UseIsVoiceConnectedResult)
 	end, { UseIsVoiceConnectedResult })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 76 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), PartyMicVoiceIndicatorFrameBuffer (upval), UseStateResult2 (copy)
 		if UseRefResult.current then
 			if PartyMicVoiceIndicatorFrameBuffer < UseRefResult1.current then
@@ -57,15 +57,15 @@ function PartyMicIcon(p1) --[[ Line: 44 ]]
 			end
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 87 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseIsActiveParticipantResult (copy)
 		UseRefResult.current = UseIsActiveParticipantResult
 	end, { UseIsActiveParticipantResult })
-	ReactModule.useEffect(function() --[[ Line: 91 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: RunService (upval), UseMemoResult (copy), UseResult (copy)
 		RunService:BindToRenderStep(UseMemoResult, 1, UseResult)
 		
-		return function() --[[ Line: 94 ]]
+		return function()
 			-- upvalues: RunService (upval), UseMemoResult (upval)
 			RunService:UnbindFromRenderStep(UseMemoResult)
 		end
@@ -82,7 +82,7 @@ function PartyMicIcon(p1) --[[ Line: 44 ]]
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
 			Size = UDim2.fromOffset(ICONSIZE, ICONSIZE),
-			Image = ReactModule.useMemo(function() --[[ Line: 99 ]]
+			Image = ReactModule.useMemo(function()
 				-- upvalues: getLoadingIndicatorIcon (upval), UseParticipantResult (copy), IsUseIsParticipantMutedResult (copy), UseIsVoiceConnectedResult (copy), UseIsActiveParticipantResult (copy), UseStateResult (copy)
 				return getLoadingIndicatorIcon(UseParticipantResult, IsUseIsParticipantMutedResult, UseIsVoiceConnectedResult, UseIsActiveParticipantResult, UseStateResult)
 			end, {

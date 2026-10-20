@@ -17,7 +17,7 @@ local config = {
 local TopicInfoModelModule = {}
 TopicInfoModelModule.__index = TopicInfoModelModule
 
-function TopicInfoModelModule.new() --[[ Line: 37 ]]
+function TopicInfoModelModule.new()
 	-- upvalues: DiscoveryTypesModule (copy), TopicInfoModelModule (copy)
 	local config = { dataSource = DiscoveryTypesModule.DataSourceType.Unknown }
 	setmetatable(config, TopicInfoModelModule)
@@ -25,7 +25,7 @@ function TopicInfoModelModule.new() --[[ Line: 37 ]]
 	return config
 end
 
-function TopicInfoModelModule.mockFromExploreJsonData(SortId, TreatmentType, p1) --[[ Line: 47 ]]
+function TopicInfoModelModule.mockFromExploreJsonData(SortId, TreatmentType, p1)
 	-- upvalues: TopicInfoModelModule (copy)
 	return (TopicInfoModelModule.fromExploreJsonData({
 		sortDisplayName = "",
@@ -37,12 +37,12 @@ function TopicInfoModelModule.mockFromExploreJsonData(SortId, TreatmentType, p1)
 	}))
 end
 
-function TopicInfoModelModule.mockFromOmniApi(TopicId) --[[ Line: 60 ]]
+function TopicInfoModelModule.mockFromOmniApi(TopicId)
 	-- upvalues: TopicInfoModelModule (copy)
 	return (TopicInfoModelModule.fromOmniApi({ topic = "", treatmentType = "", topicId = TopicId }))
 end
 
-function TopicInfoModelModule:fromExploreJsonData() --[[ Line: 69 ]]
+function TopicInfoModelModule:fromExploreJsonData()
 	-- upvalues: TopicInfoModelModule (copy), DiscoveryTypesModule (copy), FFlagEnableTopSongsSort (copy), config (copy)
 	local NewTopicInfoModel = TopicInfoModelModule.new()
 	NewTopicInfoModel.dataSource = DiscoveryTypesModule.DataSourceType.ExploreApi
@@ -72,7 +72,7 @@ function TopicInfoModelModule:fromExploreJsonData() --[[ Line: 69 ]]
 	return NewTopicInfoModel
 end
 
-function TopicInfoModelModule:fromOmniApi() --[[ Line: 101 ]]
+function TopicInfoModelModule:fromOmniApi()
 	-- upvalues: TopicInfoModelModule (copy), DiscoveryTypesModule (copy)
 	local NewTopicInfoModel = TopicInfoModelModule.new()
 	NewTopicInfoModel.dataSource = DiscoveryTypesModule.DataSourceType.DiscoveryApi
@@ -89,7 +89,7 @@ function TopicInfoModelModule:fromOmniApi() --[[ Line: 101 ]]
 end
 
 if FFlagSearchOmniAutocompletePage then
-	function TopicInfoModelModule:fromOmniAutocompleteApi() --[[ Line: 118 ]]
+	function TopicInfoModelModule:fromOmniAutocompleteApi()
 		-- upvalues: TopicInfoModelModule (copy), DiscoveryTypesModule (copy)
 		local NewTopicInfoModel = TopicInfoModelModule.new()
 		NewTopicInfoModel.dataSource = DiscoveryTypesModule.DataSourceType.OmniAutocompleteApi
@@ -103,11 +103,11 @@ if FFlagSearchOmniAutocompletePage then
 		return NewTopicInfoModel
 	end
 end
-function TopicInfoModelModule.makeTopSearchTopicKey(SearchUuid, TopicId): string --[[ Line: 133 ]]
+function TopicInfoModelModule.makeTopSearchTopicKey(SearchUuid, TopicId): string
 	return `{SearchUuid}_{TopicId}`
 end
 
-function TopicInfoModelModule:fromTopSearchApi(SearchUuid) --[[ Line: 137 ]]
+function TopicInfoModelModule:fromTopSearchApi(SearchUuid)
 	-- upvalues: TopicInfoModelModule (copy), DiscoveryTypesModule (copy)
 	local NewTopicInfoModel = TopicInfoModelModule.new()
 	NewTopicInfoModel.dataSource = DiscoveryTypesModule.DataSourceType.SearchApi
@@ -121,22 +121,22 @@ function TopicInfoModelModule:fromTopSearchApi(SearchUuid) --[[ Line: 137 ]]
 	return NewTopicInfoModel
 end
 
-function TopicInfoModelModule.makeSearchTopicKey(p1, p2) --[[ Line: 151 ]]
+function TopicInfoModelModule.makeSearchTopicKey(p1, p2)
 	-- upvalues: TopicInfoModelModule (copy)
 	return TopicInfoModelModule.makeTopSearchTopicKey(p1, p2)
 end
 
-function TopicInfoModelModule.fromSearchApi(p1, SearchUuid) --[[ Line: 155 ]]
+function TopicInfoModelModule.fromSearchApi(p1, SearchUuid)
 	-- upvalues: TopicInfoModelModule (copy)
 	return TopicInfoModelModule.fromTopSearchApi(p1, SearchUuid)
 end
 
-function TopicInfoModelModule:isOmni(): boolean --[[ Line: 159 ]]
+function TopicInfoModelModule:isOmni(): boolean
 	-- upvalues: DiscoveryTypesModule (copy)
 	return self.dataSource == DiscoveryTypesModule.DataSourceType.DiscoveryApi
 end
 
-function TopicInfoModelModule:isSponsored(): boolean --[[ Line: 167 ]]
+function TopicInfoModelModule:isSponsored(): boolean
 	return self.topicId == "400000000" or self.gameSetTypeId == "27"
 end
 

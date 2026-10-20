@@ -6,7 +6,7 @@ local _ = require(AvatarViewport.Types)
 local ViewportInputTypesModule = require(AvatarViewport.ViewportInputTypes)
 local ViewportUserInputSubscriptionsModule = require(AvatarViewport.ViewportUserInputSubscriptions)
 
-return function(p1) --[[ Line: 36 | Named "useViewportOrbitInteractions" ]]
+return function(p1)
 	-- upvalues: GetFIntAvatarViewportDegreesPerPixelModule (copy), CameraMathModule (copy), ReactModule (copy), ViewportUserInputSubscriptionsModule (copy), ViewportInputTypesModule (copy)
 	local NoEnabled = p1.enabled == nil or p1.enabled
 	local DegreesPerPixel = p1.degreesPerPixel or GetFIntAvatarViewportDegreesPerPixelModule()
@@ -28,11 +28,11 @@ return function(p1) --[[ Line: 36 | Named "useViewportOrbitInteractions" ]]
 	UseRefResult9.current = p1.onYRotDegChanged
 	UseRefResult10.current = p1.onDistanceScaleChanged
 	UseRefResult11.current = p1.onCameraUpdateRequested
-	ReactModule.useEffect(function() --[[ Line: 63 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult8 (copy), CameraMathModule (upval), p1 (copy)
 		UseRefResult8.current = CameraMathModule.clampDistanceScale(p1.distanceScale)
 	end, { p1.distanceScale })
-	local UseResult = ReactModule.useCallback(function(Current, p2) --[[ Line: 68 ]]
+	local UseResult = ReactModule.useCallback(function(Current, p2)
 		-- upvalues: UseRefResult (copy), UseStateResult2 (copy), UseRefResult9 (copy), UseRefResult11 (copy)
 		UseRefResult.current = Current
 		
@@ -48,7 +48,7 @@ return function(p1) --[[ Line: 36 | Named "useViewportOrbitInteractions" ]]
 	end, {})
 	local UseRefResult12 = ReactModule.useRef(ClampYRotDegResult)
 	local UseRefResult13 = ReactModule.useRef(nil)
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 87 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UseRefResult12 (copy), UseStateResult2 (copy), UseRefResult9 (copy)
 		local Current = UseRefResult.current
 		
@@ -61,13 +61,13 @@ return function(p1) --[[ Line: 36 | Named "useViewportOrbitInteractions" ]]
 		end
 	end, {})
 	UseRefResult13.current = UseResult1
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 100 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: CameraMathModule (upval), p1 (copy), UseRefResult12 (copy), UseResult (copy)
 		local ClampYRotDegResult = CameraMathModule.clampYRotDeg(p2 or (p1.initialYRotDeg or 0))
 		UseRefResult12.current = ClampYRotDegResult
 		UseResult(ClampYRotDegResult, { syncReactState = true })
 	end, { UseResult, p1.initialYRotDeg })
-	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 106 ]]
+	local UseResult3 = ReactModule.useCallback(function(p2)
 		-- upvalues: CameraMathModule (upval), UseRefResult8 (copy), UseRefResult10 (copy), UseRefResult11 (copy)
 		local AdjustDistanceScaleByZoomGestureResult = CameraMathModule.adjustDistanceScaleByZoomGesture(UseRefResult8.current, p2)
 		
@@ -81,7 +81,7 @@ return function(p1) --[[ Line: 36 | Named "useViewportOrbitInteractions" ]]
 			UseRefResult11.current()
 		end
 	end, {})
-	local UseResult4 = ReactModule.useCallback(function(p2) --[[ Line: 121 ]]
+	local UseResult4 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult4 (copy), UseRefResult1 (copy), NoEnabled (copy), UseRefResult3 (copy), CameraMathModule (upval), UseRefResult (copy), DegreesPerPixel (copy), UseResult (copy)
 		if UseRefResult4.current > 1 or not UseRefResult1.current or not NoEnabled then return end
 		local Current = UseRefResult3.current
@@ -96,7 +96,7 @@ return function(p1) --[[ Line: 36 | Named "useViewportOrbitInteractions" ]]
 			UseRefResult3.current = p2.Position
 		end
 	end, { NoEnabled, DegreesPerPixel, UseResult })
-	local UseResult5 = ReactModule.useCallback(function(p2) --[[ Line: 140 ]]
+	local UseResult5 = ReactModule.useCallback(function(p2)
 		-- upvalues: NoEnabled (copy), CameraMathModule (upval), UseRefResult (copy), UseResult (copy)
 		if NoEnabled then
 			UseResult(CameraMathModule.clampYRotDeg(UseRefResult.current + p2), { syncReactState = false, notifyParent = false })
@@ -104,7 +104,7 @@ return function(p1) --[[ Line: 36 | Named "useViewportOrbitInteractions" ]]
 			return
 		end
 	end, { NoEnabled, UseResult })
-	ReactModule.useEffect(function() --[[ Line: 148 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), UseResult2 (copy), ClampYRotDegResult (copy)
 		if not UseRefResult1.current then
 			UseResult2(ClampYRotDegResult)
@@ -112,9 +112,9 @@ return function(p1) --[[ Line: 36 | Named "useViewportOrbitInteractions" ]]
 			return
 		end
 	end, { ClampYRotDegResult, UseResult2 })
-	ReactModule.useEffect(function() --[[ Line: 155 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ViewportUserInputSubscriptionsModule (upval), UseRefResult2 (copy), ViewportInputTypesModule (upval), UseResult4 (copy), UseRefResult1 (copy), UseRefResult4 (copy), UseRefResult6 (copy), UseRefResult3 (copy), UseRefResult13 (copy), UseRefResult5 (copy)
-		local ConnectInputChangedResult = ViewportUserInputSubscriptionsModule.connectInputChanged(function(Current) --[[ Line: 156 ]]
+		local ConnectInputChangedResult = ViewportUserInputSubscriptionsModule.connectInputChanged(function(Current)
 			-- upvalues: UseRefResult2 (upval), ViewportInputTypesModule (upval), UseResult4 (upval), UseRefResult1 (upval), UseRefResult4 (upval), UseRefResult6 (upval)
 			if UseRefResult2.current then
 				if ViewportInputTypesModule.isMouseMovement(Current) then
@@ -125,7 +125,7 @@ return function(p1) --[[ Line: 36 | Named "useViewportOrbitInteractions" ]]
 				UseResult4(Current)
 			end
 		end)
-		local ConnectInputEndedResult = ViewportUserInputSubscriptionsModule.connectInputEnded(function(p2) --[[ Line: 176 ]]
+		local ConnectInputEndedResult = ViewportUserInputSubscriptionsModule.connectInputEnded(function(p2)
 			-- upvalues: ViewportInputTypesModule (upval), UseRefResult2 (upval), UseRefResult1 (upval), UseRefResult3 (upval), UseRefResult13 (upval), UseRefResult5 (upval), UseRefResult4 (upval), UseRefResult6 (upval)
 			if ViewportInputTypesModule.isPrimaryPointerEnded(p2) then
 				if not UseRefResult2.current then return end
@@ -160,7 +160,7 @@ return function(p1) --[[ Line: 36 | Named "useViewportOrbitInteractions" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 211 ]]
+		return function()
 			-- upvalues: ConnectInputChangedResult (copy), ConnectInputEndedResult (copy), UseRefResult2 (upval), UseRefResult1 (upval), UseRefResult3 (upval), UseRefResult4 (upval), UseRefResult5 (upval), UseRefResult6 (upval)
 			ConnectInputChangedResult:Disconnect()
 			ConnectInputEndedResult:Disconnect()
@@ -182,7 +182,7 @@ return function(p1) --[[ Line: 36 | Named "useViewportOrbitInteractions" ]]
 		applyYawDelta = UseResult5,
 		applyZoomGesture = UseResult3,
 		inputHandlers = {
-			onInputBegan = ReactModule.useCallback(function(_, Current) --[[ Line: 250 ]]
+			onInputBegan = ReactModule.useCallback(function(_, Current)
 				-- upvalues: NoEnabled (copy), ViewportInputTypesModule (upval), UseRefResult2 (copy), UseRefResult1 (copy), UseRefResult3 (copy), UseRefResult5 (copy), UseRefResult4 (copy), UseRefResult6 (copy)
 				if not NoEnabled then return end
 				if ViewportInputTypesModule.isPrimaryPointerBegan(Current) then
@@ -209,7 +209,7 @@ return function(p1) --[[ Line: 36 | Named "useViewportOrbitInteractions" ]]
 					UseRefResult3.current = Current.Position
 				end
 			end, { NoEnabled }),
-			onInputChanged = ReactModule.useCallback(function(_, p2) --[[ Line: 288 ]]
+			onInputChanged = ReactModule.useCallback(function(_, p2)
 				-- upvalues: ViewportInputTypesModule (upval), UseResult3 (copy), UseRefResult2 (copy), UseRefResult1 (copy), UseRefResult4 (copy), UseResult4 (copy)
 				if ViewportInputTypesModule.isMouseWheel(p2) then
 					UseResult3(p2.Position.Z)
@@ -223,7 +223,7 @@ return function(p1) --[[ Line: 36 | Named "useViewportOrbitInteractions" ]]
 					return
 				end
 			end, { UseResult4, UseResult3 }),
-			onInputEnded = ReactModule.useCallback(function(_, p2) --[[ Line: 308 ]]
+			onInputEnded = ReactModule.useCallback(function(_, p2)
 				-- upvalues: ViewportInputTypesModule (upval), UseRefResult2 (copy), UseRefResult1 (copy), UseRefResult3 (copy), UseRefResult13 (copy)
 				if ViewportInputTypesModule.isPrimaryPointerEnded(p2) then
 					UseRefResult2.current = false
@@ -235,7 +235,7 @@ return function(p1) --[[ Line: 36 | Named "useViewportOrbitInteractions" ]]
 					end
 				end
 			end, {}),
-			onTouchPinch = ReactModule.useCallback(function(_, Entry, _, _, UserInputState) --[[ Line: 224 ]]
+			onTouchPinch = ReactModule.useCallback(function(_, Entry, _, _, UserInputState)
 				-- upvalues: NoEnabled (copy), UseRefResult7 (copy), UseRefResult1 (copy), UseRefResult6 (copy), UseRefResult3 (copy), UseResult3 (copy), PinchDeltaToZoomDelta (copy)
 				if not NoEnabled or #Entry < 2 then return end
 				if UserInputState == Enum.UserInputState.Begin then

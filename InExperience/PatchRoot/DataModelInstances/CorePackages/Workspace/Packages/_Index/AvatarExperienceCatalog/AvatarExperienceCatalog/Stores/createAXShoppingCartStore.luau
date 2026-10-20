@@ -19,7 +19,7 @@ local CreateComputedFunction = SignalsModule.createComputed
 local GetItemPurchaseActionTypeFunction = AvatarExperienceCommonModule.Utils.getItemPurchaseActionType
 local ItemPurchaseActionTypeEnum = AvatarExperienceCommonModule.Enums.ItemPurchaseActionTypeEnum
 
-local function _(p1): string? --[[ Line: 28 | Named "getItemRestrictionFromItemData" ]]
+local function _(p1): string?
 	-- upvalues: ItemTileEnums (copy)
 	local TileRestrictionsMap = if p1 then p1.tileRestrictionsMap else nil
 	
@@ -33,7 +33,7 @@ local function _(p1): string? --[[ Line: 28 | Named "getItemRestrictionFromItemD
 	return nil
 end
 
-local function getItemCartData(ItemCartData, p1) --[[ Line: 118 ]]
+local function getItemCartData(ItemCartData, p1)
 	-- upvalues: Constants (copy), FFlagAXMISWithOffers (copy), FFlagAXMISSmallUIChanges (copy), PurchaseItemsErrorStatusMapModule (copy), TutilsModule (copy), GetItemPurchaseActionTypeFunction (copy), ItemPurchaseActionTypeEnum (copy), FFlagAXDurablesForMIS (copy), ItemTileEnums (copy), FFlagAXGifting (copy)
 	if ItemCartData.itemId == Constants.AVATAR_BLOCKY_DEFAULT_BUNDLE_ID then
 		return {
@@ -109,7 +109,7 @@ local function getItemCartData(ItemCartData, p1) --[[ Line: 118 ]]
 	}
 end
 
-local _ = function(p2, List): boolean --[[ Line: 223 | Named "areCartItemsDifferent" ]]
+local _ = function(p2, List): boolean
 	-- upvalues: TutilsModule (copy)
 	if TutilsModule.fieldCount(p2) ~= TutilsModule.fieldCount(List) then
 		return true
@@ -122,7 +122,7 @@ local _ = function(p2, List): boolean --[[ Line: 223 | Named "areCartItemsDiffer
 	return false
 end
 
-return function() --[[ Line: 238 | Named "createAXShoppingCartStore" ]]
+return function()
 	-- upvalues: CreateSignalFunction (copy), FFlagAXMISWithBlackbird (copy), CreateComputedFunction (copy), PurchaseItemsErrorStatusMapModule (copy), TutilsModule (copy), GetTryOnItemReducerKeyFunction (copy), getItemCartData (copy), CryoModule (copy), FFlagAXDurablesForMIS (copy)
 	local Signal, Signal2 = CreateSignalFunction({})
 	local Signal1, Signal2_1 = CreateSignalFunction(0)
@@ -132,12 +132,12 @@ return function() --[[ Line: 238 | Named "createAXShoppingCartStore" ]]
 	if FFlagAXMISWithBlackbird then
 		Callback, Callback1 = CreateSignalFunction({})
 	end
-	local Computed = if FFlagAXMISWithBlackbird then CreateComputedFunction(function(p3) --[[ Line: 251 ]]
+	local Computed = if FFlagAXMISWithBlackbird then CreateComputedFunction(function(p3)
 		-- upvalues: Callback (ref)
 		return Callback(p3)
 	end) else nil
 	
-	local function updateItemPrice(p3, p4, PriceInRobux, SelectedTimedOptionDays) --[[ Line: 454 ]]
+	local function updateItemPrice(p3, p4, PriceInRobux, SelectedTimedOptionDays)
 		-- upvalues: FFlagAXDurablesForMIS (upval), Signal (copy), GetTryOnItemReducerKeyFunction (upval), Signal2 (copy), CryoModule (upval)
 		if not FFlagAXDurablesForMIS then return end
 		local SignalResult = Signal(false)
@@ -155,7 +155,7 @@ return function() --[[ Line: 238 | Named "createAXShoppingCartStore" ]]
 	end
 	
 	return {
-		getCanPurchase = CreateComputedFunction(function(p3): boolean --[[ Line: 283 ]]
+		getCanPurchase = CreateComputedFunction(function(p3): boolean
 			-- upvalues: Signal (copy), PurchaseItemsErrorStatusMapModule (upval), TutilsModule (upval)
 			local SignalResult = Signal(p3)
 			local Count = 0
@@ -170,18 +170,18 @@ return function() --[[ Line: 238 | Named "createAXShoppingCartStore" ]]
 			end
 			return Count ~= TutilsModule.fieldCount(SignalResult)
 		end),
-		getErroredItemCount = CreateComputedFunction(function(p4) --[[ Line: 246 ]]
+		getErroredItemCount = CreateComputedFunction(function(p4)
 			-- upvalues: Signal1 (copy)
 			return Signal1(p4)
 		end),
-		getItems = CreateComputedFunction(function(p4) --[[ Line: 256 ]]
+		getItems = CreateComputedFunction(function(p4)
 			-- upvalues: Signal (copy), PurchaseItemsErrorStatusMapModule (upval)
 			local List = {}
 			
 			for _, value in Signal(p4) do
 				table.insert(List, value)
 			end
-			table.sort(List, function(A, B): boolean --[[ Line: 265 ]]
+			table.sort(List, function(A, B): boolean
 				-- upvalues: PurchaseItemsErrorStatusMapModule (upval)
 				return (A.status ~= PurchaseItemsErrorStatusMapModule.ALREADY_OWNED or B.status == PurchaseItemsErrorStatusMapModule.ALREADY_OWNED) and (B.status == PurchaseItemsErrorStatusMapModule.ALREADY_OWNED and A.status ~= PurchaseItemsErrorStatusMapModule.ALREADY_OWNED or B.ordering < A.ordering)
 			end)
@@ -189,7 +189,7 @@ return function() --[[ Line: 238 | Named "createAXShoppingCartStore" ]]
 			return List
 		end, TutilsModule.deepEqual),
 		getDiscounts = if FFlagAXMISWithBlackbird then Computed else nil,
-		getPurchasableItemsTotalPriceInRobux = CreateComputedFunction(function(p5): number --[[ Line: 317 ]]
+		getPurchasableItemsTotalPriceInRobux = CreateComputedFunction(function(p5): number
 			-- upvalues: Signal (copy), PurchaseItemsErrorStatusMapModule (upval)
 			local NewPriceInRobux = 0
 			
@@ -200,7 +200,7 @@ return function() --[[ Line: 238 | Named "createAXShoppingCartStore" ]]
 			end
 			return NewPriceInRobux
 		end),
-		getPurchasableItemsTotalOriginalPriceInRobux = CreateComputedFunction(function(p6): number --[[ Line: 329 ]]
+		getPurchasableItemsTotalOriginalPriceInRobux = CreateComputedFunction(function(p6): number
 			-- upvalues: Signal (copy), PurchaseItemsErrorStatusMapModule (upval)
 			local NewOriginalPrice = 0
 			local v1 = nil
@@ -234,7 +234,7 @@ return function() --[[ Line: 238 | Named "createAXShoppingCartStore" ]]
 			end
 			return NewOriginalPrice
 		end),
-		syncFromTryOns = function(List, p7) --[[ Line: 370 ]]
+		syncFromTryOns = function(List, p7)
 			-- upvalues: Signal (copy), GetTryOnItemReducerKeyFunction (upval), getItemCartData (upval), CryoModule (upval), FFlagAXMISWithBlackbird (upval), Callback1 (ref), TutilsModule (upval), Signal2 (copy), Signal2_1 (copy)
 			local SignalResult = Signal(false)
 			local JoinResults = {}
@@ -273,7 +273,7 @@ return function() --[[ Line: 238 | Named "createAXShoppingCartStore" ]]
 				Signal2_1(0)
 			end
 		end,
-		updateCartFromPurchaseResponse = function(p8) --[[ Line: 404 ]]
+		updateCartFromPurchaseResponse = function(p8)
 			-- upvalues: Signal (copy), PurchaseItemsErrorStatusMapModule (upval), CryoModule (upval), Signal2 (copy), Signal2_1 (copy)
 			local JoinResults = {}
 			local BoughtItems = {}

@@ -14,11 +14,11 @@ local CoreScriptsAdsLabelWhyThisAd = RobloxTranslatorModule:FormatByKey("CoreScr
 local CoreScriptsAdsActionClose = RobloxTranslatorModule:FormatByKey("CoreScripts.Ads.Action.Close")
 local InteractiveAlert1 = RoactModule.Component:extend("InteractiveAlert")
 
-function InteractiveAlert1.init(p1) --[[ Line: 28 ]]
+function InteractiveAlert1.init(p1)
 	p1.state = { animating = false, screenSize = Vector2.new(0, 0) }
 end
 
-function InteractiveAlert1.renderWithStyle(p1, _) --[[ Line: 35 ]]
+function InteractiveAlert1.renderWithStyle(p1, _)
 	-- upvalues: ButtonType (copy), CoreScriptsAdsActionClose (copy), RoactModule (copy), InteractiveAlert (copy), CoreScriptsAdsLabelWhyThisAd (copy)
 	return RoactModule.createFragment({
 		Frame = RoactModule.createElement("Frame", {
@@ -28,7 +28,7 @@ function InteractiveAlert1.renderWithStyle(p1, _) --[[ Line: 35 ]]
 			Size = UDim2.fromScale(1, 1),
 			Position = UDim2.fromScale(0.5, 0.5),
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			[RoactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 55 ]]
+			[RoactModule.Change.AbsoluteSize] = function(Frame)
 				-- upvalues: p1 (copy)
 				p1:setState({ screenSize = Frame.AbsoluteSize })
 			end
@@ -43,7 +43,7 @@ function InteractiveAlert1.renderWithStyle(p1, _) --[[ Line: 35 ]]
 							isDefaultChild = true,
 							buttonType = ButtonType.PrimarySystem,
 							props = {
-								onActivated = function() --[[ Line: 39 ]]
+								onActivated = function()
 									-- upvalues: p1 (copy)
 									p1.props.handler:hidePrompt()
 								end,
@@ -57,11 +57,11 @@ function InteractiveAlert1.renderWithStyle(p1, _) --[[ Line: 35 ]]
 	})
 end
 
-function InteractiveAlert1.render(p1) --[[ Line: 76 ]]
+function InteractiveAlert1.render(p1)
 	return p1:renderWithStyle(p1.props.style)
 end
 
-return function(p1) --[[ Line: 81 ]]
+return function(p1)
 	-- upvalues: UseStyle (copy), CryoModule (copy), RoactModule (copy), CoreScriptsRootProvider (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), InteractiveAlert1 (copy)
 	return RoactModule.createElement(CoreScriptsRootProvider, {}, {
 		FocusNavigationCoreScriptsWrapper = RoactModule.createElement(FocusRoot, {

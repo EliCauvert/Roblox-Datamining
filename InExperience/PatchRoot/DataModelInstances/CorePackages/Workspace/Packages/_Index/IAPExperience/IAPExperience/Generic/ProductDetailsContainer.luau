@@ -11,7 +11,7 @@ local _ = require(IAPExperience.ProductPurchase.PricingTypes)
 local _ = require(IAPExperience.Enums.VirtualItemBadgeType)
 local FFlagLuaAppsEnablePromptVIPServerPurchase = require(Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 
-local function _(p1): boolean --[[ Line: 62 | Named "itemPriceHasDiscountBreakdown" ]]
+local function _(p1): boolean
 	if p1 then
 		local BasePriceInRobux = p1.basePriceInRobux
 		local PriceInRobux = p1.priceInRobux
@@ -22,7 +22,7 @@ local function _(p1): boolean --[[ Line: 62 | Named "itemPriceHasDiscountBreakdo
 	end
 end
 
-return function(p1) --[[ Line: 73 | Named "ProductDetailsContainer" ]]
+return function(p1)
 	-- upvalues: MultiItemPriceShowsDiscountAccordionModule (copy), UnifiedPurchaseModalTypeEnumModule (copy), ReactModule (copy), View (copy), UnifiedProductDetailsModule (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), DiscountSummaryModule (copy), PriceSummaryV2Module (copy)
 	local ItemPrice = p1.product and p1.product.itemPrice
 	local v1 = nil

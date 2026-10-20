@@ -14,22 +14,22 @@ local DeferPlayerInfoRequests = game:DefineFastFlag("DeferPlayerInfoRequests", f
 local PlayerIconInfoStore = require(CorePackages.Workspace.Packages.PlayerIconInfoStore).PlayerIconInfoStore
 local PlayerServiceConnector = RoactModule.PureComponent:extend("PlayerServiceConnector")
 
-function PlayerServiceConnector.didMount(p1) --[[ Line: 23 ]]
+function PlayerServiceConnector.didMount(p1)
 	-- upvalues: Players (copy), FFlagBadgeVisibilitySettingEnabled (copy), RobloxReplicatedStorage (copy), DeferPlayerInfoRequests (copy)
 	for _, player in ipairs((Players:GetPlayers())) do
 		p1.props.addPlayer(player)
 		p1.props.makePlayerInfoRequests(player)
 	end
 	if FFlagBadgeVisibilitySettingEnabled then
-		spawn(function() --[[ Line: 31 ]]
+		spawn(function()
 			-- upvalues: RobloxReplicatedStorage (upval), p1 (copy), Players (upval), DeferPlayerInfoRequests (upval)
-			p1.sendPlayerProfileSettingsConnection = RobloxReplicatedStorage:WaitForChild("SendPlayerProfileSettings", 1e999).OnClientEvent:Connect(function(p2) --[[ Line: 33 ]]
+			p1.sendPlayerProfileSettingsConnection = RobloxReplicatedStorage:WaitForChild("SendPlayerProfileSettings", 1e999).OnClientEvent:Connect(function(p2)
 				-- upvalues: Players (upval), DeferPlayerInfoRequests (upval), p1 (upval)
 				local Player = Players:GetPlayerByUserId((tonumber(p2)))
 				
 				if Player then
 					if DeferPlayerInfoRequests then
-						task.defer(function() --[[ Line: 38 ]]
+						task.defer(function()
 							-- upvalues: p1 (upval), Player (copy)
 							p1.props.makePlayerInfoRequests(Player)
 						end)
@@ -43,12 +43,12 @@ function PlayerServiceConnector.didMount(p1) --[[ Line: 23 ]]
 	end
 end
 
-function PlayerServiceConnector.render(p2) --[[ Line: 50 ]]
+function PlayerServiceConnector.render(p2)
 	-- upvalues: RoactModule (copy), EventConnectionModule (copy), Players (copy)
 	return RoactModule.createFragment({
 		PlayerAddedConnection = RoactModule.createElement(EventConnectionModule, {
 			event = Players.PlayerAdded,
-			callback = function(p3) --[[ Line: 54 ]]
+			callback = function(p3)
 				-- upvalues: p2 (copy)
 				p2.props.addPlayer(p3)
 				p2.props.makePlayerInfoRequests(p3)
@@ -56,7 +56,7 @@ function PlayerServiceConnector.render(p2) --[[ Line: 50 ]]
 		}),
 		PlayerRemovingConnection = RoactModule.createElement(EventConnectionModule, {
 			event = Players.PlayerRemoving,
-			callback = function(p3) --[[ Line: 62 ]]
+			callback = function(p3)
 				-- upvalues: p2 (copy)
 				p2.props.removePlayer(p3)
 			end
@@ -64,7 +64,7 @@ function PlayerServiceConnector.render(p2) --[[ Line: 50 ]]
 	})
 end
 
-function PlayerServiceConnector.willUnmount(p2) --[[ Line: 69 ]]
+function PlayerServiceConnector.willUnmount(p2)
 	-- upvalues: Players (copy), FFlagBadgeVisibilitySettingEnabled (copy)
 	for _, player in ipairs((Players:GetPlayers())) do
 		p2.props.removePlayer(player)
@@ -74,18 +74,18 @@ function PlayerServiceConnector.willUnmount(p2) --[[ Line: 69 ]]
 	end
 end
 
-return RoactRoduxModule.connect(nil, function(Callback) --[[ Line: 80 | Named "mapDispatchToProps" ]]
+return RoactRoduxModule.connect(nil, function(Callback)
 	-- upvalues: AddPlayerModule (copy), MakePlayerInfoRequestsModule (copy), FFlagReplacePlayerIconRoduxWithSignal (copy), PlayerIconInfoStore (copy), RemovePlayerModule (copy)
 	return {
-		addPlayer = function(p3) --[[ Line: 82 ]]
+		addPlayer = function(p3)
 			-- upvalues: Callback (copy), AddPlayerModule (upval)
 			return Callback(AddPlayerModule(p3))
 		end,
-		makePlayerInfoRequests = function(p3) --[[ Line: 86 ]]
+		makePlayerInfoRequests = function(p3)
 			-- upvalues: Callback (copy), MakePlayerInfoRequestsModule (upval)
 			return Callback(MakePlayerInfoRequestsModule(p3))
 		end,
-		removePlayer = function(Player) --[[ Line: 90 ]]
+		removePlayer = function(Player)
 			-- upvalues: FFlagReplacePlayerIconRoduxWithSignal (upval), PlayerIconInfoStore (upval), Callback (copy), RemovePlayerModule (upval)
 			if FFlagReplacePlayerIconRoduxWithSignal then
 				PlayerIconInfoStore.removePlayer(Player.UserId)

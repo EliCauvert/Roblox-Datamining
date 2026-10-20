@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("LuaAppEnableOpenTypeIGMFix", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("LuaAppEnableOpenTypeIGMFix")
 end

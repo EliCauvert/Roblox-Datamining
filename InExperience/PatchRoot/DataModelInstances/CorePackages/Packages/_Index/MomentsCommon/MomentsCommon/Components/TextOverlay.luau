@@ -6,17 +6,17 @@ local View = FoundationModule.View
 local UseCallbackFunction = ReactModule.useCallback
 local _ = require(MomentsCommon.Types)
 
-return function(p1) --[[ Line: 28 | Named "TextOverlay" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseCallbackFunction (copy), View (copy), FoundationModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
-	local UseCallbackResult = UseCallbackFunction(function(_, Current) --[[ Line: 32 ]]
+	local UseCallbackResult = UseCallbackFunction(function(_, Current)
 		-- upvalues: p1 (copy), UseRefResult1 (copy)
 		if p1.containerRef and p1.containerRef.current then
 			UseRefResult1.current = Current
 		end
 	end, { p1.containerRef })
-	local UseCallbackResult1 = UseCallbackFunction(function(_, Current) --[[ Line: 38 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function(_, Current)
 		-- upvalues: UseRefResult1 (copy), p1 (copy)
 		if UseRefResult1.current == Current and p1.onActivated then
 			p1.onActivated()
@@ -39,7 +39,7 @@ return function(p1) --[[ Line: 28 | Named "TextOverlay" ]]
 		},
 		ZIndex = p1.textOverlayEdit.zIndex
 	}, {
-		UIDragDetector = ReactModule.useMemo(function() --[[ Line: 48 ]]
+		UIDragDetector = ReactModule.useMemo(function()
 			-- upvalues: p1 (copy), ReactModule (upval), UseRefResult (copy), UseCallbackResult (copy), UseCallbackResult1 (copy)
 			return if p1.draggable then ReactModule.createElement("UIDragDetector", {
 				BoundingBehavior = Enum.UIDragDetectorBoundingBehavior.EntireObject,

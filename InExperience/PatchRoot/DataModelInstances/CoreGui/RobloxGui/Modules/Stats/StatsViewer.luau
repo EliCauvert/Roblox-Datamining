@@ -9,7 +9,7 @@ local _UDim2_3 = UDim2.new(0.6, 0, 1, 0)
 local StatsViewerModule = {}
 StatsViewerModule.__index = StatsViewerModule
 
-function StatsViewerModule.new() --[[ Line: 31 ]]
+function StatsViewerModule.new()
 	-- upvalues: StatsViewerModule (copy), StatsUtilsModule (copy)
 	local t = {}
 	setmetatable(t, StatsViewerModule)
@@ -28,7 +28,7 @@ function StatsViewerModule.new() --[[ Line: 31 ]]
 	return t
 end
 
-function StatsViewerModule:OnPerformanceStatsShouldBeVisibleChanged() --[[ Line: 51 ]]
+function StatsViewerModule:OnPerformanceStatsShouldBeVisibleChanged()
 	if self._graph then
 		self._graph:OnPerformanceStatsShouldBeVisibleChanged()
 	end
@@ -37,24 +37,24 @@ function StatsViewerModule:OnPerformanceStatsShouldBeVisibleChanged() --[[ Line:
 	end
 end
 
-function StatsViewerModule:GetIsVisible() --[[ Line: 60 ]]
+function StatsViewerModule:GetIsVisible()
 	return self._frameImageLabel.Visible
 end
 
-function StatsViewerModule:GetStatType() --[[ Line: 64 ]]
+function StatsViewerModule:GetStatType()
 	return self._statType
 end
 
-function StatsViewerModule:SetSizeAndPosition(Size, Position) --[[ Line: 68 ]]
+function StatsViewerModule:SetSizeAndPosition(Size, Position)
 	self._frameImageLabel.Size = Size
 	self._frameImageLabel.Position = Position
 end
 
-function StatsViewerModule:SetParent(Parent) --[[ Line: 73 ]]
+function StatsViewerModule:SetParent(Parent)
 	self._frameImageLabel.Parent = Parent
 end
 
-function StatsViewerModule:SetVisible(Visible) --[[ Line: 77 ]]
+function StatsViewerModule:SetVisible(Visible)
 	self._frameImageLabel.Visible = Visible
 	
 	if self._graph then
@@ -65,7 +65,7 @@ function StatsViewerModule:SetVisible(Visible) --[[ Line: 77 ]]
 	end
 end
 
-function StatsViewerModule:SetStatType(_statType) --[[ Line: 89 ]]
+function StatsViewerModule:SetStatType(_statType)
 	-- upvalues: StatsTextPanelModule (copy), _UDim2_1 (copy), _UDim2 (copy), StatsAnnotatedGraphModule (copy), _UDim2_3 (copy), _UDim2_2 (copy), StatsUtilsModule (copy)
 	self._statType = _statType
 	self._frameImageLabel:ClearAllChildren()
@@ -85,7 +85,7 @@ function StatsViewerModule:SetStatType(_statType) --[[ Line: 89 ]]
 	self:_applyStatsAggregator()
 end
 
-function StatsViewerModule:_applyStatsAggregator() --[[ Line: 118 ]]
+function StatsViewerModule:_applyStatsAggregator()
 	if self._aggregator == nil then return end
 	if self._textPanel then
 		self._textPanel:SetStatsAggregator(self._aggregator)
@@ -95,7 +95,7 @@ function StatsViewerModule:_applyStatsAggregator() --[[ Line: 118 ]]
 	end
 end
 
-function StatsViewerModule:SetStatsAggregator(_aggregator) --[[ Line: 132 ]]
+function StatsViewerModule:SetStatsAggregator(_aggregator)
 	self._aggregator = _aggregator
 	self:_applyStatsAggregator()
 end

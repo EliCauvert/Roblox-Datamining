@@ -1,4 +1,4 @@
-﻿return function(Object) --[[ Line: 1 | Named "getFirstFocusableDescendant" ]]
+﻿return function(Object)
 	for _, Gui in Object:GetDescendants() do
 		if Gui:IsA("GuiObject") and Gui.Selectable and Gui.Visible then
 			return Gui

@@ -2,7 +2,7 @@
 local GameEntryUtilsModule = require(UnifiedLogging.gameEntryUtils)
 local FlaggedMutedErrorFunction = require(UnifiedLogging.Parent.Loggers).flaggedMutedError
 
-return function(List, p1, p2) --[[ Line: 8 ]]
+return function(List, p1, p2)
 	-- upvalues: GameEntryUtilsModule (copy), FlaggedMutedErrorFunction (copy)
 	local List1 = {}
 	local List2 = {}

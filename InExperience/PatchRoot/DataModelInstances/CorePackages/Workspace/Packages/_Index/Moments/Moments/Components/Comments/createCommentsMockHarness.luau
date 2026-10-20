@@ -5,7 +5,7 @@ local _ = require(Parent.DataHydration.MomentsStoreTypes)
 local CreateCommentCollectionStoreModule = require(script.Parent.GetCommentCollectionStore.createCommentCollectionStore)
 local CreateCommentSessionFiltersStoreModule = require(script.Parent.GetCommentSessionFiltersStore.createCommentSessionFiltersStore)
 
-return function(p1) --[[ Line: 35 | Named "createCommentsMockHarness" ]]
+return function(p1)
 	-- upvalues: MomentsCreateCommentsMockNetworkModule (copy), MomentsCommentsModule (copy), CreateCommentSessionFiltersStoreModule (copy), CreateCommentCollectionStoreModule (copy)
 	local MomentsCreateCommentsMockNetworkModuleResult = MomentsCreateCommentsMockNetworkModule({
 		latencySeconds = if p1 == nil then nil else p1.latencySeconds,
@@ -22,7 +22,7 @@ return function(p1) --[[ Line: 35 | Named "createCommentsMockHarness" ]]
 		commentsEntityStore = MomentsCommentsStore,
 		collectionStore = CommentCollectionStoreModule,
 		sessionFilters = CommentSessionFiltersStoreModule,
-		dispose = function() --[[ Line: 50 ]]
+		dispose = function()
 			-- upvalues: Flag (ref), CommentCollectionStoreModule (copy), MomentsCommentsStore (copy)
 			if not Flag then
 				Flag = true

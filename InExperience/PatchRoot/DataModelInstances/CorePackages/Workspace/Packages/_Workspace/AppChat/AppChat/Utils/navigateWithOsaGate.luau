@@ -11,7 +11,7 @@ local RemovedConversationModule = require(AppChat.Conversations.Actions.RemovedC
 local ConversationModule = require(AppChat.Models.Conversation)
 local FFlagAppChatShowOSAOnPageEntry = require(AppChat.Parent.SharedFlags).FFlagAppChatShowOSAOnPageEntry
 
-return function(p1) --[[ Line: 29 ]]
+return function(p1)
 	-- upvalues: FFlagAppChatShowOSAOnPageEntry (copy), FetchLatestConversationDetailsModule (copy), ShouldShowU13ChatOptInForConversationModule (copy), ConversationModule (copy), ConstantsModule (copy), ShouldShowOSAForConversationModule (copy), GetOverlayStoreModule (copy), LoggerModule (copy), OverlayTypesModule (copy), HttpService (copy), RemovedConversationModule (copy)
 	local ConversationId = p1.conversationId
 	local DispatchFunction = p1.dispatch
@@ -24,10 +24,10 @@ return function(p1) --[[ Line: 29 ]]
 		return
 	end
 	if ConversationId and ConversationId ~= "" then
-		DispatchFunction(FetchLatestConversationDetailsModule(ConversationId)):andThen(function() --[[ Line: 46 ]]
+		DispatchFunction(FetchLatestConversationDetailsModule(ConversationId)):andThen(function()
 			-- upvalues: DispatchFunction (copy), ConversationId (copy), ShouldShowU13ChatOptInForConversationModule (upval), p1 (copy), ConversationModule (upval), ConstantsModule (upval), ShouldShowOSAForConversationModule (upval), OnAcceptedFunction (copy), GetOverlayStoreModule (upval), LoggerModule (upval), OverlayTypesModule (upval), HttpService (upval), RemovedConversationModule (upval), OnDeclinedFunction (copy)
 			local Conversation = nil
-			DispatchFunction(function(p2) --[[ Line: 48 ]]
+			DispatchFunction(function(p2)
 				-- upvalues: Conversation (ref), ConversationId (upval)
 				Conversation = p2:getState().ChatAppReducer.Conversations[ConversationId]
 			end)
@@ -49,12 +49,12 @@ return function(p1) --[[ Line: 29 ]]
 					conversationId = ConversationId,
 					impressionId = HttpService:GenerateGUID(false),
 					modalVariant = ChatOptInInfoCard,
-					onJoin = function() --[[ Line: 74 ]]
+					onJoin = function()
 						-- upvalues: OverlayStoreModule (copy), OnAcceptedFunction (upval)
 						OverlayStoreModule.dismissOverlay()
 						OnAcceptedFunction()
 					end,
-					onDecline = function() --[[ Line: 78 ]]
+					onDecline = function()
 						-- upvalues: ConversationId (upval), Conversation (ref), ConversationModule (upval), DispatchFunction (upval), RemovedConversationModule (upval), OverlayStoreModule (copy), OnDeclinedFunction (upval)
 						if ConversationId and Conversation and Conversation.conversationType == ConversationModule.Type.MULTI_USER_CONVERSATION then
 							DispatchFunction(RemovedConversationModule(ConversationId))
@@ -65,7 +65,7 @@ return function(p1) --[[ Line: 29 ]]
 							OnDeclinedFunction()
 						end
 					end,
-					onClose = function() --[[ Line: 91 ]]
+					onClose = function()
 						-- upvalues: OnDeclinedFunction (upval)
 						if OnDeclinedFunction then
 							OnDeclinedFunction()
@@ -77,7 +77,7 @@ return function(p1) --[[ Line: 29 ]]
 			else
 				OnAcceptedFunction()
 			end
-		end):catch(function(Err) --[[ Line: 98 ]]
+		end):catch(function(Err)
 			-- upvalues: LoggerModule (upval), ConversationId (copy), p1 (copy)
 			LoggerModule:warning("[OSA Gate] Error fetching conversation details for {}: {}", ConversationId, (tostring(Err)))
 			

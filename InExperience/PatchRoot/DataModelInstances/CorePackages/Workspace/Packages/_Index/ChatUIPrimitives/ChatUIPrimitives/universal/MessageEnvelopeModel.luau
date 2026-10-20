@@ -1,14 +1,14 @@
 ﻿local _ = require(script.Parent.Types)
 
 return {
-	incoming = function(Message) --[[ Line: 13 ]]
+	incoming = function(Message)
 		return {
 			direction = "incoming",
 			stableId = Message.id,
 			payload = { kind = "message", message = Message }
 		}
 	end,
-	sending = function(StableId, Draft, Author, AttemptedAtUnixMilliseconds) --[[ Line: 24 ]]
+	sending = function(StableId, Draft, Author, AttemptedAtUnixMilliseconds)
 		return {
 			direction = "outgoing",
 			stableId = StableId,
@@ -19,7 +19,7 @@ return {
 			}
 		}
 	end,
-	acknowledged = function(p1, Message, ResolvedAtUnixMilliseconds) --[[ Line: 45 ]]
+	acknowledged = function(p1, Message, ResolvedAtUnixMilliseconds)
 		return {
 			direction = "outgoing",
 			stableId = p1.stableId,
@@ -31,7 +31,7 @@ return {
 			}
 		}
 	end,
-	failed = function(p1, ResolvedAtUnixMilliseconds) --[[ Line: 65 ]]
+	failed = function(p1, ResolvedAtUnixMilliseconds)
 		return {
 			direction = "outgoing",
 			stableId = p1.stableId,

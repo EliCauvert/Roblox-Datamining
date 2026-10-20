@@ -16,17 +16,17 @@ local VoiceIndicatorPerformanceOptimizationsV2 = game:DefineFastFlag("VoiceIndic
 local MicTalkingUpdateFrequency = game:DefineFastInt("MicTalkingUpdateFrequency", 3)
 local _UDim2 = UDim2.fromOffset(28, 28)
 
-local function _(p1, p2) --[[ Line: 32 | Named "useJoinBinding" ]]
+local function _(p1, p2)
 	-- upvalues: ReactModule (copy), RoactModule (copy)
-	return ReactModule.useMemo(function() --[[ Line: 33 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: RoactModule (upval), p1 (copy), p2 (copy)
 		return RoactModule.joinBindings({ p1, p2 })
 	end, { p1, p2 })
 end
 
-local _ = function(p1, p2) --[[ Line: 38 | Named "mapLevelToIcon" ]]
+local _ = function(p1, p2)
 	-- upvalues: ConstantsModule (copy), Default (copy)
-	return function(Entry) --[[ Line: 40 ]]
+	return function(Entry)
 		-- upvalues: ConstantsModule (upval), Default (upval), p1 (copy), p2 (copy)
 		local Entry1 = Entry[1]
 		local Entry2: number = Entry[2]
@@ -40,23 +40,23 @@ local config = {
 	[ConstantsModule.VOICE_STATE.HIDDEN] = true
 }
 
-local function GenerateGUID() --[[ Line: 67 ]]
+local function GenerateGUID()
 	-- upvalues: HttpService (copy)
 	return HttpService:GenerateGUID()
 end
 
-local function createTweenShimmeringEffect(UseRefResult) --[[ Line: 83 ]]
+local function createTweenShimmeringEffect(UseRefResult)
 	-- upvalues: TweenService (copy)
 	return (TweenService:Create(UseRefResult:getValue(), TweenInfo.new(1, Enum.EasingStyle.Circular, Enum.EasingDirection.Out, -1), { Offset = Vector2.new(1, 0) }))
 end
 
-return function(p1) --[[ Line: 91 | Named "VoiceIndicator" ]]
+return function(p1)
 	-- upvalues: UseVoiceStateModule (copy), ReactModule (copy), RoactModule (copy), GenerateGUID (copy), ConstantsModule (copy), createTweenShimmeringEffect (copy), VoiceIndicatorPerformanceOptimizationsV2 (copy), RunService (copy), MicTalkingUpdateFrequency (copy), config (copy), ReactIsModule (copy), Default (copy), UseSelectionCursorFunction (copy), CursorKind (copy), _UDim2 (copy)
 	local UseVoiceStateModuleResult = UseVoiceStateModule(p1.userId, p1.disable or false)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	local NoSelectable = p1.selectable == nil or p1.selectable
 	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(UseVoiceStateModuleResult)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 33 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: RoactModule (upval), UseBindingResult1 (copy), UseBindingResult (copy)
 		return RoactModule.joinBindings({ UseBindingResult1, UseBindingResult })
 	end, { UseBindingResult1, UseBindingResult })
@@ -66,18 +66,18 @@ return function(p1) --[[ Line: 91 | Named "VoiceIndicator" ]]
 	local IsUseVoiceStateModuleResultMatch1 = UseVoiceStateModuleResult == ConstantsModule.VOICE_STATE.CONNECTING
 	local IsShowConnectingShimmer = p1.showConnectingShimmer == true
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 105 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsShowConnectingShimmer (copy), IsUseVoiceStateModuleResultMatch1 (copy), UseRefResult (copy), createTweenShimmeringEffect (upval)
 		if IsShowConnectingShimmer and IsUseVoiceStateModuleResultMatch1 and UseRefResult.current then
 			local TweenShimmeringEffect = createTweenShimmeringEffect(UseRefResult)
 			TweenShimmeringEffect:Play()
 			
-			return function() --[[ Line: 110 ]]
+			return function()
 				-- upvalues: TweenShimmeringEffect (copy)
 				TweenShimmeringEffect:Cancel()
 			end
 		else
-			return function() --[[ Line: 114 ]] end
+			return function() end
 		end
 	end, {
 		IsUseVoiceStateModuleResultMatch1,
@@ -87,10 +87,10 @@ return function(p1) --[[ Line: 91 | Named "VoiceIndicator" ]]
 	if VoiceIndicatorPerformanceOptimizationsV2 then
 		local UseRefResult1 = ReactModule.useRef(false)
 		UseRefResult1.current = UseVoiceStateModuleResult == ConstantsModule.VOICE_STATE.TALKING
-		ReactModule.useEffect(function() --[[ Line: 121 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: RunService (upval), Current (copy), UseRefResult1 (copy), MicTalkingUpdateFrequency (upval), UseBindingResult2 (copy)
 			local Count = 0
-			RunService:BindToRenderStep(Current, 1, function() --[[ Line: 124 ]]
+			RunService:BindToRenderStep(Current, 1, function()
 				-- upvalues: UseRefResult1 (upval), Count (ref), MicTalkingUpdateFrequency (upval), UseBindingResult2 (upval)
 				if not UseRefResult1.current then return end
 				Count += 1
@@ -101,21 +101,21 @@ return function(p1) --[[ Line: 91 | Named "VoiceIndicator" ]]
 				end
 			end)
 			
-			return function() --[[ Line: 136 ]]
+			return function()
 				-- upvalues: RunService (upval), Current (upval)
 				RunService:UnbindFromRenderStep(Current)
 			end
 		end, { Current })
 	else
-		ReactModule.useEffect(function() --[[ Line: 141 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: IsUseVoiceStateModuleResultMatch (copy), RunService (upval), Current (copy), UseBindingResult2 (copy)
 			if IsUseVoiceStateModuleResultMatch then
-				RunService:BindToRenderStep(Current, 1, function() --[[ Line: 143 ]]
+				RunService:BindToRenderStep(Current, 1, function()
 					-- upvalues: UseBindingResult2 (upval)
 					UseBindingResult2(math.random())
 				end)
 			end
-			return function() --[[ Line: 147 ]]
+			return function()
 				-- upvalues: IsUseVoiceStateModuleResultMatch (upval), RunService (upval), Current (upval)
 				if IsUseVoiceStateModuleResultMatch then
 					RunService:UnbindFromRenderStep(Current)
@@ -127,7 +127,7 @@ return function(p1) --[[ Line: 91 | Named "VoiceIndicator" ]]
 	local MapResult = if UseVoiceStateModuleResult == ConstantsModule.VOICE_STATE.LOCAL_MUTED then 0.5 else 0
 	
 	if p1.iconTransparency then
-		MapResult = if ReactIsModule.isBinding(p1.iconTransparency) then p1.iconTransparency:map(function(p2: number): number --[[ Line: 161 ]]
+		MapResult = if ReactIsModule.isBinding(p1.iconTransparency) then p1.iconTransparency:map(function(p2: number): number
 			-- upvalues: MapResult (copy)
 			return 1 - (1 - p2) * (1 - MapResult)
 		end) else 1 - (1 - p1.iconTransparency) * (1 - MapResult)
@@ -136,11 +136,11 @@ return function(p1) --[[ Line: 91 | Named "VoiceIndicator" ]]
 		Size = p1.size or _UDim2,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		Image = ReactModule.useMemo(function() --[[ Line: 169 ]]
+		Image = ReactModule.useMemo(function()
 			-- upvalues: UseMemoResult (copy), p1 (copy), IsShowConnectingShimmer (copy), ConstantsModule (upval), Default (upval)
 			local IconStyle = p1.iconStyle
 			
-			return UseMemoResult:map(function(Entry) --[[ Line: 40 ]]
+			return UseMemoResult:map(function(Entry)
 				-- upvalues: ConstantsModule (upval), Default (upval), IconStyle (copy), IsShowConnectingShimmer (copy)
 				local Entry1 = Entry[1]
 				local Entry2: number = Entry[2]

@@ -1,15 +1,15 @@
 ﻿local UserInputService = game:GetService("UserInputService")
 local ReactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
 
-return function() --[[ Line: 8 | Named "useOnScreenKeyboardHeight" ]]
+return function()
 	-- upvalues: UserInputService (copy), ReactModule (copy)
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 9 | Named "read" ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 		-- upvalues: UserInputService (upval)
 		return if UserInputService.OnScreenKeyboardVisible then UserInputService.OnScreenKeyboardSize.Y else 0
 	end)
-	ReactModule.useEffect(function() --[[ Line: 18 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), UserInputService (upval)
-		local function update() --[[ Line: 19 ]]
+		local function update()
 			-- upvalues: UseStateResult2 (upval), UserInputService (upval)
 			UseStateResult2(if UserInputService.OnScreenKeyboardVisible then UserInputService.OnScreenKeyboardSize.Y else 0)
 		end
@@ -18,7 +18,7 @@ return function() --[[ Line: 8 | Named "useOnScreenKeyboardHeight" ]]
 		local Connection1 = UserInputService:GetPropertyChangedSignal("OnScreenKeyboardSize"):Connect(update)
 		UseStateResult2(if UserInputService.OnScreenKeyboardVisible then UserInputService.OnScreenKeyboardSize.Y else 0)
 		
-		return function() --[[ Line: 27 ]]
+		return function()
 			-- upvalues: Connection (copy), Connection1 (copy)
 			Connection:Disconnect()
 			Connection1:Disconnect()

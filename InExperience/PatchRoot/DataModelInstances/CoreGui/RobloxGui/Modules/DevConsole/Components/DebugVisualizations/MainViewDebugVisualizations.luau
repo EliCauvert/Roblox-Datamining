@@ -12,19 +12,19 @@ local Names = {
 }
 local MainViewDebugVisualizations = RoactModule.Component:extend("MainViewDebugVisualizations")
 
-function MainViewDebugVisualizations.init(p1) --[[ Line: 26 ]]
+function MainViewDebugVisualizations.init(p1)
 	-- upvalues: RoactModule (copy)
-	function p1.onUtilTabHeightChanged(UtilTabHeight) --[[ Line: 27 ]]
+	function p1.onUtilTabHeightChanged(UtilTabHeight)
 		-- upvalues: p1 (copy)
 		p1:setState({ utilTabHeight = UtilTabHeight })
 	end
 	
-	function p1.onCheckboxChanged(p2, p3) --[[ Line: 33 ]]
+	function p1.onCheckboxChanged(p2, p3)
 		-- upvalues: p1 (copy)
 		p1.props.dispatchDebugVisualizationsUpdateSearchFilter(nil, { [p2] = p3 })
 	end
 	
-	function p1.onSearchTermChanged(p2) --[[ Line: 39 ]]
+	function p1.onSearchTermChanged(p2)
 		-- upvalues: p1 (copy)
 		p1.props.dispatchDebugVisualizationsUpdateSearchFilter(p2, {})
 	end
@@ -33,11 +33,11 @@ function MainViewDebugVisualizations.init(p1) --[[ Line: 26 ]]
 	p1.state = { utilTabHeight = 0 }
 end
 
-function MainViewDebugVisualizations.didMount(p1) --[[ Line: 50 ]]
+function MainViewDebugVisualizations.didMount(p1)
 	p1:setState({ utilTabHeight = p1.utilRef.current.Size.Y.Offset })
 end
 
-function MainViewDebugVisualizations.didUpdate(p1) --[[ Line: 57 ]]
+function MainViewDebugVisualizations.didUpdate(p1)
 	local Size = p1.utilRef.current.Size
 	
 	if Size.Y.Offset ~= p1.state.utilTabHeight then
@@ -45,7 +45,7 @@ function MainViewDebugVisualizations.didUpdate(p1) --[[ Line: 57 ]]
 	end
 end
 
-function MainViewDebugVisualizations.render(p1) --[[ Line: 66 ]]
+function MainViewDebugVisualizations.render(p1)
 	-- upvalues: Names (copy), RoactModule (copy), ConstantsModule (copy), MainRowPadding (copy), UtilAndTabModule (copy), DebugVisualizationsChartModule (copy)
 	local Size = p1.props.size
 	local FormFactor = p1.props.formFactor
@@ -94,15 +94,15 @@ function MainViewDebugVisualizations.render(p1) --[[ Line: 66 ]]
 	})
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p2, _) --[[ Line: 121 | Named "mapStateToProps" ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p2, _)
 	return {
 		debugVisualizationsSearchTerm = p2.DebugVisualizationsData.debugVisualizationsSearchTerm,
 		debugVisualizationsTypeFilters = p2.DebugVisualizationsData.debugVisualizationsTypeFilters
 	}
-end, function(Callback) --[[ Line: 128 | Named "mapDispatchToProps" ]]
+end, function(Callback)
 	-- upvalues: DebugVisualizationsUpdateSearchFilterModule (copy)
 	return {
-		dispatchDebugVisualizationsUpdateSearchFilter = function(p2, p3) --[[ Line: 130 ]]
+		dispatchDebugVisualizationsUpdateSearchFilter = function(p2, p3)
 			-- upvalues: Callback (copy), DebugVisualizationsUpdateSearchFilterModule (upval)
 			Callback(DebugVisualizationsUpdateSearchFilterModule(p2, p3))
 		end

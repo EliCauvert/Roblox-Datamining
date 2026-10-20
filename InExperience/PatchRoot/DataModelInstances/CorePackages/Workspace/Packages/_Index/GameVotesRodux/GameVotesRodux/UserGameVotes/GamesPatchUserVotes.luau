@@ -8,7 +8,7 @@ local config = {
 	[VoteStatusModule.NotVoted] = "null"
 }
 
-return function(Callback, p1, p2) --[[ Line: 22 ]]
+return function(Callback, p1, p2)
 	-- upvalues: config (copy), Url (copy), HttpService (copy)
 	assert(type(p1) == "string", "GamesPatchUserVotes request expects universeId to be a string")
 	local Entry = config[p2]

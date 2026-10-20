@@ -13,7 +13,7 @@ local UseSduiVideoAnalyticsFunction = require(Parent.SduiSharedContent).useSduiV
 local FIntLuaAppGameTileVideoDwellTimeInSec = require(Parent.SharedFlags).FIntLuaAppGameTileVideoDwellTimeInSec
 local FIntLuaAppGameTileVideoVisiblePercent = require(Parent.SharedFlags).FIntLuaAppGameTileVideoVisiblePercent
 
-return function(p1) --[[ Line: 45 | Named "SduiGameVideoThumbnail" ]]
+return function(p1)
 	-- upvalues: DataHydrationModule (copy), SignalsReactModule (copy), UseSduiVideoAnalyticsFunction (copy), ReactModule (copy), VideoEndReason (copy), UseCanDevicePlayVideoPreviewFunction (copy), TileVideoBlockingConfig (copy), SduiVideoThumbnailModule (copy), IsVideoEligibleForPlayabilityFunction (copy), FIntLuaAppGameTileVideoDwellTimeInSec (copy), FIntLuaAppGameTileVideoVisiblePercent (copy)
 	local PlayabilityStore = DataHydrationModule.Game.getPlayabilityStore(false)
 	local Playability = PlayabilityStore.getPlayability(p1.universeId)
@@ -25,7 +25,7 @@ return function(p1) --[[ Line: 45 | Named "SduiGameVideoThumbnail" ]]
 		universeId = p1.universeId,
 		placeId = p1.placeId
 	})
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 59 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: IsUseSignalStateResultMatch (copy), UseSduiVideoAnalyticsResult (copy), VideoEndReason (upval)
 		if IsUseSignalStateResultMatch then
 			UseSduiVideoAnalyticsResult.reportVideoEnd(nil, VideoEndReason.PlayabilityCheckFailed, p2, -1)
@@ -41,7 +41,7 @@ return function(p1) --[[ Line: 45 | Named "SduiGameVideoThumbnail" ]]
 		videoPlaybackContext = p1.sduiContext.videoPlaybackContext,
 		isVideoEligible = IsVideoEligibleForPlayabilityFunction(IsUseSignalStateResultMatch, UseSignalStateResult, nil) and UseStateResult,
 		onVideoIneligible = UseResult,
-		onPlaybackCandidate = ReactModule.useCallback(function() --[[ Line: 70 ]]
+		onPlaybackCandidate = ReactModule.useCallback(function()
 			-- upvalues: IsUseSignalStateResultMatch (copy), PlayabilityStore (copy), p1 (copy), UseStateResult2 (copy), UseCanDevicePlayVideoPreviewResult (copy)
 			if not IsUseSignalStateResultMatch then
 				PlayabilityStore.fetchPlayability(p1.universeId)

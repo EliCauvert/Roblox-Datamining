@@ -32,9 +32,9 @@ Badge.defaultProps = {
 	badgeVariant = BadgeVariantModule.Default
 }
 
-function Badge.render(p1) --[[ Line: 68 ]]
+function Badge.render(p1)
 	-- upvalues: WithStyleModule (copy), TModule (copy), BadgeStatesModule (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy), BadgeVariantModule (copy), RoactModule (copy), ImageSetComponentModule (copy), ImagesModule (copy), DivideTransparencyModule (copy), ComponentAssetsCircle25 (copy), ComponentAssetsCircle21 (copy), GenericTextLabelModule (copy)
-	return WithStyleModule(function(p2) --[[ Line: 69 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: p1 (copy), TModule (upval), BadgeStatesModule (upval), FoundationFontFaceMigration (upval), GetFontFromFontStyleModule (upval), GetTextSizeModule (upval), BadgeVariantModule (upval), RoactModule (upval), ImageSetComponentModule (upval), ImagesModule (upval), DivideTransparencyModule (upval), ComponentAssetsCircle25 (upval), ComponentAssetsCircle21 (upval), GenericTextLabelModule (upval)
 		local Theme = p2.Theme
 		local _Font = p2.Font

@@ -16,7 +16,7 @@ local GetFFlagContactsListEntryUpdatedTruncationFixModule = require(ContactImpor
 local SendInviteLinkModule = require(script.Parent.sendInviteLink)
 local config = { smsProtocol = SMSProtocol.default }
 
-function ContactsListInviteEntry(p1) --[[ Line: 42 ]]
+function ContactsListInviteEntry(p1)
 	-- upvalues: Dash (copy), config (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseStyleFunction (copy), SendInviteLinkModule (copy), SMSProtocol (copy), React (copy), Roact (copy), GetFFlagContactsListEntryUpdatedTruncationFixModule (copy), StyledTextLabel (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy)
 	local JoinResult = Dash.join(config, p1)
 	local UseLocalizationResult = UseLocalizationFunction({ invite = TextKeysModule.INVITE_BUTTON_TEXT })
@@ -68,7 +68,7 @@ function ContactsListInviteEntry(p1) --[[ Line: 42 ]]
 				isDisabled = true,
 				text = UseLocalizationResult.invite,
 				onActivated = Dash.noop,
-				[React.Change.AbsoluteSize] = function(Frame) --[[ Line: 122 ]]
+				[React.Change.AbsoluteSize] = function(Frame)
 					-- upvalues: GetFFlagContactsListEntryUpdatedTruncationFixModule (upval), UseStateResult2 (copy)
 					if GetFFlagContactsListEntryUpdatedTruncationFixModule() then
 						UseStateResult2(0 - (Frame.AbsoluteSize.X + 10))
@@ -83,7 +83,7 @@ function ContactsListInviteEntry(p1) --[[ Line: 42 ]]
 				text = UseLocalizationResult.invite,
 				isDisabled = SendInviteLinkModuleResult.isLoading,
 				onActivated = SendInviteLinkModuleResult.sendInvite,
-				[React.Change.AbsoluteSize] = function(Frame) --[[ Line: 108 ]]
+				[React.Change.AbsoluteSize] = function(Frame)
 					-- upvalues: GetFFlagContactsListEntryUpdatedTruncationFixModule (upval), UseStateResult2 (copy)
 					if GetFFlagContactsListEntryUpdatedTruncationFixModule() then
 						UseStateResult2(0 - (Frame.AbsoluteSize.X + 10))

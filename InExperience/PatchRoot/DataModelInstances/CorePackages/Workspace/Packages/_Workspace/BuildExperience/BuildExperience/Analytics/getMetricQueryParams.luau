@@ -4,7 +4,7 @@ local _ = require(BuildExperience.Analytics.AnalyticsMetric)
 local _ = require(BuildExperience.Analytics.AnalyticsWindow)
 local FFlagBuildAnalyticsGoalsModule = require(BuildExperience.Flags.FFlagBuildAnalyticsGoals)
 
-return function(UniverseId, p1, p2, EndTime) --[[ Line: 18 | Named "getMetricQueryParams" ]]
+return function(UniverseId, p1, p2, EndTime)
 	-- upvalues: FFlagBuildAnalyticsGoalsModule (copy)
 	return {
 		universeId = UniverseId,

@@ -1,4 +1,4 @@
-﻿return function(Text: string, Number): boolean --[[ Line: 7 | Named "parseUserAllowList" ]]
+﻿return function(Text: string, Number): boolean
 	if not Text or Text == "" then
 		return false
 	end

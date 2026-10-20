@@ -15,7 +15,7 @@ local config = {
 	size = require(Foundation.Enums.StatusBadgeSize).Small
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 38 | Named "StatusBadge" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseStatusBadgeVariantsModule (copy), UseScaledValueModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), TextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseStatusBadgeVariantsModuleResult = UseStatusBadgeVariantsModule(UseTokensModule(), WithDefaultsModuleResult.variant, WithDefaultsModuleResult.shape, WithDefaultsModuleResult.size)

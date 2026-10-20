@@ -19,7 +19,7 @@ local FFlagBlackbirdUpdateStringFlyoutMenu = require(Parent.SharedFlags).FFlagBl
 local FixFlyoutMenuTextWrap = game:DefineFastFlag("FixFlyoutMenuTextWrap", false)
 local FlyoutBlackbirdBannerFlexLayout = game:DefineFastFlag("FlyoutBlackbirdBannerFlexLayout", false)
 
-return function(p1) --[[ Line: 32 | Named "BlackbirdUpsellBanner" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), FFlagBlackbirdUpdateStringFlyoutMenu (copy), UseLocalizationFunction (copy), UsePlaceholderLocalizationModule (copy), ReactModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), FlyoutContentSettingsModule (copy), FlyoutAnalyticsModule (copy), FixFlyoutMenuTextWrap (copy), FlyoutBlackbirdBannerFlexLayout (copy), FoundationModule (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDispatchResult = UseDispatchFunction()
@@ -28,7 +28,7 @@ return function(p1) --[[ Line: 32 | Named "BlackbirdUpsellBanner" ]]
 	}) else UsePlaceholderLocalizationModule({
 		bannerText = "Feature.RobloxSubscription.Description.ExclusiveBenefits"
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 44 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval), FlyoutContentSettingsModule (upval), FlyoutAnalyticsModule (upval)
 		p1.closeDrawer()
 		local config = { name = AppPage.Blackbird }

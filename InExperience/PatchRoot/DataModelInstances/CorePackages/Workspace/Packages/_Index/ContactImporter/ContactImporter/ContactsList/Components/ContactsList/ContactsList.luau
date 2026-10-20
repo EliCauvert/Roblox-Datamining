@@ -48,9 +48,9 @@ local AmpApiProvider = require(Parent.AmpUpsell).AmpApiProvider
 local AmpEnums = require(Parent.AmpUpsell).AmpEnums
 local UserInputService = DependenciesModule.UserInputService
 
-return function(p1) --[[ Line: 97 | Named "ContactsList" ]]
+return function(p1)
 	-- upvalues: UseAppPolicyFunction (copy), UseStyleFunction (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ContactImportButtonsExperimentEnabled (copy), ContactImportButtonsIXPModule (copy), Dash (copy), EventNames (copy), React (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), FFlagContactsListEmojiSortingModule (copy), UprankContactsWithEmojiFunction (copy), ContactsListEmojiSortingIxpEnabled (copy), IXPService (copy), ContactsListEmojiSortingIxpLayer (copy), FFlagQRCodeCopyUpdates (copy), FFlagTCPolicyCheckRedirect (copy), FStringIsUserInTcEligibleCountryAmpFeature (copy), FStringCanAccessTrustedContactsAmpFeature (copy), AmpApiProvider (copy), FStringCanAccessTrustedContactsAmpNameSpace (copy), AmpEnums (copy), Roact (copy), ContactsListEntryModule (copy), ContactsListInviteEntryModule (copy), StyledTextLabel (copy), ButtonType (copy), UserInputService (copy), FFlagAddFriendsBannersNewUIIXP (copy), ContactsSyncWarningMessageModule (copy), SectionList (copy), ContactsEmptyListModule (copy), InputLabel (copy), InputLabelSize (copy), ContactsListSearchBarModule (copy), ContactsGlimmerModule (copy), ContactsUploadErrorModalModule (copy), FullPageModal (copy), HorizontalPageMargin (copy)
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 98 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2)
 		return p2.getWebViewSupport()
 	end)
 	local UseStyleResult = UseStyleFunction()
@@ -68,22 +68,22 @@ return function(p1) --[[ Line: 97 | Named "ContactsList" ]]
 	})
 	local UseIsRemoveCloseButtonExperimentEnabledResult = if ContactImportButtonsExperimentEnabled then ContactImportButtonsIXPModule.useIsRemoveCloseButtonExperimentEnabled({ isExposureEnabled = true }) else false
 	
-	local function v48(p2, FilterResult, FilterResult1) --[[ Line: 120 ]]
+	local function v48(p2, FilterResult, FilterResult1)
 		-- upvalues: Dash (upval)
 		Dash.append(p2, FilterResult, if #FilterResult == 0 then nil else { { isSectionDivider = true } }, FilterResult1)
 	end
 	
-	local function OnActivated() --[[ Line: 125 ]]
+	local function OnActivated()
 		-- upvalues: p1 (copy), EventNames (upval)
 		p1.closeModal(EventNames.CloseContactListButton)
 	end
 	
-	local function OnCloseClicked() --[[ Line: 129 ]]
+	local function OnCloseClicked()
 		-- upvalues: p1 (copy), EventNames (upval)
 		p1.closeModal(EventNames.CloseContactListCross)
 	end
 	
-	local UseResult = React.useCallback(function() --[[ Line: 133 ]]
+	local UseResult = React.useCallback(function()
 		-- upvalues: AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 		local config = {
 			detail = "https://en.help.roblox.com/hc/en-us/articles/37725513985812",
@@ -101,39 +101,39 @@ return function(p1) --[[ Line: 97 | Named "ContactsList" ]]
 	end, { UseDispatchResult })
 	local UseStateResult, UseStateResult2 = React.useState("")
 	
-	local function _(p2) --[[ Line: 150 ]]
+	local function _(p2)
 		-- upvalues: Dash (upval), UseStateResult (copy)
-		return Dash.filter(p2, function(p3): boolean --[[ Line: 151 ]]
+		return Dash.filter(p2, function(p3): boolean
 			-- upvalues: UseStateResult (upval)
 			return if p3.contactName == nil then string.find(string.lower(p3.contactName or ""), string.lower(UseStateResult)) ~= nil else not p3.contactName:match("^%s*$") and string.find(string.lower(p3.contactName or ""), string.lower(UseStateResult)) ~= nil
 		end)
 	end
 	
-	local UseMemoResult = if FFlagContactsListEmojiSortingModule then React.useMemo(function() --[[ Line: 165 ]]
+	local UseMemoResult = if FFlagContactsListEmojiSortingModule then React.useMemo(function()
 		-- upvalues: UprankContactsWithEmojiFunction (upval), p1 (copy)
 		return UprankContactsWithEmojiFunction(p1.matchedContacts)
 	end, { p1.matchedContacts }) else nil
-	local UseMemoResult1 = if FFlagContactsListEmojiSortingModule then React.useMemo(function() --[[ Line: 170 ]]
+	local UseMemoResult1 = if FFlagContactsListEmojiSortingModule then React.useMemo(function()
 		-- upvalues: UprankContactsWithEmojiFunction (upval), p1 (copy)
 		return UprankContactsWithEmojiFunction(p1.deviceContacts)
 	end, { p1.deviceContacts }) else nil
-	local FilterResult = if FFlagContactsListEmojiSortingModule then Dash.filter(UseMemoResult, function(p2): boolean --[[ Line: 151 ]]
+	local FilterResult = if FFlagContactsListEmojiSortingModule then Dash.filter(UseMemoResult, function(p2): boolean
 		-- upvalues: UseStateResult (copy)
 		return if p2.contactName == nil then string.find(string.lower(p2.contactName or ""), string.lower(UseStateResult)) ~= nil else not p2.contactName:match("^%s*$") and string.find(string.lower(p2.contactName or ""), string.lower(UseStateResult)) ~= nil
-	end) else Dash.filter(p1.matchedContacts, function(p2): boolean --[[ Line: 151 ]]
+	end) else Dash.filter(p1.matchedContacts, function(p2): boolean
 		-- upvalues: UseStateResult (copy)
 		return if p2.contactName == nil then string.find(string.lower(p2.contactName or ""), string.lower(UseStateResult)) ~= nil else not p2.contactName:match("^%s*$") and string.find(string.lower(p2.contactName or ""), string.lower(UseStateResult)) ~= nil
 	end)
-	local FilterResult1 = if FFlagContactsListEmojiSortingModule then Dash.filter(UseMemoResult1, function(p2): boolean --[[ Line: 151 ]]
+	local FilterResult1 = if FFlagContactsListEmojiSortingModule then Dash.filter(UseMemoResult1, function(p2): boolean
 		-- upvalues: UseStateResult (copy)
 		return if p2.contactName == nil then string.find(string.lower(p2.contactName or ""), string.lower(UseStateResult)) ~= nil else not p2.contactName:match("^%s*$") and string.find(string.lower(p2.contactName or ""), string.lower(UseStateResult)) ~= nil
-	end) else Dash.filter(p1.deviceContacts, function(p2): boolean --[[ Line: 151 ]]
+	end) else Dash.filter(p1.deviceContacts, function(p2): boolean
 		-- upvalues: UseStateResult (copy)
 		return if p2.contactName == nil then string.find(string.lower(p2.contactName or ""), string.lower(UseStateResult)) ~= nil else not p2.contactName:match("^%s*$") and string.find(string.lower(p2.contactName or ""), string.lower(UseStateResult)) ~= nil
 	end)
 	
 	if ContactsListEmojiSortingIxpEnabled then
-		React.useEffect(function() --[[ Line: 185 ]]
+		React.useEffect(function()
 			-- upvalues: IXPService (upval), ContactsListEmojiSortingIxpLayer (upval)
 			IXPService:LogFlagLinkedUserLayerExposure(ContactsListEmojiSortingIxpLayer)
 		end, {})
@@ -141,7 +141,7 @@ return function(p1) --[[ Line: 97 | Named "ContactsList" ]]
 	local UseStateResult1, UseStateResult2_1 = React.useState(false)
 	
 	if FFlagQRCodeCopyUpdates then
-		React.useEffect(function() --[[ Line: 193 ]]
+		React.useEffect(function()
 			-- upvalues: FFlagTCPolicyCheckRedirect (upval), FStringIsUserInTcEligibleCountryAmpFeature (upval), FStringCanAccessTrustedContactsAmpFeature (upval), AmpApiProvider (upval), FStringCanAccessTrustedContactsAmpNameSpace (upval), AmpEnums (upval), UseStateResult2_1 (copy)
 			if AmpApiProvider.upsellFeatureAccess(if FFlagTCPolicyCheckRedirect then FStringIsUserInTcEligibleCountryAmpFeature else FStringCanAccessTrustedContactsAmpFeature, {}, FStringCanAccessTrustedContactsAmpNameSpace).access == AmpEnums.AccessResponseEnum.Granted then
 				UseStateResult2_1(true)
@@ -166,12 +166,12 @@ return function(p1) --[[ Line: 97 | Named "ContactsList" ]]
 			sectionNumber = #List + 1
 		})
 	end
-	local _ = function(): boolean --[[ Line: 223 ]]
+	local _ = function(): boolean
 		-- upvalues: p1 (copy)
 		return #p1.matchedContacts + #p1.deviceContacts == 0
 	end
 	
-	local function RenderItem(p2) --[[ Line: 227 ]]
+	local function RenderItem(p2)
 		-- upvalues: Roact (upval), UseStyleResult (copy), ContactsListEntryModule (upval), UseLocalizationResult (copy), p1 (copy), ContactsListInviteEntryModule (upval)
 		local Item = p2.item
 		
@@ -211,7 +211,7 @@ return function(p1) --[[ Line: 97 | Named "ContactsList" ]]
 		end
 	end
 	
-	local function v65(p2) --[[ Line: 266 ]]
+	local function v65(p2)
 		-- upvalues: Roact (upval), StyledTextLabel (upval), UseStyleResult (copy)
 		return if p2.section then Roact.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 0, 0) }, {
 			layout = Roact.createElement("UIListLayout", {
@@ -248,7 +248,7 @@ return function(p1) --[[ Line: 97 | Named "ContactsList" ]]
 		})
 	end
 	
-	local function v66(p2) --[[ Line: 311 ]]
+	local function v66(p2)
 		-- upvalues: p1 (copy), ButtonType (upval), Dash (upval), UseIsRemoveCloseButtonExperimentEnabledResult (copy), OnActivated (copy)
 		if p1.isFetching then
 			return {
@@ -351,7 +351,7 @@ return function(p1) --[[ Line: 97 | Named "ContactsList" ]]
 		searchBarContainer = Roact.createElement(ContactsListSearchBarModule, {
 			height = 36,
 			layoutOrder = 4,
-			textChangeCallback = function(p2) --[[ Line: 387 ]]
+			textChangeCallback = function(p2)
 				-- upvalues: UseStateResult2 (copy)
 				UseStateResult2(p2)
 			end

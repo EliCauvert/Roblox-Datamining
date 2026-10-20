@@ -9,7 +9,7 @@ local DialogSize = FoundationModule.Enums.DialogSize
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local FFlagEnableTeamTestLua = require(Parent.SharedFlags).FFlagEnableTeamTestLua
 
-return function(p1) --[[ Line: 27 | Named "RestoreVersionDialog" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), FFlagEnableTeamTestLua (copy), ButtonVariant (copy), Dialog (copy), DialogSize (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		cancel = LocalizationStringsModule.VERSION_HISTORY_CANCEL,
@@ -19,7 +19,7 @@ return function(p1) --[[ Line: 27 | Named "RestoreVersionDialog" ]]
 	local Cancel = UseLocalizationResult.cancel
 	local Revert = UseLocalizationResult.revert
 	local Restore = UseLocalizationResult.restore
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 36 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		if not p1.isLoading then
 			p1.onRestore()
@@ -27,7 +27,7 @@ return function(p1) --[[ Line: 27 | Named "RestoreVersionDialog" ]]
 			return
 		end
 	end, { p1.isLoading, p1.onRestore })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 42 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		if not p1.isLoading then
 			p1.onCancel()
@@ -35,7 +35,7 @@ return function(p1) --[[ Line: 27 | Named "RestoreVersionDialog" ]]
 			return
 		end
 	end, { p1.isLoading, p1.onCancel })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 49 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FFlagEnableTeamTestLua (upval), Revert (copy), Restore (copy), ButtonVariant (upval), p1 (copy), UseResult (copy), Cancel (copy), UseResult1 (copy)
 		return {
 			LayoutOrder = 3,

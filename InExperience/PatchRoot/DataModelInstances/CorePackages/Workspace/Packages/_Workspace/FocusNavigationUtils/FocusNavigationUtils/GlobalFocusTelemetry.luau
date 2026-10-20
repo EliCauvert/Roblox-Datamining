@@ -24,7 +24,7 @@ local config2 = {
 }
 
 return {
-	sendAutoFocusFailureCounter = function(p1) --[[ Line: 29 ]]
+	sendAutoFocusFailureCounter = function(p1)
 		-- upvalues: TelemetryService (copy), config (copy)
 		TelemetryService:LogCounter(config, {
 			customFields = {
@@ -32,7 +32,7 @@ return {
 			}
 		})
 	end,
-	sendAutoFocusRecoveryCounter = function() --[[ Line: 38 ]]
+	sendAutoFocusRecoveryCounter = function()
 		-- upvalues: TelemetryService (copy), config1 (copy), RunService (copy)
 		TelemetryService:LogCounter(config1)
 		
@@ -40,7 +40,7 @@ return {
 			warn("[GlobalFocusTelemetry] Global autofocus recovered")
 		end
 	end,
-	sendAutoFocusFailureEvent = function(Object, List, List1, List2, PrevRoute, CurrentRoute, OverlayType) --[[ Line: 45 ]]
+	sendAutoFocusFailureEvent = function(Object, List, List1, List2, PrevRoute, CurrentRoute, OverlayType)
 		-- upvalues: GuiService (copy), TelemetryService (copy), config2 (copy), RunService (copy)
 		local FullNames = {
 			SelectedCoreObject = if GuiService.SelectedCoreObject then GuiService.SelectedCoreObject:GetFullName() else "nil",

@@ -4,11 +4,11 @@ local IsGlobalMessagePrefixEnabledModule = require(ExpChat.isGlobalMessagePrefix
 local IsGlobalChatMessageModule = require(ExpChat.isGlobalChatMessage)
 local FFlagExpChatDisableNameTapActionInGlobalChatModule = require(ExpChat.Flags.FFlagExpChatDisableNameTapActionInGlobalChat)
 
-local function _(p1): boolean --[[ Line: 41 | Named "isGlobalChatMessage" ]]
+local function _(p1): boolean
 	return p1.isUniverseChat == true or p1.channelNameOverride == "RBXGlobal"
 end
 
-return function(Text: string, p1, p2, p3): string --[[ Line: 47 | Named "formatGlobalChatPrefix" ]]
+return function(Text: string, p1, p2, p3): string
 	-- upvalues: Players (copy), IsGlobalMessagePrefixEnabledModule (copy), FFlagExpChatDisableNameTapActionInGlobalChatModule (copy), IsGlobalChatMessageModule (copy)
 	local P3 = p3 or Players
 	

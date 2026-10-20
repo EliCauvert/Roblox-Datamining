@@ -10,7 +10,7 @@ local CreateElementFunction = ReactModule.createElement
 local ShallowTable = ViewRecyclerModule.Adapter._Private.ShallowTable
 local Frozen = table.freeze({ "axis", "activationMargin", "retentionMargin" })
 
-local function _(Callback: (any) -> (), Current) --[[ Line: 26 | Named "assignRef" ]]
+local function _(Callback: (any) -> (), Current)
 	if Callback == nil then return end
 	if type(Callback) == "function" then
 		Callback(Current)
@@ -22,14 +22,14 @@ local function _(Callback: (any) -> (), Current) --[[ Line: 26 | Named "assignRe
 end
 
 return {
-	create = function(p1) --[[ Line: 37 ]]
+	create = function(p1)
 		-- upvalues: RecyclingScopeModule (copy), ReactModule (copy), RecyclingScopeContextModule (copy), ShallowTable (copy), Frozen (copy), ViewRecyclerRobloxModule (copy), Axis (copy), CreateElementFunction (copy), RecyclingViewportContextModule (copy)
 		local NewRecyclingScope = RecyclingScopeModule.create(p1)
 		
-		return function(p2) --[[ Line: 40 | Named "RecyclingViewport" ]]
+		return function(p2)
 			-- upvalues: ReactModule (upval), RecyclingScopeContextModule (upval), ShallowTable (upval), Frozen (upval), ViewRecyclerRobloxModule (upval), Axis (upval), CreateElementFunction (upval), RecyclingViewportContextModule (upval), NewRecyclingScope (copy)
 			local UseContextResult = ReactModule.useContext(RecyclingScopeContextModule)
-			local UseStateResult = ReactModule.useState(function() --[[ Line: 42 ]]
+			local UseStateResult = ReactModule.useState(function()
 				-- upvalues: p2 (copy)
 				return {
 					axis = p2.axis,
@@ -38,16 +38,16 @@ return {
 				}
 			end)
 			assert(ShallowTable.containsEqual(p2, UseStateResult, Frozen), "RecyclingViewport: axis and margins cannot change during its lifetime")
-			local UseStateResult1 = ReactModule.useState(function() --[[ Line: 54 ]]
+			local UseStateResult1 = ReactModule.useState(function()
 				-- upvalues: ViewRecyclerRobloxModule (upval), UseStateResult (copy)
 				return ViewRecyclerRobloxModule.ViewportCoordinator.new(UseStateResult)
 			end)
-			local UseStateResult2 = ReactModule.useState(function() --[[ Line: 57 ]]
+			local UseStateResult2 = ReactModule.useState(function()
 				-- upvalues: UseStateResult1 (copy)
 				return { register = UseStateResult1.register }
 			end)
 			local ScrollingFrameRefFunction = p2.scrollingFrameRef
-			local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 63 ]]
+			local UseResult = ReactModule.useCallback(function(Current)
 				-- upvalues: UseStateResult1 (copy), ScrollingFrameRefFunction (copy)
 				UseStateResult1.setViewport(Current)
 				
@@ -60,9 +60,9 @@ return {
 					ScrollingFrameRefFunction.current = Current
 				end
 			end, { UseStateResult1, ScrollingFrameRefFunction })
-			ReactModule.useEffect(function() --[[ Line: 68 ]]
+			ReactModule.useEffect(function()
 				-- upvalues: UseStateResult1 (copy)
-				return function() --[[ Line: 69 ]]
+				return function()
 					-- upvalues: UseStateResult1 (upval)
 					UseStateResult1.destroy()
 				end

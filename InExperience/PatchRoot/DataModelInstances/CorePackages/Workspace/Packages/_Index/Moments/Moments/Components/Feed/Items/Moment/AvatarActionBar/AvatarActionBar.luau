@@ -13,7 +13,7 @@ local Radius = FoundationModule.Enums.Radius
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local ImageWithSkeletonModule = require(Moments.Components.ImageWithSkeleton)
 
-return function(Frame: Frame) --[[ Line: 53 | Named "AvatarActionBar" ]]
+return function(Frame: Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), ImageWithSkeletonModule (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy), Button (copy), FoundationModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Size1000 = UseTokensResult.Size.Size_1000

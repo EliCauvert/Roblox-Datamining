@@ -4,9 +4,9 @@ local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
 local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(Detail, OnClose) --[[ Line: 12 | Named "openFiatPurchasePage" ]]
+return function(Detail, OnClose)
 	-- upvalues: AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
-	return function(p1) --[[ Line: 13 ]]
+	return function(p1)
 		-- upvalues: AppPage (upval), Detail (copy), OnClose (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval)
 		local config = {
 			name = AppPage.GenericWebPage,

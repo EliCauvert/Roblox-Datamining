@@ -1,11 +1,11 @@
 ﻿local ResultModule = require(script:FindFirstAncestor("GameProductInfoRodux").Parent.Result)
 local GameProductInfoModule = {
-	new = function() --[[ Line: 18 ]]
+	new = function()
 		return {}
 	end
 }
 
-function GameProductInfoModule.mock(UniverseId) --[[ Line: 23 ]]
+function GameProductInfoModule.mock(UniverseId)
 	-- upvalues: GameProductInfoModule (copy)
 	local NewGameProductInfo = GameProductInfoModule.new()
 	NewGameProductInfo.universeId = UniverseId
@@ -17,7 +17,7 @@ function GameProductInfoModule.mock(UniverseId) --[[ Line: 23 ]]
 	return NewGameProductInfo
 end
 
-function GameProductInfoModule.fromJsonData(p1) --[[ Line: 33 ]]
+function GameProductInfoModule.fromJsonData(p1)
 	-- upvalues: ResultModule (copy), GameProductInfoModule (copy)
 	local IsBoolean: boolean = p1.fiatPurchaseData ~= nil and (type(p1.universeId) == "number" and type(p1.isForSale) == "boolean")
 	

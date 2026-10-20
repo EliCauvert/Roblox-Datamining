@@ -13,11 +13,11 @@ local FFlagSideSheetOpenPeoplePage = require(InExperienceSideSheet.Flags).FFlagS
 local FFlagShowSwitchServerButton = require(Parent.SharedFlags).FFlagShowSwitchServerButton
 local IsPioneerLaunchFunction = require(Parent.PioneerUtils).isPioneerLaunch
 
-local function createActionBinding(KeyCodes) --[[ Line: 38 ]]
+local function createActionBinding(KeyCodes)
 	-- upvalues: SignalsModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(true)
-	local Signal1, Signal2_1 = SignalsModule.createSignal(function() --[[ Line: 40 ]]
-		return function() --[[ Line: 41 ]] end
+	local Signal1, Signal2_1 = SignalsModule.createSignal(function()
+		return function() end
 	end)
 	
 	return {
@@ -29,7 +29,7 @@ local function createActionBinding(KeyCodes) --[[ Line: 38 ]]
 	}
 end
 
-return function() --[[ Line: 53 | Named "createActionBindingsStore" ]]
+return function()
 	-- upvalues: EnumsModule (copy), createActionBinding (copy), FFlagShowSwitchServerButton (copy), IsPioneerLaunchFunction (copy), SignalsModule (copy), GetIntegrationsStoreModule (copy), FFlagSideSheetOpenPeoplePage (copy), ClosePeoplePageOpenedWithSideSheetModule (copy), ToggleSideSheetModule (copy), SidesheetAnalyticsModule (copy), AnalyticsConstantsModule (copy), GetSideSheetVisibilityModule (copy), ContextActionService (copy)
 	local SessionActionBindings = {
 		[EnumsModule.ActionBinding.Leave] = createActionBinding({ Enum.KeyCode.L, Enum.KeyCode.ButtonX }),
@@ -39,15 +39,15 @@ return function() --[[ Line: 53 | Named "createActionBindingsStore" ]]
 	if FFlagShowSwitchServerButton or IsPioneerLaunchFunction() then
 		SessionActionBindings[EnumsModule.ActionBinding.SwitchServer] = createActionBinding(nil)
 	end
-	local Effect = SignalsModule.createEffect(function(p1) --[[ Line: 63 ]]
+	local Effect = SignalsModule.createEffect(function(p1)
 		-- upvalues: GetIntegrationsStoreModule (upval), SessionActionBindings (copy), FFlagSideSheetOpenPeoplePage (upval), ClosePeoplePageOpenedWithSideSheetModule (upval), ToggleSideSheetModule (upval), SidesheetAnalyticsModule (upval), AnalyticsConstantsModule (upval)
 		for _, value in GetIntegrationsStoreModule(p1).getSessionActionIntegrations(p1) do
 			local SessionActionBinding = SessionActionBindings[value.id]
 			
 			if SessionActionBinding then
-				SessionActionBinding.setOnActivated(function() --[[ Line: 71 ]]
+				SessionActionBinding.setOnActivated(function()
 					-- upvalues: value (copy), FFlagSideSheetOpenPeoplePage (upval), ClosePeoplePageOpenedWithSideSheetModule (upval), ToggleSideSheetModule (upval), SidesheetAnalyticsModule (upval), AnalyticsConstantsModule (upval)
-					return function() --[[ Line: 72 ]]
+					return function()
 						-- upvalues: value (upval), FFlagSideSheetOpenPeoplePage (upval), ClosePeoplePageOpenedWithSideSheetModule (upval), ToggleSideSheetModule (upval), SidesheetAnalyticsModule (upval), AnalyticsConstantsModule (upval)
 						value.activated()
 						
@@ -61,12 +61,12 @@ return function() --[[ Line: 53 | Named "createActionBindingsStore" ]]
 			end
 		end
 	end)
-	local Effect1 = SignalsModule.createEffect(function(p2) --[[ Line: 86 ]]
+	local Effect1 = SignalsModule.createEffect(function(p2)
 		-- upvalues: GetSideSheetVisibilityModule (upval), SessionActionBindings (copy), IsPioneerLaunchFunction (upval), FFlagShowSwitchServerButton (upval), ContextActionService (upval)
 		if GetSideSheetVisibilityModule(p2) then
 			for i, sessionActionBinding in SessionActionBindings do
 				if not IsPioneerLaunchFunction() and not FFlagShowSwitchServerButton or sessionActionBinding.keyCodes ~= nil then
-					local function FunctionToBind(_, UserInputState, _) --[[ Line: 93 ]]
+					local function FunctionToBind(_, UserInputState, _)
 						-- upvalues: sessionActionBinding (copy)
 						if UserInputState == Enum.UserInputState.Begin then
 							sessionActionBinding.getOnActivated()()
@@ -90,7 +90,7 @@ return function() --[[ Line: 53 | Named "createActionBindingsStore" ]]
 	
 	return {
 		sessionActionBindings = SessionActionBindings,
-		cleanUp = function() --[[ Line: 113 ]]
+		cleanUp = function()
 			-- upvalues: Effect1 (copy), Effect (copy)
 			Effect1()
 			Effect()

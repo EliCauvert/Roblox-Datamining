@@ -10,7 +10,7 @@ local UseApolloClientFunction = ApolloClientModule.useApolloClient
 local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
 local HandlePresenceEventWithScoresModule = require(FriendsCommon.EventHandlers.handlePresenceEventWithScores)
 
-return function() --[[ Line: 38 | Named "useHandlePresenceEvent" ]]
+return function()
 	-- upvalues: UseLocalUserIdFunction (copy), UseApolloClientFunction (copy), UseQueryFunction (copy), Queries (copy), UserIdExistsFunction (copy), ApolloFriendsModule (copy), ReactModule (copy), HandlePresenceEventWithScoresModule (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseApolloClientResult = UseApolloClientFunction()
@@ -24,7 +24,7 @@ return function() --[[ Line: 38 | Named "useHandlePresenceEvent" ]]
 	})
 	
 	return {
-		handleNewEvent = ReactModule.useCallback(function(UpdatedPresences, UpdatedSortScores, RtnMessageId) --[[ Line: 52 ]]
+		handleNewEvent = ReactModule.useCallback(function(UpdatedPresences, UpdatedSortScores, RtnMessageId)
 			-- upvalues: HandlePresenceEventWithScoresModule (upval), UseLocalUserIdResult (copy), UseApolloClientResult (copy), UseQueryResult (copy)
 			HandlePresenceEventWithScoresModule({
 				localUserId = UseLocalUserIdResult,
@@ -39,7 +39,7 @@ return function() --[[ Line: 38 | Named "useHandlePresenceEvent" ]]
 			UseApolloClientResult,
 			UseQueryResult
 		}),
-		refetchOnlineFriends = ReactModule.useCallback(function() --[[ Line: 63 ]]
+		refetchOnlineFriends = ReactModule.useCallback(function()
 			-- upvalues: UseQueryResult (copy)
 			return UseQueryResult.refetch()
 		end, { UseQueryResult })

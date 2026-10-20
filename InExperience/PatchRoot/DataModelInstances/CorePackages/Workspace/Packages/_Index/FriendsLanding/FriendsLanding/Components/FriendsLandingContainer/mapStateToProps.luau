@@ -1,3 +1,3 @@
-﻿return function(p1, _) --[[ Line: 1 ]]
+﻿return function(p1, _)
 	return { localUserId = p1.LocalUserId }
 end

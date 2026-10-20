@@ -8,7 +8,7 @@ return require(Foundation.Parent.React).createContext({
 	contentStartRef = nil,
 	size = DialogSizeModule.Small,
 	responsiveSize = DialogSizeModule.Small,
-	setResponsiveSize = function(_) --[[ Line: 11 ]] end,
-	setHasHeroMedia = function(_) --[[ Line: 13 ]] end,
-	setContentStartRef = function(_) --[[ Line: 17 ]] end
+	setResponsiveSize = function(_) end,
+	setHasHeroMedia = function(_) end,
+	setContentStartRef = function(_) end
 })

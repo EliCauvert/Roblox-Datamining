@@ -9,12 +9,12 @@ local InvariantFunction = InvariantModule.invariant
 local InvariantError = InvariantModule.InvariantError
 local ValueToObjectRepresentationFunction = require(script.Parent.storeUtils).valueToObjectRepresentation
 
-local function checkDocument(p1) --[[ Line: 29 ]]
+local function checkDocument(p1)
 	-- upvalues: InvariantFunction (copy), Array (copy), InvariantError (copy)
 	InvariantFunction(p1 and p1.kind == "Document", "Expecting a parsed GraphQL document. Perhaps you need to wrap the query string in a \"gql\" tag? http://docs.apollostack.com/apollo-client/core.html#gql")
-	local MapResult = Array.map(Array.filter(p1.definitions, function(p2): boolean --[[ Line: 36 ]]
+	local MapResult = Array.map(Array.filter(p1.definitions, function(p2): boolean
 		return p2.kind ~= "FragmentDefinition"
-	end), function(p2) --[[ Line: 39 ]]
+	end), function(p2)
 		-- upvalues: InvariantError (upval)
 		if p2.kind ~= "OperationDefinition" then
 			error(InvariantError.new(("Schema type definitions not allowed in queries. Found: \"%s\""):format(p2.kind)))
@@ -28,43 +28,43 @@ end
 
 return {
 	checkDocument = checkDocument,
-	getOperationDefinition = function(p1) --[[ Line: 57 ]]
+	getOperationDefinition = function(p1)
 		-- upvalues: checkDocument (copy), Array (copy)
 		checkDocument(p1)
 		
-		return Array.filter(p1.definitions, function(p2): boolean --[[ Line: 59 ]]
+		return Array.filter(p1.definitions, function(p2): boolean
 			return p2.kind == "OperationDefinition"
 		end)[1]
 	end,
-	getOperationName = function(p1) --[[ Line: 65 ]]
+	getOperationName = function(p1)
 		-- upvalues: Array (copy), Boolean (copy)
-		local MapResult = Array.map(Array.filter(p1.definitions, function(p2) --[[ Line: 67 ]]
+		local MapResult = Array.map(Array.filter(p1.definitions, function(p2)
 			-- upvalues: Boolean (upval)
 			return if Boolean.toJSBoolean(p2.kind == "OperationDefinition") then p2.name else p2.kind == "OperationDefinition"
-		end), function(p2) --[[ Line: 74 ]]
+		end), function(p2)
 			-- upvalues: Boolean (upval)
 			return Boolean.toJSBoolean(p2) and Boolean.toJSBoolean(p2.name) and p2.name.value or nil
 		end)
 		
 		return Boolean.toJSBoolean(MapResult[1]) and MapResult[1] or nil
 	end,
-	getFragmentDefinitions = function(p1) --[[ Line: 84 ]]
+	getFragmentDefinitions = function(p1)
 		-- upvalues: Array (copy)
-		return (Array.filter(p1.definitions, function(p2): boolean --[[ Line: 85 ]]
+		return (Array.filter(p1.definitions, function(p2): boolean
 			return p2.kind == "FragmentDefinition"
 		end))
 	end,
-	getQueryDefinition = function(p1) --[[ Line: 91 ]]
+	getQueryDefinition = function(p1)
 		-- upvalues: checkDocument (copy), Array (copy), InvariantFunction (copy), Boolean (copy)
 		checkDocument(p1)
-		local FilterResultEntry = Array.filter(p1.definitions, function(p2): boolean --[[ Line: 59 ]]
+		local FilterResultEntry = Array.filter(p1.definitions, function(p2): boolean
 			return p2.kind == "OperationDefinition"
 		end)[1]
 		InvariantFunction(Boolean.toJSBoolean(FilterResultEntry) and FilterResultEntry.operation == "query", "Must contain a query definition.")
 		
 		return FilterResultEntry
 	end,
-	getFragmentDefinition = function(p1) --[[ Line: 99 ]]
+	getFragmentDefinition = function(p1)
 		-- upvalues: InvariantFunction (copy)
 		InvariantFunction(p1.kind == "Document", "Expecting a parsed GraphQL document. Perhaps you need to wrap the query string in a \"gql\" tag? http://docs.apollostack.com/apollo-client/core.html#gql")
 		InvariantFunction(#p1.definitions <= 1, "Fragment must have exactly one definition.")
@@ -73,7 +73,7 @@ return {
 		
 		return Definition
 	end,
-	getMainDefinition = function(p1) --[[ Line: 120 ]]
+	getMainDefinition = function(p1)
 		-- upvalues: checkDocument (copy), Boolean (copy), InvariantError (copy)
 		checkDocument(p1)
 		local v1 = nil
@@ -96,13 +96,13 @@ return {
 			error(InvariantError.new("Expected a parsed GraphQL query with a query, mutation, subscription, or a fragment."))
 		end
 	end,
-	getDefaultValues = function(p2) --[[ Line: 148 ]]
+	getDefaultValues = function(p2)
 		-- upvalues: Array (copy), Boolean (copy), ValueToObjectRepresentationFunction (copy)
 		local t = {}
 		local VariableDefinitions = if p2 == nil then nil else p2.variableDefinitions
 		
 		if VariableDefinitions ~= nil and #VariableDefinitions > 0 then
-			Array.forEach(VariableDefinitions, function(p3) --[[ Line: 157 ]]
+			Array.forEach(VariableDefinitions, function(p3)
 				-- upvalues: Boolean (upval), ValueToObjectRepresentationFunction (upval), t (copy)
 				if Boolean.toJSBoolean(p3.defaultValue) then
 					ValueToObjectRepresentationFunction(t, p3.variable.name, p3.defaultValue)

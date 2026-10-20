@@ -4,7 +4,7 @@ local FoundationModule = require(Songbird.Parent.Foundation)
 local ProgressCountdownModule = require(Songbird.Components.ProgressCountdown)
 local CreateNextOrderFunction = require(Songbird.Parent.ReactUtils).createNextOrder
 
-return function(Frame) --[[ Line: 22 | Named "AudioPlaybackTimeline" ]]
+return function(Frame)
 	-- upvalues: CreateNextOrderFunction (copy), ReactModule (copy), FoundationModule (copy), ProgressCountdownModule (copy)
 	local NextOrder = CreateNextOrderFunction()
 	
@@ -23,7 +23,7 @@ return function(Frame) --[[ Line: 22 | Named "AudioPlaybackTimeline" ]]
 			LayoutOrder = NextOrder()
 		}, {
 			Slider = ReactModule.createElement(FoundationModule.Slider, {
-				value = Frame.elapsed:map(function(p1) --[[ Line: 41 ]]
+				value = Frame.elapsed:map(function(p1)
 					-- upvalues: Frame (copy)
 					return if Frame.duration > 0 then p1 / Frame.duration else 0
 				end),

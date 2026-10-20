@@ -8,27 +8,27 @@ while LocalPlayer == nil do
 	LocalPlayer = Players.LocalPlayer
 end
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
-local Success, Result = pcall(function() --[[ Line: 24 ]]
+local Success, Result = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserShouldLocalizeGameChatBubble")
 end)
 local Result1 = Success and Result
 local Result2_1 = nil
-local Success1, Result2 = pcall(function() --[[ Line: 30 ]]
+local Success1, Result2 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserFixBubbleChatText")
 end)
 Result2_1 = Success1 and Result2
 local Result3_1 = nil
-local Success2, Result3 = pcall(function() --[[ Line: 37 ]]
+local Success2, Result3 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserRoactBubbleChatBeta")
 end)
 Result3_1 = Success2 and Result3
 local Result4_1 = nil
-local Success3, Result4 = pcall(function() --[[ Line: 44 ]]
+local Success3, Result4 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserPreventOldBubbleChatOverlap")
 end)
 Result4_1 = Success3 and Result4
 
-local function _(p1): number --[[ Line: 50 | Named "getMessageLength" ]]
+local function _(p1): number
 	return utf8.len(utf8.nfcnormalize(p1))
 end
 
@@ -41,25 +41,25 @@ BubbleChat.Name = "BubbleChat"
 BubbleChat.ResetOnSpawn = false
 BubbleChat.Parent = PlayerGui
 
-local _ = function(p1, p2, p3) --[[ Line: 93 | Named "lerpLength" ]]
+local _ = function(p1, p2, p3)
 	return p2 + (p3 - p2) * math.min(utf8.len(utf8.nfcnormalize(p1)) / 75, 1)
 end
 
-local function createFifo() --[[ Line: 97 ]]
+local function createFifo()
 	local BindableEvent = Instance.new("BindableEvent")
 	local config = { data = {}, Emptied = BindableEvent.Event }
 	
-	function config:Size(): number --[[ Line: 104 ]]
+	function config:Size(): number
 		-- upvalues: config (copy)
 		return #config.data
 	end
 	
-	function config:Empty(): boolean --[[ Line: 108 ]]
+	function config:Empty(): boolean
 		-- upvalues: config (copy)
 		return config:Size() <= 0
 	end
 	
-	function config:PopFront() --[[ Line: 112 ]]
+	function config:PopFront()
 		-- upvalues: config (copy), BindableEvent (copy)
 		table.remove(config.data, 1)
 		
@@ -68,22 +68,22 @@ local function createFifo() --[[ Line: 97 ]]
 		end
 	end
 	
-	function config:Front() --[[ Line: 117 ]]
+	function config:Front()
 		-- upvalues: config (copy)
 		return config.data[1]
 	end
 	
-	function config:Get(p1) --[[ Line: 121 ]]
+	function config:Get(p1)
 		-- upvalues: config (copy)
 		return config.data[p1]
 	end
 	
-	function config:PushBack(p1) --[[ Line: 125 ]]
+	function config:PushBack(p1)
 		-- upvalues: config (copy)
 		table.insert(config.data, p1)
 	end
 	
-	function config:GetData() --[[ Line: 129 ]]
+	function config:GetData()
 		-- upvalues: config (copy)
 		return config.data
 	end
@@ -91,23 +91,23 @@ local function createFifo() --[[ Line: 97 ]]
 	return config
 end
 
-local _ = function() --[[ Line: 136 | Named "createCharacterChats" ]]
+local _ = function()
 	-- upvalues: createFifo (copy)
 	return { Fifo = createFifo(), BillboardGui = nil }
 end
 
-local function createMap() --[[ Line: 145 ]]
+local function createMap()
 	-- upvalues: createFifo (copy)
 	local Count = 0
 	local config = {
 		data = {},
-		Size = function(_) --[[ Line: 150 ]]
+		Size = function(_)
 			-- upvalues: Count (ref)
 			return Count
 		end
 	}
 	
-	function config:Erase(p1) --[[ Line: 154 ]]
+	function config:Erase(p1)
 		-- upvalues: config (copy), Count (ref)
 		if config.data[p1] then
 			Count -= 1
@@ -115,7 +115,7 @@ local function createMap() --[[ Line: 145 ]]
 		config.data[p1] = nil
 	end
 	
-	function config:Set(p1, p2) --[[ Line: 159 ]]
+	function config:Set(p1, p2)
 		-- upvalues: config (copy), Count (ref)
 		config.data[p1] = p2
 		
@@ -124,13 +124,13 @@ local function createMap() --[[ Line: 145 ]]
 		end
 	end
 	
-	function config:Get(p1) --[[ Line: 164 ]]
+	function config:Get(p1)
 		-- upvalues: config (copy), createFifo (upval)
 		if not p1 then return end
 		if not config.data[p1] then
 			config.data[p1] = { Fifo = createFifo(), BillboardGui = nil }
 			local EmptiedConnection = nil
-			EmptiedConnection = config.data[p1].Fifo.Emptied:connect(function() --[[ Line: 169 ]]
+			EmptiedConnection = config.data[p1].Fifo.Emptied:connect(function()
 				-- upvalues: EmptiedConnection (ref), config (upval), p1 (copy)
 				EmptiedConnection:disconnect()
 				config:Erase(p1)
@@ -139,7 +139,7 @@ local function createMap() --[[ Line: 145 ]]
 		return config.data[p1]
 	end
 	
-	function config:GetData() --[[ Line: 177 ]]
+	function config:GetData()
 		-- upvalues: config (copy)
 		return config.data
 	end
@@ -147,9 +147,9 @@ local function createMap() --[[ Line: 145 ]]
 	return config
 end
 
-local function createChatLine(Message, BubbleColor, IsLocalPlayer) --[[ Line: 184 ]]
+local function createChatLine(Message, BubbleColor, IsLocalPlayer)
 	local config = {
-		ComputeBubbleLifetime = function(_, Message, IsLocalPlayer): number --[[ Line: 187 ]]
+		ComputeBubbleLifetime = function(_, Message, IsLocalPlayer): number
 			return if IsLocalPlayer then 8 + 7 * math.min(utf8.len(utf8.nfcnormalize(Message)) / 75, 1) else 12 + 8 * math.min(utf8.len(utf8.nfcnormalize(Message)) / 75, 1)
 		end,
 		Origin = nil,
@@ -163,7 +163,7 @@ local function createChatLine(Message, BubbleColor, IsLocalPlayer) --[[ Line: 18
 	return config
 end
 
-local _ = function(Player, Message, IsLocalPlayer) --[[ Line: 205 | Named "createPlayerChatLine" ]]
+local _ = function(Player, Message, IsLocalPlayer)
 	-- upvalues: createChatLine (copy)
 	local Dub = createChatLine(Message, "dub", IsLocalPlayer)
 	
@@ -174,7 +174,7 @@ local _ = function(Player, Message, IsLocalPlayer) --[[ Line: 205 | Named "creat
 	return Dub
 end
 
-local _ = function(Origin, Message, IsLocalPlayer, BubbleColor) --[[ Line: 216 | Named "createGameChatLine" ]]
+local _ = function(Origin, Message, IsLocalPlayer, BubbleColor)
 	-- upvalues: createChatLine (copy)
 	local ChatLine = createChatLine(Message, BubbleColor, IsLocalPlayer)
 	ChatLine.Origin = Origin
@@ -182,7 +182,7 @@ local _ = function(Origin, Message, IsLocalPlayer, BubbleColor) --[[ Line: 216 |
 	return ChatLine
 end
 
-function createChatBubbleMain(p1, SliceCenter) --[[ Line: 223 ]]
+function createChatBubbleMain(p1, SliceCenter)
 	local ChatBubble = Instance.new("ImageLabel")
 	ChatBubble.Name = "ChatBubble"
 	ChatBubble.ScaleType = Enum.ScaleType.Slice
@@ -196,7 +196,7 @@ function createChatBubbleMain(p1, SliceCenter) --[[ Line: 223 ]]
 	return ChatBubble
 end
 
-function createChatBubbleTail(Position, Size) --[[ Line: 237 ]]
+function createChatBubbleTail(Position, Size)
 	local ChatBubbleTail = Instance.new("ImageLabel")
 	ChatBubbleTail.Name = "ChatBubbleTail"
 	ChatBubbleTail.Image = "rbxasset://textures/ui/dialog_tail.png"
@@ -208,14 +208,14 @@ function createChatBubbleTail(Position, Size) --[[ Line: 237 ]]
 	return ChatBubbleTail
 end
 
-function createChatBubbleWithTail(p1, p2, p3, p4) --[[ Line: 249 ]]
+function createChatBubbleWithTail(p1, p2, p3, p4)
 	local ChatBubbleMain = createChatBubbleMain(p1, p4)
 	createChatBubbleTail(p2, p3).Parent = ChatBubbleMain
 	
 	return ChatBubbleMain
 end
 
-function createScaledChatBubbleWithTail(p1, XScale, p2, p3) --[[ Line: 258 ]]
+function createScaledChatBubbleWithTail(p1, XScale, p2, p3)
 	local ChatBubbleMain = createChatBubbleMain(p1, p3)
 	local ChatBubbleTailFrame = Instance.new("Frame")
 	ChatBubbleTailFrame.Name = "ChatBubbleTailFrame"
@@ -229,7 +229,7 @@ function createScaledChatBubbleWithTail(p1, XScale, p2, p3) --[[ Line: 258 ]]
 	return ChatBubbleMain
 end
 
-function createChatImposter(p1, p2, YScale) --[[ Line: 275 ]]
+function createChatImposter(p1, p2, YScale)
 	local DialogPlaceholder = Instance.new("ImageLabel")
 	DialogPlaceholder.Name = "DialogPlaceholder"
 	DialogPlaceholder.Image = "rbxasset://textures/" .. tostring(p1) .. ".png"
@@ -256,7 +256,7 @@ local config1 = {
 	CharacterSortedMsg = createMap()
 }
 
-local function initChatBubbleType(p1, p2, _, p3, p4) --[[ Line: 304 ]]
+local function initChatBubbleType(p1, p2, _, p3, p4)
 	-- upvalues: config1 (copy)
 	config1.ChatBubble[p1] = createChatBubbleMain(p2, p4)
 	config1.ChatBubbleWithTail[p1] = createChatBubbleWithTail(p2, UDim2.new(0.5, -14, 1, if p3 then -1 else 0), UDim2.new(0, 30, 0, 14), p4)
@@ -268,12 +268,12 @@ initChatBubbleType("blu", "ui/dialog_blue", "ui/chatBubble_blue_notify_bkg", tru
 initChatBubbleType("red", "ui/dialog_red", "ui/chatBubble_red_notify_bkg", true, Rect.new(7, 7, 33, 33))
 initChatBubbleType("gre", "ui/dialog_green", "ui/chatBubble_green_notify_bkg", true, Rect.new(7, 7, 33, 33))
 
-function config1:SanitizeChatLine(Text: string): string --[[ Line: 315 ]]
+function config1:SanitizeChatLine(Text: string): string
 	-- upvalues: LengthDelta (copy)
 	return if LengthDelta < utf8.len(utf8.nfcnormalize(Text)) then string.sub(Text, 1, utf8.offset(Text, LengthDelta + utf8.len(utf8.nfcnormalize("...")) + 1) - 1) else Text
 end
 
-local function createBillboardInstance(Adornee) --[[ Line: 324 ]]
+local function createBillboardInstance(Adornee)
 	-- upvalues: BubbleChat (copy), config1 (copy)
 	local Billboard = Instance.new("BillboardGui")
 	Billboard.Adornee = Adornee
@@ -287,7 +287,7 @@ local function createBillboardInstance(Adornee) --[[ Line: 324 ]]
 	BillboardFrame.BackgroundTransparency = 1
 	BillboardFrame.Parent = Billboard
 	local ChildRemovedConnection = nil
-	ChildRemovedConnection = BillboardFrame.ChildRemoved:connect(function() --[[ Line: 339 ]]
+	ChildRemovedConnection = BillboardFrame.ChildRemoved:connect(function()
 		-- upvalues: BillboardFrame (copy), ChildRemovedConnection (ref), Billboard (copy)
 		if #BillboardFrame:GetChildren() <= 1 then
 			ChildRemovedConnection:disconnect()
@@ -299,7 +299,7 @@ local function createBillboardInstance(Adornee) --[[ Line: 324 ]]
 	return Billboard
 end
 
-function config1:CreateBillboardGuiHelper(Object, p1) --[[ Line: 351 ]]
+function config1:CreateBillboardGuiHelper(Object, p1)
 	-- upvalues: config1 (copy), createBillboardInstance (copy)
 	if Object and not config1.CharacterSortedMsg:Get(Object).BillboardGui then
 		if not p1 and Object:IsA("BasePart") then
@@ -317,17 +317,17 @@ function config1:CreateBillboardGuiHelper(Object, p1) --[[ Line: 351 ]]
 	end
 end
 
-local _ = function(p1) --[[ Line: 373 | Named "distanceToBubbleOrigin" ]]
+local _ = function(p1)
 	return if p1 then (p1.Position - game.Workspace.CurrentCamera.CoordinateFrame.Position).magnitude else 100000
 end
 
-local _ = function(Object) --[[ Line: 379 | Named "isPartOfLocalPlayer" ]]
+local _ = function(Object)
 	-- upvalues: Players (copy)
 	if not Object or not Players.LocalPlayer.Character then return end
 	return Object:IsDescendantOf(Players.LocalPlayer.Character)
 end
 
-function config1:SetBillboardLODNear(p1) --[[ Line: 385 ]]
+function config1:SetBillboardLODNear(p1)
 	-- upvalues: Players (copy)
 	local Adornee = p1.Adornee
 	local IsDescendantOf = if Adornee and Players.LocalPlayer.Character then Adornee:IsDescendantOf(Players.LocalPlayer.Character) else nil
@@ -342,7 +342,7 @@ function config1:SetBillboardLODNear(p1) --[[ Line: 385 ]]
 	p1.BillboardFrame.SmallTalkBubble.Visible = false
 end
 
-function config1:SetBillboardLODDistant(p2) --[[ Line: 397 ]]
+function config1:SetBillboardLODDistant(p2)
 	-- upvalues: Players (copy)
 	local Adornee = p2.Adornee
 	local IsDescendantOf = if Adornee and Players.LocalPlayer.Character then Adornee:IsDescendantOf(Players.LocalPlayer.Character) else nil
@@ -357,11 +357,11 @@ function config1:SetBillboardLODDistant(p2) --[[ Line: 397 ]]
 	p2.BillboardFrame.SmallTalkBubble.Visible = true
 end
 
-function config1:SetBillboardLODVeryFar(p3) --[[ Line: 409 ]]
+function config1:SetBillboardLODVeryFar(p3)
 	p3.Enabled = false
 end
 
-function config1:SetBillboardGuiLOD(BillboardGui, Model: Model) --[[ Line: 413 ]]
+function config1:SetBillboardGuiLOD(BillboardGui, Model: Model)
 	-- upvalues: config1 (copy)
 	if not Model then return end
 	if Model:IsA("Model") then
@@ -389,7 +389,7 @@ function config1:SetBillboardGuiLOD(BillboardGui, Model: Model) --[[ Line: 413 ]
 	end
 end
 
-function config1:CameraCFrameChanged() --[[ Line: 433 ]]
+function config1:CameraCFrameChanged()
 	-- upvalues: config1 (copy)
 	for i, entry in pairs(config1.CharacterSortedMsg:GetData()) do
 		local BillboardGui = entry.BillboardGui
@@ -400,7 +400,7 @@ function config1:CameraCFrameChanged() --[[ Line: 433 ]]
 	end
 end
 
-function config1:CreateBubbleText(Text, AutoLocalize) --[[ Line: 440 ]]
+function config1:CreateBubbleText(Text, AutoLocalize)
 	-- upvalues: Result2_1 (ref), SourceSans (copy), Size24 (copy)
 	local BubbleText = Instance.new("TextLabel")
 	BubbleText.Name = "BubbleText"
@@ -431,7 +431,7 @@ function config1:CreateBubbleText(Text, AutoLocalize) --[[ Line: 440 ]]
 	return BubbleText
 end
 
-function config1:CreateSmallTalkBubble(p3) --[[ Line: 472 ]]
+function config1:CreateSmallTalkBubble(p3)
 	-- upvalues: config1 (copy)
 	local SmallTalkBubble = config1.ScalingChatBubbleWithTail[p3]:Clone()
 	SmallTalkBubble.Name = "SmallTalkBubble"
@@ -447,7 +447,7 @@ function config1:CreateSmallTalkBubble(p3) --[[ Line: 472 ]]
 	return SmallTalkBubble
 end
 
-function config1:UpdateChatLinesForOrigin(Origin, p3: number) --[[ Line: 487 ]]
+function config1:UpdateChatLinesForOrigin(Origin, p3: number)
 	-- upvalues: config1 (copy)
 	local Fifo = config1.CharacterSortedMsg:Get(Origin).Fifo
 	local SizeResult: number = Fifo:Size()
@@ -475,13 +475,13 @@ function config1:UpdateChatLinesForOrigin(Origin, p3: number) --[[ Line: 487 ]]
 	end
 end
 
-function config1:DestroyBubble(p4, Frame) --[[ Line: 513 ]]
+function config1:DestroyBubble(p4, Frame)
 	if not p4 then return end
 	if p4:Empty() then return end
 	local RenderBubble = p4:Front().RenderBubble
 	
 	if RenderBubble then
-		spawn(function() --[[ Line: 523 ]]
+		spawn(function()
 			-- upvalues: p4 (copy), Frame (copy), RenderBubble (ref)
 			while p4:Front().RenderBubble ~= Frame do
 				wait()
@@ -515,7 +515,7 @@ function config1:DestroyBubble(p4, Frame) --[[ Line: 513 ]]
 	end
 end
 
-function config1:CreateChatLineRender(Origin, p5, p6, Fifo, AutoLocalize) --[[ Line: 551 ]]
+function config1:CreateChatLineRender(Origin, p5, p6, Fifo, AutoLocalize)
 	-- upvalues: config1 (copy), TextService (copy), SourceSans (copy), Result2_1 (ref)
 	if not Origin then return end
 	if not config1.CharacterSortedMsg:Get(Origin).BillboardGui then
@@ -538,7 +538,7 @@ function config1:CreateChatLineRender(Origin, p5, p6, Fifo, AutoLocalize) --[[ L
 			local YOffset = YRatio * 34
 			Copy.Size = UDim2.fromOffset(0, 0)
 			Copy.Position = UDim2.fromScale(0.5, 1)
-			Copy:TweenSizeAndPosition(UDim2.fromOffset(Ceiled, YOffset), UDim2.new(0.5, -Ceiled / 2, 1, -YOffset), Enum.EasingDirection.Out, Enum.EasingStyle.Elastic, 0.1, true, function() --[[ Line: 590 ]]
+			Copy:TweenSizeAndPosition(UDim2.fromOffset(Ceiled, YOffset), UDim2.new(0.5, -Ceiled / 2, 1, -YOffset), Enum.EasingDirection.Out, Enum.EasingStyle.Elastic, 0.1, true, function()
 				-- upvalues: BubbleText (copy)
 				BubbleText.Visible = true
 			end)
@@ -549,21 +549,21 @@ function config1:CreateChatLineRender(Origin, p5, p6, Fifo, AutoLocalize) --[[ L
 			Copy.Size = UDim2.new(0, 0, 0, 0)
 			Copy.Position = UDim2.new(0.5, 0, 1, 0)
 			local YOffset1 = YRatio * 34
-			Copy:TweenSizeAndPosition(UDim2.new(Largest, 0, 0, YOffset1), UDim2.new((1 - Largest) / 2, 0, 1, -YOffset1), Enum.EasingDirection.Out, Enum.EasingStyle.Elastic, 0.1, true, function() --[[ Line: 610 ]]
+			Copy:TweenSizeAndPosition(UDim2.new(Largest, 0, 0, YOffset1), UDim2.new((1 - Largest) / 2, 0, 1, -YOffset1), Enum.EasingDirection.Out, Enum.EasingStyle.Elastic, 0.1, true, function()
 				-- upvalues: BubbleText (copy)
 				BubbleText.Visible = true
 			end)
 			config1:SetBillboardGuiLOD(BillboardGui, p5.Origin)
 			config1:UpdateChatLinesForOrigin(p5.Origin, -YOffset1)
 		end
-		delay(p5.BubbleDieDelay, function() --[[ Line: 617 ]]
+		delay(p5.BubbleDieDelay, function()
 			-- upvalues: config1 (upval), Fifo (copy), Copy (copy)
 			config1:DestroyBubble(Fifo, Copy)
 		end)
 	end
 end
 
-function config1:OnPlayerChatMessage(Player: Player, Message, _) --[[ Line: 623 ]]
+function config1:OnPlayerChatMessage(Player: Player, Message, _)
 	-- upvalues: config1 (copy), Players (copy), createChatLine (copy), config (copy)
 	if not config1:BubbleChatEnabled() then return end
 	local LocalPlayer = Players.LocalPlayer
@@ -580,7 +580,7 @@ function config1:OnPlayerChatMessage(Player: Player, Message, _) --[[ Line: 623 
 	end
 end
 
-function config1:OnGameChatMessage(Origin, p5, ChatColor) --[[ Line: 642 ]]
+function config1:OnGameChatMessage(Origin, p5, ChatColor)
 	-- upvalues: Result3_1 (ref), Result4_1 (ref), Chat (copy), Players (copy), config1 (copy), createChatLine (copy), Result1 (copy)
 	if Result3_1 or Result4_1 and Chat.BubbleChatEnabled then return end
 	local LocalPlayer = Players.LocalPlayer
@@ -597,7 +597,7 @@ function config1:OnGameChatMessage(Origin, p5, ChatColor) --[[ Line: 642 ]]
 	end
 end
 
-function config1:BubbleChatEnabled() --[[ Line: 668 ]]
+function config1:BubbleChatEnabled()
 	-- upvalues: Result3_1 (ref), Result4_1 (ref), Chat (copy), Players (copy)
 	if Result3_1 or Result4_1 and Chat.BubbleChatEnabled then
 		return false
@@ -618,7 +618,7 @@ function config1:BubbleChatEnabled() --[[ Line: 668 ]]
 	return Players.BubbleChat
 end
 
-function config1:ShowOwnFilteredMessage() --[[ Line: 685 ]]
+function config1:ShowOwnFilteredMessage()
 	-- upvalues: Chat (copy)
 	local ClientChatModules = Chat:FindFirstChild("ClientChatModules")
 	
@@ -632,7 +632,7 @@ function config1:ShowOwnFilteredMessage() --[[ Line: 685 ]]
 	return false
 end
 
-function findPlayer(Name) --[[ Line: 697 ]]
+function findPlayer(Name)
 	-- upvalues: Players (copy)
 	for _, player in pairs(Players:GetPlayers()) do
 		if player.Name == Name then
@@ -641,22 +641,22 @@ function findPlayer(Name) --[[ Line: 697 ]]
 	end
 end
 
-Chat.Chatted:connect(function(Message, Recipient, ChatColor) --[[ Line: 705 ]]
+Chat.Chatted:connect(function(Message, Recipient, ChatColor)
 	-- upvalues: config1 (copy)
 	config1:OnGameChatMessage(Message, Recipient, ChatColor)
 end)
-local Connection = if game.Workspace.CurrentCamera then game.Workspace.CurrentCamera:GetPropertyChangedSignal("CFrame"):Connect(function(_) --[[ Line: 709 ]]
+local Connection = if game.Workspace.CurrentCamera then game.Workspace.CurrentCamera:GetPropertyChangedSignal("CFrame"):Connect(function(_)
 	-- upvalues: config1 (copy)
 	config1:CameraCFrameChanged()
 end) else nil
-game.Workspace.Changed:Connect(function(Property) --[[ Line: 712 ]]
+game.Workspace.Changed:Connect(function(Property)
 	-- upvalues: Connection (ref), config1 (copy)
 	if Property == "CurrentCamera" then
 		if Connection then
 			Connection:disconnect()
 		end
 		if game.Workspace.CurrentCamera then
-			Connection = game.Workspace.CurrentCamera:GetPropertyChangedSignal("CFrame"):Connect(function(_) --[[ Line: 716 ]]
+			Connection = game.Workspace.CurrentCamera:GetPropertyChangedSignal("CFrame"):Connect(function(_)
 				-- upvalues: config1 (upval)
 				config1:CameraCFrameChanged()
 			end)
@@ -665,7 +665,7 @@ game.Workspace.Changed:Connect(function(Property) --[[ Line: 712 ]]
 end)
 local List = nil
 
-function getAllowedMessageTypes() --[[ Line: 724 ]]
+function getAllowedMessageTypes()
 	-- upvalues: List (ref), Chat (copy)
 	if List then
 		return List
@@ -695,7 +695,7 @@ function getAllowedMessageTypes() --[[ Line: 724 ]]
 	return List
 end
 
-function checkAllowedMessageType(p5): boolean --[[ Line: 748 ]]
+function checkAllowedMessageType(p5): boolean
 	local AllowedMessageTypes = getAllowedMessageTypes()
 	
 	for i = 1, #AllowedMessageTypes do
@@ -708,7 +708,7 @@ end
 
 local DefaultChatSystemChatEvents = ReplicatedStorage:WaitForChild("DefaultChatSystemChatEvents")
 local OnMessageDoneFiltering = DefaultChatSystemChatEvents:WaitForChild("OnMessageDoneFiltering")
-DefaultChatSystemChatEvents:WaitForChild("OnNewMessage").OnClientEvent:connect(function(p6, _) --[[ Line: 762 ]]
+DefaultChatSystemChatEvents:WaitForChild("OnNewMessage").OnClientEvent:connect(function(p6, _)
 	-- upvalues: LocalPlayer (ref), config1 (copy)
 	if not checkAllowedMessageType(p6) then return end
 	local Player = findPlayer(p6.FromSpeaker)
@@ -720,7 +720,7 @@ DefaultChatSystemChatEvents:WaitForChild("OnNewMessage").OnClientEvent:connect(f
 		return
 	end
 end)
-OnMessageDoneFiltering.OnClientEvent:connect(function(p6, _) --[[ Line: 781 ]]
+OnMessageDoneFiltering.OnClientEvent:connect(function(p6, _)
 	-- upvalues: LocalPlayer (ref), config1 (copy)
 	if not checkAllowedMessageType(p6) then return end
 	local Player = findPlayer(p6.FromSpeaker)

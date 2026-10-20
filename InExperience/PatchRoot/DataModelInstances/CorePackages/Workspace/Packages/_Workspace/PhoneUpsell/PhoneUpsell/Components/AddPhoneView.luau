@@ -27,7 +27,7 @@ local config = {
 	shouldShowVerificationText = not FFlagHomePhoneVerificationUpsellNewCopy and nil
 }
 
-local function getButtonStackProps(Text, OnActivated, IsDisabled, Text1, OnActivated1, p1) --[[ Line: 89 ]]
+local function getButtonStackProps(Text, OnActivated, IsDisabled, Text1, OnActivated1, p1)
 	-- upvalues: ButtonType (copy)
 	local Buttons = {
 		{
@@ -63,11 +63,11 @@ local function getButtonStackProps(Text, OnActivated, IsDisabled, Text1, OnActiv
 	return config
 end
 
-return function(p1) --[[ Line: 136 | Named "AddPhoneView" ]]
+return function(p1)
 	-- upvalues: MergePropsModule (copy), config (copy), ReactModule (copy), GetPartialPageModalMiddleContentWidthFunction (copy), FFlagHomePhoneVerificationUpsellNewCopy (copy), WithStyleFunction (copy), WithLocalizationFunction (copy), PartialPageModal (copy), getButtonStackProps (copy), FFlagPhoneUpsellFocusNavigationModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), TextBoxStateWrapper (copy), PhoneNumberTextBox (copy), Text (copy), Checkbox (copy), LinkButton (copy)
 	local MergePropsModuleResult = MergePropsModule(config, p1)
 	
-	local function noOp() --[[ Line: 139 ]] end
+	local function noOp() end
 	
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(nil)
@@ -87,9 +87,9 @@ return function(p1) --[[ Line: 136 | Named "AddPhoneView" ]]
 	if MergePropsModuleResult.extraButtonKey and MergePropsModuleResult.extraButtonKey ~= "" then
 		config1.extraButtonKey = MergePropsModuleResult.extraButtonKey
 	end
-	return WithStyleFunction(function(p2) --[[ Line: 165 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: WithLocalizationFunction (upval), config1 (copy), MergePropsModuleResult (copy), UseStateResult (copy), ReactModule (upval), PartialPageModal (upval), getButtonStackProps (upval), FFlagPhoneUpsellFocusNavigationModule (upval), UseRefResult (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), PartialPageModalMiddleContentWidth (copy), TextBoxStateWrapper (upval), PhoneNumberTextBox (upval), noOp (copy), FFlagHomePhoneVerificationUpsellNewCopy (upval), Text (upval), Checkbox (upval), UseStateResult2 (copy), LinkButton (upval)
-		return WithLocalizationFunction(config1)(function(p3) --[[ Line: 166 ]]
+		return WithLocalizationFunction(config1)(function(p3)
 			-- upvalues: p2 (copy), MergePropsModuleResult (upval), UseStateResult (upval), ReactModule (upval), PartialPageModal (upval), getButtonStackProps (upval), FFlagPhoneUpsellFocusNavigationModule (upval), UseRefResult (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), PartialPageModalMiddleContentWidth (upval), TextBoxStateWrapper (upval), PhoneNumberTextBox (upval), noOp (upval), FFlagHomePhoneVerificationUpsellNewCopy (upval), Text (upval), Checkbox (upval), UseStateResult2 (upval), LinkButton (upval)
 			local BaseSize = p2.Font.BaseSize
 			local RelativeSize = p2.Font.CaptionHeader.RelativeSize

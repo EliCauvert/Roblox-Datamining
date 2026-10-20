@@ -1,7 +1,7 @@
 ﻿local HttpService = game:GetService("HttpService")
 local _ = require(script:FindFirstAncestor("DataHydration").Parent.HttpClient)
 
-local function _(Buf) --[[ Line: 10 | Named "tryJsonDecode" ]]
+local function _(Buf)
 	-- upvalues: HttpService (copy)
 	if Buf == nil or Buf == "" then
 		return nil
@@ -12,9 +12,9 @@ local function _(Buf) --[[ Line: 10 | Named "tryJsonDecode" ]]
 	end
 end
 
-return function(Callback) --[[ Line: 21 | Named "rpcDecoder" ]]
+return function(Callback)
 	-- upvalues: HttpService (copy)
-	return function(p1) --[[ Line: 22 ]]
+	return function(p1)
 		-- upvalues: HttpService (upval), Callback (copy)
 		local ResponseBody = p1.responseBody
 		local v1 = nil

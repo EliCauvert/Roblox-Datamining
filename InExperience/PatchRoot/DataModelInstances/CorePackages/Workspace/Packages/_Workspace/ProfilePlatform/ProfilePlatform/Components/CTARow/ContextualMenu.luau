@@ -11,25 +11,25 @@ local OverlayProvider = FoundationModule.OverlayProvider
 local PopoverAlign = FoundationModule.Enums.PopoverAlign
 local InputSize = FoundationModule.Enums.InputSize
 
-local function _() --[[ Line: 30 | Named "getVROverlaySurfaceGui" ]]
+local function _()
 	-- upvalues: CoreGui (copy)
 	local LuaAppScreenGui = CoreGui:FindFirstChild("LuaAppScreenGui")
 	
 	return if LuaAppScreenGui then LuaAppScreenGui:FindFirstChild("MainAppScreen_SurfaceGui") else nil
 end
 
-local function convertToMenuItems(MenuItems, Callback) --[[ Line: 38 ]]
+local function convertToMenuItems(MenuItems, Callback)
 	-- upvalues: DashModule (copy)
-	return DashModule.map(MenuItems, function(p1) --[[ Line: 42 ]]
+	return DashModule.map(MenuItems, function(p1)
 		-- upvalues: DashModule (upval), Callback (copy)
 		return {
-			items = DashModule.map(p1.items, function(p2) --[[ Line: 44 ]]
+			items = DashModule.map(p1.items, function(p2)
 				-- upvalues: Callback (upval)
 				local DisplayValue = p2.displayValue
 				
 				return {
 					id = p2.id,
-					onActivated = function() --[[ Line: 46 ]]
+					onActivated = function()
 						-- upvalues: Callback (upval), p2 (copy)
 						Callback()
 						p2.onActivated()
@@ -43,12 +43,12 @@ local function convertToMenuItems(MenuItems, Callback) --[[ Line: 38 ]]
 	end)
 end
 
-return function(p1) --[[ Line: 63 | Named "ContextualMenu" ]]
+return function(p1)
 	-- upvalues: UseIsSpatialFunction (copy), ReactModule (copy), CoreGui (copy), convertToMenuItems (copy), OverlayProvider (copy), Menu (copy), PopoverAlign (copy), InputSize (copy)
 	local UseIsSpatialResult = UseIsSpatialFunction()
 	
 	return (ReactModule.createElement(OverlayProvider, {
-		gui = ReactModule.useMemo(function() --[[ Line: 65 ]]
+		gui = ReactModule.useMemo(function()
 			-- upvalues: UseIsSpatialResult (copy), CoreGui (upval)
 			if UseIsSpatialResult then
 				local LuaAppScreenGui = CoreGui:FindFirstChild("LuaAppScreenGui")
@@ -63,7 +63,7 @@ return function(p1) --[[ Line: 63 | Named "ContextualMenu" ]]
 			isOpen = p1.isOpen,
 			align = p1.align or PopoverAlign.End,
 			anchorRef = p1.anchorRef,
-			items = ReactModule.useMemo(function() --[[ Line: 69 ]]
+			items = ReactModule.useMemo(function()
 				-- upvalues: convertToMenuItems (upval), p1 (copy)
 				return convertToMenuItems(p1.menuItems, p1.closeMenu)
 			end, { p1.menuItems, p1.closeMenu }),

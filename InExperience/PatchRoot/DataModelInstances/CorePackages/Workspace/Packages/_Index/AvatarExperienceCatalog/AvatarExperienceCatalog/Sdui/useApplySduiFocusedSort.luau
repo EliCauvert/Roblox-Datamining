@@ -7,7 +7,7 @@ local FFlagAXSduiSeeAllPageRequestId = require(Parent.AvatarExperienceFlags).FFl
 local BuildFocusedSortWidgetInfoModule = require(script.Parent.buildFocusedSortWidgetInfo)
 local HydrateCatalogSortByIdModule = require(script.Parent.hydrateCatalogSortById)
 
-local function buildAlreadyHydratedSet(HydratedWidgetData) --[[ Line: 63 ]]
+local function buildAlreadyHydratedSet(HydratedWidgetData)
 	if not HydratedWidgetData then
 		return nil
 	end
@@ -30,11 +30,11 @@ local function buildAlreadyHydratedSet(HydratedWidgetData) --[[ Line: 63 ]]
 	return if next(t) == nil then nil else t
 end
 
-return function(p1) --[[ Line: 92 | Named "useApplySduiFocusedSort" ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), Logging (copy), FFlagAXSduiSeeAllPageRequestId (copy), BuildFocusedSortWidgetInfoModule (copy), buildAlreadyHydratedSet (copy), HydrateCatalogSortByIdModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	
-	return ReactModule.useCallback(function(p2, p3, p4): boolean --[[ Line: 95 ]]
+	return ReactModule.useCallback(function(p2, p3, p4): boolean
 		-- upvalues: Logging (upval), FFlagAXSduiSeeAllPageRequestId (upval), p1 (copy), BuildFocusedSortWidgetInfoModule (upval), UseDispatchResult (copy), buildAlreadyHydratedSet (upval), HydrateCatalogSortByIdModule (upval)
 		if not p3 or p3 == "" then
 			Logging.warn("useApplySduiFocusedSort: missing context for sortId=" .. tostring(p2 and p2.sortId) .. "; SDUI catalog isn't propagating context to ResultsList. " .. "Verify FFlagAXMigrateAllTabToSduiDev is on.")

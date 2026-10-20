@@ -62,7 +62,7 @@ local config2 = {
 	durable = LocalizationStringsModule.AGENT_SUBSCRIPTION_PRODUCT_TYPE_DURABLE
 }
 
-local function _(p1) --[[ Line: 99 | Named "summaryKeys" ]]
+local function _(p1)
 	-- upvalues: config1 (copy), config (copy)
 	local Entry = nil
 	if p1.itemKind == nil then
@@ -77,19 +77,19 @@ local function _(p1) --[[ Line: 99 | Named "summaryKeys" ]]
 	return Entry
 end
 
-local _ = function(p1, p2) --[[ Line: 103 | Named "idActionKey" ]]
+local _ = function(p1, p2)
 	return if p2.action == "create" or p2.action == "update" or p2.action == "title" then nil elseif p2.action == "deactivate" and p2.cancelRenewals == true and p1.deactivateCancelRenewals ~= nil then p1.deactivateCancelRenewals else p1[p2.action]
 end
 
-local _ = function(p1) --[[ Line: 113 | Named "itemIdText" ]]
+local _ = function(p1)
 	return p1.itemId or tostring(p1.productId)
 end
 
-local function formatSummary(p1, AGENTDEVPRODUCTDESCRIPTION, p2) --[[ Line: 119 ]]
+local function formatSummary(p1, AGENTDEVPRODUCTDESCRIPTION, p2)
 	return p1:Format(AGENTDEVPRODUCTDESCRIPTION, p2)
 end
 
-local function appendSubscriptionProductType(List, p1, p2) --[[ Line: 123 ]]
+local function appendSubscriptionProductType(List, p1, p2)
 	-- upvalues: config2 (copy), formatSummary (copy), LocalizationStringsModule (copy)
 	if p1.itemKind ~= "subscription" or p1.productType == nil then return end
 	local Entry = config2[p1.productType]
@@ -101,7 +101,7 @@ local function appendSubscriptionProductType(List, p1, p2) --[[ Line: 123 ]]
 	end
 end
 
-local function devProductSummaryText(p1, UseContextResult, DefaultName, UnavailablePrice) --[[ Line: 139 ]]
+local function devProductSummaryText(p1, UseContextResult, DefaultName, UnavailablePrice)
 	-- upvalues: NumberLocalization (copy), LocalizationService (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), formatSummary (copy), LocalizationStringsModule (copy)
 	local Action = p1.action
 	
@@ -143,7 +143,7 @@ local function devProductSummaryText(p1, UseContextResult, DefaultName, Unavaila
 	end
 end
 
-local function itemSummaryText(p1, UseContextResult, DefaultName, UnavailablePrice) --[[ Line: 223 ]]
+local function itemSummaryText(p1, UseContextResult, DefaultName, UnavailablePrice)
 	-- upvalues: config1 (copy), config (copy), NumberLocalization (copy), LocalizationService (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), formatSummary (copy), LocalizationStringsModule (copy), appendSubscriptionProductType (copy)
 	local Action = p1.action
 	local Config = if p1.itemKind == nil then config else config1[p1.itemKind] or config
@@ -190,12 +190,12 @@ local function itemSummaryText(p1, UseContextResult, DefaultName, UnavailablePri
 	end
 end
 
-local _ = function(p1, p2, p3, p4) --[[ Line: 290 | Named "summaryText" ]]
+local _ = function(p1, p2, p3, p4)
 	-- upvalues: FFlagCreatorAgentChatMonetizationToolHelpersModule (copy), devProductSummaryText (copy), itemSummaryText (copy)
 	return if FFlagCreatorAgentChatMonetizationToolHelpersModule or p1.itemKind ~= nil then itemSummaryText(p1, p2, p3, p4) else devProductSummaryText(p1, p2, p3, p4)
 end
 
-return function(p1) --[[ Line: 302 | Named "AgentDevProductCard" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), LocalizationRoactContext (copy), UseLocalizationFunction (copy), config1 (copy), config (copy), LocalizationStringsModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), FFlagBuildExperienceDevProductRecoveryModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), UseChatCardEmphasisModule (copy), ChatCardPriorityModule (copy), Sheet (copy), Text (copy), View (copy), Image (copy), AssetId (ref), FFlagCreatorAgentChatMonetizationToolHelpersModule (copy), devProductSummaryText (copy), itemSummaryText (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), AgentCardActionsModule (copy), AgentCardModule (copy)
 	local UseContextResult = ReactModule.useContext(LocalizationRoactContext)
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -222,7 +222,7 @@ return function(p1) --[[ Line: 302 | Named "AgentDevProductCard" ]]
 	
 	if FFlagBuildExperienceMonetizationNativeUIModule then
 		IsOpen, Callback = ReactModule.useState(false)
-		UseResult = ReactModule.useCallback(function() --[[ Line: 338 ]]
+		UseResult = ReactModule.useCallback(function()
 			-- upvalues: UseRefResult (copy), Callback (ref)
 			if UseRefResult ~= nil then
 				UseRefResult.current = false
@@ -236,7 +236,7 @@ return function(p1) --[[ Line: 302 | Named "AgentDevProductCard" ]]
 		local UnavailablePrice = UseLocalizationResult.unavailablePrice
 		Element = ReactModule.createElement(Sheet.Root, {
 			isOpen = IsOpen,
-			onClose = function() --[[ Line: 348 ]]
+			onClose = function()
 				-- upvalues: FFlagBuildExperienceDevProductRecoveryModule (upval), IsOpen (ref), IsIsActionDisabled (copy), p1 (copy), Callback (ref)
 				if not FFlagBuildExperienceDevProductRecoveryModule and not IsOpen and not IsIsActionDisabled then
 					p1.onApprove()
@@ -287,7 +287,7 @@ return function(p1) --[[ Line: 302 | Named "AgentDevProductCard" ]]
 					variant = ButtonVariant.Emphasis,
 					fillBehavior = FillBehavior.Fill,
 					isDisabled = not IsOpen,
-					onActivated = function() --[[ Line: 408 ]]
+					onActivated = function()
 						-- upvalues: IsIsActionDisabled (copy), IsOpen (ref), UseRefResult (copy), p1 (copy), Callback (ref)
 						if IsIsActionDisabled or not IsOpen then return end
 						if UseRefResult ~= nil then
@@ -304,7 +304,7 @@ return function(p1) --[[ Line: 302 | Named "AgentDevProductCard" ]]
 	else
 		Element = nil
 	end
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 428 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: IsIsActionDisabled (copy), p1 (copy)
 		if not IsIsActionDisabled then
 			p1.onApprove()
@@ -312,7 +312,7 @@ return function(p1) --[[ Line: 302 | Named "AgentDevProductCard" ]]
 			return
 		end
 	end, { IsIsActionDisabled, p1.onApprove })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 435 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: IsIsActionDisabled (copy), p1 (copy)
 		if not IsIsActionDisabled then
 			p1.onReject()

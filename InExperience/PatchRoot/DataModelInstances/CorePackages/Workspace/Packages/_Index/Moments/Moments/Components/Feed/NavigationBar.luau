@@ -15,7 +15,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FFlagLuaSupportMicroGamepadPreferredInput = require(Parent.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
 local FormFactor = MomentsCommonModule.Enums.FormFactor
 
-return function(p1) --[[ Line: 41 | Named "NavigationBar" ]]
+return function(p1)
 	-- upvalues: UseDeviceInsetsFunction (copy), UseFormFactorFunction (copy), UsePreferredInputModule (copy), UseTokensFunction (copy), Moments (copy), Parent (copy), FormFactor (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy), ReactModule (copy), View (copy), IconButton (copy), ChevronLargeUp (copy), FoundationModule (copy), ChevronLargeDown (copy)
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseFormFactorResult = UseFormFactorFunction()

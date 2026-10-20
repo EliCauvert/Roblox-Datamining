@@ -24,11 +24,11 @@ local v1 = nil
 local v2 = nil
 local v3 = 1e999
 
-local function _(Vector, Vector1, Vector3): boolean --[[ Line: 37 | Named "contains" ]]
+local function _(Vector, Vector1, Vector3): boolean
 	return Vector1.x <= Vector.x and (Vector1.y <= Vector.y and Vector.x <= Vector3.x) and Vector.y <= Vector3.y
 end
 
-local function handleScrollingFrame(ScrollFrame, Vector, p1): boolean --[[ Line: 41 ]]
+local function handleScrollingFrame(ScrollFrame, Vector, p1): boolean
 	-- upvalues: Tbl (copy), InputModule (copy), PropertiesModule (copy), AbsFunction (copy), CosFunction (copy), SinFunction (copy), MaxFunction (copy), MinFunction (copy), SignFunction (copy), InterfaceModule (copy)
 	if not ScrollFrame:IsA("ScrollingFrame") then
 		return false
@@ -79,7 +79,7 @@ local function handleScrollingFrame(ScrollFrame, Vector, p1): boolean --[[ Line:
 	return false
 end
 
-local function findClosestOrOccludingGuiObject(_, Frames, Position, p1) --[[ Line: 106 ]]
+local function findClosestOrOccludingGuiObject(_, Frames, Position, p1)
 	-- upvalues: handleScrollingFrame (copy), Flag (ref), IsSelectableGuiObjectModule (copy), v1 (ref), RotatePointAroundObjectModule (copy), v3 (ref), IsCircleContainedInGuiObjectModule (copy), PropertiesModule (copy), v2 (ref)
 	for _, frame in ipairs(Frames) do
 		if handleScrollingFrame(frame, Position, p1) then
@@ -112,7 +112,7 @@ local function findClosestOrOccludingGuiObject(_, Frames, Position, p1) --[[ Lin
 	end
 end
 
-local function handleScrollingInAncestors(p2, Parent, Position, p3) --[[ Line: 161 ]]
+local function handleScrollingInAncestors(p2, Parent, Position, p3)
 	-- upvalues: handleScrollingFrame (copy), Flag (ref)
 	local Parent1 = p2.Parent
 	while Parent1 and Parent1 ~= Parent do
@@ -124,7 +124,7 @@ local function handleScrollingInAncestors(p2, Parent, Position, p3) --[[ Line: 1
 	end
 end
 
-local function processCursorPosition(GamepadCursorPosition, SelectionRadius, p4) --[[ Line: 172 ]]
+local function processCursorPosition(GamepadCursorPosition, SelectionRadius, p4)
 	-- upvalues: Tbl (copy), v1 (ref), v2 (ref), v3 (ref), GuiService (copy), PlayerGui (ref), Players (copy), CoreGui (copy), Flag (ref), findClosestOrOccludingGuiObject (copy), handleScrollingInAncestors (copy)
 	table.clear(Tbl)
 	v1 = nil
@@ -171,12 +171,12 @@ local function processCursorPosition(GamepadCursorPosition, SelectionRadius, p4)
 	return v1
 end
 
-local _ = function() --[[ Line: 237 | Named "getMaxSpeed" ]]
+local _ = function()
 	-- upvalues: GuiService (copy), PropertiesModule (copy)
 	return GuiService:GetScreenResolution().Magnitude * PropertiesModule.MaxSpeedRelative
 end
 
-return function(p5, p6) --[[ Line: 242 ]]
+return function(p5, p6)
 	-- upvalues: GuiService (copy), InputModule (copy), GamepadService (copy), SpeedAdjustmentTarget (ref), InterfaceModule (copy), Flag (ref), PropertiesModule (copy), processCursorPosition (copy), CoreGui (copy), PlayerGui (ref)
 	local NewScreenResolution = GuiService:GetScreenResolution() + GuiService:GetGuiInset()
 	local ThumbstickVector = InputModule:GetThumbstickVector()

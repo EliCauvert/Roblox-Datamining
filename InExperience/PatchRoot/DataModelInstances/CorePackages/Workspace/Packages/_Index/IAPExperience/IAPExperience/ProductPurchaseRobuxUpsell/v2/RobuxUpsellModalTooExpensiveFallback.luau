@@ -20,7 +20,7 @@ local GetAppContextModule = require(Parent.Utility.getAppContext)
 local Default = require(Parent1.LoggingProtocol).default
 local TooExpensiveUpsellFallbackShownCounter = require(Parent.Generic.Events.TooExpensiveUpsellCounter).TooExpensiveUpsellFallbackShownCounter
 
-local function MiddleContent(p1) --[[ Line: 56 ]]
+local function MiddleContent(p1)
 	-- upvalues: UseLocalizationFunction (copy), FormatNumberModule (copy), LocalizationService (copy), ReactModule (copy), View (copy), ProductDetailsModule (copy), Text (copy)
 	return ReactModule.createElement(View, {
 		tag = "col gap-medium auto-y size-full-0 align-x-center align-y-center"
@@ -42,9 +42,9 @@ local function MiddleContent(p1) --[[ Line: 56 ]]
 	})
 end
 
-local function RobuxUpsellModalTooExpensiveFallback(p1) --[[ Line: 95 ]]
+local function RobuxUpsellModalTooExpensiveFallback(p1)
 	-- upvalues: ReactModule (copy), LoggerModule (copy), GetAppContextModule (copy), Default (copy), TooExpensiveUpsellFallbackShownCounter (copy), UseLocalizationFunction (copy), InteractiveAlert (copy), RobuxUpsellModalTitleModule (copy), MiddleContent (copy), ButtonType (copy)
-	ReactModule.useEffect(function() --[[ Line: 96 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: LoggerModule (upval), p1 (copy), GetAppContextModule (upval), Default (upval), TooExpensiveUpsellFallbackShownCounter (upval)
 		LoggerModule.debug({
 			message = "Too Expensive Upsell Fallback Modal Shown",
@@ -66,14 +66,14 @@ local function RobuxUpsellModalTooExpensiveFallback(p1) --[[ Line: 95 ]]
 		screenSize = p1.screenSize,
 		anchorPoint = Vector2.new(0.5, 0.5),
 		position = UDim2.new(0.5, 0, 0.5, 0),
-		titleContent = function() --[[ Line: 119 ]]
+		titleContent = function()
 			-- upvalues: ReactModule (upval), RobuxUpsellModalTitleModule (upval), p1 (copy)
 			return ReactModule.createElement(RobuxUpsellModalTitleModule, {
 				balanceAmount = p1.balanceAmount,
 				cancelPurchaseActivated = p1.doneActivated
 			})
 		end,
-		middleContent = function() --[[ Line: 125 ]]
+		middleContent = function()
 			-- upvalues: ReactModule (upval), MiddleContent (upval), p1 (copy)
 			return ReactModule.createElement(MiddleContent, {
 				product = p1.product,
@@ -97,7 +97,7 @@ local function RobuxUpsellModalTooExpensiveFallback(p1) --[[ Line: 95 ]]
 	})
 end
 
-return function(p1) --[[ Line: 148 | Named "RobuxUpsellModalTooExpensiveFallbackContainer" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), RobuxUpsellModalTooExpensiveFallback (copy)
 	return ReactModule.createElement(LocalizationProvider, {
 		localization = Localization.new(LocalizationService.RobloxLocaleId)

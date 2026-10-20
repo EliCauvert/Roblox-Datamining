@@ -2,7 +2,7 @@
 local ClientNetworkUpdateSearchFilterModule = require(script.Parent.Parent.Actions.ClientNetworkUpdateSearchFilter)
 local ServerNetworkUpdateSearchFilterModule = require(script.Parent.Parent.Actions.ServerNetworkUpdateSearchFilter)
 
-return function(p1, p2) --[[ Line: 11 ]]
+return function(p1, p2)
 	-- upvalues: ClientNetworkUpdateSearchFilterModule (copy), ImmutableModule (copy), ServerNetworkUpdateSearchFilterModule (copy)
 	local P0 = p1 or { clientSearchTerm = "", serverSearchTerm = "" }
 	

@@ -3,11 +3,11 @@ local EnumScreensModule = require(AppChat.EnumScreens)
 local FFlagAppChatFixBackButtonOnRotationModule = require(AppChat.Flags.FFlagAppChatFixBackButtonOnRotation)
 local CanPopParentStackModule = require(AppChat.Utils.canPopParentStack)
 
-return function(p1) --[[ Line: 14 | Named "createBackFunc" ]]
+return function(p1)
 	-- upvalues: FFlagAppChatFixBackButtonOnRotationModule (copy), CanPopParentStackModule (copy), EnumScreensModule (copy)
 	local NavigateToRootStackFunction = p1.navigateToRootStack
 	
-	return if NavigateToRootStackFunction then function() --[[ Line: 18 ]]
+	return if NavigateToRootStackFunction then function()
 		-- upvalues: p1 (copy), FFlagAppChatFixBackButtonOnRotationModule (upval), CanPopParentStackModule (upval), EnumScreensModule (upval), NavigateToRootStackFunction (copy)
 		if p1.closeInputBar then
 			p1.closeInputBar()

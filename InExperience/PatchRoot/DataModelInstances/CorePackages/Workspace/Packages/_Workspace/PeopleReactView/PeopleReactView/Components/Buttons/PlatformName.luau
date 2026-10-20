@@ -11,36 +11,36 @@ local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
-return function(Player: Player) --[[ Line: 28 | Named "PlatformNameSection" ]]
+return function(Player: Player)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), PeopleServiceModule (copy), UseSignalStateFunction (copy), View (copy), ConstantsModule (copy), Button (copy), ButtonVariant (copy), ButtonSize (copy)
 	local UseTokensResult = UseTokensFunction()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 31 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: PeopleServiceModule (upval)
 		return PeopleServiceModule.getService("PeopleUtility")
 	end, {})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 35 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: PeopleServiceModule (upval)
 		return PeopleServiceModule.getService("PeopleListStore")
 	end, {})
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 44 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult1 (copy), Player (copy)
 		return UseMemoResult1.getPlatformProfileId(Player.UserId)
 	end, { Player.UserId })
-	local UseSignalStateResult: string = UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 40 ]]
+	local UseSignalStateResult: string = UseSignalStateFunction((ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult1 (copy), Player (copy)
 		return UseMemoResult1.getPlatformName(Player.UserId)
 	end, { Player.UserId })))
 	local UseSignalStateResult1 = UseSignalStateFunction(UseMemoResult2)
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 52 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), UseSignalStateResult1 (copy)
 		return UseMemoResult.canShowPlatformProfile(UseSignalStateResult1)
 	end, { UseSignalStateResult1 })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 57 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseMemoResult (copy), UseSignalStateResult1 (copy)
 		UseMemoResult.showPlatformProfile(UseSignalStateResult1)
 	end, { UseSignalStateResult1 })
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult1 = ReactModule.useCallback(function(Current) --[[ Line: 63 ]]
+	local UseResult1 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), UseMemoResult3 (copy)
 		UseRefResult.current = Current
 		

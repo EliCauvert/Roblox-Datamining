@@ -13,7 +13,7 @@ local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local _ = require(script.Parent.PrivateInvitesPickerView)
 
-return function(p1) --[[ Line: 43 | Named "usePrivateInvitesPickerViewModel" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), SendBuildExperienceEventModule (copy), GetPrivatePlaytestersStoreFunction (copy), SignalsReactModule (copy), FriendsStore (copy), SearchFriendsAsyncModule (copy), Logger (copy), UseUserPickerModule (copy)
 	local UniverseId = p1.universeId
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -34,7 +34,7 @@ return function(p1) --[[ Line: 43 | Named "usePrivateInvitesPickerViewModel" ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState({ navigateOnDismiss = false, userIds = {} })
 	local UseRefResult = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 73 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), SendBuildExperienceEventModule (upval), UniverseId (copy)
 		if not UseRefResult.current then
 			UseRefResult.current = true
@@ -44,13 +44,13 @@ return function(p1) --[[ Line: 43 | Named "usePrivateInvitesPickerViewModel" ]]
 		end
 	end, { UniverseId })
 	local PrivatePlaytestersStore = GetPrivatePlaytestersStoreFunction(false)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 82 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: PrivatePlaytestersStore (copy), UniverseId (copy)
 		return PrivatePlaytestersStore.getAndFetchInvitedPlayers(UniverseId)
 	end, { PrivatePlaytestersStore, UniverseId })
 	local UseSignalStateResult = SignalsReactModule.useSignalState(UseMemoResult.players)
 	local Largest: number = if SignalsReactModule.useSignalState(UseMemoResult.status) == "Ready" then math.max(0, PrivatePlaytestersStore.MAX_INVITES - #UseSignalStateResult) else 0
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 95 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult (copy)
 		local t = {}
 		
@@ -59,19 +59,19 @@ return function(p1) --[[ Line: 43 | Named "usePrivateInvitesPickerViewModel" ]]
 		end
 		return t
 	end, { UseSignalStateResult })
-	local UseMemoResult11 = ReactModule.useMemo(function() --[[ Line: 105 ]]
+	local UseMemoResult11 = ReactModule.useMemo(function()
 		-- upvalues: FriendsStore (upval)
 		return FriendsStore.get()
 	end, {})
-	local UseSignalStateResult1 = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 108 ]]
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult11 (copy)
 		return UseMemoResult11.GetAllFriends()
 	end, { UseMemoResult11 })))
-	local UseSignalStateResult2 = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 111 ]]
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult11 (copy)
 		return UseMemoResult11.GetAllFriendsStatus()
 	end, { UseMemoResult11 })))
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 117 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult1 (copy)
 		local List = {}
 		
@@ -87,17 +87,17 @@ return function(p1) --[[ Line: 43 | Named "usePrivateInvitesPickerViewModel" ]]
 		return List
 	end, { UseSignalStateResult1 })
 	local IsNotReady = UseSignalStateResult2 == "NotReady"
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 131 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseMemoResult11 (copy)
 		UseMemoResult11.FetchMoreFriends()
 	end, { UseMemoResult11 })
-	local UseResult1 = ReactModule.useCallback(function(p2, p3) --[[ Line: 137 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: SearchFriendsAsyncModule (upval)
 		return SearchFriendsAsyncModule(p2, p3, 20)
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function(p2, p3) --[[ Line: 141 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: PrivatePlaytestersStore (copy), UniverseId (copy), SendBuildExperienceEventModule (upval), UseStateResult2_1 (copy), OnInvitesSentFunction (copy), Logger (upval), UseStateResult2 (copy)
-		return PrivatePlaytestersStore.sendInvites(UniverseId, p2, p3):andThen(function(Result) --[[ Line: 144 ]]
+		return PrivatePlaytestersStore.sendInvites(UniverseId, p2, p3):andThen(function(Result)
 			-- upvalues: SendBuildExperienceEventModule (upval), UniverseId (upval), UseStateResult2_1 (upval), OnInvitesSentFunction (upval)
 			local Added = Result.added
 			local Rejected = Result.rejected
@@ -120,7 +120,7 @@ return function(p1) --[[ Line: 43 | Named "usePrivateInvitesPickerViewModel" ]]
 			else
 				OnInvitesSentFunction()
 			end
-		end):catch(function(Err) --[[ Line: 174 ]]
+		end):catch(function(Err)
 			-- upvalues: SendBuildExperienceEventModule (upval), UniverseId (upval), p2 (copy), Logger (upval), UseStateResult2 (upval)
 			SendBuildExperienceEventModule("PLAYTESTERS_ADD_FAILED", { universeId = UniverseId }, { count = tostring(#p2) })
 			Logger:warning("PrivateInvitesPicker: add playtesters failed for universe {}: {}", UniverseId, Err)
@@ -131,11 +131,11 @@ return function(p1) --[[ Line: 43 | Named "usePrivateInvitesPickerViewModel" ]]
 		UniverseId,
 		OnInvitesSentFunction
 	})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 190 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {})
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 196 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult1 (copy), UseStateResult2_1 (copy), OnInvitesSentFunction (copy)
 		local NavigateOnDismiss = UseStateResult1.navigateOnDismiss
 		UseStateResult2_1({ navigateOnDismiss = false, userIds = {} })
@@ -144,7 +144,7 @@ return function(p1) --[[ Line: 43 | Named "usePrivateInvitesPickerViewModel" ]]
 			OnInvitesSentFunction()
 		end
 	end, { UseStateResult1, OnInvitesSentFunction })
-	local UseUserPickerModuleResult = UseUserPickerModule((ReactModule.useMemo(function() --[[ Line: 205 ]]
+	local UseUserPickerModuleResult = UseUserPickerModule((ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult2 (copy), IsNotReady (copy), UseResult (copy), UseResult1 (copy), UseResult2 (copy), Largest (copy), UseMemoResult1 (copy)
 		return {
 			browseIds = UseMemoResult2,
@@ -160,20 +160,20 @@ return function(p1) --[[ Line: 43 | Named "usePrivateInvitesPickerViewModel" ]]
 		UseMemoResult1
 	})))
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(true)
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 232 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_2 (copy)
 		UseStateResult2_2(false)
 	end, {})
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(nil)
-	local UseResult6 = ReactModule.useCallback(function(p2) --[[ Line: 241 ]]
+	local UseResult6 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_3 (copy)
 		UseStateResult2_3(p2)
 	end, {})
 	local LoadMoreFunction = UseUserPickerModuleResult.loadMore
-	ReactModule.useEffect(function() --[[ Line: 245 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult4 (copy), LoadMoreFunction (copy)
 		if UseStateResult4 == nil then return end
-		local function maybeLoadMore() --[[ Line: 250 ]]
+		local function maybeLoadMore()
 			-- upvalues: UseStateResult4 (copy), LoadMoreFunction (upval)
 			local YDelta = UseStateResult4.AbsoluteCanvasSize.Y - (UseStateResult4.CanvasPosition.Y + UseStateResult4.AbsoluteWindowSize.Y)
 			
@@ -190,7 +190,7 @@ return function(p1) --[[ Line: 43 | Named "usePrivateInvitesPickerViewModel" ]]
 		if UseStateResult4.AbsoluteCanvasSize.Y > 0 and YDelta <= 240 then
 			LoadMoreFunction()
 		end
-		return function() --[[ Line: 261 ]]
+		return function()
 			-- upvalues: Connection (copy), Connection1 (copy), Connection2 (copy)
 			Connection:Disconnect()
 			Connection1:Disconnect()

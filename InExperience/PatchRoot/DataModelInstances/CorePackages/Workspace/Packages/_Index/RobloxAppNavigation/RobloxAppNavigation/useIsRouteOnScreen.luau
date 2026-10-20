@@ -6,7 +6,7 @@ local GetCurrentNavigationStateFunction = require(Parent.Navigation).getCurrentN
 local OnScreenContextModule = require(script.Parent.OnScreenContext)
 local EnableOnScreenAPICheckDescendants = game:DefineFastFlag("EnableOnScreenAPICheckDescendants", false)
 
-return function() --[[ Line: 12 | Named "useIsRouteOnScreen" ]]
+return function()
 	-- upvalues: UseNavigationFunction (copy), ReactModule (copy), OnScreenContextModule (copy), UseEarlyIsFocusedFunction (copy), EnableOnScreenAPICheckDescendants (copy), GetCurrentNavigationStateFunction (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local Key = if UseNavigationResult.state then UseNavigationResult.state.key else nil

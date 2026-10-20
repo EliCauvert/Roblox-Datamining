@@ -5,14 +5,14 @@ local UseViewportBindingModule = require(Graphing.Util.useViewportBinding)
 local UseViewportBindingFunction = UseViewportBindingModule.useViewportBinding
 local UseViewportVisibilityFunction = UseViewportBindingModule.useViewportVisibility
 
-local function _(SIDEBOTTOM): boolean --[[ Line: 31 | Named "isX" ]]
+local function _(SIDEBOTTOM): boolean
 	-- upvalues: TypesModule (copy)
 	return SIDEBOTTOM == TypesModule.SIDE_TOP or SIDEBOTTOM == TypesModule.SIDE_BOTTOM
 end
 
-function SidePositioner(p1) --[[ Line: 35 ]]
+function SidePositioner(p1)
 	-- upvalues: UseViewportBindingFunction (copy), TypesModule (copy), UseViewportVisibilityFunction (copy), ReactModule (copy)
-	local UseViewportBindingResult = UseViewportBindingFunction(function(p2): UDim2 --[[ Line: 36 ]]
+	local UseViewportBindingResult = UseViewportBindingFunction(function(p2): UDim2
 		-- upvalues: p1 (copy), TypesModule (upval)
 		local XScale = 0
 		local YScale = 0
@@ -34,7 +34,7 @@ function SidePositioner(p1) --[[ Line: 35 ]]
 		return UDim2.fromScale(XScale, YScale)
 	end, { p1.Side, p1.Position })
 	
-	return if UseViewportVisibilityFunction(function(p2) --[[ Line: 54 ]]
+	return if UseViewportVisibilityFunction(function(p2)
 		-- upvalues: p1 (copy), TypesModule (upval)
 		local Side = p1.Side
 		local IsSideMatch: boolean = Side == TypesModule.SIDE_TOP or Side == TypesModule.SIDE_BOTTOM

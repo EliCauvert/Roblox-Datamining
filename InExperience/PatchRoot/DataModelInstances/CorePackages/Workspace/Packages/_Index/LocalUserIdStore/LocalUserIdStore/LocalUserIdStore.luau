@@ -3,7 +3,7 @@
 return {
 	getCurrentUserId = Signal,
 	setCurrentUserId = Signal2,
-	reset = function() --[[ Line: 26 ]]
+	reset = function()
 		-- upvalues: Signal2 (copy)
 		Signal2("")
 	end

@@ -31,11 +31,11 @@ local RenderWithCoreScriptsStyleProviderModule = require(RobloxGui.Modules.Commo
 local v1 = nil
 local ConstantsModule = require(RobloxGui.Modules:WaitForChild("InGameMenu"):WaitForChild("Resources"):WaitForChild("Constants"))
 local GetFIntEducationalPopupDisplayMaxCountModule = require(RobloxGui.Modules.Flags.GetFIntEducationalPopupDisplayMaxCount)
-v1 = (function() --[[ Line: 81 | Named "Initialize" ]]
+v1 = (function()
 	-- upvalues: RobloxGui (copy), GuiService (copy), SendAnalyticsModule (copy), RunService (copy), GetDefaultQualityLevelFunction (copy), NotificationTypeList (copy), LinkingProtocol (copy), DeepLinkSource (copy), v1 (ref), UserLocalStoreModule (copy), GetFIntEducationalPopupDisplayMaxCountModule (copy), Localization (copy), LocalizationService (copy), RoactModule (copy), EducationalModal (copy), Images (copy), CoreGui (copy), FFlagSurvBloxEventTypeEnabled (copy), SurveyEventPublisherModule (copy), WebViewEventTypeModule (copy), Players (copy), MessageBus (copy), ConstantsModule (copy), RenderWithCoreScriptsStyleProviderModule (copy)
 	local NewPage = require(RobloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	
-	function NewPage.LeaveAppFunc(p1) --[[ Line: 85 ]]
+	function NewPage.LeaveAppFunc(p1)
 		-- upvalues: GuiService (upval), SendAnalyticsModule (upval), RunService (upval), GetDefaultQualityLevelFunction (upval), NotificationTypeList (upval)
 		GuiService.SelectedCoreObject = nil
 		SendAnalyticsModule("educational_popup", "educational_close_app", { source = if p1 then "Native" else "Button" })
@@ -45,7 +45,7 @@ v1 = (function() --[[ Line: 81 | Named "Initialize" ]]
 		GuiService:BroadcastNotification("", NotificationTypeList.NATIVE_EXIT)
 	end
 	
-	function NewPage.LeaveGameFunc(IsUserInputTypeMatch) --[[ Line: 102 ]]
+	function NewPage.LeaveGameFunc(IsUserInputTypeMatch)
 		-- upvalues: GuiService (upval), SendAnalyticsModule (upval), LinkingProtocol (upval), DeepLinkSource (upval), RunService (upval), GetDefaultQualityLevelFunction (upval)
 		GuiService.SelectedCoreObject = nil
 		SendAnalyticsModule("educational_popup", "educational_confirmed", {
@@ -63,14 +63,14 @@ v1 = (function() --[[ Line: 81 | Named "Initialize" ]]
 		settings().Rendering.QualityLevel = GetDefaultQualityLevelFunction()
 	end
 	
-	function NewPage:LeaveGameFromHotkey(UserInputState, Input) --[[ Line: 129 ]]
+	function NewPage:LeaveGameFromHotkey(UserInputState, Input)
 		-- upvalues: NewPage (copy)
 		if UserInputState == Enum.UserInputState.Begin then
 			NewPage.LeaveGameFunc(Input.UserInputType == Enum.UserInputType.Gamepad1 or (Input.UserInputType == Enum.UserInputType.Gamepad2 or (Input.UserInputType == Enum.UserInputType.Gamepad3 or Input.UserInputType == Enum.UserInputType.Gamepad4)))
 		end
 	end
 	
-	function NewPage.DontLeaveFunc(IsUserInputTypeMatch) --[[ Line: 139 ]]
+	function NewPage.DontLeaveFunc(IsUserInputTypeMatch)
 		-- upvalues: v1 (upval), NewPage (copy)
 		v1.dismissedFrom = if IsUserInputTypeMatch then "Gamepad" else "Button"
 		
@@ -79,21 +79,21 @@ v1 = (function() --[[ Line: 81 | Named "Initialize" ]]
 		end
 	end
 	
-	function NewPage:DontLeaveFromHotkey(UserInputState, Input) --[[ Line: 146 ]]
+	function NewPage:DontLeaveFromHotkey(UserInputState, Input)
 		-- upvalues: NewPage (copy)
 		if UserInputState == Enum.UserInputState.Begin then
 			NewPage.DontLeaveFunc(Input.UserInputType == Enum.UserInputType.Gamepad1 or (Input.UserInputType == Enum.UserInputType.Gamepad2 or (Input.UserInputType == Enum.UserInputType.Gamepad3 or Input.UserInputType == Enum.UserInputType.Gamepad4)))
 		end
 	end
 	
-	function NewPage.DontShowAgain() --[[ Line: 157 ]]
+	function NewPage.DontShowAgain()
 		-- upvalues: UserLocalStoreModule (upval)
 		local NewUserLocalStore = UserLocalStoreModule.new()
 		NewUserLocalStore:SetItem("NativeCloseLuaPromptDisplayCount", (tostring(1e999)))
 		NewUserLocalStore:Flush()
 	end
 	
-	function NewPage.ShouldShow(): boolean --[[ Line: 164 ]]
+	function NewPage.ShouldShow(): boolean
 		-- upvalues: UserLocalStoreModule (upval), GetFIntEducationalPopupDisplayMaxCountModule (upval)
 		local NewUserLocalStore = UserLocalStoreModule.new()
 		local Number: number? = tonumber(NewUserLocalStore:GetItem("NativeCloseLuaPromptDisplayCount"))
@@ -116,7 +116,7 @@ v1 = (function() --[[ Line: 81 | Named "Initialize" ]]
 	NewPage.Page.Size = UDim2.new(1, 0, 0, 1)
 	local NewLocalization = Localization.new(LocalizationService.RobloxLocaleId)
 	
-	local function ExitModal() --[[ Line: 192 ]]
+	local function ExitModal()
 		-- upvalues: NewLocalization (copy), LocalizationService (upval), RoactModule (upval), EducationalModal (upval), Images (upval), CoreGui (upval), NewPage (copy), FFlagSurvBloxEventTypeEnabled (upval), SurveyEventPublisherModule (upval), WebViewEventTypeModule (upval), Players (upval), MessageBus (upval), ConstantsModule (upval), RenderWithCoreScriptsStyleProviderModule (upval)
 		NewLocalization:SetLocale(LocalizationService.RobloxLocaleId)
 		local config = {
@@ -148,18 +148,18 @@ v1 = (function() --[[ Line: 81 | Named "Initialize" ]]
 					text = "<font face=\"GothamBlack\" size=\"42\">" .. config.title .. "</font><font size=\"4\"><br /></font><br />" .. config.subtitle
 				},
 				screenSize = CoreGui.RobloxGui.AbsoluteSize,
-				onDismiss = function() --[[ Line: 228 ]]
+				onDismiss = function()
 					-- upvalues: NewPage (upval)
 					NewPage.DontLeaveFunc(false)
 				end,
-				onCancel = function(p1) --[[ Line: 231 ]]
+				onCancel = function(p1)
 					-- upvalues: NewPage (upval)
 					if p1 then
 						NewPage.DontShowAgain()
 					end
 					NewPage.LeaveAppFunc(false)
 				end,
-				onConfirm = function(p1) --[[ Line: 237 ]]
+				onConfirm = function(p1)
 					-- upvalues: NewPage (upval), FFlagSurvBloxEventTypeEnabled (upval), SurveyEventPublisherModule (upval), WebViewEventTypeModule (upval), Players (upval), MessageBus (upval), ConstantsModule (upval)
 					if p1 then
 						NewPage.DontShowAgain()
@@ -185,11 +185,11 @@ v1 = (function() --[[ Line: 81 | Named "Initialize" ]]
 	local ExitModal1 = RoactModule.mount(ExitModal(), NewPage.Page, "ExitModal")
 	local Flag = false
 	
-	local function Callback() --[[ Line: 265 ]]
+	local function Callback()
 		-- upvalues: Flag (ref), ExitModal1 (ref), RoactModule (upval), ExitModal (copy)
 		if not Flag then
 			Flag = true
-			task.delay(1, function() --[[ Line: 268 ]]
+			task.delay(1, function()
 				-- upvalues: Flag (upval), ExitModal1 (upval), RoactModule (upval), ExitModal (upval)
 				Flag = false
 				ExitModal1 = RoactModule.update(ExitModal1, ExitModal())
@@ -202,7 +202,7 @@ v1 = (function() --[[ Line: 81 | Named "Initialize" ]]
 	
 	return NewPage
 end)()
-v1.Displayed.Event:connect(function() --[[ Line: 283 ]]
+v1.Displayed.Event:connect(function()
 	-- upvalues: v1 (ref), GetFFlagGateEducationalPopupVisibilityViaGUACFunction (copy), InExperienceCapabilities (copy), ContextActionService (copy), IsSideSheetEnabledModule (copy), ToggleSideSheet (ref)
 	if not v1.ShouldShow() or GetFFlagGateEducationalPopupVisibilityViaGUACFunction() and not InExperienceCapabilities.canViewEducationalPopup then
 		v1.LeaveAppFunc(true)
@@ -215,7 +215,7 @@ v1.Displayed.Event:connect(function() --[[ Line: 283 ]]
 		ToggleSideSheet(false)
 	end
 end)
-v1.Hidden.Event:connect(function() --[[ Line: 310 ]]
+v1.Hidden.Event:connect(function()
 	-- upvalues: v1 (ref), SendAnalyticsModule (copy), ContextActionService (copy)
 	if v1.dismissedFrom then
 		SendAnalyticsModule("educational_popup", "educational_dismiss_prompt", { source = v1.dismissedFrom })

@@ -21,7 +21,7 @@ local FFlagLuaAppSduiSponsoredTwoByOneTile = require(Parent.SharedFlags).FFlagLu
 local FFlagSduiForwardAnalyticsDataToGameClick = require(Parent.SharedFlags).FFlagSduiForwardAnalyticsDataToGameClick
 local t = {}
 
-return function(p1, p2, p3) --[[ Line: 35 ]]
+return function(p1, p2, p3)
 	-- upvalues: SduiErrors (copy), GetInputModeStoreFunction (copy), t (copy), FindAnalyticsFieldInAncestorsFunction (copy), IntervalPerformanceTracker (copy), FFlagSduiFixSearchTelemetry (copy), SduiParsers (copy), FFlagLuaAppSduiSponsoredTwoByOneTile (copy), CryoModule (copy), SponsoredGamesRecordClickFunction (copy), CalculateRowPositionFieldsFunction (copy), FFlagLuaAppSduiPassSortSubId (copy), FFlagSduiForwardAnalyticsDataToGameClick (copy), FilterAndStringifyAnalyticsDataModule (copy), OpenGameDetailsFunction (copy), FFlagLuaAppEdpBottomSheetPeekViewEvents (copy), FFlagEnableExperienceDetailsBottomSheet (copy), AppPage (copy), FFlagLuaAppSduiEdpEnabled (copy)
 	p3.dependencies.logger.reportCounter(SduiErrors.SduiCounterName.OpenGameDetailsAction, {
 		name = GetInputModeStoreFunction(false).getLastInputType(false)

@@ -16,9 +16,9 @@ local UseTopBarHeightSelectorModule = require(GameFilters.Components.Menu.useTop
 local GetOptionContextTagModule = require(GameFilters.Analytics.getOptionContextTag)
 local FFlagLuaAppChartsFilterOptionTextTag = require(Parent.SharedFlags).FFlagLuaAppChartsFilterOptionTextTag
 
-return function() --[[ Line: 34 | Named "FilterMenuPeekView" ]]
+return function()
 	-- upvalues: UseNavigationPropsFunction (copy), ReactModule (copy), UseNavigationFunction (copy), PeekViewState (copy), FilterClickButtonNameModule (copy), FFlagLuaAppChartsFilterOptionTextTag (copy), GetOptionContextTagModule (copy), UseTopBarHeightSelectorModule (copy), Signal (copy), PeekView (copy), FilterMenuActionBarModule (copy), FilterMenuHeaderModule (copy), FilterMenuOptionsModule (copy)
-	local UseNavigationPropsResult = UseNavigationPropsFunction(function(_, p1) --[[ Line: 35 ]]
+	local UseNavigationPropsResult = UseNavigationPropsFunction(function(_, p1)
 		return {
 			filter = p1.filter,
 			onFilterApplied = p1.onFilterApplied,
@@ -30,7 +30,7 @@ return function() --[[ Line: 34 | Named "FilterMenuPeekView" ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Filter.selectedOptionId)
 	local UseRefResult = ReactModule.useRef(false)
 	local UseNavigationResult = UseNavigationFunction()
-	local UseResult = ReactModule.useCallback(function(Closed, _) --[[ Line: 53 ]]
+	local UseResult = ReactModule.useCallback(function(Closed, _)
 		-- upvalues: PeekViewState (upval), UseNavigationResult (copy), UseNavigationPropsResult (copy), UseRefResult (copy), FilterClickButtonNameModule (upval), Filter (copy), UseStateResult (copy), FFlagLuaAppChartsFilterOptionTextTag (upval), GetOptionContextTagModule (upval)
 		if Closed == PeekViewState.Closed or Closed == PeekViewState.Hidden then
 			UseNavigationResult.goBack()
@@ -58,19 +58,19 @@ return function() --[[ Line: 34 | Named "FilterMenuPeekView" ]]
 	
 	if FFlagLuaAppChartsFilterOptionTextTag then
 		v3, UseBindingResult2_2 = ReactModule.useBinding(0)
-		UseResult1 = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 90 ]]
+		UseResult1 = ReactModule.useCallback(function(ScrollFrame)
 			-- upvalues: UseBindingResult2_2 (ref)
 			UseBindingResult2_2(ScrollFrame.AbsoluteCanvasSize.Y)
 		end, {})
 	else
 		v1, v28 = ReactModule.useBinding(Vector2.new(0, 0))
 	end
-	local MapResult = if FFlagLuaAppChartsFilterOptionTextTag then nil else UseBindingResult:map(function(p1) --[[ Line: 99 ]]
+	local MapResult = if FFlagLuaAppChartsFilterOptionTextTag then nil else UseBindingResult:map(function(p1)
 		return p1.X
 	end)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseRefResult2 = ReactModule.useRef(Signal.new())
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 138 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult2 (copy)
 		UseRefResult2.current:fire()
 	end, {})
@@ -79,7 +79,7 @@ return function() --[[ Line: 34 | Named "FilterMenuPeekView" ]]
 		Size = UDim2.new(1, 0, 1, 0),
 		BackgroundTransparency = 1,
 		ClipsDescendants = false,
-		[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 176 ]]
+		[ReactModule.Change.AbsoluteSize] = function(Frame)
 			-- upvalues: UseBindingResult2 (copy)
 			UseBindingResult2(Frame.AbsoluteSize)
 		end
@@ -98,7 +98,7 @@ return function() --[[ Line: 34 | Named "FilterMenuPeekView" ]]
 			bottomDockedContainerContent = ReactModule.createElement(FilterMenuActionBarModule, {
 				Size = UDim2.new(1, 0, 0, 84),
 				applyEnabled = UseStateResult ~= Filter.selectedOptionId,
-				onApply = ReactModule.useCallback(function() --[[ Line: 150 ]]
+				onApply = ReactModule.useCallback(function()
 					-- upvalues: UseNavigationPropsResult (copy), Filter (copy), UseStateResult (copy), UseRefResult (copy), UseResult2 (copy), FilterClickButtonNameModule (upval), FFlagLuaAppChartsFilterOptionTextTag (upval), GetOptionContextTagModule (upval)
 					UseNavigationPropsResult.onFilterApplied(Filter.filterType, UseStateResult)
 					UseRefResult.current = true
@@ -120,11 +120,11 @@ return function() --[[ Line: 34 | Named "FilterMenuPeekView" ]]
 					UseBindingResult,
 					UseBindingResult1,
 					if FFlagLuaAppChartsFilterOptionTextTag then v3 else v1
-				}):map(function(Entry): UDim2 --[[ Line: 107 ]]
+				}):map(function(Entry): UDim2
 					-- upvalues: FFlagLuaAppChartsFilterOptionTextTag (upval), UseTopBarHeightSelectorModuleResult (copy)
 					return UDim2.new(1, 0, 0, (math.min(Entry[2] + (if FFlagLuaAppChartsFilterOptionTextTag then Entry[3] else Entry[3].Y), Entry[1].Y - 84 - 25 - UseTopBarHeightSelectorModuleResult)))
 				end),
-				[ReactModule.Change.AbsoluteSize] = ReactModule.useCallback(function(Frame) --[[ Line: 125 ]]
+				[ReactModule.Change.AbsoluteSize] = ReactModule.useCallback(function(Frame)
 					-- upvalues: UseRefResult1 (copy)
 					local Current = UseRefResult1.current
 					
@@ -149,13 +149,13 @@ return function() --[[ Line: 34 | Named "FilterMenuPeekView" ]]
 				}),
 				Options = ReactModule.createElement(FilterMenuOptionsModule, {
 					LayoutOrder = 2,
-					Size = UseBindingResult1:map(function(p1): UDim2 --[[ Line: 119 ]]
+					Size = UseBindingResult1:map(function(p1): UDim2
 						return UDim2.new(1, 0, 1, -p1)
 					end),
 					containerMaxWidthBinding = if FFlagLuaAppChartsFilterOptionTextTag then nil else MapResult,
 					options = Filter.filterOptions,
 					selectedOptionId = UseStateResult,
-					onSelectedOptionChanged = ReactModule.useCallback(function(p1) --[[ Line: 143 ]]
+					onSelectedOptionChanged = ReactModule.useCallback(function(p1)
 						-- upvalues: UseStateResult2 (copy)
 						UseStateResult2(p1)
 					end, {}),

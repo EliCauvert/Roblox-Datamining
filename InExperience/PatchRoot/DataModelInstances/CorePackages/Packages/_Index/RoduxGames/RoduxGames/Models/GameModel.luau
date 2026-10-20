@@ -2,7 +2,7 @@
 local CreatorModelModule = require(script.Parent.CreatorModel)
 local GameModelModule = {}
 
-function GameModelModule.new(p1) --[[ Line: 18 ]]
+function GameModelModule.new(p1)
 	-- upvalues: GameModelModule (copy)
 	assert(GameModelModule.isValid(p1))
 	GameModelModule.__index = GameModelModule
@@ -11,7 +11,7 @@ function GameModelModule.new(p1) --[[ Line: 18 ]]
 	return p1
 end
 
-function GameModelModule.mock(Creator) --[[ Line: 30 ]]
+function GameModelModule.mock(Creator)
 	-- upvalues: GameModelModule (copy), CreatorModelModule (copy)
 	local Creator1 = Creator or {}
 	
@@ -27,7 +27,7 @@ function GameModelModule.mock(Creator) --[[ Line: 30 ]]
 	}))
 end
 
-function GameModelModule.format(Creator) --[[ Line: 47 ]]
+function GameModelModule.format(Creator)
 	-- upvalues: GameModelModule (copy), CreatorModelModule (copy)
 	return (GameModelModule.new({
 		experienceId = tostring(Creator.id),

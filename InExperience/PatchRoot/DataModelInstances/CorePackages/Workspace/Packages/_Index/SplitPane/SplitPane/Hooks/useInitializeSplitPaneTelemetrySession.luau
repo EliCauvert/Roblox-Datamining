@@ -5,14 +5,14 @@ local SplitPaneStoreModule = require(script.Parent.Parent.Stores.SplitPaneStore)
 local SplitPaneTelemetryModule = require(script.Parent.Parent.Telemetry.SplitPaneTelemetry)
 local GetTelemetrySnapshotModule = require(script.Parent.Parent.Telemetry.getTelemetrySnapshot)
 
-return function(p1) --[[ Line: 9 | Named "useInitializeSplitPaneTelemetrySession" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), SplitPaneStoreModule (copy), SignalsModule (copy), GetTelemetrySnapshotModule (copy), SplitPaneTelemetryModule (copy)
-	ReactModule.useEffect(function() --[[ Line: 10 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), SplitPaneStoreModule (upval), SignalsModule (upval), GetTelemetrySnapshotModule (upval), SplitPaneTelemetryModule (upval)
 		if p1 then
 			local Store = SplitPaneStoreModule.getStore()
 			
-			return SignalsModule.createEffect(function(p2) --[[ Line: 15 ]]
+			return SignalsModule.createEffect(function(p2)
 				-- upvalues: Store (copy), GetTelemetrySnapshotModule (upval), SplitPaneTelemetryModule (upval)
 				if Store.getIsTelemetrySessionInitialized(p2) then return end
 				local TelemetrySnapshotModule = GetTelemetrySnapshotModule(Store, p2)

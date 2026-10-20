@@ -4,7 +4,7 @@
 	"ThumbnailFieldOfView"
 }
 
-return function() --[[ Line: 15 | Named "createEmoteSchema" ]]
+return function()
 	-- upvalues: Names (copy)
 	local config = { ClassName = "Animation", _children = {} }
 	

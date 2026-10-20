@@ -24,7 +24,7 @@ local config = {
 }
 
 return {
-	mountModalSelector = function(ViewportHeight, ViewportWidth, CellData, OnSelect, OnClose, Callback: () -> ()) --[[ Line: 58 ]]
+	mountModalSelector = function(ViewportHeight, ViewportWidth, CellData, OnSelect, OnClose, Callback: () -> ())
 		-- upvalues: GuiService (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (ref), UIManager (ref), PanelType (ref), config (copy), CoreGui (copy), ConstantsModule (copy), FFlagHideShortcutsOnReportDropdownModule (copy), RoactModule (copy), ModalBaseSelectorDialogModule (copy)
 		local GuiInset, _ = GuiService:GetGuiInset()
 		
@@ -64,7 +64,7 @@ return {
 			onClose = OnClose
 		}), config.modalSelectorFrame, "ModalSelectorDialog")
 	end,
-	unmountModalSelector = function() --[[ Line: 34 ]]
+	unmountModalSelector = function()
 		-- upvalues: config (copy), RoactModule (copy), IsInExperienceUIVREnabled (copy)
 		if config.modalSelectorHandle ~= nil then
 			RoactModule.unmount(config.modalSelectorHandle)

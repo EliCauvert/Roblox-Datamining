@@ -4,7 +4,7 @@ local FoundationModule = require(Parent.Foundation)
 local View = FoundationModule.View
 local Text = FoundationModule.Text
 
-return ReactModule.memo(function(p1) --[[ Line: 26 | Named "EvidenceField" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), View (copy), Text (copy)
 	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y col",

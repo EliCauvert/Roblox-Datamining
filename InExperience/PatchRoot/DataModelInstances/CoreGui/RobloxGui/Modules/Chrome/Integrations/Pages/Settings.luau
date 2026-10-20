@@ -9,13 +9,13 @@ return ServiceModule:register({
 	label = "CoreScripts.InGameMenu.PageTitle.GameSettings",
 	initialAvailability = ServiceModule.AvailabilitySignal.Available,
 	sideSheetPlacement = require(game:GetService("CorePackages").Workspace.Packages.Chrome).Enums.SideSheetPlacement.AboveFold,
-	activated = function(_) --[[ Line: 19 ]]
+	activated = function(_)
 		-- upvalues: InGameMenuIntegrationUtilsModule (copy), GameSettingsPage (copy)
 		InGameMenuIntegrationUtilsModule.toggleIGMPage("GameSettingsPage", GameSettingsPage:get())
 	end,
 	isActivated = GameSettingsPage,
 	components = {
-		Icon = function(_) --[[ Line: 24 ]]
+		Icon = function(_)
 			-- upvalues: CommonIconModule (copy), GameSettingsPage (copy)
 			return CommonIconModule("icons/common/settings", "icons/common/settingsOn", GameSettingsPage)
 		end

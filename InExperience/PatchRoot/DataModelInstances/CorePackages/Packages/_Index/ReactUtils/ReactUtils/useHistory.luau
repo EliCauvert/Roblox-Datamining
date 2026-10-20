@@ -3,14 +3,14 @@ local ReactUtils = script:FindFirstAncestor("ReactUtils")
 local ReactModule = require(ReactUtils.Parent.React)
 local LUAUANALYZEERRORModule = require(ReactUtils.LUAU_ANALYZE_ERROR)
 
-return function(p1, Callback, p2) --[[ Line: 11 | Named "useHistory" ]]
+return function(p1, Callback, p2)
 	-- upvalues: ReactModule (copy), ChangeHistoryService (copy), LUAUANALYZEERRORModule (copy)
 	local UseRefResult = ReactModule.useRef(p1)
 	local UseRefResult1 = ReactModule.useRef({})
 	local UseRefResult2 = ReactModule.useRef({})
-	ReactModule.useEffect(function() --[[ Line: 16 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ChangeHistoryService (upval), UseRefResult1 (copy), UseRefResult2 (copy), LUAUANALYZEERRORModule (upval), UseRefResult (copy), Callback (copy)
-		local OnUndoConnection = ChangeHistoryService.OnUndo:Connect(function(Waypoint) --[[ Line: 17 ]]
+		local OnUndoConnection = ChangeHistoryService.OnUndo:Connect(function(Waypoint)
 			-- upvalues: UseRefResult1 (upval), UseRefResult2 (upval), LUAUANALYZEERRORModule (upval), UseRefResult (upval), Callback (upval)
 			local Current = UseRefResult1.current
 			local Current1 = UseRefResult2.current
@@ -30,7 +30,7 @@ return function(p1, Callback, p2) --[[ Line: 11 | Named "useHistory" ]]
 			UseRefResult1.current = Current
 			UseRefResult2.current = Current1
 		end)
-		local OnRedoConnection = ChangeHistoryService.OnRedo:Connect(function(Waypoint) --[[ Line: 48 ]]
+		local OnRedoConnection = ChangeHistoryService.OnRedo:Connect(function(Waypoint)
 			-- upvalues: UseRefResult1 (upval), UseRefResult2 (upval), LUAUANALYZEERRORModule (upval), UseRefResult (upval), Callback (upval)
 			local Current = UseRefResult1.current
 			local Current1 = UseRefResult2.current
@@ -52,19 +52,19 @@ return function(p1, Callback, p2) --[[ Line: 11 | Named "useHistory" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 76 ]]
+		return function()
 			-- upvalues: OnUndoConnection (copy), OnRedoConnection (copy)
 			OnUndoConnection:Disconnect()
 			OnRedoConnection:Disconnect()
 		end
 	end, p2)
-	ReactModule.useEffect(function() --[[ Line: 82 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), UseRefResult2 (copy)
 		UseRefResult1.current = {}
 		UseRefResult2.current = {}
 	end, p2)
 	
-	return (ReactModule.useCallback(function(Key, Current) --[[ Line: 87 ]]
+	return (ReactModule.useCallback(function(Key, Current)
 		-- upvalues: UseRefResult1 (copy), LUAUANALYZEERRORModule (upval), UseRefResult2 (copy), ChangeHistoryService (upval), UseRefResult (copy)
 		local Current1 = UseRefResult1.current
 		assert(Current1 ~= nil, LUAUANALYZEERRORModule)

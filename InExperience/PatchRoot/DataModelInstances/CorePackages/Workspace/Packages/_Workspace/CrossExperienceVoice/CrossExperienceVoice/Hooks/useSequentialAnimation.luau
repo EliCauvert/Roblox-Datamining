@@ -4,10 +4,10 @@ local React = DependenciesModule.React
 local ReactOtter = DependenciesModule.ReactOtter
 local _ = require(CrossExperienceVoice.Common.Types)
 
-return function(p1) --[[ Line: 11 ]]
+return function(p1)
 	-- upvalues: React (copy), ReactOtter (copy)
 	local UseRefResult = React.useRef(nil)
-	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtter.useAnimatedBinding(p1, function() --[[ Line: 13 ]]
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtter.useAnimatedBinding(p1, function()
 		-- upvalues: UseRefResult (copy)
 		if UseRefResult.current then
 			UseRefResult.current()
@@ -15,9 +15,9 @@ return function(p1) --[[ Line: 11 ]]
 		end
 	end)
 	
-	return UseAnimatedBindingResult, (React.useCallback(function(p2, p3) --[[ Line: 20 ]]
+	return UseAnimatedBindingResult, (React.useCallback(function(p2, p3)
 		-- upvalues: UseRefResult (copy), UseAnimatedBindingResult2 (copy), ReactOtter (upval)
-		local function _(p4, Current) --[[ Line: 21 | Named "animateStep" ]]
+		local function _(p4, Current)
 			-- upvalues: UseRefResult (upval), UseAnimatedBindingResult2 (upval), ReactOtter (upval)
 			UseRefResult.current = Current
 			UseAnimatedBindingResult2(ReactOtter.ease(p4.value, {
@@ -26,12 +26,12 @@ return function(p1) --[[ Line: 11 ]]
 			}))
 		end
 		
-		local function animateImpl(p4, p5, Callback) --[[ Line: 29 ]]
+		local function animateImpl(p4, p5, Callback)
 			-- upvalues: animateImpl (copy), UseRefResult (upval), UseAnimatedBindingResult2 (upval), ReactOtter (upval)
 			local v1 = p4[p5]
 			
 			if v1 ~= nil then
-				function UseRefResult.current() --[[ Line: 32 ]]
+				function UseRefResult.current()
 					-- upvalues: Callback (copy), p5 (copy), animateImpl (upval), p4 (copy)
 					if Callback then
 						Callback(p5)

@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("MomentsStickerOverlayMediaRect", false)
 
-return function() --[[ Line: 13 ]]
+return function()
 	return game:GetFastFlag("MomentsStickerOverlayMediaRect")
 end

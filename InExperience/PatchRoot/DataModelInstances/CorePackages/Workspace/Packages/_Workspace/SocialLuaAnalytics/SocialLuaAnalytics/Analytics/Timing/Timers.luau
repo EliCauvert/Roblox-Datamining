@@ -2,11 +2,11 @@
 local SimpleTimerModule = require(script.Parent.SimpleTimer)
 local LoggerModule = require(script.Parent.Parent.Logger)
 
-return function(p1) --[[ Line: 16 | Named "Timers" ]]
+return function(p1)
 	-- upvalues: LoggerModule (copy), HttpService (copy), SimpleTimerModule (copy)
 	local t = {}
 	
-	local function _(Key) --[[ Line: 19 ]]
+	local function _(Key)
 		-- upvalues: t (copy), LoggerModule (upval)
 		if t[Key] then
 			t[Key].clear()
@@ -18,9 +18,9 @@ return function(p1) --[[ Line: 16 | Named "Timers" ]]
 		end
 	end
 	
-	local _ = function(p2, p3) --[[ Line: 29 ]]
+	local _ = function(p2, p3)
 		-- upvalues: t (copy), LoggerModule (upval)
-		return if p3 then function() --[[ Line: 31 ]]
+		return if p3 then function()
 			-- upvalues: p2 (copy), t (upval), LoggerModule (upval), p3 (copy)
 			if t[p2] then
 				t[p2].clear()
@@ -32,7 +32,7 @@ return function(p1) --[[ Line: 16 | Named "Timers" ]]
 		end else nil
 	end
 	
-	local function v6(p2) --[[ Line: 38 ]]
+	local function v6(p2)
 		-- upvalues: HttpService (upval), t (copy), SimpleTimerModule (upval), p1 (copy), LoggerModule (upval)
 		local P4 = p2 or HttpService:GenerateGUID(false)
 		
@@ -46,7 +46,7 @@ return function(p1) --[[ Line: 16 | Named "Timers" ]]
 		
 		if p1 then
 			local OnReachingThresholdFunction = p1.onReachingThreshold
-			OnReachingThreshold = (if OnReachingThresholdFunction then function() --[[ Line: 31 ]]
+			OnReachingThreshold = (if OnReachingThresholdFunction then function()
 				-- upvalues: P4 (copy), t (upval), LoggerModule (upval), OnReachingThresholdFunction (copy)
 				if t[P4] then
 					t[P4].clear()
@@ -66,14 +66,14 @@ return function(p1) --[[ Line: 16 | Named "Timers" ]]
 	end
 	
 	return {
-		start = function(p2, p3) --[[ Line: 52 ]]
+		start = function(p2, p3)
 			-- upvalues: v6 (copy), t (copy)
 			local v1 = v6(p2)
 			t[v1].start(p3)
 			
 			return v1
 		end,
-		stop = function(Key) --[[ Line: 59 ]]
+		stop = function(Key)
 			-- upvalues: t (copy), LoggerModule (upval)
 			if not t[Key] then
 				LoggerModule:warning("(Stop) Timer with this key doesn't exist: " .. tostring(Key))
@@ -93,7 +93,7 @@ return function(p1) --[[ Line: 16 | Named "Timers" ]]
 				return StopResult
 			end
 		end,
-		getTime = function(p2) --[[ Line: 71 ]]
+		getTime = function(p2)
 			-- upvalues: t (copy), LoggerModule (upval)
 			if t[p2] then
 				return t[p2].getTime()
@@ -103,7 +103,7 @@ return function(p1) --[[ Line: 16 | Named "Timers" ]]
 				return -1
 			end
 		end,
-		getStartTimestamp = function(p2) --[[ Line: 80 ]]
+		getStartTimestamp = function(p2)
 			-- upvalues: t (copy), LoggerModule (upval)
 			if t[p2] then
 				return t[p2].getStartTimestamp()

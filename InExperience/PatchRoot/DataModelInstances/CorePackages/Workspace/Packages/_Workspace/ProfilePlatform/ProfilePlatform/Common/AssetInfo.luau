@@ -6,7 +6,7 @@ local FFlagProfilePlatformEnableBundlesInAssetsCarousel = require(Parent.SharedF
 local FFlagProfileStoreShowLimitedResalePriceModule = require(ProfilePlatform.Flags.FFlagProfileStoreShowLimitedResalePrice)
 local Count = 0
 
-local function _(): string --[[ Line: 15 ]]
+local function _(): string
 	-- upvalues: Count (ref)
 	Count += 1
 	
@@ -14,7 +14,7 @@ local function _(): string --[[ Line: 15 ]]
 end
 
 return {
-	mock = function(p1, p2) --[[ Line: 54 ]]
+	mock = function(p1, p2)
 		-- upvalues: Count (ref), EnumsModule (copy)
 		local t = {}
 		local Text = tostring(p1)
@@ -30,7 +30,7 @@ return {
 		
 		return t
 	end,
-	fromAsset = function(p1) --[[ Line: 69 ]]
+	fromAsset = function(p1)
 		-- upvalues: FFlagProfilePlatformEnableBundlesInAssetsCarousel (copy), FFlagSocialEnableProfileInspectAndBuy (copy), FFlagProfileStoreShowLimitedResalePriceModule (copy)
 		local config = {
 			id = tostring(p1.id),

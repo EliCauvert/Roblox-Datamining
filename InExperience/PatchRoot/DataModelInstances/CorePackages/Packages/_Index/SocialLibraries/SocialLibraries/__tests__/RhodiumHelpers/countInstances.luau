@@ -1,4 +1,4 @@
-﻿return function(Object, ClassName): number --[[ Line: 7 ]]
+﻿return function(Object, ClassName): number
 	local Count = 0
 	
 	for _, child in pairs(Object:GetChildren()) do

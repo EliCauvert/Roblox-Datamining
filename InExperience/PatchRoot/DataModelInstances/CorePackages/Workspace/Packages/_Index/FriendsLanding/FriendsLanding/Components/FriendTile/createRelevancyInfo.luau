@@ -7,7 +7,7 @@ local Images = DependenciesModule.UIBlox.App.ImageSet.Images
 local PresenceType = DependenciesModule.RoduxPresence.Enums.PresenceType
 local _UDim2 = UDim2.fromOffset(12, 12)
 
-return function(p1, Text, p2, _, p3, _, p4, p5, Text1, p6) --[[ Line: 14 ]]
+return function(p1, Text, p2, _, p3, _, p4, p5, Text1, p6)
 	-- upvalues: GetCorrectUserPresenceModule (copy), Images (copy), PresenceType (copy), _UDim2 (copy), IsUserInGameModule (copy), NotLocalizedStringsModule (copy)
 	local config = { icon = p2 and Images[p2] or nil }
 	

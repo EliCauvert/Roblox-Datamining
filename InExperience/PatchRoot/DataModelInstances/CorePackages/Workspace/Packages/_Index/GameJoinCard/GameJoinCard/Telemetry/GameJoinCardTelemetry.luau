@@ -23,7 +23,7 @@ local config2 = {
 local config3 = { Ready = true, Failed = true }
 
 return {
-	logBannerLoadResult = function(Status) --[[ Line: 49 ]]
+	logBannerLoadResult = function(Status)
 		-- upvalues: config1 (copy), LoggingProtocolModule (copy), config (copy)
 		if config1[Status] then
 			LoggingProtocolModule.default:logRobloxTelemetryCounter(config, nil, { status = Status })
@@ -31,7 +31,7 @@ return {
 			return
 		end
 	end,
-	logActionsResolved = function(Value: number, Status, Surface) --[[ Line: 76 ]]
+	logActionsResolved = function(Value: number, Status, Surface)
 		-- upvalues: config3 (copy), LoggingProtocolModule (copy), config2 (copy)
 		if config3[Status] then
 			LoggingProtocolModule.default:logRobloxTelemetryStat(config2, math.max(0, (math.floor(Value))), { status = Status, surface = Surface })

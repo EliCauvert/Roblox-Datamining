@@ -6,9 +6,9 @@ local SendNotificationInfo = game:GetService("CoreGui"):WaitForChild("RobloxGui"
 local RobloxTranslatorModule = require(game:GetService("CorePackages").Workspace.Packages.RobloxTranslator)
 local PlayerGui = nil
 
-local function _(p1, Text) --[[ Line: 18 | Named "LocalizedGetString" ]]
+local function _(p1, Text)
 	-- upvalues: RobloxTranslatorModule (copy)
-	pcall(function() --[[ Line: 19 ]]
+	pcall(function()
 		-- upvalues: Text (ref), RobloxTranslatorModule (upval), p1 (copy)
 		Text = RobloxTranslatorModule:FormatByKey(p1)
 	end)
@@ -16,7 +16,7 @@ local function _(p1, Text) --[[ Line: 18 | Named "LocalizedGetString" ]]
 	return Text
 end
 
-local function ScrollSelectedElement(_, InputState, InputObject) --[[ Line: 25 ]]
+local function ScrollSelectedElement(_, InputState, InputObject)
 	-- upvalues: GuiService (copy)
 	if InputState ~= Enum.UserInputState.Begin then
 		return Enum.ContextActionResult.Pass
@@ -54,7 +54,7 @@ local function ScrollSelectedElement(_, InputState, InputObject) --[[ Line: 25 ]
 	return Enum.ContextActionResult.Pass
 end
 
-local function EnableKeyboardNavigation(_, InputState, _) --[[ Line: 73 ]]
+local function EnableKeyboardNavigation(_, InputState, _)
 	-- upvalues: GameSettings (copy), GuiService (copy), PlayerGui (ref), Players (copy), RobloxTranslatorModule (copy), SendNotificationInfo (copy)
 	if not GameSettings.UiNavigationKeyBindEnabled then
 		return Enum.ContextActionResult.Pass
@@ -78,14 +78,14 @@ local function EnableKeyboardNavigation(_, InputState, _) --[[ Line: 73 ]]
 	if GuiService.SelectedObject then
 		local FormatByKeyResult = nil
 		local v1 = "InGame.NotificationScript2.UINavigation.Title"
-		pcall(function() --[[ Line: 19 ]]
+		pcall(function()
 			-- upvalues: FormatByKeyResult (ref), RobloxTranslatorModule (upval), v1 (copy)
 			FormatByKeyResult = RobloxTranslatorModule:FormatByKey(v1)
 		end)
 		local Title = FormatByKeyResult
 		local FormatByKeyResult1 = nil
 		local v2 = "InGame.NotificationScript2.UINavigation.Text"
-		pcall(function() --[[ Line: 19 ]]
+		pcall(function()
 			-- upvalues: FormatByKeyResult1 (ref), RobloxTranslatorModule (upval), v2 (copy)
 			FormatByKeyResult1 = RobloxTranslatorModule:FormatByKey(v2)
 		end)
@@ -97,12 +97,12 @@ end
 local Module = {}
 Module.__index = Module
 
-function Module.new() --[[ Line: 116 ]]
+function Module.new()
 	-- upvalues: Module (copy), ContextActionService (copy), EnableKeyboardNavigation (copy), ScrollSelectedElement (copy), GameSettings (copy), GuiService (copy)
 	local self = setmetatable({}, Module)
 	ContextActionService:BindAction("EnableKeyboardUINavigation", EnableKeyboardNavigation, false, Enum.KeyCode.BackSlash)
 	ContextActionService:BindAction("ScrollSelectedElement", ScrollSelectedElement, false, Enum.KeyCode.PageUp, Enum.KeyCode.PageDown, Enum.KeyCode.Home, Enum.KeyCode.End)
-	GameSettings:GetPropertyChangedSignal("UiNavigationKeyBindEnabled"):Connect(function() --[[ Line: 121 ]]
+	GameSettings:GetPropertyChangedSignal("UiNavigationKeyBindEnabled"):Connect(function()
 		-- upvalues: GameSettings (upval), GuiService (upval)
 		if not GameSettings.UiNavigationKeyBindEnabled then
 			GuiService.SelectedObject = nil

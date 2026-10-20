@@ -14,7 +14,7 @@ local v1 = UrlBuilderModule.UrlBuilder.new({
 })()
 
 return {
-	fetchShareLink = function(p1, p2) --[[ Line: 40 ]]
+	fetchShareLink = function(p1, p2)
 		-- upvalues: Fetch (copy), HttpService (copy), PromiseModule (copy), v1 (copy), Response (copy), GraphQLError (copy)
 		local Fetch1 = if p2 then p2 else Fetch
 		local Json = HttpService:JSONEncode({
@@ -22,7 +22,7 @@ return {
 			data = HttpService:JSONEncode(p1.data)
 		})
 		
-		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 50 ]]
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 			-- upvalues: Fetch1 (copy), v1 (upval), Json (copy), Response (upval), GraphQLError (upval)
 			local v2 = Fetch1(v1, {
 				method = "POST",
@@ -31,7 +31,7 @@ return {
 					["Content-Type"] = "application/json",
 					Accept = "application/json"
 				}
-			}):catch(function(Err) --[[ Line: 59 ]]
+			}):catch(function(Err)
 				-- upvalues: Response (upval)
 				local v3 = Response.error()
 				v3.statusText = Err.message
@@ -47,7 +47,7 @@ return {
 				
 				return
 			end
-			local v3 = v2:json():catch(function() --[[ Line: 83 ]]
+			local v3 = v2:json():catch(function()
 				return nil
 			end):expect()
 			

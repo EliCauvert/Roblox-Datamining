@@ -8,7 +8,7 @@ local _ = require(AvatarExperienceProfilePictureEditor.Hooks.useRecommendedEmote
 local _ = require(AvatarExperienceProfilePictureEditor.Utils.mapWidgetContentToFrameItems)
 local GetRecommendationPriceLineContentModule = require(AvatarExperienceProfilePictureEditor.Utils.getRecommendationPriceLineContent)
 
-local function buildOwnedEmoteItems(OwnedEmotes) --[[ Line: 35 ]]
+local function buildOwnedEmoteItems(OwnedEmotes)
 	-- upvalues: GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy)
 	local List = {}
 	
@@ -22,7 +22,7 @@ local function buildOwnedEmoteItems(OwnedEmotes) --[[ Line: 35 ]]
 	return List
 end
 
-local function buildRecommendedEmoteItems(OwnedEmotes, RecommendedEmotes, FreeLabel) --[[ Line: 50 ]]
+local function buildRecommendedEmoteItems(OwnedEmotes, RecommendedEmotes, FreeLabel)
 	-- upvalues: GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), GetRecommendationPriceLineContentModule (copy)
 	local List = {}
 	local t = {}
@@ -48,7 +48,7 @@ local function buildRecommendedEmoteItems(OwnedEmotes, RecommendedEmotes, FreeLa
 	return List
 end
 
-local function _(Tbl, List) --[[ Line: 81 | Named "buildCombinedEmoteItems" ]]
+local function _(Tbl, List)
 	local Copy = table.clone(Tbl)
 	
 	for _, value in List do
@@ -57,7 +57,7 @@ local function _(Tbl, List) --[[ Line: 81 | Named "buildCombinedEmoteItems" ]]
 	return Copy
 end
 
-local function buildFrameAssetItems(FrameItems) --[[ Line: 92 ]]
+local function buildFrameAssetItems(FrameItems)
 	local List = {}
 	
 	for _, frameItem in FrameItems do
@@ -70,7 +70,7 @@ local function buildFrameAssetItems(FrameItems) --[[ Line: 92 ]]
 	return List
 end
 
-return function(p1) --[[ Line: 107 | Named "buildEditProfileImageAssetItems" ]]
+return function(p1)
 	-- upvalues: buildOwnedEmoteItems (copy), buildRecommendedEmoteItems (copy), buildFrameAssetItems (copy)
 	local OwnedEmoteItems = buildOwnedEmoteItems(p1.ownedEmotes)
 	local RecommendedEmoteItems = buildRecommendedEmoteItems(p1.ownedEmotes, p1.recommendedEmotes, p1.freeLabel)

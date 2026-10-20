@@ -13,7 +13,7 @@ local UseGroupsAnalyticsModule = require(Groups.Hooks.useGroupsAnalytics)
 local EventNamesModule = require(Groups.Analytics.EventNames)
 local SearchBarWrapperModule = require(script.Parent.SearchBarWrapper)
 
-return function(p1) --[[ Line: 26 | Named "GroupsListToolbar" ]]
+return function(p1)
 	-- upvalues: UseGroupsWrapperContextModule (copy), UseGroupsAnalyticsModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), EventNamesModule (copy), View (copy), SearchBarWrapperModule (copy), Button (copy), ButtonVariant (copy), InputSize (copy)
 	local UseGroupsWrapperContextModuleResult = UseGroupsWrapperContextModule()
 	local UseGroupsAnalyticsModuleResult = UseGroupsAnalyticsModule()
@@ -43,7 +43,7 @@ return function(p1) --[[ Line: 26 | Named "GroupsListToolbar" ]]
 				size = InputSize.Medium,
 				width = UDim.new(1, 0),
 				isDisabled = p1.canCreateGroup == false,
-				onActivated = ReactModule.useCallback(function() --[[ Line: 36 ]]
+				onActivated = ReactModule.useCallback(function()
 					-- upvalues: UseGroupsAnalyticsModuleResult (copy), EventNamesModule (upval), UseGroupsWrapperContextModuleResult (copy)
 					UseGroupsAnalyticsModuleResult.fireAnalyticsEvent(EventNamesModule.GroupsListCreateGroupClicked)
 					UseGroupsWrapperContextModuleResult.navigateTo.createGroup()

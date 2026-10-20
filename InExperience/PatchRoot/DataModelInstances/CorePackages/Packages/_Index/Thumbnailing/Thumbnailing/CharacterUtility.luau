@@ -1,4 +1,4 @@
-﻿local function getHeadAttachments(Object) --[[ Line: 11 ]]
+﻿local function getHeadAttachments(Object)
 	local t = {}
 	local Head = Object:FindFirstChild("Head")
 	
@@ -12,15 +12,15 @@
 	return t
 end
 
-local function _(p1, p2, p3, Vector, p4): Vector3 --[[ Line: 32 | Named "makeRotatedCorner" ]]
+local function _(p1, p2, p3, Vector, p4): Vector3
 	return p4 * Vector3.new(p1 * Vector.X, p2 * Vector.Y, p3 * Vector.Z)
 end
 
-local function growExtentsToIncludePoint(Vector, Vector1, Vector2) --[[ Line: 41 ]]
+local function growExtentsToIncludePoint(Vector, Vector1, Vector2)
 	return Vector3.new(math.min(Vector2.X, Vector.X), math.min(Vector2.Y, Vector.Y), (math.min(Vector2.Z, Vector.Z))), (Vector3.new(math.max(Vector2.X, Vector1.X), math.max(Vector2.Y, Vector1.Y), (math.max(Vector2.Z, Vector1.Z))))
 end
 
-local function growExtentsToInclude(p1, p2, Handle, p3, p4, p5: number) --[[ Line: 68 ]]
+local function growExtentsToInclude(p1, p2, Handle, p3, p4, p5: number)
 	-- upvalues: growExtentsToIncludePoint (copy)
 	local SizeRatio = Handle.Size / 2
 	
@@ -40,11 +40,11 @@ local function growExtentsToInclude(p1, p2, Handle, p3, p4, p5: number) --[[ Lin
 	return p1, p2
 end
 
-local _ = function() --[[ Line: 103 | Named "initExtents" ]]
+local _ = function()
 	return vector.create(1e999, 1e999, 1e999), vector.create(-1e999, -1e999, -1e999)
 end
 
-local function recursiveCalculateExtents(p6, p7, Part, p8, Text: string) --[[ Line: 118 ]]
+local function recursiveCalculateExtents(p6, p7, Part, p8, Text: string)
 	-- upvalues: growExtentsToInclude (copy), recursiveCalculateExtents (copy)
 	if not Text then
 		Text = ""
@@ -62,13 +62,13 @@ local function recursiveCalculateExtents(p6, p7, Part, p8, Text: string) --[[ Li
 end
 
 return {
-	CalculateModelExtents = function(p9, p10) --[[ Line: 145 ]]
+	CalculateModelExtents = function(p9, p10)
 		-- upvalues: recursiveCalculateExtents (copy)
 		local v1, v2 = recursiveCalculateExtents(vector.create(1e999, 1e999, 1e999), vector.create(-1e999, -1e999, -1e999), p9, p10:Inverse(), "  ")
 		
 		return v1, v2
 	end,
-	CalculateHeadExtents = function(Object, p9) --[[ Line: 160 ]]
+	CalculateHeadExtents = function(Object, p9)
 		-- upvalues: growExtentsToInclude (copy), getHeadAttachments (copy)
 		local v1: vector = vector.create(1e999, 1e999, 1e999)
 		local v2: vector = vector.create(-1e999, -1e999, -1e999)
@@ -97,7 +97,7 @@ return {
 		end
 		return GrowExtentsToIncludeResult, GrowExtentsToIncludeResult2
 	end,
-	CalculateBodyPartsExtents = function(p10, List) --[[ Line: 201 ]]
+	CalculateBodyPartsExtents = function(p10, List)
 		-- upvalues: growExtentsToInclude (copy)
 		local v4: vector = vector.create(1e999, 1e999, 1e999)
 		local v5: vector = vector.create(-1e999, -1e999, -1e999)
@@ -108,7 +108,7 @@ return {
 		end
 		return v4, v5
 	end,
-	AllocateDebugExtentParts = function() --[[ Line: 217 ]]
+	AllocateDebugExtentParts = function()
 		local Parts = {}
 		
 		for i = 1, 8 do
@@ -123,7 +123,7 @@ return {
 		end
 		return Parts
 	end,
-	PositionDebugExtentParts = function(p11, Vector, Vector1, p12) --[[ Line: 237 ]]
+	PositionDebugExtentParts = function(p11, Vector, Vector1, p12)
 		for i = 0, 1 do
 			for i1 = 0, 1 do
 				for i2 = 0, 1 do

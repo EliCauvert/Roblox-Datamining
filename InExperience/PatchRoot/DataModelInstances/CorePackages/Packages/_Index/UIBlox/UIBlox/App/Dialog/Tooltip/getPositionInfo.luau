@@ -1,6 +1,6 @@
 ﻿local TooltipOrientationModule = require(script.Parent.Enum.TooltipOrientation)
 
-return function(XOffset: number, YOffset1: number, Bottom, Vector: number, Vector1: number, Vector3, Vector4) --[[ Line: 22 ]]
+return function(XOffset: number, YOffset1: number, Bottom, Vector: number, Vector1: number, Vector3, Vector4)
 	-- upvalues: TooltipOrientationModule (copy)
 	local t = {}
 	local NewVector = Vector + Vector1 * 0.5

@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("UGCValidateCageDuplicateUVThreshold", 100)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastInt("UGCValidateCageDuplicateUVThreshold")
 end

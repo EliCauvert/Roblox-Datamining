@@ -4,11 +4,11 @@ local FindMeFunction = UserConnectorModule.findMe
 
 return {
 	default = {
-		findUserById = function(_, p1) --[[ Line: 7 ]]
+		findUserById = function(_, p1)
 			-- upvalues: FindUserByIdFunction (copy)
 			return FindUserByIdFunction(p1)
 		end,
-		findMe = function(_) --[[ Line: 10 ]]
+		findMe = function(_)
 			-- upvalues: FindMeFunction (copy)
 			return FindMeFunction()
 		end

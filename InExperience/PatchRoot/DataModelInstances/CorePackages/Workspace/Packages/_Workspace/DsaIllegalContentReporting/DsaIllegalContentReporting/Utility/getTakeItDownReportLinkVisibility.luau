@@ -5,7 +5,7 @@ local CountriesWithTakeItDownReport = game:DefineFastString("CountriesWithTakeIt
 local Flag = false
 
 if FFlagAddTakeItDownReportLinkToSurfaces then
-	task.spawn(function() --[[ Line: 18 ]]
+	task.spawn(function()
 		-- upvalues: Players (copy), LocalizationService (copy), CountriesWithTakeItDownReport (copy), Flag (ref)
 		local LocalPlayer = Players.LocalPlayer
 		while not LocalPlayer do
@@ -23,7 +23,7 @@ if FFlagAddTakeItDownReportLinkToSurfaces then
 		end
 	end)
 end
-return function() --[[ Line: 42 | Named "getTakeItDownReportLinkVisibility" ]]
+return function()
 	-- upvalues: FFlagAddTakeItDownReportLinkToSurfaces (copy), Flag (ref)
 	return FFlagAddTakeItDownReportLinkToSurfaces and Flag
 end

@@ -17,12 +17,12 @@ local GetFFlagIBGateUGC4ACollectibleAssetsBundlesModule = require(Parent.Flags.G
 local GetFFlagIBEnableCollectiblesSystemSupportModule = require(Parent.Flags.GetFFlagIBEnableCollectiblesSystemSupport)
 local DetailsButtons = RoactModule.PureComponent:extend("DetailsButtons")
 
-local function _(p1): boolean --[[ Line: 35 | Named "isAnimationAsset" ]]
+local function _(p1): boolean
 	-- upvalues: ConstantsModule (copy)
 	return ConstantsModule.AnimationAssetTypes[p1] ~= nil
 end
 
-local function getBuyText(p1, p2, IsCollectibleQuantityLimitPerUserBelow, CollectibleLowestResalePrice) --[[ Line: 39 ]]
+local function getBuyText(p1, p2, IsCollectibleQuantityLimitPerUserBelow, CollectibleLowestResalePrice)
 	-- upvalues: GetFFlagIBEnableCollectiblesSystemSupportModule (copy), RobloxTranslatorModule (copy), ConstantsModule (copy), Players (copy)
 	local Price = nil
 	local IsLimited = p1.isLimited or GetFFlagIBEnableCollectiblesSystemSupportModule() and p1.isLimitedUnique
@@ -66,14 +66,14 @@ local function getBuyText(p1, p2, IsCollectibleQuantityLimitPerUserBelow, Collec
 	return Price
 end
 
-function DetailsButtons.init(p1) --[[ Line: 83 ]]
+function DetailsButtons.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.tryOnButtonRef = RoactModule.createRef()
 	p1.buyButtonRef = RoactModule.createRef()
 	p1.favoriteButtonRef = RoactModule.createRef()
 end
 
-function DetailsButtons.didUpdate(p1, p2) --[[ Line: 89 ]]
+function DetailsButtons.didUpdate(p1, p2)
 	-- upvalues: GuiService (copy)
 	local DetailsInformation = p1.props.detailsInformation
 	local GamepadEnabled = p1.props.gamepadEnabled
@@ -95,7 +95,7 @@ function DetailsButtons.didUpdate(p1, p2) --[[ Line: 89 ]]
 	end
 end
 
-function DetailsButtons.calculateBuyStatusForLimitedItem(p1, AssetInfo, Locale, _) --[[ Line: 113 ]]
+function DetailsButtons.calculateBuyStatusForLimitedItem(p1, AssetInfo, Locale, _)
 	-- upvalues: UtilityFunctionsModule (copy), TutilsModule (copy), Players (copy), getBuyText (copy), ConstantsModule (copy)
 	local IsLimited1Point0 = UtilityFunctionsModule.isLimited1Point0(AssetInfo) or UtilityFunctionsModule.isLimited1Point0_LimitedUnique(AssetInfo)
 	local IsCollectibleQuantityLimitPerUserBelow: boolean? = nil
@@ -142,7 +142,7 @@ function DetailsButtons.calculateBuyStatusForLimitedItem(p1, AssetInfo, Locale, 
 	}
 end
 
-function DetailsButtons.render(p1) --[[ Line: 188 ]]
+function DetailsButtons.render(p1)
 	-- upvalues: UtilityFunctionsModule (copy), ConstantsModule (copy), GetFFlagIBGateUGC4ACollectibleAssetsBundlesModule (copy), RoactModule (copy), InspectAndBuyControllerBarModule (copy), FavoritesButtonModule (copy), TryOnButtonModule (copy), BuyButtonModule (copy)
 	local Locale = p1.props.locale
 	local AssetInfo = p1.props.assetInfo
@@ -240,7 +240,7 @@ function DetailsButtons.render(p1) --[[ Line: 188 ]]
 	})
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 315 ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	-- upvalues: GetIsFavoriteModule (copy)
 	return {
 		visible = p1.visible,

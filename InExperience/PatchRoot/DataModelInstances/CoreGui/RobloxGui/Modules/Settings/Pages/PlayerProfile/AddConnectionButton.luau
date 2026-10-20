@@ -9,21 +9,21 @@ local Button = FoundationModule.Button
 local UseLocalizationFunction = require(CorePackages.Workspace.Packages.Localization).Hooks.useLocalization
 local PeopleServiceModule = require(CorePackages.Workspace.Packages.PeopleService)
 
-return ReactModule.memo(function(p1) --[[ Line: 22 | Named "AddConnectionButton" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), PeopleServiceModule (copy), Players (copy), SignalsReactModule (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 29 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: PeopleServiceModule (upval)
 		return PeopleServiceModule.getService("Constants")
 	end, {})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 33 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: PeopleServiceModule (upval)
 		return PeopleServiceModule.getService("PeopleAnalyticsManager")
 	end, {})
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 37 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: PeopleServiceModule (upval)
 		return PeopleServiceModule.getService("FriendStatusStore")
 	end, {})
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 41 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), Players (upval)
 		return if p1.userId then Players:GetPlayerByUserId(p1.userId) else nil
 	end, { p1.userId })
@@ -39,7 +39,7 @@ return ReactModule.memo(function(p1) --[[ Line: 22 | Named "AddConnectionButton"
 		fillBehavior = FillBehavior.Fill,
 		isDisabled = UseSignalStateResult,
 		LayoutOrder = p1.layoutOrder,
-		onActivated = function() --[[ Line: 54 ]]
+		onActivated = function()
 			-- upvalues: UseMemoResult1 (copy), UseMemoResult (copy), UseMemoResult2 (copy), UseMemoResult3 (copy)
 			UseMemoResult1:trackRequestFriendship(UseMemoResult.ANALYTICS.ENTRY_POINT.PLAYER_PROFILE)
 			UseMemoResult2.sendFriendRequest(UseMemoResult3)

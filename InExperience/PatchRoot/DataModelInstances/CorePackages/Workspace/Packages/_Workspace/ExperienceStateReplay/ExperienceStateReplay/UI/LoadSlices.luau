@@ -2,9 +2,9 @@
 local ExperienceStateRecordingService = game:GetService("ExperienceStateRecordingService")
 local HttpService = game:GetService("HttpService")
 
-function debugPrint(_) --[[ Line: 10 ]] end
+function debugPrint(_) end
 
-local function SetLoadedState(p1, p2) --[[ Line: 16 ]]
+local function SetLoadedState(p1, p2)
 	debugPrint("playResult minFrameNumber " .. tostring(p2.minFrameNumber) .. " maxFrameNumber " .. tostring(p2.maxFrameNumber) .. " minEpoch " .. tostring(p2.minEpoch) .. " - " .. tostring(DateTime.fromUnixTimestampMillis(p2.minEpoch):ToIsoDate()) .. " maxEpoch " .. tostring(p2.maxEpoch) .. " - " .. tostring(DateTime.fromUnixTimestampMillis(p2.maxEpoch):ToIsoDate()))
 	p1.minLoadedFrameNumber = p2.minFrameNumber
 	p1.maxLoadedFrameNumber = p2.maxFrameNumber
@@ -29,12 +29,12 @@ local function SetLoadedState(p1, p2) --[[ Line: 16 ]]
 	debugPrint("loadedPercent " .. tostring(LoadedLengthSecondsRatio) .. " loadedStartPercent " .. tostring(ReplayToLoadedStartSecondsRatio))
 end
 
-function _getMetadataForUser(p1) --[[ Line: 74 ]]
+function _getMetadataForUser(p1)
 	-- upvalues: ExperienceStateRecordingService (copy)
 	print((ExperienceStateRecordingService:ListRecordingsAsync(p1, "")))
 end
 
-function getMetadataForGuid(EngineContextGuid, Callback) --[[ Line: 81 ]]
+function getMetadataForGuid(EngineContextGuid, Callback)
 	-- upvalues: HttpService (copy)
 	return HttpService:RequestInternal({
 		Url = "https://apis.roblox.com/data-model-capture-service/v1/GetCaptureMetadataByEngineContextGuid",
@@ -44,7 +44,7 @@ function getMetadataForGuid(EngineContextGuid, Callback) --[[ Line: 81 ]]
 			["Content-Type"] = "application/json",
 			Accept = "application/json"
 		}
-	}):Start(function(p1, List) --[[ Line: 94 ]]
+	}):Start(function(p1, List)
 		-- upvalues: HttpService (upval), Callback (copy), EngineContextGuid (copy)
 		if p1 then
 			print(List.Body)
@@ -64,15 +64,15 @@ end
 
 local LoadSlicesModule = {
 	SetLoadedState = SetLoadedState,
-	loadGUIDSlices = function(_, p1, _, _) --[[ Line: 116 ]]
+	loadGUIDSlices = function(_, p1, _, _)
 		print((getMetadataForGuid(p1)))
 	end
 }
 
-function LoadSlicesModule.loadGUID(p1, DirectGuid) --[[ Line: 121 ]]
+function LoadSlicesModule.loadGUID(p1, DirectGuid)
 	-- upvalues: ExperienceStateRecordingService (copy), LoadSlicesModule (copy)
 	debugPrint("Loading slices for GUID: " .. tostring(DirectGuid))
-	local _ = getMetadataForGuid(DirectGuid, function(p2, p3) --[[ Line: 125 ]]
+	local _ = getMetadataForGuid(DirectGuid, function(p2, p3)
 		-- upvalues: ExperienceStateRecordingService (upval), DirectGuid (copy), p1 (copy), LoadSlicesModule (upval)
 		debugPrint("Received metadata - PlaceId: " .. tostring(p2) .. " PlaceVersion: " .. tostring(p3))
 		local PlaceFileURLAsync = ExperienceStateRecordingService:GetPlaceFileURLAsync(p3, p2)
@@ -93,9 +93,9 @@ function LoadSlicesModule.loadGUID(p1, DirectGuid) --[[ Line: 121 ]]
 		for i, value in p1.recordingsToPlayback do
 			debugPrint("Recording " .. tostring(i) .. " " .. value)
 		end
-		task.spawn(function() --[[ Line: 155 ]]
+		task.spawn(function()
 			-- upvalues: ExperienceStateRecordingService (upval), p1 (upval), LoadSlicesModule (upval)
-			local Success, Result = pcall(function() --[[ Line: 156 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: ExperienceStateRecordingService (upval), p1 (upval), LoadSlicesModule (upval)
 				LoadSlicesModule.SetLoadedState(p1, (ExperienceStateRecordingService:LoadPlaybackAsync(p1.recordingsToPlayback[1], p1.placeURL, Enum.ExperienceStateRecordingLoadMode.NewReplay, p1.sourceType)))
 				p1.nextSliceToLoad = 2
@@ -113,7 +113,7 @@ function LoadSlicesModule.loadGUID(p1, DirectGuid) --[[ Line: 121 ]]
 	end)
 end
 
-function LoadSlicesModule.experienceCallback(p2) --[[ Line: 182 ]]
+function LoadSlicesModule.experienceCallback(p2)
 	-- upvalues: TeleportService (copy), LoadSlicesModule (copy)
 	local LocalPlayerTeleportData = TeleportService:GetLocalPlayerTeleportData()
 	
@@ -128,7 +128,7 @@ function LoadSlicesModule.experienceCallback(p2) --[[ Line: 182 ]]
 	end
 end
 
-function LoadSlicesModule.loadSlices(p2) --[[ Line: 196 ]]
+function LoadSlicesModule.loadSlices(p2)
 	-- upvalues: TeleportService (copy), ExperienceStateRecordingService (copy), LoadSlicesModule (copy)
 	p2.LoadingOverlay.Visible = true
 	p2.state.Loading = true
@@ -159,9 +159,9 @@ function LoadSlicesModule.loadSlices(p2) --[[ Line: 196 ]]
 	for i, value in p2.recordingsToPlayback do
 		debugPrint("Recording " .. tostring(i) .. " " .. value)
 	end
-	task.spawn(function() --[[ Line: 238 ]]
+	task.spawn(function()
 		-- upvalues: ExperienceStateRecordingService (upval), p2 (copy), LoadSlicesModule (upval)
-		local Success, Result = pcall(function() --[[ Line: 239 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: ExperienceStateRecordingService (upval), p2 (upval), LoadSlicesModule (upval)
 			LoadSlicesModule.SetLoadedState(p2, (ExperienceStateRecordingService:LoadPlaybackAsync(p2.recordingsToPlayback[1], p2.placeURL, Enum.ExperienceStateRecordingLoadMode.NewReplay, p2.sourceType)))
 			p2.nextSliceToLoad = 2
@@ -178,9 +178,9 @@ function LoadSlicesModule.loadSlices(p2) --[[ Line: 196 ]]
 	end)
 end
 
-function LoadSlicesModule.loadSlicesAfterFirst(p3) --[[ Line: 262 ]]
+function LoadSlicesModule.loadSlicesAfterFirst(p3)
 	-- upvalues: ExperienceStateRecordingService (copy), LoadSlicesModule (copy)
-	local Success, Result = pcall(function() --[[ Line: 263 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: p3 (copy), ExperienceStateRecordingService (upval), LoadSlicesModule (upval)
 		local Count = 0
 		while true do
@@ -215,7 +215,7 @@ function LoadSlicesModule.loadSlicesAfterFirst(p3) --[[ Line: 262 ]]
 	end
 end
 
-function LoadSlicesModule.loadNoncontiguousSlice(p4, p5) --[[ Line: 335 ]]
+function LoadSlicesModule.loadNoncontiguousSlice(p4, p5)
 	if p4.noncontiguousSliceToLoad ~= nil then
 		warn("skipping non-contiguous slice load as still waiting for last jump")
 	end

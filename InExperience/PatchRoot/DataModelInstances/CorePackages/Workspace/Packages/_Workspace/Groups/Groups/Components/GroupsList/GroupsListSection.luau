@@ -7,7 +7,7 @@ local Text = FoundationModule.Text
 local _ = require(Groups.Common.Types)
 local GroupListItemModule = require(script.Parent.GroupListItem)
 
-return ReactModule.memo(function(p1) --[[ Line: 24 | Named "GroupsListSection" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), Text (copy), View (copy), GroupListItemModule (copy)
 	if #p1.groups == 0 then
 		return nil

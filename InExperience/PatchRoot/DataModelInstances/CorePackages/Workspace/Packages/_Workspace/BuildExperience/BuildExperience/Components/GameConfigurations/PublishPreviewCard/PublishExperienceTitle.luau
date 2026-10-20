@@ -13,11 +13,11 @@ local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 local IconVariant = FoundationModule.Enums.IconVariant
 
-local function _(p1) --[[ Line: 31 | Named "getGameIconUrl" ]]
+local function _(p1)
 	return p1.gameIcon or `rbxthumb://type=GameIcon&id={p1.universeId}&w=150&h=150`
 end
 
-return function(p1) --[[ Line: 35 | Named "PublishExperienceTitle" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), Image (copy), Text (copy), FFlagUnifyVerifiedBadgeComponent (copy), VerifiedBadgeModule (copy), Icon (copy), IconName (copy), IconSize (copy), IconVariant (copy)
 	local TestId = p1.testId or "publish-experience-title"
 	local Target = p1.target

@@ -15,20 +15,20 @@ local FFlagPymkCarouselPresenceStoreMigrationModule = require(Parent.Flags.FFlag
 local FFlagLuaAppEnableSduiHomePage = require(Parent1.SharedFlags).FFlagLuaAppEnableSduiHomePage
 local _ = require(Parent1.UserList)
 
-return function(p1) --[[ Line: 43 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ImpressionsTagUtility (copy), FFlagLuaAppEnableSduiHomePage (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), RoduxFriends (copy), UsePrimaryCtaModule (copy), UseContextualInfoModule (copy), UseUserPresenceModule (copy), FFlagPymkCarouselPresenceStoreMigrationModule (copy), UseOnActivatedTileModule (copy)
 	local Text = tostring(p1.entity.id)
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 47 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ImpressionsTagUtility (upval), UseRefResult (copy), p1 (copy)
 		ImpressionsTagUtility.AddTag(UseRefResult, p1.impressionsTag, p1.absolutePosition)
 		
-		return function() --[[ Line: 49 ]]
+		return function()
 			-- upvalues: ImpressionsTagUtility (upval), UseRefResult (upval), p1 (upval)
 			ImpressionsTagUtility.RemoveTag(UseRefResult, p1.impressionsTag, p1.absolutePosition)
 		end
 	end, { p1.impressionsTag, p1.absolutePosition })
-	local UseSelectorResult = if not FFlagLuaAppEnableSduiHomePage then UseSelectorFunction(function(p2): string --[[ Line: 56 ]]
+	local UseSelectorResult = if not FFlagLuaAppEnableSduiHomePage then UseSelectorFunction(function(p2): string
 		return (tostring(p2.LocalUserId))
 	end) else nil
 	local HasIncomingFriendRequest = nil
@@ -38,16 +38,16 @@ return function(p1) --[[ Line: 43 ]]
 		HasIncomingFriendRequest = if p1.recommendation then p1.recommendation.hasIncomingFriendRequest else nil
 		Recommendation = p1.recommendation or {}
 	else
-		HasIncomingFriendRequest = UseSelectorFunction(function(p2) --[[ Line: 68 ]]
+		HasIncomingFriendRequest = UseSelectorFunction(function(p2)
 			-- upvalues: GetDeepValueFunction (upval), Text (copy)
 			return GetDeepValueFunction(p2, string.format("PYMKCarousel.Friends.recommendations.hasIncomingFriendRequest.%s", Text))
 		end)
-		Recommendation = UseSelectorFunction(function(p2) --[[ Line: 74 ]]
+		Recommendation = UseSelectorFunction(function(p2)
 			-- upvalues: RoduxFriends (upval), UseSelectorResult (ref), Text (copy)
 			return RoduxFriends.Selectors.selectRecommendationsForUserId(p2)(UseSelectorResult)[Text] or {}
 		end)
 	end
-	local UseSelectorResult1 = UseSelectorFunction(function(p2) --[[ Line: 79 ]]
+	local UseSelectorResult1 = UseSelectorFunction(function(p2)
 		-- upvalues: RoduxFriends (upval), Text (copy)
 		return RoduxFriends.Selectors.selectFriendshipStatusesByUserIds(p2)({ userId = Text })[Text] or nil
 	end)

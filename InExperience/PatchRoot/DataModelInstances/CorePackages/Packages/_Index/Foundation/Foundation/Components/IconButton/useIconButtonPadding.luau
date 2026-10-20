@@ -3,10 +3,10 @@ local ReactModule = require(Foundation.Parent.React)
 local IconSizeModule = require(Foundation.Enums.IconSize)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 
-return function(Text, p1) --[[ Line: 11 | Named "useIconButtonPadding" ]]
+return function(Text, p1)
 	-- upvalues: UseTokensModule (copy), ReactModule (copy), IconSizeModule (copy)
 	local UseTokensModuleResult = UseTokensModule()
-	local UseMemoResultEntry = ReactModule.useMemo(function() --[[ Line: 14 ]]
+	local UseMemoResultEntry = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), IconSizeModule (upval), UseTokensModuleResult (copy)
 		return if p1 then {
 			[IconSizeModule.XSmall] = UseTokensModuleResult.Size.Size_150,

@@ -9,7 +9,7 @@ local Milestone = TimeToInteractiveTracker.Milestone
 
 return {
 	SURFACE_LOAD_TIME_PAGE_SCOPE_KEY = "__sduiSurfaceLoadTimeTracker",
-	createLoadTimerWithSurfaceLoadTime = function(p1, p2, p3) --[[ Line: 53 ]]
+	createLoadTimerWithSurfaceLoadTime = function(p1, p2, p3)
 		-- upvalues: FFlagEDPTTIParityDefinitions (copy), SduiLoadTimerModule (copy), TimeToInteractiveTracker (copy), Milestone (copy), GetSduiClientPageScopeFunction (copy)
 		local EventName = p2.eventName
 		local IsManualSurfaceReady = p2.manualSurfaceReady == true
@@ -18,7 +18,7 @@ return {
 		local Flag = false
 		local t = {}
 		
-		local function trackOnce(Key) --[[ Line: 68 ]]
+		local function trackOnce(Key)
 			-- upvalues: t (copy), TimeToInteractiveTracker (upval), EventName (copy)
 			if not t[Key] then
 				t[Key] = true
@@ -26,7 +26,7 @@ return {
 			end
 		end
 		
-		local function trackSurfaceReady(p4) --[[ Line: 75 ]]
+		local function trackSurfaceReady(p4)
 			-- upvalues: t (copy), Milestone (upval), TimeToInteractiveTracker (upval), EventName (copy)
 			if t[Milestone.SurfaceReady] then return end
 			if p4 then
@@ -41,7 +41,7 @@ return {
 			TimeToInteractiveTracker.trackEnd(EventName)
 		end
 		
-		local function _() --[[ Line: 88 | Named "ensureStarted" ]]
+		local function _()
 			-- upvalues: Flag (ref), TimeToInteractiveTracker (upval), EventName (copy), p2 (copy)
 			if not Flag then
 				Flag = true
@@ -55,7 +55,7 @@ return {
 		
 		local LogUiRequestSentFunction = LoadTimer.logUiRequestSent
 		
-		function LoadTimer.logUiRequestSent() --[[ Line: 100 ]]
+		function LoadTimer.logUiRequestSent()
 			-- upvalues: LogUiRequestSentFunction (copy), Flag (ref), TimeToInteractiveTracker (upval), EventName (copy), p2 (copy), Milestone (upval), t (copy)
 			LogUiRequestSentFunction()
 			
@@ -77,7 +77,7 @@ return {
 		
 		local LogUiRequestQueuedFunction = LoadTimer.logUiRequestQueued
 		
-		function LoadTimer.logUiRequestQueued() --[[ Line: 107 ]]
+		function LoadTimer.logUiRequestQueued()
 			-- upvalues: LogUiRequestQueuedFunction (copy), Flag (ref), TimeToInteractiveTracker (upval), EventName (copy), p2 (copy)
 			LogUiRequestQueuedFunction()
 			
@@ -93,7 +93,7 @@ return {
 		
 		local LogResponseDecodeBeginFunction = LoadTimer.logResponseDecodeBegin
 		
-		function LoadTimer.logResponseDecodeBegin() --[[ Line: 113 ]]
+		function LoadTimer.logResponseDecodeBegin()
 			-- upvalues: LogResponseDecodeBeginFunction (copy), Milestone (upval), t (copy), TimeToInteractiveTracker (upval), EventName (copy)
 			LogResponseDecodeBeginFunction()
 			local Name = Milestone.PrimaryDataReady.Name
@@ -112,7 +112,7 @@ return {
 		
 		local LogComponentMountedFunction = LoadTimer.logComponentMounted
 		
-		function LoadTimer.logComponentMounted() --[[ Line: 121 ]]
+		function LoadTimer.logComponentMounted()
 			-- upvalues: LogComponentMountedFunction (copy), Milestone (upval), t (copy), TimeToInteractiveTracker (upval), EventName (copy)
 			LogComponentMountedFunction()
 			local SurfaceMounted = Milestone.SurfaceMounted
@@ -125,7 +125,7 @@ return {
 		
 		local LogComponentReadyFunction = LoadTimer.logComponentReady
 		
-		function LoadTimer.logComponentReady() --[[ Line: 127 ]]
+		function LoadTimer.logComponentReady()
 			-- upvalues: Milestone (upval), t (copy), TimeToInteractiveTracker (upval), EventName (copy), LogComponentReadyFunction (copy), IsManualFunctionallyReady (copy), IsManualSurfaceReady (copy)
 			local Name = Milestone.DataProcessingCompleted.Name
 			

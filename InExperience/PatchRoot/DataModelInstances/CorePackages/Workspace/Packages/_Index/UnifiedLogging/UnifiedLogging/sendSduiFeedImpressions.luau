@@ -16,7 +16,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 	feedComponentTypes = TModule.string
 })
 
-return function(List, List1, List2, EventContext) --[[ Line: 26 | Named "sendSduiFeedImpressions" ]]
+return function(List, List1, List2, EventContext)
 	-- upvalues: DiscoveryEventErrorLogger (copy), StrictInterfaceResult (copy), TelemetryService (copy), config (copy)
 	if #List == 0 then return end
 	if #List ~= #List1 or #List ~= #List2 then

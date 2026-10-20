@@ -2,7 +2,7 @@
 local UseAdditionalAuditContentFunction = require(AuthCommon.Stores.AuditContentContext.AuditContentContext).useAdditionalAuditContent
 local GetFFlagEnableAuditSystemModule = require(AuthCommon.Flags.GetFFlagEnableAuditSystem)
 
-return function(p1) --[[ Line: 21 | Named "RegisterAdditionalAuditContent" ]]
+return function(p1)
 	-- upvalues: GetFFlagEnableAuditSystemModule (copy), UseAdditionalAuditContentFunction (copy)
 	if GetFFlagEnableAuditSystemModule() then
 		UseAdditionalAuditContentFunction(p1.contentKey, p1.value)

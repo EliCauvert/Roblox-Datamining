@@ -9,19 +9,19 @@ local _ = require(DataHydration.DataHydrationTypes)
 local FetchUniverseSearchModule = require(script.Parent.fetchUniverseSearch)
 local _ = require(script.Parent.UniverseSearchStoreTypes)
 
-local function _(Input) --[[ Line: 29 | Named "paramsKey" ]]
+local function _(Input)
 	-- upvalues: HttpService (copy)
 	return HttpService:JSONEncode(Input)
 end
 
-return function(p1) --[[ Line: 33 | Named "createUniverseSearchStore" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), CreateDataCacheModule (copy), CreateDataResolverModule (copy), FetchUniverseSearchModule (copy), HttpService (copy)
 	local P1 = p1 or {}
 	local Inputs = {}
 	local T = {}
 	local JoinResults = {}
 	
-	local function applyItemPatches(Result) --[[ Line: 40 ]]
+	local function applyItemPatches(Result)
 		-- upvalues: JoinResults (ref), CryoModule (upval)
 		local Data = Result.data
 		
@@ -48,28 +48,28 @@ return function(p1) --[[ Line: 33 | Named "createUniverseSearchStore" ]]
 	local DataResolverModule = CreateDataResolverModule({
 		supportsMultiGet = false,
 		cache = DataCacheModule,
-		fetchFn = function(p2, _) --[[ Line: 71 ]]
+		fetchFn = function(p2, _)
 			-- upvalues: Inputs (ref), FetchUniverseSearchModule (upval), P1 (copy), applyItemPatches (copy)
 			return FetchUniverseSearchModule(Inputs[p2], { network = P1.network, baseUrl = P1.baseUrl }):andThen(applyItemPatches)
 		end
 	})
 	
 	return {
-		getSearch = function(Input) --[[ Line: 80 ]]
+		getSearch = function(Input)
 			-- upvalues: HttpService (upval), Inputs (ref), DataResolverModule (copy)
 			local Json = HttpService:JSONEncode(Input)
 			Inputs[Json] = Input
 			
 			return DataResolverModule.getCachedItem(Json)
 		end,
-		fetchSearch = function(Input) --[[ Line: 86 ]]
+		fetchSearch = function(Input)
 			-- upvalues: HttpService (upval), Inputs (ref), DataResolverModule (copy)
 			local Json = HttpService:JSONEncode(Input)
 			Inputs[Json] = Input
 			
 			return DataResolverModule.fetchItem(Json)
 		end,
-		refreshSearch = function(Input) --[[ Line: 92 ]]
+		refreshSearch = function(Input)
 			-- upvalues: HttpService (upval), Inputs (ref), T (ref), DataCacheModule (copy), FetchUniverseSearchModule (upval), P1 (copy), applyItemPatches (copy)
 			local Json = HttpService:JSONEncode(Input)
 			Inputs[Json] = Input
@@ -77,13 +77,13 @@ return function(p1) --[[ Line: 33 | Named "createUniverseSearchStore" ]]
 			T[Json] = v1
 			DataCacheModule.resetFailedItem(Json)
 			
-			return FetchUniverseSearchModule(Input, { network = P1.network, baseUrl = P1.baseUrl }):andThen(applyItemPatches):andThen(function(Result) --[[ Line: 101 ]]
+			return FetchUniverseSearchModule(Input, { network = P1.network, baseUrl = P1.baseUrl }):andThen(applyItemPatches):andThen(function(Result)
 				-- upvalues: T (upval), Json (copy), v1 (copy), DataCacheModule (upval)
 				if T[Json] == v1 then
 					DataCacheModule.replaceItem(Json, Result)
 				end
 				return Result
-			end):catch(function(Err) --[[ Line: 107 ]]
+			end):catch(function(Err)
 				-- upvalues: T (upval), Json (copy), v1 (copy), DataCacheModule (upval)
 				if T[Json] == v1 then
 					DataCacheModule.markItemsAsFailed({ Json })
@@ -91,14 +91,14 @@ return function(p1) --[[ Line: 33 | Named "createUniverseSearchStore" ]]
 				error(Err)
 			end)
 		end,
-		getAndFetchSearch = function(Input) --[[ Line: 115 ]]
+		getAndFetchSearch = function(Input)
 			-- upvalues: HttpService (upval), Inputs (ref), DataResolverModule (copy)
 			local Json = HttpService:JSONEncode(Input)
 			Inputs[Json] = Input
 			
 			return DataResolverModule.getAndFetchItem(Json)
 		end,
-		updateSearchItem = function(Key, p2) --[[ Line: 123 ]]
+		updateSearchItem = function(Key, p2)
 			-- upvalues: JoinResults (ref), CryoModule (upval), Inputs (ref), DataResolverModule (copy), applyItemPatches (copy), DataCacheModule (copy)
 			JoinResults[Key] = CryoModule.Dictionary.join(JoinResults[Key] or {}, p2)
 			
@@ -116,13 +116,13 @@ return function(p1) --[[ Line: 33 | Named "createUniverseSearchStore" ]]
 				end
 			end
 		end,
-		invalidateAll = function() --[[ Line: 140 ]]
+		invalidateAll = function()
 			-- upvalues: Inputs (ref), T (ref), DataResolverModule (copy)
 			Inputs = {}
 			T = {}
 			DataResolverModule.clear()
 		end,
-		dispose = function() --[[ Line: 146 ]]
+		dispose = function()
 			-- upvalues: Inputs (ref), T (ref), JoinResults (ref), DataResolverModule (copy)
 			Inputs = {}
 			T = {}

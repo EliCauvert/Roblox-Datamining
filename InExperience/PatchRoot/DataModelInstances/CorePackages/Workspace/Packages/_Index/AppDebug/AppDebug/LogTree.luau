@@ -8,7 +8,7 @@ local Root = LumberyakModule.Logger.new(nil, "root")
 local CurrentTime = tick()
 local NewResults = { ["*"] = Root }
 Root:setContext({
-	tostring = function(p1) --[[ Line: 46 ]]
+	tostring = function(p1)
 		-- upvalues: DashModule (copy)
 		if typeof(p1) == "string" then
 			return p1
@@ -20,7 +20,7 @@ Root:setContext({
 	end
 })
 
-local function _(p1, Key) --[[ Line: 63 | Named "newLogger" ]]
+local function _(p1, Key)
 	-- upvalues: LumberyakModule (copy), NewResults (copy)
 	local NewResult = LumberyakModule.Logger.new(p1, Key)
 	NewResults[Key] = NewResult
@@ -28,7 +28,7 @@ local function _(p1, Key) --[[ Line: 63 | Named "newLogger" ]]
 	return NewResult
 end
 
-local function createLoggerTree(Text: string) --[[ Line: 69 ]]
+local function createLoggerTree(Text: string)
 	-- upvalues: Root (copy), NewResults (copy), LumberyakModule (copy)
 	local Text1 = ""
 	local Root1 = Root
@@ -54,7 +54,7 @@ local function createLoggerTree(Text: string) --[[ Line: 69 ]]
 	return Root1
 end
 
-local _ = function(Text: string) --[[ Line: 92 | Named "parseTag" ]]
+local _ = function(Text: string)
 	-- upvalues: DashModule (copy), Levels (copy)
 	local v1 = Text:split(":")
 	
@@ -69,19 +69,19 @@ local _ = function(Text: string) --[[ Line: 92 | Named "parseTag" ]]
 	end
 end
 
-local _ = function(p1) --[[ Line: 123 | Named "splitNonEmpty" ]]
+local _ = function(p1)
 	-- upvalues: DashModule (copy)
-	return DashModule.filter(DashModule.splitOn(p1, "%s+"), function(p2): boolean --[[ Line: 125 ]]
+	return DashModule.filter(DashModule.splitOn(p1, "%s+"), function(p2): boolean
 		return #p2 > 0
 	end)
 end
 
 return {
-	logger = function(p1) --[[ Line: 88 ]]
+	logger = function(p1)
 		-- upvalues: NewResults (copy), createLoggerTree (copy)
 		return NewResults[p1] or createLoggerTree(p1)
 	end,
-	formatLog = function(p1, p2, p3): string --[[ Line: 103 ]]
+	formatLog = function(p1, p2, p3): string
 		-- upvalues: CurrentTime (copy)
 		local Formatted = string.format("%s [%s] %s", p2.level:sub(1, 1), p2.loggerName, p1)
 		
@@ -90,7 +90,7 @@ return {
 		end
 		return Formatted
 	end,
-	logToConsole = function(_, p1, p2) --[[ Line: 113 ]]
+	logToConsole = function(_, p1, p2)
 		-- upvalues: Levels (copy)
 		local Level = p2.level
 		local Formatted = string.format("%s [%s] %s", p2.level:sub(1, 1), p2.loggerName, p1)
@@ -103,11 +103,11 @@ return {
 			print(Formatted)
 		end
 	end,
-	setLogTags = function(p1, p2) --[[ Line: 130 ]]
+	setLogTags = function(p1, p2)
 		-- upvalues: SharedSinkModule (copy), DashModule (copy), Levels (copy), NewResults (copy), createLoggerTree (copy)
 		local NewSharedSink = SharedSinkModule.new(p2)
 		
-		for _, Text in DashModule.filter(DashModule.splitOn(p1, "%s+"), function(p3): boolean --[[ Line: 125 ]]
+		for _, Text in DashModule.filter(DashModule.splitOn(p1, "%s+"), function(p3): boolean
 			return #p3 > 0
 		end) do
 			local v1 = Text:split(":")

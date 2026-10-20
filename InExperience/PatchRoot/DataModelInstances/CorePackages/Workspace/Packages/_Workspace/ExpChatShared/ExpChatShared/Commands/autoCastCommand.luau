@@ -3,7 +3,7 @@ local PromiseModule = require(ExpChatShared.Parent.Promise)
 local ContextModule = require(ExpChatShared.context)
 local _ = require(script:FindFirstAncestor("Commands").types)
 
-local function matchesAlias(AutoCastCommand, Text: string): boolean --[[ Line: 10 ]]
+local function matchesAlias(AutoCastCommand, Text: string): boolean
 	for _, value in pairs(AutoCastCommand) do
 		if string.find(Text, "^" .. value .. " ") then
 			return true
@@ -12,9 +12,9 @@ local function matchesAlias(AutoCastCommand, Text: string): boolean --[[ Line: 1
 	return false
 end
 
-return function(p1, p2, p3) --[[ Line: 20 ]]
+return function(p1, p2, p3)
 	-- upvalues: PromiseModule (copy), ContextModule (copy), matchesAlias (copy)
-	return PromiseModule.try(function() --[[ Line: 21 ]]
+	return PromiseModule.try(function()
 		-- upvalues: ContextModule (upval), p1 (copy), matchesAlias (upval), p3 (copy), p2 (copy), PromiseModule (upval)
 		assert(ContextModule.store, "Store should exist")
 		

@@ -32,11 +32,11 @@ local config1 = {
 	badgeHeight = 24
 }
 
-local function _(p1): string --[[ Line: 140 | Named "getAvatarImage" ]]
+local function _(p1): string
 	return string.format("rbxthumb://type=AvatarHeadShot&id=%s&w=150&h=150", (tostring(p1)))
 end
 
-local function renderCornerStroke(p1) --[[ Line: 144 ]]
+local function renderCornerStroke(p1)
 	-- upvalues: ReactModule (copy)
 	return ReactModule.createElement(ReactModule.Fragment, nil, {
 		Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p1.borderRadius) }),
@@ -49,7 +49,7 @@ local function renderCornerStroke(p1) --[[ Line: 144 ]]
 	})
 end
 
-local function renderEmphasisBorder(BadgeBorderWidth: number, p1, p2, NewZIndex) --[[ Line: 158 ]]
+local function renderEmphasisBorder(BadgeBorderWidth: number, p1, p2, NewZIndex)
 	-- upvalues: ReactModule (copy), renderCornerStroke (copy)
 	local XOffset1 = BadgeBorderWidth - 1
 	local XOffset = (1 - BadgeBorderWidth) / 2
@@ -68,7 +68,7 @@ local function renderEmphasisBorder(BadgeBorderWidth: number, p1, p2, NewZIndex)
 	})
 end
 
-local function renderBadge(p1, p2, p3) --[[ Line: 181 ]]
+local function renderBadge(p1, p2, p3)
 	-- upvalues: ReactModule (copy), renderCornerStroke (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), renderEmphasisBorder (copy)
 	local Theme = p3.Theme
 	local _Font = p3.Font
@@ -126,7 +126,7 @@ local function renderBadge(p1, p2, p3) --[[ Line: 181 ]]
 	})
 end
 
-local function renderFaceImage(p1, p2, p3) --[[ Line: 256 ]]
+local function renderFaceImage(p1, p2, p3)
 	-- upvalues: ReactModule (copy), Label (copy), renderCornerStroke (copy), renderEmphasisBorder (copy)
 	local FaceBackgroundColor = p2.faceBackgroundColor or p3.Theme.TextDefault
 	local FaceBorderWidth = p2.faceBorderWidth
@@ -149,7 +149,7 @@ local function renderFaceImage(p1, p2, p3) --[[ Line: 256 ]]
 	})
 end
 
-local function renderFaces(JoinResult, JoinResult1, p1, p2: number, p3, FaceGroupCount: number) --[[ Line: 283 ]]
+local function renderFaces(JoinResult, JoinResult1, p1, p2: number, p3, FaceGroupCount: number)
 	-- upvalues: ReactModule (copy), renderBadge (copy), renderFaceImage (copy)
 	local Users = JoinResult.users
 	local BadgeBorderWidth: number = JoinResult1.badgeBorderWidth
@@ -192,7 +192,7 @@ local function renderFaces(JoinResult, JoinResult1, p1, p2: number, p3, FaceGrou
 	}, config)
 end
 
-return function(p4) --[[ Line: 337 | Named "CoPlayFooter" ]]
+return function(p4)
 	-- upvalues: CryoModule (copy), config (copy), UIBloxConfigModule (copy), UseStyleModule (copy), ReactModule (copy), config1 (copy), renderFaces (copy), GenericTextLabelModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p4)
 	
@@ -205,7 +205,7 @@ return function(p4) --[[ Line: 337 | Named "CoPlayFooter" ]]
 	local UseResult = nil
 	
 	if UIBloxConfigModule.fixCoplayFooterConditionalHooks then
-		UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 351 ]]
+		UseResult = ReactModule.useCallback(function(Frame)
 			-- upvalues: UseBindingResult2 (copy)
 			UseBindingResult2(Frame.AbsoluteSize)
 		end, { UseBindingResult2 })
@@ -225,7 +225,7 @@ return function(p4) --[[ Line: 337 | Named "CoPlayFooter" ]]
 	local NewFaceGroupCount = FaceGroupCount + 1
 	
 	if not UIBloxConfigModule.fixCoplayFooterConditionalHooks then
-		UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 372 ]]
+		UseResult = ReactModule.useCallback(function(Frame)
 			-- upvalues: UseBindingResult2 (copy)
 			UseBindingResult2(Frame.AbsoluteSize)
 		end, { UseBindingResult2 })
@@ -256,7 +256,7 @@ return function(p4) --[[ Line: 337 | Named "CoPlayFooter" ]]
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			Size = UseBindingResult:map(function(p5): UDim2 --[[ Line: 402 ]]
+			Size = UseBindingResult:map(function(p5): UDim2
 				-- upvalues: ContainerGap (copy)
 				return UDim2.new(1, -p5.X - ContainerGap, 1, 0)
 			end)

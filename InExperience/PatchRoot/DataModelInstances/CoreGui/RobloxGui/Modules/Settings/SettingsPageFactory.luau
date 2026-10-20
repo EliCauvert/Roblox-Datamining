@@ -17,7 +17,7 @@ local FFlagIEMFocusNavSupportNewButtonsModule = require(script.Parent.Flags.FFla
 local FFlagIEMTabFocusNav = require(CorePackages.Workspace.Packages.SharedFlags).FFlagIEMTabFocusNav
 local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 
-local function Initialize() --[[ Line: 41 ]]
+local function Initialize()
 	-- upvalues: IsSideSheetEnabledModule (copy), Signal (copy), FFlagIEMTabFocusNav (copy), CreateFunction (copy), UtilityModule (copy), IsEnabled (copy), ThemeModule (copy), GuiService (copy), FFlagIEMSettingsGroupsModule (copy), FFlagIEMFocusNavSupportNewButtonsModule (copy), CoreGui (copy), UserGameSettings (copy), GetFFlagFixIGMTabTransitionsModule (copy), TweenService (copy)
 	local config = {
 		HubRef = nil,
@@ -56,7 +56,7 @@ local function Initialize() --[[ Line: 41 ]]
 		config.TabHeader.Size = UDim2.new(0, 220, 1, 0)
 	end
 	if FFlagIEMTabFocusNav then
-		local function switchToPage() --[[ Line: 78 ]]
+		local function switchToPage()
 			-- upvalues: config (copy)
 			if config.HubRef and config.HubRef.Pages.CurrentPage ~= config then
 				config.HubRef:SwitchToPage(config, true)
@@ -66,7 +66,7 @@ local function Initialize() --[[ Line: 41 ]]
 		config.TabHeader.Activated:connect(switchToPage)
 		config.TabHeader.SelectionGained:connect(switchToPage)
 	else
-		config.TabHeader.MouseButton1Click:connect(function() --[[ Line: 86 ]]
+		config.TabHeader.MouseButton1Click:connect(function()
 			-- upvalues: config (copy)
 			if config.HubRef then
 				config.HubRef:SwitchToPage(config, true)
@@ -145,7 +145,7 @@ local function Initialize() --[[ Line: 41 ]]
 	Label1.Parent = Parent
 	Label1.Size = UDim2.new(0, 0, 0, 0)
 	Label1.AutomaticSize = Enum.AutomaticSize.XY
-	UtilityModule:OnResized(config.TabHeader, function() --[[ Line: 171 | Named "onResized" ]]
+	UtilityModule:OnResized(config.TabHeader, function()
 		-- upvalues: config (copy), UtilityModule (upval), Label (copy), IsEnabled (upval), ThemeModule (upval), Parent (copy), Label1 (copy)
 		if not config.TabHeader then return end
 		if UtilityModule:IsSmallTouchScreen() then
@@ -199,7 +199,7 @@ local function Initialize() --[[ Line: 41 ]]
 	config.Displaying.Name = "Displaying"
 	config.Displayed = Instance.new("BindableEvent")
 	config.Displayed.Name = "Displayed"
-	config.Displayed.Event:connect(function() --[[ Line: 242 ]]
+	config.Displayed.Event:connect(function()
 		-- upvalues: config (copy)
 		if config.HubRef.Shield.Visible then
 			config:SelectARow()
@@ -208,7 +208,7 @@ local function Initialize() --[[ Line: 41 ]]
 		end
 	end)
 	config.Hidden = Instance.new("BindableEvent")
-	config.Hidden.Event:connect(function() --[[ Line: 250 ]]
+	config.Hidden.Event:connect(function()
 		-- upvalues: GuiService (upval), config (copy)
 		if GuiService.SelectedCoreObject and GuiService.SelectedCoreObject:IsDescendantOf(config.Page) then
 			GuiService.SelectedCoreObject = nil
@@ -216,11 +216,11 @@ local function Initialize() --[[ Line: 41 ]]
 	end)
 	config.Hidden.Name = "Hidden"
 	
-	function config:getValueChangerFrame(ValueChanger) --[[ Line: 258 ]]
+	function config:getValueChangerFrame(ValueChanger)
 		return if type(ValueChanger) == "table" then ValueChanger.SliderFrame and ValueChanger.SliderFrame or (ValueChanger.SelectorFrame or ValueChanger.DropDownFrame) else ValueChanger
 	end
 	
-	function config:SelectARow(p1) --[[ Line: 272 ]]
+	function config:SelectARow(p1)
 		-- upvalues: FFlagIEMTabFocusNav (upval), GuiService (upval), config (copy), t (copy), FFlagIEMSettingsGroupsModule (upval), FFlagIEMFocusNavSupportNewButtonsModule (upval), CoreGui (upval)
 		if FFlagIEMTabFocusNav and not p1 and GuiService.SelectedCoreObject == config.TabHeader then return end
 		if p1 or not GuiService.SelectedCoreObject or not GuiService.SelectedCoreObject:IsDescendantOf(config.Page) then
@@ -254,7 +254,7 @@ local function Initialize() --[[ Line: 41 ]]
 		end
 	end
 	
-	function config:Display(Parent, p2) --[[ Line: 310 ]]
+	function config:Display(Parent, p2)
 		-- upvalues: config (copy), Label (copy), Label1 (copy), UserGameSettings (upval), GetFFlagFixIGMTabTransitionsModule (upval), Flag (ref), TweenService (upval)
 		config.OpenStateChangedCount += 1
 		
@@ -268,7 +268,7 @@ local function Initialize() --[[ Line: 41 ]]
 		config.Displaying:Fire()
 		local _UDim2 = UDim2.new(0, 0, 0, 0)
 		
-		local function v33() --[[ Line: 325 ]]
+		local function v33()
 			-- upvalues: UserGameSettings (upval), Parent (copy), GetFFlagFixIGMTabTransitionsModule (upval), config (upval), _UDim2 (copy), Flag (upval)
 			if UserGameSettings.ReducedMotion then
 				Parent.InnerCanvasGroupShow.Visible = false
@@ -309,7 +309,7 @@ local function Initialize() --[[ Line: 41 ]]
 			config.Page.Visible = true
 			local Tween = TweenService:Create(Parent.InnerCanvasGroupShow, TweenInfo.new(0.25), { GroupTransparency = 0 })
 			Tween:Play()
-			Tween.Completed:Connect(function() --[[ Line: 356 ]]
+			Tween.Completed:Connect(function()
 				-- upvalues: config (upval), Parent (copy), UserGameSettings (upval), GetFFlagFixIGMTabTransitionsModule (upval), _UDim2 (copy), Flag (upval)
 				config.Page.Parent = Parent
 				
@@ -333,7 +333,7 @@ local function Initialize() --[[ Line: 41 ]]
 		end
 	end
 	
-	function config:Hide(p2: number, p3, p4, p5, Parent, p6) --[[ Line: 371 ]]
+	function config:Hide(p2: number, p3, p4, p5, Parent, p6)
 		-- upvalues: config (copy), Label (copy), Label1 (copy), UserGameSettings (upval), Flag (ref), TweenService (upval)
 		config.OpenStateChangedCount += 1
 		
@@ -345,7 +345,7 @@ local function Initialize() --[[ Line: 41 ]]
 		if config.Page.Parent then
 			local _UDim2 = UDim2.new(1 * p2, 0, 0, 0)
 			
-			local function v36() --[[ Line: 382 ]]
+			local function v36()
 				-- upvalues: UserGameSettings (upval), p6 (copy), Parent (copy), config (upval), p3 (copy), Flag (upval)
 				if UserGameSettings.ReducedMotion and p6 then
 					Parent.InnerCanvasGroupHide.Visible = false
@@ -356,7 +356,7 @@ local function Initialize() --[[ Line: 41 ]]
 				config.Hidden:Fire()
 			end
 			
-			local function v37() --[[ Line: 392 ]]
+			local function v37()
 				-- upvalues: p4 (copy), config (upval), _UDim2 (copy), UserGameSettings (upval), p6 (copy), Parent (copy), p3 (copy), Flag (upval), TweenService (upval), v36 (copy)
 				if p4 then
 					config.Page.Position = _UDim2
@@ -376,7 +376,7 @@ local function Initialize() --[[ Line: 41 ]]
 					config.Page.Parent = Parent.InnerCanvasGroupHide
 					local Tween = TweenService:Create(Parent.InnerCanvasGroupHide, TweenInfo.new(0.25), { GroupTransparency = 1 })
 					Tween:Play()
-					Tween.Completed:Connect(function() --[[ Line: 408 ]]
+					Tween.Completed:Connect(function()
 						-- upvalues: config (upval), Parent (upval), _UDim2 (upval), UserGameSettings (upval), p6 (upval), p3 (upval), Flag (upval)
 						config.Page.Parent = Parent
 						config.Page.Position = _UDim2
@@ -398,7 +398,7 @@ local function Initialize() --[[ Line: 41 ]]
 			
 			if p5 then
 				local OpenStateChangedCount = config.OpenStateChangedCount
-				delay(p5, function() --[[ Line: 427 ]]
+				delay(p5, function()
 					-- upvalues: OpenStateChangedCount (copy), config (upval), v37 (copy)
 					if OpenStateChangedCount == config.OpenStateChangedCount then
 						v37()
@@ -412,27 +412,27 @@ local function Initialize() --[[ Line: 41 ]]
 		end
 	end
 	
-	function config:GetDisplayed() --[[ Line: 438 ]]
+	function config:GetDisplayed()
 		-- upvalues: Flag (ref)
 		return Flag
 	end
 	
-	function config:GetVisibility() --[[ Line: 442 ]]
+	function config:GetVisibility()
 		-- upvalues: config (copy)
 		return config.Page.Parent
 	end
 	
-	function config:GetTabHeader() --[[ Line: 446 ]]
+	function config:GetTabHeader()
 		-- upvalues: config (copy)
 		return config.TabHeader
 	end
 	
-	function config:GetRows() --[[ Line: 450 ]]
+	function config:GetRows()
 		-- upvalues: t (copy)
 		return t
 	end
 	
-	function config:SetHub(HubRef) --[[ Line: 454 ]]
+	function config:SetHub(HubRef)
 		-- upvalues: config (copy), t (copy)
 		config.HubRef = HubRef
 		
@@ -443,12 +443,12 @@ local function Initialize() --[[ Line: 41 ]]
 		end
 	end
 	
-	function config:GetSize() --[[ Line: 464 ]]
+	function config:GetSize()
 		-- upvalues: config (copy)
 		return config.Page.AbsoluteSize
 	end
 	
-	function config:AddRow(SelectionFrame, Label, ValueChanger, p2) --[[ Line: 468 ]]
+	function config:AddRow(SelectionFrame, Label, ValueChanger, p2)
 		-- upvalues: t (copy), config (copy)
 		t[#t + 1] = {
 			SelectionFrame = SelectionFrame,
@@ -471,7 +471,7 @@ local function Initialize() --[[ Line: 41 ]]
 end
 
 return {
-	CreateNewPage = function(_) --[[ Line: 493 ]]
+	CreateNewPage = function(_)
 		-- upvalues: Initialize (copy)
 		return (Initialize())
 	end

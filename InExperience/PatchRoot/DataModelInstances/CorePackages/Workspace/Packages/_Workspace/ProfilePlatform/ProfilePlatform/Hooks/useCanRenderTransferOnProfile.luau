@@ -2,9 +2,9 @@
 local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 local FFlagProfilePlatformEnableCurrencyTransfer = require(Parent.SharedFlags).FFlagProfilePlatformEnableCurrencyTransfer
 
-return function() --[[ Line: 9 ]]
+return function()
 	-- upvalues: UseAppPolicyFunction (copy), FFlagProfilePlatformEnableCurrencyTransfer (copy)
-	return UseAppPolicyFunction(function(p1) --[[ Line: 10 ]]
+	return UseAppPolicyFunction(function(p1)
 		-- upvalues: FFlagProfilePlatformEnableCurrencyTransfer (upval)
 		return if FFlagProfilePlatformEnableCurrencyTransfer then p1.getCanRenderTransferOnProfile() else false
 	end)

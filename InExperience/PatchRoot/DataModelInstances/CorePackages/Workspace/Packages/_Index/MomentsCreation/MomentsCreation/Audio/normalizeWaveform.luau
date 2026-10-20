@@ -1,4 +1,4 @@
-﻿return function(List) --[[ Line: 8 | Named "normalizeWaveform" ]]
+﻿return function(List)
 	local Largest = 0
 	local List1 = {}
 	

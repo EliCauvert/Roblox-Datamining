@@ -8,11 +8,11 @@ local ConstantsModule = require(VerifiedBadges.constants)
 local _UDim = UDim.new(0, 24)
 local _UDim1 = UDim.new(0, 12)
 
-local function selectScreenSize(p1) --[[ Line: 20 ]]
+local function selectScreenSize(p1)
 	return p1.ScreenSize
 end
 
-return function(p1) --[[ Line: 24 | Named "AboutVerifiedBadgeModal" ]]
+return function(p1)
 	-- upvalues: UIBloxModule (copy), UseSelectorFunction (copy), selectScreenSize (copy), UseLocalizationFunction (copy), ReactModule (copy), _UDim (copy), _UDim1 (copy), ConstantsModule (copy)
 	local UseStyleResult = UIBloxModule.Core.Style.useStyle()
 	local UseSelectorResult = UseSelectorFunction(selectScreenSize)
@@ -30,7 +30,7 @@ return function(p1) --[[ Line: 24 | Named "AboutVerifiedBadgeModal" ]]
 				{
 					buttonType = UIBloxModule.App.Button.Enum.ButtonType.PrimarySystem,
 					props = {
-						onActivated = ReactModule.useCallback(function() --[[ Line: 40 ]]
+						onActivated = ReactModule.useCallback(function()
 							-- upvalues: p1 (copy)
 							if p1.onConfirm then
 								p1.onConfirm()
@@ -42,7 +42,7 @@ return function(p1) --[[ Line: 24 | Named "AboutVerifiedBadgeModal" ]]
 			}
 		},
 		contentPadding = _UDim,
-		onCloseClicked = ReactModule.useCallback(function() --[[ Line: 34 ]]
+		onCloseClicked = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy)
 			if p1.onClose then
 				p1.onClose()

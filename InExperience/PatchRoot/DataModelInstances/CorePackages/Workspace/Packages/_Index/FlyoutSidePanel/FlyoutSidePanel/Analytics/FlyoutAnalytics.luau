@@ -51,12 +51,12 @@ local config5 = {
 	lastUpdated = { 2026, 9, 3 }
 }
 
-local function _(p1) --[[ Line: 73 | Named "checkEventNameMappings" ]]
+local function _(p1)
 	-- upvalues: FlyoutContentSettingsModule (copy)
 	return if p1 and FlyoutContentSettingsModule.EventNameMappings[p1] then FlyoutContentSettingsModule.EventNameMappings[p1] else p1 or ""
 end
 
-local function logEventHelper(p1, p2, p3) --[[ Line: 80 ]]
+local function logEventHelper(p1, p2, p3)
 	-- upvalues: FlyoutRemoveAddSessionInfo (copy), FlyoutContentSettingsModule (copy), Default (copy)
 	local IntegrationId = p3.integrationId
 	Default:logRobloxTelemetryEvent(p1, if FlyoutRemoveAddSessionInfo then {
@@ -76,7 +76,7 @@ local function logEventHelper(p1, p2, p3) --[[ Line: 80 ]]
 	}, p2)
 end
 
-local _ = function(p1, ItemType, LocalUserId, Url) --[[ Line: 124 | Named "sendMoreGridItemClickEvent_legacy" ]]
+local _ = function(p1, ItemType, LocalUserId, Url)
 	p1:setRBXEventStream("moreGridItem", "moreGridItemClick", {
 		itemType = ItemType,
 		localUserId = LocalUserId,
@@ -85,28 +85,28 @@ local _ = function(p1, ItemType, LocalUserId, Url) --[[ Line: 124 | Named "sendM
 end
 
 return {
-	onFlyoutSidePanelClosed = function(p1) --[[ Line: 102 ]]
+	onFlyoutSidePanelClosed = function(p1)
 		-- upvalues: logEventHelper (copy), config1 (copy)
 		logEventHelper(config1, "flyout_close", p1)
 	end,
-	onFlyoutTooltipShown = function(p1) --[[ Line: 106 ]]
+	onFlyoutTooltipShown = function(p1)
 		-- upvalues: logEventHelper (copy), config2 (copy)
 		logEventHelper(config2, "flyout_tooltip_show", p1)
 	end,
-	onFlyoutTooltipDismissed = function(p1) --[[ Line: 110 ]]
+	onFlyoutTooltipDismissed = function(p1)
 		-- upvalues: logEventHelper (copy), config3 (copy)
 		logEventHelper(config3, "flyout_tooltip_dismiss", p1)
 	end,
-	onFlyoutContentItemClicked = function(p1) --[[ Line: 114 ]]
+	onFlyoutContentItemClicked = function(p1)
 		-- upvalues: logEventHelper (copy), config4 (copy), config1 (copy)
 		logEventHelper(config4, "flyout_item_click", p1)
 		logEventHelper(config1, "flyout_close", p1)
 	end,
-	onFlyoutContentItemImpressed = function(p1) --[[ Line: 120 ]]
+	onFlyoutContentItemImpressed = function(p1)
 		-- upvalues: logEventHelper (copy), config5 (copy)
 		logEventHelper(config5, "flyout_item_impression", p1)
 	end,
-	sendMoreLegacyAndFlyoutItemClickEvent = function(p1, p2, LocalUserId, Url) --[[ Line: 132 ]]
+	sendMoreLegacyAndFlyoutItemClickEvent = function(p1, p2, LocalUserId, Url)
 		-- upvalues: FlyoutContentSettingsModule (copy), logEventHelper (copy), config4 (copy), config1 (copy)
 		local EventNameMapping = if p2 and FlyoutContentSettingsModule.EventNameMappings[p2] then FlyoutContentSettingsModule.EventNameMappings[p2] else p2 or ""
 		local config = { source = "click", integrationId = EventNameMapping }
@@ -118,7 +118,7 @@ return {
 			url = Url
 		})
 	end,
-	sendPageLoadEvent = function(p1, RootPageTitle) --[[ Line: 138 ]]
+	sendPageLoadEvent = function(p1, RootPageTitle)
 		-- upvalues: LocalizationService (copy), logEventHelper (copy), config (copy)
 		p1:setRBXEventStream("AppRouter", "luaPageLoad", {
 			page = "more",

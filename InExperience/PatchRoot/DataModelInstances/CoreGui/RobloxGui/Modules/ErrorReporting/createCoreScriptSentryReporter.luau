@@ -2,12 +2,12 @@
 local RunService = game:GetService("RunService")
 local SentryReporter = require(game:GetService("CorePackages").Workspace.Packages.ErrorReporters).SentryReporter
 
-return function(p1) --[[ Line: 23 | Named "createCoreScriptSentryReporter" ]]
+return function(p1)
 	-- upvalues: RunService (copy), SentryReporter (copy), HttpService (copy)
 	local RunService1 = p1.runService or RunService
 	local IsStudio = false
 	
-	local function processErrorReport(p2) --[[ Line: 30 ]]
+	local function processErrorReport(p2)
 		-- upvalues: p1 (copy)
 		local ProcessErrorReportResult = p1.processErrorReportMethod(p2)
 		ProcessErrorReportResult:addCustomMetadata({ CoreScripts = ProcessErrorReportResult.attributes })
@@ -15,7 +15,7 @@ return function(p1) --[[ Line: 23 | Named "createCoreScriptSentryReporter" ]]
 		return ProcessErrorReportResult
 	end
 	
-	local Success, Result = pcall(function() --[[ Line: 38 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: IsStudio (ref), RunService1 (copy), SentryReporter (upval), HttpService (upval), processErrorReport (copy), p1 (copy)
 		IsStudio = RunService1:IsStudio()
 		

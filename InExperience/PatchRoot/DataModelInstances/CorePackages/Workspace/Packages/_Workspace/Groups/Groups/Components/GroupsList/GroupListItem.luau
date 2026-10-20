@@ -20,7 +20,7 @@ local _ = require(Groups.Common.Types)
 local UseMembersFollowersLabelModule = require(Groups.Hooks.useMembersFollowersLabel)
 local UseGroupsWrapperContextModule = require(Groups.Contexts.useGroupsWrapperContext)
 
-return ReactModule.memo(function(p1) --[[ Line: 38 | Named "GroupListItem" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseGroupsWrapperContextModule (copy), UseAbbreviatedNumberLocalizationFunction (copy), UseMembersFollowersLabelModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), Chip (copy), ChipSize (copy), View (copy), Image (copy), EmojiWrapper (copy), VerifiedBadgesModule (copy), Text (copy)
 	local UseGroupsWrapperContextModuleResult = UseGroupsWrapperContextModule()
 	local Group = p1.group
@@ -42,7 +42,7 @@ return ReactModule.memo(function(p1) --[[ Line: 38 | Named "GroupListItem" ]]
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			LayoutOrder = p1.layoutOrder,
-			onActivated = ReactModule.useCallback(function() --[[ Line: 73 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: Id (copy), UseGroupsWrapperContextModuleResult (copy)
 				if Id then
 					UseGroupsWrapperContextModuleResult.navigateTo.groupDetails(Id)
@@ -55,7 +55,7 @@ return ReactModule.memo(function(p1) --[[ Line: 38 | Named "GroupListItem" ]]
 			Thumbnail = ReactModule.createElement(Image, {
 				LayoutOrder = 1,
 				tag = "radius-medium bg-surface-100",
-				Image = ReactModule.useMemo(function() --[[ Line: 62 ]]
+				Image = ReactModule.useMemo(function()
 					-- upvalues: Group (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (upval), Id (copy), Constants (upval)
 					return if Group.thumbnail and Group.thumbnail ~= "" then Group.thumbnail else GetRbxthumbWithTypeSizeAndOptionsFunction(tostring(Id), Constants.RbxthumbTypes.GroupIcon, 150)
 				end, { Id, Group.thumbnail }),
@@ -86,7 +86,7 @@ return ReactModule.memo(function(p1) --[[ Line: 38 | Named "GroupListItem" ]]
 					Text = UseMembersFollowersLabelModuleResult1
 				}) or nil
 			}),
-			RoleChip = ReactModule.useMemo(function() --[[ Line: 81 ]]
+			RoleChip = ReactModule.useMemo(function()
 				-- upvalues: p1 (copy), Group (copy), ReactModule (upval), Chip (upval), UseLocalizationResult (copy), ChipSize (upval)
 				if not p1.showRank then
 					return nil
@@ -96,7 +96,7 @@ return ReactModule.memo(function(p1) --[[ Line: 38 | Named "GroupListItem" ]]
 						isChecked = true,
 						text = UseLocalizationResult.owned,
 						size = ChipSize.Small,
-						onActivated = function() --[[ Line: 92 ]] end
+						onActivated = function() end
 					})
 				else
 					local Name = if Group.role and Group.role.name and Group.role.name ~= "" then Group.role.name else nil
@@ -105,7 +105,7 @@ return ReactModule.memo(function(p1) --[[ Line: 38 | Named "GroupListItem" ]]
 						LayoutOrder = 3,
 						text = Name,
 						size = ChipSize.Small,
-						onActivated = function() --[[ Line: 101 ]] end
+						onActivated = function() end
 					}) else nil
 				end
 			end, {

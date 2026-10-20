@@ -1,4 +1,4 @@
-﻿return function(Text: string, MaxValue: number): number --[[ Line: 1 | Named "getVisibleLineCount" ]]
+﻿return function(Text: string, MaxValue: number): number
 	local Value = 1
 	
 	if Text ~= "" then

@@ -2,7 +2,7 @@
 local VRService = game:GetService("VRService")
 local PaymentPlatformEnumModule = require(script:FindFirstAncestor("BulkPurchaseApp").Enums.PaymentPlatformEnum)
 
-return function() --[[ Line: 9 | Named "getPaymentPlatform" ]]
+return function()
 	-- upvalues: UserInputService (copy), PaymentPlatformEnumModule (copy), VRService (copy)
 	local Platform = UserInputService:GetPlatform()
 	

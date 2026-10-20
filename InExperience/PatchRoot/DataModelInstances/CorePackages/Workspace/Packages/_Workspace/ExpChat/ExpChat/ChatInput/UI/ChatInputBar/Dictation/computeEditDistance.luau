@@ -1,4 +1,4 @@
-﻿return function(Text: string, Text1: string) --[[ Line: 2 | Named "computeEditDistance" ]]
+﻿return function(Text: string, Text1: string)
 	if Text == Text1 then
 		return 0
 	end

@@ -12,16 +12,16 @@ local FriendsChatTabNameModule = require(script.Parent.Parent.FriendsChatTabName
 local FFlagFriendsChatHasFriendsGate = SharedFlagsModule.FFlagFriendsChatHasFriendsGate
 local FFlagExpChatCanShowFriendsTab = SharedFlagsModule.FFlagExpChatCanShowFriendsTab
 
-return function(p1) --[[ Line: 44 | Named "FriendsChatEventReceiver" ]]
+return function(p1)
 	-- upvalues: GetFriendsChatRealtimeStoreModule (copy), SignalsReactModule (copy), GetFriendsChatNavigationStoreModule (copy), ReactModule (copy), FriendsChatTabNameModule (copy), FriendsSurfaceVisibility (copy), FriendsTabUnreadBridgeModule (copy), FFlagFriendsChatHasFriendsGate (copy), FFlagExpChatCanShowFriendsTab (copy), FriendsCountRefetchBridgeModule (copy), FriendsChatRealtimeSubscriberModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetFriendsChatRealtimeStoreModule(false).getHasEnteredFriendsTab)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(GetFriendsChatNavigationStoreModule(false).getSelectedConversationId)
-	ReactModule.useEffect(function() --[[ Line: 50 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), FriendsChatTabNameModule (upval), UseSignalStateResult1 (copy), FriendsSurfaceVisibility (upval)
 		local UseSignalStateResult = if p1.isChatWindowVisible and p1.selectedTabName == FriendsChatTabNameModule then UseSignalStateResult1 else nil
 		FriendsSurfaceVisibility.setVisibleConversationId(UseSignalStateResult)
 		
-		return function() --[[ Line: 57 ]]
+		return function()
 			-- upvalues: FriendsSurfaceVisibility (upval), UseSignalStateResult (copy)
 			if FriendsSurfaceVisibility.getVisibleConversationId(false) == UseSignalStateResult then
 				FriendsSurfaceVisibility.setVisibleConversationId(nil)

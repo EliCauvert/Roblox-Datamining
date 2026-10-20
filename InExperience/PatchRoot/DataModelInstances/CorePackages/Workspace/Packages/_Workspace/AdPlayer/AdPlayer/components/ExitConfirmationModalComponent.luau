@@ -13,7 +13,7 @@ local config = {
 	confirmationText = "CoreScripts.Ads.Label.RewardedVideoExitConfirmation"
 }
 
-return function(p1) --[[ Line: 24 | Named "ExitConfirmationModalComponent" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), AdsDisplayOrder (copy), View (copy), StateLayerAffordance (copy), Text (copy), Button (copy), FillBehavior (copy), ButtonVariant (copy)
 	return ReactModule.createElement("ScreenGui", {
 		IgnoreGuiInset = true,
@@ -23,7 +23,7 @@ return function(p1) --[[ Line: 24 | Named "ExitConfirmationModalComponent" ]]
 		modal = ReactModule.createElement(View, {
 			tag = "anchor-center-center position-center-center bg-over-media-0 radius-medium padding-x-xxlarge padding-y-xxlarge",
 			Size = UDim2.fromOffset(440, 164),
-			onActivated = function() --[[ Line: 35 ]] end,
+			onActivated = function() end,
 			stateLayer = { affordance = StateLayerAffordance.None }
 		}, {
 			ReactModule.createElement(Text, {

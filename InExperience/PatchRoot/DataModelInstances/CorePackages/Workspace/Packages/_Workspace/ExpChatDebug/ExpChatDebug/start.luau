@@ -2,7 +2,7 @@
 local GetFFlagTextChatEnableUniverseChatTabsFunction = require(Parent.ExpChatShared).Flags.GetFFlagTextChatEnableUniverseChatTabs
 local GetFFlagExpChatProtectedChatInternalAPIsFunction = require(Parent.SharedFlags).getFFlagExpChatProtectedChatInternalAPIs
 
-return function() --[[ Line: 6 | Named "startDebug" ]]
+return function()
 	-- upvalues: GetFFlagExpChatProtectedChatInternalAPIsFunction (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy)
 	local CoreGui = game:GetService("CoreGui")
 	local TextChatService = game:GetService("TextChatService")
@@ -56,7 +56,7 @@ return function() --[[ Line: 6 | Named "startDebug" ]]
 	local ListLayout = Instance.new("UIListLayout")
 	ListLayout.Parent = ExperienceChatDebug
 	
-	local function _() --[[ Line: 36 | Named "updateContainerLayout" ]]
+	local function _()
 		-- upvalues: list (copy), Count (ref), ListLayout (copy)
 		local Entry = list[Count]
 		ListLayout.VerticalAlignment = Entry.vertical
@@ -72,7 +72,7 @@ return function() --[[ Line: 6 | Named "startDebug" ]]
 	ImageButton.BackgroundTransparency = 0.3
 	ImageButton.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
 	ImageButton.Parent = ExperienceChatDebug
-	ImageButton.Activated:Connect(function() --[[ Line: 50 ]]
+	ImageButton.Activated:Connect(function()
 		-- upvalues: Count (ref), list (copy), ListLayout (copy)
 		Count += 1
 		
@@ -84,7 +84,7 @@ return function() --[[ Line: 6 | Named "startDebug" ]]
 		ListLayout.HorizontalAlignment = Entry.horizontal
 	end)
 	
-	local function clearEntries() --[[ Line: 59 ]]
+	local function clearEntries()
 		-- upvalues: List (ref)
 		for _, value in List do
 			value:Destroy()
@@ -98,7 +98,7 @@ return function() --[[ Line: 6 | Named "startDebug" ]]
 	ListLayout1.VerticalAlignment = Enum.VerticalAlignment.Bottom
 	ListLayout1.Parent = ImageButton
 	
-	local function addEntryToContainer(Text, BackgroundColor3, BackgroundTransparency) --[[ Line: 72 ]]
+	local function addEntryToContainer(Text, BackgroundColor3, BackgroundTransparency)
 		-- upvalues: List (ref), ImageButton (copy)
 		if #List > 10 then
 			local Removed = table.remove(List, 1)
@@ -127,29 +127,29 @@ return function() --[[ Line: 6 | Named "startDebug" ]]
 	local Character = utf8.char(128227)
 	local Character1 = utf8.char(128229)
 	
-	local function formatEntry(TextChatMessage, p1) --[[ Line: 102 ]]
+	local function formatEntry(TextChatMessage, p1)
 		-- upvalues: Character (copy), Character1 (copy), GetFFlagExpChatProtectedChatInternalAPIsFunction (upval), addEntryToContainer (copy)
 		local IsNotStatusMatch: boolean = TextChatMessage.Status ~= Enum.TextChatMessageStatus.Success and TextChatMessage.Status ~= Enum.TextChatMessageStatus.Sending
 		addEntryToContainer(`{if TextChatMessage.Status == Enum.TextChatMessageStatus.Sending then `{Character} Sent` else `{Character1} Rec.`} [{if p1 == "Global" then "RBXGlobal" elseif TextChatMessage.TextChannel and p1 == "Local" then TextChatMessage.TextChannel.Name else "Unknown"}{if TextChatMessage.TextChannel and TextChatMessage.TextChannel.DirectChatRequester then " <font color='#00E344'>(Direct)</font>" else ""}] {if GetFFlagExpChatProtectedChatInternalAPIsFunction() then TextChatMessage.TextInternal else TextChatMessage.Text} {if IsNotStatusMatch then `({TextChatMessage.Status.Name})` else ""}`, if IsNotStatusMatch then Color3.fromRGB(255, 0, 0) else Color3.fromRGB(32, 32, 32), if IsNotStatusMatch then 0.5 else 1)
 	end
 	
 	if ExpChatDebuggerIncomingMessageEventEngineFeature then
-		TextChatService.OnIncomingMessageEvent:Connect(function(TextChatMessage) --[[ Line: 135 ]]
+		TextChatService.OnIncomingMessageEvent:Connect(function(TextChatMessage)
 			-- upvalues: formatEntry (copy)
 			formatEntry(TextChatMessage, "Local")
 		end)
 	else
-		TextChatService.MessageReceived:Connect(function(TextChatMessage) --[[ Line: 139 ]]
+		TextChatService.MessageReceived:Connect(function(TextChatMessage)
 			-- upvalues: formatEntry (copy)
 			formatEntry(TextChatMessage, "Local")
 		end)
-		TextChatService.SendingMessage:Connect(function(TextChatMessage) --[[ Line: 142 ]]
+		TextChatService.SendingMessage:Connect(function(TextChatMessage)
 			-- upvalues: formatEntry (copy)
 			formatEntry(TextChatMessage, "Local")
 		end)
 	end
 	if GetFFlagTextChatEnableUniverseChatTabsFunction() and ExpChatDebugGlobalChat then
-		TextChatService.UniverseChatMessageReceived:Connect(function(TextChatMessage) --[[ Line: 148 ]]
+		TextChatService.UniverseChatMessageReceived:Connect(function(TextChatMessage)
 			-- upvalues: formatEntry (copy)
 			formatEntry(TextChatMessage, "Global")
 		end)

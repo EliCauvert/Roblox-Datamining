@@ -8,7 +8,7 @@ AnalyticsModule.EventName = {
 	EmoteFailed = "emoteTriggerFailed"
 }
 
-function AnalyticsModule.new() --[[ Line: 13 ]]
+function AnalyticsModule.new()
 	-- upvalues: AnalyticsModule (copy)
 	local config = { eventStreamImpl = nil }
 	setmetatable(config, AnalyticsModule)
@@ -16,13 +16,13 @@ function AnalyticsModule.new() --[[ Line: 13 ]]
 	return config
 end
 
-function AnalyticsModule:withEventStream(EventStreamImpl) --[[ Line: 22 ]]
+function AnalyticsModule:withEventStream(EventStreamImpl)
 	self.eventStreamImpl = EventStreamImpl
 	
 	return self
 end
 
-function AnalyticsModule:onMenuOpened() --[[ Line: 27 ]]
+function AnalyticsModule:onMenuOpened()
 	-- upvalues: Players (copy), StatsService (copy)
 	self:_getEventStream():setRBXEventStream("emoteMenu", self.EventName.MenuOpened, {
 		pid = tostring(game.PlaceId),
@@ -31,7 +31,7 @@ function AnalyticsModule:onMenuOpened() --[[ Line: 27 ]]
 	})
 end
 
-function AnalyticsModule:onEmotePlayed(SlotNumber, AssetID) --[[ Line: 40 ]]
+function AnalyticsModule:onEmotePlayed(SlotNumber, AssetID)
 	-- upvalues: Players (copy), StatsService (copy)
 	self:_getEventStream():setRBXEventStream("emoteMenu", self.EventName.EmotePlayed, {
 		pid = tostring(game.PlaceId),
@@ -42,7 +42,7 @@ function AnalyticsModule:onEmotePlayed(SlotNumber, AssetID) --[[ Line: 40 ]]
 	})
 end
 
-function AnalyticsModule:onEmoteFailed(SlotNumber, AssetID, ErrorType) --[[ Line: 55 ]]
+function AnalyticsModule:onEmoteFailed(SlotNumber, AssetID, ErrorType)
 	-- upvalues: Players (copy), StatsService (copy)
 	self:_getEventStream():setRBXEventStream("emoteMenu", self.EventName.EmoteFailed, {
 		invokedByCoreGui = true,
@@ -55,7 +55,7 @@ function AnalyticsModule:onEmoteFailed(SlotNumber, AssetID, ErrorType) --[[ Line
 	})
 end
 
-function AnalyticsModule:_getEventStream() --[[ Line: 72 ]]
+function AnalyticsModule:_getEventStream()
 	assert(self.eventStreamImpl, "EventStream implementation not found. Did you forget to construct withEventStream?")
 	
 	return self.eventStreamImpl

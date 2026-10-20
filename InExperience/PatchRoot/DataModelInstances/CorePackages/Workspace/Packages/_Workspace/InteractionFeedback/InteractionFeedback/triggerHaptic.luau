@@ -3,7 +3,7 @@ local _ = require(script.Parent.InteractionFeedbackContext)
 local SendHapticAnalyticsModule = require(script.Parent.sendHapticAnalytics)
 local HapticEffects = {}
 
-return function(Type, Position, Radius, ContextKey, InteractionType, p1, p2) --[[ Line: 12 | Named "triggerHaptic" ]]
+return function(Type, Position, Radius, ContextKey, InteractionType, p1, p2)
 	-- upvalues: HapticEffects (copy), CryoModule (copy), SendHapticAnalyticsModule (copy)
 	if not HapticEffects[Type] then
 		HapticEffects[Type] = Instance.new("HapticEffect")

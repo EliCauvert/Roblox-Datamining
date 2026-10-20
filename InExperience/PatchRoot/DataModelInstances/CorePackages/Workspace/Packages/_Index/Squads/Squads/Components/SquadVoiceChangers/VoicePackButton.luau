@@ -10,14 +10,14 @@ local config = {
 	LayoutOrder = 1,
 	isSelected = false,
 	isVoiceChangerActive = false,
-	onActivated = function() --[[ Line: 31 ]] end
+	onActivated = function() end
 }
 
-local function _(Text: string): string --[[ Line: 35 | Named "getVoicePackSlug" ]]
+local function _(Text: string): string
 	return string.lower((string.gsub(Text, "%s+", "-")))
 end
 
-return function(p1) --[[ Line: 39 | Named "VoicePackButton" ]]
+return function(p1)
 	-- upvalues: Cryo (copy), config (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), UseTokensFunction (copy), React (copy), FoundationModule (copy)
 	local JoinResult = Cryo.Dictionary.join(config, p1)
 	local TestId = if FFlagSquadsEnableFoundationTestIdsModule then JoinResult.testId or `--social-squad-voice-changers--voice-pack-{string.lower((string.gsub(JoinResult.voicePackName, "%s+", "-")))}` else nil

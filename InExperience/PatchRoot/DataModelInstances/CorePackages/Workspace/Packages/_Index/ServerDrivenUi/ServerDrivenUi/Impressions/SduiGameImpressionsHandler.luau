@@ -13,7 +13,7 @@ local FFlagLuaAppSponsoredGamePreviewVideo = require(Parent.SharedFlags).FFlagLu
 local FFlagLuaAppSduiPassSortSubId = require(Parent.SharedFlags).FFlagLuaAppSduiPassSortSubId
 local t = {}
 local FilterAndStringifyAnalyticsDataModule = nil
-FilterAndStringifyAnalyticsDataModule = if require(Parent.SharedFlags).FFlagSduiForwardAnalyticsDataToGameClick then require(ServerDrivenUi.Analytics.filterAndStringifyAnalyticsData) else function(List) --[[ Line: 28 ]]
+FilterAndStringifyAnalyticsDataModule = if require(Parent.SharedFlags).FFlagSduiForwardAnalyticsDataToGameClick then require(ServerDrivenUi.Analytics.filterAndStringifyAnalyticsData) else function(List)
 	if not List or type(List) ~= "table" then
 		return nil
 	end
@@ -27,7 +27,7 @@ FilterAndStringifyAnalyticsDataModule = if require(Parent.SharedFlags).FFlagSdui
 	return if next(t) then t else nil
 end
 
-return function(p1, Entry, p2, p3, p4) --[[ Line: 52 | Named "SduiGameImpressionsHandler" ]]
+return function(p1, Entry, p2, p3, p4)
 	-- upvalues: SduiErrors (copy), FFlagSduiFixSearchTelemetry (copy), t (copy), CryoModule (copy), FilterAndStringifyAnalyticsDataModule (ref), SduiParsers (copy), FFlagLuaAppSponsoredGamePreviewVideo (copy), AppPage (copy), FFlagSduiSearchResultsPageEnabled (copy), SendGameImpressions (copy), SduiParseHelpers (copy), FFlagLuaAppSduiPassSortSubId (copy)
 	if not p3 then
 		p1.dependencies.logger.reportError(SduiErrors.SduiErrorType.FailedToLogGameImpressions, {
@@ -87,7 +87,7 @@ return function(p1, Entry, p2, p3, p4) --[[ Line: 52 | Named "SduiGameImpression
 		
 		return
 	else
-		SendGameImpressions.sendFromTopicContents(p1.dependencies.eventIngest, p1.dependencies.appAnalytics, Entry, JoinResults, p1.appPage, tostring(p3.collectionId), p3.collectionPosition, p4, p3.gameSetTargetId, nil, p3.itemsPerRow, p3.isWideTiles or false, ItemComponentType, p3.appliedFilters, nil, function(p5) --[[ Line: 173 ]]
+		SendGameImpressions.sendFromTopicContents(p1.dependencies.eventIngest, p1.dependencies.appAnalytics, Entry, JoinResults, p1.appPage, tostring(p3.collectionId), p3.collectionPosition, p4, p3.gameSetTargetId, nil, p3.itemsPerRow, p3.isWideTiles or false, ItemComponentType, p3.appliedFilters, nil, function(p5)
 			-- upvalues: SduiParseHelpers (upval), p3 (copy), p1 (copy), SduiErrors (upval), ItemComponentType (copy)
 			p1.dependencies.logger.reportError(SduiErrors.SduiErrorType.FailedToLogGameImpressions, {
 				name = "SduiGameImpressionsHandler",

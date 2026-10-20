@@ -7,14 +7,14 @@ local SignalsExperimentalModule = require(ViewRecyclerReact.Parent.SignalsExperi
 local CreateElementFunction = require(ViewRecyclerReact.Parent.React).createElement
 
 return {
-	new = function(Callback) --[[ Line: 37 ]]
+	new = function(Callback)
 		-- upvalues: ViewRecyclerModule (copy), RecyclableViewRegistryModule (copy), RecyclableViewModule (copy), CreateElementFunction (copy), RecyclableViewHostModule (copy), SignalsExperimentalModule (copy)
 		local Tbl = {}
 		local Count = 1
 		local Flag = false
 		local Config = nil
 		
-		local function _() --[[ Line: 43 | Named "notifyChanged" ]]
+		local function _()
 			-- upvalues: Flag (ref), Callback (copy)
 			if not Flag then
 				Callback()
@@ -23,7 +23,7 @@ return {
 		
 		local config = nil
 		config = {
-			allocateId = function(): number --[[ Line: 51 ]]
+			allocateId = function(): number
 				-- upvalues: Flag (ref), Count (ref)
 				assert(not Flag, "RecyclingRoot: cannot allocate after destroy")
 				local Count1: number = Count
@@ -31,7 +31,7 @@ return {
 				
 				return Count1
 			end,
-			addHosts = function(List, Callback1, Callback2) --[[ Line: 57 ]]
+			addHosts = function(List, Callback1, Callback2)
 				-- upvalues: Flag (ref), Tbl (copy), Callback (copy)
 				assert(not Flag, "RecyclingRoot: cannot add hosts after destroy")
 				local Flag1 = false
@@ -45,7 +45,7 @@ return {
 					Callback()
 				end
 			end,
-			removeHosts = function(List) --[[ Line: 72 ]]
+			removeHosts = function(List)
 				-- upvalues: Tbl (copy), Flag (ref), Callback (copy)
 				local Flag1 = false
 				
@@ -62,14 +62,14 @@ return {
 		}
 		
 		return {
-			getScope = function(p1) --[[ Line: 86 ]]
+			getScope = function(p1)
 				-- upvalues: Flag (ref), Config (ref), ViewRecyclerModule (upval), RecyclableViewRegistryModule (upval), RecyclableViewModule (upval), config (ref), CreateElementFunction (upval), RecyclableViewHostModule (upval), SignalsExperimentalModule (upval)
 				assert(not Flag, "RecyclingRoot: cannot get a Recycling scope after destroy")
 				
 				if Config == nil then
 					local MaxPoolSize = p1.maxPoolSize
 					local RecyclingScope = ViewRecyclerModule.Adapter.createRecyclingScope({
-						onPoolChanged = if p1.diagnostics == nil then nil else function(p2) --[[ Line: 96 ]]
+						onPoolChanged = if p1.diagnostics == nil then nil else function(p2)
 							-- upvalues: p1 (copy), ViewRecyclerModule (upval)
 							p1.diagnostics({
 								kind = ViewRecyclerModule.Diagnostics.EventKind.PoolChanged,
@@ -81,29 +81,29 @@ return {
 							})
 						end,
 						adapter = {
-							create = function(p2) --[[ Line: 107 ]]
+							create = function(p2)
 								-- upvalues: RecyclableViewRegistryModule (upval), RecyclableViewModule (upval), config (upval)
 								local Metadata = RecyclableViewRegistryModule.getMetadata(p2)
 								assert(Metadata ~= nil, "RecyclingScope: cannot create an unregistered Recyclable view type")
 								
 								return RecyclableViewModule(config.allocateId(), p2, nil, Metadata.readiness, Metadata.hideWhilePending)
 							end,
-							destroy = function(p2) --[[ Line: 118 ]]
+							destroy = function(p2)
 								p2.destroy()
 							end,
-							onCreated = function(p2) --[[ Line: 121 ]]
+							onCreated = function(p2)
 								-- upvalues: config (upval), CreateElementFunction (upval), RecyclableViewHostModule (upval)
-								config.addHosts(p2, function(p3): string --[[ Line: 122 ]]
+								config.addHosts(p2, function(p3): string
 									return `RecyclableView{p3.id}`
-								end, function(ItemView) --[[ Line: 124 ]]
+								end, function(ItemView)
 									-- upvalues: CreateElementFunction (upval), RecyclableViewHostModule (upval)
-									return function(CreatePortal) --[[ Line: 125 ]]
+									return function(CreatePortal)
 										-- upvalues: CreateElementFunction (upval), RecyclableViewHostModule (upval), ItemView (copy)
 										return CreateElementFunction(RecyclableViewHostModule, { itemView = ItemView, createPortal = CreatePortal })
 									end
 								end)
 							end,
-							onEvicted = function(p2) --[[ Line: 133 ]]
+							onEvicted = function(p2)
 								-- upvalues: config (upval)
 								config.removeHosts(p2)
 							end,
@@ -111,7 +111,7 @@ return {
 						}
 					})
 					Config = {
-						bind = function(Tbl) --[[ Line: 140 ]]
+						bind = function(Tbl)
 							-- upvalues: MaxPoolSize (ref), RecyclingScope (copy)
 							local Copy = table.clone(Tbl)
 							
@@ -133,7 +133,7 @@ return {
 					return Config
 				end
 			end,
-			getPortalChildren = function(p1) --[[ Line: 161 ]]
+			getPortalChildren = function(p1)
 				-- upvalues: Tbl (copy)
 				local RenderResults = {}
 				
@@ -142,7 +142,7 @@ return {
 				end
 				return RenderResults
 			end,
-			destroy = function() --[[ Line: 168 ]]
+			destroy = function()
 				-- upvalues: Flag (ref), Config (ref), Tbl (copy)
 				if Flag then return end
 				Flag = true

@@ -26,28 +26,28 @@ local EventNames = MomentsCommonModule.Analytics.EventNames
 local SessionManager = MomentsCommonModule.Analytics.SessionManager
 local FunnelEventNames = MomentsCommonModule.Analytics.FunnelEventNames
 
-return function(p1) --[[ Line: 66 ]]
+return function(p1)
 	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseCreationFlowStringsModule (copy), ReactModule (copy), CryoModule (copy), SessionManager (copy), FunnelEventNames (copy), FireAnalyticsEventModule (copy), EventNames (copy), MakeCreationEventFieldsModule (copy), UseCallbackFunction (copy), CaptureItemModule (copy), View (copy), Text (copy), Chip (copy), FoundationModule (copy), Image (copy), VideoCamera (copy), ScrollingGridView (copy), ConstantsModule (copy), Button (copy), InputSize (copy), ButtonVariant (copy)
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseTokensResult = UseTokensFunction()
 	local UseCreationFlowStringsModuleResult = UseCreationFlowStringsModule()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseRefResult = ReactModule.useRef(false)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 73 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseStateResult (copy), p1 (copy), CryoModule (upval)
-		return if UseStateResult then CryoModule.List.filter(p1.captures, function(p2): boolean --[[ Line: 78 ]]
+		return if UseStateResult then CryoModule.List.filter(p1.captures, function(p2): boolean
 			-- upvalues: UseStateResult (upval)
 			return p2.CaptureType == UseStateResult
 		end) else p1.captures
 	end, { p1.captures, UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 83 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseRefResult (copy), SessionManager (upval), FunnelEventNames (upval), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval)
 		if #p1.captures == 0 and UseRefResult.current == false then
 			UseRefResult.current = true
 			FireAnalyticsEventModule(EventNames.EditingFlowGalleryNoCapturesAvailable, MakeCreationEventFieldsModule.makeCreationBaseFields((SessionManager.getSessionId(FunnelEventNames.FunnelTypes.CreationFlow))))
 		end
 	end, { p1.captures })
-	local UseCallbackResult = UseCallbackFunction(function(p2) --[[ Line: 96 ]]
+	local UseCallbackResult = UseCallbackFunction(function(p2)
 		-- upvalues: p1 (copy)
 		p1.onCaptureSelected(p2)
 	end, { p1.onCaptureSelected })
@@ -71,7 +71,7 @@ return function(p1) --[[ Line: 66 ]]
 			AllChip = ReactModule.createElement(Chip, {
 				LayoutOrder = 1,
 				isChecked = UseStateResult == nil,
-				onActivated = UseCallbackFunction(function() --[[ Line: 120 ]]
+				onActivated = UseCallbackFunction(function()
 					-- upvalues: UseStateResult2 (copy)
 					UseStateResult2(nil)
 				end, {}),
@@ -82,7 +82,7 @@ return function(p1) --[[ Line: 66 ]]
 				LayoutOrder = 2,
 				isChecked = UseStateResult == Enum.CaptureType.Screenshot,
 				leading = Image,
-				onActivated = UseCallbackFunction(function() --[[ Line: 124 ]]
+				onActivated = UseCallbackFunction(function()
 					-- upvalues: UseStateResult2 (copy)
 					UseStateResult2(Enum.CaptureType.Screenshot)
 				end, {}),
@@ -93,7 +93,7 @@ return function(p1) --[[ Line: 66 ]]
 				LayoutOrder = 3,
 				isChecked = UseStateResult == Enum.CaptureType.Video,
 				leading = VideoCamera,
-				onActivated = UseCallbackFunction(function() --[[ Line: 128 ]]
+				onActivated = UseCallbackFunction(function()
 					-- upvalues: UseStateResult2 (copy)
 					UseStateResult2(Enum.CaptureType.Video)
 				end, {}),
@@ -119,14 +119,14 @@ return function(p1) --[[ Line: 66 ]]
 					minItemWidth = 100
 				},
 				items = UseMemoResult,
-				onShowMoreCallback = UseCallbackFunction(function() --[[ Line: 132 ]]
+				onShowMoreCallback = UseCallbackFunction(function()
 					-- upvalues: p1 (copy)
 					if p1.onShowMore then
 						p1.onShowMore()
 					end
 				end, { p1.onShowMore }),
 				padding = { bottom = UDim.new(0, UseTokensResult.Padding.Large) },
-				renderEmptyState = UseCallbackFunction(function() --[[ Line: 109 ]]
+				renderEmptyState = UseCallbackFunction(function()
 					-- upvalues: ReactModule (upval), View (upval), Text (upval), UseCreationFlowStringsModuleResult (copy)
 					return ReactModule.createElement(View, { tag = "shrink size-full-full" }, {
 						EmptyState = ReactModule.createElement(Text, {
@@ -135,7 +135,7 @@ return function(p1) --[[ Line: 66 ]]
 						})
 					})
 				end, { UseCreationFlowStringsModuleResult }),
-				renderItem = UseCallbackFunction(function(Capture, _) --[[ Line: 100 ]]
+				renderItem = UseCallbackFunction(function(Capture, _)
 					-- upvalues: ReactModule (upval), CaptureItemModule (upval), UseCallbackResult (copy), p1 (copy)
 					return ReactModule.createElement(CaptureItemModule, {
 						zIndex = 1,

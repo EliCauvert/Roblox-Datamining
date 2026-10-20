@@ -13,12 +13,12 @@ local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 local UrlBase = require(Parent.UrlBuilder).UrlBase
 local CryoModule = require(Parent.Cryo)
 
-local function _(): string --[[ Line: 23 | Named "getUserDarkModeSettingQueryParam" ]]
+local function _(): string
 	-- upvalues: NotificationService (copy)
 	return if string.lower(NotificationService.SelectedTheme) == "dark" then "true" else "false"
 end
 
-local function getUserAppTypeQueryParam(): string --[[ Line: 30 ]]
+local function getUserAppTypeQueryParam(): string
 	-- upvalues: UserInputService (copy)
 	local Platform = UserInputService:GetPlatform()
 	local v1 = "unknown"
@@ -54,7 +54,7 @@ local function getUserAppTypeQueryParam(): string --[[ Line: 30 ]]
 	return v1
 end
 
-local function getChallengeTypeQueryParameters(Generic, p1) --[[ Line: 49 ]]
+local function getChallengeTypeQueryParameters(Generic, p1)
 	-- upvalues: ChallengeTypeModule (copy), CaptchaActionTypeModule (copy), TwoStepVerificationActionTypeModule (copy)
 	if Generic == ChallengeTypeModule.Captcha then
 		assert(p1.actionType ~= nil, "actionType must be provided to render captcha")
@@ -106,7 +106,7 @@ local function getChallengeTypeQueryParameters(Generic, p1) --[[ Line: 49 ]]
 	end
 end
 
-return function(p1, p2, p3) --[[ Line: 109 ]]
+return function(p1, p2, p3)
 	-- upvalues: ChallengeTypeModule (copy), ConstantsModule (copy), getUserAppTypeQueryParam (copy), NotificationService (copy), getChallengeTypeQueryParameters (copy), Base64 (copy), UrlBuilder (copy), UrlBase (copy), CryoModule (copy)
 	if p1 ~= nil then
 		assert(p3 == nil, "challenge parameters cannot be specified for generic challenge rendering")

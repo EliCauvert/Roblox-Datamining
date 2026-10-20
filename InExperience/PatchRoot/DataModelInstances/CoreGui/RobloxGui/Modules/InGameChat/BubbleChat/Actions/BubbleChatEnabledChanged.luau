@@ -2,7 +2,7 @@
 local TModule = require(CorePackages.Packages.t)
 local MaybeAssertModule = require(script.Parent.Parent.Helpers.maybeAssert)
 
-return require(CorePackages.Packages.Rodux).makeActionCreator(script.Name, function(Enabled) --[[ Line: 7 ]]
+return require(CorePackages.Packages.Rodux).makeActionCreator(script.Name, function(Enabled)
 	-- upvalues: MaybeAssertModule (copy), TModule (copy)
 	MaybeAssertModule(TModule.boolean(Enabled))
 	

@@ -8,7 +8,7 @@ local Host = {
 	screenInsets = Enum.ScreenInsets.None
 }
 
-return function() --[[ Line: 17 | Named "AppFriendsCallingCallPip" ]]
+return function()
 	-- upvalues: ReactModule (copy), CallPipModule (copy), Host (copy)
 	return ReactModule.createElement(CallPipModule, { host = Host })
 end

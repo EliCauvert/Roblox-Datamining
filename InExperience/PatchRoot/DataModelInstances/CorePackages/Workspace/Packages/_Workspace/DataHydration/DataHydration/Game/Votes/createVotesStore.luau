@@ -24,14 +24,14 @@ local FFlagLuaAppDataHydrationUpdateItem = SharedFlagsModule.FFlagLuaAppDataHydr
 local GetGameInfoStoreModule = require(DataHydration.Game.GameInfo.getGameInfoStore)
 local USERVOTECACHETTLSECONDS = game:DefineFastInt("USER_VOTE_CACHE_TTL_SECONDS", 600)
 
-return function() --[[ Line: 39 | Named "createVotesStore" ]]
+return function()
 	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), DashModule (copy), FetchVotesModule (copy), FFlagLuaAppInExperienceDetailsPrompt (copy), VotesUtilsModule (copy), USERVOTECACHETTLSECONDS (copy), LogResponseErrorFunction (copy), FetchUserVoteModule (copy), VotesStoreTypesModule (copy), DiscoveryEventErrorLogger (copy), SignalsModule (copy), CryoModule (copy), FFlagLuaAppDataHydrationVotesStoreTrackOptimisticVotes (copy), GetGameInfoStoreModule (copy), RequestUserVoteUpdateModule (copy), HttpService (copy), ReasonNotVoteable (copy), StatusCodes (copy), FFlagLuaAppDataHydrationUpdateItem (copy)
 	local DataCacheModule = CreateDataCacheModule()
 	local DataResolverModule = CreateDataResolverModule({
 		cache = DataCacheModule,
-		fetchFn = function(p1) --[[ Line: 43 ]]
+		fetchFn = function(p1)
 			-- upvalues: DashModule (upval), FetchVotesModule (upval), FFlagLuaAppInExperienceDetailsPrompt (upval), VotesUtilsModule (upval)
-			return FetchVotesModule((DashModule.keys(p1))):andThen(function(Result) --[[ Line: 48 ]]
+			return FetchVotesModule((DashModule.keys(p1))):andThen(function(Result)
 				-- upvalues: FFlagLuaAppInExperienceDetailsPrompt (upval), DashModule (upval), VotesUtilsModule (upval)
 				if not Result then
 					error("No response")
@@ -44,7 +44,7 @@ return function() --[[ Line: 39 | Named "createVotesStore" ]]
 					end
 				end
 				local t = {}
-				DashModule.forEach(Result.responseBody.data, function(p2) --[[ Line: 62 ]]
+				DashModule.forEach(Result.responseBody.data, function(p2)
 					-- upvalues: VotesUtilsModule (upval), t (copy)
 					local Rating = nil
 					local UpVotes = p2.upVotes
@@ -61,7 +61,7 @@ return function() --[[ Line: 39 | Named "createVotesStore" ]]
 				end)
 				
 				return t
-			end):catch(function(Err) --[[ Line: 78 ]]
+			end):catch(function(Err)
 				error(`Error requesting votes: {Err}`)
 			end)
 		end
@@ -71,13 +71,13 @@ return function() --[[ Line: 39 | Named "createVotesStore" ]]
 		supportsMultiGet = false,
 		supportsMutations = true,
 		cache = DataCacheModule1,
-		logError = function(p1) --[[ Line: 89 ]]
+		logError = function(p1)
 			-- upvalues: LogResponseErrorFunction (upval)
 			LogResponseErrorFunction("v1/games/votes/user", p1)
 		end,
-		fetchFn = function(UniverseId, _) --[[ Line: 92 ]]
+		fetchFn = function(UniverseId, _)
 			-- upvalues: FetchUserVoteModule (upval), VotesStoreTypesModule (upval), DiscoveryEventErrorLogger (upval)
-			return FetchUserVoteModule(UniverseId):andThen(function(Result) --[[ Line: 96 ]]
+			return FetchUserVoteModule(UniverseId):andThen(function(Result)
 				-- upvalues: VotesStoreTypesModule (upval), DiscoveryEventErrorLogger (upval), UniverseId (copy)
 				local ResponseBody = Result.responseBody
 				
@@ -103,7 +103,7 @@ return function() --[[ Line: 39 | Named "createVotesStore" ]]
 		getUserVotes = DataResolverModule1.getOptimisticCachedItems,
 		getAndFetchUserVote = DataResolverModule1.getOptimisticAndFetchItem,
 		getAndFetchUserVotes = DataResolverModule1.getOptimisticAndFetchItems,
-		updateUserVote = function(UniverseId, Enabled) --[[ Line: 113 ]]
+		updateUserVote = function(UniverseId, Enabled)
 			-- upvalues: SignalsModule (upval), DataResolverModule1 (copy), DataCacheModule (copy), CryoModule (upval), FFlagLuaAppDataHydrationVotesStoreTrackOptimisticVotes (upval), VotesUtilsModule (upval), GetGameInfoStoreModule (upval), RequestUserVoteUpdateModule (upval), HttpService (upval), VotesStoreTypesModule (upval), ReasonNotVoteable (upval), StatusCodes (upval), DiscoveryEventErrorLogger (upval), LogResponseErrorFunction (upval)
 			local Signal, Signal2 = SignalsModule.createSignal(nil)
 			local OptimisticCachedItem, OptimisticCachedItem2 = DataResolverModule1.getOptimisticCachedItem(UniverseId)
@@ -149,11 +149,11 @@ return function() --[[ Line: 39 | Named "createVotesStore" ]]
 			end
 			local ApplyVoteChangeResult = nil
 			ApplyVoteChangeResult = GetGameInfoStoreModule(false).applyVoteChange(UniverseId, UserVote, Enabled)
-			RequestUserVoteUpdateModule(UniverseId, Enabled):andThen(function(_) --[[ Line: 183 ]]
+			RequestUserVoteUpdateModule(UniverseId, Enabled):andThen(function(_)
 				-- upvalues: DataResolverModule1 (upval), UniverseId (copy), Signal2 (copy), Enabled (copy)
 				DataResolverModule1.commitMutation(UniverseId)
 				Signal2({ type = "success", userVote = Enabled })
-			end):catch(function(Err) --[[ Line: 190 ]]
+			end):catch(function(Err)
 				-- upvalues: DataResolverModule1 (upval), UniverseId (copy), DataResult1 (copy), DataCacheModule (upval), ApplyVoteChangeResult (ref), GetGameInfoStoreModule (upval), HttpService (upval), VotesStoreTypesModule (upval), ReasonNotVoteable (upval), StatusCodes (upval), Signal2 (copy), DiscoveryEventErrorLogger (upval), LogResponseErrorFunction (upval)
 				DataResolverModule1.clearMutation(UniverseId)
 				
@@ -167,7 +167,7 @@ return function() --[[ Line: 39 | Named "createVotesStore" ]]
 				local FloodCheckThresholdMet = nil
 				
 				if StatusCode then
-					local Success, Result = pcall(function() --[[ Line: 207 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: HttpService (upval), Err (copy)
 						return HttpService:JSONDecode(Err.Body)
 					end)
@@ -197,7 +197,7 @@ return function() --[[ Line: 39 | Named "createVotesStore" ]]
 			
 			return Signal
 		end,
-		updateVoteItem = if FFlagLuaAppDataHydrationUpdateItem then function(p1, DownVotes, UpVotes) --[[ Line: 283 ]]
+		updateVoteItem = if FFlagLuaAppDataHydrationUpdateItem then function(p1, DownVotes, UpVotes)
 			-- upvalues: DataCacheModule (copy), VotesUtilsModule (upval)
 			DataCacheModule.updateItem(p1, {
 				downVotes = DownVotes,
@@ -205,7 +205,7 @@ return function() --[[ Line: 39 | Named "createVotesStore" ]]
 				rating = VotesUtilsModule.calculateRating(UpVotes, DownVotes)
 			})
 		end else nil,
-		updateVoteItems = function(List) --[[ Line: 240 ]]
+		updateVoteItems = function(List)
 			-- upvalues: VotesUtilsModule (upval), DataCacheModule (copy)
 			local t = {}
 			
@@ -220,14 +220,14 @@ return function() --[[ Line: 39 | Named "createVotesStore" ]]
 		end,
 		updateUserVoteItem = if FFlagLuaAppDataHydrationUpdateItem then DataCacheModule1.updateItem else nil,
 		updateUserVoteItems = DataCacheModule1.updateItems,
-		clear = function() --[[ Line: 253 ]]
+		clear = function()
 			-- upvalues: DataCacheModule (copy), DataResolverModule (copy), DataCacheModule1 (copy), DataResolverModule1 (copy)
 			DataCacheModule.clear()
 			DataResolverModule.clear()
 			DataCacheModule1.clear()
 			DataResolverModule1.clear()
 		end,
-		dispose = function() --[[ Line: 260 ]]
+		dispose = function()
 			-- upvalues: DataCacheModule (copy), DataResolverModule (copy), DataResolverModule1 (copy)
 			DataCacheModule.dispose()
 			DataResolverModule.dispose()

@@ -6,7 +6,7 @@ local _ = require(CatalogNetworking.Types)
 local FetchPurchaseDetailsModule = require(CatalogNetworking.networkRequests.fetchPurchaseDetails)
 local Signal, Signal2 = require(Parent.Signals).createSignal({})
 
-local function mergeResponse(Result) --[[ Line: 15 ]]
+local function mergeResponse(Result)
 	-- upvalues: Signal (copy), Signal2 (copy)
 	if Result and Result.look and Result.look.items then
 		local Copy = table.clone(Signal(false))
@@ -21,29 +21,29 @@ end
 
 return {
 	getCache = Signal,
-	fetchAndCache = function(p1, p2) --[[ Line: 26 ]]
+	fetchAndCache = function(p1, p2)
 		-- upvalues: Signal (copy), DashModule (copy), PromiseModule (copy), FetchPurchaseDetailsModule (copy), mergeResponse (copy)
 		local SignalResult = Signal(false)
-		local FilterResult = DashModule.filter(p2, function(p3): boolean --[[ Line: 28 ]]
+		local FilterResult = DashModule.filter(p2, function(p3): boolean
 			-- upvalues: SignalResult (copy)
 			return not SignalResult[tostring(p3.id)]
 		end)
 		
 		return if #FilterResult == 0 then PromiseModule.resolve() else FetchPurchaseDetailsModule(p1, FilterResult):andThen(mergeResponse)
 	end,
-	fetchAll = function(p1, p2) --[[ Line: 37 ]]
+	fetchAll = function(p1, p2)
 		-- upvalues: FetchPurchaseDetailsModule (copy), mergeResponse (copy)
 		return FetchPurchaseDetailsModule(p1, p2):andThen(mergeResponse)
 	end,
-	getItem = function(p1) --[[ Line: 41 ]]
+	getItem = function(p1)
 		-- upvalues: Signal (copy)
 		return Signal(false)[p1]
 	end,
-	clear = function() --[[ Line: 45 ]]
+	clear = function()
 		-- upvalues: Signal2 (copy)
 		Signal2({})
 	end,
-	markItemsOwned = function(List) --[[ Line: 49 ]]
+	markItemsOwned = function(List)
 		-- upvalues: Signal (copy), Signal2 (copy)
 		local Copy = table.clone(Signal(false))
 		

@@ -16,9 +16,9 @@ local _ = require(Parent.Actions.SetPromptState)
 local _ = require(Parent.Enums.PromptState)
 local list = { AnalyticsModule, NetworkModule, ExternalSettingsModule }
 
-return function() --[[ Line: 28 | Named "initiatePurchasePrecheck" ]]
+return function()
 	-- upvalues: ThunkModule (copy), list (copy), AnalyticsModule (copy), NetworkModule (copy), ExternalSettingsModule (copy), ResolvePurchasePrecheckModule (copy), PurchaseWarningModule (copy), GetUpsellFlowModule (copy), SelectedRobuxPackageModule (copy), UpsellFlowModule (copy), SetButtonStateModule (copy), ButtonStateModule (copy), GetPurchaseWarningModule (copy)
-	return ThunkModule.new(script.Name, list, function(p1, p2) --[[ Line: 29 ]]
+	return ThunkModule.new(script.Name, list, function(p1, p2)
 		-- upvalues: AnalyticsModule (upval), NetworkModule (upval), ExternalSettingsModule (upval), ResolvePurchasePrecheckModule (upval), PurchaseWarningModule (upval), GetUpsellFlowModule (upval), SelectedRobuxPackageModule (upval), UpsellFlowModule (upval), SetButtonStateModule (upval), ButtonStateModule (upval), GetPurchaseWarningModule (upval)
 		local State = p1:getState()
 		local v1 = p2[AnalyticsModule]
@@ -42,7 +42,7 @@ return function() --[[ Line: 28 | Named "initiatePurchasePrecheck" ]]
 		end
 		p1:dispatch(SetButtonStateModule(ButtonStateModule.Disabled))
 		
-		return GetPurchaseWarningModule(v2, RobuxProductId, ProductId1, IsMembershipTypeMatch):andThen(function(Result) --[[ Line: 57 ]]
+		return GetPurchaseWarningModule(v2, RobuxProductId, ProductId1, IsMembershipTypeMatch):andThen(function(Result)
 			-- upvalues: p1 (copy), SetButtonStateModule (upval), ButtonStateModule (upval), v1 (copy), ProductId (copy), RobuxProductId (ref), ProductId1 (ref), ResolvePurchasePrecheckModule (upval), PurchaseWarningModule (upval)
 			p1:dispatch(SetButtonStateModule(ButtonStateModule.Enabled))
 			
@@ -66,7 +66,7 @@ return function() --[[ Line: 28 | Named "initiatePurchasePrecheck" ]]
 				end
 			end
 			p1:dispatch(ResolvePurchasePrecheckModule(PurchaseWarningModule.NoAction))
-		end):catch(function(_) --[[ Line: 95 ]]
+		end):catch(function(_)
 			-- upvalues: p1 (copy), SetButtonStateModule (upval), ButtonStateModule (upval), ResolvePurchasePrecheckModule (upval), PurchaseWarningModule (upval)
 			p1:dispatch(SetButtonStateModule(ButtonStateModule.Enabled))
 			p1:dispatch(ResolvePurchasePrecheckModule(PurchaseWarningModule.NoAction))

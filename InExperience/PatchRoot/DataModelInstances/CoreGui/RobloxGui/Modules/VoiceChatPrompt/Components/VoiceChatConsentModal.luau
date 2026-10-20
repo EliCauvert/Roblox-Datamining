@@ -29,7 +29,7 @@ local WrapResult = require(CorePackages.Workspace.Packages.ArgCheck).wrap(TModul
 	showPrompt = TModule.optional(TModule.boolean)
 }))
 
-local function VoiceChatConsentModal(p1, p2) --[[ Line: 68 ]]
+local function VoiceChatConsentModal(p1, p2)
 	-- upvalues: WrapResult (copy), ReactModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), FeatureSettingsHubPromptSubtitleSelectingTurnOn (copy), GetFFlagSupportGamepadNavInVoiceModalsFunction (copy), RoactModule (copy), UIBloxModule (copy), AssetsModule (copy), GetFFlagDisablePVUpsellDataConsentFunction (copy), Checkbox (copy), Button (copy), ButtonType (copy), FeatureSettingsHubActionNotNow (copy), FeatureSettingsHubActionTurnOn (copy)
 	assert(WrapResult(p1))
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
@@ -146,7 +146,7 @@ local function VoiceChatConsentModal(p1, p2) --[[ Line: 68 ]]
 					isDisabled = false,
 					LayoutOrder = 1,
 					isChecked = UseStateResult,
-					onActivated = function(p3) --[[ Line: 223 ]]
+					onActivated = function(p3)
 						-- upvalues: UseStateResult2 (copy)
 						UseStateResult2(p3)
 					end

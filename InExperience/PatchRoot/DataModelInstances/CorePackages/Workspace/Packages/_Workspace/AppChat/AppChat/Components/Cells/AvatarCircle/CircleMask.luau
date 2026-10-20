@@ -6,7 +6,7 @@ local config = {
 	Size48x48 = "rbxasset://textures/ui/LuaChat/graphic/gr-profile-border-48x48.png"
 }
 
-return function(Frame) --[[ Line: 28 | Named "CircleMask" ]]
+return function(Frame)
 	-- upvalues: config (copy), UseCursorFunction (copy), ReactModule (copy)
 	return ReactModule.createElement("ImageButton", {
 		Size = UDim2.new(1, 0, 1, 0),

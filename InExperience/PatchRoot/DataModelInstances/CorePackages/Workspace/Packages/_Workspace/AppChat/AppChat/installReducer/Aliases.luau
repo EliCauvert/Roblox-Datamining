@@ -2,7 +2,7 @@
 local Llama = require(AppChat.Parent.LuaSocialLibrariesDeps).llama
 local RoduxAliasesModule = require(AppChat.Http.RoduxAliases)
 
-local function convertToNewAliasUpdatedActions(Aliases) --[[ Line: 8 ]]
+local function convertToNewAliasUpdatedActions(Aliases)
 	-- upvalues: RoduxAliasesModule (copy)
 	local AliasUpdatedResults = {}
 	
@@ -13,18 +13,18 @@ local function convertToNewAliasUpdatedActions(Aliases) --[[ Line: 8 ]]
 end
 
 local config = {
-	GetAliases_Success = function(p1) --[[ Line: 20 ]]
+	GetAliases_Success = function(p1)
 		-- upvalues: convertToNewAliasUpdatedActions (copy)
 		return (convertToNewAliasUpdatedActions(p1.responseBody))
 	end,
-	ReceivedAliases = function(p1) --[[ Line: 24 ]]
+	ReceivedAliases = function(p1)
 		-- upvalues: convertToNewAliasUpdatedActions (copy)
 		return (convertToNewAliasUpdatedActions(p1.aliases))
 	end
 }
 local InstallReducerResult = RoduxAliasesModule.installReducer()
 
-return function(p1, p2) --[[ Line: 31 ]]
+return function(p1, p2)
 	-- upvalues: config (copy), Llama (copy), InstallReducerResult (copy)
 	local P3 = p1 or { byUserId = { ShowUserAlias = true } }
 	local list = { p2 }

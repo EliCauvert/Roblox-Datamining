@@ -46,17 +46,17 @@ local config1 = {
 local ConversationList = RoactModule.PureComponent:extend("ConversationList")
 ConversationList.defaultProps = { entryHeight = 62, entryPadding = 16 }
 
-function ConversationList.init(p1) --[[ Line: 76 ]]
+function ConversationList.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.scrollingRef = RoactModule.createRef()
 	
-	function p1.inviteUser(p2) --[[ Line: 78 ]]
+	function p1.inviteUser(p2)
 		-- upvalues: p1 (copy)
 		return p1.props.inviteUser(p2, p1.props.analytics, p1.props.trigger, p1.props.inviteMessageId, p1.props.launchData)
 	end
 end
 
-function ConversationList.render(p1) --[[ Line: 89 ]]
+function ConversationList.render(p1)
 	-- upvalues: RoactModule (copy), GetFFlagEnableNewInviteSendEndpointModule (copy), GetFFlagEnableNewInviteMenuModule (copy), PlayerSearchPredicateModule (copy), InviteListEntryModule (copy), UserInputService (copy), ConversationEntryModule (copy), RetrievalStatus (copy), LoadingFriendsPageModule (copy), NoFriendsPageModule (copy), FriendsErrorPageModule (copy), FontResult (copy), Translator (copy), GRAY3 (copy), TextSizeResult (copy)
 	local Analytics = p1.props.analytics
 	local Prop = p1.props[RoactModule.Children] or {}
@@ -151,7 +151,7 @@ function ConversationList.render(p1) --[[ Line: 89 ]]
 	}, Prop)
 end
 
-local function handleBinding(p2) --[[ Line: 211 ]]
+local function handleBinding(p2)
 	-- upvalues: GetFFlagEnableNewInviteMenuModule (copy), UserInputService (copy), GuiService (copy)
 	if GetFFlagEnableNewInviteMenuModule() and not UserInputService.GamepadEnabled then return end
 	local Value = p2.scrollingRef:getValue()
@@ -171,7 +171,7 @@ end
 ConversationList.didUpdate = handleBinding
 
 if GetFFlagEnableNewInviteSendEndpointModule() then
-	function ConversationList.didMount(p3) --[[ Line: 237 ]]
+	function ConversationList.didMount(p3)
 		-- upvalues: ConstantsModule (copy), GameInviteEvents (copy), GetFFlagAbuseReportAnalyticsHasLaunchDataModule (copy), handleBinding (copy)
 		if p3.props.analytics and p3.props.trigger == ConstantsModule.Triggers.GameMenu then
 			local IsNotLaunchDataMatch: boolean = p3.props.launchData ~= nil and p3.props.launchData ~= ""
@@ -182,11 +182,11 @@ if GetFFlagEnableNewInviteSendEndpointModule() then
 else
 	ConversationList.didMount = handleBinding
 end
-local MemoizeResult = MemoizeFunction(function(List) --[[ Line: 256 ]]
+local MemoizeResult = MemoizeFunction(function(List)
 	-- upvalues: config (copy)
 	local List1 = {}
 	
-	local function friendPreference(A, B): boolean --[[ Line: 258 ]]
+	local function friendPreference(A, B): boolean
 		-- upvalues: config (upval)
 		local Entry = config[A.presence]
 		local Entry1 = config[B.presence]
@@ -203,7 +203,7 @@ local MemoizeResult = MemoizeFunction(function(List) --[[ Line: 256 ]]
 	
 	return List1
 end)
-local MemoizeResult1 = MemoizeFunction(function(List) --[[ Line: 280 ]]
+local MemoizeResult1 = MemoizeFunction(function(List)
 	-- upvalues: SortFriendsByCorrectedPresenceAndRank (copy)
 	local List1 = {}
 	
@@ -216,10 +216,10 @@ local MemoizeResult1 = MemoizeFunction(function(List) --[[ Line: 280 ]]
 	
 	return List1
 end)
-local MemoizeResult2 = MemoizeFunction(function(List) --[[ Line: 293 ]]
+local MemoizeResult2 = MemoizeFunction(function(List)
 	local List1 = {}
 	
-	local function friendPreference(A, B): boolean --[[ Line: 295 ]]
+	local function friendPreference(A, B): boolean
 		local Number: number = tonumber(A.friendFrequentRank) or 0
 		local Number1: number = tonumber(B.friendFrequentRank) or 0
 		
@@ -236,14 +236,14 @@ local MemoizeResult2 = MemoizeFunction(function(List) --[[ Line: 293 ]]
 	return List1
 end)
 
-local function _() --[[ Line: 317 ]]
+local function _()
 	-- upvalues: NewInviteMenuExperimentManagerModule (copy), MemoizeResult2 (copy), MemoizeResult1 (copy), MemoizeResult (copy)
 	local InviteListSortOrder = NewInviteMenuExperimentManagerModule.default:getInviteListSortOrder() or 0
 	
 	return if InviteListSortOrder == 1 then MemoizeResult2 elseif InviteListSortOrder == 2 then MemoizeResult1 else MemoizeResult
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p3, _) --[[ Line: 329 ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p3, _)
 	-- upvalues: MemoizeResult (copy), GetFFlagInviteListRerankFunction (copy), NewInviteMenuExperimentManagerModule (copy), config1 (copy), MemoizeResult2 (copy), MemoizeResult1 (copy), Players (copy)
 	local Callback = MemoizeResult
 	
@@ -256,10 +256,10 @@ return RoactRoduxModule.UNSTABLE_connect2(function(p3, _) --[[ Line: 329 ]]
 		friendsRetrievalStatus = p3.Friends.retrievalStatus[tostring(Players.LocalPlayer.UserId)],
 		invites = p3.Invites
 	}
-end, function(Callback) --[[ Line: 341 ]]
+end, function(Callback)
 	-- upvalues: HttpRequestModule (copy), HttpRbxApiService (copy), GetFFlagEnableNewInviteSendEndpointModule (copy), InviteUserIdToPlaceIdCustomizedModule (copy), InviteUserIdToPlaceIdModule (copy)
 	return {
-		inviteUser = function(p3, p4, p5, p6, p7) --[[ Line: 343 ]]
+		inviteUser = function(p3, p4, p5, p6, p7)
 			-- upvalues: HttpRequestModule (upval), HttpRbxApiService (upval), GetFFlagEnableNewInviteSendEndpointModule (upval), Callback (copy), InviteUserIdToPlaceIdCustomizedModule (upval), InviteUserIdToPlaceIdModule (upval)
 			local HttpRequestModuleResult = HttpRequestModule(HttpRbxApiService)
 			local Text = tostring(game.PlaceId)

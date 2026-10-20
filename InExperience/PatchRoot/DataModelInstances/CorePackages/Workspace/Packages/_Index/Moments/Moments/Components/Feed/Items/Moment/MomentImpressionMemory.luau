@@ -9,12 +9,12 @@ local UsePagerItemFunction = VerticalPagerModule.usePagerItem
 local Context = ReactModule.createContext(nil)
 
 return table.freeze({
-	Provider = function(p1) --[[ Line: 39 ]]
+	Provider = function(p1)
 		-- upvalues: UseVerticalPagerFunction (copy), UsePagerItemFunction (copy), ReactModule (copy), SignalsModule (copy), UseSignalStateFunction (copy), Context (copy)
 		local UseVerticalPagerResult = UseVerticalPagerFunction()
 		local Item = UsePagerItemFunction().item
 		local UseRefResult = ReactModule.useRef({})
-		local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 44 ]]
+		local UseResult = ReactModule.useCallback(function(p2)
 			-- upvalues: UseRefResult (copy)
 			local CurrentEntry = UseRefResult.current[p2]
 			
@@ -24,14 +24,14 @@ return table.freeze({
 			end
 			return CurrentEntry
 		end, {})
-		local UseSignalStateResult = UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 53 ]]
+		local UseSignalStateResult = UseSignalStateFunction((ReactModule.useMemo(function()
 			-- upvalues: SignalsModule (upval), Item (copy), UseVerticalPagerResult (copy)
-			return SignalsModule.createComputed(function(p2): boolean --[[ Line: 54 ]]
+			return SignalsModule.createComputed(function(p2): boolean
 				-- upvalues: Item (upval), UseVerticalPagerResult (upval)
 				return Item ~= nil and UseVerticalPagerResult.store.getCurrentItem(p2) == Item
 			end)
 		end, { UseVerticalPagerResult, Item })))
-		ReactModule.useEffect(function() --[[ Line: 60 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseSignalStateResult (copy), UseRefResult (copy)
 			if UseSignalStateResult then return end
 			for _, value in UseRefResult.current do
@@ -41,7 +41,7 @@ return table.freeze({
 		
 		return ReactModule.createElement(Context.Provider, { value = UseResult }, p1.children)
 	end,
-	useImpressionRef = function(p2) --[[ Line: 76 ]]
+	useImpressionRef = function(p2)
 		-- upvalues: ReactModule (copy), Context (copy)
 		local UseContextResult = ReactModule.useContext(Context)
 		local UseRefResult = ReactModule.useRef(false)

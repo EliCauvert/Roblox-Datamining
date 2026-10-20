@@ -23,12 +23,12 @@ local ProfileTypes = EnumsModule.ProfileTypes
 local ShareName: string = `{require(Parent.Http).Url.BASE_URL}share/g/%s`
 
 return {
-	[EnumsModule.ProfileActions.CopyLink] = function(p1) --[[ Line: 40 ]]
+	[EnumsModule.ProfileActions.CopyLink] = function(p1)
 		-- upvalues: EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), Default (copy), Contexts (copy), ShareName (copy), SetCurrentToastMessageFunction (copy), TextKeysModule (copy)
 		return {
 			text = p1.localized[EnumsModule.ProfileActions.CopyLink],
 			onActivated = {
-				[ProfileTypes.Community] = function() --[[ Line: 44 ]]
+				[ProfileTypes.Community] = function()
 					-- upvalues: p1 (copy), EventNamesModule (upval), Default (upval), Contexts (upval), ShareName (upval), SetCurrentToastMessageFunction (upval), TextKeysModule (upval)
 					p1.analytics.fireAnalyticsEvent(EventNamesModule.ContextualMenuButtonCopyLink, { buttonSurface = p1.buttonSurface })
 					Default:setClipboardText({
@@ -40,20 +40,20 @@ return {
 			}
 		}
 	end,
-	[EnumsModule.ProfileActions.JoinCommunity] = function(p1) --[[ Line: 61 ]]
+	[EnumsModule.ProfileActions.JoinCommunity] = function(p1)
 		-- upvalues: ButtonVariant (copy), EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), GroupsNetworkingModule (copy), GetProfilePlatformModule (copy), GetAvailableCommunityComponentsModule (copy)
 		return {
 			variant = ButtonVariant.Emphasis,
 			text = p1.localized[EnumsModule.ProfileActions.JoinCommunity],
 			onActivated = {
-				[ProfileTypes.Community] = function() --[[ Line: 66 ]]
+				[ProfileTypes.Community] = function()
 					-- upvalues: p1 (copy), EventNamesModule (upval), GroupsNetworkingModule (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval)
 					p1.analytics.fireAnalyticsEvent(EventNamesModule.CTAButtonJoinCommunity, {
 						buttonSurface = p1.buttonSurface,
 						btnContext = p1.profileWrapperContext.sourceInfo.source
 					})
 					
-					return p1.dispatch(GroupsNetworkingModule.JoinGroup.API({ groupId = p1.profileId })):andThen(function() --[[ Line: 76 ]]
+					return p1.dispatch(GroupsNetworkingModule.JoinGroup.API({ groupId = p1.profileId })):andThen(function()
 						-- upvalues: p1 (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval)
 						p1.dispatch(GetProfilePlatformModule.API({
 							includeComponentOrdering = true,
@@ -66,20 +66,20 @@ return {
 			}
 		}
 	end,
-	[EnumsModule.ProfileActions.CancelJoinCommunityRequest] = function(p1) --[[ Line: 89 ]]
+	[EnumsModule.ProfileActions.CancelJoinCommunityRequest] = function(p1)
 		-- upvalues: ButtonVariant (copy), EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), GroupsNetworkingModule (copy), RefreshProfilePlatformModule (copy)
 		return {
 			variant = ButtonVariant.Standard,
 			text = p1.localized[EnumsModule.ProfileActions.CancelJoinCommunityRequest],
 			onActivated = {
-				[ProfileTypes.Community] = function() --[[ Line: 94 ]]
+				[ProfileTypes.Community] = function()
 					-- upvalues: p1 (copy), EventNamesModule (upval), GroupsNetworkingModule (upval), RefreshProfilePlatformModule (upval), EnumsModule (upval)
 					p1.analytics.fireAnalyticsEvent(EventNamesModule.CTAButtonCancelJoinCommunityRequest, {
 						buttonSurface = p1.buttonSurface,
 						btnContext = p1.profileWrapperContext.sourceInfo.source
 					})
 					
-					return p1.dispatch(GroupsNetworkingModule.CancelJoinGroupRequest.API({ groupId = p1.profileId, userId = p1.localUserId })):andThen(function() --[[ Line: 105 ]]
+					return p1.dispatch(GroupsNetworkingModule.CancelJoinGroupRequest.API({ groupId = p1.profileId, userId = p1.localUserId })):andThen(function()
 						-- upvalues: p1 (upval), RefreshProfilePlatformModule (upval), EnumsModule (upval)
 						p1.dispatch(RefreshProfilePlatformModule({
 							profileType = p1.profileType,
@@ -91,19 +91,19 @@ return {
 			}
 		}
 	end,
-	[EnumsModule.ProfileActions.ViewCommunity] = function(p1) --[[ Line: 119 ]]
+	[EnumsModule.ProfileActions.ViewCommunity] = function(p1)
 		-- upvalues: ButtonVariant (copy), EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), MakeViewGroupPageModule (copy), GetProfilePlatformModule (copy), GetAvailableCommunityComponentsModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
 		return {
 			variant = ButtonVariant.SubEmphasis,
 			text = p1.localized[EnumsModule.ProfileActions.ViewCommunity],
 			onActivated = {
-				[ProfileTypes.Community] = function() --[[ Line: 124 ]]
+				[ProfileTypes.Community] = function()
 					-- upvalues: p1 (copy), EventNamesModule (upval), MakeViewGroupPageModule (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval)
 					p1.analytics.fireAnalyticsEvent(EventNamesModule.CTAButtonViewCommunity, {
 						buttonSurface = p1.buttonSurface,
 						btnContext = p1.profileWrapperContext.sourceInfo.source
 					})
-					local ViewGroupPageModule = MakeViewGroupPageModule(p1.profileId, function() --[[ Line: 130 ]]
+					local ViewGroupPageModule = MakeViewGroupPageModule(p1.profileId, function()
 						-- upvalues: p1 (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval)
 						p1.dispatch(GetProfilePlatformModule.API({
 							includeComponentOrdering = true,
@@ -124,13 +124,13 @@ return {
 			}
 		}
 	end,
-	[EnumsModule.ProfileActions.ViewFullProfile] = function(p1) --[[ Line: 148 ]]
+	[EnumsModule.ProfileActions.ViewFullProfile] = function(p1)
 		-- upvalues: ButtonVariant (copy), EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), AppPage (copy), UrlBuilder (copy), UrlBase (copy), TextKeysModule (copy), GetProfilePlatformModule (copy), GetAvailableCommunityComponentsModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
 		return {
 			variant = ButtonVariant.SubEmphasis,
 			text = p1.localized[EnumsModule.ProfileActions.ViewFullProfile],
 			onActivated = {
-				[ProfileTypes.Community] = function() --[[ Line: 153 ]]
+				[ProfileTypes.Community] = function()
 					-- upvalues: p1 (copy), EventNamesModule (upval), AppPage (upval), UrlBuilder (upval), UrlBase (upval), TextKeysModule (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval)
 					p1.analytics.fireAnalyticsEvent(EventNamesModule.CTAButtonViewFullProfile, {
 						buttonSurface = p1.buttonSurface,
@@ -141,7 +141,7 @@ return {
 						detail = UrlBuilder.new({ base = UrlBase.WWW, path = `profiles/{p1.profileId}` })(),
 						extraProps = {
 							titleKey = TextKeysModule.Profile,
-							onClose = function() --[[ Line: 167 ]]
+							onClose = function()
 								-- upvalues: p1 (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval)
 								p1.dispatch(GetProfilePlatformModule.API({
 									includeComponentOrdering = true,
@@ -164,19 +164,19 @@ return {
 			}
 		}
 	end,
-	[EnumsModule.ProfileActions.LeaveCommunity] = function(p1) --[[ Line: 187 ]]
+	[EnumsModule.ProfileActions.LeaveCommunity] = function(p1)
 		-- upvalues: EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), GroupsNetworkingModule (copy), GetProfilePlatformModule (copy), GetAvailableCommunityComponentsModule (copy)
 		return {
 			text = p1.localized[EnumsModule.ProfileActions.LeaveCommunity],
 			onActivated = {
-				[ProfileTypes.Community] = function() --[[ Line: 191 ]]
+				[ProfileTypes.Community] = function()
 					-- upvalues: p1 (copy), EventNamesModule (upval), GroupsNetworkingModule (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval)
 					p1.analytics.fireAnalyticsEvent(EventNamesModule.ContextualMenuButtonLeaveCommunity, {
 						buttonSurface = p1.buttonSurface,
 						btnContext = p1.profileWrapperContext.sourceInfo.source
 					})
 					
-					return p1.dispatch(GroupsNetworkingModule.LeaveGroup.API({ groupId = p1.profileId, userId = p1.localUserId })):andThen(function() --[[ Line: 202 ]]
+					return p1.dispatch(GroupsNetworkingModule.LeaveGroup.API({ groupId = p1.profileId, userId = p1.localUserId })):andThen(function()
 						-- upvalues: p1 (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval)
 						p1.dispatch(GetProfilePlatformModule.API({
 							includeComponentOrdering = true,
@@ -189,19 +189,19 @@ return {
 			}
 		}
 	end,
-	[EnumsModule.ProfileActions.MakePrimaryCommunity] = function(p1) --[[ Line: 215 ]]
+	[EnumsModule.ProfileActions.MakePrimaryCommunity] = function(p1)
 		-- upvalues: EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), GroupsNetworkingModule (copy), RefreshProfilePlatformModule (copy)
 		return {
 			text = p1.localized[EnumsModule.ProfileActions.MakePrimaryCommunity],
 			onActivated = {
-				[ProfileTypes.Community] = function() --[[ Line: 219 ]]
+				[ProfileTypes.Community] = function()
 					-- upvalues: p1 (copy), EventNamesModule (upval), GroupsNetworkingModule (upval), RefreshProfilePlatformModule (upval), EnumsModule (upval)
 					p1.analytics.fireAnalyticsEvent(EventNamesModule.ContextualMenuButtonMakePrimaryCommunity, {
 						buttonSurface = p1.buttonSurface,
 						btnContext = p1.profileWrapperContext.sourceInfo.source
 					})
 					
-					return p1.dispatch(GroupsNetworkingModule.MakePrimaryGroup.API({ groupId = p1.profileId })):andThen(function() --[[ Line: 229 ]]
+					return p1.dispatch(GroupsNetworkingModule.MakePrimaryGroup.API({ groupId = p1.profileId })):andThen(function()
 						-- upvalues: p1 (upval), RefreshProfilePlatformModule (upval), EnumsModule (upval)
 						p1.dispatch(RefreshProfilePlatformModule({
 							profileType = p1.profileType,
@@ -213,19 +213,19 @@ return {
 			}
 		}
 	end,
-	[EnumsModule.ProfileActions.RemovePrimaryCommunity] = function(p1) --[[ Line: 243 ]]
+	[EnumsModule.ProfileActions.RemovePrimaryCommunity] = function(p1)
 		-- upvalues: EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), GroupsNetworkingModule (copy), RefreshProfilePlatformModule (copy)
 		return {
 			text = p1.localized[EnumsModule.ProfileActions.RemovePrimaryCommunity],
 			onActivated = {
-				[ProfileTypes.Community] = function() --[[ Line: 247 ]]
+				[ProfileTypes.Community] = function()
 					-- upvalues: p1 (copy), EventNamesModule (upval), GroupsNetworkingModule (upval), RefreshProfilePlatformModule (upval), EnumsModule (upval)
 					p1.analytics.fireAnalyticsEvent(EventNamesModule.ContextualMenuButtonRemovePrimaryCommunity, {
 						buttonSurface = p1.buttonSurface,
 						btnContext = p1.profileWrapperContext.sourceInfo.source
 					})
 					
-					return p1.dispatch(GroupsNetworkingModule.RemovePrimaryGroup.API()):andThen(function() --[[ Line: 253 ]]
+					return p1.dispatch(GroupsNetworkingModule.RemovePrimaryGroup.API()):andThen(function()
 						-- upvalues: p1 (upval), RefreshProfilePlatformModule (upval), EnumsModule (upval)
 						p1.dispatch(RefreshProfilePlatformModule({
 							profileType = p1.profileType,

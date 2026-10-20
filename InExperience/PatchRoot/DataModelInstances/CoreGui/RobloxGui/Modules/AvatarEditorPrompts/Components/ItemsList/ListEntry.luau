@@ -25,9 +25,9 @@ ListEntry.validateProps = TModule.strictInterface({
 	forwardRef = TModule.optional(TModule.table)
 })
 
-function ListEntry.render(p1) --[[ Line: 40 ]]
+function ListEntry.render(p1)
 	-- upvalues: WithStyleFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), RoactModule (copy), RoactFitComponents (copy), NormalizeFontFaceFunction (copy), FitTextLabel (copy), FoundationFontFaceMigration1 (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 41 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Text (upval), p1 (copy), RoactModule (upval), RoactFitComponents (upval), NormalizeFontFaceFunction (upval), FitTextLabel (upval), FoundationFontFaceMigration1 (upval)
 		local _Font = p2.Font
 		local Theme = p2.Theme
@@ -75,7 +75,7 @@ function ListEntry.render(p1) --[[ Line: 40 ]]
 	end)
 end
 
-return RoactModule.forwardRef(function(p1, ForwardRef) --[[ Line: 102 ]]
+return RoactModule.forwardRef(function(p1, ForwardRef)
 	-- upvalues: RoactModule (copy), ListEntry (copy), CryoModule (copy)
 	return RoactModule.createElement(ListEntry, CryoModule.Dictionary.join(p1, { forwardRef = ForwardRef }))
 end)

@@ -8,7 +8,7 @@ local GameTextTranslatorContextModule = require(Parent.Common.GameTextTranslator
 local GetPeopleHeaderLabelModule = require(Parent.Common.getPeopleHeaderLabel)
 local FFlagPlayerListLocalizeGameTextModule = require(Parent.Flags.FFlagPlayerListLocalizeGameText)
 
-return ReactModule.memo(function(p1) --[[ Line: 18 | Named "ColumnHeaderRow" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FFlagPlayerListLocalizeGameTextModule (copy), ReactModule (copy), GameTextTranslatorContextModule (copy), GetPeopleHeaderLabelModule (copy), PeopleCellModule (copy), LeaderboardTextCellModule (copy), LeaderboardRowShellModule (copy)
 	local UseContextResult = if FFlagPlayerListLocalizeGameTextModule then ReactModule.useContext(GameTextTranslatorContextModule) else nil
 	local config = {

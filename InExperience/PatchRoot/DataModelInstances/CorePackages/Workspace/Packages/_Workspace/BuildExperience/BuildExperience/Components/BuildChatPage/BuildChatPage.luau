@@ -5,7 +5,7 @@ local UseBuildChatPageViewModelModule = require(script.Parent.useBuildChatPageVi
 local ChatCardEmphasisProviderModule = require(BuildExperience.Components.Chat.ChatCardEmphasis.ChatCardEmphasisProvider)
 local FFlagBuildExperienceChatCardEmphasisModule = require(BuildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
 
-return function(p1) --[[ Line: 13 | Named "BuildChatPage" ]]
+return function(p1)
 	-- upvalues: UseBuildChatPageViewModelModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ReactModule (copy), ChatCardEmphasisProviderModule (copy), BuildChatPageViewModule (copy)
 	local UseBuildChatPageViewModelModuleResult = UseBuildChatPageViewModelModule(p1)
 	

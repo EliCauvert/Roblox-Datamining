@@ -7,7 +7,7 @@ local BackButtonModule = require(AvatarExperienceInspectAndBuy.Components.Common
 local _ = require(AvatarExperienceInspectAndBuy.Components.Common.BuyActionBar)
 local _ = require(AvatarExperienceInspectAndBuy.Types)
 
-return function(Frame) --[[ Line: 39 | Named "ItemHeader" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FoundationModule (copy), BackButtonModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	

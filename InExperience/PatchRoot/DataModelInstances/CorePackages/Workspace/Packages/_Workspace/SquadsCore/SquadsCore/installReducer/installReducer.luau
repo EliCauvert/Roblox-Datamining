@@ -26,7 +26,7 @@ if require(Parent.SharedFlags).GetFFlagEnableCrossExpVoice() then
 	end
 	config.CrossExperienceVoice = CrossExperienceVoiceModule.installReducer(CrossExperienceVoice)
 end
-return function(InExperience) --[[ Line: 43 ]]
+return function(InExperience)
 	-- upvalues: config (copy), SquadLocationModule (copy), SquadPromptReducerModule (copy), RoduxModule (copy)
 	config.SquadPrompt = if InExperience == SquadLocationModule.InExperience then SquadPromptReducerModule else nil
 	

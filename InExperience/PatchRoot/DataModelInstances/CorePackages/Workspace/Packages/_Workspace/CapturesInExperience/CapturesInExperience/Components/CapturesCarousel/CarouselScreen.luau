@@ -39,7 +39,7 @@ local FFlagUseMediaPlayerInCarousel = require(Parent1.SharedFlags).FFlagUseMedia
 local FStringSocialCaptureTakenIXPLayer = require(Parent1.SharedFlags).FStringSocialCaptureTakenIXPLayer
 local _UDim2 = UDim2.fromOffset(32, 32)
 
-local function getTitle(p1): string --[[ Line: 58 ]]
+local function getTitle(p1): string
 	-- upvalues: GetTimestampFromCaptureModule (copy), LocalizationService (copy)
 	local TimestampFromCaptureModule = GetTimestampFromCaptureModule(p1)
 	
@@ -54,24 +54,24 @@ local function getTitle(p1): string --[[ Line: 58 ]]
 	end
 end
 
-return function(_) --[[ Line: 76 ]]
+return function(_)
 	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseStyleFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseRefFunction (copy), Signal (copy), UseStateFunction (copy), UseScreenSizeFunction (copy), UseEffectOnceFunction (copy), IXPServiceWrapper (copy), FStringSocialCaptureTakenIXPLayer (copy), UseEffectFunction (copy), ToastTriggeredModule (copy), CapturesToastTypeModule (copy), UseCallbackFunction (copy), EventNamesModule (copy), CarouselClosedModule (copy), DeleteCaptureModule (copy), ContextActionService (copy), getTitle (copy), ReactModule (copy), FFlagUseMediaPlayerInCarousel (copy), ImageSetButton (copy), Images (copy), _UDim2 (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), CapturesCarouselModule (copy), CarouselCTAContainerModule (copy), DeleteWarningModalModule (copy), PermissionModalModule (copy), ToastContainerModule (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseStyleResult = UseStyleFunction()
-	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 81 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p1)
 		-- upvalues: ConstantsModule (upval)
 		return p1[ConstantsModule.RoduxKey].Captures
 	end)
-	local UseSelectorResult1 = UseSelectorFunction(function(p1) --[[ Line: 85 ]]
+	local UseSelectorResult1 = UseSelectorFunction(function(p1)
 		-- upvalues: ConstantsModule (upval)
 		return p1[ConstantsModule.RoduxKey].Carousel.IsOpen
 	end)
-	local UseSelectorResult2 = UseSelectorFunction(function(p1) --[[ Line: 89 ]]
+	local UseSelectorResult2 = UseSelectorFunction(function(p1)
 		-- upvalues: ConstantsModule (upval)
 		return p1[ConstantsModule.RoduxKey].Carousel.SelectedCaptureIndex
 	end)
-	local UseSelectorResult3 = UseSelectorFunction(function(p1) --[[ Line: 93 ]]
+	local UseSelectorResult3 = UseSelectorFunction(function(p1)
 		-- upvalues: ConstantsModule (upval)
 		return p1[ConstantsModule.RoduxKey].Carousel.IsDeleteWarningModalOpen
 	end)
@@ -79,55 +79,55 @@ return function(_) --[[ Line: 76 ]]
 	local UseStateResult, UseStateResult2 = UseStateFunction(false)
 	local UseStateResult1, UseStateResult2_1 = UseStateFunction(false)
 	local UseScreenSizeResult = UseScreenSizeFunction()
-	UseEffectOnceFunction(function() --[[ Line: 102 ]]
+	UseEffectOnceFunction(function()
 		-- upvalues: IXPServiceWrapper (upval), FStringSocialCaptureTakenIXPLayer (upval)
 		IXPServiceWrapper:LogUserLayerExposure(FStringSocialCaptureTakenIXPLayer)
 	end, UseSelectorResult1)
-	UseEffectFunction(function() --[[ Line: 106 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseDispatchResult (copy), ToastTriggeredModule (upval), CapturesToastTypeModule (upval)
 		UseDispatchResult(ToastTriggeredModule(CapturesToastTypeModule.None))
 	end, { UseSelectorResult1 })
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 110 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: UseStateResult2 (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval), UseDispatchResult (copy), CarouselClosedModule (upval)
 		UseStateResult2(false)
 		UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesCarouselClosed)
 		UseDispatchResult(CarouselClosedModule())
 	end, {})
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 116 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: UseStateResult2 (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval), UseDispatchResult (copy), CarouselClosedModule (upval)
 		UseStateResult2(false)
 		UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesCarouselClosedByKeyboard)
 		UseDispatchResult(CarouselClosedModule())
 	end, {})
-	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 122 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function()
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(true)
 	end, {})
-	local UseCallbackResult3 = UseCallbackFunction(function() --[[ Line: 126 ]]
+	local UseCallbackResult3 = UseCallbackFunction(function()
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(false)
 	end, {})
-	local UseCallbackResult4 = UseCallbackFunction(function() --[[ Line: 130 ]]
+	local UseCallbackResult4 = UseCallbackFunction(function()
 		-- upvalues: UseStateResult2 (copy), UseSelectorResult (copy), UseSelectorResult2 (copy), UseDispatchResult (copy), DeleteCaptureModule (upval), UseRefResult (copy)
 		UseStateResult2(true)
 		local UseSelectorResultEntry = UseSelectorResult[UseSelectorResult2]
-		UseRefResult.current:fire(function() --[[ Line: 134 ]]
+		UseRefResult.current:fire(function()
 			-- upvalues: UseDispatchResult (upval), DeleteCaptureModule (upval), UseSelectorResultEntry (copy), UseStateResult2 (upval)
 			UseDispatchResult(DeleteCaptureModule(UseSelectorResultEntry))
 			UseStateResult2(false)
 		end)
 	end, { UseSelectorResult, UseSelectorResult2 })
-	UseEffectFunction(function() --[[ Line: 142 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseSelectorResult1 (copy), UseSelectorResult3 (copy), ContextActionService (upval), UseCallbackResult1 (copy)
 		if not UseSelectorResult1 or UseSelectorResult3 then return end
-		ContextActionService:BindCoreAction("CapturesCarouselCloseShortcutAction", function(_, UserInputState) --[[ Line: 147 ]]
+		ContextActionService:BindCoreAction("CapturesCarouselCloseShortcutAction", function(_, UserInputState)
 			-- upvalues: UseCallbackResult1 (upval)
 			if UserInputState == Enum.UserInputState.End then
 				UseCallbackResult1()
 			end
 		end, false, Enum.KeyCode.Escape)
 		
-		return function() --[[ Line: 153 ]]
+		return function()
 			-- upvalues: ContextActionService (upval)
 			ContextActionService:UnbindCoreAction("CapturesCarouselCloseShortcutAction")
 		end

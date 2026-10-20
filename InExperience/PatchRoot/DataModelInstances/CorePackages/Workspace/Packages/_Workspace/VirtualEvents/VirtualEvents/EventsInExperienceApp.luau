@@ -10,7 +10,7 @@ local CoreScriptsRootProvider = require(Parent1.CoreScriptsRoactCommon).CoreScri
 local EventInExperiencePromptsModule = require(Parent.Components.CoreUI.EventInExperiencePrompts)
 local EventsInExperienceAppFixStyleLink = game:DefineFastFlag("EventsInExperienceAppFixStyleLink", false)
 
-local function v10(p1, p2) --[[ Line: 29 ]]
+local function v10(p1, p2)
 	-- upvalues: ReactModule (copy), CoreScriptsRootProvider (copy), RoactServices (copy), RoactNetworking (copy), RequestInternalWrapperFunction (copy), HttpService (copy), EventsInExperienceAppFixStyleLink (copy), RoactCompatModule (copy)
 	local Element = ReactModule.createElement(CoreScriptsRootProvider, {}, {
 		RoactServicesProvider = ReactModule.createElement(RoactServices.ServiceProvider, {
@@ -27,18 +27,18 @@ local function v10(p1, p2) --[[ Line: 29 ]]
 end
 
 return {
-	createApp = function() --[[ Line: 43 ]]
+	createApp = function()
 		-- upvalues: v10 (copy), ReactModule (copy), EventInExperiencePromptsModule (copy), RoactCompatModule (copy)
 		local config = { _coreUiHandle = nil }
 		
-		function config.mountCoreUI(p1) --[[ Line: 48 ]]
+		function config.mountCoreUI(p1)
 			-- upvalues: config (copy), v10 (upval), ReactModule (upval), EventInExperiencePromptsModule (upval)
 			config._coreUiHandle = v10(p1, {
 				EventInExperiencePrompts = ReactModule.createElement(EventInExperiencePromptsModule)
 			})
 		end
 		
-		function config.unMountCoreUI() --[[ Line: 54 ]]
+		function config.unMountCoreUI()
 			-- upvalues: config (copy), RoactCompatModule (upval)
 			if config._coreUiHandle then
 				RoactCompatModule.unmount(config._coreUiHandle)

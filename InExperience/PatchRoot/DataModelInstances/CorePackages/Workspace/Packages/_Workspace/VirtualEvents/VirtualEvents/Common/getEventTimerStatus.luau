@@ -3,7 +3,7 @@ local _ = require(VirtualEvents.Parent.GraphQLServer)
 local _ = require(VirtualEvents.Parent.VirtualEventsState)
 local GetVirtualEventDatesModule = require(VirtualEvents.Common.getVirtualEventDates)
 
-return function(p1, p2): string --[[ Line: 11 | Named "getEventTimerStatus" ]]
+return function(p1, p2): string
 	-- upvalues: GetVirtualEventDatesModule (copy)
 	local VirtualEventDatesModule = GetVirtualEventDatesModule(p1)
 	local UnixTimestampDelta = VirtualEventDatesModule.startDate.UnixTimestamp - p2.UnixTimestamp

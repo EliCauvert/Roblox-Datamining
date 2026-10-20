@@ -2,9 +2,9 @@
 local ReactModule = require(Parent.React)
 local ArgCheckModule = require(Parent.ArgCheck)
 
-return ReactModule.memo(function(p1) --[[ Line: 33 | Named "RowOfCollectionItems" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), ArgCheckModule (copy)
-	return ReactModule.createElement(ReactModule.Fragment, nil, (ReactModule.useMemo(function() --[[ Line: 35 ]]
+	return ReactModule.createElement(ReactModule.Fragment, nil, (ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), ReactModule (upval), ArgCheckModule (upval)
 		if p1.numToRender == 0 or p1.numItemsForSizing == 0 then
 			return nil

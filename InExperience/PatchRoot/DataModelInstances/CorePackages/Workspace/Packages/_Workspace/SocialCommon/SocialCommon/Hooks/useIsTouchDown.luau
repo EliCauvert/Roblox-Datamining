@@ -5,16 +5,16 @@ local ReactModule = require(Parent1.React)
 local UseEventConnectionFunction = require(Parent1.ReactUtils).useEventConnection
 local InputUtilitiesModule = require(Parent.Utils.InputUtilities)
 
-return function() --[[ Line: 13 ]]
+return function()
 	-- upvalues: ReactModule (copy), InputUtilitiesModule (copy), UseEventConnectionFunction (copy), UserInputService (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 22 ]]
+	local UseResult = ReactModule.useCallback(function(p1)
 		-- upvalues: InputUtilitiesModule (upval), UseStateResult2 (copy)
 		if InputUtilitiesModule.isTouchInput(p1) then
 			UseStateResult2(false)
 		end
 	end, { UseStateResult2 })
-	UseEventConnectionFunction(UserInputService.InputBegan, (ReactModule.useCallback(function(p1) --[[ Line: 16 ]]
+	UseEventConnectionFunction(UserInputService.InputBegan, (ReactModule.useCallback(function(p1)
 		-- upvalues: InputUtilitiesModule (upval), UseStateResult2 (copy)
 		if InputUtilitiesModule.isTouchInput(p1) then
 			UseStateResult2(true)

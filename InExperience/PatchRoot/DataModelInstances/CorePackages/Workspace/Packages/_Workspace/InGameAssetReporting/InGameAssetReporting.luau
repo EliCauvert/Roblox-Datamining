@@ -25,7 +25,7 @@ return {
 	interpretAnnotation = SceneAnalysisModule.interpretAnnotation,
 	extractItemsFromInterpretations = SceneAnalysisModule.extractItemsFromInterpretations,
 	__setRandomGenerator = SceneAnalysisModule.__setRandomGenerator,
-	initialize = function() --[[ Line: 41 ]]
+	initialize = function()
 		-- upvalues: InGameAssetReportModeModule (copy), FFlagHighlightModePreciseSelectionEnabled (copy), GetHighlightModeVariantModule (copy), HighlightModeVariants (copy), config (copy), ReactModule (copy), LayerCollectorProvider (copy), FoundationProvider (copy), RoactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), StyleProviderWithDefaultTheme (copy), MessageBusService (copy), CaptureModeMessageId (copy), ExperienceStateCaptureService (copy), CoreGui (copy)
 		local InGameAssetReportModeModule1 = InGameAssetReportModeModule
 		
@@ -49,17 +49,17 @@ return {
 					}, {
 						StyleProvider = ReactModule.createElement(StyleProviderWithDefaultTheme, { withDarkTheme = true }, {
 							InGameAssetReportUI = RoactModule.createElement(InGameAssetReportModeModule1, {
-								backAction = function() --[[ Line: 72 ]]
+								backAction = function()
 									-- upvalues: MessageBusService (upval), CaptureModeMessageId (upval), ExperienceStateCaptureService (upval)
 									MessageBusService:Publish(CaptureModeMessageId, { reason = "back" })
 									ExperienceStateCaptureService:ToggleCaptureMode()
 								end,
-								onReportComplete = function() --[[ Line: 76 ]]
+								onReportComplete = function()
 									-- upvalues: MessageBusService (upval), CaptureModeMessageId (upval), ExperienceStateCaptureService (upval)
 									MessageBusService:Publish(CaptureModeMessageId, { reason = "submit" })
 									ExperienceStateCaptureService:ToggleCaptureMode()
 								end,
-								getIsSmallPortraitMode = function(Vector): boolean --[[ Line: 80 ]]
+								getIsSmallPortraitMode = function(Vector): boolean
 									return Vector.X < Vector.Y and Vector.X < 800
 								end
 							})

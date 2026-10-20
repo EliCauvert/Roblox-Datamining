@@ -9,16 +9,16 @@ local Roact = DependenciesModule.Roact
 local Cryo = DependenciesModule.Cryo
 local GenericPagination = DependenciesModule.GenericPagination
 
-local function _(List, p1) --[[ Line: 16 | Named "formatMessage" ]]
+local function _(List, p1)
 	return table.concat(List, "\n"):format(unpack(p1 or {}))
 end
 
-return function(Callback) --[[ Line: 20 | Named "connect" ]]
+return function(Callback)
 	-- upvalues: Roact (copy), GenericPagination (copy), FetchInitSymbolModule (copy), FetchWithCursorSymbolModule (copy), Cryo (copy), LoadNextSymbolModule (copy), LoggerModule (copy), LoadPreviousSymbolModule (copy)
 	assert(Callback and type(Callback) == "function", "RoactPaginator.connect: parameters expected to be a function")
 	local Traceback = debug.traceback()
 	
-	return function(p1) --[[ Line: 24 ]]
+	return function(p1)
 		-- upvalues: Traceback (copy), Roact (upval), Callback (copy), GenericPagination (upval), FetchInitSymbolModule (upval), FetchWithCursorSymbolModule (upval), Cryo (upval), LoadNextSymbolModule (upval), LoggerModule (upval), LoadPreviousSymbolModule (upval)
 		if p1 == nil then
 			error(table.concat({
@@ -29,7 +29,7 @@ return function(Callback) --[[ Line: 20 | Named "connect" ]]
 		end
 		local ExtendResult = Roact.Component:extend((("PaginatorConnection(%s)"):format((tostring(p1)))))
 		
-		function ExtendResult.init(p2) --[[ Line: 41 ]]
+		function ExtendResult.init(p2)
 			-- upvalues: Callback (upval), GenericPagination (upval), FetchInitSymbolModule (upval), FetchWithCursorSymbolModule (upval)
 			local CallbackResult = Callback()
 			assert(CallbackResult, "RoactPaginator.connect: Expected parameters to return an object")
@@ -40,13 +40,13 @@ return function(Callback) --[[ Line: 20 | Named "connect" ]]
 			})
 		end
 		
-		function ExtendResult.render(p2) --[[ Line: 52 ]]
+		function ExtendResult.render(p2)
 			-- upvalues: Cryo (upval), LoadNextSymbolModule (upval), LoggerModule (upval), LoadPreviousSymbolModule (upval), Roact (upval), p1 (copy)
 			return Roact.createElement(p1, (Cryo.Dictionary.join(p2.props, {
-				[LoadNextSymbolModule] = function() --[[ Line: 54 ]]
+				[LoadNextSymbolModule] = function()
 					-- upvalues: p2 (copy), LoggerModule (upval)
 					if not p2.paginator:isFetching() then
-						p2.paginator:getNext():catch(function(Err) --[[ Line: 59 ]]
+						p2.paginator:getNext():catch(function(Err)
 							-- upvalues: LoggerModule (upval)
 							LoggerModule:error("Could not getNext. Got error: {}", Err)
 						end)
@@ -54,10 +54,10 @@ return function(Callback) --[[ Line: 20 | Named "connect" ]]
 						return
 					end
 				end,
-				[LoadPreviousSymbolModule] = function() --[[ Line: 63 ]]
+				[LoadPreviousSymbolModule] = function()
 					-- upvalues: p2 (copy), LoggerModule (upval)
 					if not p2.paginator:isFetching() then
-						p2.paginator:getPrevious():catch(function(Err) --[[ Line: 68 ]]
+						p2.paginator:getPrevious():catch(function(Err)
 							-- upvalues: LoggerModule (upval)
 							LoggerModule:error("Could not getPrevious. Got error: {}", Err)
 						end)

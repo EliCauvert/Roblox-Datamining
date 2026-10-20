@@ -2,7 +2,7 @@
 local BarGraphModule = {}
 BarGraphModule.__index = BarGraphModule
 
-function BarGraphModule.new(_showExtras) --[[ Line: 23 ]]
+function BarGraphModule.new(_showExtras)
 	-- upvalues: BarGraphModule (copy)
 	local t = {}
 	setmetatable(t, BarGraphModule)
@@ -25,7 +25,7 @@ function BarGraphModule.new(_showExtras) --[[ Line: 23 ]]
 	return t
 end
 
-function BarGraphModule:SetZIndex(ZIndex: number) --[[ Line: 53 ]]
+function BarGraphModule:SetZIndex(ZIndex: number)
 	self._barFrame.ZIndex = ZIndex
 	self._lineFrame.ZIndex = ZIndex + 1
 	
@@ -35,7 +35,7 @@ function BarGraphModule:SetZIndex(ZIndex: number) --[[ Line: 53 ]]
 	end
 end
 
-function BarGraphModule:PlaceInParent(Parent, Size, Position) --[[ Line: 62 ]]
+function BarGraphModule:PlaceInParent(Parent, Size, Position)
 	self._barFrame.Position = Position
 	self._barFrame.Size = Size
 	self._barFrame.Parent = Parent
@@ -44,24 +44,24 @@ function BarGraphModule:PlaceInParent(Parent, Size, Position) --[[ Line: 62 ]]
 	self._lineFrame.Parent = Parent
 end
 
-function BarGraphModule:SetAxisMax(_axisMax) --[[ Line: 71 ]]
+function BarGraphModule:SetAxisMax(_axisMax)
 	self._axisMax = _axisMax
 end
 
-function BarGraphModule:SetValues(_values) --[[ Line: 75 ]]
+function BarGraphModule:SetValues(_values)
 	self._values = _values
 end
 
-function BarGraphModule:SetAverage(_average) --[[ Line: 79 ]]
+function BarGraphModule:SetAverage(_average)
 	self._average = _average
 end
 
-function BarGraphModule:SetTarget(_target) --[[ Line: 83 ]]
+function BarGraphModule:SetTarget(_target)
 	self._target = _target
 	self:_moveGraphTarget()
 end
 
-function BarGraphModule:_updateBarCount(CountValues) --[[ Line: 90 ]]
+function BarGraphModule:_updateBarCount(CountValues)
 	local List = {}
 	local CountBars = #self._bars
 	
@@ -78,7 +78,7 @@ function BarGraphModule:_updateBarCount(CountValues) --[[ Line: 90 ]]
 	self._bars = List
 end
 
-function BarGraphModule:Render() --[[ Line: 113 ]]
+function BarGraphModule:Render()
 	local CountValues = #self._values
 	self:_updateBarCount(CountValues)
 	
@@ -90,7 +90,7 @@ function BarGraphModule:Render() --[[ Line: 113 ]]
 	end
 end
 
-function BarGraphModule:_addGraphTarget() --[[ Line: 128 ]]
+function BarGraphModule:_addGraphTarget()
 	-- upvalues: StatsUtilsModule (copy)
 	local TargetLine = Instance.new("ImageLabel")
 	TargetLine.Name = "TargetLine"
@@ -100,7 +100,7 @@ function BarGraphModule:_addGraphTarget() --[[ Line: 128 ]]
 	TargetLine.Parent = self._lineFrame
 	TargetLine.ZIndex = self._lineFrame.ZIndex
 	TargetLine.BorderSizePixel = 0
-	TargetLine.Changed:connect(function() --[[ Line: 140 ]]
+	TargetLine.Changed:connect(function()
 		-- upvalues: self (copy)
 		self:_updateTargetLineImageSize()
 	end)
@@ -108,11 +108,11 @@ function BarGraphModule:_addGraphTarget() --[[ Line: 128 ]]
 	self:_updateTargetLineImageSize()
 end
 
-function BarGraphModule:_updateTargetLineImageSize() --[[ Line: 148 ]]
+function BarGraphModule:_updateTargetLineImageSize()
 	self._targetLine.ImageRectSize = self._targetLine.AbsoluteSize
 end
 
-function BarGraphModule:_addGraphAverage() --[[ Line: 152 ]]
+function BarGraphModule:_addGraphAverage()
 	-- upvalues: StatsUtilsModule (copy)
 	local AverageLine = Instance.new("Frame")
 	AverageLine.Name = "AverageLine"
@@ -123,7 +123,7 @@ function BarGraphModule:_addGraphAverage() --[[ Line: 152 ]]
 	self._averageLine = AverageLine
 end
 
-function BarGraphModule:_moveGraphTarget() --[[ Line: 166 ]]
+function BarGraphModule:_moveGraphTarget()
 	-- upvalues: StatsUtilsModule (copy)
 	if self._targetLine ~= nil then
 		self._targetLine.Position = UDim2.new(0, 0, (self._axisMax - self._target) / self._axisMax, -StatsUtilsModule.GraphTargetLineInnerThickness / 2)
@@ -132,7 +132,7 @@ function BarGraphModule:_moveGraphTarget() --[[ Line: 166 ]]
 	end
 end
 
-function BarGraphModule:_moveGraphAverage() --[[ Line: 177 ]]
+function BarGraphModule:_moveGraphAverage()
 	-- upvalues: StatsUtilsModule (copy)
 	if self._averageLine ~= nil then
 		self._averageLine.Position = UDim2.new(0, 0, (self._axisMax - math.min(self._average, self._axisMax)) / self._axisMax, -StatsUtilsModule.GraphAverageLineTotalThickness / 2)
@@ -141,7 +141,7 @@ function BarGraphModule:_moveGraphAverage() --[[ Line: 177 ]]
 	end
 end
 
-function BarGraphModule:_makeNthBar(p1: number) --[[ Line: 192 ]]
+function BarGraphModule:_makeNthBar(p1: number)
 	local Frame = Instance.new("Frame")
 	Frame.Name = string.format("Bar_%d", p1 - 1)
 	Frame.Parent = self._barFrame
@@ -151,7 +151,7 @@ function BarGraphModule:_makeNthBar(p1: number) --[[ Line: 192 ]]
 	return Frame
 end
 
-function BarGraphModule:_updateBar(p1: number, p2: number, CountValues: number) --[[ Line: 203 ]]
+function BarGraphModule:_updateBar(p1: number, p2: number, CountValues: number)
 	-- upvalues: StatsUtilsModule (copy)
 	local Bar = self._bars[p1]
 	local Largest = math.max(0, (math.min(p2, self._axisMax)))

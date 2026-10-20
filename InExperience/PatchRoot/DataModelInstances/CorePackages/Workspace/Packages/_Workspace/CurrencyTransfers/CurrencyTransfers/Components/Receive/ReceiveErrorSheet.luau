@@ -21,7 +21,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local FailureReasonModule = require(CurrencyTransfers.Enums.FailureReason)
 local UseTransferStoreModule = require(CurrencyTransfers.Hooks.useTransferStore)
 
-local function _(TransferDisabledForUser, p1, p2) --[[ Line: 38 | Named "getErrorMessageAndButton" ]]
+local function _(TransferDisabledForUser, p1, p2)
 	-- upvalues: FailureReasonModule (copy), TransferLocaleFormatModule (copy)
 	if not TransferDisabledForUser then
 		return p1.GenericError, p1.TryAgain
@@ -43,7 +43,7 @@ end
 local GetFFlagCurrencyTransferFocusNavigationModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferFocusNavigation)
 local UseTransferSheetFocusModule = require(CurrencyTransfers.Hooks.useTransferSheetFocus)
 
-return function(_) --[[ Line: 67 | Named "ReceiveErrorSheet" ]]
+return function(_)
 	-- upvalues: UseTransferStoreModule (copy), UseTokensFunction (copy), SignalsReactModule (copy), FailureReasonModule (copy), ReactModule (copy), GetTransferRequestByIdRequestModule (copy), UseUserNameFromUserIdModule (copy), UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), TransferLocaleFormatModule (copy), GetFFlagCurrencyTransferFocusNavigationModule (copy), UseTransferSheetFocusModule (copy), Sheet (copy), UseScaledValueFunction (copy), View (copy), Icon (copy), Enums (copy), Text (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
 	local UseTransferStoreModuleResult = UseTransferStoreModule()
 	local UseTokensResult = UseTokensFunction()
@@ -54,15 +54,15 @@ return function(_) --[[ Line: 67 | Named "ReceiveErrorSheet" ]]
 	local TriggerOnClose = UseTransferStoreModuleResult.triggerOnClose
 	local FailureReason = if UseSignalStateResult then UseSignalStateResult.failureReason else nil
 	local IsFailureReasonMatch = FailureReason == FailureReasonModule.TransferExpired
-	ReactModule.useEffect(function() --[[ Line: 84 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsFailureReasonMatch (copy), UseSignalStateResult1 (copy), UseSignalStateResult2 (copy), UseSignalStateResult3 (copy), GetTransferRequestByIdRequestModule (upval), UseTransferStoreModuleResult (copy)
 		if IsFailureReasonMatch and not UseSignalStateResult1 and (not UseSignalStateResult2 or not UseSignalStateResult2.sender) and UseSignalStateResult3 then
-			GetTransferRequestByIdRequestModule({ transferRequestId = UseSignalStateResult3 }, nil, UseTransferStoreModuleResult.getNetworkImpl()):andThen(function(Result) --[[ Line: 94 ]]
+			GetTransferRequestByIdRequestModule({ transferRequestId = UseSignalStateResult3 }, nil, UseTransferStoreModuleResult.getNetworkImpl()):andThen(function(Result)
 				-- upvalues: UseTransferStoreModuleResult (upval)
 				if Result and Result.transfer and Result.transfer.sender then
 					UseTransferStoreModuleResult.setSender(Result.transfer.sender)
 				end
-			end):catch(function() --[[ Line: 99 ]] end)
+			end):catch(function() end)
 			
 			return
 		end

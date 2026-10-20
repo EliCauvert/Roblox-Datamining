@@ -1,4 +1,4 @@
-﻿local function serializeTable(List, Text, p1, p2): string --[[ Line: 3 ]]
+﻿local function serializeTable(List, Text, p1, p2): string
 	-- upvalues: serializeTable (copy)
 	local P2 = p1 or false
 	local Count = p2 or 0

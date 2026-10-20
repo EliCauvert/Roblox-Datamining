@@ -2,10 +2,10 @@
 local EngineFeature = game:GetEngineFeature(ConstantsModule.UNIVERSAL_APP_CONTACT_IMPORTER_STORAGE_KEYS)
 
 return {
-	getLastOSPermissionSettings = function(_, p1): boolean --[[ Line: 8 ]]
+	getLastOSPermissionSettings = function(_, p1): boolean
 		-- upvalues: EngineFeature (copy), ConstantsModule (copy)
 		if EngineFeature then
-			local Success, Result = pcall(function() --[[ Line: 14 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: p1 (copy), ConstantsModule (upval)
 				return p1:GetItem(ConstantsModule.LOCAL_STORAGE_KEY_LAST_CONTACTS_OS_PERMISSIONS)
 			end)
@@ -15,10 +15,10 @@ return {
 			return true
 		end
 	end,
-	updateOSPermissionSettings = function(_, p1, p2) --[[ Line: 25 ]]
+	updateOSPermissionSettings = function(_, p1, p2)
 		-- upvalues: EngineFeature (copy), ConstantsModule (copy)
 		if EngineFeature then
-			pcall(function() --[[ Line: 30 ]]
+			pcall(function()
 				-- upvalues: p1 (copy), ConstantsModule (upval), p2 (copy)
 				p1:SetItem(ConstantsModule.LOCAL_STORAGE_KEY_LAST_CONTACTS_OS_PERMISSIONS, (tostring(p2)))
 				p1:Flush()

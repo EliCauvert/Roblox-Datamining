@@ -9,7 +9,7 @@ local Frozen = table.freeze({
 	placements = table.freeze({})
 })
 
-return function(p1) --[[ Line: 34 | Named "buildPlacementPlan" ]]
+return function(p1)
 	-- upvalues: Frozen (copy), PlacementTypesModule (copy)
 	if #p1.stickyIndices == 0 and p1.pinnedStartItem == nil and p1.pinnedEndItem == nil then
 		return Frozen

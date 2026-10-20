@@ -9,7 +9,7 @@ local IconSize = FoundationModule.Enums.IconSize
 local IconVariant = FoundationModule.Enums.IconVariant
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1) --[[ Line: 23 | Named "MomentEngagementCount" ]]
+return function(p1)
 	-- upvalues: UseAbbreviatedNumberLocalizationFunction (copy), UseTokensFunction (copy), ReactModule (copy), View (copy), Icon (copy), IconSize (copy), IconVariant (copy), Text (copy)
 	local UseAbbreviatedNumberLocalizationResult = UseAbbreviatedNumberLocalizationFunction(p1.count or 0)
 	local UseTokensResult = UseTokensFunction()

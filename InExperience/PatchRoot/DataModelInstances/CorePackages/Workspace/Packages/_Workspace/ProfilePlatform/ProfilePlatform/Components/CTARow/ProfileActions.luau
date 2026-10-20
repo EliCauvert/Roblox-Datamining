@@ -28,9 +28,9 @@ end
 if FFlagJoinabilityCTARefactor then
 	table.insert(List, PlayExperienceActionModule)
 end
-local function _(Value, Callback) --[[ Line: 70 | Named "withValidation" ]]
+local function _(Value, Callback)
 	-- upvalues: SupportedProfileTypesModule (copy)
-	return function(p1) --[[ Line: 71 ]]
+	return function(p1)
 		-- upvalues: Callback (copy), Value (copy), SupportedProfileTypesModule (upval)
 		local CallbackResult = Callback(p1)
 		
@@ -50,7 +50,7 @@ for _, value in List do
 	for i, value2 in value do
 		assert(t[i] == nil, "Duplicate ProfileAction key: " .. tostring(i))
 		
-		t[i] = function(p1) --[[ Line: 71 ]]
+		t[i] = function(p1)
 			-- upvalues: value2 (copy), i (copy), SupportedProfileTypesModule (copy)
 			local CallbackResult = value2(p1)
 			

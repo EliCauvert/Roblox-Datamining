@@ -3,13 +3,13 @@ local Players = game:GetService("Players")
 local CoreScriptsProfilerModule = {}
 CoreScriptsProfilerModule.__index = CoreScriptsProfilerModule
 
-function CoreScriptsProfilerModule.new(Callback) --[[ Line: 37 ]]
+function CoreScriptsProfilerModule.new(Callback)
 	-- upvalues: CoreScriptsProfilerModule (copy), Players (copy), ScriptProfilerService (copy)
 	local self = setmetatable({}, CoreScriptsProfilerModule)
 	self._isProfiling = false
 	self._isClient = false
 	self._player = Players.LocalPlayer
-	self._connection = if Callback then ScriptProfilerService.OnNewData:Connect(function(Player, JsonString) --[[ Line: 45 ]]
+	self._connection = if Callback then ScriptProfilerService.OnNewData:Connect(function(Player, JsonString)
 		-- upvalues: Callback (copy)
 		local HasPlayer = Player ~= nil
 		
@@ -21,7 +21,7 @@ function CoreScriptsProfilerModule.new(Callback) --[[ Line: 37 ]]
 	return self
 end
 
-function CoreScriptsProfilerModule:ClientStart(Player) --[[ Line: 58 ]]
+function CoreScriptsProfilerModule:ClientStart(Player)
 	-- upvalues: ScriptProfilerService (copy)
 	if not self._isProfiling then
 		ScriptProfilerService:ClientStart(self._player, Player or 1000)
@@ -32,7 +32,7 @@ function CoreScriptsProfilerModule:ClientStart(Player) --[[ Line: 58 ]]
 	end
 end
 
-function CoreScriptsProfilerModule:ClientStop() --[[ Line: 70 ]]
+function CoreScriptsProfilerModule:ClientStop()
 	-- upvalues: ScriptProfilerService (copy)
 	if self._isProfiling and self._isClient then
 		ScriptProfilerService:ClientStop(self._player)
@@ -44,7 +44,7 @@ function CoreScriptsProfilerModule:ClientStop() --[[ Line: 70 ]]
 	end
 end
 
-function CoreScriptsProfilerModule:ServerStart(p1) --[[ Line: 82 ]]
+function CoreScriptsProfilerModule:ServerStart(p1)
 	-- upvalues: ScriptProfilerService (copy)
 	if not self._isProfiling then
 		ScriptProfilerService:ServerStart(p1 or 1000)
@@ -55,7 +55,7 @@ function CoreScriptsProfilerModule:ServerStart(p1) --[[ Line: 82 ]]
 	end
 end
 
-function CoreScriptsProfilerModule:ServerStop() --[[ Line: 94 ]]
+function CoreScriptsProfilerModule:ServerStop()
 	-- upvalues: ScriptProfilerService (copy)
 	if self._isProfiling and not self._isClient then
 		ScriptProfilerService:ServerStop()
@@ -66,11 +66,11 @@ function CoreScriptsProfilerModule:ServerStop() --[[ Line: 94 ]]
 	end
 end
 
-function CoreScriptsProfilerModule:IsProfiling() --[[ Line: 105 ]]
+function CoreScriptsProfilerModule:IsProfiling()
 	return self._isProfiling
 end
 
-function CoreScriptsProfilerModule:Disconnect() --[[ Line: 109 ]]
+function CoreScriptsProfilerModule:Disconnect()
 	if self._connection then
 		self._connection:Disconnect()
 		self._connection = nil

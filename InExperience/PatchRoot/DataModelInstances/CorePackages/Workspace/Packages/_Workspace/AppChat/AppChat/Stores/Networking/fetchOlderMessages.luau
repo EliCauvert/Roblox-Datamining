@@ -5,7 +5,7 @@ local PromiseModule = require(Parent.Promise)
 local GetConversationMessageListStoreModule = require(AppChat.Stores.GetConversationMessageListStore)
 local IngestOlderMessagesModule = require(AppChat.Stores.Ingestion.ingestOlderMessages)
 
-return function(p1) --[[ Line: 27 | Named "fetchOlderMessages" ]]
+return function(p1)
 	-- upvalues: GetConversationMessageListStoreModule (copy), PromiseModule (copy), AppChatNetworkingModule (copy), IngestOlderMessagesModule (copy)
 	local ConversationMessageListStoreModule = GetConversationMessageListStoreModule(false)
 	local Metadata = ConversationMessageListStoreModule.getMetadata(p1, false)
@@ -16,7 +16,7 @@ return function(p1) --[[ Line: 27 | Named "fetchOlderMessages" ]]
 		local NextPageCursor = Metadata and Metadata.nextPageCursor or nil
 		ConversationMessageListStoreModule.setLoading(p1, true)
 		
-		return AppChatNetworkingModule.http.GetConversationMessages(nil, p1, NextPageCursor):andThen(function(Result) --[[ Line: 39 ]]
+		return AppChatNetworkingModule.http.GetConversationMessages(nil, p1, NextPageCursor):andThen(function(Result)
 			-- upvalues: IngestOlderMessagesModule (upval), p1 (copy)
 			local ResponseBody = Result and Result.responseBody
 			
@@ -24,7 +24,7 @@ return function(p1) --[[ Line: 27 | Named "fetchOlderMessages" ]]
 				response = Result,
 				ingestedIds = IngestOlderMessagesModule(p1, if ResponseBody then ResponseBody.messages or {} else {}, if ResponseBody then ResponseBody.next_cursor else nil)
 			}
-		end):catch(function(Err) --[[ Line: 48 ]]
+		end):catch(function(Err)
 			-- upvalues: ConversationMessageListStoreModule (copy), p1 (copy), PromiseModule (upval)
 			ConversationMessageListStoreModule.setLoading(p1, false)
 			

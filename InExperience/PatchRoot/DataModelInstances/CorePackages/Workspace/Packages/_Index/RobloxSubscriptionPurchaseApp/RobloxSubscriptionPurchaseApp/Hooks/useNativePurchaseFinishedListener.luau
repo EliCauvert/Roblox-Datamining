@@ -7,24 +7,24 @@ local CompleteRobloxSubscriptionUpsellFlowModule = require(RobloxSubscriptionPur
 local FFlagEnableHeadlessSubscriptionNativePurchaseCancelCallbackModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagEnableHeadlessSubscriptionNativePurchaseCancelCallback)
 local FFlagLuaAppEnableNativePurchaseFinishedV2Signals = require(Parent.SharedFlags).FFlagLuaAppEnableNativePurchaseFinishedV2Signals
 
-local function useNativePurchaseFinishedListenerLegacy(p1, p2, Callback1, Callback) --[[ Line: 16 ]]
+local function useNativePurchaseFinishedListenerLegacy(p1, p2, Callback1, Callback)
 	-- upvalues: RobloxSubscriptionStoreModule (copy), ReactModule (copy), PromptStateModule (copy), CompleteRobloxSubscriptionUpsellFlowModule (copy), FFlagLuaAppEnableNativePurchaseFinishedV2Signals (copy)
 	local UseRefResult = ReactModule.useRef((RobloxSubscriptionStoreModule.get()))
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 25 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
-		return if p1 then p1 else function() --[[ Line: 29 ]]
+		return if p1 then p1 else function()
 			return game:GetService("MarketplaceService").NativePurchaseFinishedWithLocalPlayer
 		end
 	end, { p1 })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 35 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: p2 (copy)
-		return if p2 then p2 else function() --[[ Line: 39 ]]
+		return if p2 then p2 else function()
 			return game:GetService("MarketplaceService").NativePurchaseFinished
 		end
 	end, { p2 })
-	ReactModule.useEffect(function() --[[ Line: 46 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy), UseRefResult (copy), PromptStateModule (upval), CompleteRobloxSubscriptionUpsellFlowModule (upval), UseMemoResult1 (copy), FFlagLuaAppEnableNativePurchaseFinishedV2Signals (upval), Callback1 (copy), Callback (copy)
-		local Connection = UseMemoResult():Connect(function(_, p3) --[[ Line: 48 ]]
+		local Connection = UseMemoResult():Connect(function(_, p3)
 			-- upvalues: UseRefResult (upval), PromptStateModule (upval), CompleteRobloxSubscriptionUpsellFlowModule (upval)
 			local Current = UseRefResult.current
 			
@@ -39,7 +39,7 @@ local function useNativePurchaseFinishedListenerLegacy(p1, p2, Callback1, Callba
 				end
 			end
 		end)
-		local Connection1 = UseMemoResult1():Connect(function(_, _, p3) --[[ Line: 63 ]]
+		local Connection1 = UseMemoResult1():Connect(function(_, _, p3)
 			-- upvalues: UseRefResult (upval), PromptStateModule (upval), CompleteRobloxSubscriptionUpsellFlowModule (upval)
 			local Current = UseRefResult.current
 			
@@ -58,7 +58,7 @@ local function useNativePurchaseFinishedListenerLegacy(p1, p2, Callback1, Callba
 		local Connection3 = nil
 		
 		if FFlagLuaAppEnableNativePurchaseFinishedV2Signals then
-			Connection2 = (if Callback1 then Callback1() else game:GetService("MarketplaceService").NativePurchaseFinishedWithLocalPlayerV2):Connect(function(_, p3, _) --[[ Line: 85 ]]
+			Connection2 = (if Callback1 then Callback1() else game:GetService("MarketplaceService").NativePurchaseFinishedWithLocalPlayerV2):Connect(function(_, p3, _)
 				-- upvalues: UseRefResult (upval), PromptStateModule (upval), CompleteRobloxSubscriptionUpsellFlowModule (upval)
 				local Current = UseRefResult.current
 				
@@ -73,7 +73,7 @@ local function useNativePurchaseFinishedListenerLegacy(p1, p2, Callback1, Callba
 					end
 				end
 			end)
-			Connection3 = (if Callback then Callback() else game:GetService("MarketplaceService").NativePurchaseFinishedV2):Connect(function(_, _, p3, _) --[[ Line: 102 ]]
+			Connection3 = (if Callback then Callback() else game:GetService("MarketplaceService").NativePurchaseFinishedV2):Connect(function(_, _, p3, _)
 				-- upvalues: UseRefResult (upval), PromptStateModule (upval), CompleteRobloxSubscriptionUpsellFlowModule (upval)
 				local Current = UseRefResult.current
 				
@@ -89,7 +89,7 @@ local function useNativePurchaseFinishedListenerLegacy(p1, p2, Callback1, Callba
 				end
 			end)
 		end
-		return function() --[[ Line: 116 ]]
+		return function()
 			-- upvalues: Connection (copy), Connection1 (copy), Connection2 (ref), Connection3 (ref)
 			if Connection then
 				Connection:Disconnect()
@@ -107,25 +107,25 @@ local function useNativePurchaseFinishedListenerLegacy(p1, p2, Callback1, Callba
 	end, { UseMemoResult, UseMemoResult1, Callback1, Callback })
 end
 
-local function useNativePurchaseFinishedListenerWithCancelCallback(p1, p2, Current, Callback, Callback1) --[[ Line: 141 ]]
+local function useNativePurchaseFinishedListenerWithCancelCallback(p1, p2, Current, Callback, Callback1)
 	-- upvalues: RobloxSubscriptionStoreModule (copy), ReactModule (copy), PromptStateModule (copy), CompleteRobloxSubscriptionUpsellFlowModule (copy), FFlagLuaAppEnableNativePurchaseFinishedV2Signals (copy)
 	local UseRefResult = ReactModule.useRef((RobloxSubscriptionStoreModule.get()))
 	local UseRefResult1 = ReactModule.useRef(Current)
 	UseRefResult1.current = Current
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 153 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
-		return if p1 then p1 else function() --[[ Line: 157 ]]
+		return if p1 then p1 else function()
 			return game:GetService("MarketplaceService").NativePurchaseFinishedWithLocalPlayer
 		end
 	end, { p1 })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 163 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: p2 (copy)
-		return if p2 then p2 else function() --[[ Line: 167 ]]
+		return if p2 then p2 else function()
 			return game:GetService("MarketplaceService").NativePurchaseFinished
 		end
 	end, { p2 })
 	
-	local function onNativePurchaseFinished(_, p3) --[[ Line: 173 ]]
+	local function onNativePurchaseFinished(_, p3)
 		-- upvalues: UseRefResult (copy), PromptStateModule (upval), CompleteRobloxSubscriptionUpsellFlowModule (upval), UseRefResult1 (copy)
 		local Current = UseRefResult.current
 		
@@ -145,13 +145,13 @@ local function useNativePurchaseFinishedListenerWithCancelCallback(p1, p2, Curre
 		end
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 191 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy), onNativePurchaseFinished (copy), UseMemoResult1 (copy), FFlagLuaAppEnableNativePurchaseFinishedV2Signals (upval), Callback (copy), Callback1 (copy)
-		local Connection = UseMemoResult():Connect(function(p3, p4) --[[ Line: 193 ]]
+		local Connection = UseMemoResult():Connect(function(p3, p4)
 			-- upvalues: onNativePurchaseFinished (upval)
 			onNativePurchaseFinished(p3, p4)
 		end)
-		local Connection1 = UseMemoResult1():Connect(function(_, p3, p4) --[[ Line: 199 ]]
+		local Connection1 = UseMemoResult1():Connect(function(_, p3, p4)
 			-- upvalues: onNativePurchaseFinished (upval)
 			onNativePurchaseFinished(p3, p4)
 		end)
@@ -159,16 +159,16 @@ local function useNativePurchaseFinishedListenerWithCancelCallback(p1, p2, Curre
 		local Connection3 = nil
 		
 		if FFlagLuaAppEnableNativePurchaseFinishedV2Signals then
-			Connection2 = (if Callback then Callback() else game:GetService("MarketplaceService").NativePurchaseFinishedWithLocalPlayerV2):Connect(function(p3, p4, _) --[[ Line: 212 ]]
+			Connection2 = (if Callback then Callback() else game:GetService("MarketplaceService").NativePurchaseFinishedWithLocalPlayerV2):Connect(function(p3, p4, _)
 				-- upvalues: onNativePurchaseFinished (upval)
 				onNativePurchaseFinished(p3, p4)
 			end)
-			Connection3 = (if Callback1 then Callback1() else game:GetService("MarketplaceService").NativePurchaseFinishedV2):Connect(function(_, p3, p4, _) --[[ Line: 221 ]]
+			Connection3 = (if Callback1 then Callback1() else game:GetService("MarketplaceService").NativePurchaseFinishedV2):Connect(function(_, p3, p4, _)
 				-- upvalues: onNativePurchaseFinished (upval)
 				onNativePurchaseFinished(p3, p4)
 			end)
 		end
-		return function() --[[ Line: 227 ]]
+		return function()
 			-- upvalues: Connection (copy), Connection1 (copy), Connection2 (ref), Connection3 (ref)
 			if Connection then
 				Connection:Disconnect()
@@ -186,7 +186,7 @@ local function useNativePurchaseFinishedListenerWithCancelCallback(p1, p2, Curre
 	end, { UseMemoResult, UseMemoResult1, Callback, Callback1 })
 end
 
-return function(p1, p2, Current, p3, p4) --[[ Line: 255 | Named "useNativePurchaseFinishedListener" ]]
+return function(p1, p2, Current, p3, p4)
 	-- upvalues: FFlagEnableHeadlessSubscriptionNativePurchaseCancelCallbackModule (copy), useNativePurchaseFinishedListenerWithCancelCallback (copy), useNativePurchaseFinishedListenerLegacy (copy)
 	if FFlagEnableHeadlessSubscriptionNativePurchaseCancelCallbackModule then
 		useNativePurchaseFinishedListenerWithCancelCallback(p1, p2, Current, p3, p4)

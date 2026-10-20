@@ -9,14 +9,14 @@ local AppChatGlobalSwipeTracking = game:DefineFastFlag("AppChatGlobalSwipeTracki
 local Current = nil
 local config = { frequency = 4, dampingRatio = 0.8 }
 local config1 = {
-	onSwipeComplete = function() --[[ Line: 35 ]] end,
+	onSwipeComplete = function() end,
 	direction = SwipeDirectionModule.Right,
 	swipeStartThreshold = game:DefineFastInt("AppChatSwipeStartThreshold", 10),
 	swipeCompleteThreshold = game:DefineFastInt("AppChatSwipeCompleteThreshold", 50),
 	swipeMaxVerticalDrift = game:DefineFastInt("AppChatSwipeMaxVerticalDrift", 35)
 }
 
-return function(p1) --[[ Line: 48 | Named "useSwipeGesture" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config1 (copy), ReactModule (copy), FFlagAppChatSwipeGestureLatestConfigModule (copy), ReactOtterModule (copy), AppChatGlobalSwipeTracking (copy), Current (ref), config (copy), SwipeDirectionModule (copy)
 	local UnionResult = CryoModule.Dictionary.union(config1, p1)
 	local UseRefResult = ReactModule.useRef(UnionResult)
@@ -25,9 +25,9 @@ return function(p1) --[[ Line: 48 | Named "useSwipeGesture" ]]
 		UseRefResult.current = UnionResult
 	end
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 56 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseAnimatedBindingResult (copy), UnionResult (copy)
-		return UseAnimatedBindingResult:map(function(p2): number --[[ Line: 57 ]]
+		return UseAnimatedBindingResult:map(function(p2): number
 			-- upvalues: UnionResult (upval)
 			return (math.clamp(p2 / UnionResult.swipeCompleteThreshold, 0, 1))
 		end)
@@ -39,14 +39,14 @@ return function(p1) --[[ Line: 48 | Named "useSwipeGesture" ]]
 	local UseRefResult2 = ReactModule.useRef(nil)
 	local UseRefResult3 = ReactModule.useRef(Vector2.zero)
 	local UseRefResult4 = ReactModule.useRef(false)
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 67 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseRefResult1 (copy), AppChatGlobalSwipeTracking (upval), Current (upval), UseRefResult3 (copy), UseRefResult2 (copy), UseRefResult4 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval), UseRefResult (copy)
 		return {
-			getActiveInput = function() --[[ Line: 68 ]]
+			getActiveInput = function()
 				-- upvalues: UseRefResult1 (upval)
 				return UseRefResult1.current
 			end,
-			setOffset = function(Largest) --[[ Line: 99 ]]
+			setOffset = function(Largest)
 				-- upvalues: UseRefResult (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval), UseRefResult4 (upval)
 				local Current = UseRefResult.current
 				UseAnimatedBindingResult2(ReactOtterModule.spring(Largest, config))
@@ -63,23 +63,23 @@ return function(p1) --[[ Line: 48 | Named "useSwipeGesture" ]]
 					UseRefResult4.current = false
 				end
 			end,
-			isPastCompleteThreshold = function() --[[ Line: 96 ]]
+			isPastCompleteThreshold = function()
 				-- upvalues: UseRefResult4 (upval)
 				return UseRefResult4.current
 			end,
-			startSwipe = function(Current1, Callback) --[[ Line: 71 ]]
+			startSwipe = function(Current1, Callback)
 				-- upvalues: AppChatGlobalSwipeTracking (upval), Current (upval), UseRefResult1 (upval), UseRefResult3 (upval), UseRefResult2 (upval)
 				if AppChatGlobalSwipeTracking then
 					Current = Current1
 				end
 				UseRefResult1.current = Current1
 				UseRefResult3.current = Vector2.new(Current1.Position.X, Current1.Position.Y)
-				UseRefResult2.current = Current1.Changed:Connect(function() --[[ Line: 77 ]]
+				UseRefResult2.current = Current1.Changed:Connect(function()
 					-- upvalues: Callback (copy)
 					Callback()
 				end)
 			end,
-			resetSwipe = function() --[[ Line: 87 ]]
+			resetSwipe = function()
 				-- upvalues: AppChatGlobalSwipeTracking (upval), Current (upval), UseRefResult1 (upval), UseRefResult4 (upval), UseRefResult2 (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval)
 				if AppChatGlobalSwipeTracking and Current == UseRefResult1.current then
 					Current = nil
@@ -93,7 +93,7 @@ return function(p1) --[[ Line: 48 | Named "useSwipeGesture" ]]
 				end
 				UseAnimatedBindingResult2(ReactOtterModule.spring(0, config))
 			end,
-			disconnectInputListener = function() --[[ Line: 81 ]]
+			disconnectInputListener = function()
 				-- upvalues: UseRefResult2 (upval)
 				if UseRefResult2.current then
 					UseRefResult2.current:Disconnect()
@@ -102,7 +102,7 @@ return function(p1) --[[ Line: 48 | Named "useSwipeGesture" ]]
 			end
 		}
 	end, { UseAnimatedBindingResult2 })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 121 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UseMemoResult1 (copy), UseRefResult3 (copy), SwipeDirectionModule (upval)
 		local Current = UseRefResult.current
 		local ActiveInput = UseMemoResult1.getActiveInput()
@@ -129,11 +129,11 @@ return function(p1) --[[ Line: 48 | Named "useSwipeGesture" ]]
 			end
 		end
 	end, { UseMemoResult1 })
-	ReactModule.useEffect(function() --[[ Line: 154 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult1 (copy)
 		return UseMemoResult1.resetSwipe
 	end, { UseMemoResult1.resetSwipe })
-	local UseResult1 = ReactModule.useCallback(function(_, Input) --[[ Line: 158 ]]
+	local UseResult1 = ReactModule.useCallback(function(_, Input)
 		-- upvalues: AppChatGlobalSwipeTracking (upval), Current (upval), UseMemoResult1 (copy), UseResult (copy)
 		if AppChatGlobalSwipeTracking and Current ~= nil then return end
 		if UseMemoResult1.getActiveInput() ~= nil then return end
@@ -142,7 +142,7 @@ return function(p1) --[[ Line: 48 | Named "useSwipeGesture" ]]
 		end
 	end, { UseMemoResult1, UseResult })
 	
-	return ReactModule.useMemo(function() --[[ Line: 176 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: UseAnimatedBindingResult (copy), UseMemoResult (copy), UseResult1 (copy)
 		return {
 			swipeOffset = UseAnimatedBindingResult,

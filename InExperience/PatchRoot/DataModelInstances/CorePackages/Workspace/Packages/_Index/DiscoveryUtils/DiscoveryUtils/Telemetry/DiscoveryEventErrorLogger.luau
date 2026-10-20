@@ -21,7 +21,7 @@ local config1 = {
 }
 
 return {
-	reportError = function(ErrorType, ErrorMessage, p1) --[[ Line: 33 ]]
+	reportError = function(ErrorType, ErrorMessage, p1)
 		-- upvalues: TelemetryService (copy), config1 (copy), config (copy), UpdateDiscoveryEventErrorDetailsLogging (copy), CryoModule (copy)
 		if not _G.__TESTEZ_RUNNING_TEST__ then
 			warn(`[DiscoveryEventErrorLogger]\nError Type: {ErrorType}\nError Message: {ErrorMessage}`)

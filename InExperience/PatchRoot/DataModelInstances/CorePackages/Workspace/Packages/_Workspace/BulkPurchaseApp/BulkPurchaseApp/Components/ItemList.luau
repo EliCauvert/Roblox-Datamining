@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local CatalogRowItemCard = require(Parent.AvatarExperienceCommon).Components.CatalogItemCard.CatalogRowItemCard
 
-return function(Frame) --[[ Line: 17 | Named "ItemList" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), CatalogRowItemCard (copy)
 	local UseTokensResult = UseTokensFunction()
 	local config = {

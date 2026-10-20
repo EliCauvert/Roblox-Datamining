@@ -1,6 +1,6 @@
 ﻿local JsonModule = {}
 
-local function kind_of(List): string --[[ Line: 5 ]]
+local function kind_of(List): string
 	if type(List) ~= "table" then
 		return (type(List))
 	end
@@ -15,7 +15,7 @@ local function kind_of(List): string --[[ Line: 5 ]]
 	return if Count == 1 then "table" else "array"
 end
 
-local function escape_str(Text: string): string --[[ Line: 24 ]]
+local function escape_str(Text: string): string
 	local list = {
 		"\\", "\"", "/", "b", "f", "n", "r", "t"
 	}
@@ -28,7 +28,7 @@ local function escape_str(Text: string): string --[[ Line: 24 ]]
 	return Text
 end
 
-function JsonModule.stringify(List, p1): string --[[ Line: 33 ]]
+function JsonModule.stringify(List, p1): string
 	-- upvalues: kind_of (copy), JsonModule (copy), escape_str (copy)
 	local StringifyResults = {}
 	local Kind_ofResult = kind_of(List)

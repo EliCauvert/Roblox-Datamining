@@ -3,7 +3,7 @@ local Parent = script.Parent
 local GlobalConfigModule = require(Parent.GlobalConfig)
 local ReducerModule = require(Parent.reducer)
 
-return function() --[[ Line: 11 | Named "createStore" ]]
+return function()
 	-- upvalues: Rodux (copy), GlobalConfigModule (copy), ReducerModule (copy)
 	local List = { Rodux.thunkMiddleware }
 	

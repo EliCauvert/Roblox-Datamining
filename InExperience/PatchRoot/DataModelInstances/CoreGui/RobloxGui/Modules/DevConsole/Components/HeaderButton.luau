@@ -4,7 +4,7 @@ local MainWindowHeader = ConstantsModule.Font.MainWindowHeader
 local MainWindowHeader1 = ConstantsModule.DefaultFontSize.MainWindowHeader
 local Text = ConstantsModule.Color.Text
 
-return function(p1) --[[ Line: 18 | Named "HeaderButton" ]]
+return function(p1)
 	-- upvalues: RoactModule (copy), MainWindowHeader1 (copy), Text (copy), MainWindowHeader (copy)
 	local Text1 = p1.text
 	local SortfunctionFunction = p1.sortfunction
@@ -18,7 +18,7 @@ return function(p1) --[[ Line: 18 | Named "HeaderButton" ]]
 		Size = p1.size,
 		Position = p1.pos,
 		BackgroundTransparency = 1,
-		[RoactModule.Event.Activated] = function() --[[ Line: 35 ]]
+		[RoactModule.Event.Activated] = function()
 			-- upvalues: SortfunctionFunction (copy), Text1 (copy)
 			if SortfunctionFunction then
 				SortfunctionFunction(Text1)

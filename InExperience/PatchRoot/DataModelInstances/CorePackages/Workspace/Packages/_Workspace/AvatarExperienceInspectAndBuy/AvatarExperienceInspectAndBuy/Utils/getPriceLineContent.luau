@@ -10,7 +10,7 @@ local FFlagAXIaBEnableShopContext = require(Parent.AvatarExperienceFlags).FFlagA
 local FFlagSocialEnableProfileInspectAndBuy = require(Parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy or FFlagAXIaBEnableShopContext
 local GetPriceStatusInShopModule = if FFlagSocialEnableProfileInspectAndBuy then require(AvatarExperienceInspectAndBuy.Utils.getPriceStatusInShop) else nil
 
-return function(p1, p2, p3, p4) --[[ Line: 35 | Named "getPriceLineContent" ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: FFlagSocialEnableProfileInspectAndBuy (copy), GetPriceStatusInShopModule (copy), GetPriceStatusModule (copy), FFlagAXIaBDiscountPriceLine (copy), PriceStatusModule (copy)
 	local t = {}
 	local PriceStatusModule1 = nil

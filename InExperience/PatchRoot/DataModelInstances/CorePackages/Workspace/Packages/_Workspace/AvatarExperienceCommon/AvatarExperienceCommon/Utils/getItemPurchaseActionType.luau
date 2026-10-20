@@ -4,16 +4,16 @@ local SalesLocationTypeModule = require(AvatarExperienceCommon.Enums.SalesLocati
 local ItemRestrictionsModule = require(AvatarExperienceCommon.Enums.ItemRestrictions)
 local FFlagAXDurablesForMIS = require(AvatarExperienceCommon.Parent.AvatarExperienceFlags).FFlagAXDurablesForMIS
 
-local function _(p1): number --[[ Line: 30 | Named "getExperienceCount" ]]
+local function _(p1): number
 	return #(if p1 then p1.experiences or {} else {})
 end
 
-local _ = function(p1): boolean --[[ Line: 35 | Named "getAvailableInExperienceOnly" ]]
+local _ = function(p1): boolean
 	-- upvalues: SalesLocationTypeModule (copy)
 	return p1.saleLocationType == SalesLocationTypeModule.ExperiencesDevApiOnly
 end
 
-local _ = function(p1) --[[ Line: 39 | Named "getHasLimitedAmount" ]]
+local _ = function(p1)
 	-- upvalues: ItemRestrictionsModule (copy)
 	local ItemRestrictions = p1.itemRestrictions
 	local ItemRestriction = ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.LimitedUnique]
@@ -22,7 +22,7 @@ local _ = function(p1) --[[ Line: 39 | Named "getHasLimitedAmount" ]]
 	return ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.Limited] or (ItemRestriction or ItemRestriction1)
 end
 
-local _ = function(p1, p2, p3): boolean --[[ Line: 47 | Named "getUserHasReachedQuantityLimit" ]]
+local _ = function(p1, p2, p3): boolean
 	-- upvalues: ItemRestrictionsModule (copy)
 	local ItemRestrictions = p1.itemRestrictions
 	local ItemRestriction = ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.LimitedUnique]
@@ -47,7 +47,7 @@ local _ = function(p1, p2, p3): boolean --[[ Line: 47 | Named "getUserHasReached
 	return Flag
 end
 
-local _ = function(p1): boolean --[[ Line: 65 | Named "getOriginalStockAvailable" ]]
+local _ = function(p1): boolean
 	-- upvalues: ItemRestrictionsModule (copy)
 	local ItemRestrictions = p1.itemRestrictions
 	local ItemRestriction = ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.LimitedUnique]
@@ -57,7 +57,7 @@ local _ = function(p1): boolean --[[ Line: 65 | Named "getOriginalStockAvailable
 	return ItemRestriction2 and (p1.numberRobloxHasAvailable and p1.numberRobloxHasAvailable > 0) or not ItemRestriction2
 end
 
-local _ = function(p1, p2): boolean --[[ Line: 73 | Named "getButtonTypeIsPurchaseFromResale" ]]
+local _ = function(p1, p2): boolean
 	-- upvalues: SalesLocationTypeModule (copy), ItemRestrictionsModule (copy)
 	if p2 and p1.hasResellers then
 		local IsSaleLocationTypeMatch = p1.saleLocationType == SalesLocationTypeModule.ExperiencesDevApiOnly
@@ -73,12 +73,12 @@ local _ = function(p1, p2): boolean --[[ Line: 73 | Named "getButtonTypeIsPurcha
 	end
 end
 
-local _ = function(p1): boolean --[[ Line: 87 | Named "getButtonTypeIsFree" ]]
+local _ = function(p1): boolean
 	-- upvalues: SalesLocationTypeModule (copy)
 	return not p1.isOffSale and (not (p1.saleLocationType == SalesLocationTypeModule.ExperiencesDevApiOnly) and p1.priceInRobux == 0)
 end
 
-local _ = function(p1, p2): boolean --[[ Line: 95 | Named "getButtonTypeIsExperienceLink" ]]
+local _ = function(p1, p2): boolean
 	-- upvalues: SalesLocationTypeModule (copy), ItemRestrictionsModule (copy)
 	if p1.isOffSale then
 		return false
@@ -94,7 +94,7 @@ local _ = function(p1, p2): boolean --[[ Line: 95 | Named "getButtonTypeIsExperi
 	end
 end
 
-local _ = function(p1, p2): boolean --[[ Line: 105 | Named "getButtonTypeIsSoldOut" ]]
+local _ = function(p1, p2): boolean
 	-- upvalues: ItemRestrictionsModule (copy)
 	local ItemRestrictions = p1.itemRestrictions
 	local ItemRestriction = ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.LimitedUnique]
@@ -106,7 +106,7 @@ local _ = function(p1, p2): boolean --[[ Line: 105 | Named "getButtonTypeIsSoldO
 	return not IsNumberRobloxHasAvailableAbove and not HasResellers
 end
 
-local _ = function(p1, p2, p3, p4): boolean --[[ Line: 111 | Named "getButtonTypeIsCustomizeLink" ]]
+local _ = function(p1, p2, p3, p4): boolean
 	-- upvalues: FFlagAXDurablesForMIS (copy), ItemRestrictionsModule (copy)
 	local ItemRestrictions = p1.itemRestrictions
 	local ItemRestriction = ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.LimitedUnique]
@@ -122,16 +122,16 @@ local _ = function(p1, p2, p3, p4): boolean --[[ Line: 111 | Named "getButtonTyp
 	return (if FFlagAXDurablesForMIS then p1.isOwned and not p1.expirationTime else p1.isOwned) and (Inverted and not HasResellers)
 end
 
-local _ = function(p1): boolean --[[ Line: 127 | Named "getButtonTypeIsPurchasableFromRoblox" ]]
+local _ = function(p1): boolean
 	-- upvalues: SalesLocationTypeModule (copy)
 	return not p1.isOffSale and not (p1.saleLocationType == SalesLocationTypeModule.ExperiencesDevApiOnly)
 end
 
-local _ = function(_, p1, p2): boolean --[[ Line: 134 | Named "getButtonTypeIsQuantityLimitExceeded" ]]
+local _ = function(_, p1, p2): boolean
 	return p1 ~= nil and p1.quantityLimitPerUser ~= nil and (p1.quantityLimitPerUser > 0 and p1.quantityLimitPerUser <= p2)
 end
 
-return function(p1, p2, p3, p4) --[[ Line: 145 | Named "getItemPurchaseActionType" ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: ItemPurchaseActionTypeEnumModule (copy), FFlagAXDurablesForMIS (copy), ItemRestrictionsModule (copy), SalesLocationTypeModule (copy)
 	if not p1 then
 		return ItemPurchaseActionTypeEnumModule.Disabled

@@ -7,12 +7,12 @@ local VersionHistoryContainerModule = require(BuildExperience.Components.Version
 local GameInfoUtilsModule = require(BuildExperience.utils.GameInfoUtils)
 local Screens = require(BuildExperience.Components.BuildPillMenu.BuildOverflowMenuScreens).Screens
 
-local function _(p1, p2) --[[ Line: 45 | Named "resolvePlaceId" ]]
+local function _(p1, p2)
 	-- upvalues: GameInfoUtilsModule (copy)
 	return if p1.placeId == nil then if GameInfoUtilsModule.isGameInfoReady(p2) then tonumber(p2.rootPlaceId) else nil else p1.placeId
 end
 
-return function(p1) --[[ Line: 55 | Named "PublishSheetController" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), GameInfoUtilsModule (copy), Screens (copy), PublishBottomSheetContainerModule (copy), VersionHistoryContainerModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local NavigateToSubPageFunction = p1.navigateToSubPage
@@ -20,7 +20,7 @@ return function(p1) --[[ Line: 55 | Named "PublishSheetController" ]]
 	local Target = p1.target
 	local UseGameInfoResult = GameInfoUtilsModule.useGameInfo(Target.universeId)
 	local Number = if Target.placeId == nil then if GameInfoUtilsModule.isGameInfoReady(UseGameInfoResult) then tonumber(UseGameInfoResult.rootPlaceId) else nil else Target.placeId
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 65 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Target (copy), Number (copy)
 		return {
 			universeId = Target.universeId,
@@ -35,7 +35,7 @@ return function(p1) --[[ Line: 55 | Named "PublishSheetController" ]]
 		Target.gameIcon, Target.isNewGameTarget
 	})
 	local IsTitleDescriptionReady = GameInfoUtilsModule.isTitleDescriptionReady(UseGameInfoResult)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 86 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: IsTitleDescriptionReady (copy), OnCloseFunction (copy), NavigateToSubPageFunction (copy), Screens (upval), UseMemoResult (copy)
 		if IsTitleDescriptionReady then
 			OnCloseFunction()
@@ -49,7 +49,7 @@ return function(p1) --[[ Line: 55 | Named "PublishSheetController" ]]
 		IsTitleDescriptionReady,
 		UseMemoResult
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 94 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: OnCloseFunction (copy), NavigateToSubPageFunction (copy), Screens (upval), UseMemoResult (copy)
 		OnCloseFunction()
 		NavigateToSubPageFunction(Screens.BuildMediaSelection, UseMemoResult)
@@ -58,7 +58,7 @@ return function(p1) --[[ Line: 55 | Named "PublishSheetController" ]]
 		NavigateToSubPageFunction,
 		UseMemoResult
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 99 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: Number (copy), OnCloseFunction (copy), NavigateToSubPageFunction (copy), Screens (upval), UseMemoResult (copy)
 		if Number ~= nil then
 			OnCloseFunction()
@@ -72,7 +72,7 @@ return function(p1) --[[ Line: 55 | Named "PublishSheetController" ]]
 		Number,
 		UseMemoResult
 	})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 107 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: Number (copy), OnCloseFunction (copy), UseStateResult2 (copy)
 		if Number ~= nil then
 			OnCloseFunction()
@@ -81,7 +81,7 @@ return function(p1) --[[ Line: 55 | Named "PublishSheetController" ]]
 			return
 		end
 	end, { OnCloseFunction, Number })
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 115 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {})

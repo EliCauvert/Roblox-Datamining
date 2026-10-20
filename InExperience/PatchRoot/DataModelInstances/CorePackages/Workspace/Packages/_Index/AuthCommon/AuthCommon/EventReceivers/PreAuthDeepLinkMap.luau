@@ -16,7 +16,7 @@ local PreAuthDeepLinkMapModule = {
 	{
 		regexPattern = "roblox.*//testing/preauth.*",
 		preauthOnly = false,
-		handler = function(List, List1): boolean --[[ Line: 62 ]]
+		handler = function(List, List1): boolean
 			print("preauth deeplink example called with query params:")
 			
 			for i, value in pairs(List) do
@@ -36,12 +36,12 @@ if game:DefineFastFlag("EnableJoinV2PreAuthDeepLink", false) then
 	table.insert(PreAuthDeepLinkMapModule, {
 		regexPattern = "roblox.*://join_v2/join.*",
 		preauthOnly = false,
-		handler = function(p1, p2) --[[ Line: 82 ]]
+		handler = function(p1, p2)
 			-- upvalues: LaunchContext (copy), HandleAuthTicketModule (copy)
-			return HandleAuthTicketModule(p2.networking, p1.ticket, p1.placelauncherurl, function() --[[ Line: 83 ]]
+			return HandleAuthTicketModule(p2.networking, p1.ticket, p1.placelauncherurl, function()
 				-- upvalues: p2 (copy), LaunchContext (upval)
 				return p2.dispatch(p2.launchApp(p2.networking, p2.omniRecommendationsRequest, p2.analytics, p2.appPolicy, LaunchContext.Login))
-			end, function() --[[ Line: 95 ]]
+			end, function()
 				-- upvalues: p2 (copy)
 				return p2.dispatch(p2.resetAppState())
 			end)
@@ -52,7 +52,7 @@ if EnableAccountRecoveryPreAuthDeepLink2 then
 	table.insert(PreAuthDeepLinkMapModule, {
 		regexPattern = "roblox.*://navigation/account_recovery.*",
 		preauthOnly = false,
-		handler = function(p1, p2) --[[ Line: 114 ]]
+		handler = function(p1, p2)
 			-- upvalues: GetFFlagEnableUnifiedWebViewsFunction (copy), WebViewService (copy), BrowserService (copy), WaitAfterCloseChallengeWebViewSeconds (copy), AppPage (copy), HttpService (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateSidewaysFunction (copy)
 			local Origin = p1.origin
 			local ExtraProps = {}

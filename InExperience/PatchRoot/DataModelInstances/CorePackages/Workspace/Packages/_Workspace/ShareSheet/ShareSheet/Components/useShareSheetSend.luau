@@ -11,13 +11,13 @@ local _ = require(ShareSheet.Recipients.RecipientSource)
 local ShareSheetTelemetryModule = require(ShareSheet.telemetry.ShareSheetTelemetry)
 local UseConversationListModule = require(Parent.AppChat.useConversationList)
 
-local function _(p1) --[[ Line: 68 | Named "getConversationDisplayName" ]]
+local function _(p1)
 	local TitleForViewer = p1.titleForViewer
 	
 	return if TitleForViewer and TitleForViewer ~= "" then TitleForViewer else p1.title or ""
 end
 
-local function formatLocalizedSnackbarTitle(UseContextResult, p1, Count, p2, Callback) --[[ Line: 73 ]]
+local function formatLocalizedSnackbarTitle(UseContextResult, p1, Count, p2, Callback)
 	if not p1 then
 		return UseContextResult:Format(if Count == 1 then "Feature.UniversalShareSheet.Response.NotSharedMessage" else "Feature.UniversalShareSheet.Response.NotSharedMultipleMessages")
 	elseif Callback == nil then
@@ -30,7 +30,7 @@ local function formatLocalizedSnackbarTitle(UseContextResult, p1, Count, p2, Cal
 	end
 end
 
-return function(p1) --[[ Line: 96 | Named "useShareSheetSend" ]]
+return function(p1)
 	-- upvalues: FFlagShareSheetFriendsSort (copy), UseConversationListModule (copy), ReactModule (copy), LocalizationRoactContext (copy), ShareSheetTelemetryModule (copy), RecipientModule (copy), formatLocalizedSnackbarTitle (copy)
 	local Items = if FFlagShareSheetFriendsSort then nil else UseConversationListModule(p1.chatShare ~= nil).items
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
@@ -39,7 +39,7 @@ return function(p1) --[[ Line: 96 | Named "useShareSheetSend" ]]
 	
 	return {
 		isSending = UseStateResult,
-		onSendActivated = ReactModule.useCallback(function(Text: string) --[[ Line: 105 ]]
+		onSendActivated = ReactModule.useCallback(function(Text: string)
 			-- upvalues: UseRefResult (copy), ShareSheetTelemetryModule (upval), p1 (copy), FFlagShareSheetFriendsSort (upval), RecipientModule (upval), Items (copy), UseStateResult2 (copy), UseContextResult (copy), formatLocalizedSnackbarTitle (upval)
 			if UseRefResult.current then return end
 			local HasFoundAt = string.find(Text, "%S") ~= nil
@@ -86,7 +86,7 @@ return function(p1) --[[ Line: 96 | Named "useShareSheetSend" ]]
 			local List = {}
 			local Url = if Text == "" then p1.url else `{p1.url} {Text}`
 			
-			local function finishSending() --[[ Line: 158 ]]
+			local function finishSending()
 				-- upvalues: UseRefResult (upval), UseStateResult2 (upval), Flag1 (ref), Flag2 (ref), p1 (upval), ChatShare (copy), CountT1 (copy), List (copy), ShareSheetTelemetryModule (upval), FFlagShareSheetFriendsSort (upval), T1 (copy), T (copy), UseContextResult (upval), formatLocalizedSnackbarTitle (upval)
 				UseRefResult.current = false
 				UseStateResult2(false)
@@ -97,7 +97,7 @@ return function(p1) --[[ Line: 96 | Named "useShareSheetSend" ]]
 					local ConversationId = if CountT1 == 1 and #List == 1 then List[1].conversationId else nil
 					p1.onShareSendResultSnackbar({
 						action = if Flag2 and NavigateToChatFunction then {
-							onActivated = function() --[[ Line: 174 ]]
+							onActivated = function()
 								-- upvalues: ShareSheetTelemetryModule (upval), p1 (upval), FFlagShareSheetFriendsSort (upval), CountT1 (upval), T1 (upval), T (upval), ConversationId (copy), NavigateToChatFunction (copy)
 								ShareSheetTelemetryModule.logInteraction({
 									context = p1.context,
@@ -121,7 +121,7 @@ return function(p1) --[[ Line: 96 | Named "useShareSheetSend" ]]
 				end
 			end
 			
-			local function send(p2) --[[ Line: 212 ]]
+			local function send(p2)
 				-- upvalues: FFlagShareSheetFriendsSort (upval), T1 (copy), T (copy), ShareSheetTelemetryModule (upval), p1 (upval), HasFoundAt (copy), RecipientModule (upval), ChatShare (copy), Url (copy), Flag2 (ref), List (copy), Flag1 (ref), Flag (ref)
 				local Entry = if FFlagShareSheetFriendsSort then T1[p2] else nil
 				local Entry1 = if FFlagShareSheetFriendsSort then nil else T[p2]
@@ -133,9 +133,9 @@ return function(p1) --[[ Line: 96 | Named "useShareSheetSend" ]]
 					hasCustomMessage = HasFoundAt
 				})
 				
-				return (if FFlagShareSheetFriendsSort then RecipientModule.send(ChatShare, Entry, Url) else ChatShare.sendToConversation(Entry1, Url)):catch(function() --[[ Line: 226 ]]
+				return (if FFlagShareSheetFriendsSort then RecipientModule.send(ChatShare, Entry, Url) else ChatShare.sendToConversation(Entry1, Url)):catch(function()
 					return { status = "failure" }
-				end):andThen(function(Result) --[[ Line: 231 ]]
+				end):andThen(function(Result)
 					-- upvalues: StartMessageSendResultResult (copy), Flag2 (upval), List (upval), FFlagShareSheetFriendsSort (upval), RecipientModule (upval), Entry (copy), Entry1 (copy), Flag1 (upval), Flag (upval)
 					StartMessageSendResultResult(Result)
 					
@@ -169,7 +169,7 @@ return function(p1) --[[ Line: 96 | Named "useShareSheetSend" ]]
 			local SendResult = send(1)
 			
 			for i = 2, CountT1 do
-				SendResult = SendResult:andThen(function() --[[ Line: 251 ]]
+				SendResult = SendResult:andThen(function()
 					-- upvalues: Flag (ref), send (copy), i (copy)
 					if Flag then return end
 					return send(i)

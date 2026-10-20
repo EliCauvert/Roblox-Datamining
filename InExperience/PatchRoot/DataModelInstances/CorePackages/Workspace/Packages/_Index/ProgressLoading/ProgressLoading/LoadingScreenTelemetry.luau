@@ -13,7 +13,7 @@ local config = {
 }
 
 return {
-	countPlayerLocalizationChoiceNotReady = function() --[[ Line: 16 ]]
+	countPlayerLocalizationChoiceNotReady = function()
 		-- upvalues: TelemetryService (copy), StandardizedFields (copy)
 		TelemetryService:LogCounter({
 			eventName = "PlayerLocalizationChoiceNotReady",
@@ -23,7 +23,7 @@ return {
 			lastUpdated = { 2026, 2, 24 }
 		}, { standardizedFields = StandardizedFields }, 1)
 	end,
-	countPlayerLocalizationChoiceFailed = function(p1) --[[ Line: 27 ]]
+	countPlayerLocalizationChoiceFailed = function(p1)
 		-- upvalues: TelemetryService (copy), StandardizedFields (copy)
 		TelemetryService:LogCounter({
 			eventName = "PlayerLocalizationChoiceFailed",
@@ -36,7 +36,7 @@ return {
 			customFields = { responseCode = p1.responseCode, errorType = p1.errorType }
 		}, 1)
 	end,
-	countAutoTranslateZeroUniverseId = function() --[[ Line: 44 ]]
+	countAutoTranslateZeroUniverseId = function()
 		-- upvalues: TelemetryService (copy), StandardizedFields (copy)
 		TelemetryService:LogCounter({
 			eventName = "AutoTranslateZeroUniverseId",
@@ -46,7 +46,7 @@ return {
 			lastUpdated = { 2026, 3, 11 }
 		}, { standardizedFields = StandardizedFields }, 1)
 	end,
-	logQueuedStateButtonClick = function(p1) --[[ Line: 64 ]]
+	logQueuedStateButtonClick = function(p1)
 		-- upvalues: IsJoinNewServerButtonEnabled (copy), TelemetryService (copy), config (copy)
 		if IsJoinNewServerButtonEnabled then
 			TelemetryService:LogEvent(config, { customFields = p1 or {} })

@@ -3,14 +3,14 @@ local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 local Url = require(Parent.Http).Url
 
 return {
-	buildFavoriteUrl = function(UniverseId) --[[ Line: 14 ]]
+	buildFavoriteUrl = function(UniverseId)
 		-- upvalues: UrlBuilder (copy), Url (copy)
 		return UrlBuilder.new({
 			path = "v1/games/{universeId}/favorites",
 			base = Url.GAME_URL
 		})({ universeId = UniverseId })
 	end,
-	buildFavoriteUpdateUrl = function(UniverseId) --[[ Line: 28 ]]
+	buildFavoriteUpdateUrl = function(UniverseId)
 		-- upvalues: UrlBuilder (copy), Url (copy)
 		return UrlBuilder.new({
 			path = "v1/games/{universeId}/favorites",

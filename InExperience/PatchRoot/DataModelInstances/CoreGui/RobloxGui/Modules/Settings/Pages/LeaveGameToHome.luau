@@ -20,7 +20,7 @@ local CollectAnalyticsForSystemMenuFFlag = settings():GetFFlag("CollectAnalytics
 local GetDefaultQualityLevelFunction = require(CorePackages.Workspace.Packages.AppCommonLib).GetDefaultQualityLevel
 local ConstantsModule = if CollectAnalyticsForSystemMenuFFlag then require(RobloxGui.Modules:WaitForChild("InGameMenu"):WaitForChild("Resources"):WaitForChild("Constants")) else nil
 local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
-v1 = (function() --[[ Line: 53 | Named "Initialize" ]]
+v1 = (function()
 	-- upvalues: RobloxGui (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy), GetFFlagEnableInGameMenuDurationLoggerModule (copy), PerfUtilsModule (copy), GuiService (copy), CollectAnalyticsForSystemMenuFFlag (copy), ConstantsModule (ref), LinkingProtocol (copy), DeepLinkSource (copy), RunService (copy), GetDefaultQualityLevelFunction (copy), RobloxTranslatorModule (copy), CreateFunction (copy), ThemeModule (copy), IsEnabled (copy), UtilityModule (copy)
 	local NewPage = require(RobloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	NewPage.playsessionid = ""
@@ -28,7 +28,7 @@ v1 = (function() --[[ Line: 53 | Named "Initialize" ]]
 	if RbxAnalyticsServiceExposePlaySessionIdEngineFeature then
 		NewPage.playsessionid = RbxAnalyticsService:GetPlaySessionId()
 	end
-	function NewPage.LeaveFunc() --[[ Line: 62 ]]
+	function NewPage.LeaveFunc()
 		-- upvalues: GetFFlagEnableInGameMenuDurationLoggerModule (upval), PerfUtilsModule (upval), GuiService (upval), CollectAnalyticsForSystemMenuFFlag (upval), RbxAnalyticsService (upval), ConstantsModule (upval), NewPage (copy), LinkingProtocol (upval), DeepLinkSource (upval), RunService (upval), GetDefaultQualityLevelFunction (upval)
 		if GetFFlagEnableInGameMenuDurationLoggerModule() then
 			PerfUtilsModule.leavingGame()
@@ -54,7 +54,7 @@ v1 = (function() --[[ Line: 53 | Named "Initialize" ]]
 		settings().Rendering.QualityLevel = GetDefaultQualityLevelFunction()
 	end
 	
-	function NewPage.DontLeaveFunc(IsUserInputTypeMatch) --[[ Line: 102 ]]
+	function NewPage.DontLeaveFunc(IsUserInputTypeMatch)
 		-- upvalues: NewPage (copy), CollectAnalyticsForSystemMenuFFlag (upval), RbxAnalyticsService (upval), ConstantsModule (upval)
 		if NewPage.HubRef then
 			NewPage.HubRef:PopMenu(IsUserInputTypeMatch, true)
@@ -69,14 +69,14 @@ v1 = (function() --[[ Line: 53 | Named "Initialize" ]]
 		end
 	end
 	
-	function NewPage:DontLeaveFromHotkey(UserInputState, Input) --[[ Line: 121 ]]
+	function NewPage:DontLeaveFromHotkey(UserInputState, Input)
 		-- upvalues: NewPage (copy)
 		if UserInputState == Enum.UserInputState.Begin then
 			NewPage.DontLeaveFunc(Input.UserInputType == Enum.UserInputType.Gamepad1 or (Input.UserInputType == Enum.UserInputType.Gamepad2 or (Input.UserInputType == Enum.UserInputType.Gamepad3 or Input.UserInputType == Enum.UserInputType.Gamepad4)))
 		end
 	end
 	
-	function NewPage.DontLeaveFromButton(p1) --[[ Line: 129 ]]
+	function NewPage.DontLeaveFromButton(p1)
 		-- upvalues: NewPage (copy)
 		NewPage.DontLeaveFunc(p1)
 	end
@@ -132,12 +132,12 @@ v1 = (function() --[[ Line: 53 | Named "Initialize" ]]
 	
 	return NewPage
 end)()
-v1.Displayed.Event:connect(function() --[[ Line: 214 ]]
+v1.Displayed.Event:connect(function()
 	-- upvalues: GuiService (copy), v1 (ref), ContextActionService (copy)
 	GuiService.SelectedCoreObject = v1.LeaveGameButton
 	ContextActionService:BindCoreAction("LeaveGameCancelAction", v1.DontLeaveFromHotkey, false, Enum.KeyCode.ButtonB)
 end)
-v1.Hidden.Event:connect(function() --[[ Line: 219 ]]
+v1.Hidden.Event:connect(function()
 	-- upvalues: ContextActionService (copy)
 	ContextActionService:UnbindCoreAction("LeaveGameCancelAction")
 end)

@@ -5,9 +5,9 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local ReactModule = require(Parent.React)
 local FFlagAddFriendsPageTrustedFriendRequestSection = require(Parent.SharedFlags).FFlagAddFriendsPageTrustedFriendRequestSection
 
-return function(p1) --[[ Line: 19 | Named "useSignalProfileInsightsByUserId" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ProfileInsightsStoreModule (copy), FFlagAddFriendsPageTrustedFriendRequestSection (copy), SignalsReactModule (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 20 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ProfileInsightsStoreModule (upval), p1 (copy), FFlagAddFriendsPageTrustedFriendRequestSection (upval)
 		return ProfileInsightsStoreModule(false).getProfileInsightsByUserId({
 			userIds = { p1.userId },
@@ -23,7 +23,7 @@ return function(p1) --[[ Line: 19 | Named "useSignalProfileInsightsByUserId" ]]
 	})
 	local UseSignalStateResult = SignalsReactModule.useSignalState(UseMemoResult(false).data.getProfileInsights)
 	
-	return ReactModule.useMemo(function() --[[ Line: 31 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult (copy), p1 (copy)
 		for _, value in UseSignalStateResult do
 			if value.targetUserId == p1.userId then

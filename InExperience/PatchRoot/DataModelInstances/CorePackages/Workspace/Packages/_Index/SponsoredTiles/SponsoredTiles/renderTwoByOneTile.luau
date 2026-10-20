@@ -9,7 +9,7 @@ local ResolveWideAssetIdFunction = GameTileModule.resolveWideAssetId
 local _ = require(Parent.VideoUtils)
 local FFlagMigrateGameInfoToStore = require(Parent.SharedFlags).FFlagMigrateGameInfoToStore
 local FFlagLuaAppEnableReportExperience = require(Parent.SharedFlags).FFlagLuaAppEnableReportExperience
-local MemoResult = ReactModule.memo(function(p1) --[[ Line: 43 ]]
+local MemoResult = ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), GetTileBadgeByPositionConfigFromEntryFunction (copy), TwoByOneGameTileModule (copy), FFlagLuaAppEnableReportExperience (copy), FFlagMigrateGameInfoToStore (copy), ResolveWideAssetIdFunction (copy)
 	local Negated = -((p1.maxItemIndex or 0) + 1)
 	
@@ -45,7 +45,7 @@ local MemoResult = ReactModule.memo(function(p1) --[[ Line: 43 ]]
 		enableExplicitFeedback = p1.enableExplicitFeedback,
 		placeIdOverride = p1.item.placeIdOverride,
 		launchDataOverride = p1.item.launchDataOverride,
-		onSelectionGained = ReactModule.useCallback(function() --[[ Line: 48 ]]
+		onSelectionGained = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy)
 			if p1.onSelectionGained then
 				p1.onSelectionGained(p1.item, p1.index, p1.item.universeId)
@@ -60,7 +60,7 @@ local MemoResult = ReactModule.memo(function(p1) --[[ Line: 43 ]]
 	})
 end)
 
-return function(p1) --[[ Line: 105 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), MemoResult (copy), GameCollectionItemTypes (copy)
 	return ReactModule.createElement(MemoResult, p1), GameCollectionItemTypes.GameCollectionItemType.TwoByOneTile
 end

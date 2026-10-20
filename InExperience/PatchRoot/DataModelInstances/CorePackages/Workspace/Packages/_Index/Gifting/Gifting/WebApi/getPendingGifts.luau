@@ -9,7 +9,7 @@ local UrlsModule = require(Gifting.WebApi.Urls)
 local _ = require(Gifting.Types)
 local OptionalResult = TModule.optional(TModule.intersection(TModule.integer, TModule.numberPositive))
 
-return function(p1, p2, Network) --[[ Line: 22 | Named "getPendingGifts" ]]
+return function(p1, p2, Network)
 	-- upvalues: OptionalResult (copy), PromiseModule (copy), GiftErrorModelModule (copy), FetchGiftingModule (copy), UrlsModule (copy), PendingGiftsResponseModelModule (copy)
 	local OptionalResultResult, OptionalResultResult2 = OptionalResult(p1)
 	

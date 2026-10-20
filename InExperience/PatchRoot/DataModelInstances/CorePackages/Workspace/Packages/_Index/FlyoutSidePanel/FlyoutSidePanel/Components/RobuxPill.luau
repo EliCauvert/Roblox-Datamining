@@ -20,16 +20,16 @@ local FFlagEnableFlyoutMenuRobuxCardRefactor = SharedFlagsModule.FFlagEnableFlyo
 local FFlagEnableSharedFlyoutRobuxPill = SharedFlagsModule.FFlagEnableSharedFlyoutRobuxPill
 local RobuxPill = if FFlagEnableSharedFlyoutRobuxPill then require(Parent.RobuxPill).RobuxPill else nil
 
-local function _(p1) --[[ Line: 34 | Named "numWithCommas" ]]
+local function _(p1)
 	return tostring(p1):reverse():gsub("(%d%d%d)", "%1,"):reverse():gsub("^,", "")
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 38 | Named "RobuxPill" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), FlyoutContentSettingsModule (copy), FlyoutAnalyticsModule (copy), FFlagEnableSharedFlyoutRobuxPill (copy), RobuxPill (copy), FFlagEnableFlyoutMenuRobuxCardRefactor (copy), FoundationModule (copy), Icon (copy), IconSize (copy), Text (copy), Button (copy), InputSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalizationResult = UseLocalizationFunction({ buyRobux = "IAPExperience.RobuxUpsell.Action.BuyRobux" })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 44 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval), FlyoutContentSettingsModule (upval), FlyoutAnalyticsModule (upval)
 		p1.closeDrawer()
 		local config = { name = AppPage.PurchaseRobux }

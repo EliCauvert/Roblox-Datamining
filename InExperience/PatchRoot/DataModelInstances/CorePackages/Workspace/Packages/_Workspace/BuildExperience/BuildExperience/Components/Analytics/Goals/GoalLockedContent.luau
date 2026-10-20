@@ -11,13 +11,13 @@ local FillBehavior = FoundationModule.Enums.FillBehavior
 local InputSize = FoundationModule.Enums.InputSize
 local _ = require(BuildExperience.Analytics.Goals.GoalTypes)
 
-return function(p1) --[[ Line: 30 | Named "GoalLockedContent" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), View (copy), Text (copy)
 	local TestId = p1.testId or "GoalLockedContent"
 	local Locked = p1.locked
 	local Actions = Locked.actions
 	
-	local function _(p2) --[[ Line: 35 | Named "getEligibleHandler" ]]
+	local function _(p2)
 		-- upvalues: p1 (copy)
 		if p2 == nil or p1.actionHandlers == nil then
 			return nil

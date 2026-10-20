@@ -52,50 +52,50 @@ local config = {
 	[";"] = true
 }
 
-local function _(p1, p2) --[[ Line: 60 | Named "decode" ]]
+local function _(p1, p2)
 	local Text = p1
 	
 	if not p2 then
 		Text = Text:gsub("+", " ")
 	end
-	return (Text:gsub("%%(%x%x)", function(p3): string --[[ Line: 65 ]]
+	return (Text:gsub("%%(%x%x)", function(p3): string
 		return (string.char((tonumber(p3, 16))))
 	end))
 end
 
-local _ = function(Text: string): string --[[ Line: 70 | Named "encode" ]]
-	return (Text:gsub("([^A-Za-z0-9%_%.%-%~])", function(Text: string): string --[[ Line: 71 ]]
+local _ = function(Text: string): string
+	return (Text:gsub("([^A-Za-z0-9%_%.%-%~])", function(Text: string): string
 		return string.upper(string.format("%%%02x", string.byte(Text)))
 	end))
 end
 
-local _ = function(Text: string) --[[ Line: 77 | Named "encodeValue" ]]
-	return Text:gsub("([^A-Za-z0-9%_%.%-%~])", function(Text: string): string --[[ Line: 71 ]]
+local _ = function(Text: string)
+	return Text:gsub("([^A-Za-z0-9%_%.%-%~])", function(Text: string): string
 		return string.upper(string.format("%%%02x", string.byte(Text)))
 	end):gsub("%%20", "+")
 end
 
-local function encodeSegment(Text: string): string --[[ Line: 82 ]]
+local function encodeSegment(Text: string): string
 	-- upvalues: config (copy)
-	return Text:gsub("([^a-zA-Z0-9])", function(Text: string): string --[[ Line: 83 ]]
+	return Text:gsub("([^a-zA-Z0-9])", function(Text: string): string
 		-- upvalues: config (upval)
-		return if config[Text] then Text else Text:gsub("([^A-Za-z0-9%_%.%-%~])", function(Text: string): string --[[ Line: 71 ]]
+		return if config[Text] then Text else Text:gsub("([^A-Za-z0-9%_%.%-%~])", function(Text: string): string
 			return string.upper(string.format("%%%02x", string.byte(Text)))
 		end)
 	end)
 end
 
-local function concat(Text, p1): string --[[ Line: 92 ]]
+local function concat(Text, p1): string
 	return Text .. p1:build()
 end
 
-function UrlModule.build(p1): string --[[ Line: 98 ]]
+function UrlModule.build(p1): string
 	-- upvalues: encodeSegment (copy), UrlModule (copy)
 	local Text = ""
 	
 	if p1.path then
 		local Path: string = p1.path
-		Path:gsub("([^/]+)", function(p2) --[[ Line: 102 ]]
+		Path:gsub("([^/]+)", function(p2)
 			-- upvalues: encodeSegment (upval)
 			return encodeSegment(p2)
 		end)
@@ -143,7 +143,7 @@ function UrlModule.build(p1): string --[[ Line: 98 ]]
 	return Text
 end
 
-function UrlModule.buildQuery(Query, Separator, AZaZ): string --[[ Line: 148 ]]
+function UrlModule.buildQuery(Query, Separator, AZaZ): string
 	-- upvalues: UrlModule (copy)
 	local AZaZes = {}
 	
@@ -159,7 +159,7 @@ function UrlModule.buildQuery(Query, Separator, AZaZ): string --[[ Line: 148 ]]
 	
 	for _, value in ipairs(List) do
 		local QueryEntry = Query[value]
-		local AZaZ09 = tostring(value):gsub("([^A-Za-z0-9%_%.%-%~])", function(Text: string): string --[[ Line: 71 ]]
+		local AZaZ09 = tostring(value):gsub("([^A-Za-z0-9%_%.%-%~])", function(Text: string): string
 			return string.upper(string.format("%%%02x", string.byte(Text)))
 		end)
 		
@@ -169,7 +169,7 @@ function UrlModule.buildQuery(Query, Separator, AZaZ): string --[[ Line: 148 ]]
 		if type(QueryEntry) == "table" then
 			AZaZes[#AZaZes + 1] = UrlModule.buildQuery(QueryEntry, Separator, AZaZ09)
 		else
-			local _20 = tostring(QueryEntry):gsub("([^A-Za-z0-9%_%.%-%~])", function(Text: string): string --[[ Line: 71 ]]
+			local _20 = tostring(QueryEntry):gsub("([^A-Za-z0-9%_%.%-%~])", function(Text: string): string
 				return string.upper(string.format("%%%02x", string.byte(Text)))
 			end):gsub("%%20", "+")
 			
@@ -183,7 +183,7 @@ function UrlModule.buildQuery(Query, Separator, AZaZ): string --[[ Line: 148 ]]
 	return table.concat(AZaZes, Separator)
 end
 
-function UrlModule.parseQuery(Text: string, p1) --[[ Line: 185 ]]
+function UrlModule.parseQuery(Text: string, p1)
 	-- upvalues: UrlModule (copy)
 	if not p1 then
 		p1 = UrlModule.options.separator or "&"
@@ -192,11 +192,11 @@ function UrlModule.parseQuery(Text: string, p1) --[[ Line: 185 ]]
 	
 	for Text2, Text3 in Text:gmatch(string.format("([^%q=]+)(=*[^%q=]*)", p1, p1)) do
 		local List = {}
-		local S = Text2:gsub("+", " "):gsub("%%(%x%x)", function(p2): string --[[ Line: 65 ]]
+		local S = Text2:gsub("+", " "):gsub("%%(%x%x)", function(p2): string
 			return (string.char((tonumber(p2, 16))))
-		end):gsub("%[([^%]]*)%]", function(Text: string): string --[[ Line: 194 ]]
+		end):gsub("%[([^%]]*)%]", function(Text: string): string
 			-- upvalues: List (copy)
-			table.insert(List, if string.find(Text, "^-?%d+$") then tonumber(Text) else Text:gsub("+", " "):gsub("%%(%x%x)", function(p2): string --[[ Line: 65 ]]
+			table.insert(List, if string.find(Text, "^-?%d+$") then tonumber(Text) else Text:gsub("+", " "):gsub("%%(%x%x)", function(p2): string
 				return (string.char((tonumber(p2, 16))))
 			end))
 			
@@ -210,7 +210,7 @@ function UrlModule.parseQuery(Text: string, p1) --[[ Line: 185 ]]
 		if #List > 0 and type(XXes[S]) ~= "table" then
 			XXes[S] = {}
 		elseif #List == 0 and type(XXes[S]) == "table" then
-			XXes[S] = Text1:gsub("+", " "):gsub("%%(%x%x)", function(p2): string --[[ Line: 65 ]]
+			XXes[S] = Text1:gsub("+", " "):gsub("%%(%x%x)", function(p2): string
 				return (string.char((tonumber(p2, 16))))
 			end)
 		end
@@ -227,7 +227,7 @@ function UrlModule.parseQuery(Text: string, p1) --[[ Line: 185 ]]
 				XX[value] = {}
 			end
 			if i == #List then
-				XX[value] = Text1:gsub("+", " "):gsub("%%(%x%x)", function(p2): string --[[ Line: 65 ]]
+				XX[value] = Text1:gsub("+", " "):gsub("%%(%x%x)", function(p2): string
 					return (string.char((tonumber(p2, 16))))
 				end)
 			end
@@ -239,7 +239,7 @@ function UrlModule.parseQuery(Text: string, p1) --[[ Line: 185 ]]
 	return XXes
 end
 
-function UrlModule.setQuery(p2, Query) --[[ Line: 241 ]]
+function UrlModule.setQuery(p2, Query)
 	-- upvalues: UrlModule (copy)
 	local Query1 = Query
 	
@@ -251,24 +251,24 @@ function UrlModule.setQuery(p2, Query) --[[ Line: 241 ]]
 	return Query1
 end
 
-function UrlModule.setAuthority(p2, Authority: string): string --[[ Line: 254 ]]
+function UrlModule.setAuthority(p2, Authority: string): string
 	p2.authority = Authority
 	p2.port = nil
 	p2.host = nil
 	p2.userinfo = nil
 	p2.user = nil
 	p2.password = nil
-	local Text: string = Authority:gsub("^([^@]*)@", function(Userinfo): string --[[ Line: 262 ]]
+	local Text: string = Authority:gsub("^([^@]*)@", function(Userinfo): string
 		-- upvalues: p2 (copy)
 		p2.userinfo = Userinfo
 		
 		return ""
-	end):gsub("^%[[^%]]+%]", function(Host): string --[[ Line: 266 ]]
+	end):gsub("^%[[^%]]+%]", function(Host): string
 		-- upvalues: p2 (copy)
 		p2.host = Host
 		
 		return ""
-	end):gsub(":([^:]*)$", function(p3): string --[[ Line: 271 ]]
+	end):gsub(":([^:]*)$", function(p3): string
 		-- upvalues: p2 (copy)
 		p2.port = tonumber(p3)
 		
@@ -279,7 +279,7 @@ function UrlModule.setAuthority(p2, Authority: string): string --[[ Line: 254 ]]
 		p2.host = Text:lower()
 	end
 	if p2.userinfo then
-		p2.user = p2.userinfo:gsub(":([^:]*)$", function(Password): string --[[ Line: 280 ]]
+		p2.user = p2.userinfo:gsub(":([^:]*)$", function(Password): string
 			-- upvalues: p2 (copy)
 			p2.password = Password
 			
@@ -289,32 +289,32 @@ function UrlModule.setAuthority(p2, Authority: string): string --[[ Line: 254 ]]
 	return Text
 end
 
-function UrlModule.parse(ParseResult) --[[ Line: 295 ]]
+function UrlModule.parse(ParseResult)
 	-- upvalues: UrlModule (copy), concat (copy)
 	local t = {}
 	UrlModule.setAuthority(t, "")
 	UrlModule.setQuery(t, "")
-	t.path = tostring(ParseResult or ""):gsub("#(.*)$", function(Fragment): string --[[ Line: 301 ]]
+	t.path = tostring(ParseResult or ""):gsub("#(.*)$", function(Fragment): string
 		-- upvalues: t (copy)
 		t.fragment = Fragment
 		
 		return ""
-	end):gsub("^([%w][%w%+%-%.]*)%:", function(Text: string): string --[[ Line: 305 ]]
+	end):gsub("^([%w][%w%+%-%.]*)%:", function(Text: string): string
 		-- upvalues: t (copy)
 		t.scheme = Text:lower()
 		
 		return ""
-	end):gsub("%?(.*)", function(p2): string --[[ Line: 309 ]]
+	end):gsub("%?(.*)", function(p2): string
 		-- upvalues: UrlModule (upval), t (copy)
 		UrlModule.setQuery(t, p2)
 		
 		return ""
-	end):gsub("^//([^/]*)", function(p2): string --[[ Line: 313 ]]
+	end):gsub("^//([^/]*)", function(p2): string
 		-- upvalues: UrlModule (upval), t (copy)
 		UrlModule.setAuthority(t, p2)
 		
 		return ""
-	end):gsub("%%(%x%x)", function(p2): string --[[ Line: 65 ]]
+	end):gsub("%%(%x%x)", function(p2): string
 		return (string.char((tonumber(p2, 16))))
 	end)
 	setmetatable(t, {
@@ -326,7 +326,7 @@ function UrlModule.parse(ParseResult) --[[ Line: 295 ]]
 	return t
 end
 
-function UrlModule.removeDotSegments(Text: string): string --[[ Line: 331 ]]
+function UrlModule.removeDotSegments(Text: string): string
 	local List = {}
 	
 	if string.len(Text) == 0 then
@@ -341,7 +341,7 @@ function UrlModule.removeDotSegments(Text: string): string --[[ Line: 331 ]]
 	if (string.len(Text) > 1 or Enabled == false) and string.sub(Text, -1) == "/" then
 		Flag = true
 	end
-	Text:gsub("[^/]+", function(p2) --[[ Line: 345 ]]
+	Text:gsub("[^/]+", function(p2)
 		-- upvalues: List (copy)
 		table.insert(List, p2)
 	end)
@@ -369,7 +369,7 @@ function UrlModule.removeDotSegments(Text: string): string --[[ Line: 331 ]]
 	return Joined
 end
 
-local function absolutePath(Path, Text: string): string --[[ Line: 375 ]]
+local function absolutePath(Path, Text: string): string
 	if string.sub(Text, 1, 1) == "/" then
 		return "/" .. string.gsub(Text, "^[%./]+", "")
 	end
@@ -378,17 +378,17 @@ local function absolutePath(Path, Text: string): string --[[ Line: 375 ]]
 	if Text ~= "" then
 		Text3 = "/" .. Text3:gsub("[^/]*$", "")
 	end
-	local Replaced = string.gsub((Text3 .. Text):gsub("([^/]*%./)", function(p2) --[[ Line: 384 ]]
+	local Replaced = string.gsub((Text3 .. Text):gsub("([^/]*%./)", function(p2)
 		return if p2 == "./" then "" else p2
 	end), "/%.$", "/")
 	local Text1: string? = nil
 	while Text1 ~= Replaced do
 		Text1 = Replaced
-		Replaced = string.gsub(Text1, "([^/]*/%.%./)", function(Match) --[[ Line: 391 ]]
+		Replaced = string.gsub(Text1, "([^/]*/%.%./)", function(Match)
 			return if Match == "../../" then Match else ""
 		end)
 	end
-	local Replaced1 = string.gsub(Replaced, "([^/]*/%.%.?)$", function(Match) --[[ Line: 395 ]]
+	local Replaced1 = string.gsub(Replaced, "([^/]*/%.%.?)$", function(Match)
 		return if Match == "../.." then Match else ""
 	end)
 	local Text2: string? = nil
@@ -399,7 +399,7 @@ local function absolutePath(Path, Text: string): string --[[ Line: 375 ]]
 	return "/" .. Replaced1
 end
 
-function UrlModule.resolve(p2, p3) --[[ Line: 409 ]]
+function UrlModule.resolve(p2, p3)
 	-- upvalues: UrlModule (copy), absolutePath (copy)
 	if type(p2) == "string" then
 		p2 = UrlModule.parse(p2)
@@ -431,7 +431,7 @@ function UrlModule.resolve(p2, p3) --[[ Line: 409 ]]
 	return p3
 end
 
-function UrlModule.normalize(p2) --[[ Line: 439 ]]
+function UrlModule.normalize(p2)
 	-- upvalues: UrlModule (copy), absolutePath (copy)
 	if type(p2) == "string" then
 		p2 = UrlModule.parse(p2)

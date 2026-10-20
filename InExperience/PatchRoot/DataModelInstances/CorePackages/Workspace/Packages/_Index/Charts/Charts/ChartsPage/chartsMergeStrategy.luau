@@ -2,7 +2,7 @@
 local FFlagSduiChartsRequestPlaceholders = require(Parent.SharedFlags).FFlagSduiChartsRequestPlaceholders
 local _ = require(Parent.SduiSharedUtilities)
 
-local function hasAnyOverlap(List, List1): boolean --[[ Line: 10 ]]
+local function hasAnyOverlap(List, List1): boolean
 	if List == nil or #List == 0 then
 		return false
 	end
@@ -19,7 +19,7 @@ local function hasAnyOverlap(List, List1): boolean --[[ Line: 10 ]]
 	return false
 end
 
-return function(Entry, p1, p2) --[[ Line: 41 | Named "chartsMergeStrategy" ]]
+return function(Entry, p1, p2)
 	-- upvalues: FFlagSduiChartsRequestPlaceholders (copy), hasAnyOverlap (copy)
 	return if FFlagSduiChartsRequestPlaceholders and #Entry == 1 and Entry[1] == "entry_order" then if hasAnyOverlap(p2, p1) then "replace" else "append" else nil
 end

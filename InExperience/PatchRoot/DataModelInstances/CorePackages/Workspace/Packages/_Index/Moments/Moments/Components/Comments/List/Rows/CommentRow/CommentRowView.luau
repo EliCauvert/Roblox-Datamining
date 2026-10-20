@@ -17,9 +17,9 @@ local GetRbxThumbFunction = FoundationModule.Utility.getRbxThumb
 local UseComposedRefFunction = require(Parent.ReactUtils).useComposedRef
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function noop() --[[ Line: 66 ]] end
+local function noop() end
 
-return function(Frame) --[[ Line: 68 | Named "CommentRowView" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), UseComposedRefFunction (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), GetLineHeightsModule (copy), FFlagMomentsCommentRowRedesignModule (copy), FoundationModule (copy), CommentRowHighlightModule (copy), noop (copy), StateLayerAffordance (copy), ImageWithSkeletonModule (copy), Radius (copy), CommentReactionButtonModule (copy), CommentActionsMenuModule (copy), CommentDeleteConfirmationDialogModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ActionsMenu = Frame.actionsMenu
@@ -27,7 +27,7 @@ return function(Frame) --[[ Line: 68 | Named "CommentRowView" ]]
 	local HasAnchorRef: boolean = ActionsMenu ~= nil and ActionsMenu.anchorRef ~= nil
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseComposedRefResult = UseComposedRefFunction(Frame.gestureRef, UseStateResult2)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 76 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseStateResult (copy)
 		return { current = UseStateResult }
 	end, { UseStateResult })

@@ -4,7 +4,7 @@ local PartyPageCarouselVariant = game:DefineFastString("PartyPageCarouselVariant
 local ForceEnableSocialCarouselPartyPage5 = game:DefineFastFlag("ForceEnableSocialCarouselPartyPage5", false)
 local EnablePartyPageCarouselExperimentation4 = game:DefineFastFlag("EnablePartyPageCarouselExperimentation4", false)
 
-local function _(p1) --[[ Line: 13 | Named "getIsUserInTreatment" ]]
+local function _(p1)
 	-- upvalues: ExperimentCacheManager (copy), FStringPartyPageCarouselExpLayer (copy)
 	local LayerVariables = ExperimentCacheManager.default:getLayerVariables(FStringPartyPageCarouselExpLayer)
 	
@@ -12,7 +12,7 @@ local function _(p1) --[[ Line: 13 | Named "getIsUserInTreatment" ]]
 end
 
 return {
-	getAppChatFormFactorEnabled = function() --[[ Line: 28 ]]
+	getAppChatFormFactorEnabled = function()
 		-- upvalues: ForceEnableSocialCarouselPartyPage5 (copy), EnablePartyPageCarouselExperimentation4 (copy), PartyPageCarouselVariant (copy), ExperimentCacheManager (copy), FStringPartyPageCarouselExpLayer (copy)
 		local Flag: boolean = ForceEnableSocialCarouselPartyPage5
 		
@@ -30,7 +30,7 @@ return {
 		end
 		return Flag
 	end,
-	getPartyPageCarouselEnabled = function() --[[ Line: 23 ]]
+	getPartyPageCarouselEnabled = function()
 		-- upvalues: ForceEnableSocialCarouselPartyPage5 (copy), EnablePartyPageCarouselExperimentation4 (copy), PartyPageCarouselVariant (copy), ExperimentCacheManager (copy), FStringPartyPageCarouselExpLayer (copy)
 		local Flag: boolean = ForceEnableSocialCarouselPartyPage5
 		
@@ -48,7 +48,7 @@ return {
 		end
 		return Flag
 	end,
-	logExposure = function() --[[ Line: 33 ]]
+	logExposure = function()
 		-- upvalues: EnablePartyPageCarouselExperimentation4 (copy), ExperimentCacheManager (copy), FStringPartyPageCarouselExpLayer (copy)
 		if EnablePartyPageCarouselExperimentation4 and ExperimentCacheManager.default:getLayerVariables(FStringPartyPageCarouselExpLayer) ~= nil then
 			ExperimentCacheManager.default:logLayerExposure(FStringPartyPageCarouselExpLayer)

@@ -7,12 +7,12 @@ local Focusable = RoactGamepadModule.Focusable
 local _ = require(Parent.Dash)
 local CheckboxButtonItemModule = require(script.Parent.CheckboxButtonItem)
 
-local function CheckboxGroup(Gui) --[[ Line: 65 ]]
+local function CheckboxGroup(Gui)
 	-- upvalues: RoactGamepadModule (copy), ReactModule (copy), Focusable (copy), CheckboxButtonItemModule (copy), View (copy)
 	local UseRefCacheResult = RoactGamepadModule.useRefCache()
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	local UseRefCacheResult1 = RoactGamepadModule.useRefCache()
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 71 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: Gui (copy), UseRefCacheResult1 (copy), UseBindingResult2 (copy)
 		local Total = 0
 		
@@ -59,7 +59,7 @@ local function CheckboxGroup(Gui) --[[ Line: 65 ]]
 			restorePreviousChildFocus = HasFoundIndex,
 			NextSelectionUp = if LayoutOrder > 1 then UseRefCacheResult[LayoutOrder - 1] else nil,
 			NextSelectionDown = if LayoutOrder < #Gui.items then UseRefCacheResult[LayoutOrder + 1] else nil,
-			onHeightChanged = ReactModule.useCallback(function(Current) --[[ Line: 116 ]]
+			onHeightChanged = ReactModule.useCallback(function(Current)
 				-- upvalues: UseRefCacheResult1 (copy), item (copy), UseResult (copy)
 				UseRefCacheResult1[item.id].current = Current
 				UseResult()
@@ -71,7 +71,7 @@ local function CheckboxGroup(Gui) --[[ Line: 65 ]]
 	return ReactModule.createElement(v1 and Focusable[View] or View, {
 		BackgroundTransparency = 1,
 		defaultChild = v1 and UseRefCacheResult[1] or nil,
-		Size = UseBindingResult:map(function(YOffset): UDim2 --[[ Line: 127 ]]
+		Size = UseBindingResult:map(function(YOffset): UDim2
 			return UDim2.new(1, 0, 0, YOffset)
 		end),
 		LayoutOrder = Gui.layoutOrder,
@@ -84,7 +84,7 @@ local function CheckboxGroup(Gui) --[[ Line: 65 ]]
 	}, config)
 end
 
-return ReactModule.forwardRef(function(p1, FrameRef) --[[ Line: 141 ]]
+return ReactModule.forwardRef(function(p1, FrameRef)
 	-- upvalues: ReactModule (copy), CheckboxGroup (copy), CryoModule (copy)
 	return ReactModule.createElement(CheckboxGroup, CryoModule.Dictionary.join(p1, { frameRef = FrameRef }))
 end)

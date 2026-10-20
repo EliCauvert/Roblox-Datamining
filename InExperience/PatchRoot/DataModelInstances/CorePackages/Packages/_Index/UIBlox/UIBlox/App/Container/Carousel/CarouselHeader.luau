@@ -23,14 +23,14 @@ CarouselHeader.validateProps = TModule.strictInterface({
 })
 CarouselHeader.defaultProps = { headerText = "", carouselMargin = 0 }
 
-function CarouselHeader.render(p1) --[[ Line: 51 ]]
+function CarouselHeader.render(p1)
 	-- upvalues: WithStyleModule (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy), GetIconSizeModule (copy), IconSizeModule (copy), RoactModule (copy), InteractableModule (copy), GenericTextLabelModule (copy), ImageSetComponentModule (copy), IconsNavigationPushRightSmall (copy)
 	local HeaderText = p1.props.headerText
 	local OnSeeAll = p1.props.onSeeAll
 	local LayoutOrder = p1.props.layoutOrder
 	local CarouselMargin = p1.props.carouselMargin
 	
-	return WithStyleModule(function(p2) --[[ Line: 58 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: FoundationFontFaceMigration (upval), GetFontFromFontStyleModule (upval), GetTextSizeModule (upval), HeaderText (copy), GetIconSizeModule (upval), IconSizeModule (upval), RoactModule (upval), LayoutOrder (copy), InteractableModule (upval), CarouselMargin (copy), OnSeeAll (copy), GenericTextLabelModule (upval), ImageSetComponentModule (upval), IconsNavigationPushRightSmall (upval)
 		local Header1 = p2.Font.Header1
 		local TextSizeModule = GetTextSizeModule(HeaderText, Header1.RelativeSize * p2.Font.BaseSize, if FoundationFontFaceMigration then GetFontFromFontStyleModule(Header1) else Header1.Font, Vector2.new(10000, 10000))
@@ -46,7 +46,7 @@ function CarouselHeader.render(p1) --[[ Line: 51 ]]
 				AutoButtonColor = false,
 				BackgroundTransparency = 1,
 				[RoactModule.Event.Activated] = OnSeeAll,
-				onStateChanged = function() --[[ Line: 80 ]] end
+				onStateChanged = function() end
 			}, {
 				Layout = RoactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Horizontal,

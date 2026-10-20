@@ -16,7 +16,7 @@ local FFlagBuildAnalyticsCreatorHubWindowFixModule = require(BuildExperience.Fla
 local MetricChartModule = require(script.Parent.MetricChart)
 local PLOTHEIGHT = require(script.Parent.chartLayout).PLOT_HEIGHT
 
-local function MetricChartSkeleton(p1) --[[ Line: 47 ]]
+local function MetricChartSkeleton(p1)
 	-- upvalues: ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), PLOTHEIGHT (copy)
 	return ReactModule.createElement(View, {
 		tag = "col gap-xsmall size-full-0 auto-y",
@@ -46,7 +46,7 @@ local function MetricChartSkeleton(p1) --[[ Line: 47 ]]
 	})
 end
 
-local function MetricChartEmpty(p1) --[[ Line: 76 ]]
+local function MetricChartEmpty(p1)
 	-- upvalues: ReactModule (copy), View (copy), Text (copy)
 	return ReactModule.createElement(View, {
 		tag = "col gap-xsmall size-full-0 auto-y",
@@ -60,7 +60,7 @@ local function MetricChartEmpty(p1) --[[ Line: 76 ]]
 	})
 end
 
-return function(p1) --[[ Line: 89 | Named "MetricChartContainer" ]]
+return function(p1)
 	-- upvalues: DataStatus (copy), UseExperienceMetricSeriesModule (copy), UseLocalizationFunction (copy), AnalyticsKeysModule (copy), ReactModule (copy), MetricChartEmpty (copy), MetricChartSkeleton (copy), FFlagBuildAnalyticsCreatorHubWindowFixModule (copy), MetricChartModule (copy)
 	local LatestAvailableTime = if p1.metadataStatus == DataStatus.Failed then nil else p1.latestAvailableTime
 	local UseExperienceMetricSeriesModuleResult = UseExperienceMetricSeriesModule(p1.universeId, p1.metric, p1.window, LatestAvailableTime)

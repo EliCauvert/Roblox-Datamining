@@ -10,10 +10,10 @@ local MomentStatus = require(Parent.MomentsTypes).Enums.MomentStatus
 local FFlagMomentsPassFeedItemIdToBackendApis = require(Parent.SharedFlags).FFlagMomentsPassFeedItemIdToBackendApis
 local config = { metadata = {} }
 
-return function(p1, p2) --[[ Line: 37 | Named "useMomentDetails" ]]
+return function(p1, p2)
 	-- upvalues: GetMomentDetailsStoreModule (copy), ReactModule (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), SignalsReactModule (copy), config (copy), DataHydrationModule (copy), MomentDetailsStatusModule (copy), FFlagAppChatMomentShareCardEdgeCasesModule (copy), MomentStatus (copy)
 	local MomentDetailsStoreModule = GetMomentDetailsStoreModule(false)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 39 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FFlagMomentsPassFeedItemIdToBackendApis (upval), MomentDetailsStoreModule (copy), p1 (copy), p2 (copy)
 		return if FFlagMomentsPassFeedItemIdToBackendApis then MomentDetailsStoreModule.getAndFetchMomentDetails(p1, p2) else MomentDetailsStoreModule.getAndFetchMomentDetails(p1)
 	end, { MomentDetailsStoreModule, p1, p2 })
@@ -32,7 +32,7 @@ return function(p1, p2) --[[ Line: 37 | Named "useMomentDetails" ]]
 	local IsModerated = UseSignalStateResult2.isModerated
 	local Status = UseSignalStateResult2.status
 	
-	return ReactModule.useMemo(function() --[[ Line: 61 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult (copy), UseSignalStateResult1 (copy), DataHydrationModule (upval), MomentDetailsStatusModule (upval), FFlagAppChatMomentShareCardEdgeCasesModule (upval), IsModerated (copy), Status (copy), MomentStatus (upval), CreatorId (copy), Description (copy), UniverseId (copy), ExperienceName (copy), LikeCount (copy), AssetId (copy), CaptureType (copy), AssetAccessContext (copy)
 		return if UseSignalStateResult == nil then if UseSignalStateResult1 == DataHydrationModule.DataStatus.Failed then { status = MomentDetailsStatusModule.Error } else { status = MomentDetailsStatusModule.Loading } elseif FFlagAppChatMomentShareCardEdgeCasesModule and (IsModerated == true or Status == MomentStatus.Deleted) then { status = MomentDetailsStatusModule.Unavailable } else {
 			status = MomentDetailsStatusModule.Ready,

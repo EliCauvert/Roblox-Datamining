@@ -10,15 +10,15 @@ local SelectCommerceProductIdModule = require(CommercePurchaseApp.Store.Selector
 local SelectCheckoutSessionIdModule = require(CommercePurchaseApp.Store.Selectors.selectCheckoutSessionId)
 local CommercePurchaseEndedModule = require(CommercePurchaseApp.Store.Actions.CommercePurchaseEnded)
 
-return function() --[[ Line: 16 | Named "usePurchaseBrowserClosedListenerEffect" ]]
+return function()
 	-- upvalues: UseDispatchFunction (copy), UseSelectorFunction (copy), SelectPromptStateModule (copy), SelectCommerceProductIdModule (copy), SelectCheckoutSessionIdModule (copy), ReactModule (copy), CommerceService (copy), CommercePurchasePromptStateEnumModule (copy), CommercePurchaseEndedModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseSelectorResult = UseSelectorFunction(SelectPromptStateModule)
 	local UseSelectorResult1 = UseSelectorFunction(SelectCommerceProductIdModule)
 	local UseSelectorResult2 = UseSelectorFunction(SelectCheckoutSessionIdModule)
-	ReactModule.useEffect(function() --[[ Line: 21 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseDispatchResult (copy), CommerceService (upval), UseSelectorResult (copy), CommercePurchasePromptStateEnumModule (upval), UseSelectorResult1 (copy), UseSelectorResult2 (copy), CommercePurchaseEndedModule (upval)
-		local PurchaseBrowserClosedConnection = if UseDispatchResult then CommerceService.PurchaseBrowserClosed:Connect(function() --[[ Line: 24 ]]
+		local PurchaseBrowserClosedConnection = if UseDispatchResult then CommerceService.PurchaseBrowserClosed:Connect(function()
 			-- upvalues: UseSelectorResult (upval), CommercePurchasePromptStateEnumModule (upval), CommerceService (upval), UseSelectorResult1 (upval), UseSelectorResult2 (upval), UseDispatchResult (upval), CommercePurchaseEndedModule (upval)
 			if UseSelectorResult == CommercePurchasePromptStateEnumModule.Checkout then
 				CommerceService:SignalPromptCommerceProductPurchaseFinished(UseSelectorResult1, true, UseSelectorResult2)
@@ -26,7 +26,7 @@ return function() --[[ Line: 16 | Named "usePurchaseBrowserClosedListenerEffect"
 			end
 		end) else nil
 		
-		return function() --[[ Line: 35 ]]
+		return function()
 			-- upvalues: PurchaseBrowserClosedConnection (ref)
 			if PurchaseBrowserClosedConnection then
 				PurchaseBrowserClosedConnection:Disconnect()

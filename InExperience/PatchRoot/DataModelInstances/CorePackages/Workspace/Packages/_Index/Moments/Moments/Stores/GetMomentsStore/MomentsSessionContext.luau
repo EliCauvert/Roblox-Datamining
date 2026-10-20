@@ -5,7 +5,7 @@ local Context = ReactModule.createContext(nil)
 
 return {
 	MomentsSessionContext = Context,
-	useMomentsSession = function() --[[ Line: 27 ]]
+	useMomentsSession = function()
 		-- upvalues: ReactModule (copy), Context (copy), ParentModule (copy)
 		local UseContextResult = ReactModule.useContext(Context)
 		

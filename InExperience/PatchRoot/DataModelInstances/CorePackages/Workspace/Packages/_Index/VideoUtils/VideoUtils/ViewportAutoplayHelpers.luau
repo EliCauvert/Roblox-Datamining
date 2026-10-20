@@ -4,25 +4,25 @@ local ViewportAutoplayCellVerticalPaddingAttributeModule = require(VideoUtils.Vi
 local ViewportAutoplayAlignmentTypeAttributeModule = require(VideoUtils.ViewportAutoplayAlignmentTypeAttribute)
 local AlignmentType = require(VideoUtils.Parent.DiscoveryTypes).GameCollectionItemTypes.AlignmentType
 local ViewportAutoplayHelpersModule = {
-	getTileRowSpan = function(Frame): number --[[ Line: 11 ]]
+	getTileRowSpan = function(Frame): number
 		-- upvalues: ViewportAutoplayRowSpanAttributeModule (copy)
 		local Attribute: number = Frame:GetAttribute(ViewportAutoplayRowSpanAttributeModule)
 		
 		return if typeof(Attribute) == "number" and Attribute > 0 then math.floor(Attribute) else 1
 	end,
-	resolveOneByOneHeight = function(Frame, p1: number) --[[ Line: 20 ]]
+	resolveOneByOneHeight = function(Frame, p1: number)
 		-- upvalues: ViewportAutoplayCellVerticalPaddingAttributeModule (copy)
 		local Attribute = Frame:GetAttribute(ViewportAutoplayCellVerticalPaddingAttributeModule)
 		
 		return if typeof(Attribute) == "number" and p1 >= 2 then (Frame.AbsoluteSize.Y - Attribute * (p1 - 1)) / p1 else nil
 	end,
-	isTilePinnedLeft = function(Frame) --[[ Line: 30 ]]
+	isTilePinnedLeft = function(Frame)
 		-- upvalues: ViewportAutoplayAlignmentTypeAttributeModule (copy), AlignmentType (copy)
 		local Attribute = Frame:GetAttribute(ViewportAutoplayAlignmentTypeAttributeModule)
 		
 		return Attribute == AlignmentType.LeftPin or Attribute ~= AlignmentType.RightPin and nil
 	end,
-	getReadingOrderPositions = function(Frame: Frame, p1, p2, p3: number, p4) --[[ Line: 42 ]]
+	getReadingOrderPositions = function(Frame: Frame, p1, p2, p3: number, p4)
 		local Y = Frame.AbsolutePosition.Y
 		local Y1 = Frame.AbsoluteSize.Y
 		
@@ -40,7 +40,7 @@ local ViewportAutoplayHelpersModule = {
 	end
 }
 
-function ViewportAutoplayHelpersModule.computeRowAnchorOverrides(Frames, p5) --[[ Line: 72 ]]
+function ViewportAutoplayHelpersModule.computeRowAnchorOverrides(Frames, p5)
 	-- upvalues: ViewportAutoplayHelpersModule (copy)
 	local NewRowTops = {}
 	
@@ -84,7 +84,7 @@ function ViewportAutoplayHelpersModule.computeRowAnchorOverrides(Frames, p5) --[
 						end
 					end
 				end
-				table.sort(List, function(A, B): boolean --[[ Line: 122 ]]
+				table.sort(List, function(A, B): boolean
 					return A.absoluteX < B.absoluteX
 				end)
 				local CountList = #List

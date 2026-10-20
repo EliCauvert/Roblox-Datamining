@@ -8,7 +8,7 @@ local RobloxSubscriptionPurchaseAppModule = require(Parent.RobloxSubscriptionPur
 local SignalsReactModule = require(Parent.SignalsReact)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return ReactModule.memo(function(p1) --[[ Line: 24 | Named "EarlyAccessPlusTooltip" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseLocalizationFunction (copy), RobloxSubscriptionPurchaseAppModule (copy), SignalsReactModule (copy), ReactModule (copy), EducationalTooltip (copy), PopoverSide (copy), PopoverAlign (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		title = "Feature.RobloxSubscription.ToolTip.EarlyAccess.Title",

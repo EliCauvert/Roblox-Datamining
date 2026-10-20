@@ -5,7 +5,7 @@ local SettingsServiceModule = require(game:GetService("CorePackages").Workspace.
 local ValueChangedSignal = SettingsServiceModule.ValueChangedSignal
 local UtilsModule = require(Settings.Integrations.Utils)
 
-local function _(): boolean --[[ Line: 45 | Named "initAvailability" ]]
+local function _(): boolean
 	-- upvalues: UtilsModule (copy)
 	return UtilsModule.getDeviceType() == UtilsModule.DeviceTypes.Desktop or UtilsModule.getDeviceType() == UtilsModule.DeviceTypes.Unknown
 end
@@ -16,10 +16,10 @@ return {
 	alreadyLocalized = false,
 	field_type = SettingsServiceModule.SettingEnum.Toggle,
 	layoutOrder = require(Settings.Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER.FullScreenFrame,
-	onChanged = (function() --[[ Line: 24 | Named "FullScreenValue" ]]
+	onChanged = (function()
 		-- upvalues: ValueChangedSignal (copy), GameSettings (copy), GuiService (copy)
 		local NewValueChangedSignal = ValueChangedSignal.new(GameSettings:InFullScreen())
-		NewValueChangedSignal:connect(function(p1) --[[ Line: 27 ]]
+		NewValueChangedSignal:connect(function(p1)
 			-- upvalues: GameSettings (upval), GuiService (upval)
 			if p1 ~= GameSettings:InFullScreen() then
 				GuiService:ToggleFullscreen()
@@ -27,7 +27,7 @@ return {
 				return
 			end
 		end, true)
-		GameSettings.FullscreenChanged:Connect(function(IsFullscreen) --[[ Line: 35 ]]
+		GameSettings.FullscreenChanged:Connect(function(IsFullscreen)
 			-- upvalues: NewValueChangedSignal (copy)
 			NewValueChangedSignal:set(IsFullscreen)
 		end)

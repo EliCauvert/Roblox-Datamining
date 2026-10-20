@@ -6,7 +6,7 @@ local Dialog = FoundationModule.Dialog
 local DialogSize = FoundationModule.Enums.DialogSize
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
-return function(p1) --[[ Line: 22 | Named "OfferTermsDialog" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), Dialog (copy), DialogSize (copy), ButtonVariant (copy)
 	local Terms = p1.terms
 	

@@ -9,7 +9,7 @@ local IconButton = FoundationModule.IconButton
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(Frame: Frame) --[[ Line: 35 | Named "TextColorButton" ]]
+return function(Frame: Frame)
 	-- upvalues: UseTokensFunction (copy), FFlagMomentsTextOverlayColorPickerIconModule (copy), ReactModule (copy), View (copy), IconButton (copy), BuilderIconsModule (copy), FoundationModule (copy), Image (copy)
 	local UseTokensResult = UseTokensFunction()
 	

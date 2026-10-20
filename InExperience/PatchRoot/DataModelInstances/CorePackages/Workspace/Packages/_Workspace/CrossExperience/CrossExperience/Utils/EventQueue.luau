@@ -4,7 +4,7 @@ local LoggerModule = require(CrossExperience.Logger)
 local EventQueueModule = {}
 EventQueueModule.__index = EventQueueModule
 
-local function _(List) --[[ Line: 40 | Named "getFirstKeyInTable" ]]
+local function _(List)
 	local v1 = nil
 	
 	if List then
@@ -17,7 +17,7 @@ local function _(List) --[[ Line: 40 | Named "getFirstKeyInTable" ]]
 	return v1
 end
 
-function EventQueueModule.new(RequiresEventsInOrder) --[[ Line: 51 ]]
+function EventQueueModule.new(RequiresEventsInOrder)
 	-- upvalues: EventQueueModule (copy)
 	local config = {
 		queues = {},
@@ -28,7 +28,7 @@ function EventQueueModule.new(RequiresEventsInOrder) --[[ Line: 51 ]]
 	return config
 end
 
-function EventQueueModule:processNextEvent(Origin, p1) --[[ Line: 60 ]]
+function EventQueueModule:processNextEvent(Origin, p1)
 	-- upvalues: LoggerModule (copy)
 	local Queue = self.queues[Origin]
 	
@@ -73,11 +73,11 @@ function EventQueueModule:processNextEvent(Origin, p1) --[[ Line: 60 ]]
 	end
 end
 
-function EventQueueModule:reset() --[[ Line: 98 ]]
+function EventQueueModule:reset()
 	self.queues = {}
 end
 
-function EventQueueModule:process(Event, Params, Callback: (any) -> ()) --[[ Line: 102 ]]
+function EventQueueModule:process(Event, Params, Callback: (any) -> ())
 	-- upvalues: LoggerModule (copy)
 	if not Params then
 		LoggerModule:error("EventQueue: invalid event {} params missing", Event.NOTIFY)

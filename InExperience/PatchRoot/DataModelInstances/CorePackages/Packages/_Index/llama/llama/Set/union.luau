@@ -1,4 +1,4 @@
-﻿return function(...) --[[ Line: 2 | Named "union" ]]
+﻿return function(...)
 	local t = {}
 	
 	for i = 1, select("#", ...) do

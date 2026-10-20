@@ -31,21 +31,21 @@ CallbackInputBox.defaultProps = {
 	clearButtonSelectionImageObject = nil,
 	clearButtonDisabled = nil,
 	textChangedCallback = nil,
-	focusChangedCallback = function() --[[ Line: 42 ]] end,
-	onSelectCallback = function() --[[ Line: 43 ]] end,
-	returnPressedFromOnScreenKeyboardCallback = function() --[[ Line: 44 ]] end,
+	focusChangedCallback = function() end,
+	onSelectCallback = function() end,
+	returnPressedFromOnScreenKeyboardCallback = function() end,
 	inputBoxRef = nil,
-	[Roact.Change.AbsoluteSize] = function() --[[ Line: 48 ]] end
+	[Roact.Change.AbsoluteSize] = function() end
 }
 
-function CallbackInputBox.init(p1) --[[ Line: 51 ]]
+function CallbackInputBox.init(p1)
 	-- upvalues: Roact (copy)
 	p1.clearRef = Roact.createRef()
 	p1.inputBoxRef = p1.props.inputBoxRef or Roact.createRef()
 	p1.inputText = p1.props.initialInputText
 	p1.textChangedEventUnlocked = false
 	
-	function p1.focusTextbox() --[[ Line: 62 ]]
+	function p1.focusTextbox()
 		-- upvalues: p1 (copy)
 		p1.props.onSelectCallback()
 		
@@ -55,7 +55,7 @@ function CallbackInputBox.init(p1) --[[ Line: 51 ]]
 	end
 end
 
-function CallbackInputBox.render(p1) --[[ Line: 70 ]]
+function CallbackInputBox.render(p1)
 	-- upvalues: Roact (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ImageSetLabel (copy)
 	local PlaceholderTextTransparency = p1.props.placeholderTextTransparency
 	local InputTextTransparency = p1.props.inputTextTransparency
@@ -103,7 +103,7 @@ function CallbackInputBox.render(p1) --[[ Line: 70 ]]
 				SelectionImageObject = p1.props.inputBoxSelectionImageObject,
 				[Roact.Event.ReturnPressedFromOnScreenKeyboard] = p1.props.returnPressedFromOnScreenKeyboardCallback,
 				[Roact.Event.TouchTap] = p1.focusTextbox,
-				[Roact.Event.Focused] = function(Label) --[[ Line: 139 ]]
+				[Roact.Event.Focused] = function(Label)
 					-- upvalues: p1 (copy), InputTextTransparency (copy), PlaceholderTextTransparency (copy)
 					if p1.inputBoxRef.current and p1.inputBoxRef.current.Text ~= "" then
 						if p1.clearRef.current and not p1.props.clearButtonDisabled then
@@ -117,7 +117,7 @@ function CallbackInputBox.render(p1) --[[ Line: 70 ]]
 					end
 					p1.props.focusChangedCallback(true)
 				end,
-				[Roact.Event.FocusLost] = function(Label, p2) --[[ Line: 155 ]]
+				[Roact.Event.FocusLost] = function(Label, p2)
 					-- upvalues: p1 (copy), PlaceholderTextTransparency (copy)
 					if p1.inputBoxRef.current and p1.inputBoxRef.current.Text == "" then
 						Label.TextColor3 = p1.props.placeholderTextColor3
@@ -125,7 +125,7 @@ function CallbackInputBox.render(p1) --[[ Line: 70 ]]
 					end
 					p1.props.focusChangedCallback(false, p2)
 				end,
-				[Roact.Change.Text] = function(Label) --[[ Line: 164 ]]
+				[Roact.Change.Text] = function(Label)
 					-- upvalues: p1 (copy), InputTextTransparency (copy), PlaceholderTextTransparency (copy)
 					if Label.Text ~= "" or p1.textChangedEventUnlocked then
 						if Label.Text == "" then
@@ -160,7 +160,7 @@ function CallbackInputBox.render(p1) --[[ Line: 70 ]]
 				Visible = not p1.props.clearButtonDisabled,
 				SelectionImageObject = p1.props.clearButtonSelectionImageObject,
 				Selectable = p1.clearRef.current and p1.clearRef.current.Visible == true,
-				[Roact.Event.Activated] = function() --[[ Line: 205 ]]
+				[Roact.Event.Activated] = function()
 					-- upvalues: p1 (copy)
 					if p1.inputBoxRef.current then
 						p1.inputBoxRef.current.Text = ""
@@ -190,12 +190,12 @@ function CallbackInputBox.render(p1) --[[ Line: 70 ]]
 	})
 end
 
-function CallbackInputBox.didMount(p1) --[[ Line: 237 ]]
+function CallbackInputBox.didMount(p1)
 	if p1.inputBoxRef.current then
 		p1.inputBoxRef.current.Text = p1.inputText
 		
 		if p1.props.captureFocusOnMount then
-			spawn(function() --[[ Line: 242 ]]
+			spawn(function()
 				-- upvalues: p1 (copy)
 				if p1.inputBoxRef and p1.inputBoxRef.current then
 					p1.inputBoxRef.current:captureFocus()

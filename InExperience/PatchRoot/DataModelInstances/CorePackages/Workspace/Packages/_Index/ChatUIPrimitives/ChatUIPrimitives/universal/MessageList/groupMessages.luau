@@ -1,14 +1,14 @@
 ﻿local UnpackContentModule = require(script.Parent.Parent.ContentKinds.unpackContent)
 local _ = require(script.Parent.projectMessageEnvelope)
 
-local function _(p1, p2): boolean --[[ Line: 33 | Named "sameSender" ]]
+local function _(p1, p2): boolean
 	local Author = p1.author
 	local Author1 = p2.author
 	
 	return Author ~= nil and Author1 ~= nil and Author.userId == Author1.userId
 end
 
-local _ = function(p1, p2, p3, p4, p5) --[[ Line: 44 | Named "getGroupBreakReason" ]]
+local _ = function(p1, p2, p3, p4, p5)
 	if p5 == nil or p5 > p2.sentAtUnixMilliseconds - p1.sentAtUnixMilliseconds then
 		local Author = p1.author
 		local Author1 = p2.author
@@ -20,7 +20,7 @@ local _ = function(p1, p2, p3, p4, p5) --[[ Line: 44 | Named "getGroupBreakReaso
 	end
 end
 
-local _ = function(p1): boolean --[[ Line: 65 | Named "hasRenderableContent" ]]
+local _ = function(p1): boolean
 	-- upvalues: UnpackContentModule (copy)
 	local Contents = p1.contents
 	
@@ -35,7 +35,7 @@ local _ = function(p1): boolean --[[ Line: 65 | Named "hasRenderableContent" ]]
 	return false
 end
 
-local function orderedMessages(List) --[[ Line: 78 ]]
+local function orderedMessages(List)
 	-- upvalues: UnpackContentModule (copy)
 	local List1 = {}
 	local Flag = nil
@@ -61,14 +61,14 @@ local function orderedMessages(List) --[[ Line: 78 ]]
 			end
 		end
 	end
-	table.sort(List1, function(A, B): boolean --[[ Line: 85 ]]
+	table.sort(List1, function(A, B): boolean
 		return if A.sentAtUnixMilliseconds == B.sentAtUnixMilliseconds then A.id < B.id else A.sentAtUnixMilliseconds < B.sentAtUnixMilliseconds
 	end)
 	
 	return List1
 end
 
-local _ = function(List) --[[ Line: 94 | Named "indexPrevious" ]]
+local _ = function(List)
 	local t = {}
 	
 	if List == nil then
@@ -80,7 +80,7 @@ local _ = function(List) --[[ Line: 94 | Named "indexPrevious" ]]
 	return t
 end
 
-local function messageRow(p2, Message, IsFirst, IsLast) --[[ Line: 109 ]]
+local function messageRow(p2, Message, IsFirst, IsLast)
 	local v1 = p2[Message.id]
 	
 	return if v1 == nil or v1.kind ~= "message" or v1.message ~= Message or v1.groupPosition.isFirst ~= IsFirst or v1.groupPosition.isLast ~= IsLast then {
@@ -91,7 +91,7 @@ local function messageRow(p2, Message, IsFirst, IsLast) --[[ Line: 109 ]]
 	} else v1
 end
 
-local function timestampRow(p2, p3, p4) --[[ Line: 133 ]]
+local function timestampRow(p2, p3, p4)
 	local TimestampName: string = `timestamp:{p3.id}`
 	local SentAtUnixMilliseconds = if p4 == nil then nil else p4.sentAtUnixMilliseconds
 	local v1 = p2[TimestampName]
@@ -104,7 +104,7 @@ local function timestampRow(p2, p3, p4) --[[ Line: 133 ]]
 	} else v1
 end
 
-local _ = function(p2, List) --[[ Line: 153 | Named "finish" ]]
+local _ = function(p2, List)
 	if p2 == nil or #p2 ~= #List then
 		return List
 	end
@@ -117,7 +117,7 @@ local _ = function(p2, List) --[[ Line: 153 | Named "finish" ]]
 end
 
 return {
-	groupMessages = function(p3, p4, p5, List) --[[ Line: 175 ]]
+	groupMessages = function(p3, p4, p5, List)
 		-- upvalues: orderedMessages (copy), messageRow (copy), timestampRow (copy)
 		local OrderedMessagesResult = orderedMessages(p3)
 		local t = {}
@@ -134,7 +134,7 @@ return {
 		local List1 = {}
 		local v1 = 1
 		
-		local function appendGroup(Count: number) --[[ Line: 186 ]]
+		local function appendGroup(Count: number)
 			-- upvalues: v1 (ref), OrderedMessagesResult (copy), List1 (copy), messageRow (upval), t1 (copy)
 			local NewCount = Count - v1 + 1
 			
@@ -143,7 +143,7 @@ return {
 			end
 		end
 		
-		local function _(p6, p7) --[[ Line: 194 | Named "appendTimestamp" ]]
+		local function _(p6, p7)
 			-- upvalues: List1 (copy), timestampRow (upval), t1 (copy)
 			table.insert(List1, (timestampRow(t1, p6, p7)))
 		end
@@ -188,7 +188,7 @@ return {
 		end
 		return List2
 	end,
-	ungroupedRows = function(p6, List) --[[ Line: 165 ]]
+	ungroupedRows = function(p6, List)
 		-- upvalues: orderedMessages (copy), messageRow (copy)
 		local OrderedMessagesResult = orderedMessages(p6)
 		local t = {}

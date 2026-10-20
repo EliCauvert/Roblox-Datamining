@@ -19,16 +19,16 @@ local UseFocusRootFunction = FocusNavigationUtilsModule.useFocusRoot
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
 
-local function useFooterLayout(CaptionText) --[[ Line: 55 ]]
+local function useFooterLayout(CaptionText)
 	-- upvalues: UseTokensFunction (copy), UseTextSizeOffsetFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), UseTextSizeFunction (copy), TextService (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseTextSizeOffsetResult = UseTextSizeOffsetFunction()
 	local CaptionSmall = UseTokensResult.Typography.CaptionSmall
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 61 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2 (copy)
 		local Floored = math.floor(Frame.AbsoluteSize.X)
-		UseStateResult2(function(Floored1) --[[ Line: 63 ]]
+		UseStateResult2(function(Floored1)
 			-- upvalues: Floored (copy)
 			return if Floored1 == Floored then Floored1 else Floored
 		end)
@@ -40,7 +40,7 @@ local function useFooterLayout(CaptionText) --[[ Line: 55 ]]
 	
 	return {
 		topInset = UseTokensResult.Padding.Medium - UseTokensResult.Margin.Small,
-		captionHeight = ReactModule.useMemo(function() --[[ Line: 76 ]]
+		captionHeight = ReactModule.useMemo(function()
 			-- upvalues: CaptionText (copy), UseStateResult (copy), FoundationFontFaceMigration (upval), CaptionSmall (copy), UseTextSizeResult (copy), UseTextSizeOffsetResult (copy), TextService (upval)
 			return if CaptionText == nil or UseStateResult <= 0 then 0 elseif FoundationFontFaceMigration then CaptionSmall.LineHeight * (if UseTextSizeResult then UseTextSizeResult.Y else CaptionSmall.FontSize + UseTextSizeOffsetResult) else CaptionSmall.LineHeight * TextService:GetTextSize(CaptionText, CaptionSmall.FontSize + UseTextSizeOffsetResult, CaptionSmall.Font, Vector2.new(UseStateResult, 1e999)).Y
 		end, {
@@ -59,7 +59,7 @@ local EventMap = {
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-local function useSheetFocusRoot(p1) --[[ Line: 112 ]]
+local function useSheetFocusRoot(p1)
 	-- upvalues: ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy)
 	local OnBack = p1.onBack or p1.onClose
 	
@@ -67,11 +67,11 @@ local function useSheetFocusRoot(p1) --[[ Line: 112 ]]
 		isAutoFocusRoot = true,
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
 		eventMap = EventMap,
-		eventHandlers = ReactModule.useMemo(function() --[[ Line: 114 ]]
+		eventHandlers = ReactModule.useMemo(function()
 			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), OnBack (copy)
 			return {
 				[FocusNavigationEventNameEnum.NavigateBack] = {
-					handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 117 ]]
+					handler = InputHandlersModule.onRelease(function(p2)
 						-- upvalues: OnBack (upval)
 						p2:cancel()
 						OnBack()
@@ -83,7 +83,7 @@ local function useSheetFocusRoot(p1) --[[ Line: 112 ]]
 	})
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 134 | Named "GiftSheetLayoutView" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: useFooterLayout (copy), useSheetFocusRoot (copy), ReactModule (copy), Sheet (copy), DialogSize (copy), IconButton (copy), IconName (copy), Text (copy), View (copy)
 	local HasActions: boolean = p1.actions ~= nil or p1.captionText ~= nil
 	local UseFooterLayoutResult = useFooterLayout(p1.captionText)

@@ -1,7 +1,7 @@
 ﻿local ConstantsModule = require(script:FindFirstAncestor("AbuseReportMenu").Components.Constants)
 local RobloxTranslatorModule = require(game:GetService("CorePackages").Workspace.Packages.RobloxTranslator)
 
-function getAvailableMethodsOfAbuse(p1, p2) --[[ Line: 7 ]]
+function getAvailableMethodsOfAbuse(p1, p2)
 	-- upvalues: RobloxTranslatorModule (copy), ConstantsModule (copy)
 	local List = {
 		{

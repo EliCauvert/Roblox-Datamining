@@ -21,15 +21,15 @@ local FFlagSduiCarouselUseNestedImpressionsFeedContext = SharedFlagsModule.FFlag
 local SduiParseHelpers = SduiCoreSystemModule.SduiParseHelpers
 local Frozen = table.freeze({})
 
-local function ImpressionTaggedSduiItem(p1) --[[ Line: 75 ]]
+local function ImpressionTaggedSduiItem(p1)
 	-- upvalues: ReactModule (copy), ImpressionsTagUtility (copy), GetSduiComponentWrapperFunction (copy)
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 78 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), ImpressionsTagUtility (upval), UseRefResult (copy)
 		if not p1.impressionsTag then return end
 		ImpressionsTagUtility.AddTag(UseRefResult, p1.impressionsTag, p1.index)
 		
-		return function() --[[ Line: 83 ]]
+		return function()
 			-- upvalues: ImpressionsTagUtility (upval), UseRefResult (upval), p1 (upval)
 			ImpressionsTagUtility.RemoveTag(UseRefResult, p1.impressionsTag, p1.index)
 		end
@@ -37,7 +37,7 @@ local function ImpressionTaggedSduiItem(p1) --[[ Line: 75 ]]
 	
 	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		ref = ReactModule.useCallback(function(Current) --[[ Line: 88 ]]
+		ref = ReactModule.useCallback(function(Current)
 			-- upvalues: UseRefResult (copy), p1 (copy), ImpressionsTagUtility (upval)
 			UseRefResult.current = Current
 			
@@ -65,7 +65,7 @@ local function ImpressionTaggedSduiItem(p1) --[[ Line: 75 ]]
 	})
 end
 
-local function resolveImpressionsTag(p1, ComponentType, RouteName, Name, Index, SduiContext): string? --[[ Line: 121 ]]
+local function resolveImpressionsTag(p1, ComponentType, RouteName, Name, Index, SduiContext): string?
 	-- upvalues: SduiErrors (copy)
 	local Current = p1.current
 	
@@ -91,7 +91,7 @@ local function resolveImpressionsTag(p1, ComponentType, RouteName, Name, Index, 
 	end
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 163 | Named "SduiVerticalListWithImpressions" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: Frozen (copy), ReactModule (copy), SduiFeedContextModule (copy), FFlagSduiCarouselUseNestedImpressionsFeedContext (copy), FindAnalyticsFieldFunction (copy), SduiBuilder (copy), UseCollectionAnalyticsContextModule (copy), resolveImpressionsTag (copy), SduiParseHelpers (copy), SduiErrors (copy), ReportUnifiedLoggingImpressionsFunction (copy), SduiCollectionAnalyticsBuilder (copy), ImpressionTaggedSduiItem (copy), GetSduiComponentWrapperFunction (copy), SduiViewModule (copy), FrameBoundsImpressionsTracker (copy), FFlagLuaAppRespectClipAncestorImpressions (copy)
 	local SduiContext = p1.sduiContext
 	local Items = p1.items or Frozen
@@ -106,7 +106,7 @@ return ReactModule.memo(function(p1) --[[ Line: 163 | Named "SduiVerticalListWit
 	local UseRefResult1 = ReactModule.useRef({})
 	local RouteName = SduiContext.routeName or SduiContext.appPage
 	local ResolveImpressionsTagResult = resolveImpressionsTag(UseCollectionAnalyticsContextModuleResult2, ComponentType, RouteName, p1.debugName, p1.index or 0, SduiContext)
-	local UseResult = ReactModule.useCallback(function(List) --[[ Line: 213 ]]
+	local UseResult = ReactModule.useCallback(function(List)
 		-- upvalues: Items (copy), UseCollectionAnalyticsContextModuleResult (copy), SduiParseHelpers (upval), SduiContext (copy), SduiErrors (upval), ComponentType (copy), ResolveImpressionsTagResult (copy), ReportUnifiedLoggingImpressionsFunction (upval), UseRefResult1 (copy), UseCollectionAnalyticsContextModuleResult2 (copy), p1 (copy)
 		if #Items ~= 0 then
 			ReportUnifiedLoggingImpressionsFunction(SduiContext, List, UseRefResult1.current, UseCollectionAnalyticsContextModuleResult2.current, p1.startRow, p1.impressionEventName, p1.skipItemImpressionsLog, ResolveImpressionsTagResult)
@@ -126,7 +126,7 @@ return ReactModule.memo(function(p1) --[[ Line: 163 | Named "SduiVerticalListWit
 		ResolveImpressionsTagResult, p1.startRow, p1.impressionEventName,
 		p1.skipItemImpressionsLog
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 254 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Items (copy), SduiContext (copy), SduiErrors (upval), ComponentType (copy), ResolveImpressionsTagResult (copy), FindAnalyticsFieldFunction (upval), Frozen (upval), SduiBuilder (upval), SduiCollectionAnalyticsBuilder (upval), ReactModule (upval), ImpressionTaggedSduiItem (upval), p1 (copy), UseCollectionAnalyticsContextModuleResult (copy), ScrollViewPositionChangedSignal (copy), VerticalScrollingFrameRef (copy), UseRefResult1 (copy)
 		local Elements = {}
 		local Current = {}

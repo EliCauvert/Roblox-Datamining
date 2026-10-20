@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local ActionTextModule = require(script.Parent.ActionText)
 
-return ReactModule.memo(function(p1) --[[ Line: 17 | Named "ControlActionRow" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), ActionTextModule (copy)
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "row align-y-center gap-small size-full-0 auto-y",

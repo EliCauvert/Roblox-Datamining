@@ -1,4 +1,4 @@
-﻿return function(Text: string, Value: number): string --[[ Line: 1 | Named "truncateToMaxLength" ]]
+﻿return function(Text: string, Value: number): string
 	local Largest = math.max(0, (math.floor(Value)))
 	local Length = utf8.len(Text)
 	

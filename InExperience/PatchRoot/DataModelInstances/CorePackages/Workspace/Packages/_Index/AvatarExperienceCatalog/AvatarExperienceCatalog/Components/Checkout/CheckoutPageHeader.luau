@@ -11,7 +11,7 @@ local UseAvatarRouteFunction = AvatarExperienceNavigationModule.AvatarRoute.Hook
 local AvatarScreen = AvatarExperienceNavigationModule.Enums.AvatarScreen
 local FFlagAXEnableExpiredUserLookCheckout = require(Parent.AvatarExperienceFlags).FFlagAXEnableExpiredUserLookCheckout
 
-return ReactModule.memo(function() --[[ Line: 21 | Named "CheckoutPageHeader" ]]
+return ReactModule.memo(function()
 	-- upvalues: FFlagAXEnableExpiredUserLookCheckout (copy), UseDispatchFunction (copy), UseNavigationFunction (copy), FoundationModule (copy), UseAvatarRouteFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), AvatarScreen (copy), ClearTryOnsFunction (copy), CanGoBackFunction (copy)
 	local UseDispatchResult = if FFlagAXEnableExpiredUserLookCheckout then UseDispatchFunction() else nil
 	local UseNavigationResult = UseNavigationFunction()
@@ -23,7 +23,7 @@ return ReactModule.memo(function() --[[ Line: 21 | Named "CheckoutPageHeader" ]]
 		BackButton = ReactModule.createElement(FoundationModule.IconButton, {
 			icon = "chevron-large-left",
 			tag = "content-emphasis",
-			onActivated = ReactModule.useCallback(function() --[[ Line: 31 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: FFlagAXEnableExpiredUserLookCheckout (upval), UseAvatarRouteResult (copy), AvatarScreen (upval), UseDispatchResult (copy), ClearTryOnsFunction (upval), CanGoBackFunction (upval), UseNavigationResult (copy)
 				if FFlagAXEnableExpiredUserLookCheckout and (UseAvatarRouteResult and (UseAvatarRouteResult.current and UseAvatarRouteResult.current.name)) == AvatarScreen.ExpiredUserLookCheckout then
 					UseDispatchResult(ClearTryOnsFunction())

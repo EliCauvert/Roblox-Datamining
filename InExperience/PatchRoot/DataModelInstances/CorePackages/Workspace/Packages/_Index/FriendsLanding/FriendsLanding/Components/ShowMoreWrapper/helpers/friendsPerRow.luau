@@ -5,7 +5,7 @@ local InterfaceResult = T.interface({
 	minimumItemsPerRow = T.optional(T.number)
 })
 
-return function(p1): number --[[ Line: 13 ]]
+return function(p1): number
 	-- upvalues: InterfaceResult (copy)
 	assert(InterfaceResult(p1))
 	

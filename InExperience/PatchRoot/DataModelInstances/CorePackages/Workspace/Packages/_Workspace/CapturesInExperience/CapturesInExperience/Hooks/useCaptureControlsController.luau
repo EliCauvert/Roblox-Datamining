@@ -18,7 +18,7 @@ local _Vector2 = Vector2.new(1, 0.5)
 local Right = SnapDirectionModule.Right
 local config2 = { duration = 0.4, easingStyle = { 0.19, 1, 0.22, 1 } }
 
-local function validateRefs(List): boolean --[[ Line: 31 ]]
+local function validateRefs(List): boolean
 	for _, value in List do
 		if value.current == nil then
 			return false
@@ -29,7 +29,7 @@ local function validateRefs(List): boolean --[[ Line: 31 ]]
 	return true
 end
 
-local function clampItemPosition(AbsolutePosition, Vector, AbsolutePosition1, Vector1, Current): Vector2 --[[ Line: 45 ]]
+local function clampItemPosition(AbsolutePosition, Vector, AbsolutePosition1, Vector1, Current): Vector2
 	local AbsolutePositionDelta = AbsolutePosition - AbsolutePosition1
 	local MinValue = 50
 	local Y1: number = Current.Y
@@ -45,12 +45,12 @@ local function clampItemPosition(AbsolutePosition, Vector, AbsolutePosition1, Ve
 	return Vector2.new(X, Y)
 end
 
-local function getSnapPosition(AbsoluteSize, AnchorPoint, AbsolutePosition, AbsoluteSize1, Vector, Current) --[[ Line: 67 ]]
+local function getSnapPosition(AbsoluteSize, AnchorPoint, AbsolutePosition, AbsoluteSize1, Vector, Current)
 	-- upvalues: clampItemPosition (copy)
 	return (clampItemPosition(Vector2.new(AbsoluteSize1.X * Vector.X, AbsoluteSize1.Y * Vector.Y) - Vector2.new(AbsoluteSize.X * AnchorPoint.X, AbsoluteSize.Y * AnchorPoint.Y) + AbsolutePosition, AbsoluteSize, AbsolutePosition, AbsoluteSize1, Current))
 end
 
-local function getSnapAnchorPoint(p1, AbsolutePosition, AbsoluteSize, Current) --[[ Line: 94 ]]
+local function getSnapAnchorPoint(p1, AbsolutePosition, AbsoluteSize, Current)
 	local Vector = p1 - AbsolutePosition
 	local List = {
 		Vector2.new(0, (math.max(Vector.Y, Current.Y))),
@@ -58,7 +58,7 @@ local function getSnapAnchorPoint(p1, AbsolutePosition, AbsoluteSize, Current) -
 		Vector2.new(math.max(Vector.X, Current.X), 0),
 		Vector2.new(Vector.X, AbsoluteSize.Y)
 	}
-	table.sort(List, function(A, B): boolean --[[ Line: 109 ]]
+	table.sort(List, function(A, B): boolean
 		-- upvalues: Vector (copy)
 		return (A - Vector).Magnitude < (B - Vector).Magnitude
 	end)
@@ -67,12 +67,12 @@ local function getSnapAnchorPoint(p1, AbsolutePosition, AbsoluteSize, Current) -
 	return Entry / AbsoluteSize, (Entry - Vector).Magnitude
 end
 
-local function _(Vector) --[[ Line: 118 | Named "getSnapDirectionFromAnchorPoint" ]]
+local function _(Vector)
 	-- upvalues: SnapDirectionModule (copy)
 	return if Vector.X == 0 then SnapDirectionModule.Left elseif Vector.X == 1 then SnapDirectionModule.Right elseif Vector.Y == 0 then SnapDirectionModule.Top else SnapDirectionModule.Bottom
 end
 
-local _ = function(p1, Vector): boolean --[[ Line: 130 | Named "getShouldRotate" ]]
+local _ = function(p1, Vector): boolean
 	local IsXMatch: boolean = Vector.X == 0 or Vector.X == 1
 	local IsYMatch: boolean = Vector.Y == 0 or Vector.Y == 1
 	local Flag = false
@@ -93,7 +93,7 @@ local _ = function(p1, Vector): boolean --[[ Line: 130 | Named "getShouldRotate"
 	return Flag
 end
 
-return function(p1, Current) --[[ Line: 146 | Named "useCaptureControlsController" ]]
+return function(p1, Current)
 	-- upvalues: UseRefFunction (copy), CaptureControlsConfigurationModule (copy), UseStateFunction (copy), _Vector2 (copy), Right (copy), UseGuiInsetFunction (copy), UseDeviceInsetsFunction (copy), UseCallbackFunction (copy), UseAnimatedBindingFunction (copy), config (copy), config1 (copy), UseEffectFunction (copy), validateRefs (copy), SnapDirectionModule (copy), ReactOtterModule (copy), config2 (copy), getSnapPosition (copy), clampItemPosition (copy), UIDragDetectorFixEventPositionEnabledEngineFeature (copy), getSnapAnchorPoint (copy)
 	local UseRefResult = UseRefFunction(Current)
 	local UseRefResult1 = UseRefFunction(nil)
@@ -108,13 +108,13 @@ return function(p1, Current) --[[ Line: 146 | Named "useCaptureControlsControlle
 	local UseStateResult4, UseStateResult2_3 = UseStateFunction(Right)
 	local UseGuiInsetResult = UseGuiInsetFunction()
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 163 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: UseRefResult4 (copy)
 		UseRefResult4.current = false
 	end, {})
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = UseAnimatedBindingFunction(config)
 	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = UseAnimatedBindingFunction(config1, UseCallbackResult)
-	UseEffectFunction(function() --[[ Line: 174 ]]
+	UseEffectFunction(function()
 		-- upvalues: p1 (copy), validateRefs (upval), UseRefResult3 (copy), UseRefResult1 (copy), UseRefResult (copy), Current (copy), UseRefResult6 (copy), UseStateResult2 (copy), UseStateResult2_3 (copy), SnapDirectionModule (upval), UseStateResult3 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config2 (upval), UseStateResult2_2 (copy), getSnapPosition (upval), UseAnimatedBindingResult2_1 (copy)
 		if not p1 or not validateRefs({ UseRefResult3, UseRefResult1 }) then return end
 		assert(UseRefResult3.current ~= nil, "dragItemRef is nil")
@@ -157,7 +157,7 @@ return function(p1, Current) --[[ Line: 146 | Named "useCaptureControlsControlle
 		UseAnimatedBindingResult2,
 		UseAnimatedBindingResult2_1
 	})
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 230 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: p1 (copy), UseRefResult4 (copy), validateRefs (upval), UseRefResult3 (copy), UseRefResult1 (copy), getSnapPosition (upval), UseStateResult (copy), Current (copy), UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval)
 		if p1 and not UseRefResult4.current and validateRefs({ UseRefResult3, UseRefResult1 }) then
 			assert(UseRefResult3.current ~= nil, "dragItemRef is nil")
@@ -180,7 +180,7 @@ return function(p1, Current) --[[ Line: 146 | Named "useCaptureControlsControlle
 		UseStateResult1,
 		UseAnimatedBindingResult2_1
 	})
-	local UseCallbackResult11 = UseCallbackFunction(function(p2) --[[ Line: 268 ]]
+	local UseCallbackResult11 = UseCallbackFunction(function(p2)
 		-- upvalues: p1 (copy), UseStateResult1 (copy), validateRefs (upval), UseRefResult1 (copy), UseRefResult3 (copy), UseGuiInsetResult (copy), UseDeviceInsetsResult (copy), UseStateResult2_1 (copy), clampItemPosition (upval), Current (copy), UseStateResult3 (copy), UIDragDetectorFixEventPositionEnabledEngineFeature (upval), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseAnimatedBindingResult2_1 (copy)
 		if p1 and not UseStateResult1 and validateRefs({ UseRefResult1, UseRefResult3 }) then
 			assert(UseRefResult3.current ~= nil, "dragItemRef is nil")
@@ -211,7 +211,7 @@ return function(p1, Current) --[[ Line: 146 | Named "useCaptureControlsControlle
 		UseStateResult1, UseStateResult3, UseAnimatedBindingResult2_1,
 		UseAnimatedBindingResult2
 	})
-	local UseCallbackResult2 = UseCallbackFunction(function(p2, p3) --[[ Line: 334 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function(p2, p3)
 		-- upvalues: validateRefs (upval), UseRefResult3 (copy), UseRefResult1 (copy), UseGuiInsetResult (copy), UseDeviceInsetsResult (copy), getSnapAnchorPoint (upval), UIDragDetectorFixEventPositionEnabledEngineFeature (upval), Current (copy), UseStateResult3 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseStateResult2_2 (copy), getSnapPosition (upval), clampItemPosition (upval), UseAnimatedBindingResult2_1 (copy), UseRefResult4 (copy), config2 (upval), UseStateResult2 (copy), UseStateResult2_3 (copy), SnapDirectionModule (upval), CaptureControlsConfigurationModule (upval), UseRefResult6 (copy)
 		if not validateRefs({ UseRefResult3, UseRefResult1 }) then return end
 		assert(UseRefResult3.current ~= nil, "dragItemRef is nil")
@@ -270,7 +270,7 @@ return function(p1, Current) --[[ Line: 146 | Named "useCaptureControlsControlle
 		if UIDragDetectorFixEventPositionEnabledEngineFeature then nil else UseGuiInsetResult,
 		UseStateResult3, UseAnimatedBindingResult2_1, UseAnimatedBindingResult2
 	})
-	local UseCallbackResult3 = UseCallbackFunction(function(p2) --[[ Line: 425 ]]
+	local UseCallbackResult3 = UseCallbackFunction(function(p2)
 		-- upvalues: p1 (copy), UseStateResult1 (copy), UseCallbackResult2 (copy)
 		if p1 and UseStateResult1 then
 			UseCallbackResult2(p2, true)
@@ -278,7 +278,7 @@ return function(p1, Current) --[[ Line: 146 | Named "useCaptureControlsControlle
 			return
 		end
 	end, { p1, UseCallbackResult2, UseStateResult1 })
-	local UseCallbackResult4 = UseCallbackFunction(function(p2) --[[ Line: 433 ]]
+	local UseCallbackResult4 = UseCallbackFunction(function(p2)
 		-- upvalues: p1 (copy), UseStateResult1 (copy), UseCallbackResult2 (copy), UseStateResult2_1 (copy)
 		if p1 and UseStateResult1 then
 			UseCallbackResult2(p2, false)
@@ -287,7 +287,7 @@ return function(p1, Current) --[[ Line: 146 | Named "useCaptureControlsControlle
 			return
 		end
 	end, { p1, UseCallbackResult2, UseStateResult1 })
-	UseEffectFunction(function() --[[ Line: 442 ]]
+	UseEffectFunction(function()
 		-- upvalues: p1 (copy), UseRefResult (copy), Current (copy), UseCallbackResult1 (copy)
 		if not p1 then return end
 		if UseRefResult.current ~= Current then
@@ -295,7 +295,7 @@ return function(p1, Current) --[[ Line: 146 | Named "useCaptureControlsControlle
 			UseCallbackResult1()
 		end
 	end, { p1, Current, UseCallbackResult1 })
-	UseEffectFunction(function() --[[ Line: 453 ]]
+	UseEffectFunction(function()
 		-- upvalues: p1 (copy), UseRefResult2 (copy), UseCallbackResult11 (copy), UseCallbackResult3 (copy), UseCallbackResult4 (copy), UseRefResult1 (copy), UseCallbackResult1 (copy), UseRefResult3 (copy)
 		if not p1 then return end
 		local List = {}
@@ -311,7 +311,7 @@ return function(p1, Current) --[[ Line: 146 | Named "useCaptureControlsControlle
 		if UseRefResult3.current ~= nil then
 			table.insert(List, UseRefResult3.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(UseCallbackResult1))
 		end
-		return function() --[[ Line: 479 ]]
+		return function()
 			-- upvalues: List (copy)
 			for _, Connection in List do
 				Connection:Disconnect()

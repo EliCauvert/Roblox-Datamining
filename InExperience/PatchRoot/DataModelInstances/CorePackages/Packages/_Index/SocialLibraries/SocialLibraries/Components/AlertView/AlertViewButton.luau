@@ -8,11 +8,11 @@ AlertViewButton.defaultProps = {
 	LayoutOrder = 0,
 	secondary = false,
 	Text = "",
-	onActivated = function() --[[ Line: 13 ]] end,
+	onActivated = function() end,
 	Size = UDim2.new(1, 0, 1, 0)
 }
 
-function AlertViewButton.render(p1) --[[ Line: 18 ]]
+function AlertViewButton.render(p1)
 	-- upvalues: ButtonType (copy), Roact (copy), Button (copy)
 	return Roact.createElement(Button, {
 		buttonType = if p1.props.secondary then ButtonType.Secondary else ButtonType.PrimarySystem,

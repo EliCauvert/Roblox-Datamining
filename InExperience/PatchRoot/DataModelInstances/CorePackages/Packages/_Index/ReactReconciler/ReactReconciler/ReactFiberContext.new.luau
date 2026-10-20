@@ -29,16 +29,16 @@ local Cursor1 = CreateCursorFunction(false)
 local Current = EmptyContextObject
 local Callback = nil
 
-local function getUnmaskedContext(_, p1, p2) --[[ Line: 70 ]]
+local function getUnmaskedContext(_, p1, p2)
 	-- upvalues: Callback (ref), Current (ref), Cursor (copy)
 	return if p2 and Callback(p1) then Current else Cursor.current
 end
 
-Callback = function(Callback): boolean --[[ Line: 163 | Named "isContextProvider" ]]
+Callback = function(Callback): boolean
 	return type(Callback) ~= "function" and Callback.childContextTypes ~= nil
 end
 
-local function processChildContext(p1, p2, Current) --[[ Line: 221 ]]
+local function processChildContext(p1, p2, Current)
 	-- upvalues: DEV (copy), GetComponentNameFunction (copy), T (ref), Console (copy), Error1 (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), CheckPropTypesFunction (copy), Object (copy)
 	local StateNode = p1.stateNode
 	local ChildContextTypes = p2.childContextTypes
@@ -71,12 +71,12 @@ end
 return {
 	emptyContextObject = EmptyContextObject,
 	getUnmaskedContext = getUnmaskedContext,
-	cacheContext = function(p3, p4, p5) --[[ Line: 90 ]]
+	cacheContext = function(p3, p4, p5)
 		local StateNode = p3.stateNode
 		StateNode.__reactInternalMemoizedUnmaskedChildContext = p4
 		StateNode.__reactInternalMemoizedMaskedChildContext = p5
 	end,
-	getMaskedContext = function(p3, ReactInternalMemoizedUnmaskedChildContext) --[[ Line: 105 ]]
+	getMaskedContext = function(p3, ReactInternalMemoizedUnmaskedChildContext)
 		-- upvalues: EmptyContextObject (copy), DEV (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), GetComponentNameFunction (copy), CheckPropTypesFunction (copy)
 		local TypeFunction = p3.type
 		
@@ -108,21 +108,21 @@ return {
 		end
 		return t
 	end,
-	hasContextChanged = function() --[[ Line: 154 ]]
+	hasContextChanged = function()
 		-- upvalues: DisableLegacyContext (copy), Cursor1 (copy)
 		return not DisableLegacyContext and Cursor1.current
 	end,
-	popContext = function(p4) --[[ Line: 178 ]]
+	popContext = function(p4)
 		-- upvalues: PopFunction (copy), Cursor1 (copy), Cursor (copy)
 		PopFunction(Cursor1, p4)
 		PopFunction(Cursor, p4)
 	end,
-	popTopLevelContextObject = function(p4) --[[ Line: 188 ]]
+	popTopLevelContextObject = function(p4)
 		-- upvalues: PopFunction (copy), Cursor1 (copy), Cursor (copy)
 		PopFunction(Cursor1, p4)
 		PopFunction(Cursor, p4)
 	end,
-	pushTopLevelContextObject = function(p4, p5, p6) --[[ Line: 198 ]]
+	pushTopLevelContextObject = function(p4, p5, p6)
 		-- upvalues: Cursor (copy), EmptyContextObject (copy), Error1 (copy), PushFunction (copy), Cursor1 (copy)
 		if Cursor.current ~= EmptyContextObject then
 			error(Error1.new("Unexpected context found on stack. This error is likely caused by a bug in React. Please file an issue."))
@@ -132,7 +132,7 @@ return {
 	end,
 	processChildContext = processChildContext,
 	isContextProvider = Callback,
-	pushContextProvider = function(p4): boolean --[[ Line: 281 ]]
+	pushContextProvider = function(p4): boolean
 		-- upvalues: EmptyContextObject (copy), Current (ref), Cursor (copy), PushFunction (copy), Cursor1 (copy)
 		local StateNode = p4.stateNode
 		Current = Cursor.current
@@ -141,7 +141,7 @@ return {
 		
 		return true
 	end,
-	invalidateContextProvider = function(p4, p5, p6) --[[ Line: 304 ]]
+	invalidateContextProvider = function(p4, p5, p6)
 		-- upvalues: Error1 (copy), processChildContext (copy), Current (ref), PopFunction (copy), Cursor1 (copy), Cursor (copy), PushFunction (copy)
 		local StateNode = p4.stateNode
 		
@@ -162,7 +162,7 @@ return {
 			PushFunction(Cursor1, p6, p4)
 		end
 	end,
-	findCurrentUnmaskedContext = function(Return) --[[ Line: 345 ]]
+	findCurrentUnmaskedContext = function(Return)
 		-- upvalues: ClassComponent (copy), IsFiberMountedFunction (copy), Error1 (copy), HostRoot (copy)
 		if Return.tag ~= ClassComponent or not IsFiberMountedFunction(Return) then
 			error(Error1.new("Expected subtree parent to be a mounted class component. This error is likely caused by a bug in React. Please file an issue."))

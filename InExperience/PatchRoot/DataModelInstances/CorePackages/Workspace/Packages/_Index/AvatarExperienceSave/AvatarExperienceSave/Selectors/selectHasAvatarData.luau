@@ -1,3 +1,3 @@
-﻿return function(p1) --[[ Line: 1 | Named "selectHasAvatarData" ]]
+﻿return function(p1)
 	return p1.AvatarExperience.AvatarEditor.HasAvatarData
 end

@@ -15,12 +15,12 @@ local config = {
 }
 local config1 = { Fae = SocialUpsellTypeModule.FacialAgeEstimation }
 
-local function _(p1) --[[ Line: 69 | Named "getButtonAction" ]]
+local function _(p1)
 	-- upvalues: config (copy)
 	return if p1.action and p1.action.type then config[p1.action.type] else nil
 end
 
-return function(p1, p2) --[[ Line: 76 ]]
+return function(p1, p2)
 	-- upvalues: config1 (copy), SocialUpsellTypeModule (copy), ConstantsModule (copy), config (copy), FFlagAgeBasedUXHomepageVerificationBannerGreyButton (copy), CreateCommonSocialUpsellBannerConfigModule (copy), GetDeepValueFunction (copy), FFlagAgeBasedUXHomepageVerificationBannerLockIcon (copy)
 	local Entry = config1[p1.upsellCardType] or SocialUpsellTypeModule.Unknown
 	local UpsellCardV2Config = p1.upsellCardV2Config

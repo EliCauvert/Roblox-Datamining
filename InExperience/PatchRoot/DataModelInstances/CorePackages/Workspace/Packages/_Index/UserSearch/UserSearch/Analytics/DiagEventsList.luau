@@ -34,23 +34,23 @@ return {
 	[EventNamesModule.PlayerTileImpressions] = {
 		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("UserSearchPlayerTileImpressionsCounter", "UserSearchPlayerTileImpressions"),
-		count = function(p1): number --[[ Line: 45 ]]
+		count = function(p1): number
 			return if p1 and p1.playerId then #p1.playerId else 0
 		end
 	},
 	[EventNamesModule.UserSearchLoadingTime] = {
 		type = DiagEventTypes.Stats,
-		name = function(p1) --[[ Line: 51 ]]
+		name = function(p1)
 			-- upvalues: config1 (copy), config (copy)
 			return if p1.nextPage then config1[p1.status] else config[p1.status]
 		end,
-		stats = function(p1) --[[ Line: 56 ]]
+		stats = function(p1)
 			return p1.loadingTime or 0
 		end
 	},
 	[EventNamesModule.UserSearchLoaded] = {
 		type = DiagEventTypes.Counter,
-		name = function(p1) --[[ Line: 62 ]]
+		name = function(p1)
 			-- upvalues: config3 (copy), config2 (copy)
 			return if p1.nextPage then config3[p1.status] else config2[p1.status]
 		end,

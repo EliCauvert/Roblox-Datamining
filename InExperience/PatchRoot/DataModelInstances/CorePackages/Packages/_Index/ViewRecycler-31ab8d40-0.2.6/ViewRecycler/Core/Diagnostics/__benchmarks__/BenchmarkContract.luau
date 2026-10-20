@@ -8,7 +8,7 @@ local config1 = {
 }
 
 return {
-	create = function(p1) --[[ Line: 46 ]]
+	create = function(p1)
 		-- upvalues: config (copy), ResponsibilityCatalogModule (copy), config1 (copy)
 		assert(p1.suite ~= "", "benchmark suite must not be empty")
 		assert(p1.workload ~= "", "benchmark workload must not be empty")

@@ -50,12 +50,12 @@ local FFlagLuaAppGameTileSelectionVideoPlayback = require(Parent.SharedFlags).FF
 local FFlagMigrateGameInfoToStore = require(Parent.SharedFlags).FFlagMigrateGameInfoToStore
 local ResolveGameTileThumbnailUriModule = if FFlagLuaAppHomeThumbnailPrefetch then require(GameTile.resolveGameTileThumbnailUri) else nil
 
-return function(p1) --[[ Line: 101 ]]
+return function(p1)
 	-- upvalues: UseDesignTokensFunction (copy), UseTokensFunction (copy), UseSelectorFunction (copy), GameInfosReducer (copy), FFlagMigrateGameInfoToStore (copy), GameHydrationReactModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UseDispatchFunction (copy), ReactModule (copy), ApiFetchGameDetails (copy), GetGameTileLayoutDataModule (copy), FFlagLuaAppHomeThumbnailPrefetch (copy), ResolveGameTileThumbnailUriModule (copy), ItemLayoutDataParsingUtilsModule (copy), FormatExperienceThumbnailModule (copy), GameTileViewConfigModule (copy), IsVRAppBuildFunction (copy), UseIsHoveredTileModule (copy), FFlagLuaAppEmphasisGameTileVideo (copy), VideoPlaybackCoordinator (copy), HoverTileCoordinatorModule (copy), VideoEndReason (copy), GameCollectionItemTypes (copy), SponsoredGamesRecordClickFunction (copy), AppExperienceActionRowModule (copy), GridTileTextFooterModule (copy), CreatorNameMetadataModule (copy), GameStatsModule (copy), GameTileConstantsModule (copy), ImpressionsTagUtility (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), FFlagLuaAppEdpMediaGalleryVideoPreview (copy), UsePreferredInputFunction (copy), UseTagAsViewportAutoplayCandidateFunction (copy), FFlagLuaAppTileVideoCandidateOnly (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), GameTileVideoThumbnailModule (copy), GameVideoPlaybackDetectorModule (copy), ResponsiveModule (copy), FIntLuaAppGameTileVideoDwellTimeInSec (copy), FIntLuaAppGameTileVideoVisiblePercent (copy), GetTileBadgeByPositionConfigFromEntryModule (copy), GameTileThumbnailBadgesModule (copy), GameTileViewModule (copy), UserGameSettings (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local UseTokensResult = UseTokensFunction()
 	local UniverseId = p1.entry.universeId
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 111 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: GameInfosReducer (upval), UniverseId (copy)
 		return p2.Personalization[GameInfosReducer.key][UniverseId]
 	end)
@@ -66,13 +66,13 @@ return function(p1) --[[ Line: 101 ]]
 		UseGameInfoResult = GameHydrationReactModule.useGameInfo(UniverseId)
 		UseGameVotesResult = GameHydrationReactModule.useGameVotes(UniverseId)
 	end
-	local UseSelectorResult1 = UseSelectorFunction(function(p2) --[[ Line: 119 ]]
+	local UseSelectorResult1 = UseSelectorFunction(function(p2)
 		-- upvalues: UniverseId (copy)
 		return p2.GameDetails[UniverseId]
 	end)
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
 	local UseDispatchResult = UseDispatchFunction()
-	ReactModule.useEffect(function() --[[ Line: 125 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSelectorResult1 (copy), UseDispatchResult (copy), ApiFetchGameDetails (upval), UseRoactServiceResult (copy), UniverseId (copy)
 		if not UseSelectorResult1 then
 			UseDispatchResult(ApiFetchGameDetails.Fetch(UseRoactServiceResult, { UniverseId }))
@@ -113,7 +113,7 @@ return function(p1) --[[ Line: 101 ]]
 	local Text: string = `{p1.impressionsTag or ""}_{p1.index}_{GameTileLayoutType}`
 	local UseIsHoveredTileModuleResult = UseIsHoveredTileModule(UseRefResult, Text, HasImpressionsTag)
 	local VideoPlaybackCoordinator1 = if FFlagLuaAppEmphasisGameTileVideo then if p1.videoPlaybackContext and p1.videoPlaybackContext.videoPlaybackCoordinator then p1.videoPlaybackContext.videoPlaybackCoordinator else VideoPlaybackCoordinator.default else nil
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 187 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseIsHoveredTileModuleResult (copy), HoverTileCoordinatorModule (upval), FFlagLuaAppEmphasisGameTileVideo (upval), VideoPlaybackCoordinator1 (ref), VideoEndReason (upval), UniverseId (copy), p1 (copy), GameCollectionItemTypes (upval), SponsoredGamesRecordClickFunction (upval), UseRoactServiceResult (copy)
 		if UseIsHoveredTileModuleResult then
 			HoverTileCoordinatorModule.default:reset()
@@ -169,7 +169,7 @@ return function(p1) --[[ Line: 101 ]]
 		Name1 = UseSelectorResult and UseSelectorResult.creatorName ~= "" and UseSelectorResult.creatorName or UseSelectorResult1 and (UseSelectorResult1.creator and UseSelectorResult1.creator.name)
 	end
 	local LinesOfText: number = if LicenseDescription then 2 else 3
-	local UseMemoResult = ReactModule.useMemo(function(): number --[[ Line: 274 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): number
 		-- upvalues: Name1 (ref), ShowDescription (copy), LinesOfText (copy), HideGameStats (copy), LicenseDescription (copy)
 		local Count = 0
 		
@@ -195,7 +195,7 @@ return function(p1) --[[ Line: 101 ]]
 	})
 	local IsContained = p1.isContained or false
 	local PlayButtonHeight = GameTileViewConfigModule.getElementSizes(UseDesignTokensResult, p1.textSizeOffset, 1, UseTokensResult, true, UseMemoResult).playButtonHeight
-	local UseResult1 = ReactModule.useCallback(function(...) --[[ Line: 308 ]]
+	local UseResult1 = ReactModule.useCallback(function(...)
 		-- upvalues: UseIsHoveredTileModuleResult (copy), HoverTileCoordinatorModule (upval), p1 (copy), FFlagLuaAppEmphasisGameTileVideo (upval), VideoPlaybackCoordinator1 (ref), VideoEndReason (upval), UniverseId (copy)
 		if UseIsHoveredTileModuleResult then
 			HoverTileCoordinatorModule.default:reset()
@@ -212,7 +212,7 @@ return function(p1) --[[ Line: 101 ]]
 		if FFlagLuaAppEmphasisGameTileVideo then UniverseId else nil,
 		if FFlagLuaAppEmphasisGameTileVideo then VideoPlaybackCoordinator1 else nil
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 335 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), AppExperienceActionRowModule (upval), UniverseId (copy), p1 (copy), UseResult1 (copy), UseResult (copy), ImageAspectRatio (copy), PlayButtonHeight (copy)
 		return ReactModule.createElement(AppExperienceActionRowModule, {
 			launchSource = "FeaturedSearchTile",
@@ -233,7 +233,7 @@ return function(p1) --[[ Line: 101 ]]
 		UniverseId, p1.referralSource, UseResult1, UseResult, p1.entry,
 		p1.launchExperienceEventContext, PlayButtonHeight, p1.index, ImageAspectRatio
 	})
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 366 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), LicenseDescription (copy), GridTileTextFooterModule (upval), CreatorNameMetadataModule (upval), Name1 (ref), HasVerifiedBadge (copy), GameStatsModule (upval), UpVotes (ref), DownVotes (ref), p1 (copy), GameTileConstantsModule (upval), IsWide (copy), HideGameStats (copy), GameTileLayoutType (copy), ShowDescription (copy), Description (copy), LinesOfText (copy)
 		return ReactModule.createElement(ReactModule.Fragment, {}, {
 			UIListLayout = ReactModule.createElement("UIListLayout", {
@@ -281,7 +281,7 @@ return function(p1) --[[ Line: 101 ]]
 		LicenseDescription, HasVerifiedBadge, LinesOfText
 	})
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 435 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: GameTileViewConfigModule (upval), UseDesignTokensResult (copy), UseStateResult (copy), GameTileLayoutType (copy), IsContained (copy), p1 (copy), UseMemoResult (copy), UseTokensResult (copy)
 		return UseStateResult.Y - GameTileViewConfigModule.getTileHeight(UseDesignTokensResult, UseStateResult.X, GameTileLayoutType, IsContained, false, false, p1.textSizeOffset, nil, 1, UseMemoResult, UseTokensResult, true)
 	end, {
@@ -289,11 +289,11 @@ return function(p1) --[[ Line: 101 ]]
 		p1.textSizeOffset, 1, UseMemoResult, UseTokensResult
 	})
 	local UseRefResult1 = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 466 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ImpressionsTagUtility (upval), UseRefResult1 (copy), p1 (copy)
 		ImpressionsTagUtility.AddTag(UseRefResult1, p1.impressionsTag, p1.index)
 		
-		return function() --[[ Line: 468 ]]
+		return function()
 			-- upvalues: ImpressionsTagUtility (upval), UseRefResult1 (upval), p1 (upval)
 			ImpressionsTagUtility.RemoveTag(UseRefResult1, p1.impressionsTag, p1.index)
 		end
@@ -312,7 +312,7 @@ return function(p1) --[[ Line: 101 ]]
 	if FFlagLuaAppEmphasisGameTileVideo then
 		IsDisablePlayback = p1.videoPlaybackContext ~= nil and p1.videoPlaybackContext.disablePlayback == true
 		Playing, UseStateResult2_1 = ReactModule.useState(false)
-		UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 485 ]]
+		UseResult2 = ReactModule.useCallback(function(p2)
 			-- upvalues: UseStateResult2_1 (ref)
 			UseStateResult2_1(p2)
 		end, {})
@@ -320,7 +320,7 @@ return function(p1) --[[ Line: 101 ]]
 		
 		if FFlagLuaAppGameTileSelectionVideoPlayback then
 			v1, UseStateResult2_2 = ReactModule.useState(false)
-			UseResult3 = ReactModule.useCallback(function(...) --[[ Line: 495 ]]
+			UseResult3 = ReactModule.useCallback(function(...)
 				-- upvalues: UseStateResult2_2 (ref), p1 (copy)
 				UseStateResult2_2(true)
 				
@@ -328,7 +328,7 @@ return function(p1) --[[ Line: 101 ]]
 					p1.onSelectionGained(...)
 				end
 			end, { p1.onSelectionGained })
-			UseResult4 = ReactModule.useCallback(function(...) --[[ Line: 503 ]]
+			UseResult4 = ReactModule.useCallback(function(...)
 				-- upvalues: UseStateResult2_2 (ref), p1 (copy)
 				UseStateResult2_2(false)
 				
@@ -340,7 +340,7 @@ return function(p1) --[[ Line: 101 ]]
 		if not FFlagLuaAppGameTileSelectionVideoPlayback then
 			Touch = if FFlagLuaAppEdpMediaGalleryVideoPreview then UsePreferredInputFunction() else nil
 		end
-		ReactModule.useEffect(function() --[[ Line: 516 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: IsDisablePlayback (ref), UseStateResult2_1 (ref)
 			if IsDisablePlayback then
 				UseStateResult2_1(false)
@@ -406,7 +406,7 @@ return function(p1) --[[ Line: 101 ]]
 			Size = p1.size,
 			BackgroundTransparency = 1,
 			ref = UseRefResult1,
-			[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 606 ]]
+			[ReactModule.Change.AbsoluteSize] = function(Frame)
 				-- upvalues: UseStateResult2 (copy)
 				UseStateResult2(Frame.AbsoluteSize)
 			end

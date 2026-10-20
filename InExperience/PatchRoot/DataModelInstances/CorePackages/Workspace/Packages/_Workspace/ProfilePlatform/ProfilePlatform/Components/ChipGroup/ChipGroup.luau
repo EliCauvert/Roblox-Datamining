@@ -7,14 +7,14 @@ local Chip = FoundationModule.Chip
 local View = FoundationModule.View
 local _UDim2 = UDim2.new(1, 0, 0, 32)
 
-function ChipGroup(p1) --[[ Line: 24 ]]
+function ChipGroup(p1)
 	-- upvalues: ReactModule (copy), Chip (copy), _UDim2 (copy), View (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 31 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult2_2 (copy), UseStateResult (copy), UseStateResult1 (copy)
 		if p1.scrollingEnabledOverride == nil then
 			UseStateResult2_2(UseStateResult1 < UseStateResult)
@@ -47,7 +47,7 @@ function ChipGroup(p1) --[[ Line: 24 ]]
 			Selectable = false,
 			Size = p1.size or _UDim2,
 			ZIndex = 1,
-			[ReactModule.Change.AbsoluteSize] = ReactModule.useCallback(function(Frame) --[[ Line: 68 ]]
+			[ReactModule.Change.AbsoluteSize] = ReactModule.useCallback(function(Frame)
 				-- upvalues: UseStateResult2_1 (copy)
 				UseStateResult2_1(Frame.AbsoluteSize.X)
 			end, {})
@@ -56,11 +56,11 @@ function ChipGroup(p1) --[[ Line: 24 ]]
 				tag = "row gap-small auto-y size-full-0",
 				ref = UseRefResult1,
 				AutomaticSize = Enum.AutomaticSize.X,
-				onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 72 ]]
+				onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
 					-- upvalues: UseStateResult2 (copy)
 					UseStateResult2(Frame.AbsoluteSize.X)
 				end, {})
-			}, table.unpack((ReactModule.useMemo(function() --[[ Line: 43 ]]
+			}, table.unpack((ReactModule.useMemo(function()
 				-- upvalues: p1 (copy), ReactModule (upval), Chip (upval)
 				local Elements = {}
 				

@@ -1,6 +1,6 @@
 ﻿local SetLocalUserUnder13Module = require(script:FindFirstAncestor("UserLib").Actions.SetLocalUserUnder13)
 
-return function(Enabled, p1) --[[ Line: 4 ]]
+return function(Enabled, p1)
 	-- upvalues: SetLocalUserUnder13Module (copy)
 	local IsEnabled = Enabled == true
 	

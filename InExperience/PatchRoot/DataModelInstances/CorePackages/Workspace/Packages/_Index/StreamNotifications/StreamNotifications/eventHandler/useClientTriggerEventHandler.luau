@@ -2,11 +2,11 @@
 local ReactModule = require(Parent.React)
 local UseTCStreamNotificationEventHandlerFunction = require(Parent.TrustedContacts).EventHandlers.useTCStreamNotificationEventHandler
 
-return function() --[[ Line: 7 | Named "useClientTriggerEventHandler" ]]
+return function()
 	-- upvalues: UseTCStreamNotificationEventHandlerFunction (copy), ReactModule (copy)
 	local UseTCStreamNotificationEventHandlerResult = UseTCStreamNotificationEventHandlerFunction()
 	
-	return (ReactModule.useCallback(function(p1, p2) --[[ Line: 10 ]]
+	return (ReactModule.useCallback(function(p1, p2)
 		-- upvalues: UseTCStreamNotificationEventHandlerResult (copy)
 		if p1 == "TrustedContactsDoubleOptInModal" then
 			UseTCStreamNotificationEventHandlerResult({

@@ -5,18 +5,18 @@ local HistoryPageUtilsModule = require(script.Parent.historyPageUtils)
 local _ = require(script.Parent.sessionDeps)
 
 return {
-	createHistoryLoader = function(p1) --[[ Line: 47 ]]
+	createHistoryLoader = function(p1)
 		-- upvalues: HistoryPageUtilsModule (copy), SessionHistoryMergeModule (copy), ConstantsModule (copy)
 		local Count = 0
 		local CasSessionId = nil
 		local v1 = nil
 		
-		local function _(RefreshGeneration): boolean --[[ Line: 52 | Named "isRefreshGenerationStale" ]]
+		local function _(RefreshGeneration): boolean
 			-- upvalues: p1 (copy)
 			return RefreshGeneration ~= p1.getRefreshGeneration()
 		end
 		
-		local _ = function(p2) --[[ Line: 56 | Named "clearHistoryLoadInFlightIfOwned" ]]
+		local _ = function(p2)
 			-- upvalues: CasSessionId (ref), p1 (copy)
 			if CasSessionId == p2 then
 				p1.setHistoryLoadInFlight(false)
@@ -24,7 +24,7 @@ return {
 			end
 		end
 		
-		local _ = function(p2): boolean --[[ Line: 63 | Named "tryAcquireHistoryLoad" ]]
+		local _ = function(p2): boolean
 			-- upvalues: p1 (copy), CasSessionId (ref)
 			if p1.getHistoryLoadInFlight() then
 				if CasSessionId == p2 then
@@ -39,7 +39,7 @@ return {
 			return true
 		end
 		
-		local function loadHistoryPage(CasSessionId, HistoryPageToken, Callback) --[[ Line: 76 ]]
+		local function loadHistoryPage(CasSessionId, HistoryPageToken, Callback)
 			-- upvalues: p1 (copy), HistoryPageUtilsModule (upval)
 			local AwaitRequestStateCancelledResult = HistoryPageUtilsModule.awaitRequestStateCancelled(p1.deps.sessionLoad(CasSessionId, { historyPageToken = HistoryPageToken }).state, Callback)
 			
@@ -52,17 +52,17 @@ return {
 			return true, HistoryPageUtilsModule.getSessionLoadHistory(AwaitRequestStateCancelledResult.result), HistoryPageUtilsModule.getNextHistoryPageToken(AwaitRequestStateCancelledResult.result)
 		end
 		
-		local _ = function(CasSessionId, RefreshGeneration, Callback) --[[ Line: 97 | Named "isSessionLoadStale" ]]
+		local _ = function(CasSessionId, RefreshGeneration, Callback)
 			-- upvalues: p1 (copy)
 			return Callback() or (p1.getCasSessionId() ~= CasSessionId or RefreshGeneration ~= p1.getRefreshGeneration())
 		end
 		
-		local _ = function(CasSessionId, Count1, RefreshGeneration, Callback) --[[ Line: 105 | Named "isPrefetchStale" ]]
+		local _ = function(CasSessionId, Count1, RefreshGeneration, Callback)
 			-- upvalues: p1 (copy), Count (ref)
 			return (if Callback() then Callback() else p1.getCasSessionId() ~= CasSessionId or RefreshGeneration ~= p1.getRefreshGeneration()) or Count1 ~= Count
 		end
 		
-		local function commitRefreshedHistory(CasSessionId, RefreshGeneration, p2, NextHistoryPageToken, Callback): boolean --[[ Line: 115 ]]
+		local function commitRefreshedHistory(CasSessionId, RefreshGeneration, p2, NextHistoryPageToken, Callback): boolean
 			-- upvalues: p1 (copy), SessionHistoryMergeModule (upval)
 			if Callback() or (p1.getCasSessionId() ~= CasSessionId or RefreshGeneration ~= p1.getRefreshGeneration()) then
 				return false
@@ -86,9 +86,9 @@ return {
 			return true
 		end
 		
-		local _ = function(p3, p4, p5, p6, p7) --[[ Line: 145 | Named "prefetchOlderHistoryPagesInBackground" ]]
+		local _ = function(p3, p4, p5, p6, p7)
 			-- upvalues: ConstantsModule (upval), p1 (copy), Count (ref), loadHistoryPage (copy)
-			task.spawn(function() --[[ Line: 152 ]]
+			task.spawn(function()
 				-- upvalues: p4 (copy), ConstantsModule (upval), p3 (copy), p6 (copy), p7 (copy), p5 (copy), p1 (upval), Count (upval), loadHistoryPage (upval)
 				local HistoryPageToken = p4
 				local PrefetchHistoryPagesOnRefresh = ConstantsModule.getPrefetchHistoryPagesOnRefresh()
@@ -104,7 +104,7 @@ return {
 			end)
 		end
 		
-		local _ = function(): number --[[ Line: 170 | Named "beginPrefetchGeneration" ]]
+		local _ = function(): number
 			-- upvalues: Count (ref)
 			Count += 1
 			
@@ -113,7 +113,7 @@ return {
 		
 		local Callback = nil
 		
-		local function refreshSession(Callback1, p8): boolean --[[ Line: 176 ]]
+		local function refreshSession(Callback1, p8): boolean
 			-- upvalues: p1 (copy), CasSessionId (ref), HistoryPageUtilsModule (upval), loadHistoryPage (copy), ConstantsModule (upval), commitRefreshedHistory (copy), Callback (ref), Count (ref)
 			local CasSessionId1 = p1.getCasSessionId()
 			
@@ -181,10 +181,10 @@ return {
 					else
 						Count += 1
 						local Count2: number = Count
-						task.defer(function() --[[ Line: 240 ]]
+						task.defer(function()
 							-- upvalues: CasSessionId1 (copy), NextHistoryPageToken (ref), Callback1 (copy), Count2 (copy), RefreshGeneration (copy), ConstantsModule (upval), p1 (upval), Count (upval), loadHistoryPage (upval)
 							local NextHistoryPageToken1 = NextHistoryPageToken
-							task.spawn(function() --[[ Line: 152 ]]
+							task.spawn(function()
 								-- upvalues: NextHistoryPageToken1 (copy), ConstantsModule (upval), CasSessionId1 (copy), Count2 (copy), RefreshGeneration (copy), Callback1 (copy), p1 (upval), Count (upval), loadHistoryPage (upval)
 								local HistoryPageToken = NextHistoryPageToken1
 								local PrefetchHistoryPagesOnRefresh = ConstantsModule.getPrefetchHistoryPagesOnRefresh()
@@ -211,7 +211,7 @@ return {
 			end
 		end
 		
-		local function loadOlderHistoryPage(Callback) --[[ Line: 255 ]]
+		local function loadOlderHistoryPage(Callback)
 			-- upvalues: p1 (copy), CasSessionId (ref), loadHistoryPage (copy)
 			local CasSessionId1 = p1.getCasSessionId()
 			local NextHistoryPageToken = p1.getNextHistoryPageToken()
@@ -260,7 +260,7 @@ return {
 			end
 		end
 		
-		Callback = function(MinimumPagesRemaining: number, IsCancelled, ShouldContinue) --[[ Line: 283 ]]
+		Callback = function(MinimumPagesRemaining: number, IsCancelled, ShouldContinue)
 			-- upvalues: p1 (copy), v1 (ref), loadOlderHistoryPage (copy)
 			local CasSessionId = p1.getCasSessionId()
 			
@@ -277,14 +277,14 @@ return {
 					shouldContinue = ShouldContinue
 				}
 				v1 = config
-				task.defer(function() --[[ Line: 315 ]]
+				task.defer(function()
 					-- upvalues: config (copy), p1 (upval), loadOlderHistoryPage (upval), v1 (upval)
-					local Success, Result = xpcall(function() --[[ Line: 316 ]]
+					local Success, Result = xpcall(function()
 						-- upvalues: config (upval), p1 (upval), loadOlderHistoryPage (upval), v1 (upval)
 						while true do
 							local SessionId = config.sessionId
 							local RefreshGeneration = config.refreshGeneration
-							if config.isCancelled() or (p1.getCasSessionId() ~= SessionId or RefreshGeneration ~= p1.getRefreshGeneration()) or p1.getNextHistoryPageToken() == nil or (config.minimumPagesRemaining <= 0 and (config.shouldContinue == nil or not config.shouldContinue()) or not loadOlderHistoryPage(function() --[[ Line: 327 ]]
+							if config.isCancelled() or (p1.getCasSessionId() ~= SessionId or RefreshGeneration ~= p1.getRefreshGeneration()) or p1.getNextHistoryPageToken() == nil or (config.minimumPagesRemaining <= 0 and (config.shouldContinue == nil or not config.shouldContinue()) or not loadOlderHistoryPage(function()
 								-- upvalues: config (upval), v1 (upval)
 								return config.isCancelled() or v1 ~= config
 							end)) then break end
@@ -315,16 +315,16 @@ return {
 		
 		return {
 			refreshSession = refreshSession,
-			loadOlderHistory = function(Callback) --[[ Line: 352 ]]
+			loadOlderHistory = function(Callback)
 				-- upvalues: loadOlderHistoryPage (copy), Count (ref), ConstantsModule (upval), p1 (copy), loadHistoryPage (copy)
 				local OlderHistoryPage, OlderHistoryPage2, OlderHistoryPage3, OlderHistoryPage4 = loadOlderHistoryPage(Callback)
 				
 				if OlderHistoryPage and OlderHistoryPage2 ~= nil and OlderHistoryPage3 ~= nil and OlderHistoryPage4 ~= nil then
 					Count += 1
 					local Count1: number = Count
-					task.defer(function() --[[ Line: 356 ]]
+					task.defer(function()
 						-- upvalues: OlderHistoryPage2 (copy), OlderHistoryPage4 (copy), Callback (copy), Count1 (copy), OlderHistoryPage3 (copy), ConstantsModule (upval), p1 (upval), Count (upval), loadHistoryPage (upval)
-						task.spawn(function() --[[ Line: 152 ]]
+						task.spawn(function()
 							-- upvalues: OlderHistoryPage4 (copy), ConstantsModule (upval), OlderHistoryPage2 (copy), Count1 (copy), OlderHistoryPage3 (copy), Callback (copy), p1 (upval), Count (upval), loadHistoryPage (upval)
 							local HistoryPageToken = OlderHistoryPage4
 							local PrefetchHistoryPagesOnRefresh = ConstantsModule.getPrefetchHistoryPagesOnRefresh()
@@ -342,7 +342,7 @@ return {
 				end
 				return OlderHistoryPage
 			end,
-			requestOlderHistoryWhile = function(IsCancelled, ShouldContinue) --[[ Line: 348 ]]
+			requestOlderHistoryWhile = function(IsCancelled, ShouldContinue)
 				-- upvalues: Callback (ref)
 				Callback(0, IsCancelled, ShouldContinue)
 			end

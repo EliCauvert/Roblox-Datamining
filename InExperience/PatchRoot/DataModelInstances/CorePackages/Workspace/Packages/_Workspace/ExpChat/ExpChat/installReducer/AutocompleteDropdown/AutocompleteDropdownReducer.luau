@@ -9,19 +9,19 @@ return require(Parent.Rodux).createReducer({
 	autocompleteType = "none",
 	results = {}
 }, {
-	[require(Actions.AutocompleteDropdownActivated).name] = function(p1, p2) --[[ Line: 28 ]]
+	[require(Actions.AutocompleteDropdownActivated).name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
 		return Dictionary.join(p1, { activated = p2.activated })
 	end,
-	[require(Actions.AutocompleteDropdownResultsChanged).name] = function(p1, p2) --[[ Line: 31 ]]
+	[require(Actions.AutocompleteDropdownResultsChanged).name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
 		return Dictionary.join(p1, { selectedIndex = 1, results = p2.results })
 	end,
-	[require(Actions.AutocompleteDropdownSelectionChanged).name] = function(p1, p2) --[[ Line: 40 ]]
+	[require(Actions.AutocompleteDropdownSelectionChanged).name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
 		return Dictionary.join(p1, { selectedIndex = p2.selectedIndex })
 	end,
-	[require(Actions.AutocompleteDropdownTypeChanged).name] = function(p1, p2) --[[ Line: 46 ]]
+	[require(Actions.AutocompleteDropdownTypeChanged).name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
 		return if p2.autocompleteType == p1.autocompleteType then p1 else Dictionary.join(p1, {
 			activated = false,
@@ -30,7 +30,7 @@ return require(Parent.Rodux).createReducer({
 			results = {}
 		})
 	end,
-	[require(Actions.AutocompleteDropdownDeactivated).name] = function(p1, _) --[[ Line: 57 ]]
+	[require(Actions.AutocompleteDropdownDeactivated).name] = function(p1, _)
 		-- upvalues: Dictionary (copy)
 		return Dictionary.join(p1, {
 			autocompleteType = "none",

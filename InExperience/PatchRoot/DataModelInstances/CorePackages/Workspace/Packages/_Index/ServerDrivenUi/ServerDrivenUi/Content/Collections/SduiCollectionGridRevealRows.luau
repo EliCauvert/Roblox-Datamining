@@ -11,11 +11,11 @@ local FindAnalyticsFieldInAncestorsFunction = SduiCoreSystemModule.findAnalytics
 local GetSduiComponentWrapperFunction = SduiCoreSystemModule.getSduiComponentWrapper
 local FIntLuaAppGameGridRevealMoreButtonGapPx = require(Parent.SharedFlags).FIntLuaAppGameGridRevealMoreButtonGapPx
 
-local function _(p1: number): boolean --[[ Line: 41 | Named "isPositive" ]]
+local function _(p1: number): boolean
 	return p1 ~= nil and p1 > 0
 end
 
-local _ = function(p1, p2: number, p3: number): number? --[[ Line: 45 | Named "getTotalRowsInGrid" ]]
+local _ = function(p1, p2: number, p3: number): number?
 	if p2 <= 0 then
 		return nil
 	end
@@ -27,7 +27,7 @@ local _ = function(p1, p2: number, p3: number): number? --[[ Line: 45 | Named "g
 	return Ceiled
 end
 
-local _ = function(p1, p2: number) --[[ Line: 57 | Named "getInitialVisibleRowsInGrid" ]]
+local _ = function(p1, p2: number)
 	if p1 == nil or p2 == nil then
 		return nil, false
 	end
@@ -40,7 +40,7 @@ local _ = function(p1, p2: number) --[[ Line: 57 | Named "getInitialVisibleRowsI
 	end
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 77 | Named "SduiCollectionGridRevealRows" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), DiscoveryEventErrorLogger (copy), ReactFocusNavigationModule (copy), FindAnalyticsFieldInAncestorsFunction (copy), GuiService (copy), ShowMoreClickEventFunction (copy), GetSduiComponentWrapperFunction (copy), FIntLuaAppGameGridRevealMoreButtonGapPx (copy), CollectionGrid (copy), CryoModule (copy)
 	local ItemCount = p1.itemCount
 	local ItemsPerRow: number = p1.itemsPerRow
@@ -84,7 +84,7 @@ return ReactModule.memo(function(p1) --[[ Line: 77 | Named "SduiCollectionGridRe
 		end
 	end
 	local UseStateResult, UseStateResult2 = ReactModule.useState(v1)
-	ReactModule.useEffect(function() --[[ Line: 86 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), v1 (copy)
 		UseStateResult2(v1)
 	end, {
@@ -94,7 +94,7 @@ return ReactModule.memo(function(p1) --[[ Line: 77 | Named "SduiCollectionGridRe
 		p1.startRow,
 		p1.sduiContext.dataUpdatedTimestamp
 	})
-	ReactModule.useEffect(function() --[[ Line: 99 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsInitialFeedVisibleRowsAbove (copy), Flag (copy), DiscoveryEventErrorLogger (upval), p1 (copy)
 		if IsInitialFeedVisibleRowsAbove and Flag then
 			DiscoveryEventErrorLogger.reportError("SduiCollectionGridRevealRowsInvalidFeedThreshold", "Unable to reveal CollectionGrid rows because the grid starts after the feed threshold", {
@@ -112,15 +112,15 @@ return ReactModule.memo(function(p1) --[[ Line: 77 | Named "SduiCollectionGridRe
 	local Smallest = if HasUseStateResult then math.min(UseStateResult, TotalNumberOfRows) else nil
 	local IsSmallestBelow: boolean = HasUseStateResult and Smallest < TotalNumberOfRows
 	local Smallest1 = if IsSmallestBelow then Smallest else nil
-	ReactModule.useLayoutEffect(function() --[[ Line: 129 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: p1 (copy), Smallest1 (copy)
 		p1.setDisplayedRowCount(Smallest1)
 	end, { p1.setDisplayedRowCount, Smallest1 })
-	ReactModule.useEffect(function() --[[ Line: 134 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy)
 		local SetDisplayedRowCountFunction = p1.setDisplayedRowCount
 		
-		return function() --[[ Line: 136 ]]
+		return function()
 			-- upvalues: SetDisplayedRowCountFunction (copy)
 			SetDisplayedRowCountFunction(nil)
 		end
@@ -136,7 +136,7 @@ return ReactModule.memo(function(p1) --[[ Line: 77 | Named "SduiCollectionGridRe
 		extraLocalProps = {
 			layoutOrder = 2,
 			zIndex = 1,
-			onActivated = ReactModule.useCallback(function() --[[ Line: 147 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: Smallest (copy), TotalNumberOfRows (copy), p1 (copy), GuiService (upval), UseFocusGuiObjectResult (copy), UseStateResult2 (copy), CollectionId (copy), CollectionPosition (copy), ShowMoreClickEventFunction (upval), DiscoveryEventErrorLogger (upval)
 				if Smallest == nil or TotalNumberOfRows == nil or p1.visibleRowsPerReveal == nil then return end
 				if GuiService.SelectedCoreObject ~= nil and p1.containerFrame ~= nil then

@@ -9,7 +9,7 @@ local Parent = RobloxSubscriptionPurchaseApp.Parent
 local FFlagEnablePlusReferralLandingSheet = require(Parent.SharedFlags).FFlagEnablePlusReferralLandingSheet
 local FFlagEnablePlusReferralEntrypointTelemetry = require(Parent.SharedFlags).FFlagEnablePlusReferralEntrypointTelemetry
 
-return function(p1, p2, UniverseId, p3, p4, p5, p6, p7) --[[ Line: 21 | Named "initiateRobloxSubscriptionPurchase" ]]
+return function(p1, p2, UniverseId, p3, p4, p5, p6, p7)
 	-- upvalues: RobloxSubscriptionStoreModule (copy), FFlagEnablePlusReferralLandingSheet (copy), FFlagEnablePlusReferralEntrypointTelemetry (copy), SurfaceContextModule (copy), SurfaceNameModule (copy), InitiateRobloxSubscriptionPurchaseInternalModule (copy), RobloxSubscriptionOverlayControllerModule (copy)
 	local GetResult = RobloxSubscriptionStoreModule.get()
 	

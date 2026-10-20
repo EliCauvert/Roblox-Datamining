@@ -1,14 +1,14 @@
 ﻿local ReactModule = require(game:GetService("CorePackages").Packages.React)
 local TooltipContextModule = require(script.Parent.TooltipContext)
 
-function TooltipProvider(p1) --[[ Line: 29 ]]
+function TooltipProvider(p1)
 	-- upvalues: ReactModule (copy), TooltipContextModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseRefResult2 = ReactModule.useRef(nil)
 	local UseRefResult3 = ReactModule.useRef({})
-	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 40 ]]
+	local UseResult = ReactModule.useCallback(function(Current)
 		-- upvalues: UseStateResult2 (copy), UseRefResult (copy), UseRefResult1 (copy)
 		UseStateResult2(Current)
 		UseRefResult.current = Current
@@ -17,7 +17,7 @@ function TooltipProvider(p1) --[[ Line: 29 ]]
 			UseRefResult1.current = nil
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(Id) --[[ Line: 52 ]]
+	local UseResult1 = ReactModule.useCallback(function(Id)
 		-- upvalues: UseRefResult (copy), UseResult (copy), UseRefResult1 (copy), UseRefResult3 (copy)
 		if UseRefResult and UseRefResult.current and UseRefResult.current.id == Id then
 			UseResult(nil)
@@ -37,7 +37,7 @@ function TooltipProvider(p1) --[[ Line: 29 ]]
 			UseRefResult3.current[v1.priority] = nil
 		end
 	end, { UseStateResult })
-	UseRefResult2.current = ReactModule.useCallback(function() --[[ Line: 73 ]]
+	UseRefResult2.current = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseRefResult3 (copy), UseResult (copy), UseResult1 (copy), UseRefResult2 (copy)
 		if UseRefResult.current or UseRefResult1.current then return end
 		local List = {}
@@ -45,17 +45,17 @@ function TooltipProvider(p1) --[[ Line: 29 ]]
 		for _, value in pairs(UseRefResult3.current) do
 			table.insert(List, value)
 		end
-		table.sort(List, function(A, B): boolean --[[ Line: 85 ]]
+		table.sort(List, function(A, B): boolean
 			return B.priority < A.priority
 		end)
 		local Entry = List[1]
 		
 		if Entry then
 			UseRefResult1.current = Entry
-			task.delay(Entry.showDelay / 1000, function() --[[ Line: 96 ]]
+			task.delay(Entry.showDelay / 1000, function()
 				-- upvalues: UseResult (upval), Entry (copy), UseResult1 (upval), UseRefResult2 (upval)
 				UseResult(Entry)
-				task.delay(Entry.dismissDelay / 1000, function() --[[ Line: 99 ]]
+				task.delay(Entry.dismissDelay / 1000, function()
 					-- upvalues: UseResult1 (upval), Entry (upval), UseRefResult2 (upval)
 					UseResult1(Entry.id)
 					
@@ -69,7 +69,7 @@ function TooltipProvider(p1) --[[ Line: 29 ]]
 		end
 	end, { UseStateResult })
 	
-	local function _() --[[ Line: 108 ]]
+	local function _()
 		-- upvalues: UseRefResult2 (copy)
 		if UseRefResult2.current then
 			UseRefResult2.current()
@@ -77,10 +77,10 @@ function TooltipProvider(p1) --[[ Line: 29 ]]
 	end
 	
 	return ReactModule.createElement(TooltipContextModule.Provider, {
-		value = ReactModule.useMemo(function() --[[ Line: 114 ]]
+		value = ReactModule.useMemo(function()
 			-- upvalues: UseRefResult3 (copy), UseRefResult2 (copy), UseResult1 (copy), UseStateResult (copy)
 			return {
-				registerTooltip = function(Id, Priority, ShowDelay, DismissDelay) --[[ Line: 116 ]]
+				registerTooltip = function(Id, Priority, ShowDelay, DismissDelay)
 					-- upvalues: UseRefResult3 (upval), UseRefResult2 (upval)
 					if not UseRefResult3.current[Priority] then
 						table.insert(UseRefResult3.current, Priority, {
@@ -95,7 +95,7 @@ function TooltipProvider(p1) --[[ Line: 29 ]]
 						end
 					end
 				end,
-				unregisterTooltip = function(p2) --[[ Line: 127 ]]
+				unregisterTooltip = function(p2)
 					-- upvalues: UseResult1 (upval), UseRefResult2 (upval)
 					UseResult1(p2)
 					
@@ -103,7 +103,7 @@ function TooltipProvider(p1) --[[ Line: 29 ]]
 						UseRefResult2.current()
 					end
 				end,
-				dismissTooltip = function(p2, _) --[[ Line: 131 ]]
+				dismissTooltip = function(p2, _)
 					-- upvalues: UseResult1 (upval), UseRefResult2 (upval)
 					UseResult1(p2)
 					
@@ -111,7 +111,7 @@ function TooltipProvider(p1) --[[ Line: 29 ]]
 						UseRefResult2.current()
 					end
 				end,
-				isCurrentTooltip = function(Id): boolean --[[ Line: 135 ]]
+				isCurrentTooltip = function(Id): boolean
 					-- upvalues: UseStateResult (upval)
 					return UseStateResult and UseStateResult.id == Id
 				end

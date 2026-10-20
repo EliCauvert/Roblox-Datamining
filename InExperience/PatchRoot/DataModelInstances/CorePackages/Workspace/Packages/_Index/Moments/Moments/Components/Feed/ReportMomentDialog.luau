@@ -19,14 +19,14 @@ local config = {
 	ipReportSubmittedTitle = "Feature.ReportAbuse.Title.SelectInSceneIpReport"
 }
 
-return function(p1) --[[ Line: 39 | Named "ReportMomentDialog" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), Dialog (copy), FoundationModule (copy), View (copy), Text (copy), RadioGroup (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local Safety, Safety2 = ReactModule.useState("Safety")
 	local Text1, v1 = ReactModule.useState("------")
-	ReactModule.useEffect(function() --[[ Line: 46 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), Safety2 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), v1 (copy)
 		if p1.isOpen then
 			Safety2("Safety")
@@ -35,7 +35,7 @@ return function(p1) --[[ Line: 39 | Named "ReportMomentDialog" ]]
 			v1("------")
 		end
 	end, { p1.isOpen })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 55 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult1 (copy), Safety (copy), UseStateResult2_1 (copy), p1 (copy), v1 (copy), UseStateResult2 (copy)
 		if UseStateResult1 then return end
 		local IsIntellectualProperty = Safety == "IntellectualProperty"
@@ -45,7 +45,7 @@ return function(p1) --[[ Line: 39 | Named "ReportMomentDialog" ]]
 			UseStateResult2_1(false)
 			p1.onClose()
 		end
-		task.spawn(function() --[[ Line: 69 ]]
+		task.spawn(function()
 			-- upvalues: p1 (upval), Safety (copy), IsIntellectualProperty (copy), v1 (upval), UseStateResult2 (upval), UseStateResult2_1 (upval)
 			local OnSubmitReportResult = p1.onSubmitReport(Safety, IsIntellectualProperty)
 			
@@ -56,7 +56,7 @@ return function(p1) --[[ Line: 39 | Named "ReportMomentDialog" ]]
 			end
 		end)
 	end, { UseStateResult1, Safety, p1.onClose, p1.onSubmitReport })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 83 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult1 (copy), p1 (copy)
 		if not UseStateResult1 then
 			p1.onClose()
@@ -64,7 +64,7 @@ return function(p1) --[[ Line: 39 | Named "ReportMomentDialog" ]]
 			return
 		end
 	end, { UseStateResult1, p1.onClose })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 91 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), p1 (copy)
 		UseStateResult2(false)
 		p1.onClose()

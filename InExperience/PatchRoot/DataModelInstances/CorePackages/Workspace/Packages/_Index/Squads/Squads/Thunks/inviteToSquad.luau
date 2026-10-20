@@ -3,12 +3,12 @@ local DependenciesModule = require(script:FindFirstAncestor("Squads").dependenci
 local Cryo = DependenciesModule.Cryo
 local NetworkingSquads = DependenciesModule.NetworkingSquads
 
-local function encodeInvitees(InvitedUserIds) --[[ Line: 9 ]]
+local function encodeInvitees(InvitedUserIds)
 	-- upvalues: Cryo (copy), HttpService (copy)
-	local MapResult = Cryo.List.map(InvitedUserIds, function(p1): number --[[ Line: 10 ]]
+	local MapResult = Cryo.List.map(InvitedUserIds, function(p1): number
 		return (tonumber(p1))
 	end)
-	local Success, Result = pcall(function() --[[ Line: 14 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: HttpService (upval), MapResult (copy)
 		return HttpService:JSONEncode(MapResult)
 	end)
@@ -16,16 +16,16 @@ local function encodeInvitees(InvitedUserIds) --[[ Line: 9 ]]
 	return if Success then Result else "[]"
 end
 
-return function(SquadId, ParentChannelId, p1, InvitedUserIds, Callback, IsReparented) --[[ Line: 25 ]]
+return function(SquadId, ParentChannelId, p1, InvitedUserIds, Callback, IsReparented)
 	-- upvalues: NetworkingSquads (copy), encodeInvitees (copy), HttpService (copy)
-	return function(p2) --[[ Line: 33 ]]
+	return function(p2)
 		-- upvalues: NetworkingSquads (upval), SquadId (copy), ParentChannelId (copy), InvitedUserIds (copy), IsReparented (copy), encodeInvitees (upval), Callback (copy), p1 (copy), HttpService (upval)
 		return p2:dispatch(NetworkingSquads.SquadInvite.API({
 			squadId = SquadId,
 			parentChannelId = ParentChannelId,
 			invitedUserIds = InvitedUserIds,
 			isReparented = IsReparented
-		})):andThen(function() --[[ Line: 41 ]]
+		})):andThen(function()
 			-- upvalues: encodeInvitees (upval), InvitedUserIds (upval), Callback (upval), p1 (upval)
 			Callback({
 				isSuccess = true,
@@ -33,10 +33,10 @@ return function(SquadId, ParentChannelId, p1, InvitedUserIds, Callback, IsRepare
 				inviteeCount = #InvitedUserIds,
 				userId = tonumber(p1)
 			})
-		end):catch(function(Err) --[[ Line: 51 ]]
+		end):catch(function(Err)
 			-- upvalues: HttpService (upval), encodeInvitees (upval), InvitedUserIds (upval), Callback (upval), p1 (upval)
 			local Body = Err.Body
-			local Success, Result = pcall(function() --[[ Line: 53 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: HttpService (upval), Body (copy)
 				return HttpService:JSONDecode(Body)
 			end)

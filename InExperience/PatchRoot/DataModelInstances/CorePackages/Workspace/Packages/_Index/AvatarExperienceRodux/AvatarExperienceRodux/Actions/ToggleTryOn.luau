@@ -5,7 +5,7 @@ local _ = require(Parent.AvatarExperienceModel)
 local FFlagAXDurablesForMIS = require(Parent.AvatarExperienceFlags).FFlagAXDurablesForMIS
 local _ = require(AvatarExperienceRodux.Types.OutfitTryOn)
 
-return require(Parent.Rodux).makeActionCreator(script.Name, function(ItemType, ItemSubType, ItemId, SelectedInTryOnManager, OverrideOrder, BundleInfo, WidgetInfo, ReceivedBundleInfo, IsRecolorable, BundleItems, ResetTryOnsBeforeToggleOn, p1) --[[ Line: 40 ]]
+return require(Parent.Rodux).makeActionCreator(script.Name, function(ItemType, ItemSubType, ItemId, SelectedInTryOnManager, OverrideOrder, BundleInfo, WidgetInfo, ReceivedBundleInfo, IsRecolorable, BundleItems, ResetTryOnsBeforeToggleOn, p1)
 	-- upvalues: FFlagAXDurablesForMIS (copy)
 	return {
 		itemType = ItemType,

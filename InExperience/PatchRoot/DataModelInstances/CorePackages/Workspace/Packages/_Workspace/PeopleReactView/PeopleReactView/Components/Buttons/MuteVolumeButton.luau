@@ -17,7 +17,7 @@ local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local VoiceVolumePopoverModule = require(PeopleReactView.Components.Buttons.VoiceVolumePopover)
 local Signal = SignalsModule.createSignal("")
 local Signal1 = SignalsModule.createSignal(false)
-local MemoResult = ReactModule.memo(function(p1) --[[ Line: 46 ]]
+local MemoResult = ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), UseSignalStateFunction (copy), Signal (copy), Signal1 (copy), ReactModule (copy), FoundationModule (copy), IconSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseSignalStateResult = UseSignalStateFunction(p1.animatedIcon or Signal)
@@ -32,7 +32,7 @@ local MemoResult = ReactModule.memo(function(p1) --[[ Line: 46 ]]
 	})
 end)
 
-return function(Frame) --[[ Line: 65 | Named "MuteVolumeButton" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), ControlState (copy), UseCursorFunction (copy), PeopleServiceModule (copy), ENTRYPOINT (copy), View (copy), StateLayerAffordance (copy), MemoResult (copy), FoundationModule (copy), IconName (copy), IconSize (copy), VoiceVolumePopoverModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local XXSmall: number = UseTokensResult.Gap.XXSmall
@@ -50,7 +50,7 @@ return function(Frame) --[[ Line: 65 | Named "MuteVolumeButton" ]]
 	local Size1000: number = UseTokensResult.Size.Size_1000
 	local LayoutOrder = Frame.LayoutOrder or Config.layoutOrder
 	
-	local function _(Hover) --[[ Line: 144 | Named "getInteractionOverlayStyle" ]]
+	local function _(Hover)
 		-- upvalues: ControlState (upval), UseTokensResult (copy)
 		return if Hover == ControlState.Pressed then UseTokensResult.Color.State.Press elseif Hover == ControlState.Hover then UseTokensResult.Color.State.Hover else nil
 	end
@@ -61,7 +61,7 @@ return function(Frame) --[[ Line: 65 | Named "MuteVolumeButton" ]]
 	return ReactModule.createElement(VoiceVolumePopoverModule, {
 		userId = Frame.userId,
 		isOpen = HasUserId,
-		onClose = ReactModule.useCallback(function() --[[ Line: 111 ]]
+		onClose = ReactModule.useCallback(function()
 			-- upvalues: FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (upval), UseRefResult (ref), UseStateResult2 (copy)
 			if FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry and UseRefResult then
 				UseRefResult.current = false
@@ -71,17 +71,17 @@ return function(Frame) --[[ Line: 65 | Named "MuteVolumeButton" ]]
 		layoutOrder = LayoutOrder,
 		muteHalf = ReactModule.createElement(View, {
 			tag = "size-1000-1000",
-			onActivated = ReactModule.useCallback(function() --[[ Line: 84 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: Config (copy), Frame (copy)
 				Config.onActivated(Frame.entryPoint)
 			end, { Config.onActivated, Frame.entryPoint }),
-			onStateChanged = ReactModule.useCallback(function(p1) --[[ Line: 130 ]]
+			onStateChanged = ReactModule.useCallback(function(p1)
 				-- upvalues: UseStateResult2_1 (copy)
 				UseStateResult2_1(p1)
 			end, {}),
 			selection = { SelectionImageObject = UseCursorResult },
 			LayoutOrder = LayoutOrder,
-			ref = ReactModule.useCallback(function(p1) --[[ Line: 118 ]]
+			ref = ReactModule.useCallback(function(p1)
 				-- upvalues: Frame (copy)
 				if Frame.onButtonMount then
 					Frame.onButtonMount(p1, Frame.muteButtonName)
@@ -110,7 +110,7 @@ return function(Frame) --[[ Line: 65 | Named "MuteVolumeButton" ]]
 		}),
 		chevronHalf = ReactModule.createElement(View, {
 			tag = "size-1000-1000",
-			onActivated = if FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then ReactModule.useCallback(function() --[[ Line: 90 ]]
+			onActivated = if FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then ReactModule.useCallback(function()
 				-- upvalues: Frame (copy), UseRefResult (ref), PeopleServiceModule (upval), ENTRYPOINT (upval), UseStateResult2 (copy)
 				if Frame.userId == nil or not UseRefResult then return end
 				local NoCurrent = not UseRefResult.current
@@ -120,19 +120,19 @@ return function(Frame) --[[ Line: 65 | Named "MuteVolumeButton" ]]
 					PeopleServiceModule.getService("PeopleAnalyticsManager"):recordPerUserVoiceVolumeUiOpened(Frame.entryPoint or ENTRYPOINT.PEOPLE_LIST)
 				end
 				UseStateResult2(NoCurrent)
-			end, { Frame.entryPoint, Frame.userId }) else ReactModule.useCallback(function() --[[ Line: 104 ]]
+			end, { Frame.entryPoint, Frame.userId }) else ReactModule.useCallback(function()
 				-- upvalues: UseStateResult2 (copy)
-				UseStateResult2(function(p1): boolean --[[ Line: 105 ]]
+				UseStateResult2(function(p1): boolean
 					return not p1
 				end)
 			end, {}),
-			onStateChanged = ReactModule.useCallback(function(p1) --[[ Line: 134 ]]
+			onStateChanged = ReactModule.useCallback(function(p1)
 				-- upvalues: UseStateResult2_2 (copy)
 				UseStateResult2_2(p1)
 			end, {}),
 			selection = { SelectionImageObject = UseCursorResult },
 			LayoutOrder = LayoutOrder + 1,
-			ref = ReactModule.useCallback(function(p1) --[[ Line: 124 ]]
+			ref = ReactModule.useCallback(function(p1)
 				-- upvalues: Frame (copy)
 				if Frame.onButtonMount then
 					Frame.onButtonMount(p1, Frame.volumeButtonName)

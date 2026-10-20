@@ -18,7 +18,7 @@ return {
 	prereqTests = {
 		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
-	run = function(p1, p2) --[[ Line: 21 ]]
+	run = function(p1, p2)
 		-- upvalues: ConstantsModule (copy), GetFStringUGCValidateMaxAnimationMovementPerPartModule (copy), ErrorSourceStringsModule (copy)
 		local AsNumberResults = {}
 		

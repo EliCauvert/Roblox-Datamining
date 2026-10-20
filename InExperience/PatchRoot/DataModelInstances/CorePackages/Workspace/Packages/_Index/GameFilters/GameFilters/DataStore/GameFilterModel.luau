@@ -3,12 +3,12 @@ local ArgCheckModule = require(Parent.ArgCheck)
 local _ = require(Parent.DiscoveryTypes)
 local FFlagLuaAppChartsFilterOptionTextTag = require(Parent.SharedFlags).FFlagLuaAppChartsFilterOptionTextTag
 local GameFilterModelModule = {
-	new = function() --[[ Line: 10 ]]
+	new = function()
 		return {}
 	end
 }
 
-function GameFilterModelModule.mockFromExploreApi(Text, p1) --[[ Line: 16 ]]
+function GameFilterModelModule.mockFromExploreApi(Text, p1)
 	-- upvalues: GameFilterModelModule (copy), FFlagLuaAppChartsFilterOptionTextTag (copy)
 	local FromExploreJsonDataResult = GameFilterModelModule.fromExploreJsonData({
 		filterType = "",
@@ -30,7 +30,7 @@ function GameFilterModelModule.mockFromExploreApi(Text, p1) --[[ Line: 16 ]]
 	return FromExploreJsonDataResult
 end
 
-function GameFilterModelModule.fromExploreJsonData(p1) --[[ Line: 38 ]]
+function GameFilterModelModule.fromExploreJsonData(p1)
 	-- upvalues: GameFilterModelModule (copy), FFlagLuaAppChartsFilterOptionTextTag (copy), ArgCheckModule (copy)
 	local NewGameFilterModel = GameFilterModelModule.new()
 	NewGameFilterModel.filterId = p1.filterId

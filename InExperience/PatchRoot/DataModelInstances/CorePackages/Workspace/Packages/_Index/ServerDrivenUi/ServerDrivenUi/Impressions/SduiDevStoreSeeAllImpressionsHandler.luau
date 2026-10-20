@@ -11,7 +11,7 @@ local SduiMarketplaceItemImpressionsHandlerModule = require(ServerDrivenUi.Impre
 local MarketplaceUnifiedItemType = require(Parent.AvatarExperienceAnalytics).UnifiedEventLogEnums.MarketplaceUnifiedItemType
 local self = setmetatable({}, { __mode = "k" })
 
-return function(Key, p1, p2, AnalyticsData, p3, p4) --[[ Line: 46 | Named "SduiDevStoreSeeAllImpressionsHandler" ]]
+return function(Key, p1, p2, AnalyticsData, p3, p4)
 	-- upvalues: FindAnalyticsFieldInAncestorsFunction (copy), MarketplaceUnifiedItemType (copy), SduiMarketplaceItemImpressionsHandlerModule (copy), SduiLogger (copy), SduiErrors (copy), self (copy), EdpStoreAnalyticsLogger (copy), StoreEnums (copy)
 	if #p1 == 0 then return end
 	local config = { analyticsData = AnalyticsData }

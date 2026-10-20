@@ -17,21 +17,21 @@ local UseEffectFunction = ReactModule.useEffect
 local UseMusicInfoModule = require(MomentsCreation.Hooks.useMusicInfo)
 local MusicThumbnailIconSize = MomentsCommonModule.Enums.MusicThumbnailIconSize
 
-return function(p1) --[[ Line: 41 | Named "MusicPreviewItem" ]]
+return function(p1)
 	-- upvalues: UseMusicInfoModule (copy), UseBindingFunction (copy), UseEffectFunction (copy), ReactModule (copy), Skeleton (copy), View (copy), MusicThumbnailIcon (copy), MusicThumbnailIconSize (copy), Text (copy), IconButton (copy), PauseLarge (copy), PlayLarge (copy), FoundationModule (copy), RadialProgressBarModule (copy)
 	local UseMusicInfoModuleResult = UseMusicInfoModule(p1.musicAssetId)
 	local UseBindingResult, UseBindingResult2 = UseBindingFunction(p1.progress or 0)
-	UseEffectFunction(function() --[[ Line: 45 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseBindingResult2 (copy), p1 (copy)
 		UseBindingResult2(p1.progress or 0)
 	end, { p1.progress })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 49 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		if p1.onMusicSelected then
 			p1.onMusicSelected(p1.musicAssetId)
 		end
 	end, { p1.onMusicSelected, p1.musicAssetId })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 55 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		if p1.togglePreviewMusic then
 			p1.togglePreviewMusic(p1.musicAssetId)

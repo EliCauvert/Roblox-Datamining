@@ -7,18 +7,18 @@ local FetchUniverseConfigurationModule = require(script.Parent.fetchUniverseConf
 local GetPrivacyTypeForAudiencesModule = require(script.Parent.getPrivacyTypeForAudiences)
 local _ = require(script.Parent.UniverseConfigurationStoreTypes)
 
-return function(p1) --[[ Line: 24 | Named "createUniverseConfigurationStore" ]]
+return function(p1)
 	-- upvalues: CreateSingleEntityResolverModule (copy), FetchUniverseConfigurationModule (copy), CryoModule (copy), GetPrivacyTypeForAudiencesModule (copy)
 	local P0 = p1 or {}
 	local config = { network = P0.network, baseUrl = P0.baseUrl }
 	local Generation = 0
 	local t = {}
-	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p2) --[[ Line: 30 ]]
+	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p2)
 		-- upvalues: Generation (ref), FetchUniverseConfigurationModule (upval), config (copy), t (ref), CryoModule (upval)
 		Generation += 1
 		local Generation1: number = Generation
 		
-		return FetchUniverseConfigurationModule.fetchSummary(p2, config):andThen(function(Result) --[[ Line: 33 ]]
+		return FetchUniverseConfigurationModule.fetchSummary(p2, config):andThen(function(Result)
 			-- upvalues: t (upval), p2 (copy), Generation1 (copy), CryoModule (upval)
 			local Entry = t[p2]
 			
@@ -33,16 +33,16 @@ return function(p1) --[[ Line: 24 | Named "createUniverseConfigurationStore" ]]
 			end
 		end)
 	end)
-	local SingleEntityResolverModule1 = CreateSingleEntityResolverModule(function(p2) --[[ Line: 46 ]]
+	local SingleEntityResolverModule1 = CreateSingleEntityResolverModule(function(p2)
 		-- upvalues: FetchUniverseConfigurationModule (upval), config (copy)
 		return FetchUniverseConfigurationModule.fetchConfiguration(p2, config)
 	end)
-	local SingleEntityResolverModule2 = CreateSingleEntityResolverModule(function(p2) --[[ Line: 49 ]]
+	local SingleEntityResolverModule2 = CreateSingleEntityResolverModule(function(p2)
 		-- upvalues: FetchUniverseConfigurationModule (upval), config (copy)
 		return FetchUniverseConfigurationModule.fetchTeamCreate(p2, config)
 	end)
 	
-	local function getSummaryPatch(p2) --[[ Line: 53 ]]
+	local function getSummaryPatch(p2)
 		-- upvalues: GetPrivacyTypeForAudiencesModule (upval)
 		local t = {}
 		
@@ -65,9 +65,9 @@ return function(p1) --[[ Line: 24 | Named "createUniverseConfigurationStore" ]]
 	return {
 		getSummary = SingleEntityResolverModule.get,
 		fetchSummary = SingleEntityResolverModule.fetch,
-		refreshSummary = function(p2) --[[ Line: 98 ]]
+		refreshSummary = function(p2)
 			-- upvalues: FetchUniverseConfigurationModule (upval), config (copy), SingleEntityResolverModule (copy)
-			return FetchUniverseConfigurationModule.fetchSummary(p2, config):andThen(function(Result) --[[ Line: 99 ]]
+			return FetchUniverseConfigurationModule.fetchSummary(p2, config):andThen(function(Result)
 				-- upvalues: SingleEntityResolverModule (upval), p2 (copy)
 				SingleEntityResolverModule.cache.replaceItem(tostring(p2), Result)
 				
@@ -75,7 +75,7 @@ return function(p1) --[[ Line: 24 | Named "createUniverseConfigurationStore" ]]
 			end)
 		end,
 		getAndFetchSummary = SingleEntityResolverModule.getAndFetch,
-		updateSummary = function(p2, p3) --[[ Line: 86 ]]
+		updateSummary = function(p2, p3)
 			-- upvalues: SingleEntityResolverModule (copy), CryoModule (upval)
 			local DataResult = SingleEntityResolverModule.get(p2).data(false)
 			
@@ -87,9 +87,9 @@ return function(p1) --[[ Line: 24 | Named "createUniverseConfigurationStore" ]]
 		end,
 		getConfiguration = SingleEntityResolverModule1.get,
 		fetchConfiguration = SingleEntityResolverModule1.fetch,
-		refreshConfiguration = function(p2) --[[ Line: 105 ]]
+		refreshConfiguration = function(p2)
 			-- upvalues: FetchUniverseConfigurationModule (upval), config (copy), SingleEntityResolverModule1 (copy)
-			return FetchUniverseConfigurationModule.fetchConfiguration(p2, config):andThen(function(Result) --[[ Line: 108 ]]
+			return FetchUniverseConfigurationModule.fetchConfiguration(p2, config):andThen(function(Result)
 				-- upvalues: SingleEntityResolverModule1 (upval), p2 (copy)
 				SingleEntityResolverModule1.cache.replaceItem(tostring(p2), Result)
 				
@@ -97,7 +97,7 @@ return function(p1) --[[ Line: 24 | Named "createUniverseConfigurationStore" ]]
 			end)
 		end,
 		getAndFetchConfiguration = SingleEntityResolverModule1.getAndFetch,
-		updateConfiguration = function(p2, p3) --[[ Line: 76 ]]
+		updateConfiguration = function(p2, p3)
 			-- upvalues: SingleEntityResolverModule1 (copy), CryoModule (upval)
 			local DataResult = SingleEntityResolverModule1.get(p2).data(false)
 			
@@ -107,9 +107,9 @@ return function(p1) --[[ Line: 24 | Named "createUniverseConfigurationStore" ]]
 				return
 			end
 		end,
-		patchConfiguration = function(p2, p3) --[[ Line: 114 ]]
+		patchConfiguration = function(p2, p3)
 			-- upvalues: FetchUniverseConfigurationModule (upval), config (copy), SingleEntityResolverModule1 (copy), getSummaryPatch (copy), SingleEntityResolverModule (copy), t (ref), Generation (ref), CryoModule (upval)
-			return FetchUniverseConfigurationModule.patchConfiguration(p2, p3, config):andThen(function(Result) --[[ Line: 120 ]]
+			return FetchUniverseConfigurationModule.patchConfiguration(p2, p3, config):andThen(function(Result)
 				-- upvalues: SingleEntityResolverModule1 (upval), p2 (copy), p3 (copy), getSummaryPatch (upval), SingleEntityResolverModule (upval), t (upval), Generation (upval), CryoModule (upval)
 				SingleEntityResolverModule1.update(p2, Result)
 				SingleEntityResolverModule1.update(p2, p3)
@@ -129,16 +129,16 @@ return function(p1) --[[ Line: 24 | Named "createUniverseConfigurationStore" ]]
 		getTeamCreate = SingleEntityResolverModule2.get,
 		fetchTeamCreate = SingleEntityResolverModule2.fetch,
 		getAndFetchTeamCreate = SingleEntityResolverModule2.getAndFetch,
-		setTeamCreate = function(p2, p3) --[[ Line: 137 ]]
+		setTeamCreate = function(p2, p3)
 			-- upvalues: FetchUniverseConfigurationModule (upval), config (copy), SingleEntityResolverModule2 (copy)
-			return FetchUniverseConfigurationModule.setTeamCreate(p2, p3, config):andThen(function(Result) --[[ Line: 138 ]]
+			return FetchUniverseConfigurationModule.setTeamCreate(p2, p3, config):andThen(function(Result)
 				-- upvalues: SingleEntityResolverModule2 (upval), p2 (copy)
 				SingleEntityResolverModule2.update(p2, Result)
 				
 				return Result
 			end)
 		end,
-		clear = function() --[[ Line: 144 ]]
+		clear = function()
 			-- upvalues: Generation (ref), t (ref), SingleEntityResolverModule (copy), SingleEntityResolverModule1 (copy), SingleEntityResolverModule2 (copy)
 			Generation = 0
 			t = {}
@@ -146,7 +146,7 @@ return function(p1) --[[ Line: 24 | Named "createUniverseConfigurationStore" ]]
 			SingleEntityResolverModule1.clear()
 			SingleEntityResolverModule2.clear()
 		end,
-		dispose = function() --[[ Line: 152 ]]
+		dispose = function()
 			-- upvalues: SingleEntityResolverModule (copy), SingleEntityResolverModule1 (copy), SingleEntityResolverModule2 (copy)
 			SingleEntityResolverModule.dispose()
 			SingleEntityResolverModule1.dispose()

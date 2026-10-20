@@ -1,6 +1,6 @@
 ﻿local GuiPositionToScreenPositionModule = require(script:FindFirstAncestor("AdGuiInteractivity").guiPositionToScreenPosition)
 
-return function(Frame: Frame, p1) --[[ Line: 5 ]]
+return function(Frame: Frame, p1)
 	-- upvalues: GuiPositionToScreenPositionModule (copy)
 	local CurrentCamera = game.Workspace.CurrentCamera
 	

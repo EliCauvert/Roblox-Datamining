@@ -1,23 +1,23 @@
 ﻿local SSMetabuiLuaEngineFeature = game:GetEngineFeature("SSMetabuiLua")
 
-local function _() --[[ Line: 6 | Named "getSafetyService" ]]
-	local Success, Result = pcall(function() --[[ Line: 7 ]]
+local function _()
+	local Success, Result = pcall(function()
 		return game:GetService("SafetyService")
 	end)
 	
 	return if Success then Result else nil
 end
 
-local function createBuildUIVisibility(SafetyService) --[[ Line: 17 ]]
+local function createBuildUIVisibility(SafetyService)
 	local Count = 0
 	
 	return {
-		acquire = function() --[[ Line: 20 ]]
+		acquire = function()
 			-- upvalues: Count (ref), SafetyService (copy)
 			Count += 1
 			
 			if Count == 1 and SafetyService ~= nil then
-				pcall(function() --[[ Line: 26 ]]
+				pcall(function()
 					-- upvalues: SafetyService (upval)
 					SafetyService:ReportBuildUIOpen()
 				end)
@@ -25,13 +25,13 @@ local function createBuildUIVisibility(SafetyService) --[[ Line: 17 ]]
 				return
 			end
 		end,
-		release = function() --[[ Line: 31 ]]
+		release = function()
 			-- upvalues: Count (ref), SafetyService (copy)
 			if Count == 0 then return end
 			Count -= 1
 			
 			if Count == 0 and SafetyService ~= nil then
-				pcall(function() --[[ Line: 41 ]]
+				pcall(function()
 					-- upvalues: SafetyService (upval)
 					SafetyService:ReportBuildUIClose()
 				end)
@@ -39,7 +39,7 @@ local function createBuildUIVisibility(SafetyService) --[[ Line: 17 ]]
 				return
 			end
 		end,
-		getOpenPanelCountForTests = function() --[[ Line: 46 ]]
+		getOpenPanelCountForTests = function()
 			-- upvalues: Count (ref)
 			return Count
 		end
@@ -48,7 +48,7 @@ end
 local v1 = nil
 
 if require(script:FindFirstAncestor("BuildExperience").Flags.FFlagReportBuildUIVisibility) and SSMetabuiLuaEngineFeature then
-	local Success, Result = pcall(function() --[[ Line: 7 ]]
+	local Success, Result = pcall(function()
 		return game:GetService("SafetyService")
 	end)
 	v1 = if Success then Result else nil

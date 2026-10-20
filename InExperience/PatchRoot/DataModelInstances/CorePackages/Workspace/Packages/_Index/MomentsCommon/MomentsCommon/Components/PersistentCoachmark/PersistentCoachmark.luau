@@ -7,7 +7,7 @@ local _ = require(Parent1.Utils.createCoachmarkImpressionCache)
 local UsePersistentCoachmarkViewModelModule = require(Parent.usePersistentCoachmarkViewModel)
 local EducationalTooltip = FoundationModule.EducationalTooltip
 
-return function(p1) --[[ Line: 42 | Named "PersistentCoachmark" ]]
+return function(p1)
 	-- upvalues: UsePersistentCoachmarkViewModelModule (copy), ReactModule (copy), EducationalTooltip (copy), FoundationModule (copy)
 	local UsePersistentCoachmarkViewModelModuleResult = UsePersistentCoachmarkViewModelModule({
 		impressionCache = p1.impressionCache,

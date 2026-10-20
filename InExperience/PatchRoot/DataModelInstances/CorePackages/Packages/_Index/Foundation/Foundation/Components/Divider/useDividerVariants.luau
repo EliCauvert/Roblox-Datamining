@@ -6,7 +6,7 @@ local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant
 local _ = require(Foundation.Providers.Style.Tokens)
 local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p1) --[[ Line: 26 ]]
+local function variantsFactory(p1)
 	-- upvalues: OrientationModule (copy), DividerVariantModule (copy)
 	return {
 		common = {
@@ -36,7 +36,7 @@ local function variantsFactory(p1) --[[ Line: 26 ]]
 	}
 end
 
-return function(p1, p2, Horizontal) --[[ Line: 81 ]]
+return function(p1, p2, Horizontal)
 	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy), OrientationModule (copy)
 	local Divider = VariantsContextModule.useVariants("Divider", variantsFactory, p1)
 	

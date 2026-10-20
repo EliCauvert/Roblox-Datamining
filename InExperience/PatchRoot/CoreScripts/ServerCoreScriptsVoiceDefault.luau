@@ -10,7 +10,7 @@ local DebugLogVoiceDefault = game:DefineFastFlag("DebugLogVoiceDefault", false)
 local AudioInstanceAddedApiEnabledEngineFeature = game:GetEngineFeature("AudioInstanceAddedApiEnabled")
 local FFlagExpChatDictation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagExpChatDictation
 
-local function log(...) --[[ Line: 17 ]]
+local function log(...)
 	-- upvalues: DebugLogVoiceDefault (copy)
 	if DebugLogVoiceDefault then
 		print("[VoiceDefault]", ...)
@@ -44,7 +44,7 @@ local t = {}
 local t1 = {}
 local CharacterAddedConnections = {}
 
-local function _(p1, Key) --[[ Line: 58 | Named "upsertDeviceList" ]]
+local function _(p1, Key)
 	if p1 == nil then
 		return { [Key] = true }
 	else
@@ -54,7 +54,7 @@ local function _(p1, Key) --[[ Line: 58 | Named "upsertDeviceList" ]]
 	end
 end
 
-local function addEmitterToHead(Parent) --[[ Line: 69 ]]
+local function addEmitterToHead(Parent)
 	-- upvalues: log (copy), VoiceChatService (copy), Curve (copy)
 	local AudioEmitter = Instance.new("AudioEmitter")
 	AudioEmitter.Parent = Parent
@@ -67,7 +67,7 @@ local function addEmitterToHead(Parent) --[[ Line: 69 ]]
 	return AudioEmitter
 end
 
-local _ = function(Parent, SourceInstance) --[[ Line: 83 | Named "hookupDeviceInputToEmitter" ]]
+local _ = function(Parent, SourceInstance)
 	-- upvalues: addEmitterToHead (copy), log (copy)
 	local AddEmitterToHeadResult = addEmitterToHead(Parent)
 	log("Hooking input device to emitter", Parent, SourceInstance, AddEmitterToHeadResult)
@@ -77,7 +77,7 @@ local _ = function(Parent, SourceInstance) --[[ Line: 83 | Named "hookupDeviceIn
 	Wire.TargetInstance = AddEmitterToHeadResult
 end
 
-local _ = function(Key, p1) --[[ Line: 95 | Named "untrackDeviceForPlayer" ]]
+local _ = function(Key, p1)
 	-- upvalues: t (copy), t1 (copy), log (copy)
 	if p1 then
 		local Entry = t[p1]
@@ -98,12 +98,12 @@ local _ = function(Key, p1) --[[ Line: 95 | Named "untrackDeviceForPlayer" ]]
 	end
 end
 
-local _ = function(Object) --[[ Line: 116 | Named "isIgnoredAudioInput" ]]
+local _ = function(Object)
 	-- upvalues: CoreGui (copy)
 	return Object:IsDescendantOf(CoreGui)
 end
 
-local function trackDevice(AudioDeviceInput) --[[ Line: 120 ]]
+local function trackDevice(AudioDeviceInput)
 	-- upvalues: FFlagExpChatDictation (copy), CoreGui (copy), t (copy), t1 (copy), log (copy), trackDevice (copy)
 	if FFlagExpChatDictation and AudioDeviceInput:IsDescendantOf(CoreGui) then return end
 	local Player = AudioDeviceInput.Player
@@ -122,7 +122,7 @@ local function trackDevice(AudioDeviceInput) --[[ Line: 120 ]]
 	end
 	local Player1 = Player
 	t1[AudioDeviceInput] = {
-		onPlayerChanged = AudioDeviceInput:GetPropertyChangedSignal("Player"):Connect(function() --[[ Line: 132 ]]
+		onPlayerChanged = AudioDeviceInput:GetPropertyChangedSignal("Player"):Connect(function()
 			-- upvalues: AudioDeviceInput (copy), Player1 (ref), t (upval), t1 (upval), log (upval), trackDevice (upval)
 			local Player = Player1
 			
@@ -145,7 +145,7 @@ local function trackDevice(AudioDeviceInput) --[[ Line: 120 ]]
 			trackDevice(AudioDeviceInput)
 		end)
 	}
-	AudioDeviceInput.Destroying:Connect(function() --[[ Line: 139 ]]
+	AudioDeviceInput.Destroying:Connect(function()
 		-- upvalues: AudioDeviceInput (copy), t (upval), t1 (upval), log (upval)
 		local Player = AudioDeviceInput.Player
 		
@@ -169,9 +169,9 @@ local function trackDevice(AudioDeviceInput) --[[ Line: 120 ]]
 	end)
 end
 
-local function createAudioDevice(Player: Player) --[[ Line: 144 ]]
+local function createAudioDevice(Player: Player)
 	-- upvalues: VoiceChatService (copy), log (copy), trackDevice (copy), addEmitterToHead (copy), CharacterAddedConnections (copy)
-	local Success, Result = pcall(function() --[[ Line: 145 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: VoiceChatService (upval), Player (copy)
 		return VoiceChatService:IsVoiceEnabledForUserIdAsync(Player.UserId)
 	end)
@@ -195,7 +195,7 @@ local function createAudioDevice(Player: Player) --[[ Line: 144 ]]
 		Wire.SourceInstance = AudioDeviceInput
 		Wire.TargetInstance = AddEmitterToHeadResult
 	end
-	CharacterAddedConnections[Player] = Player.CharacterAdded:Connect(function(Character) --[[ Line: 164 ]]
+	CharacterAddedConnections[Player] = Player.CharacterAdded:Connect(function(Character)
 		-- upvalues: AudioDeviceInput (copy), addEmitterToHead (upval), log (upval)
 		local AddEmitterToHeadResult = addEmitterToHead(Character)
 		log("Hooking input device to emitter", Character, AudioDeviceInput, AddEmitterToHeadResult)
@@ -213,7 +213,7 @@ if VoiceChatService.UseNewAudioApi then
 	if VoiceChatService.EnableDefaultVoice then
 		local Players = game:GetService("Players")
 		Players.PlayerAdded:Connect(createAudioDevice)
-		Players.PlayerRemoving:Connect(function(Player) --[[ Line: 175 ]]
+		Players.PlayerRemoving:Connect(function(Player)
 			-- upvalues: t (copy), CharacterAddedConnections (copy), log (copy)
 			local Entry = t[Player]
 			local CharacterAddedConnection = CharacterAddedConnections[Player]
@@ -236,7 +236,7 @@ if VoiceChatService.UseNewAudioApi then
 	SetUserActive.Parent = RobloxReplicatedStorage
 	
 	if AudioInstanceAddedApiEnabledEngineFeature then
-		SoundService.AudioInstanceAdded:Connect(function(AudioDeviceInput) --[[ Line: 197 ]]
+		SoundService.AudioInstanceAdded:Connect(function(AudioDeviceInput)
 			-- upvalues: FFlagExpChatDictation (copy), CoreGui (copy), trackDevice (copy)
 			if AudioDeviceInput:IsA("AudioDeviceInput") then
 				if FFlagExpChatDictation and AudioDeviceInput:IsDescendantOf(CoreGui) then return end
@@ -245,7 +245,7 @@ if VoiceChatService.UseNewAudioApi then
 			end
 		end)
 	else
-		game.DescendantAdded:Connect(function(Descendant) --[[ Line: 208 ]]
+		game.DescendantAdded:Connect(function(Descendant)
 			-- upvalues: FFlagExpChatDictation (copy), CoreGui (copy), trackDevice (copy)
 			if Descendant:IsA("AudioDeviceInput") then
 				if FFlagExpChatDictation and Descendant:IsDescendantOf(CoreGui) then return end
@@ -260,7 +260,7 @@ if VoiceChatService.UseNewAudioApi then
 			trackDevice(audioInstance)
 		end
 	end
-	SetUserActive.OnServerEvent:Connect(function(Player, Active) --[[ Line: 231 ]]
+	SetUserActive.OnServerEvent:Connect(function(Player, Active)
 		-- upvalues: t (copy), log (copy)
 		local Entry = t[Player]
 		

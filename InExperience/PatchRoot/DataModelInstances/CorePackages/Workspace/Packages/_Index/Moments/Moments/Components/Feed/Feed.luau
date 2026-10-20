@@ -58,14 +58,14 @@ local config = {
 	deletedToast = "Feature.Moments.Label.PostDeleted"
 }
 
-local function renderFeedItem(p1, p2) --[[ Line: 116 ]]
+local function renderFeedItem(p1, p2)
 	-- upvalues: FeedItemRegistryModule (copy)
 	local FeedItemRegistryModuleEntry = FeedItemRegistryModule[p1.kind]
 	
 	return if FeedItemRegistryModuleEntry == nil then nil else FeedItemRegistryModuleEntry.render(p1, p2)
 end
 
-local function feedItemKey(p1, p2) --[[ Line: 121 ]]
+local function feedItemKey(p1, p2)
 	-- upvalues: FeedItemRegistryModule (copy)
 	local FeedItemRegistryModuleEntry = FeedItemRegistryModule[p1.kind]
 	local Key = if FeedItemRegistryModuleEntry == nil then nil else FeedItemRegistryModuleEntry.getKey(p1)
@@ -73,25 +73,25 @@ local function feedItemKey(p1, p2) --[[ Line: 121 ]]
 	return if Key == nil or Key == "" then tostring(p2) else Key
 end
 
-local function feedItemDedupeKey(p1) --[[ Line: 131 ]]
+local function feedItemDedupeKey(p1)
 	-- upvalues: FeedItemRegistryModule (copy)
 	local FeedItemRegistryModuleEntry = FeedItemRegistryModule[p1.kind]
 	
 	return if FeedItemRegistryModuleEntry == nil then nil else FeedItemRegistryModuleEntry.getKey(p1)
 end
 
-local function feedItemAttribution(p1) --[[ Line: 136 ]]
+local function feedItemAttribution(p1)
 	-- upvalues: FeedItemRegistryModule (copy)
 	local FeedItemRegistryModuleEntry = FeedItemRegistryModule[p1.kind]
 	
 	return if FeedItemRegistryModuleEntry == nil then nil else FeedItemRegistryModuleEntry.getAttribution(p1)
 end
 
-local function _(p1) --[[ Line: 141 | Named "stringOrNil" ]]
+local function _(p1)
 	return if p1 == nil then nil else tostring(p1)
 end
 
-local function makeMediaLoadEventFields(MediaLoadEventFields, Source) --[[ Line: 145 ]]
+local function makeMediaLoadEventFields(MediaLoadEventFields, Source)
 	local RecommendationMetadata = MediaLoadEventFields.recommendationMetadata
 	local PlaceId = MediaLoadEventFields.metadata.placeId
 	local Text = if PlaceId == nil then nil else tostring(PlaceId)
@@ -113,7 +113,7 @@ end
 
 local MomentsFeed = nil
 
-local _ = function() --[[ Line: 162 | Named "getLogger" ]]
+local _ = function()
 	-- upvalues: MomentsFeed (ref), Parent (copy)
 	if MomentsFeed == nil then
 		MomentsFeed = require(Parent.Loggers).Logger:new("Moments.Feed")
@@ -121,7 +121,7 @@ local _ = function() --[[ Line: 162 | Named "getLogger" ]]
 	return MomentsFeed
 end
 
-return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
+return function(Frame: Frame)
 	-- upvalues: NoopTelemetry (copy), FFlagMomentsComments (copy), GetCommentsSheetStoreModule (copy), SignalsReactModule (copy), FFlagMomentsCreatorAnalyticsModule (copy), GetPostInsightsPageStoreModule (copy), GetImmersiveChromeStoreModule (copy), UseLocalizationFunction (copy), config (copy), UseMomentsSessionFunction (copy), GetToastStoreModule (copy), ReactModule (copy), GetFeedScrollLimitModule (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), GetFFlagMomentsNonInfiniteScrollFunction (copy), GetMomentsCapabilitiesFunction (copy), CreateFeedStoreModule (copy), feedItemDedupeKey (copy), FFlagMomentsCommentsCloseOnFeedJumpModule (copy), SignalsModule (copy), FFlagMomentsMediaSmoothnessTelemetry (copy), FFlagMomentsNavigationEventModule (copy), UseMomentsHostFunction (copy), LogMomentViewBeganModule (copy), FFlagMomentsImpressionPrimaryEntityModule (copy), Moments (copy), FireAnalyticsEventFunction (copy), EventNames (copy), LogFeedEndStateReachedModule (copy), UseFeedTelemetryModule (copy), feedItemAttribution (copy), FFlagMomentsOptimisticProfilePending (copy), MomentsSurfaceLoadManager (copy), FeedItemRegistryModule (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), DeleteMomentModule (copy), MomentsFeed (ref), Parent (copy), FFlagMomentsRemoveDeletedFromProfile (copy), GetDeletedMomentsStoreModule (copy), MakeFeedActionFieldsModule (copy), FFlagMomentsDeleteSnackbarModule (copy), FFlagMomentsFixDeleteToastCopyModule (copy), makeMediaLoadEventFields (copy), Analytics (copy), FFlagMomentsFeedMediaLoadAttemptedEvent (copy), FeedContext (copy), VerticalPager (copy), renderFeedItem (copy), feedItemKey (copy), FeedStateViewModule (copy), FeedNavigationBarModule (copy), ImmersiveChromeControllerModule (copy), SwipeLatencyTrackerModule (copy), DeletionConfirmationDialogModule (copy), MomentMediaCoordinatorProviderModule (copy), SurfaceReadyTrackerModule (copy)
 	local Source = Frame.source
 	local NoActive = Frame.active == nil or Frame.active
@@ -152,30 +152,30 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 	local UseMomentsSessionResult = UseMomentsSessionFunction()
 	local ToastStoreModule = GetToastStoreModule(false)
 	local UseSignalStateResult3 = SignalsReactModule.useSignalState(UseMomentsSessionResult.getPendingDeletion)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 273 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: GetFeedScrollLimitModule (upval), FFlagMomentsNonInfiniteScrollEndStateFixesModule (upval), GetFFlagMomentsNonInfiniteScrollFunction (upval), GetMomentsCapabilitiesFunction (upval), CreateFeedStoreModule (upval), Source (copy), feedItemDedupeKey (upval), IsTrackSurfaceLoad (copy)
-		return CreateFeedStoreModule(Source, feedItemDedupeKey, IsTrackSurfaceLoad, (GetFeedScrollLimitModule(FFlagMomentsNonInfiniteScrollEndStateFixesModule, GetFFlagMomentsNonInfiniteScrollFunction(), function() --[[ Line: 277 ]]
+		return CreateFeedStoreModule(Source, feedItemDedupeKey, IsTrackSurfaceLoad, (GetFeedScrollLimitModule(FFlagMomentsNonInfiniteScrollEndStateFixesModule, GetFFlagMomentsNonInfiniteScrollFunction(), function()
 			-- upvalues: GetMomentsCapabilitiesFunction (upval)
 			return GetMomentsCapabilitiesFunction(false)
 		end)))
 	end, { Source, IsTrackSurfaceLoad })
-	ReactModule.useEffect(function() --[[ Line: 285 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy)
 		UseMemoResult.loadInitial()
 		
-		return function() --[[ Line: 287 ]]
+		return function()
 			-- upvalues: UseMemoResult (upval)
 			UseMemoResult.dispose()
 		end
 	end, { UseMemoResult })
 	
 	if FFlagMomentsCommentsCloseOnFeedJumpModule and GetCommentsSheetStoreModule ~= nil then
-		ReactModule.useEffect(function() --[[ Line: 298 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: NoActive (copy), GetCommentsSheetStoreModule (upval), UseMemoResult (copy), SignalsModule (upval)
 			if not NoActive then return end
 			local CommentsSheetStoreModule = GetCommentsSheetStoreModule(false)
 			
-			local function _(p1) --[[ Line: 305 | Named "getCurrentPosition" ]]
+			local function _(p1)
 				-- upvalues: UseMemoResult (upval)
 				local CurrentItem = UseMemoResult.pager.getCurrentItem(p1)
 				
@@ -201,7 +201,7 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 			else
 				FeedItemId = `kind:{CurrentItem.kind}`
 			end
-			return SignalsModule.createEffect(function(p1) --[[ Line: 317 ]]
+			return SignalsModule.createEffect(function(p1)
 				-- upvalues: UseMemoResult (upval), FeedItemId (ref), CommentsSheetStoreModule (copy)
 				local CurrentItem = UseMemoResult.pager.getCurrentItem(p1)
 				local FeedItemId1 = nil
@@ -227,7 +227,7 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseRefResult2 = ReactModule.useRef(nil)
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 340 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: FFlagMomentsMediaSmoothnessTelemetry (upval), FFlagMomentsNavigationEventModule (upval), UseRefResult1 (copy), UseRefResult2 (copy)
 		if not FFlagMomentsMediaSmoothnessTelemetry and not FFlagMomentsNavigationEventModule then
 			return nil
@@ -235,7 +235,7 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 		local t = {}
 		
 		if FFlagMomentsMediaSmoothnessTelemetry then
-			function t.onTargetCommitted(p1, p2, p3) --[[ Line: 346 ]]
+			function t.onTargetCommitted(p1, p2, p3)
 				-- upvalues: UseRefResult1 (upval)
 				local CurrentFunction: (any, any, any) -> () = UseRefResult1.current
 				
@@ -245,7 +245,7 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 			end
 		end
 		if FFlagMomentsNavigationEventModule then
-			function t.onUserStep(p1, p2) --[[ Line: 354 ]]
+			function t.onUserStep(p1, p2)
 				-- upvalues: UseRefResult2 (upval)
 				local CurrentFunction: (any, any) -> () = UseRefResult2.current
 				
@@ -260,7 +260,7 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 	local UseRefResult4 = ReactModule.useRef(false)
 	local UseRefResult5 = ReactModule.useRef(0)
 	local UseRefResult6 = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 369 ]]
+	local UseResult = ReactModule.useCallback(function(p1)
 		-- upvalues: UseRefResult4 (copy), UseRefResult3 (copy), UseRefResult6 (copy), FFlagMomentsNavigationEventModule (upval), UseRefResult5 (copy), UseMemoResult (copy)
 		if UseRefResult4.current or DateTime.now().UnixTimestampMillis < UseRefResult3.current then return end
 		local CurrentFunction: (any) -> () = UseRefResult6.current
@@ -272,7 +272,7 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 		UseRefResult5.current += 1
 		local Current = UseRefResult5.current
 		UseMemoResult.refresh()
-		task.spawn(function() --[[ Line: 384 ]]
+		task.spawn(function()
 			-- upvalues: UseRefResult4 (upval), Current (copy), UseRefResult5 (upval), UseMemoResult (upval), UseRefResult3 (upval)
 			while UseRefResult4.current and Current == UseRefResult5.current do
 				local Status = UseMemoResult.getStatus(false)
@@ -290,7 +290,7 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 			end
 		end)
 	end, { UseMemoResult })
-	local UseResult1 = ReactModule.useCallback(function(Moment) --[[ Line: 401 ]]
+	local UseResult1 = ReactModule.useCallback(function(Moment)
 		-- upvalues: UseMemoResult (copy), UseRefResult (copy)
 		UseMemoResult.prependItem({ kind = "moment", moment = Moment })
 		local Current = UseRefResult.current
@@ -301,7 +301,7 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 	end, { UseMemoResult })
 	local UseRefResult7 = ReactModule.useRef(nil)
 	local HasOpenAvatarLookTryOn = UseMomentsHostFunction().openAvatarLookTryOn ~= nil
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 412 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult7 (copy), LogMomentViewBeganModule (upval), UseMomentsSessionResult (copy), FFlagMomentsNavigationEventModule (upval), FFlagMomentsImpressionPrimaryEntityModule (upval), HasOpenAvatarLookTryOn (copy)
 		if p2.kind == "moment" then
 			local CurrentFunction = UseRefResult7.current
@@ -311,7 +311,7 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 		end
 	end, { UseMomentsSessionResult, HasOpenAvatarLookTryOn })
 	local HasTelemetry = Frame.telemetry ~= nil
-	local UseResult3 = ReactModule.useCallback(function(MediaLoadEventFields, p2) --[[ Line: 429 ]]
+	local UseResult3 = ReactModule.useCallback(function(MediaLoadEventFields, p2)
 		-- upvalues: Moments (upval), FireAnalyticsEventFunction (upval), EventNames (upval), HasTelemetry (copy)
 		FireAnalyticsEventFunction(EventNames.MomentsNavigationEvent, require(Moments.Analytics.makeMomentsNavigationFields)({
 			feedItemId = MediaLoadEventFields.itemId,
@@ -324,7 +324,7 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 			clientEventTimestampMs = DateTime.now().UnixTimestampMillis
 		}))
 	end, { HasTelemetry })
-	local UseResult4 = ReactModule.useCallback(function(ItemPosition) --[[ Line: 447 ]]
+	local UseResult4 = ReactModule.useCallback(function(ItemPosition)
 		-- upvalues: LogFeedEndStateReachedModule (upval), UseMomentsSessionResult (copy), Source (copy)
 		LogFeedEndStateReachedModule({
 			source = UseMomentsSessionResult.getSessionSource(false),
@@ -346,7 +346,7 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 	UseRefResult7.current = UseFeedTelemetryModuleResult.getViewId
 	UseRefResult6.current = UseFeedTelemetryModuleResult.flushView
 	UseRefResult2.current = UseFeedTelemetryModuleResult.noteUserStep
-	ReactModule.useImperativeHandle(Frame.controllerRef, function() --[[ Line: 470 ]]
+	ReactModule.useImperativeHandle(Frame.controllerRef, function()
 		-- upvalues: UseResult1 (copy), UseResult (copy), UseFeedTelemetryModuleResult (copy)
 		return {
 			prependMoment = UseResult1,
@@ -359,7 +359,7 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 		UseFeedTelemetryModuleResult.flushView
 	})
 	local UseRefResult8 = ReactModule.useRef(NoActive1)
-	ReactModule.useEffect(function() --[[ Line: 483 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult8 (copy), NoActive1 (copy), UseMemoResult (copy), UseResult2 (copy)
 		local Current = UseRefResult8.current
 		UseRefResult8.current = NoActive1
@@ -372,7 +372,7 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 			end
 		end
 	end, { NoActive1, UseMemoResult, UseResult2 })
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 494 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy)
 		local Current = UseRefResult.current
 		
@@ -380,7 +380,7 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 			Current.next()
 		end
 	end, {})
-	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 500 ]]
+	local UseResult6 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy)
 		local Current = UseRefResult.current
 		
@@ -398,9 +398,9 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 	end
 	local UseSignalStateResult7 = SignalsReactModule.useSignalState(UseMemoResult.getLoadMoreFailed)
 	local UseRefResult9 = ReactModule.useRef({})
-	ReactModule.useEffect(function() --[[ Line: 520 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult5 (copy), UseRefResult4 (copy), UseRefResult3 (copy)
-		return function() --[[ Line: 521 ]]
+		return function()
 			-- upvalues: UseRefResult5 (upval), UseRefResult4 (upval), UseRefResult3 (upval)
 			UseRefResult5.current += 1
 			UseRefResult4.current = false
@@ -409,7 +409,7 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 	end, { UseMemoResult })
 	local UseRefResult10 = ReactModule.useRef(false)
 	local UseRefResult11 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 533 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult10 (copy), IsTrackSurfaceLoad (copy), MomentsSurfaceLoadManager (upval), FireAnalyticsEventFunction (upval), EventNames (upval)
 		if not UseRefResult10.current then
 			UseRefResult10.current = true
@@ -423,7 +423,7 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 			})
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 552 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsTrackSurfaceLoad (copy), UseRefResult11 (copy), UseSignalStateResult4 (copy), FireAnalyticsEventFunction (upval), EventNames (upval)
 		if IsTrackSurfaceLoad then return end
 		if not UseRefResult11.current and (UseSignalStateResult4 == "Loaded" or UseSignalStateResult4 == "LoadingMore") then
@@ -432,7 +432,7 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 		end
 	end, { UseSignalStateResult4 })
 	local UseRefResult12 = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 568 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult4 (copy), UseRefResult12 (copy), FireAnalyticsEventFunction (upval), EventNames (upval), Source (copy), UseMemoResult (copy)
 		if UseSignalStateResult4 ~= UseRefResult12.current then
 			if UseSignalStateResult4 == "Failed" then
@@ -451,7 +451,7 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 		UseRefResult12.current = UseSignalStateResult4
 	end, { UseSignalStateResult4 })
 	local UseRefResult13 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 591 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult7 (copy), UseRefResult13 (copy), UseMemoResult (copy), FeedItemRegistryModule (upval), FireAnalyticsEventFunction (upval), EventNames (upval), Source (copy)
 		if UseSignalStateResult7 and not UseRefResult13.current then
 			local Item = UseMemoResult.pager.getItems(false)[UseMemoResult.pager.getCurrentIndex(false)]
@@ -472,7 +472,7 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 		end
 		UseRefResult13.current = UseSignalStateResult7
 	end, { UseSignalStateResult7 })
-	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 606 ]]
+	local UseResult7 = ReactModule.useCallback(function()
 		-- upvalues: UseMemoResult (copy), UseRefResult (copy)
 		local CurrentIndex = UseMemoResult.pager.getCurrentIndex(false)
 		local Current = UseRefResult.current
@@ -481,7 +481,7 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 			Current.removeItem(CurrentIndex)
 		end
 	end, { UseMemoResult })
-	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 618 ]]
+	local UseResult8 = ReactModule.useCallback(function()
 		-- upvalues: UseSignalStateResult3 (copy), FFlagMomentsPassFeedItemIdToBackendApis (upval), UseMomentsSessionResult (copy), DeleteMomentModule (upval), MomentsFeed (upval), Parent (upval), UseResult7 (copy), FFlagMomentsRemoveDeletedFromProfile (upval), FFlagMomentsOptimisticProfilePending (upval), GetDeletedMomentsStoreModule (upval), MakeFeedActionFieldsModule (upval), FireAnalyticsEventFunction (upval), EventNames (upval), FFlagMomentsDeleteSnackbarModule (upval), ToastStoreModule (copy), UseLocalizationResult (copy), FFlagMomentsFixDeleteToastCopyModule (upval)
 		if UseSignalStateResult3 then
 			local MomentId = UseSignalStateResult3.momentId
@@ -493,7 +493,7 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 				
 				return
 			end
-			task.spawn(function() --[[ Line: 633 ]]
+			task.spawn(function()
 				-- upvalues: FFlagMomentsPassFeedItemIdToBackendApis (upval), DeleteMomentModule (upval), MomentId (copy), FeedItemId (copy), MomentsFeed (upval), Parent (upval)
 				local v1, v2 = (if FFlagMomentsPassFeedItemIdToBackendApis then DeleteMomentModule(MomentId, nil, FeedItemId) else DeleteMomentModule(MomentId)):await()
 				
@@ -537,11 +537,11 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 		UseLocalizationResult,
 		UseResult7
 	})
-	local UseResult9 = ReactModule.useCallback(function() --[[ Line: 674 ]]
+	local UseResult9 = ReactModule.useCallback(function()
 		-- upvalues: UseMomentsSessionResult (copy)
 		UseMomentsSessionResult.clearPendingDeletion()
 	end, { UseMomentsSessionResult })
-	local UseResult10 = ReactModule.useCallback(function(MediaLoadEventFields, FailureReason) --[[ Line: 678 ]]
+	local UseResult10 = ReactModule.useCallback(function(MediaLoadEventFields, FailureReason)
 		-- upvalues: MomentsFeed (upval), Parent (upval), makeMediaLoadEventFields (upval), Source (copy), FireAnalyticsEventFunction (upval), EventNames (upval)
 		if MomentsFeed == nil then
 			MomentsFeed = require(Parent.Loggers).Logger:new("Moments.Feed")
@@ -554,7 +554,7 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 		end
 		FireAnalyticsEventFunction(EventNames.FeedMediaLoadFailed, MediaLoadEventFields1)
 	end, { Source })
-	local UseResult11 = ReactModule.useCallback(function(MomentId, p2) --[[ Line: 693 ]]
+	local UseResult11 = ReactModule.useCallback(function(MomentId, p2)
 		-- upvalues: UseRefResult9 (copy), UseMemoResult (copy), UseResult10 (copy), UseRefResult (copy)
 		if UseRefResult9.current[MomentId] then return end
 		for i, value in UseMemoResult.pager.getItems(false) do
@@ -575,14 +575,14 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 	end, { UseMemoResult, UseResult10 })
 	local IsLoaded: boolean = NoShowNavigationBar and (UseSignalStateResult4 == "Loaded" or UseSignalStateResult4 == "LoadingMore")
 	local Element = ReactModule.createElement(FeedContext.Provider, {
-		value = ReactModule.useMemo(function() --[[ Line: 733 ]]
+		value = ReactModule.useMemo(function()
 			-- upvalues: UseMemoResult (copy), NoActive (copy), NoActive1 (copy), Source (copy), Telemetry (copy), UseFeedTelemetryModuleResult (copy), ImmersiveChromeStoreModule (copy), UseResult7 (copy), UseResult5 (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (upval), GetFFlagMomentsNonInfiniteScrollFunction (upval)
 			return {
 				getStatus = UseMemoResult.getStatus,
 				isActiveFeed = NoActive,
 				isPlaybackActive = NoActive1,
 				recommendationSource = Source.recommendationSource,
-				logAction = function(p3, p4, p5) --[[ Line: 739 ]]
+				logAction = function(p3, p4, p5)
 					-- upvalues: Telemetry (upval)
 					return Telemetry.logAction(p3, p4, p5)
 				end,
@@ -654,7 +654,7 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 		pager = UseMemoResult.pager,
 		playbackActive = NoUseSignalStateResult1,
 		createCoordinator = Frame.createCoordinator,
-		onMediaItemLoadAttempted = ReactModule.useCallback(function(MomentId) --[[ Line: 714 ]]
+		onMediaItemLoadAttempted = ReactModule.useCallback(function(MomentId)
 			-- upvalues: Analytics (upval), UseMemoResult (copy), FFlagMomentsFeedMediaLoadAttemptedEvent (upval), FireAnalyticsEventFunction (upval), EventNames (upval), makeMediaLoadEventFields (upval), Source (copy)
 			Analytics.reportMomentsFeedMediaLoad("attempted", UseMemoResult.observabilityFeedType)
 			
@@ -667,7 +667,7 @@ return function(Frame: Frame) --[[ Line: 220 | Named "Feed" ]]
 				end
 			end
 		end, { UseMemoResult, Source }),
-		onMediaItemFailed = ReactModule.useCallback(function(p3, p4) --[[ Line: 727 ]]
+		onMediaItemFailed = ReactModule.useCallback(function(p3, p4)
 			-- upvalues: Analytics (upval), UseMemoResult (copy), UseResult11 (copy)
 			Analytics.reportMomentsFeedMediaLoad("failed", UseMemoResult.observabilityFeedType, p4)
 			UseResult11(p3, p4)

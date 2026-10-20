@@ -48,12 +48,12 @@ DetailsPageHeader.validateProps = TModule.strictInterface({
 	deviceType = TModule.optional(TModule.string)
 })
 
-function DetailsPageHeader.init(p1) --[[ Line: 83 ]]
+function DetailsPageHeader.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.actionBarLabelRef = RoactModule.createRef()
 end
 
-function DetailsPageHeader.renderThumbnail(p1, p2, ThumbnailShadowHeight: number, XOffset, YOffset) --[[ Line: 87 ]]
+function DetailsPageHeader.renderThumbnail(p1, p2, ThumbnailShadowHeight: number, XOffset, YOffset)
 	-- upvalues: RoactModule (copy), LoadableImage (copy), ImageSetLabel (copy), Images (copy), FFlagFixDetailsPageIconShadowSlicing (copy)
 	return RoactModule.createElement("Frame", {
 		LayoutOrder = 1,
@@ -80,7 +80,7 @@ function DetailsPageHeader.renderThumbnail(p1, p2, ThumbnailShadowHeight: number
 	})
 end
 
-function DetailsPageHeader.renderDesktopMode(p1, p2) --[[ Line: 117 ]]
+function DetailsPageHeader.renderDesktopMode(p1, p2)
 	-- upvalues: RoactModule (copy), LuaAppBottomAlignDetailsHeaderInfoFrame (copy), DetailsPageTitleContentModule (copy), ActionBar (copy), FFlagUIBloxEnableActionBarButtonOverride (copy), FFlagUIBloxAddTestIdToActionBar (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local ThumbnailHeight = p1.props.thumbnailHeight
 	local ScaledThumbnailHeight = ThumbnailHeight * (p1.props.thumbnailAspectRatio.X / p1.props.thumbnailAspectRatio.Y)
@@ -172,7 +172,7 @@ function DetailsPageHeader.renderDesktopMode(p1, p2) --[[ Line: 117 ]]
 	}
 end
 
-function DetailsPageHeader.renderisPhone(p1, p2) --[[ Line: 257 ]]
+function DetailsPageHeader.renderisPhone(p1, p2)
 	-- upvalues: RoactModule (copy), FFlagLuaAppFixDetailsPageThumbnailRenderInPhone (copy)
 	local ThumbnailHeight = p1.props.thumbnailHeight
 	local ScaledThumbnailHeight = ThumbnailHeight * (p1.props.thumbnailAspectRatio.X / p1.props.thumbnailAspectRatio.Y)
@@ -201,7 +201,7 @@ function DetailsPageHeader.renderisPhone(p1, p2) --[[ Line: 257 ]]
 	}
 end
 
-function DetailsPageHeader.render(p1) --[[ Line: 295 ]]
+function DetailsPageHeader.render(p1)
 	-- upvalues: DeviceType (copy), WithStyleFunction (copy), RoactModule (copy)
 	local IsDeviceTypeMatch = p1.props.deviceType == DeviceType.Phone
 	local ThumbnailHeight: number = p1.props.thumbnailHeight
@@ -209,7 +209,7 @@ function DetailsPageHeader.render(p1) --[[ Line: 295 ]]
 	local GradientHeight = p1.props.gradientHeight or ThumbnailHeight + 16 - HeaderBarBackgroundHeight + 44
 	local BottomMargin = p1.props.bottomMargin
 	
-	return WithStyleFunction(function(p2) --[[ Line: 305 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: RoactModule (upval), GradientHeight (copy), HeaderBarBackgroundHeight (copy), IsDeviceTypeMatch (copy), p1 (copy), ThumbnailHeight (copy), BottomMargin (copy)
 		local Theme = p2.Theme
 		

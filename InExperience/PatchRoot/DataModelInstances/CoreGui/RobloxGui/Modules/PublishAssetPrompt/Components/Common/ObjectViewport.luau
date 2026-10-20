@@ -29,7 +29,7 @@ local _UDim2 = UDim2.new(0.4, 50, 0.15, 10)
 local _UDim2_1 = UDim2.new(0.5, 0, 1, 0)
 local ObjectViewport = RoactModule.PureComponent:extend("ObjectViewport")
 
-local function _() --[[ Line: 47 | Named "getReviewingCreationText" ]]
+local function _()
 	-- upvalues: RobloxTranslatorModule (copy)
 	local Success, Result = pcall(RobloxTranslatorModule.FormatByKey, RobloxTranslatorModule, "CoreScripts.PublishCommon.ReviewingCreation")
 	
@@ -47,7 +47,7 @@ ObjectViewport.validateProps = TModule.strictInterface({
 	isMakeupPreview = TModule.optional(TModule.boolean)
 })
 
-function ObjectViewport.createCamera(p1) --[[ Line: 64 ]]
+function ObjectViewport.createCamera(p1)
 	local Camera = Instance.new("Camera")
 	Camera.CameraType = Enum.CameraType.Scriptable
 	Camera.Parent = p1.worldModelRef:getValue()
@@ -57,20 +57,20 @@ function ObjectViewport.createCamera(p1) --[[ Line: 64 ]]
 	return Camera
 end
 
-function ObjectViewport.init(p1) --[[ Line: 74 ]]
+function ObjectViewport.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.worldModelRef = RoactModule.createRef()
 	p1.camera, p1.updateCamera = RoactModule.createBinding(nil)
 	p1.isMounted = false
 end
 
-local _ = function(Degrees: number, Vector): number --[[ Line: 80 | Named "getCameraDistance" ]]
+local _ = function(Degrees: number, Vector): number
 	local Z: number = Vector.Z
 	
 	return math.max(Vector.X, Vector.Y, Z) / 2 * (1 / math.tan(math.rad(Degrees) / 2)) + Z / 2
 end
 
-function ObjectViewport.setupViewportForAsset(p1) --[[ Line: 88 ]]
+function ObjectViewport.setupViewportForAsset(p1)
 	-- upvalues: MakeupPreviewUtilsModule (copy)
 	if not p1.props.model then return end
 	local Model = p1.props.model:Clone()
@@ -105,7 +105,7 @@ function ObjectViewport.setupViewportForAsset(p1) --[[ Line: 88 ]]
 	p1.updateCamera(Camera)
 end
 
-function ObjectViewport.setupViewport(p1) --[[ Line: 151 ]]
+function ObjectViewport.setupViewport(p1)
 	-- upvalues: EmoteUtility (copy), RunService (copy), CFrameUtility (copy), CharacterUtility (copy), CameraUtility (copy)
 	local Model = p1.props.model:Clone()
 	assert(Model.PrimaryPart, "The Model should have a PrimaryPart for setting up Camera")
@@ -148,9 +148,9 @@ function ObjectViewport.setupViewport(p1) --[[ Line: 151 ]]
 	p1.updateCamera(Camera)
 end
 
-function ObjectViewport.didMount(p1) --[[ Line: 195 ]]
+function ObjectViewport.didMount(p1)
 	p1.isMounted = true
-	task.spawn(function() --[[ Line: 197 ]]
+	task.spawn(function()
 		-- upvalues: p1 (copy)
 		if not p1.props.isLoading then
 			if p1.props.isHumanoidModel then
@@ -163,9 +163,9 @@ function ObjectViewport.didMount(p1) --[[ Line: 195 ]]
 	end)
 end
 
-function ObjectViewport.didUpdate(p1, p2) --[[ Line: 208 ]]
+function ObjectViewport.didUpdate(p1, p2)
 	if p2.isLoading and not p1.props.isLoading then
-		task.spawn(function() --[[ Line: 211 ]]
+		task.spawn(function()
 			-- upvalues: p1 (copy)
 			if p1.props.isHumanoidModel then
 				p1:setupViewport()
@@ -178,9 +178,9 @@ function ObjectViewport.didUpdate(p1, p2) --[[ Line: 208 ]]
 	end
 end
 
-function ObjectViewport.render(p1) --[[ Line: 221 ]]
+function ObjectViewport.render(p1)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy), ConstantsModule (copy), IconButton (copy), IconsActionsPreviewExpand (copy), IconSize (copy), ImageSetLabel (copy), _UDim2_1 (copy), ComponentAssetsDropshadow25 (copy), _UDim2 (copy), FFlagIECPublishValidationLoadingUIModule (copy), View (copy), Progress (copy), ProgressShape (copy), ProgressSize (copy), Text (copy), RobloxTranslatorModule (copy), Skeleton (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 222 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: p1 (copy), RoactModule (upval), ConstantsModule (upval), IconButton (upval), IconsActionsPreviewExpand (upval), IconSize (upval), ImageSetLabel (upval), _UDim2_1 (upval), ComponentAssetsDropshadow25 (upval), _UDim2 (upval), FFlagIECPublishValidationLoadingUIModule (upval), View (upval), Progress (upval), ProgressShape (upval), ProgressSize (upval), Text (upval), RobloxTranslatorModule (upval), Skeleton (upval)
 		local Theme = p2.Theme
 		
@@ -276,7 +276,7 @@ function ObjectViewport.render(p1) --[[ Line: 221 ]]
 	end)
 end
 
-function ObjectViewport.willUnmount(p1) --[[ Line: 313 ]]
+function ObjectViewport.willUnmount(p1)
 	p1.isMounted = false
 end
 

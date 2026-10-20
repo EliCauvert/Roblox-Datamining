@@ -14,13 +14,13 @@ local NewUrlBuilder = UrlBuilder.new({
 })
 
 return {
-	findExperienceDetailsByUniverseId = function(UniverseIds, p1) --[[ Line: 27 ]]
+	findExperienceDetailsByUniverseId = function(UniverseIds, p1)
 		-- upvalues: Fetch (copy), PromiseModule (copy), GamesGamesUniverseIdsUniverseIds (copy), Response (copy), GraphQLError (copy)
 		local Fetch1 = if p1 then p1 else Fetch
 		
-		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 30 ]]
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 			-- upvalues: GamesGamesUniverseIdsUniverseIds (upval), UniverseIds (copy), Fetch1 (copy), Response (upval), GraphQLError (upval)
-			local v1 = Fetch1(GamesGamesUniverseIdsUniverseIds({ universeIds = UniverseIds }), { method = "GET" }):catch(function() --[[ Line: 33 ]]
+			local v1 = Fetch1(GamesGamesUniverseIdsUniverseIds({ universeIds = UniverseIds }), { method = "GET" }):catch(function()
 				-- upvalues: Response (upval)
 				return Response.error()
 			end):expect()
@@ -30,7 +30,7 @@ return {
 				
 				return
 			end
-			local v2 = v1:json():catch(function() --[[ Line: 44 ]]
+			local v2 = v1:json():catch(function()
 				return nil
 			end):expect()
 			
@@ -43,13 +43,13 @@ return {
 			end
 		end)
 	end,
-	findExperienceMediaByUniverseId = function(UniverseId, p1) --[[ Line: 67 ]]
+	findExperienceMediaByUniverseId = function(UniverseId, p1)
 		-- upvalues: Fetch (copy), PromiseModule (copy), NewUrlBuilder (copy), Response (copy), GraphQLError (copy)
 		local Fetch1 = if p1 then p1 else Fetch
 		
-		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 70 ]]
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 			-- upvalues: NewUrlBuilder (upval), UniverseId (copy), Fetch1 (copy), Response (upval), GraphQLError (upval)
-			local v1 = Fetch1(NewUrlBuilder({ universeId = UniverseId }), { method = "GET" }):catch(function() --[[ Line: 73 ]]
+			local v1 = Fetch1(NewUrlBuilder({ universeId = UniverseId }), { method = "GET" }):catch(function()
 				-- upvalues: Response (upval)
 				return Response.error()
 			end):expect()
@@ -59,7 +59,7 @@ return {
 				
 				return
 			end
-			local v2 = v1:json():catch(function() --[[ Line: 84 ]]
+			local v2 = v1:json():catch(function()
 				return nil
 			end):expect()
 			

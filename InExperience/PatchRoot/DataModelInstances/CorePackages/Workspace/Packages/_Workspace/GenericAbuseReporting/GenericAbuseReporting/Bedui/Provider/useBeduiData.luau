@@ -2,7 +2,7 @@
 local ReactModule = require(GenericAbuseReporting.Parent.React)
 local AbuseReportBeduiContextModule = require(GenericAbuseReporting.Bedui.Provider.AbuseReportBeduiContext)
 
-return function() --[[ Line: 7 | Named "useBeduiData" ]]
+return function()
 	-- upvalues: ReactModule (copy), AbuseReportBeduiContextModule (copy)
 	return ReactModule.useContext(AbuseReportBeduiContextModule)
 end

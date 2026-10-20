@@ -11,13 +11,13 @@ local FFlagLuaAppHomePageFirstImageLoadObserver = require(Parent.SharedFlags).FF
 local FFlagAXTestSkeletonInCatalog = require(Parent.AvatarExperienceFlags).FFlagAXTestSkeletonInCatalog
 local FFlagAXTestSkeletonInCatalog1 = game:DefineFastFlag("AXTestDontUseSkeletonOnloadInCatalog", false) and FFlagAXTestSkeletonInCatalog
 
-return ReactModule.forwardRef(function(p1, Callback) --[[ Line: 34 | Named "ItemCardThumbnail" ]]
+return ReactModule.forwardRef(function(p1, Callback)
 	-- upvalues: ReactModule (copy), UseDesignTokensFunction (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), RunService (copy), FFlagAXTestSkeletonInCatalog (copy), FFlagAXTestSkeletonInCatalog1 (copy), ItemCardThumbnailSkeletonModule (copy), Radius (copy), Image (copy), Skeleton (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local Tag = p1.tag
 	local ObservedName = if FFlagLuaAppHomePageFirstImageLoadObserver then if Tag then `{Tag} observed-image` else "observed-image" else Tag
-	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 43 ]]
+	local UseResult = ReactModule.useCallback(function(Current)
 		-- upvalues: Callback (copy), UseStateResult2 (copy), p1 (copy), RunService (upval)
 		if typeof(Callback) == "function" then
 			Callback(Current)
@@ -29,7 +29,7 @@ return ReactModule.forwardRef(function(p1, Callback) --[[ Line: 34 | Named "Item
 		if Current and p1.url then
 			local Connection = nil
 			local CurrentTime = tick()
-			Connection = RunService.Heartbeat:Connect(function(DeltaTime) --[[ Line: 53 ]]
+			Connection = RunService.Heartbeat:Connect(function(DeltaTime)
 				-- upvalues: CurrentTime (ref), Current (copy), UseStateResult2 (upval), p1 (upval), Connection (ref)
 				CurrentTime += DeltaTime
 				

@@ -2,7 +2,7 @@
 local CryoModule = require(LegacyFriendsRodux.Parent.Cryo)
 local UpdateFriendPresenceCounts = require(LegacyFriendsRodux.Actions).UpdateFriendPresenceCounts
 
-return function(p1, p2) --[[ Line: 8 ]]
+return function(p1, p2)
 	-- upvalues: UpdateFriendPresenceCounts (copy), CryoModule (copy)
 	local P0 = p1 or {}
 	

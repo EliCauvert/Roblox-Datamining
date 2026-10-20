@@ -6,11 +6,11 @@ local _ = require(DataHydration.Moments.MomentsStoreTypes)
 local ConstructApiUrlModule = require(DataHydration.Moments.Util.constructApiUrl)
 local ConvertApiCommentToCommentModule = require(DataHydration.Moments.Util.convertApiCommentToComment)
 
-local function _(p1): string --[[ Line: 16 | Named "commentsPath" ]]
+local function _(p1): string
 	return `moment-comments-api/v1/moments/{p1}/comments`
 end
 
-return function(p1, Body, Network, StatusCodeActions) --[[ Line: 20 | Named "postMomentComment" ]]
+return function(p1, Body, Network, StatusCodeActions)
 	-- upvalues: ConstructApiUrlModule (copy), HttpClientModule (copy), ConvertApiCommentToCommentModule (copy)
 	local ConstructApiUrlModuleResult, ConstructApiUrlModuleResult2 = ConstructApiUrlModule(`moment-comments-api/v1/moments/{p1}/comments`)
 	
@@ -22,7 +22,7 @@ return function(p1, Body, Network, StatusCodeActions) --[[ Line: 20 | Named "pos
 		body = Body,
 		network = Network,
 		statusCodeActions = StatusCodeActions,
-		decode = function(p2) --[[ Line: 36 ]]
+		decode = function(p2)
 			-- upvalues: ConvertApiCommentToCommentModule (upval)
 			local ConvertApiCommentToCommentModuleResult = ConvertApiCommentToCommentModule(p2)
 			assert(ConvertApiCommentToCommentModuleResult ~= nil, "postMomentComment: response was not a Comment")

@@ -32,7 +32,7 @@ local UseCreationFlowStringsModule = require(MomentsCreation.Hooks.useCreationFl
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
 local _ = require(Parent.MomentsTypes)
 
-return function(p1) --[[ Line: 64 | Named "MusicOverlay" ]]
+return function(p1)
 	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseCreationFlowStringsModule (copy), GetMusicStoreModule (copy), UseStateFunction (copy), UseEffectFunction (copy), SignalsModule (copy), UseAudioPlaybackModule (copy), UseCallbackFunction (copy), MakeCreationEventFieldsModule (copy), SessionManager (copy), FunnelEventNames (copy), FireAnalyticsEventModule (copy), EventNames (copy), ReactModule (copy), MusicEditorModule (copy), GetFFlagMomentsCreationMusicSearchStateFixModule (copy), DashModule (copy), MusicPreviewItemModule (copy), Text (copy), Button (copy), FoundationModule (copy), View (copy), Icon (copy), TextInput (copy), MagnifyingGlass (copy), ScrollView (copy), ScrollBarVisibility (copy)
 	local Controller = p1.controller
 	local Playback = Controller.preview.playback
@@ -46,9 +46,9 @@ return function(p1) --[[ Line: 64 | Named "MusicOverlay" ]]
 	local UseStateResult4, UseStateResult2_3 = UseStateFunction(Playback.getTimeLength(false))
 	local UseStateResult5, UseStateResult2_4 = UseStateFunction(MusicStoreModule.getResults(false))
 	local UseStateResult6, UseStateResult2_5 = UseStateFunction(MusicStoreModule.getSearchStatus(false))
-	UseEffectFunction(function() --[[ Line: 81 ]]
+	UseEffectFunction(function()
 		-- upvalues: SignalsModule (upval), UseStateResult2_3 (copy), Playback (copy), UseStateResult2_4 (copy), MusicStoreModule (copy), UseStateResult2_5 (copy)
-		return SignalsModule.createEffect(function(p2) --[[ Line: 82 ]]
+		return SignalsModule.createEffect(function(p2)
 			-- upvalues: UseStateResult2_3 (upval), Playback (upval), UseStateResult2_4 (upval), MusicStoreModule (upval), UseStateResult2_5 (upval)
 			UseStateResult2_3(Playback.getTimeLength(p2))
 			UseStateResult2_4(MusicStoreModule.getResults(p2))
@@ -56,33 +56,33 @@ return function(p1) --[[ Line: 64 | Named "MusicOverlay" ]]
 		end)
 	end, { Playback, MusicStoreModule })
 	local UseStateResult7, UseStateResult2_6 = UseStateFunction(nil)
-	UseEffectFunction(function() --[[ Line: 91 ]]
+	UseEffectFunction(function()
 		-- upvalues: SignalsModule (upval), Controller (copy), UseStateResult2_6 (copy)
-		return SignalsModule.createEffect(function(p2) --[[ Line: 92 ]]
+		return SignalsModule.createEffect(function(p2)
 			-- upvalues: Controller (upval), UseStateResult2_6 (upval)
 			local ActiveSession = Controller.getActiveSession(p2)
 			UseStateResult2_6(if ActiveSession == nil then nil else ActiveSession.getDraft(p2))
 		end)
 	end, { Controller })
 	local UseAudioPlaybackModuleResult = UseAudioPlaybackModule(UseStateResult1 ~= nil, UseStateResult1, { autoplay = true, looping = false })
-	UseEffectFunction(function() --[[ Line: 105 ]]
+	UseEffectFunction(function()
 		-- upvalues: Playback (copy), MusicStoreModule (copy), UseStateResult4 (copy)
 		Playback.pause()
 		MusicStoreModule.search("", UseStateResult4)
 	end, { UseStateResult4 })
-	UseEffectFunction(function() --[[ Line: 111 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseAudioPlaybackModuleResult (copy), UseStateResult2_1 (copy)
 		if not UseAudioPlaybackModuleResult.playback.isPlaying then
 			UseStateResult2_1(nil)
 		end
 	end, { UseAudioPlaybackModuleResult.playback.isPlaying })
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 117 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: Playback (copy), Controller (copy)
 		Playback.play()
 		Playback.setMuted(false)
 		Controller.discardActiveTool()
 	end, { Controller, Playback })
-	local UseCallbackResult1 = UseCallbackFunction(function(AssetId) --[[ Line: 123 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function(AssetId)
 		-- upvalues: Controller (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), MakeCreationEventFieldsModule (upval), SessionManager (upval), FunnelEventNames (upval), FireAnalyticsEventModule (upval), EventNames (upval)
 		local ActiveSession = Controller.getActiveSession(false)
 		
@@ -101,7 +101,7 @@ return function(p1) --[[ Line: 64 | Named "MusicOverlay" ]]
 		end
 		FireAnalyticsEventModule(EventNames.EditingFlowMusicSelected, config)
 	end, { Controller })
-	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 147 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function()
 		-- upvalues: Controller (copy), UseStateResult2_2 (copy), Playback (copy)
 		local ActiveSession = Controller.getActiveSession(false)
 		
@@ -111,14 +111,14 @@ return function(p1) --[[ Line: 64 | Named "MusicOverlay" ]]
 		UseStateResult2_2(false)
 		Playback.pause()
 	end, { Controller, Playback })
-	local UseCallbackResult3 = UseCallbackFunction(function() --[[ Line: 156 ]]
+	local UseCallbackResult3 = UseCallbackFunction(function()
 		-- upvalues: UseStateResult2_2 (copy), Playback (copy), Controller (copy)
 		UseStateResult2_2(false)
 		Playback.play()
 		Playback.setMuted(false)
 		Controller.commitActiveTool()
 	end, { Controller, Playback })
-	local UseCallbackResult4 = UseCallbackFunction(function(StartTime) --[[ Line: 163 ]]
+	local UseCallbackResult4 = UseCallbackFunction(function(StartTime)
 		-- upvalues: Controller (copy)
 		local ActiveSession = Controller.getActiveSession(false)
 		local Draft = if ActiveSession == nil then nil else ActiveSession.getDraft(false)
@@ -127,7 +127,7 @@ return function(p1) --[[ Line: 64 | Named "MusicOverlay" ]]
 			ActiveSession.update({ assetId = Draft.assetId, startTime = StartTime })
 		end
 	end, { Controller })
-	local UseCallbackResult5 = UseCallbackFunction(function(p2) --[[ Line: 173 ]]
+	local UseCallbackResult5 = UseCallbackFunction(function(p2)
 		-- upvalues: UseStateResult1 (copy), UseStateResult2_1 (copy), UseAudioPlaybackModuleResult (copy)
 		if UseStateResult1 == p2 then
 			UseStateResult2_1(nil)
@@ -138,14 +138,14 @@ return function(p1) --[[ Line: 64 | Named "MusicOverlay" ]]
 			UseAudioPlaybackModuleResult.playback.play()
 		end
 	end, { UseStateResult1 })
-	local UseCallbackResult6 = UseCallbackFunction(function() --[[ Line: 183 ]]
+	local UseCallbackResult6 = UseCallbackFunction(function()
 		-- upvalues: UseStateResult1 (copy), UseStateResult2_1 (copy), MusicStoreModule (copy), UseStateResult (copy), UseStateResult4 (copy)
 		if UseStateResult1 ~= nil then
 			UseStateResult2_1(nil)
 		end
 		MusicStoreModule.search(UseStateResult, UseStateResult4)
 	end, { UseStateResult1, UseStateResult, UseStateResult4 })
-	local UseCallbackResult7 = UseCallbackFunction(function() --[[ Line: 190 ]]
+	local UseCallbackResult7 = UseCallbackFunction(function()
 		-- upvalues: MusicStoreModule (copy), UseStateResult (copy), UseStateResult4 (copy)
 		MusicStoreModule.search(UseStateResult, UseStateResult4)
 	end, { MusicStoreModule, UseStateResult, UseStateResult4 })
@@ -166,7 +166,7 @@ return function(p1) --[[ Line: 64 | Named "MusicOverlay" ]]
 		return ReactModule.createElement(View, {
 			tag = "col align-x-center align-y-top gap-small position-bottom-center anchor-bottom-center size-full-0 radius-medium bg-surface-100",
 			ZIndex = 5,
-			onActivated = function() --[[ Line: 260 ]] end,
+			onActivated = function() end,
 			Size = UDim2.fromScale(1, 0.6666666666666666),
 			stateLayer = {
 				affordance = FoundationModule.Enums.StateLayerAffordance.None
@@ -226,7 +226,7 @@ return function(p1) --[[ Line: 64 | Named "MusicOverlay" ]]
 					scrollBarVisibility = ScrollBarVisibility.None,
 					ScrollingDirection = Enum.ScrollingDirection.Y
 				}
-			}, if #UseStateResult5 > 0 then DashModule.map(UseStateResult5, function(p2, LayoutOrder) --[[ Line: 213 ]]
+			}, if #UseStateResult5 > 0 then DashModule.map(UseStateResult5, function(p2, LayoutOrder)
 				-- upvalues: ReactModule (upval), MusicPreviewItemModule (upval), UseCallbackResult1 (copy), UseCallbackResult5 (copy), UseStateResult1 (copy), ElapsedRatio (copy)
 				return ReactModule.createElement(MusicPreviewItemModule, {
 					key = p2.AssetId,

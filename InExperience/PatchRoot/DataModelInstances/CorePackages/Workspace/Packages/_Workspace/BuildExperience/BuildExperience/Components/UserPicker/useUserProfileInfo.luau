@@ -3,9 +3,9 @@ local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 local UserProfileModule = require(Parent.DataHydration.UserProfile)
 
-return function(p1) --[[ Line: 21 | Named "useUserProfileInfo" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UserProfileModule (copy), SignalsReactModule (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 22 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UserProfileModule (upval), p1 (copy)
 		return UserProfileModule.getAndFetchUserInfo(p1)
 	end, { p1 })

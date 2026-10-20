@@ -6,12 +6,12 @@ local SalesLocationType = AXCommonModule.Enums.SalesLocationType
 local NoPriceStatus = AXCommonModule.Enums.NoPriceStatus
 local _ = require(AvatarExperienceInspectAndBuy.Types)
 
-local function _(p1): boolean --[[ Line: 32 | Named "getAvailableInExperienceOnly" ]]
+local function _(p1): boolean
 	-- upvalues: SalesLocationType (copy)
 	return p1.saleLocationType == SalesLocationType.ExperiencesDevApiOnly
 end
 
-local _ = function(p1) --[[ Line: 36 | Named "getHasLimitedAmount" ]]
+local _ = function(p1)
 	-- upvalues: ItemRestrictions (copy)
 	local ItemRestrictions1 = p1.itemRestrictions
 	local ItemRestriction = ItemRestrictions1 and ItemRestrictions1[ItemRestrictions.LimitedUnique]
@@ -20,7 +20,7 @@ local _ = function(p1) --[[ Line: 36 | Named "getHasLimitedAmount" ]]
 	return ItemRestrictions1 and ItemRestrictions1[ItemRestrictions.Limited] or (ItemRestriction or ItemRestriction1)
 end
 
-local _ = function(p1) --[[ Line: 44 | Named "getUserHasReachedQuantityLimit" ]]
+local _ = function(p1)
 	-- upvalues: ItemRestrictions (copy)
 	local ItemRestrictions1 = p1.itemRestrictions
 	local ItemRestriction = ItemRestrictions1 and ItemRestrictions1[ItemRestrictions.LimitedUnique]
@@ -29,7 +29,7 @@ local _ = function(p1) --[[ Line: 44 | Named "getUserHasReachedQuantityLimit" ]]
 	return (not ItemRestrictions1 or not ItemRestrictions1[ItemRestrictions.Limited]) and (not ItemRestriction and not ItemRestriction1) and p1.isOwned or (if p1.collectibleItemDetails and p1.collectibleItemDetails.quantityLimitPerUser then p1.collectibleItemDetails.quantityLimitPerUser > 0 and p1.collectibleItemDetails.quantityLimitPerUser <= p1.collectibleItemDetails.resellableCount else false)
 end
 
-local _ = function(p1): boolean --[[ Line: 56 | Named "getOriginalStockAvailable" ]]
+local _ = function(p1): boolean
 	-- upvalues: ItemRestrictions (copy)
 	local ItemRestrictions1 = p1.itemRestrictions
 	local ItemRestriction = ItemRestrictions1 and ItemRestrictions1[ItemRestrictions.LimitedUnique]
@@ -39,7 +39,7 @@ local _ = function(p1): boolean --[[ Line: 56 | Named "getOriginalStockAvailable
 	return ItemRestriction2 and (p1.collectibleItemDetails and (p1.collectibleItemDetails.unitsAvailableForConsumption and p1.collectibleItemDetails.unitsAvailableForConsumption > 0)) or not ItemRestriction2
 end
 
-local _ = function(p1): boolean --[[ Line: 65 | Named "getIsOwned" ]]
+local _ = function(p1): boolean
 	-- upvalues: ItemRestrictions (copy)
 	local ItemRestrictions1 = p1.itemRestrictions
 	local ItemRestriction = ItemRestrictions1 and ItemRestrictions1[ItemRestrictions.LimitedUnique]
@@ -55,7 +55,7 @@ local _ = function(p1): boolean --[[ Line: 65 | Named "getIsOwned" ]]
 	return p1.isOwned and (Inverted and not HasResellers)
 end
 
-local _ = function(p1): boolean --[[ Line: 75 | Named "getIsSoldOut" ]]
+local _ = function(p1): boolean
 	-- upvalues: ItemRestrictions (copy)
 	local ItemRestrictions1 = p1.itemRestrictions
 	local ItemRestriction = ItemRestrictions1 and ItemRestrictions1[ItemRestrictions.LimitedUnique]
@@ -67,7 +67,7 @@ local _ = function(p1): boolean --[[ Line: 75 | Named "getIsSoldOut" ]]
 	return not IsUnitsAvailableForConsumptionAbove and not HasResellers
 end
 
-local function getIsPurchaseFromResale(p1): boolean --[[ Line: 81 ]]
+local function getIsPurchaseFromResale(p1): boolean
 	-- upvalues: ItemRestrictions (copy)
 	if p1.collectibleItemDetails and p1.collectibleItemDetails.hasResellers then
 		local ItemRestrictions1 = p1.itemRestrictions
@@ -82,7 +82,7 @@ local function getIsPurchaseFromResale(p1): boolean --[[ Line: 81 ]]
 	end
 end
 
-local _ = function(p1): boolean --[[ Line: 96 | Named "getIsExperienceOnly" ]]
+local _ = function(p1): boolean
 	-- upvalues: SalesLocationType (copy), ItemRestrictions (copy)
 	if p1.isOffSale then
 		return false
@@ -97,7 +97,7 @@ local _ = function(p1): boolean --[[ Line: 96 | Named "getIsExperienceOnly" ]]
 	end
 end
 
-local _ = function(p1): boolean --[[ Line: 107 | Named "getIsFree" ]]
+local _ = function(p1): boolean
 	-- upvalues: SalesLocationType (copy), NoPriceStatus (copy)
 	if p1.isOffSale then
 		return false
@@ -108,12 +108,12 @@ local _ = function(p1): boolean --[[ Line: 107 | Named "getIsFree" ]]
 	end
 end
 
-local _ = function(p1): boolean --[[ Line: 117 | Named "getIsPurchasableFromRoblox" ]]
+local _ = function(p1): boolean
 	-- upvalues: NoPriceStatus (copy), SalesLocationType (copy)
 	return not p1.isOffSale and p1.noPriceStatus ~= NoPriceStatus.OffSale and not (p1.saleLocationType == SalesLocationType.ExperiencesDevApiOnly)
 end
 
-return function(p1) --[[ Line: 124 | Named "getPriceStatusInShop" ]]
+return function(p1)
 	-- upvalues: PriceStatusModule (copy), ItemRestrictions (copy), getIsPurchaseFromResale (copy), SalesLocationType (copy), NoPriceStatus (copy)
 	if not p1 then
 		return PriceStatusModule.Unavailable

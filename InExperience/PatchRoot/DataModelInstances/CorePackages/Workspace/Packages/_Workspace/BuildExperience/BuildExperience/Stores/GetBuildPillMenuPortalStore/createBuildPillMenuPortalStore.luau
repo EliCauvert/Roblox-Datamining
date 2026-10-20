@@ -1,6 +1,6 @@
 ﻿local SignalsModule = require(script:FindFirstAncestor("BuildExperience").Parent.Signals)
 
-return function() --[[ Line: 11 | Named "createBuildPillMenuPortalStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(nil)
 	

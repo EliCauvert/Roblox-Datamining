@@ -14,7 +14,7 @@ local SocialNetworksInEditProfileIXPModule = require(EditProfile.Flags.SocialNet
 local UseScreenSizeFunction = require(Parent.RobloxAppHooks).useScreenSize
 local CallbackInputBox = require(Parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Components.CallbackInputBox
 
-return function(p1) --[[ Line: 37 | Named "EditSocialNetworksItem" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseStyleFunction (copy), UseScreenSizeFunction (copy), SocialNetworksInEditProfileIXPModule (copy), UserInputService (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ImageSetLabel (copy), Images (copy), CallbackInputBox (copy), IconSize (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStyleResult = UseStyleFunction()
@@ -23,7 +23,7 @@ return function(p1) --[[ Line: 37 | Named "EditSocialNetworksItem" ]]
 	local ScaledBaseSize = UseStyleResultFont.BaseSize * UseStyleResultFont.Body.RelativeSize
 	local UseGetExperimentVariantResult = SocialNetworksInEditProfileIXPModule.useGetExperimentVariant({ isExposureEnabled = true })
 	local IsVisibilityNoOne = if UseGetExperimentVariantResult then UseGetExperimentVariantResult == SocialNetworksInEditProfileIXPModule.Variants.VisibilityFirst and p1.isVisibilityNoOne else nil
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 51 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UserInputService (upval), UseRefResult (copy), p1 (copy)
 		if not UserInputService.OnScreenKeyboardVisible then
 			p1.setKeyboardOffset(0)
@@ -41,7 +41,7 @@ return function(p1) --[[ Line: 37 | Named "EditSocialNetworksItem" ]]
 			end
 		end
 	end, { UseScreenSizeFunction(), p1.setKeyboardOffset })
-	ReactModule.useEffect(function() --[[ Line: 67 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UserInputService (upval), UseResult (copy), p1 (copy), UseRefResult (copy)
 		local Connections = {
 			UserInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(UseResult),
@@ -49,14 +49,14 @@ return function(p1) --[[ Line: 37 | Named "EditSocialNetworksItem" ]]
 		}
 		
 		if p1.focusOn then
-			task.spawn(function() --[[ Line: 74 ]]
+			task.spawn(function()
 				-- upvalues: UseRefResult (upval)
 				if UseRefResult and UseRefResult.current then
 					UseRefResult.current:captureFocus()
 				end
 			end)
 		end
-		return function() --[[ Line: 81 ]]
+		return function()
 			-- upvalues: Connections (copy)
 			for _, connection in Connections do
 				connection:Disconnect()

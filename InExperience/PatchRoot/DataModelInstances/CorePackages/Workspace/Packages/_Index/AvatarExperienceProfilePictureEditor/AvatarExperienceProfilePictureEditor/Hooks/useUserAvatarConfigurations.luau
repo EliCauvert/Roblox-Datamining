@@ -16,25 +16,25 @@ local config = {
 	fieldOfViewDeg = ConstantsModule.DefaultFieldOfViewDeg
 }
 local ConfigResult = HttpRequestModule.config({
-	requestFunction = function(p1, p2, p3) --[[ Line: 33 ]]
+	requestFunction = function(p1, p2, p3)
 		-- upvalues: HttpRequestModule (copy)
 		return HttpRequestModule.requestFunctions.RequestInternal(p1, p2, p3)
 	end
 })
 
-return function(Current, p1) --[[ Line: 43 | Named "useUserAvatarConfigurations" ]]
+return function(Current, p1)
 	-- upvalues: UserAvatarConfigurationsApiModule (copy), UseSignalStateFunction (copy), ProfileRefreshSignal (copy), ReactModule (copy), config (copy), UserAvatarConfigurationsCacheModule (copy), ConfigResult (copy)
 	local NoP4: boolean = not p1 or p1.listenToProfileRefreshSignal ~= false
 	local SelectionTypes = if p1 then p1.selectionTypes else UserAvatarConfigurationsApiModule.DEFAULT_SELECTION_TYPES
 	local UseSignalStateResult = UseSignalStateFunction(ProfileRefreshSignal.getProfileRefreshSignal)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
 	local UseRefResult = ReactModule.useRef(0)
-	ReactModule.useEffect(function() --[[ Line: 58 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: NoP4 (copy), UseSignalStateResult (copy), UseRefResult (copy), UseStateResult2 (copy)
 		if not NoP4 then return end
 		if UseRefResult.current < UseSignalStateResult then
 			UseRefResult.current = UseSignalStateResult
-			UseStateResult2(function(p2: number): number --[[ Line: 64 ]]
+			UseStateResult2(function(p2: number): number
 				return p2 + 1
 			end)
 		end
@@ -45,7 +45,7 @@ return function(Current, p1) --[[ Line: 43 | Named "useUserAvatarConfigurations"
 	local UseRefResult1 = ReactModule.useRef(false)
 	local UseRefResult2 = ReactModule.useRef(nil)
 	local UseRefResult3 = ReactModule.useRef(UseStateResult)
-	ReactModule.useEffect(function() --[[ Line: 78 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Current (copy), UseRefResult1 (copy), UseRefResult2 (copy), UseRefResult3 (copy), UseStateResult (copy), UseStateResult2_1 (copy), config (upval), UseStateResult2_2 (copy), UseStateResult2_3 (copy), UserAvatarConfigurationsCacheModule (upval), ConfigResult (upval), SelectionTypes (copy)
 		local Flag = false
 		
@@ -72,7 +72,7 @@ return function(Current, p1) --[[ Line: 43 | Named "useUserAvatarConfigurations"
 		if not UseRefResult1.current then
 			UseStateResult2_3(true)
 		end
-		UserAvatarConfigurationsCacheModule.fetchCached(ConfigResult, Current, SelectionTypes):andThen(function(Result) --[[ Line: 109 ]]
+		UserAvatarConfigurationsCacheModule.fetchCached(ConfigResult, Current, SelectionTypes):andThen(function(Result)
 			-- upvalues: Flag (ref), UseStateResult2_1 (upval), UseStateResult2_2 (upval), UseRefResult1 (upval), UseStateResult2_3 (upval)
 			if not Flag then
 				UseStateResult2_1(Result.parsed.closeupCameraConfig)
@@ -82,7 +82,7 @@ return function(Current, p1) --[[ Line: 43 | Named "useUserAvatarConfigurations"
 				
 				return
 			end
-		end):catch(function(_) --[[ Line: 119 ]]
+		end):catch(function(_)
 			-- upvalues: Flag (ref), UseRefResult1 (upval), UseStateResult2_3 (upval)
 			if not Flag then
 				UseRefResult1.current = true
@@ -92,7 +92,7 @@ return function(Current, p1) --[[ Line: 43 | Named "useUserAvatarConfigurations"
 			end
 		end)
 		
-		return function() --[[ Line: 128 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end

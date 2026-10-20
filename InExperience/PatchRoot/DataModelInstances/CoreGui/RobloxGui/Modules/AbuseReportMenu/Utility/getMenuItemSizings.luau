@@ -1,7 +1,7 @@
 ﻿local ConstantsModule = require(script:FindFirstAncestor("AbuseReportMenu").Components.Constants)
 local UseStyleFunction = require(game:GetService("CorePackages").Packages.UIBlox).Core.Style.useStyle
 
-function getMenuItemSizings() --[[ Line: 10 ]]
+function getMenuItemSizings()
 	-- upvalues: UseStyleFunction (copy), ConstantsModule (copy)
 	local UseStyleResult = UseStyleFunction()
 	

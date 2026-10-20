@@ -8,7 +8,7 @@ local GetSetUpBubbleChatConfigurationChildPropertiesModule = require(ExpChat.Fla
 local DefaultBubbleChatChildrenCustomizationProperties = require(ExpChat.Config).DefaultBubbleChatChildrenCustomizationProperties
 local ClassNames = { "ImageLabel", "UIGradient", "UICorner", "UIPadding" }
 
-local function getSettingsFromInstance(ClassName) --[[ Line: 17 ]]
+local function getSettingsFromInstance(ClassName)
 	-- upvalues: DefaultBubbleChatChildrenCustomizationProperties (copy)
 	local t = {}
 	
@@ -20,13 +20,13 @@ local function getSettingsFromInstance(ClassName) --[[ Line: 17 ]]
 	return t
 end
 
-local function connectPropertyChangedSignalsToInstance(p1, ClassName) --[[ Line: 31 ]]
+local function connectPropertyChangedSignalsToInstance(p1, ClassName)
 	-- upvalues: DefaultBubbleChatChildrenCustomizationProperties (copy), BubbleChatChildSettingChangedModule (copy)
 	local List = {}
 	
 	for PropertyName, _ in pairs(DefaultBubbleChatChildrenCustomizationProperties[ClassName.ClassName]) do
 		if ClassName[PropertyName] ~= nil then
-			table.insert(List, (ClassName:GetPropertyChangedSignal(PropertyName):Connect(function() --[[ Line: 37 ]]
+			table.insert(List, (ClassName:GetPropertyChangedSignal(PropertyName):Connect(function()
 				-- upvalues: p1 (copy), BubbleChatChildSettingChangedModule (upval), ClassName (copy), PropertyName (copy)
 				p1:dispatch(BubbleChatChildSettingChangedModule(ClassName.ClassName, PropertyName, ClassName[PropertyName]))
 			end)))
@@ -35,7 +35,7 @@ local function connectPropertyChangedSignalsToInstance(p1, ClassName) --[[ Line:
 	return List
 end
 
-local function _(Connections) --[[ Line: 47 | Named "disconnectPropertyChangedSignalsToInstance" ]]
+local function _(Connections)
 	if Connections then
 		for _, connection in ipairs(Connections) do
 			connection:Disconnect()
@@ -43,7 +43,7 @@ local function _(Connections) --[[ Line: 47 | Named "disconnectPropertyChangedSi
 	end
 end
 
-local _ = function(p2): boolean --[[ Line: 55 | Named "isValidBubbleChatChild" ]]
+local _ = function(p2): boolean
 	-- upvalues: ClassNames (copy)
 	for _, className in ipairs(ClassNames) do
 		if className == p2.ClassName then
@@ -53,7 +53,7 @@ local _ = function(p2): boolean --[[ Line: 55 | Named "isValidBubbleChatChild" ]
 	return false
 end
 
-return function(p3) --[[ Line: 65 ]]
+return function(p3)
 	-- upvalues: TextChatService (copy), GetSetUpBubbleChatConfigurationChildPropertiesModule (copy), DefaultBubbleChatChildrenCustomizationProperties (copy), getSettingsFromInstance (copy), connectPropertyChangedSignalsToInstance (copy), ClassNames (copy), BubbleChatChildRemovedModule (copy), BubbleChatSettingsChangedModule (copy)
 	local BubbleChatConfiguration = TextChatService:FindFirstChildOfClass("BubbleChatConfiguration")
 	
@@ -75,7 +75,7 @@ return function(p3) --[[ Line: 65 ]]
 			t1[value.ClassName] = connectPropertyChangedSignalsToInstance(p3, value)
 		end
 	end
-	BubbleChatConfiguration.ChildRemoved:Connect(function(Child) --[[ Line: 95 ]]
+	BubbleChatConfiguration.ChildRemoved:Connect(function(Child)
 		-- upvalues: ClassNames (upval), t1 (copy), p3 (copy), BubbleChatChildRemovedModule (upval), BubbleChatConfiguration (copy), getSettingsFromInstance (upval), BubbleChatSettingsChangedModule (upval), connectPropertyChangedSignalsToInstance (upval)
 		local Flag = false
 		
@@ -103,7 +103,7 @@ return function(p3) --[[ Line: 65 ]]
 			end
 		end
 	end)
-	BubbleChatConfiguration.ChildAdded:Connect(function(Child) --[[ Line: 112 ]]
+	BubbleChatConfiguration.ChildAdded:Connect(function(Child)
 		-- upvalues: ClassNames (upval), p3 (copy), getSettingsFromInstance (upval), BubbleChatSettingsChangedModule (upval), connectPropertyChangedSignalsToInstance (upval), t1 (copy)
 		local Flag = false
 		

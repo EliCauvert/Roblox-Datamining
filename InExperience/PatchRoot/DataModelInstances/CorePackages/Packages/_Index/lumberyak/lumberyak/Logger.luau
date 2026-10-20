@@ -20,7 +20,7 @@ local t = {}
 for i, value in pairs(list) do
 	t[value] = i
 end
-function LoggerModule.Levels.fromString(Text: string): string? --[[ Line: 28 ]]
+function LoggerModule.Levels.fromString(Text: string): string?
 	-- upvalues: list (copy)
 	if type(Text) ~= "string" then
 		return nil
@@ -33,7 +33,7 @@ function LoggerModule.Levels.fromString(Text: string): string? --[[ Line: 28 ]]
 	return nil
 end
 
-function LoggerModule.new(Parent, Name) --[[ Line: 40 ]]
+function LoggerModule.new(Parent, Name)
 	-- upvalues: LoggerModule (copy)
 	local config = {
 		dirty = true,
@@ -61,7 +61,7 @@ function LoggerModule.new(Parent, Name) --[[ Line: 40 ]]
 	return config
 end
 
-local function setActive(MaxLevel, p1) --[[ Line: 72 ]]
+local function setActive(MaxLevel, p1)
 	-- upvalues: t (copy), list (copy), setActive (copy)
 	local Entry = t[MaxLevel]
 	
@@ -75,7 +75,7 @@ local function setActive(MaxLevel, p1) --[[ Line: 72 ]]
 	end
 end
 
-local function setDirty(p2) --[[ Line: 85 ]]
+local function setDirty(p2)
 	-- upvalues: setDirty (copy)
 	p2.dirty = true
 	
@@ -84,7 +84,7 @@ local function setDirty(p2) --[[ Line: 85 ]]
 	end
 end
 
-local function updateCache(Parent) --[[ Line: 93 ]]
+local function updateCache(Parent)
 	-- upvalues: updateCache (copy), CryoModule (copy)
 	if not Parent.dirty then return end
 	if not Parent.parent then
@@ -104,7 +104,7 @@ local function updateCache(Parent) --[[ Line: 93 ]]
 	Parent.dirty = false
 end
 
-function LoggerModule:setParent(Parent) --[[ Line: 117 ]]
+function LoggerModule:setParent(Parent)
 	-- upvalues: updateCache (copy), t (copy), setActive (copy), list (copy), setDirty (copy)
 	if self.parent then
 		self.parent.children[self] = nil
@@ -129,7 +129,7 @@ function LoggerModule:setParent(Parent) --[[ Line: 117 ]]
 	end
 end
 
-function LoggerModule:addSink(p3) --[[ Line: 141 ]]
+function LoggerModule:addSink(p3)
 	-- upvalues: setActive (copy), setDirty (copy)
 	setActive(p3.maxLevel, self)
 	table.insert(self.sinks, p3)
@@ -140,7 +140,7 @@ function LoggerModule:addSink(p3) --[[ Line: 141 ]]
 	end
 end
 
-function LoggerModule:setContext(Context) --[[ Line: 147 ]]
+function LoggerModule:setContext(Context)
 	-- upvalues: setDirty (copy)
 	self.context = Context
 	self.dirty = true
@@ -150,7 +150,7 @@ function LoggerModule:setContext(Context) --[[ Line: 147 ]]
 	end
 end
 
-local function log(Level, p4, Entry) --[[ Line: 152 ]]
+local function log(Level, p4, Entry)
 	-- upvalues: updateCache (copy), t (copy)
 	if p4.dirty then
 		updateCache(p4)
@@ -171,7 +171,7 @@ local function log(Level, p4, Entry) --[[ Line: 152 ]]
 	end
 	if LUMBERYAKINTERNALNoLogMessageGiven:find("{") then
 		local Count = 1
-		LUMBERYAKINTERNALNoLogMessageGiven = LUMBERYAKINTERNALNoLogMessageGiven:gsub("{(.-)}", function(p5) --[[ Line: 186 ]]
+		LUMBERYAKINTERNALNoLogMessageGiven = LUMBERYAKINTERNALNoLogMessageGiven:gsub("{(.-)}", function(p5)
 			-- upvalues: Count (ref), Entry (copy), config (copy)
 			if p5 == "" then
 				Count += 1
@@ -201,7 +201,7 @@ local function log(Level, p4, Entry) --[[ Line: 152 ]]
 	end
 end
 
-function LoggerModule:error(...) --[[ Line: 213 ]]
+function LoggerModule:error(...)
 	-- upvalues: LoggerModule (copy), log (copy)
 	if self.active[LoggerModule.Levels.Error] then
 		log(LoggerModule.Levels.Error, self, table.pack(...))
@@ -210,7 +210,7 @@ function LoggerModule:error(...) --[[ Line: 213 ]]
 	end
 end
 
-function LoggerModule:warning(...) --[[ Line: 220 ]]
+function LoggerModule:warning(...)
 	-- upvalues: LoggerModule (copy), log (copy)
 	if self.active[LoggerModule.Levels.Warning] then
 		log(LoggerModule.Levels.Warning, self, table.pack(...))
@@ -219,7 +219,7 @@ function LoggerModule:warning(...) --[[ Line: 220 ]]
 	end
 end
 
-function LoggerModule:info(...) --[[ Line: 227 ]]
+function LoggerModule:info(...)
 	-- upvalues: LoggerModule (copy), log (copy)
 	if self.active[LoggerModule.Levels.Info] then
 		log(LoggerModule.Levels.Info, self, table.pack(...))
@@ -228,7 +228,7 @@ function LoggerModule:info(...) --[[ Line: 227 ]]
 	end
 end
 
-function LoggerModule:debug(...) --[[ Line: 234 ]]
+function LoggerModule:debug(...)
 	-- upvalues: LoggerModule (copy), log (copy)
 	if self.active[LoggerModule.Levels.Debug] then
 		log(LoggerModule.Levels.Debug, self, table.pack(...))
@@ -237,7 +237,7 @@ function LoggerModule:debug(...) --[[ Line: 234 ]]
 	end
 end
 
-function LoggerModule:trace(...) --[[ Line: 241 ]]
+function LoggerModule:trace(...)
 	-- upvalues: LoggerModule (copy), log (copy)
 	if self.active[LoggerModule.Levels.Trace] then
 		log(LoggerModule.Levels.Trace, self, table.pack(...))

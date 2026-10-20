@@ -1,8 +1,8 @@
-﻿return function(p1, p2) --[[ Line: 8 | Named "fetchGalleryCaptures" ]]
+﻿return function(p1, p2)
 	local P1 = p2 or { Enum.CaptureType.Screenshot }
 	local CaptureService = nil
 	CaptureService = if p1 == nil then game:GetService("CaptureService") else p1
-	local Success, Result = pcall(function() --[[ Line: 17 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: CaptureService (ref), P1 (copy)
 		local CapturesFromGalleryAsync, CapturesFromGalleryAsync2 = CaptureService:ReadCapturesFromGalleryAsync(P1, false)
 		

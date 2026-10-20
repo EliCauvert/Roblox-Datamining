@@ -12,12 +12,12 @@ local NetworkingFriendsModule = require(SocialTabsPage.Networking.NetworkingFrie
 local FFlagMigrateFriendshipStatusesRemainingActions = require(Parent.SharedFlags).FFlagMigrateFriendshipStatusesRemainingActions
 local IconsActionsFriendsFriendAdd = require(Parent.UIBlox).App.ImageSet.Images["icons/actions/friends/friendAdd"]
 
-local function _(p1) --[[ Line: 66 | Named "refreshCTA" ]]
+local function _(p1)
 	-- upvalues: ProfileCTAStore (copy)
 	ProfileCTAStore.get().getCTA(p1, true)
 end
 
-local function getErrorToastMessage(p1, StatusCode, Code) --[[ Line: 71 ]]
+local function getErrorToastMessage(p1, StatusCode, Code)
 	-- upvalues: FriendingErrorCodesModule (copy)
 	return if StatusCode == 400 then ({
 		[FriendingErrorCodesModule.INVALID_TARGET_USER] = p1.invalidTargetUserError,
@@ -35,13 +35,13 @@ local function getErrorToastMessage(p1, StatusCode, Code) --[[ Line: 71 ]]
 	})[Code] else nil
 end
 
-local function showErrorToast(Callback: (any) -> (), Localized, p1) --[[ Line: 97 ]]
+local function showErrorToast(Callback: (any) -> (), Localized, p1)
 	-- upvalues: HttpService (copy), getErrorToastMessage (copy), SetCurrentToastMessageFunction (copy)
 	local DefaultFriendingError = Localized.defaultFriendingError
 	
 	if p1 ~= nil then
 		local StatusCode = p1.StatusCode
-		local Success, Result = pcall(function() --[[ Line: 102 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p1 (copy), HttpService (upval)
 			return if p1.Body then HttpService:JSONDecode(p1.Body) else nil
 		end)
@@ -51,13 +51,13 @@ local function showErrorToast(Callback: (any) -> (), Localized, p1) --[[ Line: 9
 end
 
 return {
-	executeAddFriend = function(p1) --[[ Line: 121 ]]
+	executeAddFriend = function(p1)
 		-- upvalues: FFlagMigrateFriendshipStatusesRemainingActions (copy), GetResult (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FriendsStoreChallengeNetworkModule (copy), NetworkingFriendsModule (copy), ProfileCTAStore (copy), SetCurrentToastMessageFunction (copy), IconsActionsFriendsFriendAdd (copy), showErrorToast (copy)
 		return (if FFlagMigrateFriendshipStatusesRemainingActions then GetResult.RequestFriendship(p1.targetUserId, p1.friendshipOriginSourceType, nil, if FFlagEnableFriendsStoreChallengeInterceptor then FriendsStoreChallengeNetworkModule else nil) else p1.dispatch(NetworkingFriendsModule.RequestFriendshipFromUserId.API({
 			currentUserId = p1.currentUserId,
 			targetUserId = p1.targetUserId,
 			friendshipOriginSourceType = p1.friendshipOriginSourceType
-		}))):andThen(function() --[[ Line: 135 ]]
+		}))):andThen(function()
 			-- upvalues: p1 (copy), ProfileCTAStore (upval), SetCurrentToastMessageFunction (upval), IconsActionsFriendsFriendAdd (upval)
 			ProfileCTAStore.get().getCTA(p1.targetUserId, true)
 			p1.dispatch(SetCurrentToastMessageFunction({
@@ -65,17 +65,17 @@ return {
 				toastMessage = p1.localized.friendRequestSent,
 				toastIcon = IconsActionsFriendsFriendAdd
 			}))
-		end):catch(function(Err) --[[ Line: 143 ]]
+		end):catch(function(Err)
 			-- upvalues: showErrorToast (upval), p1 (copy)
 			showErrorToast(p1.dispatch, p1.localized, Err)
 		end)
 	end,
-	executeAcceptFriendRequest = function(p1) --[[ Line: 148 ]]
+	executeAcceptFriendRequest = function(p1)
 		-- upvalues: FFlagMigrateFriendshipStatusesRemainingActions (copy), GetResult (copy), NetworkingFriendsModule (copy), ProfileCTAStore (copy), SetCurrentToastMessageFunction (copy), IconsActionsFriendsFriendAdd (copy), showErrorToast (copy)
 		return (if FFlagMigrateFriendshipStatusesRemainingActions then GetResult.AcceptFriendRequest(p1.targetUserId) else p1.dispatch(NetworkingFriendsModule.AcceptFriendRequestFromUserId.API({
 			currentUserId = p1.currentUserId,
 			targetUserId = p1.targetUserId
-		}))):andThen(function() --[[ Line: 156 ]]
+		}))):andThen(function()
 			-- upvalues: p1 (copy), ProfileCTAStore (upval), SetCurrentToastMessageFunction (upval), IconsActionsFriendsFriendAdd (upval)
 			ProfileCTAStore.get().getCTA(p1.targetUserId, true)
 			p1.dispatch(SetCurrentToastMessageFunction({
@@ -83,7 +83,7 @@ return {
 				toastMessage = p1.localized.friendAdded,
 				toastIcon = IconsActionsFriendsFriendAdd
 			}))
-		end):catch(function(Err) --[[ Line: 164 ]]
+		end):catch(function(Err)
 			-- upvalues: showErrorToast (upval), p1 (copy)
 			showErrorToast(p1.dispatch, p1.localized, Err)
 		end)

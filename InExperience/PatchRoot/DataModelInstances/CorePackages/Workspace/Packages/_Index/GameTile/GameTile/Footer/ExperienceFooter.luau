@@ -23,7 +23,7 @@ local ArgCheckModule = require(Parent.ArgCheck)
 local GetUserInputIsSelectionOnlyModule = require(GameTile.Footer.getUserInputIsSelectionOnly)
 local _UDim2 = UDim2.fromScale(1, 1)
 
-return function(p1) --[[ Line: 31 ]]
+return function(p1)
 	-- upvalues: ArgCheckModule (copy), UsePlayerCountTextModule (copy), UseStyleFunction (copy), UseDesignTokensFunction (copy), UseLocalizationFunction (copy), GetUserInputIsSelectionOnlyModule (copy), ReactModule (copy), StyledTextLabel (copy), SponsoredTooltipHover (copy), TooltipOrientation (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), _UDim2 (copy), CoPlayFooter (copy), Colors (copy), CoPlayFooterModule (copy), TextFooter (copy), SocialProofFooter (copy), StatGroup (copy)
 	if p1.automaticSize then
 		ArgCheckModule.isNotNil(p1.size, "If props.automaticSize is defined, props.size should also be defined.  Otherwise size falls back to a 1, 1 scale for this component.")

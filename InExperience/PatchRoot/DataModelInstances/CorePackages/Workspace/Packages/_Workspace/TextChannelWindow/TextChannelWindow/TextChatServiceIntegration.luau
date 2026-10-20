@@ -1,15 +1,15 @@
 ﻿local MessageModule = require(script.Parent.Message)
 
 return {
-	mapTextChatMessage = function(p1, p2) --[[ Line: 14 ]]
+	mapTextChatMessage = function(p1, p2)
 		-- upvalues: MessageModule (copy)
 		return if p1.TextSource then MessageModule.createUserMessageFromTextChatMessage(p1, p2) else MessageModule.createSystemMessageFromTextChatMessage(p1)
 	end,
-	mapSendingMessage = function(p1, p2) --[[ Line: 24 ]]
+	mapSendingMessage = function(p1, p2)
 		-- upvalues: MessageModule (copy)
 		return MessageModule.createUserMessageFromTextChatMessage(p1, p2)
 	end,
-	applyMessage = function(Tbl, p1) --[[ Line: 33 ]]
+	applyMessage = function(Tbl, p1)
 		for i, value in Tbl do
 			if value.messageId == p1.messageId then
 				local Copy = table.clone(Tbl)

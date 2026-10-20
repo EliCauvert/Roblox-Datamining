@@ -32,7 +32,7 @@ local FFlagUnifyVerifiedBadgeComponent = require(Parent.SharedFlags).FFlagUnifyV
 local FFlagSocialCarouselInGameTitleMarquee = require(Parent.SharedFlags).FFlagSocialCarouselInGameTitleMarquee
 local config = { layoutOrder = 2 }
 
-return function(p1) --[[ Line: 73 | Named "TitleStack" ]]
+return function(p1)
 	-- upvalues: Llama (copy), config (copy), UseTokensFunction (copy), LayoutModeModule (copy), ReactModule (copy), Image (copy), FFlagSocialCarouselInGameTitleMarquee (copy), FFlagUserTileTitleStackAddExtraInfo (copy), FFlagUserTileShowShimmerWhenLoadingModule (copy), ConstantsModule (copy), FFlagEnableBlackbirdCheck (copy), FFlagHidePremiumIconography (copy), UseLocalizationFunction (copy), TextKeysModule (copy), FFlagUserTileUnfilteredChatIndicator (copy), View (copy), Skeleton (copy), Radius (copy), FFlagProfilePlatformNewProfileHeader (copy), Text (copy), FFlagUserTileShowBadges (copy), FFlagUnifyVerifiedBadgeComponent (copy), VerifiedBadgeModule (copy), IconSize (copy), FoundationModule (copy), FFlagEnableMobileGameJoinCard (copy), StateLayerAffordance (copy), FFlagUserTileAddContextualInfoIcon (copy), Icon (copy), UserTileRemoveContextualInfoTag (copy)
 	local JoinResult = Llama.Dictionary.join(config, p1 or {})
 	local UseTokensResult = UseTokensFunction()
@@ -186,7 +186,7 @@ return function(p1) --[[ Line: 73 | Named "TitleStack" ]]
 				["align-x-center"] = JoinResult.layoutMode == LayoutModeModule.compact,
 				["align-x-left"] = JoinResult.layoutMode == LayoutModeModule.wide
 			},
-			onActivated = if (FFlagProfilePlatformNewProfileHeader or FFlagEnableMobileGameJoinCard) and JoinResult.onSubtitleClicked then function() --[[ Line: 284 ]]
+			onActivated = if (FFlagProfilePlatformNewProfileHeader or FFlagEnableMobileGameJoinCard) and JoinResult.onSubtitleClicked then function()
 				-- upvalues: JoinResult (ref)
 				JoinResult.onSubtitleClicked()
 			end else nil,

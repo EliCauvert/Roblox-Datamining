@@ -1,14 +1,14 @@
 ﻿local Label = Instance.new("TextLabel")
 Label.RichText = true
 
-local function _(Text) --[[ Line: 5 | Named "getContentText" ]]
+local function _(Text)
 	-- upvalues: Label (copy)
 	Label.Text = Text
 	
 	return Label.ContentText
 end
 
-return function(Text): boolean --[[ Line: 10 | Named "isWhitespaceOnly" ]]
+return function(Text): boolean
 	-- upvalues: Label (copy)
 	Label.Text = Text
 	

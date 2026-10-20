@@ -5,13 +5,13 @@ local ReactModule = require(Parent.React)
 local FocusNavigationContext = require(Parent.ReactFocusNavigation).FocusNavigationContext
 local FFlagLuaAppsDefaultSelection = require(Parent.SharedFlags).FFlagLuaAppsDefaultSelection
 
-local function v6(Delay, Ancestors, UseContextResult) --[[ Line: 19 ]]
+local function v6(Delay, Ancestors, UseContextResult)
 	-- upvalues: FFlagLuaAppsDefaultSelection (copy), GuiService (copy), CoreGui (copy)
 	local Flag = #Ancestors == 0
 	local Connections = {}
 	local List = {}
 	
-	local function _() --[[ Line: 24 | Named "disconnect" ]]
+	local function _()
 		-- upvalues: Flag (ref), Connections (copy)
 		if not Flag then
 			Flag = true
@@ -22,7 +22,7 @@ local function v6(Delay, Ancestors, UseContextResult) --[[ Line: 19 ]]
 		end
 	end
 	
-	local function onFocusChange(_, _, p1) --[[ Line: 33 ]]
+	local function onFocusChange(_, _, p1)
 		-- upvalues: Flag (ref), Connections (copy)
 		if p1 and not Flag then
 			Flag = true
@@ -33,9 +33,9 @@ local function v6(Delay, Ancestors, UseContextResult) --[[ Line: 19 ]]
 		end
 	end
 	
-	local function focus(p2) --[[ Line: 39 ]]
+	local function focus(p2)
 		-- upvalues: Delay (copy), Flag (ref), FFlagLuaAppsDefaultSelection (upval), GuiService (upval), Ancestors (copy), Connections (copy), CoreGui (upval), UseContextResult (copy), focus (copy), List (copy)
-		table.insert(List, (task.delay(Delay, function() --[[ Line: 40 ]]
+		table.insert(List, (task.delay(Delay, function()
 			-- upvalues: Flag (upval), FFlagLuaAppsDefaultSelection (upval), GuiService (upval), Ancestors (upval), Connections (upval), p2 (copy), CoreGui (upval), UseContextResult (upval), focus (upval)
 			if not Flag then
 				if FFlagLuaAppsDefaultSelection then
@@ -70,7 +70,7 @@ local function v6(Delay, Ancestors, UseContextResult) --[[ Line: 19 ]]
 		table.insert(Connections, ancestor.SelectionChanged:Connect(onFocusChange))
 	end
 	local v1 = 1
-	table.insert(List, (task.delay(Delay, function() --[[ Line: 40 ]]
+	table.insert(List, (task.delay(Delay, function()
 		-- upvalues: Flag (ref), FFlagLuaAppsDefaultSelection (upval), GuiService (upval), Ancestors (copy), Connections (copy), v1 (copy), CoreGui (upval), UseContextResult (copy), focus (copy)
 		if not Flag then
 			if FFlagLuaAppsDefaultSelection then
@@ -101,7 +101,7 @@ local function v6(Delay, Ancestors, UseContextResult) --[[ Line: 19 ]]
 	end)))
 	
 	return {
-		cancel = function() --[[ Line: 71 ]]
+		cancel = function()
 			-- upvalues: List (copy), Flag (ref), Connections (copy)
 			for _, value in List do
 				task.cancel(value)
@@ -119,11 +119,11 @@ local function v6(Delay, Ancestors, UseContextResult) --[[ Line: 19 ]]
 	}
 end
 
-return function(p3, Delay) --[[ Line: 99 ]]
+return function(p3, Delay)
 	-- upvalues: ReactModule (copy), FocusNavigationContext (copy), v6 (copy)
 	local UseContextResult = ReactModule.useContext(FocusNavigationContext)
 	
-	return ReactModule.useCallback(function() --[[ Line: 102 ]]
+	return ReactModule.useCallback(function()
 		-- upvalues: UseContextResult (copy), v6 (upval), Delay (copy), p3 (copy)
 		return if UseContextResult then v6(Delay, p3, UseContextResult) else nil
 	end, { UseContextResult, p3, Delay })

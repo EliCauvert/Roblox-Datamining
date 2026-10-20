@@ -41,7 +41,7 @@ ChromeService.__index = ChromeService
 ChromeService.AvailabilitySignal = ChromeUtilsModule.AvailabilitySignalState
 ChromeService.IntegrationStatus = { None = 0, Icon = 1, Window = 2 }
 
-function noop() --[[ Line: 98 ]] end
+function noop() end
 
 local Integration = {
 	id = "div",
@@ -54,11 +54,11 @@ local Integration = {
 	sideSheetPlacement = if IsSideSheetEnabledModule then SideSheetPlacement.None else nil
 }
 
-function createUnibarLayoutInfo(p1, p2): Rect --[[ Line: 248 ]]
+function createUnibarLayoutInfo(p1, p2): Rect
 	return Rect.new(p1, p1 + p2)
 end
 
-function ChromeService.new() --[[ Line: 252 ]]
+function ChromeService.new()
 	-- upvalues: LocalizationService (copy), FFlagEnableConsoleExpControls (copy), ShortcutServiceModule (copy), ChromeUtilsModule (copy), ObservableValue (copy), NotifySignal (copy), Localization (copy), FFlagChromeNineDotActivityIndicator (copy), Signal (copy), IsInExperienceUIVREnabled (copy), ChromeService (copy), ViewportUtilModule (copy), ChromeDeprecateMRUs (copy), FocusOnChromeSignal (copy), FocusOffChromeSignal (copy)
 	local config = {
 		_shortcutService = if FFlagEnableConsoleExpControls then ShortcutServiceModule.new() else nil,
@@ -97,7 +97,7 @@ function ChromeService.new() --[[ Line: 252 ]]
 		_inFocusNav = ObservableValue.new(false)
 	}
 	local self = setmetatable(config, ChromeService)
-	ViewportUtilModule.viewport:connect(function(p1) --[[ Line: 299 ]]
+	ViewportUtilModule.viewport:connect(function(p1)
 		-- upvalues: ChromeDeprecateMRUs (upval), self (copy)
 		if ChromeDeprecateMRUs then
 			self:updateWindowSizeSignals()
@@ -109,25 +109,25 @@ function ChromeService.new() --[[ Line: 252 ]]
 	end, true)
 	
 	if FFlagEnableConsoleExpControls then
-		config._shortcutService.onShortcutBarChanged:connect(function(p1) --[[ Line: 313 ]]
+		config._shortcutService.onShortcutBarChanged:connect(function(p1)
 			-- upvalues: self (copy)
 			self._currentShortcutBar:set(p1)
 		end)
 	end
 	if FFlagChromeNineDotActivityIndicator then
-		config._currentSubMenu:connect(function() --[[ Line: 319 ]]
+		config._currentSubMenu:connect(function()
 			-- upvalues: self (copy)
 			self:updateNineDotActivityIndicatorVisible()
 		end)
 	end
-	FocusOnChromeSignal:connect(function(p1) --[[ Line: 324 ]]
+	FocusOnChromeSignal:connect(function(p1)
 		-- upvalues: config (copy), self (copy)
 		if p1 and not config._subMenuConfig.nine_dot[p1] then
 			self:setSelected(p1)
 		end
 		self:enableFocusNav()
 	end)
-	FocusOffChromeSignal:connect(function() --[[ Line: 331 ]]
+	FocusOffChromeSignal:connect(function()
 		-- upvalues: self (copy), FFlagEnableConsoleExpControls (upval)
 		self:disableFocusNav()
 		
@@ -139,14 +139,14 @@ function ChromeService.new() --[[ Line: 252 ]]
 	return self
 end
 
-function ChromeService:storeChromeInteracted() --[[ Line: 343 ]]
+function ChromeService:storeChromeInteracted()
 	-- upvalues: LocalStoreModule (copy)
 	if LocalStoreModule.isEnabled() then
 		LocalStoreModule.storeForLocalPlayer("ChromeInteracted3", true)
 	end
 end
 
-function ChromeService:updateScreenSize(_, IsMobileDevice, PortraitOrientation, TinyPortrait) --[[ Line: 349 ]]
+function ChromeService:updateScreenSize(_, IsMobileDevice, PortraitOrientation, TinyPortrait)
 	-- upvalues: ConstantsModule (copy)
 	local MOBILETINYPORTRAITSLOTSDelta = if IsMobileDevice then if TinyPortrait then ConstantsModule.MOBILE_TINY_PORTRAIT_SLOTS - ConstantsModule.CORE_SLOTS elseif PortraitOrientation then ConstantsModule.MOBILE_PORTRAIT_SLOTS - ConstantsModule.CORE_SLOTS else ConstantsModule.MOBILE_LANDSCAPE_SLOTS - ConstantsModule.CORE_SLOTS else ConstantsModule.NON_MOBILE_SLOTS - ConstantsModule.CORE_SLOTS
 	
@@ -158,7 +158,7 @@ function ChromeService:updateScreenSize(_, IsMobileDevice, PortraitOrientation, 
 	self:updateWindowSizeSignals()
 end
 
-function ChromeService.updateWindowSizeSignals(p1) --[[ Line: 385 ]]
+function ChromeService.updateWindowSizeSignals(p1)
 	for _, integration in p1._integrations do
 		if integration.windowSize then
 			integration.windowSize:updateConstraints()
@@ -166,24 +166,24 @@ function ChromeService.updateWindowSizeSignals(p1) --[[ Line: 385 ]]
 	end
 end
 
-function ChromeService:notificationIndicator() --[[ Line: 393 ]]
+function ChromeService:notificationIndicator()
 	return self._notificationIndicator
 end
 
-function ChromeService:nineDotActivityIndicatorVisible() --[[ Line: 397 ]]
+function ChromeService:nineDotActivityIndicatorVisible()
 	return self._nineDotActivityIndicatorVisible
 end
 
-function ChromeService:setNineDotActivityIndicatorVisible(p2, p3) --[[ Line: 401 ]]
+function ChromeService:setNineDotActivityIndicatorVisible(p2, p3)
 	self._nineDotActivityIndicatorKeys[p2] = if p3 then true else nil
 	self:updateNineDotActivityIndicatorVisible()
 end
 
-function ChromeService:updateNineDotActivityIndicatorVisible() --[[ Line: 408 ]]
+function ChromeService:updateNineDotActivityIndicatorVisible()
 	self._nineDotActivityIndicatorVisible:set(self._currentSubMenu:get() ~= "nine_dot" and next(self._nineDotActivityIndicatorKeys) ~= nil)
 end
 
-function ChromeService:toggleSubMenu(GetResult) --[[ Line: 420 ]]
+function ChromeService:toggleSubMenu(GetResult)
 	-- upvalues: IsSideSheetEnabledModule (copy), ToggleSideSheetFunction (ref)
 	if IsSideSheetEnabledModule and ToggleSideSheetFunction then
 		ToggleSideSheetFunction(true)
@@ -204,15 +204,15 @@ function ChromeService:toggleSubMenu(GetResult) --[[ Line: 420 ]]
 	end
 end
 
-function ChromeService:currentSubMenu() --[[ Line: 440 ]]
+function ChromeService:currentSubMenu()
 	return self._currentSubMenu
 end
 
-function ChromeService:inFocusNav() --[[ Line: 444 ]]
+function ChromeService:inFocusNav()
 	return self._inFocusNav
 end
 
-function ChromeService:enableFocusNav() --[[ Line: 448 ]]
+function ChromeService:enableFocusNav()
 	-- upvalues: GamepadService (copy), FFlagEnableConsoleExpControls (copy), ConstantsModule (copy)
 	if GamepadService.GamepadCursorEnabled then return end
 	if not self._inFocusNav:get() then
@@ -223,7 +223,7 @@ function ChromeService:enableFocusNav() --[[ Line: 448 ]]
 	end
 end
 
-function ChromeService:disableFocusNav() --[[ Line: 461 ]]
+function ChromeService:disableFocusNav()
 	-- upvalues: GamepadService (copy)
 	if GamepadService.GamepadCursorEnabled then return end
 	if self._inFocusNav:get() then
@@ -233,7 +233,7 @@ function ChromeService:disableFocusNav() --[[ Line: 461 ]]
 	end
 end
 
-function ChromeService:toggleWindow(Key) --[[ Line: 473 ]]
+function ChromeService:toggleWindow(Key)
 	-- upvalues: ChromeService (copy), LocalStoreModule (copy)
 	if self._integrations[Key].components.Window then
 		if self._integrationsStatus[Key] and self._integrationsStatus[Key] ~= ChromeService.IntegrationStatus.None and self._integrationsStatus[Key] ~= ChromeService.IntegrationStatus.Icon then
@@ -251,30 +251,30 @@ function ChromeService:toggleWindow(Key) --[[ Line: 473 ]]
 	self:updateMenuList()
 end
 
-function ChromeService:isWindowOpen(Id): boolean --[[ Line: 499 ]]
+function ChromeService:isWindowOpen(Id): boolean
 	-- upvalues: ChromeService (copy)
 	return self._integrations[Id].components.Window and self._integrationsStatus[Id] == ChromeService.IntegrationStatus.Window
 end
 
-function ChromeService:menuList() --[[ Line: 503 ]]
+function ChromeService:menuList()
 	return self._menuList
 end
 
-function ChromeService:windowList() --[[ Line: 507 ]]
+function ChromeService:windowList()
 	return self._windowList
 end
 
-function ChromeService.dragConnection(p2, p3) --[[ Line: 511 ]]
+function ChromeService.dragConnection(p2, p3)
 	return if p2._integrations[p3] then p2._dragConnection[p3] else nil
 end
 
-function ChromeService:updateLocalization(Integration) --[[ Line: 519 ]]
+function ChromeService:updateLocalization(Integration)
 	local Label = ""
 	local Label1 = ""
 	self._localizedLabelKeys[Integration.id] = {}
 	self._localizedLabelKeys[Integration.id].label = Integration.label
 	Label = Integration.label
-	local Success, Result = pcall(function() --[[ Line: 530 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: Label (ref), self (copy)
 		Label = self._localization:Format(Label)
 	end)
@@ -288,7 +288,7 @@ function ChromeService:updateLocalization(Integration) --[[ Line: 519 ]]
 	if Integration.secondaryAction then
 		self._localizedLabelKeys[Integration.id].secondaryActionLabel = Integration.secondaryAction.label
 		Label1 = Integration.secondaryAction.label
-		local Success1, Result1 = pcall(function() --[[ Line: 544 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: Label1 (ref), self (copy)
 			Label1 = self._localization:Format(Label1)
 		end)
@@ -302,7 +302,7 @@ function ChromeService:updateLocalization(Integration) --[[ Line: 519 ]]
 	return Integration
 end
 
-function ChromeService:register(Integration) --[[ Line: 559 ]]
+function ChromeService:register(Integration)
 	-- upvalues: IsSideSheetEnabledModule (copy), SideSheetPlacement (copy), ChromeService (copy), AvailabilitySignal (copy), NotifySignal (copy), WindowSizeSignalModule (copy), ConstantsModule (copy), FFlagEnableConsoleExpControls (copy), GamepadService (copy)
 	if self._integrations[Integration.id] then
 		warn(string.format(Integration.id .. "already registered", debug.traceback()))
@@ -330,13 +330,13 @@ function ChromeService:register(Integration) --[[ Line: 559 ]]
 		Integration.components = {}
 	end
 	if Integration.availability then
-		IntegrationsConnection[#IntegrationsConnection + 1] = Integration.availability:connect(function() --[[ Line: 594 ]]
+		IntegrationsConnection[#IntegrationsConnection + 1] = Integration.availability:connect(function()
 			-- upvalues: self (copy), Integration (ref)
 			self:availabilityChanged(Integration)
 		end)
 	end
 	if Integration.notification and not Integration.notification:excludeFromTotalCounts() then
-		IntegrationsConnection[#IntegrationsConnection + 1] = Integration.notification:connect(function() --[[ Line: 600 ]]
+		IntegrationsConnection[#IntegrationsConnection + 1] = Integration.notification:connect(function()
 			-- upvalues: self (copy)
 			self:updateNotificationTotals()
 		end)
@@ -354,7 +354,7 @@ function ChromeService:register(Integration) --[[ Line: 559 ]]
 	self._integrations[Integration.id] = UpdateLocalizationResult
 	
 	if FFlagEnableConsoleExpControls and Integration.selected then
-		IntegrationsConnection[#IntegrationsConnection + 1] = self:selectedItem():connect(function(Id) --[[ Line: 634 ]]
+		IntegrationsConnection[#IntegrationsConnection + 1] = self:selectedItem():connect(function(Id)
 			-- upvalues: UpdateLocalizationResult (copy), GamepadService (upval), Integration (ref)
 			if UpdateLocalizationResult.id == Id then
 				if GamepadService.GamepadCursorEnabled then return end
@@ -365,7 +365,7 @@ function ChromeService:register(Integration) --[[ Line: 559 ]]
 	return UpdateLocalizationResult
 end
 
-function ChromeService.createIconProps(p2, Id, Count) --[[ Line: 647 ]]
+function ChromeService.createIconProps(p2, Id, Count)
 	-- upvalues: Integration (copy)
 	local Count1 = Count or 0
 	
@@ -376,7 +376,7 @@ function ChromeService.createIconProps(p2, Id, Count) --[[ Line: 647 ]]
 		order = Count1,
 		component = p2._integrations[Id].components.Icon,
 		integration = p2._integrations[Id],
-		activated = function() --[[ Line: 657 ]]
+		activated = function()
 			-- upvalues: p2 (copy), Id (copy)
 			p2:activate(Id)
 		end
@@ -389,7 +389,7 @@ function ChromeService.createIconProps(p2, Id, Count) --[[ Line: 647 ]]
 	}
 end
 
-function ChromeService:createWidgetProps(Id, Count) --[[ Line: 672 ]]
+function ChromeService:createWidgetProps(Id, Count)
 	local Integration = self._integrations[Id]
 	
 	return if Integration and Integration.components.Widget then {
@@ -402,7 +402,7 @@ function ChromeService:createWidgetProps(Id, Count) --[[ Line: 672 ]]
 	} else nil
 end
 
-function ChromeService:isIntegrationValid(p2): boolean --[[ Line: 688 ]]
+function ChromeService:isIntegrationValid(p2): boolean
 	-- upvalues: ChromeService (copy)
 	local Integration = self._integrations[p2]
 	
@@ -415,19 +415,19 @@ function ChromeService:isIntegrationValid(p2): boolean --[[ Line: 688 ]]
 	end
 end
 
-function ChromeService:updateMenuList() --[[ Line: 701 ]]
+function ChromeService:updateMenuList()
 	-- upvalues: Integration (copy), IsSideSheetEnabledModule (copy), FFlagEnableChromeWindowsNotInMenu (copy)
 	local Count = 0
 	local Count1 = 0
 	
-	local function iconProps(Id) --[[ Line: 705 ]]
+	local function iconProps(Id)
 		-- upvalues: Count1 (ref), self (copy)
 		Count1 += 1
 		
 		return self:createIconProps(Id, Count1)
 	end
 	
-	local function windowProps(Id) --[[ Line: 710 ]]
+	local function windowProps(Id)
 		-- upvalues: Count1 (ref), self (copy), Integration (upval)
 		Count1 += 1
 		
@@ -447,7 +447,7 @@ function ChromeService:updateMenuList() --[[ Line: 701 ]]
 		}
 	end
 	
-	local function divider(_) --[[ Line: 732 ]]
+	local function divider(_)
 		-- upvalues: Count (ref), Count1 (ref), Integration (upval)
 		Count += 1
 		Count1 += 1
@@ -462,7 +462,7 @@ function ChromeService:updateMenuList() --[[ Line: 701 ]]
 		}
 	end
 	
-	local function collectMenu(MenuConfig, IconProps, List): number --[[ Line: 745 ]]
+	local function collectMenu(MenuConfig, IconProps, List): number
 		-- upvalues: divider (copy), Count (ref), collectMenu (copy), IsSideSheetEnabledModule (upval), self (copy), Count1 (ref), windowProps (copy), iconProps (copy)
 		local Count2 = 0
 		
@@ -529,7 +529,7 @@ function ChromeService:updateMenuList() --[[ Line: 701 ]]
 end
 
 if IsSideSheetEnabledModule then
-	function ChromeService.updateSideSheet(p2) --[[ Line: 819 ]]
+	function ChromeService.updateSideSheet(p2)
 		-- upvalues: SideSheetPlacement (copy), FFlagEnableSideSheetWidgets (copy), IsPioneerLaunchFunction (copy), RegisterSideSheetIntegrationsFunction (ref)
 		local Count = 0
 		local AboveFoldIntegrations = {}
@@ -539,7 +539,7 @@ if IsSideSheetEnabledModule then
 		local ScrollableContentTopWidgetIntegrations = {}
 		local ScrollableContentBottomWidgetIntegrations = {}
 		
-		local function addIntegration(Id) --[[ Line: 828 ]]
+		local function addIntegration(Id)
 			-- upvalues: p2 (copy), SideSheetPlacement (upval), UnibarIntegrations (copy), Count (ref), AboveFoldIntegrations (copy), BelowFoldIntegrations (copy), SessionActionIntegrations (copy), FFlagEnableSideSheetWidgets (upval), IsPioneerLaunchFunction (upval), ScrollableContentTopWidgetIntegrations (copy), ScrollableContentBottomWidgetIntegrations (copy)
 			local Integration = p2._integrations[Id]
 			
@@ -605,7 +605,7 @@ if IsSideSheetEnabledModule then
 		})
 	end
 end
-function ChromeService:availabilityChanged(_) --[[ Line: 889 ]]
+function ChromeService:availabilityChanged(_)
 	-- upvalues: IsSideSheetEnabledModule (copy)
 	self:updateNotificationTotals()
 	self:updateMenuList()
@@ -615,7 +615,7 @@ function ChromeService:availabilityChanged(_) --[[ Line: 889 ]]
 	end
 end
 
-function ChromeService:subMenuNotifications(p3) --[[ Line: 897 ]]
+function ChromeService:subMenuNotifications(p3)
 	-- upvalues: NotifySignal (copy)
 	if not self._subMenuNotifications[p3] then
 		self._subMenuNotifications[p3] = NotifySignal.new(true)
@@ -623,31 +623,31 @@ function ChromeService:subMenuNotifications(p3) --[[ Line: 897 ]]
 	return self._subMenuNotifications[p3]
 end
 
-function ChromeService:totalNotifications() --[[ Line: 904 ]]
+function ChromeService:totalNotifications()
 	return self._totalNotifications
 end
 
-function ChromeService:onIntegrationRegistered() --[[ Line: 908 ]]
+function ChromeService:onIntegrationRegistered()
 	return self._onIntegrationRegistered
 end
 
-function ChromeService:onIntegrationActivated() --[[ Line: 912 ]]
+function ChromeService:onIntegrationActivated()
 	return self._onIntegrationActivated
 end
 
-function ChromeService:onIntegrationHovered() --[[ Line: 916 ]]
+function ChromeService:onIntegrationHovered()
 	return self._onIntegrationHovered
 end
 
-function ChromeService:onIntegrationStatusChanged() --[[ Line: 920 ]]
+function ChromeService:onIntegrationStatusChanged()
 	return self._onIntegrationStatusChanged
 end
 
-function ChromeService:integrations() --[[ Line: 924 ]]
+function ChromeService:integrations()
 	return self._integrations
 end
 
-function ChromeService:updateNotificationTotals() --[[ Line: 928 ]]
+function ChromeService:updateNotificationTotals()
 	-- upvalues: ChromeService (copy)
 	local NewValue = 0
 	
@@ -683,13 +683,13 @@ function ChromeService:updateNotificationTotals() --[[ Line: 928 ]]
 	end
 end
 
-function ChromeService:configureMenu(_menuConfig) --[[ Line: 972 ]]
+function ChromeService:configureMenu(_menuConfig)
 	self._menuConfig = _menuConfig
 	self:updateNotificationTotals()
 	self:updateMenuList()
 end
 
-function ChromeService:configureSubMenu(p3, p4) --[[ Line: 978 ]]
+function ChromeService:configureSubMenu(p3, p4)
 	-- upvalues: NotifySignal (copy), IsSideSheetEnabledModule (copy)
 	self._subMenuConfig[p3] = p4
 	
@@ -705,7 +705,7 @@ function ChromeService:configureSubMenu(p3, p4) --[[ Line: 978 ]]
 end
 
 if FFlagEnableConsoleExpControls then
-	function ChromeService:registerShortcut(p3) --[[ Line: 991 ]]
+	function ChromeService:registerShortcut(p3)
 		-- upvalues: ChromeService (copy)
 		self._shortcutService:registerShortcut(p3)
 		local Shortcut = self._shortcutService:getShortcut(p3.id)
@@ -716,7 +716,7 @@ if FFlagEnableConsoleExpControls then
 			if Integration.availability:get() == ChromeService.AvailabilitySignal.Unavailable then
 				Shortcut.availability:unavailable()
 			end
-			Integration.availability:connect(function() --[[ Line: 999 ]]
+			Integration.availability:connect(function()
 				-- upvalues: Integration (copy), ChromeService (upval), Shortcut (copy)
 				local GetResult = Integration.availability:get()
 				
@@ -732,7 +732,7 @@ if FFlagEnableConsoleExpControls then
 		end
 	end
 	
-	function ChromeService:activateShortcut(p3) --[[ Line: 1013 ]]
+	function ChromeService:activateShortcut(p3)
 		-- upvalues: FFlagIntegrationsChromeShortcutTelemetryModule (copy)
 		local Shortcut = self._shortcutService:getShortcut(p3)
 		
@@ -756,70 +756,70 @@ if FFlagEnableConsoleExpControls then
 		end
 	end
 	
-	function ChromeService:configureShortcutBar(p3, p4) --[[ Line: 1033 ]]
+	function ChromeService:configureShortcutBar(p3, p4)
 		self._shortcutService:configureShortcutBar(p3, p4)
 	end
 	
-	function ChromeService:setShortcutBar(UNIBARSHORTCUTBARID) --[[ Line: 1037 ]]
+	function ChromeService:setShortcutBar(UNIBARSHORTCUTBARID)
 		self._shortcutService:setShortcutBar(UNIBARSHORTCUTBARID)
 	end
 	
-	function ChromeService:getCurrentShortcutBar() --[[ Line: 1041 ]]
+	function ChromeService:getCurrentShortcutBar()
 		return self._currentShortcutBar
 	end
 	
-	function ChromeService:getShortcutsFromBar(GetResult) --[[ Line: 1045 ]]
+	function ChromeService:getShortcutsFromBar(GetResult)
 		return self._shortcutService:getShortcutsFromBar(GetResult, self._integrations)
 	end
 	
-	function ChromeService:getCurrentShortcuts() --[[ Line: 1049 ]]
+	function ChromeService:getCurrentShortcuts()
 		return self:getShortcutsFromBar(self._currentShortcutBar:get())
 	end
 	
-	function ChromeService:onShortcutBarChanged() --[[ Line: 1053 ]]
+	function ChromeService:onShortcutBarChanged()
 		return self._shortcutService.onShortcutBarChanged
 	end
 	
-	function ChromeService:selectMenuIcon() --[[ Line: 1057 ]]
+	function ChromeService:selectMenuIcon()
 		self._triggerMenuIcon:fire()
 	end
 	
-	function ChromeService:onTriggerMenuIcon() --[[ Line: 1061 ]]
+	function ChromeService:onTriggerMenuIcon()
 		return self._triggerMenuIcon
 	end
 	
-	function ChromeService:setHideShortcutBar(p3, p4) --[[ Line: 1065 ]]
+	function ChromeService:setHideShortcutBar(p3, p4)
 		self._shortcutService:setHideShortcutBar(p3, p4)
 	end
 	
-	function ChromeService:getHideShortcutBar() --[[ Line: 1069 ]]
+	function ChromeService:getHideShortcutBar()
 		return self._shortcutService:getHideShortcutBar()
 	end
 end
 if IsInExperienceUIVREnabled then
-	function ChromeService:onTriggerVRToggleButton() --[[ Line: 1075 ]]
+	function ChromeService:onTriggerVRToggleButton()
 		return self._triggerVRToggleButton
 	end
 	
-	function ChromeService:showTopBar() --[[ Line: 1079 ]]
+	function ChromeService:showTopBar()
 		return self._topBarVisibility:get()
 	end
 	
-	function ChromeService:getTopBarVisibiity() --[[ Line: 1083 ]]
+	function ChromeService:getTopBarVisibiity()
 		return self._topBarVisibility
 	end
 	
-	function ChromeService:connectTopBarVisibility(_topBarVisibility) --[[ Line: 1087 ]]
+	function ChromeService:connectTopBarVisibility(_topBarVisibility)
 		self._topBarVisibility = _topBarVisibility
 	end
 end
-function ChromeService:gesture(p3, Connection, InputObject) --[[ Line: 1092 ]]
+function ChromeService:gesture(p3, Connection, InputObject)
 	if self._integrations[p3] then
 		self._dragConnection[p3] = { connection = Connection, inputObject = InputObject }
 	end
 end
 
-function ChromeService.withinCurrentTopLevelMenu(p3, GetResult) --[[ Line: 1105 ]]
+function ChromeService.withinCurrentTopLevelMenu(p3, GetResult)
 	for i, value in p3._menuList:get() do
 		if value.id == GetResult then
 			return value, i
@@ -828,7 +828,7 @@ function ChromeService.withinCurrentTopLevelMenu(p3, GetResult) --[[ Line: 1105 
 	return nil, 0
 end
 
-function ChromeService:withinCurrentSubmenu(Id): boolean --[[ Line: 1115 ]]
+function ChromeService:withinCurrentSubmenu(Id): boolean
 	local GetResult = self._currentSubMenu:get()
 	
 	if not GetResult then
@@ -854,7 +854,7 @@ function ChromeService:withinCurrentSubmenu(Id): boolean --[[ Line: 1115 ]]
 end
 
 if IsSideSheetEnabledModule then
-	function ChromeService.withinOpenSideSheet(p4, Id): boolean --[[ Line: 1145 ]]
+	function ChromeService.withinOpenSideSheet(p4, Id): boolean
 		-- upvalues: GetSideSheetVisibilityFunction (ref), SideSheetPlacement (copy)
 		if not GetSideSheetVisibilityFunction() then
 			return false
@@ -867,11 +867,11 @@ if IsSideSheetEnabledModule then
 		return false
 	end
 end
-function ChromeService:windowPosition(p4) --[[ Line: 1160 ]]
+function ChromeService:windowPosition(p4)
 	return self._windowPositions[p4]
 end
 
-function ChromeService:updateWindowPosition(Key, Vector) --[[ Line: 1164 ]]
+function ChromeService:updateWindowPosition(Key, Vector)
 	-- upvalues: LocalStoreModule (copy)
 	if LocalStoreModule.isEnabled() and self._integrations[Key] and self._integrations[Key].persistWindowState then
 		local ChromeWindowPosition = LocalStoreModule.loadForLocalPlayer("ChromeWindowPosition") or {}
@@ -886,12 +886,12 @@ function ChromeService:updateWindowPosition(Key, Vector) --[[ Line: 1164 ]]
 	self._windowPositions[Key] = Vector
 end
 
-function ChromeService:getWindowStatusFromStore(Id) --[[ Line: 1177 ]]
+function ChromeService:getWindowStatusFromStore(Id)
 	-- upvalues: LocalStoreModule (copy)
 	return if LocalStoreModule.isEnabled() then (LocalStoreModule.loadForLocalPlayer("ChromeWindowStatus") or {})[Id] or false else nil
 end
 
-function ChromeService:getWindowPositionFromStore(Id) --[[ Line: 1187 ]]
+function ChromeService:getWindowPositionFromStore(Id)
 	-- upvalues: LocalStoreModule (copy)
 	if LocalStoreModule.isEnabled() then
 		local ChromeWindowPositionEntry = (LocalStoreModule.loadForLocalPlayer("ChromeWindowPosition") or {})[Id] or nil
@@ -902,7 +902,7 @@ function ChromeService:getWindowPositionFromStore(Id) --[[ Line: 1187 ]]
 	end
 end
 
-function ChromeService:activate(Integration, p4) --[[ Line: 1198 ]]
+function ChromeService:activate(Integration, p4)
 	-- upvalues: FFlagIntegrationsChromeShortcutTelemetryModule (copy), FFlagEnableConsoleExpControls (copy)
 	local v1 = nil
 	
@@ -917,7 +917,7 @@ function ChromeService:activate(Integration, p4) --[[ Line: 1198 ]]
 		self:storeChromeInteracted()
 		
 		if ActivatedFunction then
-			local Success, Result = pcall(function() --[[ Line: 1214 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: ActivatedFunction (copy), self (copy), Integration (copy), FFlagEnableConsoleExpControls (upval)
 				ActivatedFunction(self._integrations[Integration])
 				
@@ -945,11 +945,11 @@ function ChromeService:activate(Integration, p4) --[[ Line: 1198 ]]
 	end
 end
 
-function ChromeService:selectedItem() --[[ Line: 1242 ]]
+function ChromeService:selectedItem()
 	return self._selectedItem
 end
 
-function ChromeService:setSelected(Id) --[[ Line: 1246 ]]
+function ChromeService:setSelected(Id)
 	-- upvalues: UserInputService (copy)
 	local WithinCurrentTopLevelMenuResult, WithinCurrentTopLevelMenuResult2 = self:withinCurrentTopLevelMenu(Id or "")
 	
@@ -965,7 +965,7 @@ function ChromeService:setSelected(Id) --[[ Line: 1246 ]]
 	self._selectedItem:set(Id)
 end
 
-function ChromeService:setSelectedByOffset(p4: number) --[[ Line: 1264 ]]
+function ChromeService:setSelectedByOffset(p4: number)
 	local GetResult = self._menuList:get()
 	local _, WithinCurrentTopLevelMenuResult2 = self:withinCurrentTopLevelMenu(self._selectedItem:get() or "")
 	
@@ -974,7 +974,7 @@ function ChromeService:setSelectedByOffset(p4: number) --[[ Line: 1264 ]]
 	end
 end
 
-function ChromeService:repairSelected() --[[ Line: 1274 ]]
+function ChromeService:repairSelected()
 	if self._selectedItem:get() then
 		local _, WithinCurrentTopLevelMenuResult2 = self:withinCurrentTopLevelMenu(self._selectedItem:get() or "")
 		
@@ -986,32 +986,32 @@ function ChromeService:repairSelected() --[[ Line: 1274 ]]
 	end
 end
 
-function ChromeService:configureOrderAlignment(p4) --[[ Line: 1288 ]]
+function ChromeService:configureOrderAlignment(p4)
 	if self._orderAlignment:get() ~= p4 then
 		self._orderAlignment:set(p4)
 		self:updateMenuList()
 	end
 end
 
-function ChromeService:orderAlignment() --[[ Line: 1295 ]]
+function ChromeService:orderAlignment()
 	return self._orderAlignment
 end
 
-function ChromeService:setMenuAbsolutePosition(_menuAbsolutePosition) --[[ Line: 1299 ]]
+function ChromeService:setMenuAbsolutePosition(_menuAbsolutePosition)
 	if _menuAbsolutePosition ~= self._menuAbsolutePosition then
 		self._menuAbsolutePosition = _menuAbsolutePosition
 		self._layout:set(createUnibarLayoutInfo(_menuAbsolutePosition, self._menuAbsoluteSizeOpen))
 	end
 end
 
-function ChromeService:setMenuAbsoluteSize(_menuAbsoluteSizeOpen) --[[ Line: 1306 ]]
+function ChromeService:setMenuAbsoluteSize(_menuAbsoluteSizeOpen)
 	if _menuAbsoluteSizeOpen ~= self._menuAbsoluteSizeOpen then
 		self._menuAbsoluteSizeOpen = _menuAbsoluteSizeOpen
 		self._layout:set(createUnibarLayoutInfo(self._menuAbsolutePosition, _menuAbsoluteSizeOpen))
 	end
 end
 
-function ChromeService:layout() --[[ Line: 1313 ]]
+function ChromeService:layout()
 	return self._layout
 end
 

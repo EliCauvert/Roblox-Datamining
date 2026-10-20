@@ -56,7 +56,7 @@ local Effect = nil
 if EnabledResult then
 	if FFlagBuildExperienceInGameShell then
 		local DisplayStore = DisplayModule.GetDisplayStore(false)
-		DisplayStore.setGuiInset(function(p1) --[[ Line: 76 ]]
+		DisplayStore.setGuiInset(function(p1)
 			-- upvalues: ConstantsModule (copy)
 			return {
 				left = p1.left,
@@ -65,13 +65,13 @@ if EnabledResult then
 				bottom = p1.bottom
 			}
 		end)
-		Effect = SignalsModule.createEffect(function(p1) --[[ Line: 84 ]]
+		Effect = SignalsModule.createEffect(function(p1)
 			-- upvalues: DisplayStore (copy), GuiService (copy)
 			local GuiInset = DisplayStore.getGuiInset(p1)
 			GuiService:SetGlobalGuiInset(GuiInset.left, GuiInset.top, GuiInset.right, GuiInset.bottom)
 		end)
 	else
-		(function() --[[ Line: 89 | Named "SetGlobalGuiInset" ]]
+		(function()
 			-- upvalues: GuiService (copy), ConstantsModule (copy), DisplayModule (copy)
 			local GuiInset, GuiInset2 = GuiService:GetGuiInset()
 			GuiService:SetGlobalGuiInset(GuiInset.X, ConstantsModule.ApplyDisplayScale(ConstantsModule.TopBarHeight), GuiInset2.X, GuiInset2.Y)
@@ -113,14 +113,14 @@ local IsSpatialFunction = require(CorePackages.Workspace.Packages.AppCommonLib).
 local ConnectToIsSpatialChangedFunction = require(CorePackages.Workspace.Packages.AppCommonLib).connectToIsSpatialChanged
 local FFlagStudioDeviceSimVRSwitchFixes = SharedFlagsModule.FFlagStudioDeviceSimVRSwitchFixes
 
-local function SpatialRemountGate() --[[ Line: 149 ]]
+local function SpatialRemountGate()
 	-- upvalues: ReactModule (copy), IsSpatialFunction (copy), ConnectToIsSpatialChangedFunction (copy), TopBarAppModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(IsSpatialFunction())
-	ReactModule.useEffect(function() --[[ Line: 151 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ConnectToIsSpatialChangedFunction (upval), UseStateResult2 (copy)
 		local ConnectToIsSpatialChangedResult = ConnectToIsSpatialChangedFunction(UseStateResult2, true)
 		
-		return function() --[[ Line: 153 ]]
+		return function()
 			-- upvalues: ConnectToIsSpatialChangedResult (copy)
 			ConnectToIsSpatialChangedResult:Disconnect()
 		end
@@ -135,7 +135,7 @@ Module.__index = Module
 if FFlagBuildExperienceInGameShell then
 	Module._disposeGlobalGuiInsetEffect = Effect
 end
-function Module.new() --[[ Line: 171 ]]
+function Module.new()
 	-- upvalues: Module (copy), GlobalConfigModule (copy), RoactModule (copy), TenFootInterfaceModule (copy), EnabledResult (copy), GuiService (copy), ConstantsModule (copy), FFlagEnablePlaytestModeUnibar (copy), RoduxModule (copy), ReducerModule (copy), FFlagTopBarSignalizeSetCores (copy), RegisterSetCoresModule (copy), FFlagTopBarDeprecateChatRoduxModule (copy), GetCanChatModule (copy), FFlagTopBarDeprecateGameInfoRoduxModule (copy), GetGameNameModule (copy), GetFFlagDebugEnableVRFTUXExperienceInStudioModule (copy), IsRunningInStudioFunction (copy), FTUXModule (copy), PlatformEnumModule (copy), GetFFlagEnableVRFTUXExperienceModule (copy), IsFTUXExperienceModule (copy), IsNewInGameMenuEnabledModule (copy), RobloxGui (copy), FFlagTopBarDeprecateDisplayOptionsRoduxModule (copy), SetSmallTouchDeviceModule (copy), UtilityModule (copy), ColorMode (copy), Constants (copy), UiModeStyleProvider (copy), FFlagStudioDeviceSimVRSwitchFixes (copy), SpatialRemountGate (copy), TopBarAppModule (copy), FFlagAddMenuNavigationToggleDialog (copy), FFlagGamepadNavigationDialogABTestModule (copy), DesignTokenProvider (copy), MenuNavigationPromptTokenMapperModule (copy), ServiceModule (ref), FFlagAddTopBarScrimModule (copy), ReactModule (copy), TopBarScrimModule (ref), RoactRoduxModule (copy), FFlagTopBarRefactor (copy), FFlagShowGameAgeRating (copy), RoactAppPolicy (copy), TopBarAppPolicyModule (copy), AppFeaturePolicies (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), RoactAppExperimentModule (copy), IXPService (copy), GetFFlagEnableCrossExpVoiceFunction (copy), Component (copy), ReactSceneUnderstandingModule (copy), VoiceStateContextModule (copy), FFlagCoreScriptsReactTreeCrashCounter (copy), CoreScriptsErrorBoundary (copy), Surfaces (copy), CorePackages (copy), CoreGui (copy), ShouldSkipHistoricalMessageFunction (copy), UpdateUnreadMessagesBadgeModule (copy), FFlagTopBarDeprecateGamepadNavigationDialogRoduxModule (copy)
 	local self = setmetatable({}, Module)
 	
@@ -172,7 +172,7 @@ function Module.new() --[[ Line: 171 ]]
 		require(RobloxGui.Modules.InGameMenuInit).mountInGameMenu()
 	end
 	if not FFlagTopBarDeprecateDisplayOptionsRoduxModule then
-		coroutine.wrap(function() --[[ Line: 228 ]]
+		coroutine.wrap(function()
 			-- upvalues: self (copy), SetSmallTouchDeviceModule (upval), UtilityModule (upval)
 			self.store:dispatch(SetSmallTouchDeviceModule(UtilityModule:IsSmallTouchScreen()))
 		end)()
@@ -182,7 +182,7 @@ function Module.new() --[[ Line: 171 ]]
 		fontName = Constants.FontName.Gotham
 	}
 	
-	local function wrapWithUiModeStyleProvider(p1) --[[ Line: 238 ]]
+	local function wrapWithUiModeStyleProvider(p1)
 		-- upvalues: RoactModule (upval), UiModeStyleProvider (upval), Style (copy)
 		return {
 			UiModeStyleProvider = RoactModule.createElement(UiModeStyleProvider, { style = Style }, p1)
@@ -232,7 +232,7 @@ function Module.new() --[[ Line: 171 ]]
 		self.element = RoactModule.mount(self.root, CoreGui, "TopBar")
 	end
 	if not FFlagTopBarDeprecateChatRoduxModule then
-		game:GetService("TextChatService").MessageReceived:Connect(function(TextChatMessage) --[[ Line: 327 ]]
+		game:GetService("TextChatService").MessageReceived:Connect(function(TextChatMessage)
 			-- upvalues: ShouldSkipHistoricalMessageFunction (upval), self (copy), UpdateUnreadMessagesBadgeModule (upval)
 			if not ShouldSkipHistoricalMessageFunction(TextChatMessage) then
 				self.store:dispatch(UpdateUnreadMessagesBadgeModule(1))
@@ -245,7 +245,7 @@ function Module.new() --[[ Line: 171 ]]
 		local UserInputService = game:GetService("UserInputService")
 		local Connection = nil
 		
-		local function disconnectGamepadConnected() --[[ Line: 338 ]]
+		local function disconnectGamepadConnected()
 			-- upvalues: Connection (ref)
 			if Connection then
 				Connection:Disconnect()
@@ -256,7 +256,7 @@ function Module.new() --[[ Line: 171 ]]
 		if UserInputService:GetGamepadConnected(Enum.UserInputType.Gamepad1) then
 			self:setGamepadNavigationDialogOpen(true)
 		else
-			Connection = UserInputService.GamepadConnected:Connect(function() --[[ Line: 347 ]]
+			Connection = UserInputService.GamepadConnected:Connect(function()
 				-- upvalues: self (copy), Connection (ref)
 				self:setGamepadNavigationDialogOpen(true)
 				
@@ -271,7 +271,7 @@ function Module.new() --[[ Line: 171 ]]
 	return self
 end
 
-function Module:setInspectMenuOpen(p1) --[[ Line: 359 ]]
+function Module:setInspectMenuOpen(p1)
 	-- upvalues: FFlagTopBarSignalizeMenuOpen (copy), SetInspectMenuOpenModule (copy)
 	if not FFlagTopBarSignalizeMenuOpen then
 		self.store:dispatch(SetInspectMenuOpenModule(p1))
@@ -280,12 +280,12 @@ function Module:setInspectMenuOpen(p1) --[[ Line: 359 ]]
 	end
 end
 
-function Module:setGamepadMenuOpen(p1) --[[ Line: 366 ]]
+function Module:setGamepadMenuOpen(p1)
 	-- upvalues: SetGamepadMenuOpenModule (copy)
 	self.store:dispatch(SetGamepadMenuOpenModule(p1))
 end
 
-function Module:setGamepadNavigationDialogOpen(p1) --[[ Line: 370 ]]
+function Module:setGamepadNavigationDialogOpen(p1)
 	-- upvalues: FFlagTopBarDeprecateDisplayOptionsRoduxModule (copy), SetGamepadNavigationDialogOpenModule (copy)
 	if not FFlagTopBarDeprecateDisplayOptionsRoduxModule then
 		self.store:dispatch(SetGamepadNavigationDialogOpenModule(p1))

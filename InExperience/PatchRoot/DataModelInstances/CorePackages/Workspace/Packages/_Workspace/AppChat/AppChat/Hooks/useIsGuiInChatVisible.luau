@@ -6,7 +6,7 @@ local UseChatIsVisibleModule = require(script.Parent.useChatIsVisible)
 local SetTimeoutFunction = require(Parent.LuauPolyfill).setTimeout
 local AppChatGuiVisibleBatchUpdateIntervalMs = game:DefineFastInt("AppChat.GuiVisibleBatchUpdateIntervalMs", 1000)
 
-local function getGuiObjectIsObscuredAtPosition(Frame, XDelta, YDelta): boolean --[[ Line: 24 ]]
+local function getGuiObjectIsObscuredAtPosition(Frame, XDelta, YDelta): boolean
 	-- upvalues: CoreGui (copy)
 	for _, Frame1 in CoreGui:GetGuiObjectsAtPosition(XDelta, YDelta) do
 		if Frame1:IsA("GuiObject") then
@@ -21,7 +21,7 @@ local function getGuiObjectIsObscuredAtPosition(Frame, XDelta, YDelta): boolean 
 	return false
 end
 
-local function getGuiObjectIsObscured(Frame: Frame) --[[ Line: 42 ]]
+local function getGuiObjectIsObscured(Frame: Frame)
 	-- upvalues: getGuiObjectIsObscuredAtPosition (copy)
 	local AbsolutePosition: number = Frame.AbsolutePosition
 	local AbsoluteSize: number = Frame.AbsoluteSize
@@ -48,14 +48,14 @@ local function getGuiObjectIsObscured(Frame: Frame) --[[ Line: 42 ]]
 	return GuiObjectIsObscuredAtPosition or (GuiObjectIsObscuredAtPosition1 or (GuiObjectIsObscuredAtPosition2 or (GuiObjectIsObscuredAtPosition3 or GuiObjectIsObscuredAtPosition4)))
 end
 
-return function(p1, p2) --[[ Line: 82 | Named "useIsGuiInChatVisible" ]]
+return function(p1, p2)
 	-- upvalues: UseChatIsVisibleModule (copy), ReactModule (copy), getGuiObjectIsObscured (copy), SetTimeoutFunction (copy), AppChatGuiVisibleBatchUpdateIntervalMs (copy), CryoModule (copy)
 	local UseChatIsVisibleModuleResult = UseChatIsVisibleModule()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 92 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), getGuiObjectIsObscured (upval), UseStateResult2 (copy), UseRefResult (copy), SetTimeoutFunction (upval), AppChatGuiVisibleBatchUpdateIntervalMs (upval), UseChatIsVisibleModuleResult (copy)
-		local function _() --[[ Line: 93 | Named "updateIsGuiVisible" ]]
+		local function _()
 			-- upvalues: p1 (upval), getGuiObjectIsObscured (upval), UseStateResult2 (upval)
 			if p1.current and p1.current:IsA("GuiObject") then
 				local IsNotOccluded = p1.current.IsNotOccluded
@@ -68,10 +68,10 @@ return function(p1, p2) --[[ Line: 82 | Named "useIsGuiInChatVisible" ]]
 			end
 		end
 		
-		local function queueUpdateIsGuiVisible() --[[ Line: 103 ]]
+		local function queueUpdateIsGuiVisible()
 			-- upvalues: UseRefResult (upval), SetTimeoutFunction (upval), p1 (upval), getGuiObjectIsObscured (upval), UseStateResult2 (upval), AppChatGuiVisibleBatchUpdateIntervalMs (upval)
 			if not UseRefResult.current then
-				UseRefResult.current = SetTimeoutFunction(function() --[[ Line: 107 ]]
+				UseRefResult.current = SetTimeoutFunction(function()
 					-- upvalues: UseRefResult (upval), p1 (upval), getGuiObjectIsObscured (upval), UseStateResult2 (upval)
 					UseRefResult.current = nil
 					
@@ -90,11 +90,11 @@ return function(p1, p2) --[[ Line: 82 | Named "useIsGuiInChatVisible" ]]
 			end
 		end
 		
-		local function onDescendantEvent(Descendant) --[[ Line: 112 ]]
+		local function onDescendantEvent(Descendant)
 			-- upvalues: UseRefResult (upval), SetTimeoutFunction (upval), p1 (upval), getGuiObjectIsObscured (upval), UseStateResult2 (upval), AppChatGuiVisibleBatchUpdateIntervalMs (upval)
 			if not Descendant:IsA("GuiObject") then return end
 			if not UseRefResult.current then
-				UseRefResult.current = SetTimeoutFunction(function() --[[ Line: 107 ]]
+				UseRefResult.current = SetTimeoutFunction(function()
 					-- upvalues: UseRefResult (upval), p1 (upval), getGuiObjectIsObscured (upval), UseStateResult2 (upval)
 					UseRefResult.current = nil
 					
@@ -114,7 +114,7 @@ return function(p1, p2) --[[ Line: 82 | Named "useIsGuiInChatVisible" ]]
 		end
 		
 		if not UseRefResult.current then
-			UseRefResult.current = SetTimeoutFunction(function() --[[ Line: 107 ]]
+			UseRefResult.current = SetTimeoutFunction(function()
 				-- upvalues: UseRefResult (upval), p1 (upval), getGuiObjectIsObscured (upval), UseStateResult2 (upval)
 				UseRefResult.current = nil
 				
@@ -140,7 +140,7 @@ return function(p1, p2) --[[ Line: 82 | Named "useIsGuiInChatVisible" ]]
 				table.insert(List, LayerCollector.DescendantRemoving:Connect(onDescendantEvent))
 			end
 		end
-		return function() --[[ Line: 133 ]]
+		return function()
 			-- upvalues: List (copy)
 			for _, Connection in List do
 				Connection:Disconnect()

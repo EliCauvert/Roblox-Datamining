@@ -3,7 +3,7 @@
 return {
 	fields = {
 		profileInsights = {
-			merge = function(_, p1, p2) --[[ Line: 6 ]]
+			merge = function(_, p1, p2)
 				-- upvalues: MergeListsModule (copy)
 				return MergeListsModule(p1, p2)
 			end

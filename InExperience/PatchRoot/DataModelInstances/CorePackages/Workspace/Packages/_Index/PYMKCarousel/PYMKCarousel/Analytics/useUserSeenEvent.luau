@@ -14,30 +14,30 @@ local FFlagMigrateFriendshipStatusesPYMKModule = require(Parent.Flags.FFlagMigra
 local FFlagLuaAppEnableSduiHomePage = require(Parent1.SharedFlags).FFlagLuaAppEnableSduiHomePage
 local GetResult = if FFlagMigrateFriendshipStatusesPYMKModule then require(Parent1.DataHydration).Friends.FriendsStore.get() else nil
 
-local function _(p1) --[[ Line: 22 | Named "getHydratedFriendshipStatus" ]]
+local function _(p1)
 	-- upvalues: GetResult (copy)
 	local FriendshipStatus = GetResult.GetFriendshipStatus(p1, { skipFetch = true })
 	
 	return if FriendshipStatus then FriendshipStatus.data(false) else nil
 end
 
-return function(Callback) --[[ Line: 27 ]]
+return function(Callback)
 	-- upvalues: React (copy), FFlagMigrateFriendshipStatusesPYMKModule (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), ConstantsModule (copy), FFlagLuaAppEnableSduiHomePage (copy), GetFFlagPYMKAddFriendsEntryFunction (copy), EventNamesModule (copy), RecommendationContextType (copy), GetFriendStatusModule (copy), GetResult (copy), Llama (copy)
 	local UseRefResult = React.useRef({})
-	local UseSelectorResult = if FFlagMigrateFriendshipStatusesPYMKModule then nil else UseSelectorFunction(function(p1) --[[ Line: 31 ]]
+	local UseSelectorResult = if FFlagMigrateFriendshipStatusesPYMKModule then nil else UseSelectorFunction(function(p1)
 		-- upvalues: GetDeepValueFunction (upval), ConstantsModule (upval)
 		return GetDeepValueFunction(p1, string.format("%s.Friends.friendshipStatus", ConstantsModule.RODUX_KEY)) or {}
 	end)
-	local UseSelectorResult1 = if FFlagLuaAppEnableSduiHomePage then nil else UseSelectorFunction(function(p1) --[[ Line: 37 ]]
+	local UseSelectorResult1 = if FFlagLuaAppEnableSduiHomePage then nil else UseSelectorFunction(function(p1)
 		-- upvalues: GetDeepValueFunction (upval), ConstantsModule (upval)
 		return GetDeepValueFunction(p1, string.format("%s.Friends.recommendations.hasIncomingFriendRequest", ConstantsModule.RODUX_KEY))
 	end) or {}
-	local UseSelectorResult2 = UseSelectorFunction(function(p1) --[[ Line: 45 ]]
+	local UseSelectorResult2 = UseSelectorFunction(function(p1)
 		-- upvalues: GetDeepValueFunction (upval)
 		return GetDeepValueFunction(p1, "PYMKCarousel.Presence.byUserId") or {}
 	end)
 	
-	return React.useMemo(function() --[[ Line: 49 ]]
+	return React.useMemo(function()
 		-- upvalues: UseRefResult (copy), GetFFlagPYMKAddFriendsEntryFunction (upval), Callback (copy), EventNamesModule (upval), RecommendationContextType (upval), GetFriendStatusModule (upval), FFlagMigrateFriendshipStatusesPYMKModule (upval), GetResult (upval), UseSelectorResult (ref), FFlagLuaAppEnableSduiHomePage (upval), UseSelectorResult1 (ref), UseSelectorResult2 (copy), Llama (upval)
 		return {
 			{
@@ -45,7 +45,7 @@ return function(Callback) --[[ Line: 27 ]]
 					itemVisiblePercentThreshold = 50,
 					waitForInteraction = false
 				},
-				onViewableItemsChanged = function(p1) --[[ Line: 56 ]]
+				onViewableItemsChanged = function(p1)
 					-- upvalues: UseRefResult (upval), GetFFlagPYMKAddFriendsEntryFunction (upval), Callback (upval), EventNamesModule (upval), RecommendationContextType (upval), GetFriendStatusModule (upval), FFlagMigrateFriendshipStatusesPYMKModule (upval), GetResult (upval), UseSelectorResult (upval), FFlagLuaAppEnableSduiHomePage (upval), UseSelectorResult1 (upval), UseSelectorResult2 (upval), Llama (upval)
 					for _, value in pairs(p1.changed) do
 						local Item = value.item

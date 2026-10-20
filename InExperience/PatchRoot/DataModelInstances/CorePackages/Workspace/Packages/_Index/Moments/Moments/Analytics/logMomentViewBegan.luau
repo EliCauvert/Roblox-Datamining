@@ -4,7 +4,7 @@ local MakeMomentViewBeganFieldsModule = require(script.Parent.makeMomentViewBega
 local Analytics = require(Parent.MomentsCommon).Analytics
 local EventNames = Analytics.EventNames
 
-return function(p1, p2, p3, p4) --[[ Line: 15 | Named "logMomentViewBegan" ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: Analytics (copy), MakeMomentViewBeganFieldsModule (copy), EventNames (copy)
 	Analytics.reportMomentsViewBegan(p2)
 	local MomentViewBeganFieldsModule = MakeMomentViewBeganFieldsModule(p1, p2, p3, p4)

@@ -233,9 +233,9 @@ local config = {
 
 return {
 	MOCK_RESPONSE_FOR_TESTING = config,
-	getShopItemIds = function(p1) --[[ Line: 270 ]]
+	getShopItemIds = function(p1)
 		-- upvalues: PromiseModule (copy), config (copy)
-		return PromiseModule.delay(if p1 == nil then 0.5 else p1):andThen(function() --[[ Line: 272 ]]
+		return PromiseModule.delay(if p1 == nil then 0.5 else p1):andThen(function()
 			-- upvalues: config (upval)
 			return config
 		end)

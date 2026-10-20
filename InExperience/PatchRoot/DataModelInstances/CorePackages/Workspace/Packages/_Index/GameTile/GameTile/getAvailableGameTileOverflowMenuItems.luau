@@ -4,7 +4,7 @@ local TileOverflowMenuItems = require(GameTile.GameTileConstants).TileOverflowMe
 local FFlagLuaAppContinueSortInstantPlay = SharedFlagsModule.FFlagLuaAppContinueSortInstantPlay
 local FFlagLuaAppEnableReportExperience = SharedFlagsModule.FFlagLuaAppEnableReportExperience
 
-return function(p1) --[[ Line: 10 | Named "getAvailableGameTileOverflowMenuItems" ]]
+return function(p1)
 	-- upvalues: TileOverflowMenuItems (copy), FFlagLuaAppContinueSortInstantPlay (copy), FFlagLuaAppEnableReportExperience (copy)
 	local t = {}
 	

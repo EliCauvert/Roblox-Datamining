@@ -27,7 +27,7 @@ local config = {
 	lastUpdated = { 2026, 6, 8 }
 }
 
-local function sendReportMistakeAnalytics(p1) --[[ Line: 48 ]]
+local function sendReportMistakeAnalytics(p1)
 	-- upvalues: Players (copy), TelemetryService (copy), config (copy)
 	TelemetryService:LogEvent(config, {
 		customFields = {
@@ -40,7 +40,7 @@ local function sendReportMistakeAnalytics(p1) --[[ Line: 48 ]]
 	})
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 72 | Named "TemporaryAvatarKickWarningDialog" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ConstantsModule (copy), UseTokensFunction (copy), UseInterventionPlacementModule (copy), UseInterventionFocusRootModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), ReactModule (copy), sendReportMistakeAnalytics (copy), NotificationModalsManagerModule (copy), IconsActionsAccept (copy), Dialog (copy), DialogSize (copy), VRService (copy), View (copy), Text (copy), ButtonVariant (copy), ButtonSize (copy)
 	local UseLocalizationResult = UseLocalizationFunction(ConstantsModule.localizationKeys)
 	local UseTokensResult = UseTokensFunction()
@@ -78,7 +78,7 @@ return ReactModule.memo(function(p1) --[[ Line: 72 | Named "TemporaryAvatarKickW
 					variant = ButtonVariant.Utility,
 					size = ButtonSize.Medium,
 					text = UseLocalizationResult.ReportMistakeText,
-					onActivated = ReactModule.useCallback(function() --[[ Line: 82 ]]
+					onActivated = ReactModule.useCallback(function()
 						-- upvalues: sendReportMistakeAnalytics (upval), p1 (copy), NotificationModalsManagerModule (upval), IconsActionsAccept (upval), UseLocalizationResult (copy), UseTokensResult (copy)
 						sendReportMistakeAnalytics(p1)
 						p1.onDismiss()

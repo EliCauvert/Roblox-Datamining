@@ -6,25 +6,25 @@ local ButtonAssetsModule = require(Parent.ButtonAssets)
 local CreateButtonsTimeModule = require(Parent.CreateButtonsTime)
 
 return {
-	setupControl = function(p1) --[[ Line: 12 ]]
+	setupControl = function(p1)
 		-- upvalues: ButtonAssetsModule (copy), ExperienceStateRecordingService (copy), CreateButtonsTimeModule (copy), ReplicatedStorage (copy), UserInputService (copy)
 		p1.connections = {}
 		
-		function p1.SetPlaying() --[[ Line: 15 ]]
+		function p1.SetPlaying()
 			-- upvalues: p1 (copy), ButtonAssetsModule (upval), ExperienceStateRecordingService (upval)
 			p1.state.Playing = true
 			p1.PlayButton.Image = ButtonAssetsModule.PauseButton
 			ExperienceStateRecordingService:SetPlaybackMode(Enum.ExperienceStateRecordingPlaybackMode.Playing)
 		end
 		
-		function p1.SetPaused() --[[ Line: 22 ]]
+		function p1.SetPaused()
 			-- upvalues: p1 (copy), ButtonAssetsModule (upval), ExperienceStateRecordingService (upval)
 			p1.state.Playing = false
 			p1.PlayButton.Image = ButtonAssetsModule.PlayButton
 			ExperienceStateRecordingService:SetPlaybackMode(Enum.ExperienceStateRecordingPlaybackMode.Stopped)
 		end
 		
-		function p1.ControlButtons(PlayButton) --[[ Line: 29 ]]
+		function p1.ControlButtons(PlayButton)
 			-- upvalues: p1 (copy), CreateButtonsTimeModule (upval), ReplicatedStorage (upval), ExperienceStateRecordingService (upval)
 			p1.StopButton.ImageColor3 = CreateButtonsTimeModule.regularColor
 			p1.StopButton:SetAttribute("useHoverColor", true)
@@ -65,19 +65,19 @@ return {
 			end
 		end
 		
-		p1.connections.PlayListener = p1.PlayButton.MouseButton1Click:Connect(function() --[[ Line: 64 ]]
+		p1.connections.PlayListener = p1.PlayButton.MouseButton1Click:Connect(function()
 			-- upvalues: p1 (copy)
 			p1.ControlButtons(p1.PlayButton)
 		end)
-		p1.connections.StopListener = p1.StopButton.MouseButton1Click:Connect(function() --[[ Line: 69 ]]
+		p1.connections.StopListener = p1.StopButton.MouseButton1Click:Connect(function()
 			-- upvalues: p1 (copy)
 			p1.ControlButtons(p1.StopButton)
 		end)
-		p1.connections.ReverseListener = p1.ReverseButton.MouseButton1Click:Connect(function() --[[ Line: 74 ]]
+		p1.connections.ReverseListener = p1.ReverseButton.MouseButton1Click:Connect(function()
 			-- upvalues: p1 (copy)
 			p1.ControlButtons(p1.ReverseButton)
 		end)
-		UserInputService.InputBegan:Connect(function(Input, _) --[[ Line: 79 ]]
+		UserInputService.InputBegan:Connect(function(Input, _)
 			-- upvalues: p1 (copy)
 			if Input.KeyCode == Enum.KeyCode.Space then
 				p1.ControlButtons(p1.PlayButton)

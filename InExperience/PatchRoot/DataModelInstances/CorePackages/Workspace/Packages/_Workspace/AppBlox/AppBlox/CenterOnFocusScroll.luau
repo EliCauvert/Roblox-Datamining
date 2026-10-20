@@ -1,5 +1,5 @@
 ﻿return {
-	getRevealOnlyCanvasY = function(p1, p2, Vector, p3, p4) --[[ Line: 4 ]]
+	getRevealOnlyCanvasY = function(p1, p2, Vector, p3, p4)
 		if p3 <= p1 and p1 + p2 <= p3 + p4 then
 			return nil
 		else

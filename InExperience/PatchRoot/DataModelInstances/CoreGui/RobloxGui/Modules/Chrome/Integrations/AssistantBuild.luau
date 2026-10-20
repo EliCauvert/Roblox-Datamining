@@ -9,7 +9,7 @@ local DisplayModule = if FFlagBuildExperienceInGameShell then require(CorePackag
 local ServiceModule = require(script:FindFirstAncestor("Chrome").Service)
 local ButtonVariant = require(CorePackages.Packages.Foundation).Enums.ButtonVariant
 
-local function _(p1): boolean --[[ Line: 21 | Named "canShowAssistantBuild" ]]
+local function _(p1): boolean
 	-- upvalues: BuildModeLaunchModule (copy), VRService (copy), FFlagBuildExperienceInGameShell (copy), DisplayModule (copy)
 	if not BuildModeLaunchModule:hasBuildMode() or VRService.VREnabled then
 		return false
@@ -40,7 +40,7 @@ else
 end
 config.initialAvailability = if Flag then ServiceModule.AvailabilitySignal.Available else ServiceModule.AvailabilitySignal.Unavailable
 
-function config:activated() --[[ Line: 38 ]]
+function config:activated()
 	-- upvalues: BuildExperienceModule (copy), FFlagBuildExperienceInGameShell (copy)
 	local AssistantBuildStore = BuildExperienceModule.GetAssistantBuildStore()
 	
@@ -60,7 +60,7 @@ function config:activated() --[[ Line: 38 ]]
 end
 
 config.components = {
-	Icon = function(_) --[[ Line: 50 ]]
+	Icon = function(_)
 		-- upvalues: ReactModule (copy), BuildExperienceModule (copy), ButtonVariant (copy)
 		return ReactModule.createElement(BuildExperienceModule.AssistantBuild, { variant = ButtonVariant.Utility })
 	end
@@ -68,7 +68,7 @@ config.components = {
 local RegisterResult = ServiceModule:register(config)
 
 if FFlagBuildExperienceInGameShell then
-	RegisterResult._disposeDisplaySizeEffect = SignalsModule.createEffect(function(p1) --[[ Line: 60 ]]
+	RegisterResult._disposeDisplaySizeEffect = SignalsModule.createEffect(function(p1)
 		-- upvalues: BuildModeLaunchModule (copy), VRService (copy), FFlagBuildExperienceInGameShell (copy), DisplayModule (copy), RegisterResult (copy)
 		local Flag = nil
 		if BuildModeLaunchModule:hasBuildMode() and not VRService.VREnabled then

@@ -7,19 +7,19 @@ local LearnMorePartialModalContainerModule = require(script.Parent.LearnMorePart
 local LoggerModule = require(script.Parent.Logger)
 local t = {}
 
-return function(p1) --[[ Line: 18 | Named "LearnMorePartialModalScreen" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), t (copy), UseEffectOnMountFunction (copy), LoggerModule (copy), UseCallbackFunction (copy), ReactModule (copy), LearnMorePartialModalContainerModule (copy)
 	local Navigation = CryoModule.Dictionary.union(t, p1).navigation
 	assert(type(Navigation) ~= "nil", "LearnMorePartialModalScreen should be wrapped with React Navigation")
 	local ConversationIdParam = Navigation and (Navigation.getParam and Navigation.getParam("conversationId", nil))
-	UseEffectOnMountFunction(function() --[[ Line: 24 ]]
+	UseEffectOnMountFunction(function()
 		-- upvalues: LoggerModule (upval)
 		LoggerModule:info("LearnMorePartialModalScreen mounted")
 	end)
 	
 	return ReactModule.createElement(LearnMorePartialModalContainerModule, {
 		conversationId = ConversationIdParam,
-		onDismissed = UseCallbackFunction(function() --[[ Line: 28 ]]
+		onDismissed = UseCallbackFunction(function()
 			-- upvalues: Navigation (copy)
 			Navigation.goBack()
 		end, { Navigation })

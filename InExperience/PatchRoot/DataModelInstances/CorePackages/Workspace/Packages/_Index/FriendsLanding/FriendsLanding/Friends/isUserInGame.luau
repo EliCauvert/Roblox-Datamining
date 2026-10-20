@@ -1,6 +1,6 @@
 ﻿local PresenceType = require(script:FindFirstAncestor("FriendsLanding").dependencies).RoduxPresence.Enums.PresenceType
 
-return function(p1): boolean --[[ Line: 11 ]]
+return function(p1): boolean
 	-- upvalues: PresenceType (copy)
 	if p1 then
 		assert(p1, "user modal must be non-nil")

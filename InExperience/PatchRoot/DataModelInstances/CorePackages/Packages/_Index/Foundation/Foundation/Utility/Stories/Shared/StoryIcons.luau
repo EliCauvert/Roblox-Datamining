@@ -6,7 +6,7 @@ local MatrixGridModule = require(Foundation.Utility.Stories.Shared.MatrixGrid)
 local Icon = BuilderIconsModule.Icon
 local Uiblox = BuilderIconsModule.Migration.uiblox
 
-local function _(p1): string --[[ Line: 16 | Named "formatMigratedLegacySubtitle" ]]
+local function _(p1): string
 	-- upvalues: Uiblox (copy)
 	local UibloxEntry = Uiblox[p1]
 	
@@ -34,7 +34,7 @@ local list = {
 
 return {
 	ICON_TYPE_EXAMPLES = list,
-	buildIconControlOptions = function(p1) --[[ Line: 51 ]]
+	buildIconControlOptions = function(p1)
 		-- upvalues: list (copy)
 		local List = { "" }
 		
@@ -50,7 +50,7 @@ return {
 		end
 		return List
 	end,
-	buildIconTypeMatrixRows = function(Callback) --[[ Line: 72 ]]
+	buildIconTypeMatrixRows = function(Callback)
 		-- upvalues: list (copy), MatrixGridModule (copy)
 		local List = {}
 		
@@ -62,7 +62,7 @@ return {
 		end
 		return List
 	end,
-	parseIconControl = function(p2) --[[ Line: 65 ]]
+	parseIconControl = function(p2)
 		return if p2 == "" then nil else p2
 	end
 }

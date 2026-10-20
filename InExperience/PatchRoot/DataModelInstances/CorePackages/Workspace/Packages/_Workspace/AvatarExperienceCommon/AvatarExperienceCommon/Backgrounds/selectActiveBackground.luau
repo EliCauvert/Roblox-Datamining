@@ -3,7 +3,7 @@ local AvatarExperienceFlagsModule = require(AvatarExperienceCommon.Parent.Avatar
 local AvatarBackground = require(AvatarExperienceCommon.Constants).ASSET_TYPE_NAME_TO_ID_STRING.AvatarBackground
 local NOBACKGROUNDASSETID = require(script.Parent.constants).NO_BACKGROUND_ASSET_ID
 
-local function scanTryOnForBackground(TryOnItems): number? --[[ Line: 32 ]]
+local function scanTryOnForBackground(TryOnItems): number?
 	-- upvalues: AvatarBackground (copy)
 	if not TryOnItems then
 		return nil
@@ -21,7 +21,7 @@ local function scanTryOnForBackground(TryOnItems): number? --[[ Line: 32 ]]
 	return nil
 end
 
-local function _(p1): number? --[[ Line: 50 | Named "firstEquippedBackgroundId" ]]
+local function _(p1): number?
 	-- upvalues: AvatarBackground (copy)
 	if not p1 then
 		return nil
@@ -42,7 +42,7 @@ local function _(p1): number? --[[ Line: 50 | Named "firstEquippedBackgroundId" 
 	return nil
 end
 
-return function(p2) --[[ Line: 67 | Named "selectActiveBackground" ]]
+return function(p2)
 	-- upvalues: AvatarBackground (copy), AvatarExperienceFlagsModule (copy), scanTryOnForBackground (copy), NOBACKGROUNDASSETID (copy)
 	if not AvatarBackground then
 		return nil

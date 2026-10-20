@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableARFlowSession", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("EnableARFlowSession")
 end

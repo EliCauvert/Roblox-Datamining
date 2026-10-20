@@ -15,7 +15,7 @@ local FFlagLuaAppEnableSduiHomePage = require(Parent.SharedFlags).FFlagLuaAppEna
 local AddLayoutOrderToSduiSectionHeaderIconComponent = game:DefineFastFlag("AddLayoutOrderToSduiSectionHeaderIconComponent", false)
 local LuaAppSduiSeeAllArrowIconMigration2 = game:DefineFastFlag("LuaAppSduiSeeAllArrowIconMigration2", false)
 
-return ReactModule.memo(function(p1) --[[ Line: 83 | Named "SduiSectionHeader" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ResponsiveModule (copy), LuaAppSduiSeeAllArrowIconMigration2 (copy), GetImageDataFunction (copy), Images (copy), AddLayoutOrderToSduiSectionHeaderIconComponent (copy), ReactModule (copy), View (copy), FFlagLuaAppEnableSduiHomePage (copy), CombineReactTagsFunction (copy), SduiTextIconRowModule (copy), IconWithTooltip (copy), TooltipOrientation (copy)
 	local LayoutOrder = p1.layoutOrder
 	local AnchorPoint = p1.anchorPoint

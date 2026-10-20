@@ -27,7 +27,7 @@ local config = {
 	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-local function SelfieQRCodeView(p1) --[[ Line: 60 ]]
+local function SelfieQRCodeView(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), EnableTimeoutUI (copy), AdoptStyleTokens (copy), DisplayQRCode (copy), QRCodeDisplayModule (copy), Image (copy)
 	local UseTokensResult = UseTokensFunction()
 	
@@ -83,11 +83,11 @@ local function SelfieQRCodeView(p1) --[[ Line: 60 ]]
 	})
 end
 
-local function getJobStatus(Callback, p1) --[[ Line: 133 ]]
+local function getJobStatus(Callback, p1)
 	-- upvalues: DebugAvatarGenerationStaticApiKey (copy), PromiseModule (copy)
 	return Callback(p1, "GET", {
 		headers = { ["X-Static-Api-Key"] = DebugAvatarGenerationStaticApiKey }
-	}):andThen(function(Result) --[[ Line: 135 ]]
+	}):andThen(function(Result)
 		-- upvalues: PromiseModule (upval)
 		local ResponseBody = Result.responseBody
 		
@@ -95,7 +95,7 @@ local function getJobStatus(Callback, p1) --[[ Line: 133 ]]
 	end)
 end
 
-return function(p1) --[[ Line: 146 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ResponsiveModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), SelfieQrTimeoutSeconds (copy), EnableTimeoutUI (copy), AvatarCreationService (copy), getJobStatus (copy), Url (copy), DialogSize (copy), ConsoleCloseAffordanceFix (copy), ReactFocusNavigationModule (copy), config (copy), FocusNavigationEventNameEnum (copy), AdoptStyleTokens (copy), AllowQrEnlargeUniversally (copy), SelfieQRCodeView (copy), Dialog (copy), Icon (copy), FoundationModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local IsUsePreferredInputResultMatch = ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Directional
@@ -126,17 +126,17 @@ return function(p1) --[[ Line: 146 ]]
 		}
 	})
 	
-	local function _() --[[ Line: 178 | Named "handleError" ]]
+	local function _()
 		-- upvalues: UseStateResult2_2 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy)
 		UseStateResult2_2(true)
 		UseStateResult2(false)
 		UseStateResult2_1(false)
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 185 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SelfieQrTimeoutSeconds (upval), EnableTimeoutUI (upval), UseStateResult2_2 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), p1 (copy), AvatarCreationService (upval), getJobStatus (upval), UseRoactServiceResult (copy), Url (upval)
 		local DelayedThread = nil
-		local DelayedThread1 = task.delay(SelfieQrTimeoutSeconds, function() --[[ Line: 187 ]]
+		local DelayedThread1 = task.delay(SelfieQrTimeoutSeconds, function()
 			-- upvalues: EnableTimeoutUI (upval), UseStateResult2_2 (upval), UseStateResult2 (upval), UseStateResult2_1 (upval), p1 (upval), AvatarCreationService (upval)
 			if EnableTimeoutUI then
 				UseStateResult2_2(true)
@@ -150,9 +150,9 @@ return function(p1) --[[ Line: 146 ]]
 			end
 		end)
 		
-		local function poll(Formatted) --[[ Line: 196 ]]
+		local function poll(Formatted)
 			-- upvalues: getJobStatus (upval), UseRoactServiceResult (upval), p1 (upval), AvatarCreationService (upval), EnableTimeoutUI (upval), UseStateResult2_2 (upval), UseStateResult2 (upval), UseStateResult2_1 (upval), DelayedThread (ref), poll (copy)
-			getJobStatus(UseRoactServiceResult, Formatted):andThen(function(Result) --[[ Line: 198 ]]
+			getJobStatus(UseRoactServiceResult, Formatted):andThen(function(Result)
 				-- upvalues: p1 (upval), AvatarCreationService (upval), EnableTimeoutUI (upval), UseStateResult2_2 (upval), UseStateResult2 (upval), UseStateResult2_1 (upval), DelayedThread (upval), poll (upval), Formatted (copy)
 				if Result.status == "done" then
 					local FileId = Result.fileIds and Result.fileIds[1]
@@ -162,7 +162,7 @@ return function(p1) --[[ Line: 146 ]]
 					return
 				end
 				if Result.status ~= "cancelled" and Result.status ~= "error" then
-					DelayedThread = task.delay(1, function() --[[ Line: 211 ]]
+					DelayedThread = task.delay(1, function()
 						-- upvalues: poll (upval), Formatted (upval)
 						poll(Formatted)
 					end)
@@ -179,7 +179,7 @@ return function(p1) --[[ Line: 146 ]]
 					p1.displaySelfieQRCode(false)
 					AvatarCreationService:HandleSelfieQRResult(false, "job polling failed")
 				end
-			end):catch(function(_) --[[ Line: 216 ]]
+			end):catch(function(_)
 				-- upvalues: EnableTimeoutUI (upval), UseStateResult2_2 (upval), UseStateResult2 (upval), UseStateResult2_1 (upval), p1 (upval), AvatarCreationService (upval)
 				if EnableTimeoutUI then
 					UseStateResult2_2(true)
@@ -196,7 +196,7 @@ return function(p1) --[[ Line: 146 ]]
 		
 		poll((string.format("%sml-runtime-gateway/v0.2/jobs/%s", Url.APIS_URL, p1.jobId)))
 		
-		return function() --[[ Line: 229 ]]
+		return function()
 			-- upvalues: DelayedThread (ref), DelayedThread1 (copy)
 			if DelayedThread then
 				task.cancel(DelayedThread)
@@ -209,7 +209,7 @@ return function(p1) --[[ Line: 146 ]]
 	local config1 = { ZIndex = 2, size = DialogSize.Medium }
 	
 	if not IsUsePreferredInputResultMatch then
-		function config1:onClose() --[[ Line: 245 ]]
+		function config1:onClose()
 			-- upvalues: p1 (copy), EnableTimeoutUI (upval), AvatarCreationService (upval)
 			p1.displaySelfieQRCode(false)
 			
@@ -223,7 +223,7 @@ return function(p1) --[[ Line: 146 ]]
 		end
 	end
 	local UseEventMapResult = if ConsoleCloseAffordanceFix then ReactFocusNavigationModule.useEventMap(config) else nil
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 259 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult (copy), UseStateResult2 (copy), p1 (copy), EnableTimeoutUI (upval), AvatarCreationService (upval)
 		local EventData = p2.eventData
 		
@@ -259,10 +259,10 @@ return function(p1) --[[ Line: 146 ]]
 			BackgroundTransparency = if AdoptStyleTokens then UseTokensResult.Color.ActionUtility.Background.Transparency else 1,
 			Text = "",
 			ZIndex = if ConsoleCloseAffordanceFix then nil else 5,
-			[ReactModule.Event.Activated] = if AllowQrEnlargeUniversally and not IsUsePreferredInputResultMatch then function() --[[ Line: 311 ]]
+			[ReactModule.Event.Activated] = if AllowQrEnlargeUniversally and not IsUsePreferredInputResultMatch then function()
 				-- upvalues: UseStateResult2 (copy)
 				UseStateResult2(false)
-			end elseif ConsoleCloseAffordanceFix then nil else function() --[[ Line: 311 ]]
+			end elseif ConsoleCloseAffordanceFix then nil else function()
 				-- upvalues: UseStateResult2 (copy)
 				UseStateResult2(false)
 			end
@@ -285,7 +285,7 @@ return function(p1) --[[ Line: 146 ]]
 			BackgroundTransparency = if AdoptStyleTokens then UseTokensResult.Color.ActionUtility.Background.Transparency else 1,
 			Text = "",
 			ZIndex = 1,
-			[ReactModule.Event.Activated] = function() --[[ Line: 344 ]]
+			[ReactModule.Event.Activated] = function()
 				-- upvalues: p1 (copy), AvatarCreationService (upval)
 				p1.displaySelfieQRCode(false)
 				AvatarCreationService:HandleSelfieQRResult(false, "QR code closed before job completed")
@@ -318,18 +318,18 @@ return function(p1) --[[ Line: 146 ]]
 						Size = UDim2.new(0.65, 0, 0, 0),
 						BackgroundTransparency = if AdoptStyleTokens then UseTokensResult.Color.ActionUtility.Background.Transparency else 1,
 						AutoButtonColor = false,
-						[ReactModule.Event.MouseEnter] = function() --[[ Line: 386 ]]
+						[ReactModule.Event.MouseEnter] = function()
 							-- upvalues: EnableTimeoutUI (upval), UseStateResult3 (copy), AllowQrEnlargeUniversally (upval), IsUsePreferredInputResultMatch (copy), UseStateResult2_1 (copy)
 							if EnableTimeoutUI and UseStateResult3 then return end
 							if AllowQrEnlargeUniversally or IsUsePreferredInputResultMatch then
 								UseStateResult2_1(true)
 							end
 						end,
-						[ReactModule.Event.MouseLeave] = function() --[[ Line: 394 ]]
+						[ReactModule.Event.MouseLeave] = function()
 							-- upvalues: UseStateResult2_1 (copy)
 							UseStateResult2_1(false)
 						end,
-						[ReactModule.Event.Activated] = function() --[[ Line: 397 ]]
+						[ReactModule.Event.Activated] = function()
 							-- upvalues: EnableTimeoutUI (upval), UseStateResult3 (copy), AllowQrEnlargeUniversally (upval), IsUsePreferredInputResultMatch (copy), UseStateResult2 (copy), UseStateResult2_1 (copy)
 							if EnableTimeoutUI and UseStateResult3 then return end
 							if AllowQrEnlargeUniversally or IsUsePreferredInputResultMatch then

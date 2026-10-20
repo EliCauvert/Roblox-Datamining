@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("UGCValidateBackendInExperienceViaCanPublish", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("UGCValidateBackendInExperienceViaCanPublish")
 end

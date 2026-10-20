@@ -6,7 +6,7 @@ local NewUrlBuilder = UrlBuilder.new({
 	base = require(Parent.Http).Url.APIS_URL
 })
 
-return function(UniverseId, Cursor) --[[ Line: 13 | Named "getBadgesSeeAllUrl" ]]
+return function(UniverseId, Cursor)
 	-- upvalues: UrlBuilder (copy), NewUrlBuilder (copy), BadgesSeeAllPageConstantsModule (copy)
 	return (UrlBuilder.addQueryString(NewUrlBuilder(), {
 		PageEntryFormat = "Universal",

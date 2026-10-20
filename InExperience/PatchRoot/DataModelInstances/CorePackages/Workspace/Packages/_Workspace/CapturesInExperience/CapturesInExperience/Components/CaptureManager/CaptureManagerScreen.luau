@@ -35,37 +35,37 @@ local _ = require(Parent.Types)
 local UpdateSelectedCapturesModule = require(Parent.Actions.UpdateSelectedCaptures)
 local _UDim2 = UDim2.fromOffset(32, 32)
 
-local function _(p1: number): number --[[ Line: 66 | Named "getItemsPerRow" ]]
+local function _(p1: number): number
 	return (math.clamp(math.floor(p1 / 90), 1, 3))
 end
 
-local _ = function(p1, p2: number): Vector2 --[[ Line: 70 | Named "getGalleryItemSize" ]]
+local _ = function(p1, p2: number): Vector2
 	local ClampedValue = math.clamp(math.floor(p2 / 90), 1, 3)
 	local Value = (p2 - (ClampedValue - 1) * 4) / ClampedValue
 	
 	return Vector2.new(math.floor(Value), (math.floor(Value * p1)))
 end
 
-local function renderItem(Capture, CaptureIndex) --[[ Line: 80 ]]
+local function renderItem(Capture, CaptureIndex)
 	-- upvalues: ReactModule (copy), CaptureManagerItemModule (copy)
 	return ReactModule.createElement(CaptureManagerItemModule, { capture = Capture, captureIndex = CaptureIndex })
 end
 
-return function(_) --[[ Line: 87 ]]
+return function(_)
 	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseStyleFunction (copy), UseTopbarInsetHeightModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseLocalizationFunction (copy), ReactModule (copy), UseStateFunction (copy), UseScreenSizeFunction (copy), UseCallbackFunction (copy), CaptureManagerClosedModule (copy), DeleteCapturesModule (copy), UpdateSelectedCapturesModule (copy), EventNamesModule (copy), DashModule (copy), View (copy), ImageSetButton (copy), Images (copy), _UDim2 (copy), Text (copy), ScrollView (copy), ScrollBarVisibility (copy), GridView (copy), renderItem (copy), ShowMoreButtonModule (copy), CaptureManagerCTAContainerModule (copy), DeleteWarningModalModule (copy), PermissionModalModule (copy), ToastContainerModule (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseStyleResult = UseStyleFunction()
 	local UseTopbarInsetHeightModuleResult = UseTopbarInsetHeightModule()
-	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 94 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p1)
 		-- upvalues: ConstantsModule (upval)
 		return p1[ConstantsModule.RoduxKey].Captures
 	end)
-	local UseSelectorResult1 = UseSelectorFunction(function(p1) --[[ Line: 98 ]]
+	local UseSelectorResult1 = UseSelectorFunction(function(p1)
 		-- upvalues: ConstantsModule (upval)
 		return p1[ConstantsModule.RoduxKey].CaptureManager.SelectedCaptures
 	end)
-	local UseSelectorResult2 = UseSelectorFunction(function(p1) --[[ Line: 102 ]]
+	local UseSelectorResult2 = UseSelectorFunction(function(p1)
 		-- upvalues: ConstantsModule (upval)
 		return p1[ConstantsModule.RoduxKey].CaptureManager.IsOpen
 	end)
@@ -80,34 +80,34 @@ return function(_) --[[ Line: 87 ]]
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(24)
 	local SelectAllAction = if #UseSelectorResult1 == 0 then UseLocalizationResult.selectAllAction else UseLocalizationResult.cancelSelectAllAction
 	local UseScreenSizeResult = UseScreenSizeFunction()
-	ReactModule.useEffect(function() --[[ Line: 121 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
 		if UseRefResult.current then
 			UseStateResult2(UseRefResult.current.AbsoluteSize)
 		end
 	end, {})
-	local UseCallbackResult = UseCallbackFunction(function(Frame) --[[ Line: 127 ]]
+	local UseCallbackResult = UseCallbackFunction(function(Frame)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(Frame.AbsoluteSize)
 	end, {})
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 131 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: UseStateResult2_1 (copy), UseDispatchResult (copy), CaptureManagerClosedModule (upval)
 		UseStateResult2_1(false)
 		UseDispatchResult(CaptureManagerClosedModule())
 	end, {})
-	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 136 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function()
 		-- upvalues: UseStateResult2_2 (copy)
 		UseStateResult2_2(true)
 	end, {})
-	local UseCallbackResult3 = UseCallbackFunction(function() --[[ Line: 140 ]]
+	local UseCallbackResult3 = UseCallbackFunction(function()
 		-- upvalues: UseStateResult2_2 (copy)
 		UseStateResult2_2(false)
 	end, {})
-	local UseCallbackResult4 = UseCallbackFunction(function() --[[ Line: 144 ]]
+	local UseCallbackResult4 = UseCallbackFunction(function()
 		-- upvalues: UseDispatchResult (copy), DeleteCapturesModule (upval), UseSelectorResult1 (copy)
 		UseDispatchResult(DeleteCapturesModule(UseSelectorResult1))
 	end, { UseSelectorResult1 })
-	local UseCallbackResult5 = UseCallbackFunction(function() --[[ Line: 148 ]]
+	local UseCallbackResult5 = UseCallbackFunction(function()
 		-- upvalues: UseSelectorResult1 (copy), UseDispatchResult (copy), UpdateSelectedCapturesModule (upval), UseSelectorResult (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval)
 		if #UseSelectorResult1 == 0 then
 			UseDispatchResult(UpdateSelectedCapturesModule(UseSelectorResult))
@@ -118,11 +118,11 @@ return function(_) --[[ Line: 87 ]]
 			UseDispatchResult(UpdateSelectedCapturesModule({}))
 		end
 	end, { UseSelectorResult1, UseSelectorResult })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 157 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_3 (copy), UseStateResult4 (copy)
 		UseStateResult2_3(UseStateResult4 + 24)
 	end, { UseStateResult4 })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 161 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseSelectorResult (copy), UseStateResult4 (copy), DashModule (upval)
 		return DashModule.slice(UseSelectorResult, 1, (math.min(#UseSelectorResult, UseStateResult4)))
 	end, { UseSelectorResult, UseStateResult4 })

@@ -13,7 +13,7 @@ local NormalizeTableFn = NormalizeModule.makeNormalizeTableFn({
 	licenseDisplayName = if require(Parent.AvatarExperienceFlags).FFlagAXMarketplaceLicensingItemDetails then { fn = NormalizeModule.normalizeString } else nil
 })
 
-return function(p1) --[[ Line: 29 ]]
+return function(p1)
 	-- upvalues: GetRawItemLicensingInfoModule (copy), RunService (copy), List (copy), NormalizeTableFn (copy)
 	local RawItemLicensingInfoModule = GetRawItemLicensingInfoModule(p1) or p1
 	local LicenseType = if type(RawItemLicensingInfoModule) == "table" then RawItemLicensingInfoModule.licenseType else nil

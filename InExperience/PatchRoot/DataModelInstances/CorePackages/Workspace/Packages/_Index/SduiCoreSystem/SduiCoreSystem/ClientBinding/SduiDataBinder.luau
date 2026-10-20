@@ -34,17 +34,17 @@ local FFlagSduiNotificationBadgeHydration = SharedFlagsModule.FFlagSduiNotificat
 local DataStatus = DataHydrationModule.DataHydrationTypes.DataStatus
 local ProtobufTimestampToLocalTimeStringFunction = require(SduiCoreSystem.ClientBinding.SduiDataBinderTransformUtils).protobufTimestampToLocalTimeString
 
-local function _(p1) --[[ Line: 74 | Named "updateBadgesInfoStore" ]]
+local function _(p1)
 	-- upvalues: DataHydrationModule (copy)
 	DataHydrationModule.Badges.getBadgeInfoStore(false).updateBadges(p1)
 end
 
-local _ = function(p1) --[[ Line: 78 | Named "updateCreatorInfoStore" ]]
+local _ = function(p1)
 	-- upvalues: DataHydrationModule (copy)
 	DataHydrationModule.Creator.getCreatorInfoStore(false).updateCreatorInfos(p1)
 end
 
-local _ = function(p1) --[[ Line: 82 | Named "updateGameInfos" ]]
+local _ = function(p1)
 	-- upvalues: FFlagMigrateGameInfoToStore (copy), DataHydrationModule (copy)
 	if FFlagMigrateGameInfoToStore then
 		DataHydrationModule.Game.getGameInfoStore(false).updateGameInfos(p1, false)
@@ -55,97 +55,97 @@ local _ = function(p1) --[[ Line: 82 | Named "updateGameInfos" ]]
 	end
 end
 
-local _ = function(p1) --[[ Line: 92 | Named "updateAgeRecommendations" ]]
+local _ = function(p1)
 	-- upvalues: DataHydrationModule (copy)
 	DataHydrationModule.Game.getAgeRecommendationStore(false).updateAgeRecommendations(p1)
 end
 
-local _ = function(p1) --[[ Line: 96 | Named "updateSocialLinkInfos" ]]
+local _ = function(p1)
 	-- upvalues: DataHydrationModule (copy)
 	DataHydrationModule.SocialLink.getSocialLinkInfoStore(false).updateSocialLinkInfos(p1)
 end
 
-local _ = function(p1) --[[ Line: 100 | Named "updateMediaAssetStore" ]]
+local _ = function(p1)
 	-- upvalues: DataHydrationModule (copy)
 	DataHydrationModule.MediaAsset.getMediaAssetStore(false).updateMediaAssets(p1)
 end
 
-local _ = function(p1) --[[ Line: 104 | Named "updateExperienceEventInfoStore" ]]
+local _ = function(p1)
 	-- upvalues: DataHydrationModule (copy)
 	DataHydrationModule.ExperienceEvents.getExperienceEventInfoStore(false).updateExperienceEventInfos(p1)
 end
 
-local _ = function(p1) --[[ Line: 108 | Named "updateMarketplaceCatalogCategoryStore" ]]
+local _ = function(p1)
 	-- upvalues: DataHydrationModule (copy)
 	DataHydrationModule.MarketplaceCatalogCategory.getMarketplaceCatalogCategoryStore(false).updateMarketplaceCatalogCategories(p1)
 end
 
-local _ = function(p1) --[[ Line: 114 | Named "updateMarketplaceCatalogSortStore" ]]
+local _ = function(p1)
 	-- upvalues: DataHydrationModule (copy)
 	DataHydrationModule.MarketplaceCatalogSort.getMarketplaceCatalogSortStore(false).updateMarketplaceCatalogSorts(p1)
 end
 
-local _ = function(p1) --[[ Line: 118 | Named "updateMarketplaceAssetInfoStore" ]]
+local _ = function(p1)
 	-- upvalues: DataHydrationModule (copy)
 	DataHydrationModule.MarketplaceAsset.getMarketplaceAssetStore(false).updateMarketplaceAssetInfos(p1)
 end
 
-local _ = function(p1) --[[ Line: 122 | Named "updateMarketplaceBundleInfoStore" ]]
+local _ = function(p1)
 	-- upvalues: DataHydrationModule (copy)
 	DataHydrationModule.MarketplaceBundle.getMarketplaceBundleStore(false).updateMarketplaceBundleInfos(p1)
 end
 
-local _ = function(p1) --[[ Line: 126 | Named "updateMarketplaceLookInfoStore" ]]
+local _ = function(p1)
 	-- upvalues: DataHydrationModule (copy)
 	DataHydrationModule.MarketplaceLook.getMarketplaceLookStore(false).updateMarketplaceLookInfos(p1)
 end
 
-local _ = function(p1) --[[ Line: 130 | Named "updateCollectibleItemInfoStore" ]]
+local _ = function(p1)
 	-- upvalues: DataHydrationModule (copy)
 	DataHydrationModule.CollectibleItem.getCollectibleItemStore(false).updateCollectibleItemInfos(p1)
 end
 
-local _ = function(p1) --[[ Line: 134 | Named "updateLeaderboardStatsStore" ]]
+local _ = function(p1)
 	-- upvalues: DataHydrationModule (copy)
 	DataHydrationModule.LeaderboardStats.getLeaderboardStatsStore(false).updateLeaderboardStatsBatch(p1)
 end
 
-local _ = function(p1) --[[ Line: 138 | Named "updateGamePassStore" ]]
+local _ = function(p1)
 	-- upvalues: DataHydrationModule (copy)
 	DataHydrationModule.Game.getGamePassStore(false).updateGamePassInfos(p1)
 end
 
-local _ = function(p1) --[[ Line: 142 | Named "updatePlayabilityStore" ]]
+local _ = function(p1)
 	-- upvalues: DataHydrationModule (copy)
 	DataHydrationModule.Game.getPlayabilityStore(false).updatePlayabilities(p1)
 end
 
-local _ = function(p1) --[[ Line: 146 | Named "updateGameDeveloperProductStore" ]]
+local _ = function(p1)
 	-- upvalues: DataHydrationModule (copy)
 	DataHydrationModule.Game.getGameDeveloperProductStore(false).updateGameDeveloperProductInfos(p1)
 end
 
-local _ = function(p1) --[[ Line: 150 | Named "updateGameSubscriptionStore" ]]
+local _ = function(p1)
 	-- upvalues: DataHydrationModule (copy)
 	DataHydrationModule.Game.getGameSubscriptionStore(false).updateGameSubscriptionInfos(p1)
 end
 
-local _ = function(p1) --[[ Line: 154 | Named "updateNotificationBadgeStore" ]]
+local _ = function(p1)
 	-- upvalues: DataHydrationModule (copy)
 	DataHydrationModule.NotificationBadge.getNotificationBadgeStore(false).updateNotificationBadges(p1)
 end
 
-local _ = function(p1) --[[ Line: 158 | Named "updateFavoritesStore" ]]
+local _ = function(p1)
 	-- upvalues: DataHydrationModule (copy)
 	DataHydrationModule.Game.getFavoritesStore(false).updateItems(p1)
 end
 
-local _ = function(p1) --[[ Line: 162 | Named "updateUserVoteStore" ]]
+local _ = function(p1)
 	-- upvalues: DataHydrationModule (copy)
 	DataHydrationModule.Game.getVotesStore(false).updateUserVoteItems(p1)
 end
 
-local function updateVoteCountsFromUniverses(Universe) --[[ Line: 169 ]]
+local function updateVoteCountsFromUniverses(Universe)
 	-- upvalues: DataHydrationModule (copy)
 	local t = {}
 	local Flag = false
@@ -164,17 +164,17 @@ local function updateVoteCountsFromUniverses(Universe) --[[ Line: 169 ]]
 	end
 end
 
-local _ = function(p1) --[[ Line: 188 | Named "updateCommunityInfoStore" ]]
+local _ = function(p1)
 	-- upvalues: DataHydrationModule (copy)
 	DataHydrationModule.Community.getCommunityInfoStore(false).updateCommunityInfos(p1)
 end
 
-local _ = function(p1) --[[ Line: 192 | Named "updateCommunityUserMembershipStore" ]]
+local _ = function(p1)
 	-- upvalues: DataHydrationModule (copy)
 	DataHydrationModule.CommunityUserMembership.getCommunityUserMembershipStore(false).updateMemberships(p1)
 end
 
-local function calculateBadgeDerivedField(p1, p2, _) --[[ Line: 204 ]]
+local function calculateBadgeDerivedField(p1, p2, _)
 	-- upvalues: ProtobufTimestampToLocalTimeStringFunction (copy)
 	if p1 == "created_time_formatted" then
 		local CreatedTime = p2 and (p2.created_time or p2.createdTime)
@@ -193,7 +193,7 @@ local function calculateBadgeDerivedField(p1, p2, _) --[[ Line: 204 ]]
 	end
 end
 
-local function calculateUniverseDerivedField(p1, p2, _) --[[ Line: 227 ]]
+local function calculateUniverseDerivedField(p1, p2, _)
 	-- upvalues: DataHydrationModule (copy), FFlagSduiSupportRatingNoPercent (copy), LocalizationService (copy), GetZendeskUrlFunction (copy)
 	if p1 == "rating_text_formatted_brief" then
 		local Number: number = tonumber(p2.totalUpVotes) or 0
@@ -218,7 +218,7 @@ local function calculateUniverseDerivedField(p1, p2, _) --[[ Line: 227 ]]
 	end
 end
 
-local function calculateAgeRecommendationDerivedField(p1, p2, _) --[[ Line: 269 ]]
+local function calculateAgeRecommendationDerivedField(p1, p2, _)
 	-- upvalues: DataHydrationModule (copy)
 	if p1 == "content_rating_image" then
 		local IgrsRating = p2 and p2.igrsRating
@@ -251,7 +251,7 @@ local function calculateAgeRecommendationDerivedField(p1, p2, _) --[[ Line: 269 
 	end
 end
 
-local function getDataObjectSignal(Community, _, p3, p4) --[[ Line: 305 ]]
+local function getDataObjectSignal(Community, _, p3, p4)
 	-- upvalues: DataHydrationModule (copy), SduiDataBindingContentTypeModule (copy), FFlagSduiCommunitySectionSupport (copy), FFlagSduiMarketplaceCatalogCategorySupport (copy), FFlagSduiMarketplaceCatalogSortSupport (copy), FFlagSduiAddMarketplaceEntityDataHydration (copy), FFlagSduiAddCollectibleItemDataHydration (copy), FFlagSduiLeaderboardComponent (copy), FFlagSduiDevStoreSeeAllSupport (copy), FFlagSduiNotificationBadgeHydration (copy)
 	if Community == "badge" then
 		return DataHydrationModule.Badges.getBadgeInfoStore(false).getBadgeInfo((tostring(p3)))
@@ -322,12 +322,12 @@ local config = {
 	capability = if FFlagSduiCapabilityBindings then true else nil
 }
 
-local function calculateDerivedFieldValue(UniverseUserVoteFeedbackMetadata, p3, DataResult, p4) --[[ Line: 534 ]]
+local function calculateDerivedFieldValue(UniverseUserVoteFeedbackMetadata, p3, DataResult, p4)
 	-- upvalues: calculateBadgeDerivedField (copy), calculateUniverseDerivedField (copy), calculateAgeRecommendationDerivedField (copy), SduiDataBindingContentTypeModule (copy), DataHydrationModule (copy), GetSduiServiceDependenciesStoreModule (copy)
 	return if UniverseUserVoteFeedbackMetadata == "badge" then calculateBadgeDerivedField(p3, DataResult, p4) elseif UniverseUserVoteFeedbackMetadata == "universe" then calculateUniverseDerivedField(p3, DataResult, p4) elseif UniverseUserVoteFeedbackMetadata == "ageRecommendation" then calculateAgeRecommendationDerivedField(p3, DataResult, p4) elseif UniverseUserVoteFeedbackMetadata == SduiDataBindingContentTypeModule.universeUserVoteFeedbackMetadata then DataHydrationModule.Game.getUserVoteFeedbackMetadataStore(false).calculateDerivedField(p3, DataResult, p4) elseif UniverseUserVoteFeedbackMetadata == "event" then DataHydrationModule.ExperienceEvents.getExperienceEventInfoStore(false).calculateDerivedField(p3, DataResult, p4, GetSduiServiceDependenciesStoreModule().getDependencies("SduiDataBinder").localization) else nil
 end
 
-local function getUniverseIcon(p3, p4, Large) --[[ Line: 579 ]]
+local function getUniverseIcon(p3, p4, Large)
 	-- upvalues: DataHydrationModule (copy)
 	local AndFetchGameIcon = DataHydrationModule.Game.getGameIconStore(false).getAndFetchGameIcon(tostring(p3), Large)
 	local DataResult = AndFetchGameIcon.data(p4)
@@ -340,7 +340,7 @@ local function getUniverseIcon(p3, p4, Large) --[[ Line: 579 ]]
 	end
 end
 
-local function getUniverseVoteRatingText(p3, p4, p5) --[[ Line: 601 ]]
+local function getUniverseVoteRatingText(p3, p4, p5)
 	-- upvalues: DataHydrationModule (copy)
 	local Vote = DataHydrationModule.Game.getVotesStore(false).getVote(p3)
 	local DataResult = Vote.data(p4)
@@ -354,7 +354,7 @@ local function getUniverseVoteRatingText(p3, p4, p5) --[[ Line: 601 ]]
 	}, p5), (Vote.status(p4))
 end
 
-local _ = function(p3, Entry, p4, p5) --[[ Line: 620 | Named "resolveFieldFromData" ]]
+local _ = function(p3, Entry, p4, p5)
 	-- upvalues: TryGetPathFromDataModule (copy), calculateDerivedFieldValue (copy)
 	if p4 == nil then
 		return false, nil
@@ -372,7 +372,7 @@ local _ = function(p3, Entry, p4, p5) --[[ Line: 620 | Named "resolveFieldFromDa
 	end
 end
 
-local function getDataHydrationField(p3, Entry, p4, p5, p6) --[[ Line: 643 ]]
+local function getDataHydrationField(p3, Entry, p4, p5, p6)
 	-- upvalues: FFlagMigrateGameInfoToStore (copy), getUniverseIcon (copy), DataHydrationModule (copy), getDataObjectSignal (copy), TryGetPathFromDataModule (copy), calculateDerivedFieldValue (copy)
 	if #Entry < 2 then
 		return nil, nil
@@ -407,7 +407,7 @@ local function getDataHydrationField(p3, Entry, p4, p5, p6) --[[ Line: 643 ]]
 	end
 end
 
-local function resolveUniverseField(p7, Entry, p8, p9, p10) --[[ Line: 697 ]]
+local function resolveUniverseField(p7, Entry, p8, p9, p10)
 	-- upvalues: getUniverseIcon (copy), DataHydrationModule (copy), getUniverseVoteRatingText (copy), FFlagSduiSupportRatingNoPercent (copy), getDataHydrationField (copy), TryGetPathFromDataModule (copy), calculateDerivedFieldValue (copy), DataStatus (copy)
 	if #Entry == 2 then
 		if Entry[2] == "icon" then
@@ -493,7 +493,7 @@ local config1 = {
 }
 
 return {
-	updateDataStores = function(p7) --[[ Line: 805 ]]
+	updateDataStores = function(p7)
 		-- upvalues: DataHydrationModule (copy), FFlagMigrateGameInfoToStore (copy), updateVoteCountsFromUniverses (copy), FFlagSduiCommunitySectionSupport (copy), FFlagSduiMarketplaceCatalogCategorySupport (copy), FFlagSduiMarketplaceCatalogSortSupport (copy), FFlagSduiAddMarketplaceEntityDataHydration (copy), FFlagSduiAddCollectibleItemDataHydration (copy), FFlagSduiLeaderboardComponent (copy), FFlagSduiDevStoreSeeAllSupport (copy), FFlagSduiNotificationBadgeHydration (copy)
 		if p7.badge then
 			DataHydrationModule.Badges.getBadgeInfoStore(false).updateBadges(p7.badge)
@@ -587,7 +587,7 @@ return {
 		end
 	end,
 	getDataObjectSignal = getDataObjectSignal,
-	getFieldValue = function(p7, p8, p9, p10, p11) --[[ Line: 782 ]]
+	getFieldValue = function(p7, p8, p9, p10, p11)
 		-- upvalues: config1 (copy)
 		if #p8 < 2 then
 			return nil, nil
@@ -602,11 +602,11 @@ return {
 	end,
 	calculateBadgeDerivedField = calculateBadgeDerivedField,
 	calculateUniverseDerivedField = calculateUniverseDerivedField,
-	isClientContentType = function(p7) --[[ Line: 430 ]]
+	isClientContentType = function(p7)
 		-- upvalues: config (copy)
 		return config[p7] or false
 	end,
-	getFieldValueForClientContentType = function(Capability, Entry, p7, p8) --[[ Line: 434 ]]
+	getFieldValueForClientContentType = function(Capability, Entry, p7, p8)
 		-- upvalues: SduiDataBindingContentTypeModule (copy), GetSduiClientPageScopeModule (copy), SduiDataBindingResponsiveFieldName (copy), DisplayModule (copy), ResponsiveModule (copy), FFlagLuaAppEdpKeepFullPageOnPortraitRotation (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), FFlagSduiCapabilityBindings (copy), SduiCapabilitiesModule (copy), GetSduiPolicyStoreModule (copy), ResolveSduiPolicyFieldModule (copy), TryGetPathFromDataModule (copy)
 		if Capability == SduiDataBindingContentTypeModule.clientPageScope then
 			local ConfigKey = if p8 then p8.configKey else nil

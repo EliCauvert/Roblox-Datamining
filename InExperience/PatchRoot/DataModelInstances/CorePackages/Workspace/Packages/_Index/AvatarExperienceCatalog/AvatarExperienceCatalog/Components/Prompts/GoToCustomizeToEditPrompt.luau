@@ -9,7 +9,7 @@ local Text = FoundationModule.Text
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local InputSize = FoundationModule.Enums.InputSize
 
-return function(p1) --[[ Line: 20 | Named "GoToCustomizeToEditPrompt" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), RoactNavigationModule (copy), View (copy), Text (copy), AXPartialPageModal (copy), ButtonVariant (copy), InputSize (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		confirmButtonText = "Feature.Catalog.Action.Checkout.GoToCustomize",
@@ -17,11 +17,11 @@ return function(p1) --[[ Line: 20 | Named "GoToCustomizeToEditPrompt" ]]
 		titleText = "Feature.Catalog.Title.Checkout.GoToCustomizeTitle",
 		bodyText = "Feature.Catalog.Label.Checkout.GoToCustomizeBody"
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 28 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), RoactNavigationModule (upval)
 		p1.navigation.dispatch(RoactNavigationModule.Actions.back(nil))
 	end, { p1.navigation })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 37 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy)
 		UseResult()
 	end, { UseResult })
@@ -33,7 +33,7 @@ return function(p1) --[[ Line: 20 | Named "GoToCustomizeToEditPrompt" ]]
 			buttons = {
 				{
 					props = {
-						onActivated = ReactModule.useCallback(function() --[[ Line: 32 ]]
+						onActivated = ReactModule.useCallback(function()
 							-- upvalues: UseResult (copy), p1 (copy)
 							UseResult()
 							p1.onConfirm()
@@ -53,7 +53,7 @@ return function(p1) --[[ Line: 20 | Named "GoToCustomizeToEditPrompt" ]]
 				}
 			}
 		}
-	}, ((function() --[[ Line: 41 ]]
+	}, ((function()
 		-- upvalues: ReactModule (upval), View (upval), Text (upval), UseLocalizationResult (copy)
 		return {
 			ViewFrame = ReactModule.createElement(View, {

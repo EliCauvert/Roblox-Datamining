@@ -2,11 +2,11 @@
 
 return {
 	ServiceLocator = ServiceLocatorModule,
-	getService = function(p1) --[[ Line: 11 ]]
+	getService = function(p1)
 		-- upvalues: ServiceLocatorModule (copy)
 		return ServiceLocatorModule.get(p1)
 	end,
-	setupMockServices = function(List) --[[ Line: 16 ]]
+	setupMockServices = function(List)
 		-- upvalues: ServiceLocatorModule (copy)
 		ServiceLocatorModule.clear()
 		

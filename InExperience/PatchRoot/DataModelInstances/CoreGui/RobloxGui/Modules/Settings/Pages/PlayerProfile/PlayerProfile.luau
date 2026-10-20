@@ -24,16 +24,16 @@ local ProfileWrapperContextModule = require(CorePackages.Workspace.Packages.Prof
 local AddConnectionButtonModule = require(script.Parent.AddConnectionButton)
 local ProfileHeaderModule = require(script.Parent.ProfileHeader)
 
-return ReactModule.memo(function(p1) --[[ Line: 41 ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ProfileWrapperContextModule (copy), PeopleServiceModule (copy), Players (copy), SignalsReactModule (copy), UseDeviceOrientationFunction (copy), UseBreakpointXOrLargerFunction (copy), ResponsiveModule (copy), RobloxAppEnumsModule (copy), UseDynamicSizeMarginModule (copy), UseDispatchFunction (copy), GetProfilePlatformModule (copy), EnumsModule (copy), View (copy), IconButton (copy), IconName (copy), Text (copy), ScrollView (copy), Visibility (copy), ProfileHeaderModule (copy), AddConnectionButtonModule (copy), CurrentlyWearingModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseContextResult = ReactModule.useContext(ProfileWrapperContextModule)
 	local ProfileId = UseContextResult.profileId
 	local ProfileType = UseContextResult.profileType
-	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function() --[[ Line: 48 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function()
 		-- upvalues: PeopleServiceModule (upval)
 		return PeopleServiceModule.getService("FriendStatusStore")
-	end, {}).getShouldShowFriendButton(p1.userId, (ReactModule.useMemo(function() --[[ Line: 52 ]]
+	end, {}).getShouldShowFriendButton(p1.userId, (ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), Players (upval)
 		return if p1.userId then Players:GetPlayerByUserId(p1.userId) else nil
 	end, { p1.userId }))))
@@ -44,7 +44,7 @@ return ReactModule.memo(function(p1) --[[ Line: 41 ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local UseDispatchResult = UseDispatchFunction()
-	ReactModule.useEffect(function() --[[ Line: 71 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseDispatchResult (copy), GetProfilePlatformModule (upval), ProfileId (copy), ProfileType (copy), EnumsModule (upval), UseStateResult2 (copy), UseStateResult2_1 (copy)
 		UseDispatchResult(GetProfilePlatformModule.API({
 			includeComponentOrdering = false,
@@ -55,11 +55,11 @@ return ReactModule.memo(function(p1) --[[ Line: 41 ]]
 				{ component = EnumsModule.Components.CurrentlyWearing },
 				{ component = EnumsModule.Components.UserProfileHeader }
 			}
-		})):andThen(function(_) --[[ Line: 86 ]]
+		})):andThen(function(_)
 			-- upvalues: UseStateResult2 (upval), UseStateResult2_1 (upval)
 			UseStateResult2(false)
 			UseStateResult2_1(false)
-		end):catch(function(_) --[[ Line: 90 ]]
+		end):catch(function(_)
 			-- upvalues: UseStateResult2 (upval), UseStateResult2_1 (upval)
 			UseStateResult2(false)
 			UseStateResult2_1(true)

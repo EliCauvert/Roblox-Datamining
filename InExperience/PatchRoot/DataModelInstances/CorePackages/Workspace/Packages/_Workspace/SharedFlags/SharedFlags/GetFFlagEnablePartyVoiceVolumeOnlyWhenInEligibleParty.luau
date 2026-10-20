@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnablePartyVoiceVolumeOnlyWhenInEligibleParty", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetEngineFeature("PartyVoiceVolume") and game:GetFastFlag("EnablePartyVoiceVolumeOnlyWhenInEligibleParty")
 end

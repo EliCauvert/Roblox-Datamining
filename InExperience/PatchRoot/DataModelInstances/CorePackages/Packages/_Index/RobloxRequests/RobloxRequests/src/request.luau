@@ -12,7 +12,7 @@ local CacheModule = require(Src.cache)
 local RequestModule = {}
 RequestModule.__index = RequestModule
 
-function RequestModule.new(Text: string, Input_url, Elapsed) --[[ Line: 26 ]]
+function RequestModule.new(Text: string, Input_url, Elapsed)
 	-- upvalues: RequestModule (copy), UrlModule (copy), RatelimitModule (copy), CookiesModule (copy)
 	local self = setmetatable({}, RequestModule)
 	local Elapsed1 = Elapsed or {}
@@ -51,7 +51,7 @@ function RequestModule.new(Text: string, Input_url, Elapsed) --[[ Line: 26 ]]
 	return self
 end
 
-function RequestModule:set_headers(List) --[[ Line: 87 ]]
+function RequestModule:set_headers(List)
 	for i, value in pairs(List) do
 		self.headers[i] = value
 	end
@@ -60,7 +60,7 @@ end
 
 RequestModule.update_headers = UtilModule.deprecate(RequestModule.set_headers, "0.5", "update_headers")
 
-function RequestModule:set_query(Query) --[[ Line: 98 ]]
+function RequestModule:set_query(Query)
 	for i, value in pairs(Query) do
 		self.query[i] = value
 	end
@@ -71,7 +71,7 @@ end
 
 RequestModule.update_query = UtilModule.deprecate(RequestModule.set_headers, "0.5", "update_query")
 
-function RequestModule:set_data(EncResult) --[[ Line: 111 ]]
+function RequestModule:set_data(EncResult)
 	-- upvalues: JsonModule (copy)
 	if type(EncResult) == "table" then
 		if EncResult.__FormData then
@@ -87,7 +87,7 @@ function RequestModule:set_data(EncResult) --[[ Line: 111 ]]
 	return self
 end
 
-function RequestModule._ratelimit(p1): boolean --[[ Line: 129 ]]
+function RequestModule._ratelimit(p1): boolean
 	for _, ratelimit in ipairs(p1._ratelimits) do
 		if not ratelimit:request() then
 			return false
@@ -96,7 +96,7 @@ function RequestModule._ratelimit(p1): boolean --[[ Line: 129 ]]
 	return true
 end
 
-function RequestModule:_send() --[[ Line: 141 ]]
+function RequestModule:_send()
 	-- upvalues: CacheModule (copy), ResponseModule (copy), HttpService (copy)
 	local config = {
 		Url = self.url:build(),
@@ -154,9 +154,9 @@ function RequestModule:_send() --[[ Line: 141 ]]
 	return NewResult
 end
 
-function RequestModule.send(p2, p3) --[[ Line: 212 ]]
+function RequestModule.send(p2, p3)
 	-- upvalues: PromiseModule (copy)
-	return if p3 then PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ()) --[[ Line: 218 ]]
+	return if p3 then PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ())
 		-- upvalues: p2 (copy)
 		local Success, Result = pcall(p2._send, p2)
 		
@@ -175,7 +175,7 @@ function RequestModule.send(p2, p3) --[[ Line: 212 ]]
 	end) else p2:_send()
 end
 
-function RequestModule:promise() --[[ Line: 238 ]]
+function RequestModule:promise()
 	return self:send(true)
 end
 

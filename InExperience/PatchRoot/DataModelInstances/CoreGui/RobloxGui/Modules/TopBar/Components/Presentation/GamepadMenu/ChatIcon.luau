@@ -15,9 +15,9 @@ ChatIcon.validateProps = TModule.strictInterface({
 	unreadMessages = TModule.integer
 })
 
-function ChatIcon.render(p1) --[[ Line: 24 ]]
+function ChatIcon.render(p1)
 	-- upvalues: WithStyleFunction (copy), IconsMenuChatOn (copy), IconsMenuChatOff (copy), RoactModule (copy), ImageSetLabel (copy), Badge (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 25 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: IconsMenuChatOn (upval), p1 (copy), IconsMenuChatOff (upval), RoactModule (upval), ImageSetLabel (upval), Badge (upval)
 		local Theme = p2.Theme
 		
@@ -39,7 +39,7 @@ function ChatIcon.render(p1) --[[ Line: 24 ]]
 	end)
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p1) --[[ Line: 52 | Named "mapStateToProps" ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p1)
 	return {
 		chatVisible = p1.chat.visible,
 		unreadMessages = p1.chat.unreadMessages

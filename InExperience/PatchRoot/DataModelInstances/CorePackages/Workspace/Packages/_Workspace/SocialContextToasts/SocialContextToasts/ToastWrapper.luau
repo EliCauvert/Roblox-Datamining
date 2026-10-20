@@ -14,9 +14,9 @@ local GetFFlagSocialContextToastEventStreamFunction = require(Parent.SharedFlags
 local _Vector2 = Vector2.new(48, 48)
 local _Vector2_1 = Vector2.new(36, 36)
 
-local function _(Users, p1, ShowEmphasisBorder) --[[ Line: 34 | Named "makeCoPlayFooter" ]]
+local function _(Users, p1, ShowEmphasisBorder)
 	-- upvalues: ReactModule (copy), CoPlayFooter (copy), Colors (copy)
-	return function(p2) --[[ Line: 35 ]]
+	return function(p2)
 		-- upvalues: Users (copy), ReactModule (upval), CoPlayFooter (upval), ShowEmphasisBorder (copy), p1 (copy), Colors (upval)
 		local Offset: number = p2.Size.X.Offset
 		local Offset1 = if #Users == 1 then Offset else (Offset - -9) / 2
@@ -42,14 +42,14 @@ end
 
 local config = { areUsersActive = true }
 
-return function(p1) --[[ Line: 62 | Named "ToastWrapper" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), GetFFlagSocialContextToastEventStreamFunction (copy), ReactModule (copy), SocialContextToastEventsModule (copy), SocialContextToastAnalyticsActionTypesModule (copy), UseStyleFunction (copy), GetLocalizedStringsFunction (copy), Toast (copy), CoPlayFooter (copy), Colors (copy), _Vector2 (copy), _Vector2_1 (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseResult = nil
 	
 	if GetFFlagSocialContextToastEventStreamFunction() then
 		local AnalyticsProps = JoinResult.analyticsProps
-		UseResult = ReactModule.useCallback(function() --[[ Line: 68 ]]
+		UseResult = ReactModule.useCallback(function()
 			-- upvalues: JoinResult (copy), SocialContextToastEventsModule (upval), AnalyticsProps (copy), SocialContextToastAnalyticsActionTypesModule (upval)
 			SocialContextToastEventsModule(AnalyticsProps.eventIngest, {
 				toastType = AnalyticsProps.toastType,
@@ -64,7 +64,7 @@ return function(p1) --[[ Line: 62 | Named "ToastWrapper" ]]
 		if GetFFlagSocialContextToastEventStreamFunction() then
 			JoinResult.onActivated = UseResult
 		else
-			function JoinResult.onActivated() --[[ Line: 89 ]] end
+			function JoinResult.onActivated() end
 		end
 	end
 	local UseStyleResult = UseStyleFunction()
@@ -77,7 +77,7 @@ return function(p1) --[[ Line: 62 | Named "ToastWrapper" ]]
 	
 	if UserIdList then
 		local AreUsersActive = JoinResult.areUsersActive
-		IconImage = function(p2) --[[ Line: 35 ]]
+		IconImage = function(p2)
 			-- upvalues: UserIdList (copy), ReactModule (upval), CoPlayFooter (upval), AreUsersActive (copy), UseStyleResult (copy), Colors (upval)
 			local Offset: number = p2.Size.X.Offset
 			local Offset1 = if #UserIdList == 1 then Offset else (Offset - -9) / 2

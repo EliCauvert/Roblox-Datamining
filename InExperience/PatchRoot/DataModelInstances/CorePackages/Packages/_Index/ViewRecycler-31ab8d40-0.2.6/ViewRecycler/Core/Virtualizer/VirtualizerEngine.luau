@@ -24,15 +24,15 @@ local ViewportModelModule = require(ViewRecycler.Core.Virtualizer.ViewportModel)
 local VirtualizerSnapshotStoreModule = require(ViewRecycler.Core.Virtualizer.VirtualizerSnapshotStore)
 local Frozen = table.freeze({ firstIndex = 1, lastIndex = 0 })
 
-local function _(p1, p2): boolean --[[ Line: 58 | Named "sameRange" ]]
+local function _(p1, p2): boolean
 	return p1.firstIndex == p2.firstIndex and p1.lastIndex == p2.lastIndex
 end
 
-local _ = function(p1, p2): boolean --[[ Line: 62 | Named "sameScrollState" ]]
+local _ = function(p1, p2): boolean
 	return p1.scrollOffset == p2.scrollOffset and (p1.viewportLength == p2.viewportLength and (p1.contentLength == p2.contentLength and (p1.distanceFromEnd == p2.distanceFromEnd and p1.atStart == p2.atStart))) and p1.atEnd == p2.atEnd
 end
 
-return function(p1) --[[ Line: 71 | Named "createVirtualizerEngine" ]]
+return function(p1)
 	-- upvalues: OverscanPolicyModule (copy), ItemRevisionTrackerModule (copy), CreatePinnedItemPlannerModule (copy), ViewportModelModule (copy), VirtualizerSnapshotStoreModule (copy), DataPrefetchControllerModule (copy), ScrollPositionControllerModule (copy), Frozen (copy), VirtualizerEffectTypeModule (copy), DiagnosticsModule (copy), TypesModule (copy), CloneFrozenFunction (copy), DataSourceChangeTypeModule (copy), DataPrefetchModule (copy), External (copy), ScrollObservationKindModule (copy), Internal (copy), VirtualizerQueryTypeModule (copy)
 	local Layout: boolean = p1.overscan == nil or p1.overscanPolicy == nil
 	assert(Layout, "VirtualizerEngine: overscan and overscanPolicy are mutually exclusive")
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 71 | Named "createVirtualizerEngine" ]]
 	local PinnedItemPlannerModule = CreatePinnedItemPlannerModule(DataSource, config.pinnedItems)
 	local HasIsItemStickyHeader: boolean = config.pinnedItems.isItemStickyHeader ~= nil or config.pinnedItems.pinnedStartItem ~= nil or config.pinnedItems.pinnedEndItem ~= nil
 	local ViewportModelModuleResult = ViewportModelModule({
-		getLayout = function() --[[ Line: 101 ]]
+		getLayout = function()
 			-- upvalues: Layout (ref)
 			return Layout
 		end,
@@ -75,15 +75,15 @@ return function(p1) --[[ Line: 71 | Named "createVirtualizerEngine" ]]
 	})
 	local DataPrefetchControllerModuleResult = DataPrefetchControllerModule(config.dataPrefetch)
 	local ScrollPositionControllerModuleResult = ScrollPositionControllerModule({
-		shouldPreserveUserPosition = function() --[[ Line: 119 ]]
+		shouldPreserveUserPosition = function()
 			-- upvalues: PreserveScrollPositionOnChange (ref)
 			return PreserveScrollPositionOnChange
 		end,
-		getItemCount = function() --[[ Line: 122 ]]
+		getItemCount = function()
 			-- upvalues: DataSource (ref)
 			return DataSource.getItemCount()
 		end,
-		getItemKey = function(FirstIndex) --[[ Line: 125 ]]
+		getItemKey = function(FirstIndex)
 			-- upvalues: DataSource (ref)
 			return DataSource.getItemKey(FirstIndex)
 		end,
@@ -134,7 +134,7 @@ return function(p1) --[[ Line: 71 | Named "createVirtualizerEngine" ]]
 	local T = nil
 	local Config = nil
 	
-	local function _(Key) --[[ Line: 183 | Named "advanceVersion" ]]
+	local function _(Key)
 		-- upvalues: T (ref), config1 (copy)
 		local T1 = T
 		
@@ -146,7 +146,7 @@ return function(p1) --[[ Line: 71 | Named "createVirtualizerEngine" ]]
 		end
 	end
 	
-	local function dataKeys() --[[ Line: 192 ]]
+	local function dataKeys()
 		-- upvalues: DataSource (ref)
 		local Buffer = table.create(DataSource.getItemCount())
 		
@@ -156,7 +156,7 @@ return function(p1) --[[ Line: 71 | Named "createVirtualizerEngine" ]]
 		return Buffer
 	end
 	
-	local _ = function(List, Event) --[[ Line: 200 | Named "addDiagnostic" ]]
+	local _ = function(List, Event)
 		-- upvalues: VirtualizerEffectTypeModule (upval)
 		table.insert(List, {
 			type = VirtualizerEffectTypeModule.Diagnostic,
@@ -164,7 +164,7 @@ return function(p1) --[[ Line: 71 | Named "createVirtualizerEngine" ]]
 		})
 	end
 	
-	local _ = function(List, RangeKind, p2) --[[ Line: 204 | Named "reportRange" ]]
+	local _ = function(List, RangeKind, p2)
 		-- upvalues: p1 (copy), DiagnosticsModule (upval), VirtualizerEffectTypeModule (upval)
 		if p1.diagnostics ~= nil then
 			table.insert(List, {
@@ -179,7 +179,7 @@ return function(p1) --[[ Line: 71 | Named "createVirtualizerEngine" ]]
 		end
 	end
 	
-	local function refreshRanges(List): boolean --[[ Line: 219 ]]
+	local function refreshRanges(List): boolean
 		-- upvalues: ViewportModelModuleResult (copy), VisibleRange (ref), ExpandIndexRangeResult (ref), OverscanPolicy (ref), Layout (ref), Config (ref), config1 (copy), TypesModule (upval), Frozen (upval), T (ref), VirtualizerEffectTypeModule (upval), CloneFrozenFunction (upval), DiagnosticsModule (upval), p1 (copy)
 		ViewportModelModuleResult.refreshContentMetrics()
 		local VisibleRange1 = VisibleRange
@@ -269,7 +269,7 @@ return function(p1) --[[ Line: 71 | Named "createVirtualizerEngine" ]]
 		return Inverted1
 	end
 	
-	local function updatePrefetch(List) --[[ Line: 292 ]]
+	local function updatePrefetch(List)
 		-- upvalues: config2 (copy), DataSource (ref), ExpandIndexRangeResult (ref), config (ref), DataPrefetchControllerModuleResult (copy), VirtualizerEffectTypeModule (upval)
 		config2.dataSource = DataSource
 		config2.mountedRange = ExpandIndexRangeResult
@@ -283,7 +283,7 @@ return function(p1) --[[ Line: 71 | Named "createVirtualizerEngine" ]]
 		end
 	end
 	
-	local function commitSnapshot() --[[ Line: 304 ]]
+	local function commitSnapshot()
 		-- upvalues: ViewportModelModuleResult (copy), VirtualizerSnapshotStoreModuleResult (copy), T (ref), config1 (copy), Revisions (copy), config3 (copy), DataSource (ref), Layout (ref), VisibleRange (ref), ExpandIndexRangeResult (ref), HasIsItemStickyHeader (ref)
 		local ScrollState = ViewportModelModuleResult.getScrollState()
 		local ScrollState1 = VirtualizerSnapshotStoreModuleResult.getSnapshot().scrollState
@@ -314,7 +314,7 @@ return function(p1) --[[ Line: 71 | Named "createVirtualizerEngine" ]]
 		return VirtualizerSnapshotStoreModuleResult.commit(config3)
 	end
 	
-	local function captureAnchorEvidence() --[[ Line: 328 ]]
+	local function captureAnchorEvidence()
 		-- upvalues: TypesModule (upval), VisibleRange (ref), ViewportModelModuleResult (copy), DataSource (ref)
 		if TypesModule.isIndexRangeEmpty(VisibleRange) then
 			return nil
@@ -336,7 +336,7 @@ return function(p1) --[[ Line: 71 | Named "createVirtualizerEngine" ]]
 		}
 	end
 	
-	local function applyCorrection(List, ApplyGeometryChangeResult) --[[ Line: 348 ]]
+	local function applyCorrection(List, ApplyGeometryChangeResult)
 		-- upvalues: ViewportModelModuleResult (copy), VirtualizerEffectTypeModule (upval), p1 (copy), DiagnosticsModule (upval)
 		if ApplyGeometryChangeResult == nil then return end
 		local ScrollOffset = ViewportModelModuleResult.getScrollOffset()
@@ -365,7 +365,7 @@ return function(p1) --[[ Line: 71 | Named "createVirtualizerEngine" ]]
 		end
 	end
 	
-	local function resetLayout(Keys) --[[ Line: 375 ]]
+	local function resetLayout(Keys)
 		-- upvalues: dataKeys (copy), ItemRevisionTrackerModuleResult (copy), DataSourceChangeTypeModule (upval), Layout (ref), ViewportModelModuleResult (copy)
 		local Keys1 = Keys or dataKeys()
 		ItemRevisionTrackerModuleResult.applyChange({ type = DataSourceChangeTypeModule.Reset, keys = Keys1 })
@@ -373,7 +373,7 @@ return function(p1) --[[ Line: 71 | Named "createVirtualizerEngine" ]]
 		ViewportModelModuleResult.refreshContentMetrics()
 	end
 	
-	local function applyPolicy(Policy) --[[ Line: 382 ]]
+	local function applyPolicy(Policy)
 		-- upvalues: DataPrefetchModule (upval), config (ref), OverscanPolicy (ref), OverscanPolicyModule (upval), T (ref), config1 (copy), ViewportModelModuleResult (copy), PreserveScrollPositionOnChange (ref), PinnedItemPlannerModule (copy), HasIsItemStickyHeader (ref)
 		assert(Policy.overscan == nil or Policy.overscanPolicy == nil, "VirtualizerEngine: overscan and overscanPolicy are mutually exclusive")
 		assert(Policy.overscan == nil or Policy.overscan >= 0 and Policy.overscan % 1 == 0, "VirtualizerEngine: overscan must be a non-negative integer")
@@ -435,7 +435,7 @@ return function(p1) --[[ Line: 71 | Named "createVirtualizerEngine" ]]
 		config = Policy
 	end
 	
-	local function execute(p2, List) --[[ Line: 429 ]]
+	local function execute(p2, List)
 		-- upvalues: External (upval), Flag (ref), dataKeys (copy), resetLayout (copy), PinnedItemPlannerModule (copy), DataSourceChangeTypeModule (upval), DataSource (ref), T (ref), config1 (copy), ViewportModelModuleResult (copy), ScrollObservationKindModule (upval), ScrollPositionControllerModuleResult (copy), VirtualizerEffectTypeModule (upval), Layout (ref), HasIsItemStickyHeader (ref), applyPolicy (copy), Internal (upval), captureAnchorEvidence (copy), DiagnosticsModule (upval), ItemRevisionTrackerModuleResult (copy), applyCorrection (copy), p1 (copy), v1 (ref), DataPrefetchControllerModuleResult (copy)
 		local ScrollToOffsetResult = nil
 		
@@ -593,7 +593,7 @@ return function(p1) --[[ Line: 71 | Named "createVirtualizerEngine" ]]
 					source = DiagnosticsModule.ScrollCorrectionSource.Data,
 					dataSourceChange = p2.changeBatch,
 					anchorEvidence = CaptureAnchorEvidenceResult
-				}, function() --[[ Line: 521 ]]
+				}, function()
 					-- upvalues: p2 (copy), ItemRevisionTrackerModuleResult (upval), ApplyDataSourceChangeResult (ref), Layout (upval), PinnedItemPlannerModule (upval), ViewportModelModuleResult (upval)
 					for _, change in p2.changeBatch.changes do
 						ItemRevisionTrackerModuleResult.applyChange(change)
@@ -646,7 +646,7 @@ return function(p1) --[[ Line: 71 | Named "createVirtualizerEngine" ]]
 					source = DiagnosticsModule.ScrollCorrectionSource.Measurement
 				}
 				local Start = PinnedItemPlannerModule.getContentInsets().start
-				applyCorrection(List, (ScrollPositionControllerModuleResult.applyGeometryChange(config, function() --[[ Line: 556 ]]
+				applyCorrection(List, (ScrollPositionControllerModuleResult.applyGeometryChange(config, function()
 					-- upvalues: p2 (copy), DataSource (upval), ItemRevisionTrackerModuleResult (upval), Layout (upval), Type (ref), ApplyDataSourceChangeResult1 (ref), Flag2 (ref), ApplyDataSourceChangeResult (ref), PinnedItemPlannerModule (upval), config (copy), Start (copy), ViewportModelModuleResult (upval)
 					for _, measurement in p2.measurements do
 						if measurement.itemIndex == nil or measurement.pinnedPosition ~= nil then
@@ -810,7 +810,7 @@ return function(p1) --[[ Line: 71 | Named "createVirtualizerEngine" ]]
 	end
 	
 	return {
-		dispatch = function(p3) --[[ Line: 636 ]]
+		dispatch = function(p3)
 			-- upvalues: Flag1 (ref), v1 (ref), External (upval), T (ref), execute (copy), refreshRanges (copy), updatePrefetch (copy), commitSnapshot (copy)
 			assert(not Flag1, "VirtualizerEngine: cannot dispatch during a Geometry transaction")
 			assert(not v1 or p3.type == External.Destroy, "VirtualizerEngine: cannot dispatch after destruction")
@@ -843,7 +843,7 @@ return function(p1) --[[ Line: 71 | Named "createVirtualizerEngine" ]]
 			}
 		end,
 		getSnapshot = VirtualizerSnapshotStoreModuleResult.getSnapshot,
-		query = function(p3) --[[ Line: 668 ]]
+		query = function(p3)
 			-- upvalues: VirtualizerSnapshotStoreModuleResult (copy), VirtualizerQueryTypeModule (upval), Layout (ref), ViewportModelModuleResult (copy), DataSource (ref)
 			local Snapshot = VirtualizerSnapshotStoreModuleResult.getSnapshot()
 			

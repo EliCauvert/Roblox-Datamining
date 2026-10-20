@@ -14,8 +14,8 @@ return require(SocialCarousel.Parent.React).createContext({
 	source = nil,
 	navigateToQRCodePage = nil,
 	isLoading = false,
-	eventIngest = function() --[[ Line: 32 ]] end,
-	appAnalytics = function() --[[ Line: 33 ]] end,
+	eventIngest = function() end,
+	appAnalytics = function() end,
 	tiles = {},
-	onSuccessfulRender = function() --[[ Line: 43 ]] end
+	onSuccessfulRender = function() end
 })

@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("UGCValidationMaxEmissiveStrengthForAreaChecks", 40)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastInt("UGCValidationMaxEmissiveStrengthForAreaChecks")
 end

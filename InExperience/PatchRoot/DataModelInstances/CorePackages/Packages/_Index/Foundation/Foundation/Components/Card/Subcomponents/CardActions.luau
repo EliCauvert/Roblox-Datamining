@@ -8,7 +8,7 @@ local _ = require(script.Parent.Parent.useCardVariants)
 local Icon = require(Parent.BuilderIcons).Icon
 local Small = require(Foundation.Enums.InputSize).Small
 
-return function(p1) --[[ Line: 31 | Named "CardActions" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ViewModule (copy), IconButtonModule (copy), Icon (copy), ButtonVariantModule (copy), Small (copy)
 	return ReactModule.createElement(ViewModule, {
 		ZIndex = 2,

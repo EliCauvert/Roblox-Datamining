@@ -1,6 +1,6 @@
 ﻿local CHATPLATFORMBASEURLModule = require(script:FindFirstAncestor("AppChatNetworking").url.CHAT_PLATFORM_BASE_URL)
 
-return (require(script.Parent.RoduxNetworking).POST(script.Name, function(Callback, p1) --[[ Line: 9 ]]
+return (require(script.Parent.RoduxNetworking).POST(script.Name, function(Callback, p1)
 	-- upvalues: CHATPLATFORMBASEURLModule (copy)
 	local BodyResult = Callback(CHATPLATFORMBASEURLModule):path("v1"):path("get-chat-moderation-statuses"):body({ ids = p1 or {} })
 	

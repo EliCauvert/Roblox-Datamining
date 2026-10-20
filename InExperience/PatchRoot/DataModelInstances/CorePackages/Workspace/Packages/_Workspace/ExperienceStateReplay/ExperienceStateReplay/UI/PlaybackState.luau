@@ -1,5 +1,5 @@
 ﻿return {
-	new = function(Playing, Reversing, Loading) --[[ Line: 9 ]]
+	new = function(Playing, Reversing, Loading)
 		return {
 			Playing = Playing,
 			Reversing = Reversing,

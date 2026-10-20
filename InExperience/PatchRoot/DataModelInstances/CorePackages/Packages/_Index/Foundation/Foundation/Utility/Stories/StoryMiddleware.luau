@@ -11,21 +11,21 @@ local TokenOverridesStoreModule = require(script.Parent.TokenOverridesStore)
 local IsPluginSecurityModule = require(Foundation.Utility.isPluginSecurity)
 local UseStyleSheetFunction = require(Foundation.Providers.Style.StyleSheetContext).useStyleSheet
 
-local function useTokenOverrides() --[[ Line: 21 ]]
+local function useTokenOverrides()
 	-- upvalues: TokenOverridesStoreModule (copy), ReactModule (copy)
 	local KenOverridesStoreModule = TokenOverridesStoreModule()
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 23 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 		-- upvalues: KenOverridesStoreModule (copy)
 		return KenOverridesStoreModule.getTokenOverrides()
 	end)
-	ReactModule.useEffect(function() --[[ Line: 27 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: KenOverridesStoreModule (copy), UseStateResult2 (copy)
-		local SubscribeResult = KenOverridesStoreModule.subscribe(function(p1) --[[ Line: 28 ]]
+		local SubscribeResult = KenOverridesStoreModule.subscribe(function(p1)
 			-- upvalues: UseStateResult2 (upval)
 			UseStateResult2(p1)
 		end)
 		
-		return function() --[[ Line: 31 ]]
+		return function()
 			-- upvalues: SubscribeResult (copy)
 			SubscribeResult()
 		end
@@ -34,14 +34,14 @@ local function useTokenOverrides() --[[ Line: 21 ]]
 	return UseStateResult
 end
 
-local function StyleLinkPortal(p1) --[[ Line: 51 ]]
+local function StyleLinkPortal(p1)
 	-- upvalues: UseStyleSheetFunction (copy), ReactRobloxModule (copy), ReactModule (copy)
 	local UseStyleSheetResult = UseStyleSheetFunction()
 	
 	return if UseStyleSheetResult and p1.overlay then ReactRobloxModule.createPortal(ReactModule.createElement("StyleLink", { StyleSheet = UseStyleSheetResult }), p1.overlay) else nil
 end
 
-local function useCreateOverlay(p1) --[[ Line: 66 ]]
+local function useCreateOverlay(p1)
 	-- upvalues: TypesModule (copy), ReactModule (copy)
 	local FlipbookStoryProps = TypesModule.toFlipbookStoryProps(p1)
 	local Widget = if FlipbookStoryProps then FlipbookStoryProps.widget else p1.focus
@@ -51,12 +51,12 @@ local function useCreateOverlay(p1) --[[ Line: 66 ]]
 	if UseRefResult.current.Parent ~= Widget then
 		UseRefResult.current.Parent = Widget
 	end
-	ReactModule.useEffect(function() --[[ Line: 80 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy)
 		UseRefResult.current.Size = UDim2.fromScale(1, 1)
 		UseRefResult.current.BackgroundTransparency = 1
 		
-		return function() --[[ Line: 84 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			UseRefResult.current:Destroy()
 		end
@@ -65,9 +65,9 @@ local function useCreateOverlay(p1) --[[ Line: 66 ]]
 	return if IsStorybookEmbed then nil else UseRefResult.current
 end
 
-return function(p1) --[[ Line: 92 | Named "StoryMiddleware" ]]
+return function(p1)
 	-- upvalues: useCreateOverlay (copy), ColorModeModule (copy), ThemeNameModule (copy), useTokenOverrides (copy), TypesModule (copy), DeviceModule (copy), ReactModule (copy), FoundationModule (copy), IsPluginSecurityModule (copy), StyleLinkPortal (copy)
-	return function(p2) --[[ Line: 94 ]]
+	return function(p2)
 		-- upvalues: useCreateOverlay (upval), ColorModeModule (upval), ThemeNameModule (upval), useTokenOverrides (upval), TypesModule (upval), DeviceModule (upval), ReactModule (upval), FoundationModule (upval), IsPluginSecurityModule (upval), p1 (copy), StyleLinkPortal (upval)
 		local UseCreateOverlayResult = useCreateOverlay(p2)
 		local ColorMode = p2.colorMode or p2.theme

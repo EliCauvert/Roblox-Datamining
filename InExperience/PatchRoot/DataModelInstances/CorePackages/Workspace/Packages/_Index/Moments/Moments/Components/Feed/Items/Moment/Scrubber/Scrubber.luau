@@ -10,14 +10,14 @@ local ControlState = FoundationModule.Enums.ControlState
 local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 local UseSignalBindingFunction = require(Parent.SignalsReact).useSignalBinding
 
-return ReactModule.memo(function(Frame) --[[ Line: 23 | Named "Scrubber" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: MomentContextModule (copy), ReactModule (copy), UseMomentProgressModule (copy), UseSignalBindingFunction (copy), View (copy), StateLayerAffordance (copy), ControlState (copy), ScrubberBarModule (copy), PreviewPopoverModule (copy)
 	local UseMomentResult = MomentContextModule.useMoment()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function(p1): number --[[ Line: 31 ]]
+	local UseResult = ReactModule.useCallback(function(p1): number
 		-- upvalues: UseRefResult (copy), UseMomentResult (copy)
 		local Current = UseRefResult.current
 		
@@ -33,7 +33,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 23 | Named "Scrubber" ]]
 	local MapResult = ReactModule.joinBindings({
 		UseSignalBindingFunction(UseMomentResult.store.getScrubPosition),
 		(UseSignalBindingFunction((UseMomentProgressModule())))
-	}):map(function(Entry) --[[ Line: 51 ]]
+	}):map(function(Entry)
 		local Entry1 = Entry[1]
 		local Entry2 = Entry[2]
 		local Ratio = if Entry1 == nil then Entry2.ratio else Entry1
@@ -44,7 +44,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 23 | Named "Scrubber" ]]
 			ratio = Ratio
 		}
 	end)
-	local MapResult1 = MapResult:map(function(p1) --[[ Line: 63 ]]
+	local MapResult1 = MapResult:map(function(p1)
 		return p1.ratio
 	end)
 	
@@ -52,7 +52,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 23 | Named "Scrubber" ]]
 		tag = "size-full-300",
 		LayoutOrder = Frame.LayoutOrder,
 		stateLayer = { affordance = StateLayerAffordance.None },
-		onStateChanged = function(Hover) --[[ Line: 71 ]]
+		onStateChanged = function(Hover)
 			-- upvalues: ControlState (upval), UseStateResult2 (copy), UseStateResult2_1 (copy)
 			local IsHoverMatch: boolean = Hover == ControlState.Pressed or Hover == ControlState.SelectedPressed
 			UseStateResult2(Hover == ControlState.Hover or Hover == ControlState.Selected)
@@ -65,7 +65,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 23 | Named "Scrubber" ]]
 				DragAxis = Vector2.new(1, 0),
 				DragStyle = Enum.UIDragDetectorDragStyle.Scriptable,
 				ResponseStyle = Enum.UIDragDetectorResponseStyle.CustomScale,
-				[ReactModule.Event.DragStart] = function(_, p1) --[[ Line: 89 ]]
+				[ReactModule.Event.DragStart] = function(_, p1)
 					-- upvalues: UseStateResult2_2 (copy), UseMomentResult (copy), UseResult (copy)
 					UseStateResult2_2(true)
 					
@@ -74,11 +74,11 @@ return ReactModule.memo(function(Frame) --[[ Line: 23 | Named "Scrubber" ]]
 					end
 					UseResult(p1)
 				end,
-				[ReactModule.Event.DragContinue] = function(_, p1) --[[ Line: 97 ]]
+				[ReactModule.Event.DragContinue] = function(_, p1)
 					-- upvalues: UseResult (copy)
 					UseResult(p1)
 				end,
-				[ReactModule.Event.DragEnd] = function(_, p1) --[[ Line: 100 ]]
+				[ReactModule.Event.DragEnd] = function(_, p1)
 					-- upvalues: UseResult (copy), UseMomentResult (copy), UseStateResult2_2 (copy)
 					local UseResultResult = UseResult(p1)
 					UseMomentResult.store.setScrubPosition(nil)

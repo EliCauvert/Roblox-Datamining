@@ -6,17 +6,17 @@ local ReactModule = require(Parent.React)
 local WorldCutoutTransitionModule = require(script.Parent.WorldCutoutTransition)
 local UserGameSettings = UserSettings():GetService("UserGameSettings")
 
-local function _(Frame: Frame) --[[ Line: 43 | Named "toRect" ]]
+local function _(Frame: Frame)
 	return if Frame == nil or Frame.AbsoluteSize.X <= 1 or Frame.AbsoluteSize.Y <= 1 then nil else Rect.new(Frame.AbsolutePosition, Frame.AbsolutePosition + Frame.AbsoluteSize)
 end
 
-local _ = function(p1, p2) --[[ Line: 52 | Named "toUnscrolledRect" ]]
+local _ = function(p1, p2)
 	local ScrollingFrame = p1:FindFirstAncestorWhichIsA("ScrollingFrame")
 	
 	return if ScrollingFrame == nil then p2 else Rect.new(p2.Min + ScrollingFrame.CanvasPosition, p2.Max + ScrollingFrame.CanvasPosition)
 end
 
-return function(Current) --[[ Line: 60 | Named "useLibraryWorldCutoutViewModel" ]]
+return function(Current)
 	-- upvalues: FoundationModule (copy), UserGameSettings (copy), ReactModule (copy), WorldCutoutTransitionModule (copy), MotionModule (copy), RunService (copy)
 	local ReducedMotion = FoundationModule.Hooks.usePreferences().reducedMotion or UserGameSettings.ReducedMotion
 	local UseRefResult = ReactModule.useRef(WorldCutoutTransitionModule.initialState)
@@ -33,7 +33,7 @@ return function(Current) --[[ Line: 60 | Named "useLibraryWorldCutoutViewModel" 
 	local IsHome: boolean = Current.isAvailable and (Current.isHome and (Current.isOpen and UseStateResult == "Home"))
 	local UseRefResult3 = ReactModule.useRef(IsHome)
 	UseRefResult3.current = IsHome
-	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 77 ]]
+	local UseResult = ReactModule.useCallback(function(p1)
 		-- upvalues: UseRefResult (copy), WorldCutoutTransitionModule (upval), UseStateResult2 (copy)
 		local Current = UseRefResult.current
 		UseRefResult.current = WorldCutoutTransitionModule.reduce(Current, p1)
@@ -47,7 +47,7 @@ return function(Current) --[[ Line: 60 | Named "useLibraryWorldCutoutViewModel" 
 	local UseRefResult5 = ReactModule.useRef(nil)
 	local UseRefResult6 = ReactModule.useRef(nil)
 	local UseRefResult7 = ReactModule.useRef(nil)
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 92 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult6 (copy), UseBindingResult2_1 (copy), UseRefResult4 (copy), UseBindingResult2 (copy), UseStateResult2_1 (copy), UseRefResult5 (copy), UseRefResult3 (copy), UseRefResult2 (copy)
 		local Current = UseRefResult6.current
 		local _Rect = if Current == nil or Current.AbsoluteSize.X <= 1 or Current.AbsoluteSize.Y <= 1 then nil else Rect.new(Current.AbsolutePosition, Current.AbsolutePosition + Current.AbsoluteSize)
@@ -68,21 +68,21 @@ return function(Current) --[[ Line: 60 | Named "useLibraryWorldCutoutViewModel" 
 			UseRefResult2.current.onViewportRectChanged(UseRefResult5.current)
 		end
 	end, { UseBindingResult2, UseBindingResult2_1 })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 109 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseResult1 (copy), UseRefResult7 (copy)
 		UseResult1()
 		
 		if UseRefResult7.current == nil then
-			UseRefResult7.current = task.defer(function() --[[ Line: 112 ]]
+			UseRefResult7.current = task.defer(function()
 				-- upvalues: UseRefResult7 (upval), UseResult1 (upval)
 				UseRefResult7.current = nil
 				UseResult1()
 			end)
 		end
 	end, { UseResult1 })
-	ReactModule.useEffect(function() --[[ Line: 118 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult7 (copy)
-		return function() --[[ Line: 119 ]]
+		return function()
 			-- upvalues: UseRefResult7 (upval)
 			if UseRefResult7.current ~= nil then
 				task.cancel(UseRefResult7.current)
@@ -90,17 +90,17 @@ return function(Current) --[[ Line: 60 | Named "useLibraryWorldCutoutViewModel" 
 			end
 		end
 	end, {})
-	local UseResult3 = ReactModule.useCallback(function(Current) --[[ Line: 127 ]]
+	local UseResult3 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult4 (copy), UseResult2 (copy)
 		UseRefResult4.current = Current
 		UseResult2()
 	end, { UseResult2 })
-	local UseResult4 = ReactModule.useCallback(function(Current) --[[ Line: 132 ]]
+	local UseResult4 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult6 (copy), UseResult2 (copy)
 		UseRefResult6.current = Current
 		UseResult2()
 	end, { UseResult2 })
-	local UseResult5 = ReactModule.useCallback(function(): boolean --[[ Line: 137 ]]
+	local UseResult5 = ReactModule.useCallback(function(): boolean
 		-- upvalues: UseRefResult2 (copy), UseRefResult (copy), UseResult (copy)
 		local Current = UseRefResult2.current
 		local Phase = UseRefResult.current.phase
@@ -113,7 +113,7 @@ return function(Current) --[[ Line: 60 | Named "useLibraryWorldCutoutViewModel" 
 			return false
 		end
 	end, { UseResult })
-	local UseResult6 = ReactModule.useCallback(function(): boolean --[[ Line: 150 ]]
+	local UseResult6 = ReactModule.useCallback(function(): boolean
 		-- upvalues: UseRefResult (copy), UseResult (copy)
 		local Phase = UseRefResult.current.phase
 		
@@ -125,7 +125,7 @@ return function(Current) --[[ Line: 60 | Named "useLibraryWorldCutoutViewModel" 
 			return false
 		end
 	end, { UseResult })
-	ReactModule.useEffect(function() --[[ Line: 160 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsHome (copy), UseRefResult5 (copy), Current (copy), UseStateResult (copy)
 		if IsHome then
 			local Current1 = UseRefResult5.current
@@ -142,7 +142,7 @@ return function(Current) --[[ Line: 60 | Named "useLibraryWorldCutoutViewModel" 
 		IsHome, UseStateResult, Current.isAvailable, Current.isOpen,
 		Current.onViewportRectChanged, UseBindingResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 180 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), Current (copy), UseResult (copy)
 		if UseStateResult ~= "Home" and (not Current.isAvailable or not Current.isHome or UseStateResult == "World" and Current.isOpen) then
 			UseResult({ type = "Reset" })
@@ -154,11 +154,11 @@ return function(Current) --[[ Line: 60 | Named "useLibraryWorldCutoutViewModel" 
 		Current.isOpen,
 		UseResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 186 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: WorldCutoutTransitionModule (upval), UseStateResult (copy), RunService (upval), UseResult (copy), Progress (copy), UseBindingResult (copy), UseBindingResult1 (copy), UseRefResult2 (copy), UseRefResult1 (copy), MotionModule (upval), ReducedMotion (copy), UseRefResult (copy)
 		local IsTransitioning = WorldCutoutTransitionModule.isTransitioning(UseStateResult)
 		local Flag = false
-		local HeartbeatConnection = if IsTransitioning then RunService.Heartbeat:Connect(function() --[[ Line: 191 ]]
+		local HeartbeatConnection = if IsTransitioning then RunService.Heartbeat:Connect(function()
 			-- upvalues: UseResult (upval), Progress (upval), UseBindingResult (upval), UseBindingResult1 (upval), WorldCutoutTransitionModule (upval), UseRefResult2 (upval)
 			local UseResultResult = UseResult({ type = "Progress", progress = Progress:getValue() })
 			local Value = UseBindingResult:getValue()
@@ -176,7 +176,7 @@ return function(Current) --[[ Line: 60 | Named "useLibraryWorldCutoutViewModel" 
 				easingStyle = Enum.EasingStyle.Quad
 			})
 		}), {
-			onAnimationComplete = function(Enabled) --[[ Line: 209 ]]
+			onAnimationComplete = function(Enabled)
 				-- upvalues: Flag (ref), UseRefResult (upval), UseStateResult (upval), UseResult (upval)
 				if Enabled == true and not Flag and UseRefResult.current.phase == UseStateResult then
 					UseResult({ type = "Settle" })
@@ -184,7 +184,7 @@ return function(Current) --[[ Line: 60 | Named "useLibraryWorldCutoutViewModel" 
 			end
 		})
 		
-		return function() --[[ Line: 216 ]]
+		return function()
 			-- upvalues: Flag (ref), HeartbeatConnection (ref)
 			Flag = true
 			
@@ -196,13 +196,13 @@ return function(Current) --[[ Line: 60 | Named "useLibraryWorldCutoutViewModel" 
 		UseStateResult, ReducedMotion, Progress, UseBindingResult, UseBindingResult1,
 		UseResult
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 224 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), Progress (copy), UseBindingResult (copy), UseBindingResult1 (copy), WorldCutoutTransitionModule (upval)
 		return ReactModule.joinBindings({
 			progress = Progress,
 			cell = UseBindingResult,
 			content = UseBindingResult1
-		}):map(function(p1): Rect? --[[ Line: 226 ]]
+		}):map(function(p1): Rect?
 			-- upvalues: WorldCutoutTransitionModule (upval)
 			if p1.cell == nil or p1.content == nil then
 				return nil

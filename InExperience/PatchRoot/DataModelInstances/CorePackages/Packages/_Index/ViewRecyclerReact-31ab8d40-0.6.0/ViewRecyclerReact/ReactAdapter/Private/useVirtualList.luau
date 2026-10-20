@@ -9,7 +9,7 @@ local SignalsModule = require(ViewRecyclerReact.Parent.Signals)
 local _ = require(script.Parent.VirtualListShell)
 local UseCompositionPlacementModule = require(script.Parent.useCompositionPlacement)
 
-local function _(Callback: (any) -> (), Current) --[[ Line: 13 | Named "assignRef" ]]
+local function _(Callback: (any) -> (), Current)
 	if Callback == nil then return end
 	if type(Callback) == "function" then
 		Callback(Current)
@@ -20,7 +20,7 @@ local function _(Callback: (any) -> (), Current) --[[ Line: 13 | Named "assignRe
 	end
 end
 
-local _ = function(p1) --[[ Line: 24 | Named "toCorePinnedItem" ]]
+local _ = function(p1)
 	return if p1 == nil then nil else {
 		key = p1.key,
 		value = p1.value,
@@ -28,7 +28,7 @@ local _ = function(p1) --[[ Line: 24 | Named "toCorePinnedItem" ]]
 	}
 end
 
-local function configuration(Current, p1) --[[ Line: 35 ]]
+local function configuration(Current, p1)
 	local PinnedStartItem = Current.pinnedStartItem
 	local Config = if PinnedStartItem == nil then nil else {
 		key = PinnedStartItem.key,
@@ -70,20 +70,20 @@ local function configuration(Current, p1) --[[ Line: 35 ]]
 	}
 end
 
-local _ = function(p1, p2) --[[ Line: 65 | Named "hostTarget" ]]
+local _ = function(p1, p2)
 	return {
 		scrollingFrame = p1.current,
 		viewportOverlay = p2.current
 	}
 end
 
-return function(Current) --[[ Line: 72 | Named "useVirtualList" ]]
+return function(Current)
 	-- upvalues: ReactModule (copy), RecyclingScopeContextModule (copy), RecyclingViewportContextModule (copy), SignalsModule (copy), UseCompositionPlacementModule (copy), configuration (copy), RecyclableViewRegistryModule (copy), PlacementKindModule (copy), ViewRecyclerRobloxModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseContextResult = ReactModule.useContext(RecyclingScopeContextModule)
 	assert(UseContextResult ~= nil, "VirtualListRenderer requires a RecyclingScope")
 	local UseContextResult1 = ReactModule.useContext(RecyclingViewportContextModule)
-	local UseStateResult = ReactModule.useState(function() --[[ Line: 78 ]]
+	local UseStateResult = ReactModule.useState(function()
 		-- upvalues: SignalsModule (upval)
 		local Signal, Signal2 = SignalsModule.createSignal(false)
 		
@@ -92,11 +92,11 @@ return function(Current) --[[ Line: 72 | Named "useVirtualList" ]]
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseRefResult2 = ReactModule.useRef(nil)
 	local UseRefResult3 = ReactModule.useRef(nil)
-	local UseStateResult1 = ReactModule.useState(function() --[[ Line: 89 ]]
+	local UseStateResult1 = ReactModule.useState(function()
 		-- upvalues: UseContextResult (copy)
 		return UseContextResult.root.getScope(UseContextResult.listOptions)
 	end)
-	ReactModule.useEffect(function() --[[ Line: 92 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult1 (copy), UseContextResult (copy)
 		UseStateResult1.bind({
 			updateCapacity = true,
@@ -110,12 +110,12 @@ return function(Current) --[[ Line: 72 | Named "useVirtualList" ]]
 	})
 	local UseCompositionPlacementModuleResult = UseCompositionPlacementModule(UseContextResult.root, UseContextResult.listOptions.maxPoolSize, UseContextResult.listOptions.diagnostics)
 	local UseRefResult4 = ReactModule.useRef(nil)
-	local UseStateResult2 = ReactModule.useState(function() --[[ Line: 107 ]]
+	local UseStateResult2 = ReactModule.useState(function()
 		-- upvalues: Current (copy), UseRefResult (copy), UseRefResult4 (copy), configuration (upval), UseRefResult2 (copy), UseRefResult3 (copy)
 		local Current1 = Current
 		
 		return {
-			synchronize = function(Current) --[[ Line: 110 ]]
+			synchronize = function(Current)
 				-- upvalues: Current1 (ref), UseRefResult (upval), UseRefResult4 (upval), configuration (upval), UseRefResult2 (upval), UseRefResult3 (upval)
 				Current1 = Current
 				UseRefResult.current = Current
@@ -128,7 +128,7 @@ return function(Current) --[[ Line: 72 | Named "useVirtualList" ]]
 					})))
 				end
 			end,
-			refreshHost = function() --[[ Line: 118 ]]
+			refreshHost = function()
 				-- upvalues: UseRefResult4 (upval), configuration (upval), Current1 (ref), UseRefResult2 (upval), UseRefResult3 (upval)
 				local Current = UseRefResult4.current
 				
@@ -141,11 +141,11 @@ return function(Current) --[[ Line: 72 | Named "useVirtualList" ]]
 			end
 		}
 	end)
-	ReactModule.useLayoutEffect(function() --[[ Line: 129 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseRefResult (copy), Current (copy), configuration (upval), UseRefResult2 (copy), UseRefResult3 (copy), UseStateResult1 (copy), RecyclableViewRegistryModule (upval), UseContextResult1 (copy), UseStateResult (copy), PlacementKindModule (upval), UseCompositionPlacementModuleResult (copy), ViewRecyclerRobloxModule (upval), UseRefResult4 (copy), SignalsModule (upval)
 		UseRefResult.current = Current
 		
-		local function _() --[[ Line: 131 | Named "instrumentation" ]]
+		local function _()
 			-- upvalues: UseRefResult (upval)
 			local Current = UseRefResult.current
 			
@@ -154,17 +154,17 @@ return function(Current) --[[ Line: 72 | Named "useVirtualList" ]]
 		
 		local self = setmetatable({}, { __mode = "k" })
 		
-		local function listSink(Key, p1) --[[ Line: 136 ]]
+		local function listSink(Key, p1)
 			-- upvalues: self (copy)
 			local SelfEntry = self[Key]
 			
 			if SelfEntry == nil then
 				SelfEntry = table.freeze({
-					apply = function(Key1) --[[ Line: 140 ]]
+					apply = function(Key1)
 						-- upvalues: p1 (copy), Key (copy)
 						p1.apply(Key, Key1)
 					end,
-					setMeasurementDependencies = function(Key1) --[[ Line: 143 ]]
+					setMeasurementDependencies = function(Key1)
 						-- upvalues: p1 (copy), Key (copy)
 						p1.setMeasurementDependencies(Key, Key1)
 					end
@@ -180,7 +180,7 @@ return function(Current) --[[ Line: 72 | Named "useVirtualList" ]]
 		})
 		ConfigurationResult.recyclingScope = UseStateResult1
 		
-		function ConfigurationResult.getItemViewType(p1, p2) --[[ Line: 153 ]]
+		function ConfigurationResult.getItemViewType(p1, p2)
 			-- upvalues: UseRefResult (upval), RecyclableViewRegistryModule (upval)
 			local ItemTypeFunction = UseRefResult.current.itemType
 			assert(RecyclableViewRegistryModule.isRegistered(ItemTypeFunction) or type(ItemTypeFunction) == "function", "VirtualList: `itemType` must be a Recyclable view type or selector")
@@ -193,7 +193,7 @@ return function(Current) --[[ Line: 72 | Named "useVirtualList" ]]
 		ConfigurationResult.diagnostics = Current.diagnostics
 		ConfigurationResult.active = if UseContextResult1 == nil then nil else UseStateResult.active(false)
 		
-		function ConfigurationResult.presentItemView(p1, State, p2, p3) --[[ Line: 171 ]]
+		function ConfigurationResult.presentItemView(p1, State, p2, p3)
 			-- upvalues: PlacementKindModule (upval), listSink (copy), UseCompositionPlacementModuleResult (upval), UseRefResult (upval)
 			p1.transition(if State == nil then nil else table.freeze({
 				assignment = State.assignment,
@@ -213,7 +213,7 @@ return function(Current) --[[ Line: 72 | Named "useVirtualList" ]]
 			end
 		end
 		
-		function ConfigurationResult.onItemViewPresentationChanged(p1, p2) --[[ Line: 189 ]]
+		function ConfigurationResult.onItemViewPresentationChanged(p1, p2)
 			-- upvalues: UseRefResult (upval)
 			local Current = UseRefResult.current
 			local Instrumentation = if Current == nil then nil else Current._instrumentation
@@ -229,7 +229,7 @@ return function(Current) --[[ Line: 72 | Named "useVirtualList" ]]
 		
 		if UseContextResult1 ~= nil then
 			local Active = ConfigurationResult.active
-			Callback = SignalsModule.createEffect(function(p1) --[[ Line: 200 ]]
+			Callback = SignalsModule.createEffect(function(p1)
 				-- upvalues: UseStateResult (upval), Active (ref), Virtualizer (copy)
 				local ActiveResult = UseStateResult.active(p1)
 				
@@ -239,7 +239,7 @@ return function(Current) --[[ Line: 72 | Named "useVirtualList" ]]
 				end
 			end)
 		end
-		return function() --[[ Line: 208 ]]
+		return function()
 			-- upvalues: Callback (ref), UseRefResult4 (upval), Virtualizer (copy)
 			if Callback ~= nil then
 				Callback()
@@ -248,13 +248,13 @@ return function(Current) --[[ Line: 72 | Named "useVirtualList" ]]
 			Virtualizer.destroy()
 		end
 	end, { UseStateResult2 })
-	ReactModule.useEffect(function() --[[ Line: 217 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseContextResult (copy)
 		return UseContextResult.registerConsumer()
 	end, { UseContextResult })
-	ReactModule.useEffect(function() --[[ Line: 221 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy)
-		return function() --[[ Line: 222 ]]
+		return function()
 			-- upvalues: UseRefResult1 (upval)
 			local CurrentFunction: () -> () = UseRefResult1.current
 			
@@ -264,11 +264,11 @@ return function(Current) --[[ Line: 72 | Named "useVirtualList" ]]
 			end
 		end
 	end, {})
-	ReactModule.useLayoutEffect(function() --[[ Line: 231 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseStateResult2 (copy), Current (copy)
 		UseStateResult2.synchronize(Current)
 	end)
-	ReactModule.useEffect(function() --[[ Line: 235 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult4 (copy)
 		local Current = UseRefResult4.current
 		
@@ -276,43 +276,43 @@ return function(Current) --[[ Line: 72 | Named "useVirtualList" ]]
 			Current.refreshItemViews()
 		end
 	end, { Current.itemType })
-	ReactModule.useEffect(function() --[[ Line: 242 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult4 (copy), Current (copy)
-		local function _() --[[ Line: 243 | Named "runtime" ]]
+		local function _()
 			-- upvalues: UseRefResult4 (upval)
 			return assert(UseRefResult4.current, "VirtualList: list handle used after unmount")
 		end
 		
 		local Current1 = {
-			scrollToIndex = function(p1, p2) --[[ Line: 247 ]]
+			scrollToIndex = function(p1, p2)
 				-- upvalues: UseRefResult4 (upval)
 				assert(UseRefResult4.current, "VirtualList: list handle used after unmount").scrollToIndex(p1, p2)
 			end,
-			scrollToOffset = function(p1) --[[ Line: 250 ]]
+			scrollToOffset = function(p1)
 				-- upvalues: UseRefResult4 (upval)
 				return assert(UseRefResult4.current, "VirtualList: list handle used after unmount").scrollToOffset(p1)
 			end,
-			scrollToStart = function() --[[ Line: 253 ]]
+			scrollToStart = function()
 				-- upvalues: UseRefResult4 (upval)
 				assert(UseRefResult4.current, "VirtualList: list handle used after unmount").scrollToStart()
 			end,
-			scrollToEnd = function() --[[ Line: 256 ]]
+			scrollToEnd = function()
 				-- upvalues: UseRefResult4 (upval)
 				assert(UseRefResult4.current, "VirtualList: list handle used after unmount").scrollToEnd()
 			end,
-			scrollBy = function(p1) --[[ Line: 259 ]]
+			scrollBy = function(p1)
 				-- upvalues: UseRefResult4 (upval)
 				return assert(UseRefResult4.current, "VirtualList: list handle used after unmount").scrollBy(p1)
 			end,
-			getScrollState = function() --[[ Line: 262 ]]
+			getScrollState = function()
 				-- upvalues: UseRefResult4 (upval)
 				return assert(UseRefResult4.current, "VirtualList: list handle used after unmount").getScrollState()
 			end,
-			captureScrollAnchorSnapshot = function() --[[ Line: 265 ]]
+			captureScrollAnchorSnapshot = function()
 				-- upvalues: UseRefResult4 (upval)
 				return assert(UseRefResult4.current, "VirtualList: list handle used after unmount").captureScrollAnchorSnapshot()
 			end,
-			restoreScrollAnchorSnapshot = function(p1) --[[ Line: 268 ]]
+			restoreScrollAnchorSnapshot = function(p1)
 				-- upvalues: UseRefResult4 (upval)
 				return assert(UseRefResult4.current, "VirtualList: list handle used after unmount").restoreScrollAnchorSnapshot(p1)
 			end
@@ -326,7 +326,7 @@ return function(Current) --[[ Line: 72 | Named "useVirtualList" ]]
 				ListRefFunction.current = Current1
 			end
 		end
-		return function() --[[ Line: 273 ]]
+		return function()
 			-- upvalues: Current (upval)
 			local ListRefFunction: (any) -> () = Current.listRef
 			
@@ -340,7 +340,7 @@ return function(Current) --[[ Line: 72 | Named "useVirtualList" ]]
 			end
 		end
 	end, { Current.listRef })
-	ReactModule.useEffect(function() --[[ Line: 278 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Current (copy), UseRefResult2 (copy)
 		local ScrollingFrameRefFunction: (any) -> () = Current.scrollingFrameRef
 		local Current1 = UseRefResult2.current
@@ -352,7 +352,7 @@ return function(Current) --[[ Line: 72 | Named "useVirtualList" ]]
 				ScrollingFrameRefFunction.current = Current1
 			end
 		end
-		return function() --[[ Line: 280 ]]
+		return function()
 			-- upvalues: Current (upval)
 			local ScrollingFrameRefFunction: (any) -> () = Current.scrollingFrameRef
 			
@@ -369,7 +369,7 @@ return function(Current) --[[ Line: 72 | Named "useVirtualList" ]]
 	
 	return {
 		axis = Current.axis,
-		onScrollingFrameChanged = ReactModule.useCallback(function(p1) --[[ Line: 286 ]]
+		onScrollingFrameChanged = ReactModule.useCallback(function(p1)
 			-- upvalues: UseRefResult1 (copy), UseContextResult1 (copy), UseStateResult (copy), UseStateResult2 (copy)
 			local CurrentFunction: () -> () = UseRefResult1.current
 			
@@ -386,7 +386,7 @@ return function(Current) --[[ Line: 72 | Named "useVirtualList" ]]
 			UseStateResult2.refreshHost,
 			UseContextResult1
 		}),
-		onViewportOverlayChanged = ReactModule.useCallback(function(_) --[[ Line: 304 ]]
+		onViewportOverlayChanged = ReactModule.useCallback(function(_)
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2.refreshHost()
 		end, { UseStateResult2.refreshHost }),

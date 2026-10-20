@@ -6,12 +6,12 @@ local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStri
 local GetEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule = require(Parent.flags.getEngineFeatureEngineUGCValidateInstanceTreesEquivalent)
 local UGCValidationService = game:GetService("UGCValidationService")
 
-local function _(ExpectedTree, CandidateTree, Backend) --[[ Line: 20 | Named "deepEquals" ]]
+local function _(ExpectedTree, CandidateTree, Backend)
 	-- upvalues: GetEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (copy), ValidationEnumsModule (copy), UGCValidationService (copy)
 	return not GetEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule() or Backend ~= ValidationEnumsModule.ConsumerEnv.Backend or UGCValidationService:AreInstanceTreesEquivalent(ExpectedTree, CandidateTree)
 end
 
-local function getFoldersMapping(EntrypointInput) --[[ Line: 33 ]]
+local function getFoldersMapping(EntrypointInput)
 	local config = { R15ArtistIntent = true, R15Fixed = true, R6 = true }
 	local Folders = {}
 	
@@ -30,7 +30,7 @@ return {
 		ValidationEnumsModule.SharedDataMember.consumerConfig,
 		ValidationEnumsModule.SharedDataMember.uploadEnum
 	},
-	run = function(p1, p2) --[[ Line: 50 ]]
+	run = function(p1, p2)
 		-- upvalues: ConstantsModule (copy), ErrorSourceStringsModule (copy), getFoldersMapping (copy), GetEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (copy), ValidationEnumsModule (copy), UGCValidationService (copy)
 		local EntrypointInput = p2.entrypointInput
 		local ConsumerConfig = p2.consumerConfig

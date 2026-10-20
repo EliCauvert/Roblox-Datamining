@@ -19,7 +19,7 @@ local config = {
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-local function findTaggedDescendant(Tag, UseRefResult) --[[ Line: 34 ]]
+local function findTaggedDescendant(Tag, UseRefResult)
 	-- upvalues: CollectionService (copy)
 	local Current = UseRefResult.current
 	
@@ -34,17 +34,17 @@ local function findTaggedDescendant(Tag, UseRefResult) --[[ Line: 34 ]]
 	return nil
 end
 
-return function(p1) --[[ Line: 57 | Named "useExperienceDetailsFocusNavigation" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseInitialFocusOnTagFunction (copy), SduiFocusTags (copy), UseSelectionOrderTrackingFunction (copy), ReactFocusNavigationModule (copy), GetSduiFocusActivationStoreFunction (copy), findTaggedDescendant (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), UsePageButtonBindingsFunction (copy), config (copy), UseOnNavigateBackFunction (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	UseInitialFocusOnTagFunction(SduiFocusTags.PrimaryAction, UseRefResult)
 	UseSelectionOrderTrackingFunction(UseRefResult)
 	local UseFocusGuiObjectResult = ReactFocusNavigationModule.useFocusGuiObject()
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 64 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: GetSduiFocusActivationStoreFunction (upval), SduiFocusTags (upval)
 		GetSduiFocusActivationStoreFunction().activate(SduiFocusTags.PrimaryAction)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 68 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: findTaggedDescendant (upval), SduiFocusTags (upval), UseRefResult (copy), UseFocusGuiObjectResult (copy)
 		local TaggedDescendant = findTaggedDescendant(SduiFocusTags.StatsSection, UseRefResult)
 		
@@ -52,7 +52,7 @@ return function(p1) --[[ Line: 57 | Named "useExperienceDetailsFocusNavigation" 
 			UseFocusGuiObjectResult(TaggedDescendant)
 		end
 	end, { UseFocusGuiObjectResult, UseRefResult })
-	local UseOnNavigateBackResult = UseOnNavigateBackFunction(p1, (UsePageButtonBindingsFunction(UseRefResult, config, (ReactModule.useMemo(function() --[[ Line: 75 ]]
+	local UseOnNavigateBackResult = UseOnNavigateBackFunction(p1, (UsePageButtonBindingsFunction(UseRefResult, config, (ReactModule.useMemo(function()
 		-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), UseResult (copy), FFlagLuaAppMediaGalleryGamepadSupport (upval), UseResult1 (copy)
 		return {
 			[FocusNavigationEventNameEnum.Play] = { handler = InputHandlersModule.onRelease(UseResult) },
@@ -60,7 +60,7 @@ return function(p1) --[[ Line: 57 | Named "useExperienceDetailsFocusNavigation" 
 		}
 	end, { UseResult, UseResult1 })))))
 	
-	return (ReactModule.useCallback(function(Current) --[[ Line: 89 ]]
+	return (ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), UseOnNavigateBackResult (copy)
 		UseRefResult.current = Current
 		

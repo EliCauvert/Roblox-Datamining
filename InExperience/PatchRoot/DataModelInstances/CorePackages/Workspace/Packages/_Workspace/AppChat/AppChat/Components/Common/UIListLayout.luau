@@ -1,6 +1,6 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
 
-return function(p1) --[[ Line: 10 | Named "UIListLayout" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy)
 	return ReactModule.createElement("UIListLayout", {
 		HorizontalAlignment = p1.HorizontalAlignment,

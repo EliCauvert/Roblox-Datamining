@@ -3,13 +3,13 @@ local PlainTextContentModelModule = require(script.Parent.ContentKinds.PlainText
 local PresetContentModelModule = require(script.Parent.ContentKinds.Preset.PresetContentModel)
 
 return {
-	fromPlainText = function(p1) --[[ Line: 8 ]]
+	fromPlainText = function(p1)
 		-- upvalues: PlainTextContentModelModule (copy)
 		return {
 			contents = { PlainTextContentModelModule.draftFromText(p1) }
 		}
 	end,
-	fromPreset = function(p1, p2) --[[ Line: 16 ]]
+	fromPreset = function(p1, p2)
 		-- upvalues: PresetContentModelModule (copy)
 		return {
 			contents = { PresetContentModelModule.draftFromPreset(p1, p2) }

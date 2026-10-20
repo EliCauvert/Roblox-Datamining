@@ -4,7 +4,7 @@ local _ = require(ViewRecycler.Core.Layout.LayoutRuntime)
 local TypesModule = require(ViewRecycler.Core.Types)
 local StaticPartsModule = require(ViewRecycler.Core.Layout.staticParts)
 
-return function(p1) --[[ Line: 21 | Named "uniform" ]]
+return function(p1)
 	-- upvalues: TypesModule (copy), DataSourceChangeTypeModule (copy), StaticPartsModule (copy)
 	assert(p1.itemLength > 0, "Layout.uniform: itemLength must be positive")
 	local ItemLength = p1.itemLength
@@ -15,15 +15,15 @@ return function(p1) --[[ Line: 21 | Named "uniform" ]]
 	local CountKeys = 0
 	
 	return {
-		getItemCount = function() --[[ Line: 32 ]]
+		getItemCount = function()
 			-- upvalues: CountKeys (ref)
 			return CountKeys
 		end,
-		getContentLength = function() --[[ Line: 36 ]]
+		getContentLength = function()
 			-- upvalues: CountKeys (ref), PaddingBefore (copy), ItemLength (copy), Spacing (copy), PaddingAfter (copy)
 			return if CountKeys == 0 then 0 else PaddingBefore + CountKeys * ItemLength + (CountKeys - 1) * Spacing + PaddingAfter
 		end,
-		getIntersectingIndexRange = function(p2, p3) --[[ Line: 59 ]]
+		getIntersectingIndexRange = function(p2, p3)
 			-- upvalues: CountKeys (ref), TypesModule (upval), PaddingBefore (copy), NewItemLength (copy), ItemLength (copy)
 			if CountKeys == 0 or p3 <= p2 then
 				return TypesModule.EMPTY_INDEX_RANGE
@@ -53,18 +53,18 @@ return function(p1) --[[ Line: 21 | Named "uniform" ]]
 			
 			return if Smallest < Largest then TypesModule.EMPTY_INDEX_RANGE else { firstIndex = Largest, lastIndex = Smallest }
 		end,
-		expandIndexRange = function(p2, p3, p4) --[[ Line: 112 ]]
+		expandIndexRange = function(p2, p3, p4)
 			-- upvalues: StaticPartsModule (upval), CountKeys (ref)
 			return StaticPartsModule.expandItemRange(p2, p3, p4 or p3, CountKeys)
 		end,
-		getItemLayout = function(p2: number) --[[ Line: 43 ]]
+		getItemLayout = function(p2: number)
 			-- upvalues: PaddingBefore (copy), NewItemLength (copy), ItemLength (copy)
 			return {
 				startOffset = PaddingBefore + (p2 - 1) * NewItemLength,
 				length = ItemLength
 			}
 		end,
-		getItemLayouts = function(p2: number, p3, p4) --[[ Line: 50 ]]
+		getItemLayouts = function(p2: number, p3, p4)
 			-- upvalues: PaddingBefore (copy), NewItemLength (copy), ItemLength (copy)
 			for i = p2, p3 do
 				p4[i - p2 + 1] = {
@@ -75,7 +75,7 @@ return function(p1) --[[ Line: 21 | Named "uniform" ]]
 		end,
 		updateItemMeasurement = StaticPartsModule.updateItemMeasurementNoop,
 		requiresItemMeasurement = StaticPartsModule.requiresItemMeasurementFalse,
-		applyDataSourceChange = function(p5): boolean --[[ Line: 95 ]]
+		applyDataSourceChange = function(p5): boolean
 			-- upvalues: CountKeys (ref), DataSourceChangeTypeModule (upval)
 			local CountKeys1: number = CountKeys
 			

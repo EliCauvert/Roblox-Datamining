@@ -1,4 +1,4 @@
-﻿return function(p1: number, p2, p3: number, p4) --[[ Line: 1 | Named "getCenterSheetHeight" ]]
+﻿return function(p1: number, p2, p3: number, p4)
 	if p1 <= p2 then
 		return p4
 	else

@@ -4,7 +4,7 @@ local _ = require(SduiCoreSystem.SduiBuilderTypes)
 local PropResultCategory = require(SduiCoreSystem.ClientBinding.SduiClientBindingTypes).PropResultCategory
 local SduiPropUtilsModule = require(SduiCoreSystem.ClientBinding.PropBuilder.SduiPropUtils)
 
-local function buildDefaultProp(p1, p2, p3, p4, p5, p6, p7, p8) --[[ Line: 37 ]]
+local function buildDefaultProp(p1, p2, p3, p4, p5, p6, p7, p8)
 	-- upvalues: SduiPropUtilsModule (copy), PropResultCategory (copy), buildDefaultProp (copy)
 	if p1 == "literal" then
 		return SduiPropUtilsModule.generateStaticPropValue(p2, p7), PropResultCategory.Literal

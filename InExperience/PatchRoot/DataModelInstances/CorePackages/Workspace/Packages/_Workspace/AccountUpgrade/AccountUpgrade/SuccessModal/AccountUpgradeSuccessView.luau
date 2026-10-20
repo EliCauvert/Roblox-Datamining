@@ -9,7 +9,7 @@ local View = FoundationModule.View
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return function(p1) --[[ Line: 43 | Named "AccountUpgradeSuccessView" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ButtonVariant (copy), ReactModule (copy), View (copy), AccountUpgradeIdentityHeaderModule (copy), Text (copy), AccountUpgradeDialogActionsModule (copy), AccountUpgradeDialogModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		respawnNowText = "Authentication.SignUp.Action.RespawnNow",

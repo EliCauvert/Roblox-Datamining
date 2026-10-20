@@ -1,9 +1,9 @@
 ﻿local DependenciesModule = require(script.Parent.Parent.dependencies)
 local ThrottleUserIdModule = require(script.Parent.throttleUserId)
 
-return function(Callback) --[[ Line: 5 ]]
+return function(Callback)
 	-- upvalues: DependenciesModule (copy), ThrottleUserIdModule (copy)
-	return function() --[[ Line: 6 ]]
+	return function()
 		-- upvalues: DependenciesModule (upval), ThrottleUserIdModule (upval), Callback (copy)
 		local LocalPlayer = DependenciesModule.Players.LocalPlayer
 		

@@ -21,7 +21,7 @@ local EventNamesModule = require(ProfileQRCode.Analytics.EventNames)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FFlagProfileQrCodeDeprecateUserReduxModule = require(ProfileQRCode.Flags.FFlagProfileQrCodeDeprecateUserRedux)
 
-return function(p1) --[[ Line: 39 ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseStyleFunction (copy), UseLocalUserInfoModule (copy), UseCombinedUserNameModule (copy), FFlagProfileQrCodeDeprecateUserReduxModule (copy), UseAnalyticsModule (copy), ReactModule (copy), EventNamesModule (copy), View (copy), UserTile (copy), LayoutMode (copy), FoundationModule (copy), StyledTextLabel (copy), Button (copy), ButtonVariant (copy), InputSize (copy), FillBehavior (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -35,11 +35,11 @@ return function(p1) --[[ Line: 39 ]]
 	local DisplayName = if UseCombinedUserNameModuleResult == "" then UseLocalUserInfoModuleResult and (UseLocalUserInfoModuleResult.displayName or UseLocalUserInfoModuleResult.username) or "" else UseCombinedUserNameModuleResult .. " @" .. (UseLocalUserInfoModuleResult.username or (if FFlagProfileQrCodeDeprecateUserReduxModule then "" else nil))
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 57 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, { p1.userId })
-	ReactModule.useEffect(function() --[[ Line: 61 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseAnalyticsModuleResult (copy), EventNamesModule (upval), p1 (copy)
 		UseAnalyticsModuleResult.fireEvent(EventNamesModule.QRPageFriendRequestBannerShown, { qrCodeBannerQueueSize = p1.notificationQueueSize })
 	end, {
@@ -103,7 +103,7 @@ return function(p1) --[[ Line: 39 ]]
 							size = InputSize.Small,
 							fillBehavior = FillBehavior.Fill,
 							isDisabled = UseStateResult,
-							onActivated = function() --[[ Line: 131 ]]
+							onActivated = function()
 								-- upvalues: UseStateResult2 (copy), p1 (copy)
 								UseStateResult2(true)
 								p1.onAccept(p1.userId)

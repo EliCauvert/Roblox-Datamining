@@ -1,6 +1,6 @@
 ﻿local MrRouterHeaders = require(script:FindFirstAncestor("SduiSharedUtilities").Parent.Http).MrRouterHeaders
 
-return function(Accept, p1) --[[ Line: 9 | Named "buildSduiRequestHeaders" ]]
+return function(Accept, p1)
 	-- upvalues: MrRouterHeaders (copy)
 	local config = { Accept = Accept }
 	

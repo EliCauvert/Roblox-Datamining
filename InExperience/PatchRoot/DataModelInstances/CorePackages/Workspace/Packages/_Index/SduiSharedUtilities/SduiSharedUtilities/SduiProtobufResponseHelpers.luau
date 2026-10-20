@@ -7,16 +7,16 @@ local FFlagSduiHydrationDataCamelCasePropertyKeys = require(Parent.SharedFlags).
 local FFlagEnableHomepagePromptsForModalsAndBanners = require(Parent.SharedFlags).FFlagEnableHomepagePromptsForModalsAndBanners
 local FFlagPromptsHandlerEnabled = require(Parent.SharedFlags).FFlagPromptsHandlerEnabled
 
-local function decodeProto(p1, p2) --[[ Line: 22 ]]
+local function decodeProto(p1, p2)
 	return p1.decode(if typeof(p2) == "string" then buffer.fromstring(p2) else p2)
 end
 
-local function decodeProtobufJson(p1, Buf) --[[ Line: 34 ]]
+local function decodeProtobufJson(p1, Buf)
 	-- upvalues: HttpService (copy)
 	return p1.jsonDecode(HttpService:JSONDecode(if typeof(Buf) == "buffer" then buffer.tostring(Buf) else Buf))
 end
 
-local function parseSurfacing(Surfacing) --[[ Line: 66 ]]
+local function parseSurfacing(Surfacing)
 	-- upvalues: GetProtoVariableMapperFunction (copy)
 	if not Surfacing or not Surfacing.kind then
 		return nil
@@ -37,21 +37,21 @@ end
 return {
 	decodeProto = decodeProto,
 	decodeProtobufJson = decodeProtobufJson,
-	makeProtoResponseDecoder = function(p1) --[[ Line: 42 ]]
+	makeProtoResponseDecoder = function(p1)
 		-- upvalues: decodeProto (copy)
-		return function(p2) --[[ Line: 43 ]]
+		return function(p2)
 			-- upvalues: decodeProto (upval), p1 (copy)
 			return decodeProto(p1, p2)
 		end
 	end,
-	makeProtobufJsonResponseDecoder = function(p1) --[[ Line: 51 ]]
+	makeProtobufJsonResponseDecoder = function(p1)
 		-- upvalues: decodeProtobufJson (copy)
-		return function(p2) --[[ Line: 52 ]]
+		return function(p2)
 			-- upvalues: decodeProtobufJson (upval), p1 (copy)
 			return decodeProtobufJson(p1, p2)
 		end
 	end,
-	parsePageEntriesFromResponse = function(p1) --[[ Line: 83 ]]
+	parsePageEntriesFromResponse = function(p1)
 		-- upvalues: FFlagEnableHomepagePromptsForModalsAndBanners (copy), FFlagPromptsHandlerEnabled (copy), parseSurfacing (copy)
 		local List = {}
 		
@@ -71,7 +71,7 @@ return {
 		end
 		return List
 	end,
-	parseHydrationDataFromResponse = function(p2) --[[ Line: 115 ]]
+	parseHydrationDataFromResponse = function(p2)
 		-- upvalues: FFlagSduiHydrationDataCamelCasePropertyKeys (copy), GetProtoVariableMapperFunction (copy)
 		local HydrationData = p2.hydration_data
 		
@@ -108,10 +108,10 @@ return {
 		end
 		return HydrationData
 	end,
-	parseLocalizedLiteralsFromResponse = function(p3) --[[ Line: 158 ]]
+	parseLocalizedLiteralsFromResponse = function(p3)
 		return if p3.localized_literals then p3.localized_literals else nil
 	end,
-	parseTemplateEntriesFromResponse = function(p3, p4) --[[ Line: 173 ]]
+	parseTemplateEntriesFromResponse = function(p3, p4)
 		local Templates = {}
 		local Templates1 = {}
 		local t = {}

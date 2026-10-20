@@ -23,7 +23,7 @@ local FFlagLuaAppNotInterestedFeedbackFormTelemetry = SharedFlagsModule.FFlagLua
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local LuaAppCheckboxFeedbackFormTitleTextWrapping = game:DefineFastFlag("LuaAppCheckboxFeedbackFormTitleTextWrapping", false)
 
-return ReactModule.memo(function(p1) --[[ Line: 59 | Named "CheckboxFeedbackFormModal" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), CloseCentralOverlayFunction (copy), FFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), CryoModule (copy), Checkbox (copy), UseAppPolicyFunction (copy), AppPage (copy), UrlBuilder (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), Dialog (copy), Text (copy), LuaAppCheckboxFeedbackFormTitleTextWrapping (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ButtonVariant (copy), FFlagLuaAppMakeDisclaimerOptInForFeedbackForm (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseTokensResult = UseTokensFunction()
@@ -36,7 +36,7 @@ return ReactModule.memo(function(p1) --[[ Line: 59 | Named "CheckboxFeedbackForm
 			underlineEnd = "</u>"
 		}
 	})
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 72 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseDispatchResult (copy), CloseCentralOverlayFunction (upval), FFlagLuaAppNotInterestedFeedbackFormTelemetry (upval), p1 (copy)
 		UseDispatchResult(CloseCentralOverlayFunction())
 		
@@ -45,9 +45,9 @@ return ReactModule.memo(function(p1) --[[ Line: 59 | Named "CheckboxFeedbackForm
 		end
 	end, { UseDispatchResult, p1.onClose })
 	local UseStateResult, UseStateResult2 = ReactModule.useState({})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 81 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CryoModule (upval), p1 (copy), ReactModule (upval), Checkbox (upval), UseStateResult (copy), UseStateResult2 (copy)
-		return CryoModule.List.map(p1.checkboxItems, function(p2, LayoutOrder) --[[ Line: 82 ]]
+		return CryoModule.List.map(p1.checkboxItems, function(p2, LayoutOrder)
 			-- upvalues: ReactModule (upval), Checkbox (upval), UseStateResult (upval), UseStateResult2 (upval)
 			local Id = p2.id
 			
@@ -55,7 +55,7 @@ return ReactModule.memo(function(p1) --[[ Line: 59 | Named "CheckboxFeedbackForm
 				label = p2.text,
 				isChecked = if UseStateResult[Id] then true else false,
 				LayoutOrder = LayoutOrder,
-				onActivated = function() --[[ Line: 88 ]]
+				onActivated = function()
 					-- upvalues: UseStateResult (upval), Id (copy), UseStateResult2 (upval)
 					local Copy = table.clone(UseStateResult)
 					
@@ -72,7 +72,7 @@ return ReactModule.memo(function(p1) --[[ Line: 59 | Named "CheckboxFeedbackForm
 			})
 		end)
 	end, { p1.checkboxItems, UseStateResult })
-	local UseMemoResult1, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 102 ]]
+	local UseMemoResult1, UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), UseStateResult (copy)
 		local Flag = false
 		local Flag1 = false
@@ -91,7 +91,7 @@ return ReactModule.memo(function(p1) --[[ Line: 59 | Named "CheckboxFeedbackForm
 	local UseRefResult = ReactModule.useRef("")
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local v1: boolean = (not UseMemoResult2 or UseStateResult1) and (if UseMemoResult1 or UseMemoResult2 and UseStateResult1 then true else false)
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 124 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult (copy), UseStateResult2_1 (copy)
 		if not p2 then return end
 		if p2.Text:len() > 500 then
@@ -100,7 +100,7 @@ return ReactModule.memo(function(p1) --[[ Line: 59 | Named "CheckboxFeedbackForm
 		UseRefResult.current = p2.Text
 		UseStateResult2_1(p2.Text:len() >= 10)
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 135 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: v1 (copy), UseResult (copy), FFlagLuaAppNotInterestedFeedbackFormTelemetry (upval), p1 (copy), UseStateResult (copy), UseRefResult (copy)
 		if v1 then
 			UseResult(if FFlagLuaAppNotInterestedFeedbackFormTelemetry then true else nil)
@@ -109,10 +109,10 @@ return ReactModule.memo(function(p1) --[[ Line: 59 | Named "CheckboxFeedbackForm
 			return
 		end
 	end, { v1, p1.onSubmit, UseStateResult, UseResult })
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 143 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2)
 		return p2.getWebViewSupport()
 	end)
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 148 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: AppPage (upval), UrlBuilder (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval), UseResult (copy), FFlagLuaAppNotInterestedFeedbackFormTelemetry (upval)
 		local config = {
 			name = AppPage.GenericWebPage,
@@ -127,7 +127,7 @@ return ReactModule.memo(function(p1) --[[ Line: 59 | Named "CheckboxFeedbackForm
 		end
 		UseResult(not FFlagLuaAppNotInterestedFeedbackFormTelemetry and nil)
 	end, { UseDispatchResult, UseResult })
-	local UseResult4 = if FFlagLuaAppNotInterestedFeedbackFormTelemetry then ReactModule.useCallback(function() --[[ Line: 170 ]]
+	local UseResult4 = if FFlagLuaAppNotInterestedFeedbackFormTelemetry then ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy)
 		UseResult(false)
 	end, { UseResult }) else nil

@@ -16,11 +16,11 @@ return require(Parent.Rodux).createReducer({
 	BackgroundTransparency = ConfigModule.ChatWindowBackgroundTransparency,
 	SpatialPanelTextSize = ConfigModule.ChatWindowSpatialPanelTextSize
 }, {
-	[require(Actions.ConfigurationObjectsLoaded).name] = function(p1, p2) --[[ Line: 26 ]]
+	[require(Actions.ConfigurationObjectsLoaded).name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
 		return Dictionary.join(p1, p2.chatWindowSettings)
 	end,
-	[require(Actions.ChatWindowSettingsChanged).name] = function(p1, p2) --[[ Line: 30 ]]
+	[require(Actions.ChatWindowSettingsChanged).name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
 		return if p1[p2.property] then Dictionary.join(p1, { [p2.property] = p2.value }) else p1
 	end

@@ -8,14 +8,14 @@ local Context = ReactModule.createContext(nil)
 
 return {
 	Context = Context,
-	Provider = function(p1) --[[ Line: 56 ]]
+	Provider = function(p1)
 		-- upvalues: UsePreferencesFunction (copy), ReactModule (copy), SignalsModule (copy), MAXCONCURRENTEXPLOSIONS (copy), Context (copy)
 		local ReducedMotion = UsePreferencesFunction().reducedMotion
 		local UseRefResult = ReactModule.useRef(0)
 		local UseRefResult1 = ReactModule.useRef(nil)
 		local UseRefResult2 = ReactModule.useRef(ReducedMotion)
 		UseRefResult2.current = ReducedMotion
-		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 65 ]]
+		local UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: SignalsModule (upval)
 			local Signal, Signal2 = SignalsModule.createSignal({})
 			
@@ -23,10 +23,10 @@ return {
 		end, {})
 		
 		return ReactModule.createElement(Context.Provider, {
-			value = ReactModule.useMemo(function() --[[ Line: 70 ]]
+			value = ReactModule.useMemo(function()
 				-- upvalues: UseRefResult1 (copy), UseRefResult2 (copy), UseMemoResult (copy), MAXCONCURRENTEXPLOSIONS (upval), UseRefResult (copy)
 				return {
-					spawnExplosion = function(ReactionType, p2) --[[ Line: 71 ]]
+					spawnExplosion = function(ReactionType, p2)
 						-- upvalues: UseRefResult1 (upval), UseRefResult2 (upval), UseMemoResult (upval), MAXCONCURRENTEXPLOSIONS (upval), UseRefResult (upval)
 						local Current = UseRefResult1.current
 						
@@ -48,7 +48,7 @@ return {
 						end
 					end,
 					getExplosions = UseMemoResult.get,
-					onExplosionComplete = function(Id) --[[ Line: 101 ]]
+					onExplosionComplete = function(Id)
 						-- upvalues: UseMemoResult (upval)
 						local List = {}
 						
@@ -64,7 +64,7 @@ return {
 			end, { UseMemoResult })
 		}, p1.children)
 	end,
-	useReactionEffects = function() --[[ Line: 125 ]]
+	useReactionEffects = function()
 		-- upvalues: ReactModule (copy), Context (copy)
 		return ReactModule.useContext(Context)
 	end

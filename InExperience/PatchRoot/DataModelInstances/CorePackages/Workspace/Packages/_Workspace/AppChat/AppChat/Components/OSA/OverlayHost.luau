@@ -11,12 +11,12 @@ local config = {
 	GroupOSADialog = require(AppChat.Components.OSA.GroupOSADialog)
 }
 
-return function(p1) --[[ Line: 35 | Named "OverlayHost" ]]
+return function(p1)
 	-- upvalues: GetOverlayStoreModule (copy), SignalsReactModule (copy), FFlagSupportViewingUserProfileOnOSAModule (copy), ReactModule (copy), config (copy), CryoModule (copy), FFlagAppChatShowOSAOnPageEntry (copy), ProviderContainer (copy)
 	local OverlayStoreModule = GetOverlayStoreModule(false)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(OverlayStoreModule.getCurrentOverlay)
 	local UseSignalStateResult1 = if FFlagSupportViewingUserProfileOnOSAModule then SignalsReactModule.useSignalState(OverlayStoreModule.getOverlayDefaultProps) else nil
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 43 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: OverlayStoreModule (copy)
 		OverlayStoreModule.dismissOverlay()
 	end, {})
@@ -31,7 +31,7 @@ return function(p1) --[[ Line: 35 | Named "OverlayHost" ]]
 	if FFlagAppChatShowOSAOnPageEntry then
 		local OnCloseFunction = UnionResult.onClose
 		
-		function UnionResult.onClose() --[[ Line: 58 ]]
+		function UnionResult.onClose()
 			-- upvalues: OnCloseFunction (copy), UseResult (copy)
 			if OnCloseFunction then
 				OnCloseFunction()

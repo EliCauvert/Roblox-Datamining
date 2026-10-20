@@ -5,7 +5,7 @@ local Icon = FoundationModule.Icon
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local IconSize = FoundationModule.Enums.IconSize
 
-local function ItemCardIcon(Frame) --[[ Line: 11 ]]
+local function ItemCardIcon(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Icon (copy), IconSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	

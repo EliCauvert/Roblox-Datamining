@@ -32,23 +32,23 @@ local t = {}
 local t1 = {}
 local config = { games = "All" }
 
-local function _(p1): string --[[ Line: 161 | Named "thumbForUniverseId" ]]
+local function _(p1): string
 	return string.format("rbxthumb://type=GameIcon&id=%d&w=150&h=150", p1)
 end
 
-local _ = function(p1, p2, p3) --[[ Line: 165 | Named "privacyLabelForSummary" ]]
+local _ = function(p1, p2, p3)
 	-- upvalues: UniverseConfigurationModule (copy), PrivacyType (copy)
 	local PrivacyTypeForAudiences = UniverseConfigurationModule.getPrivacyTypeForAudiences(p1.audiences)
 	
 	return if p1.isActive == true and PrivacyTypeForAudiences == PrivacyType.Public and (p2 == nil or p2) then nil elseif PrivacyTypeForAudiences == PrivacyType.Public then p3.live else nil
 end
 
-local _ = function(p1, p2) --[[ Line: 179 | Named "privacyLabelForSearchItem" ]]
+local _ = function(p1, p2)
 	-- upvalues: UniverseConfigurationModule (copy), PrivacyType (copy)
 	return if UniverseConfigurationModule.getPrivacyTypeForAudiences(p1.audiences) == PrivacyType.Public then p2.live else nil
 end
 
-local _ = function(CreatorTargetId, p1, PageIndex) --[[ Line: 185 | Named "universeSearchParamsForPage" ]]
+local _ = function(CreatorTargetId, p1, PageIndex)
 	-- upvalues: PageSize (copy)
 	return {
 		creatorType = "User",
@@ -65,7 +65,7 @@ local _ = function(CreatorTargetId, p1, PageIndex) --[[ Line: 185 | Named "unive
 	}
 end
 
-local _ = function(Creators, p1, Cursor) --[[ Line: 205 | Named "multiCreatorSearchParamsForPage" ]]
+local _ = function(Creators, p1, Cursor)
 	-- upvalues: PageSize (copy)
 	return {
 		surface = "Build",
@@ -81,7 +81,7 @@ local _ = function(Creators, p1, Cursor) --[[ Line: 205 | Named "multiCreatorSea
 	}
 end
 
-local function keyForCreators(Creators): string? --[[ Line: 224 ]]
+local function keyForCreators(Creators): string?
 	if Creators == nil then
 		return nil
 	end
@@ -93,7 +93,7 @@ local function keyForCreators(Creators): string? --[[ Line: 224 ]]
 	return table.concat(Buffer, ",")
 end
 
-local _ = function(List, p1): boolean --[[ Line: 235 | Named "isCursorRequested" ]]
+local _ = function(List, p1): boolean
 	if List == nil then
 		return false
 	end
@@ -105,18 +105,18 @@ local _ = function(List, p1): boolean --[[ Line: 235 | Named "isCursorRequested"
 	return false
 end
 
-local _ = function(p2, p3) --[[ Line: 247 | Named "descriptionForSessionStatus" ]]
+local _ = function(p2, p3)
 	local Roblox = p2._meta and p2._meta._roblox
 	local SessionStatus = if Roblox then Roblox.sessionStatus else nil
 	
 	return if SessionStatus == nil then nil else p3[SessionStatus]
 end
 
-local function requestHandleToPromise(More) --[[ Line: 256 ]]
+local function requestHandleToPromise(More)
 	-- upvalues: PromiseModule (copy)
-	return PromiseModule.new(function(Callback, Callback1) --[[ Line: 257 ]]
+	return PromiseModule.new(function(Callback, Callback1)
 		-- upvalues: More (copy)
-		task.spawn(function() --[[ Line: 258 ]]
+		task.spawn(function()
 			-- upvalues: More (upval), Callback (copy), Callback1 (copy)
 			while More.state(false).status == "pending" do
 				task.wait()
@@ -134,11 +134,11 @@ local function requestHandleToPromise(More) --[[ Line: 256 ]]
 	end)
 end
 
-local function ignorePromiseRejection() --[[ Line: 273 ]] end
+local function ignorePromiseRejection() end
 
-local function noOp() --[[ Line: 275 ]] end
+local function noOp() end
 
-local _ = function(p2) --[[ Line: 277 | Named "getSessionUniverseId" ]]
+local _ = function(p2)
 	local Roblox = p2._meta and p2._meta._roblox
 	
 	if Roblox == nil then
@@ -150,7 +150,7 @@ local _ = function(p2) --[[ Line: 277 | Named "getSessionUniverseId" ]]
 	end
 end
 
-local function buildExperienceMetadataByUniverseId(List, p2, p3) --[[ Line: 289 ]]
+local function buildExperienceMetadataByUniverseId(List, p2, p3)
 	-- upvalues: UniverseConfigurationModule (copy), PrivacyType (copy)
 	local t = {}
 	
@@ -173,7 +173,7 @@ local function buildExperienceMetadataByUniverseId(List, p2, p3) --[[ Line: 289 
 	return t
 end
 
-local function buildSessionItems(List, UseMemoResult, p4, _, Callback) --[[ Line: 316 ]]
+local function buildSessionItems(List, UseMemoResult, p4, _, Callback)
 	local t = {}
 	local List1 = {}
 	
@@ -209,7 +209,7 @@ local function buildSessionItems(List, UseMemoResult, p4, _, Callback) --[[ Line
 	return List1
 end
 
-local function buildLatestSessionByUniverseId(List) --[[ Line: 356 ]]
+local function buildLatestSessionByUniverseId(List)
 	local t = {}
 	
 	for _, value in List do
@@ -229,7 +229,7 @@ local function buildLatestSessionByUniverseId(List) --[[ Line: 356 ]]
 	return t
 end
 
-local function useUniverseSessions(p5, Current) --[[ Line: 367 ]]
+local function useUniverseSessions(p5, Current)
 	-- upvalues: ReactModule (copy), FFlagBuildExperiencePinForBuild (copy), PromiseModule (copy), ignorePromiseRejection (copy), SignalsModule (copy), UseSignalStateFunction (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState({})
 	local UseRefResult = ReactModule.useRef(UseStateResult)
@@ -238,16 +238,16 @@ local function useUniverseSessions(p5, Current) --[[ Line: 367 ]]
 	local UseRefResult2 = ReactModule.useRef(Current)
 	UseRefResult2.current = Current
 	local UseRefResult3 = ReactModule.useRef(true)
-	ReactModule.useEffect(function() --[[ Line: 386 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult3 (copy)
 		UseRefResult3.current = true
 		
-		return function() --[[ Line: 388 ]]
+		return function()
 			-- upvalues: UseRefResult3 (upval)
 			UseRefResult3.current = false
 		end
 	end, {})
-	local UseResult = ReactModule.useCallback(function(p6) --[[ Line: 393 ]]
+	local UseResult = ReactModule.useCallback(function(p6)
 		-- upvalues: UseRefResult2 (copy), UseRefResult1 (copy), UseRefResult (copy), p5 (copy), FFlagBuildExperiencePinForBuild (upval), PromiseModule (upval), UseRefResult3 (copy), UseStateResult2 (copy)
 		local List = {}
 		
@@ -267,9 +267,9 @@ local function useUniverseSessions(p5, Current) --[[ Line: 367 ]]
 					})
 					local config = { promise = nil, handle = SessionFindByUniverseResult }
 					UseRefResult1.current[Id] = config
-					local Promise = PromiseModule.new(function(Callback, Callback1) --[[ Line: 257 ]]
+					local Promise = PromiseModule.new(function(Callback, Callback1)
 						-- upvalues: SessionFindByUniverseResult (copy)
-						task.spawn(function() --[[ Line: 258 ]]
+						task.spawn(function()
 							-- upvalues: SessionFindByUniverseResult (upval), Callback (copy), Callback1 (copy)
 							while SessionFindByUniverseResult.state(false).status == "pending" do
 								task.wait()
@@ -284,7 +284,7 @@ local function useUniverseSessions(p5, Current) --[[ Line: 367 ]]
 								Callback1(StateResult.error)
 							end
 						end)
-					end):andThen(function() --[[ Line: 416 ]]
+					end):andThen(function()
 						-- upvalues: UseRefResult1 (upval), Id (copy), SessionFindByUniverseResult (copy), UseRefResult3 (upval), UseRefResult (upval), UseStateResult2 (upval)
 						local CurrentEntry = UseRefResult1.current[Id]
 						
@@ -297,7 +297,7 @@ local function useUniverseSessions(p5, Current) --[[ Line: 367 ]]
 							UseRefResult.current = Copy
 							UseStateResult2(Copy)
 						end
-					end, function(p7) --[[ Line: 428 ]]
+					end, function(p7)
 						-- upvalues: UseRefResult1 (upval), Id (copy), SessionFindByUniverseResult (copy), PromiseModule (upval)
 						local CurrentEntry = UseRefResult1.current[Id]
 						
@@ -313,15 +313,15 @@ local function useUniverseSessions(p5, Current) --[[ Line: 367 ]]
 		end
 		return PromiseModule.all(List)
 	end, { p5 })
-	ReactModule.useEffect(function() --[[ Line: 442 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult (copy), ignorePromiseRejection (upval)
 		UseResult(false):catch(ignorePromiseRejection)
 	end, { Current, UseResult })
 	
 	return {
-		entries = UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 446 ]]
+		entries = UseSignalStateFunction((ReactModule.useMemo(function()
 			-- upvalues: SignalsModule (upval), Current (copy), UseStateResult (copy)
-			return SignalsModule.createComputed(function(p7) --[[ Line: 447 ]]
+			return SignalsModule.createComputed(function(p7)
 				-- upvalues: Current (upval), UseStateResult (upval)
 				local List = {}
 				
@@ -343,14 +343,14 @@ local function useUniverseSessions(p5, Current) --[[ Line: 367 ]]
 				return List
 			end)
 		end, { Current, UseStateResult }))),
-		refresh = ReactModule.useCallback(function() --[[ Line: 464 ]]
+		refresh = ReactModule.useCallback(function()
 			-- upvalues: UseResult (copy)
 			return UseResult(true)
 		end, { UseResult })
 	}
 end
 
-local function buildUniverseItems(Items, Entries, p7, p8, Callback) --[[ Line: 474 ]]
+local function buildUniverseItems(Items, Entries, p7, p8, Callback)
 	-- upvalues: buildLatestSessionByUniverseId (copy), UniverseConfigurationModule (copy), PrivacyType (copy), FFlagBuildWithGroupsModule (copy)
 	local LatestSessionByUniverseId = buildLatestSessionByUniverseId(Entries)
 	local List = {}
@@ -386,7 +386,7 @@ local function buildUniverseItems(Items, Entries, p7, p8, Callback) --[[ Line: 4
 	return List
 end
 
-local function useUniverseSearchList(SearchStore, CreatorTargetId, Query, IsIsFocused, p9, UseMemoResult, UseMemoResult1, UseResult, p10, p11) --[[ Line: 514 ]]
+local function useUniverseSearchList(SearchStore, CreatorTargetId, Query, IsIsFocused, p9, UseMemoResult, UseMemoResult1, UseResult, p10, p11)
 	-- upvalues: ReactModule (copy), FFlagBuildWithGroupsModule (copy), keyForCreators (copy), PageSize (copy), SignalsModule (copy), t1 (copy), UseSignalStateFunction (copy), FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule (copy), useUniverseSessions (copy), PromiseModule (copy), ignorePromiseRejection (copy), buildUniverseItems (copy)
 	local UseRefResult = ReactModule.useRef({})
 	local UseRefResult1 = ReactModule.useRef(Query)
@@ -404,7 +404,7 @@ local function useUniverseSearchList(SearchStore, CreatorTargetId, Query, IsIsFo
 		creators = Creators,
 		cursors = if FFlagBuildWithGroupsModule then {} else nil
 	})
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 542 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: FFlagBuildWithGroupsModule (upval), UseStateResult (copy), PageSize (upval), SearchStore (copy), CreatorTargetId (copy)
 		local List = {}
 		
@@ -450,9 +450,9 @@ local function useUniverseSearchList(SearchStore, CreatorTargetId, Query, IsIsFo
 		end
 		return List
 	end, { UseStateResult, SearchStore, CreatorTargetId })
-	local UseSignalStateResult = UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 564 ]]
+	local UseSignalStateResult = UseSignalStateFunction((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), UseMemoResult2 (copy), t1 (upval), FFlagBuildWithGroupsModule (upval), UseStateResult (copy), PageSize (upval)
-		return SignalsModule.createComputed(function(p12) --[[ Line: 565 ]]
+		return SignalsModule.createComputed(function(p12)
 			-- upvalues: UseMemoResult2 (upval), t1 (upval), FFlagBuildWithGroupsModule (upval), UseStateResult (upval), PageSize (upval)
 			local Items = {}
 			local t = {}
@@ -549,7 +549,7 @@ local function useUniverseSearchList(SearchStore, CreatorTargetId, Query, IsIsFo
 		UseMemoResult2
 	})))
 	local UseUniverseSessionsResult = if FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule then useUniverseSessions(p10, UseSignalStateResult.items) else nil
-	local UseResult1 = ReactModule.useCallback(function(p13, PageIndex, p14, Cursor, Creators) --[[ Line: 656 ]]
+	local UseResult1 = ReactModule.useCallback(function(p13, PageIndex, p14, Cursor, Creators)
 		-- upvalues: FFlagBuildWithGroupsModule (upval), keyForCreators (upval), UseRefResult (copy), PageSize (upval), CreatorTargetId (copy), SearchStore (copy)
 		local Text: string = if FFlagBuildWithGroupsModule then `{PageIndex}\0{p13}\0{Cursor or ""}\0{keyForCreators(Creators) or ""}` else `{PageIndex}\0{p13}`
 		
@@ -583,7 +583,7 @@ local function useUniverseSearchList(SearchStore, CreatorTargetId, Query, IsIsFo
 				pageIndex = PageIndex,
 				pageSize = PageSize,
 				search = if p13 == "" then nil else p13
-			}):finally(function() --[[ Line: 678 ]]
+			}):finally(function()
 				-- upvalues: UseRefResult (upval), Text (copy), CurrentEntry1 (ref)
 				if UseRefResult.current[Text] == CurrentEntry1 then
 					UseRefResult.current[Text] = nil
@@ -596,7 +596,7 @@ local function useUniverseSearchList(SearchStore, CreatorTargetId, Query, IsIsFo
 			return CurrentEntry
 		end
 	end, { SearchStore, CreatorTargetId })
-	local UseResult2 = ReactModule.useCallback(function(p13) --[[ Line: 689 ]]
+	local UseResult2 = ReactModule.useCallback(function(p13)
 		-- upvalues: UseRefResult1 (copy), FFlagBuildWithGroupsModule (upval), UseRefResult2 (copy), UseStateResult2 (copy), PromiseModule (upval), UseResult1 (copy)
 		local P52 = p13 or UseRefResult1.current
 		
@@ -616,7 +616,7 @@ local function useUniverseSearchList(SearchStore, CreatorTargetId, Query, IsIsFo
 			return UseResult1(P52, 0)
 		end
 	end, { UseResult1 })
-	ReactModule.useEffect(function() --[[ Line: 712 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsIsFocused (copy), FFlagBuildWithGroupsModule (upval), keyForCreators (upval), UseStateResult (copy), KeyForCreatorsResult (copy), Query (copy), UseResult2 (copy), ignorePromiseRejection (upval)
 		if not IsIsFocused then return end
 		local IsNotKeyForCreatorsResultMatch: boolean = FFlagBuildWithGroupsModule and keyForCreators(UseStateResult.creators) ~= KeyForCreatorsResult
@@ -630,7 +630,7 @@ local function useUniverseSearchList(SearchStore, CreatorTargetId, Query, IsIsFo
 	})
 	
 	return {
-		items = ReactModule.useMemo(function() --[[ Line: 779 ]]
+		items = ReactModule.useMemo(function()
 			-- upvalues: buildUniverseItems (upval), UseSignalStateResult (copy), FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule (upval), UseUniverseSessionsResult (copy), p9 (copy), UseMemoResult (copy), UseMemoResult1 (copy), UseResult (copy)
 			return (buildUniverseItems(UseSignalStateResult.items, if FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule then UseUniverseSessionsResult.entries else p9, UseMemoResult, UseMemoResult1, UseResult))
 		end, {
@@ -647,7 +647,7 @@ local function useUniverseSearchList(SearchStore, CreatorTargetId, Query, IsIsFo
 		query = UseStateResult.query,
 		refresh = UseResult2,
 		refreshSessions = if FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule then UseUniverseSessionsResult.refresh else nil,
-		loadMore = ReactModule.useCallback(function() --[[ Line: 722 ]]
+		loadMore = ReactModule.useCallback(function()
 			-- upvalues: UseSignalStateResult (copy), UseStateResult (copy), UseRefResult1 (copy), FFlagBuildWithGroupsModule (upval), keyForCreators (upval), UseRefResult2 (copy), UseStateResult2 (copy), UseResult1 (copy), ignorePromiseRejection (upval)
 			local FailedPageIndex = UseSignalStateResult.failedPageIndex or UseSignalStateResult.nextPageIndex
 			local Query = UseStateResult.query
@@ -661,7 +661,7 @@ local function useUniverseSearchList(SearchStore, CreatorTargetId, Query, IsIsFo
 				local Cursor = if HasFailedPageIndex then (UseStateResult.cursors or {})[FailedPageIndex] else UseSignalStateResult.nextCursor
 				
 				if not HasFailedPageIndex then
-					UseStateResult2(function(p13) --[[ Line: 739 ]]
+					UseStateResult2(function(p13)
 						-- upvalues: Query (copy), Creators (copy), FailedPageIndex (copy), Cursor (copy)
 						if p13.query == Query and p13.creators == Creators and not table.find(p13.pageIndexes, FailedPageIndex) then
 							local Copy = table.clone(p13.pageIndexes)
@@ -685,7 +685,7 @@ local function useUniverseSearchList(SearchStore, CreatorTargetId, Query, IsIsFo
 				return
 			else
 				if UseSignalStateResult.failedPageIndex == nil then
-					UseStateResult2(function(p13) --[[ Line: 762 ]]
+					UseStateResult2(function(p13)
 						-- upvalues: Query (copy), FailedPageIndex (copy)
 						if p13.query == Query and not table.find(p13.pageIndexes, FailedPageIndex) then
 							local Copy = table.clone(p13.pageIndexes)
@@ -709,9 +709,9 @@ local function useUniverseSearchList(SearchStore, CreatorTargetId, Query, IsIsFo
 	}
 end
 
-local function useBuildCreators(CreatorGroupsStore, CreatorTargetId, Filter) --[[ Line: 818 ]]
+local function useBuildCreators(CreatorGroupsStore, CreatorTargetId, Filter)
 	-- upvalues: ReactModule (copy), UseSignalStateFunction (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 823 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CreatorGroupsStore (copy)
 		return (CreatorGroupsStore.getAndFetchGroups("Build"))
 	end, { CreatorGroupsStore })
@@ -720,7 +720,7 @@ local function useBuildCreators(CreatorGroupsStore, CreatorTargetId, Filter) --[
 	local Games = Filter.games
 	local GroupId = Filter.groupId
 	
-	return ReactModule.useMemo(function() --[[ Line: 831 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: CreatorTargetId (copy), Games (copy), UseSignalStateResult (copy), UseSignalStateResult1 (copy), GroupId (copy)
 		local config = { creatorType = "User", creatorTargetId = CreatorTargetId }
 		
@@ -760,11 +760,11 @@ local function useBuildCreators(CreatorGroupsStore, CreatorTargetId, Filter) --[
 	})
 end
 
-local function useLegacySessionList(p13, ConfigurationStore, UniverseActivationStore, UseDebouncedQueryResult, UseMemoResult, UseMemoResult1, UseResult) --[[ Line: 874 ]]
+local function useLegacySessionList(p13, ConfigurationStore, UniverseActivationStore, UseDebouncedQueryResult, UseMemoResult, UseMemoResult1, UseResult)
 	-- upvalues: ReactModule (copy), SignalsModule (copy), UseSignalStateFunction (copy), PrivacyType (copy), ContentMaturityUtilsModule (copy), t (copy), buildExperienceMetadataByUniverseId (copy), buildSessionItems (copy), MatchesSearchQueryModule (copy)
-	local UseSignalStateResult = UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 883 ]]
+	local UseSignalStateResult = UseSignalStateFunction((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), p13 (copy), ConfigurationStore (copy)
-		return SignalsModule.createComputed(function(p14) --[[ Line: 884 ]]
+		return SignalsModule.createComputed(function(p14)
 			-- upvalues: p13 (upval), ConfigurationStore (upval)
 			local DataResults = {}
 			local t = {}
@@ -794,9 +794,9 @@ local function useLegacySessionList(p13, ConfigurationStore, UniverseActivationS
 			return DataResults
 		end)
 	end, { ConfigurationStore, p13 })))
-	local UseSignalStateResult1 = UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 904 ]]
+	local UseSignalStateResult1 = UseSignalStateFunction((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), UniverseActivationStore (copy), UseSignalStateResult (copy), PrivacyType (upval), ContentMaturityUtilsModule (upval), t (upval)
-		return SignalsModule.createComputed(function(p14) --[[ Line: 905 ]]
+		return SignalsModule.createComputed(function(p14)
 			-- upvalues: UniverseActivationStore (upval), UseSignalStateResult (upval), PrivacyType (upval), ContentMaturityUtilsModule (upval), t (upval)
 			local t2 = {}
 			
@@ -810,7 +810,7 @@ local function useLegacySessionList(p13, ConfigurationStore, UniverseActivationS
 			return if next(t2) == nil then t else t2
 		end)
 	end, { UniverseActivationStore, UseSignalStateResult })))
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 927 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: buildExperienceMetadataByUniverseId (upval), UseSignalStateResult (copy), UseSignalStateResult1 (copy), UseMemoResult1 (copy)
 		return (buildExperienceMetadataByUniverseId(UseSignalStateResult, UseSignalStateResult1, UseMemoResult1))
 	end, {
@@ -818,7 +818,7 @@ local function useLegacySessionList(p13, ConfigurationStore, UniverseActivationS
 		UseSignalStateResult,
 		UseMemoResult1
 	})
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 935 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: buildSessionItems (upval), p13 (copy), UseMemoResult2 (copy), UseMemoResult (copy), UseMemoResult1 (copy), UseResult (copy), UseSignalStateResult (copy)
 		local List = {}
 		
@@ -837,7 +837,7 @@ local function useLegacySessionList(p13, ConfigurationStore, UniverseActivationS
 	
 	return {
 		displayedItems = UseMemoResult3,
-		joinableItems = ReactModule.useMemo(function() --[[ Line: 974 ]]
+		joinableItems = ReactModule.useMemo(function()
 			-- upvalues: UseDebouncedQueryResult (copy), UseMemoResult3 (copy), MatchesSearchQueryModule (upval)
 			if UseDebouncedQueryResult == "" then
 				return UseMemoResult3
@@ -851,7 +851,7 @@ local function useLegacySessionList(p13, ConfigurationStore, UniverseActivationS
 			end
 			return List
 		end, { UseDebouncedQueryResult, UseMemoResult3 }),
-		hasPendingSummary = ReactModule.useMemo(function(): boolean --[[ Line: 961 ]]
+		hasPendingSummary = ReactModule.useMemo(function(): boolean
 			-- upvalues: p13 (copy), UseSignalStateResult (copy)
 			local t = {}
 			
@@ -878,7 +878,7 @@ local function useLegacySessionList(p13, ConfigurationStore, UniverseActivationS
 	}
 end
 
-return function(p14) --[[ Line: 994 | Named "useMyCreationsResults" ]]
+return function(p14)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationRoactContext (copy), LocalizationModule (copy), CreatorAgentChatModule (copy), FFlagBuildExperienceMyCreationsUseUniverseListModule (copy), UniverseSearchModule (copy), UniverseActivationModule (copy), UniverseConfigurationModule (copy), GetSearchQueryStoreModule (copy), GetBuildExperienceRefreshStoreModule (copy), AppLifecycleObserverService (copy), UseSignalStateFunction (copy), FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule (copy), Players (copy), FFlagBuildWithGroupsModule (copy), CreatorGroupsModule (copy), useBuildCreators (copy), config (copy), useUniverseSearchList (copy), useLegacySessionList (copy), PromiseModule (copy), ignorePromiseRejection (copy), SignalsModule (copy), FIntMyCreationsSessionListPollingIntervalSecondsModule (copy), requestHandleToPromise (copy), noOp (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		building = LocalizationStringsModule.MY_CREATIONS_BUILDING,
@@ -892,7 +892,7 @@ return function(p14) --[[ Line: 994 | Named "useMyCreationsResults" ]]
 		restricted = LocalizationStringsModule.MY_CREATIONS_RESTRICTED
 	})
 	local UseContextResult = ReactModule.useContext(LocalizationRoactContext)
-	local UseResult = ReactModule.useCallback(function(p15) --[[ Line: 1008 ]]
+	local UseResult = ReactModule.useCallback(function(p15)
 		-- upvalues: UseContextResult (copy), LocalizationStringsModule (upval)
 		return UseContextResult:Format(LocalizationStringsModule.MY_CREATIONS_UNIVERSE_NAME, { UNIVERSE_ID = p15 })
 	end, {
@@ -900,7 +900,7 @@ return function(p14) --[[ Line: 994 | Named "useMyCreationsResults" ]]
 		UseLocalizationResult[LocalizationModule.RobloxLocaleIdKey]
 	})
 	local LoadError = UseLocalizationResult.loadError
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 1015 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseLocalizationResult (copy)
 		return {
 			waiting_on_client = UseLocalizationResult.inputNeeded,
@@ -912,7 +912,7 @@ return function(p14) --[[ Line: 994 | Named "useMyCreationsResults" ]]
 		UseLocalizationResult.ready,
 		UseLocalizationResult.building
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 1030 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseLocalizationResult (copy)
 		return {
 			live = UseLocalizationResult.live,
@@ -963,12 +963,12 @@ return function(p14) --[[ Line: 994 | Named "useMyCreationsResults" ]]
 	if FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule then
 		UseRefResult2.current = RefreshSessions
 	end
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 1132 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: SessionListStore (copy), PromiseModule (upval), FFlagBuildWithGroupsModule (upval), CreatorGroupsStore (copy), FFlagBuildExperienceMyCreationsUseUniverseListModule (upval), FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule (upval), Refresh (copy), UseRefResult2 (copy), ignorePromiseRejection (upval)
 		local RefreshResult = SessionListStore.refresh()
-		local NewPromise = PromiseModule.new(function(Callback, Callback1) --[[ Line: 257 ]]
+		local NewPromise = PromiseModule.new(function(Callback, Callback1)
 			-- upvalues: RefreshResult (copy)
-			task.spawn(function() --[[ Line: 258 ]]
+			task.spawn(function()
 				-- upvalues: RefreshResult (upval), Callback (copy), Callback1 (copy)
 				while RefreshResult.state(false).status == "pending" do
 					task.wait()
@@ -994,9 +994,9 @@ return function(p14) --[[ Line: 994 | Named "useMyCreationsResults" ]]
 			UseRefResult2.current():catch(ignorePromiseRejection)
 		}) else PromiseModule.all({ Refresh(), NewPromise }) else NewPromise
 	end, { CreatorGroupsStore, Refresh, SessionListStore })
-	ReactModule.useEffect(function() --[[ Line: 1153 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: AppLifecycleObserverService1 (copy), IsIsFocused (copy), FFlagBuildExperienceMyCreationsUseUniverseListModule (upval), Refresh (copy), ignorePromiseRejection (upval), FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule (upval), UseRefResult2 (copy), SessionListStore (copy)
-		local OnUnhideConnection = AppLifecycleObserverService1.OnUnhide:Connect(function() --[[ Line: 1154 ]]
+		local OnUnhideConnection = AppLifecycleObserverService1.OnUnhide:Connect(function()
 			-- upvalues: IsIsFocused (upval), FFlagBuildExperienceMyCreationsUseUniverseListModule (upval), Refresh (upval), ignorePromiseRejection (upval), FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule (upval), UseRefResult2 (upval), SessionListStore (upval)
 			if IsIsFocused then
 				if FFlagBuildExperienceMyCreationsUseUniverseListModule then
@@ -1010,7 +1010,7 @@ return function(p14) --[[ Line: 994 | Named "useMyCreationsResults" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 1166 ]]
+		return function()
 			-- upvalues: OnUnhideConnection (copy)
 			OnUnhideConnection:Disconnect()
 		end
@@ -1020,7 +1020,7 @@ return function(p14) --[[ Line: 994 | Named "useMyCreationsResults" ]]
 		Refresh,
 		SessionListStore
 	})
-	ReactModule.useEffect(function() --[[ Line: 1171 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule (upval), UseRefResult (copy), UseSignalStateResult (copy), IsIsFocused (copy), UseRefResult1 (copy), UseStateResult2 (copy), FFlagBuildExperienceMyCreationsUseUniverseListModule (upval), Refresh (copy), ignorePromiseRejection (upval), UseRefResult2 (copy), SessionListStore (copy), SignalsModule (upval)
 		local IsNotCurrentMatch = false
 		
@@ -1045,7 +1045,7 @@ return function(p14) --[[ Line: 994 | Named "useMyCreationsResults" ]]
 		end
 		local RefreshResult = SessionListStore.refresh()
 		
-		return SignalsModule.createEffect(function(p15) --[[ Line: 1192 ]]
+		return SignalsModule.createEffect(function(p15)
 			-- upvalues: RefreshResult (copy), UseStateResult2 (upval)
 			if RefreshResult.state(p15).status == "succeeded" then
 				UseStateResult2(true)
@@ -1058,14 +1058,14 @@ return function(p14) --[[ Line: 994 | Named "useMyCreationsResults" ]]
 		SessionListStore
 	})
 	local Largest = math.max(0, p14.pollingIntervalSeconds or FIntMyCreationsSessionListPollingIntervalSecondsModule)
-	ReactModule.useEffect(function() --[[ Line: 1201 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsIsFocused (copy), Largest (copy), FFlagBuildExperienceMyCreationsUseUniverseListModule (upval), FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule (upval), UseRefResult2 (copy), ignorePromiseRejection (upval), SessionListStore (copy)
 		if not IsIsFocused or Largest == 0 then return end
 		local Flag = false
 		
-		local function scheduleNextPoll() --[[ Line: 1207 ]]
+		local function scheduleNextPoll()
 			-- upvalues: Largest (upval), Flag (ref), FFlagBuildExperienceMyCreationsUseUniverseListModule (upval), FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule (upval), UseRefResult2 (upval), ignorePromiseRejection (upval), SessionListStore (upval), scheduleNextPoll (copy)
-			task.delay(Largest, function() --[[ Line: 1208 ]]
+			task.delay(Largest, function()
 				-- upvalues: Flag (upval), FFlagBuildExperienceMyCreationsUseUniverseListModule (upval), FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule (upval), UseRefResult2 (upval), ignorePromiseRejection (upval), SessionListStore (upval), scheduleNextPoll (upval)
 				if Flag then return end
 				if FFlagBuildExperienceMyCreationsUseUniverseListModule and FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule then
@@ -1076,7 +1076,7 @@ return function(p14) --[[ Line: 994 | Named "useMyCreationsResults" ]]
 			end)
 		end
 		
-		task.delay(Largest, function() --[[ Line: 1208 ]]
+		task.delay(Largest, function()
 			-- upvalues: Flag (ref), FFlagBuildExperienceMyCreationsUseUniverseListModule (upval), FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule (upval), UseRefResult2 (upval), ignorePromiseRejection (upval), SessionListStore (upval), scheduleNextPoll (copy)
 			if Flag then return end
 			if FFlagBuildExperienceMyCreationsUseUniverseListModule and FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule then
@@ -1086,7 +1086,7 @@ return function(p14) --[[ Line: 994 | Named "useMyCreationsResults" ]]
 			scheduleNextPoll()
 		end)
 		
-		return function() --[[ Line: 1224 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end
@@ -1098,7 +1098,7 @@ return function(p14) --[[ Line: 994 | Named "useMyCreationsResults" ]]
 	local IsReady: boolean = Status == "Ready" or SourceItemCount > 0
 	local IsPending = UseSignalStateResult4 == "pending"
 	local IsLoadingMore = if FFlagBuildExperienceMyCreationsUseUniverseListModule then UseUniverseSearchListResult.isLoadingMore else false
-	local UseResult11 = ReactModule.useCallback(function() --[[ Line: 1253 ]]
+	local UseResult11 = ReactModule.useCallback(function()
 		-- upvalues: SessionListStore (copy), PromiseModule (upval), requestHandleToPromise (upval)
 		local More = SessionListStore.loadMore()
 		
@@ -1126,7 +1126,7 @@ return function(p14) --[[ Line: 994 | Named "useMyCreationsResults" ]]
 		hasCompletedFocusedRefresh = UseStateResult,
 		loadError = LoadError,
 		refresh = UseResult1,
-		loadMoreIfNeeded = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 1266 ]]
+		loadMoreIfNeeded = ReactModule.useCallback(function(ScrollFrame)
 			-- upvalues: FFlagBuildExperienceMyCreationsUseUniverseListModule (upval), LoadMore (copy), UseSignalStateResult2 (copy), IsPending (copy), NotReady (copy), UseResult11 (copy)
 			local Y: number = ScrollFrame.AbsoluteCanvasSize.Y
 			

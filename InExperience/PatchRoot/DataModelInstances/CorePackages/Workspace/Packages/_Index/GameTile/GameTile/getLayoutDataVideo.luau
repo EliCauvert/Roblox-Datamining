@@ -4,11 +4,11 @@ local _ = require(GameTile.GameTileTypes)
 local FFlagLuaAppHomeMomentVideoPrecedence = require(Parent.SharedFlags).FFlagLuaAppHomeMomentVideoPrecedence
 local FFlagLuaAppDiscoveryMomentVideoTelemetry = require(Parent.SharedFlags).FFlagLuaAppDiscoveryMomentVideoTelemetry
 
-local function _(p1): boolean --[[ Line: 17 | Named "isNonEmptyString" ]]
+local function _(p1): boolean
 	return type(p1) == "string" and p1 ~= ""
 end
 
-local _ = function(p1) --[[ Line: 21 | Named "getMomentVideo" ]]
+local _ = function(p1)
 	-- upvalues: FFlagLuaAppDiscoveryMomentVideoTelemetry (copy)
 	local MomentVideoAssetId = p1.momentVideoAssetId
 	
@@ -26,7 +26,7 @@ local _ = function(p1) --[[ Line: 21 | Named "getMomentVideo" ]]
 	return nil
 end
 
-return function(p1, AssetId) --[[ Line: 38 | Named "getLayoutDataVideo" ]]
+return function(p1, AssetId)
 	-- upvalues: FFlagLuaAppHomeMomentVideoPrecedence (copy), FFlagLuaAppDiscoveryMomentVideoTelemetry (copy)
 	local PrimaryMediaAsset = p1 and p1.primaryMediaAsset
 	local v1 = nil

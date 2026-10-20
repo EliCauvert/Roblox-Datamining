@@ -43,14 +43,14 @@ local VideoLiftContainerModule = if FFlagMomentsComments then require(script.Par
 local UseCommentsChromeTransparencyModule = if FFlagMomentsComments then require(script.Parent.useCommentsChromeTransparency) else nil
 local UseCommentsEventsModule = if FFlagMomentsComments then require(Moments.Components.Comments.useCommentsEvents) else nil
 
-local function DisplayWakeLockEffect() --[[ Line: 100 ]]
+local function DisplayWakeLockEffect()
 	-- upvalues: UseIsPlayingModule (copy), UseDisplayWakeLockModule (copy)
 	UseDisplayWakeLockModule((UseIsPlayingModule()))
 	
 	return nil
 end
 
-local function OverlayInfoFrame(p1) --[[ Line: 124 ]]
+local function OverlayInfoFrame(p1)
 	-- upvalues: UseTokensFunction (copy), MomentOverlayInsetContextModule (copy), FFlagMomentsFeedAboveNavBarModule (copy), ReactModule (copy), View (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseMomentOverlayInsetResult: number = MomentOverlayInsetContextModule.useMomentOverlayInset()
@@ -75,7 +75,7 @@ local function OverlayInfoFrame(p1) --[[ Line: 124 ]]
 	}, p1.children)
 end
 
-return function(p1) --[[ Line: 167 | Named "MomentItem" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseCompositionLayoutFunction (copy), UseDeviceInsetsFunction (copy), ReactUtilsModule (copy), MomentPushedFeedSafeAreaContextModule (copy), GetFFlagMomentsRenderPostAssetsModule (copy), ReactModule (copy), SignalsModule (copy), MomentsGetPostAssetStoreModule (copy), SignalsReactModule (copy), DeriveMomentFromPostModule (copy), FFlagMomentsAvatarLookTryOn (copy), UseMomentsHostFunction (copy), FFlagMomentsComments (copy), VideoLiftContainerModule (copy), UseCommentsChromeTransparencyModule (copy), UseCommentsEventsModule (copy), UseMomentsSessionFunction (copy), TopContentModule (copy), ScrubberModule (copy), AvatarActionBarModule (copy), CallToActionModule (copy), MomentLayoutModule (copy), OverlayInfoFrame (copy), MomentContextModule (copy), View (copy), Text (copy), VideoScrimModule (copy), MomentGestureLayerModule (copy), GradientBackdrop (copy), PlaybackToggleIndicatorModule (copy), ReactionExplosionLayerModule (copy), GetFFlagMomentsDisplayWakeLockModule (copy), DisplayWakeLockEffect (copy), FFlagMomentsFixOverlayRemountImpressionsModule (copy), MomentImpressionMemoryModule (copy), ReactionEffectsContextModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseCompositionLayoutResult = UseCompositionLayoutFunction()
@@ -91,14 +91,14 @@ return function(p1) --[[ Line: 167 | Named "MomentItem" ]]
 	
 	if GetFFlagMomentsRenderPostAssetsModule() then
 		local PostAssetId = if p1.moment == nil or p1.moment.postAsset == nil then nil else p1.moment.postAsset.postAssetId
-		local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 183 ]]
+		local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 			-- upvalues: SignalsModule (upval), PostAssetId (copy), MomentsGetPostAssetStoreModule (upval)
-			return SignalsModule.createComputed(function(p2) --[[ Line: 184 ]]
+			return SignalsModule.createComputed(function(p2)
 				-- upvalues: PostAssetId (upval), MomentsGetPostAssetStoreModule (upval)
 				return if PostAssetId == nil then nil else MomentsGetPostAssetStoreModule(false).getCachedPostAsset(PostAssetId).data(p2)
 			end)
 		end, { PostAssetId or false })))
-		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 192 ]]
+		local UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: p1 (copy), UseSignalStateResult (copy), DeriveMomentFromPostModule (upval)
 			return if p1.moment == nil or UseSignalStateResult == nil then nil else DeriveMomentFromPostModule(p1.moment, UseSignalStateResult)
 		end, { p1.moment, UseSignalStateResult or false })
@@ -107,7 +107,7 @@ return function(p1) --[[ Line: 167 | Named "MomentItem" ]]
 		if Moment ~= nil and p1.renderMediaSurface ~= nil then
 			MediaSurface = p1.renderMediaSurface(Moment)
 		end
-		Data = ReactModule.useMemo(function() --[[ Line: 202 ]]
+		Data = ReactModule.useMemo(function()
 			-- upvalues: UseMemoResult (copy), p1 (copy), FFlagMomentsAvatarLookTryOn (upval)
 			if UseMemoResult == nil then
 				return p1.data
@@ -181,7 +181,7 @@ return function(p1) --[[ Line: 167 | Named "MomentItem" ]]
 					verticalPadding = UseTokensResult.Padding.XLarge,
 					safeAreaInsets = UseDeviceInsetsResult1,
 					maxSize = MomentLayoutModule.BOTTOM_UI_MAX_SIZE,
-					onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 275 ]]
+					onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
 						-- upvalues: UseBindingResult2 (copy), ScaledXLarge (copy)
 						UseBindingResult2(UDim2.new(1, 0, 0, Frame.AbsoluteSize.Y + ScaledXLarge))
 					end, { ScaledXLarge })

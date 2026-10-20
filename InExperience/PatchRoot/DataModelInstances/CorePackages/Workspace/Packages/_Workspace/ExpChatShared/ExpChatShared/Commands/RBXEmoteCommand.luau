@@ -12,7 +12,7 @@ local config = {
 	cheer = true
 }
 
-local function _(Object): string --[[ Line: 18 | Named "getDanceBasedOnRigType" ]]
+local function _(Object): string
 	local v1: string? = nil
 	local Humanoid = Object:FindFirstChildOfClass("Humanoid")
 	
@@ -29,9 +29,9 @@ local function _(Object): string --[[ Line: 18 | Named "getDanceBasedOnRigType" 
 	return v1
 end
 
-local function handleLegacyEmote(Lowered, Object) --[[ Line: 33 ]]
+local function handleLegacyEmote(Lowered, Object)
 	-- upvalues: Emote (copy)
-	local Success, Result = pcall(function(): boolean --[[ Line: 34 ]]
+	local Success, Result = pcall(function(): boolean
 		-- upvalues: Object (copy), Lowered (ref), Emote (upval)
 		local Animate = Object:FindFirstChild("Animate")
 		
@@ -74,7 +74,7 @@ local function handleLegacyEmote(Lowered, Object) --[[ Line: 33 ]]
 	end
 end
 
-local function getValidEmoteOrResponse(HumanoidDescription, Lowered) --[[ Line: 63 ]]
+local function getValidEmoteOrResponse(HumanoidDescription, Lowered)
 	local Number: number? = tonumber(Lowered, 10)
 	
 	if Number then
@@ -109,7 +109,7 @@ end
 return {
 	name = script.Name,
 	alias = { "/emote", "/e" },
-	clientRun = function(p1, _, Text: string) --[[ Line: 105 ]]
+	clientRun = function(p1, _, Text: string)
 		-- upvalues: Emote (copy), config (copy), handleLegacyEmote (copy), StarterPlayer (copy), getValidEmoteOrResponse (copy)
 		local Text1: string? = nil
 		
@@ -189,7 +189,7 @@ return {
 					
 					return ValidEmoteOrResponse2
 				end
-				local Success, Result = pcall(function() --[[ Line: 192 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: Humanoid (copy), ValidEmoteOrResponse (copy)
 					return Humanoid:PlayEmoteAsync(ValidEmoteOrResponse)
 				end)

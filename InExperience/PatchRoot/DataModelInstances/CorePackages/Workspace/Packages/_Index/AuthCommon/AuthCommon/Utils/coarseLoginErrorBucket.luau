@@ -17,7 +17,7 @@ local config1 = {
 	[StatusCodes.INTERNAL_SERVER_ERROR] = "serverError"
 }
 
-return function(p1) --[[ Line: 25 | Named "coarseLoginErrorBucket" ]]
+return function(p1)
 	-- upvalues: config (copy), config1 (copy)
 	if typeof(p1) == "table" then
 		local Entry = config[p1.errorCode]

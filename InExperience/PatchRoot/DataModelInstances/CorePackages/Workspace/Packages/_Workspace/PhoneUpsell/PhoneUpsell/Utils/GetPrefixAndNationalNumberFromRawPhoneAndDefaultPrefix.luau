@@ -1,4 +1,4 @@
-﻿return function(Text: string, Text1: string) --[[ Line: 1 ]]
+﻿return function(Text: string, Text1: string)
 	local D: string = Text:gsub("%D", "")
 	local D1: string = Text1:gsub("%D", "")
 	

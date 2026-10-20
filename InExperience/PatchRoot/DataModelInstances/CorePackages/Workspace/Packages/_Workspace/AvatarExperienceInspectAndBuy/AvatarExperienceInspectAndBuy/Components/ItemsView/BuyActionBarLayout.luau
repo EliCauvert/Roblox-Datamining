@@ -6,7 +6,7 @@ local Divider = FoundationModule.Divider
 local DividerOrientation = FoundationModule.Enums.DividerOrientation
 local BuyActionBarModule = require(AvatarExperienceInspectAndBuy.Components.Common.BuyActionBar)
 
-return function(Frame: Frame) --[[ Line: 34 | Named "BuyActionBarLayout" ]]
+return function(Frame: Frame)
 	-- upvalues: ReactModule (copy), Divider (copy), DividerOrientation (copy), BuyActionBarModule (copy)
 	return ReactModule.createElement("TextButton", {
 		Size = Frame.Size,
@@ -19,7 +19,7 @@ return function(Frame: Frame) --[[ Line: 34 | Named "BuyActionBarLayout" ]]
 		Selectable = false,
 		Text = "",
 		AutoButtonColor = false,
-		[ReactModule.Event.Activated] = function() --[[ Line: 46 ]] end
+		[ReactModule.Event.Activated] = function() end
 	}, {
 		TopBorder = if Frame.enableTopBorder then ReactModule.createElement(Divider, {
 			orientation = DividerOrientation.Horizontal,

@@ -4,7 +4,7 @@ local _ = require(AvatarExperienceGifting.Types.GiftSendFlowNavigationOverrides)
 local AvatarItemGiftReviewSheetPlaceholderViewModule = require(script.Parent.AvatarItemGiftReviewSheetPlaceholderView)
 local UseAvatarItemGiftReviewSheetViewModelModule = require(script.Parent.useAvatarItemGiftReviewSheetViewModel)
 
-return function(p1) --[[ Line: 14 | Named "AvatarItemGiftReviewSheetContainer" ]]
+return function(p1)
 	-- upvalues: UseAvatarItemGiftReviewSheetViewModelModule (copy), ReactModule (copy), AvatarItemGiftReviewSheetPlaceholderViewModule (copy)
 	return ReactModule.createElement(AvatarItemGiftReviewSheetPlaceholderViewModule, (UseAvatarItemGiftReviewSheetViewModelModule(p1.navigationOverrides)))
 end

@@ -50,20 +50,20 @@ IconButton.validateProps = TModule.strictInterface({
 	[RoactModule.Change.AbsolutePosition] = TModule.optional(TModule.callback)
 })
 
-function AnimatedScaleIcon(p1) --[[ Line: 65 ]]
+function AnimatedScaleIcon(p1)
 	-- upvalues: ReactOtterModule (copy), ReactModule (copy), RoactModule (copy), ImageSetLabel (copy)
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(p1.iconSize)
-	ReactModule.useEffect(function() --[[ Line: 68 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), p1 (copy)
 		UseAnimatedBindingResult2(ReactOtterModule.spring(p1.iconSize, { dampingRatio = 1, frequency = 2.857142857142857 }))
 		
-		return function() --[[ Line: 73 ]] end
+		return function() end
 	end, { p1.iconSize })
 	
 	return RoactModule.createElement(ImageSetLabel, {
 		BackgroundTransparency = 1,
 		ZIndex = 1,
-		Size = UseAnimatedBindingResult:map(function(XOffset): UDim2 --[[ Line: 77 ]]
+		Size = UseAnimatedBindingResult:map(function(XOffset): UDim2
 			return UDim2.fromOffset(XOffset, XOffset)
 		end),
 		Position = UDim2.fromScale(0.5, 0.5),
@@ -74,11 +74,11 @@ function AnimatedScaleIcon(p1) --[[ Line: 65 ]]
 	})
 end
 
-function IconButton.init(p1) --[[ Line: 90 ]]
+function IconButton.init(p1)
 	-- upvalues: ControlState (copy), SignalsModule (copy), DisplayModule (copy)
 	p1:setState({ controlState = ControlState.Default })
 	
-	function p1.controlStateUpdated(Hover, ControlState1) --[[ Line: 95 ]]
+	function p1.controlStateUpdated(Hover, ControlState1)
 		-- upvalues: p1 (copy), ControlState (upval)
 		if p1.props.onHover and ControlState1 == ControlState.Hover then
 			p1.props.onHover()
@@ -88,7 +88,7 @@ function IconButton.init(p1) --[[ Line: 90 ]]
 		p1:setState({ controlState = ControlState1 })
 	end
 	
-	p1.disposeUiScaleEffect = SignalsModule.createEffect(function(p2) --[[ Line: 109 ]]
+	p1.disposeUiScaleEffect = SignalsModule.createEffect(function(p2)
 		-- upvalues: DisplayModule (upval), p1 (copy)
 		p1:setState({
 			UiScale = DisplayModule.GetDisplayStore(p2).getUIScale(p2)
@@ -96,23 +96,23 @@ function IconButton.init(p1) --[[ Line: 90 ]]
 	end)
 end
 
-function IconButton.render(p1) --[[ Line: 117 ]]
+function IconButton.render(p1)
 	-- upvalues: EnabledResult (copy), WithCursorFunction (copy), WithSelectionCursorProviderFunction (copy)
-	return if EnabledResult then WithCursorFunction(function(p2) --[[ Line: 119 ]]
+	return if EnabledResult then WithCursorFunction(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithCursor(p2)
-	end) else WithSelectionCursorProviderFunction(function(p2) --[[ Line: 123 ]]
+	end) else WithSelectionCursorProviderFunction(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithCursor(p2)
 	end)
 end
 
-function IconButton.renderWithCursor(p1, p2) --[[ Line: 129 ]]
+function IconButton.renderWithCursor(p1, p2)
 	-- upvalues: IsNewTiltIconEnabledModule (copy), ConstantsModule (copy), WithStyleFunction (copy), ControlState (copy), RoactModule (copy), Interactable (copy), FFlagAddUILessMode (copy), FIntAddUILessModeVariant (copy), SkinToneCircle (copy), EnabledResult (copy), FFlagEnableConsoleExpControls (copy), ImageSetLabel (copy), GetFFlagFlashingDotUseAsyncInitModule (copy), FlashingDotV2Module (copy), FlashingDotModule (copy), ComponentAssetsCircle17 (copy)
 	local BackgroundColor3 = not IsNewTiltIconEnabledModule() and p1.props.backgroundColor3
 	local ScaledTopBarButtonHeight = ConstantsModule.TopBarButtonHeight * p1.state.UiScale
 	
-	return WithStyleFunction(function(Style) --[[ Line: 132 ]]
+	return WithStyleFunction(function(Style)
 		-- upvalues: p1 (copy), ControlState (upval), RoactModule (upval), Interactable (upval), FFlagAddUILessMode (upval), FIntAddUILessModeVariant (upval), IsNewTiltIconEnabledModule (upval), ScaledTopBarButtonHeight (copy), p2 (copy), SkinToneCircle (upval), EnabledResult (upval), FFlagEnableConsoleExpControls (upval), BackgroundColor3 (copy), ImageSetLabel (upval), GetFFlagFlashingDotUseAsyncInitModule (upval), FlashingDotV2Module (upval), FlashingDotModule (upval), ComponentAssetsCircle17 (upval)
 		local BackgroundOnPress = if p1.state.controlState == ControlState.Pressed then Style.Theme.BackgroundOnPress elseif p1.state.controlState == ControlState.Hover then Style.Theme.BackgroundOnHover else { Transparency = 1, Color = Color3.new(1, 1, 1) }
 		
@@ -182,13 +182,13 @@ function IconButton.renderWithCursor(p1, p2) --[[ Line: 129 ]]
 	end)
 end
 
-function IconButton.willUnmount(p1) --[[ Line: 236 ]]
+function IconButton.willUnmount(p1)
 	if p1.disposeUiScaleEffect then
 		p1.disposeUiScaleEffect()
 	end
 end
 
-return RoactModule.forwardRef(function(p1, ForwardRef) --[[ Line: 241 ]]
+return RoactModule.forwardRef(function(p1, ForwardRef)
 	-- upvalues: RoactModule (copy), IconButton (copy), CryoModule (copy)
 	return RoactModule.createElement(IconButton, CryoModule.Dictionary.join(p1, { forwardRef = ForwardRef }))
 end)

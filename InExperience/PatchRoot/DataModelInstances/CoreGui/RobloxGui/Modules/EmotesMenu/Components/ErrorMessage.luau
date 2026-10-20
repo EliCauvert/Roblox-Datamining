@@ -6,7 +6,7 @@ local HideErrorModule = require(Parent.Actions.HideError)
 local ConstantsModule = require(Parent.Constants)
 local ErrorMessage = RoactModule.PureComponent:extend("ErrorMessage")
 
-function ErrorMessage.render(p1) --[[ Line: 17 ]]
+function ErrorMessage.render(p1)
 	-- upvalues: ConstantsModule (copy), RoactModule (copy)
 	local Layout = ConstantsModule.Layouts[p1.props.layout]
 	
@@ -18,11 +18,11 @@ function ErrorMessage.render(p1) --[[ Line: 17 ]]
 		BorderSizePixel = ConstantsModule.ErrorFrameBorderSize,
 		Selectable = false,
 		Visible = p1.props.displayOptions.errorVisible,
-		[RoactModule.Event.TouchTap] = function() --[[ Line: 29 ]]
+		[RoactModule.Event.TouchTap] = function()
 			-- upvalues: p1 (copy)
 			p1.props.close()
 		end,
-		[RoactModule.Event.InputBegan] = function(_, Input) --[[ Line: 33 ]]
+		[RoactModule.Event.InputBegan] = function(_, Input)
 			-- upvalues: p1 (copy)
 			if Input.UserInputType == Enum.UserInputType.MouseButton1 then
 				p1.props.close()
@@ -63,12 +63,12 @@ function ErrorMessage.render(p1) --[[ Line: 17 ]]
 	})
 end
 
-return RoactRoduxModule.connect(function(p1) --[[ Line: 86 | Named "mapStateToProps" ]]
+return RoactRoduxModule.connect(function(p1)
 	return { displayOptions = p1.displayOptions, layout = p1.layout }
-end, function(Callback) --[[ Line: 93 | Named "mapDispatchToProps" ]]
+end, function(Callback)
 	-- upvalues: HideErrorModule (copy)
 	return {
-		close = function() --[[ Line: 95 ]]
+		close = function()
 			-- upvalues: Callback (copy), HideErrorModule (upval)
 			return Callback(HideErrorModule())
 		end

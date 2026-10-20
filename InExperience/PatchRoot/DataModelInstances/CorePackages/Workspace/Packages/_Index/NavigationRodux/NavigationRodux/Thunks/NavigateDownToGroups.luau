@@ -6,7 +6,7 @@ local TModule = require(Parent.t)
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 
-return function(OnClose) --[[ Line: 14 ]]
+return function(OnClose)
 	-- upvalues: TModule (copy), NavigateDownModule (copy), AppPage (copy), UrlBuilder (copy), GetFFlagUseCommunitiesTranslationFunction (copy)
 	assert(TModule.callback(OnClose) or TModule.none(OnClose), "")
 	

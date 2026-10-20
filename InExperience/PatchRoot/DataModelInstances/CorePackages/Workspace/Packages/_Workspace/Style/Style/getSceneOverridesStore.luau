@@ -1,11 +1,11 @@
 ﻿local SceneOverrides = nil
 local List = {}
 local config = {
-	getSceneOverrides = function() --[[ Line: 24 ]]
+	getSceneOverrides = function()
 		-- upvalues: SceneOverrides (ref)
 		return SceneOverrides
 	end,
-	setSceneOverrides = function(Value) --[[ Line: 27 ]]
+	setSceneOverrides = function(Value)
 		-- upvalues: SceneOverrides (ref), List (copy)
 		SceneOverrides = Value
 		
@@ -13,11 +13,11 @@ local config = {
 			value(Value)
 		end
 	end,
-	subscribe = function(Value) --[[ Line: 33 ]]
+	subscribe = function(Value)
 		-- upvalues: List (copy)
 		table.insert(List, Value)
 		
-		return function() --[[ Line: 35 ]]
+		return function()
 			-- upvalues: List (upval), Value (copy)
 			local FoundIndex: number? = table.find(List, Value)
 			
@@ -28,7 +28,7 @@ local config = {
 	end
 }
 
-return function() --[[ Line: 44 | Named "getSceneOverridesStore" ]]
+return function()
 	-- upvalues: config (copy)
 	return config
 end

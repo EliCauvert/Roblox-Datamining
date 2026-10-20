@@ -5,13 +5,13 @@ local TweenDuration = require(InExperienceSideSheet.Common.Constants).TweenDurat
 local GetDrawerVisibleStoreFunction = require(Parent.Drawer).Stores.GetDrawerVisibleStore
 local AnimateScrollViewToSelectionHelperFunction = require(Parent.AppBlox).AnimateScrollViewToSelectionHelper
 
-return function() --[[ Line: 13 | Named "useSideSheetFocusNavScrollViewAnimation" ]]
+return function()
 	-- upvalues: ReactModule (copy), GetDrawerVisibleStoreFunction (copy), AnimateScrollViewToSelectionHelperFunction (copy), TweenDuration (copy)
 	local UseRefResult = ReactModule.useRef({})
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseRefResult2 = ReactModule.useRef(nil)
 	local GetDrawerAnimating = GetDrawerVisibleStoreFunction(false).getDrawerAnimating
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 19 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
 		if UseRefResult.current then
 			for _, Connection in UseRefResult.current do
@@ -24,7 +24,7 @@ return function() --[[ Line: 13 | Named "useSideSheetFocusNavScrollViewAnimation
 			UseRefResult1.current = nil
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(Current) --[[ Line: 32 ]]
+	local UseResult1 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult2 (copy), UseResult (copy), UseRefResult (copy), UseRefResult1 (copy), AnimateScrollViewToSelectionHelperFunction (upval), TweenDuration (upval), GetDrawerAnimating (copy)
 		if UseRefResult2.current == Current then return end
 		if Current then
@@ -38,7 +38,7 @@ return function() --[[ Line: 13 | Named "useSideSheetFocusNavScrollViewAnimation
 			UseResult()
 		end
 	end, { UseRefResult, UseResult, GetDrawerAnimating })
-	ReactModule.useEffect(function() --[[ Line: 52 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult (copy)
 		return UseResult
 	end, { UseResult })

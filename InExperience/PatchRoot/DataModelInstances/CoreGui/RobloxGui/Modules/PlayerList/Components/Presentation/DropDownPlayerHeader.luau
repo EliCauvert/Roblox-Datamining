@@ -21,11 +21,11 @@ DropDownPlayerHeader.validateProps = TModule.strictInterface({
 	showVerifiedBadge = TModule.optional(TModule.boolean)
 })
 
-function DropDownPlayerHeader.render(p1) --[[ Line: 42 ]]
+function DropDownPlayerHeader.render(p1)
 	-- upvalues: WithLayoutValuesFunction (copy), WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), FFlagEnableVerifiedBadgeStore (copy), UserLibModule (copy), CryoModule (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), RoactModule (copy), EmojiTextLabel (copy), Emoji (copy), NormalizeFontFaceFunction (copy)
-	return WithLayoutValuesFunction(function(p2) --[[ Line: 43 ]]
+	return WithLayoutValuesFunction(function(p2)
 		-- upvalues: WithFoundationOrUIBloxStyleFunction (upval), FoundationFontFaceMigration (upval), p1 (copy), FFlagEnableVerifiedBadgeStore (upval), UserLibModule (upval), CryoModule (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), RoactModule (upval), EmojiTextLabel (upval), Emoji (upval), NormalizeFontFaceFunction (upval)
-		return WithFoundationOrUIBloxStyleFunction(function(p3) --[[ Line: 44 ]]
+		return WithFoundationOrUIBloxStyleFunction(function(p3)
 			-- upvalues: FoundationFontFaceMigration (upval)
 			return {
 				Tokens = if FoundationFontFaceMigration then p3 else nil,
@@ -62,7 +62,7 @@ function DropDownPlayerHeader.render(p1) --[[ Line: 42 ]]
 					}
 				}
 			}
-		end, function(p3) --[[ Line: 80 ]]
+		end, function(p3)
 			-- upvalues: p1 (upval), FFlagEnableVerifiedBadgeStore (upval), UserLibModule (upval), FoundationFontFaceMigration (upval), CryoModule (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), RoactModule (upval), p2 (copy), EmojiTextLabel (upval), Emoji (upval), NormalizeFontFaceFunction (upval)
 			local Player = p1.props.player
 			local JoinResult = if FoundationFontFaceMigration then CryoModule.Dictionary.join(p3.Font.Header2, { Font = p3.Tokens.Typography.TitleLarge.Font }) elseif FFlagCoreUiMigrateUIBloxToFoundation and p3.Font.Header2.FontSize then {
@@ -172,7 +172,7 @@ function DropDownPlayerHeader.render(p1) --[[ Line: 42 ]]
 	end)
 end
 
-local function v14(p1) --[[ Line: 207 ]]
+local function v14(p1)
 	-- upvalues: UseVerifiedBadgeFunction (copy), RoactModule (copy), DropDownPlayerHeader (copy), CryoModule (copy)
 	return RoactModule.createElement(DropDownPlayerHeader, CryoModule.Dictionary.join(p1, { showVerifiedBadge = UseVerifiedBadgeFunction(p1.player) }))
 end

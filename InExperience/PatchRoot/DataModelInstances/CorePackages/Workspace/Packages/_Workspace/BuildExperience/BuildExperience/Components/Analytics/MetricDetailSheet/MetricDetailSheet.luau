@@ -2,7 +2,7 @@
 local MetricDetailSheetViewModule = require(script.Parent.MetricDetailSheetView)
 local UseMetricDetailSheetViewModelModule = require(script.Parent.useMetricDetailSheetViewModel)
 
-return function(p1) --[[ Line: 11 | Named "MetricDetailSheet" ]]
+return function(p1)
 	-- upvalues: UseMetricDetailSheetViewModelModule (copy), ReactModule (copy), MetricDetailSheetViewModule (copy)
 	return ReactModule.createElement(MetricDetailSheetViewModule, (UseMetricDetailSheetViewModelModule(p1)))
 end

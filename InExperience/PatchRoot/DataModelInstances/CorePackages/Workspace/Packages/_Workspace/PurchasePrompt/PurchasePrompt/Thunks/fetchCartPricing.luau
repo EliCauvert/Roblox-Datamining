@@ -15,7 +15,7 @@ local SetCartPricingResponseModule = require(PurchasePrompt.Actions.SetCartPrici
 local SetCartPricingFetchFailedModule = require(PurchasePrompt.Actions.SetCartPricingFetchFailed)
 local list = { NetworkModule }
 
-local function _(p1) --[[ Line: 36 | Named "resolveCollectibleItemId" ]]
+local function _(p1)
 	local ProductInfo = p1.productInfo
 	
 	if ProductInfo == nil or type(ProductInfo.collectibleItemId) ~= "string" or ProductInfo.collectibleItemId == "" then
@@ -28,9 +28,9 @@ local function _(p1) --[[ Line: 36 | Named "resolveCollectibleItemId" ]]
 	end
 end
 
-return function(p1, CollectibleItemId) --[[ Line: 53 | Named "fetchCartPricing" ]]
+return function(p1, CollectibleItemId)
 	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), FFlagEnableFetchCartPricingDuringInExperience (copy), GetCartPricingRequestedItemsForCartPricingModule (copy), PromiseModule (copy), GetProductTypeFromRequestTypeModule (copy), HttpService (copy), SetCartPricingFetchingModule (copy), PostCartPricingModule (copy), DisableInExpMarketplaceOffersTemp (copy), SetCartPricingFetchFailedModule (copy), SetCartPricingResponseModule (copy), LogUnifiedPurchaseTelemetryCounterModule (copy), UnifiedPurchaseTelemetryModule (copy)
-	return ThunkModule.new(script.Name, list, function(p2, p3) --[[ Line: 54 ]]
+	return ThunkModule.new(script.Name, list, function(p2, p3)
 		-- upvalues: NetworkModule (upval), FFlagEnableFetchCartPricingDuringInExperience (upval), GetCartPricingRequestedItemsForCartPricingModule (upval), CollectibleItemId (copy), PromiseModule (upval), GetProductTypeFromRequestTypeModule (upval), HttpService (upval), SetCartPricingFetchingModule (upval), PostCartPricingModule (upval), p1 (copy), DisableInExpMarketplaceOffersTemp (upval), SetCartPricingFetchFailedModule (upval), SetCartPricingResponseModule (upval), LogUnifiedPurchaseTelemetryCounterModule (upval), UnifiedPurchaseTelemetryModule (upval)
 		local v1 = p3[NetworkModule]
 		local State = p2:getState()
@@ -79,14 +79,14 @@ return function(p1, CollectibleItemId) --[[ Line: 53 | Named "fetchCartPricing" 
 			local Guid = HttpService:GenerateGUID(false)
 			p2:dispatch(SetCartPricingFetchingModule(Guid))
 			
-			local function _(): boolean --[[ Line: 92 | Named "isCurrentRequest" ]]
+			local function _(): boolean
 				-- upvalues: p2 (copy), Guid (copy)
 				local CartPricing = p2:getState().cartPricing
 				
 				return CartPricing ~= nil and CartPricing.requestId == Guid
 			end
 			
-			return PostCartPricingModule(v1, CartPricingRequestedItemsForCartPricingModule, p1, Surface, ProductTypeFromRequestTypeModule):andThen(function(Result) --[[ Line: 98 ]]
+			return PostCartPricingModule(v1, CartPricingRequestedItemsForCartPricingModule, p1, Surface, ProductTypeFromRequestTypeModule):andThen(function(Result)
 				-- upvalues: DisableInExpMarketplaceOffersTemp (upval), CollectibleItemId (upval), p2 (copy), SetCartPricingFetchFailedModule (upval), Guid (copy), SetCartPricingResponseModule (upval)
 				if DisableInExpMarketplaceOffersTemp and CollectibleItemId then
 					p2:dispatch(SetCartPricingFetchFailedModule())
@@ -106,7 +106,7 @@ return function(p1, CollectibleItemId) --[[ Line: 53 | Named "fetchCartPricing" 
 					
 					return Result
 				end
-			end):catch(function() --[[ Line: 117 ]]
+			end):catch(function()
 				-- upvalues: LogUnifiedPurchaseTelemetryCounterModule (upval), UnifiedPurchaseTelemetryModule (upval), Surface (copy), ProductTypeFromRequestTypeModule (copy), p2 (copy), Guid (copy), SetCartPricingFetchFailedModule (upval)
 				LogUnifiedPurchaseTelemetryCounterModule(UnifiedPurchaseTelemetryModule.UnifiedCartPricingHandlerErrorCounter, Surface, ProductTypeFromRequestTypeModule)
 				local CartPricing = p2:getState().cartPricing

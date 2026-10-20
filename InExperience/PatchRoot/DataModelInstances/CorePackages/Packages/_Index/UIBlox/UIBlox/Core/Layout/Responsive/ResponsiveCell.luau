@@ -16,33 +16,33 @@ ResponsiveCell.validateProps = TModule.interface({
 	gridCellRef = TModule.optional(TModule.union(TModule.table, TModule.callback))
 })
 
-local function findProp(Props, Text, Text1: string) --[[ Line: 35 ]]
+local function findProp(Props, Text, Text1: string)
 	if Text1 == nil then
 		Text1 = "default"
 	end
 	return if Props[Text .. "_" .. Text1] == nil then if Props[Text] == nil then nil elseif type(Props[Text]) == "table" then if Props[Text][Text1] == nil then Props[Text].default else Props[Text][Text1] else Props[Text] else Props[Text .. "_" .. Text1]
 end
 
-function ResponsiveCell.getColspan(p1, Breakpoint) --[[ Line: 56 ]]
+function ResponsiveCell.getColspan(p1, Breakpoint)
 	-- upvalues: findProp (copy)
 	local Colspan = findProp(p1.props, "colspan", Breakpoint)
 	
 	return if Colspan == nil then 1 else Colspan
 end
 
-function ResponsiveCell.getRowspan(p1, Breakpoint) --[[ Line: 61 ]]
+function ResponsiveCell.getRowspan(p1, Breakpoint)
 	-- upvalues: findProp (copy)
 	local Rowspan = findProp(p1.props, "rowspan", Breakpoint)
 	
 	return if Rowspan == nil then 1 else Rowspan
 end
 
-function ResponsiveCell.getOrder(p1, Breakpoint) --[[ Line: 66 ]]
+function ResponsiveCell.getOrder(p1, Breakpoint)
 	-- upvalues: findProp (copy)
 	return if p1.props.layoutOrder then p1.props.layoutOrder else findProp(p1.props, "order", Breakpoint)
 end
 
-local function _(Value: number, p1): number --[[ Line: 75 | Named "round" ]]
+local function _(Value: number, p1): number
 	local Floored = math.floor(Value)
 	p1.subPixelOffset += Value - Floored
 	local Floored1 = math.floor(p1.subPixelOffset + 0.5)
@@ -51,7 +51,7 @@ local function _(Value: number, p1): number --[[ Line: 75 | Named "round" ]]
 	return Floored + Floored1
 end
 
-function ResponsiveCell:getSize(XScale: number, YScale: number, p1) --[[ Line: 84 ]]
+function ResponsiveCell:getSize(XScale: number, YScale: number, p1)
 	-- upvalues: ResponsiveLayoutConfigReaderModule (copy)
 	local GutterValue = ResponsiveLayoutConfigReaderModule.getValue(p1, "gutter") or 0
 	
@@ -74,10 +74,10 @@ function ResponsiveCell:getSize(XScale: number, YScale: number, p1) --[[ Line: 8
 	return NewFunction(XScaleRatio, Floored + Floored1, 1, 0)
 end
 
-function ResponsiveCell.render(p1) --[[ Line: 103 ]]
+function ResponsiveCell.render(p1)
 	-- upvalues: RoactModule (copy), ResponsiveLayoutContextModule (copy)
 	return RoactModule.createElement(ResponsiveLayoutContextModule.Consumer, {
-		render = function(p2) --[[ Line: 105 ]]
+		render = function(p2)
 			-- upvalues: p1 (copy), RoactModule (upval)
 			local Colspan: number = p1:getColspan(p2.breakpoint)
 			local Rowspan = if p2.multiLine then p1:getRowspan(p2.breakpoint) else 1
@@ -108,7 +108,7 @@ function ResponsiveCell.render(p1) --[[ Line: 103 ]]
 	})
 end
 
-return RoactModule.forwardRef(function(p1, GridCellRef) --[[ Line: 141 ]]
+return RoactModule.forwardRef(function(p1, GridCellRef)
 	-- upvalues: RoactModule (copy), ResponsiveCell (copy), Object (copy)
 	return RoactModule.createElement(ResponsiveCell, Object.assign({}, p1, { gridCellRef = GridCellRef }))
 end)

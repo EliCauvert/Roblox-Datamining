@@ -7,7 +7,7 @@ local FFlagLuaAppMigrateGameTileFooterValueFixes = require(Parent.SharedFlags).F
 local FFlagLuaAppUnifyPlayButtonTile = require(Parent.SharedFlags).FFlagLuaAppUnifyPlayButtonTile
 local FFlagLuaAppUnifyPlayButtonTileIxp = require(Parent.SharedFlags).FFlagLuaAppUnifyPlayButtonTileIxp
 local GameTileExperimentationModule = require(GameTile.GameTileExperimentation)
-local MemoizeResult = require(Parent.AppCommonLib).memoize(function(p1, p2, p3, p4, p5, p6) --[[ Line: 75 ]]
+local MemoizeResult = require(Parent.AppCommonLib).memoize(function(p1, p2, p3, p4, p5, p6)
 	-- upvalues: FFlagLuaAppUnifyPlayButtonTileIxp (copy), GameTileExperimentationModule (copy), FFlagLuaAppUnifyPlayButtonTile (copy)
 	local IsPlayButtonMigrationEnabled = if FFlagLuaAppUnifyPlayButtonTileIxp then GameTileExperimentationModule.getIsPlayButtonMigrationEnabled() else nil
 	
@@ -29,7 +29,7 @@ local MemoizeResult = require(Parent.AppCommonLib).memoize(function(p1, p2, p3, 
 end)
 
 return {
-	getTileHeight = function(p1, p2, p3, p4, p5, p6, p7, Amount, p8, p9, p10, p11) --[[ Line: 151 ]]
+	getTileHeight = function(p1, p2, p3, p4, p5, p6, p7, Amount, p8, p9, p10, p11)
 		-- upvalues: MemoizeResult (copy)
 		local v1 = p2 * (if p3 == "Wide" or p3 == "Event" then 0.5625 else 1)
 		local MemoizeResultResult = MemoizeResult(p1, p7, p8, p10, p11, p9)
@@ -49,7 +49,7 @@ return {
 		end
 		return v1 + FooterTopPadding
 	end,
-	getFooterHeight = function(p1, p2, p3, p4, p5, Amount, p6, p7, p8, p9) --[[ Line: 114 ]]
+	getFooterHeight = function(p1, p2, p3, p4, p5, Amount, p6, p7, p8, p9)
 		-- upvalues: MemoizeResult (copy)
 		local MemoizeResultResult = MemoizeResult(p1, p5, p6, p7, p8, p9)
 		local FooterTopPadding = MemoizeResultResult.footerTopPadding
@@ -68,14 +68,14 @@ return {
 		end
 		return FooterTopPadding
 	end,
-	getImageAspectRatio = function(p1): number --[[ Line: 25 ]]
+	getImageAspectRatio = function(p1): number
 		return if p1 == "Wide" or p1 == "Event" then 1.7777777777777777 else 1
 	end,
-	getInverseImageAspectRatio = function(p1): number --[[ Line: 33 ]]
+	getInverseImageAspectRatio = function(p1): number
 		return if p1 == "Wide" or p1 == "Event" then 0.5625 else 1
 	end,
 	getElementSizes = MemoizeResult,
-	getContainmentSidePadding = function(p1, p2, p3) --[[ Line: 41 ]]
+	getContainmentSidePadding = function(p1, p2, p3)
 		-- upvalues: FFlagLuaAppMigrateGameTileFooterValueFixes (copy)
 		return if p3 then if p2 == "Wide" or p2 == "Event" then if FFlagLuaAppMigrateGameTileFooterValueFixes then p3.Padding.Medium else p3.Padding.Large elseif FFlagLuaAppMigrateGameTileFooterValueFixes then p3.Size.Size_150 else p3.Padding.Small elseif p2 == "Wide" or p2 == "Event" then p1.Size.Size_300 else p1.Size.Size_150
 	end

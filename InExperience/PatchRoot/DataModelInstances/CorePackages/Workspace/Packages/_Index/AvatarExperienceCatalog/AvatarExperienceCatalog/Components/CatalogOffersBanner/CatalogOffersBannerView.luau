@@ -13,7 +13,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FFlagAXUpdateOffersEndsUIWithBadge = AvatarExperienceFlagsModule.FFlagAXUpdateOffersEndsUIWithBadge
 local FFlagAXRemoveOfferBannerIcon = AvatarExperienceFlagsModule.FFlagAXRemoveOfferBannerIcon
 
-return function(p1) --[[ Line: 44 | Named "CatalogOffersBannerView" ]]
+return function(p1)
 	-- upvalues: FFlagAXUpdateOffersEndsUIWithBadge (copy), UseTokensFunction (copy), ReactModule (copy), FoundationModule (copy), FFlagAXRemoveOfferBannerIcon (copy), GetFoundationIconNameModule (copy), IconVariant (copy), IconSize (copy), OfferExpiryBadge (copy), IconName (copy), ButtonVariant (copy), InputSize (copy)
 	local UseTokensResult = if FFlagAXUpdateOffersEndsUIWithBadge then UseTokensFunction() else nil
 	

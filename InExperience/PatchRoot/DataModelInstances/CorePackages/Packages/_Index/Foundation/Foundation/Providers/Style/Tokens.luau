@@ -8,7 +8,7 @@ local TokenProcessingUtilitiesModule = require(script.TokenProcessingUtilities)
 local _ = require(Foundation.Components.Types)
 local ThemeGeneratorsModule = require(script.themeGenerators)
 
-local function _(Console, Value: number): number --[[ Line: 25 | Named "getPlatformScale" ]]
+local function _(Console, Value: number): number
 	-- upvalues: FlagsModule (copy), DeviceModule (copy)
 	if FlagsModule.FoundationDisableTokenScaling then
 		return 1
@@ -19,7 +19,7 @@ local function _(Console, Value: number): number --[[ Line: 25 | Named "getPlatf
 	return (if Console == DeviceModule.Console then 1.5 else 1) * math.clamp(Value, 0, 1e999)
 end
 
-local function applyTokenOverrides(p1, List) --[[ Line: 40 ]]
+local function applyTokenOverrides(p1, List)
 	-- upvalues: TokenProcessingUtilitiesModule (copy)
 	for i, value in List do
 		local ResolveTokenOverrideResult = TokenProcessingUtilitiesModule.resolveTokenOverride(p1, i, value)
@@ -31,7 +31,7 @@ local function applyTokenOverrides(p1, List) --[[ Line: 40 ]]
 	return p1
 end
 
-local function buildTokens(Callback, ScaledClampedValue, p2) --[[ Line: 51 ]]
+local function buildTokens(Callback, ScaledClampedValue, p2)
 	-- upvalues: applyTokenOverrides (copy), FlagsModule (copy), DeprecatedTokenUtilitiesModule (copy)
 	local CallbackResult = Callback(ScaledClampedValue)
 	local config = {
@@ -69,7 +69,7 @@ local function buildTokens(Callback, ScaledClampedValue, p2) --[[ Line: 51 ]]
 	end
 end
 
-local function getTokens(p2, p3, p4, p5, p6) --[[ Line: 88 ]]
+local function getTokens(p2, p3, p4, p5, p6)
 	-- upvalues: DeviceModule (copy), FlagsModule (copy), ThemeGeneratorsModule (copy), ThemeNameModule (copy), buildTokens (copy)
 	local P6 = p3 or DeviceModule.Desktop
 	local Value: number = p4

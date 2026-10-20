@@ -1,15 +1,15 @@
 ﻿local Result1 = false
-local Success, Result = pcall(function() --[[ Line: 8 ]]
+local Success, Result = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserShouldMuteUnfilteredMessage")
 end)
 Result1 = Success and Result
 local Result2_1 = nil
-local Success1, Result2 = pcall(function() --[[ Line: 13 ]]
+local Success1, Result2 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserRemoveMessageOnTextFilterFailures")
 end)
 Result2_1 = Success1 and Result2
 local Result3_1 = false
-local Success2, Result3 = pcall(function() --[[ Line: 21 ]]
+local Success2, Result3 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserIsChatTranslationEnabled2")
 end)
 Result3_1 = Success2 and Result3
@@ -21,23 +21,23 @@ local ChatSettingsModule = require(ClientChatModules:WaitForChild("ChatSettings"
 local ChatConstantsModule = require(ClientChatModules:WaitForChild("ChatConstants"))
 local UtilModule = require(script.Parent:WaitForChild("Util"))
 local ChatLocalizationModule = nil
-pcall(function() --[[ Line: 42 ]]
+pcall(function()
 	-- upvalues: ChatLocalizationModule (ref)
 	ChatLocalizationModule = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
 ChatLocalizationModule = ChatLocalizationModule or {}
 
 if not ChatLocalizationModule.FormatMessageToSend or not ChatLocalizationModule.LocalizeFormattedMessage then
-	function ChatLocalizationModule:FormatMessageToSend(_, p1) --[[ Line: 46 ]]
+	function ChatLocalizationModule:FormatMessageToSend(_, p1)
 		return p1
 	end
 end
 local Module = {}
 Module.__index = Module
 
-function Module.SendSystemMessage(p1, Formatted, p2) --[[ Line: 55 ]]
+function Module.SendSystemMessage(p1, Formatted, p2)
 	local InternalCreateMessageObjectResult = p1:InternalCreateMessageObject(Formatted, nil, true, p2)
-	local Success, Result = pcall(function() --[[ Line: 58 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: p1 (copy), InternalCreateMessageObjectResult (copy)
 		p1.eMessagePosted:Fire(InternalCreateMessageObjectResult)
 	end)
@@ -53,7 +53,7 @@ function Module.SendSystemMessage(p1, Formatted, p2) --[[ Line: 55 ]]
 	return InternalCreateMessageObjectResult
 end
 
-function Module.SendSystemMessageToSpeaker(p3, GameChatChatChannelMutedInChannel, Name, p4) --[[ Line: 72 ]]
+function Module.SendSystemMessageToSpeaker(p3, GameChatChatChannelMutedInChannel, Name, p4)
 	-- upvalues: RunService (copy)
 	local Speaker = p3.Speakers[Name]
 	
@@ -67,7 +67,7 @@ function Module.SendSystemMessageToSpeaker(p3, GameChatChatChannelMutedInChannel
 	end
 end
 
-function Module.SendMessageObjToFilters(p3, Message, InternalCreateMessageObjectResult, FromSpeaker) --[[ Line: 82 ]]
+function Module.SendMessageObjToFilters(p3, Message, InternalCreateMessageObjectResult, FromSpeaker)
 	local Message1 = InternalCreateMessageObjectResult.Message
 	InternalCreateMessageObjectResult.Message = Message
 	p3:InternalDoMessageFilter(FromSpeaker.Name, InternalCreateMessageObjectResult, p3.Name)
@@ -77,14 +77,14 @@ function Module.SendMessageObjToFilters(p3, Message, InternalCreateMessageObject
 	return InternalCreateMessageObjectResult.Message
 end
 
-function Module:CanCommunicateByUserId(UserId, SpeakerUserId) --[[ Line: 92 ]]
+function Module:CanCommunicateByUserId(UserId, SpeakerUserId)
 	-- upvalues: RunService (copy), Chat (copy)
 	if RunService:IsStudio() then
 		return true
 	elseif UserId == 0 or SpeakerUserId == 0 then
 		return true
 	else
-		local Success, Result = pcall(function() --[[ Line: 100 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Chat (upval), UserId (copy), SpeakerUserId (copy)
 			return Chat:CanUsersChatAsync(UserId, SpeakerUserId)
 		end)
@@ -93,14 +93,14 @@ function Module:CanCommunicateByUserId(UserId, SpeakerUserId) --[[ Line: 92 ]]
 	end
 end
 
-function Module.CanCommunicate(p3, Speaker, Speaker1) --[[ Line: 106 ]]
+function Module.CanCommunicate(p3, Speaker, Speaker1)
 	local Player = Speaker:GetPlayer()
 	local Player1 = Speaker1:GetPlayer()
 	
 	return not Player or not Player1 or p3:CanCommunicateByUserId(Player.UserId, Player1.UserId)
 end
 
-function Module.SendMessageToSpeaker(p3, Message, p4, FromSpeaker, p5) --[[ Line: 115 ]]
+function Module.SendMessageToSpeaker(p3, Message, p4, FromSpeaker, p5)
 	-- upvalues: RunService (copy)
 	local Speaker = p3.Speakers[p4]
 	local Speaker1 = p3.ChatService:GetSpeaker(FromSpeaker)
@@ -126,7 +126,7 @@ function Module.SendMessageToSpeaker(p3, Message, p4, FromSpeaker, p5) --[[ Line
 	end
 end
 
-function Module.KickSpeaker(p3, Text, p4) --[[ Line: 151 ]]
+function Module.KickSpeaker(p3, Text, p4)
 	local Speaker = p3.ChatService:GetSpeaker(Text)
 	
 	if not Speaker then
@@ -148,7 +148,7 @@ function Module.KickSpeaker(p3, Text, p4) --[[ Line: 151 ]]
 	p3:SendSystemMessage(Formatted1)
 end
 
-function Module.MuteSpeaker(p3, Text: string, p4, p5) --[[ Line: 174 ]]
+function Module.MuteSpeaker(p3, Text: string, p4, p5)
 	local Speaker = p3.ChatService:GetSpeaker(Text)
 	
 	if not Speaker then
@@ -159,7 +159,7 @@ function Module.MuteSpeaker(p3, Text: string, p4, p5) --[[ Line: 174 ]]
 	if p4 then
 		p3:SendSystemMessage(string.format("%s was muted for the following reason(s): %s", Speaker:GetNameForDisplay(), p4))
 	end
-	local Success, Result = pcall(function() --[[ Line: 188 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: p3 (copy), Text (copy), p4 (copy), p5 (copy)
 		p3.eSpeakerMuted:Fire(Text, p4, p5)
 	end)
@@ -170,7 +170,7 @@ function Module.MuteSpeaker(p3, Text: string, p4, p5) --[[ Line: 174 ]]
 	local Speaker1 = p3.ChatService:GetSpeaker(Text)
 	
 	if Speaker1 then
-		local Success1, Result1 = pcall(function() --[[ Line: 195 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: Speaker1 (copy), p3 (copy), p4 (copy), p5 (copy)
 			Speaker1.eMuted:Fire(p3.Name, p4, p5)
 		end)
@@ -181,12 +181,12 @@ function Module.MuteSpeaker(p3, Text: string, p4, p5) --[[ Line: 174 ]]
 	end
 end
 
-function Module.UnmuteSpeaker(p3, Text: string) --[[ Line: 203 ]]
+function Module.UnmuteSpeaker(p3, Text: string)
 	if not p3.ChatService:GetSpeaker(Text) then
 		error("Speaker \"" .. Text .. "\" does not exist!")
 	end
 	p3.Mutes[Text:lower()] = nil
-	local Success, Result = pcall(function() --[[ Line: 211 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: p3 (copy), Text (copy)
 		p3.eSpeakerUnmuted:Fire(Text)
 	end)
@@ -197,7 +197,7 @@ function Module.UnmuteSpeaker(p3, Text: string) --[[ Line: 203 ]]
 	local Speaker = p3.ChatService:GetSpeaker(Text)
 	
 	if Speaker then
-		local Success1, Result1 = pcall(function() --[[ Line: 218 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: Speaker (copy), p3 (copy)
 			Speaker.eUnmuted:Fire(p3.Name)
 		end)
@@ -208,11 +208,11 @@ function Module.UnmuteSpeaker(p3, Text: string) --[[ Line: 203 ]]
 	end
 end
 
-function Module.IsSpeakerMuted(p3, Name: string): boolean --[[ Line: 225 ]]
+function Module.IsSpeakerMuted(p3, Name: string): boolean
 	return p3.Mutes[Name:lower()] ~= nil
 end
 
-function Module.GetSpeakerList(p3) --[[ Line: 229 ]]
+function Module.GetSpeakerList(p3)
 	local List = {}
 	
 	for _, speaker in pairs(p3.Speakers) do
@@ -221,43 +221,43 @@ function Module.GetSpeakerList(p3) --[[ Line: 229 ]]
 	return List
 end
 
-function Module.RegisterFilterMessageFunction(p4, p5, p6, p7) --[[ Line: 237 ]]
+function Module.RegisterFilterMessageFunction(p4, p5, p6, p7)
 	if p4.FilterMessageFunctions:HasFunction(p5) then
 		error(string.format("FilterMessageFunction '%s' already exists", p5))
 	end
 	p4.FilterMessageFunctions:AddFunction(p5, p6, p7)
 end
 
-function Module.FilterMessageFunctionExists(p4, p5) --[[ Line: 244 ]]
+function Module.FilterMessageFunctionExists(p4, p5)
 	return p4.FilterMessageFunctions:HasFunction(p5)
 end
 
-function Module.UnregisterFilterMessageFunction(p4, p5) --[[ Line: 248 ]]
+function Module.UnregisterFilterMessageFunction(p4, p5)
 	if not p4.FilterMessageFunctions:HasFunction(p5) then
 		error(string.format("FilterMessageFunction '%s' does not exists", p5))
 	end
 	p4.FilterMessageFunctions:RemoveFunction(p5)
 end
 
-function Module.RegisterProcessCommandsFunction(p4, p5, p6, p7) --[[ Line: 255 ]]
+function Module.RegisterProcessCommandsFunction(p4, p5, p6, p7)
 	if p4.ProcessCommandsFunctions:HasFunction(p5) then
 		error(string.format("ProcessCommandsFunction '%s' already exists", p5))
 	end
 	p4.ProcessCommandsFunctions:AddFunction(p5, p6, p7)
 end
 
-function Module.ProcessCommandsFunctionExists(p4, p5) --[[ Line: 262 ]]
+function Module.ProcessCommandsFunctionExists(p4, p5)
 	return p4.ProcessCommandsFunctions:HasFunction(p5)
 end
 
-function Module.UnregisterProcessCommandsFunction(p4, p5) --[[ Line: 266 ]]
+function Module.UnregisterProcessCommandsFunction(p4, p5)
 	if not p4.ProcessCommandsFunctions:HasFunction(p5) then
 		error(string.format("ProcessCommandsFunction '%s' does not exist", p5))
 	end
 	p4.ProcessCommandsFunctions:RemoveFunction(p5)
 end
 
-local function _(List) --[[ Line: 273 | Named "ShallowCopy" ]]
+local function _(List)
 	local t = {}
 	
 	for i, value in pairs(List) do
@@ -266,7 +266,7 @@ local function _(List) --[[ Line: 273 | Named "ShallowCopy" ]]
 	return t
 end
 
-function Module.GetHistoryLog(p4) --[[ Line: 281 ]]
+function Module.GetHistoryLog(p4)
 	local t = {}
 	
 	for i, value in pairs(p4.ChatHistory) do
@@ -275,7 +275,7 @@ function Module.GetHistoryLog(p4) --[[ Line: 281 ]]
 	return t
 end
 
-function Module.GetHistoryLogForSpeaker(p5, p6) --[[ Line: 285 ]]
+function Module.GetHistoryLogForSpeaker(p5, p6)
 	-- upvalues: ChatConstantsModule (copy)
 	local UserId = -1
 	local Player = p6:GetPlayer()
@@ -311,7 +311,7 @@ function Module.GetHistoryLogForSpeaker(p5, p6) --[[ Line: 285 ]]
 	return List
 end
 
-function Module.InternalDestroy(p7) --[[ Line: 323 ]]
+function Module.InternalDestroy(p7)
 	for _, speaker in pairs(p7.Speakers) do
 		speaker:LeaveChannel(p7.Name)
 	end
@@ -324,9 +324,9 @@ function Module.InternalDestroy(p7) --[[ Line: 323 ]]
 	p7.eSpeakerUnmuted:Destroy()
 end
 
-function Module.InternalDoMessageFilter(p8, Name, p9, Name1) --[[ Line: 338 ]]
+function Module.InternalDoMessageFilter(p8, Name, p9, Name1)
 	for i, value, _ in p8.FilterMessageFunctions:GetIterator() do
-		local Success, Result = pcall(function() --[[ Line: 341 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: value (copy), Name (copy), p9 (copy), Name1 (copy)
 			value(Name, p9, Name1)
 		end)
@@ -337,9 +337,9 @@ function Module.InternalDoMessageFilter(p8, Name, p9, Name1) --[[ Line: 338 ]]
 	end
 end
 
-function Module.InternalDoProcessCommands(p10, Name, Message, Name1): boolean --[[ Line: 351 ]]
+function Module.InternalDoProcessCommands(p10, Name, Message, Name1): boolean
 	for i, value, _ in p10.ProcessCommandsFunctions:GetIterator() do
-		local Success, Result = pcall(function() --[[ Line: 354 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: value (copy), Name (copy), Message (copy), Name1 (copy)
 			local ValueResult = value(Name, Message, Name1)
 			
@@ -358,13 +358,13 @@ function Module.InternalDoProcessCommands(p10, Name, Message, Name1): boolean --
 	return false
 end
 
-function getLanguageCodeFromLocale(Text: string) --[[ Line: 372 ]]
+function getLanguageCodeFromLocale(Text: string)
 	local v1 = string.gmatch(Text, "[^-]+")()
 	
 	return if v1 then v1 else "en"
 end
 
-function Module.InternalPostMessage(p11, p12, Message, p13) --[[ Line: 382 ]]
+function Module.InternalPostMessage(p11, p12, Message, p13)
 	-- upvalues: ChatLocalizationModule (ref), Chat (copy), Result1 (ref), Result3_1 (ref), Result2_1 (ref)
 	if p11:InternalDoProcessCommands(p12.Name, Message, p11.Name) then
 		return false
@@ -382,7 +382,7 @@ function Module.InternalPostMessage(p11, p12, Message, p13) --[[ Line: 382 ]]
 	local InternalCreateMessageObjectResult = p11:InternalCreateMessageObject(Message, p12.Name, false, p13)
 	InternalCreateMessageObjectResult.Message = Message
 	local InvokeChatResult = nil
-	pcall(function() --[[ Line: 400 ]]
+	pcall(function()
 		-- upvalues: InvokeChatResult (ref), Chat (upval), InternalCreateMessageObjectResult (ref)
 		InvokeChatResult = Chat:InvokeChatCallback(Enum.ChatCallbackType.OnServerReceivingMessage, InternalCreateMessageObjectResult)
 	end)
@@ -419,7 +419,7 @@ function Module.InternalPostMessage(p11, p12, Message, p13) --[[ Line: 382 ]]
 			speaker1:InternalSendMessage(t, p11.Name)
 		end
 	end
-	local Success, Result = pcall(function() --[[ Line: 439 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: p11 (copy), InternalCreateMessageObjectResult (ref)
 		p11.eMessagePosted:Fire(InternalCreateMessageObjectResult)
 	end)
@@ -522,14 +522,14 @@ function Module.InternalPostMessage(p11, p12, Message, p13) --[[ Line: 382 ]]
 	return InternalCreateMessageObjectResult
 end
 
-function Module.InternalAddSpeaker(p14, p15) --[[ Line: 551 ]]
+function Module.InternalAddSpeaker(p14, p15)
 	if p14.Speakers[p15.Name] then
 		warn("Speaker \"" .. p15.name .. "\" is already in the channel!")
 		
 		return
 	end
 	p14.Speakers[p15.Name] = p15
-	local Success, Result = pcall(function() --[[ Line: 558 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: p14 (copy), p15 (copy)
 		p14.eSpeakerJoined:Fire(p15.Name)
 	end)
@@ -539,14 +539,14 @@ function Module.InternalAddSpeaker(p14, p15) --[[ Line: 551 ]]
 	end
 end
 
-function Module.InternalRemoveSpeaker(p14, p15) --[[ Line: 564 ]]
+function Module.InternalRemoveSpeaker(p14, p15)
 	if not p14.Speakers[p15.Name] then
 		warn("Speaker \"" .. p15.name .. "\" is not in the channel!")
 		
 		return
 	end
 	p14.Speakers[p15.Name] = nil
-	local Success, Result = pcall(function() --[[ Line: 571 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: p14 (copy), p15 (copy)
 		p14.eSpeakerLeft:Fire(p15.Name)
 	end)
@@ -556,24 +556,24 @@ function Module.InternalRemoveSpeaker(p14, p15) --[[ Line: 564 ]]
 	end
 end
 
-function Module.InternalRemoveExcessMessagesFromLog(p14) --[[ Line: 577 ]]
+function Module.InternalRemoveExcessMessagesFromLog(p14)
 	local RemoveFunction: (any, any) -> () = table.remove
 	while p14.MaxHistory < #p14.ChatHistory do
 		RemoveFunction(p14.ChatHistory, 1)
 	end
 end
 
-function Module.InternalAddMessageToHistoryLog(p15, InternalCreateMessageObjectResult) --[[ Line: 584 ]]
+function Module.InternalAddMessageToHistoryLog(p15, InternalCreateMessageObjectResult)
 	table.insert(p15.ChatHistory, InternalCreateMessageObjectResult)
 	p15:InternalRemoveExcessMessagesFromLog()
 end
 
-function Module:GetMessageType(_, FromSpeaker) --[[ Line: 590 ]]
+function Module:GetMessageType(_, FromSpeaker)
 	-- upvalues: ChatConstantsModule (copy)
 	return if FromSpeaker == nil then ChatConstantsModule.MessageTypeSystem else ChatConstantsModule.MessageTypeDefault
 end
 
-function Module.InternalCreateMessageObject(p15, Text: string, FromSpeaker, IsFiltered, List) --[[ Line: 597 ]]
+function Module.InternalCreateMessageObject(p15, Text: string, FromSpeaker, IsFiltered, List)
 	-- upvalues: ChatSettingsModule (copy)
 	local MessageType = p15:GetMessageType(Text, FromSpeaker)
 	local UserId = -1
@@ -625,7 +625,7 @@ function Module.InternalCreateMessageObject(p15, Text: string, FromSpeaker, IsFi
 	return config
 end
 
-function Module.SetChannelNameColor(p16, ChannelNameColor) --[[ Line: 657 ]]
+function Module.SetChannelNameColor(p16, ChannelNameColor)
 	p16.ChannelNameColor = ChannelNameColor
 	
 	for _, speaker in pairs(p16.Speakers) do
@@ -633,7 +633,7 @@ function Module.SetChannelNameColor(p16, ChannelNameColor) --[[ Line: 657 ]]
 	end
 end
 
-function Module.GetWelcomeMessageForSpeaker(p17, p18) --[[ Line: 664 ]]
+function Module.GetWelcomeMessageForSpeaker(p17, p18)
 	if p17.GetWelcomeMessageFunction then
 		local WelcomeMessageFunction = p17.GetWelcomeMessageFunction(p18)
 		
@@ -644,18 +644,18 @@ function Module.GetWelcomeMessageForSpeaker(p17, p18) --[[ Line: 664 ]]
 	return p17.WelcomeMessage
 end
 
-function Module.RegisterGetWelcomeMessageFunction(p17, Callback) --[[ Line: 674 ]]
+function Module.RegisterGetWelcomeMessageFunction(p17, Callback)
 	if type(Callback) ~= "function" then
 		error("RegisterGetWelcomeMessageFunction must be called with a function.")
 	end
 	p17.GetWelcomeMessageFunction = Callback
 end
 
-function Module.UnRegisterGetWelcomeMessageFunction(p17) --[[ Line: 681 ]]
+function Module.UnRegisterGetWelcomeMessageFunction(p17)
 	p17.GetWelcomeMessageFunction = nil
 end
 
-function ChatChannelModule.new(ChatService, Name, p17, ChannelNameColor) --[[ Line: 688 ]]
+function ChatChannelModule.new(ChatService, Name, p17, ChannelNameColor)
 	-- upvalues: Module (copy), UtilModule (copy)
 	local self = setmetatable({}, Module)
 	self.ChatService = ChatService

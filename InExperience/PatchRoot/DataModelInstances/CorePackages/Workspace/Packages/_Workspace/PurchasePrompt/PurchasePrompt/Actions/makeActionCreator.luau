@@ -1,4 +1,4 @@
-﻿return function(Name, ...) --[[ Line: 11 | Named "makeActionCreator" ]]
+﻿return function(Name, ...)
 	local list = { ... }
 	assert(type(Name) == "string", "Bad argument #1 to makeActionCreator, expected string")
 	
@@ -6,7 +6,7 @@
 		assert(typeof(select(i, ...)) == "string", "Bad argument to makeActionCreator, all arguments must be of type string")
 	end
 	return (setmetatable({ name = Name }, {
-		__call = function(_, ...) --[[ Line: 26 ]]
+		__call = function(_, ...)
 			-- upvalues: Name (copy), list (copy)
 			local config = { type = Name }
 			assert(select("#", ...) == #list, "Incorrect number of arguments provided to action creator " .. Name)

@@ -1,6 +1,6 @@
 ﻿local LoginErrorCodesModule = require(script:FindFirstAncestor("AuthCommon").Enums.LoginErrorCodes)
 
-return function(p1, p2): boolean --[[ Line: 28 | Named "isNonTerminalLoginError" ]]
+return function(p1, p2): boolean
 	-- upvalues: LoginErrorCodesModule (copy)
 	if typeof(p1) == "table" then
 		local P1 = p2 or {}

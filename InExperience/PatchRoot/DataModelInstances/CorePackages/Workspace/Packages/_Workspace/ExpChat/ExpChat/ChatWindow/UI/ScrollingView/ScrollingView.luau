@@ -9,7 +9,7 @@ local BottomLockedScrollViewV3Module = require(ExpChat.ChatWindow.UI.BottomLocke
 local ScrollingView = RoactModule.PureComponent:extend("ScrollingView")
 ScrollingView.defaultProps = {}
 
-function ScrollingView.render(p1) --[[ Line: 15 ]]
+function ScrollingView.render(p1)
 	-- upvalues: FFlagExpChatEnableV2ChatWindowModule (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), RoactModule (copy), BottomLockedScrollViewV3Module (copy), Dictionary (copy), FFlagExpChatEnableFriendsTab (copy)
 	local Config = if FFlagExpChatEnableV2ChatWindowModule then {
 		showTranslationButton = p1.props.showTranslationButton,

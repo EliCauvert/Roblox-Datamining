@@ -4,7 +4,7 @@ local AvatarSwitcherEmoteIds = game:DefineFastString("AvatarSwitcherEmoteIds", "
 local FFlagAvatarSwitcherAccurateAvatarWarning = require(script:FindFirstAncestor("AvatarSwitcher").Parent.AvatarExperienceFlags).FFlagAvatarSwitcherAccurateAvatarWarning
 local AvatarSwitcherMakeupSupport = game:DefineFastFlag("AvatarSwitcherMakeupSupport", false)
 local OutfitViewportUtils = {
-	buildOutfitModel = function(OutfitId, RigType) --[[ Line: 17 ]]
+	buildOutfitModel = function(OutfitId, RigType)
 		-- upvalues: Players (copy), AvatarEditorService (copy), FFlagAvatarSwitcherAccurateAvatarWarning (copy)
 		local ConformToAvatarRulesAsyncResult = AvatarEditorService:ConformToAvatarRulesAsync((Players:GetHumanoidDescriptionFromOutfitIdAsync(OutfitId)))
 		local HumanoidModelFromDescriptionAsync = Players:CreateHumanoidModelFromDescriptionAsync(ConformToAvatarRulesAsyncResult, RigType)
@@ -15,12 +15,12 @@ local OutfitViewportUtils = {
 			return HumanoidModelFromDescriptionAsync
 		end
 	end,
-	getCameraDistance = function(Model: Model, p1: number) --[[ Line: 29 ]]
+	getCameraDistance = function(Model: Model, p1: number)
 		local _, BoundingSize = Model:GetBoundingBox()
 		
 		return (BoundingSize / 2).Magnitude / math.sin((math.rad(p1 / 2)))
 	end,
-	loadIdleAnimationForAvatar = function(Object) --[[ Line: 37 ]]
+	loadIdleAnimationForAvatar = function(Object)
 		local Humanoid = Object:FindFirstChildOfClass("Humanoid")
 		local Animator = Humanoid and Humanoid:FindFirstChildOfClass("Animator")
 		
@@ -48,7 +48,7 @@ local OutfitViewportUtils = {
 			return nil
 		end
 	end,
-	loadAnimationTrackForAvatar = function(Text, Object) --[[ Line: 65 ]]
+	loadAnimationTrackForAvatar = function(Text, Object)
 		local Humanoid = Object:FindFirstChildOfClass("Humanoid")
 		local Animator = Humanoid and Humanoid:FindFirstChildOfClass("Animator")
 		
@@ -64,12 +64,12 @@ local OutfitViewportUtils = {
 }
 local v1 = nil
 
-function OutfitViewportUtils.playRandomEmote(Object) --[[ Line: 80 ]]
+function OutfitViewportUtils.playRandomEmote(Object)
 	-- upvalues: AvatarSwitcherEmoteIds (copy), v1 (ref), OutfitViewportUtils (copy)
 	local Humanoid = Object:FindFirstChildOfClass("Humanoid")
 	local IsRigTypeMatch: boolean = Humanoid and Humanoid.RigType == Enum.HumanoidRigType.R15
 	local AnimationTrackForAvatar = nil
-	local Success, Result = pcall(function() --[[ Line: 85 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: AvatarSwitcherEmoteIds (upval)
 		return string.split(AvatarSwitcherEmoteIds)
 	end)
@@ -82,7 +82,7 @@ function OutfitViewportUtils.playRandomEmote(Object) --[[ Line: 80 ]]
 		AnimationTrackForAvatar = OutfitViewportUtils.loadAnimationTrackForAvatar(Entry, Object)
 		v1 = Entry
 	end
-	task.spawn(function() --[[ Line: 100 ]]
+	task.spawn(function()
 		-- upvalues: AnimationTrackForAvatar (ref), Object (copy), OutfitViewportUtils (upval)
 		if AnimationTrackForAvatar then
 			AnimationTrackForAvatar.Looped = false
@@ -99,11 +99,11 @@ function OutfitViewportUtils.playRandomEmote(Object) --[[ Line: 80 ]]
 	end)
 end
 
-function OutfitViewportUtils.hasMissingAccessoriesInHumanoid(Humanoid: Humanoid, Humanoid1: Humanoid): boolean --[[ Line: 124 ]]
+function OutfitViewportUtils.hasMissingAccessoriesInHumanoid(Humanoid: Humanoid, Humanoid1: Humanoid): boolean
 	return #Humanoid:GetAccessories() < #Humanoid1:GetAccessories(true)
 end
 
-local function getAssetIdsInHumanoidDescription(Character) --[[ Line: 136 ]]
+local function getAssetIdsInHumanoidDescription(Character)
 	-- upvalues: AvatarSwitcherMakeupSupport (copy)
 	local t = {}
 	
@@ -139,7 +139,7 @@ local function getAssetIdsInHumanoidDescription(Character) --[[ Line: 136 ]]
 	return t
 end
 
-function OutfitViewportUtils.hasMissingAssetsInDescription(Character, List): boolean --[[ Line: 177 ]]
+function OutfitViewportUtils.hasMissingAssetsInDescription(Character, List): boolean
 	-- upvalues: getAssetIdsInHumanoidDescription (copy)
 	local AssetIdsInHumanoidDescription = getAssetIdsInHumanoidDescription(Character)
 	

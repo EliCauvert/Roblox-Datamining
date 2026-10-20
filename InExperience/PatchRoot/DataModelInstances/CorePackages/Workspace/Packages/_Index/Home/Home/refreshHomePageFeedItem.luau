@@ -6,7 +6,7 @@ local _ = require(Parent.SduiCoreSystem)
 local SduiLoadTimer = require(Parent.SduiSharedUtilities).SduiLoadTimer
 local FetchHomePageModule = require(Home.fetchHomePage)
 
-return function(TopicId, FeedItemKey, RequestIntent, ReportError, p1) --[[ Line: 14 | Named "refreshHomePageFeedItem" ]]
+return function(TopicId, FeedItemKey, RequestIntent, ReportError, p1)
 	-- upvalues: SduiLoadTimer (copy), AppPage (copy), FetchHomePageModule (copy), PromiseModule (copy)
 	local LoadTimer = SduiLoadTimer.createLoadTimer(AppPage.Home)
 	LoadTimer.start("feed-item-refresh")
@@ -19,12 +19,12 @@ return function(TopicId, FeedItemKey, RequestIntent, ReportError, p1) --[[ Line:
 			feedItemKey = FeedItemKey,
 			reportError = ReportError
 		}
-	}):andThen(function(Result) --[[ Line: 33 ]]
+	}):andThen(function(Result)
 		-- upvalues: LoadTimer (copy)
 		LoadTimer.logRefreshComplete()
 		
 		return Result
-	end, function(p2) --[[ Line: 36 ]]
+	end, function(p2)
 		-- upvalues: LoadTimer (copy), PromiseModule (upval)
 		LoadTimer.logRefreshComplete()
 		

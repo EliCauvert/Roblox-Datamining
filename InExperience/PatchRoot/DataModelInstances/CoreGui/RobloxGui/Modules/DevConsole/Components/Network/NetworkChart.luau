@@ -40,17 +40,17 @@ for i, Vector in ipairs(List) do
 end
 local NetworkChart = RoactModule.Component:extend("NetworkChart")
 
-function NetworkChart.init(p1) --[[ Line: 57 ]]
+function NetworkChart.init(p1)
 	-- upvalues: RoactModule (copy)
-	function p1.getOnExpandEntry(Num) --[[ Line: 58 ]]
+	function p1.getOnExpandEntry(Num)
 		-- upvalues: p1 (copy)
-		return function(_, _) --[[ Line: 59 ]]
+		return function(_, _)
 			-- upvalues: p1 (upval), Num (copy)
 			p1:setState({ expandIndex = p1.state.expandIndex ~= Num and Num })
 		end
 	end
 	
-	function p1.onCanvasPosChanged() --[[ Line: 66 ]]
+	function p1.onCanvasPosChanged()
 		-- upvalues: p1 (copy)
 		local CanvasPosition = p1.scrollingRef.current.CanvasPosition
 		
@@ -67,13 +67,13 @@ function NetworkChart.init(p1) --[[ Line: 57 ]]
 	p1.state = { expandIndex = false }
 end
 
-function NetworkChart.willUpdate(p1) --[[ Line: 84 ]]
+function NetworkChart.willUpdate(p1)
 	if p1.canvasPosConnector then
 		p1.canvasPosConnector:Disconnect()
 	end
 end
 
-function NetworkChart.didUpdate(p1) --[[ Line: 90 ]]
+function NetworkChart.didUpdate(p1)
 	if p1.scrollingRef.current then
 		p1.canvasPosConnector = p1.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p1.onCanvasPosChanged)
 		local AbsoluteSize = p1.scrollingRef.current.AbsoluteSize
@@ -84,7 +84,7 @@ function NetworkChart.didUpdate(p1) --[[ Line: 90 ]]
 	end
 end
 
-function NetworkChart.didMount(p1) --[[ Line: 104 ]]
+function NetworkChart.didMount(p1)
 	if p1.scrollingRef.current then
 		p1.canvasPosConnector = p1.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p1.onCanvasPosChanged)
 		p1:setState({
@@ -94,7 +94,7 @@ function NetworkChart.didMount(p1) --[[ Line: 104 ]]
 	end
 end
 
-function NetworkChart.render(p1) --[[ Line: 116 ]]
+function NetworkChart.render(p1)
 	-- upvalues: ChartHeaderNames (copy), RoactModule (copy), HeaderButtonModule (copy), List1 (copy), List (copy), VerticalOffsets (copy), LineWidth (copy), HeaderFrameHeight (copy), LineColor (copy), EntryFrameHeight (copy), ResponseStrHeight (copy), ResponseWidthRatio (copy), TextService (copy), MainWindow (copy), MainWindow1 (copy), NetworkChartEntryModule (copy), List2 (copy), ConstantsModule (copy)
 	local HttpEntryList = p1.props.httpEntryList or {}
 	local ChartHeight = p1.props.chartHeight

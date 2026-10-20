@@ -1,14 +1,14 @@
 ﻿local MutedErrorModule = require(script.Parent.mutedError)
 game:DefineFastString("SuppressMutedErrorKeys", "")
 
-local function _() --[[ Line: 32 | Named "getFStringSuppressMutedErrorKeys" ]]
+local function _()
 	return game:GetFastString("SuppressMutedErrorKeys")
 end
 
 local SuppressMutedErrorKeysFastString = ""
 local t = {}
 
-local function shouldSuppressMutedError(p1) --[[ Line: 39 ]]
+local function shouldSuppressMutedError(p1)
 	-- upvalues: SuppressMutedErrorKeysFastString (ref), t (ref)
 	local SuppressMutedErrorKeysFastString1: string = game:GetFastString("SuppressMutedErrorKeys")
 	
@@ -23,7 +23,7 @@ local function shouldSuppressMutedError(p1) --[[ Line: 39 ]]
 	return t[p1] or false
 end
 
-return function(p2, p3, p4) --[[ Line: 53 | Named "flaggedMutedError" ]]
+return function(p2, p3, p4)
 	-- upvalues: shouldSuppressMutedError (copy), MutedErrorModule (copy)
 	if not shouldSuppressMutedError(p2) then
 		MutedErrorModule(p3, p4)

@@ -5,10 +5,10 @@ local ValueChangedSignal = SettingsServiceModule.ValueChangedSignal
 local AvailabilitySignal = SettingsServiceModule.AvailabilitySignal
 local LAYOUTORDER = require(script:FindFirstAncestor("Settings").Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER
 
-local function _() --[[ Line: 23 | Named "UINavValue" ]]
+local function _()
 	-- upvalues: ValueChangedSignal (copy), GameSettings (copy)
 	local NewValueChangedSignal = ValueChangedSignal.new(GameSettings.UiNavigationKeyBindEnabled)
-	NewValueChangedSignal:connect(function(UiNavigationKeyBindEnabled) --[[ Line: 26 ]]
+	NewValueChangedSignal:connect(function(UiNavigationKeyBindEnabled)
 		-- upvalues: GameSettings (upval)
 		if GameSettings.UiNavigationKeyBindEnabled ~= UiNavigationKeyBindEnabled then
 			GameSettings.UiNavigationKeyBindEnabled = UiNavigationKeyBindEnabled
@@ -20,10 +20,10 @@ local function _() --[[ Line: 23 | Named "UINavValue" ]]
 	return NewValueChangedSignal
 end
 
-local _ = function() --[[ Line: 39 | Named "UINavAvailability" ]]
+local _ = function()
 	-- upvalues: AvailabilitySignal (copy), UserInputService (copy)
 	local NewAvailabilitySignal = AvailabilitySignal.new(UserInputService.KeyboardEnabled)
-	UserInputService:GetPropertyChangedSignal("KeyboardEnabled"):Connect(function() --[[ Line: 42 ]]
+	UserInputService:GetPropertyChangedSignal("KeyboardEnabled"):Connect(function()
 		-- upvalues: NewAvailabilitySignal (copy), UserInputService (upval)
 		NewAvailabilitySignal:set(UserInputService.KeyboardEnabled)
 	end)
@@ -39,7 +39,7 @@ local UINavToggleModule = {
 	field_type = SettingsServiceModule.SettingEnum.Toggle
 }
 local NewValueChangedSignal = ValueChangedSignal.new(GameSettings.UiNavigationKeyBindEnabled)
-NewValueChangedSignal:connect(function(UiNavigationKeyBindEnabled) --[[ Line: 26 ]]
+NewValueChangedSignal:connect(function(UiNavigationKeyBindEnabled)
 	-- upvalues: GameSettings (copy)
 	if GameSettings.UiNavigationKeyBindEnabled ~= UiNavigationKeyBindEnabled then
 		GameSettings.UiNavigationKeyBindEnabled = UiNavigationKeyBindEnabled
@@ -49,7 +49,7 @@ NewValueChangedSignal:connect(function(UiNavigationKeyBindEnabled) --[[ Line: 26
 end)
 UINavToggleModule.onChanged = NewValueChangedSignal
 local NewAvailabilitySignal = AvailabilitySignal.new(UserInputService.KeyboardEnabled)
-UserInputService:GetPropertyChangedSignal("KeyboardEnabled"):Connect(function() --[[ Line: 42 ]]
+UserInputService:GetPropertyChangedSignal("KeyboardEnabled"):Connect(function()
 	-- upvalues: NewAvailabilitySignal (copy), UserInputService (copy)
 	NewAvailabilitySignal:set(UserInputService.KeyboardEnabled)
 end)

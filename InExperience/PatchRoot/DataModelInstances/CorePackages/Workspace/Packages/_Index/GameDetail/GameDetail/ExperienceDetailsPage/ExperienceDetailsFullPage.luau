@@ -58,14 +58,14 @@ local SelectionGroup = {
 	SelectionBehaviorRight = Enum.SelectionBehavior.Stop
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 80 | Named "ExperienceDetailsFullPage" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: GameDetail (copy), ExperienceDetailsPageUtilsModule (copy), GetExperienceDetailsPageKeyModule (copy), ReactModule (copy), UsePageScopeRefFunction (copy), FFlagEDPTTIParityDefinitions (copy), CreateExperienceDetailsPageTimerModule (copy), EDPTTIConstants (copy), SduiSurfaceLoadTimeTracker (copy), GetSduiClientPageScopeFunction (copy), UseEdpFunctionallyReadyLoggerModule (copy), UseNavigationFunction (copy), UseRoactServiceFunction (copy), AppSessionService (copy), UseTokensFunction (copy), UseGetCurrentLegacyRouteFunction (copy), FilterPlayWithReward (copy), SduiEdpPageScopeIsTenFoot (copy), IsTenFoot (copy), IsTenFootInterfaceFunction (copy), RemoveGameDetailSessionIfDepartedModule (copy), FetchExperienceDetailsPageModule (copy), UseUiStatusFunction (copy), UiStatus (copy), DataHydrationModule (copy), FFlagSduiContainerQueries (copy), UsePublishContainerWidthModule (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), ResponsiveModule (copy), FFlagEnableSplitPaneEDPFix (copy), ExperienceDetailsPageScopeFieldsModule (copy), DetailsPageLayout (copy), SelectionGroup (copy), EdpBannerAspectRatioTenths (copy), EdpDirectionalFullBleedOverlapOffset (copy), EdpFullBleedOverlapOffset (copy), EdpGradientTopBleedOffset (copy), FFlagLuaAppEdpDirectionalGradientMidTransparency (copy), EdpDirectionalGradientMidTransparencyHundredths (copy), EdpDirectionalBannerBottomVisiblePercent (copy), EdpBannerBottomVisiblePercent (copy), SduiFeatureEntryPoint (copy), AppPage (copy), ExperienceDetailsPageConstantsModule (copy), ExperienceDetailsFallbackBannerImageModule (copy), FoundationModule (copy), SduiPageEntryPoint (copy), FFlagSduiPageEntryUseSharedHooks (copy), CompositionTags (copy), ExperienceDetailsFallbackFeedModule (copy), ExperienceDetailsPersistentActionBarModule (copy)
 	local UseExperienceDetailsFocusNavigationModule = require(GameDetail.FocusNavigation.useExperienceDetailsFocusNavigation)
 	local UniverseId = ExperienceDetailsPageUtilsModule.getUniverseId(p1)
 	local ExperienceDetailsPageKeyModule = GetExperienceDetailsPageKeyModule(UniverseId)
 	local UseRefResult = ReactModule.useRef(nil)
 	UsePageScopeRefFunction(ExperienceDetailsPageKeyModule)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 88 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ExperienceDetailsPageUtilsModule (upval), p1 (copy), FFlagEDPTTIParityDefinitions (upval), CreateExperienceDetailsPageTimerModule (upval), ExperienceDetailsPageKeyModule (copy), EDPTTIConstants (upval), SduiSurfaceLoadTimeTracker (upval), GetSduiClientPageScopeFunction (upval)
 		local PageTimerFromPropsOrNavigationParams = ExperienceDetailsPageUtilsModule.getFromPropsOrNavigationParams(p1, "pageTimer")
 		local PageTimerFromPropsOrNavigationParams1 = if FFlagEDPTTIParityDefinitions then PageTimerFromPropsOrNavigationParams or CreateExperienceDetailsPageTimerModule(ExperienceDetailsPageKeyModule, {
@@ -91,7 +91,7 @@ return ReactModule.memo(function(p1) --[[ Line: 80 | Named "ExperienceDetailsFul
 	local ReferralSourceFromPropsOrNavigationParams = ExperienceDetailsPageUtilsModule.getFromPropsOrNavigationParams(p1, "referralSource")
 	local ExperienceJoinDataFromPropsOrNavigationParams = ExperienceDetailsPageUtilsModule.getFromPropsOrNavigationParams(p1, "experienceJoinData")
 	local PlaceIdOverrideFromPropsOrNavigationParams = ExperienceDetailsPageUtilsModule.getFromPropsOrNavigationParams(p1, "placeIdOverride")
-	ReactModule.useEffect(function() --[[ Line: 123 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: GetSduiClientPageScopeFunction (upval), ExperienceDetailsPageKeyModule (copy), ReferralSourceFromPropsOrNavigationParams (copy), ExperienceJoinDataFromPropsOrNavigationParams (copy), PlaceIdOverrideFromPropsOrNavigationParams (copy), FilterPlayWithReward (upval), SduiEdpPageScopeIsTenFoot (upval), IsTenFoot (upval), IsTenFootInterfaceFunction (upval)
 		local SduiClientPageScope = GetSduiClientPageScopeFunction(ExperienceDetailsPageKeyModule)
 		SduiClientPageScope.set("referralSource", ReferralSourceFromPropsOrNavigationParams)
@@ -109,7 +109,7 @@ return ReactModule.memo(function(p1) --[[ Line: 80 | Named "ExperienceDetailsFul
 		ExperienceJoinDataFromPropsOrNavigationParams,
 		PlaceIdOverrideFromPropsOrNavigationParams
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 136 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseGetCurrentLegacyRouteResult (copy), UseNavigationResult (copy), RemoveGameDetailSessionIfDepartedModule (upval), UseRoactServiceResult (copy)
 		local UseGetCurrentLegacyRouteResultResult = UseGetCurrentLegacyRouteResult()
 		UseNavigationResult.goBack()
@@ -119,23 +119,23 @@ return ReactModule.memo(function(p1) --[[ Line: 80 | Named "ExperienceDetailsFul
 		UseRoactServiceResult,
 		UseGetCurrentLegacyRouteResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 148 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UniverseId (copy), UseMemoResult (copy), FetchExperienceDetailsPageModule (upval)
 		if UniverseId and UseMemoResult then
 			FetchExperienceDetailsPageModule(UniverseId, UseMemoResult)
 		end
 	end, { UniverseId, UseMemoResult })
 	local UseUiStatusResult = UseUiStatusFunction(ExperienceDetailsPageKeyModule)
-	ReactModule.useEffect(function() --[[ Line: 155 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseUiStatusResult (copy), UiStatus (upval), UniverseId (copy), DataHydrationModule (upval)
 		if UseUiStatusResult == UiStatus.Error and UniverseId then
-			DataHydrationModule.Game.getGameInfoStore(false).getAndFetchGameInfo(UniverseId, function(p2): boolean --[[ Line: 159 ]]
+			DataHydrationModule.Game.getGameInfoStore(false).getAndFetchGameInfo(UniverseId, function(p2): boolean
 				return p2 == nil or p2.creator == nil
 			end)
 			DataHydrationModule.Game.getAgeRecommendationStore(false).getAndFetchAgeRecommendation(UniverseId)
 		end
 	end, { UseUiStatusResult, UniverseId })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 166 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UniverseId (copy), UseMemoResult (copy), FetchExperienceDetailsPageModule (upval)
 		if UniverseId and UseMemoResult then
 			FetchExperienceDetailsPageModule(UniverseId, UseMemoResult, true)
@@ -147,7 +147,7 @@ return ReactModule.memo(function(p1) --[[ Line: 80 | Named "ExperienceDetailsFul
 	local IsHideCloseButtonOnHeader = if FFlagEnableSplitPaneEDPFix then p1.hideCloseButtonOnHeader == true else nil
 	
 	if FFlagEnableSplitPaneEDPFix then
-		ReactModule.useEffect(function() --[[ Line: 182 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: GetSduiClientPageScopeFunction (upval), ExperienceDetailsPageKeyModule (copy), ExperienceDetailsPageScopeFieldsModule (upval), IsHideCloseButtonOnHeader (copy)
 			GetSduiClientPageScopeFunction(ExperienceDetailsPageKeyModule).set(ExperienceDetailsPageScopeFieldsModule.HideCloseButtonOnHeader, IsHideCloseButtonOnHeader)
 		end, {

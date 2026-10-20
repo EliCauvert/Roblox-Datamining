@@ -11,7 +11,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 	items = TModule.array(TModule.strictInterface({ itemType = TModule.string, itemId = TModule.string }))
 })
 
-return function(Body, Network) --[[ Line: 29 | Named "postCanGift" ]]
+return function(Body, Network)
 	-- upvalues: StrictInterfaceResult (copy), PromiseModule (copy), GiftErrorModelModule (copy), FetchGiftingModule (copy), UrlsModule (copy), CanGiftResponseModelModule (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(Body)
 	

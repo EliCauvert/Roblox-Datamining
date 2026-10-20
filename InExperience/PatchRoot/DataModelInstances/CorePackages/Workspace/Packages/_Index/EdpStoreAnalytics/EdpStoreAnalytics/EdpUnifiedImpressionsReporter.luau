@@ -7,9 +7,9 @@ local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.U
 local SendUnifiedEventLogForInstanceFunction = AvatarExperienceAnalyticsModule.sendUnifiedEventLogForInstance
 local ConstantsModule = require(EdpStoreAnalytics.Constants)
 
-return function(Edp) --[[ Line: 14 | Named "EdpUnifiedImpressionsReporter" ]]
+return function(Edp)
 	-- upvalues: SendUnifiedEventLogForInstanceFunction (copy), CryoModule (copy), UnifiedEventLogEnums (copy), ConstantsModule (copy), UnifiedLoggingSurface (copy)
-	return function(p1) --[[ Line: 15 ]]
+	return function(p1)
 		-- upvalues: SendUnifiedEventLogForInstanceFunction (upval), CryoModule (upval), UnifiedEventLogEnums (upval), Edp (copy), ConstantsModule (upval), UnifiedLoggingSurface (upval)
 		local VisibleInstance = p1.visibleInstance
 		SendUnifiedEventLogForInstanceFunction(VisibleInstance, CryoModule.Dictionary.join(VisibleInstance:GetAttributes() or {}, {

@@ -18,7 +18,7 @@ local UseCurrentSquadMembersFunction = require(Parent.SquadsCore.Hooks).useCurre
 local EventNamesModule = require(Parent.SquadsCore.EventNames)
 local SquadLobbyLuckyRecommendationModalModule = require(script.Parent.SquadLobbyLuckyRecommendationModal)
 
-return function(_) --[[ Line: 32 | Named "SquadLobbyLuckyRecommendationRow" ]]
+return function(_)
 	-- upvalues: UseTokensFunction (copy), React (copy), UseLocalizationFunction (copy), UseLocalUserIdFunction (copy), SquadExternalContractContext (copy), UseCurrentSquadMembersFunction (copy), UseEffectOnceFunction (copy), EventNamesModule (copy), HttpService (copy), View (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), Text (copy), Icon (copy), IconSize (copy), SquadLobbyLuckyRecommendationModalModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = React.useState(false)
@@ -32,11 +32,11 @@ return function(_) --[[ Line: 32 | Named "SquadLobbyLuckyRecommendationRow" ]]
 	local UseRefResult = React.useRef(UseCurrentSquadMembersResult)
 	UseRefResult.current = UseCurrentSquadMembersResult
 	local UseRefResult1 = React.useRef("")
-	UseEffectOnceFunction(function() --[[ Line: 48 ]]
+	UseEffectOnceFunction(function()
 		-- upvalues: UseContextResult (copy), EventNamesModule (upval), Number (copy)
 		UseContextResult.fireSquadAnalytics(EventNamesModule.LuckyRecommendationRowImpression, { localUserId = Number, clientTimestamp = os.time() })
 	end, true)
-	local UseResult = React.useCallback(function() --[[ Line: 68 ]]
+	local UseResult = React.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {})
@@ -51,7 +51,7 @@ return function(_) --[[ Line: 32 | Named "SquadLobbyLuckyRecommendationRow" ]]
 					top = UDim.new(0, UseTokensResult.Padding.Large),
 					bottom = UDim.new(0, UseTokensResult.Padding.Large)
 				},
-				onActivated = React.useCallback(function() --[[ Line: 55 ]]
+				onActivated = React.useCallback(function()
 					-- upvalues: HttpService (upval), UseRefResult1 (copy), UseRefResult (copy), UseContextResult (copy), EventNamesModule (upval), Number (copy), UseStateResult2 (copy)
 					local Guid = HttpService:GenerateGUID(false)
 					UseRefResult1.current = Guid

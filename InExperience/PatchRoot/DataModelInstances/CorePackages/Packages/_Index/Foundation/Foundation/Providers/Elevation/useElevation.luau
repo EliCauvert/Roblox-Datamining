@@ -6,11 +6,11 @@ local _ = require(script.Parent.elevation)
 local UseElevationManagerFunction = ElevationProviderModule.useElevationManager
 local UseOwnerTokenFunction = ElevationProviderModule.useOwnerToken
 
-return function(Layer, p1) --[[ Line: 20 | Named "useElevation" ]]
+return function(Layer, p1)
 	-- upvalues: UseElevationManagerFunction (copy), UseOwnerTokenFunction (copy), ReactModule (copy)
 	local UseElevationManagerResult = UseElevationManagerFunction()
 	local UseOwnerTokenResult = UseOwnerTokenFunction()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 25 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseOwnerTokenResult (copy), Layer (copy), p1 (copy), UseElevationManagerResult (copy)
 		local IsLayerMatch: boolean = UseOwnerTokenResult ~= nil and UseOwnerTokenResult.layer == Layer
 		
@@ -25,9 +25,9 @@ return function(Layer, p1) --[[ Line: 20 | Named "useElevation" ]]
 		UseElevationManagerResult,
 		p1.stackAboveOwner
 	})
-	ReactModule.useEffect(function() --[[ Line: 57 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy), UseElevationManagerResult (copy), Layer (copy)
-		return function() --[[ Line: 58 ]]
+		return function()
 			-- upvalues: UseMemoResult (upval), UseElevationManagerResult (upval), Layer (upval)
 			if UseMemoResult.index ~= nil and UseMemoResult.index >= 0 then
 				UseElevationManagerResult.releaseIfTop(Layer, UseMemoResult.index)

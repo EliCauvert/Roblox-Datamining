@@ -4,9 +4,9 @@ local MomentsCreationFlowOpenedModule = require(Parent.Actions.MomentsCreationFl
 local _ = require(Parent.Types)
 
 if require(Parent.Flags.FFlagCapturesInExpUseMomentsCreation) then
-	return function(p1, p2) --[[ Line: 9 ]]
+	return function(p1, p2)
 		-- upvalues: Parent (copy), Parent1 (copy), MomentsCreationFlowOpenedModule (copy)
-		return function(p3) --[[ Line: 10 ]]
+		return function(p3)
 			-- upvalues: Parent (upval), Parent1 (upval), p1 (copy), MomentsCreationFlowOpenedModule (upval), p2 (copy)
 			if not p3:getState()[require(Parent.Constants).RoduxKey].MomentsCreationFlow.IsOpen then
 				local MomentsCreationModule = require(Parent1.MomentsCreation)
@@ -26,9 +26,9 @@ else
 	local SelectedCaptureUpdatedFunction = MomentsCreationFlowModule.Actions.SelectedCaptureUpdated
 	local CreationFlowStateUpdatedFunction = MomentsCreationFlowModule.Actions.CreationFlowStateUpdated
 	
-	return function(p1, p2) --[[ Line: 34 ]]
+	return function(p1, p2)
 		-- upvalues: MomentsCreationFlowOpenedModule (copy), CreationFlowStateUpdatedFunction (copy), CreationFlowState (copy), SelectedCaptureUpdatedFunction (copy)
-		return function(p3) --[[ Line: 35 ]]
+		return function(p3)
 			-- upvalues: MomentsCreationFlowOpenedModule (upval), p1 (copy), p2 (copy), CreationFlowStateUpdatedFunction (upval), CreationFlowState (upval), SelectedCaptureUpdatedFunction (upval)
 			p3:dispatch(MomentsCreationFlowOpenedModule(p1, p2))
 			p3:dispatch(CreationFlowStateUpdatedFunction(CreationFlowState.Preview))

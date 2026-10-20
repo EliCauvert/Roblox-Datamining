@@ -16,7 +16,7 @@ local t = {}
 local MarketplaceUnifiedAction = UnifiedEventLogEnums.MarketplaceUnifiedAction
 local MarketplaceUnifiedItemType = UnifiedEventLogEnums.MarketplaceUnifiedItemType
 
-local function _(p1: number, p2: number) --[[ Line: 30 | Named "gridPosition" ]]
+local function _(p1: number, p2: number)
 	if p2 and p2 > 0 then
 		return math.ceil(p1 / p2), (p1 - 1) % p2 + 1
 	else
@@ -24,7 +24,7 @@ local function _(p1: number, p2: number) --[[ Line: 30 | Named "gridPosition" ]]
 	end
 end
 
-return function(p1, List, p2, AnalyticsData, p3, p4): number --[[ Line: 48 | Named "SduiMarketplaceItemImpressionsHandler" ]]
+return function(p1, List, p2, AnalyticsData, p3, p4): number
 	-- upvalues: t (copy), SduiLogger (copy), SduiErrors (copy), FindAnalyticsFieldInAncestorsFunction (copy), UnifiedLoggingSurface (copy), MarketplaceUnifiedItemType (copy), FindCollectionItemInstancesModule (copy), MarketplaceUnifiedAction (copy), UnifiedEventLoggingUtils (copy), FFlagAXUnifiedEventCounters (copy), AXUnifiedEventFilter (copy), SendUnifiedEventLogFunction (copy)
 	if #List == 0 or #(p2 or t) == 0 then
 		SduiLogger.reportError(SduiErrors.SduiErrorType.FailedToLogMarketplaceItemImpressions, {

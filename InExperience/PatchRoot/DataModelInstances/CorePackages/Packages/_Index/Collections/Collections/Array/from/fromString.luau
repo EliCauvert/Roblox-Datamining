@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.Parent.Parent.Parent.ES7Types)
 
-return function(Text: string, Callback, p1) --[[ Line: 25 ]]
+return function(Text: string, Callback, p1)
 	local CountText = #Text
 	local Buffer = table.create(CountText)
 	

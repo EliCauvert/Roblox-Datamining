@@ -3,7 +3,7 @@ local Parent = script.Parent
 local IsArrayModule = require(Parent.isArray)
 local _ = require(Parent.Parent.Parent.ES7Types)
 
-local function flat(List, p1) --[[ Line: 21 ]]
+local function flat(List, p1)
 	-- upvalues: DEV (copy), IsArrayModule (copy), flat (copy)
 	if DEV then
 		if typeof(List) ~= "table" then

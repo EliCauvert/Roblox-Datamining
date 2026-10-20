@@ -6,17 +6,17 @@ local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local NewResult = require(Parent.Loggers).Logger:new(script.Name)
 
-return function(p1) --[[ Line: 22 | Named "ImagePile" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), CryoModule (copy), NewResult (copy), ImageSetLabel (copy)
 	local Tokens = UseStyleFunction().Tokens
-	local UnionResult = CryoModule.Dictionary.union(ReactModule.useMemo(function() --[[ Line: 26 ]]
+	local UnionResult = CryoModule.Dictionary.union(ReactModule.useMemo(function()
 		-- upvalues: Tokens (copy)
 		return {
 			imageBorderColor = Tokens.Color.Extended.White.White_100.Color3,
 			imageBorderThickness = Tokens.Size.Size_50
 		}
 	end, { Tokens }), p1)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 35 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Tokens (copy)
 		return {
 			[1] = {
@@ -43,11 +43,11 @@ return function(p1) --[[ Line: 22 | Named "ImagePile" ]]
 			}
 		}
 	end, { Tokens })
-	local UseResult = ReactModule.useCallback(function(p2: number, Text) --[[ Line: 62 ]]
+	local UseResult = ReactModule.useCallback(function(p2: number, Text)
 		-- upvalues: UseMemoResult (copy)
 		return UseMemoResult[math.min(p2, 2)]["Attribute" .. Text]
 	end, { UseMemoResult })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 67 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UnionResult (copy), NewResult (upval), UseResult (copy), ReactModule (upval), ImageSetLabel (upval)
 		local Elements = {}
 		

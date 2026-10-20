@@ -4,7 +4,7 @@ local config = {
 	[Enum.InfoType.Product] = "DeveloperProduct"
 }
 
-return function(p1, p2) --[[ Line: 22 | Named "getInGameItemProductIdentifier" ]]
+return function(p1, p2)
 	-- upvalues: config (copy)
 	local Entry = config[p1]
 	

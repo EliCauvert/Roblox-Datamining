@@ -10,7 +10,7 @@ local ImageSet = UIBloxModule.Core.ImageSet
 local Images = UIBloxModule.App.ImageSet.Images
 local _Rect = Rect.new(8, 8, 9, 9)
 
-return function(p1) --[[ Line: 22 ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), GameInviteModalLayoutContextModule (copy), ImageSet (copy), FFlagGameInviteModalUnlockMouse (copy), GameInviteModalManagerModule (copy), Images (copy), _Rect (copy)
 	local UseStyleResult = UseStyleFunction()
 	local Theme = UseStyleResult.Theme
@@ -40,7 +40,7 @@ return function(p1) --[[ Line: 22 ]]
 		AutoButtonColor = false,
 		Modal = if FFlagGameInviteModalUnlockMouse then true else nil,
 		ZIndex = 0,
-		[ReactModule.Event.Activated] = function() --[[ Line: 52 ]]
+		[ReactModule.Event.Activated] = function()
 			-- upvalues: GameInviteModalManagerModule (upval)
 			GameInviteModalManagerModule:closeModal()
 		end

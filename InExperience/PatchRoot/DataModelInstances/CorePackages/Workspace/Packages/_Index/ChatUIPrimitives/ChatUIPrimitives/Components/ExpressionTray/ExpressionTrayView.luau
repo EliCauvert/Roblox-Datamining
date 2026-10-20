@@ -13,11 +13,11 @@ local _ = require(ChatUIPrimitives.UniversalMessage.Types)
 local _ = require(ChatUIPrimitives.Hooks.useLayoutMode)
 local CreateNextOrderFunction = require(Parent.ReactUtils).createNextOrder
 
-local function _(p1) --[[ Line: 56 | Named "expressionText" ]]
+local function _(p1)
 	return if p1.kind == "plain-text" then p1.text else (if p1.kind == "preset" then p1.text else p1.kind == "emoji" and (p1.unicode or p1.name) or p1.altText) or ""
 end
 
-local function buildEntryButton(p1, ButtonRef) --[[ Line: 67 ]]
+local function buildEntryButton(p1, ButtonRef)
 	-- upvalues: ReactModule (copy), ExpressionEntryButtonViewModule (copy), FoundationModule (copy)
 	return ReactModule.createElement(ExpressionEntryButtonViewModule, {
 		onActivated = p1.onEntryActivated,
@@ -27,7 +27,7 @@ local function buildEntryButton(p1, ButtonRef) --[[ Line: 67 ]]
 	})
 end
 
-local function buildContent(p1, DefaultFocusRef) --[[ Line: 76 ]]
+local function buildContent(p1, DefaultFocusRef)
 	-- upvalues: CreateNextOrderFunction (copy), ExpressionKeyFunction (copy), ReactModule (copy), ExpressionPillViewModule (copy), FoundationModule (copy), ExpressionTabBarModule (copy)
 	local v1 = nil
 	
@@ -132,7 +132,7 @@ local function buildContent(p1, DefaultFocusRef) --[[ Line: 76 ]]
 	})
 end
 
-local function buildFlyOut(p2, p3) --[[ Line: 193 ]]
+local function buildFlyOut(p2, p3)
 	-- upvalues: ReactModule (copy), ExpressionFlyOutViewModule (copy), ExpressionEntryButtonViewModule (copy), FoundationModule (copy), buildContent (copy)
 	return ReactModule.createElement(ExpressionFlyOutViewModule, {
 		isOpen = p2.isOpen,
@@ -149,7 +149,7 @@ local function buildFlyOut(p2, p3) --[[ Line: 193 ]]
 	})
 end
 
-return ReactModule.memo(function(p2) --[[ Line: 204 | Named "ExpressionTrayView" ]]
+return ReactModule.memo(function(p2)
 	-- upvalues: buildEntryButton (copy), ReactModule (copy), ExpressionSheetViewModule (copy), buildContent (copy), ExpressionTrayFocusRootModule (copy), buildFlyOut (copy)
 	if p2.isVisible then
 		local LayoutMode = p2.layoutMode or "FlyOut"
@@ -161,7 +161,7 @@ return ReactModule.memo(function(p2) --[[ Line: 204 | Named "ExpressionTrayView"
 			content = buildContent(p2, nil)
 		}) elseif p2.focusNavEnabled == true then ReactModule.createElement(ExpressionTrayFocusRootModule, {
 			isOpen = p2.isOpen,
-			render = function(p3) --[[ Line: 231 ]]
+			render = function(p3)
 				-- upvalues: buildFlyOut (upval), p2 (copy)
 				return buildFlyOut(p2, p3)
 			end

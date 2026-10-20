@@ -1,11 +1,11 @@
 ﻿local HttpService = game:GetService("HttpService")
 local _ = require(script.Parent.types)
 
-local function _(Text: string, Lowered): boolean --[[ Line: 38 | Named "valueLooksLikeToolName" ]]
+local function _(Text: string, Lowered): boolean
 	return typeof(Text) == "string" and string.lower(Text) == Lowered
 end
 
-local function toolCallLooksLikeRequest(ToolCall, Lowered): boolean --[[ Line: 42 ]]
+local function toolCallLooksLikeRequest(ToolCall, Lowered): boolean
 	local Kind: string = ToolCall.kind
 	
 	if typeof(Kind) ~= "string" or string.lower(Kind) ~= Lowered then
@@ -30,7 +30,7 @@ local function toolCallLooksLikeRequest(ToolCall, Lowered): boolean --[[ Line: 4
 	return true
 end
 
-local function hasPersistedToolResult(ToolCall): boolean --[[ Line: 59 ]]
+local function hasPersistedToolResult(ToolCall): boolean
 	-- upvalues: HttpService (copy)
 	if ToolCall.content == nil then
 		return false
@@ -51,7 +51,7 @@ local function hasPersistedToolResult(ToolCall): boolean --[[ Line: 59 ]]
 	return false
 end
 
-local function findRequestInTurnState(p1, Lowered, p2) --[[ Line: 85 ]]
+local function findRequestInTurnState(p1, Lowered, p2)
 	-- upvalues: hasPersistedToolResult (copy), toolCallLooksLikeRequest (copy)
 	local List = {}
 	
@@ -98,15 +98,15 @@ return {
 		}
 	},
 	toolCallLooksLikeRequest = toolCallLooksLikeRequest,
-	findSearchRequestInTurnState = function(p3, p4) --[[ Line: 115 ]]
+	findSearchRequestInTurnState = function(p3, p4)
 		-- upvalues: findRequestInTurnState (copy)
 		return findRequestInTurnState(p3, "search_client_datamodel", p4)
 	end,
-	findInspectRequestInTurnState = function(p3, p4) --[[ Line: 122 ]]
+	findInspectRequestInTurnState = function(p3, p4)
 		-- upvalues: findRequestInTurnState (copy)
 		return findRequestInTurnState(p3, "inspect_client_instance", p4)
 	end,
-	formatResultContent = function(p3) --[[ Line: 129 ]]
+	formatResultContent = function(p3)
 		-- upvalues: HttpService (copy)
 		local Success, Result = pcall(HttpService.JSONEncode, HttpService, p3)
 		

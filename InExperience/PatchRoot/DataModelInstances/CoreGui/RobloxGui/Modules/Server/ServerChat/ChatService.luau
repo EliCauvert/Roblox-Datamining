@@ -13,32 +13,32 @@ local ChatChannelModule = require(Parent:WaitForChild("ChatChannel"))
 local SpeakerModule = require(Parent:WaitForChild("Speaker"))
 local UtilModule = require(Parent:WaitForChild("Util"))
 local ChatLocalizationModule = nil
-pcall(function() --[[ Line: 38 ]]
+pcall(function()
 	-- upvalues: ChatLocalizationModule (ref)
 	ChatLocalizationModule = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
 ChatLocalizationModule = ChatLocalizationModule or {}
 
 if not ChatLocalizationModule.FormatMessageToSend or not ChatLocalizationModule.LocalizeFormattedMessage then
-	function ChatLocalizationModule:FormatMessageToSend(_, Formatted) --[[ Line: 42 ]]
+	function ChatLocalizationModule:FormatMessageToSend(_, Formatted)
 		return Formatted
 	end
 end
-local function _(Text: string): boolean --[[ Line: 45 | Named "allSpaces" ]]
+local function _(Text: string): boolean
 	return string.len((string.gsub(Text, " ", ""))) == 0
 end
 
 local Module = {}
 Module.__index = Module
 
-function Module.AddChannel(p1, Text: string, AutoJoin) --[[ Line: 55 ]]
+function Module.AddChannel(p1, Text: string, AutoJoin)
 	-- upvalues: ChatLocalizationModule (ref), ChatChannelModule (copy), ChatConstantsModule (copy)
 	if p1.ChatChannels[Text:lower()] then
 		error(string.format("Channel %q alrady exists.", Text))
 	end
 	local NewChatChannel = ChatChannelModule.new(p1, Text)
 	p1.ChatChannels[Text:lower()] = NewChatChannel
-	NewChatChannel:RegisterProcessCommandsFunction("default_commands", function(p2, Text1: string): boolean --[[ Line: 60 | Named "DefaultChannelCommands" ]]
+	NewChatChannel:RegisterProcessCommandsFunction("default_commands", function(p2, Text1: string): boolean
 		-- upvalues: p1 (copy), Text (copy), ChatLocalizationModule (upval)
 		if Text1:lower() ~= "/leave" then
 			return false
@@ -56,7 +56,7 @@ function Module.AddChannel(p1, Text: string, AutoJoin) --[[ Line: 55 ]]
 		end
 		return true
 	end, ChatConstantsModule.HighPriority)
-	local Success, Result = pcall(function() --[[ Line: 89 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: p1 (copy), Text (copy)
 		p1.eChannelAdded:Fire(Text)
 	end)
@@ -76,12 +76,12 @@ function Module.AddChannel(p1, Text: string, AutoJoin) --[[ Line: 55 ]]
 	return NewChatChannel
 end
 
-function Module.RemoveChannel(p2, Text: string) --[[ Line: 106 ]]
+function Module.RemoveChannel(p2, Text: string)
 	if p2.ChatChannels[Text:lower()] then
 		local Name = p2.ChatChannels[Text:lower()].Name
 		p2.ChatChannels[Text:lower()]:InternalDestroy()
 		p2.ChatChannels[Text:lower()] = nil
-		local Success, Result = pcall(function() --[[ Line: 113 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p2 (copy), Name (copy)
 			p2.eChannelRemoved:Fire(Name)
 		end)
@@ -96,18 +96,18 @@ function Module.RemoveChannel(p2, Text: string) --[[ Line: 106 ]]
 	end
 end
 
-function Module.GetChannel(p2, Text: string) --[[ Line: 122 ]]
+function Module.GetChannel(p2, Text: string)
 	return p2.ChatChannels[Text:lower()]
 end
 
-function Module.AddSpeaker(p2, Text: string) --[[ Line: 127 ]]
+function Module.AddSpeaker(p2, Text: string)
 	-- upvalues: SpeakerModule (copy)
 	if p2.Speakers[Text:lower()] then
 		error("Speaker \"" .. Text .. "\" already exists!")
 	end
 	local NewSpeaker = SpeakerModule.new(p2, Text)
 	p2.Speakers[Text:lower()] = NewSpeaker
-	local Success, Result = pcall(function() --[[ Line: 135 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: p2 (copy), Text (copy)
 		p2.eSpeakerAdded:Fire(Text)
 	end)
@@ -118,7 +118,7 @@ function Module.AddSpeaker(p2, Text: string) --[[ Line: 127 ]]
 	return NewSpeaker
 end
 
-function Module.InternalUnmuteSpeaker(p2, Name) --[[ Line: 143 ]]
+function Module.InternalUnmuteSpeaker(p2, Name)
 	for _, chatChannel in pairs(p2.ChatChannels) do
 		if chatChannel:IsSpeakerMuted(Name) then
 			chatChannel:UnmuteSpeaker(Name)
@@ -126,13 +126,13 @@ function Module.InternalUnmuteSpeaker(p2, Name) --[[ Line: 143 ]]
 	end
 end
 
-function Module.RemoveSpeaker(p3, Text: string) --[[ Line: 151 ]]
+function Module.RemoveSpeaker(p3, Text: string)
 	if p3.Speakers[Text:lower()] then
 		local Name = p3.Speakers[Text:lower()].Name
 		p3:InternalUnmuteSpeaker(Name)
 		p3.Speakers[Text:lower()]:InternalDestroy()
 		p3.Speakers[Text:lower()] = nil
-		local Success, Result = pcall(function() --[[ Line: 160 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p3 (copy), Name (copy)
 			p3.eSpeakerRemoved:Fire(Name)
 		end)
@@ -147,11 +147,11 @@ function Module.RemoveSpeaker(p3, Text: string) --[[ Line: 151 ]]
 	end
 end
 
-function Module.GetSpeaker(p3, Text: string) --[[ Line: 170 ]]
+function Module.GetSpeaker(p3, Text: string)
 	return p3.Speakers[Text:lower()]
 end
 
-function Module.GetSpeakerByUserOrDisplayName(p3, Text: string) --[[ Line: 174 ]]
+function Module.GetSpeakerByUserOrDisplayName(p3, Text: string)
 	local Speaker = p3.Speakers[Text:lower()]
 	
 	if Speaker then
@@ -166,7 +166,7 @@ function Module.GetSpeakerByUserOrDisplayName(p3, Text: string) --[[ Line: 174 ]
 	end
 end
 
-function Module.GetChannelList(p4) --[[ Line: 190 ]]
+function Module.GetChannelList(p4)
 	local List = {}
 	
 	for _, chatChannel in pairs(p4.ChatChannels) do
@@ -177,7 +177,7 @@ function Module.GetChannelList(p4) --[[ Line: 190 ]]
 	return List
 end
 
-function Module.GetAutoJoinChannelList(p5) --[[ Line: 200 ]]
+function Module.GetAutoJoinChannelList(p5)
 	local List = {}
 	
 	for _, chatChannel in pairs(p5.ChatChannels) do
@@ -188,7 +188,7 @@ function Module.GetAutoJoinChannelList(p5) --[[ Line: 200 ]]
 	return List
 end
 
-function Module.GetSpeakerList(p6) --[[ Line: 210 ]]
+function Module.GetSpeakerList(p6)
 	local List = {}
 	
 	for _, speaker in pairs(p6.Speakers) do
@@ -197,42 +197,42 @@ function Module.GetSpeakerList(p6) --[[ Line: 210 ]]
 	return List
 end
 
-function Module.SendGlobalSystemMessage(p7, p8) --[[ Line: 218 ]]
+function Module.SendGlobalSystemMessage(p7, p8)
 	for _, speaker in pairs(p7.Speakers) do
 		speaker:SendSystemMessage(p8, nil)
 	end
 end
 
-function Module.RegisterFilterMessageFunction(p9, p10, p11, p12) --[[ Line: 224 ]]
+function Module.RegisterFilterMessageFunction(p9, p10, p11, p12)
 	if p9.FilterMessageFunctions:HasFunction(p10) then
 		error(string.format("FilterMessageFunction '%s' already exists", p10))
 	end
 	p9.FilterMessageFunctions:AddFunction(p10, p11, p12)
 end
 
-function Module.FilterMessageFunctionExists(p9, p10) --[[ Line: 231 ]]
+function Module.FilterMessageFunctionExists(p9, p10)
 	return p9.FilterMessageFunctions:HasFunction(p10)
 end
 
-function Module.UnregisterFilterMessageFunction(p9, p10) --[[ Line: 235 ]]
+function Module.UnregisterFilterMessageFunction(p9, p10)
 	if not p9.FilterMessageFunctions:HasFunction(p10) then
 		error(string.format("FilterMessageFunction '%s' does not exists", p10))
 	end
 	p9.FilterMessageFunctions:RemoveFunction(p10)
 end
 
-function Module.RegisterProcessCommandsFunction(p9, p10, p11, HighPriority) --[[ Line: 242 ]]
+function Module.RegisterProcessCommandsFunction(p9, p10, p11, HighPriority)
 	if p9.ProcessCommandsFunctions:HasFunction(p10) then
 		error(string.format("ProcessCommandsFunction '%s' already exists", p10))
 	end
 	p9.ProcessCommandsFunctions:AddFunction(p10, p11, HighPriority)
 end
 
-function Module.ProcessCommandsFunctionExists(p9, p10) --[[ Line: 249 ]]
+function Module.ProcessCommandsFunctionExists(p9, p10)
 	return p9.ProcessCommandsFunctions:HasFunction(p10)
 end
 
-function Module.UnregisterProcessCommandsFunction(p9, p10) --[[ Line: 253 ]]
+function Module.UnregisterProcessCommandsFunction(p9, p10)
 	if not p9.ProcessCommandsFunctions:HasFunction(p10) then
 		error(string.format("ProcessCommandsFunction '%s' does not exist", p10))
 	end
@@ -243,7 +243,7 @@ local CurrentTime = 0
 local CurrentTime1 = 0
 local Count = 0
 
-function Module.InternalNotifyFilterIssue(p9) --[[ Line: 263 ]]
+function Module.InternalNotifyFilterIssue(p9)
 	-- upvalues: CurrentTime1 (ref), Count (ref), CurrentTime (ref), ChatLocalizationModule (ref), config (copy)
 	if tick() - CurrentTime1 > 60 then
 		Count = 0
@@ -263,7 +263,7 @@ end
 
 local t1 = {}
 
-function Module.InternalApplyRobloxFilter(p9, p10, Text: string, p11) --[[ Line: 292 ]]
+function Module.InternalApplyRobloxFilter(p9, p10, Text: string, p11)
 	-- upvalues: RunService (copy), Chat (copy), list (copy), t1 (copy)
 	if RunService:IsServer() and not RunService:IsStudio() then
 		local Speaker = p9:GetSpeaker(p10)
@@ -286,7 +286,7 @@ function Module.InternalApplyRobloxFilter(p9, p10, Text: string, p11) --[[ Line:
 		local Result = nil
 		while true do
 			local Success
-			Success, Result = pcall(function() --[[ Line: 315 ]]
+			Success, Result = pcall(function()
 				-- upvalues: Player1 (copy), Chat (upval), Text (copy), Player (copy)
 				return if Player1 then Chat:FilterStringAsync(Text, Player, Player1) else Chat:FilterStringForBroadcast(Text, Player)
 			end)
@@ -313,7 +313,7 @@ function Module.InternalApplyRobloxFilter(p9, p10, Text: string, p11) --[[ Line:
 	end
 end
 
-function Module.InternalApplyRobloxFilterAndTranslate(p12, p13, TargetLocales, Text: string, TextContext) --[[ Line: 351 ]]
+function Module.InternalApplyRobloxFilterAndTranslate(p12, p13, TargetLocales, Text: string, TextContext)
 	-- upvalues: RunService (copy)
 	if not RunService:IsServer() or RunService:IsStudio() then
 		wait()
@@ -332,7 +332,7 @@ function Module.InternalApplyRobloxFilterAndTranslate(p12, p13, TargetLocales, T
 	elseif string.len((string.gsub(Text, " ", ""))) == 0 then
 		return true, false, Text
 	else
-		local Success, Result = pcall(function() --[[ Line: 369 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Text (copy), Player (copy), TargetLocales (copy), TextContext (copy)
 			return (game:GetService("TextService"):FilterAndTranslateStringAsync(Text, Player.UserId, TargetLocales, TextContext))
 		end)
@@ -348,7 +348,7 @@ function Module.InternalApplyRobloxFilterAndTranslate(p12, p13, TargetLocales, T
 	end
 end
 
-function Module.InternalApplyRobloxFilterNewAPI(p12, p13, Text: string, TextContext) --[[ Line: 388 ]]
+function Module.InternalApplyRobloxFilterNewAPI(p12, p13, Text: string, TextContext)
 	-- upvalues: RunService (copy)
 	if not RunService:IsServer() or RunService:IsStudio() then
 		wait()
@@ -367,7 +367,7 @@ function Module.InternalApplyRobloxFilterNewAPI(p12, p13, Text: string, TextCont
 	elseif string.len((string.gsub(Text, " ", ""))) == 0 then
 		return true, false, Text
 	else
-		local Success, Result = pcall(function() --[[ Line: 407 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Text (copy), Player (copy), TextContext (copy)
 			return (game:GetService("TextService"):FilterStringAsync(Text, Player.UserId, TextContext))
 		end)
@@ -383,9 +383,9 @@ function Module.InternalApplyRobloxFilterNewAPI(p12, p13, Text: string, TextCont
 	end
 end
 
-function Module.InternalDoMessageFilter(p12, p13, p14, p15) --[[ Line: 426 ]]
+function Module.InternalDoMessageFilter(p12, p13, p14, p15)
 	for i, value, _ in p12.FilterMessageFunctions:GetIterator() do
-		local Success, Result = pcall(function() --[[ Line: 430 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: value (copy), p13 (copy), p14 (copy), p15 (copy)
 			value(p13, p14, p15)
 		end)
@@ -396,9 +396,9 @@ function Module.InternalDoMessageFilter(p12, p13, p14, p15) --[[ Line: 426 ]]
 	end
 end
 
-function Module.InternalDoProcessCommands(p16, p17, p18, p19): boolean --[[ Line: 440 ]]
+function Module.InternalDoProcessCommands(p16, p17, p18, p19): boolean
 	for i, value, _ in p16.ProcessCommandsFunctions:GetIterator() do
-		local Success, Result = pcall(function() --[[ Line: 444 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: value (copy), p17 (copy), p18 (copy), p19 (copy)
 			local ValueResult = value(p17, p18, p19)
 			
@@ -417,14 +417,14 @@ function Module.InternalDoProcessCommands(p16, p17, p18, p19): boolean --[[ Line
 	return false
 end
 
-function Module.InternalGetUniqueMessageId(p20): number --[[ Line: 462 ]]
+function Module.InternalGetUniqueMessageId(p20): number
 	local MessageIdCounter: number = p20.MessageIdCounter
 	p20.MessageIdCounter = MessageIdCounter + 1
 	
 	return MessageIdCounter
 end
 
-function Module.InternalAddSpeakerWithPlayerObject(p20, Text: string, p21, p22) --[[ Line: 468 ]]
+function Module.InternalAddSpeakerWithPlayerObject(p20, Text: string, p21, p22)
 	-- upvalues: SpeakerModule (copy)
 	if p20.Speakers[Text:lower()] then
 		error("Speaker \"" .. Text .. "\" already exists!")
@@ -434,7 +434,7 @@ function Module.InternalAddSpeakerWithPlayerObject(p20, Text: string, p21, p22) 
 	p20.Speakers[Text:lower()] = NewSpeaker
 	
 	if p22 then
-		local Success, Result = pcall(function() --[[ Line: 478 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p20 (copy), Text (copy)
 			p20.eSpeakerAdded:Fire(Text)
 		end)
@@ -446,8 +446,8 @@ function Module.InternalAddSpeakerWithPlayerObject(p20, Text: string, p21, p22) 
 	return NewSpeaker
 end
 
-function Module.InternalFireSpeakerAdded(p20, p21) --[[ Line: 487 ]]
-	local Success, Result = pcall(function() --[[ Line: 488 ]]
+function Module.InternalFireSpeakerAdded(p20, p21)
+	local Success, Result = pcall(function()
 		-- upvalues: p20 (copy), p21 (copy)
 		p20.eSpeakerAdded:Fire(p21)
 	end)
@@ -457,7 +457,7 @@ function Module.InternalFireSpeakerAdded(p20, p21) --[[ Line: 487 ]]
 	end
 end
 
-function t.new() --[[ Line: 497 ]]
+function t.new()
 	-- upvalues: Module (copy), UtilModule (copy)
 	local self = setmetatable({}, Module)
 	self.MessageIdCounter = 0

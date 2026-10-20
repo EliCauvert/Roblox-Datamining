@@ -2,7 +2,7 @@
 local SduiUsageRecorderModule = require(SduiCoreSystem.Analytics.SduiUsageRecorder)
 local RecordV1ComponentUsageModule = require(SduiCoreSystem.Analytics.recordV1ComponentUsage)
 
-return function(p1, List) --[[ Line: 18 | Named "recordV1RegisteredTemplates" ]]
+return function(p1, List)
 	-- upvalues: SduiUsageRecorderModule (copy), RecordV1ComponentUsageModule (copy)
 	if not List then return end
 	if not SduiUsageRecorderModule.isTypeSamplingEnabled() and not SduiUsageRecorderModule.isParamSamplingEnabled() then return end

@@ -8,26 +8,26 @@ local EditProfileStoreModule = require(EditProfile.Stores.EditProfileStore)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local AnalyticsServiceV2Module = require(EditProfile.Analytics.AnalyticsServiceV2)
 
-return function(p1) --[[ Line: 18 ]]
+return function(p1)
 	-- upvalues: UseLocalUserIdFunction (copy), EditProfileStoreModule (copy), UseSignalStateFunction (copy), ReactModule (copy), AnalyticsServiceV2Module (copy), PromiseModule (copy), EditBioModule (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseSignalStateResult = UseSignalStateFunction(EditProfileStoreModule.getDescription(UseLocalUserIdResult).data) or ""
 	local UseStateResult, UseStateResult2 = ReactModule.useState(UseSignalStateResult)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 26 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy)
 		UseStateResult2(p2)
 		UseStateResult2_1(nil)
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 31 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), UseSignalStateResult (copy)
 		UseStateResult2(UseSignalStateResult)
 	end, { UseSignalStateResult })
-	ReactModule.useEffect(function() --[[ Line: 35 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), EditProfileStoreModule (upval), UseLocalUserIdResult (copy), UseStateResult (copy), UseStateResult2_1 (copy), AnalyticsServiceV2Module (upval), PromiseModule (upval)
-		p1.registerSaveHandler(function() --[[ Line: 36 ]]
+		p1.registerSaveHandler(function()
 			-- upvalues: EditProfileStoreModule (upval), UseLocalUserIdResult (upval), UseStateResult (upval), UseStateResult2_1 (upval), AnalyticsServiceV2Module (upval), PromiseModule (upval)
-			return EditProfileStoreModule.updateDescription(UseLocalUserIdResult, UseStateResult):catch(function(Err) --[[ Line: 37 ]]
+			return EditProfileStoreModule.updateDescription(UseLocalUserIdResult, UseStateResult):catch(function(Err)
 				-- upvalues: UseStateResult2_1 (upval), AnalyticsServiceV2Module (upval), PromiseModule (upval)
 				if not Err then return end
 				local Code = nil

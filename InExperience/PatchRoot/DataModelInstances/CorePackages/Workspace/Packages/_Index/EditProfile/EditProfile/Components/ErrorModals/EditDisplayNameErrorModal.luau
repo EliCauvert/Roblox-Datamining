@@ -11,13 +11,13 @@ local FFlagEditProfileFixFocusNavigationModule = require(EditProfile.Flags.FFlag
 local UseDisplayNameTextModule = require(EditProfile.Hooks.useDisplayNameText)
 local FocusNavigatorWrapperModule = require(EditProfile.Utils.FocusNavigatorWrapper)
 
-return function(p1) --[[ Line: 19 | Named "EditDisplayNameErrorModal" ]]
+return function(p1)
 	-- upvalues: UseScreenSizeFunction (copy), UseDisplayNameTextModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), FFlagEditProfileFixFocusNavigationModule (copy), FocusNavigatorWrapperModule (copy), ReactModule (copy), InteractiveAlert (copy), ButtonType (copy)
 	local UseScreenSizeResult = UseScreenSizeFunction()
 	local UseDisplayNameTextModuleResult = UseDisplayNameTextModule()
 	local UseLocalizationResult = UseLocalizationFunction({ OK = TextKeysModule.OK })
 	
-	local function onClose() --[[ Line: 26 ]]
+	local function onClose()
 		-- upvalues: p1 (copy)
 		p1.navigation.goBack()
 	end

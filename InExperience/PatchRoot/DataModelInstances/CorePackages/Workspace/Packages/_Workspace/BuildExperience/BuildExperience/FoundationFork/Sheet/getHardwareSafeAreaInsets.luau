@@ -1,6 +1,6 @@
 ﻿local GuiService = require(game:GetService("CorePackages").Packages._Index.Foundation.Foundation.Utility.Wrappers).Services.GuiService
 
-return function() --[[ Line: 9 | Named "getHardwareSafeAreaInsets" ]]
+return function()
 	-- upvalues: GuiService (copy)
 	local InsetArea = GuiService:GetInsetArea(Enum.ScreenInsets.DeviceSafeInsets)
 	local InsetArea1 = GuiService:GetInsetArea(Enum.ScreenInsets.None)

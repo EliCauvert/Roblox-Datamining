@@ -4,7 +4,7 @@ local ReactModule = require(Parent.React)
 local SearchInput = FoundationModule.SearchInput
 local View = FoundationModule.View
 
-return function(Frame) --[[ Line: 22 | Named "SearchBarView" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), View (copy), SearchInput (copy)
 	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y",

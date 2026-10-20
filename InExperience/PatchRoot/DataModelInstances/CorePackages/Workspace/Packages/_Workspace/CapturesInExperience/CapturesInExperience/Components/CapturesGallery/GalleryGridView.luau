@@ -10,11 +10,11 @@ local GalleryItemModule = require(Parent.Components.CapturesGallery.GalleryItem)
 local ShowMoreButtonModule = require(Parent.Components.Common.ShowMoreButton)
 local _ = require(Parent.Types)
 
-local function _(p1: number): number --[[ Line: 40 | Named "getItemsPerRow" ]]
+local function _(p1: number): number
 	return (math.clamp(math.floor(p1 / 120), 1, 4))
 end
 
-local _ = function(p1, p2: number): Vector2 --[[ Line: 44 | Named "getGalleryItemSize" ]]
+local _ = function(p1, p2: number): Vector2
 	local ClampedValue = math.clamp(math.floor(p2 / 120), 1, 4)
 	local v1 = p2 - 4 * (ClampedValue - 1)
 	local Smallest = math.min(v1 / ClampedValue, v1)
@@ -22,7 +22,7 @@ local _ = function(p1, p2: number): Vector2 --[[ Line: 44 | Named "getGalleryIte
 	return Vector2.new(math.floor(Smallest), (math.floor(Smallest * p1)))
 end
 
-local _ = function(p1: number, p2: number, Vector): number --[[ Line: 54 | Named "getItemsPerPage" ]]
+local _ = function(p1: number, p2: number, Vector): number
 	if p1 <= 0 then
 		return 0
 	end
@@ -34,19 +34,19 @@ local _ = function(p1: number, p2: number, Vector): number --[[ Line: 54 | Named
 	return (math.max(Floored * math.clamp(math.floor(p2 / 120), 1, 4), 8))
 end
 
-local function renderGalleryItem(Capture, CaptureIndex) --[[ Line: 69 ]]
+local function renderGalleryItem(Capture, CaptureIndex)
 	-- upvalues: ReactModule (copy), GalleryItemModule (copy)
 	return ReactModule.createElement(GalleryItemModule, { capture = Capture, captureIndex = CaptureIndex })
 end
 
-return function(Frame) --[[ Line: 76 ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), UseScreenSizeFunction (copy), UseEffectOnceFunction (copy), DashModule (copy), GalleryActionContainerModule (copy), GridView (copy), renderGalleryItem (copy), ShowMoreButtonModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
 	local UseScreenSizeResult = UseScreenSizeFunction()
 	local IsUseStateResultBelow = UseStateResult1 < #Frame.captures
 	local IsYAbove: boolean = UseStateResult.X > 0 and UseStateResult.Y > 0
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 84 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(Frame.AbsoluteSize)
 	end, {})
@@ -89,21 +89,21 @@ return function(Frame) --[[ Line: 76 ]]
 			Largest = math.max(Floored * math.clamp(math.floor(XDelta1 / 120), 1, 4), 8)
 		end
 	end
-	UseEffectOnceFunction(function() --[[ Line: 106 ]]
+	UseEffectOnceFunction(function()
 		-- upvalues: UseStateResult2_1 (copy), Largest (ref)
 		UseStateResult2_1(Largest)
 	end, Largest ~= 0)
-	ReactModule.useEffect(function() --[[ Line: 110 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult1 (copy), Largest (ref), UseStateResult2_1 (copy)
 		if UseStateResult1 < Largest then
 			UseStateResult2_1(Largest)
 		end
 	end, { UseStateResult })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 116 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy), UseStateResult1 (copy), Largest (ref)
 		UseStateResult2_1(UseStateResult1 + Largest)
 	end, { UseStateResult1, Largest })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 120 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Frame (copy), UseStateResult1 (copy), DashModule (upval)
 		return DashModule.slice(Frame.captures, 1, (math.min(#Frame.captures, UseStateResult1)))
 	end, { Frame.captures, UseStateResult1 })

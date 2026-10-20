@@ -3,20 +3,20 @@ local ReactModule = require(Parent.React)
 local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
 
-return function(p1, _) --[[ Line: 9 | Named "autoFocusNavigation" ]]
+return function(p1, _)
 	-- upvalues: ReactModule (copy), FocusNavigationUtilsModule (copy), ReactFocusNavigationModule (copy)
-	return function(p2) --[[ Line: 10 ]]
+	return function(p2)
 		-- upvalues: ReactModule (upval), FocusNavigationUtilsModule (upval), ReactFocusNavigationModule (upval), p1 (copy)
 		local UseRefResult = ReactModule.useRef(nil)
 		local Currents = {}
 		local UseAutoFocusResult = FocusNavigationUtilsModule.useAutoFocus(Currents, 0.1)
 		local UseContextResult = ReactModule.useContext(ReactFocusNavigationModule.FocusNavigationContext)
-		ReactModule.useEffect(function() --[[ Line: 15 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: Currents (copy), UseRefResult (copy), UseContextResult (copy), UseAutoFocusResult (copy)
 			Currents[1] = UseRefResult.current
 			local UseAutoFocusResultResult = if UseContextResult and UseContextResult.focusedGuiObject:getValue() ~= nil and UseAutoFocusResult then UseAutoFocusResult() else nil
 			
-			return function() --[[ Line: 21 ]]
+			return function()
 				-- upvalues: UseAutoFocusResultResult (ref)
 				if UseAutoFocusResultResult then
 					UseAutoFocusResultResult.cancel()

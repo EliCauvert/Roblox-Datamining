@@ -22,7 +22,7 @@ local AuthButtonClickFunction = AuthAnalyticsModule.Events.authButtonClick
 local IncompatibleAccountsSupportLink = game:DefineFastString("IncompatibleAccountsSupportLink", "https://help.roblox.com/hc/articles/360000334523-Xbox-One-App-Trouble-logging-into-Roblox-account")
 local AccountLinkingAlertTypeModule = require(AuthCommon.Enums.AccountLinkingAlertType)
 
-local function AccountLinkingAlert(p1) --[[ Line: 51 ]]
+local function AccountLinkingAlert(p1)
 	-- upvalues: ButtonType (copy), UseScreenSizeFunction (copy), ReactModule (copy), Text (copy), WithStyleFunction (copy), InteractiveAlert (copy)
 	local List = {}
 	
@@ -31,7 +31,7 @@ local function AccountLinkingAlert(p1) --[[ Line: 51 ]]
 			buttonType = ButtonType.Secondary,
 			props = {
 				text = p1.secondaryButtonText,
-				onActivated = function() --[[ Line: 59 ]]
+				onActivated = function()
 					-- upvalues: p1 (copy)
 					p1.secondaryButtonCallback()
 				end
@@ -43,7 +43,7 @@ local function AccountLinkingAlert(p1) --[[ Line: 51 ]]
 			buttonType = ButtonType.PrimarySystem,
 			props = {
 				text = p1.primaryButtonText,
-				onActivated = function() --[[ Line: 71 ]]
+				onActivated = function()
 					-- upvalues: p1 (copy)
 					p1.primaryButtonCallback()
 				end
@@ -51,7 +51,7 @@ local function AccountLinkingAlert(p1) --[[ Line: 51 ]]
 		})
 	end
 	local UseScreenSizeResult = UseScreenSizeFunction()
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 80 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), ReactModule (upval), Text (upval)
 		return if p1.footerText and p1.footerCallback then ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -68,7 +68,7 @@ local function AccountLinkingAlert(p1) --[[ Line: 51 ]]
 		}) else nil
 	end, { p1.footerText, p1.footerCallback })
 	
-	return WithStyleFunction(function(_) --[[ Line: 99 ]]
+	return WithStyleFunction(function(_)
 		-- upvalues: ReactModule (upval), InteractiveAlert (upval), p1 (copy), List (copy), UseResult (copy), UseScreenSizeResult (copy)
 		return ReactModule.createElement(InteractiveAlert, {
 			isRoactGamepadEnabled = false,
@@ -82,11 +82,11 @@ local function AccountLinkingAlert(p1) --[[ Line: 51 ]]
 	end)
 end
 
-local function useIncompatibleAccountsAlertProps(p1) --[[ Line: 114 ]]
+local function useIncompatibleAccountsAlertProps(p1)
 	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), UseAppPolicyFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), GuiService (copy), NotificationType (copy), AuthButtonClickFunction (copy), EventStreamConstants (copy), AppPage (copy), Default (copy), IncompatibleAccountsSupportLink (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseNavigationResult = UseNavigationFunction()
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 118 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2)
 		return p2.getPlatformAccountName()
 	end)
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -108,7 +108,7 @@ local function useIncompatibleAccountsAlertProps(p1) --[[ Line: 114 ]]
 		bodyText = if p1.userFacingMessage then p1.userFacingMessage else UseLocalizationResult.bodyText,
 		primaryButtonText = UseLocalizationResult.primaryButtonText,
 		secondaryButtonText = UseLocalizationResult.secondaryButtonText,
-		primaryButtonCallback = ReactModule.useCallback(function() --[[ Line: 133 ]]
+		primaryButtonCallback = ReactModule.useCallback(function()
 			-- upvalues: GuiService (upval), NotificationType (upval), p1 (copy), UseDispatchResult (copy), AuthButtonClickFunction (upval), EventStreamConstants (upval)
 			GuiService:BroadcastNotification("", NotificationType.NATIVE_EXIT)
 			
@@ -117,7 +117,7 @@ local function useIncompatibleAccountsAlertProps(p1) --[[ Line: 114 ]]
 			end
 			AuthButtonClickFunction(EventStreamConstants.Context.AccountLinking, EventStreamConstants.Button.PrimaryButton)
 		end, { p1.closeCentralOverlayThunk }),
-		secondaryButtonCallback = ReactModule.useCallback(function() --[[ Line: 141 ]]
+		secondaryButtonCallback = ReactModule.useCallback(function()
 			-- upvalues: UseNavigationResult (copy), AppPage (upval), p1 (copy), UseDispatchResult (copy), AuthButtonClickFunction (upval), EventStreamConstants (upval)
 			UseNavigationResult.navigate(AppPage.Landing)
 			
@@ -127,7 +127,7 @@ local function useIncompatibleAccountsAlertProps(p1) --[[ Line: 114 ]]
 			AuthButtonClickFunction(EventStreamConstants.Context.AccountLinking, EventStreamConstants.Button.SecondaryButton)
 		end, { UseNavigationResult, p1.closeCentralOverlayThunk }),
 		footerText = UseLocalizationResult.footerText,
-		footerCallback = ReactModule.useCallback(function() --[[ Line: 149 ]]
+		footerCallback = ReactModule.useCallback(function()
 			-- upvalues: Default (upval), IncompatibleAccountsSupportLink (upval), AuthButtonClickFunction (upval), EventStreamConstants (upval)
 			Default:openURL(IncompatibleAccountsSupportLink)
 			AuthButtonClickFunction(EventStreamConstants.Context.AccountLinking, EventStreamConstants.Button.Support)
@@ -136,16 +136,16 @@ local function useIncompatibleAccountsAlertProps(p1) --[[ Line: 114 ]]
 	}
 end
 
-local function IncompatibleAccountsAlert(p1) --[[ Line: 167 ]]
+local function IncompatibleAccountsAlert(p1)
 	-- upvalues: useIncompatibleAccountsAlertProps (copy), ReactModule (copy), AccountLinkingAlert (copy)
 	return ReactModule.createElement(AccountLinkingAlert, (useIncompatibleAccountsAlertProps(p1)))
 end
 
-local function useRetryLogInAlertProps(p1) --[[ Line: 172 ]]
+local function useRetryLogInAlertProps(p1)
 	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), UseAppPolicyFunction (copy), AccountLinkingAlertTypeModule (copy), UseLocalizationFunction (copy), ReactModule (copy), AppPage (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseNavigationResult = UseNavigationFunction()
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 176 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2)
 		return p2.getPlatformAccountName()
 	end)
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -161,7 +161,7 @@ local function useRetryLogInAlertProps(p1) --[[ Line: 172 ]]
 		titleText = UseLocalizationResult.titleText,
 		bodyText = UseLocalizationResult.bodyText,
 		primaryButtonText = UseLocalizationResult.primaryButtonText,
-		primaryButtonCallback = ReactModule.useCallback(function() --[[ Line: 196 ]]
+		primaryButtonCallback = ReactModule.useCallback(function()
 			-- upvalues: UseNavigationResult (copy), AppPage (upval), p1 (copy), UseDispatchResult (copy)
 			UseNavigationResult.navigate(AppPage.PlatformAccountRouter)
 			
@@ -173,14 +173,14 @@ local function useRetryLogInAlertProps(p1) --[[ Line: 172 ]]
 	}
 end
 
-local function RetryLogInAlert(p1) --[[ Line: 212 ]]
+local function RetryLogInAlert(p1)
 	-- upvalues: useRetryLogInAlertProps (copy), ReactModule (copy), AccountLinkingAlert (copy)
 	return ReactModule.createElement(AccountLinkingAlert, (useRetryLogInAlertProps(p1)))
 end
 
-return function(p1) --[[ Line: 217 | Named "AccountLinkingAlertContainer" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), AuthModalShownFunction (copy), EventStreamConstants (copy), AccountLinkingAlertTypeModule (copy), IncompatibleAccountsAlert (copy), RetryLogInAlert (copy)
-	ReactModule.useEffect(function() --[[ Line: 218 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: AuthModalShownFunction (upval), EventStreamConstants (upval), p1 (copy)
 		AuthModalShownFunction(EventStreamConstants.Context.AccountLinking, nil, p1.alertType)
 	end, { p1.alertType })

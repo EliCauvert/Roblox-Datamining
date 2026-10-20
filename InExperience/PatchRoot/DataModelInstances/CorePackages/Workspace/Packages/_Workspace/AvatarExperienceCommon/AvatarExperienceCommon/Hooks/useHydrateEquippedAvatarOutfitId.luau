@@ -2,10 +2,10 @@
 local ReactModule = require(AvatarExperienceCommon.Parent.React)
 local GetEquippedAvatarOutfitIdStoreModule = require(AvatarExperienceCommon.Stores.EquippedAvatarOutfitIdStore.getEquippedAvatarOutfitIdStore)
 
-return function() --[[ Line: 8 | Named "useHydrateEquippedAvatarOutfitId" ]]
+return function()
 	-- upvalues: GetEquippedAvatarOutfitIdStoreModule (copy), ReactModule (copy)
 	local EquippedAvatarOutfitIdStoreModule = GetEquippedAvatarOutfitIdStoreModule(false)
-	ReactModule.useEffect(function() --[[ Line: 11 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: EquippedAvatarOutfitIdStoreModule (copy)
 		EquippedAvatarOutfitIdStoreModule.fetchCurrentlyWearingSavedOutfitId()
 	end, { EquippedAvatarOutfitIdStoreModule })

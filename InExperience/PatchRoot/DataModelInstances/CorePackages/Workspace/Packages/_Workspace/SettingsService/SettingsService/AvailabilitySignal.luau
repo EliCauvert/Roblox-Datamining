@@ -4,7 +4,7 @@ local ValueChangedSignalModule = require(Parent.ValueChangedSignal)
 local AvailabilitySignalModule = {}
 AvailabilitySignalModule.__index = AvailabilitySignalModule
 
-function AvailabilitySignalModule.new(p1) --[[ Line: 18 ]]
+function AvailabilitySignalModule.new(p1)
 	-- upvalues: ValueChangedSignalModule (copy)
 	return ValueChangedSignalModule.new(p1)
 end

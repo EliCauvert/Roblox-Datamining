@@ -5,7 +5,7 @@ local ItemKeyRegistryModule = require(script.Parent.ItemKeyRegistry)
 local MutationControllerModule = require(script.Parent.MutationController)
 local ReadDenseRangeModule = require(script.Parent.readDenseRange)
 
-return function(p1, p2) --[[ Line: 32 | Named "createDequeDataSource" ]]
+return function(p1, p2)
 	-- upvalues: ItemKeyRegistryModule (copy), MutationControllerModule (copy), ReadDenseRangeModule (copy), DataSourceChangeTypeModule (copy)
 	local P0 = p1 or {}
 	local Values = {}
@@ -20,10 +20,10 @@ return function(p1, p2) --[[ Line: 32 | Named "createDequeDataSource" ]]
 		Values[i] = value
 		Keys[i] = RebuildResult[i]
 	end
-	local MutationControllerModuleResult = MutationControllerModule(function() --[[ Line: 46 ]]
+	local MutationControllerModuleResult = MutationControllerModule(function()
 		-- upvalues: CountP0 (ref)
 		return CountP0
-	end, function() --[[ Line: 48 ]]
+	end, function()
 		-- upvalues: Values (ref), Keys (ref), Largest (ref), Head (ref), CountP0 (ref), DataSourceDeque (copy)
 		return {
 			values = table.clone(Values),
@@ -33,7 +33,7 @@ return function(p1, p2) --[[ Line: 32 | Named "createDequeDataSource" ]]
 			count = CountP0,
 			keyRegistry = DataSourceDeque.snapshot()
 		}
-	end, function(p3) --[[ Line: 57 ]]
+	end, function(p3)
 		-- upvalues: Values (ref), Keys (ref), Largest (ref), Head (ref), CountP0 (ref), DataSourceDeque (copy)
 		Values = p3.values
 		Keys = p3.keys
@@ -43,12 +43,12 @@ return function(p1, p2) --[[ Line: 32 | Named "createDequeDataSource" ]]
 		DataSourceDeque.restore(p3.keyRegistry)
 	end)
 	
-	local function _(p3): number --[[ Line: 66 | Named "physical" ]]
+	local function _(p3): number
 		-- upvalues: Head (ref), Largest (ref)
 		return (Head + p3 - 2) % Largest + 1
 	end
 	
-	local function ensureCapacity(p3) --[[ Line: 70 ]]
+	local function ensureCapacity(p3)
 		-- upvalues: Largest (ref), CountP0 (ref), Values (ref), Head (ref), Keys (ref)
 		if p3 <= Largest then return end
 		local ScaledLargest = Largest * 2
@@ -68,10 +68,10 @@ return function(p1, p2) --[[ Line: 32 | Named "createDequeDataSource" ]]
 		Head = 1
 	end
 	
-	local function claimMany(p4, p5) --[[ Line: 90 ]]
+	local function claimMany(p4, p5)
 		-- upvalues: DataSourceDeque (copy)
 		local Buffer = table.create(#p4)
-		local Packed = table.pack(pcall(function() --[[ Line: 92 ]]
+		local Packed = table.pack(pcall(function()
 			-- upvalues: p4 (copy), Buffer (copy), DataSourceDeque (upval), p5 (copy)
 			for i, value in p4 do
 				Buffer[i] = DataSourceDeque.claim(value, p5 + i - 1)
@@ -89,19 +89,19 @@ return function(p1, p2) --[[ Line: 32 | Named "createDequeDataSource" ]]
 	
 	local v1 = nil
 	v1 = {
-		getItemCount = function() --[[ Line: 108 ]]
+		getItemCount = function()
 			-- upvalues: CountP0 (ref)
 			return CountP0
 		end,
-		getItem = function(p6) --[[ Line: 111 ]]
+		getItem = function(p6)
 			-- upvalues: Values (ref), Head (ref), Largest (ref)
 			return Values[(Head + p6 - 2) % Largest + 1]
 		end,
-		getItemKey = function(p6) --[[ Line: 114 ]]
+		getItemKey = function(p6)
 			-- upvalues: Keys (ref), Head (ref), Largest (ref)
 			return Keys[(Head + p6 - 2) % Largest + 1]
 		end,
-		getItems = function(p6, p7) --[[ Line: 117 ]]
+		getItems = function(p6, p7)
 			-- upvalues: ReadDenseRangeModule (upval), CountP0 (ref), v1 (ref)
 			return ReadDenseRangeModule(CountP0, v1.getItem, p6, p7)
 		end,
@@ -109,17 +109,17 @@ return function(p1, p2) --[[ Line: 32 | Named "createDequeDataSource" ]]
 		transaction = MutationControllerModuleResult.transaction
 	}
 	
-	function v1.pushFront(p6) --[[ Line: 124 ]]
+	function v1.pushFront(p6)
 		-- upvalues: v1 (ref)
 		v1.pushFrontMany({ p6 })
 	end
 	
-	function v1.pushBack(p6) --[[ Line: 128 ]]
+	function v1.pushBack(p6)
 		-- upvalues: v1 (ref)
 		v1.pushBackMany({ p6 })
 	end
 	
-	function v1.pushFrontMany(List) --[[ Line: 132 ]]
+	function v1.pushFrontMany(List)
 		-- upvalues: CountP0 (ref), claimMany (copy), ensureCapacity (copy), Head (ref), Largest (ref), Values (ref), Keys (ref), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
 		local CountList = #List
 		
@@ -142,7 +142,7 @@ return function(p1, p2) --[[ Line: 32 | Named "createDequeDataSource" ]]
 		}, Count)
 	end
 	
-	function v1.pushBackMany(List) --[[ Line: 150 ]]
+	function v1.pushBackMany(List)
 		-- upvalues: CountP0 (ref), claimMany (copy), ensureCapacity (copy), Head (ref), Largest (ref), Values (ref), Keys (ref), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
 		local CountList = #List
 		
@@ -164,7 +164,7 @@ return function(p1, p2) --[[ Line: 32 | Named "createDequeDataSource" ]]
 		}, Count)
 	end
 	
-	function v1.popFront() --[[ Line: 170 ]]
+	function v1.popFront()
 		-- upvalues: CountP0 (ref), Values (ref), Head (ref), Keys (ref), DataSourceDeque (copy), Largest (ref), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
 		if CountP0 == 0 then
 			return nil
@@ -187,7 +187,7 @@ return function(p1, p2) --[[ Line: 32 | Named "createDequeDataSource" ]]
 		end
 	end
 	
-	function v1.popBack() --[[ Line: 186 ]]
+	function v1.popBack()
 		-- upvalues: CountP0 (ref), Head (ref), Largest (ref), Values (ref), Keys (ref), DataSourceDeque (copy), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
 		if CountP0 == 0 then
 			return nil
@@ -210,7 +210,7 @@ return function(p1, p2) --[[ Line: 32 | Named "createDequeDataSource" ]]
 		end
 	end
 	
-	function v1.setItem(p6: number, p7) --[[ Line: 205 ]]
+	function v1.setItem(p6: number, p7)
 		-- upvalues: CountP0 (ref), Head (ref), Largest (ref), Keys (ref), DataSourceDeque (copy), Values (ref), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
 		local Count = CountP0
 		assert(p6 >= 1 and p6 <= Count, "DataSource.deque: setItem index out of range")

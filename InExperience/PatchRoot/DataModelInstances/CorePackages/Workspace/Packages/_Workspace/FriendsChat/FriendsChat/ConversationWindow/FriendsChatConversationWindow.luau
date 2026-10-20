@@ -29,10 +29,10 @@ local ResolveFadeModule = require(script.Parent.Parent.Utils.resolveFade)
 local LayoutConstantsModule = require(FriendsChat.LayoutConstants)
 local UseFriendsChatConversationTelemetryModule = require(script.Parent.Parent.Telemetry.ChatConversation.useFriendsChatConversationTelemetry)
 
-return function(p1) --[[ Line: 81 | Named "FriendsChatConversationWindow" ]]
+return function(p1)
 	-- upvalues: UseChatWindowSettingsModule (copy), ReactModule (copy), UseInterpolatedClientSettingsModule (copy), FFlagDebugFriendsChatModule (copy), FStringDebugFriendsChatConversationIdModule (copy), Players (copy), ExpChatConversationListAdapterModule (copy), SignalsModule (copy), FFlagFriendsChatOsaSystemMessage (copy), GetConversationStoreModule (copy), SignalsReactModule (copy), AppChatNetworkingModule (copy), FriendsChatOsaAcknowledgementModule (copy), UseConversationHeaderPropsModule (copy), UseConversationModerationTypeModule (copy), UseConversationMessagePoolModule (copy), GetConversationMessageListStoreModule (copy), UseFriendsChatConversationTelemetryModule (copy), UseConversationHeaderFadeLayoutModule (copy), FFlagFriendsChatConversationListFocusNav (copy), UseFocusInputBarOnWindowEnterModule (copy), FriendsChatConversationHeaderBarModule (copy), ResolveFadeModule (copy), LayoutConstantsModule (copy), FriendsChatMessageListModule (copy), FriendsChatInputBarHostModule (copy)
 	local UseChatWindowSettingsModuleResult = UseChatWindowSettingsModule()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 83 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseChatWindowSettingsModuleResult (copy)
 		return {
 			BackgroundColor3 = UseChatWindowSettingsModuleResult.ChatWindowBackgroundColor3,
@@ -51,9 +51,9 @@ return function(p1) --[[ Line: 81 | Named "FriendsChatConversationWindow" ]]
 	local UserId = if LocalPlayer then LocalPlayer.UserId else 0
 	local IsFriendPlaceholder = ExpChatConversationListAdapterModule.isFriendPlaceholder(ConversationId)
 	local NoIsFriendPlaceholder: boolean = IsNotConversationIdMatch and not IsFriendPlaceholder
-	local Inverted: boolean = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 103 ]]
+	local Inverted: boolean = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), FFlagFriendsChatOsaSystemMessage (upval), GetConversationStoreModule (upval), ConversationId (ref)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 104 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: FFlagFriendsChatOsaSystemMessage (upval), GetConversationStoreModule (upval), ConversationId (upval)
 			if FFlagFriendsChatOsaSystemMessage then
 				local Conversation = GetConversationStoreModule(p2).getConversation(ConversationId, p2)
@@ -73,7 +73,7 @@ return function(p1) --[[ Line: 81 | Named "FriendsChatConversationWindow" ]]
 		conversationId = ConversationId,
 		hasConversationId = IsNotConversationIdMatch
 	})
-	ReactModule.useEffect(function() --[[ Line: 128 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsNotConversationIdMatch (copy), ExpChatConversationListAdapterModule (upval), ConversationId (ref)
 		if IsNotConversationIdMatch then
 			ExpChatConversationListAdapterModule.markConversationRead(ConversationId)
@@ -91,12 +91,12 @@ return function(p1) --[[ Line: 81 | Named "FriendsChatConversationWindow" ]]
 	local OnOpenDetailsFunction = p1.onOpenDetails
 	local FireInfoButtonClickedFunction = UseFriendsChatConversationTelemetryModule({
 		conversationId = ConversationId,
-		getLoadedMessageCount = ReactModule.useCallback(function(): number --[[ Line: 154 ]]
+		getLoadedMessageCount = ReactModule.useCallback(function(): number
 			-- upvalues: IsNotConversationIdMatch (copy), GetConversationMessageListStoreModule (upval), ConversationId (ref)
 			return if IsNotConversationIdMatch then #GetConversationMessageListStoreModule(false).getOrderedIds(ConversationId, false) else 0
 		end, { ConversationId, IsNotConversationIdMatch })
 	}).fireInfoButtonClicked
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 172 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FireInfoButtonClickedFunction (copy), OnOpenDetailsFunction (copy), ConversationId (ref)
 		FireInfoButtonClickedFunction()
 		OnOpenDetailsFunction(ConversationId)

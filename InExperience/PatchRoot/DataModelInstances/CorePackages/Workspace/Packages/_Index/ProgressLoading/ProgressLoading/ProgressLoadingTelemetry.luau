@@ -25,13 +25,13 @@ local config2 = {
 local ClockTime = nil
 
 return {
-	logLoadingAssetsActivated = function() --[[ Line: 41 ]]
+	logLoadingAssetsActivated = function()
 		-- upvalues: ClockTime (ref), TelemetryService (copy), config (copy), Default (copy)
 		ClockTime = os.clock()
 		TelemetryService:LogCounter(config, {}, 1)
 		Default:logEvent("progress_loading_assets_activated")
 	end,
-	logLoadingAssetsDeactivated = function() --[[ Line: 47 ]]
+	logLoadingAssetsDeactivated = function()
 		-- upvalues: ClockTime (ref), TelemetryService (copy), config1 (copy), config2 (copy), Default (copy)
 		assert(ClockTime ~= nil, "logLoadingAssetsDeactivated called without a prior logLoadingAssetsActivated")
 		local Floored = math.floor((os.clock() - ClockTime) * 1000)

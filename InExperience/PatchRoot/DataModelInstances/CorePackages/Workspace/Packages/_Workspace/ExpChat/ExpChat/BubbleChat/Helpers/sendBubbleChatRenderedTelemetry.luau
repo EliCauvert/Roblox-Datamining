@@ -7,7 +7,7 @@ local v1 = require(ExpChat.Flags.getFIntExpChatMessageRenderUserThrottlePermyria
 local EngineFeatureExpChatGlobalChatEngineTelemetryEnabledModule = require(ExpChat.Flags.EngineFeatureExpChatGlobalChatEngineTelemetryEnabled)
 local EngineFeatureTextChatReportEmojiTelemetryEnabledModule = require(ExpChat.Flags.EngineFeatureTextChatReportEmojiTelemetryEnabled)
 
-return function(TextChatMessage, p1) --[[ Line: 15 | Named "sendBubbleChatRenderedTelemetry" ]]
+return function(TextChatMessage, p1)
 	-- upvalues: GetFFlagExpChatUseUpdatedMessageRenderedModule (copy), ShouldSendHighFrequencyTelemetryModule (copy), v1 (copy), EngineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (copy), EngineFeatureTextChatReportEmojiTelemetryEnabledModule (copy), TextChatService (copy)
 	if not GetFFlagExpChatUseUpdatedMessageRenderedModule() or not ShouldSendHighFrequencyTelemetryModule(v1) then return end
 	if not EngineFeatureExpChatGlobalChatEngineTelemetryEnabledModule then

@@ -7,7 +7,7 @@ local NodeConfigModule = require(InlineRichText.NodeConfig)
 local NodeStackModule = {}
 NodeStackModule.__index = NodeStackModule
 
-function NodeStackModule.new() --[[ Line: 42 ]]
+function NodeStackModule.new()
 	-- upvalues: NodeStackModule (copy)
 	local self = setmetatable({}, NodeStackModule)
 	self.__stack = {}
@@ -16,7 +16,7 @@ function NodeStackModule.new() --[[ Line: 42 ]]
 	return self
 end
 
-function NodeStackModule:push(Default) --[[ Line: 51 ]]
+function NodeStackModule:push(Default)
 	-- upvalues: NodeConfigModule (copy), NewResult (copy), NodeTypeModule (copy), CryoModule (copy)
 	if not NodeConfigModule.getByNode(Default) then
 		return {}, false
@@ -71,7 +71,7 @@ function NodeStackModule:push(Default) --[[ Line: 51 ]]
 	end
 end
 
-function NodeStackModule:pushDefault(DefaultParent) --[[ Line: 102 ]]
+function NodeStackModule:pushDefault(DefaultParent)
 	-- upvalues: NodeConfigModule (copy), NewResult (copy)
 	local ByType = NodeConfigModule.getByType(DefaultParent)
 	
@@ -84,7 +84,7 @@ function NodeStackModule:pushDefault(DefaultParent) --[[ Line: 102 ]]
 	end
 end
 
-function NodeStackModule:findAndClose(Name) --[[ Line: 112 ]]
+function NodeStackModule:findAndClose(Name)
 	-- upvalues: NewResult (copy)
 	if not self:__has(Name) then
 		return {}, false
@@ -109,7 +109,7 @@ function NodeStackModule:findAndClose(Name) --[[ Line: 112 ]]
 	return CloseTopAndReduceResults, Flag
 end
 
-function NodeStackModule:buildRoot() --[[ Line: 135 ]]
+function NodeStackModule:buildRoot()
 	-- upvalues: NewResult (copy), NodeTypeModule (copy)
 	while self:__canCloseTop() do
 		if self:__closeTopAndReduce() then continue end
@@ -134,11 +134,11 @@ function NodeStackModule:buildRoot() --[[ Line: 135 ]]
 	}
 end
 
-function NodeStackModule:peek() --[[ Line: 162 ]]
+function NodeStackModule:peek()
 	return self.__stack[#self.__stack]
 end
 
-function NodeStackModule:__push(p1) --[[ Line: 169 ]]
+function NodeStackModule:__push(p1)
 	-- upvalues: CryoModule (copy)
 	table.insert(self.__stack, (CryoModule.Dictionary.join(p1, { index = self.__index })))
 	self.__index += 1
@@ -146,7 +146,7 @@ function NodeStackModule:__push(p1) --[[ Line: 169 ]]
 	return nil
 end
 
-function NodeStackModule:__closeTopAndReduce() --[[ Line: 179 ]]
+function NodeStackModule:__closeTopAndReduce()
 	-- upvalues: NewResult (copy), CryoModule (copy)
 	local StackEntry = self.__stack[#self.__stack]
 	local StackEntry1 = self.__stack[#self.__stack - 1]
@@ -173,13 +173,13 @@ function NodeStackModule:__closeTopAndReduce() --[[ Line: 179 ]]
 	end
 end
 
-function NodeStackModule:__canCloseTop(): boolean --[[ Line: 202 ]]
+function NodeStackModule:__canCloseTop(): boolean
 	return #self.__stack > 1
 end
 
-function NodeStackModule:__has(Name): boolean --[[ Line: 206 ]]
+function NodeStackModule:__has(Name): boolean
 	-- upvalues: CryoModule (copy)
-	return CryoModule.List.findWhere(self.__stack, function(p1): boolean --[[ Line: 207 ]]
+	return CryoModule.List.findWhere(self.__stack, function(p1): boolean
 		-- upvalues: Name (copy)
 		return p1.name == Name
 	end) ~= nil

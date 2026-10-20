@@ -5,7 +5,7 @@ local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local CryoModule = require(Parent.Cryo)
 local SduiTileModule = require(ServerDrivenUi.Content.SduiTile)
 
-return ReactModule.memo(function(p1) --[[ Line: 16 | Named "SduiBadgeTile" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), CryoModule (copy), ReactModule (copy), SduiTileModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	

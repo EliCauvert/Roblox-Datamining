@@ -9,15 +9,15 @@ local Skeleton = FoundationModule.Skeleton
 local Radius = FoundationModule.Enums.Radius
 local View = FoundationModule.View
 
-local function GetItemHeight(p1: number): number --[[ Line: 21 ]]
+local function GetItemHeight(p1: number): number
 	return p1 + 49
 end
 
-return function(p1) --[[ Line: 25 | Named "StoreGridSkeleton" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), SquareCollectionGridViewModule (copy), GetItemHeight (copy)
 	return ReactModule.createElement(SquareCollectionGridViewModule, {
 		layoutOrder = p1.layoutOrder,
-		items = ReactModule.useMemo(function() --[[ Line: 55 ]]
+		items = ReactModule.useMemo(function()
 			-- upvalues: p1 (copy)
 			local List = {}
 			
@@ -26,7 +26,7 @@ return function(p1) --[[ Line: 25 | Named "StoreGridSkeleton" ]]
 			end
 			return List
 		end, { p1.numSkeletons }),
-		renderItem = ReactModule.useCallback(function(_, LayoutOrder, Size) --[[ Line: 30 ]]
+		renderItem = ReactModule.useCallback(function(_, LayoutOrder, Size)
 			-- upvalues: ReactModule (upval), View (upval), Skeleton (upval), Radius (upval)
 			return ReactModule.createElement(View, {
 				tag = "col gap-small radius-medium",

@@ -7,7 +7,7 @@ local AvailabilitySignalState = { Unavailable = 0, Loading = 1, Available = 2, P
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 28 ]]
+function Module.new(p1)
 	-- upvalues: AvailabilitySignalState (copy), FFlagEnableConsoleExpControls (copy), Signal (copy), Module (copy)
 	return (setmetatable({
 		_state = p1 or AvailabilitySignalState.Unavailable,
@@ -16,11 +16,11 @@ function Module.new(p1) --[[ Line: 28 ]]
 	}, Module))
 end
 
-function Module:connect(p1) --[[ Line: 37 ]]
+function Module:connect(p1)
 	return self._changeSignal:connect(p1)
 end
 
-function Module:set(_state) --[[ Line: 41 ]]
+function Module:set(_state)
 	-- upvalues: FFlagEnableConsoleExpControls (copy)
 	if self._state ~= _state then
 		self._state = _state
@@ -31,32 +31,32 @@ function Module:set(_state) --[[ Line: 41 ]]
 	end
 end
 
-function Module.get(p1) --[[ Line: 50 ]]
+function Module.get(p1)
 	-- upvalues: FFlagEnableConsoleExpControls (copy), AvailabilitySignalState (copy)
 	return if FFlagEnableConsoleExpControls and p1._forceUnavailable then AvailabilitySignalState.Unavailable else p1._state
 end
 
-function Module:available() --[[ Line: 58 ]]
+function Module:available()
 	-- upvalues: AvailabilitySignalState (copy)
 	self:set(AvailabilitySignalState.Available)
 end
 
-function Module:loading() --[[ Line: 62 ]]
+function Module:loading()
 	-- upvalues: AvailabilitySignalState (copy)
 	self:set(AvailabilitySignalState.Loading)
 end
 
-function Module:unavailable() --[[ Line: 66 ]]
+function Module:unavailable()
 	-- upvalues: AvailabilitySignalState (copy)
 	self:set(AvailabilitySignalState.Unavailable)
 end
 
-function Module:pinned() --[[ Line: 70 ]]
+function Module:pinned()
 	-- upvalues: AvailabilitySignalState (copy)
 	self:set(AvailabilitySignalState.Pinned)
 end
 
-function Module:forceUnavailable() --[[ Line: 74 ]]
+function Module:forceUnavailable()
 	-- upvalues: FFlagEnableConsoleExpControls (copy), AvailabilitySignalState (copy)
 	if FFlagEnableConsoleExpControls and not self._forceUnavailable then
 		self._forceUnavailable = true
@@ -67,7 +67,7 @@ function Module:forceUnavailable() --[[ Line: 74 ]]
 	end
 end
 
-function Module:unforceUnavailable() --[[ Line: 84 ]]
+function Module:unforceUnavailable()
 	-- upvalues: FFlagEnableConsoleExpControls (copy), AvailabilitySignalState (copy)
 	if FFlagEnableConsoleExpControls and self._forceUnavailable then
 		self._forceUnavailable = false
@@ -81,7 +81,7 @@ end
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(p1) --[[ Line: 97 ]]
+function Module1.new(p1)
 	-- upvalues: Signal (copy), Module1 (copy)
 	return (setmetatable({
 		_value = { type = "empty", value = nil },
@@ -90,30 +90,30 @@ function Module1.new(p1) --[[ Line: 97 ]]
 	}, Module1))
 end
 
-function Module1:setExcludeFromTotalCounts(_excludeFromTotalCounts) --[[ Line: 106 ]]
+function Module1:setExcludeFromTotalCounts(_excludeFromTotalCounts)
 	self._excludeFromTotalCounts = _excludeFromTotalCounts
 end
 
-function Module1:excludeFromTotalCounts() --[[ Line: 110 ]]
+function Module1:excludeFromTotalCounts()
 	return self._excludeFromTotalCounts
 end
 
-function Module1:connect(p1) --[[ Line: 114 ]]
+function Module1:connect(p1)
 	return self._changeSignal:connect(p1)
 end
 
-function Module1:get() --[[ Line: 118 ]]
+function Module1:get()
 	return self._value
 end
 
-function Module1:clear() --[[ Line: 122 ]]
+function Module1:clear()
 	if self._value and self._value.type ~= "empty" then
 		self._value = { type = "empty", value = nil }
 		self._changeSignal:fire(self._value)
 	end
 end
 
-function Module1:fireCount(Value) --[[ Line: 129 ]]
+function Module1:fireCount(Value)
 	local config = { type = "count", value = Value }
 	
 	if self._value ~= config then
@@ -122,23 +122,23 @@ function Module1:fireCount(Value) --[[ Line: 129 ]]
 	end
 end
 
-function Module1:isEmpty(): boolean --[[ Line: 137 ]]
+function Module1:isEmpty(): boolean
 	return self._value and self._value.type == "empty"
 end
 
 local Module2 = {}
 Module2.__index = Module2
 
-function Module2.new(_value) --[[ Line: 146 ]]
+function Module2.new(_value)
 	-- upvalues: Signal (copy), Module2 (copy)
 	return (setmetatable({ _value = _value, _changeSignal = Signal.new() }, Module2))
 end
 
-function Module2:get() --[[ Line: 153 ]]
+function Module2:get()
 	return self._value
 end
 
-function Module2:setMomentary(_value, Delay, p1) --[[ Line: 157 ]]
+function Module2:setMomentary(_value, Delay, p1)
 	if self._value ~= _value then
 		self._value = _value
 		self._changeSignal:fire(_value)
@@ -148,14 +148,14 @@ function Module2:setMomentary(_value, Delay, p1) --[[ Line: 157 ]]
 	if MomentaryClearThread then
 		task.cancel(MomentaryClearThread)
 	end
-	self._momentaryClearThread = task.delay(Delay, function() --[[ Line: 169 ]]
+	self._momentaryClearThread = task.delay(Delay, function()
 		-- upvalues: self (copy), p1 (copy)
 		self._momentaryClearThread = nil
 		self.set(self, p1)
 	end)
 end
 
-function Module2:set(_value) --[[ Line: 176 ]]
+function Module2:set(_value)
 	local MomentaryClearThread = self._momentaryClearThread
 	
 	if MomentaryClearThread then
@@ -168,11 +168,11 @@ function Module2:set(_value) --[[ Line: 176 ]]
 	end
 end
 
-function Module2:signal() --[[ Line: 189 ]]
+function Module2:signal()
 	return self._changeSignal
 end
 
-function Module2:connect(Callback: (any) -> (), Enabled) --[[ Line: 193 ]]
+function Module2:connect(Callback: (any) -> (), Enabled)
 	local ChangeSignalConnection = self._changeSignal:connect(Callback)
 	
 	if Enabled == true then
@@ -184,7 +184,7 @@ end
 local Module3 = {}
 Module3.__index = Module3
 
-function Module3.new(_signal, _fetchMapFunction, _eventReceiver) --[[ Line: 219 ]]
+function Module3.new(_signal, _fetchMapFunction, _eventReceiver)
 	-- upvalues: Module3 (copy)
 	if not _signal then
 		error("No signal provided to MappedSignal")
@@ -199,13 +199,13 @@ function Module3.new(_signal, _fetchMapFunction, _eventReceiver) --[[ Line: 219 
 	}, Module3))
 end
 
-function Module3:connect(Callback: (any) -> ()) --[[ Line: 233 ]]
+function Module3:connect(Callback: (any) -> ())
 	if not self._signal then
 		warn("MappedSignal: Missing signal")
 		
-		return function() --[[ Line: 236 ]] end
+		return function() end
 	end
-	local SignalConnection = self._signal:connect(function() --[[ Line: 239 ]]
+	local SignalConnection = self._signal:connect(function()
 		-- upvalues: self (copy), Callback (copy)
 		if self._eventReceiver then
 			self._eventReceiver()
@@ -221,13 +221,13 @@ function Module3:connect(Callback: (any) -> ()) --[[ Line: 233 ]]
 	return SignalConnection
 end
 
-function Module3:get() --[[ Line: 253 ]]
+function Module3:get()
 	return self._fetchMapFunction()
 end
 
-function setCoreGuiAvailability(p1, CoreGuiType, Callback: (any) -> ()) --[[ Line: 257 ]]
+function setCoreGuiAvailability(p1, CoreGuiType, Callback: (any) -> ())
 	-- upvalues: StarterGui (copy)
-	local CoreGuiChangedSignalConnection = StarterGui.CoreGuiChangedSignal:Connect(function() --[[ Line: 262 | Named "updateAvailable" ]]
+	local CoreGuiChangedSignalConnection = StarterGui.CoreGuiChangedSignal:Connect(function()
 		-- upvalues: StarterGui (upval), CoreGuiType (copy), Callback (copy), p1 (copy)
 		local CoreGuiEnabled = StarterGui:GetCoreGuiEnabled(CoreGuiType)
 		

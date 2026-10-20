@@ -10,7 +10,7 @@ local UseOverflowMenuOpenFunction = require(Parent.AppBlox).useOverflowMenuOpen
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FFlagSduiGameTileDirectAction = require(Parent.SharedFlags).FFlagSduiGameTileDirectAction
 
-return ReactModule.memo(function(p1) --[[ Line: 41 | Named "SduiTileOverflowMenu" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), UseOverflowMenuOpenFunction (copy), UseGameTileOverflowMenuFocusNavigationFunction (copy), FFlagSduiGameTileDirectAction (copy), GetInputModeStoreFunction (copy), ResponsiveModule (copy), ReactModule (copy), GetSduiComponentWrapperFunction (copy), InputSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseOverflowMenuOpenResult = UseOverflowMenuOpenFunction(p1.menuKey)

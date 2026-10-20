@@ -1,13 +1,13 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("SocialLuaAnalytics").Parent.React)
 local UseLoadingTimersModule = require(script.Parent.useLoadingTimers)
 
-return function(p1) --[[ Line: 26 | Named "useFetchTimeLogging" ]]
+return function(p1)
 	-- upvalues: UseLoadingTimersModule (copy), ReactModule (copy)
 	local UseLoadingTimersModuleResult = UseLoadingTimersModule({})
 	local UseRefResult = ReactModule.useRef("")
 	local Loading = p1.loading
 	local Error = p1.error
-	ReactModule.useEffect(function() --[[ Line: 33 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Loading (copy), UseRefResult (copy), UseLoadingTimersModuleResult (copy), p1 (copy), Error (copy)
 		if Loading then
 			UseRefResult.current = UseLoadingTimersModuleResult.start(p1.timerKey)

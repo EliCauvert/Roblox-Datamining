@@ -5,10 +5,10 @@ local Kind = require(Language.kinds).Kind
 local IsExecutableDefinitionNodeFunction = require(Language.predicates).isExecutableDefinitionNode
 
 return {
-	ExecutableDefinitionsRule = function(p1) --[[ Line: 23 ]]
+	ExecutableDefinitionsRule = function(p1)
 		-- upvalues: IsExecutableDefinitionNodeFunction (copy), Kind (copy), GraphQLError (copy)
 		return {
-			Document = function(_, p2): boolean --[[ Line: 25 ]]
+			Document = function(_, p2): boolean
 				-- upvalues: IsExecutableDefinitionNodeFunction (upval), Kind (upval), p1 (copy), GraphQLError (upval)
 				for _, definition in ipairs(p2.definitions) do
 					if not IsExecutableDefinitionNodeFunction(definition) then

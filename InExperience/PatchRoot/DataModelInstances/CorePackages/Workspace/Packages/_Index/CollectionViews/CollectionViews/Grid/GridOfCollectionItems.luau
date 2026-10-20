@@ -17,19 +17,19 @@ local config = {
 	thresholdRowsFromBottom = 0
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 82 | Named "GridOfCollectionItems" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), LuaAppFixCollectionGridWindowAbsoluteCanvasSize (copy), LuaAppGridReuseUnchangedTileElements (copy), ArgCheckModule (copy), CalculateRelativeColumnGapModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseRefResult = ReactModule.useRef(nil)
 	local Smallest = math.min(math.ceil(#JoinResult.items / JoinResult.numColumns), JoinResult.maxNumRows)
-	local MapResult = JoinResult.itemSizeBinding:map(function(p2) --[[ Line: 90 ]]
+	local MapResult = JoinResult.itemSizeBinding:map(function(p2)
 		-- upvalues: Smallest (copy), JoinResult (copy)
 		return Smallest * (p2.Y + JoinResult.verticalPadding) - JoinResult.verticalPadding
 	end)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(-1)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(-1)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(JoinResult.bufferRowsBelowScreen + JoinResult.bufferRowsAboveScreen)
-	ReactModule.useEffect(function() --[[ Line: 103 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: JoinResult (copy), UseRefResult (copy), Smallest (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), LuaAppFixCollectionGridWindowAbsoluteCanvasSize (upval)
 		local List = {}
 		
@@ -40,14 +40,14 @@ return ReactModule.memo(function(p1) --[[ Line: 82 | Named "GridOfCollectionItem
 			local Y1 = Current1.AbsoluteWindowSize.Y
 			local NewCeiled = math.ceil(Y1 / math.max(1, JoinResult.itemSizeBinding:getValue().Y + JoinResult.verticalPadding)) + 1
 			
-			local function _() --[[ Line: 120 | Named "calculateOffsetOfGrid" ]]
+			local function _()
 				-- upvalues: Current (copy), Current1 (copy), Y (ref)
 				return Current.AbsolutePosition.Y + Current1.CanvasPosition.Y - Y
 			end
 			
 			local YDelta = Current.AbsolutePosition.Y + Current1.CanvasPosition.Y - Y
 			
-			local function updateRowsToRender() --[[ Line: 127 ]]
+			local function updateRowsToRender()
 				-- upvalues: Current1 (copy), JoinResult (upval), Smallest (upval), YDelta (ref), Y1 (ref), NewCeiled (ref), UseStateResult2 (upval), UseStateResult2_1 (upval)
 				local Y = JoinResult.itemSizeBinding:getValue().Y
 				local Largest = math.max(1, Y + JoinResult.verticalPadding)
@@ -70,7 +70,7 @@ return ReactModule.memo(function(p1) --[[ Line: 82 | Named "GridOfCollectionItem
 				UseStateResult2_1(Smallest1)
 			end
 			
-			local function updateWindowParams() --[[ Line: 172 ]]
+			local function updateWindowParams()
 				-- upvalues: JoinResult (upval), Y (ref), Current1 (copy), Y1 (ref), YDelta (ref), Current (copy), NewCeiled (ref), UseStateResult2_2 (upval), Smallest (upval), updateRowsToRender (copy)
 				Y = Current1.AbsolutePosition.Y
 				Y1 = Current1.AbsoluteWindowSize.Y
@@ -90,7 +90,7 @@ return ReactModule.memo(function(p1) --[[ Line: 82 | Named "GridOfCollectionItem
 			UseStateResult2_1(Smallest)
 			UseStateResult2_2(Smallest)
 		end
-		return function() --[[ Line: 219 ]]
+		return function()
 			-- upvalues: List (copy)
 			for _, Connection in List do
 				Connection:Disconnect()
@@ -105,14 +105,14 @@ return ReactModule.memo(function(p1) --[[ Line: 82 | Named "GridOfCollectionItem
 	local Smallest1 = math.min(UseStateResult1, Smallest)
 	local Largest = math.max(-1, (UseStateResult - 1) * JoinResult.numColumns + 1)
 	local Largest1 = math.max(-1, (math.min(#JoinResult.items, Smallest1 * JoinResult.numColumns)))
-	ReactModule.useEffect(function() --[[ Line: 244 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: JoinResult (copy), Largest (copy), Largest1 (copy)
 		if JoinResult.onViewableItemsChanged then
 			JoinResult.onViewableItemsChanged(Largest, Largest1)
 		end
 	end, { Largest, Largest1, JoinResult.onViewableItemsChanged })
 	local UseRefResult1 = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 252 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Smallest1 (ref), Smallest (copy), JoinResult (copy), UseRefResult1 (copy)
 		if Smallest - JoinResult.thresholdRowsFromBottom <= Smallest1 and UseRefResult1.current ~= JoinResult.items and JoinResult.onReachedThresholdFromEnd then
 			JoinResult.onReachedThresholdFromEnd()
@@ -130,12 +130,12 @@ return ReactModule.memo(function(p1) --[[ Line: 82 | Named "GridOfCollectionItem
 	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		ref = UseRefResult,
-		Size = MapResult:map(function(YOffset): UDim2 --[[ Line: 400 ]]
+		Size = MapResult:map(function(YOffset): UDim2
 			return UDim2.new(1, 0, 0, YOffset)
 		end),
 		LayoutOrder = JoinResult.LayoutOrder,
 		Position = JoinResult.Position
-	}, (ReactModule.useMemo(function() --[[ Line: 275 ]]
+	}, (ReactModule.useMemo(function()
 		-- upvalues: UseStateResult (copy), Smallest1 (ref), Largest (copy), Largest1 (copy), JoinResult (copy), Smallest (copy), ArgCheckModule (upval), ReactModule (upval), CalculateRelativeColumnGapModule (upval), LuaAppGridReuseUnchangedTileElements (upval), UseRefResult2 (copy), UseStateResult3 (copy)
 		local Elements = {}
 		
@@ -154,7 +154,7 @@ return ReactModule.memo(function(p1) --[[ Line: 82 | Named "GridOfCollectionItem
 		if UseStateResult > 1 then
 			local UseStateResultDelta = UseStateResult - 1
 			Elements.Padding = ReactModule.createElement("UIPadding", {
-				PaddingTop = JoinResult.itemSizeBinding:map(function(p2): UDim --[[ Line: 293 ]]
+				PaddingTop = JoinResult.itemSizeBinding:map(function(p2): UDim
 					-- upvalues: UseStateResultDelta (copy), JoinResult (upval)
 					return UDim.new(0, UseStateResultDelta * (p2.Y + JoinResult.verticalPadding))
 				end)
@@ -167,7 +167,7 @@ return ReactModule.memo(function(p1) --[[ Line: 82 | Named "GridOfCollectionItem
 		local NewColumnGap = JoinResult.columnGap + (math.floor(NumColumnsDelta / JoinResult.numColumns * JoinResult.columnGap) * JoinResult.numColumns - JoinResult.columnGap * NumColumnsDelta) / NumColumnsDelta
 		Elements.Layout = ReactModule.createElement("UIGridLayout", {
 			FillDirectionMaxCells = JoinResult.numColumns,
-			CellPadding = if JoinResult.disableRelativeGap then UDim2.new(0, NewColumnGap, 0, JoinResult.verticalPadding) else JoinResult.itemSizeBinding:map(function(p2): UDim2 --[[ Line: 317 ]]
+			CellPadding = if JoinResult.disableRelativeGap then UDim2.new(0, NewColumnGap, 0, JoinResult.verticalPadding) else JoinResult.itemSizeBinding:map(function(p2): UDim2
 				-- upvalues: CalculateRelativeColumnGapModule (upval), JoinResult (upval)
 				return UDim2.new(CalculateRelativeColumnGapModule(JoinResult.numColumns, JoinResult.columnGap, p2.X, JoinResult.sideMargin), 0, 0, JoinResult.verticalPadding)
 			end),

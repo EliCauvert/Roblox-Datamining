@@ -46,28 +46,28 @@ local ExternalContentSharingProtocolModule = {
 }
 ExternalContentSharingProtocolModule.__index = ExternalContentSharingProtocolModule
 
-function ExternalContentSharingProtocolModule.new(p1) --[[ Line: 82 ]]
+function ExternalContentSharingProtocolModule.new(p1)
 	-- upvalues: MessageBus (copy), ExternalContentSharingProtocolModule (copy)
 	return (setmetatable({ messageBus = p1 or MessageBus }, ExternalContentSharingProtocolModule))
 end
 
-function ExternalContentSharingProtocolModule:shareText(p1) --[[ Line: 90 ]]
+function ExternalContentSharingProtocolModule:shareText(p1)
 	self.messageBus.publish(self.EXTERNAL_CONTENT_SHARING_SHARE_TEXT_DESCRIPTOR, p1)
 end
 
-function ExternalContentSharingProtocolModule:shareUrl(p1) --[[ Line: 94 ]]
+function ExternalContentSharingProtocolModule:shareUrl(p1)
 	self.messageBus.publish(self.EXTERNAL_CONTENT_SHARING_SHARE_URL_DESCRIPTOR, p1)
 end
 
-function ExternalContentSharingProtocolModule:shareImage(p1) --[[ Line: 101 ]]
+function ExternalContentSharingProtocolModule:shareImage(p1)
 	self.messageBus.publish(self.EXTERNAL_CONTENT_SHARING_SHARE_IMAGE_DESCRIPTOR, p1)
 end
 
-function ExternalContentSharingProtocolModule:shareVideo(p1) --[[ Line: 105 ]]
+function ExternalContentSharingProtocolModule:shareVideo(p1)
 	self.messageBus.publish(self.EXTERNAL_CONTENT_SHARING_SHARE_VIDEO_DESCRIPTOR, p1)
 end
 
-function ExternalContentSharingProtocolModule:setClipboardText(p1) --[[ Line: 109 ]]
+function ExternalContentSharingProtocolModule:setClipboardText(p1)
 	self.messageBus.publish(self.EXTERNAL_CONTENT_SHARING_SET_CLIPBOARD_TEXT_DESCRIPTOR, p1)
 end
 

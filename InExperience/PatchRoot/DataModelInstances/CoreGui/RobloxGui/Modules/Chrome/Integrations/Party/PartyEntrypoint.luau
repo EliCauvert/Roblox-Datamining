@@ -8,12 +8,12 @@ local IsConnectDropdownEnabledModule = require(Chrome.Integrations.Connect.isCon
 local GetFFlagIsSquadEnabledFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagIsSquadEnabled
 local AppPolicy = require(CorePackages.Packages.PolicyProvider).GetPolicyImplementations.MemStorageService("app-policy")
 
-local function _() --[[ Line: 18 | Named "canAccessParty" ]]
+local function _()
 	-- upvalues: UniversalAppPolicyModule (copy)
 	return UniversalAppPolicyModule.getAppFeaturePolicies().getCanAccessParty()
 end
 
-local _ = function() --[[ Line: 22 | Named "shouldEnableIntegrationForParty" ]]
+local _ = function()
 	-- upvalues: GetFFlagIsSquadEnabledFunction (copy), UniversalAppPolicyModule (copy), IsConnectDropdownEnabledModule (copy)
 	return GetFFlagIsSquadEnabledFunction() and (UniversalAppPolicyModule.getAppFeaturePolicies().getCanAccessParty() and IsConnectDropdownEnabledModule())
 end
@@ -21,7 +21,7 @@ end
 local PartyEntrypoint = nil
 local Callback = nil
 
-local function updatePartyIntegration(p1) --[[ Line: 29 ]]
+local function updatePartyIntegration(p1)
 	-- upvalues: PartyEntrypoint (ref), RegisterPartyIntegrationModule (copy), ServiceModule (copy), Callback (ref), InExperienceAppChatModalModule (copy)
 	if not PartyEntrypoint then
 		PartyEntrypoint = RegisterPartyIntegrationModule("party_entrypoint", if p1 then ServiceModule.AvailabilitySignal.Pinned else ServiceModule.AvailabilitySignal.Unavailable)
@@ -31,7 +31,7 @@ local function updatePartyIntegration(p1) --[[ Line: 29 ]]
 			PartyEntrypoint.availability:pinned()
 		end
 		if not Callback then
-			local EventConnection = InExperienceAppChatModalModule.default.currentSquadIdSignal.Event:Connect(function(p2) --[[ Line: 55 ]]
+			local EventConnection = InExperienceAppChatModalModule.default.currentSquadIdSignal.Event:Connect(function(p2)
 				-- upvalues: PartyEntrypoint (upval)
 				if p2 == "" then
 					PartyEntrypoint.availability:unavailable()
@@ -42,7 +42,7 @@ local function updatePartyIntegration(p1) --[[ Line: 29 ]]
 				end
 			end)
 			
-			Callback = function() --[[ Line: 62 ]]
+			Callback = function()
 				-- upvalues: EventConnection (copy)
 				EventConnection:Disconnect()
 			end
@@ -59,7 +59,7 @@ local function updatePartyIntegration(p1) --[[ Line: 29 ]]
 	end
 end
 
-local function handlePolicyUpdate() --[[ Line: 69 ]]
+local function handlePolicyUpdate()
 	-- upvalues: updatePartyIntegration (copy), GetFFlagIsSquadEnabledFunction (copy), UniversalAppPolicyModule (copy), IsConnectDropdownEnabledModule (copy)
 	updatePartyIntegration(GetFFlagIsSquadEnabledFunction() and (UniversalAppPolicyModule.getAppFeaturePolicies().getCanAccessParty() and IsConnectDropdownEnabledModule()))
 end

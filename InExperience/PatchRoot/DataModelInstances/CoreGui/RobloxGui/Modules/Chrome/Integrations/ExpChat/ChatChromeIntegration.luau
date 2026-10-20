@@ -66,14 +66,14 @@ local VisibilityStateChanged = ChatSelectorModule.VisibilityStateChanged
 local Smallest = 0
 local Flag = false
 
-local function _(p1) --[[ Line: 99 | Named "readHistoricalWindowMessageCount" ]]
+local function _(p1)
 	-- upvalues: GetMessagesStoreFunction (copy)
 	local GetHistoricalWindowMessageCountFunction = GetMessagesStoreFunction(p1).getHistoricalWindowMessageCount
 	
 	return if GetHistoricalWindowMessageCountFunction then GetHistoricalWindowMessageCountFunction(p1) else 0
 end
 
-local _ = function(): number --[[ Line: 104 | Named "getHistoricalUnreadCount" ]]
+local _ = function(): number
 	-- upvalues: GetMessagesStoreFunction (copy), Smallest (ref)
 	local GetHistoricalWindowMessageCountFunction = GetMessagesStoreFunction(false).getHistoricalWindowMessageCount
 	local HistoricalWindowMessageCount = if GetHistoricalWindowMessageCountFunction then GetHistoricalWindowMessageCountFunction(false) else 0
@@ -82,13 +82,13 @@ local _ = function(): number --[[ Line: 104 | Named "getHistoricalUnreadCount" ]
 	return HistoricalWindowMessageCount - Smallest
 end
 
-local _ = function() --[[ Line: 110 | Named "acknowledgeHistoricalMessages" ]]
+local _ = function()
 	-- upvalues: Smallest (ref), GetMessagesStoreFunction (copy)
 	local GetHistoricalWindowMessageCountFunction = GetMessagesStoreFunction(false).getHistoricalWindowMessageCount
 	Smallest = if GetHistoricalWindowMessageCountFunction then GetHistoricalWindowMessageCountFunction(false) else 0
 end
 
-local function updateUnreadNotification() --[[ Line: 114 ]]
+local function updateUnreadNotification()
 	-- upvalues: RegisterResult (ref), FFlagExpChatHistoricalMessagesUnibarUnread (copy), GetMessagesStoreFunction (copy), Smallest (ref), FFlagExpChatEnableFriendsTab (copy), Count (ref), GetFriendsChatIconUnreadStoreModule (copy), ChatVisible (ref)
 	if not RegisterResult.notification then return end
 	local HistoricalWindowMessageCountDelta = nil
@@ -116,12 +116,12 @@ local function updateUnreadNotification() --[[ Line: 114 ]]
 	end
 end
 
-local _ = function() --[[ Line: 137 | Named "localUserCanChat" ]]
+local _ = function()
 	-- upvalues: RunService (copy), Chat (copy), Players (copy)
 	if RunService:IsStudio() then
 		return true
 	else
-		local Success, Result = pcall(function() --[[ Line: 139 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Chat (upval), Players (upval)
 			return Chat:CanUserChatAsync(Players.LocalPlayer and Players.LocalPlayer.UserId or 0)
 		end)
@@ -131,7 +131,7 @@ local _ = function() --[[ Line: 137 | Named "localUserCanChat" ]]
 end
 
 if not FFlagExpChatWindowSyncUnibar then
-	VisibilityStateChanged:connect(function(p1) --[[ Line: 150 ]]
+	VisibilityStateChanged:connect(function(p1)
 		-- upvalues: ExpChatUnibarAvailabilityRefactor (copy), Default (copy), RegisterResult (ref)
 		if ExpChatUnibarAvailabilityRefactor then
 			Default.setVisibleViaChatSelector(p1)
@@ -142,7 +142,7 @@ if not FFlagExpChatWindowSyncUnibar then
 			RegisterResult.availability:pinned()
 		end
 	end)
-	ChatSelectorModule.ChatWindowToggled:connect(function(p1) --[[ Line: 161 ]]
+	ChatSelectorModule.ChatWindowToggled:connect(function(p1)
 		-- upvalues: ExpChatUnibarAvailabilityRefactor (copy), Default (copy), RegisterResult (ref)
 		if ExpChatUnibarAvailabilityRefactor then
 			Default.setVisibleViaChatSelector(p1)
@@ -155,16 +155,16 @@ if not FFlagExpChatWindowSyncUnibar then
 	end)
 end
 if FFlagExpChatWindowSyncUnibar then
-	GameSettings:GetPropertyChangedSignal("ChatVisible"):Connect(function() --[[ Line: 175 ]]
+	GameSettings:GetPropertyChangedSignal("ChatVisible"):Connect(function()
 		-- upvalues: Default (copy), GameSettings (copy)
 		Default.setGameSettingsChatVisible(GameSettings.ChatVisible)
 	end)
 	Default.setGameSettingsChatVisible(GameSettings.ChatVisible)
 end
-local NewMappedSignal = MappedSignal.new(VisibilityStateChanged, function() --[[ Line: 181 ]]
+local NewMappedSignal = MappedSignal.new(VisibilityStateChanged, function()
 	-- upvalues: ChatVisible (ref)
 	return ChatVisible
-end, function() --[[ Line: 183 ]]
+end, function()
 	-- upvalues: ChatSelectorModule (copy), ExpChatUnibarAvailabilityRefactor (copy), RunService (copy), Chat (copy), Players (copy), RegisterResult (ref), GuiService (copy), GameSettings (copy), ChatVisible (ref), Flag (ref), FFlagExpChatEnableFriendsTab (copy), Count (ref), FFlagExpChatHistoricalMessagesUnibarUnread (copy), Smallest (ref), GetMessagesStoreFunction (copy), GetFriendsChatIconUnreadStoreModule (copy), updateUnreadNotification (copy)
 	local Visibility = ChatSelectorModule.GetVisibility()
 	
@@ -173,7 +173,7 @@ end, function() --[[ Line: 183 ]]
 		if RunService:IsStudio() then
 			Result1 = true
 		else
-			local Success, Result = pcall(function() --[[ Line: 139 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: Chat (upval), Players (upval)
 				return Chat:CanUserChatAsync(Players.LocalPlayer and Players.LocalPlayer.UserId or 0)
 			end)
@@ -215,7 +215,7 @@ end, function() --[[ Line: 183 ]]
 	end
 end)
 
-local _ = function() --[[ Line: 219 | Named "hideAppChat" ]]
+local _ = function()
 	-- upvalues: InExperienceAppChatModalModule (copy)
 	if InExperienceAppChatModalModule:getVisible() then
 		InExperienceAppChatModalModule.default:setVisible(false)
@@ -224,7 +224,7 @@ local _ = function() --[[ Line: 219 | Named "hideAppChat" ]]
 	end
 end
 
-local _ = function() --[[ Line: 227 | Named "revealChat" ]]
+local _ = function()
 	-- upvalues: InExperienceAppChatModalModule (copy), ChatSelectorModule (copy), FFlagEnableConsoleExpControls (copy), FocusSelectExpChatModule (copy), RegisterResult (ref)
 	if InExperienceAppChatModalModule:getVisible() then
 		InExperienceAppChatModalModule.default:setVisible(false)
@@ -236,17 +236,17 @@ local _ = function() --[[ Line: 227 | Named "revealChat" ]]
 	end
 end
 
-local function isChatOpenAvailable(): boolean --[[ Line: 237 ]]
+local function isChatOpenAvailable(): boolean
 	-- upvalues: RegisterResult (ref), ServiceModule (copy)
 	return RegisterResult.availability:get() ~= ServiceModule.AvailabilitySignal.Unavailable
 end
 
-local _ = function(): boolean --[[ Line: 241 | Named "isSpatialDirectOpen" ]]
+local _ = function(): boolean
 	-- upvalues: IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), InExperienceUIVRIXP (copy)
 	return IsInExperienceUIVREnabled and (IsSpatialFunction() and not InExperienceUIVRIXP:isMovePanelToCenter())
 end
 
-local function ensureOpenChat(Callback) --[[ Line: 247 ]]
+local function ensureOpenChat(Callback)
 	-- upvalues: ChatVisible (ref), InExperienceAppChatModalModule (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), InExperienceUIVRIXP (copy), ChatSelectorModule (copy), FFlagEnableConsoleExpControls (copy), FocusSelectExpChatModule (copy), RegisterResult (ref), ChromeIntegrationUtilsModule (copy), ServiceModule (copy)
 	if not ChatVisible then
 		if IsInExperienceUIVREnabled and (IsSpatialFunction() and not InExperienceUIVRIXP:isMovePanelToCenter()) then
@@ -261,7 +261,7 @@ local function ensureOpenChat(Callback) --[[ Line: 247 ]]
 				return
 			end
 		else
-			ChromeIntegrationUtilsModule.dismissRobloxMenuAndRun(function() --[[ Line: 253 ]]
+			ChromeIntegrationUtilsModule.dismissRobloxMenuAndRun(function()
 				-- upvalues: Callback (copy), RegisterResult (upval), ServiceModule (upval), InExperienceAppChatModalModule (upval), ChatSelectorModule (upval), FFlagEnableConsoleExpControls (upval), FocusSelectExpChatModule (upval)
 				if Callback() and RegisterResult.availability:get() ~= ServiceModule.AvailabilitySignal.Unavailable then
 					if InExperienceAppChatModalModule:getVisible() then
@@ -288,7 +288,7 @@ RegisterResult = ServiceModule:register({
 	id = "chat",
 	label = "CoreScripts.TopBar.Chat",
 	sideSheetPlacement = if ArgoPartyExperimentation.getIsRenameEnabled() and (not FFlagRemoveFriendsChatUnibarEntrypoints or not FFlagExpChatCanShowFriendsTab) then SideSheetPlacement.None else SideSheetPlacement.Unibar,
-	activated = function(_) --[[ Line: 273 ]]
+	activated = function(_)
 		-- upvalues: ChatVisible (ref), ChatSelectorModule (copy), ExpChatPerfTracker (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), InExperienceUIVRIXP (copy), ChromeIntegrationUtilsModule (copy), InExperienceAppChatModalModule (copy), FFlagEnableConsoleExpControls (copy), FocusSelectExpChatModule (copy), RegisterResult (ref)
 		if ChatVisible then
 			ChatSelectorModule:SetVisible(false)
@@ -302,7 +302,7 @@ RegisterResult = ServiceModule:register({
 			
 			return
 		else
-			ChromeIntegrationUtilsModule.dismissRobloxMenuAndRun(function() --[[ Line: 281 ]]
+			ChromeIntegrationUtilsModule.dismissRobloxMenuAndRun(function()
 				-- upvalues: InExperienceAppChatModalModule (upval), ChatSelectorModule (upval), FFlagEnableConsoleExpControls (upval), FocusSelectExpChatModule (upval), RegisterResult (upval)
 				if InExperienceAppChatModalModule:getVisible() then
 					InExperienceAppChatModalModule.default:setVisible(false)
@@ -316,25 +316,25 @@ RegisterResult = ServiceModule:register({
 		end
 	end,
 	isActivated = NewMappedSignal,
-	selected = if FFlagEnableConsoleExpControls then function(p1) --[[ Line: 289 ]]
+	selected = if FFlagEnableConsoleExpControls then function(p1)
 		-- upvalues: ServiceModule (copy), UserInputService (copy), GamepadUtils (copy), FocusSelectExpChatModule (copy), RegisterResult (ref)
 		local Connection = nil
 		local Connection1 = nil
 		local Connection2 = nil
-		Connection = ServiceModule:selectedItem():connect(function(Id) --[[ Line: 294 ]]
+		Connection = ServiceModule:selectedItem():connect(function(Id)
 			-- upvalues: p1 (copy), Connection (ref), Connection1 (ref), Connection2 (ref)
 			assert(Id ~= p1.id, "Expected selectedId to not be self.id on selection")
 			Connection:disconnect()
 			Connection1:Disconnect()
 			Connection2:Disconnect()
 		end)
-		Connection1 = UserInputService.InputChanged:Connect(function(Input) --[[ Line: 304 ]]
+		Connection1 = UserInputService.InputChanged:Connect(function(Input)
 			-- upvalues: GamepadUtils (upval), FocusSelectExpChatModule (upval), RegisterResult (upval)
 			if Input.KeyCode == Enum.KeyCode.Thumbstick1 and GamepadUtils.mapPositionToDirection(Vector2.new(Input.Position.X, Input.Position.Y)) == Enum.KeyCode.Down then
 				FocusSelectExpChatModule(RegisterResult.id)
 			end
 		end)
-		Connection2 = UserInputService.InputBegan:Connect(function(Input) --[[ Line: 313 ]]
+		Connection2 = UserInputService.InputBegan:Connect(function(Input)
 			-- upvalues: FocusSelectExpChatModule (upval), RegisterResult (upval)
 			local KeyCode = Input.KeyCode
 			
@@ -344,7 +344,7 @@ RegisterResult = ServiceModule:register({
 		end)
 	end else nil,
 	components = {
-		Icon = function(_) --[[ Line: 322 ]]
+		Icon = function(_)
 			-- upvalues: GetExperienceChatVisualConfigFunction (copy), CommonIconModule (copy), NewMappedSignal (copy)
 			local ExperienceChatVisualConfig = GetExperienceChatVisualConfigFunction()
 			
@@ -358,7 +358,7 @@ RegisterResult.chatOpenCapability = if FFlagExpChatEnableFriendsTab then {
 } else nil
 
 if ExpChatUnibarAvailabilityRefactor then
-	SignalsUtilsModule.createDetachedEffect(function(p1) --[[ Line: 340 ]]
+	SignalsUtilsModule.createDetachedEffect(function(p1)
 		-- upvalues: Default (copy), RegisterResult (ref), FFlagExpChatWindowSyncUnibar (copy), ExpChatModule (copy)
 		if Default.getIsChatIconVisible(p1) then
 			RegisterResult.availability:available()
@@ -369,13 +369,13 @@ if ExpChatUnibarAvailabilityRefactor then
 			ExpChatModule.Events.ChatTopBarButtonActivated((Default.getIsChatWindowVisible(p1)))
 		end
 	end)
-	ChromeUtilsModule.setCoreGuiAvailability(RegisterResult, Enum.CoreGuiType.Chat, function(p1) --[[ Line: 357 ]]
+	ChromeUtilsModule.setCoreGuiAvailability(RegisterResult, Enum.CoreGuiType.Chat, function(p1)
 		-- upvalues: Default (copy)
 		Default.setCoreGuiEnabled(p1)
 	end)
 end
 if FFlagEnableConsoleExpControls then
-	SignalsUtilsModule.createDetachedEffect(function(p1) --[[ Line: 363 ]]
+	SignalsUtilsModule.createDetachedEffect(function(p1)
 		-- upvalues: FocusNavigationStore (copy), ServiceModule (copy), ConstantsModule (copy)
 		if FocusNavigationStore.getChatInputBarFocused(p1) then
 			ServiceModule:setShortcutBar(ConstantsModule.UNIBAR_SHORTCUTBAR_ID)
@@ -387,14 +387,14 @@ if FFlagEnableConsoleExpControls then
 	end)
 end
 if FFlagExpChatEnableFriendsTab then
-	SignalsUtilsModule.createDetachedEffect(function(p1) --[[ Line: 375 ]]
+	SignalsUtilsModule.createDetachedEffect(function(p1)
 		-- upvalues: GetFriendsChatIconUnreadStoreModule (copy), updateUnreadNotification (copy)
 		GetFriendsChatIconUnreadStoreModule(p1).getUnreadCountToDisplay(p1)
 		updateUnreadNotification()
 	end)
 end
 if FFlagExpChatHistoricalMessagesUnibarUnread then
-	SignalsUtilsModule.createDetachedEffect(function(p1) --[[ Line: 382 ]]
+	SignalsUtilsModule.createDetachedEffect(function(p1)
 		-- upvalues: GetMessagesStoreFunction (copy), Flag (ref), ChatVisible (ref), Smallest (ref), updateUnreadNotification (copy)
 		local GetHistoricalWindowMessageCountFunction = GetMessagesStoreFunction(p1).getHistoricalWindowMessageCount
 		
@@ -408,12 +408,12 @@ if FFlagExpChatHistoricalMessagesUnibarUnread then
 		updateUnreadNotification()
 	end)
 end
-local _ = function(p1) --[[ Line: 393 | Named "shouldIgnoreUnreadForMessage" ]]
+local _ = function(p1)
 	-- upvalues: FFlagExpChatHistoricalMessagesUnibarUnread (copy), IsHistoricalMessageFunction (copy), ShouldSkipHistoricalMessageFunction (copy), ExpChatSuppressWelcomeMessageUnibarUnread (copy), ShouldSuppressUnreadForTabMetadataFunction (copy)
 	return if FFlagExpChatHistoricalMessagesUnibarUnread and IsHistoricalMessageFunction(p1) then true elseif p1 == nil then ExpChatSuppressWelcomeMessageUnibarUnread and ShouldSuppressUnreadForTabMetadataFunction(p1 and p1.Metadata) else ShouldSkipHistoricalMessageFunction(p1) or ExpChatSuppressWelcomeMessageUnibarUnread and ShouldSuppressUnreadForTabMetadataFunction(p1 and p1.Metadata)
 end
 
-TextChatService.MessageReceived:Connect(function(TextChatMessage) --[[ Line: 404 ]]
+TextChatService.MessageReceived:Connect(function(TextChatMessage)
 	-- upvalues: GetTextChannelDisplayModeFunction (copy), ShouldRenderTextChannelInDefaultWindowFunction (copy), FFlagExpChatHistoricalMessagesUnibarUnread (copy), IsHistoricalMessageFunction (copy), ShouldSkipHistoricalMessageFunction (copy), ExpChatSuppressWelcomeMessageUnibarUnread (copy), ShouldSuppressUnreadForTabMetadataFunction (copy), ChatVisible (ref), Count (ref), updateUnreadNotification (copy)
 	if not ShouldRenderTextChannelInDefaultWindowFunction(TextChatMessage.TextChannel, (GetTextChannelDisplayModeFunction())) then return end
 	if if FFlagExpChatHistoricalMessagesUnibarUnread and IsHistoricalMessageFunction(TextChatMessage) then true elseif TextChatMessage == nil then ExpChatSuppressWelcomeMessageUnibarUnread and ShouldSuppressUnreadForTabMetadataFunction(TextChatMessage and TextChatMessage.Metadata) else ShouldSkipHistoricalMessageFunction(TextChatMessage) or ExpChatSuppressWelcomeMessageUnibarUnread and ShouldSuppressUnreadForTabMetadataFunction(TextChatMessage and TextChatMessage.Metadata) then return end
@@ -424,7 +424,7 @@ TextChatService.MessageReceived:Connect(function(TextChatMessage) --[[ Line: 404
 end)
 
 if GetFFlagTextChatEnableUniverseChatTabsFunction() then
-	TextChatService.UniverseChatMessageReceived:Connect(function(TextChatMessage) --[[ Line: 420 ]]
+	TextChatService.UniverseChatMessageReceived:Connect(function(TextChatMessage)
 		-- upvalues: FFlagExpChatHistoricalMessagesUnibarUnread (copy), IsHistoricalMessageFunction (copy), ShouldSkipHistoricalMessageFunction (copy), ExpChatSuppressWelcomeMessageUnibarUnread (copy), ShouldSuppressUnreadForTabMetadataFunction (copy), ChatVisible (ref), Count (ref), updateUnreadNotification (copy)
 		if if FFlagExpChatHistoricalMessagesUnibarUnread and IsHistoricalMessageFunction(TextChatMessage) then true elseif TextChatMessage == nil then ExpChatSuppressWelcomeMessageUnibarUnread and ShouldSuppressUnreadForTabMetadataFunction(TextChatMessage and TextChatMessage.Metadata) else ShouldSkipHistoricalMessageFunction(TextChatMessage) or ExpChatSuppressWelcomeMessageUnibarUnread and ShouldSuppressUnreadForTabMetadataFunction(TextChatMessage and TextChatMessage.Metadata) then return end
 		if not ChatVisible then
@@ -434,7 +434,7 @@ if GetFFlagTextChatEnableUniverseChatTabsFunction() then
 	end)
 end
 local v1 = 0
-ChatSelectorModule.MessagesChanged:connect(function(p1) --[[ Line: 432 ]]
+ChatSelectorModule.MessagesChanged:connect(function(p1)
 	-- upvalues: ChatVisible (ref), Count (ref), v1 (ref), updateUnreadNotification (copy)
 	if not ChatVisible then
 		Count += p1 - v1
@@ -444,7 +444,7 @@ ChatSelectorModule.MessagesChanged:connect(function(p1) --[[ Line: 432 ]]
 end)
 
 if not FFlagExpChatWindowSyncUnibar then
-	ChatSelectorModule.ChatActiveChanged:connect(function(p1) --[[ Line: 441 ]]
+	ChatSelectorModule.ChatActiveChanged:connect(function(p1)
 		-- upvalues: ExpChatUnibarAvailabilityRefactor (copy), Default (copy), RunService (copy), Chat (copy), Players (copy), RegisterResult (ref)
 		if ExpChatUnibarAvailabilityRefactor then
 			Default.setChatActiveCalledByDeveloper(p1)
@@ -456,7 +456,7 @@ if not FFlagExpChatWindowSyncUnibar then
 			if RunService:IsStudio() then
 				Result1 = true
 			else
-				local Success, Result = pcall(function() --[[ Line: 139 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: Chat (upval), Players (upval)
 					return Chat:CanUserChatAsync(Players.LocalPlayer and Players.LocalPlayer.UserId or 0)
 				end)
@@ -468,14 +468,14 @@ if not FFlagExpChatWindowSyncUnibar then
 		end
 	end)
 end
-local _ = function() --[[ Line: 455 | Named "setChatVisibilityOnLoad" ]]
+local _ = function()
 	-- upvalues: GameSettings (copy), ViewportUtilModule (copy), ChatVisible (ref), ChatSelectorModule (copy)
 	local ChatVisible1 = not ViewportUtilModule.isSmallTouchScreen() and GameSettings.ChatVisible
 	ChatVisible = ChatVisible1
 	ChatSelectorModule:SetVisible(ChatVisible1)
 end
 
-coroutine.wrap(function() --[[ Line: 465 ]]
+coroutine.wrap(function()
 	-- upvalues: Players (copy), RunService (copy), Chat (copy), ExpChatUnibarAvailabilityRefactor (copy), Default (copy), GameSettings (copy), ViewportUtilModule (copy), ChatVisible (ref), ChatSelectorModule (copy), RegisterResult (ref), ChromeUtilsModule (copy)
 	local LocalPlayer = Players.LocalPlayer
 	while not LocalPlayer do
@@ -486,7 +486,7 @@ coroutine.wrap(function() --[[ Line: 465 ]]
 	if RunService:IsStudio() then
 		Result1 = true
 	else
-		local Success, Result = pcall(function() --[[ Line: 139 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Chat (upval), Players (upval)
 			return Chat:CanUserChatAsync(Players.LocalPlayer and Players.LocalPlayer.UserId or 0)
 		end)
@@ -503,7 +503,7 @@ coroutine.wrap(function() --[[ Line: 465 ]]
 			return
 		end
 	elseif Result1 and RegisterResult.availability then
-		ChromeUtilsModule.setCoreGuiAvailability(RegisterResult, Enum.CoreGuiType.Chat, function(p1) --[[ Line: 480 ]]
+		ChromeUtilsModule.setCoreGuiAvailability(RegisterResult, Enum.CoreGuiType.Chat, function(p1)
 			-- upvalues: RegisterResult (upval)
 			if p1 then
 				RegisterResult.availability:pinned()
@@ -519,7 +519,7 @@ coroutine.wrap(function() --[[ Line: 465 ]]
 	end
 end)()
 
-function _simulateChat() --[[ Line: 500 ]]
+function _simulateChat()
 	-- upvalues: ChatVisible (ref), Count (ref), updateUnreadNotification (copy)
 	while true do
 		task.wait(math.random(1, 15))

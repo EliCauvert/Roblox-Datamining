@@ -1,7 +1,7 @@
 ﻿local MockVRService = {}
 MockVRService.__index = MockVRService
 
-function MockVRService:GetPropertyChangedSignal(p1) --[[ Line: 4 ]]
+function MockVRService:GetPropertyChangedSignal(p1)
 	if p1 == "VRDeviceAvailable" then
 		return self._vrDeviceAvailableChanged.Event
 	else
@@ -9,13 +9,13 @@ function MockVRService:GetPropertyChangedSignal(p1) --[[ Line: 4 ]]
 	end
 end
 
-function MockVRService:toggleHeadsetConnectionState() --[[ Line: 11 ]]
+function MockVRService:toggleHeadsetConnectionState()
 	local NoVRDeviceAvailable = not self.VRDeviceAvailable
 	self.VRDeviceAvailable = NoVRDeviceAvailable
 	self._vrDeviceAvailableChanged:Fire(NoVRDeviceAvailable)
 end
 
-function MockVRService.new() --[[ Line: 18 ]]
+function MockVRService.new()
 	-- upvalues: MockVRService (copy)
 	local config = {
 		VRDeviceAvailable = true,

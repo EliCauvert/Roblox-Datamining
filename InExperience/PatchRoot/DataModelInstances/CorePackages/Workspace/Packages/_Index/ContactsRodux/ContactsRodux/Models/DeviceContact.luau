@@ -3,7 +3,7 @@ local _ = require(script.Parent.Parent.Types.ContactTypes)
 local DashModule = require(script.Parent.Parent.Parent.Dash)
 local DeviceContactModule = {}
 
-function DeviceContactModule.new(JoinResult) --[[ Line: 9 ]]
+function DeviceContactModule.new(JoinResult)
 	-- upvalues: DeviceContactModule (copy)
 	DeviceContactModule.__index = DeviceContactModule
 	local config = {
@@ -16,7 +16,7 @@ function DeviceContactModule.new(JoinResult) --[[ Line: 9 ]]
 	return config
 end
 
-function DeviceContactModule.mock(p1) --[[ Line: 23 ]]
+function DeviceContactModule.mock(p1)
 	-- upvalues: GetMockNameModule (copy), DashModule (copy), DeviceContactModule (copy)
 	local MockNameModule = GetMockNameModule()
 	
@@ -27,7 +27,7 @@ function DeviceContactModule.mock(p1) --[[ Line: 23 ]]
 	}, p1)))
 end
 
-function DeviceContactModule.formatFromDevice(p1) --[[ Line: 39 ]]
+function DeviceContactModule.formatFromDevice(p1)
 	-- upvalues: DeviceContactModule (copy)
 	return DeviceContactModule.new({
 		id = DeviceContactModule.generateId(p1),
@@ -36,7 +36,7 @@ function DeviceContactModule.formatFromDevice(p1) --[[ Line: 39 ]]
 	})
 end
 
-function DeviceContactModule.generateId(p1): string --[[ Line: 49 ]]
+function DeviceContactModule.generateId(p1): string
 	return (p1.firstname or "") .. (p1.lastname or "") .. tostring(p1.phonenumber[1])
 end
 

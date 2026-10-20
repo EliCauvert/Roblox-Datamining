@@ -5,7 +5,7 @@ local TModule = require(Parent.t)
 local EnumsModule = require(RoduxPresence.Enums)
 local PresenceModelModule = {}
 
-function PresenceModelModule.new(p1) --[[ Line: 10 ]]
+function PresenceModelModule.new(p1)
 	-- upvalues: PresenceModelModule (copy)
 	assert(PresenceModelModule.isValid(p1))
 	PresenceModelModule.__index = PresenceModelModule
@@ -14,7 +14,7 @@ function PresenceModelModule.new(p1) --[[ Line: 10 ]]
 	return p1
 end
 
-function PresenceModelModule.mock(p1) --[[ Line: 22 ]]
+function PresenceModelModule.mock(p1)
 	-- upvalues: PresenceModelModule (copy)
 	local P1 = p1 or {}
 	
@@ -31,7 +31,7 @@ function PresenceModelModule.mock(p1) --[[ Line: 22 ]]
 	}))
 end
 
-function PresenceModelModule.format(p1) --[[ Line: 40 ]]
+function PresenceModelModule.format(p1)
 	-- upvalues: CryoModule (copy), EnumsModule (copy)
 	return CryoModule.Dictionary.join(p1, {
 		userPresenceType = EnumsModule.PresenceType.fromRawValue(p1.userPresenceType)
@@ -47,7 +47,7 @@ PresenceModelModule.isValid = TModule.interface({
 	rootPlaceId = TModule.optional(TModule.union(TModule.numberPositive, TModule.string)),
 	universeId = TModule.optional(TModule.union(TModule.numberPositive, TModule.string)),
 	userId = TModule.union(TModule.numberPositive, TModule.string),
-	userPresenceType = function(p1): boolean --[[ Line: 55 ]]
+	userPresenceType = function(p1): boolean
 		-- upvalues: EnumsModule (copy)
 		return EnumsModule.PresenceType.fromRawValue(p1) ~= nil
 	end

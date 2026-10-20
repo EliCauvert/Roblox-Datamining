@@ -8,7 +8,7 @@ local ProgressShape = FoundationModule.Enums.ProgressShape
 local ProgressSize = FoundationModule.Enums.ProgressSize
 local config = { retry = "Feature.Moments.Action.RetryLoadingComments" }
 
-return function(Frame: Frame) --[[ Line: 25 | Named "CommentsListFooterView" ]]
+return function(Frame: Frame)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), FoundationModule (copy), ProgressShape (copy), ProgressSize (copy), InputSize (copy), ButtonVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	

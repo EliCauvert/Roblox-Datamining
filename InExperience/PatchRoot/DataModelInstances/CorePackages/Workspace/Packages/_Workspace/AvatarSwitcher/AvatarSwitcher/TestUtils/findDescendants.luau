@@ -1,5 +1,5 @@
 ﻿return {
-	findFirstDescendant = function(Object, ClassName, Callback) --[[ Line: 1 ]]
+	findFirstDescendant = function(Object, ClassName, Callback)
 		for _, descendant in Object:GetDescendants() do
 			if descendant:IsA(ClassName) and (Callback == nil or Callback(descendant)) then
 				return descendant
@@ -7,7 +7,7 @@
 		end
 		return nil
 	end,
-	findAllDescendants = function(Object, ClassName) --[[ Line: 14 ]]
+	findAllDescendants = function(Object, ClassName)
 		local List = {}
 		
 		for _, descendant in Object:GetDescendants() do

@@ -72,18 +72,18 @@ local IdentityProtocolModule = {
 }
 IdentityProtocolModule.__index = IdentityProtocolModule
 
-function IdentityProtocolModule.new() --[[ Line: 101 ]]
+function IdentityProtocolModule.new()
 	-- upvalues: MessageBus (copy), IdentityProtocolModule (copy)
 	return (setmetatable({ subscriber = MessageBus.Subscriber.new() }, IdentityProtocolModule))
 end
 
-function IdentityProtocolModule:supportsVerifySNA() --[[ Line: 113 ]]
+function IdentityProtocolModule:supportsVerifySNA()
 	-- upvalues: GetFFlagLuaIdentityProtocolModule (copy), GetFFlagLuaIdentityVerifySNAFunction (copy), PromiseModule (copy), MessageBus (copy)
 	if GetFFlagLuaIdentityProtocolModule() and GetFFlagLuaIdentityVerifySNAFunction() then
-		local NewPromise = PromiseModule.new(function(Callback, _) --[[ Line: 118 ]]
+		local NewPromise = PromiseModule.new(function(Callback, _)
 			-- upvalues: self (copy)
 			local SUPPORTSVERIFYSNAMETHODRESPONSEDESCRIPTOR = self.SUPPORTS_VERIFY_SNA_METHOD_RESPONSE_DESCRIPTOR
-			self.subscriber:subscribeProtocolMethodResponse(SUPPORTSVERIFYSNAMETHODRESPONSEDESCRIPTOR, function(p1) --[[ Line: 120 ]]
+			self.subscriber:subscribeProtocolMethodResponse(SUPPORTSVERIFYSNAMETHODRESPONSEDESCRIPTOR, function(p1)
 				-- upvalues: self (upval), SUPPORTSVERIFYSNAMETHODRESPONSEDESCRIPTOR (copy), Callback (copy)
 				self.subscriber:unsubscribeToProtocolMethodResponse(SUPPORTSVERIFYSNAMETHODRESPONSEDESCRIPTOR)
 				Callback(p1.support)
@@ -97,13 +97,13 @@ function IdentityProtocolModule:supportsVerifySNA() --[[ Line: 113 ]]
 	end
 end
 
-function IdentityProtocolModule:verifySNA(p1) --[[ Line: 142 ]]
+function IdentityProtocolModule:verifySNA(p1)
 	-- upvalues: GetFFlagLuaIdentityProtocolModule (copy), GetFFlagLuaIdentityVerifySNAFunction (copy), PromiseModule (copy), MessageBus (copy)
 	if GetFFlagLuaIdentityProtocolModule() and GetFFlagLuaIdentityVerifySNAFunction() then
-		local NewPromise = PromiseModule.new(function(Callback, _) --[[ Line: 147 ]]
+		local NewPromise = PromiseModule.new(function(Callback, _)
 			-- upvalues: self (copy)
 			local VERIFYSNAMETHODRESPONSEDESCRIPTOR = self.VERIFY_SNA_METHOD_RESPONSE_DESCRIPTOR
-			self.subscriber:subscribeProtocolMethodResponse(VERIFYSNAMETHODRESPONSEDESCRIPTOR, function(p2) --[[ Line: 149 ]]
+			self.subscriber:subscribeProtocolMethodResponse(VERIFYSNAMETHODRESPONSEDESCRIPTOR, function(p2)
 				-- upvalues: self (upval), VERIFYSNAMETHODRESPONSEDESCRIPTOR (copy), Callback (copy)
 				self.subscriber:unsubscribeToProtocolMethodResponse(VERIFYSNAMETHODRESPONSEDESCRIPTOR)
 				Callback(p2.result)
@@ -117,13 +117,13 @@ function IdentityProtocolModule:verifySNA(p1) --[[ Line: 142 ]]
 	end
 end
 
-function IdentityProtocolModule:getPhoneNumber() --[[ Line: 168 ]]
+function IdentityProtocolModule:getPhoneNumber()
 	-- upvalues: GetFFlagLuaIdentityProtocolModule (copy), GetFFlagLuaIdentityGetPhoneNumberFunction (copy), PromiseModule (copy), MessageBus (copy)
 	if GetFFlagLuaIdentityProtocolModule() and GetFFlagLuaIdentityGetPhoneNumberFunction() then
-		local NewPromise = PromiseModule.new(function(Callback, _) --[[ Line: 172 ]]
+		local NewPromise = PromiseModule.new(function(Callback, _)
 			-- upvalues: self (copy)
 			local GETPHONENUMBERMETHODRESPONSEDESCRIPTOR = self.GET_PHONE_NUMBER_METHOD_RESPONSE_DESCRIPTOR
-			self.subscriber:subscribeProtocolMethodResponse(GETPHONENUMBERMETHODRESPONSEDESCRIPTOR, function(p1) --[[ Line: 174 ]]
+			self.subscriber:subscribeProtocolMethodResponse(GETPHONENUMBERMETHODRESPONSEDESCRIPTOR, function(p1)
 				-- upvalues: self (upval), GETPHONENUMBERMETHODRESPONSEDESCRIPTOR (copy), Callback (copy)
 				self.subscriber:unsubscribeToProtocolMethodResponse(GETPHONENUMBERMETHODRESPONSEDESCRIPTOR)
 				Callback(p1.result)
@@ -137,13 +137,13 @@ function IdentityProtocolModule:getPhoneNumber() --[[ Line: 168 ]]
 	end
 end
 
-function IdentityProtocolModule:supportsGetPhoneNumber() --[[ Line: 197 ]]
+function IdentityProtocolModule:supportsGetPhoneNumber()
 	-- upvalues: GetFFlagLuaIdentityProtocolModule (copy), GetFFlagLuaIdentityGetPhoneNumberFunction (copy), PromiseModule (copy), MessageBus (copy)
 	if GetFFlagLuaIdentityProtocolModule() and GetFFlagLuaIdentityGetPhoneNumberFunction() then
-		local NewPromise = PromiseModule.new(function(Callback, _) --[[ Line: 202 ]]
+		local NewPromise = PromiseModule.new(function(Callback, _)
 			-- upvalues: self (copy)
 			local SUPPORTSGETPHONENUMBERMETHODRESPONSEDESCRIPTOR = self.SUPPORTS_GET_PHONE_NUMBER_METHOD_RESPONSE_DESCRIPTOR
-			self.subscriber:subscribeProtocolMethodResponse(SUPPORTSGETPHONENUMBERMETHODRESPONSEDESCRIPTOR, function(p1) --[[ Line: 204 ]]
+			self.subscriber:subscribeProtocolMethodResponse(SUPPORTSGETPHONENUMBERMETHODRESPONSEDESCRIPTOR, function(p1)
 				-- upvalues: self (upval), SUPPORTSGETPHONENUMBERMETHODRESPONSEDESCRIPTOR (copy), Callback (copy)
 				self.subscriber:unsubscribeToProtocolMethodResponse(SUPPORTSGETPHONENUMBERMETHODRESPONSEDESCRIPTOR)
 				Callback(p1.support)
@@ -157,13 +157,13 @@ function IdentityProtocolModule:supportsGetPhoneNumber() --[[ Line: 197 ]]
 	end
 end
 
-function IdentityProtocolModule:getSMSOTP() --[[ Line: 227 ]]
+function IdentityProtocolModule:getSMSOTP()
 	-- upvalues: GetFFlagLuaIdentityProtocolModule (copy), GetFFlagLuaIdentityGetSMSOTPFunction (copy), PromiseModule (copy), MessageBus (copy)
 	if GetFFlagLuaIdentityProtocolModule() and GetFFlagLuaIdentityGetSMSOTPFunction() then
-		local NewPromise = PromiseModule.new(function(Callback, _) --[[ Line: 231 ]]
+		local NewPromise = PromiseModule.new(function(Callback, _)
 			-- upvalues: self (copy)
 			local GETSMSOTPMETHODRESPONSEDESCRIPTOR = self.GET_SMS_OTP_METHOD_RESPONSE_DESCRIPTOR
-			self.subscriber:subscribeProtocolMethodResponse(GETSMSOTPMETHODRESPONSEDESCRIPTOR, function(p1) --[[ Line: 233 ]]
+			self.subscriber:subscribeProtocolMethodResponse(GETSMSOTPMETHODRESPONSEDESCRIPTOR, function(p1)
 				-- upvalues: self (upval), GETSMSOTPMETHODRESPONSEDESCRIPTOR (copy), Callback (copy)
 				self.subscriber:unsubscribeToProtocolMethodResponse(GETSMSOTPMETHODRESPONSEDESCRIPTOR)
 				Callback(p1.result)
@@ -177,13 +177,13 @@ function IdentityProtocolModule:getSMSOTP() --[[ Line: 227 ]]
 	end
 end
 
-function IdentityProtocolModule:supportsGetSMSOTP() --[[ Line: 256 ]]
+function IdentityProtocolModule:supportsGetSMSOTP()
 	-- upvalues: GetFFlagLuaIdentityProtocolModule (copy), GetFFlagLuaIdentityGetSMSOTPFunction (copy), PromiseModule (copy), MessageBus (copy)
 	if GetFFlagLuaIdentityProtocolModule() and GetFFlagLuaIdentityGetSMSOTPFunction() then
-		local NewPromise = PromiseModule.new(function(Callback, _) --[[ Line: 261 ]]
+		local NewPromise = PromiseModule.new(function(Callback, _)
 			-- upvalues: self (copy)
 			local SUPPORTSGETSMSOTPMETHODRESPONSEDESCRIPTOR = self.SUPPORTS_GET_SMS_OTP_METHOD_RESPONSE_DESCRIPTOR
-			self.subscriber:subscribeProtocolMethodResponse(SUPPORTSGETSMSOTPMETHODRESPONSEDESCRIPTOR, function(p1) --[[ Line: 263 ]]
+			self.subscriber:subscribeProtocolMethodResponse(SUPPORTSGETSMSOTPMETHODRESPONSEDESCRIPTOR, function(p1)
 				-- upvalues: self (upval), SUPPORTSGETSMSOTPMETHODRESPONSEDESCRIPTOR (copy), Callback (copy)
 				self.subscriber:unsubscribeToProtocolMethodResponse(SUPPORTSGETSMSOTPMETHODRESPONSEDESCRIPTOR)
 				Callback(p1.support)

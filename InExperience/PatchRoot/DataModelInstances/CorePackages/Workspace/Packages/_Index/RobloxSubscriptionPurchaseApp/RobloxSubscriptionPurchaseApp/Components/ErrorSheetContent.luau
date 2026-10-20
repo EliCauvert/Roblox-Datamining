@@ -17,7 +17,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FillBehavior = FoundationModule.Enums.FillBehavior
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
-local function mapErrorReasonToCopy(UseSignalStateResult, p1) --[[ Line: 32 ]]
+local function mapErrorReasonToCopy(UseSignalStateResult, p1)
 	-- upvalues: ErrorReasonModule (copy)
 	local Entry = ({
 		[ErrorReasonModule.GenericError] = { p1.GenericErrorTitle, p1.GenericErrorBody },
@@ -30,7 +30,7 @@ local function mapErrorReasonToCopy(UseSignalStateResult, p1) --[[ Line: 32 ]]
 	return if Entry then { title = Entry[1], body = Entry[2] } else { title = p1.GenericErrorTitle, body = p1.GenericErrorBody }
 end
 
-return function() --[[ Line: 63 | Named "useErrorSheetSlots" ]]
+return function()
 	-- upvalues: RobloxSubscriptionStoreModule (copy), SignalsReactModule (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), mapErrorReasonToCopy (copy), CompleteRobloxSubscriptionUpsellFlowModule (copy), Sheet (copy), View (copy), Text (copy), Icon (copy), IconName (copy), Button (copy), FillBehavior (copy), ButtonVariant (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(RobloxSubscriptionStoreModule.get().getErrorReason)
 	local UseTokensResult = UseTokensFunction()
@@ -45,16 +45,16 @@ return function() --[[ Line: 63 | Named "useErrorSheetSlots" ]]
 		ReferralIneligibleBody = "Feature.RobloxSubscription.Description.NoLongerValidReferralGenericError",
 		ReferralSelfReferralBody = "Feature.RobloxSubscription.Message.AlreadySubscribed"
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 79 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: mapErrorReasonToCopy (upval), UseSignalStateResult (copy), UseLocalizationResult (copy)
 		return (mapErrorReasonToCopy(UseSignalStateResult, UseLocalizationResult))
 	end, { UseSignalStateResult, UseLocalizationResult })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 83 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: CompleteRobloxSubscriptionUpsellFlowModule (upval)
 		CompleteRobloxSubscriptionUpsellFlowModule()
 	end, {})
 	
-	return ReactModule.useMemo(function() --[[ Line: 87 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), Sheet (upval), View (upval), Text (upval), UseMemoResult (copy), Icon (upval), IconName (upval), UseTokensResult (copy), Button (upval), UseLocalizationResult (copy), UseResult (copy), FillBehavior (upval), ButtonVariant (upval)
 		return {
 			Header = ReactModule.createElement(Sheet.Header, { hasCloseAffordance = true }, {

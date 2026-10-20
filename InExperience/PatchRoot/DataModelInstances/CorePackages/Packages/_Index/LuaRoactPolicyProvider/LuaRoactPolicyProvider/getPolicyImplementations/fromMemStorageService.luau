@@ -8,7 +8,7 @@ local FixPolicyStalePlayerUpdates = game:DefineFastFlag("FixPolicyStalePlayerUpd
 local ClearPolicyOnLogout = game:DefineFastFlag("ClearPolicyOnLogout", false)
 local Default = if FFlagLogFirstGuacRead then require(game:GetService("CorePackages").Workspace.Packages.LoggingProtocol).default else nil
 
-return function(p1) --[[ Line: 21 ]]
+return function(p1)
 	-- upvalues: HttpService (copy), MemStorageService (copy), Players (copy), CacheReadParsePolicy (copy), ClearPolicyOnLogout (copy), FixPolicyStalePlayerUpdates (copy), FFlagLogAllGuacRead (copy), Default (ref), FFlagLogFirstGuacRead (copy)
 	local P0 = p1 or {}
 	P0.HttpService = P0.HttpService or HttpService
@@ -22,11 +22,11 @@ return function(p1) --[[ Line: 21 ]]
 	local PlayersService = P0.PlayersService
 	local Flag = false
 	
-	return function(Text) --[[ Line: 36 ]]
+	return function(Text)
 		-- upvalues: PlayersService (copy), HttpService1 (copy), CacheReadParsePolicy (upval), ClearPolicyOnLogout (upval), MemStorageService1 (copy), FixPolicyStalePlayerUpdates (upval), FFlagLogAllGuacRead (upval), Default (upval), FFlagLogFirstGuacRead (upval), Flag (ref)
 		assert(Text, "expected behavior")
 		
-		local function _(): string --[[ Line: 39 | Named "getStoreKey" ]]
+		local function _(): string
 			-- upvalues: PlayersService (upval), Text (copy)
 			local UserId = -1
 			local LocalPlayer = PlayersService.LocalPlayer
@@ -44,10 +44,10 @@ return function(p1) --[[ Line: 21 ]]
 		local v2 = nil
 		local BindableEvent = Instance.new("BindableEvent")
 		
-		local function onPolicyUpdated(Input1) --[[ Line: 57 ]]
+		local function onPolicyUpdated(Input1)
 			-- upvalues: Input (ref), HttpService1 (upval), v2 (ref), BindableEvent (copy)
 			if Input1 ~= Input and Input1 and #Input1 > 0 then
-				local Success, Result = pcall(function() --[[ Line: 61 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: HttpService1 (upval), Input1 (copy)
 					return HttpService1:JSONDecode(Input1)
 				end)
@@ -63,7 +63,7 @@ return function(p1) --[[ Line: 21 ]]
 		if CacheReadParsePolicy then
 			local Connection = nil
 			
-			local function invalidateForKeyChange() --[[ Line: 77 ]]
+			local function invalidateForKeyChange()
 				-- upvalues: ClearPolicyOnLogout (upval), v1 (ref), v2 (ref), Input (ref), BindAndFireResult (ref), PlayersService (upval), Text (copy), Text1 (copy), MemStorageService1 (upval), onPolicyUpdated (copy)
 				local Key = if ClearPolicyOnLogout then v1 else nil
 				v2 = nil
@@ -91,14 +91,14 @@ return function(p1) --[[ Line: 21 ]]
 				BindAndFireResult = MemStorageService1:BindAndFire(Text2, onPolicyUpdated)
 			end
 			
-			local function localPlayerChanged() --[[ Line: 104 ]]
+			local function localPlayerChanged()
 				-- upvalues: Connection (ref), PlayersService (upval), FixPolicyStalePlayerUpdates (upval), invalidateForKeyChange (copy), v2 (ref)
 				if Connection then
 					Connection:Disconnect()
 					Connection = nil
 				end
 				if PlayersService.LocalPlayer then
-					Connection = PlayersService.LocalPlayer:GetPropertyChangedSignal("UserId"):Connect(function() --[[ Line: 110 ]]
+					Connection = PlayersService.LocalPlayer:GetPropertyChangedSignal("UserId"):Connect(function()
 						-- upvalues: FixPolicyStalePlayerUpdates (upval), invalidateForKeyChange (upval), v2 (upval)
 						if FixPolicyStalePlayerUpdates then
 							invalidateForKeyChange()
@@ -122,7 +122,7 @@ return function(p1) --[[ Line: 21 ]]
 			localPlayerChanged()
 		end
 		return {
-			read = function() --[[ Line: 129 ]]
+			read = function()
 				-- upvalues: CacheReadParsePolicy (upval), v2 (ref), PlayersService (upval), Text (copy), MemStorageService1 (upval), HttpService1 (upval), FFlagLogAllGuacRead (upval), Default (upval), FFlagLogFirstGuacRead (upval), Flag (upval), Input (ref)
 				if CacheReadParsePolicy and v2 then
 					return v2
@@ -136,7 +136,7 @@ return function(p1) --[[ Line: 21 ]]
 				local Item = MemStorageService1:GetItem("GUAC:" .. UserId .. ":" .. Text)
 				
 				if Item and #Item > 0 then
-					local Success, Result = pcall(function() --[[ Line: 136 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: HttpService1 (upval), Item (copy)
 						return HttpService1:JSONDecode(Item)
 					end)
@@ -156,7 +156,7 @@ return function(p1) --[[ Line: 21 ]]
 				end
 				return nil
 			end,
-			onPolicyChanged = function(Callback: (any) -> ()) --[[ Line: 158 ]]
+			onPolicyChanged = function(Callback: (any) -> ())
 				-- upvalues: PlayersService (upval), Text (copy), BindableEvent (copy), BindAndFireResult (ref), v1 (ref), v2 (ref), MemStorageService1 (upval), onPolicyUpdated (copy)
 				local UserId = -1
 				local LocalPlayer = PlayersService.LocalPlayer

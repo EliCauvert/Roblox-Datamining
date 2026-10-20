@@ -7,7 +7,7 @@ local Image = FoundationModule.Image
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local GuiService = game:GetService("GuiService")
 
-return function(p1) --[[ Line: 22 | Named "PlusHeroContent" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), GuiService (copy), ReactModule (copy), View (copy), Image (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsNotViewportDisplaySizeMatch = GuiService.ViewportDisplaySize ~= Enum.DisplaySize.Small

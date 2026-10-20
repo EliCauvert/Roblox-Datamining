@@ -1,4 +1,4 @@
-﻿return function(Text: string, p1, p2, p3, p4) --[[ Line: 7 | Named "checkAndFormatPossibleLink" ]]
+﻿return function(Text: string, p1, p2, p3, p4)
 	if Text == nil or Text == "" or typeof(Text) ~= "string" then
 		return false, Text
 	end

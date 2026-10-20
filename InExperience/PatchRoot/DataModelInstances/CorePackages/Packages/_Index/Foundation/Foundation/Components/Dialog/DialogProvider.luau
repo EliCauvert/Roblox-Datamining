@@ -6,11 +6,11 @@ local UseOverlayModule = require(Foundation.Providers.Overlay.useOverlay)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local DialogContextModule = require(script.Parent.DialogContext)
 
-return function(p1) --[[ Line: 23 | Named "DialogProvider" ]]
+return function(p1)
 	-- upvalues: UseOverlayModule (copy), UseTokensModule (copy), ReactModule (copy), GetResponsiveSizeModule (copy), DialogContextModule (copy)
 	local UseOverlayModuleResult = UseOverlayModule()
 	local UseTokensModuleResult = UseTokensModule()
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 27 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 		-- upvalues: UseOverlayModuleResult (copy), GetResponsiveSizeModule (upval), p1 (copy), UseTokensModuleResult (copy)
 		return if UseOverlayModuleResult then GetResponsiveSizeModule(UseOverlayModuleResult.AbsoluteSize.X, p1.size, UseTokensModuleResult) else p1.responsiveSize or p1.size
 	end)
@@ -19,7 +19,7 @@ return function(p1) --[[ Line: 23 | Named "DialogProvider" ]]
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
 	
 	return ReactModule.createElement(DialogContextModule.Provider, {
-		value = ReactModule.useMemo(function() --[[ Line: 41 ]]
+		value = ReactModule.useMemo(function()
 			-- upvalues: p1 (copy), UseStateResult (copy), UseStateResult2 (copy), UseStateResult1 (copy), UseStateResult2_1 (copy), UseRefResult (copy), UseStateResult3 (copy), UseStateResult2_2 (copy)
 			return {
 				size = p1.size,

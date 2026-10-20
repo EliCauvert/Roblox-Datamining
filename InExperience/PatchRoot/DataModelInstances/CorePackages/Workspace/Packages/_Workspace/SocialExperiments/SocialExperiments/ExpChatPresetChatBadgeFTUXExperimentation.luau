@@ -7,7 +7,7 @@ local ExpChatEnablePresetChatBadgeFTUXExperimentation = game:DefineFastFlag("Exp
 local ExpChatPresetChatIconBadgeOverride = game:DefineFastInt("ExpChatPresetChatIconBadgeOverride", 0)
 local Flag = false
 
-local function _() --[[ Line: 21 | Named "getChatIconBadged" ]]
+local function _()
 	-- upvalues: ExperimentCacheManager (copy), ExpChatPresetChatBadgeFTUXExperimentLayer (copy), ExpChatPresetChatBadgeFTUXVariable (copy)
 	local LayerVariables = ExperimentCacheManager.default:getLayerVariables(ExpChatPresetChatBadgeFTUXExperimentLayer)
 	
@@ -15,7 +15,7 @@ local function _() --[[ Line: 21 | Named "getChatIconBadged" ]]
 end
 
 return {
-	getShouldShowPresetChatIconBadge = function(): boolean --[[ Line: 32 ]]
+	getShouldShowPresetChatIconBadge = function(): boolean
 		-- upvalues: ExpChatPresetChatIconBadgeOverride (copy), ExpChatEnablePresetChatBadgeFTUXExperimentation (copy), FFlagExpChatPresetChatBadgeExperimentCleanup (copy), ExperimentCacheManager (copy), ExpChatPresetChatBadgeFTUXExperimentLayer (copy), ExpChatPresetChatBadgeFTUXVariable (copy)
 		if ExpChatPresetChatIconBadgeOverride == 1 then
 			return true
@@ -30,14 +30,14 @@ return {
 			return not FFlagExpChatPresetChatBadgeExperimentCleanup
 		end
 	end,
-	logExposure = function() --[[ Line: 63 ]]
+	logExposure = function()
 		-- upvalues: ExpChatEnablePresetChatBadgeFTUXExperimentation (copy), Flag (ref), ExperimentCacheManager (copy), ExpChatPresetChatBadgeFTUXExperimentLayer (copy), ExpChatPresetChatBadgeFTUXVariable (copy)
 		if not ExpChatEnablePresetChatBadgeFTUXExperimentation or Flag then return end
 		local LayerVariables = ExperimentCacheManager.default:getLayerVariables(ExpChatPresetChatBadgeFTUXExperimentLayer)
 		
 		if (if LayerVariables and LayerVariables[ExpChatPresetChatBadgeFTUXVariable] ~= nil then LayerVariables[ExpChatPresetChatBadgeFTUXVariable] else nil) ~= nil then
 			Flag = true
-			pcall(function() --[[ Line: 73 ]]
+			pcall(function()
 				-- upvalues: ExperimentCacheManager (upval), ExpChatPresetChatBadgeFTUXExperimentLayer (upval)
 				ExperimentCacheManager.default:logLayerExposure(ExpChatPresetChatBadgeFTUXExperimentLayer)
 			end)

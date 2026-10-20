@@ -1,7 +1,7 @@
 ﻿local UserInputService = require(script:FindFirstAncestor("Foundation").Utility.Wrappers).Services.UserInputService
 local t = {}
 
-return function(Key) --[[ Line: 13 ]]
+return function(Key)
 	-- upvalues: t (copy), UserInputService (copy)
 	if t[Key] then
 		return t[Key]

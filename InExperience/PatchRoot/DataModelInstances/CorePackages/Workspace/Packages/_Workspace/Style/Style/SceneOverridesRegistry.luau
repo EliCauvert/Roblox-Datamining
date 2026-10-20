@@ -5,11 +5,11 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local ColorMode = FoundationModule.Enums.ColorMode
 local GetSceneOverridesStoreModule = require(script.Parent.getSceneOverridesStore)
 
-return function(p1) --[[ Line: 14 | Named "SceneOverridesRegistry" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ColorMode (copy), GetSceneOverridesStoreModule (copy)
 	local IsActive = p1.isActive
 	local UseTokensResult = UseTokensFunction()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 18 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseTokensResult (copy), ColorMode (upval)
 		local GrayColor3 = UseTokensResult.Color.Extended.Gray.Gray_300.Color3
 		local GrayColor3_1 = UseTokensResult.Color.Extended.Gray.Gray_400.Color3
@@ -45,14 +45,14 @@ return function(p1) --[[ Line: 14 | Named "SceneOverridesRegistry" ]]
 			FogColor = GrayColor3_6:Lerp(SurfaceColor3, 0.3)
 		}
 	end, { UseTokensResult })
-	ReactModule.useEffect(function() --[[ Line: 59 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: GetSceneOverridesStoreModule (upval), IsActive (copy), UseMemoResult (copy)
 		local SceneOverridesStoreModule = GetSceneOverridesStoreModule()
 		
 		if not IsActive then return end
 		SceneOverridesStoreModule.setSceneOverrides(UseMemoResult)
 		
-		return function() --[[ Line: 66 ]]
+		return function()
 			-- upvalues: SceneOverridesStoreModule (copy)
 			SceneOverridesStoreModule.setSceneOverrides(nil)
 		end

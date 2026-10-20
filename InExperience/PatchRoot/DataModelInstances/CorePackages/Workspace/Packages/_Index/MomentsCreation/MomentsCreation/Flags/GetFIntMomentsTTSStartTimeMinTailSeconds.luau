@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("MomentsTTSStartTimeMinTailSeconds", 1)
 
-return function() --[[ Line: 5 ]]
+return function()
 	return game:GetFastInt("MomentsTTSStartTimeMinTailSeconds")
 end

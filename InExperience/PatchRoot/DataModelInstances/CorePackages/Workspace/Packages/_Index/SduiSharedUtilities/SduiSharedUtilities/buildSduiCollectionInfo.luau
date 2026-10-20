@@ -7,7 +7,7 @@ local GetPreferredTextSizeLineBudgetModule = require(SduiSharedUtilities.getPref
 local FIntLuaAppSduiCarouselPlaceholderHeaderHeightPx = SharedFlagsModule.FIntLuaAppSduiCarouselPlaceholderHeaderHeightPx
 local FFlagSduiPreferredTextSizeLineBudgets = SharedFlagsModule.FFlagSduiPreferredTextSizeLineBudgets
 
-return function(p1, p2, p3) --[[ Line: 30 | Named "buildSduiCollectionInfo" ]]
+return function(p1, p2, p3)
 	-- upvalues: DisplayModule (copy), CollectionViewsModule (copy), FFlagSduiPreferredTextSizeLineBudgets (copy), Parent (copy), GetPreferredTextSizeLineBudgetModule (copy), FIntLuaAppSduiCarouselPlaceholderHeaderHeightPx (copy)
 	local DisplayStore = DisplayModule.GetDisplayStore(false)
 	local MainCollectionLayoutStore = CollectionViewsModule.getMainCollectionLayoutStore(false)

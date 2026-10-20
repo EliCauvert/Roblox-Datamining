@@ -2,7 +2,7 @@
 local ArgCheckModule = require(Parent.ArgCheck)
 local _ = require(Parent.AvatarExperienceNavigation)
 
-return require(Parent.Rodux).makeActionCreator(script.Name, function(AvatarRoute) --[[ Line: 9 ]]
+return require(Parent.Rodux).makeActionCreator(script.Name, function(AvatarRoute)
 	-- upvalues: ArgCheckModule (copy)
 	ArgCheckModule.isType(AvatarRoute, "table", "avatarRoute")
 	

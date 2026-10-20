@@ -13,11 +13,11 @@ local IconSize = UIBloxModule.App.ImageSet.Enum.IconSize
 local Images = UIBloxModule.App.ImageSet.Images
 local WithStyleFunction = UIBloxModule.Style.withStyle
 
-local function _(Text) --[[ Line: 34 | Named "renderHeaderBarCenter" ]]
+local function _(Text)
 	-- upvalues: WithStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
-	return function() --[[ Line: 35 ]]
+	return function()
 		-- upvalues: WithStyleFunction (upval), ReactModule (upval), Text (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
-		return WithStyleFunction(function(p1) --[[ Line: 36 ]]
+		return WithStyleFunction(function(p1)
 			-- upvalues: ReactModule (upval), Text (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 			local Theme = p1.Theme
 			local _Font = p1.Font
@@ -39,9 +39,9 @@ local function _(Text) --[[ Line: 34 | Named "renderHeaderBarCenter" ]]
 	end
 end
 
-local _ = function(OnActivated) --[[ Line: 59 | Named "renderHeaderBarLeft" ]]
+local _ = function(OnActivated)
 	-- upvalues: ReactModule (copy), IconButton (copy), IconSize (copy), Images (copy)
-	return function() --[[ Line: 60 ]]
+	return function()
 		-- upvalues: ReactModule (upval), IconButton (upval), IconSize (upval), Images (upval), OnActivated (copy)
 		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -63,9 +63,9 @@ local _ = function(OnActivated) --[[ Line: 59 | Named "renderHeaderBarLeft" ]]
 	end
 end
 
-local _ = function(OnActivated, Text, Title, Text1, p1, OnClose) --[[ Line: 81 | Named "renderHeaderBarRight" ]]
+local _ = function(OnActivated, Text, Title, Text1, p1, OnClose)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), Button (copy), ButtonVariant (copy), InputSize (copy)
-	return function() --[[ Line: 89 ]]
+	return function()
 		-- upvalues: ReactModule (upval), FoundationModule (upval), Title (copy), Text1 (copy), p1 (copy), OnClose (copy), Button (upval), ButtonVariant (upval), InputSize (upval), OnActivated (copy), Text (copy)
 		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -96,11 +96,11 @@ local _ = function(OnActivated, Text, Title, Text1, p1, OnClose) --[[ Line: 81 |
 	end
 end
 
-return function(p1) --[[ Line: 119 | Named "LandscapeModeHeader" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), HeaderBar (copy), IconButton (copy), IconSize (copy), Images (copy), FoundationModule (copy), Button (copy), ButtonVariant (copy), InputSize (copy), WithStyleFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local BackAction = p1.backAction
 	
-	local function RenderLeft() --[[ Line: 60 ]]
+	local function RenderLeft()
 		-- upvalues: ReactModule (upval), IconButton (upval), IconSize (upval), Images (upval), BackAction (copy)
 		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -128,7 +128,7 @@ return function(p1) --[[ Line: 119 | Named "LandscapeModeHeader" ]]
 	local IsCoachmarkOpen = p1.isCoachmarkOpen
 	local OnCoachmarkClose = p1.onCoachmarkClose
 	
-	local function RenderRight() --[[ Line: 89 ]]
+	local function RenderRight()
 		-- upvalues: ReactModule (upval), FoundationModule (upval), CoachmarkTitle (copy), CoachmarkText (copy), IsCoachmarkOpen (copy), OnCoachmarkClose (copy), Button (upval), ButtonVariant (upval), InputSize (upval), NextAction (copy), NextText (copy)
 		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -173,9 +173,9 @@ return function(p1) --[[ Line: 119 | Named "LandscapeModeHeader" ]]
 			barHeight = 72,
 			renderLeft = RenderLeft,
 			renderRight = RenderRight,
-			renderCenter = function() --[[ Line: 35 ]]
+			renderCenter = function()
 				-- upvalues: WithStyleFunction (upval), ReactModule (upval), TitleText (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
-				return WithStyleFunction(function(p2) --[[ Line: 36 ]]
+				return WithStyleFunction(function(p2)
 					-- upvalues: ReactModule (upval), TitleText (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 					local Theme = p2.Theme
 					local _Font = p2.Font

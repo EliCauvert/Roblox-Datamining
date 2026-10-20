@@ -1,6 +1,6 @@
 ﻿local Players = game:GetService("Players")
 
-return function(p1, p2, p3, UniverseId, AutoAdvance, IsYouTubeVideo, PlaceId) --[[ Line: 12 | Named "sendMediaGalleryMediaChanged" ]]
+return function(p1, p2, p3, UniverseId, AutoAdvance, IsYouTubeVideo, PlaceId)
 	-- upvalues: Players (copy)
 	local LocalPlayer = Players.LocalPlayer
 	p1:setRBXEventStream(p2, "mediaGalleryMediaChanged", {

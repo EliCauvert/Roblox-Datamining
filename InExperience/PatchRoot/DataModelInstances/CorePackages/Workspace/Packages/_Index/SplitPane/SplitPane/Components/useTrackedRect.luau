@@ -1,17 +1,17 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("SplitPane").Parent.React)
 local IsSplitPaneEducationalTourGuiObjectVisibleModule = require(script.Parent.isSplitPaneEducationalTourGuiObjectVisible)
 
-return function(Frame: Frame) --[[ Line: 8 ]]
+return function(Frame: Frame)
 	-- upvalues: ReactModule (copy), IsSplitPaneEducationalTourGuiObjectVisibleModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-	ReactModule.useLayoutEffect(function() --[[ Line: 11 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: Frame (copy), UseStateResult2 (copy), IsSplitPaneEducationalTourGuiObjectVisibleModule (upval)
 		if Frame == nil then
 			UseStateResult2(nil)
 			
 			return
 		end
-		local function updateRect() --[[ Line: 17 ]]
+		local function updateRect()
 			-- upvalues: IsSplitPaneEducationalTourGuiObjectVisibleModule (upval), Frame (upval), UseStateResult2 (upval)
 			if IsSplitPaneEducationalTourGuiObjectVisibleModule(Frame) then
 				local AbsolutePosition = Frame.AbsolutePosition
@@ -36,7 +36,7 @@ return function(Frame: Frame) --[[ Line: 8 ]]
 			end
 			Gui = Gui.Parent
 		end
-		return function() --[[ Line: 41 ]]
+		return function()
 			-- upvalues: Connections (copy)
 			for _, connection in Connections do
 				connection:Disconnect()

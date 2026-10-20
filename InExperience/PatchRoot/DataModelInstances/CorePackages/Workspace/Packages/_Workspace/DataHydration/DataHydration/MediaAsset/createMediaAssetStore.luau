@@ -5,12 +5,12 @@ local CreateDataResolverModule = require(DataHydration.createDataResolver)
 local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.MediaAssetStoreTypes)
 
-return function() --[[ Line: 17 | Named "createMediaAssetStore" ]]
+return function()
 	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy)
 	local DataCacheModule = CreateDataCacheModule()
 	local DataResolverModule = CreateDataResolverModule({
 		cache = DataCacheModule,
-		fetchFn = function(_) --[[ Line: 21 ]]
+		fetchFn = function(_)
 			-- upvalues: PromiseModule (upval)
 			return PromiseModule.resolve({})
 		end

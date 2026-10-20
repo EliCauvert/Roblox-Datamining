@@ -13,7 +13,7 @@ local config = {
 local Logger = require(Parent.Loggers).Logger
 Logger:addSink({
 	maxLevel = Logger.Levels.fromString("trace"),
-	log = function(_, p1, _) --[[ Line: 38 ]]
+	log = function(_, p1, _)
 		print(p1)
 	end
 })
@@ -21,9 +21,9 @@ LoggerModule:setParent(Logger)
 
 return {
 	roact = RoactModule,
-	mapStory = function(p1) --[[ Line: 47 ]]
+	mapStory = function(p1)
 		-- upvalues: config (copy), RoactModule (copy), MockProvidersModule (copy), CryoModule (copy)
-		return function(p2) --[[ Line: 48 ]]
+		return function(p2)
 			-- upvalues: config (upval), RoactModule (upval), MockProvidersModule (upval), p1 (copy), CryoModule (upval)
 			local Props = p2 and p2.definition and p2.definition.props or {}
 			

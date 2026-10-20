@@ -2,9 +2,9 @@
 local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
 local SetCentralOverlayFunction = require(Parent.CentralOverlay).Actions.SetCentralOverlay
 
-return function(Title, Body, CloseAlert, ButtonText, ShowCloseButton) --[[ Line: 6 ]]
+return function(Title, Body, CloseAlert, ButtonText, ShowCloseButton)
 	-- upvalues: SetCentralOverlayFunction (copy), CentralOverlayType (copy)
-	return function(p1) --[[ Line: 7 ]]
+	return function(p1)
 		-- upvalues: SetCentralOverlayFunction (upval), CentralOverlayType (upval), Title (copy), Body (copy), CloseAlert (copy), ButtonText (copy), ShowCloseButton (copy)
 		p1:dispatch(SetCentralOverlayFunction(CentralOverlayType.CloseOnlyInteractiveAlert, {
 			title = Title,

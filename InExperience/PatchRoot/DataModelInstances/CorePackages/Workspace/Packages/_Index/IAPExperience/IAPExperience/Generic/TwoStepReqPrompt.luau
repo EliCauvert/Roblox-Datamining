@@ -12,7 +12,7 @@ ExtendResult.defaultProps = {
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function ExtendResult.render(p1) --[[ Line: 35 ]]
+function ExtendResult.render(p1)
 	-- upvalues: RoactModule (copy), MultiTextLocalizerModule (copy)
 	return RoactModule.createElement(MultiTextLocalizerModule, {
 		keys = {
@@ -28,14 +28,14 @@ function ExtendResult.render(p1) --[[ Line: 35 ]]
 				key = "Authentication.TwoStepVerification.Action.GoToSecurity"
 			}
 		},
-		render = function(p2) --[[ Line: 54 ]]
+		render = function(p2)
 			-- upvalues: p1 (copy)
 			return p1:renderAlert(p2)
 		end
 	})
 end
 
-function ExtendResult.renderAlert(p1, p2) --[[ Line: 60 ]]
+function ExtendResult.renderAlert(p1, p2)
 	-- upvalues: ButtonType (copy), RoactModule (copy), InteractiveAlert (copy), Images (copy)
 	local Props = p1.props
 	

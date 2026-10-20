@@ -6,7 +6,7 @@ local _ = require(Parent.Common.DirectRecommendationTypes)
 local FFlagLuaAppEnableSduiHomePage = require(Parent1.SharedFlags).FFlagLuaAppEnableSduiHomePage
 local EntityType = require(Parent1.UserList).Enums.EntityType
 
-return function(p1) --[[ Line: 27 | Named "usePrimaryCta" ]]
+return function(p1)
 	-- upvalues: UsePYMKCarouselUserButtonsModule (copy), EntityType (copy), FFlagLuaAppEnableSduiHomePage (copy), React (copy)
 	local UsePYMKCarouselUserButtonsModuleResult = UsePYMKCarouselUserButtonsModule({
 		userId = p1.entityId,
@@ -17,7 +17,7 @@ return function(p1) --[[ Line: 27 | Named "usePrimaryCta" ]]
 		recommendation = if FFlagLuaAppEnableSduiHomePage then p1.recommendation else nil
 	})
 	
-	return React.useMemo(function() --[[ Line: 37 ]]
+	return React.useMemo(function()
 		-- upvalues: UsePYMKCarouselUserButtonsModuleResult (copy)
 		local UsePYMKCarouselUserButtonsModuleResultResultEntry = UsePYMKCarouselUserButtonsModuleResult()[1]
 		

@@ -15,7 +15,7 @@ local config = {
 	retryLabel = "Feature.Moments.Action.Retry"
 }
 
-local function CenteredOverlay(p1) --[[ Line: 60 ]]
+local function CenteredOverlay(p1)
 	-- upvalues: ReactModule (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), View (copy)
 	return ReactModule.createElement(FocusRoot, {
 		isAutoFocusRoot = true,
@@ -28,7 +28,7 @@ local function CenteredOverlay(p1) --[[ Line: 60 ]]
 	})
 end
 
-return function(p1) --[[ Line: 74 | Named "FeedStateView" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), CenteredOverlay (copy), Text (copy), View (copy), Button (copy), FoundationModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local Status = p1.status

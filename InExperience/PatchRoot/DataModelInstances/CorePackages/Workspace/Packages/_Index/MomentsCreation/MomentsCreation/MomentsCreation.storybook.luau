@@ -11,9 +11,9 @@ return {
 	name = "MomentsCreation",
 	roact = ReactModule,
 	reactRoblox = require(Parent.Dev.ReactRoblox),
-	mapStory = function(p1) --[[ Line: 24 ]]
+	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), FoundationProvider (copy), config (copy), ColorMode (copy), Device (copy)
-		return function(p2) --[[ Line: 25 ]]
+		return function(p2)
 			-- upvalues: ReactModule (upval), FoundationProvider (upval), config (upval), ColorMode (upval), Device (upval), p1 (copy)
 			return ReactModule.createElement(FoundationProvider, {
 				colorMode = config[p2.theme] or ColorMode.Dark,

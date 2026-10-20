@@ -1,7 +1,7 @@
 ﻿local _ = require(script:FindFirstAncestor("DataHydration").Parent.MomentsTypes)
 local IsCanonicalNonzeroUuidModule = require(script.Parent.isCanonicalNonzeroUuid)
 
-local function decodeReactions(Reactions) --[[ Line: 13 ]]
+local function decodeReactions(Reactions)
 	-- upvalues: IsCanonicalNonzeroUuidModule (copy)
 	if type(Reactions) ~= "table" or type(Reactions.counts) ~= "table" then
 		return nil
@@ -33,7 +33,7 @@ local function decodeReactions(Reactions) --[[ Line: 13 ]]
 	return { counts = Counts, userReaction = UserReaction }
 end
 
-return function(p1) --[[ Line: 69 | Named "convertApiCommentToComment" ]]
+return function(p1)
 	-- upvalues: decodeReactions (copy)
 	return if type(p1) == "table" and (type(p1.commentId) == "string" and p1.commentId ~= "" and (type(p1.feedItemId) == "string" and p1.feedItemId ~= "" and (type(p1.authorUserId) == "string" and p1.authorUserId ~= "" and (type(p1.text) == "string" and (type(p1.createdAt) == "string" and p1.createdAt ~= "" and (p1.isAuthoredByViewer == nil or type(p1.isAuthoredByViewer) == "boolean")))))) then {
 		status = "Active",

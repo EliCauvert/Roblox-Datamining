@@ -13,7 +13,7 @@ return {
 	requiredData = { ValidationEnumsModule.SharedDataMember.outerCagesData },
 	conditionalData = {},
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 34 ]]
+	run = function(p1, p2)
 		-- upvalues: WrapTargetCageUVReferenceValuesModule (copy), UGCValidationService (copy), ErrorSourceStringsModule (copy)
 		for PartName, value in p2.outerCagesData do
 			local WrapTargetCageUVReferenceValuesModuleEntry = WrapTargetCageUVReferenceValuesModule[PartName]

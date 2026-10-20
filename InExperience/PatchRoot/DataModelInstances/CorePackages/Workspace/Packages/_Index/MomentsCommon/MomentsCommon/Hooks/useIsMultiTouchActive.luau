@@ -3,15 +3,15 @@ local UserInputService = game:GetService("UserInputService")
 local UseEffectFunction = ReactModule.useEffect
 local UseStateFunction = ReactModule.useState
 
-return function(p1) --[[ Line: 27 | Named "useIsMultiTouchActive" ]]
+return function(p1)
 	-- upvalues: UseStateFunction (copy), UseEffectFunction (copy), UserInputService (copy)
 	local UseStateResult, UseStateResult2 = UseStateFunction(false)
-	UseEffectFunction(function() --[[ Line: 30 ]]
+	UseEffectFunction(function()
 		-- upvalues: p1 (copy), UseStateResult2 (copy), UserInputService (upval)
 		if p1 then
 			local t = {}
 			
-			local function _() --[[ Line: 39 | Named "refreshFromActiveTouches" ]]
+			local function _()
 				-- upvalues: t (copy), UseStateResult2 (upval)
 				local Count = 0
 				
@@ -21,7 +21,7 @@ return function(p1) --[[ Line: 27 | Named "useIsMultiTouchActive" ]]
 				UseStateResult2(Count >= 2)
 			end
 			
-			local TouchStartedConnection = UserInputService.TouchStarted:Connect(function(Touch) --[[ Line: 47 ]]
+			local TouchStartedConnection = UserInputService.TouchStarted:Connect(function(Touch)
 				-- upvalues: t (copy), UseStateResult2 (upval)
 				t[Touch] = true
 				local Count = 0
@@ -31,7 +31,7 @@ return function(p1) --[[ Line: 27 | Named "useIsMultiTouchActive" ]]
 				end
 				UseStateResult2(Count >= 2)
 			end)
-			local TouchEndedConnection = UserInputService.TouchEnded:Connect(function(Hit) --[[ Line: 51 ]]
+			local TouchEndedConnection = UserInputService.TouchEnded:Connect(function(Hit)
 				-- upvalues: t (copy), UseStateResult2 (upval)
 				t[Hit] = nil
 				local Count = 0
@@ -42,7 +42,7 @@ return function(p1) --[[ Line: 27 | Named "useIsMultiTouchActive" ]]
 				UseStateResult2(Count >= 2)
 			end)
 			
-			return function() --[[ Line: 56 ]]
+			return function()
 				-- upvalues: TouchStartedConnection (copy), TouchEndedConnection (copy)
 				TouchStartedConnection:Disconnect()
 				TouchEndedConnection:Disconnect()

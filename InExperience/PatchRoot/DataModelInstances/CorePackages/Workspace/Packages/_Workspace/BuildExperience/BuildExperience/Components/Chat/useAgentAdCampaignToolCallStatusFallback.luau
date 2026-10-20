@@ -6,15 +6,15 @@ local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local AdCampaignToolCallStatusModule = require(Parent.DataHydration.AdCampaignToolCallStatus)
 local _ = require(BuildExperience.Chat.chatTypes)
-local Computed = SignalsModule.createComputed(function() --[[ Line: 21 ]]
+local Computed = SignalsModule.createComputed(function()
 	return { cardStates = {}, pendingToolCallIds = {} }
 end)
 
-local function _(List): string --[[ Line: 31 | Named "toolCallIdsKey" ]]
+local function _(List): string
 	return table.concat(List, "\0")
 end
 
-return function(List, p1) --[[ Line: 35 | Named "useAgentAdCampaignToolCallStatusFallback" ]]
+return function(List, p1)
 	-- upvalues: Players (copy), AdCampaignToolCallStatusModule (copy), ReactModule (copy), Computed (copy), SignalsModule (copy), SignalsReactModule (copy)
 	local LocalPlayer = Players.LocalPlayer
 	local P0 = p1 or (if LocalPlayer == nil or LocalPlayer.UserId <= 0 then nil else LocalPlayer.UserId)
@@ -26,9 +26,9 @@ return function(List, p1) --[[ Line: 35 | Named "useAgentAdCampaignToolCallStatu
 		UseRefResult.current = { key = Joined, value = table.clone(List) }
 	end
 	local Value = UseRefResult.current.value
-	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 48 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: P0 (copy), Value (copy), Computed (upval), SignalsModule (upval), AdCampaignToolCallStatusStore (copy)
-		return if P0 == nil or #Value == 0 then Computed else SignalsModule.createComputed(function(p2) --[[ Line: 52 ]]
+		return if P0 == nil or #Value == 0 then Computed else SignalsModule.createComputed(function(p2)
 			-- upvalues: Value (upval), AdCampaignToolCallStatusStore (upval), P0 (upval)
 			local CardStates = {}
 			local PendingToolCallIds = {}
@@ -60,7 +60,7 @@ return function(List, p1) --[[ Line: 35 | Named "useAgentAdCampaignToolCallStatu
 		end)
 	end, { AdCampaignToolCallStatusStore, P0, Value })))
 	local UseRefResult1 = ReactModule.useRef({})
-	ReactModule.useEffect(function() --[[ Line: 82 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: P0 (copy), UseSignalStateResult (copy), UseRefResult1 (copy), AdCampaignToolCallStatusStore (copy)
 		if P0 == nil or next(UseSignalStateResult.pendingToolCallIds) == nil then return end
 		local Current = UseRefResult1.current
@@ -79,7 +79,7 @@ return function(List, p1) --[[ Line: 35 | Named "useAgentAdCampaignToolCallStatu
 			
 			if not IsCurrentEntryAbove then
 				DelayedThread = nil
-				DelayedThread = task.delay(5 * 2 ^ CurrentEntry, function() --[[ Line: 100 ]]
+				DelayedThread = task.delay(5 * 2 ^ CurrentEntry, function()
 					-- upvalues: DelayedThread (ref), t (copy), AdCampaignToolCallStatusStore (upval), P0 (upval), pendingToolCallId (copy), Current (copy), CurrentEntry (copy)
 					if DelayedThread ~= nil then
 						t[DelayedThread] = nil
@@ -98,7 +98,7 @@ return function(List, p1) --[[ Line: 35 | Named "useAgentAdCampaignToolCallStatu
 				t[DelayedThread] = true
 			end
 		end
-		return function() --[[ Line: 120 ]]
+		return function()
 			-- upvalues: t (copy)
 			for i in t do
 				task.cancel(i)

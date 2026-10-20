@@ -32,20 +32,20 @@ local FFlagAXUpdateOffersEndsUIWithBadge = AvatarExperienceFlagsModule.FFlagAXUp
 local SplitPaneStore = if FFlagEnableSplitPane then require(Parent.SplitPane).SplitPaneStore else nil
 local UseSignalState = if FFlagEnableSplitPane then require(Parent.SignalsReact).useSignalState else nil
 
-local function selectDeviceOrientation(p1) --[[ Line: 46 ]]
+local function selectDeviceOrientation(p1)
 	return p1.DeviceOrientation
 end
 
-local function selectStatusBarHeight(p1) --[[ Line: 73 ]]
+local function selectStatusBarHeight(p1)
 	return if p1 and p1.TopBar and p1.TopBar.statusBarHeight then p1.TopBar.statusBarHeight else 0
 end
 
-local function OnActivated() --[[ Line: 77 ]]
+local function OnActivated()
 	-- upvalues: RobloxSubscriptionPurchaseAppModule (copy), SurfaceName (copy), SurfaceContext (copy)
-	RobloxSubscriptionPurchaseAppModule.initiateRobloxSubscriptionPurchase({ showBackButton = true }, { onFlowComplete = function(_) --[[ Line: 81 ]] end }, nil, SurfaceName.CatalogMultiItemCheckoutPage, SurfaceContext.InApp, nil, nil)
+	RobloxSubscriptionPurchaseAppModule.initiateRobloxSubscriptionPurchase({ showBackButton = true }, { onFlowComplete = function(_) end }, nil, SurfaceName.CatalogMultiItemCheckoutPage, SurfaceContext.InApp, nil, nil)
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 87 | Named "CheckoutPage" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: Parent (copy), FoundationModule (copy), FFlagEnableSplitPane (copy), UseSignalState (copy), SplitPaneStore (copy), UseSelectorFunction (copy), selectDeviceOrientation (copy), ResponsiveModule (copy), selectStatusBarHeight (copy), UseLocalizationFunction (copy), FFlagAXMISWithOffers (copy), ReactModule (copy), Constants (copy), FFlagAXUpdateOffersEndsUIWithBadge (copy), OfferExpiryBadge (copy), FFlagAXMISWithBlackbird (copy), CheckoutPageHeaderModule (copy), CheckoutPageBodyModule (copy), FFlagAXEnableExpiredUserLookCheckout (copy), FFlagAXDurables2Option (copy), CryoModule (copy), CheckoutTotalLinesModule (copy), TutilsModule (copy), FFlagAXMISSmallUIChanges (copy), CheckoutBuyButtonModule (copy), CheckoutUnavailableButtonModule (copy), BlackbirdUpsellBanner (copy), OnActivated (copy)
 	local IAPExperienceModule = require(Parent.IAPExperience)
 	local PurchasePromptModule = require(Parent.PurchasePrompt)
@@ -62,7 +62,7 @@ return ReactModule.memo(function(p1) --[[ Line: 87 | Named "CheckoutPage" ]]
 		addToMyMakeupLooksLabel = "Feature.Avatar.Label.Title.AddToMyMakeupLooks",
 		saveOptionsLabel = if FFlagAXMISWithOffers then "Feature.Catalog.Label.SaveOptions" else nil
 	})
-	local UseMemoResult = ReactModule.useMemo(function(): boolean --[[ Line: 116 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): boolean
 		-- upvalues: p1 (copy), Constants (upval)
 		for _, cartItem in p1.cartItems do
 			if not Constants.MAKEUP_LOOK_ASSET_TYPES[cartItem.itemSubType] then
@@ -75,7 +75,7 @@ return ReactModule.memo(function(p1) --[[ Line: 87 | Named "CheckoutPage" ]]
 	local LANDSCAPEUIWIDTHPERCENTAGE = if FFlagEnableSplitPane and UseSignalStateResult then 1 - UseSignalStateResult1 else Constants.LANDSCAPE_UI_WIDTH_PERCENTAGE
 	local _UDim2: UDim2 = if IsPortraitMatch then UDim2.fromScale(1, 1) else UDim2.fromScale(UseSignalStateResult2, 1)
 	local _UDim2_1: UDim2 = if IsPortraitMatch then UDim2.fromScale(0, 0) else UDim2.fromScale(LANDSCAPEUIWIDTHPERCENTAGE, 0)
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 135 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: FFlagAXMISWithOffers (upval), p1 (copy), ReactModule (upval), FFlagAXUpdateOffersEndsUIWithBadge (upval), FoundationModule (upval), UseTokensResult (copy), OfferExpiryBadge (upval)
 		if not FFlagAXMISWithOffers then
 			return nil
@@ -91,7 +91,7 @@ return ReactModule.memo(function(p1) --[[ Line: 87 | Named "CheckoutPage" ]]
 					BorderSizePixel = 0,
 					Selectable = false,
 					LayoutOrder = 0,
-					[ReactModule.Event.Activated] = function() --[[ Line: 153 ]]
+					[ReactModule.Event.Activated] = function()
 						-- upvalues: p1 (upval), i (copy)
 						if p1.handleDeselectOfferId then
 							p1.handleDeselectOfferId(i)
@@ -106,7 +106,7 @@ return ReactModule.memo(function(p1) --[[ Line: 87 | Named "CheckoutPage" ]]
 							LayoutOrder = 1,
 							label = value.localizedDescription,
 							isChecked = value.selected,
-							onActivated = function() --[[ Line: 168 ]]
+							onActivated = function()
 								-- upvalues: p1 (upval), i (copy)
 								if p1.handleDeselectOfferId then
 									p1.handleDeselectOfferId(i)
@@ -126,7 +126,7 @@ return ReactModule.memo(function(p1) --[[ Line: 87 | Named "CheckoutPage" ]]
 							label = "",
 							LayoutOrder = 1,
 							isChecked = value.selected,
-							onActivated = function() --[[ Line: 190 ]]
+							onActivated = function()
 								-- upvalues: p1 (upval), i (copy)
 								if p1.handleDeselectOfferId then
 									p1.handleDeselectOfferId(i)

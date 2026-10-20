@@ -3,12 +3,12 @@ local ReactModule = require(Parent.React)
 local ChatConversationTelemetryLayerModule = require(Parent.AppChat.ChatConversationTelemetryLayer)
 local ExpChatConversationListAdapterModule = require(script.Parent.Parent.Parent.ConversationList.ExpChatConversationListAdapter)
 
-return function(p1) --[[ Line: 24 | Named "FriendsChatConversationTelemetryProviders" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ExpChatConversationListAdapterModule (copy), ChatConversationTelemetryLayerModule (copy)
 	local ConversationId = p1.conversationId
 	
 	return ReactModule.createElement(ChatConversationTelemetryLayerModule.Provider, {
-		value = ReactModule.useCallback(function() --[[ Line: 30 ]]
+		value = ReactModule.useCallback(function()
 			-- upvalues: ConversationId (copy), ExpChatConversationListAdapterModule (upval)
 			local ModerationType = nil
 			local UserPendingStatus = nil

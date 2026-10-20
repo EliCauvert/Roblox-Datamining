@@ -39,7 +39,7 @@ TooltipContainer.defaultProps = {
 	orientation = TooltipOrientationModule.Bottom
 }
 
-function TooltipContainer.init(p1) --[[ Line: 61 ]]
+function TooltipContainer.init(p1)
 	-- upvalues: RoactModule (copy), OtterModule (copy), config1 (copy)
 	p1.visible = true
 	local Binding2
@@ -49,9 +49,9 @@ function TooltipContainer.init(p1) --[[ Line: 61 ]]
 	p1.progressMotor:setGoal(OtterModule.spring(1, config1))
 end
 
-function TooltipContainer.render(p1) --[[ Line: 72 ]]
+function TooltipContainer.render(p1)
 	-- upvalues: WithStyleModule (copy), GetTextSizeModule (copy), GetTextHeightModule (copy), GetPositionInfoModule (copy), LerpModule (copy), DivideTransparencyModule (copy), RoactModule (copy), Label (copy), config (copy), GenericTextLabelModule (copy)
-	return WithStyleModule(function(p2) --[[ Line: 73 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: GetTextSizeModule (upval), p1 (copy), GetTextHeightModule (upval), GetPositionInfoModule (upval), LerpModule (upval), DivideTransparencyModule (upval), RoactModule (upval), Label (upval), config (upval), GenericTextLabelModule (upval)
 		local _Font = p2.Font
 		local Theme = p2.Theme
@@ -69,11 +69,11 @@ function TooltipContainer.render(p1) --[[ Line: 72 ]]
 		local TextHeightModule1 = p1.props.headerText and GetTextHeightModule(p1.props.headerText, CaptionHeader.Font, ScaledBaseSize, Smallest) or 0
 		local YOffset: number = p1.props.headerText and TextHeightModule1 + TextHeightModule + 24 + 4 or TextHeightModule + 24
 		local PositionInfoModule = GetPositionInfoModule(XOffset, YOffset, p1.props.orientation, p1.props.triggerPosition, p1.props.triggerSize, p1.props.screenSize, p1.props.position)
-		local MapResult = p1.progress:map(function(p3) --[[ Line: 124 ]]
+		local MapResult = p1.progress:map(function(p3)
 			-- upvalues: Theme (copy), LerpModule (upval), DivideTransparencyModule (upval)
 			return LerpModule(1, DivideTransparencyModule(Theme.BackgroundMuted.Transparency, 1), p3)
 		end)
-		local MapResult1 = p1.progress:map(function(p3) --[[ Line: 130 ]]
+		local MapResult1 = p1.progress:map(function(p3)
 			-- upvalues: Theme (copy), LerpModule (upval), DivideTransparencyModule (upval)
 			return LerpModule(1, DivideTransparencyModule(Theme.TextEmphasis.Transparency, 2), p3)
 		end)
@@ -82,7 +82,7 @@ function TooltipContainer.render(p1) --[[ Line: 72 ]]
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			Visible = p1.visible,
-			Position = p1.progress:map(function(p3) --[[ Line: 113 ]]
+			Position = p1.progress:map(function(p3)
 				-- upvalues: p1 (upval), PositionInfoModule (copy)
 				local Position = if p1.props.position then p1.props.position else p1.props.isDirectChild and PositionInfoModule.position or PositionInfoModule.absolutePosition
 				
@@ -157,11 +157,11 @@ function TooltipContainer.render(p1) --[[ Line: 72 ]]
 	end)
 end
 
-function TooltipContainer.didMount(p1) --[[ Line: 212 ]]
+function TooltipContainer.didMount(p1)
 	p1.progressMotor:start()
 end
 
-function TooltipContainer.didUpdate(p1, p2, _) --[[ Line: 216 ]]
+function TooltipContainer.didUpdate(p1, p2, _)
 	if p2.triggerPosition ~= p1.props.triggerPosition then
 		if p1.props.triggerPosition.Y < 0 or p1.props.screenSize.Y < p1.props.triggerPosition.Y + p1.props.triggerSize.Y then
 			p1.visible = false
@@ -172,7 +172,7 @@ function TooltipContainer.didUpdate(p1, p2, _) --[[ Line: 216 ]]
 	end
 end
 
-function TooltipContainer.willUnmount(p1) --[[ Line: 229 ]]
+function TooltipContainer.willUnmount(p1)
 	p1.progressMotor:destroy()
 	p1.progressMotor = nil
 end

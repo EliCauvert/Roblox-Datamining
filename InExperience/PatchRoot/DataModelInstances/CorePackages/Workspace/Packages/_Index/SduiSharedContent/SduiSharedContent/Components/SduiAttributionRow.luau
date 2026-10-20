@@ -10,7 +10,7 @@ local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local FFlagSduiAttributionRowV2 = require(Parent.SharedFlags).FFlagSduiAttributionRowV2
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
-return ReactModule.memo(function(p1) --[[ Line: 61 | Named "SduiAttributionRow" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), FFlagSduiAttributionRowV2 (copy), ReactModule (copy), View (copy), FoundationModule (copy), Image (copy), Text (copy), Icon (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local LayoutOrder = p1.layoutOrder
 	local ZIndex = p1.zIndex

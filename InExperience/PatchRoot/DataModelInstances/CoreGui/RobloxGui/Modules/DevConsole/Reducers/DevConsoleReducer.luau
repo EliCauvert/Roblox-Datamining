@@ -13,7 +13,7 @@ local DebugVisualizationsDataModule = require(Parent.DebugVisualizationsData)
 local ScriptProfilerModule = require(Parent.ScriptProfiler)
 local LuauHeapModule = require(Parent.LuauHeap)
 
-return function(p1, p2) --[[ Line: 18 ]]
+return function(p1, p2)
 	-- upvalues: DevConsoleDisplayOptionsModule (copy), MainViewModule (copy), MemoryDataModule (copy), NetworkDataModule (copy), ScriptsDataModule (copy), DataStoresDataModule (copy), ServerStatsDataModule (copy), ServerJobsDataModule (copy), ActionBindingsDataModule (copy), MicroProfilerModule (copy), DebugVisualizationsDataModule (copy), ScriptProfilerModule (copy), LuauHeapModule (copy)
 	local P0 = p1 or {}
 	

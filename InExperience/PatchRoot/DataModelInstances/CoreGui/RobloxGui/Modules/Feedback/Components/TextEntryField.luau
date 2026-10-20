@@ -29,7 +29,7 @@ TextEntryField.validateProps = TModule.strictInterface({
 	textBoxRef = TModule.optional(TModule.table)
 })
 
-function TextEntryField.init(p1) --[[ Line: 51 ]]
+function TextEntryField.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.textBoxRef = p1.props.textBoxRef or RoactModule.createRef()
 	p1.state = {
@@ -40,9 +40,9 @@ function TextEntryField.init(p1) --[[ Line: 51 ]]
 	}
 end
 
-function TextEntryField.calculateNeedsRescroll(p1, p2, Body) --[[ Line: 62 ]]
+function TextEntryField.calculateNeedsRescroll(p1, p2, Body)
 	-- upvalues: FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy)
-	p1:setState(function(State, p3) --[[ Line: 64 ]]
+	p1:setState(function(State, p3)
 		-- upvalues: Body (copy), p2 (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), TextService (upval)
 		if State.cursorPosition == -1 then
 			return nil
@@ -57,9 +57,9 @@ function TextEntryField.calculateNeedsRescroll(p1, p2, Body) --[[ Line: 62 ]]
 	end)
 end
 
-function TextEntryField.renderWithSelectionCursor(p1, Callback) --[[ Line: 115 ]]
+function TextEntryField.renderWithSelectionCursor(p1, Callback)
 	-- upvalues: WithStyleFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), RoactModule (copy), ImageSetLabel (copy), AssetsModule (copy), NormalizeFontFaceFunction (copy), CursorKind (copy), ThemedTextLabelModule (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 116 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: p1 (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), TextService (upval), RoactModule (upval), ImageSetLabel (upval), AssetsModule (upval), NormalizeFontFaceFunction (upval), Callback (copy), CursorKind (upval), ThemedTextLabelModule (upval)
 		local TextDefault = p2.Theme.TextDefault
 		local Body = p2.Font.Body
@@ -87,13 +87,13 @@ function TextEntryField.renderWithSelectionCursor(p1, Callback) --[[ Line: 115 ]
 				VerticalScrollBarInset = Enum.ScrollBarInset.Always,
 				CanvasPosition = Vector2.new(0, p1.state.canvasPosition),
 				Selectable = false,
-				[RoactModule.Change.CanvasPosition] = function(ScrollFrame) --[[ Line: 159 ]]
+				[RoactModule.Change.CanvasPosition] = function(ScrollFrame)
 					-- upvalues: p1 (upval)
 					p1:setState({ canvasPosition = ScrollFrame.CanvasPosition.Y })
 				end,
-				[RoactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 165 ]]
+				[RoactModule.Change.AbsoluteSize] = function(Frame)
 					-- upvalues: p1 (upval), p2 (copy), Body (copy)
-					p1:setState({ scrollingFrameHeight = Frame.AbsoluteSize.Y }, function() --[[ Line: 166 ]]
+					p1:setState({ scrollingFrameHeight = Frame.AbsoluteSize.Y }, function()
 						-- upvalues: p1 (upval), p2 (upval), Body (upval)
 						p1:calculateNeedsRescroll(p2, Body)
 					end)
@@ -118,16 +118,16 @@ function TextEntryField.renderWithSelectionCursor(p1, Callback) --[[ Line: 115 ]
 					MultiLine = true,
 					SelectionImageObject = Callback(CursorKind.InputFields),
 					[RoactModule.Ref] = p1.textBoxRef,
-					[RoactModule.Change.Text] = function(TextBox) --[[ Line: 194 ]]
+					[RoactModule.Change.Text] = function(TextBox)
 						-- upvalues: p1 (upval), p2 (copy), Body (copy)
-						local Success, Result = pcall(function(): number --[[ Line: 195 ]]
+						local Success, Result = pcall(function(): number
 							-- upvalues: TextBox (copy)
 							return utf8.len(utf8.nfcnormalize(TextBox.Text))
 						end)
 						
 						if Success and p1.props.maxTextLength >= Result then
 							p1.props.textChanged(TextBox.Text)
-							p1:setState({ cursorPosition = TextBox.CursorPosition }, function() --[[ Line: 204 ]]
+							p1:setState({ cursorPosition = TextBox.CursorPosition }, function()
 								-- upvalues: p1 (upval), p2 (upval), Body (upval)
 								p1:calculateNeedsRescroll(p2, Body)
 							end)
@@ -137,16 +137,16 @@ function TextEntryField.renderWithSelectionCursor(p1, Callback) --[[ Line: 115 ]
 							TextBox.Text = p1.props.text
 						end
 					end,
-					[RoactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 209 ]]
+					[RoactModule.Change.AbsoluteSize] = function(Frame)
 						-- upvalues: p1 (upval), p2 (copy), Body (copy)
-						p1:setState({ textBoxWidth = Frame.AbsoluteSize.X }, function() --[[ Line: 210 ]]
+						p1:setState({ textBoxWidth = Frame.AbsoluteSize.X }, function()
 							-- upvalues: p1 (upval), p2 (upval), Body (upval)
 							p1:calculateNeedsRescroll(p2, Body)
 						end)
 					end,
-					[RoactModule.Change.CursorPosition] = function(TextBox) --[[ Line: 215 ]]
+					[RoactModule.Change.CursorPosition] = function(TextBox)
 						-- upvalues: p1 (upval), p2 (copy), Body (copy)
-						p1:setState({ cursorPosition = TextBox.CursorPosition }, function() --[[ Line: 216 ]]
+						p1:setState({ cursorPosition = TextBox.CursorPosition }, function()
 							-- upvalues: p1 (upval), p2 (upval), Body (upval)
 							p1:calculateNeedsRescroll(p2, Body)
 						end)
@@ -170,15 +170,15 @@ function TextEntryField.renderWithSelectionCursor(p1, Callback) --[[ Line: 115 ]
 	end)
 end
 
-function TextEntryField.render(p1) --[[ Line: 240 ]]
+function TextEntryField.render(p1)
 	-- upvalues: WithSelectionCursorProviderFunction (copy)
-	return WithSelectionCursorProviderFunction(function(p2) --[[ Line: 241 ]]
+	return WithSelectionCursorProviderFunction(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithSelectionCursor(p2)
 	end)
 end
 
-function TextEntryField.didUpdate(p1, p2) --[[ Line: 246 ]]
+function TextEntryField.didUpdate(p1, p2)
 	if p1.props.enabled or not p2.enabled then
 		if p1.props.enabled and not p2.enabled and p1.props.autoFocusOnEnabled and p1.textBoxRef.current then
 			p1.textBoxRef.current:CaptureFocus()
@@ -190,7 +190,7 @@ function TextEntryField.didUpdate(p1, p2) --[[ Line: 246 ]]
 	end
 end
 
-return RoactModule.forwardRef(function(p1, TextBoxRef) --[[ Line: 259 ]]
+return RoactModule.forwardRef(function(p1, TextBoxRef)
 	-- upvalues: RoactModule (copy), TextEntryField (copy), CryoModule (copy)
 	return RoactModule.createElement(TextEntryField, CryoModule.Dictionary.join(p1, { textBoxRef = TextBoxRef }))
 end)

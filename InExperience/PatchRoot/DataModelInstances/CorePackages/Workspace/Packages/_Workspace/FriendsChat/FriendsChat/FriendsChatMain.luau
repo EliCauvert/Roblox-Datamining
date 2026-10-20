@@ -39,11 +39,11 @@ local FFlagFriendsChatIxpScreenExposureModule = require(script.Parent.Flags.FFla
 local Exposure = IXPNavigationUtilsModule.createExposureHandler((require(script.Parent.Flags.FStringFriendsChatLandingPageIxpLayer)))
 local Exposure1 = IXPNavigationUtilsModule.createExposureHandler((require(script.Parent.Flags.FStringFriendsChatConversationPageIxpLayer)))
 
-local function FriendsChatMainContent(p1) --[[ Line: 77 ]]
+local function FriendsChatMainContent(p1)
 	-- upvalues: UseFriendsChatVisibilityTelemetryModule (copy), UseChatWindowSettingsModule (copy), ReactModule (copy), GetChatModerationStatusDataHydrationModule (copy), GetFriendsChatNavigationStoreModule (copy), GetFriendsChatRealtimeStoreModule (copy), FFlagFriendsChatConversationListFocusNav (copy), ReactFocusNavigationModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy), UsePartyChatReactiveFeatureRestrictionModule (copy), FFlagExpChatEnableFriendsTab (copy), ExpChatPerfTracker (copy), FriendsChatTabNameModule (copy), SignalsReactModule (copy), FFlagFriendsChatIxpScreenExposureModule (copy), Exposure1 (copy), Exposure (copy), Players (copy), Localization (copy), LocalizationService (copy), FFlagFriendsChatFocusInputOnConversationActivatedModule (copy), ChatSessionRefCountModule (copy), InExperienceAppChatModalModule (copy), EnumScreensModule (copy), SocialCommonModule (copy), FriendsChatLandingTelemetryProvidersModule (copy), ConversationListModule (copy), FriendsChatConversationTelemetryProvidersModule (copy), FriendsChatConversationWindowModule (copy), GetFFlagAppChatEnableRootedNavigationModule (copy), LocalizationProvider (copy), FoundationModule (copy)
 	UseFriendsChatVisibilityTelemetryModule()
 	local UseChatWindowSettingsModuleResult = UseChatWindowSettingsModule()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 81 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseChatWindowSettingsModuleResult (copy)
 		return {
 			BackgroundColor3 = UseChatWindowSettingsModuleResult.ChatWindowBackgroundColor3,
@@ -58,26 +58,26 @@ local function FriendsChatMainContent(p1) --[[ Line: 77 ]]
 	if FFlagAppChatReactiveFeatureRestrictions then
 		UsePartyChatReactiveFeatureRestrictionModule(true)
 	end
-	ReactModule.useEffect(function() --[[ Line: 111 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FriendsChatRealtimeStoreModule (copy)
 		FriendsChatRealtimeStoreModule.markFriendsTabEntered()
 	end, { FriendsChatRealtimeStoreModule })
-	ReactModule.useEffect(function() --[[ Line: 114 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagExpChatEnableFriendsTab (upval), FFlagAppChatReactiveFeatureRestrictions (upval), ChatModerationStatusDataHydrationModule (copy)
 		if FFlagExpChatEnableFriendsTab and not FFlagAppChatReactiveFeatureRestrictions then
 			ChatModerationStatusDataHydrationModule.getUserStatus()
 		end
 	end, { ChatModerationStatusDataHydrationModule })
-	ReactModule.useEffect(function() --[[ Line: 120 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ExpChatPerfTracker (upval), FriendsChatTabNameModule (upval)
 		ExpChatPerfTracker.finish(ExpChatPerfTracker.Events.ChatWindowMountTTI, {}, { tabName = FriendsChatTabNameModule })
 		
-		return function() --[[ Line: 122 ]]
+		return function()
 			-- upvalues: ExpChatPerfTracker (upval)
 			ExpChatPerfTracker.cancelAll()
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 126 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ExpChatPerfTracker (upval), FriendsChatTabNameModule (upval)
 		ExpChatPerfTracker.finish(ExpChatPerfTracker.Events.ChatWindowTabSwitchTTI, { tabId = FriendsChatTabNameModule }, { tabName = FriendsChatTabNameModule })
 	end, {})
@@ -96,38 +96,38 @@ local function FriendsChatMainContent(p1) --[[ Line: 77 ]]
 	local ParentLayoutOrder = p1.parentLayoutOrder or 1
 	local LocalPlayer = Players.LocalPlayer
 	local Text = if LocalPlayer then tostring(LocalPlayer.UserId) else nil
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 152 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: Localization (upval), LocalizationService (upval)
 		return Localization.new(LocalizationService.RobloxLocaleId)
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 156 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FriendsChatRealtimeStoreModule (copy), UseSignalStateResult (copy)
 		FriendsChatRealtimeStoreModule.setActiveConversationId(UseSignalStateResult)
 		
-		return function() --[[ Line: 158 ]]
+		return function()
 			-- upvalues: FriendsChatRealtimeStoreModule (upval)
 			FriendsChatRealtimeStoreModule.setActiveConversationId(nil)
 		end
 	end, { FriendsChatRealtimeStoreModule, UseSignalStateResult })
-	local UseResult = if FFlagFriendsChatConversationListFocusNav then ReactModule.useCallback(function(): boolean --[[ Line: 171 ]]
+	local UseResult = if FFlagFriendsChatConversationListFocusNav then ReactModule.useCallback(function(): boolean
 		-- upvalues: UseContextResult (ref)
 		return UseContextResult ~= nil and UseContextResult.focusedGuiObject:getValue() ~= nil
 	end, { UseContextResult }) else nil
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 176 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: FFlagFriendsChatConversationListFocusNav (upval), UseResult (ref), FFlagFriendsChatFocusInputOnConversationActivatedModule (upval), FriendsChatNavigationStoreModule (copy)
 		if FFlagFriendsChatConversationListFocusNav and UseResult() or FFlagFriendsChatFocusInputOnConversationActivatedModule then
 			FriendsChatNavigationStoreModule.requestFocusInputBar()
 		end
 		FriendsChatNavigationStoreModule.setSelectedConversationId(p2)
 	end, { FriendsChatNavigationStoreModule, UseResult })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 189 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: FFlagFriendsChatConversationListFocusNav (upval), UseResult (ref), FriendsChatNavigationStoreModule (copy)
 		if FFlagFriendsChatConversationListFocusNav and UseResult() then
 			FriendsChatNavigationStoreModule.requestFocusConversationList()
 		end
 		FriendsChatNavigationStoreModule.setSelectedConversationId(nil)
 	end, { FriendsChatNavigationStoreModule, UseResult })
-	local UseResult3 = ReactModule.useCallback(function(ConversationId) --[[ Line: 198 ]]
+	local UseResult3 = ReactModule.useCallback(function(ConversationId)
 		-- upvalues: ChatSessionRefCountModule (upval), InExperienceAppChatModalModule (upval), EnumScreensModule (upval), SocialCommonModule (upval)
 		ChatSessionRefCountModule.reserve()
 		InExperienceAppChatModalModule.default:openToScreen({
@@ -139,7 +139,7 @@ local function FriendsChatMainContent(p1) --[[ Line: 77 ]]
 			}
 		})
 	end, {})
-	local UseResult4 = ReactModule.useCallback(function(p2) --[[ Line: 210 ]]
+	local UseResult4 = ReactModule.useCallback(function(p2)
 		-- upvalues: FriendsChatNavigationStoreModule (copy)
 		FriendsChatNavigationStoreModule.setSelectedConversationId(p2)
 	end, { FriendsChatNavigationStoreModule })
@@ -182,14 +182,14 @@ local function FriendsChatMainContent(p1) --[[ Line: 77 ]]
 	})
 end
 
-return function(p1) --[[ Line: 265 | Named "FriendsChatMain" ]]
+return function(p1)
 	-- upvalues: Players (copy), LocalizationService (copy), RbxAnalyticsService (copy), UseAppChatUpdateSessionModule (copy), ReactModule (copy), FFlagExpChatEnableFriendsTab (copy), ChatPlacementContextModule (copy), SocialCommonModule (copy), UseGetAndSetRefModule (copy), AppTelemetryLayerModule (copy), FriendsChatMainContent (copy)
 	local LocalPlayer = Players.LocalPlayer
 	local Text: string = if LocalPlayer then tostring(LocalPlayer.UserId) else "unknown"
 	local RobloxLocaleId = LocalizationService.RobloxLocaleId
 	local PlaySessionId = RbxAnalyticsService:GetPlaySessionId()
 	UseAppChatUpdateSessionModule()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 273 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FFlagExpChatEnableFriendsTab (upval), ChatPlacementContextModule (upval), RobloxLocaleId (copy), SocialCommonModule (upval), Text (copy), PlaySessionId (copy)
 		return {
 			context = "platformChat",
@@ -202,7 +202,7 @@ return function(p1) --[[ Line: 265 | Named "FriendsChatMain" ]]
 		}
 	end, { RobloxLocaleId, Text, PlaySessionId })
 	local UseGetAndSetRefModuleResult, UseGetAndSetRefModuleResult2 = UseGetAndSetRefModule(UseMemoResult)
-	ReactModule.useEffect(function() --[[ Line: 290 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseGetAndSetRefModuleResult2 (copy), UseMemoResult (copy)
 		UseGetAndSetRefModuleResult2(UseMemoResult)
 	end, { UseMemoResult, UseGetAndSetRefModuleResult2 })

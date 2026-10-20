@@ -1,11 +1,11 @@
 ﻿return {
-	computeContentTopOffset = function(p1: number, p2, p3): number --[[ Line: 10 ]]
+	computeContentTopOffset = function(p1: number, p2, p3): number
 		return if p1 <= 0 then 0 else math.max(0, p1 / p2 - p3)
 	end,
-	computeInitialScrollY = function(p1: number, p2, p3, p4): number --[[ Line: 26 ]]
+	computeInitialScrollY = function(p1: number, p2, p3, p4): number
 		return (math.max(0, (if p1 <= 0 then 0 else math.max(0, p1 / p2 - p3)) - p4))
 	end,
-	computeInitialScrollYForSize = function(Vector, p1): number --[[ Line: 108 ]]
+	computeInitialScrollYForSize = function(Vector, p1): number
 		local FullBleedAspectRatio = p1.fullBleedAspectRatio
 		local HeaderBarHeight = p1.headerBarHeight
 		local FullBleedOverlapOffset = p1.fullBleedOverlapOffset
@@ -28,7 +28,7 @@
 		end
 		return (math.min(Largest, (math.max(0, math.min(Largest1, Vector.Y * 0.75) - HeaderBarHeight))))
 	end,
-	computeCanvasPaddingTop = function(p1, p2, p3, p4): number --[[ Line: 62 ]]
+	computeCanvasPaddingTop = function(p1, p2, p3, p4): number
 		local Largest = math.max(0, p1 - (if p2 then p3 else 0))
 		
 		if Largest == 0 then
@@ -36,16 +36,16 @@
 		end
 		return Largest
 	end,
-	getNoBannerFadeParams = function(p1: number): number --[[ Line: 40 ]]
+	getNoBannerFadeParams = function(p1: number): number
 		return (math.max(60, p1 * 1.5))
 	end,
-	getHeaderFadeParams = function(p1: number, p2: number, p3: number) --[[ Line: 80 ]]
+	getHeaderFadeParams = function(p1: number, p2: number, p3: number)
 		local Largest = math.max(0, p1 - p3)
 		local v1: boolean = p2 > 0 and p2 < p1
 		
 		return Largest, if v1 then math.max(1, p2 - Largest) else math.max(1, (p1 - Largest) / 3)
 	end,
-	shouldShowStickyBar = function(p1, p2, p3, p4): boolean --[[ Line: 48 ]]
+	shouldShowStickyBar = function(p1, p2, p3, p4): boolean
 		return p2 < p1 or p3 + p4 <= p1
 	end
 }

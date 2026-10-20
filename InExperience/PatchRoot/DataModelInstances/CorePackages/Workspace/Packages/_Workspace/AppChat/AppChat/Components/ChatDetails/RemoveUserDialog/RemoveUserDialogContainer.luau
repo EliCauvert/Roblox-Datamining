@@ -20,23 +20,23 @@ local config = {
 	confirmationTitleKey = "Feature.Chat.Action.Remove",
 	failureTitleKey = "Feature.Chat.Heading.FailedToRemoveUser",
 	failureButtonKey = "Feature.Chat.Action.Confirm",
-	onModalClose = function() --[[ Line: 40 ]] end,
+	onModalClose = function() end,
 	messageKey = if GetFFlagIsSquadEnabledFunction() then "Feature.Chat.Message.RemoveUser.V2" else "Feature.Chat.Message.RemoveUser",
 	failureBodyKey = if GetFFlagIsSquadEnabledFunction() then "Feature.Chat.Message.FailedToRemoveUser.V2" else "Feature.Chat.Message.FailedToRemoveUser"
 }
 
-function RemoveUserDialogContainer(p1) --[[ Line: 57 ]]
+function RemoveUserDialogContainer(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStateFunction (copy), UseDispatchFunction (copy), UseCallbackFunction (copy), AppChatNetworkingModule (copy), UseSelectorFunction (copy), PopulateUserWithStateModule (copy), UseLocalizationFunction (copy), ReactModule (copy), RemoveUserDialogLayoutModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseStateResult, UseStateResult2 = UseStateFunction(true)
 	local UseStateResult1, UseStateResult2_1 = UseStateFunction(false)
 	local UseStateResult3, UseStateResult2_2 = UseStateFunction(false)
 	local UseDispatchResult = UseDispatchFunction()
-	local UseCallbackResult = UseCallbackFunction(function(p2, p3) --[[ Line: 64 ]]
+	local UseCallbackResult = UseCallbackFunction(function(p2, p3)
 		-- upvalues: UseDispatchResult (copy), AppChatNetworkingModule (upval)
 		return UseDispatchResult(AppChatNetworkingModule.rodux.RemoveUserFromConversation.API(p3, p2))
 	end, { UseDispatchResult })
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 68 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: JoinResult (copy), PopulateUserWithStateModule (upval)
 		return {
 			conversationTitle = (p2.ChatAppReducer.Conversations[JoinResult.conversationId] or { title = nil }).title,
@@ -60,17 +60,17 @@ function RemoveUserDialogContainer(p1) --[[ Line: 57 ]]
 			CONVERSATION_TITLE = UseSelectorResult.conversationTitle
 		}
 	}), UseSelectorResult, {
-		onActivated = UseCallbackFunction(function(): boolean --[[ Line: 80 ]]
+		onActivated = UseCallbackFunction(function(): boolean
 			-- upvalues: UseStateResult2_1 (copy), UseStateResult2 (copy), JoinResult (copy), UseCallbackResult (copy), UseStateResult2_2 (copy)
 			UseStateResult2_1(true)
 			UseStateResult2(false)
 			local ConversationId = JoinResult.conversationId
 			
 			if ConversationId then
-				UseCallbackResult(JoinResult.participantId, ConversationId):andThen(function() --[[ Line: 87 ]]
+				UseCallbackResult(JoinResult.participantId, ConversationId):andThen(function()
 					-- upvalues: JoinResult (upval)
 					JoinResult.onModalClose()
-				end):catch(function() --[[ Line: 90 ]]
+				end):catch(function()
 					-- upvalues: UseStateResult2_1 (upval), UseStateResult2 (upval), UseStateResult2_2 (upval)
 					UseStateResult2_1(false)
 					UseStateResult2(true)

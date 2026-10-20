@@ -1,7 +1,7 @@
 ﻿local Players = game:GetService("Players")
 local _ = game:GetService("CorePackages")
 local FaceAnimatorService = game:GetService("FaceAnimatorService")
-require(game:GetService("CoreGui").RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default.participantsUpdate.Event:Connect(function(List) --[[ Line: 14 ]]
+require(game:GetService("CoreGui").RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default.participantsUpdate.Event:Connect(function(List)
 	-- upvalues: Players (copy)
 	for UserId, value in pairs(List) do
 		local Player = Players:GetPlayerByUserId(UserId)
@@ -12,7 +12,7 @@ require(game:GetService("CoreGui").RobloxGui.Modules.VoiceChat.VoiceChatServiceM
 	end
 end)
 
-local function setLocalPlayerVideoAnimationEnabled() --[[ Line: 23 ]]
+local function setLocalPlayerVideoAnimationEnabled()
 	-- upvalues: Players (copy), FaceAnimatorService (copy)
 	local LocalPlayer = Players.LocalPlayer
 	

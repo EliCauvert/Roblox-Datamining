@@ -40,21 +40,21 @@ local config = {
 	Unvailable = "Feature.Catalog.Label.Checkout.Unavailable"
 }
 
-local function _(Name, p1): boolean --[[ Line: 56 | Named "hasAssetTypeLocalizedString" ]]
+local function _(Name, p1): boolean
 	-- upvalues: ASSETTYPELOCALIZED (copy)
 	return Name == Enum.AvatarItemType.Asset.Name and ASSETTYPELOCALIZED[tostring(p1)] ~= nil
 end
 
-local _ = function(Name, p1): boolean --[[ Line: 60 | Named "hasBundleTypeLocalizedString" ]]
+local _ = function(Name, p1): boolean
 	-- upvalues: BUNDLETYPELOCALIZED (copy)
 	return Name == Enum.AvatarItemType.Bundle.Name and BUNDLETYPELOCALIZED[tostring(p1)] ~= nil
 end
 
-local _ = function(Name): string --[[ Line: 64 | Named "getThumbnailType" ]]
+local _ = function(Name): string
 	return if Name == Enum.AvatarItemType.Bundle.Name then "BundleThumbnail" else "Asset"
 end
 
-return ReactModule.memo(function(Frame) --[[ Line: 81 | Named "CheckoutRowItemCard" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: FoundationModule (copy), FFlagAXDurablesForMIS (copy), UseCheckoutRowItemCardViewModelModule (copy), FFlagAXDurables2Option (copy), UseLocalizationFunction (copy), ASSETTYPELOCALIZED (copy), BUNDLETYPELOCALIZED (copy), config (copy), FFlagAXMISOffersChip (copy), OFFERSLOCALIZED (copy), ReactModule (copy), FFlagAXMISWithOffers (copy), PurchaseItemsErrorStatusMapModule (copy), WearTimeOptionButton (copy), FFlagAXGifting (copy), Constants (copy), UseAvatarItemGiftEligibilityFunction (copy), AvatarItemGiftEntryPoint (copy), CatalogRowItemCard (copy), ItemCardThumbnail (copy), FFlagAXMISSmallUIChanges (copy), WearTimeSelectedOptionInList (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local ThumbnailSize = Frame.thumbnailSize or UseTokensResult.Size.Size_2100
@@ -73,7 +73,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 81 | Named "CheckoutRowItemCa
 	local UseLocalizationResult2 = UseLocalizationFunction(config)
 	local UseLocalizationResult3 = if FFlagAXMISOffersChip then UseLocalizationFunction(OFFERSLOCALIZED) else nil
 	local BundleThumbnail: string = if Frame.itemType == Enum.AvatarItemType.Bundle.Name then "BundleThumbnail" else "Asset"
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 103 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Frame (copy), ASSETTYPELOCALIZED (upval), UseLocalizationResult (copy), BUNDLETYPELOCALIZED (upval), UseLocalizationResult1 (copy)
 		local ItemType = Frame.itemType
 		local ItemSubType = Frame.itemSubType
@@ -91,7 +91,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 81 | Named "CheckoutRowItemCa
 		Frame.itemType,
 		Frame.itemSubType
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 116 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: Frame (copy), FFlagAXMISWithOffers (upval), PurchaseItemsErrorStatusMapModule (upval), UseTokensResult (copy), UseLocalizationResult2 (copy), config (upval)
 		local List = {}
 		
@@ -170,7 +170,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 81 | Named "CheckoutRowItemCa
 	local Element = if FFlagAXDurables2Option then ReactModule.createElement(FoundationModule.View, {
 		tag = "row gap-medium align-y-center size-full-0 auto-y",
 		LayoutOrder = 2
-	}, (ReactModule.useMemo(function() --[[ Line: 206 ]]
+	}, (ReactModule.useMemo(function()
 		-- upvalues: Frame (copy), ReactModule (upval), FoundationModule (upval), WearTimeOptionButton (upval), SetSelectedTimedOptionPriceFunction (ref)
 		local Elements = {}
 		
@@ -190,7 +190,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 81 | Named "CheckoutRowItemCa
 								selected = if Frame.selectedTimedOptionIndexInReducer then i == Frame.selectedTimedOptionIndexInReducer else timedOption.selected,
 								priceInRobuxDiscountedByOffers = Frame.priceInRobuxDiscountedByOffers
 							},
-							onActivated = function() --[[ Line: 226 ]]
+							onActivated = function()
 								-- upvalues: Frame (upval), i (copy), SetSelectedTimedOptionPriceFunction (upval)
 								local TimedOption = Frame.timedOptions[i]
 								

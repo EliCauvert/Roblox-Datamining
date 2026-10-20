@@ -12,7 +12,7 @@ local GetFFlagAppChatEnableRootedNavigationModule = require(AppChat.Flags.getFFl
 local EditChatMembersContainerModule = require(script.Parent.EditChatMembersContainer)
 local LoggerModule = require(script.Parent.Logger)
 
-local function renderContainer(Navigation, Conversation, NavigateToConversation, NavigateToToast, SetSystemButtonActivated, SetSystemButtonEnabled) --[[ Line: 20 ]]
+local function renderContainer(Navigation, Conversation, NavigateToConversation, NavigateToToast, SetSystemButtonActivated, SetSystemButtonEnabled)
 	-- upvalues: RoactModule (copy), EditChatMembersContainerModule (copy)
 	return RoactModule.createElement(EditChatMembersContainerModule, {
 		topBarHeight = Navigation.getScreenProps("topBarHeight", 0),
@@ -24,14 +24,14 @@ local function renderContainer(Navigation, Conversation, NavigateToConversation,
 	})
 end
 
-local function RootedEditChatMembersContainer(p1) --[[ Line: 38 ]]
+local function RootedEditChatMembersContainer(p1)
 	-- upvalues: ReactModule (copy), ParentContainerContextModule (copy), LoggerModule (copy), renderContainer (copy)
 	local NavigateToConversationFunction = p1.navigateToConversation
 	local OpenFriendsChatConversationFunction = ReactModule.useContext(ParentContainerContextModule).openFriendsChatConversation
 	
-	return renderContainer(p1.navigation, p1.conversation, ReactModule.useCallback(function(p2) --[[ Line: 42 ]]
+	return renderContainer(p1.navigation, p1.conversation, ReactModule.useCallback(function(p2)
 		-- upvalues: OpenFriendsChatConversationFunction (copy), LoggerModule (upval), NavigateToConversationFunction (copy)
-		OpenFriendsChatConversationFunction(p2):andThen(function(Result) --[[ Line: 43 ]]
+		OpenFriendsChatConversationFunction(p2):andThen(function(Result)
 			-- upvalues: LoggerModule (upval), p2 (copy), NavigateToConversationFunction (upval)
 			if not Result then
 				LoggerModule:warning("Failed to navigate to Friends Chat conversation {}", p2)
@@ -47,13 +47,13 @@ end
 local EditChatMembersScreen = RoactModule.PureComponent:extend("EditChatMembersScreen")
 EditChatMembersScreen.defaultProps = {}
 
-local function _(p1) --[[ Line: 64 | Named "getTabBarVisible" ]]
+local function _(p1)
 	local Navigation = p1 and p1.navigation
 	
 	return if Navigation and Navigation.getScreenProps then Navigation.getScreenProps("wideMode", false) else false
 end
 
-function EditChatMembersScreen.navigationOptions(p1) --[[ Line: 69 ]]
+function EditChatMembersScreen.navigationOptions(p1)
 	local Navigation = p1 and p1.navigation
 	
 	return {
@@ -61,11 +61,11 @@ function EditChatMembersScreen.navigationOptions(p1) --[[ Line: 69 ]]
 	}
 end
 
-function EditChatMembersScreen.init(p1) --[[ Line: 77 ]]
+function EditChatMembersScreen.init(p1)
 	-- upvalues: FFlagAppChatIxpScreenExposureModule (copy), IXPNavigationUtilsModule (copy), LoggerModule (copy), GetFFlagAppChatEnableRootedNavigationModule (copy), EnumScreensModule (copy), GetTopBarStoreModule (copy)
 	p1.ixpSubscription = if FFlagAppChatIxpScreenExposureModule then IXPNavigationUtilsModule.registerExposureOnFocus(p1.props.navigation, "Party.ChatMembersPage") else nil
 	
-	function p1.navigateToConversation(ConversationId) --[[ Line: 83 ]]
+	function p1.navigateToConversation(ConversationId)
 		-- upvalues: LoggerModule (upval), GetFFlagAppChatEnableRootedNavigationModule (upval), p1 (copy), EnumScreensModule (upval)
 		LoggerModule:info("Navigate To Conversation: {} from {screen}", ConversationId)
 		p1.props.navigation.navigate(EnumScreensModule.ChatConversation, if GetFFlagAppChatEnableRootedNavigationModule() then {
@@ -74,24 +74,24 @@ function EditChatMembersScreen.init(p1) --[[ Line: 77 ]]
 		} else { conversationId = ConversationId })
 	end
 	
-	function p1.navigateToToast(p2) --[[ Line: 94 ]]
+	function p1.navigateToToast(p2)
 		-- upvalues: LoggerModule (upval), p1 (copy), EnumScreensModule (upval)
 		LoggerModule:info("Navigate To Toast from {screen}")
 		p1.props.navigation.navigate(EnumScreensModule.RoactChatToast, p2)
 	end
 	
-	function p1.setSystemButtonActivated(SystemButtonActivated) --[[ Line: 99 ]]
+	function p1.setSystemButtonActivated(SystemButtonActivated)
 		-- upvalues: GetTopBarStoreModule (upval), EnumScreensModule (upval)
 		GetTopBarStoreModule(false).setScreenTopBar(EnumScreensModule.EditChatMembers, { systemButtonActivated = SystemButtonActivated })
 	end
 	
-	function p1.setSystemButtonEnabled(SystemButtonEnabled) --[[ Line: 105 ]]
+	function p1.setSystemButtonEnabled(SystemButtonEnabled)
 		-- upvalues: GetTopBarStoreModule (upval), EnumScreensModule (upval)
 		GetTopBarStoreModule(false).setScreenTopBar(EnumScreensModule.EditChatMembers, { systemButtonEnabled = SystemButtonEnabled })
 	end
 end
 
-function EditChatMembersScreen.render(p1) --[[ Line: 112 ]]
+function EditChatMembersScreen.render(p1)
 	-- upvalues: ArgCheckModule (copy), LoggerModule (copy), GetFFlagAppChatEnableRootedNavigationModule (copy), RoactModule (copy), RootedEditChatMembersContainer (copy), renderContainer (copy)
 	local NavigationInEditChatMembersScreen = ArgCheckModule.isNotNil(p1.props.navigation, "navigation in EditChatMembersScreen")
 	local ConversationParam = NavigationInEditChatMembersScreen.getParam("conversation", nil)
@@ -112,7 +112,7 @@ function EditChatMembersScreen.render(p1) --[[ Line: 112 ]]
 	end
 end
 
-function EditChatMembersScreen.didMount(p1) --[[ Line: 142 ]]
+function EditChatMembersScreen.didMount(p1)
 	-- upvalues: LoggerModule (copy), GetTopBarStoreModule (copy), EnumScreensModule (copy)
 	LoggerModule:info("{screen} mounted")
 	GetTopBarStoreModule(false).setScreenTopBar(EnumScreensModule.EditChatMembers, {
@@ -126,7 +126,7 @@ function EditChatMembersScreen.didMount(p1) --[[ Line: 142 ]]
 	p1.setSystemButtonEnabled(false)
 end
 
-function EditChatMembersScreen.willUnmount(p1) --[[ Line: 156 ]]
+function EditChatMembersScreen.willUnmount(p1)
 	-- upvalues: GetTopBarStoreModule (copy), EnumScreensModule (copy)
 	GetTopBarStoreModule(false).clearScreenTopBar(EnumScreensModule.EditChatMembers)
 	

@@ -5,7 +5,7 @@ local list = {
 	"roblox.cn", "roblox.qq.com", "roblox%-cn.com"
 }
 
-return function(p1) --[[ Line: 18 ]]
+return function(p1)
 	-- upvalues: ArgCheckModule (copy), FilterForLinksModule (copy), list (copy)
 	ArgCheckModule.isType(p1, "table", "filterForLinks.text")
 	

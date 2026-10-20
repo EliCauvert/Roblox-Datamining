@@ -7,11 +7,11 @@ local RecordModalSequenceResponseFunction = require(Parent.AppChatNetworking).ht
 local GetSduiApiStoreFunction = require(Parent.SduiSharedUtilities).getSduiApiStore
 local RecordedModalActionsModule = require(SocialServerDrivenUi.Common.recordedModalActions)
 
-local function _(p1) --[[ Line: 17 | Named "orNil" ]]
+local function _(p1)
 	return if typeof(p1) == "string" and p1 ~= "" then p1 else nil
 end
 
-return function(p1, _, p2) --[[ Line: 21 | Named "SduiRecordPartyChatConversationUpsellAcknowledgementAction" ]]
+return function(p1, _, p2)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), RecordedModalActionsModule (copy), RecordModalSequenceResponseFunction (copy), GetSduiApiStoreFunction (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	
@@ -69,7 +69,7 @@ return function(p1, _, p2) --[[ Line: 21 | Named "SduiRecordPartyChatConversatio
 		modalVariant = ModalVariant1,
 		conversationId = ConversationId1,
 		friendId = if ConversationId1 == nil then FriendId1 else nil
-	}):catch(function(Err) --[[ Line: 77 ]]
+	}):catch(function(Err)
 		-- upvalues: p2 (copy), SduiErrorType (upval), SduiActionType (upval)
 		p2.dependencies.logger.reportError(SduiErrorType.ActionNetworkRequestFailed, {
 			name = SduiActionType.RecordPartyChatConversationUpsellAcknowledgement,

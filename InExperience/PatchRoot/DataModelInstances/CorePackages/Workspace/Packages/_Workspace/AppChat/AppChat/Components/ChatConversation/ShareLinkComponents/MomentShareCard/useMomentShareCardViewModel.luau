@@ -20,7 +20,7 @@ local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
 local UseAssetFetchStatusFunction = require(Parent.RoactUtils).Hooks.useAssetFetchStatus
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(Frame) --[[ Line: 39 | Named "useMomentShareCardViewModel" ]]
+return function(Frame)
 	-- upvalues: UseMomentDetailsModule (copy), UseScaledValueFunction (copy), ConstantsModule (copy), UseTokensFunction (copy), FFlagAppChatMomentShareCardEdgeCasesModule (copy), UseIsMomentsViewingEligibleModule (copy), UserProfilesModule (copy), ResolveMomentShareCardMetadataTextModule (copy), UseExperienceNameModule (copy), MomentDetailsStatusModule (copy), FFlagAppChatMomentShareCardLoadingSkeletonsModule (copy), ReactModule (copy), BuildMomentShareCardMediaModule (copy), UseMomentShareCardVideoFrameModule (copy), UseAssetFetchStatusFunction (copy), GetMomentShareCardCornerRadiiModule (copy)
 	local UseMomentDetailsModuleResult = UseMomentDetailsModule(Frame.momentId, Frame.targetIdType)
 	local Status = UseMomentDetailsModuleResult.status
@@ -45,7 +45,7 @@ return function(Frame) --[[ Line: 39 | Named "useMomentShareCardViewModel" ]]
 	local AssetId = UseMomentDetailsModuleResult.assetId
 	local CaptureType = UseMomentDetailsModuleResult.captureType
 	local AssetAccessContext = UseMomentDetailsModuleResult.assetAccessContext
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 77 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: NoNoFFlagAppChatMomentShareCardEdgeCasesModule (copy), Status (copy), MomentDetailsStatusModule (upval), BuildMomentShareCardMediaModule (upval), AssetId (copy), CaptureType (copy), AssetAccessContext (copy)
 		return if NoNoFFlagAppChatMomentShareCardEdgeCasesModule or Status ~= MomentDetailsStatusModule.Ready then nil else BuildMomentShareCardMediaModule({
 			assetId = AssetId,
@@ -74,7 +74,7 @@ return function(Frame) --[[ Line: 39 | Named "useMomentShareCardViewModel" ]]
 		playIconStyle = UseTokensResult.Color.Content.Emphasis,
 		posterContent = UseMomentShareCardVideoFrameModuleResult1,
 		isPosterLoaded = if IsCaptureTypeMatch then UseMomentShareCardVideoFrameModuleResult ~= nil else IsUseAssetFetchStatusResultMatch,
-		cornerRadii = ReactModule.useMemo(function() --[[ Line: 104 ]]
+		cornerRadii = ReactModule.useMemo(function()
 			-- upvalues: GetMomentShareCardCornerRadiiModule (upval), Frame (copy), Size500 (copy)
 			return GetMomentShareCardCornerRadiiModule(Frame.isStartOfGroup, Frame.isIncoming, Size500)
 		end, { Frame.isStartOfGroup, Frame.isIncoming, Size500 }),
@@ -82,7 +82,7 @@ return function(Frame) --[[ Line: 39 | Named "useMomentShareCardViewModel" ]]
 		metadataText = ResolveMomentShareCardMetadataTextModuleResult2,
 		isUsernameLoading = IsStatusMatch1,
 		isMetadataLoading = IsStatusMatch2,
-		onActivated = ReactModule.useCallback(function() --[[ Line: 110 ]]
+		onActivated = ReactModule.useCallback(function()
 			-- upvalues: NoNoFFlagAppChatMomentShareCardEdgeCasesModule (copy), OpenMomentsDeepLinkFunction (copy), UseMomentDetailsModuleResult (copy), MomentDetailsStatusModule (upval), Frame (copy)
 			if NoNoFFlagAppChatMomentShareCardEdgeCasesModule then return end
 			if OpenMomentsDeepLinkFunction and UseMomentDetailsModuleResult.status == MomentDetailsStatusModule.Ready then

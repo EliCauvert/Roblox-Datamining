@@ -9,7 +9,7 @@ local _ = require(script.Parent.UniverseSearchStoreTypes)
 local FetchFunction = HttpClientModule.fetch
 local AsPromiseFunction = HttpClientModule.asPromise
 
-return function(p1, p2) --[[ Line: 22 | Named "fetchUniverseSearch" ]]
+return function(p1, p2)
 	-- upvalues: UrlBase (copy), FFlagBuildWithGroups (copy), FetchFunction (copy), WithCsrfRetryModule (copy), HttpClientModule (copy), AsPromiseFunction (copy), UrlBuilderModule (copy)
 	local P1 = p2 or {}
 	local BaseUrl = P1.baseUrl or UrlBase.APIS
@@ -33,7 +33,7 @@ return function(p1, p2) --[[ Line: 22 | Named "fetchUniverseSearch" ]]
 				limit = p1.pageSize,
 				cursor = p1.cursor
 			},
-			decode = function(p3) --[[ Line: 48 ]]
+			decode = function(p3)
 				return p3
 			end
 		})))
@@ -84,7 +84,7 @@ return function(p1, p2) --[[ Line: 22 | Named "fetchUniverseSearch" ]]
 		analyticsKey = "universes-search.search",
 		network = P1.network,
 		url = UrlBuilderModule.UrlBuilder.addQueryString(BaseUrl .. "/universes/v1/search", t),
-		decode = function(p3) --[[ Line: 102 ]]
+		decode = function(p3)
 			return p3
 		end
 	})))

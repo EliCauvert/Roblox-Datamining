@@ -3,10 +3,10 @@ local Parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
 local ReactModule = require(Parent.React)
 local UseEventConnectionFunction = require(Parent.ReactUtils).useEventConnection
 
-return function() --[[ Line: 8 | Named "useRobloxLocale" ]]
+return function()
 	-- upvalues: ReactModule (copy), LocalizationService (copy), UseEventConnectionFunction (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(LocalizationService.RobloxLocaleId)
-	UseEventConnectionFunction(LocalizationService:GetPropertyChangedSignal("RobloxLocaleId"), function() --[[ Line: 11 ]]
+	UseEventConnectionFunction(LocalizationService:GetPropertyChangedSignal("RobloxLocaleId"), function()
 		-- upvalues: UseStateResult2 (copy), LocalizationService (upval)
 		UseStateResult2(LocalizationService.RobloxLocaleId)
 	end, {})

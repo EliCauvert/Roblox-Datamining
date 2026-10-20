@@ -6,7 +6,7 @@ local GiftModelUtilsModule = require(Gifting.Models.GiftModelUtils)
 local _ = require(Gifting.Types)
 local InterfaceResult = TModule.interface({ isGiftable = TModule.boolean })
 
-local function formatItemGiftability(p1) --[[ Line: 31 ]]
+local function formatItemGiftability(p1)
 	-- upvalues: InterfaceResult (copy), GiftModelUtilsModule (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult(p1)
 	
@@ -23,7 +23,7 @@ local function formatItemGiftability(p1) --[[ Line: 31 ]]
 end
 
 return {
-	format = function(p1) --[[ Line: 50 ]]
+	format = function(p1)
 		-- upvalues: GiftEligibilityModule (copy), GiftModelUtilsModule (copy), RequiredActionModule (copy), formatItemGiftability (copy)
 		local FromValueResult = GiftEligibilityModule.fromValue(p1.eligibility)
 		

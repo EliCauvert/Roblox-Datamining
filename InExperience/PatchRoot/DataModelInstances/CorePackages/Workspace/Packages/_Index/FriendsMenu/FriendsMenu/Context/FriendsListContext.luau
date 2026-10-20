@@ -7,10 +7,10 @@ return (require(FriendsMenu.Parent.React).createContext({
 	isFriendsListFetchFailed = false,
 	searchFriendsString = "",
 	friends = {},
-	searchFriends = function() --[[ Line: 15 ]]
+	searchFriends = function()
 		return {}
 	end,
-	fetchMoreFriends = function() --[[ Line: 18 ]]
+	fetchMoreFriends = function()
 		return {}
 	end,
 	friendsNames = { loading = true }

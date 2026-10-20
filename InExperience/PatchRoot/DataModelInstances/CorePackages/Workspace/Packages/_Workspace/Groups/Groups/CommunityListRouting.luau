@@ -6,18 +6,18 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagEnableLuaCommunityList = SharedFlagsModule.FFlagEnableLuaCommunityList
 local FFlagEnableGroupDetailPane = SharedFlagsModule.FFlagEnableGroupDetailPane
 
-local function getIsCompactTouch(p1) --[[ Line: 11 ]]
+local function getIsCompactTouch(p1)
 	-- upvalues: DisplayModule (copy), ResponsiveModule (copy)
 	return ResponsiveModule.getIsCompactTouch(DisplayModule.GetDisplayStore(false).getViewportSize(p1), (ResponsiveModule.GetInputModeStore(false).getPreferredInputType(p1)))
 end
 
 return {
 	getIsCompactTouch = getIsCompactTouch,
-	getShouldOpenGroupDetailPane = function() --[[ Line: 28 ]]
+	getShouldOpenGroupDetailPane = function()
 		-- upvalues: FFlagEnableGroupDetailPane (copy), getIsCompactTouch (copy)
 		return if FFlagEnableGroupDetailPane then getIsCompactTouch(false) else false
 	end,
-	getShouldUseLuaCommunityList = function() --[[ Line: 17 ]]
+	getShouldUseLuaCommunityList = function()
 		-- upvalues: FFlagEnableLuaCommunityList (copy), FFlagEnableGroupDetailPane (copy), getIsCompactTouch (copy)
 		return if FFlagEnableLuaCommunityList then if FFlagEnableGroupDetailPane then true else getIsCompactTouch(false) else false
 	end

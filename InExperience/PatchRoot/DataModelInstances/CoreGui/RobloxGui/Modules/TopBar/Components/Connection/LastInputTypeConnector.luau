@@ -24,7 +24,7 @@ local config = {
 	[Enum.UserInputType.Touch] = InputType.Touch
 }
 
-function LastInputTypeConnector.didMount(p1) --[[ Line: 38 ]]
+function LastInputTypeConnector.didMount(p1)
 	-- upvalues: config (copy), UserInputService (copy)
 	local Entry = config[UserInputService:GetLastInputType()]
 	
@@ -33,11 +33,11 @@ function LastInputTypeConnector.didMount(p1) --[[ Line: 38 ]]
 	end
 end
 
-function LastInputTypeConnector.render(p1) --[[ Line: 45 ]]
+function LastInputTypeConnector.render(p1)
 	-- upvalues: RoactModule (copy), EventConnectionModule (copy), UserInputService (copy), config (copy)
 	return RoactModule.createElement(EventConnectionModule, {
 		event = UserInputService.LastInputTypeChanged,
-		callback = function(p2) --[[ Line: 48 ]]
+		callback = function(p2)
 			-- upvalues: config (upval), p1 (copy)
 			local Entry = config[p2]
 			
@@ -48,10 +48,10 @@ function LastInputTypeConnector.render(p1) --[[ Line: 45 ]]
 	})
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 57 ]]
+return RoactRoduxModule.UNSTABLE_connect2(nil, function(Callback)
 	-- upvalues: SetInputTypeModule (copy)
 	return {
-		setInputType = function(p1) --[[ Line: 59 ]]
+		setInputType = function(p1)
 			-- upvalues: Callback (copy), SetInputTypeModule (upval)
 			return Callback(SetInputTypeModule(p1))
 		end

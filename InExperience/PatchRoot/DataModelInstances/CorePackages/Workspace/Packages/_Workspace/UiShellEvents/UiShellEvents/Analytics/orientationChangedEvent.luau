@@ -27,7 +27,7 @@ local config = {
 	lastUpdated = { 2026, 5, 6 }
 }
 
-return function(p1, EventContext, CustomFields) --[[ Line: 50 ]]
+return function(p1, EventContext, CustomFields)
 	-- upvalues: StrictInterfaceResult (copy), LoggerModule (copy), OrientationUseTelemetryService (copy), TelemetryService (copy), config (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	

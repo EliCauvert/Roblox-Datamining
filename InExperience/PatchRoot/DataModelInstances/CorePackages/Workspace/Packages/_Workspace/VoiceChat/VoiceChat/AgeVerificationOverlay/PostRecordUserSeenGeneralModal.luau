@@ -1,7 +1,7 @@
 ﻿local Url = require(script:FindFirstAncestor("VoiceChat").Parent.Http).Url
 local HttpService = game:GetService("HttpService")
 
-return function(Callback, ModalId) --[[ Line: 11 ]]
+return function(Callback, ModalId)
 	-- upvalues: HttpService (copy), Url (copy)
 	assert(type(ModalId) == "string", "PostRecordUserSeenGeneralModal request expects modalId to be a string")
 	

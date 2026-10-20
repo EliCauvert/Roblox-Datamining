@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("IOSPhoneVerificationLayer", "PlayerApp.PhoneVerification.iOS")
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastString("IOSPhoneVerificationLayer")
 end

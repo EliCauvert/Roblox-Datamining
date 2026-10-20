@@ -12,10 +12,10 @@ local AspectRatio = {
 	DominantAxis = Enum.DominantAxis.Width
 }
 
-local function useScreenHeight(p1) --[[ Line: 23 ]]
+local function useScreenHeight(p1)
 	-- upvalues: ReactModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
-	ReactModule.useEffect(function() --[[ Line: 25 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult2 (copy)
 		local LayerCollector = if p1 == nil then nil else p1:FindFirstAncestorWhichIsA("LayerCollector")
 		
@@ -23,12 +23,12 @@ local function useScreenHeight(p1) --[[ Line: 23 ]]
 			return nil
 		else
 			UseStateResult2(LayerCollector.AbsoluteSize.Y)
-			local Connection = LayerCollector:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 31 ]]
+			local Connection = LayerCollector:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: UseStateResult2 (upval), LayerCollector (copy)
 				UseStateResult2(LayerCollector.AbsoluteSize.Y)
 			end)
 			
-			return function() --[[ Line: 34 ]]
+			return function()
 				-- upvalues: Connection (copy)
 				Connection:Disconnect()
 			end
@@ -38,7 +38,7 @@ local function useScreenHeight(p1) --[[ Line: 23 ]]
 	return UseStateResult
 end
 
-return function(Frame) --[[ Line: 53 | Named "LibraryWorldCutoutView" ]]
+return function(Frame)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), useScreenHeight (copy), IsTapReleaseModule (copy), View (copy), Skeleton (copy), Radius (copy), Text (copy), _UDim2 (copy), AspectRatio (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local _UDim = UDim.new(0, Frame.inset)
@@ -46,7 +46,7 @@ return function(Frame) --[[ Line: 53 | Named "LibraryWorldCutoutView" ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseScreenHeightResult: number = useScreenHeight(UseStateResult)
 	local OnActivatedFunction = Frame.onActivated
-	local UseResult = ReactModule.useCallback(function(_, p1) --[[ Line: 63 ]]
+	local UseResult = ReactModule.useCallback(function(_, p1)
 		-- upvalues: UseRefResult (copy), IsTapReleaseModule (upval), OnActivatedFunction (copy)
 		UseRefResult.current = nil
 		
@@ -54,7 +54,7 @@ return function(Frame) --[[ Line: 53 | Named "LibraryWorldCutoutView" ]]
 			OnActivatedFunction()
 		end
 	end, { OnActivatedFunction })
-	local UseResult1 = ReactModule.useCallback(function(_, Input) --[[ Line: 70 ]]
+	local UseResult1 = ReactModule.useCallback(function(_, Input)
 		-- upvalues: UseRefResult (copy)
 		if Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.MouseButton1 then
 			UseRefResult.current = Input.Position

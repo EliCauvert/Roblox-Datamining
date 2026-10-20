@@ -10,7 +10,7 @@ NetworkProfilerModule.aggregate = {
 	receiveResponse = 0
 }
 
-function NetworkProfilerModule.track(p1, Aggregate) --[[ Line: 24 ]]
+function NetworkProfilerModule.track(p1, Aggregate)
 	p1.aggregate.queued += Aggregate.queued
 	
 	if Aggregate.nameLookup >= 0 then
@@ -30,7 +30,7 @@ function NetworkProfilerModule.track(p1, Aggregate) --[[ Line: 24 ]]
 	end
 end
 
-function NetworkProfilerModule.report(p1, Callback: (any, any, any, any) -> ()) --[[ Line: 43 ]]
+function NetworkProfilerModule.report(p1, Callback: (any, any, any, any) -> ())
 	-- upvalues: Number (copy)
 	Callback("NetworkProfileDuringStartup", "Queued", p1.aggregate.queued, Number)
 	Callback("NetworkProfileDuringStartup", "NameLookup", p1.aggregate.nameLookup, Number)

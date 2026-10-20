@@ -11,23 +11,23 @@ local GameDetailModelModule = require(GameDetailRodux.GameDetails.GameDetailMode
 local EnumGameDetailErrorTypes = require(Parent.DiscoveryTypes).EnumGameDetailErrorTypes
 local LoggerModule = require(GameDetailRodux.Logger)
 
-local function KeyMapper(Text): string --[[ Line: 20 ]]
+local function KeyMapper(Text): string
 	return "luaapp.gamesapi.games." .. Text
 end
 
 return {
 	KeyMapper = KeyMapper,
-	GetFetchingStatus = function(p1, Text) --[[ Line: 26 ]]
+	GetFetchingStatus = function(p1, Text)
 		-- upvalues: PerformFetch (copy)
 		return PerformFetch.GetStatus(p1, "luaapp.gamesapi.games." .. Text)
 	end,
-	Fetch = function(p1, p2) --[[ Line: 30 ]]
+	Fetch = function(p1, p2)
 		-- upvalues: ArgCheckModule (copy), PerformFetch (copy), KeyMapper (copy), GamesMultigetDetailsModule (copy), GameDetailModelModule (copy), ResultModule (copy), SetGameDetailErrorModule (copy), EnumGameDetailErrorTypes (copy), AddGameDetailsModule (copy), LoggerModule (copy), PromiseModule (copy)
 		ArgCheckModule.isType(p2, "table", "ApiFetchGameDetails: universeIds")
 		
-		return PerformFetch.Batch(p2, KeyMapper, function(p3, p4) --[[ Line: 33 ]]
+		return PerformFetch.Batch(p2, KeyMapper, function(p3, p4)
 			-- upvalues: GamesMultigetDetailsModule (upval), p1 (copy), GameDetailModelModule (upval), ResultModule (upval), SetGameDetailErrorModule (upval), EnumGameDetailErrorTypes (upval), AddGameDetailsModule (upval), LoggerModule (upval), PromiseModule (upval)
-			return GamesMultigetDetailsModule(p1, p4):andThen(function(Result) --[[ Line: 34 ]]
+			return GamesMultigetDetailsModule(p1, p4):andThen(function(Result)
 				-- upvalues: GameDetailModelModule (upval), ResultModule (upval), p4 (copy), p3 (copy), SetGameDetailErrorModule (upval), EnumGameDetailErrorTypes (upval), AddGameDetailsModule (upval), LoggerModule (upval), PromiseModule (upval)
 				local NewResults = {}
 				local Data = Result and (Result.responseBody and Result.responseBody.data)
@@ -52,7 +52,7 @@ return {
 					end
 				end
 				return PromiseModule.resolve(NewResults)
-			end, function(_) --[[ Line: 61 ]]
+			end, function(_)
 				-- upvalues: PromiseModule (upval)
 				return PromiseModule.resolve({})
 			end)

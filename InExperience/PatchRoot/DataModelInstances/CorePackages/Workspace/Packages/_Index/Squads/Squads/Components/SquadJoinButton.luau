@@ -33,7 +33,7 @@ local AppChatSquadButtonColorUpdateIxpLayer = game:DefineFastString("AppChatSqua
 local AppChatSquadButtonHideGamepadIconOnTvRemote = game:DefineFastFlag("AppChatSquadButtonHideGamepadIconOnTvRemote", false)
 local config = { dampingRatio = 1, frequency = 1 }
 
-return function(p1) --[[ Line: 70 ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), UseDispatchFunction (copy), UsePreferredInputFunction (copy), AppChatSquadButtonHideGamepadIconOnTvRemote (copy), UseIsTvRemoteDeviceFunction (copy), UseTokensFunction (copy), React (copy), SquadExternalContractContext (copy), FFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), UseSquadStateFunction (copy), ReactOtterModule (copy), config (copy), UseSelectorFunction (copy), SquadButtonClickIntentionEnumModule (copy), EventNamesModule (copy), LeaveSquadFunction (copy), SquadPromptType (copy), AppChatSquadButtonColorVariantB (copy), AppChatSquadButtonColorUpdateIxpEnabled (copy), IXPService (copy), AppChatSquadButtonColorUpdateIxpLayer (copy), Foundation (copy), AppChatSquadButtonColorUpdate (copy), SquadState (copy), FFlagDebugAppChatEnableDomLocators (copy), AppChatNewSquadJoinButtonLookIconless (copy), ResponsiveModule (copy), UserInputService (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		joinButtonText = "Feature.Squads.Action.Join",
@@ -49,16 +49,16 @@ return function(p1) --[[ Line: 70 ]]
 	local NoFFlagPartyDevAPIToRespectThirdPartySettingsEnabled = not FFlagPartyDevAPIToRespectThirdPartySettingsEnabled or UseContextResult.useIsChatEnabled()
 	local UseSquadStateResult = UseSquadStateFunction()
 	local Callback = nil
-	local UseAnimatedBindingResult, Callback = ReactOtterModule.useAnimatedBinding(1, function(p2) --[[ Line: 93 ]]
+	local UseAnimatedBindingResult, Callback = ReactOtterModule.useAnimatedBinding(1, function(p2)
 		-- upvalues: p1 (copy), Callback (ref), ReactOtterModule (upval), config (upval)
 		if p1.shouldAnimate then
-			task.delay(0.5, function() --[[ Line: 95 ]]
+			task.delay(0.5, function()
 				-- upvalues: Callback (upval), ReactOtterModule (upval), p2 (copy), config (upval)
 				Callback(ReactOtterModule.spring(if p2 == 1 then 0 else 1, config))
 			end)
 		end
 	end)
-	React.useEffect(function() --[[ Line: 101 ]]
+	React.useEffect(function()
 		-- upvalues: p1 (copy), Callback (ref), ReactOtterModule (upval), config (upval)
 		if p1.shouldAnimate then
 			Callback(ReactOtterModule.spring(1, config))
@@ -68,18 +68,18 @@ return function(p1) --[[ Line: 70 ]]
 			Callback(ReactOtterModule.instant(1))
 		end
 	end, { p1.shouldAnimate, Callback })
-	local UseSelectorResult = UseSelectorFunction((React.useCallback(function(p2) --[[ Line: 109 ]]
+	local UseSelectorResult = UseSelectorFunction((React.useCallback(function(p2)
 		return if p2.Squad and p2.Squad.Squad then p2.Squad.Squad.currentSquad else nil
 	end, {})))
-	local UseMemoResult = React.useMemo(function(): boolean --[[ Line: 118 ]]
+	local UseMemoResult = React.useMemo(function(): boolean
 		-- upvalues: UseSelectorResult (copy), p1 (copy)
 		return UseSelectorResult and UseSelectorResult.parentChannelId == p1.conversationId
 	end, { UseSelectorResult, p1.conversationId })
-	local UseMemoResult1 = React.useMemo(function() --[[ Line: 122 ]]
+	local UseMemoResult1 = React.useMemo(function()
 		-- upvalues: UseMemoResult (copy), SquadButtonClickIntentionEnumModule (upval), UseParentChannelHasGroupUpResult (copy)
 		return if UseMemoResult then SquadButtonClickIntentionEnumModule.View elseif UseParentChannelHasGroupUpResult then SquadButtonClickIntentionEnumModule.Join else SquadButtonClickIntentionEnumModule.Create
 	end, { UseMemoResult, UseParentChannelHasGroupUpResult })
-	local UseMemoResult2 = React.useMemo(function() --[[ Line: 132 ]]
+	local UseMemoResult2 = React.useMemo(function()
 		-- upvalues: UseMemoResult (copy), UseLocalizationResult (copy), UseParentChannelHasGroupUpResult (copy)
 		return if UseMemoResult then UseLocalizationResult.viewButtonText elseif UseParentChannelHasGroupUpResult then UseLocalizationResult.joinButtonText else UseLocalizationResult.startButtonText
 	end, {
@@ -89,7 +89,7 @@ return function(p1) --[[ Line: 70 ]]
 		UseLocalizationResult.startButtonText,
 		UseLocalizationResult.viewButtonText
 	})
-	local UseResult = React.useCallback(function() --[[ Line: 148 ]]
+	local UseResult = React.useCallback(function()
 		-- upvalues: UseContextResult (copy), EventNamesModule (upval), p1 (copy), UseSelectorResult (copy), UseMemoResult1 (copy)
 		UseContextResult.fireSquadAnalytics(EventNamesModule.EnterSquadButtonPressed, {
 			conversationId = p1.conversationId,
@@ -102,7 +102,7 @@ return function(p1) --[[ Line: 70 ]]
 		UseMemoResult1, UseSelectorResult, p1.conversationId, p1.squadButtonSource,
 		p1.squadLocation, UseContextResult.fireSquadAnalytics
 	})
-	local UseResult1 = React.useCallback(function() --[[ Line: 165 ]]
+	local UseResult1 = React.useCallback(function()
 		-- upvalues: UseResult (copy), UseMemoResult (copy), UseSelectorResult (copy), UseDispatchResult (copy), LeaveSquadFunction (upval), SquadPromptType (upval), UseContextResult (copy), p1 (copy), FFlagPartyDevAPIToRespectThirdPartySettingsEnabled (upval), NoFFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy)
 		UseResult()
 		
@@ -111,7 +111,7 @@ return function(p1) --[[ Line: 70 ]]
 			
 			return
 		else
-			UseDispatchResult(LeaveSquadFunction(SquadPromptType.JoinAnotherSquad, UseContextResult.setSquadPrompt, function() --[[ Line: 172 ]]
+			UseDispatchResult(LeaveSquadFunction(SquadPromptType.JoinAnotherSquad, UseContextResult.setSquadPrompt, function()
 				-- upvalues: p1 (upval)
 				p1.onActivated(p1.conversationId)
 			end, UseContextResult.squadLocation, not FFlagPartyDevAPIToRespectThirdPartySettingsEnabled or NoFFlagPartyDevAPIToRespectThirdPartySettingsEnabled))
@@ -121,13 +121,13 @@ return function(p1) --[[ Line: 70 ]]
 		UseContextResult.setSquadPrompt, UseContextResult.squadLocation,
 		if FFlagPartyDevAPIToRespectThirdPartySettingsEnabled then NoFFlagPartyDevAPIToRespectThirdPartySettingsEnabled else nil
 	})
-	local UseMemoResult3 = React.useMemo(function() --[[ Line: 192 ]]
+	local UseMemoResult3 = React.useMemo(function()
 		-- upvalues: UseTokensResult (copy), p1 (copy)
 		return if UseTokensResult.Config.ColorMode.IsLight == "true" then if p1.isInCard then UseTokensResult.Color.Extended.Gray.Gray_300 else UseTokensResult.Color.Extended.Gray.Gray_200 elseif p1.isInCard then UseTokensResult.Color.Extended.Gray.Gray_800 else UseTokensResult.Color.Extended.Gray.Gray_900
 	end, { p1.isInCard, UseTokensResult.Config.ColorMode.IsLight })
 	local IsUseMemoResultMatch = UseMemoResult1 == SquadButtonClickIntentionEnumModule.View
 	local NoAppChatSquadButtonColorVariantB = not AppChatSquadButtonColorVariantB
-	React.useEffect(function() --[[ Line: 214 ]]
+	React.useEffect(function()
 		-- upvalues: AppChatSquadButtonColorUpdateIxpEnabled (upval), IXPService (upval), AppChatSquadButtonColorUpdateIxpLayer (upval)
 		if AppChatSquadButtonColorUpdateIxpEnabled then
 			IXPService:LogFlagLinkedUserLayerExposure(AppChatSquadButtonColorUpdateIxpLayer)
@@ -164,7 +164,7 @@ return function(p1) --[[ Line: 70 ]]
 				tag = "radius-circle anchor-top-right",
 				ZIndex = 2,
 				Size = UDim2.fromOffset(UseTokensResult.Size.Size_200, UseTokensResult.Size.Size_200),
-				backgroundStyle = UseAnimatedBindingResult:map(function(p2) --[[ Line: 258 ]]
+				backgroundStyle = UseAnimatedBindingResult:map(function(p2)
 					-- upvalues: UseTokensResult (copy)
 					return {
 						Color3 = UseTokensResult.Color.Extended.Green.Green_500.Color3,
@@ -174,7 +174,7 @@ return function(p1) --[[ Line: 70 ]]
 				Position = UDim2.new(1, UseTokensResult.Size.Size_50, 0, -UseTokensResult.Size.Size_50),
 				stroke = {
 					Color = UseMemoResult3.Color3,
-					Transparency = UseAnimatedBindingResult:map(function(p2): number --[[ Line: 267 ]]
+					Transparency = UseAnimatedBindingResult:map(function(p2): number
 						-- upvalues: UseMemoResult3 (copy)
 						return 1 + (UseMemoResult3.Transparency - 1) * p2
 					end),

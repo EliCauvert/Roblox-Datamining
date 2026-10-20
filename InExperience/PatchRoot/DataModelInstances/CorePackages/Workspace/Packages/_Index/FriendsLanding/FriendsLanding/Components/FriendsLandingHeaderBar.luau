@@ -10,29 +10,29 @@ local GetActiveChildNavigationOptionsSafelyModule = require(FriendsLanding.Navig
 local IsTenFootInterfaceFunction = require(FriendsLanding.Parent.AppCommonLib).isTenFootInterface
 local FriendsLandingHeaderBar = Roact.PureComponent:extend("FriendsLandingHeaderBar")
 
-function FriendsLandingHeaderBar.init(p1) --[[ Line: 18 ]]
+function FriendsLandingHeaderBar.init(p1)
 	-- upvalues: AppHeaderBar (copy), IsTenFootInterfaceFunction (copy), Actions (copy)
-	function p1.renderLeft(Navigation, _, _) --[[ Line: 19 ]]
+	function p1.renderLeft(Navigation, _, _)
 		-- upvalues: AppHeaderBar (upval), IsTenFootInterfaceFunction (upval), Actions (upval)
 		local MakeBackButtonFunction = AppHeaderBar.makeBackButton
 		
-		return if IsTenFootInterfaceFunction() then nil else MakeBackButtonFunction(function() --[[ Line: 25 ]]
+		return if IsTenFootInterfaceFunction() then nil else MakeBackButtonFunction(function()
 			-- upvalues: Navigation (copy), Actions (upval)
 			Navigation.dispatch(Actions.back())
 		end)
 	end
 end
 
-function FriendsLandingHeaderBar.render(p1) --[[ Line: 33 ]]
+function FriendsLandingHeaderBar.render(p1)
 	-- upvalues: FriendsLandingContextModule (copy), GetActiveChildNavigationOptionsSafelyModule (copy), WithLocalizationFunction (copy), Roact (copy), FriendsLandingHeaderBarPresentationalModule (copy)
-	return FriendsLandingContextModule.with(function(p2) --[[ Line: 34 ]]
+	return FriendsLandingContextModule.with(function(p2)
 		-- upvalues: p1 (copy), GetActiveChildNavigationOptionsSafelyModule (upval), WithLocalizationFunction (upval), Roact (upval), FriendsLandingHeaderBarPresentationalModule (upval)
 		local Navigation = p1.props.navigation
 		local ActiveChildNavigationOptionsSafelyModule = GetActiveChildNavigationOptionsSafelyModule(Navigation)
 		
 		return WithLocalizationFunction({
 			titleText = ActiveChildNavigationOptionsSafelyModule.headerText.raw
-		})(function(p3) --[[ Line: 40 ]]
+		})(function(p3)
 			-- upvalues: p2 (copy), Roact (upval), FriendsLandingHeaderBarPresentationalModule (upval), ActiveChildNavigationOptionsSafelyModule (copy), p1 (upval), Navigation (copy)
 			local TitleText = p3.titleText
 			

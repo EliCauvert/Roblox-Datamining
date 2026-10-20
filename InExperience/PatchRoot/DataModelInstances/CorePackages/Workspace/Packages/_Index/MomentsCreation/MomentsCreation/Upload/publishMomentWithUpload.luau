@@ -4,7 +4,7 @@ local MakeMomentMetadataModule = require(MomentsCreation.Utils.makeMomentMetadat
 local MakeRegistrationInfoModule = require(MomentsCreation.Utils.makeRegistrationInfo)
 local UploadMomentModule = require(MomentsCreation.Upload.uploadMoment)
 
-return function(p1, p2, p3, p4) --[[ Line: 39 | Named "publishMomentWithUpload" ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: MakeMomentMetadataModule (copy), MakeRegistrationInfoModule (copy), UploadMomentModule (copy)
 	local MomentMetadataModule = MakeMomentMetadataModule(p1, p3, p2, p4.resolvedTimeLength, p4.commentsEnabled)
 	UploadMomentModule(p1, MomentMetadataModule, MakeRegistrationInfoModule(p1, MomentMetadataModule), p4.localizations, p4.uploadStore, p4.toastStore, nil, nil, p4.creationSessionId)

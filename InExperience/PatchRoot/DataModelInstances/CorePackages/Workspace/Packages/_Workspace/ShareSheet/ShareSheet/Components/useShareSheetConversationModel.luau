@@ -13,7 +13,7 @@ local ShareSheetConstantsModule = require(ShareSheet.ShareSheetConstants)
 local _ = require(ShareSheet.Types)
 local UseConversationListModule = require(Parent.AppChat.useConversationList)
 
-local function getCompactConversations(EligibleConversations, Conversations, SelectedConversationIds, Callback) --[[ Line: 49 ]]
+local function getCompactConversations(EligibleConversations, Conversations, SelectedConversationIds, Callback)
 	-- upvalues: ShareSheetConstantsModule (copy)
 	local List = {}
 	local t = {}
@@ -32,7 +32,7 @@ local function getCompactConversations(EligibleConversations, Conversations, Sel
 	return List
 end
 
-local function getCompactRecipients(Recipients, Recipients1, SelectedConversationIds, Callback) --[[ Line: 78 ]]
+local function getCompactRecipients(Recipients, Recipients1, SelectedConversationIds, Callback)
 	-- upvalues: ShareSheetConstantsModule (copy)
 	local List = {}
 	local t = {}
@@ -51,7 +51,7 @@ local function getCompactRecipients(Recipients, Recipients1, SelectedConversatio
 	return List
 end
 
-return function(p1) --[[ Line: 102 | Named "useShareSheetConversationModel" ]]
+return function(p1)
 	-- upvalues: FFlagShareSheetFriendsSort (copy), ReactModule (copy), ListRecipientsStatusModule (copy), UseConversationListModule (copy), RecipientModule (copy), ShareSheetConstantsModule (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), getCompactRecipients (copy), UseExternalChatConversationEligibilityModule (copy), getCompactConversations (copy), FetchConversationListPageToSignalsModule (copy)
 	local HasChatShare = p1.chatShare ~= nil
 	local Current = nil
@@ -114,7 +114,7 @@ return function(p1) --[[ Line: 102 | Named "useShareSheetConversationModel" ]]
 				maxCount = ShareSheetConstantsModule.FIntShareSheetPeoplePickerMaxConversations
 			})
 			EligibleRecipients = {
-				recipients = getCompactRecipients(UseEligibleRecipientsResult.recipients, Recipients, p1.selectedConversationIds, function(p2) --[[ Line: 165 ]]
+				recipients = getCompactRecipients(UseEligibleRecipientsResult.recipients, Recipients, p1.selectedConversationIds, function(p2)
 					-- upvalues: p1 (copy), RecipientModule (upval)
 					return p1.chatShare ~= nil and RecipientModule.canSend(p1.chatShare, p2)
 				end),
@@ -142,7 +142,7 @@ return function(p1) --[[ Line: 102 | Named "useShareSheetConversationModel" ]]
 				maxConversationCount = ShareSheetConstantsModule.FIntShareSheetPeoplePickerMaxConversations
 			})
 			ConversationEligibility = {
-				eligibleConversations = getCompactConversations(UseExternalChatConversationEligibilityModuleResult.eligibleConversations, Conversations, p1.selectedConversationIds, function(p2) --[[ Line: 199 ]]
+				eligibleConversations = getCompactConversations(UseExternalChatConversationEligibilityModuleResult.eligibleConversations, Conversations, p1.selectedConversationIds, function(p2)
 					-- upvalues: p1 (copy)
 					return p1.chatShare ~= nil and p1.chatShare.canSendToConversation(p2)
 				end),
@@ -155,7 +155,7 @@ return function(p1) --[[ Line: 102 | Named "useShareSheetConversationModel" ]]
 		end
 	end
 	if not FFlagShareSheetFriendsSort then
-		ReactModule.useEffect(function() --[[ Line: 216 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: HasChatShare (copy), FetchConversationListPageToSignalsModule (upval)
 			if HasChatShare then
 				FetchConversationListPageToSignalsModule()

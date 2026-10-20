@@ -10,25 +10,25 @@ local Radius = FoundationModule.Enums.Radius
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local config = { frequency = 3, dampingRatio = 1 }
 
-local function _(Circle, p1): UDim --[[ Line: 55 | Named "getCornerRadius" ]]
+local function _(Circle, p1): UDim
 	-- upvalues: Radius (copy)
 	return if Circle == Radius.Circle then UDim.new(1, 0) else UDim.new(0, p1.Radius[Circle])
 end
 
-return ReactModule.memo(function(Frame) --[[ Line: 62 | Named "ImageWithSkeleton" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseTokensFunction (copy), Radius (copy), ReactModule (copy), ReactOtterModule (copy), ContentProvider (copy), config (copy), View (copy), Image (copy), Skeleton (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Radius1 = Frame.radius or Radius.Medium
 	local Image1 = Frame.Image
 	local IsNotImageMatch: boolean = Image1 ~= nil and Image1 ~= ""
 	local UseStateResult, UseStateResult2 = ReactModule.useState(IsNotImageMatch)
-	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0, function() --[[ Line: 71 ]]
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0, function()
 		-- upvalues: Image1 (copy), ContentProvider (upval), UseStateResult2 (copy)
 		if Image1 ~= nil and ContentProvider:GetAssetFetchStatus(Image1) == Enum.AssetFetchStatus.Success then
 			UseStateResult2(false)
 		end
 	end)
-	ReactModule.useEffect(function() --[[ Line: 78 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), IsNotImageMatch (copy), Image1 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval), ContentProvider (upval)
 		UseStateResult2(IsNotImageMatch)
 		
@@ -39,7 +39,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 62 | Named "ImageWithSkeleton
 		end
 		local Flag = true
 		
-		local function _() --[[ Line: 87 | Named "fadeInImage" ]]
+		local function _()
 			-- upvalues: Flag (ref), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval)
 			if Flag then
 				UseAnimatedBindingResult2((ReactOtterModule.spring(1, config)))
@@ -48,11 +48,11 @@ return ReactModule.memo(function(Frame) --[[ Line: 62 | Named "ImageWithSkeleton
 		
 		if ContentProvider:GetAssetFetchStatus(Image1) ~= Enum.AssetFetchStatus.Success then
 			UseAnimatedBindingResult2((ReactOtterModule.instant(0)))
-			task.spawn(function() --[[ Line: 101 ]]
+			task.spawn(function()
 				-- upvalues: ContentProvider (upval), Image1 (upval), Flag (ref), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval)
-				pcall(function() --[[ Line: 102 ]]
+				pcall(function()
 					-- upvalues: ContentProvider (upval), Image1 (upval), Flag (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval)
-					ContentProvider:PreloadAsync({ Image1 }, function(Image, AssetFetchStatus) --[[ Line: 103 ]]
+					ContentProvider:PreloadAsync({ Image1 }, function(Image, AssetFetchStatus)
 						-- upvalues: Image1 (upval), Flag (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval)
 						if Image == Image1 and AssetFetchStatus == Enum.AssetFetchStatus.Success and Flag then
 							UseAnimatedBindingResult2((ReactOtterModule.spring(1, config)))
@@ -65,7 +65,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 62 | Named "ImageWithSkeleton
 				end
 			end)
 			
-			return function() --[[ Line: 115 ]]
+			return function()
 				-- upvalues: Flag (ref)
 				Flag = false
 			end
@@ -73,13 +73,13 @@ return ReactModule.memo(function(Frame) --[[ Line: 62 | Named "ImageWithSkeleton
 		if Flag then
 			UseAnimatedBindingResult2((ReactOtterModule.spring(1, config)))
 		end
-		return function() --[[ Line: 95 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = false
 		end
 	end, { Image1, IsNotImageMatch })
 	local ImageStyle = Frame.imageStyle
-	local UseAnimatedBindingResult1 = if ImageStyle == nil then UseAnimatedBindingResult else ReactModule.joinBindings({ UseAnimatedBindingResult, ImageStyle }):map(function(Entry): number --[[ Line: 154 ]]
+	local UseAnimatedBindingResult1 = if ImageStyle == nil then UseAnimatedBindingResult else ReactModule.joinBindings({ UseAnimatedBindingResult, ImageStyle }):map(function(Entry): number
 		return 1 - (1 - Entry[1]) * (1 - (Entry[2].Transparency or 0))
 	end)
 	
@@ -88,14 +88,14 @@ return ReactModule.memo(function(Frame) --[[ Line: 62 | Named "ImageWithSkeleton
 			tag = "size-full",
 			Image = Image1,
 			backgroundStyle = Frame.backgroundStyle,
-			imageStyle = if IsNotImageMatch and ImageStyle ~= nil then ReactModule.joinBindings({ ImageStyle, UseAnimatedBindingResult }):map(function(Entry) --[[ Line: 127 ]]
+			imageStyle = if IsNotImageMatch and ImageStyle ~= nil then ReactModule.joinBindings({ ImageStyle, UseAnimatedBindingResult }):map(function(Entry)
 				local Entry1 = Entry[1]
 				
 				return {
 					Color3 = Entry1.Color3,
 					Transparency = 1 - (1 - Entry1.Transparency) * Entry[2]
 				}
-			end) elseif IsNotImageMatch then UseAnimatedBindingResult:map(function(p1: number) --[[ Line: 136 ]]
+			end) elseif IsNotImageMatch then UseAnimatedBindingResult:map(function(p1: number)
 				return { Color3 = Color3.new(1, 1, 1), Transparency = 1 - p1 }
 			end) else ImageStyle,
 			cornerRadius = if Radius1 == Radius.Circle then UDim.new(1, 0) else UDim.new(0, UseTokensResult.Radius[Radius1]),

@@ -13,7 +13,7 @@ local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispa
 local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return ReactModule.memo(function(p1) --[[ Line: 39 | Named "ExperienceDetailsConnectionsPlayedChip" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseDispatchFunction (copy), SignalsReactModule (copy), Game1 (copy), UseLocalizationFunction (copy), ReactModule (copy), Players (copy), GameConnectionsPlayedChipClickedFunction (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), SduiChip (copy), AvatarGroupType (copy)
 	local LayoutOrder = p1.layoutOrder
 	local UniverseId = p1.universeId
@@ -33,7 +33,7 @@ return ReactModule.memo(function(p1) --[[ Line: 39 | Named "ExperienceDetailsCon
 		},
 		connectionRecentlyPlayed = { "Feature.Friends.Label.FriendRecentlyPlayed" }
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 67 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseSignalStateResult1 (copy), Players (upval), GameConnectionsPlayedChipClickedFunction (upval), UniverseId (copy), TotalCount (copy), AppPage (upval), UserIds (copy), UseLocalizationResult (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 		local RootPlaceId = UseSignalStateResult1 and UseSignalStateResult1.rootPlaceId
 		

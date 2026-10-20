@@ -1,9 +1,9 @@
 ﻿local SSUIMetaLuaEngineFeature = game:GetEngineFeature("SSUIMetaLua")
 
-return function(p1) --[[ Line: 3 | Named "reportChatSuspensionDialogVisibility" ]]
+return function(p1)
 	-- upvalues: SSUIMetaLuaEngineFeature (copy)
 	if SSUIMetaLuaEngineFeature then
-		pcall(function() --[[ Line: 5 ]]
+		pcall(function()
 			-- upvalues: p1 (copy)
 			local SafetyService = game:GetService("SafetyService")
 			

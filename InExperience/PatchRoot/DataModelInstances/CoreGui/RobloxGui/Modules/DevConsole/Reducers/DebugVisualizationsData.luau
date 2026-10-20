@@ -1,7 +1,7 @@
 ﻿local ImmutableModule = require(script.Parent.Parent.Immutable)
 local DebugVisualizationsUpdateSearchFilterModule = require(script.Parent.Parent.Actions.DebugVisualizationsUpdateSearchFilter)
 
-return function(p1, p2) --[[ Line: 5 ]]
+return function(p1, p2)
 	-- upvalues: ImmutableModule (copy), DebugVisualizationsUpdateSearchFilterModule (copy)
 	local P0 = p1 or {
 		debugVisualizationsSearchTerm = "",

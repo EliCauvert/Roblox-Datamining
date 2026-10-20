@@ -11,13 +11,13 @@ local LoadingScreenTelemetryModule = require(ProgressLoading.LoadingScreenTeleme
 local QueueExperimentation = require(Parent.SocialExperiments).QueueExperimentation
 local IsJoinNewServerButtonEnabled = game:GetEngineFeature("PlaceJoinStateEnabled") and (QueueExperimentation.getIsJoinNewServerButtonEnabled() or QueueExperimentation.getIsAutoJoinNewServerEnabled())
 
-return function() --[[ Line: 27 | Named "createLoadingScreenStore" ]]
+return function()
 	-- upvalues: CreateDataCacheFunction (copy), CreateDataResolverFunction (copy), LoadingScreenTelemetryModule (copy), FetchPlayerLocalizationChoiceModule (copy), IsJoinNewServerButtonEnabled (copy), SignalsModule (copy), ExperienceService (copy), GuiService (copy)
 	local DataCache = CreateDataCacheFunction()
 	local DataResolver = CreateDataResolverFunction({
 		supportsMultiGet = false,
 		cache = DataCache,
-		logError = function(p1) --[[ Line: 32 ]]
+		logError = function(p1)
 			-- upvalues: LoadingScreenTelemetryModule (upval)
 			if type(p1) == "table" then
 				LoadingScreenTelemetryModule.countPlayerLocalizationChoiceFailed({ responseCode = p1.responseCode, errorType = p1.errorType })
@@ -27,9 +27,9 @@ return function() --[[ Line: 27 | Named "createLoadingScreenStore" ]]
 				LoadingScreenTelemetryModule.countPlayerLocalizationChoiceFailed({ errorType = "PlayerLocalizationChoiceFetchError" })
 			end
 		end,
-		fetchFn = function(UniverseId, _) --[[ Line: 49 ]]
+		fetchFn = function(UniverseId, _)
 			-- upvalues: FetchPlayerLocalizationChoiceModule (upval)
-			return FetchPlayerLocalizationChoiceModule(UniverseId):andThen(function(Result) --[[ Line: 51 ]]
+			return FetchPlayerLocalizationChoiceModule(UniverseId):andThen(function(Result)
 				-- upvalues: UniverseId (copy)
 				if not Result or not Result.responseBody then
 					error({
@@ -50,7 +50,7 @@ return function() --[[ Line: 27 | Named "createLoadingScreenStore" ]]
 					})
 				end
 				return ResponseBody
-			end):catch(function(Err) --[[ Line: 74 ]]
+			end):catch(function(Err)
 				error(Err)
 			end)
 		end
@@ -64,12 +64,12 @@ return function() --[[ Line: 27 | Named "createLoadingScreenStore" ]]
 	
 	if IsJoinNewServerButtonEnabled then
 		GetJoinState, Signal2 = SignalsModule.createSignal(ExperienceService:GetPlaceJoinState() or "")
-		Connection1 = ExperienceService.PlaceJoinStateChanged:Connect(function(State) --[[ Line: 83 ]]
+		Connection1 = ExperienceService.PlaceJoinStateChanged:Connect(function(State)
 			-- upvalues: Signal2 (ref)
 			Signal2(State)
 		end)
 		GetServerStatusText, Signal2_1 = SignalsModule.createSignal(GuiService:GetUiMessage() or "")
-		Connection = GuiService.UiMessageChanged:Connect(function(MsgType, NewUiMessage) --[[ Line: 89 ]]
+		Connection = GuiService.UiMessageChanged:Connect(function(MsgType, NewUiMessage)
 			-- upvalues: Signal2_1 (ref)
 			if MsgType == Enum.UiMessageType.UiMessageInfo then
 				Signal2_1(NewUiMessage)
@@ -81,12 +81,12 @@ return function() --[[ Line: 27 | Named "createLoadingScreenStore" ]]
 		getServerStatusText = GetServerStatusText,
 		getAndFetchPlayerLocalizationChoice = DataResolver.getAndFetchItem,
 		getCachedPlayerLocalizationChoice = DataResolver.getCachedItem,
-		clear = function() --[[ Line: 96 ]]
+		clear = function()
 			-- upvalues: DataCache (copy), DataResolver (copy)
 			DataCache.clear()
 			DataResolver.clear()
 		end,
-		dispose = function() --[[ Line: 101 ]]
+		dispose = function()
 			-- upvalues: DataResolver (copy), IsJoinNewServerButtonEnabled (upval), Connection1 (ref), Connection (ref)
 			DataResolver.dispose()
 			

@@ -2,7 +2,7 @@
 local ReactModule = require(Parent.React)
 local View = require(Parent.Foundation).View
 
-return function(p1) --[[ Line: 14 | Named "AgentCardActions" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy)
 	return ReactModule.createElement(View, {
 		tag = "row gap-small size-full-0 auto-y",

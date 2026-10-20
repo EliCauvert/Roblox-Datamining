@@ -10,18 +10,18 @@ local ThunkModule = require(PurchasePrompt.Thunk)
 local PurchaseFlowModule = require(PurchasePrompt.Enums.PurchaseFlow)
 
 return {
-	getMockPurchaseFlow = function(p1) --[[ Line: 17 ]]
+	getMockPurchaseFlow = function(p1)
 		-- upvalues: PurchaseFlowModule (copy)
 		return p1 or PurchaseFlowModule.Product
 	end,
-	getMockNativeUpsell = function(_, _, _) --[[ Line: 21 ]]
+	getMockNativeUpsell = function(_, _, _)
 		return {
 			robuxProductId = "testRobuxProductId",
 			productId = "testProductId",
 			robuxPurchaseAmount = 500
 		}
 	end,
-	getMockRobuxUpsellSuggestions = function(p1) --[[ Line: 29 ]]
+	getMockRobuxUpsellSuggestions = function(p1)
 		return {
 			selection = 1,
 			products = p1 or {
@@ -35,7 +35,7 @@ return {
 			}
 		}
 	end,
-	getMockStore = function() --[[ Line: 44 ]]
+	getMockStore = function()
 		-- upvalues: ABTestModule (copy), NetworkModule (copy), AnalyticsModule (copy), PlatformInterfaceModule (copy), ExternalSettingsModule (copy), Rodux (copy), ReducerModule (copy), ThunkModule (copy)
 		return Rodux.Store.new(ReducerModule, {}, {
 			ThunkModule.middleware({

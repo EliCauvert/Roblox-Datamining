@@ -11,7 +11,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 	universeId = if require(Parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents then TModule.optional(TModule.string) else nil
 })
 
-return function(CustomFields, EventContext) --[[ Line: 21 ]]
+return function(CustomFields, EventContext)
 	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), GameFollowThrottleHundrethsPercent (copy), TelemetryService (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	

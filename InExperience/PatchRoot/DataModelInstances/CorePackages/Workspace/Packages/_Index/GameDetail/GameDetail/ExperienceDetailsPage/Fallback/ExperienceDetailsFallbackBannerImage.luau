@@ -6,14 +6,14 @@ local Image = FoundationModule.Image
 local UseExperienceBannerImageModule = require(script.Parent.Parent.useExperienceBannerImage)
 local UseGameInfoModule = require(script.Parent.Parent.useGameInfo)
 
-local function ExperienceDetailsBannerImageSkeleton() --[[ Line: 12 ]]
+local function ExperienceDetailsBannerImageSkeleton()
 	-- upvalues: ReactModule (copy), View (copy)
 	return ReactModule.createElement(View, { tag = "size-full bg-surface-100" })
 end
 
 return {
 	Skeleton = ReactModule.memo(ExperienceDetailsBannerImageSkeleton),
-	Error = ReactModule.memo(function(p1) --[[ Line: 18 | Named "ExperienceDetailsBannerImageError" ]]
+	Error = ReactModule.memo(function(p1)
 		-- upvalues: UseGameInfoModule (copy), UseExperienceBannerImageModule (copy), ReactModule (copy), ExperienceDetailsBannerImageSkeleton (copy), Image (copy)
 		local UseGameInfoModuleResult = UseGameInfoModule(p1.universeId)
 		local UseExperienceBannerImageModuleResult = UseExperienceBannerImageModule(p1.universeId)

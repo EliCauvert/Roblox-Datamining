@@ -2,7 +2,7 @@
 local _ = require(AvatarExperienceCommon.Parent.AvatarExperienceModel)
 local ConstantsModule = require(AvatarExperienceCommon.Constants)
 
-function removeMakeupAssetsFromTryOnsIfOverLimit(List) --[[ Line: 6 ]]
+function removeMakeupAssetsFromTryOnsIfOverLimit(List)
 	-- upvalues: ConstantsModule (copy)
 	local Count = 0
 	local Smallest = 1e999

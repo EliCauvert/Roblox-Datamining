@@ -16,10 +16,10 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 28 ]]
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return { isGroupConversation = p1.isGroupConversation }
 			end),
-			NamedCounterConfigurationAndFormatFunction("AppChat.ChatDetails.Rendered", function(p1) --[[ Line: 34 ]]
+			NamedCounterConfigurationAndFormatFunction("AppChat.ChatDetails.Rendered", function(p1)
 				return { isGroupConversation = p1.isGroupConversation }
 			end)
 		}
@@ -110,10 +110,10 @@ return {
 		description = "",
 		lastUpdated = { 2026, 4, 30 },
 		backendsList = {
-			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 130 ]]
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return { modalVariantOverride = p1.modalVariantOverride }
 			end),
-			NamedCounterConfigurationAndFormatFunction("AppChat.Dialog.ParticipantDetails.Button.AddTrustedConnection", function(p1) --[[ Line: 138 ]]
+			NamedCounterConfigurationAndFormatFunction("AppChat.Dialog.ParticipantDetails.Button.AddTrustedConnection", function(p1)
 				return { modalVariantOverride = p1.modalVariantOverride }
 			end)
 		}

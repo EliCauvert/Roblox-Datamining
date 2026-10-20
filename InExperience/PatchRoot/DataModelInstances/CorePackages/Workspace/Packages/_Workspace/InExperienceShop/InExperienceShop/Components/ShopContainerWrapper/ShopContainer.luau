@@ -13,13 +13,13 @@ local ShopViewModule = require(script.Parent.ShopView)
 local UseShopViewModelModule = require(script.Parent.useShopViewModel)
 local Flag = false
 
-return function(p1) --[[ Line: 25 | Named "ShopContainer" ]]
+return function(p1)
 	-- upvalues: SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), ReactModule (copy), FFlagEnableShopPrefetchModule (copy), Flag (ref), ShopDebugLoggerModule (copy), LogCounterModule (copy), OpenCounterModule (copy), FirstOpenCounterModule (copy), FirstOpenPrefetchHitCounterModule (copy), UseShopViewModelModule (copy), ShopViewModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetInExperienceShopStoreModule)
-	ReactModule.useEffect(function() --[[ Line: 43 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagEnableShopPrefetchModule (upval), Flag (upval), ShopDebugLoggerModule (upval), LogCounterModule (upval), OpenCounterModule (upval), FirstOpenCounterModule (upval), UseSignalStateResult (copy), FirstOpenPrefetchHitCounterModule (upval)
 		local NoFlag: boolean = FFlagEnableShopPrefetchModule and not Flag
-		ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 51 ]]
+		ShopDebugLoggerModule.logLazy(function(): string
 			-- upvalues: NoFlag (copy)
 			return "ShopContainer: mount isFirstOpen=" .. tostring(NoFlag)
 		end)
@@ -29,7 +29,7 @@ return function(p1) --[[ Line: 25 | Named "ShopContainer" ]]
 			Flag = true
 			LogCounterModule(FirstOpenCounterModule)
 			local v1 = #UseSignalStateResult.getCategories(false) > 0
-			ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 61 ]]
+			ShopDebugLoggerModule.logLazy(function(): string
 				-- upvalues: v1 (copy)
 				return "ShopContainer: prefetch cache hit=" .. tostring(v1)
 			end)
@@ -38,7 +38,7 @@ return function(p1) --[[ Line: 25 | Named "ShopContainer" ]]
 				LogCounterModule(FirstOpenPrefetchHitCounterModule)
 			end
 		end
-		task.spawn(function() --[[ Line: 68 ]]
+		task.spawn(function()
 			-- upvalues: ShopDebugLoggerModule (upval), UseSignalStateResult (upval)
 			ShopDebugLoggerModule.log("ShopContainer: calling onShopOpened")
 			UseSignalStateResult.onShopOpened()

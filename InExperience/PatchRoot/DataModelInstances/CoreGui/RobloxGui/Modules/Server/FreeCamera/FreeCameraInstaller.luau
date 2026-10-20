@@ -8,9 +8,9 @@ local RunService = game:GetService("RunService")
 local StarterPlayer = game:GetService("StarterPlayer")
 local ServerUtilModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Server.ServerUtil)
 
-return function() --[[ Line: 28 | Named "Install" ]]
+return function()
 	-- upvalues: PlayerScriptStatusPropertyEngineFeature (copy), StarterPlayer (copy), ServerUtilModule (copy), RunService (copy), list (copy), AllowLuobuFreecamGroup (copy), PolicyService (copy), list1 (copy), Players (copy)
-	local function WaitForChildOfClass(Object, ClassName) --[[ Line: 29 ]]
+	local function WaitForChildOfClass(Object, ClassName)
 		local ClassName1 = Object:FindFirstChildOfClass(ClassName)
 		while not ClassName1 or ClassName1.ClassName ~= ClassName do
 			ClassName1 = Object.ChildAdded:Wait()
@@ -18,7 +18,7 @@ return function() --[[ Line: 28 | Named "Install" ]]
 		return ClassName1
 	end
 	
-	local function AddFreeCamera(Player) --[[ Line: 37 ]]
+	local function AddFreeCamera(Player)
 		-- upvalues: WaitForChildOfClass (copy), PlayerScriptStatusPropertyEngineFeature (upval), StarterPlayer (upval), ServerUtilModule (upval)
 		local PlayerGui = WaitForChildOfClass(Player, "PlayerGui")
 		local Child = nil
@@ -45,7 +45,7 @@ return function() --[[ Line: 28 | Named "Install" ]]
 		Freecam.Parent = PlayerGui
 	end
 	
-	local function ShouldAddFreeCam(Player): boolean --[[ Line: 66 ]]
+	local function ShouldAddFreeCam(Player): boolean
 		-- upvalues: RunService (upval), list (upval), AllowLuobuFreecamGroup (upval), PolicyService (upval), list1 (upval)
 		if RunService:IsStudio() then
 			return true
@@ -77,7 +77,7 @@ return function() --[[ Line: 28 | Named "Install" ]]
 		return false
 	end
 	
-	local function PlayerAdded(Player) --[[ Line: 101 ]]
+	local function PlayerAdded(Player)
 		-- upvalues: ShouldAddFreeCam (copy), AddFreeCamera (copy)
 		if ShouldAddFreeCam(Player) then
 			AddFreeCamera(Player)

@@ -19,14 +19,14 @@ local Map = LuauPolyfillModule.Map
 local String = LuauPolyfillModule.String
 local Callback = nil
 
-local function healSchema(p1) --[[ Line: 96 ]]
+local function healSchema(p1)
 	-- upvalues: Callback (ref)
 	Callback(p1:getTypeMap(), p1:getDirectives())
 	
 	return p1
 end
 
-Callback = function(List, Directives) --[[ Line: 106 | Named "healTypes" ]]
+Callback = function(List, Directives)
 	-- upvalues: Boolean (copy), IsObjectTypeFunction (copy), IsInterfaceTypeFunction (copy), IsUnionTypeFunction (copy), IsInputObjectTypeFunction (copy), IsLeafTypeFunction (copy), Error1 (copy), Array (copy), IsListTypeFunction (copy), GraphQLList (copy), IsNonNullTypeFunction (copy), GraphQLNonNull (copy), IsNamedTypeFunction (copy), Map (copy), String (copy), Console (copy)
 	local Callback = nil
 	local Callback1 = nil
@@ -34,7 +34,7 @@ Callback = function(List, Directives) --[[ Line: 106 | Named "healTypes" ]]
 	local Callback2 = nil
 	local Callback4 = nil
 	
-	local function healNamedType(GetResult) --[[ Line: 187 ]]
+	local function healNamedType(GetResult)
 		-- upvalues: Boolean (upval), IsObjectTypeFunction (upval), Callback (ref), Callback1 (ref), IsInterfaceTypeFunction (upval), IsUnionTypeFunction (upval), Callback2 (ref), IsInputObjectTypeFunction (upval), Callback3 (ref), IsLeafTypeFunction (upval), Error1 (upval)
 		if Boolean.toJSBoolean(IsObjectTypeFunction(GetResult)) then
 			Callback(GetResult)
@@ -67,14 +67,14 @@ Callback = function(List, Directives) --[[ Line: 106 | Named "healTypes" ]]
 		end
 	end
 	
-	Callback = function(p1) --[[ Line: 234 | Named "healFields" ]]
+	Callback = function(p1)
 		-- upvalues: Array (upval), Callback4 (ref), Boolean (upval)
 		local Fields = p1:getFields()
 		
 		for _, value in Fields:entries() do
 			local v1 = value[1]
 			local v2 = value[2]
-			Array.filter(Array.map(v2.args, function(p2) --[[ Line: 250 ]]
+			Array.filter(Array.map(v2.args, function(p2)
 				-- upvalues: Callback4 (upval)
 				p2.type = Callback4(p2.type)
 				
@@ -88,18 +88,18 @@ Callback = function(List, Directives) --[[ Line: 106 | Named "healTypes" ]]
 		end
 	end
 	
-	Callback1 = function(p2) --[[ Line: 267 | Named "healInterfaces" ]]
+	Callback1 = function(p2)
 		-- upvalues: Array (upval), Callback4 (ref), Boolean (upval)
 		if p2.getInterfaces ~= nil then
 			local Interfaces = p2:getInterfaces()
-			local _ = Array.concat(Interfaces, Array.filter(Array.map(Array.splice(Interfaces, 1), function(p3) --[[ Line: 285 ]]
+			local _ = Array.concat(Interfaces, Array.filter(Array.map(Array.splice(Interfaces, 1), function(p3)
 				-- upvalues: Callback4 (upval)
 				return (Callback4(p3))
 			end), Boolean.toJSBoolean))
 		end
 	end
 	
-	Callback3 = function(p2) --[[ Line: 296 | Named "healInputFields" ]]
+	Callback3 = function(p2)
 		-- upvalues: Callback4 (ref)
 		local Fields = p2:getFields()
 		
@@ -114,16 +114,16 @@ Callback = function(List, Directives) --[[ Line: 106 | Named "healTypes" ]]
 		end
 	end
 	
-	Callback2 = function(p3) --[[ Line: 316 | Named "healUnderlyingTypes" ]]
+	Callback2 = function(p3)
 		-- upvalues: Array (upval), Callback4 (ref), Boolean (upval)
 		local Types = p3:getTypes()
-		local _ = Array.concat(Types, Array.filter(Array.map(Array.splice(Types, 1), function(p4) --[[ Line: 327 ]]
+		local _ = Array.concat(Types, Array.filter(Array.map(Array.splice(Types, 1), function(p4)
 			-- upvalues: Callback4 (upval)
 			return (Callback4(p4))
 		end), Boolean.toJSBoolean))
 	end
 	
-	Callback4 = function(Type) --[[ Line: 337 | Named "healType" ]]
+	Callback4 = function(Type)
 		-- upvalues: Boolean (upval), IsListTypeFunction (upval), Callback4 (ref), GraphQLList (upval), IsNonNullTypeFunction (upval), GraphQLNonNull (upval), IsNamedTypeFunction (upval), List (copy)
 		if Boolean.toJSBoolean(IsListTypeFunction(Type)) then
 			local CallbackResult = Callback4(Type.ofType)
@@ -170,7 +170,7 @@ Callback = function(List, Directives) --[[ Line: 106 | Named "healTypes" ]]
 		List:set(Unpacked, (NewMap:get(Unpacked)))
 	end
 	for _, directive in Directives do
-		directive.args = Array.filter(directive.args, function(p3): boolean --[[ Line: 422 ]]
+		directive.args = Array.filter(directive.args, function(p3): boolean
 			-- upvalues: Callback4 (ref)
 			p3.type = Callback4(p3.type)
 			

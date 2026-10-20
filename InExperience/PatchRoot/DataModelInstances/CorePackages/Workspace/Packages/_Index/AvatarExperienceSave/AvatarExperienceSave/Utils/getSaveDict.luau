@@ -5,7 +5,7 @@ local _ = require(AvatarExperienceSave.Context.AvatarSaveContext)
 local FFlagAXBackgroundsPersistence = require(Parent.AvatarExperienceFlags).FFlagAXBackgroundsPersistence
 local AXFixEmptyDictionaryKeysForSaveDict2 = game:DefineFastFlag("AXFixEmptyDictionaryKeysForSaveDict2", false)
 
-local function filterEmptyDicts(Tbl) --[[ Line: 21 ]]
+local function filterEmptyDicts(Tbl)
 	local Copy = table.clone(Tbl)
 	
 	for i, value in Copy do
@@ -16,12 +16,12 @@ local function filterEmptyDicts(Tbl) --[[ Line: 21 ]]
 	return Copy
 end
 
-local function _(p1, p2) --[[ Line: 31 | Named "deepEqualWithoutEmptyDicts" ]]
+local function _(p1, p2)
 	-- upvalues: filterEmptyDicts (copy), TutilsModule (copy)
 	return TutilsModule.deepEqual(filterEmptyDicts(p1), (filterEmptyDicts(p2)))
 end
 
-return function(p1, p2) --[[ Line: 41 | Named "getSaveDict" ]]
+return function(p1, p2)
 	-- upvalues: FFlagAXBackgroundsPersistence (copy), AXFixEmptyDictionaryKeysForSaveDict2 (copy), filterEmptyDicts (copy), TutilsModule (copy)
 	local Equipped = p1.equipped
 	local Equipped1 = p2.equipped

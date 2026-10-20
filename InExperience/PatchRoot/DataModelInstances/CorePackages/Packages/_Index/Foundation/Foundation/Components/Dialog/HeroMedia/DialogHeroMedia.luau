@@ -10,16 +10,16 @@ local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local UseDialogVariantsFunction = require(script.Parent.Parent.useDialogVariants).useDialogVariants
 local config = { height = UDim.new(1, 0) }
 
-return function(p1) --[[ Line: 36 | Named "DialogHeroMedia" ]]
+return function(p1)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseDialogModule (copy), UseDialogVariantsFunction (copy), ReactModule (copy), ViewModule (copy), ConstantsModule (copy), ImageModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseDialogModuleResult = UseDialogModule()
 	local UseDialogVariantsResult = UseDialogVariantsFunction()
-	ReactModule.useEffect(function() --[[ Line: 41 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseDialogModuleResult (copy)
 		UseDialogModuleResult.setHasHeroMedia(true)
 		
-		return function() --[[ Line: 44 ]]
+		return function()
 			-- upvalues: UseDialogModuleResult (upval)
 			UseDialogModuleResult.setHasHeroMedia(false)
 		end

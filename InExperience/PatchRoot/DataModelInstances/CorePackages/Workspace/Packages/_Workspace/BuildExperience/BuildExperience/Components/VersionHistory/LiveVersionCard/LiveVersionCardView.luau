@@ -14,7 +14,7 @@ local InputSize = FoundationModule.Enums.InputSize
 local Radius = FoundationModule.Enums.Radius
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function MetricItem(p1) --[[ Line: 36 ]]
+local function MetricItem(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Icon (copy), IconSize (copy), Text (copy), Skeleton (copy), Radius (copy)
 	local UseTokensResult = UseTokensFunction()
 	
@@ -42,7 +42,7 @@ local function MetricItem(p1) --[[ Line: 36 ]]
 	})
 end
 
-return function(p1) --[[ Line: 73 | Named "LiveVersionCardView" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), Text (copy), MetricItem (copy), IconName (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy)
 	local TestId = p1.testId or "LiveVersionCardView"
 	

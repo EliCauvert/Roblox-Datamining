@@ -12,11 +12,11 @@ local PopoverSide = FoundationModule.Enums.PopoverSide
 local View = FoundationModule.View
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-local function _(p1) --[[ Line: 39 | Named "formatTags" ]]
+local function _(p1)
 	return if typeof(p1) == "table" then p1 else { [p1] = true }
 end
 
-local _ = function(p1, NextSelectionDown, Bottom) --[[ Line: 46 | Named "setMenuSelection" ]]
+local _ = function(p1, NextSelectionDown, Bottom)
 	-- upvalues: PopoverSide (copy)
 	if not p1 or not p1.current then return end
 	if Bottom == PopoverSide.Top then
@@ -29,14 +29,14 @@ local _ = function(p1, NextSelectionDown, Bottom) --[[ Line: 46 | Named "setMenu
 	end
 end
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 61 | Named "HistoryMenu" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 	-- upvalues: ConstantsModule (copy), ReactModule (copy), UseLocalizationFunction (copy), PopoverSide (copy), CryoModule (copy), TraversalTelemetryModule (copy), IconName (copy), View (copy), Icon (copy), Menu (copy), PopoverAlign (copy)
 	local DEFAULTCHEVRONBUTTONSTATE = if p1.idleButtonStateIsDown == nil then ConstantsModule.DEFAULT_CHEVRON_BUTTON_STATE else p1.idleButtonStateIsDown
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local NoDEFAULTCHEVRONBUTTONSTATE = UseStateResult and not DEFAULTCHEVRONBUTTONSTATE or not UseStateResult and DEFAULTCHEVRONBUTTONSTATE
 	local UseLocalizationResult = UseLocalizationFunction({ history = "CoreScripts.TopBar.Traversal.History" })
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function(NextSelectionDown) --[[ Line: 76 ]]
+	local UseResult = ReactModule.useCallback(function(NextSelectionDown)
 		-- upvalues: UseRefResult (copy), p1 (copy), PopoverSide (upval)
 		local MenuSide = p1.menuSide
 		
@@ -52,7 +52,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 61 | 
 			end
 		end
 	end, { p1.menuSide })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 80 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), CryoModule (upval)
 		local HistoryButtonTags1 = nil
 		if p1.historyButtonTags then
@@ -65,14 +65,14 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 61 | 
 			["row auto-xy align-y-center align-x-center radius-medium"] = true
 		}, HistoryButtonTags1)
 	end, { p1.historyButtonTags })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 87 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), UseStateResult (copy), UseStateResult2 (copy)
 		if p1.onMenuToggled then
 			p1.onMenuToggled(not UseStateResult)
 		end
 		UseStateResult2(not UseStateResult)
 	end, { UseStateResult, p1.onMenuToggled })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 95 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), p1 (copy)
 		UseStateResult2(false)
 		
@@ -80,19 +80,19 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 61 | 
 			p1.onMenuToggled(false)
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 101 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseResult2 (copy)
 		if not p1.closeMenuConn then return end
 		local CloseMenuConnResult = p1.closeMenuConn(UseResult2)
 		
-		return function() --[[ Line: 107 ]]
+		return function()
 			-- upvalues: CloseMenuConnResult (copy)
 			for _, Connection in CloseMenuConnResult do
 				Connection:Disconnect()
 			end
 		end
 	end, { p1.closeMenuConn, UseResult2 })
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 128 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: TraversalTelemetryModule (upval), UseResult2 (copy), p1 (copy)
 		TraversalTelemetryModule.sendHistoryMenuHistoryClick({ integration_id = "history_landing", event_type = "click" })
 		UseResult2()
@@ -103,7 +103,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 61 | 
 		ChevronButton = ReactModule.createElement(View, {
 			testId = "--chevron-button",
 			tag = UseMemoResult,
-			onActivated = function() --[[ Line: 162 ]]
+			onActivated = function()
 				-- upvalues: TraversalTelemetryModule (upval), UseStateResult (copy), UseResult1 (copy)
 				TraversalTelemetryModule.sendHistoryMenuButtonActionEvent({
 					integration_id = "history_chevron",
@@ -121,9 +121,9 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 61 | 
 			align = PopoverAlign.Start,
 			anchorRef = p2 or UseRefResult,
 			isOpen = UseStateResult,
-			items = ReactModule.useMemo(function() --[[ Line: 138 ]]
+			items = ReactModule.useMemo(function()
 				-- upvalues: CryoModule (upval), p1 (copy), UseLocalizationResult (copy), IconName (upval), UseResult3 (copy)
-				return (CryoModule.List.join(CryoModule.List.map(p1.historyItems, function(p3) --[[ Line: 139 ]]
+				return (CryoModule.List.join(CryoModule.List.map(p1.historyItems, function(p3)
 					return { id = p3.universeId, text = p3.text, icon = p3.icon }
 				end), {
 					{
@@ -134,7 +134,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 61 | 
 					}
 				}))
 			end, { p1.historyItems }),
-			onActivated = ReactModule.useCallback(function(p3) --[[ Line: 114 ]]
+			onActivated = ReactModule.useCallback(function(p3)
 				-- upvalues: TraversalTelemetryModule (upval), UseResult2 (copy), p1 (copy)
 				TraversalTelemetryModule.sendHistoryMenuItemClick({
 					integration_id = "history_dropdown",

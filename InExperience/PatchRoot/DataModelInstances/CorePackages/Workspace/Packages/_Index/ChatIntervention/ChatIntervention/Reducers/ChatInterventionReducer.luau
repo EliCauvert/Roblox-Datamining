@@ -9,19 +9,19 @@ return require(Parent.Rodux).createReducer({
 	isShowChatNudgeModal = false,
 	isShowChatTimeoutModal = false
 }, {
-	[require(Actions.UpdateShowChatFeedbackModalAction).name] = function(p1, p2) --[[ Line: 35 ]]
+	[require(Actions.UpdateShowChatFeedbackModalAction).name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
 		return Dictionary.set(p1, "isShowChatFeedbackModal", p2.isShow)
 	end,
-	[require(Actions.UpdateShowChatFeedbackPillAction).name] = function(p1, p2) --[[ Line: 39 ]]
+	[require(Actions.UpdateShowChatFeedbackPillAction).name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
 		return Dictionary.set(p1, "isShowChatFeedbackPill", p2.isShow)
 	end,
-	[require(Actions.UpdateShowChatNudgeModalAction).name] = function(p1, p2) --[[ Line: 31 ]]
+	[require(Actions.UpdateShowChatNudgeModalAction).name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
 		return Dictionary.set(p1, "isShowChatNudgeModal", p2.isShow)
 	end,
-	[require(Actions.UpdateShowChatTimeoutModalAction).name] = function(p1, p2) --[[ Line: 27 ]]
+	[require(Actions.UpdateShowChatTimeoutModalAction).name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
 		return Dictionary.set(p1, "isShowChatTimeoutModal", p2.isShow)
 	end

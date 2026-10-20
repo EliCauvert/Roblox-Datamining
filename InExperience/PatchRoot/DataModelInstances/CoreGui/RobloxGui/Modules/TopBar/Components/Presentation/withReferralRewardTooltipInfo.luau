@@ -2,7 +2,7 @@
 local ReactModule = require(CorePackages.Packages.React)
 local HttpRequestModule = require(CorePackages.Packages.HttpRequest)
 local ConfigResult = HttpRequestModule.config({
-	requestFunction = function(p1, p2, p3) --[[ Line: 7 ]]
+	requestFunction = function(p1, p2, p3)
 		-- upvalues: HttpRequestModule (copy)
 		return HttpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
 	end,
@@ -12,29 +12,29 @@ local Url = require(CorePackages.Workspace.Packages.Http).Url
 local UseLocalizationFunction = require(CorePackages.Workspace.Packages.Localization).Hooks.useLocalization
 local CryoModule = require(CorePackages.Packages.Cryo)
 
-function GetReferralRewardTooltipInfo() --[[ Line: 19 ]]
+function GetReferralRewardTooltipInfo()
 	-- upvalues: Url (copy), ConfigResult (copy)
 	return ConfigResult(string.format("%sreferral-reward-metadata/v1/get-reward-metadata?%s", Url.APIS_URL, (Url:makeQueryString({ UniverseId = game.GameId }))), "GET")
 end
 
-function withReferralRewardTooltipInfo(p1) --[[ Line: 27 ]]
+function withReferralRewardTooltipInfo(p1)
 	-- upvalues: CryoModule (copy), ReactModule (copy), UseLocalizationFunction (copy)
-	return function(p2) --[[ Line: 28 ]]
+	return function(p2)
 		-- upvalues: CryoModule (upval), ReactModule (upval), UseLocalizationFunction (upval), p1 (copy)
 		local JoinResult = CryoModule.Dictionary.join(p2, { referralRewardTooltipText = "" })
 		local UseStateResult, UseStateResult2 = ReactModule.useState("")
-		ReactModule.useEffect(function() --[[ Line: 33 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseStateResult2 (copy)
-			GetReferralRewardTooltipInfo():andThen(function(Result) --[[ Line: 34 ]]
+			GetReferralRewardTooltipInfo():andThen(function(Result)
 				-- upvalues: UseStateResult2 (upval)
 				if Result and Result.responseBody and Result.responseBody.name then
 					UseStateResult2(Result.responseBody.name)
-					task.delay(4, function() --[[ Line: 37 ]]
+					task.delay(4, function()
 						-- upvalues: UseStateResult2 (upval)
 						UseStateResult2("")
 					end)
 				end
-			end):catch(function(Err) --[[ Line: 41 ]]
+			end):catch(function(Err)
 				warn(Err)
 			end)
 		end, {})

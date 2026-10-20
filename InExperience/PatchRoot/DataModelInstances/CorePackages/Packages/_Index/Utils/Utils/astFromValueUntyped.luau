@@ -8,9 +8,9 @@ local Number = LuauPolyfillModule.Number
 local Object = LuauPolyfillModule.Object
 local _01909 = nil
 
-local function _(Value) --[[ Line: 31 | Named "isFinite" ]]
+local function _(Value)
 	-- upvalues: Number (copy)
-	local Success, Result = pcall(function(): boolean --[[ Line: 32 ]]
+	local Success, Result = pcall(function(): boolean
 		-- upvalues: Value (copy), Number (upval)
 		local Number: number? = tonumber(Value)
 		
@@ -20,7 +20,7 @@ local function _(Value) --[[ Line: 31 | Named "isFinite" ]]
 	return if Success then Result else false
 end
 
-local function astFromValueUntyped(Value) --[[ Line: 61 ]]
+local function astFromValueUntyped(Value)
 	-- upvalues: Object (copy), Kind (copy), Boolean (copy), Array (copy), astFromValueUntyped (copy), Number (copy), _01909 (ref), Error1 (copy)
 	if Value == Object.None then
 		return { kind = Kind.NULL }
@@ -62,7 +62,7 @@ local function astFromValueUntyped(Value) --[[ Line: 61 ]]
 		local v1 = false
 		
 		if typeof(Value) == "number" then
-			local Success, Result = pcall(function(): boolean --[[ Line: 32 ]]
+			local Success, Result = pcall(function(): boolean
 				-- upvalues: Value (copy), Number (upval)
 				local Number: number? = tonumber(Value)
 				

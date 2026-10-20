@@ -12,9 +12,9 @@ local SetCurrentZoneModule = require(Parent.Actions.SetCurrentZone)
 local PagesModule = require(Parent.Components.Pages)
 local ConstantsModule = require(Parent.Resources.Constants)
 
-return function(p1) --[[ Line: 31 | Named "bindMenuActions" ]]
+return function(p1)
 	-- upvalues: PagesModule (copy), SetCurrentPageModule (copy), ConstantsModule (copy), OpenSystemMenuModule (copy), CloseMenuModule (copy), ContextActionService (copy), DevConsoleMasterModule (copy), UserInputService (copy), UserGameSettings (copy), SetRespawningModule (copy), NavigateBackModule (copy), SetCurrentZoneModule (copy)
-	ContextActionService:BindCoreAction("ToggleInGameMenu", function(_, UserInputState, _) --[[ Line: 32 | Named "toggleMenuFunc" ]]
+	ContextActionService:BindCoreAction("ToggleInGameMenu", function(_, UserInputState, _)
 		-- upvalues: p1 (copy), PagesModule (upval), SetCurrentPageModule (upval), ConstantsModule (upval), OpenSystemMenuModule (upval), CloseMenuModule (upval)
 		if UserInputState ~= Enum.UserInputState.Begin then return end
 		local State = p1:getState()
@@ -39,7 +39,7 @@ return function(p1) --[[ Line: 31 | Named "bindMenuActions" ]]
 			p1:dispatch(CloseMenuModule)
 		end
 	end, false, Enum.KeyCode.Escape)
-	ContextActionService:BindCoreAction("ToggleDeveloperConsole", function(p2, UserInputState) --[[ Line: 59 ]]
+	ContextActionService:BindCoreAction("ToggleDeveloperConsole", function(p2, UserInputState)
 		-- upvalues: DevConsoleMasterModule (upval)
 		if p2 ~= "ToggleDeveloperConsole" then return end
 		if UserInputState == Enum.UserInputState.Begin then
@@ -48,7 +48,7 @@ return function(p1) --[[ Line: 31 | Named "bindMenuActions" ]]
 			return
 		end
 	end, false, Enum.KeyCode.F9)
-	ContextActionService:BindCoreAction("TogglePerformanceStats", function(p2, UserInputState) --[[ Line: 71 ]]
+	ContextActionService:BindCoreAction("TogglePerformanceStats", function(p2, UserInputState)
 		-- upvalues: UserInputService (upval), UserGameSettings (upval)
 		if not UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) and not UserInputService:IsKeyDown(Enum.KeyCode.RightControl) then
 			return Enum.ContextActionResult.Pass
@@ -59,7 +59,7 @@ return function(p1) --[[ Line: 31 | Named "bindMenuActions" ]]
 			return
 		end
 	end, false, Enum.KeyCode.F7)
-	ContextActionService:BindCoreAction("LeaveGame", function(_, UserInputState, _) --[[ Line: 90 | Named "leaveGameFunc" ]]
+	ContextActionService:BindCoreAction("LeaveGame", function(_, UserInputState, _)
 		-- upvalues: p1 (copy), PagesModule (upval), SetCurrentPageModule (upval), ConstantsModule (upval)
 		local State = p1:getState()
 		
@@ -73,7 +73,7 @@ return function(p1) --[[ Line: 31 | Named "bindMenuActions" ]]
 			return Enum.ContextActionResult.Sink
 		end
 	end, false, Enum.KeyCode.L, Enum.KeyCode.ButtonX)
-	ContextActionService:BindCoreAction("ResetCharacter", function(_, UserInputState, _) --[[ Line: 107 | Named "resetCharacterFunc" ]]
+	ContextActionService:BindCoreAction("ResetCharacter", function(_, UserInputState, _)
 		-- upvalues: p1 (copy), PagesModule (upval), ConstantsModule (upval), SetRespawningModule (upval)
 		local State = p1:getState()
 		
@@ -91,7 +91,7 @@ return function(p1) --[[ Line: 31 | Named "bindMenuActions" ]]
 			return Enum.ContextActionResult.Sink
 		end
 	end, false, Enum.KeyCode.R, Enum.KeyCode.ButtonY)
-	ContextActionService:BindCoreAction("NavigateBack", function(_, UserInputState, _) --[[ Line: 132 | Named "navigateBackFunc" ]]
+	ContextActionService:BindCoreAction("NavigateBack", function(_, UserInputState, _)
 		-- upvalues: p1 (copy), PagesModule (upval), DevConsoleMasterModule (upval), CloseMenuModule (upval), NavigateBackModule (upval)
 		local State = p1:getState()
 		local ParentPage = PagesModule.pagesByKey[State.menuPage].parentPage
@@ -110,14 +110,14 @@ return function(p1) --[[ Line: 31 | Named "bindMenuActions" ]]
 		return Enum.ContextActionResult.Sink
 	end, false, Enum.KeyCode.ButtonB)
 	
-	local function _(): boolean --[[ Line: 159 | Named "canBumperSwitch" ]]
+	local function _(): boolean
 		-- upvalues: p1 (copy)
 		local State = p1:getState()
 		
 		return State.menuPage ~= "Controls" and (State.isMenuOpen and (not State.respawn.dialogOpen and (not State.report.dialogOpen and not State.report.reportSentOpen)))
 	end
 	
-	ContextActionService:BindCoreAction("LeftBumperSwitchToZone0", function(_, UserInputState, _) --[[ Line: 169 ]]
+	ContextActionService:BindCoreAction("LeftBumperSwitchToZone0", function(_, UserInputState, _)
 		-- upvalues: p1 (copy), SetCurrentZoneModule (upval)
 		if UserInputState == Enum.UserInputState.Begin then
 			local State = p1:getState()
@@ -130,7 +130,7 @@ return function(p1) --[[ Line: 31 | Named "bindMenuActions" ]]
 		end
 		return Enum.ContextActionResult.Pass
 	end, false, Enum.KeyCode.ButtonL1)
-	ContextActionService:BindCoreAction("RightBumperSwitchToZone1", function(_, UserInputState, _) --[[ Line: 179 ]]
+	ContextActionService:BindCoreAction("RightBumperSwitchToZone1", function(_, UserInputState, _)
 		-- upvalues: p1 (copy), SetCurrentZoneModule (upval)
 		if UserInputState == Enum.UserInputState.Begin then
 			local State = p1:getState()

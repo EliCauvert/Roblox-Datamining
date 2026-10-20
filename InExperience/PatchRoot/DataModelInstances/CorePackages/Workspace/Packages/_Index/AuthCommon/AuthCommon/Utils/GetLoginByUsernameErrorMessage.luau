@@ -30,7 +30,7 @@ local config = {
 if require(AuthCommon.Flags.FFlagEnableIllegalChildAccountLinkingErrorMessageOnSSO) then
 	config[LoginErrorCodesModule.IllegalChildAccountLinking] = "Authentication.Login.LinkIllegalChildAccountLinking"
 end
-return function(p1) --[[ Line: 44 | Named "GetLoginByUsernameErrorMessage" ]]
+return function(p1)
 	-- upvalues: config (copy)
 	return if config[p1] then config[p1] else "Authentication.Login.Response.SomethingWentWrong"
 end

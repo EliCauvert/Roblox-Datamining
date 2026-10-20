@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.SplitPaneEducationalTourSteps)
 
-return function(p1, p2, p3) --[[ Line: 6 | Named "getSplitPaneEducationalTourVideoAssetId" ]]
+return function(p1, p2, p3)
 	if p3 then
 		if p2 and p1.collapsedGamepadVideoAssetId ~= nil then
 			return p1.collapsedGamepadVideoAssetId

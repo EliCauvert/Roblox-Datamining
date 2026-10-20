@@ -23,10 +23,10 @@ local config = {
 	hideAllChatToasts = false,
 	isAppChatVisible = false,
 	isInExperience = false,
-	navigateToChat = function() --[[ Line: 41 ]] end
+	navigateToChat = function() end
 }
 
-return function(p1) --[[ Line: 44 ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseLocalizationFunction (copy), FFlagAppChatToastChatTerminologyFixEnabled (copy), FFlagExpChatEnableFriendsTab (copy), UniversalAppPolicyModule (copy), GetFFlagIsSquadEnabledFunction (copy), GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction (copy), UseIsChatEnabledModule (copy), ReactModule (copy), LifecycleEvents (copy), NotificationTypeEnum (copy), HttpService (copy), Default (copy), ShowNotificationSnoozeMenuSignal (copy), NotificationGroups (copy), ShouldHideFriendsChatToastModule (copy), DismissNotificationSnoozeMenuSignal (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -36,9 +36,9 @@ return function(p1) --[[ Line: 44 ]]
 	local CanSeeChatTab = UniversalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTab()
 	local UseIsChatEnabledModuleResult = UseIsChatEnabledModule()
 	local IsAppChatVisible = (if GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction() then JoinResult.isAppChatVisible else JoinResult.hideAllChatToasts) or not UseIsChatEnabledModuleResult
-	ReactModule.useEffect(function() --[[ Line: 67 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: LifecycleEvents (upval), NotificationTypeEnum (upval), HttpService (upval), Default (upval), JoinResult (copy), ShowNotificationSnoozeMenuSignal (upval), UseLocalizationResult (copy), NotificationGroups (upval)
-		local RegisterResult = LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.UserAction, NotificationTypeEnum.ChatNewMessage, function(p2) --[[ Line: 71 ]]
+		local RegisterResult = LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.UserAction, NotificationTypeEnum.ChatNewMessage, function(p2)
 			-- upvalues: HttpService (upval), Default (upval), JoinResult (upval), ShowNotificationSnoozeMenuSignal (upval), UseLocalizationResult (upval), NotificationGroups (upval)
 			if p2 and p2.userActionType == "click" and p2.notificationData and p2.visualItem and p2.visualItem.eventName == "ChatMessageBody" and p2.visualItem.actionEventParams then
 				local Data = HttpService:JSONDecode(p2.visualItem.actionEventParams)
@@ -55,14 +55,14 @@ return function(p1) --[[ Line: 44 ]]
 			end
 		end)
 		
-		return function() --[[ Line: 103 ]]
+		return function()
 			-- upvalues: RegisterResult (copy)
 			RegisterResult()
 		end
 	end, { JoinResult.navigateToChat, UseLocalizationResult })
-	ReactModule.useEffect(function() --[[ Line: 108 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Default (upval), NotificationTypeEnum (upval), FFlagExpChatEnableFriendsTab (upval), JoinResult (copy), ShouldHideFriendsChatToastModule (upval), IsAppChatVisible (ref), CanSeeChatTab (copy)
-		local ListenToDisplayNotificationResult = Default:listenToDisplayNotification(function(p2) --[[ Line: 110 ]]
+		local ListenToDisplayNotificationResult = Default:listenToDisplayNotification(function(p2)
 			-- upvalues: NotificationTypeEnum (upval), FFlagExpChatEnableFriendsTab (upval), JoinResult (upval), ShouldHideFriendsChatToastModule (upval), IsAppChatVisible (upval), CanSeeChatTab (upval), Default (upval)
 			if p2.notificationType == NotificationTypeEnum.ChatNewMessage then
 				local ShouldHideFriendsChatToastModule1 = FFlagExpChatEnableFriendsTab and (JoinResult.visibleFriendsConversationId ~= nil and ShouldHideFriendsChatToastModule(p2, JoinResult.visibleFriendsConversationId))
@@ -73,7 +73,7 @@ return function(p1) --[[ Line: 44 ]]
 			end
 		end)
 		
-		return function() --[[ Line: 122 ]]
+		return function()
 			-- upvalues: ListenToDisplayNotificationResult (copy)
 			ListenToDisplayNotificationResult:Disconnect()
 		end
@@ -84,7 +84,7 @@ return function(p1) --[[ Line: 44 ]]
 	})
 	
 	if GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction() then
-		ReactModule.useEffect(function() --[[ Line: 128 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: JoinResult (copy), DismissNotificationSnoozeMenuSignal (upval)
 			if not JoinResult.isAppChatVisible and DismissNotificationSnoozeMenuSignal then
 				DismissNotificationSnoozeMenuSignal:fire()

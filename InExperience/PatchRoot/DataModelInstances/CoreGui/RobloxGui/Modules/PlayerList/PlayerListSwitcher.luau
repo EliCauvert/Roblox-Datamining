@@ -17,7 +17,7 @@ local FFlagPlayerListKeepModalHiddenOnRemountModule = require(Parent.Flags.FFlag
 local PlatformLeaderboardContainer = PlayerListModule.Container.PlatformLeaderboardContainer
 local PlayerListSwitcher = RoactModule.PureComponent:extend("PlayerListSwitcher")
 
-function PlayerListSwitcher.didMount(p1) --[[ Line: 31 ]]
+function PlayerListSwitcher.didMount(p1)
 	-- upvalues: FFlagPlayerListKeepModalHiddenOnRemountModule (copy), PlayerListInitialVisibleStateModule (copy)
 	if FFlagPlayerListKeepModalHiddenOnRemountModule and p1.props.isSmallTouchDevice then
 		p1.props.setPlayerListVisible(false)
@@ -28,7 +28,7 @@ function PlayerListSwitcher.didMount(p1) --[[ Line: 31 ]]
 	end
 end
 
-function PlayerListSwitcher.wrapWithUiModeStyleProvider(p1, p2) --[[ Line: 39 ]]
+function PlayerListSwitcher.wrapWithUiModeStyleProvider(p1, p2)
 	-- upvalues: RoactModule (copy), UiModeStyleProvider (copy)
 	return {
 		ThemeProvider = RoactModule.createElement(UiModeStyleProvider, {
@@ -40,7 +40,7 @@ function PlayerListSwitcher.wrapWithUiModeStyleProvider(p1, p2) --[[ Line: 39 ]]
 	}
 end
 
-function PlayerListSwitcher.render(p1) --[[ Line: 50 ]]
+function PlayerListSwitcher.render(p1)
 	-- upvalues: RoactModule (copy), Provider (copy), CreateLayoutValuesModule (copy), FFlagEnableMobilePlayerListOnConsole (copy), TenFootInterfaceModule (copy), PlayerListAppModule1 (copy), PlayerListAppModule (copy), FFlagPlayerListTwoTabsOnLegacy (copy), PlatformLeaderboardContainer (copy)
 	local Element = RoactModule.createElement(Provider, {
 		layoutValues = CreateLayoutValuesModule(not FFlagEnableMobilePlayerListOnConsole and TenFootInterfaceModule:IsEnabled())
@@ -55,18 +55,18 @@ function PlayerListSwitcher.render(p1) --[[ Line: 50 ]]
 	return if FFlagPlayerListTwoTabsOnLegacy then RoactModule.createElement(PlatformLeaderboardContainer, {}, Element) else Element
 end
 
-function PlayerListSwitcher.didUpdate(p1) --[[ Line: 72 ]]
+function PlayerListSwitcher.didUpdate(p1)
 	p1.props.setPlayerListVisible(not p1.props.isSmallTouchDevice)
 end
 
-return RoactRoduxModule.connect(function(p1) --[[ Line: 76 | Named "mapStateToProps" ]]
+return RoactRoduxModule.connect(function(p1)
 	return {
 		isSmallTouchDevice = p1.displayOptions.isSmallTouchDevice
 	}
-end, function(Callback) --[[ Line: 82 | Named "mapDispatchToProps" ]]
+end, function(Callback)
 	-- upvalues: SetPlayerListVisibilityModule (copy)
 	return {
-		setPlayerListVisible = function(p1) --[[ Line: 84 ]]
+		setPlayerListVisible = function(p1)
 			-- upvalues: Callback (copy), SetPlayerListVisibilityModule (upval)
 			return Callback(SetPlayerListVisibilityModule(p1))
 		end

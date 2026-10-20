@@ -14,21 +14,21 @@ local CompositionTags = AppCompositionModule.CompositionTags
 local GetRegionOverridesFunction = AppCompositionModule.getRegionOverrides
 local RegionName = AppCompositionModule.RegionName
 
-local function _(p1) --[[ Line: 23 | Named "getPlatformScale" ]]
+local function _(p1)
 	-- upvalues: DisplayModule (copy)
 	local DisplayStore = DisplayModule.GetDisplayStore(p1)
 	
 	return if DisplayStore.getPlatformScale then DisplayStore.getPlatformScale(p1) else 1
 end
 
-local Computed = SignalsModule.createComputed(function(p1) --[[ Line: 29 ]]
+local Computed = SignalsModule.createComputed(function(p1)
 	-- upvalues: GetRegionOverridesFunction (copy), RegionName (copy), DisplayModule (copy)
 	local RegionOverrides = if GetRegionOverridesFunction and RegionName then GetRegionOverridesFunction(RegionName.NavigationRegion) else nil
 	local DisplayStore = DisplayModule.GetDisplayStore(p1)
 	
 	return (if RegionOverrides and RegionOverrides.widthScale then RegionOverrides.widthScale else 0) * (if DisplayStore.getPlatformScale then DisplayStore.getPlatformScale(p1) else 1)
 end)
-local Computed1 = SignalsModule.createComputed(function(p1) --[[ Line: 37 ]]
+local Computed1 = SignalsModule.createComputed(function(p1)
 	-- upvalues: GetRegionOverridesFunction (copy), RegionName (copy), DisplayModule (copy)
 	local RegionOverrides = if GetRegionOverridesFunction and RegionName then GetRegionOverridesFunction(RegionName.SupportRegion) else nil
 	
@@ -36,7 +36,7 @@ local Computed1 = SignalsModule.createComputed(function(p1) --[[ Line: 37 ]]
 end)
 local BackgroundStyle = { Transparency = 1 }
 
-return ReactModule.memo(function(p1) --[[ Line: 76 | Named "SplitView" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: SignalsReactModule (copy), Computed (copy), Computed1 (copy), EnumsModule (copy), UseSplitViewResizeModule (copy), ReactModule (copy), CompositionTags (copy), CompositionStyleSheet (copy), View (copy), BackgroundStyle (copy), PaneResizerModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(Computed)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(Computed1)
@@ -56,7 +56,7 @@ return ReactModule.memo(function(p1) --[[ Line: 76 | Named "SplitView" ]]
 		hasWidthOverride = p1.supportPane ~= nil and p1.supportPane.width ~= nil,
 		onSupportPaneWidthChanged = p1.onSupportPaneWidthChanged
 	})
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 115 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: IsSupportPaneModeMatch3 (copy), UseSplitViewResizeModuleResult (copy), p1 (copy)
 		if not IsSupportPaneModeMatch3 then
 			UseSplitViewResizeModuleResult.onSupportAbsoluteSizeChanged(p2)

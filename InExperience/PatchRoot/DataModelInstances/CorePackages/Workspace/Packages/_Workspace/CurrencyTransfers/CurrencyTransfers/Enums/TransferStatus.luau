@@ -13,7 +13,7 @@ local config = {
 	[4] = TransferStatusModule.Completed
 }
 
-function TransferStatusModule.fromValue(p1) --[[ Line: 21 ]]
+function TransferStatusModule.fromValue(p1)
 	-- upvalues: config (copy), TransferStatusModule (copy)
 	if p1 == nil then
 		return nil

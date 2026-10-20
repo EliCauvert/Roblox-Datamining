@@ -3,12 +3,12 @@ local BrowserService = game:GetService("BrowserService")
 local HttpService = game:GetService("HttpService")
 local WebViewService = game:GetService("WebViewService")
 
-local function openUnified(Url, Title, Callback) --[[ Line: 25 ]]
+local function openUnified(Url, Title, Callback)
 	-- upvalues: WebViewService (copy)
 	local Connection = nil
 	local Flag = false
 	
-	local function stopListening() --[[ Line: 29 ]]
+	local function stopListening()
 		-- upvalues: Connection (ref)
 		if Connection ~= nil then
 			Connection:Disconnect()
@@ -16,7 +16,7 @@ local function openUnified(Url, Title, Callback) --[[ Line: 25 ]]
 		end
 	end
 	
-	local function close() --[[ Line: 38 ]]
+	local function close()
 		-- upvalues: Flag (ref), Connection (ref), WebViewService (upval)
 		if Flag then return end
 		Flag = true
@@ -28,7 +28,7 @@ local function openUnified(Url, Title, Callback) --[[ Line: 25 ]]
 		WebViewService:CloseWindow()
 	end
 	
-	Connection = WebViewService.OnWindowClosed:Connect(function() --[[ Line: 47 ]]
+	Connection = WebViewService.OnWindowClosed:Connect(function()
 		-- upvalues: Flag (ref), Connection (ref), WebViewService (upval), Callback (copy)
 		if not Flag then
 			Flag = true
@@ -48,12 +48,12 @@ local function openUnified(Url, Title, Callback) --[[ Line: 25 ]]
 	return close, stopListening
 end
 
-local function openBrowser(Url, Title, Callback) --[[ Line: 60 ]]
+local function openBrowser(Url, Title, Callback)
 	-- upvalues: BrowserService (copy), HttpService (copy)
 	local Connection = nil
 	local Flag = false
 	
-	local function stopListening() --[[ Line: 64 ]]
+	local function stopListening()
 		-- upvalues: Connection (ref)
 		if Connection ~= nil then
 			Connection:Disconnect()
@@ -62,7 +62,7 @@ local function openBrowser(Url, Title, Callback) --[[ Line: 60 ]]
 	end
 	
 	if Callback then
-		Connection = BrowserService.BrowserWindowClosed:Connect(function() --[[ Line: 73 ]]
+		Connection = BrowserService.BrowserWindowClosed:Connect(function()
 			-- upvalues: Flag (ref), Connection (ref), Callback (copy)
 			Flag = true
 			
@@ -82,7 +82,7 @@ local function openBrowser(Url, Title, Callback) --[[ Line: 60 ]]
 		title = Title
 	}))
 	
-	return function() --[[ Line: 89 | Named "close" ]]
+	return function()
 		-- upvalues: Flag (ref), Connection (ref), BrowserService (upval)
 		if Flag then return end
 		Flag = true
@@ -95,7 +95,7 @@ local function openBrowser(Url, Title, Callback) --[[ Line: 60 ]]
 	end, stopListening
 end
 
-return function(Url, Title, p1) --[[ Line: 101 | Named "openWebViewSession" ]]
+return function(Url, Title, p1)
 	-- upvalues: GetFFlagEnableUnifiedWebViewsFunction (copy), openUnified (copy), openBrowser (copy)
 	return if GetFFlagEnableUnifiedWebViewsFunction() then openUnified(Url, Title, p1) else openBrowser(Url, Title, p1)
 end

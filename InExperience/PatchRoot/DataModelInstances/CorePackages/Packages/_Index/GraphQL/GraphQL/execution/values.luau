@@ -25,11 +25,11 @@ local CoerceVariableValues = nil
 local getArgumentValues = nil
 local Callback = nil
 
-local function GetVariableValues(p1, p2, p3, p4) --[[ Line: 79 ]]
+local function GetVariableValues(p1, p2, p3, p4)
 	-- upvalues: CoerceVariableValues (ref), GraphQLError (copy)
 	local List = {}
 	local MaxErrors = if p4 == nil then nil else p4.maxErrors
-	local Success, Result = pcall(CoerceVariableValues, p1, p2, p3, function(p5) --[[ Line: 91 ]]
+	local Success, Result = pcall(CoerceVariableValues, p1, p2, p3, function(p5)
 		-- upvalues: MaxErrors (ref), List (copy), GraphQLError (upval)
 		if MaxErrors ~= nil and MaxErrors <= #List then
 			error(GraphQLError.new("Too many errors processing variables, error limit reached. Execution aborted."))
@@ -43,7 +43,7 @@ local function GetVariableValues(p1, p2, p3, p4) --[[ Line: 79 ]]
 	return if #List == 0 then { coerced = Result } else { errors = List }
 end
 
-CoerceVariableValues = function(p1, List, p2, Callback1: (any) -> ()) --[[ Line: 113 | Named "coerceVariableValues" ]]
+CoerceVariableValues = function(p1, List, p2, Callback1: (any) -> ())
 	-- upvalues: TypeFromASTFunction (copy), IsInputTypeFunction (copy), PrintFunction (copy), GraphQLError (copy), Callback (ref), ValueFromASTFunction (copy), IsNonNullTypeFunction (copy), InspectFunction (copy), NullModule (copy), CoerceInputValueFunction (copy), PrintPathArrayFunction (copy)
 	local t = {}
 	
@@ -61,7 +61,7 @@ CoerceVariableValues = function(p1, List, p2, Callback1: (any) -> ()) --[[ Line:
 			if NullModule1 == NullModule and IsNonNullTypeFunction(TypeFromASTResult) then
 				Callback1(GraphQLError.new(("Variable \"$%s\" of non-null type \"%s\" must not be null."):format(Value, (InspectFunction(TypeFromASTResult))), value))
 			else
-				t[Value] = CoerceInputValueFunction(NullModule1, TypeFromASTResult, function(p3, p4, p5) --[[ Line: 174 ]]
+				t[Value] = CoerceInputValueFunction(NullModule1, TypeFromASTResult, function(p3, p4, p5)
 					-- upvalues: Value (copy), InspectFunction (upval), PrintPathArrayFunction (upval), Callback1 (copy), GraphQLError (upval), value (copy)
 					local Text = ("Variable \"$%s\" got invalid value "):format(Value) .. InspectFunction(p4)
 					
@@ -80,10 +80,10 @@ CoerceVariableValues = function(p1, List, p2, Callback1: (any) -> ()) --[[ Line:
 	return t
 end
 
-getArgumentValues = function(p3, FindResult, p4) --[[ Line: 207 | Named "getArgumentValues" ]]
+getArgumentValues = function(p3, FindResult, p4)
 	-- upvalues: KeyMapFunction (copy), IsNonNullTypeFunction (copy), GraphQLError (copy), InspectFunction (copy), Kind (copy), Callback (ref), IsNillishFunction (copy), ValueFromASTFunction (copy), PrintFunction (copy)
 	local DefaultValues = {}
-	local KeyMapResult = KeyMapFunction(if FindResult.arguments then FindResult.arguments else {}, function(p5) --[[ Line: 217 ]]
+	local KeyMapResult = KeyMapFunction(if FindResult.arguments then FindResult.arguments else {}, function(p5)
 		return p5.name.value
 	end)
 	
@@ -130,16 +130,16 @@ getArgumentValues = function(p3, FindResult, p4) --[[ Line: 207 | Named "getArgu
 	return DefaultValues
 end
 
-Callback = function(p5, p6): boolean --[[ Line: 325 | Named "hasOwnProperty" ]]
+Callback = function(p5, p6): boolean
 	return p5[p6] ~= nil
 end
 
 return {
 	getVariableValues = GetVariableValues,
 	getArgumentValues = getArgumentValues,
-	getDirectiveValues = function(p5, p6, p7) --[[ Line: 305 ]]
+	getDirectiveValues = function(p5, p6, p7)
 		-- upvalues: Array (copy), getArgumentValues (ref)
-		local FindResult = if p6.directives then Array.find(p6.directives, function(p8): boolean --[[ Line: 312 ]]
+		local FindResult = if p6.directives then Array.find(p6.directives, function(p8): boolean
 			-- upvalues: p5 (copy)
 			return p8.name.value == p5.name
 		end) else nil

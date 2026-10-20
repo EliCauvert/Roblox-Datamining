@@ -20,25 +20,25 @@ local config = {
 	createNewNavigator = ConversationStackNavigatorModule
 }
 
-function ConversationStackNavigatorConnector(p1) --[[ Line: 41 ]]
+function ConversationStackNavigatorConnector(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseChatWideModeFocusModule (copy), ReactModule (copy), UserGameSettings (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), EnumScreensModule (copy), ChatConversationTopBarModule (copy), ChatTopBarBaseModule (copy), SquadAddFriendsIconButtonModule (copy), SystemMenuTopBarModule (copy), FFlagAppChatConsoleFocusFixesModule (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseStyleResult = UseStyleFunction()
 	local UseChatWideModeFocusModuleResult = UseChatWideModeFocusModule()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(UserGameSettings.ReducedMotion)
-	ReactModule.useEffect(function() --[[ Line: 49 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UserGameSettings (upval), UseStateResult2 (copy)
-		local Connection = UserGameSettings:GetPropertyChangedSignal("ReducedMotion"):Connect(function() --[[ Line: 50 ]]
+		local Connection = UserGameSettings:GetPropertyChangedSignal("ReducedMotion"):Connect(function()
 			-- upvalues: UseStateResult2 (upval), UserGameSettings (upval)
 			UseStateResult2(UserGameSettings.ReducedMotion)
 		end)
 		
-		return function() --[[ Line: 53 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end
 	end, {})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 58 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UnionResult (copy), UseStyleResult (copy), UseStateResult (copy)
 		local NewNavigator = UnionResult.createNewNavigator({
 			transparent = true,
@@ -75,7 +75,7 @@ function ConversationStackNavigatorConnector(p1) --[[ Line: 41 ]]
 		Element = ReactModule.createElement(ChatTopBarBaseModule, {
 			screenName = EnumScreensModule.SquadLobby,
 			navigation = UnionResult.navigation,
-			renderRight = function() --[[ Line: 93 ]]
+			renderRight = function()
 				-- upvalues: ReactModule (upval), SquadAddFriendsIconButtonModule (upval), UnionResult (copy)
 				return ReactModule.createElement(SquadAddFriendsIconButtonModule, { navigation = UnionResult.navigation })
 			end
@@ -114,15 +114,15 @@ end
 local ConversationStackNavigatorConnectorWrapper = ReactModule.PureComponent:extend("ConversationStackNavigatorConnectorWrapper")
 ConversationStackNavigatorConnectorWrapper.router = ConversationStackNavigatorModule().router
 
-function ConversationStackNavigatorConnectorWrapper.init(p1) --[[ Line: 142 ]]
+function ConversationStackNavigatorConnectorWrapper.init(p1)
 	-- upvalues: ConversationStackNavigatorConnectorWrapper (copy)
-	function p1.setRouter(Router) --[[ Line: 143 ]]
+	function p1.setRouter(Router)
 		-- upvalues: ConversationStackNavigatorConnectorWrapper (upval)
 		ConversationStackNavigatorConnectorWrapper.router = Router
 	end
 end
 
-function ConversationStackNavigatorConnectorWrapper.render(p1) --[[ Line: 148 ]]
+function ConversationStackNavigatorConnectorWrapper.render(p1)
 	-- upvalues: ReactModule (copy), CryoModule (copy)
 	return ReactModule.createElement(ConversationStackNavigatorConnector, CryoModule.Dictionary.join(p1.props, { setRouter = p1.setRouter }))
 end

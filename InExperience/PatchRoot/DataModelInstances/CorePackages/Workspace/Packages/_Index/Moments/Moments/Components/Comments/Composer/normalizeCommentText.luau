@@ -34,13 +34,13 @@ local config2 = {
 	[65279] = true
 }
 
-local function normalizeAsciiWhitespace(Text: string): string --[[ Line: 48 ]]
-	return (string.gsub(string.gsub(string.gsub(Text, "%s+", function(Text: string): string --[[ Line: 49 ]]
+local function normalizeAsciiWhitespace(Text: string): string
+	return (string.gsub(string.gsub(string.gsub(Text, "%s+", function(Text: string): string
 		return if string.find(Text, "[\n\11\f\r]") then "\n" else " "
 	end), "^[ \n]", ""), "[ \n]$", ""))
 end
 
-return function(Text: string) --[[ Line: 57 | Named "normalizeCommentText" ]]
+return function(Text: string)
 	-- upvalues: normalizeAsciiWhitespace (copy), config (copy), config1 (copy), config2 (copy)
 	if utf8.len(Text) == nil then
 		return (normalizeAsciiWhitespace(Text))

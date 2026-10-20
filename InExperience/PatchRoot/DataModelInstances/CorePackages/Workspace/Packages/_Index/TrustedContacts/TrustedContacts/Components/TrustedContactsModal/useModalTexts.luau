@@ -4,7 +4,7 @@ local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local TrustedConnectionStatus = require(TrustedContacts.Enums).TrustedConnectionStatus
 
-return function(p1) --[[ Line: 14 | Named "useModalTexts" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), TrustedConnectionStatus (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		addTFHeader = "Feature.Friends.TrustedFriend.Label.AddTrustedFriend",
@@ -14,7 +14,7 @@ return function(p1) --[[ Line: 14 | Named "useModalTexts" ]]
 		newTFHeader = "Feature.Friends.TrustedFriend.Info.Modal.Header",
 		newTFBody = "Feature.Friends.Description.YouCanDoMoreWithTrustedFriends"
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 24 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: TrustedConnectionStatus (upval), UseLocalizationResult (copy)
 		return {
 			[TrustedConnectionStatus.Friends] = {

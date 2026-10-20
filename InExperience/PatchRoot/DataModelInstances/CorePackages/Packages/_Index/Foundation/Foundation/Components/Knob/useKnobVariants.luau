@@ -7,7 +7,7 @@ local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext
 local GetKnobSizeModule = require(script.Parent.getKnobSize)
 local IconSizeModule = require(Foundation.Enums.IconSize)
 
-local function computeProps(p1) --[[ Line: 38 ]]
+local function computeProps(p1)
 	local NewOffset = p1.size.X.Offset + p1.shadowPadding * 2
 	
 	return {
@@ -19,7 +19,7 @@ local function computeProps(p1) --[[ Line: 38 ]]
 	}
 end
 
-local function variantsFactory(p1) --[[ Line: 57 ]]
+local function variantsFactory(p1)
 	-- upvalues: InputSizeModule (copy), computeProps (copy), IconSizeModule (copy), GetKnobSizeModule (copy)
 	return {
 		common = {
@@ -63,7 +63,7 @@ local function variantsFactory(p1) --[[ Line: 57 ]]
 	}
 end
 
-return function(p1, p2, p3) --[[ Line: 112 ]]
+return function(p1, p2, p3)
 	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
 	local Knob = VariantsContextModule.useVariants("Knob", variantsFactory, p1)
 	

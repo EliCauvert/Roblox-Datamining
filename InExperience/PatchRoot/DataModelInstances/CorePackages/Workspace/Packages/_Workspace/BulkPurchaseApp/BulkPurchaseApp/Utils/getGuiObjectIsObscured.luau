@@ -3,17 +3,17 @@ local BulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
 local FIntAXGuiObjectIsObscuredPaddingModule = require(BulkPurchaseApp.Flags.FIntAXGuiObjectIsObscuredPadding)
 local FFlagFixBulkPurchaseTopBarObfuscation = require(BulkPurchaseApp.Parent.SharedFlags).FFlagFixBulkPurchaseTopBarObfuscation
 
-local function _(Image): boolean --[[ Line: 7 | Named "isTransparentImageLabel" ]]
+local function _(Image): boolean
 	-- upvalues: FFlagFixBulkPurchaseTopBarObfuscation (copy)
 	return FFlagFixBulkPurchaseTopBarObfuscation and (Image:IsA("ImageLabel") and Image.ImageTransparency == 1)
 end
 
-local _ = function(Frame): boolean --[[ Line: 11 | Named "hasDefaultTransparency" ]]
+local _ = function(Frame): boolean
 	-- upvalues: FFlagFixBulkPurchaseTopBarObfuscation (copy)
 	return FFlagFixBulkPurchaseTopBarObfuscation and (Frame.BackgroundTransparency == 0 and (Frame:HasTag("gui-object-defaults") and not Frame:HasTag("x-default-transparency")))
 end
 
-local function getGuiObjectIsObscuredAtPosition(Frame, XDelta, YDelta): boolean --[[ Line: 18 ]]
+local function getGuiObjectIsObscuredAtPosition(Frame, XDelta, YDelta): boolean
 	-- upvalues: CoreGui (copy), FFlagFixBulkPurchaseTopBarObfuscation (copy)
 	for _, Frame1 in CoreGui:GetGuiObjectsAtPosition(XDelta, YDelta) do
 		if (not Frame1:IsA("Frame") and (not FFlagFixBulkPurchaseTopBarObfuscation or (not Frame1:IsA("ImageLabel") or Frame1.ImageTransparency ~= 1)) or Frame1.Active ~= false or Frame1.BackgroundTransparency ~= 1 and (not FFlagFixBulkPurchaseTopBarObfuscation or (Frame1.BackgroundTransparency ~= 0 or (not Frame1:HasTag("gui-object-defaults") or Frame1:HasTag("x-default-transparency"))))) and not Frame1:IsDescendantOf(Frame) then
@@ -23,7 +23,7 @@ local function getGuiObjectIsObscuredAtPosition(Frame, XDelta, YDelta): boolean 
 	return false
 end
 
-return function(Frame: Frame) --[[ Line: 39 | Named "getGuiObjectIsObscured" ]]
+return function(Frame: Frame)
 	-- upvalues: getGuiObjectIsObscuredAtPosition (copy), FIntAXGuiObjectIsObscuredPaddingModule (copy)
 	local AbsolutePosition: number = Frame.AbsolutePosition
 	local AbsoluteSize: number = Frame.AbsoluteSize

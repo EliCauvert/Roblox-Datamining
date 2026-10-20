@@ -40,7 +40,7 @@ local FFlagSduiVerticalFeedScrollTelemetry = require(Parent.SharedFlags).FFlagSd
 local FFlagLuaAppSduiVideoThumbnail = require(Parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
 local FFlagLuaAppOneByTwoHoverIdleAutoplay = require(Parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
 
-local function SduiPageEntryPoint(p1, p2) --[[ Line: 152 ]]
+local function SduiPageEntryPoint(p1, p2)
 	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), FFlagSduiPageEntryUseSharedHooks (copy), UseComponentConfigModule (copy), ReactModule (copy), GetSduiApiStoreModule (copy), SignalsReactModule (copy), UseUiStatusModule (copy), UiStatus (copy), FFlagSduiPageEntryPointResolvedSlot (copy), UseComponentLifecycleTimingModule (copy), UseLocalAnalyticsDataModule (copy), UseStatefulRefModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), ReactFocusNavigationModule (copy), UseCloseWithBackButtonFunction (copy), FFlagLuaAppSduiPageEntryPointSnackbar (copy), UsePageEntrySnackbarModule (copy), UseDataUpdatedTimestampModule (copy), UseCreateClientBindingSduiContextModule (copy), FFlagLuaAppSduiVideoThumbnail (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), GetSduiComponentWrapperFunction (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), FFlagSduiSrpScrollAway (copy), FFlagSduiVerticalFeedScrollTelemetry (copy), FFlagAppThemeHalloween2026HomeBackground (copy), SduiPageNavigationHeaderModule (copy), CompositionTags (copy), NavButtonType (copy), FoundationModule (copy), Loading (copy), SduiPageErrorStateModule (copy), ReactRobloxModule (copy), Snackbar (copy), CoreGui (copy)
 	local AppPage = p1.appPage
 	local ConfigKey = p1.configKey or AppPage
@@ -49,11 +49,11 @@ local function SduiPageEntryPoint(p1, p2) --[[ Line: 152 ]]
 	local UseTokensResult = UseTokensFunction()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseComponentConfigModuleResult = nil
-	UseComponentConfigModuleResult = if FFlagSduiPageEntryUseSharedHooks then UseComponentConfigModule(ConfigKey, p1.identifier) else SignalsReactModule.useSignalState((ReactModule.useCallback(function(p3) --[[ Line: 166 ]]
+	UseComponentConfigModuleResult = if FFlagSduiPageEntryUseSharedHooks then UseComponentConfigModule(ConfigKey, p1.identifier) else SignalsReactModule.useSignalState((ReactModule.useCallback(function(p3)
 		-- upvalues: GetSduiApiStoreModule (upval), ConfigKey (copy), p1 (copy)
 		return GetSduiApiStoreModule().getRootConfig(ConfigKey, p3, p1.identifier)
 	end, { ConfigKey, p1.identifier })))
-	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useCallback(function(p3) --[[ Line: 173 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useCallback(function(p3)
 		-- upvalues: GetSduiApiStoreModule (upval), ConfigKey (copy)
 		return GetSduiApiStoreModule().getTitle(ConfigKey, p3)
 	end, { ConfigKey }))) or p1.pageTitle
@@ -65,13 +65,13 @@ local function SduiPageEntryPoint(p1, p2) --[[ Line: 152 ]]
 	if FFlagSduiPageEntryUseSharedHooks then
 		UseComponentLifecycleTimingModule(PageTimer, typeof(UseComponentConfigModuleResult) == "table" or FFlagSduiPageEntryPointResolvedSlot and NoIsUseUiStatusModuleResultMatch1)
 	else
-		ReactModule.useEffect(function() --[[ Line: 193 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: PageTimer (copy)
 			if PageTimer then
 				PageTimer.logComponentMounted()
 			end
 		end, { PageTimer })
-		ReactModule.useEffect(function() --[[ Line: 200 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: PageTimer (copy), UseComponentConfigModuleResult (ref), FFlagSduiPageEntryPointResolvedSlot (upval), NoIsUseUiStatusModuleResultMatch1 (copy)
 			if PageTimer and (UseComponentConfigModuleResult or FFlagSduiPageEntryPointResolvedSlot and NoIsUseUiStatusModuleResultMatch1) then
 				PageTimer.logComponentReady()
@@ -82,7 +82,7 @@ local function SduiPageEntryPoint(p1, p2) --[[ Line: 152 ]]
 			if FFlagSduiPageEntryPointResolvedSlot then NoIsUseUiStatusModuleResultMatch1 else nil
 		})
 	end
-	local UseLocalAnalyticsDataModuleResult = if FFlagSduiPageEntryUseSharedHooks then UseLocalAnalyticsDataModule(ConfigKey, AppPage, p1.additionalAnalyticsData) else ReactModule.useMemo(function() --[[ Line: 215 ]]
+	local UseLocalAnalyticsDataModuleResult = if FFlagSduiPageEntryUseSharedHooks then UseLocalAnalyticsDataModule(ConfigKey, AppPage, p1.additionalAnalyticsData) else ReactModule.useMemo(function()
 		-- upvalues: ConfigKey (copy), AppPage (copy)
 		return { configKey = ConfigKey, appPage = AppPage }
 	end, { ConfigKey, AppPage })
@@ -95,7 +95,7 @@ local function SduiPageEntryPoint(p1, p2) --[[ Line: 152 ]]
 		UseStatefulRefModuleResult, UseStatefulRefModuleResult2 = ReactModule.useState(nil)
 		ReactModule.useRef(UseStatefulRefModuleResult).current = UseStatefulRefModuleResult
 	end
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 232 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval)
 		if p1.onCloseActivated then
 			p1.onCloseActivated()
@@ -117,7 +117,7 @@ local function SduiPageEntryPoint(p1, p2) --[[ Line: 152 ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseCreateClientBindingSduiContextModuleResult = UseCreateClientBindingSduiContextModule(AppPage, UseStateResult, nil, UseDataUpdatedTimestampModuleResult, ConfigKey, nil, p1.routeName, p1.scrollAway, if FFlagLuaAppSduiVideoThumbnail or FFlagLuaAppOneByTwoHoverIdleAutoplay then p1.videoPlaybackContext else nil)
 	local NoUseStatefulRefModuleResult = UseStatefulRefModuleResult == nil
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 270 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseComponentConfigModuleResult (ref), GetSduiComponentWrapperFunction (upval), ReactModule (upval), SduiPageEntryPointName (copy), UseCreateClientBindingSduiContextModuleResult (copy), UseLocalAnalyticsDataModuleResult (copy), p1 (copy), FFlagLuaAppMediaGalleryGamepadSupport (upval), FFlagSduiSrpScrollAway (upval), FFlagSduiVerticalFeedScrollTelemetry (upval), FFlagAppThemeHalloween2026HomeBackground (upval)
 		return if UseComponentConfigModuleResult == nil then nil else ReactModule.createElement(GetSduiComponentWrapperFunction(UseComponentConfigModuleResult), {
 			debugName = SduiPageEntryPointName,

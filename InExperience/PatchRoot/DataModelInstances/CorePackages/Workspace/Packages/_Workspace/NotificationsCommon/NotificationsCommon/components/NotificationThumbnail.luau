@@ -16,17 +16,17 @@ local IconsLogoBlock = Images["icons/logo/block"]
 local IconsCommonSafety = Images["icons/common/safety"]
 local UseNotificationCardStateModule = require(Parent.context.useNotificationCardState)
 
-local function v15(IdType) --[[ Line: 24 ]]
+local function v15(IdType)
 	-- upvalues: TypeModule (copy), UserLibConstants (copy), EnableStreamAvatarImageUrlThumbnail (copy)
 	return if IdType == TypeModule.SENDERThumbnailTypeEnum.Game then UserLibConstants.RbxthumbTypes.GameIcon elseif IdType == TypeModule.SENDERThumbnailTypeEnum.User then UserLibConstants.RbxthumbTypes.AvatarHeadShot elseif IdType == TypeModule.SENDERThumbnailTypeEnum.Group then UserLibConstants.RbxthumbTypes.GroupIcon elseif IdType == TypeModule.SENDERThumbnailTypeEnum.Asset then UserLibConstants.RbxthumbTypes.Asset elseif IdType == TypeModule.SENDERThumbnailTypeEnum.Bundle then UserLibConstants.RbxthumbTypes.BundleThumbnail elseif IdType == TypeModule.SENDERThumbnailTypeEnum.GamePass then UserLibConstants.RbxthumbTypes.GamePass elseif EnableStreamAvatarImageUrlThumbnail and IdType == TypeModule.SENDERThumbnailTypeEnum.AvatarImageUrl then UserLibConstants.RbxthumbTypes.AvatarImageUrl else UserLibConstants.RbxthumbTypes.GameIcon
 end
 
-local function _(p1): boolean --[[ Line: 47 ]]
+local function _(p1): boolean
 	-- upvalues: TypeModule (copy), EnableStreamAvatarImageUrlThumbnail (copy)
 	return p1.idType == TypeModule.SENDERThumbnailTypeEnum.User or EnableStreamAvatarImageUrlThumbnail and p1.idType == TypeModule.SENDERThumbnailTypeEnum.AvatarImageUrl
 end
 
-return function() --[[ Line: 55 ]]
+return function()
 	-- upvalues: UseNotificationCardStateModule (copy), EnableStreamAvatarImageUrlThumbnail (copy), TypeModule (copy), UseStyleFunction (copy), ConstantsModule (copy), React (copy), ImageSetLabel (copy), IconsCommonSafety (copy), IconsLogoBlock (copy), v15 (copy), UserLibConstants (copy), FFlagNotificationThumbnailUseProfileFrameThumbnailModule (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), LoadableImage (copy)
 	local Thumbnail = UseNotificationCardStateModule("thumbnail")
 	

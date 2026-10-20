@@ -13,7 +13,7 @@ FriendIcon.defaultProps = {
 	maskColor = require(Parent.Style).Colors.White
 }
 
-function FriendIcon.render(p1) --[[ Line: 25 ]]
+function FriendIcon.render(p1)
 	-- upvalues: ConstantsModule (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), RoactModule (copy), ImageSetLabel (copy), GetImageDataFunction (copy)
 	local User = p1.props.user
 	local DotSize = p1.props.dotSize

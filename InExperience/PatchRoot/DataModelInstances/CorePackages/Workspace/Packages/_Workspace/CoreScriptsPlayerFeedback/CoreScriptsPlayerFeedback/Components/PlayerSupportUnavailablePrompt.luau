@@ -38,8 +38,8 @@ local config = {
 }
 local config1 = { titleKey = "DefaultTitle", bodyKey = "DefaultBody" }
 
-local function _() --[[ Line: 105 | Named "openAbuseReportPage" ]]
-	pcall(function() --[[ Line: 106 ]]
+local function _()
+	pcall(function()
 		local RobloxGui = game:GetService("CoreGui"):FindFirstChild("RobloxGui")
 		local Modules = RobloxGui and RobloxGui:FindFirstChild("Modules") or nil
 		local Settings = Modules and Modules:FindFirstChild("Settings") or nil
@@ -54,7 +54,7 @@ local function _() --[[ Line: 105 | Named "openAbuseReportPage" ]]
 	end)
 end
 
-return (ReactModule.memo(function(p1) --[[ Line: 120 ]]
+return (ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), config (copy), config1 (copy), FFlagPlayerSupportPromptEventIngestModule (copy), ReactModule (copy), PlayerSupportPromptTelemetryModule (copy), UseEscapeDismissModule (copy), Dialog (copy), View (copy), Icon (copy), BuilderIconsModule (copy), IconSize (copy), IconVariant (copy), Text (copy), ButtonVariant (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -83,12 +83,12 @@ return (ReactModule.memo(function(p1) --[[ Line: 120 ]]
 	local Reason = p1.reason or ""
 	
 	if FFlagPlayerSupportPromptEventIngestModule then
-		ReactModule.useEffect(function() --[[ Line: 151 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: PlayerSupportPromptTelemetryModule (upval), Reason (copy)
 			PlayerSupportPromptTelemetryModule.logUnavailableShown(Reason)
 		end, { Reason })
 	end
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 159 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FFlagPlayerSupportPromptEventIngestModule (upval), p1 (copy), PlayerSupportPromptTelemetryModule (upval), Reason (copy)
 		if FFlagPlayerSupportPromptEventIngestModule and p1.openPlayerSupportPrompt then
 			PlayerSupportPromptTelemetryModule.log({
@@ -102,7 +102,7 @@ return (ReactModule.memo(function(p1) --[[ Line: 120 ]]
 			p1.openPlayerSupportPrompt()
 		end
 	end, if FFlagPlayerSupportPromptEventIngestModule then { p1.closePrompt, p1.openPlayerSupportPrompt, Reason } else { p1.closePrompt, p1.openPlayerSupportPrompt })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 179 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: FFlagPlayerSupportPromptEventIngestModule (upval), PlayerSupportPromptTelemetryModule (upval), Reason (copy), p1 (copy)
 		if FFlagPlayerSupportPromptEventIngestModule then
 			PlayerSupportPromptTelemetryModule.log({
@@ -111,7 +111,7 @@ return (ReactModule.memo(function(p1) --[[ Line: 120 ]]
 			})
 		end
 		p1.closePrompt()
-		pcall(function() --[[ Line: 106 ]]
+		pcall(function()
 			local RobloxGui = game:GetService("CoreGui"):FindFirstChild("RobloxGui")
 			local Modules = RobloxGui and RobloxGui:FindFirstChild("Modules") or nil
 			local Settings = Modules and Modules:FindFirstChild("Settings") or nil

@@ -2,7 +2,7 @@
 local Array = LuauPolyfillModule.Array
 local Object = LuauPolyfillModule.Object
 
-local function equal(List, p1): boolean? --[[ Line: 12 ]]
+local function equal(List, p1): boolean?
 	-- upvalues: Array (copy), Object (copy), equal (copy)
 	if typeof(List) ~= typeof(p1) then
 		return false

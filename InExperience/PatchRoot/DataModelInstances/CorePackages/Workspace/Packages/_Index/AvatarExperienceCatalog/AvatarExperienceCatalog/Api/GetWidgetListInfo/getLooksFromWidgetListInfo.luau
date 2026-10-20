@@ -9,7 +9,7 @@ local MakeAXResponseHandlerModule = require(AvatarExperienceCatalog.Utils.makeAX
 local _ = require(Parent.AvatarExperienceCommon)
 local FFlagAXAvatarTabLooksYouMayAlsoLike = require(Parent.AvatarExperienceFlags).FFlagAXAvatarTabLooksYouMayAlsoLike
 
-return function(Callback, RequestId, Query, p1, p2) --[[ Line: 22 | Named "getLooksFromWidgetListInfo" ]]
+return function(Callback, RequestId, Query, p1, p2)
 	-- upvalues: FFlagAXAvatarTabLooksYouMayAlsoLike (copy), Url (copy), MakeAXResponseHandlerModule (copy), NormalizeWidgetListInfoResponseToWidgetListInfoModule (copy), ConstantsModule (copy)
 	local GET, GET2 = Callback(`{Url.APIS_URL}marketplace-widgets/v1/widgets?{Url:makeQueryString({
 		query = Query,

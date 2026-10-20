@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("GameFilters").Parent.DiscoveryTypes)
 
-return function(List) --[[ Line: 6 | Named "getSelectedGameFilterOptions" ]]
+return function(List)
 	local SelectedOptionIds = {}
 	
 	for _, value in List do

@@ -1,16 +1,16 @@
 ﻿local ScrollAlignmentModule = require(script:FindFirstAncestor("ViewRecycler").Core.Enums.ScrollAlignment)
 
-local function _(p1, Start, Callback) --[[ Line: 14 | Named "getInitialOffset" ]]
+local function _(p1, Start, Callback)
 	-- upvalues: ScrollAlignmentModule (copy)
 	return if Start == nil or Start == ScrollAlignmentModule.Start or p1 == 0 then nil else Callback(p1, Start)
 end
 
-return function() --[[ Line: 21 | Named "createInitialScrollPosition" ]]
+return function()
 	-- upvalues: ScrollAlignmentModule (copy)
 	local Flag = false
 	
 	return {
-		onDataSourceChange = function(p1, Start, Callback) --[[ Line: 25 ]]
+		onDataSourceChange = function(p1, Start, Callback)
 			-- upvalues: Flag (ref), ScrollAlignmentModule (upval)
 			if Flag then
 				return nil
@@ -22,13 +22,13 @@ return function() --[[ Line: 21 | Named "createInitialScrollPosition" ]]
 			end
 			return CallbackResult
 		end,
-		onDataSourceReplaced = function(p1, Start, Callback) --[[ Line: 36 ]]
+		onDataSourceReplaced = function(p1, Start, Callback)
 			-- upvalues: Flag (ref), ScrollAlignmentModule (upval)
 			Flag = true
 			
 			return (if Start == nil or Start == ScrollAlignmentModule.Start or p1 == 0 then nil else Callback(p1, Start)) or 0
 		end,
-		onViewportChanged = function(p1, Start, Callback) --[[ Line: 41 ]]
+		onViewportChanged = function(p1, Start, Callback)
 			-- upvalues: Flag (ref), ScrollAlignmentModule (upval)
 			if Flag then
 				return nil

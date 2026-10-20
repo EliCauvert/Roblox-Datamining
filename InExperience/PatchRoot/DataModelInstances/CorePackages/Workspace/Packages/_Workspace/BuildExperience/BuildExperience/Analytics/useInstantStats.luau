@@ -5,7 +5,7 @@ local GetGameInfoStoreFunction = DataHydrationModule.Game.getGameInfoStore
 local GetVotesStoreFunction = DataHydrationModule.Game.getVotesStore
 local DataStatus = DataHydrationModule.DataStatus
 
-return function(p1) --[[ Line: 33 | Named "useInstantStats" ]]
+return function(p1)
 	-- upvalues: GetGameInfoStoreFunction (copy), GetVotesStoreFunction (copy), SignalsReactModule (copy), DataStatus (copy)
 	local Text = tostring(p1)
 	local AndFetchGameInfo = GetGameInfoStoreFunction(false).getAndFetchGameInfo(Text)

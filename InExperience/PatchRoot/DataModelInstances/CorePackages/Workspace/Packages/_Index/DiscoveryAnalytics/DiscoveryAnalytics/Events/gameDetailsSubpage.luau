@@ -12,7 +12,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 	ctx = TModule.string
 })
 
-return function(CustomFields, EventContext) --[[ Line: 20 ]]
+return function(CustomFields, EventContext)
 	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), GameDetailsSubpageThrottleHundrethsPercent (copy), TelemetryService (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	

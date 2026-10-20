@@ -13,9 +13,9 @@ ContactsInformationModal.validateProps = T.strictInterface({
 	layoutOrder = T.optional(T.number)
 })
 
-function ContactsInformationModal.render(p1) --[[ Line: 32 ]]
+function ContactsInformationModal.render(p1)
 	-- upvalues: WithStyleFunction (copy), Roact (copy), ImageSetLabel (copy), IconSize (copy), StyledTextLabel (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 33 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: p1 (copy), Roact (upval), ImageSetLabel (upval), IconSize (upval), StyledTextLabel (upval)
 		local Props = p1.props
 		

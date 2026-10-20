@@ -9,18 +9,18 @@ local ParseMomentsEmojiFallbackCatalogModule = require(DataHydration.Moments.Uti
 local ValidateMomentsEmojiCatalogModule = require(DataHydration.Moments.Util.validateMomentsEmojiCatalog)
 local FlattenEmojisResult = DecodeEmojiSetsModule.flattenEmojis((DecodeEmojiSetsModule.decodeGetEmojiSetsResponse(require(DataHydration.Moments.Util.compiledMomentsEmojiFallbackCatalog).COMPILED_MOMENTS_EMOJI_FALLBACK_API_PAYLOAD)))
 
-local function _(p1) --[[ Line: 43 | Named "resolveFromCachedResponse" ]]
+local function _(p1)
 	-- upvalues: ValidateMomentsEmojiCatalogModule (copy), DecodeEmojiSetsModule (copy)
 	return if ValidateMomentsEmojiCatalogModule.isValidCachedGetEmojiSetsResponse(p1) then DecodeEmojiSetsModule.flattenEmojis(p1) else nil
 end
 
-local _ = function() --[[ Line: 50 | Named "resolveFromFString" ]]
+local _ = function()
 	-- upvalues: ParseMomentsEmojiFallbackCatalogModule (copy), GetFStringMomentsEmojiFallbackCatalogJSONModule (copy)
 	return ParseMomentsEmojiFallbackCatalogModule.parseMomentsEmojiFallbackCatalogJson(GetFStringMomentsEmojiFallbackCatalogJSONModule())
 end
 
 return {
-	resolveMomentsEmojiCatalog = function(p1) --[[ Line: 56 ]]
+	resolveMomentsEmojiCatalog = function(p1)
 		-- upvalues: FFlagMomentsEmojiSetsApiModule (copy), HardcodedMomentsEmojisModule (copy), ValidateMomentsEmojiCatalogModule (copy), DecodeEmojiSetsModule (copy), FFlagMomentsReactToFeedItemV2Module (copy), ParseMomentsEmojiFallbackCatalogModule (copy), GetFStringMomentsEmojiFallbackCatalogJSONModule (copy), FlattenEmojisResult (copy)
 		if not FFlagMomentsEmojiSetsApiModule then
 			return { source = "legacy", emojis = HardcodedMomentsEmojisModule }
@@ -40,11 +40,11 @@ return {
 			return { source = "legacy", emojis = HardcodedMomentsEmojisModule }
 		end
 	end,
-	shouldUseLegacyWireStringCatalog = function(): boolean --[[ Line: 35 ]]
+	shouldUseLegacyWireStringCatalog = function(): boolean
 		-- upvalues: FFlagMomentsEmojiSetsApiModule (copy)
 		return not FFlagMomentsEmojiSetsApiModule
 	end,
-	shouldUseUuidFallbackCatalog = function() --[[ Line: 39 ]]
+	shouldUseUuidFallbackCatalog = function()
 		-- upvalues: FFlagMomentsReactToFeedItemV2Module (copy)
 		return FFlagMomentsReactToFeedItemV2Module
 	end

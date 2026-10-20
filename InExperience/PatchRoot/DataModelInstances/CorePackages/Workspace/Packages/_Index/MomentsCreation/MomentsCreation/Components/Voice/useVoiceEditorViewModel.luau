@@ -45,11 +45,11 @@ local config = {
 	["—"] = "-"
 }
 
-local function _(Text: string): string --[[ Line: 91 | Named "trimWhitespace" ]]
+local function _(Text: string): string
 	return (Text:gsub("^%s*(.-)%s*$", "%1"))
 end
 
-local _ = function(Frame: Frame, p1, p2): boolean --[[ Line: 96 | Named "isPointWithin" ]]
+local _ = function(Frame: Frame, p1, p2): boolean
 	if Frame == nil then
 		return false
 	else
@@ -60,7 +60,7 @@ local _ = function(Frame: Frame, p1, p2): boolean --[[ Line: 96 | Named "isPoint
 	end
 end
 
-return function(p1) --[[ Line: 105 | Named "useVoiceEditorViewModel" ]]
+return function(p1)
 	-- upvalues: GetFIntMomentsTTSMaxCharactersModule (copy), FFlagMomentsTTSTooManyDigitsErrorModule (copy), UseLocalizationFunction (copy), UseOnScreenKeyboardHeightModule (copy), UseStateFunction (copy), UserInputService (copy), UseEffectFunction (copy), UseComposerParentTextPaddingModule (copy), FFlagMomentsTTSComposerCaretAlignmentModule (copy), UseTokensFunction (copy), v1 (copy), FFlagMomentsTTSVoiceSelectorModule (copy), UseSignalStateFunction (copy), VoiceCatalogModule (copy), FFlagMomentsTTSComposerUncontrolledInputModule (copy), ReactModule (copy), GetFFlagMomentsTTSStartTimePositioningModule (copy), SignalsModule (copy), ClampTtsStartTimeModule (copy), FireAnalyticsEventModule (copy), EventNames (copy), MakeCreationEventFieldsModule (copy), DialogTypeModule (copy), UseCallbackFunction (copy), config (copy), UseLayoutEffectFunction (copy), UseMemoFunction (copy), MeasureTextLineCountModule (copy), BuilderSans (copy), v3 (copy), v2 (copy), ComputeVoiceButtonStateModule (copy), UseVoiceSelectorModule (copy), FFlagMomentsTTSStartTimeScrubberFollowModule (copy), UseTtsStartTimeDragModule (copy)
 	local Controller = p1.controller
 	local FIntMomentsTTSMaxCharactersModule = GetFIntMomentsTTSMaxCharactersModule()
@@ -97,14 +97,14 @@ return function(p1) --[[ Line: 105 | Named "useVoiceEditorViewModel" ]]
 	local FailureError = UseLocalizationResult.failureError
 	local IsUseOnScreenKeyboardHeightModuleResultAbove = UseOnScreenKeyboardHeightModule() > 0
 	local UseStateResult, UseStateResult2 = UseStateFunction(UserInputService.PreferredInput == Enum.PreferredInput.Touch)
-	UseEffectFunction(function() --[[ Line: 150 ]]
+	UseEffectFunction(function()
 		-- upvalues: UserInputService (upval), UseStateResult2 (copy)
-		local Connection = UserInputService:GetPropertyChangedSignal("PreferredInput"):Connect(function() --[[ Line: 151 ]]
+		local Connection = UserInputService:GetPropertyChangedSignal("PreferredInput"):Connect(function()
 			-- upvalues: UseStateResult2 (upval), UserInputService (upval)
 			UseStateResult2(UserInputService.PreferredInput == Enum.PreferredInput.Touch)
 		end)
 		
-		return function() --[[ Line: 154 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end
@@ -155,14 +155,14 @@ return function(p1) --[[ Line: 105 | Named "useVoiceEditorViewModel" ]]
 	local UseSignalStateResult4 = UseSignalStateFunction(TtsAudio.getWaveform)
 	local UseRefResult13 = ReactModule.useRef(false)
 	local UseStateResult11, UseStateResult2_9 = UseStateFunction(Controller.getActiveSession(false))
-	UseEffectFunction(function() --[[ Line: 242 ]]
+	UseEffectFunction(function()
 		-- upvalues: SignalsModule (upval), UseStateResult2_9 (copy), Controller (copy)
-		return SignalsModule.createEffect(function(p2) --[[ Line: 243 ]]
+		return SignalsModule.createEffect(function(p2)
 			-- upvalues: UseStateResult2_9 (upval), Controller (upval)
 			UseStateResult2_9(Controller.getActiveSession(p2))
 		end)
 	end, { Controller })
-	UseEffectFunction(function() --[[ Line: 248 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseRefResult13 (copy), UseStateResult11 (copy), UseStateResult2_1 (copy), FFlagMomentsTTSComposerUncontrolledInputModule (upval), UseRefResult (ref), Callback (ref), UseRefResult8 (copy), UseStateResult2_4 (copy), UseStateResult2_6 (copy), FFlagMomentsTTSVoiceSelectorModule (upval), Callback1 (ref), SetSelectedVoiceIdFunction (copy), GetFFlagMomentsTTSStartTimePositioningModule (upval), Playback (copy), ClampTtsStartTimeModule (upval), UseStateResult2_7 (copy), UseStateResult2_8 (copy), UseRefResult9 (copy)
 		if UseRefResult13.current then return end
 		if UseStateResult11 == nil then return end
@@ -200,7 +200,7 @@ return function(p1) --[[ Line: 105 | Named "useVoiceEditorViewModel" ]]
 		end
 		UseRefResult9.current = true
 	end, { UseStateResult11, Playback, SetSelectedVoiceIdFunction })
-	UseEffectFunction(function() --[[ Line: 290 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseSignalStateResult1 (copy), UseRefResult8 (copy), UseStateResult2_4 (copy), UseRefResult9 (copy), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval), TtsAudio (copy), UseRefResult10 (copy), UseRefResult12 (copy), Playback (copy), UseStateResult10 (copy), Controller (copy), DialogTypeModule (upval), config2 (copy), FailureError (copy), UseRefResult11 (copy)
 		if UseSignalStateResult1 == "ready" and UseRefResult8.current ~= "" then
 			UseStateResult2_4(true)
@@ -239,7 +239,7 @@ return function(p1) --[[ Line: 105 | Named "useVoiceEditorViewModel" ]]
 					modalType = DialogTypeModule.VoiceoverError,
 					modalProps = {
 						message = config2[ErrorReason] or FailureError,
-						onTryAgain = function() --[[ Line: 337 ]]
+						onTryAgain = function()
 							-- upvalues: Controller (upval), UseRefResult11 (upval)
 							Controller.dismissModal()
 							
@@ -254,14 +254,14 @@ return function(p1) --[[ Line: 105 | Named "useVoiceEditorViewModel" ]]
 		end
 	end, { UseSignalStateResult1 })
 	local UseStateResult12, UseStateResult2_10 = UseStateFunction(Playback.getIsPlaying(false))
-	UseEffectFunction(function() --[[ Line: 352 ]]
+	UseEffectFunction(function()
 		-- upvalues: SignalsModule (upval), UseStateResult2_10 (copy), Playback (copy)
-		return SignalsModule.createEffect(function(p2) --[[ Line: 353 ]]
+		return SignalsModule.createEffect(function(p2)
 			-- upvalues: UseStateResult2_10 (upval), Playback (upval)
 			UseStateResult2_10(Playback.getIsPlaying(p2))
 		end)
 	end, { Playback })
-	UseEffectFunction(function() --[[ Line: 359 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseSignalStateResult3 (copy), Playback (copy), UseStateResult10 (copy), TtsAudio (copy), GetFFlagMomentsTTSStartTimePositioningModule (upval)
 		if UseSignalStateResult3 <= 0 then return end
 		local IsPlaying = Playback.getIsPlaying(false)
@@ -282,12 +282,12 @@ return function(p1) --[[ Line: 105 | Named "useVoiceEditorViewModel" ]]
 		UseSignalStateResult3,
 		UseStateResult10
 	})
-	UseEffectFunction(function() --[[ Line: 385 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseSignalStateResult3 (copy), UseStateResult10 (copy), SignalsModule (upval), Playback (copy), UseRefResult12 (copy), TtsAudio (copy), GetFFlagMomentsTTSStartTimePositioningModule (upval)
 		if UseSignalStateResult3 <= 0 then return end
 		local NewUseStateResult = UseStateResult10 + UseSignalStateResult3
 		
-		return SignalsModule.createEffect(function(p2) --[[ Line: 392 ]]
+		return SignalsModule.createEffect(function(p2)
 			-- upvalues: Playback (upval), UseRefResult12 (upval), UseStateResult10 (upval), NewUseStateResult (copy), TtsAudio (upval), GetFFlagMomentsTTSStartTimePositioningModule (upval)
 			local Position = Playback.getPosition(p2)
 			local Current = UseRefResult12.current
@@ -314,7 +314,7 @@ return function(p1) --[[ Line: 105 | Named "useVoiceEditorViewModel" ]]
 			end
 		end)
 	end, { UseSignalStateResult3, UseStateResult10 })
-	local UseCallbackResult = UseCallbackFunction(function(p2: number) --[[ Line: 421 ]]
+	local UseCallbackResult = UseCallbackFunction(function(p2: number)
 		-- upvalues: UseSignalStateResult3 (copy), UseStateResult10 (copy), TtsAudio (copy)
 		if UseSignalStateResult3 <= 0 then return end
 		local NewUseStateResult = UseStateResult10 + UseSignalStateResult3
@@ -323,7 +323,7 @@ return function(p1) --[[ Line: 105 | Named "useVoiceEditorViewModel" ]]
 			TtsAudio.seek(p2 - UseStateResult10)
 		end
 	end, { UseSignalStateResult3, UseStateResult10 })
-	local UseCallbackResult1 = UseCallbackFunction(function(Text: string) --[[ Line: 431 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function(Text: string)
 		-- upvalues: config (upval), FFlagMomentsTTSComposerUncontrolledInputModule (upval), UseRefResult (ref), Callback (ref), UseStateResult2_1 (copy), UseStateResult1 (copy), UseRefResult3 (copy), UseRefResult2 (copy), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval), Controller (copy), FFlagMomentsTTSVoiceSelectorModule (upval), UseSignalStateResult (copy), UseStateResult10 (copy)
 		local Text1 = Text:gsub("[\r\n]+", " ")
 		
@@ -369,19 +369,19 @@ return function(p1) --[[ Line: 105 | Named "useVoiceEditorViewModel" ]]
 		UseStateResult10,
 		UseSignalStateResult
 	})
-	UseLayoutEffectFunction(function() --[[ Line: 491 ]]
+	UseLayoutEffectFunction(function()
 		-- upvalues: UseRefResult3 (copy), UseStateResult2_1 (copy)
 		if UseRefResult3.current ~= nil then
 			UseRefResult3.current = nil
 			UseStateResult2_1(UseRefResult3.current)
 		end
 	end)
-	local UseCallbackResult2 = UseCallbackFunction(function(Frame) --[[ Line: 500 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function(Frame)
 		-- upvalues: UseStateResult2_2 (copy)
 		UseStateResult2_2(Frame.AbsoluteSize.X)
 	end, {})
 	local FontSize = UseTokensResult.Typography.BodyMedium.FontSize
-	local UseMemoResult = UseMemoFunction(function(): number --[[ Line: 507 ]]
+	local UseMemoResult = UseMemoFunction(function(): number
 		-- upvalues: MeasureTextLineCountModule (upval), UseStateResult1 (copy), UseStateResult3 (copy), FontSize (copy), BuilderSans (upval), v3 (upval), v2 (upval)
 		return (math.max(v2, (MeasureTextLineCountModule(UseStateResult1, UseStateResult3 - 32, FontSize, BuilderSans, v3))))
 	end, { UseStateResult1, UseStateResult3, FontSize })
@@ -408,13 +408,13 @@ return function(p1) --[[ Line: 105 | Named "useVoiceEditorViewModel" ]]
 	local IsTooManyDigits = VoiceButtonStateModule.isTooManyDigits
 	local IsOverLimit1 = IsOverLimit or (IsModerated or IsTooManyDigits)
 	local UseRefResult14 = ReactModule.useRef(false)
-	UseEffectFunction(function() --[[ Line: 546 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseSignalStateResult1 (copy), UseRefResult14 (copy)
 		if UseSignalStateResult1 ~= "loading" then
 			UseRefResult14.current = false
 		end
 	end, { UseSignalStateResult1 })
-	local UseCallbackResult3 = UseCallbackFunction(function(p2, p3, p4, Enabled) --[[ Line: 560 ]]
+	local UseCallbackResult3 = UseCallbackFunction(function(p2, p3, p4, Enabled)
 		-- upvalues: UseRefResult14 (copy), TtsAudio (copy), CanGenerate (copy), UseRefResult1 (copy), FFlagMomentsTTSComposerUncontrolledInputModule (upval), Callback (ref), UseRefResult (ref), UseSignalStateResult (copy), UseStateResult1 (copy), UseRefResult8 (copy), Controller (copy), UseStateResult2_4 (copy), UseStateResult2_5 (copy), UseStateResult10 (copy), GetFFlagMomentsTTSStartTimePositioningModule (upval), Playback (copy), ClampTtsStartTimeModule (upval), UseStateResult2_7 (copy), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval), UseRefResult9 (copy), UseRefResult10 (copy)
 		if UseRefResult14.current then return end
 		if TtsAudio.getState(false) == "loading" then return end
@@ -472,11 +472,11 @@ return function(p1) --[[ Line: 105 | Named "useVoiceEditorViewModel" ]]
 		UseSignalStateResult
 	})
 	UseRefResult11.current = UseCallbackResult3
-	local UseCallbackResult4 = UseCallbackFunction(function() --[[ Line: 655 ]]
+	local UseCallbackResult4 = UseCallbackFunction(function()
 		-- upvalues: UseCallbackResult3 (copy)
 		UseCallbackResult3()
 	end, { UseCallbackResult3 })
-	local UseCallbackResult5 = UseCallbackFunction(function() --[[ Line: 659 ]]
+	local UseCallbackResult5 = UseCallbackFunction(function()
 		-- upvalues: UseRefResult8 (copy), Controller (copy), UseSignalStateResult (copy), UseStateResult10 (copy), UseStateResult2_6 (copy), UseStateResult2_8 (copy), Callback1 (ref)
 		local Current = UseRefResult8.current
 		local ActiveSession = Controller.getActiveSession(false)
@@ -506,24 +506,24 @@ return function(p1) --[[ Line: 105 | Named "useVoiceEditorViewModel" ]]
 		createPreviewAudio = p1.createPreviewAudio
 	}) else nil
 	local OnOpenVoiceSelector = if UseVoiceSelectorModuleResult == nil then nil else UseVoiceSelectorModuleResult.onOpenVoiceSelector
-	UseEffectFunction(function() --[[ Line: 702 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseStateResult4 (copy), UseRefResult1 (copy)
 		if UseStateResult4 > 0 and UseRefResult1.current ~= nil then
 			UseRefResult1.current.focus()
 		end
 	end, { UseStateResult4 })
-	local UseCallbackResult6 = UseCallbackFunction(function() --[[ Line: 709 ]]
+	local UseCallbackResult6 = UseCallbackFunction(function()
 		-- upvalues: UseRefResult7 (copy), IsUseOnScreenKeyboardHeightModuleResultAbove (copy), UseRefResult1 (copy), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval), Controller (copy), UseStateResult2_1 (copy), FFlagMomentsTTSComposerUncontrolledInputModule (upval), UseRefResult (ref), Callback (ref), UseStateResult2_4 (copy), UseStateResult2_5 (copy), UseRefResult8 (copy), UseRefResult9 (copy), UseStateResult2_6 (copy), UseStateResult2_3 (copy), DialogTypeModule (upval)
 		UseRefResult7.current = IsUseOnScreenKeyboardHeightModuleResultAbove
 		
-		local function _() --[[ Line: 711 | Named "refocusIfEditing" ]]
+		local function _()
 			-- upvalues: UseRefResult7 (upval), UseRefResult1 (upval)
 			if UseRefResult7.current and UseRefResult1.current ~= nil then
 				UseRefResult1.current.focus()
 			end
 		end
 		
-		local function performDelete() --[[ Line: 716 ]]
+		local function performDelete()
 			-- upvalues: FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval), Controller (upval), UseRefResult1 (upval), UseStateResult2_1 (upval), FFlagMomentsTTSComposerUncontrolledInputModule (upval), UseRefResult (upval), Callback (upval), UseStateResult2_4 (upval), UseStateResult2_5 (upval), UseRefResult8 (upval), UseRefResult9 (upval), UseStateResult2_6 (upval), UseRefResult7 (upval), UseStateResult2_3 (upval)
 			FireAnalyticsEventModule(EventNames.EditingFlowVoiceoverDeleted, MakeCreationEventFieldsModule.makeVoiceEventFields())
 			Controller.dismissModal()
@@ -546,13 +546,13 @@ return function(p1) --[[ Line: 105 | Named "useVoiceEditorViewModel" ]]
 			UseStateResult2_6("")
 			
 			if UseRefResult7.current then
-				UseStateResult2_3(function(p2: number): number --[[ Line: 742 ]]
+				UseStateResult2_3(function(p2: number): number
 					return p2 + 1
 				end)
 			end
 		end
 		
-		local function cancelDelete() --[[ Line: 747 ]]
+		local function cancelDelete()
 			-- upvalues: FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval), Controller (upval), UseRefResult7 (upval), UseRefResult1 (upval)
 			FireAnalyticsEventModule(EventNames.EditingFlowVoiceoverDeleteCancelled, MakeCreationEventFieldsModule.makeVoiceEventFields())
 			Controller.dismissModal()
@@ -568,7 +568,7 @@ return function(p1) --[[ Line: 105 | Named "useVoiceEditorViewModel" ]]
 			modalProps = { onConfirm = performDelete, onCancel = cancelDelete }
 		})
 	end, { Controller, IsUseOnScreenKeyboardHeightModuleResultAbove })
-	local UseCallbackResult7 = UseCallbackFunction(function(p2) --[[ Line: 773 ]]
+	local UseCallbackResult7 = UseCallbackFunction(function(p2)
 		-- upvalues: FFlagMomentsTTSComposerUncontrolledInputModule (upval), Callback (ref), UseRefResult (ref), UseRefResult4 (copy), NoIsUseOnScreenKeyboardHeightModuleResultAbove (copy), UseCallbackResult5 (copy), UseCallbackResult3 (copy), UseRefResult5 (copy), UseCallbackResult6 (copy), UseRefResult6 (ref), OnOpenVoiceSelector (copy)
 		if FFlagMomentsTTSComposerUncontrolledInputModule and Callback and UseRefResult then
 			Callback(UseRefResult.current)
@@ -639,9 +639,9 @@ return function(p1) --[[ Line: 105 | Named "useVoiceEditorViewModel" ]]
 	})
 	local UseStateResult13, UseStateResult2_11 = UseStateFunction(Controller.preview.getCapture(false))
 	local UseStateResult14, UseStateResult2_12 = UseStateFunction(Playback.getDuration(false))
-	UseEffectFunction(function() --[[ Line: 806 ]]
+	UseEffectFunction(function()
 		-- upvalues: SignalsModule (upval), UseStateResult2_11 (copy), Controller (copy), UseStateResult2_12 (copy), Playback (copy)
-		return SignalsModule.createEffect(function(p2) --[[ Line: 807 ]]
+		return SignalsModule.createEffect(function(p2)
 			-- upvalues: UseStateResult2_11 (upval), Controller (upval), UseStateResult2_12 (upval), Playback (upval)
 			UseStateResult2_11(Controller.preview.getCapture(p2))
 			UseStateResult2_12(Playback.getDuration(p2))
@@ -650,7 +650,7 @@ return function(p1) --[[ Line: 105 | Named "useVoiceEditorViewModel" ]]
 	local OverLimit = if IsOverLimit then UseLocalizationResult.overLimit elseif IsModerated then UseLocalizationResult.moderationError elseif IsTooManyDigits then UseLocalizationResult.tooManyDigitsError elseif IsGenerating then UseLocalizationResult.generating else UseLocalizationResult.helperDefault
 	local IsUseStateResultAbove: boolean = if UseSignalStateResult1 == "ready" then UseSignalStateResult3 > 0 and UseStateResult14 > 0 else UseSignalStateResult1 == "playing" and (UseSignalStateResult3 > 0 and UseStateResult14 > 0)
 	local UseRefResult15 = ReactModule.useRef(UseStateResult10)
-	local UseCallbackResult8 = UseCallbackFunction(function(Current) --[[ Line: 824 ]]
+	local UseCallbackResult8 = UseCallbackFunction(function(Current)
 		-- upvalues: UseStateResult2_7 (copy), FFlagMomentsTTSStartTimeScrubberFollowModule (upval), UseRefResult15 (copy), Controller (copy)
 		UseStateResult2_7(Current)
 		
@@ -673,12 +673,12 @@ return function(p1) --[[ Line: 105 | Named "useVoiceEditorViewModel" ]]
 	local UseRefResult16 = ReactModule.useRef(false)
 	local UseRefResult17 = ReactModule.useRef(0)
 	local UseRefResult18 = ReactModule.useRef(UseSignalStateResult3)
-	UseEffectFunction(function() --[[ Line: 849 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseRefResult15 (copy), UseStateResult10 (copy), UseRefResult18 (copy), UseSignalStateResult3 (copy)
 		UseRefResult15.current = UseStateResult10
 		UseRefResult18.current = UseSignalStateResult3
 	end, { UseStateResult10, UseSignalStateResult3 })
-	local UseTtsStartTimeDragModuleResult = UseTtsStartTimeDragModule(GetFFlagMomentsTTSStartTimePositioningModule and IsUseStateResultAbove, UseStateResult14, UseStateResult8, UseCallbackResult8, UseCallbackFunction(function() --[[ Line: 854 ]]
+	local UseTtsStartTimeDragModuleResult = UseTtsStartTimeDragModule(GetFFlagMomentsTTSStartTimePositioningModule and IsUseStateResultAbove, UseStateResult14, UseStateResult8, UseCallbackResult8, UseCallbackFunction(function()
 		-- upvalues: UseRefResult17 (copy), UseRefResult15 (copy), Playback (copy), UseRefResult16 (copy)
 		UseRefResult17.current = UseRefResult15.current
 		
@@ -686,7 +686,7 @@ return function(p1) --[[ Line: 105 | Named "useVoiceEditorViewModel" ]]
 			UseRefResult16.current = true
 			Playback.pause()
 		end
-	end, { Playback }), (UseCallbackFunction(function(p2) --[[ Line: 865 ]]
+	end, { Playback }), (UseCallbackFunction(function(p2)
 		-- upvalues: UseRefResult16 (copy), UseRefResult15 (copy), GetFFlagMomentsTTSStartTimePositioningModule (upval), UseRefResult17 (copy), Playback (copy), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval), FFlagMomentsTTSStartTimeScrubberFollowModule (upval), TtsAudio (copy), UseRefResult18 (copy)
 		local Current = UseRefResult16.current
 		UseRefResult16.current = false

@@ -1,4 +1,4 @@
-﻿return function(p1, p2: number, Value: number): NumberSequence --[[ Line: 3 ]]
+﻿return function(p1, p2: number, Value: number): NumberSequence
 	if p2 <= 0 then
 		return NumberSequence.new(0)
 	else

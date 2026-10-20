@@ -2,7 +2,7 @@
 local HttpService = game:GetService("HttpService")
 local Text = string.format("https://itemconfiguration.%s", (APIUtilModule.getBaseDomain())) .. "v1/creations/get-asset-details"
 
-return function(AssetIds) --[[ Line: 13 | Named "getAssetCreationDetails" ]]
+return function(AssetIds)
 	-- upvalues: APIUtilModule (copy), Text (copy), HttpService (copy)
 	local RequestAndRetryPostResult, RequestAndRetryPostResult2 = APIUtilModule.requestAndRetryPost(Text, HttpService:JSONEncode({ assetIds = AssetIds }))
 	

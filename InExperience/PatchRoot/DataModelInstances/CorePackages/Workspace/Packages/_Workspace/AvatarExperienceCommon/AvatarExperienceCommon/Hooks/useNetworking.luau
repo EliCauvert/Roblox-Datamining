@@ -2,7 +2,7 @@
 local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
 local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
 
-return function() --[[ Line: 8 | Named "useNetworking" ]]
+return function()
 	-- upvalues: UseRoactServiceFunction (copy), RoactNetworking (copy)
 	return UseRoactServiceFunction(RoactNetworking)
 end

@@ -9,7 +9,7 @@ local UseBreakpointXOrLargerFunction = ResponsiveModule.useBreakpointXOrLarger
 local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
 local _ = require(Parent.Types)
 
-return function(p1) --[[ Line: 20 | Named "AppHeaderBarResponsive" ]]
+return function(p1)
 	-- upvalues: UseBreakpointXOrLargerFunction (copy), ResponsiveModule (copy), UsePreferredInputFunction (copy), UseStyleFunction (copy), ReactModule (copy), CryoModule (copy), AppHeaderBarComponentModule (copy)
 	local UseBreakpointXOrLargerResult = UseBreakpointXOrLargerFunction(ResponsiveModule.Keys.Medium)
 	local UseBreakpointXOrLargerResult1 = UseBreakpointXOrLargerFunction(ResponsiveModule.Keys.Large)
@@ -24,7 +24,7 @@ return function(p1) --[[ Line: 20 | Named "AppHeaderBarResponsive" ]]
 	local PaddingBottom = p1.paddingBottom
 	local OnMedia = p1.onMedia
 	
-	return ReactModule.createElement(AppHeaderBarComponentModule, (CryoModule.Dictionary.join(p1, (ReactModule.useMemo(function() --[[ Line: 37 ]]
+	return ReactModule.createElement(AppHeaderBarComponentModule, (CryoModule.Dictionary.join(p1, (ReactModule.useMemo(function()
 		-- upvalues: UseBreakpointXOrLargerResult1 (copy), IsUsePreferredInputResultMatch (copy), CryoModule (upval), ShouldRenderCenter (copy), PaddingTop (copy), Tokens (copy), PaddingBottom (copy), OnMedia (copy), ShouldRenderTitle (copy), UseBreakpointXOrLargerResult (copy), IsTitleCentered (copy), TitleFontStyle (copy), UtilitiesGap (copy)
 		local config = {
 			title = if UseBreakpointXOrLargerResult1 and IsUsePreferredInputResultMatch then CryoModule.None else nil,

@@ -14,18 +14,18 @@ local Default = require(Parent2.LoggingProtocol).default
 local PreparePaymentCheckCounterModule = require(Parent.Events.PreparePaymentCheckCounter)
 local UsePlaystationPaymentsProtocolCommonFunctions = game:DefineFastFlag("UsePlaystationPaymentsProtocolCommonFunctions", false)
 
-function GetPaymentMethod(Platform): string --[[ Line: 19 ]]
+function GetPaymentMethod(Platform): string
 	-- upvalues: PaymentPlatformModule (copy), GetIsQuestPlatformModule (copy)
 	return if Platform == Enum.Platform.PS4 then "PlaystationStore" elseif Platform == PaymentPlatformModule.Maquettes or GetIsQuestPlatformModule() then "QuestStore" elseif Platform == Enum.Platform.XBoxOne then "XboxStore" else ""
 end
 
-function IsPreparePaymentSuccessful(PaymentMethod, ProviderProductId): boolean --[[ Line: 30 ]]
+function IsPreparePaymentSuccessful(PaymentMethod, ProviderProductId): boolean
 	-- upvalues: HttpService (copy), HttpRbxApiService (copy), Url (copy), Default (copy), PreparePaymentCheckCounterModule (copy)
 	local Json = HttpService:JSONEncode({
 		paymentMethod = PaymentMethod,
 		providerProductId = ProviderProductId
 	})
-	local Success, Result = pcall(function() --[[ Line: 37 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: HttpRbxApiService (upval), Url (upval), Json (copy)
 		return HttpRbxApiService:PostAsyncFullUrl(Url.APIS_URL .. "payments-gateway/v1/prepare-payment", Json)
 	end)
@@ -45,7 +45,7 @@ function IsPreparePaymentSuccessful(PaymentMethod, ProviderProductId): boolean -
 	end
 end
 
-function ConsolePreparePaymentCheck(p1) --[[ Line: 65 ]]
+function ConsolePreparePaymentCheck(p1)
 	-- upvalues: UserInputService (copy), UsePlaystationPaymentsProtocolCommonFunctions (copy)
 	local Platform = UserInputService:GetPlatform()
 	local Payment = GetPaymentMethod(Platform)
@@ -53,7 +53,7 @@ function ConsolePreparePaymentCheck(p1) --[[ Line: 65 ]]
 	return UsePlaystationPaymentsProtocolCommonFunctions and (Platform == Enum.Platform.PS4 or Platform == Enum.Platform.PS5) or (Payment == "" or Platform == Enum.Platform.XBoxOne or IsPreparePaymentSuccessful(Payment, p1))
 end
 
-return function(p1) --[[ Line: 84 ]]
+return function(p1)
 	-- upvalues: IsVRAppBuildFunction (copy), IsTenFootInterfaceFunction (copy), GetBlockingConsolePreparePaymentCheckModule (copy)
 	return not IsVRAppBuildFunction() and not IsTenFootInterfaceFunction() or (not GetBlockingConsolePreparePaymentCheckModule() or ConsolePreparePaymentCheck(p1))
 end

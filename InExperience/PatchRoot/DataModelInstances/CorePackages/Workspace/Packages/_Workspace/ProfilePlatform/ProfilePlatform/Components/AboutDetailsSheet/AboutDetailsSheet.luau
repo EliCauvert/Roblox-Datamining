@@ -42,7 +42,7 @@ local config = {
 	anchorPoint = Vector2.new(0, 0)
 }
 
-local function AboutDetailsSheetLegacy(_) --[[ Line: 58 ]]
+local function AboutDetailsSheetLegacy(_)
 	-- upvalues: UseTopBarHeightFunction (copy), UseDispatchFunction (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), FFlagEnableSplitPane (copy), UseSignalState (copy), SplitPaneStore (copy), UseScreenSizeFunction (copy), UseSelectorFunction (copy), GetSafeAreaSizeFunction (copy), FFlagProfilePlatformNewProfileHeader (copy), FFlagSwitchProfileWidthHookToSocialCommon (copy), UseProfileCardWidthFunction (copy), UseProfileCardWidthModule (copy), ConstantsModule (copy), ReactModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), PeekViewState (copy), UseNavigationPropsFunction (copy), config (copy), View (copy), PeekViewWithTopBar (copy), IconButton (copy)
 	local UseTopBarHeightResult = UseTopBarHeightFunction()
 	local UseDispatchResult = UseDispatchFunction()
@@ -50,14 +50,14 @@ local function AboutDetailsSheetLegacy(_) --[[ Line: 58 ]]
 	local IsFormFactorMatch = UseProfileFormFactorModuleResult.formFactor == EnumsModule.ProfileFormFactor.Wide
 	local UseSignalStateResult = if FFlagEnableSplitPane then UseSignalState(SplitPaneStore.getStore().getIsSplitEnabled) else false
 	local UseScreenSizeResult = UseScreenSizeFunction()
-	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 69 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p1)
 		return p1.GlobalGuiInset
 	end)
-	local UseSelectorResult1 = UseSelectorFunction(function(p1) --[[ Line: 72 ]]
+	local UseSelectorResult1 = UseSelectorFunction(function(p1)
 		return p1.TopBar.statusBarHeight
 	end)
 	local SafeAreaSize = GetSafeAreaSizeFunction(UseScreenSizeResult, UseSelectorResult)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 85 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval)
 		if FFlagSignalsNavP3Dispatch then
 			NavigationCommands.back(true)
@@ -72,7 +72,7 @@ local function AboutDetailsSheetLegacy(_) --[[ Line: 58 ]]
 		size = UDim2.fromScale((if FFlagProfilePlatformNewProfileHeader then if FFlagSwitchProfileWidthHookToSocialCommon then UseProfileCardWidthFunction() else UseProfileCardWidthModule(IsFormFactorMatch) else math.min(SafeAreaSize.X.Offset, ConstantsModule.MAXIMUM_CONTAINER_WIDTH)) / SafeAreaSize.X.Offset, 1),
 		anchorPoint = Vector2.new(1, 0)
 	}
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 116 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FFlagEnableSplitPane (upval), UseSignalStateResult (copy), config (upval), IsFormFactorMatch (copy), config1 (copy)
 		return if FFlagEnableSplitPane and UseSignalStateResult then config elseif IsFormFactorMatch then config1 else config
 	end, {
@@ -88,7 +88,7 @@ local function AboutDetailsSheetLegacy(_) --[[ Line: 58 ]]
 		AboutDetailsSheet = ReactModule.createElement(PeekViewWithTopBar, {
 			briefViewContentHeight = UDim.new(0.55, 0),
 			fullViewContentHeight = UDim.new(1, -UseTopBarHeightResult),
-			onViewStateChanged = ReactModule.useCallback(function(Closed, _, _) --[[ Line: 97 ]]
+			onViewStateChanged = ReactModule.useCallback(function(Closed, _, _)
 				-- upvalues: PeekViewState (upval), UseResult (copy)
 				if Closed == PeekViewState.Closed then
 					UseResult()
@@ -106,7 +106,7 @@ local function AboutDetailsSheetLegacy(_) --[[ Line: 58 ]]
 					BackgroundTransparency = 1,
 					icon = "icons/navigation/close",
 					Position = UDim2.new(0, 15, 0, UseSelectorResult1),
-					onActivated = ReactModule.useCallback(function() --[[ Line: 93 ]]
+					onActivated = ReactModule.useCallback(function()
 						-- upvalues: UseResult (copy)
 						UseResult()
 					end, { UseResult })
@@ -121,7 +121,7 @@ local function AboutDetailsSheetLegacy(_) --[[ Line: 58 ]]
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
 				}, {
-					ContentSections = ReactModule.createElement(ReactModule.Fragment, {}, UseNavigationPropsFunction(function(_, p1) --[[ Line: 103 ]]
+					ContentSections = ReactModule.createElement(ReactModule.Fragment, {}, UseNavigationPropsFunction(function(_, p1)
 						return { sections = p1.sections }
 					end).sections or {})
 				})
@@ -130,11 +130,11 @@ local function AboutDetailsSheetLegacy(_) --[[ Line: 58 ]]
 	})
 end
 
-local function AboutDetailsSheetFoundation(_) --[[ Line: 167 ]]
+local function AboutDetailsSheetFoundation(_)
 	-- upvalues: UseDispatchFunction (copy), FFlagEnableSplitPane (copy), UseSignalState (copy), SplitPaneStore (copy), ReactModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), UseNavigationPropsFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), View (copy), OverlayProvider (copy), Sheet (copy), SnapPoints (copy), Text (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseSignalStateResult = if FFlagEnableSplitPane then UseSignalState(SplitPaneStore.getStore().getIsSplitEnabled) else false
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 173 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval)
 		if FFlagSignalsNavP3Dispatch then
 			NavigationCommands.back(true)
@@ -144,7 +144,7 @@ local function AboutDetailsSheetFoundation(_) --[[ Line: 167 ]]
 			UseDispatchResult(NavigateBackFunction(true))
 		end
 	end, { UseDispatchResult })
-	local UseNavigationPropsResult = UseNavigationPropsFunction(function(_, p1) --[[ Line: 181 ]]
+	local UseNavigationPropsResult = UseNavigationPropsFunction(function(_, p1)
 		return { sections = p1.sections, profileName = p1.profileName }
 	end)
 	local Sections = UseNavigationPropsResult.sections or {}
@@ -194,7 +194,7 @@ local function AboutDetailsSheetFoundation(_) --[[ Line: 167 ]]
 	})
 end
 
-return function(p1) --[[ Line: 242 | Named "AboutDetailsSheet" ]]
+return function(p1)
 	-- upvalues: FFlagProfileAboutDetailsUseSheet (copy), AboutDetailsSheetFoundation (copy), AboutDetailsSheetLegacy (copy)
 	return if FFlagProfileAboutDetailsUseSheet then AboutDetailsSheetFoundation(p1) else AboutDetailsSheetLegacy(p1)
 end

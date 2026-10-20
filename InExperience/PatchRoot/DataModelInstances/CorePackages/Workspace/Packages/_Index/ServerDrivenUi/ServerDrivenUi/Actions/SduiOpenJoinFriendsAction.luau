@@ -5,7 +5,7 @@ local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SduiActionType = SduiCoreSystemModule.SduiActionType
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 
-return function(p1, _, p2, Frame: Frame) --[[ Line: 15 ]]
+return function(p1, _, p2, Frame: Frame)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	

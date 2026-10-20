@@ -41,7 +41,7 @@ local GetSquadExperienceInviteStoreFunction = require(Parent.SquadsCore.Stores).
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local EventNamesModule = require(Parent.SquadsCore.EventNames)
 
-return function(p1) --[[ Line: 75 | Named "SquadLobbyLuckyRecommendationModal" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), React (copy), SquadExternalContractContext (copy), UseLuckyRecommendationFunction (copy), UseLuckyRecommendationAnalyticsFunction (copy), UseLocalizationFunction (copy), SquadLuckyRecommendationPhase (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), UseSelectorFunction (copy), FFlagUseSignalsForSquadExperienceInvite (copy), UseSignalStateFunction (copy), GetSquadExperienceInviteStoreFunction (copy), UseIsExperienceInviteRetryBlockedFunction (copy), EventNamesModule (copy), CreateExperienceInviteModule (copy), SquadExperienceInviteSource (copy), SetTimeoutFunction (copy), ClearTimeoutFunction (copy), ReactOtterModule (copy), Text (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), View (copy), Image (copy), Progress (copy), ProgressShape (copy), ProgressSize (copy), OverlayProvider (copy), Dialog (copy), DialogSize (copy), Button (copy), ButtonVariant (copy), Icon (copy), IconSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDispatchResult = UseDispatchFunction()
@@ -69,20 +69,20 @@ return function(p1) --[[ Line: 75 | Named "SquadLobbyLuckyRecommendationModal" ]
 	local UniverseId = Recommendation and Recommendation.universeId
 	local RootPlaceId = Recommendation and Recommendation.rootPlaceId
 	local RbxthumbWithTypeSizeAndOptions = if UniverseId == nil then nil else GetRbxthumbWithTypeSizeAndOptionsFunction(tostring(UniverseId), Constants.RbxthumbTypes.GameIcon, 150, false)
-	local UseSelectorResult = UseSelectorFunction((React.useCallback(function(p2) --[[ Line: 115 ]]
+	local UseSelectorResult = UseSelectorFunction((React.useCallback(function(p2)
 		return p2.Squad and (p2.Squad.Squad and (p2.Squad.Squad.currentSquad and p2.Squad.Squad.currentSquad.squadId))
 	end, {})))
-	local UseResult = React.useCallback(function(p2) --[[ Line: 123 ]]
+	local UseResult = React.useCallback(function(p2)
 		return p2.Squad and (p2.Squad.Squad and p2.Squad.Squad.currentExperienceInvite)
 	end, {})
 	local UseSignalStateResult = if FFlagUseSignalsForSquadExperienceInvite then UseSignalStateFunction(GetSquadExperienceInviteStoreFunction(false).getHasCurrentExperienceInvite) else UseSelectorFunction(UseResult) ~= nil
 	local UseIsExperienceInviteRetryBlockedResult = UseIsExperienceInviteRetryBlockedFunction(UseSelectorResult)
-	local UseResult1 = React.useCallback(function() --[[ Line: 131 ]]
+	local UseResult1 = React.useCallback(function()
 		-- upvalues: UseLuckyRecommendationAnalyticsResult (copy), EventNamesModule (upval), Phase (copy), p1 (copy)
 		UseLuckyRecommendationAnalyticsResult.fire(EventNamesModule.LuckyRecommendationDismissed, { phaseAtDismiss = Phase })
 		p1.onClose()
 	end, { UseLuckyRecommendationAnalyticsResult, Phase, p1.onClose })
-	local UseResult11 = React.useCallback(function() --[[ Line: 138 ]]
+	local UseResult11 = React.useCallback(function()
 		-- upvalues: UseLuckyRecommendationAnalyticsResult (copy), EventNamesModule (upval), Phase (copy), Actions (copy), UseSelectorResult (copy)
 		UseLuckyRecommendationAnalyticsResult.fire(EventNamesModule.LuckyRecommendationRerolled, { phaseAtReroll = Phase })
 		Actions.startRoll(UseSelectorResult, false)
@@ -92,13 +92,13 @@ return function(p1) --[[ Line: 75 | Named "SquadLobbyLuckyRecommendationModal" ]
 		UseLuckyRecommendationAnalyticsResult,
 		Phase
 	})
-	local UseResult2 = React.useCallback(function() --[[ Line: 145 ]]
+	local UseResult2 = React.useCallback(function()
 		-- upvalues: UseLuckyRecommendationAnalyticsResult (copy), EventNamesModule (upval), RootPlaceId (copy), UseDispatchResult (copy), CreateExperienceInviteModule (upval), UseContextResult (copy), SquadExperienceInviteSource (upval)
 		local Context = UseLuckyRecommendationAnalyticsResult.getContext()
 		UseLuckyRecommendationAnalyticsResult.fire(EventNamesModule.LuckyRecommendationJoinTapped, { rootPlaceId = RootPlaceId })
 		
 		if RootPlaceId ~= nil then
-			UseDispatchResult(CreateExperienceInviteModule(tostring(RootPlaceId), UseContextResult, SquadExperienceInviteSource.LuckyRecommendation)):andThen(function(Result) --[[ Line: 155 ]]
+			UseDispatchResult(CreateExperienceInviteModule(tostring(RootPlaceId), UseContextResult, SquadExperienceInviteSource.LuckyRecommendation)):andThen(function(Result)
 				-- upvalues: UseLuckyRecommendationAnalyticsResult (upval), EventNamesModule (upval), Context (copy), RootPlaceId (upval)
 				if Result then
 					UseLuckyRecommendationAnalyticsResult.fire(EventNamesModule.LuckyRecommendationExperienceInviteCreated, {
@@ -118,28 +118,28 @@ return function(p1) --[[ Line: 75 | Named "SquadLobbyLuckyRecommendationModal" ]
 		UseContextResult,
 		UseLuckyRecommendationAnalyticsResult
 	})
-	React.useLayoutEffect(function() --[[ Line: 167 ]]
+	React.useLayoutEffect(function()
 		-- upvalues: Actions (copy), UseSelectorResult (copy)
 		Actions.startRoll(UseSelectorResult, true)
 	end, { Actions.startRoll, UseSelectorResult })
-	React.useEffect(function() --[[ Line: 171 ]]
+	React.useEffect(function()
 		-- upvalues: Phase (copy), SquadLuckyRecommendationPhase (upval), SetTimeoutFunction (upval), Actions (copy), ClearTimeoutFunction (upval)
 		if Phase ~= SquadLuckyRecommendationPhase.Rolling then return end
 		local SetTimeoutResult = SetTimeoutFunction(Actions.endRoll, 1000)
 		
-		return function() --[[ Line: 176 ]]
+		return function()
 			-- upvalues: ClearTimeoutFunction (upval), SetTimeoutResult (copy)
 			ClearTimeoutFunction(SetTimeoutResult)
 		end
 	end, { Phase, Actions.endRoll })
-	React.useEffect(function() --[[ Line: 181 ]]
+	React.useEffect(function()
 		-- upvalues: Actions (copy)
-		return function() --[[ Line: 182 ]]
+		return function()
 			-- upvalues: Actions (upval)
 			Actions.cancelFetch()
 		end
 	end, { Actions.cancelFetch })
-	React.useEffect(function() --[[ Line: 187 ]]
+	React.useEffect(function()
 		-- upvalues: Phase (copy), SquadLuckyRecommendationPhase (upval), UseLuckyRecommendationAnalyticsResult (copy), EventNamesModule (upval), UniverseId (copy), State (copy)
 		if Phase == SquadLuckyRecommendationPhase.Revealed then
 			UseLuckyRecommendationAnalyticsResult.fire(EventNamesModule.LuckyRecommendationRevealShown, { universeId = UniverseId })
@@ -156,7 +156,7 @@ return function(p1) --[[ Line: 75 | Named "SquadLobbyLuckyRecommendationModal" ]
 		UniverseId
 	})
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
-	React.useEffect(function() --[[ Line: 201 ]]
+	React.useEffect(function()
 		-- upvalues: IsPhaseMatch (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), IsPhaseMatch1_1 (copy)
 		if IsPhaseMatch then
 			UseAnimatedBindingResult2(ReactOtterModule.ease(100, {

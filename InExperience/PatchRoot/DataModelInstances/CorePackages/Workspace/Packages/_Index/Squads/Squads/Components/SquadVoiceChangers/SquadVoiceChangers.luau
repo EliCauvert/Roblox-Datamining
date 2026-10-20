@@ -17,12 +17,12 @@ local IconSize = Enums.IconSize
 local InputSize = Enums.InputSize
 local config = {
 	enableTestingTheme = false,
-	closeCentralOverlayThunk = function() --[[ Line: 36 ]]
+	closeCentralOverlayThunk = function()
 		return { type = "CloseCentralOverlay" }
 	end
 }
 
-return function(p1) --[[ Line: 43 | Named "SquadVoiceChangers" ]]
+return function(p1)
 	-- upvalues: Cryo (copy), config (copy), UseNavigationFunction (copy), UseLocalUserIdFunction (copy), UseParticipantFunction (copy), ReactModule (copy), VoicePackButtonModule (copy), CrossExperienceVoiceManager (copy), FoundationModule (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), BuilderIconsModule (copy), IconSize (copy), Enums (copy), InputSize (copy)
 	local JoinResult = Cryo.Dictionary.join(config, p1)
 	local UseNavigationResult = UseNavigationFunction()
@@ -52,7 +52,7 @@ return function(p1) --[[ Line: 43 | Named "SquadVoiceChangers" ]]
 		{ name = "Ghost" }
 	}
 	
-	local function makeButton(Text, LayoutOrder) --[[ Line: 79 ]]
+	local function makeButton(Text, LayoutOrder)
 		-- upvalues: list (copy), JoinResult (copy), ReactModule (upval), VoicePackButtonModule (upval), IsVoiceChangerActive (copy), SelectedVoicePack (copy), CrossExperienceVoiceManager (upval), Number (copy)
 		local Entry = list[Text] or { name = "Voicepack " .. Text }
 		local Name = if JoinResult.fillListWithExtraVoicePacks then Entry.name or "Voicepack " .. Text else Entry.name
@@ -62,7 +62,7 @@ return function(p1) --[[ Line: 43 | Named "SquadVoiceChangers" ]]
 			voicePackName = Name,
 			isVoiceChangerActive = IsVoiceChangerActive,
 			isSelected = if SelectedVoicePack then Name == SelectedVoicePack else false,
-			onActivated = function() --[[ Line: 90 ]]
+			onActivated = function()
 				-- upvalues: CrossExperienceVoiceManager (upval), Name (copy), IsVoiceChangerActive (upval), Number (upval)
 				CrossExperienceVoiceManager.default:setVoicePack(Name)
 				
@@ -153,7 +153,7 @@ return function(p1) --[[ Line: 43 | Named "SquadVoiceChangers" ]]
 				HearMyselfToggle = ReactModule.createElement(FoundationModule.Toggle, {
 					label = "",
 					size = InputSize.Medium,
-					onActivated = function(_) --[[ Line: 202 ]]
+					onActivated = function(_)
 						-- upvalues: IsVoiceChangerHearMyselfActive (copy), CrossExperienceVoiceManager (upval), Number (copy)
 						if IsVoiceChangerHearMyselfActive then
 							CrossExperienceVoiceManager.default:disableHearMyself(Number)

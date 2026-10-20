@@ -11,7 +11,7 @@ local SelectErrorMetadataModule = require(BulkPurchaseApp.Store.Selectors.select
 local _ = require(BulkPurchaseApp.Enums.ErrorCodeEnum)
 local _ = require(script.Parent.BulkPurchaseError)
 
-return function() --[[ Line: 16 | Named "useBulkPurchaseErrorProps" ]]
+return function()
 	-- upvalues: UseSelectorFunction (copy), SelectPurchaseResultsModule (copy), SelectErrorCodeModule (copy), SelectErrorMetadataModule (copy), UseDispatchFunction (copy), ReactModule (copy), MarketplaceService (copy), BulkPurchaseEndedModule (copy)
 	local UseSelectorResult = UseSelectorFunction(SelectPurchaseResultsModule)
 	local UseSelectorResult1 = UseSelectorFunction(SelectErrorCodeModule)
@@ -19,7 +19,7 @@ return function() --[[ Line: 16 | Named "useBulkPurchaseErrorProps" ]]
 	local UseDispatchResult = UseDispatchFunction()
 	
 	return {
-		onDismiss = ReactModule.useCallback(function() --[[ Line: 22 ]]
+		onDismiss = ReactModule.useCallback(function()
 			-- upvalues: MarketplaceService (upval), UseSelectorResult (copy), UseDispatchResult (copy), BulkPurchaseEndedModule (upval)
 			MarketplaceService:signalPromptBulkPurchaseFinished(3, UseSelectorResult)
 			UseDispatchResult(BulkPurchaseEndedModule())

@@ -39,25 +39,25 @@ local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local SquadInviteFriendsButtonModule = require(script.Parent.SquadInviteFriendsButton)
 local InviteToSquadModule = require(Squads.Thunks.inviteToSquad)
 
-local function InviteSingleFriend() --[[ Line: 59 ]] end
+local function InviteSingleFriend() end
 
 local config = {
 	buttonText = "Add",
 	preselectedUsers = nil,
 	preselectedUsersUnremovable = false,
 	shouldHideFooterButton = nil,
-	onMultiInvite = function(_) --[[ Line: 63 ]] end,
+	onMultiInvite = function(_) end,
 	participants = {},
 	analyticsInfo = {},
-	onRemoveCallback = function() --[[ Line: 66 ]] end,
-	onSelectedFriendsChanged = function() --[[ Line: 69 ]] end
+	onRemoveCallback = function() end,
+	onSelectedFriendsChanged = function() end
 }
 
-local function SelectedFriendsListener(p1) --[[ Line: 73 ]]
+local function SelectedFriendsListener(p1)
 	-- upvalues: React (copy), SelectedUsersContext (copy), FFlagEnablePartyQuickStartButton (copy), UseIsInviteButtonDisabledModule (copy)
 	local UseContextResult = React.useContext(SelectedUsersContext)
 	local SelectedFriends = UseContextResult.selectedFriends
-	local UseResult = React.useCallback(function() --[[ Line: 82 ]]
+	local UseResult = React.useCallback(function()
 		-- upvalues: FFlagEnablePartyQuickStartButton (upval), p1 (copy), SelectedFriends (copy)
 		if FFlagEnablePartyQuickStartButton and p1.onMultiInvite then
 			p1.onMultiInvite(SelectedFriends)
@@ -72,7 +72,7 @@ local function SelectedFriendsListener(p1) --[[ Line: 73 ]]
 		SelectedFriends
 	})
 	local UseIsInviteButtonDisabledModuleResult = UseIsInviteButtonDisabledModule(UseContextResult.selectedFriendsSize, UseContextResult.selectedFriends or {}, UseContextResult.preselectedUsers or {})
-	React.useEffect(function() --[[ Line: 96 ]]
+	React.useEffect(function()
 		-- upvalues: p1 (copy), UseIsInviteButtonDisabledModuleResult (copy), UseResult (copy)
 		p1.onSelectedFriendsChanged(not UseIsInviteButtonDisabledModuleResult, UseResult)
 	end, {
@@ -84,7 +84,7 @@ local function SelectedFriendsListener(p1) --[[ Line: 73 ]]
 	return nil
 end
 
-return function(p1) --[[ Line: 103 | Named "SquadInviteFriends" ]]
+return function(p1)
 	-- upvalues: Cryo (copy), config (copy), React (copy), FocusNavigationContext (copy), SquadExternalContractContext (copy), UseDispatchFunction (copy), UseNavigationFunction (copy), UseStoreFunction (copy), UseStyleFunction (copy), UseAppPolicyFunction (copy), UseLocalUserIdFunction (copy), UseCurrentSquadSelectorFunction (copy), UseLocalizationFunction (copy), SquadInviteSourceEnumModule (copy), EventNamesModule (copy), NotificationModalsManagerModule (copy), Images (copy), PromiseModule (copy), InviteToParentChannelModule (copy), InviteToSquadModule (copy), ConstantsModule1 (copy), SquadPromptType (copy), FocusBehaviorsModule (copy), FocusNavigationService (copy), CoreGui (copy), FriendsMenuContextWrapper (copy), InviteSingleFriend (copy), FFlagEnablePartyQuickStartButton (copy), ConstantsModule (copy), SelectedFriendsListener (copy), FriendsMenuSearch (copy), SelectedUsersScroller (copy), FriendsMenuFriendsList (copy), FriendMenuType (copy), SquadInviteFriendsButtonModule (copy)
 	local JoinResult = Cryo.Dictionary.join(config, p1)
 	local UseContextResult = React.useContext(FocusNavigationContext)
@@ -94,13 +94,13 @@ return function(p1) --[[ Line: 103 | Named "SquadInviteFriends" ]]
 	local UseStoreResult = UseStoreFunction()
 	local Theme = UseStyleFunction().Theme
 	local UseStateResult, UseStateResult2 = React.useState(0)
-	local UseAppPolicyResult = UseAppPolicyFunction((React.useCallback(function(p2) --[[ Line: 116 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction((React.useCallback(function(p2)
 		return p2.getCanUsePlatformChat()
 	end, {})))
 	local UseRefResult = React.useRef(nil)
 	local UseRefResult1 = React.useRef(nil)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
-	local UseResult = React.useCallback(function(Frame) --[[ Line: 126 ]]
+	local UseResult = React.useCallback(function(Frame)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(Frame.AbsoluteSize.Y)
 	end, { UseStateResult2 })
@@ -113,14 +113,14 @@ return function(p1) --[[ Line: 103 | Named "SquadInviteFriends" ]]
 		youAddedToChat = "Feature.Squads.Description.YouAddedToChat",
 		youAddedTwoToChat = "Feature.Squads.Description.YouAddedTwoToChat"
 	})
-	local UseResult1 = React.useCallback(function(p2) --[[ Line: 143 ]]
+	local UseResult1 = React.useCallback(function(p2)
 		-- upvalues: Cryo (upval), ParentChannelId (copy), SquadInviteSourceEnumModule (upval), UseContextResult1 (copy), EventNamesModule (upval)
 		UseContextResult1.fireSquadAnalytics(EventNamesModule.SquadInvite, (Cryo.Dictionary.union({
 			parentChannelId = ParentChannelId,
 			source = SquadInviteSourceEnumModule.SourceSquadInvitePage
 		}, p2)))
 	end, { ParentChannelId, UseContextResult1.fireSquadAnalytics })
-	local UseResult2 = React.useCallback(function(p2) --[[ Line: 155 ]]
+	local UseResult2 = React.useCallback(function(p2)
 		-- upvalues: Cryo (upval), UseLocalizationResult (copy), NotificationModalsManagerModule (upval), Images (upval)
 		local KeysResult = Cryo.Dictionary.keys(p2)
 		local DisplayName = p2[KeysResult[1]].displayName
@@ -139,19 +139,19 @@ return function(p1) --[[ Line: 103 | Named "SquadInviteFriends" ]]
 		UseLocalizationResult.youAddedToChat,
 		UseLocalizationResult.youAddedTwoToChat
 	})
-	local UseResult3 = React.useCallback(function(p2) --[[ Line: 182 ]]
+	local UseResult3 = React.useCallback(function(p2)
 		-- upvalues: UseCurrentSquadSelectorResult (copy), UseGetConversationFromIdResult (copy), Cryo (upval), UseLocalUserIdResult (copy), UseContextResult1 (copy), UseDispatchResult (copy), PromiseModule (upval), InviteToParentChannelModule (upval), UseNavigationResult (copy), InviteToSquadModule (upval), UseResult1 (copy), UseResult2 (copy), ConstantsModule1 (upval), UseAppPolicyResult (copy), UseStoreResult (copy), SquadPromptType (upval)
 		if not UseCurrentSquadSelectorResult or not UseGetConversationFromIdResult then return end
 		local KeysResult = Cryo.Dictionary.keys(p2)
 		local Set = Cryo.List.toSet(UseGetConversationFromIdResult.participants)
-		local FilterResult = Cryo.List.filter(KeysResult, function(p3): boolean --[[ Line: 193 ]]
+		local FilterResult = Cryo.List.filter(KeysResult, function(p3): boolean
 			-- upvalues: Set (copy)
 			return Set[p3] == nil
 		end)
 		
-		local function v65() --[[ Line: 197 ]]
+		local function v65()
 			-- upvalues: Cryo (upval), UseGetConversationFromIdResult (upval), KeysResult (copy), UseLocalUserIdResult (upval), UseContextResult1 (upval), UseDispatchResult (upval), PromiseModule (upval), FilterResult (copy), InviteToParentChannelModule (upval), UseNavigationResult (upval), InviteToSquadModule (upval), UseCurrentSquadSelectorResult (upval), UseResult1 (upval), UseResult2 (upval), p2 (copy)
-			local FilterResult1 = Cryo.List.filter(UseGetConversationFromIdResult.participants, function(p3): boolean --[[ Line: 200 ]]
+			local FilterResult1 = Cryo.List.filter(UseGetConversationFromIdResult.participants, function(p3): boolean
 				-- upvalues: Cryo (upval), KeysResult (upval), UseLocalUserIdResult (upval)
 				return Cryo.List.find(KeysResult, (tostring(p3))) == nil and p3 ~= UseLocalUserIdResult
 			end)
@@ -160,18 +160,18 @@ return function(p1) --[[ Line: 103 | Named "SquadInviteFriends" ]]
 			for _, value in ipairs(FilterResult1) do
 				table.insert(List, UseContextResult1.removeUserFromParentChannel(UseDispatchResult, UseGetConversationFromIdResult.id, value))
 			end
-			PromiseModule.all(List):andThen(function() --[[ Line: 215 ]]
+			PromiseModule.all(List):andThen(function()
 				-- upvalues: FilterResult (upval), UseDispatchResult (upval), InviteToParentChannelModule (upval), FilterResult1 (copy), UseNavigationResult (upval), UseGetConversationFromIdResult (upval), InviteToSquadModule (upval), UseCurrentSquadSelectorResult (upval), UseLocalUserIdResult (upval), UseResult1 (upval), UseResult2 (upval), p2 (upval), UseContextResult1 (upval)
 				if #FilterResult > 0 then
 					UseDispatchResult(InviteToParentChannelModule({
 						dispatch = UseDispatchResult,
-						onErrorCallback = function() --[[ Line: 219 ]]
+						onErrorCallback = function()
 							-- upvalues: FilterResult1 (upval), UseNavigationResult (upval)
 							if #FilterResult1 > 0 then
 								UseNavigationResult.pop()
 							end
 						end,
-						onSuccessCallback = function(Id) --[[ Line: 224 ]]
+						onSuccessCallback = function(Id)
 							-- upvalues: UseGetConversationFromIdResult (upval), UseDispatchResult (upval), InviteToSquadModule (upval), UseCurrentSquadSelectorResult (upval), UseLocalUserIdResult (upval), FilterResult (upval), UseResult1 (upval), UseResult2 (upval), p2 (upval), UseNavigationResult (upval)
 							UseDispatchResult(InviteToSquadModule(UseCurrentSquadSelectorResult.squadId, Id, UseLocalUserIdResult, FilterResult, UseResult1, Id ~= UseGetConversationFromIdResult.id))
 							UseResult2(p2)
@@ -193,7 +193,7 @@ return function(p1) --[[ Line: 103 | Named "SquadInviteFriends" ]]
 			UseContextResult1.setSquadPrompt(UseStoreResult, {
 				hideCancelButton = false,
 				promptType = SquadPromptType.ConfirmInviteToSquad,
-				onConfirm = function() --[[ Line: 257 ]]
+				onConfirm = function()
 					-- upvalues: v65 (copy)
 					v65()
 				end
@@ -210,7 +210,7 @@ return function(p1) --[[ Line: 103 | Named "SquadInviteFriends" ]]
 		UseContextResult1.removeUserFromParentChannel, UseStoreResult,
 		UseLocalUserIdResult
 	})
-	React.useEffect(function() --[[ Line: 278 ]]
+	React.useEffect(function()
 		-- upvalues: UseContextResult (copy), UseRefResult (copy), UseRefResult1 (copy), FocusBehaviorsModule (upval), FocusNavigationService (upval), CoreGui (upval)
 		if not UseContextResult or UseRefResult.current == nil or UseRefResult1.current == nil then
 			if UseRefResult.current ~= nil and UseRefResult1.current ~= nil then
@@ -221,12 +221,12 @@ return function(p1) --[[ Line: 103 | Named "SquadInviteFriends" ]]
 			local Current = UseRefResult.current
 			UseContextResult:registerFocusBehavior(Current, DefaultResult)
 			
-			return function() --[[ Line: 284 ]]
+			return function()
 				-- upvalues: UseContextResult (upval), Current (copy), DefaultResult (copy)
 				UseContextResult:deregisterFocusBehavior(Current, DefaultResult)
 			end
 		end
-		return function() --[[ Line: 296 ]] end
+		return function() end
 	end, { UseContextResult })
 	
 	return React.createElement(FriendsMenuContextWrapper, {
@@ -234,12 +234,12 @@ return function(p1) --[[ Line: 103 | Named "SquadInviteFriends" ]]
 		inviteSingleFriend = InviteSingleFriend,
 		inviteMultiFriends = if FFlagEnablePartyQuickStartButton then JoinResult.onMultiInvite else UseResult3,
 		selectionLimit = ConstantsModule.SQUAD_PARTICIPANT_LIMIT - 1,
-		preselectedUsers = if FFlagEnablePartyQuickStartButton then JoinResult.preselectedUsers else UseGetConversationFromIdResult and (UseGetConversationFromIdResult.participants and Cryo.List.filter(UseGetConversationFromIdResult.participants, function(p3): boolean --[[ Line: 308 ]]
+		preselectedUsers = if FFlagEnablePartyQuickStartButton then JoinResult.preselectedUsers else UseGetConversationFromIdResult and (UseGetConversationFromIdResult.participants and Cryo.List.filter(UseGetConversationFromIdResult.participants, function(p3): boolean
 			-- upvalues: UseLocalUserIdResult (copy)
 			return p3 ~= UseLocalUserIdResult
 		end)),
 		preselectedUsersUnremovable = if FFlagEnablePartyQuickStartButton then JoinResult.preselectedUsersUnremovable elseif UseGetConversationFromIdResult then UseGetConversationFromIdResult.type == ConstantsModule1.CONVERSATION_CHANNEL_ONE_TO_ONE_TYPE or UseGetConversationFromIdResult.initiator ~= tostring(UseLocalUserIdResult) else nil,
-		onRemoveCallback = if FFlagEnablePartyQuickStartButton then JoinResult.onRemoveCallback elseif UseGetConversationFromIdResult then function(p3, p4) --[[ Line: 321 ]]
+		onRemoveCallback = if FFlagEnablePartyQuickStartButton then JoinResult.onRemoveCallback elseif UseGetConversationFromIdResult then function(p3, p4)
 			-- upvalues: Cryo (upval), UseGetConversationFromIdResult (copy), UseContextResult1 (copy), UseStoreResult (copy), UseLocalizationResult (copy), SquadPromptType (upval)
 			if Cryo.List.find(UseGetConversationFromIdResult.participants, p3) then
 				UseContextResult1.setSquadPrompt(UseStoreResult, {

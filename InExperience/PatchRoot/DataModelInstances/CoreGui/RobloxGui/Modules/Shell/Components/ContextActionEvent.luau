@@ -1,11 +1,11 @@
 ﻿local ContextActionService = game:GetService("ContextActionService")
 local ContextActionEvent = require(game:GetService("CorePackages").Packages.Roact).Component:extend("ContextActionEvent")
 
-function ContextActionEvent:render() --[[ Line: 29 ]]
+function ContextActionEvent:render()
 	return nil
 end
 
-function ContextActionEvent.didMount(p1) --[[ Line: 33 ]]
+function ContextActionEvent.didMount(p1)
 	-- upvalues: ContextActionService (copy)
 	if p1.props.actionPriority then
 		ContextActionService:BindCoreActionAtPriority(p1.props.name, p1.props.callback, false, 2000 + p1.props.actionPriority, unpack(p1.props.binds))
@@ -16,7 +16,7 @@ function ContextActionEvent.didMount(p1) --[[ Line: 33 ]]
 	end
 end
 
-function ContextActionEvent.didUpdate(p1, p2) --[[ Line: 41 ]]
+function ContextActionEvent.didUpdate(p1, p2)
 	-- upvalues: ContextActionService (copy)
 	if p1.props.callback ~= p2.callback or p1.props.name ~= p2.name then
 		ContextActionService:UnbindCoreAction(p2.name)
@@ -30,7 +30,7 @@ function ContextActionEvent.didUpdate(p1, p2) --[[ Line: 41 ]]
 	end
 end
 
-function ContextActionEvent.willUnmount(p1) --[[ Line: 52 ]]
+function ContextActionEvent.willUnmount(p1)
 	-- upvalues: ContextActionService (copy)
 	ContextActionService:UnbindCoreAction(p1.props.name)
 end

@@ -4,15 +4,15 @@ local HttpModule = require(Parent.Http)
 local _ = require(Parent.HttpClient)
 local FStringArgusApiUrlBaseModule = require(DataHydration.Moments.FStringArgusApiUrlBase)
 
-local function _(Text: string): string --[[ Line: 14 | Named "normalizeBaseUrl" ]]
+local function _(Text: string): string
 	return if Text:sub(#Text) == "/" then Text:sub(1, #Text - 1) else Text
 end
 
-local _ = function(Text: string): string --[[ Line: 22 | Named "normalizePath" ]]
+local _ = function(Text: string): string
 	return if Text:sub(1, 1) == "/" then Text else `/{Text}`
 end
 
-local _ = function() --[[ Line: 30 | Named "getFStringApiUrlBase" ]]
+local _ = function()
 	-- upvalues: FStringArgusApiUrlBaseModule (copy)
 	local FStringArgusApiUrlBaseModuleResult: string = FStringArgusApiUrlBaseModule()
 	
@@ -25,7 +25,7 @@ local _ = function() --[[ Line: 30 | Named "getFStringApiUrlBase" ]]
 	end
 end
 
-return function(Text: string) --[[ Line: 44 | Named "constructApiUrl" ]]
+return function(Text: string)
 	-- upvalues: FStringArgusApiUrlBaseModule (copy), HttpModule (copy)
 	assert(type(Text) == "string", "path must be a string")
 	local LocalPlayer = game:GetService("Players").LocalPlayer

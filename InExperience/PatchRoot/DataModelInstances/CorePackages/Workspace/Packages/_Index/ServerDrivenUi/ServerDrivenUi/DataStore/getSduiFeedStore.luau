@@ -4,7 +4,7 @@ local _ = require(ServerDrivenUi.DataStore.SduiFeedStoreTypes)
 local CreateSduiFeedStoreModule = require(ServerDrivenUi.DataStore.createSduiFeedStore)
 local t = {}
 
-return function(Key) --[[ Line: 19 ]]
+return function(Key)
 	-- upvalues: t (copy), CreateSduiFeedStoreModule (copy)
 	local Entry = t[Key]
 	

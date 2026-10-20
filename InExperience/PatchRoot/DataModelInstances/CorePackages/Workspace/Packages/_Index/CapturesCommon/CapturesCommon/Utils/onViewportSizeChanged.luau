@@ -1,9 +1,9 @@
-﻿return function(Callback: (any) -> ()) --[[ Line: 1 ]]
+﻿return function(Callback: (any) -> ())
 	local ViewportSize = nil
 	local Connection1 = nil
 	local Connection = nil
 	
-	local function _(ViewportSize1) --[[ Line: 6 | Named "fireCallback" ]]
+	local function _(ViewportSize1)
 		-- upvalues: ViewportSize (ref), Callback (copy)
 		if ViewportSize1 ~= ViewportSize then
 			ViewportSize = ViewportSize1
@@ -11,7 +11,7 @@
 		end
 	end
 	
-	local function onViewportSizeChanged() --[[ Line: 13 ]]
+	local function onViewportSizeChanged()
 		-- upvalues: ViewportSize (ref), Callback (copy)
 		local CurrentCamera = workspace.CurrentCamera
 		
@@ -25,7 +25,7 @@
 		end
 	end
 	
-	Connection1 = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function() --[[ Line: 20 | Named "onCurrentCameraChanged" ]]
+	Connection1 = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
 		-- upvalues: Connection (ref), onViewportSizeChanged (copy), ViewportSize (ref), Callback (copy)
 		if Connection then
 			Connection:Disconnect()
@@ -67,7 +67,7 @@
 			end
 		end
 	end
-	return function() --[[ Line: 37 ]]
+	return function()
 		-- upvalues: Connection1 (ref), Connection (ref)
 		if Connection1 then
 			Connection1:Disconnect()

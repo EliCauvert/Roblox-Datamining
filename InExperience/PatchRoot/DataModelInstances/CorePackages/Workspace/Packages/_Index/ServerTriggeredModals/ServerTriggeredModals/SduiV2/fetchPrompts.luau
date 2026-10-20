@@ -19,7 +19,7 @@ local FFlagSplitPaneEducationalTour = require(Parent.SharedFlags).FFlagSplitPane
 local SplitPaneTourPromptModule = if FFlagSplitPaneEducationalTour then require(script.Parent.SplitPaneTourPrompt) else nil
 local FFlagPromptsEdpOpenReplaceOnFetch = require(Parent.SharedFlags).FFlagPromptsEdpOpenReplaceOnFetch
 
-local function getPromptsUrl(EntryPoint, ClientAttributes) --[[ Line: 43 ]]
+local function getPromptsUrl(EntryPoint, ClientAttributes)
 	-- upvalues: UrlBuilder (copy), UrlBase (copy), HttpService (copy)
 	local v1 = UrlBuilder.new({
 		path = "modals-api/v1/prompts",
@@ -30,7 +30,7 @@ local function getPromptsUrl(EntryPoint, ClientAttributes) --[[ Line: 43 ]]
 	return if ClientAttributes == nil then v1 else `{v1}&clientAttributes={HttpService:UrlEncode(HttpService:JSONEncode(ClientAttributes))}`
 end
 
-return function(p1, p2) --[[ Line: 60 | Named "fetchPrompts" ]]
+return function(p1, p2)
 	-- upvalues: Parent (copy), FFlagSduiExtendedCapabilitiesPrompts (copy), SduiSharedUtilitiesModule (copy), GetSduiApiStoreFunction (copy), SduiResponseType (copy), UrlBuilder (copy), UrlBase (copy), FFlagEdpGameLeavePromptsHandlerEnabled (copy), FFlagEdpOpenPromptsHandlerEnabled (copy), FFlagHomepagePromptsHandlerPassClientAttributes (copy), getPromptsUrl (copy), FFlagPromptsEdpOpenReplaceOnFetch (copy), FFlagSduiAllowNoConfigsBuilt (copy), PromptsEntryPointModule (copy), FFlagPushNotificationsUpsellHomePromptsExperiment (copy), NativePushNotificationPermissionPrompt (copy), FFlagSplitPaneEducationalTour (copy), SplitPaneTourPromptModule (copy), ParsePageEntriesFromResponseFunction (copy)
 	local ServiceContractsProtoModule = require(Parent.ServiceContractsProto)
 	local GetEligiblePromptsRequest = ServiceContractsProtoModule.apppageplatform.prompts.prompts.GetEligiblePromptsRequest
@@ -49,7 +49,7 @@ return function(p1, p2) --[[ Line: 60 | Named "fetchPrompts" ]]
 		allowNoConfigsBuilt = if FFlagSduiAllowNoConfigsBuilt then p1.allowNoConfigsBuilt else nil,
 		loadTimer = p1.loadTimer,
 		apiProto = ServiceContractsProtoModule.apppageplatform.prompts.prompts.GetEligiblePromptsResponse,
-		parsePageEntriesFromResponse = if p1.entryPoint == PromptsEntryPointModule.HomepageLaunch then if FFlagPushNotificationsUpsellHomePromptsExperiment and NativePushNotificationPermissionPrompt.isEnabled() then function(p3) --[[ Line: 96 ]]
+		parsePageEntriesFromResponse = if p1.entryPoint == PromptsEntryPointModule.HomepageLaunch then if FFlagPushNotificationsUpsellHomePromptsExperiment and NativePushNotificationPermissionPrompt.isEnabled() then function(p3)
 			-- upvalues: FFlagPushNotificationsUpsellHomePromptsExperiment (upval), NativePushNotificationPermissionPrompt (upval), FFlagSplitPaneEducationalTour (upval), SplitPaneTourPromptModule (upval), ParsePageEntriesFromResponseFunction (upval)
 			if FFlagPushNotificationsUpsellHomePromptsExperiment and NativePushNotificationPermissionPrompt.isEnabled() then
 				NativePushNotificationPermissionPrompt.handlePromptsResponse(p3)
@@ -58,7 +58,7 @@ return function(p1, p2) --[[ Line: 60 | Named "fetchPrompts" ]]
 				SplitPaneTourPromptModule.handlePromptsResponse(p3)
 			end
 			return ParsePageEntriesFromResponseFunction(p3)
-		end elseif FFlagSplitPaneEducationalTour then function(p3) --[[ Line: 96 ]]
+		end elseif FFlagSplitPaneEducationalTour then function(p3)
 			-- upvalues: FFlagPushNotificationsUpsellHomePromptsExperiment (upval), NativePushNotificationPermissionPrompt (upval), FFlagSplitPaneEducationalTour (upval), SplitPaneTourPromptModule (upval), ParsePageEntriesFromResponseFunction (upval)
 			if FFlagPushNotificationsUpsellHomePromptsExperiment and NativePushNotificationPermissionPrompt.isEnabled() then
 				NativePushNotificationPermissionPrompt.handlePromptsResponse(p3)

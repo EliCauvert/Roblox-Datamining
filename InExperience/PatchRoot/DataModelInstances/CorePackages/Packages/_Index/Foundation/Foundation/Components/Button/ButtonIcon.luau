@@ -16,7 +16,7 @@ local UseTextSizeOffsetModule = require(Foundation.Providers.Style.useTextSizeOf
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local UsePresentationContextFunction = require(Foundation.Providers.Style.PresentationContext).usePresentationContext
 
-return function(p1) --[[ Line: 38 | Named "ButtonIcon" ]]
+return function(p1)
 	-- upvalues: UseTokensModule (copy), UseTextSizeOffsetModule (copy), GetIconScaleModule (copy), UsePresentationContextFunction (copy), UseButtonVariantsModule (copy), IsBuilderOrMigratedIconFunction (copy), ReactModule (copy), TextModule (copy), IsMigratedFunction (copy), Uiblox (copy), BuilderIconsModule (copy), ImageModule (copy)
 	local DisabledTransparencyBinding = p1.disabledTransparencyBinding
 	local TextTransparencyBinding = p1.textTransparencyBinding
@@ -34,7 +34,7 @@ return function(p1) --[[ Line: 38 | Named "ButtonIcon" ]]
 			FontSize = UseButtonVariantsModuleResult.icon.size.Y.Offset
 		},
 		Size = UseButtonVariantsModuleResult.icon.size,
-		textStyle = ReactModule.joinBindings({ DisabledTransparencyBinding, TextTransparencyBinding }):map(function(Entry) --[[ Line: 71 ]]
+		textStyle = ReactModule.joinBindings({ DisabledTransparencyBinding, TextTransparencyBinding }):map(function(Entry)
 			-- upvalues: UseButtonVariantsModuleResult (copy)
 			return {
 				Color3 = UseButtonVariantsModuleResult.content.style.Color3,
@@ -50,7 +50,7 @@ return function(p1) --[[ Line: 38 | Named "ButtonIcon" ]]
 		tag = "position-center-center anchor-center-center",
 		Image = p1.icon,
 		Size = if IconScaleModule then UDim2.fromOffset(IconScaleModule.X, IconScaleModule.Y) else UseButtonVariantsModuleResult.icon.size,
-		imageStyle = ReactModule.joinBindings({ DisabledTransparencyBinding, TextTransparencyBinding }):map(function(Entry) --[[ Line: 97 ]]
+		imageStyle = ReactModule.joinBindings({ DisabledTransparencyBinding, TextTransparencyBinding }):map(function(Entry)
 			-- upvalues: UseButtonVariantsModuleResult (copy)
 			return {
 				Color3 = UseButtonVariantsModuleResult.content.style.Color3,

@@ -73,7 +73,7 @@ local FFlagEnableSquadRegroupExperimentationSmallScreenFix = SharedFlags.FFlagEn
 local FFlagEnableSquadRegroupServerCapacityCheck = SharedFlags.FFlagEnableSquadRegroupServerCapacityCheck
 local FFlagAppChatShowOSAOnPageEntry = SharedFlags.FFlagAppChatShowOSAOnPageEntry
 
-return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), UseLocalUserIdFunction (copy), UseStyleFunction (copy), UseSquadStateFunction (copy), UseNavigationFunction (copy), React (copy), SquadExternalContractContext (copy), UseVoiceStatusFunction (copy), FFlagEnableSquadTopBannerWideMode (copy), HttpService (copy), RoactNavigationModule (copy), SquadViewFlags (copy), UseCurrentSquadSelectorFunction (copy), UseSelectorFunction (copy), UseStoreFunction (copy), SquadQuickStartExperimentation (copy), FFlagEnablePartyQuickStartButton (copy), SquadPromptType (copy), FFlagMakeCreateOrJoinSquadAThunks (copy), CreateOrJoinSquadFunction (copy), NetworkingSquads (copy), LogInExpCoplayTelemetryModule (copy), SquadCoplayJoin (copy), UseEffectOnceFunction (copy), FFlagAppChatShowOSAOnPageEntry (copy), LoggerModule (copy), Cryo (copy), SquadUserPartyStatusModule (copy), PartyUserInvitedDurationSeconds (copy), PartyInviteeNoResponseDurationSeconds (copy), SetIntervalFunction (copy), ClearIntervalFunction (copy), UsePreviousFunction (copy), UserBlockingNetworking (copy), FFlagSquadsPresenceStoreMigration (copy), NetworkingPresence (copy), ConstantsModule (copy), SignalsModule (copy), GetResult (copy), UseSignalStateFunction (copy), FFlagEnableSquadRegroupServerCapacityCheck (copy), Players (copy), SquadRegroupExperimentation (copy), PresenceType1 (copy), PresenceType (copy), LuckyRecommendationExperimentation (copy), FFlagEnableSquadRegroupExperimentationSmallScreenFix (copy), EnableSquadLobbyBanners (copy), SquadLobbyBannersModule (copy), Foundation (copy), SquadLobbyUserGridModule (copy), EventNamesModule (copy), SquadPartySheetActionEnumModule (copy), SquadLobbyRegroupRowModule (copy), SquadLobbyActionBarModule (copy), SquadLobbyLuckyRecommendationRowModule (copy), StateLayerAffordance (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), SquadLobbyVoiceChatMenuModule (copy), FFlagEnablePartyVoiceChangersInLua (copy), SquadLobbyUserDropdownMenuModule (copy), SquadCoordinationExperienceJoinExperimentation (copy), FFlagEnableSquadRegroupExperimentation (copy), Roact (copy), SquadLobbySessionProvider (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDispatchResult = UseDispatchFunction()
@@ -88,14 +88,14 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 	
 	if FFlagEnableSquadTopBannerWideMode then
 		local UseRefResult = React.useRef(HttpService:GenerateGUID())
-		React.useEffect(function() --[[ Line: 126 ]]
+		React.useEffect(function()
 			-- upvalues: IsWideMode (copy), UseRefResult (copy), UseContextResult (copy), UseNavigationResult (copy), RoactNavigationModule (upval)
 			if IsWideMode then
-				return function() --[[ Line: 152 ]] end
+				return function() end
 			else
 				local Current = UseRefResult.current
 				UseContextResult.disableSquadTopBanner(Current, true)
-				local AddListenerResult = UseNavigationResult and UseNavigationResult.addListener(RoactNavigationModule.Events.WillBlur, function(p2) --[[ Line: 131 ]]
+				local AddListenerResult = UseNavigationResult and UseNavigationResult.addListener(RoactNavigationModule.Events.WillBlur, function(p2)
 					-- upvalues: UseContextResult (upval), Current (copy)
 					if p2.state.routeName == "SquadInviteFriends" or p2.state.routeName == "SquadLobby" then
 						UseContextResult.disableSquadTopBanner(Current, true)
@@ -106,7 +106,7 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 					end
 				end)
 				
-				return function() --[[ Line: 142 ]]
+				return function()
 					-- upvalues: AddListenerResult (ref), UseContextResult (upval), Current (copy)
 					if AddListenerResult then
 						AddListenerResult.remove()
@@ -120,20 +120,20 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 			UseNavigationResult,
 			IsWideMode
 		})
-		React.useEffect(function() --[[ Line: 155 ]]
+		React.useEffect(function()
 			-- upvalues: UseContextResult (copy), SquadViewFlags (upval)
 			UseContextResult.updateSquadViewFlags(SquadViewFlags.SquadLobby, true)
 			
-			return function() --[[ Line: 157 ]]
+			return function()
 				-- upvalues: UseContextResult (upval), SquadViewFlags (upval)
 				UseContextResult.updateSquadViewFlags(SquadViewFlags.SquadLobby, false)
 			end
 		end, { UseContextResult.updateSquadViewFlags })
 	else
-		React.useEffect(function() --[[ Line: 165 ]]
+		React.useEffect(function()
 			-- upvalues: UseContextResult (copy), SquadViewFlags (upval), UseNavigationResult (copy), RoactNavigationModule (upval)
 			UseContextResult.updateSquadViewFlags(SquadViewFlags.SquadLobby, true)
-			local AddListenerResult = UseNavigationResult and UseNavigationResult.addListener(RoactNavigationModule.Events.WillBlur, function(p2) --[[ Line: 168 ]]
+			local AddListenerResult = UseNavigationResult and UseNavigationResult.addListener(RoactNavigationModule.Events.WillBlur, function(p2)
 				-- upvalues: UseContextResult (upval), SquadViewFlags (upval)
 				if p2.state.routeName == "SquadInviteFriends" or p2.state.routeName == "SquadLobby" then
 					UseContextResult.updateSquadViewFlags(SquadViewFlags.SquadLobby, true)
@@ -144,7 +144,7 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 				end
 			end)
 			
-			return function() --[[ Line: 175 ]]
+			return function()
 				-- upvalues: AddListenerResult (ref), UseContextResult (upval), SquadViewFlags (upval)
 				if AddListenerResult then
 					AddListenerResult.remove()
@@ -159,14 +159,14 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 	end
 	local UseStateResult1, UseStateResult2_1 = React.useState(false)
 	local UseStateResult3, UseStateResult2_2 = React.useState(Vector2.zero)
-	local UseResult = React.useCallback(function(Frame) --[[ Line: 187 ]]
+	local UseResult = React.useCallback(function(Frame)
 		-- upvalues: UseStateResult2_2 (copy)
 		UseStateResult2_2(Frame.AbsoluteSize)
 	end, { UseStateResult2_2 })
 	local UseCurrentSquadSelectorResult = UseCurrentSquadSelectorFunction()
 	local SquadId = if UseCurrentSquadSelectorResult then UseCurrentSquadSelectorResult.squadId else ""
 	local Members = UseCurrentSquadSelectorResult and UseCurrentSquadSelectorResult.members
-	local UseSelectorResult = UseSelectorFunction((React.useCallback(function(p2) --[[ Line: 195 ]]
+	local UseSelectorResult = UseSelectorFunction((React.useCallback(function(p2)
 		return p2.Squad and p2.Squad.Squad and p2.Squad.Squad.currentSquad and p2.Squad.Squad.currentSquad.parentChannelId or ""
 	end, {})))
 	local UseStoreResult = UseStoreFunction()
@@ -182,12 +182,12 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 		SquadCreateOrJoinAttemptId = ExtraParamsParam.squadCreateOrJoinAttemptId
 	end
 	local ScheduledGroupUpId = ExtraParamsParam.scheduledGroupUpId
-	local UseResult1 = React.useCallback(function() --[[ Line: 219 ]]
+	local UseResult1 = React.useCallback(function()
 		-- upvalues: UseContextResult (copy), UseStoreResult (copy), SquadPromptType (upval), p1 (copy)
 		UseContextResult.setSquadPrompt(UseStoreResult, {
 			hideCancelButton = true,
 			promptType = SquadPromptType.Error,
-			onConfirm = function() --[[ Line: 223 ]]
+			onConfirm = function()
 				-- upvalues: p1 (upval)
 				p1.navigateAwayFromSquad()
 			end
@@ -197,7 +197,7 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 		UseStoreResult,
 		UseContextResult.setSquadPrompt
 	})
-	local UseResult2 = React.useCallback(function(ParentChannelId) --[[ Line: 229 ]]
+	local UseResult2 = React.useCallback(function(ParentChannelId)
 		-- upvalues: FFlagMakeCreateOrJoinSquadAThunks (upval), UseDispatchResult (copy), CreateOrJoinSquadFunction (upval), UseContextResult (copy), SquadCreateOrJoinAttemptId (ref), p1 (copy), ScheduledGroupUpId (copy), NetworkingSquads (upval), LogInExpCoplayTelemetryModule (upval), SquadCoplayJoin (upval), UseResult1 (copy)
 		if FFlagMakeCreateOrJoinSquadAThunks then
 			UseDispatchResult(CreateOrJoinSquadFunction(ParentChannelId, UseContextResult.setSquadPrompt, UseContextResult.fireSquadAnalytics, UseContextResult.squadLocation, SquadCreateOrJoinAttemptId, p1.navigateAwayFromSquad, ScheduledGroupUpId))
@@ -209,7 +209,7 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 				parentChannelId = ParentChannelId,
 				squadLocation = UseContextResult.squadLocation,
 				partyAttemptId = SquadCreateOrJoinAttemptId
-			})):andThen(function(Result) --[[ Line: 251 ]]
+			})):andThen(function(Result)
 				-- upvalues: LogInExpCoplayTelemetryModule (upval), UseContextResult (upval), SquadCoplayJoin (upval)
 				local GroupUpId = Result.responseBody.groupUp.groupUpId
 				local Members = Result.responseBody.groupUp.members
@@ -217,7 +217,7 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 				if GroupUpId and Members then
 					LogInExpCoplayTelemetryModule(GroupUpId, Members, UseContextResult.squadLocation, SquadCoplayJoin.PartyJoin, UseContextResult.fireSquadAnalytics)
 				end
-			end):catch(function(_) --[[ Line: 266 ]]
+			end):catch(function(_)
 				-- upvalues: UseResult1 (upval)
 				UseResult1()
 			end)
@@ -232,16 +232,16 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 		SquadCreateOrJoinAttemptId, ScheduledGroupUpId
 	})
 	local IsNotSquadIdMatch: boolean = SquadId1 and SquadId1 ~= SquadId
-	React.useEffect(function() --[[ Line: 285 ]]
+	React.useEffect(function()
 		-- upvalues: IsNotSquadIdMatch (copy), UseContextResult (copy), UseStoreResult (copy), SquadPromptType (upval), UseResult2 (copy), ConversationIdParam (copy), p1 (copy), UseNavigationResult (copy)
 		if IsNotSquadIdMatch then
 			UseContextResult.setSquadPrompt(UseStoreResult, {
 				promptType = SquadPromptType.JoinAnotherSquad,
-				onConfirm = function() --[[ Line: 289 ]]
+				onConfirm = function()
 					-- upvalues: UseResult2 (upval), ConversationIdParam (upval)
 					UseResult2(ConversationIdParam)
 				end,
-				onCancel = function() --[[ Line: 292 ]]
+				onCancel = function()
 					-- upvalues: p1 (upval)
 					p1.navigateAwayFromSquad()
 				end
@@ -252,7 +252,7 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 		SquadId1, UseContextResult.setSquadPrompt, UseResult2, ConversationIdParam,
 		p1.navigateAwayFromSquad, IsNotSquadIdMatch
 	})
-	UseEffectOnceFunction(function() --[[ Line: 311 ]]
+	UseEffectOnceFunction(function()
 		-- upvalues: IsNotSquadIdMatch (copy), FFlagAppChatShowOSAOnPageEntry (upval), UseContextResult (copy), UseGetConversationFromIdResult (copy), p1 (copy), SquadId (copy), LoggerModule (upval), ConversationIdParam (copy), UseDispatchResult (copy), UseResult2 (copy), UseResult1 (copy)
 		if IsNotSquadIdMatch then return end
 		if FFlagAppChatShowOSAOnPageEntry and UseContextResult.shouldShowOSAForConversation and UseContextResult.shouldShowOSAForConversation(UseGetConversationFromIdResult) then
@@ -263,12 +263,12 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 		if SquadId == "" then
 			if UseGetConversationFromIdResult and UseGetConversationFromIdResult.source == "friends" then
 				LoggerModule:debug("Channel does not exist for: {}. Creating a friend conversation.", ConversationIdParam)
-				UseDispatchResult(UseContextResult.createFriendConversation(ConversationIdParam)):andThen(function(Result) --[[ Line: 335 ]]
+				UseDispatchResult(UseContextResult.createFriendConversation(ConversationIdParam)):andThen(function(Result)
 					-- upvalues: UseResult2 (upval)
 					if Result and Result.id then
 						UseResult2(Result.id)
 					end
-				end):catch(function(Err) --[[ Line: 340 ]]
+				end):catch(function(Err)
 					-- upvalues: LoggerModule (upval), UseResult1 (upval)
 					LoggerModule:debug("Error while trying to create a friend conversation: {}", Err)
 					UseResult1()
@@ -284,7 +284,7 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 		ConversationIdParam, UseGetConversationFromIdResult, UseResult2, UseResult1
 	})
 	local UseStateResult4, UseStateResult2_3 = React.useState({})
-	local UseMemoResult = React.useMemo(function() --[[ Line: 360 ]]
+	local UseMemoResult = React.useMemo(function()
 		-- upvalues: Members (copy)
 		local t = {}
 		
@@ -295,7 +295,7 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 		end
 		return t
 	end, { Members })
-	local UseResult3 = React.useCallback(function(List, p2, p3) --[[ Line: 381 ]]
+	local UseResult3 = React.useCallback(function(List, p2, p3)
 		-- upvalues: Cryo (upval), Number (copy), SquadUserPartyStatusModule (upval), PartyUserInvitedDurationSeconds (upval), PartyInviteeNoResponseDurationSeconds (upval)
 		local List1 = {}
 		local Count = 0
@@ -314,7 +314,7 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 				if p2[value] then
 					Inactive = SquadUserPartyStatusModule.Active
 				else
-					local Where = p3 and Cryo.List.findWhere(p3, function(p4): boolean --[[ Line: 406 ]]
+					local Where = p3 and Cryo.List.findWhere(p3, function(p4): boolean
 						-- upvalues: value (copy)
 						return value == tostring(p4.userId)
 					end)
@@ -340,11 +340,11 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 		end
 		return { users = List1, numberOfUpdatesPending = Count }
 	end, {})
-	React.useEffect(function() --[[ Line: 450 ]]
+	React.useEffect(function()
 		-- upvalues: UseResult3 (copy), Participants (copy), UseMemoResult (copy), Invitees (copy), UseStateResult2_3 (copy), SetIntervalFunction (upval), ClearIntervalFunction (upval)
 		UseStateResult2_3(UseResult3(Participants, UseMemoResult, Invitees).users)
 		local v1 = nil
-		v1 = SetIntervalFunction(function() --[[ Line: 456 ]]
+		v1 = SetIntervalFunction(function()
 			-- upvalues: UseResult3 (upval), Participants (upval), UseMemoResult (upval), Invitees (upval), UseStateResult2_3 (upval), ClearIntervalFunction (upval), v1 (ref)
 			local UseResultResult = UseResult3(Participants, UseMemoResult, Invitees)
 			UseStateResult2_3(UseResultResult.users)
@@ -354,13 +354,13 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 			end
 		end, 1000)
 		
-		return function() --[[ Line: 465 ]]
+		return function()
 			-- upvalues: ClearIntervalFunction (upval), v1 (ref)
 			ClearIntervalFunction(v1)
 		end
 	end, { UseMemoResult, Invitees, Participants, UseResult3 })
 	local UsePreviousResult = UsePreviousFunction(SquadId) or ""
-	React.useEffect(function() --[[ Line: 472 ]]
+	React.useEffect(function()
 		-- upvalues: UsePreviousResult (copy), SquadId (copy), p1 (copy), ConversationIdParam (copy), UseSelectorResult (copy), RoactNavigationModule (upval), IsWideMode (copy), UseNavigationResult (copy)
 		if UsePreviousResult ~= "" and SquadId == "" then
 			p1.navigateAwayFromSquad()
@@ -395,7 +395,7 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 		p1.navigateAwayFromSquad
 	})
 	local UsePreviousResult1 = UsePreviousFunction(Members)
-	React.useEffect(function() --[[ Line: 536 ]]
+	React.useEffect(function()
 		-- upvalues: Members (copy), UsePreviousResult1 (copy), Number (copy), UseDispatchResult (copy), UserBlockingNetworking (upval), FFlagSquadsPresenceStoreMigration (upval), NetworkingPresence (upval)
 		local List = {}
 		
@@ -427,7 +427,7 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 			UseDispatchResult(NetworkingPresence.GetPresencesFromUserIds.API(List))
 		end
 	end, { Members, Number, UsePreviousResult1 })
-	local UseResult4 = React.useCallback(function() --[[ Line: 570 ]]
+	local UseResult4 = React.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy), UseStateResult1 (copy)
 		UseStateResult2_1(not UseStateResult1)
 	end, { UseStateResult1, UseStateResult2_1 })
@@ -435,7 +435,7 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 	local NewSQUADLOBBYACTIONBARHEIGHT1 = ConstantsModule.SQUAD_LOBBY_ACTION_BAR_HEIGHT + 20
 	local UseStateResult5, UseStateResult2_4 = React.useState(nil)
 	local UseStateResult6, UseStateResult2_5 = React.useState(false)
-	local UseResult5 = React.useCallback(function(Vector) --[[ Line: 582 ]]
+	local UseResult5 = React.useCallback(function(Vector)
 		-- upvalues: UseStateResult2 (copy), UseTokensResult (copy)
 		if Vector.Y > 0 then
 			UseStateResult2(Vector.Y + UseTokensResult.Gap.Medium)
@@ -445,7 +445,7 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 			UseStateResult2(0)
 		end
 	end, { UseStateResult2, UseTokensResult })
-	local UseResult6 = React.useCallback(function(p4) --[[ Line: 590 ]]
+	local UseResult6 = React.useCallback(function(p4)
 		-- upvalues: Members (copy)
 		local ByUserId = p4.Squad and p4.Squad.Presence and p4.Squad.Presence.byUserId or {}
 		local t = {}
@@ -457,9 +457,9 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 		end
 		return t
 	end, { Members })
-	local UseMemoResult1 = if FFlagSquadsPresenceStoreMigration then React.useMemo(function() --[[ Line: 603 ]]
+	local UseMemoResult1 = if FFlagSquadsPresenceStoreMigration then React.useMemo(function()
 		-- upvalues: SignalsModule (upval), Members (copy), GetResult (upval)
-		return SignalsModule.createComputed(function(p5) --[[ Line: 604 ]]
+		return SignalsModule.createComputed(function(p5)
 			-- upvalues: Members (upval), GetResult (upval)
 			local DataResults = {}
 			local Iterator = ipairs
@@ -473,7 +473,7 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 	end, { Members }) else nil
 	local UseSignalStateResult = if FFlagSquadsPresenceStoreMigration then UseSignalStateFunction(UseMemoResult1) else UseSelectorFunction(UseResult6)
 	local NoFFlagEnableSquadRegroupServerCapacityCheck: boolean = not FFlagEnableSquadRegroupServerCapacityCheck or Players.MaxPlayers > 1
-	local UseMemoResult2 = React.useMemo(function(): boolean --[[ Line: 622 ]]
+	local UseMemoResult2 = React.useMemo(function(): boolean
 		-- upvalues: SquadRegroupExperimentation (upval), p1 (copy), NoFFlagEnableSquadRegroupServerCapacityCheck (copy), UseCurrentSquadSelectorResult (copy), UseSignalStateResult (copy), Number (copy), FFlagSquadsPresenceStoreMigration (upval), PresenceType1 (upval), PresenceType (upval)
 		if not SquadRegroupExperimentation.getSquadRegroupEnabled() or not p1.isInExperience or not NoFFlagEnableSquadRegroupServerCapacityCheck or not UseCurrentSquadSelectorResult or not UseCurrentSquadSelectorResult.members or #UseCurrentSquadSelectorResult.members <= 1 or not UseCurrentSquadSelectorResult.selfPermissions or not UseCurrentSquadSelectorResult.selfPermissions.canSeeRegroupJoinButton then
 			return false
@@ -500,15 +500,15 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 	local NewSize = UseTokensResult.Size.Size_1000 + UseTokensResult.Padding.Medium * 2
 	local UseMemoResult2_1 = FFlagEnableSquadRegroupExperimentationSmallScreenFix and UseMemoResult2
 	local NewXXLarge = if UseMemoResult2 and not UseMemoResult2_1 then UseTokensResult.Gap.XXLarge + NewSize elseif v1 then UseTokensResult.Gap.XXLarge + NewSize else 0
-	local UseMemoResult3 = React.useMemo(function() --[[ Line: 693 ]]
+	local UseMemoResult3 = React.useMemo(function()
 		-- upvalues: EnableSquadLobbyBanners (upval), React (upval), SquadLobbyBannersModule (upval), UseResult5 (copy)
 		return if EnableSquadLobbyBanners then React.createElement(SquadLobbyBannersModule, { onAbsoluteSizeChanged = UseResult5 }) else nil
 	end, { UseResult5 })
-	local UseResult7 = React.useCallback(function() --[[ Line: 701 ]]
+	local UseResult7 = React.useCallback(function()
 		-- upvalues: p1 (copy), UseSelectorResult (copy)
 		p1.navigateToSquadInviteFriends(UseSelectorResult)
 	end, { UseSelectorResult, p1.navigateToSquadInviteFriends })
-	local UseMemoResult4 = React.useMemo(function() --[[ Line: 706 ]]
+	local UseMemoResult4 = React.useMemo(function()
 		-- upvalues: React (upval), UseStateResult (copy), NewXXLarge (copy), UseStyleResult (copy), UseResult (copy), UseMemoResult2_1 (copy), Foundation (upval), SquadLobbyUserGridModule (upval), UseStateResult3 (copy), NewSQUADLOBBYACTIONBARHEIGHT (copy), UseTokensResult (copy), NewSize (copy), UseStateResult4 (copy), p1 (copy), UseContextResult (copy), EventNamesModule (upval), UseSelectorResult (copy), SquadPartySheetActionEnumModule (upval), UseVoiceStatusResult (copy), UseStateResult2_4 (copy), UseStateResult2_5 (copy), UseResult7 (copy), SquadLobbyRegroupRowModule (upval), Number (copy)
 		return React.createElement("ScrollingFrame", {
 			Position = UDim2.fromOffset(0, UseStateResult),
@@ -534,7 +534,7 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 						paddingBottom = UDim.new(0, 0),
 						users = UseStateResult4,
 						isInExperience = p1.isInExperience,
-						onUserCardActivated = function(p5) --[[ Line: 736 ]]
+						onUserCardActivated = function(p5)
 							-- upvalues: UseContextResult (upval), EventNamesModule (upval), UseSelectorResult (upval), SquadPartySheetActionEnumModule (upval), UseVoiceStatusResult (upval), UseStateResult2_4 (upval), UseStateResult2_5 (upval)
 							UseContextResult.fireSquadAnalytics(EventNamesModule.PartySheetAction, {
 								parentChannelId = UseSelectorResult,
@@ -571,7 +571,7 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 				paddingBottom = UDim.new(0, NewSQUADLOBBYACTIONBARHEIGHT),
 				users = UseStateResult4,
 				isInExperience = p1.isInExperience,
-				onUserCardActivated = function(p5) --[[ Line: 778 ]]
+				onUserCardActivated = function(p5)
 					-- upvalues: UseContextResult (upval), EventNamesModule (upval), UseSelectorResult (upval), SquadPartySheetActionEnumModule (upval), UseVoiceStatusResult (upval), UseStateResult2_4 (upval), UseStateResult2_5 (upval)
 					UseContextResult.fireSquadAnalytics(EventNamesModule.PartySheetAction, {
 						parentChannelId = UseSelectorResult,
@@ -592,7 +592,7 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 		UseMemoResult2_1, if UseMemoResult2_1 then NewSize else nil,
 		if UseMemoResult2_1 then Number else nil, UseVoiceStatusResult
 	})
-	local UseMemoResult5 = React.useMemo(function() --[[ Line: 809 ]]
+	local UseMemoResult5 = React.useMemo(function()
 		-- upvalues: React (upval), SquadLobbyActionBarModule (upval), UseSquadStateResult (copy), UseGetConversationFromIdResult (copy), p1 (copy), UseResult4 (copy), SquadId (copy)
 		return React.createElement(SquadLobbyActionBarModule, {
 			squadState = UseSquadStateResult,
@@ -611,7 +611,7 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 		UseSquadStateResult, UseResult4,
 		UseGetConversationFromIdResult and UseGetConversationFromIdResult.hasUnreadMessages
 	})
-	local UseMemoResult6 = React.useMemo(function() --[[ Line: 834 ]]
+	local UseMemoResult6 = React.useMemo(function()
 		-- upvalues: UseMemoResult2_1 (copy), UseMemoResult2 (copy), React (upval), Foundation (upval), ConstantsModule (upval), UseTokensResult (copy), NewSize (copy), SquadLobbyRegroupRowModule (upval), Number (copy)
 		return if UseMemoResult2_1 or not UseMemoResult2 then nil else React.createElement(Foundation.View, {
 			tag = "anchor-bottom-center auto-none gui-object-defaults",
@@ -621,7 +621,7 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 			Row = React.createElement(SquadLobbyRegroupRowModule, { localUserId = Number })
 		})
 	end, { UseMemoResult2, Number, UseTokensResult, NewSize })
-	local UseMemoResult7 = React.useMemo(function() --[[ Line: 855 ]]
+	local UseMemoResult7 = React.useMemo(function()
 		-- upvalues: v1 (ref), React (upval), Foundation (upval), ConstantsModule (upval), UseTokensResult (copy), NewSize (copy), SquadLobbyLuckyRecommendationRowModule (upval)
 		return if v1 then React.createElement(Foundation.View, {
 			tag = "anchor-bottom-center auto-none gui-object-defaults",
@@ -631,12 +631,12 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 			Row = React.createElement(SquadLobbyLuckyRecommendationRowModule)
 		}) else nil
 	end, { v1, UseTokensResult, NewSize })
-	local UseMemoResult8 = React.useMemo(function() --[[ Line: 874 ]]
+	local UseMemoResult8 = React.useMemo(function()
 		-- upvalues: UseStateResult1 (copy), React (upval), Foundation (upval), StateLayerAffordance (upval), UseStateResult2_1 (copy), FFlagSquadsEnableFoundationTestIdsModule (upval), NewSQUADLOBBYACTIONBARHEIGHT1 (copy), UseTokensResult (copy), SquadLobbyVoiceChatMenuModule (upval), FFlagEnablePartyVoiceChangersInLua (upval), p1 (copy)
 		return if UseStateResult1 then React.createElement(Foundation.View, {
 			Size = UDim2.new(1, 0, 1, 0),
 			stateLayer = { affordance = StateLayerAffordance.None },
-			onActivated = function() --[[ Line: 880 ]]
+			onActivated = function()
 				-- upvalues: UseStateResult2_1 (upval)
 				UseStateResult2_1(false)
 			end,
@@ -662,7 +662,7 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 					Size = UDim2.new(1, 0, 0, NewSQUADLOBBYACTIONBARHEIGHT1),
 					flexItem = { FlexMode = Enum.UIFlexMode.Fill },
 					stateLayer = { affordance = StateLayerAffordance.None },
-					onActivated = function() --[[ Line: 907 ]]
+					onActivated = function()
 						-- upvalues: UseStateResult2_1 (upval)
 						UseStateResult2_1(false)
 					end
@@ -675,7 +675,7 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 					AutomaticSize = Enum.AutomaticSize.Y,
 					padding = Vector2.new(UseTokensResult.Padding.XLarge, UseTokensResult.Padding.Medium),
 					stateLayer = { affordance = StateLayerAffordance.None },
-					onActivated = function() --[[ Line: 920 ]] end
+					onActivated = function() end
 				}, {
 					SquadLobbyVoiceChatMenu = React.createElement(SquadLobbyVoiceChatMenuModule, {
 						openSquadVoiceChangers = if FFlagEnablePartyVoiceChangersInLua then p1.openSquadVoiceChangers else nil
@@ -685,7 +685,7 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 					LayoutOrder = 3,
 					Size = UDim2.new(1, 0, 0, NewSQUADLOBBYACTIONBARHEIGHT1),
 					stateLayer = { affordance = StateLayerAffordance.None },
-					onActivated = function() --[[ Line: 933 ]]
+					onActivated = function()
 						-- upvalues: UseStateResult2_1 (upval)
 						UseStateResult2_1(false)
 					end
@@ -698,17 +698,17 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 		UseStateResult2_1,
 		UseTokensResult
 	})
-	local UseMemoResult9 = React.useMemo(function() --[[ Line: 942 ]]
+	local UseMemoResult9 = React.useMemo(function()
 		-- upvalues: UseStateResult6 (copy), UseStateResult5 (copy), React (upval), SquadLobbyUserDropdownMenuModule (upval), p1 (copy), UseStateResult2_4 (copy), UseStateResult2_5 (copy), UseSelectorResult (copy)
 		return if UseStateResult6 and UseStateResult5 then React.createElement(SquadLobbyUserDropdownMenuModule, {
 			userId = UseStateResult5,
 			isInExperience = p1.isInExperience,
-			onDismiss = function() --[[ Line: 947 ]]
+			onDismiss = function()
 				-- upvalues: UseStateResult2_4 (upval), UseStateResult2_5 (upval)
 				UseStateResult2_4(nil)
 				UseStateResult2_5(false)
 			end,
-			openViewProfile = function() --[[ Line: 951 ]]
+			openViewProfile = function()
 				-- upvalues: p1 (upval), UseStateResult5 (upval)
 				p1.openViewProfile(UseStateResult5)
 			end,
@@ -719,7 +719,7 @@ return function(p1) --[[ Line: 111 | Named "SquadLobby" ]]
 		UseSelectorResult, p1.isInExperience, UseStateResult6, UseStateResult2_5,
 		p1.openViewProfile, UseStateResult5, UseStateResult2_4
 	})
-	React.useEffect(function() --[[ Line: 968 ]]
+	React.useEffect(function()
 		-- upvalues: SquadCoordinationExperienceJoinExperimentation (upval), FFlagEnableSquadRegroupExperimentation (upval), SquadRegroupExperimentation (upval), LuckyRecommendationExperimentation (upval)
 		SquadCoordinationExperienceJoinExperimentation.logExposure()
 		

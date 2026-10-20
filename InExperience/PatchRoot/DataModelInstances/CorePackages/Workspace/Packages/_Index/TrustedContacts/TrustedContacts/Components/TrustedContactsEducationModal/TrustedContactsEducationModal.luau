@@ -23,7 +23,7 @@ local FStringIsVerified18PlusAmpFeature = require(Parent.SharedFlags).FStringIsV
 local FFlagCreateConnectionsHub = require(Parent.SharedFlags).FFlagCreateConnectionsHub
 local ConsoleFriendsPageNavigation = game:DefineFastFlag("ConsoleFriendsPageNavigation", false)
 
-local function TextWithIcon(p1) --[[ Line: 38 ]]
+local function TextWithIcon(p1)
 	-- upvalues: ReactModule (copy), Icon (copy), IconSize (copy), Text (copy)
 	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -47,32 +47,32 @@ local function TextWithIcon(p1) --[[ Line: 38 ]]
 	})
 end
 
-return function(_) --[[ Line: 65 | Named "TrustedContactsEducationModal" ]]
+return function(_)
 	-- upvalues: UseScreenSizeFunction (copy), UseNavigationFunction (copy), UseTokensFunction (copy), ReactModule (copy), AccessResponseEnum (copy), AmpApiProvider (copy), FStringIsVerified18PlusAmpFeature (copy), FStringCanAccessTrustedContactsAmpNameSpace (copy), UseTCAnalyticsFunction (copy), EventNames (copy), FFlagCreateConnectionsHub (copy), AppPage (copy), ConsoleFriendsPageNavigation (copy), UseLocalizationFunction (copy), PartialPageModal (copy), ButtonType (copy), Skeleton (copy), Text (copy), TextWithIcon (copy)
 	local UseScreenSizeResult = UseScreenSizeFunction()
 	local UseNavigationResult = UseNavigationFunction()
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(AccessResponseEnum.Pending)
-	ReactModule.useEffect(function() --[[ Line: 71 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: AmpApiProvider (upval), FStringIsVerified18PlusAmpFeature (upval), FStringCanAccessTrustedContactsAmpNameSpace (upval), UseStateResult2 (copy)
 		UseStateResult2(AmpApiProvider.upsellFeatureAccess(FStringIsVerified18PlusAmpFeature, {}, FStringCanAccessTrustedContactsAmpNameSpace).access)
 	end, {})
 	local FireAnalyticsEventFunction = UseTCAnalyticsFunction().fireAnalyticsEvent
-	ReactModule.useEffect(function() --[[ Line: 78 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FireAnalyticsEventFunction (copy), EventNames (upval)
 		FireAnalyticsEventFunction(EventNames.TCEducationModalSeen)
 	end, {})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 82 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FireAnalyticsEventFunction (copy), EventNames (upval), UseNavigationResult (copy)
 		FireAnalyticsEventFunction(EventNames.TCEducationCloseClicked)
 		UseNavigationResult.pop()
 	end, { UseNavigationResult })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 87 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: FireAnalyticsEventFunction (copy), EventNames (upval), UseNavigationResult (copy)
 		FireAnalyticsEventFunction(EventNames.TCEducationGotItClicked)
 		UseNavigationResult.pop()
 	end, { UseNavigationResult })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 92 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: FireAnalyticsEventFunction (copy), EventNames (upval), FFlagCreateConnectionsHub (upval), UseNavigationResult (copy), AppPage (upval), ConsoleFriendsPageNavigation (upval)
 		FireAnalyticsEventFunction(EventNames.TCEducationManageConnectionsClicked)
 		

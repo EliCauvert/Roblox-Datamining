@@ -4,7 +4,7 @@ local FFlagFriendSortedByPresenceSignalsImplementation = require(Parent.SharedFl
 local FFlagFriendsStoreRteRequestStatusUpdates = require(Parent.SharedFlags).FFlagFriendsStoreRteRequestStatusUpdates
 local GetResult = require(Parent.DataHydration).Friends.FriendsStore.get()
 
-return function(p1) --[[ Line: 20 | Named "handleFriendshipEvent" ]]
+return function(p1)
 	-- upvalues: FFlagFriendSortedByPresenceSignalsImplementation (copy), GetResult (copy), FFlagFriendsStoreRteRequestStatusUpdates (copy), ApolloFriendsModule (copy)
 	if p1.friendshipUpdate.removedUserId then
 		if not FFlagFriendSortedByPresenceSignalsImplementation then

@@ -2,7 +2,7 @@
 local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
 local _UDim = UDim.new(0, 6)
 
-return function(p1) --[[ Line: 17 | Named "FreezeToggle" ]]
+return function(p1)
 	-- upvalues: RoactModule (copy), ConstantsModule (copy), _UDim (copy)
 	return RoactModule.createElement("TextButton", {
 		Text = if p1.frozen then "Frozen" else "Freeze",

@@ -4,7 +4,7 @@ local Contexts = Enums.Contexts
 local SubPages = Enums.SubPages
 local EventTypes = Enums.EventTypes
 
-local function ProfileUserId(p1) --[[ Line: 11 ]]
+local function ProfileUserId(p1)
 	return p1
 end
 

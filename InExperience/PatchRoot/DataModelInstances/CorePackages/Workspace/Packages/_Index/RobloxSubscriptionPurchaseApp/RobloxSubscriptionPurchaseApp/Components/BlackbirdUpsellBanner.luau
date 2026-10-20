@@ -15,7 +15,7 @@ local RobloxPlusUpsellBannerCTAModule = require(script.Parent.RobloxPlusUpsellBa
 local FFlagRobloxPlusUpsellBannerUseTryItForFreeModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusUpsellBannerUseTryItForFree)
 local BoldBlackbirdUpsellBannerStroke = game:DefineFastFlag("BoldBlackbirdUpsellBannerStroke", false)
 
-return function(Frame) --[[ Line: 36 | Named "BlackbirdUpsellBanner" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), FFlagRobloxPlusUpsellBannerUseTryItForFreeModule (copy), ReactModule (copy), FFlagSupportNewBadgeRobloxPlusModule (copy), UseRobloxPlusUpsellBannerNewBadgeInteractionModule (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy), RobloxPlusUpsellBannerCTAModule (copy), BoldBlackbirdUpsellBannerStroke (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -26,7 +26,7 @@ return function(Frame) --[[ Line: 36 | Named "BlackbirdUpsellBanner" ]]
 		},
 		getFreeTrialText = if FFlagRobloxPlusUpsellBannerUseTryItForFreeModule then "Feature.RobloxSubscription.Action.TryItForFree" else "Feature.RobloxSubscription.Label.FreeTrialText"
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 50 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: Frame (copy), UseLocalizationResult (copy)
 		return if Frame.productInfo.isFreeTrial then UseLocalizationResult.getFreeTrialText else UseLocalizationResult.subscribe
 	end, {

@@ -53,7 +53,7 @@ local Config = if GetEngineFeatureEngineDebugUGCValidationViaLocalRCCModule() th
 	[ValidationEnumsModule.ValidationModule.DescendantIdsPublished] = true
 } else nil
 
-local function initRunVariables(Value, ConsumerConfig) --[[ Line: 95 ]]
+local function initRunVariables(Value, ConsumerConfig)
 	-- upvalues: ValidationModuleLoaderModule (copy), GetFFlagDebugUGCDisableAssetQualityChecksModule (copy)
 	local List = {}
 	local t = {}
@@ -99,7 +99,7 @@ local function initRunVariables(Value, ConsumerConfig) --[[ Line: 95 ]]
 	return List, t, t1
 end
 
-local function fetchQualityResults(p1, DesiredQualityChecks) --[[ Line: 168 ]]
+local function fetchQualityResults(p1, DesiredQualityChecks)
 	-- upvalues: AssetQualityService (copy), AssetQualityFetchStatus (copy), RecreateSceneFromEditablesModule (copy), GetEngineFeatureEngineUGCValidateEmoteAnimationExportModule (copy), ValidationEnumsModule (copy), StripMeshFromGltfModule (copy), GetFIntUGCValidationFetchQualityRetryDelayMsModule (copy), GetFIntUGCValidationFetchQualityMaxRetryModule (copy), GetEngineFeatureEngineAssetQualityV2SummaryFromUrlModule (copy), GetFFlagUGCValidationAllowFullVaasModule (copy), HttpService (copy), GetFFlagDebugUGCValidationPrintNewStructureResultsModule (copy), FetchAllDesiredDataModule (copy)
 	if not AssetQualityService then
 		p1.aqsFetchMetrics.fetchStatus = AssetQualityFetchStatus.assetQualityFetchFailure
@@ -113,7 +113,7 @@ local function fetchQualityResults(p1, DesiredQualityChecks) --[[ Line: 168 ]]
 	local Success = nil
 	
 	if p1.consumerConfig.aqFetchStage == "scene" then
-		Success, FetchFailureReason = pcall(function() --[[ Line: 182 ]]
+		Success, FetchFailureReason = pcall(function()
 			-- upvalues: ModelForGltfExport (ref), RecreateSceneFromEditablesModule (upval), p1 (copy), AssetQualityGltfFromInstanceAsync (ref), AssetQualityService (upval)
 			ModelForGltfExport = RecreateSceneFromEditablesModule.createModelForGltfExport(p1)
 			AssetQualityGltfFromInstanceAsync = AssetQualityService:GenerateAssetQualityGltfFromInstanceAsync(ModelForGltfExport)
@@ -139,7 +139,7 @@ local function fetchQualityResults(p1, DesiredQualityChecks) --[[ Line: 168 ]]
 			if i > 1 and FIntUGCValidationFetchQualityRetryDelayMsModule > 0 then
 				task.wait(FIntUGCValidationFetchQualityRetryDelayMsModule / 1000)
 			end
-			Success, FetchFailureReason = pcall(function() --[[ Line: 209 ]]
+			Success, FetchFailureReason = pcall(function()
 				-- upvalues: p1 (copy), i (copy), GetEngineFeatureEngineAssetQualityV2SummaryFromUrlModule (upval), GetFFlagUGCValidationAllowFullVaasModule (upval), AssetQualityService (upval), DesiredQualityChecks (copy), AssetQualityGltfFromInstanceAsync (ref), HttpService (upval)
 				p1.aqsFetchMetrics.fetchAttemptCount = i
 				local ClockTime = os.clock()
@@ -182,7 +182,7 @@ local function fetchQualityResults(p1, DesiredQualityChecks) --[[ Line: 168 ]]
 	end
 end
 
-local function getNextLayer(List, p2) --[[ Line: 278 ]]
+local function getNextLayer(List, p2)
 	local List1 = {}
 	
 	for i, value in List do
@@ -193,9 +193,9 @@ local function getNextLayer(List, p2) --[[ Line: 278 ]]
 	return List1
 end
 
-local function populateRelevantSourceStrings(p3) --[[ Line: 293 ]]
+local function populateRelevantSourceStrings(p3)
 	-- upvalues: ErrorSourceStringsModule (copy)
-	local function _(Text: string) --[[ Line: 294 | Named "capture" ]]
+	local function _(Text: string)
 		-- upvalues: ErrorSourceStringsModule (upval), p3 (copy)
 		local v1 = Text:split(".")
 		local Value = ErrorSourceStringsModule.Values[v1[#v1]]
@@ -229,13 +229,13 @@ local function populateRelevantSourceStrings(p3) --[[ Line: 293 ]]
 	end
 end
 
-local function _(p4) --[[ Line: 315 | Named "getDebugLabel" ]]
+local function _(p4)
 	local UploadEnum = p4.uploadEnum
 	
 	return if UploadEnum.assetType then UploadEnum.assetType.Name elseif UploadEnum.bundleType then UploadEnum.bundleType.Name else "?"
 end
 
-local function reportFullResult(p4, p5, ScaledClockTime) --[[ Line: 325 ]]
+local function reportFullResult(p4, p5, ScaledClockTime)
 	-- upvalues: AssetQualityFetchStatus (copy), RbxAnalyticsService (copy), GetFFlagUGCValidationAllowFullVaasModule (copy), TelemetryService (copy), config (copy), GetFFlagDebugUGCValidationPrintNewStructureResultsModule (copy)
 	local IsNotFetchStatusMatch = p5.aqsFetchMetrics.fetchStatus ~= AssetQualityFetchStatus.assetQualityFetchNA
 	local CustomFields = {
@@ -278,7 +278,7 @@ local function reportFullResult(p4, p5, ScaledClockTime) --[[ Line: 325 ]]
 	end
 end
 
-local function updateResultData(p6, p7, p8, _, EnforceShadowValidations) --[[ Line: 382 ]]
+local function updateResultData(p6, p7, p8, _, EnforceShadowValidations)
 	-- upvalues: ValidationEnumsModule (copy)
 	local ValidationEnum = p8.validationEnum
 	
@@ -306,7 +306,7 @@ local function updateResultData(p6, p7, p8, _, EnforceShadowValidations) --[[ Li
 	p7[ValidationEnum] = nil
 end
 
-local function createConsumerConfigWithDefaults(Tbl) --[[ Line: 420 ]]
+local function createConsumerConfigWithDefaults(Tbl)
 	-- upvalues: Config (copy), config3 (copy), GetFFlagUGCValidationAllowFullVaasModule (copy), ValidationEnumsModule (copy), GetEngineFeatureEngineAssetQualityV2SummaryFromUrlModule (copy)
 	local Copy = table.clone(Tbl)
 	
@@ -365,7 +365,7 @@ local function createConsumerConfigWithDefaults(Tbl) --[[ Line: 420 ]]
 	return Copy
 end
 
-local function runValidationOnRootInstance(p9) --[[ Line: 488 ]]
+local function runValidationOnRootInstance(p9)
 	-- upvalues: GetFFlagDebugUGCValidationPrintNewStructureResultsModule (copy), GetFFlagUGCValidationAllowFullVaasModule (copy), GetUploadCategoryModule (copy), initRunVariables (copy), AssetQualityFetchStatus (copy), GetEngineFeatureEngineAssetQualityV2SummaryFromUrlModule (copy), ValidationTestWrapperModule (copy), ValidationEnumsModule (copy), updateResultData (copy), populateRelevantSourceStrings (copy), reportFullResult (copy), FetchContentIdsModule (copy), ResetPhysicsDataModule (copy), config1 (copy), FetchAllDesiredDataModule (copy), RunService (copy), fetchQualityResults (copy), getNextLayer (copy), config2 (copy)
 	local ClockTime = os.clock()
 	local RootInstance = p9.rootInstance
@@ -468,7 +468,7 @@ local function runValidationOnRootInstance(p9) --[[ Line: 488 ]]
 	return config
 end
 
-local _ = function(Entry) --[[ Line: 627 | Named "getRootInstance" ]]
+local _ = function(Entry)
 	-- upvalues: ConstantsModule (copy)
 	if #Entry == 0 then
 		return nil
@@ -481,7 +481,7 @@ local _ = function(Entry) --[[ Line: 627 | Named "getRootInstance" ]]
 	return Entry[1]
 end
 
-local _ = function(Entry, Name, p10) --[[ Line: 642 | Named "findFolderByName" ]]
+local _ = function(Entry, Name, p10)
 	for _, value in Entry do
 		if value.Name == Name then
 			return value
@@ -490,7 +490,7 @@ local _ = function(Entry, Name, p10) --[[ Line: 642 | Named "findFolderByName" ]
 	return if p10 then Entry[1] else nil
 end
 
-local function synthesizeRootFromFolders(EntrypointInput, R15ArtistIntent, p11) --[[ Line: 657 ]]
+local function synthesizeRootFromFolders(EntrypointInput, R15ArtistIntent, p11)
 	local Folder = Instance.new("Folder")
 	
 	for _, value in EntrypointInput do
@@ -519,7 +519,7 @@ local function synthesizeRootFromFolders(EntrypointInput, R15ArtistIntent, p11) 
 end
 
 return {
-	ValidateAsset = function(Entry, AssetType, p12) --[[ Line: 684 ]]
+	ValidateAsset = function(Entry, AssetType, p12)
 		-- upvalues: HttpService (copy), ConstantsModule (copy), GetEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (copy), createConsumerConfigWithDefaults (copy), runValidationOnRootInstance (copy)
 		local config = {
 			jobId = HttpService:GenerateGUID(),
@@ -562,7 +562,7 @@ return {
 		
 		return (runValidationOnRootInstance(config))
 	end,
-	ValidateFinalizedBundle = function(EntrypointInput, BundleType, p13) --[[ Line: 706 ]]
+	ValidateFinalizedBundle = function(EntrypointInput, BundleType, p13)
 		-- upvalues: GetFFlagDebugAllowHRDUploadOnBundleBackendModule (copy), R15plusUtilsModule (copy), ConstantsModule (copy), GetEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (copy), synthesizeRootFromFolders (copy), HttpService (copy), createConsumerConfigWithDefaults (copy), runValidationOnRootInstance (copy)
 		if GetFFlagDebugAllowHRDUploadOnBundleBackendModule() then
 			R15plusUtilsModule.setIsBackendBundleUpload(p13.source == "Publish" or p13.source == "Backend")

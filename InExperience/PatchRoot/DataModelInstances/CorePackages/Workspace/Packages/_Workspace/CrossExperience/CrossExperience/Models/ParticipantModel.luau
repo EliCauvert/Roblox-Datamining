@@ -3,7 +3,7 @@ local FFlagEnablePartyVoiceChangersInLua = DependenciesModule.SharedFlags.FFlagE
 local T = DependenciesModule.t
 local ParticipantModelModule = {}
 
-function ParticipantModelModule.new(p1) --[[ Line: 10 ]]
+function ParticipantModelModule.new(p1)
 	-- upvalues: ParticipantModelModule (copy)
 	assert(ParticipantModelModule.isValid(p1))
 	ParticipantModelModule.__index = ParticipantModelModule
@@ -12,7 +12,7 @@ function ParticipantModelModule.new(p1) --[[ Line: 10 ]]
 	return p1
 end
 
-function ParticipantModelModule.format(p1) --[[ Line: 22 ]]
+function ParticipantModelModule.format(p1)
 	-- upvalues: ParticipantModelModule (copy), FFlagEnablePartyVoiceChangersInLua (copy)
 	return (ParticipantModelModule.new({
 		userId = p1.userId,

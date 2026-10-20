@@ -6,7 +6,7 @@ local list = {
 	"HomeIncomingRobuxTransferAgeGateBanner"
 }
 
-local function dismissPromptTypes(Callback, List) --[[ Line: 27 ]]
+local function dismissPromptTypes(Callback, List)
 	local t = {}
 	local List1 = {}
 	
@@ -21,7 +21,7 @@ local function dismissPromptTypes(Callback, List) --[[ Line: 27 ]]
 	return List1
 end
 
-local Callback = if FFlagSduiDismissPromptPageScope then function(p1, List) --[[ Line: 44 ]]
+local Callback = if FFlagSduiDismissPromptPageScope then function(p1, List)
 	-- upvalues: SetPromptDismissedInPageScopeFunction (copy)
 	if typeof(p1) ~= "string" or p1 == "" then return end
 	for _, value in List do
@@ -29,7 +29,7 @@ local Callback = if FFlagSduiDismissPromptPageScope then function(p1, List) --[[
 	end
 end else nil
 
-local function reportDismissForAllPromptTypes(Callback, Networking, List, PromptId) --[[ Line: 55 ]]
+local function reportDismissForAllPromptTypes(Callback, Networking, List, PromptId)
 	local Promise = nil
 	
 	for _, value in List do
@@ -38,7 +38,7 @@ local function reportDismissForAllPromptTypes(Callback, Networking, List, Prompt
 		if Promise == nil then
 			Promise = CallbackResult
 		else
-			Promise = Promise:andThen(function() --[[ Line: 67 ]]
+			Promise = Promise:andThen(function()
 				-- upvalues: CallbackResult (copy)
 				return CallbackResult
 			end)
@@ -48,13 +48,13 @@ local function reportDismissForAllPromptTypes(Callback, Networking, List, Prompt
 end
 
 return {
-	createCallbacks = function(p2) --[[ Line: 75 ]]
+	createCallbacks = function(p2)
 		-- upvalues: list (copy), Parent (copy), FFlagSduiDismissPromptPageScope (copy), Callback (ref), dismissPromptTypes (copy), reportDismissForAllPromptTypes (copy)
 		local PromptId = p2.promptId
 		local OnReportPromptDismissFailedFunction = p2.onReportPromptDismissFailed
 		
 		return {
-			optimisticHide = function() --[[ Line: 80 ]]
+			optimisticHide = function()
 				-- upvalues: Parent (upval), FFlagSduiDismissPromptPageScope (upval), p2 (copy), Callback (upval), dismissPromptTypes (upval), list (copy)
 				local DismissEntryFunction: (any) -> () = require(Parent.SduiSharedUtilities).getSduiApiStore().dismissEntry
 				
@@ -85,7 +85,7 @@ return {
 					Callback(p2.configKey, list)
 				end
 			end,
-			commitDismiss = function() --[[ Line: 111 ]]
+			commitDismiss = function()
 				-- upvalues: Parent (upval), FFlagSduiDismissPromptPageScope (upval), Callback (upval), p2 (copy), list (copy), dismissPromptTypes (upval), reportDismissForAllPromptTypes (upval), PromptId (copy), OnReportPromptDismissFailedFunction (copy)
 				local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
 				local SduiApiStore = SduiSharedUtilitiesModule.getSduiApiStore()
@@ -101,7 +101,7 @@ return {
 				local Networking = p2.networking
 				
 				if Networking ~= nil then
-					reportDismissForAllPromptTypes(require(Parent.SduiSharedContent).reportPromptDismiss, Networking, list, PromptId):andThen(function() --[[ Line: 131 ]]
+					reportDismissForAllPromptTypes(require(Parent.SduiSharedContent).reportPromptDismiss, Networking, list, PromptId):andThen(function()
 						-- upvalues: DismissEntry (copy), ConfigKeys (ref), SduiApiStore (copy), SduiSharedUtilitiesModule (copy)
 						if DismissEntry ~= nil then
 							for _, configKey in ConfigKeys do
@@ -111,7 +111,7 @@ return {
 								})
 							end
 						end
-					end):catch(function(Err) --[[ Line: 141 ]]
+					end):catch(function(Err)
 						-- upvalues: OnReportPromptDismissFailedFunction (upval)
 						if OnReportPromptDismissFailedFunction then
 							OnReportPromptDismissFailedFunction(Err)

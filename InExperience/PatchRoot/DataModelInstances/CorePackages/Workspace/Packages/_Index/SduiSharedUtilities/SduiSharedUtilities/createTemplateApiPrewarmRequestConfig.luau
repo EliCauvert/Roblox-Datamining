@@ -5,7 +5,7 @@ local _ = require(SduiSharedUtilities.SduiLoadTimer)
 local SduiProtobufResponseHelpersModule = require(SduiSharedUtilities.SduiProtobufResponseHelpers)
 local SduiTemplateApiModule = require(SduiSharedUtilities.SduiTemplateApi)
 
-return function(p1) --[[ Line: 20 | Named "createTemplateApiPrewarmRequestConfig" ]]
+return function(p1)
 	-- upvalues: SduiTemplateApiModule (copy), SduiIntegrationTypesModule (copy), SduiProtobufResponseHelpersModule (copy)
 	local Request = SduiTemplateApiModule.createRequest({
 		surfaceKeys = p1.surfaceKeys,
@@ -22,10 +22,10 @@ return function(p1) --[[ Line: 20 | Named "createTemplateApiPrewarmRequestConfig
 		loadTimer = p1.loadTimer,
 		apiProto = Request.responseProto,
 		postConfig = Request.postConfig,
-		parsePageEntriesFromResponse = function() --[[ Line: 41 ]]
+		parsePageEntriesFromResponse = function()
 			return {}
 		end,
-		parseTemplateEntriesFromResponse = function(p2) --[[ Line: 44 ]]
+		parseTemplateEntriesFromResponse = function(p2)
 			-- upvalues: SduiTemplateApiModule (upval), Request (copy)
 			SduiTemplateApiModule.storeResponse(p2, Request)
 			

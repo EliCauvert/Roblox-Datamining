@@ -6,7 +6,7 @@ local CreateResolveLinkFromLinkIdModule = require(NetworkRequests.createResolveL
 local CreateResolveLinkFromLinkIdV2Module = require(NetworkRequests.createResolveLinkFromLinkIdV2)
 local CreateGetMetadataModule = require(NetworkRequests.createGetMetadata)
 
-return function(p1) --[[ Line: 10 ]]
+return function(p1)
 	-- upvalues: CreateGenerateLinkModule (copy), CreateGetOrGenerateLinkModule (copy), CreateResolveLinkFromLinkIdModule (copy), CreateResolveLinkFromLinkIdV2Module (copy), CreateGetMetadataModule (copy)
 	return {
 		GenerateLink = CreateGenerateLinkModule(p1),

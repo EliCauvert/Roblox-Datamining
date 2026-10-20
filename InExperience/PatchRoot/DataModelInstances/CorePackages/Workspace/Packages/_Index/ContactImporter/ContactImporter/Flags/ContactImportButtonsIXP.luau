@@ -3,12 +3,12 @@ local ContactImportGreenFindFriendsButtonExperimentVariable = game:DefineFastStr
 local ContactImportRemoveCloseButtonExperimentVariable = game:DefineFastString("ContactImportRemoveCloseButtonExperimentVariable", "remove_close_button")
 local UseUserExperimentFunction = require(script:FindFirstAncestor("ContactImporter").Parent.RoactAppExperiment).useUserExperiment
 
-local function IsGreenFindFriendsButtonExperimentEnabled(p1): boolean --[[ Line: 12 ]]
+local function IsGreenFindFriendsButtonExperimentEnabled(p1): boolean
 	-- upvalues: ContactImportLayer (copy), ContactImportGreenFindFriendsButtonExperimentVariable (copy)
 	return ((p1 or {})[ContactImportLayer] or {})[ContactImportGreenFindFriendsButtonExperimentVariable] == true
 end
 
-local function IsRemoveCloseButtonExperimentEnabled(p1): boolean --[[ Line: 18 ]]
+local function IsRemoveCloseButtonExperimentEnabled(p1): boolean
 	-- upvalues: ContactImportLayer (copy), ContactImportRemoveCloseButtonExperimentVariable (copy)
 	return ((p1 or {})[ContactImportLayer] or {})[ContactImportRemoveCloseButtonExperimentVariable] == true
 end
@@ -16,11 +16,11 @@ end
 return {
 	isGreenFindFriendsButtonExperimentEnabled = IsGreenFindFriendsButtonExperimentEnabled,
 	isRemoveCloseButtonExperimentEnabled = IsRemoveCloseButtonExperimentEnabled,
-	useIsGreenFindFriendsButtonExperimentEnabled = function(p1) --[[ Line: 27 ]]
+	useIsGreenFindFriendsButtonExperimentEnabled = function(p1)
 		-- upvalues: UseUserExperimentFunction (copy), ContactImportLayer (copy), IsGreenFindFriendsButtonExperimentEnabled (copy)
 		return UseUserExperimentFunction({ ContactImportLayer }, IsGreenFindFriendsButtonExperimentEnabled, p1.isExposureEnabled)
 	end,
-	useIsRemoveCloseButtonExperimentEnabled = function(p1) --[[ Line: 34 ]]
+	useIsRemoveCloseButtonExperimentEnabled = function(p1)
 		-- upvalues: UseUserExperimentFunction (copy), ContactImportLayer (copy), IsRemoveCloseButtonExperimentEnabled (copy)
 		return UseUserExperimentFunction({ ContactImportLayer }, IsRemoveCloseButtonExperimentEnabled, p1.isExposureEnabled)
 	end

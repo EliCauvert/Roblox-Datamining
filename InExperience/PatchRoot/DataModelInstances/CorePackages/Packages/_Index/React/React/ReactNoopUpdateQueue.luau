@@ -3,7 +3,7 @@ local ReactGlobalsModule = require(Parent.ReactGlobals)
 local Console = require(Parent.Shared).console
 local t = {}
 
-local function _(p1, Text) --[[ Line: 16 | Named "warnNoop" ]]
+local function _(p1, Text)
 	-- upvalues: ReactGlobalsModule (copy), t (copy), Console (copy)
 	if ReactGlobalsModule.__DEV__ then
 		local ComponentName = p1.__componentName or "ReactClass"
@@ -16,10 +16,10 @@ local function _(p1, Text) --[[ Line: 16 | Named "warnNoop" ]]
 end
 
 return {
-	isMounted = function(_): boolean --[[ Line: 51 ]]
+	isMounted = function(_): boolean
 		return false
 	end,
-	enqueueForceUpdate = function(p1, _, _) --[[ Line: 69 ]]
+	enqueueForceUpdate = function(p1, _, _)
 		-- upvalues: ReactGlobalsModule (copy), t (copy), Console (copy)
 		if ReactGlobalsModule.__DEV__ then
 			local ComponentName = p1.__componentName or "ReactClass"
@@ -30,7 +30,7 @@ return {
 			t[Text] = true
 		end
 	end,
-	enqueueReplaceState = function(p1, _, _, _) --[[ Line: 85 ]]
+	enqueueReplaceState = function(p1, _, _, _)
 		-- upvalues: ReactGlobalsModule (copy), t (copy), Console (copy)
 		if ReactGlobalsModule.__DEV__ then
 			local ComponentName = p1.__componentName or "ReactClass"
@@ -41,7 +41,7 @@ return {
 			t[Text] = true
 		end
 	end,
-	enqueueSetState = function(p1, _, _, _) --[[ Line: 100 ]]
+	enqueueSetState = function(p1, _, _, _)
 		-- upvalues: ReactGlobalsModule (copy), t (copy), Console (copy)
 		if ReactGlobalsModule.__DEV__ then
 			local ComponentName = p1.__componentName or "ReactClass"

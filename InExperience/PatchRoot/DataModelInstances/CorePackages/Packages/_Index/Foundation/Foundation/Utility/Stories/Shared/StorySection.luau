@@ -4,7 +4,7 @@ local TextModule = require(Foundation.Components.Text)
 local ViewModule = require(Foundation.Components.View)
 local MatrixGrid = require(Foundation.Utility.Stories.Shared.MatrixGrid).MatrixGrid
 
-local function Section(Frame) --[[ Line: 24 ]]
+local function Section(Frame)
 	-- upvalues: ReactModule (copy), ViewModule (copy), TextModule (copy)
 	return ReactModule.createElement(ViewModule, {
 		tag = "col gap-medium size-full-0 auto-y",
@@ -36,7 +36,7 @@ local function Section(Frame) --[[ Line: 24 ]]
 	})
 end
 
-local function StoryMatrixGrid(Frame) --[[ Line: 82 ]]
+local function StoryMatrixGrid(Frame)
 	-- upvalues: ReactModule (copy), ViewModule (copy), MatrixGrid (copy)
 	return ReactModule.createElement(ViewModule, { tag = "auto-xy", LayoutOrder = Frame.LayoutOrder }, {
 		Content = ReactModule.createElement(MatrixGrid, {
@@ -59,7 +59,7 @@ return {
 	STORY_PAGE_TAG = "size-full-0 auto-y padding-y-large bg-surface-0",
 	STORY_PAGE_COL_TAG = "col gap-xxlarge size-full-0 auto-y padding-y-large bg-surface-0",
 	Section = Section,
-	LabeledCell = function(Frame) --[[ Line: 59 ]]
+	LabeledCell = function(Frame)
 		-- upvalues: ReactModule (copy), ViewModule (copy), TextModule (copy)
 		return ReactModule.createElement(ViewModule, {
 			tag = Frame.tag or "col align-x-left gap-small auto-xy",
@@ -74,7 +74,7 @@ return {
 		})
 	end,
 	StoryMatrixGrid = StoryMatrixGrid,
-	MatrixSection = function(Frame) --[[ Line: 112 ]]
+	MatrixSection = function(Frame)
 		-- upvalues: ReactModule (copy), Section (copy), StoryMatrixGrid (copy)
 		return ReactModule.createElement(Section, {
 			LayoutOrder = Frame.LayoutOrder,

@@ -3,9 +3,9 @@ local Immutable = require(Parent.AppCommonLib).Immutable
 local UpdateUsersFunction = require(Parent.UserLib).Thunks.UpdateUsers
 local GetConversationMetadata = require(Parent.AppChatNetworking).rodux.GetConversationMetadata
 
-return function(p1) --[[ Line: 14 ]]
+return function(p1)
 	-- upvalues: Immutable (copy), UpdateUsersFunction (copy), GetConversationMetadata (copy)
-	return function(p2) --[[ Line: 15 ]]
+	return function(p2)
 		-- upvalues: p1 (copy), Immutable (upval), UpdateUsersFunction (upval), GetConversationMetadata (upval)
 		local User = p2:getState().Users[p1]
 		

@@ -4,7 +4,7 @@ local FeatureNameModule = require(script.Parent.FeatureName)
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 27 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy), StarterGui (copy), LifecycleModule (copy)
 	local self = setmetatable({}, Module)
 	local v1 = nil
@@ -21,7 +21,7 @@ function Module.new(p1) --[[ Line: 27 ]]
 	self.lifecycle = NewLifecycle
 	
 	if CoreGuiType then
-		self._coreGuiConnection = StarterGui.CoreGuiChangedSignal:Connect(function(CoreGuiType1, Enabled) --[[ Line: 51 ]]
+		self._coreGuiConnection = StarterGui.CoreGuiChangedSignal:Connect(function(CoreGuiType1, Enabled)
 			-- upvalues: CoreGuiType (ref), NewLifecycle (copy)
 			if CoreGuiType1 == CoreGuiType or CoreGuiType1 == Enum.CoreGuiType.All then
 				NewLifecycle.setEnabled(Enabled)
@@ -31,7 +31,7 @@ function Module.new(p1) --[[ Line: 27 ]]
 	return self
 end
 
-function Module:dispose() --[[ Line: 61 ]]
+function Module:dispose()
 	if self._coreGuiConnection then
 		self._coreGuiConnection:Disconnect()
 		self._coreGuiConnection = nil
@@ -43,7 +43,7 @@ local NewResults = {}
 
 return {
 	FeatureName = FeatureNameModule,
-	registerLifecycle = function(Key, p1) --[[ Line: 75 ]]
+	registerLifecycle = function(Key, p1)
 		-- upvalues: NewResults (copy), Module (copy)
 		assert(not NewResults[Key], `Feature "{Key}" already has a registered lifecycle`)
 		local NewModule = Module.new(p1)
@@ -51,17 +51,17 @@ return {
 		
 		return NewModule
 	end,
-	getFeature = function(p1) --[[ Line: 83 ]]
+	getFeature = function(p1)
 		-- upvalues: NewResults (copy)
 		return NewResults[p1]
 	end,
-	getVisibility = function(p1) --[[ Line: 87 ]]
+	getVisibility = function(p1)
 		-- upvalues: NewResults (copy)
 		local NewResult = NewResults[p1]
 		
 		return if NewResult then NewResult.lifecycle.getVisible(false) else false
 	end,
-	setVisibility = function(p1, p2) --[[ Line: 95 ]]
+	setVisibility = function(p1, p2)
 		-- upvalues: NewResults (copy)
 		local NewResult = NewResults[p1]
 		
@@ -69,7 +69,7 @@ return {
 			NewResult.lifecycle.setVisible(p2)
 		end
 	end,
-	toggleVisibility = function(p1) --[[ Line: 102 ]]
+	toggleVisibility = function(p1)
 		-- upvalues: NewResults (copy)
 		local NewResult = NewResults[p1]
 		
@@ -77,7 +77,7 @@ return {
 			NewResult.lifecycle.setVisible(not NewResult.lifecycle.getVisible(false))
 		end
 	end,
-	setEnabled = function(p1, p2) --[[ Line: 109 ]]
+	setEnabled = function(p1, p2)
 		-- upvalues: NewResults (copy)
 		local NewResult = NewResults[p1]
 		
@@ -85,16 +85,16 @@ return {
 			NewResult.lifecycle.setEnabled(p2)
 		end
 	end,
-	onVisibilityChanged = function(p1, p2) --[[ Line: 116 ]]
+	onVisibilityChanged = function(p1, p2)
 		-- upvalues: NewResults (copy)
 		local NewResult = NewResults[p1]
 		
-		return if NewResult then NewResult.lifecycle:onVisibilityChanged(p2) else function() --[[ Line: 121 ]] end
+		return if NewResult then NewResult.lifecycle:onVisibilityChanged(p2) else function() end
 	end,
-	onEnabledChanged = function(p1, p2) --[[ Line: 124 ]]
+	onEnabledChanged = function(p1, p2)
 		-- upvalues: NewResults (copy)
 		local NewResult = NewResults[p1]
 		
-		return if NewResult then NewResult.lifecycle:onEnabledChanged(p2) else function() --[[ Line: 129 ]] end
+		return if NewResult then NewResult.lifecycle:onEnabledChanged(p2) else function() end
 	end
 }

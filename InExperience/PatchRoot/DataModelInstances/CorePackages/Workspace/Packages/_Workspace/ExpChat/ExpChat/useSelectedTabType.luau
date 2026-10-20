@@ -7,7 +7,7 @@ local GetChannelTabsStoreModule = require(ExpChat.Stores.GetChannelTabsStore)
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
-local function selectRoduxTabType(p1) --[[ Line: 32 ]]
+local function selectRoduxTabType(p1)
 	local ChannelTabs = p1.ChannelTabs
 	
 	if ChannelTabs == nil or ChannelTabs.allChannelTabs == nil or ChannelTabs.selectedTabName == nil then
@@ -19,11 +19,11 @@ local function selectRoduxTabType(p1) --[[ Line: 32 ]]
 	end
 end
 
-local function useSelectedTabTypeFromSignals() --[[ Line: 41 ]]
+local function useSelectedTabTypeFromSignals()
 	-- upvalues: ReactModule (copy), SignalsModule (copy), GetChannelTabsStoreModule (copy), UseSignalStateFunction (copy)
-	return UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 44 ]]
+	return UseSignalStateFunction((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), GetChannelTabsStoreModule (upval)
-		return SignalsModule.createComputed(function(p1) --[[ Line: 45 ]]
+		return SignalsModule.createComputed(function(p1)
 			-- upvalues: GetChannelTabsStoreModule (upval)
 			local ChannelTabsState = GetChannelTabsStoreModule(false).getChannelTabsState(p1)
 			local SelectedTabName = ChannelTabsState.selectedTabName
@@ -39,7 +39,7 @@ local function useSelectedTabTypeFromSignals() --[[ Line: 41 ]]
 	end, {})))
 end
 
-local function useSelectedTabTypeFromRodux() --[[ Line: 59 ]]
+local function useSelectedTabTypeFromRodux()
 	-- upvalues: UseSelectorFunction (copy), selectRoduxTabType (copy)
 	return UseSelectorFunction(selectRoduxTabType)
 end

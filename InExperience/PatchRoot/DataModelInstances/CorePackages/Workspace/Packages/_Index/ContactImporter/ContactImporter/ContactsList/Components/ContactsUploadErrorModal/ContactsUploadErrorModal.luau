@@ -7,9 +7,9 @@ local TextKeysModule = require(Parent.Common.TextKeys)
 local ContactsInformationModalModule = require(Parent.ContactsList.Components.ContactsInformationModal)
 local ContactsUploadErrorModal = Roact.PureComponent:extend("ContactsUploadErrorModal")
 
-function ContactsUploadErrorModal:render() --[[ Line: 14 ]]
+function ContactsUploadErrorModal:render()
 	-- upvalues: WithLocalizationFunction (copy), TextKeysModule (copy), Roact (copy), ContactsInformationModalModule (copy), Images (copy)
-	return WithLocalizationFunction({ hasUploadError = TextKeysModule.UPLOAD_CONTACTS_FAILURE })(function(p1) --[[ Line: 17 ]]
+	return WithLocalizationFunction({ hasUploadError = TextKeysModule.UPLOAD_CONTACTS_FAILURE })(function(p1)
 		-- upvalues: Roact (upval), ContactsInformationModalModule (upval), Images (upval)
 		return Roact.createElement(ContactsInformationModalModule, {
 			image = Images["icons/status/error_large"],

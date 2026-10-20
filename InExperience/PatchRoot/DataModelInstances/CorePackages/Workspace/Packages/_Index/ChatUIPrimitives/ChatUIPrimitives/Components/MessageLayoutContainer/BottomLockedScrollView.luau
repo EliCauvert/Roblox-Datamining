@@ -4,19 +4,19 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local _ = require(ChatUIPrimitives.Types)
 
-local function _(ScrollFrame): boolean --[[ Line: 12 | Named "isNearBottom" ]]
+local function _(ScrollFrame): boolean
 	local Y = ScrollFrame.AbsoluteWindowSize.Y
 	local Y1 = ScrollFrame.AbsoluteCanvasSize.Y
 	
 	return Y1 <= Y or ScrollFrame.CanvasPosition.Y / (Y1 - Y) >= 0.9
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 33 | Named "BottomLockedScrollView" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), FoundationModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(true)
 	local OnScrollFunction = p1.onScroll
-	local UseResult = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 38 ]]
+	local UseResult = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: UseRefResult1 (copy), OnScrollFunction (copy)
 		local Y = ScrollFrame.AbsoluteWindowSize.Y
 		local Y1 = ScrollFrame.AbsoluteCanvasSize.Y
@@ -26,13 +26,13 @@ return ReactModule.memo(function(p1) --[[ Line: 33 | Named "BottomLockedScrollVi
 			OnScrollFunction()
 		end
 	end, { OnScrollFunction })
-	local UseResult1 = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 46 ]]
+	local UseResult1 = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: UseRefResult1 (copy)
 		if UseRefResult1.current then
 			ScrollFrame.CanvasPosition = Vector2.new(0, 9007199254740992)
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 53 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy)
 		local Current = UseRefResult.current
 		

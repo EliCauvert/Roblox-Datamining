@@ -5,7 +5,7 @@ local StartsWithModule = require(Parent.startsWith)
 local ConcatFunction = table.concat
 local InsertFunction = table.insert
 
-return function(p1, ...) --[[ Line: 43 | Named "format" ]]
+return function(p1, ...)
 	-- upvalues: SplitOnModule (copy), InsertFunction (copy), StartsWithModule (copy), FormatValueModule (copy), ConcatFunction (copy)
 	local list = { ... }
 	local Count = 1

@@ -17,11 +17,11 @@ local MenuButtonsIncreaseIconSize = game:DefineFastFlag("MenuButtonsIncreaseIcon
 local FFlagIEMFocusNavSupportNewButtonsModule = require(RobloxGui.Modules.Settings.Flags.FFlagIEMFocusNavSupportNewButtons)
 local FFlagGamepadIconSupportCheck = require(CorePackages.Workspace.Packages.SharedFlags).FFlagGamepadIconSupportCheck
 
-local function _(p1: number): number --[[ Line: 47 ]]
+local function _(p1: number): number
 	return p1 + (1 - p1) * 0.5
 end
 
-local function KeyLabelIcon(KeyboardHint, IsDisabled) --[[ Line: 51 ]]
+local function KeyLabelIcon(KeyboardHint, IsDisabled)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local CreateElementFunction = ReactModule.createElement
@@ -63,7 +63,7 @@ local function KeyLabelIcon(KeyboardHint, IsDisabled) --[[ Line: 51 ]]
 	return CreateElementFunction(View, config, t)
 end
 
-local function Hint(p1) --[[ Line: 73 ]]
+local function Hint(p1)
 	-- upvalues: FIntRelocateMobileMenuButtonsVariantModule (copy), UtilityModule (copy), ResponsiveModule (copy), MenuButtonsIncreaseIconSize (copy), ReactModule (copy), Image (copy), KeyLabelIcon (copy)
 	if FIntRelocateMobileMenuButtonsVariantModule == 2 and UtilityModule:IsSmallTouchScreen() then
 		return nil
@@ -95,7 +95,7 @@ local function Hint(p1) --[[ Line: 73 ]]
 	end
 end
 
-local function ButtonText(p1) --[[ Line: 111 ]]
+local function ButtonText(p1)
 	-- upvalues: ReactModule (copy), Text (copy)
 	return ReactModule.createElement(Text, {
 		LayoutOrder = 2,
@@ -114,26 +114,26 @@ local function ButtonText(p1) --[[ Line: 111 ]]
 	})
 end
 
-local function supportsButton(LastInput, GamepadButton) --[[ Line: 146 ]]
+local function supportsButton(LastInput, GamepadButton)
 	-- upvalues: FFlagGamepadIconSupportCheck (copy), ResponsiveModule (copy), UserInputService (copy)
 	return not FFlagGamepadIconSupportCheck or not GamepadButton or LastInput ~= ResponsiveModule.Input.Directional or UserInputService:GamepadSupports(UserInputService:GetLastInputType(), GamepadButton)
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 153 | Named "MenuButton" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), FFlagIEMFocusNavSupportNewButtonsModule (copy), FFlagAddTraversalHistoryReactMenuButtonsModule (copy), ReactModule (copy), supportsButton (copy), FFlagGamepadIconSupportCheck (copy), UserInputService (copy), MenuButtonsIncreaseIconSize (copy), ResponsiveModule (copy), View (copy), Hint (copy), ButtonText (copy), FIntRelocateMobileMenuButtonsVariantModule (copy), UtilityModule (copy), Image (copy), KeyLabelIcon (copy), Text (copy), TraversalHistoryMenuModule (copy), PopoverSide (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ButtonRef = if FFlagIEMFocusNavSupportNewButtonsModule then p1.buttonRef elseif FFlagAddTraversalHistoryReactMenuButtonsModule then ReactModule.useRef(nil) else nil
 	local Background = if p1.isEmphasized then UseTokensResult.Color.ActionSoftEmphasis.Background else UseTokensResult.Color.ActionStandard.Background
 	local Foreground = if p1.isEmphasized then UseTokensResult.Color.ActionSoftEmphasis.Foreground else UseTokensResult.Color.ActionStandard.Foreground
 	local UseStateResult, UseStateResult2 = ReactModule.useState(supportsButton(p1.lastInput, p1.gamepadButton))
-	ReactModule.useEffect(function() --[[ Line: 163 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagGamepadIconSupportCheck (upval), p1 (copy), UserInputService (upval), UseStateResult2 (copy), supportsButton (upval)
-		local LastInputTypeChangedConnection = if FFlagGamepadIconSupportCheck and p1.gamepadButton then UserInputService.LastInputTypeChanged:Connect(function() --[[ Line: 166 ]]
+		local LastInputTypeChangedConnection = if FFlagGamepadIconSupportCheck and p1.gamepadButton then UserInputService.LastInputTypeChanged:Connect(function()
 			-- upvalues: UseStateResult2 (upval), supportsButton (upval), p1 (upval)
 			UseStateResult2(supportsButton(p1.lastInput, p1.gamepadButton))
 		end) else nil
 		
-		return function() --[[ Line: 171 ]]
+		return function()
 			-- upvalues: LastInputTypeChangedConnection (ref)
 			if LastInputTypeChangedConnection then
 				LastInputTypeChangedConnection:Disconnect()

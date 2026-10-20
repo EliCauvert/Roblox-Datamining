@@ -36,7 +36,7 @@ local Theme = {
 local Module = {}
 Module.__index = Module
 
-function Module:UpdateTheme(p1) --[[ Line: 56 ]]
+function Module:UpdateTheme(p1)
 	-- upvalues: Theme (copy)
 	local Theme1 = {}
 	
@@ -52,9 +52,9 @@ function Module:UpdateTheme(p1) --[[ Line: 56 ]]
 	self.Theme = Theme1
 end
 
-function Module.RegisterCoreMethods(p2) --[[ Line: 75 ]]
+function Module.RegisterCoreMethods(p2)
 	-- upvalues: Theme (copy), StarterGui (copy)
-	StarterGui:RegisterSetCore("AvatarContextMenuTheme", function(List) --[[ Line: 76 | Named "setMenuTheme" ]]
+	StarterGui:RegisterSetCore("AvatarContextMenuTheme", function(List)
 		-- upvalues: Theme (upval), p2 (copy)
 		if type(List) ~= "table" then
 			error("AvatarContextMenuTheme argument must be a table")
@@ -70,11 +70,11 @@ function Module.RegisterCoreMethods(p2) --[[ Line: 75 ]]
 	end)
 end
 
-function Module:GetTheme() --[[ Line: 93 ]]
+function Module:GetTheme()
 	return self.Theme
 end
 
-function Module.new() --[[ Line: 97 ]]
+function Module.new()
 	-- upvalues: Module (copy), Theme (copy)
 	local self = setmetatable({}, Module)
 	self.Theme = Theme

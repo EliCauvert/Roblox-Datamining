@@ -1,8 +1,8 @@
-﻿local function _(p1) --[[ Line: 1 | Named "nonEmpty" ]]
+﻿local function _(p1)
 	return if p1 == nil or p1 == "" then nil else p1
 end
 
-return function(p1, p2, p3) --[[ Line: 5 | Named "resolveMomentShareCardMetadataText" ]]
+return function(p1, p2, p3)
 	local v1 = if p1 == nil or p1 == "" then nil else p1
 	
 	if not v1 then

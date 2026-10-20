@@ -2,7 +2,7 @@
 local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
 local Checkbox = RoactModule.Component:extend("Checkbox")
 
-function Checkbox.render(p1) --[[ Line: 8 ]]
+function Checkbox.render(p1)
 	-- upvalues: ConstantsModule (copy), RoactModule (copy)
 	local Size = p1.props.Size
 	local Position = p1.props.Position or UDim2.new(0, 0, 0, 0)
@@ -28,7 +28,7 @@ function Checkbox.render(p1) --[[ Line: 8 ]]
 		BorderColor3 = ConstantsModule.Color.Text,
 		BorderSizePixel = BorderSizePixel,
 		LayoutOrder = LayoutOrder,
-		[RoactModule.Event.Activated] = function(_) --[[ Line: 39 ]]
+		[RoactModule.Event.Activated] = function(_)
 			-- upvalues: OnSelectedStateChangedFunction (copy), Name (copy), p1 (copy)
 			if OnSelectedStateChangedFunction then
 				OnSelectedStateChangedFunction(Name, not p1.props.IsSelected)

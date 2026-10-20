@@ -7,7 +7,7 @@ local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local AuthButtonClickFunction = require(Parent.AuthAnalytics).Events.authButtonClick
 
-return function(p1) --[[ Line: 24 | Named "FAEFailedModal" ]]
+return function(p1)
 	-- upvalues: UseScreenSizeFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), AuthButtonClickFunction (copy), InteractiveAlert (copy), ButtonType (copy)
 	local OnCloseFunction = p1.onClose
 	local OnRetryFunction = p1.onRetry
@@ -30,7 +30,7 @@ return function(p1) --[[ Line: 24 | Named "FAEFailedModal" ]]
 				{
 					props = {
 						buttonType = ButtonType.Secondary,
-						onActivated = ReactModule.useCallback(function() --[[ Line: 39 ]]
+						onActivated = ReactModule.useCallback(function()
 							-- upvalues: AuthButtonClickFunction (upval), EntryPointEventCtx (copy), SessionId (copy), OnCloseFunction (copy)
 							AuthButtonClickFunction(EntryPointEventCtx, "faeFailedClose", SessionId)
 							OnCloseFunction()
@@ -41,7 +41,7 @@ return function(p1) --[[ Line: 24 | Named "FAEFailedModal" ]]
 				{
 					buttonType = ButtonType.PrimaryContextual,
 					props = {
-						onActivated = ReactModule.useCallback(function() --[[ Line: 44 ]]
+						onActivated = ReactModule.useCallback(function()
 							-- upvalues: AuthButtonClickFunction (upval), EntryPointEventCtx (copy), SessionId (copy), OnRetryFunction (copy)
 							AuthButtonClickFunction(EntryPointEventCtx, "faeFailedRetry", SessionId)
 							OnRetryFunction()

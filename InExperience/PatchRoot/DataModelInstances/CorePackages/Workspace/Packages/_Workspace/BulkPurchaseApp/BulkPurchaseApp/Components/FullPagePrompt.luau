@@ -16,7 +16,7 @@ local FFlagBulkPurchaseCloseOnEscapeModule = require(BulkPurchaseApp.Flags.FFlag
 local ScrimModule = require(script.Parent.Scrim)
 local BoxModule = require(script.Parent.Box)
 
-local function CloseButton(p1) --[[ Line: 26 ]]
+local function CloseButton(p1)
 	-- upvalues: UseDesignTokensFunction (copy), UseCursorFunction (copy), ReactModule (copy), ImageSetLabel (copy), Images (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	
@@ -41,7 +41,7 @@ local function CloseButton(p1) --[[ Line: 26 ]]
 	}))
 end
 
-local function v14(p1) --[[ Line: 55 ]]
+local function v14(p1)
 	return {
 		background = p1.Color.Surface.Surface_0.Color3,
 		padding = p1.Size.Size_600,
@@ -53,7 +53,7 @@ local function v14(p1) --[[ Line: 55 ]]
 	}
 end
 
-return (ReactModule.forwardRef(function(p1, Ref) --[[ Line: 73 ]]
+return (ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: FFlagBulkPurchaseCloseOnEscapeModule (copy), UseCloseOnEscapeEffectModule (copy), UseScreenSizeFunction (copy), UseDesignTokensFunction (copy), v14 (copy), UseUiModeInfoFunction (copy), UiMode (copy), ConstantsModule (copy), ReactModule (copy), ScrimModule (copy), BoxModule (copy), StyledTextLabel (copy), CloseButton (copy)
 	if FFlagBulkPurchaseCloseOnEscapeModule then
 		UseCloseOnEscapeEffectModule("BulkPurchaseCloseFullPagePrompt", p1.onClose)

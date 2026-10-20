@@ -10,14 +10,14 @@ local _Color3 = Color3.fromRGB(185, 185, 185)
 local _Color3_1 = Color3.fromRGB(200, 200, 200)
 local InsertService = game:GetService("InsertService")
 
-return function(p1) --[[ Line: 37 | Named "EditProfileBackgroundViewport" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseSelectedThemeFunction (copy), UseLocalUserIdFunction (copy), UseSelectorFunction (copy), InsertService (copy), GetDisplayBackgroundIdFunction (copy), _Color3 (copy), _Color3_1 (copy), View (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseRefResult2 = ReactModule.useRef(nil)
 	local UseSelectedThemeResult = UseSelectedThemeFunction()
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 44 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: UseLocalUserIdResult (copy)
 		if p2.ProfilePlatform and p2.ProfilePlatform.Profiles and UseLocalUserIdResult then
 			local UserEntry = p2.ProfilePlatform.Profiles.User[tostring(UseLocalUserIdResult)]
@@ -28,12 +28,12 @@ return function(p1) --[[ Line: 37 | Named "EditProfileBackgroundViewport" ]]
 		end
 		return -1
 	end)
-	ReactModule.useEffect(function() --[[ Line: 54 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSelectorResult (copy), InsertService (upval), GetDisplayBackgroundIdFunction (upval), UseSelectedThemeResult (copy), UseRefResult1 (copy), UseRefResult (copy), _Color3 (upval), _Color3_1 (upval)
-		task.defer(function() --[[ Line: 56 ]]
+		task.defer(function()
 			-- upvalues: UseSelectorResult (upval), InsertService (upval), GetDisplayBackgroundIdFunction (upval), UseSelectedThemeResult (upval), UseRefResult1 (upval), UseRefResult (upval), _Color3 (upval), _Color3_1 (upval)
 			if not UseSelectorResult then return end
-			local Success, Result = pcall(function() --[[ Line: 61 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: InsertService (upval), GetDisplayBackgroundIdFunction (upval), UseSelectorResult (upval), UseSelectedThemeResult (upval)
 				return InsertService:LoadAsset(GetDisplayBackgroundIdFunction(UseSelectorResult, UseSelectedThemeResult))
 			end)
@@ -63,7 +63,7 @@ return function(p1) --[[ Line: 37 | Named "EditProfileBackgroundViewport" ]]
 			end
 		end)
 	end, { UseSelectorResult, UseSelectedThemeResult })
-	ReactModule.useEffect(function() --[[ Line: 94 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseRefResult2 (copy)
 		if UseRefResult.current and UseRefResult2.current then
 			UseRefResult.current.CurrentCamera = UseRefResult2.current

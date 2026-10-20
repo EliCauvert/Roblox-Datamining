@@ -5,14 +5,14 @@ local SignalsModule = require(Parent.Signals)
 local GetCreationFlowStoreModule = require(MomentsCreation.Stores.GetCreationFlowStore)
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
 
-return function(p1) --[[ Line: 21 | Named "useRestoredVoiceoverCheck" ]]
+return function(p1)
 	-- upvalues: GetCreationFlowStoreModule (copy), ReactModule (copy), SignalsModule (copy)
 	local CreationFlowStoreModule = GetCreationFlowStoreModule(false)
 	local TtsAudio = p1.ttsAudio
-	ReactModule.useEffect(function() --[[ Line: 25 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: TtsAudio (copy), SignalsModule (upval), CreationFlowStoreModule (copy), p1 (copy)
 		if TtsAudio == nil then return end
-		return SignalsModule.createEffect(function(p2) --[[ Line: 29 ]]
+		return SignalsModule.createEffect(function(p2)
 			-- upvalues: CreationFlowStoreModule (upval), TtsAudio (upval), p1 (upval)
 			local PendingRestoredVoice = CreationFlowStoreModule.getPendingRestoredVoice(p2)
 			

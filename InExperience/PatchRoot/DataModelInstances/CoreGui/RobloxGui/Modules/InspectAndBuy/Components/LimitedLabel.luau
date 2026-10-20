@@ -7,7 +7,7 @@ local RoactModule = require(CorePackages.Packages.Roact)
 local LimitedLabel = RoactModule.PureComponent:extend("LimitedLabel")
 local GetFFlagIBEnableCollectiblesSystemSupportModule = require(script.Parent.Parent.Flags.GetFFlagIBEnableCollectiblesSystemSupport)
 
-function LimitedLabel.render(p1) --[[ Line: 21 ]]
+function LimitedLabel.render(p1)
 	-- upvalues: Images (copy), RoactModule (copy), ImageSetLabel (copy), GetFFlagIBEnableCollectiblesSystemSupportModule (copy), AppFonts (copy)
 	local TextSize = p1.props.textSize
 	local TextPosition = p1.props.textPosition

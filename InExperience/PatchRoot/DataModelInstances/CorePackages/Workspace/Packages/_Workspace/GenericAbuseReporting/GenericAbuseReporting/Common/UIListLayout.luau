@@ -1,6 +1,6 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
 
-return function(p1) --[[ Line: 12 | Named "UIListLayout" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy)
 	return ReactModule.createElement("UIListLayout", {
 		FillDirection = p1.FillDirection,

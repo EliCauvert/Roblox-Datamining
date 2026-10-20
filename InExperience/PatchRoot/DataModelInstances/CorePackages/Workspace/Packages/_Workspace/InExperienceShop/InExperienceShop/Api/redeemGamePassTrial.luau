@@ -10,7 +10,7 @@ local EncodeRawFunction = HttpClientModule.encodeRaw
 local GetShopPurchasePayloadModule = require(InExperienceShop.Utils.getShopPurchasePayload)
 
 return {
-	redeemGamePassTrial = function(p1) --[[ Line: 18 ]]
+	redeemGamePassTrial = function(p1)
 		-- upvalues: CreateRequestFunction (copy), CreateRequestInternalNetworkFunction (copy), Url (copy), GetShopPurchasePayloadModule (copy), EncodeRawFunction (copy), DecodeJsonFunction (copy), AsPromiseFunction (copy)
 		return AsPromiseFunction((CreateRequestFunction({
 			method = "POST",
@@ -20,7 +20,7 @@ return {
 			body = GetShopPurchasePayloadModule(),
 			headers = {},
 			encode = EncodeRawFunction("application/json"),
-			decode = DecodeJsonFunction(function(p2) --[[ Line: 26 ]]
+			decode = DecodeJsonFunction(function(p2)
 				return p2
 			end)
 		})))

@@ -9,7 +9,7 @@ local config = {
 local config1 = { Success = true, Failed = true }
 
 return {
-	logFetchResult = function(Status) --[[ Line: 36 ]]
+	logFetchResult = function(Status)
 		-- upvalues: config1 (copy), LoggingProtocolModule (copy), config (copy)
 		if config1[Status] then
 			LoggingProtocolModule.default:logRobloxTelemetryCounter(config, nil, { status = Status })

@@ -2,7 +2,7 @@
 local BackgroundGradientModule = require(script.Parent.BackgroundGradient)
 local BackgroundImageModule = require(script.Parent.BackgroundImage)
 
-return function(p1) --[[ Line: 36 | Named "BackgroundLayers" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), BackgroundGradientModule (copy), BackgroundImageModule (copy)
 	local Elements = {}
 	

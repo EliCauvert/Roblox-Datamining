@@ -1,10 +1,10 @@
 ﻿return {
-	DevStoreSeeAllPage = function() --[[ Line: 9 ]]
+	DevStoreSeeAllPage = function()
 		return require(script.Components.DevStoreSeeAllPage)
 	end,
 	SduiExperienceStoreRegister = require(script.System.SduiExperienceStoreRegister),
 	SduiVirtualGameItemText = require(script.Components.SduiVirtualGameItemText),
-	navigateToDevStoreSeeAll = function(...) --[[ Line: 14 ]]
+	navigateToDevStoreSeeAll = function(...)
 		return require(script.Navigation.navigateToDevStoreSeeAll)(...)
 	end,
 	registerExperienceStoreActions = require(script.Actions.registerExperienceStoreActions),

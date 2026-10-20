@@ -8,7 +8,7 @@ local SetCurrentToastMessageFunction = ToastRoduxModule.Actions.SetCurrentToastM
 local TutilsModule = require(Parent.tutils)
 local LuaAppMutedSetNetworkingErrorToast = game:DefineFastFlag("LuaAppMutedSetNetworkingErrorToast", false)
 
-local function getUserFacingMessage(p1) --[[ Line: 13 ]]
+local function getUserFacingMessage(p1)
 	-- upvalues: HttpService (copy), LuaAppMutedSetNetworkingErrorToast (copy), MutedErrorFunction (copy), TutilsModule (copy)
 	local Success, Result = pcall(HttpService.JSONDecode, HttpService, p1.Body)
 	
@@ -32,12 +32,12 @@ local function getUserFacingMessage(p1) --[[ Line: 13 ]]
 	return nil
 end
 
-return function(p2) --[[ Line: 37 ]]
+return function(p2)
 	-- upvalues: getUserFacingMessage (copy), SetCurrentToastMessageFunction (copy), ToastType (copy), GetLocalizedToastStringFromHttpErrorModule (copy)
 	local P1 = p2 or {}
 	assert(P1, "not nil")
 	
-	return function(p3) --[[ Line: 41 ]]
+	return function(p3)
 		-- upvalues: getUserFacingMessage (upval), P1 (ref), SetCurrentToastMessageFunction (upval), ToastType (upval), GetLocalizedToastStringFromHttpErrorModule (upval)
 		local UserFacingMessage = getUserFacingMessage(P1)
 		

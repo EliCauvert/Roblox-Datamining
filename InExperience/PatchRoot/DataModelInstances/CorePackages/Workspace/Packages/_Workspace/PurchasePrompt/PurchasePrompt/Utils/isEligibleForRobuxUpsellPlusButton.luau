@@ -13,7 +13,7 @@ local config = {
 	[ProductTypeEnum.Look] = true
 }
 
-return function(p1, p2, p3, p4, p5): boolean --[[ Line: 27 | Named "isEligibleForRobuxUpsellPlusButton" ]]
+return function(p1, p2, p3, p4, p5): boolean
 	-- upvalues: GetBlackbirdUpsellBannerProductInfoModule (copy), config (copy), FFlagEnableRobuxUpsellPlusButtonExperiment (copy), ShouldShowBlackbirdUpsellModule (copy)
 	if not p1 then
 		return false

@@ -9,14 +9,14 @@ local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
 	base = require(Parent.UrlBuilder).UrlBase.APIS
 })
 
-return function(Callback, ModalId, ModalType) --[[ Line: 20 ]]
+return function(Callback, ModalId, ModalType)
 	-- upvalues: LoggerModule (copy), NewResult (copy), HttpService (copy), LogResponseLatencyModule (copy), LogResponseStatusModule (copy)
 	if not Callback then
 		LoggerModule:error("Missing networking implementation")
 		
 		return
 	end
-	local Success, Result = pcall(function() --[[ Line: 26 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: NewResult (upval), HttpService (upval), ModalId (copy), ModalType (copy), Callback (copy)
 		return Callback(NewResult(), "POST", {
 			postBody = HttpService:JSONEncode({ modalId = ModalId, modalType = ModalType })
@@ -24,7 +24,7 @@ return function(Callback, ModalId, ModalType) --[[ Line: 20 ]]
 	end)
 	
 	if Success then
-		Result:andThen(function(Result) --[[ Line: 38 ]]
+		Result:andThen(function(Result)
 			-- upvalues: LogResponseLatencyModule (upval), LoggerModule (upval)
 			local ResponseCode = Result and Result.responseCode or nil
 			LogResponseLatencyModule("modals-api/v1/impression", Result.responseTimeMs, ResponseCode)
@@ -32,7 +32,7 @@ return function(Callback, ModalId, ModalType) --[[ Line: 20 ]]
 			if ResponseCode ~= nil and ResponseCode ~= 200 then
 				LoggerModule:error(`Unexpected responseCode when reporting impression: {ResponseCode}`)
 			end
-		end):catch(function(Err) --[[ Line: 45 ]]
+		end):catch(function(Err)
 			-- upvalues: LogResponseStatusModule (upval), LoggerModule (upval)
 			LogResponseStatusModule("modals-api/v1/impression", Err.StatusCode)
 			LoggerModule:error(`Report Impression request error: {Err}`)

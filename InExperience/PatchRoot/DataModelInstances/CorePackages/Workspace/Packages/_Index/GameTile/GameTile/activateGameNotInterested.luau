@@ -22,7 +22,7 @@ local SendNotInterestedFeedbackFormAnalyticsModule = require(GameTile.sendNotInt
 local FFlagLuaAppMakeDisclaimerOptInForFeedbackForm = SharedFlagsModule.FFlagLuaAppMakeDisclaimerOptInForFeedbackForm
 local FFlagLuaAppNotInterestedFeedbackFormTelemetry = SharedFlagsModule.FFlagLuaAppNotInterestedFeedbackFormTelemetry
 
-local function _(p1, UniverseId, SortId, ActionType) --[[ Line: 63 | Named "sendFeedbackFormAnalytics" ]]
+local function _(p1, UniverseId, SortId, ActionType)
 	-- upvalues: FFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), SendNotInterestedFeedbackFormAnalyticsModule (copy)
 	if FFlagLuaAppNotInterestedFeedbackFormTelemetry then
 		SendNotInterestedFeedbackFormAnalyticsModule({
@@ -35,7 +35,7 @@ local function _(p1, UniverseId, SortId, ActionType) --[[ Line: 63 | Named "send
 	end
 end
 
-local _ = function(p1, p2, UniverseId, SortId) --[[ Line: 74 | Named "onFeedbackFormClosed" ]]
+local _ = function(p1, p2, UniverseId, SortId)
 	-- upvalues: FFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), SendNotInterestedFeedbackFormAnalyticsModule (copy)
 	if p1 then return end
 	if FFlagLuaAppNotInterestedFeedbackFormTelemetry then
@@ -49,7 +49,7 @@ local _ = function(p1, p2, UniverseId, SortId) --[[ Line: 74 | Named "onFeedback
 	end
 end
 
-local function onFeedbackFormSubmitted(p1, TextResponse, CheckboxItems, ProductSurface, SortId, Callback: (any) -> (), Networking, TargetId, IsSponsored, UniverseId) --[[ Line: 86 ]]
+local function onFeedbackFormSubmitted(p1, TextResponse, CheckboxItems, ProductSurface, SortId, Callback: (any) -> (), Networking, TargetId, IsSponsored, UniverseId)
 	-- upvalues: UserSignalTypes (copy), FlaggedMutedErrorFunction (copy), OpenDynamicAbuseReportModule (copy), AbuseVectorModule (copy), CloseCentralOverlayFunction (copy), PostSendUserSignalFunction (copy), HttpService (copy), SetNetworkingErrorToastFunction (copy), Default (copy), NotInterestedUserSignalTelemetryEventConfigsModule (copy), MutedErrorFunction (copy), FFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), SendNotInterestedFeedbackFormAnalyticsModule (copy)
 	local SponsoredGame = if IsSponsored then UserSignalTypes.AssetType.SponsoredGame else UserSignalTypes.AssetType.Game
 	local Items = {}
@@ -70,14 +70,14 @@ local function onFeedbackFormSubmitted(p1, TextResponse, CheckboxItems, ProductS
 			Callback(OpenDynamicAbuseReportModule({
 				abuseVector = AbuseVectorModule.Place,
 				targetId = TargetId,
-				onClose = function() --[[ Line: 121 ]]
+				onClose = function()
 					-- upvalues: Callback (copy), CloseCentralOverlayFunction (upval)
 					Callback(CloseCentralOverlayFunction())
 				end
 			}))
 		end
 	end
-	local Success, Result = pcall(function() --[[ Line: 128 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: PostSendUserSignalFunction (upval), Networking (copy), HttpService (upval), UserSignalTypes (upval), TextResponse (copy), Items (copy), UniverseId (copy), SponsoredGame (copy), ProductSurface (copy), SortId (copy), Callback (copy), SetNetworkingErrorToastFunction (upval), Default (upval), NotInterestedUserSignalTelemetryEventConfigsModule (upval)
 		PostSendUserSignalFunction(Networking, {
 			stringValue = HttpService:JSONEncode({
@@ -94,7 +94,7 @@ local function onFeedbackFormSubmitted(p1, TextResponse, CheckboxItems, ProductS
 				topicId = SortId,
 				subIds = { SortId }
 			}
-		}, UserSignalTypes.SignalValueType.String, UserSignalTypes.SignalType.NotInterestedFeedback):catch(function(Err) --[[ Line: 145 ]]
+		}, UserSignalTypes.SignalValueType.String, UserSignalTypes.SignalType.NotInterestedFeedback):catch(function(Err)
 			-- upvalues: Callback (upval), SetNetworkingErrorToastFunction (upval), Default (upval), NotInterestedUserSignalTelemetryEventConfigsModule (upval)
 			Callback(SetNetworkingErrorToastFunction(Err))
 			Default:logRobloxTelemetryCounter(NotInterestedUserSignalTelemetryEventConfigsModule.NotInterestedUserSignalFailed, 1)
@@ -115,7 +115,7 @@ local function onFeedbackFormSubmitted(p1, TextResponse, CheckboxItems, ProductS
 	end
 end
 
-return function(p2): boolean --[[ Line: 161 | Named "activateGameNotInterested" ]]
+return function(p2): boolean
 	-- upvalues: Default (copy), NotInterestedUserSignalTelemetryEventConfigsModule (copy), SetNetworkingErrorToastFunction (copy), UserSignalTypes (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), onFeedbackFormSubmitted (copy), FFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), SendNotInterestedFeedbackFormAnalyticsModule (copy), FFlagLuaAppMakeDisclaimerOptInForFeedbackForm (copy), CircleMinus (copy), PostSendUserSignalFunction (copy), MutedErrorFunction (copy)
 	local AppPage = p2.appPage
 	
@@ -162,11 +162,11 @@ return function(p2): boolean --[[ Line: 161 | Named "activateGameNotInterested" 
 			dialogText = LocalizedStrings.dialogText,
 			checkboxListTitle = LocalizedStrings.checkboxListTitle,
 			checkboxItems = CheckboxItems,
-			onSubmit = function(p3, TextResponse) --[[ Line: 213 ]]
+			onSubmit = function(p3, TextResponse)
 				-- upvalues: onFeedbackFormSubmitted (upval), CheckboxItems (copy), AppPage (copy), CollectionId (copy), DispatchFunction (copy), Networking (copy), PlaceId (copy), p2 (copy), UniverseId (copy)
 				onFeedbackFormSubmitted(p3, TextResponse, CheckboxItems, AppPage, CollectionId, DispatchFunction, Networking, PlaceId, p2.isSponsored, UniverseId)
 			end,
-			onClose = if FFlagLuaAppNotInterestedFeedbackFormTelemetry then function(p3) --[[ Line: 228 ]]
+			onClose = if FFlagLuaAppNotInterestedFeedbackFormTelemetry then function(p3)
 				-- upvalues: AppPage (copy), UniverseId (copy), CollectionId (copy), FFlagLuaAppNotInterestedFeedbackFormTelemetry (upval), SendNotInterestedFeedbackFormAnalyticsModule (upval)
 				if p3 then return end
 				if FFlagLuaAppNotInterestedFeedbackFormTelemetry then
@@ -182,7 +182,7 @@ return function(p2): boolean --[[ Line: 161 | Named "activateGameNotInterested" 
 			showTermsOfUseDisclaimer = not FFlagLuaAppMakeDisclaimerOptInForFeedbackForm and nil
 		},
 		toastIcon = CircleMinus,
-		onToastActivated = if FFlagLuaAppNotInterestedFeedbackFormTelemetry then function() --[[ Line: 236 ]]
+		onToastActivated = if FFlagLuaAppNotInterestedFeedbackFormTelemetry then function()
 			-- upvalues: AppPage (copy), UniverseId (copy), CollectionId (copy), FFlagLuaAppNotInterestedFeedbackFormTelemetry (upval), SendNotInterestedFeedbackFormAnalyticsModule (upval)
 			if FFlagLuaAppNotInterestedFeedbackFormTelemetry then
 				SendNotInterestedFeedbackFormAnalyticsModule({
@@ -195,7 +195,7 @@ return function(p2): boolean --[[ Line: 161 | Named "activateGameNotInterested" 
 			end
 		end else nil
 	}))
-	local Success, Result = pcall(function() --[[ Line: 242 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: PostSendUserSignalFunction (upval), Networking (copy), UniverseId (copy), SponsoredGame (copy), AppPage (copy), CollectionId (copy), UserSignalTypes (upval), p2 (copy), DispatchFunction (copy), SetNetworkingErrorToastFunction (upval), Default (upval), NotInterestedUserSignalTelemetryEventConfigsModule (upval)
 		PostSendUserSignalFunction(Networking, { boolValue = true }, {
 			id = UniverseId,
@@ -205,7 +205,7 @@ return function(p2): boolean --[[ Line: 161 | Named "activateGameNotInterested" 
 				topicId = CollectionId,
 				subIds = { CollectionId }
 			}
-		}, UserSignalTypes.SignalValueType.Bool, UserSignalTypes.SignalType.NotInterested):catch(function(Err) --[[ Line: 254 ]]
+		}, UserSignalTypes.SignalValueType.Bool, UserSignalTypes.SignalType.NotInterested):catch(function(Err)
 			-- upvalues: p2 (upval), UniverseId (upval), DispatchFunction (upval), SetNetworkingErrorToastFunction (upval), Default (upval), NotInterestedUserSignalTelemetryEventConfigsModule (upval)
 			p2.setGameHidden(UniverseId, false)
 			DispatchFunction(SetNetworkingErrorToastFunction(Err))

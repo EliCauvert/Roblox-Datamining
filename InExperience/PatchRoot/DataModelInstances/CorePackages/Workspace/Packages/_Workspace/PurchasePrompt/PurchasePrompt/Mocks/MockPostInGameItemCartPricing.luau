@@ -5,7 +5,7 @@ local _ = require(Parent.types)
 local _ = require(Parent1.IAPExperience)
 local _ = require(Parent1.PurchasePromptLite)
 
-local function _(List): boolean --[[ Line: 22 | Named "isOfferDeselected" ]]
+local function _(List): boolean
 	if List == nil then
 		return false
 	end
@@ -17,7 +17,7 @@ local function _(List): boolean --[[ Line: 22 | Named "isOfferDeselected" ]]
 	return false
 end
 
-local function buildMockResponse(List) --[[ Line: 34 ]]
+local function buildMockResponse(List)
 	local Flag = nil
 	if List == nil then
 		Flag = false
@@ -69,7 +69,7 @@ local function buildMockResponse(List) --[[ Line: 34 ]]
 	}
 end
 
-return function(_, _, _, p1, p2, _, _) --[[ Line: 81 | Named "MockPostInGameItemCartPricing" ]]
+return function(_, _, _, p1, p2, _, _)
 	-- upvalues: PromiseModule (copy), buildMockResponse (copy)
 	return if p1 == nil or #p1 == 0 then PromiseModule.resolve(nil) else PromiseModule.resolve((buildMockResponse(p2)))
 end

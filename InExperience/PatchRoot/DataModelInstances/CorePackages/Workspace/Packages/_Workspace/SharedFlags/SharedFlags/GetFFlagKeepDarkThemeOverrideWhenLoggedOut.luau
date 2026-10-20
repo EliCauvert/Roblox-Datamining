@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("KeepDarkThemeOverrideWhenLoggedOut", false)
 
-return function() --[[ Line: 6 ]]
+return function()
 	return game:GetFastFlag("KeepDarkThemeOverrideWhenLoggedOut")
 end

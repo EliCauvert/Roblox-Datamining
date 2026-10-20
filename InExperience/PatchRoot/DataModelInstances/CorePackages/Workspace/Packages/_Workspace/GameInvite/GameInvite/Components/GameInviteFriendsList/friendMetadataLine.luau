@@ -3,7 +3,7 @@ local UserModel = require(GameInvite.Parent.UserLib).Models.UserModel
 local EscapeRichTextModule = require(GameInvite.utils.escapeRichText)
 
 return {
-	getContextText = function(p1, p2) --[[ Line: 17 ]]
+	getContextText = function(p1, p2)
 		-- upvalues: UserModel (copy), EscapeRichTextModule (copy)
 		local LastLocation = p1.lastLocation
 		

@@ -16,15 +16,15 @@ end
 if TeleportHistoryButtonsEngineFeature and v3 > 0 then
 	v2 = v3
 end
-local function _(Text: string, p1: number): string --[[ Line: 30 | Named "truncateWithEllipsis" ]]
+local function _(Text: string, p1: number): string
 	return if p1 < #Text then string.sub(Text, 1, p1 - 3) .. "..." else Text
 end
 
 local PlaceName = nil
-local DeferResult = PromiseModule.defer(function(Callback: () -> ()) --[[ Line: 39 ]]
+local DeferResult = PromiseModule.defer(function(Callback: () -> ())
 	-- upvalues: v2 (ref), GetGameNameAndDescriptionFunction (copy), v1 (copy), PlaceName (ref)
 	if v2 > 0 then
-		GetGameNameAndDescriptionFunction(v1, v2):andThen(function(Result) --[[ Line: 41 ]]
+		GetGameNameAndDescriptionFunction(v1, v2):andThen(function(Result)
 			-- upvalues: PlaceName (upval)
 			local Name: string = Result.Name
 			PlaceName = if #Name > 30 then string.sub(Name, 1, 27) .. "..." else Name
@@ -37,13 +37,13 @@ local DeferResult = PromiseModule.defer(function(Callback: () -> ()) --[[ Line: 
 	end
 end)
 local config = {
-	getTooltipText = function() --[[ Line: 51 ]]
+	getTooltipText = function()
 		-- upvalues: PlaceName (ref), RobloxTranslatorModule (copy)
 		return if PlaceName == nil then RobloxTranslatorModule:FormatByKey("InGame.CommonUI.Label.ReturnFallback") else RobloxTranslatorModule:FormatByKey("InGame.CommonUI.Label.ReturnTo", { placeName = PlaceName })
 	end
 }
 
-function config.getTooltipTextTimeout() --[[ Line: 61 ]]
+function config.getTooltipTextTimeout()
 	-- upvalues: PlaceName (ref), PromiseModule (copy), DeferResult (copy), config (copy)
 	if PlaceName == nil then
 		PromiseModule.any({ DeferResult, PromiseModule.delay(1) }):await()
@@ -51,14 +51,14 @@ function config.getTooltipTextTimeout() --[[ Line: 61 ]]
 	return config.getTooltipText()
 end
 
-function config.getMenuText() --[[ Line: 67 ]]
+function config.getMenuText()
 	-- upvalues: RoactModule (copy), config (copy), PlaceName (ref), DeferResult (copy)
 	local Binding, Binding2 = RoactModule.createBinding(config.getTooltipText())
 	
 	if PlaceName == nil then
-		pcall(function() --[[ Line: 70 ]]
+		pcall(function()
 			-- upvalues: DeferResult (upval), Binding2 (copy), config (upval)
-			DeferResult:andThen(function() --[[ Line: 71 ]]
+			DeferResult:andThen(function()
 				-- upvalues: Binding2 (upval), config (upval)
 				Binding2(config.getTooltipText())
 			end)
@@ -67,14 +67,14 @@ function config.getMenuText() --[[ Line: 67 ]]
 	return Binding
 end
 
-function config.initiateFrontButtonTeleport() --[[ Line: 78 ]]
+function config.initiateFrontButtonTeleport()
 	-- upvalues: TeleportHistoryButtonsEngineFeature (copy), TeleportService (copy)
 	if TeleportHistoryButtonsEngineFeature then
 		TeleportService:TeleportTrustedBackForth(true)
 	end
 end
 
-function config.hasReturnUniverse(): boolean --[[ Line: 83 ]]
+function config.hasReturnUniverse(): boolean
 	-- upvalues: v2 (ref)
 	return v2 > 0
 end

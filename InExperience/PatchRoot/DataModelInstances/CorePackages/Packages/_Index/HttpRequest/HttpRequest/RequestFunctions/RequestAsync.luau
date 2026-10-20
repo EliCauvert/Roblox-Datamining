@@ -2,12 +2,12 @@
 local GetHeadersModule = require(script.Parent.Util.getHeaders)
 local GetPostBodyModule = require(script.Parent.Util.getPostBody)
 
-return function(Url, Method, p1) --[[ Line: 6 ]]
+return function(Url, Method, p1)
 	-- upvalues: HttpService (copy), GetPostBodyModule (copy), GetHeadersModule (copy)
 	return {
-		Start = function(_, Callback: (any, any) -> ()) --[[ Line: 8 ]]
+		Start = function(_, Callback: (any, any) -> ())
 			-- upvalues: HttpService (upval), Url (copy), Method (copy), GetPostBodyModule (upval), p1 (copy), GetHeadersModule (upval)
-			local Success, Result = pcall(function() --[[ Line: 9 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: HttpService (upval), Url (upval), Method (upval), GetPostBodyModule (upval), p1 (upval), GetHeadersModule (upval)
 				return HttpService:RequestAsync({
 					Url = Url,
@@ -18,6 +18,6 @@ return function(Url, Method, p1) --[[ Line: 6 ]]
 			end)
 			Callback(Success, Result)
 		end,
-		Cancel = function() --[[ Line: 20 ]] end
+		Cancel = function() end
 	}
 end

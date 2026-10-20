@@ -13,14 +13,14 @@ local RecordModalSequenceResponseResults = {}
 local t1 = {}
 local t2 = {}
 
-local function _(p1): string --[[ Line: 31 | Named "getSubmissionKey" ]]
+local function _(p1): string
 	-- upvalues: Players (copy)
 	local LocalPlayer = Players.LocalPlayer
 	
 	return `{if LocalPlayer then LocalPlayer.UserId else 0}:{p1}`
 end
 
-local _ = function(p2): boolean --[[ Line: 40 | Named "isRetryable" ]]
+local _ = function(p2): boolean
 	if typeof(p2) == "table" then
 		local StatusCode = p2.StatusCode or (p2.statusCode or p2.responseCode)
 		
@@ -30,7 +30,7 @@ local _ = function(p2): boolean --[[ Line: 40 | Named "isRetryable" ]]
 	end
 end
 
-local function markAcknowledged(ConversationId) --[[ Line: 48 ]]
+local function markAcknowledged(ConversationId)
 	-- upvalues: GetConversationStoreModule (copy), AppChatNetworkingModule (copy)
 	local ConversationStoreModule = GetConversationStoreModule(false)
 	local Conversation = ConversationStoreModule.getConversation(ConversationId, false)
@@ -43,11 +43,11 @@ local function markAcknowledged(ConversationId) --[[ Line: 48 ]]
 end
 
 return {
-	useAcknowledgement = function(p2) --[[ Line: 63 ]]
+	useAcknowledgement = function(p2)
 		-- upvalues: ReactModule (copy), SignalsModule (copy), GetConversationStoreModule (copy), SignalsReactModule (copy), AppChatNetworkingModule (copy), UseIsGuiInChatVisibleModule (copy), Players (copy), t (copy), t2 (copy), t1 (copy), RecordModalSequenceResponseResults (copy), markAcknowledged (copy), FetchConversationDetailsToSignalsModule (copy), NewResult (copy)
-		local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 64 ]]
+		local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 			-- upvalues: SignalsModule (upval), GetConversationStoreModule (upval), p2 (copy)
-			return SignalsModule.createComputed(function(p3) --[[ Line: 65 ]]
+			return SignalsModule.createComputed(function(p3)
 				-- upvalues: GetConversationStoreModule (upval), p2 (upval)
 				return GetConversationStoreModule(p3).getConversation(p2.conversationId, p3)
 			end)
@@ -56,7 +56,7 @@ return {
 		local Source = if UseSignalStateResult then UseSignalStateResult.source else nil
 		local UseIsGuiInChatVisibleModuleResult = UseIsGuiInChatVisibleModule(p2.guiObjectRef, { p2.guiObjectRef.current })
 		local UseStateResult, UseStateResult2 = ReactModule.useState(0)
-		ReactModule.useEffect(function() --[[ Line: 79 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p2 (copy), Players (upval), IsOsaAcknowledgementStatusMatch (copy), UseIsGuiInChatVisibleModuleResult (copy), t (upval), t2 (upval), t1 (upval), UseStateResult2 (copy), RecordModalSequenceResponseResults (upval), Source (copy), AppChatNetworkingModule (upval), markAcknowledged (upval), FetchConversationDetailsToSignalsModule (upval), NewResult (upval)
 			local ConversationId = p2.conversationId
 			local LocalPlayer = Players.LocalPlayer
@@ -65,7 +65,7 @@ return {
 			if ConversationId == "" or not IsOsaAcknowledgementStatusMatch or not UseIsGuiInChatVisibleModuleResult or t[Text] or t2[Text] then return end
 			local Flag = false
 			
-			local function scheduleRetry(Err) --[[ Line: 93 ]]
+			local function scheduleRetry(Err)
 				-- upvalues: t1 (upval), Text (copy), t2 (upval), Flag (ref), UseStateResult2 (upval)
 				local Entry = t1[Text] or 0
 				local v1 = nil
@@ -77,10 +77,10 @@ return {
 					v1 = true
 				end
 				if v1 and Entry < 4 then
-					task.delay(2 ^ math.max(Entry - 1, 0) * 1, function() --[[ Line: 100 ]]
+					task.delay(2 ^ math.max(Entry - 1, 0) * 1, function()
 						-- upvalues: Flag (upval), UseStateResult2 (upval)
 						if not Flag then
-							UseStateResult2(function(p3: number): number --[[ Line: 102 ]]
+							UseStateResult2(function(p3: number): number
 								return p3 + 1
 							end)
 						end
@@ -97,7 +97,7 @@ return {
 			if RecordModalSequenceResponseResult then
 				RecordModalSequenceResponseResult:catch(scheduleRetry)
 				
-				return function() --[[ Line: 111 ]]
+				return function()
 					-- upvalues: Flag (ref)
 					Flag = true
 				end
@@ -112,7 +112,7 @@ return {
 				})
 				t1[Text] = (t1[Text] or 0) + 1
 				RecordModalSequenceResponseResults[Text] = RecordModalSequenceResponseResult1
-				RecordModalSequenceResponseResult1:andThen(function() --[[ Line: 127 ]]
+				RecordModalSequenceResponseResult1:andThen(function()
 					-- upvalues: RecordModalSequenceResponseResults (upval), Text (copy), t1 (upval), t (upval), markAcknowledged (upval), ConversationId (copy), IsFriends (copy), FetchConversationDetailsToSignalsModule (upval), NewResult (upval)
 					RecordModalSequenceResponseResults[Text] = nil
 					t1[Text] = nil
@@ -120,22 +120,22 @@ return {
 					markAcknowledged(ConversationId)
 					
 					if not IsFriends then
-						FetchConversationDetailsToSignalsModule(ConversationId):andThen(function() --[[ Line: 134 ]]
+						FetchConversationDetailsToSignalsModule(ConversationId):andThen(function()
 							-- upvalues: markAcknowledged (upval), ConversationId (upval)
 							markAcknowledged(ConversationId)
-						end):catch(function(Err) --[[ Line: 137 ]]
+						end):catch(function(Err)
 							-- upvalues: NewResult (upval)
 							NewResult:warning(`Failed to refresh conversation after Friends Chat OSA acknowledgement: {tostring(Err)}`)
 						end)
 					end
-				end):catch(function(Err) --[[ Line: 146 ]]
+				end):catch(function(Err)
 					-- upvalues: RecordModalSequenceResponseResults (upval), Text (copy), NewResult (upval), scheduleRetry (copy)
 					RecordModalSequenceResponseResults[Text] = nil
 					NewResult:error(`Failed to record Friends Chat OSA acknowledgement: {tostring(Err)}`)
 					scheduleRetry(Err)
 				end)
 				
-				return function() --[[ Line: 151 ]]
+				return function()
 					-- upvalues: Flag (ref)
 					Flag = true
 				end
@@ -145,7 +145,7 @@ return {
 			UseIsGuiInChatVisibleModuleResult, Source, UseStateResult
 		})
 	end,
-	hasSubmitted = function(p3): boolean --[[ Line: 36 ]]
+	hasSubmitted = function(p3): boolean
 		-- upvalues: t (copy), Players (copy)
 		local LocalPlayer = Players.LocalPlayer
 		

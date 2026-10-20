@@ -5,7 +5,7 @@ local ButtonGroup = FoundationModule.ButtonGroup
 local _ = FoundationModule.Enums.ButtonVariant
 local Orientation = FoundationModule.Enums.Orientation
 
-return function(Frame) --[[ Line: 30 | Named "AccountUpgradeDialogActions" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), ButtonGroup (copy), Orientation (copy)
 	local Buttons = {}
 	

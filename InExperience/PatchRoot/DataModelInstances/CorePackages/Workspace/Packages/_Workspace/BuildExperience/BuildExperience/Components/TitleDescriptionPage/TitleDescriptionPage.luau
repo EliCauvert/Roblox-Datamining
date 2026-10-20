@@ -14,7 +14,7 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local IconName = FoundationModule.Enums.IconName
 local InputSize = FoundationModule.Enums.InputSize
 
-return function(p1) --[[ Line: 31 | Named "TitleDescriptionPage" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), GameConfigurationActionsModule (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), Text (copy), TextInput (copy), TextArea (copy)
 	local TestId = p1.testId or "title-description-page"
 	local TitleText = p1.titleText or ""
@@ -29,7 +29,7 @@ return function(p1) --[[ Line: 31 | Named "TitleDescriptionPage" ]]
 	local DescriptionLabel = UseLocalizationResult.descriptionLabel
 	local Title = UseLocalizationResult.title
 	local TitleLabel = UseLocalizationResult.titleLabel
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 47 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), UseBindingResult (copy), UseBindingResult1 (copy), TitleText (copy), DescriptionText (copy), GameConfigurationActionsModule (upval)
 		local UniverseId = p1.universeId
 		
@@ -38,7 +38,7 @@ return function(p1) --[[ Line: 31 | Named "TitleDescriptionPage" ]]
 		local Value1 = UseBindingResult1:getValue()
 		
 		if Value ~= TitleText or Value1 ~= DescriptionText then
-			GameConfigurationActionsModule.updateTitleDescription(UniverseId, Value, Value1):catch(function(Err) --[[ Line: 60 ]]
+			GameConfigurationActionsModule.updateTitleDescription(UniverseId, Value, Value1):catch(function(Err)
 				warn(`[BuildExperience] Failed to save title and description: {tostring(Err)}`)
 			end)
 			
@@ -51,7 +51,7 @@ return function(p1) --[[ Line: 31 | Named "TitleDescriptionPage" ]]
 		p1.universeId,
 		UseBindingResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 73 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult (copy)
 		return UseResult
 	end, { UseResult })
@@ -73,7 +73,7 @@ return function(p1) --[[ Line: 31 | Named "TitleDescriptionPage" ]]
 				LayoutOrder = 1,
 				isCircular = true,
 				icon = IconName.ArrowLargeLeft,
-				onActivated = ReactModule.useCallback(function() --[[ Line: 77 ]]
+				onActivated = ReactModule.useCallback(function()
 					-- upvalues: UseResult (copy), p1 (copy)
 					UseResult()
 					p1.onBack()

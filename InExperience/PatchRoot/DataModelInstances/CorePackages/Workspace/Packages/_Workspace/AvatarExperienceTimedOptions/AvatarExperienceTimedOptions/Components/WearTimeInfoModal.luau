@@ -12,7 +12,7 @@ local IconName = FoundationModule.Enums.IconName
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function(p1) --[[ Line: 26 ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), UseSelectorFunction (copy), ReactModule (copy), ModalWindow (copy), View (copy), Icon (copy), IconName (copy), Text (copy), Button (copy), InputSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -23,7 +23,7 @@ return function(p1) --[[ Line: 26 ]]
 	
 	return ReactModule.createElement(ModalWindow, {
 		isFullHeight = false,
-		screenSize = UseSelectorFunction(function(p2) --[[ Line: 35 ]]
+		screenSize = UseSelectorFunction(function(p2)
 			return p2.ScreenSize
 		end)
 	}, {

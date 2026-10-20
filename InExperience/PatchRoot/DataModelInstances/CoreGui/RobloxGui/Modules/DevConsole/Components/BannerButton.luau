@@ -8,7 +8,7 @@ local RightArrow = ConstantsModule.Image.RightArrow
 local DownArrow = ConstantsModule.Image.DownArrow
 local BannerButton = RoactModule.Component:extend("BannerButton")
 
-function BannerButton.render(p1) --[[ Line: 14 ]]
+function BannerButton.render(p1)
 	-- upvalues: RoactModule (copy), DownArrow (copy), RightArrow (copy), ArrowWidth (copy), LineWidth (copy), LineColor (copy), ImmutableModule (copy)
 	local Prop = p1.props[RoactModule.Children] or {}
 	local Size = p1.props.size

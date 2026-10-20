@@ -11,7 +11,7 @@ local ViewTypeModule = require(AvatarExperienceInspectAndBuy.Enums.ViewType)
 local _ = require(AvatarExperienceInspectAndBuy.Types)
 local GetItemWidthFunction = require(AvatarExperienceInspectAndBuy.Utils.itemDetailsUtils).getItemWidth
 
-return function(Frame) --[[ Line: 44 | Named "BundleAssetsList" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), ViewTypeModule (copy), ReactModule (copy), ItemCard (copy), GetItemWidthFunction (copy), ItemCardHeader (copy), ItemCardThumbnail (copy), FoundationModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ItemData = Frame.itemData
@@ -24,7 +24,7 @@ return function(Frame) --[[ Line: 44 | Named "BundleAssetsList" ]]
 	if ItemData.assetsInBundle then
 		for i, value in ItemData.assetsInBundle do
 			Elements["AssetItemCard" .. i] = ReactModule.createElement(ItemCard, {
-				Size = UseBindingResult:map(function(p1): UDim2 --[[ Line: 57 ]]
+				Size = UseBindingResult:map(function(p1): UDim2
 					-- upvalues: GetItemWidthFunction (upval), v1 (copy), UseTokensResult (copy)
 					return UDim2.new(0, GetItemWidthFunction(p1.X, v1, UseTokensResult.Gap.Medium), 1, 0)
 				end),
@@ -43,7 +43,7 @@ return function(Frame) --[[ Line: 44 | Named "BundleAssetsList" ]]
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "auto-y size-full-0 col align-x-left align-y-top gap-small",
 		LayoutOrder = Frame.LayoutOrder or 5,
-		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 81 ]]
+		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
 			-- upvalues: UseBindingResult2 (copy)
 			UseBindingResult2(Frame.AbsoluteSize)
 		end, {})

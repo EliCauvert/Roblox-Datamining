@@ -3,7 +3,7 @@ local CreateGetCurrentlyWearingModule = require(NetworkRequests.createGetCurrent
 local CreateGetItemDetailsModule = require(NetworkRequests.createGetItemDetails)
 
 return {
-	config = function(p1) --[[ Line: 9 ]]
+	config = function(p1)
 		-- upvalues: CreateGetCurrentlyWearingModule (copy), CreateGetItemDetailsModule (copy)
 		return {
 			GetCurrentlyWearing = CreateGetCurrentlyWearingModule(p1),

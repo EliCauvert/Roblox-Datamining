@@ -18,7 +18,7 @@ local config = {
 	paddingBottom = 12
 }
 
-function GroupNameEntryCell(p1) --[[ Line: 40 ]]
+function GroupNameEntryCell(p1)
 	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), IconWithTextCellModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local Size300 = if JoinResult.isDisabled then JoinResult.style.Tokens.Size.Size_300 else 0

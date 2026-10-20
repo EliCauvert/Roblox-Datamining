@@ -12,7 +12,7 @@ local LoggerModule = require(script.Parent.Logger)
 local ChatEntryPointNames = require(Parent.SocialCommon).Enums.ChatEntryPointNames
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function(p1) --[[ Line: 27 ]]
+return function(p1)
 	-- upvalues: ChatEntryPointNames (copy), LoggerModule (copy), GetFFlagIsSquadEnabledFunction (copy), UseSelectorFunction (copy), RbxAnalyticsService (copy), ReactModule (copy), AnalyticsFactory (copy), EventStreamActionListModule (copy), DiagActionListModule (copy), DefaultAnalyticsService (copy), RoactChatAnalyticsContextModule (copy)
 	local EntryPoint = p1.entryPoint
 	
@@ -20,7 +20,7 @@ return function(p1) --[[ Line: 27 ]]
 		LoggerModule:warning("entryPoint=" .. tostring(EntryPoint) .. " is not a reigstered value.")
 		EntryPoint = ChatEntryPointNames.Unknown
 	end
-	local UseSelectorResult = if GetFFlagIsSquadEnabledFunction() then UseSelectorFunction(function(p2) --[[ Line: 36 ]]
+	local UseSelectorResult = if GetFFlagIsSquadEnabledFunction() then UseSelectorFunction(function(p2)
 		local CurrentSquad = p2.Squad and (p2.Squad.Squad and p2.Squad.Squad.currentSquad)
 		
 		return if CurrentSquad and CurrentSquad.squadId then CurrentSquad.squadId else nil
@@ -28,7 +28,7 @@ return function(p1) --[[ Line: 27 ]]
 	local PlaySessionId = RbxAnalyticsService:GetPlaySessionId()
 	
 	return ReactModule.createElement(RoactChatAnalyticsContextModule.Provider, {
-		value = ReactModule.useMemo(function() --[[ Line: 44 ]]
+		value = ReactModule.useMemo(function()
 			-- upvalues: AnalyticsFactory (upval), EventStreamActionListModule (upval), DiagActionListModule (upval), DefaultAnalyticsService (upval), GetFFlagIsSquadEnabledFunction (upval), UseSelectorResult (copy), EntryPoint (ref), PlaySessionId (copy)
 			return AnalyticsFactory.setUpAnalyticsFactory({
 				eventLists = {

@@ -12,7 +12,7 @@ local UseFormFactorFunction = MomentsCommonModule.Hooks.useFormFactor
 local FormFactor = MomentsCommonModule.Enums.FormFactor
 local UsePreferencesFunction = require(Parent.Foundation).Hooks.usePreferences
 
-return function(p1) --[[ Line: 51 | Named "ImmersiveChromeController" ]]
+return function(p1)
 	-- upvalues: MediaPreloadProvider (copy), UsePreferredInputModule (copy), UseFormFactorFunction (copy), UsePreferencesFunction (copy), FormFactor (copy), ReactModule (copy), UseImmersiveChromeModule (copy)
 	local Pager = p1.pager
 	local UseMediaControllerProviderResult = MediaPreloadProvider.useMediaControllerProvider()
@@ -21,9 +21,9 @@ return function(p1) --[[ Line: 51 | Named "ImmersiveChromeController" ]]
 	UseImmersiveChromeModule({
 		pager = Pager,
 		active = p1.active,
-		getActiveIsPlaying = ReactModule.useMemo(function() --[[ Line: 65 ]]
+		getActiveIsPlaying = ReactModule.useMemo(function()
 			-- upvalues: UseMediaControllerProviderResult (copy), Pager (copy)
-			return function(p2) --[[ Line: 66 ]]
+			return function(p2)
 				-- upvalues: UseMediaControllerProviderResult (upval), Pager (upval)
 				if UseMediaControllerProviderResult == nil then
 					return true
@@ -39,9 +39,9 @@ return function(p1) --[[ Line: 51 | Named "ImmersiveChromeController" ]]
 				end
 			end
 		end, { Pager, UseMediaControllerProviderResult }),
-		getIsScrolling = ReactModule.useMemo(function() --[[ Line: 86 ]]
+		getIsScrolling = ReactModule.useMemo(function()
 			-- upvalues: p1 (copy)
-			return function(p2): boolean --[[ Line: 87 ]]
+			return function(p2): boolean
 				-- upvalues: p1 (upval)
 				local Current = p1.controllerRef.current
 				

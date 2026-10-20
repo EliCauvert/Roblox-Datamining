@@ -8,7 +8,7 @@ local UseStyleFunction = require(CorePackages.Packages.UIBlox).Core.Style.useSty
 local ConstantsModule = require(AbuseReportMenu.Components.Constants)
 local GetMenuItemDimensionsModule = require(AbuseReportMenu.Components.getMenuItemDimensions)
 
-return function(p1) --[[ Line: 23 | Named "DropdownReportMenuItem" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), GetMenuItemDimensionsModule (copy), ConstantsModule (copy), ReactModule (copy), TextService (copy), AppFonts (copy), CryoModule (copy)
 	local UseStyleResult = UseStyleFunction()
 	local Size150 = if p1.label == "" or p1.isRightComponentFullWidth then 0 else UseStyleResult.Tokens.Size.Size_150
@@ -16,7 +16,7 @@ return function(p1) --[[ Line: 23 | Named "DropdownReportMenuItem" ]]
 	local MenuItemDimensionsModule = GetMenuItemDimensionsModule(p1.menuContainerWidth)
 	local Largest = math.max(p1.menuContainerWidth - ConstantsModule.MenuItemDynamicWidthOffset, MenuItemDimensionsModule.LeftWidth + MenuItemDimensionsModule.RightWidth)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(UseStyleResult.Tokens.Size.Size_1000)
-	ReactModule.useEffect(function() --[[ Line: 37 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), UseStyleResult (copy), TextService (upval), p1 (copy), MenuItemDimensionsModule (copy), AppFonts (upval), Largest (copy)
 		UseStateResult2((math.max(UseStyleResult.Tokens.Size.Size_1000, TextService:GetTextSize(p1.label, MenuItemDimensionsModule.TextSize, AppFonts.default:getMedium(), Vector2.new(if p1.isSmallPortraitViewport then Largest else MenuItemDimensionsModule.LeftWidth, 1e999)).Y)))
 	end, {})

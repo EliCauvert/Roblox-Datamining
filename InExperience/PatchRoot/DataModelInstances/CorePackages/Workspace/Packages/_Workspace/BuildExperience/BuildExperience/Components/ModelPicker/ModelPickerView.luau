@@ -7,7 +7,7 @@ local Sheet = FoundationModule.Sheet
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 
-return function(Frame) --[[ Line: 34 | Named "ModelPickerView" ]]
+return function(Frame)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), View (copy), Text (copy), Chip (copy), Sheet (copy)
 	local Element = nil
 	
@@ -19,7 +19,7 @@ return function(Frame) --[[ Line: 34 | Named "ModelPickerView" ]]
 			local Description = if option.isAvailable then option.description else Frame.unavailableText
 			Elements[option.id] = ReactModule.createElement(View, {
 				LayoutOrder = LayoutOrder,
-				onActivated = function() --[[ Line: 43 ]]
+				onActivated = function()
 					-- upvalues: Frame (copy), option (copy)
 					Frame.onSelect(option.id)
 				end,

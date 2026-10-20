@@ -4,7 +4,7 @@ local FoundationModule = require(Parent.Foundation)
 local Image = FoundationModule.Image
 local Icon = FoundationModule.Icon
 
-return function(p1) --[[ Line: 14 | Named "PlayerListIcon" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), Icon (copy), Image (copy)
 	local Icon1 = p1.icon
 	

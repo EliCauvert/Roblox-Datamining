@@ -1,14 +1,14 @@
 ﻿local ReactModule = require(game:GetService("CorePackages").Packages._Index.Foundation.Foundation.Parent.React)
 local GetHardwareSafeAreaInsetsModule = require(script.Parent.getHardwareSafeAreaInsets)
 
-return function(Object) --[[ Line: 7 | Named "useHardwareInsets" ]]
+return function(Object)
 	-- upvalues: ReactModule (copy), GetHardwareSafeAreaInsetsModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(GetHardwareSafeAreaInsetsModule)
-	ReactModule.useEffect(function() --[[ Line: 10 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Object (copy), UseStateResult2 (copy), GetHardwareSafeAreaInsetsModule (upval)
-		local Connection = if Object then Object:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 14 ]]
+		local Connection = if Object then Object:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 			-- upvalues: UseStateResult2 (upval), GetHardwareSafeAreaInsetsModule (upval)
-			UseStateResult2(function(p1) --[[ Line: 15 ]]
+			UseStateResult2(function(p1)
 				-- upvalues: GetHardwareSafeAreaInsetsModule (upval)
 				local HardwareSafeAreaInsetsModule = GetHardwareSafeAreaInsetsModule()
 				
@@ -16,7 +16,7 @@ return function(Object) --[[ Line: 7 | Named "useHardwareInsets" ]]
 			end)
 		end) else nil
 		
-		return function() --[[ Line: 31 ]]
+		return function()
 			-- upvalues: Connection (ref)
 			if Connection then
 				Connection:Disconnect()

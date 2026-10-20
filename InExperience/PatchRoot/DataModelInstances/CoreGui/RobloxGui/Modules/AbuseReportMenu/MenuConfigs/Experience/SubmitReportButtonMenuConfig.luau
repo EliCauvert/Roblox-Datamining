@@ -13,16 +13,16 @@ return {
 	variant = "primary",
 	fieldLabel = "",
 	componentName = "SubmitButton",
-	getIsVisible = function(_): boolean --[[ Line: 14 ]]
+	getIsVisible = function(_): boolean
 		return true
 	end,
-	getIconSrc = function(_): string --[[ Line: 18 ]]
+	getIconSrc = function(_): string
 		return ""
 	end,
-	getButtonLabel = function(_): string --[[ Line: 21 ]]
+	getButtonLabel = function(_): string
 		return "SubmitButton"
 	end,
-	onClick = function(p1, _, p2) --[[ Line: 24 ]]
+	onClick = function(p1, _, p2)
 		-- upvalues: Players (copy), TnSIXPWrapperModule (copy), AbuseReportBuilderModule (copy), ReportAbuseAnalyticsModule (copy), ConstantsModule (copy), GetToastMessageFromAbuseReasonModule (copy), MarketplaceService (copy)
 		local AbuseReason = p1.abuseReason
 		
@@ -43,12 +43,12 @@ return {
 				
 				return
 			end
-			spawn(function() --[[ Line: 49 ]]
+			spawn(function()
 				-- upvalues: MarketplaceService (upval), p1 (copy), Players (upval), AbuseReason (copy)
 				local Text = tostring(game.PlaceId)
 				local Name = "N/A"
 				local Description = "N/A"
-				pcall(function() --[[ Line: 51 ]]
+				pcall(function()
 					-- upvalues: MarketplaceService (upval), Name (ref), Description (ref)
 					local ProductInfoAsync = MarketplaceService:GetProductInfoAsync(game.PlaceId, Enum.InfoType.Asset)
 					Name = ProductInfoAsync.Name

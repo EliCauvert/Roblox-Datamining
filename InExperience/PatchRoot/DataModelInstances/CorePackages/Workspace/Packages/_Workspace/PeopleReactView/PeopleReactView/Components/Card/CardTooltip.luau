@@ -15,14 +15,14 @@ local View = FoundationModule.View
 local ConstantsModule = require(PeopleReactView.Constants)
 local GetFFlagFixPeoplePageCardTooltipFunction = require(Parent.PeopleService).getService("Flags").GetFFlagFixPeoplePageCardTooltip
 
-return function(p1) --[[ Line: 33 | Named "CardTooltip" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), GetFFlagFixPeoplePageCardTooltipFunction (copy), UseDeviceOrientationFunction (copy), RobloxAppEnumsModule (copy), ReactModule (copy), UseLocalizationFunction (copy), ConstantsModule (copy), View (copy), StateLayerMode (copy), Text (copy), Button (copy), InputSize (copy), ButtonVariant (copy)
 	local UseTokensResult = UseTokensFunction()
 	local _UDim2 = UDim2.fromScale(1.75, 0)
 	
 	if GetFFlagFixPeoplePageCardTooltipFunction() then
 		local IsUseDeviceOrientationResultMatch = UseDeviceOrientationFunction() == RobloxAppEnumsModule.DeviceOrientationMode.Portrait
-		_UDim2 = ReactModule.useMemo(function(): UDim2 --[[ Line: 41 ]]
+		_UDim2 = ReactModule.useMemo(function(): UDim2
 			-- upvalues: IsUseDeviceOrientationResultMatch (copy)
 			return if IsUseDeviceOrientationResultMatch then UDim2.fromScale(1, 0) else UDim2.fromScale(1.75, 0)
 		end, { IsUseDeviceOrientationResultMatch })

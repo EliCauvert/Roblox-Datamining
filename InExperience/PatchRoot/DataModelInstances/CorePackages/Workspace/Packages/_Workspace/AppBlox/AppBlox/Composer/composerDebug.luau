@@ -1,15 +1,15 @@
 ﻿local Enabled = false
 
 return {
-	setEnabled = function(Value) --[[ Line: 6 ]]
+	setEnabled = function(Value)
 		-- upvalues: Enabled (ref)
 		Enabled = Value
 	end,
-	isEnabled = function() --[[ Line: 10 ]]
+	isEnabled = function()
 		-- upvalues: Enabled (ref)
 		return Enabled
 	end,
-	log = function(p1, p2) --[[ Line: 14 ]]
+	log = function(p1, p2)
 		-- upvalues: Enabled (ref)
 		if not Enabled then return end
 		if p2 then

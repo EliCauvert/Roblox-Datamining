@@ -8,13 +8,13 @@ local ShowEditProfileImageToastModule = require(AvatarExperienceProfilePictureEd
 local EditProfileImageAnalyticsModule = require(AvatarExperienceProfilePictureEditor.Analytics.EditProfileImageAnalytics)
 local _ = require(AvatarExperienceProfilePictureEditor.Common.Enums)
 
-return function(p1) --[[ Line: 41 | Named "useEditProfileImageSave" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), EditProfileImageHelpersModule (copy), SaveEditProfileImageModule (copy), EditProfileImageAnalyticsModule (copy), ShowEditProfileImageToastModule (copy), FFlagEditProfileFramesEnabled (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	
 	return {
 		isSaving = UseStateResult,
-		onSave = ReactModule.useCallback(function() --[[ Line: 49 ]]
+		onSave = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult (copy), UseStateResult2 (copy), EditProfileImageHelpersModule (upval), p1 (copy), SaveEditProfileImageModule (upval), EditProfileImageAnalyticsModule (upval), ShowEditProfileImageToastModule (upval), FFlagEditProfileFramesEnabled (upval)
 			if not UseStateResult then
 				UseStateResult2(true)
@@ -35,7 +35,7 @@ return function(p1) --[[ Line: 41 | Named "useEditProfileImageSave" ]]
 				local OnCloseFunction = p1.onClose
 				local OnSaveSuccessFunction = p1.onSaveSuccess
 				local TitleBackAvailable = p1.titleBackAvailable
-				task.spawn(function() --[[ Line: 73 ]]
+				task.spawn(function()
 					-- upvalues: SaveEditProfileImageModule (upval), config (copy), UseStateResult2 (upval), EditProfileImageAnalyticsModule (upval), p1 (upval), SavePayloadForActiveView (copy), ShowEditProfileImageToastModule (upval), EditProfileImageHelpersModule (upval), FFlagEditProfileFramesEnabled (upval), TitleBackAvailable (copy), OnSaveSuccessFunction (copy), OnCloseFunction (copy)
 					local SaveEditProfileImageModuleResult = SaveEditProfileImageModule(config)
 					UseStateResult2(false)
@@ -88,7 +88,7 @@ return function(p1) --[[ Line: 41 | Named "useEditProfileImageSave" ]]
 			p1.isPlusSubscriber, p1.dispatch, p1.onReturnToCombined, p1.onClose,
 			p1.onSaveSuccess
 		}),
-		resetTransientState = ReactModule.useCallback(function() --[[ Line: 44 ]]
+		resetTransientState = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(false)
 		end, {})

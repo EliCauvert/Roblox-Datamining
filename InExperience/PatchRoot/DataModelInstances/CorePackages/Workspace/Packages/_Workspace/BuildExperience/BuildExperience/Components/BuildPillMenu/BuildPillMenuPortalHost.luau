@@ -4,16 +4,16 @@ local ReactModule = require(Parent.React)
 local GetBuildPillMenuPortalStoreModule = require(BuildExperience.Stores.GetBuildPillMenuPortalStore)
 local View = require(Parent.Foundation).View
 
-return ReactModule.memo(function(p1) --[[ Line: 18 | Named "BuildPillMenuPortalHost" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: GetBuildPillMenuPortalStoreModule (copy), ReactModule (copy), View (copy)
 	local BuildPillMenuPortalStoreModule = GetBuildPillMenuPortalStoreModule()
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 21 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: BuildPillMenuPortalStoreModule (copy)
 		BuildPillMenuPortalStoreModule.setPortalTarget(p2)
 	end, { BuildPillMenuPortalStoreModule })
-	ReactModule.useEffect(function() --[[ Line: 25 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: BuildPillMenuPortalStoreModule (copy)
-		return function() --[[ Line: 26 ]]
+		return function()
 			-- upvalues: BuildPillMenuPortalStoreModule (upval)
 			BuildPillMenuPortalStoreModule.setPortalTarget(nil)
 		end

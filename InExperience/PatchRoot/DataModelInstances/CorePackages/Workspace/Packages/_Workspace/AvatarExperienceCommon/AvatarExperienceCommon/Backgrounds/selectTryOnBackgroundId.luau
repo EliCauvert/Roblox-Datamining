@@ -2,7 +2,7 @@
 local ItemTypeEnum = require(AvatarExperienceCommon.Parent.AvatarExperienceModel).Enums.ItemTypeEnum
 local AvatarBackground = require(AvatarExperienceCommon.Constants).ASSET_TYPE_NAME_TO_ID_STRING.AvatarBackground
 
-return function(p1): number? --[[ Line: 15 | Named "selectTryOnBackgroundId" ]]
+return function(p1): number?
 	-- upvalues: ItemTypeEnum (copy), AvatarBackground (copy)
 	local AvatarExperience = p1 and p1.AvatarExperience or p1
 	local AvatarScene = AvatarExperience and AvatarExperience.AvatarScene

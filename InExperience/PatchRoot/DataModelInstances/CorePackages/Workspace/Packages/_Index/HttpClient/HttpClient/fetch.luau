@@ -9,7 +9,7 @@ local StatusCodeActionsModule = require(script.Parent.statusCodeActions)
 local FFlagHttpClientRetryExtensionsModule = require(script.Parent.Flags.FFlagHttpClientRetryExtensions)
 local v1 = nil
 
-local function _() --[[ Line: 17 | Named "defaultNetwork" ]]
+local function _()
 	-- upvalues: v1 (ref), WithRetryModule (copy), CreateRequestInternalNetworkModule (copy)
 	if v1 == nil then
 		v1 = WithRetryModule(CreateRequestInternalNetworkModule())
@@ -17,7 +17,7 @@ local function _() --[[ Line: 17 | Named "defaultNetwork" ]]
 	return v1
 end
 
-local _ = function(p1) --[[ Line: 24 | Named "pickNetwork" ]]
+local _ = function(p1)
 	-- upvalues: WithRetryModule (copy), CreateRequestInternalNetworkModule (copy), v1 (ref)
 	local Network = p1.network
 	
@@ -36,13 +36,13 @@ local _ = function(p1) --[[ Line: 24 | Named "pickNetwork" ]]
 	return v1
 end
 
-local function asBuffer(ResponseBody) --[[ Line: 39 ]]
+local function asBuffer(ResponseBody)
 	return if typeof(ResponseBody) == "buffer" then ResponseBody else buffer.fromstring(ResponseBody or "")
 end
 
-local _ = function(p1) --[[ Line: 46 | Named "buildProtobufDecoder" ]]
+local _ = function(p1)
 	-- upvalues: IsSuccessFunction (copy), asBuffer (copy)
-	return function(p2) --[[ Line: 47 ]]
+	return function(p2)
 		-- upvalues: IsSuccessFunction (upval), p1 (copy), asBuffer (upval)
 		if IsSuccessFunction(p2.statusCode) then
 			return p1(asBuffer(p2.responseBody)), nil, nil
@@ -52,7 +52,7 @@ local _ = function(p1) --[[ Line: 46 | Named "buildProtobufDecoder" ]]
 	end
 end
 
-local _ = function(List) --[[ Line: 56 | Named "resolveStatusCodeActions" ]]
+local _ = function(List)
 	-- upvalues: StatusCodeActionsModule (copy)
 	local SnapshotResult = StatusCodeActionsModule.snapshot()
 	
@@ -67,14 +67,14 @@ local _ = function(List) --[[ Line: 56 | Named "resolveStatusCodeActions" ]]
 	return SnapshotResult
 end
 
-return function(p1) --[[ Line: 69 | Named "fetch" ]]
+return function(p1)
 	-- upvalues: EncodersModule (copy), IsSuccessFunction (copy), asBuffer (copy), DecodersModule (copy), CreateRequestModule (copy), WithRetryModule (copy), CreateRequestInternalNetworkModule (copy), v1 (ref), StatusCodeActionsModule (copy), FFlagHttpClientRetryExtensionsModule (copy)
 	local XProtobuf = if (p1.requestEncoding or "json") == "protobuf" then EncodersModule.encodeRaw("application/x-protobuf") else nil
 	
 	if (p1.responseEncoding or "json") == "protobuf" then
 		local DecodeFunction = p1.decode
 		
-		local function DecodeLegacyJsonResult(p2) --[[ Line: 47 ]]
+		local function DecodeLegacyJsonResult(p2)
 			-- upvalues: IsSuccessFunction (upval), DecodeFunction (copy), asBuffer (upval)
 			if IsSuccessFunction(p2.statusCode) then
 				return DecodeFunction(asBuffer(p2.responseBody)), nil, nil

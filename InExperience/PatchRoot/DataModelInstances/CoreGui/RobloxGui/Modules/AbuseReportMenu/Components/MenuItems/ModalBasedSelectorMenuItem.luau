@@ -3,7 +3,7 @@ local ReactModule = require(game:GetService("CorePackages").Packages.React)
 local ModalBasedSelectorModule = require(AbuseReportMenu.Components.ModalBasedSelector)
 local ReportMenuItemModule = require(AbuseReportMenu.Components.MenuItems.ReportMenuItem)
 
-return function(p1) --[[ Line: 15 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ReportMenuItemModule (copy), ModalBasedSelectorModule (copy)
 	return ReactModule.createElement(ReportMenuItemModule, {
 		label = p1.label,

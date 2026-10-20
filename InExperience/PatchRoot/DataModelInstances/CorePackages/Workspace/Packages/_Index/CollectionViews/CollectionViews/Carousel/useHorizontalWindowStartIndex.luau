@@ -1,9 +1,9 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("CollectionViews").Parent.React)
 
-return function(p1, p2, p3, p4) --[[ Line: 7 | Named "useHorizontalWindowStartIndex" ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: ReactModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(1)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 17 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p4 (copy), p1 (copy), p2 (copy), p3 (copy), UseStateResult2 (copy)
 		if not p4 then
 			UseStateResult2(1)
@@ -22,11 +22,11 @@ return function(p1, p2, p3, p4) --[[ Line: 7 | Named "useHorizontalWindowStartIn
 			end
 		end
 	end, { p4, p1, p2, p3 })
-	ReactModule.useEffect(function() --[[ Line: 42 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult (copy)
 		UseResult()
 	end, { UseResult })
-	ReactModule.useEffect(function() --[[ Line: 50 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p4 (copy), p1 (copy), UseResult (copy)
 		if not p4 then
 			return nil
@@ -38,7 +38,7 @@ return function(p1, p2, p3, p4) --[[ Line: 7 | Named "useHorizontalWindowStartIn
 			table.insert(List, p1.current:GetPropertyChangedSignal("CanvasPosition"):Connect(UseResult))
 			table.insert(List, p1.current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(UseResult))
 		end
-		return function() --[[ Line: 66 ]]
+		return function()
 			-- upvalues: List (copy)
 			for _, Connection in List do
 				Connection:Disconnect()

@@ -10,19 +10,19 @@ local ConstantsModule = require(Parent.Constants)
 local EventNamesModule = require(Parent.Analytics.EventNames)
 local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
 
-return function(p1) --[[ Line: 22 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseAnalyticsModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseEffectOnceFunction (copy), EventNamesModule (copy), CaptureConfigCTAsModule (copy), CapturesGalleryModule (copy)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 23 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		p1.closeSettingsMenu()
 	end, {})
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 30 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
 		return p2[ConstantsModule.RoduxKey].IsMenuOpen
 	end)
-	UseEffectOnceFunction(function() --[[ Line: 34 ]]
+	UseEffectOnceFunction(function()
 		-- upvalues: UseAnalyticsModuleResult (copy), EventNamesModule (upval)
 		UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesPageOpenedInGameMenu)
 	end, UseSelectorResult)
@@ -42,7 +42,7 @@ return function(p1) --[[ Line: 22 ]]
 		CaptureConfigCTAs = ReactModule.createElement(CaptureConfigCTAsModule, {
 			LayoutOrder = 1,
 			closeSettingsMenu = UseResult,
-			onAbsoluteSizeChanged = ReactModule.useCallback(function(p2) --[[ Line: 38 ]]
+			onAbsoluteSizeChanged = ReactModule.useCallback(function(p2)
 				-- upvalues: UseStateResult2 (copy)
 				UseStateResult2(p2.Y)
 			end, {})

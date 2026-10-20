@@ -1,6 +1,6 @@
 ﻿local SduiConditionKey = require(script:FindFirstAncestor("SduiCoreSystem").ConditionalProps.SduiConditionalPropTypes).SduiConditionKey
 
-return function(List, p1) --[[ Line: 10 | Named "checkPresenceConditions" ]]
+return function(List, p1)
 	-- upvalues: SduiConditionKey (copy)
 	local t = {}
 	

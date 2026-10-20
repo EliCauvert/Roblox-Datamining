@@ -4,7 +4,7 @@ local Success, Result = pcall(game.DefineFastFlag, game, "ReducePromiseTaskDefer
 if not Success then
 	Result = false
 end
-local function _(Callback): boolean --[[ Line: 16 | Named "isCallable" ]]
+local function _(Callback): boolean
 	if type(Callback) == "function" then
 		return true
 	end
@@ -18,18 +18,18 @@ local function _(Callback): boolean --[[ Line: 16 | Named "isCallable" ]]
 	return false
 end
 
-local function makeEnum(p1, List) --[[ Line: 34 ]]
+local function makeEnum(p1, List)
 	local t = {}
 	
 	for _, value in ipairs(List) do
 		t[value] = value
 	end
 	return (setmetatable(t, {
-		__index = function(_, p2) --[[ Line: 42 ]]
+		__index = function(_, p2)
 			-- upvalues: p1 (copy)
 			error(string.format("%s is not in %s!", p2, p1), 2)
 		end,
-		__newindex = function() --[[ Line: 45 ]]
+		__newindex = function()
 			-- upvalues: p1 (copy)
 			error(string.format("Creating new members in %s is not allowed!", p1), 2)
 		end
@@ -47,7 +47,7 @@ Module = {
 }
 Module.__index = Module
 
-function Module.new(p2, Parent) --[[ Line: 70 ]]
+function Module.new(p2, Parent)
 	-- upvalues: Module (ref)
 	local P4 = p2 or {}
 	
@@ -62,7 +62,7 @@ function Module.new(p2, Parent) --[[ Line: 70 ]]
 	}, Module))
 end
 
-function Module.is(p2): boolean --[[ Line: 83 ]]
+function Module.is(p2): boolean
 	if type(p2) == "table" then
 		local Meta = getmetatable(p2)
 		
@@ -73,14 +73,14 @@ function Module.is(p2): boolean --[[ Line: 83 ]]
 	return false
 end
 
-function Module:isKind(ExecutionError): boolean --[[ Line: 95 ]]
+function Module:isKind(ExecutionError): boolean
 	-- upvalues: Module (ref)
 	assert(ExecutionError ~= nil, "Argument #2 to Promise.Error.isKind must not be nil")
 	
 	return Module.is(self) and self.kind == ExecutionError
 end
 
-function Module:extend(p2) --[[ Line: 101 ]]
+function Module:extend(p2)
 	-- upvalues: Module (ref)
 	local P10 = p2 or {}
 	P10.kind = P10.kind or self.kind
@@ -88,7 +88,7 @@ function Module:extend(p2) --[[ Line: 101 ]]
 	return Module.new(P10, self)
 end
 
-function Module.getErrorChain(p2) --[[ Line: 109 ]]
+function Module.getErrorChain(p2)
 	local List = { p2 }
 	while List[#List].parent do
 		table.insert(List, List[#List].parent)
@@ -96,7 +96,7 @@ function Module.getErrorChain(p2) --[[ Line: 109 ]]
 	return List
 end
 
-function Module:__tostring(): string --[[ Line: 119 ]]
+function Module:__tostring(): string
 	local List = {
 		string.format("-- Promise.Error(%s) --", self.kind or "?")
 	}
@@ -107,19 +107,19 @@ function Module:__tostring(): string --[[ Line: 119 ]]
 	return table.concat(List, "\n")
 end
 
-local function pack(...) --[[ Line: 143 ]]
+local function pack(...)
 	return select("#", ...), { ... }
 end
 
-local function packResult(p3, ...) --[[ Line: 150 ]]
+local function packResult(p3, ...)
 	return p3, select("#", ...), { ... }
 end
 
-local _ = function(p3) --[[ Line: 154 | Named "makeErrorHandler" ]]
+local _ = function(p3)
 	-- upvalues: Module (ref)
 	assert(p3 ~= nil, "traceback is nil")
 	
-	return function(p4) --[[ Line: 157 ]]
+	return function(p4)
 		-- upvalues: Module (upval), p3 (copy)
 		return if type(p4) == "table" then p4 else Module.new({
 			error = p4,
@@ -130,12 +130,12 @@ local _ = function(p3) --[[ Line: 154 | Named "makeErrorHandler" ]]
 	end
 end
 
-local function runExecutor(Source, p3, ...) --[[ Line: 177 ]]
+local function runExecutor(Source, p3, ...)
 	-- upvalues: packResult (copy), Module (ref)
 	local Callback = xpcall
 	assert(Source ~= nil, "traceback is nil")
 	
-	return packResult(Callback(p3, function(p4) --[[ Line: 157 ]]
+	return packResult(Callback(p3, function(p4)
 		-- upvalues: Module (upval), Source (copy)
 		return if type(p4) == "table" then p4 else Module.new({
 			error = p4,
@@ -146,9 +146,9 @@ local function runExecutor(Source, p3, ...) --[[ Line: 177 ]]
 	end, ...))
 end
 
-local _ = function(p3, p4, p5, p6) --[[ Line: 185 | Named "createAdvancer" ]]
+local _ = function(p3, p4, p5, p6)
 	-- upvalues: runExecutor (copy)
-	return function(...) --[[ Line: 186 ]]
+	return function(...)
 		-- upvalues: runExecutor (upval), p3 (copy), p4 (copy), p5 (copy), p6 (copy)
 		local v1, v2, v3 = runExecutor(p3, p4, ...)
 		
@@ -162,7 +162,7 @@ local _ = function(p3, p4, p5, p6) --[[ Line: 185 | Named "createAdvancer" ]]
 	end
 end
 
-local _ = function(p3): boolean --[[ Line: 197 | Named "isEmpty" ]]
+local _ = function(p3): boolean
 	return next(p3) == nil
 end
 
@@ -176,7 +176,7 @@ local PromiseModule = {
 }
 PromiseModule.__index = PromiseModule.prototype
 
-function PromiseModule._new(Traceback, p3, Parent) --[[ Line: 236 ]]
+function PromiseModule._new(Traceback, p3, Parent)
 	-- upvalues: PromiseModule (copy), config (copy), runExecutor (copy)
 	if Parent ~= nil and not PromiseModule.is(Parent) then
 		error("Argument #2 to Promise.new must be a promise or nil", 2)
@@ -201,17 +201,17 @@ function PromiseModule._new(Traceback, p3, Parent) --[[ Line: 236 ]]
 	end
 	setmetatable(config1, PromiseModule)
 	
-	local function resolve(...) --[[ Line: 284 ]]
+	local function resolve(...)
 		-- upvalues: config1 (copy)
 		config1:_resolve(...)
 	end
 	
-	local function reject(...) --[[ Line: 288 ]]
+	local function reject(...)
 		-- upvalues: config1 (copy)
 		config1:_reject(...)
 	end
 	
-	local function onCancel(Callback: () -> ()): boolean --[[ Line: 292 ]]
+	local function onCancel(Callback: () -> ()): boolean
 		-- upvalues: config1 (copy), PromiseModule (upval)
 		if Callback then
 			if config1._status == PromiseModule.Status.Cancelled then
@@ -223,7 +223,7 @@ function PromiseModule._new(Traceback, p3, Parent) --[[ Line: 236 ]]
 		return config1._status == PromiseModule.Status.Cancelled
 	end
 	
-	config1._thread = coroutine.create(function() --[[ Line: 304 ]]
+	config1._thread = coroutine.create(function()
 		-- upvalues: runExecutor (upval), config1 (copy), p3 (copy), resolve (copy), reject (copy), onCancel (copy)
 		local RunExecutorResult, _, RunExecutorResult3 = runExecutor(config1._source, p3, resolve, reject, onCancel)
 		
@@ -236,23 +236,23 @@ function PromiseModule._new(Traceback, p3, Parent) --[[ Line: 236 ]]
 	return config1
 end
 
-function PromiseModule.new(p3) --[[ Line: 355 ]]
+function PromiseModule.new(p3)
 	-- upvalues: PromiseModule (copy)
 	return PromiseModule._new(debug.traceback(nil, 2), p3)
 end
 
-function PromiseModule:__tostring(): string --[[ Line: 359 ]]
+function PromiseModule:__tostring(): string
 	return string.format("Promise(%s)", self._status)
 end
 
-function PromiseModule.defer(p3) --[[ Line: 381 ]]
+function PromiseModule.defer(p3)
 	-- upvalues: PromiseModule (copy), runExecutor (copy)
 	local Traceback = debug.traceback(nil, 2)
 	
-	return (PromiseModule._new(Traceback, function(p4, Callback, p5) --[[ Line: 384 ]]
+	return (PromiseModule._new(Traceback, function(p4, Callback, p5)
 		-- upvalues: PromiseModule (upval), runExecutor (upval), Traceback (copy), p3 (copy)
 		local Connection = nil
-		Connection = PromiseModule._timeEvent:Connect(function() --[[ Line: 386 ]]
+		Connection = PromiseModule._timeEvent:Connect(function()
 			-- upvalues: Connection (ref), runExecutor (upval), Traceback (upval), p3 (upval), p4 (copy), Callback (copy), p5 (copy)
 			Connection:Disconnect()
 			local RunExecutorResult, _, RunExecutorResult3 = runExecutor(Traceback, p3, p4, Callback, p5)
@@ -266,42 +266,42 @@ end
 
 PromiseModule.async = PromiseModule.defer
 
-function PromiseModule.resolve(...) --[[ Line: 424 ]]
+function PromiseModule.resolve(...)
 	-- upvalues: pack (copy), PromiseModule (copy)
 	local PackResult, PackResult2 = pack(...)
 	
-	return PromiseModule._new(debug.traceback(nil, 2), function(Callback: (any) -> ()) --[[ Line: 426 ]]
+	return PromiseModule._new(debug.traceback(nil, 2), function(Callback: (any) -> ())
 		-- upvalues: PackResult2 (copy), PackResult (copy)
 		Callback(unpack(PackResult2, 1, PackResult))
 	end)
 end
 
-function PromiseModule.reject(...) --[[ Line: 441 ]]
+function PromiseModule.reject(...)
 	-- upvalues: pack (copy), PromiseModule (copy)
 	local PackResult, PackResult2 = pack(...)
 	
-	return PromiseModule._new(debug.traceback(nil, 2), function(_, Callback: (any) -> ()) --[[ Line: 443 ]]
+	return PromiseModule._new(debug.traceback(nil, 2), function(_, Callback: (any) -> ())
 		-- upvalues: PackResult2 (copy), PackResult (copy)
 		Callback(unpack(PackResult2, 1, PackResult))
 	end)
 end
 
-function PromiseModule._try(Traceback, Callback, ...) --[[ Line: 452 ]]
+function PromiseModule._try(Traceback, Callback, ...)
 	-- upvalues: pack (copy), PromiseModule (copy)
 	local PackResult, PackResult2 = pack(...)
 	
-	return PromiseModule._new(Traceback, function(Callback1: (any) -> ()) --[[ Line: 455 ]]
+	return PromiseModule._new(Traceback, function(Callback1: (any) -> ())
 		-- upvalues: Callback (copy), PackResult2 (copy), PackResult (copy)
 		Callback1(Callback(unpack(PackResult2, 1, PackResult)))
 	end)
 end
 
-function PromiseModule.try(p3, ...) --[[ Line: 483 ]]
+function PromiseModule.try(p3, ...)
 	-- upvalues: PromiseModule (copy)
 	return PromiseModule._try(debug.traceback(nil, 2), p3, ...)
 end
 
-function PromiseModule._all(Traceback, List, p3) --[[ Line: 492 ]]
+function PromiseModule._all(Traceback, List, p3)
 	-- upvalues: PromiseModule (copy)
 	if type(List) ~= "table" then
 		error(string.format("Please pass a list of promises to %s", "Promise.all"), 3)
@@ -311,7 +311,7 @@ function PromiseModule._all(Traceback, List, p3) --[[ Line: 492 ]]
 			error(string.format("Non-promise value passed into %s at index %s", "Promise.all", (tostring(i))), 3)
 		end
 	end
-	return if #List == 0 or p3 == 0 then PromiseModule.resolve({}) else PromiseModule._new(Traceback, function(Callback1, Callback2, Callback: (any) -> ()) --[[ Line: 510 ]]
+	return if #List == 0 or p3 == 0 then PromiseModule.resolve({}) else PromiseModule._new(Traceback, function(Callback1, Callback2, Callback: (any) -> ())
 		-- upvalues: p3 (copy), List (copy)
 		local t = {}
 		local t1 = {}
@@ -319,7 +319,7 @@ function PromiseModule._all(Traceback, List, p3) --[[ Line: 492 ]]
 		local Count1 = 0
 		local Flag = false
 		
-		local function resolveOne(Key, ...) --[[ Line: 528 ]]
+		local function resolveOne(Key, ...)
 			-- upvalues: Flag (ref), Count (ref), p3 (upval), t (copy), List (upval), Callback1 (copy), t1 (copy)
 			if Flag then return end
 			Count += 1
@@ -339,7 +339,7 @@ function PromiseModule._all(Traceback, List, p3) --[[ Line: 492 ]]
 			end
 		end
 		
-		Callback(function() --[[ Line: 521 | Named "cancel" ]]
+		Callback(function()
 			-- upvalues: t1 (copy)
 			for _, value in ipairs(t1) do
 				value:cancel()
@@ -347,10 +347,10 @@ function PromiseModule._all(Traceback, List, p3) --[[ Line: 492 ]]
 		end)
 		
 		for i, Promise in ipairs(List) do
-			t1[i] = Promise:andThen(function(...) --[[ Line: 553 ]]
+			t1[i] = Promise:andThen(function(...)
 				-- upvalues: resolveOne (copy), i (copy)
 				resolveOne(i, ...)
-			end, function(...) --[[ Line: 555 ]]
+			end, function(...)
 				-- upvalues: Count1 (ref), p3 (upval), List (upval), t1 (copy), Flag (ref), Callback2 (copy)
 				Count1 += 1
 				
@@ -371,7 +371,7 @@ function PromiseModule._all(Traceback, List, p3) --[[ Line: 492 ]]
 	end)
 end
 
-function PromiseModule.all(...) --[[ Line: 597 ]]
+function PromiseModule.all(...)
 	-- upvalues: PromiseModule (copy)
 	local list = { ... }
 	
@@ -381,7 +381,7 @@ function PromiseModule.all(...) --[[ Line: 597 ]]
 	return PromiseModule._all(debug.traceback(nil, 2), list)
 end
 
-function PromiseModule.fold(p4, Callback, p5) --[[ Line: 634 ]]
+function PromiseModule.fold(p4, Callback, p5)
 	-- upvalues: PromiseModule (copy)
 	assert(type(p4) == "table", "Bad argument #1 to Promise.fold: must be a table")
 	local Flag = nil
@@ -403,33 +403,33 @@ function PromiseModule.fold(p4, Callback, p5) --[[ Line: 634 ]]
 	assert(Flag, "Bad argument #2 to Promise.fold: must be a function")
 	local ResolveResult = PromiseModule.resolve(p5)
 	
-	return PromiseModule.each(p4, function(p6, p7) --[[ Line: 639 ]]
+	return PromiseModule.each(p4, function(p6, p7)
 		-- upvalues: ResolveResult (ref), Callback (copy)
-		ResolveResult = ResolveResult:andThen(function(Result) --[[ Line: 640 ]]
+		ResolveResult = ResolveResult:andThen(function(Result)
 			-- upvalues: Callback (upval), p6 (copy), p7 (copy)
 			return Callback(Result, p6, p7)
 		end)
-	end):andThen(function() --[[ Line: 643 ]]
+	end):andThen(function()
 		-- upvalues: ResolveResult (ref)
 		return ResolveResult
 	end)
 end
 
-function PromiseModule.some(p4, p5) --[[ Line: 667 ]]
+function PromiseModule.some(p4, p5)
 	-- upvalues: PromiseModule (copy)
 	assert(type(p5) == "number", "Bad argument #2 to Promise.some: must be a number")
 	
 	return PromiseModule._all(debug.traceback(nil, 2), p4, p5)
 end
 
-function PromiseModule.any(p4) --[[ Line: 691 ]]
+function PromiseModule.any(p4)
 	-- upvalues: PromiseModule (copy)
-	return PromiseModule._all(debug.traceback(nil, 2), p4, 1):andThen(function(Entry) --[[ Line: 692 ]]
+	return PromiseModule._all(debug.traceback(nil, 2), p4, 1):andThen(function(Entry)
 		return Entry[1]
 	end)
 end
 
-function PromiseModule.allSettled(List) --[[ Line: 713 ]]
+function PromiseModule.allSettled(List)
 	-- upvalues: PromiseModule (copy)
 	if type(List) ~= "table" then
 		error(string.format("Please pass a list of promises to %s", "Promise.allSettled"), 2)
@@ -439,13 +439,13 @@ function PromiseModule.allSettled(List) --[[ Line: 713 ]]
 			error(string.format("Non-promise value passed into %s at index %s", "Promise.allSettled", (tostring(i))), 2)
 		end
 	end
-	return if #List == 0 then PromiseModule.resolve({}) else PromiseModule._new(debug.traceback(nil, 2), function(Callback1, _, Callback: (any) -> ()) --[[ Line: 731 ]]
+	return if #List == 0 then PromiseModule.resolve({}) else PromiseModule._new(debug.traceback(nil, 2), function(Callback1, _, Callback: (any) -> ())
 		-- upvalues: List (copy)
 		local t = {}
 		local t2 = {}
 		local Count = 0
 		
-		local function resolveOne(Key, ...) --[[ Line: 741 ]]
+		local function resolveOne(Key, ...)
 			-- upvalues: Count (ref), t (copy), List (upval), Callback1 (copy)
 			Count += 1
 			t[Key] = (...)
@@ -455,7 +455,7 @@ function PromiseModule.allSettled(List) --[[ Line: 713 ]]
 			end
 		end
 		
-		Callback(function() --[[ Line: 751 ]]
+		Callback(function()
 			-- upvalues: t2 (copy)
 			for _, value in ipairs(t2) do
 				value:cancel()
@@ -463,7 +463,7 @@ function PromiseModule.allSettled(List) --[[ Line: 713 ]]
 		end)
 		
 		for i, Promise in ipairs(List) do
-			t2[i] = Promise:finally(function(...) --[[ Line: 760 ]]
+			t2[i] = Promise:finally(function(...)
 				-- upvalues: resolveOne (copy), i (copy)
 				resolveOne(i, ...)
 			end)
@@ -471,28 +471,28 @@ function PromiseModule.allSettled(List) --[[ Line: 713 ]]
 	end)
 end
 
-function PromiseModule.race(List) --[[ Line: 791 ]]
+function PromiseModule.race(List)
 	-- upvalues: PromiseModule (copy)
 	assert(type(List) == "table", string.format("Please pass a list of promises to %s", "Promise.race"))
 	
 	for i, value in pairs(List) do
 		assert(PromiseModule.is(value), string.format("Non-promise value passed into %s at index %s", "Promise.race", (tostring(i))))
 	end
-	return PromiseModule._new(debug.traceback(nil, 2), function(p4, p5, Callback) --[[ Line: 798 ]]
+	return PromiseModule._new(debug.traceback(nil, 2), function(p4, p5, Callback)
 		-- upvalues: List (copy)
 		local t = {}
 		local Flag = false
 		
-		local function _() --[[ Line: 802 | Named "cancel" ]]
+		local function _()
 			-- upvalues: t (copy)
 			for _, value in ipairs(t) do
 				value:cancel()
 			end
 		end
 		
-		local _ = function(Callback) --[[ Line: 808 | Named "finalize" ]]
+		local _ = function(Callback)
 			-- upvalues: t (copy), Flag (ref)
-			return function(...) --[[ Line: 809 ]]
+			return function(...)
 				-- upvalues: t (upval), Flag (upval), Callback (copy)
 				for _, value in ipairs(t) do
 					value:cancel()
@@ -503,7 +503,7 @@ function PromiseModule.race(List) --[[ Line: 791 ]]
 			end
 		end
 		
-		if Callback(function(...) --[[ Line: 809 ]]
+		if Callback(function(...)
 			-- upvalues: t (copy), Flag (ref), p5 (copy)
 			for _, value in ipairs(t) do
 				value:cancel()
@@ -513,7 +513,7 @@ function PromiseModule.race(List) --[[ Line: 791 ]]
 			return p5(...)
 		end) then return end
 		for i, Promise in ipairs(List) do
-			t[i] = Promise:andThen(function(...) --[[ Line: 809 ]]
+			t[i] = Promise:andThen(function(...)
 				-- upvalues: t (copy), Flag (ref), p4 (copy)
 				for _, value in ipairs(t) do
 					value:cancel()
@@ -521,7 +521,7 @@ function PromiseModule.race(List) --[[ Line: 791 ]]
 				Flag = true
 				
 				return p4(...)
-			end, function(...) --[[ Line: 809 ]]
+			end, function(...)
 				-- upvalues: t (copy), Flag (ref), p5 (copy)
 				for _, value in ipairs(t) do
 					value:cancel()
@@ -539,7 +539,7 @@ function PromiseModule.race(List) --[[ Line: 791 ]]
 	end)
 end
 
-function PromiseModule.each(Promises, Callback) --[[ Line: 886 ]]
+function PromiseModule.each(Promises, Callback)
 	-- upvalues: PromiseModule (copy), Module (ref)
 	assert(type(Promises) == "table", string.format("Please pass a list of promises to %s", "Promise.each"))
 	local Flag = nil
@@ -560,20 +560,20 @@ function PromiseModule.each(Promises, Callback) --[[ Line: 886 ]]
 	until true
 	assert(Flag, string.format("Please pass a handler function to %s!", "Promise.each"))
 	
-	return PromiseModule._new(debug.traceback(nil, 2), function(Callback3: (any) -> (), Callback2, Callback1: (any) -> ()) --[[ Line: 890 ]]
+	return PromiseModule._new(debug.traceback(nil, 2), function(Callback3: (any) -> (), Callback2, Callback1: (any) -> ())
 		-- upvalues: Promises (copy), PromiseModule (upval), Module (upval), Callback (copy)
 		local t = {}
 		local List = {}
 		local Flag = false
 		
-		local function _() --[[ Line: 896 | Named "cancel" ]]
+		local function _()
 			-- upvalues: List (copy)
 			for _, value in ipairs(List) do
 				value:cancel()
 			end
 		end
 		
-		Callback1(function() --[[ Line: 902 ]]
+		Callback1(function()
 			-- upvalues: Flag (ref), List (copy)
 			Flag = true
 			
@@ -604,7 +604,7 @@ function PromiseModule.each(Promises, Callback) --[[ Line: 886 ]]
 				end
 				return Callback2(select(2, promis:await()))
 			else
-				local v1 = promis:andThen(function(...) --[[ Line: 935 ]]
+				local v1 = promis:andThen(function(...)
 					return ...
 				end)
 				table.insert(List, v1)
@@ -646,7 +646,7 @@ function PromiseModule.each(Promises, Callback) --[[ Line: 886 ]]
 	end)
 end
 
-function PromiseModule:is(): boolean --[[ Line: 985 ]]
+function PromiseModule:is(): boolean
 	-- upvalues: PromiseModule (copy)
 	if type(self) ~= "table" then
 		return false
@@ -697,9 +697,9 @@ function PromiseModule:is(): boolean --[[ Line: 985 ]]
 	end
 end
 
-function PromiseModule.promisify(p6) --[[ Line: 1034 ]]
+function PromiseModule.promisify(p6)
 	-- upvalues: PromiseModule (copy)
-	return function(...) --[[ Line: 1035 ]]
+	return function(...)
 		-- upvalues: PromiseModule (upval), p6 (copy)
 		return PromiseModule._try(debug.traceback(nil, 2), p6, ...)
 	end
@@ -708,14 +708,14 @@ end
 local Previous = nil
 local Connection = nil
 
-function PromiseModule.delay(p6: number) --[[ Line: 1065 ]]
+function PromiseModule.delay(p6: number)
 	-- upvalues: PromiseModule (copy), Connection (ref), Previous (ref)
 	assert(type(p6) == "number", "Bad argument #1 to Promise.delay, must be a number.")
 	
 	if p6 < 0.016666666666666666 or p6 == 1e999 then
 		p6 = 0.016666666666666666
 	end
-	return PromiseModule._new(debug.traceback(nil, 2), function(Resolve, _, Callback: (any) -> ()) --[[ Line: 1073 ]]
+	return PromiseModule._new(debug.traceback(nil, 2), function(Resolve, _, Callback: (any) -> ())
 		-- upvalues: PromiseModule (upval), p6 (ref), Connection (upval), Previous (upval)
 		local Time = PromiseModule._getTime()
 		local NewTime = Time + p6
@@ -723,7 +723,7 @@ function PromiseModule.delay(p6: number) --[[ Line: 1065 ]]
 		
 		if Connection == nil then
 			Previous = Previous1
-			Connection = PromiseModule._timeEvent:Connect(function() --[[ Line: 1085 ]]
+			Connection = PromiseModule._timeEvent:Connect(function()
 				-- upvalues: PromiseModule (upval), Previous (upval), Connection (upval)
 				local Time = PromiseModule._getTime()
 				while Previous ~= nil and Previous.endTime < Time do
@@ -758,7 +758,7 @@ function PromiseModule.delay(p6: number) --[[ Line: 1065 ]]
 			Previous.previous = Previous1
 			Previous = Previous1
 		end
-		Callback(function() --[[ Line: 1130 ]]
+		Callback(function()
 			-- upvalues: Previous1 (copy), Previous (upval), Connection (upval)
 			local Next1 = Previous1.next
 			
@@ -784,12 +784,12 @@ function PromiseModule.delay(p6: number) --[[ Line: 1065 ]]
 	end)
 end
 
-function PromiseModule.prototype.timeout(p7, p8, p9) --[[ Line: 1194 ]]
+function PromiseModule.prototype.timeout(p7, p8, p9)
 	-- upvalues: PromiseModule (copy), Module (ref)
 	local Traceback = debug.traceback(nil, 2)
 	
 	return PromiseModule.race({
-		PromiseModule.delay(p8):andThen(function() --[[ Line: 1198 ]]
+		PromiseModule.delay(p8):andThen(function()
 			-- upvalues: PromiseModule (upval), p9 (copy), Module (upval), p8 (copy), Traceback (copy)
 			return PromiseModule.reject(p9 == nil and Module.new({
 				error = "Timed out",
@@ -801,17 +801,17 @@ function PromiseModule.prototype.timeout(p7, p8, p9) --[[ Line: 1194 ]]
 	})
 end
 
-function PromiseModule.prototype.getStatus(p7) --[[ Line: 1218 ]]
+function PromiseModule.prototype.getStatus(p7)
 	return p7._status
 end
 
-function PromiseModule.prototype._andThen(Parent, Traceback, p7, p8) --[[ Line: 1227 ]]
+function PromiseModule.prototype._andThen(Parent, Traceback, p7, p8)
 	-- upvalues: PromiseModule (copy), runExecutor (copy), Module (ref)
 	Parent._unhandledRejection = false
 	
-	return PromiseModule._new(Traceback, function(p9, Callback2: (any) -> ()) --[[ Line: 1231 ]]
+	return PromiseModule._new(Traceback, function(p9, Callback2: (any) -> ())
 		-- upvalues: p7 (copy), Traceback (copy), runExecutor (upval), p8 (copy), Parent (copy), PromiseModule (upval), Module (upval)
-		local Callback: (any) -> () = if p7 then function(...) --[[ Line: 186 ]]
+		local Callback: (any) -> () = if p7 then function(...)
 			-- upvalues: runExecutor (upval), Traceback (copy), p7 (copy), p9 (copy), Callback2 (copy)
 			local v5, v6, v7 = runExecutor(Traceback, p7, ...)
 			
@@ -823,7 +823,7 @@ function PromiseModule.prototype._andThen(Parent, Traceback, p7, p8) --[[ Line: 
 				Callback2(v7[1])
 			end
 		end else p9
-		local Callback1: (any) -> () = if p8 then function(...) --[[ Line: 186 ]]
+		local Callback1: (any) -> () = if p8 then function(...)
 			-- upvalues: runExecutor (upval), Traceback (copy), p8 (copy), p9 (copy), Callback2 (copy)
 			local v5, v6, v7 = runExecutor(Traceback, p8, ...)
 			
@@ -862,7 +862,7 @@ function PromiseModule.prototype._andThen(Parent, Traceback, p7, p8) --[[ Line: 
 	end, Parent)
 end
 
-function PromiseModule.prototype.andThen(p7, Callback, Callback1) --[[ Line: 1288 ]]
+function PromiseModule.prototype.andThen(p7, Callback, Callback1)
 	local Flag = true
 	repeat
 		if Callback == nil then break end
@@ -903,7 +903,7 @@ function PromiseModule.prototype.andThen(p7, Callback, Callback1) --[[ Line: 128
 	return p7:_andThen(debug.traceback(nil, 2), Callback, Callback1)
 end
 
-function PromiseModule.prototype.andThenAsync(p7, Callback, Callback1) --[[ Line: 1316 ]]
+function PromiseModule.prototype.andThenAsync(p7, Callback, Callback1)
 	-- upvalues: pack (copy), PromiseModule (copy)
 	local Flag = true
 	repeat
@@ -942,26 +942,26 @@ function PromiseModule.prototype.andThenAsync(p7, Callback, Callback1) --[[ Line
 	until true
 	assert(Flag1, string.format("Please pass a handler function to %s!", "Promise:andThenAsync"))
 	
-	return p7:_andThen(debug.traceback(nil, 2), function(...) --[[ Line: 1323 ]]
+	return p7:_andThen(debug.traceback(nil, 2), function(...)
 		-- upvalues: pack (upval), PromiseModule (upval)
 		local PackResult, PackResult2 = pack(...)
 		
-		return PromiseModule.defer(function(Callback: (any) -> ()) --[[ Line: 1325 ]]
+		return PromiseModule.defer(function(Callback: (any) -> ())
 			-- upvalues: PackResult2 (copy), PackResult (copy)
 			Callback(unpack(PackResult2, 1, PackResult))
 		end)
-	end, function(...) --[[ Line: 1329 ]]
+	end, function(...)
 		-- upvalues: pack (upval), PromiseModule (upval)
 		local PackResult, PackResult2 = pack(...)
 		
-		return PromiseModule.defer(function(_, Callback: (any) -> ()) --[[ Line: 1331 ]]
+		return PromiseModule.defer(function(_, Callback: (any) -> ())
 			-- upvalues: PackResult2 (copy), PackResult (copy)
 			Callback(unpack(PackResult2, 1, PackResult))
 		end)
 	end):andThen(Callback, Callback1)
 end
 
-function PromiseModule.prototype.catch(p7, Callback) --[[ Line: 1358 ]]
+function PromiseModule.prototype.catch(p7, Callback)
 	local Flag = true
 	repeat
 		if Callback == nil then break end
@@ -984,7 +984,7 @@ function PromiseModule.prototype.catch(p7, Callback) --[[ Line: 1358 ]]
 	return p7:_andThen(debug.traceback(nil, 2), nil, Callback)
 end
 
-function PromiseModule.prototype.tap(p7, Callback) --[[ Line: 1379 ]]
+function PromiseModule.prototype.tap(p7, Callback)
 	-- upvalues: PromiseModule (copy), pack (copy)
 	local Flag = nil
 	repeat
@@ -1004,14 +1004,14 @@ function PromiseModule.prototype.tap(p7, Callback) --[[ Line: 1379 ]]
 	until true
 	assert(Flag, string.format("Please pass a handler function to %s!", "Promise:tap"))
 	
-	return p7:_andThen(debug.traceback(nil, 2), function(...) --[[ Line: 1381 ]]
+	return p7:_andThen(debug.traceback(nil, 2), function(...)
 		-- upvalues: Callback (copy), PromiseModule (upval), pack (upval)
 		local CallbackResult = Callback(...)
 		
 		if PromiseModule.is(CallbackResult) then
 			local PackResult, PackResult2 = pack(...)
 			
-			return CallbackResult:andThen(function() --[[ Line: 1386 ]]
+			return CallbackResult:andThen(function()
 				-- upvalues: PackResult2 (copy), PackResult (copy)
 				return unpack(PackResult2, 1, PackResult)
 			end)
@@ -1021,7 +1021,7 @@ function PromiseModule.prototype.tap(p7, Callback) --[[ Line: 1379 ]]
 	end)
 end
 
-function PromiseModule.prototype.andThenCall(p7, Callback, ...) --[[ Line: 1414 ]]
+function PromiseModule.prototype.andThenCall(p7, Callback, ...)
 	-- upvalues: pack (copy)
 	local Flag = nil
 	repeat
@@ -1042,23 +1042,23 @@ function PromiseModule.prototype.andThenCall(p7, Callback, ...) --[[ Line: 1414 
 	assert(Flag, string.format("Please pass a handler function to %s!", "Promise:andThenCall"))
 	local PackResult, PackResult2 = pack(...)
 	
-	return p7:_andThen(debug.traceback(nil, 2), function() --[[ Line: 1417 ]]
+	return p7:_andThen(debug.traceback(nil, 2), function()
 		-- upvalues: Callback (copy), PackResult2 (copy), PackResult (copy)
 		return Callback(unpack(PackResult2, 1, PackResult))
 	end)
 end
 
-function PromiseModule.prototype.andThenReturn(p7, ...) --[[ Line: 1444 ]]
+function PromiseModule.prototype.andThenReturn(p7, ...)
 	-- upvalues: pack (copy)
 	local PackResult, PackResult2 = pack(...)
 	
-	return p7:_andThen(debug.traceback(nil, 2), function() --[[ Line: 1446 ]]
+	return p7:_andThen(debug.traceback(nil, 2), function()
 		-- upvalues: PackResult2 (copy), PackResult (copy)
 		return unpack(PackResult2, 1, PackResult)
 	end)
 end
 
-function PromiseModule.prototype.cancel(p7) --[[ Line: 1462 ]]
+function PromiseModule.prototype.cancel(p7)
 	-- upvalues: PromiseModule (copy)
 	if p7._status ~= PromiseModule.Status.Started then return end
 	p7._status = PromiseModule.Status.Cancelled
@@ -1077,7 +1077,7 @@ function PromiseModule.prototype.cancel(p7) --[[ Line: 1462 ]]
 	p7:_finalize()
 end
 
-function PromiseModule.prototype._consumerCancelled(p8, p9) --[[ Line: 1490 ]]
+function PromiseModule.prototype._consumerCancelled(p8, p9)
 	-- upvalues: PromiseModule (copy)
 	if p8._status ~= PromiseModule.Status.Started then return end
 	p8._consumers[p9] = nil
@@ -1087,17 +1087,17 @@ function PromiseModule.prototype._consumerCancelled(p8, p9) --[[ Line: 1490 ]]
 	end
 end
 
-function PromiseModule.prototype._finally(Parent, Traceback, p8, p9) --[[ Line: 1506 ]]
+function PromiseModule.prototype._finally(Parent, Traceback, p8, p9)
 	-- upvalues: PromiseModule (copy), runExecutor (copy)
 	if not p9 then
 		Parent._unhandledRejection = false
 	end
-	return PromiseModule._new(Traceback, function(Callback1, Callback2) --[[ Line: 1512 ]]
+	return PromiseModule._new(Traceback, function(Callback1, Callback2)
 		-- upvalues: p8 (copy), Traceback (copy), runExecutor (upval), p9 (copy), Parent (copy), PromiseModule (upval)
-		local Callback: (any) -> () = if p9 then function(...) --[[ Line: 1520 ]]
+		local Callback: (any) -> () = if p9 then function(...)
 			-- upvalues: Parent (upval), PromiseModule (upval), Callback1 (copy), Callback (copy)
 			return if Parent._status == PromiseModule.Status.Rejected then Callback1(Parent) else Callback(...)
-		end elseif p8 then function(...) --[[ Line: 186 ]]
+		end elseif p8 then function(...)
 			-- upvalues: runExecutor (upval), Traceback (copy), p8 (copy), Callback1 (copy), Callback2 (copy)
 			local v5, v6, v7 = runExecutor(Traceback, p8, ...)
 			
@@ -1120,7 +1120,7 @@ function PromiseModule.prototype._finally(Parent, Traceback, p8, p9) --[[ Line: 
 	end, Parent)
 end
 
-function PromiseModule.prototype.finally(p8, Callback) --[[ Line: 1588 ]]
+function PromiseModule.prototype.finally(p8, Callback)
 	local Flag = true
 	repeat
 		if Callback == nil then break end
@@ -1143,7 +1143,7 @@ function PromiseModule.prototype.finally(p8, Callback) --[[ Line: 1588 ]]
 	return p8:_finally(debug.traceback(nil, 2), Callback)
 end
 
-function PromiseModule.prototype.finallyCall(p8, Callback, ...) --[[ Line: 1602 ]]
+function PromiseModule.prototype.finallyCall(p8, Callback, ...)
 	-- upvalues: pack (copy)
 	local Flag = nil
 	repeat
@@ -1164,23 +1164,23 @@ function PromiseModule.prototype.finallyCall(p8, Callback, ...) --[[ Line: 1602 
 	assert(Flag, string.format("Please pass a handler function to %s!", "Promise:finallyCall"))
 	local PackResult, PackResult2 = pack(...)
 	
-	return p8:_finally(debug.traceback(nil, 2), function() --[[ Line: 1605 ]]
+	return p8:_finally(debug.traceback(nil, 2), function()
 		-- upvalues: Callback (copy), PackResult2 (copy), PackResult (copy)
 		return Callback(unpack(PackResult2, 1, PackResult))
 	end)
 end
 
-function PromiseModule.prototype.finallyReturn(p8, ...) --[[ Line: 1628 ]]
+function PromiseModule.prototype.finallyReturn(p8, ...)
 	-- upvalues: pack (copy)
 	local PackResult, PackResult2 = pack(...)
 	
-	return p8:_finally(debug.traceback(nil, 2), function() --[[ Line: 1630 ]]
+	return p8:_finally(debug.traceback(nil, 2), function()
 		-- upvalues: PackResult2 (copy), PackResult (copy)
 		return unpack(PackResult2, 1, PackResult)
 	end)
 end
 
-function PromiseModule.prototype.done(p8, Callback) --[[ Line: 1638 ]]
+function PromiseModule.prototype.done(p8, Callback)
 	local Flag = true
 	repeat
 		if Callback == nil then break end
@@ -1203,7 +1203,7 @@ function PromiseModule.prototype.done(p8, Callback) --[[ Line: 1638 ]]
 	return p8:_finally(debug.traceback(nil, 2), Callback, true)
 end
 
-function PromiseModule.prototype.doneCall(p8, Callback, ...) --[[ Line: 1649 ]]
+function PromiseModule.prototype.doneCall(p8, Callback, ...)
 	-- upvalues: pack (copy)
 	local Flag = nil
 	repeat
@@ -1224,29 +1224,29 @@ function PromiseModule.prototype.doneCall(p8, Callback, ...) --[[ Line: 1649 ]]
 	assert(Flag, string.format("Please pass a handler function to %s!", "Promise:doneCall"))
 	local PackResult, PackResult2 = pack(...)
 	
-	return p8:_finally(debug.traceback(nil, 2), function() --[[ Line: 1652 ]]
+	return p8:_finally(debug.traceback(nil, 2), function()
 		-- upvalues: Callback (copy), PackResult2 (copy), PackResult (copy)
 		return Callback(unpack(PackResult2, 1, PackResult))
 	end, true)
 end
 
-function PromiseModule.prototype.doneReturn(p8, ...) --[[ Line: 1660 ]]
+function PromiseModule.prototype.doneReturn(p8, ...)
 	-- upvalues: pack (copy)
 	local PackResult, PackResult2 = pack(...)
 	
-	return p8:_finally(debug.traceback(nil, 2), function() --[[ Line: 1662 ]]
+	return p8:_finally(debug.traceback(nil, 2), function()
 		-- upvalues: PackResult2 (copy), PackResult (copy)
 		return unpack(PackResult2, 1, PackResult)
 	end, true)
 end
 
-function PromiseModule.prototype.awaitStatus(Promise) --[[ Line: 1674 ]]
+function PromiseModule.prototype.awaitStatus(Promise)
 	-- upvalues: PromiseModule (copy)
 	Promise._unhandledRejection = false
 	
 	if Promise._status == PromiseModule.Status.Started then
 		local CurrentThread = coroutine.running()
-		Promise:finally(function() --[[ Line: 1680 ]]
+		Promise:finally(function()
 			-- upvalues: CurrentThread (copy)
 			task.spawn(CurrentThread)
 		end)
@@ -1261,17 +1261,17 @@ function PromiseModule.prototype.awaitStatus(Promise) --[[ Line: 1674 ]]
 	end
 end
 
-local function awaitHelper(AwaitStatusResult, ...) --[[ Line: 1696 ]]
+local function awaitHelper(AwaitStatusResult, ...)
 	-- upvalues: PromiseModule (copy)
 	return AwaitStatusResult == PromiseModule.Status.Resolved, ...
 end
 
-function PromiseModule.prototype.await(p8) --[[ Line: 1721 ]]
+function PromiseModule.prototype.await(p8)
 	-- upvalues: awaitHelper (copy)
 	return awaitHelper(p8:awaitStatus())
 end
 
-local function expectHelper(AwaitStatusResult, ...) --[[ Line: 1725 ]]
+local function expectHelper(AwaitStatusResult, ...)
 	-- upvalues: PromiseModule (copy)
 	if AwaitStatusResult ~= PromiseModule.Status.Resolved then
 		error(if (...) == nil then "Expected Promise rejected with no value." else (...), 3)
@@ -1279,14 +1279,14 @@ local function expectHelper(AwaitStatusResult, ...) --[[ Line: 1725 ]]
 	return ...
 end
 
-function PromiseModule.prototype.expect(p8) --[[ Line: 1758 ]]
+function PromiseModule.prototype.expect(p8)
 	-- upvalues: expectHelper (copy)
 	return expectHelper(p8:awaitStatus())
 end
 
 PromiseModule.prototype.awaitValue = PromiseModule.prototype.expect
 
-function PromiseModule.prototype._unwrap(p8) --[[ Line: 1772 ]]
+function PromiseModule.prototype._unwrap(p8)
 	-- upvalues: PromiseModule (copy)
 	if p8._status == PromiseModule.Status.Started then
 		error("Promise has not resolved or rejected.", 2)
@@ -1294,7 +1294,7 @@ function PromiseModule.prototype._unwrap(p8) --[[ Line: 1772 ]]
 	return p8._status == PromiseModule.Status.Resolved, unpack(p8._values, 1, p8._valuesLength)
 end
 
-function PromiseModule.prototype._resolve(p8, ...) --[[ Line: 1782 ]]
+function PromiseModule.prototype._resolve(p8, ...)
 	-- upvalues: PromiseModule (copy), Module (ref), pack (copy)
 	if p8._status == PromiseModule.Status.Started then
 		if PromiseModule.is((...)) then
@@ -1302,10 +1302,10 @@ function PromiseModule.prototype._resolve(p8, ...) --[[ Line: 1782 ]]
 				warn((string.format("When returning a Promise from andThen, extra arguments are discarded! See:\n\n%s", p8._source)))
 			end
 			local Promise = (...)
-			local _parent = Promise:andThen(function(...) --[[ Line: 1803 ]]
+			local _parent = Promise:andThen(function(...)
 				-- upvalues: p8 (copy)
 				p8:_resolve(...)
-			end, function(...) --[[ Line: 1805 ]]
+			end, function(...)
 				-- upvalues: Promise (copy), Module (upval), p8 (copy)
 				local NewModule = if Promise._error then Module.new({
 					context = "[No stack trace available as this Promise originated from an older version of the Promise library (< v2)]",
@@ -1350,7 +1350,7 @@ function PromiseModule.prototype._resolve(p8, ...) --[[ Line: 1782 ]]
 	end
 end
 
-function PromiseModule.prototype._reject(p9, ...) --[[ Line: 1853 ]]
+function PromiseModule.prototype._reject(p9, ...)
 	-- upvalues: PromiseModule (copy), pack (copy)
 	if p9._status ~= PromiseModule.Status.Started then return end
 	p9._status = PromiseModule.Status.Rejected
@@ -1358,7 +1358,7 @@ function PromiseModule.prototype._reject(p9, ...) --[[ Line: 1853 ]]
 	
 	if next(p9._queuedReject) == nil then
 		local Text = tostring((...))
-		coroutine.wrap(function() --[[ Line: 1875 ]]
+		coroutine.wrap(function()
 			-- upvalues: PromiseModule (upval), p9 (copy), Text (copy)
 			PromiseModule._timeEvent:Wait()
 			
@@ -1385,7 +1385,7 @@ end
 local List = {}
 local DeferredThread = nil
 
-local function closeThreads() --[[ Line: 1906 ]]
+local function closeThreads()
 	-- upvalues: DeferredThread (ref), List (ref)
 	DeferredThread = nil
 	local Threads = List
@@ -1396,7 +1396,7 @@ local function closeThreads() --[[ Line: 1906 ]]
 	end
 end
 
-function PromiseModule.prototype._finalize(p10) --[[ Line: 1920 ]]
+function PromiseModule.prototype._finalize(p10)
 	-- upvalues: PromiseModule (copy), Result (ref), List (ref), DeferredThread (ref), closeThreads (copy)
 	for _, value in ipairs(p10._queuedFinally) do
 		coroutine.wrap(value)(p10._status)
@@ -1422,11 +1422,11 @@ function PromiseModule.prototype._finalize(p10) --[[ Line: 1920 ]]
 	end
 end
 
-function PromiseModule.prototype.now(p11, p12) --[[ Line: 1965 ]]
+function PromiseModule.prototype.now(p11, p12)
 	-- upvalues: PromiseModule (copy), Module (ref)
 	local Traceback = debug.traceback(nil, 2)
 	
-	return if p11._status == PromiseModule.Status.Resolved then p11:_andThen(Traceback, function(...) --[[ Line: 1968 ]]
+	return if p11._status == PromiseModule.Status.Resolved then p11:_andThen(Traceback, function(...)
 		return ...
 	end) else PromiseModule.reject(p12 == nil and Module.new({
 		error = "This Promise was not resolved in time for :now()",
@@ -1435,7 +1435,7 @@ function PromiseModule.prototype.now(p11, p12) --[[ Line: 1965 ]]
 	}) or p12)
 end
 
-function PromiseModule.retry(Callback, p11, ...) --[[ Line: 2010 ]]
+function PromiseModule.retry(Callback, p11, ...)
 	-- upvalues: PromiseModule (copy)
 	local Flag = nil
 	repeat
@@ -1458,13 +1458,13 @@ function PromiseModule.retry(Callback, p11, ...) --[[ Line: 2010 ]]
 	local list = { ... }
 	local Selected = select("#", ...)
 	
-	return PromiseModule.resolve(Callback(...)):catch(function(...) --[[ Line: 2016 ]]
+	return PromiseModule.resolve(Callback(...)):catch(function(...)
 		-- upvalues: p11 (copy), PromiseModule (upval), Callback (copy), list (copy), Selected (copy)
 		return if p11 > 0 then PromiseModule.retry(Callback, p11 - 1, unpack(list, 1, Selected)) else PromiseModule.reject(...)
 	end)
 end
 
-function PromiseModule.retryWithDelay(Callback, p11, p12, ...) --[[ Line: 2038 ]]
+function PromiseModule.retryWithDelay(Callback, p11, p12, ...)
 	-- upvalues: PromiseModule (copy)
 	local Flag = nil
 	repeat
@@ -1488,7 +1488,7 @@ function PromiseModule.retryWithDelay(Callback, p11, p12, ...) --[[ Line: 2038 ]
 	local list = { ... }
 	local Selected = select("#", ...)
 	
-	return PromiseModule.resolve(Callback(...)):catch(function(...) --[[ Line: 2045 ]]
+	return PromiseModule.resolve(Callback(...)):catch(function(...)
 		-- upvalues: p11 (copy), PromiseModule (upval), p12 (copy), Callback (copy), list (copy), Selected (copy)
 		if p11 > 0 then
 			PromiseModule.delay(p12):await()
@@ -1500,24 +1500,24 @@ function PromiseModule.retryWithDelay(Callback, p11, p12, ...) --[[ Line: 2038 ]
 	end)
 end
 
-function PromiseModule.fromEvent(Signal, p11) --[[ Line: 2080 ]]
+function PromiseModule.fromEvent(Signal, p11)
 	-- upvalues: PromiseModule (copy)
-	local Callback = p11 or function(): boolean --[[ Line: 2081 ]]
+	local Callback = p11 or function(): boolean
 		return true
 	end
 	
-	return PromiseModule._new(debug.traceback(nil, 2), function(Callback2, _, Callback1: (any) -> ()) --[[ Line: 2085 ]]
+	return PromiseModule._new(debug.traceback(nil, 2), function(Callback2, _, Callback1: (any) -> ())
 		-- upvalues: Signal (copy), Callback (ref)
 		local Connection = nil
 		local Flag = false
 		
-		local function disconnect() --[[ Line: 2089 ]]
+		local function disconnect()
 			-- upvalues: Connection (ref)
 			Connection:Disconnect()
 			Connection = nil
 		end
 		
-		Connection = Signal:Connect(function(...) --[[ Line: 2098 ]]
+		Connection = Signal:Connect(function(...)
 			-- upvalues: Callback (upval), Callback2 (copy), Connection (ref), Flag (ref)
 			local CallbackResult = Callback(...)
 			
@@ -1547,11 +1547,11 @@ function PromiseModule.fromEvent(Signal, p11) --[[ Line: 2080 ]]
 	end)
 end
 
-function PromiseModule.onUnhandledRejection(Value) --[[ Line: 2132 ]]
+function PromiseModule.onUnhandledRejection(Value)
 	-- upvalues: PromiseModule (copy)
 	table.insert(PromiseModule._unhandledRejectionCallbacks, Value)
 	
-	return function() --[[ Line: 2135 ]]
+	return function()
 		-- upvalues: PromiseModule (upval), Value (copy)
 		local FoundIndex: number? = table.find(PromiseModule._unhandledRejectionCallbacks, Value)
 		

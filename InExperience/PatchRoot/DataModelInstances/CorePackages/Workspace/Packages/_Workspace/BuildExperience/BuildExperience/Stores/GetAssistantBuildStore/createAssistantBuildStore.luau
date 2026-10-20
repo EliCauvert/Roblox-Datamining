@@ -3,10 +3,10 @@ local FFlagBuildExperienceInGameShell = require(Parent.SharedFlags).FFlagBuildEx
 local DisplayModule = if FFlagBuildExperienceInGameShell then nil else require(Parent.Display)
 local SignalsModule = require(Parent.Signals)
 
-return function() --[[ Line: 17 | Named "createAssistantBuildStore" ]]
+return function()
 	-- upvalues: FFlagBuildExperienceInGameShell (copy), SignalsModule (copy), DisplayModule (copy)
 	local Signal = nil
-	Signal = if FFlagBuildExperienceInGameShell then SignalsModule.createSignal(false) else SignalsModule.createComputed(function(p1): boolean --[[ Line: 22 ]]
+	Signal = if FFlagBuildExperienceInGameShell then SignalsModule.createSignal(false) else SignalsModule.createComputed(function(p1): boolean
 		-- upvalues: DisplayModule (upval)
 		local DisplayStore = DisplayModule.GetDisplayStore(p1)
 		local ViewportSize = DisplayStore.getViewportSize(p1)
@@ -20,7 +20,7 @@ return function() --[[ Line: 17 | Named "createAssistantBuildStore" ]]
 		getIsDisabled = Signal,
 		getIsDisabledTooltipOpen = Signal1,
 		getIsOverlayVisible = Signal3,
-		activate = function() --[[ Line: 32 ]]
+		activate = function()
 			-- upvalues: Signal (ref), Signal2 (copy), Signal1 (copy), Signal2_1 (copy), Signal3 (copy)
 			if Signal(false) then
 				Signal2(not Signal1(false))

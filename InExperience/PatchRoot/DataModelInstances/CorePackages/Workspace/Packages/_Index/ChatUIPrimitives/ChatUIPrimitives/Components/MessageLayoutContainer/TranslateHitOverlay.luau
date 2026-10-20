@@ -1,6 +1,6 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("ChatUIPrimitives").Parent.React)
 
-return ReactModule.memo(function(p1) --[[ Line: 32 | Named "TranslateHitOverlay" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy)
 	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

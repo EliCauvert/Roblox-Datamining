@@ -5,7 +5,7 @@ local _ = require(SduiCoreSystem.SduiBuilderTypes)
 local _ = require(SduiCoreSystem.SduiConfigTypes)
 local GetSduiActionHandlerRegistryModule = require(SduiCoreSystem.getSduiActionHandlerRegistry)
 
-return function(p1, p2, p3, p4) --[[ Line: 17 | Named "executeAction" ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: GetSduiActionHandlerRegistryModule (copy), LogActionTelemetryModule (copy)
 	if not p1 then return end
 	assert(p1, "actionConfig must exist")

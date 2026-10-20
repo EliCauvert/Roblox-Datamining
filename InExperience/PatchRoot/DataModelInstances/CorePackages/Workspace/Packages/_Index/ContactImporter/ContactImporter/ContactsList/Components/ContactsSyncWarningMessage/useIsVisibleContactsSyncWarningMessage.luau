@@ -2,17 +2,17 @@
 local ContactsSyncWarningCacheModule = require(script.Parent.ContactsSyncWarningCache)
 local ContactsSyncWarningImpressionsCountCap = game:DefineFastInt("ContactsSyncWarningImpressionsCountCap", 1)
 
-local function isMessageHiddenInitState(): boolean --[[ Line: 9 ]]
+local function isMessageHiddenInitState(): boolean
 	-- upvalues: ContactsSyncWarningCacheModule (copy), ContactsSyncWarningImpressionsCountCap (copy)
 	local Value = ContactsSyncWarningCacheModule.getValue() or 0
 	
 	return Value < 0 or ContactsSyncWarningImpressionsCountCap <= Value
 end
 
-return function(): boolean --[[ Line: 14 | Named "useIsVisibleContactsSyncWarningMessage" ]]
+return function(): boolean
 	-- upvalues: ReactModule (copy), isMessageHiddenInitState (copy), ContactsSyncWarningCacheModule (copy)
 	local UseStateResult = ReactModule.useState(isMessageHiddenInitState)
-	ReactModule.useEffect(function() --[[ Line: 18 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), ContactsSyncWarningCacheModule (upval)
 		if not UseStateResult then
 			ContactsSyncWarningCacheModule.incrementValue()

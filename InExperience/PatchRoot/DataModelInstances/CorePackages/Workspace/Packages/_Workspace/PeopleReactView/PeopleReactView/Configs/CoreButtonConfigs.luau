@@ -27,7 +27,7 @@ local GetSwitchServerStoreFunction = SwitchServerModule.GetSwitchServerStore
 local SwitchServerTelemetry = SwitchServerModule.SwitchServerTelemetry
 local Flag = false
 
-local function _() --[[ Line: 57 | Named "sendSwitchServerButtonImpressionOnce" ]]
+local function _()
 	-- upvalues: Flag (ref), SwitchServerTelemetry (copy)
 	if not Flag then
 		Flag = true
@@ -35,9 +35,9 @@ local function _() --[[ Line: 57 | Named "sendSwitchServerButtonImpressionOnce" 
 	end
 end
 
-return function(p1, p2) --[[ Line: 66 | Named "useCoreButtonConfigs" ]]
+return function(p1, p2)
 	-- upvalues: FFlagShowSwitchServerButton (copy), FFlagPeopleTabUseSwitchServerModule (copy), ReactModule (copy), SignalsModule (copy), RunService (copy), RobloxReplicatedStorage (copy), UseSignalStateFunction (copy), GetSwitchServerStoreFunction (copy), UseLocalizationFunction (copy), ConstantsModule (copy), Constants (copy), PeopleServiceModule (copy), UseSignalBindingFunction (copy), FFlagHidePeoplePageInviteFriends (copy), FFlagAddInviteFriendsIntegration (copy), IsSideSheetEnabledModule (copy), GetFFlagNewPeoplePageIconsFunction (copy), Players (copy), STANDARDSERVER (copy), FFlagEnablePeoplePageButtonOnMount (copy), Flag (ref), SwitchServerTelemetry (copy)
-	local UseMemoResult = if FFlagShowSwitchServerButton and not FFlagPeopleTabUseSwitchServerModule then ReactModule.useMemo(function() --[[ Line: 72 ]]
+	local UseMemoResult = if FFlagShowSwitchServerButton and not FFlagPeopleTabUseSwitchServerModule then ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), RunService (upval), RobloxReplicatedStorage (upval)
 		local Signal, Signal2 = SignalsModule.createSignal(nil)
 		
@@ -45,7 +45,7 @@ return function(p1, p2) --[[ Line: 66 | Named "useCoreButtonConfigs" ]]
 			local GetServerType = RobloxReplicatedStorage:WaitForChild("GetServerType", 2)
 			
 			if GetServerType then
-				local Success, Result = pcall(function() --[[ Line: 78 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: GetServerType (copy)
 					return GetServerType:InvokeServer()
 				end)
@@ -76,11 +76,11 @@ return function(p1, p2) --[[ Line: 66 | Named "useCoreButtonConfigs" ]]
 	local UseSignalBindingResult = UseSignalBindingFunction(AllPlayersMuted)
 	local LocalMuted = PeopleVoiceChatStoreService.localMuted
 	local UseSignalBindingResult1 = UseSignalBindingFunction(LocalMuted)
-	local MapResult = UseSignalBindingResult:map(function(p3) --[[ Line: 117 ]]
+	local MapResult = UseSignalBindingResult:map(function(p3)
 		-- upvalues: UseLocalizationResult (copy)
 		return p3 and UseLocalizationResult.unmuteAll or UseLocalizationResult.muteAll
 	end)
-	local MapResult1 = UseSignalBindingResult1:map(function(p3) --[[ Line: 121 ]]
+	local MapResult1 = UseSignalBindingResult1:map(function(p3)
 		-- upvalues: UseLocalizationResult (copy)
 		local MuteSelf = nil
 		repeat
@@ -97,7 +97,7 @@ return function(p1, p2) --[[ Line: 66 | Named "useCoreButtonConfigs" ]]
 		return MuteSelf
 	end)
 	
-	return (ReactModule.useMemo(function() --[[ Line: 128 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: FFlagHidePeoplePageInviteFriends (upval), FFlagAddInviteFriendsIntegration (upval), IsSideSheetEnabledModule (upval), UseLocalizationResult (copy), GetFFlagNewPeoplePageIconsFunction (upval), ConstantsModule (upval), RunService (upval), Players (upval), SettingsHubService (copy), PeopleAnalyticsManagerService (copy), MapResult (copy), AllPlayersMuted (copy), UseSignalStateResult2 (copy), UseSignalBindingResult (copy), PeopleVoiceChatStoreService (copy), FFlagShowSwitchServerButton (upval), Constants (upval), FFlagPeopleTabUseSwitchServerModule (upval), UseSignalStateResult1 (copy), UseSignalStateResult (copy), STANDARDSERVER (upval), p2 (copy), FFlagEnablePeoplePageButtonOnMount (upval), Flag (upval), SwitchServerTelemetry (upval), MapResult1 (copy), LocalMuted (copy), p1 (copy), UseSignalBindingResult1 (copy)
 		local List = {}
 		
@@ -108,11 +108,11 @@ return function(p1, p2) --[[ Line: 66 | Named "useCoreButtonConfigs" ]]
 				text = UseLocalizationResult.inviteFriends,
 				onIcon = if GetFFlagNewPeoplePageIconsFunction() then ConstantsModule.PEOPLEPAGE.CORE_BUTTONS.ICON.INVITE_FRIENDS_NEW else ConstantsModule.PEOPLEPAGE.CORE_BUTTONS.ICON.INVITE_FRIENDS_LEGACY,
 				isNewIcon = GetFFlagNewPeoplePageIconsFunction(),
-				shouldShow = function(): boolean --[[ Line: 140 ]]
+				shouldShow = function(): boolean
 					-- upvalues: RunService (upval), Players (upval)
 					return not RunService:IsStudio() and (Players.LocalPlayer ~= nil and Players.LocalPlayer.UserId > 0)
 				end,
-				onActivated = function() --[[ Line: 143 ]]
+				onActivated = function()
 					-- upvalues: SettingsHubService (upval), PeopleAnalyticsManagerService (upval)
 					local HubRefResult = SettingsHubService.hubRef()
 					
@@ -131,11 +131,11 @@ return function(p1, p2) --[[ Line: 66 | Named "useCoreButtonConfigs" ]]
 			offIcon = if GetFFlagNewPeoplePageIconsFunction() then ConstantsModule.PEOPLEPAGE.CORE_BUTTONS.ICON.HEADPHONE_MUTED_NEW else ConstantsModule.PEOPLEPAGE.CORE_BUTTONS.ICON.HEADPHONE_MUTED_LEGACY,
 			buttonState = AllPlayersMuted,
 			isNewIcon = GetFFlagNewPeoplePageIconsFunction(),
-			shouldShow = function() --[[ Line: 168 ]]
+			shouldShow = function()
 				-- upvalues: UseSignalStateResult2 (upval)
 				return UseSignalStateResult2
 			end,
-			onActivated = function() --[[ Line: 171 ]]
+			onActivated = function()
 				-- upvalues: UseSignalBindingResult (upval), PeopleAnalyticsManagerService (upval), PeopleVoiceChatStoreService (upval)
 				PeopleAnalyticsManagerService:trackToggleMuteAll((UseSignalBindingResult:getValue()))
 				PeopleVoiceChatStoreService.toggleMuteAll()
@@ -149,12 +149,12 @@ return function(p1, p2) --[[ Line: 66 | Named "useCoreButtonConfigs" ]]
 				layoutOrder = 3,
 				text = UseLocalizationResult.switchServer,
 				onIcon = Constants.BUTTON.ICON,
-				shouldShow = function() --[[ Line: 188 ]]
+				shouldShow = function()
 					-- upvalues: FFlagPeopleTabUseSwitchServerModule (upval), UseSignalStateResult1 (upval), UseSignalStateResult (upval), STANDARDSERVER (upval), Players (upval)
 					return if FFlagPeopleTabUseSwitchServerModule then UseSignalStateResult1 else game:GetEngineFeature("GameIdToExcludeAvailable") and (UseSignalStateResult == STANDARDSERVER and Players.MaxPlayers > 1)
 				end,
 				onActivated = p2[ConstantsModule.PEOPLEPAGE.BUTTON_ACTIVATED_TABLE_KEYS.SWITCH_SERVER],
-				onMount = if FFlagEnablePeoplePageButtonOnMount then function() --[[ Line: 200 ]]
+				onMount = if FFlagEnablePeoplePageButtonOnMount then function()
 					-- upvalues: Flag (upval), SwitchServerTelemetry (upval)
 					if not Flag then
 						Flag = true
@@ -171,11 +171,11 @@ return function(p1, p2) --[[ Line: 66 | Named "useCoreButtonConfigs" ]]
 			offIcon = ConstantsModule.PEOPLEPAGE.CORE_BUTTONS.ICON.MICROPHONE_MUTED,
 			animatedIcon = PeopleVoiceChatStoreService.getMuteSelfIcon(),
 			buttonState = LocalMuted,
-			shouldShow = function(): boolean --[[ Line: 216 ]]
+			shouldShow = function(): boolean
 				-- upvalues: UseSignalStateResult2 (upval), p1 (upval)
 				return UseSignalStateResult2 and not p1
 			end,
-			onActivated = function() --[[ Line: 219 ]]
+			onActivated = function()
 				-- upvalues: UseSignalBindingResult1 (upval), PeopleAnalyticsManagerService (upval), PeopleVoiceChatStoreService (upval)
 				PeopleAnalyticsManagerService:trackToggleMuteSelf(UseSignalBindingResult1:getValue() or false)
 				PeopleVoiceChatStoreService.toggleMuteSelf()

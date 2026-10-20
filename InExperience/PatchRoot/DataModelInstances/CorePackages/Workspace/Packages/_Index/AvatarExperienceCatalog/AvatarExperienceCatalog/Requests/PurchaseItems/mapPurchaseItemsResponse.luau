@@ -1,6 +1,6 @@
 ﻿local GetTryOnItemReducerKeyFunction = require(script:FindFirstAncestor("AvatarExperienceCatalog").Parent.AvatarExperienceCommon).Utils.getTryOnItemReducerKey
 
-return function(p1) --[[ Line: 9 | Named "mapPurchaseItemsResponse" ]]
+return function(p1)
 	-- upvalues: GetTryOnItemReducerKeyFunction (copy)
 	local LineItems = {}
 	

@@ -1,12 +1,12 @@
 ﻿local MemStorageService = game:GetService("MemStorageService")
 local HttpService = game:GetService("HttpService")
 
-return function(p1) --[[ Line: 8 ]]
+return function(p1)
 	-- upvalues: MemStorageService (copy), HttpService (copy)
 	local config = {
-		persist = function(_, Input) --[[ Line: 10 ]]
+		persist = function(_, Input)
 			-- upvalues: MemStorageService (upval), p1 (copy), HttpService (upval)
-			local Success, _ = pcall(function() --[[ Line: 11 ]]
+			local Success, _ = pcall(function()
 				-- upvalues: MemStorageService (upval), p1 (upval), HttpService (upval), Input (copy)
 				MemStorageService:SetItem(p1.storeKey, HttpService:JSONEncode(Input))
 			end)
@@ -16,9 +16,9 @@ return function(p1) --[[ Line: 8 ]]
 			end
 			return Success
 		end,
-		restore = function() --[[ Line: 19 ]]
+		restore = function()
 			-- upvalues: MemStorageService (upval), p1 (copy), HttpService (upval)
-			local Success, Result = pcall(function() --[[ Line: 20 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: MemStorageService (upval), p1 (upval), HttpService (upval)
 				local Item = MemStorageService:GetItem(p1.storeKey)
 				
@@ -27,9 +27,9 @@ return function(p1) --[[ Line: 8 ]]
 			
 			return if Success then Result else nil
 		end,
-		clean = function() --[[ Line: 32 ]]
+		clean = function()
 			-- upvalues: MemStorageService (upval), p1 (copy)
-			local Success, _ = pcall(function() --[[ Line: 33 ]]
+			local Success, _ = pcall(function()
 				-- upvalues: MemStorageService (upval), p1 (upval)
 				MemStorageService:SetItem(p1.storeKey, "")
 			end)
@@ -41,16 +41,16 @@ return function(p1) --[[ Line: 8 ]]
 		end
 	}
 	
-	function config:getMiddleware() --[[ Line: 43 ]]
+	function config:getMiddleware()
 		-- upvalues: config (copy)
-		return function(Callback, p2) --[[ Line: 44 ]]
+		return function(Callback, p2)
 			-- upvalues: config (upval)
-			p2.changed:connect(function(Value, _) --[[ Line: 47 ]]
+			p2.changed:connect(function(Value, _)
 				-- upvalues: config (upval), p2 (copy)
 				config.persist(p2, Value)
 			end)
 			
-			return function(p3) --[[ Line: 50 ]]
+			return function(p3)
 				-- upvalues: Callback (copy)
 				return Callback(p3)
 			end

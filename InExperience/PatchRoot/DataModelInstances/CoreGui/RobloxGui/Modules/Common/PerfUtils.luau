@@ -12,17 +12,17 @@ local v1 = require(script.Parent.Flags.GetFFlagEnableInGameMenuDurationLogger)()
 local FrameRateManager = if StatsService then StatsService:FindFirstChild("FrameRateManager") else nil
 local RenderAverage = if FrameRateManager then FrameRateManager:FindFirstChild("RenderAverage") else nil
 
-local function _(): number --[[ Line: 26 | Named "getCurrentMenuVersion" ]]
+local function _(): number
 	-- upvalues: IsNewInGameMenuEnabledModule (copy)
 	return if IsNewInGameMenuEnabledModule() then 2 else 1
 end
 
-local _ = function(p1) --[[ Line: 33 | Named "getMenuAnimationTime" ]]
+local _ = function(p1)
 	-- upvalues: ConstantsModule (copy)
 	return if p1 then ConstantsModule.ShieldOpenAnimationTweenTime else ConstantsModule.ShieldCloseAnimationTweenTime
 end
 
-local _ = function(): number --[[ Line: 40 | Named "getMonoTimeSec" ]]
+local _ = function(): number
 	return os.clock()
 end
 
@@ -35,7 +35,7 @@ local Flag = false
 local Interrupted_opening = false
 local Count = 0
 
-local function sendEvent(AnalyticsGameMenuCloseStart: string, p1) --[[ Line: 63 ]]
+local function sendEvent(AnalyticsGameMenuCloseStart: string, p1)
 	-- upvalues: RenderAverage (copy), IsNewInGameMenuEnabledModule (copy), v1 (copy), Default (copy), SendAnalyticsModule (copy), Constants (copy)
 	p1.fps = if RenderAverage then 1000 / RenderAverage:GetValue() else nil
 	p1.menu_version = if IsNewInGameMenuEnabledModule() then 2 else 1
@@ -53,7 +53,7 @@ local function sendEvent(AnalyticsGameMenuCloseStart: string, p1) --[[ Line: 63 
 	end
 end
 
-local function sendMenuOpening() --[[ Line: 89 ]]
+local function sendMenuOpening()
 	-- upvalues: v1 (copy), Constants (copy), Guid1 (ref), Guid (copy), Count (ref), Flag (ref), sendEvent (copy)
 	local AnalyticsGameMenuOpenStart = if v1 then Constants.AnalyticsGameMenuOpenStart else Constants.AnalyticsPerfMenuOpening
 	local config = {
@@ -69,7 +69,7 @@ local function sendMenuOpening() --[[ Line: 89 ]]
 	sendEvent(AnalyticsGameMenuOpenStart, config)
 end
 
-local _ = function(Transition_time_total, Transition_time_normalized) --[[ Line: 105 | Named "sendMenuStarted" ]]
+local _ = function(Transition_time_total, Transition_time_normalized)
 	-- upvalues: v1 (copy), Constants (copy), sendEvent (copy), Guid1 (ref)
 	sendEvent(if v1 then Constants.AnalyticsGameMenuOpenEnd else Constants.AnalyticsPerfMenuStarted, {
 		menu_session = Guid1,
@@ -78,7 +78,7 @@ local _ = function(Transition_time_total, Transition_time_normalized) --[[ Line:
 	})
 end
 
-local function sendMenuClosed(Transition_time_total, Transition_time_normalized) --[[ Line: 114 ]]
+local function sendMenuClosed(Transition_time_total, Transition_time_normalized)
 	-- upvalues: v1 (copy), Constants (copy), Menu_session (ref), sendEvent (copy)
 	local config = {
 		menu_session = Menu_session,
@@ -92,7 +92,7 @@ local function sendMenuClosed(Transition_time_total, Transition_time_normalized)
 	end
 end
 
-local _ = function(Session_time, p1) --[[ Line: 128 | Named "sendMenuEnding" ]]
+local _ = function(Session_time, p1)
 	-- upvalues: v1 (copy), Constants (copy), sendEvent (copy), Guid1 (ref), Interrupted_opening (ref)
 	sendEvent(if v1 then Constants.AnalyticsGameMenuCloseStart else Constants.AnalyticsPerfMenuEnding, {
 		menu_session = Guid1,
@@ -103,7 +103,7 @@ local _ = function(Session_time, p1) --[[ Line: 128 | Named "sendMenuEnding" ]]
 end
 
 return {
-	menuOpenBegin = function() --[[ Line: 140 ]]
+	menuOpenBegin = function()
 		-- upvalues: Guid1 (ref), Count (ref), ClockTime (ref), HttpService (copy), sendMenuOpening (copy), Interrupted_opening (ref), Flag (ref)
 		if not Guid1 then
 			Count += 1
@@ -116,7 +116,7 @@ return {
 			return
 		end
 	end,
-	menuOpenComplete = function() --[[ Line: 152 ]]
+	menuOpenComplete = function()
 		-- upvalues: ClockTime (ref), ConstantsModule (copy), v1 (copy), Constants (copy), sendEvent (copy), Guid1 (ref), Interrupted_opening (ref)
 		local Elapsed = os.clock() - ClockTime
 		sendEvent(if v1 then Constants.AnalyticsGameMenuOpenEnd else Constants.AnalyticsPerfMenuStarted, {
@@ -126,7 +126,7 @@ return {
 		})
 		Interrupted_opening = false
 	end,
-	menuClose = function() --[[ Line: 159 ]]
+	menuClose = function()
 		-- upvalues: ClockTime1 (ref), ClockTime (ref), v1 (copy), Constants (copy), sendEvent (copy), Guid1 (ref), Interrupted_opening (ref), Menu_session (ref), Flag (ref)
 		ClockTime1 = os.clock()
 		sendEvent(if v1 then Constants.AnalyticsGameMenuCloseStart else Constants.AnalyticsPerfMenuEnding, {
@@ -140,14 +140,14 @@ return {
 		Interrupted_opening = false
 		Flag = true
 	end,
-	menuCloseComplete = function() --[[ Line: 168 ]]
+	menuCloseComplete = function()
 		-- upvalues: ClockTime1 (ref), ConstantsModule (copy), sendMenuClosed (copy), Menu_session (ref), Flag (ref)
 		local Elapsed = os.clock() - ClockTime1
 		sendMenuClosed(Elapsed, Elapsed - ConstantsModule.ShieldCloseAnimationTweenTime)
 		Menu_session = nil
 		Flag = false
 	end,
-	leavingGame = function() --[[ Line: 176 ]]
+	leavingGame = function()
 		-- upvalues: ClockTime (ref), v1 (copy), Constants (copy), sendEvent (copy), Guid1 (ref), Interrupted_opening (ref)
 		sendEvent(if v1 then Constants.AnalyticsGameMenuCloseStart else Constants.AnalyticsPerfMenuEnding, {
 			reason = "leaving",
@@ -157,7 +157,7 @@ return {
 		})
 		Guid1 = nil
 	end,
-	getFps = function() --[[ Line: 44 ]]
+	getFps = function()
 		-- upvalues: RenderAverage (copy)
 		return if RenderAverage then 1000 / RenderAverage:GetValue() else nil
 	end

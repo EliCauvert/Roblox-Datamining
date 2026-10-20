@@ -1,14 +1,14 @@
 ﻿local AppStorageService = game:GetService("AppStorageService")
 local RobloxPlusUnifiedBuyModalBannerImpressionModule = {
-	canUseAppStorage = function() --[[ Line: 16 ]]
+	canUseAppStorage = function()
 		return game:GetEngineFeature("RobloxPlusImpressionStorageKey")
 	end
 }
 
-function RobloxPlusUnifiedBuyModalBannerImpressionModule.getImpressionCount(): number --[[ Line: 20 ]]
+function RobloxPlusUnifiedBuyModalBannerImpressionModule.getImpressionCount(): number
 	-- upvalues: RobloxPlusUnifiedBuyModalBannerImpressionModule (copy), AppStorageService (copy)
 	if RobloxPlusUnifiedBuyModalBannerImpressionModule.canUseAppStorage() then
-		local Success, Result = pcall(function() --[[ Line: 24 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: AppStorageService (upval)
 			return AppStorageService:GetItem("RobloxPlusUpsellBannerUnifiedBuyModalImpressionCount")
 		end)
@@ -19,10 +19,10 @@ function RobloxPlusUnifiedBuyModalBannerImpressionModule.getImpressionCount(): n
 	end
 end
 
-function RobloxPlusUnifiedBuyModalBannerImpressionModule.incrementImpressionCount() --[[ Line: 33 ]]
+function RobloxPlusUnifiedBuyModalBannerImpressionModule.incrementImpressionCount()
 	-- upvalues: RobloxPlusUnifiedBuyModalBannerImpressionModule (copy), AppStorageService (copy)
 	if RobloxPlusUnifiedBuyModalBannerImpressionModule.canUseAppStorage() then
-		pcall(function() --[[ Line: 37 ]]
+		pcall(function()
 			-- upvalues: RobloxPlusUnifiedBuyModalBannerImpressionModule (upval), AppStorageService (upval)
 			AppStorageService:SetItem("RobloxPlusUpsellBannerUnifiedBuyModalImpressionCount", (tostring(RobloxPlusUnifiedBuyModalBannerImpressionModule.getImpressionCount() + 1)))
 			AppStorageService:Flush()

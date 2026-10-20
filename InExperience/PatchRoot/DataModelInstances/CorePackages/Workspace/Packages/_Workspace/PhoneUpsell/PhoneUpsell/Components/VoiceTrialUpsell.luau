@@ -24,7 +24,7 @@ local SetCurrentToastMessageFunction = ToastRoduxModule.Actions.SetCurrentToastM
 local PostUpsellTrialOptInModule = require(PhoneUpsell.Http.Requests.PostUpsellTrialOptIn)
 local t = {}
 
-local function getButtonStackProps(Text, ButtonHeight, OnActivated, Text1, OnActivated1) --[[ Line: 35 ]]
+local function getButtonStackProps(Text, ButtonHeight, OnActivated, Text1, OnActivated1)
 	-- upvalues: ButtonType (copy)
 	local Buttons = {
 		{
@@ -42,7 +42,7 @@ local function getButtonStackProps(Text, ButtonHeight, OnActivated, Text1, OnAct
 	return { buttonHeight = ButtonHeight, buttons = Buttons }
 end
 
-return function(p1) --[[ Line: 67 | Named "VoiceTrialUpsell" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), t (copy), UseDispatchFunction (copy), UseRefFunction (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), PostUserOptInFunction (copy), PostUpsellTrialOptInModule (copy), SetCurrentToastMessageFunction (copy), ToastRoduxModule (copy), Images (copy), ReactModule (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigableSurfaceIdentifierEnum (copy), InteractiveAlert (copy), getButtonStackProps (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UnionResult = CryoModule.Dictionary.union(t, p1)
 	local UseDispatchResult = UseDispatchFunction()
@@ -65,13 +65,13 @@ return function(p1) --[[ Line: 67 | Named "VoiceTrialUpsell" ]]
 		Modal = ReactModule.createElement(InteractiveAlert, {
 			title = UseLocalizationResult.titleKey,
 			screenSize = if UseRefResult and UseRefResult.current then UseRefResult.current.AbsoluteSize else Vector2.new(500, 500),
-			buttonStackInfo = getButtonStackProps(UseLocalizationResult.buttonKey, UseStyleResult.Tokens.Size.Size_1200, function() --[[ Line: 84 | Named "handleTurnOn" ]]
+			buttonStackInfo = getButtonStackProps(UseLocalizationResult.buttonKey, UseStyleResult.Tokens.Size.Size_1200, function()
 				-- upvalues: UnionResult (copy), PostUserOptInFunction (upval), UseRoactServiceResult (copy), PostUpsellTrialOptInModule (upval), UseDispatchResult (copy), SetCurrentToastMessageFunction (upval), ToastRoduxModule (upval), Images (upval), UseStyleResult (copy)
 				UnionResult.onClose()
-				PostUserOptInFunction(UseRoactServiceResult, true, false):andThen(function(_) --[[ Line: 87 ]]
+				PostUserOptInFunction(UseRoactServiceResult, true, false):andThen(function(_)
 					-- upvalues: PostUpsellTrialOptInModule (upval), UseRoactServiceResult (upval), UnionResult (upval)
 					return PostUpsellTrialOptInModule(UseRoactServiceResult, UnionResult.upsellCardType)
-				end):andThen(function() --[[ Line: 90 ]]
+				end):andThen(function()
 					-- upvalues: UseDispatchResult (upval), SetCurrentToastMessageFunction (upval), ToastRoduxModule (upval), Images (upval), UseStyleResult (upval), UnionResult (upval)
 					UseDispatchResult(SetCurrentToastMessageFunction({
 						toastMessage = "Feature.VerificationUpsell.Heading.VoiceChatTurnedOn",
@@ -84,7 +84,7 @@ return function(p1) --[[ Line: 67 | Named "VoiceTrialUpsell" ]]
 						}
 					}))
 					UnionResult.onCompletion()
-				end):catch(function() --[[ Line: 103 ]]
+				end):catch(function()
 					-- upvalues: UseDispatchResult (upval), SetCurrentToastMessageFunction (upval), ToastRoduxModule (upval), UseStyleResult (upval)
 					UseDispatchResult(SetCurrentToastMessageFunction({
 						toastMessage = "Feature.VerificationUpsell.Heading.VoiceChatJoinFailed",
@@ -96,7 +96,7 @@ return function(p1) --[[ Line: 67 | Named "VoiceTrialUpsell" ]]
 				end)
 			end, UseLocalizationResult.extraButtonKey, UnionResult.onClose),
 			onCloseClicked = UnionResult.onClose,
-			middleContent = function() --[[ Line: 135 ]]
+			middleContent = function()
 				-- upvalues: ReactModule (upval), UseLocalizationResult (copy), BaseSize (copy), UseStyleResult (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 				return ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,

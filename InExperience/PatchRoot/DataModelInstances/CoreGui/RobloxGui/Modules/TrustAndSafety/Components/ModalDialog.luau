@@ -27,11 +27,11 @@ ModalDialog.validateProps = TModule.strictInterface({
 	onBackButtonActivated = TModule.optional(TModule.callback)
 })
 
-function ModalDialog.init(p1) --[[ Line: 44 ]]
+function ModalDialog.init(p1)
 	-- upvalues: VirtualKeyboardMonitorModule (copy)
 	p1.virtualKeyboardMonitor = VirtualKeyboardMonitorModule.getInstance()
 	
-	function p1.onOverlayActivated() --[[ Line: 46 ]]
+	function p1.onOverlayActivated()
 		-- upvalues: p1 (copy)
 		if not p1.virtualKeyboardMonitor:isKeyboardJustOff() then
 			p1.props.onDismiss()
@@ -41,29 +41,29 @@ function ModalDialog.init(p1) --[[ Line: 44 ]]
 	end
 end
 
-function ModalDialog.renderHeaderBarLeft(p1) --[[ Line: 55 ]]
+function ModalDialog.renderHeaderBarLeft(p1)
 	-- upvalues: RoactModule (copy), IconButton (copy), IconSize (copy), Images (copy), MakeBackButtonFunction (copy)
 	local Props = p1.props
 	
-	return if Props.showCloseButton then function() --[[ Line: 59 ]]
+	return if Props.showCloseButton then function()
 		-- upvalues: RoactModule (upval), IconButton (upval), IconSize (upval), Images (upval), Props (copy)
 		return RoactModule.createElement(IconButton, {
 			iconSize = IconSize.Medium,
 			icon = Images["icons/navigation/close"],
 			onActivated = Props.onDismiss
 		})
-	end elseif Props.onBackButtonActivated == nil then function() --[[ Line: 71 ]]
+	end elseif Props.onBackButtonActivated == nil then function()
 		return nil
 	end else MakeBackButtonFunction(Props.onBackButtonActivated)
 end
 
-function ModalDialog:renderHeaderBarRight() --[[ Line: 77 ]]
-	return function() --[[ Line: 79 ]]
+function ModalDialog:renderHeaderBarRight()
+	return function()
 		return nil
 	end
 end
 
-function ModalDialog.render(p1) --[[ Line: 84 ]]
+function ModalDialog.render(p1)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy), ImageSetButton (copy), AssetsModule (copy), HeaderBar (copy), DividerModule (copy)
 	local Props = p1.props
 	local _Vector2 = Vector2.new(math.min(Props.screenSize.X, 540), (math.min(Props.screenSize.Y, 375)))
@@ -82,7 +82,7 @@ function ModalDialog.render(p1) --[[ Line: 84 ]]
 	if not Props.actionButtons then
 		Smallest += 96
 	end
-	return WithStyleFunction(function(p2) --[[ Line: 106 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: RoactModule (upval), Props (copy), p1 (copy), ImageSetButton (upval), _Vector2_1 (ref), AssetsModule (upval), _UDim2 (ref), _Vector2 (copy), HeaderBar (upval), DividerModule (upval), Smallest (ref)
 		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -154,9 +154,9 @@ function ModalDialog.render(p1) --[[ Line: 84 ]]
 	end)
 end
 
-function ModalDialog.bindActions(p1) --[[ Line: 181 ]]
+function ModalDialog.bindActions(p1)
 	-- upvalues: ContextActionService (copy)
-	ContextActionService:BindCoreAction("ModalDialogDismiss", function(_, UserInputState, _) --[[ Line: 182 | Named "dismissFunc" ]]
+	ContextActionService:BindCoreAction("ModalDialogDismiss", function(_, UserInputState, _)
 		-- upvalues: p1 (copy)
 		if UserInputState == Enum.UserInputState.Begin then
 			p1.props.onDismiss()
@@ -164,18 +164,18 @@ function ModalDialog.bindActions(p1) --[[ Line: 181 ]]
 	end, false, Enum.KeyCode.Escape)
 end
 
-function ModalDialog:unbindActions() --[[ Line: 190 ]]
+function ModalDialog:unbindActions()
 	-- upvalues: ContextActionService (copy)
 	ContextActionService:UnbindCoreAction("ModalDialogDismiss")
 end
 
-function ModalDialog.didMount(p1) --[[ Line: 194 ]]
+function ModalDialog.didMount(p1)
 	if p1.props.visible then
 		p1:bindActions()
 	end
 end
 
-function ModalDialog.didUpdate(p1) --[[ Line: 200 ]]
+function ModalDialog.didUpdate(p1)
 	if p1.props.visible then
 		p1:bindActions()
 		
@@ -185,7 +185,7 @@ function ModalDialog.didUpdate(p1) --[[ Line: 200 ]]
 	end
 end
 
-function ModalDialog.willUnmount(p1) --[[ Line: 208 ]]
+function ModalDialog.willUnmount(p1)
 	p1:unbindActions()
 end
 

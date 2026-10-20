@@ -14,7 +14,7 @@ local ShopPageType = if AnalyticsModule then AnalyticsModule.Constants.ShopPageT
 local UseShopImpressionsDetectorModule = require(InExperienceShop.Hooks.useShopImpressionsDetector)
 local _ = require(InExperienceShop.Types)
 
-return function(Frame) --[[ Line: 40 | Named "CategoryPageView" ]]
+return function(Frame)
 	-- upvalues: IsSubjectToDesktopPoliciesFunction (copy), UseShopImpressionsDetectorModule (copy), ShopPageType (copy), ReactModule (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (copy), View (copy), ScrollView (copy), FoundationModule (copy), RobuxTermsDisclosureModule (copy), ItemGridModule (copy)
 	local IsShowRobuxTermsDisclosure = Frame.showRobuxTermsDisclosure == true
 	local Inverted = not IsSubjectToDesktopPoliciesFunction()
@@ -23,7 +23,7 @@ return function(Frame) --[[ Line: 40 | Named "CategoryPageView" ]]
 		externalScrollSignal = nil,
 		pageType = if ShopPageType then ShopPageType.Category else ""
 	})
-	local UseResult = ReactModule.useCallback(function(_) --[[ Line: 50 ]]
+	local UseResult = ReactModule.useCallback(function(_)
 		-- upvalues: FFlagEnableInExperienceShopUnifiedLoggingModule (upval), UseShopImpressionsDetectorModuleResult (copy)
 		if FFlagEnableInExperienceShopUnifiedLoggingModule then
 			UseShopImpressionsDetectorModuleResult.onLayoutChange()
@@ -48,7 +48,7 @@ return function(Frame) --[[ Line: 40 | Named "CategoryPageView" ]]
 			Content = ReactModule.createElement(View, {
 				tag = if IsShowRobuxTermsDisclosure then "col gap-medium size-full-0 auto-y padding-x-xlarge padding-bottom-xlarge" else "size-full-0 auto-y padding-x-xlarge padding-bottom-xlarge padding-top-medium",
 				ref = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseShopImpressionsDetectorModuleResult.gridRef else nil,
-				onAbsoluteSizeChanged = if FFlagEnableInExperienceShopUnifiedLoggingModule then function(_) --[[ Line: 83 ]]
+				onAbsoluteSizeChanged = if FFlagEnableInExperienceShopUnifiedLoggingModule then function(_)
 					-- upvalues: UseShopImpressionsDetectorModuleResult (copy)
 					UseShopImpressionsDetectorModuleResult.onLayoutChange()
 				end else nil

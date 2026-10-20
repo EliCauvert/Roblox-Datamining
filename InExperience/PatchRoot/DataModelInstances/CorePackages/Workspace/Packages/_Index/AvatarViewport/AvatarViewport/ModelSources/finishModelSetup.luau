@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.Parent.Types)
 
-return function(Model) --[[ Line: 5 | Named "finishModelSetup" ]]
+return function(Model)
 	Model:PivotTo(CFrame.new())
 	local HumanoidRootPart = Model:FindFirstChild("HumanoidRootPart")
 	

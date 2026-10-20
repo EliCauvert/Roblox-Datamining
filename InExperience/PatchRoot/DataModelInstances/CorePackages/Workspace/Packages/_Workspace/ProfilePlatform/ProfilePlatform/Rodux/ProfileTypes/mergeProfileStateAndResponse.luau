@@ -4,7 +4,7 @@ local _ = require(ProfilePlatform.Common.Types)
 local GetDeepValueModule = require(ProfilePlatform.Utils.getDeepValue)
 local FFlagProfilePlatformEnableLazyLoadingComponentsModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableLazyLoadingComponents)
 
-return function(p1, p2) --[[ Line: 11 ]]
+return function(p1, p2)
 	-- upvalues: GetDeepValueModule (copy), FFlagProfilePlatformEnableLazyLoadingComponentsModule (copy), CryoModule (copy)
 	local DeepValueModule = GetDeepValueModule(p1, `{p2.profileId}`) or {}
 	

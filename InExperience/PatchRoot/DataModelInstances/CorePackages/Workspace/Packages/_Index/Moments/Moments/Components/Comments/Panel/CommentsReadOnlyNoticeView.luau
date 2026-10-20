@@ -4,7 +4,7 @@ local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local config = { readOnly = "Feature.Moments.Label.CommentsReadOnly" }
 
-return function() --[[ Line: 14 | Named "CommentsReadOnlyNoticeView" ]]
+return function()
 	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), FoundationModule (copy)
 	return ReactModule.createElement(FoundationModule.Text, {
 		tag = "auto-xy text-body-small content-muted",

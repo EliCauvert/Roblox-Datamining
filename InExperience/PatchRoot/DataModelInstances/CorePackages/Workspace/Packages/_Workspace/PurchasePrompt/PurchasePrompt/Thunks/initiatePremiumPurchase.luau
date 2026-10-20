@@ -21,9 +21,9 @@ local FFlagEnablePurchaseFlowUUIDMigrationModule = require(PurchasePrompt.Flags.
 local PurchaseFlowUUIDTelemetryModule = require(PurchasePrompt.Events.PurchaseFlowUUIDTelemetry)
 local list = { NetworkModule, ExternalSettingsModule }
 
-return function(_, _, _) --[[ Line: 33 | Named "initiatePremiumPurchase" ]]
+return function(_, _, _)
 	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), ExternalSettingsModule (copy), FFlagEnablePurchaseFlowUUIDMigrationModule (copy), HttpService (copy), SetPurchaseFlowUUIDModule (copy), LoggingProtocolModule (copy), PurchaseFlowUUIDTelemetryModule (copy), HasPendingRequestModule (copy), RequestPremiumPurchaseModule (copy), ErrorOccurredModule (copy), PurchaseErrorModule (copy), PromiseModule (copy), GetPremiumUpsellPrecheckModule (copy), GetPremiumProductInfoModule (copy), GetAccountInfoModule (copy), GetBalanceInfoModule (copy), ResolvePremiumPromptStateModule (copy)
-	return ThunkModule.new(script.Name, list, function(p1, p2) --[[ Line: 34 ]]
+	return ThunkModule.new(script.Name, list, function(p1, p2)
 		-- upvalues: NetworkModule (upval), ExternalSettingsModule (upval), FFlagEnablePurchaseFlowUUIDMigrationModule (upval), HttpService (upval), SetPurchaseFlowUUIDModule (upval), LoggingProtocolModule (upval), PurchaseFlowUUIDTelemetryModule (upval), HasPendingRequestModule (upval), RequestPremiumPurchaseModule (upval), ErrorOccurredModule (upval), PurchaseErrorModule (upval), PromiseModule (upval), GetPremiumUpsellPrecheckModule (upval), GetPremiumProductInfoModule (upval), GetAccountInfoModule (upval), GetBalanceInfoModule (upval), ResolvePremiumPromptStateModule (upval)
 		local v1 = p2[NetworkModule]
 		local v2 = p2[ExternalSettingsModule]
@@ -47,10 +47,10 @@ return function(_, _, _) --[[ Line: 33 | Named "initiatePremiumPurchase" ]]
 				premiumProductInfo = GetPremiumProductInfoModule(v1),
 				accountInfo = GetAccountInfoModule(v1, v2),
 				balanceInfo = GetBalanceInfoModule(v1, v2, false)
-			}):andThen(function(Result) --[[ Line: 66 ]]
+			}):andThen(function(Result)
 				-- upvalues: p1 (copy), ResolvePremiumPromptStateModule (upval)
 				p1:dispatch(ResolvePremiumPromptStateModule(Result.accountInfo, Result.balanceInfo, Result.premiumProductInfo, Result.canShowUpsell))
-			end):catch(function(Err) --[[ Line: 76 ]]
+			end):catch(function(Err)
 				-- upvalues: p1 (copy), ErrorOccurredModule (upval)
 				p1:dispatch(ErrorOccurredModule(Err))
 			end)

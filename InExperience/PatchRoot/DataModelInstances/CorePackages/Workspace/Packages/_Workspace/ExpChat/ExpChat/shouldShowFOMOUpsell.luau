@@ -8,9 +8,9 @@ local ExpChatFOMOUpsellIXPLayerValue = game:DefineFastString("ExpChatFOMOUpsellI
 local v1 = nil
 local v2 = nil
 
-local function fetchIXPData() --[[ Line: 21 ]]
+local function fetchIXPData()
 	-- upvalues: v1 (ref), v2 (ref), IXPServiceWrapperModule (copy), ExpChatFOMOUpsellIXPLayerName (copy), ExpChatFOMOUpsellIXPLayerValue (copy)
-	v1, v8 = pcall(function() --[[ Line: 22 ]]
+	v1, v8 = pcall(function()
 		-- upvalues: IXPServiceWrapperModule (upval), ExpChatFOMOUpsellIXPLayerName (upval)
 		return IXPServiceWrapperModule:GetLayerData(ExpChatFOMOUpsellIXPLayerName)
 	end)
@@ -24,7 +24,7 @@ local function fetchIXPData() --[[ Line: 21 ]]
 	end
 end
 
-return function() --[[ Line: 35 ]]
+return function()
 	-- upvalues: FFlagExpChatUseGuacForFOMOUpsell (copy), UniversalAppPolicyModule (ref), v1 (ref), v2 (ref), ExpChatFOMOUpsellIXPLayerValue (copy), fetchIXPData (copy)
 	return if FFlagExpChatUseGuacForFOMOUpsell and UniversalAppPolicyModule.getAppFeaturePolicies().getShowFOMOUpsell() then if v1 and v2 then v2[ExpChatFOMOUpsellIXPLayerValue] else fetchIXPData() else false
 end

@@ -1,4 +1,4 @@
-﻿return function(Gui) --[[ Line: 1 | Named "isValidFocusTarget" ]]
+﻿return function(Gui)
 	if not Gui then
 		return false, "`nil` value provided to isValidFocusTarget"
 	elseif not Gui:IsA("GuiBase2d") then

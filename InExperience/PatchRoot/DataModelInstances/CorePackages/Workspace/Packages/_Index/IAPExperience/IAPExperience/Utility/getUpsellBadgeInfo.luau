@@ -3,7 +3,7 @@ local Enums = require(Parent.Parent.Foundation).Enums
 local BadgeTypeModule = require(Parent.Enums.BadgeType)
 local GetFFlagIAPExperienceEnableBestValueBadgeModule = require(Parent.Flags.GetFFlagIAPExperienceEnableBestValueBadge)
 
-return function(BestValue, p1) --[[ Line: 24 | Named "getUpsellBadgeInfo" ]]
+return function(BestValue, p1)
 	-- upvalues: BadgeTypeModule (copy), GetFFlagIAPExperienceEnableBestValueBadgeModule (copy), Enums (copy)
 	return {
 		text = if BestValue == BadgeTypeModule.Popular then p1.Popular elseif BestValue == BadgeTypeModule.LastPurchased then p1.LastPurchased elseif BestValue == BadgeTypeModule.ForYou then p1.ForYouItem elseif BestValue == BadgeTypeModule.BetterValue then p1.BetterValue elseif BestValue == BadgeTypeModule.BestValue and GetFFlagIAPExperienceEnableBestValueBadgeModule() then p1.BestValue else nil,

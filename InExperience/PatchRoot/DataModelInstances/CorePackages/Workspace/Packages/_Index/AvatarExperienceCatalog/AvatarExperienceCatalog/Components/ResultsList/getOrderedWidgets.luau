@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("AvatarExperienceCatalog").Components.ResultsList.WidgetListInfoViewModel)
 
-return function(List) --[[ Line: 25 | Named "getOrderedWidgets" ]]
+return function(List)
 	local List1 = {}
 	
 	for i in List do

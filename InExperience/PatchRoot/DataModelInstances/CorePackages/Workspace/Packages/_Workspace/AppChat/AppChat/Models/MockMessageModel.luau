@@ -3,7 +3,7 @@ local _DateTime = require(Parent.Time).DateTime
 local GenerateStringIdFunction = require(Parent.AppCommonLib).GenerateStringId
 local MessageModelModule = require(script.Parent.MessageModel)
 local MockMessageModelModule = {
-	mock = function(List) --[[ Line: 11 ]]
+	mock = function(List)
 		-- upvalues: MessageModelModule (copy), GenerateStringIdFunction (copy), _DateTime (copy)
 		local NewMessageModel = MessageModelModule.new()
 		NewMessageModel.id = GenerateStringIdFunction()

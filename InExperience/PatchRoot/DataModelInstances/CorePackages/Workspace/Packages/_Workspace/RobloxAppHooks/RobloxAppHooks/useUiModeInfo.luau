@@ -12,12 +12,12 @@ local config = {
 	[DeviceType.VR] = UiMode.VR
 }
 
-return function() --[[ Line: 36 | Named "useUiModeInfo" ]]
+return function()
 	-- upvalues: UseDeviceTypeModule (copy), config (copy), UiMode (copy), ReactModule (copy)
 	local UseDeviceTypeModuleResult = UseDeviceTypeModule()
 	local Entry = config[UseDeviceTypeModuleResult] or UiMode.Unknown
 	
-	return (ReactModule.useMemo(function() --[[ Line: 40 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: UseDeviceTypeModuleResult (copy), Entry (copy)
 		return { deviceType = UseDeviceTypeModuleResult, uiMode = Entry }
 	end, { UseDeviceTypeModuleResult, Entry }))

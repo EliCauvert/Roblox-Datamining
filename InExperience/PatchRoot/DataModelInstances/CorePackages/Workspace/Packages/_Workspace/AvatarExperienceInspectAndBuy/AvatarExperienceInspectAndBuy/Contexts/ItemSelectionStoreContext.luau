@@ -4,16 +4,16 @@ local CreateItemSelectionStoreModule = require(AvatarExperienceInspectAndBuy.Sto
 local Context = ReactModule.createContext(nil)
 
 return {
-	Provider = function(p1) --[[ Line: 20 ]]
+	Provider = function(p1)
 		-- upvalues: ReactModule (copy), CreateItemSelectionStoreModule (copy), Context (copy)
 		return ReactModule.createElement(Context.Provider, {
-			value = ReactModule.useMemo(function() --[[ Line: 22 ]]
+			value = ReactModule.useMemo(function()
 				-- upvalues: CreateItemSelectionStoreModule (upval)
 				return CreateItemSelectionStoreModule()
 			end, {})
 		}, p1.children)
 	end,
-	useItemSelectionStore = function() --[[ Line: 29 ]]
+	useItemSelectionStore = function()
 		-- upvalues: ReactModule (copy), Context (copy)
 		local UseContextResult = ReactModule.useContext(Context)
 		

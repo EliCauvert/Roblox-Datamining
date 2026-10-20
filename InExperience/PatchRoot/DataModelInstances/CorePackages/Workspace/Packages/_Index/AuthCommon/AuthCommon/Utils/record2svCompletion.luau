@@ -2,7 +2,7 @@
 local AppStorageUtilitiesModule = require(AuthCommon.Utils.AppStorageUtilities)
 local CryoModule = require(AuthCommon.Parent.Cryo)
 
-return function(Key): boolean --[[ Line: 7 | Named "record2svCompletion" ]]
+return function(Key): boolean
 	-- upvalues: AppStorageUtilitiesModule (copy), CryoModule (copy)
 	if Key == nil or Key == "0" then
 		return false

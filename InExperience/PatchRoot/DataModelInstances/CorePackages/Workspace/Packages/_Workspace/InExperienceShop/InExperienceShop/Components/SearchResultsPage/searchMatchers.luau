@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("InExperienceShop").Types)
 
-local function _(Text: string) --[[ Line: 41 | Named "tokenize" ]]
+local function _(Text: string)
 	local List = {}
 	
 	for i in string.gmatch(Text, "%S+") do
@@ -9,15 +9,15 @@ local function _(Text: string) --[[ Line: 41 | Named "tokenize" ]]
 	return List
 end
 
-local _ = function(Text: string): string --[[ Line: 49 | Named "trim" ]]
+local _ = function(Text: string): string
 	return string.match(Text, "^%s*(.-)%s*$") or ""
 end
 
-local _ = function(Text: string, Segment): boolean --[[ Line: 53 | Named "startsWith" ]]
+local _ = function(Text: string, Segment): boolean
 	return #Text >= #Segment and string.sub(Text, 1, #Segment) == Segment
 end
 
-local _ = function(List, p1): boolean --[[ Line: 60 | Named "anyWordEquals" ]]
+local _ = function(List, p1): boolean
 	for _, value in List do
 		if value == p1 then
 			return true
@@ -26,7 +26,7 @@ local _ = function(List, p1): boolean --[[ Line: 60 | Named "anyWordEquals" ]]
 	return false
 end
 
-local _ = function(List, Segment): boolean --[[ Line: 69 | Named "anyWordStartsWith" ]]
+local _ = function(List, Segment): boolean
 	for _, value in List do
 		if #Segment <= #value and string.sub(value, 1, #Segment) == Segment then
 			return true
@@ -35,7 +35,7 @@ local _ = function(List, Segment): boolean --[[ Line: 69 | Named "anyWordStartsW
 	return false
 end
 
-local function anyWordIncludes(List, Pattern): boolean --[[ Line: 78 ]]
+local function anyWordIncludes(List, Pattern): boolean
 	for _, value in List do
 		if string.find(value, Pattern, 1, true) ~= nil then
 			return true
@@ -44,11 +44,11 @@ local function anyWordIncludes(List, Pattern): boolean --[[ Line: 78 ]]
 	return false
 end
 
-local _ = function(p2: number): number --[[ Line: 87 | Named "maxEditsFor" ]]
+local _ = function(p2: number): number
 	return if p2 >= 8 then 2 else 1
 end
 
-local function editDistanceWithin(Text: string, Text1: string, p2): boolean --[[ Line: 95 ]]
+local function editDistanceWithin(Text: string, Text1: string, p2): boolean
 	if Text == Text1 then
 		return true
 	end
@@ -117,7 +117,7 @@ local function editDistanceWithin(Text: string, Text1: string, p2): boolean --[[
 	return Buffer1[CountText1 + 1] <= p2
 end
 
-local _ = function(List, p3, p4): boolean --[[ Line: 164 | Named "anyWordWithinEditDistance" ]]
+local _ = function(List, p3, p4): boolean
 	-- upvalues: editDistanceWithin (copy)
 	for _, value in List do
 		if editDistanceWithin(p3, value, p4) then
@@ -127,7 +127,7 @@ local _ = function(List, p3, p4): boolean --[[ Line: 164 | Named "anyWordWithinE
 	return false
 end
 
-local function anyWordHasFuzzyPrefix(List, Pattern, p5): boolean --[[ Line: 176 ]]
+local function anyWordHasFuzzyPrefix(List, Pattern, p5): boolean
 	-- upvalues: editDistanceWithin (copy)
 	local CountPattern = #Pattern
 	
@@ -139,7 +139,7 @@ local function anyWordHasFuzzyPrefix(List, Pattern, p5): boolean --[[ Line: 176 
 	return false
 end
 
-local function scoreToken(Text: string, List, Pattern, Count: number): number --[[ Line: 215 ]]
+local function scoreToken(Text: string, List, Pattern, Count: number): number
 	-- upvalues: anyWordHasFuzzyPrefix (copy), anyWordIncludes (copy), editDistanceWithin (copy)
 	if Text == Pattern then
 		return 100
@@ -193,7 +193,7 @@ local function scoreToken(Text: string, List, Pattern, Count: number): number --
 end
 
 return {
-	substringMatch = function(List, Text: string, p6: number) --[[ Line: 191 ]]
+	substringMatch = function(List, Text: string, p6: number)
 		if p6 <= 0 then
 			return {}
 		end
@@ -214,7 +214,7 @@ return {
 		end
 		return List1
 	end,
-	fuzzyMatch = function(Items, Text: string, p7: number) --[[ Line: 256 ]]
+	fuzzyMatch = function(Items, Text: string, p7: number)
 		-- upvalues: scoreToken (copy)
 		if p7 <= 0 then
 			return {}
@@ -258,7 +258,7 @@ return {
 				table.insert(List1, { item = item, score = Score, index = Index })
 			end
 		end
-		table.sort(List1, function(A, B): boolean --[[ Line: 294 ]]
+		table.sort(List1, function(A, B): boolean
 			return if A.score == B.score then A.index < B.index else B.score < A.score
 		end)
 		local Smallest = math.min(p7, #List1)

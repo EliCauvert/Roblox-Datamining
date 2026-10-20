@@ -4,13 +4,13 @@ local GraphQLError = require(Parent.error.GraphQLError).GraphQLError
 local IsEnumTypeFunction = require(Parent.type.definition).isEnumType
 
 return {
-	UniqueEnumValueNamesRule = function(p1) --[[ Line: 25 ]]
+	UniqueEnumValueNamesRule = function(p1)
 		-- upvalues: Map (copy), IsEnumTypeFunction (copy), GraphQLError (copy)
 		local Schema = p1:getSchema()
 		local TypeMap = Schema and Schema:getTypeMap() or Map.new()
 		local t = {}
 		
-		local function checkValueUniqueness(_, p2): boolean --[[ Line: 33 ]]
+		local function checkValueUniqueness(_, p2): boolean
 			-- upvalues: t (copy), TypeMap (copy), IsEnumTypeFunction (upval), p1 (copy), GraphQLError (upval)
 			local Value = p2.name.value
 			

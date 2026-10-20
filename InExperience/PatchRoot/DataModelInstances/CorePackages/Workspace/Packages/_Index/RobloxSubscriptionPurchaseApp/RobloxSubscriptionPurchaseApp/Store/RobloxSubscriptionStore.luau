@@ -7,7 +7,7 @@ local _ = require(RobloxSubscriptionPurchaseApp.Enums.ErrorReason)
 local _ = require(RobloxSubscriptionPurchaseApp.types)
 local v1 = nil
 
-local function v8() --[[ Line: 58 ]]
+local function v8()
 	-- upvalues: SignalsModule (copy), PromptStateModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(PromptStateModule.Unspecified)
 	local Signal1, Signal2_1 = SignalsModule.createSignal(nil)
@@ -41,11 +41,11 @@ local function v8() --[[ Line: 58 ]]
 		setErrorReason = Signal2_8,
 		getReferrerId = Signal10,
 		setReferrerId = Signal2_9,
-		setOnFlowComplete = function(Value) --[[ Line: 83 ]]
+		setOnFlowComplete = function(Value)
 			-- upvalues: Callback1 (ref)
 			Callback1 = Value
 		end,
-		triggerOnFlowComplete = function(p1) --[[ Line: 87 ]]
+		triggerOnFlowComplete = function(p1)
 			-- upvalues: Callback1 (ref)
 			if Callback1 then
 				Callback1(p1)
@@ -55,38 +55,38 @@ local function v8() --[[ Line: 58 ]]
 		setPurchaseUIOptions = Signal2_3,
 		getIsNativePurchase = Signal6,
 		setIsNativePurchase = Signal2_5,
-		getRobloxSubscriptionProductId = SignalsModule.createComputed(function(p1) --[[ Line: 71 ]]
+		getRobloxSubscriptionProductId = SignalsModule.createComputed(function(p1)
 			-- upvalues: Signal1 (copy)
 			local SignalResult = Signal1(p1)
 			
 			return SignalResult and SignalResult.ProductKey and SignalResult.ProductKey.Id or ""
 		end),
-		setOnUnmountUI = function(Value) --[[ Line: 111 ]]
+		setOnUnmountUI = function(Value)
 			-- upvalues: Callback2 (ref)
 			Callback2 = Value
 		end,
-		triggerUnmountUI = function() --[[ Line: 115 ]]
+		triggerUnmountUI = function()
 			-- upvalues: Callback2 (ref)
 			if Callback2 then
 				Callback2()
 				Callback2 = nil
 			end
 		end,
-		setOnBackButtonActivated = function(Value) --[[ Line: 93 ]]
+		setOnBackButtonActivated = function(Value)
 			-- upvalues: Callback (ref)
 			Callback = Value
 		end,
-		triggerOnBackButtonActivated = function() --[[ Line: 97 ]]
+		triggerOnBackButtonActivated = function()
 			-- upvalues: Callback (ref)
 			if Callback then
 				Callback()
 			end
 		end,
-		setOnCtaOverride = function(Value) --[[ Line: 103 ]]
+		setOnCtaOverride = function(Value)
 			-- upvalues: OnCtaOverride (ref)
 			OnCtaOverride = Value
 		end,
-		getOnCtaOverride = function() --[[ Line: 107 ]]
+		getOnCtaOverride = function()
 			-- upvalues: OnCtaOverride (ref)
 			return OnCtaOverride
 		end
@@ -94,14 +94,14 @@ local function v8() --[[ Line: 58 ]]
 end
 
 return {
-	get = function() --[[ Line: 157 ]]
+	get = function()
 		-- upvalues: v1 (ref), SignalsModule (copy), v8 (copy)
 		if v1 == nil then
 			v1 = SignalsModule.createComputed(v8)(false)
 		end
 		return v1
 	end,
-	cleanup = function() --[[ Line: 164 ]]
+	cleanup = function()
 		-- upvalues: v1 (ref)
 		v1 = nil
 	end

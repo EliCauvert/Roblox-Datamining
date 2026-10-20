@@ -5,7 +5,7 @@ local GetThumbnailUrlModule = require(BulkPurchaseApp.Utils.getThumbnailUrl)
 local FFlagBulkPurchaseEnablePurchaseOptionsModule = require(BulkPurchaseApp.Flags.FFlagBulkPurchaseEnablePurchaseOptions)
 local FFlagBulkPurchaseUsesPurchaseOptionDiscountModule = require(BulkPurchaseApp.Flags.FFlagBulkPurchaseUsesPurchaseOptionDiscount)
 
-local function getTimedOptionDays(PurchaseOptions) --[[ Line: 16 ]]
+local function getTimedOptionDays(PurchaseOptions)
 	for _, purchaseOption in PurchaseOptions do
 		if purchaseOption.purchaseOptionType == "timedOption" and purchaseOption.durationInSeconds then
 			local Floored = math.floor(purchaseOption.durationInSeconds / 86400)
@@ -16,7 +16,7 @@ local function getTimedOptionDays(PurchaseOptions) --[[ Line: 16 ]]
 	return nil
 end
 
-return function(p1) --[[ Line: 29 | Named "createPurchasableItem" ]]
+return function(p1)
 	-- upvalues: FFlagBulkPurchaseEnablePurchaseOptionsModule (copy), getTimedOptionDays (copy), FFlagBulkPurchaseUsesPurchaseOptionDiscountModule (copy), GetThumbnailUrlModule (copy)
 	local TimedOptionDays = if FFlagBulkPurchaseEnablePurchaseOptionsModule and p1.purchaseOptions then getTimedOptionDays(p1.purchaseOptions) else nil
 	local PriceRobux = p1.priceRobux

@@ -9,7 +9,7 @@ local FFlagShowFriendJoinedYouToastForNonReferredJoins = require(CorePackages.Wo
 local GetFIntReferredPlayerJoinRemoteEventTimeoutFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFIntReferredPlayerJoinRemoteEventTimeout
 local HttpRequestModule = require(CorePackages.Packages.HttpRequest)
 local ConfigResult = HttpRequestModule.config({
-	requestFunction = function(p1, p2, p3) --[[ Line: 21 ]]
+	requestFunction = function(p1, p2, p3)
 		-- upvalues: HttpRequestModule (copy)
 		return HttpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
 	end,

@@ -5,20 +5,20 @@ local config = {
 	recentlyBlockedAuthorIds = {}
 }
 
-return function() --[[ Line: 27 | Named "createCommentSessionFiltersStore" ]]
+return function()
 	-- upvalues: CreateSignalFunction (copy), config (copy)
 	local Signal, Signal2 = CreateSignalFunction(config)
 	
 	return {
 		getFilters = Signal,
-		reset = function() --[[ Line: 30 ]]
+		reset = function()
 			-- upvalues: Signal2 (copy)
 			Signal2({
 				sessionHiddenCommentIds = {},
 				recentlyBlockedAuthorIds = {}
 			})
 		end,
-		hideCommentForSession = function(Key) --[[ Line: 37 ]]
+		hideCommentForSession = function(Key)
 			-- upvalues: Signal (copy), Signal2 (copy)
 			local SignalResult = Signal(false)
 			
@@ -33,7 +33,7 @@ return function() --[[ Line: 27 | Named "createCommentSessionFiltersStore" ]]
 				return
 			end
 		end,
-		markAuthorRecentlyBlocked = function(Key) --[[ Line: 50 ]]
+		markAuthorRecentlyBlocked = function(Key)
 			-- upvalues: Signal (copy), Signal2 (copy)
 			local SignalResult = Signal(false)
 			
@@ -48,7 +48,7 @@ return function() --[[ Line: 27 | Named "createCommentSessionFiltersStore" ]]
 				return
 			end
 		end,
-		unmarkAuthorRecentlyBlocked = function(Key) --[[ Line: 63 ]]
+		unmarkAuthorRecentlyBlocked = function(Key)
 			-- upvalues: Signal (copy), Signal2 (copy)
 			local SignalResult = Signal(false)
 			
@@ -63,11 +63,11 @@ return function() --[[ Line: 27 | Named "createCommentSessionFiltersStore" ]]
 				return
 			end
 		end,
-		isCommentSessionHidden = function(p1): boolean --[[ Line: 76 ]]
+		isCommentSessionHidden = function(p1): boolean
 			-- upvalues: Signal (copy)
 			return Signal(false).sessionHiddenCommentIds[p1] == true
 		end,
-		isAuthorRecentlyBlocked = function(p1): boolean --[[ Line: 80 ]]
+		isAuthorRecentlyBlocked = function(p1): boolean
 			-- upvalues: Signal (copy)
 			return Signal(false).recentlyBlockedAuthorIds[p1] == true
 		end

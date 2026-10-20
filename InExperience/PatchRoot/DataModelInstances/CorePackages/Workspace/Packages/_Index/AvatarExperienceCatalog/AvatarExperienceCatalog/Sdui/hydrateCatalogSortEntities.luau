@@ -9,7 +9,7 @@ local _ = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListInfoV
 local CollectDedupedHydrationContentModule = require(AvatarExperienceCatalog.Sdui.Utils.collectDedupedHydrationContent)
 local BuildHydrationReduxPayloadModule = require(AvatarExperienceCatalog.Sdui.Utils.buildHydrationReduxPayload)
 
-local function getSortedEntries(p1: number) --[[ Line: 36 ]]
+local function getSortedEntries(p1: number)
 	-- upvalues: DataHydrationModule (copy)
 	local GetLastReceivedSortsFunction = DataHydrationModule.MarketplaceCatalogSort.getMarketplaceCatalogSortStore(false).getLastReceivedSorts
 	
@@ -26,7 +26,7 @@ local function getSortedEntries(p1: number) --[[ Line: 36 ]]
 	for Id, lastReceivedSort in LastReceivedSorts do
 		table.insert(List, { id = Id, data = lastReceivedSort })
 	end
-	table.sort(List, function(A, B): boolean --[[ Line: 54 ]]
+	table.sort(List, function(A, B): boolean
 		return (A.data.hydrationPriority or 0) < (B.data.hydrationPriority or 0)
 	end)
 	
@@ -41,7 +41,7 @@ local function getSortedEntries(p1: number) --[[ Line: 36 ]]
 	return List
 end
 
-local function collectContent(List) --[[ Line: 76 ]]
+local function collectContent(List)
 	-- upvalues: CollectDedupedHydrationContentModule (copy)
 	local t = {}
 	local t1 = {}
@@ -56,7 +56,7 @@ local function collectContent(List) --[[ Line: 76 ]]
 	return t
 end
 
-local function groupContentByType(List) --[[ Line: 95 ]]
+local function groupContentByType(List)
 	local t = {}
 	
 	for _, value in List do
@@ -70,7 +70,7 @@ local function groupContentByType(List) --[[ Line: 95 ]]
 	return t
 end
 
-return function(Callback1, p2, Callback, p3, p4) --[[ Line: 107 | Named "hydrateCatalogSortEntities" ]]
+return function(Callback1, p2, Callback, p3, p4)
 	-- upvalues: getSortedEntries (copy), PromiseModule (copy), collectContent (copy), groupContentByType (copy), BuildHydrationReduxPayloadModule (copy), Logging (copy)
 	local SortedEntries = getSortedEntries(p4)
 	
@@ -85,7 +85,7 @@ return function(Callback1, p2, Callback, p3, p4) --[[ Line: 107 | Named "hydrate
 	local List = {}
 	
 	for _, value in groupContentByType(CollectContentResult) do
-		table.insert(List, (p3.HydrateWidgetContent(p2, value):andThen(function(Result) --[[ Line: 134 ]]
+		table.insert(List, (p3.HydrateWidgetContent(p2, value):andThen(function(Result)
 			-- upvalues: BuildHydrationReduxPayloadModule (upval), value (copy), Callback1 (copy), Callback (copy)
 			local ResponseBody = if Result then Result.responseBody else nil
 			local HydratedContent = if ResponseBody then ResponseBody.hydratedContent else nil
@@ -95,7 +95,7 @@ return function(Callback1, p2, Callback, p3, p4) --[[ Line: 107 | Named "hydrate
 				
 				return
 			end
-		end):catch(function(Err) --[[ Line: 144 ]]
+		end):catch(function(Err)
 			-- upvalues: Logging (upval)
 			Logging.warn("hydrateCatalogSortEntities: HydrateWidgetContent failed: " .. tostring(Err))
 		end)))

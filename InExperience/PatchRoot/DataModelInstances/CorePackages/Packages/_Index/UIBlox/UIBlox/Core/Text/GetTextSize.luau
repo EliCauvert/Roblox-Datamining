@@ -7,9 +7,9 @@ local LoggerModule = require(Parent.Logger)
 local GetLegacyFontModule = require(script.Parent.GetLegacyFont)
 local _Vector2 = Vector2.new(2, 2)
 
-return function(Text, Size, p1, Vector, p2) --[[ Line: 23 | Named "getTextSize" ]]
+return function(Text, Size, p1, Vector, p2)
 	-- upvalues: FoundationFontFaceMigration (copy), GetLegacyFontModule (copy), TextService (copy), NormalizeFontFaceFunction (copy), _Vector2 (copy), LoggerModule (copy)
-	local Success, Result, Result3 = pcall(function() --[[ Line: 30 ]]
+	local Success, Result, Result3 = pcall(function()
 		-- upvalues: FoundationFontFaceMigration (upval), p2 (copy), GetLegacyFontModule (upval), p1 (copy), Vector (copy), TextService (upval), Text (copy), Size (copy), NormalizeFontFaceFunction (upval)
 		if not FoundationFontFaceMigration or p2 then
 			local GetTextBoundsParams = Instance.new("GetTextBoundsParams")

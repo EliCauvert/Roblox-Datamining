@@ -6,7 +6,7 @@ local _ = require(script.Parent.Parent.Types)
 local _ = require(script.Parent.groupMessages)
 local UnpackContentModule = require(script.Parent.Parent.ContentKinds.unpackContent)
 
-local function contentKindsKey(p1): string --[[ Line: 29 ]]
+local function contentKindsKey(p1): string
 	-- upvalues: UnpackContentModule (copy)
 	local List = {}
 	
@@ -20,20 +20,20 @@ local function contentKindsKey(p1): string --[[ Line: 29 ]]
 	return table.concat(List, ",")
 end
 
-return function(Callback) --[[ Line: 40 | Named "useMessageRowContents" ]]
+return function(Callback)
 	-- upvalues: ReactModule (copy), SignalsModule (copy), contentKindsKey (copy), SignalsReactModule (copy), UnpackContentModule (copy)
-	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 56 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), contentKindsKey (upval), Callback (copy)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 57 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: contentKindsKey (upval), Callback (upval)
 			return contentKindsKey(Callback(p2))
 		end)
 	end, { Callback })))
 	
 	return {
-		getIdentity = ReactModule.useMemo(function() --[[ Line: 41 ]]
+		getIdentity = ReactModule.useMemo(function()
 			-- upvalues: Callback (copy)
-			return function(p2) --[[ Line: 42 ]]
+			return function(p2)
 				-- upvalues: Callback (upval)
 				local Author = Callback(p2).message.author
 				
@@ -45,7 +45,7 @@ return function(Callback) --[[ Line: 40 | Named "useMessageRowContents" ]]
 				}
 			end
 		end, { Callback }),
-		contents = ReactModule.useMemo(function() --[[ Line: 63 ]]
+		contents = ReactModule.useMemo(function()
 			-- upvalues: Callback (copy), UnpackContentModule (upval)
 			local List = {}
 			
@@ -55,7 +55,7 @@ return function(Callback) --[[ Line: 40 | Named "useMessageRowContents" ]]
 				if UnpackContentModuleResult ~= nil then
 					table.insert(List, {
 						kind = UnpackContentModuleResult,
-						getContent = function(p2) --[[ Line: 75 ]]
+						getContent = function(p2)
 							-- upvalues: Callback (upval), i (copy), UnpackContentModule (upval), UnpackContentModuleResult (copy), content (copy)
 							local Content = Callback(p2).message.contents[i]
 							

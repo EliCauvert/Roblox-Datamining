@@ -9,7 +9,7 @@ local config = {
 	scaleType = Enum.ScaleType.Fit
 }
 
-return function(p1) --[[ Line: 27 | Named "BackgroundImage" ]]
+return function(p1)
 	-- upvalues: DashModule (copy), config (copy), ReactModule (copy)
 	local JoinResult = DashModule.join(config, p1)
 	

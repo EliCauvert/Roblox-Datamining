@@ -1,7 +1,7 @@
 ﻿local ExperienceService = game:GetService("ExperienceService")
 
 return {
-	LaunchExperience = function(_, p1, Source, Callback) --[[ Line: 9 ]]
+	LaunchExperience = function(_, p1, Source, Callback)
 		-- upvalues: ExperienceService (copy)
 		if Source == nil then
 			if Callback == nil then
@@ -21,29 +21,29 @@ return {
 			ExperienceService:LaunchExperienceFromSourceWithCallback(p1, Source, Callback)
 		end
 	end,
-	RegisterForExperienceJoin = function(_, Callback) --[[ Line: 24 ]]
+	RegisterForExperienceJoin = function(_, Callback)
 		-- upvalues: ExperienceService (copy)
 		return (ExperienceService:RegisterForExperienceJoin(Callback))
 	end,
-	RegisterForExperienceLeave = function(_, Callback) --[[ Line: 28 ]]
+	RegisterForExperienceLeave = function(_, Callback)
 		-- upvalues: ExperienceService (copy)
 		return (ExperienceService:RegisterForExperienceLeave(Callback))
 	end,
-	LeaveExperienceWithReason = function(_, Reason) --[[ Line: 33 ]]
+	LeaveExperienceWithReason = function(_, Reason)
 		-- upvalues: ExperienceService (copy)
 		if game:GetEngineFeature("ExperienceLeaveReasonEnabled") then
 			ExperienceService:LeaveExperienceWithReason(Reason)
 		end
 	end,
-	ConsumePendingExperienceLeaveWithReason = function(_) --[[ Line: 39 ]]
+	ConsumePendingExperienceLeaveWithReason = function(_)
 		-- upvalues: ExperienceService (copy)
 		return if game:GetEngineFeature("ExperienceLeaveReasonEnabled") then ExperienceService:ConsumePendingExperienceLeaveWithReason() else nil
 	end,
-	GetPendingJoinAttempt = function(_) --[[ Line: 46 ]]
+	GetPendingJoinAttempt = function(_)
 		-- upvalues: ExperienceService (copy)
 		return ExperienceService:GetPendingJoinAttempt()
 	end,
-	OnNewJoinAttempt = function(_) --[[ Line: 50 ]]
+	OnNewJoinAttempt = function(_)
 		-- upvalues: ExperienceService (copy)
 		return ExperienceService.OnNewJoinAttempt
 	end

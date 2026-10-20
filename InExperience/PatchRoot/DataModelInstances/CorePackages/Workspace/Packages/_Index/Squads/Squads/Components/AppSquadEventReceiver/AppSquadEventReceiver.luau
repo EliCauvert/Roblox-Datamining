@@ -14,28 +14,28 @@ local UseCanAccessPartyModule = require(Squads.Hooks.useCanAccessParty)
 local CurrentSquadUpdatedFunction = RoduxSquads.Actions.CurrentSquadUpdated
 local FFlagUseSignalsForSquadExperienceInvite = DependenciesModule.SharedFlags.FFlagUseSignalsForSquadExperienceInvite
 
-return function(_) --[[ Line: 22 ]]
+return function(_)
 	-- upvalues: UseDispatchFunction (copy), React (copy), FFlagUseSignalsForSquadExperienceInvite (copy), UseSignalStateFunction (copy), GetSquadExperienceInviteStoreFunction (copy), UseSelectorFunction (copy), ExperienceService (copy), RoduxSquads (copy), UseCanAccessPartyModule (copy), CurrentSquadUpdatedFunction (copy), AppSquadTopBannerEventReceiverModule (copy), SquadEventReceiverModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
-	local UseResult = React.useCallback(function(p1) --[[ Line: 25 ]]
+	local UseResult = React.useCallback(function(p1)
 		return if p1.Squad and p1.Squad.Squad then p1.Squad.Squad.currentExperienceInvite else nil
 	end, {})
 	local UseSignalStateResult = if FFlagUseSignalsForSquadExperienceInvite then UseSignalStateFunction(GetSquadExperienceInviteStoreFunction(false).getCurrentExperienceInvite) else UseSelectorFunction(UseResult)
-	local UseSelectorResult = UseSelectorFunction((React.useCallback(function(p1) --[[ Line: 32 ]]
+	local UseSelectorResult = UseSelectorFunction((React.useCallback(function(p1)
 		return if p1.Squad and p1.Squad.Squad and p1.Squad.Squad.currentSquadPersist then p1.Squad.Squad.currentSquadPersist.isPaused else false
 	end, {})))
-	React.useEffect(function() --[[ Line: 42 ]]
+	React.useEffect(function()
 		-- upvalues: ExperienceService (upval), RoduxSquads (upval), UseDispatchResult (copy)
-		ExperienceService:RegisterForExperienceJoin(function() --[[ Line: 43 ]]
+		ExperienceService:RegisterForExperienceJoin(function()
 			-- upvalues: RoduxSquads (upval), UseDispatchResult (upval)
 			RoduxSquads.PersistManagers.currentSquadPersistManager.pause(UseDispatchResult)
 		end)
-		ExperienceService:RegisterForExperienceLeave(function() --[[ Line: 48 ]]
+		ExperienceService:RegisterForExperienceLeave(function()
 			-- upvalues: RoduxSquads (upval), UseDispatchResult (upval)
 			RoduxSquads.PersistManagers.currentSquadPersistManager.persistAndUpdateState(UseDispatchResult)
 		end)
 	end, { UseDispatchResult })
-	React.useEffect(function() --[[ Line: 54 ]]
+	React.useEffect(function()
 		-- upvalues: UseSignalStateResult (copy), UseSelectorResult (copy), FFlagUseSignalsForSquadExperienceInvite (upval), GetSquadExperienceInviteStoreFunction (upval), UseDispatchResult (copy), RoduxSquads (upval)
 		if UseSignalStateResult and UseSelectorResult then
 			if FFlagUseSignalsForSquadExperienceInvite then
@@ -47,7 +47,7 @@ return function(_) --[[ Line: 22 ]]
 		end
 	end, { UseSignalStateResult, UseSelectorResult })
 	local UseCanAccessPartyModuleResult = UseCanAccessPartyModule()
-	React.useEffect(function() --[[ Line: 76 ]]
+	React.useEffect(function()
 		-- upvalues: UseCanAccessPartyModuleResult (copy), UseDispatchResult (copy), CurrentSquadUpdatedFunction (upval)
 		if not UseCanAccessPartyModuleResult then
 			UseDispatchResult(CurrentSquadUpdatedFunction(nil))

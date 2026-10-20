@@ -19,13 +19,13 @@ local FFlagEnableConsoleRobloxLogo = SharedFlagsModule.FFlagEnableConsoleRobloxL
 local FFlagEnableFlyoutOnNavRail = SharedFlagsModule.FFlagEnableFlyoutOnNavRail
 local FFlagFlyoutHeaderFixPadding = SharedFlagsModule.FFlagFlyoutHeaderFixPadding
 
-return function(p1) --[[ Line: 37 | Named "FlyoutLeftHeader" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ConstantsModule (copy), FFlagEnableFlyoutOnNavRail (copy), UseNavBarPlacementFunction (copy), Placement (copy), FFlagEnableCoreContentBadge (copy), UseAppPolicyFunction (copy), AppPage (copy), FFlagAppIaHomeSubTab (copy), NavigationRoduxModule (copy), FFlagFlyoutHeaderFixPadding (copy), FFlagEnableHomeRobloxLogo (copy), FFlagEnableConsoleRobloxLogo (copy), ReactModule (copy), FoundationModule (copy), EnableHomeBetaBadge (copy), FlyoutHamburgerButtonModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Size500 = UseTokensResult.Size.Size_500
 	local _Vector2 = Vector2.new(Size500 * ConstantsModule.ROBLOX_LOGO_ASPECT_RATIO, Size500)
 	local IsUseNavBarPlacementResultMatch = if FFlagEnableFlyoutOnNavRail then UseNavBarPlacementFunction() == Placement.Bottom else nil
-	local UseAppPolicyResult = if FFlagEnableCoreContentBadge then UseAppPolicyFunction(function(p2) --[[ Line: 50 ]]
+	local UseAppPolicyResult = if FFlagEnableCoreContentBadge then UseAppPolicyFunction(function(p2)
 		return p2.getCoreContentBadgeText()
 	end) else nil
 	local IsNotUseAppPolicyResultMatch: boolean = if FFlagEnableCoreContentBadge then UseAppPolicyResult and UseAppPolicyResult ~= "" else false

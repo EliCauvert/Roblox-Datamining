@@ -2,12 +2,12 @@
 local UseDispatchFunction = require(ProfileQRCode.Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local RefreshQrSessionModule = require(ProfileQRCode.Networking.refreshQrSession)
 
-return function() --[[ Line: 8 ]]
+return function()
 	-- upvalues: UseDispatchFunction (copy), RefreshQrSessionModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	
-	return function() --[[ Line: 11 ]]
+	return function()
 		-- upvalues: UseDispatchResult (copy), RefreshQrSessionModule (upval)
-		return UseDispatchResult(RefreshQrSessionModule.API()):catch(function() --[[ Line: 12 ]] end)
+		return UseDispatchResult(RefreshQrSessionModule.API()):catch(function() end)
 	end
 end

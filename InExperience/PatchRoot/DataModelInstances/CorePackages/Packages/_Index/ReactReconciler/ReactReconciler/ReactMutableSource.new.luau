@@ -8,11 +8,11 @@ local List = {}
 local T = if ReactGlobalsModule.__DEV__ then {} else nil
 
 return {
-	markSourceAsDirty = function(p1) --[[ Line: 39 ]]
+	markSourceAsDirty = function(p1)
 		-- upvalues: List (copy)
 		table.insert(List, p1)
 	end,
-	resetWorkInProgressVersions = function() --[[ Line: 43 ]]
+	resetWorkInProgressVersions = function()
 		-- upvalues: List (copy), IsPrimaryRenderer (copy)
 		for _, value in List do
 			if IsPrimaryRenderer then
@@ -23,11 +23,11 @@ return {
 		end
 		table.clear(List)
 	end,
-	getWorkInProgressVersion = function(p1) --[[ Line: 54 ]]
+	getWorkInProgressVersion = function(p1)
 		-- upvalues: IsPrimaryRenderer (copy)
 		return if IsPrimaryRenderer then p1._workInProgressVersionPrimary else p1._workInProgressVersionSecondary
 	end,
-	setWorkInProgressVersion = function(p1, _workInProgressVersionPrimary) --[[ Line: 64 ]]
+	setWorkInProgressVersion = function(p1, _workInProgressVersionPrimary)
 		-- upvalues: IsPrimaryRenderer (copy), List (copy)
 		if IsPrimaryRenderer then
 			p1._workInProgressVersionPrimary = _workInProgressVersionPrimary
@@ -36,7 +36,7 @@ return {
 		end
 		table.insert(List, p1)
 	end,
-	warnAboutMultipleRenderersDEV = function(p1) --[[ Line: 76 ]]
+	warnAboutMultipleRenderersDEV = function(p1)
 		-- upvalues: ReactGlobalsModule (copy), IsPrimaryRenderer (copy), T (ref), Console (copy)
 		if ReactGlobalsModule.__DEV__ then
 			if IsPrimaryRenderer then
@@ -61,7 +61,7 @@ return {
 			end
 		end
 	end,
-	registerMutableSourceForHydration = function(p1, p2) --[[ Line: 104 ]]
+	registerMutableSourceForHydration = function(p1, p2)
 		local Version = p2._getVersion(p2._source)
 		
 		if p1.mutableSourceEagerHydrationData == nil then

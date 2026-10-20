@@ -4,7 +4,7 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(script.Parent.FeedTypes)
 local NavigationBarModule = require(script.Parent.NavigationBar)
 
-return function(p1) --[[ Line: 35 | Named "FeedNavigationBar" ]]
+return function(p1)
 	-- upvalues: SignalsReactModule (copy), ReactModule (copy), NavigationBarModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.pager.getItems)
 	local CountUseSignalStateResult = #UseSignalStateResult

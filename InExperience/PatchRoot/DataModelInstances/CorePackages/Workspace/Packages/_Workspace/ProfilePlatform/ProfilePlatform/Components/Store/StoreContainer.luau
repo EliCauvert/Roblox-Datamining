@@ -31,7 +31,7 @@ local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.Robl
 local HttpService = game:GetService("HttpService")
 local StoreGridModule = require(script.Parent.StoreGrid)
 local StoreGridSkeletonModule = require(script.Parent.StoreGridSkeleton)
-local MemoizeResult = require(Parent.AppCommonLib).memoize(function(List, p1, p2) --[[ Line: 53 ]]
+local MemoizeResult = require(Parent.AppCommonLib).memoize(function(List, p1, p2)
 	-- upvalues: EnumsModule (copy)
 	local t = {}
 	local Count = 1
@@ -48,14 +48,14 @@ local MemoizeResult = require(Parent.AppCommonLib).memoize(function(List, p1, p2
 	return t
 end)
 
-return function(p3) --[[ Line: 76 | Named "StoreContainer" ]]
+return function(p3)
 	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseDispatchFunction (copy), ReactModule (copy), FFlagEnableCommunityProfileLoadingSkeletonsModule (copy), UseMarketplaceAnalyticsContextModule (copy), EventNamesModule (copy), FFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule (copy), EnumsModule (copy), UseProfileJsonComponentModule (copy), ConstantsModule (copy), MemoizeResult (copy), UseSelectorFunction (copy), FFlagAXEnableProfileTab (copy), UseProfileFormFactorModule (copy), GetFIntProfilePlatformMeTabStoreItemLimitModule (copy), ProfilePlatformStoreItemLimit (copy), HttpService (copy), FFlagProfilePlatformNavigateToMarketplaceWebViewModule (copy), Url (copy), AppPage (copy), TextKeysModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), NetworkingCatalogModule (copy), StoreGridSkeletonModule (copy), ProfilePlatformHideStoreIfNoAssets (copy), StoreGridModule (copy), DashModule (copy)
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	local UseProfileAnalyticsContextModuleResult = UseProfileAnalyticsContextModule()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(if FFlagEnableCommunityProfileLoadingSkeletonsModule then true else false)
 	local UseMarketplaceAnalyticsContextModuleResult = UseMarketplaceAnalyticsContextModule()
-	local UseResult = ReactModule.useCallback(function(p4, p5, p6) --[[ Line: 85 ]]
+	local UseResult = ReactModule.useCallback(function(p4, p5, p6)
 		-- upvalues: UseProfileWrapperContextModuleResult (copy), UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), FFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule (upval), EnumsModule (upval), UseMarketplaceAnalyticsContextModuleResult (copy)
 		UseProfileWrapperContextModuleResult.navigateTo.itemOrBundleDetails(p4, p5)
 		UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.CatalogItemOpened, if FFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule then {
@@ -75,7 +75,7 @@ return function(p3) --[[ Line: 76 | Named "StoreContainer" ]]
 		UseProfileWrapperContextModuleResult.externalAnalytics.catalogAnalytics
 	})
 	local Assets = UseProfileJsonComponentModule(EnumsModule.Components.Store).assets or {}
-	local UseSelectorResult = UseSelectorFunction((ReactModule.useCallback(function(p4) --[[ Line: 119 ]]
+	local UseSelectorResult = UseSelectorFunction((ReactModule.useCallback(function(p4)
 		-- upvalues: ConstantsModule (upval), MemoizeResult (upval), Assets (copy)
 		return MemoizeResult(Assets, p4[ConstantsModule.RODUX_KEY].BundleDetails or {}, p4[ConstantsModule.RODUX_KEY].AssetDetails or {})
 	end, { Assets })))
@@ -88,7 +88,7 @@ return function(p3) --[[ Line: 76 | Named "StoreContainer" ]]
 	local ProfileType = UseProfileWrapperContextModuleResult.profileType
 	local ProfileId = UseProfileWrapperContextModuleResult.profileId
 	local Name1 = if ProfileType == EnumsModule.ProfileTypes.Community then HttpService:UrlEncode(Name) else Name
-	local UseResult1 = if FFlagProfilePlatformNavigateToMarketplaceWebViewModule then ReactModule.useCallback(function() --[[ Line: 160 ]]
+	local UseResult1 = if FFlagProfilePlatformNavigateToMarketplaceWebViewModule then ReactModule.useCallback(function()
 		-- upvalues: UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), ProfileType (copy), EnumsModule (upval), Url (upval), ProfileId (copy), Name1 (copy), AppPage (upval), TextKeysModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 		UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.StoreHeaderButton)
 		local config = {
@@ -110,7 +110,7 @@ return function(p3) --[[ Line: 76 | Named "StoreContainer" ]]
 		ProfileType,
 		ProfileId
 	}) else nil
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 186 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), UseProfileWrapperContextModuleResult (copy), Name (copy)
 		UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.StoreHeaderButton)
 		UseProfileWrapperContextModuleResult.navigateTo.catalogSearch(Name)
@@ -119,9 +119,9 @@ return function(p3) --[[ Line: 76 | Named "StoreContainer" ]]
 		Name,
 		UseProfileAnalyticsContextModuleResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 198 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseDispatchResult (copy), NetworkingCatalogModule (upval), Assets (copy), FFlagEnableCommunityProfileLoadingSkeletonsModule (upval), UseStateResult2 (copy)
-		UseDispatchResult(NetworkingCatalogModule.GetItemAndBundleDetails.API(Assets)):catch(function(_) --[[ Line: 199 ]] end):finally(function() --[[ Line: 199 ]]
+		UseDispatchResult(NetworkingCatalogModule.GetItemAndBundleDetails.API(Assets)):catch(function(_) end):finally(function()
 			-- upvalues: FFlagEnableCommunityProfileLoadingSkeletonsModule (upval), UseStateResult2 (upval)
 			if FFlagEnableCommunityProfileLoadingSkeletonsModule then
 				UseStateResult2(false)

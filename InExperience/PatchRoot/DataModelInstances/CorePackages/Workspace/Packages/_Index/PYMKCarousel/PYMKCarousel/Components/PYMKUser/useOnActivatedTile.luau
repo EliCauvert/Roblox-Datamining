@@ -10,16 +10,16 @@ local GetRecommendationContextualInfoTypeFunction = require(Parent1.SocialCommon
 local GetFriendStatusModule = require(Parent.Analytics.getFriendStatus)
 local EventNames = require(Parent.Analytics).EventNames
 
-return function(p1) --[[ Line: 43 | Named "useOnActivatedTile" ]]
+return function(p1)
 	-- upvalues: React (copy), ConstantsModule (copy), GetRecommendationContextualInfoTypeFunction (copy), RecommendationContextType (copy), EventNames (copy), GetFriendStatusModule (copy), HttpService (copy)
-	local UseMemoResult = React.useMemo(function() --[[ Line: 44 ]]
+	local UseMemoResult = React.useMemo(function()
 		-- upvalues: p1 (copy)
 		return if p1.recommendation.mutualFriendsCount then p1.recommendation.mutualFriendsCount elseif p1.recommendation.mutualFriendsList then #p1.recommendation.mutualFriendsList else nil
 	end, {
 		p1.recommendation.mutualFriendsCount,
 		p1.recommendation.mutualFriendsList
 	})
-	local UseResult = React.useCallback(function() --[[ Line: 57 ]]
+	local UseResult = React.useCallback(function()
 		-- upvalues: p1 (copy), ConstantsModule (upval), UseMemoResult (copy), GetRecommendationContextualInfoTypeFunction (upval), RecommendationContextType (upval)
 		p1.openProfilePeekView(p1.userId, {
 			isRecommendation = true,
@@ -42,7 +42,7 @@ return function(p1) --[[ Line: 43 | Named "useOnActivatedTile" ]]
 		p1.recommendationSessionId, p1.recommendation
 	})
 	
-	return (React.useCallback(function() --[[ Line: 97 ]]
+	return (React.useCallback(function()
 		-- upvalues: UseResult (copy), p1 (copy), EventNames (upval), GetFriendStatusModule (upval), RecommendationContextType (upval), HttpService (upval)
 		UseResult()
 		p1.fireAnalyticsEvent(EventNames.UserPressed, {

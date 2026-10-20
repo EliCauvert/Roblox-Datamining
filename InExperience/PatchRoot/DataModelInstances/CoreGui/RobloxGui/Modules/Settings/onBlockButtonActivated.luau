@@ -10,7 +10,7 @@ local BlockingModalScreenModule = require(script.Parent.Components.Blocking.Bloc
 local FFlagAddNewPlayerListMobileFocusNav = require(CorePackages.Workspace.Packages.PlayerList).Flags.FFlagAddNewPlayerListMobileFocusNav
 local BlockingContainer = nil
 
-local function _() --[[ Line: 23 ]]
+local function _()
 	-- upvalues: BlockingContainer (ref), RoactModule (copy), ContextActionService (copy)
 	if BlockingContainer ~= nil then
 		RoactModule.unmount(BlockingContainer)
@@ -19,9 +19,9 @@ local function _() --[[ Line: 23 ]]
 	end
 end
 
-return function(Player: Player, p1, Source, p2) --[[ Line: 32 ]]
+return function(Player: Player, p1, Source, p2)
 	-- upvalues: PromiseModule (copy), BlockingAnalyticsModule (copy), BlockingContainer (ref), RoactModule (copy), ContextActionService (copy), FFlagAddNewPlayerListMobileFocusNav (copy), GuiService (copy), BlockingModalScreenModule (copy), CoreScriptsRootProvider (copy), RobloxGui (copy)
-	return PromiseModule.new(function(Callback) --[[ Line: 33 ]]
+	return PromiseModule.new(function(Callback)
 		-- upvalues: p1 (copy), BlockingAnalyticsModule (upval), Player (copy), Source (copy), BlockingContainer (upval), RoactModule (upval), ContextActionService (upval), FFlagAddNewPlayerListMobileFocusNav (upval), p2 (copy), GuiService (upval), BlockingModalScreenModule (upval), CoreScriptsRootProvider (upval), RobloxGui (upval)
 		local P1 = p1 or BlockingAnalyticsModule.new()
 		P1:action("SettingsHub", "blockUserButtonClick", { blockeeUserId = Player.UserId, source = Source })
@@ -31,7 +31,7 @@ return function(Player: Player, p1, Source, p2) --[[ Line: 32 ]]
 			BlockingContainer = nil
 			ContextActionService:UnbindCoreAction("BlockingModalScreen")
 		end
-		local function CloseModal() --[[ Line: 42 ]]
+		local function CloseModal()
 			-- upvalues: BlockingContainer (upval), RoactModule (upval), ContextActionService (upval), Callback (copy), FFlagAddNewPlayerListMobileFocusNav (upval), p2 (upval), GuiService (upval)
 			if BlockingContainer ~= nil then
 				RoactModule.unmount(BlockingContainer)

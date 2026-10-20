@@ -5,9 +5,9 @@ local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local _ = require(SocialTabsPage.Common.Types)
 
-return function(p1) --[[ Line: 11 | Named "useLocalizedTabs" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), CryoModule (copy)
-	local UseLocalizationResult = UseLocalizationFunction((ReactModule.useMemo(function() --[[ Line: 12 ]]
+	local UseLocalizationResult = UseLocalizationFunction((ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		local TabLabelKeys = {}
 		
@@ -17,9 +17,9 @@ return function(p1) --[[ Line: 11 | Named "useLocalizedTabs" ]]
 		return TabLabelKeys
 	end, { p1 })))
 	
-	return ReactModule.useMemo(function() --[[ Line: 22 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: CryoModule (upval), p1 (copy), UseLocalizationResult (copy)
-		return CryoModule.List.map(p1, function(p2) --[[ Line: 23 ]]
+		return CryoModule.List.map(p1, function(p2)
 			-- upvalues: UseLocalizationResult (upval)
 			return { id = p2.id, text = UseLocalizationResult[p2.id] }
 		end)

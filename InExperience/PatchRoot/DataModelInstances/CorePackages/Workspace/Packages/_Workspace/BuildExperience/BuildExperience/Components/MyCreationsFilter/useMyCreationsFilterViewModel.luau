@@ -13,16 +13,16 @@ local FocusNavigableSurfaceIdentifierEnum = require(Parent.FocusNavigationUtils)
 local config = { games = "MyGames" }
 local List = { "All", "MyGames", "GroupGames" }
 
-local function _(p1): string --[[ Line: 38 | Named "getGroupIcon" ]]
+local function _(p1): string
 	return string.format("rbxthumb://type=GroupIcon&id=%d&w=150&h=150", p1)
 end
 
-return function(Frame) --[[ Line: 42 | Named "useMyCreationsFilterViewModel" ]]
+return function(Frame)
 	-- upvalues: GetMyCreationsFilterStoreModule (copy), CreatorGroupsModule (copy), ReactModule (copy), UseSignalStateFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseClosableFocusRootModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), List (copy), config (copy), MatchesSearchQueryModule (copy)
 	local FilterStore = Frame.filterStore or GetMyCreationsFilterStoreModule()
 	local UseFilterResult = FilterStore.useFilter()
 	local CreatorGroupsStore = Frame.creatorGroupsStore or CreatorGroupsModule.getCreatorGroupsStore()
-	local UseSignalStateResult = UseSignalStateFunction(ReactModule.useMemo(function() --[[ Line: 46 ]]
+	local UseSignalStateResult = UseSignalStateFunction(ReactModule.useMemo(function()
 		-- upvalues: CreatorGroupsStore (copy)
 		return (CreatorGroupsStore.getAndFetchGroups("Build"))
 	end, { CreatorGroupsStore }).data)
@@ -45,13 +45,13 @@ return function(Frame) --[[ Line: 42 | Named "useMyCreationsFilterViewModel" ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(UseFilterResult)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState("")
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 71 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), FilterStore (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy)
 		UseStateResult2(FilterStore.getFilter())
 		UseStateResult2_1("")
 		UseStateResult2_2(true)
 	end, { FilterStore })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 77 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_2 (copy)
 		UseStateResult2_2(false)
 	end, {})
@@ -60,10 +60,10 @@ return function(Frame) --[[ Line: 42 | Named "useMyCreationsFilterViewModel" ]]
 		isOpen = UseStateResult3,
 		onClose = UseResult1
 	})
-	local UseResult2 = ReactModule.useCallback(function(Value) --[[ Line: 87 ]]
+	local UseResult2 = ReactModule.useCallback(function(Value)
 		-- upvalues: List (upval), UseStateResult2 (copy)
 		if table.find(List, Value) then
-			UseStateResult2(function(p1) --[[ Line: 90 ]]
+			UseStateResult2(function(p1)
 				-- upvalues: Value (copy)
 				return {
 					games = Value,
@@ -72,9 +72,9 @@ return function(Frame) --[[ Line: 42 | Named "useMyCreationsFilterViewModel" ]]
 			end)
 		end
 	end, {})
-	local UseResult3 = ReactModule.useCallback(function(GroupId) --[[ Line: 99 ]]
+	local UseResult3 = ReactModule.useCallback(function(GroupId)
 		-- upvalues: UseStateResult2 (copy)
-		UseStateResult2(function(p1) --[[ Line: 100 ]]
+		UseStateResult2(function(p1)
 			-- upvalues: GroupId (copy)
 			return {
 				games = "GroupGames",
@@ -82,17 +82,17 @@ return function(Frame) --[[ Line: 42 | Named "useMyCreationsFilterViewModel" ]]
 			}
 		end)
 	end, {})
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 108 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: FilterStore (copy), UseStateResult (copy), UseStateResult2_2 (copy)
 		FilterStore.setFilter(UseStateResult)
 		UseStateResult2_2(false)
 	end, { UseStateResult, FilterStore })
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 113 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), config (upval), UseStateResult2_1 (copy)
 		UseStateResult2(config)
 		UseStateResult2_1("")
 	end, {})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 118 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: All (copy), MyGames (copy), GroupGames (copy)
 		return {
 			{ value = "All", label = All },
@@ -101,7 +101,7 @@ return function(Frame) --[[ Line: 42 | Named "useMyCreationsFilterViewModel" ]]
 		}
 	end, { All, GroupGames, MyGames })
 	local GroupId = UseStateResult.groupId
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 127 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult (copy), MatchesSearchQueryModule (upval), UseStateResult1 (copy), GroupId (copy), UseResult3 (copy)
 		local List = {}
 		
@@ -115,7 +115,7 @@ return function(Frame) --[[ Line: 42 | Named "useMyCreationsFilterViewModel" ]]
 					name = group.name,
 					icon = string.format("rbxthumb://type=GroupIcon&id=%d&w=150&h=150", group.id),
 					isSelected = group.id == GroupId,
-					onActivated = function() --[[ Line: 139 ]]
+					onActivated = function()
 						-- upvalues: UseResult3 (upval), group (copy)
 						UseResult3(group.id)
 					end

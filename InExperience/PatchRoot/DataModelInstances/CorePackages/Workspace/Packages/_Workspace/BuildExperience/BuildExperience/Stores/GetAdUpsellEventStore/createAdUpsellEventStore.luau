@@ -13,7 +13,7 @@ local BuildAppStorageKeyEngineFeature = game:GetEngineFeature("BuildAppStorageKe
 local BuildAppStorageModule = if BuildAppStorageKeyEngineFeature then require(BuildExperience.Storage.BuildAppStorage) else nil
 local _ = require(BuildExperience.Storage.createAdCampaignCardStorage)
 
-local function defaultDependencies() --[[ Line: 98 ]]
+local function defaultDependencies()
 	-- upvalues: BuildAppStorageKeyEngineFeature (copy), FFlagBuildAgentAdCampaignCardModule (copy), BuildAppStorageModule (copy), UniverseConfigurationModule (copy), GameConfigurationLabelsModule (copy), GetAdUpsellEligibilityModule (copy), ObserveAdUpsellEligibilityModule (copy)
 	return if BuildAppStorageKeyEngineFeature then {
 		getAdCampaignCardStorage = if FFlagBuildAgentAdCampaignCardModule then BuildAppStorageModule.getAdCampaignCardStorage else nil,
@@ -23,39 +23,39 @@ local function defaultDependencies() --[[ Line: 98 ]]
 		pruneAnchors = BuildAppStorageModule.pruneAdUpsellAnchors,
 		markAnchorImpressed = BuildAppStorageModule.markAdUpsellAnchorImpressed,
 		dismissPermanently = BuildAppStorageModule.markAdUpsellDismissedPermanently,
-		isDismissedPermanently = function(UniverseId) --[[ Line: 112 ]]
+		isDismissedPermanently = function(UniverseId)
 			-- upvalues: BuildAppStorageModule (upval)
 			local AdUpsellState = BuildAppStorageModule.getAdUpsellState(UniverseId, nil)
 			
 			return AdUpsellState.isAvailable and AdUpsellState.dismissedPermanently
 		end,
 		retryStorageRead = BuildAppStorageModule.retryAdUpsellRead,
-		refreshSummary = function(p1) --[[ Line: 117 ]]
+		refreshSummary = function(p1)
 			-- upvalues: UniverseConfigurationModule (upval)
 			return UniverseConfigurationModule.getUniverseConfigurationStore().refreshSummary(p1)
 		end,
-		getAudience = function(p1) --[[ Line: 120 ]]
+		getAudience = function(p1)
 			-- upvalues: GameConfigurationLabelsModule (upval)
 			return GameConfigurationLabelsModule.getAudience(p1)
 		end,
 		publicAudience = UniverseConfigurationModule.PrivacyType.Public,
 		getEligibility = GetAdUpsellEligibilityModule,
 		observeEligibility = ObserveAdUpsellEligibilityModule,
-		scheduleRetry = function(Delay, p1) --[[ Line: 126 ]]
+		scheduleRetry = function(Delay, p1)
 			return task.delay(Delay, p1)
 		end,
-		cancelRetry = function(ScheduleRetryResult) --[[ Line: 129 ]]
+		cancelRetry = function(ScheduleRetryResult)
 			task.cancel(ScheduleRetryResult)
 		end
 	} else nil
 end
 
-local function _(p1): boolean --[[ Line: 135 | Named "hasSuccessfulPublish" ]]
+local function _(p1): boolean
 	-- upvalues: CreatorAgentChatModule (copy)
 	return CreatorAgentChatModule.PublishToolUtils.getLatestSuccessfulResult(p1, { parseDirectText = true }) ~= nil
 end
 
-return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
+return function(p1)
 	-- upvalues: defaultDependencies (copy), SignalsModule (copy), FFlagBuildAdUpsellPinnedModule (copy), ChatTypesModule (copy), CreatorAgentChatModule (copy), FFlagBuildAgentAdCampaignCardModule (copy)
 	local P6 = p1 or defaultDependencies()
 	local Signal, Signal2 = SignalsModule.createSignal(0)
@@ -69,42 +69,42 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 	local Callback = nil
 	local _ = nil
 	
-	local function _() --[[ Line: 155 | Named "bumpRevision" ]]
+	local function _()
 		-- upvalues: Signal2 (copy)
-		Signal2(function(p2: number): number --[[ Line: 156 ]]
+		Signal2(function(p2: number): number
 			return p2 + 1
 		end)
 	end
 	
-	local _ = function() --[[ Line: 161 | Named "getCardStorage" ]]
+	local _ = function()
 		-- upvalues: P6 (copy)
 		return if P6 == nil then nil else P6.getAdCampaignCardStorage()
 	end
 	
-	local _ = function() --[[ Line: 165 | Named "bumpAdCampaignRevision" ]]
+	local _ = function()
 		-- upvalues: Signal2_1 (copy), Signal2 (copy)
-		Signal2_1(function(p2: number): number --[[ Line: 166 ]]
+		Signal2_1(function(p2: number): number
 			return p2 + 1
 		end)
-		Signal2(function(p2: number): number --[[ Line: 156 ]]
+		Signal2(function(p2: number): number
 			return p2 + 1
 		end)
 	end
 	
-	local function recordCardMutation(p2, p3, HasPendingWrites) --[[ Line: 172 ]]
+	local function recordCardMutation(p2, p3, HasPendingWrites)
 		-- upvalues: Signal2_1 (copy), Signal2 (copy)
 		if p3 or p2 and HasPendingWrites then
-			Signal2_1(function(p4: number): number --[[ Line: 166 ]]
+			Signal2_1(function(p4: number): number
 				return p4 + 1
 			end)
-			Signal2(function(p4: number): number --[[ Line: 156 ]]
+			Signal2(function(p4: number): number
 				return p4 + 1
 			end)
 		end
 		return p2, p3
 	end
 	
-	local _ = function(Key) --[[ Line: 183 | Named "disposeEligibilitySubscription" ]]
+	local _ = function(Key)
 		-- upvalues: ObserveEligibilityResults (copy)
 		local ObserveEligibilityResult: () -> () = ObserveEligibilityResults[Key]
 		
@@ -116,7 +116,7 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 		end
 	end
 	
-	local _ = function(Value) --[[ Line: 193 | Named "removePending" ]]
+	local _ = function(Value)
 		-- upvalues: Tbl (copy), ObserveEligibilityResults (copy), List (copy)
 		if Tbl[Value] == nil then return end
 		local ObserveEligibilityResult: () -> () = ObserveEligibilityResults[Value]
@@ -133,7 +133,7 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 		end
 	end
 	
-	local function retainPending(p2) --[[ Line: 205 ]]
+	local function retainPending(p2)
 		-- upvalues: Tbl (copy), List (copy), ObserveEligibilityResults (copy)
 		local Entry = Tbl[p2.id]
 		
@@ -157,11 +157,11 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 		return p2
 	end
 	
-	local _ = function(p3): boolean --[[ Line: 224 | Named "canRetryAutomatically" ]]
+	local _ = function(p3): boolean
 		return not p3.isAwaitingEligibility and (if p3.requiresAudienceVerification and p3.isEligiblePublish == nil then not p3.isVerifyingAudience and p3.audienceVerificationAttempts < 3 else p3.storagePersistenceAttempts < 3)
 	end
 	
-	local _ = function(): boolean --[[ Line: 237 | Named "hasAutomaticallyRetryableEvent" ]]
+	local _ = function(): boolean
 		-- upvalues: List (copy), Tbl (copy)
 		for _, value in List do
 			local Entry = Tbl[value]
@@ -173,7 +173,7 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 		return false
 	end
 	
-	local function v38() --[[ Line: 247 ]]
+	local function v38()
 		-- upvalues: P6 (copy), ScheduleRetryResult (ref), List (copy), Tbl (copy), Count (ref), Callback (ref), v38 (ref)
 		if P6 ~= nil and ScheduleRetryResult == nil then
 			local Flag = false
@@ -188,7 +188,7 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 			end
 			if Flag then
 				local Count1 = Count
-				ScheduleRetryResult = P6.scheduleRetry(1, function() --[[ Line: 252 ]]
+				ScheduleRetryResult = P6.scheduleRetry(1, function()
 					-- upvalues: ScheduleRetryResult (upval), Count (upval), Count1 (copy), List (upval), Tbl (upval), Callback (upval), v38 (upval)
 					ScheduleRetryResult = nil
 					
@@ -220,7 +220,7 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 		end
 	end
 	
-	local function persistEvent(p3) --[[ Line: 270 ]]
+	local function persistEvent(p3)
 		-- upvalues: P6 (copy), FFlagBuildAdUpsellPinnedModule (upval), AfterMessageKeys (copy), Signal2 (copy), Tbl (copy), ObserveEligibilityResults (copy), List (copy), v38 (ref)
 		if P6 == nil then return end
 		local config = {
@@ -242,7 +242,7 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 			if FFlagBuildAdUpsellPinnedModule and p3.afterMessageKey ~= nil then
 				AfterMessageKeys[p3.id] = p3.afterMessageKey
 			end
-			Signal2(function(p4: number): number --[[ Line: 156 ]]
+			Signal2(function(p4: number): number
 				return p4 + 1
 			end)
 		end
@@ -273,7 +273,7 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 		end
 	end
 	
-	local _ = function(p3) --[[ Line: 304 | Named "handleAudienceVerificationFailure" ]]
+	local _ = function(p3)
 		-- upvalues: v38 (ref)
 		p3.isVerifyingAudience = false
 		p3.audienceVerificationAttempts += 1
@@ -283,7 +283,7 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 		end
 	end
 	
-	local function awaitEligibility(p3, p4) --[[ Line: 317 ]]
+	local function awaitEligibility(p3, p4)
 		-- upvalues: P6 (copy), Count (ref), Tbl (copy), ObserveEligibilityResults (copy), persistEvent (copy)
 		if P6 == nil then return end
 		p3.isVerifyingAudience = false
@@ -293,7 +293,7 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 		local Count1 = Count
 		local v1 = nil
 		local Flag = false
-		local ObserveEligibilityResult: () -> () = P6.observeEligibility(p3.universeId, function() --[[ Line: 330 | Named "onEligibilityChanged" ]]
+		local ObserveEligibilityResult: () -> () = P6.observeEligibility(p3.universeId, function()
 			-- upvalues: Count (upval), Count1 (copy), Tbl (upval), p3 (copy), P6 (upval), v1 (ref), ObserveEligibilityResults (upval), Flag (ref), p4 (copy), persistEvent (upval)
 			if Count ~= Count1 or Tbl[p3.id] ~= p3 then return end
 			local Eligibility = P6.getEligibility(p3.universeId)
@@ -326,7 +326,7 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 		end
 	end
 	
-	Callback = function(p3) --[[ Line: 363 ]]
+	Callback = function(p3)
 		-- upvalues: P6 (copy), Tbl (copy), persistEvent (copy), v38 (ref), Count (ref), awaitEligibility (copy)
 		if P6 == nil or Tbl[p3.id] ~= p3 then return end
 		if not p3.requiresAudienceVerification or p3.isEligiblePublish ~= nil then
@@ -340,7 +340,7 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 		
 		if Success and Result ~= nil then
 			local Count1 = Count
-			Result:andThen(function(Result) --[[ Line: 382 ]]
+			Result:andThen(function(Result)
 				-- upvalues: Count (upval), Count1 (copy), Tbl (upval), p3 (copy), P6 (upval), awaitEligibility (upval), persistEvent (upval)
 				if Count ~= Count1 or Tbl[p3.id] ~= p3 then return end
 				local Eligibility = P6.getEligibility(p3.universeId)
@@ -354,7 +354,7 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 				else
 					awaitEligibility(p3, Result)
 				end
-			end, function() --[[ Line: 399 ]]
+			end, function()
 				-- upvalues: Count (upval), Count1 (copy), Tbl (upval), p3 (copy), v38 (upval)
 				if Count ~= Count1 or Tbl[p3.id] ~= p3 then return end
 				p3.isVerifyingAudience = false
@@ -375,7 +375,7 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 		end
 	end
 	
-	local function disposeAllEligibilitySubscriptions() --[[ Line: 527 ]]
+	local function disposeAllEligibilitySubscriptions()
 		-- upvalues: ObserveEligibilityResults (copy)
 		local List = {}
 		
@@ -393,36 +393,36 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 	end
 	
 	return {
-		recordAdCampaignAttempt = if FFlagBuildAgentAdCampaignCardModule then function(p3, p4): boolean --[[ Line: 573 ]]
+		recordAdCampaignAttempt = if FFlagBuildAgentAdCampaignCardModule then function(p3, p4): boolean
 			-- upvalues: P6 (copy), Signal2_1 (copy), Signal2 (copy)
 			local AdCampaignCardStorage = if P6 == nil then nil else P6.getAdCampaignCardStorage()
 			
 			if AdCampaignCardStorage == nil or not AdCampaignCardStorage.saveAttempt(p3, p4) then
 				return false
 			else
-				Signal2_1(function(p5: number): number --[[ Line: 166 ]]
+				Signal2_1(function(p5: number): number
 					return p5 + 1
 				end)
-				Signal2(function(p5: number): number --[[ Line: 156 ]]
+				Signal2(function(p5: number): number
 					return p5 + 1
 				end)
 				
 				return true
 			end
 		end else nil,
-		getAdCampaignCard = if FFlagBuildAgentAdCampaignCardModule then function(p3, p4) --[[ Line: 583 ]]
+		getAdCampaignCard = if FFlagBuildAgentAdCampaignCardModule then function(p3, p4)
 			-- upvalues: P6 (copy)
 			local AdCampaignCardStorage = if P6 == nil then nil else P6.getAdCampaignCardStorage()
 			
 			return if AdCampaignCardStorage == nil then { isAvailable = false, isPersisted = false } else AdCampaignCardStorage.get(p3, p4)
 		end else nil,
-		listAdCampaignCards = if FFlagBuildAgentAdCampaignCardModule then function(p3) --[[ Line: 592 ]]
+		listAdCampaignCards = if FFlagBuildAgentAdCampaignCardModule then function(p3)
 			-- upvalues: P6 (copy)
 			local AdCampaignCardStorage = if P6 == nil then nil else P6.getAdCampaignCardStorage()
 			
 			return if AdCampaignCardStorage == nil then { isAvailable = false, records = {} } else AdCampaignCardStorage.list(p3)
 		end else nil,
-		recordAdCampaignCreatedReceipt = if FFlagBuildAgentAdCampaignCardModule then function(p3) --[[ Line: 601 ]]
+		recordAdCampaignCreatedReceipt = if FFlagBuildAgentAdCampaignCardModule then function(p3)
 			-- upvalues: P6 (copy), recordCardMutation (copy)
 			local AdCampaignCardStorage = if P6 == nil then nil else P6.getAdCampaignCardStorage()
 			
@@ -435,7 +435,7 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 				return recordCardMutation(ConfirmResult, ConfirmResult2, HasPendingWrites)
 			end
 		end else nil,
-		retryAdCampaignCardWrites = if FFlagBuildAgentAdCampaignCardModule then function(): boolean --[[ Line: 612 ]]
+		retryAdCampaignCardWrites = if FFlagBuildAgentAdCampaignCardModule then function(): boolean
 			-- upvalues: P6 (copy), Signal2_1 (copy), Signal2 (copy)
 			local AdCampaignCardStorage = if P6 == nil then nil else P6.getAdCampaignCardStorage()
 			
@@ -448,16 +448,16 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 				return false
 			end
 			if HasPendingWrites then
-				Signal2_1(function(p3: number): number --[[ Line: 166 ]]
+				Signal2_1(function(p3: number): number
 					return p3 + 1
 				end)
-				Signal2(function(p3: number): number --[[ Line: 156 ]]
+				Signal2(function(p3: number): number
 					return p3 + 1
 				end)
 			end
 			return true
 		end else nil,
-		pruneAdCampaignCards = if FFlagBuildAgentAdCampaignCardModule then function(p3) --[[ Line: 628 ]]
+		pruneAdCampaignCards = if FFlagBuildAgentAdCampaignCardModule then function(p3)
 			-- upvalues: P6 (copy), Signal2_1 (copy), Signal2 (copy)
 			local AdCampaignCardStorage = if P6 == nil then nil else P6.getAdCampaignCardStorage()
 			
@@ -467,10 +467,10 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 			local PruneResult, PruneResult2 = AdCampaignCardStorage.prune(p3)
 			
 			if PruneResult2 then
-				Signal2_1(function(p4: number): number --[[ Line: 166 ]]
+				Signal2_1(function(p4: number): number
 					return p4 + 1
 				end)
-				Signal2(function(p4: number): number --[[ Line: 156 ]]
+				Signal2(function(p4: number): number
 					return p4 + 1
 				end)
 			end
@@ -478,7 +478,7 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 		end else nil,
 		getRevision = Signal,
 		getAdCampaignRevision = Signal1,
-		reportAssistantTurnCompleted = function(p3) --[[ Line: 407 ]]
+		reportAssistantTurnCompleted = function(p3)
 			-- upvalues: P6 (copy), ChatTypesModule (upval), CreatorAgentChatModule (upval), retainPending (copy), Callback (ref)
 			if P6 == nil or p3.universeId == 0 or P6.isDismissedPermanently(p3.universeId) then return end
 			local AssistantTurnAnchorKey = ChatTypesModule.makeAssistantTurnAnchorKey(p3.sessionId, p3.latestSequenceId)
@@ -502,7 +502,7 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 				return
 			end
 		end,
-		reportMenuPublish = function(UniverseId, p3, p4, p5) --[[ Line: 438 ]]
+		reportMenuPublish = function(UniverseId, p3, p4, p5)
 			-- upvalues: P6 (copy), retainPending (copy), Callback (ref)
 			if P6 ~= nil and UniverseId ~= 0 and p4 ~= "" and not P6.isDismissedPermanently(UniverseId) then
 				local Eligibility = P6.getEligibility(UniverseId)
@@ -524,30 +524,30 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 				return
 			end
 		end,
-		retryStorageRead = function() --[[ Line: 466 ]]
+		retryStorageRead = function()
 			-- upvalues: FFlagBuildAgentAdCampaignCardModule (upval), P6 (copy), Signal2_1 (copy), Signal2 (copy), List (copy), Tbl (copy), Callback (ref)
 			if FFlagBuildAgentAdCampaignCardModule then
 				local AdCampaignCardStorage = if P6 == nil then nil else P6.getAdCampaignCardStorage()
 				
 				if AdCampaignCardStorage ~= nil and AdCampaignCardStorage.hasPendingWrites() and AdCampaignCardStorage.retryWrites() then
-					Signal2_1(function(p3: number): number --[[ Line: 166 ]]
+					Signal2_1(function(p3: number): number
 						return p3 + 1
 					end)
-					Signal2(function(p3: number): number --[[ Line: 156 ]]
+					Signal2(function(p3: number): number
 						return p3 + 1
 					end)
 				end
 			end
 			if P6 ~= nil and P6.retryStorageRead() then
 				if FFlagBuildAgentAdCampaignCardModule then
-					Signal2_1(function(p3: number): number --[[ Line: 166 ]]
+					Signal2_1(function(p3: number): number
 						return p3 + 1
 					end)
-					Signal2(function(p3: number): number --[[ Line: 156 ]]
+					Signal2(function(p3: number): number
 						return p3 + 1
 					end)
 				else
-					Signal2(function(p3: number): number --[[ Line: 156 ]]
+					Signal2(function(p3: number): number
 						return p3 + 1
 					end)
 				end
@@ -561,16 +561,16 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 				end
 			end
 		end,
-		attachPendingMilestones = function(p3, p4, p5) --[[ Line: 490 ]]
+		attachPendingMilestones = function(p3, p4, p5)
 			-- upvalues: P6 (copy), Signal2 (copy)
 			if P6 ~= nil then
 				P6.attachPendingMilestones(p3, p4, p5)
-				Signal2(function(p6: number): number --[[ Line: 156 ]]
+				Signal2(function(p6: number): number
 					return p6 + 1
 				end)
 			end
 		end,
-		pruneAnchors = function(p3, p4, p5) --[[ Line: 497 ]]
+		pruneAnchors = function(p3, p4, p5)
 			-- upvalues: FFlagBuildAdUpsellPinnedModule (upval), P6 (copy), Signal2 (copy)
 			if FFlagBuildAdUpsellPinnedModule or P6 == nil then
 				return false
@@ -578,17 +578,17 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 			local PruneAnchorsResult, PruneAnchorsResult2 = P6.pruneAnchors(p3, p4, p5)
 			
 			if PruneAnchorsResult2 then
-				Signal2(function(p6: number): number --[[ Line: 156 ]]
+				Signal2(function(p6: number): number
 					return p6 + 1
 				end)
 			end
 			return PruneAnchorsResult
 		end,
-		getTransientCongratsMessageKey = function(p3) --[[ Line: 512 ]]
+		getTransientCongratsMessageKey = function(p3)
 			-- upvalues: FFlagBuildAdUpsellPinnedModule (upval), AfterMessageKeys (copy)
 			return if FFlagBuildAdUpsellPinnedModule then AfterMessageKeys[p3] else nil
 		end,
-		markAnchorImpressed = function(p3, p4, p5) --[[ Line: 516 ]]
+		markAnchorImpressed = function(p3, p4, p5)
 			-- upvalues: P6 (copy), Signal2 (copy)
 			if P6 == nil then
 				return false
@@ -596,13 +596,13 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 			local MarkAnchorImpressedResult = P6.markAnchorImpressed(p3, p4, p5)
 			
 			if MarkAnchorImpressedResult then
-				Signal2(function(p6: number): number --[[ Line: 156 ]]
+				Signal2(function(p6: number): number
 					return p6 + 1
 				end)
 			end
 			return MarkAnchorImpressedResult
 		end,
-		dismissPermanently = function(UniverseId) --[[ Line: 538 ]]
+		dismissPermanently = function(UniverseId)
 			-- upvalues: P6 (copy), List (copy), Tbl (copy), ObserveEligibilityResults (copy), Signal2 (copy)
 			if P6 ~= nil then
 				for _, value in table.clone(List) do
@@ -624,12 +624,12 @@ return function(p1) --[[ Line: 141 | Named "createAdUpsellEventStore" ]]
 					end
 				end
 				P6.dismissPermanently(UniverseId)
-				Signal2(function(p3: number): number --[[ Line: 156 ]]
+				Signal2(function(p3: number): number
 					return p3 + 1
 				end)
 			end
 		end,
-		reset = function() --[[ Line: 555 ]]
+		reset = function()
 			-- upvalues: Count (ref), P6 (copy), ScheduleRetryResult (ref), disposeAllEligibilitySubscriptions (copy), Tbl (copy), List (copy), FFlagBuildAdUpsellPinnedModule (upval), AfterMessageKeys (copy), Signal2 (copy), Signal2_1 (copy)
 			Count += 1
 			

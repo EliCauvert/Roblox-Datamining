@@ -7,11 +7,11 @@ local Url = require(Parent.UrlBuilder).UrlBuilder.new({
 	query = { entryPoint = "SelfUserProfileOpen" }
 })()
 
-return function() --[[ Line: 18 | Named "fetchFramesPromptId" ]]
+return function()
 	-- upvalues: PromiseModule (copy), HttpService (copy), Url (copy)
-	return PromiseModule.new(function(Callback1, Callback) --[[ Line: 19 ]]
+	return PromiseModule.new(function(Callback1, Callback)
 		-- upvalues: HttpService (upval), Url (upval)
-		HttpService:RequestInternal({ Method = "GET", Url = Url }):Start(function(p1, p2) --[[ Line: 24 ]]
+		HttpService:RequestInternal({ Method = "GET", Url = Url }):Start(function(p1, p2)
 			-- upvalues: Callback (copy), HttpService (upval), Callback1 (copy)
 			if not p1 or not p2 or p2.StatusCode ~= 200 then
 				Callback()
@@ -21,7 +21,7 @@ return function() --[[ Line: 18 | Named "fetchFramesPromptId" ]]
 			local Body = p2.Body
 			
 			if typeof(Body) == "string" then
-				local Success, Result = pcall(function() --[[ Line: 31 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: HttpService (upval), Body (ref)
 					return HttpService:JSONDecode(Body)
 				end)

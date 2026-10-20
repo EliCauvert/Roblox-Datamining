@@ -11,13 +11,13 @@ local SquadLobbyScreenModule = require(AppChat.Components.Squads.SquadLobbyScree
 local GetFFlagIsSquadEnabledFunction = require(Parent.SharedFlags).GetFFlagIsSquadEnabled
 local FFlagAppChatDisableAbsorbInputSelectableModule = require(AppChat.Flags.FFlagAppChatDisableAbsorbInputSelectable)
 
-local function instantTransitionConfig() --[[ Line: 19 ]]
+local function instantTransitionConfig()
 	return {
 		transitionSpec = { frequency = 1000000, dampingRatio = 1 }
 	}
 end
 
-return function(p1, p2) --[[ Line: 28 ]]
+return function(p1, p2)
 	-- upvalues: EnumScreensModule (copy), ChatConversationScreenModule (copy), CryoModule (copy), AutoFocusNavigationModule (copy), ChatDetailsScreenModule (copy), GetFFlagIsSquadEnabledFunction (copy), SquadLobbyScreenModule (copy), SquadInviteFriendsScreenModule (copy), FFlagAppChatDisableAbsorbInputSelectableModule (copy), RoactNavigationModule (copy), instantTransitionConfig (copy)
 	local List = {
 		{

@@ -10,7 +10,7 @@ local DisableAppShortcutBarAndroidTV = game:DefineFastFlag("DisableAppShortcutBa
 local FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled = require(AppShortcutBar1.Flags).FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled
 local UseStickyShortcutBarExposureLoggingModule = require(AppShortcutBar1.Hooks.useStickyShortcutBarExposureLogging)
 
-function AppShortcutBar(Frame: Frame) --[[ Line: 26 ]]
+function AppShortcutBar(Frame: Frame)
 	-- upvalues: UseFocusedTextBoxFunction (copy), ResponsiveModule (copy), ReactModule (copy), UserInputService (copy), DisableAppShortcutBarAndroidTV (copy), ShortcutBarMinSize (copy), FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled (copy), UseStickyShortcutBarExposureLoggingModule (copy), ShortcutBar (copy)
 	local Position = if Frame.Position then Frame.Position else UDim2.fromScale(0.5, 0)
 	local AnchorPoint = if Frame.AnchorPoint then Frame.AnchorPoint else Vector2.new(0.5, 0)
@@ -19,14 +19,14 @@ function AppShortcutBar(Frame: Frame) --[[ Line: 26 ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(UseLastInputResult ~= ResponsiveModule.Input.Directional or UserInputService:GamepadSupports(UserInputService:GetLastInputType(), Enum.KeyCode.Thumbstick1))
 	
 	if DisableAppShortcutBarAndroidTV then
-		ReactModule.useEffect(function() --[[ Line: 37 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UserInputService (upval), UseStateResult2 (copy), UseLastInputResult (copy), ResponsiveModule (upval)
-			local LastInputTypeChangedConnection = UserInputService.LastInputTypeChanged:Connect(function() --[[ Line: 38 ]]
+			local LastInputTypeChangedConnection = UserInputService.LastInputTypeChanged:Connect(function()
 				-- upvalues: UseStateResult2 (upval), UseLastInputResult (upval), ResponsiveModule (upval), UserInputService (upval)
 				UseStateResult2(UseLastInputResult ~= ResponsiveModule.Input.Directional or UserInputService:GamepadSupports(UserInputService:GetLastInputType(), Enum.KeyCode.Thumbstick1))
 			end)
 			
-			return function() --[[ Line: 47 ]]
+			return function()
 				-- upvalues: LastInputTypeChangedConnection (copy)
 				LastInputTypeChangedConnection:Disconnect()
 			end

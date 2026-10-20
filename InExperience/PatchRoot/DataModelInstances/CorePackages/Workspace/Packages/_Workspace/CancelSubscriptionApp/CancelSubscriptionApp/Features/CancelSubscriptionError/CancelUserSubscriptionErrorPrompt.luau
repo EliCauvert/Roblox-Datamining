@@ -19,7 +19,7 @@ local config1 = {
 	[ErrorStateEnumModule.ErrorCancelling] = "CoreScripts.CancelUserSubscriptionPrompt.ErrorCancellingPrompt.Body"
 }
 
-return function(p1) --[[ Line: 30 | Named "CancelUserSubscriptionErrorPrompt" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), config1 (copy), ReactModule (copy), InteractiveAlert (copy), IconsStatusErrorLarge (copy), ButtonType (copy), UseScreenSizeFunction (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		buttonText = "CoreScripts.CancelUserSubscriptionPrompt.Error.ButtonText",
@@ -37,7 +37,7 @@ return function(p1) --[[ Line: 30 | Named "CancelUserSubscriptionErrorPrompt" ]]
 					isDefaultChild = true,
 					buttonType = ButtonType.PrimarySystem,
 					props = {
-						onActivated = p1.onDismiss or function() --[[ Line: 46 ]] end,
+						onActivated = p1.onDismiss or function() end,
 						text = UseLocalizationResult.buttonText,
 						delayInputSeconds = 0.75,
 						[ReactModule.Tag] = "data-testid=CancelSubscriptionApp_OkButton"

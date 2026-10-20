@@ -26,7 +26,7 @@ local UseSignalBindingFunction = SignalsReactModule.useSignalBinding
 local config = { isNavigationFocus = true }
 local _Vector2 = Vector2.new(320, 320)
 
-return function(p1) --[[ Line: 61 | Named "AudioPlayer" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), CreateNextOrderFunction (copy), UseLocalizationFunction (copy), UseAudioStoreFunction (copy), GetFFlagAudioPreviewLuaFunction (copy), UseSignalStateFunction (copy), UseSignalBindingFunction (copy), GetFFlagAudioPlayerCanSkipTracksFunction (copy), GetAudioPlaybackStoreFunction (copy), UseCallbackFunction (copy), SendAudioPlayerAnalyticsModule (copy), AnalyticActionsModule (copy), UseRefFunction (copy), UseStopSongOnPageNavigationModule (copy), UsePreviousFunction (copy), UseEffectFunction (copy), ReactModule (copy), FoundationModule (copy), _Vector2 (copy), AudioPlaybackTimelineModule (copy), RoundIconButtonModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local NextOrder = CreateNextOrderFunction()
@@ -40,7 +40,7 @@ return function(p1) --[[ Line: 61 | Named "AudioPlayer" ]]
 	local UseSignalStateResult4 = if GetFFlagAudioPlayerCanSkipTracksFunction() then UseSignalStateFunction(UseSignalStateResult3.hasNextSong) else nil
 	local UseSignalStateResult5 = if GetFFlagAudioPlayerCanSkipTracksFunction() then UseSignalStateFunction(UseSignalStateResult3.hasPrevSong) else nil
 	local UseSignalStateResult4_1 = UseSignalStateResult4 or UseSignalStateResult5
-	local UseCallbackResult = UseCallbackFunction(function(Action) --[[ Line: 90 ]]
+	local UseCallbackResult = UseCallbackFunction(function(Action)
 		-- upvalues: JoinResult (copy), SendAudioPlayerAnalyticsModule (upval), UseSignalBindingResult (copy)
 		SendAudioPlayerAnalyticsModule({
 			action = Action,
@@ -55,28 +55,28 @@ return function(p1) --[[ Line: 61 | Named "AudioPlayer" ]]
 		JoinResult.analyticsSource,
 		UseSignalBindingResult
 	})
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 117 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: UseCallbackResult (copy), AnalyticActionsModule (upval)
 		UseCallbackResult(AnalyticActionsModule.AudioElapsed)
 		UseCallbackResult(AnalyticActionsModule.AudioStopped)
 	end, { UseCallbackResult })
 	local UseRefResult = UseRefFunction(false)
-	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 124 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function()
 		-- upvalues: UseRefResult (copy), UseSignalStateResult (copy), UseAudioStoreResult (copy)
 		UseRefResult.current = UseSignalStateResult
 		UseAudioStoreResult.pause()
 	end, { UseAudioStoreResult.pause, UseSignalStateResult })
-	local UseCallbackResult3 = UseCallbackFunction(function(p2) --[[ Line: 129 ]]
+	local UseCallbackResult3 = UseCallbackFunction(function(p2)
 		-- upvalues: UseAudioStoreResult (copy), UseSignalStateResult2 (copy)
 		UseAudioStoreResult.seek(UseSignalStateResult2 * p2)
 	end, { UseAudioStoreResult.seek, UseSignalStateResult2 })
-	local UseCallbackResult4 = UseCallbackFunction(function() --[[ Line: 133 ]]
+	local UseCallbackResult4 = UseCallbackFunction(function()
 		-- upvalues: UseRefResult (copy), UseAudioStoreResult (copy)
 		if UseRefResult.current then
 			UseAudioStoreResult.play()
 		end
 	end, { UseAudioStoreResult.play })
-	local UseCallbackResult5 = UseCallbackFunction(function() --[[ Line: 140 ]]
+	local UseCallbackResult5 = UseCallbackFunction(function()
 		-- upvalues: UseSignalStateResult (copy), UseCallbackResult (copy), AnalyticActionsModule (upval), UseAudioStoreResult (copy), GetFFlagAudioPlayerCanSkipTracksFunction (upval), UseSignalStateResult3 (copy), GetAudioPlaybackStoreFunction (upval)
 		if UseSignalStateResult then
 			UseCallbackResult(AnalyticActionsModule.AudioPause)
@@ -99,12 +99,12 @@ return function(p1) --[[ Line: 61 | Named "AudioPlayer" ]]
 		UseSignalStateResult,
 		if GetFFlagAudioPlayerCanSkipTracksFunction() then UseSignalStateResult3 else nil
 	})
-	UseStopSongOnPageNavigationModule(JoinResult.isNavigationFocus, (UseCallbackFunction(function() --[[ Line: 163 ]]
+	UseStopSongOnPageNavigationModule(JoinResult.isNavigationFocus, (UseCallbackFunction(function()
 		-- upvalues: UseCallbackResult (copy), AnalyticActionsModule (upval)
 		UseCallbackResult(AnalyticActionsModule.AudioStopped)
 	end, { UseCallbackResult })))
 	local UsePreviousResult = UsePreviousFunction(UseSignalStateResult1)
-	UseEffectFunction(function() --[[ Line: 169 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseSignalStateResult1 (copy), UsePreviousResult (copy), UseCallbackResult1 (copy)
 		if UseSignalStateResult1 and not UsePreviousResult then
 			UseCallbackResult1()

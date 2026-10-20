@@ -22,7 +22,7 @@ local config1 = {
 }
 
 return {
-	logWebviewToggled = function(p1, Flow_id, Target_url) --[[ Line: 33 ]]
+	logWebviewToggled = function(p1, Flow_id, Target_url)
 		-- upvalues: TelemetryService (copy), config (copy), StandardizedFields (copy), config1 (copy), StandardizedFields1 (copy)
 		TelemetryService:LogEvent(config, {
 			standardizedFields = StandardizedFields,

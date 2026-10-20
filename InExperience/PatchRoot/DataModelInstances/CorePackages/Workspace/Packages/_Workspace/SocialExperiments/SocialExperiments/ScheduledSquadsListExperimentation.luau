@@ -4,7 +4,7 @@ local ScheduledSquadsListChatLandingScreenEntrypointVariant = game:DefineFastStr
 local EnableScheduledSquadsListExperimentationDev = game:DefineFastFlag("EnableScheduledSquadsListExperimentation_dev", false)
 local EnableScheduledSquadsTopBarEntrypointDev = game:DefineFastFlag("EnableScheduledSquadsTopBarEntrypoint_dev", false)
 
-local function _(p1) --[[ Line: 15 | Named "getIsUserInTreatment" ]]
+local function _(p1)
 	-- upvalues: ExperimentCacheManager (copy), ScheduledSquadsListExpLayer (copy)
 	local LayerVariables = ExperimentCacheManager.default:getLayerVariables(ScheduledSquadsListExpLayer)
 	
@@ -12,7 +12,7 @@ local function _(p1) --[[ Line: 15 | Named "getIsUserInTreatment" ]]
 end
 
 return {
-	getIsTopBarEntrypointEnabled = function() --[[ Line: 25 ]]
+	getIsTopBarEntrypointEnabled = function()
 		-- upvalues: EnableScheduledSquadsTopBarEntrypointDev (copy), EnableScheduledSquadsListExperimentationDev (copy), ScheduledSquadsListChatLandingScreenEntrypointVariant (copy), ExperimentCacheManager (copy), ScheduledSquadsListExpLayer (copy)
 		local EnableScheduledSquadsTopBarEntrypointDev1: boolean = EnableScheduledSquadsTopBarEntrypointDev
 		
@@ -30,7 +30,7 @@ return {
 		end
 		return EnableScheduledSquadsTopBarEntrypointDev1
 	end,
-	logExposure = function() --[[ Line: 33 ]]
+	logExposure = function()
 		-- upvalues: EnableScheduledSquadsListExperimentationDev (copy), ExperimentCacheManager (copy), ScheduledSquadsListExpLayer (copy)
 		if EnableScheduledSquadsListExperimentationDev and ExperimentCacheManager.default:getLayerVariables(ScheduledSquadsListExpLayer) ~= nil then
 			ExperimentCacheManager.default:logLayerExposure(ScheduledSquadsListExpLayer)

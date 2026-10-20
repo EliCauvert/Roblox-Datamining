@@ -4,7 +4,7 @@ local FoundationFontFaceMigration = require(Parent.Foundation).Utility.Flags.Fou
 local GetTextSizeFunction = require(Parent.UIBlox).Core.Text.GetTextSize
 local _Vector2 = Vector2.new(2, 2)
 
-return function(String, FontSize, p1, FrameSize, p2) --[[ Line: 22 | Named "getTextSize" ]]
+return function(String, FontSize, p1, FrameSize, p2)
 	-- upvalues: FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), _Vector2 (copy), TextService (copy)
 	if FoundationFontFaceMigration then
 		local TextSize = GetTextSizeFunction(String, FontSize, p1, FrameSize)

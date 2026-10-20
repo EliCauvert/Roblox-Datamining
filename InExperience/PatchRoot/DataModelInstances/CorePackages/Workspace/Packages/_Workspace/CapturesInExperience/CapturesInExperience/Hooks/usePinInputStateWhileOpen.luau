@@ -2,9 +2,9 @@
 local ReactModule = require(script.Parent.Parent.Parent.React)
 local Default = Enum.MouseBehavior.Default
 
-return function(p1, p2) --[[ Line: 30 ]]
+return function(p1, p2)
 	-- upvalues: ReactModule (copy), UserInputService (copy), Default (copy)
-	ReactModule.useEffect(function() --[[ Line: 31 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), p2 (copy), UserInputService (upval), Default (upval)
 		if not p1 then return end
 		local UserInputService1 = if p2 == nil then UserInputService else p2
@@ -14,7 +14,7 @@ return function(p1, p2) --[[ Line: 30 ]]
 			MouseIcon = UserInputService1.MouseIcon
 		}
 		
-		local function _(Key, p3) --[[ Line: 44 | Named "pin" ]]
+		local function _(Key, p3)
 			-- upvalues: UserInputService1 (copy)
 			UserInputService1[Key] = p3
 		end
@@ -23,7 +23,7 @@ return function(p1, p2) --[[ Line: 30 ]]
 		UserInputService1.MouseIconEnabled = true
 		UserInputService1.MouseIcon = ""
 		local PropertyName = "MouseBehavior"
-		local Connection = UserInputService1:GetPropertyChangedSignal("MouseBehavior"):Connect(function() --[[ Line: 53 ]]
+		local Connection = UserInputService1:GetPropertyChangedSignal("MouseBehavior"):Connect(function()
 			-- upvalues: UserInputService1 (copy), PropertyName (copy), Default (copy), config (copy)
 			local UserInputServiceEntry = UserInputService1[PropertyName]
 			
@@ -36,7 +36,7 @@ return function(p1, p2) --[[ Line: 30 ]]
 		local v1 = true
 		local Connections = {
 			Connection,
-			UserInputService1:GetPropertyChangedSignal("MouseIconEnabled"):Connect(function() --[[ Line: 53 ]]
+			UserInputService1:GetPropertyChangedSignal("MouseIconEnabled"):Connect(function()
 				-- upvalues: UserInputService1 (copy), PropertyName1 (copy), v1 (copy), config (copy)
 				local UserInputServiceEntry = UserInputService1[PropertyName1]
 				
@@ -45,9 +45,9 @@ return function(p1, p2) --[[ Line: 30 ]]
 					UserInputService1[PropertyName1] = v1
 				end
 			end),
-			(function(PropertyName, p3) --[[ Line: 52 | Named "watch" ]]
+			(function(PropertyName, p3)
 				-- upvalues: UserInputService1 (copy), config (copy)
-				return UserInputService1:GetPropertyChangedSignal(PropertyName):Connect(function() --[[ Line: 53 ]]
+				return UserInputService1:GetPropertyChangedSignal(PropertyName):Connect(function()
 					-- upvalues: UserInputService1 (upval), PropertyName (copy), p3 (copy), config (upval)
 					local UserInputServiceEntry = UserInputService1[PropertyName]
 					
@@ -59,7 +59,7 @@ return function(p1, p2) --[[ Line: 30 ]]
 			end)("MouseIcon", "")
 		}
 		
-		return function() --[[ Line: 68 ]]
+		return function()
 			-- upvalues: Connections (copy), UserInputService1 (copy), config (copy)
 			for _, connection in Connections do
 				connection:Disconnect()

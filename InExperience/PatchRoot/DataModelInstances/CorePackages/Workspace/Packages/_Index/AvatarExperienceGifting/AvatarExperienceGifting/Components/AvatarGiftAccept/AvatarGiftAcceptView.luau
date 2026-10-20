@@ -4,7 +4,7 @@ local AvatarGiftInfoPanelViewModule = require(script.Parent.Parent.AvatarGiftInf
 local GiftAcceptView = require(Parent.Gifting).Components.GiftAcceptView
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 
-return ReactModule.memo(function(p1) --[[ Line: 22 | Named "AvatarGiftAcceptView" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), AvatarGiftInfoPanelViewModule (copy), GiftAcceptView (copy)
 	local ThumbnailUrl = p1.thumbnailUrl
 	local ItemName = p1.itemName
@@ -15,7 +15,7 @@ return ReactModule.memo(function(p1) --[[ Line: 22 | Named "AvatarGiftAcceptView
 		isOpen = p1.isOpen,
 		titleText = p1.titleText,
 		userInfoProps = p1.userInfoProps,
-		giftPresentation = ReactModule.useMemo(function() --[[ Line: 30 ]]
+		giftPresentation = ReactModule.useMemo(function()
 			-- upvalues: ReactModule (upval), AvatarGiftInfoPanelViewModule (upval), ThumbnailUrl (copy), ItemName (copy), CaptionText (copy), Size2000 (copy)
 			return ReactModule.createElement(AvatarGiftInfoPanelViewModule, {
 				thumbnailUrl = ThumbnailUrl,

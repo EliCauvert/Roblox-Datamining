@@ -16,7 +16,7 @@ local config = {
 	size = require(Foundation.Enums.AvatarIconSize).Medium
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 37 | Named "AvatarIcon" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseAvatarIconVariantsModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ImageModule (copy), MapBindableModule (copy), GetRbxThumbModule (copy), ThumbnailTypeModule (copy), ThumbnailSizeModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseAvatarIconVariantsModuleResult = UseAvatarIconVariantsModule(UseTokensModule(), WithDefaultsModuleResult.size, WithDefaultsModuleResult.backplateStyle)
@@ -29,7 +29,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 37 |
 		Size = UDim2.fromOffset(UseAvatarIconVariantsModuleResult.container.size, UseAvatarIconVariantsModuleResult.container.size)
 	}), {
 		Image = ReactModule.createElement(ImageModule, {
-			Image = MapBindableModule(WithDefaultsModuleResult.userId, function(p2) --[[ Line: 54 ]]
+			Image = MapBindableModule(WithDefaultsModuleResult.userId, function(p2)
 				-- upvalues: GetRbxThumbModule (upval), ThumbnailTypeModule (upval), ThumbnailSizeModule (upval)
 				return GetRbxThumbModule(ThumbnailTypeModule.AvatarHeadShot, p2, ThumbnailSizeModule.Medium)
 			end),

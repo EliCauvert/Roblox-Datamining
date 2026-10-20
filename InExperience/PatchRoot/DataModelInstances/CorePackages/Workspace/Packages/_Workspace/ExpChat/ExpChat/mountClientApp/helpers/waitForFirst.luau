@@ -1,8 +1,8 @@
-﻿return function(...) --[[ Line: 1 | Named "waitForFirst" ]]
+﻿return function(...)
 	local BindableEvent = Instance.new("BindableEvent")
 	local Connections = { ... }
 	
-	local function fire(...) --[[ Line: 5 ]]
+	local function fire(...)
 		-- upvalues: Connections (copy), BindableEvent (copy)
 		for i = 1, #Connections do
 			Connections[i]:Disconnect()

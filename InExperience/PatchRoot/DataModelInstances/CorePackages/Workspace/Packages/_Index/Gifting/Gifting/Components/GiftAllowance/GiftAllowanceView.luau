@@ -9,7 +9,7 @@ local IconSize = FoundationModule.Enums.IconSize
 local IconVariant = FoundationModule.Enums.IconVariant
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return ReactModule.memo(function(Frame) --[[ Line: 24 | Named "GiftAllowanceView" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Icon (copy), IconName (copy), IconVariant (copy), IconSize (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	

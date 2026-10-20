@@ -29,7 +29,7 @@ local FFlagMomentTextGenerationFilteredSignal = MomentsCommonModule.Flags.FFlagM
 local GetFFlagMomentsUseUploadPostAsyncFunction = MomentsCommonModule.Flags.GetFFlagMomentsUseUploadPostAsync
 local FFlagMomentsCommentsCreatorControlModule = require(MomentsCreation.Flags.FFlagMomentsCommentsCreatorControl)
 
-local function AllowCommentsToggle(p1) --[[ Line: 53 ]]
+local function AllowCommentsToggle(p1)
 	-- upvalues: UseCreationFlowStringsModule (copy), GetCreationFlowStoreModule (copy), UseSignalStateFunction (copy), UseCallbackFunction (copy), FFlagMomentsComments (copy), SessionManager (copy), FunnelEventNames (copy), FireAnalyticsEventModule (copy), EventNames (copy), CryoModule (copy), MakeCreationEventFieldsModule (copy), ReactModule (copy), Toggle (copy), InputPlacement (copy), InputSize (copy)
 	local UseCreationFlowStringsModuleResult = UseCreationFlowStringsModule()
 	local CreationFlowStoreModule = GetCreationFlowStoreModule(false)
@@ -39,7 +39,7 @@ local function AllowCommentsToggle(p1) --[[ Line: 53 ]]
 		isChecked = UseSignalStateFunction(CreationFlowStoreModule.getCommentsEnabled),
 		label = UseCreationFlowStringsModuleResult.PublishingAllowComments,
 		LayoutOrder = p1.layoutOrder,
-		onActivated = UseCallbackFunction(function(p2) --[[ Line: 58 ]]
+		onActivated = UseCallbackFunction(function(p2)
 			-- upvalues: CreationFlowStoreModule (copy), FFlagMomentsComments (upval), SessionManager (upval), FunnelEventNames (upval), FireAnalyticsEventModule (upval), EventNames (upval), CryoModule (upval), MakeCreationEventFieldsModule (upval)
 			CreationFlowStoreModule.updateCommentsEnabled(p2)
 			
@@ -52,7 +52,7 @@ local function AllowCommentsToggle(p1) --[[ Line: 53 ]]
 	})
 end
 
-return function(p1) --[[ Line: 82 ]]
+return function(p1)
 	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseCreationFlowStringsModule (copy), GetCreationFlowStoreModule (copy), ReactModule (copy), UseSignalStateFunction (copy), FFlagMomentsCommentsCreatorControlModule (copy), GetFFlagMomentsUseUploadPostAsyncFunction (copy), UseCallbackFunction (copy), SessionManager (copy), FunnelEventNames (copy), FireAnalyticsEventModule (copy), EventNames (copy), CryoModule (copy), MakeCreationEventFieldsModule (copy), View (copy), ConstantsModule (copy), AllowCommentsToggle (copy), FFlagMomentTextGenerationFilteredSignal (copy), GeneratedTextFeedbackContainerModule (copy), Button (copy), FoundationModule (copy), InputSize (copy), ButtonVariant (copy), Text (copy)
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseTokensResult = UseTokensFunction()
@@ -61,7 +61,7 @@ return function(p1) --[[ Line: 82 ]]
 	local UseRefResult = ReactModule.useRef(nil)
 	local PublishingCtaSecondary = UseCreationFlowStringsModuleResult.PublishingCtaSecondary
 	local UseSignalStateResult = UseSignalStateFunction(CreationFlowStoreModule.getDescription)
-	ReactModule.useEffect(function() --[[ Line: 95 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseSignalStateResult (copy)
 		local Current = UseRefResult.current
 		
@@ -105,7 +105,7 @@ return function(p1) --[[ Line: 82 ]]
 					TextWrapped = true,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Top,
-					[ReactModule.Change.Text] = UseCallbackFunction(function(p2) --[[ Line: 121 ]]
+					[ReactModule.Change.Text] = UseCallbackFunction(function(p2)
 						local Text = p2.Text:gsub("[\r\n]+", " ")
 						local Length = utf8.len(Text)
 						
@@ -116,7 +116,7 @@ return function(p1) --[[ Line: 82 ]]
 							p2.Text = Text
 						end
 					end, {}),
-					[ReactModule.Event.FocusLost] = UseCallbackFunction(function() --[[ Line: 105 ]]
+					[ReactModule.Event.FocusLost] = UseCallbackFunction(function()
 						-- upvalues: UseRefResult (copy), CreationFlowStoreModule (copy), SessionManager (upval), FunnelEventNames (upval), FireAnalyticsEventModule (upval), EventNames (upval), CryoModule (upval), MakeCreationEventFieldsModule (upval)
 						local Current = UseRefResult.current
 						CreationFlowStoreModule.updateDescription(if Current == nil then "" else Current.Text)

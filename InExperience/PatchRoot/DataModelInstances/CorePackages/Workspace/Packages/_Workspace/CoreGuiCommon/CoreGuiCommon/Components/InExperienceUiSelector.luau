@@ -11,7 +11,7 @@ local GetUiSelectorSignalStore = require(CoreGuiCommon.Stores).GetUiSelectorSign
 local BaseMenu = FoundationModule.UNSTABLE.BaseMenu
 local InputSize = FoundationModule.Enums.InputSize
 
-return function(_) --[[ Line: 27 | Named "InExperienceUiSelector" ]]
+return function(_)
 	-- upvalues: SignalsReactModule (copy), GetUiSelectorSignalStore (copy), ReactModule (copy), UseLocalizationFunction (copy), GuiService (copy), FocusOnChromeFunction (copy), GamepadService (copy), FoundationModule (copy), BaseMenu (copy), InputSize (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetUiSelectorSignalStore)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(UseSignalStateResult.getVisibility)
@@ -21,7 +21,7 @@ return function(_) --[[ Line: 27 | Named "InExperienceUiSelector" ]]
 		robloxMenu = "CoreScripts.InGameMenu.Controls.RobloxMenu",
 		uiNavToggle = "CoreScripts.InGameMenu.GameSettings.UINavToggle"
 	})
-	ReactModule.useEffect(function() --[[ Line: 37 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult1 (copy), UseRefResult1 (copy), GuiService (upval)
 		if UseSignalStateResult1 and UseRefResult1.current then
 			GuiService.SelectedCoreObject = UseRefResult1.current
@@ -32,14 +32,14 @@ return function(_) --[[ Line: 27 | Named "InExperienceUiSelector" ]]
 			GuiService.SelectedCoreObject = nil
 		end
 	end, { UseSignalStateResult1 })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 45 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseLocalizationResult (copy), UseRefResult1 (copy), UseSignalStateResult (copy), FocusOnChromeFunction (upval), GuiService (upval), GamepadService (upval)
 		return {
 			{
 				id = "RobloxMenu",
 				text = UseLocalizationResult.robloxMenu,
 				ref = UseRefResult1,
-				onActivated = function() --[[ Line: 51 ]]
+				onActivated = function()
 					-- upvalues: UseSignalStateResult (upval), FocusOnChromeFunction (upval)
 					UseSignalStateResult.setVisibility(false)
 					FocusOnChromeFunction()
@@ -48,11 +48,11 @@ return function(_) --[[ Line: 27 | Named "InExperienceUiSelector" ]]
 			{
 				id = "UiNavigationMode",
 				text = UseLocalizationResult.uiNavToggle,
-				onActivated = function() --[[ Line: 59 ]]
+				onActivated = function()
 					-- upvalues: UseSignalStateResult (upval), GuiService (upval), GamepadService (upval)
 					UseSignalStateResult.setVisibility(false)
 					GuiService.SelectedCoreObject = nil
-					local _, _ = pcall(function() --[[ Line: 62 ]]
+					local _, _ = pcall(function()
 						-- upvalues: GamepadService (upval)
 						GamepadService:AutoSelectGui()
 					end)

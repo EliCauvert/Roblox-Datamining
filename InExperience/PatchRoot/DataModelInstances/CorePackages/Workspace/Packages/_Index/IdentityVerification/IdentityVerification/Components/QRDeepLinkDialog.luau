@@ -9,7 +9,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local QRCodeDisplayModule = require(Parent.QRCodeDisplay)
 local ECLevels = QRCodeDisplayModule.ECLevels
 
-return function(p1) --[[ Line: 28 | Named "QRDeepLinkDialog" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), View (copy), Text (copy), QRCodeDisplayModule (copy), ECLevels (copy)
 	local Deeplink = p1.deeplink
 	local Title = p1.title

@@ -1,4 +1,4 @@
-﻿return function(p1) --[[ Line: 4 | Named "getPreciseUnixTimestamp" ]]
+﻿return function(p1)
 	if typeof(p1) == "DateTime" then
 		return p1.UnixTimestampMillis / 1000
 	elseif type(p1) == "string" then

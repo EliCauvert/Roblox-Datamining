@@ -9,7 +9,7 @@ local ConversationRoduxSeedModule = require(AppChat.Utils.ConversationRoduxSeed)
 local IsFriendsPlaceholderConversationIdFunction = ConversationRoduxSeedModule.isFriendsPlaceholderConversationId
 local NormalizeStoreConversationForRoduxFunction = ConversationRoduxSeedModule.normalizeStoreConversationForRodux
 local RootedChatDetailsNavigationModule = {
-	navigateToRootedChatDetails = function(ConversationId, RootedNavigationRequestId) --[[ Line: 17 ]]
+	navigateToRootedChatDetails = function(ConversationId, RootedNavigationRequestId)
 		-- upvalues: RoactNavigationModule (copy), EnumScreensModule (copy)
 		return RoactNavigationModule.Actions.navigate({
 			routeName = EnumScreensModule.ChatLandingStack,
@@ -31,7 +31,7 @@ local RootedChatDetailsNavigationModule = {
 	end
 }
 
-function RootedChatDetailsNavigationModule.tryNavigateToRootedChatDetails(p1, p2): boolean --[[ Line: 44 ]]
+function RootedChatDetailsNavigationModule.tryNavigateToRootedChatDetails(p1, p2): boolean
 	-- upvalues: GetFFlagAppChatEnableRootedNavigationModule (copy), GetConversationStoreModule (copy), ReceivedConversationModule (copy), NormalizeStoreConversationForRoduxFunction (copy), IsFriendsPlaceholderConversationIdFunction (copy), ConversationChannelsModule (copy), RootedChatDetailsNavigationModule (copy)
 	local ConversationId = p2 and p2.conversationId
 	

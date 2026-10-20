@@ -8,7 +8,7 @@ return {
 		require(Parent.validationSystem.ValidationEnums).UploadCategory.FULL_BODY
 	},
 	fflag = require(Parent.flags.getFFlagUGCValidateAQMeshIslandML),
-	run = function(p1, p2) --[[ Line: 19 ]]
+	run = function(p1, p2)
 		-- upvalues: UGCValidationMeshIslandMLMinScore (copy), ErrorSourceStringsModule (copy)
 		local MeasureMeshIslandML = p2.aqsSummaryData.Measure_Mesh_Island_ML
 		

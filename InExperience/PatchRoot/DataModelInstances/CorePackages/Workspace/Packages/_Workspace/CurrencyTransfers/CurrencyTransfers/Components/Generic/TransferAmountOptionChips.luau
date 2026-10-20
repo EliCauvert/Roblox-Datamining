@@ -8,7 +8,7 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local Enums = FoundationModule.Enums
 local GetFFlagCurrencyTransferFlowUIImprovementFixModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferFlowUIImprovementFix)
 
-return function(p1) --[[ Line: 33 | Named "TransferAmountOptionChips" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), GetFFlagCurrencyTransferFlowUIImprovementFixModule (copy), Button (copy), Enums (copy), ButtonVariant (copy), View (copy)
 	return ReactModule.createElement(View, {
 		tag = "row align-x-center align-y-center gap-small auto-xy padding-y-medium",
@@ -16,7 +16,7 @@ return function(p1) --[[ Line: 33 | Named "TransferAmountOptionChips" ]]
 	}, {
 		ChipsContainer = ReactModule.createElement(View, {
 			tag = "row align-x-center align-y-center gap-small auto-xy"
-		}, table.unpack((ReactModule.useMemo(function() --[[ Line: 34 ]]
+		}, table.unpack((ReactModule.useMemo(function()
 			-- upvalues: GetFFlagCurrencyTransferFlowUIImprovementFixModule (upval), p1 (copy), ReactModule (upval), Button (upval), Enums (upval), ButtonVariant (upval)
 			local Elements = {}
 			local FFlagCurrencyTransferFlowUIImprovementFixModule = GetFFlagCurrencyTransferFlowUIImprovementFixModule()
@@ -46,7 +46,7 @@ return function(p1) --[[ Line: 33 | Named "TransferAmountOptionChips" ]]
 								icon = Enums.IconName.Robux,
 								variant = if IsSelectedAmountMatch then ButtonVariant.Subtle else ButtonVariant.Standard,
 								size = Enums.ChipSize.Medium,
-								onActivated = function() --[[ Line: 77 ]] end
+								onActivated = function() end
 							})
 						}),
 						TouchTarget = ReactModule.createElement("TextButton", {
@@ -54,11 +54,11 @@ return function(p1) --[[ Line: 33 | Named "TransferAmountOptionChips" ]]
 							BackgroundTransparency = 1,
 							Text = "",
 							ZIndex = 5,
-							[ReactModule.Event.Activated] = function() --[[ Line: 88 ]]
+							[ReactModule.Event.Activated] = function()
 								-- upvalues: p1 (upval), chip (copy)
 								p1.onChipSelected(chip.amount)
 							end,
-							[ReactModule.Event.InputBegan] = function(_, Input) --[[ Line: 97 ]]
+							[ReactModule.Event.InputBegan] = function(_, Input)
 								-- upvalues: p1 (upval), chip (copy)
 								if Input.UserInputType == Enum.UserInputType.Touch then
 									p1.onChipSelected(chip.amount)
@@ -70,7 +70,7 @@ return function(p1) --[[ Line: 33 | Named "TransferAmountOptionChips" ]]
 					Elements[LayoutOrder] = ReactModule.createElement(Button, {
 						text = chip.text,
 						icon = Enums.IconName.Robux,
-						onActivated = function() --[[ Line: 108 ]]
+						onActivated = function()
 							-- upvalues: p1 (upval), chip (copy)
 							p1.onChipSelected(chip.amount)
 						end,

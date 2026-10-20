@@ -8,7 +8,7 @@ local config = {
 	adData = nil
 }
 
-return function(p1, p2) --[[ Line: 24 ]]
+return function(p1, p2)
 	-- upvalues: config (copy), SetPlayWithRewardStateModule (copy)
 	local P0 = p1 or table.clone(config)
 	

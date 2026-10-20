@@ -4,7 +4,7 @@ local _ = require(Parent.AppChatNetworking)
 local GetFFlagEnableSocialCardsFunction = require(Parent.SharedFlags).GetFFlagEnableSocialCards
 local _ = require(AppChat.MessageData.Types)
 
-return function(p1, ConversationId) --[[ Line: 22 | Named "buildConversationMessageFromApi" ]]
+return function(p1, ConversationId)
 	-- upvalues: GetFFlagEnableSocialCardsFunction (copy)
 	return {
 		id = p1.id,

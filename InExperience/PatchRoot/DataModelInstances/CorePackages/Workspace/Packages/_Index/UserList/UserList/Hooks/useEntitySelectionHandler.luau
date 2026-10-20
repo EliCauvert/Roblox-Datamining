@@ -8,11 +8,11 @@ local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.Robl
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local EnumsModule = require(UserList.Common.Enums)
 
-return function(Callback) --[[ Line: 21 | Named "useEntitySelectionHandler" ]]
+return function(Callback)
 	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), AppPage (copy), EnumsModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	
-	return (ReactModule.useCallback(function(Detail, Contact) --[[ Line: 26 ]]
+	return (ReactModule.useCallback(function(Detail, Contact)
 		-- upvalues: Callback (copy), AppPage (upval), EnumsModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 		if Callback then
 			Callback(Detail, Contact)

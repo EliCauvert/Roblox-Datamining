@@ -7,7 +7,7 @@ local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SduiActionType = SduiCoreSystemModule.SduiActionType
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 
-return function(p1, _, p2, _) --[[ Line: 24 ]]
+return function(p1, _, p2, _)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), CloseCentralOverlayFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	
@@ -26,9 +26,9 @@ return function(p1, _, p2, _) --[[ Line: 24 ]]
 		local DispatchFunction: (any) -> () = p2.dependencies.dispatch
 		local LinkingProtocol = p2.dependencies.linkingProtocol
 		DispatchFunction(SetCentralOverlayFunction(CentralOverlayType.LeaveRobloxAlert, {
-			continueFunc = function() --[[ Line: 53 ]]
+			continueFunc = function()
 				-- upvalues: LinkingProtocol (copy), Url (copy), p2 (copy), SduiErrorType (upval), SduiActionType (upval), DispatchFunction (copy), CloseCentralOverlayFunction (upval)
-				LinkingProtocol:openURL(Url):catch(function(Err) --[[ Line: 54 ]]
+				LinkingProtocol:openURL(Url):catch(function(Err)
 					-- upvalues: p2 (upval), SduiErrorType (upval), SduiActionType (upval)
 					p2.dependencies.logger.reportError(SduiErrorType.FailedToOpenLink, {
 						name = SduiActionType.OpenExternalLink,

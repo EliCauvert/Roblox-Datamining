@@ -1,4 +1,4 @@
-﻿return function(Text: string): string --[[ Line: 4 | Named "cleanRichTextTags" ]]
+﻿return function(Text: string): string
 	local Text1 = ""
 	local Count = 0
 	

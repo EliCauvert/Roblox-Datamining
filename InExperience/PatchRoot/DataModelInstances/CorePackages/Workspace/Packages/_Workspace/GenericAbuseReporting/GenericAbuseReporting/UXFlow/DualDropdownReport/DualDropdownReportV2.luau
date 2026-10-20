@@ -21,7 +21,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local View = FoundationModule.View
 local SideModalDropdownButtonModule = require(GenericAbuseReporting.Common.SideModalDropdownButton)
 
-return ReactModule.memo(function(p1) --[[ Line: 46 | Named "DualDropdownReportV2" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), DashModule (copy), Sheet (copy), View (copy), IconButton (copy), ButtonVariant (copy), IconName (copy), Text (copy), InputLabel (copy), InputSize (copy), SideModalDropdownButtonModule (copy), TextArea (copy), Button (copy), IsShowGenericIllegalContentReportingLinkFunction (copy), GenericReportLink (copy), OptionSelectorGroup (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
@@ -40,21 +40,21 @@ return ReactModule.memo(function(p1) --[[ Line: 46 | Named "DualDropdownReportV2
 		continueButton = "Feature.ReportAbuse.Action.Continue",
 		titleIpInfringement = "Feature.ReportAbuse.Title.SelectInSceneContinueYourReport"
 	})
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 67 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_3 (copy)
 		UseStateResult2_3(p2)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 75 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: None2 (copy)
 		None2("Surface")
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 79 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), p1 (copy)
 		UseStateResult2(false)
 		task.wait(0.3)
 		p1.onClose()
 	end, { p1.onClose })
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 85 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: None2 (copy)
 		None2("None")
 	end, {})
@@ -89,7 +89,7 @@ return ReactModule.memo(function(p1) --[[ Line: 46 | Named "DualDropdownReportV2
 					ProblemDropdownButton = ReactModule.createElement(SideModalDropdownButtonModule, {
 						layoutOrder = 2,
 						text = UseStateResult1 and UseStateResult1.label or UseLocalizationResult.chooseOne,
-						onActivated = ReactModule.useCallback(function() --[[ Line: 71 ]]
+						onActivated = ReactModule.useCallback(function()
 							-- upvalues: None2 (copy)
 							None2("Problem")
 						end, {}),
@@ -141,7 +141,7 @@ return ReactModule.memo(function(p1) --[[ Line: 46 | Named "DualDropdownReportV2
 					SubmitButton = ReactModule.createElement(Button, {
 						LayoutOrder = 0,
 						text = if IsIpInfringement then UseLocalizationResult.continueButton else UseLocalizationResult.submitButton,
-						onActivated = ReactModule.useCallback(function() --[[ Line: 106 ]]
+						onActivated = ReactModule.useCallback(function()
 							-- upvalues: UseStateResult1 (copy), UseStateResult3 (copy), None2_1 (copy), IsIpInfringement (copy), UseResult2 (copy), p1 (copy), UseStateResult4 (copy)
 							local Value = if UseStateResult1 == nil then "" else UseStateResult1.value
 							local Value1 = if UseStateResult3 == nil then "" else UseStateResult3.value
@@ -196,22 +196,22 @@ return ReactModule.memo(function(p1) --[[ Line: 46 | Named "DualDropdownReportV2
 				OptionsList = ReactModule.createElement(OptionSelectorGroup.Root, {
 					LayoutOrder = 2,
 					value = if None == "Problem" and UseStateResult1 ~= nil then UseStateResult1.value elseif None == "Surface" and UseStateResult3 ~= nil then UseStateResult3.value else "",
-					onValueChanged = ReactModule.useCallback(function(p2) --[[ Line: 89 ]]
+					onValueChanged = ReactModule.useCallback(function(p2)
 						-- upvalues: None (copy), DashModule (upval), p1 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseResult3 (copy)
 						if None == "Problem" then
-							UseStateResult2_1((DashModule.find(p1.problems, function(p3): boolean --[[ Line: 91 ]]
+							UseStateResult2_1((DashModule.find(p1.problems, function(p3): boolean
 								-- upvalues: p2 (copy)
 								return p3.value == p2
 							end)))
 						else
-							UseStateResult2_2((DashModule.find(p1.surfaces, function(p3): boolean --[[ Line: 96 ]]
+							UseStateResult2_2((DashModule.find(p1.surfaces, function(p3): boolean
 								-- upvalues: p2 (copy)
 								return p3.value == p2
 							end)))
 						end
 						UseResult3()
 					end, { None, p1.problems, p1.surfaces, UseResult3 })
-				}, DashModule.map(p1[if None == "Problem" then "problems" else "surfaces"], function(p2) --[[ Line: 279 ]]
+				}, DashModule.map(p1[if None == "Problem" then "problems" else "surfaces"], function(p2)
 					-- upvalues: ReactModule (upval), OptionSelectorGroup (upval), InputSize (upval)
 					return ReactModule.createElement(OptionSelectorGroup.Item, {
 						key = p2.value,

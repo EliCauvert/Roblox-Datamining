@@ -26,12 +26,12 @@ local config = {
 	[UserModel.PresenceType.IN_STUDIO] = 3
 }
 
-local function _() --[[ Line: 46 | Named "getFFlagRenameFriendsToConnectionsPartyLobby" ]]
+local function _()
 	-- upvalues: UniversalAppPolicyModule (copy)
 	return UniversalAppPolicyModule.getAppFeaturePolicies().getRenameFriendsToConnections()
 end
 
-return function(p1) --[[ Line: 50 | Named "SquadInviteFriendsButton" ]]
+return function(p1)
 	-- upvalues: React (copy), SelectedUsersContext (copy), InviteCallbackContext (copy), FriendsListContext (copy), SquadExternalContractContext (copy), UseIsInviteButtonDisabledModule (copy), UseLocalizationFunction (copy), FFlagEnablePartyQuickStartButton (copy), UserModel (copy), config (copy), CryoModule (copy), EncodeUserIdsModule (copy), EventNamesModule (copy), SquadRootViewType (copy), Button (copy), ButtonType (copy), UniversalAppPolicyModule (copy)
 	local UseContextResult = React.useContext(SelectedUsersContext)
 	local UseContextResult1 = React.useContext(InviteCallbackContext)
@@ -47,7 +47,7 @@ return function(p1) --[[ Line: 50 | Named "SquadInviteFriendsButton" ]]
 	if FFlagEnablePartyQuickStartButton then
 		local UseSquadRootViewResult = UseContextResult3.useSquadRootView()
 		local UseRefResult = React.useRef({})
-		local UseResult = React.useCallback(function() --[[ Line: 77 ]]
+		local UseResult = React.useCallback(function()
 			-- upvalues: UseContextResult2 (copy), UserModel (upval), config (upval)
 			if UseContextResult2.isFetchingFriends then
 				return {}, {}
@@ -66,7 +66,7 @@ return function(p1) --[[ Line: 50 | Named "SquadInviteFriendsButton" ]]
 			UseContextResult2.isFetchingFriends,
 			UseContextResult2.friends
 		})
-		local UseResult1 = React.useCallback(function() --[[ Line: 94 ]]
+		local UseResult1 = React.useCallback(function()
 			-- upvalues: UseContextResult (copy), UseContextResult2 (copy), config (upval)
 			local List = {}
 			local List1 = {}
@@ -86,7 +86,7 @@ return function(p1) --[[ Line: 50 | Named "SquadInviteFriendsButton" ]]
 			UseContextResult.selectedFriends,
 			UseContextResult2.friends
 		})
-		React.useEffect(function() --[[ Line: 113 ]]
+		React.useEffect(function()
 			-- upvalues: UseResult (copy), UseResult1 (copy), UseRefResult (copy)
 			local UseResultResult, UseResultResult2 = UseResult()
 			local UseResultResult1, UseResultResult2_1 = UseResult1()
@@ -99,7 +99,7 @@ return function(p1) --[[ Line: 50 | Named "SquadInviteFriendsButton" ]]
 				numSelectedFriends = #UseResultResult1
 			}
 		end, { UseResult, UseResult1 })
-		local UseResult2 = React.useCallback(function(ActionType) --[[ Line: 127 ]]
+		local UseResult2 = React.useCallback(function(ActionType)
 			-- upvalues: UseRefResult (copy), CryoModule (upval), p1 (copy), UseContextResult3 (copy), EncodeUserIdsModule (upval), EventNamesModule (upval)
 			local Current = UseRefResult.current
 			UseContextResult3.fireSquadAnalytics(EventNamesModule.MultiInviteMenuActionStatus, (CryoModule.Dictionary.join(p1.analyticsInfo, {
@@ -118,9 +118,9 @@ return function(p1) --[[ Line: 50 | Named "SquadInviteFriendsButton" ]]
 			UseContextResult3.fireSquadAnalytics,
 			p1.analyticsInfo
 		})
-		React.useEffect(function() --[[ Line: 146 ]]
+		React.useEffect(function()
 			-- upvalues: p1 (copy), UseResult2 (copy)
-			return function() --[[ Line: 147 ]]
+			return function()
 				-- upvalues: p1 (upval), UseResult2 (upval)
 				if p1.partyStartedRef.current then
 					UseResult2("multi_invite_attempted")
@@ -131,13 +131,13 @@ return function(p1) --[[ Line: 50 | Named "SquadInviteFriendsButton" ]]
 				end
 			end
 		end, {})
-		React.useEffect(function() --[[ Line: 158 ]]
+		React.useEffect(function()
 			-- upvalues: UseSquadRootViewResult (copy), SquadRootViewType (upval), UseResult2 (copy)
 			if UseSquadRootViewResult == SquadRootViewType.None then
 				UseResult2("leave_page")
 			end
 		end, { UseSquadRootViewResult, UseResult2 })
-		UseResult3 = React.useCallback(function() --[[ Line: 165 ]]
+		UseResult3 = React.useCallback(function()
 			-- upvalues: UseResult2 (copy), UseContextResult1 (copy), UseContextResult (copy)
 			UseResult2("multi_invite_button_clicked")
 			UseContextResult1.inviteMultiFriends(UseContextResult.selectedFriends)
@@ -147,7 +147,7 @@ return function(p1) --[[ Line: 50 | Named "SquadInviteFriendsButton" ]]
 			UseContextResult.selectedFriends
 		})
 	else
-		UseResult3 = React.useCallback(function() --[[ Line: 174 ]]
+		UseResult3 = React.useCallback(function()
 			-- upvalues: UseContextResult1 (copy), UseContextResult (copy)
 			UseContextResult1.inviteMultiFriends(UseContextResult.selectedFriends)
 		end, {

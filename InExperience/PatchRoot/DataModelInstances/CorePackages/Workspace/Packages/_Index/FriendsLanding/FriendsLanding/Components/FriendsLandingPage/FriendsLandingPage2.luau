@@ -49,7 +49,7 @@ local UserListModule = require(Parent.UserList)
 local UserListLayoutAdaptor = UserListModule.UserListLayoutAdaptor
 local LayoutMode = UserListModule.Enums.LayoutMode
 
-local function OnFewestInteractionsSelection() --[[ Line: 65 ]] end
+local function OnFewestInteractionsSelection() end
 
 local FFlagFixScalingOnFriendsLandingModule = require(FriendsLanding.Flags.FFlagFixScalingOnFriendsLanding)
 local FFlagEnableFriendsLandingFilterChipsOnConsoleModule = require(FriendsLanding.Flags.FFlagEnableFriendsLandingFilterChipsOnConsole)
@@ -65,7 +65,7 @@ local FStringCanAccessTrustedContactsAmpNameSpace = require(Parent.SharedFlags).
 local FixFriendsLandingRightMargin = game:DefineFastFlag("FixFriendsLandingRightMargin", false)
 local FFlagLuaAppsDefaultSelection = require(Parent.SharedFlags).FFlagLuaAppsDefaultSelection
 
-return function(p1) --[[ Line: 109 | Named "FriendsLandingPage" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FriendsLandingContextModule (copy), FriendsLandingAnalyticsModule (copy), UseNavigationFunction (copy), UseDesignTokensFunction (copy), UseUiModeInfoFunction (copy), FFlagFixScalingOnFriendsLandingModule (copy), UseTokensFunction (copy), UseFocusGuiObjectFunction (copy), GetPageMarginFunction (copy), UseScreenSizeFunction (copy), UiMode (copy), FFlagEnableFriendsLandingFilterChipsOnConsoleModule (copy), FocusNavigationUtilsModule (copy), InputHandlersModule (copy), AppPage (copy), ReactFocusNavigationModule (copy), FocusNavigationEventNameEnum (copy), UseTextSizeOffsetFunction (copy), FFlagConnectionManagementChips (copy), AmpApiProvider (copy), FStringIsUserInTcEligibleCountryAmpFeature (copy), FStringCanAccessTrustedContactsAmpNameSpace (copy), AccessResponseEnum (copy), FFlagFriendsPageAlwaysOpenPPV (copy), ConvertUserPresenceTypeToStringFunction (copy), EnumScreensModule (copy), ButtonClickEventsModule (copy), ConstantsModule (copy), FriendTileModule (copy), DependencyArrayFunction (copy), OnFewestInteractionsSelection (copy), FilterStatesModule (copy), FFlagCreateConnectionsHub (copy), GridMetrics (copy), UseAnimatedScrollToSelectionFunction (copy), FFlagExtendScrollingFramesBySafeInsets (copy), UseSignalStateFunction (copy), DisplayModule (copy), IsFromConnectionsHubModule (copy), FFlagLuaAppsDefaultSelection (copy), UseFocusOnMountFunction (copy), FFlagFriendsPageUserListEnabled (copy), RoactModule (copy), HorizontalPageMargin (copy), FixFriendsLandingRightMargin (copy), RefreshScrollingFrame (copy), FilterByButtonModule (copy), EmptyResultsViewModule (copy), NoFriendsViewModule (copy), UserListLayoutAdaptor (copy), LayoutMode (copy), FFlagFriendsPageUserListCtaEnabledModule (copy), FriendsLandingCtaConfigModule (ref), CollectionGrid (copy), Button (copy), ButtonType (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		pageError = "CommonUI.Messages.Response.PageError",
@@ -85,7 +85,7 @@ return function(p1) --[[ Line: 109 | Named "FriendsLandingPage" ]]
 	local IsUiModeMatch = UseUiModeInfoResult.uiMode == UiMode.TenFoot
 	local NoFFlagEnableFriendsLandingFilterChipsOnConsoleModule: boolean = IsUiModeMatch and not FFlagEnableFriendsLandingFilterChipsOnConsoleModule
 	local IsCursor = FocusNavigationUtilsModule.useLastInputMode() == "Cursor"
-	local UseEventResult = ReactFocusNavigationModule.useEventHandler(FocusNavigationEventNameEnum.Search, (InputHandlersModule.onRelease(function(p2) --[[ Line: 131 ]]
+	local UseEventResult = ReactFocusNavigationModule.useEventHandler(FocusNavigationEventNameEnum.Search, (InputHandlersModule.onRelease(function(p2)
 		-- upvalues: UseNavigationResult (copy), AppPage (upval)
 		p2:cancel()
 		UseNavigationResult.navigate(AppPage.UserSearch, { shouldShowUserSearchLandingPage = true })
@@ -98,7 +98,7 @@ return function(p1) --[[ Line: 109 | Named "FriendsLandingPage" ]]
 	if FFlagConnectionManagementChips then
 		v1, Callback = ReactModule.useState(false)
 	end
-	ReactModule.useEffect(function() --[[ Line: 152 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseContextResult1 (copy), FFlagConnectionManagementChips (upval), AmpApiProvider (upval), FStringIsUserInTcEligibleCountryAmpFeature (upval), FStringCanAccessTrustedContactsAmpNameSpace (upval), AccessResponseEnum (upval), Callback (ref)
 		UseContextResult1:pageMountingTimeReport()
 		
@@ -106,9 +106,9 @@ return function(p1) --[[ Line: 109 | Named "FriendsLandingPage" ]]
 			Callback(true)
 		end
 	end, {})
-	local UseResult = if FFlagFriendsPageAlwaysOpenPPV then nil else ReactModule.useCallback(function(p2) --[[ Line: 164 ]]
+	local UseResult = if FFlagFriendsPageAlwaysOpenPPV then nil else ReactModule.useCallback(function(p2)
 		-- upvalues: UseContextResult (copy), ConvertUserPresenceTypeToStringFunction (upval)
-		return function() --[[ Line: 165 ]]
+		return function()
 			-- upvalues: UseContextResult (upval), p2 (copy), ConvertUserPresenceTypeToStringFunction (upval)
 			UseContextResult.openPlayerContextualMenu({
 				friendshipOriginSourceType = nil,
@@ -124,7 +124,7 @@ return function(p1) --[[ Line: 109 | Named "FriendsLandingPage" ]]
 			})
 		end
 	end, { UseContextResult.openPlayerContextualMenu })
-	local UseResult1 = ReactModule.useCallback(function(FriendId, p2: number, p3) --[[ Line: 181 ]]
+	local UseResult1 = ReactModule.useCallback(function(FriendId, p2: number, p3)
 		-- upvalues: FFlagFriendsPageAlwaysOpenPPV (upval), IsUiModeMatch (copy), UseResult (copy), UseContextResult1 (copy), EnumScreensModule (upval), ButtonClickEventsModule (upval), UseContextResult (copy), ConstantsModule (upval)
 		if FFlagFriendsPageAlwaysOpenPPV or not IsUiModeMatch or not UseResult then
 			UseContextResult1:navigate(EnumScreensModule.ViewUserProfile)
@@ -142,12 +142,12 @@ return function(p1) --[[ Line: 109 | Named "FriendsLandingPage" ]]
 		end
 	end, { UseContextResult1, UseResult, IsUiModeMatch })
 	
-	local function PageLoadingTimeReport() --[[ Line: 203 ]]
+	local function PageLoadingTimeReport()
 		-- upvalues: UseContextResult1 (copy)
 		UseContextResult1:pageLoadingTimeReport()
 	end
 	
-	local UseResult2 = ReactModule.useCallback(function(User, Index) --[[ Line: 207 ]]
+	local UseResult2 = ReactModule.useCallback(function(User, Index)
 		-- upvalues: ReactModule (upval), FriendTileModule (upval), UseResult1 (copy), PageLoadingTimeReport (copy), p1 (copy), UseFocusGuiObjectResult (copy)
 		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -164,11 +164,11 @@ return function(p1) --[[ Line: 109 | Named "FriendsLandingPage" ]]
 			})
 		}), "FriendTile"
 	end, { p1.selectedItemIndex, IsUiModeMatch, UseResult1 })
-	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 230 ]]
+	local UseResult3 = ReactModule.useCallback(function(p2)
 		-- upvalues: NewUseTextSizeOffsetResult (ref)
 		return p2 + NewUseTextSizeOffsetResult
 	end, DependencyArrayFunction(NewUseTextSizeOffsetResult, UseTextSizeOffsetResult))
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 234 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseContextResult1 (copy), ButtonClickEventsModule (upval), UseNavigationResult (copy), EnumScreensModule (upval), OnFewestInteractionsSelection (upval), p1 (copy)
 		UseContextResult1:buttonClick(ButtonClickEventsModule.FriendFilterPill)
 		UseNavigationResult.navigate(EnumScreensModule.FilterByModal, {
@@ -176,25 +176,25 @@ return function(p1) --[[ Line: 109 | Named "FriendsLandingPage" ]]
 			friendCount = p1.totalFriendCount
 		})
 	end, DependencyArrayFunction(UseNavigationResult, UseContextResult1))
-	local UseResult5 = if FFlagConnectionManagementChips then ReactModule.useCallback(function(p2) --[[ Line: 243 ]]
+	local UseResult5 = if FFlagConnectionManagementChips then ReactModule.useCallback(function(p2)
 		-- upvalues: UseContextResult1 (copy), ButtonClickEventsModule (upval), UseContextResult (copy)
 		UseContextResult1:buttonClick(ButtonClickEventsModule.FriendFilterPill)
 		UseContextResult.setFilterKeys(p2)
 	end, DependencyArrayFunction(UseContextResult1, UseContextResult.setFilterKeys)) else nil
-	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 249 ]]
+	local UseResult6 = ReactModule.useCallback(function()
 		-- upvalues: UseContextResult1 (copy), UseContextResult (copy), FilterStatesModule (upval), UseLocalizationResult (copy)
 		UseContextResult1:pageLoaded()
 		UseContextResult.setFilterKeys(FilterStatesModule.All)
 		
 		return UseContextResult.refreshPage({
 			errorMessage = UseLocalizationResult.pageError,
-			onResolve = function() --[[ Line: 255 ]]
+			onResolve = function()
 				-- upvalues: UseContextResult1 (upval)
 				UseContextResult1:pageLoadedWithArgs()
 			end
 		})
 	end, DependencyArrayFunction(UseContextResult.refreshPage, UseLocalizationResult, UseContextResult1, UseContextResult.setFilterKeys))
-	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 261 ]]
+	local UseResult7 = ReactModule.useCallback(function()
 		-- upvalues: UseContextResult1 (copy), ButtonClickEventsModule (upval), EnumScreensModule (upval), FFlagCreateConnectionsHub (upval), UseNavigationResult (copy), AppPage (upval)
 		UseContextResult1:buttonClick(ButtonClickEventsModule.AddFriendsNoFriendsEmptyView)
 		UseContextResult1:navigate(EnumScreensModule.AddFriends)
@@ -212,7 +212,7 @@ return function(p1) --[[ Line: 109 | Named "FriendsLandingPage" ]]
 	local IsTotalFriendCountMatch = TotalFriendCount == 0
 	local IsTotalFriendCountAbove: boolean = CountFriends == 0 and TotalFriendCount > 0
 	local NoFilter: boolean = p1.fetchMoreFriends and (not IsTotalFriendCountMatch and (not IsTotalFriendCountAbove and (not UseContextResult.filter or UseContextResult.filter == FilterStatesModule.All)))
-	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 280 ]]
+	local UseResult8 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		if p1.fetchMoreFriends then
 			p1.fetchMoreFriends()
@@ -233,15 +233,15 @@ return function(p1) --[[ Line: 109 | Named "FriendsLandingPage" ]]
 		}
 		GridHorizontalSpacing = 12
 	end
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 303 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: GridMetrics (upval), GridViewItemMetrics (ref)
 		return GridMetrics.makeCustomMetricsGetter(GridViewItemMetrics)
 	end, { GridViewItemMetrics })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 307 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), UseStateResult (copy), GridHorizontalSpacing (ref)
 		return UseMemoResult(UseStateResult, GridHorizontalSpacing)
 	end, { UseMemoResult })
-	local UseResult9 = ReactModule.useCallback(function(p2) --[[ Line: 311 ]]
+	local UseResult9 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(p2.X)
 	end, {})
@@ -250,7 +250,7 @@ return function(p1) --[[ Line: 109 | Named "FriendsLandingPage" ]]
 	local UseSignalStateResult = if FFlagExtendScrollingFramesBySafeInsets then UseSignalStateFunction(DisplayModule.GetDisplayStore().getDeviceSafePadding) else nil
 	local IsFromConnectionsHubModule1 = FFlagCreateConnectionsHub and IsFromConnectionsHubModule(UseNavigationResult)
 	local UseFocusOnMountResult = if FFlagLuaAppsDefaultSelection then UseFocusOnMountFunction() else nil
-	local UseResult10 = if FFlagFriendsPageUserListEnabled then ReactModule.useCallback(function(CreateRow, User, Index) --[[ Line: 338 ]]
+	local UseResult10 = if FFlagFriendsPageUserListEnabled then ReactModule.useCallback(function(CreateRow, User, Index)
 		-- upvalues: ReactModule (upval), FriendTileModule (upval), UseResult1 (copy), PageLoadingTimeReport (copy)
 		return ReactModule.createElement(FriendTileModule, {
 			user = User,

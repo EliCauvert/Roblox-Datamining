@@ -16,7 +16,7 @@ local IsValidIdentifierFunction = MediaGalleryModule.isValidIdentifier
 local IsYouTubeVideoFunction = MediaGalleryModule.isYouTubeVideo
 local ITEMASPECTRATIO = MediaGalleryModule.MediaGalleryConstants.ITEM_ASPECT_RATIO
 
-return function(p1) --[[ Line: 56 | Named "useMediaGalleryFullscreen" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), DetailsPageLayoutContext (copy), UseOnNavigateBackFunction (copy), IsValidIdentifierFunction (copy), IsYouTubeVideoFunction (copy), SendMediaGalleryFullscreenEventFunction (copy), View (copy), ITEMASPECTRATIO (copy), MediaGalleryCarousel (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigableSurfaceIdentifierEnum (copy), SduiFocusTags (copy)
 	local UseContextResult = ReactModule.useContext(DetailsPageLayoutContext)
 	local SetFullscreenContentFunction = UseContextResult.setFullscreenContent
@@ -25,13 +25,13 @@ return function(p1) --[[ Line: 56 | Named "useMediaGalleryFullscreen" ]]
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(1)
 	local UseRefResult = ReactModule.useRef(1)
 	local UseRefResult1 = ReactModule.useRef(nil)
-	local UseOnNavigateBackResult = UseOnNavigateBackFunction((ReactModule.useCallback(function() --[[ Line: 68 ]]
+	local UseOnNavigateBackResult = UseOnNavigateBackFunction((ReactModule.useCallback(function()
 		-- upvalues: UseRefResult1 (copy), UseRefResult (copy)
 		if UseRefResult1.current then
 			UseRefResult1.current(UseRefResult.current)
 		end
 	end, {})))
-	local UseResult = ReactModule.useCallback(function(Current, p2) --[[ Line: 75 ]]
+	local UseResult = ReactModule.useCallback(function(Current, p2)
 		-- upvalues: UseRefResult (copy), p1 (copy)
 		UseRefResult.current = Current
 		
@@ -43,9 +43,9 @@ return function(p1) --[[ Line: 56 | Named "useMediaGalleryFullscreen" ]]
 	UseRefResult2.current = SetFullscreenContentFunction
 	local UseRefResult3 = ReactModule.useRef(SetOnExitFullscreenOverlayFunction)
 	UseRefResult3.current = SetOnExitFullscreenOverlayFunction
-	ReactModule.useEffect(function() --[[ Line: 87 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult2 (copy), UseRefResult3 (copy)
-		return function() --[[ Line: 88 ]]
+		return function()
 			-- upvalues: UseRefResult2 (upval), UseRefResult3 (upval)
 			if UseRefResult2.current then
 				UseRefResult2.current(nil)
@@ -55,7 +55,7 @@ return function(p1) --[[ Line: 56 | Named "useMediaGalleryFullscreen" ]]
 			end
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 99 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult1 (copy), UseStateResult2_1 (copy), SetFullscreenContentFunction (copy), SetOnExitFullscreenOverlayFunction (copy), UseStateResult2 (copy), p1 (copy), IsValidIdentifierFunction (upval), IsYouTubeVideoFunction (upval), SendMediaGalleryFullscreenEventFunction (upval)
 		UseRefResult1.current = nil
 		UseStateResult2_1(p2)
@@ -74,7 +74,7 @@ return function(p1) --[[ Line: 56 | Named "useMediaGalleryFullscreen" ]]
 		p1.filteredItems, p1.eventIngest, p1.placeId, p1.universeId,
 		p1.mediaGalleryAnalyticsContext
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 132 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult1 (copy), UseRefResult (copy)
 		if UseRefResult1.current then
 			UseRefResult1.current(UseRefResult.current)
@@ -83,7 +83,7 @@ return function(p1) --[[ Line: 56 | Named "useMediaGalleryFullscreen" ]]
 	
 	return {
 		isFullscreen = UseStateResult,
-		onFullscreenToggle = ReactModule.useCallback(function(Current) --[[ Line: 139 ]]
+		onFullscreenToggle = ReactModule.useCallback(function(Current)
 			-- upvalues: p1 (copy), SetFullscreenContentFunction (copy), UseRefResult1 (copy), UseResult1 (copy), UseStateResult2_1 (copy), UseRefResult (copy), UseStateResult2 (copy), SetOnExitFullscreenOverlayFunction (copy), UseResult2 (copy), ReactModule (upval), View (upval), ITEMASPECTRATIO (upval), MediaGalleryCarousel (upval), UseResult (copy), FocusNavigableSurfaceWrapper (upval), FocusNavigableSurfaceIdentifierEnum (upval), UseOnNavigateBackResult (copy), SduiFocusTags (upval), IsValidIdentifierFunction (upval), IsYouTubeVideoFunction (upval), SendMediaGalleryFullscreenEventFunction (upval)
 			if p1.fullscreenEnabled == false or not SetFullscreenContentFunction then return end
 			UseRefResult1.current = UseResult1
@@ -92,7 +92,7 @@ return function(p1) --[[ Line: 56 | Named "useMediaGalleryFullscreen" ]]
 			UseStateResult2(true)
 			
 			if SetOnExitFullscreenOverlayFunction then
-				SetOnExitFullscreenOverlayFunction(function() --[[ Line: 148 ]]
+				SetOnExitFullscreenOverlayFunction(function()
 					-- upvalues: UseResult2 (upval)
 					return UseResult2
 				end)
@@ -110,7 +110,7 @@ return function(p1) --[[ Line: 56 | Named "useMediaGalleryFullscreen" ]]
 				}, {
 					Content = ReactModule.createElement(View, {
 						tag = "size-full bg-surface-0",
-						onAbsoluteSizeChanged = function(Frame: Frame) --[[ Line: 157 ]]
+						onAbsoluteSizeChanged = function(Frame: Frame)
 							-- upvalues: ITEMASPECTRATIO (upval), Binding2 (copy)
 							local X = Frame.AbsoluteSize.X
 							local Y = Frame.AbsoluteSize.Y

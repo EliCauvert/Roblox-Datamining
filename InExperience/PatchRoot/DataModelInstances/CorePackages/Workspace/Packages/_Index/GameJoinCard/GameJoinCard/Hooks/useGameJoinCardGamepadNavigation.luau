@@ -15,18 +15,18 @@ local EventMap = {
 }
 
 return {
-	useGameJoinCardGamepadNavigation = function(Callback, IsFocusable) --[[ Line: 32 ]]
+	useGameJoinCardGamepadNavigation = function(Callback, IsFocusable)
 		-- upvalues: ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseMostRecentOrDefaultFocusBehaviorFunction (copy), UseFocusOnMountFunction (copy)
 		local UseMostRecentOrDefaultFocusBehaviorResult, UseMostRecentOrDefaultFocusBehaviorResult2 = UseMostRecentOrDefaultFocusBehaviorFunction((UseFocusRootFunction({
 			isAutoFocusRoot = true,
 			shouldRestoreFocus = false,
 			surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
 			eventMap = EventMap,
-			eventHandlers = ReactModule.useMemo(function() --[[ Line: 33 ]]
+			eventHandlers = ReactModule.useMemo(function()
 				-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), Callback (copy)
 				return {
 					[FocusNavigationEventNameEnum.NavigateBack] = {
-						handler = InputHandlersModule.onRelease(function(p1) --[[ Line: 36 ]]
+						handler = InputHandlersModule.onRelease(function(p1)
 							-- upvalues: Callback (upval)
 							Callback()
 							p1:cancel()
@@ -43,7 +43,7 @@ return {
 			primaryButtonFocusRef = if IsFocusable then UseFocusOnMountResult else UseMostRecentOrDefaultFocusBehaviorResult
 		}
 	end,
-	assignPrimaryFocusRef = function(Entry, FocusRef) --[[ Line: 63 ]]
+	assignPrimaryFocusRef = function(Entry, FocusRef)
 		if Entry == nil or FocusRef == nil or Entry[1] == nil then
 			return Entry
 		else

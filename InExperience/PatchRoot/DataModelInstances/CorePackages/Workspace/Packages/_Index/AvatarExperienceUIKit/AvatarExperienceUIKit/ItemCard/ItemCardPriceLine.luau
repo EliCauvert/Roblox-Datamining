@@ -13,7 +13,7 @@ local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 local GetLocalizedPriceModule = require(AvatarExperienceUIKit.ItemCard.Utils.getLocalizedPrice)
 local FFlagAXDurablesFooter = AvatarExperienceFlagsModule.FFlagAXDurablesFooter
 
-local function renderIconTextPair(p1) --[[ Line: 86 ]]
+local function renderIconTextPair(p1)
 	-- upvalues: ReactModule (copy), Icon (copy), IconSize (copy), Text (copy)
 	local Elements = {}
 	
@@ -40,7 +40,7 @@ local function renderIconTextPair(p1) --[[ Line: 86 ]]
 	return Elements
 end
 
-local function renderContentChildren(p1, PriceLineName, IconLayoutOrder, p2, ResolvedColorStyle, Tokens, DesignTokens) --[[ Line: 113 ]]
+local function renderContentChildren(p1, PriceLineName, IconLayoutOrder, p2, ResolvedColorStyle, Tokens, DesignTokens)
 	-- upvalues: GetLocalizedPriceModule (copy), renderIconTextPair (copy)
 	local Icon = nil
 	local Text = nil
@@ -78,7 +78,7 @@ local function renderContentChildren(p1, PriceLineName, IconLayoutOrder, p2, Res
 	}))
 end
 
-local function ItemCardPriceLine(Frame: Frame) --[[ Line: 158 ]]
+local function ItemCardPriceLine(Frame: Frame)
 	-- upvalues: UseTokensFunction (copy), UseDesignTokensFunction (copy), ReactModule (copy), Badge (copy), BadgeVariant (copy), IconSize (copy), FFlagAXDurablesFooter (copy), renderContentChildren (copy), Icon (copy), Text (copy), GetLocalizedPriceModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDesignTokensResult = UseDesignTokensFunction()

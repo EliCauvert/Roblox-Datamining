@@ -5,7 +5,7 @@ local UsePluginModule = require(Foundation.Providers.Plugin.usePlugin)
 local UseWidgetRefModule = require(script.Parent.useWidgetRef)
 local UseWidgetsContextModule = require(script.Parent.useWidgetsContext)
 
-return function(p1) --[[ Line: 16 | Named "useUniqueWidget" ]]
+return function(p1)
 	-- upvalues: UsePluginModule (copy), UseWidgetsContextModule (copy), ReactModule (copy), StudioUriModule (copy), UseWidgetRefModule (copy)
 	local UsePluginModuleResult = UsePluginModule()
 	
@@ -13,7 +13,7 @@ return function(p1) --[[ Line: 16 | Named "useUniqueWidget" ]]
 		error("useUniqueWidget must be used within a Plugin context")
 	end
 	local UseWidgetsContextModuleResult = UseWidgetsContextModule()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 23 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: StudioUriModule (upval), UsePluginModuleResult (copy)
 		return StudioUriModule.wrap(UsePluginModuleResult:GetUri())
 	end, { UsePluginModuleResult })
@@ -26,7 +26,7 @@ return function(p1) --[[ Line: 16 | Named "useUniqueWidget" ]]
 			UseRefResult.current = UseWidgetsContextModuleResult.nextId()
 		end
 	end
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 36 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: StudioUriModule (upval), UseMemoResult (copy), UseRefResult (copy)
 		return StudioUriModule.join(UseMemoResult, { Category = "Actions", ItemId = UseRefResult.current })
 	end, { UseMemoResult, UseRefResult.current })

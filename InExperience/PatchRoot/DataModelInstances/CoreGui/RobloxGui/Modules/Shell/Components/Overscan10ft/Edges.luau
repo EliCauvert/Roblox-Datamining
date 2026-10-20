@@ -3,7 +3,7 @@ local UserGameSettings = UserSettings():GetService("UserGameSettings")
 local GameOptions = settings():FindFirstChild("Game Options")
 local UserInputService = game:GetService("UserInputService")
 local PlatformService = nil
-pcall(function() --[[ Line: 8 ]]
+pcall(function()
 	-- upvalues: PlatformService (ref)
 	PlatformService = game:GetService("PlatformService")
 end)
@@ -19,7 +19,7 @@ local _Vector2_1 = Vector2.new(0.9, 0.9)
 local _Vector2_2 = Vector2.new(1920, 1080)
 local _Vector2_3 = Vector2.new(0, 0)
 
-local function EdgeImage(Frame) --[[ Line: 28 ]]
+local function EdgeImage(Frame)
 	-- upvalues: ReactModule (copy)
 	return ReactModule.createElement("ImageLabel", {
 		BackgroundTransparency = 1,
@@ -33,28 +33,28 @@ end
 
 local Edges = ReactModule.Component:extend("Edges")
 
-function Edges.init(p1) --[[ Line: 41 ]]
+function Edges.init(p1)
 	-- upvalues: UtilityModule (copy), _Vector2 (copy), _Vector2_2 (copy), _Vector2_3 (copy), MigrateOverscanToGameBasicSettingsEngineFeature (copy), UserGameSettings (copy), GameOptions (copy), _Vector2_1 (copy), UserInputService (copy)
-	local function _(p2) --[[ Line: 42 | Named "getCurrentEdgePercent" ]]
+	local function _(p2)
 		-- upvalues: UtilityModule (upval), _Vector2 (upval)
 		return UtilityModule.ClampVector2(_Vector2, Vector2.new(1, 1), p2)
 	end
 	
-	local _ = function(p2) --[[ Line: 46 | Named "getCurrentEdgeSize" ]]
+	local _ = function(p2)
 		-- upvalues: _Vector2_2 (upval), UtilityModule (upval), _Vector2_3 (upval)
 		local ScaledVector = p2 * _Vector2_2
 		
 		return UtilityModule.ClampVector2(_Vector2_3, _Vector2_2, Vector2.new(UtilityModule.Round(ScaledVector.X / 2), UtilityModule.Round(ScaledVector.Y / 2)) * 2)
 	end
 	
-	function p1:onAdjustThumbstick(_, p2) --[[ Line: 52 ]]
+	function p1:onAdjustThumbstick(_, p2)
 		-- upvalues: p1 (copy), UtilityModule (upval)
 		p1._stickPosition = UtilityModule.GamepadLinearToCurve(Vector2.new(p2.Position.X, -p2.Position.Y), 0.2)
 	end
 	
-	function p1.onAccept() --[[ Line: 56 ]]
+	function p1.onAccept()
 		-- upvalues: MigrateOverscanToGameBasicSettingsEngineFeature (upval), UserGameSettings (upval), p1 (copy), GameOptions (upval)
-		local _, _ = pcall(function() --[[ Line: 57 ]]
+		local _, _ = pcall(function()
 			-- upvalues: MigrateOverscanToGameBasicSettingsEngineFeature (upval), UserGameSettings (upval), p1 (upval), GameOptions (upval)
 			if MigrateOverscanToGameBasicSettingsEngineFeature then
 				UserGameSettings.Overscan = Vector2.new(math.min(1, p1._edgePercent.X), (math.min(1, p1._edgePercent.Y)))
@@ -71,7 +71,7 @@ function Edges.init(p1) --[[ Line: 41 ]]
 		end
 	end
 	
-	function p1.onRenderStep() --[[ Line: 73 ]]
+	function p1.onRenderStep()
 		-- upvalues: p1 (copy), _Vector2_3 (upval), UtilityModule (upval), _Vector2 (upval), _Vector2_2 (upval)
 		local CurrentTime = tick()
 		
@@ -91,9 +91,9 @@ function Edges.init(p1) --[[ Line: 41 ]]
 		p1._lastUpdate = CurrentTime
 	end
 	
-	function p1.onSuspended() --[[ Line: 92 ]]
+	function p1.onSuspended()
 		-- upvalues: MigrateOverscanToGameBasicSettingsEngineFeature (upval), UserGameSettings (upval), p1 (copy), GameOptions (upval)
-		pcall(function() --[[ Line: 93 ]]
+		pcall(function()
 			-- upvalues: MigrateOverscanToGameBasicSettingsEngineFeature (upval), UserGameSettings (upval), p1 (upval), GameOptions (upval)
 			if MigrateOverscanToGameBasicSettingsEngineFeature then
 				UserGameSettings.Overscan = Vector2.new(p1._lastSavedOverscan.X, p1._lastSavedOverscan.Y)
@@ -111,7 +111,7 @@ function Edges.init(p1) --[[ Line: 41 ]]
 	local ClampVector2Result1 = UtilityModule.ClampVector2(_Vector2_3, _Vector2_2, Vector2.new(UtilityModule.Round(ScaledClampVector2Result.X / 2), UtilityModule.Round(ScaledClampVector2Result.Y / 2)) * 2)
 	
 	if UserInputService:GetPlatform() == Enum.Platform.XBoxOne then
-		pcall(function() --[[ Line: 106 ]]
+		pcall(function()
 			-- upvalues: MigrateOverscanToGameBasicSettingsEngineFeature (upval), UserGameSettings (upval), ClampVector2Result (ref), UtilityModule (upval), _Vector2 (upval), ClampVector2Result1 (ref), _Vector2_2 (upval), _Vector2_3 (upval), p1 (copy), GameOptions (upval)
 			if MigrateOverscanToGameBasicSettingsEngineFeature then
 				if UserGameSettings.Overscan.x > 0 and UserGameSettings.Overscan.y > 0 then
@@ -143,7 +143,7 @@ function Edges.init(p1) --[[ Line: 41 ]]
 	p1.state = { currentSize = ClampVector2Result1 }
 end
 
-function Edges.render(p1) --[[ Line: 145 ]]
+function Edges.render(p1)
 	-- upvalues: ReactModule (copy), EdgeImage (copy), RenderStepModule (copy), ContextActionEventModule (copy), PlatformService (ref), ExternalEventConnection (copy)
 	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

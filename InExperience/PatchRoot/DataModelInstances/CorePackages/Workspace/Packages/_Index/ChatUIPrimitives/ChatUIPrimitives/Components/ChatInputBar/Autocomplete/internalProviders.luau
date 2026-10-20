@@ -5,7 +5,7 @@ local CryoModule = require(Parent.Cryo)
 local EmojiListModule = require(Parent.EmojiList)
 local TrieModule = require(script.Parent.Trie)
 
-local function buildEmojiArray() --[[ Line: 43 ]]
+local function buildEmojiArray()
 	-- upvalues: CryoModule (copy), EmojiListModule (copy)
 	local List = {}
 	
@@ -19,7 +19,7 @@ end
 
 local v1 = nil
 
-local function searchSortedArray(Emoji, Text1: string, CompareEmojiPopularity) --[[ Line: 178 ]]
+local function searchSortedArray(Emoji, Text1: string, CompareEmojiPopularity)
 	local Lowered = Text1:lower()
 	local CountLowered = #Lowered
 	local v2 = 1
@@ -47,7 +47,7 @@ local function searchSortedArray(Emoji, Text1: string, CompareEmojiPopularity) -
 	return List
 end
 
-local function compareEmojiPopularity(Text: string, Text1: string): boolean --[[ Line: 212 ]]
+local function compareEmojiPopularity(Text: string, Text1: string): boolean
 	-- upvalues: EmojiListModule (copy)
 	local Popularity = EmojiListModule[string.sub(Text, 2)].popularity
 	local Popularity1 = EmojiListModule[string.sub(Text1, 2)].popularity
@@ -56,7 +56,7 @@ local function compareEmojiPopularity(Text: string, Text1: string): boolean --[[
 end
 
 return {
-	buildTrie = function(List, p1) --[[ Line: 26 ]]
+	buildTrie = function(List, p1)
 		-- upvalues: TrieModule (copy), CryoModule (copy), EmojiListModule (copy)
 		local NewTrie = TrieModule.new()
 		
@@ -73,7 +73,7 @@ return {
 		return NewTrie
 	end,
 	buildEmojiArray = buildEmojiArray,
-	buildCommandTrie = function(List) --[[ Line: 52 ]]
+	buildCommandTrie = function(List)
 		-- upvalues: TrieModule (copy)
 		local NewTrie = TrieModule.new()
 		
@@ -82,14 +82,14 @@ return {
 		end
 		return NewTrie
 	end,
-	getEmojiStructure = function() --[[ Line: 64 ]]
+	getEmojiStructure = function()
 		-- upvalues: v1 (ref), buildEmojiArray (copy)
 		if not v1 then
 			v1 = buildEmojiArray()
 		end
 		return v1
 	end,
-	matchTrigger = function(Text: string, p2: number) --[[ Line: 81 ]]
+	matchTrigger = function(Text: string, p2: number)
 		if p2 < 2 then
 			return nil
 		end
@@ -133,7 +133,7 @@ return {
 			replaceFinish = p2 - 1
 		}
 	end,
-	matchColonCompletion = function(Text: string, p3: number) --[[ Line: 129 ]]
+	matchColonCompletion = function(Text: string, p3: number)
 		-- upvalues: EmojiListModule (copy)
 		if p3 - 1 < 3 then
 			return nil
@@ -155,10 +155,10 @@ return {
 			end
 		end
 	end,
-	search = function(p3, Text: string) --[[ Line: 155 ]]
+	search = function(p3, Text: string)
 		-- upvalues: EmojiListModule (copy)
 		local AutocompleteResult = p3:autocomplete(Text:lower())
-		table.sort(AutocompleteResult, function(Text1: string, Text: string): boolean --[[ Line: 157 ]]
+		table.sort(AutocompleteResult, function(Text1: string, Text: string): boolean
 			-- upvalues: EmojiListModule (upval)
 			local IsSegmentMatch = string.sub(Text, 1, 1) == ":"
 			
@@ -175,13 +175,13 @@ return {
 		return AutocompleteResult
 	end,
 	searchSortedArray = searchSortedArray,
-	searchStructures = function(p3, Text: string) --[[ Line: 229 ]]
+	searchStructures = function(p3, Text: string)
 		-- upvalues: searchSortedArray (copy), compareEmojiPopularity (copy), EmojiListModule (copy)
 		if string.sub(Text, 1, 1) == ":" then
 			return if p3.emoji then searchSortedArray(p3.emoji, Text, compareEmojiPopularity) else {}
 		elseif p3.command then
 			local AutocompleteResult = p3.command:autocomplete(Text:lower())
-			table.sort(AutocompleteResult, function(Text1: string, Text: string): boolean --[[ Line: 157 ]]
+			table.sort(AutocompleteResult, function(Text1: string, Text: string): boolean
 				-- upvalues: EmojiListModule (upval)
 				local IsSegmentMatch = string.sub(Text, 1, 1) == ":"
 				
@@ -200,11 +200,11 @@ return {
 			return {}
 		end
 	end,
-	formatReplacement = function(Text: string) --[[ Line: 243 ]]
+	formatReplacement = function(Text: string)
 		-- upvalues: EmojiListModule (copy)
 		return if string.sub(Text, 1, 1) == ":" then EmojiListModule[string.sub(Text, 2)].base else Text
 	end,
-	renderEntry = function(Text: string, _) --[[ Line: 250 ]]
+	renderEntry = function(Text: string, _)
 		-- upvalues: EmojiListModule (copy), ReactModule (copy), FoundationModule (copy)
 		if string.sub(Text, 1, 1) == ":" then
 			local Segment = string.sub(Text, 2)

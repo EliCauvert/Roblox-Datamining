@@ -16,7 +16,7 @@ local DataStatus = DataHydrationModule.DataStatus
 local BuildItemGiftabilityKeyFunction = ItemGiftabilityCacheKeyModule.buildItemGiftabilityKey
 local ParseItemGiftabilityKeyFunction = ItemGiftabilityCacheKeyModule.parseItemGiftabilityKey
 
-local function buildRecipientsKey(p1) --[[ Line: 80 ]]
+local function buildRecipientsKey(p1)
 	-- upvalues: BuildItemGiftabilityKeyFunction (copy), HttpService (copy)
 	local List = {}
 	
@@ -26,7 +26,7 @@ local function buildRecipientsKey(p1) --[[ Line: 80 ]]
 	return HttpService:JSONEncode({ List, p1.searchTerm or "", p1.cursor or "" })
 end
 
-return function(p2) --[[ Line: 89 | Named "createCanGiftStore" ]]
+return function(p2)
 	-- upvalues: PostCanGiftModule (copy), PostFindRecipientsModule (copy), CreateDataCacheFunction (copy), CreateDataResolverFunction (copy), ParseItemGiftabilityKeyFunction (copy), BuildItemGiftabilityKeyFunction (copy), DataStatus (copy), PromiseModule (copy), GiftModelUtilsModule (copy), buildRecipientsKey (copy)
 	local PostCanGift = if p2 and p2.postCanGift then p2.postCanGift else PostCanGiftModule
 	local PostFindRecipients = if p2 and p2.postFindRecipients then p2.postFindRecipients else PostFindRecipientsModule
@@ -38,7 +38,7 @@ return function(p2) --[[ Line: 89 | Named "createCanGiftStore" ]]
 		requestBatchSize = 20,
 		queueProcessDelaySec = 0,
 		cache = DataCache1,
-		fetchFn = function(List) --[[ Line: 105 ]]
+		fetchFn = function(List)
 			-- upvalues: ParseItemGiftabilityKeyFunction (upval), PostCanGift (copy), Network (copy), DataCache (copy), BuildItemGiftabilityKeyFunction (upval), DataStatus (upval), PromiseModule (upval)
 			local Items = {}
 			
@@ -49,7 +49,7 @@ return function(p2) --[[ Line: 89 | Named "createCanGiftStore" ]]
 					table.insert(Items, ParseItemGiftabilityKeyResult)
 				end
 			end
-			return PostCanGift({ items = Items }, Network):andThen(function(Result) --[[ Line: 117 ]]
+			return PostCanGift({ items = Items }, Network):andThen(function(Result)
 				-- upvalues: DataCache (upval), BuildItemGiftabilityKeyFunction (upval)
 				DataCache.replaceItem("sender", {
 					eligibility = Result.eligibility,
@@ -61,7 +61,7 @@ return function(p2) --[[ Line: 89 | Named "createCanGiftStore" ]]
 					t[BuildItemGiftabilityKeyFunction(item.item)] = item
 				end
 				return t
-			end):catch(function(Err) --[[ Line: 129 ]]
+			end):catch(function(Err)
 				-- upvalues: DataCache (upval), DataStatus (upval), PromiseModule (upval)
 				if DataCache.getItem("sender").status(false) ~= DataStatus.Ready then
 					DataCache.markItemsAsFailed({ "sender" })
@@ -71,12 +71,12 @@ return function(p2) --[[ Line: 89 | Named "createCanGiftStore" ]]
 		end
 	})
 	
-	local function _(p3) --[[ Line: 139 | Named "isValidItem" ]]
+	local function _(p3)
 		-- upvalues: GiftModelUtilsModule (upval)
 		return p3 ~= nil and GiftModelUtilsModule.nonEmptyString(p3.itemId)
 	end
 	
-	local _ = function() --[[ Line: 144 | Named "invalidItemResult" ]]
+	local _ = function()
 		-- upvalues: DataCache1 (copy)
 		local InvalidItem = DataCache1.getItem("invalid")
 		DataCache1.markItemsAsFailed({ "invalid" })
@@ -89,7 +89,7 @@ return function(p2) --[[ Line: 89 | Named "createCanGiftStore" ]]
 		supportsMultiGet = false,
 		replaceItems = true,
 		cache = CreateDataCacheFunction(45, 0),
-		fetchFn = function(p3) --[[ Line: 158 ]]
+		fetchFn = function(p3)
 			-- upvalues: T (ref), PostFindRecipients (copy), Network (copy)
 			local Entry = T[p3]
 			
@@ -102,7 +102,7 @@ return function(p2) --[[ Line: 89 | Named "createCanGiftStore" ]]
 		end
 	})
 	
-	local _ = function(p3) --[[ Line: 169 | Named "recipientsKeyFor" ]]
+	local _ = function(p3)
 		-- upvalues: buildRecipientsKey (upval), T (ref)
 		local RecipientsKey = buildRecipientsKey(p3)
 		T[RecipientsKey] = p3
@@ -111,11 +111,11 @@ return function(p2) --[[ Line: 89 | Named "createCanGiftStore" ]]
 	end
 	
 	return {
-		getSenderEligibility = function() --[[ Line: 176 ]]
+		getSenderEligibility = function()
 			-- upvalues: DataCache (copy)
 			return (DataCache.getItem("sender"))
 		end,
-		getAndFetchItemGiftability = function(p3) --[[ Line: 180 ]]
+		getAndFetchItemGiftability = function(p3)
 			-- upvalues: GiftModelUtilsModule (upval), DataCache1 (copy), DataResolver (copy), BuildItemGiftabilityKeyFunction (upval)
 			if p3 ~= nil and GiftModelUtilsModule.nonEmptyString(p3.itemId) then
 				return (DataResolver.getAndFetchItem(BuildItemGiftabilityKeyFunction(p3)))
@@ -126,7 +126,7 @@ return function(p2) --[[ Line: 89 | Named "createCanGiftStore" ]]
 				return InvalidItem
 			end
 		end,
-		getAndFetchItemGiftabilities = function(List) --[[ Line: 187 ]]
+		getAndFetchItemGiftabilities = function(List)
 			-- upvalues: GiftModelUtilsModule (upval), BuildItemGiftabilityKeyFunction (upval), DataResolver (copy), DataCache1 (copy)
 			local List1 = {}
 			local Flag = false
@@ -147,7 +147,7 @@ return function(p2) --[[ Line: 89 | Named "createCanGiftStore" ]]
 			end
 			return AndFetchItems
 		end,
-		getAndFetchRecipients = function(p3) --[[ Line: 204 ]]
+		getAndFetchRecipients = function(p3)
 			-- upvalues: DataResolver1 (copy), buildRecipientsKey (upval), T (ref)
 			local GetAndFetchItemFunction = DataResolver1.getAndFetchItem
 			local RecipientsKey = buildRecipientsKey(p3)
@@ -155,14 +155,14 @@ return function(p2) --[[ Line: 89 | Named "createCanGiftStore" ]]
 			
 			return (GetAndFetchItemFunction(RecipientsKey))
 		end,
-		clear = function() --[[ Line: 208 ]]
+		clear = function()
 			-- upvalues: DataCache (copy), DataResolver (copy), T (ref), DataResolver1 (copy)
 			DataCache.clear()
 			DataResolver.clear()
 			T = {}
 			DataResolver1.clear()
 		end,
-		dispose = function() --[[ Line: 214 ]]
+		dispose = function()
 			-- upvalues: DataCache (copy), DataResolver (copy), T (ref), DataResolver1 (copy)
 			DataCache.dispose()
 			DataResolver.dispose()

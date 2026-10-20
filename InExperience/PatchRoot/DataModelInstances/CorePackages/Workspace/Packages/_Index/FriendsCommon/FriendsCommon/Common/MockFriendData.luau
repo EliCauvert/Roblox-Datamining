@@ -91,7 +91,7 @@
 			universeId = "789"
 		}
 	},
-	convertGraphQlOnlineFriendsToPresenceApiFormat = function(List) --[[ Line: 100 ]]
+	convertGraphQlOnlineFriendsToPresenceApiFormat = function(List)
 		local List1 = {}
 		local SortScores = {}
 		
@@ -112,7 +112,7 @@
 		end
 		return List1, SortScores
 	end,
-	convertGraphQlOnlineFriendsToExectedSignalFormat = function(List) --[[ Line: 123 ]]
+	convertGraphQlOnlineFriendsToExectedSignalFormat = function(List)
 		local List1 = {}
 		
 		for _, value in List do

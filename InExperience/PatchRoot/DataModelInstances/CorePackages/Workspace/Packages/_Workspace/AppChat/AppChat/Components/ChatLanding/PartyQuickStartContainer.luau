@@ -18,7 +18,7 @@ local EnumScreensModule = require(AppChat.EnumScreens)
 local Text = if game.PlaceId > 0 then tostring(game.PlaceId) else nil
 local Text1 = if game.GameId > 0 then tostring(game.GameId) else nil
 
-function PartyQuickStartContainer(p1) --[[ Line: 35 ]]
+function PartyQuickStartContainer(p1)
 	-- upvalues: UseAnalyticsModule (copy), UseChatPlacementContextFunction (copy), UseNavigationFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), HttpService (copy), EventNamesModule (copy), Text (copy), Text1 (copy), EnumScreensModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), FFlagAppChatUseFoundationCustomConversationListRowModule (copy), CustomConversationListRowModule (copy), IconName (copy), CustomConversationListEntryModule (copy), Images (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseChatPlacementContextResult = UseChatPlacementContextFunction()
@@ -27,7 +27,7 @@ function PartyQuickStartContainer(p1) --[[ Line: 35 ]]
 		titleText = "Feature.Squads.Label.StartParty",
 		subTitleText = "Feature.Squads.Label.JoinExperiencesTogether"
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 44 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: HttpService (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval), UseChatPlacementContextResult (copy), Text (upval), Text1 (upval), UseNavigationResult (copy), EnumScreensModule (upval)
 		local Guid = HttpService:GenerateGUID(false)
 		UseAnalyticsModuleResult.fireAnalyticsEvent(EventNamesModule.ChatLandingPartyQuickStartButtonClicked, {

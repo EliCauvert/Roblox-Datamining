@@ -4,7 +4,7 @@ local _ = require(script.Parent.ResolverTypes)
 local TransformJsonLeafFirstModule = require(script.Parent.transformJsonLeafFirst)
 local _ = require(GenericAbuseReporting.BeduiV2.Types)
 
-local function getByPath(Attribute, Text: string) --[[ Line: 18 ]]
+local function getByPath(Attribute, Text: string)
 	local Attribute1 = Attribute
 	
 	for _, value in ipairs((string.split(Text, "."))) do
@@ -20,35 +20,35 @@ local function getByPath(Attribute, Text: string) --[[ Line: 18 ]]
 	return Attribute1
 end
 
-local function _(Enabled): boolean --[[ Line: 47 | Named "isTruthy" ]]
+local function _(Enabled): boolean
 	return Enabled ~= nil and (Enabled ~= false and Enabled ~= "")
 end
 
 local config = {
 	["$attribute"] = {
-		is = function(p1): boolean --[[ Line: 57 ]]
+		is = function(p1): boolean
 			return type(p1) == "table" and (p1["$attribute"] ~= nil and type(p1["$attribute"]) == "string")
 		end,
-		resolve = function(p1, p2) --[[ Line: 60 ]]
+		resolve = function(p1, p2)
 			-- upvalues: getByPath (copy)
 			return (getByPath(p2.attribute, p1["$attribute"]))
 		end
 	},
 	["$resource"] = {
-		is = function(p1): boolean --[[ Line: 66 ]]
+		is = function(p1): boolean
 			return type(p1) == "table" and (p1["$resource"] ~= nil and type(p1["$resource"]) == "string")
 		end,
-		resolve = function(p1, p2) --[[ Line: 69 ]]
+		resolve = function(p1, p2)
 			local Resource = p2.resources[p1["$resource"]]
 			
 			return if Resource then Resource.value else nil
 		end
 	},
 	["$switch"] = {
-		is = function(p1): boolean --[[ Line: 75 ]]
+		is = function(p1): boolean
 			return type(p1) == "table" and (p1["$switch"] ~= nil and type(p1["$switch"]) == "table")
 		end,
-		resolve = function(p1, _) --[[ Line: 78 ]]
+		resolve = function(p1, _)
 			for _, value in ipairs(p1["$switch"]) do
 				if type(value) == "string" then
 					return value
@@ -64,10 +64,10 @@ local config = {
 		end
 	},
 	["$store"] = {
-		is = function(p2): boolean --[[ Line: 93 ]]
+		is = function(p2): boolean
 			return type(p2) == "table" and (p2["$store"] ~= nil and type(p2["$store"]) == "string")
 		end,
-		resolve = function(p2, p3) --[[ Line: 96 ]]
+		resolve = function(p2, p3)
 			-- upvalues: getByPath (copy)
 			return (getByPath(p3.store, p2["$store"]))
 		end
@@ -75,7 +75,7 @@ local config = {
 }
 
 return {
-	resolveArConfig = function(p2, p3) --[[ Line: 139 ]]
+	resolveArConfig = function(p2, p3)
 		-- upvalues: config (copy), TransformJsonLeafFirstModule (copy)
 		local config1 = {
 			attribute = p2.attributes,
@@ -84,7 +84,7 @@ return {
 		}
 		local config2 = {
 			attribute = p2.attributes,
-			resources = TransformJsonLeafFirstModule(p2.resources, function(p4) --[[ Line: 113 | Named "replacerFn" ]]
+			resources = TransformJsonLeafFirstModule(p2.resources, function(p4)
 				-- upvalues: config (upval), config1 (copy)
 				if type(p4) == "table" then
 					if config["$attribute"].is(p4) then
@@ -102,7 +102,7 @@ return {
 			store = p3.store
 		}
 		
-		return (TransformJsonLeafFirstModule(p2, function(p4) --[[ Line: 113 | Named "replacerFn" ]]
+		return (TransformJsonLeafFirstModule(p2, function(p4)
 			-- upvalues: config (upval), config2 (copy)
 			if type(p4) == "table" then
 				if config["$attribute"].is(p4) then
@@ -118,9 +118,9 @@ return {
 			return p4
 		end))
 	end,
-	resolveConfig = function(p2, p3) --[[ Line: 105 ]]
+	resolveConfig = function(p2, p3)
 		-- upvalues: config (copy), TransformJsonLeafFirstModule (copy)
-		return (TransformJsonLeafFirstModule(p2, function(p4) --[[ Line: 113 | Named "replacerFn" ]]
+		return (TransformJsonLeafFirstModule(p2, function(p4)
 			-- upvalues: config (upval), p3 (copy)
 			if type(p4) == "table" then
 				if config["$attribute"].is(p4) then

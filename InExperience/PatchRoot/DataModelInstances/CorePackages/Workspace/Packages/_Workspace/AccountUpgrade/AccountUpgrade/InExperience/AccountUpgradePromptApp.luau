@@ -12,26 +12,26 @@ local RespawnIntoExperienceModule = require(script.Parent.respawnIntoExperience)
 local ResolveSuccessIdentityModule = require(script.Parent.resolveSuccessIdentity)
 local FStringAccountUpgradeLinkedAccountTypeModule = require(AccountUpgrade.Flags.FStringAccountUpgradeLinkedAccountType)
 
-return function(p1) --[[ Line: 35 | Named "AccountUpgradePromptApp" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), Players (copy), RespawnIntoExperienceModule (copy), ResolveSuccessIdentityModule (copy), AccountUpgradeSuccessViewModule (copy), FStringAccountUpgradeLinkedAccountTypeModule (copy), AccountUpgradeContainerModule (copy), CoreScriptsRootProvider (copy), FoundationModule (copy), InExperienceProviderContainer (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
 	local LocalPlayer = Players.LocalPlayer
 	local Name = if LocalPlayer then LocalPlayer.Name else nil
 	local OnCompleteFunction = p1.onComplete
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 45 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_1 (copy)
 		if p2.isSuccess then
 			UseStateResult2_1(p2)
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 51 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult1 (copy), OnCompleteFunction (copy)
 		if UseStateResult1 ~= nil then
 			OnCompleteFunction(UseStateResult1)
 		end
 	end, { OnCompleteFunction, UseStateResult1 })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 59 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseResult1 (copy), RespawnIntoExperienceModule (upval)
 		UseResult1()
 		RespawnIntoExperienceModule()

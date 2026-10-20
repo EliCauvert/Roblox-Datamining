@@ -7,13 +7,13 @@ local Icon = FoundationModule.Icon
 local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 
-return function(p1) --[[ Line: 22 | Named "ShopMoreCarouselTile" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy)
 	return ReactModule.createElement(View, {
 		tag = "col align-x-left gap-small auto-y",
 		Size = UDim2.fromOffset(p1.tileSize, 0),
 		LayoutOrder = p1.layoutOrder,
-		onActivated = ReactModule.useCallback(function() --[[ Line: 23 ]]
+		onActivated = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy)
 			p1.onActivated()
 		end, { p1.onActivated })

@@ -23,9 +23,9 @@ LeaveToAppPrompt.validateProps = T.strictInterface({
 })
 LeaveToAppPrompt.defaultProps = { linkingProtocol = LinkingProtocol.default }
 
-function LeaveToAppPrompt.init(p1) --[[ Line: 37 ]]
+function LeaveToAppPrompt.init(p1)
 	-- upvalues: SendAnalyticsModule (copy), ConstantsModule (copy), DeepLinkSource (copy), RunService (copy)
-	function p1.goToHomePage() --[[ Line: 38 ]]
+	function p1.goToHomePage()
 		-- upvalues: SendAnalyticsModule (upval), ConstantsModule (upval), p1 (copy), DeepLinkSource (upval), RunService (upval)
 		SendAnalyticsModule(ConstantsModule.AnalyticsLeaveToHomeName, ConstantsModule.AnalyticsLeaveToHomeName, { confirmed = ConstantsModule.AnalyticsLeaveToHomeName })
 		
@@ -41,14 +41,14 @@ function LeaveToAppPrompt.init(p1) --[[ Line: 37 ]]
 	end
 end
 
-function LeaveToAppPrompt.render(p1) --[[ Line: 67 ]]
+function LeaveToAppPrompt.render(p1)
 	-- upvalues: WithLocalizationModule (copy), Roact (copy), LeavePromptModule (copy)
 	return WithLocalizationModule({
 		titleText = "CoreScripts.InGameMenu.Prompt.LeaveGameTitle",
 		bodyText = "CoreScripts.InGameMenu.Prompt.LeaveGameBodyText",
 		confirmText = "CoreScripts.InGameMenu.Prompt.BackToHome",
 		cancelText = "CoreScripts.InGameMenu.Prompt.ResumeGame"
-	})(function(p2) --[[ Line: 73 ]]
+	})(function(p2)
 		-- upvalues: Roact (upval), LeavePromptModule (upval), p1 (copy)
 		return Roact.createElement(LeavePromptModule, {
 			titleText = p2.titleText,
@@ -63,16 +63,16 @@ function LeaveToAppPrompt.render(p1) --[[ Line: 67 ]]
 	end)
 end
 
-return RoactRodux.UNSTABLE_connect2(function(p1, _) --[[ Line: 87 ]]
+return RoactRodux.UNSTABLE_connect2(function(p1, _)
 	-- upvalues: ConstantsModule (copy)
 	return {
 		canGamepadCaptureFocus = p1.menuPage == ConstantsModule.LeaveToAppPromptPageKey and p1.displayOptions.inputType == ConstantsModule.InputType.Gamepad and (not p1.respawn.dialogOpen and p1.currentZone == 1),
 		canKeyboardCaptureFocus = p1.menuPage == ConstantsModule.LeaveToAppPromptPageKey and p1.displayOptions.inputType == ConstantsModule.InputType.MouseAndKeyboard and not p1.respawn.dialogOpen
 	}
-end, function(Callback) --[[ Line: 101 ]]
+end, function(Callback)
 	-- upvalues: CloseMenuModule (copy)
 	return {
-		closeMenu = function() --[[ Line: 103 ]]
+		closeMenu = function()
 			-- upvalues: Callback (copy), CloseMenuModule (upval)
 			Callback(CloseMenuModule)
 		end

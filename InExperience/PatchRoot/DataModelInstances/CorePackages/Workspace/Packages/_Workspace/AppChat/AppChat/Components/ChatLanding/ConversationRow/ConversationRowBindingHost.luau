@@ -4,7 +4,7 @@ local _ = require(Parent.Signals)
 local ConversationRowViewModule = require(script.Parent.ConversationRowView)
 local UseConversationRowBindingPresentationModule = require(script.Parent.useConversationRowBindingPresentation)
 
-return ReactModule.memo(function(p1) --[[ Line: 21 | Named "ConversationRowBindingHost" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseConversationRowBindingPresentationModule (copy), ReactModule (copy), ConversationRowViewModule (copy)
 	local UseConversationRowBindingPresentationModuleResult = UseConversationRowBindingPresentationModule({ itemSignal = p1.itemSignal })
 	

@@ -1,4 +1,4 @@
-﻿return function(p1: number, p2: number): string --[[ Line: 1 | Named "getGameStatsRatingPercentageText" ]]
+﻿return function(p1: number, p2: number): string
 	local v1 = "--"
 	
 	if p1 == nil or p1 < 0 then

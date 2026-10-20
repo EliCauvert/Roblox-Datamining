@@ -4,7 +4,7 @@ local String = LuauPolyfillModule.String
 local HttpService = game:GetService("HttpService")
 local MakeUniqueIdFunction = require(script.Parent.makeUniqueId).makeUniqueId
 
-function replaceUndefined(p1, p2) --[[ Line: 20 ]]
+function replaceUndefined(p1, p2)
 	-- upvalues: Array (copy)
 	if not Array.isArray(p1) then
 		return p1
@@ -22,7 +22,7 @@ function replaceUndefined(p1, p2) --[[ Line: 20 ]]
 end
 
 return {
-	stringifyForDisplay = function(p3) --[[ Line: 35 ]]
+	stringifyForDisplay = function(p3)
 		-- upvalues: MakeUniqueIdFunction (copy), Array (copy), String (copy), HttpService (copy)
 		local StringifyForDisplay = MakeUniqueIdFunction("stringifyForDisplay")
 		

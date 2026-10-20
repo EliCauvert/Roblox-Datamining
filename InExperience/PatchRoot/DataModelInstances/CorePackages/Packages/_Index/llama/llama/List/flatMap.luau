@@ -1,4 +1,4 @@
-﻿local function flatMap(p1, Callback) --[[ Line: 2 ]]
+﻿local function flatMap(p1, Callback)
 	-- upvalues: flatMap (copy)
 	local ValueType = type(p1)
 	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)

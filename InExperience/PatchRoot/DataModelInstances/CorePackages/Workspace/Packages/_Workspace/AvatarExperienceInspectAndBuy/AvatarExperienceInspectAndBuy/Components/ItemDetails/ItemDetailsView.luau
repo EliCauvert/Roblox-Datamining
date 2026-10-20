@@ -34,7 +34,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local _ = require(AvatarExperienceInspectAndBuy.Components.Common.BuyActionBar)
 local _ = require(AvatarExperienceInspectAndBuy.Enums.PriceStatus)
 
-local function v27(View, p1) --[[ Line: 70 ]]
+local function v27(View, p1)
 	-- upvalues: ViewTypeModule (copy)
 	return if View == ViewTypeModule.WideLandscape then {
 		PaddingTop = UDim.new(0, p1.Padding.XSmall),
@@ -54,7 +54,7 @@ local function v27(View, p1) --[[ Line: 70 ]]
 	}
 end
 
-local function v28(View, p1) --[[ Line: 100 ]]
+local function v28(View, p1)
 	-- upvalues: ViewTypeModule (copy)
 	return if View == ViewTypeModule.WideLandscape then {
 		left = UDim.new(0, p1.Padding.Large),
@@ -63,17 +63,17 @@ local function v28(View, p1) --[[ Line: 100 ]]
 	} else { bottom = UDim.new(0, p1.Padding.XXLarge) }
 end
 
-local function v29(View, p1, p2): UDim2 --[[ Line: 120 ]]
+local function v29(View, p1, p2): UDim2
 	-- upvalues: ViewTypeModule (copy)
 	return if View == ViewTypeModule.Compact then UDim2.new(1, 0, 1, -p1.buyActionBarOffset - p1.backButtonOffset - p2.Padding.Small) else UDim2.new(1, 0, 1, -p1.backButtonOffset - p2.Padding.Small)
 end
 
-local function _(Wide): number --[[ Line: 133 ]]
+local function _(Wide): number
 	-- upvalues: ViewTypeModule (copy)
 	return if Wide == ViewTypeModule.Wide then 2.5 else 2
 end
 
-return function(p1) --[[ Line: 140 | Named "ItemDetailsView" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseConvertedItemDataModule (copy), UseItemExperienceInfoModule (copy), GetPriceStatusModule (copy), ViewTypeModule (copy), UseItemStatusLocalizationModule (copy), v27 (copy), IsCollectibleFunction (copy), GetQuantitySoldFunction (copy), GetOriginalPriceFunction (copy), IsTradeableFunction (copy), IsInExperienceCreationPlayableFunction (copy), ReactModule (copy), FoundationModule (copy), Enums (copy), BackButtonModule (copy), v29 (copy), ViewportLayoutModule (copy), GetItemThumbnailUrlModule (copy), ItemHeaderModule (copy), v28 (copy), SubheaderLabelPriceModule (copy), GetCreatorNameFunction (copy), FormatNumberModule (copy), GetPriceInRobuxFunction (copy), ControlBarModule (copy), NumberLocalization (copy), LocalizationService (copy), IsItemAvailableForTryOnModule (copy), ResellableInstancesLabelModule (copy), ItemInfoLabelsModule (copy), BundleAssetsListModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseConvertedItemDataModuleResult = UseConvertedItemDataModule(p1.item)
@@ -128,7 +128,7 @@ return function(p1) --[[ Line: 140 | Named "ItemDetailsView" ]]
 			rightLabel = ReactModule.createElement(FoundationModule.View, {
 				LayoutOrder = 2,
 				tag = "auto-xy",
-				onActivated = function() --[[ Line: 197 ]]
+				onActivated = function()
 					-- upvalues: p1 (copy), UseItemExperienceInfoModuleResult (copy)
 					if p1.openAttributionOverlay then
 						p1.openAttributionOverlay(UseItemExperienceInfoModuleResult)
@@ -231,7 +231,7 @@ return function(p1) --[[ Line: 140 | Named "ItemDetailsView" ]]
 						LayoutOrder = 1,
 						text = if UseConvertedItemDataModuleResult and UseConvertedItemDataModuleResult.favoritesDetails and UseConvertedItemDataModuleResult.favoritesDetails.numFavorites then NumberLocalization.abbreviate(UseConvertedItemDataModuleResult.favoritesDetails.numFavorites, LocalizationService.RobloxLocaleId) else nil,
 						iconVariant = if UseConvertedItemDataModuleResult and UseConvertedItemDataModuleResult.favoritesDetails and UseConvertedItemDataModuleResult.favoritesDetails.isFavorited then Enums.IconVariant.Filled else Enums.IconVariant.Regular,
-						onActivated = function() --[[ Line: 325 ]]
+						onActivated = function()
 							-- upvalues: UseConvertedItemDataModuleResult (copy), p1 (copy)
 							if UseConvertedItemDataModuleResult and UseConvertedItemDataModuleResult.favoritesDetails then
 								p1.onToggleFavorite(p1.item, UseConvertedItemDataModuleResult.favoritesDetails.isFavorited or false)
@@ -242,7 +242,7 @@ return function(p1) --[[ Line: 140 | Named "ItemDetailsView" ]]
 						LayoutOrder = 2,
 						text = UseItemStatusLocalizationModuleResult.tryOn,
 						iconVariant = if p1.tryOnState.isTryOnEnabled then Enums.IconVariant.Filled else Enums.IconVariant.Regular,
-						onActivated = function() --[[ Line: 338 ]]
+						onActivated = function()
 							-- upvalues: UseConvertedItemDataModuleResult (copy), p1 (copy)
 							if UseConvertedItemDataModuleResult then
 								p1.onToggleTryOn({

@@ -18,11 +18,11 @@ local FFlagAppChatDerivedConversationLatestActivityModule = require(AppChat.Flag
 local MessageType = EnumsModule.MessageType
 local MessageVisibility = EnumsModule.MessageVisibility
 
-local function _(Entry) --[[ Line: 34 | Named "getFirstCardAltText" ]]
+local function _(Entry)
 	return if type(Entry) == "table" and type(Entry[1]) == "table" and type(Entry[1].alt_text) == "string" then Entry[1].alt_text else nil
 end
 
-local _ = function(Text: string) --[[ Line: 55 | Named "getContentFirstLine" ]]
+local _ = function(Text: string)
 	if type(Text) == "string" then
 		local v1 = Text:split("\n")
 		
@@ -32,16 +32,16 @@ local _ = function(Text: string) --[[ Line: 55 | Named "getContentFirstLine" ]]
 	end
 end
 
-local _ = function() --[[ Line: 63 | Named "getHiddenMessageText" ]]
+local _ = function()
 	-- upvalues: Localization (copy), LocalizationService (copy)
 	return Localization.new(LocalizationService.RobloxLocaleId):Format("Feature.Chat.Label.MessageNotAvailable")
 end
 
-local _ = function(p1) --[[ Line: 67 | Named "getUnixTime" ]]
+local _ = function(p1)
 	return if p1 == nil then nil elseif typeof(p1) == "DateTime" then p1.UnixTimestamp elseif type(p1) == "table" and p1.GetUnixTimestamp ~= nil then p1:GetUnixTimestamp() else nil
 end
 
-local _ = function(p1, p2) --[[ Line: 81 | Named "getLatestUnixTime" ]]
+local _ = function(p1, p2)
 	-- upvalues: GetPreciseUnixTimestampModule (copy)
 	local PreciseUnixTimestampModule = GetPreciseUnixTimestampModule(p1.lastUpdated)
 	local PreciseUnixTimestampModule1 = if p2 == nil then nil else GetPreciseUnixTimestampModule(p2.created_at)
@@ -49,7 +49,7 @@ local _ = function(p1, p2) --[[ Line: 81 | Named "getLatestUnixTime" ]]
 	return if PreciseUnixTimestampModule1 == nil or PreciseUnixTimestampModule ~= nil and PreciseUnixTimestampModule >= PreciseUnixTimestampModule1 then PreciseUnixTimestampModule else PreciseUnixTimestampModule1
 end
 
-local _ = function(p1, p2): boolean --[[ Line: 94 | Named "isNewerPreviewThanServer" ]]
+local _ = function(p1, p2): boolean
 	-- upvalues: GetPreciseUnixTimestampModule (copy)
 	local PreciseUnixTimestampModule = GetPreciseUnixTimestampModule(p1.lastUpdated)
 	local PreciseUnixTimestampModule1 = GetPreciseUnixTimestampModule(p2.created_at)
@@ -57,7 +57,7 @@ local _ = function(p1, p2): boolean --[[ Line: 94 | Named "isNewerPreviewThanSer
 	return PreciseUnixTimestampModule1 ~= nil and (PreciseUnixTimestampModule == nil or PreciseUnixTimestampModule <= PreciseUnixTimestampModule1)
 end
 
-local function getSubtitle(Conversation, Message) --[[ Line: 100 ]]
+local function getSubtitle(Conversation, Message)
 	-- upvalues: MessageVisibility (copy), Localization (copy), LocalizationService (copy), MessageType (copy)
 	if Message == nil then
 		local PreviewContent: string = Conversation.previewContent
@@ -88,17 +88,17 @@ local function getSubtitle(Conversation, Message) --[[ Line: 100 ]]
 	end
 end
 
-local _ = function(p1) --[[ Line: 114 | Named "getTitle" ]]
+local _ = function(p1)
 	-- upvalues: GetConversationTitleModule (copy)
 	return GetConversationTitleModule(p1) or ""
 end
 
-local _ = function(p1) --[[ Line: 118 | Named "getLocatorTitle" ]]
+local _ = function(p1)
 	-- upvalues: GetConversationTitleModule (copy)
 	return p1.title or (GetConversationTitleModule(p1) or "")
 end
 
-local _ = function(p1, Key, Key1, p2) --[[ Line: 124 | Named "getCachedGetter" ]]
+local _ = function(p1, Key, Key1, p2)
 	-- upvalues: SignalsModule (copy)
 	local v1 = p1[Key]
 	
@@ -118,13 +118,13 @@ local _ = function(p1, Key, Key1, p2) --[[ Line: 124 | Named "getCachedGetter" ]
 	return Computed
 end
 
-return function(p1, p2, p3) --[[ Line: 146 | Named "createConversationViewModelStore" ]]
+return function(p1, p2, p3)
 	-- upvalues: GetConversationTitleModule (copy), SignalsModule (copy), FFlagAppChatDerivedConversationLatestActivityModule (copy), GetPreciseUnixTimestampModule (copy), getSubtitle (copy), UseIsUserPendingModule (copy), ShouldShowOSAForConversationModule (copy), ShouldShowU13ChatOptInForConversationModule (copy), DomLocatorsModule (copy)
 	local t = {}
 	
-	local function _(Key) --[[ Line: 160 | Named "getNewestPreviewableMessageGetter" ]]
+	local function _(Key)
 		-- upvalues: t (copy), p3 (copy), p2 (copy), SignalsModule (upval)
-		local function v50(p4) --[[ Line: 161 ]]
+		local function v50(p4)
 			-- upvalues: p3 (upval), Key (copy), p2 (upval)
 			local Message = nil
 			for _, value in p3.getOrderedIds(Key, p4) do
@@ -156,9 +156,9 @@ return function(p1, p2, p3) --[[ Line: 146 | Named "createConversationViewModelS
 	end
 	
 	return {
-		getTitle = function(Key) --[[ Line: 153 ]]
+		getTitle = function(Key)
 			-- upvalues: t (copy), p1 (copy), GetConversationTitleModule (upval), SignalsModule (upval)
-			local function v45(p4) --[[ Line: 154 ]]
+			local function v45(p4)
 				-- upvalues: p1 (upval), Key (copy), GetConversationTitleModule (upval)
 				local Conversation = p1.getConversation(Key, p4)
 				
@@ -182,9 +182,9 @@ return function(p1, p2, p3) --[[ Line: 146 | Named "createConversationViewModelS
 			
 			return Computed
 		end,
-		getSubtitle = function(Key) --[[ Line: 173 ]]
+		getSubtitle = function(Key)
 			-- upvalues: t (copy), p1 (copy), FFlagAppChatDerivedConversationLatestActivityModule (upval), p3 (copy), p2 (copy), SignalsModule (upval), GetPreciseUnixTimestampModule (upval), getSubtitle (upval)
-			local function v55(p4) --[[ Line: 174 ]]
+			local function v55(p4)
 				-- upvalues: p1 (upval), Key (copy), FFlagAppChatDerivedConversationLatestActivityModule (upval), t (upval), p3 (upval), p2 (upval), SignalsModule (upval), GetPreciseUnixTimestampModule (upval), getSubtitle (upval)
 				local Conversation = p1.getConversation(Key, p4)
 				
@@ -193,7 +193,7 @@ return function(p1, p2, p3) --[[ Line: 146 | Named "createConversationViewModelS
 				end
 				repeat
 					if not FFlagAppChatDerivedConversationLatestActivityModule then break end
-					local function v60(p5) --[[ Line: 161 ]]
+					local function v60(p5)
 						-- upvalues: p3 (upval), Key (copy), p2 (upval)
 						local Message = nil
 						for _, value in p3.getOrderedIds(Key, p5) do
@@ -253,9 +253,9 @@ return function(p1, p2, p3) --[[ Line: 146 | Named "createConversationViewModelS
 			
 			return Computed
 		end,
-		getIsSubtitlePending = function(Key) --[[ Line: 197 ]]
+		getIsSubtitlePending = function(Key)
 			-- upvalues: t (copy), p1 (copy), UseIsUserPendingModule (upval), SignalsModule (upval)
-			local function v67(p4) --[[ Line: 198 ]]
+			local function v67(p4)
 				-- upvalues: p1 (upval), Key (copy), UseIsUserPendingModule (upval)
 				local Conversation = p1.getConversation(Key, p4)
 				
@@ -279,9 +279,9 @@ return function(p1, p2, p3) --[[ Line: 146 | Named "createConversationViewModelS
 			
 			return Computed
 		end,
-		getHasUnreadMessages = function(Key) --[[ Line: 204 ]]
+		getHasUnreadMessages = function(Key)
 			-- upvalues: t (copy), p1 (copy), SignalsModule (upval)
-			local function v72(p4): boolean --[[ Line: 205 ]]
+			local function v72(p4): boolean
 				-- upvalues: p1 (upval), Key (copy)
 				local Conversation = p1.getConversation(Key, p4)
 				
@@ -305,9 +305,9 @@ return function(p1, p2, p3) --[[ Line: 146 | Named "createConversationViewModelS
 			
 			return Computed
 		end,
-		getHasGroupUp = function(Key) --[[ Line: 211 ]]
+		getHasGroupUp = function(Key)
 			-- upvalues: t (copy), p1 (copy), SignalsModule (upval)
-			local function v77(p4): boolean --[[ Line: 212 ]]
+			local function v77(p4): boolean
 				-- upvalues: p1 (upval), Key (copy)
 				local Conversation = p1.getConversation(Key, p4)
 				
@@ -331,9 +331,9 @@ return function(p1, p2, p3) --[[ Line: 146 | Named "createConversationViewModelS
 			
 			return Computed
 		end,
-		getShouldShowOSA = function(Key) --[[ Line: 218 ]]
+		getShouldShowOSA = function(Key)
 			-- upvalues: t (copy), p1 (copy), ShouldShowOSAForConversationModule (upval), SignalsModule (upval)
-			local function v82(p4): boolean --[[ Line: 219 ]]
+			local function v82(p4): boolean
 				-- upvalues: p1 (upval), Key (copy), ShouldShowOSAForConversationModule (upval)
 				local Conversation = p1.getConversation(Key, p4)
 				
@@ -357,9 +357,9 @@ return function(p1, p2, p3) --[[ Line: 146 | Named "createConversationViewModelS
 			
 			return Computed
 		end,
-		getShouldShowU13ChatOptIn = function(Key) --[[ Line: 225 ]]
+		getShouldShowU13ChatOptIn = function(Key)
 			-- upvalues: t (copy), p1 (copy), ShouldShowU13ChatOptInForConversationModule (upval), SignalsModule (upval)
-			local function v87(p4): boolean --[[ Line: 226 ]]
+			local function v87(p4): boolean
 				-- upvalues: p1 (upval), Key (copy), ShouldShowU13ChatOptInForConversationModule (upval)
 				local Conversation = p1.getConversation(Key, p4)
 				
@@ -383,9 +383,9 @@ return function(p1, p2, p3) --[[ Line: 146 | Named "createConversationViewModelS
 			
 			return Computed
 		end,
-		getConversationType = function(Key) --[[ Line: 232 ]]
+		getConversationType = function(Key)
 			-- upvalues: t (copy), p1 (copy), SignalsModule (upval)
-			local function v92(p4) --[[ Line: 233 ]]
+			local function v92(p4)
 				-- upvalues: p1 (upval), Key (copy)
 				local Conversation = p1.getConversation(Key, p4)
 				
@@ -409,9 +409,9 @@ return function(p1, p2, p3) --[[ Line: 146 | Named "createConversationViewModelS
 			
 			return Computed
 		end,
-		getUnixTime = function(Key) --[[ Line: 239 ]]
+		getUnixTime = function(Key)
 			-- upvalues: t (copy), p1 (copy), FFlagAppChatDerivedConversationLatestActivityModule (upval), p3 (copy), p2 (copy), SignalsModule (upval), GetPreciseUnixTimestampModule (upval)
-			local function v97(p4) --[[ Line: 240 ]]
+			local function v97(p4)
 				-- upvalues: p1 (upval), Key (copy), FFlagAppChatDerivedConversationLatestActivityModule (upval), t (upval), p3 (upval), p2 (upval), SignalsModule (upval), GetPreciseUnixTimestampModule (upval)
 				local Conversation = p1.getConversation(Key, p4)
 				
@@ -419,7 +419,7 @@ return function(p1, p2, p3) --[[ Line: 146 | Named "createConversationViewModelS
 					if Conversation == nil then
 						return nil
 					end
-					local function v102(p5) --[[ Line: 161 ]]
+					local function v102(p5)
 						-- upvalues: p3 (upval), Key (copy), p2 (upval)
 						local Message = nil
 						for _, value in p3.getOrderedIds(Key, p5) do
@@ -481,9 +481,9 @@ return function(p1, p2, p3) --[[ Line: 146 | Named "createConversationViewModelS
 			
 			return Computed
 		end,
-		getTestId = function(Key) --[[ Line: 251 ]]
+		getTestId = function(Key)
 			-- upvalues: t (copy), p1 (copy), DomLocatorsModule (upval), GetConversationTitleModule (upval), SignalsModule (upval)
-			local function v110(p4) --[[ Line: 252 ]]
+			local function v110(p4)
 				-- upvalues: p1 (upval), Key (copy), DomLocatorsModule (upval), GetConversationTitleModule (upval)
 				local Conversation = p1.getConversation(Key, p4)
 				
@@ -507,9 +507,9 @@ return function(p1, p2, p3) --[[ Line: 146 | Named "createConversationViewModelS
 			
 			return Computed
 		end,
-		getLocatorTitle = function(Key) --[[ Line: 261 ]]
+		getLocatorTitle = function(Key)
 			-- upvalues: t (copy), p1 (copy), GetConversationTitleModule (upval), SignalsModule (upval)
-			local function v115(p4) --[[ Line: 262 ]]
+			local function v115(p4)
 				-- upvalues: p1 (upval), Key (copy), GetConversationTitleModule (upval)
 				local Conversation = p1.getConversation(Key, p4)
 				local Title = nil

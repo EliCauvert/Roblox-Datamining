@@ -3,15 +3,15 @@ local MomentsGetOutfitLookStoreModule = require(Parent.DataHydration.MomentsGetO
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local CreateComputedFunction = require(Parent.Signals).createComputed
 local config = {
-	data = CreateComputedFunction(function() --[[ Line: 24 ]]
+	data = CreateComputedFunction(function()
 		return nil
 	end),
-	status = CreateComputedFunction(function(): string --[[ Line: 27 ]]
+	status = CreateComputedFunction(function(): string
 		return "NotReady"
 	end)
 }
 
-return function(p1: number) --[[ Line: 32 | Named "useAvatarLook" ]]
+return function(p1: number)
 	-- upvalues: MomentsGetOutfitLookStoreModule (copy), config (copy), UseSignalStateFunction (copy)
 	local v1: boolean = p1 ~= nil and p1 > 0
 	local AndFetchLookByOutfit = if v1 then MomentsGetOutfitLookStoreModule(false).getAndFetchLookByOutfit(p1) else config

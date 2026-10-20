@@ -5,11 +5,11 @@ local UseSelectorFunction = DependenciesModule.RoactUtils.Hooks.RoactRodux.useSe
 local UseIsVoiceFocusedModule = require(CrossExperienceVoice.Hooks.useIsVoiceFocused)
 local GetFFlagEnableCrossExpVoiceFunction = DependenciesModule.SharedFlags.GetFFlagEnableCrossExpVoice
 
-return function() --[[ Line: 13 ]]
+return function()
 	-- upvalues: GetFFlagEnableCrossExpVoiceFunction (copy), UseIsVoiceFocusedModule (copy), UseSelectorFunction (copy), AudioFocusManagementEngineFeature (copy)
 	if GetFFlagEnableCrossExpVoiceFunction() then
 		local UseIsVoiceFocusedModuleResult = UseIsVoiceFocusedModule()
-		local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 19 ]]
+		local UseSelectorResult = UseSelectorFunction(function(p1)
 			if not p1 or not p1.Squad or not p1.Squad.CrossExperienceVoice then
 				return nil
 			end

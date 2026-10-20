@@ -5,7 +5,7 @@ local EmoteSkinningDisableCleanupCharacterConnections = game:DefineFastFlag("Emo
 local ScaledUGCEmoteSkinningDisableTranslationThresholdMillistuds = game:DefineFastInt("UGCEmoteSkinningDisableTranslationThresholdMillistuds", 100) * 0.001
 local t = {}
 
-local function getClipMetadata(AnimationId) --[[ Line: 18 ]]
+local function getClipMetadata(AnimationId)
 	-- upvalues: t (copy), InsertService (copy)
 	if t[AnimationId] then
 		return t[AnimationId]
@@ -15,7 +15,7 @@ local function getClipMetadata(AnimationId) --[[ Line: 18 ]]
 	if not Number then
 		return nil
 	end
-	local Success, Result = pcall(function() --[[ Line: 28 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: InsertService (upval), Number (copy)
 		return InsertService:LoadAsset(Number)
 	end)
@@ -43,7 +43,7 @@ local function getClipMetadata(AnimationId) --[[ Line: 18 ]]
 	end
 end
 
-local function setAllJointsSkinning(Key, EnableSkinning) --[[ Line: 55 ]]
+local function setAllJointsSkinning(Key, EnableSkinning)
 	for _, descendant in Key:GetDescendants() do
 		if descendant:IsA("Motor6D") or descendant:IsA("AnimationConstraint") or descendant:IsA("BallSocketConstraint") or descendant:IsA("Weld") or descendant:IsA("RigidConstraint") then
 			descendant.EnableSkinning = EnableSkinning
@@ -54,7 +54,7 @@ end
 local StoppedConnections = {}
 local AnimationPlayedConnections = {}
 
-local function _(Key) --[[ Line: 68 | Named "clearActiveEmoteConnection" ]]
+local function _(Key)
 	-- upvalues: StoppedConnections (copy)
 	if StoppedConnections[Key] then
 		StoppedConnections[Key]:Disconnect()
@@ -62,7 +62,7 @@ local function _(Key) --[[ Line: 68 | Named "clearActiveEmoteConnection" ]]
 	end
 end
 
-local _ = function(Key) --[[ Line: 75 | Named "clearAnimationPlayedConnection" ]]
+local _ = function(Key)
 	-- upvalues: AnimationPlayedConnections (copy)
 	if AnimationPlayedConnections[Key] then
 		AnimationPlayedConnections[Key]:Disconnect()
@@ -70,7 +70,7 @@ local _ = function(Key) --[[ Line: 75 | Named "clearAnimationPlayedConnection" ]
 	end
 end
 
-local function onCharacterRemoving(Character) --[[ Line: 82 ]]
+local function onCharacterRemoving(Character)
 	-- upvalues: StoppedConnections (copy), EmoteSkinningDisableCleanupCharacterConnections (copy), AnimationPlayedConnections (copy)
 	if StoppedConnections[Character] then
 		StoppedConnections[Character]:Disconnect()
@@ -82,7 +82,7 @@ local function onCharacterRemoving(Character) --[[ Line: 82 ]]
 	end
 end
 
-local _ = function(p1, p2) --[[ Line: 89 | Named "onAnimationPlayed" ]]
+local _ = function(p1, p2)
 	-- upvalues: getClipMetadata (copy), ScaledUGCEmoteSkinningDisableTranslationThresholdMillistuds (copy), StoppedConnections (copy), setAllJointsSkinning (copy)
 	local Animation = p2.Animation
 	
@@ -90,7 +90,7 @@ local _ = function(p1, p2) --[[ Line: 89 | Named "onAnimationPlayed" ]]
 	local AnimationId = Animation.AnimationId
 	
 	if AnimationId ~= "" then
-		task.spawn(function() --[[ Line: 100 ]]
+		task.spawn(function()
 			-- upvalues: getClipMetadata (upval), AnimationId (copy), ScaledUGCEmoteSkinningDisableTranslationThresholdMillistuds (upval), p2 (copy), p1 (copy), StoppedConnections (upval), setAllJointsSkinning (upval)
 			local v1 = getClipMetadata(AnimationId)
 			
@@ -102,7 +102,7 @@ local _ = function(p1, p2) --[[ Line: 89 | Named "onAnimationPlayed" ]]
 				StoppedConnections[p1] = nil
 			end
 			setAllJointsSkinning(p1, false)
-			StoppedConnections[p1] = p2.Stopped:Connect(function() --[[ Line: 116 ]]
+			StoppedConnections[p1] = p2.Stopped:Connect(function()
 				-- upvalues: setAllJointsSkinning (upval), p1 (upval), StoppedConnections (upval)
 				setAllJointsSkinning(p1, true)
 				
@@ -117,7 +117,7 @@ local _ = function(p1, p2) --[[ Line: 89 | Named "onAnimationPlayed" ]]
 	end
 end
 
-local function onCharacterAdded(Character) --[[ Line: 123 ]]
+local function onCharacterAdded(Character)
 	-- upvalues: EmoteSkinningDisableUseClassLookup (copy), getClipMetadata (copy), ScaledUGCEmoteSkinningDisableTranslationThresholdMillistuds (copy), StoppedConnections (copy), setAllJointsSkinning (copy), EmoteSkinningDisableCleanupCharacterConnections (copy), AnimationPlayedConnections (copy)
 	local Animator = nil
 	if EmoteSkinningDisableUseClassLookup then
@@ -130,7 +130,7 @@ local function onCharacterAdded(Character) --[[ Line: 123 ]]
 	else
 		Animator = Character:WaitForChild("Humanoid"):WaitForChild("Animator")
 	end
-	local AnimationPlayedConnection = Animator.AnimationPlayed:Connect(function(AnimationTrack) --[[ Line: 140 ]]
+	local AnimationPlayedConnection = Animator.AnimationPlayed:Connect(function(AnimationTrack)
 		-- upvalues: Character (copy), getClipMetadata (upval), ScaledUGCEmoteSkinningDisableTranslationThresholdMillistuds (upval), StoppedConnections (upval), setAllJointsSkinning (upval)
 		local Animation = AnimationTrack.Animation
 		
@@ -138,7 +138,7 @@ local function onCharacterAdded(Character) --[[ Line: 123 ]]
 		local AnimationId = Animation.AnimationId
 		
 		if AnimationId ~= "" then
-			task.spawn(function() --[[ Line: 100 ]]
+			task.spawn(function()
 				-- upvalues: getClipMetadata (upval), AnimationId (copy), ScaledUGCEmoteSkinningDisableTranslationThresholdMillistuds (upval), AnimationTrack (copy), Character (copy), StoppedConnections (upval), setAllJointsSkinning (upval)
 				local v1 = getClipMetadata(AnimationId)
 				
@@ -150,7 +150,7 @@ local function onCharacterAdded(Character) --[[ Line: 123 ]]
 					StoppedConnections[Character] = nil
 				end
 				setAllJointsSkinning(Character, false)
-				StoppedConnections[Character] = AnimationTrack.Stopped:Connect(function() --[[ Line: 116 ]]
+				StoppedConnections[Character] = AnimationTrack.Stopped:Connect(function()
 					-- upvalues: setAllJointsSkinning (upval), Character (upval), StoppedConnections (upval)
 					setAllJointsSkinning(Character, true)
 					
@@ -174,7 +174,7 @@ local function onCharacterAdded(Character) --[[ Line: 123 ]]
 	end
 end
 
-local function onPlayerAdded(Player: Player) --[[ Line: 150 ]]
+local function onPlayerAdded(Player: Player)
 	-- upvalues: onCharacterAdded (copy), onCharacterRemoving (copy)
 	if Player.Character then
 		onCharacterAdded(Player.Character)

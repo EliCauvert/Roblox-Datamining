@@ -15,7 +15,7 @@ local config = {
 	throttlingPercentage = game:DefineFastInt("DynamicAbuseReportThrottleHundredthsPercent", 0)
 }
 
-local function buildCustomFields(p1) --[[ Line: 60 ]]
+local function buildCustomFields(p1)
 	-- upvalues: DashModule (copy), LocalPlayer (copy), AbuseEntrypointModule (copy)
 	return {
 		abuse_vector = p1.context.abuseVector,
@@ -27,7 +27,7 @@ local function buildCustomFields(p1) --[[ Line: 60 ]]
 end
 
 return {
-	sendAnalyticsEvent = function(p1) --[[ Line: 76 ]]
+	sendAnalyticsEvent = function(p1)
 		-- upvalues: ArgCheckModule (copy), TelemetryService (copy), config (copy), buildCustomFields (copy)
 		ArgCheckModule.assert(p1.context, "customFields must be provided")
 		ArgCheckModule.assert(p1.context.abuseVector, "customFields.abuse_vector must be provided")

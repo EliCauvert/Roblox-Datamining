@@ -2,7 +2,7 @@
 local _ = require(Parent.util.Types)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
-local function collectViolationDetails(p1) --[[ Line: 13 ]]
+local function collectViolationDetails(p1)
 	local List = {}
 	local Count = 0
 	while true do
@@ -32,7 +32,7 @@ return {
 		require(Parent.validationSystem.ValidationEnums).UploadCategory.LAYERED_CLOTHING
 	},
 	fflag = require(Parent.flags.getFFlagUGCValidateAQCagePartPlacement),
-	run = function(p2, p3) --[[ Line: 40 ]]
+	run = function(p2, p3)
 		-- upvalues: ErrorSourceStringsModule (copy), collectViolationDetails (copy)
 		local MeasureCagePartPlacement = p3.aqsSummaryData.Measure_Cage_Part_Placement
 		

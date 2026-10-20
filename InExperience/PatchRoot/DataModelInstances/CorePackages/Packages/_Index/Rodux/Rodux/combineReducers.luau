@@ -1,5 +1,5 @@
-﻿return function(p1) --[[ Line: 4 | Named "combineReducers" ]]
-	return function(p2, p3) --[[ Line: 5 ]]
+﻿return function(p1)
+	return function(p2, p3)
 		-- upvalues: p1 (copy)
 		if p2 == nil then
 			p2 = {}

@@ -7,7 +7,7 @@ local Default = require(CorePackages.Workspace.Packages.PermissionsProtocol).Per
 local Inverted = not require(CorePackages.Packages.Cryo).isEmpty((require(CoreGui.RobloxGui.Modules.Settings.cameraDevicesHelper).GetDevices()))
 
 if Inverted then
-	GetCamMicPermissionsModule(function(p1) --[[ Line: 14 ]]
+	GetCamMicPermissionsModule(function(p1)
 		-- upvalues: RbxAnalyticsService (copy), Inverted (copy)
 		RbxAnalyticsService:SendEventDeferred("client", "avatarChat", "CameraDevicePermissionResponse", {
 			hasAccessToCamera = p1.hasCameraPermissions,

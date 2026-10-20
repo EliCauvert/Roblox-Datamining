@@ -9,15 +9,15 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagExpChatTabShortcutNav = SharedFlagsModule.FFlagExpChatTabShortcutNav
 local FFlagFriendsChatConversationListFocusNav = SharedFlagsModule.FFlagFriendsChatConversationListFocusNav or FFlagExpChatTabShortcutNav
 
-return function(p1) --[[ Line: 44 | Named "useFocusInputBar" ]]
+return function(p1)
 	-- upvalues: FFlagFriendsChatConversationListFocusNav (copy), ReactModule (copy), FocusNavigationContext (copy), InputTypeModule (copy), UserInputService (copy), GuiService (copy), Players (copy)
 	local UseContextResult = if FFlagFriendsChatConversationListFocusNav then ReactModule.useContext(FocusNavigationContext) else nil
 	local UseRefResult = ReactModule.useRef(nil)
 	local P0 = p1 or UseRefResult
 	local UseRefResult1 = ReactModule.useRef(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 55 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: P0 (copy), FFlagFriendsChatConversationListFocusNav (upval), InputTypeModule (upval), UserInputService (upval), UseContextResult (ref), GuiService (upval), UseRefResult1 (copy)
-		task.delay(0, function() --[[ Line: 59 ]]
+		task.delay(0, function()
 			-- upvalues: P0 (upval), FFlagFriendsChatConversationListFocusNav (upval), InputTypeModule (upval), UserInputService (upval), UseContextResult (upval), GuiService (upval), UseRefResult1 (upval)
 			local Current = P0.current
 			
@@ -37,9 +37,9 @@ return function(p1) --[[ Line: 44 | Named "useFocusInputBar" ]]
 			end
 		end)
 	end, { P0, UseContextResult })
-	ReactModule.useEffect(function() --[[ Line: 84 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), Players (upval)
-		return function() --[[ Line: 85 ]]
+		return function()
 			-- upvalues: UseRefResult1 (upval), Players (upval)
 			if not UseRefResult1.current then return end
 			local LocalPlayer = Players.LocalPlayer

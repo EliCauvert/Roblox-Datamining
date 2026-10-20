@@ -4,12 +4,12 @@ local RoactModule = require(script:FindFirstAncestor("AppBlox").Parent.Roact)
 local _Rect = Rect.new(1, 0, 2, 3)
 local LoadingBar = RoactModule.Component:extend("LoadingBar")
 
-function LoadingBar.init(p1) --[[ Line: 16 ]]
+function LoadingBar.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.barRef = RoactModule.createRef()
 end
 
-function LoadingBar.render(p1) --[[ Line: 20 ]]
+function LoadingBar.render(p1)
 	-- upvalues: RoactModule (copy), _Rect (copy)
 	return RoactModule.createElement("ImageLabel", {
 		Image = "rbxasset://textures/ui/LuaApp/9-slice/gr-loading-indicator.png",
@@ -22,9 +22,9 @@ function LoadingBar.render(p1) --[[ Line: 20 ]]
 	})
 end
 
-function LoadingBar.didMount(p1) --[[ Line: 34 ]]
+function LoadingBar.didMount(p1)
 	-- upvalues: RunService (copy), Workspace (copy)
-	p1.connection = RunService.RenderStepped:Connect(function() --[[ Line: 35 ]]
+	p1.connection = RunService.RenderStepped:Connect(function()
 		-- upvalues: Workspace (upval), p1 (copy)
 		local DistributedGameTime: number = Workspace.DistributedGameTime
 		local Current = p1.barRef.current
@@ -34,7 +34,7 @@ function LoadingBar.didMount(p1) --[[ Line: 34 ]]
 	end)
 end
 
-function LoadingBar.willUnmount(p1) --[[ Line: 48 ]]
+function LoadingBar.willUnmount(p1)
 	p1.connection:Disconnect()
 end
 

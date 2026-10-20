@@ -7,8 +7,8 @@ local Gray2 = Colors.Gray2
 local CountryCodeSelectorButton = RoactModule.PureComponent:extend("CountryCodeSelectorButton")
 local Text = require(Parent.AppCommonLib).Text
 
-function CountryCodeSelectorButton.init(p1) --[[ Line: 14 ]]
-	function p1.selectionCallback() --[[ Line: 15 ]]
+function CountryCodeSelectorButton.init(p1)
+	function p1.selectionCallback()
 		-- upvalues: p1 (copy)
 		if p1.props.ListButtonProps.SelectionCallback then
 			p1.props.ListButtonProps.SelectionCallback(p1.props.Data)
@@ -16,7 +16,7 @@ function CountryCodeSelectorButton.init(p1) --[[ Line: 14 ]]
 	end
 end
 
-function CountryCodeSelectorButton.render(p1) --[[ Line: 22 ]]
+function CountryCodeSelectorButton.render(p1)
 	-- upvalues: Text (copy), AppFonts (copy), RoactModule (copy), White (copy), Gray2 (copy)
 	local Text1 = "+" .. (p1.props.Data.prefix or "")
 	local TextSize = p1.props.ListButtonProps.TextSize

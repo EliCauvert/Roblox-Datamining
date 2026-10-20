@@ -19,9 +19,9 @@ return {
 	roact = ReactModule,
 	reactRoblox = require(Parent.Dev.ReactRoblox),
 	storyRoot = SocialCards,
-	mapStory = function(p1) --[[ Line: 29 ]]
+	mapStory = function(p1)
 		-- upvalues: config (copy), ReactModule (copy), FoundationModule (copy), config1 (copy), AppStyleProvider (copy)
-		return function(p2) --[[ Line: 30 ]]
+		return function(p2)
 			-- upvalues: config (upval), ReactModule (upval), FoundationModule (upval), config1 (upval), AppStyleProvider (upval), p1 (copy)
 			local Entry = p2 and config[p2.theme] or config.Default
 			

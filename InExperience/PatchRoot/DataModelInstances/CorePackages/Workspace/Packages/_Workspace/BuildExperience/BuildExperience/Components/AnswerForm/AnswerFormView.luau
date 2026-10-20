@@ -7,7 +7,7 @@ local Text = FoundationModule.Text
 local Divider = FoundationModule.Divider
 local IconButton = FoundationModule.IconButton
 
-return function(Frame) --[[ Line: 40 | Named "AnswerFormView" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), View (copy), List (copy), Text (copy), IconButton (copy), Divider (copy)
 	local Elements = {}
 	

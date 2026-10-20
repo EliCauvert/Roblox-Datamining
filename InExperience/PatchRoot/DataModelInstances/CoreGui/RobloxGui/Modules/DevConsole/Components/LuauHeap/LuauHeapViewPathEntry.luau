@@ -13,18 +13,18 @@ local CellPadding = ConstantsModule.LuauHeapFormatting.CellPadding
 local _ = ConstantsModule.LuauHeapFormatting.ValuePadding
 local LuauHeapViewPathEntry = RoactModule.PureComponent:extend("LuauHeapViewPathEntry")
 
-function LuauHeapViewPathEntry.init(p1) --[[ Line: 25 ]]
+function LuauHeapViewPathEntry.init(p1)
 	p1.state = { expanded = false }
 	
-	function p1.onButtonPress() --[[ Line: 30 ]]
+	function p1.onButtonPress()
 		-- upvalues: p1 (copy)
-		p1:setState(function(p2) --[[ Line: 31 ]]
+		p1:setState(function(p2)
 			return { expanded = not p2.expanded }
 		end)
 	end
 end
 
-function LuauHeapViewPathEntry.renderChildren(p1, List) --[[ Line: 39 ]]
+function LuauHeapViewPathEntry.renderChildren(p1, List)
 	-- upvalues: DepthIndent (copy), CellPadding (copy), RoactModule (copy), CellLabelModule (copy), PathEntryFrameHeight (copy)
 	local Elements = {}
 	local NewDepthIndent = 2 * DepthIndent + CellPadding
@@ -42,7 +42,7 @@ function LuauHeapViewPathEntry.renderChildren(p1, List) --[[ Line: 39 ]]
 	return Elements
 end
 
-function LuauHeapViewPathEntry.render(p2) --[[ Line: 58 ]]
+function LuauHeapViewPathEntry.render(p2)
 	-- upvalues: PathEntryFrameHeight (copy), DepthIndent (copy), RoactModule (copy), BannerButtonModule (copy), CellLabelModule (copy), CellPadding (copy)
 	local Props = p2.props
 	local Data = Props.data

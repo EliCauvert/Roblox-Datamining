@@ -10,20 +10,20 @@ local Default = require(CoreGui.RobloxGui.Modules.VoiceChat.VoiceChatServiceMana
 local CameraDevicePermissionGrantedSignalModule = require(CoreGui.RobloxGui.Modules.Settings.cameraDevicePermissionGrantedSignal)
 local FlashingDot = RoactModule.PureComponent:extend("FlashingDot")
 
-local function _(p1, p2, p3) --[[ Line: 29 | Named "lerpNum" ]]
+local function _(p1, p2, p3)
 	return p1 + (p2 - p1) * p3
 end
 
 FlashingDot.validateProps = require(CorePackages.Packages.t).strictInterface({})
 
-function FlashingDot.init(p1) --[[ Line: 35 ]]
+function FlashingDot.init(p1)
 	-- upvalues: RoactModule (copy), Default (copy), FaceAnimatorService (copy), CameraDevicePermissionGrantedSignalModule (copy)
 	p1:setState({ Visible = false, isUsingMic = false })
 	p1.prevTime = 1.5707963267948966
 	p1.prevSinTime = 1
 	p1.transparencyBinding, p1.updateTransparencyBinding = RoactModule.createBinding(0)
 	
-	function p1.checkNewVisibility() --[[ Line: 45 ]]
+	function p1.checkNewVisibility()
 		-- upvalues: Default (upval), FaceAnimatorService (upval), p1 (copy)
 		local NoLocalMuted: boolean = Default.localMuted ~= nil and not Default.localMuted
 		local VideoAnimationEnabled = FaceAnimatorService:IsStarted() and FaceAnimatorService.VideoAnimationEnabled
@@ -34,7 +34,7 @@ function FlashingDot.init(p1) --[[ Line: 35 ]]
 		end
 	end
 	
-	function p1.animationConnection(p2) --[[ Line: 61 ]]
+	function p1.animationConnection(p2)
 		-- upvalues: p1 (copy)
 		local NewPrevTime = p1.prevTime + p2
 		local Sine = math.sin(NewPrevTime * 3)
@@ -43,7 +43,7 @@ function FlashingDot.init(p1) --[[ Line: 35 ]]
 		p1.prevSinTime = Sine
 	end
 	
-	function p1.teardownCameraPermissionGrantedListener() --[[ Line: 71 ]]
+	function p1.teardownCameraPermissionGrantedListener()
 		-- upvalues: p1 (copy)
 		if p1.cameraPermissionGrantedListener then
 			p1.cameraPermissionGrantedListener:disconnect()
@@ -51,23 +51,23 @@ function FlashingDot.init(p1) --[[ Line: 35 ]]
 		end
 	end
 	
-	p1.cameraPermissionGrantedListener = CameraDevicePermissionGrantedSignalModule:connect(function() --[[ Line: 79 ]]
+	p1.cameraPermissionGrantedListener = CameraDevicePermissionGrantedSignalModule:connect(function()
 		-- upvalues: p1 (copy)
 		p1.checkNewVisibility()
 	end)
 end
 
-function FlashingDot.didMount(p1) --[[ Line: 84 ]]
+function FlashingDot.didMount(p1)
 	p1.checkNewVisibility()
 end
 
-function FlashingDot.willUnmount(p1) --[[ Line: 88 ]]
+function FlashingDot.willUnmount(p1)
 	if p1.teardownCameraPermissionGrantedListener then
 		p1.teardownCameraPermissionGrantedListener()
 	end
 end
 
-function FlashingDot.render(p1) --[[ Line: 94 ]]
+function FlashingDot.render(p1)
 	-- upvalues: RoactModule (copy), EventConnection (copy), Default (copy), FaceAnimatorService (copy), RunService (copy)
 	return RoactModule.createElement("Frame", {
 		ZIndex = 2,

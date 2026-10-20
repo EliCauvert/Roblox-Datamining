@@ -1,6 +1,6 @@
 ﻿local CreateSignalFunction = require(script:FindFirstAncestor("ExpChat").Parent.Signals).createSignal
 
-local function findFirstChildByNameAndClass(Ter, Name, ClassName) --[[ Line: 20 ]]
+local function findFirstChildByNameAndClass(Ter, Name, ClassName)
 	if not Ter then
 		return nil
 	end
@@ -12,16 +12,16 @@ local function findFirstChildByNameAndClass(Ter, Name, ClassName) --[[ Line: 20 
 	return nil
 end
 
-return function() --[[ Line: 32 | Named "createAdorneeStore" ]]
+return function()
 	-- upvalues: CreateSignalFunction (copy), findFirstChildByNameAndClass (copy)
 	local t = {}
 	
-	local function _(p1): string --[[ Line: 37 | Named "getKey" ]]
+	local function _(p1): string
 		return (tostring(p1))
 	end
 	
 	return {
-		getAdornee = function(p1) --[[ Line: 41 ]]
+		getAdornee = function(p1)
 			-- upvalues: t (copy), CreateSignalFunction (upval)
 			local Text = tostring(p1)
 			
@@ -31,7 +31,7 @@ return function() --[[ Line: 32 | Named "createAdorneeStore" ]]
 			end
 			return t[Text].getter
 		end,
-		handleAdorneeAdded = function(p1, p2, Humanoid) --[[ Line: 50 ]]
+		handleAdorneeAdded = function(p1, p2, Humanoid)
 			-- upvalues: findFirstChildByNameAndClass (upval), t (copy), CreateSignalFunction (upval)
 			local Text = tostring(p1)
 			local Head = findFirstChildByNameAndClass(p2, "Head", "BasePart")
@@ -48,7 +48,7 @@ return function() --[[ Line: 32 | Named "createAdorneeStore" ]]
 			end
 			t[Text].setter(Head1)
 		end,
-		handleHumanoidDied = function(p1) --[[ Line: 61 ]]
+		handleHumanoidDied = function(p1)
 			-- upvalues: t (copy), findFirstChildByNameAndClass (upval)
 			local Text = tostring(p1)
 			
@@ -57,7 +57,7 @@ return function() --[[ Line: 32 | Named "createAdorneeStore" ]]
 				t[Text].setter(if Ter then findFirstChildByNameAndClass(Ter, "Head", "BasePart") or Ter else nil)
 			end
 		end,
-		handlePlayerRemoved = function(p1) --[[ Line: 77 ]]
+		handlePlayerRemoved = function(p1)
 			-- upvalues: t (copy)
 			local Text = tostring(p1)
 			

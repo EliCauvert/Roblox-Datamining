@@ -6,7 +6,7 @@ local UseLeaderboardStoreFunction = require(CorePackages.Workspace.Packages.Play
 local TitleBarViewModule = require(script.Parent.Parent.Parent.Components.PresentationCommon.TitleBarView)
 local FFlagPlayerListFixLeaderstatsStacking = require(CorePackages.Workspace.Packages.SharedFlags).FFlagPlayerListFixLeaderstatsStacking
 
-return ReactModule.memo(function(p1) --[[ Line: 41 | Named "TitleBarContainer" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseLeaderboardStoreFunction (copy), FFlagPlayerListFixLeaderstatsStacking (copy), SignalsReactModule (copy), ReactModule (copy), TitleBarViewModule (copy)
 	local GameStatsList = UseLeaderboardStoreFunction().getGameStatsList()
 	local UseSignalStateResult = if FFlagPlayerListFixLeaderstatsStacking then nil else SignalsReactModule.useSignalState(GameStatsList.getCount)

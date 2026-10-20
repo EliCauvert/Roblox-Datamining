@@ -7,12 +7,12 @@ local Parent1 = nil
 local Slot = {}
 local Count = 1
 
-local function makeSlotClass() --[[ Line: 62 ]]
+local function makeSlotClass()
 	-- upvalues: Array (copy), Count (ref), UuidFunction (copy), Parent1 (ref), Slot (copy)
 	local Module = {}
 	Module.__index = Module
 	
-	function Module.new() --[[ Line: 66 ]]
+	function Module.new()
 		-- upvalues: Module (copy), Array (upval), Count (upval), UuidFunction (upval)
 		local self = setmetatable({}, Module)
 		self.id = Array.join({
@@ -26,7 +26,7 @@ local function makeSlotClass() --[[ Line: 62 ]]
 		return self
 	end
 	
-	function Module:hasValue(): boolean --[[ Line: 84 ]]
+	function Module:hasValue(): boolean
 		-- upvalues: Parent1 (upval), Slot (upval)
 		local Parent1 = Parent1
 		while Parent1 do
@@ -48,16 +48,16 @@ local function makeSlotClass() --[[ Line: 62 ]]
 		return false
 	end
 	
-	function Module.getValue(p1) --[[ Line: 120 ]]
+	function Module.getValue(p1)
 		-- upvalues: Parent1 (upval)
 		return if p1:hasValue() then Parent1.slots[p1.id] else nil
 	end
 	
-	function Module:withValue(p1, Callback, p2, p3) --[[ Line: 127 ]]
+	function Module:withValue(p1, Callback, p2, p3)
 		-- upvalues: Parent1 (upval)
 		local Parent1 = Parent1
 		Parent1 = { parent = Parent1, slots = { [self.id] = p1 } }
-		local Success, Result, Result3 = pcall(function() --[[ Line: 144 ]]
+		local Success, Result, Result3 = pcall(function()
 			-- upvalues: Callback (copy), p3 (copy), p2 (copy)
 			return Callback(p3, table.unpack(p2 or {})), true
 		end)
@@ -72,11 +72,11 @@ local function makeSlotClass() --[[ Line: 62 ]]
 		return nil
 	end
 	
-	function Module.bind(p1) --[[ Line: 162 ]]
+	function Module.bind(p1)
 		-- upvalues: Parent1 (upval)
 		local Parent1 = Parent1
 		
-		return function(p2, ...) --[[ Line: 164 ]]
+		return function(p2, ...)
 			-- upvalues: Parent1 (upval), Parent1 (copy), p1 (copy)
 			local Parent2 = Parent1
 			Parent1 = Parent1
@@ -90,13 +90,13 @@ local function makeSlotClass() --[[ Line: 62 ]]
 		end
 	end
 	
-	function Module.noContext(Callback, p1, p2) --[[ Line: 178 ]]
+	function Module.noContext(Callback, p1, p2)
 		-- upvalues: Parent1 (upval)
 		if not Parent1 then
 			return Callback(p2, table.unpack(p1 or {}))
 		end
 		local Parent1 = Parent1
-		local Success, Result, Result3 = pcall(function() --[[ Line: 189 ]]
+		local Success, Result, Result3 = pcall(function()
 			-- upvalues: Parent1 (upval), Callback (copy), p2 (copy), p1 (copy)
 			Parent1 = nil
 			
@@ -123,7 +123,7 @@ repeat
 		if WryContextSlot then break end
 	end
 	local SlotClass = makeSlotClass()
-	pcall(function() --[[ Line: 227 ]]
+	pcall(function()
 		-- upvalues: Array (copy), SlotClass (copy)
 		Array["@wry/context:Slot"] = SlotClass
 	end)

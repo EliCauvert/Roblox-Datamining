@@ -13,14 +13,14 @@ local HandleReceiveCompleteModule = require(CurrencyTransfers.Actions.Receive.ha
 local UseTransferStoreModule = require(CurrencyTransfers.Hooks.useTransferStore)
 local FormatNumberModule = require(CurrencyTransfers.Utils.formatNumber)
 
-return function(_) --[[ Line: 34 | Named "ReceiveRobuxSuccessToast" ]]
+return function(_)
 	-- upvalues: UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), UseTransferStoreModule (copy), SignalsReactModule (copy), FormatNumberModule (copy), LocalizationService (copy), ReactModule (copy), TransferLocaleFormatModule (copy), HandleReceiveCompleteModule (copy), Snackbar (copy), Enums (copy)
 	local UseLocalizationResult = UseLocalizationFunction(TransferLocalizationKeysModule.Presets.ReceiveRobuxSuccessToast)
 	local UseTransferStoreModuleResult = UseTransferStoreModule()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(UseTransferStoreModuleResult.getRobuxTransfer)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(UseTransferStoreModuleResult.getIsAlreadyAccepted)
 	local FormatNumberModuleResult = FormatNumberModule(LocalizationService.RobloxLocaleId, if UseSignalStateResult then UseSignalStateResult.receivingAmount or UseSignalStateResult.transferAmount else 0)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 44 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult1 (copy), UseLocalizationResult (copy), TransferLocaleFormatModule (upval), FormatNumberModuleResult (copy)
 		return if UseSignalStateResult1 then UseLocalizationResult.AlreadyAcceptedNotification else TransferLocaleFormatModule.substituteAmount(UseLocalizationResult.SuccessNotification, (tostring(FormatNumberModuleResult)))
 	end, {
@@ -30,17 +30,17 @@ return function(_) --[[ Line: 34 | Named "ReceiveRobuxSuccessToast" ]]
 		UseLocalizationResult.AlreadyAcceptedNotification
 	})
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 55 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), HandleReceiveCompleteModule (upval), UseTransferStoreModuleResult (copy)
 		if UseRefResult.current then
 			task.cancel(UseRefResult.current)
 		end
-		UseRefResult.current = task.delay(5, function() --[[ Line: 62 ]]
+		UseRefResult.current = task.delay(5, function()
 			-- upvalues: HandleReceiveCompleteModule (upval), UseTransferStoreModuleResult (upval)
 			HandleReceiveCompleteModule(UseTransferStoreModuleResult)
 		end)
 		
-		return function() --[[ Line: 68 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			if UseRefResult.current then
 				task.cancel(UseRefResult.current)
@@ -60,7 +60,7 @@ return function(_) --[[ Line: 34 | Named "ReceiveRobuxSuccessToast" ]]
 		AnchorPoint = Vector2.new(0.5, 0),
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		onClose = function() --[[ Line: 89 ]]
+		onClose = function()
 			-- upvalues: HandleReceiveCompleteModule (upval), UseTransferStoreModuleResult (copy)
 			HandleReceiveCompleteModule(UseTransferStoreModuleResult)
 		end

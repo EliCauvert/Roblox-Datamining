@@ -9,10 +9,10 @@ local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelec
 local GetStandardSizeAvatarHeadShotRbxthumbFunction = require(Parent.UserLib).Utils.getStandardSizeAvatarHeadShotRbxthumb
 local FFlagFlyoutAlternateEntryPointUseProfileFrameThumbnailModule = require(FlyoutSidePanel.Flags.FFlagFlyoutAlternateEntryPointUseProfileFrameThumbnail)
 
-return function() --[[ Line: 16 | Named "FlyoutAlternateEntryPoint" ]]
+return function()
 	-- upvalues: UseTokensFunction (copy), UseSelectorFunction (copy), ReactModule (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), FFlagFlyoutAlternateEntryPointUseProfileFrameThumbnailModule (copy), FoundationModule (copy), BuilderIconsModule (copy), LoadableImage (copy)
 	local UseTokensResult = UseTokensFunction()
-	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 18 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p1)
 		return p1.Users[p1.LocalUserId]
 	end)
 	
@@ -29,7 +29,7 @@ return function() --[[ Line: 16 | Named "FlyoutAlternateEntryPoint" ]]
 			Size = UDim2.new(0, UseTokensResult.Size.Size_400, 0, UseTokensResult.Size.Size_400),
 			BackgroundColor3 = UseTokensResult.Color.Common.Shimmer.Color3,
 			BackgroundTransparency = UseTokensResult.Color.Common.Shimmer.Transparency,
-			Image = ReactModule.useMemo(function() --[[ Line: 21 ]]
+			Image = ReactModule.useMemo(function()
 				-- upvalues: UseSelectorResult (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (upval), FFlagFlyoutAlternateEntryPointUseProfileFrameThumbnailModule (upval)
 				return if UseSelectorResult and UseSelectorResult.id then GetStandardSizeAvatarHeadShotRbxthumbFunction(UseSelectorResult.id, FFlagFlyoutAlternateEntryPointUseProfileFrameThumbnailModule) else nil
 			end, { UseSelectorResult }),

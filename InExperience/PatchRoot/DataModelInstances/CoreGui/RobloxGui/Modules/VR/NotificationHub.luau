@@ -17,7 +17,7 @@ local NotificationHubModule = {
 	KeepVRTopbarOpen = true,
 	VRIsExclusive = true,
 	VRClosesNonExclusive = true,
-	UnreadCountChanged = function(...) --[[ Line: 79 ]] end,
+	UnreadCountChanged = function(...) end,
 	SetVisible = nil
 }
 VRHub:RegisterModule(NotificationHubModule)
@@ -26,7 +26,7 @@ local Notifications1 = nil
 local NotificationDetails = Panel3D.Get("NotificationDetails")
 local FriendRequests = nil
 
-local function _(): boolean --[[ Line: 88 | Named "IsDeveloperGroupEnabled" ]]
+local function _(): boolean
 	return false
 end
 
@@ -34,7 +34,7 @@ local t = {}
 local List = {}
 local config = { __index = t }
 
-function t.new(Panel, Parent, Text) --[[ Line: 96 ]]
+function t.new(Panel, Parent, Text)
 	-- upvalues: List (copy), CreateFunction (copy), _Color3 (copy), _Color3_4 (copy), _Color3_2 (copy), config (copy)
 	local t = {}
 	table.insert(List, t)
@@ -46,7 +46,7 @@ function t.new(Panel, Parent, Text) --[[ Line: 96 ]]
 	t.panel = Panel
 	t.SetPopOut = nil
 	
-	function t.panel.OnMouseEnter() --[[ Line: 106 ]]
+	function t.panel.OnMouseEnter()
 		-- upvalues: List (upval), t (copy)
 		for _, value in pairs(List) do
 			if value ~= t then
@@ -94,11 +94,11 @@ function t.new(Panel, Parent, Text) --[[ Line: 96 ]]
 	return (setmetatable(t, config))
 end
 
-function t.SetTitle(p1, Text) --[[ Line: 163 ]]
+function t.SetTitle(p1, Text)
 	p1.titleText.Text = Text
 end
 
-function t.AddCloseButton(p1, p2) --[[ Line: 167 ]]
+function t.AddCloseButton(p1, p2)
 	-- upvalues: CreateFunction (copy)
 	p1.closeButton = CreateFunction("ImageButton")({
 		Name = "CloseButton",
@@ -118,7 +118,7 @@ function t.AddCloseButton(p1, p2) --[[ Line: 167 ]]
 	p1.closeButton.MouseButton1Click:connect(p2)
 end
 
-function t.TweenZOffsetTo(p1, p2, p3, EaseInOutQuad, p4) --[[ Line: 189 ]]
+function t.TweenZOffsetTo(p1, p2, p3, EaseInOutQuad, p4)
 	-- upvalues: UtilityModule (copy)
 	if p1.tweener and not p1.tweener:IsFinished() then
 		p1.tweener:Cancel()
@@ -126,10 +126,10 @@ function t.TweenZOffsetTo(p1, p2, p3, EaseInOutQuad, p4) --[[ Line: 189 ]]
 	p1.tweener = UtilityModule:TweenProperty(p1, "zOffset", p1.zOffset, p2, p3, EaseInOutQuad, p4)
 end
 
-function t.AnimateOut(p1, Callback) --[[ Line: 196 ]]
+function t.AnimateOut(p1, Callback)
 	-- upvalues: UtilityModule (copy)
 	p1.isAnimating = true
-	p1:TweenZOffsetTo(-100, 0.25, UtilityModule:GetEaseInOutQuad(), function() --[[ Line: 198 ]]
+	p1:TweenZOffsetTo(-100, 0.25, UtilityModule:GetEaseInOutQuad(), function()
 		-- upvalues: Callback (copy), p1 (copy)
 		if Callback then
 			Callback()
@@ -138,12 +138,12 @@ function t.AnimateOut(p1, Callback) --[[ Line: 196 ]]
 	end)
 end
 
-function t.AnimateIn(GlobalDataStore, Callback) --[[ Line: 204 ]]
+function t.AnimateIn(GlobalDataStore, Callback)
 	-- upvalues: UtilityModule (copy)
 	GlobalDataStore.zOffset = -100
 	GlobalDataStore:OnUpdate(0)
 	GlobalDataStore.isAnimating = true
-	GlobalDataStore:TweenZOffsetTo(0, 0.25, UtilityModule:GetEaseInOutQuad(), function() --[[ Line: 208 ]]
+	GlobalDataStore:TweenZOffsetTo(0, 0.25, UtilityModule:GetEaseInOutQuad(), function()
 		-- upvalues: Callback (copy), GlobalDataStore (copy)
 		if Callback then
 			Callback()
@@ -152,12 +152,12 @@ function t.AnimateIn(GlobalDataStore, Callback) --[[ Line: 204 ]]
 	end)
 end
 
-function t.SetPopOut(p1, p2) --[[ Line: 214 ]]
+function t.SetPopOut(p1, p2)
 	-- upvalues: UtilityModule (copy)
 	if p1.isAnimating then return end
 	if p2 then
 		p1.isPopping = true
-		p1:TweenZOffsetTo(0.25, 0.25, UtilityModule:GetEaseInOutQuad(), function() --[[ Line: 221 ]]
+		p1:TweenZOffsetTo(0.25, 0.25, UtilityModule:GetEaseInOutQuad(), function()
 			-- upvalues: p1 (copy)
 			p1.isPopping = false
 		end)
@@ -165,14 +165,14 @@ function t.SetPopOut(p1, p2) --[[ Line: 214 ]]
 		return
 	else
 		p1.isPopping = true
-		p1:TweenZOffsetTo(0, 0.25, UtilityModule:GetEaseInOutQuad(), function() --[[ Line: 226 ]]
+		p1:TweenZOffsetTo(0, 0.25, UtilityModule:GetEaseInOutQuad(), function()
 			-- upvalues: p1 (copy)
 			p1.isPopping = false
 		end)
 	end
 end
 
-function t.OnUpdate(p1, _) --[[ Line: 232 ]]
+function t.OnUpdate(p1, _)
 	-- upvalues: _Color3 (copy), _Color3_1 (copy)
 	p1.panel.localCF = p1.zeroCF * CFrame.new(0, 0, p1.zOffset)
 	p1.panel.needsLocalPositionUpdate = p1.isAnimating or p1.isPopping
@@ -196,12 +196,12 @@ Notifications1 = t.new(Notifications, CreateFunction("TextButton")({
 	Size = UDim2.new(1, -4, 1, 0),
 	SelectionImageObject = SelectionImageObject
 }), "Notifications")
-Notifications1:AddCloseButton(function() --[[ Line: 263 ]]
+Notifications1:AddCloseButton(function()
 	-- upvalues: NotificationHubModule (copy)
 	NotificationHubModule:SetVisible(false)
 end)
 
-function Notifications:OnUpdate(p1) --[[ Line: 266 ]]
+function Notifications:OnUpdate(p1)
 	-- upvalues: Notifications1 (ref)
 	Notifications1:OnUpdate(p1)
 end
@@ -221,7 +221,7 @@ FriendRequests = t.new(NotificationDetails, CreateFunction("TextButton")({
 	SelectionImageObject = SelectionImageObject
 }), "Friend Requests")
 
-function NotificationDetails:OnUpdate(p1) --[[ Line: 291 ]]
+function NotificationDetails:OnUpdate(p1)
 	-- upvalues: FriendRequests (ref)
 	FriendRequests:OnUpdate(p1)
 end
@@ -229,13 +229,13 @@ end
 local t1 = {}
 local List1 = {}
 
-local function groupSort(A, B): boolean --[[ Line: 298 ]]
+local function groupSort(A, B): boolean
 	return A.order < B.order
 end
 
 local v1 = nil
 
-local function layoutNotificationsGroups() --[[ Line: 303 ]]
+local function layoutNotificationsGroups()
 	-- upvalues: List1 (copy), Notifications (copy), v1 (ref)
 	local YOffset = 20
 	
@@ -294,7 +294,7 @@ end
 local t2 = {}
 local config1 = { __index = t2 }
 
-function t2.new(Key, Title, Order) --[[ Line: 362 ]]
+function t2.new(Key, Title, Order)
 	-- upvalues: config1 (copy), CreateFunction (copy), Notifications1 (ref), t1 (copy), List1 (copy)
 	local self = setmetatable({}, config1)
 	self.key = Key
@@ -319,7 +319,7 @@ function t2.new(Key, Title, Order) --[[ Line: 362 ]]
 	return self
 end
 
-function t2.Deactivate(p1) --[[ Line: 389 ]]
+function t2.Deactivate(p1)
 	-- upvalues: NotificationDetails (copy)
 	p1.detailsFrame.Parent = nil
 	
@@ -328,7 +328,7 @@ function t2.Deactivate(p1) --[[ Line: 389 ]]
 	end
 end
 
-function t2.SwitchTo(p2) --[[ Line: 396 ]]
+function t2.SwitchTo(p2)
 	-- upvalues: FriendRequests (ref), t1 (copy), v1 (ref)
 	FriendRequests:SetTitle(p2.title)
 	
@@ -342,7 +342,7 @@ function t2.SwitchTo(p2) --[[ Line: 396 ]]
 	p2.notificationsDirty = true
 end
 
-function t2.BringNotificationToFront(p3, Notification) --[[ Line: 409 ]]
+function t2.BringNotificationToFront(p3, Notification)
 	-- upvalues: v1 (ref), layoutNotificationsGroups (copy)
 	if v1 ~= p3 then
 		p3:SwitchTo()
@@ -363,7 +363,7 @@ function t2.BringNotificationToFront(p3, Notification) --[[ Line: 409 ]]
 	layoutNotificationsGroups()
 end
 
-function t2.RemoveNotification(p4, p5) --[[ Line: 432 ]]
+function t2.RemoveNotification(p4, p5)
 	-- upvalues: Notifications (copy), NotificationDetails (copy), layoutNotificationsGroups (copy)
 	for i, notification in ipairs(p4.notifications) do
 		if notification == p5 then
@@ -379,7 +379,7 @@ function t2.RemoveNotification(p4, p5) --[[ Line: 432 ]]
 	end
 end
 
-function t2.GetTopNotification(p6) --[[ Line: 448 ]]
+function t2.GetTopNotification(p6)
 	local CountNotifications = #p6.notifications
 	
 	return if CountNotifications <= 0 then nil else p6.notifications[CountNotifications]
@@ -390,7 +390,7 @@ t2.new("BadgeAwards", "Badges", 2)
 t2.new("PlayerPoints", "Points", 3)
 table.sort(List1, groupSort)
 
-local function doCallback(Callback: (any) -> (), ...) --[[ Line: 465 ]]
+local function doCallback(Callback: (any) -> (), ...)
 	if not Callback then return end
 	if type(Callback) == "function" then
 		Callback(...)
@@ -412,7 +412,7 @@ end
 local t3 = {}
 local config2 = { __index = t3 }
 
-function t3.new(Group, p6) --[[ Line: 487 ]]
+function t3.new(Group, p6)
 	-- upvalues: config2 (copy), CreateFunction (copy), SelectionImageObject (copy), _Color3_3 (copy), _Color3_4 (copy), NotificationDetails (copy), doCallback (copy), layoutNotificationsGroups (copy)
 	local self = setmetatable({}, config2)
 	self.group = Group
@@ -422,7 +422,7 @@ function t3.new(Group, p6) --[[ Line: 487 ]]
 		Size = UDim2.new(1, 0, 0, 80),
 		SelectionImageObject = SelectionImageObject
 	})
-	self.frame.MouseButton1Click:connect(function() --[[ Line: 498 ]]
+	self.frame.MouseButton1Click:connect(function()
 		-- upvalues: self (copy)
 		self:OnClicked()
 	end)
@@ -465,11 +465,11 @@ function t3.new(Group, p6) --[[ Line: 487 ]]
 		TextColor3 = _Color3_4
 	})
 	self.detailsFrame = CreateFunction("Frame")({ BackgroundTransparency = 1, Parent = Group.detailsFrame })
-	self.detailsFrame.MouseEnter:connect(function() --[[ Line: 558 ]]
+	self.detailsFrame.MouseEnter:connect(function()
 		-- upvalues: NotificationDetails (upval), self (copy)
 		NotificationDetails:SetSubpanelDepth(self.detailsFrame, 0.25)
 	end)
-	self.detailsFrame.MouseLeave:connect(function() --[[ Line: 561 ]]
+	self.detailsFrame.MouseLeave:connect(function()
 		-- upvalues: NotificationDetails (upval), self (copy)
 		NotificationDetails:SetSubpanelDepth(self.detailsFrame, 0)
 	end)
@@ -512,7 +512,7 @@ function t3.new(Group, p6) --[[ Line: 487 ]]
 		FontSize = Enum.FontSize.Size36
 	})
 	
-	local function createButton(XScale, XScale1, Button1Text) --[[ Line: 614 ]]
+	local function createButton(XScale, XScale1, Button1Text)
 		-- upvalues: CreateFunction (upval), self (copy), SelectionImageObject (upval), _Color3_4 (upval)
 		local Parent = CreateFunction("ImageButton")({
 			BackgroundTransparency = 1,
@@ -534,11 +534,11 @@ function t3.new(Group, p6) --[[ Line: 487 ]]
 			FontSize = Enum.FontSize.Size24
 		})
 		v2.Parent = Parent
-		Parent.SelectionGained:connect(function() --[[ Line: 640 ]]
+		Parent.SelectionGained:connect(function()
 			-- upvalues: Parent (copy)
 			Parent.Image = "rbxasset://textures/ui/Settings/MenuBarAssets/MenuButtonSelected.png"
 		end)
-		Parent.SelectionLost:connect(function() --[[ Line: 643 ]]
+		Parent.SelectionLost:connect(function()
 			-- upvalues: Parent (copy)
 			Parent.Image = "rbxasset://textures/ui/Settings/MenuBarAssets/MenuButton.png"
 		end)
@@ -549,19 +549,19 @@ function t3.new(Group, p6) --[[ Line: 487 ]]
 	if p6.Button1Text and p6.Button2Text then
 		self.detailsButton1, self.detailsButton1Text = createButton(0.07, 0.415, p6.Button1Text)
 		self.detailsButton2, self.detailsButton2Text = createButton(0.511, 0.415, p6.Button2Text)
-		self.detailsButton1.MouseButton1Click:connect(function() --[[ Line: 653 ]]
+		self.detailsButton1.MouseButton1Click:connect(function()
 			-- upvalues: doCallback (upval), p6 (copy), self (copy)
 			doCallback(p6.Callback, p6.Button1Text)
 			self:Dismiss()
 		end)
-		self.detailsButton2.MouseButton1Click:connect(function() --[[ Line: 657 ]]
+		self.detailsButton2.MouseButton1Click:connect(function()
 			-- upvalues: doCallback (upval), p6 (copy), self (copy)
 			doCallback(p6.Callback, p6.Button2Text)
 			self:Dismiss()
 		end)
 	elseif not p6.button2Text then
 		self.detailsButton1, self.detailsButton1Text = createButton(0.07, 0.86, p6.Button1Text or "Dismiss")
-		self.detailsButton1.MouseButton1Click:connect(function() --[[ Line: 664 ]]
+		self.detailsButton1.MouseButton1Click:connect(function()
 			-- upvalues: doCallback (upval), p6 (copy), self (copy)
 			doCallback(p6.Callback, p6.Button1Text)
 			self:Dismiss()
@@ -574,20 +574,20 @@ function t3.new(Group, p6) --[[ Line: 487 ]]
 	return self
 end
 
-function t3.OnClicked(p6) --[[ Line: 677 ]]
+function t3.OnClicked(p6)
 	-- upvalues: layoutNotificationsGroups (copy)
 	p6.group:SwitchTo()
 	layoutNotificationsGroups()
 end
 
-function t3.Dismiss(p6) --[[ Line: 685 ]]
+function t3.Dismiss(p6)
 	p6.group:RemoveNotification(p6)
 end
 
 local t4 = {}
 local Visible = false
 local Count = 0
-RobloxGui:WaitForChild("SendNotificationInfo").Event:connect(function(p6) --[[ Line: 697 ]]
+RobloxGui:WaitForChild("SendNotificationInfo").Event:connect(function(p6)
 	-- upvalues: t1 (copy), t3 (copy), Visible (ref), Count (ref), NotificationHubModule (copy)
 	local Entry = p6.GroupName and t1[p6.GroupName]
 	
@@ -600,7 +600,7 @@ RobloxGui:WaitForChild("SendNotificationInfo").Event:connect(function(p6) --[[ L
 	end
 end)
 
-local function onMenuCloseShortcut(_, UserInputState, _) --[[ Line: 716 ]]
+local function onMenuCloseShortcut(_, UserInputState, _)
 	-- upvalues: NotificationHubModule (copy)
 	if UserInputState == Enum.UserInputState.Begin then
 		NotificationHubModule:SetVisible(false)
@@ -609,17 +609,17 @@ end
 
 NotificationHubModule.VisibilityStateChanged = CreateFunction("BindableEvent")({ Name = "VisibilityStateChanged" })
 
-function NotificationHubModule:GetNumberOfPendingNotifications(): number --[[ Line: 726 ]]
+function NotificationHubModule:GetNumberOfPendingNotifications(): number
 	-- upvalues: t4 (copy)
 	return #t4
 end
 
-function NotificationHubModule:IsVisible() --[[ Line: 730 ]]
+function NotificationHubModule:IsVisible()
 	-- upvalues: Visible (ref)
 	return Visible
 end
 
-function NotificationHubModule:SetVisible(Value) --[[ Line: 734 ]]
+function NotificationHubModule:SetVisible(Value)
 	-- upvalues: Visible (ref), Panel3D (copy), Count (ref), NotificationHubModule (copy), Notifications (copy), Notifications1 (ref), NotificationDetails (copy), FriendRequests (ref), ContextActionService (copy), onMenuCloseShortcut (copy), VRHub (copy)
 	if Visible == Value then return end
 	Visible = Value
@@ -639,13 +639,13 @@ function NotificationHubModule:SetVisible(Value) --[[ Line: 734 ]]
 		ContextActionService:BindCoreAction("NotificationsMenuCloseShortcut", onMenuCloseShortcut, false, Enum.KeyCode.ButtonB, Enum.KeyCode.ButtonStart)
 		VRHub:FireModuleOpened(NotificationHubModule.ModuleName)
 	else
-		spawn(function() --[[ Line: 766 ]]
+		spawn(function()
 			-- upvalues: Notifications1 (upval), Notifications (upval), FriendRequests (upval), NotificationDetails (upval)
-			Notifications1:AnimateOut(function() --[[ Line: 767 ]]
+			Notifications1:AnimateOut(function()
 				-- upvalues: Notifications (upval)
 				Notifications:SetVisible(false)
 			end)
-			FriendRequests:AnimateOut(function() --[[ Line: 770 ]]
+			FriendRequests:AnimateOut(function()
 				-- upvalues: NotificationDetails (upval)
 				NotificationDetails:SetVisible(false)
 			end)
@@ -656,7 +656,7 @@ function NotificationHubModule:SetVisible(Value) --[[ Line: 734 ]]
 	NotificationHubModule.VisibilityStateChanged:Fire(Value)
 end
 
-VRHub.ModuleOpened.Event:connect(function(ModuleName, _, _, _) --[[ Line: 788 ]]
+VRHub.ModuleOpened.Event:connect(function(ModuleName, _, _, _)
 	-- upvalues: NotificationHubModule (copy)
 	if ModuleName ~= NotificationHubModule.ModuleName then
 		NotificationHubModule:SetVisible(false)

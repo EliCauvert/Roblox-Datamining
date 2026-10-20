@@ -8,7 +8,7 @@ local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
 local NavControlsModule = require(script.Parent.NavControls)
 local _ = require(script.Parent.Parent.usePaginationSelectionChain)
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 36 | Named "NavPaginationLayout" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), NavControlsModule (copy)
 	return ReactModule.createElement(ViewModule, WithCommonPropsModule(p1, { tag = "row align-y-center gap-small auto-xy", ref = Ref }), {
 		LeftNav = ReactModule.createElement(NavControlsModule, {

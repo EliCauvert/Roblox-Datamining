@@ -14,24 +14,24 @@ local FollowingsStoreTypesModule = require(script.Parent.FollowingsStoreTypes)
 local FollowingsUrlBuilderModule = require(script.Parent.FollowingsUrlBuilder)
 local FFlagLuaAppDataHydrationUpdateItem = require(Parent.SharedFlags).FFlagLuaAppDataHydrationUpdateItem
 
-return function() --[[ Line: 22 | Named "createFollowingsStore" ]]
+return function()
 	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), LogResponseErrorFunction (copy), FollowingsUrlBuilderModule (copy), FetchFollowingModule (copy), FollowingsStoreTypesModule (copy), DiscoveryEventErrorLogger (copy), SignalsModule (copy), RequestUpdateFollowingModule (copy), FFlagLuaAppDataHydrationUpdateItem (copy)
 	local DataCacheModule = CreateDataCacheModule()
 	local Config = nil
 	local DataResolverModule = CreateDataResolverModule({
 		supportsMultiGet = false,
 		cache = DataCacheModule,
-		logError = function(p1) --[[ Line: 30 ]]
+		logError = function(p1)
 			-- upvalues: LogResponseErrorFunction (upval), FollowingsUrlBuilderModule (upval)
 			LogResponseErrorFunction(FollowingsUrlBuilderModule.FOLLOWING_STATUS_URL, p1)
 		end,
-		onClear = function() --[[ Line: 34 ]]
+		onClear = function()
 			-- upvalues: Config (ref)
 			Config = nil
 		end,
-		fetchFn = function(UniverseId, _) --[[ Line: 38 ]]
+		fetchFn = function(UniverseId, _)
 			-- upvalues: FetchFollowingModule (upval), FollowingsStoreTypesModule (upval), DiscoveryEventErrorLogger (upval), Config (ref)
-			return FetchFollowingModule(UniverseId):andThen(function(Result) --[[ Line: 43 ]]
+			return FetchFollowingModule(UniverseId):andThen(function(Result)
 				-- upvalues: FollowingsStoreTypesModule (upval), DiscoveryEventErrorLogger (upval), Config (upval)
 				local ResponseBody = Result.responseBody
 				
@@ -56,7 +56,7 @@ return function() --[[ Line: 22 | Named "createFollowingsStore" ]]
 					canFollow = ResponseBody.CanFollow,
 					isFollowing = ResponseBody.IsFollowing
 				}
-			end):catch(function(Err) --[[ Line: 74 ]]
+			end):catch(function(Err)
 				-- upvalues: DiscoveryEventErrorLogger (upval), UniverseId (copy)
 				if type(Err) == "table" and Err.ClientError ~= nil then
 					DiscoveryEventErrorLogger.reportError("createFollowingsStore", "Client validation error fetching following", {
@@ -79,7 +79,7 @@ return function() --[[ Line: 22 | Named "createFollowingsStore" ]]
 		getFollowings = DataResolverModule.getCachedItems,
 		getAndFetchFollowing = DataResolverModule.getAndFetchItem,
 		getAndFetchFollowings = DataResolverModule.getAndFetchItems,
-		updateFollowing = function(UniverseId, IsFollowing) --[[ Line: 95 ]]
+		updateFollowing = function(UniverseId, IsFollowing)
 			-- upvalues: SignalsModule (upval), DataCacheModule (copy), Config (ref), RequestUpdateFollowingModule (upval), DiscoveryEventErrorLogger (upval), LogResponseErrorFunction (upval), FollowingsUrlBuilderModule (upval)
 			local Signal, Signal2 = SignalsModule.createSignal(nil)
 			local Item = DataCacheModule.getItem(UniverseId)
@@ -105,10 +105,10 @@ return function() --[[ Line: 22 | Named "createFollowingsStore" ]]
 					followingLimitByType = Config1.followingLimitByType
 				}
 			end
-			RequestUpdateFollowingModule(UniverseId, IsFollowing):andThen(function() --[[ Line: 143 ]]
+			RequestUpdateFollowingModule(UniverseId, IsFollowing):andThen(function()
 				-- upvalues: Signal2 (copy), IsFollowing (copy)
 				Signal2({ type = "success", isFollowing = IsFollowing })
-			end):catch(function(Err) --[[ Line: 149 ]]
+			end):catch(function(Err)
 				-- upvalues: DataCacheModule (upval), UniverseId (copy), IsFollowing1 (copy), Config1 (copy), Config (upval), Signal2 (copy), DiscoveryEventErrorLogger (upval), IsFollowing (copy), LogResponseErrorFunction (upval), FollowingsUrlBuilderModule (upval)
 				DataCacheModule.updateItem(UniverseId, { isFollowing = IsFollowing1 })
 				
@@ -148,16 +148,16 @@ return function() --[[ Line: 22 | Named "createFollowingsStore" ]]
 			return Signal
 		end,
 		updateItem = if FFlagLuaAppDataHydrationUpdateItem then DataCacheModule.updateItem else nil,
-		updateUserFollowingLimits = if FFlagLuaAppDataHydrationUpdateItem then function(p1) --[[ Line: 234 ]]
+		updateUserFollowingLimits = if FFlagLuaAppDataHydrationUpdateItem then function(p1)
 			-- upvalues: Config (ref)
 			Config = p1
 		end else nil,
-		clear = function() --[[ Line: 212 ]]
+		clear = function()
 			-- upvalues: Config (ref), DataResolverModule (copy)
 			Config = nil
 			DataResolverModule.clear()
 		end,
-		dispose = function() --[[ Line: 217 ]]
+		dispose = function()
 			-- upvalues: DataResolverModule (copy)
 			DataResolverModule.dispose()
 		end

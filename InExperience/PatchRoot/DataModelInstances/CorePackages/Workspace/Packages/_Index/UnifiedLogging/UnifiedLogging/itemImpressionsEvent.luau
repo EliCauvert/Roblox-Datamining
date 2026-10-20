@@ -69,7 +69,7 @@ local config1 = {
 	[ContentTypeModule.Badge] = IntersectionResult1
 }
 
-return function(p1, EventContext, p2, Tbl) --[[ Line: 117 ]]
+return function(p1, EventContext, p2, Tbl)
 	-- upvalues: config1 (copy), IntersectionResult1 (ref), DiscoveryEventErrorLogger (copy), FFlagLuaAppMigrateItemEventsTelemetryService (copy), TelemetryService (copy), Config (ref), GetPlatformTargetFunction (copy), FFlagLuaAppItemEventsTelemetryServiceShadowTraffic (copy), Config1 (ref)
 	local Entry = config1[p2] or IntersectionResult1
 	

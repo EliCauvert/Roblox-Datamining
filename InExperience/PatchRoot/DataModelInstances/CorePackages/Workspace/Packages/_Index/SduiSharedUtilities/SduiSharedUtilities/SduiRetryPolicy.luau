@@ -7,7 +7,7 @@ local SduiRetryJitterMaxMs = game:DefineFastInt("SduiRetryJitterMaxMs", 1000)
 local SduiRetryBudgetSec = game:DefineFastInt("SduiRetryBudgetSec", 20)
 local SduiFetchTimeoutHeadroomSec = game:DefineFastInt("SduiFetchTimeoutHeadroomSec", 10)
 
-local function getDefaultRetryOptions() --[[ Line: 42 ]]
+local function getDefaultRetryOptions()
 	-- upvalues: SduiMaxRetryCount (copy), SduiRetryJitterMinMs (copy), SduiRetryJitterMaxMs (copy), SduiRetryBudgetSec (copy)
 	return {
 		maxRetryCount = SduiMaxRetryCount,
@@ -23,7 +23,7 @@ local function getDefaultRetryOptions() --[[ Line: 42 ]]
 end
 
 return {
-	resolve = function(p1) --[[ Line: 57 ]]
+	resolve = function(p1)
 		-- upvalues: getDefaultRetryOptions (copy), CryoModule (copy), SduiRetryBudgetSec (copy)
 		if p1 == nil then
 			return (getDefaultRetryOptions())
@@ -37,11 +37,11 @@ return {
 			return JoinResult
 		end
 	end,
-	getRequestDeadlineSec = function() --[[ Line: 34 ]]
+	getRequestDeadlineSec = function()
 		-- upvalues: SduiRetryBudgetSec (copy), SduiFetchTimeoutHeadroomSec (copy)
 		return SduiRetryBudgetSec + SduiFetchTimeoutHeadroomSec
 	end,
-	getFetchTimeoutSec = function(): number --[[ Line: 38 ]]
+	getFetchTimeoutSec = function(): number
 		-- upvalues: SduiRetryBudgetSec (copy), SduiFetchTimeoutHeadroomSec (copy)
 		return SduiRetryBudgetSec + SduiFetchTimeoutHeadroomSec + 5
 	end

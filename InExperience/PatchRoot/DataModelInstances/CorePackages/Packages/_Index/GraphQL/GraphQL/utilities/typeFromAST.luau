@@ -8,7 +8,7 @@ local GraphQLList = DefinitionModule.GraphQLList
 local GraphQLNonNull = DefinitionModule.GraphQLNonNull
 local _ = require(Parent.type.schema)
 
-local function typeFromAST(p1, Type) --[[ Line: 33 ]]
+local function typeFromAST(p1, Type)
 	-- upvalues: Kind (copy), typeFromAST (copy), GraphQLList (copy), GraphQLNonNull (copy), InvariantFunction (copy), InspectFunction (copy)
 	if Type.kind == Kind.LIST_TYPE then
 		local TypeFromASTResult = typeFromAST(p1, Type.type)

@@ -8,30 +8,30 @@ game:DefineFastFlag("EnableJoinVoiceTooltip", false)
 game:DefineFastFlag("EnableInitialJoinVoiceButton", false)
 game:DefineFastFlag("EnableHideJoinToastSubtitle", false)
 local config = {
-	[ConstantsModule.SeamlessVoiceFeatures.ConnectDisconnect] = function() --[[ Line: 22 ]]
+	[ConstantsModule.SeamlessVoiceFeatures.ConnectDisconnect] = function()
 		return game:GetFastFlag("EnableConnectDisconnect")
 	end,
-	[ConstantsModule.SeamlessVoiceFeatures.HearingWithoutMicPermissions] = function() --[[ Line: 25 ]]
+	[ConstantsModule.SeamlessVoiceFeatures.HearingWithoutMicPermissions] = function()
 		return game:GetFastFlag("EnableHearingWithoutMicPermissions")
 	end,
-	[ConstantsModule.SeamlessVoiceFeatures.JoinVoiceIsMutedMic] = function() --[[ Line: 28 ]]
+	[ConstantsModule.SeamlessVoiceFeatures.JoinVoiceIsMutedMic] = function()
 		return game:GetFastFlag("EnableJoinVoiceIsMutedMic")
 	end,
-	[ConstantsModule.SeamlessVoiceFeatures.JoinVoiceTooltip] = function() --[[ Line: 31 ]]
+	[ConstantsModule.SeamlessVoiceFeatures.JoinVoiceTooltip] = function()
 		return game:GetFastFlag("EnableJoinVoiceTooltip")
 	end,
-	[ConstantsModule.SeamlessVoiceFeatures.InitialJoinVoice] = function() --[[ Line: 34 ]]
+	[ConstantsModule.SeamlessVoiceFeatures.InitialJoinVoice] = function()
 		return game:GetFastFlag("EnableInitialJoinVoiceButton")
 	end,
-	[ConstantsModule.SeamlessVoiceFeatures.DeferConnection] = function() --[[ Line: 37 ]]
+	[ConstantsModule.SeamlessVoiceFeatures.DeferConnection] = function()
 		return game:GetFastFlag("EnableDeferVoiceConnection")
 	end,
-	[ConstantsModule.SeamlessVoiceFeatures.HideJoinToastSubtitle] = function() --[[ Line: 40 ]]
+	[ConstantsModule.SeamlessVoiceFeatures.HideJoinToastSubtitle] = function()
 		return game:GetFastFlag("EnableHideJoinToastSubtitle")
 	end
 }
 
-return function(List) --[[ Line: 45 ]]
+return function(List)
 	-- upvalues: config (copy)
 	if type(List) == "string" then
 		List = { List }

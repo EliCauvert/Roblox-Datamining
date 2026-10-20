@@ -9,7 +9,7 @@ local FaceChatUtilsModule = require(script.Parent.Parent.Utils.FaceChatUtils)
 local UseLocalizationFunction = require(CorePackages.Workspace.Packages.Localization).Hooks.useLocalization
 local TrackerMode = Enum.TrackerMode
 
-return function() --[[ Line: 27 ]]
+return function()
 	-- upvalues: ReactModule (copy), FaceChatUtilsModule (copy), UseTrackerModeModule (copy), UseLocalizationFunction (copy), TrackerMode (copy), ClearTimeoutFunction (copy), SetTimeoutFunction (copy)
 	local UseRefResult = ReactModule.useRef(FaceChatUtilsModule.getTrackerMode())
 	local UseTrackerModeModuleResult = UseTrackerModeModule()
@@ -26,7 +26,7 @@ return function() --[[ Line: 27 ]]
 	})
 	local UseRefResult1 = ReactModule.useRef(nil)
 	
-	local function v13() --[[ Line: 42 ]]
+	local function v13()
 		-- upvalues: UseLocalizationResult (copy), UseTrackerModeModuleResult (copy), TrackerMode (upval), UseRefResult (copy)
 		local _ = UseLocalizationResult.controlMessageMotion
 		local _ = UseLocalizationResult.controlMessageOff
@@ -49,13 +49,13 @@ return function() --[[ Line: 27 ]]
 		}
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 75 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), ClearTimeoutFunction (upval), UseStateResult2 (copy), v13 (copy), SetTimeoutFunction (upval), UseStateResult (copy)
 		if UseRefResult1.current then
 			ClearTimeoutFunction(UseRefResult1.current)
 		end
 		UseStateResult2((v13()))
-		UseRefResult1.current = SetTimeoutFunction(function() --[[ Line: 81 ]]
+		UseRefResult1.current = SetTimeoutFunction(function()
 			-- upvalues: UseStateResult2 (upval), UseStateResult (upval)
 			UseStateResult2({
 				visible = false,

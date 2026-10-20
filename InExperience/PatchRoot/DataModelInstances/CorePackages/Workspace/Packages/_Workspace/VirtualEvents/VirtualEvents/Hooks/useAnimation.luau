@@ -6,22 +6,22 @@ local config = {
 	cubic = Enum.EasingStyle.Cubic
 }
 
-local function _(p1) --[[ Line: 32 | Named "stopTween" ]]
+local function _(p1)
 	if p1.current then
 		p1.current:Cancel()
 		p1.current = nil
 	end
 end
 
-local _ = function(p1, p2): boolean --[[ Line: 40 | Named "isApproximatelyEqual" ]]
+local _ = function(p1, p2): boolean
 	return math.abs(p1 - p2) < 0.001
 end
 
-return function(p1) --[[ Line: 44 | Named "useAnimation" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), config (copy), TweenService (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 48 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseRefResult1 (copy), config (upval), UseRefResult (copy), TweenService (upval)
 		local StartOffset = p1.startOffset
 		local EndOffset = p1.endOffset or 0
@@ -39,7 +39,7 @@ return function(p1) --[[ Line: 44 | Named "useAnimation" ]]
 			UseRefResult.current = nil
 		end
 		UseRefResult.current = TweenService:Create(NumValue, _TweenInfo, { Value = EndOffset })
-		local Connection = NumValue:GetPropertyChangedSignal("Value"):Connect(function() --[[ Line: 75 ]]
+		local Connection = NumValue:GetPropertyChangedSignal("Value"):Connect(function()
 			-- upvalues: NumValue (copy), UseRefResult1 (upval), p1 (upval)
 			local Value = NumValue.Value
 			
@@ -50,7 +50,7 @@ return function(p1) --[[ Line: 44 | Named "useAnimation" ]]
 		end)
 		
 		if UseRefResult.current then
-			UseRefResult.current.Completed:Connect(function() --[[ Line: 84 ]]
+			UseRefResult.current.Completed:Connect(function()
 				-- upvalues: Connection (copy), NumValue (copy), UseRefResult (upval), UseRefResult1 (upval)
 				Connection:Disconnect()
 				NumValue:Destroy()
@@ -59,7 +59,7 @@ return function(p1) --[[ Line: 44 | Named "useAnimation" ]]
 			end)
 			UseRefResult.current:Play()
 		end
-		return function() --[[ Line: 93 ]]
+		return function()
 			-- upvalues: Connection (copy), UseRefResult (upval), NumValue (copy), UseRefResult1 (upval)
 			Connection:Disconnect()
 			

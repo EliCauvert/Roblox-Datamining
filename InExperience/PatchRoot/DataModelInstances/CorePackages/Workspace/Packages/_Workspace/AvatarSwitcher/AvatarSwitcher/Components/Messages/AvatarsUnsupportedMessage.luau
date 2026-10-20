@@ -9,7 +9,7 @@ local ExperienceAvatarSupportTypeModule = require(AvatarSwitcher.Enums.Experienc
 local GetAvatarSwitcherStoreModule = require(AvatarSwitcher.Stores.getAvatarSwitcherStore)
 local FFlagAvatarSwitcherUiFixes = require(Parent.AvatarExperienceFlags).FFlagAvatarSwitcherUiFixes
 
-return function(Frame) --[[ Line: 21 | Named "AvatarsUnsupportedMessage" ]]
+return function(Frame)
 	-- upvalues: UseSignalStateFunction (copy), GetAvatarSwitcherStoreModule (copy), UseLocalizationFunction (copy), FFlagAvatarSwitcherUiFixes (copy), ExperienceAvatarSupportTypeModule (copy), ReactModule (copy), FoundationModule (copy), MessageCardModule (copy)
 	local UseSignalStateResult = UseSignalStateFunction(UseSignalStateFunction(GetAvatarSwitcherStoreModule).getExperienceAvatarSupportType)
 	local UseLocalizationResult = UseLocalizationFunction(if FFlagAvatarSwitcherUiFixes then {

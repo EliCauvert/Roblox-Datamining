@@ -3,7 +3,7 @@ local _ = require(script.Types)
 local FFlagSocialEnableProfileInspectAndBuy = require(script:FindFirstAncestor("CatalogNetworking").Parent.Parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
 
 return {
-	config = function(p1) --[[ Line: 21 ]]
+	config = function(p1)
 		-- upvalues: CreateGetItemAndBundleDetailsModule (copy)
 		return {
 			GetItemAndBundleDetails = CreateGetItemAndBundleDetailsModule(p1)

@@ -1,14 +1,14 @@
 ﻿local SignalsModule = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.Signals)
 local CreateSignalFunction = SignalsModule.createSignal
 
-return SignalsModule.createComputed(function() --[[ Line: 18 | Named "createUnifiedLoggingDeferredEventStore" ]]
+return SignalsModule.createComputed(function()
 	-- upvalues: CreateSignalFunction (copy)
 	local Signal, Signal2 = CreateSignalFunction(false)
 	local T = {}
 	
 	return {
 		isEntered = Signal,
-		enqueue = function(Key, p1) --[[ Line: 24 ]]
+		enqueue = function(Key, p1)
 			-- upvalues: T (ref)
 			local Entry = T[Key]
 			
@@ -18,7 +18,7 @@ return SignalsModule.createComputed(function() --[[ Line: 18 | Named "createUnif
 			end
 			table.insert(Entry, p1)
 		end,
-		takePending = function(Key) --[[ Line: 32 ]]
+		takePending = function(Key)
 			-- upvalues: T (ref)
 			if Key ~= nil then
 				T[Key] = nil
@@ -36,11 +36,11 @@ return SignalsModule.createComputed(function() --[[ Line: 18 | Named "createUnif
 			
 			return List
 		end,
-		markEntered = function() --[[ Line: 48 ]]
+		markEntered = function()
 			-- upvalues: Signal2 (copy)
 			Signal2(true)
 		end,
-		reset = function() --[[ Line: 51 ]]
+		reset = function()
 			-- upvalues: Signal2 (copy), T (ref)
 			Signal2(false)
 			T = {}

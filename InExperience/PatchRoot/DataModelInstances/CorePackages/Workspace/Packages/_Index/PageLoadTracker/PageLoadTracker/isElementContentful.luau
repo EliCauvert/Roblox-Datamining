@@ -8,7 +8,7 @@
 	ViewportFrame = true
 }
 
-function isElementContentful(Frame) --[[ Line: 11 ]]
+function isElementContentful(Frame)
 	-- upvalues: config (copy)
 	return if Frame.Visible and Frame.BackgroundTransparency ~= 1 then config[Frame.ClassName] else false
 end

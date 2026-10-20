@@ -10,18 +10,18 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local config = { duration = 0.08, easingStyle = Enum.EasingStyle.Quad }
 local config1 = { duration = 0.15, easingStyle = Enum.EasingStyle.Quad }
 
-local function _(Hover): boolean --[[ Line: 32 | Named "isFadingState" ]]
+local function _(Hover): boolean
 	-- upvalues: ControlState (copy)
 	return Hover == ControlState.Hover or Hover == ControlState.Pressed
 end
 
-return function(p1, Current) --[[ Line: 37 | Named "useCommentBodyPressFeedback" ]]
+return function(p1, Current)
 	-- upvalues: UseTokensFunction (copy), ReactOtterModule (copy), ReactModule (copy), ControlState (copy), config (copy), config1 (copy), FFlagMomentsCommentRowRedesignModule (copy), GetColorStyleWithTransparencyModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
 	local UseRefResult = ReactModule.useRef(ControlState.Default)
 	local UseRefResult1 = ReactModule.useRef(Current)
-	ReactModule.useLayoutEffect(function() --[[ Line: 43 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseRefResult1 (copy), Current (copy), UseRefResult (copy), ControlState (upval), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
 		UseRefResult1.current = Current
 		local IsHoverMatch: boolean = Current
@@ -35,7 +35,7 @@ return function(p1, Current) --[[ Line: 37 | Named "useCommentBodyPressFeedback"
 	local Default = if FFlagMomentsCommentRowRedesignModule then UseTokensResult.Color.Content.Default else UseTokensResult.Color.Content.Emphasis
 	
 	return {
-		onStateChanged = ReactModule.useCallback(function(Current) --[[ Line: 50 ]]
+		onStateChanged = ReactModule.useCallback(function(Current)
 			-- upvalues: UseRefResult (copy), UseRefResult1 (copy), ControlState (upval), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval), config1 (upval)
 			UseRefResult.current = Current
 			
@@ -44,9 +44,9 @@ return function(p1, Current) --[[ Line: 37 | Named "useCommentBodyPressFeedback"
 				UseAnimatedBindingResult2(ReactOtterModule.ease(if IsCurrentMatch then 1 else 0, if IsCurrentMatch then config else config1))
 			end
 		end, { UseAnimatedBindingResult2 }),
-		textStyle = ReactModule.useMemo(function() --[[ Line: 61 ]]
+		textStyle = ReactModule.useMemo(function()
 			-- upvalues: UseAnimatedBindingResult (copy), GetColorStyleWithTransparencyModule (upval), Default (copy)
-			return UseAnimatedBindingResult:map(function(p2: number) --[[ Line: 62 ]]
+			return UseAnimatedBindingResult:map(function(p2: number)
 				-- upvalues: GetColorStyleWithTransparencyModule (upval), Default (upval)
 				return GetColorStyleWithTransparencyModule(Default, p2 * 0.4)
 			end)

@@ -2,12 +2,12 @@
 local PromiseModule = require(AppChat.Parent.Promise)
 local ChatSessionRefCountModule = require(AppChat.Hooks.ChatSessionRefCount)
 
-return function(p1) --[[ Line: 16 | Named "createOpenFriendsChatConversation" ]]
+return function(p1)
 	-- upvalues: ChatSessionRefCountModule (copy), PromiseModule (copy)
 	local v1 = nil
 	local Count = 0
 	
-	return function(p2) --[[ Line: 23 ]]
+	return function(p2)
 		-- upvalues: ChatSessionRefCountModule (upval), v1 (ref), Count (ref), PromiseModule (upval), p1 (copy)
 		ChatSessionRefCountModule.reserve()
 		
@@ -18,7 +18,7 @@ return function(p1) --[[ Line: 16 | Named "createOpenFriendsChatConversation" ]]
 		local Count1: number = Count
 		local Flag = true
 		
-		local function _() --[[ Line: 35 | Named "cancelReservation" ]]
+		local function _()
 			-- upvalues: Flag (ref), ChatSessionRefCountModule (upval)
 			if Flag then
 				Flag = false
@@ -29,16 +29,16 @@ return function(p1) --[[ Line: 16 | Named "createOpenFriendsChatConversation" ]]
 			end
 		end
 		
-		local Promise = PromiseModule.resolve():andThen(function() --[[ Line: 48 ]]
+		local Promise = PromiseModule.resolve():andThen(function()
 			-- upvalues: p1 (upval), p2 (copy)
 			return if p1.isChatAvailable() then p1.openConversation(p2) else false
-		end):andThen(function(Result) --[[ Line: 54 ]]
+		end):andThen(function(Result)
 			-- upvalues: p1 (upval)
 			return if Result then p1.requestSelectFriendsTab() else false
-		end):andThen(function(Result): boolean --[[ Line: 60 ]]
+		end):andThen(function(Result): boolean
 			-- upvalues: p1 (upval), Count1 (copy), Count (upval), Flag (ref)
 			if Result then
-				p1.ensureOpenChat(function(): boolean --[[ Line: 64 ]]
+				p1.ensureOpenChat(function(): boolean
 					-- upvalues: Count1 (upval), Count (upval)
 					return Count1 == Count
 				end)
@@ -48,9 +48,9 @@ return function(p1) --[[ Line: 16 | Named "createOpenFriendsChatConversation" ]]
 			else
 				return false
 			end
-		end):catch(function(): boolean --[[ Line: 70 ]]
+		end):catch(function(): boolean
 			return false
-		end):andThen(function(Result) --[[ Line: 73 ]]
+		end):andThen(function(Result)
 			-- upvalues: Flag (ref), ChatSessionRefCountModule (upval)
 			if not Result then
 				if not Flag then
@@ -62,9 +62,9 @@ return function(p1) --[[ Line: 16 | Named "createOpenFriendsChatConversation" ]]
 			end
 			return Result
 		end)
-		local NewPromise = PromiseModule.new(function(p3, p4, Callback: (any) -> ()) --[[ Line: 80 ]]
+		local NewPromise = PromiseModule.new(function(p3, p4, Callback: (any) -> ())
 			-- upvalues: Flag (ref), ChatSessionRefCountModule (upval), Promise (copy)
-			Callback(function() --[[ Line: 81 ]]
+			Callback(function()
 				-- upvalues: Flag (upval), ChatSessionRefCountModule (upval), Promise (upval)
 				if Flag then
 					Flag = false
@@ -75,7 +75,7 @@ return function(p1) --[[ Line: 16 | Named "createOpenFriendsChatConversation" ]]
 			end)
 			Promise:andThen(p3, p4)
 		end)
-		Promise:finally(function() --[[ Line: 87 ]]
+		Promise:finally(function()
 			-- upvalues: Promise (copy), PromiseModule (upval), NewPromise (copy)
 			if Promise:getStatus() == PromiseModule.Status.Cancelled then
 				NewPromise:cancel()

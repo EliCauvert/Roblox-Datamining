@@ -2,31 +2,31 @@
 local TweenService = game:GetService("TweenService")
 
 return {
-	setupControl = function(p1) --[[ Line: 10 ]]
+	setupControl = function(p1)
 		-- upvalues: Mouse (copy), TweenService (copy)
 		local Timestamp = os.time()
 		local Flag = false
 		local Flag1 = false
-		Mouse.Move:Connect(function() --[[ Line: 15 ]]
+		Mouse.Move:Connect(function()
 			-- upvalues: Timestamp (ref)
 			Timestamp = os.time()
 		end)
-		p1.ControlBarContainer.MouseEnter:Connect(function() --[[ Line: 19 ]]
+		p1.ControlBarContainer.MouseEnter:Connect(function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end)
-		p1.ControlBarContainer.MouseLeave:Connect(function() --[[ Line: 23 ]]
+		p1.ControlBarContainer.MouseLeave:Connect(function()
 			-- upvalues: Flag (ref)
 			Flag = false
 		end)
 		local CreateResult = nil
 		
-		local function createTween() --[[ Line: 29 ]]
+		local function createTween()
 			-- upvalues: CreateResult (ref), TweenService (upval), p1 (copy), createTween (copy)
 			CreateResult = TweenService:Create(p1.ControlBarContainer, TweenInfo.new(2), { Position = p1.ControlBarContainerNonVisiblePosition })
 			
 			if CreateResult then
-				CreateResult.Completed:Connect(function() --[[ Line: 36 ]]
+				CreateResult.Completed:Connect(function()
 					-- upvalues: createTween (upval)
 					createTween()
 				end)
@@ -38,7 +38,7 @@ return {
 		end
 		
 		createTween()
-		task.spawn(function() --[[ Line: 45 ]]
+		task.spawn(function()
 			-- upvalues: CreateResult (ref), Flag (ref), Timestamp (ref), Flag1 (ref), p1 (copy)
 			while true do
 				if not CreateResult then

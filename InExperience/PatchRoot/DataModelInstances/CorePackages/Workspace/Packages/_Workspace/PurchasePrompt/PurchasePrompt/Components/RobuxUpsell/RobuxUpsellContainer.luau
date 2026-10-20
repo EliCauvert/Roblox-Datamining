@@ -54,19 +54,19 @@ local GetBlackbirdUpsellBannerProductInfoModule = require(PurchasePrompt.Utils.g
 local StartRobuxUpsellPlusPurchaseModule = require(PurchasePrompt.Utils.startRobuxUpsellPlusPurchase)
 local ExtendResult = Roact.Component:extend(script.Name)
 
-function ExtendResult.init(p1) --[[ Line: 71 ]]
+function ExtendResult.init(p1)
 	-- upvalues: FFlagEnableInExperienceOffersPurchaseFlow (copy), RequestTypeModule (copy), AppPage (copy), StartRobuxUpsellPlusPurchaseModule (copy)
 	p1.state = { screenSize = Vector2.new(0, 0) }
 	p1.isRobloxPlusUpsellStarting = false
 	
-	function p1.changeScreenSize(Frame: Frame) --[[ Line: 80 ]]
+	function p1.changeScreenSize(Frame: Frame)
 		-- upvalues: p1 (copy)
 		if p1.state.screenSize ~= Frame.AbsoluteSize then
 			p1:setState({ screenSize = Frame.AbsoluteSize })
 		end
 	end
 	
-	function p1:fetchCartPricingForPurchasePrompt(p2) --[[ Line: 87 ]]
+	function p1:fetchCartPricingForPurchasePrompt(p2)
 		-- upvalues: p1 (copy), FFlagEnableInExperienceOffersPurchaseFlow (upval), RequestTypeModule (upval)
 		if p2 == nil then
 			return nil
@@ -77,17 +77,17 @@ function ExtendResult.init(p1) --[[ Line: 71 ]]
 		end
 	end
 	
-	function p1.navigateToBuyRobux() --[[ Line: 105 ]]
+	function p1.navigateToBuyRobux()
 		-- upvalues: p1 (copy), AppPage (upval)
 		p1.props.navigation.navigate(AppPage.PurchaseRobux)
 	end
 	
-	function p1.navigateToTermsOfUse() --[[ Line: 109 ]]
+	function p1.navigateToTermsOfUse()
 		-- upvalues: p1 (copy)
 		p1.props.openTermsOfUse(p1.props.navigation)
 	end
 	
-	function p1.openRobloxPlusUpsell() --[[ Line: 113 ]]
+	function p1.openRobloxPlusUpsell()
 		-- upvalues: p1 (copy), StartRobuxUpsellPlusPurchaseModule (upval)
 		if not p1.isRobloxPlusUpsellStarting then
 			p1.isRobloxPlusUpsellStarting = true
@@ -98,7 +98,7 @@ function ExtendResult.init(p1) --[[ Line: 71 ]]
 				onRobloxSubscriptionUpsellSuccess = p1.props.onRobloxSubscriptionUpsellSuccess,
 				retryPurchaseAfterUpsell = p1.props.retryPurchaseAfterUpsell,
 				completeRequest = p1.props.completeRequest,
-				onFlowEnded = function() --[[ Line: 126 ]]
+				onFlowEnded = function()
 					-- upvalues: p1 (upval)
 					p1.isRobloxPlusUpsellStarting = false
 				end
@@ -109,7 +109,7 @@ function ExtendResult.init(p1) --[[ Line: 71 ]]
 	end
 end
 
-function ExtendResult.getRobloxPlusPromptKey(p1) --[[ Line: 133 ]]
+function ExtendResult.getRobloxPlusPromptKey(p1)
 	local PurchaseFlowUUID = p1.props.purchaseFlowUUID
 	
 	if type(PurchaseFlowUUID) == "string" and PurchaseFlowUUID ~= "" then
@@ -122,14 +122,14 @@ function ExtendResult.getRobloxPlusPromptKey(p1) --[[ Line: 133 ]]
 	end
 end
 
-function ExtendResult.isRobuxUpsellModalVisible(p1): boolean --[[ Line: 146 ]]
+function ExtendResult.isRobuxUpsellModalVisible(p1): boolean
 	-- upvalues: PurchaseFlowModule (copy), PromptStateModule (copy)
 	local PurchaseFlow = p1.props.purchaseFlow
 	
 	return if PurchaseFlow == PurchaseFlowModule.RobuxUpsellV2 then p1.props.promptState == PromptStateModule.RobuxUpsell else PurchaseFlow == PurchaseFlowModule.LargeRobuxUpsell and p1.props.promptState == PromptStateModule.RobuxUpsell
 end
 
-function ExtendResult.createElement(CoreScriptsRootProvider) --[[ Line: 152 ]]
+function ExtendResult.createElement(CoreScriptsRootProvider)
 	-- upvalues: GetUpsellSuggestionsTypes (copy), GetBlackbirdUpsellBannerProductInfoModule (copy), PurchaseFlowModule (copy), FFlagEnableRobuxUpsellPlusButtonExperiment (copy), PromptStateModule (copy), IsLinksAllowedModule (copy), Roact (copy), RobuxUpsellOverlayModule (copy), UpsellSuggestionsAPIMaxPackages (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), GetPlayerPriceModule (copy), FFlagSkipBuyDelayForExperienceShopModule (copy), ExternalEventConnectionModule (copy), GuiService (copy), FFlagSetMenuOnPurchasePromptModule (copy)
 	local Props = CoreScriptsRootProvider.props
 	local State = CoreScriptsRootProvider.state
@@ -162,7 +162,7 @@ function ExtendResult.createElement(CoreScriptsRootProvider) --[[ Line: 152 ]]
 				upsellSuggestions = Props.robuxSuggestions,
 				selectedUpsellIndex = Props.robuxPackageSelection,
 				virtualItemBadgeType = Props.virtualItemBadgeType,
-				onUpsellSuggestionsSelected = function(p1) --[[ Line: 203 ]]
+				onUpsellSuggestionsSelected = function(p1)
 					-- upvalues: Props (copy)
 					Props.onUpsellSuggestionsSelected(Props.robuxSuggestions, p1, Props.virtualItemBadgeType, Props.experimentVariant)
 				end,
@@ -206,7 +206,7 @@ function ExtendResult.createElement(CoreScriptsRootProvider) --[[ Line: 152 ]]
 			}),
 			OnCoreGuiMenuOpened = Roact.createElement(ExternalEventConnectionModule, {
 				event = GuiService.MenuOpened,
-				callback = function() --[[ Line: 268 ]]
+				callback = function()
 					-- upvalues: FFlagSetMenuOnPurchasePromptModule (upval), CoreScriptsRootProvider (copy), Props (copy)
 					if FFlagSetMenuOnPurchasePromptModule and CoreScriptsRootProvider.menuOpenedBySelf then
 						CoreScriptsRootProvider.menuOpenedBySelf = false
@@ -221,7 +221,7 @@ function ExtendResult.createElement(CoreScriptsRootProvider) --[[ Line: 152 ]]
 	end
 end
 
-function ExtendResult.render(p1) --[[ Line: 279 ]]
+function ExtendResult.render(p1)
 	-- upvalues: FFlagSetMenuOnPurchasePromptModule (copy), GuiService (copy), GetFFLagUseCoreScriptsRootProviderForUpsellModalModule (copy), Roact (copy), CoreScriptsRootProvider (copy), ReactModule (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
 	local Element = p1:createElement()
 	
@@ -240,7 +240,7 @@ function ExtendResult.render(p1) --[[ Line: 279 ]]
 	}) else Element
 end
 
-return (ConnectToStoreModule(function(p1) --[[ Line: 315 ]]
+return (ConnectToStoreModule(function(p1)
 	-- upvalues: IsMockingPurchasesModule (copy), SelectedRobuxPackageModule (copy), FFlagSkipBuyDelayForExperienceShopModule (copy), SelectPriceModule (copy), SelectCartPricingResponseModule (copy), SelectIsCartPricingFetchingModule (copy), FFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal (copy)
 	local IsMockingPurchasesModule1 = IsMockingPurchasesModule(p1.promptRequest.requestType)
 	local CollectibleItemId = p1.productInfo.collectibleItemId
@@ -283,73 +283,73 @@ return (ConnectToStoreModule(function(p1) --[[ Line: 315 ]]
 		robloxSubscriptionProducts = p1.robloxSubscriptionProducts,
 		onRobloxSubscriptionUpsellSuccess = if FFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal and p1.purchaseCallbacks then p1.purchaseCallbacks.onRobloxSubscriptionUpsellSuccess else nil
 	}
-end, function(Callback) --[[ Line: 371 ]]
+end, function(Callback)
 	-- upvalues: PurchaseItemModule (copy), FetchCartPricingModule (copy), FFlagEnableInExperienceOffersPurchaseFlow (copy), FetchInGameItemCartPricingModule (copy), LaunchRobuxUpsellModule (copy), OpenRobuxStoreModule (copy), OpenSecuritySettingsModule (copy), OpenTermsOfUseModule (copy), InitiateUserPurchaseSettingsPrecheckModule (copy), GuiService (copy), CompleteRequestModule (copy), RetryPurchaseAfterUpsellModule (copy), SetPromptStateModule (copy), SetWindowStateModule (copy), PromptNativeUpsellSuggestionsModule (copy), SendEventModule (copy), SetPostPurchaseActionsModule (copy)
 	return {
-		purchaseItem = function() --[[ Line: 373 ]]
+		purchaseItem = function()
 			-- upvalues: Callback (copy), PurchaseItemModule (upval)
 			return Callback(PurchaseItemModule())
 		end,
-		fetchCartPricing = function(p1) --[[ Line: 376 ]]
+		fetchCartPricing = function(p1)
 			-- upvalues: Callback (copy), FetchCartPricingModule (upval)
 			return Callback(FetchCartPricingModule(p1))
 		end,
-		fetchInGameItemCartPricing = if FFlagEnableInExperienceOffersPurchaseFlow then function(p1) --[[ Line: 380 ]]
+		fetchInGameItemCartPricing = if FFlagEnableInExperienceOffersPurchaseFlow then function(p1)
 			-- upvalues: Callback (copy), FetchInGameItemCartPricingModule (upval)
 			return Callback(FetchInGameItemCartPricingModule(p1))
 		end else nil,
-		promptRobuxPurchase = function() --[[ Line: 384 ]]
+		promptRobuxPurchase = function()
 			-- upvalues: Callback (copy), LaunchRobuxUpsellModule (upval)
 			return Callback(LaunchRobuxUpsellModule())
 		end,
-		openRobuxStore = function() --[[ Line: 387 ]]
+		openRobuxStore = function()
 			-- upvalues: Callback (copy), OpenRobuxStoreModule (upval)
 			return Callback(OpenRobuxStoreModule())
 		end,
-		openSecuritySettings = function() --[[ Line: 390 ]]
+		openSecuritySettings = function()
 			-- upvalues: Callback (copy), OpenSecuritySettingsModule (upval)
 			return Callback(OpenSecuritySettingsModule())
 		end,
-		openTermsOfUse = function(p1) --[[ Line: 393 ]]
+		openTermsOfUse = function(p1)
 			-- upvalues: Callback (copy), OpenTermsOfUseModule (upval)
 			return Callback(OpenTermsOfUseModule(p1))
 		end,
-		dispatchFetchPurchaseWarning = function() --[[ Line: 396 ]]
+		dispatchFetchPurchaseWarning = function()
 			-- upvalues: Callback (copy), InitiateUserPurchaseSettingsPrecheckModule (upval)
 			return Callback(InitiateUserPurchaseSettingsPrecheckModule())
 		end,
-		completeRequest = function() --[[ Line: 399 ]]
+		completeRequest = function()
 			-- upvalues: GuiService (upval), Callback (copy), CompleteRequestModule (upval)
 			GuiService.SelectedCoreObject = nil
 			
 			return Callback(CompleteRequestModule())
 		end,
-		retryPurchaseAfterUpsell = function() --[[ Line: 403 ]]
+		retryPurchaseAfterUpsell = function()
 			-- upvalues: Callback (copy), RetryPurchaseAfterUpsellModule (upval)
 			return Callback(RetryPurchaseAfterUpsellModule())
 		end,
-		setPromptState = function(p1) --[[ Line: 406 ]]
+		setPromptState = function(p1)
 			-- upvalues: Callback (copy), SetPromptStateModule (upval)
 			return Callback(SetPromptStateModule(p1))
 		end,
-		setWindowState = function(p1) --[[ Line: 409 ]]
+		setWindowState = function(p1)
 			-- upvalues: Callback (copy), SetWindowStateModule (upval)
 			return Callback(SetWindowStateModule(p1))
 		end,
-		onUpsellSuggestionsSelected = function(p1, p2, p3, p4) --[[ Line: 412 ]]
+		onUpsellSuggestionsSelected = function(p1, p2, p3, p4)
 			-- upvalues: Callback (copy), PromptNativeUpsellSuggestionsModule (upval)
 			return Callback(PromptNativeUpsellSuggestionsModule(p1, p2, p3, p4))
 		end,
-		onAnalyticEvent = function(p1, p2) --[[ Line: 420 ]]
+		onAnalyticEvent = function(p1, p2)
 			-- upvalues: Callback (copy), SendEventModule (upval)
 			return Callback(SendEventModule(p1, p2))
 		end,
-		setPostPurchaseActions = function(p1) --[[ Line: 423 ]]
+		setPostPurchaseActions = function(p1)
 			-- upvalues: Callback (copy), SetPostPurchaseActionsModule (upval)
 			Callback(SetPostPurchaseActionsModule(p1))
 		end
 	}
-end)(function(p1) --[[ Line: 303 ]]
+end)(function(p1)
 	-- upvalues: NavigationModule (copy), Roact (copy), ExtendResult (copy), CryoModule (copy)
 	return Roact.createElement(ExtendResult, CryoModule.Dictionary.join(p1, { navigation = NavigationModule.useNavigation() }))
 end))

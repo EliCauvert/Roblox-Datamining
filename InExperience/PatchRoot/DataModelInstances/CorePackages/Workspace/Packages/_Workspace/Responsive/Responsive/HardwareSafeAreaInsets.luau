@@ -16,13 +16,13 @@ local ScreenGui = nil
 local ScreenGui1 = nil
 local config1 = { left = 0, top = 0, right = 0, bottom = 0 }
 
-function diffInsets(p1, p2): boolean --[[ Line: 41 ]]
+function diffInsets(p1, p2): boolean
 	return p1.top ~= p2.top or (p1.bottom ~= p2.bottom or p1.left ~= p2.left) or p1.right ~= p2.right
 end
 
 local DeferredThread = nil
 
-function handleSizeChange() --[[ Line: 46 ]]
+function handleSizeChange()
 	-- upvalues: config1 (ref), DeferredThread (ref), NewResult (copy)
 	local HardwareSafeAreaInsets = getHardwareSafeAreaInsets()
 	
@@ -32,7 +32,7 @@ function handleSizeChange() --[[ Line: 46 ]]
 		if DeferredThread then
 			task.cancel(DeferredThread)
 		end
-		DeferredThread = task.defer(function() --[[ Line: 53 ]]
+		DeferredThread = task.defer(function()
 			-- upvalues: DeferredThread (upval), NewResult (upval), HardwareSafeAreaInsets (copy)
 			DeferredThread = nil
 			NewResult:fire(HardwareSafeAreaInsets)
@@ -40,7 +40,7 @@ function handleSizeChange() --[[ Line: 46 ]]
 	end
 end
 
-function init() --[[ Line: 60 ]]
+function init()
 	-- upvalues: Flag (ref), ScreenGui (ref), CoreGui (copy), ScreenGui1 (ref)
 	if Flag then return end
 	if not ScreenGui then
@@ -63,7 +63,7 @@ function init() --[[ Line: 60 ]]
 	Flag = true
 end
 
-function getHardwareSafeAreaInsets() --[[ Line: 87 ]]
+function getHardwareSafeAreaInsets()
 	-- upvalues: ScreenGui (ref), ScreenGui1 (ref), config (copy), UserInputService (copy)
 	local AbsolutePosition = ScreenGui.AbsolutePosition
 	local AbsoluteSize: number = ScreenGui.AbsoluteSize
@@ -85,23 +85,23 @@ function getHardwareSafeAreaInsets() --[[ Line: 87 ]]
 end
 
 return {
-	connect = function(_, p1) --[[ Line: 111 ]]
+	connect = function(_, p1)
 		-- upvalues: NewResult (copy)
 		init()
 		
 		return NewResult:connect(p1)
 	end,
-	deviceInsets = function() --[[ Line: 115 ]]
+	deviceInsets = function()
 		-- upvalues: config1 (ref)
 		init()
 		
 		return config1
 	end,
 	diffInsets = diffInsets,
-	hasExtraPlatformInset = function(): boolean --[[ Line: 120 ]]
+	hasExtraPlatformInset = function(): boolean
 		return false
 	end,
-	fullscreenGui = function() --[[ Line: 123 ]]
+	fullscreenGui = function()
 		-- upvalues: ScreenGui (ref)
 		init()
 		

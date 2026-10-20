@@ -11,7 +11,7 @@ local FillBehavior = FoundationModule.Enums.FillBehavior
 local InputSize = FoundationModule.Enums.InputSize
 local _UDim2 = UDim2.new(0.25, -3, 0, 1)
 
-local function renderTile(LayoutOrder, Element) --[[ Line: 33 ]]
+local function renderTile(LayoutOrder, Element)
 	-- upvalues: ReactModule (copy), View (copy), _UDim2 (copy)
 	return ReactModule.createElement(View, {
 		LayoutOrder = LayoutOrder,
@@ -25,7 +25,7 @@ local function renderTile(LayoutOrder, Element) --[[ Line: 33 ]]
 	}, { Content = Element })
 end
 
-local function _(Text1) --[[ Line: 48 | Named "renderEmptyState" ]]
+local function _(Text1)
 	-- upvalues: ReactModule (copy), Text (copy)
 	return ReactModule.createElement(Text, {
 		LayoutOrder = 1,
@@ -34,14 +34,14 @@ local function _(Text1) --[[ Line: 48 | Named "renderEmptyState" ]]
 	})
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 56 | Named "ChatCaptureGrid" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), renderTile (copy), View (copy), CaptureGridItemModule (copy), Text (copy), Button (copy), FillBehavior (copy), InputSize (copy), ButtonVariant (copy)
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): number --[[ Line: 57 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): number
 		-- upvalues: p1 (copy)
 		return if p1.shouldProgressivelyLoad then 0 else #p1.captures
 	end)
 	local UseRefResult = ReactModule.useRef(UseStateResult)
-	ReactModule.useEffect(function() --[[ Line: 62 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseRefResult (copy), UseStateResult2 (copy)
 		if p1.isLoading then
 			UseRefResult.current = 0
@@ -56,7 +56,7 @@ return ReactModule.memo(function(p1) --[[ Line: 56 | Named "ChatCaptureGrid" ]]
 			return
 		end
 		local Flag = false
-		task.spawn(function() --[[ Line: 75 ]]
+		task.spawn(function()
 			-- upvalues: UseRefResult (upval), p1 (upval), Flag (ref), UseStateResult2 (upval)
 			task.wait(0.3)
 			
@@ -69,7 +69,7 @@ return ReactModule.memo(function(p1) --[[ Line: 56 | Named "ChatCaptureGrid" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 87 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end

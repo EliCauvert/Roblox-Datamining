@@ -2,7 +2,7 @@
 local _ = require(script.Parent.ChatPlatformTypes)
 local CreateDefaultChatPlatformValueModule = require(script.Parent.createDefaultChatPlatformValue)
 
-return function(p1) --[[ Line: 29 | Named "createMockChatPlatformValue" ]]
+return function(p1)
 	-- upvalues: CreateDefaultChatPlatformValueModule (copy), SignalsModule (copy)
 	local P0 = p1 or {}
 	local DefaultChatPlatformValueModule = CreateDefaultChatPlatformValueModule()
@@ -12,7 +12,7 @@ return function(p1) --[[ Line: 29 | Named "createMockChatPlatformValue" ]]
 	local TransparencyStore = P0.transparencyStore
 	
 	if TransparencyStore ~= nil then
-		GetTransparencyStore = function(_) --[[ Line: 46 ]]
+		GetTransparencyStore = function(_)
 			-- upvalues: TransparencyStore (copy)
 			return TransparencyStore
 		end

@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("NetworkingVirtualEvents").types)
 
-return function(Id) --[[ Line: 5 | Named "createMockVirtualEventResponse" ]]
+return function(Id)
 	return {
 		title = "Event Title",
 		description = "Event description...",

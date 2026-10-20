@@ -8,14 +8,14 @@ return {
 		description = "",
 		lastUpdated = { 2026, 10, 7 },
 		backendsList = {
-			DefaultTelemetryEventsModule.namedCounterConfigurationAndFormat("AppChat.Navigation.Visible", function(p1) --[[ Line: 31 ]]
+			DefaultTelemetryEventsModule.namedCounterConfigurationAndFormat("AppChat.Navigation.Visible", function(p1)
 				return {
 					isChatEnabled = p1.isChatEnabled,
 					isChatLoading = p1.isChatLoading,
 					isInConversation = p1.isInConversation
 				}
 			end),
-			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 39 ]]
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return {
 					isChatEnabled = p1.isChatEnabled,
 					isChatLoading = p1.isChatLoading
@@ -28,13 +28,13 @@ return {
 		description = "",
 		lastUpdated = { 2026, 7, 7 },
 		backendsList = {
-			DefaultTelemetryEventsModule.namedCounterConfigurationAndFormat("AppChat.Navigation.Closed", function(p1) --[[ Line: 54 ]]
+			DefaultTelemetryEventsModule.namedCounterConfigurationAndFormat("AppChat.Navigation.Closed", function(p1)
 				return {
 					isChatEnabled = p1.isChatEnabled,
 					isChatLoading = p1.isChatLoading
 				}
 			end),
-			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 61 ]]
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return {
 					isChatEnabled = p1.isChatEnabled,
 					isChatLoading = p1.isChatLoading

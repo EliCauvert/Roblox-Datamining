@@ -11,17 +11,17 @@ local RobloxAppSessionizationModule = require(Parent.RobloxAppSessionization)
 local SetGamePlaySessionFunction = RobloxAppSessionizationModule.SetGamePlaySession
 local SessionType = RobloxAppSessionizationModule.SessionType
 
-return function(p1) --[[ Line: 30 | Named "InstantPlayLauncher" ]]
+return function(p1)
 	-- upvalues: UseRoactServiceFunction (copy), RoactNetworking (copy), AppSessionService (copy), UsePlayButtonStateFunction (copy), ReactModule (copy), UseOnPlayButtonCallbackFunction (copy), PlayButtonStates (copy), SetGamePlaySessionFunction (copy), SessionType (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(AppSessionService)
 	local UsePlayButtonStateResult = UsePlayButtonStateFunction(UseRoactServiceResult, p1.universeId, nil, true)
 	local UseRefResult = ReactModule.useRef(false)
-	local UseOnPlayButtonCallbackResult = UseOnPlayButtonCallbackFunction(p1.universeId, p1.referralSource, p1.eventContext, nil, p1.launchSource, ReactModule.useMemo(function() --[[ Line: 36 ]]
+	local UseOnPlayButtonCallbackResult = UseOnPlayButtonCallbackFunction(p1.universeId, p1.referralSource, p1.eventContext, nil, p1.launchSource, ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		return { launchData = p1.launchData }
 	end, { p1.launchData }), p1.placeId)
-	ReactModule.useEffect(function() --[[ Line: 53 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UsePlayButtonStateResult (copy), PlayButtonStates (upval), SetGamePlaySessionFunction (upval), UseRoactServiceResult1 (copy), SessionType (upval), UseOnPlayButtonCallbackResult (copy), p1 (copy)
 		if UseRefResult.current or UsePlayButtonStateResult.playButtonState == PlayButtonStates.Loading then return end
 		UseRefResult.current = true

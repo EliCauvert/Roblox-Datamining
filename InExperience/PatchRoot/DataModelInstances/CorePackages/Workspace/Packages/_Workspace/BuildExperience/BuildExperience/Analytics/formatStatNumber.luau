@@ -3,12 +3,12 @@ local NumberLocalization = require(BuildExperience.Parent.Localization).NumberLo
 local AnalyticsUnitModule = require(BuildExperience.Analytics.AnalyticsUnit)
 local RoundToDecimalsModule = require(BuildExperience.Analytics.roundToDecimals)
 
-local function formatNumber(p1, p2, p3) --[[ Line: 25 ]]
+local function formatNumber(p1, p2, p3)
 	-- upvalues: NumberLocalization (copy)
 	return if p2 == "Regular" then NumberLocalization.localizeDecimal(p1, p3, 2) else NumberLocalization.abbreviate(p1, p3)
 end
 
-return function(p1: number, Minutes, p2, p3) --[[ Line: 32 | Named "formatStatNumber" ]]
+return function(p1: number, Minutes, p2, p3)
 	-- upvalues: AnalyticsUnitModule (copy), NumberLocalization (copy), formatNumber (copy), RoundToDecimalsModule (copy)
 	if Minutes == AnalyticsUnitModule.Minutes then
 		return NumberLocalization.localizeDecimal(p1, p3, 2)

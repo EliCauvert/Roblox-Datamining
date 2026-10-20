@@ -2,7 +2,7 @@
 local WaitForChildOfClassTimeout: number = game:DefineFastInt("WaitForChildOfClassTimeout", 0)
 
 if WaitForChildOfClassTimeout > 0 then
-	function CoreUtilityModule.waitForChildOfClass(Object, ClassName) --[[ Line: 5 ]]
+	function CoreUtilityModule.waitForChildOfClass(Object, ClassName)
 		-- upvalues: WaitForChildOfClassTimeout (copy)
 		local ClassName1 = Object:FindFirstChildOfClass(ClassName)
 		local NewCurrentTime = tick() + WaitForChildOfClassTimeout
@@ -13,7 +13,7 @@ if WaitForChildOfClassTimeout > 0 then
 		return ClassName1
 	end
 else
-	function CoreUtilityModule.waitForChildOfClass(Object, ClassName) --[[ Line: 15 ]]
+	function CoreUtilityModule.waitForChildOfClass(Object, ClassName)
 		local ClassName1 = Object:FindFirstChildOfClass(ClassName)
 		while not ClassName1 or ClassName1.ClassName ~= ClassName do
 			ClassName1 = Object.ChildAdded:Wait()
@@ -21,7 +21,7 @@ else
 		return ClassName1
 	end
 end
-function CoreUtilityModule.waitForChildWhichIsA(Object, ClassName) --[[ Line: 24 ]]
+function CoreUtilityModule.waitForChildWhichIsA(Object, ClassName)
 	local ClassName1 = Object:FindFirstChildWhichIsA(ClassName)
 	while not ClassName1 or not ClassName1:IsA(ClassName) do
 		ClassName1 = Object.ChildAdded:Wait()

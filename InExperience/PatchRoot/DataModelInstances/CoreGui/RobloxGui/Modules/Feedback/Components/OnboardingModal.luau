@@ -16,42 +16,42 @@ local OnboardingModal = RoactModule.PureComponent:extend("OnboardingModal")
 local FFlagTopBarSignalizeScreenSize = require(CorePackages.Workspace.Packages.CoreGuiCommon).Flags.FFlagTopBarSignalizeScreenSize
 local GetFFlagEnableSendImageFeedbackToBackendModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Flags.GetFFlagEnableSendImageFeedbackToBackend)
 
-function OnboardingModal.init(p1) --[[ Line: 40 ]]
+function OnboardingModal.init(p1)
 	-- upvalues: ExperienceStateCaptureService (copy), FFlagTopBarSignalizeScreenSize (copy), DisplayModule (copy), SignalsModule (copy)
-	function p1.onDismiss() --[[ Line: 41 ]]
+	function p1.onDismiss()
 		-- upvalues: p1 (copy)
 		p1.props.showOnboardingModal(false)
 	end
 	
-	function p1.onCancel() --[[ Line: 45 ]]
+	function p1.onCancel()
 		-- upvalues: ExperienceStateCaptureService (upval)
 		ExperienceStateCaptureService:ToggleCaptureMode()
 	end
 	
 	if FFlagTopBarSignalizeScreenSize then
 		local GetViewportSizeFunction = DisplayModule.GetDisplayStore(false).getViewportSize
-		p1.disposeScreenSize = SignalsModule.createEffect(function(p2) --[[ Line: 52 ]]
+		p1.disposeScreenSize = SignalsModule.createEffect(function(p2)
 			-- upvalues: p1 (copy), GetViewportSizeFunction (copy)
 			p1:setState({ screenSize = GetViewportSizeFunction(p2) })
 		end)
 	end
 end
 
-function OnboardingModal.willUnmount(p1) --[[ Line: 60 ]]
+function OnboardingModal.willUnmount(p1)
 	-- upvalues: FFlagTopBarSignalizeScreenSize (copy)
 	if FFlagTopBarSignalizeScreenSize then
 		p1.disposeScreenSize()
 	end
 end
 
-function OnboardingModal.render(p1) --[[ Line: 66 ]]
+function OnboardingModal.render(p1)
 	-- upvalues: WithLocalizationFunction (copy), GetFFlagEnableSendImageFeedbackToBackendModule (copy), RoactModule (copy), ModalDialogModule (copy), FFlagTopBarSignalizeScreenSize (copy), ButtonStack (copy), ButtonType (copy), ThemedTextLabelModule (copy)
 	return WithLocalizationFunction({
 		mainHeader = "CoreScripts.Feedback.Onboarding.MainHeader",
 		cancel = "CoreScripts.Feedback.Onboarding.Cancel",
 		start = "CoreScripts.Feedback.Onboarding.Start",
 		instructionLabel = if GetFFlagEnableSendImageFeedbackToBackendModule() then "CoreScripts.Feedback.Onboarding.InstructionsWithImage" else "CoreScripts.Feedback.Onboarding.Instructions"
-	})(function(p2) --[[ Line: 74 ]]
+	})(function(p2)
 		-- upvalues: RoactModule (upval), ModalDialogModule (upval), p1 (copy), FFlagTopBarSignalizeScreenSize (upval), ButtonStack (upval), ButtonType (upval), ThemedTextLabelModule (upval)
 		return RoactModule.createElement(ModalDialogModule, {
 			maxHeight = 200,
@@ -105,16 +105,16 @@ function OnboardingModal.render(p1) --[[ Line: 66 ]]
 	end)
 end
 
-return RoactRoduxModule.connect(function(p1) --[[ Line: 133 ]]
+return RoactRoduxModule.connect(function(p1)
 	-- upvalues: FFlagTopBarSignalizeScreenSize (copy)
 	return {
 		screenSize = if FFlagTopBarSignalizeScreenSize then nil else p1.displayOptions.screenSize,
 		visible = p1.common.showOnboardingModal
 	}
-end, function(Callback) --[[ Line: 138 ]]
+end, function(Callback)
 	-- upvalues: ShowOnboardingModalThunkModule (copy)
 	return {
-		showOnboardingModal = function(p1) --[[ Line: 140 ]]
+		showOnboardingModal = function(p1)
 			-- upvalues: Callback (copy), ShowOnboardingModalThunkModule (upval)
 			Callback(ShowOnboardingModalThunkModule(p1))
 		end

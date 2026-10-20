@@ -17,7 +17,7 @@ local config = {
 	[ContextTypeModule.Contacts] = true
 }
 
-local function _() --[[ Line: 28 | Named "resolveTargetUserId" ]]
+local function _()
 	-- upvalues: LocalUserIdStore (copy), GetLocalPlayerUserIdFunction (copy)
 	local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
 	
@@ -30,7 +30,7 @@ local function _() --[[ Line: 28 | Named "resolveTargetUserId" ]]
 	end
 end
 
-local function normalizeRecommendation(p1) --[[ Line: 37 ]]
+local function normalizeRecommendation(p1)
 	-- upvalues: config (copy)
 	local ContactId = if p1.contactId and p1.contactId ~= "" then p1.contactId else nil
 	
@@ -51,13 +51,13 @@ local function normalizeRecommendation(p1) --[[ Line: 37 ]]
 	}
 end
 
-return function() --[[ Line: 62 | Named "createFriendsRecommendationsStore" ]]
+return function()
 	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), RequestsModule (copy), LocalUserIdStore (copy), GetLocalPlayerUserIdFunction (copy), CryoModule (copy), normalizeRecommendation (copy), FFlagAddFriendsPageUseSections (copy)
 	local DataCacheModule = CreateDataCacheModule()
 	local DataResolverModule = CreateDataResolverModule({
 		supportsMultiGet = false,
 		cache = DataCacheModule,
-		fetchFn = function(p1, _) --[[ Line: 67 ]]
+		fetchFn = function(p1, _)
 			-- upvalues: RequestsModule (upval), LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), CryoModule (upval), normalizeRecommendation (upval)
 			local GetFriendsRecommendationsFunction = RequestsModule.GetFriendsRecommendations
 			local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
@@ -69,12 +69,12 @@ return function() --[[ Line: 62 | Named "createFriendsRecommendationsStore" ]]
 			else
 				CurrentUserId1 = CurrentUserId
 			end
-			return GetFriendsRecommendationsFunction(CurrentUserId1, p1):andThen(function(Result) --[[ Line: 69 ]]
+			return GetFriendsRecommendationsFunction(CurrentUserId1, p1):andThen(function(Result)
 				-- upvalues: CryoModule (upval), normalizeRecommendation (upval)
 				local MapResult = if Result.data then CryoModule.List.map(Result.data, normalizeRecommendation) else nil
 				
 				if MapResult then
-					table.sort(MapResult, function(A, B): boolean --[[ Line: 75 ]]
+					table.sort(MapResult, function(A, B): boolean
 						return (A.rank or 0) < (B.rank or 0)
 					end)
 				end
@@ -87,7 +87,7 @@ return function() --[[ Line: 62 | Named "createFriendsRecommendationsStore" ]]
 	})
 	
 	return {
-		getFriendsRecommendations = function(p1, p2) --[[ Line: 88 ]]
+		getFriendsRecommendations = function(p1, p2)
 			-- upvalues: DataResolverModule (copy), FFlagAddFriendsPageUseSections (upval)
 			if p2 and p2.skipFetch then
 				return DataResolverModule.getCachedItem(p1)
@@ -97,11 +97,11 @@ return function() --[[ Line: 62 | Named "createFriendsRecommendationsStore" ]]
 			end
 			return DataResolverModule.getAndFetchItem(p1)
 		end,
-		refreshFriendsRecommendations = function(p1) --[[ Line: 105 ]]
+		refreshFriendsRecommendations = function(p1)
 			-- upvalues: DataResolverModule (copy)
 			return DataResolverModule.fetchItem(p1)
 		end,
-		removeFriendsRecommendationByUserId = function(p1, Id) --[[ Line: 111 ]]
+		removeFriendsRecommendationByUserId = function(p1, Id)
 			-- upvalues: DataResolverModule (copy), DataCacheModule (copy)
 			local DataResult = DataResolverModule.getCachedItem(p1).data(false)
 			
@@ -118,11 +118,11 @@ return function() --[[ Line: 62 | Named "createFriendsRecommendationsStore" ]]
 				recommendationRequestId = DataResult.recommendationRequestId
 			})
 		end,
-		clear = function() --[[ Line: 128 ]]
+		clear = function()
 			-- upvalues: DataResolverModule (copy)
 			DataResolverModule.clear()
 		end,
-		dispose = function() --[[ Line: 132 ]]
+		dispose = function()
 			-- upvalues: DataResolverModule (copy)
 			DataResolverModule.dispose()
 		end

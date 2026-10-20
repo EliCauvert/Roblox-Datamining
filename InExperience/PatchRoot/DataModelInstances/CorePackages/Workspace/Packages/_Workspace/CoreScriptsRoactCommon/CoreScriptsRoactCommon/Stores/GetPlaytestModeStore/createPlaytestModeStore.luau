@@ -15,16 +15,16 @@ local FFlagPlaytestModeExcludeBuildModeModule = require(CoreScriptsRoactCommon.F
 local FFlagPlaytestModeExcludeStudioModule = require(CoreScriptsRoactCommon.Flags.FFlagPlaytestModeExcludeStudio)
 local FFlagPlaytestModeIncludeTeamTestModule = require(CoreScriptsRoactCommon.Flags.FFlagPlaytestModeIncludeTeamTest)
 
-return function() --[[ Line: 32 ]]
+return function()
 	-- upvalues: CreateSignalFunction (copy), SignalsModule (copy), GetIsPrivatePlaytesterStoreFunction (copy), GetUniverseConfigurationStoreFunction (copy), PrivacyType (copy), DebugEnablePlaytestMode (copy), FFlagPlaytestModeExcludeBuildModeModule (copy), BuildModeLaunchModule (copy), FFlagPlaytestModeIncludeTeamTestModule (copy), RunService (copy), FFlagAddPlaytestModeAnalyticsModule (copy), PlaytestModeAnalyticsModule (copy), FFlagPlaytestModeExcludeStudioModule (copy)
 	local Signal, Signal2 = CreateSignalFunction(false)
-	local Computed = SignalsModule.createComputed(function(p1): boolean --[[ Line: 35 ]]
+	local Computed = SignalsModule.createComputed(function(p1): boolean
 		-- upvalues: GetIsPrivatePlaytesterStoreFunction (upval)
 		local DataResult = GetIsPrivatePlaytesterStoreFunction(p1).getAndFetch(game.GameId).data(p1)
 		
 		return DataResult ~= nil and DataResult.isPlaytester == true
 	end)
-	local Computed1 = SignalsModule.createComputed(function(p1): boolean --[[ Line: 41 ]]
+	local Computed1 = SignalsModule.createComputed(function(p1): boolean
 		-- upvalues: GetUniverseConfigurationStoreFunction (upval), PrivacyType (upval)
 		local DataResult = GetUniverseConfigurationStoreFunction(p1).getAndFetchSummary(game.GameId).data(p1)
 		
@@ -32,7 +32,7 @@ return function() --[[ Line: 32 ]]
 	end)
 	
 	return {
-		getIsPlaytestMode = SignalsModule.createComputed(function(p1): boolean --[[ Line: 47 ]]
+		getIsPlaytestMode = SignalsModule.createComputed(function(p1): boolean
 			-- upvalues: DebugEnablePlaytestMode (upval), FFlagPlaytestModeExcludeBuildModeModule (upval), BuildModeLaunchModule (upval), FFlagPlaytestModeIncludeTeamTestModule (upval), RunService (upval), FFlagAddPlaytestModeAnalyticsModule (upval), PlaytestModeAnalyticsModule (upval), Computed (copy), Signal (copy), Computed1 (copy), FFlagPlaytestModeExcludeStudioModule (upval)
 			if DebugEnablePlaytestMode then
 				return true

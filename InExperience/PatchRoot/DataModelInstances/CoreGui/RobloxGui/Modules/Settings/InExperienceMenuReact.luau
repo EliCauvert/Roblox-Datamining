@@ -17,7 +17,7 @@ local Localization = require(CorePackages.Workspace.Packages.InExperienceLocales
 local FoundationProvider = FoundationModule.FoundationProvider
 local config = { colorMode = FoundationModule.Enums.ColorMode.Dark }
 
-return ReactModule.memo(function(p1) --[[ Line: 38 | Named "InExperienceMenuReact" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: GetLocalizationServiceStoreFunction (copy), SignalsReactModule (copy), Localization (copy), ReactModule (copy), ServiceProvider (copy), AppEventIngestService (copy), EventIngest (copy), EventIngestService (copy), RoactAnalytics (copy), Analytics (copy), LocalizationProvider (copy), FoundationProvider (copy), config (copy), UtilsModule (copy)
 	return ReactModule.createElement(ServiceProvider, {
 		services = {

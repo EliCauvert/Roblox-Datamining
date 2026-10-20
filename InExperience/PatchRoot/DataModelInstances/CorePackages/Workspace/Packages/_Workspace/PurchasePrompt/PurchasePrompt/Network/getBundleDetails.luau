@@ -10,7 +10,7 @@ local ResolveRefreshedExpectedPriceModule = require(Parent.Utils.resolveRefreshe
 local FFlagFixTimedOptionRefreshModule = require(Parent.Flags.FFlagFixTimedOptionRefresh)
 local ResolveRefreshedProductInfoModule = require(Parent.Utils.resolveRefreshedProductInfo)
 
-local function convertDiscountInfoToPriceDiscountDetails(DiscountInformation) --[[ Line: 26 ]]
+local function convertDiscountInfoToPriceDiscountDetails(DiscountInformation)
 	if not DiscountInformation or type(DiscountInformation.discounts) ~= "table" then
 		return nil
 	end
@@ -26,7 +26,7 @@ local function convertDiscountInfoToPriceDiscountDetails(DiscountInformation) --
 	return List
 end
 
-local function normalizeBundleFields(p1) --[[ Line: 41 ]]
+local function normalizeBundleFields(p1)
 	-- upvalues: convertDiscountInfoToPriceDiscountDetails (copy)
 	if not p1.UserBasePriceInRobux then
 		local DiscountInformation = p1.discountInformation
@@ -38,18 +38,18 @@ local function normalizeBundleFields(p1) --[[ Line: 41 ]]
 	return p1
 end
 
-return function(p1, p2, p3, Callback) --[[ Line: 58 | Named "getBundleDetails" ]]
+return function(p1, p2, p3, Callback)
 	-- upvalues: FFlagEnableFetchCartPricingDuringInExperience (copy), normalizeBundleFields (copy), PromiseModule (copy), PurchaseErrorModule (copy), FFlagRefreshPriceOnRetryAfterUpsellModule (copy), GetCatalogItemDetailsModule (copy), GetResellersModule (copy), FFlagFixTimedOptionRefreshModule (copy), ResolveRefreshedProductInfoModule (copy), ResolveRefreshedExpectedPriceModule (copy)
-	local BundleDetails = p1.getBundleDetails(p2):andThen(function(Result) --[[ Line: 66 ]]
+	local BundleDetails = p1.getBundleDetails(p2):andThen(function(Result)
 		-- upvalues: FFlagEnableFetchCartPricingDuringInExperience (upval), Callback (copy), normalizeBundleFields (upval), PromiseModule (upval)
-		return if FFlagEnableFetchCartPricingDuringInExperience and Result.collectibleItemDetail and Result.collectibleItemDetail.collectibleItemId and Callback then Callback(Result.collectibleItemDetail.collectibleItemId):andThen(function() --[[ Line: 74 ]]
+		return if FFlagEnableFetchCartPricingDuringInExperience and Result.collectibleItemDetail and Result.collectibleItemDetail.collectibleItemId and Callback then Callback(Result.collectibleItemDetail.collectibleItemId):andThen(function()
 			-- upvalues: normalizeBundleFields (upval), Result (copy)
 			return (normalizeBundleFields(Result))
-		end):catch(function() --[[ Line: 77 ]]
+		end):catch(function()
 			-- upvalues: normalizeBundleFields (upval), Result (copy)
 			return (normalizeBundleFields(Result))
 		end) else PromiseModule.resolve((normalizeBundleFields(Result)))
-	end):catch(function(_) --[[ Line: 83 ]]
+	end):catch(function(_)
 		-- upvalues: PromiseModule (upval), PurchaseErrorModule (upval)
 		return PromiseModule.reject(PurchaseErrorModule.UnknownFailure)
 	end)
@@ -61,17 +61,17 @@ return function(p1, p2, p3, Callback) --[[ Line: 58 | Named "getBundleDetails" ]
 		return PromiseModule.all({
 			bundleDetails = BundleDetails,
 			refreshedExpectedPrice = PromiseModule.all({
-				catalogItemDetails = GetCatalogItemDetailsModule(p1, p2, "bundle"):catch(function() --[[ Line: 96 ]]
+				catalogItemDetails = GetCatalogItemDetailsModule(p1, p2, "bundle"):catch(function()
 					return nil
 				end),
-				resellersData = if CollectibleItemInstanceId and CollectibleItemInstanceId ~= "" and CollectibleItemId and CollectibleItemId ~= "" then GetResellersModule(p1, CollectibleItemId, 10):catch(function() --[[ Line: 103 ]]
+				resellersData = if CollectibleItemInstanceId and CollectibleItemInstanceId ~= "" and CollectibleItemId and CollectibleItemId ~= "" then GetResellersModule(p1, CollectibleItemId, 10):catch(function()
 					return nil
 				end) else PromiseModule.resolve(nil)
-			}):andThen(function(Result) --[[ Line: 107 ]]
+			}):andThen(function(Result)
 				-- upvalues: FFlagFixTimedOptionRefreshModule (upval), ResolveRefreshedProductInfoModule (upval), CollectibleItemInstanceId (copy), p3 (copy), ResolveRefreshedExpectedPriceModule (upval)
 				return if FFlagFixTimedOptionRefreshModule then ResolveRefreshedProductInfoModule(Result.catalogItemDetails, Result.resellersData, CollectibleItemInstanceId, p3.timedOptionDays) else ResolveRefreshedExpectedPriceModule(Result.catalogItemDetails, Result.resellersData, CollectibleItemInstanceId, p3.timedOptionDays)
 			end)
-		}):andThen(function(Result) --[[ Line: 127 ]]
+		}):andThen(function(Result)
 			-- upvalues: FFlagFixTimedOptionRefreshModule (upval)
 			local BundleDetails = Result.bundleDetails
 			

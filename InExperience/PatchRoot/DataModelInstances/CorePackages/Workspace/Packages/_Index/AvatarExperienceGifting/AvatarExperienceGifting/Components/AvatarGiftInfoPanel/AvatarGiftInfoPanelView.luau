@@ -9,12 +9,12 @@ local IconName = FoundationModule.Enums.IconName
 local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function _(p1): string --[[ Line: 36 | Named "robuxText" ]]
+local function _(p1): string
 	-- upvalues: GetIconRichTextFunction (copy), IconName (copy)
 	return `{GetIconRichTextFunction(IconName.Robux)} {p1}`
 end
 
-return ReactModule.memo(function(Frame) --[[ Line: 40 | Named "AvatarGiftInfoPanelView" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Image (copy), Text (copy), GetIconRichTextFunction (copy), IconName (copy), InfoTooltip (copy)
 	local UseTokensResult = UseTokensFunction()
 	local PriceText = Frame.priceText

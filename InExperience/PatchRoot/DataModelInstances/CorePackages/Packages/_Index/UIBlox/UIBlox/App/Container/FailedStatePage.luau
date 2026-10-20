@@ -15,7 +15,7 @@ FailedStatePage.validateProps = TModule.strictInterface({
 })
 FailedStatePage.defaultProps = { renderOnFailed = RenderOnFailedStyleModule.RetryButton }
 
-function FailedStatePage.render(p1) --[[ Line: 36 ]]
+function FailedStatePage.render(p1)
 	-- upvalues: RenderOnFailedStyleModule (copy), RoactModule (copy), EmptyStateModule (copy), ImagesModule (copy), ButtonModule (copy), ButtonTypeModule (copy)
 	if p1.props.renderOnFailed == RenderOnFailedStyleModule.EmptyStatePage then
 		return RoactModule.createElement(EmptyStateModule, {

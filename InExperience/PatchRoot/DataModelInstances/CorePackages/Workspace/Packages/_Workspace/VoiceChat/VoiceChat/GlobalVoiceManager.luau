@@ -8,7 +8,7 @@ local FFlagEnableCrossExperienceVoiceCaptureMute = SharedFlagsModule.GetFFlagEna
 local GlobalVoiceManager = {}
 GlobalVoiceManager.__index = GlobalVoiceManager
 
-function GlobalVoiceManager.new() --[[ Line: 38 ]]
+function GlobalVoiceManager.new()
 	-- upvalues: GlobalVoiceManager (copy)
 	local t = {}
 	setmetatable(t, GlobalVoiceManager)
@@ -16,17 +16,17 @@ function GlobalVoiceManager.new() --[[ Line: 38 ]]
 	return t
 end
 
-function GlobalVoiceManager:isPublicVoiceFocused(): boolean --[[ Line: 44 ]]
+function GlobalVoiceManager:isPublicVoiceFocused(): boolean
 	-- upvalues: FFlagEnableCrossExpVoice (copy), Default1 (copy), AUDIOFOCUSMANAGEMENT (copy)
 	return not FFlagEnableCrossExpVoice or Default1:getCurrentAudioContext() == AUDIOFOCUSMANAGEMENT.UGC.CONTEXT_ID
 end
 
-function GlobalVoiceManager:isPrivateVoiceFocused(): boolean --[[ Line: 49 ]]
+function GlobalVoiceManager:isPrivateVoiceFocused(): boolean
 	-- upvalues: FFlagEnableCrossExpVoice (copy), Default1 (copy), AUDIOFOCUSMANAGEMENT (copy)
 	return FFlagEnableCrossExpVoice and Default1:getCurrentAudioContext() == AUDIOFOCUSMANAGEMENT.CEV.CONTEXT_ID
 end
 
-function GlobalVoiceManager:MuteAll(p1) --[[ Line: 54 ]]
+function GlobalVoiceManager:MuteAll(p1)
 	-- upvalues: FFlagEnableCrossExperienceVoiceCaptureMute (copy), Default1 (copy), Default (copy)
 	if self:isPrivateVoiceFocused() and FFlagEnableCrossExperienceVoiceCaptureMute then
 		Default1:muteAll(p1)
@@ -36,7 +36,7 @@ function GlobalVoiceManager:MuteAll(p1) --[[ Line: 54 ]]
 	end
 end
 
-function GlobalVoiceManager:UnmuteAll(p1) --[[ Line: 64 ]]
+function GlobalVoiceManager:UnmuteAll(p1)
 	-- upvalues: FFlagEnableCrossExperienceVoiceCaptureMute (copy), Default1 (copy), Default (copy)
 	if self:isPrivateVoiceFocused() and FFlagEnableCrossExperienceVoiceCaptureMute then
 		Default1:unmuteAll(p1)

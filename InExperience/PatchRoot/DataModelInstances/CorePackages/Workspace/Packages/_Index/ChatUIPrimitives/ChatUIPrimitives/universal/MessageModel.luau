@@ -4,7 +4,7 @@ local PlainTextContentModelModule = require(script.Parent.ContentKinds.PlainText
 local PresetContentModelModule = require(script.Parent.ContentKinds.Preset.PresetContentModel)
 
 return {
-	fromPlainText = function(p1, p2) --[[ Line: 20 ]]
+	fromPlainText = function(p1, p2)
 		-- upvalues: HttpService (copy), PlainTextContentModelModule (copy)
 		return {
 			id = HttpService:GenerateGUID(false),
@@ -13,7 +13,7 @@ return {
 			contents = { PlainTextContentModelModule.fromText(p1) }
 		}
 	end,
-	fromPreset = function(p1, p2, PresetVersion) --[[ Line: 32 ]]
+	fromPreset = function(p1, p2, PresetVersion)
 		-- upvalues: HttpService (copy), PresetContentModelModule (copy)
 		return {
 			id = HttpService:GenerateGUID(false),

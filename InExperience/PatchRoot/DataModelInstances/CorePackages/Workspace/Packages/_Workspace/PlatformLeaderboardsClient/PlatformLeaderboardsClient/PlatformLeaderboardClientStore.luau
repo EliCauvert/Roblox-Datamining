@@ -15,9 +15,9 @@ local SignalsModule = require(Parent.Signals)
 local Url = require(Parent.CoreScriptsCommon).Url
 local CreateSignalMapFunction = require(Parent.CoreScriptsRoactCommon).Utilities.createSignalMap
 
-local function _() --[[ Line: 85 | Named "getPlayerPermissionsModule" ]]
+local function _()
 	-- upvalues: CoreGui (copy)
-	local Success, Result = pcall(function() --[[ Line: 86 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: CoreGui (upval)
 		return require(CoreGui:WaitForChild("RobloxGui").Modules.PlayerPermissionsModule)
 	end)
@@ -25,21 +25,21 @@ local function _() --[[ Line: 85 | Named "getPlayerPermissionsModule" ]]
 	return if Success then Result else nil
 end
 
-local _ = function(): boolean --[[ Line: 93 | Named "resolveIsLocalPlayerCreator" ]]
+local _ = function(): boolean
 	-- upvalues: Players (copy), CoreGui (copy)
 	local LocalPlayer = Players.LocalPlayer
 	
 	if not LocalPlayer then
 		return false
 	end
-	local Success, Result = pcall(function() --[[ Line: 86 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: CoreGui (upval)
 		return require(CoreGui:WaitForChild("RobloxGui").Modules.PlayerPermissionsModule)
 	end)
 	local Result1 = if Success then Result else nil
 	
 	if Result1 then
-		local Success1, Result2 = pcall(function() --[[ Line: 102 ]]
+		local Success1, Result2 = pcall(function()
 			-- upvalues: Result1 (copy), LocalPlayer (copy)
 			return Result1.CanPlayerManagePlaceAsync(LocalPlayer)
 		end)
@@ -53,7 +53,7 @@ end
 local PlatformLeaderboardClientStore = {}
 PlatformLeaderboardClientStore.__index = PlatformLeaderboardClientStore
 
-function PlatformLeaderboardClientStore.new() --[[ Line: 143 ]]
+function PlatformLeaderboardClientStore.new()
 	-- upvalues: SignalsModule (copy), PlatformLeaderboardBadgeMetadataEnabled (copy), CreateSignalMapFunction (copy), PlatformLeaderboardClientStore (copy), RobloxReplicatedStorage (copy), PlatformLeaderboardPushWaitTimeoutSeconds (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(false)
 	local Signal1, Signal2_1 = SignalsModule.createSignal(nil)
@@ -99,12 +99,12 @@ function PlatformLeaderboardClientStore.new() --[[ Line: 143 ]]
 		_globalEntrySetters = {},
 		_friendsEntrySetters = {}
 	}, PlatformLeaderboardClientStore)
-	task.spawn(function() --[[ Line: 187 ]]
+	task.spawn(function()
 		-- upvalues: RobloxReplicatedStorage (upval), PlatformLeaderboardPushWaitTimeoutSeconds (upval), self (copy)
 		local PlatformLeaderboardPush = RobloxReplicatedStorage:WaitForChild("PlatformLeaderboardPush", PlatformLeaderboardPushWaitTimeoutSeconds)
 		
 		if PlatformLeaderboardPush then
-			self._conn = PlatformLeaderboardPush.OnClientEvent:Connect(function(p1) --[[ Line: 195 ]]
+			self._conn = PlatformLeaderboardPush.OnClientEvent:Connect(function(p1)
 				-- upvalues: self (upval)
 				self:_handleEvent(p1)
 			end)
@@ -116,7 +116,7 @@ function PlatformLeaderboardClientStore.new() --[[ Line: 143 ]]
 	return self
 end
 
-function PlatformLeaderboardClientStore:_updateEntries(FriendsEntries, FriendsEntrySetters, Entries) --[[ Line: 203 ]]
+function PlatformLeaderboardClientStore:_updateEntries(FriendsEntries, FriendsEntrySetters, Entries)
 	-- upvalues: PlatformLeaderboardBadgeMetadataEnabled (copy), SignalsModule (copy)
 	local t = {}
 	
@@ -160,7 +160,7 @@ function PlatformLeaderboardClientStore:_updateEntries(FriendsEntries, FriendsEn
 	end
 end
 
-function PlatformLeaderboardClientStore:_handleEvent(p1) --[[ Line: 272 ]]
+function PlatformLeaderboardClientStore:_handleEvent(p1)
 	-- upvalues: PlatformLeaderboardsExposure2EnabledV2 (copy), IXPService (copy), PlatformLeaderboardsExposure2Layer (copy), PlatformLeaderboardsIXPNoLeaderboardsShownV3 (copy), Players (copy), CoreGui (copy), PlatformLeaderboardLocalizedUnitEnabled (copy), PlatformLeaderboardBadgeMetadataEnabled (copy)
 	if PlatformLeaderboardsExposure2EnabledV2 and p1.config ~= nil then
 		IXPService:LogFlagLinkedUserLayerExposure(PlatformLeaderboardsExposure2Layer)
@@ -170,7 +170,7 @@ function PlatformLeaderboardClientStore:_handleEvent(p1) --[[ Line: 272 ]]
 		local Flag = nil
 		
 		if LocalPlayer then
-			local Success, Result = pcall(function() --[[ Line: 86 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: CoreGui (upval)
 				return require(CoreGui:WaitForChild("RobloxGui").Modules.PlayerPermissionsModule)
 			end)
@@ -178,7 +178,7 @@ function PlatformLeaderboardClientStore:_handleEvent(p1) --[[ Line: 272 ]]
 			
 			if Result1 then
 				local Result2
-				Flag, Result2 = pcall(function() --[[ Line: 102 ]]
+				Flag, Result2 = pcall(function()
 					-- upvalues: Result1 (copy), LocalPlayer (copy)
 					return Result1.CanPlayerManagePlaceAsync(LocalPlayer)
 				end)
@@ -244,7 +244,7 @@ function PlatformLeaderboardClientStore:_handleEvent(p1) --[[ Line: 272 ]]
 	end
 end
 
-function PlatformLeaderboardClientStore:_updateUserFriendRankAndScore(Entries) --[[ Line: 318 ]]
+function PlatformLeaderboardClientStore:_updateUserFriendRankAndScore(Entries)
 	-- upvalues: Players (copy)
 	local LocalPlayer = Players.LocalPlayer
 	
@@ -263,12 +263,12 @@ function PlatformLeaderboardClientStore:_updateUserFriendRankAndScore(Entries) -
 	self._setUserFriendScore(nil)
 end
 
-function PlatformLeaderboardClientStore._fetchLocalizedUnit(p1) --[[ Line: 335 ]]
+function PlatformLeaderboardClientStore._fetchLocalizedUnit(p1)
 	-- upvalues: Url (copy), HttpRbxApiService (copy), HttpService (copy)
-	task.spawn(function() --[[ Line: 336 ]]
+	task.spawn(function()
 		-- upvalues: Url (upval), HttpRbxApiService (upval), HttpService (upval), p1 (copy)
 		local LeaderboardsName: string = `{Url.APIS_URL}platform-leaderboards-api/v1/universes/{game.GameId}/leaderboard/localized`
-		local Success, Result = pcall(function() --[[ Line: 340 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: HttpRbxApiService (upval), LeaderboardsName (copy)
 			return HttpRbxApiService:GetAsyncFullUrl(LeaderboardsName)
 		end)
@@ -278,7 +278,7 @@ function PlatformLeaderboardClientStore._fetchLocalizedUnit(p1) --[[ Line: 335 ]
 			
 			return
 		end
-		local Success1, Result1 = pcall(function() --[[ Line: 348 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: HttpService (upval), Result (copy)
 			return HttpService:JSONDecode(Result)
 		end)
@@ -296,7 +296,7 @@ function PlatformLeaderboardClientStore._fetchLocalizedUnit(p1) --[[ Line: 335 ]
 	end)
 end
 
-function PlatformLeaderboardClientStore:fireTabOpened(TabType) --[[ Line: 363 ]]
+function PlatformLeaderboardClientStore:fireTabOpened(TabType)
 	-- upvalues: RobloxReplicatedStorage (copy)
 	local PlatformLeaderboardTabOpened = RobloxReplicatedStorage:FindFirstChild("PlatformLeaderboardTabOpened")
 	
@@ -305,7 +305,7 @@ function PlatformLeaderboardClientStore:fireTabOpened(TabType) --[[ Line: 363 ]]
 	end
 end
 
-function PlatformLeaderboardClientStore:fireTabClosed(TabType) --[[ Line: 370 ]]
+function PlatformLeaderboardClientStore:fireTabClosed(TabType)
 	-- upvalues: RobloxReplicatedStorage (copy)
 	local PlatformLeaderboardTabClosed = RobloxReplicatedStorage:FindFirstChild("PlatformLeaderboardTabClosed")
 	
@@ -314,7 +314,7 @@ function PlatformLeaderboardClientStore:fireTabClosed(TabType) --[[ Line: 370 ]]
 	end
 end
 
-function PlatformLeaderboardClientStore:destroy() --[[ Line: 377 ]]
+function PlatformLeaderboardClientStore:destroy()
 	if self._conn then
 		self._conn:Disconnect()
 		self._conn = nil

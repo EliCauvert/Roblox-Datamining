@@ -21,10 +21,10 @@ local AbortReason = ConstantsModule.AbortReason
 local Milestone = ConstantsModule.Milestone
 local DismissSource = ConstantsModule.DismissSource
 
-return function(p1, p2, Current) --[[ Line: 41 | Named "useExperienceLoadingLifecycle" ]]
+return function(p1, p2, Current)
 	-- upvalues: FFlagLoadingScreenMilestones (copy), ReactModule (copy), ReplicatedFirst (copy), MotionModule (copy), State (copy), Milestone (copy), State1 (copy), UserGameSettings (copy), ANIMATION (copy), ShouldHoldForExitModule (copy), Players (copy), DismissSource (copy), Game (copy), AbortReason (copy)
 	local UseRefResult = if FFlagLoadingScreenMilestones then ReactModule.useRef(p2) else nil
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean --[[ Line: 47 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean
 		-- upvalues: p1 (copy), ReplicatedFirst (upval)
 		return not p1 or not ReplicatedFirst:IsDefaultLoadingGuiRemoved()
 	end)
@@ -36,13 +36,13 @@ return function(p1, p2, Current) --[[ Line: 41 | Named "useExperienceLoadingLife
 	local UseRefResult3 = ReactModule.useRef(Current)
 	UseRefResult3.current = Current
 	local UseRefResult4 = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 61 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult4 (copy)
 		if UseRefResult4.current then
 			UseRefResult4.current()
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 67 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseRefResult (copy), FFlagLoadingScreenMilestones (upval), Milestone (upval), UseStateResult2_1 (copy), UseRefResult2 (copy), State1 (upval), ReplicatedFirst (upval), UseStateResult2 (copy), UseRefResult3 (copy), UserGameSettings (upval), ANIMATION (upval), UseRefResult4 (copy), ShouldHoldForExitModule (upval), Players (upval), DismissSource (upval), Game (upval), AbortReason (upval)
 		if not p1 then return end
 		local Current = if UseRefResult then UseRefResult.current else nil
@@ -59,7 +59,7 @@ return function(p1, p2, Current) --[[ Line: 41 | Named "useExperienceLoadingLife
 		local Flag2 = false
 		local Flag3 = false
 		
-		local function doDismiss() --[[ Line: 84 ]]
+		local function doDismiss()
 			-- upvalues: FFlagLoadingScreenMilestones (upval), Current (copy), Milestone (upval), Flag (ref), UseStateResult2_1 (upval), DelayedThread (ref), Flag1 (ref), UseRefResult2 (upval), State1 (upval), ReplicatedFirst (upval), UseStateResult2 (upval), UseRefResult3 (upval), UserGameSettings (upval), ANIMATION (upval)
 			if FFlagLoadingScreenMilestones and Current then
 				Current.record(Milestone.DismissStarted)
@@ -67,13 +67,13 @@ return function(p1, p2, Current) --[[ Line: 41 | Named "useExperienceLoadingLife
 			Flag = true
 			UseStateResult2_1(true)
 			
-			local function fadeChrome() --[[ Line: 91 ]]
+			local function fadeChrome()
 				-- upvalues: DelayedThread (upval), Flag1 (upval), UseRefResult2 (upval), State1 (upval), FFlagLoadingScreenMilestones (upval), Current (upval), Milestone (upval), ReplicatedFirst (upval), UseStateResult2 (upval), UseRefResult3 (upval)
 				DelayedThread = nil
 				
 				if not Flag1 then
 					UseRefResult2.current(State1, {
-						onAnimationComplete = function(Enabled) --[[ Line: 97 ]]
+						onAnimationComplete = function(Enabled)
 							-- upvalues: Flag1 (upval), FFlagLoadingScreenMilestones (upval), Current (upval), Milestone (upval), ReplicatedFirst (upval), UseStateResult2 (upval), UseRefResult3 (upval)
 							if Enabled ~= true or Flag1 then return end
 							if FFlagLoadingScreenMilestones and Current then
@@ -104,11 +104,11 @@ return function(p1, p2, Current) --[[ Line: 41 | Named "useExperienceLoadingLife
 			end
 		end
 		
-		function UseRefResult4.current() --[[ Line: 123 ]]
+		function UseRefResult4.current()
 			-- upvalues: Flag1 (ref), Flag (ref), ShouldHoldForExitModule (upval), UserGameSettings (upval), Flag2 (ref), Flag3 (ref), doDismiss (copy), DelayedThread1 (ref), ANIMATION (upval), FFlagLoadingScreenMilestones (upval), Current (copy), Milestone (upval)
 			if Flag1 or Flag then return end
 			if ShouldHoldForExitModule(UserGameSettings.ReducedMotion) then
-				DelayedThread1 = task.delay(ANIMATION.enterExitHold, function() --[[ Line: 134 ]]
+				DelayedThread1 = task.delay(ANIMATION.enterExitHold, function()
 					-- upvalues: DelayedThread1 (upval), Flag1 (upval), Flag (upval), Flag2 (upval), FFlagLoadingScreenMilestones (upval), Current (upval), Milestone (upval), Flag3 (upval), doDismiss (upval)
 					DelayedThread1 = nil
 					
@@ -132,7 +132,7 @@ return function(p1, p2, Current) --[[ Line: 41 | Named "useExperienceLoadingLife
 			end
 		end
 		
-		local function _() --[[ Line: 149 | Named "dismiss" ]]
+		local function _()
 			-- upvalues: Flag (ref), ShouldHoldForExitModule (upval), UserGameSettings (upval), doDismiss (copy), Flag2 (ref), Flag3 (ref)
 			if Flag then return end
 			if not ShouldHoldForExitModule(UserGameSettings.ReducedMotion) then
@@ -149,10 +149,10 @@ return function(p1, p2, Current) --[[ Line: 41 | Named "useExperienceLoadingLife
 			end
 		end
 		
-		local _ = function() --[[ Line: 166 | Named "waitForCharacterAndDismiss" ]]
+		local _ = function()
 			-- upvalues: SpawnedThread (ref), Players (upval), Flag1 (ref), FFlagLoadingScreenMilestones (upval), Current (copy), DismissSource (upval), Flag (ref), ShouldHoldForExitModule (upval), UserGameSettings (upval), doDismiss (copy), Flag2 (ref), Flag3 (ref)
 			if not SpawnedThread then
-				SpawnedThread = task.spawn(function() --[[ Line: 170 ]]
+				SpawnedThread = task.spawn(function()
 					-- upvalues: Players (upval), SpawnedThread (upval), Flag1 (upval), FFlagLoadingScreenMilestones (upval), Current (upval), DismissSource (upval), Flag (upval), ShouldHoldForExitModule (upval), UserGameSettings (upval), doDismiss (upval), Flag2 (upval), Flag3 (upval)
 					if Players.CharacterAutoLoads then
 						local LocalPlayer = Players.LocalPlayer
@@ -190,16 +190,16 @@ return function(p1, p2, Current) --[[ Line: 41 | Named "useExperienceLoadingLife
 			end
 		end
 		
-		table.insert(List, ReplicatedFirst.FinishedReplicating:Connect(function() --[[ Line: 192 | Named "handleFinishedReplicating" ]]
+		table.insert(List, ReplicatedFirst.FinishedReplicating:Connect(function()
 			-- upvalues: Game (upval), SpawnedThread (ref), Players (upval), Flag1 (ref), FFlagLoadingScreenMilestones (upval), Current (copy), DismissSource (upval), Flag (ref), ShouldHoldForExitModule (upval), UserGameSettings (upval), doDismiss (copy), Flag2 (ref), Flag3 (ref), List (copy)
 			if not Game:IsLoaded() then
 				local Connection = nil
-				Connection = Game.Loaded:Connect(function() --[[ Line: 197 ]]
+				Connection = Game.Loaded:Connect(function()
 					-- upvalues: Connection (ref), SpawnedThread (upval), Players (upval), Flag1 (upval), FFlagLoadingScreenMilestones (upval), Current (upval), DismissSource (upval), Flag (upval), ShouldHoldForExitModule (upval), UserGameSettings (upval), doDismiss (upval), Flag2 (upval), Flag3 (upval)
 					Connection:Disconnect()
 					
 					if not SpawnedThread then
-						SpawnedThread = task.spawn(function() --[[ Line: 170 ]]
+						SpawnedThread = task.spawn(function()
 							-- upvalues: Players (upval), SpawnedThread (upval), Flag1 (upval), FFlagLoadingScreenMilestones (upval), Current (upval), DismissSource (upval), Flag (upval), ShouldHoldForExitModule (upval), UserGameSettings (upval), doDismiss (upval), Flag2 (upval), Flag3 (upval)
 							if Players.CharacterAutoLoads then
 								local LocalPlayer = Players.LocalPlayer
@@ -241,7 +241,7 @@ return function(p1, p2, Current) --[[ Line: 41 | Named "useExperienceLoadingLife
 				return
 			end
 			if not SpawnedThread then
-				SpawnedThread = task.spawn(function() --[[ Line: 170 ]]
+				SpawnedThread = task.spawn(function()
 					-- upvalues: Players (upval), SpawnedThread (upval), Flag1 (upval), FFlagLoadingScreenMilestones (upval), Current (upval), DismissSource (upval), Flag (upval), ShouldHoldForExitModule (upval), UserGameSettings (upval), doDismiss (upval), Flag2 (upval), Flag3 (upval)
 					if Players.CharacterAutoLoads then
 						local LocalPlayer = Players.LocalPlayer
@@ -278,7 +278,7 @@ return function(p1, p2, Current) --[[ Line: 41 | Named "useExperienceLoadingLife
 				return
 			end
 		end))
-		table.insert(List, ReplicatedFirst.RemoveDefaultLoadingGuiSignal:Connect(function() --[[ Line: 208 ]]
+		table.insert(List, ReplicatedFirst.RemoveDefaultLoadingGuiSignal:Connect(function()
 			-- upvalues: FFlagLoadingScreenMilestones (upval), Current (copy), DismissSource (upval), Flag (ref), ShouldHoldForExitModule (upval), UserGameSettings (upval), doDismiss (copy), Flag2 (ref), Flag3 (ref)
 			if FFlagLoadingScreenMilestones and Current then
 				Current.dismissRequested(DismissSource.DeveloperOverride)
@@ -301,7 +301,7 @@ return function(p1, p2, Current) --[[ Line: 41 | Named "useExperienceLoadingLife
 		if ReplicatedFirst:IsFinishedReplicating() then
 			if Game:IsLoaded() then
 				if not SpawnedThread then
-					SpawnedThread = task.spawn(function() --[[ Line: 170 ]]
+					SpawnedThread = task.spawn(function()
 						-- upvalues: Players (upval), SpawnedThread (ref), Flag1 (ref), FFlagLoadingScreenMilestones (upval), Current (copy), DismissSource (upval), Flag (ref), ShouldHoldForExitModule (upval), UserGameSettings (upval), doDismiss (copy), Flag2 (ref), Flag3 (ref)
 						if Players.CharacterAutoLoads then
 							local LocalPlayer = Players.LocalPlayer
@@ -337,12 +337,12 @@ return function(p1, p2, Current) --[[ Line: 41 | Named "useExperienceLoadingLife
 				end
 			else
 				local LoadedConnection = nil
-				LoadedConnection = Game.Loaded:Connect(function() --[[ Line: 197 ]]
+				LoadedConnection = Game.Loaded:Connect(function()
 					-- upvalues: LoadedConnection (ref), SpawnedThread (ref), Players (upval), Flag1 (ref), FFlagLoadingScreenMilestones (upval), Current (copy), DismissSource (upval), Flag (ref), ShouldHoldForExitModule (upval), UserGameSettings (upval), doDismiss (copy), Flag2 (ref), Flag3 (ref)
 					LoadedConnection:Disconnect()
 					
 					if not SpawnedThread then
-						SpawnedThread = task.spawn(function() --[[ Line: 170 ]]
+						SpawnedThread = task.spawn(function()
 							-- upvalues: Players (upval), SpawnedThread (upval), Flag1 (upval), FFlagLoadingScreenMilestones (upval), Current (upval), DismissSource (upval), Flag (upval), ShouldHoldForExitModule (upval), UserGameSettings (upval), doDismiss (upval), Flag2 (upval), Flag3 (upval)
 							if Players.CharacterAutoLoads then
 								local LocalPlayer = Players.LocalPlayer
@@ -398,7 +398,7 @@ return function(p1, p2, Current) --[[ Line: 41 | Named "useExperienceLoadingLife
 				end
 			end
 		end
-		return function() --[[ Line: 227 ]]
+		return function()
 			-- upvalues: Flag1 (ref), FFlagLoadingScreenMilestones (upval), Current (copy), AbortReason (upval), UseRefResult4 (upval), DelayedThread1 (ref), DelayedThread (ref), SpawnedThread (ref), List (copy)
 			Flag1 = true
 			

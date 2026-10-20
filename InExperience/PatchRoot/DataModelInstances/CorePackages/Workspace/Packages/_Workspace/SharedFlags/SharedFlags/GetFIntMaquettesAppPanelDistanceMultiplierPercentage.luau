@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("MaquetesAppPanelDistanceMultiplierPercentage", 145)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastInt("MaquetesAppPanelDistanceMultiplierPercentage")
 end

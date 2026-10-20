@@ -18,7 +18,7 @@ local EventMap = {
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p1) --[[ Line: 32 | Named "StopAssistantResponseDialog" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseDefaultFocusBehaviorFunction (copy), ButtonVariant (copy), Dialog (copy), DialogSize (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		cancel = LocalizationStringsModule.CHAT_STOP_CONFIRMATION_CANCEL,
@@ -32,11 +32,11 @@ return function(p1) --[[ Line: 32 | Named "StopAssistantResponseDialog" ]]
 		shouldRestoreFocus = false,
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
 		eventMap = EventMap,
-		eventHandlers = ReactModule.useMemo(function() --[[ Line: 40 ]]
+		eventHandlers = ReactModule.useMemo(function()
 			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), OnCancelFunction (copy)
 			return {
 				[FocusNavigationEventNameEnum.NavigateBack] = {
-					handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 44 ]]
+					handler = InputHandlersModule.onRelease(function(p2)
 						-- upvalues: OnCancelFunction (upval)
 						OnCancelFunction()
 						p2:cancel()
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 32 | Named "StopAssistantResponseDialog" ]]
 		Content = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
 			Description = ReactModule.createElement(Dialog.Text, { Text = UseLocalizationResult.description })
 		}),
-		Actions = ReactModule.createElement(Dialog.Actions, (ReactModule.useMemo(function() --[[ Line: 62 ]]
+		Actions = ReactModule.createElement(Dialog.Actions, (ReactModule.useMemo(function()
 			-- upvalues: UseLocalizationResult (copy), ButtonVariant (upval), p1 (copy), OnCancelFunction (copy), UseDefaultFocusBehaviorResult (copy)
 			return {
 				LayoutOrder = 3,

@@ -8,13 +8,13 @@ local Loading = FoundationModule.Loading
 local IconSize = FoundationModule.Enums.IconSize
 local VirtualizedFeed = require(Parent.AvatarExperienceUIKit).FeedComponents.VirtualizedFeed
 
-return function(Frame) --[[ Line: 36 | Named "AssetPickerVirtualizedFeedView" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), View (copy), AssetPickerTileModule (copy), Loading (copy), IconSize (copy), AssetPickerErrorBodyModule (copy), VirtualizedFeed (copy)
 	return ReactModule.createElement(VirtualizedFeed, {
 		onEndReachedThreshold = 0.5,
 		shouldWrapFooter = false,
 		data = Frame.rows,
-		renderItem = function(p1) --[[ Line: 37 ]]
+		renderItem = function(p1)
 			-- upvalues: Frame (copy), ReactModule (upval), View (upval), AssetPickerTileModule (upval)
 			local Elements = {}
 			

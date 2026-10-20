@@ -18,7 +18,7 @@ local GetOptionContextTagModule = require(GameFilters.Analytics.getOptionContext
 local FFlagLuaAppChartsFilterOptionTextTag = require(Parent.SharedFlags).FFlagLuaAppChartsFilterOptionTextTag
 local _ = require(GameFilters.FilterCallbackTypes)
 
-return ReactModule.memo(function(p1) --[[ Line: 39 ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), UseDispatchFunction (copy), UseTokensFunction (copy), ImpressionsTagUtility (copy), ShouldUsePeekViewModule (copy), FFlagLuaAppChartsFilterOptionTextTag (copy), GetOptionContextTagModule (copy), OpenFilterMenuPeekViewModule (copy), FilterClickButtonNameModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), Chip (copy), IconPosition (copy)
 	local UseStateResult2 = nil
 	local UseStateResult
@@ -26,39 +26,39 @@ return ReactModule.memo(function(p1) --[[ Line: 39 ]]
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseTokensResult = UseTokensFunction()
-	local UseMemoResult = ReactModule.useMemo(function(): boolean --[[ Line: 48 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): boolean
 		-- upvalues: p1 (copy)
 		return p1.filter.inactiveOptionIds ~= nil and p1.filter.selectedOptionId ~= nil and not p1.filter.inactiveOptionIds[p1.filter.selectedOptionId]
 	end, { p1.filter.selectedOptionId, p1.filter.inactiveOptionIds }) or UseStateResult
-	ReactModule.useEffect(function() --[[ Line: 57 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), p1 (copy)
-		local Connection = if UseRefResult.current then UseRefResult.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 61 ]]
+		local Connection = if UseRefResult.current then UseRefResult.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 			-- upvalues: p1 (upval), UseRefResult (upval)
 			p1.onAbsoluteSizeChanged(UseRefResult.current)
 		end) else nil
 		
-		return function() --[[ Line: 66 ]]
+		return function()
 			-- upvalues: Connection (ref)
 			if Connection then
 				Connection:Disconnect()
 			end
 		end
 	end, { p1.onAbsoluteSizeChanged })
-	ReactModule.useEffect(function() --[[ Line: 73 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ImpressionsTagUtility (upval), UseRefResult (copy), p1 (copy)
 		ImpressionsTagUtility.AddTag(UseRefResult, p1.impressionsTag, p1.index)
 		
-		return function() --[[ Line: 76 ]]
+		return function()
 			-- upvalues: ImpressionsTagUtility (upval), UseRefResult (upval), p1 (upval)
 			ImpressionsTagUtility.RemoveTag(UseRefResult, p1.impressionsTag, p1.index)
 		end
 	end, { p1.impressionsTag, p1.index })
-	local UseResult = ReactModule.useCallback(function(p2, p3, p4, p5, p6, p7) --[[ Line: 89 ]]
+	local UseResult = ReactModule.useCallback(function(p2, p3, p4, p5, p6, p7)
 		-- upvalues: p1 (copy)
 		p1.sendFilterClick(p2, p1.filter.filterId, p3, p4, p5, p6, p7)
 	end, { p1.sendFilterClick, p1.filter.filterId })
 	local ShouldUsePeekViewModule1 = ShouldUsePeekViewModule()
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 111 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (ref)
 		UseStateResult2(false)
 	end, {})
@@ -70,7 +70,7 @@ return ReactModule.memo(function(p1) --[[ Line: 39 ]]
 		},
 		text = p1.filter.selectedOptionDisplayName,
 		isChecked = UseMemoResult,
-		onActivated = ReactModule.useCallback(function() --[[ Line: 115 ]]
+		onActivated = ReactModule.useCallback(function()
 			-- upvalues: FFlagLuaAppChartsFilterOptionTextTag (upval), GetOptionContextTagModule (upval), p1 (copy), ShouldUsePeekViewModule1 (copy), UseDispatchResult (copy), OpenFilterMenuPeekViewModule (upval), UseResult1 (copy), UseResult (copy), FilterClickButtonNameModule (upval), UseMemoResult (copy), UseRefResult (copy), UseTokensResult (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval), UseStateResult2 (ref)
 			local OptionContextTagModule = if FFlagLuaAppChartsFilterOptionTextTag then GetOptionContextTagModule(p1.filter, p1.filter.selectedOptionId) else nil
 			

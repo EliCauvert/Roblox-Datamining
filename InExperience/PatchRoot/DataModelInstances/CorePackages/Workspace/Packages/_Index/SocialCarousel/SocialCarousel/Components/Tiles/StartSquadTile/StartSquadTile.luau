@@ -9,7 +9,7 @@ local TileModule = require(SocialCarousel.BaseComponents.Tile)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local ConstantsModule = require(SocialCarousel.Common.Constants)
 
-return function(p1) --[[ Line: 29 | Named "StartSquadTile" ]]
+return function(p1)
 	-- upvalues: UseNavigationFunction (copy), UseSocialCarouselAnalyticsModule (copy), UseSocialCarouselContextModule (copy), UseLocalizationFunction (copy), ConstantsModule (copy), ReactModule (copy), AppPage (copy), TileModule (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseSocialCarouselAnalyticsModuleResult = UseSocialCarouselAnalyticsModule()
@@ -17,7 +17,7 @@ return function(p1) --[[ Line: 29 | Named "StartSquadTile" ]]
 	local UseLocalizationResult = UseLocalizationFunction({
 		startPartyText = ConstantsModule.LOCALIZATION.START_SQUAD_TEXT
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 38 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), UseNavigationResult (copy), AppPage (upval), UseSocialCarouselAnalyticsModuleResult (copy)
 		if p1.item and p1.item.onActivated then
 			p1.item.onActivated()
@@ -31,7 +31,7 @@ return function(p1) --[[ Line: 29 | Named "StartSquadTile" ]]
 		p1.index,
 		UseSocialCarouselAnalyticsModuleResult.startSquadPressed
 	})
-	ReactModule.useEffect(function() --[[ Line: 55 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSocialCarouselContextModuleResult (copy), ConstantsModule (upval)
 		UseSocialCarouselContextModuleResult.onSuccessfulRender(ConstantsModule.ANALYTICS.UI_LOADING_EVENTS.START_SQUAD)
 	end, {})

@@ -24,7 +24,7 @@ local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavi
 local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
 local InputHandlersModule = require(Parent.InputHandlers)
 
-local function _(p1) --[[ Line: 42 | Named "logRenameError" ]]
+local function _(p1)
 	-- upvalues: FFlagAppChatFoundationGroupNameDialogModule (copy), LoggerModule (copy)
 	if FFlagAppChatFoundationGroupNameDialogModule then
 		LoggerModule:error(p1)
@@ -36,10 +36,10 @@ local function _(p1) --[[ Line: 42 | Named "logRenameError" ]]
 end
 
 local config = {
-	Success = function() --[[ Line: 58 ]]
+	Success = function()
 		return { visible = false, isLoading = false, warningTextKey = nil }
 	end,
-	Moderated = function() --[[ Line: 67 ]]
+	Moderated = function()
 		-- upvalues: GetFFlagIsSquadEnabledFunction (copy)
 		return {
 			visible = true,
@@ -47,7 +47,7 @@ local config = {
 			warningTextKey = if GetFFlagIsSquadEnabledFunction() then "Feature.Chat.Response.ChatNameFullyModerated.V2" else "Feature.Chat.Response.ChatNameFullyModerated"
 		}
 	end,
-	Default = function(InputText, InputBox) --[[ Line: 76 ]]
+	Default = function(InputText, InputBox)
 		-- upvalues: GetFFlagIsSquadEnabledFunction (copy)
 		return {
 			visible = true,
@@ -59,38 +59,38 @@ local config = {
 			}
 		}
 	end,
-	Waiting = function() --[[ Line: 89 ]]
+	Waiting = function()
 		return { visible = true, isLoading = true }
 	end
 }
 local config1 = {
 	cancelTitleKey = "Feature.Chat.Action.Cancel",
 	confirmationTitleKey = "Feature.Chat.Action.Save",
-	onModalClose = function() --[[ Line: 108 ]] end,
+	onModalClose = function() end,
 	titleKey = if GetFFlagIsSquadEnabledFunction() then "Feature.Chat.Label.GroupName" else "Feature.Chat.Label.ChatGroupName",
 	placeholderTextKey = if GetFFlagIsSquadEnabledFunction() then "Feature.Chat.Description.NameGroup" else "Feature.Chat.Description.NameGroupChat"
 }
 
-function EditChatGroupNameDialogContainer(p1) --[[ Line: 119 ]]
+function EditChatGroupNameDialogContainer(p1)
 	-- upvalues: CryoModule (copy), config1 (copy), UseStateFunction (copy), UseDispatchFunction (copy), UseCallbackFunction (copy), AppChatNetworkingModule (copy), UseSelectorFunction (copy), FFlagAppChatFoundationGroupNameDialogModule (copy), LoggerModule (copy), config (copy), ResponseStatus (copy), GetFFlagIsSquadEnabledFunction (copy), ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseLocalizationFunction (copy), InputDialogContainerModule (copy), ResponseIndicator (copy), EditChatGroupNameDialogModule (copy), AppFocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
 	local JoinResult = CryoModule.Dictionary.join(config1, p1)
 	local UseStateResult, UseStateResult2 = UseStateFunction({ visible = true, isLoading = false })
 	local UseDispatchResult = UseDispatchFunction()
-	local UseCallbackResult = UseCallbackFunction(function(p2, p3) --[[ Line: 127 ]]
+	local UseCallbackResult = UseCallbackFunction(function(p2, p3)
 		-- upvalues: UseDispatchResult (copy), AppChatNetworkingModule (upval)
 		return UseDispatchResult(AppChatNetworkingModule.rodux.UpdateConversationTitle.API(p2, p3))
 	end, { UseDispatchResult })
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 131 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: JoinResult (copy)
 		local Conversation = p2.ChatAppReducer.Conversations[JoinResult.conversationId]
 		
 		return if Conversation and not Conversation.isDefaultTitle then Conversation.title else ""
 	end)
-	local UseCallbackResult1 = UseCallbackFunction(function(p2): boolean --[[ Line: 146 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function(p2): boolean
 		-- upvalues: JoinResult (copy), UseStateResult2 (copy), UseCallbackResult (copy), FFlagAppChatFoundationGroupNameDialogModule (upval), LoggerModule (upval), config (upval), UseSelectorResult (copy), ResponseStatus (upval), GetFFlagIsSquadEnabledFunction (upval)
 		if JoinResult.conversationId then
 			UseStateResult2({ visible = true, isLoading = true })
-			UseCallbackResult(JoinResult.conversationId, p2.InputBox):andThen(function(Result) --[[ Line: 150 ]]
+			UseCallbackResult(JoinResult.conversationId, p2.InputBox):andThen(function(Result)
 				-- upvalues: FFlagAppChatFoundationGroupNameDialogModule (upval), LoggerModule (upval), UseStateResult2 (upval), config (upval), UseSelectorResult (upval), p2 (copy), ResponseStatus (upval), JoinResult (upval), GetFFlagIsSquadEnabledFunction (upval)
 				if Result and Result.responseBody and Result.responseBody.conversations and Result.responseBody.conversations[1] then
 					if Result.responseBody.conversations[1].status == ResponseStatus.SUCCESS then
@@ -130,18 +130,18 @@ function EditChatGroupNameDialogContainer(p1) --[[ Line: 119 ]]
 					end
 					UseStateResult2((config.Default(UseSelectorResult, p2.InputBox)))
 				end
-			end):catch(function(_) --[[ Line: 173 ]]
+			end):catch(function(_)
 				-- upvalues: UseStateResult2 (upval), config (upval), UseSelectorResult (upval), p2 (copy)
 				UseStateResult2((config.Default(UseSelectorResult, p2.InputBox)))
 			end)
 		end
 		return true
 	end, { JoinResult.conversationId, UseSelectorResult })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 181 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), JoinResult (copy)
 		return {
 			[FocusNavigationEventNameEnum.NavigateBack] = {
-				handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 185 ]]
+				handler = InputHandlersModule.onRelease(function(p2)
 					-- upvalues: JoinResult (upval)
 					JoinResult.onModalClose()
 					p2:cancel()

@@ -8,7 +8,7 @@ local WhatsNewTelemetryModule = require(WhatsNew.telemetry.WhatsNewTelemetry)
 local LoadWhatsNewRegistryModule = require(WhatsNew.registry.LoadWhatsNewRegistry)
 local _ = require(WhatsNew.registry.ScopeActions)
 
-local function createIdleState(ScreenScopeId) --[[ Line: 30 ]]
+local function createIdleState(ScreenScopeId)
 	-- upvalues: EnumsModule (copy)
 	return {
 		activeTourType = nil,
@@ -23,14 +23,14 @@ local function createIdleState(ScreenScopeId) --[[ Line: 30 ]]
 	}
 end
 
-local function _(p1): boolean --[[ Line: 45 | Named "hasBeenSeen" ]]
+local function _(p1): boolean
 	-- upvalues: EntryStorageModule (copy)
 	local Entry = EntryStorageModule.getEntries()[p1]
 	
 	return Entry ~= nil and Entry.seen ~= nil
 end
 
-local _ = function(p1) --[[ Line: 51 | Named "isEligibleForNewSession" ]]
+local _ = function(p1)
 	-- upvalues: EntryStorageModule (copy)
 	local ToShow = p1.toShow
 	
@@ -41,7 +41,7 @@ local _ = function(p1) --[[ Line: 51 | Named "isEligibleForNewSession" ]]
 	return ToShow
 end
 
-local _ = function(p1): number --[[ Line: 55 | Named "countEligibleTips" ]]
+local _ = function(p1): number
 	-- upvalues: EntryStorageModule (copy)
 	local NewStepCount = 0
 	
@@ -59,7 +59,7 @@ local _ = function(p1): number --[[ Line: 55 | Named "countEligibleTips" ]]
 	return NewStepCount
 end
 
-local _ = function(p2): boolean --[[ Line: 66 | Named "tourHasEligibleRootTips" ]]
+local _ = function(p2): boolean
 	-- upvalues: EntryStorageModule (copy)
 	for _, tourTip in p2.tourTips do
 		local ToShow = tourTip.toShow
@@ -75,7 +75,7 @@ local _ = function(p2): boolean --[[ Line: 66 | Named "tourHasEligibleRootTips" 
 	return false
 end
 
-local _ = function(p3) --[[ Line: 75 | Named "findFirstEligibleTipIndex" ]]
+local _ = function(p3)
 	-- upvalues: EntryStorageModule (copy)
 	for i, tourTip in p3.tourTips do
 		local ToShow = tourTip.toShow
@@ -91,7 +91,7 @@ local _ = function(p3) --[[ Line: 75 | Named "findFirstEligibleTipIndex" ]]
 	return nil
 end
 
-local _ = function(p4, p5): number? --[[ Line: 85 | Named "findNextVisibleTipIndexFrom" ]]
+local _ = function(p4, p5): number?
 	for i = p5, #p4.tourTips do
 		if p4.tourTips[i].toShow then
 			return i
@@ -100,7 +100,7 @@ local _ = function(p4, p5): number? --[[ Line: 85 | Named "findNextVisibleTipInd
 	return nil
 end
 
-local _ = function(p6, p7): number? --[[ Line: 94 | Named "findPreviousVisibleTipIndexFrom" ]]
+local _ = function(p6, p7): number?
 	for i = p7, 1, -1 do
 		if p6.tourTips[i].toShow then
 			return i
@@ -109,7 +109,7 @@ local _ = function(p6, p7): number? --[[ Line: 94 | Named "findPreviousVisibleTi
 	return nil
 end
 
-local function findGatewayTipByOpenActionKey(Scope, OpenActionKey) --[[ Line: 103 ]]
+local function findGatewayTipByOpenActionKey(Scope, OpenActionKey)
 	-- upvalues: findGatewayTipByOpenActionKey (copy)
 	local GatewayTipByOpenActionKey = nil
 	for _, tourTip in Scope.tourTips do
@@ -131,7 +131,7 @@ local function findGatewayTipByOpenActionKey(Scope, OpenActionKey) --[[ Line: 10
 	return nil
 end
 
-local function findCloseActionKeyForScope(ScopeTree, Id) --[[ Line: 119 ]]
+local function findCloseActionKeyForScope(ScopeTree, Id)
 	-- upvalues: findCloseActionKeyForScope (copy)
 	local Gateway = nil
 	local CloseActionKeyForScope = nil
@@ -152,7 +152,7 @@ local function findCloseActionKeyForScope(ScopeTree, Id) --[[ Line: 119 ]]
 	return nil
 end
 
-local _ = function(p8) --[[ Line: 135 | Named "getCloseActionKeyForFrame" ]]
+local _ = function(p8)
 	local TourTip = p8.parentScopeTour.tourTips[p8.parentTipIndex]
 	local Gateway = TourTip.gateway
 	assert(Gateway ~= nil, `parent tip '{TourTip.id}' is missing gateway for scope stack frame`)
@@ -160,7 +160,7 @@ local _ = function(p8) --[[ Line: 135 | Named "getCloseActionKeyForFrame" ]]
 	return Gateway.closeActionKey
 end
 
-local _ = function(Tbl) --[[ Line: 143 | Named "popScopeStack" ]]
+local _ = function(Tbl)
 	local Entry = Tbl[#Tbl]
 	local Copy = table.clone(Tbl)
 	table.remove(Copy)
@@ -168,16 +168,16 @@ local _ = function(Tbl) --[[ Line: 143 | Named "popScopeStack" ]]
 	return Entry, Copy
 end
 
-local _ = function(p9) --[[ Line: 150 | Named "markEntrySeen" ]]
+local _ = function(p9)
 	-- upvalues: EntryStorageModule (copy), v1 (copy)
 	EntryStorageModule.markSeen(p9, v1.now():ToIsoDate())
 end
 
-local function markTipsSeenFromCurrent(CurrentScopeTour, Id, Tbl) --[[ Line: 154 ]]
+local function markTipsSeenFromCurrent(CurrentScopeTour, Id, Tbl)
 	-- upvalues: EntryStorageModule (copy), v1 (copy), WhatsNewTelemetryModule (copy)
 	local Flag = false
 	
-	local function _(CurrentEntry) --[[ Line: 161 | Named "runtimeStateForTip" ]]
+	local function _(CurrentEntry)
 		-- upvalues: Tbl (copy)
 		local Copy = table.clone(Tbl)
 		Copy.currentEntry = CurrentEntry
@@ -203,18 +203,18 @@ local function markTipsSeenFromCurrent(CurrentScopeTour, Id, Tbl) --[[ Line: 154
 	end
 end
 
-return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy), createIdleState (copy), EnumsModule (copy), WhatsNewTelemetryModule (copy), markTipsSeenFromCurrent (copy), LoadWhatsNewRegistryModule (copy), findCloseActionKeyForScope (copy), EntryStorageModule (copy), findGatewayTipByOpenActionKey (copy), v1 (copy)
 	local RootTourMap = nil
 	local ScopeActions = nil
 	local Flag = false
 	
-	local function _() --[[ Line: 192 | Named "assertInitialized" ]]
+	local function _()
 		-- upvalues: Flag (ref), RootTourMap (ref), ScopeActions (ref)
 		assert(Flag and (RootTourMap ~= nil and ScopeActions ~= nil), "WhatsNew store not initialized. Call initialize first.")
 	end
 	
-	local _ = function() --[[ Line: 196 | Named "getRootTourAndScopeActions" ]]
+	local _ = function()
 		-- upvalues: Flag (ref), RootTourMap (ref), ScopeActions (ref)
 		assert(Flag and (RootTourMap ~= nil and ScopeActions ~= nil), "WhatsNew store not initialized. Call initialize first.")
 		
@@ -224,14 +224,14 @@ return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
 	local Tbl = {}
 	local Signal, Signal2 = SignalsModule.createSignal((createIdleState("")))
 	
-	local _ = function(p9) --[[ Line: 204 | Named "resolveSurfaceForAnchor" ]]
+	local _ = function(p9)
 		-- upvalues: Tbl (copy), EnumsModule (upval)
 		local Entry = Tbl[p9]
 		
 		return if Entry == nil or not Entry.isReady then EnumsModule.WhatsNewSurface.WaitingForAnchor else EnumsModule.WhatsNewSurface.TourTip
 	end
 	
-	local function refreshSurfaceForCurrentEntry() --[[ Line: 212 ]]
+	local function refreshSurfaceForCurrentEntry()
 		-- upvalues: Signal (copy), Signal2 (copy), Tbl (copy), EnumsModule (upval)
 		local SignalResult = Signal(false)
 		local CurrentEntry = SignalResult.currentEntry
@@ -254,7 +254,7 @@ return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
 		end
 	end
 	
-	local function showTipAt(CurrentScopeTour, CurrentTipIndex, TourTip, IdleState) --[[ Line: 231 ]]
+	local function showTipAt(CurrentScopeTour, CurrentTipIndex, TourTip, IdleState)
 		-- upvalues: Signal (copy), Signal2 (copy), Tbl (copy), EnumsModule (upval)
 		local SignalResult = Signal(false)
 		local Entry = Tbl[TourTip.anchorId]
@@ -271,17 +271,17 @@ return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
 		})
 	end
 	
-	local _ = function() --[[ Line: 257 | Named "resetToIdle" ]]
+	local _ = function()
 		-- upvalues: Signal2 (copy), createIdleState (upval), Signal (copy)
 		Signal2((createIdleState(Signal(false).screenScopeId)))
 	end
 	
 	local Flag1 = false
 	
-	local _ = function(p9, p10) --[[ Line: 277 | Named "invokeCloseAction" ]]
+	local _ = function(p9, p10)
 		-- upvalues: Flag1 (ref)
 		Flag1 = true
-		local Success, Result = pcall(function() --[[ Line: 279 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p9 (copy), p10 (copy)
 			p9:invoke(p10)
 		end)
@@ -292,7 +292,7 @@ return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
 		end
 	end
 	
-	local _ = function(p9, Tbl) --[[ Line: 288 | Named "exitNestedScope" ]]
+	local _ = function(p9, Tbl)
 		-- upvalues: Flag1 (ref)
 		local Entry = Tbl[#Tbl]
 		local Copy = table.clone(Tbl)
@@ -302,7 +302,7 @@ return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
 		assert(Gateway ~= nil, `parent tip '{TourTip.id}' is missing gateway for scope stack frame`)
 		local CloseActionKey = Gateway.closeActionKey
 		Flag1 = true
-		local Success, Result = pcall(function() --[[ Line: 279 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p9 (copy), CloseActionKey (copy)
 			p9:invoke(CloseActionKey)
 		end)
@@ -314,7 +314,7 @@ return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
 		return Entry, Copy
 	end
 	
-	local function markActiveScopeEndedEarly(IdleState) --[[ Line: 297 ]]
+	local function markActiveScopeEndedEarly(IdleState)
 		-- upvalues: WhatsNewTelemetryModule (upval), markTipsSeenFromCurrent (upval)
 		if IdleState.currentEntry ~= nil then
 			WhatsNewTelemetryModule.logTourtipInteraction(WhatsNewTelemetryModule.InteractionType.DISMISS, IdleState.currentEntry.id, WhatsNewTelemetryModule.Button.CLOSE, IdleState)
@@ -328,7 +328,7 @@ return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
 		WhatsNewTelemetryModule.logTourLifecycle(WhatsNewTelemetryModule.LifecycleType.TOUR_STOPPED, IdleState, WhatsNewTelemetryModule.StopReason.DISMISS)
 	end
 	
-	local function completeTour(p10) --[[ Line: 321 ]]
+	local function completeTour(p10)
 		-- upvalues: Signal (copy), EnumsModule (upval), markActiveScopeEndedEarly (copy), Flag (ref), RootTourMap (ref), ScopeActions (ref), WhatsNewTelemetryModule (upval), Flag1 (ref), showTipAt (copy), Signal2 (copy), createIdleState (upval), LoadWhatsNewRegistryModule (upval), findCloseActionKeyForScope (upval)
 		local SignalResult = Signal(false)
 		
@@ -357,7 +357,7 @@ return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
 				assert(Gateway ~= nil, `parent tip '{TourTip.id}' is missing gateway for scope stack frame`)
 				local CloseActionKey = Gateway.closeActionKey
 				Flag1 = true
-				local Success, Result = pcall(function() --[[ Line: 279 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: ScopeActions1 (copy), CloseActionKey (copy)
 					ScopeActions1:invoke(CloseActionKey)
 				end)
@@ -416,7 +416,7 @@ return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
 					
 					if CloseActionKeyForScope ~= nil then
 						Flag1 = true
-						local Success1, Result1 = pcall(function() --[[ Line: 279 ]]
+						local Success1, Result1 = pcall(function()
 							-- upvalues: ScopeActions1 (copy), CloseActionKeyForScope (copy)
 							ScopeActions1:invoke(CloseActionKeyForScope)
 						end)
@@ -432,7 +432,7 @@ return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
 		end
 	end
 	
-	local function startTour(ScreenScopeId, ActiveTourType) --[[ Line: 395 ]]
+	local function startTour(ScreenScopeId, ActiveTourType)
 		-- upvalues: Flag (ref), RootTourMap (ref), ScopeActions (ref), LoadWhatsNewRegistryModule (upval), EntryStorageModule (upval), showTipAt (copy), WhatsNewTelemetryModule (upval), Signal (copy)
 		assert(Flag and (RootTourMap ~= nil and ScopeActions ~= nil), "WhatsNew store not initialized. Call initialize first.")
 		local RootTour = RootTourMap[LoadWhatsNewRegistryModule.makeRootTourKey(ScreenScopeId, ActiveTourType)]
@@ -480,7 +480,7 @@ return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
 		WhatsNewTelemetryModule.logTourLifecycle(WhatsNewTelemetryModule.LifecycleType.TOUR_STARTED, Signal(false), nil, WhatsNewTelemetryModule.StartContext.ROOT)
 	end
 	
-	local _ = function(ScreenScopeId, ActiveTourType): boolean --[[ Line: 424 | Named "tryStartTour" ]]
+	local _ = function(ScreenScopeId, ActiveTourType): boolean
 		-- upvalues: Flag (ref), RootTourMap (ref), ScopeActions (ref), LoadWhatsNewRegistryModule (upval), EntryStorageModule (upval), startTour (copy)
 		assert(Flag and (RootTourMap ~= nil and ScopeActions ~= nil), "WhatsNew store not initialized. Call initialize first.")
 		local RootTour = RootTourMap[LoadWhatsNewRegistryModule.makeRootTourKey(ScreenScopeId, ActiveTourType)]
@@ -511,7 +511,7 @@ return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
 	
 	local Flag2 = false
 	
-	local function tryEnterNestedScope(p11): boolean --[[ Line: 510 ]]
+	local function tryEnterNestedScope(p11): boolean
 		-- upvalues: Flag2 (ref), Signal (copy), EnumsModule (upval), EntryStorageModule (upval), showTipAt (copy), WhatsNewTelemetryModule (upval)
 		if Flag2 then
 			return false
@@ -546,7 +546,7 @@ return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
 			return false
 		end
 		Flag2 = true
-		local Success, Result = pcall(function() --[[ Line: 541 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: SignalResult (copy), CurrentScopeTour (copy), Scope (copy), CurrentTipIndex (copy), showTipAt (upval), EntryStorageModule (upval), WhatsNewTelemetryModule (upval), Signal (upval)
 			local Copy = table.clone(SignalResult.scopeStack)
 			table.insert(Copy, {
@@ -582,7 +582,7 @@ return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
 		return true
 	end
 	
-	local function tryStartNestedFromIdle(OpenActionKey): boolean --[[ Line: 570 ]]
+	local function tryStartNestedFromIdle(OpenActionKey): boolean
 		-- upvalues: Signal (copy), Flag (ref), RootTourMap (ref), ScopeActions (ref), EnumsModule (upval), LoadWhatsNewRegistryModule (upval), findGatewayTipByOpenActionKey (upval), EntryStorageModule (upval), showTipAt (copy), WhatsNewTelemetryModule (upval)
 		local ScreenScopeId = Signal(false).screenScopeId
 		
@@ -653,7 +653,7 @@ return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
 		return false
 	end
 	
-	local function notifyScopeOpened(OpenActionKey) --[[ Line: 610 ]]
+	local function notifyScopeOpened(OpenActionKey)
 		-- upvalues: Signal (copy), EnumsModule (upval), tryStartNestedFromIdle (copy), EntryStorageModule (upval), v1 (upval), tryEnterNestedScope (copy)
 		local SignalResult = Signal(false)
 		
@@ -690,7 +690,7 @@ return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
 		end
 	end
 	
-	local function notifyScopeClosed(CloseActionKey) --[[ Line: 643 ]]
+	local function notifyScopeClosed(CloseActionKey)
 		-- upvalues: Signal (copy), Flag1 (ref), Flag2 (ref), EnumsModule (upval), completeTour (copy), Flag (ref), RootTourMap (ref), ScopeActions (ref), LoadWhatsNewRegistryModule (upval), findCloseActionKeyForScope (upval)
 		local SignalResult = Signal(false)
 		
@@ -726,7 +726,7 @@ return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
 	end
 	
 	return {
-		initialize = function(p12) --[[ Line: 754 ]]
+		initialize = function(p12)
 			-- upvalues: Flag (ref), RootTourMap (ref), ScopeActions (ref), notifyScopeOpened (copy), notifyScopeClosed (copy), Signal (copy)
 			if not Flag then
 				RootTourMap = p12.rootTourMap
@@ -742,7 +742,7 @@ return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
 				return
 			end
 		end,
-		resetForTests = function() --[[ Line: 769 ]]
+		resetForTests = function()
 			-- upvalues: ScopeActions (ref), Flag (ref), RootTourMap (ref), Tbl (copy), Signal2 (copy), createIdleState (upval)
 			if ScopeActions ~= nil then
 				ScopeActions:stopOpenStateWiring()
@@ -753,30 +753,30 @@ return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
 			table.clear(Tbl)
 			Signal2((createIdleState("")))
 		end,
-		getRuntimeState = function() --[[ Line: 784 ]]
+		getRuntimeState = function()
 			-- upvalues: Signal (copy)
 			return Signal(false)
 		end,
 		getRuntimeStateSignal = Signal,
-		getCurrentScope = function() --[[ Line: 790 ]]
+		getCurrentScope = function()
 			-- upvalues: Signal (copy)
 			return Signal(false).currentScopeTour
 		end,
-		getCurrentEntry = function() --[[ Line: 794 ]]
+		getCurrentEntry = function()
 			-- upvalues: Signal (copy)
 			return Signal(false).currentEntry
 		end,
-		getGlobalStepIndex = function() --[[ Line: 798 ]]
+		getGlobalStepIndex = function()
 			-- upvalues: Signal (copy)
 			return Signal(false).globalStepIndex
 		end,
-		getGlobalTotalSteps = function() --[[ Line: 802 ]]
+		getGlobalTotalSteps = function()
 			-- upvalues: Signal (copy)
 			local SignalResult = Signal(false)
 			
 			return if SignalResult.activeTourType == nil then 0 else SignalResult.globalTotalSteps
 		end,
-		registerAnchor = function(AnchorId, Ref) --[[ Line: 449 ]]
+		registerAnchor = function(AnchorId, Ref)
 			-- upvalues: Tbl (copy), Signal (copy), refreshSurfaceForCurrentEntry (copy)
 			local Entry = Tbl[AnchorId]
 			
@@ -791,13 +791,13 @@ return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
 				refreshSurfaceForCurrentEntry()
 			end
 		end,
-		getAnchorRef = function(p12) --[[ Line: 469 ]]
+		getAnchorRef = function(p12)
 			-- upvalues: Tbl (copy)
 			local Entry = Tbl[p12]
 			
 			return if Entry == nil then nil else Entry.ref
 		end,
-		setAnchorReady = function(AnchorId, IsReady, Ref) --[[ Line: 477 ]]
+		setAnchorReady = function(AnchorId, IsReady, Ref)
 			-- upvalues: Tbl (copy), Signal (copy), refreshSurfaceForCurrentEntry (copy)
 			local Entry = Tbl[AnchorId]
 			
@@ -810,7 +810,7 @@ return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
 				refreshSurfaceForCurrentEntry()
 			end
 		end,
-		unregisterAnchor = function(AnchorId, Ref) --[[ Line: 492 ]]
+		unregisterAnchor = function(AnchorId, Ref)
 			-- upvalues: Tbl (copy), Signal (copy), refreshSurfaceForCurrentEntry (copy)
 			local Entry = Tbl[AnchorId]
 			
@@ -823,7 +823,7 @@ return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
 				refreshSurfaceForCurrentEntry()
 			end
 		end,
-		startEligibleTour = function(ScreenScopeId) --[[ Line: 434 ]]
+		startEligibleTour = function(ScreenScopeId)
 			-- upvalues: Flag (ref), RootTourMap (ref), ScopeActions (ref), Signal (copy), EnumsModule (upval), Signal2 (copy), createIdleState (upval), LoadWhatsNewRegistryModule (upval), EntryStorageModule (upval), startTour (copy)
 			assert(Flag and (RootTourMap ~= nil and ScopeActions ~= nil), "WhatsNew store not initialized. Call initialize first.")
 			
@@ -862,7 +862,7 @@ return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
 			end
 		end,
 		startTour = startTour,
-		stopTour = function() --[[ Line: 261 ]]
+		stopTour = function()
 			-- upvalues: Signal (copy), EnumsModule (upval), WhatsNewTelemetryModule (upval), Signal2 (copy), createIdleState (upval)
 			local SignalResult = Signal(false)
 			
@@ -871,7 +871,7 @@ return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
 			end
 			Signal2((createIdleState(Signal(false).screenScopeId)))
 		end,
-		next = function() --[[ Line: 678 ]]
+		next = function()
 			-- upvalues: Signal (copy), EnumsModule (upval), EntryStorageModule (upval), v1 (upval), WhatsNewTelemetryModule (upval), completeTour (copy), showTipAt (copy)
 			local SignalResult = Signal(false)
 			
@@ -905,7 +905,7 @@ return function() --[[ Line: 187 | Named "createWhatsNewStore" ]]
 				showTipAt(CurrentScopeTour, CurrentTipIndex, CurrentScopeTour.tourTips[CurrentTipIndex], { globalStepIndex = NewGlobalStepIndex })
 			end
 		end,
-		back = function() --[[ Line: 718 ]]
+		back = function()
 			-- upvalues: Signal (copy), EnumsModule (upval), WhatsNewTelemetryModule (upval), showTipAt (copy)
 			local SignalResult = Signal(false)
 			

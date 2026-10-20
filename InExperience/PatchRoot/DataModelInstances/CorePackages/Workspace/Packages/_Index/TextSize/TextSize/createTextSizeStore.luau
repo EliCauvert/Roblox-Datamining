@@ -5,20 +5,20 @@ local FoundationModule = require(Parent.Foundation)
 local SignalsModule = require(Parent.Signals)
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
-local function _(Callback) --[[ Line: 12 ]]
+local function _(Callback)
 	local Thread = coroutine.create(Callback)
 	
-	return (function(Thread, p1, ...) --[[ Line: 13 ]]
+	return (function(Thread, p1, ...)
 		return if p1 and coroutine.status(Thread) == "dead" then ... else nil
 	end)(Thread, coroutine.resume(Thread))
 end
 
-local _ = function() --[[ Line: 29 | Named "calculateTextSizeOffset" ]]
+local _ = function()
 	-- upvalues: TextService (copy)
-	local Thread = coroutine.create(function() --[[ Line: 30 ]]
+	local Thread = coroutine.create(function()
 		-- upvalues: TextService (upval)
 		local _Font = Font.fromEnum(Enum.Font.BuilderSans)
-		local Success, Result = pcall(function() --[[ Line: 34 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: TextService (upval), _Font (copy)
 			return TextService:GetTextSizeOffsetAsync(0, _Font)
 		end)
@@ -32,12 +32,12 @@ local _ = function() --[[ Line: 29 | Named "calculateTextSizeOffset" ]]
 		end
 	end)
 	
-	return (function(Thread, p1, ...) --[[ Line: 13 ]]
+	return (function(Thread, p1, ...)
 		return if p1 and coroutine.status(Thread) == "dead" then ... else nil
 	end)(Thread, coroutine.resume(Thread)) or 0
 end
 
-return function() --[[ Line: 48 | Named "createTextSizeStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy), FoundationFontFaceMigration (copy), FoundationModule (copy), TextService (copy), UserGameSettings (copy)
 	local CreateSignalFunction = SignalsModule.createSignal
 	local TextSizeOffset = nil
@@ -45,10 +45,10 @@ return function() --[[ Line: 48 | Named "createTextSizeStore" ]]
 	if FoundationFontFaceMigration then
 		TextSizeOffset = FoundationModule.Utility.getTextSizeOffset() or 0
 	else
-		local Thread = coroutine.create(function() --[[ Line: 30 ]]
+		local Thread = coroutine.create(function()
 			-- upvalues: TextService (upval)
 			local _Font = Font.fromEnum(Enum.Font.BuilderSans)
-			local Success, Result = pcall(function() --[[ Line: 34 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: TextService (upval), _Font (copy)
 				return TextService:GetTextSizeOffsetAsync(0, _Font)
 			end)
@@ -61,21 +61,21 @@ return function() --[[ Line: 48 | Named "createTextSizeStore" ]]
 				return 0
 			end
 		end)
-		TextSizeOffset = (function(Thread, p1, ...) --[[ Line: 13 ]]
+		TextSizeOffset = (function(Thread, p1, ...)
 			return if p1 and coroutine.status(Thread) == "dead" then ... else nil
 		end)(Thread, coroutine.resume(Thread)) or 0
 	end
 	local Signal, Signal2 = CreateSignalFunction(TextSizeOffset)
-	local Connection = UserGameSettings:GetPropertyChangedSignal("PreferredTextSize"):Connect(function() --[[ Line: 55 ]]
+	local Connection = UserGameSettings:GetPropertyChangedSignal("PreferredTextSize"):Connect(function()
 		-- upvalues: Signal2 (copy), FoundationFontFaceMigration (upval), FoundationModule (upval), TextService (upval)
 		local TextSizeOffset = nil
 		if FoundationFontFaceMigration then
 			TextSizeOffset = FoundationModule.Utility.getTextSizeOffset() or 0
 		else
-			local Thread = coroutine.create(function() --[[ Line: 30 ]]
+			local Thread = coroutine.create(function()
 				-- upvalues: TextService (upval)
 				local _Font = Font.fromEnum(Enum.Font.BuilderSans)
-				local Success, Result = pcall(function() --[[ Line: 34 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: TextService (upval), _Font (copy)
 					return TextService:GetTextSizeOffsetAsync(0, _Font)
 				end)
@@ -88,7 +88,7 @@ return function() --[[ Line: 48 | Named "createTextSizeStore" ]]
 					return 0
 				end
 			end)
-			TextSizeOffset = (function(Thread, p1, ...) --[[ Line: 13 ]]
+			TextSizeOffset = (function(Thread, p1, ...)
 				return if p1 and coroutine.status(Thread) == "dead" then ... else nil
 			end)(Thread, coroutine.resume(Thread)) or 0
 		end
@@ -97,7 +97,7 @@ return function() --[[ Line: 48 | Named "createTextSizeStore" ]]
 	
 	return {
 		getTextSizeOffset = Signal,
-		cleanup = function() --[[ Line: 65 ]]
+		cleanup = function()
 			-- upvalues: Connection (ref)
 			if Connection then
 				Connection:Disconnect()

@@ -20,7 +20,7 @@ local EventMap = {
 }
 local FFlagEnableSplitPane = require(Parent.SharedFlags).FFlagEnableSplitPane
 
-return function(p1) --[[ Line: 61 ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), FFlagAppBloxConfirmationDialogFocusNav (copy), ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseDefaultFocusBehaviorFunction (copy), FFlagLuaAppPlayButtonPrivatePT (copy), ButtonVariant (copy), Dialog (copy), FFlagEnableSplitPane (copy), Orientation (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		confirmButtonText = "CommonUI.Controls.Action.Confirm",
@@ -36,11 +36,11 @@ return function(p1) --[[ Line: 61 ]]
 			shouldRestoreFocus = false,
 			surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
 			eventMap = EventMap,
-			eventHandlers = ReactModule.useMemo(function() --[[ Line: 74 ]]
+			eventHandlers = ReactModule.useMemo(function()
 				-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), OnCancelFunction (copy)
 				return {
 					[FocusNavigationEventNameEnum.NavigateBack] = {
-						handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 80 ]]
+						handler = InputHandlersModule.onRelease(function(p2)
 							-- upvalues: OnCancelFunction (upval)
 							OnCancelFunction()
 							p2:cancel()

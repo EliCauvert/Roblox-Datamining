@@ -20,24 +20,24 @@ local CreationFlowStateModule = require(MomentsCreationFlow.Enums.CreationFlowSt
 local CreationFlowLocalizationModule = require(MomentsCreationFlow.Enums.CreationFlowLocalization)
 local EventNamesModule = require(MomentsCreationFlow.Analytics.EventNames)
 
-return function(p1) --[[ Line: 40 ]]
+return function(p1)
 	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), ReactModule (copy), CreationFlowContextModule (copy), UseDispatchFunction (copy), CreationFlowStateUpdatedModule (copy), CreationFlowStateModule (copy), EventNamesModule (copy), View (copy), GradientBackdrop (copy), Icon (copy), ThreeBarsVerticalTrianglesHorizontal (copy), FoundationModule (copy), Text (copy), CreationFlowLocalizationModule (copy), MusicNote (copy), TextUppercaseALowercaseA (copy)
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseTokensResult = UseTokensFunction()
 	local UseContextResult = ReactModule.useContext(CreationFlowContextModule)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UDim2.fromScale(1, 0))
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 52 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseDispatchResult (copy), CreationFlowStateUpdatedModule (upval), CreationFlowStateModule (upval), UseContextResult (copy), EventNamesModule (upval)
 		UseDispatchResult(CreationFlowStateUpdatedModule(CreationFlowStateModule.Trimming))
 		UseContextResult.fireEvent(EventNamesModule.EditingFlowTrimButtonPressed)
 	end)
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 57 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseDispatchResult (copy), CreationFlowStateUpdatedModule (upval), CreationFlowStateModule (upval), UseContextResult (copy), EventNamesModule (upval)
 		UseDispatchResult(CreationFlowStateUpdatedModule(CreationFlowStateModule.Music))
 		UseContextResult.fireEvent(EventNamesModule.EditingFlowMusicButtonPressed)
 	end)
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 62 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseDispatchResult (copy), CreationFlowStateUpdatedModule (upval), CreationFlowStateModule (upval), UseContextResult (copy), EventNamesModule (upval)
 		UseDispatchResult(CreationFlowStateUpdatedModule(CreationFlowStateModule.TextOverlay))
 		UseContextResult.fireEvent(EventNamesModule.EditingFlowTextOverlayButtonPressed)
@@ -54,7 +54,7 @@ return function(p1) --[[ Line: 40 ]]
 		}),
 		EditCTABar = ReactModule.createElement(View, {
 			tag = "align-x-right align-y-center anchor-center-right auto-x col gap-small position-center-right size-0-full",
-			onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 48 ]]
+			onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
 				-- upvalues: UseBindingResult2 (copy)
 				UseBindingResult2(UDim2.new(0, 1.5 * Frame.AbsoluteSize.X, 1, 0))
 			end, {})

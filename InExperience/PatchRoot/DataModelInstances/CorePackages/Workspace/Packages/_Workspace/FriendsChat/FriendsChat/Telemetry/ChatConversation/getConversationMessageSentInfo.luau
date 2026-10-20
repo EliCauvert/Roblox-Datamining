@@ -1,6 +1,6 @@
 ﻿local SendMessageErrorModule = require(script:FindFirstAncestor("FriendsChat").Parent.AppChat.SendMessageError)
 
-return function(p1, RecipientIds) --[[ Line: 27 | Named "getConversationMessageSentInfo" ]]
+return function(p1, RecipientIds)
 	-- upvalues: SendMessageErrorModule (copy)
 	local config = {
 		messageSentResult = SendMessageErrorModule.OtherFailure,

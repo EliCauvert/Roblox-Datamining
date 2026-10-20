@@ -39,11 +39,11 @@ local IconsCommonPlay = Images["icons/common/play"]
 local IconsActionsTruncationCollapse = Images["icons/actions/truncationCollapse"]
 local IconsActionsTruncationExpand = Images["icons/actions/truncationExpand"]
 
-local function v38() --[[ Line: 58 ]] end
+local function v38() end
 
 local ButtonHeightSizeKeyByInputSizeModule = require(script.Parent.ButtonHeightSizeKeyByInputSize)
 
-return ReactModule.memo(function(Frame) --[[ Line: 112 | Named "PlayButtonView" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: FFlagEnableGameJoinEarlyAccess (copy), ReactModule (copy), EarlyAccessPlusTooltipModule (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), CollectionService (copy), InputSize (copy), FFlagLuaAppUseTokenHeightForPlayButton (copy), ButtonHeightSizeKeyByInputSizeModule (copy), FillBehavior (copy), PlayButtonStatesModule (copy), FFlagLuaAppPlayButtonLoadingSkeleton (copy), FFlagLuaAppUnifyPlayButtonAllSurfacesIxp (copy), Skeleton (copy), Radius (copy), ButtonVariant (copy), FFlagLuaAppIconTextPlayButton (copy), FFlagLuaAppTextOnlyPlayButton (copy), FFlagLuaAppJoinTextPlayableButton (copy), FFlagLuaAppUpdatePlayButtonText (copy), PlayXlarge (copy), FFlagLuaAppIconPlayButton (copy), GetFFlagIsSquadEnabledFunction (copy), IconsCommonPlay (copy), FFlagLuaAppPlayButtonPrivatePT (copy), ComboButton (copy), FFlagLuaAppUnifiedPlayButtonSquadMenuDirection (copy), MenuDirection (copy), IconsActionsTruncationExpand (copy), IconsActionsTruncationCollapse (copy), ButtonType (copy), Images (copy), Button (copy), v38 (copy), GetFFlagUIBloxUseFoundationButtonFunction (copy), FFlagLuaAppPlayButtonOptOutFoundationButton (copy), IconButton (copy), Button1 (copy)
 	local Tokens = Frame.tokens
 	local PlayButtonState = Frame.playButtonState
@@ -60,7 +60,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 112 | Named "PlayButtonView" 
 		v1 = UseRefResult
 		
 		if IsShowEarlyAccessTooltip then
-			OnPlayButtonActivated = function() --[[ Line: 128 ]]
+			OnPlayButtonActivated = function()
 				-- upvalues: UseStateResult2 (copy), Frame (copy)
 				UseStateResult2(false)
 				Frame.onPlayButtonActivated()
@@ -68,7 +68,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 112 | Named "PlayButtonView" 
 			
 			Element = ReactModule.createElement(EarlyAccessPlusTooltipModule, {
 				isOpen = UseStateResult,
-				onRequestClose = function() --[[ Line: 134 ]]
+				onRequestClose = function()
 					-- upvalues: UseStateResult2 (copy)
 					UseStateResult2(false)
 				end,
@@ -82,7 +82,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 112 | Named "PlayButtonView" 
 		local Tag = Frame.tag
 		local PlayButtonCaptureRefFunction = Frame.playButtonCaptureRef
 		local UseRefResult = ReactModule.useRef(nil)
-		UseResult = ReactModule.useCallback(function(Current) --[[ Line: 148 ]]
+		UseResult = ReactModule.useCallback(function(Current)
 			-- upvalues: UseRefResult (copy), Tag (copy), CollectionService (upval), PlayButtonCaptureRefFunction (copy)
 			local Current1 = UseRefResult.current
 			
@@ -228,12 +228,12 @@ return ReactModule.memo(function(Frame) --[[ Line: 112 | Named "PlayButtonView" 
 				icon = Icon,
 				text = Text,
 				isDisabled = IsDisabled1,
-				onActivated = if IsDisabled1 then function() --[[ Line: 329 ]] end else OnPlayButtonActivated
+				onActivated = if IsDisabled1 then function() end else OnPlayButtonActivated
 			},
 			overflow = {
 				icon = if FFlagLuaAppUnifiedPlayButtonSquadMenuDirection and Frame.squadButtonMenuDirection == MenuDirection.Down then IconsActionsTruncationExpand else IconsActionsTruncationCollapse,
 				isDisabled = IsDisabled,
-				onActivated = if IsDisabled then function() --[[ Line: 337 ]] end else Frame.onPlaySquadButtonActivated
+				onActivated = if IsDisabled then function() end else Frame.onPlaySquadButtonActivated
 			},
 			testId = Frame.testId
 		})

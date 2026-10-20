@@ -8,7 +8,7 @@ local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local LaunchExperience = SduiCoreSystemModule.SduiActionType.LaunchExperience
 
-return function(p1, AnalyticsContext, SduiContext, _) --[[ Line: 32 ]]
+return function(p1, AnalyticsContext, SduiContext, _)
 	-- upvalues: SduiErrorType (copy), LaunchExperience (copy), FFlagDeferInExperienceRbxmDownload (copy), CryoModule (copy), SduiReportGamePlayIntentFunction (copy), FFlagLuaAppFixLaunchGameSourceParam (copy), LaunchGameFunction (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	

@@ -6,16 +6,16 @@ local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
 local SquadExternalContractContextModule = require(SquadsCore.Components.SquadExternalContractProvider.SquadExternalContractContext)
 local GetLuckyRecommendationStoreModule = require(SquadsCore.Stores.GetLuckyRecommendationStore)
 
-return function(LuckyRecommendationSessionId) --[[ Line: 12 | Named "useLuckyRecommendationAnalytics" ]]
+return function(LuckyRecommendationSessionId)
 	-- upvalues: GetLuckyRecommendationStoreModule (copy), ReactModule (copy), SquadExternalContractContextModule (copy), UseLocalUserIdFunction (copy), CryoModule (copy)
 	local LuckyRecommendationStoreModule = GetLuckyRecommendationStoreModule(false)
 	local UseContextResult = ReactModule.useContext(SquadExternalContractContextModule)
 	local Number: number = tonumber(UseLocalUserIdFunction()) or 0
 	
-	return (ReactModule.useMemo(function() --[[ Line: 18 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: LuckyRecommendationStoreModule (copy), LuckyRecommendationSessionId (copy), Number (copy), CryoModule (upval), UseContextResult (copy)
 		return {
-			fire = function(p1, p2) --[[ Line: 20 ]]
+			fire = function(p1, p2)
 				-- upvalues: LuckyRecommendationStoreModule (upval), LuckyRecommendationSessionId (upval), Number (upval), CryoModule (upval), UseContextResult (upval)
 				local AnalyticsContext = LuckyRecommendationStoreModule.getAnalyticsContext()
 				local JoinResult = {
@@ -31,7 +31,7 @@ return function(LuckyRecommendationSessionId) --[[ Line: 12 | Named "useLuckyRec
 				end
 				UseContextResult.fireSquadAnalytics(p1, JoinResult)
 			end,
-			getContext = function() --[[ Line: 34 ]]
+			getContext = function()
 				-- upvalues: LuckyRecommendationStoreModule (upval)
 				return LuckyRecommendationStoreModule.getAnalyticsContext()
 			end

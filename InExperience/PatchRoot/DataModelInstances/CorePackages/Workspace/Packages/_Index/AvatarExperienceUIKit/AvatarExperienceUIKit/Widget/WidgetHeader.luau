@@ -16,11 +16,11 @@ local FFlagAXCatalogItemInformationPopover = AvatarExperienceFlagsModule.FFlagAX
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local FFlagAXWidgetHeaderFlexLayout = AvatarExperienceFlagsModule.FFlagAXWidgetHeaderFlexLayout
 
-local function _(p1) --[[ Line: 43 | Named "nonEmptyOrNil" ]]
+local function _(p1)
 	return if p1 == nil or p1 == "" then nil else p1
 end
 
-return function(Frame) --[[ Line: 47 | Named "WidgetHeader" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), UseDesignTokensFunction (copy), UseLocalizationFunction (copy), FFlagAXWidgetHeaderTreatEmptyTextAsNil (copy), FFlagAXCatalogItemInformationPopover (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), FFlagAXWidgetHeaderFlexLayout (copy), IconWithTooltip (copy), TooltipOrientation (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.new())
 	local UseDesignTokensResult = UseDesignTokensFunction()
@@ -71,7 +71,7 @@ return function(Frame) --[[ Line: 47 | Named "WidgetHeader" ]]
 	}, {
 		UIFlexItem = if HasOnInformationIconActivated then ReactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Shrink }) else nil,
 		UISizeConstraint = if FFlagAXWidgetHeaderFlexLayout then nil elseif Frame.seeAllCallback then ReactModule.createElement("UISizeConstraint", {
-			MinSize = UseBindingResult:map(function(p1): Vector2 --[[ Line: 102 ]]
+			MinSize = UseBindingResult:map(function(p1): Vector2
 				return Vector2.new(0, p1.Y)
 			end)
 		}) else nil
@@ -128,7 +128,7 @@ return function(Frame) --[[ Line: 47 | Named "WidgetHeader" ]]
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			LayoutOrder = if FFlagAXWidgetHeaderFlexLayout then 1 else nil,
-			Size = if FFlagAXWidgetHeaderFlexLayout then UDim2.new(1, 0, 0, 0) elseif Frame.seeAllCallback then UseBindingResult:map(function(p1): UDim2 --[[ Line: 191 ]]
+			Size = if FFlagAXWidgetHeaderFlexLayout then UDim2.new(1, 0, 0, 0) elseif Frame.seeAllCallback then UseBindingResult:map(function(p1): UDim2
 				-- upvalues: UseDesignTokensResult (copy)
 				return UDim2.new(1, 0 - (p1.X + UseDesignTokensResult.Size.Size_300), 0, 0)
 			end) else UDim2.new(1, 0, 0, 0),
@@ -175,7 +175,7 @@ return function(Frame) --[[ Line: 47 | Named "WidgetHeader" ]]
 			standardSize = StandardButtonSize.XSmall,
 			onActivated = Frame.seeAllCallback,
 			buttonRef = Frame.seeAllRef,
-			[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 251 ]]
+			[ReactModule.Change.AbsoluteSize] = function(Frame)
 				-- upvalues: UseBindingResult2 (copy)
 				UseBindingResult2(Frame.AbsoluteSize)
 			end,

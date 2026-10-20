@@ -1,4 +1,4 @@
-﻿return function(Text, Text1, Text2, Text3, p1) --[[ Line: 1 ]]
+﻿return function(Text, Text1, Text2, Text3, p1)
 	local List = {}
 	
 	if Text3 == nil then

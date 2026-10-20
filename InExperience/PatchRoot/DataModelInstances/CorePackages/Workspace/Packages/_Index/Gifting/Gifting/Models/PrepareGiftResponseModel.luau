@@ -25,7 +25,7 @@ local InterfaceResult5 = TModule.interface({
 	senderRobuxBalance = TModule.number
 })
 
-local function formatItemDetail(p1) --[[ Line: 92 ]]
+local function formatItemDetail(p1)
 	-- upvalues: InterfaceResult (copy), GiftModelUtilsModule (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult(p1)
 	
@@ -46,7 +46,7 @@ local function formatItemDetail(p1) --[[ Line: 92 ]]
 	end
 end
 
-local function formatDiscountDetail(p1) --[[ Line: 111 ]]
+local function formatDiscountDetail(p1)
 	-- upvalues: InterfaceResult1 (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult1(p1)
 	
@@ -62,7 +62,7 @@ local function formatDiscountDetail(p1) --[[ Line: 111 ]]
 	end
 end
 
-local function formatDiscountInformation(DiscountInformation) --[[ Line: 125 ]]
+local function formatDiscountInformation(DiscountInformation)
 	-- upvalues: InterfaceResult2 (copy), GiftModelUtilsModule (copy), formatDiscountDetail (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult2(DiscountInformation)
 	
@@ -83,7 +83,7 @@ local function formatDiscountInformation(DiscountInformation) --[[ Line: 125 ]]
 	end
 end
 
-local function _(p1) --[[ Line: 144 | Named "formatRecipientInfo" ]]
+local function _(p1)
 	-- upvalues: InterfaceResult3 (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult3(p1)
 	
@@ -98,7 +98,7 @@ local function _(p1) --[[ Line: 144 | Named "formatRecipientInfo" ]]
 	end
 end
 
-local _ = function(p1) --[[ Line: 157 | Named "formatFreeAllowance" ]]
+local _ = function(p1)
 	-- upvalues: InterfaceResult4 (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult4(p1)
 	
@@ -115,7 +115,7 @@ local _ = function(p1) --[[ Line: 157 | Named "formatFreeAllowance" ]]
 end
 
 return {
-	format = function(p1) --[[ Line: 173 ]]
+	format = function(p1)
 		-- upvalues: InterfaceResult5 (copy), GiftModelUtilsModule (copy), formatItemDetail (copy), InterfaceResult3 (copy), formatDiscountInformation (copy), InterfaceResult4 (copy)
 		local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult5(p1)
 		

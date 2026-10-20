@@ -9,7 +9,7 @@ local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local GetSduiClientPageScopeFunction = SduiCoreSystemModule.getSduiClientPageScope
 local config = { [true] = "Upvote", [false] = "Downvote" }
 
-return function(p1, _, p2, _) --[[ Line: 32 | Named "SduiOpenGameFeedbackFormAction" ]]
+return function(p1, _, p2, _)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), Game (copy), config (copy), PlayerFeedbackEvents (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), GetSduiClientPageScopeFunction (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	
@@ -84,7 +84,7 @@ return function(p1, _, p2, _) --[[ Line: 32 | Named "SduiOpenGameFeedbackFormAct
 				comment = DataResult.comment,
 				metadata = DataResult.metadata
 			},
-			onSubmitted = function() --[[ Line: 123 ]]
+			onSubmitted = function()
 				-- upvalues: Game (upval), RootPlaceId (copy), ConfigKey (copy), GetSduiClientPageScopeFunction (upval)
 				Game.getUserVoteFeedbackMetadataStore(false).clearItem(RootPlaceId)
 				

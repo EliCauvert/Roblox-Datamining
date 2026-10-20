@@ -2,7 +2,7 @@
 local SignalsModule = require(Parent.Signals)
 local _ = require(Parent.UniversalAppPolicy)
 
-local function _() --[[ Line: 13 | Named "createSduiPolicyStore" ]]
+local function _()
 	-- upvalues: SignalsModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(nil)
 	
@@ -11,7 +11,7 @@ end
 
 local Config = nil
 
-return function() --[[ Line: 24 | Named "getSduiPolicyStore" ]]
+return function()
 	-- upvalues: Config (ref), SignalsModule (copy)
 	if Config == nil then
 		local Signal, Signal2 = SignalsModule.createSignal(nil)

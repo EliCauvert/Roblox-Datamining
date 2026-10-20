@@ -6,7 +6,7 @@ local FFlagUserProfilesLogErrorCodesModule = require(Parent.Flags.FFlagUserProfi
 local DiagCountersListModule = require(script.Parent.DiagCountersList)
 local _ = require(script.Parent.EventNames)
 
-return function(p1) --[[ Line: 14 ]]
+return function(p1)
 	-- upvalues: FFlagUserProfilesLogErrorCodesModule (copy), FireDiagFunction (copy), DiagCountersListModule (copy), FireDiagCounterFunction (copy)
 	if FFlagUserProfilesLogErrorCodesModule then
 		local FireDiagResult = FireDiagFunction({
@@ -14,7 +14,7 @@ return function(p1) --[[ Line: 14 ]]
 			eventList = DiagCountersListModule
 		})
 		
-		return function(p2, p3) --[[ Line: 23 ]]
+		return function(p2, p3)
 			-- upvalues: DiagCountersListModule (upval), FireDiagResult (copy)
 			return if DiagCountersListModule[p2] then FireDiagResult(p2, p3) else p2
 		end
@@ -24,7 +24,7 @@ return function(p1) --[[ Line: 14 ]]
 			eventList = DiagCountersListModule
 		})
 		
-		return function(p2) --[[ Line: 36 ]]
+		return function(p2)
 			-- upvalues: DiagCountersListModule (upval), FireDiagCounterResult (copy)
 			return if DiagCountersListModule[p2] then FireDiagCounterResult(p2) else p2
 		end

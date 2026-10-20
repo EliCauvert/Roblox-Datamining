@@ -5,7 +5,7 @@ local RaiseActionAsEventMiddleware = require(Parent.ExpChatShared).RaiseActionAs
 local InstallReducerModule = require(script.Parent.installReducer)
 local FFlagAppChatReactiveFeatureRestrictions = require(Parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
 
-return function(p1) --[[ Line: 12 | Named "createStore" ]]
+return function(p1)
 	-- upvalues: RoduxModule (copy), InstallReducerModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy), ChatModerationStatusHydrationMiddlewareModule (copy), RaiseActionAsEventMiddleware (copy)
 	return RoduxModule.Store.new(InstallReducerModule, p1, if FFlagAppChatReactiveFeatureRestrictions then {
 		RoduxModule.thunkMiddleware,

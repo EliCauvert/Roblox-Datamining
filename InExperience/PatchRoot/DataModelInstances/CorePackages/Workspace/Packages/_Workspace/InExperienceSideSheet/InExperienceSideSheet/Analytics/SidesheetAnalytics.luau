@@ -11,7 +11,7 @@ local config = {
 	lastUpdated = { 2026, 4, 8 }
 }
 
-function _logEventWithStandardizedFields(Config, p1) --[[ Line: 26 ]]
+function _logEventWithStandardizedFields(Config, p1)
 	-- upvalues: TelemetryServicePlaySessionInfoEnabledEngineFeature (copy), RbxAnalyticsService (copy), TelemetryService (copy)
 	local StandardizedFields = {
 		"addPlaceId",
@@ -33,7 +33,7 @@ function _logEventWithStandardizedFields(Config, p1) --[[ Line: 26 ]]
 	})
 end
 
-function logSidesheetClosed(Source) --[[ Line: 42 ]]
+function logSidesheetClosed(Source)
 	-- upvalues: config (copy)
 	_logEventWithStandardizedFields(config, { source = Source })
 end

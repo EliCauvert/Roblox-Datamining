@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("VoiceToxicityToastDurationSeconds", 5)
 
-return function() --[[ Line: 2 ]]
+return function()
 	return game:GetFastInt("VoiceToxicityToastDurationSeconds")
 end

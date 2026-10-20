@@ -20,12 +20,12 @@ local config = {
 	reportAbuse = "Feature.ReportAbuse.Action.EnterChatLineReporting"
 }
 
-return function(p1) --[[ Line: 34 ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), CurrentCamera (copy), ConstantsModule (copy), ReactModule (copy), ContextualMenu (copy), Images (copy), GuiService (copy), ChatLineReportRootModule (copy), GetFFlagMemoizeChatReportingMenuFunction (copy), MenuDirection (copy), MotorOverrideOptions (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local ViewportSize = if CurrentCamera then CurrentCamera.ViewportSize else Vector2.new(ConstantsModule.ViewportSize, ConstantsModule.ViewportSize)
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 41 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), ViewportSize (copy), ConstantsModule (upval)
 		if UseRefResult.current and ViewportSize.X < UseRefResult.current.AbsolutePosition.X + UseRefResult.current.AbsoluteSize.X then
 			UseRefResult.current.AnchorPoint = Vector2.new(1, 0)
@@ -46,11 +46,11 @@ return function(p1) --[[ Line: 34 ]]
 				{
 					icon = Images["icons/actions/feedback"],
 					text = UseLocalizationResult.reportAbuse,
-					onActivated = function() --[[ Line: 66 ]]
+					onActivated = function()
 						-- upvalues: GuiService (upval), ChatLineReportRootModule (upval), GetFFlagMemoizeChatReportingMenuFunction (upval), p1 (copy)
 						if GuiService.MenuIsOpen then
 							local Connection = nil
-							Connection = GuiService.MenuClosed:Connect(function() --[[ Line: 72 ]]
+							Connection = GuiService.MenuClosed:Connect(function()
 								-- upvalues: ChatLineReportRootModule (upval), GetFFlagMemoizeChatReportingMenuFunction (upval), p1 (upval), Connection (ref)
 								ChatLineReportRootModule.initialize(if GetFFlagMemoizeChatReportingMenuFunction() then p1.getMessages() else p1.messages)
 								Connection:Disconnect()
@@ -74,7 +74,7 @@ return function(p1) --[[ Line: 34 ]]
 				Color = p1.backgroundColor3
 			},
 			screenSize = ViewportSize,
-			onDismiss = function() --[[ Line: 51 ]]
+			onDismiss = function()
 				-- upvalues: p1 (copy)
 				p1.setContextMenuOpen(false)
 			end

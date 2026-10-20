@@ -1,10 +1,10 @@
 ﻿local _ = require(script:FindFirstAncestor("SplitPane").Parent.React)
 
-local function _(p1, p2): Rect --[[ Line: 38 | Named "expandRect" ]]
+local function _(p1, p2): Rect
 	return Rect.new(p1.Min.X - p2, p1.Min.Y - p2, p1.Max.X + p2, p1.Max.Y + p2)
 end
 
-return function(p1) --[[ Line: 42 ]]
+return function(p1)
 	local IsSupportPaneCollapsed = p1.stepIndex == 1 and p1.isSupportPaneCollapsed
 	local IsDirectionalInput = IsSupportPaneCollapsed and p1.isDirectionalInput
 	local NoIsSupportPaneCollapsed: boolean = not IsSupportPaneCollapsed or (p1.anchors.gamepadCollapsedStepOne ~= nil or p1.collapsedExpandButtonRect ~= nil and p1.anchors.collapsedExpandButton ~= nil)

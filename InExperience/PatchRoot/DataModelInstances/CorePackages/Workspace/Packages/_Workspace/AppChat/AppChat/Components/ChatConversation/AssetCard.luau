@@ -48,17 +48,17 @@ local config = {
 		placeId = nil,
 		universeId = nil,
 		senderUserId = nil,
-		onDetailsOpened = function() --[[ Line: 56 ]] end,
-		openGameDetailsPage = function() --[[ Line: 57 ]] end
+		onDetailsOpened = function() end,
+		openGameDetailsPage = function() end
 	}
 }
 local Signal = require(Parent.Signals).createSignal(nil)
 
-local function useRendersAssetCardView(ShareLink) --[[ Line: 73 ]]
+local function useRendersAssetCardView(ShareLink)
 	-- upvalues: FFlagAppChatResolveShareLinkV2Module (copy), GetShareLinkV2StoreModule (copy), ReactModule (copy), SignalsReactModule (copy), Signal (copy), FFlagAppChatGameAssetCardModule (copy), IsAssetCardClassificationModule (copy)
 	local LinkId = if FFlagAppChatResolveShareLinkV2Module and ShareLink and ShareLink.version == 2 then ShareLink.linkId else nil
 	local ShareLinkV2StoreModule = GetShareLinkV2StoreModule(false)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 80 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: LinkId (copy), ShareLinkV2StoreModule (copy)
 		return if LinkId then ShareLinkV2StoreModule.getAndFetchClassification(LinkId) else nil
 	end, { ShareLinkV2StoreModule, LinkId or "" })
@@ -67,7 +67,7 @@ local function useRendersAssetCardView(ShareLink) --[[ Line: 73 ]]
 	return if LinkId == nil then FFlagAppChatGameAssetCardModule else IsAssetCardClassificationModule(UseSignalStateResult)
 end
 
-local function renderAssetCardViewRow(Frame, Card) --[[ Line: 93 ]]
+local function renderAssetCardViewRow(Frame, Card)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), ChatBubbleEnumModule (copy), RepliedToMarkerModule (copy)
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "auto-xy",
@@ -87,7 +87,7 @@ local function renderAssetCardViewRow(Frame, Card) --[[ Line: 93 ]]
 	})
 end
 
-return function(p1) --[[ Line: 121 | Named "AssetCardTemp" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), ShareLinkContainerModule (copy), PlaceIdContainerModule (copy), GameCardContainerModule (copy), UseScaledValueFunction (copy), ConstantsModule (copy), FFlagAppChatShareLinkV2FallbacksModule (copy), UseShareLinkV2PresentationModule (copy), FFlagAppChatPlusReferralAssetCardModule (copy), FFlagAppChatMomentAssetCardModule (copy), FFlagAppChatGameAssetCardModule (copy), useRendersAssetCardView (copy), ReactModule (copy), ToMessageGroupShapeModule (copy), ShareLinkV2PresentationModule (copy), FFlagAppChatFullPlaintextBeforeGameCardsModule (copy), TEXTBUBBLEXPADDING (copy), BUBBLEPADDING (copy), TEXTBUBBLEXWIDEADDITIONALPADDING (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), RoactModule (copy), PlainTextModule (copy), renderAssetCardViewRow (copy), ChatBubbleContainerModule (copy), FFlagAppChatIntrinsicAssetCardHeightModule (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UnionResult1 = CryoModule.Dictionary.union(config.additionalProps, UnionResult.additionalProps)
@@ -106,7 +106,7 @@ return function(p1) --[[ Line: 121 | Named "AssetCardTemp" ]]
 	
 	if FFlagAppChatPlusReferralAssetCardModule or FFlagAppChatMomentAssetCardModule or FFlagAppChatGameAssetCardModule then
 		v1 = useRendersAssetCardView(UnionResult1.shareLink)
-		UseMemoResult = ReactModule.useMemo(function() --[[ Line: 147 ]]
+		UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: ToMessageGroupShapeModule (upval), UnionResult (copy)
 			return ToMessageGroupShapeModule(UnionResult.hasTail, UnionResult.isLastMessageInMessageGroup, UnionResult.isRepliedTo, UnionResult.isIncoming)
 		end, {

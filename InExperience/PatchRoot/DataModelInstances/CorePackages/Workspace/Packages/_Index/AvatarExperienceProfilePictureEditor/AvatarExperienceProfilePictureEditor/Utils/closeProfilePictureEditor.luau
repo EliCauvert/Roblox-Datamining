@@ -2,7 +2,7 @@
 local AvatarScreen = require(Parent.AvatarExperienceNavigation).Enums.AvatarScreen
 local FFlagAXPPEReturnToEntrySurface = require(Parent.SharedFlags).FFlagAXPPEReturnToEntrySurface
 
-local function _(p1) --[[ Line: 18 | Named "resolveEntrySurface" ]]
+local function _(p1)
 	if not p1.getParam then
 		return nil, nil
 	end
@@ -15,7 +15,7 @@ local function _(p1) --[[ Line: 18 | Named "resolveEntrySurface" ]]
 	end
 end
 
-return function(p1) --[[ Line: 31 | Named "closeProfilePictureEditor" ]]
+return function(p1)
 	-- upvalues: FFlagAXPPEReturnToEntrySurface (copy), AvatarScreen (copy)
 	if not p1 then return end
 	local PrevNavPageParam = nil

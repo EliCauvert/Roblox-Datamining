@@ -42,12 +42,12 @@ local InputBeganConnection = nil
 local v2 = 0
 local CurrentTime = 1e999
 
-local function _(p1) --[[ Line: 99 | Named "getPadding" ]]
+local function _(p1)
 	-- upvalues: IsPlatformMatch (copy), config (copy), IsTenFootInterface (copy)
 	return if IsPlatformMatch then p1 and config.MOBILE_PORTRAIT or config.MOBILE_LANDSCAPE elseif IsTenFootInterface then config.CONSOLE else config.DESKTOP
 end
 
-local _ = function(Entry, Value: number) --[[ Line: 109 | Named "lerp" ]]
+local _ = function(Entry, Value: number)
 	if type(Entry) == "table" and #Entry >= 2 then
 		local ClampedValue = math.clamp(Value, 0, 1)
 		
@@ -58,7 +58,7 @@ local _ = function(Entry, Value: number) --[[ Line: 109 | Named "lerp" ]]
 end
 
 local config1 = {
-	FadeIn = function(p1: number, _, Bindings, Callback: () -> ()) --[[ Line: 118 ]]
+	FadeIn = function(p1: number, _, Bindings, Callback: () -> ())
 		local list = { 1, 1 }
 		local list1 = { 1, 0 }
 		local list2 = { 1, 0.2 }
@@ -158,7 +158,7 @@ local config1 = {
 		end
 		CreatorTextSizeFunction(v10)
 	end,
-	FadeOut = function(p1: number, _, Bindings, Callback: () -> ()) --[[ Line: 147 ]]
+	FadeOut = function(p1: number, _, Bindings, Callback: () -> ())
 		-- upvalues: RunService (copy)
 		local list = { 1, 0.6 }
 		local list1 = { 0, 1 }
@@ -262,7 +262,7 @@ local config1 = {
 	end
 }
 
-local _ = function() --[[ Line: 180 | Named "disconnectAndCloseHealthStat" ]]
+local _ = function()
 	-- upvalues: InputBeganConnection (ref), GuiService (copy)
 	if InputBeganConnection then
 		InputBeganConnection:disconnect()
@@ -273,15 +273,15 @@ end
 
 local LoadingScreenView = RoactModule.Component:extend("LoadingScreenView")
 
-function LoadingScreenView.playAnimation(p1, AnimationFunction, p2, Callback) --[[ Line: 191 ]]
+function LoadingScreenView.playAnimation(p1, AnimationFunction, p2, Callback)
 	-- upvalues: RunService (copy)
 	p1.animationStartTime = tick()
 	p1.animationFunction = AnimationFunction
 	
 	if not p1.renderSteppedConnection then
-		p1.renderSteppedConnection = RunService.RenderStepped:Connect(function() --[[ Line: 196 ]]
+		p1.renderSteppedConnection = RunService.RenderStepped:Connect(function()
 			-- upvalues: p1 (copy), p2 (copy), Callback (copy)
-			p1.animationFunction(tick() - p1.animationStartTime, p2, p1.updateBindings, function() --[[ Line: 197 ]]
+			p1.animationFunction(tick() - p1.animationStartTime, p2, p1.updateBindings, function()
 				-- upvalues: p1 (upval), Callback (upval)
 				p1:stopAnimation()
 				
@@ -293,14 +293,14 @@ function LoadingScreenView.playAnimation(p1, AnimationFunction, p2, Callback) --
 	end
 end
 
-function LoadingScreenView.stopAnimation(p1) --[[ Line: 207 ]]
+function LoadingScreenView.stopAnimation(p1)
 	if p1.renderSteppedConnection then
 		p1.renderSteppedConnection:Disconnect()
 		p1.renderSteppedConnection = nil
 	end
 end
 
-function LoadingScreenView.renderBackground(p1, p2) --[[ Line: 214 ]]
+function LoadingScreenView.renderBackground(p1, p2)
 	-- upvalues: RoactModule (copy), v1 (ref), ExternalEventConnection (copy), RunService (copy)
 	return RoactModule.createElement("ScreenGui", {
 		IgnoreGuiInset = true,
@@ -334,7 +334,7 @@ function LoadingScreenView.renderBackground(p1, p2) --[[ Line: 214 ]]
 	})
 end
 
-function LoadingScreenView:showConnnectionHealthDebugMenu(_) --[[ Line: 256 ]]
+function LoadingScreenView:showConnnectionHealthDebugMenu(_)
 	-- upvalues: v2 (ref), CurrentTime (ref), IsPlatformMatch (copy), GuiService (copy)
 	if v2 == 0 then
 		v2 = 1
@@ -349,7 +349,7 @@ function LoadingScreenView:showConnnectionHealthDebugMenu(_) --[[ Line: 256 ]]
 	CurrentTime = 1e999
 end
 
-function LoadingScreenView.renderPlaceIcon(p1, p2) --[[ Line: 273 ]]
+function LoadingScreenView.renderPlaceIcon(p1, p2)
 	-- upvalues: RoactModule (copy), _Color3 (copy), ExternalEventConnection (copy), RunService (copy)
 	local ShimPos = p1.state.shimPos
 	local Value: number = p1.bindings.iconTransparency:getValue()
@@ -452,7 +452,7 @@ function LoadingScreenView.renderPlaceIcon(p1, p2) --[[ Line: 273 ]]
 	return CreateElementFunction(v3, config, t)
 end
 
-function LoadingScreenView.renderInfoFrame(p1, p2) --[[ Line: 334 ]]
+function LoadingScreenView.renderInfoFrame(p1, p2)
 	-- upvalues: VerifiedBadgesModule (copy), list (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), IsPlatformMatch (copy)
 	local ProductInfo = p1.props.productInfo
 	local Name = ProductInfo and ProductInfo.Name or ""
@@ -471,7 +471,7 @@ function LoadingScreenView.renderInfoFrame(p1, p2) --[[ Line: 334 ]]
 		Position = UDim2.fromScale(0.5, 0.5),
 		Size = p1.isPortrait and UDim2.fromScale(1, 0) or UDim2.fromScale(0.6, 0),
 		Active = true,
-		[RoactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 357 ]]
+		[RoactModule.Change.AbsoluteSize] = function(Frame)
 			-- upvalues: p1 (copy)
 			p1.updateBindings.updateInfoFrameAbsoluteSize(Frame.AbsoluteSize)
 		end
@@ -547,7 +547,7 @@ function LoadingScreenView.renderInfoFrame(p1, p2) --[[ Line: 334 ]]
 	})
 end
 
-function LoadingScreenView.renderMain(p1, p2) --[[ Line: 436 ]]
+function LoadingScreenView.renderMain(p1, p2)
 	-- upvalues: IsPlatformMatch (copy), config (copy), IsTenFootInterface (copy), RoactModule (copy), v1 (ref), Loading (copy), IconSize (copy)
 	local IsPortrait = p1.isPortrait
 	local MOBILEPORTRAIT = if IsPlatformMatch then IsPortrait and config.MOBILE_PORTRAIT or config.MOBILE_LANDSCAPE elseif IsTenFootInterface then config.CONSOLE else config.DESKTOP
@@ -607,7 +607,7 @@ function LoadingScreenView.renderMain(p1, p2) --[[ Line: 436 ]]
 	})
 end
 
-function LoadingScreenView.renderCloseBtn(p1, _) --[[ Line: 495 ]]
+function LoadingScreenView.renderCloseBtn(p1, _)
 	-- upvalues: ResponsiveModule (copy), RoactModule (copy)
 	if p1.props.preferredInputRef.current ~= ResponsiveModule.Input.Directional and not p1.state.showCloseBtn and tick() - p1.startTime > 5 then
 		p1:setState({ showCloseBtn = true })
@@ -621,7 +621,7 @@ function LoadingScreenView.renderCloseBtn(p1, _) --[[ Line: 495 ]]
 		Size = UDim2.fromOffset(if p1.isQueueTreatmentEnabled then 32 else 32, if p1.isQueueTreatmentEnabled then 32 else 32),
 		Active = false,
 		ZIndex = 10,
-		[RoactModule.Event.MouseButton1Click] = function() --[[ Line: 518 ]]
+		[RoactModule.Event.MouseButton1Click] = function()
 			-- upvalues: p1 (copy)
 			if p1.props.onCloseButtonActivated then
 				p1.props.onCloseButtonActivated()
@@ -630,7 +630,7 @@ function LoadingScreenView.renderCloseBtn(p1, _) --[[ Line: 495 ]]
 	})
 end
 
-function LoadingScreenView.renderServerFrame(p1, p2) --[[ Line: 526 ]]
+function LoadingScreenView.renderServerFrame(p1, p2)
 	-- upvalues: IsTenFootInterface (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), NewResult (copy), CoreGui (copy)
 	local TextSize: number = if IsTenFootInterface then 16 else 12
 	local TextSize1: number = if IsTenFootInterface then 16 else 12
@@ -683,7 +683,7 @@ function LoadingScreenView.renderServerFrame(p1, p2) --[[ Line: 526 ]]
 	})
 end
 
-function LoadingScreenView.renderGamepadCancelBtn(p1, p2) --[[ Line: 585 ]]
+function LoadingScreenView.renderGamepadCancelBtn(p1, p2)
 	-- upvalues: ResponsiveModule (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), NewResult (copy)
 	return p1.props.preferredInputRef.current == ResponsiveModule.Input.Directional and (not p1.state.gamepadCancelPressed and RoactModule.createElement("Frame", {
 		Name = "GamepadCancelFrame",
@@ -729,7 +729,7 @@ function LoadingScreenView.renderGamepadCancelBtn(p1, p2) --[[ Line: 585 ]]
 	}))
 end
 
-function LoadingScreenView.init(p1) --[[ Line: 634 ]]
+function LoadingScreenView.init(p1)
 	-- upvalues: _Vector2 (copy), IsTenFootInterface (copy), QueueExperimentation (copy), RoactModule (copy), list (copy), IsPlatformMatch (copy), GuiService (copy), ContextActionService (copy)
 	p1.thumbnailMoveSpd = 0.05
 	p1.fadeinComplete = false
@@ -752,7 +752,7 @@ function LoadingScreenView.init(p1) --[[ Line: 634 ]]
 	})
 	p1.isQueueTreatmentEnabled = if QueueExperimentation.getIsJoinNewServerButtonEnabled() then p1.props.placeId > 0 else QueueExperimentation.getIsAutoJoinNewServerEnabled() and p1.props.placeId > 0
 	
-	function p1.onAbsoluteSizeChange(Frame: Frame) --[[ Line: 664 ]]
+	function p1.onAbsoluteSizeChange(Frame: Frame)
 		-- upvalues: p1 (copy)
 		p1:setState({ absoluteSize = Frame.AbsoluteSize })
 		p1.isPortrait = Frame.AbsoluteSize.X < Frame.AbsoluteSize.Y
@@ -771,19 +771,19 @@ function LoadingScreenView.init(p1) --[[ Line: 634 ]]
 	p1.bindings = {
 		thumbnailTransparency = Binding,
 		iconTransparency = Binding1,
-		iconSize = Binding3:map(function(p2): UDim2 --[[ Line: 686 ]]
+		iconSize = Binding3:map(function(p2): UDim2
 			-- upvalues: p1 (copy), list (upval)
 			local ClampedValue = math.clamp(math.max(p1.state.absoluteSize.X, p1.state.absoluteSize.Y) / 1024 * list[1], list[1], list[2])
 			
 			return UDim2.fromOffset(ClampedValue * p2, ClampedValue * p2)
 		end),
 		placeTextTransparency = Binding4,
-		placeTextSize = Binding5:map(function(p2) --[[ Line: 692 ]]
+		placeTextSize = Binding5:map(function(p2)
 			-- upvalues: IsPlatformMatch (upval)
 			return (if IsPlatformMatch then 20 else 36) * p2
 		end),
 		creatorTextTransparency = Binding6,
-		creatorTextSize = Binding7:map(function(p2: number): number --[[ Line: 696 ]]
+		creatorTextSize = Binding7:map(function(p2: number): number
 			return 20 * p2
 		end),
 		infoFrameTransparency = Binding8,
@@ -801,7 +801,7 @@ function LoadingScreenView.init(p1) --[[ Line: 634 ]]
 		updateInfoFrameAbsoluteSize = Binding2_8
 	}
 	
-	function p1.renderBackgroundSteppedCallback(p2) --[[ Line: 716 ]]
+	function p1.renderBackgroundSteppedCallback(p2)
 		-- upvalues: p1 (copy), _Vector2 (upval)
 		local AbsoluteSize = p1.state.absoluteSize
 		local ScaledX = AbsoluteSize.x * 1.5
@@ -827,7 +827,7 @@ function LoadingScreenView.init(p1) --[[ Line: 634 ]]
 		})
 	end
 	
-	function p1.renderShimmerCallback(p2: number) --[[ Line: 743 ]]
+	function p1.renderShimmerCallback(p2: number)
 		-- upvalues: p1 (copy)
 		local NewShimPos = p1.state.shimPos + p2 * 1
 		
@@ -840,14 +840,14 @@ function LoadingScreenView.init(p1) --[[ Line: 634 ]]
 	if GuiService:GetUiMessage() ~= "" then
 		p1:setState({ serverStatusText = GuiService:GetUiMessage() })
 	end
-	GuiService.UiMessageChanged:Connect(function(MsgType, ServerStatusText) --[[ Line: 760 ]]
+	GuiService.UiMessageChanged:Connect(function(MsgType, ServerStatusText)
 		-- upvalues: p1 (copy)
 		if MsgType == Enum.UiMessageType.UiMessageInfo then
 			p1:setState({ serverStatusText = ServerStatusText })
 		end
 	end)
 	local Flag = false
-	ContextActionService:BindCoreAction("CancelGameLoad", function(_, UserInputState, _) --[[ Line: 768 ]]
+	ContextActionService:BindCoreAction("CancelGameLoad", function(_, UserInputState, _)
 		-- upvalues: Flag (ref), p1 (copy), ContextActionService (upval)
 		if UserInputState == Enum.UserInputState.Begin then
 			Flag = true
@@ -866,7 +866,7 @@ function LoadingScreenView.init(p1) --[[ Line: 634 ]]
 	end, false, Enum.KeyCode.ButtonB)
 end
 
-function LoadingScreenView.renderAutoTranslate(p1) --[[ Line: 787 ]]
+function LoadingScreenView.renderAutoTranslate(p1)
 	-- upvalues: LoadingScreenTelemetryModule (copy), RoactModule (copy), AutoTranslateBadgeModule (copy)
 	if p1.props.universeId <= 0 then
 		LoadingScreenTelemetryModule.countAutoTranslateZeroUniverseId()
@@ -881,12 +881,12 @@ function LoadingScreenView.renderAutoTranslate(p1) --[[ Line: 787 ]]
 	end
 end
 
-function LoadingScreenView.renderPolicyContainer(p1) --[[ Line: 799 ]]
+function LoadingScreenView.renderPolicyContainer(p1)
 	-- upvalues: ReactModule (copy), PolicyContainerModule (copy)
 	return if p1.props.isSubjectToChinaPolicies then ReactModule.createElement(PolicyContainerModule, { position = UDim2.new(0, 0, 0, 32) }) else nil
 end
 
-function LoadingScreenView.renderServerStatus(p1) --[[ Line: 808 ]]
+function LoadingScreenView.renderServerStatus(p1)
 	-- upvalues: QueueExperimentation (copy), RoactModule (copy), ServerStatusWithCountdownModule (copy), ServerStatusModule (copy)
 	return if QueueExperimentation.getIsAutoJoinNewServerEnabled() then RoactModule.createElement(ServerStatusWithCountdownModule, {
 		anchorPoint = Vector2.new(0.5, 1),
@@ -905,16 +905,16 @@ function LoadingScreenView.renderServerStatus(p1) --[[ Line: 808 ]]
 	}) else nil
 end
 
-function LoadingScreenView.renderMainWithProviders(p1, p2) --[[ Line: 832 ]]
+function LoadingScreenView.renderMainWithProviders(p1, p2)
 	-- upvalues: RoactModule (copy), FoundationProvider (copy), FoundationModule (copy), LocalizationProvider (copy), NewResult (copy)
 	return RoactModule.createElement(FoundationProvider, { theme = FoundationModule.Enums.Theme.Dark }, {
 		RoactModule.createElement(LocalizationProvider, { localization = NewResult }, p1:renderMain(p2))
 	})
 end
 
-function LoadingScreenView.render(p1) --[[ Line: 842 ]]
+function LoadingScreenView.render(p1)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 845 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: p1 (copy), RoactModule (upval)
 		return p1.state.visible and RoactModule.createElement("Folder", {}, {
 			BackgroundScreen = p1:renderBackground(p2),
@@ -923,9 +923,9 @@ function LoadingScreenView.render(p1) --[[ Line: 842 ]]
 	end)
 end
 
-function LoadingScreenView:willUpdate(_, _) --[[ Line: 854 ]] end
+function LoadingScreenView:willUpdate(_, _) end
 
-function LoadingScreenView.maybeStartFadeOut(p1) --[[ Line: 857 ]]
+function LoadingScreenView.maybeStartFadeOut(p1)
 	-- upvalues: IsTenFootInterface (copy), ContextActionService (copy), config1 (copy)
 	if p1.props.shouldStartFadeOut and not p1.fadeOutTriggered then
 		p1.fadeOutTriggered = true
@@ -933,13 +933,13 @@ function LoadingScreenView.maybeStartFadeOut(p1) --[[ Line: 857 ]]
 		if IsTenFootInterface then
 			ContextActionService:UnbindCoreAction("CancelGameLoad")
 		end
-		task.spawn(function() --[[ Line: 863 ]]
+		task.spawn(function()
 			-- upvalues: p1 (copy), config1 (upval)
 			while not p1.fadeinComplete do
 				wait()
 			end
 			p1:stopAnimation()
-			p1:playAnimation(config1.FadeOut, {}, function() --[[ Line: 868 ]]
+			p1:playAnimation(config1.FadeOut, {}, function()
 				-- upvalues: p1 (upval)
 				p1:setState({ visible = false })
 			end)
@@ -947,23 +947,23 @@ function LoadingScreenView.maybeStartFadeOut(p1) --[[ Line: 857 ]]
 	end
 end
 
-function LoadingScreenView.didUpdate(p2, _, _) --[[ Line: 877 ]]
+function LoadingScreenView.didUpdate(p2, _, _)
 	p2:maybeStartFadeOut()
 end
 
-function LoadingScreenView.didMount(p2) --[[ Line: 881 ]]
+function LoadingScreenView.didMount(p2)
 	-- upvalues: RunService (copy), config1 (copy)
 	if p2.props.manageRobloxGuiFocus then
 		RunService:SetRobloxGuiFocused(true)
 	end
-	p2:playAnimation(config1.FadeIn, {}, function() --[[ Line: 886 ]]
+	p2:playAnimation(config1.FadeIn, {}, function()
 		-- upvalues: p2 (copy)
 		p2.fadeinComplete = true
 	end)
 	p2:maybeStartFadeOut()
 end
 
-function LoadingScreenView.willUnmount(p2) --[[ Line: 893 ]]
+function LoadingScreenView.willUnmount(p2)
 	-- upvalues: ContextActionService (copy), RunService (copy), InputBeganConnection (ref), UserInputService (copy), GuiService (copy)
 	ContextActionService:UnbindCoreAction("CancelGameLoad")
 	
@@ -971,7 +971,7 @@ function LoadingScreenView.willUnmount(p2) --[[ Line: 893 ]]
 		RunService:SetRobloxGuiFocused(false)
 	end
 	if not InputBeganConnection then
-		InputBeganConnection = UserInputService.InputBegan:Connect(function() --[[ Line: 899 ]]
+		InputBeganConnection = UserInputService.InputBegan:Connect(function()
 			-- upvalues: InputBeganConnection (upval), GuiService (upval)
 			if InputBeganConnection then
 				InputBeganConnection:disconnect()

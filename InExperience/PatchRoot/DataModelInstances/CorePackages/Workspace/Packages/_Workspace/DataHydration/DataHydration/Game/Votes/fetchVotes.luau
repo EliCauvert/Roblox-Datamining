@@ -2,10 +2,10 @@
 local HttpRequestModule = require(Parent.HttpRequest)
 local Url = require(Parent.Http).Url
 
-return function(List) --[[ Line: 11 | Named "requestVotes" ]]
+return function(List)
 	-- upvalues: Url (copy), HttpRequestModule (copy)
 	return HttpRequestModule.config({
-		requestFunction = function(p1, p2, p3) --[[ Line: 17 ]]
+		requestFunction = function(p1, p2, p3)
 			-- upvalues: HttpRequestModule (upval)
 			return HttpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
 		end

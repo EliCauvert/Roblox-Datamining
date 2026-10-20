@@ -15,15 +15,15 @@ local config = {
 	pendingReceiptTooltip = "Purchasing.PurchaseDialog.Message.PendingDeveloperProductOnHome"
 }
 
-local function _(p1, p2) --[[ Line: 111 | Named "resolveTag" ]]
+local function _(p1, p2)
 	return if typeof(p1) == "string" and p1 ~= "" then p1 else p2
 end
 
-local _ = function(p1, p2) --[[ Line: 118 | Named "resolveIconStyle" ]]
+local _ = function(p1, p2)
 	return if p1 == nil then p2 else p1
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 127 | Named "SduiVirtualGameItemText" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), config (copy), TextSizeModule (copy), ReactModule (copy), View (copy), Text (copy), Icon (copy), IconName (copy), Tooltip (copy), PopoverSide (copy), PopoverAlign (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction(config)
@@ -189,7 +189,7 @@ return ReactModule.memo(function(p1) --[[ Line: 127 | Named "SduiVirtualGameItem
 				align = PopoverAlign.Center
 			}, ReactModule.createElement(View, {
 				tag = "auto-xy",
-				onStateChanged = function(_) --[[ Line: 282 ]] end,
+				onStateChanged = function(_) end,
 				testId = if p1.testId then `{p1.testId}--owned-count-tooltip` else nil
 			}, {
 				Text = ReactModule.createElement(Text, {

@@ -42,11 +42,11 @@ local FFlagUFRImprovementsModule = require(InterventionShared.Flags.FFlagUFRImpr
 local FFlagUFRInlineAppealLinkModule = require(InterventionShared.Flags.FFlagUFRInlineAppealLink)
 local IconsActionsAccept = require(Parent.FoundationImages).Images["icons/actions/accept"]
 
-local function _(p1) --[[ Line: 88 | Named "getNonEmptyString" ]]
+local function _(p1)
 	return if p1 == "" then nil else p1
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 97 | Named "GenericInterventionDialog" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), UseRefFunction (copy), UseInterventionPlacementModule (copy), UseLocalizationFunction (copy), ConstantsModule (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), FFlagNavigateToSafetyDashboardForAppeals (copy), UrlBuilder (copy), UseWebViewModule (copy), LinkingProtocol (copy), UseInterventionFocusRootModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), UseEffectFunction (copy), InterventionAnalyticsModule (copy), UseCallbackFunction (copy), PostDismissInterventionModule (copy), NotificationModalsManagerModule (copy), IconsActionsAccept (copy), VRService (copy), FFlagUFRInlineAppealLinkModule (copy), ReactModule (copy), Text (copy), FFlagUFRImprovementsModule (copy), View (copy), Divider (copy), EvidenceFieldModule (copy), Badge (copy), BadgeVariant (copy), IconName (copy), IconPosition (copy), IconVariant (copy), CryoModule (copy), Button (copy), ButtonVariant (copy), ButtonSize (copy), Dialog (copy), DialogSize (copy), InterventionDialogLoadingSkeletonModule (copy), InterventionDialogFooterModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local InterventionId = p1.interventionId
@@ -74,7 +74,7 @@ return ReactModule.memo(function(p1) --[[ Line: 97 | Named "GenericInterventionD
 		isAutoFocusRoot = true,
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.ModerationOverlay
 	})
-	UseEffectFunction(function() --[[ Line: 131 ]]
+	UseEffectFunction(function()
 		-- upvalues: InterventionAnalyticsModule (upval), p1 (copy), UseInterventionPlacementModuleResult (copy), UseRefResult (copy)
 		InterventionAnalyticsModule.sendAnalyticsEvent(InterventionAnalyticsModule.TelemetryConfigs.DialogRendered, {
 			eventType = InterventionAnalyticsModule.Constants.EventTypes.ModalAppeared,
@@ -88,10 +88,10 @@ return ReactModule.memo(function(p1) --[[ Line: 97 | Named "GenericInterventionD
 			abuseVector = p1.abuseVectorForAnalytics
 		})
 	end, { UseRefResult })
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 146 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: p1 (copy), InterventionId1 (copy), PostDismissInterventionModule (upval), InterventionAnalyticsModule (upval), UseInterventionPlacementModuleResult (copy), UseRefResult (copy)
 		if p1.acknowledgeable and InterventionId1 then
-			PostDismissInterventionModule(InterventionId1):andThen(function(_) --[[ Line: 148 ]]
+			PostDismissInterventionModule(InterventionId1):andThen(function(_)
 				-- upvalues: InterventionAnalyticsModule (upval), p1 (upval), UseInterventionPlacementModuleResult (upval), UseRefResult (upval)
 				InterventionAnalyticsModule.sendAnalyticsEvent(InterventionAnalyticsModule.TelemetryConfigs.DialogInterventionDismissSuccess, {
 					eventType = InterventionAnalyticsModule.Constants.EventTypes.DialogInterventionDismissSuccess,
@@ -106,7 +106,7 @@ return ReactModule.memo(function(p1) --[[ Line: 97 | Named "GenericInterventionD
 				if p1.onAcknowledgementSuccess then
 					p1.onAcknowledgementSuccess()
 				end
-			end):catch(function(Err) --[[ Line: 164 ]]
+			end):catch(function(Err)
 				-- upvalues: InterventionAnalyticsModule (upval), p1 (upval), UseInterventionPlacementModuleResult (upval), UseRefResult (upval)
 				InterventionAnalyticsModule.sendAnalyticsEvent(InterventionAnalyticsModule.TelemetryConfigs.DialogInterventionDismissFailed, {
 					eventType = InterventionAnalyticsModule.Constants.EventTypes.DialogInterventionDismissFailed,
@@ -125,7 +125,7 @@ return ReactModule.memo(function(p1) --[[ Line: 97 | Named "GenericInterventionD
 		UseInterventionPlacementModuleResult, UseRefResult.current, p1.eventId,
 		p1.abuseVectorForAnalytics, p1.onAcknowledgementSuccess
 	})
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 196 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: InterventionAnalyticsModule (upval), p1 (copy), UseInterventionPlacementModuleResult (copy), UseRefResult (copy), UseCallbackResult (copy)
 		InterventionAnalyticsModule.sendAnalyticsEvent(InterventionAnalyticsModule.TelemetryConfigs.DialogCtaClicked, {
 			eventType = InterventionAnalyticsModule.Constants.EventTypes.CtaClicked,
@@ -144,7 +144,7 @@ return ReactModule.memo(function(p1) --[[ Line: 97 | Named "GenericInterventionD
 		p1.abuseVectorForAnalytics, p1.acknowledgeable, InterventionId1,
 		UseCallbackResult, p1.onAcknowledgementSuccess
 	})
-	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 225 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function()
 		-- upvalues: InterventionAnalyticsModule (upval), p1 (copy), UseInterventionPlacementModuleResult (copy), UseRefResult (copy), UseCallbackResult (copy), NotificationModalsManagerModule (upval), IconsActionsAccept (upval), UseLocalizationResult (copy), UseTokensResult (copy), VRService (upval), IsUsePreferredInputResultMatch (copy), Default (copy), ViolationResult (copy), UseWebViewModuleResult (copy)
 		InterventionAnalyticsModule.sendAnalyticsEvent(InterventionAnalyticsModule.TelemetryConfigs.DialogAppealClicked, {
 			eventType = InterventionAnalyticsModule.Constants.EventTypes.AppealClicked,

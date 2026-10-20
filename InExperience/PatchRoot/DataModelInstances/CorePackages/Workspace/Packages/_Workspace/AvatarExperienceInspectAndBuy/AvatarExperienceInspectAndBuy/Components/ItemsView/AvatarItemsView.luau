@@ -8,7 +8,7 @@ local ViewTypeModule = require(AvatarExperienceInspectAndBuy.Enums.ViewType)
 local _ = require(AvatarExperienceInspectAndBuy.Types)
 local ItemCardRowContainerModule = require(AvatarExperienceInspectAndBuy.Components.ItemsView.ItemCardRowContainer)
 
-local function v8(View, p1) --[[ Line: 45 ]]
+local function v8(View, p1)
 	-- upvalues: ViewTypeModule (copy)
 	return if View == ViewTypeModule.WideLandscape then {
 		left = UDim.new(0, p1.Padding.XLarge),
@@ -26,12 +26,12 @@ local function v8(View, p1) --[[ Line: 45 ]]
 	}
 end
 
-return (ReactModule.forwardRef(function(p1, Ref) --[[ Line: 68 ]]
+return (ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ViewTypeModule (copy), v8 (copy), ItemCardRowContainerModule (copy), Skeleton (copy)
 	local UseTokensResult = UseTokensFunction()
 	local HeaderHeightOffset = p1.headerHeightOffset or 0
 	local ActionBarHeightOffset = p1.actionBarHeightOffset or 0
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 73 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), ViewTypeModule (upval), UseTokensResult (copy)
 		return if p1.view == ViewTypeModule.Wide then UseTokensResult.Size.Size_2500 else UseTokensResult.Size.Size_2000
 	end, { p1.view, UseTokensResult })
@@ -41,7 +41,7 @@ return (ReactModule.forwardRef(function(p1, Ref) --[[ Line: 68 ]]
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		LayoutOrder = 2,
-		Size = ReactModule.useMemo(function(): UDim2 --[[ Line: 130 ]]
+		Size = ReactModule.useMemo(function(): UDim2
 			-- upvalues: p1 (copy), ViewTypeModule (upval), HeaderHeightOffset (copy), UseTokensResult (copy), ActionBarHeightOffset (copy)
 			return if p1.view == ViewTypeModule.Compact then UDim2.new(1, 0, 1, -HeaderHeightOffset - UseTokensResult.Padding.Small - ActionBarHeightOffset) else UDim2.new(1, 0, 1, -HeaderHeightOffset - UseTokensResult.Padding.Small)
 		end, {
@@ -55,7 +55,7 @@ return (ReactModule.forwardRef(function(p1, Ref) --[[ Line: 68 ]]
 		AutomaticCanvasSize = Enum.AutomaticSize.Y,
 		ScrollingDirection = Enum.ScrollingDirection.Y,
 		ref = Ref
-	}, ReactModule.useCallback(function() --[[ Line: 81 ]]
+	}, ReactModule.useCallback(function()
 		-- upvalues: v8 (upval), p1 (copy), UseTokensResult (copy), ReactModule (upval), ItemCardRowContainerModule (upval), UseMemoResult (copy), Skeleton (upval)
 		local v1 = v8(p1.view, UseTokensResult)
 		local config = {

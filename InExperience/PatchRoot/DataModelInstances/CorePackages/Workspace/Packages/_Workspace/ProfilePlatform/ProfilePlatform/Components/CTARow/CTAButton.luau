@@ -26,25 +26,25 @@ local IconButton = FoundationModule.IconButton
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local FillBehavior = FoundationModule.Enums.FillBehavior
 
-return function(p1) --[[ Line: 50 | Named "CTAButton" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FFlagProfileTradeItemsExposureLoggingModule (copy), UseTradeItemsExposureLoggerModule (copy), FFlagProfileTradeItemsImpressionLoggingModule (copy), UseProfileAnalyticsContextModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseAppFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), FFlagProfileGamepadPrimaryActionFocusModule (copy), FocusNavigationUtilsModule (copy), UseComposedRefFunction (copy), UseProfileWrapperContextModule (copy), EnumsModule (copy), ButtonVariant (copy), ContextualMenuContainsActionModule (copy), EventNamesModule (copy), IconButton (copy), Button (copy), FillBehavior (copy), View (copy), ContextualMenuModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseTradeItemsExposureLoggerModuleResult = if FFlagProfileTradeItemsExposureLoggingModule then UseTradeItemsExposureLoggerModule() else nil
 	local UseProfileAnalyticsContextModuleResult = if FFlagProfileTradeItemsImpressionLoggingModule then UseProfileAnalyticsContextModule() else nil
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 58 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 62 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
-		UseStateResult2(function(p2): boolean --[[ Line: 63 ]]
+		UseStateResult2(function(p2): boolean
 			return not p2
 		end)
 	end, {})
 	local UseAppFocusRootResult = UseAppFocusRootFunction({
 		isAutoFocusRoot = true,
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.ContextualMenu,
-		customEventHandlers = ReactModule.useMemo(function() --[[ Line: 68 ]]
+		customEventHandlers = ReactModule.useMemo(function()
 			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), UseResult (copy)
 			return {
 				[FocusNavigationEventNameEnum.NavigateBack] = { handler = InputHandlersModule.onRelease(UseResult) }
@@ -68,7 +68,7 @@ return function(p1) --[[ Line: 50 | Named "CTAButton" ]]
 	local ButtonStyle = if p1.buttonItem.buttonStyle then p1.buttonItem.buttonStyle else ButtonVariant.Standard
 	local v2: boolean = ContextualMenuItems and #ContextualMenuItems > 0
 	local IsDisabled = p1.buttonItem.menuItem.isDisabled
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 105 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: FFlagProfileTradeItemsExposureLoggingModule (upval), MenuItem (copy), EnumsModule (upval), UseStateResult (copy), UseTradeItemsExposureLoggerModuleResult (ref), FFlagProfileTradeItemsImpressionLoggingModule (upval), ContextualMenuContainsActionModule (upval), ContextualMenuItems (copy), UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), v2 (copy), UseResult1 (copy)
 		if FFlagProfileTradeItemsExposureLoggingModule and MenuItem.id == EnumsModule.ProfileActions.ContextualOverflow and not UseStateResult then
 			UseTradeItemsExposureLoggerModuleResult()

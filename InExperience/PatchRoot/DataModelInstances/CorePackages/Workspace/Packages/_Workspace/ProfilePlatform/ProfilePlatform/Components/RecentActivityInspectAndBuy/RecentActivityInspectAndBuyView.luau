@@ -18,7 +18,7 @@ local DialogSize = FoundationModule.Enums.DialogSize
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local IsItemPurchasableFunction = require(ProfilePlatform.Components.InspectAvatar.InspectAvatarUtils).isItemPurchasable
 
-return function(p1) --[[ Line: 53 | Named "RecentActivityInspectAndBuyView" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ItemDisplayHelpersModule (copy), ReactModule (copy), DashModule (copy), CatalogItemRowCardContainerModule (copy), IsItemPurchasableFunction (copy), Skeleton (copy), Sheet (copy), DialogSize (copy), Text (copy), View (copy), BuyActionBar (copy), ButtonVariant (copy), RecentActivityPurchaseConfirmationDialogModule (copy), RecentActivityInsufficientRobuxDialogModule (copy)
 	local FeatureCatalogLabelBuyItems = UseLocalizationFunction({
 		title = "Feature.Catalog.Label.BuyItems",
@@ -33,7 +33,7 @@ return function(p1) --[[ Line: 53 | Named "RecentActivityInspectAndBuyView" ]]
 	local UseLocalizationResult = UseLocalizationFunction(ItemDisplayHelpersModule.PRICE_STATUS_LOCALIZATION_KEYS)
 	local UseLocalizationResult1 = UseLocalizationFunction(ItemDisplayHelpersModule.ASSET_TYPE_LOCALIZATION_KEYS)
 	local UseLocalizationResult2 = UseLocalizationFunction(ItemDisplayHelpersModule.BUNDLE_TYPE_LOCALIZATION_KEYS)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 69 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FeatureCatalogLabelBuyItems (copy), DashModule (upval), UseLocalizationResult1 (copy), UseLocalizationResult2 (copy)
 		return {
 			bundleParts = nil,
@@ -61,7 +61,7 @@ return function(p1) --[[ Line: 53 | Named "RecentActivityInspectAndBuyView" ]]
 			openItemDetails = p1.openItemDetails
 		})
 	end
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 93 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), Skeleton (upval)
 		local Elements = {}
 		

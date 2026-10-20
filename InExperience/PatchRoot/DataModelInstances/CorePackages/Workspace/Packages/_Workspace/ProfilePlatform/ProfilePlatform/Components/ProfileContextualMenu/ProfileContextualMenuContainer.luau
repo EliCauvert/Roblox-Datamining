@@ -18,7 +18,7 @@ local FFlagProfilePlatformAddTC = require(Parent.SharedFlags).FFlagProfilePlatfo
 local FFlagProfileContextualMenuDisableFix = require(Parent.SharedFlags).FFlagProfileContextualMenuDisableFix
 local FFlagProfileFixMenuNavigation = require(Parent.SharedFlags).FFlagProfileFixMenuNavigation
 
-return function(_) --[[ Line: 24 | Named "ProfileContextualMenuContainer" ]]
+return function(_)
 	-- upvalues: UseScreenSizeFunction (copy), UseNavigationFunction (copy), ConstantsModule (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), UseProfileActionsModule (copy), ReactModule (copy), FFlagProfileFixMenuNavigation (copy), UseAppFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), FFlagProfileContextualMenuDisableFix (copy), FFlagProfilePlatformAddTC (copy), ProfileContextualMenuModule (copy), FocusNavigableSurfaceWrapper (copy)
 	local UseScreenSizeResult = UseScreenSizeFunction()
 	local UseNavigationResult = UseNavigationFunction()
@@ -30,7 +30,7 @@ return function(_) --[[ Line: 24 | Named "ProfileContextualMenuContainer" ]]
 	local UseProfileActionsModuleResult = UseProfileActionsModule(EnumsModule.ButtonSurface.ContextualMenu)
 	local Contextual = UseProfileJsonComponentModuleResult.contextual
 	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 42 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), UseNavigationResult (copy), Param (copy)
 		UseStateResult2(false)
 		UseNavigationResult.pop()
@@ -41,7 +41,7 @@ return function(_) --[[ Line: 24 | Named "ProfileContextualMenuContainer" ]]
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.ContextualMenu,
 		customEventHandlers = {
 			[FocusNavigationEventNameEnum.NavigateBack] = {
-				handler = InputHandlersModule.onRelease(function() --[[ Line: 54 ]]
+				handler = InputHandlersModule.onRelease(function()
 					-- upvalues: UseResult (copy)
 					UseResult()
 				end)
@@ -49,17 +49,17 @@ return function(_) --[[ Line: 24 | Named "ProfileContextualMenuContainer" ]]
 		},
 		isFocusable = UseStateResult
 	}) else nil
-	ReactModule.useEffect(function() --[[ Line: 64 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Param1 (copy), UseResult (copy)
 		if not Param1 then return end
 		Param1.current = UseResult
 		
-		return function() --[[ Line: 69 ]]
+		return function()
 			-- upvalues: Param1 (upval)
 			Param1.current = nil
 		end
 	end, { UseResult })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 74 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Contextual (copy), UseProfileActionsModuleResult (copy), FFlagProfileContextualMenuDisableFix (upval), FFlagProfilePlatformAddTC (upval), UseResult (copy)
 		if not Contextual then
 			return {}
@@ -74,7 +74,7 @@ return function(_) --[[ Line: 24 | Named "ProfileContextualMenuContainer" ]]
 					text = UseProfileActionsModuleResultEntry.text,
 					disabled = if FFlagProfileContextualMenuDisableFix then nil elseif FFlagProfilePlatformAddTC then UseProfileActionsModuleResultEntry.isDisabled else nil,
 					isDisabled = if FFlagProfileContextualMenuDisableFix then UseProfileActionsModuleResultEntry.isDisabled else nil,
-					onActivated = function() --[[ Line: 90 ]]
+					onActivated = function()
 						-- upvalues: UseResult (upval), UseProfileActionsModuleResultEntry (copy)
 						UseResult()
 						UseProfileActionsModuleResultEntry.onActivated()
@@ -98,7 +98,7 @@ return function(_) --[[ Line: 24 | Named "ProfileContextualMenuContainer" ]]
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
 		customEventHandlers = {
 			[FocusNavigationEventNameEnum.NavigateBack] = {
-				handler = InputHandlersModule.onRelease(function(p1) --[[ Line: 116 ]]
+				handler = InputHandlersModule.onRelease(function(p1)
 					-- upvalues: UseResult (copy)
 					UseResult()
 					p1:cancel()

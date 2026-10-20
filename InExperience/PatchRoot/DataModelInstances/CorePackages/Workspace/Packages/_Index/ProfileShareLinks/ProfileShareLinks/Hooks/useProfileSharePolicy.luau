@@ -2,9 +2,9 @@
 local UseAppPolicyFunction = require(ProfileShareLinks.Parent.UniversalAppPolicy).useAppPolicy
 local ProfileSharePolicyEnumModule = require(ProfileShareLinks.Enums.ProfileSharePolicyEnum)
 
-return function() --[[ Line: 7 ]]
+return function()
 	-- upvalues: UseAppPolicyFunction (copy), ProfileSharePolicyEnumModule (copy)
-	return (UseAppPolicyFunction(function(p1) --[[ Line: 8 ]]
+	return (UseAppPolicyFunction(function(p1)
 		-- upvalues: ProfileSharePolicyEnumModule (upval)
 		local ProfileCopyLinkEnabled = p1.getProfileCopyLinkEnabled()
 		

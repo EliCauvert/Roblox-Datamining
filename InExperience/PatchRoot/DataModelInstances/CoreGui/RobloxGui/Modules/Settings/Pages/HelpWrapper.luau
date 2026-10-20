@@ -24,7 +24,7 @@ end
 local Root = nil
 local Signal, Signal2 = SignalsModule.createSignal(false)
 
-local function createHelpPage() --[[ Line: 45 ]]
+local function createHelpPage()
 	-- upvalues: SettingsPageFactoryModule (copy), Constants (ref), Uiblox (copy), BuilderIconsModule (copy), NewResult (copy), Root (ref), SignalsReactModule (copy), Signal (copy), ReactModule (copy), FoundationProvider (copy), FoundationModule (copy), Utils (ref), LocalizationProvider (copy), HelpReactView (copy), ReactRobloxModule (copy), Signal2 (copy)
 	local NewPage = SettingsPageFactoryModule:CreateNewPage()
 	NewPage.TabHeader.Name = Constants.HELP_PAGE.TAB_HEADER.NAME
@@ -35,10 +35,10 @@ local function createHelpPage() --[[ Line: 45 ]]
 	NewPage.TabHeader.TabLabel.Title.Text = NewResult:Format(Constants.HELP_PAGE.TAB_HEADER.TEXT)
 	NewPage.Page:ClearAllChildren()
 	
-	local function _() --[[ Line: 59 | Named "createReactTree" ]]
+	local function _()
 		-- upvalues: Root (upval), SignalsReactModule (upval), Signal (upval), ReactModule (upval), FoundationProvider (upval), FoundationModule (upval), Utils (upval), LocalizationProvider (upval), NewResult (upval), HelpReactView (upval), ReactRobloxModule (upval), NewPage (copy)
 		if Root then return end
-		local function v25() --[[ Line: 64 ]]
+		local function v25()
 			-- upvalues: SignalsReactModule (upval), Signal (upval), ReactModule (upval), FoundationProvider (upval), FoundationModule (upval), Utils (upval), LocalizationProvider (upval), NewResult (upval), HelpReactView (upval)
 			return if SignalsReactModule.useSignalState(Signal) then ReactModule.createElement(FoundationProvider, {
 				colorMode = FoundationModule.Enums.ColorMode.Dark,
@@ -55,10 +55,10 @@ local function createHelpPage() --[[ Line: 45 ]]
 		end
 	end
 	
-	NewPage.Displayed.Event:Connect(function() --[[ Line: 87 ]]
+	NewPage.Displayed.Event:Connect(function()
 		-- upvalues: Root (upval), SignalsReactModule (upval), Signal (upval), ReactModule (upval), FoundationProvider (upval), FoundationModule (upval), Utils (upval), LocalizationProvider (upval), NewResult (upval), HelpReactView (upval), ReactRobloxModule (upval), NewPage (copy), Signal2 (upval)
 		if not Root then
-			local function v26() --[[ Line: 64 ]]
+			local function v26()
 				-- upvalues: SignalsReactModule (upval), Signal (upval), ReactModule (upval), FoundationProvider (upval), FoundationModule (upval), Utils (upval), LocalizationProvider (upval), NewResult (upval), HelpReactView (upval)
 				return if SignalsReactModule.useSignalState(Signal) then ReactModule.createElement(FoundationProvider, {
 					colorMode = FoundationModule.Enums.ColorMode.Dark,
@@ -80,7 +80,7 @@ local function createHelpPage() --[[ Line: 45 ]]
 			NewPage.HubRef.VersionContainer.Visible = true
 		end
 	end)
-	NewPage.Hidden.Event:Connect(function() --[[ Line: 96 ]]
+	NewPage.Hidden.Event:Connect(function()
 		-- upvalues: Signal2 (upval), NewPage (copy)
 		Signal2(false)
 		

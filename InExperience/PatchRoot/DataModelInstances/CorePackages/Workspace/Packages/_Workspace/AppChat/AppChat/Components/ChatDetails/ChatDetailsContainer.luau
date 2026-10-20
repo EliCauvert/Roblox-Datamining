@@ -48,15 +48,15 @@ local config = {
 	isGroupOwner = nil,
 	conversationId = nil,
 	conversation = nil,
-	navigateBack = function() --[[ Line: 64 ]] end,
-	navigateToEditChatMembers = function() --[[ Line: 65 ]] end,
-	navigateToDialog = function() --[[ Line: 66 ]] end,
-	navigateToToast = function() --[[ Line: 67 ]] end,
-	navigateToConversation = function() --[[ Line: 68 ]] end,
-	navigateToChatLanding = function() --[[ Line: 69 ]] end
+	navigateBack = function() end,
+	navigateToEditChatMembers = function() end,
+	navigateToDialog = function() end,
+	navigateToToast = function() end,
+	navigateToConversation = function() end,
+	navigateToChatLanding = function() end
 }
 
-return function(p1) --[[ Line: 72 ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), GetFFlagAppChatParticipantDialogFoundationMenuModule (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), GetFFlagIsSquadEnabledFunction (copy), ReactModule (copy), LuaAppNavigationContextModule (copy), UseDispatchFunction (copy), UseStateFunction (copy), UseNavigationFunction (copy), UseIsGroupChatEnabledModule (copy), UseIsChatEnabledModule (copy), UseEffectFunction (copy), UseSelectorFunction (copy), GetDeepValueModule (copy), ConversationModule (copy), AppChatNetworkingModule (copy), UseUserProfilesFetchFunction (copy), UserProfilesCombinedNameAndUsernameByUserIds (copy), UseTelemetryModule (copy), ChatDetailsTelemetryLayerModule (copy), SelectChatUserEntryModelListModule (copy), GetConversationTitleModule (copy), UseIsUserPendingModule (copy), ConversationChannelsModule (copy), PromiseModule (copy), GenericDialogTypeModule (copy), GetFFlagAppChatEnableRootedNavigationModule (copy), ChatDetailsTelemetryEventsModule (copy), UseCallbackFunction (copy), UseAppPolicyFunction (copy), UseChatPlacementContextFunction (copy), IsPlacementInExperienceFunction (copy), ChatConversationTelemetryStateModule (copy), ChatDetailsTelemetryStateModule (copy), UseEffectOnMountFunction (copy), ChatDetailsPageModule (copy), ParticipantDialogContainerModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1 or {})
 	local FFlagAppChatParticipantDialogFoundationMenuModule = GetFFlagAppChatParticipantDialogFoundationMenuModule()
@@ -98,7 +98,7 @@ return function(p1) --[[ Line: 72 ]]
 	local UseNavigationResult = UseNavigationFunction()
 	local UseIsGroupChatEnabledModuleResult = UseIsGroupChatEnabledModule()
 	local UseIsChatEnabledModuleResult = UseIsChatEnabledModule()
-	UseEffectFunction(function() --[[ Line: 119 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseIsChatEnabledModuleResult (copy), JoinResult (copy)
 		if not UseIsChatEnabledModuleResult then
 			JoinResult.navigateToChatLanding()
@@ -107,19 +107,19 @@ return function(p1) --[[ Line: 72 ]]
 		UseIsChatEnabledModuleResult,
 		JoinResult.navigateToChatLanding
 	})
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 125 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: GetDeepValueModule (upval), JoinResult (copy), ConversationModule (upval)
 		return GetDeepValueModule(p2, `ChatAppReducer.Conversations.{JoinResult.conversationId or ""}`) or ConversationModule.empty()
 	end)
-	local UseSelectorResult1 = UseSelectorFunction(function(p2) --[[ Line: 129 ]]
+	local UseSelectorResult1 = UseSelectorFunction(function(p2)
 		-- upvalues: GetDeepValueModule (upval), JoinResult (copy)
 		return GetDeepValueModule(p2, `ChatAppReducer.ParticipantMetadata.{JoinResult.conversationId or ""}`)
 	end)
 	local Source = UseSelectorResult and UseSelectorResult.source
-	UseEffectFunction(function() --[[ Line: 134 ]]
+	UseEffectFunction(function()
 		-- upvalues: Source (copy), UseDispatchResult (copy), AppChatNetworkingModule (upval), JoinResult (copy)
 		if Source == "channels" then
-			UseDispatchResult(AppChatNetworkingModule.rodux.GetConversationsParticipantsMetadata.API({ JoinResult.conversationId })):catch(function() --[[ Line: 140 ]]
+			UseDispatchResult(AppChatNetworkingModule.rodux.GetConversationsParticipantsMetadata.API({ JoinResult.conversationId })):catch(function()
 				warn("Error in ChatDetailsContainer -> GetConversationsParticipantsMetadata")
 			end)
 			
@@ -144,12 +144,12 @@ return function(p1) --[[ Line: 72 ]]
 	local IsModerationTypeMatch: boolean? = nil
 	
 	if UseSelectorResult then
-		Participants = UseSelectorFunction(function(p2) --[[ Line: 159 ]]
+		Participants = UseSelectorFunction(function(p2)
 			-- upvalues: SelectChatUserEntryModelListModule (upval), UseSelectorResult (copy), UseUserProfilesFetchResult (copy)
 			return SelectChatUserEntryModelListModule(p2, UseSelectorResult.participants, if UseUserProfilesFetchResult and UseUserProfilesFetchResult.data then UseUserProfilesFetchResult.data.userProfiles else nil)
 		end)
 		IsGroupConversation = UseSelectorResult.conversationType == ConversationModule.Type.MULTI_USER_CONVERSATION
-		IsGroupOwner = UseSelectorFunction(function(p2): boolean --[[ Line: 167 ]]
+		IsGroupOwner = UseSelectorFunction(function(p2): boolean
 			-- upvalues: IsGroupConversation (ref), UseSelectorResult (copy)
 			return IsGroupConversation and UseSelectorResult.initiator == p2.LocalUserId
 		end)
@@ -174,9 +174,9 @@ return function(p1) --[[ Line: 72 ]]
 	if UseSelectorResult.isDefaultTitle then
 		TitleNotSetText = UseLocalizationResult.titleNotSetText
 	end
-	local function _(p2) --[[ Line: 194 ]]
+	local function _(p2)
 		-- upvalues: PromiseModule (upval)
-		return PromiseModule.new(function(Callback1: () -> (), Callback: () -> ()) --[[ Line: 195 ]]
+		return PromiseModule.new(function(Callback1: () -> (), Callback: () -> ())
 			-- upvalues: p2 (copy)
 			if #p2.participants > 5 then
 				Callback()
@@ -188,12 +188,12 @@ return function(p1) --[[ Line: 72 ]]
 		end)
 	end
 	
-	local function OnGroupNameEntryCellActivated() --[[ Line: 205 ]]
+	local function OnGroupNameEntryCellActivated()
 		-- upvalues: JoinResult (copy), GenericDialogTypeModule (upval)
 		JoinResult.navigateToDialog(GenericDialogTypeModule.EditChatGroupNameDialog, { conversationId = JoinResult.conversationId })
 	end
 	
-	local function OnLeaveGroupCellActivated() --[[ Line: 210 ]]
+	local function OnLeaveGroupCellActivated()
 		-- upvalues: GetFFlagAppChatEnableRootedNavigationModule (upval), UseNavigationResult (copy), JoinResult (copy), GenericDialogTypeModule (upval), UseTelemetryModuleResult (copy), ChatDetailsTelemetryEventsModule (upval)
 		JoinResult.navigateToDialog(GenericDialogTypeModule.LeaveGroupDialog, {
 			conversationId = JoinResult.conversationId,
@@ -202,7 +202,7 @@ return function(p1) --[[ Line: 72 ]]
 		UseTelemetryModuleResult.emit(ChatDetailsTelemetryEventsModule.ChatDetailsLeaveGroupBtnClicked, {})
 	end
 	
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 221 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: UseNavigationResult (copy), UseContextResult (copy)
 		if UseNavigationResult then
 			UseContextResult.navigateToUnfilteredThreadsLearnMore(UseNavigationResult.navigate)
@@ -212,11 +212,11 @@ return function(p1) --[[ Line: 72 ]]
 			UseContextResult.navigateToUnfilteredThreadsLearnMore()
 		end
 	end, { UseContextResult, UseNavigationResult })
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 229 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: UseTelemetryModuleResult (copy), ChatDetailsTelemetryEventsModule (upval), UseStateResult2 (copy), UseDispatchResult (copy), AppChatNetworkingModule (upval), JoinResult (copy), UseLocalizationResult (copy)
 		UseTelemetryModuleResult.emit(ChatDetailsTelemetryEventsModule.ChatDetailsCreateUnfilteredChatCellClicked, {})
 		UseStateResult2(true)
-		UseDispatchResult(AppChatNetworkingModule.rodux.DuplicateConversation.API(JoinResult.conversationId, "trusted_comms")):andThen(function(Result) --[[ Line: 233 ]]
+		UseDispatchResult(AppChatNetworkingModule.rodux.DuplicateConversation.API(JoinResult.conversationId, "trusted_comms")):andThen(function(Result)
 			-- upvalues: JoinResult (upval), UseLocalizationResult (upval)
 			local ResponseBody = Result.responseBody
 			local Id = ResponseBody and (ResponseBody.conversations and (ResponseBody.conversations[1] and ResponseBody.conversations[1].id))
@@ -232,14 +232,14 @@ return function(p1) --[[ Line: 72 ]]
 					}
 				})
 			end
-		end):catch(function() --[[ Line: 251 ]]
+		end):catch(function()
 			-- upvalues: JoinResult (upval), UseLocalizationResult (upval)
 			JoinResult.navigateToToast({
 				toastProps = {
 					toastContent = { toastTitle = UseLocalizationResult.networkErrorToastText }
 				}
 			})
-		end):finally(function() --[[ Line: 260 ]]
+		end):finally(function()
 			-- upvalues: UseStateResult2 (upval)
 			UseStateResult2(false)
 		end)
@@ -249,7 +249,7 @@ return function(p1) --[[ Line: 72 ]]
 		CountParticipants, IsGroupOwner, UseTelemetryModuleResult
 	})
 	
-	local function OnDismiss() --[[ Line: 276 ]]
+	local function OnDismiss()
 		-- upvalues: Callback (ref), Callback1 (ref)
 		if Callback and Callback1 then
 			Callback(nil)
@@ -257,7 +257,7 @@ return function(p1) --[[ Line: 72 ]]
 		end
 	end
 	
-	local function OnParticipantCellActivated(p2, p3) --[[ Line: 283 ]]
+	local function OnParticipantCellActivated(p2, p3)
 		-- upvalues: FFlagAppChatParticipantDialogFoundationMenuModule (copy), Callback (ref), Callback1 (ref), ParticipantId (ref), JoinResult (copy), GenericDialogTypeModule (upval), v1 (ref), IsGroupConversation (ref), IsGroupOwner (ref)
 		local Text = tostring(p2)
 		
@@ -281,16 +281,16 @@ return function(p1) --[[ Line: 72 ]]
 		end
 	end
 	
-	local function v63(ToastTitle) --[[ Line: 303 ]]
+	local function v63(ToastTitle)
 		-- upvalues: JoinResult (copy)
 		JoinResult.navigateToToast({
 			toastProps = { toastContent = { toastTitle = ToastTitle } }
 		})
 	end
 	
-	local function v64(ToastTitle) --[[ Line: 313 ]]
+	local function v64(ToastTitle)
 		-- upvalues: UseSelectorResult (copy), PromiseModule (upval), JoinResult (copy), v63 (copy), UseTelemetryModuleResult (copy), ChatDetailsTelemetryEventsModule (upval)
-		PromiseModule.new(function(Callback1: () -> (), Callback: () -> ()) --[[ Line: 195 ]]
+		PromiseModule.new(function(Callback1: () -> (), Callback: () -> ())
 			-- upvalues: UseSelectorResult (copy)
 			if #UseSelectorResult.participants > 5 then
 				Callback()
@@ -299,17 +299,17 @@ return function(p1) --[[ Line: 72 ]]
 			else
 				Callback1()
 			end
-		end):andThen(function() --[[ Line: 314 ]]
+		end):andThen(function()
 			-- upvalues: JoinResult (upval), UseSelectorResult (upval)
 			JoinResult.navigateToEditChatMembers(UseSelectorResult)
-		end, function() --[[ Line: 317 ]]
+		end, function()
 			-- upvalues: v63 (upval), ToastTitle (copy)
 			v63(ToastTitle)
 		end)
 		UseTelemetryModuleResult.emit(ChatDetailsTelemetryEventsModule.ChatDetailsAddFriendsBtnClicked, {})
 	end
 	
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 325 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2)
 		return p2.getWebViewSupport()
 	end)
 	local IsPlacementInExperience = IsPlacementInExperienceFunction(UseChatPlacementContextFunction().chatPlacement)
@@ -317,7 +317,7 @@ return function(p1) --[[ Line: 72 ]]
 	local ModerationType = UseSelectorResult and UseSelectorResult.moderationType or CryoModule.None
 	local UserPendingStatus = UseSelectorResult and UseSelectorResult.userPendingStatus or CryoModule.None
 	local UseMergeStateResult = ChatConversationTelemetryStateModule.useMergeState()
-	UseEffectFunction(function() --[[ Line: 335 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseMergeStateResult (copy), JoinResult (copy), ModerationType (copy), UserPendingStatus (copy)
 		UseMergeStateResult({
 			conversationId = JoinResult.conversationId,
@@ -330,14 +330,14 @@ return function(p1) --[[ Line: 72 ]]
 		UserPendingStatus
 	})
 	local UseMergeStateResult1 = ChatDetailsTelemetryStateModule.useMergeState()
-	UseEffectFunction(function() --[[ Line: 343 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseMergeStateResult1 (copy), UseSelectorResult (copy), IsGroupOwner (ref)
 		UseMergeStateResult1({
 			participantsCount = #UseSelectorResult.participants,
 			isGroupOwner = IsGroupOwner
 		})
 	end, { #UseSelectorResult.participants, IsGroupOwner })
-	UseEffectOnMountFunction(function() --[[ Line: 350 ]]
+	UseEffectOnMountFunction(function()
 		-- upvalues: UseTelemetryModuleResult (copy), ChatDetailsTelemetryEventsModule (upval), IsGroupConversation (ref)
 		UseTelemetryModuleResult.emit(ChatDetailsTelemetryEventsModule.ScreenRendered, { isGroupConversation = IsGroupConversation })
 	end)
@@ -348,7 +348,7 @@ return function(p1) --[[ Line: 72 ]]
 		onGroupNameEntryCellActivated = OnGroupNameEntryCellActivated,
 		onLeaveGroupCellActivated = OnLeaveGroupCellActivated,
 		onParticipantCellActivated = OnParticipantCellActivated,
-		onAddFriendsCellActivated = function() --[[ Line: 361 ]]
+		onAddFriendsCellActivated = function()
 			-- upvalues: v64 (copy), UseLocalizationResult (copy)
 			return v64(UseLocalizationResult.tooManyPeopleText)
 		end,

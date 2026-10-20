@@ -41,7 +41,7 @@ local config5 = {
 	[Action.ViewportChanged] = "viewport_changed"
 }
 
-local function _(p1): boolean --[[ Line: 73 | Named "getIsViewportReady" ]]
+local function _(p1): boolean
 	local Number: number? = tonumber(p1.userId)
 	
 	return Number ~= nil and (Number > 0 and p1.viewportSize ~= nil)
@@ -51,24 +51,24 @@ return {
 	View = { Shown = 1, Hidden = 2 },
 	Action = Action,
 	Control = { Back = "back", Expand = "expand", Close = "close" },
-	getTelemetryStateFromMode = function(p1) --[[ Line: 57 ]]
+	getTelemetryStateFromMode = function(p1)
 		return p1 or "inactive"
 	end,
-	logStateChanged = function(To_state, p1) --[[ Line: 61 ]]
+	logStateChanged = function(To_state, p1)
 		-- upvalues: TelemetryService (copy), config2 (copy), config5 (copy)
 		TelemetryService:LogCounter(config2, {
 			customFields = { to_state = To_state, cause = config5[p1] }
 		}, 1)
 	end,
-	logPaneControlPressed = function(Control) --[[ Line: 65 ]]
+	logPaneControlPressed = function(Control)
 		-- upvalues: TelemetryService (copy), config3 (copy)
 		TelemetryService:LogCounter(config3, { customFields = { control = Control } }, 1)
 	end,
-	logSupportRouteOpened = function() --[[ Line: 69 ]]
+	logSupportRouteOpened = function()
 		-- upvalues: TelemetryService (copy), config4 (copy)
 		TelemetryService:LogCounter(config4, {}, 1)
 	end,
-	logSplitPaneViewChange = function(p1, Action): boolean --[[ Line: 78 ]]
+	logSplitPaneViewChange = function(p1, Action): boolean
 		-- upvalues: TelemetryService (copy), config (copy)
 		local Number: number? = tonumber(p1.userId)
 		
@@ -88,7 +88,7 @@ return {
 			return false
 		end
 	end,
-	logAppLaunchViewport = function(p1): boolean --[[ Line: 94 ]]
+	logAppLaunchViewport = function(p1): boolean
 		-- upvalues: TelemetryService (copy), config1 (copy)
 		local Number: number? = tonumber(p1.userId)
 		

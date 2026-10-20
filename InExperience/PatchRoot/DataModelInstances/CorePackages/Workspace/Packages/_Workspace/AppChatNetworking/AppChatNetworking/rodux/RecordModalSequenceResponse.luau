@@ -3,7 +3,7 @@ local CHATPLATFORMBASEURLModule = require(AppChatNetworking.url.CHAT_PLATFORM_BA
 local _ = require(AppChatNetworking.responses.SharedTypes)
 local NewResult = require(script:FindFirstAncestor("Packages").Loggers).Logger:new(script.Name)
 
-return require(script.Parent.RoduxNetworking).POST(script.Name, function(Callback, Action_type, Modal_sequence, Modal_id, Modal_variant, Conversation_id, Friend_id) --[[ Line: 11 ]]
+return require(script.Parent.RoduxNetworking).POST(script.Name, function(Callback, Action_type, Modal_sequence, Modal_id, Modal_variant, Conversation_id, Friend_id)
 	-- upvalues: NewResult (copy), CHATPLATFORMBASEURLModule (copy)
 	if Conversation_id and Friend_id then
 		NewResult:warn("Both conversation ID and friend ID provided to RecordModalSequenceResponse.")

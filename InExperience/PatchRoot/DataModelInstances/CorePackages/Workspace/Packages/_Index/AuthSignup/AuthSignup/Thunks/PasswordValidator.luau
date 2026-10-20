@@ -16,9 +16,9 @@ local Config = if SharedFlagsModule.FFlagSignUpPasswordCopyV2 then {
 	[PasswordIssue.Simple] = "Authentication.SignUp.Label.PasswordError3"
 }
 
-local function _(p1, p2, Input, p3) --[[ Line: 42 | Named "validateFunction" ]]
+local function _(p1, p2, Input, p3)
 	-- upvalues: PasswordIssue (copy), IssueCondition (copy), PromiseModule (copy), PostPasswordValidFunction (copy)
-	return function(_) --[[ Line: 43 ]]
+	return function(_)
 		-- upvalues: PasswordIssue (upval), IssueCondition (upval), p3 (copy), p2 (copy), Input (copy), PromiseModule (upval), PostPasswordValidFunction (upval), p1 (copy)
 		local IssueCondition = {
 			[PasswordIssue.Length] = IssueCondition.Resolved,
@@ -27,7 +27,7 @@ local function _(p1, p2, Input, p3) --[[ Line: 42 | Named "validateFunction" ]]
 		}
 		
 		if p2 ~= nil and Input ~= nil and p2 ~= "" and Input ~= "" and string.match(Input, "%S") ~= nil then
-			return PostPasswordValidFunction(p1, p2, Input):andThen(function(Result) --[[ Line: 72 ]]
+			return PostPasswordValidFunction(p1, p2, Input):andThen(function(Result)
 				-- upvalues: IssueCondition (copy), PasswordIssue (upval), IssueCondition (upval), Input (upval), PromiseModule (upval)
 				local t = {}
 				local Code = Result and (Result.responseBody and Result.responseBody.code)
@@ -48,7 +48,7 @@ local function _(p1, p2, Input, p3) --[[ Line: 42 | Named "validateFunction" ]]
 				t.IssueCondition = IssueCondition
 				
 				return PromiseModule.resolve(t)
-			end, function(_) --[[ Line: 94 ]]
+			end, function(_)
 				-- upvalues: PromiseModule (upval), Input (upval), IssueCondition (copy)
 				return PromiseModule.resolve({
 					InputValid = true,
@@ -71,11 +71,11 @@ local function _(p1, p2, Input, p3) --[[ Line: 42 | Named "validateFunction" ]]
 end
 
 return {
-	validateFunction = function(p4, Text, p5, p6) --[[ Line: 105 ]]
+	validateFunction = function(p4, Text, p5, p6)
 		-- upvalues: PasswordIssue (copy), IssueCondition (copy), PromiseModule (copy), PostPasswordValidFunction (copy)
 		local Username = (p6 or {}).username
 		
-		return function(_) --[[ Line: 43 ]]
+		return function(_)
 			-- upvalues: PasswordIssue (upval), IssueCondition (upval), p5 (copy), Username (copy), Text (copy), PromiseModule (upval), PostPasswordValidFunction (upval), p4 (copy)
 			local IssueCondition = {
 				[PasswordIssue.Length] = IssueCondition.Resolved,
@@ -84,7 +84,7 @@ return {
 			}
 			
 			if Username ~= nil and Text ~= nil and Username ~= "" and Text ~= "" and string.match(Text, "%S") ~= nil then
-				return PostPasswordValidFunction(p4, Username, Text):andThen(function(Result) --[[ Line: 72 ]]
+				return PostPasswordValidFunction(p4, Username, Text):andThen(function(Result)
 					-- upvalues: IssueCondition (copy), PasswordIssue (upval), IssueCondition (upval), Text (upval), PromiseModule (upval)
 					local t = {}
 					local Code = Result and (Result.responseBody and Result.responseBody.code)
@@ -105,7 +105,7 @@ return {
 					t.IssueCondition = IssueCondition
 					
 					return PromiseModule.resolve(t)
-				end, function(_) --[[ Line: 94 ]]
+				end, function(_)
 					-- upvalues: PromiseModule (upval), Text (upval), IssueCondition (copy)
 					return PromiseModule.resolve({
 						InputValid = true,
@@ -126,11 +126,11 @@ return {
 			})
 		end
 	end,
-	getIssueMessageList = function() --[[ Line: 28 ]]
+	getIssueMessageList = function()
 		-- upvalues: Config (copy)
 		return Config
 	end,
-	getDefaultIssues = function() --[[ Line: 32 ]]
+	getDefaultIssues = function()
 		-- upvalues: Config (copy), IssueCondition (copy)
 		local Problematics = {}
 		

@@ -5,11 +5,11 @@ local FetchFunction = HttpClientModule.fetch
 local AsPromiseFunction = HttpClientModule.asPromise
 local Text = require(Parent.UrlBuilder).UrlBase.APIS .. "/sharelinks/v1/get-or-create-link"
 
-local function decodeShareLink(p1) --[[ Line: 37 ]]
+local function decodeShareLink(p1)
 	return if type(p1) == "table" and type(p1.shortUrl) == "string" then p1.shortUrl else nil
 end
 
-return function(p1, Retry) --[[ Line: 45 | Named "createExperienceShareLink" ]]
+return function(p1, Retry)
 	-- upvalues: FetchFunction (copy), Text (copy), HttpService (copy), decodeShareLink (copy), AsPromiseFunction (copy)
 	return AsPromiseFunction((FetchFunction({
 		method = "POST",

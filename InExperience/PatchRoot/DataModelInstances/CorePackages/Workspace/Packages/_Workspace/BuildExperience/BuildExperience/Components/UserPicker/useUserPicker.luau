@@ -2,11 +2,11 @@
 local _ = require(script.Parent.UserPickerTypes)
 local BuildExperienceUserPickerSearchDebounceMs = game:DefineFastInt("BuildExperienceUserPickerSearchDebounceMs", 250)
 
-local function _(Text: string): string --[[ Line: 23 | Named "trim" ]]
+local function _(Text: string): string
 	return (string.gsub(Text, "^%s*(.-)%s*$", "%1"))
 end
 
-local _ = function(List): number --[[ Line: 27 | Named "countKeys" ]]
+local _ = function(List): number
 	local Count = 0
 	
 	for _, value in List do
@@ -17,7 +17,7 @@ local _ = function(List): number --[[ Line: 27 | Named "countKeys" ]]
 	return Count
 end
 
-local function appendUniqueIds(Tbl, Ids) --[[ Line: 39 ]]
+local function appendUniqueIds(Tbl, Ids)
 	local t = {}
 	
 	for _, value in Tbl do
@@ -33,7 +33,7 @@ local function appendUniqueIds(Tbl, Ids) --[[ Line: 39 ]]
 	return Copy
 end
 
-return function(p1) --[[ Line: 53 | Named "useUserPicker" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), BuildExperienceUserPickerSearchDebounceMs (copy), appendUniqueIds (copy)
 	local BrowseIds = p1.browseIds
 	local BrowseIsLoading = p1.browseIsLoading
@@ -54,7 +54,7 @@ return function(p1) --[[ Line: 53 | Named "useUserPicker" ]]
 	local UseRefResult1 = ReactModule.useRef(0)
 	local UseRefResult2 = ReactModule.useRef(false)
 	local IsNotReplacedMatch = string.gsub(UseStateResult, "^%s*(.-)%s*$", "%1") ~= ""
-	ReactModule.useEffect(function() --[[ Line: 79 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseStateResult2_3 (copy), UseRefResult1 (copy), BuildExperienceUserPickerSearchDebounceMs (upval), OnSearchFunction (copy)
 		local Replaced = string.gsub(UseStateResult, "^%s*(.-)%s*$", "%1")
 		
@@ -70,16 +70,16 @@ return function(p1) --[[ Line: 53 | Named "useUserPicker" ]]
 		UseStateResult2_1({})
 		UseStateResult2_2(nil)
 		UseStateResult2_3(true)
-		local DelayedThread = task.delay(BuildExperienceUserPickerSearchDebounceMs / 1000, function() --[[ Line: 96 ]]
+		local DelayedThread = task.delay(BuildExperienceUserPickerSearchDebounceMs / 1000, function()
 			-- upvalues: OnSearchFunction (upval), Replaced (copy), UseRefResult1 (upval), Current (copy), UseStateResult2_1 (upval), UseStateResult2_2 (upval), UseStateResult2_3 (upval)
-			OnSearchFunction(Replaced):andThen(function(Result) --[[ Line: 99 ]]
+			OnSearchFunction(Replaced):andThen(function(Result)
 				-- upvalues: UseRefResult1 (upval), Current (upval), UseStateResult2_1 (upval), UseStateResult2_2 (upval), UseStateResult2_3 (upval)
 				if UseRefResult1.current == Current then
 					UseStateResult2_1(Result.ids)
 					UseStateResult2_2(Result.nextCursor)
 					UseStateResult2_3(false)
 				end
-			end):catch(function() --[[ Line: 106 ]]
+			end):catch(function()
 				-- upvalues: UseRefResult1 (upval), Current (upval), UseStateResult2_1 (upval), UseStateResult2_2 (upval), UseStateResult2_3 (upval)
 				if UseRefResult1.current == Current then
 					UseStateResult2_1({})
@@ -89,12 +89,12 @@ return function(p1) --[[ Line: 53 | Named "useUserPicker" ]]
 			end)
 		end)
 		
-		return function() --[[ Line: 117 ]]
+		return function()
 			-- upvalues: DelayedThread (copy)
 			pcall(task.cancel, DelayedThread)
 		end
 	end, { UseStateResult, OnSearchFunction })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 122 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: IsNotReplacedMatch (copy), UseRefResult (copy), UseStateResult3 (copy), UseRefResult1 (copy), OnSearchFunction (copy), UseStateResult (copy), UseStateResult2_1 (copy), appendUniqueIds (upval), UseStateResult2_2 (copy), LoadMoreBrowseFunction (copy)
 		if not IsNotReplacedMatch then
 			LoadMoreBrowseFunction()
@@ -104,10 +104,10 @@ return function(p1) --[[ Line: 53 | Named "useUserPicker" ]]
 		if not UseRefResult.current and UseStateResult3 ~= nil then
 			UseRefResult.current = true
 			local Current = UseRefResult1.current
-			OnSearchFunction(string.gsub(UseStateResult, "^%s*(.-)%s*$", "%1"), UseStateResult3):andThen(function(Result) --[[ Line: 132 ]]
+			OnSearchFunction(string.gsub(UseStateResult, "^%s*(.-)%s*$", "%1"), UseStateResult3):andThen(function(Result)
 				-- upvalues: UseRefResult1 (upval), Current (copy), UseStateResult2_1 (upval), appendUniqueIds (upval), UseStateResult2_2 (upval)
 				if UseRefResult1.current == Current then
-					UseStateResult2_1(function(p2) --[[ Line: 137 ]]
+					UseStateResult2_1(function(p2)
 						-- upvalues: appendUniqueIds (upval), Result (copy)
 						return (appendUniqueIds(p2, Result.ids))
 					end)
@@ -115,7 +115,7 @@ return function(p1) --[[ Line: 53 | Named "useUserPicker" ]]
 					
 					return
 				end
-			end):finally(function() --[[ Line: 142 ]]
+			end):finally(function()
 				-- upvalues: UseRefResult (upval)
 				UseRefResult.current = false
 			end)
@@ -129,7 +129,7 @@ return function(p1) --[[ Line: 53 | Named "useUserPicker" ]]
 		OnSearchFunction,
 		LoadMoreBrowseFunction
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 154 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: IsNotReplacedMatch (copy), UseStateResult1 (copy), BrowseIds (copy), ExcludeUserIds (copy)
 		local UseStateResult = if IsNotReplacedMatch then UseStateResult1 else BrowseIds
 		
@@ -157,10 +157,10 @@ return function(p1) --[[ Line: 53 | Named "useUserPicker" ]]
 			SelectedCount += 1
 		end
 	end
-	ReactModule.useEffect(function() --[[ Line: 173 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SelectionLimit (copy), UseStateResult2_4 (copy)
 		if SelectionLimit ~= nil then
-			UseStateResult2_4(function(List) --[[ Line: 178 ]]
+			UseStateResult2_4(function(List)
 				-- upvalues: SelectionLimit (copy)
 				local Count = 0
 				
@@ -187,7 +187,7 @@ return function(p1) --[[ Line: 53 | Named "useUserPicker" ]]
 			return
 		end
 	end, { SelectionLimit })
-	ReactModule.useEffect(function() --[[ Line: 194 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult2 (copy), OnSelectionChangedFunction (copy), UseStateResult5 (copy)
 		if not UseRefResult2.current then
 			UseRefResult2.current = true
@@ -215,11 +215,11 @@ return function(p1) --[[ Line: 53 | Named "useUserPicker" ]]
 		selectedCount = SelectedCount,
 		hasSelection = SelectedCount > 0,
 		selectionLimit = SelectionLimit,
-		isSelected = ReactModule.useCallback(function(p2): boolean --[[ Line: 210 ]]
+		isSelected = ReactModule.useCallback(function(p2): boolean
 			-- upvalues: UseStateResult5 (copy)
 			return UseStateResult5[p2] == true
 		end, { UseStateResult5 }),
-		canSelect = ReactModule.useCallback(function(p2): boolean --[[ Line: 214 ]]
+		canSelect = ReactModule.useCallback(function(p2): boolean
 			-- upvalues: UseStateResult5 (copy), SelectionLimit (copy)
 			if UseStateResult5[p2] == true then
 				return true
@@ -238,9 +238,9 @@ return function(p1) --[[ Line: 53 | Named "useUserPicker" ]]
 			end
 			return v1
 		end, { UseStateResult5, SelectionLimit }),
-		toggleSelected = ReactModule.useCallback(function(p3) --[[ Line: 221 ]]
+		toggleSelected = ReactModule.useCallback(function(p3)
 			-- upvalues: UseStateResult2_4 (copy), SelectionLimit (copy)
-			UseStateResult2_4(function(Tbl) --[[ Line: 222 ]]
+			UseStateResult2_4(function(Tbl)
 				-- upvalues: p3 (copy), SelectionLimit (upval)
 				local Copy = table.clone(Tbl)
 				
@@ -269,7 +269,7 @@ return function(p1) --[[ Line: 53 | Named "useUserPicker" ]]
 		message = UseStateResult6,
 		setMessage = UseStateResult2_5,
 		isSubmitting = UseStateResult7,
-		submit = ReactModule.useCallback(function() --[[ Line: 235 ]]
+		submit = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult7 (copy), UseStateResult5 (copy), UseStateResult2_6 (copy), OnSubmitFunction (copy), UseStateResult6 (copy)
 			if UseStateResult7 then return end
 			local List = {}
@@ -281,7 +281,7 @@ return function(p1) --[[ Line: 53 | Named "useUserPicker" ]]
 			end
 			if #List ~= 0 then
 				UseStateResult2_6(true)
-				OnSubmitFunction(List, if string.gsub(UseStateResult6, "^%s*(.-)%s*$", "%1") == "" then nil else UseStateResult6):finally(function() --[[ Line: 249 ]]
+				OnSubmitFunction(List, if string.gsub(UseStateResult6, "^%s*(.-)%s*$", "%1") == "" then nil else UseStateResult6):finally(function()
 					-- upvalues: UseStateResult2_6 (upval)
 					UseStateResult2_6(false)
 				end)

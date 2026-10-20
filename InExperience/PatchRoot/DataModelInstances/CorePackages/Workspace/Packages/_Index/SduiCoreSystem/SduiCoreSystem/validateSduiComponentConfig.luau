@@ -4,7 +4,7 @@ local SduiErrorType = require(SduiCoreSystem.SduiErrors).SduiErrorType
 local UiComponentInterface = require(SduiCoreSystem.SduiConfigTypes).UiComponentInterface
 local ValidateInterfaceModule = require(SduiCoreSystem.validateInterface)
 
-return function(p1, p2) --[[ Line: 19 | Named "validateSduiComponentConfig" ]]
+return function(p1, p2)
 	-- upvalues: SduiErrorType (copy), ValidateInterfaceModule (copy), UiComponentInterface (copy), SduiComponentTypeModule (copy)
 	if p1 == nil then
 		return false, { errorType = SduiErrorType.NilComponentConfig }

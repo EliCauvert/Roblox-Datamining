@@ -4,7 +4,7 @@ local UseUserExperimentFunction = require(Parent.RoactAppExperiment).useUserExpe
 local FFlagEditProfileSetupNewExperimentFlowModule = require(script.Parent.FFlagEditProfileSetupNewExperimentFlow)
 local EditProfileExperimentKey = game:DefineFastString("EditProfileExperimentKey", "can_view_edit_profile")
 
-local function IsExperimentEnabled(p1): boolean --[[ Line: 11 ]]
+local function IsExperimentEnabled(p1): boolean
 	-- upvalues: GetFStringSelfProfileViewFunction (copy), FFlagEditProfileSetupNewExperimentFlowModule (copy), EditProfileExperimentKey (copy)
 	local Entry = (p1 or {})[GetFStringSelfProfileViewFunction()] or {}
 	
@@ -13,7 +13,7 @@ end
 
 return {
 	isExperimentEnabled = IsExperimentEnabled,
-	useIsExperimentEnabled = function(p1) --[[ Line: 25 ]]
+	useIsExperimentEnabled = function(p1)
 		-- upvalues: UseUserExperimentFunction (copy), GetFStringSelfProfileViewFunction (copy), IsExperimentEnabled (copy)
 		return UseUserExperimentFunction({ GetFStringSelfProfileViewFunction() }, IsExperimentEnabled, if p1 then p1.isExposureEnabled else nil)
 	end

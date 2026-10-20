@@ -8,7 +8,7 @@ local CalculateAdjacentStepValueModule = require(script.Parent.calculateAdjacent
 local CalculateDirectionalStepValueModule = require(script.Parent.calculateDirectionalStepValue)
 local ConstantsModule = require(script.Parent.constants)
 
-local function getStepForKeyCode(Value, p1) --[[ Line: 32 ]]
+local function getStepForKeyCode(Value, p1)
 	-- upvalues: FlagsModule (copy), ConstantsModule (copy), SliderStepSizeModule (copy)
 	if not FlagsModule.FoundationSliderCapture then
 		if table.find(ConstantsModule.coarseIncrement, Value) then
@@ -22,21 +22,21 @@ local function getStepForKeyCode(Value, p1) --[[ Line: 32 ]]
 	return if table.find(ConstantsModule.stepIncrement[Vertical], Value) then { sign = 1, size = SliderStepSizeModule.Step } elseif table.find(ConstantsModule.stepDecrement[Vertical], Value) then { sign = -1, size = SliderStepSizeModule.Step } else nil
 end
 
-local function _(Value): boolean --[[ Line: 51 | Named "isExitKey" ]]
+local function _(Value): boolean
 	-- upvalues: ConstantsModule (copy)
 	return table.find(ConstantsModule.exit, Value) ~= nil
 end
 
-local _ = function(p1: number, p2: number): number --[[ Line: 55 | Named "getRepeatInterval" ]]
+local _ = function(p1: number, p2: number): number
 	-- upvalues: FlagsModule (copy)
 	return if FlagsModule.FoundationSliderCapture and (p2 == nil or p2 <= 0) then if p1 >= 15 then 0.03 elseif p1 >= 5 then 0.06 else 0.1 else 0.1
 end
 
-return function(p1, Step, Range, p2, Handlers) --[[ Line: 72 | Named "useSliderDirectionalInput" ]]
+return function(p1, Step, Range, p2, Handlers)
 	-- upvalues: ReactModule (copy), SliderStepSizeModule (copy), SliderStepDirectionModule (copy), FlagsModule (copy), CalculateAdjacentStepValueModule (copy), CalculateDirectionalStepValueModule (copy), ConstantsModule (copy), getStepForKeyCode (copy), ServicesModule (copy)
 	local UseRefResult = ReactModule.useRef({ step = Step, range = Range, handlers = Handlers })
 	UseRefResult.current = { step = Step, range = Range, handlers = Handlers }
-	ReactModule.useEffect(function() --[[ Line: 91 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), SliderStepSizeModule (upval), UseRefResult (copy), SliderStepDirectionModule (upval), FlagsModule (upval), CalculateAdjacentStepValueModule (upval), CalculateDirectionalStepValueModule (upval), ConstantsModule (upval), getStepForKeyCode (upval), p2 (copy), ServicesModule (upval)
 		if not p1 then return end
 		local Input = nil
@@ -46,14 +46,14 @@ return function(p1, Step, Range, p2, Handlers) --[[ Line: 72 | Named "useSliderD
 		local v2 = 0
 		local v3 = 0
 		
-		local function performStep(p3: number, Step) --[[ Line: 103 ]]
+		local function performStep(p3: number, Step)
 			-- upvalues: UseRefResult (upval), SliderStepDirectionModule (upval), FlagsModule (upval), CalculateAdjacentStepValueModule (upval), CalculateDirectionalStepValueModule (upval)
 			local Current = UseRefResult.current
 			local Increment = if p3 > 0 then SliderStepDirectionModule.Increment else SliderStepDirectionModule.Decrement
 			Current.handlers.onStep(if FlagsModule.FoundationSliderCapture then CalculateAdjacentStepValueModule(Current.handlers.getValue(), Increment, Current.range, Current.step, Step) else CalculateDirectionalStepValueModule(Current.handlers.getValue(), Increment, Current.range, Current.step, Step))
 		end
 		
-		local function _(p3) --[[ Line: 127 | Named "stopStepping" ]]
+		local function _(p3)
 			-- upvalues: Input (ref), v1 (ref), SpawnedThread (ref)
 			if p3 ~= nil and p3 ~= Input then return end
 			Input = nil
@@ -65,7 +65,7 @@ return function(p1, Step, Range, p2, Handlers) --[[ Line: 72 | Named "useSliderD
 			end
 		end
 		
-		local function startStepping(Input1, Sign, Step1) --[[ Line: 139 ]]
+		local function startStepping(Input1, Sign, Step1)
 			-- upvalues: Input (ref), v1 (ref), Step (ref), SpawnedThread (ref), performStep (copy), UseRefResult (upval), FlagsModule (upval)
 			if Input1 == Input and Sign == v1 and Step1 == Step then return end
 			Input = nil
@@ -79,7 +79,7 @@ return function(p1, Step, Range, p2, Handlers) --[[ Line: 72 | Named "useSliderD
 			v1 = Sign
 			Step = Step1
 			performStep(Sign, Step1)
-			SpawnedThread = task.spawn(function() --[[ Line: 151 ]]
+			SpawnedThread = task.spawn(function()
 				-- upvalues: Input (upval), Input1 (copy), v1 (upval), Sign (copy), Step (upval), Step1 (copy), performStep (upval), UseRefResult (upval), FlagsModule (upval)
 				task.wait(0.4)
 				local Count = 0
@@ -92,7 +92,7 @@ return function(p1, Step, Range, p2, Handlers) --[[ Line: 72 | Named "useSliderD
 			end)
 		end
 		
-		local function evaluateInput(Input1) --[[ Line: 165 ]]
+		local function evaluateInput(Input1)
 			-- upvalues: FlagsModule (upval), ConstantsModule (upval), UseRefResult (upval), getStepForKeyCode (upval), p2 (upval), startStepping (copy), v2 (ref), v3 (ref), Input (ref), v1 (ref), SpawnedThread (ref), SliderStepSizeModule (upval)
 			if FlagsModule.FoundationSliderCapture and table.find(ConstantsModule.exit, Input1.KeyCode) ~= nil then
 				local OnExitFunction: () -> () = UseRefResult.current.handlers.onExit
@@ -153,7 +153,7 @@ return function(p1, Step, Range, p2, Handlers) --[[ Line: 72 | Named "useSliderD
 		local Connections = {
 			ServicesModule.UserInputService.InputBegan:Connect(evaluateInput),
 			ServicesModule.UserInputService.InputChanged:Connect(evaluateInput),
-			ServicesModule.UserInputService.InputEnded:Connect(function(Input1) --[[ Line: 201 | Named "handleInputEnded" ]]
+			ServicesModule.UserInputService.InputEnded:Connect(function(Input1)
 				-- upvalues: ConstantsModule (upval), v2 (ref), v3 (ref), Input (ref), v1 (ref), SpawnedThread (ref)
 				if table.find(ConstantsModule.analogStep, Input1.KeyCode) then
 					v2 = 0
@@ -170,7 +170,7 @@ return function(p1, Step, Range, p2, Handlers) --[[ Line: 72 | Named "useSliderD
 			end)
 		}
 		
-		return function() --[[ Line: 215 ]]
+		return function()
 			-- upvalues: Input (ref), v1 (ref), SpawnedThread (ref), Connections (copy)
 			Input = nil
 			v1 = 0

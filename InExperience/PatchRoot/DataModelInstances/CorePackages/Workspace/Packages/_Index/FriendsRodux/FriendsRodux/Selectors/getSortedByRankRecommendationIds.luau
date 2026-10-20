@@ -5,17 +5,17 @@ local LuauPolyfillModule = require(Parent.Parent.LuauPolyfill)
 local Object = LuauPolyfillModule.Object
 local Array = LuauPolyfillModule.Array
 
-local function v6(p1, p2) --[[ Line: 13 ]]
+local function v6(p1, p2)
 	return (p1.rank or 0) - (p2.rank or 0)
 end
 
-return function(p1) --[[ Line: 19 ]]
+return function(p1)
 	-- upvalues: SelectRecommendationsForUserIdModule (copy), Array (copy), Object (copy), v6 (copy)
-	return function(p2) --[[ Line: 20 ]]
+	return function(p2)
 		-- upvalues: SelectRecommendationsForUserIdModule (upval), p1 (copy), Array (upval), Object (upval), v6 (upval)
-		return function(p3, p4) --[[ Line: 21 ]]
+		return function(p3, p4)
 			-- upvalues: SelectRecommendationsForUserIdModule (upval), p1 (upval), p2 (copy), Array (upval), Object (upval), v6 (upval)
-			return Array.map(Array.sort(Object.values((SelectRecommendationsForUserIdModule(p1)(p2)(p3, p4))), v6), function(p5) --[[ Line: 30 ]]
+			return Array.map(Array.sort(Object.values((SelectRecommendationsForUserIdModule(p1)(p2)(p3, p4))), v6), function(p5)
 				return p5.id
 			end)
 		end

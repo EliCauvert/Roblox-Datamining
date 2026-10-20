@@ -1,4 +1,4 @@
-﻿return function(p1, Frame: Frame, p2): number --[[ Line: 1 | Named "calculateSliderFraction" ]]
+﻿return function(p1, Frame: Frame, p2): number
 	local AbsoluteSize: number = Frame.AbsoluteSize
 	local Radians = math.rad(Frame.AbsoluteRotation)
 	

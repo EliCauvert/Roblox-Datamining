@@ -12,7 +12,7 @@ return {
 	},
 	requiredData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 18 ]]
+	run = function(p1, p2)
 		-- upvalues: UGCValidationService (copy), GetFIntUGCValidationVertexDensityThresholdModule (copy), ErrorSourceStringsModule (copy)
 		for _, value in p2.renderMeshesData do
 			if GetFIntUGCValidationVertexDensityThresholdModule() < UGCValidationService:GetEditableMeshMaxNearbyVerticesCollisions(value.editable, value.scale) then

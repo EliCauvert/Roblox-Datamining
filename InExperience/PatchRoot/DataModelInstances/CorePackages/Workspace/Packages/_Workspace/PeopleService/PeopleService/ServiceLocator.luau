@@ -1,7 +1,7 @@
 ﻿local ConstantsModules = {}
 local GetFFlagPeoplePageEnablePersonSignalStoreFunction = require(script:FindFirstAncestor("PeopleService").Flags).GetFFlagPeoplePageEnablePersonSignalStore
 
-local function loadService(Key) --[[ Line: 19 ]]
+local function loadService(Key)
 	-- upvalues: GetFFlagPeoplePageEnablePersonSignalStoreFunction (copy), ConstantsModules (ref)
 	local ConstantsModule = nil
 	
@@ -40,22 +40,22 @@ local function loadService(Key) --[[ Line: 19 ]]
 end
 
 return {
-	register = function(Key, p1) --[[ Line: 60 ]]
+	register = function(Key, p1)
 		-- upvalues: ConstantsModules (ref)
 		ConstantsModules[Key] = p1
 	end,
-	get = function(p1) --[[ Line: 64 ]]
+	get = function(p1)
 		-- upvalues: ConstantsModules (ref), loadService (copy)
 		if not ConstantsModules[p1] then
 			loadService(p1)
 		end
 		return ConstantsModules[p1]
 	end,
-	has = function(p1): boolean --[[ Line: 71 ]]
+	has = function(p1): boolean
 		-- upvalues: ConstantsModules (ref)
 		return ConstantsModules[p1] ~= nil
 	end,
-	clear = function() --[[ Line: 75 ]]
+	clear = function()
 		-- upvalues: ConstantsModules (ref)
 		ConstantsModules = {}
 	end

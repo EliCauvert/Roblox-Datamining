@@ -2,7 +2,7 @@
 local SelectTryOnItemsModule = require(script.Parent.selectTryOnItems)
 local SelectEquippedLayeredMakeupAssetsModule = require(script.Parent.selectEquippedLayeredMakeupAssets)
 
-return function(p1): number --[[ Line: 10 | Named "selectTotalLayeredMakeupAssets" ]]
+return function(p1): number
 	-- upvalues: SelectEquippedLayeredMakeupAssetsModule (copy), SelectTryOnItemsModule (copy), IsMakeupAssetTypeModule (copy)
 	local Count = #SelectEquippedLayeredMakeupAssetsModule(p1)
 	local Count1 = 0

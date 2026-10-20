@@ -14,11 +14,11 @@ local EventMap = {
 	[Enum.KeyCode.RightBracket] = FocusNavigationEventNameEnum.ScrollDown
 }
 
-local function _(ScrollingFrame) --[[ Line: 31 | Named "getScrollableAncestor" ]]
+local function _(ScrollingFrame)
 	return if ScrollingFrame == nil then nil elseif ScrollingFrame:IsA("ScrollingFrame") then ScrollingFrame else ScrollingFrame:FindFirstAncestorWhichIsA("ScrollingFrame")
 end
 
-local _ = function(ScrollFrame, Y: number) --[[ Line: 44 | Named "scrollTo" ]]
+local _ = function(ScrollFrame, Y: number)
 	if ScrollFrame ~= nil then
 		local YDelta = ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y
 		
@@ -36,7 +36,7 @@ local _ = function(ScrollFrame, Y: number) --[[ Line: 44 | Named "scrollTo" ]]
 	end
 end
 
-return function(p1) --[[ Line: 73 | Named "useInterventionFocusRoot" ]]
+return function(p1)
 	-- upvalues: UseFocusedGuiObjectFunction (copy), UseMemoFunction (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), EventMap (copy)
 	local UseFocusedGuiObjectResult = UseFocusedGuiObjectFunction()
 	local UseFocusedGuiObjectResult1 = if UseFocusedGuiObjectResult == nil then nil elseif UseFocusedGuiObjectResult:IsA("ScrollingFrame") then UseFocusedGuiObjectResult else UseFocusedGuiObjectResult:FindFirstAncestorWhichIsA("ScrollingFrame")
@@ -45,11 +45,11 @@ return function(p1) --[[ Line: 73 | Named "useInterventionFocusRoot" ]]
 		surfaceIdentifier = p1.surfaceIdentifier,
 		isAutoFocusRoot = p1.isAutoFocusRoot == nil or p1.isAutoFocusRoot,
 		eventMap = EventMap,
-		eventHandlers = UseMemoFunction(function() --[[ Line: 77 ]]
+		eventHandlers = UseMemoFunction(function()
 			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), UseFocusedGuiObjectResult1 (copy)
 			local config = {
 				[FocusNavigationEventNameEnum.NavigateBack] = {
-					handler = InputHandlersModule.onPress(function(p2) --[[ Line: 80 ]]
+					handler = InputHandlersModule.onPress(function(p2)
 						p2:cancel()
 					end)
 				}
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 73 | Named "useInterventionFocusRoot" ]]
 			
 			if UseFocusedGuiObjectResult1 then
 				config[FocusNavigationEventNameEnum.ScrollDown] = {
-					handler = InputHandlersModule.onRelease(function(_) --[[ Line: 88 ]]
+					handler = InputHandlersModule.onRelease(function(_)
 						-- upvalues: UseFocusedGuiObjectResult1 (upval)
 						if UseFocusedGuiObjectResult1 ~= nil then
 							local YDelta = UseFocusedGuiObjectResult1.AbsoluteCanvasSize.Y - UseFocusedGuiObjectResult1.AbsoluteWindowSize.Y
@@ -72,7 +72,7 @@ return function(p1) --[[ Line: 73 | Named "useInterventionFocusRoot" ]]
 					end)
 				}
 				config[FocusNavigationEventNameEnum.ScrollUp] = {
-					handler = InputHandlersModule.onRelease(function(_) --[[ Line: 93 ]]
+					handler = InputHandlersModule.onRelease(function(_)
 						-- upvalues: UseFocusedGuiObjectResult1 (upval)
 						if UseFocusedGuiObjectResult1 ~= nil then
 							local _ = UseFocusedGuiObjectResult1.AbsoluteCanvasSize.Y - UseFocusedGuiObjectResult1.AbsoluteWindowSize.Y

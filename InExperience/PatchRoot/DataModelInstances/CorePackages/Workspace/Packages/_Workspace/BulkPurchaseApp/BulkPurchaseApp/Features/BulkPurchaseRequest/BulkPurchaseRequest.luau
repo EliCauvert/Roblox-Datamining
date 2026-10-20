@@ -35,12 +35,12 @@ local config = {
 	itemOwned = "CoreScripts.BulkPurchasePrompt.RequestPrompt.ItemOwned"
 }
 
-return function(p1) --[[ Line: 69 | Named "BulkPurchaseRequest" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), LocalizationRoactContext (copy), ReactFocusNavigationModule (copy), FFlagFixVP8143Module (copy), UseDesignTokensFunction (copy), ItemStatusKeyToLocalizationKeyModule (copy), MapItemsToRowPresentationFunction (copy), FFlagBulkPurchaseEnablePurchaseOptionsModule (copy), MapOwnedItemsToRowPresentationFunction (copy), MapUnpurchasableItemsToRowPresentationFunction (copy), FullPagePromptModule (copy), FullPagePromptTwoPanelLayoutModule (copy), LineItemLayoutModule (copy), StyledTextLabel (copy), FullPagePromptScrollListModule (copy), ItemListModule (copy), DividerModule (copy), PriceBoxModule (copy), FFlagAXAddPlusUpsellToBulkPurchaseModule (copy), FFlagAXAddOffersToBulkPurchaseModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseContextResult = ReactModule.useContext(LocalizationRoactContext)
 	local UseDefaultFocusBehaviorResult, UseDefaultFocusBehaviorResult2 = ReactFocusNavigationModule.useDefaultFocusBehavior()
-	local UseResult = if FFlagFixVP8143Module then ReactModule.useCallback(function(Current) --[[ Line: 74 ]]
+	local UseResult = if FFlagFixVP8143Module then ReactModule.useCallback(function(Current)
 		-- upvalues: p1 (copy), UseDefaultFocusBehaviorResult (copy)
 		if typeof(p1.purchaseButtonRef) == "table" then
 			p1.purchaseButtonRef.current = Current
@@ -95,7 +95,7 @@ return function(p1) --[[ Line: 69 | Named "BulkPurchaseRequest" ]]
 			Size = UDim2.fromScale(1, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			LayoutOrder = 1,
-			[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 142 ]]
+			[ReactModule.Change.AbsoluteSize] = function(Frame)
 				-- upvalues: UseBindingResult2 (copy)
 				UseBindingResult2(Frame.AbsoluteSize)
 			end
@@ -115,7 +115,7 @@ return function(p1) --[[ Line: 69 | Named "BulkPurchaseRequest" ]]
 			})
 		})), ReactModule.createElement(FullPagePromptScrollListModule, {
 			LayoutOrder = 2,
-			size = UseBindingResult:map(function(p2): UDim2 --[[ Line: 166 ]]
+			size = UseBindingResult:map(function(p2): UDim2
 				-- upvalues: UseDesignTokensResult (copy)
 				return UDim2.new(1, 0, 1, -(p2.Y + UseDesignTokensResult.Size.Size_600))
 			end)

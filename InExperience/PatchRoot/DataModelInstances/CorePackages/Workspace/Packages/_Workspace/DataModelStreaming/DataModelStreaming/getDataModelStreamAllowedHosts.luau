@@ -1,6 +1,6 @@
 ﻿game:DefineFastFlag("LuaAppEnableDataModelStreamForConsoles", false)
 
-return function() --[[ Line: 3 | Named "getDataModelStreamAllowedHosts" ]]
+return function()
 	local List = { "ws://localhost:5051", "ws://10.0.2.2:5051" }
 	
 	if game:GetFastFlag("LuaAppEnableDataModelStreamForConsoles") then

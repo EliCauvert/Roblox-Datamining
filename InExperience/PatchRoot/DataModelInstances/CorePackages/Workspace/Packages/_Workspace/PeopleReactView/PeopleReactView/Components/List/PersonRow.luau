@@ -27,14 +27,14 @@ local FFlagPeopleListButtonOverflowModule = require(PeopleReactView.Flags.FFlagP
 local PlayerListRefactorUsernameFormatting = game:DefineFastFlag("PlayerListRefactorUsernameFormatting", false)
 local GetFFlagAddPeoplePageCardLayoutFunction = PeopleServiceModule.getService("Flags").GetFFlagAddPeoplePageCardLayout
 
-return function(p1) --[[ Line: 50 | Named "PersonRow" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseDeviceOrientationFunction (copy), RobloxAppEnumsModule (copy), ReactModule (copy), PeoplePageLayoutContextModule (copy), FFlagPeopleListButtonOverflowModule (copy), FFlagEnableBlackbirdCheck (copy), UseIsRobloxSubscriberFunction (copy), PeopleServiceModule (copy), GetFFlagAddPeoplePageCardLayoutFunction (copy), UseInExperienceCombinedNameModule (copy), UseSignalBindingFunction (copy), Avatar (copy), InputSize (copy), FFlagPeopleTabUseProfileFrameThumbnailModule (copy), Text (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy), PlayerListRefactorUsernameFormatting (copy), FormatUsernameFunction (copy), PersonButtonRowModule (copy), PlatformNameModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseContextResult = ReactModule.useContext(PeoplePageLayoutContextModule)
 	local IsUseDeviceOrientationResultMatch = UseDeviceOrientationFunction() == RobloxAppEnumsModule.DeviceOrientationMode.Portrait or FFlagPeopleListButtonOverflowModule and UseContextResult.isCompact
 	local UseIsRobloxSubscriberResult = if FFlagEnableBlackbirdCheck then UseIsRobloxSubscriberFunction((tostring(p1.person.UserId))) else nil
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 63 ]]
+	local UseResult = ReactModule.useCallback(function(Current)
 		-- upvalues: PeopleServiceModule (upval), p1 (copy), UseRefResult (copy)
 		PeopleServiceModule.getService("FocusNavigationService").registerFrame(Current, p1.person.UserId)
 		UseRefResult.current = Current
@@ -44,14 +44,14 @@ return function(p1) --[[ Line: 50 | Named "PersonRow" ]]
 	if GetFFlagAddPeoplePageCardLayoutFunction() then
 		UseInExperienceCombinedNameModuleResult = UseInExperienceCombinedNameModule(p1.person.UserId, p1.person.DisplayName)
 	else
-		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 73 ]]
+		local UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: PeopleServiceModule (upval)
 			return PeopleServiceModule.getService("PeopleListStore")
 		end, {})
-		UseInExperienceCombinedNameModuleResult = UseSignalBindingFunction((ReactModule.useMemo(function() --[[ Line: 77 ]]
+		UseInExperienceCombinedNameModuleResult = UseSignalBindingFunction((ReactModule.useMemo(function()
 			-- upvalues: UseMemoResult (copy), p1 (copy)
 			return UseMemoResult.getProfile(p1.person.UserId)
-		end, { p1.person.UserId }))):map(function(Text: string) --[[ Line: 83 ]]
+		end, { p1.person.UserId }))):map(function(Text: string)
 			-- upvalues: p1 (copy)
 			return if Text and string.len(Text) > 0 then Text else p1.person.DisplayName
 		end)

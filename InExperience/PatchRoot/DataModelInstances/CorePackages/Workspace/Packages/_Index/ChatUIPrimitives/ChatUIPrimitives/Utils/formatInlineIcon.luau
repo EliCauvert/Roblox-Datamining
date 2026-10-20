@@ -1,6 +1,6 @@
 ﻿local EscapeRichTextModule = require(script:FindFirstAncestor("ChatUIPrimitives").Utils.escapeRichText)
 
-return function(p1, List): string --[[ Line: 24 | Named "formatInlineIcon" ]]
+return function(p1, List): string
 	-- upvalues: EscapeRichTextModule (copy)
 	local List1 = { "family" }
 	local config = {

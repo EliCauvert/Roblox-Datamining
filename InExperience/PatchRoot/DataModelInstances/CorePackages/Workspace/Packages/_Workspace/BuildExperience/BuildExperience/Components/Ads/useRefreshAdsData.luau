@@ -5,14 +5,14 @@ local AdCampaignsModule = require(Parent.DataHydration.AdCampaigns)
 local CampaignStatsModule = require(Parent.DataHydration.CampaignStats)
 local AdCampaignEligibilityModule = require(Parent.DataHydration.AdCampaignEligibility)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
-local Computed = SignalsModule.createComputed(function(): string --[[ Line: 23 ]]
+local Computed = SignalsModule.createComputed(function(): string
 	return "NotReady"
 end)
-local Computed1 = SignalsModule.createComputed(function() --[[ Line: 26 ]]
+local Computed1 = SignalsModule.createComputed(function()
 	return nil
 end)
 
-return function(Current, p1) --[[ Line: 38 | Named "useRefreshAdsData" ]]
+return function(Current, p1)
 	-- upvalues: AdCampaignsModule (copy), CampaignStatsModule (copy), ReactModule (copy), AdCampaignEligibilityModule (copy), UseSignalStateFunction (copy), Computed (copy), Computed1 (copy)
 	local P1 = p1 or {}
 	local IsIncludeEligibility = P1.includeEligibility == true
@@ -28,7 +28,7 @@ return function(Current, p1) --[[ Line: 38 | Named "useRefreshAdsData" ]]
 	local UseSignalStateResult1 = UseSignalStateFunction(AdCampaigns.data)
 	local UseSignalStateResult2 = UseSignalStateFunction(if CampaignStats == nil then Computed else CampaignStats.status)
 	local UseSignalStateResult3 = UseSignalStateFunction(if CampaignStats == nil then Computed1 else CampaignStats.data)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 69 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), AdCampaignsStore (copy), IsNotCurrentMatch (copy), CampaignStats (copy), UseRefResult1 (copy), CampaignStatsStore (copy), Current (copy), AdCampaignEligibilityStore (copy)
 		UseRefResult.current = AdCampaignsStore.isAdCampaignsRequestInQueueOrInFlight()
 		AdCampaignsStore.fetchAdCampaigns()
@@ -46,7 +46,7 @@ return function(Current, p1) --[[ Line: 38 | Named "useRefreshAdsData" ]]
 		Current, IsNotCurrentMatch, AdCampaignsStore, CampaignStatsStore,
 		AdCampaignEligibilityStore, AdCampaigns, CampaignStats
 	})
-	ReactModule.useEffect(function() --[[ Line: 99 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), AdCampaignsStore (copy)
 		if UseRefResult.current and not AdCampaignsStore.isAdCampaignsRequestInQueueOrInFlight() then
 			UseRefResult.current = false
@@ -57,7 +57,7 @@ return function(Current, p1) --[[ Line: 38 | Named "useRefreshAdsData" ]]
 		UseSignalStateResult,
 		AdCampaignsStore
 	})
-	ReactModule.useEffect(function() --[[ Line: 109 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Current (copy), UseRefResult1 (copy), CampaignStatsStore (copy)
 		if Current ~= nil and UseRefResult1.current == Current and not CampaignStatsStore.isCampaignStatsRequestInQueueOrInFlight(Current) then
 			UseRefResult1.current = nil

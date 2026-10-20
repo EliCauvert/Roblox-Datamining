@@ -2,7 +2,7 @@
 local ConstantsModule = require(script.Parent.Parent.Constants)
 local MaybeAssertModule = require(script.Parent.maybeAssert)
 
-return function(Text) --[[ Line: 15 | Named "validateMessageText" ]]
+return function(Text)
 	-- upvalues: MaybeAssertModule (copy), TModule (copy), ConstantsModule (copy)
 	MaybeAssertModule(TModule.string(Text))
 	

@@ -59,21 +59,21 @@ ConversationList.defaultProps = {
 	canAccessParty = false,
 	focusLock = {},
 	itemList = {},
-	navigateToQuickStartSquadInviteFriends = function() --[[ Line: 76 ]] end,
-	navigateToSquadLobby = function() --[[ Line: 77 ]] end,
+	navigateToQuickStartSquadInviteFriends = function() end,
+	navigateToSquadLobby = function() end,
 	Size = UDim2.fromScale(1, 1),
-	onScrollUpdate = function() --[[ Line: 81 ]] end,
-	dismissUnfilteredThreadsFtux = function() --[[ Line: 86 ]] end,
+	onScrollUpdate = function() end,
+	dismissUnfilteredThreadsFtux = function() end,
 	canvasTopPadding = if FFlagAppIaScrollAway then 0 else nil,
-	fireConversationImpressionEvent = function() --[[ Line: 88 ]] end,
-	fireConversationClickedEvent = function() --[[ Line: 90 ]] end
+	fireConversationImpressionEvent = function() end,
+	fireConversationClickedEvent = function() end
 }
 
-local function _(p1): boolean --[[ Line: 94 | Named "getIsSquadEnabledForRows" ]]
+local function _(p1): boolean
 	return p1.canAccessParty == true
 end
 
-function ConversationList.init(p1) --[[ Line: 98 ]]
+function ConversationList.init(p1)
 	-- upvalues: ConversationList (copy), FFlagAppChatPerfTrackingModule (copy), Signal (copy), AppPage (copy), Constants (copy), FFlagAppIaScrollAway (copy), FFlagEnableScrollAwayContentScrollableFix (copy), VisibilityControl (copy), PartyPageCarouselExperimentation (copy), MemoizeFunction (copy), Enums (copy), RoactModule (copy), ChatLandingModalContainerModule (copy), ConversationGroupsEntryContainerModule (copy), PartyQuickStartContainerModule (copy), ReactModule (copy), SocialCarouselModule (copy), FFlagAppChatConsoleFocusFixesModule (copy), ShouldUseFoundationConversationRow (copy), ConversationRowModule (copy), ConversationEntryModule (copy), FocusNavigationService (copy), CoreGui (copy), AppChatPerfExperimentation (copy), SquadQuickStartExperimentation (copy), FFlagAppChatRemoveConversationListDividerIxpEnabledModule (copy), IXPService (copy), FStringAppChatRemoveConversationListDividerIxpLayerModule (copy), FFlagAppChatTimestampInSubtitleIxpEnabledModule (copy), FStringAppChatTimestampInSubtitleIxpLayerModule (copy)
 	ConversationList.ENTRY_HEIGHT = p1.props.entryHeight
 	
@@ -89,7 +89,7 @@ function ConversationList.init(p1) --[[ Line: 98 ]]
 		scrollViewPositionChangedSignal = p1.scrollViewPositionChangedSignal
 	}
 	
-	function p1.onScrollUpdate(ScrollFrame) --[[ Line: 115 ]]
+	function p1.onScrollUpdate(ScrollFrame)
 		-- upvalues: FFlagAppChatPerfTrackingModule (upval), p1 (copy)
 		if FFlagAppChatPerfTrackingModule and p1.scrollIntervalTracker then
 			p1.scrollIntervalTracker.onScrollTick()
@@ -102,7 +102,7 @@ function ConversationList.init(p1) --[[ Line: 98 ]]
 	if FFlagAppIaScrollAway and FFlagEnableScrollAwayContentScrollableFix then
 		p1.lastContentHeight = 0
 		
-		function p1.onViewportAbsoluteSizeChange(Frame) --[[ Line: 128 ]]
+		function p1.onViewportAbsoluteSizeChange(Frame)
 			-- upvalues: VisibilityControl (upval), p1 (copy)
 			VisibilityControl.setContentScrollable(Frame.AbsoluteSize.Y < p1.lastContentHeight)
 		end
@@ -110,16 +110,16 @@ function ConversationList.init(p1) --[[ Line: 98 ]]
 	p1.focusLock = p1.props.focusLock
 	
 	if PartyPageCarouselExperimentation.getPartyPageCarouselEnabled() then
-		function p1.navigateToConversationFromSocialCarousel(p2) --[[ Line: 136 ]]
+		function p1.navigateToConversationFromSocialCarousel(p2)
 			-- upvalues: p1 (copy)
 			p1.props.navigateToConversationFromUserId(p2.id)
 		end
 	end
-	function p1.identifier(p2) --[[ Line: 141 ]]
+	function p1.identifier(p2)
 		return if p2 then p2.id .. tostring(p2.unixTime) else nil
 	end
 	
-	local MemoizeResult = MemoizeFunction(function() --[[ Line: 149 ]]
+	local MemoizeResult = MemoizeFunction(function()
 		-- upvalues: Enums (upval), p1 (copy)
 		return {
 			{
@@ -133,12 +133,12 @@ function ConversationList.init(p1) --[[ Line: 98 ]]
 		}
 	end)
 	
-	function p1.isPartyQuickStartEnabled() --[[ Line: 162 ]]
+	function p1.isPartyQuickStartEnabled()
 		-- upvalues: p1 (copy)
 		return p1.props.isPartyQuickStartEnabled
 	end
 	
-	function p1.renderItem(p2, _) --[[ Line: 167 ]]
+	function p1.renderItem(p2, _)
 		-- upvalues: RoactModule (upval), ChatLandingModalContainerModule (upval), ConversationGroupsEntryContainerModule (upval), p1 (copy), PartyQuickStartContainerModule (upval), PartyPageCarouselExperimentation (upval), ReactModule (upval), SocialCarouselModule (upval), MemoizeResult (copy), Constants (upval), FFlagAppIaScrollAway (upval), FFlagAppChatConsoleFocusFixesModule (upval), ShouldUseFoundationConversationRow (upval), ConversationRowModule (upval), ConversationEntryModule (upval)
 		local Item = p2.item
 		
@@ -185,7 +185,7 @@ function ConversationList.init(p1) --[[ Line: 98 ]]
 	p1.initialFetchesAttempted = 0
 	p1.focusNavigationService = FocusNavigationService.new(CoreGui)
 	
-	function p1.getScrollRef() --[[ Line: 245 ]]
+	function p1.getScrollRef()
 		-- upvalues: p1 (copy)
 		if p1.ref.current == nil then
 			return nil
@@ -208,7 +208,7 @@ function ConversationList.init(p1) --[[ Line: 98 ]]
 	end
 end
 
-function ConversationList.didMount(p1) --[[ Line: 272 ]]
+function ConversationList.didMount(p1)
 	-- upvalues: FFlagAppChatPerfTrackingModule (copy), CreateScrollIntervalTrackerModule (copy), AppChatPerfTrackerModule (copy)
 	if FFlagAppChatPerfTrackingModule and p1.getScrollRef then
 		local ScrollRef1 = p1.getScrollRef()
@@ -224,7 +224,7 @@ function ConversationList.didMount(p1) --[[ Line: 272 ]]
 	end
 end
 
-function ConversationList.willUnmount(p1) --[[ Line: 286 ]]
+function ConversationList.willUnmount(p1)
 	-- upvalues: FFlagAppChatPerfTrackingModule (copy), FFlagAppIaScrollAway (copy), FFlagEnableScrollAwayContentScrollableFix (copy), VisibilityControl (copy)
 	if FFlagAppChatPerfTrackingModule and p1.scrollIntervalTracker then
 		p1.scrollIntervalTracker.cleanup()
@@ -235,7 +235,7 @@ function ConversationList.willUnmount(p1) --[[ Line: 286 ]]
 	p1.focusNavigationService:teardown()
 end
 
-function ConversationList.willUpdate(p1, DefaultProps, _) --[[ Line: 296 ]]
+function ConversationList.willUpdate(p1, DefaultProps, _)
 	-- upvalues: AppChatChatLandingInitialFetchLimit (copy), AppChatChatLandingInitialFetchMinimumConversations (copy), NewResult (copy), ConversationList (copy)
 	if DefaultProps.filterText and DefaultProps.filterText ~= "" and DefaultProps.filterText ~= p1.props.filterText then
 		p1.focusLock = DefaultProps.filterText
@@ -252,7 +252,7 @@ function ConversationList.willUpdate(p1, DefaultProps, _) --[[ Line: 296 ]]
 	end
 end
 
-function ConversationList.render(p1) --[[ Line: 331 ]]
+function ConversationList.render(p1)
 	-- upvalues: CryoModule (copy), PartyPageCarouselExperimentation (copy), FFlagAppIaScrollAway (copy), FFlagAppChatConsoleFocusFixesModule (copy), RoactModule (copy), FFlagEnableScrollAwayContentScrollableFix (copy), BidirectionalFlatList (copy), AppChatPerfChatLandingPaginationWindowSize (copy), AppChatPerfChatLandingPaginationInitialRender (copy), NewResult (copy), PromiseModule (copy), AppChatPerfChatLandingPaginationOnEndReachedUnits (copy), AppChatPerfChatLandingPaginationOnStartReachedUnits (copy), WithStyleFunction (copy)
 	local ItemList = p1.props.itemList
 	local IsFilterTextMatch: boolean = p1.props.filterText == "" or p1.props.filterText == nil
@@ -297,7 +297,7 @@ function ConversationList.render(p1) --[[ Line: 331 ]]
 			}
 		})
 	end
-	local v1 = if FFlagAppIaScrollAway then function(_, Index: number) --[[ Line: 399 ]]
+	local v1 = if FFlagAppIaScrollAway then function(_, Index: number)
 		-- upvalues: p1 (copy)
 		local ENTRYHEIGHT = nil
 		local ScaledENTRYHEIGHT = nil
@@ -320,7 +320,7 @@ function ConversationList.render(p1) --[[ Line: 331 ]]
 		}
 	end else nil
 	
-	local function renderScroller(p2) --[[ Line: 423 ]]
+	local function renderScroller(p2)
 		-- upvalues: RoactModule (upval), p1 (copy), FFlagAppIaScrollAway (upval), FFlagEnableScrollAwayContentScrollableFix (upval), BidirectionalFlatList (upval), ItemList (ref), v1 (copy), AppChatPerfChatLandingPaginationWindowSize (upval), AppChatPerfChatLandingPaginationInitialRender (upval), NewResult (upval), PromiseModule (upval), AppChatPerfChatLandingPaginationOnEndReachedUnits (upval), AppChatPerfChatLandingPaginationOnStartReachedUnits (upval), FFlagAppChatConsoleFocusFixesModule (upval)
 		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -331,7 +331,7 @@ function ConversationList.render(p1) --[[ Line: 331 ]]
 			scroller = RoactModule.createElement(BidirectionalFlatList, {
 				data = ItemList,
 				renderItem = p1.renderItem,
-				getItemLayout = if FFlagAppIaScrollAway then v1 else function(_, Index: number) --[[ Line: 437 ]]
+				getItemLayout = if FFlagAppIaScrollAway then v1 else function(_, Index: number)
 					-- upvalues: p1 (upval)
 					return {
 						length = p1.ENTRY_HEIGHT,
@@ -353,7 +353,7 @@ function ConversationList.render(p1) --[[ Line: 331 ]]
 				windowSize = AppChatPerfChatLandingPaginationWindowSize,
 				initialNumToRender = AppChatPerfChatLandingPaginationInitialRender,
 				onScroll = p1.onScrollUpdate,
-				onContentSizeChange = function(_, LastContentHeight) --[[ Line: 459 ]]
+				onContentSizeChange = function(_, LastContentHeight)
 					-- upvalues: p1 (upval), NewResult (upval), FFlagAppIaScrollAway (upval), FFlagEnableScrollAwayContentScrollableFix (upval)
 					local Current = p1.viewRef.current
 					
@@ -370,14 +370,14 @@ function ConversationList.render(p1) --[[ Line: 331 ]]
 						end
 					end
 				end,
-				onEndReached = function() --[[ Line: 477 ]]
+				onEndReached = function()
 					-- upvalues: NewResult (upval), p1 (upval), PromiseModule (upval)
 					NewResult:debug("onEndReached - Loading more conversations")
 					p1.props.loadNext()
 					
 					return PromiseModule.resolve()
 				end,
-				onStartReached = function() --[[ Line: 482 ]]
+				onStartReached = function()
 					-- upvalues: NewResult (upval), p1 (upval), PromiseModule (upval)
 					NewResult:debug("onStartReached - Loading previous conversations")
 					
@@ -390,7 +390,7 @@ function ConversationList.render(p1) --[[ Line: 331 ]]
 				CanvasSize = UDim2.fromScale(0, 0),
 				onEndReachedThreshold = p1.ENTRY_HEIGHT * AppChatPerfChatLandingPaginationOnEndReachedUnits,
 				onStartReachedThreshold = p1.ENTRY_HEIGHT * AppChatPerfChatLandingPaginationOnStartReachedUnits,
-				compareItemData = function(p3, p4): boolean --[[ Line: 493 ]]
+				compareItemData = function(p3, p4): boolean
 					return p3.id == p4.id
 				end,
 				[RoactModule.Ref] = p1.ref,
@@ -401,7 +401,7 @@ function ConversationList.render(p1) --[[ Line: 331 ]]
 		})
 	end
 	
-	return WithStyleFunction(function(p2) --[[ Line: 504 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: ItemList (ref), RoactModule (upval), p1 (copy), renderScroller (copy)
 		return if #ItemList == 0 then RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,

@@ -17,7 +17,7 @@ local Url = UrlBuilderModule.UrlBuilder.new({
 	base = UrlBuilderModule.UrlBase.APIS
 })()
 
-return function(p1, Callback, Callback1) --[[ Line: 36 ]]
+return function(p1, Callback, Callback1)
 	-- upvalues: StrictInterfaceResult (copy), HttpService (copy), Url (copy), ScheduledSquadModelModule (copy), LoggerModule (copy), SerializeTableModule (copy)
 	assert(StrictInterfaceResult(p1))
 	
@@ -33,7 +33,7 @@ return function(p1, Callback, Callback1) --[[ Line: 36 ]]
 			Accept = "application/json"
 		},
 		Url = Url
-	}):Start(function(_, p2) --[[ Line: 57 ]]
+	}):Start(function(_, p2)
 		-- upvalues: Callback (copy), ScheduledSquadModelModule (upval), HttpService (upval), LoggerModule (upval), SerializeTableModule (upval), Callback1 (copy)
 		if p2.StatusCode == 200 then
 			local Body = p2.Body

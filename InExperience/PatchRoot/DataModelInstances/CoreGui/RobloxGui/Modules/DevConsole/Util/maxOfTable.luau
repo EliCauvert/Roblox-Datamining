@@ -1,4 +1,4 @@
-﻿return function(List, p1) --[[ Line: 2 ]]
+﻿return function(List, p1)
 	local t = {}
 	
 	for i, value in pairs(List) do

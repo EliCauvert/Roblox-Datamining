@@ -28,7 +28,7 @@ local config2 = {
 	cframe = CFrame.new(0, 0, 0)
 }
 
-local function createPanelPart(AssignResult) --[[ Line: 37 ]]
+local function createPanelPart(AssignResult)
 	local Part = Instance.new("Part")
 	Part.Name = AssignResult.name .. "_Part"
 	Part.CFrame = AssignResult.cframe
@@ -44,7 +44,7 @@ local function createPanelPart(AssignResult) --[[ Line: 37 ]]
 	return Part
 end
 
-local function createPanel(COMPATPANELPROPS) --[[ Line: 52 ]]
+local function createPanel(COMPATPANELPROPS)
 	-- upvalues: Object (copy), config (copy), SpatialUIType (copy), config2 (copy), createPanelPart (copy), FFlagSpatialUIHiddenPanelRaycastFixModule (copy), CoreGui (copy), CurvedSurfaceGuisEnabledEngineFeature (copy), config1 (copy)
 	local AssignResult = Object.assign({}, config, COMPATPANELPROPS)
 	
@@ -94,7 +94,7 @@ local function createPanel(COMPATPANELPROPS) --[[ Line: 52 ]]
 	end
 end
 
-return function(p1) --[[ Line: 109 ]]
+return function(p1)
 	-- upvalues: VRService (copy), createPanel (copy), ConstantsModule (copy), SpatialUIType (copy)
 	if VRService.VREnabled then
 		local Panel = createPanel(ConstantsModule.COMPAT_PANEL_PROPS_MAP[p1.panelType])

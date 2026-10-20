@@ -11,7 +11,7 @@ local config = {
 	include_messages = true
 }
 
-return function(p1, p2, p3) --[[ Line: 25 ]]
+return function(p1, p2, p3)
 	-- upvalues: Default (copy), Object (copy), config (copy), HttpService (copy), GetFFlagEnableSocialCardsFunction (copy), CHATPLATFORMBASEURLModule (copy)
 	local AssignResult = Object.assign({}, config, p3 or {})
 	

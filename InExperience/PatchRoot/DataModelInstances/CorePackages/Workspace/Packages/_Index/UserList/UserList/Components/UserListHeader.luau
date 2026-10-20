@@ -10,7 +10,7 @@ local IconName = Enums.IconName
 local IconSize = Enums.IconSize
 local IconVariant = Enums.IconVariant
 
-return function(p1) --[[ Line: 27 | Named "UserListHeader" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), Text (copy), Enums (copy), Icon (copy), IconName (copy), IconSize (copy), IconVariant (copy), IconButton (copy)
 	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y col gap-xxsmall align-x-left",

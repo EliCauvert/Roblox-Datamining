@@ -6,22 +6,22 @@ local ConstantsModule = require(AppChat.Constants)
 local _DateTime = require(Parent.Time).DateTime
 local ConversationModule = require(script.Parent.Conversation)
 
-local function getMessageId(p1) --[[ Line: 11 ]]
+local function getMessageId(p1)
 	return p1.id
 end
 
-local function messageSortPredicate(p1, p2): boolean --[[ Line: 15 ]]
+local function messageSortPredicate(p1, p2): boolean
 	return p1.sent:GetUnixTimestamp() < p2.sent:GetUnixTimestamp()
 end
 
-local function sendingMessageSortPredicate(p1, p2): boolean --[[ Line: 22 ]]
+local function sendingMessageSortPredicate(p1, p2): boolean
 	return p1.order < p2.order
 end
 
 local MockConversationModule = {}
 MockConversationModule.__index = MockConversationModule
 
-function MockConversationModule.mock(List) --[[ Line: 29 ]]
+function MockConversationModule.mock(List)
 	-- upvalues: ConversationModule (copy), OrderedMap (copy), getMessageId (copy), messageSortPredicate (copy), sendingMessageSortPredicate (copy), GenerateStringIdFunction (copy), ConstantsModule (copy), _DateTime (copy)
 	local NewConversation = ConversationModule.new()
 	NewConversation.messages = OrderedMap.new(getMessageId, messageSortPredicate)

@@ -1,4 +1,4 @@
-﻿return function(List, p1, p2): boolean --[[ Line: 7 | Named "mergeObservedNames" ]]
+﻿return function(List, p1, p2): boolean
 	local Flag = false
 	
 	for _, value in List do

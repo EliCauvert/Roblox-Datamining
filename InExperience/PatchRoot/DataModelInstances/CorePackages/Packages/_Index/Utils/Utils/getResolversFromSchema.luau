@@ -13,7 +13,7 @@ local _ = require(script.Parent.Interfaces)
 local String = LuauPolyfillModule.String
 
 return {
-	getResolversFromSchema = function(p1, p2) --[[ Line: 37 ]]
+	getResolversFromSchema = function(p1, p2)
 		-- upvalues: String (copy), Boolean (copy), IsScalarTypeFunction (copy), IsSpecifiedScalarTypeFunction (copy), GraphQLScalarType (copy), IsEnumTypeFunction (copy), IsInterfaceTypeFunction (copy), IsUnionTypeFunction (copy), IsObjectTypeFunction (copy)
 		local NewResults = {}
 		local TypeMap = p1:getTypeMap()
@@ -33,19 +33,19 @@ return {
 						local ParseLiteralFunction = Config.parseLiteral
 						
 						if SerializeFunction then
-							function Config.serialize(...) --[[ Line: 73 ]]
+							function Config.serialize(...)
 								-- upvalues: SerializeFunction (copy), Config (copy)
 								return SerializeFunction(Config, ...)
 							end
 						end
 						if ParseValueFunction then
-							function Config.parseValue(...) --[[ Line: 79 ]]
+							function Config.parseValue(...)
 								-- upvalues: ParseValueFunction (copy), Config (copy)
 								return ParseValueFunction(Config, ...)
 							end
 						end
 						if ParseLiteralFunction then
-							function Config.parseLiteral(...) --[[ Line: 85 ]]
+							function Config.parseLiteral(...)
 								-- upvalues: ParseLiteralFunction (copy), Config (copy)
 								return ParseLiteralFunction(Config, ...)
 							end

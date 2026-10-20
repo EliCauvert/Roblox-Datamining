@@ -1,4 +1,4 @@
-﻿return function(p1): string --[[ Line: 1 ]]
+﻿return function(p1): string
 	local List = {}
 	
 	for i = 1, p1.n do

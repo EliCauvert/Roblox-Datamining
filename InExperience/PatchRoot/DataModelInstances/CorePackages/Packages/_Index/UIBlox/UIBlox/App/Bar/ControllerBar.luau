@@ -21,7 +21,7 @@ ControllerBar.validateProps = TModule.strictInterface({
 	rightHints = TModule.optional(TModule.map(TModule.number, StrictInterfaceResult))
 })
 
-function ControllerBar.init(p1) --[[ Line: 49 ]]
+function ControllerBar.init(p1)
 	p1.state = {
 		controllerBarWidth = 0,
 		hintStringsConcat = nil,
@@ -30,7 +30,7 @@ function ControllerBar.init(p1) --[[ Line: 49 ]]
 	}
 end
 
-function ControllerBar.calculateHintRatios(LeftHint, RightHints) --[[ Line: 59 ]]
+function ControllerBar.calculateHintRatios(LeftHint, RightHints)
 	-- upvalues: CryoModule (copy), GetTextSizeModule (copy), DefaultKeyLabelSize (copy), ControllerBarHintInternalPadding (copy)
 	local v1 = 84
 	local Text = ""
@@ -50,7 +50,7 @@ function ControllerBar.calculateHintRatios(LeftHint, RightHints) --[[ Line: 59 ]
 	return t, v1 + math.max(#JoinResult - 2, 0) * 40, Text
 end
 
-function ControllerBar.getDerivedStateFromProps(p1) --[[ Line: 95 ]]
+function ControllerBar.getDerivedStateFromProps(p1)
 	-- upvalues: ControllerBar (copy)
 	local HintRatios, HintRatios2, HintRatios3 = ControllerBar.calculateHintRatios(p1.leftHint, p1.rightHints)
 	
@@ -61,7 +61,7 @@ function ControllerBar.getDerivedStateFromProps(p1) --[[ Line: 95 ]]
 	}
 end
 
-function ControllerBar.calculateHintSize(p1, ControllerBarWidth, p2) --[[ Line: 106 ]]
+function ControllerBar.calculateHintSize(p1, ControllerBarWidth, p2)
 	-- upvalues: GetTextSizeModule (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy)
 	local ControllerBarWidthDelta = ControllerBarWidth - p1.state.requiredSpace
 	local ScaledRelativeSize = p2.Header2.RelativeSize * p2.BaseSize
@@ -82,14 +82,14 @@ function ControllerBar.calculateHintSize(p1, ControllerBarWidth, p2) --[[ Line: 
 	return t
 end
 
-function ControllerBar.render(p3) --[[ Line: 145 ]]
+function ControllerBar.render(p3)
 	-- upvalues: WithStyleModule (copy), CryoModule (copy), RoactModule (copy), ControllerBarHintModule (copy)
-	return WithStyleModule(function(p4) --[[ Line: 146 ]]
+	return WithStyleModule(function(p4)
 		-- upvalues: p3 (copy), CryoModule (upval), RoactModule (upval), ControllerBarHintModule (upval)
 		local Theme = p4.Theme
 		local HintSize, HintSize2 = p3:calculateHintSize(p3.state.controllerBarWidth, p4.Font)
 		
-		local function makeHint(LeftHint, p5) --[[ Line: 151 ]]
+		local function makeHint(LeftHint, p5)
 			-- upvalues: CryoModule (upval), HintSize2 (copy), HintSize (copy), RoactModule (upval), ControllerBarHintModule (upval)
 			return RoactModule.createElement(ControllerBarHintModule, (CryoModule.Dictionary.join(LeftHint, {
 				key = "Hint" .. tostring(p5),
@@ -105,11 +105,11 @@ function ControllerBar.render(p3) --[[ Line: 145 ]]
 			Size = UDim2.new(1, 0, 0, 72),
 			Position = UDim2.fromScale(0, 1),
 			AnchorPoint = Vector2.new(0, 1),
-			[RoactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 174 ]]
+			[RoactModule.Change.AbsoluteSize] = function(Frame)
 				-- upvalues: p3 (upval)
 				p3:setState({ controllerBarWidth = Frame.AbsoluteSize.X })
 			end,
-			[RoactModule.Event.AncestryChanged] = function(Frame) --[[ Line: 179 ]]
+			[RoactModule.Event.AncestryChanged] = function(Frame)
 				-- upvalues: p3 (upval)
 				p3:setState({ controllerBarWidth = Frame.AbsoluteSize.X })
 			end

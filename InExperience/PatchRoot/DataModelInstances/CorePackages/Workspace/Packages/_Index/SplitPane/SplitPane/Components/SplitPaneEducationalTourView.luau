@@ -10,14 +10,14 @@ local _ = require(script.Parent.getSplitPaneEducationalTourTooltipModel)
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local EducationalTooltip = FoundationModule.EducationalTooltip
 
-local function _(p1, p2): Rect --[[ Line: 22 | Named "toOverlayLocalRect" ]]
+local function _(p1, p2): Rect
 	return Rect.new(p1.Min - p2, p1.Max - p2)
 end
 
 local Frame = Instance.new("Frame")
 Frame.BackgroundTransparency = 1
 
-return function(p1) --[[ Line: 56 | Named "SplitPaneEducationalTourView" ]]
+return function(p1)
 	-- upvalues: ButtonVariant (copy), ReactModule (copy), EducationalTooltip (copy), SplitPaneEducationalTourVideoModule (copy), ReactRobloxModule (copy), SplitPaneEducationalTourScrimModule (copy), Frame (copy), SplitPaneEducationalTourChromeModule (copy)
 	local List = {}
 	

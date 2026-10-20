@@ -8,12 +8,12 @@ local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
 local ProfileTypes = EnumsModule.ProfileTypes
 
 return {
-	[EnumsModule.ProfileActions.EditAlias] = function(p1) --[[ Line: 13 ]]
+	[EnumsModule.ProfileActions.EditAlias] = function(p1)
 		-- upvalues: EnumsModule (copy), ProfileTypes (copy), SocialStopwatchModule (copy), EventNamesModule (copy), SetAliasModule (copy)
 		return {
 			text = p1.localized[EnumsModule.ProfileActions.EditAlias],
 			onActivated = {
-				[ProfileTypes.User] = function() --[[ Line: 17 ]]
+				[ProfileTypes.User] = function()
 					-- upvalues: SocialStopwatchModule (upval), p1 (copy), EventNamesModule (upval), EnumsModule (upval), SetAliasModule (upval)
 					SocialStopwatchModule.Stopwatch.start(SocialStopwatchModule.Events.CustomizeNameOpened)
 					p1.analytics.fireAnalyticsEvent(EventNamesModule.ContextualMenuButtonSetAlias, { buttonSurface = p1.buttonSurface })

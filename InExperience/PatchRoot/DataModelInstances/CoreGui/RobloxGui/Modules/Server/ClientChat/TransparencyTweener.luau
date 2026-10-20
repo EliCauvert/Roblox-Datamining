@@ -2,13 +2,13 @@
 local _ = script.Parent
 local config = {
 	__ClassName = "TransparencyTweener",
-	__tostring = function(p1): string --[[ Line: 21 ]]
+	__tostring = function(p1): string
 		return p1.__ClassName .. ": " .. p1.MemoryLocation
 	end,
 	__metatable = "The metatable is locked"
 }
 
-function config.__index(p1, Text, _) --[[ Line: 26 ]]
+function config.__index(p1, Text, _)
 	-- upvalues: config (copy)
 	if rawget(p1, Text) then
 		return (rawget(p1, Text))
@@ -21,7 +21,7 @@ function config.__index(p1, Text, _) --[[ Line: 26 ]]
 	end
 end
 
-function config.__newindex(p1, Text, InternalLastTweenPercentage) --[[ Line: 36 ]]
+function config.__newindex(p1, Text, InternalLastTweenPercentage)
 	if Text == "Transparency" then
 		p1.InternalLastTweenPercentage = InternalLastTweenPercentage
 		p1:SetPropertiesToTweenPercentage(InternalLastTweenPercentage)
@@ -32,7 +32,7 @@ function config.__newindex(p1, Text, InternalLastTweenPercentage) --[[ Line: 36 
 	end
 end
 
-function config.Dump(p1): string --[[ Line: 49 ]]
+function config.Dump(p1): string
 	local Text = tostring(p1)
 	
 	for i, tweenObject in pairs(p1.TweenObjects) do
@@ -51,7 +51,7 @@ function config.Dump(p1): string --[[ Line: 49 ]]
 	return Text
 end
 
-function config.OutputTest(p2) --[[ Line: 70 ]]
+function config.OutputTest(p2)
 	print("Test Output for {={" .. p2:Dump() .. "}=}")
 	
 	for i, tweenObject in pairs(p2.TweenObjects) do
@@ -63,7 +63,7 @@ function config.OutputTest(p2) --[[ Line: 70 ]]
 	end
 end
 
-function config.RegisterTweenObjectProperty(p3, p4, p5, p6) --[[ Line: 80 ]]
+function config.RegisterTweenObjectProperty(p3, p4, p5, p6)
 	local P12 = p6 or p4[p5]
 	
 	if not p3.TweenObjects[p4] then
@@ -73,15 +73,15 @@ function config.RegisterTweenObjectProperty(p3, p4, p5, p6) --[[ Line: 80 ]]
 	p3:SetObjectPropertyToPercentValue(p4, p5, P12, p3.InternalLastTweenPercentage)
 end
 
-function config.UnregisterTweenObject(p3, p4) --[[ Line: 92 ]]
+function config.UnregisterTweenObject(p3, p4)
 	p3.TweenObjects[p4] = nil
 end
 
-function config:SetObjectPropertyToPercentValue(p3, Key, p4: number, InternalLastTweenPercentage) --[[ Line: 96 ]]
+function config:SetObjectPropertyToPercentValue(p3, Key, p4: number, InternalLastTweenPercentage)
 	p3[Key] = p4 + (1 - p4) * InternalLastTweenPercentage
 end
 
-function config.SetPropertiesToTweenPercentage(p3, InternalLastTweenPercentage) --[[ Line: 102 ]]
+function config.SetPropertiesToTweenPercentage(p3, InternalLastTweenPercentage)
 	for i, tweenObject in pairs(p3.TweenObjects) do
 		for i1, value in pairs(tweenObject) do
 			p3:SetObjectPropertyToPercentValue(i, i1, value, InternalLastTweenPercentage)
@@ -89,7 +89,7 @@ function config.SetPropertiesToTweenPercentage(p3, InternalLastTweenPercentage) 
 	end
 end
 
-function config.Tween(p4, p5: number, InternalLastTweenPercentage, InternalLastTweenPercentage1) --[[ Line: 110 ]]
+function config.Tween(p4, p5: number, InternalLastTweenPercentage, InternalLastTweenPercentage1)
 	-- upvalues: RunService (copy)
 	if p4.Tweening then
 		p4.QueuedTween = {
@@ -114,7 +114,7 @@ function config.Tween(p4, p5: number, InternalLastTweenPercentage, InternalLastT
 	local NewCurrentTime = CurrentTime + p5
 	local InternalLastTweenPercentageDelta = InternalLastTweenPercentage - InternalLastTweenPercentage2
 	local Smallest = 0
-	spawn(function() --[[ Line: 132 ]]
+	spawn(function()
 		-- upvalues: NewCurrentTime (copy), p4 (copy), Smallest (ref), CurrentTime (copy), p5 (copy), InternalLastTweenPercentage2 (ref), InternalLastTweenPercentageDelta (copy), RunService (upval), InternalLastTweenPercentage (copy)
 		local CurrentTime1 = tick()
 		while CurrentTime1 < NewCurrentTime and not p4.Canceled do
@@ -143,12 +143,12 @@ function config.Tween(p4, p5: number, InternalLastTweenPercentage, InternalLastT
 	end)
 end
 
-function config.CancelTween(p6) --[[ Line: 163 ]]
+function config.CancelTween(p6)
 	p6.Canceled = true
 end
 
 return {
-	new = function() --[[ Line: 169 ]]
+	new = function()
 		-- upvalues: config (copy)
 		local t = {}
 		t.MemoryLocation = tostring(t):match("[0123456789ABCDEF]+")

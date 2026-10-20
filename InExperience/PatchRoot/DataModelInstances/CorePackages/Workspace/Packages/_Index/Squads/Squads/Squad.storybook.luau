@@ -17,19 +17,19 @@ local config = {
 }
 local config1 = { language = "en-us" }
 
-local function useCreateOverlay(p1) --[[ Line: 44 ]]
+local function useCreateOverlay(p1)
 	-- upvalues: ReactModule (copy)
 	local UseRefResult = ReactModule.useRef(Instance.new("Frame"))
 	
 	if UseRefResult.current.Parent ~= p1.focus then
 		UseRefResult.current.Parent = p1.focus
 	end
-	ReactModule.useEffect(function() --[[ Line: 52 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy)
 		UseRefResult.current.Size = UDim2.fromScale(1, 1)
 		UseRefResult.current.BackgroundTransparency = 1
 		
-		return function() --[[ Line: 56 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			UseRefResult.current:Destroy()
 		end
@@ -42,15 +42,15 @@ return {
 	name = "Squads",
 	storyRoot = Squads,
 	roact = Roact,
-	mapDefinition = function(p1) --[[ Line: 68 ]]
+	mapDefinition = function(p1)
 		-- upvalues: Cryo (copy), config1 (copy)
 		return Cryo.Dictionary.join(p1, {
 			controls = Cryo.Dictionary.join(config1, p1.controls or {})
 		})
 	end,
-	mapStory = function(p1) --[[ Line: 72 ]]
+	mapStory = function(p1)
 		-- upvalues: useCreateOverlay (copy), config (copy), Roact (copy), Foundation (copy), AppStyleProvider (copy), MockLocaleFunction (copy)
-		return function(p2) --[[ Line: 73 ]]
+		return function(p2)
 			-- upvalues: useCreateOverlay (upval), config (upval), Roact (upval), Foundation (upval), AppStyleProvider (upval), MockLocaleFunction (upval), p1 (copy)
 			local Entry = p2 and config[p2.theme] or config.Default
 			

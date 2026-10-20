@@ -5,7 +5,7 @@ local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local GetActionTelemetryFieldValueFunction = SduiCoreSystemModule.getActionTelemetryFieldValue
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 
-return function(p1, p2, p3) --[[ Line: 19 | Named "SduiExperienceDetailsJoinFriendsTelemetryHandler" ]]
+return function(p1, p2, p3)
 	-- upvalues: GetActionTelemetryFieldValueFunction (copy), SduiErrorType (copy), Players (copy), GameJoinFriendsInGameFunction (copy)
 	local PlaceId = GetActionTelemetryFieldValueFunction(p1, p2, "placeId")
 	

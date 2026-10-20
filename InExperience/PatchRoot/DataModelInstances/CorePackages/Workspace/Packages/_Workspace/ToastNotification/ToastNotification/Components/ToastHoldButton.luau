@@ -4,7 +4,7 @@ local ReactModule = require(Parent.React)
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local IconWithHoldAnimation = require(Parent.AppShortcutBar).IconWithHoldAnimation
 
-return function(p1) --[[ Line: 21 ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), IconWithHoldAnimation (copy), UserInputService (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IconSize = p1.iconSize or UseTokensResult.Size.Size_350

@@ -1,17 +1,17 @@
-﻿local function tracebackReporter(Err) --[[ Line: 9 ]]
+﻿local function tracebackReporter(Err)
 	return debug.traceback(Err)
 end
 
-return function(p1) --[[ Line: 13 | Named "makeThunkMiddleware" ]]
+return function(p1)
 	-- upvalues: tracebackReporter (copy)
-	return function(Callback, p2) --[[ Line: 14 | Named "thunkMiddleware" ]]
+	return function(Callback, p2)
 		-- upvalues: p1 (copy), tracebackReporter (upval)
-		return function(Callback1) --[[ Line: 15 ]]
+		return function(Callback1)
 			-- upvalues: p2 (copy), p1 (upval), tracebackReporter (upval), Callback (copy)
 			if typeof(Callback1) ~= "function" then
 				return Callback(Callback1)
 			end
-			local Success, Result = xpcall(function() --[[ Line: 17 ]]
+			local Success, Result = xpcall(function()
 				-- upvalues: Callback1 (copy), p2 (upval), p1 (upval)
 				return Callback1(p2, p1)
 			end, tracebackReporter)

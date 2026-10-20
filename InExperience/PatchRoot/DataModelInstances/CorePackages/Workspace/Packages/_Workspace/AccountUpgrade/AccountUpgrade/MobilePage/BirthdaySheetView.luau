@@ -22,7 +22,7 @@ local EventMap = {
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p1) --[[ Line: 57 | Named "BirthdaySheetView" ]]
+return function(p1)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), View (copy), StateLayerAffordance (copy), Text (copy), IconButton (copy), IconName (copy), InputSize (copy), BirthdayPicker (copy), AccountUpgradeDialogActionsModule (copy), ButtonVariant (copy), ReactRobloxModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseOverlayResult = FoundationModule.Hooks.useOverlay()
@@ -39,11 +39,11 @@ return function(p1) --[[ Line: 57 | Named "BirthdaySheetView" ]]
 			isAutoFocusRoot = true,
 			surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
 			eventMap = EventMap,
-			eventHandlers = ReactModule.useMemo(function() --[[ Line: 66 ]]
+			eventHandlers = ReactModule.useMemo(function()
 				-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), OnDismissFunction (copy)
 				return {
 					[FocusNavigationEventNameEnum.NavigateBack] = {
-						handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 69 ]]
+						handler = InputHandlersModule.onRelease(function(p2)
 							-- upvalues: OnDismissFunction (upval)
 							OnDismissFunction()
 							p2:cancel()
@@ -63,7 +63,7 @@ return function(p1) --[[ Line: 57 | Named "BirthdaySheetView" ]]
 			tag = "position-center-center anchor-center-center",
 			testId = "account-upgrade-birthday-sheet--backdrop",
 			Size = UDim2.fromScale(2, 2),
-			backgroundStyle = SlideProgress:map(function(Alpha: number) --[[ Line: 102 ]]
+			backgroundStyle = SlideProgress:map(function(Alpha: number)
 				-- upvalues: Backdrop (copy)
 				return {
 					Color3 = Backdrop.Color3,
@@ -77,11 +77,11 @@ return function(p1) --[[ Line: 57 | Named "BirthdaySheetView" ]]
 			tag = "col gap-medium size-full-0 auto-y radius-large bg-surface-100",
 			ZIndex = 2,
 			testId = "account-upgrade-birthday-sheet--panel",
-			AnchorPoint = SlideProgress:map(function(p2): Vector2 --[[ Line: 118 ]]
+			AnchorPoint = SlideProgress:map(function(p2): Vector2
 				-- upvalues: IsCentered (copy)
 				return Vector2.new(0.5, if IsCentered then 0.5 else p2)
 			end),
-			Position = SlideProgress:map(function(p2: number): UDim2 --[[ Line: 121 ]]
+			Position = SlideProgress:map(function(p2: number): UDim2
 				-- upvalues: IsCentered (copy), Large (copy)
 				return if IsCentered then UDim2.fromScale(0.5, 1.5 - p2) else UDim2.new(0.5, 0, 1, Large * p2)
 			end),
@@ -92,7 +92,7 @@ return function(p1) --[[ Line: 57 | Named "BirthdaySheetView" ]]
 				bottom = UDim.new(0, if IsCentered then UseTokensResult.Padding.Large else Large + UseTokensResult.Padding.Large)
 			},
 			stateLayer = { affordance = StateLayerAffordance.None },
-			onActivated = function() --[[ Line: 136 ]] end
+			onActivated = function() end
 		}, {
 			SizeConstraint = if IsCentered then ReactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(540, 1e999) }) else nil,
 			Header = ReactModule.createElement(View, {

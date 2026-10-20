@@ -15,7 +15,7 @@ local UseScrollToSelectedRefModule = require(script.Parent.useScrollToSelectedRe
 local UseTextSizeModule = require(Foundation.Utility.useTextSize)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 
-return function(Frame) --[[ Line: 46 | Named "CalendarHeader" ]]
+return function(Frame)
 	-- upvalues: UseTokensModule (copy), DateTimeUtilitiesModule (copy), UseTextSizeModule (copy), UseScaledValueModule (copy), ReactModule (copy), UseScrollToSelectedRefModule (copy), ViewModule (copy), IconButtonModule (copy), Icon (copy), InputSizeModule (copy), ButtonVariantModule (copy), DropdownModule (copy), InputVariantModule (copy)
 	local ViewDate = Frame.viewDate
 	local UseTokensModuleResult = UseTokensModule()
@@ -24,7 +24,7 @@ return function(Frame) --[[ Line: 46 | Named "CalendarHeader" ]]
 	local UseTextSizeModuleResult1 = UseTextSizeModule(Text, UseTokensModuleResult.Typography.BodySmall)
 	local UseScaledValueModuleResult = UseScaledValueModule(44)
 	local UseScaledValueModuleResult1 = UseScaledValueModule(200)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 59 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: DateTimeUtilitiesModule (upval)
 		local List = {}
 		
@@ -33,7 +33,7 @@ return function(Frame) --[[ Line: 46 | Named "CalendarHeader" ]]
 		end
 		return List
 	end, {})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 70 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: Frame (copy), DateTimeUtilitiesModule (upval), ViewDate (copy)
 		local Year = nil
 		local Year1 = nil
@@ -73,7 +73,7 @@ return function(Frame) --[[ Line: 46 | Named "CalendarHeader" ]]
 				LayoutOrder = 1,
 				items = UseMemoResult,
 				maxHeight = UseScaledValueModuleResult1,
-				onItemChanged = ReactModule.useCallback(function(p1) --[[ Line: 92 ]]
+				onItemChanged = ReactModule.useCallback(function(p1)
 					-- upvalues: Frame (copy), ViewDate (copy)
 					local Number: number? = tonumber(p1)
 					
@@ -93,7 +93,7 @@ return function(Frame) --[[ Line: 46 | Named "CalendarHeader" ]]
 				LayoutOrder = 2,
 				items = UseMemoResult1,
 				maxHeight = UseScaledValueModuleResult1,
-				onItemChanged = ReactModule.useCallback(function(p1) --[[ Line: 99 ]]
+				onItemChanged = ReactModule.useCallback(function(p1)
 					-- upvalues: Frame (copy), ViewDate (copy)
 					local Number: number? = tonumber(p1)
 					

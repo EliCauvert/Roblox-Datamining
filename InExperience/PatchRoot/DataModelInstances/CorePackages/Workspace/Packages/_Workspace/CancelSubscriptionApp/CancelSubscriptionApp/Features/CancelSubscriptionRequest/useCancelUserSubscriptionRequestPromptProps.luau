@@ -14,21 +14,21 @@ local SelectExpirationDateModule = require(CancelSubscriptionApp.Store.Selectors
 local SelectSubscriptionIdModule = require(CancelSubscriptionApp.Store.Selectors.selectSubscriptionId)
 local _ = require(script.Parent.CancelUserSubscriptionRequestPrompt)
 
-return function() --[[ Line: 23 | Named "useCancelUserSubscriptionRequestPromptProps" ]]
+return function()
 	-- upvalues: UseSelectorFunction (copy), SelectExpirationDateModule (copy), SelectSubscriptionIdModule (copy), UseDispatchFunction (copy), ReactModule (copy), CancelSubscriptionEndedModule (copy), CancelSubscriptionRequestedModule (copy), MarketplaceService (copy), CancelSubscriptionSucceededModule (copy), CancelSubscriptionFailedModule (copy), ErrorStateEnumModule (copy)
 	local UseSelectorResult = UseSelectorFunction(SelectExpirationDateModule) or ""
 	local UseSelectorResult1 = UseSelectorFunction(SelectSubscriptionIdModule) or ""
 	local UseDispatchResult = UseDispatchFunction()
 	
 	return {
-		onCancel = ReactModule.useCallback(function() --[[ Line: 28 ]]
+		onCancel = ReactModule.useCallback(function()
 			-- upvalues: UseDispatchResult (copy), CancelSubscriptionEndedModule (upval)
 			UseDispatchResult(CancelSubscriptionEndedModule())
 		end, { UseDispatchResult }),
-		onConfirm = ReactModule.useCallback(function() --[[ Line: 32 ]]
+		onConfirm = ReactModule.useCallback(function()
 			-- upvalues: UseDispatchResult (copy), CancelSubscriptionRequestedModule (upval), MarketplaceService (upval), UseSelectorResult1 (copy), CancelSubscriptionSucceededModule (upval), CancelSubscriptionFailedModule (upval), ErrorStateEnumModule (upval)
 			UseDispatchResult(CancelSubscriptionRequestedModule())
-			local Success, _ = pcall(function() --[[ Line: 34 ]]
+			local Success, _ = pcall(function()
 				-- upvalues: MarketplaceService (upval), UseSelectorResult1 (upval)
 				return MarketplaceService:PerformCancelSubscription(UseSelectorResult1)
 			end)

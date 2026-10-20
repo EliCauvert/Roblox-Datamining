@@ -6,14 +6,14 @@ local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
 	base = require(Parent.Http).Url.APIS_URL
 })
 
-return function(Callback, NotificationId) --[[ Line: 14 ]]
+return function(Callback, NotificationId)
 	-- upvalues: PromiseModule (copy), NewResult (copy), HttpService (copy)
 	return if NotificationId == nil or NotificationId == "" then PromiseModule.reject() else Callback(NewResult(), "POST", {
 		postBody = HttpService:JSONEncode({ notificationId = NotificationId })
-	}):andThen(function(Result) --[[ Line: 28 ]]
+	}):andThen(function(Result)
 		-- upvalues: PromiseModule (upval)
 		return if Result.responseCode == 200 then PromiseModule.resolve() else PromiseModule.reject()
-	end, function(_) --[[ Line: 34 ]]
+	end, function(_)
 		-- upvalues: PromiseModule (upval)
 		return PromiseModule.reject()
 	end)

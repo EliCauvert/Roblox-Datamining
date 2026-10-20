@@ -19,7 +19,7 @@ ShareGameAnalyticsModule.DiagCounters = {
 	}
 }
 
-function ShareGameAnalyticsModule.new(_eventStreamImpl, _diagImpl, _buttonName) --[[ Line: 38 ]]
+function ShareGameAnalyticsModule.new(_eventStreamImpl, _diagImpl, _buttonName)
 	-- upvalues: ShareGameAnalyticsModule (copy)
 	assert(_eventStreamImpl, "EventStream implementation not found.")
 	assert(_diagImpl, "Diag implementation not found.")
@@ -32,7 +32,7 @@ function ShareGameAnalyticsModule.new(_eventStreamImpl, _diagImpl, _buttonName) 
 	}, ShareGameAnalyticsModule))
 end
 
-function ShareGameAnalyticsModule:onActivatedInviteSent(p1, p2, SenderId, p3, List) --[[ Line: 50 ]]
+function ShareGameAnalyticsModule:onActivatedInviteSent(p1, p2, SenderId, p3, List)
 	-- upvalues: ShareGameAnalyticsModule (copy)
 	self:_getEventStream():setRBXEventStream("touch", ShareGameAnalyticsModule.EventName.InviteSent, {
 		btn = self:_getButtonName(),
@@ -49,7 +49,7 @@ function ShareGameAnalyticsModule:onActivatedInviteSent(p1, p2, SenderId, p3, Li
 	end
 end
 
-function ShareGameAnalyticsModule:inputShareGameEntryPoint(p1, p2) --[[ Line: 71 ]]
+function ShareGameAnalyticsModule:inputShareGameEntryPoint(p1, p2)
 	-- upvalues: ShareGameAnalyticsModule (copy)
 	self:_getEventStream():setRBXEventStream("touch", ShareGameAnalyticsModule.EventName.EntryPoint, {
 		btn = self:_getButtonName(),
@@ -63,15 +63,15 @@ function ShareGameAnalyticsModule:inputShareGameEntryPoint(p1, p2) --[[ Line: 71
 	end
 end
 
-function ShareGameAnalyticsModule:_getEventStream() --[[ Line: 89 ]]
+function ShareGameAnalyticsModule:_getEventStream()
 	return self._eventStreamImpl
 end
 
-function ShareGameAnalyticsModule:_getDiag() --[[ Line: 93 ]]
+function ShareGameAnalyticsModule:_getDiag()
 	return self._diagImpl
 end
 
-function ShareGameAnalyticsModule:_getButtonName() --[[ Line: 97 ]]
+function ShareGameAnalyticsModule:_getButtonName()
 	return self._buttonName
 end
 

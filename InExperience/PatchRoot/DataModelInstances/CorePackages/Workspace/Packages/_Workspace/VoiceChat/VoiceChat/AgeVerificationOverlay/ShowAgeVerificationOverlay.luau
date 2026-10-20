@@ -2,7 +2,7 @@
 local SetShowAgeVerificationOverlayModule = require(VoiceChat.AgeVerificationOverlay.SetShowAgeVerificationOverlay)
 local CryoModule = require(VoiceChat.Parent.Cryo)
 
-return function(p1, p2) --[[ Line: 6 ]]
+return function(p1, p2)
 	-- upvalues: SetShowAgeVerificationOverlayModule (copy), CryoModule (copy)
 	local P0 = p1 or {}
 	

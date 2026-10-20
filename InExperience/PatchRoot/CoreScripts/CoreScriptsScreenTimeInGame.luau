@@ -8,7 +8,7 @@ local Constants = ScreenTimeModule.Constants
 local GetFFlagScreenTimeSignalRFunction = ScreenTimeModule.GetFFlagScreenTimeSignalR
 local Logging = require(CorePackages.Workspace.Packages.AppCommonLib).Logging
 
-local function _() --[[ Line: 16 | Named "leaveGame" ]]
+local function _()
 	-- upvalues: GuiService (copy)
 	GuiService.SelectedCoreObject = nil
 	game:Shutdown()
@@ -17,7 +17,7 @@ end
 local NewResult = ScreenTimeModule.HttpRequests:new(HttpService)
 local Connection = nil
 
-local _ = function() --[[ Line: 32 | Named "disconnectAndLeaveGame" ]]
+local _ = function()
 	-- upvalues: Connection (ref), GuiService (copy)
 	if Connection then
 		Connection:Disconnect()
@@ -32,7 +32,7 @@ local config = {
 	displayMessageCallback = nil,
 	pendingResolveMessage = {},
 	resolvedMessage = {},
-	update = function(p1, List) --[[ Line: 53 ]]
+	update = function(p1, List)
 		for _, value in pairs(List) do
 			table.insert(p1.pendingResolveMessage, {
 				id = value.serialId,
@@ -43,7 +43,7 @@ local config = {
 		end
 		p1:processNext()
 	end,
-	processNext = function(p2) --[[ Line: 66 ]]
+	processNext = function(p2)
 		if p2.displaying then return end
 		local Removed = table.remove(p2.pendingResolveMessage, 1)
 		
@@ -59,7 +59,7 @@ local config = {
 			p2.displayMessageCallback(Removed.message)
 		end
 	end,
-	resolve = function(p2) --[[ Line: 88 ]]
+	resolve = function(p2)
 		-- upvalues: NewResult (copy)
 		p2.resolvedMessage[p2.displaying.id] = p2.displaying.message
 		NewResult:reportExecution(p2.displaying.instructionName, p2.displaying.id)
@@ -79,7 +79,7 @@ local list = {
 		LocalizationKey = "InGame.CommonUI.Button.Ok",
 		LayoutOrder = 1,
 		Primary = true,
-		Callback = function() --[[ Line: 112 ]]
+		Callback = function()
 			-- upvalues: Default (copy), config (copy)
 			Default:_close()
 			config:resolve()
@@ -87,7 +87,7 @@ local list = {
 	}
 }
 
-function config.displayMessageCallback(Message) --[[ Line: 108 ]]
+function config.displayMessageCallback(Message)
 	-- upvalues: Default (copy)
 	Default:_open(Message)
 end
@@ -96,7 +96,7 @@ Default:updateButtons(list)
 Default:setErrorTitle("Warning", "InGame.CommonUI.Title.Warning")
 local X = RobloxGui.AbsoluteSize.X
 local Y = RobloxGui.AbsoluteSize.Y
-RobloxGui:GetPropertyChangedSignal("AbsoluteSize"):connect(function() --[[ Line: 135 | Named "onScreenSizeChanged" ]]
+RobloxGui:GetPropertyChangedSignal("AbsoluteSize"):connect(function()
 	-- upvalues: Default (copy), RobloxGui (copy), X (ref), Y (ref)
 	if not Default then return end
 	local X1 = RobloxGui.AbsoluteSize.X
@@ -119,7 +119,7 @@ if Default then
 		Default:resizeWidthAndHeight(X, Y)
 	end
 end
-local function screenTimeStatesUpdated(List) --[[ Line: 151 ]]
+local function screenTimeStatesUpdated(List)
 	-- upvalues: Connection (ref), GuiService (copy), config (copy)
 	local List1 = {}
 	
@@ -142,9 +142,9 @@ local function screenTimeStatesUpdated(List) --[[ Line: 151 ]]
 	config:update(List1)
 end
 
-local _ = function() --[[ Line: 170 | Named "requestInstructions" ]]
+local _ = function()
 	-- upvalues: NewResult (copy), screenTimeStatesUpdated (copy), Logging (copy)
-	NewResult:getInstructions(function(p2, p3, p4) --[[ Line: 171 ]]
+	NewResult:getInstructions(function(p2, p3, p4)
 		-- upvalues: screenTimeStatesUpdated (upval), Logging (upval)
 		if p2 then
 			screenTimeStatesUpdated(p4)
@@ -161,7 +161,7 @@ local _ = function() --[[ Line: 170 | Named "requestInstructions" ]]
 	end)
 end
 
-Connection = NotificationService.RobloxEventReceived:Connect(function(EventData) --[[ Line: 183 ]]
+Connection = NotificationService.RobloxEventReceived:Connect(function(EventData)
 	-- upvalues: GetFFlagScreenTimeSignalRFunction (copy), Constants (copy), NewResult (copy), screenTimeStatesUpdated (copy), Logging (copy), Connection (ref), GuiService (copy), HttpService (copy)
 	if not GetFFlagScreenTimeSignalRFunction() then
 		if EventData.namespace == Constants.HEARTBEAT_NOTIFICATIONS_NAMESPACE then
@@ -175,7 +175,7 @@ Connection = NotificationService.RobloxEventReceived:Connect(function(EventData)
 				
 				return
 			else
-				local Success, Result = pcall(function() --[[ Line: 198 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: HttpService (upval), EventData (copy)
 					return HttpService:JSONDecode(EventData.detail)
 				end)
@@ -192,7 +192,7 @@ Connection = NotificationService.RobloxEventReceived:Connect(function(EventData)
 				end
 				for _, notification in ipairs(Result.notifications) do
 					if notification.type == Constants.HEARTBEAT_NOTIFICATION_TYPE_NEW_INSTRUCTION then
-						NewResult:getInstructions(function(p2, p3, p4) --[[ Line: 171 ]]
+						NewResult:getInstructions(function(p2, p3, p4)
 							-- upvalues: screenTimeStatesUpdated (upval), Logging (upval)
 							if p2 then
 								screenTimeStatesUpdated(p4)
@@ -212,7 +212,7 @@ Connection = NotificationService.RobloxEventReceived:Connect(function(EventData)
 			end
 		end
 	elseif EventData.namespace == Constants.SIGNALR_NAMESPACE and EventData.detailType == Constants.SIGNALR_TYPE_NEW_INSTRUCTION then
-		NewResult:getInstructions(function(p2, p3, p4) --[[ Line: 171 ]]
+		NewResult:getInstructions(function(p2, p3, p4)
 			-- upvalues: screenTimeStatesUpdated (upval), Logging (upval)
 			if p2 then
 				screenTimeStatesUpdated(p4)

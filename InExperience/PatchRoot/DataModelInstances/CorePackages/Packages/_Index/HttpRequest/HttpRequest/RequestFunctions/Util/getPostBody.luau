@@ -1,6 +1,6 @@
 ﻿local HttpService = game:GetService("HttpService")
 
-return function(Input, p1) --[[ Line: 3 ]]
+return function(Input, p1)
 	-- upvalues: HttpService (copy)
 	if p1 == "POST" or p1 == "PATCH" then
 		if type(Input) == "table" then

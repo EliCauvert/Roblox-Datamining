@@ -7,12 +7,12 @@ local ConstantsModule = require(script.Parent.Constants)
 local FFlagExpChatPresetChatGamepadEnabledModule = require(ExpChat.Flags.FFlagExpChatPresetChatGamepadEnabled)
 local FFlagLuaSupportMicroGamepadPreferredInput = require(Parent.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
 
-local function _(): boolean --[[ Line: 15 | Named "isTouchDevice" ]]
+local function _(): boolean
 	-- upvalues: UserInputService (copy)
 	return UserInputService.TouchEnabled and not UserInputService.MouseEnabled
 end
 
-return function() --[[ Line: 19 | Named "useLayoutMode" ]]
+return function()
 	-- upvalues: GetPresetChatStoreModule (copy), SignalsReactModule (copy), ConstantsModule (copy), FFlagExpChatPresetChatGamepadEnabledModule (copy), UserInputService (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetPresetChatStoreModule(false).getLayoutModeOverride)
 	

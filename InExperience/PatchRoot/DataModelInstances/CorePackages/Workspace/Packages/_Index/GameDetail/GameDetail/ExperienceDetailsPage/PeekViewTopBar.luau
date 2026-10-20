@@ -26,7 +26,7 @@ local CreateComputedFunction = require(Parent.Signals).createComputed
 local GetLegacyNavigationStoreFunction = require(Parent.NavigationRodux).GetLegacyNavigationStore
 local ExperienceDetailsPageUtilsModule = require(script.Parent.ExperienceDetailsPageUtils)
 
-return ReactModule.memo(function(p1) --[[ Line: 43 | Named "PeekViewTopBar" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseDeviceInsetsFunction (copy), UseTokensFunction (copy), FFlagSignalsNavP3fGameDetails (copy), ReactModule (copy), GetLegacyNavigationStoreFunction (copy), CreateComputedFunction (copy), AppPage (copy), UseSignalStateFunction (copy), UseSelectorFunction (copy), FFlagUseNavigationSelectors (copy), Selectors (copy), PeekViewState (copy), ExperienceDetailsPageUtilsModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), View (copy), IconButton (copy), IconName (copy), ButtonVariant (copy), ButtonSize (copy)
 	local PageProps = p1.pageProps
 	local OnCloseFunction = p1.onClose
@@ -34,11 +34,11 @@ return ReactModule.memo(function(p1) --[[ Line: 43 | Named "PeekViewTopBar" ]]
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseTokensResult = UseTokensFunction()
 	local UseSignalStateResult = nil
-	UseSignalStateResult = if FFlagSignalsNavP3fGameDetails then UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 53 ]]
+	UseSignalStateResult = if FFlagSignalsNavP3fGameDetails then UseSignalStateFunction((ReactModule.useMemo(function()
 		-- upvalues: GetLegacyNavigationStoreFunction (upval), CreateComputedFunction (upval), AppPage (upval)
 		local LegacyNavigationStore = GetLegacyNavigationStoreFunction(false)
 		
-		return CreateComputedFunction(function(p2): boolean --[[ Line: 55 ]]
+		return CreateComputedFunction(function(p2): boolean
 			-- upvalues: LegacyNavigationStore (copy), AppPage (upval)
 			local CurrentLegacyRoute = LegacyNavigationStore.getCurrentLegacyRoute(p2)
 			local Count = 0
@@ -56,7 +56,7 @@ return ReactModule.memo(function(p1) --[[ Line: 43 | Named "PeekViewTopBar" ]]
 			end
 			return false
 		end)
-	end, {}))) else UseSelectorFunction(function(p2): boolean --[[ Line: 73 ]]
+	end, {}))) else UseSelectorFunction(function(p2): boolean
 		-- upvalues: FFlagUseNavigationSelectors (upval), Selectors (upval), AppPage (upval)
 		local SelectLegacyHistoryResult = if FFlagUseNavigationSelectors then Selectors.selectLegacyHistory(p2) else p2.Navigation.history
 		local SelectLegacyHistoryResultEntry = SelectLegacyHistoryResult and SelectLegacyHistoryResult[#SelectLegacyHistoryResult]
@@ -75,9 +75,9 @@ return ReactModule.memo(function(p1) --[[ Line: 43 | Named "PeekViewTopBar" ]]
 		end
 		return false
 	end)
-	ReactModule.useEffect(function() --[[ Line: 93 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult (ref), UseDispatchResult (copy), PeekViewState (upval)
-		return function() --[[ Line: 94 ]]
+		return function()
 			-- upvalues: UseSignalStateResult (upval), UseDispatchResult (upval), PeekViewState (upval)
 			if not UseSignalStateResult then
 				UseDispatchResult({
@@ -103,7 +103,7 @@ return ReactModule.memo(function(p1) --[[ Line: 43 | Named "PeekViewTopBar" ]]
 			icon = if UseSignalStateResult1 then IconName.ChevronLargeLeft else IconName.X,
 			variant = ButtonVariant.Utility,
 			size = ButtonSize.Medium,
-			onActivated = ReactModule.useCallback(function() --[[ Line: 108 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: UseSignalStateResult1 (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval), OnCloseFunction (copy)
 				if not UseSignalStateResult1 then
 					OnCloseFunction()

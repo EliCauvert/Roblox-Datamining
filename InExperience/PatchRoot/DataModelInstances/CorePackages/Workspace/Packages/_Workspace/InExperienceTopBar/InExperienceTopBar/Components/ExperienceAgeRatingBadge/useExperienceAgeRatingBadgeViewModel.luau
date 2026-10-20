@@ -6,12 +6,12 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(script.Parent.ExperienceAgeRatingBadgeView)
 local DataStatus = DataHydrationModule.DataStatus
 
-return function(p1) --[[ Line: 20 | Named "useExperienceAgeRatingBadgeViewModel" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), SignalsModule (copy), DataHydrationModule (copy), DataStatus (copy), SignalsReactModule (copy)
 	local UniverseId = p1.universeId
-	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 23 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), DataHydrationModule (upval), UniverseId (copy), DataStatus (upval)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 24 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: DataHydrationModule (upval), UniverseId (upval), DataStatus (upval)
 			local AndFetchAgeRecommendation = DataHydrationModule.Game.getAgeRecommendationStore(p2).getAndFetchAgeRecommendation(UniverseId)
 			local StatusResult = AndFetchAgeRecommendation.status(p2)

@@ -12,12 +12,12 @@ local PlayerContextualMenuStoreModule = require(Parent.Common.PlayerContextualMe
 local TeamListViewModule = require(Parent.Components.Presentation.TeamListView)
 local UseGamepadStickScrollModule = require(Parent.Hooks.useGamepadStickScroll)
 
-local function _(): boolean --[[ Line: 28 | Named "isGamepad" ]]
+local function _(): boolean
 	-- upvalues: UserInputService (copy)
 	return UserInputService:GetLastInputType().Name:find("Gamepad") ~= nil
 end
 
-return function(p1) --[[ Line: 48 | Named "ConsoleFocusScrollView" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), SignalsReactModule (copy), PlayerListVisibilityStoreModule (copy), PlayerContextualMenuStoreModule (copy), UserInputService (copy), UseGamepadStickScrollModule (copy), GuiService (copy), ContextActionService (copy), TeamListViewModule (copy), ScrollView (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
@@ -35,7 +35,7 @@ return function(p1) --[[ Line: 48 | Named "ConsoleFocusScrollView" ]]
 	local UseRefResult4 = ReactModule.useRef(false)
 	local UseRefResult5 = ReactModule.useRef(false)
 	
-	local function _() --[[ Line: 71 | Named "restoreHud" ]]
+	local function _()
 		-- upvalues: UseRefResult5 (copy), UserInputService (upval), UseRefResult2 (copy), GuiService (upval), UseRefResult1 (copy), UseRefResult3 (copy), UseRefResult4 (copy)
 		if not UseRefResult5.current then return end
 		UserInputService.OverrideMouseIconBehavior = UseRefResult2.current
@@ -50,7 +50,7 @@ return function(p1) --[[ Line: 48 | Named "ConsoleFocusScrollView" ]]
 		UseRefResult4.current = false
 	end
 	
-	local _ = function() --[[ Line: 86 | Named "releaseRosterSelection" ]]
+	local _ = function()
 		-- upvalues: GuiService (upval), UseRefResult1 (copy), UseRefResult4 (copy)
 		local SelectedCoreObject = GuiService.SelectedCoreObject
 		
@@ -60,7 +60,7 @@ return function(p1) --[[ Line: 48 | Named "ConsoleFocusScrollView" ]]
 		UseRefResult4.current = false
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 95 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult (copy), UseRefResult5 (copy), UserInputService (upval), UseRefResult2 (copy), GuiService (upval), UseRefResult1 (copy), UseRefResult3 (copy), UseRefResult4 (copy), HasUseSignalStateResult (copy), HasGamepad (copy), UseRefResult (copy), PlayerListVisibilityStoreModule (upval), PlayerContextualMenuStoreModule (upval)
 		if UseSignalStateResult then
 			if HasUseSignalStateResult then
@@ -71,7 +71,7 @@ return function(p1) --[[ Line: 48 | Named "ConsoleFocusScrollView" ]]
 				end
 				UseRefResult4.current = false
 				
-				return function() --[[ Line: 103 ]] end
+				return function() end
 			else
 				if not UseRefResult4.current and HasGamepad and UseRefResult.current then
 					if not UseRefResult5.current then
@@ -83,7 +83,7 @@ return function(p1) --[[ Line: 48 | Named "ConsoleFocusScrollView" ]]
 					UserInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceHide
 					UseRefResult4.current = true
 				end
-				return function() --[[ Line: 118 ]]
+				return function()
 					-- upvalues: PlayerListVisibilityStoreModule (upval), UseRefResult5 (upval), UserInputService (upval), UseRefResult2 (upval), GuiService (upval), UseRefResult1 (upval), UseRefResult3 (upval), UseRefResult4 (upval), PlayerContextualMenuStoreModule (upval)
 					if PlayerListVisibilityStoreModule.getEffectiveVisible(false) then
 						if PlayerContextualMenuStoreModule.getMenuData(false) ~= nil then
@@ -123,14 +123,14 @@ return function(p1) --[[ Line: 48 | Named "ConsoleFocusScrollView" ]]
 				UseRefResult5.current = false
 				UseRefResult4.current = false
 			end
-			return function() --[[ Line: 98 ]] end
+			return function() end
 		end
 	end, {
 		UseSignalStateResult,
 		HasUseSignalStateResult,
 		HasGamepad
 	})
-	ReactModule.useEffect(function() --[[ Line: 127 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: NoHasUseSignalStateResult (copy), HasGamepad (copy), UseRefResult (copy), UseRefResult4 (copy), UseRefResult5 (copy), UseRefResult3 (copy), GuiService (upval), UseRefResult2 (copy), UserInputService (upval)
 		if not NoHasUseSignalStateResult or not HasGamepad or not UseRefResult.current then return end
 		if UseRefResult4.current then
@@ -147,10 +147,10 @@ return function(p1) --[[ Line: 48 | Named "ConsoleFocusScrollView" ]]
 		UserInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceHide
 		UseRefResult4.current = true
 	end, { NoHasUseSignalStateResult, AllTeams, HasGamepad })
-	ReactModule.useEffect(function() --[[ Line: 152 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: NoHasUseSignalStateResult (copy), ContextActionService (upval), PlayerContextualMenuStoreModule (upval), PlayerListVisibilityStoreModule (upval)
 		if NoHasUseSignalStateResult then
-			ContextActionService:BindCoreAction("RbxPlayerListReskinGamepadClose", function(_, UserInputState, _) --[[ Line: 156 ]]
+			ContextActionService:BindCoreAction("RbxPlayerListReskinGamepadClose", function(_, UserInputState, _)
 				-- upvalues: PlayerContextualMenuStoreModule (upval), PlayerListVisibilityStoreModule (upval)
 				if UserInputState == Enum.UserInputState.Begin then
 					PlayerContextualMenuStoreModule.closeContextMenu()
@@ -162,12 +162,12 @@ return function(p1) --[[ Line: 48 | Named "ConsoleFocusScrollView" ]]
 				end
 			end, false, Enum.KeyCode.ButtonB)
 			
-			return function() --[[ Line: 167 ]]
+			return function()
 				-- upvalues: ContextActionService (upval)
 				ContextActionService:UnbindCoreAction("RbxPlayerListReskinGamepadClose")
 			end
 		else
-			return function() --[[ Line: 154 ]] end
+			return function() end
 		end
 	end, { NoHasUseSignalStateResult })
 	local LeaderboardStore = p1.leaderboardStore
@@ -185,7 +185,7 @@ return function(p1) --[[ Line: 48 | Named "ConsoleFocusScrollView" ]]
 			table.insert(List, i)
 		end
 	end
-	table.sort(List, function(A, B): boolean --[[ Line: 187 ]]
+	table.sort(List, function(A, B): boolean
 		-- upvalues: AllTeams (copy)
 		if A == "Neutral" and B ~= "Neutral" then
 			return false

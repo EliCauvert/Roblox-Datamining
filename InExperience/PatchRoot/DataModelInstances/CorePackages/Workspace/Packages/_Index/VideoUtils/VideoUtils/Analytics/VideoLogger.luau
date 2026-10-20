@@ -39,7 +39,7 @@ local config = {
 }
 
 return {
-	reportVideoAction = function(ActionType, EventContext, p1, p2) --[[ Line: 59 ]]
+	reportVideoAction = function(ActionType, EventContext, p1, p2)
 		-- upvalues: StrictInterfaceResult (copy), ReportWarningFunction (copy), LoggingProtocolModule (copy), StrictInterfaceResult1 (copy), CryoModule (copy), VideoEngagementEvents (copy), t (copy), config (copy), TelemetryService (copy)
 		local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(p1)
 		

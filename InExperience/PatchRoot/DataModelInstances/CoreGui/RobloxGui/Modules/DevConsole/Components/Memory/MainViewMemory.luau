@@ -15,12 +15,12 @@ local MainRowPadding = ConstantsModule.GeneralFormatting.MainRowPadding
 local DevConsoleMemoryTrackingAlert = game:DefineFastFlag("DevConsoleMemoryTrackingAlert", false)
 local LogButton = RoactModule.Component:extend("LogButton")
 
-function LogButton.init(p1) --[[ Line: 25 ]]
-	function p1.onAction() --[[ Line: 26 ]]
+function LogButton.init(p1)
+	function p1.onAction()
 		-- upvalues: p1 (copy)
 		local Text = "\n"
 		
-		local function _(Text1) --[[ Line: 29 | Named "line" ]]
+		local function _(Text1)
 			-- upvalues: Text (ref)
 			Text ..= Text1 .. "\n"
 		end
@@ -28,7 +28,7 @@ function LogButton.init(p1) --[[ Line: 25 ]]
 		Text ..= "Name                                       Min   Max" .. "\n"
 		Text ..= "----------------------------------------   ---   ---" .. "\n"
 		
-		local function recurseMemoryTree(p2, Memory, Count: number) --[[ Line: 36 ]]
+		local function recurseMemoryTree(p2, Memory, Count: number)
 			-- upvalues: Text (ref), recurseMemoryTree (copy)
 			Text ..= string.format("%s %s %s %3d   %3d", string.rep(" ", Count), p2, string.rep(" ", 40 - Count - #p2), Memory.min, Memory.max) .. "\n"
 			
@@ -44,7 +44,7 @@ function LogButton.init(p1) --[[ Line: 25 ]]
 	end
 end
 
-function LogButton.render(p2) --[[ Line: 58 ]]
+function LogButton.render(p2)
 	-- upvalues: RoactModule (copy), ConstantsModule (copy)
 	return RoactModule.createElement("TextButton", {
 		Text = "Log",
@@ -59,24 +59,24 @@ end
 local ClientMemoryData = DataConsumerModule(LogButton, "ClientMemoryData", "ServerMemoryData")
 local MainViewMemory = RoactModule.Component:extend("MainViewMemory")
 
-function MainViewMemory.init(p2) --[[ Line: 71 ]]
+function MainViewMemory.init(p2)
 	-- upvalues: RoactModule (copy)
-	function p2.onUtilTabHeightChanged(UtilTabHeight) --[[ Line: 72 ]]
+	function p2.onUtilTabHeightChanged(UtilTabHeight)
 		-- upvalues: p2 (copy)
 		p2:setState({ utilTabHeight = UtilTabHeight })
 	end
 	
-	function p2.onClientButton() --[[ Line: 78 ]]
+	function p2.onClientButton()
 		-- upvalues: p2 (copy)
 		p2:setState({ isClientView = true })
 	end
 	
-	function p2.onServerButton() --[[ Line: 82 ]]
+	function p2.onServerButton()
 		-- upvalues: p2 (copy)
 		p2:setState({ isClientView = false })
 	end
 	
-	function p2.onSearchTermChanged(p3) --[[ Line: 86 ]]
+	function p2.onSearchTermChanged(p3)
 		-- upvalues: p2 (copy)
 		if p2.state.isClientView then
 			p2.props.dispatchClientMemoryUpdateSearchFilter(p3, {})
@@ -91,11 +91,11 @@ function MainViewMemory.init(p2) --[[ Line: 71 ]]
 	p2.state = { utilTabHeight = 0, isClientView = true }
 end
 
-function MainViewMemory.didMount(p2) --[[ Line: 102 ]]
+function MainViewMemory.didMount(p2)
 	p2:setState({ utilTabHeight = p2.utilRef.current.Size.Y.Offset })
 end
 
-function MainViewMemory.didUpdate(p2) --[[ Line: 109 ]]
+function MainViewMemory.didUpdate(p2)
 	local Offset = p2.utilRef.current.Size.Y.Offset
 	
 	if Offset ~= p2.state.utilTabHeight then
@@ -103,12 +103,12 @@ function MainViewMemory.didUpdate(p2) --[[ Line: 109 ]]
 	end
 end
 
-local function _(): boolean --[[ Line: 120 | Named "shouldDisplayMemoryWarning" ]]
+local function _(): boolean
 	-- upvalues: StatsService (copy)
 	return not StatsService.MemoryTrackingEnabled
 end
 
-function MainViewMemory.render(p2) --[[ Line: 124 ]]
+function MainViewMemory.render(p2)
 	-- upvalues: DevConsoleMemoryTrackingAlert (copy), StatsService (copy), RoactModule (copy), MainRowPadding (copy), UtilAndTabModule (copy), ClientMemoryData (ref), ConstantsModule (copy), ClientMemoryModule (copy), ServerMemoryModule (copy)
 	local Size = p2.props.size
 	local IsDeveloperView = p2.props.isDeveloperView
@@ -170,21 +170,21 @@ function MainViewMemory.render(p2) --[[ Line: 124 ]]
 	}, config)
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p2, _) --[[ Line: 198 | Named "mapStateToProps" ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p2, _)
 	return {
 		clientSearchTerm = p2.MemoryData.clientSearchTerm,
 		clientTypeFilters = p2.MemoryData.clientTypeFilters,
 		serverSearchTerm = p2.MemoryData.serverSearchTerm,
 		serverTypeFilters = p2.MemoryData.serverTypeFilters
 	}
-end, function(Callback) --[[ Line: 207 | Named "mapDispatchToProps" ]]
+end, function(Callback)
 	-- upvalues: ClientMemoryUpdateSearchFilterModule (copy), ServerMemoryUpdateSearchFilterModule (copy)
 	return {
-		dispatchClientMemoryUpdateSearchFilter = function(p2, p3) --[[ Line: 209 ]]
+		dispatchClientMemoryUpdateSearchFilter = function(p2, p3)
 			-- upvalues: Callback (copy), ClientMemoryUpdateSearchFilterModule (upval)
 			Callback(ClientMemoryUpdateSearchFilterModule(p2, p3))
 		end,
-		dispatchServerMemoryUpdateSearchFilter = function(p2, p3) --[[ Line: 213 ]]
+		dispatchServerMemoryUpdateSearchFilter = function(p2, p3)
 			-- upvalues: Callback (copy), ServerMemoryUpdateSearchFilterModule (upval)
 			Callback(ServerMemoryUpdateSearchFilterModule(p2, p3))
 		end

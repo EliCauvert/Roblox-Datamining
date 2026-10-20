@@ -21,7 +21,7 @@ local config = {
 local SwitchServerTelemetryModule = {}
 SwitchServerTelemetryModule.__index = SwitchServerTelemetryModule
 
-function SwitchServerTelemetryModule.sendSwitchServerButtonActions(CustomFields) --[[ Line: 57 ]]
+function SwitchServerTelemetryModule.sendSwitchServerButtonActions(CustomFields)
 	-- upvalues: TelemetryService (copy), config (copy)
 	TelemetryService:LogEvent(config.SwitchServerButtonActions, {
 		standardizedFields = {
@@ -34,7 +34,7 @@ function SwitchServerTelemetryModule.sendSwitchServerButtonActions(CustomFields)
 	})
 end
 
-function SwitchServerTelemetryModule.sendSwitchServerConfirmationActions(CustomFields) --[[ Line: 64 ]]
+function SwitchServerTelemetryModule.sendSwitchServerConfirmationActions(CustomFields)
 	-- upvalues: TelemetryService (copy), config (copy)
 	TelemetryService:LogEvent(config.SwitchServerConfirmationActions, {
 		standardizedFields = {

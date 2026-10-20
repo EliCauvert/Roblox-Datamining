@@ -15,11 +15,11 @@ local _ = require(script.Parent.GameDeveloperProductStoreTypes)
 local FetchGameDeveloperProductStatusesModule = require(script.Parent.fetchGameDeveloperProductStatuses)
 local FFlagLuaAppUseGameTransactionsApiForReceipts = SharedFlagsModule.FFlagLuaAppUseGameTransactionsApiForReceipts
 
-local function _(Text, Text1): string --[[ Line: 31 | Named "buildStatusesKey" ]]
+local function _(Text, Text1): string
 	return Text .. "|" .. Text1
 end
 
-return function() --[[ Line: 35 | Named "createGameDeveloperProductStore" ]]
+return function()
 	-- upvalues: CreateDataCacheModule (copy), FFlagSduiDevStoreSeeAllSupport (copy), FFlagEnableHomeGameItemOwnershipUpdate (copy), FFlagEnableSearchGameItemOwnershipUpdate (copy), CreateDataResolverModule (copy), LogResponseErrorFunction (copy), FFlagLuaAppUseGameTransactionsApiForReceipts (copy), DiscoveryEventErrorLogger (copy), PromiseModule (copy), FetchGameDeveloperProductStatusesModule (copy)
 	local DataCacheModule = CreateDataCacheModule()
 	local Cache = nil
@@ -30,18 +30,18 @@ return function() --[[ Line: 35 | Named "createGameDeveloperProductStore" ]]
 		v1 = CreateDataResolverModule({
 			supportsMultiGet = false,
 			cache = Cache,
-			logError = function(p1) --[[ Line: 49 ]]
+			logError = function(p1)
 				-- upvalues: LogResponseErrorFunction (upval), FFlagLuaAppUseGameTransactionsApiForReceipts (upval), DiscoveryEventErrorLogger (upval)
 				LogResponseErrorFunction(if FFlagLuaAppUseGameTransactionsApiForReceipts then "game-transactions/v1/receipts" else "developer-products/v1/game-transactions", {
 					StatusCode = if type(p1) == "table" and p1.StatusCode then p1.StatusCode else nil
 				})
 				DiscoveryEventErrorLogger.reportError("GameDeveloperProductStore", "Failed to fetch developer product statuses", { err = tostring(p1) })
 			end,
-			fetchFn = function(Text: string, p1) --[[ Line: 63 ]]
+			fetchFn = function(Text: string, p1)
 				-- upvalues: PromiseModule (upval), FetchGameDeveloperProductStatusesModule (upval), DataCacheModule (copy)
 				local Match, Match2 = string.match(Text, "^(.-)|(.+)$")
 				
-				return if Match == nil or Match2 == nil then PromiseModule.reject("Invalid developer product statuses key: " .. tostring(Text)) else FetchGameDeveloperProductStatusesModule.fetch(Match, Match2):andThen(function(Result) --[[ Line: 70 ]]
+				return if Match == nil or Match2 == nil then PromiseModule.reject("Invalid developer product statuses key: " .. tostring(Text)) else FetchGameDeveloperProductStatusesModule.fetch(Match, Match2):andThen(function(Result)
 					-- upvalues: p1 (copy), DataCacheModule (upval)
 					local t = {}
 					
@@ -68,13 +68,13 @@ return function() --[[ Line: 35 | Named "createGameDeveloperProductStore" ]]
 	return {
 		getGameDeveloperProductInfo = DataCacheModule.getItem,
 		updateGameDeveloperProductInfos = DataCacheModule.updateItems,
-		fetchStatuses = function(Text, Text1) --[[ Line: 115 ]]
+		fetchStatuses = function(Text, Text1)
 			-- upvalues: v1 (ref)
 			if v1 then
 				v1.fetchItem(Text .. "|" .. Text1)
 			end
 		end,
-		clear = function() --[[ Line: 95 ]]
+		clear = function()
 			-- upvalues: Cache (ref), v1 (ref), DataCacheModule (copy)
 			if Cache then
 				Cache.clear()
@@ -84,7 +84,7 @@ return function() --[[ Line: 35 | Named "createGameDeveloperProductStore" ]]
 			end
 			DataCacheModule.clear()
 		end,
-		dispose = function() --[[ Line: 105 ]]
+		dispose = function()
 			-- upvalues: v1 (ref), DataCacheModule (copy)
 			if v1 then
 				v1.dispose()

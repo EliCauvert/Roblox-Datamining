@@ -21,7 +21,7 @@ local config = {
 	variant = require(Foundation.Enums.ShortcutVariant).Standard
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 55 | Named "Shortcut" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseInputPlatformModule (copy), UseShortcutVariantsModule (copy), ReactModule (copy), SeparatorModule (copy), KeyDisplayModule (copy), KeyCapModule (copy), ViewModule (copy), WithCommonPropsModule (copy), PlacementModule (copy), TextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()

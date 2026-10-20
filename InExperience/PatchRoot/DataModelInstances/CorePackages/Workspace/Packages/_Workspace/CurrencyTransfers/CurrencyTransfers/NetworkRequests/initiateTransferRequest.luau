@@ -15,17 +15,17 @@ local StrictInterfaceResult = TModule.strictInterface({
 	transferOrigination = TModule.optional(TModule.string)
 })
 
-return function(p1, p2, p3) --[[ Line: 32 | Named "initiateTransferRequest" ]]
+return function(p1, p2, p3)
 	-- upvalues: StrictInterfaceResult (copy), HttpRequestModule (copy), TransferOriginationModule (copy), v1 (copy), InitiateTransferModelModule (copy), PromiseModule (copy)
 	assert(StrictInterfaceResult(p1))
 	
 	return (if p3 == nil then HttpRequestModule.new(p2) else HttpRequestModule.fromNetworkImpl(p3)):post(v1, {
 		recipientId = p1.recipientId,
 		transferOrigin = TransferOriginationModule.toEnumInteger[p1.transferOrigination or TransferOriginationModule.Unknown] or TransferOriginationModule.toEnumInteger[TransferOriginationModule.Unknown]
-	}):andThen(function(Result) --[[ Line: 49 ]]
+	}):andThen(function(Result)
 		-- upvalues: InitiateTransferModelModule (upval)
 		return InitiateTransferModelModule.format(Result)
-	end):catch(function(Err) --[[ Line: 52 ]]
+	end):catch(function(Err)
 		-- upvalues: PromiseModule (upval)
 		return PromiseModule.reject(Err)
 	end)

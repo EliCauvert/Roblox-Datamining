@@ -26,17 +26,17 @@ SearchBox.validateProps = T.strictInterface({
 	itemRef = T.optional(T.table)
 })
 
-function SearchBox.init(p1) --[[ Line: 52 ]]
+function SearchBox.init(p1)
 	p1.state = { searchText = "" }
 end
 
-function SearchBox.renderWithSelectionCursor(p1, Callback) --[[ Line: 58 ]]
+function SearchBox.renderWithSelectionCursor(p1, Callback)
 	-- upvalues: WithLocalizationModule (copy), WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), Roact (copy), CursorType (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), AssetsModule (copy), ImageSetLabel (copy), NormalizeFontFaceFunction (copy), ThemedTextLabelModule (copy)
 	return WithLocalizationModule({
 		searchPlaceholder = "CoreScripts.InGameMenu.InviteFriends.Search"
-	})(function(p2) --[[ Line: 61 ]]
+	})(function(p2)
 		-- upvalues: WithFoundationOrUIBloxStyleFunction (upval), FoundationFontFaceMigration (upval), p1 (copy), Roact (upval), Callback (copy), CursorType (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), AssetsModule (upval), ImageSetLabel (upval), NormalizeFontFaceFunction (upval), ThemedTextLabelModule (upval)
-		return WithFoundationOrUIBloxStyleFunction(function(p3) --[[ Line: 62 ]]
+		return WithFoundationOrUIBloxStyleFunction(function(p3)
 			-- upvalues: FoundationFontFaceMigration (upval)
 			return {
 				Tokens = if FoundationFontFaceMigration then p3 else nil,
@@ -66,7 +66,7 @@ function SearchBox.renderWithSelectionCursor(p1, Callback) --[[ Line: 58 ]]
 					}
 				}
 			}
-		end, function(p3) --[[ Line: 91 ]]
+		end, function(p3)
 			-- upvalues: p1 (upval), Roact (upval), Callback (upval), CursorType (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), AssetsModule (upval), ImageSetLabel (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), ThemedTextLabelModule (upval), p2 (copy)
 			local TextEmphasis = p3.Theme.TextEmphasis
 			local Body = p3.Font.Body
@@ -130,7 +130,7 @@ function SearchBox.renderWithSelectionCursor(p1, Callback) --[[ Line: 58 ]]
 					TextSize = Body.RelativeSize * p3.Font.BaseSize,
 					TextWrapped = false,
 					SelectionImageObject = Callback(CursorType.InputFields),
-					[Roact.Change.Text] = function(p4) --[[ Line: 208 ]]
+					[Roact.Change.Text] = function(p4)
 						-- upvalues: p1 (upval)
 						if p1.state.searchText ~= p4.Text then
 							p1:setState({ searchText = p4.Text })
@@ -158,7 +158,7 @@ function SearchBox.renderWithSelectionCursor(p1, Callback) --[[ Line: 58 ]]
 					Visible = IsNotSearchTextMatch,
 					SelectionImageObject = Callback(CursorType.SmallPill),
 					Selectable = true,
-					[Roact.Event.Activated] = function() --[[ Line: 112 ]]
+					[Roact.Event.Activated] = function()
 						-- upvalues: p1 (upval)
 						p1:setState({ searchText = "" })
 						p1.props.searchCleared()
@@ -191,9 +191,9 @@ function SearchBox.renderWithSelectionCursor(p1, Callback) --[[ Line: 58 ]]
 	end)
 end
 
-function SearchBox.render(p1) --[[ Line: 238 ]]
+function SearchBox.render(p1)
 	-- upvalues: WithCursorMigration (copy)
-	return WithCursorMigration(function(p2) --[[ Line: 239 ]]
+	return WithCursorMigration(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithSelectionCursor(p2)
 	end)

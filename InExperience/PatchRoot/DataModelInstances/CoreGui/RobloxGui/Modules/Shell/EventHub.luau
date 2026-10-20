@@ -1,18 +1,18 @@
 ﻿local t = {}
 
-local function _(Id, Callback) --[[ Line: 6 | Named "createListener" ]]
+local function _(Id, Callback)
 	return { id = Id, callback = Callback }
 end
 
 return {
-	addEventListener = function(_, Key, Id, Callback) --[[ Line: 18 ]]
+	addEventListener = function(_, Key, Id, Callback)
 		-- upvalues: t (copy)
 		if t[Key] == nil then
 			t[Key] = {}
 		end
 		table.insert(t[Key], { id = Id, callback = Callback })
 	end,
-	removeEventListener = function(_, p1, Id) --[[ Line: 26 ]]
+	removeEventListener = function(_, p1, Id)
 		-- upvalues: t (copy)
 		if t[p1] == nil then return end
 		for i, value in ipairs(t[p1]) do
@@ -21,7 +21,7 @@ return {
 			end
 		end
 	end,
-	removeCallbackFromEvent = function(_, p2, Id, Callback) --[[ Line: 40 ]]
+	removeCallbackFromEvent = function(_, p2, Id, Callback)
 		-- upvalues: t (copy)
 		if t[p2] == nil then return end
 		for i, Listener in ipairs(t[p2]) do
@@ -31,7 +31,7 @@ return {
 			end
 		end
 	end,
-	dispatchEvent = function(_, p3, ...) --[[ Line: 56 ]]
+	dispatchEvent = function(_, p3, ...)
 		-- upvalues: t (copy)
 		if t[p3] == nil then return end
 		for _, value in ipairs(t[p3]) do

@@ -2,9 +2,9 @@
 local UseAppPolicyModule = require(AppChat.Hooks.useAppPolicy)
 local UseIsChatEnabledModule = require(AppChat.Hooks.useIsChatEnabled)
 
-return function() --[[ Line: 10 ]]
+return function()
 	-- upvalues: UseAppPolicyModule (copy), UseIsChatEnabledModule (copy)
-	local UseAppPolicyModuleResult = UseAppPolicyModule(function(p1) --[[ Line: 11 ]]
+	local UseAppPolicyModuleResult = UseAppPolicyModule(function(p1)
 		return p1.getChatHeaderSearch()
 	end)
 	local UseIsChatEnabledModuleResult = UseIsChatEnabledModule()

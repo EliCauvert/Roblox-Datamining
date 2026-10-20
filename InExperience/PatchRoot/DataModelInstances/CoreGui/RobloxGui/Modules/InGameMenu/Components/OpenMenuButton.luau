@@ -7,7 +7,7 @@ local ImageSetButton = InGameMenuDependenciesModule.UIBlox.Core.ImageSet.ImageSe
 local GlobalConfigModule = require(Parent.GlobalConfig)
 local StrictInterfaceResult = T.strictInterface({ onClick = T.callback })
 
-return function(p1) --[[ Line: 24 | Named "OpenMenuButton" ]]
+return function(p1)
 	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), Roact (copy), ImageSetButton (copy), AssetsModule (copy)
 	if GlobalConfigModule.propValidation then
 		assert(StrictInterfaceResult(p1))

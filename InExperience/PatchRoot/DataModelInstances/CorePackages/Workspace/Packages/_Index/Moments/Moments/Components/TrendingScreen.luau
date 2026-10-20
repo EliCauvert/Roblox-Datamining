@@ -53,7 +53,7 @@ local FireFunnelAnalyticsEventFunction = Analytics.fireFunnelAnalyticsEvent
 local UseMomentsGatingFunction = MomentsCommonModule.Hooks.useMomentsGating
 local MomentsUpload = nil
 
-local function _() --[[ Line: 88 | Named "getUploadLogger" ]]
+local function _()
 	-- upvalues: MomentsUpload (ref), Parent (copy)
 	if MomentsUpload == nil then
 		MomentsUpload = require(Parent.Loggers).Logger:new("Moments.Upload")
@@ -61,9 +61,9 @@ local function _() --[[ Line: 88 | Named "getUploadLogger" ]]
 	return MomentsUpload
 end
 
-return function(p1) --[[ Line: 106 | Named "TrendingScreen" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), MomentsLocalStorageModule (copy), MomentsLocalStorageKeysModule (copy), UseScreenBottomInsetModule (copy), UseFeedPlaybackActiveModule (copy), FFlagMomentsNavigationEventModule (copy), UseMomentsTabIsVisibleModule (copy), SignalsReactModule (copy), GetMomentsPreferencesStoreModule (copy), UseMomentsSessionFunction (copy), UseMomentsHostFunction (copy), UseMomentsGatingFunction (copy), FFlagMomentsCreationFeatureGate (copy), UseCreationEntryModule (copy), UseUploadHostModule (copy), SessionManager (copy), FunnelEventNames (copy), FireFunnelAnalyticsEventFunction (copy), IsStudioModule (copy), GetFFlagArgusStudioMockFeedModule (copy), CreateMockFeedSourceFunction (copy), CreateMomentsFeedSourceModule (copy), SignalTracker (copy), FFlagEnableArgus (copy), CreateRecommendationTelemetryFunction (copy), GetImmersiveChromeStoreModule (copy), ReportModalCovering (copy), FFlagMomentsFixRecommendationImpressionLifecycleModule (copy), NavigationDestinationTypeModule (copy), FFlagMomentsFlushDwellBeforeNavigationModule (copy), RoactNavigationModule (copy), RobloxAppEventsModule (copy), AppPage (copy), GetUploadStoreModule (copy), MomentsUpload (ref), Parent (copy), LogCreateIntentModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), TopBarModule (copy), MomentOverlayInsetContextModule (copy), FFlagMomentsFeedAboveNavBarModule (copy), View (copy), ConstantsModule (copy), MomentsFeedSurfaceModule (copy), MomentUnavailableDialogModule (copy), CreationFlowScreen (copy), FTUXEducationScreenModule (copy)
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean --[[ Line: 107 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean
 		-- upvalues: MomentsLocalStorageModule (upval), MomentsLocalStorageKeysModule (upval)
 		return not MomentsLocalStorageModule.getField(MomentsLocalStorageKeysModule.CreateTooltipSeen)
 	end)
@@ -89,22 +89,22 @@ return function(p1) --[[ Line: 106 | Named "TrendingScreen" ]]
 		onExit = UseCreationEntryModuleResult.onExitCreation,
 		captureSource = UseCreationEntryModuleResult.captureSource
 	})
-	ReactModule.useEffect(function() --[[ Line: 150 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SessionManager (upval), FunnelEventNames (upval), FireFunnelAnalyticsEventFunction (upval)
 		FireFunnelAnalyticsEventFunction(FunnelEventNames.FunnelTypes.AppNavigation, FunnelEventNames.AppNavigationSteps.TrendingScreenView, SessionManager.getSessionId(FunnelEventNames.FunnelTypes.AppNavigation) or SessionManager.startSession(FunnelEventNames.FunnelTypes.AppNavigation))
 	end, {})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 160 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(true)
 	end, {})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 164 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: IsStudioModule (upval), GetFFlagArgusStudioMockFeedModule (upval), CreateMockFeedSourceFunction (upval), CreateMomentsFeedSourceModule (upval), UseMomentsSessionResult (copy), SignalTracker (upval), UseResult (copy)
 		return if IsStudioModule() and GetFFlagArgusStudioMockFeedModule() then CreateMockFeedSourceFunction() else CreateMomentsFeedSourceModule(UseMomentsSessionResult.getMomentsSessionId, {
 			signalTracker = SignalTracker,
 			onDeepLinkedMomentUnavailable = UseResult
 		})
 	end, { UseMomentsSessionResult, UseResult })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 174 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: FFlagEnableArgus (upval), CreateRecommendationTelemetryFunction (upval), UseMomentsSessionResult (copy), SignalTracker (upval)
 		return if FFlagEnableArgus then CreateRecommendationTelemetryFunction({
 			getMomentsSessionId = UseMomentsSessionResult.getMomentsSessionId,
@@ -120,7 +120,7 @@ return function(p1) --[[ Line: 106 | Named "TrendingScreen" ]]
 	end
 	local NoUseSignalStateResult2_1: boolean = UseFeedPlaybackActiveModuleResult and (not UseCreationEntryModuleResult.isCreating and (not UseStateResult1 and not UseSignalStateResult2))
 	local ExperienceJoin = if FFlagMomentsNavigationEventModule then if UseSignalStateResult then NavigationDestinationTypeModule.ExperienceJoin elseif UseCreationEntryModuleResult.isCreating then NavigationDestinationTypeModule.Create elseif UseSignalStateResult2 then NavigationDestinationTypeModule.Report elseif v1 then nil else NavigationDestinationTypeModule.Exit else nil
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 226 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult (copy)
 		local Current = UseRefResult.current
 		
@@ -128,7 +128,7 @@ return function(p1) --[[ Line: 106 | Named "TrendingScreen" ]]
 			Current.refresh(p2)
 		end
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 233 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult (copy)
 		local Current = UseRefResult.current
 		
@@ -136,15 +136,15 @@ return function(p1) --[[ Line: 106 | Named "TrendingScreen" ]]
 			Current.flushView(p2)
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 240 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagMomentsFlushDwellBeforeNavigationModule (upval), p1 (copy), RoactNavigationModule (upval), UseResult2 (copy)
 		if FFlagMomentsFlushDwellBeforeNavigationModule and p1.navigation.addListener ~= nil then
-			local AddListenerResult = p1.navigation.addListener(RoactNavigationModule.Events.WillBlur, function() --[[ Line: 245 ]]
+			local AddListenerResult = p1.navigation.addListener(RoactNavigationModule.Events.WillBlur, function()
 				-- upvalues: UseResult2 (upval)
 				UseResult2()
 			end)
 			
-			return function() --[[ Line: 248 ]]
+			return function()
 				-- upvalues: AddListenerResult (copy)
 				AddListenerResult.remove()
 			end
@@ -152,16 +152,16 @@ return function(p1) --[[ Line: 106 | Named "TrendingScreen" ]]
 			return nil
 		end
 	end, { p1.navigation, UseResult2 })
-	ReactModule.useEffect(function() --[[ Line: 253 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: RobloxAppEventsModule (upval), AppPage (upval), UseResult1 (copy)
-		local ReloadPageConnection = RobloxAppEventsModule.ReloadPage:connect(function(Moments) --[[ Line: 254 ]]
+		local ReloadPageConnection = RobloxAppEventsModule.ReloadPage:connect(function(Moments)
 			-- upvalues: AppPage (upval), UseResult1 (upval)
 			if Moments == AppPage.Moments then
 				UseResult1()
 			end
 		end)
 		
-		return function() --[[ Line: 260 ]]
+		return function()
 			-- upvalues: ReloadPageConnection (copy)
 			ReloadPageConnection:disconnect()
 		end
@@ -169,7 +169,7 @@ return function(p1) --[[ Line: 106 | Named "TrendingScreen" ]]
 	local UploadStoreModule = GetUploadStoreModule(false)
 	local UseSignalStateResult3 = SignalsReactModule.useSignalState(UploadStoreModule.getState)
 	local UseSignalStateResult31 = SignalsReactModule.useSignalState(UploadStoreModule.getUploadedMoment)
-	ReactModule.useEffect(function() --[[ Line: 269 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult3 (copy), UseRefResult1 (copy), UseRefResult (copy), UseSignalStateResult31 (copy), MomentsUpload (upval), Parent (upval), UseResult1 (copy)
 		if UseSignalStateResult3 ~= "Success" then
 			UseRefResult1.current = UseSignalStateResult3
@@ -201,22 +201,22 @@ return function(p1) --[[ Line: 106 | Named "TrendingScreen" ]]
 		UseSignalStateResult31,
 		UseResult1
 	})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 295 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), MomentsLocalStorageModule (upval), MomentsLocalStorageKeysModule (upval)
 		UseStateResult2(false)
 		MomentsLocalStorageModule.setField(MomentsLocalStorageKeysModule.CreateTooltipSeen, true)
 	end, {})
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 300 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: LogCreateIntentModule (upval), FunnelEventNames (upval), UseCreationEntryModuleResult (copy)
 		LogCreateIntentModule(FunnelEventNames.CreationIntentSource.TopBar)
 		UseCreationEntryModuleResult.onCreatePressed()
 	end, { UseCreationEntryModuleResult.onCreatePressed })
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 308 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: FireAnalyticsEventFunction (upval), EventNames (upval), UseResult1 (copy), FFlagMomentsNavigationEventModule (upval), NavigationDestinationTypeModule (upval)
 		FireAnalyticsEventFunction(EventNames.FeedHomeButtonPressed)
 		UseResult1(if FFlagMomentsNavigationEventModule then NavigationDestinationTypeModule.Trending else nil)
 	end, { UseResult1 })
-	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 313 ]]
+	local UseResult6 = ReactModule.useCallback(function()
 		-- upvalues: FireAnalyticsEventFunction (upval), EventNames (upval), OpenOwnMomentsFunction (copy), FFlagMomentsFlushDwellBeforeNavigationModule (upval), UseResult2 (copy), FFlagMomentsNavigationEventModule (upval), NavigationDestinationTypeModule (upval)
 		FireAnalyticsEventFunction(EventNames.MyCreationButtonPressed)
 		
@@ -237,7 +237,7 @@ return function(p1) --[[ Line: 106 | Named "TrendingScreen" ]]
 			telemetry = UseMemoResult1,
 			inactiveDestination = ExperienceJoin,
 			controllerRef = UseRefResult,
-			header = ReactModule.useMemo(function() --[[ Line: 324 ]]
+			header = ReactModule.useMemo(function()
 				-- upvalues: ReactModule (upval), TopBarModule (upval), UseStateResult (copy), UseFeedPlaybackActiveModuleResult (copy), FFlagMomentsCreationFeatureGate (upval), IsCreationEnabled (copy), PlatformIntegrationEnabled (copy), UseResult3 (copy), UseResult4 (copy), UseResult5 (copy), UseResult6 (copy)
 				return ReactModule.createElement(TopBarModule, {
 					isBaseScreen = true,
@@ -254,7 +254,7 @@ return function(p1) --[[ Line: 106 | Named "TrendingScreen" ]]
 				if FFlagMomentsCreationFeatureGate then IsCreationEnabled else false,
 				PlatformIntegrationEnabled, UseResult3, UseResult4, UseResult5, UseResult6
 			}),
-			renderFeedContainer = ReactModule.useCallback(function(Feed) --[[ Line: 356 ]]
+			renderFeedContainer = ReactModule.useCallback(function(Feed)
 				-- upvalues: ReactModule (upval), MomentOverlayInsetContextModule (upval), UseScreenBottomInsetModuleResult (copy), FFlagMomentsFeedAboveNavBarModule (upval), View (upval), ConstantsModule (upval)
 				return ReactModule.createElement(View, {
 					tag = "size-full",
@@ -267,7 +267,7 @@ return function(p1) --[[ Line: 106 | Named "TrendingScreen" ]]
 			end, { UseScreenBottomInsetModuleResult })
 		}),
 		MomentUnavailableDialog = if UseFeedPlaybackActiveModuleResult and UseStateResult1 then ReactModule.createElement(MomentUnavailableDialogModule, {
-			onDismiss = function() --[[ Line: 403 ]]
+			onDismiss = function()
 				-- upvalues: UseStateResult2_1 (copy)
 				UseStateResult2_1(false)
 			end

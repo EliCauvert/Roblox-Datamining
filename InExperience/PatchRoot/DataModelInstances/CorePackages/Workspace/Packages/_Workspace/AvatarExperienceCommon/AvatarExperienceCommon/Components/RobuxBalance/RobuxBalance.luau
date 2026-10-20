@@ -5,7 +5,7 @@ local CursorType = FoundationModule.Enums.CursorType
 local UseCursorFunction = FoundationModule.Hooks.useCursor
 local FFlagAXResetAvatarButton = require(Parent.AvatarExperienceFlags).FFlagAXResetAvatarButton
 
-return (ReactModule.forwardRef(function(p1, Ref) --[[ Line: 21 ]]
+return (ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: FoundationModule (copy), UseCursorFunction (copy), CursorType (copy), ReactModule (copy), FFlagAXResetAvatarButton (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseCursorResult = UseCursorFunction(CursorType.SmallPill)
@@ -16,7 +16,7 @@ return (ReactModule.forwardRef(function(p1, Ref) --[[ Line: 21 ]]
 		tag = if FFlagAXResetAvatarButton then "row auto-xy align-y-center radius-circle padding-x-large gap-xsmall size-0-1000" else "row auto-xy align-y-center radius-circle padding-x-large gap-xsmall size-0-1100",
 		ref = Ref,
 		onActivated = p1.onActivated,
-		onStateChanged = ReactModule.useCallback(function(Default) --[[ Line: 28 ]]
+		onStateChanged = ReactModule.useCallback(function(Default)
 			-- upvalues: FoundationModule (upval), UseBindingResult2 (copy)
 			if Default == FoundationModule.Enums.ControlState.Default then
 				UseBindingResult2(false)
@@ -27,7 +27,7 @@ return (ReactModule.forwardRef(function(p1, Ref) --[[ Line: 21 ]]
 				UseBindingResult2(true)
 			end
 		end, {}),
-		backgroundStyle = UseBindingResult:map(function(p2) --[[ Line: 46 ]]
+		backgroundStyle = UseBindingResult:map(function(p2)
 			-- upvalues: UseTokensResult (copy)
 			return if p2 then UseTokensResult.Color.Shift.Shift_200 else UseTokensResult.Color.Surface.Surface_0
 		end),

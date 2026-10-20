@@ -10,16 +10,16 @@ local list1 = {
 	"organicItemSaveToMyAvatars", "organicAssetIds", "organicBundleIds"
 }
 
-local function _(DISCOVERYHOMEPAGE): boolean --[[ Line: 31 | Named "isDiscoverySurface" ]]
+local function _(DISCOVERYHOMEPAGE): boolean
 	-- upvalues: UnifiedLoggingSurface (copy)
 	return DISCOVERYHOMEPAGE == UnifiedLoggingSurface.DISCOVERY_HOMEPAGE or DISCOVERYHOMEPAGE == UnifiedLoggingSurface.DISCOVERY_SEARCH_RESULTS
 end
 
-local _ = function(p1): boolean --[[ Line: 36 | Named "isNonEmpty" ]]
+local _ = function(p1): boolean
 	return p1 ~= nil and p1 ~= ""
 end
 
-return function(Tbl) --[[ Line: 40 | Named "normalizeDiscoveryPurchaseEntity" ]]
+return function(Tbl)
 	-- upvalues: MarketplaceUnifiedAction (copy), UnifiedLoggingSurface (copy), list1 (copy), list (copy)
 	local Action = Tbl.action
 	

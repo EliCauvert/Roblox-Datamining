@@ -1,7 +1,7 @@
 ﻿local Players = game:GetService("Players")
 local PurchaseErrorModule = require(script.Parent.Parent.Enums.PurchaseError)
 
-return function(p1, p2, p3, p4, _) --[[ Line: 10 | Named "meetsBundlePrerequisites" ]]
+return function(p1, p2, p3, p4, _)
 	-- upvalues: PurchaseErrorModule (copy), Players (copy)
 	local CollectibleItemDetail = p1.collectibleItemDetail
 	local IsNotCollectibleItemIdMatch: boolean = CollectibleItemDetail and (CollectibleItemDetail.collectibleItemId ~= nil and CollectibleItemDetail.collectibleItemId ~= "")

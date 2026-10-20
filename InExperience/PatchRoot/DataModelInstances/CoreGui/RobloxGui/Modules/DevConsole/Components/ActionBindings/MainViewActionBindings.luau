@@ -9,14 +9,14 @@ local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
 local MainRowPadding = ConstantsModule.GeneralFormatting.MainRowPadding
 local MainViewActionBindings = RoactModule.Component:extend("MainViewActionBindings")
 
-function MainViewActionBindings.init(p1) --[[ Line: 17 ]]
+function MainViewActionBindings.init(p1)
 	-- upvalues: RoactModule (copy)
-	function p1.onUtilTabHeightChanged(UtilTabHeight) --[[ Line: 18 ]]
+	function p1.onUtilTabHeightChanged(UtilTabHeight)
 		-- upvalues: p1 (copy)
 		p1:setState({ utilTabHeight = UtilTabHeight })
 	end
 	
-	function p1.onSearchTermChanged(p2) --[[ Line: 24 ]]
+	function p1.onSearchTermChanged(p2)
 		-- upvalues: p1 (copy)
 		p1.props.dispatchActionBindingsUpdateSearchFilter(p2, {})
 	end
@@ -25,11 +25,11 @@ function MainViewActionBindings.init(p1) --[[ Line: 17 ]]
 	p1.state = { utilTabHeight = 0 }
 end
 
-function MainViewActionBindings.didMount(p1) --[[ Line: 35 ]]
+function MainViewActionBindings.didMount(p1)
 	p1:setState({ utilTabHeight = p1.utilRef.current.Size.Y.Offset })
 end
 
-function MainViewActionBindings.didUpdate(p1) --[[ Line: 42 ]]
+function MainViewActionBindings.didUpdate(p1)
 	local Size = p1.utilRef.current.Size
 	
 	if Size.Y.Offset ~= p1.state.utilTabHeight then
@@ -37,7 +37,7 @@ function MainViewActionBindings.didUpdate(p1) --[[ Line: 42 ]]
 	end
 end
 
-function MainViewActionBindings.render(p1) --[[ Line: 51 ]]
+function MainViewActionBindings.render(p1)
 	-- upvalues: RoactModule (copy), ConstantsModule (copy), MainRowPadding (copy), UtilAndTabModule (copy), ActionBindingsChartModule (copy)
 	local Size = p1.props.size
 	local BindingsSearchTerm = p1.props.bindingsSearchTerm
@@ -71,14 +71,14 @@ function MainViewActionBindings.render(p1) --[[ Line: 51 ]]
 	})
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 91 | Named "mapStateToProps" ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	return {
 		bindingsSearchTerm = p1.ActionBindingsData.bindingsSearchTerm
 	}
-end, function(Callback) --[[ Line: 97 | Named "mapDispatchToProps" ]]
+end, function(Callback)
 	-- upvalues: ActionBindingsUpdateSearchFilterModule (copy)
 	return {
-		dispatchActionBindingsUpdateSearchFilter = function(p1, p2) --[[ Line: 99 ]]
+		dispatchActionBindingsUpdateSearchFilter = function(p1, p2)
 			-- upvalues: Callback (copy), ActionBindingsUpdateSearchFilterModule (upval)
 			Callback(ActionBindingsUpdateSearchFilterModule(p1, p2))
 		end

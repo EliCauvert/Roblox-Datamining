@@ -8,7 +8,7 @@ local ShallowTable = require(ViewRecyclerRoblox.Parent.ViewRecycler).Adapter._Pr
 local Frozen = table.freeze({ "key", "generation" })
 
 return {
-	new = function(Configuration) --[[ Line: 56 ]]
+	new = function(Configuration)
 		-- upvalues: MeasurementBatcherModule (copy), ReparentableHostModule (copy), CanvasItemPlacerModule (copy), MeasurerModule (copy), ShallowTable (copy), Frozen (copy), HostPresentationPhaseModule (copy)
 		local Configuration1 = {
 			container = Configuration.container,
@@ -20,14 +20,14 @@ return {
 		local NewMeasurementBatcher = MeasurementBatcherModule.new(Configuration.onItemMeasurements)
 		local Flag = false
 		
-		local function _(p1) --[[ Line: 67 | Named "disconnectMeasurer" ]]
+		local function _(p1)
 			if p1.measurer ~= nil then
 				p1.measurer.disconnect()
 				p1.measurer = nil
 			end
 		end
 		
-		local _ = function(p1) --[[ Line: 74 | Named "detachHost" ]]
+		local _ = function(p1)
 			-- upvalues: ReparentableHostModule (upval), CanvasItemPlacerModule (upval)
 			if p1.host ~= nil then
 				ReparentableHostModule.clearSelection(p1.host)
@@ -41,7 +41,7 @@ return {
 			p1.measurementIdentity = nil
 		end
 		
-		local function updateMeasurement(p1, MeasurementIdentity) --[[ Line: 84 ]]
+		local function updateMeasurement(p1, MeasurementIdentity)
 			-- upvalues: Configuration1 (ref), MeasurerModule (upval), NewMeasurementBatcher (copy)
 			p1.measurementIdentity = MeasurementIdentity
 			
@@ -50,11 +50,11 @@ return {
 					p1.measurer = MeasurerModule.attach({
 						instance = p1.host,
 						axis = Configuration1.axis,
-						getIdentity = function() --[[ Line: 96 ]]
+						getIdentity = function()
 							-- upvalues: p1 (copy)
 							return p1.measurementIdentity
 						end,
-						onItemMeasured = function(Tbl, Length) --[[ Line: 99 ]]
+						onItemMeasured = function(Tbl, Length)
 							-- upvalues: NewMeasurementBatcher (upval)
 							local Copy = table.clone(Tbl)
 							Copy.length = Length
@@ -71,7 +71,7 @@ return {
 			end
 		end
 		
-		local function getEntry(Key) --[[ Line: 109 ]]
+		local function getEntry(Key)
 			-- upvalues: Tbl (copy), CanvasItemPlacerModule (upval)
 			local Entry = Tbl[Key]
 			
@@ -91,7 +91,7 @@ return {
 			return Entry
 		end
 		
-		local function reportPresentation(p1, p2, p3) --[[ Line: 127 ]]
+		local function reportPresentation(p1, p2, p3)
 			-- upvalues: Configuration (copy)
 			local Generation = if p3 == nil then nil else p3.generation
 			
@@ -108,7 +108,7 @@ return {
 			end
 		end
 		
-		local function applyPhysical(p1, p2) --[[ Line: 143 ]]
+		local function applyPhysical(p1, p2)
 			-- upvalues: ReparentableHostModule (upval), CanvasItemPlacerModule (upval), Configuration (copy), ShallowTable (upval), Frozen (upval), Configuration1 (ref), HostPresentationPhaseModule (upval), updateMeasurement (copy), reportPresentation (copy)
 			local HostState = p2.hostState
 			local PlacementIntent = p2.placementIntent
@@ -257,21 +257,21 @@ return {
 		end
 		
 		return {
-			applyHostState = function(p1, HostState) --[[ Line: 213 ]]
+			applyHostState = function(p1, HostState)
 				-- upvalues: Flag (ref), getEntry (copy), applyPhysical (copy)
 				assert(not Flag, "HostPlacement: cannot apply Host state after destroy")
 				local Entry = getEntry(p1)
 				Entry.hostState = HostState
 				applyPhysical(p1, Entry)
 			end,
-			applyPlacementIntent = function(p1, PlacementIntent) --[[ Line: 219 ]]
+			applyPlacementIntent = function(p1, PlacementIntent)
 				-- upvalues: Flag (ref), getEntry (copy), applyPhysical (copy)
 				assert(not Flag, "HostPlacement: cannot apply Placement intent after destroy")
 				local Entry = getEntry(p1)
 				Entry.placementIntent = PlacementIntent
 				applyPhysical(p1, Entry)
 			end,
-			setConfiguration = function(Value) --[[ Line: 225 ]]
+			setConfiguration = function(Value)
 				-- upvalues: Flag (ref), Configuration1 (ref), Tbl (copy), applyPhysical (copy)
 				if not Flag then
 					local IsNotAxisMatch = Configuration1.axis ~= Value.axis
@@ -286,11 +286,11 @@ return {
 					end
 				end
 			end,
-			cancelPendingMeasurements = function() --[[ Line: 237 ]]
+			cancelPendingMeasurements = function()
 				-- upvalues: NewMeasurementBatcher (copy)
 				NewMeasurementBatcher.cancelPending()
 			end,
-			destroy = function() --[[ Line: 240 ]]
+			destroy = function()
 				-- upvalues: Flag (ref), NewMeasurementBatcher (copy), Tbl (copy), ReparentableHostModule (upval), CanvasItemPlacerModule (upval)
 				if Flag then return end
 				Flag = true

@@ -17,23 +17,23 @@ else
 	local GetResult = if FFlagAppChatPresenceStoreMigrationModule then DataHydrationModule.Presence.PresenceStore.get() else nil
 	local config = { localUserId = 0 }
 	
-	function ChatExternalEventReceiver(p1) --[[ Line: 42 ]]
+	function ChatExternalEventReceiver(p1)
 		-- upvalues: CryoModule (copy), config (copy), UseDispatchFunction (copy), UseEffectFunction (copy), FFlagAppChatPresenceStoreMigrationModule (copy), GetResult (copy), NetworkingPresenceModule (copy), SetUserPresencesFunction (copy), AppChatRealtimeExternal (copy), ChatFriendshipDestroyedModule (copy), ChatFriendshipCreatedModule (copy)
 		local JoinResult = CryoModule.Dictionary.join(config, p1)
 		local UseDispatchResult = UseDispatchFunction()
-		UseEffectFunction(function() --[[ Line: 47 ]]
+		UseEffectFunction(function()
 			-- upvalues: JoinResult (copy), CryoModule (upval), FFlagAppChatPresenceStoreMigrationModule (upval), GetResult (upval), UseDispatchResult (copy), NetworkingPresenceModule (upval), SetUserPresencesFunction (upval), AppChatRealtimeExternal (upval)
-			local PresenceBulkNotifications = JoinResult.robloxEventReceiver:observeEvent("PresenceBulkNotifications", function(p2) --[[ Line: 48 ]]
+			local PresenceBulkNotifications = JoinResult.robloxEventReceiver:observeEvent("PresenceBulkNotifications", function(p2)
 				-- upvalues: CryoModule (upval), FFlagAppChatPresenceStoreMigrationModule (upval), GetResult (upval), UseDispatchResult (upval), NetworkingPresenceModule (upval), SetUserPresencesFunction (upval), AppChatRealtimeExternal (upval)
-				local MapResult = CryoModule.List.map(p2, function(Player): string --[[ Line: 49 ]]
+				local MapResult = CryoModule.List.map(p2, function(Player): string
 					return (tostring(Player.UserId))
 				end)
 				
 				if not FFlagAppChatPresenceStoreMigrationModule then
-					UseDispatchResult(NetworkingPresenceModule.GetPresencesFromUserIds.API(MapResult)):andThen(function(Result) --[[ Line: 58 ]]
+					UseDispatchResult(NetworkingPresenceModule.GetPresencesFromUserIds.API(MapResult)):andThen(function(Result)
 						-- upvalues: UseDispatchResult (upval), SetUserPresencesFunction (upval)
 						UseDispatchResult(SetUserPresencesFunction(Result.responseBody.userPresences))
-					end):catch(function(Err) --[[ Line: 61 ]]
+					end):catch(function(Err)
 						-- upvalues: AppChatRealtimeExternal (upval)
 						AppChatRealtimeExternal:warning("NetworkingPresence failure in ChatExternalEventReceiver->PresenceBulkNotifications, Status: " .. tostring(Err))
 					end)
@@ -45,16 +45,16 @@ else
 				end
 			end)
 			
-			return function() --[[ Line: 70 ]]
+			return function()
 				-- upvalues: PresenceBulkNotifications (copy)
 				if PresenceBulkNotifications and PresenceBulkNotifications.disconnect then
 					PresenceBulkNotifications:disconnect()
 				end
 			end
 		end, { UseDispatchResult, JoinResult.robloxEventReceiver })
-		UseEffectFunction(function() --[[ Line: 78 ]]
+		UseEffectFunction(function()
 			-- upvalues: JoinResult (copy), UseDispatchResult (copy), ChatFriendshipDestroyedModule (upval), ChatFriendshipCreatedModule (upval)
-			local FriendshipNotifications = JoinResult.robloxEventReceiver:observeEvent("FriendshipNotifications", function(p2) --[[ Line: 79 ]]
+			local FriendshipNotifications = JoinResult.robloxEventReceiver:observeEvent("FriendshipNotifications", function(p2)
 				-- upvalues: JoinResult (upval), UseDispatchResult (upval), ChatFriendshipDestroyedModule (upval), ChatFriendshipCreatedModule (upval)
 				local Text: string = tostring(JoinResult.localUserId) == tostring(p2.EventArgs.UserId1) and tostring(p2.EventArgs.UserId2) or tostring(p2.EventArgs.UserId1)
 				
@@ -68,7 +68,7 @@ else
 				end
 			end)
 			
-			return function() --[[ Line: 91 ]]
+			return function()
 				-- upvalues: FriendshipNotifications (copy)
 				if FriendshipNotifications and FriendshipNotifications.disconnect then
 					FriendshipNotifications:disconnect()

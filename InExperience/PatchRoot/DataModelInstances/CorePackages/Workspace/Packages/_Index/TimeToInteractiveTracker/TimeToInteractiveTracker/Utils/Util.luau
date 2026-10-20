@@ -17,12 +17,12 @@ for _, value in require(TimeToInteractiveTracker.Milestones.constants) do
 		end
 	end
 end
-local function _(Text: string) --[[ Line: 35 | Named "sanitizeIdSegment" ]]
+local function _(Text: string)
 	return Text:gsub("[^%w_%-]", "_"):sub(1, 40)
 end
 
 return {
-	findLastMilestoneIndex = function(p1, Name): number? --[[ Line: 55 ]]
+	findLastMilestoneIndex = function(p1, Name): number?
 		for i = #p1, 1, -1 do
 			if p1[i].name == Name then
 				return i
@@ -30,7 +30,7 @@ return {
 		end
 		return nil
 	end,
-	deepCloneMilestones = function(Tbl) --[[ Line: 64 ]]
+	deepCloneMilestones = function(Tbl)
 		local Copy = table.clone(Tbl)
 		
 		for i, value in Copy do
@@ -56,16 +56,16 @@ return {
 		end
 		return Copy
 	end,
-	encodeMilestonesJSON = function(Input) --[[ Line: 87 ]]
+	encodeMilestonesJSON = function(Input)
 		-- upvalues: HttpService (copy)
-		local Success, Result = pcall(function() --[[ Line: 88 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: HttpService (upval), Input (copy)
 			return HttpService:JSONEncode(Input)
 		end)
 		
 		return if Success then Result else nil
 	end,
-	milestonesToProto = function(List) --[[ Line: 103 ]]
+	milestonesToProto = function(List)
 		local List1 = {}
 		
 		for _, value in List do
@@ -108,7 +108,7 @@ return {
 		end
 		return List1
 	end,
-	generateMilestoneStats = function(Text, List) --[[ Line: 172 ]]
+	generateMilestoneStats = function(Text, List)
 		-- upvalues: FFlagTTITrackerMemoryTrackingModule (copy)
 		local List1 = {}
 		
@@ -141,7 +141,7 @@ return {
 		end
 		return List1
 	end,
-	milestonesToPointsFields = function(List) --[[ Line: 240 ]]
+	milestonesToPointsFields = function(List)
 		-- upvalues: t (copy), FFlagTTITrackerMemoryTrackingModule (copy), t1 (copy)
 		local LuaHeapMBs = {}
 		

@@ -20,7 +20,7 @@ local ExpChatPresetChatEmojiTabExperimentation = require(Parent.SocialExperiment
 local PresetChatEmojiTabExposureLoggerModule = if ExpChatPresetChatEmojiTabExperimentation.isExperimentEnabled then require(script.Parent.PresetChat.PresetChatEmojiTabExposureLogger) else nil
 local GetFFlagExpChatTelemetryEventTriggerModule = require(ExpChat.Flags.getFFlagExpChatTelemetryEventTrigger)
 
-local function computePresetBitmap(AllTextChannels): number --[[ Line: 48 ]]
+local function computePresetBitmap(AllTextChannels): number
 	-- upvalues: GetPresetChatStoreModule (copy), ConstantsModule (copy), FFlagExpChatUniverseChatPresetEnabledModule (copy), TextChatService (copy)
 	local PresetChatStoreModule = GetPresetChatStoreModule(false)
 	
@@ -53,18 +53,18 @@ App.defaultProps = {
 	isSpatialUIEnabled = false,
 	store = require(script.Parent.createStore)(),
 	translator = {
-		FormatByKey = function(_, p1): string --[[ Line: 89 ]]
+		FormatByKey = function(_, p1): string
 			return (tostring(p1))
 		end
 	},
 	gameTranslator = {
-		TranslateGameText = function(_, _, p1) --[[ Line: 94 ]]
+		TranslateGameText = function(_, _, p1)
 			return p1
 		end
 	}
 }
 
-function App.render(p1) --[[ Line: 99 ]]
+function App.render(p1)
 	-- upvalues: RoactModule (copy), RoactRoduxModule (copy), LocalizationModule (copy), GameLocalizationModule (copy), ExpChatReconcileOnAgeVerifiedChange (copy), ExpChatEventReceiverModule (copy), FFlagExpChatEnableFriendsTab (copy), FriendsChatEventReceiverConnectorModule (copy), ShortcutNavReceiverModule (copy), ExpChatPresetChatEmojiTabExperimentation (copy), PresetChatEmojiTabExposureLoggerModule (copy), AppContainerModule (copy)
 	return p1.props.isDefaultChatEnabled and RoactModule.createElement(RoactRoduxModule.StoreProvider, { store = p1.props.store }, {
 		localization = RoactModule.createElement(LocalizationModule.Provider, { value = p1.props.translator }, {
@@ -94,7 +94,7 @@ function App.render(p1) --[[ Line: 99 ]]
 end
 
 if GetFFlagExpChatTelemetryEventTriggerModule() then
-	function App.didMount(p1) --[[ Line: 143 ]]
+	function App.didMount(p1)
 		-- upvalues: FFlagExpChatPresetChatEnabled (copy), GetPresetChatStoreModule (copy), ExpChatPresetChatLoadAnalyticsTimeoutMs (copy), TextChatService (copy), computePresetBitmap (copy)
 		local ExpChatLoadStartTime = p1.props.expChatLoadStartTime
 		
@@ -102,7 +102,7 @@ if GetFFlagExpChatTelemetryEventTriggerModule() then
 			if FFlagExpChatPresetChatEnabled then
 				local Elapsed = os.clock() - ExpChatLoadStartTime
 				local PresetChatStoreModule = GetPresetChatStoreModule(false)
-				task.spawn(function() --[[ Line: 152 ]]
+				task.spawn(function()
 					-- upvalues: PresetChatStoreModule (copy), ExpChatPresetChatLoadAnalyticsTimeoutMs (upval), p1 (copy), TextChatService (upval), Elapsed (copy), computePresetBitmap (upval)
 					local ClockTime = os.clock()
 					while PresetChatStoreModule.getIsLoading() and os.clock() - ClockTime < ExpChatPresetChatLoadAnalyticsTimeoutMs / 1000 do

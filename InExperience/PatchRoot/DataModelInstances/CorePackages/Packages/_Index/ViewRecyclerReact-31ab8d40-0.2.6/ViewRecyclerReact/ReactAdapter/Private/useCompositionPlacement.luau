@@ -4,30 +4,30 @@ local _ = require(ViewRecyclerReact.Parent.ViewRecycler)
 local ReactModule = require(ViewRecyclerReact.Parent.React)
 local _ = require(script.Parent.RecyclingRoot)
 
-return function(p1, MaxPoolSize, Diagnostics) --[[ Line: 8 | Named "useCompositionPlacement" ]]
+return function(p1, MaxPoolSize, Diagnostics)
 	-- upvalues: ReactModule (copy), CompositionPlacementModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
-	local UseStateResult1 = ReactModule.useState(function() --[[ Line: 14 ]]
+	local UseStateResult1 = ReactModule.useState(function()
 		-- upvalues: p1 (copy), MaxPoolSize (copy), Diagnostics (copy), CompositionPlacementModule (upval), UseStateResult2 (copy)
-		return CompositionPlacementModule.new(p1.getScope({ maxPoolSize = MaxPoolSize, diagnostics = Diagnostics }), function() --[[ Line: 19 ]]
+		return CompositionPlacementModule.new(p1.getScope({ maxPoolSize = MaxPoolSize, diagnostics = Diagnostics }), function()
 			-- upvalues: UseStateResult2 (upval)
-			UseStateResult2(function(p2: number): number --[[ Line: 20 ]]
+			UseStateResult2(function(p2: number): number
 				return p2 + 1
 			end)
 		end)
 	end)
 	local Scope = p1.getScope({ maxPoolSize = MaxPoolSize, diagnostics = Diagnostics })
-	ReactModule.useEffect(function() --[[ Line: 30 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Scope (copy), MaxPoolSize (copy)
 		Scope.setMaxPoolSize(MaxPoolSize)
 	end, { MaxPoolSize, Scope })
-	ReactModule.useLayoutEffect(function() --[[ Line: 34 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseStateResult1 (copy)
 		UseStateResult1.flush()
 	end, { UseStateResult1, UseStateResult })
-	ReactModule.useLayoutEffect(function() --[[ Line: 38 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseStateResult1 (copy)
-		return function() --[[ Line: 39 ]]
+		return function()
 			-- upvalues: UseStateResult1 (upval)
 			UseStateResult1.destroy()
 		end

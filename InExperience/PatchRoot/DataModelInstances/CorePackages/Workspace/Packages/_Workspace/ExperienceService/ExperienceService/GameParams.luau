@@ -1,11 +1,11 @@
 ﻿local _ = require(script.Parent.GameProtocolTypes)
 local GameParamsModule = {
-	new = function() --[[ Line: 9 ]]
+	new = function()
 		return { referralPage = "LuaChat" }
 	end
 }
 
-function GameParamsModule.fromPlaceId(PlaceId, IsTeamTest) --[[ Line: 17 ]]
+function GameParamsModule.fromPlaceId(PlaceId, IsTeamTest)
 	-- upvalues: GameParamsModule (copy)
 	local NewGameParams = GameParamsModule.new()
 	NewGameParams.placeId = PlaceId
@@ -14,7 +14,7 @@ function GameParamsModule.fromPlaceId(PlaceId, IsTeamTest) --[[ Line: 17 ]]
 	return NewGameParams
 end
 
-function GameParamsModule.fromUserId(UserId, PlaceId) --[[ Line: 26 ]]
+function GameParamsModule.fromUserId(UserId, PlaceId)
 	-- upvalues: GameParamsModule (copy)
 	local NewGameParams = GameParamsModule.new()
 	NewGameParams.userId = UserId
@@ -23,7 +23,7 @@ function GameParamsModule.fromUserId(UserId, PlaceId) --[[ Line: 26 ]]
 	return NewGameParams
 end
 
-function GameParamsModule.fromPlaceInstance(PlaceId, GameInstanceId) --[[ Line: 33 ]]
+function GameParamsModule.fromPlaceInstance(PlaceId, GameInstanceId)
 	-- upvalues: GameParamsModule (copy)
 	local NewGameParams = GameParamsModule.new()
 	NewGameParams.placeId = PlaceId
@@ -32,7 +32,7 @@ function GameParamsModule.fromPlaceInstance(PlaceId, GameInstanceId) --[[ Line: 
 	return NewGameParams
 end
 
-function GameParamsModule.fromConversationId(PlaceId, ConversationId) --[[ Line: 42 ]]
+function GameParamsModule.fromConversationId(PlaceId, ConversationId)
 	-- upvalues: GameParamsModule (copy)
 	local NewGameParams = GameParamsModule.new()
 	NewGameParams.placeId = PlaceId
@@ -41,7 +41,7 @@ function GameParamsModule.fromConversationId(PlaceId, ConversationId) --[[ Line:
 	return NewGameParams
 end
 
-function GameParamsModule.fromParams(List) --[[ Line: 51 ]]
+function GameParamsModule.fromParams(List)
 	-- upvalues: GameParamsModule (copy)
 	local NewGameParams = GameParamsModule.new()
 	

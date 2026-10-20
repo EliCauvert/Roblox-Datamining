@@ -15,9 +15,9 @@ local config = {
 if game:GetEngineFeature("CaptureServiceGalleryPermissionPrompt") then
 	config[PromptTypeModule.CapturePermissions] = CapturePermissionsPromptV2Module
 end
-return function(_) --[[ Line: 30 ]]
+return function(_)
 	-- upvalues: UseSelectorFunction (copy), ConstantsModule (copy), config (copy), ReactModule (copy), PromptConnectionsModule (copy)
-	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 31 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p1)
 		-- upvalues: ConstantsModule (upval)
 		return p1[ConstantsModule.RoduxKey].Prompts[1]
 	end)

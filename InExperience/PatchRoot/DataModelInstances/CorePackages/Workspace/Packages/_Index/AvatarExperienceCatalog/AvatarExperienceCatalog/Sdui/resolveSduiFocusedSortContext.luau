@@ -1,6 +1,6 @@
 ﻿local Logging = require(script:FindFirstAncestor("AvatarExperienceCatalog").Parent.AppCommonLib).Logging
 
-return function(p1) --[[ Line: 28 | Named "resolveSduiFocusedSortContext" ]]
+return function(p1)
 	-- upvalues: Logging (copy)
 	local SelectedCategoryId = p1.selectedCategoryId
 	

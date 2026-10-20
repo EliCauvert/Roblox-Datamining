@@ -26,7 +26,7 @@ local config = {
 	hasDivider = { hasDivider = true, isInset = false }
 }
 
-local function renderRowTrailing(AreNamesLoading, Text1, YOffset, p1) --[[ Line: 64 ]]
+local function renderRowTrailing(AreNamesLoading, Text1, YOffset, p1)
 	-- upvalues: ReactModule (copy), Skeleton (copy), Radius (copy), FFlagFixNonTruncatedTextModule (copy), Text (copy), Number (copy)
 	return if AreNamesLoading then ReactModule.createElement(Skeleton, {
 		Size = UDim2.new(0.3, 0, 0, YOffset),
@@ -41,7 +41,7 @@ local function renderRowTrailing(AreNamesLoading, Text1, YOffset, p1) --[[ Line:
 	})
 end
 
-return function(p1) --[[ Line: 91 | Named "EditProfileLandingV2" ]]
+return function(p1)
 	-- upvalues: UseProfileCardWidthFunction (copy), UseTokensFunction (copy), FFlagAXEnableProfileTab (copy), TextKeysModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), EditProfileHeaderBarModule (copy), UserTileModule (copy), IconButton (copy), IconName (copy), IconSize (copy), ButtonVariant (copy), List (copy), config (copy), renderRowTrailing (copy), FFlagFixNonTruncatedTextModule (copy), EditProfileProfileFramesSectionModule (copy)
 	local UseProfileCardWidthResult = UseProfileCardWidthFunction()
 	local UseTokensResult = UseTokensFunction()

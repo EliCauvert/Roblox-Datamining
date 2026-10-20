@@ -20,7 +20,7 @@ local PLOTHEIGHT: number = require(script.Parent.chartLayout).PLOT_HEIGHT
 local PLOTHEIGHTDelta = PLOTHEIGHT - 28
 local YOffset = PLOTHEIGHTDelta + -1
 
-local function renderTooltip(Position, Tooltip, Colors, TestId, Name, OnAbsoluteSizeChanged) --[[ Line: 130 ]]
+local function renderTooltip(Position, Tooltip, Colors, TestId, Name, OnAbsoluteSizeChanged)
 	-- upvalues: ReactModule (copy), View (copy), Text (copy), Icon (copy), IconSize (copy)
 	return ReactModule.createElement(View, {
 		ZIndex = 30,
@@ -58,7 +58,7 @@ local function renderTooltip(Position, Tooltip, Colors, TestId, Name, OnAbsolute
 	})
 end
 
-local function _(p1, p2) --[[ Line: 180 | Named "renderTitleBlock" ]]
+local function _(p1, p2)
 	-- upvalues: ReactModule (copy), Text (copy)
 	return ReactModule.createElement(Text, {
 		LayoutOrder = 1,
@@ -68,7 +68,7 @@ local function _(p1, p2) --[[ Line: 180 | Named "renderTitleBlock" ]]
 	})
 end
 
-local _ = function(p1, p2) --[[ Line: 191 | Named "renderSummary" ]]
+local _ = function(p1, p2)
 	-- upvalues: ReactModule (copy), Text (copy)
 	return ReactModule.createElement(Text, {
 		LayoutOrder = 2,
@@ -78,7 +78,7 @@ local _ = function(p1, p2) --[[ Line: 191 | Named "renderSummary" ]]
 	})
 end
 
-local function renderValueRow(p1, TestId) --[[ Line: 201 ]]
+local function renderValueRow(p1, TestId)
 	-- upvalues: ReactModule (copy), View (copy), Icon (copy), IconSize (copy), Text (copy), IconName (copy), IconVariant (copy)
 	local Colors = p1.colors
 	
@@ -129,7 +129,7 @@ local function renderValueRow(p1, TestId) --[[ Line: 201 ]]
 	})
 end
 
-local function measureGutter(YTicks, LabelFontSize, LabelFont): number --[[ Line: 263 ]]
+local function measureGutter(YTicks, LabelFontSize, LabelFont): number
 	-- upvalues: FoundationFontFaceMigration (copy), StyleModule (copy), TextService (copy)
 	local Value = 0
 	
@@ -139,7 +139,7 @@ local function measureGutter(YTicks, LabelFontSize, LabelFont): number --[[ Line
 	return (math.max(60, math.ceil(Value) + 2 + 12))
 end
 
-local function renderYAxisLabels(p1) --[[ Line: 281 ]]
+local function renderYAxisLabels(p1)
 	-- upvalues: PLOTHEIGHT (copy), ReactModule (copy), Text (copy)
 	local AxisLabel = p1.colors.axisLabel
 	local PLOTHEIGHTDelta = PLOTHEIGHT - 12 - 28
@@ -160,7 +160,7 @@ local function renderYAxisLabels(p1) --[[ Line: 281 ]]
 	return Elements
 end
 
-local function selectXAxisTicks(XAxisLabels, p2: number, FontSize, p3) --[[ Line: 308 ]]
+local function selectXAxisTicks(XAxisLabels, p2: number, FontSize, p3)
 	-- upvalues: FoundationFontFaceMigration (copy), StyleModule (copy), TextService (copy)
 	local CountXAxisLabels = #XAxisLabels
 	
@@ -213,7 +213,7 @@ local function selectXAxisTicks(XAxisLabels, p2: number, FontSize, p3) --[[ Line
 	return {}
 end
 
-local function renderXAxisLabels(p4, Offset, p5, LabelFontSize, LabelFont) --[[ Line: 372 ]]
+local function renderXAxisLabels(p4, Offset, p5, LabelFontSize, LabelFont)
 	-- upvalues: selectXAxisTicks (copy), ReactModule (copy), Text (copy), PLOTHEIGHTDelta (copy)
 	local AxisLabel = p4.colors.axisLabel
 	local Largest = math.max(p4.maxX - p4.minX, 0.000001)
@@ -233,7 +233,7 @@ local function renderXAxisLabels(p4, Offset, p5, LabelFontSize, LabelFont) --[[ 
 	return Elements
 end
 
-return function(p6) --[[ Line: 398 | Named "MetricChartView" ]]
+return function(p6)
 	-- upvalues: ReactModule (copy), renderValueRow (copy), measureGutter (copy), Curve (copy), InputDetector (copy), GridLine (copy), renderYAxisLabels (copy), renderXAxisLabels (copy), Point (copy), YOffset (copy), renderTooltip (copy), Canvas (copy), View (copy), PLOTHEIGHT (copy), Text (copy)
 	local TestId = p6.testId or "MetricChartView"
 	local Colors = p6.colors
@@ -313,7 +313,7 @@ return function(p6) --[[ Line: 398 | Named "MetricChartView" ]]
 			if p6.tooltip ~= nil then
 				local XRatio = (Point1.X - p6.minX) / math.max(p6.maxX - p6.minX, 0.000001)
 				local UseStateResultDelta = UseStateResult - 8
-				Tooltip = renderTooltip(UseBindingResult:map(function(p7: number): UDim2 --[[ Line: 503 ]]
+				Tooltip = renderTooltip(UseBindingResult:map(function(p7: number): UDim2
 					-- upvalues: MeasureGutterResult (copy), XRatio (copy), UseStateResultDelta (copy), YOffset (upval)
 					local NewMeasureGutterResult = MeasureGutterResult + XRatio * (UseStateResultDelta - MeasureGutterResult)
 					local v2 = p7 / 2
@@ -321,7 +321,7 @@ return function(p6) --[[ Line: 398 | Named "MetricChartView" ]]
 					local UseStateResultDeltaDelta = UseStateResultDelta - v2
 					
 					return UDim2.new(0, if NewMeasureGutterResult1 <= UseStateResultDeltaDelta then math.clamp(NewMeasureGutterResult, NewMeasureGutterResult1, UseStateResultDeltaDelta) else (MeasureGutterResult + UseStateResultDelta) / 2, 0, YOffset)
-				end), p6.tooltip, Colors, TestId, p6.icon, function(Frame) --[[ Line: 518 ]]
+				end), p6.tooltip, Colors, TestId, p6.icon, function(Frame)
 					-- upvalues: UseBindingResult2 (copy)
 					UseBindingResult2(Frame.AbsoluteSize.X)
 				end)
@@ -343,7 +343,7 @@ return function(p6) --[[ Line: 398 | Named "MetricChartView" ]]
 			tag = "clip",
 			Size = UDim2.new(1, 0, 0, PLOTHEIGHT),
 			testId = `{TestId}.Chart`,
-			onAbsoluteSizeChanged = function(Frame) --[[ Line: 547 ]]
+			onAbsoluteSizeChanged = function(Frame)
 				-- upvalues: UseStateResult2 (copy)
 				UseStateResult2(Frame.AbsoluteSize.X)
 			end

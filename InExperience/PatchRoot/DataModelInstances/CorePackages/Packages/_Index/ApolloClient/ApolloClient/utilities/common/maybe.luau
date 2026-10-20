@@ -1,9 +1,9 @@
 ﻿return {
-	maybe = function(Callback) --[[ Line: 10 ]]
-		local _, Result, Result3 = xpcall(function() --[[ Line: 12 ]]
+	maybe = function(Callback)
+		local _, Result, Result3 = xpcall(function()
 			-- upvalues: Callback (copy)
 			return Callback(), true
-		end, function() --[[ Line: 14 ]] end)
+		end, function() end)
 		
 		return if Result3 then Result else nil
 	end

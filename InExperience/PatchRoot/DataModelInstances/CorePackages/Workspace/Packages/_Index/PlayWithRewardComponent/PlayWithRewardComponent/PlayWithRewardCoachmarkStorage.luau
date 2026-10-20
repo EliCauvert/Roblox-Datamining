@@ -14,7 +14,7 @@ local InterfaceResult = TModule.interface({
 	isDismissed = TModule.boolean
 })
 
-local function _() --[[ Line: 49 | Named "getDefaultState" ]]
+local function _()
 	return {
 		windowStartTime = 0,
 		impressionCount = 0,
@@ -22,7 +22,7 @@ local function _() --[[ Line: 49 | Named "getDefaultState" ]]
 	}
 end
 
-local _ = function(p1) --[[ Line: 57 | Named "parseState" ]]
+local _ = function(p1)
 	-- upvalues: InterfaceResult (copy)
 	return if InterfaceResult(p1) then p1 else {
 		windowStartTime = 0,
@@ -31,12 +31,12 @@ local _ = function(p1) --[[ Line: 57 | Named "parseState" ]]
 	}
 end
 
-local function readStateLookup() --[[ Line: 66 ]]
+local function readStateLookup()
 	-- upvalues: PlayWithRewardCoachmarkStorageKeyEngineFeature (copy), AppStorageService (copy), HttpService (copy)
 	if not PlayWithRewardCoachmarkStorageKeyEngineFeature then
 		return nil
 	end
-	local Success, Result = pcall(function() --[[ Line: 71 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: AppStorageService (upval)
 		return AppStorageService:GetItem("PlayWithRewardCoachmark")
 	end)
@@ -46,7 +46,7 @@ local function readStateLookup() --[[ Line: 66 ]]
 	elseif Result == "" then
 		return {}
 	else
-		local Success1, Result1 = pcall(function() --[[ Line: 82 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: HttpService (upval), Result (copy)
 			return HttpService:JSONDecode(Result)
 		end)
@@ -55,21 +55,21 @@ local function readStateLookup() --[[ Line: 66 ]]
 	end
 end
 
-local function writeStateLookup(Input) --[[ Line: 92 ]]
+local function writeStateLookup(Input)
 	-- upvalues: HttpService (copy), AppStorageService (copy)
-	local Success, Result = pcall(function() --[[ Line: 93 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: HttpService (upval), Input (copy)
 		return HttpService:JSONEncode(Input)
 	end)
 	
-	return if Success and type(Result) == "string" then pcall(function() --[[ Line: 100 ]]
+	return if Success and type(Result) == "string" then pcall(function()
 		-- upvalues: AppStorageService (upval), Result (copy)
 		AppStorageService:SetItem("PlayWithRewardCoachmark", Result)
 		AppStorageService:Flush()
 	end) else false
 end
 
-local _ = function(p1, Callback) --[[ Line: 107 | Named "mutateStateLookup" ]]
+local _ = function(p1, Callback)
 	-- upvalues: readStateLookup (copy), InterfaceResult (copy), writeStateLookup (copy)
 	local StateLookup = readStateLookup()
 	
@@ -93,13 +93,13 @@ local _ = function(p1, Callback) --[[ Line: 107 | Named "mutateStateLookup" ]]
 	end
 end
 
-local _ = function(p1, p2): boolean --[[ Line: 126 | Named "hasWindowExpired" ]]
+local _ = function(p1, p2): boolean
 	-- upvalues: ScaledPlayWithRewardCoachmarkWindowDays (copy)
 	return p1.windowStartTime > 0 and ScaledPlayWithRewardCoachmarkWindowDays <= p2 - p1.windowStartTime
 end
 
 return {
-	consumeImpressionIfEligible = function(p1) --[[ Line: 132 ]]
+	consumeImpressionIfEligible = function(p1)
 		-- upvalues: FFlagPlayWithRewardCoachmarkOverlayFix (copy), PlayWithRewardCoachmarkMaxImpressions2 (copy), PlayWithRewardCoachmarkMaxImpressions (copy), PlayWithRewardCoachmarkStorageKeyEngineFeature (copy), ScaledPlayWithRewardCoachmarkWindowDays (copy), PlayWithRewardCoachmarkWindowResets (copy), readStateLookup (copy), InterfaceResult (copy), writeStateLookup (copy)
 		local PlayWithRewardCoachmarkMaxImpressions1 = if FFlagPlayWithRewardCoachmarkOverlayFix then PlayWithRewardCoachmarkMaxImpressions2 else PlayWithRewardCoachmarkMaxImpressions
 		
@@ -113,7 +113,7 @@ return {
 			windowStartTime = Timestamp
 		}
 		
-		local function _(DefaultState) --[[ Line: 148 ]]
+		local function _(DefaultState)
 			-- upvalues: config (copy), Timestamp (copy), ScaledPlayWithRewardCoachmarkWindowDays (upval), PlayWithRewardCoachmarkWindowResets (upval), PlayWithRewardCoachmarkMaxImpressions1 (copy)
 			if DefaultState.windowStartTime == 0 then
 				return config
@@ -160,9 +160,9 @@ return {
 			return (writeStateLookup(StateLookup))
 		end
 	end,
-	dismissCurrentWindow = function(p1) --[[ Line: 166 ]]
+	dismissCurrentWindow = function(p1)
 		-- upvalues: readStateLookup (copy), InterfaceResult (copy), writeStateLookup (copy)
-		local function _(DefaultState) --[[ Line: 167 ]]
+		local function _(DefaultState)
 			if DefaultState.windowStartTime == 0 or DefaultState.isDismissed then
 				return nil
 			else

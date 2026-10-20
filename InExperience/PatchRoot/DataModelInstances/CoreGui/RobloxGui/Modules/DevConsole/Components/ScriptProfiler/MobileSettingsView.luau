@@ -22,7 +22,7 @@ local DropDownArrowHeightRatio = DropDownArrowHeight / 2
 local DownArrow = ConstantsModule.Image.DownArrow
 local ScriptProfilerShowPlugins2 = game:DefineFastFlag("ScriptProfilerShowPlugins2", false)
 
-local function _(List, Callback) --[[ Line: 43 | Named "makeFormattedStringTable" ]]
+local function _(List, Callback)
 	local Buffer = table.create(#List)
 	
 	for _, value in List do
@@ -31,7 +31,7 @@ local function _(List, Callback) --[[ Line: 43 | Named "makeFormattedStringTable
 	return Buffer
 end
 
-local function formatTimeSelection(p1) --[[ Line: 53 ]]
+local function formatTimeSelection(p1)
 	-- upvalues: ProfilerUtilModule (copy)
 	return if p1 == 0 then "Off" else ProfilerUtilModule.formatTimer(p1)
 end
@@ -64,23 +64,23 @@ for _, value2 in List2 do
 end
 local MobileSettingsView = RoactModule.PureComponent:extend("MobileSettingsView")
 
-function MobileSettingsView:init() --[[ Line: 74 ]] end
+function MobileSettingsView:init() end
 
-function MobileSettingsView:didMount() --[[ Line: 76 ]] end
+function MobileSettingsView:didMount() end
 
-function MobileSettingsView:didUpdate() --[[ Line: 78 ]] end
+function MobileSettingsView:didUpdate() end
 
-function MobileSettingsView.GetState(p1, p2) --[[ Line: 80 ]]
+function MobileSettingsView.GetState(p1, p2)
 	return (if p1.props.isClientView then p1.props.client else p1.props.server)[p2]
 end
 
-function MobileSettingsView.UpdateState(p1, Key, State) --[[ Line: 86 ]]
+function MobileSettingsView.UpdateState(p1, Key, State)
 	local Copy = table.clone(if p1.props.isClientView then p1.props.client else p1.props.server)
 	Copy[Key] = State
 	p1.props.dispatchSetScriptProfilerState(p1.props.isClientView, Copy)
 end
 
-function MobileSettingsView:renderToggle(Text, State, Callback) --[[ Line: 95 ]]
+function MobileSettingsView:renderToggle(Text, State, Callback)
 	-- upvalues: RoactModule (copy), SmallFrameHeight (copy), ButtonWidth (copy), MainWindowHeader (copy), ButtonTextSize (copy), ConstantsModule (copy), UnselectedGray1 (copy), UnselectedGray (copy), SelectedBlue (copy)
 	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -113,7 +113,7 @@ function MobileSettingsView:renderToggle(Text, State, Callback) --[[ Line: 95 ]]
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
 				BackgroundColor3 = State and UnselectedGray or SelectedBlue,
-				[RoactModule.Event.Activated] = function() --[[ Line: 129 ]]
+				[RoactModule.Event.Activated] = function()
 					-- upvalues: Callback (copy)
 					Callback(false)
 				end
@@ -128,7 +128,7 @@ function MobileSettingsView:renderToggle(Text, State, Callback) --[[ Line: 95 ]]
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
 				BackgroundColor3 = State and SelectedBlue or UnselectedGray,
-				[RoactModule.Event.Activated] = function() --[[ Line: 145 ]]
+				[RoactModule.Event.Activated] = function()
 					-- upvalues: Callback (copy)
 					Callback(true)
 				end
@@ -137,14 +137,14 @@ function MobileSettingsView:renderToggle(Text, State, Callback) --[[ Line: 95 ]]
 	})
 end
 
-function MobileSettingsView.renderStateToggle(Humanoid: Humanoid, p1, p2, _) --[[ Line: 153 ]]
-	return Humanoid:renderToggle(p1, Humanoid:GetState(p2), function(p3) --[[ Line: 156 ]]
+function MobileSettingsView.renderStateToggle(Humanoid: Humanoid, p1, p2, _)
+	return Humanoid:renderToggle(p1, Humanoid:GetState(p2), function(p3)
 		-- upvalues: Humanoid (copy), p2 (copy)
 		Humanoid:UpdateState(p2, p3)
 	end)
 end
 
-function MobileSettingsView.renderDropDown(Humanoid: Humanoid, Text1, p1, DropDownList, p2, FoundIndex, IsProfilingState) --[[ Line: 161 ]]
+function MobileSettingsView.renderDropDown(Humanoid: Humanoid, Text1, p1, DropDownList, p2, FoundIndex, IsProfilingState)
 	-- upvalues: RoactModule (copy), ButtonWidth (copy), SmallFrameHeight (copy), ButtonTextSize (copy), Text (copy), MainWindow (copy), ConstantsModule (copy), DownArrow (copy), DropDownArrowHeight (copy), DropDownArrowHeightRatio (copy), DropDownModule (copy), MainWindowHeader (copy), UnselectedGray1 (copy)
 	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -187,7 +187,7 @@ function MobileSettingsView.renderDropDown(Humanoid: Humanoid, Text1, p1, DropDo
 				buttonSize = UDim2.new(1, 0, 0, SmallFrameHeight),
 				dropDownList = DropDownList,
 				selectedIndex = FoundIndex,
-				onSelection = function(p3) --[[ Line: 193 ]]
+				onSelection = function(p3)
 					-- upvalues: Humanoid (copy), p1 (copy), p2 (copy)
 					local State = Humanoid:GetState(p1)
 					
@@ -203,7 +203,7 @@ function MobileSettingsView.renderDropDown(Humanoid: Humanoid, Text1, p1, DropDo
 	})
 end
 
-function MobileSettingsView.render(Humanoid: Humanoid) --[[ Line: 229 ]]
+function MobileSettingsView.render(Humanoid: Humanoid)
 	-- upvalues: RoactModule (copy), ConstantsModule (copy), ScaledMainRowPadding (copy), ScriptProfilerShowPlugins2 (copy), Buffer (copy), List (copy), Buffer1 (copy), List1 (copy), ProfilerUtilModule (copy), Buffer2 (copy), List2 (copy), DropDownList (copy)
 	local IsProfilingState = Humanoid:GetState("isProfiling")
 	
@@ -218,7 +218,7 @@ function MobileSettingsView.render(Humanoid: Humanoid) --[[ Line: 229 ]]
 			Padding = UDim.new(0, ScaledMainRowPadding),
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		Percentages = Humanoid:renderToggle("Percentages", Humanoid.props.usePercentages, function(p1) --[[ Line: 245 ]]
+		Percentages = Humanoid:renderToggle("Percentages", Humanoid.props.usePercentages, function(p1)
 			-- upvalues: Humanoid (copy)
 			Humanoid.props.dispatchSetScriptProfilerUsePercentages(p1)
 		end),
@@ -232,17 +232,17 @@ function MobileSettingsView.render(Humanoid: Humanoid) --[[ Line: 229 ]]
 	})
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 296 | Named "mapStateToProps" ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	return {
 		usePercentages = p1.ScriptProfiler.usePercentages,
 		isClientView = p1.ScriptProfiler.isClientView,
 		client = p1.ScriptProfiler.client,
 		server = p1.ScriptProfiler.server
 	}
-end, function(Callback) --[[ Line: 305 | Named "mapDispatchToProps" ]]
+end, function(Callback)
 	-- upvalues: SetScriptProfilerStateModule (copy)
 	return {
-		dispatchSetScriptProfilerState = function(p1, p2) --[[ Line: 307 ]]
+		dispatchSetScriptProfilerState = function(p1, p2)
 			-- upvalues: Callback (copy), SetScriptProfilerStateModule (upval)
 			if p1 then
 				Callback(SetScriptProfilerStateModule(p1, nil, p2, nil))
@@ -252,7 +252,7 @@ end, function(Callback) --[[ Line: 305 | Named "mapDispatchToProps" ]]
 				Callback(SetScriptProfilerStateModule(p1, nil, nil, p2))
 			end
 		end,
-		dispatchSetScriptProfilerUsePercentages = function(p1) --[[ Line: 315 ]]
+		dispatchSetScriptProfilerUsePercentages = function(p1)
 			-- upvalues: Callback (copy), SetScriptProfilerStateModule (upval)
 			Callback(SetScriptProfilerStateModule(nil, p1))
 		end

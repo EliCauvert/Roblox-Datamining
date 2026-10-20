@@ -20,7 +20,7 @@ local _ = require(MomentsCreation.Types.CreationFlowTypes)
 local GetFFlagMomentsTTSStartTimePositioningModule = require(MomentsCreation.Flags.GetFFlagMomentsTTSStartTimePositioning)
 local Medium = if require(MomentsCreation.Flags.FFlagMomentsTTSCompactActionBar) then InputSize.Medium else InputSize.Large
 
-return function(p1) --[[ Line: 106 | Named "VoiceEditorView" ]]
+return function(p1)
 	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), ReactModule (copy), View (copy), VideoTimelineModule (copy), GetFFlagMomentsTTSStartTimePositioningModule (copy), AudioWaveformOverlayModule (copy), TextArea (copy), InputSize (copy), InputVariant (copy), StateLayerAffordance (copy), Text (copy), Icon (copy), BuilderIconsModule (copy), FoundationModule (copy), VoiceActionBarModule (copy), Button (copy), Medium (copy)
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseTokensResult = UseTokensFunction()

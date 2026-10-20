@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("DebugEnableUnibarDummyIntegrations", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("DebugEnableUnibarDummyIntegrations")
 end

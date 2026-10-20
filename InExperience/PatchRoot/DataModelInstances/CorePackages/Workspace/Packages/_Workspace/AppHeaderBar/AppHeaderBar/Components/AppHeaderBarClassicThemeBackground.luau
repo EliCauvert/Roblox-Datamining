@@ -16,14 +16,14 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local Image = FoundationModule.Image
 local View = FoundationModule.View
 
-local function _() --[[ Line: 40 | Named "getScreenWidth" ]]
+local function _()
 	-- upvalues: Workspace (copy), GuiService (copy)
 	local CurrentCamera = Workspace.CurrentCamera
 	
 	return if CurrentCamera then CurrentCamera.ViewportSize.X else GuiService:GetScreenResolution().X
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 45 | Named "AppHeaderBarClassicThemeBackground" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ResponsiveModule (copy), UseNavBarPlacementFunction (copy), UseNavBarSizeFunction (copy), Placement (copy), FFlagSplitPaneFixClassicThemeHeader (copy), SplitPaneStore (copy), SignalsReactModule (copy), SplitPaneModule (copy), ReactModule (copy), Workspace (copy), GuiService (copy), View (copy), Image (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDeviceInsetsResult = ResponsiveModule.useDeviceInsets()
@@ -41,7 +41,7 @@ return ReactModule.memo(function(p1) --[[ Line: 45 | Named "AppHeaderBarClassicT
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UDim2.fromOffset(0, 0))
 	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(UDim2.fromOffset(0, 0))
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 70 ]]
+	local UseResult = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), p1 (copy), UseDeviceInsetsResult (copy), UseNavBarSizeResult1 (copy), FFlagSplitPaneFixClassicThemeHeader (upval), IsUseSignalStateResultMatch (ref), UseSignalStateResult (ref), Workspace (upval), GuiService (upval), UseBindingResult2 (copy), UseBindingResult2_1 (copy)
 		if not Current then return end
 		UseRefResult.current = Current
@@ -67,7 +67,7 @@ return ReactModule.memo(function(p1) --[[ Line: 45 | Named "AppHeaderBarClassicT
 		if FFlagSplitPaneFixClassicThemeHeader then IsUseSignalStateResultMatch else nil,
 		if FFlagSplitPaneFixClassicThemeHeader then UseSignalStateResult else nil
 	})
-	ReactModule.useEffect(function() --[[ Line: 108 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult (copy), UseRefResult (copy), Workspace (upval), p1 (copy)
 		UseResult(UseRefResult.current)
 		local List = {}
@@ -85,12 +85,12 @@ return ReactModule.memo(function(p1) --[[ Line: 45 | Named "AppHeaderBarClassicT
 		local List1 = {}
 		
 		for _, Signal in List do
-			table.insert(List1, (Signal:Connect(function() --[[ Line: 126 ]]
+			table.insert(List1, (Signal:Connect(function()
 				-- upvalues: UseResult (upval), UseRefResult (upval)
 				UseResult(UseRefResult.current)
 			end)))
 		end
-		return function() --[[ Line: 132 ]]
+		return function()
 			-- upvalues: List1 (copy)
 			for _, Connection in List1 do
 				Connection:Disconnect()

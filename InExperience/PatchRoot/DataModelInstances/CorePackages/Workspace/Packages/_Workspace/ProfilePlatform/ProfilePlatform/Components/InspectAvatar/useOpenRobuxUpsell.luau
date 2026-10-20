@@ -9,13 +9,13 @@ local FFlagProfileInspectAndBuyKeepUpsellDialogOpenModule = require(ProfilePlatf
 local FFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module = require(ProfilePlatform.Flags.FFlagSocialEnableProfileInspectAndBuyAnalyticsV2)
 local FFlagEnableRecentActivityInspectAndBuy = require(Parent.SharedFlags).FFlagEnableRecentActivityInspectAndBuy
 
-return function(PriceInRobux, Callback) --[[ Line: 20 | Named "useOpenRobuxUpsell" ]]
+return function(PriceInRobux, Callback)
 	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), UseProfileWrapperContextModule (copy), ReactModule (copy), Parent (copy), FFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module (copy), FFlagEnableRecentActivityInspectAndBuy (copy), FFlagProfileInspectAndBuyKeepUpsellDialogOpenModule (copy), PromiseModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseNavigationResult = UseNavigationFunction()
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	
-	return ReactModule.useCallback(function() --[[ Line: 26 ]]
+	return ReactModule.useCallback(function()
 		-- upvalues: Parent (upval), UseDispatchResult (copy), FFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module (upval), UseProfileWrapperContextModuleResult (copy), FFlagEnableRecentActivityInspectAndBuy (upval), Callback (copy), FFlagProfileInspectAndBuyKeepUpsellDialogOpenModule (upval), UseNavigationResult (copy), PromiseModule (upval), PriceInRobux (copy)
 		local PurchasePromptLiteModule = require(Parent.PurchasePromptLite)
 		local CloseCentralOverlayFunction = require(Parent.CentralOverlay).Thunks.CloseCentralOverlay
@@ -25,7 +25,7 @@ return function(PriceInRobux, Callback) --[[ Line: 20 | Named "useOpenRobuxUpsel
 				surface = PurchasePromptLiteModule.Enums.ProductPurchaseSurface.Profile
 			} else nil,
 			purchaseCallbacks = {
-				onFlowComplete = function() --[[ Line: 38 ]]
+				onFlowComplete = function()
 					-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (copy), UseProfileWrapperContextModuleResult (upval), FFlagEnableRecentActivityInspectAndBuy (upval), Callback (upval), FFlagProfileInspectAndBuyKeepUpsellDialogOpenModule (upval), UseNavigationResult (upval)
 					UseDispatchResult(CloseCentralOverlayFunction())
 					local RefreshRobuxBalance: () -> () = if UseProfileWrapperContextModuleResult.postPurchase then UseProfileWrapperContextModuleResult.postPurchase.refreshRobuxBalance else nil
@@ -42,7 +42,7 @@ return function(PriceInRobux, Callback) --[[ Line: 20 | Named "useOpenRobuxUpsel
 						UseNavigationResult.goBack()
 					end
 				end,
-				fetchProductInfo = function() --[[ Line: 52 ]]
+				fetchProductInfo = function()
 					-- upvalues: PromiseModule (upval), PriceInRobux (upval)
 					return PromiseModule.resolve({
 						IsForSale = true,

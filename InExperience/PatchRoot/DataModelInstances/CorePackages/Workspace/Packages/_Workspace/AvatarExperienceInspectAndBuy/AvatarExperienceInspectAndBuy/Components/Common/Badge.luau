@@ -4,7 +4,7 @@ local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local IconSize = FoundationModule.Enums.IconSize
 
-return function(Frame) --[[ Line: 32 | Named "Badge" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FoundationModule (copy), IconSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	

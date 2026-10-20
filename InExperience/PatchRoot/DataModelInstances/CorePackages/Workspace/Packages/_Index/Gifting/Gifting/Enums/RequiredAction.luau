@@ -7,12 +7,12 @@ local t = {}
 for _, value in pairs(RequiredActionModule) do
 	t[value] = true
 end
-function RequiredActionModule.fromValue(p1) --[[ Line: 13 ]]
+function RequiredActionModule.fromValue(p1)
 	-- upvalues: t (copy)
 	return if p1 == nil or not t[p1] then nil else p1
 end
 
-function RequiredActionModule.fromValues(List) --[[ Line: 22 ]]
+function RequiredActionModule.fromValues(List)
 	-- upvalues: RequiredActionModule (copy)
 	if type(List) ~= "table" then
 		return nil

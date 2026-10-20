@@ -67,16 +67,16 @@ local config6 = {
 	RightBracket = true
 }
 
-local function _(p1): boolean --[[ Line: 141 | Named "isDeprecatedKeyCode" ]]
+local function _(p1): boolean
 	-- upvalues: config (copy)
 	return if config[p1] then true else p1:match("^World%d+$") ~= nil
 end
 
-local _ = function(p1): boolean --[[ Line: 148 | Named "isGamepadKeyCode" ]]
+local _ = function(p1): boolean
 	return p1:match("^Button") ~= nil or p1:match("^DPad") ~= nil or p1:match("^Thumbstick") ~= nil
 end
 
-local function getCategory(p1): string --[[ Line: 152 ]]
+local function getCategory(p1): string
 	-- upvalues: config (copy), config1 (copy), config2 (copy), config4 (copy), config5 (copy), config3 (copy), config6 (copy)
 	local Name = p1.Name
 	local Name1 = nil
@@ -96,10 +96,10 @@ local function getCategory(p1): string --[[ Line: 152 ]]
 	end
 end
 
-local function sortInCategory(p1, List1) --[[ Line: 191 ]]
+local function sortInCategory(p1, List1)
 	-- upvalues: List (copy)
 	if p1 == "Numbers" then
-		table.sort(List1, function(Value, Value1): boolean --[[ Line: 193 ]]
+		table.sort(List1, function(Value, Value1): boolean
 			-- upvalues: List (upval)
 			return (table.find(List, Value) or 0) < (table.find(List, Value1) or 0)
 		end)
@@ -107,7 +107,7 @@ local function sortInCategory(p1, List1) --[[ Line: 191 ]]
 		return
 	end
 	if p1 == "Function keys" then
-		table.sort(List1, function(A, B): boolean --[[ Line: 199 ]]
+		table.sort(List1, function(A, B): boolean
 			local Name = A.Name
 			local Name1 = nil
 			
@@ -133,7 +133,7 @@ local function sortInCategory(p1, List1) --[[ Line: 191 ]]
 		return
 	end
 	if p1 == "Deprecated" then
-		table.sort(List1, function(A, B): boolean --[[ Line: 205 ]]
+		table.sort(List1, function(A, B): boolean
 			local Name = A.Name
 			local Name1 = nil
 			
@@ -160,7 +160,7 @@ local function sortInCategory(p1, List1) --[[ Line: 191 ]]
 		
 		return
 	else
-		table.sort(List1, function(A, B): boolean --[[ Line: 222 ]]
+		table.sort(List1, function(A, B): boolean
 			local Name = A.Name
 			local Name1 = nil
 			
@@ -186,7 +186,7 @@ end
 
 return {
 	CATEGORY_ORDER = list,
-	getKeyCodeName = function(p1) --[[ Line: 127 ]]
+	getKeyCodeName = function(p1)
 		local Name = p1.Name
 		
 		if Name == "" then
@@ -198,7 +198,7 @@ return {
 		end
 	end,
 	getCategory = getCategory,
-	groupByCategory = function(List) --[[ Line: 228 ]]
+	groupByCategory = function(List)
 		-- upvalues: list (copy), getCategory (copy), sortInCategory (copy)
 		local t = {}
 		
@@ -214,7 +214,7 @@ return {
 		end
 		return t
 	end,
-	getNonEmptyCategories = function(p1) --[[ Line: 248 ]]
+	getNonEmptyCategories = function(p1)
 		-- upvalues: list (copy)
 		local List = {}
 		

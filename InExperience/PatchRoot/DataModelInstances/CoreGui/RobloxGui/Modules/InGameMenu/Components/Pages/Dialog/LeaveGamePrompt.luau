@@ -23,9 +23,9 @@ LeaveGamePrompt.validateProps = T.strictInterface({
 	onConfirm = T.optional(T.callback)
 })
 
-function LeaveGamePrompt.init(p1) --[[ Line: 35 ]]
+function LeaveGamePrompt.init(p1)
 	-- upvalues: SendAnalyticsModule (copy), ConstantsModule (copy), RunService (copy), GetDefaultQualityLevelFunction (copy)
-	function p1.leaveGameConfirm() --[[ Line: 36 ]]
+	function p1.leaveGameConfirm()
 		-- upvalues: SendAnalyticsModule (upval), ConstantsModule (upval), RunService (upval), GetDefaultQualityLevelFunction (upval)
 		SendAnalyticsModule(ConstantsModule.AnalyticsInGameMenuName, ConstantsModule.AnalyticsLeaveGameName, { confirmed = ConstantsModule.AnalyticsConfirmedName })
 		RunService.Heartbeat:Wait()
@@ -34,14 +34,14 @@ function LeaveGamePrompt.init(p1) --[[ Line: 35 ]]
 	end
 end
 
-function LeaveGamePrompt.render(p1) --[[ Line: 48 ]]
+function LeaveGamePrompt.render(p1)
 	-- upvalues: WithLocalizationModule (copy), GetFFlagEnableVRFTUXExperienceModule (copy), IsFTUXExperienceModule (copy), PlatformEnumModule (copy), Roact (copy), LeavePromptModule (copy)
 	return WithLocalizationModule({
 		titleText = "CoreScripts.InGameMenu.Prompt.LeaveGameTitle",
 		confirmText = "CoreScripts.InGameMenu.Prompt.LeaveGame",
 		cancelText = "CoreScripts.InGameMenu.Prompt.ResumeGame",
 		bodyText = if GetFFlagEnableVRFTUXExperienceModule() and IsFTUXExperienceModule(PlatformEnumModule.QuestVR) then "CoreScripts.InGameMenu.Prompt.VRFTUXLeaveGameBodyText" else "CoreScripts.InGameMenu.Prompt.LeaveGameBodyText"
-	})(function(p2) --[[ Line: 56 ]]
+	})(function(p2)
 		-- upvalues: Roact (upval), LeavePromptModule (upval), p1 (copy)
 		return Roact.createElement(LeavePromptModule, {
 			titleText = p2.titleText,
@@ -56,16 +56,16 @@ function LeaveGamePrompt.render(p1) --[[ Line: 48 ]]
 	end)
 end
 
-return RoactRodux.UNSTABLE_connect2(function(p1, _) --[[ Line: 70 ]]
+return RoactRodux.UNSTABLE_connect2(function(p1, _)
 	-- upvalues: ConstantsModule (copy)
 	return {
 		canGamepadCaptureFocus = p1.menuPage == ConstantsModule.LeaveGamePromptPageKey and p1.displayOptions.inputType == ConstantsModule.InputType.Gamepad and (not p1.respawn.dialogOpen and p1.currentZone == 1),
 		canKeyboardCaptureFocus = p1.menuPage == ConstantsModule.LeaveGamePromptPageKey and p1.displayOptions.inputType == ConstantsModule.InputType.MouseAndKeyboard and not p1.respawn.dialogOpen
 	}
-end, function(Callback) --[[ Line: 84 ]]
+end, function(Callback)
 	-- upvalues: CloseMenuModule (copy), SendAnalyticsModule (copy), ConstantsModule (copy)
 	return {
-		closeMenu = function() --[[ Line: 86 ]]
+		closeMenu = function()
 			-- upvalues: Callback (copy), CloseMenuModule (upval), SendAnalyticsModule (upval), ConstantsModule (upval)
 			Callback(CloseMenuModule)
 			SendAnalyticsModule(ConstantsModule.AnalyticsInGameMenuName, ConstantsModule.AnalyticsLeaveGameName, { confirmed = ConstantsModule.AnalyticsCancelledName })

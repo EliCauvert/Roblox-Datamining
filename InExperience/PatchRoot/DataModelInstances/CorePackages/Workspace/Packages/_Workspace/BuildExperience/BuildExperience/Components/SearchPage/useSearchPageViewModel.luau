@@ -16,7 +16,7 @@ local config = {
 	[ReactModule.Tag] = "fill"
 }
 
-return function(p1, ScrollingFrameRef) --[[ Line: 42 | Named "useSearchPageViewModel" ]]
+return function(p1, ScrollingFrameRef)
 	-- upvalues: ReactModule (copy), CryoModule (copy), config (copy)
 	return {
 		children = p1.children,
@@ -25,7 +25,7 @@ return function(p1, ScrollingFrameRef) --[[ Line: 42 | Named "useSearchPageViewM
 		onCanvasPositionChangedCallback = p1.onCanvasPositionChangedCallback,
 		onCanvasSizeChangedCallback = p1.onCanvasSizeChangedCallback,
 		refresh = p1.refresh,
-		scrollingElementProps = ReactModule.useMemo(function() --[[ Line: 43 ]]
+		scrollingElementProps = ReactModule.useMemo(function()
 			-- upvalues: CryoModule (upval), config (upval), p1 (copy)
 			return CryoModule.Dictionary.join(config, p1.scrollingElementProps or {})
 		end, { p1.scrollingElementProps }),

@@ -10,7 +10,7 @@ local CursorKind = UIBloxModule.App.SelectionImage.CursorKind
 local _ = require(AvatarExperienceUIKit.BackgroundLayers.BackgroundLayers)
 local ItemCardBackgroundsWrapperModule = require(script.Parent.ItemCardBackgroundsWrapper)
 
-return (ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 29 ]]
+return (ReactModule.forwardRef(function(Frame: Frame, Ref)
 	-- upvalues: UseSelectionCursorFunction (copy), CursorKind (copy), UseTokensFunction (copy), ReactModule (copy), ItemCardBackgroundsWrapperModule (copy), View (copy)
 	local UseSelectionCursorResult = UseSelectionCursorFunction(CursorKind.RoundedRect)
 	local UseTokensResult = UseTokensFunction()

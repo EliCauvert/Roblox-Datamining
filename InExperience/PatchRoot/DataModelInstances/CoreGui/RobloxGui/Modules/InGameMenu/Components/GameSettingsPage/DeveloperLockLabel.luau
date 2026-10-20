@@ -11,14 +11,14 @@ local StrictInterfaceResult = T.strictInterface({
 	AnchorPoint = T.Vector2
 })
 
-return function(p1) --[[ Line: 20 ]]
+return function(p1)
 	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), WithLocalizationModule (copy), Roact (copy), ThemedTextLabelModule (copy)
 	if GlobalConfigModule.propValidation then
 		assert(StrictInterfaceResult(p1))
 	end
 	return WithLocalizationModule({
 		lockedText = "CoreScripts.InGameMenu.GameSettings.LockedByDeveloper"
-	})(function(p2) --[[ Line: 27 ]]
+	})(function(p2)
 		-- upvalues: Roact (upval), ThemedTextLabelModule (upval)
 		return Roact.createElement(ThemedTextLabelModule, {
 			themeKey = "TextDefault",

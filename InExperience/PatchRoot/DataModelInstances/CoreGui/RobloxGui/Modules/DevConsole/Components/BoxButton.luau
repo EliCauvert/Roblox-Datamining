@@ -8,7 +8,7 @@ local Text = ConstantsModule.Color.Text
 local UnselectedGray = ConstantsModule.Color.UnselectedGray
 local InactiveBox = ConstantsModule.Color.InactiveBox
 
-return function(p1) --[[ Line: 20 | Named "BoxButton" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), RoactModule (copy), MainWindowHeader1 (copy), Text (copy), MainWindowHeader (copy), UnselectedGray (copy), InactiveBox (copy)
 	local _ = p1.onClicked
 	local IsNotBoolean = typeof(p1.enabled) ~= "boolean" or p1.enabled
@@ -24,7 +24,7 @@ return function(p1) --[[ Line: 20 | Named "BoxButton" ]]
 		BackgroundColor3 = if IsNotBoolean then UnselectedGray else InactiveBox,
 		Active = IsNotBoolean,
 		BackgroundTransparency = 0,
-		[RoactModule.Event.Activated] = ReactModule.useCallback(function() --[[ Line: 28 ]]
+		[RoactModule.Event.Activated] = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy)
 			p1.onClicked(p1.text)
 		end, { p1.onClicked, p1.text })

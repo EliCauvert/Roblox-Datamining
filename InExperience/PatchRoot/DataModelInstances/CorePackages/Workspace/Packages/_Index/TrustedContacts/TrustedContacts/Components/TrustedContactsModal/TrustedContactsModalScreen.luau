@@ -6,7 +6,7 @@ local UseOverlayFunction = require(Parent.Foundation).Hooks.useOverlay
 local TrustedFriendsCardWithActionsCheckModule = require(script.Parent.TrustedFriendsCardWithActionsCheck)
 local _ = require(TrustedContacts.Common.Types)
 
-return function(p1) --[[ Line: 14 ]]
+return function(p1)
 	-- upvalues: UseOverlayFunction (copy), ReactRobloxModule (copy), ReactModule (copy), TrustedFriendsCardWithActionsCheckModule (copy)
 	local ModalProps = p1.screenProps.modalProps
 	local ExternalNavigation = p1.screenProps.externalNavigation

@@ -29,7 +29,7 @@ CameraModeEntry.validateProps = T.strictInterface({
 })
 CameraModeEntry.defaultProps = { canOpen = true }
 
-function CameraModeEntry.init(p1) --[[ Line: 52 ]]
+function CameraModeEntry.init(p1)
 	-- upvalues: UserGameSettings (copy), PlayerScripts (copy), LocalPlayer (copy)
 	p1:setState({
 		selectedComputerMode = UserGameSettings.ComputerCameraMovementMode,
@@ -38,12 +38,12 @@ function CameraModeEntry.init(p1) --[[ Line: 52 ]]
 	})
 end
 
-function CameraModeEntry.render(p1) --[[ Line: 60 ]]
+function CameraModeEntry.render(p1)
 	-- upvalues: Roact (copy), ExternalEventConnectionModule (copy), ComputerCameraMovementModePropertyChangedSignal (copy), UserGameSettings (copy), PlayerScripts (copy), DevComputerMovementModePropertyChangedSignal (copy), LocalPlayer (copy), config (copy), InputLabelModule (copy), WithLocalizationModule (copy), DropDownSelectionModule (copy), SendAnalyticsModule (copy), ConstantsModule (copy), DeveloperLockLabelModule (copy)
 	local config1 = {
 		ComputerCameraMovementModeListener = Roact.createElement(ExternalEventConnectionModule, {
 			event = ComputerCameraMovementModePropertyChangedSignal,
-			callback = function() --[[ Line: 66 ]]
+			callback = function()
 				-- upvalues: p1 (copy), UserGameSettings (upval)
 				p1:setState({
 					selectedComputerMode = UserGameSettings.ComputerCameraMovementMode
@@ -52,7 +52,7 @@ function CameraModeEntry.render(p1) --[[ Line: 60 ]]
 		}),
 		ComputerCameraMovementModeRegisteredListener = PlayerScripts and Roact.createElement(ExternalEventConnectionModule, {
 			event = PlayerScripts.ComputerCameraMovementModeRegistered,
-			callback = function() --[[ Line: 75 ]]
+			callback = function()
 				-- upvalues: p1 (copy), PlayerScripts (upval)
 				p1:setState({
 					computerOptions = PlayerScripts:GetRegisteredComputerCameraMovementModes()
@@ -61,7 +61,7 @@ function CameraModeEntry.render(p1) --[[ Line: 60 ]]
 		}),
 		LocalPlayerComputerMovementMode = Roact.createElement(ExternalEventConnectionModule, {
 			event = DevComputerMovementModePropertyChangedSignal,
-			callback = function() --[[ Line: 83 ]]
+			callback = function()
 				-- upvalues: p1 (copy), LocalPlayer (upval)
 				p1:setState({
 					developerComputerMode = LocalPlayer.DevComputerCameraMode
@@ -105,7 +105,7 @@ function CameraModeEntry.render(p1) --[[ Line: 60 ]]
 		}),
 		Dropdown = WithLocalizationModule({
 			placeholder = IsNotDeveloperComputerModeMatch and config[p1.state.developerComputerMode] or nil
-		})(function(_) --[[ Line: 128 ]]
+		})(function(_)
 			-- upvalues: Roact (upval), DropDownSelectionModule (upval), Selections (copy), SelectedIndex (ref), p1 (copy), IsNotDeveloperComputerModeMatch (copy), UserGameSettings (upval), SendAnalyticsModule (upval), ConstantsModule (upval)
 			return Roact.createElement(DropDownSelectionModule, {
 				localize = true,
@@ -116,7 +116,7 @@ function CameraModeEntry.render(p1) --[[ Line: 60 ]]
 				selectedIndex = SelectedIndex,
 				placeHolderText = p1.state.developerComputerMode.Name,
 				enabled = not IsNotDeveloperComputerModeMatch,
-				selectionChanged = function(p2) --[[ Line: 137 ]]
+				selectionChanged = function(p2)
 					-- upvalues: UserGameSettings (upval), p1 (upval), SendAnalyticsModule (upval), ConstantsModule (upval)
 					UserGameSettings.ComputerCameraMovementMode = p1.state.computerOptions[p2]
 					SendAnalyticsModule(ConstantsModule.AnalyticsSettingsChangeName, nil, {}, true)

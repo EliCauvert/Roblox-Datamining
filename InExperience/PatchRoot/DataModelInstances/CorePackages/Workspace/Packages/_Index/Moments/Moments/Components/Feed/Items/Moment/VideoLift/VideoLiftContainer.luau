@@ -2,7 +2,7 @@
 local VideoLiftViewModule = require(script.Parent.VideoLiftView)
 local UseVideoLiftViewModelModule = require(script.Parent.useVideoLiftViewModel)
 
-return function(p1) --[[ Line: 19 | Named "VideoLiftContainer" ]]
+return function(p1)
 	-- upvalues: UseVideoLiftViewModelModule (copy), ReactModule (copy), VideoLiftViewModule (copy)
 	local UseVideoLiftViewModelModuleResult = UseVideoLiftViewModelModule(p1.feedItemId)
 	

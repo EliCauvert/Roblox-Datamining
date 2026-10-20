@@ -3,9 +3,9 @@ local UseSelectorFunction = require(ProfileShareLinks.Parent.RoactUtils).Hooks.R
 local ConstantsModule = require(ProfileShareLinks.Common.Constants)
 local GetDeepValueModule = require(ProfileShareLinks.Common.getDeepValue)
 
-return function() --[[ Line: 9 ]]
+return function()
 	-- upvalues: UseSelectorFunction (copy), GetDeepValueModule (copy), ConstantsModule (copy)
-	return UseSelectorFunction(function(p1) --[[ Line: 10 ]]
+	return UseSelectorFunction(function(p1)
 		-- upvalues: GetDeepValueModule (upval), ConstantsModule (upval)
 		return GetDeepValueModule(p1, `{ConstantsModule.RODUX_KEY}.ProfileShareLinks.shortUrl`)
 	end)

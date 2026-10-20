@@ -9,19 +9,19 @@ local t = {}
 for _, value in require(DataHydration.Parent.MomentsTypes).Enums.ReactionType do
 	t[value] = true
 end
-local function _(p1): boolean --[[ Line: 33 | Named "isValidReactionType" ]]
+local function _(p1): boolean
 	-- upvalues: t (copy), ResolveEmoteIdModule (copy)
 	return t[p1] == true or t[ResolveEmoteIdModule.normalizeName(p1)] == true
 end
 
-local _ = function(p1) --[[ Line: 37 | Named "asReactionType" ]]
+local _ = function(p1)
 	-- upvalues: ResolveEmoteIdModule (copy), t (copy)
 	local NormalizeNameResult = ResolveEmoteIdModule.normalizeName(p1)
 	
 	return if t[NormalizeNameResult] then NormalizeNameResult else nil
 end
 
-local function convertReactionCountsArray(ReactionCounts, Emojis) --[[ Line: 45 ]]
+local function convertReactionCountsArray(ReactionCounts, Emojis)
 	-- upvalues: ResolveEmoteIdModule (copy), t (copy)
 	local t1 = {}
 	local Flag = false
@@ -72,7 +72,7 @@ local function convertReactionCountsArray(ReactionCounts, Emojis) --[[ Line: 45 
 	return if Flag then t1 else nil
 end
 
-local function convertLegacyApiReactions(Reactions) --[[ Line: 106 ]]
+local function convertLegacyApiReactions(Reactions)
 	-- upvalues: FFlagMomentsEmojiSetsApiModule (copy), t (copy), ResolveEmoteIdModule (copy)
 	local t2 = {}
 	local Flag = false
@@ -117,7 +117,7 @@ local function convertLegacyApiReactions(Reactions) --[[ Line: 106 ]]
 	return if Flag then t2 else nil
 end
 
-local _ = function(p1, p2) --[[ Line: 151 | Named "convertApiReactions" ]]
+local _ = function(p1, p2)
 	-- upvalues: FFlagMomentsEmojiSetsApiModule (copy), convertReactionCountsArray (copy), convertLegacyApiReactions (copy)
 	if type(p1) ~= "table" then
 		return nil
@@ -136,7 +136,7 @@ local _ = function(p1, p2) --[[ Line: 151 | Named "convertApiReactions" ]]
 	return (convertLegacyApiReactions(p1))
 end
 
-return function(List) --[[ Line: 169 | Named "extractReactionsByMomentId" ]]
+return function(List)
 	-- upvalues: FFlagMomentsEmojiSetsApiModule (copy), ResolveMomentsEmojiCatalogModule (copy), HardcodedMomentsEmojisModule (copy), convertReactionCountsArray (copy), convertLegacyApiReactions (copy)
 	local t = {}
 	local Emojis = if FFlagMomentsEmojiSetsApiModule then ResolveMomentsEmojiCatalogModule.resolveMomentsEmojiCatalog(nil).emojis else HardcodedMomentsEmojisModule

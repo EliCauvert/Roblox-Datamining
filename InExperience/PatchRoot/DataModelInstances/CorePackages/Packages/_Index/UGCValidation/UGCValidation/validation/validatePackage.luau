@@ -6,7 +6,7 @@ local ValidateAssetCreatorModule = require(Parent.validation.validateAssetCreato
 local ParseContentIdsModule = require(Parent.util.ParseContentIds)
 local _ = require(Parent.util.Types)
 
-return function(p1) --[[ Line: 12 | Named "validatePackage" ]]
+return function(p1)
 	-- upvalues: ValidateSingleInstanceModule (copy), ParseContentIdsModule (copy), ConstantsModule (copy), AnalyticsModule (copy), ValidateAssetCreatorModule (copy)
 	assert(p1.instances ~= nil, "instances required in validationContext for validatePackage")
 	local Instances = p1.instances

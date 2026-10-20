@@ -2,7 +2,7 @@
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 
-return ReactModule.memo(function(Frame) --[[ Line: 15 | Named "CheckoutUnavailableButton" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: ReactModule (copy), FoundationModule (copy)
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "size-full-0 auto-y fill",

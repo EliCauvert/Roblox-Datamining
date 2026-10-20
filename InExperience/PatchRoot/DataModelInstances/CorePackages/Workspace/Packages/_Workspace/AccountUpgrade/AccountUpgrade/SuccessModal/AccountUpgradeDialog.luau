@@ -14,16 +14,16 @@ local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 local FFlagAccountUpgradeOAuthDialogFitsContentModule = require(AccountUpgrade.Flags.FFlagAccountUpgradeOAuthDialogFitsContent)
 
-local function useFitHeights(IsFitsContent) --[[ Line: 65 ]]
+local function useFitHeights(IsFitsContent)
 	-- upvalues: FoundationModule (copy), ReactModule (copy)
 	local UseOverlayResult = FoundationModule.Hooks.useOverlay()
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(1e999)
 	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(0)
 	local UseBindingResult3, UseBindingResult2_2 = ReactModule.useBinding(0)
-	ReactModule.useEffect(function() --[[ Line: 70 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsFitsContent (copy), UseOverlayResult (copy), UseBindingResult2 (copy)
 		if not IsFitsContent or UseOverlayResult == nil then return end
-		local function updateOverlayHeight() --[[ Line: 75 ]]
+		local function updateOverlayHeight()
 			-- upvalues: UseBindingResult2 (upval), UseOverlayResult (copy)
 			UseBindingResult2(UseOverlayResult.AbsoluteSize.Y)
 		end
@@ -31,7 +31,7 @@ local function useFitHeights(IsFitsContent) --[[ Line: 65 ]]
 		UseBindingResult2(UseOverlayResult.AbsoluteSize.Y)
 		local Connection = UseOverlayResult:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateOverlayHeight)
 		
-		return function() --[[ Line: 80 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end
@@ -46,7 +46,7 @@ local function useFitHeights(IsFitsContent) --[[ Line: 65 ]]
 	}
 end
 
-return function(p1) --[[ Line: 94 | Named "AccountUpgradeDialog" ]]
+return function(p1)
 	-- upvalues: FoundationModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), FFlagAccountUpgradeOAuthDialogFitsContentModule (copy), useFitHeights (copy), ReactModule (copy), View (copy), Text (copy), Dialog (copy), Icon (copy), IconName (copy), IconSize (copy), DialogSize (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseFocusRootResult = UseFocusRootFunction({
@@ -133,7 +133,7 @@ return function(p1) --[[ Line: 94 | Named "AccountUpgradeDialog" ]]
 			Element = ReactModule.createElement(View, {
 				tag = "col size-full-0 auto-y",
 				LayoutOrder = 1,
-				onAbsoluteSizeChanged = function(Frame) --[[ Line: 201 ]]
+				onAbsoluteSizeChanged = function(Frame)
 					-- upvalues: SetHeaderHeightFunction (copy)
 					SetHeaderHeightFunction(Frame.AbsoluteSize.Y)
 				end
@@ -154,7 +154,7 @@ return function(p1) --[[ Line: 94 | Named "AccountUpgradeDialog" ]]
 					UseFitHeightsResult.overlayHeight,
 					UseFitHeightsResult.headerHeight,
 					UseFitHeightsResult.contentHeight
-				}):map(function(Entry): UDim2 --[[ Line: 216 ]]
+				}):map(function(Entry): UDim2
 					-- upvalues: UseTokensResult (copy)
 					local Entry1: number = Entry[2]
 					
@@ -170,7 +170,7 @@ return function(p1) --[[ Line: 94 | Named "AccountUpgradeDialog" ]]
 					FillDirection = Enum.FillDirection.Vertical,
 					HorizontalFlex = Enum.UIFlexAlignment.Fill,
 					SortOrder = Enum.SortOrder.LayoutOrder,
-					[ReactModule.Change.AbsoluteContentSize] = function(p2) --[[ Line: 246 ]]
+					[ReactModule.Change.AbsoluteContentSize] = function(p2)
 						-- upvalues: SetContentHeightFunction (copy)
 						SetContentHeightFunction(p2.AbsoluteContentSize.Y)
 					end

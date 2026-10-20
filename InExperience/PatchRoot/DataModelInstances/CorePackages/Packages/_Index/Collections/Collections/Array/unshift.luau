@@ -3,7 +3,7 @@ local Parent = script.Parent
 local IsArrayModule = require(Parent.isArray)
 local _ = require(Parent.Parent.Parent.ES7Types)
 
-return function(List, ...): number --[[ Line: 23 ]]
+return function(List, ...): number
 	-- upvalues: DEV (copy), IsArrayModule (copy)
 	if DEV and not IsArrayModule(List) then
 		error(string.format("Array.unshift called on non-array %s", (typeof(List))))

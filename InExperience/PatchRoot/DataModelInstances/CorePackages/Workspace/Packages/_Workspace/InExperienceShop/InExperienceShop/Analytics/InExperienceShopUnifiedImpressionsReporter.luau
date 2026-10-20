@@ -5,9 +5,9 @@ local FFlagAllowCustomUnifiedEventFilter = AvatarExperienceAnalyticsModule.Flags
 local InExperienceShopUnifiedEventFilterModule = require(script.Parent.InExperienceShopUnifiedEventFilter)
 local GetShopUnifiedLoggingSurfaceModule = require(script.Parent.getShopUnifiedLoggingSurface)
 
-return function(p1) --[[ Line: 12 | Named "InExperienceShopUnifiedImpressionsReporter" ]]
+return function(p1)
 	-- upvalues: GetShopUnifiedLoggingSurfaceModule (copy), FFlagAllowCustomUnifiedEventFilter (copy), InExperienceShopUnifiedEventFilterModule (copy), SendUnifiedEventLogForInstanceFunction (copy), UnifiedEventLogEnums (copy)
-	return function(p2) --[[ Line: 13 ]]
+	return function(p2)
 		-- upvalues: GetShopUnifiedLoggingSurfaceModule (upval), p1 (copy), FFlagAllowCustomUnifiedEventFilter (upval), InExperienceShopUnifiedEventFilterModule (upval), SendUnifiedEventLogForInstanceFunction (upval), UnifiedEventLogEnums (upval)
 		SendUnifiedEventLogForInstanceFunction(p2.visibleInstance, {
 			action = UnifiedEventLogEnums.MarketplaceUnifiedAction.ITEM_IMPRESSION,

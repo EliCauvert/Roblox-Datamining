@@ -6,15 +6,15 @@ local PromiseUtilities = require(Parent.AppCommonLib).Utils.PromiseUtilities
 local FetchSubdividedThumbnailsModule = require(script.Parent.FetchSubdividedThumbnails)
 local PerformFetchModule = require(Http.PerformFetch)
 
-local function _(p1): string --[[ Line: 15 | Named "convertToId" ]]
+local function _(p1): string
 	return (tostring(p1))
 end
 
-local function KeyMapper(p1): string --[[ Line: 21 ]]
+local function KeyMapper(p1): string
 	return "luaapp.thumbnails." .. tostring(p1.targetId) .. (p1.iconSize and "." .. p1.iconSize or "") .. (p1.requestName and "." .. p1.requestName or "")
 end
 
-local function subdivideIdsArray(p1, p2: number) --[[ Line: 30 ]]
+local function subdivideIdsArray(p1, p2: number)
 	-- upvalues: CryoModule (copy)
 	local List = {}
 	
@@ -26,7 +26,7 @@ end
 
 return {
 	KeyMapper = KeyMapper,
-	Fetch = function(p3, List, KeyMapper1, RequestName, p4, p5, p6) --[[ Line: 39 ]]
+	Fetch = function(p3, List, KeyMapper1, RequestName, p4, p5, p6)
 		-- upvalues: ArgCheckModule (copy), subdivideIdsArray (copy), FetchSubdividedThumbnailsModule (copy), KeyMapper (copy), PromiseUtilities (copy)
 		local KeyMapper1_1 = KeyMapper1 or "150x150"
 		ArgCheckModule.isType(List, "table", "targetIds")
@@ -47,7 +47,7 @@ return {
 		end
 		return PromiseUtilities.Batch(DispatchResults)
 	end,
-	GetFetchingStatus = function(p7, TargetId, IconSize, RequestName) --[[ Line: 75 ]]
+	GetFetchingStatus = function(p7, TargetId, IconSize, RequestName)
 		-- upvalues: PerformFetchModule (copy)
 		local config = {
 			targetId = TargetId,

@@ -3,7 +3,7 @@ local VoiceChatService = game:GetService("VoiceChatService")
 local VoiceChatDataModule = {}
 VoiceChatDataModule.__index = VoiceChatDataModule
 
-function VoiceChatDataModule.new() --[[ Line: 9 ]]
+function VoiceChatDataModule.new()
 	-- upvalues: VoiceChatDataModule (copy), SignalModule (copy)
 	local t = {}
 	setmetatable(t, VoiceChatDataModule)
@@ -14,22 +14,22 @@ function VoiceChatDataModule.new() --[[ Line: 9 ]]
 	return t
 end
 
-function VoiceChatDataModule:Signal() --[[ Line: 19 ]]
+function VoiceChatDataModule:Signal()
 	return self._statsUpdated
 end
 
-function VoiceChatDataModule:getCurrentData() --[[ Line: 23 ]]
+function VoiceChatDataModule:getCurrentData()
 	return self._statsData
 end
 
-function VoiceChatDataModule:isRunning() --[[ Line: 27 ]]
+function VoiceChatDataModule:isRunning()
 	return self._isRunning
 end
 
-function VoiceChatDataModule:start() --[[ Line: 31 ]]
+function VoiceChatDataModule:start()
 	-- upvalues: VoiceChatService (copy)
 	if VoiceChatService and not self._statsListenerConnection then
-		self._statsListenerConnection = VoiceChatService.VoiceChatStatsCollected:Connect(function() --[[ Line: 33 ]]
+		self._statsListenerConnection = VoiceChatService.VoiceChatStatsCollected:Connect(function()
 			-- upvalues: self (copy), VoiceChatService (upval)
 			self._statsData = VoiceChatService:lastVoiceChatStats()
 			self._statsUpdated:Fire(self._statsData)
@@ -38,7 +38,7 @@ function VoiceChatDataModule:start() --[[ Line: 31 ]]
 	end
 end
 
-function VoiceChatDataModule:stop() --[[ Line: 41 ]]
+function VoiceChatDataModule:stop()
 	self._isRunning = false
 	
 	if self._statsListenerConnection then

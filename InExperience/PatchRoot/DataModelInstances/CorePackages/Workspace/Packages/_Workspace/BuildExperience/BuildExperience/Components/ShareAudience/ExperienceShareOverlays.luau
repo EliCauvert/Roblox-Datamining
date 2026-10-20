@@ -7,7 +7,7 @@ local FriendsOnlyShareDialogModule = require(BuildExperience.Components.ShareAud
 local PlaytestersOnlyShareDialogModule = require(BuildExperience.Components.ShareAudience.PlaytestersOnlyShareDialog)
 local _ = require(BuildExperience.utils.useExperienceShareFlow)
 
-return function(p1) --[[ Line: 27 | Named "ExperienceShareOverlays" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), FriendsOnlyShareDialogModule (copy), PlaytestersOnlyShareDialogModule (copy)
 	local ShareLinkError = UseLocalizationFunction({
 		shareLinkError = LocalizationStringsModule.PRIVATE_INVITES_SHARE_LINK_ERROR

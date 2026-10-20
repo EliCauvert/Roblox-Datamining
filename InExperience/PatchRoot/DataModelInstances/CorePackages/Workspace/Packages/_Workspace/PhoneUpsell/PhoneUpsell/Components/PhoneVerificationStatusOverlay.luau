@@ -7,7 +7,7 @@ local UIBloxModule = require(Parent.UIBlox)
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local Colors = UIBloxModule.App.Style.Colors
 
-return function(p1) --[[ Line: 20 | Named "PhoneVerificationStatusOverlay" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), Colors (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseStyleResult = UseStyleFunction()
 	

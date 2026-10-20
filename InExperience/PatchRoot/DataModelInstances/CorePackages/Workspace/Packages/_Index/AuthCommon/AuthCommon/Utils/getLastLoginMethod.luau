@@ -1,6 +1,6 @@
 ﻿local AppStorageUtilitiesModule = require(script:FindFirstAncestor("AuthCommon").Utils.AppStorageUtilities)
 
-return function(UserIdentifier) --[[ Line: 5 | Named "getLastLoginMethod" ]]
+return function(UserIdentifier)
 	-- upvalues: AppStorageUtilitiesModule (copy)
 	for _, value in AppStorageUtilitiesModule.getPreviousAccountsList() do
 		if value.userIdentifier == UserIdentifier then

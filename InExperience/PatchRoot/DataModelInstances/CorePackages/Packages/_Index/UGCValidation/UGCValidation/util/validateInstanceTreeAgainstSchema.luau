@@ -2,15 +2,15 @@
 local _ = require(Parent.util.Types)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
-local function _(List, Value): boolean --[[ Line: 6 | Named "checkName" ]]
+local function _(List, Value): boolean
 	return if type(List) == "table" then table.find(List, Value) ~= nil else List == Value
 end
 
-local _ = function(List) --[[ Line: 13 | Named "getReadableName" ]]
+local _ = function(List)
 	return if type(List) == "table" then table.concat(List, " or ") elseif type(List) == "string" then List else "*"
 end
 
-local function validateInstancesFromSchema(Object, p1, p2, p3, MissingErrorKey, SkipInstanceContext) --[[ Line: 22 ]]
+local function validateInstancesFromSchema(Object, p1, p2, p3, MissingErrorKey, SkipInstanceContext)
 	-- upvalues: validateInstancesFromSchema (copy), ErrorSourceStringsModule (copy)
 	p2[Object] = true
 	
@@ -68,7 +68,7 @@ local function validateInstancesFromSchema(Object, p1, p2, p3, MissingErrorKey, 
 	end
 end
 
-local function validateNoInstancesOutsideSchema(Object, p4, p5, UnauthorizedErrorKey, SkipInstanceContext) --[[ Line: 79 ]]
+local function validateNoInstancesOutsideSchema(Object, p4, p5, UnauthorizedErrorKey, SkipInstanceContext)
 	-- upvalues: ErrorSourceStringsModule (copy)
 	local List = {}
 	
@@ -85,7 +85,7 @@ local function validateNoInstancesOutsideSchema(Object, p4, p5, UnauthorizedErro
 	end
 end
 
-return function(p6, p7, p8, p9) --[[ Line: 103 | Named "validateInstanceTreeAgainstSchema" ]]
+return function(p6, p7, p8, p9)
 	-- upvalues: ErrorSourceStringsModule (copy), validateInstancesFromSchema (copy), validateNoInstancesOutsideSchema (copy)
 	local MissingErrorKey = if p9 then p9.missingErrorKey else nil
 	local UnauthorizedErrorKey = if p9 then p9.unauthorizedErrorKey else nil

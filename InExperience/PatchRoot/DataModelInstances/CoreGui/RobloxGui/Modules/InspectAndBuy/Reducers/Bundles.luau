@@ -6,13 +6,13 @@ local FFlagAXEnableFetchAvatarPreviewModule = require(Parent.Flags.FFlagAXEnable
 local BundleInfoModule = require(Parent.Models.BundleInfo)
 
 return require(CorePackages.Packages.Rodux).createReducer({}, {
-	[require(Parent.Actions.SetFavoriteBundle).name] = function(JoinResults, p1) --[[ Line: 32 ]]
+	[require(Parent.Actions.SetFavoriteBundle).name] = function(JoinResults, p1)
 		-- upvalues: CryoModule (copy), BundleInfoModule (copy)
 		JoinResults[p1.id] = CryoModule.Dictionary.join(CryoModule.Dictionary.join({}, JoinResults[p1.id] or {}), BundleInfoModule.fromGetFavoriteForAsset(p1.id, p1.isFavorite))
 		
 		return JoinResults
 	end,
-	[require(Parent.Actions.UpdateBulkPuchaseResults).name] = if require(CorePackages.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndBuyBulkPurchase then function(JoinResults, p1) --[[ Line: 43 ]]
+	[require(Parent.Actions.UpdateBulkPuchaseResults).name] = if require(CorePackages.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndBuyBulkPurchase then function(JoinResults, p1)
 		-- upvalues: CryoModule (copy), BundleInfoModule (copy)
 		for _, item in p1.result.Items do
 			if item.type == Enum.MarketplaceProductType.AvatarBundle then
@@ -22,7 +22,7 @@ return require(CorePackages.Packages.Rodux).createReducer({}, {
 		end
 		return JoinResults
 	end else nil,
-	[require(Parent.Actions.SetAvatarPreviewDetails).name] = if FFlagAXEnableFetchAvatarPreviewModule then function(p2, p3) --[[ Line: 59 ]]
+	[require(Parent.Actions.SetAvatarPreviewDetails).name] = if FFlagAXEnableFetchAvatarPreviewModule then function(p2, p3)
 		-- upvalues: ItemTypeEnum (copy), BundleInfoModule (copy), CryoModule (copy)
 		local Look = p3.avatarPreviewDetails.look
 		local FromAvatarPreviewItemResults = {}
@@ -36,7 +36,7 @@ return require(CorePackages.Packages.Rodux).createReducer({}, {
 		end
 		return CryoModule.Dictionary.join(p2, FromAvatarPreviewItemResults)
 	end else nil,
-	[require(Parent.Actions.SetBundles).name] = function(p4, p5) --[[ Line: 76 ]]
+	[require(Parent.Actions.SetBundles).name] = function(p4, p5)
 		-- upvalues: CryoModule (copy), BundleInfoModule (copy)
 		local JoinResults = {}
 		local AssetsInBundle = nil

@@ -66,7 +66,7 @@ local config = {
 	lastUpdated = { 25, 4, 23 }
 }
 
-return function(p1, p2) --[[ Line: 96 | Named "discoveryVideoPlayEvent" ]]
+return function(p1, p2)
 	-- upvalues: FFlagLuaAppBroadenVideoAnalytics (copy), GetVideoEventParamsValidatorModule (copy), Config (copy), DiscoveryEventErrorLogger (copy), StrictInterfaceResult (copy), MutedErrorFunction (copy), LoggingProtocolModule (copy), config (copy)
 	if FFlagLuaAppBroadenVideoAnalytics then
 		local VideoEventParamsValidatorModule = GetVideoEventParamsValidatorModule(p2)

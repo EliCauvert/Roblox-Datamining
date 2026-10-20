@@ -8,12 +8,12 @@ local t = {}
 local BuildExperiencePlaytestTeleport = Instance.new("RemoteEvent")
 BuildExperiencePlaytestTeleport.Name = "BuildExperiencePlaytestTeleport"
 BuildExperiencePlaytestTeleport.Parent = game:GetService("RobloxReplicatedStorage")
-Players.PlayerRemoving:Connect(function(Player) --[[ Line: 21 ]]
+Players.PlayerRemoving:Connect(function(Player)
 	-- upvalues: t (copy)
 	t[Player.UserId] = nil
 end)
 
-local function getCurrentExperiencePlaceIds() --[[ Line: 25 ]]
+local function getCurrentExperiencePlaceIds()
 	-- upvalues: v1 (ref), AssetService (copy)
 	if v1 ~= nil then
 		return v1
@@ -32,7 +32,7 @@ local function getCurrentExperiencePlaceIds() --[[ Line: 25 ]]
 	return t
 end
 
-BuildExperiencePlaytestTeleport.OnServerEvent:Connect(function(Player: Player, PlaceId: number) --[[ Line: 48 ]]
+BuildExperiencePlaytestTeleport.OnServerEvent:Connect(function(Player: Player, PlaceId: number)
 	-- upvalues: t (copy), getCurrentExperiencePlaceIds (copy), BuildPlaytestReservedServerId (copy), HttpService (copy), TeleportService (copy)
 	local Entry: number = t[Player.UserId]
 	

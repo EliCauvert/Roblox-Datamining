@@ -27,13 +27,13 @@ else
 		setEmotesEnabled = TModule.callback
 	})
 	
-	function OpenUIConnector.didMount(p1) --[[ Line: 42 ]]
+	function OpenUIConnector.didMount(p1)
 		-- upvalues: PlayerListManagerModule (copy), FFlagEnableNewBackpack (copy), Features (copy), BackpackScriptModule (copy), EmotesMenuMasterModule (copy)
 		p1.props.setLeaderboardOpen(PlayerListManagerModule:GetSetVisible())
 		
 		if FFlagEnableNewBackpack then
 			p1.props.setBackpackOpen(Features.getVisibility(Features.FeatureName.Backpack))
-			p1.disposeBackpackListener = Features.onVisibilityChanged(Features.FeatureName.Backpack, function(p2) --[[ Line: 47 ]]
+			p1.disposeBackpackListener = Features.onVisibilityChanged(Features.FeatureName.Backpack, function(p2)
 				-- upvalues: p1 (copy)
 				p1.props.setBackpackOpen(p2)
 			end)
@@ -44,40 +44,40 @@ else
 		p1.props.setEmotesEnabled(EmotesMenuMasterModule.MenuIsVisible)
 	end
 	
-	function OpenUIConnector.willUnmount(p1) --[[ Line: 57 ]]
+	function OpenUIConnector.willUnmount(p1)
 		if p1.disposeBackpackListener then
 			p1.disposeBackpackListener()
 			p1.disposeBackpackListener = nil
 		end
 	end
 	
-	function OpenUIConnector.render(p1) --[[ Line: 64 ]]
+	function OpenUIConnector.render(p1)
 		-- upvalues: PlayerListManagerModule (copy), RoactModule (copy), EventConnectionModule (copy), FFlagEnableNewBackpack (copy), BackpackScriptModule (copy), EmotesMenuMasterModule (copy)
 		return RoactModule.createFragment({
 			LeaderboardOpenChangedConnection = RoactModule.createElement(EventConnectionModule, {
 				event = PlayerListManagerModule:GetSetVisibleChangedEvent().Event,
-				callback = function(p2) --[[ Line: 70 ]]
+				callback = function(p2)
 					-- upvalues: p1 (copy)
 					p1.props.setLeaderboardOpen(p2)
 				end
 			}),
 			BackpackOpenChangedConnection = if FFlagEnableNewBackpack then nil else RoactModule.createElement(EventConnectionModule, {
 				event = BackpackScriptModule.StateChanged.Event,
-				callback = function(p2) --[[ Line: 77 ]]
+				callback = function(p2)
 					-- upvalues: p1 (copy)
 					p1.props.setBackpackOpen(p2)
 				end
 			}),
 			EmotesOpenChangedConnection = RoactModule.createElement(EventConnectionModule, {
 				event = EmotesMenuMasterModule.EmotesMenuToggled.Event,
-				callback = function(p2) --[[ Line: 84 ]]
+				callback = function(p2)
 					-- upvalues: p1 (copy)
 					p1.props.setEmotesOpen(p2)
 				end
 			}),
 			EmotesEnabledChangedConnection = RoactModule.createElement(EventConnectionModule, {
 				event = EmotesMenuMasterModule.MenuVisibilityChanged.Event,
-				callback = function(p2) --[[ Line: 91 ]]
+				callback = function(p2)
 					-- upvalues: p1 (copy)
 					p1.props.setEmotesEnabled(p2)
 				end
@@ -85,22 +85,22 @@ else
 		})
 	end
 	
-	return RoactRoduxModule.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 98 | Named "mapDispatchToProps" ]]
+	return RoactRoduxModule.UNSTABLE_connect2(nil, function(Callback)
 		-- upvalues: SetBackpackOpenModule (copy), SetEmotesOpenModule (copy), SetLeaderboardOpenModule (copy), SetEmotesEnabledModule (copy)
 		return {
-			setBackpackOpen = function(p1) --[[ Line: 100 ]]
+			setBackpackOpen = function(p1)
 				-- upvalues: Callback (copy), SetBackpackOpenModule (upval)
 				return Callback(SetBackpackOpenModule(p1))
 			end,
-			setEmotesOpen = function(p1) --[[ Line: 104 ]]
+			setEmotesOpen = function(p1)
 				-- upvalues: Callback (copy), SetEmotesOpenModule (upval)
 				return Callback(SetEmotesOpenModule(p1))
 			end,
-			setLeaderboardOpen = function(p1) --[[ Line: 108 ]]
+			setLeaderboardOpen = function(p1)
 				-- upvalues: Callback (copy), SetLeaderboardOpenModule (upval)
 				return Callback(SetLeaderboardOpenModule(p1))
 			end,
-			setEmotesEnabled = function(p1) --[[ Line: 112 ]]
+			setEmotesEnabled = function(p1)
 				-- upvalues: Callback (copy), SetEmotesEnabledModule (upval)
 				return Callback(SetEmotesEnabledModule(p1))
 			end

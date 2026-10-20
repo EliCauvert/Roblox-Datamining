@@ -81,7 +81,7 @@ if DEV then
 	v7 = {}
 	local t = {}
 	
-	Callback1 = function(Callback, Text) --[[ Line: 141 | Named "warnOnInvalidCallback" ]]
+	Callback1 = function(Callback, Text)
 		-- upvalues: t (copy), Console (copy)
 		if Callback == nil or type(Callback) == "function" then return end
 		local Text1 = Text .. "_" .. tostring(Callback)
@@ -92,9 +92,9 @@ if DEV then
 		end
 	end
 	
-	Callback = function(_, _) --[[ Line: 157 | Named "warnOnUndefinedDerivedState" ]] end
+	Callback = function(_, _) end
 end
-local function applyDerivedStateFromProps(p1, Key, Callback1, MemoizedProps) --[[ Line: 200 ]]
+local function applyDerivedStateFromProps(p1, Key, Callback1, MemoizedProps)
 	-- upvalues: DEV (copy), DebugRenderPhaseSideEffectsForStrictMode (copy), StrictMode (copy), DisableLogsFunction (copy), DescribeError (copy), ReenableLogsFunction (copy), Callback (ref), EnableAllocationTrims (copy), Object (copy), NoLanes (copy)
 	local MemoizedState = p1.memoizedState
 	
@@ -122,7 +122,7 @@ end
 
 local Config = nil
 
-local function initializeClassComponentUpdater() --[[ Line: 259 ]]
+local function initializeClassComponentUpdater()
 	-- upvalues: Config (ref), IsMounted (copy), GetFunction (copy), CreateUpdateFunction (copy), DEV (copy), Callback1 (ref), EnqueueUpdateFunction (copy), EnableDebugTracing (copy), DebugTracingMode (copy), GetComponentNameFunction (copy), LogStateUpdateScheduledFunction (copy), EnableSchedulingProfiler (copy), MarkStateUpdateScheduledFunction (copy), ReplaceState (copy), ForceUpdate (copy), LogForceUpdateScheduledFunction (copy), MarkForceUpdateScheduledFunction (copy)
 	local ReactFiberWorkLoopNewModule = require(script.Parent["ReactFiberWorkLoop.new"])
 	local RequestEventTimeFunction = ReactFiberWorkLoopNewModule.requestEventTime
@@ -130,7 +130,7 @@ local function initializeClassComponentUpdater() --[[ Line: 259 ]]
 	local ScheduleUpdateOnFiberFunction = ReactFiberWorkLoopNewModule.scheduleUpdateOnFiber
 	Config = {
 		isMounted = IsMounted,
-		enqueueSetState = function(p1, p2, p3) --[[ Line: 267 ]]
+		enqueueSetState = function(p1, p2, p3)
 			-- upvalues: GetFunction (upval), RequestEventTimeFunction (copy), RequestUpdateLaneFunction (copy), CreateUpdateFunction (upval), DEV (upval), Callback1 (upval), EnqueueUpdateFunction (upval), ScheduleUpdateOnFiberFunction (copy), EnableDebugTracing (upval), DebugTracingMode (upval), GetComponentNameFunction (upval), LogStateUpdateScheduledFunction (upval), EnableSchedulingProfiler (upval), MarkStateUpdateScheduledFunction (upval)
 			local GetResult = GetFunction(p1)
 			local RequestEventTimeResult = RequestEventTimeFunction()
@@ -150,7 +150,7 @@ local function initializeClassComponentUpdater() --[[ Line: 259 ]]
 				MarkStateUpdateScheduledFunction(GetResult, RequestUpdateLaneResult)
 			end
 		end,
-		enqueueReplaceState = function(p1, State, p2) --[[ Line: 297 ]]
+		enqueueReplaceState = function(p1, State, p2)
 			-- upvalues: GetFunction (upval), RequestEventTimeFunction (copy), RequestUpdateLaneFunction (copy), CreateUpdateFunction (upval), ReplaceState (upval), DEV (upval), Callback1 (upval), EnqueueUpdateFunction (upval), ScheduleUpdateOnFiberFunction (copy), EnableDebugTracing (upval), DebugTracingMode (upval), GetComponentNameFunction (upval), LogStateUpdateScheduledFunction (upval), EnableSchedulingProfiler (upval), MarkStateUpdateScheduledFunction (upval)
 			local GetResult = GetFunction(p1)
 			local RequestEventTimeResult = RequestEventTimeFunction()
@@ -171,7 +171,7 @@ local function initializeClassComponentUpdater() --[[ Line: 259 ]]
 				MarkStateUpdateScheduledFunction(GetResult, RequestUpdateLaneResult)
 			end
 		end,
-		enqueueForceUpdate = function(p1, p2) --[[ Line: 329 ]]
+		enqueueForceUpdate = function(p1, p2)
 			-- upvalues: GetFunction (upval), RequestEventTimeFunction (copy), RequestUpdateLaneFunction (copy), CreateUpdateFunction (upval), ForceUpdate (upval), DEV (upval), Callback1 (upval), EnqueueUpdateFunction (upval), ScheduleUpdateOnFiberFunction (copy), EnableDebugTracing (upval), DebugTracingMode (upval), GetComponentNameFunction (upval), LogForceUpdateScheduledFunction (upval), EnableSchedulingProfiler (upval), MarkForceUpdateScheduledFunction (upval)
 			local GetResult = GetFunction(p1)
 			local RequestEventTimeResult = RequestEventTimeFunction()
@@ -195,7 +195,7 @@ local function initializeClassComponentUpdater() --[[ Line: 259 ]]
 	}
 end
 
-local function _() --[[ Line: 363 | Named "getClassComponentUpdater" ]]
+local function _()
 	-- upvalues: Config (ref), initializeClassComponentUpdater (copy)
 	if Config == nil then
 		initializeClassComponentUpdater()
@@ -203,7 +203,7 @@ local function _() --[[ Line: 363 | Named "getClassComponentUpdater" ]]
 	return Config
 end
 
-function checkShouldComponentUpdate(p1, p2, p3, p4, p5, p6, p7) --[[ Line: 370 ]]
+function checkShouldComponentUpdate(p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: DEV (copy), DebugRenderPhaseSideEffectsForStrictMode (copy), StrictMode (copy), DisableLogsFunction (copy), DescribeError (copy), ReenableLogsFunction (copy), Console (copy), GetComponentNameFunction (copy), ShallowEqualFunction (copy)
 	local StateNode = p1.stateNode
 	
@@ -227,7 +227,7 @@ function checkShouldComponentUpdate(p1, p2, p3, p4, p5, p6, p7) --[[ Line: 370 ]
 	return ShouldComponentUpdate
 end
 
-local function checkClassInstance(p1, Key, Props) --[[ Line: 435 ]]
+local function checkClassInstance(p1, Key, Props)
 	-- upvalues: DEV (copy), GetComponentNameFunction (copy), Console (copy), DisableLegacyContext (copy), v6 (ref), v3 (ref)
 	local StateNode = p1.stateNode
 	
@@ -310,7 +310,7 @@ local function checkClassInstance(p1, Key, Props) --[[ Line: 435 ]]
 	end
 end
 
-local function adoptClassInstance(p1, StateNode) --[[ Line: 669 ]]
+local function adoptClassInstance(p1, StateNode)
 	-- upvalues: Config (ref), initializeClassComponentUpdater (copy), SetFunction (copy), DEV (copy), _reactInternalInstance (copy)
 	if Config == nil then
 		initializeClassComponentUpdater()
@@ -324,7 +324,7 @@ local function adoptClassInstance(p1, StateNode) --[[ Line: 669 ]]
 	end
 end
 
-local function constructClassInstance(p1, Key, p2) --[[ Line: 680 ]]
+local function constructClassInstance(p1, Key, p2)
 	-- upvalues: EmptyContextObject (copy), DEV (copy), REACTCONTEXTTYPE (copy), v7 (ref), REACTPROVIDERTYPE (copy), Console (copy), GetComponentNameFunction (copy), ReadContextFunction (copy), DisableLegacyContext (copy), GetUnmaskedContextFunction (copy), GetMaskedContextFunction (copy), DebugRenderPhaseSideEffectsForStrictMode (copy), StrictMode (copy), DisableLogsFunction (copy), DescribeError (copy), ReenableLogsFunction (copy), Config (ref), initializeClassComponentUpdater (copy), SetFunction (copy), _reactInternalInstance (copy), UninitializedState (copy), v2 (ref), v4 (ref), CacheContextFunction (copy)
 	local HasContextTypes = false
 	local EmptyContextObject1 = EmptyContextObject
@@ -437,7 +437,7 @@ local function constructClassInstance(p1, Key, p2) --[[ Line: 680 ]]
 	return CtorResult
 end
 
-local function callComponentWillMount(p3, StateNode) --[[ Line: 893 ]]
+local function callComponentWillMount(p3, StateNode)
 	-- upvalues: DEV (copy), Console (copy), GetComponentNameFunction (copy), Config (ref), initializeClassComponentUpdater (copy)
 	local State = StateNode.state
 	
@@ -458,7 +458,7 @@ local function callComponentWillMount(p3, StateNode) --[[ Line: 893 ]]
 	end
 end
 
-function callComponentWillReceiveProps(p3, p4, p5, p6) --[[ Line: 925 ]]
+function callComponentWillReceiveProps(p3, p4, p5, p6)
 	-- upvalues: DEV (copy), GetComponentNameFunction (copy), v1 (ref), Console (copy), Config (ref), initializeClassComponentUpdater (copy)
 	local State = p4.state
 	
@@ -484,7 +484,7 @@ function callComponentWillReceiveProps(p3, p4, p5, p6) --[[ Line: 925 ]]
 	end
 end
 
-local function mountClassInstance(p3, Key, Props, p4) --[[ Line: 960 ]]
+local function mountClassInstance(p3, Key, Props, p4)
 	-- upvalues: DEV (copy), checkClassInstance (copy), Refs (copy), InitializeUpdateQueueFunction (copy), ReadContextFunction (copy), DisableLegacyContext (copy), EmptyContextObject (copy), GetUnmaskedContextFunction (copy), GetMaskedContextFunction (copy), GetComponentNameFunction (copy), v5 (ref), Console (copy), StrictMode (copy), ReactStrictModeWarningsNewModule (copy), WarnAboutDeprecatedLifecycles (copy), ProcessUpdateQueueFunction (copy), applyDerivedStateFromProps (copy), callComponentWillMount (copy), EnableDoubleInvokingEffects (copy), MountLayoutDev (copy), Update (copy)
 	if DEV then
 		checkClassInstance(p3, Key, Props)
@@ -545,7 +545,7 @@ local function mountClassInstance(p3, Key, Props, p4) --[[ Line: 960 ]]
 	end
 end
 
-function resumeMountClassInstance(p3, p4, MemoizedProps, p5) --[[ Line: 1071 ]]
+function resumeMountClassInstance(p3, p4, MemoizedProps, p5)
 	-- upvalues: EmptyContextObject (copy), ReadContextFunction (copy), DisableLegacyContext (copy), GetUnmaskedContextFunction (copy), GetMaskedContextFunction (copy), ResetHasForceUpdateBeforeProcessingFunction (copy), ProcessUpdateQueueFunction (copy), HasContextChangedFunction (copy), CheckHasForceUpdateAfterProcessingFunction (copy), DEV (copy), EnableDoubleInvokingEffects (copy), MountLayoutDev (copy), Update (copy), applyDerivedStateFromProps (copy)
 	local StateNode = p3.stateNode
 	local MemoizedProps1 = p3.memoizedProps
@@ -621,7 +621,7 @@ return {
 	constructClassInstance = constructClassInstance,
 	mountClassInstance = mountClassInstance,
 	resumeMountClassInstance = resumeMountClassInstance,
-	updateClassInstance = function(p3, p4, p5, MemoizedProps, p6) --[[ Line: 1219 ]]
+	updateClassInstance = function(p3, p4, p5, MemoizedProps, p6)
 		-- upvalues: CloneUpdateQueueFunction (copy), ResolveDefaultPropsFunction (copy), EmptyContextObject (copy), ReadContextFunction (copy), DisableLegacyContext (copy), GetUnmaskedContextFunction (copy), GetMaskedContextFunction (copy), ResetHasForceUpdateBeforeProcessingFunction (copy), ProcessUpdateQueueFunction (copy), HasContextChangedFunction (copy), CheckHasForceUpdateAfterProcessingFunction (copy), Update (copy), Snapshot (copy), applyDerivedStateFromProps (copy)
 		local StateNode = p4.stateNode
 		CloneUpdateQueueFunction(p3, p4)

@@ -5,9 +5,9 @@ local AddUsersModule = require(UserLib.Actions.AddUsers)
 local SetFriendCountFunction = require(Parent.LegacyFriendsRodux).Actions.SetFriendCount
 local FFlagRemoveUnusedFriendCountRoduxSlice = require(Parent.SharedFlags).FFlagRemoveUnusedFriendCountRoduxSlice
 
-return function(p1) --[[ Line: 10 ]]
+return function(p1)
 	-- upvalues: UserModule (copy), AddUsersModule (copy), FFlagRemoveUnusedFriendCountRoduxSlice (copy), SetFriendCountFunction (copy)
-	return function(p2) --[[ Line: 11 ]]
+	return function(p2)
 		-- upvalues: p1 (copy), UserModule (upval), AddUsersModule (upval), FFlagRemoveUnusedFriendCountRoduxSlice (upval), SetFriendCountFunction (upval)
 		local Total = 0
 		local t = {}

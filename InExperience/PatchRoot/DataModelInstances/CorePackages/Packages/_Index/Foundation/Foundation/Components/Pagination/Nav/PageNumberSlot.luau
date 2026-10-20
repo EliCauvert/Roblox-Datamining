@@ -12,7 +12,7 @@ local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
 local PaginationUtilsModule = require(script.Parent.Parent.paginationUtils)
 
-local function PageNumberText(p1) --[[ Line: 43 ]]
+local function PageNumberText(p1)
 	-- upvalues: ReactModule (copy), TextModule (copy)
 	return ReactModule.createElement(TextModule, {
 		LayoutOrder = 1,
@@ -33,7 +33,7 @@ local config1 = {
 	[PaginationSizeModule.Medium] = "size-0-800"
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 67 | Named "PageNumberSlot" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(Frame: Frame, Ref)
 	-- upvalues: UseTokensModule (copy), PaginationUtilsModule (copy), PaginationSizeModule (copy), ChipSizeModule (copy), UseChipVariantsModule (copy), ChipVariantModule (copy), config1 (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), PresentationContextModule (copy), config (copy), PageNumberText (copy)
 	local UseTokensModuleResult = UseTokensModule()
 	local NoIsChecked = not Frame.isChecked
@@ -42,7 +42,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ 
 	local UseChipVariantsModuleResult = UseChipVariantsModule(UseTokensModuleResult, Small, ChipVariantModule.Utility, true, false, false)
 	local UseChipVariantsModuleResult1 = UseChipVariantsModule(UseTokensModuleResult, Small, ChipVariantModule.Utility, false, false, false)
 	local Message: string = `row align-x-center align-y-center auto-x radius-circle {config1[Frame.slotSize]}`
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 78 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: Frame (copy)
 		Frame.onPageActivated(Frame.page)
 	end, { Frame.onPageActivated, Frame.page })

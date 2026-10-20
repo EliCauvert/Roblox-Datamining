@@ -13,7 +13,7 @@ local GetSettingsPageUrlModule = require(SettingsSdui.getSettingsPageUrl)
 local BuildSettingsPageRequestModule = require(SettingsSdui.buildSettingsPageRequest)
 local FFlagSduiAdvertiseRuntimeSupportSets = require(Parent.SharedFlags).FFlagSduiAdvertiseRuntimeSupportSets
 
-local function fetchSettingsPage(LoadTimer, p1) --[[ Line: 20 ]]
+local function fetchSettingsPage(LoadTimer, p1)
 	-- upvalues: SettingsSduiConstantsModule (copy), GetSduiApiStoreFunction (copy), SettingsPageSessionModule (copy), Parent (copy), FFlagSduiAdvertiseRuntimeSupportSets (copy), SduiCapabilities (copy), GetSduiTemplateStoreFunction (copy), AppPage (copy), GetSettingsPageUrlModule (copy), BuildSettingsPageRequestModule (copy), SduiResponseType (copy), SduiApiStorePostConfigContentType (copy), fetchSettingsPage (copy)
 	local ConfigKey = SettingsSduiConstantsModule.ConfigKey
 	local SduiApiStore = GetSduiApiStoreFunction()
@@ -43,7 +43,7 @@ local function fetchSettingsPage(LoadTimer, p1) --[[ Line: 20 ]]
 				})
 			})
 		},
-		refresh = function(LoadTimer) --[[ Line: 63 ]]
+		refresh = function(LoadTimer)
 			-- upvalues: fetchSettingsPage (upval)
 			return fetchSettingsPage(LoadTimer, true)
 		end

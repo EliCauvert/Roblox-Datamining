@@ -6,7 +6,7 @@ local Sheet = FoundationModule.Sheet
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 
-return ReactModule.memo(function(p1) --[[ Line: 25 | Named "TodoBottomSheet" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), Sheet (copy), View (copy), Text (copy), TodoListModule (copy)
 	local TestId = p1.testId or "subagent-status-bottom-sheet"
 	

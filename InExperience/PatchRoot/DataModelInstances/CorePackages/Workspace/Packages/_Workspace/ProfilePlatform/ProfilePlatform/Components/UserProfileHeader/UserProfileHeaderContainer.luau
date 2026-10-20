@@ -25,13 +25,13 @@ local FFlagAddPlatformNameToProfileHeader = require(Parent.SharedFlags).FFlagAdd
 local UserProfilesModule = require(Parent.UserProfiles)
 local UseUserProfilesFetchFunction = UserProfilesModule.Hooks.useUserProfilesFetch
 
-local function _(p1, p2, p3) --[[ Line: 67 ]]
+local function _(p1, p2, p3)
 	local PrimaryName = p1.names.primaryName or ""
 	
 	return if p2.profileUserNickname and p3 and p2.profileUserNickname ~= "" then p2.profileUserNickname .. " (" .. PrimaryName .. ")" else PrimaryName
 end
 
-return function(p1) --[[ Line: 84 | Named "UserProfileHeaderContainer" ]]
+return function(p1)
 	-- upvalues: UseProfileWrapperContextModule (copy), UseNavigationFunction (copy), UseDispatchFunction (copy), ReactModule (copy), UseProfileAnalyticsContextModule (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), ConstantsModule (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), FFlagAddPlatformNameToProfileHeader (copy), UseUserProfilesFetchFunction (copy), UserProfilesModule (copy), EventNamesModule (copy), EnumsModule1 (copy), SocialStopwatchModule (copy), SetAliasModule (copy), UseEffectOnceFunction (copy), NetworkingUsersModule (copy), FFlagMoveInExperienceModeToEditProfile (copy), UserProfileHeaderModule (copy)
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	local UseNavigationResult = UseNavigationFunction()
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 84 | Named "UserProfileHeaderContainer" ]]
 			end
 		end
 	end
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 117 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseProfileJsonComponentModuleResult (copy), EnumsModule (upval), UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), UseRefResult (copy), UseNavigationResult (copy), EnumsModule1 (upval), SocialStopwatchModule (upval), ProfileId (copy), SetAliasModule (upval)
 		if not UseProfileJsonComponentModuleResult.editName then return end
 		if UseProfileJsonComponentModuleResult.editName.field ~= EnumsModule.NameTypes.DisplayName then
@@ -87,17 +87,17 @@ return function(p1) --[[ Line: 84 | Named "UserProfileHeaderContainer" ]]
 		UseProfileJsonComponentModuleResult.editName,
 		UseProfileJsonComponentModuleResult.names
 	})
-	UseEffectOnceFunction(function() --[[ Line: 145 ]]
+	UseEffectOnceFunction(function()
 		-- upvalues: UseDispatchResult (copy), NetworkingUsersModule (upval), ProfileId (copy), UseRefResult (copy)
-		local function _() --[[ Line: 146 ]]
+		local function _()
 			-- upvalues: UseDispatchResult (upval), NetworkingUsersModule (upval), ProfileId (upval)
 			return UseDispatchResult(NetworkingUsersModule.GetDisplayNameValidation.API(ProfileId, "testName"))
 		end
 		
-		UseDispatchResult(NetworkingUsersModule.GetDisplayNameValidation.API(ProfileId, "testName")):andThen(function() --[[ Line: 151 ]]
+		UseDispatchResult(NetworkingUsersModule.GetDisplayNameValidation.API(ProfileId, "testName")):andThen(function()
 			-- upvalues: UseRefResult (upval)
 			UseRefResult.current = true
-		end):catch(function() --[[ Line: 154 ]]
+		end):catch(function()
 			-- upvalues: UseRefResult (upval)
 			UseRefResult.current = false
 		end)

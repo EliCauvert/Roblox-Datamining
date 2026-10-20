@@ -14,12 +14,12 @@ local StrictInterfaceResult = T.strictInterface({
 	[Roact.Children] = T.optional(T.table)
 })
 
-return function(Frame) --[[ Line: 23 | Named "PaddedScrollFrame" ]]
+return function(Frame)
 	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), WithFoundationOrUIBloxStyleFunction (copy), Roact (copy), AssetsModule (copy)
 	if GlobalConfigModule.propValidation then
 		assert(StrictInterfaceResult(Frame))
 	end
-	return WithFoundationOrUIBloxStyleFunction(function(p1) --[[ Line: 27 ]]
+	return WithFoundationOrUIBloxStyleFunction(function(p1)
 		return {
 			Theme = {
 				UIEmphasis = {
@@ -28,7 +28,7 @@ return function(Frame) --[[ Line: 23 | Named "PaddedScrollFrame" ]]
 				}
 			}
 		}
-	end, function(p1) --[[ Line: 33 ]]
+	end, function(p1)
 		-- upvalues: Roact (upval), AssetsModule (upval), Frame (copy)
 		return Roact.createElement("ScrollingFrame", {
 			BackgroundTransparency = 1,

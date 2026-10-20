@@ -7,7 +7,7 @@ local Text = FoundationModule.Text
 local View = FoundationModule.View
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return function(p1) --[[ Line: 18 | Named "NameHistory" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), View (copy), Text (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		previousNames = TextKeysModule.PreviousNames,

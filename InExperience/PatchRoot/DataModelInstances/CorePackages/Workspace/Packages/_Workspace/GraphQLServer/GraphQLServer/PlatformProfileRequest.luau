@@ -1,8 +1,8 @@
 ﻿return {
-	hasPlatformFields = function(List): boolean --[[ Line: 2 ]]
+	hasPlatformFields = function(List): boolean
 		return table.find(List, "names.platformName") ~= nil or table.find(List, "platformProfileId") ~= nil
 	end,
-	normalizeProfiles = function(List1, List) --[[ Line: 6 ]]
+	normalizeProfiles = function(List1, List)
 		local HasFoundIndex = table.find(List, "names.platformName") ~= nil
 		local HasFoundIndex1 = table.find(List, "platformProfileId") ~= nil
 		

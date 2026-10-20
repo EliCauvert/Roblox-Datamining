@@ -4,14 +4,14 @@ local EventStream = require(game:GetService("CorePackages").Workspace.Packages.A
 local CoreScriptsCoreGuiEnableAnalyticsModule = {}
 CoreScriptsCoreGuiEnableAnalyticsModule.__index = CoreScriptsCoreGuiEnableAnalyticsModule
 
-function CoreScriptsCoreGuiEnableAnalyticsModule.new() --[[ Line: 19 ]]
+function CoreScriptsCoreGuiEnableAnalyticsModule.new()
 	-- upvalues: EventStream (copy), RbxAnalyticsService (copy), StarterGui (copy), CoreScriptsCoreGuiEnableAnalyticsModule (copy)
 	local config = {
 		evenStream = EventStream.new(RbxAnalyticsService),
 		playSessionStart = os.clock()
 	}
 	
-	function config.sendCoreGuiAnalytic(p1, p2) --[[ Line: 25 ]]
+	function config.sendCoreGuiAnalytic(p1, p2)
 		-- upvalues: config (copy), RbxAnalyticsService (upval)
 		config.evenStream:sendEventDeferred("core_gui_type", "core_gui_type", {
 			placeid = tostring(game.PlaceId),
@@ -23,7 +23,7 @@ function CoreScriptsCoreGuiEnableAnalyticsModule.new() --[[ Line: 19 ]]
 		})
 	end
 	
-	config.signalConnection = StarterGui.CoreGuiChangedSignal:Connect(function(CoreGuiType, Enabled) --[[ Line: 42 ]]
+	config.signalConnection = StarterGui.CoreGuiChangedSignal:Connect(function(CoreGuiType, Enabled)
 		-- upvalues: config (copy)
 		config.sendCoreGuiAnalytic(CoreGuiType, Enabled)
 	end)
@@ -32,7 +32,7 @@ function CoreScriptsCoreGuiEnableAnalyticsModule.new() --[[ Line: 19 ]]
 	return config
 end
 
-function CoreScriptsCoreGuiEnableAnalyticsModule:DisconnectSignal() --[[ Line: 50 ]]
+function CoreScriptsCoreGuiEnableAnalyticsModule:DisconnectSignal()
 	self.signalConnection:Disconnect()
 end
 

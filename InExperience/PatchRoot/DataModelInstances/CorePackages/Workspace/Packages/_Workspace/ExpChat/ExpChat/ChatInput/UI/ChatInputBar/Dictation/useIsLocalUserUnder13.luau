@@ -1,6 +1,6 @@
 ﻿local Players = game:GetService("Players")
 
-return function(): boolean --[[ Line: 15 | Named "useIsLocalUserUnder13" ]]
+return function(): boolean
 	-- upvalues: Players (copy)
 	local LocalPlayer = Players.LocalPlayer
 	

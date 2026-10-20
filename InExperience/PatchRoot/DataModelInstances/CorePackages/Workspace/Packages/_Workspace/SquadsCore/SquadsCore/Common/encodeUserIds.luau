@@ -1,11 +1,11 @@
 ﻿local HttpService = game:GetService("HttpService")
 
-return function(Input) --[[ Line: 3 | Named "encodeUserIds" ]]
+return function(Input)
 	-- upvalues: HttpService (copy)
 	if Input == nil then
 		return "[]"
 	else
-		local Success, Result = pcall(function() --[[ Line: 8 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: HttpService (upval), Input (copy)
 			return HttpService:JSONEncode(Input)
 		end)

@@ -1,7 +1,7 @@
 ﻿local InvariantModule = require(script.Parent.Parent.utils.invariant)
 local IsValidScreenComponentModule = require(script.Parent.Parent.utils.isValidScreenComponent)
 
-return function(List) --[[ Line: 20 ]]
+return function(List)
 	-- upvalues: InvariantModule (copy), IsValidScreenComponentModule (copy)
 	InvariantModule(type(List) == "table", "routeConfigs must be an array table")
 	

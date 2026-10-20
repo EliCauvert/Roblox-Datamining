@@ -3,10 +3,10 @@ local TModule = require(Gifting.Parent.t)
 local ItemTypeModule = require(Gifting.Enums.ItemType)
 local _ = require(Gifting.Types)
 local GiftModelUtils = {
-	invalidField = function(p1, ItemType): string --[[ Line: 22 ]]
+	invalidField = function(p1, ItemType): string
 		return `invalid {p1}: {tostring(ItemType)}`
 	end,
-	nonEmptyString = TModule.intersection(TModule.string, function(p1) --[[ Line: 26 ]]
+	nonEmptyString = TModule.intersection(TModule.string, function(p1)
 		return p1 ~= "", "non-empty string expected, got empty string"
 	end)
 }
@@ -23,7 +23,7 @@ local InterfaceResult3 = TModule.interface({
 	userAccountSinceYear = TModule.number
 })
 
-function GiftModelUtils.formatList(p1, List, Callback) --[[ Line: 51 ]]
+function GiftModelUtils.formatList(p1, List, Callback)
 	-- upvalues: TModule (copy)
 	local v1, v2 = TModule.table(List)
 	
@@ -45,7 +45,7 @@ function GiftModelUtils.formatList(p1, List, Callback) --[[ Line: 51 ]]
 	return List1
 end
 
-function GiftModelUtils.formatItem(p2) --[[ Line: 68 ]]
+function GiftModelUtils.formatItem(p2)
 	-- upvalues: InterfaceResult (copy), ItemTypeModule (copy), GiftModelUtils (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult(p2)
 	
@@ -61,7 +61,7 @@ function GiftModelUtils.formatItem(p2) --[[ Line: 68 ]]
 	end
 end
 
-function GiftModelUtils.formatDateInfo(FriendSinceDate) --[[ Line: 85 ]]
+function GiftModelUtils.formatDateInfo(FriendSinceDate)
 	-- upvalues: InterfaceResult1 (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult1(FriendSinceDate)
 	
@@ -76,7 +76,7 @@ function GiftModelUtils.formatDateInfo(FriendSinceDate) --[[ Line: 85 ]]
 	end
 end
 
-function GiftModelUtils.formatGiftSenderInfo(p2) --[[ Line: 99 ]]
+function GiftModelUtils.formatGiftSenderInfo(p2)
 	-- upvalues: InterfaceResult2 (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult2(p2)
 	
@@ -91,7 +91,7 @@ function GiftModelUtils.formatGiftSenderInfo(p2) --[[ Line: 99 ]]
 	end
 end
 
-function GiftModelUtils.formatUserRelationshipDetail(p2) --[[ Line: 113 ]]
+function GiftModelUtils.formatUserRelationshipDetail(p2)
 	-- upvalues: InterfaceResult3 (copy), GiftModelUtils (copy), TModule (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult3(p2)
 	

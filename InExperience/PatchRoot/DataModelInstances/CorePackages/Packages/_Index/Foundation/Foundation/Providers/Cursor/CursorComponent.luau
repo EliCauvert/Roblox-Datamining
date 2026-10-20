@@ -3,7 +3,7 @@ local _ = require(Foundation.Enums.ColorNamespace)
 local ReactModule = require(Foundation.Parent.React)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 
-return ReactModule.memo((ReactModule.forwardRef(function(p1, Ref) --[[ Line: 19 ]]
+return ReactModule.memo((ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: UseTokensModule (copy), ReactModule (copy)
 	local UseTokensModuleResult = UseTokensModule()
 	local ColorNamespace = p1.colorNamespace

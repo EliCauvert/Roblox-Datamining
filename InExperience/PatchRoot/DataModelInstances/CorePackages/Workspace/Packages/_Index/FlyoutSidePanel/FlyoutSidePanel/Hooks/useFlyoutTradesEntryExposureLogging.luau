@@ -4,10 +4,10 @@ local ReactModule = require(Parent.React)
 local UseDrawerVisibleFunction = require(Parent.Drawer).Hooks.useDrawerVisible
 local LogFlyoutTradesEntryExposureModule = require(FlyoutSidePanel.Utils.logFlyoutTradesEntryExposure)
 
-return function() --[[ Line: 8 | Named "useFlyoutTradesEntryExposureLogging" ]]
+return function()
 	-- upvalues: UseDrawerVisibleFunction (copy), ReactModule (copy), LogFlyoutTradesEntryExposureModule (copy)
 	local UseDrawerVisibleResult = UseDrawerVisibleFunction()
-	ReactModule.useEffect(function() --[[ Line: 10 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseDrawerVisibleResult (copy), LogFlyoutTradesEntryExposureModule (upval)
 		if UseDrawerVisibleResult then
 			LogFlyoutTradesEntryExposureModule()

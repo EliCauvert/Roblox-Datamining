@@ -23,7 +23,7 @@ local TextKeysModule = require(AvatarExperienceProfilePictureEditor.Common.TextK
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return function(p1) --[[ Line: 111 | Named "useEditProfileImageViewModel" ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseLocalUserIdFunction (copy), UseUserAvatarConfigurationsModule (copy), UseProfileFramesModule (copy), UseProfileFramesGatingModule (copy), ReactModule (copy), UseEditProfileImageDraftModule (copy), UseEditProfileImageNavigationModule (copy), UseEditProfileImageEmotesModule (copy), HttpService (copy), ConstantsModule (copy), EditProfileImageAnalyticsModule (copy), OpenProfileFramesSubscriptionUpsellModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), BuildEditProfileImageAssetItemsModule (copy), UseEditProfileImageSaveModule (copy), FFlagEditProfileFramesEnabled (copy), EditProfileImageHelpersModule (copy), UseFocusOnMountEffectFunction (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
@@ -39,7 +39,7 @@ return function(p1) --[[ Line: 111 | Named "useEditProfileImageViewModel" ]]
 		initialFrameAssetId = p1.initialFrameAssetId,
 		initialFrameSelectionRequestId = p1.initialFrameSelectionRequestId,
 		isInitialFrameSelectionLoading = p1.initialFrameAssetId ~= nil and UseProfileFramesModuleResult.isLoading,
-		isInitialFrameAvailable = ReactModule.useMemo(function(): boolean --[[ Line: 118 ]]
+		isInitialFrameAvailable = ReactModule.useMemo(function(): boolean
 			-- upvalues: p1 (copy), UseProfileFramesModuleResult (copy)
 			if p1.initialFrameAssetId == nil then
 				return false
@@ -62,12 +62,12 @@ return function(p1) --[[ Line: 111 | Named "useEditProfileImageViewModel" ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local CanEquipFrame = UseProfileFramesGatingModuleResult.canEquipFrame or UseStateResult
 	local NoUseStateResult: boolean = UseProfileFramesGatingModuleResult.shouldShowUpsell and not UseStateResult
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 150 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), UseProfileFramesGatingModuleResult (copy)
 		UseStateResult2(true)
 		UseProfileFramesGatingModuleResult.refetchAmpAccess()
 	end, { UseProfileFramesGatingModuleResult.refetchAmpAccess })
-	local UseResult1 = ReactModule.useCallback(function(Source) --[[ Line: 154 ]]
+	local UseResult1 = ReactModule.useCallback(function(Source)
 		-- upvalues: HttpService (upval), UseEditProfileImageDraftModuleResult (copy), ConstantsModule (upval), EditProfileImageAnalyticsModule (upval), p1 (copy), OpenProfileFramesSubscriptionUpsellModule (upval), UseDispatchResult (copy), UseResult (copy)
 		local Guid = HttpService:GenerateGUID(false)
 		EditProfileImageAnalyticsModule.logSubscribe({
@@ -87,7 +87,7 @@ return function(p1) --[[ Line: 111 | Named "useEditProfileImageViewModel" ]]
 		UseResult,
 		p1.mode
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 175 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseEditProfileImageDraftModuleResult (copy), ConstantsModule (upval), UseProfileFramesModuleResult (copy)
 		if not UseEditProfileImageDraftModuleResult.selectedFrameId or UseEditProfileImageDraftModuleResult.selectedFrameId == ConstantsModule.ProfileFrameNoneId then
 			return nil
@@ -107,7 +107,7 @@ return function(p1) --[[ Line: 111 | Named "useEditProfileImageViewModel" ]]
 		subscribe = TextKeysModule.Subscribe,
 		save = TextKeysModule.Save
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 193 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: BuildEditProfileImageAssetItemsModule (upval), UseEditProfileImageEmotesModuleResult (copy), UseProfileFramesModuleResult (copy)
 		return BuildEditProfileImageAssetItemsModule({
 			ownedEmotes = UseEditProfileImageEmotesModuleResult.ownedEmotes,
@@ -139,7 +139,7 @@ return function(p1) --[[ Line: 111 | Named "useEditProfileImageViewModel" ]]
 		onClose = p1.onClose,
 		onSaveSuccess = p1.onSaveSuccess
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 228 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseEditProfileImageDraftModuleResult (copy), UseEditProfileImageSaveModuleResult (copy), p1 (copy)
 		UseEditProfileImageDraftModuleResult.resetFromSavedConfig()
 		UseEditProfileImageSaveModuleResult.resetTransientState()
@@ -149,7 +149,7 @@ return function(p1) --[[ Line: 111 | Named "useEditProfileImageViewModel" ]]
 		UseEditProfileImageSaveModuleResult.resetTransientState,
 		p1.onClose
 	})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 235 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseEditProfileImageNavigationModuleResult (copy), UseResult2 (copy), FFlagEditProfileFramesEnabled (upval), UseEditProfileImageEmotesModuleResult (copy), UseEditProfileImageDraftModuleResult (copy), EditProfileImageAnalyticsModule (upval), p1 (copy)
 		local Outcome = nil
 		local ClearSelectedEmoteFunction = nil
@@ -188,12 +188,12 @@ return function(p1) --[[ Line: 111 | Named "useEditProfileImageViewModel" ]]
 		UseEditProfileImageEmotesModuleResult.isRecommendedEmoteSelected, UseResult2,
 		UseEditProfileImageDraftModuleResult.clearSelectedEmote
 	})
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 280 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: EditProfileImageAnalyticsModule (upval), p1 (copy), UseEditProfileImageEmotesModuleResult (copy)
 		EditProfileImageAnalyticsModule.logRetry({ assetType = "emotes", mode = p1.mode })
 		UseEditProfileImageEmotesModuleResult.onRetry()
 	end, { p1.mode, UseEditProfileImageEmotesModuleResult.onRetry })
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 288 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: EditProfileImageAnalyticsModule (upval), p1 (copy), UseProfileFramesModuleResult (copy)
 		EditProfileImageAnalyticsModule.logRetry({ assetType = "frames", mode = p1.mode })
 		UseProfileFramesModuleResult.refetch()

@@ -3,7 +3,7 @@ local Context = ReactModule.createContext((ReactModule.createBinding(false)))
 
 return {
 	Provider = Context.Provider,
-	useIsSlideAnimating = function() --[[ Line: 13 ]]
+	useIsSlideAnimating = function()
 		-- upvalues: ReactModule (copy), Context (copy)
 		return ReactModule.useContext(Context)
 	end

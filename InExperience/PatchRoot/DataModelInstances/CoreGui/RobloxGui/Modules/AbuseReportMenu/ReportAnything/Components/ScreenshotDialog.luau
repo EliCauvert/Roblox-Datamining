@@ -16,7 +16,7 @@ local ScreenshotDialogLandscapeModeHeaderModule = require(Parent.Components.Scre
 local _ = require(Parent.Utility.ReportAnythingAnalytics)
 local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
 
-local function PortraitModeFooter(p1) --[[ Line: 43 ]]
+local function PortraitModeFooter(p1)
 	-- upvalues: ReactModule (copy), ButtonStack (copy), ButtonType (copy), RobloxTranslatorModule (copy)
 	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 0,
@@ -46,7 +46,7 @@ local function PortraitModeFooter(p1) --[[ Line: 43 ]]
 					{
 						buttonType = ButtonType.PrimarySystem,
 						props = {
-							onActivated = function() --[[ Line: 74 ]]
+							onActivated = function()
 								-- upvalues: p1 (copy)
 								p1.finishAnnotationAction(p1.annotationPoints)
 							end,
@@ -59,12 +59,12 @@ local function PortraitModeFooter(p1) --[[ Line: 43 ]]
 	})
 end
 
-return function(p1) --[[ Line: 86 | Named "ScreenshotDialog" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), VirtualKeyboardMonitorModule (copy), ReactModule (copy), CryoModule (copy), ImageSetButton (copy), AssetsModule (copy), ScreenshotDialogPortraitModeHeaderModule (copy), ScreenshotDialogLandscapeModeHeaderModule (copy), DividerModule (copy), ScreenshotHighlighterModule (copy), PortraitModeFooter (copy)
 	local Theme = UseStyleFunction().Theme
 	local _Instance = VirtualKeyboardMonitorModule.getInstance()
 	
-	local function v19() --[[ Line: 92 ]]
+	local function v19()
 		-- upvalues: _Instance (copy), p1 (copy)
 		warn("OverlayActivated")
 		
@@ -77,16 +77,16 @@ return function(p1) --[[ Line: 86 | Named "ScreenshotDialog" ]]
 	
 	local UseStateResult, UseStateResult2 = ReactModule.useState(CryoModule.Dictionary.join({}, p1.initialAnnotationPoints or {}))
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState({})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 109 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
 		UseStateResult2(table.clone(UseStateResult))
 	end, { UseStateResult2, UseStateResult })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 113 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		p1.reportAnythingAnalytics.incrementAnnotationBack()
 		p1.backAction()
 	end, { p1.backAction, p1.reportAnythingAnalytics })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 125 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult (copy), p1 (copy), UseStateResult1 (copy), UseResult (copy)
 		if #UseStateResult > 0 then
 			p1.reportAnythingAnalytics.incrementAnnotationUndo()
@@ -100,7 +100,7 @@ return function(p1) --[[ Line: 86 | Named "ScreenshotDialog" ]]
 		UseStateResult1,
 		p1.reportAnythingAnalytics
 	})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 135 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult1 (copy), p1 (copy), UseStateResult (copy), UseResult (copy)
 		if #UseStateResult1 > 0 then
 			p1.reportAnythingAnalytics.incrementAnnotationRedo()
@@ -114,7 +114,7 @@ return function(p1) --[[ Line: 86 | Named "ScreenshotDialog" ]]
 		UseStateResult1,
 		p1.reportAnythingAnalytics
 	})
-	local UseResult4 = ReactModule.useCallback(function(p2) --[[ Line: 145 ]]
+	local UseResult4 = ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy)
 		p1.reportAnythingAnalytics.setAnnotationNext()
 		p1.finishAnnotationAction(p2)
@@ -210,7 +210,7 @@ return function(p1) --[[ Line: 86 | Named "ScreenshotDialog" ]]
 							Highlighter = ReactModule.createElement(ScreenshotHighlighterModule, {
 								ZIndex = 3,
 								annotationPoints = UseStateResult,
-								handleAnnotationPoints = ReactModule.useCallback(function(_) --[[ Line: 118 ]]
+								handleAnnotationPoints = ReactModule.useCallback(function(_)
 									-- upvalues: p1 (copy), UseResult (copy), UseStateResult2_1 (copy)
 									p1.reportAnythingAnalytics.incrementAnnotationPlace()
 									UseResult()

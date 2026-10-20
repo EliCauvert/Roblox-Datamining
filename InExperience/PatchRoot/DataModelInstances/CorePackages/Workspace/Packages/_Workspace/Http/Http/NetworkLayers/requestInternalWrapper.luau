@@ -19,7 +19,7 @@ local config = {
 local Module = {}
 Module.__index = Module
 
-local function _(p1) --[[ Line: 38 | Named "parseResponseBody" ]]
+local function _(p1)
 	-- upvalues: StatusCodesModule (copy), HttpService (copy)
 	if p1.StatusCode == StatusCodesModule.NO_CONTENT then
 		return true, nil
@@ -30,7 +30,7 @@ local function _(p1) --[[ Line: 38 | Named "parseResponseBody" ]]
 	end
 end
 
-function Module.new(HttpService, Url, p1, p2) --[[ Line: 47 ]]
+function Module.new(HttpService, Url, p1, p2)
 	-- upvalues: HttpCancellerModule (copy), None (copy), MrRouterHeadersModule (copy), Module (copy)
 	local config = {
 		resolve = nil,
@@ -63,13 +63,13 @@ function Module.new(HttpService, Url, p1, p2) --[[ Line: 47 ]]
 	return config
 end
 
-function Module:start(Resolve, Reject) --[[ Line: 83 ]]
+function Module:start(Resolve, Reject)
 	self.resolve = Resolve
 	self.reject = Reject
 	self:makeRequest()
 end
 
-function Module:processResponse(p1) --[[ Line: 89 ]]
+function Module:processResponse(p1)
 	-- upvalues: LuaAppHttpSupportNoContent (copy), StatusCodesModule (copy), HttpService (copy), NetworkProfilerModule (copy), GreenlistedEndpointsForLoggingModule (copy)
 	local Success = nil
 	local Result = nil
@@ -114,7 +114,7 @@ function Module:processResponse(p1) --[[ Line: 89 ]]
 	end
 end
 
-function Module:retry(p1, Number) --[[ Line: 126 ]]
+function Module:retry(p1, Number)
 	local NoStats: boolean = not p1.Stats or not p1.Stats.WasRequestRetried
 	
 	if NoStats then
@@ -133,17 +133,17 @@ function Module:retry(p1, Number) --[[ Line: 126 ]]
 		self.internalOptions.Headers = {}
 	end
 	self.internalOptions.Headers["X-Retry-Attempt"] = tostring(self.retryCount)
-	delay(Number or math.pow(2, self.retryCount), function() --[[ Line: 152 ]]
+	delay(Number or math.pow(2, self.retryCount), function()
 		-- upvalues: self (copy)
 		self:makeRequest()
 	end)
 end
 
-function Module:makeRequest() --[[ Line: 157 ]]
+function Module:makeRequest()
 	-- upvalues: HttpCancellerModule (copy), config (copy), EnableRetryOnPrefetch401 (copy), StatusCodesModule (copy), GreenlistedEndpointsForLoggingModule (copy)
 	if not self.canceled then
 		self.httpRequest = self.httpService:RequestInternal(self.internalOptions)
-		self.httpRequest:Start(function(p1, p2) --[[ Line: 164 ]]
+		self.httpRequest:Start(function(p1, p2)
 			-- upvalues: self (copy), HttpCancellerModule (upval), config (upval), EnableRetryOnPrefetch401 (upval), StatusCodesModule (upval), GreenlistedEndpointsForLoggingModule (upval)
 			if self.session ~= HttpCancellerModule.currentSession() then
 				warn("Http request aborted", self.internalOptions.Url)
@@ -193,7 +193,7 @@ function Module:makeRequest() --[[ Line: 157 ]]
 	end
 end
 
-function Module:cancel() --[[ Line: 204 ]]
+function Module:cancel()
 	self.canceled = true
 	self.reject({ HttpError = Enum.HttpError.Aborted })
 	
@@ -202,19 +202,19 @@ function Module:cancel() --[[ Line: 204 ]]
 	end
 end
 
-return function(HttpService1) --[[ Line: 212 | Named "createRequestInternalWrapper" ]]
+return function(HttpService1)
 	-- upvalues: HttpService (copy), Module (copy), PromiseModule (copy)
 	if not HttpService1 then
 		HttpService1 = HttpService
 	end
-	return function(Url, p1, p2) --[[ Line: 217 | Named "makeRequest" ]]
+	return function(Url, p1, p2)
 		-- upvalues: Module (upval), HttpService1 (ref), PromiseModule (upval)
 		local NewModule = Module.new(HttpService1, Url, p1, p2)
 		
-		return PromiseModule.new(function(Resolve, Reject) --[[ Line: 220 ]]
+		return PromiseModule.new(function(Resolve, Reject)
 			-- upvalues: NewModule (copy)
 			NewModule:start(Resolve, Reject)
-		end), function() --[[ Line: 224 | Named "cancel" ]]
+		end), function()
 			-- upvalues: NewModule (copy)
 			NewModule:cancel()
 		end

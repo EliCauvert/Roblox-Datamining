@@ -4,7 +4,7 @@ local EdpStoreAnalyticsLogger = EdpStoreAnalyticsModule.EdpStoreAnalyticsLogger
 local StoreEnums = EdpStoreAnalyticsModule.Constants.StoreEnums
 local GetActionTelemetryFieldValueFunction = require(Parent.SduiCoreSystem).getActionTelemetryFieldValue
 
-return function(p1, p2, _) --[[ Line: 16 | Named "SduiEdpStoreItemClickTelemetryHandler" ]]
+return function(p1, p2, _)
 	-- upvalues: GetActionTelemetryFieldValueFunction (copy), EdpStoreAnalyticsLogger (copy), StoreEnums (copy)
 	local ProductType = GetActionTelemetryFieldValueFunction(p1, p2, "productType")
 	

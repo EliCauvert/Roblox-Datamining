@@ -45,19 +45,19 @@ local ItemSelectionStoreContext = AvatarExperienceInspectAndBuyModule.Contexts.I
 local Provider = ItemSelectionStoreContext.Provider
 local UseItemSelectionStoreFunction = ItemSelectionStoreContext.useItemSelectionStore
 
-local function v35(p1) --[[ Line: 80 ]]
+local function v35(p1)
 	return p1.assets
 end
 
-local function v36(p1) --[[ Line: 84 ]]
+local function v36(p1)
 	return p1.collectibleResellableInstances
 end
 
-local function v37(p1) --[[ Line: 88 ]]
+local function v37(p1)
 	return p1.bundles
 end
 
-local function InspectAndBuyBaseContainer(p1) --[[ Line: 92 ]]
+local function InspectAndBuyBaseContainer(p1)
 	-- upvalues: UseViewBreakpointsFunction (copy), ConstantsModule (copy), UseTokensFunction (copy), UseDispatchFunction (copy), UseItemSelectionStoreFunction (copy), UseSignalStateFunction (copy), UseSelectorFunction (copy), v35 (copy), TutilsModule (copy), v36 (copy), v37 (copy), ReactModule (copy), GuiService (copy), UpdateBulkPuchaseResultsModule (copy), ItemTypeEnum (copy), BuildBulkPurchaseAnalyticsPayloadFunction (copy), GetItemDetailsModule (copy), GetFavoriteForAssetModule (copy), GetProductInfoModule (copy), FFlagAXEnableBatchItemDetailsFetchV2 (copy), GetFavoriteForBundleModule (copy), DeleteFavoriteForAssetModule (copy), CreateFavoriteForAssetModule (copy), DeleteFavoriteForBundleModule (copy), CreateFavoriteForBundleModule (copy), OpenOverlayModule (copy), OverlayModule (copy), PromptPurchaseModule (copy), ApplyTryOnItemToHumanoidDescriptionFunction (copy), AvatarViewportModule (copy), EnableAvatarViewportAutoRotation (copy), AXViewportCameraFieldOfView (copy), UseResponsivePanelLayoutPropsFunction (copy), UseUnifiedEventListenerInExperienceFunction (copy), FFlagAXEnableInspectAndBuyFocusNavigation (copy), UseInspectAndBuyFocusNavigationFunction (copy), FoundationModule (copy), ThemeModule (copy), ResponsivePanelLayout (copy), OverlayModule1 (copy), PopoverFocusRestorationContext (copy)
 	local UseViewBreakpointsResult = UseViewBreakpointsFunction(ConstantsModule.TopBarHeight)
 	local UseTokensResult = UseTokensFunction()
@@ -67,11 +67,11 @@ local function InspectAndBuyBaseContainer(p1) --[[ Line: 92 ]]
 	local UseSelectorResult1 = UseSelectorFunction(v36, TutilsModule.deepEqual)
 	local UseSelectorResult2 = UseSelectorFunction(v37, TutilsModule.deepEqual)
 	local UseResponsivePanelLayoutPropsResult = UseResponsivePanelLayoutPropsFunction({
-		onInspectMenuClosed = ReactModule.useCallback(function() --[[ Line: 107 ]]
+		onInspectMenuClosed = ReactModule.useCallback(function()
 			-- upvalues: GuiService (upval)
 			GuiService:CloseInspectMenu()
 		end, {}),
-		onBulkPurchaseFinished = ReactModule.useCallback(function(_, _, p2) --[[ Line: 115 ]]
+		onBulkPurchaseFinished = ReactModule.useCallback(function(_, _, p2)
 			-- upvalues: UseDispatchResult (copy), UpdateBulkPuchaseResultsModule (upval), ItemTypeEnum (upval), UseSignalStateResult (copy), BuildBulkPurchaseAnalyticsPayloadFunction (upval), UseSelectorResult (copy), UseSelectorResult2 (copy), UseSelectorResult1 (copy), p1 (copy), GetItemDetailsModule (upval)
 			UseDispatchResult(UpdateBulkPuchaseResultsModule(p2))
 			
@@ -100,7 +100,7 @@ local function InspectAndBuyBaseContainer(p1) --[[ Line: 92 ]]
 			UseDispatchResult, UseSelectorResult, UseSelectorResult2, UseSelectorResult1,
 			UseSignalStateResult, p1.analytics.reportPurchaseSuccessUnifiedEvent
 		}),
-		onItemDetailsOpened = ReactModule.useCallback(function(p3) --[[ Line: 161 ]]
+		onItemDetailsOpened = ReactModule.useCallback(function(p3)
 			-- upvalues: ItemTypeEnum (upval), UseDispatchResult (copy), GetFavoriteForAssetModule (upval), GetProductInfoModule (upval), FFlagAXEnableBatchItemDetailsFetchV2 (upval), GetItemDetailsModule (upval), GetFavoriteForBundleModule (upval)
 			if p3.itemType == ItemTypeEnum.Asset then
 				UseDispatchResult(GetFavoriteForAssetModule(p3.id))
@@ -115,7 +115,7 @@ local function InspectAndBuyBaseContainer(p1) --[[ Line: 92 ]]
 				UseDispatchResult(GetFavoriteForBundleModule(p3.id))
 			end
 		end, { UseDispatchResult }),
-		onToggleFavorite = ReactModule.useCallback(function(p3, p4) --[[ Line: 180 ]]
+		onToggleFavorite = ReactModule.useCallback(function(p3, p4)
 			-- upvalues: ItemTypeEnum (upval), UseDispatchResult (copy), DeleteFavoriteForAssetModule (upval), CreateFavoriteForAssetModule (upval), DeleteFavoriteForBundleModule (upval), CreateFavoriteForBundleModule (upval)
 			if p3.itemType == ItemTypeEnum.Asset then
 				if p4 then
@@ -136,15 +136,15 @@ local function InspectAndBuyBaseContainer(p1) --[[ Line: 92 ]]
 				UseDispatchResult(CreateFavoriteForBundleModule(p3.id))
 			end
 		end, { UseDispatchResult }),
-		openAttributionOverlay = ReactModule.useCallback(function(p3) --[[ Line: 196 ]]
+		openAttributionOverlay = ReactModule.useCallback(function(p3)
 			-- upvalues: UseDispatchResult (copy), OpenOverlayModule (upval), OverlayModule (upval)
 			UseDispatchResult(OpenOverlayModule(OverlayModule.AttributionTraversal, p3))
 		end, { UseDispatchResult }),
-		onPromptPurchase = function(p3, p4, p5, p6, p7, p8, p9) --[[ Line: 233 ]]
+		onPromptPurchase = function(p3, p4, p5, p6, p7, p8, p9)
 			-- upvalues: UseDispatchResult (copy), PromptPurchaseModule (upval)
 			UseDispatchResult(PromptPurchaseModule(p3, p4, p5, p6, p7, p8, p9))
 		end,
-		renderTryOnViewport = ReactModule.useCallback(function(p3) --[[ Line: 255 ]]
+		renderTryOnViewport = ReactModule.useCallback(function(p3)
 			-- upvalues: p1 (copy), ApplyTryOnItemToHumanoidDescriptionFunction (upval), ReactModule (upval), AvatarViewportModule (upval), EnableAvatarViewportAutoRotation (upval), AXViewportCameraFieldOfView (upval)
 			if p1.localPlayerModel and p1.localPlayerModel.Humanoid then
 				local HumanoidDescription = p1.localPlayerModel.Humanoid.HumanoidDescription:Clone()
@@ -196,7 +196,7 @@ local function InspectAndBuyBaseContainer(p1) --[[ Line: 92 ]]
 					stateLayer = {
 						affordance = FoundationModule.Enums.StateLayerAffordance.None
 					},
-					onActivated = function() --[[ Line: 315 ]]
+					onActivated = function()
 						-- upvalues: GuiService (upval)
 						GuiService:CloseInspectMenu()
 					end
@@ -213,7 +213,7 @@ local function InspectAndBuyBaseContainer(p1) --[[ Line: 92 ]]
 						stateLayer = {
 							affordance = FoundationModule.Enums.StateLayerAffordance.None
 						},
-						onActivated = function() --[[ Line: 331 ]] end
+						onActivated = function() end
 					}, {
 						UICorner = ReactModule.createElement("UICorner", { CornerRadius = ThemeModule.DefaultCornerRadius }),
 						ResponsivePanelLayout = ReactModule.createElement(ResponsivePanelLayout, UseResponsivePanelLayoutPropsResult)
@@ -230,7 +230,7 @@ local function InspectAndBuyBaseContainer(p1) --[[ Line: 92 ]]
 			stateLayer = {
 				affordance = FoundationModule.Enums.StateLayerAffordance.None
 			},
-			onActivated = function() --[[ Line: 358 ]]
+			onActivated = function()
 				-- upvalues: GuiService (upval)
 				GuiService:CloseInspectMenu()
 			end
@@ -247,7 +247,7 @@ local function InspectAndBuyBaseContainer(p1) --[[ Line: 92 ]]
 				stateLayer = {
 					affordance = FoundationModule.Enums.StateLayerAffordance.None
 				},
-				onActivated = function() --[[ Line: 374 ]] end
+				onActivated = function() end
 			}, {
 				UICorner = ReactModule.createElement("UICorner", { CornerRadius = ThemeModule.DefaultCornerRadius }),
 				ResponsivePanelLayout = ReactModule.createElement(ResponsivePanelLayout, UseResponsivePanelLayoutPropsResult)
@@ -257,7 +257,7 @@ local function InspectAndBuyBaseContainer(p1) --[[ Line: 92 ]]
 	end
 end
 
-return function(p2) --[[ Line: 386 | Named "InspectAndBuyBaseContainerWithSignalsProvider" ]]
+return function(p2)
 	-- upvalues: ReactModule (copy), Provider (copy), InspectAndBuyBaseContainer (copy)
 	return ReactModule.createElement(Provider, {}, {
 		Inner = ReactModule.createElement(InspectAndBuyBaseContainer, p2)

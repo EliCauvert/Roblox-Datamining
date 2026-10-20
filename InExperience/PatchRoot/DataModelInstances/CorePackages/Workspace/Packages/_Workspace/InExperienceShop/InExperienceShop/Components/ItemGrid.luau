@@ -6,10 +6,10 @@ local ItemRowModule = require(InExperienceShop.Components.ItemRow)
 local BuildItemGridRowsFunction = require(InExperienceShop.Components.buildItemGridRows).buildItemGridRows
 local _ = require(InExperienceShop.Types)
 
-return function(Frame) --[[ Line: 32 | Named "ItemGrid" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), BuildItemGridRowsFunction (copy), ItemRowModule (copy), View (copy)
 	local ItemsPerRow = Frame.itemsPerRow
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 36 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: BuildItemGridRowsFunction (upval), Frame (copy), ItemsPerRow (copy)
 		return BuildItemGridRowsFunction(Frame.items, ItemsPerRow, Frame.isFeaturedDoubleWidthRobux)
 	end, {
@@ -17,7 +17,7 @@ return function(Frame) --[[ Line: 32 | Named "ItemGrid" ]]
 		ItemsPerRow,
 		Frame.isFeaturedDoubleWidthRobux
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 67 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: Frame (copy)
 		if Frame.onGridLayoutChange then
 			Frame.onGridLayoutChange()
@@ -29,7 +29,7 @@ return function(Frame) --[[ Line: 32 | Named "ItemGrid" ]]
 		LayoutOrder = Frame.LayoutOrder,
 		ref = Frame.gridRef,
 		onAbsoluteSizeChanged = if Frame.onGridLayoutChange == nil then nil else UseResult
-	}, (ReactModule.useMemo(function() --[[ Line: 41 ]]
+	}, (ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), ReactModule (upval), ItemRowModule (upval), ItemsPerRow (copy), Frame (copy)
 		local Elements = {}
 		

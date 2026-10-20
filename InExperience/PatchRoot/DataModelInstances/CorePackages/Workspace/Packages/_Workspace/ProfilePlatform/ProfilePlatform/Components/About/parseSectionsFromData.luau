@@ -16,7 +16,7 @@ local list = {
 }
 local list1 = { "description" }
 
-return function(p1, Contact, Name) --[[ Line: 37 ]]
+return function(p1, Contact, Name)
 	-- upvalues: EnumsModule (copy), list1 (copy), list (copy), config (copy), ReactModule (copy)
 	local Elements = {}
 	

@@ -24,7 +24,7 @@ local FIntOfferExpirationRefetchMaxCountModule = require(InExperienceOffers.Flag
 local FFlagOffersPerKeyExpiryRefetchModule = require(InExperienceOffers.Flags.FFlagOffersPerKeyExpiryRefetch)
 local FFlagOffersShopScopedNotificationModule = require(InExperienceOffers.Flags.FFlagOffersShopScopedNotification)
 
-local function normalizePresentationData(PresentationData) --[[ Line: 103 ]]
+local function normalizePresentationData(PresentationData)
 	if PresentationData == nil then
 		return nil
 	end
@@ -44,7 +44,7 @@ local function normalizePresentationData(PresentationData) --[[ Line: 103 ]]
 	return t
 end
 
-local function _(p1) --[[ Line: 122 | Named "normalizeOffer" ]]
+local function _(p1)
 	-- upvalues: normalizePresentationData (copy)
 	return {
 		offerId = p1.offerId,
@@ -55,7 +55,7 @@ local function _(p1) --[[ Line: 122 | Named "normalizeOffer" ]]
 	}
 end
 
-local function bucketResponse(p1) --[[ Line: 135 ]]
+local function bucketResponse(p1)
 	-- upvalues: normalizePresentationData (copy)
 	local t = {}
 	
@@ -81,7 +81,7 @@ local function bucketResponse(p1) --[[ Line: 135 ]]
 	return t
 end
 
-local function mergeRequestedKeys(Tbl, p2, List) --[[ Line: 155 ]]
+local function mergeRequestedKeys(Tbl, p2, List)
 	local T = if Tbl == nil then {} else table.clone(Tbl)
 	for _, value in List do
 		T[value] = p2[value]
@@ -89,7 +89,7 @@ local function mergeRequestedKeys(Tbl, p2, List) --[[ Line: 155 ]]
 	return T
 end
 
-local _ = function(List) --[[ Line: 168 | Named "keysOf" ]]
+local _ = function(List)
 	local List1 = {}
 	
 	for i in List do
@@ -98,7 +98,7 @@ local _ = function(List) --[[ Line: 168 | Named "keysOf" ]]
 	return List1
 end
 
-return function() --[[ Line: 176 | Named "createOffersStore" ]]
+return function()
 	-- upvalues: CreateSessionScopedSignalFunction (copy), SignalsModule (copy), FFlagHideOfferNotificationsWhenShopEmpty (copy), FFlagOffersShopScopedNotificationModule (copy), FeatureKeyModule (copy), IsNotificationEligibleModule (copy), NotificationLocationModule (copy), FFlagUseMockUserOffersModule (copy), MockGetAllUserOffersModule (copy), GetAllUserOffersModule (copy), normalizePresentationData (copy), FFlagOffersRespectExpirationModule (copy), bucketResponse (copy), mergeRequestedKeys (copy), FFlagEnableUserOffers (copy), FFlagOffersMergeStoreResultsModule (copy), OffersDebugLoggerModule (copy), FIntOfferExpirationRefetchMaxCountModule (copy), FIntOfferExpirationRefetchBufferSecondsModule (copy), FIntOfferExpirationRefetchJitterSecondsModule (copy), GetSecondsUntilAnyKeyEmptiesModule (copy), FFlagOffersPerKeyExpiryRefetchModule (copy), GetSecondsUntilNextExpirationModule (copy)
 	local SessionScopedSignal, SessionScopedSignal2 = CreateSessionScopedSignalFunction(nil)
 	local SessionScopedSignal1, SessionScopedSignal2_1 = CreateSessionScopedSignalFunction(nil)
@@ -113,7 +113,7 @@ return function() --[[ Line: 176 | Named "createOffersStore" ]]
 	local Count1 = 0
 	local Callback = nil
 	
-	local function _() --[[ Line: 345 | Named "cancelExpirationRefetch" ]]
+	local function _()
 		-- upvalues: DelayedThread (ref)
 		if DelayedThread ~= nil then
 			pcall(task.cancel, DelayedThread)
@@ -121,7 +121,7 @@ return function() --[[ Line: 176 | Named "createOffersStore" ]]
 		end
 	end
 	
-	local function commitOffers(p3) --[[ Line: 361 ]]
+	local function commitOffers(p3)
 		-- upvalues: normalizePresentationData (upval), SessionScopedSignal2 (copy), FFlagOffersRespectExpirationModule (upval), Callback (ref)
 		local t = {}
 		
@@ -151,7 +151,7 @@ return function() --[[ Line: 176 | Named "createOffersStore" ]]
 		end
 	end
 	
-	local _ = function(p4, p5) --[[ Line: 384 | Named "commitMergedOffers" ]]
+	local _ = function(p4, p5)
 		-- upvalues: bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (copy), SessionScopedSignal2 (copy), FFlagOffersRespectExpirationModule (upval), Callback (ref)
 		local MergeRequestedKeysResult = mergeRequestedKeys(SessionScopedSignal(false), bucketResponse(p5), p4)
 		SessionScopedSignal2(MergeRequestedKeysResult)
@@ -161,7 +161,7 @@ return function() --[[ Line: 176 | Named "createOffersStore" ]]
 		end
 	end
 	
-	local function expireShopOffers() --[[ Line: 398 ]]
+	local function expireShopOffers()
 		-- upvalues: SessionScopedSignal (copy), FeatureKeyModule (upval), SessionScopedSignal2 (copy)
 		local SessionScopedSignalResult = SessionScopedSignal(false)
 		
@@ -176,7 +176,7 @@ return function() --[[ Line: 176 | Named "createOffersStore" ]]
 		SessionScopedSignal2(t)
 	end
 	
-	local _ = function(Count, p4) --[[ Line: 412 | Named "commitOffersIfCurrent" ]]
+	local _ = function(Count, p4)
 		-- upvalues: Count1 (ref), commitOffers (copy)
 		if Count == Count1 then
 			commitOffers(p4)
@@ -185,7 +185,7 @@ return function() --[[ Line: 176 | Named "createOffersStore" ]]
 		end
 	end
 	
-	local _ = function(Count, p4, p5) --[[ Line: 419 | Named "commitMergedOffersIfCurrent" ]]
+	local _ = function(Count, p4, p5)
 		-- upvalues: Count1 (ref), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (copy), SessionScopedSignal2 (copy), FFlagOffersRespectExpirationModule (upval), Callback (ref)
 		if Count ~= Count1 then return end
 		local MergeRequestedKeysResult = mergeRequestedKeys(SessionScopedSignal(false), bucketResponse(p5), p4)
@@ -196,11 +196,11 @@ return function() --[[ Line: 176 | Named "createOffersStore" ]]
 		end
 	end
 	
-	local function fetchOffers(p4) --[[ Line: 440 ]]
+	local function fetchOffers(p4)
 		-- upvalues: FFlagEnableUserOffers (upval), FFlagOffersRespectExpirationModule (upval), v1 (ref), DelayedThread (ref), Count1 (ref), MockGetAllUserOffersModule1 (copy), FFlagOffersMergeStoreResultsModule (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (copy), SessionScopedSignal2 (copy), Callback (ref), commitOffers (copy), OffersDebugLoggerModule (upval)
 		if not FFlagEnableUserOffers then return end
 		if not FFlagOffersRespectExpirationModule then
-			MockGetAllUserOffersModule1(p4):andThen(function(Result) --[[ Line: 472 ]]
+			MockGetAllUserOffersModule1(p4):andThen(function(Result)
 				-- upvalues: FFlagOffersMergeStoreResultsModule (upval), p4 (copy), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (upval), SessionScopedSignal2 (upval), FFlagOffersRespectExpirationModule (upval), Callback (upval), commitOffers (upval)
 				if FFlagOffersMergeStoreResultsModule then
 					local MergeRequestedKeysResult = mergeRequestedKeys(SessionScopedSignal(false), bucketResponse(Result), p4)
@@ -214,7 +214,7 @@ return function() --[[ Line: 176 | Named "createOffersStore" ]]
 				else
 					commitOffers(Result)
 				end
-			end):catch(function(Err) --[[ Line: 479 ]]
+			end):catch(function(Err)
 				-- upvalues: OffersDebugLoggerModule (upval)
 				OffersDebugLoggerModule.log("fetchOffers failed: " .. tostring(Err))
 			end)
@@ -229,7 +229,7 @@ return function() --[[ Line: 176 | Named "createOffersStore" ]]
 		end
 		Count1 += 1
 		local Count: number = Count1
-		MockGetAllUserOffersModule1(p4):andThen(function(Result) --[[ Line: 450 ]]
+		MockGetAllUserOffersModule1(p4):andThen(function(Result)
 			-- upvalues: FFlagOffersMergeStoreResultsModule (upval), Count (copy), p4 (copy), Count1 (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (upval), SessionScopedSignal2 (upval), FFlagOffersRespectExpirationModule (upval), Callback (upval), commitOffers (upval)
 			if FFlagOffersMergeStoreResultsModule then
 				if Count ~= Count1 then return end
@@ -243,7 +243,7 @@ return function() --[[ Line: 176 | Named "createOffersStore" ]]
 				end
 			elseif Count ~= Count1 then return end
 			commitOffers(Result)
-		end):catch(function(Err) --[[ Line: 457 ]]
+		end):catch(function(Err)
 			-- upvalues: OffersDebugLoggerModule (upval), Count (copy), Count1 (upval), SessionScopedSignal (upval), Callback (upval)
 			OffersDebugLoggerModule.log("fetchOffers failed: " .. tostring(Err))
 			
@@ -257,7 +257,7 @@ return function() --[[ Line: 176 | Named "createOffersStore" ]]
 		end)
 	end
 	
-	local function armExpirationRefetch(p4, p5) --[[ Line: 488 ]]
+	local function armExpirationRefetch(p4, p5)
 		-- upvalues: Count (ref), FIntOfferExpirationRefetchMaxCountModule (upval), FIntOfferExpirationRefetchBufferSecondsModule (upval), FIntOfferExpirationRefetchJitterSecondsModule (upval), DelayedThread (ref), Count1 (ref), MockGetAllUserOffersModule1 (copy), FFlagOffersMergeStoreResultsModule (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (copy), SessionScopedSignal2 (copy), FFlagOffersRespectExpirationModule (upval), Callback (ref), commitOffers (copy), OffersDebugLoggerModule (upval)
 		if FIntOfferExpirationRefetchMaxCountModule <= Count then return end
 		local NewFIntOfferExpirationRefetchBufferSecondsModule = p5 + FIntOfferExpirationRefetchBufferSecondsModule
@@ -265,12 +265,12 @@ return function() --[[ Line: 176 | Named "createOffersStore" ]]
 		if FIntOfferExpirationRefetchJitterSecondsModule > 0 then
 			NewFIntOfferExpirationRefetchBufferSecondsModule += math.random() * FIntOfferExpirationRefetchJitterSecondsModule
 		end
-		DelayedThread = task.delay(NewFIntOfferExpirationRefetchBufferSecondsModule, function() --[[ Line: 497 ]]
+		DelayedThread = task.delay(NewFIntOfferExpirationRefetchBufferSecondsModule, function()
 			-- upvalues: DelayedThread (upval), Count (upval), Count1 (upval), MockGetAllUserOffersModule1 (upval), p4 (copy), FFlagOffersMergeStoreResultsModule (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (upval), SessionScopedSignal2 (upval), FFlagOffersRespectExpirationModule (upval), Callback (upval), commitOffers (upval), OffersDebugLoggerModule (upval)
 			DelayedThread = nil
 			Count += 1
 			local Count2 = Count1
-			MockGetAllUserOffersModule1(p4):andThen(function(Result) --[[ Line: 502 ]]
+			MockGetAllUserOffersModule1(p4):andThen(function(Result)
 				-- upvalues: FFlagOffersMergeStoreResultsModule (upval), Count2 (copy), p4 (upval), Count1 (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (upval), SessionScopedSignal2 (upval), FFlagOffersRespectExpirationModule (upval), Callback (upval), commitOffers (upval)
 				if FFlagOffersMergeStoreResultsModule then
 					if Count2 ~= Count1 then return end
@@ -284,7 +284,7 @@ return function() --[[ Line: 176 | Named "createOffersStore" ]]
 					end
 				elseif Count2 ~= Count1 then return end
 				commitOffers(Result)
-			end):catch(function(Err) --[[ Line: 509 ]]
+			end):catch(function(Err)
 				-- upvalues: Count2 (copy), Count1 (upval), OffersDebugLoggerModule (upval), SessionScopedSignal (upval), Callback (upval)
 				if Count2 ~= Count1 then return end
 				OffersDebugLoggerModule.log("expiration refetch failed: " .. tostring(Err))
@@ -297,7 +297,7 @@ return function() --[[ Line: 176 | Named "createOffersStore" ]]
 		end)
 	end
 	
-	local _ = function(List) --[[ Line: 526 | Named "scheduleExpirationRefetchPerKey" ]]
+	local _ = function(List)
 		-- upvalues: DelayedThread (ref), GetSecondsUntilAnyKeyEmptiesModule (upval), armExpirationRefetch (copy)
 		if DelayedThread ~= nil then
 			pcall(task.cancel, DelayedThread)
@@ -314,7 +314,7 @@ return function() --[[ Line: 176 | Named "createOffersStore" ]]
 		armExpirationRefetch(List1, SecondsUntilAnyKeyEmptiesModule)
 	end
 	
-	Callback = function(List) --[[ Line: 545 | Named "scheduleExpirationRefetch" ]]
+	Callback = function(List)
 		-- upvalues: FFlagOffersPerKeyExpiryRefetchModule (upval), DelayedThread (ref), GetSecondsUntilAnyKeyEmptiesModule (upval), armExpirationRefetch (copy), v1 (ref), GetSecondsUntilNextExpirationModule (upval), Count (ref), FIntOfferExpirationRefetchMaxCountModule (upval), FIntOfferExpirationRefetchBufferSecondsModule (upval), FIntOfferExpirationRefetchJitterSecondsModule (upval), Count1 (ref), MockGetAllUserOffersModule1 (copy), FFlagOffersMergeStoreResultsModule (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (copy), SessionScopedSignal2 (copy), FFlagOffersRespectExpirationModule (upval), Callback (ref), commitOffers (copy), OffersDebugLoggerModule (upval), expireShopOffers (copy)
 		if FFlagOffersPerKeyExpiryRefetchModule then
 			if DelayedThread ~= nil then
@@ -347,12 +347,12 @@ return function() --[[ Line: 176 | Named "createOffersStore" ]]
 			if FIntOfferExpirationRefetchJitterSecondsModule > 0 then
 				NewSecondsUntilNextExpirationModule += math.random() * FIntOfferExpirationRefetchJitterSecondsModule
 			end
-			DelayedThread = task.delay(NewSecondsUntilNextExpirationModule, function() --[[ Line: 566 ]]
+			DelayedThread = task.delay(NewSecondsUntilNextExpirationModule, function()
 				-- upvalues: DelayedThread (upval), Count (upval), Count1 (upval), MockGetAllUserOffersModule1 (upval), v2 (copy), FFlagOffersMergeStoreResultsModule (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (upval), SessionScopedSignal2 (upval), FFlagOffersRespectExpirationModule (upval), Callback (upval), commitOffers (upval), OffersDebugLoggerModule (upval), expireShopOffers (upval)
 				DelayedThread = nil
 				Count += 1
 				local Count2 = Count1
-				MockGetAllUserOffersModule1(v2):andThen(function(Result) --[[ Line: 573 ]]
+				MockGetAllUserOffersModule1(v2):andThen(function(Result)
 					-- upvalues: FFlagOffersMergeStoreResultsModule (upval), Count2 (copy), v2 (upval), Count1 (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (upval), SessionScopedSignal2 (upval), FFlagOffersRespectExpirationModule (upval), Callback (upval), commitOffers (upval)
 					if FFlagOffersMergeStoreResultsModule then
 						if Count2 ~= Count1 then return end
@@ -366,7 +366,7 @@ return function() --[[ Line: 176 | Named "createOffersStore" ]]
 						end
 					elseif Count2 ~= Count1 then return end
 					commitOffers(Result)
-				end):catch(function(Err) --[[ Line: 580 ]]
+				end):catch(function(Err)
 					-- upvalues: Count2 (copy), Count1 (upval), OffersDebugLoggerModule (upval), expireShopOffers (upval)
 					if Count2 == Count1 then
 						OffersDebugLoggerModule.log("expiration refetch failed, expiring shop offers: " .. tostring(Err))
@@ -381,7 +381,7 @@ return function() --[[ Line: 176 | Named "createOffersStore" ]]
 	
 	return {
 		getOffers = SessionScopedSignal,
-		getOfferNotificationShown = SignalsModule.createComputed(function(p4): boolean --[[ Line: 211 ]]
+		getOfferNotificationShown = SignalsModule.createComputed(function(p4): boolean
 			-- upvalues: SessionScopedSignal (copy), SessionScopedSignal1 (copy), Signal1 (copy), FFlagHideOfferNotificationsWhenShopEmpty (upval), Signal3 (copy), FFlagOffersShopScopedNotificationModule (upval), FeatureKeyModule (upval), IsNotificationEligibleModule (upval)
 			local SessionScopedSignalResult = SessionScopedSignal(p4)
 			local SessionScopedSignalResult1 = SessionScopedSignal1(p4)
@@ -417,7 +417,7 @@ return function() --[[ Line: 176 | Named "createOffersStore" ]]
 				return false
 			end
 		end),
-		getOfferNotificationShownWithEnum = SignalsModule.createComputed(function(p5) --[[ Line: 256 ]]
+		getOfferNotificationShownWithEnum = SignalsModule.createComputed(function(p5)
 			-- upvalues: SessionScopedSignal3 (copy), NotificationLocationModule (upval), SessionScopedSignal (copy), SessionScopedSignal1 (copy), FFlagHideOfferNotificationsWhenShopEmpty (upval), Signal3 (copy), Signal (copy), Signal1 (copy), FFlagOffersShopScopedNotificationModule (upval), FeatureKeyModule (upval), IsNotificationEligibleModule (upval)
 			if SessionScopedSignal3(p5) then
 				return NotificationLocationModule.None
@@ -466,13 +466,13 @@ return function() --[[ Line: 176 | Named "createOffersStore" ]]
 		getIsShopAvailable = Signal1,
 		getShopHasItems = Signal3,
 		fetchOffers = fetchOffers,
-		hydrateOfferExposureSnapshot = function(p6) --[[ Line: 315 ]]
+		hydrateOfferExposureSnapshot = function(p6)
 			-- upvalues: SessionScopedSignal1 (copy), SessionScopedSignal2_1 (copy)
 			if SessionScopedSignal1(false) == nil then
 				SessionScopedSignal2_1(p6)
 			end
 		end,
-		markInExperienceShopOpened = function() --[[ Line: 321 ]]
+		markInExperienceShopOpened = function()
 			-- upvalues: SessionScopedSignal2_2 (copy)
 			SessionScopedSignal2_2(true)
 		end,

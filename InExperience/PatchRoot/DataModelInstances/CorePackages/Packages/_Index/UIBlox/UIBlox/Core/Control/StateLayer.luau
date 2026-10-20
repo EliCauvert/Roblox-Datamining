@@ -34,11 +34,11 @@ local config1 = {
 	[ControlStateModule.Disabled.rawValue()] = "Idle"
 }
 
-local function _(p1, p2) --[[ Line: 86 | Named "getStateTokens" ]]
+local function _(p1, p2)
 	return if p2 == "Standard" then p1.Color.State elseif p2 == "Inverse" then p1.Inverse.State elseif p2 == "Lighten" then p1.DarkMode.State else p1.LightMode.State
 end
 
-return ReactModule.memo((ReactModule.forwardRef(function(p1, Ref) --[[ Line: 98 ]]
+return ReactModule.memo((ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleModule (copy), config1 (copy), RawValueResult (copy), ReactModule (copy), UseCursorModule (copy), InteractableModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local Tokens = UseStyleModule().Tokens
@@ -81,7 +81,7 @@ return ReactModule.memo((ReactModule.forwardRef(function(p1, Ref) --[[ Line: 98 
 		Selectable = not JoinResult.isDisabled and JoinResult.selectable,
 		SelectionImageObject = UseCursorModuleResult,
 		[ReactModule.Event.Activated] = JoinResult.onActivated,
-		onStateChanged = ReactModule.useCallback(function(p2, p3) --[[ Line: 145 ]]
+		onStateChanged = ReactModule.useCallback(function(p2, p3)
 			-- upvalues: State (copy), config1 (upval), UseBindingResult2 (copy), UseBindingResult2_1 (copy), JoinResult (copy)
 			local StateEntry = State[config1[p3.rawValue()]]
 			UseBindingResult2(StateEntry.Color3)

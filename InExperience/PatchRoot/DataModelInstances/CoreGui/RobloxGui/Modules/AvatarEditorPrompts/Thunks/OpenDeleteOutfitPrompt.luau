@@ -6,14 +6,14 @@ local OpenPromptModule = require(Parent.Actions.OpenPrompt)
 local GetOutfitNameModule = require(Parent.Network.GetOutfitName)
 local PromptTypeModule = require(Parent.PromptType)
 
-return function(OutfitId) --[[ Line: 16 ]]
+return function(OutfitId)
 	-- upvalues: GetOutfitNameModule (copy), OpenPromptModule (copy), PromptTypeModule (copy), AvatarEditorService (copy)
-	return function(p1) --[[ Line: 17 ]]
+	return function(p1)
 		-- upvalues: GetOutfitNameModule (upval), OutfitId (copy), OpenPromptModule (upval), PromptTypeModule (upval), AvatarEditorService (upval)
-		GetOutfitNameModule(OutfitId):andThen(function(Result) --[[ Line: 18 ]]
+		GetOutfitNameModule(OutfitId):andThen(function(Result)
 			-- upvalues: p1 (copy), OpenPromptModule (upval), PromptTypeModule (upval), OutfitId (upval)
 			p1:dispatch(OpenPromptModule(PromptTypeModule.DeleteOutfit, { outfitId = OutfitId, outfitName = Result }))
-		end, function(_) --[[ Line: 23 ]]
+		end, function(_)
 			-- upvalues: AvatarEditorService (upval)
 			AvatarEditorService:SignalDeleteOutfitFailed()
 		end)

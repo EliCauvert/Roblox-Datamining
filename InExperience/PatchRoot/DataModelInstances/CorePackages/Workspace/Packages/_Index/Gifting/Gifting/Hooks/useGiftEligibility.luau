@@ -12,7 +12,7 @@ local _ = require(Gifting.Types)
 local BuildItemGiftabilityKeyFunction = require(Gifting.Stores.itemGiftabilityCacheKey).buildItemGiftabilityKey
 local t = {}
 
-local function buildItemsSignature(Current): string? --[[ Line: 43 ]]
+local function buildItemsSignature(Current): string?
 	-- upvalues: BuildItemGiftabilityKeyFunction (copy)
 	if Current == nil or #Current == 0 then
 		return nil
@@ -25,13 +25,13 @@ local function buildItemsSignature(Current): string? --[[ Line: 43 ]]
 	return table.concat(List, ",")
 end
 
-local function createEligibilitySignal(Store, Current) --[[ Line: 55 ]]
+local function createEligibilitySignal(Store, Current)
 	-- upvalues: SignalsModule (copy), GiftEligibilityModule (copy), t (copy), DataStatus (copy)
 	local v1: boolean = Current ~= nil and #Current > 0
 	local SenderEligibility = Store.getSenderEligibility()
 	local T = if Current == nil or #Current <= 0 then {} else Store.getAndFetchItemGiftabilities(Current)
 	
-	return SignalsModule.createComputed(function(p1) --[[ Line: 62 ]]
+	return SignalsModule.createComputed(function(p1)
 		-- upvalues: SenderEligibility (copy), GiftEligibilityModule (upval), t (upval), T (copy), DataStatus (upval), v1 (copy)
 		local StatusResult = SenderEligibility.status(p1)
 		local DataResult = SenderEligibility.data(p1)
@@ -69,13 +69,13 @@ local function createEligibilitySignal(Store, Current) --[[ Line: 55 ]]
 	end)
 end
 
-return function(Current, p1) --[[ Line: 109 | Named "useGiftEligibility" ]]
+return function(Current, p1)
 	-- upvalues: GetCanGiftStoreModule (copy), buildItemsSignature (copy), ReactModule (copy), createEligibilitySignal (copy), SignalsReactModule (copy)
 	local Store = (if p1 then p1.store else nil) or GetCanGiftStoreModule(false)
 	local UseRefResult = ReactModule.useRef(Current)
 	UseRefResult.current = Current
 	
-	return SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 119 ]]
+	return SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: createEligibilitySignal (upval), Store (copy), UseRefResult (copy)
 		return createEligibilitySignal(Store, UseRefResult.current)
 	end, { Store, (buildItemsSignature(Current)) })))

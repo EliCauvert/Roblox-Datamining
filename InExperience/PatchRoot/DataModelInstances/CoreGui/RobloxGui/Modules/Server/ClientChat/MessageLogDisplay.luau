@@ -1,10 +1,10 @@
 ﻿local Result1 = nil
-local Success, Result = pcall(function() --[[ Line: 7 ]]
+local Success, Result = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserRemoveMessageOnTextFilterFailures")
 end)
 Result1 = Success and Result
 local Result2_1 = false
-local Success1, Result2 = pcall(function() --[[ Line: 15 ]]
+local Success1, Result2 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserIsChatTranslationEnabled2")
 end)
 Result2_1 = Success1 and Result2
@@ -16,7 +16,7 @@ local NewResult = require(Parent:WaitForChild("MessageLabelCreator")).new()
 local Module = {}
 Module.__index = Module
 
-local function CreateGuiObjects() --[[ Line: 42 ]]
+local function CreateGuiObjects()
 	-- upvalues: ChatSettingsModule (copy), MessageLogDisplayModule (copy)
 	local Frame = Instance.new("Frame")
 	Frame.Selectable = false
@@ -40,16 +40,16 @@ local function CreateGuiObjects() --[[ Line: 42 ]]
 	return Frame, Scroller, ListLayout
 end
 
-function Module.Destroy(p1) --[[ Line: 67 ]]
+function Module.Destroy(p1)
 	p1.GuiObject:Destroy()
 	p1.Destroyed = true
 end
 
-function Module.SetActive(p1, Visible) --[[ Line: 72 ]]
+function Module.SetActive(p1, Visible)
 	p1.GuiObject.Visible = Visible
 end
 
-function Module.UpdateMessageFiltered(p1, p2) --[[ Line: 76 ]]
+function Module.UpdateMessageFiltered(p1, p2)
 	-- upvalues: Result1 (ref)
 	local v1 = nil
 	local Count = 1
@@ -82,7 +82,7 @@ function Module.UpdateMessageFiltered(p1, p2) --[[ Line: 76 ]]
 	end
 end
 
-function Module.RefreshMessagePlacement(p3, p4) --[[ Line: 107 ]]
+function Module.RefreshMessagePlacement(p3, p4)
 	local v2 = nil
 	local Count = 1
 	local MessageObjectLog = p3.MessageObjectLog
@@ -102,10 +102,10 @@ function Module.RefreshMessagePlacement(p3, p4) --[[ Line: 107 ]]
 	end
 end
 
-function Module.AddMessage(p5, p6) --[[ Line: 129 ]]
+function Module.AddMessage(p5, p6)
 	-- upvalues: Result2_1 (ref), NewResult (copy)
 	p5:WaitUntilParentedCorrectly()
-	local MessageLabel_Chat = if Result2_1 then NewResult:CreateMessageLabel_Chat(p6, p5.CurrentChannelName, function() --[[ Line: 134 ]]
+	local MessageLabel_Chat = if Result2_1 then NewResult:CreateMessageLabel_Chat(p6, p5.CurrentChannelName, function()
 		-- upvalues: p5 (copy), p6 (copy)
 		p5:RefreshMessagePlacement(p6)
 	end) else NewResult:CreateMessageLabel(p6, p5.CurrentChannelName)
@@ -118,7 +118,7 @@ function Module.AddMessage(p5, p6) --[[ Line: 129 ]]
 	end
 end
 
-function Module.RemoveMessageAtIndex(p5, Index) --[[ Line: 151 ]]
+function Module.RemoveMessageAtIndex(p5, Index)
 	p5:WaitUntilParentedCorrectly()
 	local MessageObjectLogEntry = p5.MessageObjectLog[Index]
 	
@@ -128,9 +128,9 @@ function Module.RemoveMessageAtIndex(p5, Index) --[[ Line: 151 ]]
 	end
 end
 
-function Module.AddMessageAtIndex(p5, p6, p7) --[[ Line: 162 ]]
+function Module.AddMessageAtIndex(p5, p6, p7)
 	-- upvalues: Result2_1 (ref), NewResult (copy)
-	local MessageLabel_Chat = if Result2_1 then NewResult:CreateMessageLabel_Chat(p6, p5.CurrentChannelName, function() --[[ Line: 165 ]]
+	local MessageLabel_Chat = if Result2_1 then NewResult:CreateMessageLabel_Chat(p6, p5.CurrentChannelName, function()
 		-- upvalues: p5 (copy), p6 (copy)
 		p5:RefreshMessagePlacement(p6)
 	end) else NewResult:CreateMessageLabel(p6, p5.CurrentChannelName)
@@ -143,13 +143,13 @@ function Module.AddMessageAtIndex(p5, p6, p7) --[[ Line: 162 ]]
 	end
 end
 
-function Module.RemoveLastMessage(p5) --[[ Line: 183 ]]
+function Module.RemoveLastMessage(p5)
 	p5:WaitUntilParentedCorrectly()
 	p5.MessageObjectLog[1]:Destroy()
 	table.remove(p5.MessageObjectLog, 1)
 end
 
-function Module.IsScrolledDown(p5): boolean --[[ Line: 192 ]]
+function Module.IsScrolledDown(p5): boolean
 	local Offset = p5.Scroller.CanvasSize.Y.Offset
 	local Y: number = p5.Scroller.AbsoluteWindowSize.Y
 	local Y1 = p5.Scroller.CanvasPosition.Y
@@ -157,7 +157,7 @@ function Module.IsScrolledDown(p5): boolean --[[ Line: 192 ]]
 	return Offset < Y or Offset - Y1 <= Y + 5
 end
 
-function Module.UpdateMessageTextHeight(p5, p6) --[[ Line: 201 ]]
+function Module.UpdateMessageTextHeight(p5, p6)
 	local BaseFrame = p6.BaseFrame
 	
 	for i = 1, 10 do
@@ -166,7 +166,7 @@ function Module.UpdateMessageTextHeight(p5, p6) --[[ Line: 201 ]]
 	end
 end
 
-function Module.PositionMessageLabelInWindow(p7, MessageLabel_Chat, Count: number) --[[ Line: 213 ]]
+function Module.PositionMessageLabelInWindow(p7, MessageLabel_Chat, Count: number)
 	p7:WaitUntilParentedCorrectly()
 	local IsScrolledDown = p7:IsScrolledDown()
 	local BaseFrame = MessageLabel_Chat.BaseFrame
@@ -182,7 +182,7 @@ function Module.PositionMessageLabelInWindow(p7, MessageLabel_Chat, Count: numbe
 	end
 end
 
-function Module.ReorderAllMessages(p7) --[[ Line: 243 ]]
+function Module.ReorderAllMessages(p7)
 	p7:WaitUntilParentedCorrectly()
 	
 	if p7.GuiObject.AbsoluteSize.Y < 1 then return end
@@ -201,22 +201,22 @@ function Module.ReorderAllMessages(p7) --[[ Line: 243 ]]
 	end
 end
 
-function Module.Clear(p8) --[[ Line: 265 ]]
+function Module.Clear(p8)
 	for _, value in pairs(p8.MessageObjectLog) do
 		value:Destroy()
 	end
 	p8.MessageObjectLog = {}
 end
 
-function Module.SetCurrentChannelName(p9, CurrentChannelName) --[[ Line: 272 ]]
+function Module.SetCurrentChannelName(p9, CurrentChannelName)
 	p9.CurrentChannelName = CurrentChannelName
 end
 
-function Module:FadeOutBackground(_) --[[ Line: 276 ]] end
+function Module:FadeOutBackground(_) end
 
-function Module:FadeInBackground(_) --[[ Line: 280 ]] end
+function Module:FadeInBackground(_) end
 
-function Module.FadeOutText(p9, p10) --[[ Line: 284 ]]
+function Module.FadeOutText(p9, p10)
 	-- upvalues: CurveUtilModule (copy)
 	for i = 1, #p9.MessageObjectLog do
 		if p9.MessageObjectLog[i].FadeOutFunction then
@@ -225,7 +225,7 @@ function Module.FadeOutText(p9, p10) --[[ Line: 284 ]]
 	end
 end
 
-function Module.FadeInText(p11, p12) --[[ Line: 292 ]]
+function Module.FadeInText(p11, p12)
 	-- upvalues: CurveUtilModule (copy)
 	for i = 1, #p11.MessageObjectLog do
 		if p11.MessageObjectLog[i].FadeInFunction then
@@ -234,7 +234,7 @@ function Module.FadeInText(p11, p12) --[[ Line: 292 ]]
 	end
 end
 
-function Module.Update(p13, p14) --[[ Line: 300 ]]
+function Module.Update(p13, p14)
 	-- upvalues: CurveUtilModule (copy)
 	for i = 1, #p13.MessageObjectLog do
 		if p13.MessageObjectLog[i].UpdateAnimFunction then
@@ -243,13 +243,13 @@ function Module.Update(p13, p14) --[[ Line: 300 ]]
 	end
 end
 
-function Module.WaitUntilParentedCorrectly(p15) --[[ Line: 309 ]]
+function Module.WaitUntilParentedCorrectly(p15)
 	while not p15.GuiObject:IsDescendantOf(game:GetService("Players").LocalPlayer) do
 		p15.GuiObject.AncestryChanged:wait()
 	end
 end
 
-function MessageLogDisplayModule.new() --[[ Line: 318 ]]
+function MessageLogDisplayModule.new()
 	-- upvalues: Module (copy), CreateGuiObjects (copy)
 	local MessageLogDisplay = setmetatable({}, Module)
 	MessageLogDisplay.Destroyed = false
@@ -258,15 +258,15 @@ function MessageLogDisplayModule.new() --[[ Line: 318 ]]
 	MessageLogDisplay.Name = "MessageLogDisplay"
 	MessageLogDisplay.GuiObject.Name = "Frame_" .. MessageLogDisplay.Name
 	MessageLogDisplay.CurrentChannelName = ""
-	MessageLogDisplay.GuiObject:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 334 ]]
+	MessageLogDisplay.GuiObject:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 		-- upvalues: MessageLogDisplay (copy)
-		spawn(function() --[[ Line: 335 ]]
+		spawn(function()
 			-- upvalues: MessageLogDisplay (upval)
 			MessageLogDisplay:ReorderAllMessages()
 		end)
 	end)
 	local IsScrolledDown = true
-	MessageLogDisplay.Layout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function() --[[ Line: 340 ]]
+	MessageLogDisplay.Layout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
 		-- upvalues: MessageLogDisplay (copy), IsScrolledDown (ref)
 		local AbsoluteContentSize = MessageLogDisplay.Layout.AbsoluteContentSize
 		MessageLogDisplay.Scroller.CanvasSize = UDim2.new(0, 0, 0, AbsoluteContentSize.Y)
@@ -275,7 +275,7 @@ function MessageLogDisplayModule.new() --[[ Line: 318 ]]
 			MessageLogDisplay.Scroller.CanvasPosition = Vector2.new(0, AbsoluteContentSize.Y - MessageLogDisplay.Scroller.AbsoluteWindowSize.Y)
 		end
 	end)
-	MessageLogDisplay.Scroller:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ Line: 349 ]]
+	MessageLogDisplay.Scroller:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
 		-- upvalues: IsScrolledDown (ref), MessageLogDisplay (copy)
 		IsScrolledDown = MessageLogDisplay:IsScrolledDown()
 	end)

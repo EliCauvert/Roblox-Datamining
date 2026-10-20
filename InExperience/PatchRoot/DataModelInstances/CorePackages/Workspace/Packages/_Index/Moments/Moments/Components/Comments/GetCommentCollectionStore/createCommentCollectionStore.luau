@@ -6,7 +6,7 @@ local LoadStatus = CommentCollectionTypesModule.LoadStatus
 local PendingSentinelFunction = CommentCollectionTypesModule.pendingSentinel
 local CreateSignalFunction = require(script:FindFirstAncestor("Moments").Parent.Signals).createSignal
 
-local function specialOrderedIds(PendingSubmission, StickyPostedCommentIds) --[[ Line: 62 ]]
+local function specialOrderedIds(PendingSubmission, StickyPostedCommentIds)
 	-- upvalues: PendingSentinelFunction (copy)
 	local List = {}
 	local t = {}
@@ -26,7 +26,7 @@ local function specialOrderedIds(PendingSubmission, StickyPostedCommentIds) --[[
 	return List
 end
 
-local function defaultState(PendingSubmission, StickyPostedCommentIds) --[[ Line: 80 ]]
+local function defaultState(PendingSubmission, StickyPostedCommentIds)
 	-- upvalues: specialOrderedIds (copy), LoadStatus (copy)
 	local Tbl = StickyPostedCommentIds or {}
 	
@@ -44,7 +44,7 @@ local function defaultState(PendingSubmission, StickyPostedCommentIds) --[[ Line
 	}
 end
 
-return function(p1) --[[ Line: 96 | Named "createCommentCollectionStore" ]]
+return function(p1)
 	-- upvalues: CreateCommentSessionFiltersStoreModule (copy), CreateSignalFunction (copy), defaultState (copy), PendingSentinelFunction (copy), MergeCommentPageModule (copy), LoadStatus (copy), specialOrderedIds (copy), HttpService (copy)
 	local P4 = p1 or {}
 	local CommentSessionFiltersStoreModule = if P4.sessionFilters == nil then CreateCommentSessionFiltersStoreModule() else P4.sessionFilters
@@ -54,7 +54,7 @@ return function(p1) --[[ Line: 96 | Named "createCommentCollectionStore" ]]
 	local v1 = nil
 	local Flag = false
 	
-	local function _(p2) --[[ Line: 112 | Named "requireSelectedSlot" ]]
+	local function _(p2)
 		-- upvalues: Flag (ref), Signal (copy), config (copy)
 		assert(not Flag, "Comment collection store is disposed")
 		assert(Signal(false) == p2, "Comment feed must be selected before mutation")
@@ -62,19 +62,19 @@ return function(p1) --[[ Line: 96 | Named "createCommentCollectionStore" ]]
 		return config
 	end
 	
-	local _ = function(p2) --[[ Line: 156 | Named "currentFilters" ]]
+	local _ = function(p2)
 		-- upvalues: CommentSessionFiltersStoreModule (copy)
 		return if p2 == nil then CommentSessionFiltersStoreModule.getFilters(false) else p2
 	end
 	
-	local _ = function(p2) --[[ Line: 163 | Named "pendingSentinelFor" ]]
+	local _ = function(p2)
 		-- upvalues: PendingSentinelFunction (upval)
 		local PendingSubmission = p2.pendingSubmission
 		
 		return if PendingSubmission == nil then nil else PendingSentinelFunction(PendingSubmission.clientRequestId)
 	end
 	
-	local function applyMerge(p2, p3, Replace, p4) --[[ Line: 171 ]]
+	local function applyMerge(p2, p3, Replace, p4)
 		-- upvalues: Flag (ref), Signal (copy), config (copy), MergeCommentPageModule (upval), CommentSessionFiltersStoreModule (copy), PendingSentinelFunction (upval), LoadStatus (upval)
 		assert(not Flag, "Comment collection store is disposed")
 		assert(Signal(false) == p2, "Comment feed must be selected before mutation")
@@ -133,7 +133,7 @@ return function(p1) --[[ Line: 96 | Named "createCommentCollectionStore" ]]
 		return MergeCommentPageModuleResult
 	end
 	
-	local _ = function(List, p5) --[[ Line: 317 | Named "dropId" ]]
+	local _ = function(List, p5)
 		local List1 = {}
 		
 		for _, value in List do
@@ -144,7 +144,7 @@ return function(p1) --[[ Line: 96 | Named "createCommentCollectionStore" ]]
 		return List1
 	end
 	
-	local function replaceId(OrderedCommentIds, p6, CommentId) --[[ Line: 424 ]]
+	local function replaceId(OrderedCommentIds, p6, CommentId)
 		local List = {}
 		local Flag = false
 		local t = {}
@@ -167,7 +167,7 @@ return function(p1) --[[ Line: 96 | Named "createCommentCollectionStore" ]]
 		return List
 	end
 	
-	local _ = function(List, p7) --[[ Line: 444 | Named "moveToFront" ]]
+	local _ = function(List, p7)
 		local List1 = { p7 }
 		
 		for _, value in List do
@@ -179,14 +179,14 @@ return function(p1) --[[ Line: 96 | Named "createCommentCollectionStore" ]]
 	end
 	
 	return {
-		getState = function(p8) --[[ Line: 118 ]]
+		getState = function(p8)
 			-- upvalues: Signal (copy), defaultState (upval), config (copy)
-			return function(p9) --[[ Line: 119 ]]
+			return function(p9)
 				-- upvalues: Signal (upval), p8 (copy), defaultState (upval), config (upval)
 				return if Signal(p9) == p8 then config.get(p9) else defaultState()
 			end
 		end,
-		selectFeed = function(p8, p9) --[[ Line: 137 ]]
+		selectFeed = function(p8, p9)
 			-- upvalues: Flag (ref), Signal (copy), v1 (ref), config (copy), defaultState (upval), Signal2 (copy), CommentSessionFiltersStoreModule (copy)
 			assert(not Flag, "Comment collection store is disposed")
 			
@@ -199,7 +199,7 @@ return function(p1) --[[ Line: 96 | Named "createCommentCollectionStore" ]]
 				return
 			end
 		end,
-		clear = function() --[[ Line: 127 ]]
+		clear = function()
 			-- upvalues: Flag (ref), config (copy), defaultState (upval), v1 (ref), Signal2 (copy), CommentSessionFiltersStoreModule (copy)
 			if not Flag then
 				config.set((defaultState()))
@@ -210,7 +210,7 @@ return function(p1) --[[ Line: 96 | Named "createCommentCollectionStore" ]]
 				return
 			end
 		end,
-		dispose = function() --[[ Line: 148 ]]
+		dispose = function()
 			-- upvalues: Flag (ref), config (copy), defaultState (upval), v1 (ref), Signal2 (copy), CommentSessionFiltersStoreModule (copy)
 			if Flag then return end
 			if not Flag then
@@ -221,14 +221,14 @@ return function(p1) --[[ Line: 96 | Named "createCommentCollectionStore" ]]
 			end
 			Flag = true
 		end,
-		beginListSession = function(p8) --[[ Line: 227 ]]
+		beginListSession = function(p8)
 			-- upvalues: Flag (ref), Signal (copy), config (copy), defaultState (upval)
 			assert(not Flag, "Comment collection store is disposed")
 			assert(Signal(false) == p8, "Comment feed must be selected before mutation")
 			local GetResult = config.get(false)
 			config.set((defaultState(GetResult.pendingSubmission, GetResult.stickyPostedCommentIds)))
 		end,
-		resetListSession = function(p8) --[[ Line: 233 ]]
+		resetListSession = function(p8)
 			-- upvalues: Flag (ref), Signal (copy), config (copy), specialOrderedIds (upval), LoadStatus (upval)
 			assert(not Flag, "Comment collection store is disposed")
 			assert(Signal(false) == p8, "Comment feed must be selected before mutation")
@@ -246,7 +246,7 @@ return function(p1) --[[ Line: 96 | Named "createCommentCollectionStore" ]]
 				submissionError = GetResult.submissionError
 			})
 		end,
-		beginInitialLoad = function(p8) --[[ Line: 250 ]]
+		beginInitialLoad = function(p8)
 			-- upvalues: Flag (ref), Signal (copy), config (copy), LoadStatus (upval)
 			assert(not Flag, "Comment collection store is disposed")
 			assert(Signal(false) == p8, "Comment feed must be selected before mutation")
@@ -264,11 +264,11 @@ return function(p1) --[[ Line: 96 | Named "createCommentCollectionStore" ]]
 				submissionError = GetResult.submissionError
 			})
 		end,
-		completeInitialLoad = function(p8, p9, p10) --[[ Line: 267 ]]
+		completeInitialLoad = function(p8, p9, p10)
 			-- upvalues: applyMerge (copy)
 			return (applyMerge(p8, p9, true, p10))
 		end,
-		beginLoadMore = function(p8) --[[ Line: 275 ]]
+		beginLoadMore = function(p8)
 			-- upvalues: Flag (ref), Signal (copy), config (copy), LoadStatus (upval)
 			assert(not Flag, "Comment collection store is disposed")
 			assert(Signal(false) == p8, "Comment feed must be selected before mutation")
@@ -286,11 +286,11 @@ return function(p1) --[[ Line: 96 | Named "createCommentCollectionStore" ]]
 				submissionError = GetResult.submissionError
 			})
 		end,
-		completeLoadMore = function(p8, p9, p10) --[[ Line: 292 ]]
+		completeLoadMore = function(p8, p9, p10)
 			-- upvalues: applyMerge (copy)
 			return (applyMerge(p8, p9, false, p10))
 		end,
-		failLoad = function(p8, p9, ErrorCode) --[[ Line: 300 ]]
+		failLoad = function(p8, p9, ErrorCode)
 			-- upvalues: Flag (ref), Signal (copy), config (copy), LoadStatus (upval)
 			assert(not Flag, "Comment collection store is disposed")
 			assert(Signal(false) == p8, "Comment feed must be selected before mutation")
@@ -308,7 +308,7 @@ return function(p1) --[[ Line: 96 | Named "createCommentCollectionStore" ]]
 				submissionError = GetResult.submissionError
 			})
 		end,
-		beginPendingSubmission = function(p8, Text) --[[ Line: 327 ]]
+		beginPendingSubmission = function(p8, Text)
 			-- upvalues: Flag (ref), Signal (copy), config (copy), HttpService (upval), PendingSentinelFunction (upval)
 			assert(not Flag, "Comment collection store is disposed")
 			assert(Signal(false) == p8, "Comment feed must be selected before mutation")
@@ -367,7 +367,7 @@ return function(p1) --[[ Line: 96 | Named "createCommentCollectionStore" ]]
 				return PendingSubmission.clientRequestId
 			end
 		end,
-		markPendingSending = function(p9) --[[ Line: 374 ]]
+		markPendingSending = function(p9)
 			-- upvalues: Flag (ref), Signal (copy), config (copy)
 			assert(not Flag, "Comment collection store is disposed")
 			assert(Signal(false) == p9, "Comment feed must be selected before mutation")
@@ -395,7 +395,7 @@ return function(p1) --[[ Line: 96 | Named "createCommentCollectionStore" ]]
 				return
 			end
 		end,
-		markPendingOutcomeUnknown = function(p9) --[[ Line: 399 ]]
+		markPendingOutcomeUnknown = function(p9)
 			-- upvalues: Flag (ref), Signal (copy), config (copy)
 			assert(not Flag, "Comment collection store is disposed")
 			assert(Signal(false) == p9, "Comment feed must be selected before mutation")
@@ -423,7 +423,7 @@ return function(p1) --[[ Line: 96 | Named "createCommentCollectionStore" ]]
 				return
 			end
 		end,
-		resolvePendingSubmission = function(p9, p10) --[[ Line: 454 ]]
+		resolvePendingSubmission = function(p9, p10)
 			-- upvalues: Flag (ref), Signal (copy), config (copy), PendingSentinelFunction (upval), replaceId (copy)
 			assert(not Flag, "Comment collection store is disposed")
 			assert(Signal(false) == p9, "Comment feed must be selected before mutation")
@@ -454,7 +454,7 @@ return function(p1) --[[ Line: 96 | Named "createCommentCollectionStore" ]]
 			config1.stickyPostedCommentIds = StickyPostedCommentIds
 			SetFunction(config1)
 		end,
-		rejectPendingSubmission = function(p11, ErrorCode) --[[ Line: 476 ]]
+		rejectPendingSubmission = function(p11, ErrorCode)
 			-- upvalues: Flag (ref), Signal (copy), config (copy), PendingSentinelFunction (upval)
 			assert(not Flag, "Comment collection store is disposed")
 			assert(Signal(false) == p11, "Comment feed must be selected before mutation")
@@ -485,7 +485,7 @@ return function(p1) --[[ Line: 96 | Named "createCommentCollectionStore" ]]
 			config1.submissionError = Config
 			SetFunction(config1)
 		end,
-		clearSubmissionError = function(p12) --[[ Line: 503 ]]
+		clearSubmissionError = function(p12)
 			-- upvalues: Flag (ref), Signal (copy), config (copy)
 			assert(not Flag, "Comment collection store is disposed")
 			assert(Signal(false) == p12, "Comment feed must be selected before mutation")
@@ -508,11 +508,11 @@ return function(p1) --[[ Line: 96 | Named "createCommentCollectionStore" ]]
 				return
 			end
 		end,
-		getPendingSubmission = function(p12) --[[ Line: 523 ]]
+		getPendingSubmission = function(p12)
 			-- upvalues: Signal (copy), config (copy)
 			return if Signal(false) == p12 then config.get(false).pendingSubmission else nil
 		end,
-		removeCommentId = function(p12, p13) --[[ Line: 530 ]]
+		removeCommentId = function(p12, p13)
 			-- upvalues: Flag (ref), Signal (copy), config (copy)
 			assert(not Flag, "Comment collection store is disposed")
 			assert(Signal(false) == p12, "Comment feed must be selected before mutation")
@@ -545,7 +545,7 @@ return function(p1) --[[ Line: 96 | Named "createCommentCollectionStore" ]]
 			t.submissionError = GetResult.submissionError
 			SetFunction(t)
 		end,
-		removeCommentIdsByAuthor = function(p14, p15, Callback) --[[ Line: 547 ]]
+		removeCommentIdsByAuthor = function(p14, p15, Callback)
 			-- upvalues: Flag (ref), Signal (copy), config (copy)
 			assert(not Flag, "Comment collection store is disposed")
 			assert(Signal(false) == p14, "Comment feed must be selected before mutation")

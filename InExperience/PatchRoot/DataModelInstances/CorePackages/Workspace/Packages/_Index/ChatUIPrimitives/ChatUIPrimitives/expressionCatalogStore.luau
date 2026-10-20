@@ -1,8 +1,8 @@
 ﻿local TextChatService = game:GetService("TextChatService")
 
-return require(script:FindFirstAncestor("ChatUIPrimitives").createExpressionCatalogStore)(function() --[[ Line: 18 ]]
+return require(script:FindFirstAncestor("ChatUIPrimitives").createExpressionCatalogStore)(function()
 	-- upvalues: TextChatService (copy)
-	local Success, Result = pcall(function() --[[ Line: 19 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: TextChatService (upval)
 		return TextChatService:GetPresetsAsync()
 	end)

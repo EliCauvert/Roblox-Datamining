@@ -6,9 +6,9 @@ local HoverTileCoordinator = require(Parent.GameTile).HoverTileCoordinator
 local FFlagSduiResetHoverOnExperienceLaunch = require(Parent.SharedFlags).FFlagSduiResetHoverOnExperienceLaunch
 local FFlagLuaAppDemoModePlayButtonTelemetry = require(Parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
 
-return function(SduiContext, AnalyticsContext, UniverseId, PlaceId, RootPlaceId, AppliedFilters, LaunchData) --[[ Line: 15 | Named "useSduiReportExperienceLaunched" ]]
+return function(SduiContext, AnalyticsContext, UniverseId, PlaceId, RootPlaceId, AppliedFilters, LaunchData)
 	-- upvalues: ReactModule (copy), FFlagSduiResetHoverOnExperienceLaunch (copy), HoverTileCoordinator (copy), SduiReportGamePlayIntentModule (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy)
-	return ReactModule.useCallback(function(p1) --[[ Line: 28 ]]
+	return ReactModule.useCallback(function(p1)
 		-- upvalues: FFlagSduiResetHoverOnExperienceLaunch (upval), HoverTileCoordinator (upval), SduiReportGamePlayIntentModule (upval), SduiContext (copy), AnalyticsContext (copy), UniverseId (copy), PlaceId (copy), RootPlaceId (copy), AppliedFilters (copy), LaunchData (copy), FFlagLuaAppDemoModePlayButtonTelemetry (upval)
 		if FFlagSduiResetHoverOnExperienceLaunch then
 			HoverTileCoordinator.default:reset()

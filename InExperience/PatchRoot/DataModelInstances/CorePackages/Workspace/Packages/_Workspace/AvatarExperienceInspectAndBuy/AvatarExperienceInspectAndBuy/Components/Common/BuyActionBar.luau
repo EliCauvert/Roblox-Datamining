@@ -7,10 +7,10 @@ local ShouldShowPriceLabelFunction = require(AvatarExperienceInspectAndBuy.Utils
 local _ = FoundationModule.Enums.ButtonVariant
 local _ = require(AvatarExperienceInspectAndBuy.Enums.PriceStatus)
 
-return function(p1) --[[ Line: 55 | Named "BuyActionBar" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ShouldShowPriceLabelFunction (copy), FoundationModule (copy)
 	local UseTokensResult = UseTokensFunction()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 58 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ShouldShowPriceLabelFunction (upval), p1 (copy)
 		return ShouldShowPriceLabelFunction(p1.priceStatus)
 	end, { p1.priceStatus })

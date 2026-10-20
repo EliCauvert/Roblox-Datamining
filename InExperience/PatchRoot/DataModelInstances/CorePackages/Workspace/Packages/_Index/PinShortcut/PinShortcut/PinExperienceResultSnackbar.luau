@@ -11,10 +11,10 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local FFlagAddPinExperienceTargetDestinationGUACPolicy = require(Parent.SharedFlags).FFlagAddPinExperienceTargetDestinationGUACPolicy
 local FFlagPinShortcutSnackbarTelemetryEnabledModule = require(script.Parent.Flags.FFlagPinShortcutSnackbarTelemetryEnabled)
 
-return ReactModule.memo(function(p1) --[[ Line: 35 | Named "PinExperienceResultSnackbar" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), CloseCentralOverlayFunction (copy), UseLocalizationFunction (copy), FFlagAddPinExperienceTargetDestinationGUACPolicy (copy), GetAppFeaturePoliciesFunction (copy), Enums (copy), FFlagPinShortcutSnackbarTelemetryEnabledModule (copy), LoggingProtocolModule (copy), TelemetryCountersModule (copy), SnackbarWrapper (copy)
 	local UseDispatchResult = UseDispatchFunction()
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 38 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseDispatchResult (copy), CloseCentralOverlayFunction (upval)
 		UseDispatchResult(CloseCentralOverlayFunction())
 	end, { UseDispatchResult })
@@ -63,7 +63,7 @@ return ReactModule.memo(function(p1) --[[ Line: 35 | Named "PinExperienceResultS
 		Icon = { name = Enums.IconName.TriangleExclamation }
 	end
 	if FFlagPinShortcutSnackbarTelemetryEnabledModule then
-		ReactModule.useEffect(function() --[[ Line: 88 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: IsStatusMatch (copy), IsStatusMatch1 (copy), LoggingProtocolModule (upval), TelemetryCountersModule (upval)
 			LoggingProtocolModule.default:logRobloxTelemetryCounter(TelemetryCountersModule.SnackbarShown, 1, {
 				action = if IsStatusMatch then "Success" elseif IsStatusMatch1 then "AlreadyExists" else "Failure"
@@ -76,7 +76,7 @@ return ReactModule.memo(function(p1) --[[ Line: 35 | Named "PinExperienceResultS
 	if IsStatusMatch and p1.onViewShortcut then
 		TryAgain = UseLocalizationResult.viewShortcut
 		
-		OnButtonActivated = function() --[[ Line: 99 ]]
+		OnButtonActivated = function()
 			-- upvalues: FFlagPinShortcutSnackbarTelemetryEnabledModule (upval), LoggingProtocolModule (upval), TelemetryCountersModule (upval), UseResult (copy), p1 (copy)
 			if FFlagPinShortcutSnackbarTelemetryEnabledModule then
 				LoggingProtocolModule.default:logRobloxTelemetryCounter(TelemetryCountersModule.SnackbarButtonPressed, 1, { action = "ViewShortcut" })
@@ -87,7 +87,7 @@ return ReactModule.memo(function(p1) --[[ Line: 35 | Named "PinExperienceResultS
 	elseif not IsStatusMatch and not IsStatusMatch1 and p1.onRetry then
 		TryAgain = UseLocalizationResult.tryAgain
 		
-		OnButtonActivated = function() --[[ Line: 112 ]]
+		OnButtonActivated = function()
 			-- upvalues: FFlagPinShortcutSnackbarTelemetryEnabledModule (upval), LoggingProtocolModule (upval), TelemetryCountersModule (upval), UseResult (copy), p1 (copy)
 			if FFlagPinShortcutSnackbarTelemetryEnabledModule then
 				LoggingProtocolModule.default:logRobloxTelemetryCounter(TelemetryCountersModule.SnackbarButtonPressed, 1, { action = "TryAgain" })

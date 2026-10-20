@@ -6,7 +6,7 @@ local GetChatModerationStatusDataHydrationModule = require(AppChat.Stores.GetCha
 local GetEffectiveChatTimeoutDetailsModule = require(AppChat.Utils.getEffectiveChatTimeoutDetails)
 local ToTimeoutEntryModule = require(AppChat.Utils.toTimeoutEntry)
 
-return function(p1): string --[[ Line: 20 | Named "getUserSendEligibilityStatus" ]]
+return function(p1): string
 	-- upvalues: GetChatModerationStatusDataHydrationModule (copy), DataHydrationModule (copy), GetEffectiveChatTimeoutDetailsModule (copy), ToTimeoutEntryModule (copy)
 	if p1.isAvailable then
 		local UserStatus = GetChatModerationStatusDataHydrationModule().getUserStatus()

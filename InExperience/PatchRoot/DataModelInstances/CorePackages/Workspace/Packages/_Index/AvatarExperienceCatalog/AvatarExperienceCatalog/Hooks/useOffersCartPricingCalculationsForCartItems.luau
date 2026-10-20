@@ -19,7 +19,7 @@ local SetCurrentToastMessageFunction = ToastRoduxModule.Actions.SetCurrentToastM
 local Constants = AvatarExperienceCommonModule.Constants
 local AXDoNotPass356FetchCartPricing = game:DefineFastFlag("AXDoNotPass356FetchCartPricing", false)
 
-local function buildItemsForOffersCartPricingRequest(List) --[[ Line: 40 ]]
+local function buildItemsForOffersCartPricingRequest(List)
 	-- upvalues: AXDoNotPass356FetchCartPricing (copy), Constants (copy)
 	local List1 = {}
 	
@@ -38,7 +38,7 @@ local function buildItemsForOffersCartPricingRequest(List) --[[ Line: 40 ]]
 	return List1
 end
 
-local function getOffersAvailableMap(AvailableOffers) --[[ Line: 59 ]]
+local function getOffersAvailableMap(AvailableOffers)
 	-- upvalues: DecodeLuauUnicodeEscapesModule (copy)
 	local t = {}
 	
@@ -54,7 +54,7 @@ local function getOffersAvailableMap(AvailableOffers) --[[ Line: 59 ]]
 	return t
 end
 
-local function calculateTotalDiscountFromSelectedOffers(Items, List): number --[[ Line: 72 ]]
+local function calculateTotalDiscountFromSelectedOffers(Items, List): number
 	local t = {}
 	
 	for _, value in List do
@@ -78,7 +78,7 @@ local function calculateTotalDiscountFromSelectedOffers(Items, List): number --[
 	return NewRobuxDiscountAmount
 end
 
-local function getDiscountedItemsFromItemsData(Items, p1) --[[ Line: 95 ]]
+local function getDiscountedItemsFromItemsData(Items, p1)
 	local t = {}
 	
 	for _, item in Items do
@@ -101,7 +101,7 @@ local function getDiscountedItemsFromItemsData(Items, p1) --[[ Line: 95 ]]
 	return t
 end
 
-local function getAllDiscountSummaryEntries(Items, p2) --[[ Line: 121 ]]
+local function getAllDiscountSummaryEntries(Items, p2)
 	-- upvalues: DiscountTypeEnum (copy)
 	local List = {}
 	
@@ -126,7 +126,7 @@ end
 
 local Tbl = {}
 
-return function(p3, p4, p5) --[[ Line: 146 | Named "useOffersCartPricingCalculationsForCartItems" ]]
+return function(p3, p4, p5)
 	-- upvalues: UseAXCatalogStoreContextModule (copy), UseNetworkingFunction (copy), UseDispatchFunction (copy), UseSignalStateFunction (copy), ReactModule (copy), buildItemsForOffersCartPricingRequest (copy), UseLocalizationFunction (copy), ToastType (copy), SetCurrentToastMessageFunction (copy), TutilsModule (copy), PostCartPricingForOffersModule (copy), CryoModule (copy), Tbl (ref), getOffersAvailableMap (copy), getDiscountedItemsFromItemsData (copy), calculateTotalDiscountFromSelectedOffers (copy), getAllDiscountSummaryEntries (copy), MutedErrorFunction (copy), DecodeLuauUnicodeEscapesModule (copy)
 	local CatalogOffersBannerStore = UseAXCatalogStoreContextModule().catalogOffersBannerStore
 	local UseNetworkingResult = UseNetworkingFunction()
@@ -144,7 +144,7 @@ return function(p3, p4, p5) --[[ Line: 146 | Named "useOffersCartPricingCalculat
 		fetchFailed = "Feature.Catalog.Title.Checkout.OfferFailedToFetch",
 		toggleFailed = "Feature.Catalog.Title.Checkout.OfferFailedToUpdate"
 	})
-	local UseResult = ReactModule.useCallback(function(ToastMessage) --[[ Line: 173 ]]
+	local UseResult = ReactModule.useCallback(function(ToastMessage)
 		-- upvalues: ToastType (upval), UseDispatchResult (copy), SetCurrentToastMessageFunction (upval)
 		UseDispatchResult(SetCurrentToastMessageFunction({
 			isLocalized = true,
@@ -152,7 +152,7 @@ return function(p3, p4, p5) --[[ Line: 146 | Named "useOffersCartPricingCalculat
 			toastType = ToastType.NetworkingError
 		}))
 	end, { UseDispatchResult })
-	ReactModule.useEffect(function() --[[ Line: 182 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult (copy), p5 (copy), ItemsForOffersCartPricingRequest (copy), TutilsModule (upval), UseRefResult1 (copy), PostCartPricingForOffersModule (upval), UseNetworkingResult (copy), CryoModule (upval), Tbl (upval), getOffersAvailableMap (upval), UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), getDiscountedItemsFromItemsData (upval), UseStateResult2_3 (copy), calculateTotalDiscountFromSelectedOffers (upval), UseStateResult2_4 (copy), getAllDiscountSummaryEntries (upval), MutedErrorFunction (upval), UseResult (copy), UseLocalizationResult (copy)
 		if UseSignalStateResult and p5 and #ItemsForOffersCartPricingRequest ~= 0 and not TutilsModule.deepEqual(ItemsForOffersCartPricingRequest, UseRefResult1.current) then
 			UseRefResult1.current = ItemsForOffersCartPricingRequest
@@ -161,7 +161,7 @@ return function(p3, p4, p5) --[[ Line: 146 | Named "useOffersCartPricingCalculat
 				items = ItemsForOffersCartPricingRequest,
 				unselectedOffers = CryoModule.Dictionary.keys(Tbl)
 			})
-			PostCartPricingForOffersModuleResult:andThen(function(Result) --[[ Line: 200 ]]
+			PostCartPricingForOffersModuleResult:andThen(function(Result)
 				-- upvalues: getOffersAvailableMap (upval), UseStateResult2 (upval), UseStateResult2_1 (upval), UseStateResult2_2 (upval), getDiscountedItemsFromItemsData (upval), UseStateResult2_3 (upval), calculateTotalDiscountFromSelectedOffers (upval), UseStateResult2_4 (upval), getAllDiscountSummaryEntries (upval), MutedErrorFunction (upval)
 				if Result and Result.items then
 					local OffersAvailableMap = getOffersAvailableMap(Result.availableOffers)
@@ -175,7 +175,7 @@ return function(p3, p4, p5) --[[ Line: 146 | Named "useOffersCartPricingCalculat
 				else
 					MutedErrorFunction("marketplace-sales/v1/cart-pricing did not return items in payload")
 				end
-			end):catch(function(_) --[[ Line: 214 ]]
+			end):catch(function(_)
 				-- upvalues: UseResult (upval), UseLocalizationResult (upval)
 				UseResult(UseLocalizationResult.fetchFailed)
 			end)
@@ -186,7 +186,7 @@ return function(p3, p4, p5) --[[ Line: 146 | Named "useOffersCartPricingCalculat
 		UseNetworkingResult, ItemsForOffersCartPricingRequest, UseSignalStateResult,
 		p5, UseResult, UseLocalizationResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 226 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p4 (copy), UseRefResult1 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseStateResult2_3 (copy), UseStateResult2_4 (copy)
 		if not p4 then
 			UseRefResult1.current = {}
@@ -204,7 +204,7 @@ return function(p3, p4, p5) --[[ Line: 146 | Named "useOffersCartPricingCalculat
 		totalSelectedOffersDiscount = UseStateResult4,
 		discountSummaryEntriesFromOffers = UseStateResult5,
 		savingsSummary = if UseStateResult then DecodeLuauUnicodeEscapesModule(UseStateResult) else nil,
-		handleDeselectOfferId = ReactModule.useCallback(function(Key) --[[ Line: 238 ]]
+		handleDeselectOfferId = ReactModule.useCallback(function(Key)
 			-- upvalues: UseRefResult (copy), Tbl (upval), PostCartPricingForOffersModule (upval), UseNetworkingResult (copy), ItemsForOffersCartPricingRequest (copy), CryoModule (upval), getOffersAvailableMap (upval), UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), getDiscountedItemsFromItemsData (upval), UseStateResult2_3 (copy), calculateTotalDiscountFromSelectedOffers (upval), UseStateResult2_4 (copy), getAllDiscountSummaryEntries (upval), MutedErrorFunction (upval), UseResult (copy), UseLocalizationResult (copy)
 			if UseRefResult.current then return end
 			UseRefResult.current = true
@@ -220,7 +220,7 @@ return function(p3, p4, p5) --[[ Line: 146 | Named "useOffersCartPricingCalculat
 				items = ItemsForOffersCartPricingRequest,
 				unselectedOffers = CryoModule.Dictionary.keys(Tbl)
 			})
-			PostCartPricingForOffersModuleResult:andThen(function(Result) --[[ Line: 260 ]]
+			PostCartPricingForOffersModuleResult:andThen(function(Result)
 				-- upvalues: getOffersAvailableMap (upval), UseStateResult2 (upval), UseStateResult2_1 (upval), UseStateResult2_2 (upval), getDiscountedItemsFromItemsData (upval), UseStateResult2_3 (upval), calculateTotalDiscountFromSelectedOffers (upval), UseStateResult2_4 (upval), getAllDiscountSummaryEntries (upval), MutedErrorFunction (upval), UseRefResult (upval)
 				if Result and Result.items then
 					local OffersAvailableMap = getOffersAvailableMap(Result.availableOffers)
@@ -233,7 +233,7 @@ return function(p3, p4, p5) --[[ Line: 146 | Named "useOffersCartPricingCalculat
 					MutedErrorFunction("marketplace-sales/v1/cart-pricing did not return items in payload")
 				end
 				UseRefResult.current = false
-			end):catch(function(_) --[[ Line: 276 ]]
+			end):catch(function(_)
 				-- upvalues: Tbl (upval), Copy (copy), UseResult (upval), UseLocalizationResult (upval), UseRefResult (upval)
 				Tbl = Copy
 				UseResult(UseLocalizationResult.toggleFailed)

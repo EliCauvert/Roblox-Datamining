@@ -8,7 +8,7 @@ local Device = FoundationModule.Enums.Device
 local MockProvidersModule = require(OnPlatformSurveys.MockProviders)
 local config = { Dark = ColorMode.Dark, Light = ColorMode.Light }
 
-local function _(Tbl, List) --[[ Line: 26 | Named "union" ]]
+local function _(Tbl, List)
 	local Copy = table.clone(Tbl)
 	
 	if List then
@@ -22,9 +22,9 @@ end
 return {
 	roact = ReactModule,
 	reactRoblox = require(Parent.Dev.ReactRoblox),
-	mapStory = function(p1) --[[ Line: 39 ]]
+	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), MockProvidersModule (copy), FoundationProvider (copy), config (copy), ColorMode (copy), Device (copy)
-		return function(Tbl) --[[ Line: 40 ]]
+		return function(Tbl)
 			-- upvalues: ReactModule (upval), MockProvidersModule (upval), FoundationProvider (upval), config (upval), ColorMode (upval), Device (upval), p1 (copy)
 			local Props = Tbl.definition and Tbl.definition.props or {}
 			local Copy = table.clone(Tbl)

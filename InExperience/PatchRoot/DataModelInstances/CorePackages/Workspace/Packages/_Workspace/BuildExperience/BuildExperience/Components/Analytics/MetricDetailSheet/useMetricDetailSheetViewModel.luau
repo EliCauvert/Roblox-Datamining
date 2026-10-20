@@ -18,7 +18,7 @@ local GameConfigurationActionsModule = require(BuildExperience.utils.GameConfigu
 local _ = require(script.Parent.MetricDetailSheetView)
 local UseClosableFocusRootModule = require(BuildExperience.utils.useClosableFocusRoot)
 
-return function(p1) --[[ Line: 46 | Named "useMetricDetailSheetViewModel" ]]
+return function(p1)
 	-- upvalues: FFlagBuildAnalyticsGoalsModule (copy), UseClosableFocusRootModule (copy), FocusNavigationUtilsModule (copy), ResponsiveModule (copy), AnalyticsMetricModule (copy), ReactModule (copy), UseOpenWebViewFunction (copy), AnalyticsKeysModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildAnalyticsCreatorHubWindowFixModule (copy), GameConfigurationActionsModule (copy), OpenWebViewSessionFunction (copy)
 	local FocusRootRef = nil
 	local IsNotUsePreferredInputResultMatch = true
@@ -40,7 +40,7 @@ return function(p1) --[[ Line: 46 | Named "useMetricDetailSheetViewModel" ]]
 		local Metrics = p1.metrics
 		local CountMetrics: number = if Metrics == nil then 0 else #Metrics
 		local ClampedValue = math.clamp(UseStateResult, 1, (math.max(1, CountMetrics)))
-		ReactModule.useEffect(function() --[[ Line: 67 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(1)
 		end, { Metrics })
@@ -53,11 +53,11 @@ return function(p1) --[[ Line: 46 | Named "useMetricDetailSheetViewModel" ]]
 			Navigation = {
 				index = ClampedValue,
 				count = CountMetrics,
-				onPrevious = function() --[[ Line: 78 ]]
+				onPrevious = function()
 					-- upvalues: UseStateResult2 (copy), ClampedValue (copy)
 					UseStateResult2((math.max(1, ClampedValue - 1)))
 				end,
-				onNext = function() --[[ Line: 81 ]]
+				onNext = function()
 					-- upvalues: UseStateResult2 (copy), CountMetrics (copy), ClampedValue (copy)
 					UseStateResult2((math.min(CountMetrics, ClampedValue + 1)))
 				end
@@ -81,7 +81,7 @@ return function(p1) --[[ Line: 46 | Named "useMetricDetailSheetViewModel" ]]
 	end
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	
-	local function _(p2) --[[ Line: 110 | Named "copy" ]]
+	local function _(p2)
 		-- upvalues: config (copy), UseLocalizationResult (copy)
 		return if config[p2] == nil then "" else UseLocalizationResult[p2]
 	end
@@ -96,7 +96,7 @@ return function(p1) --[[ Line: 46 | Named "useMetricDetailSheetViewModel" ]]
 		}
 	}).analyzePrompt
 	local OnOpenChatFunction = p1.onOpenChat
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 133 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: OnOpenChatFunction (copy), AnalyzeName (copy), AnalyzePrompt (copy), OnCloseFunction (copy)
 		if OnOpenChatFunction ~= nil and AnalyzeName ~= "" then
 			OnOpenChatFunction(AnalyzePrompt)
@@ -132,7 +132,7 @@ return function(p1) --[[ Line: 46 | Named "useMetricDetailSheetViewModel" ]]
 		analyzeText = if config.analyze == nil then "" else UseLocalizationResult.analyze,
 		viewInOverviewText = if config.viewInOverview == nil then "" else UseLocalizationResult.viewInOverview,
 		onAnalyze = UseResult,
-		onViewInOverview = ReactModule.useCallback(function() --[[ Line: 149 ]]
+		onViewInOverview = ReactModule.useCallback(function()
 			-- upvalues: OverviewPath (copy), GameConfigurationActionsModule (upval), UniverseId (copy), CreatorHubRangeType (copy), FFlagBuildAnalyticsGoalsModule (upval), OpenWebViewSessionFunction (upval), CreatorHub (copy), UseOpenWebViewResult (copy), OnCloseFunction (copy)
 			if OverviewPath ~= nil then
 				local CreatorHubAnalyticsUrl = GameConfigurationActionsModule.getCreatorHubAnalyticsUrl(UniverseId, OverviewPath, CreatorHubRangeType)

@@ -6,11 +6,11 @@ local _ = require(DataHydration.Moments.MomentsStoreTypes)
 local ConstructApiUrlModule = require(DataHydration.Moments.Util.constructApiUrl)
 local IsCanonicalNonzeroUuidModule = require(DataHydration.Moments.Util.isCanonicalNonzeroUuid)
 
-local function _(p1, p2): string --[[ Line: 14 | Named "reactionPath" ]]
+local function _(p1, p2): string
 	return `moment-comments-api/v1/moments/{p1}/comments/{p2}/reactions`
 end
 
-return function(p1, p2, EmoteId, Network, StatusCodeActions) --[[ Line: 18 | Named "deleteMomentCommentReaction" ]]
+return function(p1, p2, EmoteId, Network, StatusCodeActions)
 	-- upvalues: IsCanonicalNonzeroUuidModule (copy), ConstructApiUrlModule (copy), HttpClientModule (copy)
 	assert(IsCanonicalNonzeroUuidModule(p1), "deleteMomentCommentReaction: feedItemId must be a canonical nonzero UUID")
 	assert(IsCanonicalNonzeroUuidModule(p2), "deleteMomentCommentReaction: commentId must be a canonical nonzero UUID")
@@ -26,7 +26,7 @@ return function(p1, p2, EmoteId, Network, StatusCodeActions) --[[ Line: 18 | Nam
 		body = { reactionType = "thumbsup", emoteId = EmoteId },
 		network = Network,
 		statusCodeActions = StatusCodeActions,
-		decode = function(_) --[[ Line: 46 ]]
+		decode = function(_)
 			return nil
 		end
 	})

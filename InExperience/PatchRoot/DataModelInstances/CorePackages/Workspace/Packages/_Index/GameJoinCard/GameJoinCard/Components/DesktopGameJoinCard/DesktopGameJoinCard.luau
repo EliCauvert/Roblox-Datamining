@@ -38,7 +38,7 @@ local AgeCheckUpsellCTAModule = require(script.Parent.Parent.AgeCheckUpsellCTA)
 local _ = require(GameJoinCard.Components.Actions.Types)
 local BuildJoinCardActionsComponentModule = require(GameJoinCard.Components.Actions.buildJoinCardActionsComponent)
 
-return function(p1) --[[ Line: 78 | Named "DesktopGameJoinCard" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseScaledValueFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), GetBuilderIconForCurrentPlatformFunction (copy), ViewEDPsourceValues (copy), ViewProfileSourceValues (copy), ControlState (copy), FFlagDesktopGameJoinCardGamepadSupport (copy), UseGameJoinCardGamepadNavigationFunction (ref), UseComposedRefFunction (copy), FFlagJoinabilityCTARefactor (copy), Skeleton (copy), Radius (copy), AssignPrimaryFocusRefFunction (ref), BuildJoinCardActionsComponentModule (copy), Button (copy), View (copy), Image (copy), FFlagBlockEDPClickthrough (copy), StateLayerAffordance (copy), Text (copy), Icon (copy), IconSize (copy), AgeCheckUpsellCTAModule (copy), ButtonVariant (copy), InputSize (copy), FoundationModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseScaledValueResult = UseScaledValueFunction(260)
@@ -57,26 +57,26 @@ return function(p1) --[[ Line: 78 | Named "DesktopGameJoinCard" ]]
 	local GameIconUrl = p1.gameIconUrl
 	local IsLoading = p1.isLoading
 	local Size1500 = if p1.isConsole then UseTokensResult.Size.Size_1500 else UseTokensResult.Size.Size_1000
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 97 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: GetBuilderIconForCurrentPlatformFunction (upval)
 		return GetBuilderIconForCurrentPlatformFunction()
 	end, {})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 101 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), ViewEDPsourceValues (upval)
 		p1.onViewExperienceDetails(ViewEDPsourceValues.Thumbnail)
 	end, { p1 })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 105 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), ViewEDPsourceValues (upval)
 		p1.onViewExperienceDetails(ViewEDPsourceValues.Title)
 	end, { p1 })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 109 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), ViewProfileSourceValues (upval)
 		if p1.onViewProfile then
 			p1.onViewProfile(ViewProfileSourceValues.ViewProfileButton)
 		end
 	end, { p1 })
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseResult3 = ReactModule.useCallback(function(Hover) --[[ Line: 116 ]]
+	local UseResult3 = ReactModule.useCallback(function(Hover)
 		-- upvalues: UseStateResult2 (copy), ControlState (upval)
 		UseStateResult2(Hover == ControlState.Hover)
 	end, {})
@@ -101,13 +101,13 @@ return function(p1) --[[ Line: 78 | Named "DesktopGameJoinCard" ]]
 				playTogether = UseLocalizationResult.playTogether,
 				playTogetherSoon = UseLocalizationResult.playTogetherSoon,
 				differentServer = UseLocalizationResult.differentServer
-			}, p1.onClose, function(p2, LayoutOrder) --[[ Line: 158 ]]
+			}, p1.onClose, function(p2, LayoutOrder)
 				-- upvalues: ReactModule (upval), Button (upval)
 				return ReactModule.createElement(Button, {
 					tag = "align-x-center fill size-full-0",
 					ref = p2.focusRef,
 					text = p2.text,
-					onActivated = function() --[[ Line: 162 ]]
+					onActivated = function()
 						-- upvalues: p2 (copy)
 						p2.onActivated()
 					end,
@@ -252,7 +252,7 @@ return function(p1) --[[ Line: 78 | Named "DesktopGameJoinCard" ]]
 				}, if FFlagJoinabilityCTARefactor then t else {
 					JoinButton = if IsAgeCheckRequired then ReactModule.createElement(AgeCheckUpsellCTAModule, {
 						LayoutOrder = 1,
-						onUnlockPressed = p1.onAgeCheckPressed or function() --[[ Line: 345 ]] end,
+						onUnlockPressed = p1.onAgeCheckPressed or function() end,
 						focusRef = PrimaryButtonFocusRef
 					}) else ReactModule.createElement(Button, {
 						tag = "align-x-center fill size-full-0",

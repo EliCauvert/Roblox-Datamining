@@ -7,7 +7,7 @@ local SduiFeatureEntryPoint = require(Parent.SduiSharedUtilities).SduiFeatureEnt
 local FIntLuaAppDelayImpressionsMaxUpdates = require(Parent.SharedFlags).FIntLuaAppDelayImpressionsMaxUpdates
 local SduiV2OmniFeedConstantsModule = require(ServerDrivenUi.Migration.SduiV2OmniFeedConstants)
 
-return ReactModule.memo(function(p1) --[[ Line: 29 | Named "SduiV2OmniFeedItem" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: OmniFeedPropsKey (copy), ArgCheckModule (copy), ReactModule (copy), FIntLuaAppDelayImpressionsMaxUpdates (copy), SduiFeatureEntryPoint (copy), SduiV2OmniFeedConstantsModule (copy)
 	local v1 = p1[OmniFeedPropsKey]
 	local AppPage = v1.appPage
@@ -21,11 +21,11 @@ return ReactModule.memo(function(p1) --[[ Line: 29 | Named "SduiV2OmniFeedItem" 
 		appPage = AppPage,
 		configKey = SduiV2OmniFeedConstantsModule.HomeConfigKey,
 		identifier = p1.feedItemKey,
-		additionalAnalyticsData = ReactModule.useMemo(function() --[[ Line: 39 ]]
+		additionalAnalyticsData = ReactModule.useMemo(function()
 			-- upvalues: p1 (copy)
 			return { collectionPosition = p1.sortIndex }
 		end, { p1.sortIndex }),
-		extraLocalProps = ReactModule.useMemo(function() --[[ Line: 46 ]]
+		extraLocalProps = ReactModule.useMemo(function()
 			-- upvalues: v1 (copy), FIntLuaAppDelayImpressionsMaxUpdates (upval), p1 (copy)
 			return {
 				scrollViewPositionChangedSignal = v1.scrollViewPositionChangedSignal,

@@ -3,7 +3,7 @@ local Parent = AvatarExperienceCatalog.Parent
 local _ = require(AvatarExperienceCatalog.Stores.createAXShoppingCartStore)
 local FFlagAXMISSaveWearFix = require(Parent.AvatarExperienceFlags).FFlagAXMISSaveWearFix
 
-return require(Parent.Rodux).makeActionCreator(script.Name, function(p1) --[[ Line: 56 ]]
+return require(Parent.Rodux).makeActionCreator(script.Name, function(p1)
 	-- upvalues: FFlagAXMISSaveWearFix (copy)
 	return {
 		equippableAssets = p1.equippableAssets,

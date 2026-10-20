@@ -9,14 +9,14 @@ local GetCatalogContentToHydrateModule = require(AvatarExperienceCatalog.Utils.g
 local UseCatalogPageMonolithDependenciesModule = require(AvatarExperienceCatalog.Providers.useCatalogPageMonolithDependencies)
 local t = {}
 
-return function(Current, p1) --[[ Line: 47 | Named "useHydrateCatalogItemGridOnDemandEffect" ]]
+return function(Current, p1)
 	-- upvalues: UseCatalogPageMonolithDependenciesModule (copy), UseNetworkingFunction (copy), UseStoreFunction (copy), ReactModule (copy), t (copy), SelectHydratedWidgetDataModule (copy), GetCatalogContentToHydrateModule (copy)
 	local FetchHydratedWidgetContentFunction = UseCatalogPageMonolithDependenciesModule().fetchHydratedWidgetContent
 	local UseNetworkingResult = UseNetworkingFunction()
 	local UseStoreResult = UseStoreFunction()
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 62 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Current (copy), p1 (copy), t (upval), UseRefResult (copy), UseRefResult1 (copy), SelectHydratedWidgetDataModule (upval), UseStoreResult (copy), GetCatalogContentToHydrateModule (upval), FetchHydratedWidgetContentFunction (copy), UseNetworkingResult (copy)
 		if not Current or Current == "" then return end
 		local P1 = p1 or t

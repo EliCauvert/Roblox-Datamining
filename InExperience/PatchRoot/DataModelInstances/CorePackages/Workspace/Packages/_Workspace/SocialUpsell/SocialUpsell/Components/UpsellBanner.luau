@@ -20,7 +20,7 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local Banner = require(Parent.AppBlox).Banner
 local config = { isContained = true }
 
-local function _(p1, p2) --[[ Line: 65 | Named "getButtonVariant" ]]
+local function _(p1, p2)
 	-- upvalues: FFlagAgeBasedUXHomepageVerificationBannerGreyButton (copy), IsCompactUpsellBannerModule (copy), UPSELLBUTTONACTION (copy), ButtonVariant (copy)
 	if FFlagAgeBasedUXHomepageVerificationBannerGreyButton and p1.variantOverride then
 		return p1.variantOverride
@@ -37,7 +37,7 @@ local function _(p1, p2) --[[ Line: 65 | Named "getButtonVariant" ]]
 	return nil
 end
 
-local function getBannerPropsFromConfig(BannerPropsFromConfig, p1) --[[ Line: 82 ]]
+local function getBannerPropsFromConfig(BannerPropsFromConfig, p1)
 	-- upvalues: FFlagAgeBasedUXHomepageVerificationBannerGreyButton (copy), IsCompactUpsellBannerModule (copy), UPSELLBUTTONACTION (copy), ButtonVariant (copy), ConstantsModule (copy), FoundationModule (copy)
 	local Badges = {}
 	local Buttons = {}
@@ -84,23 +84,23 @@ local function getBannerPropsFromConfig(BannerPropsFromConfig, p1) --[[ Line: 82
 	}
 end
 
-return function(p2) --[[ Line: 123 | Named "UpsellBanner" ]]
+return function(p2)
 	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), HttpService (copy), GetUpsellSignalStoreModule (copy), SocialUpsellAnalyticsModule (copy), UpsellComponentModule (copy), UseEffectFunction (copy), EventTypes (copy), UseCallbackFunction (copy), UPSELLBUTTONACTION (copy), getBannerPropsFromConfig (copy), Banner (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p2)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 126 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UnionResult (copy), HttpService (upval)
 		return UnionResult.impressionId or HttpService:GenerateGUID(false)
 	end, { UnionResult.impressionId, UnionResult.config.type })
 	local UseRefResult = ReactModule.useRef(nil)
 	local UpsellSignalStoreModule = GetUpsellSignalStoreModule()
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 133 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: SocialUpsellAnalyticsModule (upval), UnionResult (copy), UpsellComponentModule (upval)
 		return SocialUpsellAnalyticsModule.evaluateUpsellStage(UnionResult.upsellEntrySurface, UpsellComponentModule.Banner, UnionResult.upsellEntryComponent)
 	end, {
 		UnionResult.upsellEntrySurface,
 		UnionResult.upsellEntryComponent
 	})
-	UseEffectFunction(function() --[[ Line: 142 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseMemoResult (copy), UseRefResult (copy), SocialUpsellAnalyticsModule (upval), EventTypes (upval), UnionResult (copy), UseMemoResult1 (copy), UpsellComponentModule (upval)
 		if UseMemoResult and UseRefResult.current ~= UseMemoResult then
 			SocialUpsellAnalyticsModule.logUpsellEvent(EventTypes.SocialUpsellShown, {
@@ -121,13 +121,13 @@ return function(p2) --[[ Line: 123 | Named "UpsellBanner" ]]
 		UseMemoResult,
 		UnionResult.upsellEntryComponent
 	})
-	UseEffectFunction(function() --[[ Line: 166 ]]
+	UseEffectFunction(function()
 		-- upvalues: UnionResult (copy), UpsellSignalStoreModule (copy)
 		local Type = UnionResult.config.type
 		local UpsellEntrySurface = UnionResult.upsellEntrySurface
 		UpsellSignalStoreModule.setUpsellBannerData(Type, UpsellEntrySurface, UnionResult.config)
 		
-		return function() --[[ Line: 171 ]]
+		return function()
 			-- upvalues: UpsellSignalStoreModule (upval), Type (copy), UpsellEntrySurface (copy)
 			UpsellSignalStoreModule.setUpsellBannerData(Type, UpsellEntrySurface, nil)
 		end
@@ -136,9 +136,9 @@ return function(p2) --[[ Line: 123 | Named "UpsellBanner" ]]
 		UnionResult.config,
 		UpsellSignalStoreModule
 	})
-	local UseCallbackResult = UseCallbackFunction(function(Callback, Btn) --[[ Line: 178 ]]
+	local UseCallbackResult = UseCallbackFunction(function(Callback, Btn)
 		-- upvalues: SocialUpsellAnalyticsModule (upval), EventTypes (upval), UnionResult (copy), UseMemoResult1 (copy), UseMemoResult (copy), UpsellComponentModule (upval)
-		return function() --[[ Line: 179 ]]
+		return function()
 			-- upvalues: SocialUpsellAnalyticsModule (upval), EventTypes (upval), UnionResult (upval), UseMemoResult1 (upval), UseMemoResult (upval), UpsellComponentModule (upval), Btn (copy), Callback (copy)
 			SocialUpsellAnalyticsModule.logUpsellEvent(EventTypes.SocialUpsellButtonClick, {
 				upsellPurpose = UnionResult.config.type,
@@ -163,7 +163,7 @@ return function(p2) --[[ Line: 123 | Named "UpsellBanner" ]]
 	local UseCallbackResult2 = UseCallbackFunction(UseCallbackResult(UnionResult.onSecondaryAction, UPSELLBUTTONACTION.Secondary), { UseCallbackResult, UnionResult.onSecondaryAction })
 	local UseCallbackResult3 = UseCallbackFunction(UseCallbackResult(UnionResult.onDismiss, "Dismiss"), { UseCallbackResult, UnionResult.onDismiss })
 	
-	return ReactModule.createElement(Banner, CryoModule.Dictionary.join(ReactModule.useMemo(function() --[[ Line: 219 ]]
+	return ReactModule.createElement(Banner, CryoModule.Dictionary.join(ReactModule.useMemo(function()
 		-- upvalues: getBannerPropsFromConfig (upval), UnionResult (copy), UPSELLBUTTONACTION (upval), UseCallbackResult1 (copy), UseCallbackResult2 (copy), UseCallbackResult3 (copy)
 		return (getBannerPropsFromConfig(UnionResult.config, {
 			[UPSELLBUTTONACTION.Primary] = UseCallbackResult1,

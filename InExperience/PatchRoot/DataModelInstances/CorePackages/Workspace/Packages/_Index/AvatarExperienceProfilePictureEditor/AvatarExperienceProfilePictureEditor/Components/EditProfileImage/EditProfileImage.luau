@@ -34,7 +34,7 @@ local FFlagAXEnableProfileTab = SharedFlagsModule.FFlagAXEnableProfileTab
 local FFlagEditProfileImageR15UpgradePrompt = SharedFlagsModule.FFlagEditProfileImageR15UpgradePrompt
 local EditProfileImageAnalyticsModule = require(AvatarExperienceProfilePictureEditor.Analytics.EditProfileImageAnalytics)
 
-local function renderFramesPlusUpsellBanner(Frame) --[[ Line: 44 ]]
+local function renderFramesPlusUpsellBanner(Frame)
 	-- upvalues: ReactModule (copy), FramesPlusUpsellBarModule (copy)
 	return ReactModule.createElement(FramesPlusUpsellBarModule, {
 		layoutOrder = Frame.LayoutOrder,
@@ -43,7 +43,7 @@ local function renderFramesPlusUpsellBanner(Frame) --[[ Line: 44 ]]
 	})
 end
 
-local function createSplitLayout(p1, YOffset) --[[ Line: 85 ]]
+local function createSplitLayout(p1, YOffset)
 	-- upvalues: ReactModule (copy), View (copy), ConstantsModule (copy)
 	return {
 		Preview = ReactModule.createElement(View, {
@@ -65,7 +65,7 @@ local function createSplitLayout(p1, YOffset) --[[ Line: 85 ]]
 	}
 end
 
-local function createStackedLayout(p1, XOffset, YOffset) --[[ Line: 119 ]]
+local function createStackedLayout(p1, XOffset, YOffset)
 	-- upvalues: ReactModule (copy), View (copy), ScrollView (copy), Visibility (copy)
 	return {
 		StackedContent = ReactModule.createElement(View, { tag = "col size-full-full" }, {
@@ -110,7 +110,7 @@ local function createStackedLayout(p1, XOffset, YOffset) --[[ Line: 119 ]]
 	}
 end
 
-local function EditProfileImageBody(p1) --[[ Line: 197 ]]
+local function EditProfileImageBody(p1)
 	-- upvalues: UseTokensFunction (copy), UseGuiInsetFunction (copy), TextKeysModule (copy), FFlagProfileFramesUpsellFreeTrialModule (copy), UseLocalizationFunction (copy), UseEditProfileImageLayoutFunction (copy), UseEditProfileImageViewModelModule (copy), FFlagEditProfileImageR15UpgradePrompt (copy), ReactModule (copy), EditProfileImageAnalyticsModule (copy), EnumsModule (copy), RobloxPlusUpsellBanner (copy), renderFramesPlusUpsellBanner (copy), FramesPlusUpsellBarModule (copy), ConstantsModule (copy), AssetGridScrollSectionModule (copy), IconName (copy), View (copy), ExpandedEmotesGridContentModule (copy), CombinedCarouselsContentModule (copy), EditProfileImageFooterModule (copy), RotatableAvatarPreviewModule (copy), IconButton (copy), IconSize (copy), ButtonVariant (copy), FoundationModule (copy), Text (copy), createSplitLayout (copy), createStackedLayout (copy), FocusNavigatorWrapperModule (copy), RoactNavigationModule (copy), FFlagAXEnableProfileTab (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseGuiInsetResult = UseGuiInsetFunction()
@@ -143,12 +143,12 @@ local function EditProfileImageBody(p1) --[[ Line: 197 ]]
 	
 	if FFlagEditProfileImageR15UpgradePrompt then
 		local AccountRigType = p1.accountRigType
-		OnSelect = ReactModule.useCallback(function(SelectedEmoteId) --[[ Line: 235 ]]
+		OnSelect = ReactModule.useCallback(function(SelectedEmoteId)
 			-- upvalues: p1 (copy), AccountRigType (copy), Emotes (copy)
 			local OnPromptR15UpgradeFunction: (any) -> () = p1.onPromptR15Upgrade
 			
 			if AccountRigType == Enum.HumanoidRigType.R6 and SelectedEmoteId ~= Emotes.selectedEmoteId and OnPromptR15UpgradeFunction then
-				OnPromptR15UpgradeFunction(function() --[[ Line: 242 ]]
+				OnPromptR15UpgradeFunction(function()
 					-- upvalues: Emotes (upval), SelectedEmoteId (copy)
 					Emotes.onSelect(SelectedEmoteId)
 				end)
@@ -164,11 +164,11 @@ local function EditProfileImageBody(p1) --[[ Line: 197 ]]
 			p1.onPromptR15Upgrade
 		})
 	end
-	ReactModule.useEffect(function() --[[ Line: 258 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: EditProfileImageAnalyticsModule (upval), p1 (copy)
 		EditProfileImageAnalyticsModule.logPageView({ mode = p1.mode })
 	end, { p1.mode })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 262 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: EditProfileImageAnalyticsModule (upval), p1 (copy), ActiveView (copy), Navigation (copy)
 		EditProfileImageAnalyticsModule.logClose({ mode = p1.mode, activeView = ActiveView })
 		Navigation.onLeaveScreen()
@@ -180,13 +180,13 @@ local function EditProfileImageBody(p1) --[[ Line: 197 ]]
 		message = UseLocalizationResult.profileFramesUnlockBanner,
 		subscribeText = UseLocalizationResult.subscribe,
 		freeTrialText = UseLocalizationResult.tryItForFree,
-		onActivated = function() --[[ Line: 278 ]]
+		onActivated = function()
 			-- upvalues: Frames (copy)
 			Frames.onOpenSubscriptionUpsell("banner")
 		end,
 		renderBanner = renderFramesPlusUpsellBanner
 	}) else ReactModule.createElement(FramesPlusUpsellBarModule, {
-		onSubscribeActivated = function() --[[ Line: 286 ]]
+		onSubscribeActivated = function()
 			-- upvalues: Frames (copy)
 			Frames.onOpenSubscriptionUpsell("banner")
 		end
@@ -336,10 +336,10 @@ local function EditProfileImageBody(p1) --[[ Line: 197 ]]
 	})
 end
 
-return function(p1) --[[ Line: 499 | Named "EditProfileImage" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), EditProfileImageActionsContextModule (copy), EditProfileImageBody (copy)
 	return ReactModule.createElement(EditProfileImageActionsContextModule.Provider, {
-		value = ReactModule.useMemo(function() --[[ Line: 501 ]]
+		value = ReactModule.useMemo(function()
 			-- upvalues: p1 (copy)
 			return {
 				onOpenEmoteDetails = p1.onOpenEmoteDetails,

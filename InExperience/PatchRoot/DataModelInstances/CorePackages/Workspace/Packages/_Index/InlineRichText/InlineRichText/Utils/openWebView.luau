@@ -3,11 +3,11 @@ local BrowserService = game:GetService("BrowserService")
 local HttpService = game:GetService("HttpService")
 local GetFFlagEnableUnifiedWebViewsFunction = require(script:FindFirstAncestor("InlineRichText").Parent.SharedFlags).GetFFlagEnableUnifiedWebViews
 
-return function(Url) --[[ Line: 10 | Named "openWebView" ]]
+return function(Url)
 	-- upvalues: GetFFlagEnableUnifiedWebViewsFunction (copy), WebViewService (copy), BrowserService (copy), HttpService (copy)
 	if GetFFlagEnableUnifiedWebViewsFunction() then
 		local Connection = nil
-		Connection = WebViewService.OnWindowClosed:Connect(function() --[[ Line: 14 ]]
+		Connection = WebViewService.OnWindowClosed:Connect(function()
 			-- upvalues: WebViewService (upval), Connection (ref)
 			WebViewService:CloseWindow()
 			

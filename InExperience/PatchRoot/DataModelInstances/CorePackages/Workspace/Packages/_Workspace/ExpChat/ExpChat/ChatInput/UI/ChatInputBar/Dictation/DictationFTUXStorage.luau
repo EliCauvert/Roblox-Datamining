@@ -1,13 +1,13 @@
 ﻿local PerUserAppStorageModule = require(script:FindFirstAncestor("ExpChat").Utils.perUserAppStorage)
 
 return {
-	hasBeenDismissed = function(): boolean --[[ Line: 16 ]]
+	hasBeenDismissed = function(): boolean
 		-- upvalues: PerUserAppStorageModule (copy)
 		return PerUserAppStorageModule.getEntry("ExpChatDictationFtux").dismissed == true
 	end,
-	markDismissed = function() --[[ Line: 21 ]]
+	markDismissed = function()
 		-- upvalues: PerUserAppStorageModule (copy)
-		PerUserAppStorageModule.updateEntry("ExpChatDictationFtux", function(p1) --[[ Line: 22 ]]
+		PerUserAppStorageModule.updateEntry("ExpChatDictationFtux", function(p1)
 			if p1.dismissed == true then
 				return nil
 			else
@@ -17,13 +17,13 @@ return {
 			end
 		end)
 	end,
-	hasBeenUsed = function(): boolean --[[ Line: 31 ]]
+	hasBeenUsed = function(): boolean
 		-- upvalues: PerUserAppStorageModule (copy)
 		return PerUserAppStorageModule.getEntry("ExpChatDictationFtux").used == true
 	end,
-	markUsed = function() --[[ Line: 36 ]]
+	markUsed = function()
 		-- upvalues: PerUserAppStorageModule (copy)
-		PerUserAppStorageModule.updateEntry("ExpChatDictationFtux", function(p1) --[[ Line: 37 ]]
+		PerUserAppStorageModule.updateEntry("ExpChatDictationFtux", function(p1)
 			if p1.used == true then
 				return nil
 			else

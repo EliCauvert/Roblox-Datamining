@@ -8,7 +8,7 @@ local UseAppFocusRootFunction = FocusNavigationUtilsModule.useAppFocusRoot
 local ComposeRefsModule = require(script.Parent.composeRefs)
 local UseScrollNavigationBindingsModule = require(script.Parent.useScrollNavigationBindings)
 
-return function(SurfaceIdentifier, p1) --[[ Line: 26 | Named "useFocusNavigationRefs" ]]
+return function(SurfaceIdentifier, p1)
 	-- upvalues: UseDefaultFocusBehaviorFunction (copy), UseScrollNavigationBindingsModule (copy), UseAppFocusRootFunction (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), ReactModule (copy), ComposeRefsModule (copy)
 	local UseDefaultFocusBehaviorResult = UseDefaultFocusBehaviorFunction()
 	local UseScrollNavigationBindingsModuleResult = UseScrollNavigationBindingsModule({ includeDiscreteScroll = false })
@@ -20,7 +20,7 @@ return function(SurfaceIdentifier, p1) --[[ Line: 26 | Named "useFocusNavigation
 		}
 	})
 	
-	return (ReactModule.useMemo(function() --[[ Line: 41 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: ComposeRefsModule (upval), UseAppFocusRootResult (copy), UseDefaultFocusBehaviorResult (copy), UseScrollNavigationBindingsModuleResult (copy)
 		return ComposeRefsModule(UseAppFocusRootResult, UseDefaultFocusBehaviorResult, UseScrollNavigationBindingsModuleResult)
 	end, {

@@ -7,12 +7,12 @@ local CanCreateCampaignFunction = require(BuildExperience.Components.Ads.adCampa
 local _ = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local FFlagBuildAdsNotificationRouting = require(Parent.SharedFlags).FFlagBuildAdsNotificationRouting
 
-return function() --[[ Line: 45 | Named "createAdsCampaignDeepLinkStore" ]]
+return function()
 	-- upvalues: CreateSessionScopedSignalFunction (copy), SignalsModule (copy), FFlagBuildAdsNotificationRouting (copy), CanCreateCampaignFunction (copy)
 	local t = {}
 	local SessionScopedSignal, SessionScopedSignal2 = CreateSessionScopedSignalFunction(nil)
 	local Idle, Idle2 = CreateSessionScopedSignalFunction("idle")
-	local SessionScopedSignal1, SessionScopedSignal2_1 = CreateSessionScopedSignalFunction(function() --[[ Line: 51 ]]
+	local SessionScopedSignal1, SessionScopedSignal2_1 = CreateSessionScopedSignalFunction(function()
 		return {}
 	end)
 	local SessionScopedSignal3, SessionScopedSignal2_2 = CreateSessionScopedSignalFunction(nil)
@@ -20,7 +20,7 @@ return function() --[[ Line: 45 | Named "createAdsCampaignDeepLinkStore" ]]
 	return {
 		getRequest = SessionScopedSignal,
 		getStatus = Idle,
-		hasVisibleChat = function(UniverseId): boolean --[[ Line: 298 ]]
+		hasVisibleChat = function(UniverseId): boolean
 			-- upvalues: t (copy)
 			for i in t do
 				local v1 = i(false)
@@ -31,7 +31,7 @@ return function() --[[ Line: 45 | Named "createAdsCampaignDeepLinkStore" ]]
 			end
 			return false
 		end,
-		begin = function(Id, UniverseId): boolean --[[ Line: 307 ]]
+		begin = function(Id, UniverseId): boolean
 			-- upvalues: SessionScopedSignal1 (copy), SessionScopedSignal2_1 (copy), Idle2 (copy), SessionScopedSignal2 (copy)
 			local SessionScopedSignalResult = SessionScopedSignal1(false)
 			
@@ -51,7 +51,7 @@ return function() --[[ Line: 45 | Named "createAdsCampaignDeepLinkStore" ]]
 				return true
 			end
 		end,
-		claim = function(Id): boolean --[[ Line: 57 ]]
+		claim = function(Id): boolean
 			-- upvalues: SessionScopedSignal (copy), SessionScopedSignal3 (copy), SessionScopedSignal2_2 (copy)
 			local SessionScopedSignalResult = SessionScopedSignal(false)
 			
@@ -63,7 +63,7 @@ return function() --[[ Line: 45 | Named "createAdsCampaignDeepLinkStore" ]]
 				return true
 			end
 		end,
-		finish = function(Id) --[[ Line: 66 ]]
+		finish = function(Id)
 			-- upvalues: SessionScopedSignal (copy), Idle (copy), Idle2 (copy), SessionScopedSignal2 (copy)
 			local SessionScopedSignalResult = SessionScopedSignal(false)
 			
@@ -76,7 +76,7 @@ return function() --[[ Line: 45 | Named "createAdsCampaignDeepLinkStore" ]]
 				SessionScopedSignal2(nil)
 			end
 		end,
-		createChat = function() --[[ Line: 77 ]]
+		createChat = function()
 			-- upvalues: CreateSessionScopedSignalFunction (upval), SignalsModule (upval), FFlagBuildAdsNotificationRouting (upval), t (copy), SessionScopedSignal (copy), Idle2 (copy), Idle (copy), SessionScopedSignal2 (copy), SessionScopedSignal3 (copy), SessionScopedSignal2_2 (copy), CanCreateCampaignFunction (upval)
 			local SessionScopedSignal1, SessionScopedSignal2_1 = CreateSessionScopedSignalFunction(nil)
 			local Signal, Signal2 = SignalsModule.createSignal(0)
@@ -85,7 +85,7 @@ return function() --[[ Line: 45 | Named "createAdsCampaignDeepLinkStore" ]]
 			
 			return {
 				getScopeRevision = Signal,
-				updateScope = function(UniverseId, SessionId, IsPageVisible, CanPresent) --[[ Line: 86 ]]
+				updateScope = function(UniverseId, SessionId, IsPageVisible, CanPresent)
 					-- upvalues: SessionScopedSignal1 (copy), SessionScopedSignal4 (copy), SessionScopedSignal5 (copy), SessionScopedSignal2_4 (copy), SessionScopedSignal2_3 (copy), Signal2 (copy), SessionScopedSignal2_1 (copy)
 					local SessionScopedSignalResult = SessionScopedSignal1(false)
 					local config = {
@@ -108,7 +108,7 @@ return function() --[[ Line: 45 | Named "createAdsCampaignDeepLinkStore" ]]
 								end
 							else
 								SessionScopedSignal2_3(nil)
-								Signal2(function(p1: number): number --[[ Line: 126 ]]
+								Signal2(function(p1: number): number
 									return p1 + 1
 								end)
 							end
@@ -116,7 +116,7 @@ return function() --[[ Line: 45 | Named "createAdsCampaignDeepLinkStore" ]]
 					end
 					SessionScopedSignal2_1(config)
 				end,
-				connect = function(p1, Callback1, Callback) --[[ Line: 135 ]]
+				connect = function(p1, Callback1, Callback)
 					-- upvalues: FFlagBuildAdsNotificationRouting (upval), t (upval), SessionScopedSignal1 (copy), SessionScopedSignal (upval), Idle2 (upval), Idle (upval), SessionScopedSignal2 (upval), SignalsModule (upval), SessionScopedSignal3 (upval), SessionScopedSignal2_2 (upval), CanCreateCampaignFunction (upval), SessionScopedSignal2_3 (copy)
 					if FFlagBuildAdsNotificationRouting then
 						t[SessionScopedSignal1] = true
@@ -128,7 +128,7 @@ return function() --[[ Line: 45 | Named "createAdsCampaignDeepLinkStore" ]]
 					local DelayedThread = nil
 					local DeferredThread = nil
 					
-					local function complete(Outcome: string): boolean --[[ Line: 150 ]]
+					local function complete(Outcome: string): boolean
 						-- upvalues: v2 (ref), DeferredThread (ref), DelayedThread (ref), SessionScopedSignal (upval), Idle2 (upval), Idle (upval), SessionScopedSignal2 (upval), Callback1 (copy)
 						local v5 = v2
 						
@@ -171,7 +171,7 @@ return function() --[[ Line: 45 | Named "createAdsCampaignDeepLinkStore" ]]
 						return Outcome == "eligible"
 					end
 					
-					local Effect = SignalsModule.createEffect(function(p2) --[[ Line: 181 ]]
+					local Effect = SignalsModule.createEffect(function(p2)
 						-- upvalues: SessionScopedSignal (upval), SessionScopedSignal1 (upval), v2 (ref), complete (copy), p1 (copy), SessionScopedSignal3 (upval), SessionScopedSignal2_2 (upval), v3 (ref), v4 (ref), IsNotReady (ref), Idle2 (upval), DelayedThread (ref), FFlagBuildAdsNotificationRouting (upval), DeferredThread (ref), CanCreateCampaignFunction (upval), Callback (copy), SessionScopedSignal2_3 (upval), Callback1 (copy)
 						local SessionScopedSignalResult = SessionScopedSignal(p2)
 						local SessionScopedSignalResult1 = SessionScopedSignal1(p2)
@@ -209,14 +209,14 @@ return function() --[[ Line: 45 | Named "createAdsCampaignDeepLinkStore" ]]
 								return
 							end
 							Idle2("refreshing")
-							DelayedThread = task.delay(ExpiresAtDelta, function() --[[ Line: 212 ]]
+							DelayedThread = task.delay(ExpiresAtDelta, function()
 								-- upvalues: DelayedThread (upval), complete (upval)
 								DelayedThread = nil
 								complete("timeout")
 							end)
 							
 							if FFlagBuildAdsNotificationRouting then
-								DeferredThread = task.defer(function() --[[ Line: 218 ]]
+								DeferredThread = task.defer(function()
 									-- upvalues: DeferredThread (upval), v2 (upval), SessionScopedSignalResult (copy), p1 (upval), IsNotReady (upval)
 									DeferredThread = nil
 									
@@ -255,26 +255,26 @@ return function() --[[ Line: 45 | Named "createAdsCampaignDeepLinkStore" ]]
 						end
 					end)
 					
-					return function() --[[ Line: 263 ]]
+					return function()
 						-- upvalues: t (upval), SessionScopedSignal1 (upval), Effect (copy), complete (copy)
 						t[SessionScopedSignal1] = nil
 						Effect()
 						complete("cancelled")
 					end
 				end,
-				clearPresentedRequest = function() --[[ Line: 274 ]]
+				clearPresentedRequest = function()
 					-- upvalues: SessionScopedSignal2_3 (copy)
 					SessionScopedSignal2_3(nil)
 				end,
-				getPresentedRequestId = function() --[[ Line: 277 ]]
+				getPresentedRequestId = function()
 					-- upvalues: SessionScopedSignal4 (copy)
 					return SessionScopedSignal4(false)
 				end,
-				startCreate = function() --[[ Line: 280 ]]
+				startCreate = function()
 					-- upvalues: SessionScopedSignal2_4 (copy), SessionScopedSignal1 (copy)
 					SessionScopedSignal2_4(SessionScopedSignal1(false))
 				end,
-				finishCreate = function(): boolean --[[ Line: 283 ]]
+				finishCreate = function(): boolean
 					-- upvalues: SessionScopedSignal5 (copy), SessionScopedSignal1 (copy), SessionScopedSignal2_4 (copy)
 					local SessionScopedSignalResult = SessionScopedSignal5(false)
 					local SessionScopedSignalResult1 = SessionScopedSignal1(false)
@@ -284,7 +284,7 @@ return function() --[[ Line: 45 | Named "createAdsCampaignDeepLinkStore" ]]
 				end
 			}
 		end,
-		reset = function() --[[ Line: 325 ]]
+		reset = function()
 			-- upvalues: SessionScopedSignal2 (copy), Idle2 (copy), SessionScopedSignal2_1 (copy), SessionScopedSignal2_2 (copy)
 			SessionScopedSignal2(nil)
 			Idle2("idle")

@@ -11,7 +11,7 @@ local SelectHydratedWidgetDataModule = require(AvatarExperienceCatalog.State.Sel
 local UseCatalogPageMonolithDependenciesModule = require(AvatarExperienceCatalog.Providers.useCatalogPageMonolithDependencies)
 local AXCarouselMaxItems = game:DefineFastInt("AXCarouselMaxItems", 50)
 
-local function getContentToHydrate(p1, p2, p3) --[[ Line: 56 ]]
+local function getContentToHydrate(p1, p2, p3)
 	-- upvalues: AXCarouselMaxItems (copy), ItemTypeEnum (copy), FFlagAXMigrateAllTabToSduiDev (copy)
 	local List = {}
 	local Content = p1 and p1.content
@@ -39,13 +39,13 @@ local function getContentToHydrate(p1, p2, p3) --[[ Line: 56 ]]
 	return List
 end
 
-return function(p4, p5, p6) --[[ Line: 99 | Named "useHydrateCatalogSortOnDemandEffect" ]]
+return function(p4, p5, p6)
 	-- upvalues: UseCatalogPageMonolithDependenciesModule (copy), UseNetworkingFunction (copy), UseStoreFunction (copy), ReactModule (copy), WidgetConstantsModule (copy), SelectHydratedWidgetDataModule (copy), getContentToHydrate (copy)
 	local FetchHydratedWidgetContentFunction = UseCatalogPageMonolithDependenciesModule().fetchHydratedWidgetContent
 	local UseNetworkingResult = UseNetworkingFunction()
 	local UseStoreResult = UseStoreFunction()
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 118 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p4 (copy), WidgetConstantsModule (upval), UseRefResult (copy), p5 (copy), p6 (copy), SelectHydratedWidgetDataModule (upval), UseStoreResult (copy), getContentToHydrate (upval), FetchHydratedWidgetContentFunction (copy), UseNetworkingResult (copy)
 		local Id = p4 and p4.id
 		

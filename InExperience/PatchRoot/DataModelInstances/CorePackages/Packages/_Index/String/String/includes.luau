@@ -1,6 +1,6 @@
 ﻿local Text = "([" .. ("$%^()-[].?"):gsub("(.)", "%%%1") .. "])"
 
-return function(Text1: string, Text2: string, p1): boolean --[[ Line: 20 | Named "includes" ]]
+return function(Text1: string, Text2: string, p1): boolean
 	-- upvalues: Text (copy)
 	local Length, Length2 = utf8.len(Text1)
 	assert(Length ~= nil, ("string `%s` has an invalid byte at position %s"):format(Text1, (tostring(Length2))))

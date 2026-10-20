@@ -9,7 +9,7 @@ local FillBehavior = FoundationModule.Enums.FillBehavior
 local InputSize = FoundationModule.Enums.InputSize
 local _ = require(AvatarExperienceProfilePictureEditor.Utils.editProfileImageHelpers)
 
-return function(p1) --[[ Line: 29 | Named "EditProfileImageFooter" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), Button (copy), ButtonVariant (copy), InputSize (copy), FillBehavior (copy), View (copy)
 	return ReactModule.createElement(View, {
 		tag = "row gap-small size-full-0 auto-y padding-x-xlarge padding-bottom-medium padding-top-medium",
@@ -23,7 +23,7 @@ return function(p1) --[[ Line: 29 | Named "EditProfileImageFooter" ]]
 			variant = ButtonVariant.Emphasis,
 			size = InputSize.Medium,
 			fillBehavior = FillBehavior.Fill,
-			onActivated = function() --[[ Line: 44 ]]
+			onActivated = function()
 				-- upvalues: p1 (copy)
 				p1.onOpenProfileFramesSubscriptionUpsell("footer")
 			end

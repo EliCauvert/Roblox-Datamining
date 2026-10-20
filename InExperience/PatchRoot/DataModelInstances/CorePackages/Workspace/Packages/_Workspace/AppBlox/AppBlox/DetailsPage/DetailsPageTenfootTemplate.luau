@@ -26,7 +26,7 @@ local config = {
 	safeAreaSize = Vector2.new(96, 144)
 }
 
-return function(p1) --[[ Line: 160 | Named "DetailsPageTenfootTemplate" ]]
+return function(p1)
 	-- upvalues: config (copy), CryoModule (copy), ReactModule (copy), GetPlatformConfigModule (copy), Signal (copy), UseAnimateFullscreenModule (copy), DetailsPageHeaderModule (copy), UseDetailsPageRenderItemsModule (copy), DetailsPageRenderItemModule (copy), UseSignalStateFunction (copy), DisplayModule (copy), FullscreenFrameModule (copy), FFlagLuaAppEdpConsoleMediaGalleryVideo (copy), LoadableImage (copy), Overlay (copy), AnimatedFlatList (copy)
 	local JoinResult = config
 	
@@ -34,17 +34,17 @@ return function(p1) --[[ Line: 160 | Named "DetailsPageTenfootTemplate" ]]
 		JoinResult = CryoModule.Dictionary.join(JoinResult, p1.tokens)
 	end
 	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 171 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: GetPlatformConfigModule (upval), p1 (copy)
 		return GetPlatformConfigModule(p1.deviceType)
 	end, { p1.deviceType })
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Vector2.new(0, 0))
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 177 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(Frame.AbsoluteSize)
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 180 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseStateResult2_1 (copy)
 		if UseRefResult.current then
 			UseStateResult2_1(UseRefResult.current.AbsoluteSize)
@@ -53,13 +53,13 @@ return function(p1) --[[ Line: 160 | Named "DetailsPageTenfootTemplate" ]]
 	local ThumbnailHeight = if p1.thumbnailHeight then p1.thumbnailHeight else UseMemoResult.thumbnailHeight
 	local HeaderBarBackgroundHeight = if p1.headerBarBackgroundHeight == nil then UseMemoResult.headerBarBackgroundHeight else p1.headerBarBackgroundHeight
 	local SideMargin = if p1.sideMargin then p1.sideMargin else UseMemoResult.sideMargin
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 192 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: Signal (upval)
 		return Signal.new()
 	end, {})
 	local RenderFullscreenContentFunction = p1.renderFullscreenContent
 	local UseAnimateFullscreenModuleResult, UseAnimateFullscreenModuleResult2 = UseAnimateFullscreenModule(p1.isFullscreen ~= nil and p1.isFullscreen, RenderFullscreenContentFunction, JoinResult.animationConfig)
-	local UseDetailsPageRenderItemsModuleResult = UseDetailsPageRenderItemsModule(p1.componentList, ReactModule.useMemo(function() --[[ Line: 204 ]]
+	local UseDetailsPageRenderItemsModuleResult = UseDetailsPageRenderItemsModule(p1.componentList, ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), DetailsPageHeaderModule (upval), p1 (copy), ThumbnailHeight (copy), UseMemoResult1 (copy), SideMargin (copy), HeaderBarBackgroundHeight (copy), JoinResult (ref)
 		return ReactModule.createElement(DetailsPageHeaderModule, {
 			thumbnailImageUrl = p1.thumbnailImageUrl,
@@ -91,7 +91,7 @@ return function(p1) --[[ Line: 160 | Named "DetailsPageTenfootTemplate" ]]
 		JoinResult.actionBarHeight, JoinResult.actionBarWidth, p1.actionBarWidth,
 		p1.renderActionBarLabelImpressionsDetector, UseMemoResult1
 	}), UseStateResult1, JoinResult.safeAreaSize)
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 255 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: ReactModule (upval), DetailsPageRenderItemModule (upval), JoinResult (ref)
 		return ReactModule.createElement(DetailsPageRenderItemModule, {
 			item = p2.item,
@@ -99,7 +99,7 @@ return function(p1) --[[ Line: 160 | Named "DetailsPageTenfootTemplate" ]]
 			safeArea = JoinResult.safeAreaSize
 		})
 	end, { JoinResult.itemPadding, JoinResult.safeAreaSize })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 263 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: ReactModule (upval), JoinResult (ref)
 		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -107,7 +107,7 @@ return function(p1) --[[ Line: 160 | Named "DetailsPageTenfootTemplate" ]]
 			Size = UDim2.new(1, 0, 0, JoinResult.itemPadding)
 		})
 	end, { JoinResult.itemPadding })
-	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 272 ]]
+	local UseResult3 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseMemoResult1 (copy), UseDetailsPageRenderItemsModuleResult (copy), UseStateResult2 (copy)
 		UseMemoResult1:fire()
 		

@@ -3,7 +3,7 @@ local HttpService = game:GetService("HttpService")
 local OpenCloudService = game:GetService("OpenCloudService")
 local RunService = game:GetService("RunService")
 
-function InvalidArgumentError(Message) --[[ Line: 19 ]]
+function InvalidArgumentError(Message)
 	-- upvalues: HttpService (copy)
 	return {
 		StatusCode = 400,
@@ -11,33 +11,33 @@ function InvalidArgumentError(Message) --[[ Line: 19 ]]
 	}
 end
 
-function verifyTable(p1, p2) --[[ Line: 37 ]]
+function verifyTable(p1, p2)
 	return if p1 == nil then nil elseif typeof(p1) == "table" then nil else InvalidArgumentError(`Argument not a table: {p2}.`)
 end
 
-function verifyNumber(p1, p2) --[[ Line: 49 ]]
+function verifyNumber(p1, p2)
 	return if p1 == nil then nil elseif typeof(p1) == "number" then nil else InvalidArgumentError(`Argument not a number: {p2}.`)
 end
 
-function verifyString(p1, p2) --[[ Line: 61 ]]
+function verifyString(p1, p2)
 	return if p1 == nil then nil elseif typeof(p1) == "string" then nil else InvalidArgumentError(`Argument not a string: {p2}.`)
 end
 
-function verifyEnum(p1, p2) --[[ Line: 73 ]]
+function verifyEnum(p1, p2)
 	return if p1 == nil then nil elseif typeof(p1) == "number" or typeof(p1) == "string" then nil else InvalidArgumentError(`Argument not an enum: {p2}.`)
 end
 
-function getApisUrl(): string --[[ Line: 85 ]]
+function getApisUrl(): string
 	-- upvalues: ContentProvider (copy)
 	return string.gsub(string.gsub(ContentProvider.BaseUrl:lower(), "http:", "https:"), "www", "apis")
 end
 
-function getUrlPrefix(p1): string --[[ Line: 91 ]]
+function getUrlPrefix(p1): string
 	-- upvalues: RunService (copy)
 	return if p1 == nil or p1["x-api-key"] == nil then if RunService:IsStudio() then "user" else "rcc" else ""
 end
 
-function verifyGetUniverseRequest(p1, p2) --[[ Line: 101 ]]
+function verifyGetUniverseRequest(p1, p2)
 	if p1 == nil then
 		return nil
 	end
@@ -54,11 +54,11 @@ function verifyGetUniverseRequest(p1, p2) --[[ Line: 101 ]]
 	end
 end
 
-function getUniverseUrl(p1, p2) --[[ Line: 122 ]]
+function getUniverseUrl(p1, p2)
 	return if p1.path == nil then InvalidArgumentError("URL parameter provided was nil: getUniverseRequest.path.") elseif string.match(p1.path, "^universes/([^/]+)$") == nil then InvalidArgumentError("URL parameter was not formatted correctly: getUniverseRequest.path.") else string.format("%s%s/cloud/v2/%s", getApisUrl(), getUrlPrefix(p2), (tostring(p1.path)))
 end
 
-function getUniverse(p1, Headers) --[[ Line: 135 ]]
+function getUniverse(p1, Headers)
 	-- upvalues: OpenCloudService (copy)
 	if p1 == nil then
 		return InvalidArgumentError("Request provided was nil.")
@@ -80,7 +80,7 @@ end
 
 OpenCloudService:RegisterOpenCloud("v2", "GetUniverse", getUniverse)
 
-function verifyTranslateTextRequest(p1, p2) --[[ Line: 155 ]]
+function verifyTranslateTextRequest(p1, p2)
 	if p1 == nil then
 		return nil
 	end
@@ -121,11 +121,11 @@ function verifyTranslateTextRequest(p1, p2) --[[ Line: 155 ]]
 	return nil
 end
 
-function translateTextUrl(p3) --[[ Line: 196 ]]
+function translateTextUrl(p3)
 	return if p3.path == nil then InvalidArgumentError("URL parameter provided was nil: translateTextRequest.path.") elseif string.match(p3.path, "^universes/([^/]+)$") == nil then InvalidArgumentError("URL parameter was not formatted correctly: translateTextRequest.path.") else string.format("%s%s/cloud/v2/%s:translateText", getApisUrl(), getUrlPrefix(), (tostring(p3.path)))
 end
 
-function translateText(Input) --[[ Line: 209 ]]
+function translateText(Input)
 	-- upvalues: HttpService (copy), OpenCloudService (copy)
 	if Input == nil then
 		return InvalidArgumentError("Request provided was nil.")
@@ -147,7 +147,7 @@ end
 
 OpenCloudService:RegisterOpenCloud("v2", "TranslateText", translateText)
 
-function verifyGenerateSpeechRequest(p3, p4) --[[ Line: 231 ]]
+function verifyGenerateSpeechRequest(p3, p4)
 	if p3 == nil then
 		return nil
 	end
@@ -178,7 +178,7 @@ function verifyGenerateSpeechRequest(p3, p4) --[[ Line: 231 ]]
 	end
 end
 
-function verifyGeneratedSpeechStyle(p3, p4) --[[ Line: 265 ]]
+function verifyGeneratedSpeechStyle(p3, p4)
 	if p3 == nil then
 		return nil
 	end
@@ -203,11 +203,11 @@ function verifyGeneratedSpeechStyle(p3, p4) --[[ Line: 265 ]]
 	end
 end
 
-function generateSpeechUrl(p3) --[[ Line: 293 ]]
+function generateSpeechUrl(p3)
 	return if p3.path == nil then InvalidArgumentError("URL parameter provided was nil: generateSpeechRequest.path.") elseif string.match(p3.path, "^universes/([^/]+)$") == nil then InvalidArgumentError("URL parameter was not formatted correctly: generateSpeechRequest.path.") else string.format("%s%s/cloud/v2/%s:generateSpeech", getApisUrl(), getUrlPrefix(), (tostring(p3.path)))
 end
 
-function generateSpeech(Input) --[[ Line: 306 ]]
+function generateSpeech(Input)
 	-- upvalues: HttpService (copy), OpenCloudService (copy)
 	if Input == nil then
 		return InvalidArgumentError("Request provided was nil.")
@@ -229,7 +229,7 @@ end
 
 OpenCloudService:RegisterOpenCloud("v2", "GenerateSpeech", generateSpeech)
 
-function verifyGenerateTextRequest(p3, p4) --[[ Line: 328 ]]
+function verifyGenerateTextRequest(p3, p4)
 	if p3 == nil then
 		return nil
 	end
@@ -287,11 +287,11 @@ function verifyGenerateTextRequest(p3, p4) --[[ Line: 328 ]]
 	end
 end
 
-function generateTextUrl(p3) --[[ Line: 389 ]]
+function generateTextUrl(p3)
 	return if p3.path == nil then InvalidArgumentError("URL parameter provided was nil: generateTextRequest.path.") elseif string.match(p3.path, "^universes/([^/]+)$") == nil then InvalidArgumentError("URL parameter was not formatted correctly: generateTextRequest.path.") else string.format("%s%s/cloud/v2/%s:generateText", getApisUrl(), getUrlPrefix(), (tostring(p3.path)))
 end
 
-function generateText(Input) --[[ Line: 402 ]]
+function generateText(Input)
 	-- upvalues: HttpService (copy), OpenCloudService (copy)
 	if Input == nil then
 		return InvalidArgumentError("Request provided was nil.")
@@ -313,7 +313,7 @@ end
 
 OpenCloudService:RegisterOpenCloud("v2", "GenerateText", generateText)
 
-function verifyGetPlaceRequest(p3, p4) --[[ Line: 424 ]]
+function verifyGetPlaceRequest(p3, p4)
 	if p3 == nil then
 		return nil
 	end
@@ -330,11 +330,11 @@ function verifyGetPlaceRequest(p3, p4) --[[ Line: 424 ]]
 	end
 end
 
-function getPlaceUrl(p3, p4) --[[ Line: 445 ]]
+function getPlaceUrl(p3, p4)
 	return if p3.path == nil then InvalidArgumentError("URL parameter provided was nil: getPlaceRequest.path.") elseif string.match(p3.path, "^universes/([^/]+)/places/([^/]+)$") == nil then InvalidArgumentError("URL parameter was not formatted correctly: getPlaceRequest.path.") else string.format("%s%s/cloud/v2/%s", getApisUrl(), getUrlPrefix(p4), (tostring(p3.path)))
 end
 
-function getPlace(p3, Headers) --[[ Line: 458 ]]
+function getPlace(p3, Headers)
 	-- upvalues: OpenCloudService (copy)
 	if p3 == nil then
 		return InvalidArgumentError("Request provided was nil.")
@@ -352,7 +352,7 @@ end
 
 OpenCloudService:RegisterOpenCloud("v2", "GetPlace", getPlace)
 
-function verifyGetGroupRequest(p3, p4) --[[ Line: 478 ]]
+function verifyGetGroupRequest(p3, p4)
 	if p3 == nil then
 		return nil
 	end
@@ -369,11 +369,11 @@ function verifyGetGroupRequest(p3, p4) --[[ Line: 478 ]]
 	end
 end
 
-function getGroupUrl(p3, p4) --[[ Line: 499 ]]
+function getGroupUrl(p3, p4)
 	return if p3.path == nil then InvalidArgumentError("URL parameter provided was nil: getGroupRequest.path.") elseif string.match(p3.path, "^groups/([^/]+)$") == nil then InvalidArgumentError("URL parameter was not formatted correctly: getGroupRequest.path.") else string.format("%s%s/cloud/v2/%s", getApisUrl(), getUrlPrefix(p4), (tostring(p3.path)))
 end
 
-function getGroup(p3, Headers) --[[ Line: 512 ]]
+function getGroup(p3, Headers)
 	-- upvalues: OpenCloudService (copy)
 	if p3 == nil then
 		return InvalidArgumentError("Request provided was nil.")
@@ -391,7 +391,7 @@ end
 
 OpenCloudService:RegisterOpenCloud("v2", "GetGroup", getGroup)
 
-function verifyListInventoryItemsRequest(p3, p4) --[[ Line: 532 ]]
+function verifyListInventoryItemsRequest(p3, p4)
 	if p3 == nil then
 		return nil
 	end
@@ -424,7 +424,7 @@ function verifyListInventoryItemsRequest(p3, p4) --[[ Line: 532 ]]
 	end
 end
 
-function listInventoryItemsUrl(p3, p4) --[[ Line: 568 ]]
+function listInventoryItemsUrl(p3, p4)
 	if p3.parent == nil then
 		return InvalidArgumentError("URL parameter provided was nil: listInventoryItemsRequest.parent.")
 	end
@@ -450,7 +450,7 @@ function listInventoryItemsUrl(p3, p4) --[[ Line: 568 ]]
 	return (string.format("%s?%s", Formatted, table.concat(List, "&")))
 end
 
-function listInventoryItems(p3, Headers) --[[ Line: 598 ]]
+function listInventoryItems(p3, Headers)
 	-- upvalues: OpenCloudService (copy)
 	if p3 == nil then
 		return InvalidArgumentError("Request provided was nil.")
@@ -472,7 +472,7 @@ end
 
 OpenCloudService:RegisterOpenCloud("v2", "ListInventoryItems", listInventoryItems)
 
-function verifyListGroupMembershipsRequest(p3, p4) --[[ Line: 618 ]]
+function verifyListGroupMembershipsRequest(p3, p4)
 	if p3 == nil then
 		return nil
 	end
@@ -505,7 +505,7 @@ function verifyListGroupMembershipsRequest(p3, p4) --[[ Line: 618 ]]
 	end
 end
 
-function listGroupMembershipsUrl(p3, p4) --[[ Line: 654 ]]
+function listGroupMembershipsUrl(p3, p4)
 	if p3.parent == nil then
 		return InvalidArgumentError("URL parameter provided was nil: listGroupMembershipsRequest.parent.")
 	end
@@ -531,7 +531,7 @@ function listGroupMembershipsUrl(p3, p4) --[[ Line: 654 ]]
 	return (string.format("%s?%s", Formatted, table.concat(List, "&")))
 end
 
-function listGroupMemberships(p3, Headers) --[[ Line: 684 ]]
+function listGroupMemberships(p3, Headers)
 	-- upvalues: OpenCloudService (copy)
 	if p3 == nil then
 		return InvalidArgumentError("Request provided was nil.")
@@ -553,7 +553,7 @@ end
 
 OpenCloudService:RegisterOpenCloud("v2", "ListGroupMemberships", listGroupMemberships)
 
-function verifyGetOperationRequest(p3, p4) --[[ Line: 704 ]]
+function verifyGetOperationRequest(p3, p4)
 	if p3 == nil then
 		return nil
 	end
@@ -570,11 +570,11 @@ function verifyGetOperationRequest(p3, p4) --[[ Line: 704 ]]
 	end
 end
 
-function getOperationUrl(p3, p4) --[[ Line: 725 ]]
+function getOperationUrl(p3, p4)
 	return if p3.path == nil then InvalidArgumentError("URL parameter provided was nil: getOperationRequest.path.") elseif string.match(p3.path, "^users/([^/]+)/operations/([^/]+)$") == nil then InvalidArgumentError("URL parameter was not formatted correctly: getOperationRequest.path.") else string.format("%s%s/cloud/v2/%s", getApisUrl(), getUrlPrefix(p4), (tostring(p3.path)))
 end
 
-function getOperation(p3, Headers) --[[ Line: 738 ]]
+function getOperation(p3, Headers)
 	-- upvalues: OpenCloudService (copy)
 	if p3 == nil then
 		return InvalidArgumentError("Request provided was nil.")
@@ -596,7 +596,7 @@ end
 
 OpenCloudService:RegisterOpenCloud("v2", "GetOperation", getOperation)
 
-function verifyGenerateUserThumbnailRequest(p3, p4) --[[ Line: 758 ]]
+function verifyGenerateUserThumbnailRequest(p3, p4)
 	if p3 == nil then
 		return nil
 	end
@@ -629,7 +629,7 @@ function verifyGenerateUserThumbnailRequest(p3, p4) --[[ Line: 758 ]]
 	end
 end
 
-function generateUserThumbnailUrl(p3, p4) --[[ Line: 794 ]]
+function generateUserThumbnailUrl(p3, p4)
 	if p3.path == nil then
 		return InvalidArgumentError("URL parameter provided was nil: generateUserThumbnailRequest.path.")
 	end
@@ -655,7 +655,7 @@ function generateUserThumbnailUrl(p3, p4) --[[ Line: 794 ]]
 	return (string.format("%s?%s", Formatted, table.concat(List, "&")))
 end
 
-function generateUserThumbnail(p3, Headers) --[[ Line: 824 ]]
+function generateUserThumbnail(p3, Headers)
 	-- upvalues: OpenCloudService (copy)
 	if p3 == nil then
 		return InvalidArgumentError("Request provided was nil.")

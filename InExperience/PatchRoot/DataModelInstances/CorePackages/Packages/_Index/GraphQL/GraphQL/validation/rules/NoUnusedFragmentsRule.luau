@@ -1,26 +1,26 @@
 ﻿local GraphQLError = require(script.Parent.Parent.Parent.error.GraphQLError).GraphQLError
 
 return {
-	NoUnusedFragmentsRule = function(p1) --[[ Line: 20 ]]
+	NoUnusedFragmentsRule = function(p1)
 		-- upvalues: GraphQLError (copy)
 		local List = {}
 		local List1 = {}
 		
 		return {
-			OperationDefinition = function(_, p2): boolean --[[ Line: 25 ]]
+			OperationDefinition = function(_, p2): boolean
 				-- upvalues: List (copy)
 				table.insert(List, p2)
 				
 				return false
 			end,
-			FragmentDefinition = function(_, p2): boolean --[[ Line: 29 ]]
+			FragmentDefinition = function(_, p2): boolean
 				-- upvalues: List1 (copy)
 				table.insert(List1, p2)
 				
 				return false
 			end,
 			Document = {
-				leave = function() --[[ Line: 34 ]]
+				leave = function()
 					-- upvalues: List (copy), p1 (copy), List1 (copy), GraphQLError (upval)
 					local t = {}
 					

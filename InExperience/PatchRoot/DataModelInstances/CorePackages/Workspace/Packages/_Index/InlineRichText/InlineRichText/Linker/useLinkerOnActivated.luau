@@ -7,7 +7,7 @@ local LinkBehaviorModule = require(InlineRichText.Enums.LinkBehavior)
 local NewResult = require(InlineRichText.Logger):new(script.Name)
 local _ = require(InlineRichText.Types)
 
-return function(p1) --[[ Line: 18 | Named "useLinkerOnActivated" ]]
+return function(p1)
 	-- upvalues: UseNavigateToWebviewModule (copy), UseInvokeLinkingProtocolModule (copy), UseShowErrorToastModule (copy), LinkBehaviorModule (copy), ReactModule (copy), NewResult (copy)
 	local config = {
 		[LinkBehaviorModule.Webview] = UseNavigateToWebviewModule(),
@@ -15,7 +15,7 @@ return function(p1) --[[ Line: 18 | Named "useLinkerOnActivated" ]]
 		[LinkBehaviorModule.ErrorToast] = UseShowErrorToastModule({ errorToastTextOverride = p1.errorToastTextOverride })
 	}
 	
-	return (ReactModule.useCallback(function(p2) --[[ Line: 31 ]]
+	return (ReactModule.useCallback(function(p2)
 		-- upvalues: config (copy), NewResult (upval)
 		local Entry: (any) -> () = config[p2.linkBehavior]
 		

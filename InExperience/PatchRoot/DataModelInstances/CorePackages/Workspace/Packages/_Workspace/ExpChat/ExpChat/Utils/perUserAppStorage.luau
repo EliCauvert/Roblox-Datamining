@@ -2,22 +2,22 @@
 local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 
-local function _(): string --[[ Line: 12 | Named "getLocalUserKey" ]]
+local function _(): string
 	-- upvalues: Players (copy)
 	local LocalPlayer = Players.LocalPlayer
 	
 	return if LocalPlayer == nil then "" else tostring(LocalPlayer.UserId)
 end
 
-local function readLookup(Key) --[[ Line: 20 ]]
+local function readLookup(Key)
 	-- upvalues: AppStorageService (copy), HttpService (copy)
-	local Success, Result = pcall(function() --[[ Line: 21 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: AppStorageService (upval), Key (copy)
 		return AppStorageService:GetItem(Key)
 	end)
 	
 	if Success and type(Result) == "string" and Result ~= "" then
-		local Success1, Result1 = pcall(function() --[[ Line: 27 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: HttpService (upval), Result (copy)
 			return HttpService:JSONDecode(Result)
 		end)
@@ -28,14 +28,14 @@ local function readLookup(Key) --[[ Line: 20 ]]
 	end
 end
 
-local function writeLookup(Key, Input) --[[ Line: 36 ]]
+local function writeLookup(Key, Input)
 	-- upvalues: HttpService (copy), AppStorageService (copy)
-	local Success, Result = pcall(function() --[[ Line: 37 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: HttpService (upval), Input (copy)
 		return HttpService:JSONEncode(Input)
 	end)
 	
-	return if Success and type(Result) == "string" then pcall(function() --[[ Line: 43 ]]
+	return if Success and type(Result) == "string" then pcall(function()
 		-- upvalues: AppStorageService (upval), Key (copy), Result (copy)
 		AppStorageService:SetItem(Key, Result)
 		AppStorageService:Flush()
@@ -43,7 +43,7 @@ local function writeLookup(Key, Input) --[[ Line: 36 ]]
 end
 
 return {
-	getEntry = function(p1) --[[ Line: 54 ]]
+	getEntry = function(p1)
 		-- upvalues: Players (copy), readLookup (copy)
 		local LocalPlayer = Players.LocalPlayer
 		local Text: string = if LocalPlayer == nil then "" else tostring(LocalPlayer.UserId)
@@ -56,7 +56,7 @@ return {
 			return if type(LookupEntry) == "table" then LookupEntry else {}
 		end
 	end,
-	updateEntry = function(p1, Callback) --[[ Line: 71 ]]
+	updateEntry = function(p1, Callback)
 		-- upvalues: Players (copy), readLookup (copy), writeLookup (copy)
 		local LocalPlayer = Players.LocalPlayer
 		local Text: string = if LocalPlayer == nil then "" else tostring(LocalPlayer.UserId)

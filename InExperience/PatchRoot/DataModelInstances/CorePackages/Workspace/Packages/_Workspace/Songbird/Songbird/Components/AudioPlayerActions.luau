@@ -14,7 +14,7 @@ local UseCallbackFunction = ReactModule.useCallback
 local UseStateFunction = ReactModule.useState
 local CreateNextOrderFunction = require(Songbird.Parent.ReactUtils).createNextOrder
 
-return function(Frame) --[[ Line: 37 | Named "AudioPlayerActions" ]]
+return function(Frame)
 	-- upvalues: UseLocalizationFunction (copy), UseStateFunction (copy), CreateNextOrderFunction (copy), UseCallbackFunction (copy), SendAudioPlayerAnalyticsModule (copy), AnalyticActionsModule (copy), ReactModule (copy), FoundationModule (copy), GetFFlagSongDetailsPageDesignPassFunction (copy), CustomFoundationChipModule (copy), ReactRobloxModule (copy), ReportSongDialogModule (copy), CoreGui (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		favorite = "Feature.SongDetails.Action.Favorite",
@@ -22,7 +22,7 @@ return function(Frame) --[[ Line: 37 | Named "AudioPlayerActions" ]]
 	})
 	local UseStateResult, UseStateResult2 = UseStateFunction(false)
 	local NextOrder = CreateNextOrderFunction()
-	local UseCallbackResult = UseCallbackFunction(function(Action) --[[ Line: 47 ]]
+	local UseCallbackResult = UseCallbackFunction(function(Action)
 		-- upvalues: Frame (copy), SendAudioPlayerAnalyticsModule (upval)
 		SendAudioPlayerAnalyticsModule({
 			action = Action,
@@ -36,7 +36,7 @@ return function(Frame) --[[ Line: 37 | Named "AudioPlayerActions" ]]
 		Frame.audio.thumbnailAssetId,
 		Frame.analyticsSource
 	})
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 72 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: Frame (copy), UseCallbackResult (copy), AnalyticActionsModule (upval)
 		if Frame.audio.isLiked then
 			if Frame.onUnlike then
@@ -55,12 +55,12 @@ return function(Frame) --[[ Line: 37 | Named "AudioPlayerActions" ]]
 		Frame.onUnlike,
 		UseCallbackResult
 	})
-	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 93 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function()
 		-- upvalues: UseCallbackResult (copy), AnalyticActionsModule (upval), UseStateResult2 (copy)
 		UseCallbackResult(AnalyticActionsModule.StartAudioReport)
 		UseStateResult2(true)
 	end, {})
-	local UseCallbackResult3 = UseCallbackFunction(function() --[[ Line: 98 ]]
+	local UseCallbackResult3 = UseCallbackFunction(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {})

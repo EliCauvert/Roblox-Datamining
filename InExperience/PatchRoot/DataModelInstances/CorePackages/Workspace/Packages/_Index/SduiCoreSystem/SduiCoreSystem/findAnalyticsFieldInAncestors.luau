@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("SduiCoreSystem").SduiBuilderTypes)
 
-return function(p1, p2, p3) --[[ Line: 9 | Named "findAnalyticsFieldInAncestors" ]]
+return function(p1, p2, p3)
 	if p2 then
 		assert(p2, "analyticsContext must exist")
 		

@@ -11,14 +11,14 @@ local config = {
 	deviceContactToRobloxContact = {}
 }
 
-return function(p1) --[[ Line: 16 ]]
+return function(p1)
 	-- upvalues: ByContactIdModule (copy), ByDeviceContactIdModule (copy), HasSentRequestModule (copy), DeviceContactToRobloxContactModule (copy), config (copy)
 	local ByContactIdModuleResult = ByContactIdModule(p1)
 	local ByDeviceContactIdModuleResult = ByDeviceContactIdModule(p1)
 	local HasSentRequestModule1 = HasSentRequestModule(p1)
 	local DeviceContactToRobloxContactModuleResult = DeviceContactToRobloxContactModule(p1)
 	
-	return function(p2, p3) --[[ Line: 22 ]]
+	return function(p2, p3)
 		-- upvalues: config (upval), ByContactIdModuleResult (copy), ByDeviceContactIdModuleResult (copy), HasSentRequestModule1 (copy), DeviceContactToRobloxContactModuleResult (copy)
 		local P1 = p2 or config
 		

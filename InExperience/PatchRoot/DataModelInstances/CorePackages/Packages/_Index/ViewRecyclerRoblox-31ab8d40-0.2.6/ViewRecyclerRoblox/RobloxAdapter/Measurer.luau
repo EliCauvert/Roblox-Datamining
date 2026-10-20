@@ -4,7 +4,7 @@ local _ = require(ViewRecyclerRoblox.Parent.ViewRecycler)
 local AxisMapModule = require(ViewRecyclerRoblox.RobloxAdapter.axisMap)
 
 return {
-	attach = function(p1) --[[ Line: 43 ]]
+	attach = function(p1)
 		-- upvalues: RunService (copy), AxisMapModule (copy)
 		local _Instance = p1.instance
 		local Axis = p1.axis
@@ -13,7 +13,7 @@ return {
 		local Tbl = {}
 		local Tbl1 = {}
 		
-		local function scheduleSettle() --[[ Line: 66 ]]
+		local function scheduleSettle()
 			-- upvalues: GetIdentityFunction (copy), Tbl1 (copy), RunService (upval), Tbl (copy), _Instance (copy), AxisMapModule (upval), Axis (copy), OnItemMeasuredFunction (copy)
 			local Identity = GetIdentityFunction()
 			
@@ -42,7 +42,7 @@ return {
 				local ItemRevision = Identity.itemRevision
 				local PinnedPosition = Identity.pinnedPosition
 				local HeartbeatConnection = nil
-				HeartbeatConnection = RunService.Heartbeat:Once(function() --[[ Line: 97 ]]
+				HeartbeatConnection = RunService.Heartbeat:Once(function()
 					-- upvalues: Tbl (upval), HeartbeatConnection (ref), Entry1 (ref), ItemRevision (copy), Entry (ref), ItemIndex (ref), Tbl1 (upval), AssignmentGeneration (copy), GetIdentityFunction (upval), ItemKey (copy), ItemIndex1 (copy), PinnedPosition (copy), _Instance (upval), AxisMapModule (upval), Axis (upval), OnItemMeasuredFunction (upval)
 					Tbl[HeartbeatConnection] = nil
 					
@@ -75,7 +75,7 @@ return {
 		
 		return {
 			scheduleSettle = scheduleSettle,
-			getPendingCount = function(): number --[[ Line: 154 ]]
+			getPendingCount = function(): number
 				-- upvalues: Tbl (copy)
 				local Count = 0
 				
@@ -84,7 +84,7 @@ return {
 				end
 				return Count
 			end,
-			disconnect = function() --[[ Line: 143 ]]
+			disconnect = function()
 				-- upvalues: Connection (copy), Tbl (copy), Tbl1 (copy)
 				Connection:Disconnect()
 				

@@ -44,20 +44,20 @@ local Context = ReactModule.createContext({
 
 return {
 	Context = Context,
-	Provider = function(p1) --[[ Line: 84 ]]
+	Provider = function(p1)
 		-- upvalues: Players (copy), ReactModule (copy), UseEventConnectionFunction (copy), config (copy), config1 (copy), Context (copy)
 		local SubjectPlayer = p1.subjectPlayer or Players.LocalPlayer
-		local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 87 ]]
+		local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 			-- upvalues: p1 (copy), SubjectPlayer (copy)
 			return if p1.value == nil then if SubjectPlayer then SubjectPlayer.ChatAvailabilityStatus else "Enabled" else p1.value
 		end)
-		UseEventConnectionFunction(if p1.value == nil and SubjectPlayer then SubjectPlayer:GetPropertyChangedSignal("ChatAvailabilityStatus") else nil, function() --[[ Line: 97 ]]
+		UseEventConnectionFunction(if p1.value == nil and SubjectPlayer then SubjectPlayer:GetPropertyChangedSignal("ChatAvailabilityStatus") else nil, function()
 			-- upvalues: SubjectPlayer (copy), UseStateResult2 (copy)
 			if SubjectPlayer then
 				UseStateResult2(SubjectPlayer.ChatAvailabilityStatus)
 			end
 		end, {})
-		ReactModule.useEffect(function() --[[ Line: 107 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p1 (copy), UseStateResult2 (copy)
 			if p1.value ~= nil then
 				UseStateResult2(p1.value)
@@ -65,7 +65,7 @@ return {
 		end, { p1.value })
 		
 		return ReactModule.createElement(Context.Provider, {
-			value = ReactModule.useMemo(function() --[[ Line: 114 ]]
+			value = ReactModule.useMemo(function()
 				-- upvalues: UseStateResult (copy), config (upval), config1 (upval)
 				local Entry = config[UseStateResult]
 				local Entry1 = if Entry then config1[Entry] else nil
@@ -79,7 +79,7 @@ return {
 			end, { UseStateResult })
 		}, p1.children)
 	end,
-	resolve = function(p1) --[[ Line: 54 ]]
+	resolve = function(p1)
 		-- upvalues: config (copy), config1 (copy)
 		local Entry = config[p1]
 		local Entry1 = if Entry then config1[Entry] else nil
@@ -91,7 +91,7 @@ return {
 			messageFallback = if Entry1 then Entry1.fallback else nil
 		}
 	end,
-	useLocalUserChatAvailability = function() --[[ Line: 123 ]]
+	useLocalUserChatAvailability = function()
 		-- upvalues: ReactModule (copy), Context (copy)
 		return ReactModule.useContext(Context)
 	end

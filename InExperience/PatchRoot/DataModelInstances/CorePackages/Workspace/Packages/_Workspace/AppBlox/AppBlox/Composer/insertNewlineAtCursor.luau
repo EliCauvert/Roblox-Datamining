@@ -1,4 +1,4 @@
-﻿return function(Text: string, p1: number) --[[ Line: 1 | Named "insertNewlineAtCursor" ]]
+﻿return function(Text: string, p1: number)
 	if p1 < 1 then
 		local Length = utf8.len(Text)
 		local Text1 = Text .. "\n"

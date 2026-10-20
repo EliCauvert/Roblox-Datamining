@@ -28,15 +28,15 @@ local BACKGROUNDASSETID = ConstantsModule.BACKGROUND_ASSET_IDS[1]
 local DEFAULTERRORMESSAGES = require(EditProfileBackground.Common.ErrorHandling).DEFAULT_ERROR_MESSAGES
 local InsertService = game:GetService("InsertService")
 
-local function _(p1) --[[ Line: 52 | Named "preloadBackgroundAssets" ]]
+local function _(p1)
 	-- upvalues: CryoModule (copy), ConstantsModule (copy), BACKGROUNDASSETID (copy), InsertService (copy), EventNames (copy), ErrorTypes (copy)
-	task.spawn(function() --[[ Line: 53 ]]
+	task.spawn(function()
 		-- upvalues: CryoModule (upval), ConstantsModule (upval), BACKGROUNDASSETID (upval), InsertService (upval), p1 (copy), EventNames (upval), ErrorTypes (upval)
-		for _, value in ipairs((CryoModule.Dictionary.join(ConstantsModule.DEFAULT_BACKGROUND_ASSET_IDS, CryoModule.List.filter(ConstantsModule.BACKGROUND_ASSET_IDS, function(p2): boolean --[[ Line: 57 ]]
+		for _, value in ipairs((CryoModule.Dictionary.join(ConstantsModule.DEFAULT_BACKGROUND_ASSET_IDS, CryoModule.List.filter(ConstantsModule.BACKGROUND_ASSET_IDS, function(p2): boolean
 			-- upvalues: BACKGROUNDASSETID (upval)
 			return p2 ~= BACKGROUNDASSETID
 		end)))) do
-			local Success, Result = pcall(function() --[[ Line: 63 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: InsertService (upval), value (copy)
 				return InsertService:LoadAsset(value)
 			end)
@@ -50,27 +50,27 @@ local function _(p1) --[[ Line: 52 | Named "preloadBackgroundAssets" ]]
 	end)
 end
 
-return function(p2) --[[ Line: 84 | Named "EditProfileBackgroundPage" ]]
+return function(p2)
 	-- upvalues: UseScreenSizeFunction (copy), UseLocalUserIdFunction (copy), UseDispatchFunction (copy), SocialToastModule (copy), UseAnalyticsFunction (copy), UseSelectorFunction (copy), UseEffectOnMountFunction (copy), EventNames (copy), CryoModule (copy), ConstantsModule (copy), BACKGROUNDASSETID (copy), InsertService (copy), ErrorTypes (copy), ReactModule (copy), UseNavigationFunction (copy), ProfileCustomizationNetworkingModule (copy), DEFAULTERRORMESSAGES (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigableSurfaceIdentifierEnum (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), View (copy), EditProfileBackgroundTopBarModule (copy), DisplayBackgroundModule (copy), SelectionCarouselModule (copy)
 	local UseScreenSizeResult = UseScreenSizeFunction()
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseOpenToastResult = SocialToastModule.useOpenToast()
 	local UseAnalyticsResult = UseAnalyticsFunction()
-	local UseSelectorResult = UseSelectorFunction(function(p3): number --[[ Line: 92 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p3): number
 		return if p3.GlobalGuiInset then p3.GlobalGuiInset.bottom + 5 else 0
 	end)
-	UseEffectOnMountFunction(function() --[[ Line: 96 ]]
+	UseEffectOnMountFunction(function()
 		-- upvalues: UseAnalyticsResult (copy), EventNames (upval), CryoModule (upval), ConstantsModule (upval), BACKGROUNDASSETID (upval), InsertService (upval), ErrorTypes (upval)
 		UseAnalyticsResult.fireAnalyticsEvent(EventNames.EditProfileBackgroundOpened)
 		local CurrentTime = tick()
-		task.spawn(function() --[[ Line: 53 ]]
+		task.spawn(function()
 			-- upvalues: CryoModule (upval), ConstantsModule (upval), BACKGROUNDASSETID (upval), InsertService (upval), UseAnalyticsResult (copy), EventNames (upval), ErrorTypes (upval)
-			for _, value in ipairs((CryoModule.Dictionary.join(ConstantsModule.DEFAULT_BACKGROUND_ASSET_IDS, CryoModule.List.filter(ConstantsModule.BACKGROUND_ASSET_IDS, function(p3): boolean --[[ Line: 57 ]]
+			for _, value in ipairs((CryoModule.Dictionary.join(ConstantsModule.DEFAULT_BACKGROUND_ASSET_IDS, CryoModule.List.filter(ConstantsModule.BACKGROUND_ASSET_IDS, function(p3): boolean
 				-- upvalues: BACKGROUNDASSETID (upval)
 				return p3 ~= BACKGROUNDASSETID
 			end)))) do
-				local Success, Result = pcall(function() --[[ Line: 63 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: InsertService (upval), value (copy)
 					return InsertService:LoadAsset(value)
 				end)
@@ -87,7 +87,7 @@ return function(p2) --[[ Line: 84 | Named "EditProfileBackgroundPage" ]]
 	local AssetId = if p2.profileBackgroundData and p2.profileBackgroundData.assetId then p2.profileBackgroundData.assetId else BACKGROUNDASSETID
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseStateResult1 = UseStateResult or AssetId
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 121 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseScreenSizeResult (copy), UseSelectorResult (copy)
 		local Smallest = math.min(640, UseScreenSizeResult.X)
 		local ButtonsPerRow: number = if Smallest >= 540 then 8 else 4
@@ -113,7 +113,7 @@ return function(p2) --[[ Line: 84 | Named "EditProfileBackgroundPage" ]]
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
 		customEventHandlers = {
 			[FocusNavigationEventNameEnum.NavigateBack] = {
-				handler = InputHandlersModule.onRelease(function(p3) --[[ Line: 197 ]]
+				handler = InputHandlersModule.onRelease(function(p3)
 					-- upvalues: p2 (copy), UseNavigationResult (copy)
 					if p2.onBackgroundChanged then
 						p2.onBackgroundChanged()
@@ -137,7 +137,7 @@ return function(p2) --[[ Line: 84 | Named "EditProfileBackgroundPage" ]]
 			TopPadding = ReactModule.createElement(View, { tag = "size-full-500" }),
 			TopBar = ReactModule.createElement(EditProfileBackgroundTopBarModule, {
 				layoutOrder = 1,
-				onClose = function() --[[ Line: 143 ]]
+				onClose = function()
 					-- upvalues: p2 (copy), UseNavigationResult (copy)
 					if p2.onBackgroundChanged then
 						p2.onBackgroundChanged()
@@ -169,21 +169,21 @@ return function(p2) --[[ Line: 84 | Named "EditProfileBackgroundPage" ]]
 					buttonSize = UseMemoResult.buttonSize,
 					buttonsPerRow = UseMemoResult.buttonsPerRow,
 					numRows = UseMemoResult.numRows,
-					onBackgroundSelected = function(AssetId) --[[ Line: 151 ]]
+					onBackgroundSelected = function(AssetId)
 						-- upvalues: UseAnalyticsResult (copy), EventNames (upval), UseStateResult2 (copy), UseLocalUserIdResult (copy), UseDispatchResult (copy), ProfileCustomizationNetworkingModule (upval), p2 (copy), ErrorTypes (upval), UseOpenToastResult (copy), DEFAULTERRORMESSAGES (upval)
 						UseAnalyticsResult.fireAnalyticsEvent(EventNames.BackgroundSelected, { backgroundId = AssetId })
 						UseStateResult2(AssetId)
-						task.spawn(function() --[[ Line: 158 ]]
+						task.spawn(function()
 							-- upvalues: UseLocalUserIdResult (upval), AssetId (copy), UseDispatchResult (upval), ProfileCustomizationNetworkingModule (upval), p2 (upval), UseAnalyticsResult (upval), EventNames (upval), ErrorTypes (upval), UseOpenToastResult (upval), DEFAULTERRORMESSAGES (upval)
 							UseDispatchResult(ProfileCustomizationNetworkingModule.UpdateProfileCustomization.API({
 								profileEntity = { type = "User", id = tostring(UseLocalUserIdResult) },
 								customizedComponents = { profileBackground = { assetId = AssetId } }
-							})):andThen(function(_) --[[ Line: 172 ]]
+							})):andThen(function(_)
 								-- upvalues: p2 (upval)
 								if p2.onBackgroundChanged then
 									p2.onBackgroundChanged()
 								end
-							end):catch(function(Err) --[[ Line: 177 ]]
+							end):catch(function(Err)
 								-- upvalues: UseAnalyticsResult (upval), EventNames (upval), ErrorTypes (upval), UseOpenToastResult (upval), DEFAULTERRORMESSAGES (upval)
 								UseAnalyticsResult.fireAnalyticsEvent(EventNames.EditProfileBackgroundFailure, {
 									errorType = ErrorTypes.BackgroundSaveFailed,

@@ -6,7 +6,7 @@
 	["&amp;"] = "&"
 }
 
-return function(Text: string): string --[[ Line: 14 | Named "unescapeRichFormatting" ]]
+return function(Text: string): string
 	-- upvalues: config (copy)
 	return (Text:gsub("&%l+;", config))
 end

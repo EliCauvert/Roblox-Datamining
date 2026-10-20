@@ -15,20 +15,20 @@ TextBoxStateWrapper.defaultProps = {
 	IconSize = UDim2.new(1, 0, 1, 0)
 }
 
-function TextBoxStateWrapper.init(p1) --[[ Line: 27 ]]
+function TextBoxStateWrapper.init(p1)
 	p1:setState({ Focused = false, Hover = false })
 	
-	function p1.onMouseEnter() --[[ Line: 33 ]]
+	function p1.onMouseEnter()
 		-- upvalues: p1 (copy)
 		p1:setState({ Hover = true })
 	end
 	
-	function p1.onMouseLeave() --[[ Line: 39 ]]
+	function p1.onMouseLeave()
 		-- upvalues: p1 (copy)
 		p1:setState({ Hover = false })
 	end
 	
-	function p1.onFocused(...) --[[ Line: 45 ]]
+	function p1.onFocused(...)
 		-- upvalues: p1 (copy)
 		p1:setState({ Focused = true })
 		
@@ -37,7 +37,7 @@ function TextBoxStateWrapper.init(p1) --[[ Line: 27 ]]
 		end
 	end
 	
-	function p1.onFocusLost(...) --[[ Line: 54 ]]
+	function p1.onFocusLost(...)
 		-- upvalues: p1 (copy)
 		p1:setState({ Focused = false })
 		
@@ -47,13 +47,13 @@ function TextBoxStateWrapper.init(p1) --[[ Line: 27 ]]
 	end
 end
 
-function TextBoxStateWrapper.render(p1) --[[ Line: 64 ]]
+function TextBoxStateWrapper.render(p1)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ImageSetLabel (copy), GetImageDataFunction (copy), CryoModule (copy)
 	local HelpComponent = p1.props.HelpComponent
 	local ErrorText = p1.props.ErrorText
 	local LabelText = p1.props.LabelText
 	
-	return WithStyleFunction(function(p2) --[[ Line: 69 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: p1 (copy), RoactModule (upval), LabelText (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), ImageSetLabel (upval), GetImageDataFunction (upval), CryoModule (upval), ErrorText (copy), HelpComponent (copy)
 		local Color = p2.Theme.UIDefault.Color
 		local Transparency = p2.Theme.UIDefault.Transparency

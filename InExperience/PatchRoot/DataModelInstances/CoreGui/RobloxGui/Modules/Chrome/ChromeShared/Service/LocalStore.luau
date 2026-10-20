@@ -12,7 +12,7 @@ while not LocalPlayer do
 end
 local Text = "player_" .. tostring(if LocalPlayer then LocalPlayer.UserId else 0)
 
-local function initStore() --[[ Line: 25 ]]
+local function initStore()
 	-- upvalues: T (ref), Text (copy)
 	if T.LocalPlayer == nil then
 		T.LocalPlayer = {}
@@ -25,19 +25,19 @@ local function initStore() --[[ Line: 25 ]]
 	end
 end
 
-local function localPlayerSelector(p1) --[[ Line: 37 ]]
+local function localPlayerSelector(p1)
 	-- upvalues: Text (copy)
 	return if p1 and p1.LocalPlayer and p1.LocalPlayer[Text] then p1.LocalPlayer[Text] else p1
 end
 
-local function anyPlayerSelector(p1) --[[ Line: 44 ]]
+local function anyPlayerSelector(p1)
 	return if p1 and p1.AnyPlayer then p1.AnyPlayer else p1
 end
 
-local function loadStore() --[[ Line: 51 ]]
+local function loadStore()
 	-- upvalues: InGameMenuStateStorageKeyEngineFeature (copy), AppStorageService (copy), Flag (ref), HttpService (copy), T (ref), initStore (copy)
 	if not InGameMenuStateStorageKeyEngineFeature then return end
-	local Success, Result = pcall(function() --[[ Line: 55 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: AppStorageService (upval)
 		return AppStorageService:GetItem("InGameMenuState")
 	end)
@@ -46,7 +46,7 @@ local function loadStore() --[[ Line: 51 ]]
 		Flag = true
 		
 		if #Result > 0 then
-			local Success1, Result1 = pcall(function() --[[ Line: 61 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -58,17 +58,17 @@ local function loadStore() --[[ Line: 51 ]]
 	end
 end
 
-local function saveStore() --[[ Line: 76 ]]
+local function saveStore()
 	-- upvalues: InGameMenuStateStorageKeyEngineFeature (copy), Flag (ref), HttpService (copy), T (ref), AppStorageService (copy)
 	if not InGameMenuStateStorageKeyEngineFeature then return end
 	if Flag then
-		local Success, Result = pcall(function() --[[ Line: 81 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: HttpService (upval), T (upval)
 			return HttpService:JSONEncode(T)
 		end)
 		
 		if Success then
-			local Success1, Result1 = pcall(function() --[[ Line: 85 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: AppStorageService (upval), Result (copy)
 				AppStorageService:SetItem("InGameMenuState", Result)
 				AppStorageService:Flush()
@@ -86,7 +86,7 @@ local function saveStore() --[[ Line: 76 ]]
 	end
 end
 
-local function deepCopy(List) --[[ Line: 99 ]]
+local function deepCopy(List)
 	-- upvalues: deepCopy (copy)
 	if type(List) ~= "table" then
 		return List
@@ -99,7 +99,7 @@ local function deepCopy(List) --[[ Line: 99 ]]
 	return t
 end
 
-local function _(Key, p1, Callback) --[[ Line: 111 | Named "store" ]]
+local function _(Key, p1, Callback)
 	-- upvalues: Flag (ref), loadStore (copy), T (ref), deepCopy (copy), saveStore (copy)
 	if not Flag then
 		loadStore()
@@ -115,7 +115,7 @@ local function _(Key, p1, Callback) --[[ Line: 111 | Named "store" ]]
 	end
 end
 
-local _ = function(p1, Callback) --[[ Line: 125 | Named "load" ]]
+local _ = function(p1, Callback)
 	-- upvalues: Flag (ref), loadStore (copy), T (ref), deepCopy (copy)
 	if not Flag then
 		loadStore()
@@ -131,11 +131,11 @@ local _ = function(p1, Callback) --[[ Line: 125 | Named "load" ]]
 end
 
 return {
-	isEnabled = function() --[[ Line: 166 ]]
+	isEnabled = function()
 		-- upvalues: InGameMenuStateStorageKeyEngineFeature (copy)
 		return InGameMenuStateStorageKeyEngineFeature
 	end,
-	storeForLocalPlayer = function(Key, p1) --[[ Line: 169 ]]
+	storeForLocalPlayer = function(Key, p1)
 		-- upvalues: localPlayerSelector (copy), Flag (ref), loadStore (copy), T (ref), Text (copy), deepCopy (copy), saveStore (copy)
 		if not Flag then
 			loadStore()
@@ -156,7 +156,7 @@ return {
 			end
 		end
 	end,
-	loadForLocalPlayer = function(p1) --[[ Line: 172 ]]
+	loadForLocalPlayer = function(p1)
 		-- upvalues: localPlayerSelector (copy), Flag (ref), loadStore (copy), T (ref), Text (copy), deepCopy (copy)
 		if not Flag then
 			loadStore()
@@ -175,7 +175,7 @@ return {
 		end
 		return nil
 	end,
-	storeForAnyPlayer = function(Key, p1) --[[ Line: 176 ]]
+	storeForAnyPlayer = function(Key, p1)
 		-- upvalues: anyPlayerSelector (copy), Flag (ref), loadStore (copy), T (ref), deepCopy (copy), saveStore (copy)
 		if not Flag then
 			loadStore()
@@ -196,7 +196,7 @@ return {
 			end
 		end
 	end,
-	loadForAnyPlayer = function(p1) --[[ Line: 179 ]]
+	loadForAnyPlayer = function(p1)
 		-- upvalues: anyPlayerSelector (copy), Flag (ref), loadStore (copy), T (ref), deepCopy (copy)
 		if not Flag then
 			loadStore()
@@ -215,12 +215,12 @@ return {
 		end
 		return nil
 	end,
-	clearCache = function() --[[ Line: 183 ]]
+	clearCache = function()
 		-- upvalues: Flag (ref), T (ref)
 		Flag = false
 		T = nil
 	end,
-	getValue = function(p1) --[[ Line: 138 ]]
+	getValue = function(p1)
 		-- upvalues: localPlayerSelector (copy), Flag (ref), loadStore (copy), T (ref), Text (copy), deepCopy (copy)
 		if not Flag then
 			loadStore()
@@ -239,7 +239,7 @@ return {
 		end
 		return nil
 	end,
-	getUniversesExposedTo = function(p1) --[[ Line: 143 ]]
+	getUniversesExposedTo = function(p1)
 		-- upvalues: localPlayerSelector (copy), Flag (ref), loadStore (copy), T (ref), Text (copy), deepCopy (copy)
 		local v1 = nil
 		if not Flag then
@@ -263,7 +263,7 @@ return {
 		until true
 		return if v1 then v1 else {}
 	end,
-	getNumUniversesExposedTo = function(p1): number --[[ Line: 160 ]]
+	getNumUniversesExposedTo = function(p1): number
 		-- upvalues: localPlayerSelector (copy), Flag (ref), loadStore (copy), T (ref), Text (copy), deepCopy (copy)
 		local v1 = nil
 		if not Flag then
@@ -287,7 +287,7 @@ return {
 		until true
 		return #(if v1 then v1 else {})
 	end,
-	addUniverseToExposureList = function(Key, Value) --[[ Line: 151 ]]
+	addUniverseToExposureList = function(Key, Value)
 		-- upvalues: localPlayerSelector (copy), Flag (ref), loadStore (copy), T (ref), Text (copy), deepCopy (copy), ConstantsModule (copy), saveStore (copy)
 		local v1 = nil
 		if not Flag then

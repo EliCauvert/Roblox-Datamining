@@ -3,7 +3,7 @@ local ConversationChannelsModule = require(Parent.AppChat.ConversationChannels)
 local _ = require(Parent.AppChat.GetConversationListStore)
 local IsUserPendingModule = require(Parent.AppChat.isUserPending)
 
-return function(p1) --[[ Line: 21 | Named "getChatLandingSharedCounts" ]]
+return function(p1)
 	-- upvalues: IsUserPendingModule (copy), ConversationChannelsModule (copy)
 	local P0 = p1 or {}
 	local PendingConversationCount = 0

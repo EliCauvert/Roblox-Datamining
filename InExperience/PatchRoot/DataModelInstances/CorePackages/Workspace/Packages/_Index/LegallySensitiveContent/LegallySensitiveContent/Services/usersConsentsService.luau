@@ -12,16 +12,16 @@ local NewResult = DependenciesModule.UrlBuilder.new({
 })
 
 return {
-	grantOneTimeUserConsent = function(p1, TtlSeconds, p2) --[[ Line: 18 ]]
+	grantOneTimeUserConsent = function(p1, TtlSeconds, p2)
 		-- upvalues: ConsentNameModule (copy), Promise (copy), NewResult (copy), FetchFunction (copy), HttpService (copy), Response (copy)
 		local ConsentNameModuleEntry = ConsentNameModule[p1]
 		
 		if ConsentNameModuleEntry then
 			local Result = NewResult()
 			
-			return Promise.new(function(Callback1: () -> (), Callback: (any) -> ()) --[[ Line: 25 ]]
+			return Promise.new(function(Callback1: () -> (), Callback: (any) -> ())
 				-- upvalues: FetchFunction (upval), Result (copy), HttpService (upval), ConsentNameModuleEntry (copy), TtlSeconds (copy), p2 (copy), Response (upval)
-				local Success, Result1 = pcall(function() --[[ Line: 26 ]]
+				local Success, Result1 = pcall(function()
 					-- upvalues: FetchFunction (upval), Result (upval), HttpService (upval), ConsentNameModuleEntry (upval), TtlSeconds (upval), p2 (upval), Response (upval)
 					return FetchFunction(Result, {
 						method = "POST",
@@ -34,7 +34,7 @@ return {
 							Accept = "application/json",
 							["rbx-audit-data"] = p2
 						}
-					}):catch(function(_) --[[ Line: 39 ]]
+					}):catch(function(_)
 						-- upvalues: Response (upval)
 						return Response.error()
 					end):expect()

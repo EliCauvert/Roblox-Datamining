@@ -15,7 +15,7 @@ local config = {
 	[BackButton.IconType.Cross] = "cross"
 }
 
-local function v11(Props) --[[ Line: 36 ]]
+local function v11(Props)
 	-- upvalues: config (copy), ShareGameIconsModule (copy), RoactModule (copy), IconButtonModule (copy)
 	local Visible = Props.visible
 	local AnchorPoint = Props.anchorPoint
@@ -39,7 +39,7 @@ local function v11(Props) --[[ Line: 36 ]]
 	})
 end
 
-function BackButton.render(p1) --[[ Line: 65 ]]
+function BackButton.render(p1)
 	-- upvalues: BackButton (copy), RoactModule (copy), RectangleButtonModule (copy), Translator (copy), ThemeModule (copy), ConstantsModule (copy), v11 (copy)
 	local ZIndex = p1.props.zIndex
 	

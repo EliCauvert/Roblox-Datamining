@@ -6,11 +6,11 @@ local LocalizationRoactContext = require(Parent.Localization).LocalizationRoactC
 local InExperienceInterventionAnalyticsModule = require(InExperienceIntervention.InExperienceInterventionAnalytics)
 local ChatInterventionGenericToastModule = require(InExperienceIntervention.Components.ChatInterventionGenericToast)
 
-local function _(p1, p2, p3) --[[ Line: 14 | Named "format" ]]
+local function _(p1, p2, p3)
 	if p1 == nil then
 		return p3
 	else
-		local Success, Result = pcall(function() --[[ Line: 18 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p1 (copy), p2 (copy)
 			return p1:Format(p2)
 		end)
@@ -19,7 +19,7 @@ local function _(p1, p2, p3) --[[ Line: 14 | Named "format" ]]
 	end
 end
 
-return function() --[[ Line: 27 | Named "DictationSafetyReminderToast" ]]
+return function()
 	-- upvalues: ReactModule (copy), LocalizationRoactContext (copy), FoundationModule (copy), ChatInterventionGenericToastModule (copy), InExperienceInterventionAnalyticsModule (copy)
 	local UseContextResult = ReactModule.useContext(LocalizationRoactContext)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
@@ -31,7 +31,7 @@ return function() --[[ Line: 27 | Named "DictationSafetyReminderToast" ]]
 		VoiceTypingMayBeTurnedOffIfYouBreakTheRules = "Voice typing may be turned off if you break the rules"
 	else
 		local v1 = "Feature.InExperienceIntervention.Heading.VoiceTypingMayBeTurnedOff"
-		local Success, Result = pcall(function() --[[ Line: 18 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: UseContextResult (copy), v1 (copy)
 			return UseContextResult:Format(v1)
 		end)
@@ -44,7 +44,7 @@ return function() --[[ Line: 27 | Named "DictationSafetyReminderToast" ]]
 		KeepYourWordsKindAndYourCommunitySafe = "Keep your words kind and your community safe."
 	else
 		local v2 = "Feature.InExperienceIntervention.Description.KeepWordsKindCommunitySafe"
-		local Success1, Result1 = pcall(function() --[[ Line: 18 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: UseContextResult (copy), v2 (copy)
 			return UseContextResult:Format(v2)
 		end)

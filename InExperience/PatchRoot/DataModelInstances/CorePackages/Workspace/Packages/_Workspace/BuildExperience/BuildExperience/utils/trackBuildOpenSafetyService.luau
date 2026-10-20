@@ -2,14 +2,14 @@
 local ReactModule = require(BuildExperience.Parent.React)
 local BuildUIVisibilityModule = require(BuildExperience.utils.buildUIVisibility)
 
-return function(p1) --[[ Line: 7 | Named "trackBuildOpenSafetyService" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), BuildUIVisibilityModule (copy)
-	ReactModule.useEffect(function() --[[ Line: 8 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), BuildUIVisibilityModule (upval)
 		if p1 then
 			BuildUIVisibilityModule.acquire()
 			
-			return function() --[[ Line: 14 ]]
+			return function()
 				-- upvalues: BuildUIVisibilityModule (upval)
 				BuildUIVisibilityModule.release()
 			end

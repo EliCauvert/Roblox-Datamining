@@ -7,7 +7,7 @@ local FocusNavigationUtilsModule = require(CorePackages.Workspace.Packages.Focus
 local FocusRoot = FocusNavigationUtilsModule.FocusRoot
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 
-function ScreenshotFlowStepHandlerContainer.render(p1) --[[ Line: 16 ]]
+function ScreenshotFlowStepHandlerContainer.render(p1)
 	-- upvalues: ReactModule (copy), CoreScriptsRootProvider (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), ScreenshotFlowStepHandlerModule (copy)
 	return ReactModule.createElement(CoreScriptsRootProvider, {}, {
 		FocusNavigationCoreScriptsWrapper = ReactModule.createElement(FocusRoot, {

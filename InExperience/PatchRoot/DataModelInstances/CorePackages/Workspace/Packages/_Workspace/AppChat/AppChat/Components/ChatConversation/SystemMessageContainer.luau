@@ -21,7 +21,7 @@ local config = {
 	senderTargetId = nil
 }
 
-local function getCardComponentTypes(Cards) --[[ Line: 47 ]]
+local function getCardComponentTypes(Cards)
 	local List = {}
 	
 	if not Cards then
@@ -41,15 +41,15 @@ local function getCardComponentTypes(Cards) --[[ Line: 47 ]]
 	return List
 end
 
-function SystemMessageContainer(p1) --[[ Line: 67 ]]
+function SystemMessageContainer(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), ReactModule (copy), GetFFlagDebugAppChatModule (copy), GetFFlagEnableSocialCardsFunction (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), getCardComponentTypes (copy), DomLocatorsModule (copy), CardContainerModule (copy), FFlagAppChatDomLocatorFoundationMigrationModule (copy), FoundationModule (copy), SystemMessageModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseStyleResult = UseStyleFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 72 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: GetFFlagDebugAppChatModule (upval), UseStateResult2 (copy)
 		if GetFFlagDebugAppChatModule() then
-			UseStateResult2(function(p2): boolean --[[ Line: 74 ]]
+			UseStateResult2(function(p2): boolean
 				return not p2
 			end)
 		end

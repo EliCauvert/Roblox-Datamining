@@ -6,7 +6,7 @@ local config = {
 	xbox = PlatformModule.Xbox
 }
 
-return function() --[[ Line: 10 | Named "getInputPlatform" ]]
+return function()
 	-- upvalues: UserInputService (copy), config (copy), PlatformModule (copy)
 	local ImageForKeyCode: string = UserInputService:GetImageForKeyCode(Enum.KeyCode.ButtonStart)
 	

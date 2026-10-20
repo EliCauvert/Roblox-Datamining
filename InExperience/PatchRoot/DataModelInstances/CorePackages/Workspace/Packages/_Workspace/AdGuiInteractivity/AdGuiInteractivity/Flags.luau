@@ -17,56 +17,56 @@ game:DefineFastFlag("EnableHideReportAdModalDuringScreenshot2", false)
 game:DefineFastInt("AdGuiInteractivityPixelsPerStud", 50)
 
 return {
-	GetFStringAdsVolumeOffImageLua = function() --[[ Line: 20 ]]
+	GetFStringAdsVolumeOffImageLua = function()
 		return game:GetFastString("AdsVolumeOffImageLua")
 	end,
-	GetFStringAdsVolumeOnImageLua = function() --[[ Line: 23 ]]
+	GetFStringAdsVolumeOnImageLua = function()
 		return game:GetFastString("AdsVolumeOnImageLua")
 	end,
-	GetFStringAdsEnterFullscreenImageLua = function() --[[ Line: 26 ]]
+	GetFStringAdsEnterFullscreenImageLua = function()
 		return game:GetFastString("AdsEnterFullscreenImageLua")
 	end,
-	GetFStringAdsExitFullscreenImageLua = function() --[[ Line: 29 ]]
+	GetFStringAdsExitFullscreenImageLua = function()
 		return game:GetFastString("AdsExitFullscreenImageLua")
 	end,
-	GetFStringAdsEudsaPromptActiveImageLua = function() --[[ Line: 32 ]]
+	GetFStringAdsEudsaPromptActiveImageLua = function()
 		return game:GetFastString("AdsEudsaPromptActiveImageLua")
 	end,
-	GetFStringAdsEudsaPromptInactiveImageLua = function() --[[ Line: 35 ]]
+	GetFStringAdsEudsaPromptInactiveImageLua = function()
 		return game:GetFastString("AdsEudsaPromptInactiveImageLua")
 	end,
-	GetFStringAdGuiPlayButtonImageLua = function() --[[ Line: 38 ]]
+	GetFStringAdGuiPlayButtonImageLua = function()
 		return game:GetFastString("AdGuiPlayButtonImageLua")
 	end,
-	GetFStringAdGuiPauseButtonImageLua = function() --[[ Line: 41 ]]
+	GetFStringAdGuiPauseButtonImageLua = function()
 		return game:GetFastString("AdGuiPauseButtonImageLua")
 	end,
-	GetFStringAdGuiCloseButtonImageLua = function() --[[ Line: 44 ]]
+	GetFStringAdGuiCloseButtonImageLua = function()
 		return game:GetFastString("AdGuiCloseButtonImageLua")
 	end,
-	GetFStringAdGuiLivePreviewWatermark = function() --[[ Line: 47 ]]
+	GetFStringAdGuiLivePreviewWatermark = function()
 		return game:GetFastString("AdGuiLivePreviewWatermark")
 	end,
-	GetFStringLivePreviewPlaceId = function() --[[ Line: 50 ]]
+	GetFStringLivePreviewPlaceId = function()
 		return game:GetFastString("LivePreviewPlaceId")
 	end,
-	GetFFlagUseV2LivePreviewWatermark = function() --[[ Line: 53 ]]
+	GetFFlagUseV2LivePreviewWatermark = function()
 		return game:GetFastFlag("UseV2LivePreviewWatermark")
 	end,
-	GetFStringAdGuiLivePreviewWatermarkV2 = function() --[[ Line: 56 ]]
+	GetFStringAdGuiLivePreviewWatermarkV2 = function()
 		return game:GetFastString("AdGuiLivePreviewWatermarkV2")
 	end,
-	GetFFlagEnableReportAdDropdown = function() --[[ Line: 59 ]]
+	GetFFlagEnableReportAdDropdown = function()
 		return game:GetFastFlag("EnableReportAdDropdown5")
 	end,
 	FFlagFixReportAdInfoDuringRotation = game:DefineFastFlag("FixReportAdInfoDuringRotation", false),
-	GetFIntUniversalAppPolicyFailureTelemetryThrottleHundredthsPercent = function() --[[ Line: 63 ]]
+	GetFIntUniversalAppPolicyFailureTelemetryThrottleHundredthsPercent = function()
 		return game:GetFastInt("UniversalAppPolicyFailureTelemetryThrottleHundredthsPercent")
 	end,
-	GetEnableHideReportAdModalDuringScreenshot = function() --[[ Line: 66 ]]
+	GetEnableHideReportAdModalDuringScreenshot = function()
 		return game:GetFastFlag("EnableHideReportAdModalDuringScreenshot2")
 	end,
-	GetAdGuiInteractivityPixelsPerStud = function() --[[ Line: 69 ]]
+	GetAdGuiInteractivityPixelsPerStud = function()
 		return game:GetFastInt("AdGuiInteractivityPixelsPerStud")
 	end
 }

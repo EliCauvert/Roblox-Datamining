@@ -22,9 +22,9 @@ PageContainer.validateProps = T.strictInterface({
 	controllerBarCount = T.number
 })
 
-function PageContainer.init(p1, p2) --[[ Line: 34 ]]
+function PageContainer.init(p1, p2)
 	-- upvalues: GuiService (copy), PagesModule (copy), Roact (copy), Otter (copy)
-	function p1.onContainerRendered(SelectionParent, CurrentPage) --[[ Line: 35 ]]
+	function p1.onContainerRendered(SelectionParent, CurrentPage)
 		-- upvalues: p1 (copy), GuiService (upval)
 		if SelectionParent then
 			local SelectionParentNameFromKey = p1.getSelectionParentNameFromKey(CurrentPage)
@@ -33,7 +33,7 @@ function PageContainer.init(p1, p2) --[[ Line: 34 ]]
 		end
 	end
 	
-	function p1.getSelectionParentNameFromKey(Text): string --[[ Line: 43 ]]
+	function p1.getSelectionParentNameFromKey(Text): string
 		return Text .. "_IGMPageSelectionGroup"
 	end
 	
@@ -47,15 +47,15 @@ function PageContainer.init(p1, p2) --[[ Line: 34 ]]
 		local v1: number = if p2.currentPage == i then 1 else 0
 		t[i], t1[i] = Roact.createBinding(v1)
 		t2[i] = v1
-		p1.pagePositions[i] = t[i]:map(function(p3: number): UDim2 --[[ Line: 55 ]]
+		p1.pagePositions[i] = t[i]:map(function(p3: number): UDim2
 			return UDim2.new(p3 - 1, 0, 0, 0)
 		end)
-		p1.pageVisibilities[i] = t[i]:map(function(p3): boolean --[[ Line: 60 ]]
+		p1.pageVisibilities[i] = t[i]:map(function(p3): boolean
 			return p3 ~= 0 and p3 ~= 1.25
 		end)
 	end
 	p1.pageMotor = Otter.createGroupMotor(t2)
-	p1.pageMotor:onStep(function(List) --[[ Line: 69 ]]
+	p1.pageMotor:onStep(function(List)
 		-- upvalues: t1 (copy)
 		for i, value in pairs(List) do
 			t1[i](value)
@@ -63,13 +63,13 @@ function PageContainer.init(p1, p2) --[[ Line: 34 ]]
 	end)
 end
 
-function PageContainer.render(p3) --[[ Line: 76 ]]
+function PageContainer.render(p3)
 	-- upvalues: PagesModule (copy), WithLocalizationModule (copy), Roact (copy), ComponentModules (copy), BlurredModalPortalModule (copy), ConstantsModule (copy)
 	local t = {}
 	
 	for i, value in pairs(PagesModule.pagesByKey) do
 		local PageVisibility = p3.pageVisibilities[i]
-		t[i] = WithLocalizationModule({ title = value.title })(function(p4) --[[ Line: 84 ]]
+		t[i] = WithLocalizationModule({ title = value.title })(function(p4)
 			-- upvalues: value (copy), Roact (upval), p3 (copy), i (copy), PageVisibility (copy), ComponentModules (upval), BlurredModalPortalModule (upval)
 			return if value.isModal then Roact.createElement(BlurredModalPortalModule, { Enabled = p3.props.currentPage == i }, {
 				ModalPageContent = Roact.createElement(ComponentModules[i], { pageTitle = p4.title })
@@ -79,7 +79,7 @@ function PageContainer.render(p3) --[[ Line: 76 ]]
 				BackgroundTransparency = 1,
 				ZIndex = value.navigationDepth,
 				Visible = PageVisibility,
-				[Roact.Ref] = function(p5) --[[ Line: 92 ]]
+				[Roact.Ref] = function(p5)
 					-- upvalues: p3 (upval), i (upval)
 					p3.onContainerRendered(p5, i)
 				end
@@ -97,7 +97,7 @@ function PageContainer.render(p3) --[[ Line: 76 ]]
 	}, t)
 end
 
-function PageContainer.didUpdate(p4, p5, _) --[[ Line: 122 ]]
+function PageContainer.didUpdate(p4, p5, _)
 	-- upvalues: PagesModule (copy), Otter (copy)
 	local CurrentPage = p5.currentPage
 	local CurrentPage1 = p4.props.currentPage
@@ -126,7 +126,7 @@ function PageContainer.didUpdate(p4, p5, _) --[[ Line: 122 ]]
 	end
 end
 
-function PageContainer.willUnmount(p6) --[[ Line: 165 ]]
+function PageContainer.willUnmount(p6)
 	-- upvalues: PagesModule (copy), GuiService (copy)
 	for i, value in pairs(PagesModule.pagesByKey) do
 		if not value.isModal then
@@ -135,7 +135,7 @@ function PageContainer.willUnmount(p6) --[[ Line: 165 ]]
 	end
 end
 
-return RoactRodux.UNSTABLE_connect2(function(p7) --[[ Line: 174 ]]
+return RoactRodux.UNSTABLE_connect2(function(p7)
 	return {
 		currentPage = p7.menuPage,
 		visible = p7.isMenuOpen,

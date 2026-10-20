@@ -15,7 +15,7 @@ local SendAnalyticsEventFunction = AnalyticsServiceModule.sendAnalyticsEvent
 local TelemetryEventType = AnalyticsServiceModule.TelemetryEventType
 local InExperience = require(GenericAbuseReporting.Enums.AbuseVector).InExperience
 
-local function getCacheKey(InExperience, List): string --[[ Line: 38 ]]
+local function getCacheKey(InExperience, List): string
 	local List1 = {}
 	
 	for i in pairs(List) do
@@ -34,7 +34,7 @@ local v1 = nil
 
 return {
 	CONFIG_CACHE_TTL_MS = 1800000,
-	useDynamicInExpConfig = function(p1, p2) --[[ Line: 77 ]]
+	useDynamicInExpConfig = function(p1, p2)
 		-- upvalues: UseRoactServiceFunction (copy), RoactNetworking (copy), getCacheKey (copy), InExperience (copy), ReactModule (copy), v1 (ref), SendAnalyticsEventFunction (copy), TelemetryEventType (copy), FetchConfigWithAttributesModule (copy), GetNewRunIdFunction (copy), FFlagAbuseReportImproveErrorEventsModule (copy), FormatErrorDetailForAnalyticsFunction (copy), DashModule (copy)
 		local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
 		local CacheKey = getCacheKey(InExperience, p2)
@@ -42,7 +42,7 @@ return {
 		local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 		local UseRefResult = ReactModule.useRef(0)
 		local Data = if UseStateResult and UseStateResult.key ~= CacheKey then nil elseif UseStateResult then UseStateResult.data else nil
-		ReactModule.useEffect(function() --[[ Line: 92 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p1 (copy), UseStateResult2 (copy), p2 (copy), v1 (upval), CacheKey (copy), UseStateResult2_1 (copy), SendAnalyticsEventFunction (upval), InExperience (upval), TelemetryEventType (upval), UseRefResult (copy), FetchConfigWithAttributesModule (upval), UseRoactServiceResult (copy), GetNewRunIdFunction (upval), FFlagAbuseReportImproveErrorEventsModule (upval), FormatErrorDetailForAnalyticsFunction (upval), DashModule (upval)
 			if not p1 then
 				UseStateResult2(nil)
@@ -74,7 +74,7 @@ return {
 				UseStateResult2(nil)
 				UseStateResult2_1(false)
 				local UnixTimestampMillis1 = DateTime.now().UnixTimestampMillis
-				FetchConfigWithAttributesModule(UseRoactServiceResult, InExperience, p2):andThen(function(Result) --[[ Line: 140 ]]
+				FetchConfigWithAttributesModule(UseRoactServiceResult, InExperience, p2):andThen(function(Result)
 					-- upvalues: UseRefResult (upval), NewCurrent (copy), v1 (upval), CacheKey (upval), UseStateResult2 (upval), SendAnalyticsEventFunction (upval), InExperience (upval), ExperienceTargetId (copy), TelemetryEventType (upval), UnixTimestampMillis1 (copy)
 					if UseRefResult.current == NewCurrent then
 						local ResponseBody = Result.responseBody
@@ -102,7 +102,7 @@ return {
 						
 						return
 					end
-				end):catch(function(Err) --[[ Line: 166 ]]
+				end):catch(function(Err)
 					-- upvalues: UseRefResult (upval), NewCurrent (copy), UseStateResult2_1 (upval), SendAnalyticsEventFunction (upval), InExperience (upval), ExperienceTargetId (copy), GetNewRunIdFunction (upval), TelemetryEventType (upval), FFlagAbuseReportImproveErrorEventsModule (upval), FormatErrorDetailForAnalyticsFunction (upval), DashModule (upval)
 					if UseRefResult.current == NewCurrent then
 						warn("Failed to fetch Dynamic Report V2 config:", Err)
@@ -133,7 +133,7 @@ return {
 			abuseVector = InExperience
 		}
 	end,
-	clearCacheForTesting = function() --[[ Line: 54 ]]
+	clearCacheForTesting = function()
 		-- upvalues: v1 (ref)
 		v1 = nil
 	end

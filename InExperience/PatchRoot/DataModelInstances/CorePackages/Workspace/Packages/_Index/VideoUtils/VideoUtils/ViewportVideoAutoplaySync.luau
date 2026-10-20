@@ -7,10 +7,10 @@ local VideoEndReason = require(VideoUtils.Analytics.Enums).VideoEndReason
 local FFlagLuaAppOneByTwoHoverIdleAutoplay = require(Parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
 local LuaAppVideoAutoplayWinnerLineOffsetFromTopBarPx = game:DefineFastInt("LuaAppVideoAutoplayWinnerLineOffsetFromTopBarPx", 240)
 
-return function(p1) --[[ Line: 21 | Named "ViewportVideoAutoplaySync" ]]
+return function(p1)
 	-- upvalues: UseViewportBoundsFunction (copy), ReactModule (copy), LuaAppVideoAutoplayWinnerLineOffsetFromTopBarPx (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), VideoEndReason (copy)
 	local UseViewportBoundsResult = UseViewportBoundsFunction(p1.scrollingFrameRef)
-	ReactModule.useEffect(function() --[[ Line: 26 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), LuaAppVideoAutoplayWinnerLineOffsetFromTopBarPx (upval), UseViewportBoundsResult (copy)
 		local ViewportAutoplayController = p1.viewportAutoplayController
 		
@@ -26,12 +26,12 @@ return function(p1) --[[ Line: 21 | Named "ViewportVideoAutoplaySync" ]]
 		p1.scrollingFrameRef,
 		UseViewportBoundsResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 46 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (upval), VideoEndReason (upval)
 		local ViewportAutoplayController = p1.viewportAutoplayController
 		
 		if not ViewportAutoplayController then return end
-		return function() --[[ Line: 52 ]]
+		return function()
 			-- upvalues: ViewportAutoplayController (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (upval), VideoEndReason (upval)
 			ViewportAutoplayController:setFeedScopeRef({ current = nil })
 			

@@ -12,7 +12,7 @@ local TextElement = InlineLayoutModule.Components.InlineLayoutElements.TextEleme
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local config = { name = "u", attributes = {} }
 
-return ReactModule.memo(function(Frame) --[[ Line: 31 | Named "InlineAppealLink" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ConstantsModule (copy), TextElement (copy), LinkElement (copy), config (copy), ReactModule (copy), View (copy), InlineLayout (copy)
 	local UseTokensResult = UseTokensFunction()
 	local BodyMedium = UseTokensResult.Typography.BodyMedium

@@ -60,9 +60,9 @@ local GetTextAndTranslationModule = require(ExpChat.getTextAndTranslation)
 local ChannelTabsConfigurationEnabledModule = require(Actions.ChannelTabsConfigurationEnabled)
 local TextChatService = game:GetService("TextChatService")
 
-function getChatTranslationEnabled() --[[ Line: 70 ]]
+function getChatTranslationEnabled()
 	-- upvalues: TextChatService (copy)
-	local Success, Result = pcall(function() --[[ Line: 71 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: TextChatService (upval)
 		return TextChatService.ChatTranslationEnabled
 	end)
@@ -70,12 +70,12 @@ function getChatTranslationEnabled() --[[ Line: 70 ]]
 	return Success and Result
 end
 
-local function resolveChannelNameForMapOrder(p1, p2, p3) --[[ Line: 133 ]]
+local function resolveChannelNameForMapOrder(p1, p2, p3)
 	-- upvalues: GetFFlagTextChatEnableUniverseChatTabsFunction (copy), None (copy)
 	return if GetFFlagTextChatEnableUniverseChatTabsFunction() then if p3 then p3 elseif p2.textChannel then if p2.textChannel.Name == "RBXSystem" or not p1.channelTabsConfigurationEnabled then "RBXGeneral" else p2.textChannel.Name else None elseif p2.textChannel then if p2.textChannel.Name == "RBXSystem" then "RBXGeneral" else p2.textChannel.Name else None
 end
 
-local function mapByMessageIdInOrderHelper(p1, p2, ChannelNameOverride) --[[ Line: 159 ]]
+local function mapByMessageIdInOrderHelper(p1, p2, ChannelNameOverride)
 	-- upvalues: IsWhiteSpaceOnlyModule (copy), resolveChannelNameForMapOrder (copy), HttpService (copy), Dictionary (copy), FFlagEnableInExpChatRewriteModule (copy), FFlagExpChatDictation (copy), GetFFlagExpChatTelemetryEventTriggerModule (copy), FFlagEnableInExpChatSummaryOnLuaModule (copy), FFlagExpChatPresetChatEnabled (copy), List (copy), FFlagExpChatEnableFOMOUpsellModule (copy), GetFFlagExpChatExcludeFOMORendersModule (copy)
 	if IsWhiteSpaceOnlyModule(p2.text) and p2.status ~= Enum.TextChatMessageStatus.Floodchecked and p2.status ~= Enum.TextChatMessageStatus.MessageTooLong then
 		return p1
@@ -136,7 +136,7 @@ local function mapByMessageIdInOrderHelper(p1, p2, ChannelNameOverride) --[[ Lin
 		ByMessageId = Dictionary.join(ByMessageId, { [MessageId] = config })
 		
 		if UserId and MessagesBySenderId[UserId] then
-			local Where: number = List.findWhere(MessagesBySenderId[UserId], function(p3, _): boolean --[[ Line: 238 ]]
+			local Where: number = List.findWhere(MessagesBySenderId[UserId], function(p3, _): boolean
 				-- upvalues: MessageId (copy)
 				return p3.messageId == MessageId
 			end)
@@ -153,7 +153,7 @@ local function mapByMessageIdInOrderHelper(p1, p2, ChannelNameOverride) --[[ Lin
 			ByMessageId = Dictionary.removeKey(ByMessageId, p2.messageId)
 			
 			if UserId then
-				local Where: number = List.findWhere(MessagesBySenderId[UserId], function(p3, _): boolean --[[ Line: 258 ]]
+				local Where: number = List.findWhere(MessagesBySenderId[UserId], function(p3, _): boolean
 					-- upvalues: MessageId (copy)
 					return p3.messageId == MessageId
 				end)
@@ -200,7 +200,7 @@ local function mapByMessageIdInOrderHelper(p1, p2, ChannelNameOverride) --[[ Lin
 						end
 					end
 				else
-					local Where: number = List.findWhere(MessagesBySenderId[UserId1], function(p3, _): boolean --[[ Line: 286 ]]
+					local Where: number = List.findWhere(MessagesBySenderId[UserId1], function(p3, _): boolean
 						-- upvalues: WindowMessagesInOrderEntry (ref)
 						return p3.messageId == WindowMessagesInOrderEntry
 					end)
@@ -299,7 +299,7 @@ local function mapByMessageIdInOrderHelper(p1, p2, ChannelNameOverride) --[[ Lin
 	end
 end
 
-local function mapByMessageIdInOrder(p1, p2) --[[ Line: 521 ]]
+local function mapByMessageIdInOrder(p1, p2)
 	-- upvalues: FFlagEnableInExpChatRewriteModule (copy), GetTextAndTranslationModule (copy), GetFFlagExpChatProtectedChatInternalAPIsFunction (copy), FFlagExpChatFixLocalUserVerifiedBadgeModule (copy), OutgoingMessageSentModule (copy), Players (copy), FFlagExpChatPresetChatEnabled (copy), Set (copy), FFlagExpChatUseChatConfigStore (copy), GetChatConfigurationStoreModule (copy), FFlagEnableInExpChatSummaryOnLuaModule (copy), FFlagExpChatDisableUniverseBubbleChat (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), FFlagExpChatGlobalTabDefaultModule (copy), IsGlobalBubbleChatEnabledModule (copy), ShouldRenderTextChannelInDefaultWindowFunction (copy), GetTextChannelDisplayModeFunction (copy), ComputeNameColorFunction (copy), GetFFlagExpChatTelemetryEventTriggerModule (copy), mapByMessageIdInOrderHelper (copy)
 	local TextChatMessage = p2.textChatMessage
 	local TextAndTranslationModule = nil
@@ -368,12 +368,12 @@ return RoduxModule.createReducer({
 	partOrModelToMockUserId = {},
 	messagesBySenderId = {}
 }, {
-	[ChannelTabsConfigurationEnabledModule.name] = function(p1, p2) --[[ Line: 746 ]]
+	[ChannelTabsConfigurationEnabledModule.name] = function(p1, p2)
 		-- upvalues: GetFFlagTextChatEnableUniverseChatTabsFunction (copy), Dictionary (copy)
 		return if GetFFlagTextChatEnableUniverseChatTabsFunction() then Dictionary.join(p1, { channelTabsConfigurationEnabled = p2.enabled }) else p1
 	end,
 	[IncomingMessageReceivedModule.name] = mapByMessageIdInOrder,
-	[IncomingBubbleChatMessageReceivedModule.name] = function(p1, p2) --[[ Line: 498 ]]
+	[IncomingBubbleChatMessageReceivedModule.name] = function(p1, p2)
 		-- upvalues: mapByMessageIdInOrderHelper (copy)
 		local BubbleChatMessageTable = p2.bubbleChatMessageTable
 		
@@ -394,25 +394,25 @@ return RoduxModule.createReducer({
 		})
 	end,
 	[OutgoingMessageSentModule.name] = mapByMessageIdInOrder,
-	[UserMuted.name] = function(p1, p2) --[[ Line: 758 ]]
+	[UserMuted.name] = function(p1, p2)
 		-- upvalues: Dictionary (copy), Set (copy)
 		return Dictionary.join(p1, { _mutedUserIds = Set.add(p1._mutedUserIds, p2.userId) })
 	end,
-	[UserUnmuted.name] = function(p1, p2) --[[ Line: 763 ]]
+	[UserUnmuted.name] = function(p1, p2)
 		-- upvalues: Dictionary (copy), Set (copy)
 		return Dictionary.join(p1, {
 			_mutedUserIds = Set.subtract(p1._mutedUserIds, p2.userId)
 		})
 	end,
-	[PlayerRemoved.name] = function(p1, p2) --[[ Line: 768 ]]
+	[PlayerRemoved.name] = function(p1, p2)
 		-- upvalues: Dictionary (copy), Set (copy)
-		local FilterResult = Dictionary.filter(p1.messagesBySenderId, function(_, UserId): boolean --[[ Line: 775 ]]
+		local FilterResult = Dictionary.filter(p1.messagesBySenderId, function(_, UserId): boolean
 			-- upvalues: p2 (copy)
 			return UserId ~= p2.userId
 		end)
 		local Inverted = not Set.has(p1._mutedUserIds, p2.userId)
 		
-		return if #Dictionary.filter(p1.bubbleMessagesInOrderBySenderId, function(_, UserId): boolean --[[ Line: 771 ]]
+		return if #Dictionary.filter(p1.bubbleMessagesInOrderBySenderId, function(_, UserId): boolean
 			-- upvalues: p2 (copy)
 			return UserId ~= p2.userId
 		end) == 0 and #FilterResult == 0 and Inverted then p1 else Dictionary.join(p1, {
@@ -420,24 +420,24 @@ return RoduxModule.createReducer({
 			_mutedUserIds = Set.subtract(p1._mutedUserIds, p2.userId)
 		})
 	end,
-	[ChatPrivacySettingsReceivedModule.name] = function(p1, p2) --[[ Line: 788 ]]
+	[ChatPrivacySettingsReceivedModule.name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
 		return Dictionary.join(p1, { canLocalUserChat = p2.canUserChat })
 	end,
-	[ChatPrivacySettingsFetchFailedModule.name] = function(p1, _) --[[ Line: 791 ]]
+	[ChatPrivacySettingsFetchFailedModule.name] = function(p1, _)
 		-- upvalues: Dictionary (copy)
 		return Dictionary.join(p1, { canLocalUserChat = false })
 	end,
-	[ConfigurationObjectsLoadedModule.name] = function(p1, p2) --[[ Line: 794 ]]
+	[ConfigurationObjectsLoadedModule.name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
 		return Dictionary.join(p1, {
 			isBubbleChatEnabled = if p2.bubbleChatSettings.Enabled then p2.bubbleChatSettings.Enabled else false
 		})
 	end,
-	[BubbleChatSettingsChangedModule.name] = function(p1, p2) --[[ Line: 801 ]]
+	[BubbleChatSettingsChangedModule.name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
 		return if p2.property == "Enabled" then Dictionary.join(p1, {
-			byMessageId = Dictionary.map(p1.byMessageId, function(p3) --[[ Line: 806 ]]
+			byMessageId = Dictionary.map(p1.byMessageId, function(p3)
 				-- upvalues: Dictionary (upval), p2 (copy)
 				return if p3.shouldOverrideBubbleChatSettings then p3 else Dictionary.join(p3, {
 					isVisibleInBubbleChat = p2.value and p3.isVisibleInChatWindow
@@ -446,18 +446,18 @@ return RoduxModule.createReducer({
 			isBubbleChatEnabled = p2.value
 		}) else p1
 	end,
-	[ChatWindowMessagesCleared.name] = function(p1, _) --[[ Line: 821 ]]
+	[ChatWindowMessagesCleared.name] = function(p1, _)
 		-- upvalues: Dictionary (copy)
 		return Dictionary.join(p1, {
 			windowMessagesInOrder = {},
 			windowMessagesInOrderByTabId = {},
-			byMessageId = Dictionary.map(p1.byMessageId, function(p2) --[[ Line: 822 ]]
+			byMessageId = Dictionary.map(p1.byMessageId, function(p2)
 				-- upvalues: Dictionary (upval)
 				return Dictionary.join(p2, { isVisibleInChatWindow = false })
 			end)
 		})
 	end,
-	[ChatTranslationGlobalToggledModule.name] = function(p1, p2) --[[ Line: 412 ]]
+	[ChatTranslationGlobalToggledModule.name] = function(p1, p2)
 		-- upvalues: GetFFlagExpChatTelemetryEventTriggerModule (copy), FFlagEnableInExpChatRewriteModule (copy), FFlagEnableInExpChatSummaryOnLuaModule (copy), FFlagExpChatPresetChatEnabled (copy), Dictionary (copy)
 		local UseTranslation = p2.useTranslation
 		local ByMessageId = p1.byMessageId
@@ -494,7 +494,7 @@ return RoduxModule.createReducer({
 		end
 		return Dictionary.join(p1, { byMessageId = Dictionary.join(ByMessageId, t) })
 	end,
-	[ChatTranslationMessageToggledModule.name] = function(p3, p4) --[[ Line: 454 ]]
+	[ChatTranslationMessageToggledModule.name] = function(p3, p4)
 		-- upvalues: Dictionary (copy), GetFFlagExpChatTelemetryEventTriggerModule (copy), FFlagEnableInExpChatRewriteModule (copy), FFlagEnableInExpChatSummaryOnLuaModule (copy), FFlagExpChatPresetChatEnabled (copy)
 		local UseTranslation = p4.useTranslation
 		local MessageId = p4.messageId
@@ -529,7 +529,7 @@ return RoduxModule.createReducer({
 			})
 		})
 	end,
-	[LegacyBubbleCreatedModule.name] = function(p3, p4) --[[ Line: 651 ]]
+	[LegacyBubbleCreatedModule.name] = function(p3, p4)
 		-- upvalues: mapByMessageIdInOrderHelper (copy)
 		local MessageData = p4.messageData
 		
@@ -546,7 +546,7 @@ return RoduxModule.createReducer({
 			partOrModel = MessageData.adornee
 		})
 	end,
-	[LegacyBubbleTextUpdatedModule.name] = function(p3, p4) --[[ Line: 836 ]]
+	[LegacyBubbleTextUpdatedModule.name] = function(p3, p4)
 		-- upvalues: Dictionary (copy), List (copy)
 		local ByMessageId = p3.byMessageId
 		local MessagesBySenderId = p3.messagesBySenderId
@@ -560,7 +560,7 @@ return RoduxModule.createReducer({
 			local UserId = ByMessageIdEntry.userId
 			
 			if UserId and MessagesBySenderId[UserId] then
-				local Where: number = List.findWhere(MessagesBySenderId[UserId], function(p5, _): boolean --[[ Line: 850 ]]
+				local Where: number = List.findWhere(MessagesBySenderId[UserId], function(p5, _): boolean
 					-- upvalues: MessageId (copy)
 					return p5.messageId == MessageId
 				end)
@@ -577,7 +577,7 @@ return RoduxModule.createReducer({
 			messagesBySenderId = MessagesBySenderId
 		})
 	end,
-	[HiddenMessageReceivedModule.name] = function(p3, p4) --[[ Line: 675 ]]
+	[HiddenMessageReceivedModule.name] = function(p3, p4)
 		-- upvalues: GetFFlagExpChatProtectedChatInternalAPIsFunction (copy), FIntExpChatRandomCharChangeLowerBoundModule (copy), FIntExpChatRandomCharChangeUpperBoundModule (copy), ConfigModule (copy), GetFFlagExpChatTelemetryEventTriggerModule (copy), mapByMessageIdInOrderHelper (copy)
 		local UserMessageIntent = p4.userMessageIntent
 		local Length = string.len(if GetFFlagExpChatProtectedChatInternalAPIsFunction() then UserMessageIntent.TextInternal else UserMessageIntent.Text)
@@ -596,7 +596,7 @@ return RoduxModule.createReducer({
 			textChatMessageInstance = if GetFFlagExpChatTelemetryEventTriggerModule() then UserMessageIntent else nil
 		})
 	end,
-	[UniverseChatSystemMessageAddedModule.name] = function(p3, p4) --[[ Line: 709 ]]
+	[UniverseChatSystemMessageAddedModule.name] = function(p3, p4)
 		-- upvalues: HttpService (copy), SanitizeForRichTextModule (copy), GetFFlagExpChatSyntheticSystemMessageRichTextFunction (copy), GenerateRichSystemMessageTextFormatModule (copy), FFlagExpChatDictation (copy), mapByMessageIdInOrderHelper (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy)
 		local Guid = HttpService:GenerateGUID(false)
 		local SanitizeForRichTextModuleResult = SanitizeForRichTextModule(p4.text)
@@ -620,24 +620,24 @@ return RoduxModule.createReducer({
 			metadata = p4.metadata
 		}, if GetFFlagTextChatEnableUniverseChatTabsFunction() then p4.channelNameOverride else nil)
 	end,
-	[HiddenMessagesClearedModule.name] = function(p3, _) --[[ Line: 868 ]]
+	[HiddenMessagesClearedModule.name] = function(p3, _)
 		-- upvalues: FFlagExpChatClearHiddenMessagesPostAgeCheckModule (copy), Dictionary (copy), List (copy)
 		if FFlagExpChatClearHiddenMessagesPostAgeCheckModule then
-			local MapResult = Dictionary.map(p3.byMessageId, function(p4) --[[ Line: 873 ]]
+			local MapResult = Dictionary.map(p3.byMessageId, function(p4)
 				-- upvalues: Dictionary (upval)
 				return if p4.isHiddenMessage then Dictionary.join(p4, { isVisibleInChatWindow = false }) else p4
 			end)
 			
 			return Dictionary.join(p3, {
-				windowMessagesInOrder = List.filter(p3.windowMessagesInOrder, function(p4): boolean --[[ Line: 883 ]]
+				windowMessagesInOrder = List.filter(p3.windowMessagesInOrder, function(p4): boolean
 					-- upvalues: MapResult (copy)
 					local MapResultEntry = MapResult[p4]
 					
 					return MapResultEntry and not MapResultEntry.isHiddenMessage
 				end),
-				windowMessagesInOrderByTabId = Dictionary.map(p3.windowMessagesInOrderByTabId, function(p4) --[[ Line: 890 ]]
+				windowMessagesInOrderByTabId = Dictionary.map(p3.windowMessagesInOrderByTabId, function(p4)
 					-- upvalues: List (upval), MapResult (copy)
-					return List.filter(p4, function(p5): boolean --[[ Line: 891 ]]
+					return List.filter(p4, function(p5): boolean
 						-- upvalues: MapResult (upval)
 						local MapResultEntry = MapResult[p5]
 						

@@ -7,7 +7,7 @@ local UseContainerFocusBehaviorFunction = ReactFocusNavigationModule.useContaine
 local FFlagFriendsChatConversationListFocusNav = require(Parent.SharedFlags).FFlagFriendsChatConversationListFocusNav
 local UseConsumeFocusConversationListRequestModule = require(script.Parent.useConsumeFocusConversationListRequest)
 
-return function(Callback) --[[ Line: 23 | Named "useFocusConversationList" ]]
+return function(Callback)
 	-- upvalues: FFlagFriendsChatConversationListFocusNav (copy), UseFocusGuiObjectFunction (copy), UseStableSignalFunction (copy), ReactModule (copy), UseConsumeFocusConversationListRequestModule (copy), UseContainerFocusBehaviorFunction (copy)
 	local v1 = nil
 	local v2 = nil
@@ -16,15 +16,15 @@ return function(Callback) --[[ Line: 23 | Named "useFocusConversationList" ]]
 		local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
 		local UseStableSignalResult, UseStableSignalResult2 = UseStableSignalFunction(nil)
 		v2 = UseStableSignalResult2
-		UseConsumeFocusConversationListRequestModule(UseStableSignalResult, (ReactModule.useCallback(function(p1) --[[ Line: 37 ]]
+		UseConsumeFocusConversationListRequestModule(UseStableSignalResult, (ReactModule.useCallback(function(p1)
 			-- upvalues: Callback (copy), UseFocusGuiObjectResult (copy)
 			Callback(false).resetAllTransparency()
 			UseFocusGuiObjectResult(p1)
 		end, { Callback, UseFocusGuiObjectResult })))
-		v1 = UseContainerFocusBehaviorFunction(ReactModule.useMemo(function() --[[ Line: 48 ]]
+		v1 = UseContainerFocusBehaviorFunction(ReactModule.useMemo(function()
 			-- upvalues: UseStableSignalResult (copy)
 			return {
-				getTargets = function() --[[ Line: 50 ]]
+				getTargets = function()
 					-- upvalues: UseStableSignalResult (upval)
 					local UseStableSignalResultResult = UseStableSignalResult(false)
 					

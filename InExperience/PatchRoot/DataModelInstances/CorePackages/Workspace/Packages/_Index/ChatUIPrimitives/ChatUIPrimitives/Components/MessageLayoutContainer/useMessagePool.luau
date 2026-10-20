@@ -5,7 +5,7 @@ local SignalsModule = require(Parent.Signals)
 local SignalsExperimentalModule = require(Parent.SignalsExperimental)
 local UseStableSignalModule = require(ChatUIPrimitives.Hooks.useStableSignal)
 
-return function(p1) --[[ Line: 66 | Named "useMessagePool" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseStableSignalModule (copy), SignalsExperimentalModule (copy), SignalsModule (copy)
 	local UseRefResult = ReactModule.useRef({})
 	local UseRefResult1 = ReactModule.useRef({})
@@ -15,7 +15,7 @@ return function(p1) --[[ Line: 66 | Named "useMessagePool" ]]
 	UseRefResult3.current = p1.createSlotElement
 	local UseStableSignalModuleResult, UseStableSignalModuleResult2 = UseStableSignalModule({})
 	
-	local function publishChildrenFromCache() --[[ Line: 86 ]]
+	local function publishChildrenFromCache()
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseStableSignalModuleResult2 (copy)
 		local Elements = {}
 		
@@ -28,7 +28,7 @@ return function(p1) --[[ Line: 66 | Named "useMessagePool" ]]
 		UseStableSignalModuleResult2(Elements)
 	end
 	
-	local function rebuildElementsFromFactory() --[[ Line: 103 ]]
+	local function rebuildElementsFromFactory()
 		-- upvalues: UseRefResult3 (copy), UseRefResult (copy), UseRefResult1 (copy), publishChildrenFromCache (copy)
 		local CurrentFunction = UseRefResult3.current
 		
@@ -47,9 +47,9 @@ return function(p1) --[[ Line: 66 | Named "useMessagePool" ]]
 		publishChildrenFromCache()
 	end
 	
-	local function _(p2) --[[ Line: 137 | Named "reconcile" ]]
+	local function _(p2)
 		-- upvalues: SignalsExperimentalModule (upval), UseRefResult (copy), UseRefResult1 (copy), MaxSlots (copy), UseRefResult2 (copy), SignalsModule (upval), UseRefResult3 (copy), publishChildrenFromCache (copy)
-		SignalsExperimentalModule.batch(function() --[[ Line: 138 ]]
+		SignalsExperimentalModule.batch(function()
 			-- upvalues: UseRefResult (upval), UseRefResult1 (upval), p2 (copy), MaxSlots (upval), UseRefResult2 (upval), SignalsModule (upval), UseRefResult3 (upval), publishChildrenFromCache (upval)
 			local Current = UseRefResult.current
 			local Current1 = UseRefResult1.current
@@ -121,7 +121,7 @@ return function(p1) --[[ Line: 66 | Named "useMessagePool" ]]
 	if not UseRefResult4.current then
 		UseRefResult4.current = true
 		local MessageIdsSignalResult = p1.messageIdsSignal()
-		SignalsExperimentalModule.batch(function() --[[ Line: 138 ]]
+		SignalsExperimentalModule.batch(function()
 			-- upvalues: UseRefResult (copy), UseRefResult1 (copy), MessageIdsSignalResult (copy), MaxSlots (copy), UseRefResult2 (copy), SignalsModule (upval), UseRefResult3 (copy), publishChildrenFromCache (copy)
 			local Current = UseRefResult.current
 			local Current1 = UseRefResult1.current
@@ -187,12 +187,12 @@ return function(p1) --[[ Line: 66 | Named "useMessagePool" ]]
 			end
 		end)
 	end
-	ReactModule.useEffect(function() --[[ Line: 234 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SignalsModule (upval), p1 (copy), SignalsExperimentalModule (upval), UseRefResult (copy), UseRefResult1 (copy), MaxSlots (copy), UseRefResult2 (copy), UseRefResult3 (copy), publishChildrenFromCache (copy)
-		return (SignalsModule.createEffect(function(p3) --[[ Line: 235 ]]
+		return (SignalsModule.createEffect(function(p3)
 			-- upvalues: p1 (upval), SignalsExperimentalModule (upval), UseRefResult (upval), UseRefResult1 (upval), MaxSlots (upval), UseRefResult2 (upval), SignalsModule (upval), UseRefResult3 (upval), publishChildrenFromCache (upval)
 			local MessageIdsSignalResult = p1.messageIdsSignal(p3)
-			SignalsExperimentalModule.batch(function() --[[ Line: 138 ]]
+			SignalsExperimentalModule.batch(function()
 				-- upvalues: UseRefResult (upval), UseRefResult1 (upval), MessageIdsSignalResult (copy), MaxSlots (upval), UseRefResult2 (upval), SignalsModule (upval), UseRefResult3 (upval), publishChildrenFromCache (upval)
 				local Current = UseRefResult.current
 				local Current1 = UseRefResult1.current
@@ -264,7 +264,7 @@ return function(p1) --[[ Line: 66 | Named "useMessagePool" ]]
 		MaxSlots
 	})
 	local UseRefResult5 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 248 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult5 (copy), rebuildElementsFromFactory (copy)
 		if UseRefResult5.current then
 			rebuildElementsFromFactory()

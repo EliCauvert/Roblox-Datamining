@@ -9,7 +9,7 @@ local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local Images = UIBloxModule.App.ImageSet.Images
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 
-return function(p1) --[[ Line: 24 | Named "ProgressTile" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), ImageSetLabel (copy), Images (copy), Loading (copy), IconSize (copy), StyledTextLabel (copy)
 	local FrameHeight = p1.frameHeight
 	local LayoutOrder = p1.layoutOrder

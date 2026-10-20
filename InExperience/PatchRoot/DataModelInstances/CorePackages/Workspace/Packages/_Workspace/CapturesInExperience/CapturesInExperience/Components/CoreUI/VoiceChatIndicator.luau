@@ -16,7 +16,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local CaptureTriggerTypeModule = require(Parent.Enums.CaptureTriggerType)
 local ConstantsModule = require(Parent.Constants)
 
-return function(p1) --[[ Line: 33 ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), UseScaledValueFunction (copy), UseTokensFunction (copy), ReactModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), ControlState (copy), Default (copy), CaptureTriggerTypeModule (copy), View (copy), Popover (copy), Icon (copy), FoundationModule (copy), PopoverAlign (copy), Text (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		voiceChatMutedLabel = "Feature.Captures.Label.VideoCaptureVoiceChatMutedTooltip",
@@ -25,17 +25,17 @@ return function(p1) --[[ Line: 33 ]]
 	local UseScaledValueResult = UseScaledValueFunction(320)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 43 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
 		return p2[ConstantsModule.RoduxKey].IsVideoCaptureActive.triggerType
 	end)
-	local UseResult = ReactModule.useCallback(function(Pressed) --[[ Line: 47 ]]
+	local UseResult = ReactModule.useCallback(function(Pressed)
 		-- upvalues: ControlState (upval), UseStateResult2 (copy), UseStateResult (copy)
 		if Pressed == ControlState.Pressed then
 			UseStateResult2(not UseStateResult)
 		end
 	end, { UseStateResult })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 53 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {})

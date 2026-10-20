@@ -6,18 +6,18 @@ local _ = require(script.Parent.Parent.Parent.Types)
 local _ = require(script.Parent.Parent.groupMessages)
 local UseMessageRowContentsModule = require(script.Parent.Parent.useMessageRowContents)
 
-local function _(p1) --[[ Line: 22 | Named "hasIdentity" ]]
+local function _(p1)
 	return p1.message.author ~= nil and p1.groupPosition.isFirst
 end
 
-local _ = function(p1): string --[[ Line: 29 | Named "renderKeyOf" ]]
+local _ = function(p1): string
 	return `{p1.message.author ~= nil and p1.groupPosition.isFirst}|{if p1.message.deliveryState == nil then "" else p1.message.deliveryState}`
 end
 
-return function(Callback) --[[ Line: 34 | Named "useMessageInlineViewModel" ]]
+return function(Callback)
 	-- upvalues: UseMessageRowContentsModule (copy), ReactModule (copy), SignalsModule (copy), SignalsReactModule (copy)
 	local UseMessageRowContentsModuleResult = UseMessageRowContentsModule(Callback)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 43 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Callback (copy)
 		local CallbackResult = Callback(false)
 		
@@ -27,9 +27,9 @@ return function(Callback) --[[ Line: 34 | Named "useMessageInlineViewModel" ]]
 		}
 	end, {
 		Callback,
-		(SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 36 ]]
+		(SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 			-- upvalues: SignalsModule (upval), Callback (copy)
-			return SignalsModule.createComputed(function(p2): string --[[ Line: 37 ]]
+			return SignalsModule.createComputed(function(p2): string
 				-- upvalues: Callback (upval)
 				local CallbackResult = Callback(p2)
 				

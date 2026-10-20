@@ -5,7 +5,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
 local FFlagAXMISWithBlackbird = require(Parent.SharedFlags).FFlagAXMISWithBlackbird
 
-return function(Frame) --[[ Line: 21 | Named "CheckoutTotalLines" ]]
+return function(Frame)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FoundationModule (copy), FFlagAXMISWithBlackbird (copy), GetIconRichTextFunction (copy)
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "size-full-0 auto-y col gap-small",

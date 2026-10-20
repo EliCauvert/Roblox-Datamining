@@ -8,7 +8,7 @@ local _ = require(Parent.VideoUtils)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagLuaAppEnableReportExperience = SharedFlagsModule.FFlagLuaAppEnableReportExperience
 local FFlagLuaAppEnableOneByTwoTileFunnelTelemetry = SharedFlagsModule.FFlagLuaAppEnableOneByTwoTileFunnelTelemetry
-local MemoResult = ReactModule.memo(function(p1) --[[ Line: 51 ]]
+local MemoResult = ReactModule.memo(function(p1)
 	-- upvalues: GetTileBadgeByPositionConfigFromEntryFunction (copy), ReactModule (copy), OneByTwoTileModule (copy), FFlagLuaAppEnableReportExperience (copy), FFlagLuaAppEnableOneByTwoTileFunnelTelemetry (copy)
 	local Negated = -((p1.maxItemIndex or 0) + 1)
 	
@@ -51,7 +51,7 @@ local MemoResult = ReactModule.memo(function(p1) --[[ Line: 51 ]]
 		enableReportAd = p1.enableReportAd,
 		enableReportExperience = if FFlagLuaAppEnableReportExperience then p1.enableReportExperience else nil,
 		enableExplicitFeedback = p1.enableExplicitFeedback,
-		onSelectionGained = ReactModule.useCallback(function() --[[ Line: 59 ]]
+		onSelectionGained = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy)
 			if p1.onSelectionGained then
 				p1.onSelectionGained(p1.item, p1.index, p1.item.universeId)
@@ -65,7 +65,7 @@ local MemoResult = ReactModule.memo(function(p1) --[[ Line: 51 ]]
 	})
 end)
 
-return function(p1) --[[ Line: 119 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), MemoResult (copy), GameCollectionItemTypes (copy)
 	return ReactModule.createElement(MemoResult, p1), GameCollectionItemTypes.GameCollectionItemType.OneByTwoTile
 end

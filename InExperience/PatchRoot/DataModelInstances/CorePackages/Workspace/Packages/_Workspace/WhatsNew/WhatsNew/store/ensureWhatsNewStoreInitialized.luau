@@ -7,7 +7,7 @@ local CreateResolveDepsModule = require(WhatsNew.storage.createResolveDeps)
 local Flag = false
 
 return {
-	ensureWhatsNewStoreInitialized = function(p1) --[[ Line: 23 ]]
+	ensureWhatsNewStoreInitialized = function(p1)
 		-- upvalues: Flag (ref), CreateResolveDepsModule (copy), LoadWhatsNewRegistryModule (copy), GetWhatsNewStoreModule (copy)
 		if not Flag then
 			GetWhatsNewStoreModule().initialize({
@@ -19,7 +19,7 @@ return {
 			return
 		end
 	end,
-	resetForTests = function() --[[ Line: 42 ]]
+	resetForTests = function()
 		-- upvalues: Flag (ref), GetWhatsNewStoreModule (copy)
 		Flag = false
 		GetWhatsNewStoreModule().resetForTests()

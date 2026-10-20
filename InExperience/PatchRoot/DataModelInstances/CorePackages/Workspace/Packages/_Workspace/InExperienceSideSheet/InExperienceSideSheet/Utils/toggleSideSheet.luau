@@ -5,7 +5,7 @@ local GetHasRoomForPeoplePageModule = require(InExperienceSideSheet.Utils.getHas
 local RegisterInGameMenuPeoplePageActionsModule = require(InExperienceSideSheet.Utils.registerInGameMenuPeoplePageActions)
 local FFlagSideSheetOpenPeoplePage = require(InExperienceSideSheet.Flags).FFlagSideSheetOpenPeoplePage
 
-return function(p1) --[[ Line: 13 ]]
+return function(p1)
 	-- upvalues: GetDrawerVisibleStoreFunction (copy), FFlagSideSheetOpenPeoplePage (copy), GetHasRoomForPeoplePageModule (copy), GetSideSheetConfigStoreModule (copy), RegisterInGameMenuPeoplePageActionsModule (copy)
 	local DrawerVisibleStore = GetDrawerVisibleStoreFunction(false)
 	local HasRoomForPeoplePageModule = FFlagSideSheetOpenPeoplePage and (p1 and GetHasRoomForPeoplePageModule())
@@ -16,7 +16,7 @@ return function(p1) --[[ Line: 13 ]]
 	DrawerVisibleStore.setDrawerVisible(p1)
 	
 	if HasRoomForPeoplePageModule then
-		task.delay(0, function() --[[ Line: 30 ]]
+		task.delay(0, function()
 			-- upvalues: DrawerVisibleStore (copy), RegisterInGameMenuPeoplePageActionsModule (upval)
 			if DrawerVisibleStore.getDrawerVisible(false) then
 				RegisterInGameMenuPeoplePageActionsModule.openPeoplePage()

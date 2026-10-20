@@ -12,16 +12,16 @@ local Offset = ConstantsModule.Tooltip.Offset
 local MaxWidth = ConstantsModule.Tooltip.MaxWidth
 local Delay = ConstantsModule.Tooltip.Delay
 
-return function(p1) --[[ Line: 21 | Named "Tooltip" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), Delay (copy), RoactModule (copy), CoreGui (copy), MainWindowHeader1 (copy), Text (copy), MainWindowHeader (copy), Offset (copy), UnselectedGray (copy), Padding (copy), MaxWidth (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local Text1 = p1.text
 	local Pos = p1.pos
-	ReactModule.useEffect(function() --[[ Line: 26 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), Delay (upval)
 		UseStateResult2(false)
 		local Flag = false
-		task.delay(Delay, function() --[[ Line: 29 ]]
+		task.delay(Delay, function()
 			-- upvalues: Flag (ref), UseStateResult2 (upval)
 			if not Flag then
 				UseStateResult2(true)
@@ -30,7 +30,7 @@ return function(p1) --[[ Line: 21 | Named "Tooltip" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 35 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end

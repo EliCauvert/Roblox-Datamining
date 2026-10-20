@@ -68,22 +68,22 @@ local config3 = {
 	lastUpdated = { 26, 11, 3 }
 }
 
-local function _() --[[ Line: 93 | Named "logReportImmersiveBrandedAdTotalCounter" ]]
+local function _()
 	-- upvalues: Default1 (copy), config (copy)
 	Default1:logRobloxTelemetryCounter(config)
 end
 
-local _ = function() --[[ Line: 97 | Named "logReportImmersiveBrandedAdSuccessCounter" ]]
+local _ = function()
 	-- upvalues: Default1 (copy), config1 (copy)
 	Default1:logRobloxTelemetryCounter(config1)
 end
 
-local _ = function(Reason) --[[ Line: 101 | Named "logReportImmersiveBrandedAdFailureCounter" ]]
+local _ = function(Reason)
 	-- upvalues: Default1 (copy), config2 (copy)
 	Default1:logRobloxTelemetryCounter(config2, 1, { reason = Reason })
 end
 
-local function logReportImmersiveBrandedAdHttpFailureEvent(Text: string) --[[ Line: 107 ]]
+local function logReportImmersiveBrandedAdHttpFailureEvent(Text: string)
 	-- upvalues: Default1 (copy), config3 (copy)
 	local t = {}
 	
@@ -100,7 +100,7 @@ local function logReportImmersiveBrandedAdHttpFailureEvent(Text: string) --[[ Li
 	Default1:logRobloxTelemetryEvent(config3, nil, t)
 end
 
-local function sendImmersiveBrandedAdAbuseReport(Callback, p1): boolean --[[ Line: 132 ]]
+local function sendImmersiveBrandedAdAbuseReport(Callback, p1): boolean
 	-- upvalues: HttpService (copy), Default1 (copy), config2 (copy), NewUrlBuilder2 (copy), config1 (copy), logReportImmersiveBrandedAdHttpFailureEvent (copy)
 	local config = {
 		abuseVector = "ad_v2",
@@ -111,18 +111,18 @@ local function sendImmersiveBrandedAdAbuseReport(Callback, p1): boolean --[[ Lin
 		submitterId = p1.userId,
 		targetIdStr = `immersiveBrandedAd/{p1.immersiveBrandedAdId}`
 	}
-	local Success, Result = pcall(function() --[[ Line: 146 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: HttpService (upval), config (copy)
 		return HttpService:JSONEncode(config)
 	end)
 	
 	if Success then
-		task.spawn(function() --[[ Line: 154 ]]
+		task.spawn(function()
 			-- upvalues: NewUrlBuilder2 (upval), Callback (copy), Result (copy), Default1 (upval), config1 (upval), config2 (upval), logReportImmersiveBrandedAdHttpFailureEvent (upval)
-			Callback(NewUrlBuilder2(), "POST", { postBody = Result }):andThen(function(_) --[[ Line: 156 ]]
+			Callback(NewUrlBuilder2(), "POST", { postBody = Result }):andThen(function(_)
 				-- upvalues: Default1 (upval), config1 (upval)
 				Default1:logRobloxTelemetryCounter(config1)
-			end, function(p2) --[[ Line: 158 ]]
+			end, function(p2)
 				-- upvalues: Default1 (upval), config2 (upval), logReportImmersiveBrandedAdHttpFailureEvent (upval)
 				Default1:logRobloxTelemetryCounter(config2, 1, { reason = "http" })
 				logReportImmersiveBrandedAdHttpFailureEvent(p2)
@@ -137,7 +137,7 @@ local function sendImmersiveBrandedAdAbuseReport(Callback, p1): boolean --[[ Lin
 	end
 end
 
-local function ImmersiveBrandedAdReportAdDialog(p1) --[[ Line: 172 ]]
+local function ImmersiveBrandedAdReportAdDialog(p1)
 	-- upvalues: UseRoactServiceFunction (copy), RoactServiceTagsModule (copy), ReactModule (copy), UseLocalizationFunction (copy), UseAppPolicyFunction (copy), NewUrlBuilder1 (copy), UrlBuilder (copy), NewUrlBuilder (copy), Default (copy), AdsInteractivityTelemetryModule (copy), View (copy), Button (copy), ButtonVariant (copy), InputSize (copy), RunService (copy), Default1 (copy), config (copy), config2 (copy), sendImmersiveBrandedAdAbuseReport (copy), ScreenshotModule (copy), DefaultTwoStepReportFlowModule (copy), ReportCategories (copy)
 	local ImmersiveBrandedAdId = p1.immersiveBrandedAdId
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactServiceTagsModule.RoactNetworking)
@@ -146,20 +146,20 @@ local function ImmersiveBrandedAdReportAdDialog(p1) --[[ Line: 172 ]]
 	local UseLocalizationResult = UseLocalizationFunction({
 		LinkText = "CoreScripts.Ads.Label.IllegalContentReportingLink"
 	})
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 182 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2)
 		return p2.getShowIllegalContentReportingUI()
 	end)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 186 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: NewUrlBuilder1 (upval), ImmersiveBrandedAdId (copy), UrlBuilder (upval), NewUrlBuilder (upval), Default (upval), AdsInteractivityTelemetryModule (upval), p1 (copy)
 		Default:openURL((UrlBuilder.addQueryString(NewUrlBuilder(), {
 			contentURL = NewUrlBuilder1({ assetId = ImmersiveBrandedAdId })
-		}))):catch(function(_) --[[ Line: 192 ]]
+		}))):catch(function(_)
 			-- upvalues: AdsInteractivityTelemetryModule (upval), p1 (upval)
 			AdsInteractivityTelemetryModule.logImmersiveBrandedAdLinkingFailedCounter("reportAd.eudsaIllegalContent")
 			p1.onDismiss()
 		end)
 	end, { ImmersiveBrandedAdId, p1.onDismiss })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 198 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: ReactModule (upval), View (upval), Button (upval), UseLocalizationResult (copy), ButtonVariant (upval), UseResult (copy), InputSize (upval)
 		return ReactModule.createElement(View, {
 			tag = "col margin-x-medium padding-top-medium size-full-0 auto-y"
@@ -173,7 +173,7 @@ local function ImmersiveBrandedAdReportAdDialog(p1) --[[ Line: 172 ]]
 			})
 		})
 	end, { UseResult, UseLocalizationResult.LinkText })
-	local UseResult2 = ReactModule.useCallback(function(Reason, Comment) --[[ Line: 212 ]]
+	local UseResult2 = ReactModule.useCallback(function(Reason, Comment)
 		-- upvalues: RunService (upval), Default1 (upval), config (upval), config2 (upval), UseRefResult (copy), sendImmersiveBrandedAdAbuseReport (upval), UseRoactServiceResult (copy), ImmersiveBrandedAdId (copy)
 		if RunService:IsStudio() or _G.__TESTEZ_RUNNING_TEST__ or _G.__TEST_SUITE_PACKAGE__ then
 			return true
@@ -200,15 +200,15 @@ local function ImmersiveBrandedAdReportAdDialog(p1) --[[ Line: 172 ]]
 			return false
 		end
 	end, { ImmersiveBrandedAdId, UseRoactServiceResult })
-	ReactModule.useEffect(function() --[[ Line: 241 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: RunService (upval), ScreenshotModule (upval), UseRefResult (copy), UseStateResult2 (copy)
 		if not RunService:IsStudio() and not _G.__TESTEZ_RUNNING_TEST__ and not _G.__TEST_SUITE_PACKAGE__ then
-			ScreenshotModule.ScreenshotManager:TakeScreenshotWithCallback(function(Current) --[[ Line: 244 ]]
+			ScreenshotModule.ScreenshotManager:TakeScreenshotWithCallback(function(Current)
 				-- upvalues: UseRefResult (upval)
 				UseRefResult.current = Current
 			end, nil)
 		end
-		task.defer(function() --[[ Line: 250 ]]
+		task.defer(function()
 			-- upvalues: UseStateResult2 (upval)
 			UseStateResult2(true)
 		end)
@@ -239,7 +239,7 @@ local function ImmersiveBrandedAdReportAdDialog(p1) --[[ Line: 172 ]]
 	}) else nil
 end
 
-return function(p1) --[[ Line: 291 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), RoactServicesModule (copy), RoactServiceTagsModule (copy), HttpModule (copy), HttpService (copy), UniversalAppPolicyModule (copy), AppStyleProvider (copy), ColorMode (copy), Constants (copy), ImmersiveBrandedAdReportAdDialog (copy)
 	return ReactModule.createElement(RoactServicesModule.RoactServices.ServiceProvider, {
 		services = {

@@ -6,7 +6,7 @@ local ReactRobloxModule = require(Parent.ReactRoblox)
 local SystemScrimModule = require(SystemScrim.SystemScrim)
 local SystemScrimSignalStoreModule = require(SystemScrim["data-model"].SystemScrimSignalStore)
 
-return function() --[[ Line: 13 | Named "renderSystemScrim" ]]
+return function()
 	-- upvalues: SystemScrimSignalStoreModule (copy), CoreGui (copy), ReactModule (copy), SystemScrimModule (copy), ReactRobloxModule (copy)
 	local SystemScrimSignalStoreModuleResult = SystemScrimSignalStoreModule(false)
 	local SystemScrim = Instance.new("ScreenGui")

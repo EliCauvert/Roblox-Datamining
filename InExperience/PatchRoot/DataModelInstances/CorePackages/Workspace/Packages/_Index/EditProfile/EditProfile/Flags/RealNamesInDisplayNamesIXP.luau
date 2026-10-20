@@ -3,14 +3,14 @@ local RealNamesInDisplayNamesExperimentDefinition = game:DefineFastString("RealN
 local RealNamesInDisplayNamesEnabledForAll = game:DefineFastFlag("RealNamesInDisplayNamesEnabledForAll", false)
 local UseUserExperimentFunction = require(script:FindFirstAncestor("EditProfile").Parent.RoactAppExperiment).useUserExperiment
 
-local function IsExperimentEnabled(p1): boolean --[[ Line: 12 ]]
+local function IsExperimentEnabled(p1): boolean
 	-- upvalues: RealNamesInDisplayNamesEnabledForAll (copy), RealNamesInDisplayNamesIXPV1 (copy), RealNamesInDisplayNamesExperimentDefinition (copy)
 	return if RealNamesInDisplayNamesEnabledForAll then true else ((p1 or {})[RealNamesInDisplayNamesIXPV1] or {})[RealNamesInDisplayNamesExperimentDefinition] == true
 end
 
 return {
 	isExperimentEnabled = IsExperimentEnabled,
-	useIsExperimentEnabled = function(p1) --[[ Line: 25 ]]
+	useIsExperimentEnabled = function(p1)
 		-- upvalues: UseUserExperimentFunction (copy), RealNamesInDisplayNamesIXPV1 (copy), IsExperimentEnabled (copy)
 		return UseUserExperimentFunction({ RealNamesInDisplayNamesIXPV1 }, IsExperimentEnabled, p1.isExposureEnabled)
 	end

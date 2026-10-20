@@ -26,7 +26,7 @@ local RoactNavigationModule = require(Parent.RoactNavigation)
 local EventsSkeletonModule = require(ProfilePlatform.Components.Events.EventsSkeleton)
 local FFlagEnableCommunityProfileLoadingSkeletonsModule = require(ProfilePlatform.Flags.FFlagEnableCommunityProfileLoadingSkeletons)
 
-return function(p1) --[[ Line: 63 | Named "EventsContainer" ]]
+return function(p1)
 	-- upvalues: UseProfileJsonComponentModule (copy), EnumsModule (copy), UseProfileWrapperContextModule (copy), UseRoactServiceFunction (copy), AppGame (copy), UseNavigationFunction (copy), UseApolloClientFunction (copy), UseProfileAnalyticsContextModule (copy), ReactModule (copy), CreateGroupEventsStoreModule (copy), UseSignalStateFunction (copy), EventNamesModule (copy), VirtualEventsModule (copy), CryoModule (copy), FFlagLuaAppSduiEventDetailsEnabled (copy), NavigateToEventDetailsFunction (copy), AppPage (copy), LaunchGameFunction (copy), FFlagEnableCommunityProfileLoadingSkeletonsModule (copy), HorizontalPageMargin (copy), RoactNavigationModule (copy), EventsSkeletonModule (copy), EventsListCarousel (copy)
 	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.Events)
 	local Number: number? = tonumber(UseProfileWrapperContextModule().profileId)
@@ -34,12 +34,12 @@ return function(p1) --[[ Line: 63 | Named "EventsContainer" ]]
 	local UseNavigationResult = UseNavigationFunction()
 	local UseApolloClientResult = UseApolloClientFunction()
 	local UseProfileAnalyticsContextModuleResult = UseProfileAnalyticsContextModule()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 73 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CreateGroupEventsStoreModule (upval), Number (copy)
 		return CreateGroupEventsStoreModule(Number)
 	end, { Number })
 	local UseSignalStateResult = UseSignalStateFunction(UseMemoResult.getEvents)
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 80 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult (copy), UseProfileJsonComponentModuleResult (copy)
 		local List = {}
 		
@@ -66,7 +66,7 @@ return function(p1) --[[ Line: 63 | Named "EventsContainer" ]]
 		UseProfileJsonComponentModuleResult
 	})
 	local Number1: number = #UseMemoResult1 > 0 and tonumber(UseMemoResult1[1].universeId) or 0
-	local UseResult = ReactModule.useCallback(function(p2, Status) --[[ Line: 110 ]]
+	local UseResult = ReactModule.useCallback(function(p2, Status)
 		-- upvalues: UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), VirtualEventsModule (upval), UseMemoResult (copy), UseApolloClientResult (copy), CryoModule (upval)
 		UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.EventRSVP, { virtualEventId = p2.id, status = Status })
 		VirtualEventsModule.fireVirtualEventRSVP({
@@ -79,18 +79,18 @@ return function(p1) --[[ Line: 63 | Named "EventsContainer" ]]
 		UseApolloClientResult.cache:modify({
 			id = "VirtualEvent:" .. p2.id,
 			fields = {
-				userRsvpStatus = function(_, _, _) --[[ Line: 126 ]]
+				userRsvpStatus = function(_, _, _)
 					-- upvalues: Status (copy)
 					return Status
 				end,
-				rsvpCounters = function(_, p3, _) --[[ Line: 129 ]]
+				rsvpCounters = function(_, p3, _)
 					-- upvalues: Status (copy), CryoModule (upval)
 					return CryoModule.Dictionary.join(p3, { going = p3.going + (if Status == "going" then 1 else -1) })
 				end
 			}
 		})
 	end, { UseMemoResult })
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 141 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), FFlagLuaAppSduiEventDetailsEnabled (upval), NavigateToEventDetailsFunction (upval), UseNavigationResult (copy), AppPage (upval)
 		UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.EventOpened, { virtualEventId = p2.id })
 		
@@ -104,7 +104,7 @@ return function(p1) --[[ Line: 63 | Named "EventsContainer" ]]
 			})
 		end
 	end, { UseNavigationResult })
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 157 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), VirtualEventsModule (upval), LaunchGameFunction (upval), UseRoactServiceResult (copy)
 		UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.EventJoined, { virtualEventId = p2.id })
 		VirtualEventsModule.fireVirtualEventJoined({
@@ -114,7 +114,7 @@ return function(p1) --[[ Line: 63 | Named "EventsContainer" ]]
 		})
 		LaunchGameFunction(p2.placeId, nil, { eventId = p2.id }, UseRoactServiceResult)
 	end, {})
-	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 169 ]]
+	local UseResult3 = ReactModule.useCallback(function(p2)
 		-- upvalues: VirtualEventsModule (upval)
 		VirtualEventsModule.fireVirtualEventImpression({
 			channel = "communityPeekView",
@@ -131,7 +131,7 @@ return function(p1) --[[ Line: 63 | Named "EventsContainer" ]]
 		layoutOrder = p1.layoutOrder
 	}, {
 		NavEvents = ReactModule.createElement(RoactNavigationModule.NavigationEvents, {
-			onDidFocus = function() --[[ Line: 188 ]]
+			onDidFocus = function()
 				-- upvalues: UseMemoResult (copy)
 				UseMemoResult.refetch()
 			end

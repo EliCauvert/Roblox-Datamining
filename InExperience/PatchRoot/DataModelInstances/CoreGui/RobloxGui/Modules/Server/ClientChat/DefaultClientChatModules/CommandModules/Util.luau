@@ -2,7 +2,7 @@
 local Module = {}
 Module.__index = Module
 
-function Module:SendSystemMessageToSelf(Text: string, p1, ExtraData) --[[ Line: 31 ]]
+function Module:SendSystemMessageToSelf(Text: string, p1, ExtraData)
 	-- upvalues: ChatConstantsModule (copy)
 	p1:AddMessageToChannel({
 		ID = -1,
@@ -20,7 +20,7 @@ function Module:SendSystemMessageToSelf(Text: string, p1, ExtraData) --[[ Line: 
 end
 
 return ({
-	new = function() --[[ Line: 50 ]]
+	new = function()
 		-- upvalues: Module (copy)
 		local self = setmetatable({}, Module)
 		self.COMMAND_MODULES_VERSION = 1

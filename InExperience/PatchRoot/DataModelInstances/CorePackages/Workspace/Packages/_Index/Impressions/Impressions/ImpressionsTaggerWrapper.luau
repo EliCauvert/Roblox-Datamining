@@ -1,7 +1,7 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("Impressions").Parent.React)
 local UseImpressionsTaggerModule = require(script.Parent.useImpressionsTagger)
 
-return function(p1) --[[ Line: 14 | Named "ImpressionsTagWrapper" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseImpressionsTaggerModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	UseImpressionsTaggerModule(UseRefResult, p1.impressionsTag, p1.impressionsIndex)

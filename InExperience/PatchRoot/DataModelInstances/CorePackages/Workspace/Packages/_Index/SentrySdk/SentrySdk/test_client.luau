@@ -17,20 +17,20 @@ if not FsModule.exists(v1 .. "/Client.lua") then
 	ProcessModule.exit(1)
 end
 local HttpService = {
-	JSONEncode = function(_, p1) --[[ Line: 47 ]]
+	JSONEncode = function(_, p1)
 		-- upvalues: JsonModule (copy)
 		return JsonModule.serialize(p1)
 	end,
-	JSONDecode = function(_, p1) --[[ Line: 50 ]]
+	JSONDecode = function(_, p1)
 		-- upvalues: JsonModule (copy)
 		return JsonModule.deserialize(p1)
 	end,
-	RequestInternal = function(_, p1) --[[ Line: 53 ]]
+	RequestInternal = function(_, p1)
 		-- upvalues: NetModule (copy)
 		return {
-			Start = function(_, Callback: (any, any) -> ()) --[[ Line: 55 ]]
+			Start = function(_, Callback: (any, any) -> ())
 				-- upvalues: NetModule (upval), p1 (copy)
-				local Success, Result = pcall(function() --[[ Line: 56 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: NetModule (upval), p1 (upval)
 					return NetModule.request(p1.Url, { method = p1.Method, headers = p1.Headers, body = p1.Body })
 				end)
@@ -54,22 +54,22 @@ local HttpService = {
 local config = {
 	HttpService = HttpService,
 	RunService = {
-		IsStudio = function(_): boolean --[[ Line: 79 ]]
+		IsStudio = function(_): boolean
 			return false
 		end,
-		GetRobloxVersion = function(_): string --[[ Line: 82 ]]
+		GetRobloxVersion = function(_): string
 			return "version-9.999.0.9999999"
 		end
 	}
 }
 local self = setmetatable({ PlaceId = 0, JobId = "lute-test-job" }, {})
 
-function self:GetService(p1) --[[ Line: 88 ]]
+function self:GetService(p1)
 	-- upvalues: config (copy)
 	return config[p1]
 end
 
-function self:DefineFastFlag(): boolean --[[ Line: 91 ]]
+function self:DefineFastFlag(): boolean
 	return false
 end
 
@@ -111,22 +111,22 @@ local v2 = nil
 local v3 = nil
 local _ = nil
 
-local function _(p1) --[[ Line: 138 | Named "parentDir" ]]
+local function _(p1)
 	return p1:match("^(.*)/[^/]+$") or "."
 end
 
-local _ = function(p1) --[[ Line: 142 | Named "folderNode" ]]
+local _ = function(p1)
 	-- upvalues: v3 (ref)
 	return (setmetatable({ __isFolder = true, __dir = p1 }, v3))
 end
 
-local _ = function(p1, p2) --[[ Line: 148 | Named "fileNode" ]]
+local _ = function(p1, p2)
 	-- upvalues: v2 (ref)
 	return (setmetatable({ __isFile = true, __base = p1, __parent = p2 }, v2))
 end
 
 v3 = {
-	__index = function(p1, Text) --[[ Line: 153 ]]
+	__index = function(p1, Text)
 		-- upvalues: v3 (ref), v2 (ref)
 		return if Text == "Parent" then setmetatable({
 			__isFolder = true,
@@ -139,7 +139,7 @@ v3 = {
 	end
 }
 v2 = {
-	__index = function(p1, p2) --[[ Line: 162 ]]
+	__index = function(p1, p2)
 		if p2 == "Parent" then
 			return p1.__parent
 		else
@@ -148,7 +148,7 @@ v2 = {
 	end
 }
 
-local function v19(p1) --[[ Line: 170 ]]
+local function v19(p1)
 	-- upvalues: t1 (copy), FsModule (copy), LuauModule (copy), v19 (ref), t (copy), config1 (copy)
 	assert(type(p1) == "table" and p1.__isFile, "custom require expects a module node")
 	local Base = p1.__base
@@ -243,7 +243,7 @@ NewResult:capture_exception({
 	type = "LuaError",
 	message = "Breadcrumb test from lute",
 	stacktrace = Stacktrace
-}, "error", config2, config3, function(p1, p2, p3) --[[ Line: 287 ]]
+}, "error", config2, config3, function(p1, p2, p3)
 	print("---- Sentry response ----")
 	print("callback success:", p1)
 	print("eventId:", (tostring(p3)))

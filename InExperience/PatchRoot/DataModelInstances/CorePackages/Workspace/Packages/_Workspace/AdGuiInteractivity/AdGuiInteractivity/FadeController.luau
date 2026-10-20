@@ -2,7 +2,7 @@
 local FadeController = {}
 FadeController.__index = FadeController
 
-function FadeController.new() --[[ Line: 6 ]]
+function FadeController.new()
 	-- upvalues: FadeController (copy)
 	local self = setmetatable({}, FadeController)
 	self.lastInputTimeSec = -1
@@ -12,42 +12,42 @@ function FadeController.new() --[[ Line: 6 ]]
 	return self
 end
 
-function FadeController:getCurrentProgress(): number --[[ Line: 15 ]]
+function FadeController:getCurrentProgress(): number
 	local Elapsed = os.clock() - self.lastInputTimeSec
 	
 	return if Elapsed < self.dwellTimeSec then 1 elseif Elapsed < self.dwellTimeSec + self.fadeDurationSec then 1 - (Elapsed - self.dwellTimeSec) / self.fadeDurationSec else 0
 end
 
-function FadeController:inProgress(): boolean --[[ Line: 26 ]]
+function FadeController:inProgress(): boolean
 	return self:getCurrentProgress() > 0
 end
 
-function FadeController:isFading(): boolean --[[ Line: 30 ]]
+function FadeController:isFading(): boolean
 	local Elapsed = os.clock() - self.lastInputTimeSec
 	
 	return self.dwellTimeSec <= Elapsed and Elapsed < self.dwellTimeSec + self.fadeDurationSec
 end
 
-function FadeController:updateLastInputTime() --[[ Line: 35 ]]
+function FadeController:updateLastInputTime()
 	self.lastInputTimeSec = os.clock()
 end
 
-function FadeController:skipToFade() --[[ Line: 39 ]]
+function FadeController:skipToFade()
 	if not self:isFading() then
 		self.lastInputTimeSec = os.clock() - self.dwellTimeSec
 	end
 end
 
-function FadeController:zeroOut() --[[ Line: 45 ]]
+function FadeController:zeroOut()
 	self.lastInputTimeSec = -1
 end
 
-function FadeController:subscribe(p1) --[[ Line: 49 ]]
+function FadeController:subscribe(p1)
 	-- upvalues: RunService (copy)
 	table.insert(self.subscriptions, p1)
 	
 	if not self.heartbeatConnection then
-		self.heartbeatConnection = RunService.RenderStepped:Connect(function() --[[ Line: 53 ]]
+		self.heartbeatConnection = RunService.RenderStepped:Connect(function()
 			-- upvalues: self (copy)
 			local CurrentProgress = self:getCurrentProgress()
 			
@@ -62,7 +62,7 @@ function FadeController:subscribe(p1) --[[ Line: 49 ]]
 	end
 end
 
-function FadeController:unsubscribe(p2) --[[ Line: 65 ]]
+function FadeController:unsubscribe(p2)
 	for i, subscription in ipairs(self.subscriptions) do
 		if subscription == p2 then
 			table.remove(self.subscriptions, i)

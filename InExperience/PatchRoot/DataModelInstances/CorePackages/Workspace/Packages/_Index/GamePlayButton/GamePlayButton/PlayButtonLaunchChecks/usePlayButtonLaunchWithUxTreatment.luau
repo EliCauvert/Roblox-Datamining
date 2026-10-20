@@ -15,15 +15,15 @@ local PlayabilityStatusEnum = DiscoveryTypesModule.PlayabilityStatusEnum
 local _ = require(Parent.PlayabilityRodux)
 local FFlagLuaAppDemoModePlayButtonTelemetry = require(Parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
 
-local function _(p1) --[[ Line: 20 | Named "asReconfirmLaunchModalData" ]]
+local function _(p1)
 	return if p1 and (type(p1.titleText) == "string" and type(p1.bodyText) == "string" and type(p1.primaryActionText) == "string" and type(p1.secondaryActionText) == "string") then p1 else nil
 end
 
-return function(p1, UniverseId, Callback, PageName) --[[ Line: 44 ]]
+return function(p1, UniverseId, Callback, PageName)
 	-- upvalues: UseRoactServiceFunction (copy), AppEventIngestService (copy), UseDispatchFunction (copy), ReactModule (copy), UnlockPlayIntentFunction (copy), PlayabilityStatusEnum (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy), PlayableUxTreatmentEnum (copy), FlaggedMutedErrorFunction (copy), OpenPlayButtonUpsellDialogFunction (copy), CloseCentralOverlayFunction (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(AppEventIngestService)
 	local UseDispatchResult = UseDispatchFunction()
-	local UseResult = ReactModule.useCallback(function(UpsellName) --[[ Line: 53 ]]
+	local UseResult = ReactModule.useCallback(function(UpsellName)
 		-- upvalues: UnlockPlayIntentFunction (upval), UseRoactServiceResult (copy), UniverseId (copy), p1 (copy), PageName (copy)
 		UnlockPlayIntentFunction(UseRoactServiceResult, {
 			universeId = UniverseId,
@@ -33,7 +33,7 @@ return function(p1, UniverseId, Callback, PageName) --[[ Line: 44 ]]
 		})
 	end, { UseRoactServiceResult, UniverseId, p1, PageName })
 	
-	return ReactModule.useCallback(function(p2, p3) --[[ Line: 68 ]]
+	return ReactModule.useCallback(function(p2, p3)
 		-- upvalues: p1 (copy), PlayabilityStatusEnum (upval), Callback (copy), FFlagLuaAppDemoModePlayButtonTelemetry (upval), PlayableUxTreatmentEnum (upval), FlaggedMutedErrorFunction (upval), UniverseId (copy), UseResult (copy), UseDispatchResult (copy), OpenPlayButtonUpsellDialogFunction (upval), CloseCentralOverlayFunction (upval)
 		if not p1 or not p1.playableUxTreatment or not p1.playableUxTreatment.treatment or p1.playabilityStatus ~= PlayabilityStatusEnum.Playable then
 			Callback(p2, if FFlagLuaAppDemoModePlayButtonTelemetry then p3 else nil)
@@ -51,14 +51,14 @@ return function(p1, UniverseId, Callback, PageName) --[[ Line: 44 ]]
 		local Data1 = if Data and (type(Data.titleText) == "string" and type(Data.bodyText) == "string" and type(Data.primaryActionText) == "string" and type(Data.secondaryActionText) == "string") then Data else nil
 		
 		if Data1 then
-			UseDispatchResult(OpenPlayButtonUpsellDialogFunction(Data1.titleText, Data1.bodyText, Data1.primaryActionText, Data1.secondaryActionText, function() --[[ Line: 102 ]]
+			UseDispatchResult(OpenPlayButtonUpsellDialogFunction(Data1.titleText, Data1.bodyText, Data1.primaryActionText, Data1.secondaryActionText, function()
 				-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval), Callback (upval), p2 (copy), FFlagLuaAppDemoModePlayButtonTelemetry (upval), p3 (copy)
 				UseDispatchResult(CloseCentralOverlayFunction())
 				Callback(p2, if FFlagLuaAppDemoModePlayButtonTelemetry then p3 else nil)
-			end, function() --[[ Line: 109 ]]
+			end, function()
 				-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
 				UseDispatchResult(CloseCentralOverlayFunction())
-			end, function() --[[ Line: 112 ]]
+			end, function()
 				-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
 				UseDispatchResult(CloseCentralOverlayFunction())
 			end))

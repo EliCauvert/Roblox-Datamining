@@ -1,4 +1,4 @@
-﻿local function applySplice(p1, p2, p3, p4: number, Count: number, List) --[[ Line: 12 ]]
+﻿local function applySplice(p1, p2, p3, p4: number, Count: number, List)
 	local v1 = #p2 - p4 - Count
 	local v2 = #p3 - p4 - Count
 	
@@ -22,7 +22,7 @@
 	end
 end
 
-local function reconcileSplice(p5, p6, p7, Callback): boolean --[[ Line: 45 ]]
+local function reconcileSplice(p5, p6, p7, Callback): boolean
 	-- upvalues: applySplice (copy)
 	local CountP7 = #p6
 	local CountP8 = #p7
@@ -52,7 +52,7 @@ local function reconcileSplice(p5, p6, p7, Callback): boolean --[[ Line: 45 ]]
 		Count += 1
 	end
 	if v4 + Count == Smallest then
-		p5.transaction(function() --[[ Line: 83 ]]
+		p5.transaction(function()
 			-- upvalues: applySplice (upval), p5 (copy), p6 (copy), p7 (copy), v4 (ref), Count (ref), List (ref)
 			applySplice(p5, p6, p7, v4, Count, List)
 		end)
@@ -63,7 +63,7 @@ local function reconcileSplice(p5, p6, p7, Callback): boolean --[[ Line: 45 ]]
 	end
 end
 
-return function(p8, List, List1, Callback) --[[ Line: 89 | Named "reconcileSnapshot" ]]
+return function(p8, List, List1, Callback)
 	-- upvalues: reconcileSplice (copy)
 	if reconcileSplice(p8, List, List1, Callback) then return end
 	local Buffer = table.create(#List)
@@ -106,7 +106,7 @@ return function(p8, List, List1, Callback) --[[ Line: 89 | Named "reconcileSnaps
 	while Count < math.min(#Buffer, #Buffer1) and Buffer[Count + 1] == Buffer1[Count + 1] do
 		Count += 1
 	end
-	local function updateRetainedValues() --[[ Line: 136 ]]
+	local function updateRetainedValues()
 		-- upvalues: List1 (copy), t (copy), Buffer1 (copy), p8 (copy)
 		for i, value in List1 do
 			if t[Buffer1[i]] ~= value then
@@ -115,7 +115,7 @@ return function(p8, List, List1, Callback) --[[ Line: 89 | Named "reconcileSnaps
 		end
 	end
 	
-	p8.transaction(function() --[[ Line: 144 ]]
+	p8.transaction(function()
 		-- upvalues: Flag (ref), Count (ref), Buffer (copy), Buffer1 (copy), p8 (copy), updateRetainedValues (copy), List1 (copy)
 		if not Flag then
 			p8.reset(List1)
@@ -126,7 +126,7 @@ return function(p8, List, List1, Callback) --[[ Line: 89 | Named "reconcileSnaps
 		local FoundIndex: number? = table.find(Buffer, Buffer1[NewCount])
 		local FoundIndex1: number? = NewCount
 		
-		local function matchesMove(Index, FoundIndex): boolean --[[ Line: 149 ]]
+		local function matchesMove(Index, FoundIndex): boolean
 			-- upvalues: Buffer (upval), Buffer1 (upval)
 			if Index == nil or FoundIndex == nil then
 				return false

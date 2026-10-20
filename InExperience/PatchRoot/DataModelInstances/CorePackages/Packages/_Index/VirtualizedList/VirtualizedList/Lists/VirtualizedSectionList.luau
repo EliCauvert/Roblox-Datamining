@@ -13,25 +13,25 @@ local ReactModule = require(Parent1.React)
 local ItemWithSeparator = nil
 local VirtualizedSectionList = ReactModule.PureComponent:extend("VirtualizedSectionList")
 
-function VirtualizedSectionList.init(p1) --[[ Line: 206 ]]
+function VirtualizedSectionList.init(p1)
 	-- upvalues: InvariantModule (copy), KeyExtractor (copy), Object (copy), Array (copy), Boolean (copy), ReactModule (copy), ItemWithSeparator (ref)
 	p1._updateHighlightMap = {}
 	p1._updatePropsMap = {}
 	p1._listRef = nil
 	
-	function p1._captureRef(_listRef) --[[ Line: 210 ]]
+	function p1._captureRef(_listRef)
 		-- upvalues: p1 (copy)
 		p1._listRef = _listRef
 	end
 	
-	function p1:_keyExtractor(p2) --[[ Line: 214 ]]
+	function p1:_keyExtractor(p2)
 		-- upvalues: p1 (copy)
 		local SubExtractorResult = p1:_subExtractor(p2)
 		
 		return if SubExtractorResult then SubExtractorResult.key else tostring(p2)
 	end
 	
-	function p1._convertViewable(p2) --[[ Line: 219 ]]
+	function p1._convertViewable(p2)
 		-- upvalues: InvariantModule (upval), p1 (copy), KeyExtractor (upval), Object (upval)
 		InvariantModule(p2.index ~= nil, "Received a broken ViewToken")
 		local SubExtractorResult = p1:_subExtractor(p2.index)
@@ -50,7 +50,7 @@ function VirtualizedSectionList.init(p1) --[[ Line: 206 ]]
 		end
 	end
 	
-	function p1._onViewableItemsChanged(p2) --[[ Line: 241 ]]
+	function p1._onViewableItemsChanged(p2)
 		-- upvalues: p1 (copy), Array (upval), Boolean (upval)
 		local ViewableItems = p2.viewableItems
 		local Changed = p2.changed
@@ -64,9 +64,9 @@ function VirtualizedSectionList.init(p1) --[[ Line: 206 ]]
 		end
 	end
 	
-	function p1._renderItem(NewItemCount) --[[ Line: 258 ]]
+	function p1._renderItem(NewItemCount)
 		-- upvalues: p1 (copy), Boolean (upval), InvariantModule (upval), ReactModule (upval), ItemWithSeparator (upval)
-		return function(p2) --[[ Line: 259 ]]
+		return function(p2)
 			-- upvalues: p1 (upval), Boolean (upval), NewItemCount (copy), InvariantModule (upval), ReactModule (upval), ItemWithSeparator (upval)
 			local Item = p2.item
 			local Index: number = p2.index
@@ -117,7 +117,7 @@ function VirtualizedSectionList.init(p1) --[[ Line: 206 ]]
 		end
 	end
 	
-	function p1._updatePropsFor(p2, p3) --[[ Line: 311 ]]
+	function p1._updatePropsFor(p2, p3)
 		-- upvalues: p1 (copy)
 		local UpdateProps: (any) -> () = p1._updatePropsMap[p2]
 		
@@ -126,7 +126,7 @@ function VirtualizedSectionList.init(p1) --[[ Line: 206 ]]
 		end
 	end
 	
-	function p1._updateHighlightFor(p2, p3) --[[ Line: 318 ]]
+	function p1._updateHighlightFor(p2, p3)
 		-- upvalues: p1 (copy)
 		local UpdateHighlight: (any) -> () = p1._updateHighlightMap[p2]
 		
@@ -135,7 +135,7 @@ function VirtualizedSectionList.init(p1) --[[ Line: 206 ]]
 		end
 	end
 	
-	function p1._setUpdateHighlightFor(p2, p3) --[[ Line: 325 ]]
+	function p1._setUpdateHighlightFor(p2, p3)
 		-- upvalues: p1 (copy)
 		if p3 == nil then
 			p1._updateHighlightMap[p2] = nil
@@ -146,7 +146,7 @@ function VirtualizedSectionList.init(p1) --[[ Line: 206 ]]
 		end
 	end
 	
-	function p1._setUpdatePropsFor(p2, p3) --[[ Line: 333 ]]
+	function p1._setUpdatePropsFor(p2, p3)
 		-- upvalues: p1 (copy)
 		if p3 == nil then
 			p1._updatePropsMap[p2] = nil
@@ -158,7 +158,7 @@ function VirtualizedSectionList.init(p1) --[[ Line: 206 ]]
 	end
 end
 
-function VirtualizedSectionList.scrollToLocation(p1, p2) --[[ Line: 342 ]]
+function VirtualizedSectionList.scrollToLocation(p1, p2)
 	-- upvalues: Object (copy)
 	local ItemIndex = p2.itemIndex
 	local Count = 1
@@ -175,11 +175,11 @@ function VirtualizedSectionList.scrollToLocation(p1, p2) --[[ Line: 342 ]]
 	p1._listRef:scrollToIndex((Object.assign({}, p2, { viewOffset = ViewOffset, index = ItemIndex })))
 end
 
-function VirtualizedSectionList.getListRef(p3) --[[ Line: 364 ]]
+function VirtualizedSectionList.getListRef(p3)
 	return p3._listRef
 end
 
-function VirtualizedSectionList.render(p3) --[[ Line: 368 ]]
+function VirtualizedSectionList.render(p3)
 	-- upvalues: Object (copy), ReactModule (copy), VirtualizedListModule (copy)
 	local _ = p3.props.renderItem
 	local _ = p3.props.sections
@@ -208,11 +208,11 @@ function VirtualizedSectionList.render(p3) --[[ Line: 368 ]]
 		stickyHeaderIndices = T,
 		renderItem = p3._renderItem(NewItemCount),
 		data = p3.props.sections,
-		getItem = function(p4, Total) --[[ Line: 405 ]]
+		getItem = function(p4, Total)
 			-- upvalues: p3 (copy)
 			return p3:_getItem(p3.props, p4, Total)
 		end,
-		getItemCount = function() --[[ Line: 408 ]]
+		getItemCount = function()
 			-- upvalues: NewItemCount (ref)
 			return NewItemCount
 		end,
@@ -221,7 +221,7 @@ function VirtualizedSectionList.render(p3) --[[ Line: 368 ]]
 	}))
 end
 
-function VirtualizedSectionList:_getItem(Props, p4, p5: number) --[[ Line: 417 ]]
+function VirtualizedSectionList:_getItem(Props, p4, p5: number)
 	if not p4 then
 		return nil
 	end
@@ -246,7 +246,7 @@ function VirtualizedSectionList:_getItem(Props, p4, p5: number) --[[ Line: 417 ]
 	return nil
 end
 
-function VirtualizedSectionList._subExtractor(p6, Index) --[[ Line: 444 ]]
+function VirtualizedSectionList._subExtractor(p6, Index)
 	-- upvalues: Boolean (copy), KeyExtractor (copy)
 	local Index1: number = Index
 	local Props = p6.props
@@ -293,7 +293,7 @@ function VirtualizedSectionList._subExtractor(p6, Index) --[[ Line: 444 ]]
 	return nil
 end
 
-function VirtualizedSectionList._getSeparatorComponent(p7, Index, SubExtractorResult, p8) --[[ Line: 504 ]]
+function VirtualizedSectionList._getSeparatorComponent(p7, Index, SubExtractorResult, p8)
 	-- upvalues: Boolean (copy)
 	if not SubExtractorResult then
 		SubExtractorResult = p7:_subExtractor(Index)
@@ -310,7 +310,7 @@ function VirtualizedSectionList._getSeparatorComponent(p7, Index, SubExtractorRe
 	end
 end
 
-ItemWithSeparator = function(p7) --[[ Line: 556 | Named "ItemWithSeparator" ]]
+ItemWithSeparator = function(p7)
 	-- upvalues: ReactModule (copy), Object (copy), ViewModule (copy)
 	local LeadingSeparatorComponent = p7.LeadingSeparatorComponent
 	local SeparatorComponent = p7.SeparatorComponent
@@ -342,12 +342,12 @@ ItemWithSeparator = function(p7) --[[ Line: 556 | Named "ItemWithSeparator" ]]
 		trailingItem = p7.trailingItem,
 		trailingSection = p7.trailingSection
 	})
-	ReactModule.useEffect(function() --[[ Line: 594 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SetSelfHighlightCallbackFunction (copy), CellKey (copy), UseStateResult2_1 (copy), SetSelfUpdatePropsCallbackFunction (copy), UseStateResult2_3 (copy)
 		SetSelfHighlightCallbackFunction(CellKey, UseStateResult2_1)
 		SetSelfUpdatePropsCallbackFunction(CellKey, UseStateResult2_3)
 		
-		return function() --[[ Line: 597 ]]
+		return function()
 			-- upvalues: SetSelfUpdatePropsCallbackFunction (upval), CellKey (upval), SetSelfHighlightCallbackFunction (upval)
 			SetSelfUpdatePropsCallbackFunction(CellKey, nil)
 			SetSelfHighlightCallbackFunction(CellKey, nil)
@@ -363,7 +363,7 @@ ItemWithSeparator = function(p7) --[[ Line: 556 | Named "ItemWithSeparator" ]]
 		index = Index,
 		section = Section,
 		separators = {
-			highlight = function() --[[ Line: 604 ]]
+			highlight = function()
 				-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy), PrevCellKey (copy), UpdateHighlightForFunction (copy)
 				UseStateResult2(true)
 				UseStateResult2_1(true)
@@ -372,7 +372,7 @@ ItemWithSeparator = function(p7) --[[ Line: 556 | Named "ItemWithSeparator" ]]
 					UpdateHighlightForFunction(PrevCellKey, true)
 				end
 			end,
-			unhighlight = function() --[[ Line: 611 ]]
+			unhighlight = function()
 				-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy), PrevCellKey (copy), UpdateHighlightForFunction (copy)
 				UseStateResult2(false)
 				UseStateResult2_1(false)
@@ -381,7 +381,7 @@ ItemWithSeparator = function(p7) --[[ Line: 556 | Named "ItemWithSeparator" ]]
 					UpdateHighlightForFunction(PrevCellKey, false)
 				end
 			end,
-			updateProps = function(p8, p9) --[[ Line: 618 ]]
+			updateProps = function(p8, p9)
 				-- upvalues: LeadingSeparatorComponent (copy), UseStateResult2_2 (copy), Object (upval), UseStateResult3 (copy), PrevCellKey (copy), UpdatePropsForFunction (copy), SeparatorComponent (copy), UseStateResult2_3 (copy), UseStateResult4 (copy)
 				if p8 == "leading" then
 					if LeadingSeparatorComponent ~= nil then

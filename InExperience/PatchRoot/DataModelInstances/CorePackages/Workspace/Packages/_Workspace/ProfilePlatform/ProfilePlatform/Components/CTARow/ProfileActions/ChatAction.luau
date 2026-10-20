@@ -11,13 +11,13 @@ local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
 local ProfileTypes = EnumsModule.ProfileTypes
 
 return {
-	[EnumsModule.ProfileActions.Chat] = function(p1) --[[ Line: 19 ]]
+	[EnumsModule.ProfileActions.Chat] = function(p1)
 		-- upvalues: EnumsModule (copy), ButtonVariant (copy), ProfileTypes (copy), EventNamesModule (copy), EnteredChatFromEntryPointModule (copy), ChatEntryPointNames (copy), GuiService (copy), NotificationTypeList (copy)
 		return {
 			text = p1.localized[EnumsModule.ProfileActions.Chat],
 			variant = ButtonVariant.Standard,
 			onActivated = {
-				[ProfileTypes.User] = function() --[[ Line: 24 ]]
+				[ProfileTypes.User] = function()
 					-- upvalues: p1 (copy), EnumsModule (upval), EventNamesModule (upval), EnteredChatFromEntryPointModule (upval), ChatEntryPointNames (upval), GuiService (upval), NotificationTypeList (upval)
 					if p1.buttonSurface == EnumsModule.ButtonSurface.ContextualMenu then
 						p1.analytics.fireAnalyticsEvent(EventNamesModule.ContextualMenuButtonChat, { buttonSurface = p1.buttonSurface })

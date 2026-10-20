@@ -30,36 +30,36 @@ local SpatialUIGroupType = {
 }
 local v1 = 800 / (game:DefineFastInt("SpatialUIResolutionScale", 100) / 100)
 
-local function _(p1) --[[ Line: 174 | Named "pixelToScaledSize" ]]
+local function _(p1)
 	-- upvalues: v1 (copy)
 	return p1 / v1
 end
 
-local _ = function(p1, p2): Vector2 --[[ Line: 178 | Named "getScaledResolutionForPart" ]]
+local _ = function(p1, p2): Vector2
 	-- upvalues: v1 (copy)
 	return Vector2.new(p1 / v1, p2 / v1)
 end
 
-local _ = function(Vector, Vector1, p1): Vector2 --[[ Line: 182 | Named "panelDistanceWithSpacing" ]]
+local _ = function(Vector, Vector1, p1): Vector2
 	-- upvalues: v1 (copy)
 	local v2 = p1 / v1
 	
 	return Vector2.new(Vector.X * 0.5 + Vector1.X * 0.5 + v2, Vector.Y * 0.5 + Vector1.Y * 0.5 + v2)
 end
 
-local _ = function(p1, p2) --[[ Line: 189 | Named "alignPanelLeftToAnchor" ]]
+local _ = function(p1, p2)
 	return p2.X * 0.5 - p1.X * 0.5
 end
 
-local _ = function(p1, p2) --[[ Line: 193 | Named "alignPanelTopToAnchor" ]]
+local _ = function(p1, p2)
 	return p1.Y * 0.5 - p2.Y * 0.5
 end
 
-local _ = function(p1, p2) --[[ Line: 197 | Named "alignPanelBottomToAnchor" ]]
+local _ = function(p1, p2)
 	return p2.Y * 0.5 - p1.Y * 0.5
 end
 
-local _ = function(): number --[[ Line: 201 | Named "getAdditionalZOffsetIfNeeded" ]]
+local _ = function(): number
 	-- upvalues: InExperienceUIVRIXP (copy), SpatialUIPanelZOffset (copy)
 	return if InExperienceUIVRIXP:isMovePanelToCenter() then SpatialUIPanelZOffset / 1000 else 0
 end
@@ -71,7 +71,7 @@ local config = {
 	PANEL_TO_DRAGBAR = game:DefineFastInt("SpatialUIPanelDragBarDistance", 10)
 }
 
-local function getPanelAroundLeftOrRightEdgeRotation(Vector, Degrees: number): CFrame --[[ Line: 218 ]]
+local function getPanelAroundLeftOrRightEdgeRotation(Vector, Degrees: number): CFrame
 	-- upvalues: config (copy), v1 (copy)
 	local NewX = Vector.X * 0.5 + config.PANEL_TO_PANEL / v1 * 0.5
 	local _Vector3: Vector3 = if Degrees > 0 then Vector3.new(NewX, 0, 0) else Vector3.new(-1 * NewX, 0, 0)
@@ -238,7 +238,7 @@ if IsInExperienceUIVREnabled then
 		[PanelType.ToolTipsContainer] = _CFrame3
 	})
 end
-local function getDragBarOffsetForPanel(BottomBar, Vector, Enabled, Amount): CFrame --[[ Line: 452 ]]
+local function getDragBarOffsetForPanel(BottomBar, Vector, Enabled, Amount): CFrame
 	-- upvalues: AssignResult (ref), _Vector2 (copy), config (copy), AssignResult3 (ref), _Vector2_7 (copy), v1 (copy)
 	local PartSize = nil
 	if Vector then

@@ -6,7 +6,7 @@ local Context = ReactModule.createContext(nil)
 
 return {
 	CommentsListRowContext = Context,
-	useCommentsListRow = function() --[[ Line: 34 ]]
+	useCommentsListRow = function()
 		-- upvalues: ReactModule (copy), Context (copy)
 		local UseContextResult = ReactModule.useContext(Context)
 		assert(UseContextResult ~= nil, "Comments list rows must render inside CommentsListRowContext")

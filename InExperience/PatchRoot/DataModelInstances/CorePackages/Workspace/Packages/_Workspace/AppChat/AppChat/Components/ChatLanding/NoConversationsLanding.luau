@@ -31,11 +31,11 @@ local config = {
 	}
 }
 
-local function _(p1): string --[[ Line: 63 | Named "getEmptyStateFromProps" ]]
+local function _(p1): string
 	return if p1.chatEnabled then "friends" elseif p1.globalRulesEnabled then if p1.privacySettingsEnabled then if p1.thirdPartyPrivacySettingsEnabled then "fallback" else "thirdParty" else "privacy" else "regional"
 end
 
-return function(p1) --[[ Line: 78 | Named "NoConversationsLanding" ]]
+return function(p1)
 	-- upvalues: config (copy), UseLocalizationFunction (copy), ReactModule (copy), FoundationModule (copy)
 	local Friends: string = if p1.chatEnabled then "friends" elseif p1.globalRulesEnabled then if p1.privacySettingsEnabled then if p1.thirdPartyPrivacySettingsEnabled then "fallback" else "thirdParty" else "privacy" else "regional"
 	local Entry = config[Friends]
@@ -44,7 +44,7 @@ return function(p1) --[[ Line: 78 | Named "NoConversationsLanding" ]]
 		callToAction = Entry.cta or "Feature.Chat.Label.PrivacySettings",
 		copy = Entry.copy
 	})
-	ReactModule.useEffect(function() --[[ Line: 93 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), Friends (copy)
 		if p1.fireRenderEvent then
 			p1.fireRenderEvent(Friends)
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 78 | Named "NoConversationsLanding" ]]
 		button = if HasCta then {
 			icon = "icons/navigation/externallink_medium",
 			text = UseLocalizationResult.callToAction,
-			onActivated = function() --[[ Line: 109 ]]
+			onActivated = function()
 				-- upvalues: p1 (copy), Friends (copy)
 				p1.onCallToAction(Friends)
 			end

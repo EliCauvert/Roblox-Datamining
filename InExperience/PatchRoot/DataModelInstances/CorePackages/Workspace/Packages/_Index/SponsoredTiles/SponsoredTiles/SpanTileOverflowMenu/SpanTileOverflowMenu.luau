@@ -9,11 +9,11 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagLuaAppGameTileNotInterestedDirectAction = SharedFlagsModule.FFlagLuaAppGameTileNotInterestedDirectAction
 local FFlagLuaAppEnableHomepageOneByTwoTile = SharedFlagsModule.FFlagLuaAppEnableHomepageOneByTwoTile
 
-return function(p1) --[[ Line: 38 | Named "SpanTileOverflowMenu" ]]
+return function(p1)
 	-- upvalues: UseOverflowMenuOpenFunction (copy), ReactModule (copy), FFlagLuaAppEnableHomepageOneByTwoTile (copy), GameTileOverflowMenuActionFunction (copy), FFlagLuaAppGameTileNotInterestedDirectAction (copy), GameTileContextualActions (copy), GameTileOverflowMenu (copy)
 	local HoverKey = p1.hoverKey
 	local UseOverflowMenuOpenResult = UseOverflowMenuOpenFunction(HoverKey)
-	local UseMemoResult = ReactModule.useMemo(function(): string --[[ Line: 42 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): string
 		-- upvalues: p1 (copy)
 		local List = {}
 		
@@ -22,7 +22,7 @@ return function(p1) --[[ Line: 38 | Named "SpanTileOverflowMenu" ]]
 		end
 		return table.concat(List, ",")
 	end, { p1.availableMenuItems })
-	local UseResult = ReactModule.useCallback(function(p2, AvailableMenuItems) --[[ Line: 51 ]]
+	local UseResult = ReactModule.useCallback(function(p2, AvailableMenuItems)
 		-- upvalues: FFlagLuaAppEnableHomepageOneByTwoTile (upval), p1 (copy), GameTileOverflowMenuActionFunction (upval)
 		GameTileOverflowMenuActionFunction({
 			universeId = if FFlagLuaAppEnableHomepageOneByTwoTile then tostring(p1.universeId or "") else p1.universeId,
@@ -38,13 +38,13 @@ return function(p1) --[[ Line: 38 | Named "SpanTileOverflowMenu" ]]
 		if FFlagLuaAppEnableHomepageOneByTwoTile then p1.contentType else nil
 	})
 	local UseRefResult = ReactModule.useRef(false)
-	local UseResult1 = ReactModule.useCallback(function(p2, p3) --[[ Line: 76 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: UseRefResult (copy), UseResult (copy)
 		UseRefResult.current = true
 		UseResult(p2, p3)
 	end, { UseResult })
 	local UseRefResult1 = ReactModule.useRef(UseOverflowMenuOpenResult)
-	ReactModule.useEffect(function() --[[ Line: 84 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseOverflowMenuOpenResult (copy), UseRefResult1 (copy), UseRefResult (copy), UseResult (copy), UseMemoResult (copy)
 		if UseOverflowMenuOpenResult ~= UseRefResult1.current then
 			UseRefResult1.current = UseOverflowMenuOpenResult

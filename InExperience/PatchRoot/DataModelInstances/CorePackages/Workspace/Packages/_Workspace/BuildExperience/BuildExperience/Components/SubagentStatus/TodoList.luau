@@ -7,7 +7,7 @@ local View = FoundationModule.View
 local InputSize = FoundationModule.Enums.InputSize
 local SubagentTaskStatus = require(Parent.DataHydration.CreatorAgentChat).SubagentTaskStatus
 
-local function createTrailingIndicator(p1, TestId) --[[ Line: 34 ]]
+local function createTrailingIndicator(p1, TestId)
 	-- upvalues: SubagentTaskStatus (copy), ReactModule (copy), View (copy), LoadingIndicatorModule (copy)
 	return if p1.status == nil or p1.status == SubagentTaskStatus.Pending then nil else ReactModule.createElement(View, { tag = "auto-xy" }, {
 		Indicator = ReactModule.createElement(LoadingIndicatorModule, {
@@ -17,7 +17,7 @@ local function createTrailingIndicator(p1, TestId) --[[ Line: 34 ]]
 	})
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 49 | Named "TodoList" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), List (copy), createTrailingIndicator (copy), InputSize (copy)
 	local TestId = p1.testId or "subagent-status-list"
 	local Elements = {}

@@ -4,7 +4,7 @@ local UseRemainingTimeFunction = require(Parent.AvatarExperienceUIKit).Hooks.use
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local GetRemainingTimeTextModule = require(AvatarExperienceCommon.Utils.getRemainingTimeText)
 
-return function(p1) --[[ Line: 13 | Named "useRemainingTimeText" ]]
+return function(p1)
 	-- upvalues: UseRemainingTimeFunction (copy), UseLocalizationFunction (copy), GetRemainingTimeTextModule (copy)
 	local UseRemainingTimeResult = UseRemainingTimeFunction(p1)
 	local Value = if UseRemainingTimeResult == nil then 0 else UseRemainingTimeResult.value

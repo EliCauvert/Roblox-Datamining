@@ -11,7 +11,7 @@ local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local MomentMediaTile = require(Parent.MomentsCommon).Media.MomentMediaTile
 
-return function(p1) --[[ Line: 34 | Named "MomentTile" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseExperienceNameModule (copy), ReactModule (copy), ToMediaItemModule (copy), View (copy), StateLayerAffordance (copy), MomentMediaTile (copy), Text (copy)
 	local Moment = p1.moment
 	local UseTokensResult = UseTokensFunction()
@@ -32,7 +32,7 @@ return function(p1) --[[ Line: 34 | Named "MomentTile" ]]
 		}, {
 			Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, UseTokensResult.Radius.Large) }),
 			Media = ReactModule.createElement(MomentMediaTile, {
-				mediaItem = ReactModule.useMemo(function() --[[ Line: 44 ]]
+				mediaItem = ReactModule.useMemo(function()
 					-- upvalues: ToMediaItemModule (upval), Moment (copy), UseTokensResult (copy)
 					local MediaItemModule = ToMediaItemModule({ kind = "moment", moment = Moment })
 					MediaItemModule.cornerRadius = UseTokensResult.Radius.Large

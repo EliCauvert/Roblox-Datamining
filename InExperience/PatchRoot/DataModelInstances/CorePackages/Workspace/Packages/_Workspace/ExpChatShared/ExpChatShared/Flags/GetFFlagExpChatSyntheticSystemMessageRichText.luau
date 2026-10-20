@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("ExpChatSyntheticSystemMessageRichText", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("ExpChatSyntheticSystemMessageRichText")
 end

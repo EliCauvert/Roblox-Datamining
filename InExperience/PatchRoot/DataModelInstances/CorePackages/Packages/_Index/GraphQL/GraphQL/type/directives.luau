@@ -22,12 +22,12 @@ local ArgsToArgsConfigFunction = DefinitionModule.argsToArgsConfig
 local GraphQLNonNull = DefinitionModule.GraphQLNonNull
 local Module = nil
 
-function isDirective(p1) --[[ Line: 53 ]]
+function isDirective(p1)
 	-- upvalues: InstanceOfModule (copy), Module (ref)
 	return InstanceOfModule(p1, Module)
 end
 
-function assertDirective(p1) --[[ Line: 57 ]]
+function assertDirective(p1)
 	-- upvalues: Error1 (copy), InspectFunction (copy)
 	if not isDirective(p1) then
 		error(Error1.new(("Expected %s to be a GraphQL directive."):format(InspectFunction(p1))))
@@ -38,7 +38,7 @@ end
 Module = {}
 Module.__index = Module
 
-function Module.new(GraphQLBoolean) --[[ Line: 87 ]]
+function Module.new(GraphQLBoolean)
 	-- upvalues: ToObjMapFunction (copy), DevAssertFunction (copy), Array (copy), IsObjectLikeFunction (copy), InstanceOfModule (copy), Map (copy), CoerceToMapFunction (copy), Module (ref)
 	local config = {
 		name = GraphQLBoolean.name,
@@ -52,7 +52,7 @@ function Module.new(GraphQLBoolean) --[[ Line: 87 ]]
 	DevAssertFunction(Array.isArray(GraphQLBoolean.locations), ("@%s locations must be an Array."):format(GraphQLBoolean.name))
 	local Args = if GraphQLBoolean.args then GraphQLBoolean.args else {}
 	DevAssertFunction(IsObjectLikeFunction(Args) and not (Array.isArray(Args) and next(Args) ~= nil) or InstanceOfModule(Args, Map), ("@%s args must be an object with argument names as keys."):format(GraphQLBoolean.name))
-	config.args = Array.map(CoerceToMapFunction(Args):entries(), function(Entry) --[[ Line: 112 ]]
+	config.args = Array.map(CoerceToMapFunction(Args):entries(), function(Entry)
 		-- upvalues: ToObjMapFunction (upval)
 		local Entry1 = Entry[2]
 		
@@ -70,7 +70,7 @@ function Module.new(GraphQLBoolean) --[[ Line: 87 ]]
 	return (setmetatable(config, Module))
 end
 
-function Module:toConfig() --[[ Line: 129 ]]
+function Module:toConfig()
 	-- upvalues: ArgsToArgsConfigFunction (copy)
 	return {
 		name = self.name,
@@ -83,15 +83,15 @@ function Module:toConfig() --[[ Line: 129 ]]
 	}
 end
 
-function Module:__tostring() --[[ Line: 141 ]]
+function Module:__tostring()
 	return self:toString()
 end
 
-function Module:toString(): string --[[ Line: 145 ]]
+function Module:toString(): string
 	return "@" .. self.name
 end
 
-function Module:toJSON() --[[ Line: 149 ]]
+function Module:toJSON()
 	return self:toString()
 end
 
@@ -177,9 +177,9 @@ return {
 	GraphQLDeprecatedDirective = Deprecated,
 	GraphQLSpecifiedByDirective = SpecifiedBy,
 	specifiedDirectives = FreezeResult,
-	isSpecifiedDirective = function(p1) --[[ Line: 277 ]]
+	isSpecifiedDirective = function(p1)
 		-- upvalues: Array (copy), FreezeResult (copy)
-		return Array.some(FreezeResult, function(p2): boolean --[[ Line: 278 ]]
+		return Array.some(FreezeResult, function(p2): boolean
 			-- upvalues: p1 (copy)
 			return p2.name == p1.name
 		end)

@@ -20,20 +20,20 @@ local StrictInterfaceResult = T.strictInterface({
 	dispatchOpenReportDialog = T.callback
 })
 
-return InGameMenuDependenciesModule.RoactRodux.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 78 ]]
+return InGameMenuDependenciesModule.RoactRodux.UNSTABLE_connect2(nil, function(Callback)
 	-- upvalues: OpenReportDialogModule (copy)
 	return {
-		dispatchOpenReportDialog = function(UserId, UserName) --[[ Line: 80 ]]
+		dispatchOpenReportDialog = function(UserId, UserName)
 			-- upvalues: Callback (copy), OpenReportDialogModule (upval)
 			Callback(OpenReportDialogModule(UserId, UserName))
 		end
 	}
-end)(function(Frame: Frame) --[[ Line: 37 | Named "ReportButton" ]]
+end)(function(Frame: Frame)
 	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), WithCursorMigration (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Roact (copy), Image (copy), AssetsModule (copy), CursorType (copy), ImageSetButton (copy)
 	if GlobalConfigModule.propValidation then
 		assert(StrictInterfaceResult(Frame))
 	end
-	return WithCursorMigration(function(Callback) --[[ Line: 42 ]]
+	return WithCursorMigration(function(Callback)
 		-- upvalues: FFlagCoreUiMigrateUIBloxToFoundation (upval), Roact (upval), Image (upval), AssetsModule (upval), Frame (copy), CursorType (upval), ImageSetButton (upval)
 		return if FFlagCoreUiMigrateUIBloxToFoundation then Roact.createElement(Image, {
 			Image = AssetsModule.Images.ReportIcon,
@@ -45,7 +45,7 @@ end)(function(Frame: Frame) --[[ Line: 37 | Named "ReportButton" ]]
 				Selectable = false,
 				SelectionImageObject = Callback(CursorType.RoundedRectNoInset)
 			},
-			onActivated = function() --[[ Line: 57 ]]
+			onActivated = function()
 				-- upvalues: Frame (upval)
 				Frame.dispatchOpenReportDialog(Frame.userId, Frame.userName)
 			end
@@ -57,7 +57,7 @@ end)(function(Frame: Frame) --[[ Line: 37 | Named "ReportButton" ]]
 			BackgroundTransparency = 1,
 			LayoutOrder = Frame.LayoutOrder,
 			SelectionImageObject = Callback(CursorType.RoundedRectNoInset),
-			[Roact.Event.Activated] = function() --[[ Line: 70 ]]
+			[Roact.Event.Activated] = function()
 				-- upvalues: Frame (upval)
 				Frame.dispatchOpenReportDialog(Frame.userId, Frame.userName)
 			end

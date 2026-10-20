@@ -2,12 +2,12 @@
 local CreateOrGetProfileShareUrlModule = require(ProfileQRCode.Networking.createOrGetProfileShareUrl)
 local UseDispatchFunction = require(ProfileQRCode.Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 
-return function() --[[ Line: 7 ]]
+return function()
 	-- upvalues: UseDispatchFunction (copy), CreateOrGetProfileShareUrlModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	
-	return function() --[[ Line: 10 ]]
+	return function()
 		-- upvalues: UseDispatchResult (copy), CreateOrGetProfileShareUrlModule (upval)
-		return UseDispatchResult(CreateOrGetProfileShareUrlModule.API()):catch(function() --[[ Line: 11 ]] end)
+		return UseDispatchResult(CreateOrGetProfileShareUrlModule.API()):catch(function() end)
 	end
 end

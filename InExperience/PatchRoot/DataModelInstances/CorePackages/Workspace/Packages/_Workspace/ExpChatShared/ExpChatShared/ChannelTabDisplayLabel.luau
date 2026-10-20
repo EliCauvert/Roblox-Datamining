@@ -9,7 +9,7 @@ return {
 		system = "CoreScripts.TextChat.ChannelTabs.System",
 		team = "CoreScripts.TextChat.ChannelTabs.Team"
 	},
-	getDisplayLabel = function(p1, Text: string, p2, p3, p4) --[[ Line: 23 ]]
+	getDisplayLabel = function(p1, Text: string, p2, p3, p4)
 		-- upvalues: GetOtherDisplayNameInWhisperChannelModule (copy), TabTypesModule (copy)
 		if p1 ~= "TextChat" then
 			if p1 ~= "UniverseChat" then

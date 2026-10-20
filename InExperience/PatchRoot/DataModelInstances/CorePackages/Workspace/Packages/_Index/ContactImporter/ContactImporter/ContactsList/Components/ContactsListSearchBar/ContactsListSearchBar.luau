@@ -13,7 +13,7 @@ local UseLocalizationFunction = DependenciesModule.useLocalization
 local IconsCommonSearch = Images["icons/common/search"]
 local IconsActionsEditClearSmall = Images["icons/actions/edit/clear_small"]
 
-function ContactsListSearchBar(p1) --[[ Line: 29 ]]
+function ContactsListSearchBar(p1)
 	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), UseStyleFunction (copy), React (copy), Roact (copy), ImageSetLabel (copy), IconSize (copy), IconsCommonSearch (copy), CallbackInputBox (copy), IconsActionsEditClearSmall (copy)
 	local UseLocalizationResult = UseLocalizationFunction({ searchContacts = TextKeysModule.SEARCH_CONTACTS })
 	local UseStyleResult = UseStyleFunction()

@@ -2,7 +2,7 @@
 local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
 
 if not game:GetService("RunService"):IsStudio() then return end
-local function _(ChildName) --[[ Line: 16 | Named "ensureRemote" ]]
+local function _(ChildName)
 	-- upvalues: RobloxReplicatedStorage (copy)
 	local ChildName1 = RobloxReplicatedStorage:FindFirstChild(ChildName)
 	
@@ -17,7 +17,7 @@ local function _(ChildName) --[[ Line: 16 | Named "ensureRemote" ]]
 	end
 end
 
-local _ = function(ChildName) --[[ Line: 27 | Named "waitForBindable" ]]
+local _ = function(ChildName)
 	-- upvalues: ReplicatedStorage (copy)
 	local ChildName1 = ReplicatedStorage:WaitForChild(ChildName, 5)
 	
@@ -63,17 +63,17 @@ local PlatformLeaderboardMockTabOpened = ReplicatedStorage:WaitForChild("Platfor
 local PlatformLeaderboardMockTabOpened1 = if PlatformLeaderboardMockTabOpened == nil or not PlatformLeaderboardMockTabOpened:IsA("BindableEvent") then nil else PlatformLeaderboardMockTabOpened
 
 if PlatformLeaderboardMockPushToPlayer1 ~= nil and PlatformLeaderboardMockTabOpened1 ~= nil then
-	PlatformLeaderboardMockPushToAll1.Event:Connect(function(p1) --[[ Line: 52 ]]
+	PlatformLeaderboardMockPushToAll1.Event:Connect(function(p1)
 		-- upvalues: RemoteEvent (copy)
 		RemoteEvent:FireAllClients(p1)
 	end)
-	PlatformLeaderboardMockPushToPlayer1.Event:Connect(function(Player: Player, p1) --[[ Line: 56 ]]
+	PlatformLeaderboardMockPushToPlayer1.Event:Connect(function(Player: Player, p1)
 		-- upvalues: RemoteEvent (copy)
 		if typeof(Player) == "Instance" and Player:IsA("Player") then
 			RemoteEvent:FireClient(Player, p1)
 		end
 	end)
-	RemoteEvent1.OnServerEvent:Connect(function(Player, p1) --[[ Line: 62 ]]
+	RemoteEvent1.OnServerEvent:Connect(function(Player, p1)
 		-- upvalues: PlatformLeaderboardMockTabOpened1 (copy)
 		PlatformLeaderboardMockTabOpened1:Fire(Player, p1)
 	end)

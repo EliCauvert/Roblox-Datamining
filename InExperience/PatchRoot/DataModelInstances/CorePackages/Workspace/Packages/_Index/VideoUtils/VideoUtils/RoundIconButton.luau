@@ -6,7 +6,7 @@ local IconSize = FoundationModule.Enums.IconSize
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(Frame) --[[ Line: 21 | Named "RoundIconButton" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Icon (copy), IconSize (copy)
 	return ReactModule.createElement(View, {
 		tag = "auto-xy bg-over-media-100 radius-circle padding-medium",

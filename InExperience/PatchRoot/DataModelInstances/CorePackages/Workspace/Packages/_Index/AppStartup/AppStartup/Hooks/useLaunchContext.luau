@@ -2,9 +2,9 @@
 local _ = require(AppStartup.Enums)
 local UseSelectorFunction = require(AppStartup.Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function() --[[ Line: 7 ]]
+return function()
 	-- upvalues: UseSelectorFunction (copy)
-	return UseSelectorFunction(function(p1) --[[ Line: 8 ]]
+	return UseSelectorFunction(function(p1)
 		return p1.LaunchContext
 	end)
 end

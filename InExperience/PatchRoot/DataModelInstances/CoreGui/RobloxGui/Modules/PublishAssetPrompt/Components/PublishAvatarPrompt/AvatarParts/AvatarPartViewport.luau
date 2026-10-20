@@ -15,14 +15,14 @@ AvatarPartViewport.validateProps = TModule.strictInterface({
 	viewportSize = TModule.optional(TModule.Vector2)
 })
 
-function AvatarPartViewport.init(p1) --[[ Line: 38 ]]
+function AvatarPartViewport.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.camera = nil
 	p1.modelRef = RoactModule.createRef()
 	p1.camera, p1.updateCamera = RoactModule.createBinding(nil)
 end
 
-function AvatarPartViewport.createViewportCamera(p1) --[[ Line: 44 ]]
+function AvatarPartViewport.createViewportCamera(p1)
 	local Camera = Instance.new("Camera")
 	Camera.Parent = p1.modelRef:getValue()
 	Camera.CameraType = Enum.CameraType.Scriptable
@@ -32,7 +32,7 @@ function AvatarPartViewport.createViewportCamera(p1) --[[ Line: 44 ]]
 	return Camera
 end
 
-function AvatarPartViewport.addBodyPartMannequinToViewport(p1) --[[ Line: 55 ]]
+function AvatarPartViewport.addBodyPartMannequinToViewport(p1)
 	-- upvalues: MannequinUtility (copy), CameraUtility (copy)
 	local BodyPartMannequin, BodyPartMannequin2, BodyPartMannequin3 = MannequinUtility.CreateBodyPartMannequin(p1.props.asset, false)
 	local SetupBodyPartMannequinResult, SetupBodyPartMannequinResult2 = MannequinUtility.SetupBodyPartMannequin(BodyPartMannequin, BodyPartMannequin2, BodyPartMannequin3, p1.props.asset)
@@ -42,7 +42,7 @@ function AvatarPartViewport.addBodyPartMannequinToViewport(p1) --[[ Line: 55 ]]
 	p1.updateCamera(ViewportCamera)
 end
 
-function AvatarPartViewport.addHeadModelToViewport(p1) --[[ Line: 67 ]]
+function AvatarPartViewport.addHeadModelToViewport(p1)
 	-- upvalues: MannequinUtility (copy), CameraUtility (copy)
 	local HeadModel = MannequinUtility.CreateHeadModel(p1.props.asset)
 	HeadModel.Parent = p1.modelRef:getValue()
@@ -51,7 +51,7 @@ function AvatarPartViewport.addHeadModelToViewport(p1) --[[ Line: 67 ]]
 	p1.updateCamera(ViewportCamera)
 end
 
-function AvatarPartViewport.addAccessoryToViewport(p1) --[[ Line: 76 ]]
+function AvatarPartViewport.addAccessoryToViewport(p1)
 	-- upvalues: CameraUtility (copy)
 	local Model = Instance.new("Model")
 	p1.props.asset.Parent = Model
@@ -61,7 +61,7 @@ function AvatarPartViewport.addAccessoryToViewport(p1) --[[ Line: 76 ]]
 	p1.updateCamera(ViewportCamera)
 end
 
-function AvatarPartViewport.addMakeupDecalToViewport(p1) --[[ Line: 86 ]]
+function AvatarPartViewport.addMakeupDecalToViewport(p1)
 	-- upvalues: MakeupPreviewUtilsModule (copy)
 	local MakeupThumbnailPreview = MakeupPreviewUtilsModule.createMakeupThumbnailPreview(p1.props.asset, p1.props.assetType)
 	
@@ -74,7 +74,7 @@ function AvatarPartViewport.addMakeupDecalToViewport(p1) --[[ Line: 86 ]]
 	end
 end
 
-function AvatarPartViewport.didMount(p1) --[[ Line: 99 ]]
+function AvatarPartViewport.didMount(p1)
 	-- upvalues: GetFFlagSingleUploadMakeupSupportModule (copy), MakeupPreviewUtilsModule (copy)
 	local Asset = p1.props.asset
 	
@@ -97,9 +97,9 @@ function AvatarPartViewport.didMount(p1) --[[ Line: 99 ]]
 	end
 end
 
-function AvatarPartViewport.render(p1) --[[ Line: 120 ]]
+function AvatarPartViewport.render(p1)
 	-- upvalues: WithStyleFunction (copy), ConstantsModule (copy), RoactModule (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 121 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: p1 (copy), ConstantsModule (upval), RoactModule (upval)
 		local Theme = p2.Theme
 		local ViewportSize = if p1.props.viewportSize then p1.props.viewportSize else ConstantsModule.ItemCardWidthLandscape

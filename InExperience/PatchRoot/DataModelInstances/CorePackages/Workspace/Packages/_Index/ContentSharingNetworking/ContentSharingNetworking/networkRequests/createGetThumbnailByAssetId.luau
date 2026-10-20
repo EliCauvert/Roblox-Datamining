@@ -1,8 +1,8 @@
 ﻿local THUMBNAILSURL = require(script.Parent.Parent.Parent.Http).Url.THUMBNAILS_URL
 
-return function(p1) --[[ Line: 15 ]]
+return function(p1)
 	-- upvalues: THUMBNAILSURL (copy)
-	return p1.roduxNetworking.POST("GetThumbnailByAssetId", function(Callback, p2) --[[ Line: 18 ]]
+	return p1.roduxNetworking.POST("GetThumbnailByAssetId", function(Callback, p2)
 		-- upvalues: THUMBNAILSURL (upval)
 		return Callback(THUMBNAILSURL):path("v1"):path("batch"):body({
 			{

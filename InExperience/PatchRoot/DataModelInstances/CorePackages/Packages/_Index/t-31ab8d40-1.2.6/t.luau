@@ -1,8 +1,8 @@
 ﻿local Typeof1 = typeof or type
 
-local function _(p1) --[[ Line: 6 | Named "primitive" ]]
+local function _(p1)
 	-- upvalues: Typeof1 (copy)
-	return function(p2) --[[ Line: 7 ]]
+	return function(p2)
 		-- upvalues: Typeof1 (upval), p1 (copy)
 		local TypeofResult = Typeof1(p2)
 		
@@ -14,7 +14,7 @@ local function _(p1) --[[ Line: 6 | Named "primitive" ]]
 	end
 end
 
-local function any(p1) --[[ Line: 26 ]]
+local function any(p1)
 	if p1 == nil then
 		return false, "any expected, got nil"
 	else
@@ -24,7 +24,7 @@ end
 
 local v1 = "boolean"
 
-local function Boolean(p1) --[[ Line: 7 ]]
+local function Boolean(p1)
 	-- upvalues: Typeof1 (copy), v1 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -37,7 +37,7 @@ end
 
 local v2 = "thread"
 
-local function Thread(p1) --[[ Line: 7 ]]
+local function Thread(p1)
 	-- upvalues: Typeof1 (copy), v2 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -50,7 +50,7 @@ end
 
 local v3 = "function"
 
-local function Callback(p1) --[[ Line: 7 ]]
+local function Callback(p1)
 	-- upvalues: Typeof1 (copy), v3 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -63,7 +63,7 @@ end
 
 local v4 = "nil"
 
-local function None(p1) --[[ Line: 7 ]]
+local function None(p1)
 	-- upvalues: Typeof1 (copy), v4 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -76,7 +76,7 @@ end
 
 local v5 = "string"
 
-local function v12(p1) --[[ Line: 7 ]]
+local function v12(p1)
 	-- upvalues: Typeof1 (copy), v5 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -89,7 +89,7 @@ end
 
 local v6 = "table"
 
-local function v14(p1) --[[ Line: 7 ]]
+local function v14(p1)
 	-- upvalues: Typeof1 (copy), v6 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -102,7 +102,7 @@ end
 
 local v7 = "userdata"
 
-local function Userdata(p1) --[[ Line: 7 ]]
+local function Userdata(p1)
 	-- upvalues: Typeof1 (copy), v7 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -115,7 +115,7 @@ end
 
 local v8 = "Axes"
 
-local function Axes(p1) --[[ Line: 7 ]]
+local function Axes(p1)
 	-- upvalues: Typeof1 (copy), v8 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -128,7 +128,7 @@ end
 
 local v9 = "BrickColor"
 
-local function v20(p1) --[[ Line: 7 ]]
+local function v20(p1)
 	-- upvalues: Typeof1 (copy), v9 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -141,7 +141,7 @@ end
 
 local v10 = "CFrame"
 
-local function v22(p1) --[[ Line: 7 ]]
+local function v22(p1)
 	-- upvalues: Typeof1 (copy), v10 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -154,7 +154,7 @@ end
 
 local v11 = "Color3"
 
-local function v24(p1) --[[ Line: 7 ]]
+local function v24(p1)
 	-- upvalues: Typeof1 (copy), v11 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -167,7 +167,7 @@ end
 
 local v12 = "ColorSequence"
 
-local function ColorSequence(p1) --[[ Line: 7 ]]
+local function ColorSequence(p1)
 	-- upvalues: Typeof1 (copy), v12 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -180,7 +180,7 @@ end
 
 local v13 = "ColorSequenceKeypoint"
 
-local function ColorSequenceKeypoint(p1) --[[ Line: 7 ]]
+local function ColorSequenceKeypoint(p1)
 	-- upvalues: Typeof1 (copy), v13 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -193,7 +193,7 @@ end
 
 local v14 = "DockWidgetPluginGuiInfo"
 
-local function DockWidgetPluginGuiInfo(p1) --[[ Line: 7 ]]
+local function DockWidgetPluginGuiInfo(p1)
 	-- upvalues: Typeof1 (copy), v14 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -206,7 +206,7 @@ end
 
 local v15 = "Faces"
 
-local function Faces(p1) --[[ Line: 7 ]]
+local function Faces(p1)
 	-- upvalues: Typeof1 (copy), v15 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -219,7 +219,7 @@ end
 
 local v16 = "Instance"
 
-local function v34(p1) --[[ Line: 7 ]]
+local function v34(p1)
 	-- upvalues: Typeof1 (copy), v16 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -232,7 +232,7 @@ end
 
 local v17 = "NumberRange"
 
-local function v36(p1) --[[ Line: 7 ]]
+local function v36(p1)
 	-- upvalues: Typeof1 (copy), v17 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -245,7 +245,7 @@ end
 
 local v18 = "NumberSequence"
 
-local function NumberSequence(p1) --[[ Line: 7 ]]
+local function NumberSequence(p1)
 	-- upvalues: Typeof1 (copy), v18 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -258,7 +258,7 @@ end
 
 local v19 = "NumberSequenceKeypoint"
 
-local function NumberSequenceKeypoint(p1) --[[ Line: 7 ]]
+local function NumberSequenceKeypoint(p1)
 	-- upvalues: Typeof1 (copy), v19 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -271,7 +271,7 @@ end
 
 local v20 = "PathWaypoint"
 
-local function PathWaypoint(p1) --[[ Line: 7 ]]
+local function PathWaypoint(p1)
 	-- upvalues: Typeof1 (copy), v20 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -284,7 +284,7 @@ end
 
 local v21 = "PhysicalProperties"
 
-local function PhysicalProperties(p1) --[[ Line: 7 ]]
+local function PhysicalProperties(p1)
 	-- upvalues: Typeof1 (copy), v21 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -297,7 +297,7 @@ end
 
 local v22 = "Random"
 
-local function v46(p1) --[[ Line: 7 ]]
+local function v46(p1)
 	-- upvalues: Typeof1 (copy), v22 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -310,7 +310,7 @@ end
 
 local v23 = "Ray"
 
-local function v48(p1) --[[ Line: 7 ]]
+local function v48(p1)
 	-- upvalues: Typeof1 (copy), v23 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -323,7 +323,7 @@ end
 
 local v24 = "Rect"
 
-local function v50(p1) --[[ Line: 7 ]]
+local function v50(p1)
 	-- upvalues: Typeof1 (copy), v24 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -336,7 +336,7 @@ end
 
 local v25 = "Region3"
 
-local function v52(p1) --[[ Line: 7 ]]
+local function v52(p1)
 	-- upvalues: Typeof1 (copy), v25 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -349,7 +349,7 @@ end
 
 local v26 = "Region3int16"
 
-local function Region3int16(p1) --[[ Line: 7 ]]
+local function Region3int16(p1)
 	-- upvalues: Typeof1 (copy), v26 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -362,7 +362,7 @@ end
 
 local v27 = "TweenInfo"
 
-local function v56(p1) --[[ Line: 7 ]]
+local function v56(p1)
 	-- upvalues: Typeof1 (copy), v27 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -375,7 +375,7 @@ end
 
 local v28 = "UDim"
 
-local function v58(p1) --[[ Line: 7 ]]
+local function v58(p1)
 	-- upvalues: Typeof1 (copy), v28 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -388,7 +388,7 @@ end
 
 local v29 = "UDim2"
 
-local function v60(p1) --[[ Line: 7 ]]
+local function v60(p1)
 	-- upvalues: Typeof1 (copy), v29 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -401,7 +401,7 @@ end
 
 local v30 = "Vector2"
 
-local function v62(p1) --[[ Line: 7 ]]
+local function v62(p1)
 	-- upvalues: Typeof1 (copy), v30 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -414,7 +414,7 @@ end
 
 local v31 = "Vector3"
 
-local function v64(p1) --[[ Line: 7 ]]
+local function v64(p1)
 	-- upvalues: Typeof1 (copy), v31 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -427,7 +427,7 @@ end
 
 local v32 = "Vector3int16"
 
-local function Vector3int16(p1) --[[ Line: 7 ]]
+local function Vector3int16(p1)
 	-- upvalues: Typeof1 (copy), v32 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -440,7 +440,7 @@ end
 
 local v33 = "Enum"
 
-local function v68(p1) --[[ Line: 7 ]]
+local function v68(p1)
 	-- upvalues: Typeof1 (copy), v33 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -453,7 +453,7 @@ end
 
 local v34 = "EnumItem"
 
-local function EnumItem(p1) --[[ Line: 7 ]]
+local function EnumItem(p1)
 	-- upvalues: Typeof1 (copy), v34 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -466,7 +466,7 @@ end
 
 local v35 = "RBXScriptSignal"
 
-local function RBXScriptSignal(p1) --[[ Line: 7 ]]
+local function RBXScriptSignal(p1)
 	-- upvalues: Typeof1 (copy), v35 (copy)
 	local TypeofResult = Typeof1(p1)
 	
@@ -487,7 +487,7 @@ local TModule = {
 	string = v12,
 	table = v14,
 	userdata = Userdata,
-	number = function(p1) --[[ Line: 106 ]]
+	number = function(p1)
 		-- upvalues: Typeof1 (copy)
 		local TypeofResult = Typeof1(p1)
 		
@@ -499,7 +499,7 @@ local TModule = {
 			return false, "unexpected NaN value"
 		end
 	end,
-	nan = function(p1) --[[ Line: 126 ]]
+	nan = function(p1)
 		if p1 == p1 then
 			return false, "unexpected non-NaN value"
 		else
@@ -534,7 +534,7 @@ local TModule = {
 	Enum = v68,
 	EnumItem = EnumItem,
 	RBXScriptSignal = RBXScriptSignal,
-	RBXScriptConnection = function(p1) --[[ Line: 7 ]]
+	RBXScriptConnection = function(p1)
 		-- upvalues: Typeof1 (copy), v36 (copy)
 		local TypeofResult = Typeof1(p1)
 		
@@ -546,14 +546,14 @@ local TModule = {
 	end
 }
 
-function TModule.literal(...) --[[ Line: 406 ]]
+function TModule.literal(...)
 	-- upvalues: TModule (copy)
 	local Selected = select("#", ...)
 	
 	if Selected == 1 then
 		local v37 = (...)
 		
-		return function(p1) --[[ Line: 410 ]]
+		return function(p1)
 			-- upvalues: v37 (copy)
 			if p1 == v37 then
 				return true
@@ -572,7 +572,7 @@ end
 
 TModule.exactly = TModule.literal
 
-function TModule.keyOf(List) --[[ Line: 439 ]]
+function TModule.keyOf(List)
 	-- upvalues: TModule (copy)
 	local t = {}
 	
@@ -582,7 +582,7 @@ function TModule.keyOf(List) --[[ Line: 439 ]]
 	return TModule.literal(unpack(t))
 end
 
-function TModule.valueOf(List) --[[ Line: 454 ]]
+function TModule.valueOf(List)
 	-- upvalues: TModule (copy)
 	local t = {}
 	
@@ -592,7 +592,7 @@ function TModule.valueOf(List) --[[ Line: 454 ]]
 	return TModule.literal(unpack(t))
 end
 
-function TModule.integer(p1: number) --[[ Line: 469 ]]
+function TModule.integer(p1: number)
 	-- upvalues: TModule (copy)
 	local NumberResult, NumberResult2 = TModule.number(p1)
 	
@@ -605,9 +605,9 @@ function TModule.integer(p1: number) --[[ Line: 469 ]]
 	end
 end
 
-function TModule.numberMin(p1) --[[ Line: 488 ]]
+function TModule.numberMin(p1)
 	-- upvalues: TModule (copy)
-	return function(p2) --[[ Line: 489 ]]
+	return function(p2)
 		-- upvalues: TModule (upval), p1 (copy)
 		local NumberResult, NumberResult2 = TModule.number(p2)
 		
@@ -621,9 +621,9 @@ function TModule.numberMin(p1) --[[ Line: 488 ]]
 	end
 end
 
-function TModule.numberMax(p1) --[[ Line: 509 ]]
+function TModule.numberMax(p1)
 	-- upvalues: TModule (copy)
-	return function(p2) --[[ Line: 510 ]]
+	return function(p2)
 		-- upvalues: TModule (upval), p1 (copy)
 		local NumberResult, NumberResult2 = TModule.number(p2)
 		
@@ -637,9 +637,9 @@ function TModule.numberMax(p1) --[[ Line: 509 ]]
 	end
 end
 
-function TModule.numberMinExclusive(p1) --[[ Line: 530 ]]
+function TModule.numberMinExclusive(p1)
 	-- upvalues: TModule (copy)
-	return function(p2) --[[ Line: 531 ]]
+	return function(p2)
 		-- upvalues: TModule (upval), p1 (copy)
 		local NumberResult, NumberResult2 = TModule.number(p2)
 		
@@ -653,9 +653,9 @@ function TModule.numberMinExclusive(p1) --[[ Line: 530 ]]
 	end
 end
 
-function TModule.numberMaxExclusive(p1) --[[ Line: 551 ]]
+function TModule.numberMaxExclusive(p1)
 	-- upvalues: TModule (copy)
-	return function(p2) --[[ Line: 552 ]]
+	return function(p2)
 		-- upvalues: TModule (upval), p1 (copy)
 		local NumberResult, NumberResult2 = TModule.number(p2)
 		
@@ -672,13 +672,13 @@ end
 TModule.numberPositive = TModule.numberMinExclusive(0)
 TModule.numberNegative = TModule.numberMaxExclusive(0)
 
-function TModule.numberConstrained(p1, p2) --[[ Line: 587 ]]
+function TModule.numberConstrained(p1, p2)
 	-- upvalues: TModule (copy)
 	assert(TModule.number(p1) and TModule.number(p2))
 	local NumberMinResult = TModule.numberMin(p1)
 	local NumberMaxResult = TModule.numberMax(p2)
 	
-	return function(p3) --[[ Line: 591 ]]
+	return function(p3)
 		-- upvalues: NumberMinResult (copy), NumberMaxResult (copy)
 		local NumberMinResultResult, NumberMinResultResult2 = NumberMinResult(p3)
 		
@@ -695,13 +695,13 @@ function TModule.numberConstrained(p1, p2) --[[ Line: 587 ]]
 	end
 end
 
-function TModule.numberConstrainedExclusive(p1, p2) --[[ Line: 614 ]]
+function TModule.numberConstrainedExclusive(p1, p2)
 	-- upvalues: TModule (copy)
 	assert(TModule.number(p1) and TModule.number(p2))
 	local NumberMinExclusiveResult = TModule.numberMinExclusive(p1)
 	local NumberMaxExclusiveResult = TModule.numberMaxExclusive(p2)
 	
-	return function(p3) --[[ Line: 618 ]]
+	return function(p3)
 		-- upvalues: NumberMinExclusiveResult (copy), NumberMaxExclusiveResult (copy)
 		local NumberMinExclusiveResultResult, NumberMinExclusiveResultResult2 = NumberMinExclusiveResult(p3)
 		
@@ -718,11 +718,11 @@ function TModule.numberConstrainedExclusive(p1, p2) --[[ Line: 614 ]]
 	end
 end
 
-function TModule.match(Pattern) --[[ Line: 640 ]]
+function TModule.match(Pattern)
 	-- upvalues: TModule (copy)
 	assert(TModule.string(Pattern))
 	
-	return function(Text: string) --[[ Line: 642 ]]
+	return function(Text: string)
 		-- upvalues: TModule (upval), Pattern (copy)
 		local v38, v39 = TModule.string(Text)
 		
@@ -736,11 +736,11 @@ function TModule.match(Pattern) --[[ Line: 640 ]]
 	end
 end
 
-function TModule.optional(Callback) --[[ Line: 663 ]]
+function TModule.optional(Callback)
 	-- upvalues: TModule (copy)
 	assert(TModule.callback(Callback))
 	
-	return function(p1) --[[ Line: 665 ]]
+	return function(p1)
 		-- upvalues: Callback (copy)
 		if p1 == nil then
 			return true
@@ -755,10 +755,10 @@ function TModule.optional(Callback) --[[ Line: 663 ]]
 	end
 end
 
-function TModule.tuple(...) --[[ Line: 685 ]]
+function TModule.tuple(...)
 	local list = { ... }
 	
-	return function(...) --[[ Line: 687 ]]
+	return function(...)
 		-- upvalues: list (copy)
 		local list1 = { ... }
 		local v38 = nil
@@ -775,11 +775,11 @@ function TModule.tuple(...) --[[ Line: 685 ]]
 	end
 end
 
-function TModule.keys(Callback) --[[ Line: 706 ]]
+function TModule.keys(Callback)
 	-- upvalues: TModule (copy)
 	assert(TModule.callback(Callback))
 	
-	return function(List) --[[ Line: 708 ]]
+	return function(List)
 		-- upvalues: TModule (upval), Callback (copy)
 		local v38, v39 = TModule.table(List)
 		
@@ -799,11 +799,11 @@ function TModule.keys(Callback) --[[ Line: 706 ]]
 	end
 end
 
-function TModule.values(Callback) --[[ Line: 732 ]]
+function TModule.values(Callback)
 	-- upvalues: TModule (copy)
 	assert(TModule.callback(Callback))
 	
-	return function(List) --[[ Line: 734 ]]
+	return function(List)
 		-- upvalues: TModule (upval), Callback (copy)
 		local v38, v39 = TModule.table(List)
 		
@@ -823,13 +823,13 @@ function TModule.values(Callback) --[[ Line: 732 ]]
 	end
 end
 
-function TModule.map(Any, Callback) --[[ Line: 759 ]]
+function TModule.map(Any, Callback)
 	-- upvalues: TModule (copy)
 	assert(TModule.callback(Any), TModule.callback(Callback))
 	local KeysResult = TModule.keys(Any)
 	local ValuesResult = TModule.values(Callback)
 	
-	return function(p1) --[[ Line: 763 ]]
+	return function(p1)
 		-- upvalues: KeysResult (copy), ValuesResult (copy)
 		local KeysResultResult, KeysResultResult2 = KeysResult(p1)
 		
@@ -848,12 +848,12 @@ end
 
 local KeysResult = TModule.keys(TModule.integer)
 
-function TModule.array(Callback) --[[ Line: 787 ]]
+function TModule.array(Callback)
 	-- upvalues: TModule (copy), KeysResult (copy)
 	assert(TModule.callback(Callback))
 	local ValuesResult = TModule.values(Callback)
 	
-	return function(List) --[[ Line: 790 ]]
+	return function(List)
 		-- upvalues: KeysResult (upval), ValuesResult (copy)
 		local KeysResultResult, KeysResultResult2 = KeysResult(List)
 		
@@ -882,12 +882,12 @@ end
 
 local ArrayResult = TModule.array(TModule.callback)
 
-function TModule.union(...) --[[ Line: 829 ]]
+function TModule.union(...)
 	-- upvalues: ArrayResult (copy)
 	local list = { ... }
 	assert(ArrayResult(list))
 	
-	return function(p1) --[[ Line: 832 ]]
+	return function(p1)
 		-- upvalues: list (copy)
 		for _, value in pairs(list) do
 			if value(p1) then
@@ -900,12 +900,12 @@ end
 
 TModule.some = TModule.union
 
-function TModule.intersection(...) --[[ Line: 854 ]]
+function TModule.intersection(...)
 	-- upvalues: ArrayResult (copy)
 	local list = { ... }
 	assert(ArrayResult(list))
 	
-	return function(p1) --[[ Line: 857 ]]
+	return function(p1)
 		-- upvalues: list (copy)
 		local v38 = nil
 		for _, value in pairs(list) do
@@ -923,11 +923,11 @@ end
 TModule.every = TModule.intersection
 local MapResult = TModule.map(TModule.any, TModule.callback)
 
-function TModule.interface(p1) --[[ Line: 883 ]]
+function TModule.interface(p1)
 	-- upvalues: MapResult (copy), TModule (copy)
 	assert(MapResult(p1))
 	
-	return function(p2) --[[ Line: 885 ]]
+	return function(p2)
 		-- upvalues: TModule (upval), p1 (copy)
 		local v38, v39 = TModule.table(p2)
 		
@@ -947,11 +947,11 @@ function TModule.interface(p1) --[[ Line: 883 ]]
 	end
 end
 
-function TModule.strictInterface(p2) --[[ Line: 908 ]]
+function TModule.strictInterface(p2)
 	-- upvalues: MapResult (copy), TModule (copy)
 	assert(MapResult(p2))
 	
-	return function(List) --[[ Line: 910 ]]
+	return function(List)
 		-- upvalues: TModule (upval), p2 (copy)
 		local v38, v39 = TModule.table(List)
 		
@@ -976,12 +976,12 @@ function TModule.strictInterface(p2) --[[ Line: 908 ]]
 	end
 end
 
-function TModule.instanceOf(ClassName, p3) --[[ Line: 941 ]]
+function TModule.instanceOf(ClassName, p3)
 	-- upvalues: TModule (copy)
 	assert(TModule.string(ClassName))
 	local ChildrenResult = if p3 == nil then nil else TModule.children(p3)
 	
-	return function(p4) --[[ Line: 949 ]]
+	return function(p4)
 		-- upvalues: TModule (upval), ClassName (copy), ChildrenResult (ref)
 		local v42, v43 = TModule.Instance(p4)
 		
@@ -1004,12 +1004,12 @@ end
 
 TModule.instance = TModule.instanceOf
 
-function TModule.instanceIsA(ClassName, p3) --[[ Line: 978 ]]
+function TModule.instanceIsA(ClassName, p3)
 	-- upvalues: TModule (copy)
 	assert(TModule.string(ClassName))
 	local ChildrenResult = if p3 == nil then nil else TModule.children(p3)
 	
-	return function(Object) --[[ Line: 986 ]]
+	return function(Object)
 		-- upvalues: TModule (upval), ClassName (copy), ChildrenResult (ref)
 		local v42, v43 = TModule.Instance(Object)
 		
@@ -1030,11 +1030,11 @@ function TModule.instanceIsA(ClassName, p3) --[[ Line: 978 ]]
 	end
 end
 
-function TModule.enum(EnumType) --[[ Line: 1014 ]]
+function TModule.enum(EnumType)
 	-- upvalues: TModule (copy)
 	assert(TModule.Enum(EnumType))
 	
-	return function(p3) --[[ Line: 1016 ]]
+	return function(p3)
 		-- upvalues: TModule (upval), EnumType (copy)
 		local EnumItemResult, EnumItemResult2 = TModule.EnumItem(p3)
 		
@@ -1050,11 +1050,11 @@ end
 
 local TupleResult = TModule.tuple(TModule.callback, TModule.callback)
 
-function TModule.wrap(Callback1, Callback) --[[ Line: 1041 ]]
+function TModule.wrap(Callback1, Callback)
 	-- upvalues: TupleResult (copy)
 	assert(TupleResult(Callback1, Callback))
 	
-	return function(...) --[[ Line: 1043 ]]
+	return function(...)
 		-- upvalues: Callback (copy), Callback1 (copy)
 		assert(Callback(...))
 		
@@ -1062,8 +1062,8 @@ function TModule.wrap(Callback1, Callback) --[[ Line: 1041 ]]
 	end
 end
 
-function TModule.strict(Callback) --[[ Line: 1057 ]]
-	return function(...) --[[ Line: 1058 ]]
+function TModule.strict(Callback)
+	return function(...)
 		-- upvalues: Callback (copy)
 		assert(Callback(...))
 	end
@@ -1071,11 +1071,11 @@ end
 
 local MapResult1 = TModule.map(TModule.string, TModule.callback)
 
-function TModule.children(p3) --[[ Line: 1077 ]]
+function TModule.children(p3)
 	-- upvalues: MapResult1 (copy), TModule (copy)
 	assert(MapResult1(p3))
 	
-	return function(Object) --[[ Line: 1080 ]]
+	return function(Object)
 		-- upvalues: TModule (upval), p3 (copy)
 		local v42, v43 = TModule.Instance(Object)
 		

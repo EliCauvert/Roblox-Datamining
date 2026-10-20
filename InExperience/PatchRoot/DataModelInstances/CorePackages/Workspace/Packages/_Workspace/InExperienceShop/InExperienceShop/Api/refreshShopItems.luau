@@ -4,7 +4,7 @@ local ShopItemMappingModule = require(script.Parent.shopItemMapping)
 local MakeRequestKeyFunction = ShopItemMappingModule.makeRequestKey
 local ToShopItemFunction = ShopItemMappingModule.toShopItem
 
-local function refreshShopItemFromProductInfo(p1, p2) --[[ Line: 204 ]]
+local function refreshShopItemFromProductInfo(p1, p2)
 	-- upvalues: ToShopItemFunction (copy)
 	local ShopItem = ToShopItemFunction(p2, p1.itemType, (tonumber(p1.id)))
 	
@@ -25,10 +25,10 @@ local function refreshShopItemFromProductInfo(p1, p2) --[[ Line: 204 ]]
 end
 
 return {
-	infoTypeForShopItemType = function(p1) --[[ Line: 26 ]]
+	infoTypeForShopItemType = function(p1)
 		return if p1 == "Product" then Enum.InfoType.Product elseif p1 == "GamePass" then Enum.InfoType.GamePass else nil
 	end,
-	buildRequestsFromSections = function(List) --[[ Line: 39 ]]
+	buildRequestsFromSections = function(List)
 		-- upvalues: MakeRequestKeyFunction (copy)
 		local List1 = {}
 		local t = {}
@@ -59,7 +59,7 @@ return {
 		end
 		return List1
 	end,
-	appendFailedItemRequests = function(List, List1) --[[ Line: 66 ]]
+	appendFailedItemRequests = function(List, List1)
 		-- upvalues: MakeRequestKeyFunction (copy)
 		local t = {}
 		
@@ -77,7 +77,7 @@ return {
 		return List
 	end,
 	refreshShopItemFromProductInfo = refreshShopItemFromProductInfo,
-	mergeProductInfoIntoSections = function(List, List1) --[[ Line: 235 ]]
+	mergeProductInfoIntoSections = function(List, List1)
 		-- upvalues: MakeRequestKeyFunction (copy), refreshShopItemFromProductInfo (copy)
 		local t = {}
 		
@@ -126,7 +126,7 @@ return {
 		end
 		return Buffer
 	end,
-	insertRecoveredItemsIntoSections = function(List2, List3, List4) --[[ Line: 108 ]]
+	insertRecoveredItemsIntoSections = function(List2, List3, List4)
 		-- upvalues: MakeRequestKeyFunction (copy), ToShopItemFunction (copy)
 		local t = {}
 		
@@ -162,7 +162,7 @@ return {
 				Buffer[i] = value2
 				continue
 			end
-			table.sort(List1, function(A, B): boolean --[[ Line: 159 ]]
+			table.sort(List1, function(A, B): boolean
 				return (A.originalIndex or 0) < (B.originalIndex or 0)
 			end)
 			local Buffer1 = table.create(#value2.items + #List1)

@@ -13,7 +13,7 @@ local TextChatService = game:GetService("TextChatService")
 local GetAppPolicyStore = if FFlagExpChatFriendsTabUsePolicy then require(Parent.UniversalAppPolicy).GetAppPolicyStore else nil
 local GetResult = if FFlagFriendsChatHasFriendsGate then require(Parent.DataHydration).Friends.FriendsStore.get() else nil
 
-return function() --[[ Line: 33 | Named "createFriendsTabVisibilityStore" ]]
+return function()
 	-- upvalues: GetFriendsChatSettingsStoreModule (copy), TextChatService (copy), FFlagExpChatFriendsRespectWindowEnabledModule (copy), SignalsModule (copy), FFlagExpChatFriendsTabUsePolicy (copy), GetAppPolicyStore (ref), FFlagFriendsChatHasFriendsGate (copy), FFlagExpChatCanShowFriendsTab (copy), GetLocalUserIdModule (copy), GetResult (ref), FFlagExpChatFriendsTabRequireDefaultChannels (copy)
 	local FriendsChatSettingsStoreModule = GetFriendsChatSettingsStoreModule(false)
 	local CreateDefaultTextChannels = TextChatService.CreateDefaultTextChannels
@@ -26,14 +26,14 @@ return function() --[[ Line: 33 | Named "createFriendsTabVisibilityStore" ]]
 		Callback, Signal2 = SignalsModule.createSignal(ChatWindowConfiguration == nil or ChatWindowConfiguration.Enabled)
 		
 		if ChatWindowConfiguration then
-			Connection = ChatWindowConfiguration:GetPropertyChangedSignal("Enabled"):Connect(function() --[[ Line: 47 ]]
+			Connection = ChatWindowConfiguration:GetPropertyChangedSignal("Enabled"):Connect(function()
 				-- upvalues: Signal2 (copy), ChatWindowConfiguration (copy)
 				Signal2(ChatWindowConfiguration.Enabled)
 			end)
 		end
 	end
 	return {
-		getIsFriendsTabVisible = SignalsModule.createComputed(function(p1) --[[ Line: 53 ]]
+		getIsFriendsTabVisible = SignalsModule.createComputed(function(p1)
 			-- upvalues: FFlagExpChatFriendsRespectWindowEnabledModule (upval), Callback (ref), FFlagExpChatFriendsTabUsePolicy (upval), GetAppPolicyStore (upval), FFlagFriendsChatHasFriendsGate (upval), FFlagExpChatCanShowFriendsTab (upval), GetLocalUserIdModule (upval), GetResult (upval), FriendsChatSettingsStoreModule (copy), FFlagExpChatFriendsTabRequireDefaultChannels (upval), CreateDefaultTextChannels (copy)
 			if FFlagExpChatFriendsRespectWindowEnabledModule and not Callback(p1) then
 				return false
@@ -53,7 +53,7 @@ return function() --[[ Line: 33 | Named "createFriendsTabVisibilityStore" ]]
 			end
 			return FFlagExpChatCanShowFriendsTab and (NoFFlagExpChatFriendsTabUsePolicy and (Flag and (FriendsChatSettingsStoreModule.getChatEnabled(p1) and (FriendsChatSettingsStoreModule.getChatUserMessagesEnabled(p1) ~= false and (not FFlagExpChatFriendsTabRequireDefaultChannels or CreateDefaultTextChannels)))))
 		end),
-		dispose = function() --[[ Line: 93 ]]
+		dispose = function()
 			-- upvalues: Connection (ref)
 			if Connection then
 				Connection:Disconnect()

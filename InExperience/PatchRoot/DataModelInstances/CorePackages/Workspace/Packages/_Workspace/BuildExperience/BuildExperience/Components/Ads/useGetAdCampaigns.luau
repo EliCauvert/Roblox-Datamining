@@ -2,7 +2,7 @@
 local AdCampaignsModule = require(Parent.DataHydration.AdCampaigns)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
-return function(p1) --[[ Line: 18 | Named "useGetAdCampaigns" ]]
+return function(p1)
 	-- upvalues: AdCampaignsModule (copy), UseSignalStateFunction (copy)
 	local AndFetchAdCampaigns = (p1 or AdCampaignsModule.getAdCampaignsStore(false)).getAndFetchAdCampaigns()
 	

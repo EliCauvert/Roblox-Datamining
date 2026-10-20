@@ -7,7 +7,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local ItemCardThumbnail = require(Parent.AvatarExperienceUIKit).ItemCardComponents.ItemCardThumbnail
 local FFlagAXMigrateBuilderIcons = require(Parent.AvatarExperienceFlags).FFlagAXMigrateBuilderIcons
 
-return function(p1) --[[ Line: 37 | Named "SlotItemCardThumbnail" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), FFlagAXMigrateBuilderIcons (copy), FoundationModule (copy), ReactModule (copy), ItemCardThumbnail (copy), Icon (copy), IconSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Name = if p1.icon then if FFlagAXMigrateBuilderIcons then p1.icon.name else p1.icon else FoundationModule.Enums.IconName.PlusLarge

@@ -11,7 +11,7 @@ local UseProfileScrollContextModule = require(ProfilePlatform.Contexts.ProfileSc
 local GetPeekViewOpenHeightByProfileTypeModule = require(ProfilePlatform.Utils.getPeekViewOpenHeightByProfileType)
 local FFlagProfilePlatformEnableImpressions = require(Parent.SharedFlags).FFlagProfilePlatformEnableImpressions
 
-return function(p1) --[[ Line: 23 | Named "ProfilePlatformPage" ]]
+return function(p1)
 	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileScrollContextModule (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), UseStyleFunction (copy), FFlagProfilePlatformEnableImpressions (copy), UseProfileAnalyticsContextModule (copy), CryoModule (copy), ReactModule (copy), GetPeekViewOpenHeightByProfileTypeModule (copy)
 	local ProfileType = UseProfileWrapperContextModule().profileType
 	local UseProfileScrollContextModuleResult = UseProfileScrollContextModule()
@@ -29,7 +29,7 @@ return function(p1) --[[ Line: 23 | Named "ProfilePlatformPage" ]]
 		BorderSizePixel = 0,
 		BackgroundTransparency = if ProfileType == EnumsModule.ProfileTypes.Community and not IsFormFactorMatch and not IsFullView then Theme.BackgroundContrast.Transparency else Theme.BackgroundDefault.Transparency,
 		BackgroundColor3 = if ProfileType == EnumsModule.ProfileTypes.Community and not IsFormFactorMatch and not IsFullView then Theme.BackgroundContrast.Color else Theme.BackgroundDefault.Color,
-		[ReactModule.Change.AbsolutePosition] = function(Frame) --[[ Line: 65 ]]
+		[ReactModule.Change.AbsolutePosition] = function(Frame)
 			-- upvalues: UseProfileScrollContextModuleResult (copy), ScrollViewPositionChangedSignal (copy)
 			UseProfileScrollContextModuleResult.setAbsoluteYPosition(Frame.AbsolutePosition.Y)
 			ScrollViewPositionChangedSignal:fire()

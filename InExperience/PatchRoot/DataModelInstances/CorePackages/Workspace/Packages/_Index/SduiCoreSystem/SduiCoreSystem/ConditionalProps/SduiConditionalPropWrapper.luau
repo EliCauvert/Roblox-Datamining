@@ -15,13 +15,13 @@ local SduiConditionKey = SduiConditionalPropTypesModule.SduiConditionKey
 local SduiResponsiveKey = SduiConditionalPropTypesModule.SduiResponsiveKey
 local t = {}
 
-return ReactModule.memo(function(p1) --[[ Line: 46 | Named "SduiConditionalPropWrapper" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), SduiConditionKey (copy), SduiResponsiveKey (copy), GetDisplayStoreFunction (copy), GetInputModeStoreFunction (copy), CheckResponsiveConditionsFunction (copy), t (copy), CheckPresenceConditionsModule (copy), CryoModule (copy), SduiPresenceDetectorModule (copy), SduiResponsiveDetectorModule (copy)
 	local SduiContext = p1.sduiContext
 	SduiContext.dependencies.instrumentation:startTimerFlow("SduiConditionalPropWrapper")
 	local ConditionalProps = p1.componentConfig.conditionalProps
 	local DataStore = SduiContext.dataStore
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 55 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ConditionalProps (copy), SduiConditionKey (upval), SduiResponsiveKey (upval)
 		local t = {}
 		
@@ -48,9 +48,9 @@ return ReactModule.memo(function(p1) --[[ Line: 46 | Named "SduiConditionalPropW
 		return t
 	end, { ConditionalProps })
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-	local UseResult = ReactModule.useCallback(function(p2, p3) --[[ Line: 81 ]]
+	local UseResult = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: UseStateResult2 (copy)
-		UseStateResult2(function(Tbl) --[[ Line: 82 ]]
+		UseStateResult2(function(Tbl)
 			-- upvalues: p3 (copy), p2 (copy)
 			if Tbl == nil and p3 == nil then
 				return Tbl
@@ -66,15 +66,15 @@ return ReactModule.memo(function(p1) --[[ Line: 46 | Named "SduiConditionalPropW
 			end
 		end)
 	end, {})
-	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(function() --[[ Line: 99 ]]
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(function()
 		-- upvalues: UseMemoResult (copy), GetDisplayStoreFunction (upval), GetInputModeStoreFunction (upval), CheckResponsiveConditionsFunction (upval), ConditionalProps (copy), SduiContext (copy), t (upval)
 		return if UseMemoResult.hasResponsiveProp then CheckResponsiveConditionsFunction(ConditionalProps, GetDisplayStoreFunction(false).getViewportSize(false), GetInputModeStoreFunction(false).getLastInputType(false), GetInputModeStoreFunction(false).getPreferredInputType(false), GetDisplayStoreFunction(false).getIsSpatial(false), SduiContext) else t
 	end)
-	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(function() --[[ Line: 119 ]]
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(function()
 		-- upvalues: UseMemoResult (copy), CheckPresenceConditionsModule (upval), ConditionalProps (copy), DataStore (copy), t (upval)
 		return if UseMemoResult.hasPresenceProp then CheckPresenceConditionsModule(ConditionalProps, DataStore.social.getInGameFriendsByGame(false)) else t
 	end)
-	local UseResult1 = ReactModule.useCallback(function(p2, p3): boolean --[[ Line: 128 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2, p3): boolean
 		-- upvalues: UseStateResult1 (copy), UseStateResult3 (copy), SduiResponsiveKey (upval), SduiConditionKey (upval), UseStateResult (copy)
 		if UseStateResult1[p2] or UseStateResult3[p2] then
 			return false
@@ -88,7 +88,7 @@ return ReactModule.memo(function(p1) --[[ Line: 46 | Named "SduiConditionalPropW
 		end
 		return true
 	end, { UseStateResult1, UseStateResult3, UseStateResult })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 146 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseResult (copy), ConditionalProps (copy), UseResult1 (copy), CryoModule (upval)
 		local JoinResult = { setCustomConditionState = UseResult }
 		
@@ -101,7 +101,7 @@ return ReactModule.memo(function(p1) --[[ Line: 46 | Named "SduiConditionalPropW
 		end
 		return JoinResult
 	end, { UseResult1, ConditionalProps, UseResult })
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 166 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: ConditionalProps (copy), UseMemoResult (copy), ReactModule (upval), SduiPresenceDetectorModule (upval), UseStateResult2_2 (copy), SduiContext (copy), SduiResponsiveDetectorModule (upval), UseStateResult2_1 (copy)
 		if not ConditionalProps then
 			return {}
@@ -125,7 +125,7 @@ return ReactModule.memo(function(p1) --[[ Line: 46 | Named "SduiConditionalPropW
 		end
 		return t
 	end, { ConditionalProps, SduiContext, UseMemoResult })
-	UseMemoResult2.WrappedComponent = ReactModule.useMemo(function() --[[ Line: 200 ]]
+	UseMemoResult2.WrappedComponent = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), p1 (copy), CryoModule (upval), UseMemoResult1 (copy)
 		return ReactModule.createElement(p1.wrappedComponent, CryoModule.Dictionary.join(p1, { conditionalProps = UseMemoResult1 }))
 	end, { p1.wrappedComponent, UseMemoResult1, p1 })

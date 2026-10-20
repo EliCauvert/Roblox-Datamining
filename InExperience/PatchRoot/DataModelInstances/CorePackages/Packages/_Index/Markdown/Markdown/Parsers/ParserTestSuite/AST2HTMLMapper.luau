@@ -1,17 +1,17 @@
 ﻿local _ = require(script:FindFirstAncestor("Markdown").Types)
 local t = {}
 
-local function sanitize(Text: string) --[[ Line: 8 ]]
+local function sanitize(Text: string)
 	return Text:gsub("&amp;", "&"):gsub("&lt;", "<"):gsub("&gt;", ">"):gsub("&quot;", "\""):gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;"):gsub("\"", "&quot;"):gsub(" *\n *", "\n")
 end
 
-local function _(Text: string): string --[[ Line: 21 | Named "urlEncode" ]]
-	return string.gsub(Text, "([^%w_%%%-%.%*%?%(%)#~/:=])", function(Text: string): string --[[ Line: 22 ]]
+local function _(Text: string): string
+	return string.gsub(Text, "([^%w_%%%-%.%*%?%(%)#~/:=])", function(Text: string): string
 		return string.format("%%%02X", string.byte(Text))
 	end)
 end
 
-local function map(p1) --[[ Line: 27 ]]
+local function map(p1)
 	-- upvalues: t (ref)
 	local Entry = t[p1.name]
 	
@@ -22,7 +22,7 @@ local function map(p1) --[[ Line: 27 ]]
 	end
 end
 
-local _ = function(List): string --[[ Line: 36 | Named "processChildren" ]]
+local _ = function(List): string
 	-- upvalues: t (ref)
 	if not List then
 		return ""
@@ -45,7 +45,7 @@ local _ = function(List): string --[[ Line: 36 | Named "processChildren" ]]
 	return v1
 end
 
-local function emptyHandler(p2): string --[[ Line: 155 ]]
+local function emptyHandler(p2): string
 	-- upvalues: t (ref)
 	local Children = p2.children
 	
@@ -71,7 +71,7 @@ local function emptyHandler(p2): string --[[ Line: 155 ]]
 end
 
 t = {
-	ROOT = function(p3): string --[[ Line: 48 ]]
+	ROOT = function(p3): string
 		-- upvalues: t (ref)
 		local Children = p3.children
 		
@@ -95,7 +95,7 @@ t = {
 		end
 		return v5
 	end,
-	HEADING = function(p4): string --[[ Line: 52 ]]
+	HEADING = function(p4): string
 		-- upvalues: t (ref)
 		local Depth = if p4.attributes then p4.attributes.depth else 1
 		local v7 = "<h%*>%*</h%*>\n"
@@ -124,7 +124,7 @@ t = {
 		end
 		return (v7:format(Depth, v8, Depth))
 	end,
-	PARAGRAPH = function(p5): string --[[ Line: 57 ]]
+	PARAGRAPH = function(p5): string
 		-- upvalues: t (ref)
 		local v11 = "<p>%*</p>\n"
 		local Children = p5.children
@@ -152,11 +152,11 @@ t = {
 		end
 		return (v11:format((Text:gsub("^ +", ""):gsub(" +$", ""))))
 	end,
-	TEXT = function(p6) --[[ Line: 107 ]]
+	TEXT = function(p6)
 		-- upvalues: sanitize (copy)
 		return sanitize(p6.text or "")
 	end,
-	STYLED_TEXT = function(p6): string? --[[ Line: 90 ]]
+	STYLED_TEXT = function(p6): string?
 		-- upvalues: t (ref)
 		local Style = if p6.attributes then p6.attributes.style else nil
 		
@@ -293,10 +293,10 @@ t = {
 			return v30
 		end
 	end,
-	DIVIDER = function(): string --[[ Line: 61 ]]
+	DIVIDER = function(): string
 		return "<hr />\n"
 	end,
-	QUOTE = function(p7): string --[[ Line: 65 ]]
+	QUOTE = function(p7): string
 		-- upvalues: t (ref)
 		local v32 = "<blockquote>\n%*</blockquote>\n"
 		local Children = p7.children
@@ -324,7 +324,7 @@ t = {
 		end
 		return (v32:format(v33))
 	end,
-	CODE_BLOCK = function(p8): string --[[ Line: 69 ]]
+	CODE_BLOCK = function(p8): string
 		local List = {}
 		
 		if p8.attributes and p8.attributes.language and p8.attributes.language ~= "" then
@@ -337,7 +337,7 @@ t = {
 		end
 		return `<pre><code{if #List1 > 0 then ` {table.concat(List1, " ")}` else ""}>{p8.text}</code></pre>\n`
 	end,
-	LIST = function(p9): string --[[ Line: 81 ]]
+	LIST = function(p9): string
 		-- upvalues: t (ref)
 		local Ol: string = if p9.attributes and p9.attributes.ordered then "ol" else "ul"
 		local v36 = "<%*>\n%*</%*>\n"
@@ -366,7 +366,7 @@ t = {
 		end
 		return (v36:format(Ol, v37, Ol))
 	end,
-	LIST_ITEM = function(p10): string --[[ Line: 86 ]]
+	LIST_ITEM = function(p10): string
 		-- upvalues: t (ref)
 		local v40 = "<li>%*</li>\n"
 		local Children = p10.children
@@ -394,7 +394,7 @@ t = {
 		end
 		return (v40:format(v41))
 	end,
-	LINK = function(p11): string --[[ Line: 111 ]]
+	LINK = function(p11): string
 		-- upvalues: t (ref), sanitize (copy)
 		local Url = p11.attributes and p11.attributes.url or (p11.url or "")
 		local Title = p11.attributes and p11.attributes.title or nil
@@ -424,11 +424,11 @@ t = {
 		if v44 == "" and p11.text then
 			v44 = sanitize(p11.text)
 		end
-		return `<a href="{string.gsub(Url, "([^%w_%%%-%.%*%?%(%)#~/:=])", function(Text: string): string --[[ Line: 22 ]]
+		return `<a href="{string.gsub(Url, "([^%w_%%%-%.%*%?%(%)#~/:=])", function(Text: string): string
 			return string.format("%%%02X", string.byte(Text))
 		end)}"{if Title then ` title="{sanitize(Title)}"` else ""}>{v93}</a>`
 	end,
-	TAG = function(p12): string --[[ Line: 123 ]]
+	TAG = function(p12): string
 		-- upvalues: t (ref)
 		local Text = p12.text
 		
@@ -472,15 +472,15 @@ t = {
 		end
 		return (v48:format(Text, v49, v50, Text))
 	end,
-	LINE_BREAK = function(): string --[[ Line: 141 ]]
+	LINE_BREAK = function(): string
 		return "<br />"
 	end,
-	BREAK = function(): string --[[ Line: 145 ]]
+	BREAK = function(): string
 		return "<br />\n"
 	end,
-	IMAGE = function(p13): string --[[ Line: 149 ]]
+	IMAGE = function(p13): string
 		-- upvalues: sanitize (copy)
-		return `<img src="{string.gsub(p14.attributes and p14.attributes.url or (p14.url or ""), "([^%w_%%%-%.%*%?%(%)#~/:=])", function(Text: string): string --[[ Line: 22 ]]
+		return `<img src="{string.gsub(p14.attributes and p14.attributes.url or (p14.url or ""), "([^%w_%%%-%.%*%?%(%)#~/:=])", function(Text: string): string
 			return string.format("%%%02X", string.byte(Text))
 		end)}" alt="{sanitize(p14.text or "")}" />`
 	end,
@@ -490,7 +490,7 @@ t = {
 }
 
 return {
-	map = function(p13) --[[ Line: 181 ]]
+	map = function(p13)
 		-- upvalues: map (copy)
 		return map(p13)
 	end

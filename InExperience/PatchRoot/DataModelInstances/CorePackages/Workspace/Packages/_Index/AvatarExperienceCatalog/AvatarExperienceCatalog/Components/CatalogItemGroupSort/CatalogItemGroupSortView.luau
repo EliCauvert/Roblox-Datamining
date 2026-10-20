@@ -19,7 +19,7 @@ local WidgetLayout = AvatarExperienceUIKitModule.WidgetComponents.WidgetLayout
 local WidgetListItem = AvatarExperienceUIKitModule.WidgetComponents.WidgetListItem
 local Grid = AvatarExperienceUIKitModule.GridComponents.Grid
 
-return ReactModule.forwardRef(function(p1, Ref) --[[ Line: 82 | Named "CatalogItemGroupSortView" ]]
+return ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: UseImpressionsTaggerFunction (copy), WidgetConstantsModule (copy), UseTokensFunction (copy), ReactModule (copy), WidgetListItem (copy), FFlagAXSduiSortLegacyBottomPadding (copy), FFlagAXCatalogUseFixedWidgetPadding (copy), ResolveWidgetListItemBottomPaddingPxModule (copy), WidgetLayout (copy), WidgetHeader (copy), FFlagAXCatalogItemInformationPopover (copy), FFlagAXSduiSeeAllClickLogging (copy), Grid (copy), ScreenSizeImpressionsDetector (copy)
 	UseImpressionsTaggerFunction(p1.containerRef, WidgetConstantsModule.WidgetExposureMetadata.TagName, p1.widgetRow)
 	local UseTokensResult = UseTokensFunction()
@@ -45,7 +45,7 @@ return ReactModule.forwardRef(function(p1, Ref) --[[ Line: 82 | Named "CatalogIt
 			contentSlot = ReactModule.createElement(ReactModule.Fragment, nil, {
 				["Widget_" .. p1.widgetId] = ReactModule.createElement(Grid, {
 					itemsPerRow = p1.itemsPerRow,
-					renderItem = function(p2) --[[ Line: 89 ]]
+					renderItem = function(p2)
 						-- upvalues: p1 (copy)
 						local Item = p2.item
 						
@@ -55,7 +55,7 @@ return ReactModule.forwardRef(function(p1, Ref) --[[ Line: 82 | Named "CatalogIt
 							gridInformation = p2.gridInformation
 						}, p2.index)
 					end,
-					getItemId = function(p2): string --[[ Line: 98 ]]
+					getItemId = function(p2): string
 						-- upvalues: p1 (copy)
 						return tostring(p2.id) .. "_" .. tostring(p1.itemsPerRow)
 					end,

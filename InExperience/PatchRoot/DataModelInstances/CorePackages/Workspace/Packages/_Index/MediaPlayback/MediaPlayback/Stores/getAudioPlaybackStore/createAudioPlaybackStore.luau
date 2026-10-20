@@ -11,31 +11,31 @@ local GetFFlagAudioPreviewLuaModule = require(MediaPlayback.Flags.getFFlagAudioP
 local CreateSignalFunction = SignalsModule.createSignal
 local CreateComputedFunction = SignalsModule.createComputed
 
-local function _(p1, p2) --[[ Line: 17 | Named "createEffect" ]]
+local function _(p1, p2)
 	-- upvalues: SignalsExperimentalModule (copy), SignalsModule (copy)
 	SignalsExperimentalModule.onDisposed(p1, SignalsModule.createEffect(p2))
 end
 
-local _ = function(p1, p2): string --[[ Line: 21 | Named "audioStoreKey" ]]
+local _ = function(p1, p2): string
 	-- upvalues: GetFFlagAudioPreviewLuaModule (copy)
 	return if GetFFlagAudioPreviewLuaModule() and p2 then tostring(p1) .. ":preview" else tostring(p1)
 end
 
-return function(p1) --[[ Line: 28 | Named "createAudioPlaybackStore" ]]
+return function(p1)
 	-- upvalues: CreateSignalFunction (copy), CreateConsumerCounterStoreModule (copy), CreateVolumeStoreModule (copy), CreatePlaylistStoreModule (copy), GetFFlagAudioPreviewLuaModule (copy), CreateAudioStoreModule (copy), CryoModule (copy), CreateComputedFunction (copy), SignalsExperimentalModule (copy), SignalsModule (copy)
 	local Signal, Signal2 = CreateSignalFunction({})
 	local ConsumerCounterStoreModule = CreateConsumerCounterStoreModule()
 	local VolumeStoreModule = CreateVolumeStoreModule()
 	local PlaylistStoreModule = CreatePlaylistStoreModule()
 	
-	local function getOrCreateAudioStore(Next, p2) --[[ Line: 36 ]]
+	local function getOrCreateAudioStore(Next, p2)
 		-- upvalues: GetFFlagAudioPreviewLuaModule (upval), Signal (copy), CreateAudioStoreModule (upval), Signal2 (copy), CryoModule (upval), ConsumerCounterStoreModule (copy)
 		local Text: string = if GetFFlagAudioPreviewLuaModule() and p2 then tostring(Next) .. ":preview" else tostring(Next)
 		local SignalResultEntry = Signal(false)[Text]
 		
 		if not SignalResultEntry then
 			SignalResultEntry = CreateAudioStoreModule(Next, p2)
-			Signal2(function(p3) --[[ Line: 43 ]]
+			Signal2(function(p3)
 				-- upvalues: CryoModule (upval), Text (copy), SignalResultEntry (ref)
 				return CryoModule.Dictionary.join(p3, { [Text] = SignalResultEntry })
 			end)
@@ -47,7 +47,7 @@ return function(p1) --[[ Line: 28 | Named "createAudioPlaybackStore" ]]
 	
 	local Signal1, Signal2_1 = CreateSignalFunction({})
 	local v1 = nil
-	local Computed = CreateComputedFunction(function(p2) --[[ Line: 58 ]]
+	local Computed = CreateComputedFunction(function(p2)
 		-- upvalues: Signal1 (copy), v1 (ref)
 		local SignalResult = Signal1(p2)
 		local SignalResultEntry = SignalResult[#SignalResult]
@@ -58,7 +58,7 @@ return function(p1) --[[ Line: 28 | Named "createAudioPlaybackStore" ]]
 		return v1
 	end)
 	
-	local function _() --[[ Line: 69 | Named "getNextSong" ]]
+	local function _()
 		-- upvalues: Computed (copy), PlaylistStoreModule (copy), getOrCreateAudioStore (copy)
 		local ComputedResult = Computed(false)
 		
@@ -72,34 +72,34 @@ return function(p1) --[[ Line: 28 | Named "createAudioPlaybackStore" ]]
 		return nil
 	end
 	
-	local Computed1 = CreateComputedFunction(function(p2): boolean --[[ Line: 81 ]]
+	local Computed1 = CreateComputedFunction(function(p2): boolean
 		-- upvalues: Computed (copy), PlaylistStoreModule (copy)
 		local ComputedResult = Computed(p2)
 		
 		return if ComputedResult then PlaylistStoreModule.getNext(ComputedResult.assetId) ~= nil else false
 	end)
-	local Computed2 = CreateComputedFunction(function(p2): boolean --[[ Line: 89 ]]
+	local Computed2 = CreateComputedFunction(function(p2): boolean
 		-- upvalues: Computed (copy), PlaylistStoreModule (copy)
 		local ComputedResult = Computed(p2)
 		
 		return if ComputedResult then PlaylistStoreModule.getPrev(ComputedResult.assetId) ~= nil else false
 	end)
 	
-	local function stopAll() --[[ Line: 97 ]]
+	local function stopAll()
 		-- upvalues: Signal (copy)
 		for _, value in Signal(false) do
 			value.stop()
 		end
 	end
 	
-	local function pauseAll() --[[ Line: 103 ]]
+	local function pauseAll()
 		-- upvalues: Signal (copy)
 		for _, value in Signal(false) do
 			value.pause()
 		end
 	end
 	
-	local function playNextSong() --[[ Line: 109 ]]
+	local function playNextSong()
 		-- upvalues: Computed (copy), PlaylistStoreModule (copy), getOrCreateAudioStore (copy)
 		local ComputedResult = Computed(false)
 		
@@ -114,7 +114,7 @@ return function(p1) --[[ Line: 28 | Named "createAudioPlaybackStore" ]]
 		end
 	end
 	
-	local function playPrevSong() --[[ Line: 123 ]]
+	local function playPrevSong()
 		-- upvalues: Computed (copy), PlaylistStoreModule (copy), getOrCreateAudioStore (copy)
 		local ComputedResult = Computed(false)
 		
@@ -129,26 +129,26 @@ return function(p1) --[[ Line: 28 | Named "createAudioPlaybackStore" ]]
 		end
 	end
 	
-	local function destroyByKey(p2) --[[ Line: 137 ]]
+	local function destroyByKey(p2)
 		-- upvalues: Signal (copy), ConsumerCounterStoreModule (copy), Signal2 (copy), CryoModule (upval)
 		local SignalResultEntry = Signal(false)[p2]
 		
 		if SignalResultEntry then
 			if ConsumerCounterStoreModule.unsubscribe(p2) > 0 then return end
 			SignalResultEntry.destroy()
-			Signal2(function(p3) --[[ Line: 149 ]]
+			Signal2(function(p3)
 				-- upvalues: CryoModule (upval), p2 (copy)
 				return CryoModule.Dictionary.join(p3, { [p2] = CryoModule.None })
 			end)
 		end
 	end
 	
-	local function destroyAudioStore(p2, p3) --[[ Line: 157 ]]
+	local function destroyAudioStore(p2, p3)
 		-- upvalues: destroyByKey (copy), GetFFlagAudioPreviewLuaModule (upval)
 		destroyByKey(if GetFFlagAudioPreviewLuaModule() and p3 then tostring(p2) .. ":preview" else tostring(p2))
 	end
 	
-	local function destroy() --[[ Line: 161 ]]
+	local function destroy()
 		-- upvalues: Signal (copy), Signal2 (copy), Signal2_1 (copy)
 		for _, value in Signal(false) do
 			value.destroy()
@@ -157,7 +157,7 @@ return function(p1) --[[ Line: 28 | Named "createAudioPlaybackStore" ]]
 		Signal2_1({})
 	end
 	
-	SignalsExperimentalModule.onDisposed(p1, SignalsModule.createEffect(function(p2) --[[ Line: 169 ]]
+	SignalsExperimentalModule.onDisposed(p1, SignalsModule.createEffect(function(p2)
 		-- upvalues: ConsumerCounterStoreModule (copy), destroyByKey (copy)
 		for i, value in ConsumerCounterStoreModule.getConsumerCounts(p2) do
 			if value <= 0 then
@@ -165,7 +165,7 @@ return function(p1) --[[ Line: 28 | Named "createAudioPlaybackStore" ]]
 			end
 		end
 	end))
-	SignalsExperimentalModule.onDisposed(p1, SignalsModule.createEffect(function(p3) --[[ Line: 179 ]]
+	SignalsExperimentalModule.onDisposed(p1, SignalsModule.createEffect(function(p3)
 		-- upvalues: Signal (copy), destroyByKey (copy)
 		for i, value in Signal(p3) do
 			if value.getIsDestroyed(p3) then
@@ -173,7 +173,7 @@ return function(p1) --[[ Line: 28 | Named "createAudioPlaybackStore" ]]
 			end
 		end
 	end))
-	SignalsExperimentalModule.onDisposed(p1, SignalsModule.createEffect(function(p4) --[[ Line: 187 ]]
+	SignalsExperimentalModule.onDisposed(p1, SignalsModule.createEffect(function(p4)
 		-- upvalues: Signal (copy), CryoModule (upval), Signal1 (copy), Signal2_1 (copy)
 		for _, value in Signal(p4) do
 			local IsPlaying = value.getIsPlaying(p4)
@@ -181,19 +181,19 @@ return function(p1) --[[ Line: 28 | Named "createAudioPlaybackStore" ]]
 			local HasFindResult = FindResult ~= nil
 			
 			if HasFindResult and not IsPlaying then
-				Signal2_1(function(p5) --[[ Line: 195 ]]
+				Signal2_1(function(p5)
 					-- upvalues: CryoModule (upval), FindResult (copy)
 					return CryoModule.List.removeIndex(p5, FindResult)
 				end)
 			elseif IsPlaying and not HasFindResult then
-				Signal2_1(function(p5) --[[ Line: 199 ]]
+				Signal2_1(function(p5)
 					-- upvalues: CryoModule (upval), value (copy)
 					return CryoModule.List.join(p5, { value })
 				end)
 			end
 		end
 	end))
-	SignalsExperimentalModule.onDisposed(p1, SignalsModule.createEffect(function(p5) --[[ Line: 206 ]]
+	SignalsExperimentalModule.onDisposed(p1, SignalsModule.createEffect(function(p5)
 		-- upvalues: VolumeStoreModule (copy), Signal (copy)
 		local Volume = VolumeStoreModule.getVolume(p5)
 		
@@ -201,7 +201,7 @@ return function(p1) --[[ Line: 28 | Named "createAudioPlaybackStore" ]]
 			value.setVolume(Volume)
 		end
 	end))
-	SignalsExperimentalModule.onDisposed(p1, SignalsModule.createEffect(function(p6) --[[ Line: 213 ]]
+	SignalsExperimentalModule.onDisposed(p1, SignalsModule.createEffect(function(p6)
 		-- upvalues: Computed (copy), Computed1 (copy), PlaylistStoreModule (copy), getOrCreateAudioStore (copy)
 		local ComputedResult = Computed(p6)
 		

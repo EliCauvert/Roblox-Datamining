@@ -5,7 +5,7 @@ local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
 local UniverseConfigurationModule = require(Parent.DataHydration.UniverseConfiguration)
 local _ = require(BuildExperience.Chat.chatTypes)
 
-local function _(p1) --[[ Line: 36 | Named "resolveUniverseIdFromSessionLoad" ]]
+local function _(p1)
 	if p1 == nil then
 		return nil
 	else
@@ -17,11 +17,11 @@ local function _(p1) --[[ Line: 36 | Named "resolveUniverseIdFromSessionLoad" ]]
 	end
 end
 
-local _ = function(p1): string --[[ Line: 49 | Named "gameIconForUniverseId" ]]
+local _ = function(p1): string
 	return string.format("rbxthumb://type=GameIcon&id=%d&w=150&h=150", p1)
 end
 
-local function makeTarget(UniverseId, SessionId, DataResult, FallbackExperienceName) --[[ Line: 53 ]]
+local function makeTarget(UniverseId, SessionId, DataResult, FallbackExperienceName)
 	local UniverseId1 = UniverseId or 0
 	
 	return {
@@ -33,7 +33,7 @@ local function makeTarget(UniverseId, SessionId, DataResult, FallbackExperienceN
 	}
 end
 
-return function(p1) --[[ Line: 69 | Named "resumeBuildChat" ]]
+return function(p1)
 	-- upvalues: CreatorAgentChatModule (copy), UniverseConfigurationModule (copy), SignalsModule (copy), makeTarget (copy)
 	local SessionId = p1.sessionId
 	local IsNotSessionIdMatch: boolean = typeof(SessionId) == "string" and SessionId ~= ""
@@ -44,7 +44,7 @@ return function(p1) --[[ Line: 69 | Named "resumeBuildChat" ]]
 		local SessionLoadResult = if IsNotUniverseIdMatch or not IsNotSessionIdMatch then nil else (p1.creatorAgentChatStore or CreatorAgentChatModule.getCreatorAgentChatStore()).sessionLoad(SessionId)
 		local ConfigurationStore = p1.configurationStore
 		
-		local function _() --[[ Line: 86 | Named "getConfigurationStore" ]]
+		local function _()
 			-- upvalues: ConfigurationStore (ref), UniverseConfigurationModule (upval)
 			local ConfigurationStore1 = ConfigurationStore or UniverseConfigurationModule.getUniverseConfigurationStore()
 			ConfigurationStore = ConfigurationStore1
@@ -54,7 +54,7 @@ return function(p1) --[[ Line: 69 | Named "resumeBuildChat" ]]
 		
 		local Flag = false
 		
-		return SignalsModule.createEffect(function(p2) --[[ Line: 94 ]]
+		return SignalsModule.createEffect(function(p2)
 			-- upvalues: Flag (ref), IsNotUniverseIdMatch (copy), p1 (copy), SessionLoadResult (ref), SessionId (copy), FallbackExperienceName (copy), ConfigurationStore (ref), UniverseConfigurationModule (upval), makeTarget (upval)
 			if Flag then return end
 			local UniverseId = nil

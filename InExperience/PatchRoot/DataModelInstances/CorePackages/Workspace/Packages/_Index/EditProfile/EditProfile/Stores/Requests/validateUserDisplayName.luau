@@ -6,17 +6,17 @@ local EnumsModule = require(EditProfile.Common.Enums)
 local HttpService = game:GetService("HttpService")
 local Url = require(Parent.Http).Url
 local ConfigResult = HttpRequestModule.config({
-	requestFunction = function(p1, p2, p3) --[[ Line: 15 ]]
+	requestFunction = function(p1, p2, p3)
 		-- upvalues: HttpRequestModule (copy)
 		return HttpRequestModule.requestFunctions.RequestInternal(p1, p2, p3)
 	end
 })
 
-return function(p1, Input) --[[ Line: 20 | Named "validateUserDisplayName" ]]
+return function(p1, Input)
 	-- upvalues: Url (copy), HttpService (copy), ConfigResult (copy), EnumsModule (copy), PromiseModule (copy)
-	return ConfigResult(string.format("%s?displayName=%s", string.format("%s/users/%s/display-names/validate", Url.USERS_URL, p1), HttpService:UrlEncode(Input)), EnumsModule.RequestMethods.GET):andThen(function(Result) --[[ Line: 25 ]]
+	return ConfigResult(string.format("%s?displayName=%s", string.format("%s/users/%s/display-names/validate", Url.USERS_URL, p1), HttpService:UrlEncode(Input)), EnumsModule.RequestMethods.GET):andThen(function(Result)
 		return Result.responseBody or {}
-	end):catch(function(Err) --[[ Line: 28 ]]
+	end):catch(function(Err)
 		-- upvalues: HttpService (upval), PromiseModule (upval)
 		if not Err then
 			return PromiseModule.reject(Err)
@@ -24,7 +24,7 @@ return function(p1, Input) --[[ Line: 20 | Named "validateUserDisplayName" ]]
 		local config = { statusCode = Err.StatusCode, errors = {} }
 		
 		if Err.Body then
-			local Success, Result = pcall(function() --[[ Line: 35 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: HttpService (upval), Err (copy)
 				return HttpService:JSONDecode(Err.Body)
 			end)

@@ -15,7 +15,7 @@ local DefaultCardPadding = ConstantsModule.Padding.DefaultCardPadding
 local DefaultContentPadding = ConstantsModule.DefaultContentPadding
 local DefaultCardCornerRadius = ConstantsModule.DefaultCardCornerRadius
 
-return function(p1) --[[ Line: 32 ]]
+return function(p1)
 	-- upvalues: UseNotificationCardDataModule (copy), ConstantsModule (copy), DefaultCardPadding (copy), UseStyleFunction (copy), UseNotificationCardStateModule (copy), ReactModule (copy), Interactable (copy), DefaultCardCornerRadius (copy), DefaultContentPadding (copy), NotificationContentFrameModule (copy), NotificationActionsFrameModule (copy)
 	local UseNotificationCardDataModuleResult = UseNotificationCardDataModule()
 	local CardSize = UseNotificationCardDataModuleResult.cardSize
@@ -31,9 +31,9 @@ return function(p1) --[[ Line: 32 ]]
 		BackgroundTransparency = if UseNotificationCardDataModuleResult.cardTransparency then UseNotificationCardDataModuleResult.cardTransparency else ConstantsModule.CardTransparency.Default,
 		BorderSizePixel = 0,
 		AutomaticSize = Enum.AutomaticSize.Y,
-		onStateChanged = function() --[[ Line: 50 ]] end,
+		onStateChanged = function() end,
 		Size = UDim2.new(1, 0, 0, 0),
-		[ReactModule.Event.Activated] = function() --[[ Line: 52 ]]
+		[ReactModule.Event.Activated] = function()
 			-- upvalues: HandleActionsFunction (copy), TextBodyEntry (copy)
 			if HandleActionsFunction and TextBodyEntry then
 				HandleActionsFunction(TextBodyEntry)

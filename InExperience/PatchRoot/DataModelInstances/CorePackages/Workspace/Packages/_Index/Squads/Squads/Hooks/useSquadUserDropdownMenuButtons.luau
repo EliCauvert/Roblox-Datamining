@@ -18,7 +18,7 @@ local UseCurrentSquadParentChannelIdFunction = HooksModule.useCurrentSquadParent
 local UseSelectorFunction = DependenciesModule.Hooks.useSelector
 local GetFFlagEnableCrossExpVoiceFunction = DependenciesModule.SharedFlags.GetFFlagEnableCrossExpVoice
 
-return function(p1, p2) --[[ Line: 32 | Named "useSquadUserDropdownMenuButtons" ]]
+return function(p1, p2)
 	-- upvalues: UseLocalUserIdFunction (copy), GetFFlagEnableCrossExpVoiceFunction (copy), UseBackgroundExperienceFunction (copy), React (copy), UseIsLocalPlayerPartyVoiceEligibleFunction (copy), UseIsUserPartyVoiceEligibleFunction (copy), UseIsCurrentSquadPartyVoiceEligibleFunction (copy), SquadExternalContractContext (copy), UseCurrentSquadParentChannelIdFunction (copy), FFlagSquadsPresenceStoreMigration (copy), UseGetPresenceByUserId (copy), UseSelectorFunction (copy), PresenceType1 (copy), PresenceType (copy), ConstantsModule (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local IsTextMatch = tostring(UseLocalUserIdResult) == tostring(p1)
@@ -30,7 +30,7 @@ return function(p1, p2) --[[ Line: 32 | Named "useSquadUserDropdownMenuButtons" 
 	if GetFFlagEnableCrossExpVoiceFunction() then
 		local Number = if p1 then tonumber(p1) else nil
 		UseBackgroundExperienceResult = UseBackgroundExperienceFunction()
-		UseMemoResult = React.useMemo(function() --[[ Line: 45 ]]
+		UseMemoResult = React.useMemo(function()
 			-- upvalues: UseBackgroundExperienceResult (ref)
 			return if UseBackgroundExperienceResult then UseBackgroundExperienceResult.voiceChannelId else nil
 		end, { UseBackgroundExperienceResult })
@@ -44,13 +44,13 @@ return function(p1, p2) --[[ Line: 32 | Named "useSquadUserDropdownMenuButtons" 
 		end
 	end
 	local UseGetConversationFromIdResult = React.useContext(SquadExternalContractContext).useGetConversationFromId(UseCurrentSquadParentChannelIdFunction() or "")
-	local UseResult = React.useCallback(function(p3) --[[ Line: 68 ]]
+	local UseResult = React.useCallback(function(p3)
 		-- upvalues: p1 (copy)
 		return p3.Squad.Presence.byUserId[tostring(p1)]
 	end, { p1 })
 	local UseGetPresenceByUserIdResult = if FFlagSquadsPresenceStoreMigration then UseGetPresenceByUserId((tostring(p1))) else UseSelectorFunction(UseResult)
 	
-	return React.useMemo(function() --[[ Line: 76 ]]
+	return React.useMemo(function()
 		-- upvalues: VoiceIneligibleButton (ref), UseGetPresenceByUserIdResult (copy), FFlagSquadsPresenceStoreMigration (upval), PresenceType1 (upval), PresenceType (upval), UseGetConversationFromIdResult (copy), ConstantsModule (upval), UseLocalUserIdResult (copy), p2 (copy), UseMemoResult (ref), IsTextMatch (copy), MuteVoiceButton (ref)
 		local List = {}
 		

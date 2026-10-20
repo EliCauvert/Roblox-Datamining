@@ -7,9 +7,9 @@ local NowModule = require(TimeToInteractiveTracker.Utils.now)
 local GetMemoryMbModule = require(TimeToInteractiveTracker.Utils.getMemoryMb)
 local FFlagTTITrackerMemoryTrackingModule = require(TimeToInteractiveTracker.Utils.FFlagTTITrackerMemoryTracking)
 
-return function(Callback, Callback1) --[[ Line: 22 ]]
+return function(Callback, Callback1)
 	-- upvalues: NowModule (copy), FFlagTimeToInteractiveTrackerWarningsRequireDebugModule (copy), FFlagDebugTimeToInteractiveTrackerModule (copy), NewResult (copy), FFlagTTITrackerMemoryTrackingModule (copy), GetMemoryMbModule (copy)
-	return function(p1, Name, p2) --[[ Line: 23 ]]
+	return function(p1, Name, p2)
 		-- upvalues: NowModule (upval), Callback (copy), FFlagTimeToInteractiveTrackerWarningsRequireDebugModule (upval), FFlagDebugTimeToInteractiveTrackerModule (upval), NewResult (upval), FFlagTTITrackerMemoryTrackingModule (upval), GetMemoryMbModule (upval), Callback1 (copy)
 		local NowModuleResult = NowModule()
 		local CallbackResultEntry = Callback(false)[p1]
@@ -24,7 +24,7 @@ return function(Callback, Callback1) --[[ Line: 22 ]]
 				totalMemoryMB = if MemoryMbModule then MemoryMbModule.totalMemoryMB else nil,
 				luaHeapMB = if MemoryMbModule then MemoryMbModule.luaHeapMB else nil
 			}
-			Callback1(function(Tbl) --[[ Line: 52 ]]
+			Callback1(function(Tbl)
 				-- upvalues: p1 (copy), config (copy)
 				local Entry = Tbl[p1]
 				

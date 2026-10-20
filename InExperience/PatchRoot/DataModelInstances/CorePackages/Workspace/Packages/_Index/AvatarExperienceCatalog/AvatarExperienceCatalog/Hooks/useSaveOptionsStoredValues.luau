@@ -3,7 +3,7 @@ local SafeAppStorageService = require(script:FindFirstAncestor("AvatarExperience
 local AXCatalogSaveOptionsUseMemStorage = game:DefineFastFlag("AXCatalogSaveOptionsUseMemStorage", false)
 local AXSetSaveAsAvatarDefault = game:DefineFastFlag("AXSetSaveAsAvatarDefault", false)
 
-local function getStorage() --[[ Line: 19 ]]
+local function getStorage()
 	-- upvalues: SafeAppStorageService (copy), AXCatalogSaveOptionsUseMemStorage (copy), HttpService (copy)
 	local AXCatalogCheckoutPageSaveOptionValuesItem = SafeAppStorageService.getItem("AXCatalogCheckoutPageSaveOptionValues", AXCatalogSaveOptionsUseMemStorage)
 	
@@ -11,7 +11,7 @@ local function getStorage() --[[ Line: 19 ]]
 		AXCatalogCheckoutPageSaveOptionValuesItem = "{}"
 	end
 	local t = {}
-	pcall(function() --[[ Line: 26 ]]
+	pcall(function()
 		-- upvalues: t (ref), HttpService (upval), AXCatalogCheckoutPageSaveOptionValuesItem (ref)
 		t = HttpService:JSONDecode(AXCatalogCheckoutPageSaveOptionValuesItem)
 	end)
@@ -19,45 +19,45 @@ local function getStorage() --[[ Line: 19 ]]
 	return t
 end
 
-local function _(p1) --[[ Line: 33 | Named "setStorage" ]]
+local function _(p1)
 	-- upvalues: HttpService (copy), SafeAppStorageService (copy), AXCatalogSaveOptionsUseMemStorage (copy)
-	pcall(function() --[[ Line: 34 ]]
+	pcall(function()
 		-- upvalues: HttpService (upval), p1 (copy), SafeAppStorageService (upval), AXCatalogSaveOptionsUseMemStorage (upval)
 		SafeAppStorageService.setItem("AXCatalogCheckoutPageSaveOptionValues", HttpService:JSONEncode(p1), AXCatalogSaveOptionsUseMemStorage)
 		SafeAppStorageService.flush()
 	end)
 end
 
-return function() --[[ Line: 41 | Named "useSaveOptionsStoredValues" ]]
+return function()
 	-- upvalues: getStorage (copy), AXSetSaveAsAvatarDefault (copy), HttpService (copy), SafeAppStorageService (copy), AXCatalogSaveOptionsUseMemStorage (copy)
 	return {
-		setWearAfterPurchase = function(WearAfterPurchase) --[[ Line: 59 ]]
+		setWearAfterPurchase = function(WearAfterPurchase)
 			-- upvalues: getStorage (upval), HttpService (upval), SafeAppStorageService (upval), AXCatalogSaveOptionsUseMemStorage (upval)
 			local Storage = getStorage()
 			Storage.wearAfterPurchase = WearAfterPurchase
-			pcall(function() --[[ Line: 34 ]]
+			pcall(function()
 				-- upvalues: HttpService (upval), Storage (copy), SafeAppStorageService (upval), AXCatalogSaveOptionsUseMemStorage (upval)
 				SafeAppStorageService.setItem("AXCatalogCheckoutPageSaveOptionValues", HttpService:JSONEncode(Storage), AXCatalogSaveOptionsUseMemStorage)
 				SafeAppStorageService.flush()
 			end)
 		end,
-		getWearAfterPurchase = function() --[[ Line: 42 ]]
+		getWearAfterPurchase = function()
 			-- upvalues: getStorage (upval)
 			local Storage = getStorage()
 			
 			return Storage.wearAfterPurchase == nil or Storage.wearAfterPurchase
 		end,
-		setAddToAvatars = function(AddToAvatars) --[[ Line: 65 ]]
+		setAddToAvatars = function(AddToAvatars)
 			-- upvalues: getStorage (upval), HttpService (upval), SafeAppStorageService (upval), AXCatalogSaveOptionsUseMemStorage (upval)
 			local Storage = getStorage()
 			Storage.addToAvatars = AddToAvatars
-			pcall(function() --[[ Line: 34 ]]
+			pcall(function()
 				-- upvalues: HttpService (upval), Storage (copy), SafeAppStorageService (upval), AXCatalogSaveOptionsUseMemStorage (upval)
 				SafeAppStorageService.setItem("AXCatalogCheckoutPageSaveOptionValues", HttpService:JSONEncode(Storage), AXCatalogSaveOptionsUseMemStorage)
 				SafeAppStorageService.flush()
 			end)
 		end,
-		getAddToAvatars = function() --[[ Line: 51 ]]
+		getAddToAvatars = function()
 			-- upvalues: getStorage (upval), AXSetSaveAsAvatarDefault (upval)
 			local Storage = getStorage()
 			

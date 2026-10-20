@@ -16,15 +16,15 @@ local config = {
 	readiness = ViewRecyclerModule.RecyclableViewReadiness.ReadyOnCommit
 }
 
-local function selectCanvasSize(ItemSignalResult): UDim2 --[[ Line: 26 ]]
+local function selectCanvasSize(ItemSignalResult): UDim2
 	return UDim2.new(1, 0, 0, ItemSignalResult.height)
 end
 
-local function _(p1) --[[ Line: 30 | Named "selectCanvasBackgroundStyle" ]]
+local function _(p1)
 	return p1.backgroundStyle
 end
 
-local RecyclableView = ViewRecyclerModule.createRecyclableView(function(p1) --[[ Line: 58 | Named "StatefulConversationItemView" ]]
+local RecyclableView = ViewRecyclerModule.createRecyclableView(function(p1)
 	-- upvalues: SignalsReactModule (copy), ReactModule (copy), ConversationRowModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(UseSignalStateResult.presentationSignal)
@@ -43,26 +43,26 @@ local RecyclableView = ViewRecyclerModule.createRecyclableView(function(p1) --[[
 		debugCellValue = if UseSignalStateResult1.isDebugEnabled then UseSignalStateResult.id else nil
 	})
 end, config)
-local RecyclableView1 = ViewRecyclerModule.createRecyclableView(function(p1) --[[ Line: 77 | Named "BindingConversationItemView" ]]
+local RecyclableView1 = ViewRecyclerModule.createRecyclableView(function(p1)
 	-- upvalues: ReactModule (copy), ConversationRowBindingHostModule (copy)
 	return ReactModule.createElement(ConversationRowBindingHostModule, { itemSignal = p1.itemSignal })
 end)
 local Frozen = table.freeze({
-	[ConversationListItemKindModule.CanvasTopPadding] = ViewRecyclerModule.createRecyclableView(function(p1) --[[ Line: 34 | Named "CanvasTopPaddingItemView" ]]
+	[ConversationListItemKindModule.CanvasTopPadding] = ViewRecyclerModule.createRecyclableView(function(p1)
 		-- upvalues: SignalsReactModule (copy), selectCanvasSize (copy), ReactModule (copy), View (copy)
 		return ReactModule.createElement(View, {
 			BorderSizePixel = 0,
-			Size = SignalsReactModule.useSignalBinding(function(p2) --[[ Line: 35 ]]
+			Size = SignalsReactModule.useSignalBinding(function(p2)
 				-- upvalues: selectCanvasSize (upval), p1 (copy)
 				return selectCanvasSize(p1.itemSignal(p2))
 			end),
-			backgroundStyle = SignalsReactModule.useSignalBinding(function(p2) --[[ Line: 38 ]]
+			backgroundStyle = SignalsReactModule.useSignalBinding(function(p2)
 				-- upvalues: p1 (copy)
 				return p1.itemSignal(p2).backgroundStyle
 			end)
 		})
 	end),
-	[ConversationListItemKindModule.ChatLandingModal] = ViewRecyclerModule.createRecyclableView(function(_) --[[ Line: 48 | Named "ChatLandingModalItemView" ]]
+	[ConversationListItemKindModule.ChatLandingModal] = ViewRecyclerModule.createRecyclableView(function(_)
 		-- upvalues: ReactModule (copy), ChatLandingModalContainerModule (copy)
 		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -73,19 +73,19 @@ local Frozen = table.freeze({
 		})
 	end),
 	[ConversationListItemKindModule.Conversation] = if require(AppChat.Flags.FFlagAppChatUseBindingViewRecyclerConversationRow) then RecyclableView1 else RecyclableView,
-	[ConversationListItemKindModule.GroupLink] = ViewRecyclerModule.createRecyclableView(function(p1) --[[ Line: 83 | Named "GroupLinkItemView" ]]
+	[ConversationListItemKindModule.GroupLink] = ViewRecyclerModule.createRecyclableView(function(p1)
 		-- upvalues: SignalsReactModule (copy), ReactModule (copy), ConversationGroupsEntryContainerModule (copy)
 		return ReactModule.createElement(ConversationGroupsEntryContainerModule, {
 			entryHeight = SignalsReactModule.useSignalState(p1.itemSignal).entryHeight
 		})
 	end, config),
-	[ConversationListItemKindModule.QuickStartLink] = ViewRecyclerModule.createRecyclableView(function(p1) --[[ Line: 90 | Named "QuickStartItemView" ]]
+	[ConversationListItemKindModule.QuickStartLink] = ViewRecyclerModule.createRecyclableView(function(p1)
 		-- upvalues: SignalsReactModule (copy), ReactModule (copy), PartyQuickStartContainerModule (copy)
 		return ReactModule.createElement(PartyQuickStartContainerModule, {
 			entryHeight = SignalsReactModule.useSignalState(p1.itemSignal).entryHeight
 		})
 	end, config),
-	[ConversationListItemKindModule.SocialCarousel] = ViewRecyclerModule.createRecyclableView(function(p1) --[[ Line: 97 | Named "SocialCarouselItemView" ]]
+	[ConversationListItemKindModule.SocialCarousel] = ViewRecyclerModule.createRecyclableView(function(p1)
 		-- upvalues: SignalsReactModule (copy), ReactModule (copy), SocialCarouselModule (copy), Constants (copy)
 		local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
 		
@@ -100,7 +100,7 @@ local Frozen = table.freeze({
 })
 
 return table.freeze({
-	canvasTopPadding = function(Height, BackgroundStyle) --[[ Line: 141 ]]
+	canvasTopPadding = function(Height, BackgroundStyle)
 		-- upvalues: ConversationListItemKindModule (copy)
 		return {
 			id = "CanvasTopPadding",
@@ -109,14 +109,14 @@ return table.freeze({
 			backgroundStyle = BackgroundStyle
 		}
 	end,
-	chatLandingModal = function() --[[ Line: 150 ]]
+	chatLandingModal = function()
 		-- upvalues: ConversationListItemKindModule (copy)
 		return {
 			id = "UnfilteredThreadsFtux",
 			kind = ConversationListItemKindModule.ChatLandingModal
 		}
 	end,
-	conversation = function(p1, PresentationSignal) --[[ Line: 157 ]]
+	conversation = function(p1, PresentationSignal)
 		-- upvalues: ConversationListItemKindModule (copy)
 		return {
 			id = tostring(p1),
@@ -124,17 +124,17 @@ return table.freeze({
 			presentationSignal = PresentationSignal
 		}
 	end,
-	getItemKey = function(p1) --[[ Line: 137 ]]
+	getItemKey = function(p1)
 		return p1.id
 	end,
-	getItemType = function(p1) --[[ Line: 131 ]]
+	getItemType = function(p1)
 		-- upvalues: Frozen (copy)
 		local FrozenEntry = Frozen[p1.kind]
 		assert(FrozenEntry ~= nil, `ConversationListViewRecycler: unknown item kind "{tostring(p11.kind)}"`)
 		
 		return FrozenEntry
 	end,
-	groupLink = function(EntryHeight) --[[ Line: 165 ]]
+	groupLink = function(EntryHeight)
 		-- upvalues: ConversationListItemKindModule (copy)
 		return {
 			id = "ConversationGroupsEntryContainer",
@@ -142,7 +142,7 @@ return table.freeze({
 			entryHeight = EntryHeight
 		}
 	end,
-	quickStart = function(EntryHeight) --[[ Line: 173 ]]
+	quickStart = function(EntryHeight)
 		-- upvalues: ConversationListItemKindModule (copy)
 		return {
 			id = "PartyQuickStartContainer",
@@ -150,7 +150,7 @@ return table.freeze({
 			entryHeight = EntryHeight
 		}
 	end,
-	socialCarousel = function(CustomTileList, IsInExperience, UnifiedLogging) --[[ Line: 181 ]]
+	socialCarousel = function(CustomTileList, IsInExperience, UnifiedLogging)
 		-- upvalues: ConversationListItemKindModule (copy)
 		return {
 			id = "SocialCarousel",

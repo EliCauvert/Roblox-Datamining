@@ -4,9 +4,9 @@ local MessageModelModule = require(AppChat.Models.MessageModel)
 local ReportAnalyticsForNewMessagesModule = require(AppChat.Utils.reportAnalyticsForNewMessages)
 local NewResult = require(AppChat.Logger):new(script.Name)
 
-return function(p1, p2, p3) --[[ Line: 9 ]]
+return function(p1, p2, p3)
 	-- upvalues: MessageModelModule (copy), ReportAnalyticsForNewMessagesModule (copy), NewResult (copy), ReceivedMessagesModule (copy)
-	return function(p4) --[[ Line: 10 ]]
+	return function(p4)
 		-- upvalues: MessageModelModule (upval), p2 (copy), p1 (copy), p3 (copy), ReportAnalyticsForNewMessagesModule (upval), NewResult (upval), ReceivedMessagesModule (upval)
 		local FromSentChannelsApiResult = MessageModelModule.fromSentChannelsApi(p2, p1, p3)
 		

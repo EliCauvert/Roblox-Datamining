@@ -16,7 +16,7 @@ local Text = FoundationModule.Text
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FFlagLuaAppIedpFixPlayButton = require(Parent.SharedFlags).FFlagLuaAppIedpFixPlayButton
 
-return function(p1) --[[ Line: 29 | Named "InExperienceDetailsPromptActions" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), LaunchErrorLocalizationKeys (copy), UseLocalizationFunction (copy), ReactModule (copy), Sheet (copy), View (copy), FFlagLuaAppIedpFixPlayButton (copy), InExperienceDetailsPromptPlayButtonModule (copy), Text (copy), DataHydrationModule (copy), Button (copy), IconName (copy), ButtonVariant (copy), Skeleton (copy), Radius (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({

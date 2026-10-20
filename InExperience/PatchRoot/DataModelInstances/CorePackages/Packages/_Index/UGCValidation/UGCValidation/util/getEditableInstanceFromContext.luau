@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.Parent.util.Types)
 
-return function(p1, p2, p3, p4) --[[ Line: 5 ]]
+return function(p1, p2, p3, p4)
 	if not p3 then
 		if not p4.isServer then
 			return false

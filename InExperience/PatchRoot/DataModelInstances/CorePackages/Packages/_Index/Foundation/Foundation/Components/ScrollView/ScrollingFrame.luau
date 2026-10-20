@@ -13,21 +13,21 @@ local ControlStateModule = require(Foundation.Enums.ControlState)
 local config = { frequency = 2 }
 local config1 = { scrollBarVisibility = "Auto" }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 52 | Named "ScrollingFrame" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config1 (copy), WithGuiObjectPropsModule (copy), UseTokensModule (copy), UseStyleTagsModule (copy), ReactModule (copy), VisibilityModule (copy), UseCursorModule (copy), ReactOtterModule (copy), config (copy), ControlStateModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config1)
 	local WithGuiObjectPropsModuleResult = WithGuiObjectPropsModule({ selection = WithDefaultsModuleResult.selection }, {})
 	local UseTokensModuleResult = UseTokensModule()
 	local UseStyleTagsModuleResult = UseStyleTagsModule(p1.tag)
 	local Shift400 = UseTokensModuleResult.Color.Shift.Shift_400
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 58 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy), VisibilityModule (upval), UseTokensModuleResult (copy)
 		return if WithDefaultsModuleResult.scrollBarVisibility == VisibilityModule.None then 0 else UseTokensModuleResult.Size.Size_150
 	end, { WithDefaultsModuleResult.scrollBarVisibility })
 	local UseCursorModuleResult = UseCursorModule()
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1)
-	local UseResult = ReactModule.useCallback(function(p2, Delay) --[[ Line: 69 ]]
+	local UseResult = ReactModule.useCallback(function(p2, Delay)
 		-- upvalues: UseRefResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), Shift400 (copy), config (upval)
 		if UseRefResult.current then
 			task.cancel(UseRefResult.current)
@@ -36,13 +36,13 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 52 |
 			UseAnimatedBindingResult2(ReactOtterModule.spring(Shift400.Transparency, config))
 		end
 		if Delay ~= nil then
-			UseRefResult.current = task.delay(Delay, function() --[[ Line: 79 ]]
+			UseRefResult.current = task.delay(Delay, function()
 				-- upvalues: UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval)
 				UseAnimatedBindingResult2(ReactOtterModule.spring(1, config))
 			end)
 		end
 	end, { Shift400 })
-	ReactModule.useEffect(function() --[[ Line: 85 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: WithDefaultsModuleResult (copy), UseResult (copy), ControlStateModule (upval)
 		if WithDefaultsModuleResult.scrollBarVisibility == "None" then
 			UseResult(false, 0)
@@ -83,7 +83,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 52 |
 		NextSelectionRight = WithGuiObjectPropsModuleResult.NextSelectionRight,
 		SelectionImageObject = WithGuiObjectPropsModuleResult.SelectionImageObject or UseCursorModuleResult,
 		SelectionOrder = WithGuiObjectPropsModuleResult.SelectionOrder,
-		[ReactModule.Change.CanvasPosition] = if WithDefaultsModuleResult.scrollBarVisibility == "Auto" then function(p2) --[[ Line: 132 ]]
+		[ReactModule.Change.CanvasPosition] = if WithDefaultsModuleResult.scrollBarVisibility == "Auto" then function(p2)
 			-- upvalues: UseResult (copy), WithDefaultsModuleResult (copy)
 			UseResult(true, 3)
 			

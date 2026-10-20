@@ -9,7 +9,7 @@ local GetMeshSizeModule = require(Util.getMeshSize)
 local GetEditableMeshFromContextModule = require(Util.getEditableMeshFromContext)
 local FailureReasonsAccumulatorModule = require(Util.FailureReasonsAccumulator)
 
-local function reportFailure(Formatted, ValidateMeshSizePropertyFailedToLoadMesh, p1, p2) --[[ Line: 21 ]]
+local function reportFailure(Formatted, ValidateMeshSizePropertyFailedToLoadMesh, p1, p2)
 	-- upvalues: AnalyticsModule (copy)
 	if p2 and p1.isServer ~= nil and p1.isServer then
 		error(Formatted)
@@ -19,12 +19,12 @@ local function reportFailure(Formatted, ValidateMeshSizePropertyFailedToLoadMesh
 	return false, { Formatted }
 end
 
-local function _(Vector, Vector1) --[[ Line: 40 | Named "vector3Equals" ]]
+local function _(Vector, Vector1)
 	-- upvalues: FloatEqualsModule (copy)
 	return FloatEqualsModule(Vector.X, Vector1.X, 0.00001) and (FloatEqualsModule(Vector.Y, Vector1.Y, 0.00001) and FloatEqualsModule(Vector.Z, Vector1.Z, 0.00001))
 end
 
-local function calculateMeshSize(Object, p1) --[[ Line: 45 ]]
+local function calculateMeshSize(Object, p1)
 	-- upvalues: GetEditableMeshFromContextModule (copy), reportFailure (copy), AnalyticsModule (copy), PcallDeferredModule (copy), GetMeshSizeModule (copy)
 	local config = {
 		fieldName = "MeshId",
@@ -38,7 +38,7 @@ local function calculateMeshSize(Object, p1) --[[ Line: 45 ]]
 		return reportFailure(string.format("Mesh for '%s' failed to load. Make sure the mesh exists and try again.", Object.Name), AnalyticsModule.ErrorType.validateMeshSizeProperty_FailedToLoadMesh, p1, false)
 	end
 	config.editableMesh = MeshId2
-	local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function() --[[ Line: 68 ]]
+	local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function()
 		-- upvalues: GetMeshSizeModule (upval), config (copy)
 		return GetMeshSizeModule(config)
 	end, p1)
@@ -50,7 +50,7 @@ local function calculateMeshSize(Object, p1) --[[ Line: 45 ]]
 	end
 end
 
-local function validateInternal(Child, p1) --[[ Line: 83 ]]
+local function validateInternal(Child, p1)
 	-- upvalues: calculateMeshSize (copy), FloatEqualsModule (copy), reportFailure (copy), AnalyticsModule (copy)
 	local CurrentTime = tick()
 	local MeshSize, MeshSize2, MeshSize3 = calculateMeshSize(Child, p1)
@@ -70,11 +70,11 @@ local function validateInternal(Child, p1) --[[ Line: 83 ]]
 end
 
 return {
-	validateSingleMeshPart = function(p1, p2) --[[ Line: 107 ]]
+	validateSingleMeshPart = function(p1, p2)
 		-- upvalues: validateInternal (copy)
 		return if p2.allowEditableInstances then true else validateInternal(p1, p2)
 	end,
-	validateBodyAsset = function(Object, p1) --[[ Line: 117 ]]
+	validateBodyAsset = function(Object, p1)
 		-- upvalues: validateInternal (copy), AnalyticsModule (copy), FailureReasonsAccumulatorModule (copy), ConstantsModule (copy)
 		local CurrentTime = tick()
 		

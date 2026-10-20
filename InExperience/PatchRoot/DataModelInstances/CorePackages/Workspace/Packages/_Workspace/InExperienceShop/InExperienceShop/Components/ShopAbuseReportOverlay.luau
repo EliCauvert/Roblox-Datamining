@@ -12,15 +12,15 @@ local FocusRoot = FocusNavigationUtilsModule.FocusRoot
 local DynamicReportContainerModule = require(Parent.GenericAbuseReporting.DynamicReportContainer)
 local _ = require(Parent.GenericAbuseReporting.AbuseVector)
 local config = {
-	isFocused = function(): boolean --[[ Line: 30 ]]
+	isFocused = function(): boolean
 		return true
 	end,
-	addListener = function(_, _) --[[ Line: 33 ]]
-		return { remove = function() --[[ Line: 35 ]] end }
+	addListener = function(_, _)
+		return { remove = function() end }
 	end
 }
 
-return function(p1) --[[ Line: 40 | Named "ShopAbuseReportOverlay" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), CoreScriptsRootProvider (copy), RoactNavigationModule (copy), config (copy), RoactServices (copy), RoactNetworking (copy), RequestInternalWrapperFunction (copy), HttpService (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), DynamicReportContainerModule (copy)
 	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

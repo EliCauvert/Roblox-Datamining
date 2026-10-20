@@ -1,7 +1,7 @@
 ﻿local HttpService = game:GetService("HttpService")
 local UrlBuilder = require(script:FindFirstAncestor("AuthSignup").Parent.UrlBuilder).UrlBuilder
 
-return function(Callback, Username, Birthday) --[[ Line: 12 ]]
+return function(Callback, Username, Birthday)
 	-- upvalues: UrlBuilder (copy), HttpService (copy)
 	assert(type(Username) == "string", "invalid username")
 	assert(type(Birthday) == "string", "invalid birthday")

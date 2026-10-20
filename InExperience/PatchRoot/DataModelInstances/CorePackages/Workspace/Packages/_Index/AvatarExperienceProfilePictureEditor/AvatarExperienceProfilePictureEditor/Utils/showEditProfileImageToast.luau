@@ -14,11 +14,11 @@ local config1 = {
 }
 
 return {
-	showSaveSuccessToast = function(Callback: (any) -> ()) --[[ Line: 22 ]]
+	showSaveSuccessToast = function(Callback: (any) -> ())
 		-- upvalues: SetCurrentToastMessageFunction (copy), config (copy)
 		Callback(SetCurrentToastMessageFunction(config))
 	end,
-	showSaveFailureToast = function(Callback: (any) -> ()) --[[ Line: 26 ]]
+	showSaveFailureToast = function(Callback: (any) -> ())
 		-- upvalues: SetCurrentToastMessageFunction (copy), config1 (copy)
 		Callback(SetCurrentToastMessageFunction(config1))
 	end

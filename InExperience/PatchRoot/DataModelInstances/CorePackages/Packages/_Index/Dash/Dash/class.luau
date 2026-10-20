@@ -1,21 +1,21 @@
 ﻿local Parent = script.Parent
 local _ = require(Parent.Types)
 
-local function _(p1) --[[ Line: 4 | Named "throwNotImplemented" ]]
+local function _(p1)
 	-- upvalues: Parent (copy)
 	require(Parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw(p1)
 end
 
-local function v3() --[[ Line: 13 ]]
+local function v3()
 	return {}
 end
 
-local function class(ClassName, p1) --[[ Line: 49 ]]
+local function class(ClassName, p1)
 	-- upvalues: v3 (copy), class (copy), Parent (copy)
 	local Callback = p1 or v3
 	local Class = { name = ClassName }
 	
-	function Class.new(...) --[[ Line: 65 ]]
+	function Class.new(...)
 		-- upvalues: Callback (copy), Class (copy)
 		local CallbackResult = Callback(...)
 		setmetatable(CallbackResult, {
@@ -36,11 +36,11 @@ local function class(ClassName, p1) --[[ Line: 49 ]]
 		return CallbackResult
 	end
 	
-	function Class:_init() --[[ Line: 114 ]] end
+	function Class:_init() end
 	
-	function Class.isInstance(p2) --[[ Line: 133 ]]
+	function Class.isInstance(p2)
 		-- upvalues: Class (copy)
-		local Success, Result = pcall(function(): boolean --[[ Line: 134 ]]
+		local Success, Result = pcall(function(): boolean
 			-- upvalues: p2 (copy), Class (upval)
 			local Meta = getmetatable(p2)
 			while Meta do
@@ -55,7 +55,7 @@ local function class(ClassName, p1) --[[ Line: 49 ]]
 		return Success and Result
 	end
 	
-	function Class.extend(p3, ClassName, p4) --[[ Line: 184 ]]
+	function Class.extend(p3, ClassName, p4)
 		-- upvalues: class (upval), Class (copy)
 		local ClassResult = class(ClassName, p4 or Class.new)
 		setmetatable(ClassResult, { __index = p3 })
@@ -63,45 +63,45 @@ local function class(ClassName, p1) --[[ Line: 49 ]]
 		return ClassResult
 	end
 	
-	function Class.toString(p3) --[[ Line: 222 ]]
+	function Class.toString(p3)
 		return p3.name
 	end
 	
-	function Class.equals(p3, p4) --[[ Line: 230 ]]
+	function Class.equals(p3, p4)
 		return (rawequal(p3, p4))
 	end
 	
-	function Class:__lt(_) --[[ Line: 238 ]]
+	function Class:__lt(_)
 		-- upvalues: ClassName (copy), Parent (upval)
 		require(Parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw({ methodName = "__lt", className = ClassName })
 	end
 	
-	function Class:__le(_) --[[ Line: 250 ]]
+	function Class:__le(_)
 		-- upvalues: ClassName (copy), Parent (upval)
 		require(Parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw({ methodName = "__le", className = ClassName })
 	end
 	
-	function Class:__add() --[[ Line: 257 ]]
+	function Class:__add()
 		-- upvalues: ClassName (copy), Parent (upval)
 		require(Parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw({ methodName = "__add", className = ClassName })
 	end
 	
-	function Class:__sub() --[[ Line: 263 ]]
+	function Class:__sub()
 		-- upvalues: ClassName (copy), Parent (upval)
 		require(Parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw({ methodName = "__sub", className = ClassName })
 	end
 	
-	function Class:__mul() --[[ Line: 269 ]]
+	function Class:__mul()
 		-- upvalues: ClassName (copy), Parent (upval)
 		require(Parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw({ methodName = "__mul", className = ClassName })
 	end
 	
-	function Class:__div() --[[ Line: 275 ]]
+	function Class:__div()
 		-- upvalues: ClassName (copy), Parent (upval)
 		require(Parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw({ methodName = "__div", className = ClassName })
 	end
 	
-	function Class:__mod() --[[ Line: 281 ]]
+	function Class:__mod()
 		-- upvalues: ClassName (copy), Parent (upval)
 		require(Parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw({ methodName = "__mod", className = ClassName })
 	end

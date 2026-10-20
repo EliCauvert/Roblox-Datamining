@@ -5,10 +5,10 @@ local IsCompositeTypeFunction = require(Parent.type.definition).isCompositeType
 local TypeFromASTFunction = require(Parent.utilities.typeFromAST).typeFromAST
 
 return {
-	FragmentsOnCompositeTypesRule = function(p1) --[[ Line: 24 ]]
+	FragmentsOnCompositeTypesRule = function(p1)
 		-- upvalues: TypeFromASTFunction (copy), IsCompositeTypeFunction (copy), PrintFunction (copy), GraphQLError (copy)
 		return {
-			InlineFragment = function(_, p2) --[[ Line: 26 ]]
+			InlineFragment = function(_, p2)
 				-- upvalues: TypeFromASTFunction (upval), p1 (copy), IsCompositeTypeFunction (upval), PrintFunction (upval), GraphQLError (upval)
 				local TypeCondition = p2.typeCondition
 				
@@ -20,7 +20,7 @@ return {
 					end
 				end
 			end,
-			FragmentDefinition = function(_, p2) --[[ Line: 43 ]]
+			FragmentDefinition = function(_, p2)
 				-- upvalues: TypeFromASTFunction (upval), p1 (copy), IsCompositeTypeFunction (upval), PrintFunction (upval), GraphQLError (upval)
 				local TypeFromASTResult = TypeFromASTFunction(p1:getSchema(), p2.typeCondition)
 				

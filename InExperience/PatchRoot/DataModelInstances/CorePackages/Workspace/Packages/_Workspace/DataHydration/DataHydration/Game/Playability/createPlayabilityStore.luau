@@ -11,12 +11,12 @@ local LogResponseErrorFunction = DiscoveryUtilsModule.logResponseError
 local DiscoveryEventErrorLogger = DiscoveryUtilsModule.DiscoveryEventErrorLogger
 local FIntLuaAppThrottleRefreshPlayabilityIntervalSeconds = require(Parent.SharedFlags).GetFIntLuaAppThrottleRefreshPlayabilityIntervalSeconds()
 
-return function() --[[ Line: 23 | Named "createPlayabilityStore" ]]
+return function()
 	-- upvalues: CreateDataCacheModule (copy), FIntLuaAppThrottleRefreshPlayabilityIntervalSeconds (copy), CreateDataResolverModule (copy), LogResponseErrorFunction (copy), DiscoveryEventErrorLogger (copy), DashModule (copy), FetchPlayabilityModule (copy), PlayabilityStoreTypesModule (copy)
 	local DataCacheModule = CreateDataCacheModule(FIntLuaAppThrottleRefreshPlayabilityIntervalSeconds)
 	local DataResolverModule = CreateDataResolverModule({
 		cache = DataCacheModule,
-		logError = function(p1) --[[ Line: 28 ]]
+		logError = function(p1)
 			-- upvalues: LogResponseErrorFunction (upval), DiscoveryEventErrorLogger (upval)
 			if type(p1) == "table" then
 				if p1.responseCode then
@@ -31,11 +31,11 @@ return function() --[[ Line: 23 | Named "createPlayabilityStore" ]]
 				DiscoveryEventErrorLogger.reportError("FetchPlayabilityError", (tostring(p1)))
 			end
 		end,
-		fetchFn = function(p1) --[[ Line: 48 ]]
+		fetchFn = function(p1)
 			-- upvalues: DashModule (upval), FetchPlayabilityModule (upval), PlayabilityStoreTypesModule (upval)
 			local KeysResult = DashModule.keys(p1)
 			
-			return FetchPlayabilityModule(KeysResult):andThen(function(Result) --[[ Line: 53 ]]
+			return FetchPlayabilityModule(KeysResult):andThen(function(Result)
 				-- upvalues: KeysResult (copy), PlayabilityStoreTypesModule (upval)
 				if not Result or not Result.responseBody then
 					error({
@@ -64,7 +64,7 @@ return function() --[[ Line: 23 | Named "createPlayabilityStore" ]]
 					}
 				end
 				return t
-			end):catch(function(Err) --[[ Line: 85 ]]
+			end):catch(function(Err)
 				error(Err)
 			end)
 		end

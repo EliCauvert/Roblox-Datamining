@@ -3,7 +3,7 @@ local CryoModule = require(CorePackages.Packages.Cryo)
 local Actions = script.Parent.Parent.Actions
 
 return (require(CorePackages.Packages.Rodux).createReducer({}, {
-	[require(Actions.AddPlayer).name] = function(p1, p2) --[[ Line: 16 ]]
+	[require(Actions.AddPlayer).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, {
 			[p2.userId] = {
@@ -14,11 +14,11 @@ return (require(CorePackages.Packages.Rodux).createReducer({}, {
 			}
 		})
 	end,
-	[require(Actions.RemovePlayer).name] = function(p1, p2) --[[ Line: 27 ]]
+	[require(Actions.RemovePlayer).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, { [p2.userId] = CryoModule.None })
 	end,
-	[require(Actions.SetPlayerIsBlocked).name] = function(p1, p2) --[[ Line: 33 ]]
+	[require(Actions.SetPlayerIsBlocked).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, {
 			[p2.userId] = {
@@ -29,7 +29,7 @@ return (require(CorePackages.Packages.Rodux).createReducer({}, {
 			}
 		})
 	end,
-	[require(Actions.SetPlayerFollowRelationship).name] = function(p1, p2) --[[ Line: 44 ]]
+	[require(Actions.SetPlayerFollowRelationship).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, {
 			[p2.userId] = {
@@ -40,7 +40,7 @@ return (require(CorePackages.Packages.Rodux).createReducer({}, {
 			}
 		})
 	end,
-	[require(Actions.SetPlayerIsFollowing).name] = function(p1, p2) --[[ Line: 55 ]]
+	[require(Actions.SetPlayerIsFollowing).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, {
 			[p2.userId] = {
@@ -51,7 +51,7 @@ return (require(CorePackages.Packages.Rodux).createReducer({}, {
 			}
 		})
 	end,
-	[require(Actions.SetPlayerFriendStatus).name] = function(p1, p2) --[[ Line: 66 ]]
+	[require(Actions.SetPlayerFriendStatus).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, {
 			[p2.userId] = {

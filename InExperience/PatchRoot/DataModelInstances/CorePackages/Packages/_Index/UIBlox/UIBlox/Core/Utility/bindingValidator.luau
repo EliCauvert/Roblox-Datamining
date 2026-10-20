@@ -1,5 +1,5 @@
-﻿return function(Callback) --[[ Line: 4 | Named "bindingValidator" ]]
-	return function(p1): boolean --[[ Line: 5 ]]
+﻿return function(Callback)
+	return function(p1): boolean
 		-- upvalues: Callback (copy)
 		local Match: string? = string.match(tostring(p1), "RoactBinding")
 		
@@ -8,7 +8,7 @@
 			
 			return false
 		end
-		local Success, Result = pcall(function() --[[ Line: 13 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p1 (copy)
 			return p1:getValue()
 		end)

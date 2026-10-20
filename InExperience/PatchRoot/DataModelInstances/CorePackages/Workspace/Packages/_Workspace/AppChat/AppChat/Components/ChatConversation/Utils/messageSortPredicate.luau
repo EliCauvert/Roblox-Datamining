@@ -1,8 +1,8 @@
-﻿local function _(p1): boolean --[[ Line: 3 ]]
+﻿local function _(p1): boolean
 	return p1.order ~= nil and (not p1.moderated and not p1.failed)
 end
 
-return function(p1, p2): boolean --[[ Line: 7 ]]
+return function(p1, p2): boolean
 	if p1.order and p2.order then
 		return p1.order < p2.order
 	elseif p1.order ~= nil and (not p1.moderated and not p1.failed) or p2.order ~= nil and (not p2.moderated and not p2.failed) then

@@ -5,7 +5,7 @@ local TutilsModule = require(Parent.tutils)
 local ItemTypeEnum = require(AvatarExperienceInspectAndBuy.Parent.AvatarExperienceModel).Enums.ItemTypeEnum
 local FFlagAXMarketplaceLicensingItemCards = require(Parent.AvatarExperienceFlags).FFlagAXMarketplaceLicensingItemCards
 
-return function(p1, p2) --[[ Line: 22 ]]
+return function(p1, p2)
 	-- upvalues: TutilsModule (copy), ItemTypeEnum (copy), FFlagAXMarketplaceLicensingItemCards (copy)
 	local FieldCountResult = if p2 then TutilsModule.fieldCount(p2) else 0
 	

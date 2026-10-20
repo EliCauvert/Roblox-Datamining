@@ -2,12 +2,12 @@
 local SignalsModule = require(WhatsNew.Parent.Signals)
 local _ = require(WhatsNew.Types)
 
-local function _(p1) --[[ Line: 39 | Named "assertValidKey" ]]
+local function _(p1)
 	assert(p1 ~= "", "scope action key must be a non-empty string")
 end
 
 return {
-	createScopeActions = function(List) --[[ Line: 43 ]]
+	createScopeActions = function(List)
 		-- upvalues: SignalsModule (copy)
 		local config = {
 			_actions = {},
@@ -22,23 +22,23 @@ return {
 			end
 		end
 		local config1 = {
-			register = function(_, p1, p2) --[[ Line: 59 ]]
+			register = function(_, p1, p2)
 				-- upvalues: config (copy)
 				assert(p1 ~= "", "scope action key must be a non-empty string")
 				assert(config._actions[p1] == nil, `scope action already registered: {p1}`)
 				config._actions[p1] = p2
 			end,
-			has = function(_, p1): boolean --[[ Line: 65 ]]
+			has = function(_, p1): boolean
 				-- upvalues: config (copy)
 				return config._actions[p1] ~= nil
 			end,
-			invoke = function(_, p1) --[[ Line: 69 ]]
+			invoke = function(_, p1)
 				-- upvalues: config (copy)
 				local Action: () -> () = config._actions[p1]
 				assert(Action ~= nil, `unknown scope action key: {p1}`)
 				Action()
 			end,
-			getRegisteredKeys = function(_) --[[ Line: 75 ]]
+			getRegisteredKeys = function(_)
 				-- upvalues: config (copy)
 				local List = {}
 				
@@ -49,11 +49,11 @@ return {
 				
 				return List
 			end,
-			toMap = function(_) --[[ Line: 84 ]]
+			toMap = function(_)
 				-- upvalues: config (copy)
 				return (table.clone(config._actions))
 			end,
-			bindOpenState = function(_, p1) --[[ Line: 89 ]]
+			bindOpenState = function(_, p1)
 				-- upvalues: config (copy)
 				assert(p1.openActionKey ~= "", "scope action key must be a non-empty string")
 				assert(p1.closeActionKey ~= "", "scope action key must be a non-empty string")
@@ -67,7 +67,7 @@ return {
 				end
 				table.insert(config._openStateBindings, p1)
 			end,
-			stopOpenStateWiring = function(_) --[[ Line: 116 ]]
+			stopOpenStateWiring = function(_)
 				-- upvalues: config (copy)
 				for _, openStateDisposer in config._openStateDisposers do
 					openStateDisposer()
@@ -76,12 +76,12 @@ return {
 			end
 		}
 		
-		function config1:startOpenStateWiring(p2) --[[ Line: 123 ]]
+		function config1:startOpenStateWiring(p2)
 			-- upvalues: config1 (copy), config (copy), SignalsModule (upval)
 			config1:stopOpenStateWiring()
 			
 			for _, openStateBinding in config._openStateBindings do
-				table.insert(config._openStateDisposers, (SignalsModule.createEffect(function(p3) --[[ Line: 128 ]]
+				table.insert(config._openStateDisposers, (SignalsModule.createEffect(function(p3)
 					-- upvalues: openStateBinding (copy), p2 (copy)
 					local IsOpen = openStateBinding.getIsOpen(p3)
 					p2.getRuntimeStateSignal(p3)
@@ -99,11 +99,11 @@ return {
 		
 		return config1
 	end,
-	collectRegistryActionKeys = function(p2) --[[ Line: 145 ]]
+	collectRegistryActionKeys = function(p2)
 		local t = {}
 		local List = {}
 		
-		local function _(Key) --[[ Line: 149 | Named "addKey" ]]
+		local function _(Key)
 			-- upvalues: t (copy), List (copy)
 			if Key ~= nil and Key ~= "" and not t[Key] then
 				t[Key] = true

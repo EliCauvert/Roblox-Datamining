@@ -6,7 +6,7 @@ local UseButtonHoldFunction = FocusNavigationUtilsModule.useButtonHold
 local ConstantsModule = require(HoldToPlay.Constants)
 local ButtonHoldStateEnum = FocusNavigationUtilsModule.ButtonHoldStateEnum
 
-return function(p1, p2) --[[ Line: 13 | Named "useHoldToPlayStateAndCallbacks" ]]
+return function(p1, p2)
 	-- upvalues: UseButtonHoldFunction (copy), ConstantsModule (copy), ReactModule (copy), ButtonHoldStateEnum (copy)
 	local UseButtonHoldResult = UseButtonHoldFunction(p1 or ConstantsModule.SIGNAL_HOLD_INTENT_SECONDS, p2 or ConstantsModule.SIGNAL_HOLD_COMPLETE_SECONDS)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
@@ -18,20 +18,20 @@ return function(p1, p2) --[[ Line: 13 | Named "useHoldToPlayStateAndCallbacks" ]
 		selectedEntry = UseStateResult3,
 		selectedIndex = UseStateResult1,
 		selectedNavigationUniverseId = UseStateResult,
-		onHoldableFocused = ReactModule.useCallback(function(p3, p4, p5) --[[ Line: 24 ]]
+		onHoldableFocused = ReactModule.useCallback(function(p3, p4, p5)
 			-- upvalues: UseStateResult2_2 (copy), UseStateResult2_1 (copy), UseStateResult2 (copy)
 			UseStateResult2_2(p3)
 			UseStateResult2_1(p4)
 			UseStateResult2(p5)
 		end, {}),
-		onHoldableUnfocused = ReactModule.useCallback(function() --[[ Line: 30 ]]
+		onHoldableUnfocused = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy)
 			UseStateResult2(nil)
 			UseStateResult2_1(nil)
 			UseStateResult2_2(nil)
 		end, {}),
 		shouldRenderHoldToPlayLauncher = UseStateResult3 ~= nil,
-		shouldDisableHoldable = ReactModule.useCallback(function(SelectedIndex): boolean --[[ Line: 38 ]]
+		shouldDisableHoldable = ReactModule.useCallback(function(SelectedIndex): boolean
 			-- upvalues: IsHoldStateMatch (copy), UseStateResult1 (copy)
 			return IsHoldStateMatch and (UseStateResult1 and SelectedIndex == UseStateResult1)
 		end, { IsHoldStateMatch, UseStateResult1 }),

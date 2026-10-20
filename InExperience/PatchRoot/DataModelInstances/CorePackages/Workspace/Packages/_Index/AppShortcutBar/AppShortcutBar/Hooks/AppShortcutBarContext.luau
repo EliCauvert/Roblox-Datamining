@@ -8,13 +8,13 @@ local AppShortcutBarStateActionEnum = {
 	ButtonHoldEnded = "ButtonHoldEnded"
 }
 local config = {
-	[AppShortcutBarStateActionEnum.ButtonHoldStarted] = function(Tbl, p1) --[[ Line: 38 ]]
+	[AppShortcutBarStateActionEnum.ButtonHoldStarted] = function(Tbl, p1)
 		local Copy = table.clone(Tbl)
 		Copy.heldProgress[p1.eventName] = p1.progress
 		
 		return Copy
 	end,
-	[AppShortcutBarStateActionEnum.ButtonHoldEnded] = function(Tbl, p1) --[[ Line: 43 ]]
+	[AppShortcutBarStateActionEnum.ButtonHoldEnded] = function(Tbl, p1)
 		local Copy = table.clone(Tbl)
 		Copy.heldProgress[p1.eventName] = nil
 		
@@ -22,7 +22,7 @@ local config = {
 	end
 }
 
-local function registryReducer(p1, p2) --[[ Line: 50 ]]
+local function registryReducer(p1, p2)
 	-- upvalues: config (copy)
 	local Entry = config[p2.type]
 	
@@ -37,7 +37,7 @@ local Context = ReactModule.createContext(nil)
 
 return {
 	Context = Context,
-	Provider = function(p1) --[[ Line: 60 ]]
+	Provider = function(p1)
 		-- upvalues: ReactModule (copy), registryReducer (copy), Context (copy)
 		local UseReducerResult, UseReducerResult2 = ReactModule.useReducer(registryReducer, { heldProgress = {} })
 		

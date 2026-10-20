@@ -4,7 +4,7 @@ local _ = require(ViewRecycler.Core.Layout.LayoutRuntime)
 local TypesModule = require(ViewRecycler.Core.Types)
 local StaticPartsModule = require(ViewRecycler.Core.Layout.staticParts)
 
-return function(p1) --[[ Line: 26 | Named "grid" ]]
+return function(p1)
 	-- upvalues: TypesModule (copy), DataSourceChangeTypeModule (copy), StaticPartsModule (copy)
 	assert(p1.itemLength > 0, "Layout.grid: itemLength must be positive")
 	assert(p1.crossAxisCount ~= nil ~= (p1.crossAxisItemLength ~= nil), "Layout.grid: provide exactly one of crossAxisCount or crossAxisItemLength")
@@ -16,23 +16,23 @@ return function(p1) --[[ Line: 26 | Named "grid" ]]
 	local CrossAxisCount = p1.crossAxisCount or 1
 	local CountKeys = 0
 	
-	local function _(): number --[[ Line: 42 | Named "rowCount" ]]
+	local function _(): number
 		-- upvalues: CountKeys (ref), CrossAxisCount (ref)
 		return (math.ceil(CountKeys / CrossAxisCount))
 	end
 	
 	return {
-		getItemCount = function() --[[ Line: 46 ]]
+		getItemCount = function()
 			-- upvalues: CountKeys (ref)
 			return CountKeys
 		end,
-		getContentLength = function() --[[ Line: 50 ]]
+		getContentLength = function()
 			-- upvalues: CountKeys (ref), CrossAxisCount (ref), PaddingBefore (copy), ItemLength (copy), Spacing (copy), PaddingAfter (copy)
 			local Ceiled = math.ceil(CountKeys / CrossAxisCount)
 			
 			return if Ceiled == 0 then 0 else PaddingBefore + Ceiled * ItemLength + (Ceiled - 1) * Spacing + PaddingAfter
 		end,
-		getIntersectingIndexRange = function(p2, p3) --[[ Line: 68 ]]
+		getIntersectingIndexRange = function(p2, p3)
 			-- upvalues: CountKeys (ref), TypesModule (upval), PaddingBefore (copy), NewItemLength (copy), ItemLength (copy), CrossAxisCount (ref)
 			if CountKeys == 0 or p3 <= p2 then
 				return TypesModule.EMPTY_INDEX_RANGE
@@ -65,14 +65,14 @@ return function(p1) --[[ Line: 26 | Named "grid" ]]
 				lastIndex = math.min(CountKeys, Smallest * CrossAxisCount)
 			}
 		end,
-		expandIndexRange = function(p2, p3, p4) --[[ Line: 104 ]]
+		expandIndexRange = function(p2, p3, p4)
 			-- upvalues: CrossAxisCount (ref), CountKeys (ref)
 			return {
 				firstIndex = (math.max(1, (p2.firstIndex - 1) // CrossAxisCount + 1 - p3) - 1) * CrossAxisCount + 1,
 				lastIndex = math.min(CountKeys, math.min(math.ceil(CountKeys / CrossAxisCount), (p2.lastIndex - 1) // CrossAxisCount + 1 + (p4 or p3)) * CrossAxisCount)
 			}
 		end,
-		getItemLayout = function(p2: number) --[[ Line: 58 ]]
+		getItemLayout = function(p2: number)
 			-- upvalues: CrossAxisCount (ref), PaddingBefore (copy), NewItemLength (copy), ItemLength (copy)
 			return {
 				startOffset = PaddingBefore + ((p2 - 1) // CrossAxisCount + 1 - 1) * NewItemLength,
@@ -83,7 +83,7 @@ return function(p1) --[[ Line: 26 | Named "grid" ]]
 		end,
 		updateItemMeasurement = StaticPartsModule.updateItemMeasurementNoop,
 		requiresItemMeasurement = StaticPartsModule.requiresItemMeasurementFalse,
-		applyDataSourceChange = function(p2): boolean --[[ Line: 116 ]]
+		applyDataSourceChange = function(p2): boolean
 			-- upvalues: CountKeys (ref), DataSourceChangeTypeModule (upval)
 			local CountKeys1: number = CountKeys
 			
@@ -96,7 +96,7 @@ return function(p1) --[[ Line: 26 | Named "grid" ]]
 			end
 			return CountKeys ~= CountKeys1
 		end,
-		setViewportCrossAxisLength = function(p2: number): boolean --[[ Line: 128 ]]
+		setViewportCrossAxisLength = function(p2: number): boolean
 			-- upvalues: p1 (copy), CrossAxisCount (ref)
 			if p1.crossAxisItemLength == nil then
 				return false

@@ -10,7 +10,7 @@ local PeopleAnalyticsManagerModule = require(script.Parent.Parent.Analytics.Peop
 local FocusNavigationServiceModule = require(script.Parent.Parent.FocusNavigationService)
 local SettingsHubServiceModule = require(script.Parent.SettingsHubService)
 
-return ((function() --[[ Line: 32 | Named "createPeopleBlockingModalManager" ]]
+return ((function()
 	-- upvalues: Players (copy), SignalsModule (copy), FocusNavigationServiceModule (copy), ContextActionService (copy), OnPersonBlockButtonActivatedModule (copy), PeopleAnalyticsManagerModule (copy), UseSignalStateFunction (copy), ReactModule (copy), ReactFocusNavigationModule (copy), SettingsHubServiceModule (copy)
 	local LocalPlayer = Players.LocalPlayer
 	local Signal, Signal2 = SignalsModule.createSignal(false)
@@ -18,19 +18,19 @@ return ((function() --[[ Line: 32 | Named "createPeopleBlockingModalManager" ]]
 	local v1 = nil
 	
 	return {
-		closeModal = function() --[[ Line: 44 ]]
+		closeModal = function()
 			-- upvalues: FocusNavigationServiceModule (upval), Signal2 (copy), Signal2_1 (copy), ContextActionService (upval)
 			FocusNavigationServiceModule.setBlockingModalRestoreMode(true)
 			Signal2(false)
 			Signal2_1(nil)
 			ContextActionService:UnbindCoreAction("BlockingModalScreen")
 		end,
-		openModal = function(p1, p2, p3) --[[ Line: 51 ]]
+		openModal = function(p1, p2, p3)
 			-- upvalues: FocusNavigationServiceModule (upval), OnPersonBlockButtonActivatedModule (upval), PeopleAnalyticsManagerModule (upval), LocalPlayer (copy), v1 (ref), Signal2 (copy), Signal2_1 (copy), ContextActionService (upval)
 			FocusNavigationServiceModule.saveScrollPosition()
 			local OnPersonBlockButtonActivatedModuleResult = OnPersonBlockButtonActivatedModule(p1, PeopleAnalyticsManagerModule, LocalPlayer.UserId, p2, v1, p3)
 			
-			function OnPersonBlockButtonActivatedModuleResult.modalProps.closeModal() --[[ Line: 63 ]]
+			function OnPersonBlockButtonActivatedModuleResult.modalProps.closeModal()
 				-- upvalues: OnPersonBlockButtonActivatedModuleResult (copy), FocusNavigationServiceModule (upval), Signal2 (upval), Signal2_1 (upval), ContextActionService (upval)
 				OnPersonBlockButtonActivatedModuleResult.resolvePromise()
 				FocusNavigationServiceModule.setBlockingModalRestoreMode(true)
@@ -44,25 +44,25 @@ return ((function() --[[ Line: 32 | Named "createPeopleBlockingModalManager" ]]
 			
 			return OnPersonBlockButtonActivatedModuleResult.promise
 		end,
-		getModalManager = function(p1, p2) --[[ Line: 74 ]]
+		getModalManager = function(p1, p2)
 			-- upvalues: v1 (ref), UseSignalStateFunction (upval), Signal (copy), ReactModule (upval), ReactFocusNavigationModule (upval), Signal1 (copy), ContextActionService (upval), FocusNavigationServiceModule (upval), Signal2 (copy), Signal2_1 (copy), SettingsHubServiceModule (upval)
 			v1 = p2
 			
-			return function() --[[ Line: 78 | Named "BlockingModalManager" ]]
+			return function()
 				-- upvalues: UseSignalStateFunction (upval), Signal (upval), ReactModule (upval), ReactFocusNavigationModule (upval), Signal1 (upval), ContextActionService (upval), FocusNavigationServiceModule (upval), Signal2 (upval), Signal2_1 (upval), SettingsHubServiceModule (upval), p1 (copy)
 				local UseSignalStateResult = UseSignalStateFunction(Signal)
 				local UseContextResult = nil
 				local UseRefResult = nil
 				UseContextResult = ReactModule.useContext(ReactFocusNavigationModule.FocusNavigationContext)
 				UseRefResult = ReactModule.useRef(false)
-				local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 85 ]]
+				local UseMemoResult = ReactModule.useMemo(function()
 					-- upvalues: Signal1 (upval)
 					return Signal1(false)
 				end, { UseSignalStateResult })
-				ReactModule.useEffect(function() --[[ Line: 90 ]]
+				ReactModule.useEffect(function()
 					-- upvalues: UseSignalStateResult (copy), ContextActionService (upval), FocusNavigationServiceModule (upval), Signal2 (upval), Signal2_1 (upval)
 					if UseSignalStateResult then
-						ContextActionService:BindCoreAction("BlockingModalScreen", function() --[[ Line: 92 ]]
+						ContextActionService:BindCoreAction("BlockingModalScreen", function()
 							-- upvalues: FocusNavigationServiceModule (upval), Signal2 (upval), Signal2_1 (upval), ContextActionService (upval)
 							FocusNavigationServiceModule.setBlockingModalRestoreMode(true)
 							Signal2(false)
@@ -72,12 +72,12 @@ return ((function() --[[ Line: 32 | Named "createPeopleBlockingModalManager" ]]
 					else
 						ContextActionService:UnbindCoreAction("BlockingModalScreen")
 					end
-					return function() --[[ Line: 99 ]]
+					return function()
 						-- upvalues: ContextActionService (upval)
 						ContextActionService:UnbindCoreAction("BlockingModalScreen")
 					end
 				end, { UseSignalStateResult })
-				ReactModule.useEffect(function() --[[ Line: 108 ]]
+				ReactModule.useEffect(function()
 					-- upvalues: UseRefResult (ref), UseSignalStateResult (copy), SettingsHubServiceModule (upval), UseContextResult (ref)
 					if UseRefResult.current and not UseSignalStateResult then
 						local PageRefResult = SettingsHubServiceModule.pageRef()

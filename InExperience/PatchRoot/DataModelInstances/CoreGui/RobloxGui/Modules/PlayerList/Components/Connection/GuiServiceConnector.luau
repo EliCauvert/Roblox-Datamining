@@ -6,12 +6,12 @@ local SetInspectMenuEnabledModule = require(script.Parent.Parent.Parent.Actions.
 local EventConnectionModule = require(script.Parent.EventConnection)
 local GuiServiceConnector = RoactModule.PureComponent:extend("GuiServiceConnector")
 
-function GuiServiceConnector.render(p1) --[[ Line: 16 ]]
+function GuiServiceConnector.render(p1)
 	-- upvalues: RoactModule (copy), EventConnectionModule (copy), GuiService (copy)
 	return RoactModule.createFragment({
 		InspectMenuEnabledConnection = RoactModule.createElement(EventConnectionModule, {
 			event = GuiService.InspectMenuEnabledChangedSignal,
-			callback = function(p2) --[[ Line: 20 ]]
+			callback = function(p2)
 				-- upvalues: p1 (copy)
 				p1.props.setInspectMenuEnabled(p2)
 			end
@@ -19,10 +19,10 @@ function GuiServiceConnector.render(p1) --[[ Line: 16 ]]
 	})
 end
 
-return RoactRoduxModule.connect(nil, function(Callback) --[[ Line: 27 | Named "mapDispatchToProps" ]]
+return RoactRoduxModule.connect(nil, function(Callback)
 	-- upvalues: SetInspectMenuEnabledModule (copy)
 	return {
-		setInspectMenuEnabled = function(p1) --[[ Line: 29 ]]
+		setInspectMenuEnabled = function(p1)
 			-- upvalues: Callback (copy), SetInspectMenuEnabledModule (upval)
 			return Callback(SetInspectMenuEnabledModule(p1))
 		end

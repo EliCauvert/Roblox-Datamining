@@ -14,7 +14,7 @@ local FFlagDetailsPageLayoutUseMeasuredSizeForInitialScrollModule = require(AppB
 local Selection = { Selectable = false }
 local Binding = ReactModule.createBinding(0)
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 39 | Named "DetailsPageLayoutContent" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: ReactModule (copy), DetailsPageLayoutContextModule (copy), FFlagDetailsPageLayoutUseMeasuredSizeForInitialScrollModule (copy), ReactUtilsModule (copy), Binding (copy), DetailsPageLayoutUtilsModule (copy), View (copy), FFlagLuaAppEdpDirectionalGradientMidTransparency (copy), ScrollView (copy), Selection (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy)
 	local UseContextResult = ReactModule.useContext(DetailsPageLayoutContextModule)
 	local ContentTopOffset = UseContextResult.contentTopOffset
@@ -35,7 +35,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 39 |
 	local GradientTopBleedOffset = UseContextResult.gradientTopBleedOffset
 	local GradientMidTransparency = UseContextResult.gradientMidTransparency
 	assert(TestId, "DetailsPageLayout.Content must be used within DetailsPageLayout.Root")
-	local UseComposedRefResult = ReactUtilsModule.useComposedRef(p1.scrollingFrameRef, (ReactModule.useCallback(function(ScrollFrame) --[[ Line: 63 ]]
+	local UseComposedRefResult = ReactUtilsModule.useComposedRef(p1.scrollingFrameRef, (ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: FFlagDetailsPageLayoutUseMeasuredSizeForInitialScrollModule (upval), HasFullBleed (copy), InitialScrollY (copy)
 		if ScrollFrame and (FFlagDetailsPageLayoutUseMeasuredSizeForInitialScrollModule and HasFullBleed or InitialScrollY > 0) then
 			ScrollFrame.CanvasPosition = Vector2.new(0, InitialScrollY)
@@ -46,7 +46,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 39 |
 	})))
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(InitialScrollY)
 	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(0)
-	local UseResult = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 84 ]]
+	local UseResult = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: UseBindingResult2 (copy), OnCanvasPositionChangedFunction (copy)
 		UseBindingResult2(ScrollFrame.CanvasPosition.Y)
 		
@@ -54,9 +54,9 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 39 |
 			OnCanvasPositionChangedFunction(ScrollFrame)
 		end
 	end, { OnCanvasPositionChangedFunction })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 94 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: HasHeader (copy), HasActions (copy), ActionBarHeight (copy), ReactModule (upval), HeaderBarHeight (copy)
-		return if HasHeader and HasActions and ActionBarHeight then ReactModule.joinBindings({ HasHeader, HasActions, ActionBarHeight }):map(function(Entry): UDim2 --[[ Line: 98 ]]
+		return if HasHeader and HasActions and ActionBarHeight then ReactModule.joinBindings({ HasHeader, HasActions, ActionBarHeight }):map(function(Entry): UDim2
 			-- upvalues: HeaderBarHeight (upval)
 			local Entry1 = Entry[2]
 			local Entry2 = Entry[3]
@@ -64,16 +64,16 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 39 |
 			return UDim2.new(1, 0, 1, -((if Entry[1] then HeaderBarHeight else 0) + (if Entry1 then Entry2 else 0)))
 		end) else nil
 	end, { HasHeader, HasActions, ActionBarHeight, HeaderBarHeight })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 108 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: HasHeader (copy), HeaderBarHeight (copy)
-		return if HasHeader then HasHeader:map(function(p2): UDim2 --[[ Line: 112 ]]
+		return if HasHeader then HasHeader:map(function(p2): UDim2
 			-- upvalues: HeaderBarHeight (upval)
 			return UDim2.new(0, 0, 0, if p2 then HeaderBarHeight else 0)
 		end) else nil
 	end, { HasHeader, HeaderBarHeight })
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 121 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: ContentTopOffset (copy), ReactModule (upval), ContainerHeight (copy), Binding (upval), DetailsPageLayoutUtilsModule (upval), HasFullBleed (copy), FullBleedOverlapOffset (copy), HeaderBarHeight (copy)
-		return if ContentTopOffset then ReactModule.joinBindings({ ContentTopOffset, ContainerHeight or Binding }):map(function(Entry): UDim --[[ Line: 126 ]]
+		return if ContentTopOffset then ReactModule.joinBindings({ ContentTopOffset, ContainerHeight or Binding }):map(function(Entry): UDim
 			-- upvalues: DetailsPageLayoutUtilsModule (upval), HasFullBleed (upval), FullBleedOverlapOffset (upval), HeaderBarHeight (upval)
 			local Entry1: number = Entry[2]
 			local CanvasPaddingTop = DetailsPageLayoutUtilsModule.computeCanvasPaddingTop(Entry[1], HasFullBleed, FullBleedOverlapOffset, HeaderBarHeight)
@@ -90,24 +90,24 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 39 |
 		FullBleedOverlapOffset,
 		HeaderBarHeight
 	})
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 150 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: HasActions (copy), ActionBarHeight (copy), ReactModule (upval)
-		return if HasActions and ActionBarHeight then ReactModule.joinBindings({ HasActions, ActionBarHeight }):map(function(Entry): UDim --[[ Line: 154 ]]
+		return if HasActions and ActionBarHeight then ReactModule.joinBindings({ HasActions, ActionBarHeight }):map(function(Entry): UDim
 			local Entry1 = Entry[2]
 			
 			return if Entry[1] then UDim.new(0, Entry1) else UDim.new(0, 0)
 		end) else nil
 	end, { HasActions, ActionBarHeight })
-	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 163 ]]
+	local UseMemoResult4 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult2 (copy), ReactModule (upval), UseBindingResult (copy), GradientTopBleedOffset (copy)
-		return if UseMemoResult2 then ReactModule.joinBindings({ UseMemoResult2, UseBindingResult }):map(function(Entry): UDim2 --[[ Line: 167 ]]
+		return if UseMemoResult2 then ReactModule.joinBindings({ UseMemoResult2, UseBindingResult }):map(function(Entry): UDim2
 			-- upvalues: GradientTopBleedOffset (upval)
 			return UDim2.new(0, 0, 0, Entry[1].Offset - Entry[2] - GradientTopBleedOffset)
 		end) else nil
 	end, { UseMemoResult2, UseBindingResult, GradientTopBleedOffset })
-	local UseMemoResult5 = ReactModule.useMemo(function() --[[ Line: 174 ]]
+	local UseMemoResult5 = ReactModule.useMemo(function()
 		-- upvalues: ContainerHeight (copy), ReactModule (upval), UseBindingResult1 (copy), GradientTopBleedOffset (copy)
-		return if ContainerHeight then ReactModule.joinBindings({ UseBindingResult1, ContainerHeight }):map(function(Entry): UDim2 --[[ Line: 178 ]]
+		return if ContainerHeight then ReactModule.joinBindings({ UseBindingResult1, ContainerHeight }):map(function(Entry): UDim2
 			-- upvalues: GradientTopBleedOffset (upval)
 			local Entry1: number = Entry[1]
 			local Entry2: number = Entry[2]
@@ -156,7 +156,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 39 |
 				GradientBar = if HasFullBleed and ContentTopOffset then ReactModule.createElement(View, {
 					tag = "bg-surface-0",
 					LayoutOrder = 0,
-					Size = ContentTopOffset:map(function(p2: number): UDim2 --[[ Line: 228 ]]
+					Size = ContentTopOffset:map(function(p2: number): UDim2
 						-- upvalues: FullBleedOverlapOffset (copy), GradientTopBleedOffset (copy)
 						return UDim2.new(1, 0, 0, math.min(p2, FullBleedOverlapOffset) + GradientTopBleedOffset)
 					end)
@@ -183,7 +183,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 39 |
 					ScrollingDirection = Enum.ScrollingDirection.Y,
 					ScrollingEnabled = if FFlagLuaAppMediaGalleryGamepadSupport then not IsFullscreenOverlay and not (UseContextResult.disableFocusNavEngineScroll == true) else not IsFullscreenOverlay
 				},
-				onAbsoluteCanvasSizeChanged = function(ScrollFrame) --[[ Line: 277 ]]
+				onAbsoluteCanvasSizeChanged = function(ScrollFrame)
 					-- upvalues: UseBindingResult2_1 (copy), OnCanvasSizeChangedFunction (copy)
 					UseBindingResult2_1(ScrollFrame.AbsoluteCanvasSize.Y)
 					
@@ -200,7 +200,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 39 |
 				ContentSection = ReactModule.createElement(View, {
 					tag = "auto-y",
 					LayoutOrder = 1,
-					Size = ContainerHeight:map(function(YOffset): UDim2 --[[ Line: 297 ]]
+					Size = ContainerHeight:map(function(YOffset): UDim2
 						return UDim2.new(1, 0, 0, YOffset)
 					end)
 				}, {

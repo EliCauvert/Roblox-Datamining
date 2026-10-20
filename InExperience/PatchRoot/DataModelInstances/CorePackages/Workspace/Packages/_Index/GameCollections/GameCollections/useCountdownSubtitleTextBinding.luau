@@ -3,18 +3,18 @@ local GameCollections = script:FindFirstAncestor("GameCollections")
 local ReactModule = require(GameCollections.Parent.React)
 local CalculateCountdownTimeModule = require(GameCollections.calculateCountdownTime)
 
-local function _(p1): boolean --[[ Line: 19 | Named "validateTimeValues" ]]
+local function _(p1): boolean
 	return p1.days >= 0 and (p1.hours >= 0 and p1.hours <= 23 and (p1.minutes >= 0 and p1.minutes <= 59))
 end
 
-local _ = function(p1: number): number --[[ Line: 35 | Named "getUpdateFrequency" ]]
+local _ = function(p1: number): number
 	return if p1 < 15 then 1 else 15
 end
 
-return function(p1, Text, Minutes) --[[ Line: 46 | Named "useCountdownSubtitleTextBinding" ]]
+return function(p1, Text, Minutes)
 	-- upvalues: ReactModule (copy), CalculateCountdownTimeModule (copy), RunService (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState("")
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 52 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: Minutes (copy), p1 (copy), Text (copy), CalculateCountdownTimeModule (upval), UseStateResult2 (copy)
 		if Minutes == nil or Minutes == "" or p1 == nil or Text == nil or Text == "" then
 			return 0
@@ -30,11 +30,11 @@ return function(p1, Text, Minutes) --[[ Line: 46 | Named "useCountdownSubtitleTe
 		
 		return v1
 	end, { Minutes, p1, Text })
-	ReactModule.useEffect(function() --[[ Line: 79 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult (copy)
 		UseResult()
 	end, { UseResult })
-	ReactModule.useEffect(function() --[[ Line: 84 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Minutes (copy), p1 (copy), Text (copy), RunService (upval), UseResult (copy)
 		local Connection = nil
 		
@@ -44,7 +44,7 @@ return function(p1, Text, Minutes) --[[ Line: 46 | Named "useCountdownSubtitleTe
 			if v1 > 0 then
 				local v2 = 0
 				local v3: number = if v1 < 15 then 1 else 15
-				Connection = RunService.Heartbeat:Connect(function() --[[ Line: 99 ]]
+				Connection = RunService.Heartbeat:Connect(function()
 					-- upvalues: v2 (ref), v3 (ref), v1 (ref), UseResult (upval), Connection (ref)
 					local ClockTime = os.clock()
 					
@@ -60,7 +60,7 @@ return function(p1, Text, Minutes) --[[ Line: 46 | Named "useCountdownSubtitleTe
 				end)
 			end
 		end
-		return function() --[[ Line: 114 ]]
+		return function()
 			-- upvalues: Connection (ref)
 			if Connection ~= nil then
 				Connection:Disconnect()

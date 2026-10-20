@@ -10,15 +10,15 @@ return {
 	alreadyLocalized = false,
 	field_type = SettingsServiceModule.SettingEnum.Toggle,
 	layoutOrder = require(script:FindFirstAncestor("Settings").Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER.HapticsFrame,
-	onChanged = (function() --[[ Line: 29 | Named "HapticValue" ]]
+	onChanged = (function()
 		-- upvalues: GameSettings (copy), ValueChangedSignal (copy), config1 (copy), config (copy)
-		local function _(): boolean --[[ Line: 30 ]]
+		local function _(): boolean
 			-- upvalues: GameSettings (upval)
 			return GameSettings.HapticStrength ~= 0
 		end
 		
 		local NewValueChangedSignal = ValueChangedSignal.new(if GameSettings.HapticStrength == config1.MIN then config.OFF else config.ON)
-		NewValueChangedSignal:connect(function(Enabled) --[[ Line: 35 ]]
+		NewValueChangedSignal:connect(function(Enabled)
 			-- upvalues: GameSettings (upval), config1 (upval), config (upval)
 			if (if GameSettings.HapticStrength == config1.MIN then config.OFF else config.ON) ~= Enabled then
 				GameSettings.HapticStrength = if Enabled == true then 1 else 0

@@ -1,4 +1,4 @@
-﻿return function(p1, p2, Field, AType, Origin, Btn, Section) --[[ Line: 8 ]]
+﻿return function(p1, p2, Field, AType, Origin, Btn, Section)
 	assert(type(p2) == "string", "Expected eventContext to be a string")
 	assert(type(Field) == "string", "Expected field to be a string")
 	assert(type(AType) == "string", "Expected actionType to be a string")

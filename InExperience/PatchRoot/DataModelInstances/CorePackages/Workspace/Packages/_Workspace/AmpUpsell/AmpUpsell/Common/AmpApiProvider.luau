@@ -48,16 +48,16 @@ local NewUrlBuilder1 = UrlBuilder.new({
 	} else { featureNames = "{featureNames}" }
 })
 
-local function _(FeatureName, List, NameSpace, ExtraParameters) --[[ Line: 54 | Named "getUpsellFeatureAccessFromFeatureName" ]]
+local function _(FeatureName, List, NameSpace, ExtraParameters)
 	-- upvalues: FetchFunction (copy), PromiseModule (copy), NewUrlBuilder (copy), Response (copy)
-	return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 61 ]]
+	return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 		-- upvalues: List (copy), NewUrlBuilder (upval), FeatureName (copy), NameSpace (copy), ExtraParameters (copy), FetchFunction (copy), Response (upval)
 		local v1 = FetchFunction(NewUrlBuilder({
 			featureName = FeatureName,
 			successfulActions = table.concat(List, ","),
 			nameSpace = NameSpace,
 			extraParameters = ExtraParameters
-		}), { method = "GET" }):catch(function() --[[ Line: 70 ]]
+		}), { method = "GET" }):catch(function()
 			-- upvalues: Response (upval)
 			return Response.error()
 		end):expect()
@@ -72,7 +72,7 @@ local function _(FeatureName, List, NameSpace, ExtraParameters) --[[ Line: 54 | 
 			
 			return
 		end
-		local v2 = v1:json():catch(function() --[[ Line: 88 ]]
+		local v2 = v1:json():catch(function()
 			return nil
 		end):expect()
 		
@@ -92,18 +92,18 @@ local function _(FeatureName, List, NameSpace, ExtraParameters) --[[ Line: 54 | 
 end
 
 return {
-	upsellFeatureAccess = function(FeatureName, List, NameSpace, Input) --[[ Line: 107 ]]
+	upsellFeatureAccess = function(FeatureName, List, NameSpace, Input)
 		-- upvalues: Base64 (copy), HttpService (copy), FetchFunction (copy), PromiseModule (copy), NewUrlBuilder (copy), Response (copy), AccessResponseEnum (copy)
 		local EncodeResult = if Input then Base64.Encode(HttpService:JSONEncode(Input)) else nil
 		
-		return (PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 61 ]]
+		return (PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 			-- upvalues: List (copy), NewUrlBuilder (upval), FeatureName (copy), NameSpace (copy), EncodeResult (copy), FetchFunction (copy), Response (upval)
 			local v1 = FetchFunction(NewUrlBuilder({
 				featureName = FeatureName,
 				successfulActions = table.concat(List, ","),
 				nameSpace = NameSpace,
 				extraParameters = EncodeResult
-			}), { method = "GET" }):catch(function() --[[ Line: 70 ]]
+			}), { method = "GET" }):catch(function()
 				-- upvalues: Response (upval)
 				return Response.error()
 			end):expect()
@@ -118,7 +118,7 @@ return {
 				
 				return
 			end
-			local v2 = v1:json():catch(function() --[[ Line: 88 ]]
+			local v2 = v1:json():catch(function()
 				return nil
 			end):expect()
 			
@@ -134,12 +134,12 @@ return {
 			else
 				Callback("Failed to decode HTTP response as JSON for AMP Upsell Feature Access API")
 			end
-		end):catch(function(_) --[[ Line: 117 ]]
+		end):catch(function(_)
 			-- upvalues: AccessResponseEnum (upval)
 			return { access = AccessResponseEnum.Error }
 		end):expect())
 	end,
-	upsellFeatureAccessGql = function(p1, FeatureName, p2, NameSpace, Input) --[[ Line: 189 ]]
+	upsellFeatureAccessGql = function(p1, FeatureName, p2, NameSpace, Input)
 		-- upvalues: GqlFunction (copy), Base64 (copy), HttpService (copy), GetFFlagAmpGqlPassSuccessfulActionsModule (copy), AccessResponseEnum (copy)
 		local v1 = p1:query({
 			fetchPolicy = "network-only",
@@ -150,19 +150,19 @@ return {
 				nameSpace = NameSpace,
 				extraParameters = if Input then Base64.Encode(HttpService:JSONEncode(Input)) else nil
 			}
-		}):catch(function(_) --[[ Line: 211 ]]
+		}):catch(function(_)
 			-- upvalues: AccessResponseEnum (upval)
 			return { access = AccessResponseEnum.Error }
 		end):expect()
 		
 		return if v1.data and v1.data.getUpsellFeatureAccess.featureAccess then v1.data.getUpsellFeatureAccess.featureAccess else { access = AccessResponseEnum.Error }
 	end,
-	getFeatureAccess = function(List, p1) --[[ Line: 126 ]]
+	getFeatureAccess = function(List, p1)
 		-- upvalues: FetchFunction (copy), PromiseModule (copy), FFlagAllowAmpV2FeatureAccessCall (copy), NewUrlBuilder1 (copy), Response (copy), AccessResponseEnum (copy)
-		return (PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 128 ]]
+		return (PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 			-- upvalues: List (copy), FFlagAllowAmpV2FeatureAccessCall (upval), NewUrlBuilder1 (upval), p1 (copy), FetchFunction (copy), Response (upval)
 			local Joined = table.concat(List, ",")
-			local v1 = FetchFunction(if FFlagAllowAmpV2FeatureAccessCall then NewUrlBuilder1({ featureNames = Joined, nameSpace = if p1 then p1 else "" }) else NewUrlBuilder1({ featureNames = Joined }), { method = "GET" }):catch(function() --[[ Line: 140 ]]
+			local v1 = FetchFunction(if FFlagAllowAmpV2FeatureAccessCall then NewUrlBuilder1({ featureNames = Joined, nameSpace = if p1 then p1 else "" }) else NewUrlBuilder1({ featureNames = Joined }), { method = "GET" }):catch(function()
 				-- upvalues: Response (upval)
 				return Response.error()
 			end):expect()
@@ -177,7 +177,7 @@ return {
 				
 				return
 			end
-			local v2 = v1:json():catch(function() --[[ Line: 158 ]]
+			local v2 = v1:json():catch(function()
 				return nil
 			end):expect()
 			
@@ -192,7 +192,7 @@ return {
 				table.insert(FeatureAccessList, { feature = feature.featureName, access = feature.access })
 			end
 			Callback1({ featureAccessList = FeatureAccessList })
-		end):catch(function(_) --[[ Line: 181 ]]
+		end):catch(function(_)
 			-- upvalues: AccessResponseEnum (upval)
 			return { access = AccessResponseEnum.Error }
 		end):expect())

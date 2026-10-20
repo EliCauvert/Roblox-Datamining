@@ -4,7 +4,7 @@ local FFlagExpChatDictationGrafanaMetricsModule = require(ExpChat.Flags.FFlagExp
 local DictationAnalyticsModule = require(script.Parent.DictationAnalytics)
 
 return require(script.Parent.createDictationSafetyReminder)({
-	onTriggered = function() --[[ Line: 14 ]]
+	onTriggered = function()
 		-- upvalues: DictationAnalyticsModule (copy), FFlagExpChatDictationGrafanaMetricsModule (copy), DictationSafetyReminderSignalModule (copy)
 		DictationAnalyticsModule.fire(DictationAnalyticsModule.Events.SafetyReminderTriggered, {
 			[DictationAnalyticsModule.Properties.SttMode] = DictationAnalyticsModule.Modes.Continuous

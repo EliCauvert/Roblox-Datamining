@@ -5,7 +5,7 @@ local FFlagAllowCustomUnifiedEventFilter = AvatarExperienceAnalyticsModule.Flags
 local InExperienceShopUnifiedEventFilterModule = require(script.Parent.InExperienceShopUnifiedEventFilter)
 local GetShopUnifiedLoggingSurfaceModule = require(script.Parent.getShopUnifiedLoggingSurface)
 
-return function(p1, p2) --[[ Line: 14 | Named "sendRobuxBuyClickUnifiedEvent" ]]
+return function(p1, p2)
 	-- upvalues: GetShopUnifiedLoggingSurfaceModule (copy), FFlagAllowCustomUnifiedEventFilter (copy), InExperienceShopUnifiedEventFilterModule (copy), SendUnifiedEventLogForInstanceFunction (copy), UnifiedEventLogEnums (copy)
 	SendUnifiedEventLogForInstanceFunction(p1, {
 		action = UnifiedEventLogEnums.MarketplaceUnifiedAction.PURCHASE_ATTEMPT,

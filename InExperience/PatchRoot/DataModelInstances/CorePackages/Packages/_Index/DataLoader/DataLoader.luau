@@ -21,7 +21,7 @@ local Callback = nil
 local Module = {}
 Module.__index = Module
 
-function Module.new(Message, p1) --[[ Line: 142 ]]
+function Module.new(Message, p1)
 	-- upvalues: Module (copy), Error1 (copy), Callback1 (ref), Callback2 (ref), Callback3 (ref), Callback4 (ref), Callback6 (ref)
 	local self = setmetatable({}, Module)
 	
@@ -39,7 +39,7 @@ function Module.new(Message, p1) --[[ Line: 142 ]]
 	return self
 end
 
-function Module:load(p1) --[[ Line: 162 ]]
+function Module:load(p1)
 	-- upvalues: Error1 (copy), Callback5 (ref), Boolean (copy), PromiseModule (copy)
 	if p1 == nil then
 		error(Error1.new("The loader.load() function must be called with a value, " .. ("but got: %s."):format((tostring(p1)))))
@@ -62,9 +62,9 @@ function Module:load(p1) --[[ Line: 162 ]]
 				CallbackResult.cacheHits = {}
 				CacheHits = CallbackResult.cacheHits
 			until true
-			return PromiseModule.new(function(Callback) --[[ Line: 182 ]]
+			return PromiseModule.new(function(Callback)
 				-- upvalues: CacheHits (copy), GetResult (copy)
-				table.insert(CacheHits, function() --[[ Line: 183 ]]
+				table.insert(CacheHits, function()
 					-- upvalues: Callback (copy), GetResult (upval)
 					Callback(GetResult)
 				end)
@@ -72,7 +72,7 @@ function Module:load(p1) --[[ Line: 162 ]]
 		end
 	end
 	table.insert(CallbackResult.keys, p1)
-	local NewPromise = PromiseModule.new(function(Resolve, Reject) --[[ Line: 192 ]]
+	local NewPromise = PromiseModule.new(function(Resolve, Reject)
 		-- upvalues: CallbackResult (copy)
 		table.insert(CallbackResult.callbacks, { resolve = Resolve, reject = Reject })
 	end)
@@ -83,7 +83,7 @@ function Module:load(p1) --[[ Line: 162 ]]
 	return NewPromise
 end
 
-function Module:loadMany(p1) --[[ Line: 202 ]]
+function Module:loadMany(p1)
 	-- upvalues: Boolean (copy), Callback (ref), Error1 (copy), PromiseModule (copy)
 	if not Boolean.toJSBoolean(Callback(p1)) then
 		error(Error1.new("The loader.loadMany() function must be called with Array<key> " .. ("but got: %s."):format((tostring(p1)))))
@@ -91,7 +91,7 @@ function Module:loadMany(p1) --[[ Line: 202 ]]
 	local List = {}
 	local Count = 0
 	while Count < #p1 do
-		table.insert(List, self:load(p1[Count + 1]):catch(function(Err) --[[ Line: 219 ]]
+		table.insert(List, self:load(p1[Count + 1]):catch(function(Err)
 			return Err
 		end))
 		Count += 1
@@ -99,7 +99,7 @@ function Module:loadMany(p1) --[[ Line: 202 ]]
 	return PromiseModule.all(List)
 end
 
-function Module:clear(Key) --[[ Line: 230 ]]
+function Module:clear(Key)
 	-- upvalues: Boolean (copy)
 	local CacheMap = self._cacheMap
 	
@@ -109,7 +109,7 @@ function Module:clear(Key) --[[ Line: 230 ]]
 	return self
 end
 
-function Module:clearAll() --[[ Line: 239 ]]
+function Module:clearAll()
 	-- upvalues: Boolean (copy)
 	local CacheMap = self._cacheMap
 	
@@ -119,7 +119,7 @@ function Module:clearAll() --[[ Line: 239 ]]
 	return self
 end
 
-function Module:prime(p2, p3) --[[ Line: 247 ]]
+function Module:prime(p2, p3)
 	-- upvalues: Boolean (copy), InstanceofFunction (copy), Error2 (copy), PromiseModule (copy)
 	local CacheMap = self._cacheMap
 	
@@ -130,7 +130,7 @@ function Module:prime(p2, p3) --[[ Line: 247 ]]
 			local RejectResult = nil
 			if InstanceofFunction(p3, Error2) then
 				RejectResult = PromiseModule.reject(p3)
-				RejectResult:catch(function() --[[ Line: 260 ]] end)
+				RejectResult:catch(function() end)
 			else
 				RejectResult = PromiseModule.resolve(p3)
 			end
@@ -140,19 +140,19 @@ function Module:prime(p2, p3) --[[ Line: 247 ]]
 	return self
 end
 
-local function v9(p2) --[[ Line: 296 ]]
+local function v9(p2)
 	-- upvalues: SetTimeoutFunction (copy)
 	SetTimeoutFunction(p2)
 end
 
-Callback5 = function(p2) --[[ Line: 316 | Named "getCurrentBatch" ]]
+Callback5 = function(p2)
 	-- upvalues: Boolean (copy), Callback7 (ref)
 	local Batch = p2._batch
 	
 	if Batch == nil or Boolean.toJSBoolean(Batch.hasDispatched) or #Batch.keys >= p2._maxBatchSize then
 		local config = { hasDispatched = false, keys = {}, callbacks = {} }
 		p2._batch = config
-		p2._batchScheduleFn(function() --[[ Line: 332 ]]
+		p2._batchScheduleFn(function()
 			-- upvalues: Callback7 (upval), p2 (copy), config (copy)
 			Callback7(p2, config)
 		end)
@@ -163,7 +163,7 @@ Callback5 = function(p2) --[[ Line: 316 | Named "getCurrentBatch" ]]
 	end
 end
 
-Callback7 = function(p2, _batch) --[[ Line: 338 | Named "dispatchBatch" ]]
+Callback7 = function(p2, _batch)
 	-- upvalues: Callback8 (ref), Callback9 (ref), Error1 (copy), Boolean (copy), Callback (ref), InstanceofFunction (copy), Error2 (copy)
 	_batch.hasDispatched = true
 	
@@ -173,10 +173,10 @@ Callback7 = function(p2, _batch) --[[ Line: 338 | Named "dispatchBatch" ]]
 		return
 	end
 	local BatchLoadFnResult = nil
-	local _, Result, Result3 = xpcall(function() --[[ Line: 350 ]]
+	local _, Result, Result3 = xpcall(function()
 		-- upvalues: BatchLoadFnResult (ref), p2 (copy), _batch (copy)
 		BatchLoadFnResult = p2._batchLoadFn(_batch.keys)
-	end, function(Err) --[[ Line: 352 ]]
+	end, function(Err)
 		-- upvalues: Callback9 (upval), p2 (copy), _batch (copy), Error1 (upval)
 		return Callback9(p2, _batch, Error1.new("DataLoader must be constructed with a function which accepts " .. "Array<key> and returns Promise<Array<value>>, but the function " .. ("errored synchronously: %s."):format((tostring(Err))))), true
 	end)
@@ -184,7 +184,7 @@ Callback7 = function(p2, _batch) --[[ Line: 338 | Named "dispatchBatch" ]]
 	if Result3 then
 		return Result
 	elseif Boolean.toJSBoolean(BatchLoadFnResult) and typeof(BatchLoadFnResult.andThen) == "function" then
-		BatchLoadFnResult:andThen(function(List) --[[ Line: 384 ]]
+		BatchLoadFnResult:andThen(function(List)
 			-- upvalues: Boolean (upval), Callback (upval), Error1 (upval), _batch (copy), Callback8 (upval), InstanceofFunction (upval), Error2 (upval)
 			if not Boolean.toJSBoolean(Callback(List)) then
 				error(Error1.new("DataLoader must be constructed with a function which accepts " .. "Array<key> and returns Promise<Array<value>>, but the function did " .. ("not return a Promise of an Array: %s."):format(table.concat(List, ","))))
@@ -204,7 +204,7 @@ Callback7 = function(p2, _batch) --[[ Line: 338 | Named "dispatchBatch" ]]
 				end
 				Count += 1
 			end
-		end):catch(function(Err) --[[ Line: 425 ]]
+		end):catch(function(Err)
 			-- upvalues: Callback9 (upval), p2 (copy), _batch (copy)
 			Callback9(p2, _batch, Err)
 		end)
@@ -215,7 +215,7 @@ Callback7 = function(p2, _batch) --[[ Line: 338 | Named "dispatchBatch" ]]
 	end
 end
 
-Callback9 = function(p3, _batch, NewResult) --[[ Line: 433 | Named "failedDispatch" ]]
+Callback9 = function(p3, _batch, NewResult)
 	-- upvalues: Callback8 (ref)
 	Callback8(_batch)
 	local Count = 0
@@ -226,7 +226,7 @@ Callback9 = function(p3, _batch, NewResult) --[[ Line: 433 | Named "failedDispat
 	end
 end
 
-Callback8 = function(p4) --[[ Line: 448 | Named "resolveCacheHits" ]]
+Callback8 = function(p4)
 	-- upvalues: Boolean (copy)
 	if Boolean.toJSBoolean(p4.cacheHits) then
 		local Count = 0
@@ -237,7 +237,7 @@ Callback8 = function(p4) --[[ Line: 448 | Named "resolveCacheHits" ]]
 	end
 end
 
-Callback1 = function(p5) --[[ Line: 463 | Named "getValidMaxBatchSize" ]]
+Callback1 = function(p5)
 	-- upvalues: Boolean (copy), Error1 (copy)
 	if not Boolean.toJSBoolean(not Boolean.toJSBoolean(p5) or p5.batch ~= false) then
 		return 1
@@ -253,7 +253,7 @@ Callback1 = function(p5) --[[ Line: 463 | Named "getValidMaxBatchSize" ]]
 	return MaxBatchSize
 end
 
-Callback2 = function(p5) --[[ Line: 481 | Named "getValidBatchScheduleFn" ]]
+Callback2 = function(p5)
 	-- upvalues: Boolean (copy), v9 (copy), Error1 (copy)
 	local BatchScheduleFn = if Boolean.toJSBoolean(p5) then p5.batchScheduleFn else p5
 	
@@ -266,12 +266,12 @@ Callback2 = function(p5) --[[ Line: 481 | Named "getValidBatchScheduleFn" ]]
 	return BatchScheduleFn
 end
 
-Callback3 = function(p5) --[[ Line: 495 | Named "getValidCacheKeyFn" ]]
+Callback3 = function(p5)
 	-- upvalues: Boolean (copy), Error1 (copy)
 	local CacheKeyFn = if Boolean.toJSBoolean(p5) then p5.cacheKeyFn else p5
 	
 	if CacheKeyFn == nil then
-		return function(p6) --[[ Line: 498 ]]
+		return function(p6)
 			return p6
 		end
 	end
@@ -281,7 +281,7 @@ Callback3 = function(p5) --[[ Line: 495 | Named "getValidCacheKeyFn" ]]
 	return CacheKeyFn
 end
 
-Callback4 = function(p5) --[[ Line: 509 | Named "getValidCacheMap" ]]
+Callback4 = function(p5)
 	-- upvalues: Boolean (copy), Map (copy), Array (copy), Error1 (copy)
 	if not Boolean.toJSBoolean(not Boolean.toJSBoolean(p5) or p5.cache ~= false) then
 		return nil
@@ -292,7 +292,7 @@ Callback4 = function(p5) --[[ Line: 509 | Named "getValidCacheMap" ]]
 		return Map.new()
 	end
 	if CacheMap ~= nil then
-		local FilterResult = Array.filter({ "get", "set", "delete", "clear" }, function(p6) --[[ Line: 520 ]]
+		local FilterResult = Array.filter({ "get", "set", "delete", "clear" }, function(p6)
 			-- upvalues: Boolean (upval), CacheMap (copy)
 			return if Boolean.toJSBoolean(CacheMap) then typeof(CacheMap[tostring(p6)]) ~= "function" else CacheMap
 		end)
@@ -304,12 +304,12 @@ Callback4 = function(p5) --[[ Line: 509 | Named "getValidCacheMap" ]]
 	return CacheMap
 end
 
-Callback6 = function(p5) --[[ Line: 530 | Named "getValidName" ]]
+Callback6 = function(p5)
 	-- upvalues: Boolean (copy)
 	return if Boolean.toJSBoolean(if Boolean.toJSBoolean(p5) then p5.name else p5) then p5.name else nil
 end
 
-Callback = function(p5): boolean --[[ Line: 538 | Named "isArrayLike" ]]
+Callback = function(p5): boolean
 	return typeof(p5) == "table" and (#p5 == 0 or #p5 > 0 and p5[#p5] ~= nil)
 end
 

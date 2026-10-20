@@ -9,7 +9,7 @@ local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local UseLayerCollectorFunction = UIBloxModule.Core.Layout.LayerCollector.useLayerCollector
 
-return function(p1) --[[ Line: 37 | Named "ReportFailedDialog" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), UseLocalizedStringsModule (copy), UseLayerCollectorFunction (copy), ReactModule (copy), InteractiveAlert (copy), MODALPOSITIONOFFSETModule (copy), ButtonType (copy)
 	local UseLocalizationResult = p1.localizationKeys and UseLocalizationFunction(p1.localizationKeys) or UseLocalizedStringsModule()
 	local UseLayerCollectorResult = UseLayerCollectorFunction()

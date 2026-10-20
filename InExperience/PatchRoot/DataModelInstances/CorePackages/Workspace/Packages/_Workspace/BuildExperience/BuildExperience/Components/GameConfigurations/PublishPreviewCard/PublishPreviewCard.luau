@@ -15,11 +15,11 @@ local NumberSequence1 = NumberSequence.new({
 	NumberSequenceKeypoint.new(1, 0)
 })
 
-local function _(p1) --[[ Line: 33 | Named "getMediaUrl" ]]
+local function _(p1)
 	return if p1.placeId == nil then p1.gameIcon or `rbxthumb://type=GameIcon&id={p1.universeId}&w=150&h=150` else `rbxthumb://type=GameThumbnail&id={p1.placeId}&w=768&h=432`
 end
 
-return function(p1) --[[ Line: 41 | Named "PublishPreviewCard" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), BuildPublishPreviewCardMaxWidth (copy), Image (copy), NumberSequence1 (copy), PublishExperienceTitleModule (copy)
 	local TestId = p1.testId or "publish-preview-card"
 	local Target = p1.target

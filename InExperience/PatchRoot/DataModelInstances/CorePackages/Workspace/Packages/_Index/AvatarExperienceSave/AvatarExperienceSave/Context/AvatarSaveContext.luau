@@ -7,15 +7,15 @@ local SaveStatusEnumModule = require(AvatarExperienceSave.Enums.SaveStatusEnum)
 return if game:DefineFastFlag("FFlagAXFixAvatarSaveContext", false) then ReactModule.createContext({
 	getHistorySignal = SignalsModule.createSignal({}),
 	getCurrentHistoryIndexSignal = SignalsModule.createSignal(0),
-	updateHistoryIndexAndGetCharacterData = function(_) --[[ Line: 42 ]]
+	updateHistoryIndexAndGetCharacterData = function(_)
 		return nil
 	end,
 	getLastSuccessfullySavedStateSignal = SignalsModule.createSignal({}),
 	getSaveEligibilityStatusSignal = SignalsModule.createSignal(SaveStatusEnumModule.AlreadySaved),
-	autoSaveNextNewSaveData = function() --[[ Line: 47 ]]
+	autoSaveNextNewSaveData = function()
 		return nil
 	end,
-	trySaveAvatar = function() --[[ Line: 50 ]]
+	trySaveAvatar = function()
 		return nil
 	end
 }) else ReactModule.createContext(nil)

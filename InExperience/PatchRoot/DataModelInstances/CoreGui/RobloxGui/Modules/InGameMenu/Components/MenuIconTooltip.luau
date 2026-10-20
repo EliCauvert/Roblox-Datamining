@@ -14,9 +14,9 @@ local Tooltip = InGameMenuDependenciesModule.UIBlox.App.Dialog.Tooltip
 local MenuIconTooltip = Roact.PureComponent:extend("MenuIconTooltip")
 MenuIconTooltip.validateProps = T.strictInterface({ isTooltipOpen = T.boolean, onDismiss = T.callback })
 
-function MenuIconTooltip.init(p1) --[[ Line: 28 ]]
+function MenuIconTooltip.init(p1)
 	-- upvalues: SignalsModule (copy), DisplayModule (copy)
-	p1.disposeUiScaleEffect = SignalsModule.createEffect(function(p2) --[[ Line: 29 ]]
+	p1.disposeUiScaleEffect = SignalsModule.createEffect(function(p2)
 		-- upvalues: DisplayModule (upval), p1 (copy)
 		p1:setState({
 			UiScale = DisplayModule.GetDisplayStore(p2).getUIScale(p2)
@@ -24,11 +24,11 @@ function MenuIconTooltip.init(p1) --[[ Line: 28 ]]
 	end)
 end
 
-function MenuIconTooltip.render(p1) --[[ Line: 37 ]]
+function MenuIconTooltip.render(p1)
 	-- upvalues: WithLocalizationModule (copy), ConstantsModule (copy), Roact (copy), CoreGui (copy), Tooltip (copy)
 	return WithLocalizationModule({
 		bodyText = "CoreScripts.InGameMenu.EducationalPopup.MenuIconTooltip"
-	})(function(p2) --[[ Line: 40 ]]
+	})(function(p2)
 		-- upvalues: ConstantsModule (upval), p1 (copy), Roact (upval), CoreGui (upval), Tooltip (upval)
 		local _Vector2 = Vector2.new(ConstantsModule.ScreenSideOffset * p1.state.UiScale, ConstantsModule.TopBarHeight * p1.state.UiScale - 32)
 		
@@ -49,18 +49,18 @@ function MenuIconTooltip.render(p1) --[[ Line: 37 ]]
 	end)
 end
 
-function MenuIconTooltip.willUnmount(p1) --[[ Line: 65 ]]
+function MenuIconTooltip.willUnmount(p1)
 	if p1.disposeUiScaleEffect then
 		p1.disposeUiScaleEffect()
 	end
 end
 
-return RoactRodux.UNSTABLE_connect2(function(p1, _) --[[ Line: 72 ]]
+return RoactRodux.UNSTABLE_connect2(function(p1, _)
 	return { isTooltipOpen = p1.nativeClosePrompt.menuIconTooltipOpen }
-end, function(Callback) --[[ Line: 76 ]]
+end, function(Callback)
 	-- upvalues: SetMenuIconTooltipOpenModule (copy)
 	return {
-		onDismiss = function() --[[ Line: 78 ]]
+		onDismiss = function()
 			-- upvalues: Callback (copy), SetMenuIconTooltipOpenModule (upval)
 			Callback(SetMenuIconTooltipOpenModule(false))
 		end

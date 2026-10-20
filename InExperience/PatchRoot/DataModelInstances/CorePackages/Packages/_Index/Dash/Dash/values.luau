@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.Types)
 local InsertFunction = table.insert
 
-return function(List) --[[ Line: 14 | Named "values" ]]
+return function(List)
 	-- upvalues: InsertFunction (copy)
 	local t = {}
 	

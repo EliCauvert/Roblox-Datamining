@@ -1,26 +1,26 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("SduiSharedContent").Parent.React)
 
-local function _(p1) --[[ Line: 17 | Named "getDelimiter" ]]
+local function _(p1)
 	return if p1 == nil or p1 == "" then " " else p1
 end
 
-local _ = function(p1: number): number --[[ Line: 24 | Named "getRevealInterval" ]]
+local _ = function(p1: number): number
 	return if p1 == nil then 0.05 else math.max(p1, 0)
 end
 
-local _ = function(p1): boolean --[[ Line: 31 | Named "shouldRenderDelimiter" ]]
+local _ = function(p1): boolean
 	return not p1
 end
 
-local _ = function(Text: string, p1): string --[[ Line: 35 | Named "getTagName" ]]
+local _ = function(Text: string, p1): string
 	return string.match(Text, if p1 then "^<%s*/%s*([%w]+)" else "^<%s*([%w]+)")
 end
 
-local _ = function(Text: string, p1): boolean --[[ Line: 40 | Named "isSelfClosingTag" ]]
+local _ = function(Text: string, p1): boolean
 	return p1 == "br" or string.match(Text, "/%s*>$") ~= nil
 end
 
-local function removeLastMatchingTag(List, Match) --[[ Line: 44 ]]
+local function removeLastMatchingTag(List, Match)
 	for i = #List, 1, -1 do
 		if List[i] == Match then
 			table.remove(List, i)
@@ -29,7 +29,7 @@ local function removeLastMatchingTag(List, Match) --[[ Line: 44 ]]
 	end
 end
 
-local _ = function(List, p1): string --[[ Line: 53 | Named "buildBalancedText" ]]
+local _ = function(List, p1): string
 	local Joined = table.concat(List)
 	
 	for i = #p1, 1, -1 do
@@ -38,7 +38,7 @@ local _ = function(List, p1): string --[[ Line: 53 | Named "buildBalancedText" ]
 	return Joined
 end
 
-local _ = function(List1, List, p2) --[[ Line: 61 | Named "appendFrame" ]]
+local _ = function(List1, List, p2)
 	local Joined = table.concat(List)
 	
 	for i = #p2, 1, -1 do
@@ -51,7 +51,7 @@ local _ = function(List1, List, p2) --[[ Line: 61 | Named "appendFrame" ]]
 	end
 end
 
-local function buildRevealTextFrames(Text: string, Delimiter, RichText, RemoveDelimiter) --[[ Line: 68 ]]
+local function buildRevealTextFrames(Text: string, Delimiter, RichText, RemoveDelimiter)
 	-- upvalues: removeLastMatchingTag (copy)
 	if Text == nil or Text == "" then
 		return { Text or "" }
@@ -124,22 +124,22 @@ local function buildRevealTextFrames(Text: string, Delimiter, RichText, RemoveDe
 	return List
 end
 
-return function(p3) --[[ Line: 133 | Named "useRevealText" ]]
+return function(p3)
 	-- upvalues: ReactModule (copy), buildRevealTextFrames (copy)
 	local Text = p3.text
 	local Delimiter = p3.delimiter
 	local RemoveDelimiter = p3.removeDelimiter
 	local RichText = p3.richText
 	local RevealInterval: number = p3.revealInterval
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 140 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: buildRevealTextFrames (upval), Text (copy), Delimiter (copy), RichText (copy), RemoveDelimiter (copy)
 		return (buildRevealTextFrames(Text, Delimiter, RichText, RemoveDelimiter))
 	end, { Text, Delimiter, RichText, RemoveDelimiter })
 	local Largest: number = if RevealInterval == nil then 0.05 else math.max(RevealInterval, 0)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(if Largest == 0 then UseMemoResult[#UseMemoResult] else UseMemoResult[1])
-	ReactModule.useEffect(function() --[[ Line: 147 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Largest (copy), UseStateResult2 (copy), UseMemoResult (copy)
-		local SpawnedThread = task.spawn(function() --[[ Line: 148 ]]
+		local SpawnedThread = task.spawn(function()
 			-- upvalues: Largest (upval), UseStateResult2 (upval), UseMemoResult (upval)
 			if Largest == 0 then
 				UseStateResult2(UseMemoResult[#UseMemoResult])
@@ -154,7 +154,7 @@ return function(p3) --[[ Line: 133 | Named "useRevealText" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 162 ]]
+		return function()
 			-- upvalues: SpawnedThread (copy)
 			task.cancel(SpawnedThread)
 		end

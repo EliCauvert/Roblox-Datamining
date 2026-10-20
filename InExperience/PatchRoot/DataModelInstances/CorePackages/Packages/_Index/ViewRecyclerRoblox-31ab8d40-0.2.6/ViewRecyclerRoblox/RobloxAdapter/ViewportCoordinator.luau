@@ -3,7 +3,7 @@ local _ = require(ViewRecyclerRoblox.Parent.ViewRecycler).Axis
 local SignalsExperimentalModule = require(ViewRecyclerRoblox.Parent.SignalsExperimental)
 local AxisMapModule = require(ViewRecyclerRoblox.RobloxAdapter.axisMap)
 
-local function _(Tbl) --[[ Line: 34 | Named "disconnectAll" ]]
+local function _(Tbl)
 	for _, Connection in Tbl do
 		Connection:Disconnect()
 	end
@@ -11,7 +11,7 @@ local function _(Tbl) --[[ Line: 34 | Named "disconnectAll" ]]
 end
 
 return {
-	new = function(p1) --[[ Line: 41 ]]
+	new = function(p1)
 		-- upvalues: AxisMapModule (copy), SignalsExperimentalModule (copy)
 		local Axis = p1.axis
 		local ActivationMargin = p1.activationMargin or 0
@@ -23,7 +23,7 @@ return {
 		local t = {}
 		local Flag = false
 		
-		local function updateTargetGeometry(p2) --[[ Line: 53 ]]
+		local function updateTargetGeometry(p2)
 			-- upvalues: v1 (ref), AxisMapModule (upval), Axis (copy)
 			local Frame = v1
 			
@@ -39,10 +39,10 @@ return {
 			end
 		end
 		
-		local function _(p2, p3) --[[ Line: 69 | Named "dispatch" ]]
+		local function _(p2, p3)
 			-- upvalues: SignalsExperimentalModule (upval)
 			if p2 ~= nil or p3 ~= nil then
-				SignalsExperimentalModule.batch(function() --[[ Line: 73 ]]
+				SignalsExperimentalModule.batch(function()
 					-- upvalues: p2 (copy), p3 (copy)
 					if p2 ~= nil then
 						for _, value in p2 do
@@ -60,7 +60,7 @@ return {
 			end
 		end
 		
-		local function deactivateAll() --[[ Line: 87 ]]
+		local function deactivateAll()
 			-- upvalues: t (copy), SignalsExperimentalModule (upval)
 			local List = nil
 			
@@ -75,7 +75,7 @@ return {
 			
 			if List1 ~= nil then
 				local v2 = nil
-				SignalsExperimentalModule.batch(function() --[[ Line: 73 ]]
+				SignalsExperimentalModule.batch(function()
 					-- upvalues: List1 (copy), v2 (copy)
 					if List1 ~= nil then
 						for _, value in List1 do
@@ -93,7 +93,7 @@ return {
 			end
 		end
 		
-		local function evaluate() --[[ Line: 99 ]]
+		local function evaluate()
 			-- upvalues: Flag (ref), v1 (ref), deactivateAll (copy), AxisMapModule (upval), Axis (copy), t (copy), RetentionMargin (copy), ActivationMargin (copy), SignalsExperimentalModule (upval)
 			if Flag then return end
 			local ScrollFrame = v1
@@ -133,7 +133,7 @@ return {
 			local List3 = List
 			
 			if List2 ~= nil or List3 ~= nil then
-				SignalsExperimentalModule.batch(function() --[[ Line: 73 ]]
+				SignalsExperimentalModule.batch(function()
 					-- upvalues: List2 (copy), List3 (copy)
 					if List2 ~= nil then
 						for _, value in List2 do
@@ -153,7 +153,7 @@ return {
 		
 		local _ = nil
 		
-		local function SetViewport(Object) --[[ Line: 140 ]]
+		local function SetViewport(Object)
 			-- upvalues: Flag (ref), v1 (ref), List (copy), deactivateAll (copy), evaluate (copy), SetViewport (ref), t (copy), updateTargetGeometry (copy)
 			if Flag or Object == v1 then return end
 			for _, Connection in List do
@@ -166,7 +166,7 @@ return {
 			if Object == nil then return end
 			table.insert(List, Object:GetPropertyChangedSignal("CanvasPosition"):Connect(evaluate))
 			table.insert(List, Object:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(evaluate))
-			table.insert(List, Object.Destroying:Connect(function() --[[ Line: 156 ]]
+			table.insert(List, Object.Destroying:Connect(function()
 				-- upvalues: SetViewport (upval)
 				SetViewport(nil)
 			end))
@@ -179,10 +179,10 @@ return {
 		
 		return {
 			setViewport = SetViewport,
-			register = function(Object, SetActive) --[[ Line: 166 ]]
+			register = function(Object, SetActive)
 				-- upvalues: Flag (ref), t (copy), SignalsExperimentalModule (upval), updateTargetGeometry (copy), evaluate (copy)
 				if Flag then
-					return function() --[[ Line: 168 ]] end
+					return function() end
 				else
 					assert(t[Object] == nil, "target is already registered")
 					local config = {
@@ -196,7 +196,7 @@ return {
 					t[Object] = config
 					local Flag1 = false
 					
-					local function unregister() --[[ Line: 183 ]]
+					local function unregister()
 						-- upvalues: Flag1 (ref), t (upval), Object (copy), config (copy), SignalsExperimentalModule (upval)
 						if Flag1 then return end
 						Flag1 = true
@@ -216,7 +216,7 @@ return {
 							
 							if list == nil then return end
 							local v3 = nil
-							SignalsExperimentalModule.batch(function() --[[ Line: 73 ]]
+							SignalsExperimentalModule.batch(function()
 								-- upvalues: list (copy), v3 (copy)
 								if list ~= nil then
 									for _, value in list do
@@ -232,7 +232,7 @@ return {
 						end
 					end
 					
-					local function updateGeometry() --[[ Line: 199 ]]
+					local function updateGeometry()
 						-- upvalues: updateTargetGeometry (upval), config (copy), evaluate (upval)
 						updateTargetGeometry(config)
 						evaluate()
@@ -247,7 +247,7 @@ return {
 					return unregister
 				end
 			end,
-			destroy = function() --[[ Line: 211 ]]
+			destroy = function()
 				-- upvalues: Flag (ref), List (copy), t (copy), v1 (ref), SignalsExperimentalModule (upval)
 				if Flag then return end
 				Flag = true
@@ -278,7 +278,7 @@ return {
 				
 				if List2 ~= nil then
 					local v4 = nil
-					SignalsExperimentalModule.batch(function() --[[ Line: 73 ]]
+					SignalsExperimentalModule.batch(function()
 						-- upvalues: List2 (copy), v4 (copy)
 						if List2 ~= nil then
 							for _, value in List2 do

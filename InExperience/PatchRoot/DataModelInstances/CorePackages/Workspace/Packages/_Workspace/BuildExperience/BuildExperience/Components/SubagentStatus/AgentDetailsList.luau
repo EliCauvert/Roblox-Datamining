@@ -20,7 +20,7 @@ local PopoverSide = FoundationModule.Enums.PopoverSide
 local SubagentTaskStatus = require(Parent.DataHydration.CreatorAgentChat).SubagentTaskStatus
 local BuildAgentDetailsStatusMenuWidth = game:DefineFastInt("BuildAgentDetailsStatusMenuWidth", 172)
 
-local function _(List, Status) --[[ Line: 50 | Named "getStatusFilterText" ]]
+local function _(List, Status)
 	for _, value in List do
 		if value.status == Status then
 			return value.text
@@ -29,16 +29,16 @@ local function _(List, Status) --[[ Line: 50 | Named "getStatusFilterText" ]]
 	return Status or "All"
 end
 
-local _ = function(p1, p2) --[[ Line: 59 | Named "taskMatchesSearch" ]]
+local _ = function(p1, p2)
 	-- upvalues: MatchesSearchQueryModule (copy)
 	return MatchesSearchQueryModule(p1.text, p2) or MatchesSearchQueryModule(p1.description, p2)
 end
 
-local _ = function(p1, Status): boolean --[[ Line: 63 | Named "taskMatchesStatus" ]]
+local _ = function(p1, Status): boolean
 	return Status == nil or p1.status == Status
 end
 
-local _ = function(p1, p2) --[[ Line: 70 | Named "shouldIncludeTask" ]]
+local _ = function(p1, p2)
 	-- upvalues: MatchesSearchQueryModule (copy)
 	local SearchQuery = p2.searchQuery
 	local MatchesSearchQueryModuleResult = MatchesSearchQueryModule(p1.text, SearchQuery) or MatchesSearchQueryModule(p1.description, SearchQuery)
@@ -54,7 +54,7 @@ local _ = function(p1, p2) --[[ Line: 70 | Named "shouldIncludeTask" ]]
 	return MatchesSearchQueryModuleResult
 end
 
-return ReactModule.memo(function(Frame) --[[ Line: 74 | Named "AgentDetailsList" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: ReactModule (copy), UseScaledValueFunction (copy), BuildAgentDetailsStatusMenuWidth (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), SubagentTaskStatus (copy), MatchesSearchQueryModule (copy), View (copy), SearchInput (copy), Menu (copy), PopoverAlign (copy), PopoverSide (copy), InputSize (copy), Chip (copy), IconName (copy), ChipVariant (copy), ChipSize (copy), TodoListModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState("")
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
@@ -124,9 +124,9 @@ return ReactModule.memo(function(Frame) --[[ Line: 74 | Named "AgentDetailsList"
 			})
 		end
 	end
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 135 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_2 (copy)
-		UseStateResult2_2(function(p1): boolean --[[ Line: 136 ]]
+		UseStateResult2_2(function(p1): boolean
 			return not p1
 		end)
 	end, {})
@@ -163,7 +163,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 74 | Named "AgentDetailsList"
 		LayoutOrder = 2,
 		align = PopoverAlign.Start,
 		isOpen = UseStateResult3,
-		items = (function() --[[ Line: 121 | Named "buildStatusMenuItems" ]]
+		items = (function()
 			-- upvalues: list (copy), UseStateResult1 (copy)
 			local List = {}
 			
@@ -177,12 +177,12 @@ return ReactModule.memo(function(Frame) --[[ Line: 74 | Named "AgentDetailsList"
 			end
 			return List
 		end)(),
-		onActivated = ReactModule.useCallback(function(p1) --[[ Line: 145 ]]
+		onActivated = ReactModule.useCallback(function(p1)
 			-- upvalues: UseStateResult2_1 (copy), UseStateResult2_2 (copy)
 			UseStateResult2_1(if p1 == "All" then nil else p1)
 			UseStateResult2_2(false)
 		end, {}),
-		onPressedOutside = ReactModule.useCallback(function() --[[ Line: 141 ]]
+		onPressedOutside = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2_2 (copy)
 			UseStateResult2_2(false)
 		end, {}),

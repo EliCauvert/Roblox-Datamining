@@ -24,7 +24,7 @@ local config = {
 	size = require(Foundation.Enums.InputSize).Medium
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 81 | Named "InternalInput" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseInputVariantsModule (copy), ReactModule (copy), UseInputMotionStatesModule (copy), UseMotionFunction (copy), ConstantsModule (copy), StateLayerAffordanceModule (copy), ViewModule (copy), WithCommonPropsModule (copy), DashModule (copy), InputLabelModule (copy), GetInputTextSizeModule (copy), InputHintModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local Text = WithDefaultsModuleResult.label.text
@@ -33,7 +33,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 81 |
 	local UseTokensModuleResult = UseTokensModule()
 	local IsChecked = WithDefaultsModuleResult.isChecked or WithDefaultsModuleResult.isIndeterminate
 	local UseInputVariantsModuleResult = UseInputVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size, Position)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 93 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy), UseTokensModuleResult (copy)
 		return {
 			radius = WithDefaultsModuleResult.customVariantProps.cursorRadius or UDim.new(0, 0),
@@ -47,7 +47,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 81 |
 	})
 	local UseInputMotionStatesModuleResult = UseInputMotionStatesModule(UseTokensModuleResult, WithDefaultsModuleResult.customVariantProps.colors)
 	local UseMotionResult, UseMotionResult2 = UseMotionFunction(UseInputMotionStatesModuleResult.Default)
-	ReactModule.useEffect(function() --[[ Line: 105 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsChecked (copy), UseMotionResult2 (copy), UseInputMotionStatesModuleResult (copy)
 		if IsChecked then
 			UseMotionResult2(UseInputMotionStatesModuleResult.Checked)
@@ -57,7 +57,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 81 |
 			UseMotionResult2(UseInputMotionStatesModuleResult.Default)
 		end
 	end, { IsChecked, UseInputMotionStatesModuleResult })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 113 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: WithDefaultsModuleResult (copy)
 		if not WithDefaultsModuleResult.isDisabled then
 			WithDefaultsModuleResult.onActivated(not WithDefaultsModuleResult.isChecked)
@@ -92,7 +92,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 81 |
 		Size = WithDefaultsModuleResult.customVariantProps.size - UDim2.fromOffset(Thickness, Thickness),
 		backgroundStyle = UseMotionResult.backgroundStyle,
 		onActivated = UseResult,
-		stateLayer = ReactModule.useMemo(function() --[[ Line: 144 ]]
+		stateLayer = ReactModule.useMemo(function()
 			-- upvalues: StateLayerAffordanceModule (upval)
 			return {
 				inset = nil,
@@ -101,10 +101,10 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 81 |
 			}
 		end, {}),
 		stroke = {
-			Color = UseMotionResult.strokeStyle:map(function(p2) --[[ Line: 156 ]]
+			Color = UseMotionResult.strokeStyle:map(function(p2)
 				return p2.Color3
 			end),
-			Transparency = UseMotionResult.strokeStyle:map(function(p2) --[[ Line: 159 ]]
+			Transparency = UseMotionResult.strokeStyle:map(function(p2)
 				-- upvalues: WithDefaultsModuleResult (copy), HasText (copy), ConstantsModule (upval)
 				return if WithDefaultsModuleResult.isDisabled and not HasText then ConstantsModule.DISABLED_TRANSPARENCY else p2.Transparency
 			end),

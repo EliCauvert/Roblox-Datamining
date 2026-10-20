@@ -15,7 +15,7 @@ end
 local Module = {}
 Module.__index = Module
 
-function Module.new(UserCFrame) --[[ Line: 23 ]]
+function Module.new(UserCFrame)
 	-- upvalues: Module (copy), VRService (copy)
 	local self = setmetatable({}, Module)
 	self.userCFrame = UserCFrame
@@ -34,7 +34,7 @@ function Module.new(UserCFrame) --[[ Line: 23 ]]
 	return self
 end
 
-function Module:createControllerModel() --[[ Line: 45 ]]
+function Module:createControllerModel()
 	-- upvalues: VRUtilModule (copy), ViveControllerModule (copy), RiftControllerModule (copy), IndexControllerModule (copy), TouchControllerModule (copy)
 	local CurrentControllerType = VRUtilModule.getCurrentControllerType()
 	
@@ -62,7 +62,7 @@ function Module:createControllerModel() --[[ Line: 45 ]]
 	end
 end
 
-function Module:setCurrentModel() --[[ Line: 62 ]]
+function Module:setCurrentModel()
 	-- upvalues: VRService (copy)
 	if self.currentModel then
 		self:setModelInWorkspace(false)
@@ -77,7 +77,7 @@ function Module:setCurrentModel() --[[ Line: 62 ]]
 	end
 end
 
-function Module:setModelInWorkspace(ModelIsInWorkspace) --[[ Line: 79 ]]
+function Module:setModelInWorkspace(ModelIsInWorkspace)
 	if not self.currentModel then return end
 	if ModelIsInWorkspace ~= self.modelIsInWorkspace then
 		self.modelIsInWorkspace = ModelIsInWorkspace
@@ -96,32 +96,32 @@ function Module:setModelInWorkspace(ModelIsInWorkspace) --[[ Line: 79 ]]
 	end
 end
 
-function Module:setEnabled(Enabled) --[[ Line: 98 ]]
+function Module:setEnabled(Enabled)
 	-- upvalues: VRService (copy), UserInputService (copy)
 	if Enabled ~= self.enabled then
 		self.enabled = Enabled
 		
 		if self.enabled then
 			self:setCurrentModel()
-			self.onCurrentCameraChangedConn = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function() --[[ Line: 105 ]]
+			self.onCurrentCameraChangedConn = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
 				-- upvalues: self (copy), VRService (upval)
 				self:setModelInWorkspace(VRService:GetUserCFrameEnabled(self.userCFrame))
 			end)
-			self.onUserCFrameEnabledChangedConn = VRService.UserCFrameEnabled:connect(function(UserCFrame, ModelIsInWorkspace) --[[ Line: 109 ]]
+			self.onUserCFrameEnabledChangedConn = VRService.UserCFrameEnabled:connect(function(UserCFrame, ModelIsInWorkspace)
 				-- upvalues: self (copy)
 				if UserCFrame == self.userCFrame then
 					self:setModelInWorkspace(ModelIsInWorkspace)
 				end
 			end)
-			self.onInputBeganConn = UserInputService.InputBegan:connect(function(...) --[[ Line: 115 ]]
+			self.onInputBeganConn = UserInputService.InputBegan:connect(function(...)
 				-- upvalues: self (copy)
 				self:onInputBegan(...)
 			end)
-			self.onInputChangedConn = UserInputService.InputChanged:connect(function(...) --[[ Line: 118 ]]
+			self.onInputChangedConn = UserInputService.InputChanged:connect(function(...)
 				-- upvalues: self (copy)
 				self:onInputChanged(...)
 			end)
-			self.onInputEndedConn = UserInputService.InputEnded:connect(function(...) --[[ Line: 121 ]]
+			self.onInputEndedConn = UserInputService.InputEnded:connect(function(...)
 				-- upvalues: self (copy)
 				self:onInputEnded(...)
 			end)
@@ -159,7 +159,7 @@ function Module:setEnabled(Enabled) --[[ Line: 98 ]]
 	end
 end
 
-function Module:update(_) --[[ Line: 162 ]]
+function Module:update(_)
 	-- upvalues: VRUtilModule (copy)
 	if not self.enabled then return end
 	if self.currentModel then
@@ -167,27 +167,27 @@ function Module:update(_) --[[ Line: 162 ]]
 	end
 end
 
-function Module:onInputBegan(p1, _) --[[ Line: 173 ]]
+function Module:onInputBegan(p1, _)
 	if not self.enabled or not self.modelIsInWorkspace then return end
 	if self.currentModel then
 		self.currentModel:onInputBegan(p1)
 	end
 end
 
-function Module:onInputChanged(p1, _) --[[ Line: 182 ]]
+function Module:onInputChanged(p1, _)
 	if not self.enabled or not self.modelIsInWorkspace then return end
 	if self.currentModel then
 		self.currentModel:onInputChanged(p1)
 	end
 end
 
-function Module:onInputEnded(p1, _) --[[ Line: 191 ]]
+function Module:onInputEnded(p1, _)
 	if self.currentModel then
 		self.currentModel:onInputEnded(p1)
 	end
 end
 
-function Module:getButtonPosition(p1) --[[ Line: 197 ]]
+function Module:getButtonPosition(p1)
 	if self.currentModel and self.currentModel.getButtonPart then
 		local ButtonPart = self.currentModel:getButtonPart(p1)
 		

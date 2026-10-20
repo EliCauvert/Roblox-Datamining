@@ -17,7 +17,7 @@ local IconsActionsAccept = UIBloxModule.App.ImageSet.Images["icons/actions/accep
 local InExperienceInterventionAnalyticsModule = require(InExperienceIntervention.InExperienceInterventionAnalytics)
 local UseLayerCollectorFunction = UIBloxModule.Core.Layout.LayerCollector.useLayerCollector
 
-function getDynamicViewTagForTranslatedText(Text: string, Text1: string, p1): string --[[ Line: 33 ]]
+function getDynamicViewTagForTranslatedText(Text: string, Text1: string, p1): string
 	-- upvalues: Constants (copy)
 	local v1 = "align-x-center align-y-center row"
 	local NewLength = string.len(Text) + string.len(Text1)
@@ -28,7 +28,7 @@ function getDynamicViewTagForTranslatedText(Text: string, Text1: string, p1): st
 	return v1
 end
 
-function InterventionFeedbackFooter(p1) --[[ Line: 45 ]]
+function InterventionFeedbackFooter(p1)
 	-- upvalues: UseLocalizationFunction (copy), Constants (copy), UseLayerCollectorFunction (copy), UseStyleFunction (copy), NotificationModalsManagerModule (copy), IconsActionsAccept (copy), InExperienceInterventionAnalyticsModule (copy), ReactModule (copy), View (copy), Text (copy), Button (copy), ButtonVariant (copy), ButtonSize (copy), FillBehavior (copy)
 	local UseLocalizationResult = UseLocalizationFunction(Constants.localizationKeys)
 	local DynamicViewTagForTranslatedText = getDynamicViewTagForTranslatedText(UseLocalizationResult.MistakeText, UseLocalizationResult.LetUsKnowLinkText, UseLayerCollectorFunction().absoluteSize.X)
@@ -64,7 +64,7 @@ function InterventionFeedbackFooter(p1) --[[ Line: 45 ]]
 			Button = ReactModule.createElement(Button, {
 				text = UseLocalizationResult.LetUsKnowLinkText,
 				variant = ButtonVariant.Text,
-				onActivated = function() --[[ Line: 55 ]]
+				onActivated = function()
 					-- upvalues: p1 (copy), NotificationModalsManagerModule (upval), IconsActionsAccept (upval), UseLocalizationResult (copy), UseStyleResult (copy), InExperienceInterventionAnalyticsModule (upval)
 					p1.onDismiss()
 					NotificationModalsManagerModule.SetUIBloxToast({

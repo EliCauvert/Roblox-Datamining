@@ -5,25 +5,25 @@ local RealtimeDeliveryModule = require(Parent.RealtimeDelivery)
 local GetAgeVerifiedChangedSignalModule = require(SocialUpsell.Signals.GetAgeVerifiedChangedSignal)
 local FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace = require(Parent.SharedFlags).FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace
 
-function SocialUpsellEventReceiver(p1) --[[ Line: 16 ]]
+function SocialUpsellEventReceiver(p1)
 	-- upvalues: RealtimeDeliveryModule (copy), FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace (copy), GetAgeVerifiedChangedSignalModule (copy), ReactModule (copy), Parent (copy)
-	RealtimeDeliveryModule.useRealtimeConnectionStateChanged(FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace, function(ConnectionState, p2) --[[ Line: 19 ]]
+	RealtimeDeliveryModule.useRealtimeConnectionStateChanged(FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace, function(ConnectionState, p2)
 		-- upvalues: GetAgeVerifiedChangedSignalModule (upval)
 		if ConnectionState == Enum.ConnectionState.Connected and p2 then
 			GetAgeVerifiedChangedSignalModule():fire()
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 28 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), Parent (upval)
 		if p1.shouldRequestAppAgeSignals then
-			require(Parent.AppStoreAgeSignalsManager).AppAgeSignalsManager.requestAppAgeSignals():catch(function() --[[ Line: 31 ]] end)
+			require(Parent.AppStoreAgeSignalsManager).AppAgeSignalsManager.requestAppAgeSignals():catch(function() end)
 		end
 	end, { p1.shouldRequestAppAgeSignals })
-	ReactModule.useEffect(function() --[[ Line: 35 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), GetAgeVerifiedChangedSignalModule (upval)
 		local Connection = if p1.onAgeVerifiedChange then GetAgeVerifiedChangedSignalModule():connect(p1.onAgeVerifiedChange) else nil
 		
-		return function() --[[ Line: 40 ]]
+		return function()
 			-- upvalues: Connection (ref)
 			if Connection then
 				Connection:disconnect()

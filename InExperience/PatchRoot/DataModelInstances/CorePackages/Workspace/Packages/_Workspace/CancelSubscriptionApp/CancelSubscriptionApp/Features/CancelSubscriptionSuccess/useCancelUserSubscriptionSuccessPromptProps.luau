@@ -9,13 +9,13 @@ local CancelSubscriptionEndedModule = require(CancelSubscriptionApp.Store.Action
 local _ = require(CancelSubscriptionApp.Store.Types)
 local _ = require(script.Parent.CancelUserSubscriptionSuccessPrompt)
 
-return function() --[[ Line: 19 | Named "useCancelUserSubscriptionSuccessPromptProps" ]]
+return function()
 	-- upvalues: UseDispatchFunction (copy), UseSelectorFunction (copy), SelectSubscriptionIdModule (copy), ReactModule (copy), MarketplaceService (copy), CancelSubscriptionEndedModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseSelectorResult = UseSelectorFunction(SelectSubscriptionIdModule) or ""
 	
 	return {
-		onDismissed = ReactModule.useCallback(function() --[[ Line: 23 ]]
+		onDismissed = ReactModule.useCallback(function()
 			-- upvalues: MarketplaceService (upval), UseSelectorResult (copy), UseDispatchResult (copy), CancelSubscriptionEndedModule (upval)
 			MarketplaceService:SignalUserSubscriptionStatusChanged(UseSelectorResult)
 			UseDispatchResult(CancelSubscriptionEndedModule())

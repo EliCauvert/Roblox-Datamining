@@ -16,11 +16,11 @@ local config = {
 	[Enum.Platform.None] = PlatformBucketsModule.None
 }
 
-return function(All) --[[ Line: 24 ]]
+return function(All)
 	-- upvalues: GetUserInputServiceModule (copy), PlatformSpecificityModule (copy), IsVRAppBuildFunction (copy), PlatformBucketsModule (copy), config (copy)
 	local UserInputServiceModule = GetUserInputServiceModule()
 	local Platform = nil
-	pcall(function() --[[ Line: 29 ]]
+	pcall(function()
 		-- upvalues: Platform (ref), UserInputServiceModule (copy)
 		Platform = UserInputServiceModule:GetPlatform() or Enum.Platform.None
 	end)

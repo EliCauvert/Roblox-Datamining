@@ -2,12 +2,12 @@
 local PromiseModule = require(AuthCommon.Parent.Promise)
 local GetGameMediaModule = require(AuthCommon.Http.Requests.GetGameMedia)
 
-function FetchGameMedia(p1, p2) --[[ Line: 8 ]]
+function FetchGameMedia(p1, p2)
 	-- upvalues: GetGameMediaModule (copy), PromiseModule (copy)
 	assert(typeof(p2) == "string", "universeId must be a string")
 	assert(#p2 > 0, "universeId must be a non-empty string")
 	
-	return GetGameMediaModule(p1, p2):andThen(function(Result) --[[ Line: 12 ]]
+	return GetGameMediaModule(p1, p2):andThen(function(Result)
 		-- upvalues: PromiseModule (upval)
 		if not Result or not Result.responseBody then
 			return PromiseModule.reject()

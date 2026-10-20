@@ -1,4 +1,4 @@
-﻿return function() --[[ Line: 4 ]]
+﻿return function()
 	local Model = Instance.new("Model")
 	local HumanoidRootPart = Instance.new("Part")
 	HumanoidRootPart.Name = "HumanoidRootPart"

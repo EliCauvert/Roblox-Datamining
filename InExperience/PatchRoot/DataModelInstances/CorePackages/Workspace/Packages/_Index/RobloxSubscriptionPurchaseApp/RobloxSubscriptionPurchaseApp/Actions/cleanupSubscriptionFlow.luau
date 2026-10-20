@@ -1,6 +1,6 @@
 ﻿local RobloxSubscriptionStoreModule = require(script:FindFirstAncestor("RobloxSubscriptionPurchaseApp").Store.RobloxSubscriptionStore)
 
-return function() --[[ Line: 5 | Named "cleanupSubscriptionFlow" ]]
+return function()
 	-- upvalues: RobloxSubscriptionStoreModule (copy)
 	RobloxSubscriptionStoreModule.get().triggerUnmountUI()
 	RobloxSubscriptionStoreModule.cleanup()

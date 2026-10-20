@@ -6,7 +6,7 @@ local ColorsModule = require(script.Parent.Parent.Colors)
 local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
 local NoInventoryNotice = RoactModule.PureComponent:extend("NoInventoryNotice")
 
-function NoInventoryNotice.render(p1) --[[ Line: 13 ]]
+function NoInventoryNotice.render(p1)
 	-- upvalues: RoactModule (copy), ColorsModule (copy), AppFonts (copy), RobloxTranslatorModule (copy)
 	local IsLoaded = p1.props.isLoaded
 	
@@ -50,7 +50,7 @@ function NoInventoryNotice.render(p1) --[[ Line: 13 ]]
 	})
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 62 ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	return {
 		assets = p1.assets,
 		locale = p1.locale,

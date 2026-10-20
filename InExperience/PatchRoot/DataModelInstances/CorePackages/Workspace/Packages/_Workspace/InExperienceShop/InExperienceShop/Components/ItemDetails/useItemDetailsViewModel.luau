@@ -18,7 +18,7 @@ local _ = require(InExperienceShop.Types)
 local _ = require(script.Parent.ItemDetailsView)
 local config = { product = "Feature.DeveloperProducts.Label.Product" }
 
-local function findSectionForItem(UseSignalStateResult, Id, ItemType) --[[ Line: 45 ]]
+local function findSectionForItem(UseSignalStateResult, Id, ItemType)
 	for _, value in UseSignalStateResult do
 		for _, item in value.items do
 			if item.id == Id and item.itemType == ItemType then
@@ -29,21 +29,21 @@ local function findSectionForItem(UseSignalStateResult, Id, ItemType) --[[ Line:
 	return nil
 end
 
-local function _(p1, p2) --[[ Line: 60 | Named "categoryLabelForType" ]]
+local function _(p1, p2)
 	return if p1 == "GamePass" then "Game pass" else p2
 end
 
-return function(p1) --[[ Line: 67 | Named "useItemDetailsViewModel" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), ReactModule (copy), ShopPageType (copy), findSectionForItem (copy), InitiateShopItemPurchaseModule (copy), UseGamePassTrialRedemptionModule (copy), SharedFlagsModule (copy), AbuseVectorModule (copy), UseShopReportOverflowModule (copy), FormatUpdatedDateModule (copy), ConstantsModule (copy)
 	local Item = p1.item
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetInExperienceShopStoreModule)
 	local UseSignalStateResult1 = if FFlagCategoryLoggingInShopPurchaseModule then SignalsReactModule.useSignalState(UseSignalStateResult.getSections) else nil
-	local UseSignalStateResult2 = SignalsReactModule.useSignalState(function(p2) --[[ Line: 83 ]]
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState(function(p2)
 		-- upvalues: UseSignalStateResult (copy), Item (copy)
 		return UseSignalStateResult.getOwnership(p2)[Item.id]
 	end)
-	local UseSignalStateResult3 = SignalsReactModule.useSignalState(function(p2): boolean --[[ Line: 87 ]]
+	local UseSignalStateResult3 = SignalsReactModule.useSignalState(function(p2): boolean
 		-- upvalues: FFlagLuaAppEnableGamePassFreeTrialsModule (upval), Item (copy), UseSignalStateResult (copy)
 		if FFlagLuaAppEnableGamePassFreeTrialsModule and Item.itemType == "GamePass" then
 			return UseSignalStateResult.getTrialAvailabilities(p2).available[Item.id] == true
@@ -53,7 +53,7 @@ return function(p1) --[[ Line: 67 | Named "useItemDetailsViewModel" ]]
 			return false
 		end
 	end)
-	ReactModule.useEffect(function() --[[ Line: 100 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Item (copy), UseSignalStateResult (copy)
 		if Item.itemType == "GamePass" then
 			UseSignalStateResult.fetchGamePassOwnership(Item.id)
@@ -64,7 +64,7 @@ return function(p1) --[[ Line: 67 | Named "useItemDetailsViewModel" ]]
 		UseSignalStateResult.fetchGamePassOwnership
 	})
 	local IsOwned = if UseSignalStateResult2 == nil then Item.isOwned else UseSignalStateResult2
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 111 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: ShopPageType (upval), FFlagCategoryLoggingInShopPurchaseModule (upval), UseSignalStateResult1 (ref), findSectionForItem (upval), Item (copy), InitiateShopItemPurchaseModule (upval)
 		local Category = if ShopPageType then ShopPageType.Category else nil
 		local v1 = nil
@@ -92,7 +92,7 @@ return function(p1) --[[ Line: 67 | Named "useItemDetailsViewModel" ]]
 	local UseGamePassTrialRedemptionModuleResult = UseGamePassTrialRedemptionModule(Item.id)
 	local UseShopReportOverflowResult = UseShopReportOverflowModule.useShopReportOverflow({
 		isReportingEnabled = SharedFlagsModule.FFlagEnableReportingFlowForExperienceShop,
-		buildReportSession = ReactModule.useCallback(function() --[[ Line: 136 ]]
+		buildReportSession = ReactModule.useCallback(function()
 			-- upvalues: Item (copy), AbuseVectorModule (upval)
 			return if Item.itemType == "GamePass" then {
 				abuseVector = AbuseVectorModule.GamePass,
@@ -103,7 +103,7 @@ return function(p1) --[[ Line: 67 | Named "useItemDetailsViewModel" ]]
 			}
 		end, { Item.id, Item.itemType })
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 154 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FormatUpdatedDateModule (upval), Item (copy)
 		return FormatUpdatedDateModule(Item.updated)
 	end, { Item.updated })
@@ -136,13 +136,13 @@ return function(p1) --[[ Line: 67 | Named "useItemDetailsViewModel" ]]
 		onOverflowMenuClosed = UseShopReportOverflowResult.onOverflowMenuClosed,
 		onMenuItemActivated = UseShopReportOverflowResult.onMenuItemActivated,
 		onReportClose = UseShopReportOverflowResult.onReportClose,
-		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 162 ]]
+		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
 			-- upvalues: ConstantsModule (upval), UseStateResult2 (copy)
 			local X: number = Frame.AbsoluteSize.X
 			
 			if X > 0 then
 				local IsXBelow = X < ConstantsModule.COMPACT_BREAKPOINT_WIDTH
-				UseStateResult2(function(IsCOMPACTBREAKPOINTWIDTHAbove) --[[ Line: 168 ]]
+				UseStateResult2(function(IsCOMPACTBREAKPOINTWIDTHAbove)
 					-- upvalues: IsXBelow (copy)
 					return if IsCOMPACTBREAKPOINTWIDTHAbove == IsXBelow then IsCOMPACTBREAKPOINTWIDTHAbove else IsXBelow
 				end)

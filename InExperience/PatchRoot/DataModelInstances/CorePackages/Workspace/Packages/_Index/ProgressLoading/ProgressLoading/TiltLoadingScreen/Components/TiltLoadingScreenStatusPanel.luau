@@ -18,12 +18,12 @@ local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalizat
 local FIntAutoJoinNewServerTimeMs = require(Parent1.SharedFlags).FIntAutoJoinNewServerTimeMs
 local IsPioneerLaunchFunction = require(Parent1.PioneerUtils).isPioneerLaunch
 
-local function _(p1) --[[ Line: 28 | Named "localizeUiMessage" ]]
+local function _(p1)
 	-- upvalues: CoreGui (copy), LocalizationService (copy)
 	local CoreScriptLocalization = CoreGui:FindFirstChild("CoreScriptLocalization")
 	
 	if CoreScriptLocalization then
-		local Success, Result = pcall(function() --[[ Line: 33 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: CoreScriptLocalization (copy), LocalizationService (upval), CoreGui (upval), p1 (copy)
 			return CoreScriptLocalization:GetTranslator(LocalizationService.RobloxLocaleId):Translate(CoreGui, p1)
 		end)
@@ -34,7 +34,7 @@ local function _(p1) --[[ Line: 28 | Named "localizeUiMessage" ]]
 	end
 end
 
-return ReactModule.memo(function(Frame) --[[ Line: 40 | Named "TiltLoadingScreenStatusPanel" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FIntAutoJoinNewServerTimeMs (copy), RunService (copy), ConstantsModule (copy), CoreGui (copy), LocalizationService (copy), View (copy), IsPioneerLaunchFunction (copy), Enums (copy), Text (copy), Progress (copy), Button (copy), FooterModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		antiAddictionText = "Authentication.Login.WeChat.AntiAddictionText",
@@ -57,7 +57,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 40 | Named "TiltLoadingScreen
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseRefResult2 = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 64 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), UseRefResult1 (copy)
 		UseStateResult2(false)
 		
@@ -66,13 +66,13 @@ return ReactModule.memo(function(Frame) --[[ Line: 40 | Named "TiltLoadingScreen
 			UseRefResult1.current = nil
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 72 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult1 (copy), UseStateResult2 (copy), FIntAutoJoinNewServerTimeMs (upval), RunService (upval), UseBindingResult2 (copy), UseResult (copy), Frame (copy)
 		if not UseRefResult1.current then
 			UseStateResult2(true)
 			local ClockTime = os.clock()
 			local FIntAutoJoinNewServerTimeMsRatio = FIntAutoJoinNewServerTimeMs / 1000
-			UseRefResult1.current = RunService.Heartbeat:Connect(function() --[[ Line: 81 ]]
+			UseRefResult1.current = RunService.Heartbeat:Connect(function()
 				-- upvalues: ClockTime (copy), FIntAutoJoinNewServerTimeMsRatio (copy), UseBindingResult2 (upval), UseResult (upval), Frame (upval)
 				local ClampedValue = math.clamp((os.clock() - ClockTime) / FIntAutoJoinNewServerTimeMsRatio * 100, 0, 100)
 				UseBindingResult2(ClampedValue)
@@ -86,13 +86,13 @@ return ReactModule.memo(function(Frame) --[[ Line: 40 | Named "TiltLoadingScreen
 			return
 		end
 	end, { Frame.onAutoJoinNewServer, UseResult })
-	ReactModule.useEffect(function() --[[ Line: 92 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy), ConstantsModule (upval), UseRefResult2 (copy)
 		if Frame.status == ConstantsModule.QUEUED_STATE then
 			UseRefResult2.current = os.clock()
 		end
 	end, { Frame.status })
-	ReactModule.useEffect(function() --[[ Line: 98 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy), ConstantsModule (upval), UseResult1 (copy), UseResult (copy)
 		if Frame.status == ConstantsModule.QUEUED_STATE and Frame.queueTreatment == ConstantsModule.AUTO_JOIN_TREATMENT and Frame.followUserId > 0 then
 			UseResult1()
@@ -107,7 +107,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 40 | Named "TiltLoadingScreen
 		UseResult1,
 		UseResult
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 112 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: Frame (copy), UseRefResult (copy), ConstantsModule (upval)
 		if Frame.isSubjectToChinaPolicies then return end
 		local ClockTime = os.clock()
@@ -124,12 +124,12 @@ return ReactModule.memo(function(Frame) --[[ Line: 40 | Named "TiltLoadingScreen
 		Frame.isSubjectToChinaPolicies,
 		Frame.onShowConnectionHealth
 	})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 125 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy), Frame (copy), UseRefResult2 (copy)
 		UseResult()
 		Frame.onJoinTheLine(if UseRefResult2.current then math.floor((os.clock() - UseRefResult2.current) * 1000) else nil)
 	end, { Frame.onJoinTheLine, UseResult })
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 132 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: Frame (copy), UseRefResult2 (copy)
 		Frame.onJoinNewServer(if UseRefResult2.current then math.floor((os.clock() - UseRefResult2.current) * 1000) else nil)
 	end, { Frame.onJoinNewServer })
@@ -152,7 +152,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 40 | Named "TiltLoadingScreen
 		local CoreScriptLocalization = CoreGui:FindFirstChild("CoreScriptLocalization")
 		
 		if CoreScriptLocalization then
-			local Success, Result = pcall(function() --[[ Line: 33 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: CoreScriptLocalization (copy), LocalizationService (upval), CoreGui (upval), StatusText (copy)
 				return CoreScriptLocalization:GetTranslator(LocalizationService.RobloxLocaleId):Translate(CoreGui, StatusText)
 			end)

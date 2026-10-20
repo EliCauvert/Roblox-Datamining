@@ -7,7 +7,7 @@ local _ = require(script.Parent.AvatarItemGiftEntryPointView)
 local UseAvatarItemGiftEligibilityModule = require(AvatarExperienceGifting.Hooks.useAvatarItemGiftEligibility)
 local AvatarScreen = require(Parent.AvatarExperienceNavigation).Enums.AvatarScreen
 
-return function(Frame) --[[ Line: 23 | Named "useAvatarItemGiftEntryPointViewModel" ]]
+return function(Frame)
 	-- upvalues: UseNavigationFunction (copy), UseAvatarItemGiftEligibilityModule (copy), ReactModule (copy), AvatarScreen (copy)
 	local CollectibleItemId = Frame.collectibleItemId
 	local IsCircular = Frame.isCircular
@@ -15,7 +15,7 @@ return function(Frame) --[[ Line: 23 | Named "useAvatarItemGiftEntryPointViewMod
 	local UseNavigationResult = UseNavigationFunction()
 	local UseAvatarItemGiftEligibilityModuleResult = UseAvatarItemGiftEligibilityModule(CollectibleItemId, Frame.eligibilityDeps)
 	local CanGift = UseAvatarItemGiftEligibilityModuleResult.canGift
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 36 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: CanGift (copy), CollectibleItemId (copy), UseNavigationResult (copy), AvatarScreen (upval)
 		if CanGift and CollectibleItemId ~= nil and CollectibleItemId ~= "" then
 			UseNavigationResult.navigate(AvatarScreen.SendGiftRecipientPicker, { collectibleItemId = CollectibleItemId })
@@ -26,7 +26,7 @@ return function(Frame) --[[ Line: 23 | Named "useAvatarItemGiftEntryPointViewMod
 	
 	return {
 		isVisible = UseAvatarItemGiftEligibilityModuleResult.areItemsGiftable,
-		buttonProps = ReactModule.useMemo(function() --[[ Line: 46 ]]
+		buttonProps = ReactModule.useMemo(function()
 			-- upvalues: UseResult (copy), IsCircular (copy), LayoutOrder (copy)
 			return {
 				onActivated = UseResult,

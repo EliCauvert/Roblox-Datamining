@@ -1,6 +1,6 @@
 ﻿local OtterModule = require(game:GetService("CorePackages").Packages.Otter)
 
-return function(p1) --[[ Line: 5 | Named "getSizeSpringFromSettings" ]]
+return function(p1)
 	-- upvalues: OtterModule (copy)
 	local SizeAnimation = p1.SizeAnimation
 	
@@ -10,7 +10,7 @@ return function(p1) --[[ Line: 5 | Named "getSizeSpringFromSettings" ]]
 			frequency = SizeAnimation.SpringFrequency
 		}
 		
-		return function(p2) --[[ Line: 15 ]]
+		return function(p2)
 			-- upvalues: OtterModule (upval), config (copy)
 			return OtterModule.spring(p2, config)
 		end

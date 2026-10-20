@@ -1,6 +1,6 @@
 ﻿local ToSetModule = require(script.Parent.toSet)
 
-return function(p1, ...) --[[ Line: 4 | Named "removeIndex" ]]
+return function(p1, ...)
 	-- upvalues: ToSetModule (copy)
 	local ValueType = type(p1)
 	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)

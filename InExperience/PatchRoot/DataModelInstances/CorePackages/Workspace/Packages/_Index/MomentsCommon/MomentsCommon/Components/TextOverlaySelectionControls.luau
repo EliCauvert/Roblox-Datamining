@@ -12,7 +12,7 @@ local _Color3_1 = Color3.fromHex("121215")
 local Style = { Transparency = 0, Color3 = Color3.fromHex("FFFFFF") }
 local _UDim = UDim.new(1, 0)
 
-local function createBorderCornerHandle(p1, OnResizeHandleInputBegan, IsPointerMatch) --[[ Line: 44 ]]
+local function createBorderCornerHandle(p1, OnResizeHandleInputBegan, IsPointerMatch)
 	-- upvalues: ReactModule (copy), _Color3 (copy), _UDim (copy)
 	local IsTL: boolean = p1 == "TL" or p1 == "BL"
 	local IsTL1: boolean = p1 == "TL" or p1 == "TR"
@@ -56,7 +56,7 @@ local function createBorderCornerHandle(p1, OnResizeHandleInputBegan, IsPointerM
 	})
 end
 
-local function createZeroSizeCornerChrome(p1, Handle, Visible) --[[ Line: 99 ]]
+local function createZeroSizeCornerChrome(p1, Handle, Visible)
 	-- upvalues: ReactModule (copy)
 	local _Vector2 = nil
 	local _UDim2 = nil
@@ -84,7 +84,7 @@ local function createZeroSizeCornerChrome(p1, Handle, Visible) --[[ Line: 99 ]]
 	}, { Handle = Handle })
 end
 
-return function(p1) --[[ Line: 144 | Named "TextOverlaySelectionControls" ]]
+return function(p1)
 	-- upvalues: ResponsiveModule (copy), UseTextOverlayPreviewGesturesModule (copy), createZeroSizeCornerChrome (copy), createBorderCornerHandle (copy), ReactModule (copy), View (copy), _Color3_1 (copy), FoundationModule (copy), Icon (copy), BuilderIconsModule (copy), Style (copy)
 	local UsePreferredInputResult = ResponsiveModule.usePreferredInput()
 	local UseTextOverlayPreviewGesturesModuleResult = UseTextOverlayPreviewGesturesModule({

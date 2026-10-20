@@ -11,7 +11,7 @@ local InputLabelSize = FoundationModule.Enums.InputLabelSize
 local ChipSize = FoundationModule.Enums.ChipSize
 local IconName = FoundationModule.Enums.IconName
 
-return function(Frame) --[[ Line: 27 | Named "SignUpGenderChips" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), View (copy), InputLabel (copy), FormatBoldRichTextFunction (copy), InputLabelSize (copy), Chip (copy), IconName (copy), ChipSize (copy), UserGender (copy)
 	local OnGenderSelectedFunction = Frame.onGenderSelected
 	
@@ -33,7 +33,7 @@ return function(Frame) --[[ Line: 27 | Named "SignUpGenderChips" ]]
 				leading = IconName.HeadFemale,
 				size = ChipSize.Large,
 				isChecked = Frame.gender == UserGender.Female,
-				onActivated = function() --[[ Line: 49 ]]
+				onActivated = function()
 					-- upvalues: OnGenderSelectedFunction (copy), UserGender (upval)
 					OnGenderSelectedFunction(UserGender.Female)
 				end
@@ -45,7 +45,7 @@ return function(Frame) --[[ Line: 27 | Named "SignUpGenderChips" ]]
 				leading = IconName.HeadMale,
 				size = ChipSize.Large,
 				isChecked = Frame.gender == UserGender.Male,
-				onActivated = function() --[[ Line: 60 ]]
+				onActivated = function()
 					-- upvalues: OnGenderSelectedFunction (copy), UserGender (upval)
 					OnGenderSelectedFunction(UserGender.Male)
 				end

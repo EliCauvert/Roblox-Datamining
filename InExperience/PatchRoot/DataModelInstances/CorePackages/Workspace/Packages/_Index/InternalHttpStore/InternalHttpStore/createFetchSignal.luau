@@ -13,7 +13,7 @@ local config = {
 	[StatusCodes.GATEWAY_TIMEOUT] = true
 }
 
-local function createHttpFetchWithRetry(Tbl) --[[ Line: 33 ]]
+local function createHttpFetchWithRetry(Tbl)
 	-- upvalues: SignalsModule (copy), HttpSignalsModule (copy), config (copy), StatusCodes (copy)
 	local MaxRetryCount = Tbl.MaxRetryCount or 4
 	local RetryJitterMinMs = Tbl.RetryJitterMinMs or 0
@@ -23,7 +23,7 @@ local function createHttpFetchWithRetry(Tbl) --[[ Line: 33 ]]
 	local Signal, Signal2 = SignalsModule.createSignal(0)
 	local Signal1, Signal2_1 = SignalsModule.createSignal(false)
 	
-	local function _() --[[ Line: 44 | Named "cleanupCurrentFetch" ]]
+	local function _()
 		-- upvalues: DelayedThread (ref), Callback (ref)
 		if DelayedThread ~= nil then
 			task.cancel(DelayedThread)
@@ -35,7 +35,7 @@ local function createHttpFetchWithRetry(Tbl) --[[ Line: 33 ]]
 		end
 	end
 	
-	local function scheduleRetry(Number) --[[ Line: 60 ]]
+	local function scheduleRetry(Number)
 		-- upvalues: DelayedThread (ref), Signal (copy), RetryJitterMaxMs (copy), RetryJitterMinMs (copy), Signal2 (copy)
 		if DelayedThread ~= nil then return end
 		local Delay: number = Number
@@ -43,16 +43,16 @@ local function createHttpFetchWithRetry(Tbl) --[[ Line: 33 ]]
 		if Delay == nil or Delay > 16 then
 			Delay = math.max(math.pow(2, Signal() + 1) + (RetryJitterMinMs + math.random() * (RetryJitterMaxMs - RetryJitterMinMs)) / 1000, 0)
 		end
-		DelayedThread = task.delay(Delay, function() --[[ Line: 74 ]]
+		DelayedThread = task.delay(Delay, function()
 			-- upvalues: DelayedThread (upval), Signal2 (upval)
 			DelayedThread = nil
-			Signal2(function(p1: number): number --[[ Line: 76 ]]
+			Signal2(function(p1: number): number
 				return p1 + 1
 			end)
 		end)
 	end
 	
-	local Computed = SignalsModule.createComputed(function(p1) --[[ Line: 82 ]]
+	local Computed = SignalsModule.createComputed(function(p1)
 		-- upvalues: Signal (copy), Tbl (copy), DelayedThread (ref), Callback (ref), HttpSignalsModule (upval)
 		local SignalResult: number = Signal(p1)
 		local Tbl1 = Tbl
@@ -77,7 +77,7 @@ local function createHttpFetchWithRetry(Tbl) --[[ Line: 33 ]]
 		return FetchResult
 	end)
 	
-	return SignalsModule.createComputed(function(p1) --[[ Line: 100 ]]
+	return SignalsModule.createComputed(function(p1)
 		-- upvalues: Signal1 (copy), Computed (copy), Signal (copy), MaxRetryCount (copy), config (upval), scheduleRetry (copy), StatusCodes (upval)
 		if Signal1(p1) then
 			return {
@@ -131,7 +131,7 @@ local function createHttpFetchWithRetry(Tbl) --[[ Line: 33 ]]
 		else
 			return v1
 		end
-	end), function() --[[ Line: 55 | Named "dispose" ]]
+	end), function()
 		-- upvalues: Signal2_1 (copy), DelayedThread (ref), Callback (ref)
 		Signal2_1(true)
 		
@@ -146,7 +146,7 @@ local function createHttpFetchWithRetry(Tbl) --[[ Line: 33 ]]
 	end
 end
 
-return function(Tbl) --[[ Line: 156 | Named "createFetchHttpHandler" ]]
+return function(Tbl)
 	-- upvalues: MrRouterHeaders (copy), createHttpFetchWithRetry (copy), CreateParsedResponseModule (copy)
 	if Tbl.MaxRetryCount ~= nil and Tbl.MaxRetryCount < 0 then
 		error(`MaxRetryCount must be >= 0, was provided: {Tbl.MaxRetryCount}`)

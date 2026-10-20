@@ -2,10 +2,10 @@
 local ChatConstantsModule = require(ClientChatModules:WaitForChild("ChatConstants"))
 local ChatSettingsModule = require(ClientChatModules:WaitForChild("ChatSettings"))
 
-return function(p1) --[[ Line: 10 | Named "Run" ]]
+return function(p1)
 	-- upvalues: ChatSettingsModule (copy), ChatConstantsModule (copy)
 	if ChatSettingsModule and ChatSettingsModule.AllowMeCommand then
-		p1:RegisterFilterMessageFunction("me_command", function(_, p2, _) --[[ Line: 13 | Named "MeCommandFilterFunction" ]]
+		p1:RegisterFilterMessageFunction("me_command", function(_, p2, _)
 			-- upvalues: ChatConstantsModule (upval)
 			local Message: string = p2.Message
 			

@@ -6,7 +6,7 @@ local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
 local IconName = FoundationModule.Enums.IconName
 local Text = FoundationModule.Text
 
-return ReactModule.memo(function(p1) --[[ Line: 21 | Named "TextLink" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), GetIconRichTextFunction (copy), IconName (copy), ControlState (copy), Text (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local IconRichText = GetIconRichTextFunction(IconName.ArrowUpRightFromSquare)
@@ -15,7 +15,7 @@ return ReactModule.memo(function(p1) --[[ Line: 21 | Named "TextLink" ]]
 		RichText = true,
 		Text = if UseStateResult then `<u>{p1.text}</u> {IconRichText}` else `{p1.text} {IconRichText}`,
 		onActivated = p1.onActivated,
-		onStateChanged = ReactModule.useCallback(function(Hover) --[[ Line: 25 ]]
+		onStateChanged = ReactModule.useCallback(function(Hover)
 			-- upvalues: UseStateResult2 (copy), ControlState (upval)
 			UseStateResult2(Hover == ControlState.Hover)
 		end, {}),

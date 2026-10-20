@@ -1,7 +1,7 @@
 ﻿local _ = script.Parent.Parent
 
 return {
-	new = function(Id, ProviderId, ProductName, RobuxAmount, Price) --[[ Line: 23 ]]
+	new = function(Id, ProviderId, ProductName, RobuxAmount, Price)
 		return {
 			id = Id,
 			providerId = ProviderId,
@@ -10,7 +10,7 @@ return {
 			price = Price
 		}
 	end,
-	fromJson = function(p1) --[[ Line: 39 ]]
+	fromJson = function(p1)
 		return {
 			id = p1.roblox_product_id,
 			providerId = p1.provider_product_id,

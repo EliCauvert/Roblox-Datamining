@@ -34,7 +34,7 @@ local AppEventIngestService = RoactServiceTagsModule.AppEventIngestService
 local RoactAnalytics = RoactServiceTagsModule.RoactAnalytics
 local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
 
-local function getCardsPerRowAndCardWidth(p1) --[[ Line: 73 ]]
+local function getCardsPerRowAndCardWidth(p1)
 	local AvailableWidth = p1.availableWidth
 	local MaxCardsPerRow: number = p1.maxCardsPerRow
 	local MinCardWidth = p1.minCardWidth
@@ -54,7 +54,7 @@ local function getCardsPerRowAndCardWidth(p1) --[[ Line: 73 ]]
 	end
 end
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 95 | Named "HistoryPage" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: UseRoactServiceFunction (copy), AppEventIngestService (copy), RoactAnalytics (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), FFlagTraversalExpPagePaddingFixes (copy), ReactModule (copy), TraversalUseDiscoveryCollectionViews (copy), TraversalUseXSmallCollectionItems (copy), GuiService (copy), CollectionItemSize (copy), CollectionLayoutCalculators (copy), CollectionViewsModule (copy), getCardsPerRowAndCardWidth (copy), MaxTraversalHistoryCardsPerRow709 (copy), Signal (copy), CryoModule (copy), TraversalExperienceCardModule (copy), ConstantsModule (copy), TraversalTelemetryModule (copy), FFlagTraversalHistoryDiscoveryTelemetry (copy), GamePlayIntentFunction (copy), DiscoveryAnalyticsModule (copy), UseViewportBoundsFunction (copy), SendGameImpressions (copy), FFlagIntegrateTraversalHistoryInSideSheet (copy), View (copy), IconButton (copy), IconName (copy), Text (copy), ScrollView (copy), ImpressionsTrackerWithoutNavigation (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(AppEventIngestService)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(RoactAnalytics)
@@ -85,16 +85,16 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 95 |
 	local Floored = math.floor(#p1.historyItems / Largest)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef({})
-	local UseResult = ReactModule.useCallback(function(p2, p3) --[[ Line: 130 ]]
+	local UseResult = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: UseRefResult1 (copy)
 		UseRefResult1.current[p2] = p3
 	end, {})
 	local UseRefResult2 = ReactModule.useRef(nil)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 134 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Signal (upval)
 		return Signal.new()
 	end, {})
-	local MapResult = CryoModule.List.map(p1.historyItems, function(p2, ImpressionIndex) --[[ Line: 138 ]]
+	local MapResult = CryoModule.List.map(p1.historyItems, function(p2, ImpressionIndex)
 		-- upvalues: ReactModule (upval), TraversalExperienceCardModule (upval), ConstantsModule (upval), p1 (copy), TraversalTelemetryModule (upval), FFlagTraversalHistoryDiscoveryTelemetry (upval), GamePlayIntentFunction (upval), UseRoactServiceResult (copy), DiscoveryAnalyticsModule (upval), ItemWidth (ref), UseResult (copy)
 		return ReactModule.createElement(TraversalExperienceCardModule, {
 			key = ImpressionIndex,
@@ -103,7 +103,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 95 |
 			impressionIndex = ImpressionIndex,
 			impressionTag = ConstantsModule.CardImpressionTag,
 			rating = p2.rating,
-			onActivated = function() --[[ Line: 146 ]]
+			onActivated = function()
 				-- upvalues: p1 (upval), TraversalTelemetryModule (upval), p2 (copy), ImpressionIndex (copy), FFlagTraversalHistoryDiscoveryTelemetry (upval), GamePlayIntentFunction (upval), UseRoactServiceResult (upval), DiscoveryAnalyticsModule (upval)
 				if not p1.onCardItemActivated then return end
 				TraversalTelemetryModule.sendHistoryPageExperienceTileClick({
@@ -123,14 +123,14 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 95 |
 				p1.onCardItemActivated(p2.universeId)
 			end,
 			width = ItemWidth,
-			ref = function(p3) --[[ Line: 168 ]]
+			ref = function(p3)
 				-- upvalues: UseResult (upval), ImpressionIndex (copy)
 				UseResult(ImpressionIndex, p3)
 			end
 		})
 	end)
 	local UseRefResult3 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 177 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult3 (copy), UseRefResult (copy), UseRefResult2 (copy), p1 (copy), Floored (copy), Largest (ref)
 		if UseRefResult3.current then return end
 		if not UseRefResult.current or not UseRefResult2.current or not p1.onLoadMoreHistory then return end
@@ -142,7 +142,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 95 |
 		end
 	end, { p1.onLoadMoreHistory, Largest, Floored })
 	local UseViewportBoundsResult = UseViewportBoundsFunction()
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 205 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: FFlagTraversalHistoryDiscoveryTelemetry (upval), p1 (copy), SendGameImpressions (upval), UseRoactServiceResult (copy), UseRoactServiceResult1 (copy), Largest (ref), Floored (copy)
 		if FFlagTraversalHistoryDiscoveryTelemetry then
 			local List = {}
@@ -165,7 +165,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 95 |
 		UseRoactServiceResult,
 		Floored
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 237 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: TraversalTelemetryModule (upval), p1 (copy)
 		TraversalTelemetryModule.sendHistoryPageBackButtonClick({
 			integration_id = "history_landing_back_button",
@@ -232,7 +232,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 95 |
 				CanvasSize = UDim2.new(0, 0, 0, 0),
 				ScrollingDirection = Enum.ScrollingDirection.Y
 			},
-			onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 246 ]]
+			onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
 				-- upvalues: XLarge (copy), UseStateResult2 (copy), UseRefResult1 (copy), UseRefResult (copy)
 				UseStateResult2(Frame.AbsoluteSize.X - 2 * XLarge)
 				
@@ -240,7 +240,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 95 |
 					UseRefResult.current = UseRefResult1.current[1].AbsoluteSize.Y
 				end
 			end, { XLarge }),
-			onCanvasPositionChanged = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 255 ]]
+			onCanvasPositionChanged = ReactModule.useCallback(function(ScrollFrame)
 				-- upvalues: UseMemoResult (copy), p1 (copy), UseRefResult (copy), Largest (ref)
 				UseMemoResult:fire()
 				

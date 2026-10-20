@@ -3,7 +3,7 @@ local EndStateModule = require(script.Parent.Items.EndState)
 local UnavailableMomentModule = require(script.Parent.Items.UnavailableMoment)
 local FeedItemRegistry = {}
 
-local function _(List) --[[ Line: 19 | Named "register" ]]
+local function _(List)
 	-- upvalues: FeedItemRegistry (copy)
 	for _, value in List do
 		FeedItemRegistry[value.kind] = value

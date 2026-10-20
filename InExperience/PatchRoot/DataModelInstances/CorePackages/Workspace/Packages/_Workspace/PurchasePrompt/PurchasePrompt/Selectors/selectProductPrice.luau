@@ -3,7 +3,7 @@ local GetPlayerPriceModule = require(PurchasePrompt.Utils.getPlayerPrice)
 local FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow = require(PurchasePrompt.Parent.SharedFlags).FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow
 local SelectCartPricingOverrideModule = require(script.Parent.selectCartPricingOverride)
 
-return function(p1) --[[ Line: 8 | Named "selectProductPrice" ]]
+return function(p1)
 	-- upvalues: GetPlayerPriceModule (copy), FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), SelectCartPricingOverrideModule (copy)
 	local CollectibleItemInstanceId = p1.promptRequest.collectibleItemInstanceId
 	local ExpectedPrice = p1.promptRequest.expectedPrice

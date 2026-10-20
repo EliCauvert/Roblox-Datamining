@@ -2,9 +2,9 @@
 local HttpModule = require(NetworkingVirtualEvents.Parent.Http)
 local _ = require(NetworkingVirtualEvents.types)
 
-return function(p1) --[[ Line: 6 ]]
+return function(p1)
 	-- upvalues: HttpModule (copy)
-	return (p1.POST(script.Name, function(Callback, p2, p3) --[[ Line: 9 ]]
+	return (p1.POST(script.Name, function(Callback, p2, p3)
 		-- upvalues: HttpModule (upval)
 		local EventTime = p3.eventTime
 		

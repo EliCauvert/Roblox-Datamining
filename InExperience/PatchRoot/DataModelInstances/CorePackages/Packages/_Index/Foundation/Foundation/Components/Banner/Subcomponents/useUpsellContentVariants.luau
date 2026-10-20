@@ -6,11 +6,11 @@ local _ = require(Foundation.Providers.Style.Tokens)
 local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 local _ = require(script.Parent.Thumbnail)
 
-local function variantsFactory(p1) --[[ Line: 26 ]]
+local function variantsFactory(p1)
 	-- upvalues: CardDensityModule (copy)
 	local BodySmall = p1.Typography.BodySmall
 	
-	local function _(p2) --[[ Line: 29 | Named "descriptionSizeConstraint" ]]
+	local function _(p2)
 		-- upvalues: BodySmall (copy)
 		return {
 			MaxSize = Vector2.new(1e999, BodySmall.FontSize * BodySmall.LineHeight * p2)
@@ -47,7 +47,7 @@ local function variantsFactory(p1) --[[ Line: 26 ]]
 	}
 end
 
-return function(p1, p2) --[[ Line: 59 ]]
+return function(p1, p2)
 	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
 	local BannerUpsellContent = VariantsContextModule.useVariants("Banner.UpsellContent", variantsFactory, p1)
 	

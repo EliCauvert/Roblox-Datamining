@@ -12,7 +12,7 @@ local config = {
 	SurfaceAppearance = "SurfaceAppearance"
 }
 
-local function findObjectOfNameAndTypeName(Name, ClassName, Object) --[[ Line: 62 ]]
+local function findObjectOfNameAndTypeName(Name, ClassName, Object)
 	if Object == nil then
 		return nil
 	end
@@ -24,7 +24,7 @@ local function findObjectOfNameAndTypeName(Name, ClassName, Object) --[[ Line: 6
 	return nil
 end
 
-local function getHead(Object) --[[ Line: 75 ]]
+local function getHead(Object)
 	-- upvalues: findObjectOfNameAndTypeName (copy)
 	if not Object then
 		return nil
@@ -44,7 +44,7 @@ local function getHead(Object) --[[ Line: 75 ]]
 	return Head
 end
 
-local function getAnimator(Object, Timeout: number) --[[ Line: 108 ]]
+local function getAnimator(Object, Timeout: number)
 	local Animator = nil
 	local Humanoid1 = nil
 	
@@ -69,7 +69,7 @@ local List = {
 	"LeftLowerArm", "LeftUpperArm", "RightHand", "RightLowerArm", "RightUpperArm"
 }
 
-local function _(Object, ChildName) --[[ Line: 213 | Named "removeChild" ]]
+local function _(Object, ChildName)
 	local ChildName1 = Object:FindFirstChild(ChildName)
 	
 	if ChildName1 then
@@ -114,7 +114,7 @@ local config1 = {
 	WrapTextureTransfer = "WrapTextureTransfer"
 }
 
-local function disableScripts(ScriptObject) --[[ Line: 288 ]]
+local function disableScripts(ScriptObject)
 	-- upvalues: disableScripts (copy)
 	for _, ScriptObject1 in ScriptObject:GetChildren() do
 		if ScriptObject1:IsA("Script") then
@@ -125,7 +125,7 @@ local function disableScripts(ScriptObject) --[[ Line: 288 ]]
 	end
 end
 
-local function removeUI(Object) --[[ Line: 298 ]]
+local function removeUI(Object)
 	-- upvalues: removeUI (copy)
 	for _, child in Object:GetChildren() do
 		if child:IsA("GuiObject") or child:IsA("ScreenGui") or child:IsA("BillboardGui") or child:IsA("AdGui") or child:IsA("SurfaceGui") then
@@ -135,7 +135,7 @@ local function removeUI(Object) --[[ Line: 298 ]]
 	end
 end
 
-local function removeInstancesStrict(Object) --[[ Line: 313 ]]
+local function removeInstancesStrict(Object)
 	-- upvalues: config1 (copy), removeInstancesStrict (copy)
 	for _, child in Object:GetChildren() do
 		if not config1[child.ClassName] then
@@ -146,11 +146,11 @@ local function removeInstancesStrict(Object) --[[ Line: 313 ]]
 end
 
 return {
-	getFaceControls = function(Object) --[[ Line: 23 ]]
+	getFaceControls = function(Object)
 		if Object == nil then return end
 		return (Object:FindFirstChildWhichIsA("FaceControls", true))
 	end,
-	getNeck = function(Object, Parent) --[[ Line: 30 ]]
+	getNeck = function(Object, Parent)
 		if Object == nil or Parent == nil then
 			return nil
 		end
@@ -170,7 +170,7 @@ return {
 	end,
 	getHead = getHead,
 	getAnimator = getAnimator,
-	updateTransparency = function(Object, List1) --[[ Line: 162 ]]
+	updateTransparency = function(Object, List1)
 		-- upvalues: List (copy), CollectionService (copy)
 		for _, descendant in ipairs(Object:GetDescendants()) do
 			if descendant:IsA("Decal") then
@@ -193,7 +193,7 @@ return {
 			end
 		end
 	end,
-	shouldMarkCloneDirtyForDescendant = function(Object): boolean --[[ Line: 191 ]]
+	shouldMarkCloneDirtyForDescendant = function(Object): boolean
 		-- upvalues: config (copy)
 		if Object:IsA("MeshPart") or Object:IsA("Part") or Object:IsA("Decal") then
 			if Object.Transparency < 1 then
@@ -204,7 +204,7 @@ return {
 		end
 		return false
 	end,
-	resetPartOrientation = function(Object) --[[ Line: 204 ]]
+	resetPartOrientation = function(Object)
 		for _, Motor in ipairs(Object:GetDescendants()) do
 			if Motor:IsA("Motor6D") then
 				Motor.C0 = CFrame.new(Motor.C0.Position)
@@ -212,7 +212,7 @@ return {
 			end
 		end
 	end,
-	removeScripts = function(Object) --[[ Line: 219 ]]
+	removeScripts = function(Object)
 		local Animate = Object:FindFirstChild("Animate")
 		
 		if Animate then
@@ -229,7 +229,7 @@ return {
 			end
 		end
 	end,
-	removeTags = function(Object) --[[ Line: 230 ]]
+	removeTags = function(Object)
 		-- upvalues: CollectionService (copy)
 		for _, tag in ipairs((CollectionService:GetTags(Object))) do
 			if tag ~= "NoFace" then
@@ -245,7 +245,7 @@ return {
 		end
 		local _ = CollectionService:GetTags(Object)
 	end,
-	sanitizeCharacter = function(p1) --[[ Line: 322 ]]
+	sanitizeCharacter = function(p1)
 		-- upvalues: removeInstancesStrict (copy)
 		if p1 then
 			removeInstancesStrict(p1)
@@ -253,11 +253,11 @@ return {
 			return
 		end
 	end,
-	isValidAvatar = function(p1): boolean --[[ Line: 330 ]]
+	isValidAvatar = function(p1): boolean
 		-- upvalues: getAnimator (copy), getHead (copy)
 		return if getAnimator(p1, 10) and getHead(p1) then true else false
 	end,
-	hasDynamicHead = function(Object): boolean --[[ Line: 344 ]]
+	hasDynamicHead = function(Object): boolean
 		return (if Object == nil then nil else Object:FindFirstChildWhichIsA("FaceControls", true)) ~= nil
 	end
 }

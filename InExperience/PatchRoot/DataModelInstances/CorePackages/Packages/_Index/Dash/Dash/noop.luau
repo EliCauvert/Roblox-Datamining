@@ -1,1 +1,1 @@
-﻿return function(...) --[[ Line: 9 | Named "noop" ]] end
+﻿return function(...) end

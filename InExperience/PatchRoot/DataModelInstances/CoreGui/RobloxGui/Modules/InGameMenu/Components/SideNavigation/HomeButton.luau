@@ -22,7 +22,7 @@ HomeButton.validateProps = T.strictInterface({
 })
 HomeButton.defaultProps = { on = false }
 
-function HomeButton.renderWithSelectionCursor(p1, Callback) --[[ Line: 45 ]]
+function HomeButton.renderWithSelectionCursor(p1, Callback)
 	-- upvalues: HomeOn (copy), HomeOff (copy), Roact (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), CursorType (copy), ImageSetButton (copy)
 	local HomeOn1 = p1.props.on and HomeOn or HomeOff
 	
@@ -51,9 +51,9 @@ function HomeButton.renderWithSelectionCursor(p1, Callback) --[[ Line: 45 ]]
 	})
 end
 
-function HomeButton.render(p1) --[[ Line: 74 ]]
+function HomeButton.render(p1)
 	-- upvalues: WithCursorMigration (copy)
-	return WithCursorMigration(function(p2) --[[ Line: 75 ]]
+	return WithCursorMigration(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithSelectionCursor(p2)
 	end)

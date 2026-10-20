@@ -1,6 +1,6 @@
 ﻿local ServerUtilModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Server.ServerUtil)
 
-return function() --[[ Line: 5 ]]
+return function()
 	-- upvalues: ServerUtilModule (copy)
 	if game:GetService("StarterPlayer"):FindFirstChild("PlayerSettings") == nil then
 		local PlayerSettings = Instance.new("ModuleScript")

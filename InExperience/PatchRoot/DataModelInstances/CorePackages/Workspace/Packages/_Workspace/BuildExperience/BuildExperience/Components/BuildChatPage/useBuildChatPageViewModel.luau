@@ -55,12 +55,12 @@ local config1 = {
 	adCampaignRunEndTimeMs = nil,
 	isAdCampaignCreatedToastVisible = false,
 	adUpsellCards = {},
-	onAdCampaignCreatedToastDismiss = function() --[[ Line: 131 ]] end,
-	onAdUpsellCreate = function() --[[ Line: 132 ]] end,
-	onAdUpsellDismiss = function() --[[ Line: 133 ]] end,
-	onAdUpsellImpression = function() --[[ Line: 134 ]] end,
-	onAdCampaignSheetClose = function() --[[ Line: 135 ]] end,
-	onAdCampaignSheetCreate = function() --[[ Line: 136 ]] end
+	onAdCampaignCreatedToastDismiss = function() end,
+	onAdUpsellCreate = function() end,
+	onAdUpsellDismiss = function() end,
+	onAdUpsellImpression = function() end,
+	onAdCampaignSheetClose = function() end,
+	onAdCampaignSheetCreate = function() end
 }
 local config2 = {
 	isSheetOpen = false,
@@ -69,36 +69,36 @@ local config2 = {
 	createErrorKind = nil,
 	campaignOffers = nil,
 	runStartTimeMs = nil,
-	onOfferSelected = function() --[[ Line: 146 ]] end,
-	isCreateDisabled = function(): boolean --[[ Line: 147 ]]
+	onOfferSelected = function() end,
+	isCreateDisabled = function(): boolean
 		return true
 	end,
-	getCardState = function() --[[ Line: 150 ]]
+	getCardState = function()
 		return nil
 	end,
-	onSheetClose = function() --[[ Line: 153 ]] end,
-	onSheetCreate = function() --[[ Line: 154 ]] end
+	onSheetClose = function() end,
+	onSheetCreate = function() end
 }
 
-local function _(): number --[[ Line: 184 | Named "getKeyboardTop" ]]
+local function _(): number
 	-- upvalues: UserInputService (copy), GuiService (copy)
 	return if UserInputService.OnScreenKeyboardVisible then math.max(0, UserInputService.OnScreenKeyboardPosition.Y - GuiService:GetGuiInset().Y) else 0
 end
 
-local function useUniverseSummary(UniverseId) --[[ Line: 192 ]]
+local function useUniverseSummary(UniverseId)
 	-- upvalues: UniverseConfigurationModule (copy), ReactModule (copy), SignalsModule (copy), SignalsReactModule (copy)
 	local UniverseConfigurationStore = UniverseConfigurationModule.getUniverseConfigurationStore()
 	
-	return SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 194 ]]
+	return SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), UniverseId (copy), UniverseConfigurationStore (copy)
-		return SignalsModule.createComputed(function(p1) --[[ Line: 195 ]]
+		return SignalsModule.createComputed(function(p1)
 			-- upvalues: UniverseId (upval), UniverseConfigurationStore (upval)
 			return if UniverseId == nil or UniverseId == 0 then nil else UniverseConfigurationStore.getAndFetchSummary(UniverseId).data(p1)
 		end)
 	end, { UniverseConfigurationStore, UniverseId })))
 end
 
-local _ = function(p1) --[[ Line: 206 | Named "fetchCachedUniverseSummary" ]]
+local _ = function(p1)
 	-- upvalues: UniverseConfigurationModule (copy)
 	local UniverseConfigurationStore = UniverseConfigurationModule.getUniverseConfigurationStore()
 	
@@ -107,7 +107,7 @@ local _ = function(p1) --[[ Line: 206 | Named "fetchCachedUniverseSummary" ]]
 	end
 end
 
-local function getResolvedSessionId(Messages, SessionId, UniverseId) --[[ Line: 217 ]]
+local function getResolvedSessionId(Messages, SessionId, UniverseId)
 	if SessionId ~= nil and SessionId ~= "" then
 		return SessionId
 	end
@@ -122,13 +122,13 @@ local function getResolvedSessionId(Messages, SessionId, UniverseId) --[[ Line: 
 	return nil
 end
 
-local _ = function(p1, p2) --[[ Line: 238 | Named "getHydratedExperienceName" ]]
+local _ = function(p1, p2)
 	local Name = if p2 == nil then nil else p2.name
 	
 	return if typeof(Name) == "string" and Name ~= "" then Name else p1
 end
 
-return function(p1) --[[ Line: 246 | Named "useBuildChatPageViewModel" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), useUniverseSummary (copy), GetBuildOverflowMenuStoreModule (copy), GetCreatorAgentResumeStoreModule (copy), ReactModule (copy), FFlagBuildExperienceDontAskAgainPushUpsellModule (copy), BuildAppStorageKeyEngineFeature (copy), BuildAppStorageModule (copy), UserInputService (copy), GuiService (copy), PermissionsProtocol (copy), MessageBusService (copy), RealtimeMessageId (copy), Default (copy), CreatorAgentChatModule (copy), FFlagBuildAdUpsellModule (copy), GetAdUpsellEventStoreModule (copy), UseChatSessionCoreModule (copy), FFlagBuildExperienceFocusNewGameComposerModule (copy), FFlagBuildExperienceAnalytics (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), UseBuildPromptDraftModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), FFlagBuildExperienceManageDevProductModule (copy), UseChatPlaytestFooterModule (copy), UniverseConfigurationModule (copy), FFlagEnableBuildAdPromotionModule (copy), UseCreatorCreditChatUpsellViewModelModule (copy), GameConfigurationLabelsModule (copy), FFlagBuildExperienceLibrary (copy), getResolvedSessionId (copy), UseAdUpsellChatViewModelModule (copy), config1 (copy), FFlagBuildAgentAdCampaignCardModule (copy), UseAgentAdCampaignChatViewModelModule (copy), config2 (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), config (copy), FFlagBuildExperienceAnswerFormModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseUniverseSummaryResult = useUniverseSummary(p1.target.universeId)
@@ -137,13 +137,13 @@ return function(p1) --[[ Line: 246 | Named "useBuildChatPageViewModel" ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
-	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(function() --[[ Line: 255 ]]
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(function()
 		-- upvalues: FFlagBuildExperienceDontAskAgainPushUpsellModule (upval), BuildAppStorageKeyEngineFeature (upval), BuildAppStorageModule (upval)
 		return FFlagBuildExperienceDontAskAgainPushUpsellModule and (BuildAppStorageKeyEngineFeature and BuildAppStorageModule.isPushNotificationsUpsellDismissedPermanently())
 	end)
 	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(false)
 	local UseStateResult6, UseStateResult2_5 = ReactModule.useState(false)
-	local UseStateResult7, UseStateResult2_6 = ReactModule.useState(function() --[[ Line: 263 ]]
+	local UseStateResult7, UseStateResult2_6 = ReactModule.useState(function()
 		-- upvalues: BuildAppStorageKeyEngineFeature (upval), BuildAppStorageModule (upval)
 		return BuildAppStorageKeyEngineFeature and BuildAppStorageModule.wasPushNotificationsUpsellShownToday()
 	end)
@@ -151,9 +151,9 @@ return function(p1) --[[ Line: 246 | Named "useBuildChatPageViewModel" ]]
 	local UseRefResult = ReactModule.useRef(false)
 	local UseStateResult9, UseStateResult2_8 = ReactModule.useState(if UserInputService.OnScreenKeyboardVisible then math.max(0, UserInputService.OnScreenKeyboardPosition.Y - GuiService:GetGuiInset().Y) else 0)
 	local UseStateResult10, UseStateResult2_9 = ReactModule.useState(0)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 273 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: PermissionsProtocol (upval), UseRefResult (copy), UseStateResult2_2 (copy), UseStateResult2_5 (copy)
-		return PermissionsProtocol.default:hasPermissions({ PermissionsProtocol.Permissions.POST_NOTIFICATIONS }):andThen(function(Result) --[[ Line: 278 ]]
+		return PermissionsProtocol.default:hasPermissions({ PermissionsProtocol.Permissions.POST_NOTIFICATIONS }):andThen(function(Result)
 			-- upvalues: UseRefResult (upval), UseStateResult2_2 (upval), PermissionsProtocol (upval), UseStateResult2_5 (upval)
 			if UseRefResult.current then
 				UseStateResult2_2(Result.status)
@@ -162,25 +162,25 @@ return function(p1) --[[ Line: 246 | Named "useBuildChatPageViewModel" ]]
 					UseStateResult2_5(false)
 				end
 			end
-		end, function() --[[ Line: 285 ]] end)
+		end, function() end)
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 290 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseResult (copy), MessageBusService (upval), RealtimeMessageId (upval)
 		UseRefResult.current = true
 		UseResult()
 		local SubscribeResult = MessageBusService:Subscribe(RealtimeMessageId, UseResult, false, true)
 		
-		return function() --[[ Line: 295 ]]
+		return function()
 			-- upvalues: UseRefResult (upval), SubscribeResult (copy)
 			UseRefResult.current = false
 			SubscribeResult:Disconnect()
 		end
 	end, { UseResult })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 301 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult5 (copy), UseStateResult2_4 (copy), PermissionsProtocol (upval), UseRefResult (copy), UseStateResult2_2 (copy), UseStateResult2_5 (copy)
 		if not UseStateResult5 then
 			UseStateResult2_4(true)
-			PermissionsProtocol.default:requestPermissions({ PermissionsProtocol.Permissions.POST_NOTIFICATIONS }):andThen(function(Result) --[[ Line: 311 ]]
+			PermissionsProtocol.default:requestPermissions({ PermissionsProtocol.Permissions.POST_NOTIFICATIONS }):andThen(function(Result)
 				-- upvalues: UseRefResult (upval), UseStateResult2_2 (upval), PermissionsProtocol (upval), UseStateResult2_5 (upval), UseStateResult2_4 (upval)
 				if not UseRefResult.current then return end
 				UseStateResult2_2(Result.status)
@@ -189,7 +189,7 @@ return function(p1) --[[ Line: 246 | Named "useBuildChatPageViewModel" ]]
 					UseStateResult2_5(true)
 				end
 				UseStateResult2_4(false)
-			end, function() --[[ Line: 320 ]]
+			end, function()
 				-- upvalues: UseRefResult (upval), UseStateResult2_4 (upval)
 				if UseRefResult.current then
 					UseStateResult2_4(false)
@@ -199,47 +199,47 @@ return function(p1) --[[ Line: 246 | Named "useBuildChatPageViewModel" ]]
 			return
 		end
 	end, { UseStateResult5 })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 327 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: Default (upval)
-		Default:switchToSettingsApp():catch(function() --[[ Line: 328 ]] end)
+		Default:switchToSettingsApp():catch(function() end)
 	end, {})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 331 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: FFlagBuildExperienceDontAskAgainPushUpsellModule (upval), BuildAppStorageKeyEngineFeature (upval), BuildAppStorageModule (upval), UseStateResult2_3 (copy)
 		if FFlagBuildExperienceDontAskAgainPushUpsellModule and BuildAppStorageKeyEngineFeature then
 			BuildAppStorageModule.markPushNotificationsUpsellDismissedPermanently()
 		end
 		UseStateResult2_3(true)
 	end, {})
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 338 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_8 (copy), UserInputService (upval), GuiService (upval)
 		UseStateResult2_8(if UserInputService.OnScreenKeyboardVisible then math.max(0, UserInputService.OnScreenKeyboardPosition.Y - GuiService:GetGuiInset().Y) else 0)
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 342 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult4 (copy), UserInputService (upval)
 		UseResult4()
 		local Connection = UserInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(UseResult4)
 		local Connection1 = UserInputService:GetPropertyChangedSignal("OnScreenKeyboardSize"):Connect(UseResult4)
 		local Connection2 = UserInputService:GetPropertyChangedSignal("OnScreenKeyboardPosition"):Connect(UseResult4)
 		
-		return function() --[[ Line: 350 ]]
+		return function()
 			-- upvalues: Connection (copy), Connection1 (copy), Connection2 (copy)
 			Connection:Disconnect()
 			Connection1:Disconnect()
 			Connection2:Disconnect()
 		end
 	end, { UseResult4 })
-	local UseResult5 = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 357 ]]
+	local UseResult5 = ReactModule.useCallback(function(Frame: Frame)
 		-- upvalues: UseStateResult2_9 (copy)
 		UseStateResult2_9(Frame.AbsolutePosition.Y + Frame.AbsoluteSize.Y)
 	end, {})
-	local UseResult6 = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 361 ]]
+	local UseResult6 = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: UseStateResult2_1 (copy)
 		local Y: number = ScrollFrame.AbsoluteWindowSize.Y
 		UseStateResult2_1(Y > 0 and Y < ScrollFrame.AbsoluteCanvasSize.Y)
 	end, {})
 	local Largest: number = if UseStateResult9 <= 0 or UseStateResult10 <= 0 then 0 else math.max(0, UseStateResult10 - UseStateResult9)
 	local IsIsNewGameTarget = p1.target.isNewGameTarget == true
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 369 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), UseUniverseSummaryResult (copy)
 		local ExperienceName = p1.target.experienceName
 		local Name = if UseUniverseSummaryResult == nil then nil else UseUniverseSummaryResult.name
@@ -258,7 +258,7 @@ return function(p1) --[[ Line: 246 | Named "useBuildChatPageViewModel" ]]
 		p1.target.experienceName, p1.target.isNewGameTarget, p1.target.creatorName,
 		p1.target.gameIcon, UseUniverseSummaryResult
 	})
-	local UseResult7 = ReactModule.useCallback(function(p2) --[[ Line: 392 ]]
+	local UseResult7 = ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy), UseMemoResult (copy)
 		if p1.onNavigateToResolvedTarget ~= nil then
 			p1.onNavigateToResolvedTarget({
@@ -287,17 +287,17 @@ return function(p1) --[[ Line: 246 | Named "useBuildChatPageViewModel" ]]
 		autoFocusComposer = FFlagBuildExperienceFocusNewGameComposerModule and IsIsNewGameTarget,
 		createUniverseOnFirstPrompt = IsIsNewGameTarget,
 		onProjectResolved = UseResult7,
-		onPromptFailure = ReactModule.useCallback(function(OutOfCredits, Reason) --[[ Line: 418 ]]
+		onPromptFailure = ReactModule.useCallback(function(OutOfCredits, Reason)
 			-- upvalues: CreatorAgentChatModule (upval), UseStateResult2_10 (copy)
 			if OutOfCredits == CreatorAgentChatModule.ErrorCodes.OutOfCredits then
-				UseStateResult2_10(function(p2) --[[ Line: 420 ]]
+				UseStateResult2_10(function(p2)
 					-- upvalues: Reason (copy)
 					return { count = p2.count + 1, reason = Reason }
 				end)
 			end
 		end, {}),
 		trackAdUpsellTurns = FFlagBuildAdUpsellModule,
-		onAssistantTurnCompleted = if FFlagBuildAdUpsellModule then ReactModule.useCallback(function(p2) --[[ Line: 431 ]]
+		onAssistantTurnCompleted = if FFlagBuildAdUpsellModule then ReactModule.useCallback(function(p2)
 			-- upvalues: AdUpsellEventStoreModule (copy)
 			if AdUpsellEventStoreModule ~= nil then
 				AdUpsellEventStoreModule.reportAssistantTurnCompleted(p2)
@@ -307,7 +307,7 @@ return function(p1) --[[ Line: 246 | Named "useBuildChatPageViewModel" ]]
 	
 	if FFlagBuildExperienceAnalytics then
 		local UseRefResult1 = ReactModule.useRef(false)
-		ReactModule.useEffect(function() --[[ Line: 459 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p1 (copy), UseRefResult1 (copy), UseChatSessionCoreModuleResult (copy)
 			local InitialPrompt = p1.initialPrompt
 			
@@ -342,10 +342,10 @@ return function(p1) --[[ Line: 246 | Named "useBuildChatPageViewModel" ]]
 	end
 	local NoUseStateResult7 = UseStateResult3 == PermissionsProtocol.Status.DENIED and (not UseStateResult4 and (not UseStateResult7 or UseStateResult8))
 	local UseRefResult2 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 508 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: BuildAppStorageKeyEngineFeature (upval), NoUseStateResult7 (copy), Flag (ref), UseChatSessionCoreModuleResult (copy), UseStateResult8 (copy), UseStateResult2_7 (copy), UseStateResult2_6 (copy), BuildAppStorageModule (upval)
 		if not BuildAppStorageKeyEngineFeature then
-			return function() --[[ Line: 510 ]] end
+			return function() end
 		end
 		local IsAssistantResponding = NoUseStateResult7 and (Flag and UseChatSessionCoreModuleResult.isAssistantResponding)
 		
@@ -356,7 +356,7 @@ return function(p1) --[[ Line: 246 | Named "useBuildChatPageViewModel" ]]
 		elseif not IsAssistantResponding and UseStateResult8 then
 			UseStateResult2_7(false)
 		end
-		return function() --[[ Line: 524 ]] end
+		return function() end
 	end, {
 		NoUseStateResult7,
 		Flag,
@@ -364,17 +364,17 @@ return function(p1) --[[ Line: 246 | Named "useBuildChatPageViewModel" ]]
 		UseStateResult7,
 		UseStateResult8
 	})
-	ReactModule.useEffect(function() --[[ Line: 535 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseRefResult2 (copy), UseChatSessionCoreModuleResult (copy), FFlagBuildAdUpsellModule (upval), UseRefResult (copy), UniverseConfigurationModule (upval)
 		local UniverseId = p1.target.universeId
 		local NoIsAssistantResponding: boolean = UseRefResult2.current and not UseChatSessionCoreModuleResult.isAssistantResponding
 		UseRefResult2.current = UseChatSessionCoreModuleResult.isAssistantResponding
 		
 		if not NoIsAssistantResponding or UniverseId == nil or UniverseId == 0 then
-			return function() --[[ Line: 541 ]] end
+			return function() end
 		end
 		if FFlagBuildAdUpsellModule then
-			task.defer(function() --[[ Line: 545 ]]
+			task.defer(function()
 				-- upvalues: UseRefResult (upval), UniverseId (copy), UniverseConfigurationModule (upval)
 				if UseRefResult.current then
 					local UniverseConfigurationStore = UniverseConfigurationModule.getUniverseConfigurationStore()
@@ -391,12 +391,12 @@ return function(p1) --[[ Line: 246 | Named "useBuildChatPageViewModel" ]]
 				UniverseConfigurationStore.fetchSummary(UniverseId)
 			end
 		end
-		return function() --[[ Line: 553 ]] end
+		return function() end
 	end, {
 		p1.target.universeId,
 		UseChatSessionCoreModuleResult.isAssistantResponding
 	})
-	ReactModule.useEffect(function() --[[ Line: 557 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagBuildExperienceMonetizationNativeUIModule (upval), p1 (copy), CreatorAgentResumeStoreModule (copy)
 		if FFlagBuildExperienceMonetizationNativeUIModule and p1.isFocused == false then return end
 		CreatorAgentResumeStoreModule.setActiveTarget({
@@ -404,7 +404,7 @@ return function(p1) --[[ Line: 246 | Named "useBuildChatPageViewModel" ]]
 			sessionId = p1.target.sessionId
 		})
 		
-		return function() --[[ Line: 565 ]]
+		return function()
 			-- upvalues: CreatorAgentResumeStoreModule (upval)
 			CreatorAgentResumeStoreModule.setActiveTarget(nil)
 		end
@@ -418,13 +418,13 @@ return function(p1) --[[ Line: 246 | Named "useBuildChatPageViewModel" ]]
 		p1.target.universeId,
 		p1.target.sessionId
 	})
-	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 581 ]]
+	local UseResult8 = ReactModule.useCallback(function()
 		-- upvalues: UseChatSessionCoreModuleResult (copy)
 		if UseChatSessionCoreModuleResult.textBoxRef.current then
 			UseChatSessionCoreModuleResult.textBoxRef.current.releaseFocus()
 		end
 	end, { UseChatSessionCoreModuleResult.textBoxRef })
-	local UseResult9 = ReactModule.useCallback(function() --[[ Line: 587 ]]
+	local UseResult9 = ReactModule.useCallback(function()
 		-- upvalues: UseResult8 (copy), p1 (copy)
 		UseResult8()
 		
@@ -433,7 +433,7 @@ return function(p1) --[[ Line: 246 | Named "useBuildChatPageViewModel" ]]
 		end
 	end, { UseResult8, p1.onOpenCreatorCreditPage })
 	local UseResult10 = if p1.onOpenCreatorCreditPage == nil then nil else UseResult9
-	local UseResult11 = if FFlagEnableBuildAdPromotionModule then ReactModule.useCallback(function() --[[ Line: 598 ]]
+	local UseResult11 = if FFlagEnableBuildAdPromotionModule then ReactModule.useCallback(function()
 		-- upvalues: UseResult8 (copy), p1 (copy)
 		UseResult8()
 		
@@ -463,7 +463,7 @@ return function(p1) --[[ Line: 246 | Named "useBuildChatPageViewModel" ]]
 		sessionId = ResolvedSessionId,
 		isPageVisible = p1.isFocused ~= false
 	}) else config2
-	local UseResult13 = ReactModule.useCallback(function(p2) --[[ Line: 645 ]]
+	local UseResult13 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseResult8 (copy), p1 (copy)
 		if p2.type == "openPage" then
 			UseResult8()
@@ -494,7 +494,7 @@ return function(p1) --[[ Line: 246 | Named "useBuildChatPageViewModel" ]]
 		p1.onOpenInvitePicker,
 		p1.onOpenInviteManagement
 	})
-	local UseResult14 = if FFlagBuildExperiencePlaytestCardPublishCtaModule then ReactModule.useCallback(function() --[[ Line: 673 ]]
+	local UseResult14 = if FFlagBuildExperiencePlaytestCardPublishCtaModule then ReactModule.useCallback(function()
 		-- upvalues: UseResult13 (copy)
 		UseResult13({ type = "openPage", page = "publish" })
 	end, { UseResult13 }) else nil
@@ -506,21 +506,21 @@ return function(p1) --[[ Line: 246 | Named "useBuildChatPageViewModel" ]]
 		keyboardOverlap = Largest,
 		onPageMetricsChanged = UseResult5,
 		selectedChipGroupName = UseStateResult,
-		onChipActivated = ReactModule.useCallback(function(p2) --[[ Line: 700 ]]
+		onChipActivated = ReactModule.useCallback(function(p2)
 			-- upvalues: UseResult8 (copy), UseStateResult2 (copy)
 			UseResult8()
 			UseStateResult2(p2)
 		end, { UseResult8 }),
-		onChipBottomSheetClose = function() --[[ Line: 713 ]]
+		onChipBottomSheetClose = function()
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(nil)
 		end,
-		onClose = ReactModule.useCallback(function() --[[ Line: 639 ]]
+		onClose = ReactModule.useCallback(function()
 			-- upvalues: UseResult8 (copy), p1 (copy)
 			UseResult8()
 			p1.onClose()
 		end, { UseResult8, p1.onClose }),
-		onOpenLibrary = ReactModule.useCallback(function() --[[ Line: 678 ]]
+		onOpenLibrary = ReactModule.useCallback(function()
 			-- upvalues: UseResult8 (copy), p1 (copy), ResolvedSessionId (copy)
 			UseResult8()
 			
@@ -530,7 +530,7 @@ return function(p1) --[[ Line: 246 | Named "useBuildChatPageViewModel" ]]
 		end, { UseResult8, p1.onOpenLibrary, ResolvedSessionId }),
 		isLibraryDisabled = FFlagBuildExperienceLibrary and p1.target.universeId == nil,
 		onOverflowMenuAction = UseResult13,
-		onPlayActivated = ReactModule.useCallback(function() --[[ Line: 685 ]]
+		onPlayActivated = ReactModule.useCallback(function()
 			-- upvalues: SendBuildExperienceEventModule (upval), FFlagBuildEventsUpdate1Module (upval), p1 (copy), UseChatSessionCoreModuleResult (copy)
 			SendBuildExperienceEventModule(if FFlagBuildEventsUpdate1Module then "PLAYTEST_CLICK" else "PLAY_CLICK", {
 				universeId = p1.target.universeId,
@@ -545,7 +545,7 @@ return function(p1) --[[ Line: 246 | Named "useBuildChatPageViewModel" ]]
 			UseChatSessionCoreModuleResult.playtestPlaceId,
 			p1.target.universeId
 		}),
-		onOpenAgentsPage = ReactModule.useCallback(function() --[[ Line: 695 ]]
+		onOpenAgentsPage = ReactModule.useCallback(function()
 			-- upvalues: UseResult8 (copy), p1 (copy), SubagentTaskState (copy), config (upval)
 			UseResult8()
 			p1.onOpenAgentsPage(SubagentTaskState or config)

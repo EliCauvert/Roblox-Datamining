@@ -1,11 +1,11 @@
 ﻿local IsBadgeDetailsSheetOpen = false
 
 return {
-	getIsBadgeDetailsSheetOpen = function() --[[ Line: 3 ]]
+	getIsBadgeDetailsSheetOpen = function()
 		-- upvalues: IsBadgeDetailsSheetOpen (ref)
 		return IsBadgeDetailsSheetOpen
 	end,
-	setIsBadgeDetailsSheetOpen = function(Value) --[[ Line: 7 ]]
+	setIsBadgeDetailsSheetOpen = function(Value)
 		-- upvalues: IsBadgeDetailsSheetOpen (ref)
 		IsBadgeDetailsSheetOpen = Value
 	end

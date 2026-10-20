@@ -1,13 +1,13 @@
 ﻿local OpenNativeClosePromptModule = require(script.Parent.Parent.Actions.OpenNativeClosePrompt)
 
-return function(GuiService, p1, p2) --[[ Line: 6 ]]
+return function(GuiService, p1, p2)
 	-- upvalues: OpenNativeClosePromptModule (copy)
-	local function _(): number --[[ Line: 7 | Named "getDisplayCount" ]]
+	local function _(): number
 		-- upvalues: p1 (copy)
 		return tonumber(p1:GetItem("NativeCloseLuaPromptDisplayCount")) or 0
 	end
 	
-	local _ = function(p3) --[[ Line: 11 | Named "setDisplayCount" ]]
+	local _ = function(p3)
 		-- upvalues: p1 (copy)
 		p1:SetItem("NativeCloseLuaPromptDisplayCount", (tostring(p3)))
 		p1:flush()
@@ -15,7 +15,7 @@ return function(GuiService, p1, p2) --[[ Line: 6 ]]
 	
 	local NotificationTypeList = GuiService:GetNotificationTypeList()
 	
-	return function(p3) --[[ Line: 18 ]]
+	return function(p3)
 		-- upvalues: p1 (copy), p2 (copy), GuiService (copy), NotificationTypeList (copy), OpenNativeClosePromptModule (upval)
 		local Number: number = tonumber(p1:GetItem("NativeCloseLuaPromptDisplayCount")) or 0
 		

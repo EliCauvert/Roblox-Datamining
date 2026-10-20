@@ -1,19 +1,19 @@
 ﻿local UtilModule = require(script.Parent:WaitForChild("Util"))
 local RunService = game:GetService("RunService")
 local ChatLocalizationModule = nil
-pcall(function() --[[ Line: 12 ]]
+pcall(function()
 	-- upvalues: ChatLocalizationModule (ref)
 	ChatLocalizationModule = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
 
 if ChatLocalizationModule == nil then
 	ChatLocalizationModule = {
-		Get = function(_, _, p1) --[[ Line: 13 ]]
+		Get = function(_, _, p1)
 			return p1
 		end
 	}
 end
-function ProcessMessage(_, p1, _): boolean --[[ Line: 15 ]]
+function ProcessMessage(_, p1, _): boolean
 	-- upvalues: RunService (copy), UtilModule (copy), ChatLocalizationModule (ref)
 	local LocalPlayer = game:GetService("Players").LocalPlayer
 	

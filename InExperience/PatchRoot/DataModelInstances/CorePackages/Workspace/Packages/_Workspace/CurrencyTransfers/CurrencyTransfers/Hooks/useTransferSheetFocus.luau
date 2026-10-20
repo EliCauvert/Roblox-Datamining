@@ -12,18 +12,18 @@ local EventMap = {
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-return function(Callback) --[[ Line: 21 | Named "useTransferSheetFocus" ]]
+return function(Callback)
 	-- upvalues: ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseMostRecentOrDefaultFocusBehaviorFunction (copy), UseFocusOnMountFunction (copy)
 	local UseMostRecentOrDefaultFocusBehaviorResult, UseMostRecentOrDefaultFocusBehaviorResult2 = UseMostRecentOrDefaultFocusBehaviorFunction((UseFocusRootFunction({
 		isAutoFocusRoot = true,
 		shouldRestoreFocus = false,
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
 		eventMap = EventMap,
-		eventHandlers = ReactModule.useMemo(function() --[[ Line: 22 ]]
+		eventHandlers = ReactModule.useMemo(function()
 			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), Callback (copy)
 			return {
 				[FocusNavigationEventNameEnum.NavigateBack] = {
-					handler = InputHandlersModule.onRelease(function(p1) --[[ Line: 25 ]]
+					handler = InputHandlersModule.onRelease(function(p1)
 						-- upvalues: Callback (upval)
 						Callback()
 						p1:cancel()

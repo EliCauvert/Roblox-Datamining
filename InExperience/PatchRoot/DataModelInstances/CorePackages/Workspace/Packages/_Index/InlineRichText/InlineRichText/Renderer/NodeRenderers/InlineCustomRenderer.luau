@@ -3,7 +3,7 @@ local NewResult = require(InlineRichText.Logger):new(script.Name)
 local _ = require(InlineRichText.Types)
 local CryoModule = require(InlineRichText.Parent.Cryo)
 
-return function(p1, p2) --[[ Line: 9 ]]
+return function(p1, p2)
 	-- upvalues: NewResult (copy), CryoModule (copy)
 	local InlineCustomRenderer = p2.inlineCustomRenderers[p1.name]
 	

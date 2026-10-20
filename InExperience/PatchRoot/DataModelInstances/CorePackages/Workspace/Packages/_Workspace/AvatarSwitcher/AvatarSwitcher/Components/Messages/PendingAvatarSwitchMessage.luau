@@ -7,7 +7,7 @@ local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local MessageCardModule = require(AvatarSwitcher.Components.Messages.MessageCard)
 local GetAvatarSwitcherStoreModule = require(AvatarSwitcher.Stores.getAvatarSwitcherStore)
 
-return function(Frame) --[[ Line: 18 | Named "PendingAvatarSwitchMessage" ]]
+return function(Frame)
 	-- upvalues: UseSignalStateFunction (copy), GetAvatarSwitcherStoreModule (copy), UseLocalizationFunction (copy), ReactModule (copy), FoundationModule (copy), MessageCardModule (copy)
 	local UseSignalStateResult = UseSignalStateFunction(GetAvatarSwitcherStoreModule)
 	local UseSignalStateResult1 = UseSignalStateFunction(UseSignalStateResult.getPendingAvatarName)

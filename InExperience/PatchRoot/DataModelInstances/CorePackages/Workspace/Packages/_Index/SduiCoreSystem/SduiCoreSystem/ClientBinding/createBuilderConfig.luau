@@ -5,9 +5,9 @@ local _ = require(SduiCoreSystem.ClientBinding.SduiClientBindingTypes)
 local SduiErrorsModule = require(SduiCoreSystem.SduiErrors)
 local SduiLoggerModule = require(SduiCoreSystem.SduiLogger)
 
-local function _(p1, p2) --[[ Line: 14 | Named "getLocalizedLiteralResolver" ]]
+local function _(p1, p2)
 	-- upvalues: SduiLoggerModule (copy), SduiErrorsModule (copy)
-	return function(p3) --[[ Line: 15 ]]
+	return function(p3)
 		-- upvalues: SduiLoggerModule (upval), SduiErrorsModule (upval), p2 (copy), p1 (copy)
 		if typeof(p3) ~= "table" or not p3.map_key then
 			SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToResolveLocalizedLiteral, {
@@ -28,7 +28,7 @@ local function _(p1, p2) --[[ Line: 14 | Named "getLocalizedLiteralResolver" ]]
 	end
 end
 
-return function(p3) --[[ Line: 47 | Named "createBuilderConfig" ]]
+return function(p3)
 	-- upvalues: GetPropBuilderModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy)
 	local LocalizedLiterals = p3.localizedLiterals
 	local AppPage = p3.appPage
@@ -38,7 +38,7 @@ return function(p3) --[[ Line: 47 | Named "createBuilderConfig" ]]
 		debugName = p3.debugName,
 		getTemplateForRobloxComponent = p3.getTemplateForRobloxComponent,
 		getPropBuilder = GetPropBuilderModule,
-		resolveLocalizedLiteral = function(p4) --[[ Line: 15 ]]
+		resolveLocalizedLiteral = function(p4)
 			-- upvalues: SduiLoggerModule (upval), SduiErrorsModule (upval), AppPage (copy), LocalizedLiterals (copy)
 			if typeof(p4) ~= "table" or not p4.map_key then
 				SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToResolveLocalizedLiteral, {

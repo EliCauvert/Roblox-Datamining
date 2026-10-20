@@ -4,7 +4,7 @@ local ReactModule = require(Parent.React)
 local UIManagerModule = require(VrSpatialUi.UIManager)
 local InExperienceUIVRIXP = require(Parent.SharedExperimentDefinition).InExperienceUIVRIXP
 
-local function _(p1, Vector) --[[ Line: 7 | Named "checkAndScalePart" ]]
+local function _(p1, Vector)
 	-- upvalues: UIManagerModule (copy)
 	local AdditionalCameraScaleIfNeeded = UIManagerModule.getInstance():getAdditionalCameraScaleIfNeeded()
 	
@@ -13,13 +13,13 @@ local function _(p1, Vector) --[[ Line: 7 | Named "checkAndScalePart" ]]
 	end
 end
 
-return function(p1, Vector) --[[ Line: 15 | Named "useHeadScale" ]]
+return function(p1, Vector)
 	-- upvalues: ReactModule (copy), UIManagerModule (copy), InExperienceUIVRIXP (copy)
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 16 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 		-- upvalues: UIManagerModule (upval)
 		return UIManagerModule.getInstance():getAdditionalCameraScaleIfNeeded()
 	end)
-	ReactModule.useEffect(function() --[[ Line: 19 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: InExperienceUIVRIXP (upval), p1 (copy), Vector (copy), UIManagerModule (upval), UseStateResult2 (copy)
 		if InExperienceUIVRIXP:isSpatialUIScalingFixEnabled() then
 			local AdditionalCameraScaleIfNeeded = UIManagerModule.getInstance():getAdditionalCameraScaleIfNeeded()
@@ -30,7 +30,7 @@ return function(p1, Vector) --[[ Line: 15 | Named "useHeadScale" ]]
 		else
 			UseStateResult2(UIManagerModule.getInstance():getAdditionalCameraScaleIfNeeded())
 		end
-		local Connection = workspace.CurrentCamera:GetPropertyChangedSignal("HeadScale"):Connect(function() --[[ Line: 26 ]]
+		local Connection = workspace.CurrentCamera:GetPropertyChangedSignal("HeadScale"):Connect(function()
 			-- upvalues: InExperienceUIVRIXP (upval), p1 (upval), Vector (upval), UIManagerModule (upval), UseStateResult2 (upval)
 			if InExperienceUIVRIXP:isSpatialUIScalingFixEnabled() then
 				local AdditionalCameraScaleIfNeeded = UIManagerModule.getInstance():getAdditionalCameraScaleIfNeeded()
@@ -45,7 +45,7 @@ return function(p1, Vector) --[[ Line: 15 | Named "useHeadScale" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 33 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end

@@ -18,13 +18,13 @@ local list = {
 	Enum.UserInputType.Gamepad7, Enum.UserInputType.Gamepad8
 }
 
-function ContextActionsBinder.init(p1) --[[ Line: 37 ]]
+function ContextActionsBinder.init(p1)
 	p1.boundPlayerListActions = false
 end
 
-function ContextActionsBinder.bindActions(p1) --[[ Line: 41 ]]
+function ContextActionsBinder.bindActions(p1)
 	-- upvalues: ContextActionService (copy), FFlagPlayerListUseMobileOnSmallDisplay (copy), GuiService (copy), list (copy), FFlagAddNewPlayerListMobileFocusNav (copy)
-	ContextActionService:BindCoreAction("RbxPlayerListToggle", function(_, UserInputState, _) --[[ Line: 42 ]]
+	ContextActionService:BindCoreAction("RbxPlayerListToggle", function(_, UserInputState, _)
 		-- upvalues: FFlagPlayerListUseMobileOnSmallDisplay (upval), p1 (copy), GuiService (upval)
 		if FFlagPlayerListUseMobileOnSmallDisplay and p1.props.displayOptions.isSmallTouchDevice then
 			return Enum.ContextActionResult.Pass
@@ -38,11 +38,11 @@ function ContextActionsBinder.bindActions(p1) --[[ Line: 41 ]]
 			return Enum.ContextActionResult.Pass
 		end
 	end, false, Enum.KeyCode.Tab)
-	ContextActionService:BindCoreAction("RbxPlayerListStopMovement", function(_, _, _) --[[ Line: 59 ]]
+	ContextActionService:BindCoreAction("RbxPlayerListStopMovement", function(_, _, _)
 		-- upvalues: p1 (copy)
 		return if p1.props.displayOptions.isVisible and p1.props.displayOptions.isTenFootInterface then Enum.ContextActionResult.Sink else Enum.ContextActionResult.Pass
 	end, false, unpack(list))
-	ContextActionService:BindCoreAction("RbxPlayerListGamepadClose", function(_, UserInputState, _) --[[ Line: 66 ]]
+	ContextActionService:BindCoreAction("RbxPlayerListGamepadClose", function(_, UserInputState, _)
 		-- upvalues: p1 (copy), FFlagAddNewPlayerListMobileFocusNav (upval)
 		if UserInputState ~= Enum.UserInputState.Begin then
 			return Enum.ContextActionResult.Pass
@@ -68,7 +68,7 @@ function ContextActionsBinder.bindActions(p1) --[[ Line: 41 ]]
 	p1.boundPlayerListActions = true
 end
 
-function ContextActionsBinder.unbindActions(p1) --[[ Line: 101 ]]
+function ContextActionsBinder.unbindActions(p1)
 	-- upvalues: ContextActionService (copy)
 	ContextActionService:UnbindCoreAction("RbxPlayerListToggle")
 	ContextActionService:UnbindCoreAction("RbxPlayerListStopMovement")
@@ -76,21 +76,21 @@ function ContextActionsBinder.unbindActions(p1) --[[ Line: 101 ]]
 	p1.boundPlayerListActions = false
 end
 
-function ContextActionsBinder.didMount(p1) --[[ Line: 108 ]]
+function ContextActionsBinder.didMount(p1)
 	p1:bindActions()
 end
 
-function ContextActionsBinder:render() --[[ Line: 112 ]]
+function ContextActionsBinder:render()
 	return nil
 end
 
-function ContextActionsBinder.willUnmount(p1) --[[ Line: 116 ]]
+function ContextActionsBinder.willUnmount(p1)
 	if p1.boundPlayerListActions then
 		p1:unbindActions()
 	end
 end
 
-local function mapStateToProps(p1) --[[ Line: 122 ]]
+local function mapStateToProps(p1)
 	-- upvalues: FFlagAddNewPlayerListMobileFocusNav (copy)
 	return {
 		displayOptions = p1.displayOptions,
@@ -98,14 +98,14 @@ local function mapStateToProps(p1) --[[ Line: 122 ]]
 	}
 end
 
-local function mapDispatchToProps(Callback) --[[ Line: 129 ]]
+local function mapDispatchToProps(Callback)
 	-- upvalues: SetPlayerListVisibilityModule (copy), FFlagAddNewPlayerListMobileFocusNav (copy), ClosePlayerDropDownModule (copy)
 	return {
-		setVisibility = function(p1) --[[ Line: 131 ]]
+		setVisibility = function(p1)
 			-- upvalues: Callback (copy), SetPlayerListVisibilityModule (upval)
 			return Callback(SetPlayerListVisibilityModule(p1))
 		end,
-		closePlayerDropDown = if FFlagAddNewPlayerListMobileFocusNav then function() --[[ Line: 135 ]]
+		closePlayerDropDown = if FFlagAddNewPlayerListMobileFocusNav then function()
 			-- upvalues: Callback (copy), ClosePlayerDropDownModule (upval)
 			return Callback(ClosePlayerDropDownModule())
 		end else nil

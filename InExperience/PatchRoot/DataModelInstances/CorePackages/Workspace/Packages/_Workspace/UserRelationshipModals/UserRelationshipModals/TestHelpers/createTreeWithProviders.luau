@@ -6,7 +6,7 @@ local LocalizationProvider = require(Parent.Localization).LocalizationProvider
 local RoduxModule = require(Parent.Rodux)
 local MockLocalizationModule = require(script.Parent.mockLocalization)
 
-return function(Component, p1) --[[ Line: 12 ]]
+return function(Component, p1)
 	-- upvalues: RoduxModule (copy), ReactModule (copy), LocalizationProvider (copy), MockLocalizationModule (copy), FoundationModule (copy), RoactRoduxModule (copy)
 	return ReactModule.createElement(LocalizationProvider, { localization = MockLocalizationModule }, {
 		Provider = ReactModule.createElement(FoundationModule.FoundationProvider, {
@@ -14,7 +14,7 @@ return function(Component, p1) --[[ Line: 12 ]]
 			preferences = { reducedMotion = true }
 		}, {
 			ReactModule.createElement(RoactRoduxModule.StoreProvider, {
-				store = if p1 == nil then RoduxModule.Store.new(function() --[[ Line: 15 ]]
+				store = if p1 == nil then RoduxModule.Store.new(function()
 					return {
 						UserRelationshipModals = { LocalUserId = 456, NetworkStatus = {} }
 					}

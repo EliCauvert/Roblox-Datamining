@@ -11,12 +11,12 @@ local WhatsNewAnchor = if FFlagEnableWhatsNew then require(Parent.WhatsNew).What
 local GetSessionActionButtonsStoreModule = require(InExperienceSideSheet.Stores.GetSessionActionButtonsStore)
 local BuildSessionActionButtonLayoutModule = require(InExperienceSideSheet.Utils.buildSessionActionButtonLayout)
 
-local function getSessionActionButtonConfigs(p1) --[[ Line: 27 ]]
+local function getSessionActionButtonConfigs(p1)
 	-- upvalues: GetSessionActionButtonsStoreModule (copy)
 	return GetSessionActionButtonsStoreModule(p1).sessionActionButtonConfigs
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 31 | Named "SessionActionButtons" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: SignalsReactModule (copy), getSessionActionButtonConfigs (copy), FFlagShowSwitchServerButton (copy), IsPioneerLaunchFunction (copy), BuildSessionActionButtonLayoutModule (copy), ReactModule (copy), View (copy), FFlagEnableWhatsNew (copy), WhatsNewAnchor (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(getSessionActionButtonConfigs)
 	local List = UseSignalStateResult

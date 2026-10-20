@@ -1,5 +1,5 @@
 ﻿return {
-	IsPointInRect = function(p1, Vector): boolean --[[ Line: 4 ]]
+	IsPointInRect = function(p1, Vector): boolean
 		local Min = p1.Min
 		local Max = p1.Max
 		

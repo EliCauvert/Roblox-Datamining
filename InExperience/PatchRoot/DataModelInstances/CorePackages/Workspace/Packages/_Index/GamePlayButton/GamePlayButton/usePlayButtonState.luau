@@ -31,7 +31,7 @@ local FFlagLuaAppPlayButtonPrivatePTEnableSingleButton = require(Parent.SharedFl
 local FFlagLuaAppPlayButtonPrivatePTEnableDualButton = require(Parent.SharedFlags).FFlagLuaAppPlayButtonPrivatePTEnableDualButton
 local LuaAppPlaytestSingleBlocksPlayable = game:DefineFastFlag("LuaAppPlaytestSingleBlocksPlayable", false)
 
-local function selectPlayButtonState(FetchingStatus, Current, p1, p2, p3, GameDetail, p4, p5) --[[ Line: 56 ]]
+local function selectPlayButtonState(FetchingStatus, Current, p1, p2, p3, GameDetail, p4, p5)
 	-- upvalues: RetrievalStatus (copy), FFlagLuaAppPlayButtonPrivatePTEnableSingleButton (copy), PlaytestUnlockUpsellModule (copy), LuaAppPlaytestSingleBlocksPlayable (copy), PlayButtonStatesModule (copy), PlayabilityStatusEnum (copy), FFlagLuaAppPlayButtonAmpAgeCheckFlow (copy), FFlagLuaAppParentUpsellPolicy (copy), FFlagLuaAppParentApprovedExperiences (copy), FFlagEnableGameJoinEarlyAccess (copy), GetFFlagIsSquadEnabledFunction (copy)
 	local Playable = nil
 	if FetchingStatus == RetrievalStatus.Done and Current ~= nil then
@@ -68,7 +68,7 @@ local function selectPlayButtonState(FetchingStatus, Current, p1, p2, p3, GameDe
 	return Playable
 end
 
-local function selectSecondaryPlayButtonState(UnplayableOther, Current) --[[ Line: 159 ]]
+local function selectSecondaryPlayButtonState(UnplayableOther, Current)
 	-- upvalues: FFlagLuaAppPlayButtonPrivatePTEnableDualButton (copy), PlaytestUnlockUpsellModule (copy), PlayButtonStatesModule (copy), PlayabilityStatusEnum (copy)
 	if Current == nil then
 		return nil
@@ -88,43 +88,43 @@ local function selectSecondaryPlayButtonState(UnplayableOther, Current) --[[ Lin
 	return if IsUnplayableOtherMatch and Current.demoModeAvailable then PlayButtonStatesModule.DemoMode else nil
 end
 
-return function(p1, Current, Delay, p2, p3, Current1, p4) --[[ Line: 195 ]]
+return function(p1, Current, Delay, p2, p3, Current1, p4)
 	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), FetchGamePlayButtonDataModule (copy), FFlagLuaAppParentUpsellPolicy (copy), UseAppPolicyFunction (copy), FFlagLuaAppSupportDisablePlayableWhenLoading (copy), FFlagLuaAppDisablePlayableWhenLoadingForce (copy), GetFFlagIsSquadEnabledFunction (copy), UseCurrentSquadSelectorFunction (copy), UseIsExperienceInvitePendingModule (copy), UseSelectorFunction (copy), FFlagEnableGameJoinEarlyAccess (copy), GamePlayButton (copy), FFlagLuaAppEnablePlayableStateWhenLoading (copy), PlayButtonStatesModule (copy), ApiPostPreparePurchaseModule (copy), RetrievalStatus (copy), FetchGamePlayabilityAndProductInfo (copy), GamesProductInfoReducer (copy), selectPlayButtonState (copy), FFlagLuaAppPlayButtonLoadingDurationTelemetry (copy), UseRouteNameFunction (copy), SendPlayButtonLoadingDurationFunction (copy), selectSecondaryPlayButtonState (copy)
 	local UseDispatchResult = UseDispatchFunction()
-	ReactModule.useEffect(function() --[[ Line: 206 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Delay (copy), UseDispatchResult (copy), FetchGamePlayButtonDataModule (upval), p1 (copy), Current (copy)
 		local DelayedThread = nil
 		
 		if Delay == nil or Delay <= 0 then
 			UseDispatchResult(FetchGamePlayButtonDataModule.Fetch(p1, Current))
 		else
-			DelayedThread = task.delay(Delay, function() --[[ Line: 209 ]]
+			DelayedThread = task.delay(Delay, function()
 				-- upvalues: DelayedThread (ref), UseDispatchResult (upval), FetchGamePlayButtonDataModule (upval), p1 (upval), Current (upval)
 				DelayedThread = nil
 				UseDispatchResult(FetchGamePlayButtonDataModule.Fetch(p1, Current))
 			end)
 		end
-		return function() --[[ Line: 217 ]]
+		return function()
 			-- upvalues: DelayedThread (ref)
 			if DelayedThread ~= nil then
 				task.cancel(DelayedThread)
 			end
 		end
 	end, { Current, Delay })
-	local UseAppPolicyResult = if FFlagLuaAppParentUpsellPolicy then UseAppPolicyFunction(function(p5) --[[ Line: 226 ]]
+	local UseAppPolicyResult = if FFlagLuaAppParentUpsellPolicy then UseAppPolicyFunction(function(p5)
 		return p5.getShouldShowVpcPlayButtonUpsells()
 	end) else nil
 	local v1 = nil
 	
 	if FFlagLuaAppSupportDisablePlayableWhenLoading then
-		local UseAppPolicyResult1 = UseAppPolicyFunction(function(p5) --[[ Line: 233 ]]
+		local UseAppPolicyResult1 = UseAppPolicyFunction(function(p5)
 			return p5.getDisablePlayableWhenLoading()
 		end)
 		v1 = FFlagLuaAppDisablePlayableWhenLoadingForce or UseAppPolicyResult1
 	end
 	local UseCurrentSquadSelectorResult = if GetFFlagIsSquadEnabledFunction() then UseCurrentSquadSelectorFunction() else nil
 	local UseIsExperienceInvitePendingModuleResult = if GetFFlagIsSquadEnabledFunction() then UseIsExperienceInvitePendingModule() else nil
-	local UseSelectorResult = UseSelectorFunction(function(p5) --[[ Line: 242 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p5)
 		-- upvalues: Current (copy)
 		return p5.PlayabilityStatus and p5.PlayabilityStatus[Current] or nil
 	end)
@@ -134,7 +134,7 @@ return function(p1, Current, Delay, p2, p3, Current1, p4) --[[ Line: 195 ]]
 		EarlyAccess = require(GamePlayButton.EarlyAccess.useGameJoinEarlyAccess)(Current, UseSelectorResult)
 		local IsIsPendingUnlock: boolean = EarlyAccess ~= nil and EarlyAccess.isPendingUnlock == true
 		local IsGainedSubscription: boolean = EarlyAccess ~= nil and EarlyAccess.gainedSubscription == true
-		ReactModule.useEffect(function() --[[ Line: 256 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: IsIsPendingUnlock (copy), IsGainedSubscription (copy), UseDispatchResult (copy), FetchGamePlayButtonDataModule (upval), p1 (copy), Current (copy)
 			if IsIsPendingUnlock or IsGainedSubscription then
 				UseDispatchResult(FetchGamePlayButtonDataModule.Fetch(p1, Current, true))
@@ -146,7 +146,7 @@ return function(p1, Current, Delay, p2, p3, Current1, p4) --[[ Line: 195 ]]
 			Current
 		})
 	end
-	local UseSelectorResult1 = UseSelectorFunction(function(p5) --[[ Line: 263 ]]
+	local UseSelectorResult1 = UseSelectorFunction(function(p5)
 		-- upvalues: FetchGamePlayButtonDataModule (upval), Current (copy), FFlagLuaAppEnablePlayableStateWhenLoading (upval), p2 (copy), FFlagLuaAppSupportDisablePlayableWhenLoading (upval), v1 (ref), GetFFlagIsSquadEnabledFunction (upval), UseCurrentSquadSelectorResult (copy), UseIsExperienceInvitePendingModuleResult (copy), PlayButtonStatesModule (upval), ApiPostPreparePurchaseModule (upval), RetrievalStatus (upval), FetchGamePlayabilityAndProductInfo (upval), GamesProductInfoReducer (upval), selectPlayButtonState (upval), UseSelectorResult (copy), FFlagLuaAppParentUpsellPolicy (upval), UseAppPolicyResult (ref), FFlagEnableGameJoinEarlyAccess (upval), p4 (copy)
 		if FetchGamePlayButtonDataModule.IsLoading(p5, Current) then
 			return if FFlagLuaAppEnablePlayableStateWhenLoading and (p2 and (not FFlagLuaAppSupportDisablePlayableWhenLoading or not v1)) then if GetFFlagIsSquadEnabledFunction() and UseCurrentSquadSelectorResult and #UseCurrentSquadSelectorResult.members > 1 then if UseIsExperienceInvitePendingModuleResult then PlayButtonStatesModule.WaitingForParty else PlayButtonStatesModule.PlayableWithParty else PlayButtonStatesModule.Playable else PlayButtonStatesModule.Loading
@@ -170,7 +170,7 @@ return function(p1, Current, Delay, p2, p3, Current1, p4) --[[ Line: 195 ]]
 		UseRefResult4.current = UseSelectorResult1
 		local UseRefResult5 = ReactModule.useRef(UseSelectorResult)
 		UseRefResult5.current = UseSelectorResult
-		local UseResult = ReactModule.useCallback(function(EndReason) --[[ Line: 341 ]]
+		local UseResult = ReactModule.useCallback(function(EndReason)
 			-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseRefResult2 (copy), SendPlayButtonLoadingDurationFunction (upval), UseRefResult4 (copy), UseRefResult5 (copy), UseRefResult3 (copy)
 			local Current = UseRefResult.current
 			local Current1 = UseRefResult1.current
@@ -193,7 +193,7 @@ return function(p1, Current, Delay, p2, p3, Current1, p4) --[[ Line: 195 ]]
 				return
 			end
 		end, {})
-		ReactModule.useEffect(function() --[[ Line: 368 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseSelectorResult1 (copy), PlayButtonStatesModule (upval), p3 (copy), UseRefResult (copy), UseRefResult1 (copy), Current (copy), UseRefResult2 (copy), Current1 (copy), UseRefResult3 (copy), UseRouteNameResult (copy), UseResult (copy)
 			if UseSelectorResult1 ~= PlayButtonStatesModule.Loading then
 				UseResult("stateChanged")
@@ -218,9 +218,9 @@ return function(p1, Current, Delay, p2, p3, Current1, p4) --[[ Line: 195 ]]
 		end, {
 			UseSelectorResult1, UseResult, Current, p3, Current1, UseRouteNameResult
 		})
-		ReactModule.useEffect(function() --[[ Line: 400 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseResult (copy)
-			return function() --[[ Line: 401 ]]
+			return function()
 				-- upvalues: UseResult (upval)
 				UseResult("unmounted")
 			end

@@ -4,14 +4,14 @@ local UserProfileStore = require(game:GetService("CorePackages").Workspace.Packa
 local FixCharacterNameHandlerNilProfileCrash = game:DefineFastFlag("FixCharacterNameHandlerNilProfileCrash", false)
 local t = {}
 
-local function setName(Player: Player, p1, p2) --[[ Line: 26 ]]
+local function setName(Player: Player, p1, p2)
 	-- upvalues: t (copy)
 	local InExperienceCombinedName = p2.names.inExperienceCombinedName
 	local DisplayName = p2.names.displayName
 	
 	if p2.names.displayName == Player.DisplayName then
 		Player.InternalDisplayName = InExperienceCombinedName
-		t[p1].HumanoidDisplayNameChanged = Player:GetPropertyChangedSignal("DisplayName"):Connect(function() --[[ Line: 33 ]]
+		t[p1].HumanoidDisplayNameChanged = Player:GetPropertyChangedSignal("DisplayName"):Connect(function()
 			-- upvalues: DisplayName (copy), Player (copy)
 			if DisplayName ~= Player.DisplayName then
 				Player.InternalDisplayName = ""
@@ -20,14 +20,14 @@ local function setName(Player: Player, p1, p2) --[[ Line: 26 ]]
 	end
 end
 
-local function checkHumanoid(Player, Character, p1) --[[ Line: 41 ]]
+local function checkHumanoid(Player, Character, p1)
 	-- upvalues: setName (copy), t (copy)
 	local Humanoid = Character:FindFirstChildWhichIsA("Humanoid")
 	
 	if Humanoid then
 		setName(Humanoid, Player, p1)
 	end
-	t[Player].CharacterHumanoidAdded = Character.ChildAdded:Connect(function(Child: Humanoid) --[[ Line: 46 ]]
+	t[Player].CharacterHumanoidAdded = Character.ChildAdded:Connect(function(Child: Humanoid)
 		-- upvalues: setName (upval), Player (copy), p1 (copy)
 		if Child:IsA("Humanoid") then
 			setName(Child, Player, p1)
@@ -35,18 +35,18 @@ local function checkHumanoid(Player, Character, p1) --[[ Line: 41 ]]
 	end)
 end
 
-local function setNameOnCharacterAdded(Player: Player, p1) --[[ Line: 53 ]]
+local function setNameOnCharacterAdded(Player: Player, p1)
 	-- upvalues: t (copy), checkHumanoid (copy)
 	t[Player] = {}
 	
 	if Player.Character then
 		checkHumanoid(Player, Player.Character, p1)
 	end
-	t[Player].CharacterAdded = Player.CharacterAdded:Connect(function(Character) --[[ Line: 59 ]]
+	t[Player].CharacterAdded = Player.CharacterAdded:Connect(function(Character)
 		-- upvalues: checkHumanoid (upval), Player (copy), p1 (copy)
 		checkHumanoid(Player, Character, p1)
 	end)
-	t[Player].CharacterRemoving = Player.CharacterRemoving:Connect(function() --[[ Line: 62 ]]
+	t[Player].CharacterRemoving = Player.CharacterRemoving:Connect(function()
 		-- upvalues: t (upval), Player (copy)
 		local HumanoidDisplayNameChanged = t[Player].HumanoidDisplayNameChanged
 		
@@ -59,9 +59,9 @@ local function setNameOnCharacterAdded(Player: Player, p1) --[[ Line: 53 ]]
 	end)
 end
 
-local function onPlayerAdded(Player: Player) --[[ Line: 101 ]]
+local function onPlayerAdded(Player: Player)
 	-- upvalues: UserProfileStore (copy), FixCharacterNameHandlerNilProfileCrash (copy), setNameOnCharacterAdded (copy)
-	UserProfileStore.get().fetchNamesByUserIds({ (tostring(Player.UserId)) }, function(p1) --[[ Line: 102 ]]
+	UserProfileStore.get().fetchNamesByUserIds({ (tostring(Player.UserId)) }, function(p1)
 		-- upvalues: FixCharacterNameHandlerNilProfileCrash (upval), setNameOnCharacterAdded (upval), Player (copy)
 		local Data = p1.data
 		local NoFixCharacterNameHandlerNilProfileCrash: boolean = not FixCharacterNameHandlerNilProfileCrash or #Data > 0 and Data[1].names ~= nil
@@ -78,7 +78,7 @@ local function onPlayerAdded(Player: Player) --[[ Line: 101 ]]
 	end)
 end
 
-local function onPlayerRemoving(Player) --[[ Line: 119 ]]
+local function onPlayerRemoving(Player)
 	-- upvalues: t (copy), UserProfileStore (copy)
 	local Entry = t[Player]
 	
@@ -91,7 +91,7 @@ local function onPlayerRemoving(Player) --[[ Line: 119 ]]
 	UserProfileStore.get().invalidateCachedNamesForUserIds({ (tostring(Player.UserId)) })
 end
 
-;(function() --[[ Line: 74 | Named "setCurrentPlayersNames" ]]
+;(function()
 	-- upvalues: Players (copy), UserProfileStore (copy), FixCharacterNameHandlerNilProfileCrash (copy), setNameOnCharacterAdded (copy)
 	local List = {}
 	local Players1 = {}
@@ -100,7 +100,7 @@ end
 		table.insert(List, (tostring(player.UserId)))
 		Players1[tostring(player.UserId)] = player
 	end
-	UserProfileStore.get().fetchNamesByUserIds(List, function(p1) --[[ Line: 82 ]]
+	UserProfileStore.get().fetchNamesByUserIds(List, function(p1)
 		-- upvalues: Players1 (copy), FixCharacterNameHandlerNilProfileCrash (upval), setNameOnCharacterAdded (upval)
 		local Data = p1.data
 		

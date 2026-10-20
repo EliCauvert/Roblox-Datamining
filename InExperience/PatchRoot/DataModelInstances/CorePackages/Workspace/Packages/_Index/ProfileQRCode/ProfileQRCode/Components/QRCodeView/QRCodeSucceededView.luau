@@ -16,7 +16,7 @@ local GetStandardSizeAvatarHeadShotRbxthumbFunction = require(Parent.UserLib).Ut
 local GetFFlagLuaAppEnableOpenTypeSupportFunction = require(Parent.SharedFlags).GetFFlagLuaAppEnableOpenTypeSupport
 local ComponentAssetsDropshadow568 = UIBloxModule.App.ImageSet.Images["component_assets/dropshadow_56_8"]
 
-return function(p1) --[[ Line: 40 ]]
+return function(p1)
 	-- upvalues: UseLocalUserIdFunction (copy), UseLocalUserInfoModule (copy), UseStyleFunction (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), ReactModule (copy), LightTheme (copy), DisplayQRCode (copy), QRCodeDisplayModule (copy), ImageSetLabel (copy), ComponentAssetsDropshadow568 (copy), StyledTextLabel (copy), FFlagProfileQrCodeDeprecateUserReduxModule (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), OpenTypeSupport (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseLocalUserInfoModuleResult = UseLocalUserInfoModule(UseLocalUserIdResult)

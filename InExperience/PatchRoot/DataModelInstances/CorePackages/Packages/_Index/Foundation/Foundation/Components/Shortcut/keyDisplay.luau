@@ -70,22 +70,22 @@ local config2 = {
 	Unknown = true
 }
 
-local function _(p1): boolean --[[ Line: 93 | Named "isGamepadKeyCode" ]]
+local function _(p1): boolean
 	local Name = p1.Name
 	
 	return Name:match("^Button") ~= nil or Name:match("^DPad") ~= nil or Name:match("^Thumbstick") ~= nil
 end
 
-local _ = function(p1) --[[ Line: 98 | Named "normalizeModifier" ]]
+local _ = function(p1)
 	-- upvalues: config (copy), t (copy)
 	local Entry = config[p1.Name]
 	
 	return if Entry == nil then p1 else t[Entry] or p1
 end
 
-local _ = function(p1) --[[ Line: 108 | Named "getStringForKeyCode" ]]
+local _ = function(p1)
 	-- upvalues: UserInputService (copy)
-	local Success, Result = pcall(function() --[[ Line: 109 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: UserInputService (upval), p1 (copy)
 		return UserInputService:GetStringForKeyCode(p1)
 	end)
@@ -94,11 +94,11 @@ local _ = function(p1) --[[ Line: 108 | Named "getStringForKeyCode" ]]
 end
 
 return {
-	isNonDisplayable = function(p1): boolean --[[ Line: 120 ]]
+	isNonDisplayable = function(p1): boolean
 		-- upvalues: config2 (copy)
 		return config2[p1.Name] == true
 	end,
-	resolveKey = function(p1, p2) --[[ Line: 124 ]]
+	resolveKey = function(p1, p2)
 		-- upvalues: config2 (copy), config (copy), t (copy), GetIconForKeyCodeModule (copy), config1 (copy), UserInputService (copy)
 		if config2[p1.Name] == true then
 			return nil
@@ -118,7 +118,7 @@ return {
 		if Entry2 then
 			return { kind = "Text", text = Entry2 }
 		else
-			local Success, Result = pcall(function() --[[ Line: 109 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: UserInputService (upval), Entry1 (copy)
 				return UserInputService:GetStringForKeyCode(Entry1)
 			end)

@@ -10,22 +10,22 @@ local MomentStatus = MomentsTypesModule.Enums.MomentStatus
 local ShareLinkTargetIdType = MomentsTypesModule.Enums.ShareLinkTargetIdType
 local FFlagMomentsPassFeedItemIdToBackendApis = require(Parent.SharedFlags).FFlagMomentsPassFeedItemIdToBackendApis
 
-return function(p1) --[[ Line: 36 | Named "createMomentDetailsStore" ]]
+return function(p1)
 	-- upvalues: DataHydrationModule (copy), NewResult (copy), MomentsGetMomentsStoreModule (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), MomentStatus (copy), FFlagAppChatMomentShareCardEdgeCasesModule (copy), ShareLinkTargetIdType (copy)
 	local P0 = p1 or {}
 	
-	local function createResolver(FeedItemId) --[[ Line: 39 ]]
+	local function createResolver(FeedItemId)
 		-- upvalues: DataHydrationModule (upval), P0 (copy), NewResult (upval), MomentsGetMomentsStoreModule (upval), FFlagMomentsPassFeedItemIdToBackendApis (upval), MomentStatus (upval), FFlagAppChatMomentShareCardEdgeCasesModule (upval), ShareLinkTargetIdType (upval)
 		return DataHydrationModule.createDataResolver({
 			supportsMultiGet = true,
 			queueProcessDelaySec = 0,
 			replaceItems = true,
 			cache = DataHydrationModule.createDataCache(P0.ttlSeconds, P0.failedTtlSeconds),
-			logError = function(p2) --[[ Line: 47 ]]
+			logError = function(p2)
 				-- upvalues: NewResult (upval)
 				NewResult:warning(`Error resolving Moment details: {tostring(p2)}`)
 			end,
-			fetchFn = function(List) --[[ Line: 50 ]]
+			fetchFn = function(List)
 				-- upvalues: MomentsGetMomentsStoreModule (upval), FFlagMomentsPassFeedItemIdToBackendApis (upval), FeedItemId (copy), MomentStatus (upval), FFlagAppChatMomentShareCardEdgeCasesModule (upval), ShareLinkTargetIdType (upval)
 				local List1 = {}
 				
@@ -34,7 +34,7 @@ return function(p1) --[[ Line: 36 | Named "createMomentDetailsStore" ]]
 				end
 				local MomentsGetMomentsStoreModuleResult = MomentsGetMomentsStoreModule(false)
 				
-				return (if FFlagMomentsPassFeedItemIdToBackendApis then MomentsGetMomentsStoreModuleResult.getMomentsByIds(List1, FeedItemId) else MomentsGetMomentsStoreModuleResult.getMomentsByIds(List1)):andThen(function(Result) --[[ Line: 60 ]]
+				return (if FFlagMomentsPassFeedItemIdToBackendApis then MomentsGetMomentsStoreModuleResult.getMomentsByIds(List1, FeedItemId) else MomentsGetMomentsStoreModuleResult.getMomentsByIds(List1)):andThen(function(Result)
 					-- upvalues: MomentStatus (upval), FFlagAppChatMomentShareCardEdgeCasesModule (upval), FeedItemId (upval), ShareLinkTargetIdType (upval), List (copy)
 					local t = {}
 					
@@ -58,25 +58,25 @@ return function(p1) --[[ Line: 36 | Named "createMomentDetailsStore" ]]
 	local Resolver = createResolver(nil)
 	local Resolver1 = if FFlagMomentsPassFeedItemIdToBackendApis then createResolver(ShareLinkTargetIdType.FeedItemId) else nil
 	
-	local function _(FeedItemId) --[[ Line: 84 | Named "getResolver" ]]
+	local function _(FeedItemId)
 		-- upvalues: Resolver1 (copy), ShareLinkTargetIdType (upval), Resolver (copy)
 		return if Resolver1 == nil or FeedItemId ~= ShareLinkTargetIdType.FeedItemId then Resolver else Resolver1
 	end
 	
 	return {
-		getCachedMomentDetails = function(p2, FeedItemId) --[[ Line: 91 ]]
+		getCachedMomentDetails = function(p2, FeedItemId)
 			-- upvalues: Resolver1 (copy), ShareLinkTargetIdType (upval), Resolver (copy)
 			return (if Resolver1 == nil or FeedItemId ~= ShareLinkTargetIdType.FeedItemId then Resolver else Resolver1).getCachedItem(p2)
 		end,
-		fetchMomentDetails = function(p2, FeedItemId) --[[ Line: 95 ]]
+		fetchMomentDetails = function(p2, FeedItemId)
 			-- upvalues: Resolver1 (copy), ShareLinkTargetIdType (upval), Resolver (copy)
 			return (if Resolver1 == nil or FeedItemId ~= ShareLinkTargetIdType.FeedItemId then Resolver else Resolver1).fetchItem(p2)
 		end,
-		getAndFetchMomentDetails = function(p2, FeedItemId) --[[ Line: 99 ]]
+		getAndFetchMomentDetails = function(p2, FeedItemId)
 			-- upvalues: Resolver1 (copy), ShareLinkTargetIdType (upval), Resolver (copy)
 			return (if Resolver1 == nil or FeedItemId ~= ShareLinkTargetIdType.FeedItemId then Resolver else Resolver1).getAndFetchItem(p2)
 		end,
-		clear = function() --[[ Line: 103 ]]
+		clear = function()
 			-- upvalues: Resolver (copy), Resolver1 (copy)
 			Resolver.clear()
 			
@@ -84,7 +84,7 @@ return function(p1) --[[ Line: 36 | Named "createMomentDetailsStore" ]]
 				Resolver1.clear()
 			end
 		end,
-		dispose = function() --[[ Line: 110 ]]
+		dispose = function()
 			-- upvalues: Resolver (copy), Resolver1 (copy)
 			Resolver.dispose()
 			

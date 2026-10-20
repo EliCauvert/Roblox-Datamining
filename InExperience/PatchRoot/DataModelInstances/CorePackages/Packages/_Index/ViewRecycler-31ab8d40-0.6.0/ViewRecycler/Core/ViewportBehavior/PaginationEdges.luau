@@ -3,7 +3,7 @@ local DataSourceChangeTypeModule = require(ViewRecycler.Core.Enums.DataSourceCha
 local _ = require(ViewRecycler.Core.Types)
 
 return {
-	hasStructuralChange = function(p1): boolean --[[ Line: 28 ]]
+	hasStructuralChange = function(p1): boolean
 		-- upvalues: DataSourceChangeTypeModule (copy)
 		for _, change in p1.changes do
 			if change.type ~= DataSourceChangeTypeModule.Update then
@@ -12,12 +12,12 @@ return {
 		end
 		return false
 	end,
-	create = function() --[[ Line: 37 ]]
+	create = function()
 		local Flag = true
 		local Flag1 = true
 		
 		return {
-			check = function(p2) --[[ Line: 42 ]]
+			check = function(p2)
 				-- upvalues: Flag (ref), Flag1 (ref)
 				if p2.rearmAfterStructureChange then
 					Flag = true

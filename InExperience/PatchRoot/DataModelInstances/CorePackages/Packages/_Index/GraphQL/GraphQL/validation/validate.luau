@@ -21,7 +21,7 @@ local ValidationContextModule = require(Parent.ValidationContext)
 local SDLValidationContext = ValidationContextModule.SDLValidationContext
 local ValidationContext = ValidationContextModule.ValidationContext
 local ValidateModule = {
-	validate = function(p1, p2, p3, p4, p5) --[[ Line: 64 ]]
+	validate = function(p1, p2, p3, p4, p5)
 		-- upvalues: SpecifiedRules (copy), TypeInfo (copy), DevAssertFunction (copy), AssertValidSchemaFunction (copy), ValidationContext (copy), GraphQLError (copy), VisitInParallelFunction (copy), Array (copy), VisitFunction (copy), VisitWithTypeInfoFunction (copy)
 		local SpecifiedRules1 = if p3 then p3 else SpecifiedRules
 		local Config = if p4 then p4 else { maxErrors = nil }
@@ -30,7 +30,7 @@ local ValidateModule = {
 		AssertValidSchemaFunction(p1)
 		local t = {}
 		local List = {}
-		local NewValidationContext = ValidationContext.new(p1, p2, NewTypeInfo, function(p6) --[[ Line: 82 ]]
+		local NewValidationContext = ValidationContext.new(p1, p2, NewTypeInfo, function(p6)
 			-- upvalues: Config (copy), List (copy), GraphQLError (upval), t (copy)
 			if Config.maxErrors ~= nil and Config.maxErrors <= #List then
 				table.insert(List, GraphQLError.new("Too many validation errors, error limit reached. Validation aborted."))
@@ -38,11 +38,11 @@ local ValidateModule = {
 			end
 			table.insert(List, p6)
 		end)
-		local VisitInParallelResult = VisitInParallelFunction(Array.map(SpecifiedRules1, function(Callback) --[[ Line: 98 ]]
+		local VisitInParallelResult = VisitInParallelFunction(Array.map(SpecifiedRules1, function(Callback)
 			-- upvalues: NewValidationContext (copy)
 			return Callback(NewValidationContext)
 		end))
-		local Success, Result = pcall(function() --[[ Line: 103 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: VisitFunction (upval), p2 (copy), VisitWithTypeInfoFunction (upval), NewTypeInfo (copy), VisitInParallelResult (copy)
 			VisitFunction(p2, VisitWithTypeInfoFunction(NewTypeInfo, VisitInParallelResult))
 		end)
@@ -52,14 +52,14 @@ local ValidateModule = {
 		end
 		return List
 	end,
-	validateSDL = function(p1, p2, p3) --[[ Line: 118 ]]
+	validateSDL = function(p1, p2, p3)
 		-- upvalues: SpecifiedSDLRules (copy), SDLValidationContext (copy), Array (copy), VisitFunction (copy), VisitInParallelFunction (copy)
 		local List = {}
-		local NewSDLValidationContext = SDLValidationContext.new(p1, p2, function(p4) --[[ Line: 126 ]]
+		local NewSDLValidationContext = SDLValidationContext.new(p1, p2, function(p4)
 			-- upvalues: List (copy)
 			table.insert(List, p4)
 		end)
-		VisitFunction(p1, VisitInParallelFunction((Array.map(if p3 then p3 else SpecifiedSDLRules, function(Callback) --[[ Line: 129 ]]
+		VisitFunction(p1, VisitInParallelFunction((Array.map(if p3 then p3 else SpecifiedSDLRules, function(Callback)
 			-- upvalues: NewSDLValidationContext (copy)
 			return Callback(NewSDLValidationContext)
 		end))))
@@ -68,23 +68,23 @@ local ValidateModule = {
 	end
 }
 
-function ValidateModule.assertValidSDL(p1) --[[ Line: 142 ]]
+function ValidateModule.assertValidSDL(p1)
 	-- upvalues: ValidateModule (copy), Error1 (copy), Array (copy)
 	local ValidateSDLResult = ValidateModule.validateSDL(p1)
 	
 	if #ValidateSDLResult ~= 0 then
-		error(Error1.new(table.concat(Array.map(ValidateSDLResult, function(p2) --[[ Line: 146 ]]
+		error(Error1.new(table.concat(Array.map(ValidateSDLResult, function(p2)
 			return p2.message
 		end), "\n\n")))
 	end
 end
 
-function ValidateModule.assertValidSDLExtension(p1, p2) --[[ Line: 160 ]]
+function ValidateModule.assertValidSDLExtension(p1, p2)
 	-- upvalues: ValidateModule (copy), Error1 (copy), Array (copy)
 	local ValidateSDLResult = ValidateModule.validateSDL(p1, p2)
 	
 	if #ValidateSDLResult ~= 0 then
-		error(Error1.new(table.concat(Array.map(ValidateSDLResult, function(p3) --[[ Line: 164 ]]
+		error(Error1.new(table.concat(Array.map(ValidateSDLResult, function(p3)
 			return if typeof(p3) == "string" then p3 else p3.message
 		end), "\n\n")))
 	end

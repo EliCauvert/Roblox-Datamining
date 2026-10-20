@@ -9,18 +9,18 @@ local Text = FoundationModule.Text
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local InputSize = FoundationModule.Enums.InputSize
 
-return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(function(p1) --[[ Line: 21 | Named "CartUnavailableItemsPrompt" ]]
+return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), RoactNavigationModule (copy), View (copy), Text (copy), AXPartialPageModal (copy), ButtonVariant (copy), InputSize (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		confirmButtonText = "Feature.Catalog.Action.Checkout.UnavailableItems",
 		titleText = "Feature.Catalog.Title.Checkout.UnavailableItems",
 		bodyText = "Feature.Catalog.Message.Checkout.UnavailableItems"
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 28 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), RoactNavigationModule (upval)
 		p1.navigation.dispatch(RoactNavigationModule.Actions.back(nil))
 	end, { p1.navigation })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 32 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy), p1 (copy)
 		UseResult()
 		
@@ -44,7 +44,7 @@ return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(fu
 				}
 			}
 		}
-	}, ((function() --[[ Line: 39 ]]
+	}, ((function()
 		-- upvalues: ReactModule (upval), View (upval), Text (upval), UseLocalizationResult (copy)
 		return {
 			ViewFrame = ReactModule.createElement(View, {

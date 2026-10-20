@@ -19,12 +19,12 @@ ExtendResult.defaultProps = {
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function ExtendResult.init(p1) --[[ Line: 48 ]]
+function ExtendResult.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.contentRef = RoactModule.createRef()
 	p1.state = { contentSize = Vector2.new(0, 0) }
 	
-	function p1.changeContentSize(Frame: Frame) --[[ Line: 54 ]]
+	function p1.changeContentSize(Frame: Frame)
 		-- upvalues: p1 (copy)
 		if p1.state.contentSize ~= Frame.AbsoluteSize then
 			p1:setState({ contentSize = Frame.AbsoluteSize })
@@ -32,7 +32,7 @@ function ExtendResult.init(p1) --[[ Line: 48 ]]
 	end
 end
 
-function ExtendResult.render(p1) --[[ Line: 63 ]]
+function ExtendResult.render(p1)
 	-- upvalues: RoactModule (copy), MultiTextLocalizerModule (copy)
 	return RoactModule.createElement(MultiTextLocalizerModule, {
 		keys = {
@@ -48,18 +48,18 @@ function ExtendResult.render(p1) --[[ Line: 63 ]]
 			EquipText = { key = "IAPExperience.PurchaseSuccess.Action.Equip" },
 			BackToShopText = { key = "IAPExperience.PurchaseSuccess.Action.BackToShop" }
 		},
-		render = function(p2) --[[ Line: 88 ]]
+		render = function(p2)
 			-- upvalues: p1 (copy)
 			return p1:renderAlert(p2)
 		end
 	})
 end
 
-function ExtendResult.renderAlert(p1, p2) --[[ Line: 94 ]]
+function ExtendResult.renderAlert(p1, p2)
 	-- upvalues: WithStyleFunction (copy), ButtonType (copy), RoactModule (copy), ImageSetLabel (copy), IconSize (copy), IconsStatusImageunavailable (copy), ModelViewportModule (copy), InteractiveAlert (copy), FitFrameVertical (copy), FitTextLabel (copy)
 	local Props = p1.props
 	
-	return WithStyleFunction(function(p3) --[[ Line: 97 ]]
+	return WithStyleFunction(function(p3)
 		-- upvalues: p2 (copy), Props (copy), p1 (copy), ButtonType (upval), RoactModule (upval), ImageSetLabel (upval), IconSize (upval), IconsStatusImageunavailable (upval), ModelViewportModule (upval), InteractiveAlert (upval), FitFrameVertical (upval), FitTextLabel (upval)
 		local Theme = p3.Theme
 		local _Font = p3.Font
@@ -90,7 +90,7 @@ function ExtendResult.renderAlert(p1, p2) --[[ Line: 94 ]]
 			position = Props.position,
 			anchorPoint = Props.anchorPoint,
 			title = p2.PurchaseSucceededTitle,
-			middleContent = function() --[[ Line: 175 ]]
+			middleContent = function()
 				-- upvalues: RoactModule (upval), FitFrameVertical (upval), p1 (upval), Element (ref), FitTextLabel (upval), _Font (copy), Text (copy), Theme (copy)
 				return RoactModule.createElement(FitFrameVertical, {
 					BackgroundTransparency = 1,

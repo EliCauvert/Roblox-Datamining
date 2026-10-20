@@ -3,7 +3,7 @@ local Roact = require(PurchasePrompt.Parent.PurchasePromptDeps).Roact
 local LayoutValuesModule = require(PurchasePrompt.Services.LayoutValues)
 local LayoutValuesContextModule = require(script.Parent.LayoutValuesContext)
 
-return function(p1) --[[ Line: 15 ]]
+return function(p1)
 	-- upvalues: LayoutValuesModule (copy), Roact (copy), LayoutValuesContextModule (copy)
 	return Roact.createElement(LayoutValuesContextModule.Provider, {
 		value = LayoutValuesModule.new(p1.isTenFootInterface).layout

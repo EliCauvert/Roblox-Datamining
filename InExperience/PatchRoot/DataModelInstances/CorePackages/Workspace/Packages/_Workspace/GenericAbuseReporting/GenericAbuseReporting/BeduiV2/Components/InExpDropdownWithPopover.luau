@@ -21,20 +21,20 @@ local Side = {
 	position = FoundationModule.Enums.PopoverSide.Bottom
 }
 
-return ReactModule.memo(function(Frame) --[[ Line: 57 | Named "InExpDropdownWithPopover" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), View (copy), Text (copy), Icon (copy), IconName (copy), Popover (copy), SideModalDropdownButtonModule (copy), PopoverAlign (copy), Side (copy), Radius (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
 	local OnOpenChangeFunction = Frame.onOpenChange
-	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 67 ]]
+	local UseResult = ReactModule.useCallback(function(p1)
 		-- upvalues: OnOpenChangeFunction (copy), UseStateResult2 (copy)
 		if OnOpenChangeFunction then
 			OnOpenChangeFunction(p1)
 		end
 		UseStateResult2(p1)
 	end, { OnOpenChangeFunction })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 74 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Frame (copy)
 		if Frame.value == nil then
 			return nil
@@ -46,7 +46,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 57 | Named "InExpDropdownWith
 		end
 		return nil
 	end, { Frame.items, Frame.value })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 90 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy)
 		UseResult(false)
 	end, { UseResult })
@@ -57,7 +57,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 57 | Named "InExpDropdownWith
 	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y padding-top-xxsmall",
 		ref = UseRefResult,
-		onAbsoluteSizeChanged = function(Frame) --[[ Line: 145 ]]
+		onAbsoluteSizeChanged = function(Frame)
 			-- upvalues: UseStateResult2_1 (copy)
 			UseStateResult2_1(Frame.AbsoluteSize.X)
 		end,
@@ -65,7 +65,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 57 | Named "InExpDropdownWith
 	}, {
 		Popover = ReactModule.createElement(Popover.Root, { isOpen = UseStateResult }, {
 			Trigger = ReactModule.createElement(SideModalDropdownButtonModule, {
-				onActivated = ReactModule.useCallback(function() --[[ Line: 86 ]]
+				onActivated = ReactModule.useCallback(function()
 					-- upvalues: UseResult (copy), UseStateResult (copy)
 					UseResult(not UseStateResult)
 				end, { UseStateResult, UseResult }),
@@ -83,7 +83,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 57 | Named "InExpDropdownWith
 				isFocusable = UseStateResult,
 				isAutoFocusRoot = UseStateResult,
 				isIsolated = UseStateResult,
-				eventHandlers = ReactModule.useMemo(function() --[[ Line: 94 ]]
+				eventHandlers = ReactModule.useMemo(function()
 					-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), UseResult1 (copy)
 					return {
 						[FocusNavigationEventNameEnum.NavigateBack] = { handler = InputHandlersModule.onRelease(UseResult1) }
@@ -93,7 +93,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 57 | Named "InExpDropdownWith
 				Menu = ReactModule.createElement(View, {
 					tag = "col align-x-center align-y-center gap-xsmall auto-y padding-xsmall stroke-default radius-medium",
 					Size = UDim2.new(0, UseStateResult1 - 2, 0, -2)
-				}, (ReactModule.useMemo(function() --[[ Line: 107 ]]
+				}, (ReactModule.useMemo(function()
 					-- upvalues: Items (copy), Value (copy), ReactModule (upval), View (upval), UseResult (copy), OnItemChangedFunction (copy), Text (upval), Icon (upval), IconName (upval)
 					local Elements = {}
 					
@@ -102,7 +102,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 57 | Named "InExpDropdownWith
 						local IsIdMatch = Id == Value
 						Elements[`item-{tostring(Id)}`] = ReactModule.createElement(View, {
 							LayoutOrder = LayoutOrder,
-							onActivated = function() --[[ Line: 114 ]]
+							onActivated = function()
 								-- upvalues: UseResult (upval), OnItemChangedFunction (upval), Id (copy)
 								UseResult(false)
 								OnItemChangedFunction(Id)

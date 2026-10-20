@@ -18,7 +18,7 @@ CheckboxRow.defaultProps = {
 	checkboxSelected = false,
 	actionDisabled = false,
 	LayoutOrder = 1,
-	onCheckboxActivated = function() --[[ Line: 29 ]] end
+	onCheckboxActivated = function() end
 }
 CheckboxRow.validateProps = TModule.interface({
 	height = TModule.number,
@@ -30,9 +30,9 @@ CheckboxRow.validateProps = TModule.interface({
 	LayoutOrder = TModule.optional(TModule.number)
 })
 
-function CheckboxRow.render(p1) --[[ Line: 43 ]]
+function CheckboxRow.render(p1)
 	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), RoactModule (copy), FoundationModule (copy), ImageSetLabel (copy), Images (copy), NormalizeFontFaceFunction (copy), Checkbox (copy)
-	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 44 ]]
+	return WithFoundationOrUIBloxStyleFunction(function(p2)
 		-- upvalues: FoundationFontFaceMigration (upval)
 		return {
 			Tokens = if FoundationFontFaceMigration then p2 else nil,
@@ -62,7 +62,7 @@ function CheckboxRow.render(p1) --[[ Line: 43 ]]
 				}
 			}
 		}
-	end, function(p2) --[[ Line: 73 ]]
+	end, function(p2)
 		-- upvalues: p1 (copy), FFlagCoreUiMigrateUIBloxToFoundation (upval), RoactModule (upval), FoundationModule (upval), ImageSetLabel (upval), Images (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), Checkbox (upval)
 		local BaseSize = p2.Font.BaseSize
 		local TextMuted = nil

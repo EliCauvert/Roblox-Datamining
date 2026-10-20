@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("ProfileFrameThumbnailEnabled", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("ProfileFrameThumbnailEnabled")
 end

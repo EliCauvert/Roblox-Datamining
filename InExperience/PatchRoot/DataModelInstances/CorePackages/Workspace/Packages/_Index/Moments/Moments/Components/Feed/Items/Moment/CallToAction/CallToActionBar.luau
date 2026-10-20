@@ -33,7 +33,7 @@ local config = {
 }
 local Character = utf8.char(57344)
 
-return ReactModule.memo(function(Frame) --[[ Line: 73 | Named "CallToActionBar" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), UseTokensFunction (copy), MomentContextModule (copy), UseSignalStateFunction (copy), GetMomentsPreferencesStoreModule (copy), GetFFlagMomentsAndroidTvEnabledModule (copy), UseIsTvRemoteDeviceFunction (copy), UseExperienceDetailsModule (copy), FFlagMomentsServeEDPVideos (copy), UseScaledValueFunction (copy), FFlagMomentsFixRecommendationImpressionLifecycleModule (copy), FeedContextModule (copy), GetRbxThumbFunction (copy), FoundationModule (copy), MomentsFixExperienceHandleVerifiedSpacing (copy), Character (copy), ReactModule (copy), ImageWithSkeletonModule (copy), Radius (copy), View (copy), Text (copy), Skeleton (copy), VerifiedBadgeModule (copy), IconSize (copy), GetExperienceDetailsSheetStoreModule (copy), Button (copy), JoinButtonModule (copy), FFlagMomentsJoinImpressionModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseTokensResult = UseTokensFunction()
@@ -70,7 +70,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 73 | Named "CallToActionBar" 
 				LayoutOrder = 1,
 				tag = "row align-x-left align-y-center grow gap-medium auto-y",
 				testId = "moments-experience-row",
-				onActivated = if IsAd or UseSignalStateResult1 or FFlagMomentsServeEDPVideos and RootPlaceId == 0 then nil else function() --[[ Line: 203 ]]
+				onActivated = if IsAd or UseSignalStateResult1 or FFlagMomentsServeEDPVideos and RootPlaceId == 0 then nil else function()
 					-- upvalues: GetExperienceDetailsSheetStoreModule (upval), RootPlaceId (copy), UniverseId (copy), Data (copy), FFlagMomentsFixRecommendationImpressionLifecycleModule (upval), UseFeedOptionalResult (ref)
 					GetExperienceDetailsSheetStoreModule(false).open({
 						placeId = RootPlaceId,
@@ -130,7 +130,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 73 | Named "CallToActionBar" 
 			CtaButton = if FFlagMomentsAndroidTvEnabledModule and UseIsTvRemoteDeviceResult then nil elseif IsAd then ReactModule.createElement(Button, {
 				LayoutOrder = 2,
 				isDisabled = UseSignalStateResult or UseSignalStateResult1,
-				onActivated = function() --[[ Line: 238 ]] end,
+				onActivated = function() end,
 				size = FoundationModule.Enums.InputSize.Medium,
 				text = CtaText,
 				variant = FoundationModule.Enums.ButtonVariant.Emphasis

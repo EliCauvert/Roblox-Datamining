@@ -67,14 +67,14 @@ local config8 = {
 }
 
 return {
-	sendLoadTimerEvent = function(CustomFields) --[[ Line: 84 ]]
+	sendLoadTimerEvent = function(CustomFields)
 		-- upvalues: TelemetryService (copy), config (copy)
 		TelemetryService:LogEvent(config, {
 			customFields = CustomFields,
 			standardizedFields = { "addOSInfo" }
 		})
 	end,
-	sendPageStatusEvent = function(PageKey, p1, p2) --[[ Line: 107 ]]
+	sendPageStatusEvent = function(PageKey, p1, p2)
 		-- upvalues: TelemetryService (copy), config2 (copy), config6 (copy)
 		TelemetryService:LogCounter(config2, {
 			customFields = {
@@ -84,7 +84,7 @@ return {
 			}
 		})
 	end,
-	sendPagePayloadSizeEvent = function(PageKey, Buf: string) --[[ Line: 117 ]]
+	sendPagePayloadSizeEvent = function(PageKey, Buf: string)
 		-- upvalues: TelemetryService (copy), config3 (copy)
 		local Length: number? = nil
 		
@@ -96,14 +96,14 @@ return {
 		end
 		TelemetryService:LogStat(config3, { customFields = { pageKey = PageKey } }, Length)
 	end,
-	sendLoadMoreEvent = function(SurfaceKey) --[[ Line: 208 ]]
+	sendLoadMoreEvent = function(SurfaceKey)
 		-- upvalues: TelemetryService (copy), config1 (copy)
 		TelemetryService:LogEvent(config1, {
 			customFields = { surfaceKey = SurfaceKey },
 			standardizedFields = { "addOSInfo" }
 		})
 	end,
-	sendRequestOutcomeCounter = function(PageKey, Endpoint, Outcome, p1, HttpError) --[[ Line: 138 ]]
+	sendRequestOutcomeCounter = function(PageKey, Endpoint, Outcome, p1, HttpError)
 		-- upvalues: TelemetryService (copy), config4 (copy), config6 (copy)
 		TelemetryService:LogCounter(config4, {
 			customFields = {
@@ -115,7 +115,7 @@ return {
 			}
 		})
 	end,
-	sendRequestRetryCounter = function(PageKey, Endpoint, Attempt) --[[ Line: 160 ]]
+	sendRequestRetryCounter = function(PageKey, Endpoint, Attempt)
 		-- upvalues: TelemetryService (copy), config5 (copy)
 		TelemetryService:LogCounter(config5, {
 			customFields = {
@@ -125,7 +125,7 @@ return {
 			}
 		})
 	end,
-	sendMissingRoot = function(Surface, p1, p2) --[[ Line: 177 ]]
+	sendMissingRoot = function(Surface, p1, p2)
 		-- upvalues: TelemetryService (copy), config7 (copy)
 		TelemetryService:LogCounter(config7, {
 			customFields = {
@@ -136,7 +136,7 @@ return {
 			standardizedFields = { "addOSInfo" }
 		})
 	end,
-	sendStaleResponseDiscarded = function(Surface, Mode, Stage) --[[ Line: 197 ]]
+	sendStaleResponseDiscarded = function(Surface, Mode, Stage)
 		-- upvalues: TelemetryService (copy), config8 (copy)
 		TelemetryService:LogCounter(config8, {
 			customFields = { surface = Surface, mode = Mode, stage = Stage },

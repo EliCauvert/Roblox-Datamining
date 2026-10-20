@@ -18,7 +18,7 @@ ExtendResult.defaultProps = {
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function ExtendResult.render(p1) --[[ Line: 45 ]]
+function ExtendResult.render(p1)
 	-- upvalues: RoactModule (copy), MultiTextLocalizerModule (copy)
 	return RoactModule.createElement(MultiTextLocalizerModule, {
 		keys = {
@@ -34,16 +34,16 @@ function ExtendResult.render(p1) --[[ Line: 45 ]]
 			cancel = { key = "IAPExperience.InsufficientRobux.Action.Cancel" },
 			buyRobux = { key = "IAPExperience.InsufficientRobux.Action.BuyRobux" }
 		},
-		render = function(p2) --[[ Line: 64 ]]
+		render = function(p2)
 			-- upvalues: p1 (copy)
 			return p1:renderAlert(p2)
 		end
 	})
 end
 
-function ExtendResult.renderAlert(p1, p2) --[[ Line: 70 ]]
+function ExtendResult.renderAlert(p1, p2)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy), InteractiveAlert (copy), ButtonType (copy), FitFrameVertical (copy), RoactFitComponentsModule (copy), FitTextLabel (copy), FitFrameHorizontal (copy), ImageSetLabel (copy), IconsCommonRobux (copy)
-	return WithStyleFunction(function(p3) --[[ Line: 71 ]]
+	return WithStyleFunction(function(p3)
 		-- upvalues: RoactModule (upval), InteractiveAlert (upval), p1 (copy), p2 (copy), ButtonType (upval), FitFrameVertical (upval), RoactFitComponentsModule (upval), FitTextLabel (upval), FitFrameHorizontal (upval), ImageSetLabel (upval), IconsCommonRobux (upval)
 		local _Font = p3.Font
 		local Theme = p3.Theme
@@ -65,7 +65,7 @@ function ExtendResult.renderAlert(p1, p2) --[[ Line: 70 ]]
 					}
 				}
 			},
-			middleContent = function() --[[ Line: 99 ]]
+			middleContent = function()
 				-- upvalues: RoactModule (upval), FitFrameVertical (upval), RoactFitComponentsModule (upval), FitTextLabel (upval), _Font (copy), p2 (upval), Theme (copy), ScaledBaseSize (copy), FitFrameHorizontal (upval), ImageSetLabel (upval), IconsCommonRobux (upval), p1 (upval)
 				return RoactModule.createElement(FitFrameVertical, {
 					BackgroundTransparency = 1,

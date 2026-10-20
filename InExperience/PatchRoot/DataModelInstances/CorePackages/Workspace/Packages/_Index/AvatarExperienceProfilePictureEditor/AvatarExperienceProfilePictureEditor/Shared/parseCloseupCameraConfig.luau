@@ -1,6 +1,6 @@
 ﻿local ConstantsModule = require(script.Parent.Parent.Constants)
 
-return function(p1) --[[ Line: 15 | Named "parseCloseupCameraConfig" ]]
+return function(p1)
 	-- upvalues: ConstantsModule (copy)
 	local DefaultDistanceScale = ConstantsModule.DefaultDistanceScale
 	local DefaultYRotDeg = ConstantsModule.DefaultYRotDeg

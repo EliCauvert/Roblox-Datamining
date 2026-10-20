@@ -20,7 +20,7 @@ local config1 = {
 }
 
 return {
-	logTileSkipped = function(p1, p2, TileType, PageContext, NumColumns, NumRows, OriginalFeedIndex, p3, p4) --[[ Line: 40 ]]
+	logTileSkipped = function(p1, p2, TileType, PageContext, NumColumns, NumRows, OriginalFeedIndex, p3, p4)
 		-- upvalues: LuaAppNullableGridLayoutTelemetryFields (copy), TelemetryService (copy), config (copy), StandardizedFields (copy)
 		TelemetryService:LogEvent(config, {
 			standardizedFields = StandardizedFields,
@@ -37,7 +37,7 @@ return {
 			}
 		})
 	end,
-	logTilePlaced = function(p1, p2, TileType, PageContext, NumColumns, NumRows, OriginalFeedIndex, FinalFeedIndex, SortIndex, TopicId, p3) --[[ Line: 69 ]]
+	logTilePlaced = function(p1, p2, TileType, PageContext, NumColumns, NumRows, OriginalFeedIndex, FinalFeedIndex, SortIndex, TopicId, p3)
 		-- upvalues: LuaAppNullableGridLayoutTelemetryFields (copy), FFlagLuaAppFixTotalColsBound (copy), TelemetryService (copy), config1 (copy), StandardizedFields (copy)
 		TelemetryService:LogEvent(config1, {
 			standardizedFields = StandardizedFields,

@@ -11,7 +11,7 @@ local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXOrganicItemPosition = AvatarExperienceFlagsModule.FFlagAXOrganicItemPosition
 local FFlagAXEditorRecommendedItemsUnifiedImpressions = AvatarExperienceFlagsModule.FFlagAXEditorRecommendedItemsUnifiedImpressions
 
-local function isReadyToLog(p1): boolean --[[ Line: 94 ]]
+local function isReadyToLog(p1): boolean
 	-- upvalues: ItemTypeEnum (copy)
 	local ItemType = p1.itemType
 	local ItemData = p1.itemData
@@ -45,7 +45,7 @@ local function isReadyToLog(p1): boolean --[[ Line: 94 ]]
 	return Enabled == true and Enabled1 == true and Enabled2 == true
 end
 
-local function buildFields(p1) --[[ Line: 130 ]]
+local function buildFields(p1)
 	-- upvalues: FFlagAXOrganicItemPosition (copy), GetMarketplaceUnifiedItemTypeModule (copy), GetItemSelectionActionModule (copy), FFlagAXEditorRecommendedItemsUnifiedImpressions (copy), UnifiedEventLoggingUtilsModule (copy), GetTimedOptionForItemDataModule (copy), CryoModule (copy)
 	local ItemData = p1.itemData
 	local LookData = p1.lookData
@@ -83,7 +83,7 @@ local function buildFields(p1) --[[ Line: 130 ]]
 	})
 end
 
-return function(p1) --[[ Line: 199 | Named "getCatalogItemUnifiedLoggingFields" ]]
+return function(p1)
 	-- upvalues: isReadyToLog (copy), buildFields (copy)
 	return if isReadyToLog(p1) then buildFields(p1) else nil
 end

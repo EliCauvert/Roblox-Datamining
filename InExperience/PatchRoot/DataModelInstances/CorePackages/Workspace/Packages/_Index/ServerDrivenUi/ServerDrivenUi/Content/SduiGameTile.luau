@@ -47,7 +47,7 @@ local FFlagSduiGameTileDirectAction = require(Parent.SharedFlags).FFlagSduiGameT
 local FFlagSduiGameTileUseFooterComponentAsDefault = require(Parent.SharedFlags).FFlagSduiGameTileUseFooterComponentAsDefault
 local Signal = if FFlagLuaAppSduiGameTileFeedback then SignalsModule.createSignal(false) else nil
 
-return ReactModule.memo(function(p1) --[[ Line: 118 | Named "SduiGameTile" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), UsePreferencesFunction (copy), FFlagSduiTileDisableLegacyHover (copy), FFlagLuaAppSduiVideoThumbnail (copy), ReactModule (copy), UseUidRefStringFunction (copy), FFlagLuaAppSduiGameTileFeedback (copy), Signal (ref), GetGameTileHiddenStoreFunction (copy), SignalsModule (copy), SignalsReactModule (copy), SduiErrors (copy), GetInputModeStoreFunction (copy), SduiParseHelpers (copy), VideoEndReason (copy), SduiParsers (copy), SduiActionType (copy), GetOverflowMenuSignalStoreFunction (copy), Default (copy), ResponsiveModule (copy), GameTileOverflowMenuActionFunction (copy), SduiGameTileDisableDefaultPlayButtonOnHover (copy), SduiBuilder (copy), FFlagSduiFixSearchTelemetry (copy), FindAnalyticsFieldInAncestorsFunction (copy), SduiPlayButton (copy), FFlagEnableGameJoinEarlyAccess (copy), LocalizeStringsFunction (copy), DiscoveryAnalyticsModule (copy), SduiHoldToPlayModule (copy), SduiGameTileFooterModule (copy), FFlagSduiGameTileUseFooterComponentAsDefault (copy), FFlagLuaAppSduiGameTileMetadataFontStyle (copy), SduiTileOverflowMenu (copy), FFlagSduiGameTileDirectAction (copy), SduiDefaultTileImageModule (copy), SduiGameVideoThumbnailModule (copy), GetSduiComponentWrapperFunction (copy), SduiTileModule (copy), CryoModule (copy), ZoomAnimatedFrame (copy), TileHoverShadowModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UsePreferencesResult = UsePreferencesFunction()
@@ -58,7 +58,7 @@ return ReactModule.memo(function(p1) --[[ Line: 118 | Named "SduiGameTile" ]]
 	local UniverseId = p1.universeId
 	local PlaceId = p1.placeId
 	local UseRefResult1 = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 135 ]]
+	local UseResult = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult1 (copy), p1 (copy)
 		UseRefResult1.current = Current
 		
@@ -72,12 +72,12 @@ return ReactModule.memo(function(p1) --[[ Line: 118 | Named "SduiGameTile" ]]
 	
 	if FFlagLuaAppSduiGameTileFeedback then
 		HasHiddenStateComponent = p1.overflowMenuComponent ~= nil and (p1.collectionId ~= nil and (p1.collectionId ~= "" and p1.hiddenStateComponent ~= nil))
-		UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 151 ]]
+		UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 			-- upvalues: HasHiddenStateComponent (ref), Signal (upval), GetGameTileHiddenStoreFunction (upval), p1 (copy), SignalsModule (upval), UniverseId (copy)
 			if HasHiddenStateComponent then
 				local GetHiddenGamesFunction = GetGameTileHiddenStoreFunction(p1.collectionId).getHiddenGames
 				
-				return SignalsModule.createComputed(function(p2): boolean --[[ Line: 157 ]]
+				return SignalsModule.createComputed(function(p2): boolean
 					-- upvalues: GetHiddenGamesFunction (copy), UniverseId (upval)
 					return GetHiddenGamesFunction(p2)[UniverseId] == true
 				end)
@@ -88,17 +88,17 @@ return ReactModule.memo(function(p1) --[[ Line: 118 | Named "SduiGameTile" ]]
 		TriggerFeedbackFunction = p1.sduiContext.dependencies.triggerFeedback
 	end
 	local UseRefResult2 = ReactModule.useRef(false)
-	local UseResult1 = ReactModule.useCallback(function(Current) --[[ Line: 168 ]]
+	local UseResult1 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult2 (copy)
 		UseRefResult2.current = Current
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 172 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), SduiErrors (upval), GetInputModeStoreFunction (upval), SduiParseHelpers (upval), UseRefResult2 (copy), FFlagLuaAppSduiVideoThumbnail (upval), VideoPlaybackContext (copy), VideoEndReason (upval), UniverseId (copy), SduiParsers (upval), SduiActionType (upval), PlaceId (copy)
 		p1.sduiContext.dependencies.logger.reportCounter(SduiErrors.SduiCounterName.GameTileActivated, {
 			name = GetInputModeStoreFunction(false).getLastInputType(false)
 		}, true)
 		
-		local function logFailure(p2) --[[ Line: 177 ]]
+		local function logFailure(p2)
 			-- upvalues: SduiParseHelpers (upval), p1 (upval), SduiErrors (upval), GetInputModeStoreFunction (upval)
 			p1.sduiContext.dependencies.logger.reportError(SduiErrors.SduiErrorType.FailedToExecuteAction, {
 				componentType = "GameTile",
@@ -107,7 +107,7 @@ return ReactModule.memo(function(p1) --[[ Line: 118 | Named "SduiGameTile" ]]
 			}, p1.sduiContext.appPage)
 		end
 		
-		local Success, Result = pcall(function() --[[ Line: 187 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: UseRefResult2 (upval), FFlagLuaAppSduiVideoThumbnail (upval), VideoPlaybackContext (upval), VideoEndReason (upval), UniverseId (upval), p1 (upval), SduiParsers (upval), SduiActionType (upval), PlaceId (upval), SduiErrors (upval), GetInputModeStoreFunction (upval), logFailure (copy)
 			if UseRefResult2.current then
 				p1.sduiContext.dependencies.logger.reportCounter(SduiErrors.SduiCounterName.GameTileActivatedWhenDisabled, {
@@ -151,7 +151,7 @@ return ReactModule.memo(function(p1) --[[ Line: 118 | Named "SduiGameTile" ]]
 	})
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 249 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), p1 (copy)
 		UseStateResult2(true)
 		
@@ -159,7 +159,7 @@ return ReactModule.memo(function(p1) --[[ Line: 118 | Named "SduiGameTile" ]]
 			p1.setCustomConditionState("selected", true)
 		end
 	end, { p1.setCustomConditionState })
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 256 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), p1 (copy)
 		UseStateResult2(false)
 		
@@ -169,7 +169,7 @@ return ReactModule.memo(function(p1) --[[ Line: 118 | Named "SduiGameTile" ]]
 	end, { p1.setCustomConditionState })
 	
 	if FFlagLuaAppSduiGameTileFeedback then
-		ReactModule.useEffect(function() --[[ Line: 264 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseSignalStateResult (ref), GetOverflowMenuSignalStoreFunction (upval), Current (copy), UseResult4 (copy)
 			if UseSignalStateResult then
 				GetOverflowMenuSignalStoreFunction().closeMenu(Current)
@@ -183,14 +183,14 @@ return ReactModule.memo(function(p1) --[[ Line: 118 | Named "SduiGameTile" ]]
 		UseRefResult3.current = 0
 	end
 	local Default1 = Default.default
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 289 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult3 (copy), Current (copy), GetInputModeStoreFunction (upval), ResponsiveModule (upval), Default1 (copy)
 		if UseRefResult3.current == 0 and Current and GetInputModeStoreFunction(false).getLastInputType(false) == ResponsiveModule.Input.Pointer then
 			Default1:requestHover(Current)
 		end
 		UseRefResult3.current += 1
 	end, { Current })
-	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 299 ]]
+	local UseResult6 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult3 (copy), Current (copy), Default1 (copy)
 		UseRefResult3.current -= 1
 		
@@ -201,11 +201,11 @@ return ReactModule.memo(function(p1) --[[ Line: 118 | Named "SduiGameTile" ]]
 			Default1:cancelHover(Current)
 		end
 	end, { Current })
-	ReactModule.useEffect(function() --[[ Line: 309 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Current (copy), UseStateResult1 (copy), Default1 (copy), UseStateResult2_1 (copy), p1 (copy), UseRefResult3 (copy)
 		local IsHovered = UseStateResult1
 		local ChangedConnection = nil
-		ChangedConnection = Default1.changed:connect(function(Current1) --[[ Line: 313 ]]
+		ChangedConnection = Default1.changed:connect(function(Current1)
 			-- upvalues: Current (upval), UseStateResult2_1 (upval), p1 (upval), IsHovered (ref)
 			local IsCurrentMatch = Current1 == Current
 			UseStateResult2_1(IsCurrentMatch)
@@ -216,7 +216,7 @@ return ReactModule.memo(function(p1) --[[ Line: 118 | Named "SduiGameTile" ]]
 			IsHovered = IsCurrentMatch
 		end)
 		
-		return function() --[[ Line: 322 ]]
+		return function()
 			-- upvalues: Default1 (upval), Current (copy), UseRefResult3 (upval), ChangedConnection (ref)
 			Default1:cancelHover(Current)
 			UseRefResult3.current = 0
@@ -230,7 +230,7 @@ return ReactModule.memo(function(p1) --[[ Line: 118 | Named "SduiGameTile" ]]
 	local UseResult7 = nil
 	
 	if FFlagLuaAppSduiGameTileFeedback then
-		Callback = ReactModule.useCallback(function(p2) --[[ Line: 335 ]]
+		Callback = ReactModule.useCallback(function(p2)
 			-- upvalues: GameTileOverflowMenuActionFunction (upval), UniverseId (copy), p1 (copy)
 			GameTileOverflowMenuActionFunction({
 				universeId = UniverseId,
@@ -238,7 +238,7 @@ return ReactModule.memo(function(p1) --[[ Line: 118 | Named "SduiGameTile" ]]
 				actionType = if p2 then "GameTileOverflowMenuClosed" else "GameTileOverflowMenuOpened"
 			}, p1.sduiContext.appPage)
 		end, { UniverseId, p1.collectionId, p1.sduiContext.appPage })
-		UseResult7 = ReactModule.useCallback(function() --[[ Line: 346 ]]
+		UseResult7 = ReactModule.useCallback(function()
 			-- upvalues: GetOverflowMenuSignalStoreFunction (upval), TriggerFeedbackFunction (ref), Current (copy), p1 (copy), UniverseId (copy), Callback (ref)
 			local OverflowMenuSignalStore = GetOverflowMenuSignalStoreFunction()
 			
@@ -252,13 +252,13 @@ return ReactModule.memo(function(p1) --[[ Line: 118 | Named "SduiGameTile" ]]
 			Callback, UniverseId
 		})
 	end
-	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 369 ]]
+	local UseResult8 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult1 (copy), Default1 (copy)
 		if UseStateResult1 then
 			Default1:reset()
 		end
 	end, { UseStateResult1 })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 376 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), UseStateResult1 (copy), SduiGameTileDisableDefaultPlayButtonOnHover (upval), SduiBuilder (upval), UniverseId (copy), PlaceId (copy), FFlagSduiFixSearchTelemetry (upval), FindAnalyticsFieldInAncestorsFunction (upval), FFlagSduiTileDisableLegacyHover (upval), ReactModule (upval), SduiPlayButton (upval), FFlagEnableGameJoinEarlyAccess (upval), UseResult8 (copy), LocalizeStringsFunction (upval)
 		if p1.ctaButtonComponent then
 			return p1.ctaButtonComponent
@@ -310,7 +310,7 @@ return ReactModule.memo(function(p1) --[[ Line: 118 | Named "SduiGameTile" ]]
 		p1.enableUiBloxButton, p1.openGameDetailsOnPurchaseRequired,
 		if SduiGameTileDisableDefaultPlayButtonOnHover then p1.disableDefaultPlayButtonOnHover else nil
 	})
-	local UseResult9 = if FFlagSduiTileDisableLegacyHover then nil else ReactModule.useCallback(function(Offset: number, BackgroundColor3, Offset1) --[[ Line: 462 ]]
+	local UseResult9 = if FFlagSduiTileDisableLegacyHover then nil else ReactModule.useCallback(function(Offset: number, BackgroundColor3, Offset1)
 		-- upvalues: p1 (copy), ReactModule (upval), UseResult5 (copy), UseResult6 (copy), UseRefResult (copy), UseMemoResult (copy)
 		return if p1.enableLegacyHoverState then ReactModule.createElement("Frame", {
 			AutomaticSize = Enum.AutomaticSize.Y,
@@ -361,7 +361,7 @@ return ReactModule.memo(function(p1) --[[ Line: 118 | Named "SduiGameTile" ]]
 			})
 		end
 	end
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 523 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), ReactModule (upval), SduiGameTileFooterModule (upval), UseStateResult1 (copy), UseStateResult (copy), FFlagSduiGameTileUseFooterComponentAsDefault (upval), UniverseId (copy), PlaceId (copy), FFlagLuaAppSduiGameTileMetadataFontStyle (upval)
 		return if p1.disableDefaultFooterLogic then p1.footerComponent else ReactModule.createElement(SduiGameTileFooterModule, {
 			isHovered = UseStateResult1,

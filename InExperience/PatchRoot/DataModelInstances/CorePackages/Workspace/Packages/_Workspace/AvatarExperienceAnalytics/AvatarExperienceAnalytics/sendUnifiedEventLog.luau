@@ -18,7 +18,7 @@ local FFlagAXUnifiedEventDeviceTier = AvatarExperienceFlagsModule.FFlagAXUnified
 local AXSendUnifiedEventsInStudio = game:DefineFastFlag("AXSendUnifiedEventsInStudio", false)
 local DeviceMemoryTier = if FFlagAXUnifiedEventDeviceTier then DeviceTier.GetDeviceMemoryTier() else nil
 
-return function(JoinResult, p1, p2) --[[ Line: 34 ]]
+return function(JoinResult, p1, p2)
 	-- upvalues: FFlagAXUnifiedEventPageContext (copy), SessionService (copy), UnifiedEventPageStoreModule (copy), CryoModule (copy), FFlagAXUnifiedEventDeviceTier (copy), DeviceMemoryTier (copy), FFlagAXDebugPanelImpressed (copy), DebugPanelModule (copy), FFlagAXSendUnifiedEventLogWithInstance (copy), UnifiedEventLogConstantsModule (copy), IsRunningInStudioFunction (copy), AXSendUnifiedEventsInStudio (copy), FFlagAXUnifiedEventCounters (copy), AXUnifiedEventFilterModule (copy), UnifiedEventCounterAggregatorModule (copy), AnalyticsServiceModule (copy)
 	if FFlagAXUnifiedEventPageContext then
 		local Level2aSessionTag = SessionService:GetSessionTag("level2a")

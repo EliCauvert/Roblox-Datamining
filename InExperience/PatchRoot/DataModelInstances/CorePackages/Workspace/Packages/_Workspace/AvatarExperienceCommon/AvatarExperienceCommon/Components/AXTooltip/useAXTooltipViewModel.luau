@@ -9,7 +9,7 @@ local AXTooltipStoreModule = require(AvatarExperienceCommon.Stores.AXTooltipStor
 local AXTooltipTimeToDismiss = game:DefineFastInt("AXTooltipTimeToDismiss", 5)
 local _ = require(Parent.AvatarExperienceUIKit)
 
-return function(p1) --[[ Line: 36 | Named "useAXTooltipViewModel" ]]
+return function(p1)
 	-- upvalues: AXTooltipStoreModule (copy), UseLocalizationFunction (copy), UseIsSpatialFunction (copy), UseEarlyIsFocusedFunction (copy), SignalsReactModule (copy), ReactModule (copy), AXTooltipTimeToDismiss (copy)
 	local AXTooltipStoreModuleResult = AXTooltipStoreModule(false)
 	local UseLocalizationResult = UseLocalizationFunction({ tooltipText = p1.tooltipLocalizationKey })
@@ -18,7 +18,7 @@ return function(p1) --[[ Line: 36 | Named "useAXTooltipViewModel" ]]
 	local UseEarlyIsFocusedResult = UseEarlyIsFocusedFunction()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(AXTooltipStoreModuleResult.getIsTooltipAllowedToBeShown(p1.tooltipStorageKey))
 	local NoUseIsSpatialResult: boolean = p1.showTooltip and (UseSignalStateResult and (UseEarlyIsFocusedResult and not UseIsSpatialResult))
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 49 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: AXTooltipStoreModuleResult (copy), p1 (copy)
 		AXTooltipStoreModuleResult.dismissTooltip(p1.tooltipStorageKey)
 	end, { p1.tooltipStorageKey })
@@ -26,10 +26,10 @@ return function(p1) --[[ Line: 36 | Named "useAXTooltipViewModel" ]]
 	if p1.dismissTooltipRef and p1.showTooltip then
 		p1.dismissTooltipRef.current = UseResult
 	end
-	ReactModule.useEffect(function() --[[ Line: 57 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: NoUseIsSpatialResult (copy), AXTooltipTimeToDismiss (upval), AXTooltipStoreModuleResult (copy), p1 (copy)
 		if NoUseIsSpatialResult then
-			task.spawn(function() --[[ Line: 59 ]]
+			task.spawn(function()
 				-- upvalues: AXTooltipTimeToDismiss (upval), AXTooltipStoreModuleResult (upval), p1 (upval)
 				task.wait(AXTooltipTimeToDismiss)
 				AXTooltipStoreModuleResult.dismissTooltip(p1.tooltipStorageKey, true)

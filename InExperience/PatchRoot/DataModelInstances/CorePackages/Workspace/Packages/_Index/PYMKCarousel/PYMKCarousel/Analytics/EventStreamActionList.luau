@@ -11,11 +11,11 @@ local ConstantsModule = require(Parent.Common.Constants)
 local FormatRecommendationContextType = SocialLuaAnalyticsModule.Analytics.Formatters.formatRecommendationContextType
 local FFlagLuaAppUserSeenCollectionUnifiedFields = SharedFlagsModule.FFlagLuaAppUserSeenCollectionUnifiedFields
 
-local function AbsolutePosition(p1) --[[ Line: 20 ]]
+local function AbsolutePosition(p1)
 	return p1
 end
 
-local function Presence(p1) --[[ Line: 24 ]]
+local function Presence(p1)
 	return if p1 then tostring(p1) else nil
 end
 

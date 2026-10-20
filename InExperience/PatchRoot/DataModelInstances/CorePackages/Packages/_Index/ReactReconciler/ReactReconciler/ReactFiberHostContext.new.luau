@@ -11,16 +11,16 @@ local Cursor = CreateCursorFunction(t)
 local Cursor1 = CreateCursorFunction(t)
 local Cursor2 = CreateCursorFunction(t)
 
-function requiredContext(p1) --[[ Line: 42 ]]
+function requiredContext(p1)
 	return p1
 end
 
-function getRootHostContainer() --[[ Line: 52 ]]
+function getRootHostContainer()
 	-- upvalues: Cursor2 (copy)
 	return Cursor2.current
 end
 
-function pushHostContainer(p1, p2) --[[ Line: 59 ]]
+function pushHostContainer(p1, p2)
 	-- upvalues: PushFunction (copy), Cursor2 (copy), Cursor1 (copy), Cursor (copy), t (copy), GetRootHostContextFunction (copy), PopFunction (copy)
 	PushFunction(Cursor2, p2, p1)
 	PushFunction(Cursor1, p1, p1)
@@ -30,19 +30,19 @@ function pushHostContainer(p1, p2) --[[ Line: 59 ]]
 	PushFunction(Cursor, RootHostContext, p1)
 end
 
-function popHostContainer(p1) --[[ Line: 79 ]]
+function popHostContainer(p1)
 	-- upvalues: PopFunction (copy), Cursor (copy), Cursor1 (copy), Cursor2 (copy)
 	PopFunction(Cursor, p1)
 	PopFunction(Cursor1, p1)
 	PopFunction(Cursor2, p1)
 end
 
-function getHostContext() --[[ Line: 85 ]]
+function getHostContext()
 	-- upvalues: Cursor (copy)
 	return Cursor.current
 end
 
-function pushHostContext(p1) --[[ Line: 92 ]]
+function pushHostContext(p1)
 	-- upvalues: Cursor2 (copy), Cursor (copy), GetChildHostContextFunction (copy), PushFunction (copy), Cursor1 (copy)
 	local RequiredContextResult = requiredContext(Cursor.current)
 	local ChildHostContext = GetChildHostContextFunction(RequiredContextResult, p1.type, (requiredContext(Cursor2.current)))
@@ -55,7 +55,7 @@ function pushHostContext(p1) --[[ Line: 92 ]]
 	end
 end
 
-function popHostContext(Current) --[[ Line: 108 ]]
+function popHostContext(Current)
 	-- upvalues: Cursor1 (copy), PopFunction (copy), Cursor (copy)
 	if Cursor1.current == Current then
 		PopFunction(Cursor, Current)

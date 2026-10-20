@@ -31,7 +31,7 @@ DropDownSelection.validateProps = T.intersection(T.strictInterface({
 	canCaptureFocus = T.optional(T.boolean),
 	selectionParentName = T.optional(T.string),
 	ButtonRef = T.optional(T.table)
-}), function(p1) --[[ Line: 54 ]]
+}), function(p1)
 	if #p1.selections < p1.selectedIndex then
 		return false, "selectedIndex must not be greater than the number of selections"
 	else
@@ -40,7 +40,7 @@ DropDownSelection.validateProps = T.intersection(T.strictInterface({
 end)
 DropDownSelection.defaultProps = { canOpen = true }
 
-function DropDownSelection.init(p1) --[[ Line: 67 ]]
+function DropDownSelection.init(p1)
 	-- upvalues: Roact (copy)
 	p1.rootRef = Roact.createRef()
 	p1.firstOptionRef = Roact.createRef()
@@ -57,11 +57,11 @@ function DropDownSelection.init(p1) --[[ Line: 67 ]]
 	p1.sizeConnection = nil
 end
 
-function DropDownSelection.getDerivedStateFromProps(p1) --[[ Line: 86 ]]
+function DropDownSelection.getDerivedStateFromProps(p1)
 	return if p1.canOpen then nil else { isOpen = false }
 end
 
-function DropDownSelection.renderDropDownList(p1, p2, p3) --[[ Line: 95 ]]
+function DropDownSelection.renderDropDownList(p1, p2, p3)
 	-- upvalues: Roact (copy), ThemedButtonModule (copy), AssetsModule (copy), DivideTransparencyModule (copy), ImageSetLabel (copy), ThemedTextLabelModule (copy), DividerModule (copy)
 	local Elements = {
 		Layout = Roact.createElement("UIListLayout", {
@@ -79,14 +79,14 @@ function DropDownSelection.renderDropDownList(p1, p2, p3) --[[ Line: 95 ]]
 			hoverThemeKey = "BackgroundOnHover",
 			Size = UDim2.new(1, 0, 0, p1.state.dropDownItemHeight - 1),
 			LayoutOrder = i * 2,
-			onActivated = function() --[[ Line: 119 ]]
+			onActivated = function()
 				-- upvalues: p1 (copy), i (copy)
 				p1:setState({ isOpen = false })
 				p1.props.selectionChanged(i)
 			end,
 			ButtonRef = i == 1 and p1.firstOptionRef or nil,
 			imageProps = AssetsModule.Images.WhiteSquare,
-			renderChildren = function(_, p4, p5) --[[ Line: 130 ]]
+			renderChildren = function(_, p4, p5)
 				-- upvalues: p2 (copy), DivideTransparencyModule (upval), Roact (upval), ImageSetLabel (upval), AssetsModule (upval), p1 (copy), i (copy), ThemedTextLabelModule (upval), XOffset (ref), Text (ref)
 				local IconOnHover = p4 and p2.Theme.IconOnHover or p2.Theme.IconDefault
 				
@@ -121,13 +121,13 @@ function DropDownSelection.renderDropDownList(p1, p2, p3) --[[ Line: 95 ]]
 	return Elements
 end
 
-function DropDownSelection.renderFocusHandler(p4) --[[ Line: 170 ]]
+function DropDownSelection.renderFocusHandler(p4)
 	-- upvalues: Roact (copy), FocusHandlerModule (copy), ContextActionService (copy), GuiService (copy)
 	return p4.props.selectionParentName and Roact.createElement(FocusHandlerModule, {
 		isFocused = p4.props.canOpen and p4.state.isOpen,
-		didFocus = function() --[[ Line: 175 ]]
+		didFocus = function()
 			-- upvalues: ContextActionService (upval), p4 (copy), GuiService (upval)
-			ContextActionService:BindCoreAction("settings_dropdown_close_action", function(_, UserInputState) --[[ Line: 176 ]]
+			ContextActionService:BindCoreAction("settings_dropdown_close_action", function(_, UserInputState)
 				-- upvalues: p4 (upval)
 				if UserInputState == Enum.UserInputState.End then
 					p4:setState({ isOpen = false })
@@ -144,7 +144,7 @@ function DropDownSelection.renderFocusHandler(p4) --[[ Line: 170 ]]
 				GuiService.SelectedCoreObject = p4.firstOptionRef.current
 			end
 		end,
-		didBlur = function() --[[ Line: 191 ]]
+		didBlur = function()
 			-- upvalues: ContextActionService (upval), GuiService (upval), p4 (copy)
 			ContextActionService:UnbindCoreAction("settings_dropdown_close_action")
 			GuiService:RemoveSelectionGroup(p4.props.selectionParentName)
@@ -156,9 +156,9 @@ function DropDownSelection.renderFocusHandler(p4) --[[ Line: 170 ]]
 	}) or nil
 end
 
-function DropDownSelection.render(p4) --[[ Line: 203 ]]
+function DropDownSelection.render(p4)
 	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), WithLocalizationModule (copy), AssetsModule (copy), Roact (copy), ThemedButtonModule (copy), DivideTransparencyModule (copy), ImageSetLabel (copy), ThemedTextLabelModule (copy), BarOnTopScrollingFrameModule (copy)
-	return WithFoundationOrUIBloxStyleFunction(function(p5) --[[ Line: 204 ]]
+	return WithFoundationOrUIBloxStyleFunction(function(p5)
 		return {
 			Theme = {
 				BackgroundUIDefault = {
@@ -175,9 +175,9 @@ function DropDownSelection.render(p4) --[[ Line: 203 ]]
 				}
 			}
 		}
-	end, function(p5) --[[ Line: 212 ]]
+	end, function(p5)
 		-- upvalues: WithLocalizationModule (upval), p4 (copy), AssetsModule (upval), Roact (upval), ThemedButtonModule (upval), DivideTransparencyModule (upval), ImageSetLabel (upval), ThemedTextLabelModule (upval), BarOnTopScrollingFrameModule (upval)
-		return WithLocalizationModule(p4.props.localize and p4.props.selections or {})(function(p6) --[[ Line: 213 ]]
+		return WithLocalizationModule(p4.props.localize and p4.props.selections or {})(function(p6)
 			-- upvalues: p4 (upval), AssetsModule (upval), p5 (copy), Roact (upval), ThemedButtonModule (upval), DivideTransparencyModule (upval), ImageSetLabel (upval), ThemedTextLabelModule (upval), BarOnTopScrollingFrameModule (upval)
 			local Selection = if p4.props.selectedIndex > 0 then if p4.props.localize then p6[p4.props.selectedIndex] else p4.props.selections[p4.props.selectedIndex] else p4.props.placeHolderText
 			local Size: number = AssetsModule.Images.Shadow.Size
@@ -188,11 +188,11 @@ function DropDownSelection.render(p4) --[[ Line: 203 ]]
 				LayoutOrder = p4.props.LayoutOrder,
 				BackgroundTransparency = 1,
 				[Roact.Ref] = p4.rootRef,
-				[Roact.Change.AbsoluteSize] = function(Frame) --[[ Line: 235 ]]
+				[Roact.Change.AbsoluteSize] = function(Frame)
 					-- upvalues: p4 (upval)
 					p4:setState({ dropDownItemHeight = Frame.AbsoluteSize.Y })
 				end,
-				[Roact.Change.AbsolutePosition] = function(Frame: Frame) --[[ Line: 241 ]]
+				[Roact.Change.AbsolutePosition] = function(Frame: Frame)
 					-- upvalues: p4 (upval)
 					p4:setState({
 						absolutePositionX = Frame.AbsolutePosition.X,
@@ -206,12 +206,12 @@ function DropDownSelection.render(p4) --[[ Line: 203 ]]
 					Size = UDim2.new(1, 0, 1, 0),
 					Visible = not p4.state.isOpen,
 					enabled = p4.props.enabled,
-					onActivated = function() --[[ Line: 252 ]]
+					onActivated = function()
 						-- upvalues: p4 (upval)
 						p4:setState({ isOpen = true })
 					end,
 					imageProps = AssetsModule.Images.RoundedRectBorder,
-					renderChildren = function(TextTransparency, p7, p8) --[[ Line: 260 ]]
+					renderChildren = function(TextTransparency, p7, p8)
 						-- upvalues: p5 (upval), DivideTransparencyModule (upval), Roact (upval), ImageSetLabel (upval), AssetsModule (upval), ThemedTextLabelModule (upval), Selection (ref), p4 (upval)
 						local IconOnHover = p7 and p5.Theme.IconOnHover or p5.Theme.IconDefault
 						
@@ -246,7 +246,7 @@ function DropDownSelection.render(p4) --[[ Line: 203 ]]
 					Size = UDim2.new(0, p4.state.screenSizeX, 0, p4.state.screenSizeY),
 					Visible = p4.state.isOpen,
 					Selectable = false,
-					[Roact.Event.Activated] = function() --[[ Line: 299 ]]
+					[Roact.Event.Activated] = function()
 						-- upvalues: p4 (upval)
 						p4:setState({ isOpen = false })
 					end,
@@ -287,12 +287,12 @@ function DropDownSelection.render(p4) --[[ Line: 203 ]]
 	end)
 end
 
-function DropDownSelection.watchLayerCollector(p4, Frame: Frame) --[[ Line: 342 ]]
+function DropDownSelection.watchLayerCollector(p4, Frame: Frame)
 	p4:setState({
 		screenSizeX = Frame.AbsoluteSize.X,
 		screenSizeY = Frame.AbsoluteSize.Y
 	})
-	p4.sizeConnection = Frame:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 348 ]]
+	p4.sizeConnection = Frame:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 		-- upvalues: p4 (copy), Frame (copy)
 		p4:setState({
 			screenSizeX = Frame.AbsoluteSize.X,
@@ -301,12 +301,12 @@ function DropDownSelection.watchLayerCollector(p4, Frame: Frame) --[[ Line: 342 
 	end)
 end
 
-function DropDownSelection.didMount(p4) --[[ Line: 356 ]]
+function DropDownSelection.didMount(p4)
 	local Current = p4.rootRef.current
 	local LayerCollector = Current:FindFirstAncestorWhichIsA("LayerCollector")
 	
 	if LayerCollector == nil then
-		p4.ancestryConnection = Current.AncestryChanged:Connect(function() --[[ Line: 361 ]]
+		p4.ancestryConnection = Current.AncestryChanged:Connect(function()
 			-- upvalues: LayerCollector (ref), Current (copy), p4 (copy)
 			LayerCollector = Current:FindFirstAncestorWhichIsA("LayerCollector")
 			
@@ -321,7 +321,7 @@ function DropDownSelection.didMount(p4) --[[ Line: 356 ]]
 	end
 end
 
-function DropDownSelection.didUpdate(p4, p5) --[[ Line: 374 ]]
+function DropDownSelection.didUpdate(p4, p5)
 	-- upvalues: Roact (copy)
 	if p5.ButtonRef ~= p4.props.ButtonRef then
 		p4.openDropDownButtonRef = p4.props.ButtonRef or Roact.createRef()
@@ -331,7 +331,7 @@ function DropDownSelection.didUpdate(p4, p5) --[[ Line: 374 ]]
 	end
 end
 
-function DropDownSelection.willUnmount(p4) --[[ Line: 385 ]]
+function DropDownSelection.willUnmount(p4)
 	if p4.ancestryConnection then
 		p4.ancestryConnection:Disconnect()
 	end

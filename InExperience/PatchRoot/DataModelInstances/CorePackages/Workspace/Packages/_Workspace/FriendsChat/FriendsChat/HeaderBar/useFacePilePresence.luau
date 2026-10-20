@@ -9,12 +9,12 @@ local UserPresence = require(Parent.Foundation).Enums.UserPresence
 local PresenceType = DataHydrationModule.Presence.PresenceEnums.PresenceType
 local GetResult = DataHydrationModule.Presence.PresenceStore.get()
 
-local function _(InGame) --[[ Line: 33 | Named "toUserPresence" ]]
+local function _(InGame)
 	-- upvalues: PresenceType (copy), UserPresence (copy)
 	return if InGame == PresenceType.InGame then UserPresence.InExperience elseif InGame == PresenceType.InStudio or InGame == PresenceType.Online then UserPresence.Active else UserPresence.None
 end
 
-local function aggregateGroupPresence(List, p1) --[[ Line: 50 ]]
+local function aggregateGroupPresence(List, p1)
 	-- upvalues: GetResult (copy), PresenceType (copy), UserPresence (copy)
 	local Flag = false
 	local Flag1 = false
@@ -35,14 +35,14 @@ local function aggregateGroupPresence(List, p1) --[[ Line: 50 ]]
 	return if Flag then UserPresence.InExperience elseif Flag1 then UserPresence.Active else UserPresence.None
 end
 
-return function(Entry) --[[ Line: 74 | Named "useFacePilePresence" ]]
+return function(Entry)
 	-- upvalues: FFlagFriendsChatFacePileGroupPresenceModule (copy), ReactModule (copy), SignalsModule (copy), aggregateGroupPresence (copy), UserPresence (copy), GetResult (copy), PresenceType (copy), SignalsReactModule (copy)
 	local Entry1 = Entry[1]
 	local v1: boolean = FFlagFriendsChatFacePileGroupPresenceModule and #Entry >= 2
 	
-	return (SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 91 ]]
+	return (SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), v1 (copy), aggregateGroupPresence (upval), Entry (copy), Entry1 (copy), UserPresence (upval), GetResult (upval), PresenceType (upval)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 92 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: v1 (upval), aggregateGroupPresence (upval), Entry (upval), Entry1 (upval), UserPresence (upval), GetResult (upval), PresenceType (upval)
 			if v1 then
 				return (aggregateGroupPresence(Entry, p2))

@@ -4,19 +4,19 @@ local _ = require(BuildExperience.Chat.chatTypes)
 
 return {
 	BUILD_CHAT_SCREEN = "BuildChat",
-	getTarget = function(p1) --[[ Line: 20 ]]
+	getTarget = function(p1)
 		return (p1.getParam("target"))
 	end,
-	getSubagentTaskState = function(p1) --[[ Line: 24 ]]
+	getSubagentTaskState = function(p1)
 		return (p1.getParam("subagentTaskState"))
 	end,
-	getSubagentTaskGroupName = function(p1) --[[ Line: 28 ]]
+	getSubagentTaskGroupName = function(p1)
 		return (p1.getParam("subagentTaskGroupName"))
 	end,
-	getInitialPrompt = function(p1) --[[ Line: 34 ]]
+	getInitialPrompt = function(p1)
 		return (p1.getParam("initialPrompt"))
 	end,
-	getShouldDismissOnBack = function(p1): boolean --[[ Line: 41 ]]
+	getShouldDismissOnBack = function(p1): boolean
 		return p1.getParam("dismissOnBack") == true
 	end
 }

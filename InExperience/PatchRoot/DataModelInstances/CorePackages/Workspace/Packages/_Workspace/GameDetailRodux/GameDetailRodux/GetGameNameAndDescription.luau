@@ -3,12 +3,12 @@ local PromiseModule = require(Parent.Promise)
 local Url = require(Parent.Http).Url
 local t = {}
 
-return function(Callback, Key) --[[ Line: 10 ]]
+return function(Callback, Key)
 	-- upvalues: t (copy), Url (copy), PromiseModule (copy)
 	if t[Key] then
 		return t[Key]
 	else
-		t[Key] = Callback(string.format("%sv1/games?universeIds=%s", Url.GAME_URL, (tostring(Key))), "GET"):andThen(function(Result) --[[ Line: 16 ]]
+		t[Key] = Callback(string.format("%sv1/games?universeIds=%s", Url.GAME_URL, (tostring(Key))), "GET"):andThen(function(Result)
 			-- upvalues: PromiseModule (upval)
 			if not Result.responseBody or not Result.responseBody.data then
 				PromiseModule.reject("Unexpected response when fetching game name")
@@ -23,7 +23,7 @@ return function(Callback, Key) --[[ Line: 10 ]]
 				Description = Entry.description or "",
 				Created = Entry.created
 			})
-		end, function(p1) --[[ Line: 32 ]]
+		end, function(p1)
 			-- upvalues: PromiseModule (upval)
 			return PromiseModule.reject(p1)
 		end)

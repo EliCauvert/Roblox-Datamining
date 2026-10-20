@@ -11,11 +11,11 @@ local config = {
 	[Enum.KeyCode.Down] = Vector2.new(0, 1)
 }
 
-local function _(Degrees: number, Offset, Vector): number --[[ Line: 43 | Named "getCameraDistance" ]]
+local function _(Degrees: number, Offset, Vector): number
 	return math.max(Offset.Magnitude / 2, 0.01) / math.sin((math.atan(math.tan(math.rad(Degrees) / 2) * math.min(1, if Vector.X > 0 and Vector.Y > 0 then Vector.X / Vector.Y else 1))))
 end
 
-return ReactModule.memo(function(Frame) --[[ Line: 49 | Named "ModelViewport" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseTokensFunction (copy), FoundationModule (copy), ReactModule (copy), MotionModule (copy), config (copy), View (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ReducedMotion = FoundationModule.Hooks.usePreferences().reducedMotion
@@ -40,7 +40,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 49 | Named "ModelViewport" ]]
 		dragInput = nil,
 		lastDragPosition = nil
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 75 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult2 (copy)
 		local Current = UseRefResult2.current
 		local Camera = Current.camera
@@ -51,7 +51,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 49 | Named "ModelViewport" ]]
 			return
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 86 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), Model (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), FieldOfView (copy), UseRefResult2 (copy), CameraDistanceScale (copy), UseResult (copy), IsIsInteractive (copy)
 		local Current = UseRefResult.current
 		
@@ -62,14 +62,14 @@ return ReactModule.memo(function(Frame) --[[ Line: 49 | Named "ModelViewport" ]]
 		
 		if ModelClone == nil then
 			UseStateResult2(Model)
-			local Connection = Model:GetPropertyChangedSignal("Archivable"):Connect(function() --[[ Line: 95 ]]
+			local Connection = Model:GetPropertyChangedSignal("Archivable"):Connect(function()
 				-- upvalues: UseStateResult2_1 (upval)
-				UseStateResult2_1(function(p1: number): number --[[ Line: 96 ]]
+				UseStateResult2_1(function(p1: number): number
 					return p1 + 1
 				end)
 			end)
 			
-			return function() --[[ Line: 100 ]]
+			return function()
 				-- upvalues: Connection (copy)
 				Connection:Disconnect()
 			end
@@ -95,7 +95,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 49 | Named "ModelViewport" ]]
 		local BoundingCFrame, BoundingSize = ModelClone:GetBoundingBox()
 		ModelClone:TranslateBy(-BoundingCFrame.Position)
 		Current1.center = vector.create(0, 0, 0)
-		local Connection1 = Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 129 | Named "updateFit" ]]
+		local Connection1 = Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 			-- upvalues: Current1 (copy), FieldOfView (upval), BoundingSize (ref), Current (copy), CameraDistanceScale (upval), UseResult (upval)
 			local AbsoluteSize = Current.AbsoluteSize
 			Current1.baseDistance = math.max(BoundingSize.Magnitude / 2, 0.01) / math.sin((math.atan(math.tan(math.rad(FieldOfView) / 2) * math.min(1, if AbsoluteSize.X > 0 and AbsoluteSize.Y > 0 then AbsoluteSize.X / AbsoluteSize.Y else 1)))) * CameraDistanceScale
@@ -108,7 +108,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 49 | Named "ModelViewport" ]]
 		local DeferredThread = nil
 		local ChangedConnections = {}
 		
-		local function refreshPreview() --[[ Line: 140 ]]
+		local function refreshPreview()
 			-- upvalues: DeferredThread (ref), Flag (ref), Model (upval), ModelClone (ref), WorldModel (copy), BoundingSize (ref), Current1 (copy), FieldOfView (upval), Current (copy), CameraDistanceScale (upval), UseResult (upval)
 			DeferredThread = nil
 			
@@ -130,7 +130,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 49 | Named "ModelViewport" ]]
 			end
 		end
 		
-		local function scheduleRefresh() --[[ Line: 157 ]]
+		local function scheduleRefresh()
 			-- upvalues: Flag (ref), DeferredThread (ref), refreshPreview (copy)
 			if not Flag and DeferredThread == nil then
 				DeferredThread = task.defer(refreshPreview)
@@ -139,7 +139,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 49 | Named "ModelViewport" ]]
 			end
 		end
 		
-		local function _(Key) --[[ Line: 163 | Named "observe" ]]
+		local function _(Key)
 			-- upvalues: ChangedConnections (copy), scheduleRefresh (copy)
 			if ChangedConnections[Key] == nil then
 				ChangedConnections[Key] = Key.Changed:Connect(scheduleRefresh)
@@ -158,7 +158,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 49 | Named "ModelViewport" ]]
 					ChangedConnections[descendant] = descendant.Changed:Connect(scheduleRefresh)
 				end
 			end
-			Connection2 = Model.DescendantAdded:Connect(function(Descendant) --[[ Line: 175 ]]
+			Connection2 = Model.DescendantAdded:Connect(function(Descendant)
 				-- upvalues: ChangedConnections (copy), scheduleRefresh (copy), Flag (ref), DeferredThread (ref), refreshPreview (copy)
 				if ChangedConnections[Descendant] == nil then
 					ChangedConnections[Descendant] = Descendant.Changed:Connect(scheduleRefresh)
@@ -168,7 +168,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 49 | Named "ModelViewport" ]]
 					DeferredThread = task.defer(refreshPreview)
 				end
 			end)
-			Connection3 = Model.DescendantRemoving:Connect(function(Descendant) --[[ Line: 179 ]]
+			Connection3 = Model.DescendantRemoving:Connect(function(Descendant)
 				-- upvalues: ChangedConnections (copy), Flag (ref), DeferredThread (ref), refreshPreview (copy)
 				local ChangedConnection = ChangedConnections[Descendant]
 				
@@ -182,7 +182,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 49 | Named "ModelViewport" ]]
 				end
 			end)
 		end
-		return function() --[[ Line: 189 ]]
+		return function()
 			-- upvalues: Flag (ref), DeferredThread (ref), Connection2 (ref), Connection3 (ref), ChangedConnections (copy), Connection1 (copy), Current1 (copy), WorldModel (copy)
 			Flag = true
 			
@@ -208,7 +208,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 49 | Named "ModelViewport" ]]
 		Model or false, FieldOfView, CameraDistanceScale, IsIsInteractive, UseResult,
 		UseStateResult1
 	})
-	ReactModule.useEffect(function() --[[ Line: 211 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), IsIsInteractive (copy), UseRefResult1 (copy), MotionModule (upval), ReducedMotion (copy)
 		local Current = UseRefResult.current
 		
@@ -218,7 +218,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 49 | Named "ModelViewport" ]]
 			local Parent = Current.Parent
 			local Flag = false
 			
-			local function resizeViewport() --[[ Line: 218 ]]
+			local function resizeViewport()
 				-- upvalues: Parent (copy), UseRefResult1 (upval), MotionModule (upval), Flag (ref), ReducedMotion (upval)
 				local AbsoluteSize = Parent.AbsoluteSize
 				
@@ -238,13 +238,13 @@ return ReactModule.memo(function(Frame) --[[ Line: 49 | Named "ModelViewport" ]]
 			resizeViewport()
 			local Connection = Parent:GetPropertyChangedSignal("AbsoluteSize"):Connect(resizeViewport)
 			
-			return function() --[[ Line: 233 ]]
+			return function()
 				-- upvalues: Connection (copy)
 				Connection:Disconnect()
 			end
 		end
 	end, { IsIsInteractive, ReducedMotion })
-	local UseResult1 = ReactModule.useCallback(function(_, Input) --[[ Line: 238 ]]
+	local UseResult1 = ReactModule.useCallback(function(_, Input)
 		-- upvalues: UseRefResult2 (copy), IsIsInteractive (copy)
 		local Current = UseRefResult2.current
 		
@@ -254,11 +254,11 @@ return ReactModule.memo(function(Frame) --[[ Line: 49 | Named "ModelViewport" ]]
 			Current.lastDragPosition = Input.Position
 		end
 	end, { IsIsInteractive })
-	ReactModule.useEffect(function() --[[ Line: 252 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsIsInteractive (copy), UseRefResult2 (copy), UseResult (copy), config (upval)
 		if IsIsInteractive then
 			local UserInputService = game:GetService("UserInputService")
-			local InputChangedConnection = UserInputService.InputChanged:Connect(function(Input) --[[ Line: 257 ]]
+			local InputChangedConnection = UserInputService.InputChanged:Connect(function(Input)
 				-- upvalues: UseRefResult2 (upval), UseResult (upval)
 				local Current = UseRefResult2.current
 				local DragInput = Current.dragInput
@@ -274,19 +274,19 @@ return ReactModule.memo(function(Frame) --[[ Line: 49 | Named "ModelViewport" ]]
 					return
 				end
 			end)
-			local InputEndedConnection = UserInputService.InputEnded:Connect(function(Input) --[[ Line: 278 ]]
+			local InputEndedConnection = UserInputService.InputEnded:Connect(function(Input)
 				-- upvalues: UseRefResult2 (upval)
 				if UseRefResult2.current.dragInput == Input then
 					UseRefResult2.current.dragInput = nil
 					UseRefResult2.current.lastDragPosition = nil
 				end
 			end)
-			local WindowFocusReleasedConnection = UserInputService.WindowFocusReleased:Connect(function() --[[ Line: 274 | Named "clearDrag" ]]
+			local WindowFocusReleasedConnection = UserInputService.WindowFocusReleased:Connect(function()
 				-- upvalues: UseRefResult2 (upval)
 				UseRefResult2.current.dragInput = nil
 				UseRefResult2.current.lastDragPosition = nil
 			end)
-			local InputBeganConnection = UserInputService.InputBegan:Connect(function(Input, GameProcessed) --[[ Line: 284 ]]
+			local InputBeganConnection = UserInputService.InputBegan:Connect(function(Input, GameProcessed)
 				-- upvalues: config (upval), UseRefResult2 (upval), UseResult (upval)
 				local Entry = config[Input.KeyCode]
 				
@@ -300,7 +300,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 49 | Named "ModelViewport" ]]
 				end
 			end)
 			
-			return function() --[[ Line: 294 ]]
+			return function()
 				-- upvalues: InputBeganConnection (copy), InputChangedConnection (copy), InputEndedConnection (copy), WindowFocusReleasedConnection (copy), UseRefResult2 (upval)
 				InputBeganConnection:Disconnect()
 				InputChangedConnection:Disconnect()
@@ -338,7 +338,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 49 | Named "ModelViewport" ]]
 			ref = UseRefResult,
 			[ReactModule.Tag] = if Frame.testId == nil then nil else `data-testid={Frame.testId}.Viewport`,
 			[ReactModule.Event.InputBegan] = UseResult1,
-			[ReactModule.Event.InputChanged] = ReactModule.useCallback(function(_, Input) --[[ Line: 303 ]]
+			[ReactModule.Event.InputChanged] = ReactModule.useCallback(function(_, Input)
 				-- upvalues: UseRefResult2 (copy), IsIsInteractive (copy), UseResult (copy)
 				local Current = UseRefResult2.current
 				

@@ -1,4 +1,4 @@
-﻿return function(p1, List) --[[ Line: 1 ]]
+﻿return function(p1, List)
 	local LocalUserId = p1.LocalUserId
 	
 	for _, value in ipairs(List) do

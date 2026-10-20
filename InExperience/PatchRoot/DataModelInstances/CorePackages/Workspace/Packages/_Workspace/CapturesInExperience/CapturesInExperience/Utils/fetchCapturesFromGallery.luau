@@ -4,10 +4,10 @@ local _ = require(Parent.Types)
 local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 local FFlagCaptureServiceRetrieveCapturesSafeguardModule = require(Parent.Flags.FFlagCaptureServiceRetrieveCapturesSafeguard)
 
-return function() --[[ Line: 12 | Named "fetchCapturesFromGallery" ]]
+return function()
 	-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureService (copy), FFlagCaptureServiceRetrieveCapturesSafeguardModule (copy)
 	if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then
-		local Success, Result = pcall(function() --[[ Line: 14 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: CaptureService (upval)
 			local CapturesFromGalleryAsync, CapturesFromGalleryAsync2 = CaptureService:ReadCapturesFromGalleryAsync()
 			
@@ -28,7 +28,7 @@ return function() --[[ Line: 12 | Named "fetchCapturesFromGallery" ]]
 	elseif not FFlagCaptureServiceRetrieveCapturesSafeguardModule then
 		return CaptureService:RetrieveCaptures()
 	else
-		local Success1, Result1 = pcall(function() --[[ Line: 35 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: CaptureService (upval)
 			return CaptureService:RetrieveCaptures()
 		end)

@@ -8,12 +8,12 @@ local InputLabel = FoundationModule.InputLabel
 local InputLabelSize = FoundationModule.Enums.InputLabelSize
 local FFlagEnableGlobalChatAbuseReporting = require(Parent.SharedFlags).FFlagEnableGlobalChatAbuseReporting
 
-local function _(Text: string, p1) --[[ Line: 20 | Named "getEyebrowText" ]]
+local function _(Text: string, p1)
 	-- upvalues: ConstantsModule (copy)
 	return if string.match(Text, ConstantsModule.ChannelTypes.Whisper) then p1.localizedText.ChatEyebrowSentPrivately else p1.localizedText.ChatEyebrowSentInAnotherChat
 end
 
-return function(p1) --[[ Line: 28 | Named "ChatLineReportEyebrow" ]]
+return function(p1)
 	-- upvalues: FFlagEnableGlobalChatAbuseReporting (copy), ConstantsModule (copy), ReactModule (copy), View (copy), InputLabel (copy), InputLabelSize (copy)
 	if FFlagEnableGlobalChatAbuseReporting and not p1.message.textChannel or p1.message.textChannel.Name == ConstantsModule.ChannelTypes.General then
 		return nil

@@ -1,6 +1,6 @@
 ﻿local UseTrackerModeModule = require(script.Parent.useTrackerMode)
 
-return function(): boolean --[[ Line: 5 | Named "useCameraOn" ]]
+return function(): boolean
 	-- upvalues: UseTrackerModeModule (copy)
 	local UseTrackerModeModuleResult = UseTrackerModeModule()
 	

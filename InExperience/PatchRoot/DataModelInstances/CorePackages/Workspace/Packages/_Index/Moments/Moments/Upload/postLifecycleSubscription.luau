@@ -10,7 +10,7 @@ local FFlagMomentsRealtimeSessionTelemetry = MomentsCommonModule.Flags.FFlagMome
 local MomentsPostReviewTelemetry = game:DefineFastFlag("MomentsPostReviewTelemetry", false)
 local Signal, Signal2 = require(Parent.Signals).createSignal({})
 
-local function _(Key) --[[ Line: 28 | Named "advanceWakeVersion" ]]
+local function _(Key)
 	-- upvalues: Signal (copy), Signal2 (copy)
 	local Copy = table.clone(Signal(false))
 	Copy[Key] = (Copy[Key] or 0) + 1
@@ -21,7 +21,7 @@ local t = {}
 local MomentsPostLifecycleV1 = nil
 local OnUnhideConnection = nil
 
-local function onPostLifecycleEvent(p1) --[[ Line: 40 ]]
+local function onPostLifecycleEvent(p1)
 	-- upvalues: GetLocalUserIdModule (copy), FFlagMomentsRealtimeSessionTelemetry (copy), MomentsPostReviewTelemetry (copy), t (copy), MomentsCommonModule (copy), SharedFlagsModule (copy), Signal (copy), Signal2 (copy), MomentsGetMomentsUserStoreModule (copy)
 	if type(p1) ~= "table" or p1.type ~= "PostStatusChanged" or p1.status ~= "Published" and p1.status ~= "Rejected" or (type(p1.postAssetId) ~= "string" or p1.postAssetId == "") then return end
 	local LocalUserIdModule = GetLocalUserIdModule()
@@ -45,7 +45,7 @@ local function onPostLifecycleEvent(p1) --[[ Line: 40 ]]
 	end
 end
 
-local function onAppResumed() --[[ Line: 76 ]]
+local function onAppResumed()
 	-- upvalues: GetLocalUserIdModule (copy), Signal (copy), Signal2 (copy)
 	local LocalUserIdModule = GetLocalUserIdModule()
 	
@@ -57,7 +57,7 @@ local function onAppResumed() --[[ Line: 76 ]]
 end
 
 return {
-	subscribe = function(p1, AppLifecycleObserverService) --[[ Line: 84 ]]
+	subscribe = function(p1, AppLifecycleObserverService)
 		-- upvalues: MomentsPostLifecycleV1 (ref), RealtimeDeliveryModule (copy), NotificationService (copy), onPostLifecycleEvent (copy), SharedFlagsModule (copy), OnUnhideConnection (ref), onAppResumed (copy)
 		if MomentsPostLifecycleV1 ~= nil then return end
 		MomentsPostLifecycleV1 = (p1 or RealtimeDeliveryModule.RobloxEventReceiver.new(NotificationService)):observeEvent("MomentsPostLifecycleV1", onPostLifecycleEvent)
@@ -66,7 +66,7 @@ return {
 			local AppLifecycleObserverService1 = AppLifecycleObserverService
 			
 			if AppLifecycleObserverService1 == nil then
-				local Success, Result = pcall(function() --[[ Line: 93 ]]
+				local Success, Result = pcall(function()
 					return game:GetService("AppLifecycleObserverService")
 				end)
 				
@@ -79,7 +79,7 @@ return {
 			end
 		end
 	end,
-	unsubscribe = function() --[[ Line: 106 ]]
+	unsubscribe = function()
 		-- upvalues: MomentsPostLifecycleV1 (ref), OnUnhideConnection (ref)
 		if MomentsPostLifecycleV1 ~= nil then
 			MomentsPostLifecycleV1:disconnect()
@@ -90,7 +90,7 @@ return {
 			OnUnhideConnection = nil
 		end
 	end,
-	getWakeVersion = function(p1, p2) --[[ Line: 24 ]]
+	getWakeVersion = function(p1, p2)
 		-- upvalues: Signal (copy)
 		return Signal(p1)[p2] or 0
 	end

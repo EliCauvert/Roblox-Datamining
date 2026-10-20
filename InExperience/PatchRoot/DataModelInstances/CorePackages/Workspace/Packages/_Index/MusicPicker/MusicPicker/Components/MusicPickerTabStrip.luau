@@ -9,7 +9,7 @@ local ScrollBarVisibility = FoundationModule.Enums.ScrollBarVisibility
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local _ = require(MusicPicker.Types.MusicPickerTypes)
 
-local function TabPill(p1) --[[ Line: 31 ]]
+local function TabPill(p1)
 	-- upvalues: ReactModule (copy), View (copy), FoundationModule (copy), Text (copy)
 	return ReactModule.createElement(View, {
 		LayoutOrder = p1.layoutOrder,
@@ -34,7 +34,7 @@ local function TabPill(p1) --[[ Line: 31 ]]
 	})
 end
 
-return function(Frame) --[[ Line: 58 | Named "MusicPickerTabStrip" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), TabPill (copy), ScrollView (copy), ScrollBarVisibility (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Elements = {}
@@ -45,7 +45,7 @@ return function(Frame) --[[ Line: 58 | Named "MusicPickerTabStrip" ]]
 			label = tab.label,
 			isActive = Frame.activeTabId == Id,
 			layoutOrder = LayoutOrder,
-			onActivated = function() --[[ Line: 67 ]]
+			onActivated = function()
 				-- upvalues: Frame (copy), Id (copy)
 				Frame.onTabSelected(Id)
 			end

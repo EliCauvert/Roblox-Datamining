@@ -5,25 +5,25 @@ local ToolControllerUtilsModule = require(script.Parent.toolControllerUtils)
 local StudioClientDataModelTools = CreatorAgentChatModule.StudioClientDataModelTools
 local Debug = CreatorAgentChatModule.debug
 
-return function(p1, p2, p3) --[[ Line: 30 | Named "createClientDataModelController" ]]
+return function(p1, p2, p3)
 	-- upvalues: StudioClientDataModelTools (copy), ClientDataModelCollectorModule (copy), Debug (copy), ToolControllerUtilsModule (copy), ChatConstantsModule (copy)
-	local Callback = p3 or function(): boolean --[[ Line: 35 ]]
+	local Callback = p3 or function(): boolean
 		return true
 	end
 	local t = {}
 	
-	local function _(Key) --[[ Line: 40 | Named "clearPending" ]]
+	local function _(Key)
 		-- upvalues: t (copy), p2 (copy)
 		t[Key] = nil
 		p2[Key] = nil
 	end
 	
-	local function collectResult(p4) --[[ Line: 45 ]]
+	local function collectResult(p4)
 		-- upvalues: StudioClientDataModelTools (upval), ClientDataModelCollectorModule (upval)
 		return if p4.toolName == StudioClientDataModelTools.SEARCH_TOOL_NAME then ClientDataModelCollectorModule.searchClientDataModel(p4.rawInput) else ClientDataModelCollectorModule.inspectClientInstance(p4.rawInput)
 	end
 	
-	local function submitResult(p4) --[[ Line: 52 ]]
+	local function submitResult(p4)
 		-- upvalues: Callback (copy), t (copy), p2 (copy), Debug (upval), collectResult (copy), StudioClientDataModelTools (upval), p1 (copy), ToolControllerUtilsModule (upval), ChatConstantsModule (upval)
 		if not Callback() then
 			local ToolCallId = p4.toolCallId
@@ -99,7 +99,7 @@ return function(p1, p2, p3) --[[ Line: 30 | Named "createClientDataModelControll
 		})
 	end
 	
-	local function syncRequest(p4, ToolName, Callback1): boolean --[[ Line: 122 ]]
+	local function syncRequest(p4, ToolName, Callback1): boolean
 		-- upvalues: Callback (copy), p2 (copy), t (copy), Debug (upval), submitResult (copy)
 		if not Callback() then
 			return false
@@ -128,7 +128,7 @@ return function(p1, p2, p3) --[[ Line: 30 | Named "createClientDataModelControll
 				gameId = game.GameId,
 				path = if typeof(CallbackResult2) == "table" then CallbackResult2.path else nil
 			})
-			task.spawn(function() --[[ Line: 154 ]]
+			task.spawn(function()
 				-- upvalues: submitResult (upval), config (copy)
 				submitResult(config)
 			end)
@@ -138,14 +138,14 @@ return function(p1, p2, p3) --[[ Line: 30 | Named "createClientDataModelControll
 	end
 	
 	return {
-		revokePending = function() --[[ Line: 175 ]]
+		revokePending = function()
 			-- upvalues: t (copy), p2 (copy)
 			for i in t do
 				t[i] = nil
 				p2[i] = nil
 			end
 		end,
-		syncClientDataModelRequests = function(p4) --[[ Line: 160 ]]
+		syncClientDataModelRequests = function(p4)
 			-- upvalues: syncRequest (copy), StudioClientDataModelTools (upval)
 			local SyncRequestResult = syncRequest(p4, StudioClientDataModelTools.SEARCH_TOOL_NAME, StudioClientDataModelTools.findSearchRequestInTurnState)
 			local SyncRequestResult1 = syncRequest(p4, StudioClientDataModelTools.INSPECT_TOOL_NAME, StudioClientDataModelTools.findInspectRequestInTurnState)

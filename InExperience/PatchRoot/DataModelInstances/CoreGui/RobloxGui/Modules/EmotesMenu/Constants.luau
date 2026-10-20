@@ -90,10 +90,10 @@ Constants.Layouts = {
 	[Constants.Layout.TenFoot] = require(Layouts.TenFoot)
 }
 
-local function makeTableConstant(p1, p2) --[[ Line: 168 ]]
+local function makeTableConstant(p1, p2)
 	setmetatable(p2, {
-		__newindex = function() --[[ Line: 170 ]] end,
-		__index = function(_, p3) --[[ Line: 172 ]]
+		__newindex = function() end,
+		__index = function(_, p3)
 			-- upvalues: p1 (copy)
 			error(p1 .. " table has no index: " .. tostring(p3), 2)
 		end

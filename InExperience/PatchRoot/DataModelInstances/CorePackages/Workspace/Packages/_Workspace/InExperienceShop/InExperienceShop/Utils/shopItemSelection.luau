@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("InExperienceShop").Types)
 
-local function findItemById(List, Id, ItemType) --[[ Line: 10 ]]
+local function findItemById(List, Id, ItemType)
 	if Id == nil or ItemType == nil then
 		return nil
 	end
@@ -14,7 +14,7 @@ local function findItemById(List, Id, ItemType) --[[ Line: 10 ]]
 	return nil
 end
 
-local function findBonusItemById(List, Id, ItemType) --[[ Line: 24 ]]
+local function findBonusItemById(List, Id, ItemType)
 	if Id == nil or ItemType == nil then
 		return nil
 	end
@@ -49,13 +49,13 @@ end
 return {
 	findItemById = findItemById,
 	findBonusItemById = findBonusItemById,
-	resolveItemForSelection = function(p1, Id, ItemType, p2) --[[ Line: 53 ]]
+	resolveItemForSelection = function(p1, Id, ItemType, p2)
 		-- upvalues: findItemById (copy), findBonusItemById (copy)
 		local ItemById = findItemById(p1, Id, ItemType)
 		
 		return if ItemById == nil then if p2 then findBonusItemById(p1, Id, ItemType) else nil else ItemById
 	end,
-	isRobuxBonusOnlySelection = function(p1, Id, ItemType, p2): boolean --[[ Line: 71 ]]
+	isRobuxBonusOnlySelection = function(p1, Id, ItemType, p2): boolean
 		-- upvalues: findItemById (copy), findBonusItemById (copy)
 		return if p2 and Id ~= nil and ItemType ~= nil and findItemById(p1, Id, ItemType) == nil then findBonusItemById(p1, Id, ItemType) ~= nil else false
 	end

@@ -9,9 +9,9 @@ local View = FoundationModule.View
 local InputSize = FoundationModule.Enums.InputSize
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
-local function noop() --[[ Line: 26 ]] end
+local function noop() end
 
-return ReactModule.memo(function(Frame) --[[ Line: 32 | Named "DebugInfo" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: GetMomentsPreferencesStoreModule (copy), UseSignalStateFunction (copy), MomentContextModule (copy), ReactModule (copy), View (copy), TextInput (copy), noop (copy), InputSize (copy)
 	local UseMomentResult = MomentContextModule.useMoment()
 	

@@ -18,7 +18,7 @@ local NewUrlBuilder2 = UrlBuilder.new({
 })
 
 return {
-	sendRequestToNewParent = function(Callback, Email, Entry, RequestDetails, p1) --[[ Line: 29 ]]
+	sendRequestToNewParent = function(Callback, Email, Entry, RequestDetails, p1)
 		-- upvalues: NewUrlBuilder (copy), VPCRequestTypeEnum (copy), HttpService (copy)
 		return Callback(NewUrlBuilder(), "POST", {
 			postBody = HttpService:JSONEncode({
@@ -31,21 +31,21 @@ return {
 				["Content-Type"] = "application/json",
 				Accept = "application/json"
 			}
-		}):andThen(function(Result) --[[ Line: 52 ]]
+		}):andThen(function(Result)
 			return {
 				sessionId = Result.responseBody.sessionId,
 				lockedUntil = Result.responseBody.lockedUntil
 			}
-		end):catch(function(Err) --[[ Line: 58 ]]
+		end):catch(function(Err)
 			-- upvalues: HttpService (upval)
-			local _, Result = pcall(function() --[[ Line: 59 ]]
+			local _, Result = pcall(function()
 				-- upvalues: HttpService (upval), Err (copy)
 				return HttpService:JSONDecode(Err.Body)
 			end)
 			error({ code = Result.code, message = Result.message })
 		end)
 	end,
-	sendRequestToAllParents = function(Callback, Entry, RequestDetails, p1) --[[ Line: 74 ]]
+	sendRequestToAllParents = function(Callback, Entry, RequestDetails, p1)
 		-- upvalues: NewUrlBuilder1 (copy), HttpService (copy)
 		return Callback(NewUrlBuilder1(), "POST", {
 			postBody = HttpService:JSONEncode({
@@ -57,30 +57,30 @@ return {
 				["Content-Type"] = "application/json",
 				Accept = "application/json"
 			}
-		}):andThen(function(Result) --[[ Line: 94 ]]
+		}):andThen(function(Result)
 			return {
 				sessionId = Result.responseBody.sessionId,
 				lockedUntil = Result.responseBody.lockedUntil
 			}
-		end):catch(function(Err) --[[ Line: 100 ]]
+		end):catch(function(Err)
 			-- upvalues: HttpService (upval)
-			local _, Result = pcall(function() --[[ Line: 101 ]]
+			local _, Result = pcall(function()
 				-- upvalues: HttpService (upval), Err (copy)
 				return HttpService:JSONDecode(Err.Body)
 			end)
 			error({ code = Result.code, message = Result.message })
 		end)
 	end,
-	getLinkedParentEmails = function(Callback) --[[ Line: 114 ]]
+	getLinkedParentEmails = function(Callback)
 		-- upvalues: NewUrlBuilder2 (copy)
 		return Callback(NewUrlBuilder2(), "GET", {
 			headers = {
 				["Content-Type"] = "application/json",
 				Accept = "application/json"
 			}
-		}):andThen(function(Result) --[[ Line: 122 ]]
+		}):andThen(function(Result)
 			return { parentEmails = Result.responseBody.parentEmails }
-		end):catch(function(_) --[[ Line: 127 ]]
+		end):catch(function(_)
 			error({})
 		end)
 	end

@@ -12,10 +12,10 @@ local FFlagNotApprovedPageIXPExposure = require(Parent.SharedFlags).FFlagNotAppr
 local FFlagScopeBadUtterancePlayerNameToChatDialogsModule = require(Parent.InterventionShared.FFlagScopeBadUtterancePlayerNameToChatDialogs)
 local _ = require(InExperienceIntervention.Utils.Types)
 
-return ReactModule.memo(function(p1) --[[ Line: 36 | Named "ChatTimeoutCustomDialogV2" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), FFlagNotApprovedPageIXPExposure (copy), IXPService (copy), AppUserLayers (copy), UseTimeoutInfoBindingFunction (copy), UseParsedBadUtterancesFunction (copy), FFlagScopeBadUtterancePlayerNameToChatDialogsModule (copy), NewResult (copy), GenericInterventionDialog (copy), InterventionAnalytics (copy)
 	local ModerationDetail = p1.moderationDetail
-	ReactModule.useEffect(function() --[[ Line: 39 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagNotApprovedPageIXPExposure (upval), IXPService (upval), AppUserLayers (upval)
 		if FFlagNotApprovedPageIXPExposure and game:GetEngineFeature("EnableLogFlagLinkedUserLayerExposure") then
 			IXPService:LogFlagLinkedUserLayerExposure(AppUserLayers.NotApprovedPageUserIDLayer)
@@ -38,10 +38,10 @@ return ReactModule.memo(function(p1) --[[ Line: 36 | Named "ChatTimeoutCustomDia
 	end
 	return ReactModule.createElement(GenericInterventionDialog, {
 		isAppealable = true,
-		titleText = Heading:map(function(p2) --[[ Line: 66 ]]
+		titleText = Heading:map(function(p2)
 			return p2
 		end),
-		bodyText = Description:map(function(p2) --[[ Line: 70 ]]
+		bodyText = Description:map(function(p2)
 			return p2
 		end),
 		evidence = Joined,

@@ -19,7 +19,7 @@ local ReactionTypes = {
 	ReactionType.Wow, ReactionType.Cry, ReactionType.Fire, ReactionType.Skull
 }
 
-return function(p1, OnBack) --[[ Line: 82 | Named "usePostInsightsPageViewModel" ]]
+return function(p1, OnBack)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), PostInsightsStringsModule (copy), UseSignalStateFunction (copy), ReactModule (copy), ToMediaItemModule (copy), ReactionTypes (copy), AbbreviateCountFunction (copy), LocalizationService (copy), PlaceholderOverviewMetricsModule (copy), BuilderIconsModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction(PostInsightsStringsModule.PAGE_KEYS)
@@ -29,7 +29,7 @@ return function(p1, OnBack) --[[ Line: 82 | Named "usePostInsightsPageViewModel"
 	local UseSignalStateResult1 = UseSignalStateFunction(MomentStore.getIndividualReactionCounts)
 	local UseSignalStateResult2 = UseSignalStateFunction(MomentStore.getCommentCount)
 	local UseSignalStateResult3 = UseSignalStateFunction(MomentStore.getShareCount)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 95 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ToMediaItemModule (upval), Moment (copy), UseTokensResult (copy)
 		local MediaItemModule = ToMediaItemModule({ kind = "moment", moment = Moment })
 		
@@ -38,7 +38,7 @@ return function(p1, OnBack) --[[ Line: 82 | Named "usePostInsightsPageViewModel"
 		end
 		return MediaItemModule
 	end, { Moment.momentId })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 103 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult1 (copy), ReactionTypes (upval), AbbreviateCountFunction (upval), LocalizationService (upval)
 		local t = {}
 		
@@ -55,7 +55,7 @@ return function(p1, OnBack) --[[ Line: 82 | Named "usePostInsightsPageViewModel"
 		end
 		return List
 	end, { UseSignalStateResult1 })
-	local UseLocalizationResult1 = UseLocalizationFunction((ReactModule.useMemo(function() --[[ Line: 121 ]]
+	local UseLocalizationResult1 = UseLocalizationFunction((ReactModule.useMemo(function()
 		-- upvalues: PlaceholderOverviewMetricsModule (upval), PostInsightsStringsModule (upval)
 		local t = {}
 		

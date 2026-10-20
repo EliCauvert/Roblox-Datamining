@@ -1,6 +1,6 @@
 ﻿local DataModelTraversalOptionsModule = require(script:FindFirstAncestor("SceneUnderstanding").options.DataModelTraversalOptions)
 
-return function(p1, Callback, p2) --[[ Line: 9 | Named "createLazyInstanceCollector" ]]
+return function(p1, Callback, p2)
 	-- upvalues: DataModelTraversalOptionsModule (copy)
 	local NewDataModelTraversalOptions = DataModelTraversalOptionsModule.new(p2)
 	local Flag = false
@@ -11,12 +11,12 @@ return function(p1, Callback, p2) --[[ Line: 9 | Named "createLazyInstanceCollec
 	local List2 = {}
 	local t = {}
 	
-	local function _(): number --[[ Line: 24 | Named "getBatchCount" ]]
+	local function _(): number
 		-- upvalues: List2 (copy), NewDataModelTraversalOptions (copy)
 		return (math.min(#List2, NewDataModelTraversalOptions.instanceProcessingLimit))
 	end
 	
-	local function onAncestryChanged(Value) --[[ Line: 28 ]]
+	local function onAncestryChanged(Value)
 		-- upvalues: List (copy)
 		if Value.Parent == nil then
 			local FoundIndex: number? = table.find(List, Value)
@@ -27,7 +27,7 @@ return function(p1, Callback, p2) --[[ Line: 9 | Named "createLazyInstanceCollec
 		end
 	end
 	
-	local function processStack(): boolean --[[ Line: 37 ]]
+	local function processStack(): boolean
 		-- upvalues: List2 (copy), NewDataModelTraversalOptions (copy), Callback (copy), List (copy), List1 (copy), onAncestryChanged (copy), Total (ref), t (ref), Flag (ref)
 		local Smallest = math.min(#List2, NewDataModelTraversalOptions.instanceProcessingLimit)
 		
@@ -47,7 +47,7 @@ return function(p1, Callback, p2) --[[ Line: 9 | Named "createLazyInstanceCollec
 		Total += Smallest
 		
 		for i in t do
-			task.spawn(function() --[[ Line: 58 ]]
+			task.spawn(function()
 				-- upvalues: i (copy), List (upval)
 				i(List)
 			end)
@@ -65,12 +65,12 @@ return function(p1, Callback, p2) --[[ Line: 9 | Named "createLazyInstanceCollec
 		end
 	end
 	
-	local _ = function() --[[ Line: 80 | Named "startProcessingLoop" ]]
+	local _ = function()
 		-- upvalues: Flag (ref), List2 (copy), NewDataModelTraversalOptions (copy), processStack (copy), SpawnedThread (ref)
 		if not Flag and math.min(#List2, NewDataModelTraversalOptions.instanceProcessingLimit) ~= 0 then
 			Flag = true
 			processStack()
-			SpawnedThread = task.spawn(function() --[[ Line: 89 ]]
+			SpawnedThread = task.spawn(function()
 				-- upvalues: Flag (upval), processStack (upval)
 				task.wait()
 				while Flag do
@@ -86,7 +86,7 @@ return function(p1, Callback, p2) --[[ Line: 9 | Named "createLazyInstanceCollec
 		end
 	end
 	
-	local function onDescendantAdded(Descendant) --[[ Line: 102 ]]
+	local function onDescendantAdded(Descendant)
 		-- upvalues: List2 (copy), Flag (ref), NewDataModelTraversalOptions (copy), processStack (copy), SpawnedThread (ref)
 		table.insert(List2, Descendant)
 		
@@ -94,7 +94,7 @@ return function(p1, Callback, p2) --[[ Line: 9 | Named "createLazyInstanceCollec
 			if math.min(#List2, NewDataModelTraversalOptions.instanceProcessingLimit) == 0 then return end
 			Flag = true
 			processStack()
-			SpawnedThread = task.spawn(function() --[[ Line: 89 ]]
+			SpawnedThread = task.spawn(function()
 				-- upvalues: Flag (upval), processStack (upval)
 				task.wait()
 				while Flag do
@@ -109,7 +109,7 @@ return function(p1, Callback, p2) --[[ Line: 9 | Named "createLazyInstanceCollec
 	end
 	
 	return {
-		setInstancesProcessedPerFrame = function(Value: number) --[[ Line: 143 ]]
+		setInstancesProcessedPerFrame = function(Value: number)
 			-- upvalues: NewDataModelTraversalOptions (copy), Flag (ref), List2 (copy), processStack (copy), SpawnedThread (ref)
 			NewDataModelTraversalOptions.instanceProcessingLimit = math.clamp(Value, 0, 1e999)
 			
@@ -117,7 +117,7 @@ return function(p1, Callback, p2) --[[ Line: 9 | Named "createLazyInstanceCollec
 				if math.min(#List2, NewDataModelTraversalOptions.instanceProcessingLimit) == 0 then return end
 				Flag = true
 				processStack()
-				SpawnedThread = task.spawn(function() --[[ Line: 89 ]]
+				SpawnedThread = task.spawn(function()
 					-- upvalues: Flag (upval), processStack (upval)
 					task.wait()
 					while Flag do
@@ -130,7 +130,7 @@ return function(p1, Callback, p2) --[[ Line: 9 | Named "createLazyInstanceCollec
 				end)
 			end
 		end,
-		listen = function() --[[ Line: 110 ]]
+		listen = function()
 			-- upvalues: p1 (copy), List1 (copy), onDescendantAdded (copy), List2 (copy), Flag (ref), NewDataModelTraversalOptions (copy), processStack (copy), SpawnedThread (ref)
 			for _, value in p1 do
 				table.insert(List1, value.DescendantAdded:Connect(onDescendantAdded))
@@ -143,7 +143,7 @@ return function(p1, Callback, p2) --[[ Line: 9 | Named "createLazyInstanceCollec
 				if math.min(#List2, NewDataModelTraversalOptions.instanceProcessingLimit) == 0 then return end
 				Flag = true
 				processStack()
-				SpawnedThread = task.spawn(function() --[[ Line: 89 ]]
+				SpawnedThread = task.spawn(function()
 					-- upvalues: Flag (upval), processStack (upval)
 					task.wait()
 					while Flag do
@@ -156,11 +156,11 @@ return function(p1, Callback, p2) --[[ Line: 9 | Named "createLazyInstanceCollec
 				end)
 			end
 		end,
-		get = function() --[[ Line: 148 ]]
+		get = function()
 			-- upvalues: List (copy)
 			return List
 		end,
-		destroy = function() --[[ Line: 129 ]]
+		destroy = function()
 			-- upvalues: Flag (ref), List1 (copy), t (ref), SpawnedThread (ref)
 			Flag = false
 			
@@ -173,11 +173,11 @@ return function(p1, Callback, p2) --[[ Line: 9 | Named "createLazyInstanceCollec
 				task.cancel(SpawnedThread)
 			end
 		end,
-		onStepped = function(Key) --[[ Line: 122 ]]
+		onStepped = function(Key)
 			-- upvalues: t (ref)
 			t[Key] = true
 			
-			return function() --[[ Line: 124 ]]
+			return function()
 				-- upvalues: t (upval), Key (copy)
 				t[Key] = nil
 			end

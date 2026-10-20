@@ -4,14 +4,14 @@ local CryoModule = require(Parent.Cryo)
 local SignalsModule = require(Parent.Signals)
 local _ = require(DataHydration.DataHydrationTypes)
 
-return function() --[[ Line: 10 | Named "createMutationLayer" ]]
+return function()
 	-- upvalues: SignalsModule (copy), CryoModule (copy)
 	local t = {}
 	local t1 = {}
 	local t2 = {}
 	local t3 = {}
 	
-	local function _(p1) --[[ Line: 18 | Named "getOrCreateMutationSignal" ]]
+	local function _(p1)
 		-- upvalues: t (copy), t1 (copy), SignalsModule (upval)
 		if not t[p1] then
 			t[p1], t1[p1] = SignalsModule.createSignal(nil)
@@ -20,7 +20,7 @@ return function() --[[ Line: 10 | Named "createMutationLayer" ]]
 	end
 	
 	return {
-		set = function(p1, p2) --[[ Line: 30 ]]
+		set = function(p1, p2)
 			-- upvalues: t (copy), t1 (copy), SignalsModule (upval), CryoModule (upval)
 			if not t[p1] then
 				t[p1], t1[p1] = SignalsModule.createSignal(nil)
@@ -36,32 +36,32 @@ return function() --[[ Line: 10 | Named "createMutationLayer" ]]
 				Entry(p2)
 			end
 		end,
-		clear = function(Key) --[[ Line: 40 ]]
+		clear = function(Key)
 			-- upvalues: t1 (copy), t3 (ref)
 			if t1[Key] then
 				t1[Key](nil)
 			end
 			t3[Key] = nil
 		end,
-		has = function(p1): boolean --[[ Line: 47 ]]
+		has = function(p1): boolean
 			-- upvalues: t (copy)
 			return if t[p1] then t[p1](false) ~= nil else false
 		end,
-		get = function(p1) --[[ Line: 57 ]]
+		get = function(p1)
 			-- upvalues: t (copy)
 			return if t[p1] then t[p1](false) else nil
 		end,
-		markCommitted = function(Key) --[[ Line: 65 ]]
+		markCommitted = function(Key)
 			-- upvalues: t (copy), t3 (ref)
 			if if t[Key] then t[Key](false) ~= nil else false then
 				t3[Key] = true
 			end
 		end,
-		isCommitted = function(p1): boolean --[[ Line: 71 ]]
+		isCommitted = function(p1): boolean
 			-- upvalues: t3 (ref)
 			return t3[p1] == true
 		end,
-		drainCommitted = function(List, Callback: (any, any) -> ()) --[[ Line: 77 ]]
+		drainCommitted = function(List, Callback: (any, any) -> ())
 			-- upvalues: t3 (ref), t (copy), t1 (copy)
 			for _, value in List do
 				if t3[value] then
@@ -77,7 +77,7 @@ return function() --[[ Line: 10 | Named "createMutationLayer" ]]
 				end
 			end
 		end,
-		getMergedResult = function(Key, p1) --[[ Line: 97 ]]
+		getMergedResult = function(Key, p1)
 			-- upvalues: t2 (ref), t (copy), t1 (copy), SignalsModule (upval), CryoModule (upval)
 			if t2[Key] then
 				return t2[Key]
@@ -88,7 +88,7 @@ return function() --[[ Line: 10 | Named "createMutationLayer" ]]
 			local Entry = t[Key]
 			local _ = t1[Key]
 			t2[Key] = {
-				data = SignalsModule.createComputed(function(p2) --[[ Line: 104 ]]
+				data = SignalsModule.createComputed(function(p2)
 					-- upvalues: Entry (copy), p1 (copy), CryoModule (upval)
 					local EntryResult = Entry(p2)
 					local DataResult = p1.data(p2)
@@ -100,7 +100,7 @@ return function() --[[ Line: 10 | Named "createMutationLayer" ]]
 			
 			return t2[Key]
 		end,
-		clearAll = function() --[[ Line: 127 ]]
+		clearAll = function()
 			-- upvalues: t1 (copy), t3 (ref), t2 (ref)
 			for _, value in t1 do
 				value(nil)

@@ -1,8 +1,8 @@
 ﻿local HttpService = game:GetService("HttpService")
 
-return function(p1) --[[ Line: 12 | Named "getAccountUpgradeErrorCode" ]]
+return function(p1)
 	-- upvalues: HttpService (copy)
-	local Success, Result = pcall(function() --[[ Line: 13 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: HttpService (upval), p1 (copy)
 		return HttpService:JSONDecode(p1.Body)
 	end)

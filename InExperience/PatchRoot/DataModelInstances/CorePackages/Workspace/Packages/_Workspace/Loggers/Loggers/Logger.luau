@@ -4,7 +4,7 @@ local DebugLuaLogPattern = game:DefineFastString("DebugLuaLogPattern", "")
 Logger:setContext({ prefix = "[{loggerName}] - " })
 Logger:addSink({
 	maxLevel = FromStringResult,
-	log = function(_, Text: string, _) --[[ Line: 14 ]]
+	log = function(_, Text: string, _)
 		-- upvalues: DebugLuaLogPattern (copy)
 		if string.match(Text, DebugLuaLogPattern) then
 			print(Text)

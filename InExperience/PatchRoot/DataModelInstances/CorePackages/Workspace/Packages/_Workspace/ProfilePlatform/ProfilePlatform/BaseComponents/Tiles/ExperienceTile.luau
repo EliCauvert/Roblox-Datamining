@@ -15,7 +15,7 @@ local UseSetupImpressionsTileTaggingModule = require(ProfilePlatform.Hooks.useSe
 local GetRbxthumbWithTypeSizeAndOptionsFunction = UserLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
 local t = {}
 
-return function(p1) --[[ Line: 41 | Named "ExperienceTile" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), UseSetupImpressionsTileTaggingModule (copy), Constants (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), FFlagProfilePlatformEnableExperiencesFooterModule (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), t (copy), ExperienceTileV3 (copy), GameStats (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseRefResult = ReactModule.useRef(nil)
@@ -25,7 +25,7 @@ return function(p1) --[[ Line: 41 | Named "ExperienceTile" ]]
 	local FFlagProfilePlatformEnableExperiencesFooterModule1 = p1.showFooter and FFlagProfilePlatformEnableExperiencesFooterModule
 	
 	if FFlagProfilePlatformEnableExperiencesFooterModule1 then
-		v1 = UseSelectorFunction(function(p2) --[[ Line: 53 ]]
+		v1 = UseSelectorFunction(function(p2)
 			-- upvalues: GetDeepValueFunction (upval), t (upval)
 			return GetDeepValueFunction(p2, "GameVotes") or t
 		end)[p1.item.experienceId]

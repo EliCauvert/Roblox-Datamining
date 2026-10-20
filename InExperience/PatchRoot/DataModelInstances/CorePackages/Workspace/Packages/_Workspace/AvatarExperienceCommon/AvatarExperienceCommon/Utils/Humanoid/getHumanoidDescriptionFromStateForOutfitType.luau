@@ -13,7 +13,7 @@ local FFlagParseHeadShapeFromAPIResponse = AvatarExperienceFlagsModule.FFlagPars
 local FFlagHeadRefinementFacialAnimationToggle = AvatarExperienceFlagsModule.FFlagHeadRefinementFacialAnimationToggle
 local _ = require(AvatarExperienceCommon.Types.CategoryTypes.CategoryTypes)
 
-return function(p1, p2) --[[ Line: 21 ]]
+return function(p1, p2)
 	-- upvalues: IsValidAssetTypeForOutfitTypeModule (copy), ConstantsModule (copy), CreateHumanoidDescriptionAccessoryInfoModule (copy), FFlagParseHeadShapeFromAPIResponse (copy), FFlagHeadRefinementFacialAnimationToggle (copy), IsMakeupAssetTypeModule (copy), MutedErrorFunction (copy), SetMakeupDescriptionsModule (copy), HUMANOIDDESCRIPTIONSCALETONAME (copy), SetHumanoidDescriptionColorsFromBodyColor3sModule (copy)
 	local HumanoidDescription = Instance.new("HumanoidDescription")
 	local EquippedAssets = p1.AvatarEditor.Character.EquippedAssets

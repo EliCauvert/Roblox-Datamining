@@ -14,7 +14,7 @@ local FFlagProfileInspectAvatarBuyAllModule = require(ProfilePlatform.Flags.FFla
 local _ = require(ProfilePlatform.Common.Types)
 local ItemDisplayHelpersModule = require(script.Parent.ItemDisplayHelpers)
 
-return function(p1) --[[ Line: 41 | Named "CatalogItemRowCardContainer" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ItemDisplayHelpersModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), FFlagProfileInspectAvatarBuyAllModule (copy), Checkbox (copy), InputSize (copy), CatalogRowItemCard (copy), ItemCardThumbnail (copy), GetPriceLineContentFunction (copy)
 	local Asset = p1.asset
 	local Id = Asset.id
@@ -30,7 +30,7 @@ return function(p1) --[[ Line: 41 | Named "CatalogItemRowCardContainer" ]]
 			isChecked = p1.isPurchasable and p1.isChecked,
 			isDisabled = not p1.isPurchasable,
 			size = InputSize.Small,
-			onActivated = function(_) --[[ Line: 70 ]]
+			onActivated = function(_)
 				-- upvalues: p1 (copy), Id (copy)
 				p1.onToggleItem(Id)
 			end
@@ -55,7 +55,7 @@ return function(p1) --[[ Line: 41 | Named "CatalogItemRowCardContainer" ]]
 				headerSize = UDim2.fromOffset(p1.rowHeight, p1.rowHeight),
 				footerSize = UDim2.fromScale(0, 1),
 				footerAutomaticSize = Enum.AutomaticSize.X,
-				onActivated = function() --[[ Line: 99 ]]
+				onActivated = function()
 					-- upvalues: p1 (copy), Id (copy), Asset (copy)
 					p1.openItemDetails(Id, Asset.itemType or "Asset", p1.index)
 				end

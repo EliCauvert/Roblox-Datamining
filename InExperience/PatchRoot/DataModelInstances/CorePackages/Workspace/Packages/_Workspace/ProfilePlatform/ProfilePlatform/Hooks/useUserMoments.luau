@@ -1,6 +1,6 @@
 ﻿local Parent = script:FindFirstAncestor("ProfilePlatform").Parent
 local AppLifecycleObserverService = nil
-pcall(function() --[[ Line: 5 ]]
+pcall(function()
 	-- upvalues: AppLifecycleObserverService (ref)
 	AppLifecycleObserverService = game:GetService("AppLifecycleObserverService")
 end)
@@ -17,7 +17,7 @@ local FFlagMomentsRefreshOwnMomentsAfterPublish = SharedFlagsModule.FFlagMoments
 local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local FFlagMomentsRefreshProfileOnPostStatus = SharedFlagsModule.FFlagMomentsRefreshProfileOnPostStatus
 
-return function(Current, p1) --[[ Line: 40 | Named "useUserMoments" ]]
+return function(Current, p1)
 	-- upvalues: ReactModule (copy), FFlagMomentsRefreshProfileOnPostStatus (copy), FFlagMomentsOptimisticProfilePending (copy), UseLocalUserIdFunction (copy), FFlagMomentsRefreshOwnMomentsAfterPublish (copy), SignalsReactModule (copy), MomentsGetMomentsUserStoreModule (copy), AppLifecycleObserverService (ref), CryoModule (copy), FFlagMomentsRemoveDeletedFromProfile (copy), GetDeletedMomentsStoreModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState({})
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
@@ -28,7 +28,7 @@ return function(Current, p1) --[[ Line: 40 | Named "useUserMoments" ]]
 	local UseLocalUserIdResult = if FFlagMomentsRefreshProfileOnPostStatus or FFlagMomentsOptimisticProfilePending then UseLocalUserIdFunction() else nil
 	local IsTextMatch: boolean = UseLocalUserIdResult ~= nil and tostring(UseLocalUserIdResult) == Current
 	local UseSignalStateResult = if FFlagMomentsOptimisticProfilePending then SignalsReactModule.useSignalState(MomentsGetMomentsUserStoreModule(false).getPendingUserMoments) else {}
-	ReactModule.useEffect(function() --[[ Line: 63 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Current (copy), MomentsGetMomentsUserStoreModule (upval), FFlagMomentsRefreshProfileOnPostStatus (upval), FFlagMomentsOptimisticProfilePending (upval), UseRefResult (copy), IsTextMatch (copy), UseStateResult2_3 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy)
 		local Number = if Current == nil then nil else tonumber(Current)
 		
@@ -43,7 +43,7 @@ return function(Current, p1) --[[ Line: 40 | Named "useUserMoments" ]]
 			end
 		end
 		local Flag = false
-		MomentsGetMomentsUserStoreModuleResult.getUserMoments(Number):andThen(function(Result) --[[ Line: 83 ]]
+		MomentsGetMomentsUserStoreModuleResult.getUserMoments(Number):andThen(function(Result)
 			-- upvalues: Flag (ref), UseStateResult2_3 (upval), UseStateResult2 (upval), UseStateResult2_1 (upval), UseStateResult2_2 (upval)
 			if not Flag then
 				UseStateResult2_3(false)
@@ -51,14 +51,14 @@ return function(Current, p1) --[[ Line: 40 | Named "useUserMoments" ]]
 				UseStateResult2_1(Result.nextCursor)
 				UseStateResult2_2(Result.nextCursor ~= nil)
 			end
-		end):catch(function() --[[ Line: 91 ]]
+		end):catch(function()
 			-- upvalues: Flag (ref), UseStateResult2_3 (upval)
 			if not Flag then
 				UseStateResult2_3(true)
 			end
 		end)
 		
-		return function() --[[ Line: 96 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end
@@ -69,13 +69,13 @@ return function(Current, p1) --[[ Line: 40 | Named "useUserMoments" ]]
 	})
 	
 	if FFlagMomentsRefreshProfileOnPostStatus or FFlagMomentsOptimisticProfilePending then
-		ReactModule.useEffect(function() --[[ Line: 102 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: IsTextMatch (copy), p1 (copy), AppLifecycleObserverService (upval), Current (copy), MomentsGetMomentsUserStoreModule (upval)
 			if not IsTextMatch then return end
 			local P1 = p1 or AppLifecycleObserverService
 			
 			if P1 == nil then return end
-			local OnUnhideConnection = P1.OnUnhide:Connect(function() --[[ Line: 110 ]]
+			local OnUnhideConnection = P1.OnUnhide:Connect(function()
 				-- upvalues: Current (upval), MomentsGetMomentsUserStoreModule (upval)
 				local Number = if Current == nil then nil else tonumber(Current)
 				
@@ -84,27 +84,27 @@ return function(Current, p1) --[[ Line: 40 | Named "useUserMoments" ]]
 				end
 			end)
 			
-			return function() --[[ Line: 116 ]]
+			return function()
 				-- upvalues: OnUnhideConnection (copy)
 				OnUnhideConnection:Disconnect()
 			end
 		end, { Current, p1, IsTextMatch })
 	end
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 122 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: Current (copy), UseStateResult1 (copy), UseStateResult3 (copy), UseStateResult5 (copy), UseStateResult2_4 (copy), MomentsGetMomentsUserStoreModule (upval), UseStateResult2 (copy), CryoModule (upval), UseStateResult2_2 (copy), UseStateResult2_1 (copy)
 		local Number = if Current == nil then nil else tonumber(Current)
 		
 		if Number ~= nil and UseStateResult1 ~= nil and UseStateResult3 and not UseStateResult5 then
 			UseStateResult2_4(true)
-			MomentsGetMomentsUserStoreModule(false).getUserMoments(Number, UseStateResult1):andThen(function(Result) --[[ Line: 130 ]]
+			MomentsGetMomentsUserStoreModule(false).getUserMoments(Number, UseStateResult1):andThen(function(Result)
 				-- upvalues: UseStateResult2 (upval), CryoModule (upval), UseStateResult2_2 (upval), UseStateResult1 (upval), UseStateResult2_1 (upval)
-				UseStateResult2(function(p2) --[[ Line: 131 ]]
+				UseStateResult2(function(p2)
 					-- upvalues: CryoModule (upval), Result (copy)
 					return CryoModule.List.join(p2, Result.moments)
 				end)
 				UseStateResult2_2(Result.nextCursor ~= nil and Result.nextCursor ~= UseStateResult1)
 				UseStateResult2_1(Result.nextCursor)
-			end):catch(function() --[[ Line: 138 ]] end):finally(function() --[[ Line: 139 ]]
+			end):catch(function() end):finally(function()
 				-- upvalues: UseStateResult2_4 (upval)
 				UseStateResult2_4(false)
 			end)
@@ -123,7 +123,7 @@ return function(Current, p1) --[[ Line: 40 | Named "useUserMoments" ]]
 	if FFlagMomentsRemoveDeletedFromProfile or FFlagMomentsOptimisticProfilePending then
 		List1 = SignalsReactModule.useSignalState(GetDeletedMomentsStoreModule(false).getDeletedIds)
 		local List = List1
-		JoinResult = ReactModule.useMemo(function() --[[ Line: 156 ]]
+		JoinResult = ReactModule.useMemo(function()
 			-- upvalues: List (copy), UseStateResult (copy)
 			if #List == 0 then
 				return UseStateResult
@@ -141,7 +141,7 @@ return function(Current, p1) --[[ Line: 40 | Named "useUserMoments" ]]
 	if FFlagMomentsOptimisticProfilePending then
 		local Number = if Current == nil then nil else tonumber(Current)
 		local UseStateResult6, UseStateResult2_5 = ReactModule.useState({})
-		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 172 ]]
+		local UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: Number (copy), UseSignalStateResult (copy), UseStateResult (copy), List1 (ref)
 			local T = if Number == nil then {} else UseSignalStateResult[Number] or {}
 			local t = {}
@@ -168,9 +168,9 @@ return function(Current, p1) --[[ Line: 40 | Named "useUserMoments" ]]
 			end
 			return t
 		end, { Number, UseStateResult, UseSignalStateResult, List1 })
-		ReactModule.useEffect(function() --[[ Line: 201 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseStateResult2_5 (copy), UseMemoResult (copy)
-			UseStateResult2_5(function(Tbl) --[[ Line: 204 ]]
+			UseStateResult2_5(function(Tbl)
 				-- upvalues: UseMemoResult (upval)
 				local Copy = table.clone(Tbl)
 				local Flag = false

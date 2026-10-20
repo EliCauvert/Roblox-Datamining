@@ -27,14 +27,14 @@ local UseTCAnalyticsFunction = AnalyticsModule.useTCAnalytics
 local EventNames = AnalyticsModule.EventNames
 local FriendsRenameModalUnboldText = game:DefineFastFlag("FriendsRenameModalUnboldText", false)
 
-return function() --[[ Line: 48 | Named "FriendsRenameInfoModal" ]]
+return function()
 	-- upvalues: UsePreferredInputFunction (copy), UseDispatchFunction (copy), UseScreenSizeFunction (copy), UseNavigationFunction (copy), UseTCAnalyticsFunction (copy), ReactModule (copy), EventNames (copy), ResponsiveModule (copy), UseLocalizationFunction (copy), PeekViewState (copy), UseAppPolicyFunction (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), Text (copy), View (copy), FriendsRenameModalUnboldText (copy), InputLabel (copy), InputLabelSize (copy), InteractiveAlert (copy), ButtonType (copy), PeekView (copy)
 	local UsePreferredInputResult = UsePreferredInputFunction()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseScreenSizeResult = UseScreenSizeFunction()
 	local UseNavigationResult = UseNavigationFunction()
 	local FireAnalyticsEventFunction = UseTCAnalyticsFunction().fireAnalyticsEvent
-	ReactModule.useEffect(function() --[[ Line: 56 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FireAnalyticsEventFunction (copy), EventNames (upval)
 		FireAnalyticsEventFunction(EventNames.FriendsRenameInfoModalSeen)
 	end, {})
@@ -45,20 +45,20 @@ return function() --[[ Line: 48 | Named "FriendsRenameInfoModal" ]]
 		introducingConnections = "Feature.Friends.Label.IntroducingConnections",
 		renameInfoText = "Feature.Friends.Label.RenameInfoText"
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 70 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy)
 		UseNavigationResult.pop()
 	end, { UseNavigationResult })
-	local UseResult1 = ReactModule.useCallback(function(Closed, _) --[[ Line: 74 ]]
+	local UseResult1 = ReactModule.useCallback(function(Closed, _)
 		-- upvalues: PeekViewState (upval), UseNavigationResult (copy)
 		if Closed == PeekViewState.Closed or Closed == PeekViewState.Hidden then
 			UseNavigationResult.goBack()
 		end
 	end, { UseNavigationResult })
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p1) --[[ Line: 80 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p1)
 		return p1.getWebViewSupport()
 	end)
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 84 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: FireAnalyticsEventFunction (copy), EventNames (upval), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 		FireAnalyticsEventFunction(EventNames.FriendsRenameLearnMoreClicked)
 		local config = {
@@ -76,7 +76,7 @@ return function() --[[ Line: 48 | Named "FriendsRenameInfoModal" ]]
 		end
 	end, { UseDispatchResult })
 	local IntroducingConnections = UseLocalizationResult.introducingConnections
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 101 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), Text (upval), IntroducingConnections (copy)
 		return ReactModule.createElement(Text, {
 			LayoutOrder = 1,
@@ -84,7 +84,7 @@ return function() --[[ Line: 48 | Named "FriendsRenameInfoModal" ]]
 			Text = IntroducingConnections
 		})
 	end, { IntroducingConnections })
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 109 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: ReactModule (upval), View (upval), IsNotUsePreferredInputResultMatch (copy), FriendsRenameModalUnboldText (upval), Text (upval), InputLabel (upval), InputLabelSize (upval), UseLocalizationResult (copy), UseAppPolicyResult (copy), UseResult2 (copy)
 		return ReactModule.createElement(View, {
 			tag = "col size-full-0 auto-y gap-small padding-0",

@@ -22,11 +22,11 @@ local _ = require(SduiCoreSystem.SduiContentTypes)
 local SduiParseHelpersModule = require(SduiCoreSystem.SduiParseHelpers)
 local _ = require(SduiCoreSystem.SduiFocusNavigationTypes)
 
-local function _(Callback) --[[ Line: 44 | Named "withErrorHandling" ]]
+local function _(Callback)
 	-- upvalues: CryoModule (copy), SduiParseHelpersModule (copy), SduiErrorType (copy)
-	return function(p1, p2, p3, p4) --[[ Line: 45 ]]
+	return function(p1, p2, p3, p4)
 		-- upvalues: Callback (copy), CryoModule (upval), SduiParseHelpersModule (upval), SduiErrorType (upval)
-		local Success, Result = pcall(function() --[[ Line: 46 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Callback (upval), p1 (copy), p2 (copy), p3 (copy), p4 (copy)
 			return Callback(p1, p2, p3, p4)
 		end)
@@ -41,7 +41,7 @@ local function _(Callback) --[[ Line: 44 | Named "withErrorHandling" ]]
 	end
 end
 
-local function parseFoundationTokenHelper(Text: string, ValueType, ParserName, p1) --[[ Line: 80 ]]
+local function parseFoundationTokenHelper(Text: string, ValueType, ParserName, p1)
 	-- upvalues: GetSduiTokensStoreModule (copy)
 	local ValueType1 = typeof(Text)
 	
@@ -81,27 +81,27 @@ local function parseFoundationTokenHelper(Text: string, ValueType, ParserName, p
 	return Tokens
 end
 
-local function parseNumberToken(p2, p3, _, _) --[[ Line: 121 ]]
+local function parseNumberToken(p2, p3, _, _)
 	-- upvalues: parseFoundationTokenHelper (copy)
 	return (parseFoundationTokenHelper(p2, "number", "parseNumberToken", p3))
 end
 
-local function parseTypographyToken(p2, p3, _, _) --[[ Line: 130 ]]
+local function parseTypographyToken(p2, p3, _, _)
 	-- upvalues: parseFoundationTokenHelper (copy)
 	return (parseFoundationTokenHelper(p2, "table", "parseTypographyToken", p3))
 end
 
-local function parseFontFromTypographyToken(p2, p3, _, _) --[[ Line: 139 ]]
+local function parseFontFromTypographyToken(p2, p3, _, _)
 	-- upvalues: parseFoundationTokenHelper (copy)
 	return (parseFoundationTokenHelper(p2, "EnumItem", "parseFontFromTypographyToken", p3))
 end
 
-local function parseColorToken(p2, p3, _, _) --[[ Line: 148 ]]
+local function parseColorToken(p2, p3, _, _)
 	-- upvalues: parseFoundationTokenHelper (copy)
 	return (parseFoundationTokenHelper(p2, "table", "parseColorToken", p3))
 end
 
-local function parseLuaTableEnumHelper(p2, ValueType, FocusNavigationEventNameEnum, List) --[[ Line: 157 ]]
+local function parseLuaTableEnumHelper(p2, ValueType, FocusNavigationEventNameEnum, List)
 	local ValueType1 = typeof(p2)
 	
 	if ValueType1 == ValueType and List[p2] then
@@ -131,20 +131,20 @@ end
 
 local t = {}
 
-local _ = function(List, p3) --[[ Line: 195 | Named "makeLuaTableEnumParser" ]]
+local _ = function(List, p3)
 	-- upvalues: parseLuaTableEnumHelper (copy)
 	local t = {}
 	
 	for _, value in List do
 		t[value] = true
 	end
-	return function(p4, _, _, _) --[[ Line: 200 ]]
+	return function(p4, _, _, _)
 		-- upvalues: parseLuaTableEnumHelper (upval), p3 (copy), List (copy), t (copy)
 		return parseLuaTableEnumHelper(p4, p3, List, t)
 	end
 end
 
-local function parseEngineEnumHelper(p4, KeyCode) --[[ Line: 217 ]]
+local function parseEngineEnumHelper(p4, KeyCode)
 	if typeof(p4) == "EnumItem" then
 		return p4
 	end
@@ -154,7 +154,7 @@ local function parseEngineEnumHelper(p4, KeyCode) --[[ Line: 217 ]]
 			message = `Invalid input type Engine Enum value. Expect string. received {p4}`
 		})
 	end
-	local Success, Result = pcall(function() --[[ Line: 228 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: KeyCode (copy), p4 (copy)
 		return KeyCode[p4]
 	end)
@@ -168,21 +168,21 @@ end
 
 local t1 = {}
 
-local _ = function(p4) --[[ Line: 244 | Named "makeEngineEnumParser" ]]
+local _ = function(p4)
 	-- upvalues: parseEngineEnumHelper (copy)
-	return function(p5, _, _, _) --[[ Line: 245 ]]
+	return function(p5, _, _, _)
 		-- upvalues: parseEngineEnumHelper (upval), p4 (copy)
 		return parseEngineEnumHelper(p5, p4)
 	end
 end
 
-local function parseUDim2(Entry, _, _, _) --[[ Line: 265 ]]
+local function parseUDim2(Entry, _, _, _)
 	local ValueType = typeof(Entry)
 	
 	if ValueType == "UDim2" then
 		return Entry
 	end
-	local Success, Result = pcall(function(): UDim2? --[[ Line: 276 ]]
+	local Success, Result = pcall(function(): UDim2?
 		-- upvalues: ValueType (copy), Entry (copy)
 		if ValueType == "string" then
 			local Parts = string.split(Entry, ",")
@@ -217,13 +217,13 @@ local function parseUDim2(Entry, _, _, _) --[[ Line: 265 ]]
 	end
 end
 
-local function parseUDim(Entry, _, _, _) --[[ Line: 315 ]]
+local function parseUDim(Entry, _, _, _)
 	local ValueType = typeof(Entry)
 	
 	if ValueType == "UDim" then
 		return Entry
 	end
-	local Success, Result = pcall(function(): UDim? --[[ Line: 326 ]]
+	local Success, Result = pcall(function(): UDim?
 		-- upvalues: ValueType (copy), Entry (copy)
 		if ValueType == "string" then
 			local Parts = string.split(Entry, ",")
@@ -260,17 +260,17 @@ local function parseUDim(Entry, _, _, _) --[[ Line: 315 ]]
 	end
 end
 
-local function parseColor3(EndColor, p4, p5, p6) --[[ Line: 357 ]]
+local function parseColor3(EndColor, p4, p5, p6)
 	-- upvalues: parseFoundationTokenHelper (copy)
 	local ValueType = typeof(EndColor)
 	
 	if ValueType == "Color3" then
 		return EndColor
 	end
-	local Success, Result = pcall(function() --[[ Line: 368 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: ValueType (copy), EndColor (copy), p4 (copy), p5 (copy), p6 (copy), parseFoundationTokenHelper (upval)
 		if ValueType == "string" then
-			local Success, Result = pcall(function(): Color3 --[[ Line: 371 ]]
+			local Success, Result = pcall(function(): Color3
 				-- upvalues: EndColor (upval)
 				return Color3.fromHex(EndColor)
 			end)
@@ -278,7 +278,7 @@ local function parseColor3(EndColor, p4, p5, p6) --[[ Line: 357 ]]
 			if Success and Result then
 				return Result
 			end
-			local Success1, Result1 = pcall(function() --[[ Line: 381 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: EndColor (upval), p4 (upval), p5 (upval), p6 (upval), parseFoundationTokenHelper (upval)
 				return (parseFoundationTokenHelper(EndColor, "table", "parseColorToken", p4))
 			end)
@@ -316,11 +316,11 @@ local config = {
 	endColor = _Color3
 }
 
-local function isValidGradient(p7): boolean --[[ Line: 419 ]]
+local function isValidGradient(p7): boolean
 	return typeof(p7) == "table" and (typeof(p7.startColor) == "Color3" and (typeof(p7.endColor) == "Color3" and (typeof(p7.startOpacity) == "number" and (typeof(p7.endOpacity) == "number" and typeof(p7.degree) == "number"))))
 end
 
-local function parseGradient(p7, p8, p9, p10) --[[ Line: 443 ]]
+local function parseGradient(p7, p8, p9, p10)
 	-- upvalues: isValidGradient (copy), parseColor3 (copy), config (copy)
 	local ValueType = typeof(p7)
 	
@@ -335,7 +335,7 @@ local function parseGradient(p7, p8, p9, p10) --[[ Line: 443 ]]
 	local Result = nil
 	if p7.startColor then
 		local Success
-		Success, Result = pcall(function() --[[ Line: 463 ]]
+		Success, Result = pcall(function()
 			-- upvalues: parseColor3 (upval), p7 (copy), p8 (copy), p9 (copy), p10 (copy)
 			return parseColor3(p7.startColor, p8, p9, p10)
 		end)
@@ -352,7 +352,7 @@ local function parseGradient(p7, p8, p9, p10) --[[ Line: 443 ]]
 	local Result1 = nil
 	if p7.endColor then
 		local Success1
-		Success1, Result1 = pcall(function() --[[ Line: 478 ]]
+		Success1, Result1 = pcall(function()
 			-- upvalues: parseColor3 (upval), p7 (copy), p8 (copy), p9 (copy), p10 (copy)
 			return parseColor3(p7.endColor, p8, p9, p10)
 		end)
@@ -414,14 +414,14 @@ local config1 = {
 	icons = true
 }
 
-local _ = function(Text: string): boolean --[[ Line: 552 | Named "isValidIconString" ]]
+local _ = function(Text: string): boolean
 	-- upvalues: config1 (copy)
 	local Parts = Text:split("/")
 	
 	return if Parts and #Parts > 1 and config1[Parts[1]] then true else false
 end
 
-local function parseIcon(Image, _, _, _) --[[ Line: 565 ]]
+local function parseIcon(Image, _, _, _)
 	-- upvalues: GetImageDataFunction (copy), Images (copy)
 	local v1 = nil
 	
@@ -430,7 +430,7 @@ local function parseIcon(Image, _, _, _) --[[ Line: 565 ]]
 	end
 	if typeof(Image) == "string" then
 		local Success
-		Success, v92 = pcall(function() --[[ Line: 575 ]]
+		Success, v92 = pcall(function()
 			-- upvalues: GetImageDataFunction (upval), Image (copy), Images (upval)
 			return GetImageDataFunction(Image) or Images[Image]
 		end)
@@ -451,7 +451,7 @@ local function parseIcon(Image, _, _, _) --[[ Line: 565 ]]
 	return v1
 end
 
-local _ = function(p11): boolean --[[ Line: 608 | Named "isCallableTable" ]]
+local _ = function(p11): boolean
 	if typeof(p11) == "table" then
 		local Meta = getmetatable(p11)
 		
@@ -462,7 +462,7 @@ local _ = function(p11): boolean --[[ Line: 608 | Named "isCallableTable" ]]
 	return false
 end
 
-local function parseCallback(p11, SduiContext, AnalyticsContext, _) --[[ Line: 619 ]]
+local function parseCallback(p11, SduiContext, AnalyticsContext, _)
 	-- upvalues: GetSduiActionHandlerRegistryModule (copy), ExecuteActionModule (copy), SduiErrorsModule (copy)
 	local v2 = nil
 	local Flag = nil
@@ -502,7 +502,7 @@ local function parseCallback(p11, SduiContext, AnalyticsContext, _) --[[ Line: 6
 		error({
 			parserName = "parseCallback",
 			message = `Could not find action for: {p11} actionType: {ActionType}`,
-			overrideValue = function() --[[ Line: 656 ]]
+			overrideValue = function()
 				-- upvalues: SduiContext (copy), SduiErrorsModule (upval), ActionType (copy)
 				SduiContext.dependencies.logger.reportCounter(SduiErrorsModule.SduiCounterName.ExecutedInvalidAction, { name = ActionType })
 			end
@@ -515,7 +515,7 @@ local function parseCallback(p11, SduiContext, AnalyticsContext, _) --[[ Line: 6
 		sduiContext = SduiContext
 	}
 	setmetatable(config, {
-		__call = function(p12, p13) --[[ Line: 644 ]]
+		__call = function(p12, p13)
 			-- upvalues: ExecuteActionModule (upval), v2 (ref)
 			return ExecuteActionModule(v2, p12.analyticsContext, p12.sduiContext, p13)
 		end
@@ -524,12 +524,12 @@ local function parseCallback(p11, SduiContext, AnalyticsContext, _) --[[ Line: 6
 	return config
 end
 
-local function parseUiComponent(ComponentConfig, SduiContext, ParentAnalyticsContext, Eager) --[[ Line: 715 ]]
+local function parseUiComponent(ComponentConfig, SduiContext, ParentAnalyticsContext, Eager)
 	-- upvalues: SduiBuilderProcessingPhase (copy), SduiBuilderModule (copy), GetSduiComponentWrapperModule (copy), ReactModule (copy)
 	local Success = nil
 	local Result = nil
 	if Eager == SduiBuilderProcessingPhase.Eager then
-		Success, Result = pcall(function() --[[ Line: 725 ]]
+		Success, Result = pcall(function()
 			-- upvalues: ComponentConfig (copy), SduiBuilderModule (upval), SduiContext (copy), ParentAnalyticsContext (copy)
 			if typeof(ComponentConfig) ~= "table" then
 				error(`Invalid input type {typeof(ComponentConfig)}`)
@@ -543,7 +543,7 @@ local function parseUiComponent(ComponentConfig, SduiContext, ParentAnalyticsCon
 			end
 		end)
 	else
-		Success, Result = pcall(function() --[[ Line: 743 ]]
+		Success, Result = pcall(function()
 			-- upvalues: ComponentConfig (copy), GetSduiComponentWrapperModule (upval), ReactModule (upval), SduiContext (copy), ParentAnalyticsContext (copy)
 			if typeof(ComponentConfig) == "table" then
 				return ReactModule.createElement(GetSduiComponentWrapperModule(ComponentConfig), {
@@ -567,13 +567,13 @@ local function parseUiComponent(ComponentConfig, SduiContext, ParentAnalyticsCon
 	end
 end
 
-local function parseVector2(Entry, _, _, _) --[[ Line: 770 ]]
+local function parseVector2(Entry, _, _, _)
 	local ValueType = typeof(Entry)
 	
 	if ValueType == "Vector2" then
 		return Entry
 	end
-	local Success, Result = pcall(function(): Vector2? --[[ Line: 781 ]]
+	local Success, Result = pcall(function(): Vector2?
 		-- upvalues: ValueType (copy), Entry (copy)
 		if ValueType == "string" then
 			local Parts = string.split(Entry, ",")
@@ -608,7 +608,7 @@ local function parseVector2(Entry, _, _, _) --[[ Line: 770 ]]
 	end
 end
 
-local function parseNumber(p12, p13, p14, p15) --[[ Line: 809 ]]
+local function parseNumber(p12, p13, p14, p15)
 	-- upvalues: parseFoundationTokenHelper (copy)
 	local ValueType = typeof(p12)
 	
@@ -623,13 +623,13 @@ local function parseNumber(p12, p13, p14, p15) --[[ Line: 809 ]]
 		
 		return
 	end
-	local Success, Result = pcall(function(): number --[[ Line: 819 ]]
+	local Success, Result = pcall(function(): number
 		-- upvalues: p12 (copy)
 		return (tonumber(p12))
 	end)
 	
 	if not Success or Result == nil then
-		Success, Result = pcall(function() --[[ Line: 825 ]]
+		Success, Result = pcall(function()
 			-- upvalues: p12 (copy), p13 (copy), p14 (copy), p15 (copy), parseFoundationTokenHelper (upval)
 			return (parseFoundationTokenHelper(p12, "number", "parseNumberToken", p13))
 		end)
@@ -644,7 +644,7 @@ local function parseNumber(p12, p13, p14, p15) --[[ Line: 809 ]]
 	end
 end
 
-local function parseInteger(p16, _, _, _) --[[ Line: 845 ]]
+local function parseInteger(p16, _, _, _)
 	local ValueType = typeof(p16)
 	
 	if ValueType == "number" then
@@ -658,7 +658,7 @@ local function parseInteger(p16, _, _, _) --[[ Line: 845 ]]
 		
 		return
 	end
-	local Success, Result = pcall(function(): number --[[ Line: 855 ]]
+	local Success, Result = pcall(function(): number
 		-- upvalues: p16 (copy)
 		return (tonumber(p16))
 	end)
@@ -680,7 +680,7 @@ local function parseInteger(p16, _, _, _) --[[ Line: 845 ]]
 	return Result
 end
 
-local function parseBoolean(Text: string, _, _, _) --[[ Line: 883 ]]
+local function parseBoolean(Text: string, _, _, _)
 	local ValueType = typeof(Text)
 	
 	if ValueType == "boolean" then
@@ -721,7 +721,7 @@ local function parseBoolean(Text: string, _, _, _) --[[ Line: 883 ]]
 	end
 end
 
-local function parseString(p17, _, _, _) --[[ Line: 921 ]]
+local function parseString(p17, _, _, _)
 	local ValueType = typeof(p17)
 	
 	if ValueType == "string" then
@@ -736,7 +736,7 @@ local function parseString(p17, _, _, _) --[[ Line: 921 ]]
 	end
 end
 
-local function parseImageString(Text: string, _, _, _): string --[[ Line: 942 ]]
+local function parseImageString(Text: string, _, _, _): string
 	-- upvalues: SduiResponsiveHelpersModule (copy)
 	local ValueType = typeof(Text)
 	
@@ -793,7 +793,7 @@ local function parseImageString(Text: string, _, _, _): string --[[ Line: 942 ]]
 	return RbxthumbName
 end
 
-local function parseImageSetOrImage(Text: string, p18, p19, p20) --[[ Line: 1018 ]]
+local function parseImageSetOrImage(Text: string, p18, p19, p20)
 	-- upvalues: config1 (copy), parseIcon (copy), parseImageString (copy)
 	local ValueType = typeof(Text)
 	
@@ -812,7 +812,7 @@ local function parseImageSetOrImage(Text: string, p18, p19, p20) --[[ Line: 1018
 	return if v4 then parseIcon(Text, p18, p19, p20) else parseImageString(Text, p18, p19, p20)
 end
 
-local function isValidFocusNavActions(p21): boolean --[[ Line: 1040 ]]
+local function isValidFocusNavActions(p21): boolean
 	-- upvalues: FocusNavigationEventNameEnum (copy)
 	if typeof(p21) ~= "table" then
 		return false
@@ -857,7 +857,7 @@ local function isValidFocusNavActions(p21): boolean --[[ Line: 1040 ]]
 	return Flag or (Flag1 or false)
 end
 
-local function parseFocusNavActions(p22, SduiContext, AnalyticsContext, p23) --[[ Line: 1098 ]]
+local function parseFocusNavActions(p22, SduiContext, AnalyticsContext, p23)
 	-- upvalues: isValidFocusNavActions (copy), FocusNavigationEventNameEnum (copy), t (copy), parseLuaTableEnumHelper (copy), t1 (copy), parseEngineEnumHelper (copy), InputHandlersModule (copy), parseCallback (copy)
 	if isValidFocusNavActions(p22) then
 		return p22
@@ -871,7 +871,7 @@ local function parseFocusNavActions(p22, SduiContext, AnalyticsContext, p23) --[
 		})
 	end
 	assert(typeof(p22) == "table", "input must be table")
-	local Success, Result = pcall(function() --[[ Line: 1117 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: FocusNavigationEventNameEnum (upval), t (upval), parseLuaTableEnumHelper (upval), p22 (copy), ValueType (copy), t1 (upval), parseEngineEnumHelper (upval), SduiContext (copy), AnalyticsContext (copy), p23 (copy), InputHandlersModule (upval), parseCallback (upval)
 		if t[FocusNavigationEventNameEnum] == nil then
 			local t2 = {}
@@ -881,7 +881,7 @@ local function parseFocusNavActions(p22, SduiContext, AnalyticsContext, p23) --[
 			end
 			local v5 = "string"
 			
-			t[FocusNavigationEventNameEnum] = function(p24, _, _, _) --[[ Line: 200 ]]
+			t[FocusNavigationEventNameEnum] = function(p24, _, _, _)
 				-- upvalues: parseLuaTableEnumHelper (upval), v5 (copy), FocusNavigationEventNameEnum (copy), t2 (copy)
 				return parseLuaTableEnumHelper(p24, v5, FocusNavigationEventNameEnum, t2)
 			end
@@ -902,7 +902,7 @@ local function parseFocusNavActions(p22, SduiContext, AnalyticsContext, p23) --[
 			local KeyCode = Enum.KeyCode
 			
 			if t1[KeyCode] == nil then
-				t1[KeyCode] = function(p24, _, _, _) --[[ Line: 245 ]]
+				t1[KeyCode] = function(p24, _, _, _)
 					-- upvalues: parseEngineEnumHelper (upval), KeyCode (copy)
 					return parseEngineEnumHelper(p24, KeyCode)
 				end
@@ -973,15 +973,15 @@ return {
 	parseIconProp_ = parseIcon,
 	parseImageStringProp_ = parseImageString,
 	parseIntegerProp_ = parseInteger,
-	parseLazyCallbackProp_ = function(p24, _, _, _) --[[ Line: 666 ]]
+	parseLazyCallbackProp_ = function(p24, _, _, _)
 		return p24
 	end,
-	parseLazyUiComponentProp_ = function(p24, p25, p26, Eager) --[[ Line: 676 ]]
+	parseLazyUiComponentProp_ = function(p24, p25, p26, Eager)
 		-- upvalues: SduiBuilderProcessingPhase (copy), SduiBuilderModule (copy)
 		if Eager ~= SduiBuilderProcessingPhase.Eager then
 			return p24
 		end
-		local Success, Result = pcall(function() --[[ Line: 684 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p24 (copy), SduiBuilderModule (upval), p25 (copy), p26 (copy)
 			if typeof(p24) ~= "table" then
 				error(`Invalid input type {typeof(p24)}`)
@@ -1016,11 +1016,11 @@ return {
 	parseFontFromTypographyTokenProp_ = parseFontFromTypographyToken,
 	parseFocusNavActionsProp_ = parseFocusNavActions,
 	parseImageSetOrImageProp_ = parseImageSetOrImage,
-	getArrayMetatableParser = function(Key) --[[ Line: 1198 ]]
+	getArrayMetatableParser = function(Key)
 		-- upvalues: t2 (copy)
 		if t2[Key] == nil then
 			t2[Key] = setmetatable({}, {
-				__index = function(_, p24) --[[ Line: 1201 ]]
+				__index = function(_, p24)
 					-- upvalues: Key (copy)
 					return if type(p24) == "number" then Key else nil
 				end
@@ -1028,17 +1028,17 @@ return {
 		end
 		return t2[Key]
 	end,
-	getEngineEnumParser = function(Key) --[[ Line: 255 ]]
+	getEngineEnumParser = function(Key)
 		-- upvalues: t1 (copy), parseEngineEnumHelper (copy)
 		if t1[Key] == nil then
-			t1[Key] = function(p24, _, _, _) --[[ Line: 245 ]]
+			t1[Key] = function(p24, _, _, _)
 				-- upvalues: parseEngineEnumHelper (upval), Key (copy)
 				return parseEngineEnumHelper(p24, Key)
 			end
 		end
 		return t1[Key]
 	end,
-	getLuaTableEnumParser = function(Key, p24) --[[ Line: 210 ]]
+	getLuaTableEnumParser = function(Key, p24)
 		-- upvalues: t (copy), parseLuaTableEnumHelper (copy)
 		if t[Key] == nil then
 			local t3 = {}
@@ -1046,14 +1046,14 @@ return {
 			for _, value in Key do
 				t3[value] = true
 			end
-			t[Key] = function(p25, _, _, _) --[[ Line: 200 ]]
+			t[Key] = function(p25, _, _, _)
 				-- upvalues: parseLuaTableEnumHelper (upval), p24 (copy), Key (copy), t3 (copy)
 				return parseLuaTableEnumHelper(p25, p24, Key, t3)
 			end
 		end
 		return t[Key]
 	end,
-	isValidActionConfig = function(p25, _): boolean --[[ Line: 596 ]]
+	isValidActionConfig = function(p25, _): boolean
 		-- upvalues: GetSduiActionHandlerRegistryModule (copy)
 		if typeof(p25) == "table" and typeof(p25.actionType) == "string" then
 			local ActionHandlerConfig = GetSduiActionHandlerRegistryModule().getActionHandlerConfig(p25.actionType)
@@ -1063,14 +1063,14 @@ return {
 			return false
 		end
 	end,
-	isValidImageSet = function(Image): boolean --[[ Line: 530 ]]
+	isValidImageSet = function(Image): boolean
 		return typeof(Image) == "table" and typeof(Image.ImageRectOffset) == "Vector2" and typeof(Image.Image) == "string" and typeof(Image.ImageRectSize) == "Vector2"
 	end,
 	isValidGradient = isValidGradient,
 	isValidFocusNavActions = isValidFocusNavActions,
-	safeParseBoolean = function(p25, p26, p27, p28) --[[ Line: 45 ]]
+	safeParseBoolean = function(p25, p26, p27, p28)
 		-- upvalues: parseBoolean (copy), CryoModule (copy), SduiParseHelpersModule (copy), SduiErrorType (copy)
-		local Success, Result = pcall(function() --[[ Line: 46 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: parseBoolean (upval), p25 (copy), p26 (copy), p27 (copy), p28 (copy)
 			return parseBoolean(p25, p26, p27, p28)
 		end)
@@ -1083,9 +1083,9 @@ return {
 			return if typeof(Result) == "table" then Result.overrideValue else nil
 		end
 	end,
-	safeParseCallback = function(p25, p26, p27, p28) --[[ Line: 45 ]]
+	safeParseCallback = function(p25, p26, p27, p28)
 		-- upvalues: parseCallback (copy), CryoModule (copy), SduiParseHelpersModule (copy), SduiErrorType (copy)
-		local Success, Result = pcall(function() --[[ Line: 46 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: parseCallback (upval), p25 (copy), p26 (copy), p27 (copy), p28 (copy)
 			return parseCallback(p25, p26, p27, p28)
 		end)
@@ -1098,9 +1098,9 @@ return {
 			return if typeof(Result) == "table" then Result.overrideValue else nil
 		end
 	end,
-	safeParseColor3 = function(p25, p26, p27, p28) --[[ Line: 45 ]]
+	safeParseColor3 = function(p25, p26, p27, p28)
 		-- upvalues: parseColor3 (copy), CryoModule (copy), SduiParseHelpersModule (copy), SduiErrorType (copy)
-		local Success, Result = pcall(function() --[[ Line: 46 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: parseColor3 (upval), p25 (copy), p26 (copy), p27 (copy), p28 (copy)
 			return parseColor3(p25, p26, p27, p28)
 		end)
@@ -1113,9 +1113,9 @@ return {
 			return if typeof(Result) == "table" then Result.overrideValue else nil
 		end
 	end,
-	safeParseGradient = function(p25, p26, p27, p28) --[[ Line: 45 ]]
+	safeParseGradient = function(p25, p26, p27, p28)
 		-- upvalues: parseGradient (copy), CryoModule (copy), SduiParseHelpersModule (copy), SduiErrorType (copy)
-		local Success, Result = pcall(function() --[[ Line: 46 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: parseGradient (upval), p25 (copy), p26 (copy), p27 (copy), p28 (copy)
 			return parseGradient(p25, p26, p27, p28)
 		end)
@@ -1128,9 +1128,9 @@ return {
 			return if typeof(Result) == "table" then Result.overrideValue else nil
 		end
 	end,
-	safeParseIcon = function(p25, p26, p27, p28) --[[ Line: 45 ]]
+	safeParseIcon = function(p25, p26, p27, p28)
 		-- upvalues: parseIcon (copy), CryoModule (copy), SduiParseHelpersModule (copy), SduiErrorType (copy)
-		local Success, Result = pcall(function() --[[ Line: 46 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: parseIcon (upval), p25 (copy), p26 (copy), p27 (copy), p28 (copy)
 			return parseIcon(p25, p26, p27, p28)
 		end)
@@ -1143,9 +1143,9 @@ return {
 			return if typeof(Result) == "table" then Result.overrideValue else nil
 		end
 	end,
-	safeParseImageString = function(p25, p26, p27, p28) --[[ Line: 45 ]]
+	safeParseImageString = function(p25, p26, p27, p28)
 		-- upvalues: parseImageString (copy), CryoModule (copy), SduiParseHelpersModule (copy), SduiErrorType (copy)
-		local Success, Result = pcall(function() --[[ Line: 46 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: parseImageString (upval), p25 (copy), p26 (copy), p27 (copy), p28 (copy)
 			return parseImageString(p25, p26, p27, p28)
 		end)
@@ -1158,9 +1158,9 @@ return {
 			return if typeof(Result) == "table" then Result.overrideValue else nil
 		end
 	end,
-	safeParseInteger = function(p25, p26, p27, p28) --[[ Line: 45 ]]
+	safeParseInteger = function(p25, p26, p27, p28)
 		-- upvalues: parseInteger (copy), CryoModule (copy), SduiParseHelpersModule (copy), SduiErrorType (copy)
-		local Success, Result = pcall(function() --[[ Line: 46 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: parseInteger (upval), p25 (copy), p26 (copy), p27 (copy), p28 (copy)
 			return parseInteger(p25, p26, p27, p28)
 		end)
@@ -1173,9 +1173,9 @@ return {
 			return if typeof(Result) == "table" then Result.overrideValue else nil
 		end
 	end,
-	safeParseNumber = function(p25, p26, p27, p28) --[[ Line: 45 ]]
+	safeParseNumber = function(p25, p26, p27, p28)
 		-- upvalues: parseNumber (copy), CryoModule (copy), SduiParseHelpersModule (copy), SduiErrorType (copy)
-		local Success, Result = pcall(function() --[[ Line: 46 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: parseNumber (upval), p25 (copy), p26 (copy), p27 (copy), p28 (copy)
 			return parseNumber(p25, p26, p27, p28)
 		end)
@@ -1188,9 +1188,9 @@ return {
 			return if typeof(Result) == "table" then Result.overrideValue else nil
 		end
 	end,
-	safeParseString = function(p25, p26, p27, p28) --[[ Line: 45 ]]
+	safeParseString = function(p25, p26, p27, p28)
 		-- upvalues: parseString (copy), CryoModule (copy), SduiParseHelpersModule (copy), SduiErrorType (copy)
-		local Success, Result = pcall(function() --[[ Line: 46 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: parseString (upval), p25 (copy), p26 (copy), p27 (copy), p28 (copy)
 			return parseString(p25, p26, p27, p28)
 		end)
@@ -1203,9 +1203,9 @@ return {
 			return if typeof(Result) == "table" then Result.overrideValue else nil
 		end
 	end,
-	safeParseUDim = function(p25, p26, p27, p28) --[[ Line: 45 ]]
+	safeParseUDim = function(p25, p26, p27, p28)
 		-- upvalues: parseUDim (copy), CryoModule (copy), SduiParseHelpersModule (copy), SduiErrorType (copy)
-		local Success, Result = pcall(function() --[[ Line: 46 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: parseUDim (upval), p25 (copy), p26 (copy), p27 (copy), p28 (copy)
 			return parseUDim(p25, p26, p27, p28)
 		end)
@@ -1218,9 +1218,9 @@ return {
 			return if typeof(Result) == "table" then Result.overrideValue else nil
 		end
 	end,
-	safeParseUDim2 = function(p25, p26, p27, p28) --[[ Line: 45 ]]
+	safeParseUDim2 = function(p25, p26, p27, p28)
 		-- upvalues: parseUDim2 (copy), CryoModule (copy), SduiParseHelpersModule (copy), SduiErrorType (copy)
-		local Success, Result = pcall(function() --[[ Line: 46 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: parseUDim2 (upval), p25 (copy), p26 (copy), p27 (copy), p28 (copy)
 			return parseUDim2(p25, p26, p27, p28)
 		end)
@@ -1233,9 +1233,9 @@ return {
 			return if typeof(Result) == "table" then Result.overrideValue else nil
 		end
 	end,
-	safeParseUiComponent = function(p25, p26, p27, p28) --[[ Line: 45 ]]
+	safeParseUiComponent = function(p25, p26, p27, p28)
 		-- upvalues: parseUiComponent (copy), CryoModule (copy), SduiParseHelpersModule (copy), SduiErrorType (copy)
-		local Success, Result = pcall(function() --[[ Line: 46 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: parseUiComponent (upval), p25 (copy), p26 (copy), p27 (copy), p28 (copy)
 			return parseUiComponent(p25, p26, p27, p28)
 		end)
@@ -1248,9 +1248,9 @@ return {
 			return if typeof(Result) == "table" then Result.overrideValue else nil
 		end
 	end,
-	safeParseVector2 = function(p25, p26, p27, p28) --[[ Line: 45 ]]
+	safeParseVector2 = function(p25, p26, p27, p28)
 		-- upvalues: parseVector2 (copy), CryoModule (copy), SduiParseHelpersModule (copy), SduiErrorType (copy)
-		local Success, Result = pcall(function() --[[ Line: 46 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: parseVector2 (upval), p25 (copy), p26 (copy), p27 (copy), p28 (copy)
 			return parseVector2(p25, p26, p27, p28)
 		end)
@@ -1263,9 +1263,9 @@ return {
 			return if typeof(Result) == "table" then Result.overrideValue else nil
 		end
 	end,
-	safeParseNumberToken = function(p25, p26, p27, p28) --[[ Line: 45 ]]
+	safeParseNumberToken = function(p25, p26, p27, p28)
 		-- upvalues: parseNumberToken (copy), CryoModule (copy), SduiParseHelpersModule (copy), SduiErrorType (copy)
-		local Success, Result = pcall(function() --[[ Line: 46 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: parseNumberToken (upval), p25 (copy), p26 (copy), p27 (copy), p28 (copy)
 			return parseNumberToken(p25, p26, p27, p28)
 		end)
@@ -1278,9 +1278,9 @@ return {
 			return if typeof(Result) == "table" then Result.overrideValue else nil
 		end
 	end,
-	safeParseTypographyToken = function(p25, p26, p27, p28) --[[ Line: 45 ]]
+	safeParseTypographyToken = function(p25, p26, p27, p28)
 		-- upvalues: parseTypographyToken (copy), CryoModule (copy), SduiParseHelpersModule (copy), SduiErrorType (copy)
-		local Success, Result = pcall(function() --[[ Line: 46 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: parseTypographyToken (upval), p25 (copy), p26 (copy), p27 (copy), p28 (copy)
 			return parseTypographyToken(p25, p26, p27, p28)
 		end)
@@ -1293,9 +1293,9 @@ return {
 			return if typeof(Result) == "table" then Result.overrideValue else nil
 		end
 	end,
-	safeParseFontFromTypographyToken = function(p25, p26, p27, p28) --[[ Line: 45 ]]
+	safeParseFontFromTypographyToken = function(p25, p26, p27, p28)
 		-- upvalues: parseFontFromTypographyToken (copy), CryoModule (copy), SduiParseHelpersModule (copy), SduiErrorType (copy)
-		local Success, Result = pcall(function() --[[ Line: 46 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: parseFontFromTypographyToken (upval), p25 (copy), p26 (copy), p27 (copy), p28 (copy)
 			return parseFontFromTypographyToken(p25, p26, p27, p28)
 		end)
@@ -1308,9 +1308,9 @@ return {
 			return if typeof(Result) == "table" then Result.overrideValue else nil
 		end
 	end,
-	safeParseColorToken = function(p25, p26, p27, p28) --[[ Line: 45 ]]
+	safeParseColorToken = function(p25, p26, p27, p28)
 		-- upvalues: parseColorToken (copy), CryoModule (copy), SduiParseHelpersModule (copy), SduiErrorType (copy)
-		local Success, Result = pcall(function() --[[ Line: 46 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: parseColorToken (upval), p25 (copy), p26 (copy), p27 (copy), p28 (copy)
 			return parseColorToken(p25, p26, p27, p28)
 		end)
@@ -1323,9 +1323,9 @@ return {
 			return if typeof(Result) == "table" then Result.overrideValue else nil
 		end
 	end,
-	safeParseFocusNavActions = function(p25, p26, p27, p28) --[[ Line: 45 ]]
+	safeParseFocusNavActions = function(p25, p26, p27, p28)
 		-- upvalues: parseFocusNavActions (copy), CryoModule (copy), SduiParseHelpersModule (copy), SduiErrorType (copy)
-		local Success, Result = pcall(function() --[[ Line: 46 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: parseFocusNavActions (upval), p25 (copy), p26 (copy), p27 (copy), p28 (copy)
 			return parseFocusNavActions(p25, p26, p27, p28)
 		end)
@@ -1338,9 +1338,9 @@ return {
 			return if typeof(Result) == "table" then Result.overrideValue else nil
 		end
 	end,
-	safeParseImageSetOrImageProp_ = function(p25, p26, p27, p28) --[[ Line: 45 ]]
+	safeParseImageSetOrImageProp_ = function(p25, p26, p27, p28)
 		-- upvalues: parseImageSetOrImage (copy), CryoModule (copy), SduiParseHelpersModule (copy), SduiErrorType (copy)
-		local Success, Result = pcall(function() --[[ Line: 46 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: parseImageSetOrImage (upval), p25 (copy), p26 (copy), p27 (copy), p28 (copy)
 			return parseImageSetOrImage(p25, p26, p27, p28)
 		end)

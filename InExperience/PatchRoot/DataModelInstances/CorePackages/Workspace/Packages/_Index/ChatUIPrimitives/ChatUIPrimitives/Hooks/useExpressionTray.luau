@@ -15,7 +15,7 @@ local Disabled = SignalsModule.createSignal("disabled")
 local Signal = SignalsModule.createSignal({})
 local t = {}
 
-return function(p1) --[[ Line: 63 | Named "useExpressionTray" ]]
+return function(p1)
 	-- upvalues: UseLayoutModeModule (copy), FFlagExpChatExpressionTrayHostFetchModule (copy), ExpressionCatalogStoreModule (copy), SignalsReactModule (copy), Disabled (copy), Signal (copy), ReactModule (copy), t (copy), ExpressionCooldownStoreModule (copy), UseExpressionTrayControllerModule (copy), PresetChatCooldownLuaMsRatio (copy)
 	local UseLayoutModeModuleResult = UseLayoutModeModule()
 	local FetchExpressionItems = if FFlagExpChatExpressionTrayHostFetchModule and p1 then p1.fetchExpressionItems else nil
@@ -37,7 +37,7 @@ return function(p1) --[[ Line: 63 | Named "useExpressionTray" ]]
 	local CloseFunction = UseExpressionTrayControllerModuleResult.close
 	local UseRefResult = ReactModule.useRef(false)
 	local CanSend = if p1 then p1.canSend else false
-	ReactModule.useEffect(function() --[[ Line: 96 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: CanSend (copy), ExpressionCatalogStoreModule1 (copy), CloseFunction (copy)
 		if not CanSend or ExpressionCatalogStoreModule1 == nil then
 			CloseFunction()
@@ -46,14 +46,14 @@ return function(p1) --[[ Line: 63 | Named "useExpressionTray" ]]
 		end
 		ExpressionCatalogStoreModule1.acquire()
 		
-		return function() --[[ Line: 102 ]]
+		return function()
 			-- upvalues: ExpressionCatalogStoreModule1 (upval)
 			ExpressionCatalogStoreModule1.release()
 		end
 	end, { CanSend, ExpressionCatalogStoreModule1, CloseFunction })
 	
 	if FFlagExpChatExpressionTrayHostFetchModule then
-		ReactModule.useEffect(function() --[[ Line: 111 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: CanSend (copy), FetchExpressionItems (copy), Callback (ref)
 			if not CanSend or FetchExpressionItems == nil then
 				Callback(nil)
@@ -62,7 +62,7 @@ return function(p1) --[[ Line: 63 | Named "useExpressionTray" ]]
 			end
 			local Flag = true
 			Callback(nil)
-			task.spawn(function() --[[ Line: 118 ]]
+			task.spawn(function()
 				-- upvalues: FetchExpressionItems (upval), Flag (ref), Callback (upval)
 				local Success, Result = pcall(FetchExpressionItems)
 				
@@ -73,14 +73,14 @@ return function(p1) --[[ Line: 63 | Named "useExpressionTray" ]]
 				end
 			end)
 			
-			return function() --[[ Line: 125 ]]
+			return function()
 				-- upvalues: Flag (ref)
 				Flag = false
 			end
 		end, { CanSend, FetchExpressionItems })
 	end
 	local OnKeyboardActivated = if p1 then p1.onKeyboardActivated else nil
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 132 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: CloseFunction (copy), OnKeyboardActivated (copy)
 		CloseFunction()
 		
@@ -91,7 +91,7 @@ return function(p1) --[[ Line: 63 | Named "useExpressionTray" ]]
 	local SendExpression = if p1 then p1.sendExpression else nil
 	local CooldownKeyForContent = if p1 then p1.cooldownKeyForContent else nil
 	local CooldownDurationSeconds = if p1 and p1.cooldownDurationSeconds ~= nil then p1.cooldownDurationSeconds else PresetChatCooldownLuaMsRatio
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 144 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: SendExpression (copy), CooldownKeyForContent (copy), ExpressionCooldownStoreModule (upval), UseRefResult (copy), CooldownDurationSeconds (copy), CloseFunction (copy)
 		if SendExpression == nil then return end
 		local Kind = if CooldownKeyForContent == nil then p2.kind else CooldownKeyForContent(p2)
@@ -108,7 +108,7 @@ return function(p1) --[[ Line: 63 | Named "useExpressionTray" ]]
 			ExpressionCooldownStoreModule.startCooldown(Kind, os.clock() + CooldownDurationSeconds)
 		end
 		CloseFunction()
-		task.spawn(function() --[[ Line: 166 ]]
+		task.spawn(function()
 			-- upvalues: SendExpression (upval), p2 (copy), UseRefResult (upval), Kind (copy), ExpressionCooldownStoreModule (upval)
 			UseRefResult.current = false
 			
@@ -125,7 +125,7 @@ return function(p1) --[[ Line: 63 | Named "useExpressionTray" ]]
 	local OnOpenChanged = if p1 then p1.onOpenChanged else nil
 	local IsVisible: boolean = CanSend and (UseSignalStateResult == "enabled" and #UseSignalStateResult1 > 0)
 	local IsVisible1: boolean = UseExpressionTrayControllerModuleResult.isOpen and IsVisible
-	ReactModule.useEffect(function() --[[ Line: 180 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: OnOpenChanged (copy), IsVisible1 (copy)
 		if OnOpenChanged then
 			OnOpenChanged(IsVisible1)

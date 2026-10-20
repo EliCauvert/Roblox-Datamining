@@ -2,7 +2,7 @@
 local ChatSettingsModule = require(ClientChatModules:WaitForChild("ChatSettings"))
 local ChatConstantsModule = require(ClientChatModules:WaitForChild("ChatConstants"))
 local ChatLocalizationModule = nil
-pcall(function() --[[ Line: 13 ]]
+pcall(function()
 	-- upvalues: ChatLocalizationModule (ref)
 	ChatLocalizationModule = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
@@ -11,7 +11,7 @@ if ChatLocalizationModule == nil then
 	ChatLocalizationModule = {}
 end
 if not ChatLocalizationModule.FormatMessageToSend or not ChatLocalizationModule.LocalizeFormattedMessage then
-	function ChatLocalizationModule:FormatMessageToSend(_, Formatted) --[[ Line: 16 ]]
+	function ChatLocalizationModule:FormatMessageToSend(_, Formatted)
 		return Formatted
 	end
 end
@@ -19,7 +19,7 @@ local config = {
 	ChatColor = ChatSettingsModule.ErrorMessageTextColor or Color3.fromRGB(245, 50, 50)
 }
 
-return function(p1) --[[ Line: 22 | Named "Run" ]]
+return function(p1)
 	-- upvalues: ChatLocalizationModule (ref), ChatConstantsModule (copy), config (copy), ChatSettingsModule (copy)
 	local Players = game:GetService("Players")
 	local Team = p1:AddChannel("Team")
@@ -28,7 +28,7 @@ return function(p1) --[[ Line: 22 | Named "Run" ]]
 	Team.Leavable = false
 	Team.AutoJoin = false
 	Team.Private = true
-	Team:RegisterProcessCommandsFunction("replication_function", function(p2, p3, p4): boolean --[[ Line: 33 | Named "TeamChatReplicationFunction" ]]
+	Team:RegisterProcessCommandsFunction("replication_function", function(p2, p3, p4): boolean
 		-- upvalues: p1 (copy)
 		local Speaker = p1:GetSpeaker(p2)
 		local Channel = p1:GetChannel(p4)
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 22 | Named "Run" ]]
 		return true
 	end, ChatConstantsModule.LowPriority)
 	
-	local function DoTeamCommand(p5, Text: string, p6) --[[ Line: 70 ]]
+	local function DoTeamCommand(p5, Text: string, p6)
 		-- upvalues: p1 (copy), ChatLocalizationModule (upval), config (upval)
 		if Text == nil then
 			Text = ""
@@ -88,7 +88,7 @@ return function(p1) --[[ Line: 22 | Named "Run" ]]
 		end
 	end
 	
-	p1:RegisterProcessCommandsFunction("team_commands", function(p5, Text: string, p6): boolean --[[ Line: 99 | Named "TeamCommandsFunction" ]]
+	p1:RegisterProcessCommandsFunction("team_commands", function(p5, Text: string, p6): boolean
 		-- upvalues: DoTeamCommand (copy)
 		local Flag = false
 		
@@ -117,12 +117,12 @@ return function(p1) --[[ Line: 22 | Named "Run" ]]
 		return Flag
 	end, ChatConstantsModule.StandardPriority)
 	
-	local function GetDefaultChannelNameColor() --[[ Line: 126 ]]
+	local function GetDefaultChannelNameColor()
 		-- upvalues: ChatSettingsModule (upval)
 		return if ChatSettingsModule.DefaultChannelNameColor then ChatSettingsModule.DefaultChannelNameColor else Color3.fromRGB(35, 76, 142)
 	end
 	
-	local function PutSpeakerInCorrectTeamChatState(Speaker, Player: Player) --[[ Line: 133 ]]
+	local function PutSpeakerInCorrectTeamChatState(Speaker, Player: Player)
 		-- upvalues: Team (copy), GetDefaultChannelNameColor (copy)
 		if Player.Neutral or Player.Team == nil then
 			Speaker:UpdateChannelNameColor(Team.Name, GetDefaultChannelNameColor())
@@ -141,7 +141,7 @@ return function(p1) --[[ Line: 22 | Named "Run" ]]
 		end
 	end
 	
-	p1.SpeakerAdded:connect(function(p5) --[[ Line: 149 ]]
+	p1.SpeakerAdded:connect(function(p5)
 		-- upvalues: p1 (copy), PutSpeakerInCorrectTeamChatState (copy)
 		local Speaker = p1:GetSpeaker(p5)
 		
@@ -154,9 +154,9 @@ return function(p1) --[[ Line: 22 | Named "Run" ]]
 		end
 	end)
 	local ChangedConnections = {}
-	Players.PlayerAdded:connect(function(Player: Player) --[[ Line: 160 ]]
+	Players.PlayerAdded:connect(function(Player: Player)
 		-- upvalues: p1 (copy), PutSpeakerInCorrectTeamChatState (copy), Team (copy), ChatLocalizationModule (upval), ChangedConnections (copy)
-		ChangedConnections[Player] = Player.Changed:connect(function(p5) --[[ Line: 161 ]]
+		ChangedConnections[Player] = Player.Changed:connect(function(p5)
 			-- upvalues: p1 (upval), Player (copy), PutSpeakerInCorrectTeamChatState (upval), Team (upval), ChatLocalizationModule (upval)
 			local Speaker = p1:GetSpeaker(Player.Name)
 			
@@ -176,7 +176,7 @@ return function(p1) --[[ Line: 22 | Named "Run" ]]
 			end
 		end)
 	end)
-	Players.PlayerRemoving:connect(function(Player) --[[ Line: 182 ]]
+	Players.PlayerRemoving:connect(function(Player)
 		-- upvalues: ChangedConnections (copy)
 		local ChangedConnection = ChangedConnections[Player]
 		

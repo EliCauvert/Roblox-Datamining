@@ -1,7 +1,7 @@
 ﻿local SliderStepDirectionModule = require(script.Parent.SliderStepDirection)
 local SliderStepSizeModule = require(script.Parent.SliderStepSize)
 
-return function(p1, Increment, p2, p3: number, Page): number --[[ Line: 11 | Named "calculateAdjacentStepValue" ]]
+return function(p1, Increment, p2, p3: number, Page): number
 	-- upvalues: SliderStepDirectionModule (copy), SliderStepSizeModule (copy)
 	local MaxDelta = p2.Max - p2.Min
 	local IsIncrementMatch = Increment == SliderStepDirectionModule.Increment

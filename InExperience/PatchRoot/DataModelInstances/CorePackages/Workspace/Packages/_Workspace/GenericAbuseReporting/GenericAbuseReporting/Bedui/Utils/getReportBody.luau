@@ -4,10 +4,10 @@ local _ = require(GenericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes)
 local AbuseCategoryModule = require(GenericAbuseReporting.Enums.AbuseCategory)
 local _ = require(GenericAbuseReporting.Enums.AbuseVector)
 
-return function(p1) --[[ Line: 28 ]]
+return function(p1)
 	-- upvalues: DashModule (copy), AbuseCategoryModule (copy)
 	local TagValues = {}
-	DashModule.forEach(p1.additionalReportTags or {}, function(p2) --[[ Line: 38 ]]
+	DashModule.forEach(p1.additionalReportTags or {}, function(p2)
 		-- upvalues: TagValues (copy)
 		if not p2.tagKey or p2.tagKey == "" or not p2.tagValue or p2.tagValue == "" then return end
 		if TagValues[p2.tagKey] == nil then

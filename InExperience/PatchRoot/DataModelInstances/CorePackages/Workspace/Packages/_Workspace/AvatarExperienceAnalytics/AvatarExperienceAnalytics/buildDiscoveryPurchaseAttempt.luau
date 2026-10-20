@@ -4,7 +4,7 @@ local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.U
 local MutedErrorFunction = require(Parent.Loggers).mutedError
 local SendAXCounterV2Module = require(script.Parent.sendAXCounterV2)
 
-return function(p1) --[[ Line: 27 | Named "buildDiscoveryPurchaseAttempt" ]]
+return function(p1)
 	-- upvalues: UnifiedLoggingSurface (copy), MutedErrorFunction (copy), SendAXCounterV2Module (copy), UnifiedEventLogEnumsModule (copy)
 	local Surface = p1.surface
 	

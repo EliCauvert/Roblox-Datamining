@@ -4,7 +4,7 @@ local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SduiActionType = SduiCoreSystemModule.SduiActionType
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 
-return function(p1, _, p2, _) --[[ Line: 13 ]]
+return function(p1, _, p2, _)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), OpenSongDetailFunction (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	

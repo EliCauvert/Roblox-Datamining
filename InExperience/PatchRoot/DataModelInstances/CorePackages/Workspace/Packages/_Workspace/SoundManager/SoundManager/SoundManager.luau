@@ -18,14 +18,14 @@ local config = {
 }
 local HeartbeatConnections = {}
 
-local function fadeVolume(Sound: Sound, FadeInTime: number, Volume, Text) --[[ Line: 36 ]]
+local function fadeVolume(Sound: Sound, FadeInTime: number, Volume, Text)
 	-- upvalues: HeartbeatConnections (copy), RunService (copy)
 	if FadeInTime < 0 then
 		error(Text .. " cannot have a negative fadeIn/fadeOut time.")
 	end
 	local VolumeRatio = (Volume - Sound.Volume) / FadeInTime
 	
-	local function onHeartBeat(DeltaTime) --[[ Line: 45 ]]
+	local function onHeartBeat(DeltaTime)
 		-- upvalues: VolumeRatio (copy), Sound (copy), HeartbeatConnections (upval), Volume (copy)
 		local NewVolume = Sound.Volume + VolumeRatio * DeltaTime
 		
@@ -52,7 +52,7 @@ local function fadeVolume(Sound: Sound, FadeInTime: number, Volume, Text) --[[ L
 	HeartbeatConnections[Sound.SoundId] = RunService.Heartbeat:Connect(onHeartBeat)
 end
 
-function SoundManager:_createSoundEffect(Type, Name, Properties, Parent) --[[ Line: 76 ]]
+function SoundManager:_createSoundEffect(Type, Name, Properties, Parent)
 	-- upvalues: SoundEffectsModule (copy)
 	if not SoundEffectsModule[Type] then
 		error(Type .. " does not exist in list of SoundEffects")
@@ -66,7 +66,7 @@ function SoundManager:_createSoundEffect(Type, Name, Properties, Parent) --[[ Li
 	NewInstance.Name = Name
 end
 
-function SoundManager.PlaySound(p1, Text, p2, p3) --[[ Line: 107 ]]
+function SoundManager.PlaySound(p1, Text, p2, p3)
 	-- upvalues: RobloxGui (copy), SoundsModule (copy), CryoModule (copy), config (copy), fadeVolume (copy)
 	local SoundManagerSounds = RobloxGui:FindFirstChild("SoundManager_Sounds")
 	
@@ -112,7 +112,7 @@ function SoundManager.PlaySound(p1, Text, p2, p3) --[[ Line: 107 ]]
 	Name:Play()
 end
 
-function SoundManager:StopSound(Text) --[[ Line: 168 ]]
+function SoundManager:StopSound(Text)
 	-- upvalues: RobloxGui (copy), SoundsModule (copy), fadeVolume (copy)
 	local SoundManagerSounds = RobloxGui:FindFirstChild("SoundManager_Sounds")
 	
@@ -145,7 +145,7 @@ function SoundManager:StopSound(Text) --[[ Line: 168 ]]
 	end
 end
 
-function SoundManager.CreateSoundGroup(p4, ChildName) --[[ Line: 202 ]]
+function SoundManager.CreateSoundGroup(p4, ChildName)
 	-- upvalues: SoundGroupsModule (copy), RobloxGui (copy)
 	local SoundGroupsModuleEntry = SoundGroupsModule[ChildName]
 	
@@ -176,7 +176,7 @@ function SoundManager.CreateSoundGroup(p4, ChildName) --[[ Line: 202 ]]
 	end
 end
 
-function SoundManager.SoundGroupAddSoundEffect(p5, ChildName, p6) --[[ Line: 236 ]]
+function SoundManager.SoundGroupAddSoundEffect(p5, ChildName, p6)
 	-- upvalues: SoundGroupsModule (copy), RobloxGui (copy)
 	if not SoundGroupsModule[ChildName] then
 		error("SoundGroup does not exist in list of SoundGroups")
@@ -206,7 +206,7 @@ function SoundManager.SoundGroupAddSoundEffect(p5, ChildName, p6) --[[ Line: 236
 	end
 end
 
-function SoundManager:SoundGroupRemoveSoundEffect(ChildName, ChildName1) --[[ Line: 269 ]]
+function SoundManager:SoundGroupRemoveSoundEffect(ChildName, ChildName1)
 	-- upvalues: SoundGroupsModule (copy), RobloxGui (copy)
 	local SoundGroupsModuleEntry = SoundGroupsModule[ChildName]
 	
@@ -237,7 +237,7 @@ function SoundManager:SoundGroupRemoveSoundEffect(ChildName, ChildName1) --[[ Li
 	ChildName3:Destroy()
 end
 
-function SoundManager.init() --[[ Line: 300 ]]
+function SoundManager.init()
 	-- upvalues: SoundManager (copy), RobloxGui (copy), SoundManager1 (copy)
 	local self = setmetatable({}, SoundManager)
 	

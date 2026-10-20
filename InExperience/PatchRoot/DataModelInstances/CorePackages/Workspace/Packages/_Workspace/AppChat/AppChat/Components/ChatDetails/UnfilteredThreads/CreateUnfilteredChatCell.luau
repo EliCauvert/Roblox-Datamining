@@ -16,10 +16,10 @@ local config = {
 	subTitleText = "Placeholder subtitle",
 	iconImage = nil,
 	cellHeight = 48,
-	onActivated = function() --[[ Line: 39 ]] end
+	onActivated = function() end
 }
 
-return function(p1) --[[ Line: 44 | Named "CreateUnfilteredChatCell" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseTokensFunction (copy), UseIsInExperienceModule (copy), UseTelemetryModule (copy), ChatDetailsTelemetryLayerModule (copy), UseEffectOnMountFunction (copy), ChatDetailsTelemetryEventsModule (copy), ReactModule (copy), FlexIconWithTextCellModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseStyleResult = UseStyleFunction()
@@ -27,7 +27,7 @@ return function(p1) --[[ Line: 44 | Named "CreateUnfilteredChatCell" ]]
 	local UseTokensResult = UseTokensFunction()
 	local UseIsInExperienceModuleResult = UseIsInExperienceModule()
 	local UseTelemetryModuleResult = UseTelemetryModule(ChatDetailsTelemetryLayerModule.Context)
-	UseEffectOnMountFunction(function() --[[ Line: 52 ]]
+	UseEffectOnMountFunction(function()
 		-- upvalues: UseTelemetryModuleResult (copy), ChatDetailsTelemetryEventsModule (upval)
 		UseTelemetryModuleResult.emit(ChatDetailsTelemetryEventsModule.ChatDetailsCreateUnfilteredChatCellRendered, {})
 	end)

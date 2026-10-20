@@ -14,7 +14,7 @@ local config = {
 	propose_plan = true
 }
 
-local function extractRawFrame(p1) --[[ Line: 37 ]]
+local function extractRawFrame(p1)
 	if typeof(p1) == "string" then
 		return p1
 	end
@@ -38,7 +38,7 @@ local function extractRawFrame(p1) --[[ Line: 37 ]]
 	return nil
 end
 
-local function _(p2) --[[ Line: 53 | Named "normalizeUniverseId" ]]
+local function _(p2)
 	if typeof(p2) == "number" and p2 ~= 0 then
 		return p2
 	elseif typeof(p2) == "string" and p2 ~= "" then
@@ -50,7 +50,7 @@ local function _(p2) --[[ Line: 53 | Named "normalizeUniverseId" ]]
 	end
 end
 
-local _ = function(p2) --[[ Line: 64 | Named "getUniverseId" ]]
+local _ = function(p2)
 	local UniverseId = p2.universeId
 	local UniverseId1 = nil
 	
@@ -83,12 +83,12 @@ local _ = function(p2) --[[ Line: 64 | Named "getUniverseId" ]]
 	end
 end
 
-local _ = function(Text: string): boolean --[[ Line: 77 | Named "valueLooksLikeLocalTool" ]]
+local _ = function(Text: string): boolean
 	-- upvalues: config (copy)
 	return typeof(Text) == "string" and config[string.lower(Text)] == true
 end
 
-local _ = function(p2): boolean --[[ Line: 81 | Named "updateLooksLikeLocalTool" ]]
+local _ = function(p2): boolean
 	-- upvalues: config (copy)
 	local Kind: string = p2.kind
 	
@@ -114,7 +114,7 @@ local _ = function(p2): boolean --[[ Line: 81 | Named "updateLooksLikeLocalTool"
 	return true
 end
 
-local function getSessionUpdate(p2) --[[ Line: 94 ]]
+local function getSessionUpdate(p2)
 	-- upvalues: AcpProtocolModule (copy)
 	if p2.kind ~= "notification" then
 		return nil, nil, nil, nil
@@ -166,7 +166,7 @@ local function getSessionUpdate(p2) --[[ Line: 94 ]]
 	return Update, SessionId, UniverseId2, Params.pinForBuild == true
 end
 
-local function classifyFrame(p2) --[[ Line: 114 ]]
+local function classifyFrame(p2)
 	-- upvalues: getSessionUpdate (copy), FFlagBuildExperiencePinForBuild (copy), FFlagCreatorAgentChatFilterTerminalClientToolsModule (copy), config (copy)
 	local SessionUpdate, SessionUpdate2, SessionUpdate3, SessionUpdate4 = getSessionUpdate(p2)
 	
@@ -225,7 +225,7 @@ local function classifyFrame(p2) --[[ Line: 114 ]]
 	return nil
 end
 
-local function getResumeDeepLink(p2): string --[[ Line: 186 ]]
+local function getResumeDeepLink(p2): string
 	-- upvalues: HttpService (copy)
 	local List = {}
 	
@@ -237,7 +237,7 @@ local function getResumeDeepLink(p2): string --[[ Line: 186 ]]
 	return `roblox://navigation/build?{table.concat(List, "&")}`
 end
 
-local function getToastCopy(p2) --[[ Line: 203 ]]
+local function getToastCopy(p2)
 	-- upvalues: Localization (copy), LocalizationService (copy)
 	local IsLocalToolCall = p2.kind == "local_tool_call"
 	local NewLocalization = Localization.new(LocalizationService.RobloxLocaleId)
@@ -250,7 +250,7 @@ local function getToastCopy(p2) --[[ Line: 203 ]]
 	}
 end
 
-local _ = function(p2) --[[ Line: 222 | Named "getActionEventParams" ]]
+local _ = function(p2)
 	-- upvalues: HttpService (copy), getResumeDeepLink (copy)
 	return HttpService:JSONEncode({
 		sessionId = p2.sessionId,
@@ -260,7 +260,7 @@ local _ = function(p2) --[[ Line: 222 | Named "getActionEventParams" ]]
 	})
 end
 
-local function getToastVisualItems(p2, ToastCopy, ActionEventParams) --[[ Line: 231 ]]
+local function getToastVisualItems(p2, ToastCopy, ActionEventParams)
 	local List = {}
 	
 	if p2.universeId ~= nil then
@@ -310,7 +310,7 @@ return {
 	ResumeEventName = "CreatorAgentResume",
 	CapRtnNamespace = AcpProtocolModule.CapRtnNamespace,
 	classifyFrame = classifyFrame,
-	classifyRtnDetail = function(p2) --[[ Line: 150 ]]
+	classifyRtnDetail = function(p2)
 		-- upvalues: extractRawFrame (copy), ParseFrameModule (copy), classifyFrame (copy)
 		local ExtractRawFrameResult = extractRawFrame(p2)
 		
@@ -322,14 +322,14 @@ return {
 			return if ParseFrameModuleResult == nil then nil else classifyFrame(ParseFrameModuleResult)
 		end
 	end,
-	targetMatchesNotification = function(p2, p3): boolean --[[ Line: 164 ]]
+	targetMatchesNotification = function(p2, p3): boolean
 		return p2 ~= nil and (p2.sessionId ~= nil and p2.sessionId ~= "" and p2.sessionId == p3.sessionId or p2.universeId ~= nil and (p3.universeId ~= nil and p2.universeId == p3.universeId))
 	end,
-	getNotificationId = function(p2): string --[[ Line: 179 ]]
+	getNotificationId = function(p2): string
 		return if p2.kind == "local_tool_call" and p2.toolCallId ~= nil then `CreatorAgentResume-{p2.sessionId}-{p2.toolCallId}` else `CreatorAgentResume-{p2.sessionId}-{p2.kind}`
 	end,
 	getResumeDeepLink = getResumeDeepLink,
-	buildToastNotification = function(p2) --[[ Line: 279 ]]
+	buildToastNotification = function(p2)
 		-- upvalues: getToastCopy (copy), HttpService (copy), getResumeDeepLink (copy), getToastVisualItems (copy)
 		local UnixTimestampMillis = DateTime.now().UnixTimestampMillis
 		

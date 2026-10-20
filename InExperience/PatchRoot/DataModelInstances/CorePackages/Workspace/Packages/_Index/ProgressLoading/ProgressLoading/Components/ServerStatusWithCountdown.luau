@@ -21,21 +21,21 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
-local function getStoreJoinState(p1) --[[ Line: 36 ]]
+local function getStoreJoinState(p1)
 	-- upvalues: GetLoadingScreenStoreModule (copy)
 	local LoadingScreenStoreModule = GetLoadingScreenStoreModule(p1)
 	
 	return if p1 and LoadingScreenStoreModule and LoadingScreenStoreModule.getJoinState then LoadingScreenStoreModule.getJoinState(p1) else ""
 end
 
-local function getStoreServerStatusText(p1) --[[ Line: 44 ]]
+local function getStoreServerStatusText(p1)
 	-- upvalues: GetLoadingScreenStoreModule (copy)
 	local LoadingScreenStoreModule = GetLoadingScreenStoreModule(p1)
 	
 	return if p1 and LoadingScreenStoreModule and LoadingScreenStoreModule.getServerStatusText then LoadingScreenStoreModule.getServerStatusText(p1) else ""
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 61 ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), GuiService (copy), SignalsReactModule (copy), getStoreJoinState (copy), getStoreServerStatusText (copy), FIntAutoJoinNewServerTimeMs (copy), RunService (copy), ExperienceService (copy), PlaceLauncherStateModule (copy), FFlagEnableLuaAppsFollowUserId1 (copy), LoadingScreenTelemetryModule (copy), QueuePositionEnabledEngineFeature (copy), FoundationModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), CoreGui (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -46,7 +46,7 @@ return ReactModule.memo(function(p1) --[[ Line: 61 ]]
 	})
 	local UseRefResult = ReactModule.useRef(0)
 	local UseRefResult1 = ReactModule.useRef(1e999)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 72 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), GuiService (upval)
 		if UseRefResult.current == 0 then
 			UseRefResult.current = 1
@@ -60,7 +60,7 @@ return ReactModule.memo(function(p1) --[[ Line: 61 ]]
 		UseRefResult.current = 0
 		UseRefResult1.current = 1e999
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 87 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), UseResult (copy)
 		if not p1.isSubjectToChinaPolicies then
 			UseResult()
@@ -72,7 +72,7 @@ return ReactModule.memo(function(p1) --[[ Line: 61 ]]
 	local UseRefResult2 = ReactModule.useRef(nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseRefResult3 = ReactModule.useRef(nil)
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 102 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), UseRefResult3 (copy)
 		UseStateResult2(false)
 		
@@ -81,13 +81,13 @@ return ReactModule.memo(function(p1) --[[ Line: 61 ]]
 			UseRefResult3.current = nil
 		end
 	end, {})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 110 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult3 (copy), UseStateResult2 (copy), FIntAutoJoinNewServerTimeMs (upval), RunService (upval), UseBindingResult2 (copy), ExperienceService (upval), p1 (copy)
 		if not UseRefResult3.current then
 			UseStateResult2(true)
 			local ClockTime = os.clock()
 			local FIntAutoJoinNewServerTimeMsRatio = FIntAutoJoinNewServerTimeMs / 1000
-			UseRefResult3.current = RunService.Heartbeat:Connect(function() --[[ Line: 120 ]]
+			UseRefResult3.current = RunService.Heartbeat:Connect(function()
 				-- upvalues: ClockTime (copy), FIntAutoJoinNewServerTimeMsRatio (copy), UseBindingResult2 (upval), ExperienceService (upval), p1 (upval), UseRefResult3 (upval)
 				local ClampedValue = math.clamp((os.clock() - ClockTime) / FIntAutoJoinNewServerTimeMsRatio * 100, 0, 100)
 				UseBindingResult2(ClampedValue)
@@ -105,25 +105,25 @@ return ReactModule.memo(function(p1) --[[ Line: 61 ]]
 			return
 		end
 	end, { p1.placeId })
-	ReactModule.useEffect(function() --[[ Line: 134 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult (copy), PlaceLauncherStateModule (upval), UseRefResult2 (copy)
 		if UseSignalStateResult == PlaceLauncherStateModule.Queued then
 			UseRefResult2.current = os.clock()
 		end
 	end, { UseSignalStateResult })
-	ReactModule.useEffect(function() --[[ Line: 140 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult (copy), PlaceLauncherStateModule (upval), FFlagEnableLuaAppsFollowUserId1 (upval), ExperienceService (upval), UseResult3 (copy), UseResult2 (copy)
 		if UseSignalStateResult == PlaceLauncherStateModule.Queued and FFlagEnableLuaAppsFollowUserId1 and ExperienceService:GetFollowUserId() > 0 then
 			UseResult3()
 		else
 			UseResult2()
 		end
-		return function() --[[ Line: 151 ]]
+		return function()
 			-- upvalues: UseResult2 (upval)
 			UseResult2()
 		end
 	end, { UseSignalStateResult, UseResult3, UseResult2 })
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 156 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseResult2 (copy), UseRefResult2 (copy), LoadingScreenTelemetryModule (upval), FFlagEnableLuaAppsFollowUserId1 (upval), ExperienceService (upval), p1 (copy), QueuePositionEnabledEngineFeature (upval)
 		UseResult2()
 		LoadingScreenTelemetryModule.logQueuedStateButtonClick({

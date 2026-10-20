@@ -1,7 +1,7 @@
 ﻿local GetFFlagReportAnythingFixConvexHullCalculationModule = require(script:FindFirstAncestor("TnSAvatarIdentification").Flags.GetFFlagReportAnythingFixConvexHullCalculation)
 local CoreGui = game:GetService("CoreGui")
 
-local function getViewportInfo() --[[ Line: 17 ]]
+local function getViewportInfo()
 	-- upvalues: CoreGui (copy)
 	assert(CoreGui, "getViewportInfo requires CoreGui to be available")
 	local _FullscreenTestGui_AvatarID = CoreGui:FindFirstChild("_FullscreenTestGui_AvatarID")
@@ -38,18 +38,18 @@ end
 local _Vector2 = Vector2.new(0, 0)
 local _Vector2_1 = Vector2.new(1e999, 1e999)
 
-local function _(Vector): boolean --[[ Line: 52 ]]
+local function _(Vector): boolean
 	return Vector.Y < 0 or (Vector.Y > 1 or (Vector.X < 0 or Vector.X > 1))
 end
 
-function worldToFullViewportPointNormalized(Position, Camera: Camera, ViewportInfo) --[[ Line: 56 ]]
+function worldToFullViewportPointNormalized(Position, Camera: Camera, ViewportInfo)
 	local ViewportPosition, _ = Camera:WorldToViewportPoint(Position)
 	local _Vector2 = Vector2.new((ViewportPosition.X + ViewportInfo.insets.left) / ViewportInfo.width, (ViewportPosition.Y + ViewportInfo.insets.top) / ViewportInfo.height)
 	
 	return _Vector2, ViewportPosition.Z, not (_Vector2.Y < 0 or (_Vector2.Y > 1 or (_Vector2.X < 0 or _Vector2.X > 1))) and ViewportPosition.Z > 0
 end
 
-function getViewportCorners(List, p1, p2) --[[ Line: 73 ]]
+function getViewportCorners(List, p1, p2)
 	-- upvalues: _Vector2_1 (copy), _Vector2 (copy), GetFFlagReportAnythingFixConvexHullCalculationModule (copy)
 	local MinResult = _Vector2_1
 	local MaxResult = _Vector2
@@ -79,13 +79,13 @@ function getViewportCorners(List, p1, p2) --[[ Line: 73 ]]
 	end
 end
 
-function shouldIgnoreLocalCharacter(Object): boolean --[[ Line: 109 ]]
+function shouldIgnoreLocalCharacter(Object): boolean
 	local Head = Object:FindFirstChild("Head")
 	
 	return if Head and Head:IsA("BasePart") then Head.LocalTransparencyModifier >= 0.95 else false
 end
 
-function getLocalCharacterPosition(Object) --[[ Line: 118 ]]
+function getLocalCharacterPosition(Object)
 	local HumanoidRootPart = Object:FindFirstChild("HumanoidRootPart")
 	
 	return if HumanoidRootPart then HumanoidRootPart.Position else nil

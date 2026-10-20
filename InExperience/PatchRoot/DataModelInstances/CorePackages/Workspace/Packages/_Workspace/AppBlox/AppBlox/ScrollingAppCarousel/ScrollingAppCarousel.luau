@@ -35,19 +35,19 @@ ScrollingAppCarousel.validateProps = TModule.strictInterface({
 	shouldExpandToFitContentHeight = TModule.optional(TModule.boolean)
 })
 
-function ScrollingAppCarousel.getScrollState(ItemWidth, ItemPadding, XDelta) --[[ Line: 76 ]]
+function ScrollingAppCarousel.getScrollState(ItemWidth, ItemPadding, XDelta)
 	return {
 		maxNumOfItemsVisible = math.floor((XDelta + ItemPadding) / (ItemWidth + ItemPadding))
 	}
 end
 
-function ScrollingAppCarousel.handleMouseEvent(p1, Input, HoveringCarousel) --[[ Line: 85 ]]
+function ScrollingAppCarousel.handleMouseEvent(p1, Input, HoveringCarousel)
 	if Input.UserInputType == Enum.UserInputType.MouseMovement then
 		p1:setState({ hoveringCarousel = HoveringCarousel })
 	end
 end
 
-function ScrollingAppCarousel.handleScroll(p1, p2) --[[ Line: 93 ]]
+function ScrollingAppCarousel.handleScroll(p1, p2)
 	if not p1.state.animationActive then
 		local Index = p1.props.index
 		local MaxNumOfItemsVisible = p1.state.maxNumOfItemsVisible
@@ -57,7 +57,7 @@ function ScrollingAppCarousel.handleScroll(p1, p2) --[[ Line: 93 ]]
 	end
 end
 
-function ScrollingAppCarousel.handleResize(p1, Frame: Frame) --[[ Line: 104 ]]
+function ScrollingAppCarousel.handleResize(p1, Frame: Frame)
 	-- upvalues: CryoModule (copy)
 	if p1._isMounted then
 		local XDelta = Frame.AbsoluteSize.X - 2 * p1.props.carouselMargin
@@ -68,7 +68,7 @@ function ScrollingAppCarousel.handleResize(p1, Frame: Frame) --[[ Line: 104 ]]
 	end
 end
 
-function ScrollingAppCarousel.scrollToIndex(p1, Index: number, Index1: number) --[[ Line: 115 ]]
+function ScrollingAppCarousel.scrollToIndex(p1, Index: number, Index1: number)
 	-- upvalues: ArgCheckModule (copy), UserGameSettings (copy), OtterModule (copy), config (copy)
 	ArgCheckModule.assert(not p1.props.isScrollingDisabled, "scrolling should be disabled")
 	local NewItemWidth = p1.props.itemWidth + p1.props.itemPadding
@@ -86,31 +86,31 @@ function ScrollingAppCarousel.scrollToIndex(p1, Index: number, Index1: number) -
 	end
 end
 
-function ScrollingAppCarousel.createMotor(p1, p2) --[[ Line: 137 ]]
+function ScrollingAppCarousel.createMotor(p1, p2)
 	-- upvalues: OtterModule (copy)
 	p1.carouselMotor = OtterModule.createSingleMotor(p2)
-	p1.carouselMotor:onStep(function(X) --[[ Line: 139 ]]
+	p1.carouselMotor:onStep(function(X)
 		-- upvalues: p1 (copy)
 		p1:setState({
 			animationActive = true,
 			canvasPosition = Vector2.new(X, 0)
 		})
 	end)
-	p1.carouselMotor:onComplete(function() --[[ Line: 145 ]]
+	p1.carouselMotor:onComplete(function()
 		-- upvalues: p1 (copy)
 		p1:destroyMotor()
 		p1:setState({ animationActive = false })
 	end)
 end
 
-function ScrollingAppCarousel.destroyMotor(p1) --[[ Line: 153 ]]
+function ScrollingAppCarousel.destroyMotor(p1)
 	if p1.carouselMotor then
 		p1.carouselMotor:destroy()
 		p1.carouselMotor = nil
 	end
 end
 
-function ScrollingAppCarousel.init(p1) --[[ Line: 160 ]]
+function ScrollingAppCarousel.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1:setState({
 		carouselWidth = 0,
@@ -122,14 +122,14 @@ function ScrollingAppCarousel.init(p1) --[[ Line: 160 ]]
 	})
 	p1.carouselMotor = nil
 	
-	function p1:onMouseEnter(Input) --[[ Line: 172 ]]
+	function p1:onMouseEnter(Input)
 		-- upvalues: p1 (copy)
 		if p1._isMounted then
 			p1:handleMouseEvent(Input, true)
 		end
 	end
 	
-	function p1:onMouseLeave(Input) --[[ Line: 178 ]]
+	function p1:onMouseLeave(Input)
 		-- upvalues: p1 (copy)
 		if p1._isMounted then
 			p1:handleMouseEvent(Input, false)
@@ -138,7 +138,7 @@ function ScrollingAppCarousel.init(p1) --[[ Line: 160 ]]
 	
 	p1.frameRef = RoactModule.createRef()
 	
-	function p1.onResize(Frame) --[[ Line: 186 ]]
+	function p1.onResize(Frame)
 		-- upvalues: p1 (copy)
 		if p1._isMounted then
 			p1:handleResize(Frame)
@@ -149,14 +149,14 @@ function ScrollingAppCarousel.init(p1) --[[ Line: 160 ]]
 		end
 	end
 	
-	function p1.scrollLeft() --[[ Line: 195 ]]
+	function p1.scrollLeft()
 		-- upvalues: p1 (copy)
 		if p1._isMounted then
 			p1:handleScroll(false)
 		end
 	end
 	
-	function p1.scrollRight() --[[ Line: 201 ]]
+	function p1.scrollRight()
 		-- upvalues: p1 (copy)
 		if p1._isMounted then
 			p1:handleScroll(true)
@@ -164,19 +164,19 @@ function ScrollingAppCarousel.init(p1) --[[ Line: 160 ]]
 	end
 end
 
-function ScrollingAppCarousel.getDerivedStateFromProps(p1, p2) --[[ Line: 208 ]]
+function ScrollingAppCarousel.getDerivedStateFromProps(p1, p2)
 	-- upvalues: CryoModule (copy), ScrollingAppCarousel (copy)
 	local Largest = math.max(0, p2.absoluteWidth - 2 * p1.carouselMargin)
 	
 	return CryoModule.Dictionary.join({ carouselWidth = Largest }, ScrollingAppCarousel.getScrollState(p1.itemWidth, p1.itemPadding, Largest))
 end
 
-function ScrollingAppCarousel.didMount(p1) --[[ Line: 215 ]]
+function ScrollingAppCarousel.didMount(p1)
 	p1._isMounted = true
 	p1:handleResize((p1.frameRef:getValue()))
 end
 
-function ScrollingAppCarousel.didUpdate(p1, p2, p3) --[[ Line: 221 ]]
+function ScrollingAppCarousel.didUpdate(p1, p2, p3)
 	local IsItemCountBelow = p1.props.itemCount < p2.itemCount
 	local IsNotItemWidthMatch = p1.props.itemWidth ~= p2.itemWidth
 	local IsNotItemPaddingMatch = p1.props.itemPadding ~= p2.itemPadding
@@ -187,12 +187,12 @@ function ScrollingAppCarousel.didUpdate(p1, p2, p3) --[[ Line: 221 ]]
 	end
 end
 
-function ScrollingAppCarousel.willUnmount(p1) --[[ Line: 233 ]]
+function ScrollingAppCarousel.willUnmount(p1)
 	p1._isMounted = false
 	p1:destroyMotor()
 end
 
-function ScrollingAppCarousel.render(p1) --[[ Line: 238 ]]
+function ScrollingAppCarousel.render(p1)
 	-- upvalues: AXFixScrollingCarouselShowRightButton (copy), RoactModule (copy), ScrollButtonModule (copy), IconsActionsCycleLeft (copy), IconsActionsCycleRight (copy), AppCarouselModule (copy)
 	local CarouselMargin: number = p1.props.carouselMargin
 	local CarouselHeight = p1.props.carouselHeight

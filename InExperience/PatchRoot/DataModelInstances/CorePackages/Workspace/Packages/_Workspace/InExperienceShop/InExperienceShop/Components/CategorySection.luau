@@ -18,7 +18,7 @@ local ShopPageType1 = if FFlagPassShopPurchaseSurfaceToBuyModal then require(InE
 local UseShopImpressionsDetectorModule = require(InExperienceShop.Hooks.useShopImpressionsDetector)
 local _ = require(InExperienceShop.Types)
 
-local function _(GrowRatio) --[[ Line: 58 | Named "shopItemTileFlexItem" ]]
+local function _(GrowRatio)
 	return {
 		ShrinkRatio = 1,
 		FlexMode = Enum.UIFlexMode.Custom,
@@ -27,7 +27,7 @@ local function _(GrowRatio) --[[ Line: 58 | Named "shopItemTileFlexItem" ]]
 	}
 end
 
-local _ = function() --[[ Line: 67 | Named "explicitWidthFlexItem" ]]
+local _ = function()
 	return {
 		GrowRatio = 0,
 		ShrinkRatio = 0,
@@ -36,16 +36,16 @@ local _ = function() --[[ Line: 67 | Named "explicitWidthFlexItem" ]]
 	}
 end
 
-local _ = function(p1, p2, p3) --[[ Line: 76 | Named "resolveTileWidth" ]]
+local _ = function(p1, p2, p3)
 	return if p3 == nil or p3.rowWidth <= 0 then nil elseif p3.isFeaturedDoubleWidthRobux(p1, p2) and p3.featuredRobuxWidth ~= nil then p3.featuredRobuxWidth else p3.shopWidth
 end
 
-local _ = function(p1) --[[ Line: 88 | Named "resolveRobuxMediaHeightScale" ]]
+local _ = function(p1)
 	-- upvalues: ComputeRobuxPackageMediaHeightScaleFunction (copy)
 	return if p1 == nil or p1.shopWidth <= 0 then nil else ComputeRobuxPackageMediaHeightScaleFunction(p1.shopWidth, p1.gap)
 end
 
-local function tileWrapperProps(XOffset: number, GrowRatio) --[[ Line: 96 ]]
+local function tileWrapperProps(XOffset: number, GrowRatio)
 	return if XOffset == nil or XOffset <= 0 then {
 		tag = "size-full-0 auto-y",
 		Size = UDim2.fromOffset(0, 0),
@@ -67,7 +67,7 @@ local function tileWrapperProps(XOffset: number, GrowRatio) --[[ Line: 96 ]]
 	}
 end
 
-local _ = function(p1) --[[ Line: 112 | Named "shopItemFromRobuxPackage" ]]
+local _ = function(p1)
 	return {
 		id = p1.id,
 		name = tostring(p1.robuxAmount),
@@ -75,7 +75,7 @@ local _ = function(p1) --[[ Line: 112 | Named "shopItemFromRobuxPackage" ]]
 	}
 end
 
-local _ = function(GridPositionColumn, p1, CategoryId, CategoryType, StableCategoryId, CategoryGroup, CategoryName) --[[ Line: 120 | Named "getTileLoggingProps" ]]
+local _ = function(GridPositionColumn, p1, CategoryId, CategoryType, StableCategoryId, CategoryGroup, CategoryName)
 	return {
 		categoryId = CategoryId,
 		categoryType = CategoryType,
@@ -87,7 +87,7 @@ local _ = function(GridPositionColumn, p1, CategoryId, CategoryType, StableCateg
 	}
 end
 
-return ReactModule.memo(function(Frame) --[[ Line: 150 | Named "CategorySection" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseShopImpressionsDetectorModule (copy), ShopPageType (copy), ReactModule (copy), ConstantsModule (copy), FFlagEnableCategoryLoggingInShopModule (copy), tileWrapperProps (copy), View (copy), RobuxPackageTileContainerModule (copy), ComputeRobuxPackageMediaHeightScaleFunction (copy), ShopItemTileModule (copy), ShopPageType1 (copy), SectionTitleModule (copy), ItemGridModule (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (copy)
 	local v1: boolean = Frame.robuxPackages ~= nil and #Frame.robuxPackages > 0
 	local FeaturedRobuxPackage = Frame.featuredRobuxPackage
@@ -98,7 +98,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 150 | Named "CategorySection"
 		isPageActive = Frame.isPageVisible ~= false,
 		externalScrollSignal = Frame.scrollImpressionsSignal
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 207 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: v1 (copy), Frame (copy)
 		if v1 then
 			local t = {}
@@ -115,7 +115,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 150 | Named "CategorySection"
 			return { [FeaturedRobuxPackage.id] = FeaturedRobuxPackage }
 		end
 	end, { Frame.robuxPackages, Frame.featuredRobuxPackage, v1 })
-	local UseResult = ReactModule.useCallback(function(p1, LayoutOrder, p2) --[[ Line: 225 ]]
+	local UseResult = ReactModule.useCallback(function(p1, LayoutOrder, p2)
 		-- upvalues: Frame (copy), FFlagEnableCategoryLoggingInShopModule (upval), UseMemoResult (copy), v1 (copy), HasFeaturedRobuxPackage (copy), tileWrapperProps (upval), ReactModule (upval), View (upval), RobuxPackageTileContainerModule (upval), OnItemActivated (copy), ComputeRobuxPackageMediaHeightScaleFunction (upval), ShopPageType (upval), ShopItemTileModule (upval), OnItemActivated (copy), ShopPageType1 (upval)
 		local config = {
 			categoryId = Frame.sectionId,
@@ -188,7 +188,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 150 | Named "CategorySection"
 		Frame.paymentSessionId, Frame.bonusJwt, Frame.sectionId, Frame.categoryType,
 		Frame.stableCategoryId, Frame.categoryGroup, Frame.categoryName
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 328 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: Frame (copy)
 		if Frame.onCategoryActivated then
 			Frame.onCategoryActivated(Frame.sectionId)
@@ -206,7 +206,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 150 | Named "CategorySection"
 		}),
 		Grid = ReactModule.createElement(ItemGridModule, {
 			LayoutOrder = 2,
-			items = ReactModule.useMemo(function() --[[ Line: 166 ]]
+			items = ReactModule.useMemo(function()
 				-- upvalues: v1 (copy), Frame (copy), ConstantsModule (upval)
 				if v1 then
 					local RobuxPackages = Frame.robuxPackages
@@ -248,16 +248,16 @@ return ReactModule.memo(function(Frame) --[[ Line: 150 | Named "CategorySection"
 			sectionId = Frame.sectionId,
 			onItemActivated = OnItemActivated,
 			renderTile = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseResult elseif UseMemoResult == nil then nil else UseResult,
-			isFeaturedDoubleWidthRobux = ReactModule.useMemo(function() --[[ Line: 311 ]]
+			isFeaturedDoubleWidthRobux = ReactModule.useMemo(function()
 				-- upvalues: v1 (copy), HasFeaturedRobuxPackage (copy), FeaturedRobuxPackage (copy)
 				if v1 then
-					return function(_, _): boolean --[[ Line: 313 ]]
+					return function(_, _): boolean
 						return true
 					end
 				elseif HasFeaturedRobuxPackage then
 					local Id = FeaturedRobuxPackage.id
 					
-					return function(p1, p2): boolean --[[ Line: 323 ]]
+					return function(p1, p2): boolean
 						-- upvalues: Id (copy)
 						return p2 == 1 and p1.id == Id
 					end

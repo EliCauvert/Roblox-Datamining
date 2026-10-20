@@ -23,16 +23,16 @@ local SduiSharedUtilitiesModule = if FFlagAppChatConversationTrustedFriendUpsell
 local SduiFeatureEntryPoint = if FFlagAppChatConversationTrustedFriendUpsellBanner then SduiSharedUtilitiesModule.SduiFeatureEntryPoint else nil
 local UseComponentConfig = if FFlagAppChatConversationTrustedFriendUpsellBanner then SduiSharedUtilitiesModule.useComponentConfig else nil
 local FIntAppChatModalSeenImpressionDelayMsModule = require(AppChat.Flags.FIntAppChatModalSeenImpressionDelayMs)
-local config = { setModalHeight = function(_) --[[ Line: 48 ]] end }
+local config = { setModalHeight = function(_) end }
 local config1 = {
 	[ConversationTopModal.AddTrustedConnection] = ConversationBannerContainerModule,
 	[ConversationTopModal.TrustedConnectionRequest] = ConversationBannerContainerModule
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 57 | Named "ConversationTopModalContainer" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseSelectorFunction (copy), GetDeepValue2Module (copy), ModalConfigurationModule (copy), config1 (copy), UseDispatchFunction (copy), UseRecordModalSequenceResponseForConversationModule (copy), ReactModule (copy), UseIsGuiInChatVisibleModule (copy), FFlagAppChatConversationTrustedFriendUpsellBanner (copy), SduiConstantsModule (copy), UseComponentConfig (copy), UseRecordModalSeenWithDelayModule (copy), ModalSequence (copy), FIntAppChatModalSeenImpressionDelayMsModule (copy), NewResult (copy), DismissedChatModalModule (copy), AppChatNetworkingModule (copy), SduiFeatureEntryPoint (copy), ConversationTopModal (copy), FoundationModule (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 60 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: GetDeepValue2Module (upval), UnionResult (copy), ModalConfigurationModule (upval)
 		return GetDeepValue2Module(p2, `ChatAppReducer.Modals.conversationTopModals.{UnionResult.conversationId}`) or ModalConfigurationModule.default
 	end)
@@ -52,9 +52,9 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "ConversationTopModal
 		canRecordAction = UseIsGuiInChatVisibleModule(UseRefResult, { UseRefResult.current, Entry }) and Entry ~= nil,
 		conversationId = UnionResult.conversationId
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 96 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRecordModalSequenceResponseForConversationModuleResult (copy), UseSelectorResult (copy), ModalSequence (upval), NewResult (upval), UseDispatchResult (copy), DismissedChatModalModule (upval), AppChatNetworkingModule (upval), UnionResult (copy)
-		UseRecordModalSequenceResponseForConversationModuleResult(UseSelectorResult.modal_layout.dismissed_record_action, ModalSequence.ConversationTopModal, nil, UseSelectorResult.modal_variant):catch(function(Err) --[[ Line: 102 ]]
+		UseRecordModalSequenceResponseForConversationModuleResult(UseSelectorResult.modal_layout.dismissed_record_action, ModalSequence.ConversationTopModal, nil, UseSelectorResult.modal_variant):catch(function(Err)
 			-- upvalues: NewResult (upval), UseSelectorResult (upval)
 			NewResult:warning(`Error in ConversationOverlayContainer {UseSelectorResult.modal_layout.id} -> RecordModalSequenceResponse: {tostring(Err)}`)
 		end)
@@ -66,7 +66,7 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "ConversationTopModal
 		UseRecordModalSequenceResponseForConversationModuleResult,
 		UseDispatchResult
 	})
-	local UseResult1 = ReactModule.useCallback(function(Frame) --[[ Line: 122 ]]
+	local UseResult1 = ReactModule.useCallback(function(Frame)
 		-- upvalues: UnionResult (copy)
 		UnionResult.setModalHeight(Frame.AbsoluteSize.Y)
 	end, { UnionResult.setModalHeight })

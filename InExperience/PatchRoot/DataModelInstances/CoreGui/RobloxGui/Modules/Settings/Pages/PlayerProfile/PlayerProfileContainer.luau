@@ -18,12 +18,12 @@ local ProfileTypes = EnumsModule.ProfileTypes
 local ProfileWrapperContextModule = require(CorePackages.Workspace.Packages.ProfilePlatform.ProfileWrapperContext)
 local PlayerProfileModule = require(script.Parent.PlayerProfile)
 
-local function createStore(p1) --[[ Line: 29 ]]
+local function createStore(p1)
 	-- upvalues: RoduxModule (copy), ConstantsModule (copy), InstallReducerModule (copy)
 	return RoduxModule.Store.new(RoduxModule.combineReducers({ [ConstantsModule.RODUX_KEY] = InstallReducerModule() }), p1 or {}, { RoduxModule.thunkMiddleware })
 end
 
-return function(p1) --[[ Line: 42 | Named "PlayerProfileContainer" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), RoactAppPolicy (copy), AppFeaturePolicies (copy), ChatPolicies (copy), AvatarPolicies (copy), SharePolicies (copy), ShareTargetGamePolicies (copy), ProfileWrapperContextModule (copy), ProfileTypes (copy), EnumsModule (copy), CoreScriptsRootProvider (copy), RoactRoduxModule (copy), createStore (copy), ResponsiveModule (copy), View (copy), PlayerProfileModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	
@@ -45,16 +45,16 @@ return function(p1) --[[ Line: 42 | Named "PlayerProfileContainer" ]]
 					source = EnumsModule.Sources.InExperienceProfile
 				},
 				navigateTo = {
-					qRCodePage = function() --[[ Line: 63 ]] end,
-					previousView = function(_) --[[ Line: 64 ]] end,
-					itemDetails = function(_) --[[ Line: 65 ]] end,
-					itemOrBundleDetails = function(_, _) --[[ Line: 66 ]] end,
-					catalogSearch = function(_) --[[ Line: 67 ]] end,
-					tryOnItem = function(_, _, _, _) --[[ Line: 68 ]] end,
+					qRCodePage = function() end,
+					previousView = function(_) end,
+					itemDetails = function(_) end,
+					itemOrBundleDetails = function(_, _) end,
+					catalogSearch = function(_) end,
+					tryOnItem = function(_, _, _, _) end,
 					inspectAvatar = p1.inspectAvatar,
-					editUsername = function() --[[ Line: 76 ]] end,
-					openLeaveRobloxAlertUIBlox = function(_) --[[ Line: 77 ]] end,
-					closeLeaveRobloxAlert = function() --[[ Line: 78 ]] end
+					editUsername = function() end,
+					openLeaveRobloxAlertUIBlox = function(_) end,
+					closeLeaveRobloxAlert = function() end
 				},
 				externalAnalytics = { catalogAnalytics = {} }
 			}

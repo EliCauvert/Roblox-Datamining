@@ -1,6 +1,6 @@
 ﻿local _ = nil
 
-local function createStructValue(Entry) --[[ Line: 42 ]]
+local function createStructValue(Entry)
 	-- upvalues: createStructValue (ref)
 	local ValueType = typeof(Entry)
 	
@@ -41,14 +41,14 @@ local function createStructValue(Entry) --[[ Line: 42 ]]
 end
 
 return {
-	createLiteralKind = function(Value) --[[ Line: 16 ]]
+	createLiteralKind = function(Value)
 		return { type = "literal", value = Value }
 	end,
-	createBindingPathKind = function(Value) --[[ Line: 26 ]]
+	createBindingPathKind = function(Value)
 		return { type = "binding_path", value = Value }
 	end,
 	createStructValue = createStructValue,
-	createMockStruct = function(List) --[[ Line: 84 ]]
+	createMockStruct = function(List)
 		-- upvalues: createStructValue (ref)
 		local Fields = {}
 		
@@ -57,25 +57,25 @@ return {
 		end
 		return { fields = Fields }
 	end,
-	createLiteralProp = function(Value, FullName) --[[ Line: 104 ]]
+	createLiteralProp = function(Value, FullName)
 		return {
 			kind = { type = "literal", value = Value },
 			descriptor = { name = FullName, fullName = FullName }
 		}
 	end,
-	createBindingPathProp = function(Value, FullName) --[[ Line: 132 ]]
+	createBindingPathProp = function(Value, FullName)
 		return {
 			kind = { type = "binding_path", value = Value },
 			descriptor = { name = FullName, fullName = FullName }
 		}
 	end,
-	createTokenProp = function(Value, FullName) --[[ Line: 118 ]]
+	createTokenProp = function(Value, FullName)
 		return {
 			kind = { type = "token", value = Value },
 			descriptor = { name = FullName, fullName = FullName }
 		}
 	end,
-	createMockInlineComponent = function(Component_type, Props) --[[ Line: 175 ]]
+	createMockInlineComponent = function(Component_type, Props)
 		return {
 			kind = {
 				value = {
@@ -85,21 +85,21 @@ return {
 			}
 		}
 	end,
-	createMockInputForNestedComponent = function(p1, Value) --[[ Line: 195 ]]
+	createMockInputForNestedComponent = function(p1, Value)
 		return if p1 == "literal" then {
 			kind = { type = "literal", value = { kind = { value = Value } } }
 		} elseif p1 == "translation" then { kind = { type = "translation", value = Value } } else { kind = { type = "binding_path", value = Value } }
 	end,
-	createMockConditionalPropValue = function(Options, FullName) --[[ Line: 248 ]]
+	createMockConditionalPropValue = function(Options, FullName)
 		return {
 			kind = { type = "conditional", value = { options = Options } },
 			descriptor = { fullName = FullName, name = FullName }
 		}
 	end,
-	createMockConditionalOptions = function(Options) --[[ Line: 403 ]]
+	createMockConditionalOptions = function(Options)
 		return { options = Options }
 	end,
-	createMockComparisonConditionOption = function(Op, Field, Value, Kind) --[[ Line: 267 ]]
+	createMockComparisonConditionOption = function(Op, Field, Value, Kind)
 		return {
 			condition = {
 				kind = {
@@ -110,13 +110,13 @@ return {
 			kind = Kind
 		}
 	end,
-	createMockIsNullConditionOption = function(Field, Kind) --[[ Line: 290 ]]
+	createMockIsNullConditionOption = function(Field, Kind)
 		return {
 			condition = { kind = { type = "is_null", value = { field = Field } } },
 			kind = Kind
 		}
 	end,
-	createMockIsNotNullConditionOption = function(Field, Kind) --[[ Line: 304 ]]
+	createMockIsNotNullConditionOption = function(Field, Kind)
 		return {
 			condition = {
 				kind = { type = "is_not_null", value = { field = Field } }
@@ -124,13 +124,13 @@ return {
 			kind = Kind
 		}
 	end,
-	createMockIsEmptyConditionOption = function(Field, Kind) --[[ Line: 318 ]]
+	createMockIsEmptyConditionOption = function(Field, Kind)
 		return {
 			condition = { kind = { type = "is_empty", value = { field = Field } } },
 			kind = Kind
 		}
 	end,
-	createMockIsNotEmptyConditionOption = function(Field, Kind) --[[ Line: 332 ]]
+	createMockIsNotEmptyConditionOption = function(Field, Kind)
 		return {
 			condition = {
 				kind = { type = "is_not_empty", value = { field = Field } }
@@ -138,7 +138,7 @@ return {
 			kind = Kind
 		}
 	end,
-	createMockContainsConditionOption = function(Field, p1, Value, Kind) --[[ Line: 346 ]]
+	createMockContainsConditionOption = function(Field, p1, Value, Kind)
 		return {
 			condition = {
 				kind = {
@@ -149,7 +149,7 @@ return {
 			kind = Kind
 		}
 	end,
-	createMockAndConditionOption = function(Conditions, Kind) --[[ Line: 369 ]]
+	createMockAndConditionOption = function(Conditions, Kind)
 		return {
 			condition = {
 				kind = {
@@ -160,7 +160,7 @@ return {
 			kind = Kind
 		}
 	end,
-	createMockOrConditionOption = function(Conditions, Kind) --[[ Line: 383 ]]
+	createMockOrConditionOption = function(Conditions, Kind)
 		return {
 			condition = {
 				kind = {
@@ -171,7 +171,7 @@ return {
 			kind = Kind
 		}
 	end,
-	createMockNestedComponentConditionalOption = function(Condition, Roblox_component, Inputs) --[[ Line: 231 ]]
+	createMockNestedComponentConditionalOption = function(Condition, Roblox_component, Inputs)
 		return {
 			condition = Condition,
 			kind = {

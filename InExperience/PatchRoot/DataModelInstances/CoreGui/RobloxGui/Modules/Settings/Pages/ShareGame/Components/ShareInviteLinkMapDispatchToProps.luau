@@ -2,10 +2,10 @@
 local ShareLinksNetworking = ReducerDependencies.ShareLinksNetworking
 local ShareLinksRodux = ReducerDependencies.ShareLinksRodux
 
-return function(Callback) --[[ Line: 7 ]]
+return function(Callback)
 	-- upvalues: ShareLinksNetworking (copy), ShareLinksRodux (copy)
 	return {
-		fetchShareInviteLink = function() --[[ Line: 9 ]]
+		fetchShareInviteLink = function()
 			-- upvalues: Callback (copy), ShareLinksNetworking (upval), ShareLinksRodux (upval)
 			Callback(ShareLinksNetworking.GenerateLink.API({
 				linkType = ShareLinksRodux.Enums.LinkType.ExperienceInvite.rawValue()

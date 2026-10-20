@@ -11,7 +11,7 @@ local Frozen = table.freeze({
 	scrollBarVisibility = FoundationModule.Enums.ScrollBarVisibility.Auto
 })
 
-return function(_) --[[ Line: 25 | Named "GroupDetailPane" ]]
+return function(_)
 	-- upvalues: ReactModule (copy), ScrollView (copy), Frozen (copy), View (copy)
 	return ReactModule.createElement(ScrollView, {
 		testId = "GroupDetailPane",

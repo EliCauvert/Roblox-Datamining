@@ -58,7 +58,7 @@ end
 local LocalPlayer = Players.LocalPlayer
 local Flag1 = false
 
-function setCloneDirty(p1) --[[ Line: 93 ]]
+function setCloneDirty(p1)
 	-- upvalues: Total (ref)
 	if p1 then
 		Total = 0.35
@@ -69,7 +69,7 @@ function setCloneDirty(p1) --[[ Line: 93 ]]
 	end
 end
 
-function createCloneAnchor() --[[ Line: 101 ]]
+function createCloneAnchor()
 	-- upvalues: Object (ref), Viewport (ref)
 	if Object ~= nil then
 		Object:Destroy()
@@ -80,7 +80,7 @@ function createCloneAnchor() --[[ Line: 101 ]]
 	Object = WorldModel
 end
 
-local function _(Key) --[[ Line: 113 | Named "clearObserver" ]]
+local function _(Key)
 	-- upvalues: Player (copy)
 	if Player[Key] then
 		Player[Key]:Disconnect()
@@ -88,7 +88,7 @@ local function _(Key) --[[ Line: 113 | Named "clearObserver" ]]
 	end
 end
 
-function clearCloneCharacter() --[[ Line: 120 ]]
+function clearCloneCharacter()
 	-- upvalues: Copy (ref), Object (ref)
 	if Copy then
 		Copy:Destroy()
@@ -108,7 +108,7 @@ function clearCloneCharacter() --[[ Line: 120 ]]
 	createCloneAnchor()
 end
 
-local function clearClone() --[[ Line: 139 ]]
+local function clearClone()
 	-- upvalues: Player (copy), AnimationTracks (ref), StreamAnimationV2 (ref), Animator (ref)
 	stopRenderStepped()
 	
@@ -134,7 +134,7 @@ local function clearClone() --[[ Line: 139 ]]
 	clearCloneCharacter()
 end
 
-local function syncTrack(Animator, Key) --[[ Line: 160 ]]
+local function syncTrack(Animator, Key)
 	-- upvalues: StreamAnimationV2 (ref), TrackerStreamAnimation (ref), LocalPlayer (copy), StoppedConnections (copy)
 	if not Animator or not Key.Animation then return end
 	local v2 = nil
@@ -155,7 +155,7 @@ local function syncTrack(Animator, Key) --[[ Line: 160 ]]
 	if v2 then
 		v2:Play()
 		v2.Priority = Key.Priority
-		StoppedConnections[Key] = Key.Stopped:Connect(function() --[[ Line: 192 ]]
+		StoppedConnections[Key] = Key.Stopped:Connect(function()
 			-- upvalues: v2 (ref), StoppedConnections (upval), Key (copy)
 			v2:Stop(0)
 			
@@ -166,7 +166,7 @@ local function syncTrack(Animator, Key) --[[ Line: 160 ]]
 	end
 end
 
-local function updateClone(Player1: Player) --[[ Line: 201 ]]
+local function updateClone(Player1: Player)
 	-- upvalues: clearClone (copy), ModelUtilsModule (copy), Copy (ref), t (copy), Object (ref), Camera (ref), CFrameUtility (copy), CharacterUtility (copy), VectorDelta (ref), Y (ref), Copy1 (ref), Neck (ref), _CFrame (ref), Animator (ref), AnimatorAndADFRefactorEngineFeature (copy), SelfViewNewPoseSynchronization (copy), TrackerStreamAnimation (ref), syncTrack (copy), Player (copy)
 	clearClone()
 	
@@ -273,7 +273,7 @@ local function updateClone(Player1: Player) --[[ Line: 201 ]]
 				for _, value in ipairs(Animator1:GetPlayingAnimationTracksCoreScript()) do
 					syncTrack(Animator, value)
 				end
-				Player.AnimationPlayedCoreScript = Animator1.AnimationPlayedCoreScript:Connect(function(AnimationTrack) --[[ Line: 389 ]]
+				Player.AnimationPlayedCoreScript = Animator1.AnimationPlayedCoreScript:Connect(function(AnimationTrack)
 					-- upvalues: syncTrack (upval), Animator (upval)
 					syncTrack(Animator, AnimationTrack)
 				end)
@@ -285,22 +285,22 @@ local function updateClone(Player1: Player) --[[ Line: 201 ]]
 	end
 end
 
-local _ = function(p1, p2) --[[ Line: 405 | Named "hasProperty" ]]
+local _ = function(p1, p2)
 	local _ = p1[p2]
 end
 
-function updateCachedHeadColor(p1) --[[ Line: 412 ]]
+function updateCachedHeadColor(p1)
 	-- upvalues: Color (ref), Size (ref)
 	if p1 == nil then return end
 	assert(p1 ~= nil)
 	
-	if pcall(function() --[[ Line: 418 ]]
+	if pcall(function()
 		-- upvalues: p1 (copy)
 		local _ = p1.Color
 	end) then
 		Color = p1.Color
 		
-		if pcall(function() --[[ Line: 424 ]]
+		if pcall(function()
 			-- upvalues: p1 (copy)
 			local _ = p1.Size
 		end) then
@@ -309,11 +309,11 @@ function updateCachedHeadColor(p1) --[[ Line: 412 ]]
 	end
 end
 
-local _ = function(Humanoid) --[[ Line: 435 | Named "addHumanoidStateChangedObserver" ]]
+local _ = function(Humanoid)
 	-- upvalues: Player (copy)
 	if not Humanoid then return end
 	if not Player.HumanoidStateChanged then
-		Player.HumanoidStateChanged = Humanoid.StateChanged:Connect(function(OldState, NewState) --[[ Line: 440 ]]
+		Player.HumanoidStateChanged = Humanoid.StateChanged:Connect(function(OldState, NewState)
 			if OldState == Enum.HumanoidStateType.PlatformStanding and NewState == Enum.HumanoidStateType.Running then
 				setCloneDirty(true)
 			end
@@ -324,16 +324,16 @@ local _ = function(Humanoid) --[[ Line: 435 | Named "addHumanoidStateChangedObse
 	end
 end
 
-local _ = function(FaceControls) --[[ Line: 453 | Named "addFaceControlsObserver" ]]
+local _ = function(FaceControls)
 	-- upvalues: Player (copy)
 	if not Player.FaceControlsChanged then
-		Player.FaceControlsChanged = FaceControls.InternalFacsOverrideChanged:Connect(function() --[[ Line: 455 ]]
+		Player.FaceControlsChanged = FaceControls.InternalFacsOverrideChanged:Connect(function()
 			setCloneDirty(true)
 		end)
 	end
 end
 
-local function characterAdded(Character) --[[ Line: 461 ]]
+local function characterAdded(Character)
 	-- upvalues: Viewport (ref), Object1 (ref), Head (ref), ModelUtilsModule (copy), Player (copy), config (copy), Flag (ref)
 	if Viewport == nil or Object1 == nil then return end
 	if not Character then return end
@@ -359,7 +359,7 @@ local function characterAdded(Character) --[[ Line: 461 ]]
 	local Humanoid = Character:FindFirstChildWhichIsA("Humanoid")
 	
 	if Humanoid and Humanoid and not Player[config.HumanoidStateChanged] then
-		Player[config.HumanoidStateChanged] = Humanoid.StateChanged:Connect(function(OldState, NewState) --[[ Line: 440 ]]
+		Player[config.HumanoidStateChanged] = Humanoid.StateChanged:Connect(function(OldState, NewState)
 			if OldState == Enum.HumanoidStateType.PlatformStanding and NewState == Enum.HumanoidStateType.Running then
 				setCloneDirty(true)
 			end
@@ -371,11 +371,11 @@ local function characterAdded(Character) --[[ Line: 461 ]]
 	local FaceControls = Character:FindFirstChildWhichIsA("FaceControls", true)
 	
 	if FaceControls and not Player[config.FaceControlsChanged] then
-		Player[config.FaceControlsChanged] = FaceControls.InternalFacsOverrideChanged:Connect(function() --[[ Line: 455 ]]
+		Player[config.FaceControlsChanged] = FaceControls.InternalFacsOverrideChanged:Connect(function()
 			setCloneDirty(true)
 		end)
 	end
-	Player.DescendantAdded = Character.DescendantAdded:Connect(function(Descendant: Humanoid) --[[ Line: 491 ]]
+	Player.DescendantAdded = Character.DescendantAdded:Connect(function(Descendant: Humanoid)
 		-- upvalues: Viewport (upval), Object1 (upval), Head (upval), ModelUtilsModule (upval), Character (copy), Player (upval), config (upval)
 		if Viewport == nil or Object1 == nil then return end
 		if Descendant.Name == "Head" then
@@ -383,7 +383,7 @@ local function characterAdded(Character) --[[ Line: 461 ]]
 			updateCachedHeadColor(Head)
 		end
 		if Descendant:IsA("Humanoid") and Descendant and not Player[config.HumanoidStateChanged] then
-			Player[config.HumanoidStateChanged] = Descendant.StateChanged:Connect(function(OldState, NewState) --[[ Line: 440 ]]
+			Player[config.HumanoidStateChanged] = Descendant.StateChanged:Connect(function(OldState, NewState)
 				if OldState == Enum.HumanoidStateType.PlatformStanding and NewState == Enum.HumanoidStateType.Running then
 					setCloneDirty(true)
 				end
@@ -393,7 +393,7 @@ local function characterAdded(Character) --[[ Line: 461 ]]
 			end)
 		end
 		if Descendant:IsA("FaceControls") and not Player[config.FaceControlsChanged] then
-			Player[config.FaceControlsChanged] = Descendant.InternalFacsOverrideChanged:Connect(function() --[[ Line: 455 ]]
+			Player[config.FaceControlsChanged] = Descendant.InternalFacsOverrideChanged:Connect(function()
 				setCloneDirty(true)
 			end)
 		end
@@ -401,7 +401,7 @@ local function characterAdded(Character) --[[ Line: 461 ]]
 			setCloneDirty(true)
 		end
 	end)
-	Player.DescendantRemoving = Character.DescendantRemoving:Connect(function(Descendant) --[[ Line: 514 ]]
+	Player.DescendantRemoving = Character.DescendantRemoving:Connect(function(Descendant)
 		-- upvalues: Viewport (upval), Object1 (upval), ModelUtilsModule (upval)
 		if Viewport == nil or Object1 == nil then return end
 		if Descendant and (Descendant:IsA("MeshPart") or Descendant:IsA("Accessory")) then
@@ -415,7 +415,7 @@ local function characterAdded(Character) --[[ Line: 461 ]]
 	Flag = true
 end
 
-local function createViewport() --[[ Line: 536 ]]
+local function createViewport()
 	-- upvalues: Viewport (ref), Object1 (ref), Camera (ref)
 	if Viewport then
 		Viewport:Destroy()
@@ -443,7 +443,7 @@ local function createViewport() --[[ Line: 536 ]]
 	Camera.Parent = Viewport
 end
 
-function ReInit(Player1: Player) --[[ Line: 570 ]]
+function ReInit(Player1: Player)
 	-- upvalues: GetFFlagSelfViewVisibilityFixFunction (copy), Object2 (ref), Flag1 (ref), Head (ref), ModelUtilsModule (copy), Player (copy), clearClone (copy), createViewport (copy)
 	assert(Player1.Character ~= nil)
 	
@@ -470,7 +470,7 @@ function ReInit(Player1: Player) --[[ Line: 570 ]]
 	startRenderStepped(Player1)
 end
 
-local function onCharacterAdded(Character) --[[ Line: 592 ]]
+local function onCharacterAdded(Character)
 	-- upvalues: CharacterAddedConnection (ref), Flag (ref), characterAdded (copy), LocalPlayer (copy), Player (copy), config (copy)
 	if CharacterAddedConnection then
 		CharacterAddedConnection:Disconnect()
@@ -489,7 +489,7 @@ local function onCharacterAdded(Character) --[[ Line: 592 ]]
 	if Humanoid then
 		if not Humanoid then return end
 		if not Player[config.HumanoidStateChanged] then
-			Player[config.HumanoidStateChanged] = Humanoid.StateChanged:Connect(function(OldState, NewState) --[[ Line: 440 ]]
+			Player[config.HumanoidStateChanged] = Humanoid.StateChanged:Connect(function(OldState, NewState)
 				if OldState == Enum.HumanoidStateType.PlatformStanding and NewState == Enum.HumanoidStateType.Running then
 					setCloneDirty(true)
 				end
@@ -501,7 +501,7 @@ local function onCharacterAdded(Character) --[[ Line: 592 ]]
 	end
 end
 
-local _ = function(AncestorName) --[[ Line: 610 | Named "FindInParents" ]]
+local _ = function(AncestorName)
 	-- upvalues: Object1 (ref)
 	if not AncestorName then
 		return nil
@@ -515,7 +515,7 @@ local _ = function(AncestorName) --[[ Line: 610 | Named "FindInParents" ]]
 	end
 end
 
-function clearViewportFrame() --[[ Line: 625 ]]
+function clearViewportFrame()
 	-- upvalues: Viewport (ref), Object1 (ref)
 	if Viewport then
 		Viewport:Destroy()
@@ -524,7 +524,7 @@ function clearViewportFrame() --[[ Line: 625 ]]
 	stopRenderStepped()
 end
 
-local function onOuterContainerVisibilityChanged() --[[ Line: 633 ]]
+local function onOuterContainerVisibilityChanged()
 	-- upvalues: Object2 (ref), Flag (ref), Flag1 (ref)
 	if Object2 then
 		if not Object2.Visible then
@@ -539,7 +539,7 @@ local function onOuterContainerVisibilityChanged() --[[ Line: 633 ]]
 	end
 end
 
-function playerAdded(Player1: Player) --[[ Line: 652 ]]
+function playerAdded(Player1: Player)
 	-- upvalues: LocalPlayer (copy), CharacterAddedConnection (ref), Player (copy), onCharacterAdded (copy), characterAdded (copy), clearClone (copy)
 	if Player1 ~= nil and Player1 == LocalPlayer then
 		if CharacterAddedConnection ~= nil then
@@ -559,7 +559,7 @@ function playerAdded(Player1: Player) --[[ Line: 652 ]]
 			characterAdded(Character)
 		end
 		Player.CharacterAdded = Player1.CharacterAdded:Connect(characterAdded)
-		Player.CharacterRemoving = Player1.CharacterRemoving:Connect(function() --[[ Line: 671 ]]
+		Player.CharacterRemoving = Player1.CharacterRemoving:Connect(function()
 			-- upvalues: Player (upval), clearClone (upval)
 			if Player.DescendantAdded then
 				Player.DescendantAdded:Disconnect()
@@ -587,7 +587,7 @@ function playerAdded(Player1: Player) --[[ Line: 652 ]]
 	end
 end
 
-function stopRenderStepped() --[[ Line: 682 ]]
+function stopRenderStepped()
 	-- upvalues: Connection (ref)
 	if Connection then
 		Connection:Disconnect()
@@ -595,9 +595,9 @@ function stopRenderStepped() --[[ Line: 682 ]]
 	end
 end
 
-function updateClonePartsColor(p1) --[[ Line: 689 ]]
+function updateClonePartsColor(p1)
 	-- upvalues: Head (ref), Color (ref), LocalPlayer (copy), Copy (ref)
-	if pcall(function() --[[ Line: 690 ]]
+	if pcall(function()
 		-- upvalues: Head (upval)
 		local _ = Head.Color
 	end) and Head and Head.Color ~= Color then
@@ -622,10 +622,10 @@ function updateClonePartsColor(p1) --[[ Line: 689 ]]
 	Color = p1
 end
 
-function startRenderStepped(Player) --[[ Line: 722 ]]
+function startRenderStepped(Player)
 	-- upvalues: DebugSelfViewPerfBenchmark (copy), RunService (copy), Connection (ref), GetFFlagSelfViewVisibilityFixFunction (copy), Copy (ref), Object2 (ref), Flag1 (ref), Animator (ref), LocalPlayer (copy), Head (ref), ModelUtilsModule (copy), AnimationTracks1 (ref), AnimationTracks (ref), UserInputService (copy), Count (ref), Copy1 (ref), Neck (ref), _CFrame (ref), Camera (ref), VectorDelta (ref), FaceAnimatorService (copy), PlayerViewRemoteEventSupportEngineFeature (copy), Y (ref), Size (ref), Color (ref), Total (ref), updateClone (copy)
 	stopRenderStepped()
-	Connection = (if DebugSelfViewPerfBenchmark then RunService.Heartbeat else RunService.RenderStepped):Connect(function(Amount: number) --[[ Line: 729 ]]
+	Connection = (if DebugSelfViewPerfBenchmark then RunService.Heartbeat else RunService.RenderStepped):Connect(function(Amount: number)
 		-- upvalues: DebugSelfViewPerfBenchmark (upval), GetFFlagSelfViewVisibilityFixFunction (upval), Copy (upval), Object2 (upval), Flag1 (upval), Animator (upval), LocalPlayer (upval), Head (upval), ModelUtilsModule (upval), AnimationTracks1 (upval), AnimationTracks (upval), UserInputService (upval), Count (upval), Copy1 (upval), Neck (upval), _CFrame (upval), Camera (upval), VectorDelta (upval), FaceAnimatorService (upval), PlayerViewRemoteEventSupportEngineFeature (upval), Y (upval), Size (upval), Color (upval), Total (upval), updateClone (upval), Player (copy)
 		if DebugSelfViewPerfBenchmark then
 			debug.profilebegin("faceclone")
@@ -792,7 +792,7 @@ function startRenderStepped(Player) --[[ Line: 722 ]]
 						Size = Head.Size
 						setCloneDirty(true)
 					end
-					if pcall(function() --[[ Line: 983 ]]
+					if pcall(function()
 						-- upvalues: Head (upval)
 						local _ = Head.Color
 					end) and Head.Color ~= Color then
@@ -815,7 +815,7 @@ function startRenderStepped(Player) --[[ Line: 722 ]]
 	end)
 end
 
-return function(p2, p3, p4) --[[ Line: 1007 | Named "Initialize" ]]
+return function(p2, p3, p4)
 	-- upvalues: Object1 (ref), GetFFlagSelfViewVisibilityFixFunction (copy), v1 (ref), Object2 (ref), onOuterContainerVisibilityChanged (copy), createViewport (copy), Players (copy), LocalPlayer (copy), Player (copy), clearClone (copy)
 	if not p3 then return end
 	Object1 = p3
@@ -844,7 +844,7 @@ return function(p2, p3, p4) --[[ Line: 1007 | Named "Initialize" ]]
 	createViewport()
 	playerAdded(p2)
 	Players.PlayerAdded:Connect(playerAdded)
-	Players.PlayerRemoving:Connect(function(Player1) --[[ Line: 1035 ]]
+	Players.PlayerRemoving:Connect(function(Player1)
 		-- upvalues: LocalPlayer (upval), Player (upval), clearClone (upval)
 		if Player1 == LocalPlayer then
 			if Player.HumanoidStateChanged then

@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("ShareGameSearchBoxFocusAnalytics", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("ShareGameSearchBoxFocusAnalytics")
 end

@@ -11,7 +11,7 @@ local View = FoundationModule.View
 local IconSize = FoundationModule.Enums.IconSize
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function formatCount(p1: number, IsCountIsCapped): string --[[ Line: 35 ]]
+local function formatCount(p1: number, IsCountIsCapped): string
 	if p1 == nil then
 		return ""
 	else
@@ -21,12 +21,12 @@ local function formatCount(p1: number, IsCountIsCapped): string --[[ Line: 35 ]]
 	end
 end
 
-return ReactModule.memo(function(Frame) --[[ Line: 50 | Named "RailItem" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: ReactUtilsModule (copy), UseTokensFunction (copy), GetColorStyleWithTransparencyModule (copy), FFlagMomentsActionRailSpacingModule (copy), ReactModule (copy), View (copy), Icon (copy), IconSize (copy), Text (copy), formatCount (copy)
 	local Count = Frame.count
 	local NextOrder = ReactUtilsModule.createNextOrder()
 	local UseTokensResult = UseTokensFunction()
-	local MapResult = Frame.animationRatio:map(function(p1) --[[ Line: 56 ]]
+	local MapResult = Frame.animationRatio:map(function(p1)
 		-- upvalues: GetColorStyleWithTransparencyModule (upval), UseTokensResult (copy)
 		return GetColorStyleWithTransparencyModule(UseTokensResult.Color.Content.Emphasis, p1)
 	end)
@@ -52,11 +52,11 @@ return ReactModule.memo(function(Frame) --[[ Line: 50 | Named "RailItem" ]]
 		Count = if Count then ReactModule.createElement(Text, {
 			tag = "auto-xy text-caption-large text-align-x-center content-emphasis",
 			LayoutOrder = NextOrder(),
-			Text = Count:map(function(p1) --[[ Line: 90 ]]
+			Text = Count:map(function(p1)
 				-- upvalues: formatCount (upval), Frame (copy)
 				return (formatCount(p1, Frame.countIsCapped == true))
 			end),
-			Visible = Count:map(function(p1): boolean --[[ Line: 93 ]]
+			Visible = Count:map(function(p1): boolean
 				return p1 ~= nil
 			end),
 			textStyle = MapResult

@@ -8,7 +8,7 @@ local IconsMenuMoreOn = Images["icons/menu/more_on"]
 local IconsMenuMoreOff = Images["icons/menu/more_off"]
 local AdLabel = RoactModule.Component:extend("AdLabel")
 
-function AdLabel.render(p1) --[[ Line: 19 ]]
+function AdLabel.render(p1)
 	-- upvalues: RoactModule (copy), FeatureNativeAdsLabelAd (copy), ImageSetButton (copy), IconsMenuMoreOn (copy), IconsMenuMoreOff (copy)
 	return RoactModule.createElement("Frame", {
 		BorderSizePixel = 0,

@@ -12,11 +12,11 @@ local config = {
 }
 local t = {}
 
-local function convertToLuaEnum(Text: string, Text1, p1): string --[[ Line: 50 ]]
+local function convertToLuaEnum(Text: string, Text1, p1): string
 	local Match: string? = string.match(Text, "^" .. Text1 .. "(.*)")
 	
 	if Match then
-		local L: string = Match:lower():gsub("_(%l)", function(Text: string): string --[[ Line: 64 ]]
+		local L: string = Match:lower():gsub("_(%l)", function(Text: string): string
 			return Text:upper()
 		end)
 		
@@ -27,7 +27,7 @@ local function convertToLuaEnum(Text: string, Text1, p1): string --[[ Line: 50 ]
 end
 
 return {
-	mapProtoEnumFormatToLua = function(Key, p1, p2) --[[ Line: 82 ]]
+	mapProtoEnumFormatToLua = function(Key, p1, p2)
 		-- upvalues: config (copy), convertToLuaEnum (copy)
 		local Entry = config[Key]
 		
@@ -37,7 +37,7 @@ return {
 		end
 		return Entry
 	end,
-	mapLuaEnumFormatToProto = function(Text: string, Text1, p1) --[[ Line: 95 ]]
+	mapLuaEnumFormatToProto = function(Text: string, Text1, p1)
 		-- upvalues: t (copy)
 		local Text2 = Text1 .. Text
 		local Entry = t[Text2]
@@ -53,7 +53,7 @@ return {
 			return Entry
 		end
 	end,
-	mapUiComponentTypeToLua = function(Key) --[[ Line: 132 ]]
+	mapUiComponentTypeToLua = function(Key)
 		-- upvalues: config (copy), convertToLuaEnum (copy), SduiComponentTypeModule (copy)
 		if Key == nil then
 			return nil
@@ -66,7 +66,7 @@ return {
 		end
 		return if SduiComponentTypeModule[Entry] then SduiComponentTypeModule[Entry] else nil
 	end,
-	mapHydrationContentTypeToLua = function(Text: string) --[[ Line: 166 ]]
+	mapHydrationContentTypeToLua = function(Text: string)
 		-- upvalues: config (copy), SduiDataBindingContentTypeModule (copy)
 		if Text == nil then
 			return nil
@@ -75,14 +75,14 @@ return {
 		
 		if not Entry then
 			local Match: string? = string.match(Text, "^HYDRATION_CONTENT_TYPE_(.*)")
-			Entry = if Match then Match:lower():gsub("_(%l)", function(Text: string): string --[[ Line: 64 ]]
+			Entry = if Match then Match:lower():gsub("_(%l)", function(Text: string): string
 				return Text:upper()
 			end) else Text
 			config[Text] = Entry
 		end
 		return if SduiDataBindingContentTypeModule[Entry] then SduiDataBindingContentTypeModule[Entry] else nil
 	end,
-	mapActionTypeToLua = function(Key) --[[ Line: 149 ]]
+	mapActionTypeToLua = function(Key)
 		-- upvalues: config (copy), convertToLuaEnum (copy), SduiActionTypeModule (copy)
 		if Key == nil then
 			return nil
@@ -95,7 +95,7 @@ return {
 		end
 		return if SduiActionTypeModule[Entry] then SduiActionTypeModule[Entry] else nil
 	end,
-	mapPropName = function(Key) --[[ Line: 186 ]]
+	mapPropName = function(Key)
 		-- upvalues: config (copy), SnakeToCamelFunction (copy)
 		if Key == nil then
 			return nil
@@ -111,7 +111,7 @@ return {
 		end
 		return Entry
 	end,
-	camelCaseKeys = function(List) --[[ Line: 207 ]]
+	camelCaseKeys = function(List)
 		-- upvalues: config (copy), SnakeToCamelFunction (copy)
 		if type(List) ~= "table" then
 			return List
@@ -141,7 +141,7 @@ return {
 		end
 		return t
 	end,
-	mapProtoEngineEnumToLua = function(Key, p1, Callback) --[[ Line: 111 ]]
+	mapProtoEngineEnumToLua = function(Key, p1, Callback)
 		-- upvalues: config (copy), convertToLuaEnum (copy)
 		if Key == nil then
 			return nil

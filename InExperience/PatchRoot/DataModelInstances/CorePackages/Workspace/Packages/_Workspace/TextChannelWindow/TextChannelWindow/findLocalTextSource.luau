@@ -1,4 +1,4 @@
-﻿return function(Object, p1) --[[ Line: 3 | Named "findLocalTextSource" ]]
+﻿return function(Object, p1)
 	if Object == nil or p1 == nil then
 		return nil
 	end

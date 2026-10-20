@@ -1,7 +1,7 @@
 ﻿local _ = require(script:FindFirstAncestor("Moments").Parent.ViewRecycler)
 
-return function(p1) --[[ Line: 27 | Named "createCommentsListRevealTracker" ]]
-	local Schedule = p1.schedule or function(Callback) --[[ Line: 28 ]]
+return function(p1)
+	local Schedule = p1.schedule or function(Callback)
 		task.defer(Callback)
 	end
 	local t = {}
@@ -9,7 +9,7 @@ return function(p1) --[[ Line: 27 | Named "createCommentsListRevealTracker" ]]
 	local Flag = false
 	local Flag1 = false
 	
-	local function reveal() --[[ Line: 36 ]]
+	local function reveal()
 		-- upvalues: Flag (ref), p1 (copy)
 		if not Flag then
 			Flag = true
@@ -19,7 +19,7 @@ return function(p1) --[[ Line: 27 | Named "createCommentsListRevealTracker" ]]
 		end
 	end
 	
-	local function isVisibleRangeMeasured(): boolean --[[ Line: 44 ]]
+	local function isVisibleRangeMeasured(): boolean
 		-- upvalues: v1 (ref), p1 (copy), t (copy)
 		local v2 = v1
 		
@@ -36,7 +36,7 @@ return function(p1) --[[ Line: 27 | Named "createCommentsListRevealTracker" ]]
 		return true
 	end
 	
-	local function check() --[[ Line: 58 ]]
+	local function check()
 		-- upvalues: Flag1 (ref), Flag (ref), isVisibleRangeMeasured (copy), p1 (copy)
 		Flag1 = false
 		
@@ -47,7 +47,7 @@ return function(p1) --[[ Line: 27 | Named "createCommentsListRevealTracker" ]]
 		end
 	end
 	
-	local function _() --[[ Line: 65 | Named "scheduleCheck" ]]
+	local function _()
 		-- upvalues: Flag (ref), Flag1 (ref), Schedule (copy), check (copy)
 		if not Flag and not Flag1 then
 			Flag1 = true
@@ -60,7 +60,7 @@ return function(p1) --[[ Line: 27 | Named "createCommentsListRevealTracker" ]]
 	local Layout = p1.layout
 	local UpdateItemMeasurementFunction = Layout.updateItemMeasurement
 	
-	function Layout.updateItemMeasurement(p2) --[[ Line: 76 ]]
+	function Layout.updateItemMeasurement(p2)
 		-- upvalues: UpdateItemMeasurementFunction (copy), Flag (ref), t (copy), Flag1 (ref), Schedule (copy), check (copy)
 		local UpdateItemMeasurementResult = UpdateItemMeasurementFunction(p2)
 		
@@ -79,7 +79,7 @@ return function(p1) --[[ Line: 27 | Named "createCommentsListRevealTracker" ]]
 	end
 	
 	return {
-		onVisibleRangeChanged = function(p2) --[[ Line: 86 ]]
+		onVisibleRangeChanged = function(p2)
 			-- upvalues: v1 (ref), Flag (ref), Flag1 (ref), Schedule (copy), check (copy)
 			v1 = p2
 			
@@ -90,7 +90,7 @@ return function(p1) --[[ Line: 27 | Named "createCommentsListRevealTracker" ]]
 			end
 		end,
 		reveal = reveal,
-		destroy = function() --[[ Line: 91 ]]
+		destroy = function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end

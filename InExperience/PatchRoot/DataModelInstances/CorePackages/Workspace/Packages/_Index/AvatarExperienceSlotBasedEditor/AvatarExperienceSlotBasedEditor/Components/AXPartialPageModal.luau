@@ -7,11 +7,11 @@ local FoundationModule = require(Parent.Foundation)
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function _(p1): boolean --[[ Line: 36 | Named "isFullWidth" ]]
+local function _(p1): boolean
 	return p1.X <= 540
 end
 
-return function(p1) --[[ Line: 41 | Named "AXPartialPageModal" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ModalWindow (copy), View (copy), ButtonStack (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ScreenSize = p1.screenSize
@@ -23,7 +23,7 @@ return function(p1) --[[ Line: 41 | Named "AXPartialPageModal" ]]
 		Selectable = false,
 		Size = UDim2.fromScale(1, 1),
 		BackgroundTransparency = 1,
-		[ReactModule.Event.Activated] = function() --[[ Line: 64 ]] end,
+		[ReactModule.Event.Activated] = function() end,
 		ZIndex = 3
 	}, {
 		PartialPageModal = ReactModule.createElement(ModalWindow, {

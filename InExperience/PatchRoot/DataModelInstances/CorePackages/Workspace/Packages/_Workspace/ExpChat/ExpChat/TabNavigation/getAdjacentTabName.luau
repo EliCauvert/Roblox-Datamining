@@ -1,9 +1,9 @@
-﻿return function(Tbl, Name, p1) --[[ Line: 19 | Named "getAdjacentTabName" ]]
+﻿return function(Tbl, Name, p1)
 	if #Tbl < 2 then
 		return nil
 	end
 	local Copy = table.clone(Tbl)
-	table.sort(Copy, function(A, B): boolean --[[ Line: 25 ]]
+	table.sort(Copy, function(A, B): boolean
 		return A.tabIndex < B.tabIndex
 	end)
 	local v1: number? = nil

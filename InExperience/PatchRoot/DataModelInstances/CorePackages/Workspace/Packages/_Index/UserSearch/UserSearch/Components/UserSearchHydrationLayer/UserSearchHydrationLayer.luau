@@ -20,7 +20,7 @@ local GetResult1 = if FFlagSduiUserSearchTile then require(Parent.DataHydration.
 local GetResult2 = if FFlagSduiUserSearchTile then require(Parent.DataHydration.ProfileInsights).ProfileInsightsStore.get() else nil
 local _ = require(Parent.GraphQLServer)
 
-return function(p1) --[[ Line: 55 ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseMatchSearchPaginationModule (copy), FFlagSduiUserSearchTile (copy), UsePaginatedProfileInsightsFetchModule (copy), FFlagPlayerSearchEnableOnlineFrequents (copy), FFlagPlayerSearchEnableOnlineFrequentsForAll (copy), ReactModule (copy), CryoModule (copy), FFlagUserSearchPresenceStoreMigrationModule (copy), NetworkingPresenceModule (copy), FFlagUserSearchClassmatesInsight (copy), GetResult1 (copy), GetResult2 (copy), HydrateFollowingStatusesModule (copy), FFlagMigrateFriendshipStatusesUserSearchModule (copy), GetResult (copy), HydrateFriendStatusesModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseMatchSearchPaginationModuleResult = UseMatchSearchPaginationModule({ users = p1.users })
@@ -29,13 +29,13 @@ return function(p1) --[[ Line: 55 ]]
 		searchKeyword = p1.searchParameters.searchKeyword,
 		rankingStrategy = if FFlagPlayerSearchEnableOnlineFrequents and p1.enableOnlineFrequents then "profile_info_boost" elseif FFlagPlayerSearchEnableOnlineFrequentsForAll then "profile_info_boost" else nil
 	}) or {}
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 70 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CryoModule (upval), UseMatchSearchPaginationModuleResult (copy)
-		return CryoModule.List.map(UseMatchSearchPaginationModuleResult, function(p2) --[[ Line: 71 ]]
+		return CryoModule.List.map(UseMatchSearchPaginationModuleResult, function(p2)
 			return p2.id
 		end)
 	end, { p1.users })
-	ReactModule.useEffect(function() --[[ Line: 76 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagUserSearchPresenceStoreMigrationModule (upval), UseDispatchResult (copy), NetworkingPresenceModule (upval), UseMemoResult (copy), FFlagSduiUserSearchTile (upval), FFlagPlayerSearchEnableOnlineFrequentsForAll (upval), FFlagUserSearchClassmatesInsight (upval), GetResult1 (upval), GetResult2 (upval), HydrateFollowingStatusesModule (upval), FFlagMigrateFriendshipStatusesUserSearchModule (upval), GetResult (upval), HydrateFriendStatusesModule (upval)
 		if not FFlagUserSearchPresenceStoreMigrationModule then
 			UseDispatchResult(NetworkingPresenceModule.GetPresencesFromUserIds.API(UseMemoResult))

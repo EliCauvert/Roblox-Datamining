@@ -3,25 +3,25 @@ local CoreGui = game:GetService("CoreGui")
 local ReactModule = require(Parent.React)
 local UseIsSpatialFunction = require(Parent.Responsive).useIsSpatial
 
-local function getSyncVrOverlayOrNil() --[[ Line: 10 ]]
+local function getSyncVrOverlayOrNil()
 	-- upvalues: CoreGui (copy)
 	local VRCentralOverlay = CoreGui:FindFirstChild("VRCentralOverlay")
 	
 	return if VRCentralOverlay then VRCentralOverlay:FindFirstChildWhichIsA("SurfaceGui") else nil
 end
 
-return function() --[[ Line: 25 | Named "useVrOverlay" ]]
+return function()
 	-- upvalues: UseIsSpatialFunction (copy), ReactModule (copy), getSyncVrOverlayOrNil (copy), CoreGui (copy)
 	local UseIsSpatialResult = UseIsSpatialFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(getSyncVrOverlayOrNil)
-	ReactModule.useEffect(function() --[[ Line: 33 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseIsSpatialResult (copy), UseStateResult (copy), CoreGui (upval), UseStateResult2 (copy)
 		if not UseIsSpatialResult then
-			return function() --[[ Line: 35 ]] end
+			return function() end
 		elseif UseStateResult then
-			return function() --[[ Line: 40 ]] end
+			return function() end
 		else
-			local SpawnedThread = task.spawn(function() --[[ Line: 45 ]]
+			local SpawnedThread = task.spawn(function()
 				-- upvalues: CoreGui (upval), UseStateResult2 (upval)
 				local VRCentralOverlay = CoreGui:WaitForChild("VRCentralOverlay", 5)
 				
@@ -33,7 +33,7 @@ return function() --[[ Line: 25 | Named "useVrOverlay" ]]
 				end
 			end)
 			
-			return function() --[[ Line: 56 ]]
+			return function()
 				-- upvalues: SpawnedThread (copy)
 				task.cancel(SpawnedThread)
 			end

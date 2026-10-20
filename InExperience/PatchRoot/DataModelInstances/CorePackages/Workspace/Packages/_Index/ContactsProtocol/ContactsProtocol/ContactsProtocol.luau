@@ -31,17 +31,17 @@ local ContactsProtocolModule = {
 }
 ContactsProtocolModule.__index = ContactsProtocolModule
 
-function ContactsProtocolModule.new() --[[ Line: 55 ]]
+function ContactsProtocolModule.new()
 	-- upvalues: MessageBus (copy), ContactsProtocolModule (copy)
 	return (setmetatable({ subscriber = MessageBus.Subscriber.new() }, ContactsProtocolModule))
 end
 
-function ContactsProtocolModule:getContacts() --[[ Line: 68 ]]
+function ContactsProtocolModule:getContacts()
 	-- upvalues: PromiseModule (copy), MessageBus (copy)
-	local NewPromise = PromiseModule.new(function(Callback, _) --[[ Line: 69 ]]
+	local NewPromise = PromiseModule.new(function(Callback, _)
 		-- upvalues: self (copy)
 		local GETCONTACTSREQUESTPROTOCOLMETHODRESPONSEDESCRIPTOR = self.GET_CONTACTS_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
-		self.subscriber:subscribeProtocolMethodResponse(GETCONTACTSREQUESTPROTOCOLMETHODRESPONSEDESCRIPTOR, function(p1) --[[ Line: 71 ]]
+		self.subscriber:subscribeProtocolMethodResponse(GETCONTACTSREQUESTPROTOCOLMETHODRESPONSEDESCRIPTOR, function(p1)
 			-- upvalues: self (upval), GETCONTACTSREQUESTPROTOCOLMETHODRESPONSEDESCRIPTOR (copy), Callback (copy)
 			self.subscriber:unsubscribeToProtocolMethodResponse(GETCONTACTSREQUESTPROTOCOLMETHODRESPONSEDESCRIPTOR)
 			Callback(p1)
@@ -52,12 +52,12 @@ function ContactsProtocolModule:getContacts() --[[ Line: 68 ]]
 	return NewPromise
 end
 
-function ContactsProtocolModule:supportsContacts() --[[ Line: 96 ]]
+function ContactsProtocolModule:supportsContacts()
 	-- upvalues: PromiseModule (copy), MessageBus (copy)
-	local NewPromise = PromiseModule.new(function(Callback, _) --[[ Line: 97 ]]
+	local NewPromise = PromiseModule.new(function(Callback, _)
 		-- upvalues: self (copy)
 		local SUPPORTSCONTACTSPROTOCOLMETHODRESPONSEDESCRIPTOR = self.SUPPORTS_CONTACTS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
-		self.subscriber:subscribeProtocolMethodResponse(SUPPORTSCONTACTSPROTOCOLMETHODRESPONSEDESCRIPTOR, function(p1) --[[ Line: 99 ]]
+		self.subscriber:subscribeProtocolMethodResponse(SUPPORTSCONTACTSPROTOCOLMETHODRESPONSEDESCRIPTOR, function(p1)
 			-- upvalues: self (upval), SUPPORTSCONTACTSPROTOCOLMETHODRESPONSEDESCRIPTOR (copy), Callback (copy)
 			self.subscriber:unsubscribeToProtocolMethodResponse(SUPPORTSCONTACTSPROTOCOLMETHODRESPONSEDESCRIPTOR)
 			Callback(p1.support)

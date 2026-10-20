@@ -7,7 +7,7 @@ local InterfaceResult = TModule.interface({
 	toolCallId = TModule.optional(TModule.string)
 })
 
-return function(p1) --[[ Line: 15 | Named "decodeAdCampaignCreateResult" ]]
+return function(p1)
 	-- upvalues: InterfaceResult (copy), FFlagBuildAgentAdCampaignCardModule (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult(p1)
 	

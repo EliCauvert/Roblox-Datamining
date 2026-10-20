@@ -11,7 +11,7 @@ local InterfaceResult = TModule.interface({
 	accountBlob = TModule.optional(TModule.string)
 })
 
-function LoginResultModule.new(p1) --[[ Line: 51 ]]
+function LoginResultModule.new(p1)
 	-- upvalues: FFlagEnableLuaAccountSwitch (copy), LoginResultModule (copy)
 	local config = { user = { id = "0", name = "" } }
 	
@@ -34,7 +34,7 @@ function LoginResultModule.new(p1) --[[ Line: 51 ]]
 	return config
 end
 
-function LoginResultModule.mock() --[[ Line: 79 ]]
+function LoginResultModule.mock()
 	-- upvalues: LoginResultModule (copy)
 	local NewLoginResult = LoginResultModule.new()
 	NewLoginResult.user = { id = "1", name = "ROBLOX" }
@@ -46,7 +46,7 @@ function LoginResultModule.mock() --[[ Line: 79 ]]
 	return NewLoginResult
 end
 
-function LoginResultModule:fromJsonData() --[[ Line: 95 ]]
+function LoginResultModule:fromJsonData()
 	-- upvalues: LoginResultModule (copy), InterfaceResult (copy), FFlagEnableLuaAccountSwitch (copy), ArgCheckModule (copy)
 	local NewLoginResult = LoginResultModule.new()
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult(self)
@@ -71,12 +71,12 @@ function LoginResultModule:fromJsonData() --[[ Line: 95 ]]
 	return NewLoginResult
 end
 
-function LoginResultModule:is(): boolean --[[ Line: 126 ]]
+function LoginResultModule:is(): boolean
 	-- upvalues: t (copy)
 	return type(self) == "table" and self[t] == true
 end
 
-function LoginResultModule:hasTwoStepData(): boolean --[[ Line: 134 ]]
+function LoginResultModule:hasTwoStepData(): boolean
 	-- upvalues: LoginResultModule (copy)
 	return LoginResultModule.is(self) and type(self.twoStepVerificationData) == "table"
 end

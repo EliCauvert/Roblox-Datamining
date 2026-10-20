@@ -3,7 +3,7 @@ local _ = require(AvatarExperienceInspectAndBuy.Types)
 local _ = require(AvatarExperienceInspectAndBuy.Parent.AvatarExperienceRodux)
 local BuildItemDataFromAXRoduxModule = require(AvatarExperienceInspectAndBuy.Utils.buildItemDataFromAXRodux)
 
-return function(p1, List) --[[ Line: 15 | Named "selectItemDataForTryOnItems" ]]
+return function(p1, List)
 	-- upvalues: BuildItemDataFromAXRoduxModule (copy)
 	local List1 = {}
 	
@@ -21,7 +21,7 @@ return function(p1, List) --[[ Line: 15 | Named "selectItemDataForTryOnItems" ]]
 			})
 		end
 	end
-	table.sort(List1, function(A, B): boolean --[[ Line: 34 ]]
+	table.sort(List1, function(A, B): boolean
 		return if A.ordering == B.ordering then if A.itemData.id == B.itemData.id then tostring(A.itemData.itemType) < tostring(B.itemData.itemType) else tostring(A.itemData.id) < tostring(B.itemData.id) else A.ordering < B.ordering
 	end)
 	

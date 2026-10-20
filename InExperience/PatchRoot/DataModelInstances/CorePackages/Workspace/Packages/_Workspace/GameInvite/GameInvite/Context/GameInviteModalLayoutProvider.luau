@@ -9,7 +9,7 @@ local GetFFlagLuaAppEnableTopBannerFunction = SharedFlagsModule.GetFFlagLuaAppEn
 local IsInExperienceUIVREnabled = require(Parent.SharedExperimentDefinition).isInExperienceUIVREnabled
 local FFlagEnableInExperienceUIPCVRFix = SharedFlagsModule.FFlagEnableInExperienceUIPCVRFix
 
-local function _(p1) --[[ Line: 26 ]]
+local function _(p1)
 	-- upvalues: GetFFlagLuaAppEnableTopBannerFunction (copy), GuiService (copy)
 	local v1 = 0
 	
@@ -22,33 +22,33 @@ local function _(p1) --[[ Line: 26 ]]
 	return v1
 end
 
-local _ = function() --[[ Line: 36 ]]
+local _ = function()
 	return workspace.CurrentCamera.ViewportSize
 end
 
-local _ = function(p1: number): boolean --[[ Line: 41 ]]
+local _ = function(p1: number): boolean
 	return p1 < 800
 end
 
-local _ = function(p1: number): boolean --[[ Line: 45 ]]
+local _ = function(p1: number): boolean
 	return p1 < 624
 end
 
-local _ = function(Vector) --[[ Line: 49 ]]
+local _ = function(Vector)
 	return (if Vector.X < 800 then Vector.X else Vector.Y < 624 and Vector.X) or 800
 end
 
-local _ = function(Vector, p1) --[[ Line: 53 ]]
+local _ = function(Vector, p1)
 	-- upvalues: GetFFlagLuaAppEnableTopBannerFunction (copy), GuiService (copy)
 	return (if Vector.X < 800 then Vector.Y - (if GetFFlagLuaAppEnableTopBannerFunction() and not p1 then 0 elseif GuiService then GuiService:GetGuiInset().Y else 50) else Vector.Y < 624 and Vector.Y - (if GetFFlagLuaAppEnableTopBannerFunction() and not p1 then 0 elseif GuiService then GuiService:GetGuiInset().Y else 50)) or 624
 end
 
-local function v15(Vector, IsCoreScript): UDim2 --[[ Line: 59 ]]
+local function v15(Vector, IsCoreScript): UDim2
 	-- upvalues: GetFFlagLuaAppEnableTopBannerFunction (copy), GuiService (copy)
 	return UDim2.new(UDim.new(0, (if Vector.X < 800 then Vector.X else Vector.Y < 624 and Vector.X) or 800), (UDim.new(0, (if Vector.X < 800 then Vector.Y - (if GetFFlagLuaAppEnableTopBannerFunction() and not IsCoreScript then 0 elseif GuiService then GuiService:GetGuiInset().Y else 50) else Vector.Y < 624 and Vector.Y - (if GetFFlagLuaAppEnableTopBannerFunction() and not IsCoreScript then 0 elseif GuiService then GuiService:GetGuiInset().Y else 50)) or 624)))
 end
 
-local _ = function(Vector): string --[[ Line: 65 ]]
+local _ = function(Vector): string
 	if Vector.X < 800 or Vector.Y < 624 then
 		return "compact"
 	else
@@ -56,7 +56,7 @@ local _ = function(Vector): string --[[ Line: 65 ]]
 	end
 end
 
-return function(p1) --[[ Line: 69 ]]
+return function(p1)
 	-- upvalues: IsInExperienceUIVREnabled (copy), FFlagEnableInExperienceUIPCVRFix (copy), ReactModule (copy), v15 (copy), GameInviteModalLayoutContextModule (copy)
 	local IsCoreScript = p1.isCoreScript
 	local ScreenSizeOverride = if IsInExperienceUIVREnabled and FFlagEnableInExperienceUIPCVRFix and p1.screenSizeOverride then p1.screenSizeOverride else workspace.CurrentCamera.ViewportSize
@@ -64,7 +64,7 @@ return function(p1) --[[ Line: 69 ]]
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(ScreenSizeOverride.Y < 624)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(ScreenSizeOverride.X < 800)
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(if ScreenSizeOverride.X < 800 then "compact" elseif ScreenSizeOverride.Y < 624 then "compact" else "default")
-	local UseResult = if FFlagEnableInExperienceUIPCVRFix then ReactModule.useCallback(function() --[[ Line: 83 ]]
+	local UseResult = if FFlagEnableInExperienceUIPCVRFix then ReactModule.useCallback(function()
 		-- upvalues: v15 (upval), IsCoreScript (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseStateResult2 (copy), UseStateResult2_3 (copy)
 		local ViewportSize = workspace.CurrentCamera.ViewportSize
 		local IsYBelow = ViewportSize.Y < 624
@@ -74,7 +74,7 @@ return function(p1) --[[ Line: 69 ]]
 		UseStateResult2_2(IsXBelow)
 		UseStateResult2(v1)
 		UseStateResult2_3(if ViewportSize.X < 800 then "compact" elseif ViewportSize.Y < 624 then "compact" else "default")
-	end, { IsCoreScript }) else function() --[[ Line: 94 ]]
+	end, { IsCoreScript }) else function()
 		-- upvalues: v15 (upval), IsCoreScript (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseStateResult2 (copy), UseStateResult2_3 (copy)
 		local ViewportSize = workspace.CurrentCamera.ViewportSize
 		local IsYBelow = ViewportSize.Y < 624
@@ -85,15 +85,15 @@ return function(p1) --[[ Line: 69 ]]
 		UseStateResult2(v1)
 		UseStateResult2_3(if ViewportSize.X < 800 then "compact" elseif ViewportSize.Y < 624 then "compact" else "default")
 	end
-	ReactModule.useEffect(function() --[[ Line: 107 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsInExperienceUIVREnabled (upval), FFlagEnableInExperienceUIPCVRFix (upval), p1 (copy), UseResult (copy)
 		if IsInExperienceUIVREnabled and FFlagEnableInExperienceUIPCVRFix and p1.screenSizeOverride then
-			return function() --[[ Line: 111 ]] end
+			return function() end
 		else
 			UseResult()
 			local Connection = workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(UseResult)
 			
-			return function() --[[ Line: 119 ]]
+			return function()
 				-- upvalues: Connection (copy)
 				if Connection then
 					Connection:Disconnect()

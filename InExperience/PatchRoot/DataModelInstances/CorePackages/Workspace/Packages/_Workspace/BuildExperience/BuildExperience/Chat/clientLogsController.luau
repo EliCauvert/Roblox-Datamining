@@ -8,11 +8,11 @@ local StudioClientLogsTool = CreatorAgentChatModule.StudioClientLogsTool
 local Debug = CreatorAgentChatModule.debug
 local AwaitRequestStateFunction = require(script.Parent.toolControllerUtils).awaitRequestState
 
-local function _(p1) --[[ Line: 34 | Named "getClientLogsReason" ]]
+local function _(p1)
 	return if typeof(p1) == "table" and (typeof(p1.reason) == "string" and p1.reason ~= "") then p1.reason else nil
 end
 
-local function fetchLatestSavedVersion(PlaceId) --[[ Line: 41 ]]
+local function fetchLatestSavedVersion(PlaceId)
 	-- upvalues: Parent (copy)
 	if PlaceId == nil then
 		return nil
@@ -28,14 +28,14 @@ local function fetchLatestSavedVersion(PlaceId) --[[ Line: 41 ]]
 	end
 end
 
-return function(p1, p2, Callback) --[[ Line: 58 | Named "createClientLogsController" ]]
+return function(p1, p2, Callback)
 	-- upvalues: Debug (copy), FFlagBuildExperiencePersistPlaytestLogsModule (copy), fetchLatestSavedVersion (copy), ClientLogsCollectorModule (copy), AwaitRequestStateFunction (copy), ChatConstantsModule (copy), StudioClientLogsTool (copy)
-	local function _() --[[ Line: 63 | Named "canHandleClientLogs" ]]
+	local function _()
 		-- upvalues: Callback (copy)
 		return Callback == nil or Callback()
 	end
 	
-	local function submitClientLogsResult(p3) --[[ Line: 67 ]]
+	local function submitClientLogsResult(p3)
 		-- upvalues: Debug (upval), FFlagBuildExperiencePersistPlaytestLogsModule (upval), fetchLatestSavedVersion (upval), p1 (copy), Callback (copy), p2 (copy), ClientLogsCollectorModule (upval), AwaitRequestStateFunction (upval), ChatConstantsModule (upval)
 		Debug.log("info", "ask_for_logs tool_result collecting", {
 			sessionId = p3.sessionId,
@@ -99,7 +99,7 @@ return function(p1, p2, Callback) --[[ Line: 58 | Named "createClientLogsControl
 	end
 	
 	return {
-		syncClientLogsRequest = function(p3): boolean --[[ Line: 129 ]]
+		syncClientLogsRequest = function(p3): boolean
 			-- upvalues: Callback (copy), StudioClientLogsTool (upval), p2 (copy), submitClientLogsResult (copy)
 			if Callback ~= nil and not Callback() then
 				return false
@@ -117,7 +117,7 @@ return function(p1, p2, Callback) --[[ Line: 58 | Named "createClientLogsControl
 					referenceId = ClientLogsRequestInTurnState4,
 					reason = if typeof(ClientLogsRequestInTurnState2) == "table" and (typeof(ClientLogsRequestInTurnState2.reason) == "string" and ClientLogsRequestInTurnState2.reason ~= "") then ClientLogsRequestInTurnState2.reason else nil
 				}
-				task.spawn(function() --[[ Line: 148 ]]
+				task.spawn(function()
 					-- upvalues: submitClientLogsResult (upval), config (copy)
 					submitClientLogsResult(config)
 				end)

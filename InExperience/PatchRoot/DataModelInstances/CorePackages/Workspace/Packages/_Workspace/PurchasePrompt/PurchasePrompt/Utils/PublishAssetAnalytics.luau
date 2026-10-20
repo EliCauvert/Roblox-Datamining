@@ -2,7 +2,7 @@
 local ItemType = nil
 local ItemSubType = nil
 
-local function _(Section, Action, Element) --[[ Line: 34 | Named "sendEvent" ]]
+local function _(Section, Action, Element)
 	-- upvalues: RbxAnalyticsService (copy), ItemType (ref), ItemSubType (ref)
 	RbxAnalyticsService:SendEventDeferred("client", "publish_avatar_prompt", "iec_funnel_user_creation", {
 		section = Section,
@@ -33,14 +33,14 @@ local PublishAssetAnalyticsModule = {
 		Buy = "buy",
 		Cancel = "cancel"
 	},
-	setItemDetails = function(Value, Value1) --[[ Line: 44 ]]
+	setItemDetails = function(Value, Value1)
 		-- upvalues: ItemType (ref), ItemSubType (ref)
 		ItemType = Value
 		ItemSubType = Value1
 	end
 }
 
-function PublishAssetAnalyticsModule.sendPageLoad(Section) --[[ Line: 49 ]]
+function PublishAssetAnalyticsModule.sendPageLoad(Section)
 	-- upvalues: PublishAssetAnalyticsModule (copy), RbxAnalyticsService (copy), ItemType (ref), ItemSubType (ref)
 	RbxAnalyticsService:SendEventDeferred("client", "publish_avatar_prompt", "iec_funnel_user_creation", {
 		element = nil,
@@ -51,7 +51,7 @@ function PublishAssetAnalyticsModule.sendPageLoad(Section) --[[ Line: 49 ]]
 	})
 end
 
-function PublishAssetAnalyticsModule.sendFieldTouched(Section, Element) --[[ Line: 53 ]]
+function PublishAssetAnalyticsModule.sendFieldTouched(Section, Element)
 	-- upvalues: PublishAssetAnalyticsModule (copy), RbxAnalyticsService (copy), ItemType (ref), ItemSubType (ref)
 	RbxAnalyticsService:SendEventDeferred("client", "publish_avatar_prompt", "iec_funnel_user_creation", {
 		section = Section,
@@ -62,7 +62,7 @@ function PublishAssetAnalyticsModule.sendFieldTouched(Section, Element) --[[ Lin
 	})
 end
 
-function PublishAssetAnalyticsModule.sendButtonClicked(Section, Element) --[[ Line: 57 ]]
+function PublishAssetAnalyticsModule.sendButtonClicked(Section, Element)
 	-- upvalues: PublishAssetAnalyticsModule (copy), RbxAnalyticsService (copy), ItemType (ref), ItemSubType (ref)
 	RbxAnalyticsService:SendEventDeferred("client", "publish_avatar_prompt", "iec_funnel_user_creation", {
 		section = Section,

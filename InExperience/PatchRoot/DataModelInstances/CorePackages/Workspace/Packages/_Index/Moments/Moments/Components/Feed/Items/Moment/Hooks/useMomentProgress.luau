@@ -2,11 +2,11 @@
 local MomentContextModule = require(script.Parent.Parent.MomentContext)
 local config = { time = 0, duration = 0, ratio = 0 }
 
-return function() --[[ Line: 20 | Named "useMomentProgress" ]]
+return function()
 	-- upvalues: MomentContextModule (copy), SignalsModule (copy), config (copy)
 	local UseMomentResult = MomentContextModule.useMoment()
 	
-	return (SignalsModule.createComputed(function(p1) --[[ Line: 23 ]]
+	return (SignalsModule.createComputed(function(p1)
 		-- upvalues: UseMomentResult (copy), config (upval)
 		local Controller = UseMomentResult.controller
 		

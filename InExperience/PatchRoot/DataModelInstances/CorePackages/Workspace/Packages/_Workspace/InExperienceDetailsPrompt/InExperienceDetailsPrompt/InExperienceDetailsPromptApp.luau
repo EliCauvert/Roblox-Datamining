@@ -7,20 +7,20 @@ local FireInExperienceDetailsPromptOpenedEventFunction = require(Parent.Discover
 local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
 local FFlagLuaAppIedpOverlayAndNavigationFix = require(Parent.SharedFlags).FFlagLuaAppIedpOverlayAndNavigationFix
 
-return function() --[[ Line: 15 | Named "InExperienceDetailsPromptApp" ]]
+return function()
 	-- upvalues: ReactModule (copy), TeleportService (copy), FireInExperienceDetailsPromptOpenedEventFunction (copy), DiscoveryEventErrorLogger (copy), FFlagLuaAppIedpOverlayAndNavigationFix (copy), InExperienceDetailsPromptContainerModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 19 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: TeleportService (upval), UseStateResult2 (copy), UseStateResult2_1 (copy), FireInExperienceDetailsPromptOpenedEventFunction (upval)
-		local OpenExperienceDetailsPromptConnection = TeleportService.OpenExperienceDetailsPrompt:Connect(function(UniverseId) --[[ Line: 20 ]]
+		local OpenExperienceDetailsPromptConnection = TeleportService.OpenExperienceDetailsPrompt:Connect(function(UniverseId)
 			-- upvalues: UseStateResult2 (upval), UseStateResult2_1 (upval), FireInExperienceDetailsPromptOpenedEventFunction (upval)
 			UseStateResult2((tostring(UniverseId)))
 			UseStateResult2_1(true)
 			FireInExperienceDetailsPromptOpenedEventFunction({ targetUniverseId = tostring(UniverseId) })
 		end)
 		
-		return function() --[[ Line: 27 ]]
+		return function()
 			-- upvalues: OpenExperienceDetailsPromptConnection (copy)
 			if OpenExperienceDetailsPromptConnection then
 				OpenExperienceDetailsPromptConnection:Disconnect()
@@ -29,7 +29,7 @@ return function() --[[ Line: 15 | Named "InExperienceDetailsPromptApp" ]]
 	end, {})
 	
 	if UseStateResult1 and UseStateResult then
-		local function _() --[[ Line: 38 | Named "closePrompt" ]]
+		local function _()
 			-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy)
 			UseStateResult2(nil)
 			UseStateResult2_1(false)
@@ -37,7 +37,7 @@ return function() --[[ Line: 15 | Named "InExperienceDetailsPromptApp" ]]
 		
 		local config = {
 			universeId = UseStateResult,
-			onJoin = function(PlaceId) --[[ Line: 45 ]]
+			onJoin = function(PlaceId)
 				-- upvalues: TeleportService (upval), UseStateResult2 (copy), UseStateResult2_1 (copy), DiscoveryEventErrorLogger (upval), UseStateResult (copy)
 				if PlaceId then
 					TeleportService:PromptExperienceDetailsCompleted(Enum.PromptExperienceDetailsResult.TeleportAttempted)
@@ -50,7 +50,7 @@ return function() --[[ Line: 15 | Named "InExperienceDetailsPromptApp" ]]
 					DiscoveryEventErrorLogger.reportError("InExperienceDetailsPromptAppOnJoinMissingRootPlaceId", "Missing valid root place id for universe id", { universeId = UseStateResult })
 				end
 			end,
-			onClose = function() --[[ Line: 58 ]]
+			onClose = function()
 				-- upvalues: TeleportService (upval), UseStateResult2 (copy), UseStateResult2_1 (copy)
 				TeleportService:PromptExperienceDetailsCompleted(Enum.PromptExperienceDetailsResult.PromptClosed)
 				UseStateResult2(nil)

@@ -6,15 +6,15 @@ local StateLayer = {
 	affordance = FoundationModule.Enums.StateLayerAffordance.None
 }
 
-local function getHoverTransparency(p1): number --[[ Line: 13 ]]
+local function getHoverTransparency(p1): number
 	return if p1 then 0 else 0.2
 end
 
-local function useHoverBinding() --[[ Line: 17 ]]
+local function useHoverBinding()
 	-- upvalues: ReactModule (copy), FoundationModule (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(false)
 	
-	return UseBindingResult, (ReactModule.useCallback(function(Default) --[[ Line: 21 ]]
+	return UseBindingResult, (ReactModule.useCallback(function(Default)
 		-- upvalues: FoundationModule (upval), UseBindingResult2 (copy)
 		if Default == FoundationModule.Enums.ControlState.Default then
 			UseBindingResult2(false)
@@ -27,7 +27,7 @@ local function useHoverBinding() --[[ Line: 17 ]]
 	end, {}))
 end
 
-return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 45 | Named "ContextualActionButton" ]]
+return ReactModule.forwardRef(function(Frame, Ref)
 	-- upvalues: UseTokensFunction (copy), useHoverBinding (copy), ReactModule (copy), FoundationModule (copy), StateLayer (copy), getHoverTransparency (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseHoverBindingResult, UseHoverBindingResult2 = useHoverBinding()
@@ -47,7 +47,7 @@ return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 45 | Named "Contex
 			tag = "padding-small radius-circle clip auto-xy",
 			Size = if Frame.size then UDim2.new(Frame.size, Frame.size) else UDim2.fromScale(1, 1),
 			GroupTransparency = Frame.GroupTransparencyOverwrite or UseHoverBindingResult:map(getHoverTransparency),
-			backgroundStyle = UseHoverBindingResult:map((ReactModule.useCallback(function(p1) --[[ Line: 50 ]]
+			backgroundStyle = UseHoverBindingResult:map((ReactModule.useCallback(function(p1)
 				-- upvalues: UseTokensResult (copy), Frame (copy)
 				return if p1 then UseTokensResult.Color.Shift.Shift_200 elseif Frame.isActive then UseTokensResult.Color.Shift.Shift_400 else {
 					Transparency = 1,

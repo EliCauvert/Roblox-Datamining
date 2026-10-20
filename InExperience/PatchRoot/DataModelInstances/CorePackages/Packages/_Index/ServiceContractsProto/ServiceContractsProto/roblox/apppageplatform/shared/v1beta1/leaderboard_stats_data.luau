@@ -3,7 +3,7 @@ local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.pro
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 46 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		id = if p1 == nil or p1.id == nil then "" else p1.id,
@@ -12,7 +12,7 @@ function Module.new(p1) --[[ Line: 46 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 54 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -35,7 +35,7 @@ function Module:encode() --[[ Line: 54 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 78 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -74,7 +74,7 @@ function Module.decode(Buf) --[[ Line: 78 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 131 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.id ~= nil and self.id ~= "" then
@@ -89,7 +89,7 @@ function Module:jsonEncode() --[[ Line: 131 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 149 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy)
 	local NewModule = Module.new()
 	

@@ -4,7 +4,7 @@ local ClientChatModules = Chat:WaitForChild("ClientChatModules")
 local ChatSettingsModule = require(ClientChatModules:WaitForChild("ChatSettings"))
 local ChatConstantsModule = require(ClientChatModules:WaitForChild("ChatConstants"))
 local ChatLocalizationModule = nil
-pcall(function() --[[ Line: 14 ]]
+pcall(function()
 	-- upvalues: ChatLocalizationModule (ref)
 	ChatLocalizationModule = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
@@ -13,7 +13,7 @@ if ChatLocalizationModule == nil then
 	ChatLocalizationModule = {}
 end
 if not ChatLocalizationModule.FormatMessageToSend or not ChatLocalizationModule.LocalizeFormattedMessage then
-	function ChatLocalizationModule:FormatMessageToSend(_, p1) --[[ Line: 17 ]]
+	function ChatLocalizationModule:FormatMessageToSend(_, p1)
 		return p1
 	end
 end
@@ -25,17 +25,17 @@ local DisallowedWhiteSpace = if ChatSettingsModule.DisallowedWhiteSpace then Cha
 	"\f"
 }
 
-local function isMessageValidServer(Text): boolean --[[ Line: 27 ]]
+local function isMessageValidServer(Text): boolean
 	-- upvalues: ChatSettingsModule (copy)
 	return ChatSettingsModule.MaximumMessageLength * 6 >= Text:len() and (utf8.len(Text) ~= nil and ChatSettingsModule.MaximumMessageLength >= utf8.len(utf8.nfcnormalize(Text)))
 end
 
-local function _(Player: Player) --[[ Line: 47 | Named "CanUserChat" ]]
+local function _(Player: Player)
 	-- upvalues: RunService (copy), Chat (copy)
 	if RunService:IsStudio() then
 		return true
 	else
-		local Success, Result = pcall(function() --[[ Line: 51 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Chat (upval), Player (copy)
 			return Chat:CanUserChatAsync(Player.UserId)
 		end)
@@ -44,9 +44,9 @@ local function _(Player: Player) --[[ Line: 47 | Named "CanUserChat" ]]
 	end
 end
 
-return function(p1) --[[ Line: 57 | Named "Run" ]]
+return function(p1)
 	-- upvalues: RunService (copy), Chat (copy), ChatLocalizationModule (ref), isMessageValidServer (copy), DisallowedWhiteSpace (ref), ChatConstantsModule (copy)
-	p1:RegisterProcessCommandsFunction("message_validation", function(p2, p3: string, p4): boolean --[[ Line: 58 | Named "ValidateChatFunction" ]]
+	p1:RegisterProcessCommandsFunction("message_validation", function(p2, p3: string, p4): boolean
 		-- upvalues: p1 (copy), RunService (upval), Chat (upval), ChatLocalizationModule (upval), isMessageValidServer (upval), DisallowedWhiteSpace (upval)
 		local Speaker = p1:GetSpeaker(p2)
 		local Player = Speaker:GetPlayer()
@@ -64,7 +64,7 @@ return function(p1) --[[ Line: 57 | Named "Run" ]]
 		if RunService:IsStudio() then
 			v1 = true
 		else
-			local Success, Result = pcall(function() --[[ Line: 51 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: Chat (upval), Player (copy)
 				return Chat:CanUserChatAsync(Player.UserId)
 			end)

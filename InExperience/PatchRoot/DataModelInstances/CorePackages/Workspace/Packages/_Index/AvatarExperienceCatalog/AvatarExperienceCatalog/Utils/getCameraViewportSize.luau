@@ -1,4 +1,4 @@
-﻿return function() --[[ Line: 5 | Named "getCameraViewportSize" ]]
+﻿return function()
 	local CurrentCamera = workspace.CurrentCamera
 	
 	return if CurrentCamera then CurrentCamera.ViewportSize else nil

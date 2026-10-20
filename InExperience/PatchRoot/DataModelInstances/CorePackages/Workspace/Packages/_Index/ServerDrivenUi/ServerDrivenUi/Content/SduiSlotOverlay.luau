@@ -39,7 +39,7 @@ local config = {
 	}
 }
 
-return ReactModule.memo(function(Frames) --[[ Line: 70 | Named "SduiSlotOverlay" ]]
+return ReactModule.memo(function(Frames)
 	-- upvalues: ReactModule (copy), config (copy), LuaAppSduiSlotOverlayZIndex (copy)
 	local Padding = Frames.padding or 0
 	
@@ -52,7 +52,7 @@ return ReactModule.memo(function(Frames) --[[ Line: 70 | Named "SduiSlotOverlay"
 		BackgroundTransparency = 1,
 		ZIndex = if LuaAppSduiSlotOverlayZIndex then Frames.zIndex else nil,
 		[ReactModule.Tag] = "data-testid=--sdui-slot-overlay"
-	}, (ReactModule.useMemo(function() --[[ Line: 79 ]]
+	}, (ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), Padding (copy), config (upval), Frames (copy)
 		local config1 = {
 			UIPadding = ReactModule.createElement("UIPadding", {

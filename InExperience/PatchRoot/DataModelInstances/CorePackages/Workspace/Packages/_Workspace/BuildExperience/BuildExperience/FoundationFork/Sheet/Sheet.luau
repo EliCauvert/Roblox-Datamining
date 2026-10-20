@@ -12,7 +12,7 @@ local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local _ = require(script.Parent.Types)
 local config = { testId = "--foundation-sheet" }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 23 | Named "Sheet" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), UseScreenModule (copy), GuiService (copy), ReactUtilsModule (copy), BottomSheetModule (copy), CenterSheetModule (copy), SideSheetModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(WithDefaultsModuleResult.isOpen == nil or WithDefaultsModuleResult.isOpen)
@@ -20,11 +20,11 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 23 |
 	local UseScreenModuleResult = UseScreenModule()
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(not UseScreenModuleResult or UseScreenModuleResult.AbsoluteSize.Y < UseScreenModuleResult.AbsoluteSize.X)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(GuiService.ViewportDisplaySize)
-	ReactModule.useImperativeHandle(WithDefaultsModuleResult.sheetRef, function() --[[ Line: 33 ]]
+	ReactModule.useImperativeHandle(WithDefaultsModuleResult.sheetRef, function()
 		-- upvalues: UseRefResult (copy)
 		return UseRefResult.current
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 37 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: WithDefaultsModuleResult (copy), UseRefResult (copy), UseStateResult2 (copy)
 		if WithDefaultsModuleResult.isOpen == false and UseRefResult.current then
 			UseRefResult.current.close()
@@ -35,28 +35,28 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 23 |
 			UseStateResult2(true)
 		end
 	end, { WithDefaultsModuleResult.isOpen })
-	ReactModule.useEffect(function() --[[ Line: 45 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), WithDefaultsModuleResult (copy), UseStateResult2 (copy)
 		if not UseStateResult and WithDefaultsModuleResult.isOpen then
 			UseStateResult2(true)
 		end
 	end, { UseStateResult })
-	ReactUtilsModule.useEventConnection(GuiService:GetPropertyChangedSignal("ViewportDisplaySize"), function() --[[ Line: 51 ]]
+	ReactUtilsModule.useEventConnection(GuiService:GetPropertyChangedSignal("ViewportDisplaySize"), function()
 		-- upvalues: UseStateResult2_2 (copy), GuiService (upval)
 		UseStateResult2_2(GuiService.ViewportDisplaySize)
 	end, {})
-	ReactModule.useLayoutEffect(function() --[[ Line: 55 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseScreenModuleResult (copy), UseStateResult2_1 (copy)
 		local Connection = nil
 		
 		if UseScreenModuleResult then
 			UseStateResult2_1(UseScreenModuleResult.AbsoluteSize.Y < UseScreenModuleResult.AbsoluteSize.X)
-			Connection = UseScreenModuleResult:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 59 ]]
+			Connection = UseScreenModuleResult:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: UseStateResult2_1 (upval), UseScreenModuleResult (upval)
 				UseStateResult2_1(UseScreenModuleResult.AbsoluteSize.Y < UseScreenModuleResult.AbsoluteSize.X)
 			end)
 		end
-		return function() --[[ Line: 64 ]]
+		return function()
 			-- upvalues: Connection (ref)
 			if Connection then
 				Connection:Disconnect()
@@ -71,7 +71,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 23 |
 		Copy.sheetRef = UseRefResult
 		Copy.displaySize = UseStateResult3
 		
-		function Copy.onClose() --[[ Line: 80 ]]
+		function Copy.onClose()
 			-- upvalues: WithDefaultsModuleResult (copy), UseStateResult2 (copy)
 			if WithDefaultsModuleResult.onClose then
 				WithDefaultsModuleResult.onClose()

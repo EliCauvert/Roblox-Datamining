@@ -5,7 +5,7 @@ local UseDrawerVisibleFunction = require(Parent.Drawer).Hooks.useDrawerVisible
 local FlyoutAnalyticsModule = require(FlyoutSidePanel.Analytics.FlyoutAnalytics)
 local FlyoutContentSettingsModule = require(FlyoutSidePanel.Config.FlyoutContentSettings)
 
-return function(List) --[[ Line: 9 | Named "useFlyoutTradesEntryImpressionLogging" ]]
+return function(List)
 	-- upvalues: UseDrawerVisibleFunction (copy), ReactModule (copy), FlyoutContentSettingsModule (copy), FlyoutAnalyticsModule (copy)
 	local UseDrawerVisibleResult = UseDrawerVisibleFunction()
 	local UseRefResult = ReactModule.useRef(false)
@@ -17,7 +17,7 @@ return function(List) --[[ Line: 9 | Named "useFlyoutTradesEntryImpressionLoggin
 			break
 		end
 	end
-	ReactModule.useEffect(function() --[[ Line: 21 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseDrawerVisibleResult (copy), UseRefResult (copy), Flag (ref), FlyoutAnalyticsModule (upval), FlyoutContentSettingsModule (upval)
 		if not UseDrawerVisibleResult then
 			UseRefResult.current = false

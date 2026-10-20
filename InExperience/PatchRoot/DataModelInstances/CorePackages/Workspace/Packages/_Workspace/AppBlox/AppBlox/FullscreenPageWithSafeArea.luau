@@ -10,7 +10,7 @@ local DisplayModule = require(Parent.Display)
 local CryoModule = require(Parent.Cryo)
 local FFlagExtendScrollingFramesBySafeInsets = require(Parent.SharedFlags).FFlagExtendScrollingFramesBySafeInsets
 
-function FullscreenPageWithSafeArea.render(p1) --[[ Line: 18 ]]
+function FullscreenPageWithSafeArea.render(p1)
 	-- upvalues: RoactModule (copy), FFlagExtendScrollingFramesBySafeInsets (copy), GetSafeAreaSizeFunction (copy), IsVRAppBuildFunction (copy), Constants (copy)
 	local StatusBarHeight = p1.props.statusBarHeight
 	local ScreenSize = p1.props.screenSize
@@ -58,7 +58,7 @@ function FullscreenPageWithSafeArea.render(p1) --[[ Line: 18 ]]
 	})
 end
 
-local v1 = RoactRoduxModule.connect(function(p1, _) --[[ Line: 87 ]]
+local v1 = RoactRoduxModule.connect(function(p1, _)
 	return {
 		statusBarHeight = p1.TopBar.statusBarHeight,
 		screenSize = p1.ScreenSize,
@@ -66,7 +66,7 @@ local v1 = RoactRoduxModule.connect(function(p1, _) --[[ Line: 87 ]]
 	}
 end)(FullscreenPageWithSafeArea)
 
-return if FFlagExtendScrollingFramesBySafeInsets then function(p1) --[[ Line: 96 | Named "FullscreenPageWithSafeAreaFunctional" ]]
+return if FFlagExtendScrollingFramesBySafeInsets then function(p1)
 	-- upvalues: UseSignalStateFunction (copy), DisplayModule (copy), CryoModule (copy), RoactModule (copy), v1 (copy)
 	return RoactModule.createElement(v1, (CryoModule.Dictionary.join(p1, {
 		deviceSafePadding = UseSignalStateFunction(DisplayModule.GetDisplayStore().getDeviceSafePadding)

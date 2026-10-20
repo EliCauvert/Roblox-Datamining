@@ -6,7 +6,7 @@ local ExperienceInviteVoteTypeModule = require(RoduxSquads.Enums.ExperienceInvit
 local ExperienceInviteTypeModule = require(RoduxSquads.Enums.ExperienceInviteType)
 local FFlagEnablePrivatePartyAcceptInvite = require(Parent.SharedFlags).FFlagEnablePrivatePartyAcceptInvite
 
-local function _(p1): number --[[ Line: 12 | Named "getSpotsTaken" ]]
+local function _(p1): number
 	-- upvalues: ExperienceInviteVoteTypeModule (copy)
 	local Count = 0
 	
@@ -20,7 +20,7 @@ end
 
 local ExperienceInviteModelModule = {}
 
-function ExperienceInviteModelModule.new(p2) --[[ Line: 32 ]]
+function ExperienceInviteModelModule.new(p2)
 	-- upvalues: ExperienceInviteModelModule (copy)
 	assert(ExperienceInviteModelModule.isValid(p2))
 	ExperienceInviteModelModule.__index = ExperienceInviteModelModule
@@ -29,7 +29,7 @@ function ExperienceInviteModelModule.new(p2) --[[ Line: 32 ]]
 	return p2
 end
 
-function ExperienceInviteModelModule.mock(p2) --[[ Line: 44 ]]
+function ExperienceInviteModelModule.mock(p2)
 	-- upvalues: ExperienceInviteVoteTypeModule (copy), ExperienceInviteModelModule (copy), ExperienceInviteStateModule (copy), FFlagEnablePrivatePartyAcceptInvite (copy), ExperienceInviteTypeModule (copy)
 	local P2 = p2 or {}
 	local Votes = P2.votes or {
@@ -65,7 +65,7 @@ function ExperienceInviteModelModule.mock(p2) --[[ Line: 44 ]]
 	return NewExperienceInviteModel
 end
 
-function ExperienceInviteModelModule.format(p3) --[[ Line: 79 ]]
+function ExperienceInviteModelModule.format(p3)
 	-- upvalues: ExperienceInviteModelModule (copy), ExperienceInviteVoteTypeModule (copy), FFlagEnablePrivatePartyAcceptInvite (copy), ExperienceInviteTypeModule (copy)
 	local Votes = p3.votes
 	local NewFunction = ExperienceInviteModelModule.new

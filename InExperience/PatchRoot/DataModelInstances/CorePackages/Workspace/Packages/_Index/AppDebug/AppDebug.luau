@@ -1,4 +1,4 @@
-﻿local function v0() --[[ Line: 26 ]] end
+﻿local function v0() end
 
 local DevOnly = script:FindFirstChild("DevOnly")
 local Flag = false
@@ -11,7 +11,7 @@ return {
 	littleTraceback = require(script.littleTraceback),
 	logTreeGraphviz = require(script.logTreeGraphviz),
 	LogTree = require(script.LogTree),
-	register = function() --[[ Line: 33 ]]
+	register = function()
 		-- upvalues: DevOnly (copy), v0 (copy), Flag (ref), v1 (ref)
 		if _G.ENVIRONMENT == "PRODUCTION" or DevOnly == nil then
 			return v0
@@ -21,7 +21,7 @@ return {
 			Flag = true
 			local list = { (require(DevOnly.TagAnnotation.TagAnnotationSection)) }
 			
-			v1 = function() --[[ Line: 47 ]]
+			v1 = function()
 				-- upvalues: list (copy), Flag (upval), v1 (upval)
 				for _, value in list do
 					value()

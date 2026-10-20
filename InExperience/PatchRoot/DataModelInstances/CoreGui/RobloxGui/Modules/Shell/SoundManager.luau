@@ -15,22 +15,22 @@ local config = {
 }
 local t = {}
 
-local function _(p1, p2, p3, p4) --[[ Line: 33 | Named "EaseOutCirc" ]]
+local function _(p1, p2, p3, p4)
 	local v1 = p1 / p4 - 1
 	
 	return p3 * math.sqrt(1 - v1 * v1) + p2
 end
 
-local function IsGameRunning() --[[ Line: 39 ]]
+local function IsGameRunning()
 	-- upvalues: RunService (copy)
 	return not UserSettings().GameSettings:InStudioMode() or game:GetService("UserInputService"):GetPlatform() == Enum.Platform.Windows or RunService:IsRunning()
 end
 
-function GetSoundManager() --[[ Line: 46 ]]
+function GetSoundManager()
 	-- upvalues: t (copy), config (copy), IsGameRunning (copy), UtilityModule (copy), CoreGui (copy), GuiService (copy)
 	local Volumes = {}
 	
-	local function _(p1) --[[ Line: 53 | Named "FindSoundObjectForName" ]]
+	local function _(p1)
 		-- upvalues: t (upval)
 		if t[p1] then
 			local Removed = table.remove(t[p1], 1)
@@ -45,7 +45,7 @@ function GetSoundManager() --[[ Line: 46 ]]
 	
 	local config1 = {
 		SoundHolder = nil,
-		CreateSound = function(_, Name) --[[ Line: 63 ]]
+		CreateSound = function(_, Name)
 			-- upvalues: config (upval)
 			local Sound = Instance.new("Sound")
 			Sound.Name = Name
@@ -53,7 +53,7 @@ function GetSoundManager() --[[ Line: 46 ]]
 			
 			return Sound
 		end,
-		Play = function(_, p1, p2, p3, p4, ...) --[[ Line: 74 ]]
+		Play = function(_, p1, p2, p3, p4, ...)
 			-- upvalues: config (upval), t (upval), Volumes (copy), IsGameRunning (upval)
 			local v1 = nil
 			local Sound = nil
@@ -85,7 +85,7 @@ function GetSoundManager() --[[ Line: 46 ]]
 					
 					return v1
 				else
-					spawn(function() --[[ Line: 95 ]]
+					spawn(function()
 						-- upvalues: p1 (copy)
 						error("Unable to find sound: " .. tostring(p1))
 					end)
@@ -96,14 +96,14 @@ function GetSoundManager() --[[ Line: 46 ]]
 		end
 	}
 	
-	function config1:IsPlaying(ChildName) --[[ Line: 103 ]]
+	function config1:IsPlaying(ChildName)
 		-- upvalues: config1 (copy)
 		local ChildName1 = config1.SoundHolder:FindFirstChild(ChildName)
 		
 		return if ChildName1 then ChildName1.IsPlaying else false
 	end
 	
-	function config1:Stop(ChildName, ...) --[[ Line: 111 ]]
+	function config1:Stop(ChildName, ...)
 		-- upvalues: config1 (copy), config (upval)
 		if config1.SoundHolder and config[ChildName] then
 			local ChildName1 = config1.SoundHolder:FindFirstChild(ChildName)
@@ -114,19 +114,19 @@ function GetSoundManager() --[[ Line: 46 ]]
 		end
 	end
 	
-	function config1:TweenSound(Sound, p1, p2) --[[ Line: 120 ]]
+	function config1:TweenSound(Sound, p1, p2)
 		-- upvalues: Volumes (copy), UtilityModule (upval), IsGameRunning (upval)
 		Volumes[Sound] = nil
-		UtilityModule.PropertyTweener(Sound, "Volume", Sound.Volume, p1, p2, function(...) --[[ Line: 123 ]]
+		UtilityModule.PropertyTweener(Sound, "Volume", Sound.Volume, p1, p2, function(...)
 			-- upvalues: IsGameRunning (upval), UtilityModule (upval)
 			return IsGameRunning() and UtilityModule.EaseInOutQuad(...) or 0
-		end, true, function() --[[ Line: 127 ]]
+		end, true, function()
 			-- upvalues: Volumes (upval), Sound (copy), p1 (copy)
 			Volumes[Sound] = p1
 		end)
 	end
 	
-	;(function() --[[ Line: 138 | Named "Initialize" ]]
+	;(function()
 		-- upvalues: CoreGui (upval), config1 (copy), config (upval), t (upval), GuiService (upval), IsGameRunning (upval), Volumes (copy)
 		local AppShellSounds = Instance.new("Folder")
 		AppShellSounds.Name = "AppShellSounds"
@@ -149,7 +149,7 @@ function GetSoundManager() --[[ Line: 46 ]]
 			table.insert(t[Name], Sound2)
 		end
 		local v1 = nil
-		GuiService:GetPropertyChangedSignal("SelectedCoreObject"):connect(function() --[[ Line: 159 ]]
+		GuiService:GetPropertyChangedSignal("SelectedCoreObject"):connect(function()
 			-- upvalues: GuiService (upval), v1 (ref)
 			local SelectedCoreObject = GuiService.SelectedCoreObject
 			
@@ -165,7 +165,7 @@ function GetSoundManager() --[[ Line: 46 ]]
 		end)
 		
 		if not IsGameRunning() then
-			spawn(function() --[[ Line: 172 ]]
+			spawn(function()
 				-- upvalues: IsGameRunning (upval), Volumes (upval)
 				while not IsGameRunning() do
 					wait(0.1)

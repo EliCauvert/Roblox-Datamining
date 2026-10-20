@@ -7,7 +7,7 @@ local MergeDirectivesFunction = require(script.Parent.directives).mergeDirective
 local _ = require(script.Parent["merge-typedefs_types"])
 
 return {
-	mergeScalar = function(p1, p2, p3) --[[ Line: 24 ]]
+	mergeScalar = function(p1, p2, p3)
 		-- upvalues: Boolean (copy), MergeDirectivesFunction (copy), Object (copy), Kind (copy)
 		return if p2 then {
 			name = p1.name,

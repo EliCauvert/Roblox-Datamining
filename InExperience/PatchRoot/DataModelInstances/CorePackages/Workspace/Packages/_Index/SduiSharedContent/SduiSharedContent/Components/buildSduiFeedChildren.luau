@@ -18,12 +18,12 @@ local SduiFeedDebugNameWithImpressionsTag = game:DefineFastFlag("SduiFeedDebugNa
 local SORTINDEXSELECTIONORDERMULTIPLIER = require(Parent.DiscoveryTypes).Constants.SORT_INDEX_SELECTION_ORDER_MULTIPLIER
 local t = {}
 
-local function _(p1, p2, p3: number, p4, p5) --[[ Line: 33 | Named "getSpacingAfterFeedItem" ]]
+local function _(p1, p2, p3: number, p4, p5)
 	-- upvalues: FFlagSduiSamePoolFeedItemSpacing (copy)
 	return if p1 == nil then nil elseif FFlagSduiSamePoolFeedItemSpacing and p4 ~= nil and p5 ~= nil and p5.continuesPreviousSection == true then p4 elseif p2 == 1 and p3 ~= nil and p3 >= 0 then p3 else p1
 end
 
-return function(p1) --[[ Line: 86 | Named "buildSduiFeedChildren" ]]
+return function(p1)
 	-- upvalues: FFlagSduiIndividualFeedItemSpacing (copy), FindAnalyticsFieldFunction (copy), t (copy), SduiBuilder (copy), SduiErrors (copy), GetSduiComponentWrapperFunction (copy), CryoModule (copy), FFlagSduiCollectionGridRevealRows (copy), FFlagAppPageShellScrollToTopFocus (copy), SORTINDEXSELECTIONORDERMULTIPLIER (copy), ReactModule (copy), SduiFeedDebugNameWithImpressionsTag (copy), FFlagSduiSamePoolFeedItemSpacing (copy), SduiFeedItemModule (copy), FFlagLuaAppsDefaultSelection (copy)
 	local Elements = {}
 	local SduiContext = p1.sduiContext

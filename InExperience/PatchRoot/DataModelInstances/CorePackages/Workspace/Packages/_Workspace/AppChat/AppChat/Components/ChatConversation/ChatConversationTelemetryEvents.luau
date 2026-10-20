@@ -8,9 +8,9 @@ local FFlagAppChatEnableMessageContextMenuModule = require(AppChat.Flags.FFlagAp
 local NamedCounterConfigurationNoEmittedInfoFunction = DefaultTelemetryEventsModule.namedCounterConfigurationNoEmittedInfo
 local NamedCounterConfigurationAndFormatFunction = DefaultTelemetryEventsModule.namedCounterConfigurationAndFormat
 
-local function targetMessageFormatFunction() --[[ Line: 22 ]]
+local function targetMessageFormatFunction()
 	-- upvalues: DefaultTelemetryEventsModule (copy)
-	return DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 23 ]]
+	return DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 		return {
 			targetMessageId = p1.targetMessageId,
 			targetMessageSenderId = p1.targetMessageSenderId,
@@ -28,7 +28,7 @@ return {
 		lastUpdated = { 2025, 7, 31 },
 		backendsList = {
 			NamedCounterConfigurationNoEmittedInfoFunction("AppChat.ChatConversation.Rendered"),
-			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 47 ]]
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return { loadedMessageCount = p1.loadedMessageCount }
 			end)
 		}
@@ -38,10 +38,10 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			NamedCounterConfigurationAndFormatFunction("AppChat.ChatConversation.Exit", function(p1) --[[ Line: 59 ]]
+			NamedCounterConfigurationAndFormatFunction("AppChat.ChatConversation.Exit", function(p1)
 				return { conversationExitType = p1.conversationExitType }
 			end),
-			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 67 ]]
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return { conversationExitType = p1.conversationExitType }
 			end)
 		}
@@ -60,10 +60,10 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			NamedCounterConfigurationAndFormatFunction("AppChat.ChatConversation.Message.Sent", function(p1) --[[ Line: 89 ]]
+			NamedCounterConfigurationAndFormatFunction("AppChat.ChatConversation.Message.Sent", function(p1)
 				return { messageSentResult = p1.messageSentResult }
 			end),
-			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 102 ]]
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return {
 					messageSentResult = p1.messageSentResult,
 					messageId = p1.messageId,
@@ -81,10 +81,10 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			NamedCounterConfigurationAndFormatFunction("AppChat.ChatConversation.Button.MoreMenu", function(p1) --[[ Line: 128 ]]
+			NamedCounterConfigurationAndFormatFunction("AppChat.ChatConversation.Button.MoreMenu", function(p1)
 				return { action = p1.action }
 			end),
-			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 136 ]]
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return { action = p1.action }
 			end)
 		}
@@ -94,10 +94,10 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			NamedCounterConfigurationAndFormatFunction("AppChat.ChatConversation.Button.Send", function(p1) --[[ Line: 149 ]]
+			NamedCounterConfigurationAndFormatFunction("AppChat.ChatConversation.Button.Send", function(p1)
 				return { sendBtnClickResult = p1.sendBtnClickResult }
 			end),
-			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 156 ]]
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return { sendBtnClickResult = p1.sendBtnClickResult }
 			end)
 		}
@@ -179,10 +179,10 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			NamedCounterConfigurationAndFormatFunction("AppChat.ChatConversation.Message.FtuxTooltip.Impression", function(p1) --[[ Line: 244 ]]
+			NamedCounterConfigurationAndFormatFunction("AppChat.ChatConversation.Message.FtuxTooltip.Impression", function(p1)
 				return { tooltipVariant = p1.tooltipVariant }
 			end),
-			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 252 ]]
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return { tooltipVariant = p1.tooltipVariant }
 			end)
 		}
@@ -192,10 +192,10 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			NamedCounterConfigurationAndFormatFunction("AppChat.ChatConversation.Message.FtuxTooltip.Dismissed", function(p1) --[[ Line: 268 ]]
+			NamedCounterConfigurationAndFormatFunction("AppChat.ChatConversation.Message.FtuxTooltip.Dismissed", function(p1)
 				return { tooltipVariant = p1.tooltipVariant }
 			end),
-			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 276 ]]
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return { tooltipVariant = p1.tooltipVariant }
 			end)
 		}
@@ -206,7 +206,7 @@ return {
 		lastUpdated = { 2025, 11, 18 },
 		backendsList = {
 			NamedCounterConfigurationNoEmittedInfoFunction("AppChat.ChatConversation.GameCard.Thumbnail.Clicked"),
-			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 291 ]]
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return { universeId = p1.universeId, placeId = p1.placeId }
 			end)
 		}
@@ -217,7 +217,7 @@ return {
 		lastUpdated = { 2025, 11, 18 },
 		backendsList = {
 			NamedCounterConfigurationNoEmittedInfoFunction("AppChat.ChatConversation.GameCard.Button.Play"),
-			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 308 ]]
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return { universeId = p1.universeId, placeId = p1.placeId }
 			end)
 		}
@@ -228,7 +228,7 @@ return {
 		lastUpdated = { 2025, 11, 19 },
 		backendsList = {
 			NamedCounterConfigurationNoEmittedInfoFunction("AppChat.ChatConversation.GameCard.Metadata.Clicked"),
-			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 325 ]]
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return { universeId = p1.universeId, placeId = p1.placeId }
 			end)
 		}

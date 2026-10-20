@@ -15,21 +15,21 @@ local SquadLobbyUserCardModule = require(script.Parent.SquadLobbyUserCard)
 local SquadLobbyUpsellCardModule = require(script.Parent.SquadLobbyUpsellCard)
 local FFlagEnableSquadRegroupExperimentationSmallScreenFix = require(Parent.SharedFlags).FFlagEnableSquadRegroupExperimentationSmallScreenFix
 
-return function(p1) --[[ Line: 45 ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalUserIdFunction (copy), UseSquadStateFunction (copy), ReactModule (copy), SquadState (copy), Cryo (copy), SquadUserPartyStatusModule (copy), FFlagEnableSquadRegroupExperimentationSmallScreenFix (copy), UseSelectorFunction (copy), SquadLobbyUserCardModule (copy), SquadLobbyUpsellCardModule (copy), Roact (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Number: number = tonumber(UseLocalUserIdFunction()) or 0
 	local UseSquadStateResult = UseSquadStateFunction()
 	local Medium = UseTokensResult.Gap.Medium
 	local XLarge = UseTokensResult.Padding.XLarge
-	local UseMemoResult, UseMemoResult2, UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 52 ]]
+	local UseMemoResult, UseMemoResult2, UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), XLarge (copy), UseSquadStateResult (copy), SquadState (upval), Cryo (upval), SquadUserPartyStatusModule (upval), Medium (copy), FFlagEnableSquadRegroupExperimentationSmallScreenFix (upval)
 		if p1.containerSize.Y == 0 or p1.containerSize.X == 0 then
 			return Vector2.new(0, 0), 0, 0
 		end
 		local XDelta = p1.containerSize.X - XLarge * 2
 		local XDeltaRatio = XDelta / p1.containerSize.Y
-		local Largest: number = if UseSquadStateResult == SquadState.Active then math.max(#Cryo.List.filter(p1.users, function(p2): boolean --[[ Line: 64 ]]
+		local Largest: number = if UseSquadStateResult == SquadState.Active then math.max(#Cryo.List.filter(p1.users, function(p2): boolean
 			-- upvalues: SquadUserPartyStatusModule (upval)
 			return p2.partyStatus ~= SquadUserPartyStatusModule.Inactive
 		end), 2) else 1
@@ -50,17 +50,17 @@ return function(p1) --[[ Line: 45 ]]
 		
 		return Vector2.new((XDelta + Medium) / Largest1 - Medium, if FFlagEnableSquadRegroupExperimentationSmallScreenFix then math.max(120, p1.containerSize.Y + Medium) / Smallest - Medium else (p1.containerSize.Y + Medium) / Smallest - Medium), Ceiled, Largest1
 	end, { Medium, p1.containerSize, p1.users, XLarge })
-	local UseSelectorResult = UseSelectorFunction((ReactModule.useCallback(function(p2) --[[ Line: 101 ]]
+	local UseSelectorResult = UseSelectorFunction((ReactModule.useCallback(function(p2)
 		return p2.Squad.UserBlocking.isBlockedByMe
 	end, {})))
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 107 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), ReactModule (upval), SquadLobbyUserCardModule (upval), UseSelectorResult (copy), p1 (copy), SquadUserPartyStatusModule (upval), Number (copy), UseSquadStateResult (copy), SquadState (upval), SquadLobbyUpsellCardModule (upval), UseMemoResult2 (copy), UseMemoResult3 (copy), Medium (copy)
 		if UseMemoResult.X == 0 or UseMemoResult.Y == 0 then
 			return {}
 		end
 		local List = {}
 		
-		local function v29(LayoutOrder, User, IsPartyStatusMatch) --[[ Line: 113 ]]
+		local function v29(LayoutOrder, User, IsPartyStatusMatch)
 			-- upvalues: ReactModule (upval), SquadLobbyUserCardModule (upval), UseMemoResult (upval), UseSelectorResult (upval), p1 (upval)
 			return ReactModule.createElement(SquadLobbyUserCardModule, {
 				size = UDim2.fromOffset(UseMemoResult.X, UseMemoResult.Y),

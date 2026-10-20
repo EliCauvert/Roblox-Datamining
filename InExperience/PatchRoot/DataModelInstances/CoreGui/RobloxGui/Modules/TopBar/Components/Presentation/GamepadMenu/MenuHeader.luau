@@ -19,9 +19,9 @@ MenuHeader.validateProps = TModule.strictInterface({
 	height = TModule.numberPositive
 })
 
-function MenuHeader.render(p1) --[[ Line: 41 ]]
+function MenuHeader.render(p1)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy), ImageSetLabel (copy), ComponentAssetsCircle17 (copy), _Rect (copy), IconsImageUnavailable (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 42 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: RoactModule (upval), ImageSetLabel (upval), ComponentAssetsCircle17 (upval), _Rect (upval), IconsImageUnavailable (upval), p1 (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 		local Theme = p2.Theme
 		local _Font = p2.Font
@@ -101,6 +101,6 @@ function MenuHeader.render(p1) --[[ Line: 41 ]]
 	end)
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p1) --[[ Line: 144 | Named "mapStateToProps" ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p1)
 	return { gameName = p1.gameInfo.name }
 end, nil)(MenuHeader)

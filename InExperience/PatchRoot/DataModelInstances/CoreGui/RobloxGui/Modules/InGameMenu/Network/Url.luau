@@ -1,10 +1,10 @@
 ﻿local ContentProvider = game:GetService("ContentProvider")
 
-local function preventTableModification(_, _, _) --[[ Line: 33 ]]
+local function preventTableModification(_, _, _)
 	error("Attempt to modify read-only table")
 end
 
-local function _(p1) --[[ Line: 36 | Named "createReadOnlyTable" ]]
+local function _(p1)
 	-- upvalues: preventTableModification (copy)
 	return (setmetatable({}, {
 		__metatable = false,
@@ -13,7 +13,7 @@ local function _(p1) --[[ Line: 36 | Named "createReadOnlyTable" ]]
 	}))
 end
 
-local Text, v1, v2 = (function() --[[ Line: 11 | Named "parseBaseUrlInformation" ]]
+local Text, v1, v2 = (function()
 	-- upvalues: ContentProvider (copy)
 	local BaseUrl = ContentProvider.BaseUrl
 	
@@ -63,22 +63,22 @@ return (setmetatable({}, {
 		BLOG_URL = "https://blog.roblox.com/",
 		CORP_URL = "https://corp.roblox.com/",
 		GAME_I18N_URL = string.format("https://gameinternationalization.%s", v2),
-		getUserProfileUrl = function(p1, p2): string --[[ Line: 117 ]]
+		getUserProfileUrl = function(p1, p2): string
 			return string.format("%susers/%s/profile", p1.BASE_URL, p2)
 		end,
-		getUserFriendsUrl = function(p1, p2): string --[[ Line: 121 ]]
+		getUserFriendsUrl = function(p1, p2): string
 			return string.format("%susers/%s/friends", p1.BASE_URL, p2)
 		end,
-		getUserInventoryUrl = function(p1, p2): string --[[ Line: 125 ]]
+		getUserInventoryUrl = function(p1, p2): string
 			return string.format("%susers/%s/inventory", p1.BASE_URL, p2)
 		end,
-		getPlaceDefaultThumbnailUrl = function(p1, p2, p3, p4): string --[[ Line: 129 ]]
+		getPlaceDefaultThumbnailUrl = function(p1, p2, p3, p4): string
 			return string.format("%sThumbs/Asset.ashx?width=%d&height=%d&assetId=%s&ignorePlaceMediaItems=true", p1.BASE_URL, p3, p4, (tostring(p2)))
 		end,
-		isVanitySite = function(p1): boolean --[[ Line: 138 ]]
+		isVanitySite = function(p1): boolean
 			return p1.PREFIX ~= "www"
 		end,
-		makeQueryString = function(_, List): string --[[ Line: 143 ]]
+		makeQueryString = function(_, List): string
 			local List1 = {}
 			
 			for i, value in pairs(List) do

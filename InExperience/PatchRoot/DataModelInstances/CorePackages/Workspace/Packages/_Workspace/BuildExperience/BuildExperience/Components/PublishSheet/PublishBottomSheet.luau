@@ -14,7 +14,7 @@ local Sheet = FoundationModule.Sheet
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 
-local function PublishPreview(p1) --[[ Line: 44 ]]
+local function PublishPreview(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), PublishStatusModule (copy), PublishLatestPreviewCardModule (copy), PublishPreviewCardModule (copy), ReactModule (copy)
 	local Loading = UseLocalizationFunction({ loading = LocalizationStringsModule.BUILD_MENU_LOADING }).loading
 	local Target = p1.target
@@ -32,14 +32,14 @@ local function PublishPreview(p1) --[[ Line: 44 ]]
 	})
 end
 
-local function PublishSheetContent(p1) --[[ Line: 66 ]]
+local function PublishSheetContent(p1)
 	-- upvalues: UseScrollPerformanceTrackerModule (copy), ReactModule (copy), Sheet (copy)
 	UseScrollPerformanceTrackerModule("LuaApp_Build_PublishSheet_Scroll", p1.scrollingFrameRef)
 	
 	return ReactModule.createElement(Sheet.Content, { scrollingFrameRef = p1.scrollingFrameRef }, p1.children)
 end
 
-return function(p1) --[[ Line: 77 | Named "PublishBottomSheet" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), Sheet (copy), Text (copy), PublishSheetContent (copy), View (copy), PublishPreview (copy), PublishConfigurationContentContainerModule (copy), PublishFooterModule (copy)
 	local TestId = p1.testId or "publish-bottom-sheet"
 	

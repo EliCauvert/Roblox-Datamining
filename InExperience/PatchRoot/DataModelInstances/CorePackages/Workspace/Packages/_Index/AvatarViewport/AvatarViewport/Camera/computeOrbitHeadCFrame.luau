@@ -1,6 +1,6 @@
 ﻿local ConstantsModule = require(script.Parent.Parent.Constants)
 
-return function(p1): CFrame? --[[ Line: 18 | Named "computeOrbitHeadCFrame" ]]
+return function(p1): CFrame?
 	-- upvalues: ConstantsModule (copy)
 	local Child = p1.character:FindFirstChild(p1.focusPartName or ConstantsModule.DefaultFocusPartName)
 	

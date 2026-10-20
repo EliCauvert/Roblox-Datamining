@@ -19,7 +19,7 @@ local t = {}
 for _, value in list do
 	t[value] = true
 end
-local function normalizeConversation(p1) --[[ Line: 97 ]]
+local function normalizeConversation(p1)
 	return if p1 == nil or p1.id == nil then nil else {
 		id = tostring(p1.id),
 		source = p1.source,
@@ -51,7 +51,7 @@ local function normalizeConversation(p1) --[[ Line: 97 ]]
 	}
 end
 
-local function _(p1, p2) --[[ Line: 133 | Named "mergePreservedLocalFields" ]]
+local function _(p1, p2)
 	-- upvalues: CryoModule (copy)
 	return if p1 == nil then p2 else CryoModule.Dictionary.join(p2, {
 		usersTyping = p1.usersTyping,
@@ -60,7 +60,7 @@ local function _(p1, p2) --[[ Line: 133 | Named "mergePreservedLocalFields" ]]
 	})
 end
 
-local _ = function(Callback, p1) --[[ Line: 145 | Named "copyListStatus" ]]
+local _ = function(Callback, p1)
 	-- upvalues: list (copy)
 	local t = {}
 	local CallbackResult = Callback(p1)
@@ -71,13 +71,13 @@ local _ = function(Callback, p1) --[[ Line: 145 | Named "copyListStatus" ]]
 	return t
 end
 
-local _ = function(List) --[[ Line: 154 | Named "clearProxy" ]]
+local _ = function(List)
 	for i in List do
 		List[i] = nil
 	end
 end
 
-return function() --[[ Line: 160 | Named "createConversationStore" ]]
+return function()
 	-- upvalues: CreateProxyFunction (copy), config (copy), list (copy), normalizeConversation (copy), CryoModule (copy), t (copy)
 	local Proxy = CreateProxyFunction({})
 	local Proxy1 = CreateProxyFunction({})
@@ -85,11 +85,11 @@ return function() --[[ Line: 160 | Named "createConversationStore" ]]
 	local List = {}
 	
 	return {
-		getConversation = function(p2, p3) --[[ Line: 168 ]]
+		getConversation = function(p2, p3)
 			-- upvalues: Proxy (copy)
 			return Proxy(p3)[p2]
 		end,
-		getConversations = function(p2) --[[ Line: 172 ]]
+		getConversations = function(p2)
 			-- upvalues: Proxy (copy)
 			local List = {}
 			
@@ -100,11 +100,11 @@ return function() --[[ Line: 160 | Named "createConversationStore" ]]
 			end
 			return List
 		end,
-		getParticipantMetadata = function(p3, p4) --[[ Line: 182 ]]
+		getParticipantMetadata = function(p3, p4)
 			-- upvalues: Proxy1 (copy)
 			return Proxy1(p4)[p3]
 		end,
-		getListStatus = function(p3) --[[ Line: 186 ]]
+		getListStatus = function(p3)
 			-- upvalues: Proxy2 (copy), list (upval)
 			local t = {}
 			local ProxyResult = Proxy2(p3)
@@ -115,11 +115,11 @@ return function() --[[ Line: 160 | Named "createConversationStore" ]]
 			return t
 		end,
 		listStatus = Proxy2,
-		addClearListener = function(p4) --[[ Line: 229 ]]
+		addClearListener = function(p4)
 			-- upvalues: List (copy)
 			table.insert(List, p4)
 		end,
-		upsertConversation = function(p4, Enabled) --[[ Line: 190 ]]
+		upsertConversation = function(p4, Enabled)
 			-- upvalues: normalizeConversation (upval), Proxy (copy), CryoModule (upval)
 			local NormalizeConversationResult = normalizeConversation(p4)
 			
@@ -139,16 +139,16 @@ return function() --[[ Line: 160 | Named "createConversationStore" ]]
 			end
 			Proxy[Id] = JoinResult
 		end,
-		removeConversation = function(Key) --[[ Line: 202 ]]
+		removeConversation = function(Key)
 			-- upvalues: Proxy (copy), Proxy1 (copy)
 			Proxy[Key] = nil
 			Proxy1[Key] = nil
 		end,
-		setParticipantMetadata = function(Key, p4) --[[ Line: 207 ]]
+		setParticipantMetadata = function(Key, p4)
 			-- upvalues: Proxy1 (copy)
 			Proxy1[Key] = p4
 		end,
-		setUsersTyping = function(Key, UsersTyping) --[[ Line: 211 ]]
+		setUsersTyping = function(Key, UsersTyping)
 			-- upvalues: Proxy (copy), CryoModule (upval)
 			local ProxyEntry = Proxy[Key]
 			
@@ -158,7 +158,7 @@ return function() --[[ Line: 160 | Named "createConversationStore" ]]
 				return
 			end
 		end,
-		setListStatus = function(List) --[[ Line: 221 ]]
+		setListStatus = function(List)
 			-- upvalues: t (upval), Proxy2 (copy), CryoModule (upval)
 			for i, value in List do
 				if t[i] == true then
@@ -166,7 +166,7 @@ return function() --[[ Line: 160 | Named "createConversationStore" ]]
 				end
 			end
 		end,
-		clear = function() --[[ Line: 233 ]]
+		clear = function()
 			-- upvalues: Proxy (copy), Proxy1 (copy), Proxy2 (copy), config (upval), t (upval), CryoModule (upval), List (copy)
 			for i in Proxy do
 				Proxy[i] = nil

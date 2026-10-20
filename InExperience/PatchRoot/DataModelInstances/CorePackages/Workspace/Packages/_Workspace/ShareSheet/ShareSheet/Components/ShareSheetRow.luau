@@ -9,7 +9,7 @@ local Visibility = FoundationModule.Enums.Visibility
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FFlagShareSheetPeoplePickerEnabledModule = require(ShareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
 
-return function(Frame) --[[ Line: 22 | Named "ShareSheetRow" ]]
+return function(Frame)
 	-- upvalues: FFlagShareSheetScrollArrowsModule (copy), ReactModule (copy), ShareSheetRowWithScrollArrowsModule (copy), UseTokensFunction (copy), ScrollView (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), Visibility (copy)
 	if FFlagShareSheetScrollArrowsModule then
 		return ReactModule.createElement(ShareSheetRowWithScrollArrowsModule, Frame)

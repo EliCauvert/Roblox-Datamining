@@ -9,7 +9,7 @@ local GameConfigurationListModule = require(BuildExperience.Components.GameConfi
 local View = FoundationModule.View
 local IconName = FoundationModule.Enums.IconName
 
-return function(p1) --[[ Line: 30 | Named "PublishConfigurationContentView" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), IconName (copy), ReactModule (copy), View (copy), GameConfigurationListModule (copy), BuildMaturityBannerModule (copy)
 	local TestId = p1.testId or "game-configuration-content"
 	local UseLocalizationResult = UseLocalizationFunction({

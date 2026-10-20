@@ -5,10 +5,10 @@ local SetCentralOverlayFunction = require(Parent.CentralOverlay).Actions.SetCent
 local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
 local GetAppFeaturePoliciesFunction = require(Parent.UniversalAppPolicy).getAppFeaturePolicies
 
-return function(p1, p2, Callback: (any) -> (), Callback1) --[[ Line: 19 | Named "openYouTubeVideoWithAgeCheck" ]]
+return function(p1, p2, Callback: (any) -> (), Callback1)
 	-- upvalues: HttpService (copy), GuiService (copy), GetAppFeaturePoliciesFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy)
 	if not p1 or #p1 == 0 then return end
-	local function doOpen() --[[ Line: 29 ]]
+	local function doOpen()
 		-- upvalues: p1 (copy), HttpService (upval), p2 (copy), GuiService (upval), Callback1 (copy)
 		GuiService:BroadcastNotification(HttpService:JSONEncode({
 			animated = true,

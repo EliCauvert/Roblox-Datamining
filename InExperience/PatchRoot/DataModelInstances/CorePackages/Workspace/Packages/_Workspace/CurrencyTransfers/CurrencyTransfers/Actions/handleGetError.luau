@@ -4,7 +4,7 @@ local PromptStateModule = require(CurrencyTransfers.Enums.PromptState)
 local TransferDirectionModule = require(CurrencyTransfers.Enums.TransferDirection)
 local _ = require(CurrencyTransfers.Models.ErrorTransferModel)
 
-return function(p1, p2) --[[ Line: 11 | Named "handleGetError" ]]
+return function(p1, p2)
 	-- upvalues: TransferDirectionModule (copy), PromptStateModule (copy)
 	local SetPromptStateFunction: (any) -> () = p1.setPromptState
 	local SetErrorTransferModelFunction: (any) -> () = p1.setErrorTransferModel

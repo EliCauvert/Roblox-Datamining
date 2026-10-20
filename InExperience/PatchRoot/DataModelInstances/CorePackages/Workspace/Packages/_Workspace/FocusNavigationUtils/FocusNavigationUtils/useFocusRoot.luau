@@ -10,7 +10,7 @@ local UseDescendantHasFocusModule = require(FocusNavigationUtils.useDescendantHa
 local UseLastInputModeModule = require(FocusNavigationUtils.useLastInputMode)
 local t = {}
 
-return function(p1) --[[ Line: 44 | Named "useFocusRoot" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), t (copy), ReactFocusNavigationModule (copy), UseFocusNavigableSurfaceRegistryConnectionModule (copy), UseDescendantHasFocusModule (copy), UseAutoFocusModule (copy), UseLastInputModeModule (copy), GuiService (copy)
 	local UseStateResult = nil
 	local UseStateResult2
@@ -25,11 +25,11 @@ return function(p1) --[[ Line: 44 | Named "useFocusRoot" ]]
 	local UseAutoFocusModuleResult = UseAutoFocusModule({ UseStateResult }, 0.1)
 	local IsFocus = UseLastInputModeModule() == "Focus"
 	local NoUseDescendantHasFocusModuleResult: boolean = p1.isAutoFocusRoot and (NoIsFocusable and (IsFocus and (UseStateResult and not UseDescendantHasFocusModuleResult)))
-	ReactModule.useEffect(function() --[[ Line: 73 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: NoUseDescendantHasFocusModuleResult (copy), UseAutoFocusModuleResult (copy)
 		local UseAutoFocusModuleResultResult = if NoUseDescendantHasFocusModuleResult then UseAutoFocusModuleResult() else nil
 		
-		return function() --[[ Line: 78 ]]
+		return function()
 			-- upvalues: UseAutoFocusModuleResultResult (ref)
 			if UseAutoFocusModuleResultResult then
 				UseAutoFocusModuleResultResult.cancel()
@@ -40,15 +40,15 @@ return function(p1) --[[ Line: 44 | Named "useFocusRoot" ]]
 		UseAutoFocusModuleResult
 	})
 	local UseRefResult = ReactModule.useRef(UseStateResult)
-	ReactModule.useEffect(function() --[[ Line: 86 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (ref), UseRefResult (copy)
 		if UseStateResult then
 			UseRefResult.current = UseStateResult
 		end
 	end, { UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 92 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), GuiService (upval)
-		return function() --[[ Line: 93 ]]
+		return function()
 			-- upvalues: UseRefResult (upval), GuiService (upval)
 			if not UseRefResult.current then return end
 			local SelectedCoreObject = GuiService.SelectedCoreObject

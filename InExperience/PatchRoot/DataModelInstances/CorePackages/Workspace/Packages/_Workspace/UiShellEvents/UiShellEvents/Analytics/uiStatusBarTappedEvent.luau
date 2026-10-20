@@ -3,7 +3,7 @@ local TModule = require(UiShellEvents.Parent.t)
 local LoggerModule = require(UiShellEvents.Logger)
 local StrictInterfaceResult = TModule.strictInterface({ page = TModule.string })
 
-return function(p1, p2, p3) --[[ Line: 14 ]]
+return function(p1, p2, p3)
 	-- upvalues: StrictInterfaceResult (copy), LoggerModule (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(p3)
 	

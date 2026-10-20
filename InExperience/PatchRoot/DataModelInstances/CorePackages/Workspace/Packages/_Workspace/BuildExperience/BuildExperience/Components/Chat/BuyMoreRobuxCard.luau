@@ -12,7 +12,7 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local FillBehavior = FoundationModule.Enums.FillBehavior
 local InputSize = FoundationModule.Enums.InputSize
 
-return function(Frame) --[[ Line: 31 | Named "BuyMoreRobuxCard" ]]
+return function(Frame)
 	-- upvalues: FFlagBuildExperienceChatCardEmphasisModule (copy), UseChatCardEmphasisModule (copy), ChatCardPriorityModule (copy), ReactModule (copy), View (copy), Text (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy)
 	local UseChatCardEmphasisModuleResult = if FFlagBuildExperienceChatCardEmphasisModule then UseChatCardEmphasisModule(ChatCardPriorityModule.BuyMoreRobux) else nil
 	

@@ -6,7 +6,7 @@ local AppPage = require(Parent.RobloxAppEnums).AppPage
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local GetSduiServiceDependenciesStoreFunction = require(Parent.SduiCoreSystem).getSduiServiceDependenciesStore
 
-local function _(p1, p2, p3: number, p4, p5): number --[[ Line: 24 | Named "computePeekFraction" ]]
+local function _(p1, p2, p3: number, p4, p5): number
 	local v1 = p5 - p4
 	
 	if v1 <= 0 then
@@ -18,12 +18,12 @@ local function _(p1, p2, p3: number, p4, p5): number --[[ Line: 24 | Named "comp
 	end
 end
 
-return function(p1) --[[ Line: 50 | Named "useProfileCompletionSduiContext" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), CalculateItemWidthFunction (copy), SignalsModule (copy), AppPage (copy), GetSduiServiceDependenciesStoreFunction (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Medium = UseTokensResult.Gap.Medium
 	local Size1500 = UseTokensResult.Size.Size_1500
-	local UseMemoResult = ReactModule.useMemo(function(): number --[[ Line: 55 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): number
 		-- upvalues: p1 (copy), Medium (copy), Size1500 (copy)
 		local ContainerWidth = p1.containerWidth
 		local SideMargin = p1.sideMargin
@@ -37,11 +37,11 @@ return function(p1) --[[ Line: 50 | Named "useProfileCompletionSduiContext" ]]
 			return if ContainerWidthDelta <= 0 then 0 else math.clamp(SizeDelta * 1 / ContainerWidthDelta, 0, 0.5)
 		end
 	end, { p1.containerWidth, p1.sideMargin, Medium, Size1500 })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 59 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: CalculateItemWidthFunction (upval), Medium (copy), p1 (copy), UseMemoResult (copy)
 		return CalculateItemWidthFunction(1, Medium, p1.sideMargin, p1.containerWidth, UseMemoResult)
 	end, { Medium, p1.sideMargin, p1.containerWidth, UseMemoResult })
-	local UseMemoResult2, UseMemoResult2_1 = ReactModule.useMemo(function() --[[ Line: 63 ]]
+	local UseMemoResult2, UseMemoResult2_1 = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), UseMemoResult (copy), Medium (copy), p1 (copy), UseMemoResult1 (copy)
 		return SignalsModule.createSignal({
 			numColumns = 1,
@@ -52,7 +52,7 @@ return function(p1) --[[ Line: 50 | Named "useProfileCompletionSduiContext" ]]
 			itemWidth = UseMemoResult1
 		})
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 74 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult2_1 (copy), UseMemoResult (copy), Medium (copy), p1 (copy), UseMemoResult1 (copy)
 		UseMemoResult2_1({
 			numColumns = 1,
@@ -69,16 +69,16 @@ return function(p1) --[[ Line: 50 | Named "useProfileCompletionSduiContext" ]]
 		UseMemoResult1,
 		UseMemoResult2_1
 	})
-	local UseResult = ReactModule.useCallback(function(_) --[[ Line: 85 ]]
+	local UseResult = ReactModule.useCallback(function(_)
 		-- upvalues: SignalsModule (upval), UseMemoResult2 (copy)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 86 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: UseMemoResult2 (upval)
 			return UseMemoResult2(p2)
 		end)
 	end, { UseMemoResult2 })
 	local ProfilePlatform = AppPage.ProfilePlatform
 	
-	return (ReactModule.useMemo(function() --[[ Line: 92 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: GetSduiServiceDependenciesStoreFunction (upval), ProfilePlatform (copy), UseResult (copy)
 		return {
 			dependencies = GetSduiServiceDependenciesStoreFunction().getDependencies(ProfilePlatform),

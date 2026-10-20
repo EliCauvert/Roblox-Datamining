@@ -12,17 +12,17 @@ local GetFFlagMomentsRenderPostAssetsModule = require(MomentsCommon.Flags.GetFFl
 local CreateSignalFunction = SignalsModule.createSignal
 local CreateEffectFunction = SignalsModule.createEffect
 
-local function _(p1, p2, p3): boolean --[[ Line: 98 | Named "indexInWindow" ]]
+local function _(p1, p2, p3): boolean
 	return p2 - p3.back <= p1 and p1 <= p2 + p3.forward
 end
 
-return function(p1, p2, p3, AudioDeviceOutput, Services, p4) --[[ Line: 102 | Named "createMediaPreloadCoordinator" ]]
+return function(p1, p2, p3, AudioDeviceOutput, Services, p4)
 	-- upvalues: GetFFlagMomentsRenderPostAssetsModule (copy), DefaultMediaNodeRegistryModule (copy), CreateMomentMediaControllerModule (copy), CreateSignalFunction (copy), FFlagMomentsAutoplayAmpPolicy (copy), CreateEffectFunction (copy)
 	local P8 = p4 or {}
 	local FFlagMomentsRenderPostAssetsModule = GetFFlagMomentsRenderPostAssetsModule()
 	local Now = Services.now or os.clock
 	local Registry = P8.registry or DefaultMediaNodeRegistryModule()
-	local CreateController = P8.createController or function(p5) --[[ Line: 118 ]]
+	local CreateController = P8.createController or function(p5)
 		-- upvalues: CreateMomentMediaControllerModule (upval), Services (copy), AudioDeviceOutput (copy), Registry (copy), P8 (copy)
 		return CreateMomentMediaControllerModule(p5, {
 			services = Services,
@@ -38,7 +38,7 @@ return function(p1, p2, p3, AudioDeviceOutput, Services, p4) --[[ Line: 102 | Na
 	local Flag = false
 	local Signal, Signal2 = CreateSignalFunction({})
 	
-	local function _() --[[ Line: 138 | Named "publishControllerMap" ]]
+	local function _()
 		-- upvalues: Tbl (copy), Signal2 (copy)
 		local Controllers = {}
 		
@@ -48,11 +48,11 @@ return function(p1, p2, p3, AudioDeviceOutput, Services, p4) --[[ Line: 102 | Na
 		Signal2(Controllers)
 	end
 	
-	local function scheduleDecodeRetry(p5, p6) --[[ Line: 149 ]]
+	local function scheduleDecodeRetry(p5, p6)
 		-- upvalues: p2 (copy), Flag (ref), Tbl (copy), v1 (ref), p1 (copy), scheduleDecodeRetry (copy)
 		if not p6.retryScheduled and p2.maxDecodeRetries > p6.decodeRetries then
 			p6.retryScheduled = true
-			task.delay(p2.decodeRetryDelayMs / 1000, function() --[[ Line: 154 ]]
+			task.delay(p2.decodeRetryDelayMs / 1000, function()
 				-- upvalues: p6 (copy), Flag (upval), Tbl (upval), p5 (copy), v1 (upval), p1 (upval), scheduleDecodeRetry (upval)
 				p6.retryScheduled = false
 				
@@ -74,7 +74,7 @@ return function(p1, p2, p3, AudioDeviceOutput, Services, p4) --[[ Line: 102 | Na
 		end
 	end
 	
-	local function reconcile(p5) --[[ Line: 175 ]]
+	local function reconcile(p5)
 		-- upvalues: p1 (copy), FFlagMomentsAutoplayAmpPolicy (upval), v1 (ref), p2 (copy), FFlagMomentsRenderPostAssetsModule (copy), Tbl (copy), MomentId (ref), CreateController (copy), Flag (ref), scheduleDecodeRetry (copy), Signal2 (copy), Now (copy), p3 (copy)
 		local Items = p1.getItems(p5)
 		local ActiveIndex = p1.getActiveIndex(p5)
@@ -130,7 +130,7 @@ return function(p1, p2, p3, AudioDeviceOutput, Services, p4) --[[ Line: 102 | Na
 				}
 				Tbl[i2] = config
 				Flag1 = true
-				task.spawn(function() --[[ Line: 242 ]]
+				task.spawn(function()
 					-- upvalues: Flag (upval), Tbl (upval), i2 (copy), config (copy), Controller (copy), p2 (upval), v1 (upval), p1 (upval), scheduleDecodeRetry (upval)
 					if Flag or Tbl[i2] ~= config then return end
 					Controller.download()
@@ -138,7 +138,7 @@ return function(p1, p2, p3, AudioDeviceOutput, Services, p4) --[[ Line: 102 | Na
 					if not Flag and Tbl[i2] == config and not config.retryScheduled then
 						if p2.maxDecodeRetries <= config.decodeRetries then return end
 						config.retryScheduled = true
-						task.delay(p2.decodeRetryDelayMs / 1000, function() --[[ Line: 154 ]]
+						task.delay(p2.decodeRetryDelayMs / 1000, function()
 							-- upvalues: config (copy), Flag (upval), Tbl (upval), i2 (copy), v1 (upval), p1 (upval), scheduleDecodeRetry (upval)
 							config.retryScheduled = false
 							
@@ -231,7 +231,7 @@ return function(p1, p2, p3, AudioDeviceOutput, Services, p4) --[[ Line: 102 | Na
 		end
 	end
 	
-	local Effect = CreateEffectFunction(function(p6) --[[ Line: 338 ]]
+	local Effect = CreateEffectFunction(function(p6)
 		-- upvalues: Flag (ref), reconcile (copy)
 		if not Flag then
 			reconcile(p6)
@@ -241,14 +241,14 @@ return function(p1, p2, p3, AudioDeviceOutput, Services, p4) --[[ Line: 102 | Na
 	end)
 	
 	return {
-		getControllerFor = function(p6) --[[ Line: 345 ]]
+		getControllerFor = function(p6)
 			-- upvalues: Tbl (copy)
 			local Entry = Tbl[p6]
 			
 			return if Entry == nil then nil else Entry.controller
 		end,
 		getControllerMap = Signal,
-		dispose = function() --[[ Line: 350 ]]
+		dispose = function()
 			-- upvalues: Flag (ref), Effect (copy), Tbl (copy), MomentId (ref), Signal2 (copy)
 			if Flag then return end
 			Flag = true

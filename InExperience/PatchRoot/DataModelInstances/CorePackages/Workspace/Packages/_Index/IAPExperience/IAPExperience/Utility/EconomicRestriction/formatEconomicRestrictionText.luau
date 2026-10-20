@@ -5,7 +5,7 @@ local EconomicRestrictionsPromptShownCounter = require(IAPExperience.Generic.Eve
 local LoggerModule = require(IAPExperience.Utility.logger)
 local GetAppContextModule = require(IAPExperience.Utility.getAppContext)
 
-return function(p1, p2, p3) --[[ Line: 14 ]]
+return function(p1, p2, p3)
 	-- upvalues: Default (copy), EconomicRestrictionsPromptShownCounter (copy), GetAppContextModule (copy), LoggerModule (copy), GetEconomicRestrictionLocalizedLabelModule (copy)
 	local TimeoutMinutes = p2.timeoutMinutes or (p2.expirationTimeInMinutes or p2.ExpirationTimeInMinutes)
 	local ViolationType = p2.violationType or (p2.failureReason or p2.FailureReason)

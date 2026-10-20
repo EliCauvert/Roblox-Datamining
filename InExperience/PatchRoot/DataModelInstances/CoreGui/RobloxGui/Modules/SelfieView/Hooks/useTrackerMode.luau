@@ -8,10 +8,10 @@ local TrackerMode1 = FaceChatUtilsModule.getTrackerMode()
 local IsTrackerModeMatch: boolean = TrackerMode1 == TrackerMode.Video or TrackerMode1 == TrackerMode.AudioVideo
 local IsTrackerModeMatch1: boolean = TrackerMode1 == TrackerMode.Audio or TrackerMode1 == TrackerMode.AudioVideo
 
-return function() --[[ Line: 23 ]]
+return function()
 	-- upvalues: ReactModule (copy), TrackerMode (copy), FaceChatUtilsModule (copy), IsTrackerModeMatch (ref), NewResult (copy), IsTrackerModeMatch1 (ref), VideoCaptureService (copy), FaceAnimatorService (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(TrackerMode.None)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 26 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FaceChatUtilsModule (upval), TrackerMode (upval), IsTrackerModeMatch (upval), NewResult (upval), IsTrackerModeMatch1 (upval), UseStateResult2 (copy)
 		local TrackerMode1 = FaceChatUtilsModule.getTrackerMode()
 		local IsTrackerModeMatch2: boolean = TrackerMode1 == TrackerMode.Video or TrackerMode1 == TrackerMode.AudioVideo
@@ -28,7 +28,7 @@ return function() --[[ Line: 23 ]]
 		end
 		UseStateResult2(TrackerMode1)
 	end)
-	ReactModule.useEffect(function() --[[ Line: 45 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: VideoCaptureService (upval), UseResult (copy), FaceAnimatorService (upval)
 		if VideoCaptureService then
 			UseResult()
@@ -38,7 +38,7 @@ return function() --[[ Line: 23 ]]
 			local Connection = FaceAnimatorService:GetPropertyChangedSignal("VideoAnimationEnabled"):Connect(UseResult)
 			local Connection1 = FaceAnimatorService:GetPropertyChangedSignal("AudioAnimationEnabled"):Connect(UseResult)
 			
-			return function() --[[ Line: 55 ]]
+			return function()
 				-- upvalues: StartedConnection (copy), StoppedConnection (copy), DevicesChangedConnection (copy), Connection (copy), Connection1 (copy)
 				StartedConnection:Disconnect()
 				StoppedConnection:Disconnect()
@@ -47,7 +47,7 @@ return function() --[[ Line: 23 ]]
 				Connection1:Disconnect()
 			end
 		else
-			return function() --[[ Line: 63 ]] end
+			return function() end
 		end
 	end, {})
 	

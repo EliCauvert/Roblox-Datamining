@@ -14,7 +14,7 @@ local config = {
 	width = UDim.new(1, 0)
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 43 | Named "Accordion" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), AccordionContextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	
@@ -24,7 +24,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 43 |
 		ref = Ref
 	}), {
 		AccordionContext = ReactModule.createElement(AccordionContextModule.Provider, {
-			value = ReactModule.useMemo(function() --[[ Line: 47 ]]
+			value = ReactModule.useMemo(function()
 				-- upvalues: WithDefaultsModuleResult (copy)
 				return {
 					onAccordionItemActivated = WithDefaultsModuleResult.onActivated,

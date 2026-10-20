@@ -9,7 +9,7 @@ local ScenesReducerModule = require(script.Parent.ScenesReducer)
 local InvariantModule = require(Parent.utils.invariant)
 local config = { frequency = 4 }
 
-local function buildTransitionProps(Props, AssignResult) --[[ Line: 17 ]]
+local function buildTransitionProps(Props, AssignResult)
 	-- upvalues: InvariantModule (copy)
 	local Navigation = Props.navigation
 	local Options = Props.options
@@ -37,9 +37,9 @@ local function buildTransitionProps(Props, AssignResult) --[[ Line: 17 ]]
 	}
 end
 
-local function _(p1) --[[ Line: 46 | Named "filterStale" ]]
+local function _(p1)
 	-- upvalues: Array (copy)
-	local FilterResult = Array.filter(p1, function(p2): boolean --[[ Line: 47 ]]
+	local FilterResult = Array.filter(p1, function(p2): boolean
 		return not p2.isStale
 	end)
 	
@@ -48,7 +48,7 @@ end
 
 local Transitioner = ReactModule.Component:extend("Transitioner")
 
-function Transitioner.init(p1) --[[ Line: 60 ]]
+function Transitioner.init(p1)
 	-- upvalues: ReactModule (copy), OtterModule (copy), ScenesReducerModule (copy), buildTransitionProps (copy)
 	local State = p1.props.navigation.state
 	local Descriptors = p1.props.descriptors
@@ -59,7 +59,7 @@ function Transitioner.init(p1) --[[ Line: 60 ]]
 		scenes = ScenesReducerModule({}, State, nil, Descriptors)
 	}
 	
-	function p1._doOnAbsoluteSizeChanged(...) --[[ Line: 78 ]]
+	function p1._doOnAbsoluteSizeChanged(...)
 		-- upvalues: p1 (copy)
 		return p1:_onAbsoluteSizeChanged(...)
 	end
@@ -70,13 +70,13 @@ function Transitioner.init(p1) --[[ Line: 60 ]]
 	p1._isMounted = false
 	p1._isTransitionRunning = false
 	p1._transitionQueue = {}
-	p1._completeSignalDisconnector = p1.state.position:onComplete(function() --[[ Line: 91 ]]
+	p1._completeSignalDisconnector = p1.state.position:onComplete(function()
 		-- upvalues: p1 (copy)
 		if p1._isMounted then
 			p1:_onTransitionEnd()
 		end
 	end)
-	p1._stepSignalDisconnector = p1.state.position:onStep(function(PositionLastValue) --[[ Line: 97 ]]
+	p1._stepSignalDisconnector = p1.state.position:onStep(function(PositionLastValue)
 		-- upvalues: p1 (copy)
 		if p1._isMounted then
 			p1:_onPositionStep(PositionLastValue)
@@ -84,11 +84,11 @@ function Transitioner.init(p1) --[[ Line: 60 ]]
 	end)
 end
 
-function Transitioner.didMount(p1) --[[ Line: 104 ]]
+function Transitioner.didMount(p1)
 	p1._isMounted = true
 end
 
-function Transitioner.willUnmount(p1) --[[ Line: 108 ]]
+function Transitioner.willUnmount(p1)
 	p1._isMounted = false
 	
 	if p1._completeSignalDisconnector then
@@ -101,7 +101,7 @@ function Transitioner.willUnmount(p1) --[[ Line: 108 ]]
 	end
 end
 
-function Transitioner.didUpdate(p1, PrevProps) --[[ Line: 122 ]]
+function Transitioner.didUpdate(p1, PrevProps)
 	if not p1.state.layout.isMeasured and p1._ref.current then
 		p1:_onAbsoluteSizeChanged(p1._ref.current)
 	end
@@ -115,7 +115,7 @@ function Transitioner.didUpdate(p1, PrevProps) --[[ Line: 122 ]]
 	end
 end
 
-function Transitioner.render(p1) --[[ Line: 147 ]]
+function Transitioner.render(p1)
 	-- upvalues: ReactModule (copy)
 	return ReactModule.createElement("Frame", {
 		Size = UDim2.new(1, 0, 1, 0),
@@ -129,7 +129,7 @@ function Transitioner.render(p1) --[[ Line: 147 ]]
 	})
 end
 
-function Transitioner._onAbsoluteSizeChanged(p1, Frame: Frame) --[[ Line: 165 ]]
+function Transitioner._onAbsoluteSizeChanged(p1, Frame: Frame)
 	-- upvalues: Object (copy), buildTransitionProps (copy)
 	if not p1._isMounted then return end
 	local X = Frame.AbsoluteSize.X
@@ -144,12 +144,12 @@ function Transitioner._onAbsoluteSizeChanged(p1, Frame: Frame) --[[ Line: 165 ]]
 	end
 end
 
-function Transitioner._computeScenes(p1, p2, p3) --[[ Line: 194 ]]
+function Transitioner._computeScenes(p1, p2, p3)
 	-- upvalues: ScenesReducerModule (copy), Array (copy)
 	local ScenesReducerModuleResult = ScenesReducerModule(p1.state.scenes, p3.navigation.state, p2.navigation.state, p3.descriptors)
 	
 	if not p3.navigation.state.isTransitioning then
-		local FilterResult = Array.filter(ScenesReducerModuleResult, function(p4): boolean --[[ Line: 47 ]]
+		local FilterResult = Array.filter(ScenesReducerModuleResult, function(p4): boolean
 			return not p4.isStale
 		end)
 		ScenesReducerModuleResult = if #FilterResult == #ScenesReducerModuleResult then ScenesReducerModuleResult else FilterResult
@@ -160,7 +160,7 @@ function Transitioner._computeScenes(p1, p2, p3) --[[ Line: 194 ]]
 	return if ScenesReducerModuleResult == p1.state.scenes then nil else ScenesReducerModuleResult
 end
 
-function Transitioner._startTransition(p1, PrevProps, Props) --[[ Line: 213 ]]
+function Transitioner._startTransition(p1, PrevProps, Props)
 	-- upvalues: Object (copy), buildTransitionProps (copy), config (copy), OtterModule (copy)
 	local IsNotIndexMatch = PrevProps.navigation.state.index ~= Props.navigation.state.index
 	local Scenes = p1:_computeScenes(PrevProps, Props)
@@ -176,7 +176,7 @@ function Transitioner._startTransition(p1, PrevProps, Props) --[[ Line: 213 ]]
 		if IsTransitioning and IsNotIndexMatch then
 			p1._isTransitionRunning = true
 		end
-		p1:setState(AssignResult, function() --[[ Line: 245 ]]
+		p1:setState(AssignResult, function()
 			-- upvalues: IsTransitioning (copy), IsNotIndexMatch (copy), Props (copy), p1 (copy), Index (copy), Object (upval), config (upval), Position (copy), OtterModule (upval)
 			if IsTransitioning and IsNotIndexMatch then
 				if Props.onTransitionStart then
@@ -209,19 +209,19 @@ function Transitioner._startTransition(p1, PrevProps, Props) --[[ Line: 213 ]]
 	end
 end
 
-function Transitioner._onTransitionEnd(p1) --[[ Line: 284 ]]
+function Transitioner._onTransitionEnd(p1)
 	-- upvalues: Array (copy), Object (copy), buildTransitionProps (copy)
 	local PrevTransitionProps = p1._prevTransitionProps
 	p1._prevTransitionProps = nil
 	local Scenes = p1.state.scenes
-	local FilterResult = Array.filter(Scenes, function(p2): boolean --[[ Line: 47 ]]
+	local FilterResult = Array.filter(Scenes, function(p2): boolean
 		return not p2.isStale
 	end)
 	local AssignResult = Object.assign(table.clone(p1.state), {
 		scenes = if #FilterResult == #Scenes then Scenes else FilterResult
 	})
 	p1._transitionProps = buildTransitionProps(p1.props, AssignResult)
-	p1:setState(AssignResult, function() --[[ Line: 296 ]]
+	p1:setState(AssignResult, function()
 		-- upvalues: p1 (copy), PrevTransitionProps (copy)
 		if p1.props.onTransitionEnd then
 			p1.props.onTransitionEnd(p1._transitionProps, PrevTransitionProps)
@@ -241,7 +241,7 @@ function Transitioner._onTransitionEnd(p1) --[[ Line: 284 ]]
 	end)
 end
 
-function Transitioner._onPositionStep(p1, _positionLastValue) --[[ Line: 315 ]]
+function Transitioner._onPositionStep(p1, _positionLastValue)
 	p1._positionLastValue = _positionLastValue
 	local Index = p1._transitionProps.index
 	local Index1 = if p1._prevTransitionProps then p1._prevTransitionProps.index else Index

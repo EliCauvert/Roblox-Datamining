@@ -3,7 +3,7 @@ local Players = game:GetService("Players")
 local _ = require(Parent.DataHydration.MomentsStoreTypes)
 local MomentsGetMomentsUserStoreModule = require(Parent.DataHydration.MomentsGetMomentsUserStore)
 
-local function _(List, AssetId) --[[ Line: 33 | Named "findByAssetId" ]]
+local function _(List, AssetId)
 	if List == nil then
 		return nil
 	end
@@ -15,11 +15,11 @@ local function _(List, AssetId) --[[ Line: 33 | Named "findByAssetId" ]]
 	return nil
 end
 
-return function(AssetId, p1) --[[ Line: 45 | Named "refreshOwnMomentsAfterPublish" ]]
+return function(AssetId, p1)
 	-- upvalues: MomentsGetMomentsUserStoreModule (copy), Players (copy)
 	local P3 = p1 or {}
 	local MomentsGetMomentsUserStoreModuleResult = if P3.userStore == nil then MomentsGetMomentsUserStoreModule(false) else P3.userStore
-	local Wait: (any) -> () = P3.wait or function(Duration) --[[ Line: 50 ]]
+	local Wait: (any) -> () = P3.wait or function(Duration)
 		task.wait(Duration)
 	end
 	local LocalUserId = nil

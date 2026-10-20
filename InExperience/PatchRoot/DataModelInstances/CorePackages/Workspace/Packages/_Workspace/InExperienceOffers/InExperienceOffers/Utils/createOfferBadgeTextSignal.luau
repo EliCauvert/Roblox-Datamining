@@ -5,9 +5,9 @@ local FFlagHideOfferNotificationsWhenShopEmpty = require(Parent.SharedFlags).FFl
 local GetOffersStoreModule = require(InExperienceOffers.Stores.GetOffersStore)
 local GetOfferBadgeTextModule = require(InExperienceOffers.Utils.getOfferBadgeText)
 
-return function(p1) --[[ Line: 10 | Named "createOfferBadgeTextSignal" ]]
+return function(p1)
 	-- upvalues: SignalsModule (copy), FFlagHideOfferNotificationsWhenShopEmpty (copy), GetOffersStoreModule (copy), GetOfferBadgeTextModule (copy)
-	return SignalsModule.createComputed(function(p2) --[[ Line: 11 ]]
+	return SignalsModule.createComputed(function(p2)
 		-- upvalues: FFlagHideOfferNotificationsWhenShopEmpty (upval), GetOffersStoreModule (upval), GetOfferBadgeTextModule (upval), p1 (copy)
 		return if FFlagHideOfferNotificationsWhenShopEmpty and not GetOffersStoreModule(false).getShopHasItems(p2) then nil else GetOfferBadgeTextModule(GetOffersStoreModule(false).getOffers(p2), p1)
 	end)

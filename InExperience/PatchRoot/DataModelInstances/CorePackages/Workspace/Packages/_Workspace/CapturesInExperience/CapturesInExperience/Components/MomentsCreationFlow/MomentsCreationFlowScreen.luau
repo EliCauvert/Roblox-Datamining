@@ -19,23 +19,23 @@ if require(Parent.Flags.FFlagCapturesInExpUseMomentsCreation) then
 		[EventNames.EditingFlowReturnButtonPressed] = true
 	}
 	
-	local function isTextFiltered(_): boolean --[[ Line: 38 ]]
+	local function isTextFiltered(_): boolean
 		return false
 	end
 	
-	local function MomentsCreationScreen(p1) --[[ Line: 42 ]]
+	local function MomentsCreationScreen(p1)
 		-- upvalues: Parent1 (copy), Parent (copy), ReactModule (copy), SignalsModule (copy), UseDispatchFunction (copy), UseAnalyticsModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), config (copy), MomentsCreationFlowClosedModule (copy), FFlagCapturesInExpStickersAndVoiceModule (copy), isTextFiltered (copy), CoreGui (copy)
 		local MomentsCreationModule = require(Parent1.MomentsCreation)
 		local CreateMomentModule = require(Parent.Thunks.CreateMoment)
 		local CreationFlowScreen = MomentsCreationModule.CreationFlowScreen
 		local GetCreationFlowStoreFunction = MomentsCreationModule.Stores.GetCreationFlowStore
-		local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 48 ]]
+		local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 			-- upvalues: GetCreationFlowStoreFunction (copy)
 			return GetCreationFlowStoreFunction(false).getSelectedCapture(false)
 		end)
-		ReactModule.useEffect(function() --[[ Line: 51 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: SignalsModule (upval), UseStateResult2 (copy), GetCreationFlowStoreFunction (copy)
-			return SignalsModule.createEffect(function(p2) --[[ Line: 52 ]]
+			return SignalsModule.createEffect(function(p2)
 				-- upvalues: UseStateResult2 (upval), GetCreationFlowStoreFunction (upval)
 				UseStateResult2(GetCreationFlowStoreFunction(p2).getSelectedCapture(p2))
 			end)
@@ -43,14 +43,14 @@ if require(Parent.Flags.FFlagCapturesInExpUseMomentsCreation) then
 		local IsUseStateResultMatch = UseStateResult == p1.expectedCapture
 		local UseDispatchResult = UseDispatchFunction()
 		local FireEventFunction = UseAnalyticsModule().fireEvent
-		local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 59 ]]
+		local UseSelectorResult = UseSelectorFunction(function(p2)
 			-- upvalues: ConstantsModule (upval)
 			return p2[ConstantsModule.RoduxKey].MomentsCreationFlow.SessionId
 		end)
 		local RegisterAnalyticsListenerFunction = MomentsCreationModule.registerAnalyticsListener
-		ReactModule.useLayoutEffect(function() --[[ Line: 65 ]]
+		ReactModule.useLayoutEffect(function()
 			-- upvalues: RegisterAnalyticsListenerFunction (copy), UseSelectorResult (copy), config (upval), GetCreationFlowStoreFunction (copy), FireEventFunction (copy)
-			return RegisterAnalyticsListenerFunction(function(Text, p2) --[[ Line: 66 ]]
+			return RegisterAnalyticsListenerFunction(function(Text, p2)
 				-- upvalues: UseSelectorResult (upval), config (upval), GetCreationFlowStoreFunction (upval), FireEventFunction (upval)
 				local Copy = table.clone(p2 or {})
 				Copy.creationSessionId = UseSelectorResult
@@ -66,15 +66,15 @@ if require(Parent.Flags.FFlagCapturesInExpUseMomentsCreation) then
 			RegisterAnalyticsListenerFunction,
 			UseSelectorResult
 		})
-		local UseResult = ReactModule.useCallback(function() --[[ Line: 76 ]]
+		local UseResult = ReactModule.useCallback(function()
 			-- upvalues: UseDispatchResult (copy), MomentsCreationFlowClosedModule (upval)
 			UseDispatchResult(MomentsCreationFlowClosedModule())
 		end, { UseDispatchResult })
-		local UseResult1 = ReactModule.useCallback(function(p2, p3, p4, p5, _, p6) --[[ Line: 82 ]]
+		local UseResult1 = ReactModule.useCallback(function(p2, p3, p4, p5, _, p6)
 			-- upvalues: UseDispatchResult (copy), CreateMomentModule (copy)
 			UseDispatchResult(CreateMomentModule(p2, p3, p4, p5, nil, p6))
 		end, { UseDispatchResult, CreateMomentModule })
-		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 95 ]]
+		local UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: UseResult1 (copy), FFlagCapturesInExpStickersAndVoiceModule (upval), UseResult (copy), isTextFiltered (upval), CoreGui (upval)
 			return {
 				disableDrafts = true,
@@ -87,7 +87,7 @@ if require(Parent.Flags.FFlagCapturesInExpUseMomentsCreation) then
 				ttsAudioParent = if FFlagCapturesInExpStickersAndVoiceModule then CoreGui else nil
 			}
 		end, { UseResult1, UseResult })
-		ReactModule.useEffect(function() --[[ Line: 114 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: IsUseStateResultMatch (copy), FFlagCapturesInExpStickersAndVoiceModule (upval), MomentsCreationModule (copy), UseDispatchResult (copy), MomentsCreationFlowClosedModule (upval)
 			if not IsUseStateResultMatch then
 				if FFlagCapturesInExpStickersAndVoiceModule then
@@ -104,13 +104,13 @@ if require(Parent.Flags.FFlagCapturesInExpUseMomentsCreation) then
 		return if IsUseStateResultMatch then ReactModule.createElement(CreationFlowScreen, { excludeGallery = true, host = UseMemoResult }) else nil
 	end
 	
-	return function() --[[ Line: 133 | Named "MomentsCreationFlowScreen" ]]
+	return function()
 		-- upvalues: UseSelectorFunction (copy), ConstantsModule (copy), ReactModule (copy), MomentsCreationScreen (copy)
-		local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 134 ]]
+		local UseSelectorResult = UseSelectorFunction(function(p1)
 			-- upvalues: ConstantsModule (upval)
 			return p1[ConstantsModule.RoduxKey].MomentsCreationFlow.IsOpen
 		end)
-		local UseSelectorResult1 = UseSelectorFunction(function(p1) --[[ Line: 137 ]]
+		local UseSelectorResult1 = UseSelectorFunction(function(p1)
 			-- upvalues: ConstantsModule (upval)
 			return p1[ConstantsModule.RoduxKey].MomentsCreationFlow.Capture
 		end)
@@ -164,32 +164,32 @@ else
 		[CreationFlowLocalization.StayFriendlyModeration] = "Feature.Moments.Description.StayFriendly"
 	}
 	
-	return function() --[[ Line: 217 | Named "MomentsCreationFlowScreen" ]]
+	return function()
 		-- upvalues: UseAnalyticsModule1 (copy), UseDispatchFunction1 (copy), UseLocalizationFunction (copy), config1 (copy), UseSelectorFunction1 (copy), ConstantsModule1 (copy), ReactModule1 (copy), MomentsCreationFlowClosedModule1 (copy), CreateMomentModule (copy), DashModule (copy), CryoModule (copy), CreationFlowContextProvider (copy), CreationFlowScreen (copy)
 		local UseAnalyticsModuleResult = UseAnalyticsModule1()
 		local UseDispatchResult = UseDispatchFunction1()
 		local UseLocalizationResult = UseLocalizationFunction(config1)
-		local UseSelectorResult = UseSelectorFunction1(function(p1) --[[ Line: 223 ]]
+		local UseSelectorResult = UseSelectorFunction1(function(p1)
 			-- upvalues: ConstantsModule1 (upval)
 			return p1[ConstantsModule1.RoduxKey].MomentsCreationFlow.IsOpen
 		end)
-		local UseSelectorResult1 = UseSelectorFunction1(function(p1) --[[ Line: 227 ]]
+		local UseSelectorResult1 = UseSelectorFunction1(function(p1)
 			-- upvalues: ConstantsModule1 (upval)
 			return p1[ConstantsModule1.RoduxKey].MomentsCreationFlow.Capture
 		end)
-		local UseSelectorResult2 = UseSelectorFunction1(function(p1) --[[ Line: 231 ]]
+		local UseSelectorResult2 = UseSelectorFunction1(function(p1)
 			-- upvalues: ConstantsModule1 (upval)
 			return p1[ConstantsModule1.RoduxKey].MomentsCreationFlow.SessionId
 		end)
-		local UseResult = ReactModule1.useCallback(function() --[[ Line: 235 ]]
+		local UseResult = ReactModule1.useCallback(function()
 			-- upvalues: UseDispatchResult (copy), MomentsCreationFlowClosedModule1 (upval)
 			UseDispatchResult(MomentsCreationFlowClosedModule1())
 		end, { UseDispatchResult })
-		local UseResult1 = ReactModule1.useCallback(function(p1) --[[ Line: 239 ]]
+		local UseResult1 = ReactModule1.useCallback(function(p1)
 			-- upvalues: UseLocalizationResult (copy)
 			return UseLocalizationResult[p1] or nil
 		end, { UseLocalizationResult })
-		local UseResult2 = ReactModule1.useCallback(function(p1, p2, p3) --[[ Line: 244 ]]
+		local UseResult2 = ReactModule1.useCallback(function(p1, p2, p3)
 			-- upvalues: UseDispatchResult (copy), CreateMomentModule (upval)
 			UseDispatchResult(CreateMomentModule(p1, p2, p3))
 		end, { UseDispatchResult })
@@ -198,19 +198,19 @@ else
 			captures = { UseSelectorResult1 },
 			exitCreationFlow = UseResult,
 			value = {
-				capturesPagesIsFinished = function(): boolean --[[ Line: 259 ]]
+				capturesPagesIsFinished = function(): boolean
 					return true
 				end,
 				createMoment = UseResult2,
 				fetchAdditionalCaptures = DashModule.noop,
 				fetchInitialCaptures = DashModule.noop,
-				fireEvent = function(Text, JoinResult) --[[ Line: 265 ]]
+				fireEvent = function(Text, JoinResult)
 					-- upvalues: UseAnalyticsModuleResult (copy), CryoModule (upval), UseSelectorResult2 (copy)
 					UseAnalyticsModuleResult.fireEvent("XExp" .. Text, CryoModule.Dictionary.join(JoinResult or {}, { creationSessionId = UseSelectorResult2 }))
 				end,
 				getLocalization = UseResult1,
 				getUserConfiguration = DashModule.noop,
-				isTextFiltered = function(): boolean --[[ Line: 275 ]]
+				isTextFiltered = function(): boolean
 					return false
 				end,
 				setScreenOrientation = DashModule.noop

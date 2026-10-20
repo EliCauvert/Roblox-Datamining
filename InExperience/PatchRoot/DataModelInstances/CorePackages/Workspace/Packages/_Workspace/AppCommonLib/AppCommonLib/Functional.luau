@@ -1,5 +1,5 @@
 ﻿return {
-	Filter = function(p1, Callback) --[[ Line: 11 ]]
+	Filter = function(p1, Callback)
 		local List = {}
 		
 		for i = 1, #p1 do
@@ -11,7 +11,7 @@
 		end
 		return List
 	end,
-	Map = function(p2, Callback) --[[ Line: 27 ]]
+	Map = function(p2, Callback)
 		local t = {}
 		
 		for i = 1, #p2 do
@@ -19,7 +19,7 @@
 		end
 		return t
 	end,
-	MapReverse = function(p3, Callback) --[[ Line: 40 ]]
+	MapReverse = function(p3, Callback)
 		local t = {}
 		
 		for i = #p3, 1, -1 do
@@ -27,7 +27,7 @@
 		end
 		return t
 	end,
-	FilterMap = function(p4, Callback) --[[ Line: 56 ]]
+	FilterMap = function(p4, Callback)
 		local List = {}
 		
 		for i = 1, #p4 do
@@ -39,7 +39,7 @@
 		end
 		return List
 	end,
-	Fold = function(p5, p6, Callback) --[[ Line: 74 ]]
+	Fold = function(p5, p6, Callback)
 		local v2 = p6
 		
 		for i = 1, #p5 do
@@ -47,7 +47,7 @@
 		end
 		return v2
 	end,
-	FoldDictionary = function(List, p7, Callback) --[[ Line: 87 ]]
+	FoldDictionary = function(List, p7, Callback)
 		local v3 = p7
 		
 		for i, value in pairs(List) do
@@ -55,7 +55,7 @@
 		end
 		return v3
 	end,
-	Take = function(p8, p9, p10) --[[ Line: 100 ]]
+	Take = function(p8, p9, p10)
 		local P10 = p10 or 1
 		local NewP = p9 + (P10 - 1)
 		
@@ -69,7 +69,7 @@
 		end
 		return t
 	end,
-	Find = function(List, p11) --[[ Line: 122 ]]
+	Find = function(List, p11)
 		for i, value in ipairs(List) do
 			if value == p11 then
 				return i

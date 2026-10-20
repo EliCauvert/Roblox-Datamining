@@ -10,9 +10,9 @@ local LibraryExperienceViewModule = require(script.Parent.LibraryExperienceView)
 local LibraryThemeProviderModule = require(script.Parent.LibraryThemeProvider)
 local UseLibraryStringsModule = require(script.Parent.useLibraryStrings)
 
-local function noop() --[[ Line: 21 ]] end
+local function noop() end
 
-local function LibraryPregameContent(p1) --[[ Line: 23 ]]
+local function LibraryPregameContent(p1)
 	-- upvalues: UseLibraryStringsModule (copy), noop (copy), ReactModule (copy), LibraryExperienceViewModule (copy), LibraryBrowserViewModule (copy)
 	local UseLibraryStringsModuleResult = UseLibraryStringsModule()
 	
@@ -39,7 +39,7 @@ local function LibraryPregameContent(p1) --[[ Line: 23 ]]
 	})
 end
 
-return function(p1) --[[ Line: 51 | Named "LibraryPregameSkeleton" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), RobloxAppLocalesModule (copy), LocalizationService (copy), LocalizationModule (copy), LibraryThemeProviderModule (copy), BuildExperienceCompositionStyleSheetModule (copy), LibraryPregameContent (copy)
 	return ReactModule.createElement("ScreenGui", {
 		ResetOnSpawn = false,
@@ -49,7 +49,7 @@ return function(p1) --[[ Line: 51 | Named "LibraryPregameSkeleton" ]]
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	}, {
 		Localization = ReactModule.createElement(LocalizationModule.LocalizationProvider, {
-			localization = ReactModule.useMemo(function() --[[ Line: 52 ]]
+			localization = ReactModule.useMemo(function()
 				-- upvalues: RobloxAppLocalesModule (upval), LocalizationService (upval)
 				return RobloxAppLocalesModule.Localization.new(LocalizationService.RobloxLocaleId)
 			end, {})

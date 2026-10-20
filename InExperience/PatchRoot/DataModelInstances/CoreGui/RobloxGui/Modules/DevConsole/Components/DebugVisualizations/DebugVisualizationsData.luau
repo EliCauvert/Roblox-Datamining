@@ -6,23 +6,23 @@ local SlimTintContextFilter = game:DefineFastFlag("SlimTintContextFilter", false
 local SlimTintModeTelemetry = game:DefineFastFlag("SlimTintModeTelemetry", false)
 local DebugVisualizationsTelemetryModule = require(script.Parent.DebugVisualizationsTelemetry)
 local config = {
-	[ChartHeaderNames[1]] = function(p1, p2): boolean --[[ Line: 14 ]]
+	[ChartHeaderNames[1]] = function(p1, p2): boolean
 		return p1.name < p2.name
 	end,
-	[ChartHeaderNames[2]] = function(p1, p2) --[[ Line: 17 ]]
+	[ChartHeaderNames[2]] = function(p1, p2)
 		return if p1.settingInfo.Value == p2.settingInfo.Value then p1.name < p2.name else p1.settingInfo.Value
 	end,
-	[ChartHeaderNames[3]] = function(p1, p2): boolean --[[ Line: 20 ]]
+	[ChartHeaderNames[3]] = function(p1, p2): boolean
 		return if p1.settingInfo.Type == p2.settingInfo.Type then p1.name < p2.name else p1.settingInfo.Type < p2.settingInfo.Type
 	end,
-	[ChartHeaderNames[4]] = function(p1, p2): boolean --[[ Line: 25 ]]
+	[ChartHeaderNames[4]] = function(p1, p2): boolean
 		return p1.name < p2.name
 	end
 }
 local DebugVisualizationsDataModule = {}
 DebugVisualizationsDataModule.__index = DebugVisualizationsDataModule
 
-function DebugVisualizationsDataModule.new() --[[ Line: 33 ]]
+function DebugVisualizationsDataModule.new()
 	-- upvalues: DebugVisualizationsDataModule (copy), SignalModule (copy), ChartHeaderNames (copy)
 	local t = {}
 	setmetatable(t, DebugVisualizationsDataModule)
@@ -36,7 +36,7 @@ function DebugVisualizationsDataModule.new() --[[ Line: 33 ]]
 	return t
 end
 
-function DebugVisualizationsDataModule:setSortType(_sortType) --[[ Line: 46 ]]
+function DebugVisualizationsDataModule:setSortType(_sortType)
 	-- upvalues: config (copy)
 	if config[_sortType] then
 		self._sortType = _sortType
@@ -49,19 +49,19 @@ function DebugVisualizationsDataModule:setSortType(_sortType) --[[ Line: 46 ]]
 	end
 end
 
-function DebugVisualizationsDataModule:getSortType() --[[ Line: 56 ]]
+function DebugVisualizationsDataModule:getSortType()
 	return self._sortType
 end
 
-function DebugVisualizationsDataModule:Signal() --[[ Line: 60 ]]
+function DebugVisualizationsDataModule:Signal()
 	return self._visualizationsUpdated
 end
 
-function DebugVisualizationsDataModule:getCurrentData() --[[ Line: 64 ]]
+function DebugVisualizationsDataModule:getCurrentData()
 	return self._sortedVisualizationData
 end
 
-function DebugVisualizationsDataModule:updateDebugVisualizationDataEntry(Name, ConstructInfoResult) --[[ Line: 70 ]]
+function DebugVisualizationsDataModule:updateDebugVisualizationDataEntry(Name, ConstructInfoResult)
 	if ConstructInfoResult == nil then
 		self._visualizationsData[Name] = nil
 		
@@ -82,7 +82,7 @@ function DebugVisualizationsDataModule:updateDebugVisualizationDataEntry(Name, C
 		table.insert(self._sortedVisualizationData, {
 			name = Name,
 			settingInfo = self._visualizationsData[Name],
-			valueChangeCallback = function(p1, p2) --[[ Line: 86 ]]
+			valueChangeCallback = function(p1, p2)
 				-- upvalues: self (copy)
 				self:_toggleValue(p1, p2)
 			end,
@@ -91,11 +91,11 @@ function DebugVisualizationsDataModule:updateDebugVisualizationDataEntry(Name, C
 	end
 end
 
-function DebugVisualizationsDataModule:isRunning() --[[ Line: 97 ]]
+function DebugVisualizationsDataModule:isRunning()
 	return self._isRunning
 end
 
-function DebugVisualizationsDataModule:_toggleValue(Key, Value) --[[ Line: 101 ]]
+function DebugVisualizationsDataModule:_toggleValue(Key, Value)
 	-- upvalues: SlimDevConsole2 (copy), SlimTintModeTelemetry (copy), DebugVisualizationsTelemetryModule (copy), config (copy)
 	if SlimDevConsole2 then
 		local Visualizations = self._visualizationsData[Key]
@@ -132,14 +132,14 @@ function DebugVisualizationsDataModule:_toggleValue(Key, Value) --[[ Line: 101 ]
 	end
 end
 
-function _constructInfo(p1, p2) --[[ Line: 137 ]]
+function _constructInfo(p1, p2)
 	-- upvalues: SlimDevConsole2 (copy), SlimTintContextFilter (copy)
 	local Value = nil
 	local DropDownList = nil
 	local EnumItems = nil
 	
 	if SlimDevConsole2 and p2.kind == "Dropdown" then
-		local Success, Result = pcall(function() --[[ Line: 143 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p2 (copy)
 			return settings():GetService(p2.service)
 		end)
@@ -193,7 +193,7 @@ function _constructInfo(p1, p2) --[[ Line: 137 ]]
 	return config
 end
 
-function DebugVisualizationsDataModule:start() --[[ Line: 199 ]]
+function DebugVisualizationsDataModule:start()
 	-- upvalues: DebugVisualizationsStaticContentModule (copy), config (copy)
 	for i, value in pairs(DebugVisualizationsStaticContentModule) do
 		self:updateDebugVisualizationDataEntry(i, _constructInfo(i, value))
@@ -202,7 +202,7 @@ function DebugVisualizationsDataModule:start() --[[ Line: 199 ]]
 	self._isRunning = true
 end
 
-function DebugVisualizationsDataModule:stop() --[[ Line: 207 ]]
+function DebugVisualizationsDataModule:stop()
 	self._isRunning = false
 end
 

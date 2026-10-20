@@ -13,14 +13,14 @@ local config = {
 	affordance = FoundationModule.Enums.StateLayerAffordance.Background
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 21 | Named "MenuActionRow" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), SignalsReactModule (copy), PlayerContextualMenuStoreModule (copy), ReactModule (copy), PlayerListIconModule (copy), View (copy), Text (copy), config (copy), ConstantsModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Item = p1.item
 	local UseSignalStateResult = SignalsReactModule.useSignalState(PlayerContextualMenuStoreModule.getPendingConfirmKey)
 	local IsUseSignalStateResultMatch: boolean = Item.requiresConfirm == true and UseSignalStateResult == Item.key
 	local IsIsInteractable = p1.isInteractable ~= false
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 35 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: IsIsInteractable (copy), PlayerContextualMenuStoreModule (upval), Item (copy)
 		if IsIsInteractable then
 			PlayerContextualMenuStoreModule.activateMenuItem(Item)

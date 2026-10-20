@@ -11,7 +11,7 @@ local ConstantsModule = require(Parent.Constants)
 local GetFFlagEnableVoiceChatMuteForVideoCaptures = require(Parent1.SharedFlags).GetFFlagEnableVoiceChatMuteForVideoCaptures
 local GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction = require(Parent1.SharedFlags).GetFFlagEnableCrossExperienceVoiceCaptureMute
 
-local function maybeMuteVoiceChat(p1) --[[ Line: 22 ]]
+local function maybeMuteVoiceChat(p1)
 	-- upvalues: GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction (copy), Default1 (copy), Default (copy), GetFFlagEnableVoiceChatMuteForVideoCaptures (copy)
 	if game:GetEngineFeature("ReenableMomentsVoice") then return end
 	if GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction() then
@@ -36,9 +36,9 @@ local function maybeMuteVoiceChat(p1) --[[ Line: 22 ]]
 	end
 end
 
-return function(p1, _, Callback) --[[ Line: 47 | Named "makeVideoCaptureInProgressHandler" ]]
+return function(p1, _, Callback)
 	-- upvalues: ConstantsModule (copy), VideoCaptureStartedModule (copy), CaptureTriggerTypeModule (copy), maybeMuteVoiceChat (copy), EventNamesModule (copy), VideoCaptureStoppedModule (copy)
-	return function(p2, DeveloperCapture) --[[ Line: 52 | Named "videoCaptureInProgressHandler" ]]
+	return function(p2, DeveloperCapture)
 		-- upvalues: p1 (copy), ConstantsModule (upval), VideoCaptureStartedModule (upval), CaptureTriggerTypeModule (upval), maybeMuteVoiceChat (upval), Callback (copy), EventNamesModule (upval), VideoCaptureStoppedModule (upval)
 		local Status = p1:getState()[ConstantsModule.RoduxKey].IsVideoCaptureActive.status
 		

@@ -8,17 +8,17 @@ local TypeFromASTFunction = require(Utilities.typeFromAST).typeFromAST
 local IsTypeSubTypeOfFunction = require(Utilities.typeComparators).isTypeSubTypeOf
 local Callback = nil
 local VariablesInAllowedPositionRuleModule = {
-	VariablesInAllowedPositionRule = function(p1) --[[ Line: 27 ]]
+	VariablesInAllowedPositionRule = function(p1)
 		-- upvalues: TypeFromASTFunction (copy), Callback (ref), InspectFunction (copy), GraphQLError (copy)
 		local t = {}
 		
 		return {
 			OperationDefinition = {
-				enter = function() --[[ Line: 32 ]]
+				enter = function()
 					-- upvalues: t (ref)
 					t = {}
 				end,
-				leave = function(_, p2) --[[ Line: 35 ]]
+				leave = function(_, p2)
 					-- upvalues: p1 (copy), t (ref), TypeFromASTFunction (upval), Callback (upval), InspectFunction (upval), GraphQLError (upval)
 					for _, recursiveVariableUsage in ipairs((p1:getRecursiveVariableUsages(p2))) do
 						local Node = recursiveVariableUsage.node
@@ -38,7 +38,7 @@ local VariablesInAllowedPositionRuleModule = {
 					end
 				end
 			},
-			VariableDefinition = function(_, p3) --[[ Line: 79 ]]
+			VariableDefinition = function(_, p3)
 				-- upvalues: t (ref)
 				t[p3.variable.name.value] = p3
 			end
@@ -46,7 +46,7 @@ local VariablesInAllowedPositionRuleModule = {
 	end
 }
 
-Callback = function(Schema, p2, DefaultValue, Type, DefaultValue1) --[[ Line: 90 | Named "allowedVariableUsage" ]]
+Callback = function(Schema, p2, DefaultValue, Type, DefaultValue1)
 	-- upvalues: IsNonNullTypeFunction (copy), Kind (copy), IsTypeSubTypeOfFunction (copy)
 	return if IsNonNullTypeFunction(Type) and not IsNonNullTypeFunction(p2) then (DefaultValue ~= nil and DefaultValue.kind ~= Kind.NULL or DefaultValue1 ~= nil) and IsTypeSubTypeOfFunction(Schema, p2, Type.ofType) else IsTypeSubTypeOfFunction(Schema, p2, Type)
 end

@@ -9,9 +9,9 @@ local IconSize = FoundationModule.Enums.IconSize
 local FFlagPlayerListLocalizeGameTextModule = require(Parent.Flags.FFlagPlayerListLocalizeGameText)
 local UseLegacyAndTransparencyAwarePanelStyleModule = require(Parent.Hooks.useLegacyAndTransparencyAwarePanelStyle)
 
-local function v9() --[[ Line: 16 ]] end
+local function v9() end
 
-return ReactModule.memo(function(p1) --[[ Line: 25 | Named "ServiceUnavailableStateImpl" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseLegacyAndTransparencyAwarePanelStyleModule (copy), FFlagPlayerListLocalizeGameTextModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), Empty (copy), IconSize (copy), v9 (copy)
 	local UseLegacyAndTransparencyAwarePanelStyleModuleResult = UseLegacyAndTransparencyAwarePanelStyleModule(p1.useLegacyPanelStyling)
 	local Retry = nil

@@ -5,7 +5,7 @@ local _ = require(Parent.SduiCompat)
 local SduiTextModule = require(script.Parent.SduiText)
 local UseShimmerTextModule = require(script.Parent.useShimmerText)
 
-return function(p1) --[[ Line: 19 | Named "SduiShimmerText" ]]
+return function(p1)
 	-- upvalues: UseShimmerTextModule (copy), ReactModule (copy), CryoModule (copy), SduiTextModule (copy)
 	local UseShimmerTextModuleResult = UseShimmerTextModule({
 		animationSpeed = p1.animationSpeed,
@@ -15,7 +15,7 @@ return function(p1) --[[ Line: 19 | Named "SduiShimmerText" ]]
 		textStyle = p1.textStyle
 	})
 	
-	return ReactModule.createElement(SduiTextModule, ReactModule.useMemo(function() --[[ Line: 28 ]]
+	return ReactModule.createElement(SduiTextModule, ReactModule.useMemo(function()
 		-- upvalues: CryoModule (upval), p1 (copy), UseShimmerTextModuleResult (copy)
 		return CryoModule.Dictionary.join(p1, {
 			animationSpeed = CryoModule.None,

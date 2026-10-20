@@ -19,11 +19,11 @@ local GetClosestItemToCenterModule = require(Parent.Utils.getClosestItemToCenter
 local FFlagUseMediaPlayerInCarousel = require(Parent1.SharedFlags).FFlagUseMediaPlayerInCarousel
 local config = { dampingRatio = 1, frequency = 4 }
 
-local function _(p1, p2, p3): boolean --[[ Line: 75 | Named "isWithinEpsilon" ]]
+local function _(p1, p2, p3): boolean
 	return math.abs(p1 - p2) < p3
 end
 
-local function createController(CarouselRef, UseRefResult, Callback) --[[ Line: 79 ]]
+local function createController(CarouselRef, UseRefResult, Callback)
 	-- upvalues: OtterModule (copy), config (copy), UserGameSettings (copy), GetClosestItemToCenterModule (copy), RunService (copy)
 	local RenderSteppedConnection = nil
 	local Flag = false
@@ -32,7 +32,7 @@ local function createController(CarouselRef, UseRefResult, Callback) --[[ Line: 
 	local ScaledX = 0
 	local Flag1 = false
 	
-	local function resetMotor(X, p1, p2) --[[ Line: 111 ]]
+	local function resetMotor(X, p1, p2)
 		-- upvalues: SingleMotor (ref), OtterModule (upval), Flag (ref), ScaledX (ref), CarouselRef (copy)
 		if SingleMotor then
 			SingleMotor:destroy()
@@ -40,7 +40,7 @@ local function createController(CarouselRef, UseRefResult, Callback) --[[ Line: 
 		end
 		local SingleMotor1 = OtterModule.createSingleMotor(X)
 		SingleMotor = SingleMotor1
-		SingleMotor1:onStep(function(p3) --[[ Line: 123 ]]
+		SingleMotor1:onStep(function(p3)
 			-- upvalues: SingleMotor (upval), SingleMotor1 (copy), Flag (upval), ScaledX (upval), p1 (copy), X (copy), CarouselRef (upval)
 			if SingleMotor ~= SingleMotor1 then
 				SingleMotor1:destroy()
@@ -68,7 +68,7 @@ local function createController(CarouselRef, UseRefResult, Callback) --[[ Line: 
 		SingleMotor1:start()
 	end
 	
-	local function setGoal(Vector, p1: number, p2) --[[ Line: 156 ]]
+	local function setGoal(Vector, p1: number, p2)
 		-- upvalues: SingleMotor (ref), ScaledX (ref), OtterModule (upval), config (upval)
 		if not SingleMotor then return end
 		assert(SingleMotor ~= nil, "setGoal called before resetMotor")
@@ -85,15 +85,15 @@ local function createController(CarouselRef, UseRefResult, Callback) --[[ Line: 
 	
 	local config1 = {
 		carouselRef = CarouselRef,
-		getWasTouched = function() --[[ Line: 91 ]]
+		getWasTouched = function()
 			-- upvalues: Flag1 (ref)
 			return Flag1
 		end,
-		getIsNavigationLocked = function() --[[ Line: 100 ]]
+		getIsNavigationLocked = function()
 			-- upvalues: IsNavigationLocked (ref)
 			return IsNavigationLocked
 		end,
-		handleDeleteTransition = function(Callback1, Callback2, Vector, p1, p2, Callback) --[[ Line: 171 ]]
+		handleDeleteTransition = function(Callback1, Callback2, Vector, p1, p2, Callback)
 			-- upvalues: CarouselRef (copy), UseRefResult (copy), Flag (ref), Flag1 (ref), IsNavigationLocked (ref), resetMotor (copy), setGoal (copy), UserGameSettings (upval), OtterModule (upval), SingleMotor (ref), ScaledX (ref)
 			local Current = CarouselRef.current
 			local Current1 = UseRefResult.current
@@ -107,14 +107,14 @@ local function createController(CarouselRef, UseRefResult, Callback) --[[ Line: 
 			Flag1 = false
 			IsNavigationLocked = true
 			
-			local function handleDeleteNextImageMovement() --[[ Line: 194 ]]
+			local function handleDeleteNextImageMovement()
 				-- upvalues: Vector (copy), Current1 (copy), p1 (copy), resetMotor (upval), Current (copy), Callback (copy), Callback1 (copy), IsNavigationLocked (upval), ScrollingEnabled (copy), setGoal (upval), p2 (copy), UserGameSettings (upval)
-				resetMotor(Current.CanvasPosition.X, function(p3, p4): boolean --[[ Line: 195 | Named "onStep" ]]
+				resetMotor(Current.CanvasPosition.X, function(p3, p4): boolean
 					-- upvalues: Vector (upval), Current1 (upval), p1 (upval)
 					Current1.Size = UDim2.fromOffset(math.round(Vector.X - math.abs(p3 - p4)), Vector.Y)
 					
 					return p1 == 1
-				end, function() --[[ Line: 205 ]]
+				end, function()
 					-- upvalues: Callback (upval), Current1 (upval), Callback1 (upval), IsNavigationLocked (upval), Current (upval), ScrollingEnabled (upval)
 					Callback()
 					Current1.Visible = false
@@ -125,24 +125,24 @@ local function createController(CarouselRef, UseRefResult, Callback) --[[ Line: 
 				setGoal(Vector, p1 - 1, p2 or UserGameSettings.ReducedMotion)
 			end
 			
-			local function handleDeleteImagesFadeIn() --[[ Line: 216 ]]
+			local function handleDeleteImagesFadeIn()
 				-- upvalues: Callback2 (copy), p1 (copy), resetMotor (upval), Current (copy), Callback (copy), Current1 (copy), OtterModule (upval), Callback1 (copy), IsNavigationLocked (upval), ScrollingEnabled (copy), Vector (copy), SingleMotor (upval), ScaledX (upval)
 				if not Callback2 then return end
 				assert(Callback2 ~= nil, "setPostDeletionItemBinding should exist")
-				resetMotor(Current.CanvasPosition.X, function(_, _): boolean --[[ Line: 221 ]]
+				resetMotor(Current.CanvasPosition.X, function(_, _): boolean
 					-- upvalues: p1 (upval)
 					return p1 == 1
-				end, function() --[[ Line: 225 ]]
+				end, function()
 					-- upvalues: Callback (upval), Current1 (upval), OtterModule (upval), Callback1 (upval), Callback2 (upval), IsNavigationLocked (upval), Current (upval), ScrollingEnabled (upval)
 					Callback()
 					Current1.Visible = false
 					local SingleMotor = OtterModule.createSingleMotor(0)
-					SingleMotor:onStep(function(p3) --[[ Line: 229 ]]
+					SingleMotor:onStep(function(p3)
 						-- upvalues: Callback1 (upval), Callback2 (upval)
 						Callback1(p3)
 						Callback2(1)
 					end)
-					SingleMotor:onComplete(function() --[[ Line: 233 ]]
+					SingleMotor:onComplete(function()
 						-- upvalues: IsNavigationLocked (upval), Current (upval), ScrollingEnabled (upval)
 						IsNavigationLocked = false
 						Current.ScrollingEnabled = ScrollingEnabled
@@ -160,7 +160,7 @@ local function createController(CarouselRef, UseRefResult, Callback) --[[ Line: 
 				end
 			end
 			
-			local function handleDeleteNextImageFadeOut() --[[ Line: 243 ]]
+			local function handleDeleteNextImageFadeOut()
 				-- upvalues: Callback2 (copy), OtterModule (upval), handleDeleteImagesFadeIn (copy)
 				if Callback2 then
 					assert(Callback2 ~= nil, "setPostDeletionItemBinding should exist")
@@ -186,7 +186,7 @@ local function createController(CarouselRef, UseRefResult, Callback) --[[ Line: 
 			end
 			SingleMotor1:setGoal(OtterModule.spring(0, { frequency = Frequency }))
 		end,
-		handleInertialMove = function(Vector, p1: number) --[[ Line: 267 ]]
+		handleInertialMove = function(Vector, p1: number)
 			-- upvalues: CarouselRef (copy), Flag (ref), GetClosestItemToCenterModule (upval), SingleMotor (ref), OtterModule (upval), ScaledX (ref), config (upval), RenderSteppedConnection (ref), RunService (upval), Callback (copy)
 			local Negated = nil
 			local Current = CarouselRef.current
@@ -208,7 +208,7 @@ local function createController(CarouselRef, UseRefResult, Callback) --[[ Line: 
 					local SingleMotor1 = OtterModule.createSingleMotor(X)
 					SingleMotor = SingleMotor1
 					local v1 = nil
-					SingleMotor1:onStep(function(p2) --[[ Line: 123 ]]
+					SingleMotor1:onStep(function(p2)
 						-- upvalues: SingleMotor (upval), SingleMotor1 (copy), Flag (upval), ScaledX (upval), v1 (copy), X (copy), CarouselRef (upval)
 						if SingleMotor ~= SingleMotor1 then
 							SingleMotor1:destroy()
@@ -243,7 +243,7 @@ local function createController(CarouselRef, UseRefResult, Callback) --[[ Line: 
 					RenderSteppedConnection:Disconnect()
 					RenderSteppedConnection = nil
 				end
-				RenderSteppedConnection = RunService.RenderStepped:Connect(function(DeltaTime: number) --[[ Line: 297 ]]
+				RenderSteppedConnection = RunService.RenderStepped:Connect(function(DeltaTime: number)
 					-- upvalues: CarouselRef (upval), Flag (upval), RenderSteppedConnection (upval), GetClosestItemToCenterModule (upval), Vector (copy), Negated (ref), p1 (copy), SingleMotor (upval), OtterModule (upval), ScaledX (upval), config (upval), Callback (upval)
 					local Current = CarouselRef.current
 					
@@ -282,7 +282,7 @@ local function createController(CarouselRef, UseRefResult, Callback) --[[ Line: 
 					local SingleMotor1 = OtterModule.createSingleMotor(X)
 					SingleMotor = SingleMotor1
 					local Callback1 = nil
-					SingleMotor1:onStep(function(p2) --[[ Line: 123 ]]
+					SingleMotor1:onStep(function(p2)
 						-- upvalues: SingleMotor (upval), SingleMotor1 (copy), Flag (upval), ScaledX (upval), Callback1 (copy), X (copy), CarouselRef (upval)
 						if SingleMotor ~= SingleMotor1 then
 							SingleMotor1:destroy()
@@ -315,7 +315,7 @@ local function createController(CarouselRef, UseRefResult, Callback) --[[ Line: 
 				end)
 			end
 		end,
-		onInputBegan = function(_, Input) --[[ Line: 343 ]]
+		onInputBegan = function(_, Input)
 			-- upvalues: IsNavigationLocked (ref), Flag (ref), Flag1 (ref)
 			if IsNavigationLocked then return end
 			if Input.UserInputType == Enum.UserInputType.Touch then
@@ -324,13 +324,13 @@ local function createController(CarouselRef, UseRefResult, Callback) --[[ Line: 
 			end
 		end,
 		resetMotor = resetMotor,
-		resetTouchState = function() --[[ Line: 95 ]]
+		resetTouchState = function()
 			-- upvalues: Flag (ref), Flag1 (ref)
 			Flag = false
 			Flag1 = false
 		end,
 		setGoal = setGoal,
-		setIsNavigationLocked = function(Enabled) --[[ Line: 104 ]]
+		setIsNavigationLocked = function(Enabled)
 			-- upvalues: Flag (ref), Flag1 (ref), IsNavigationLocked (ref)
 			if Enabled == true then
 				Flag = false
@@ -344,7 +344,7 @@ local function createController(CarouselRef, UseRefResult, Callback) --[[ Line: 
 	return config1
 end
 
-return function(p1, p2, Callback) --[[ Line: 372 ]]
+return function(p1, p2, Callback)
 	-- upvalues: UseAnalyticsModule (copy), UseBindingFunction (copy), ReactModule (copy), UseIsHoveredFunction (copy), UseIsTouchDownFunction (copy), UseLastInputFunction (copy), createController (copy), UserGameSettings (copy), UseEffectOnceFunction (copy), GetClosestItemToCenterModule (copy), UseEventConnectionFunction (copy), UserInputService (copy), ContextActionService (copy), EventNamesModule (copy), FFlagUseMediaPlayerInCarousel (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseBindingResult, UseBindingResult2 = UseBindingFunction(1)
@@ -361,7 +361,7 @@ return function(p1, p2, Callback) --[[ Line: 372 ]]
 	end
 	local Current = UseRefResult2.current
 	assert(Current ~= nil, "carouselController should exist")
-	ReactModule.useEffect(function() --[[ Line: 392 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UserGameSettings (upval), Current (copy), p1 (copy), p2 (copy)
 		local Current1 = UseRefResult.current
 		
@@ -374,22 +374,22 @@ return function(p1, p2, Callback) --[[ Line: 372 ]]
 			return
 		end
 	end, { p2 })
-	UseEffectOnceFunction(function() --[[ Line: 410 ]]
+	UseEffectOnceFunction(function()
 		-- upvalues: Current (copy), p1 (copy), p2 (copy)
 		Current.setGoal(p1, p2, true)
 	end, p2 ~= nil)
-	ReactModule.useEffect(function() --[[ Line: 416 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Current (copy), p1 (copy), p2 (copy)
 		Current.setGoal(p1, p2, true)
 	end, { p1 })
-	ReactModule.useEffect(function() --[[ Line: 421 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseIsTouchDownResult (copy), Current (copy), p1 (copy), p2 (copy)
 		if not UseIsTouchDownResult and Current.getWasTouched() then
 			Current.resetTouchState()
 			Current.handleInertialMove(p1, p2)
 		end
 	end, { UseIsTouchDownResult })
-	UseEventConnectionFunction(UserInputService.PointerAction, (ReactModule.useCallback(function(p3: number) --[[ Line: 428 ]]
+	UseEventConnectionFunction(UserInputService.PointerAction, (ReactModule.useCallback(function(p3: number)
 		-- upvalues: UseRefResult (copy), Current (copy), GetClosestItemToCenterModule (upval), p1 (copy), UseIsHoveredResult (copy), Callback (copy)
 		local Current1 = UseRefResult.current
 		
@@ -408,7 +408,7 @@ return function(p1, p2, Callback) --[[ Line: 372 ]]
 			Callback(ClosestItemToCenterModule + 1)
 		end
 	end, { UseIsHoveredResult, p1 })))
-	UseEventConnectionFunction(UserInputService.TouchSwipe, (ReactModule.useCallback(function(SwipeDirection) --[[ Line: 449 ]]
+	UseEventConnectionFunction(UserInputService.TouchSwipe, (ReactModule.useCallback(function(SwipeDirection)
 		-- upvalues: UserGameSettings (upval), UseRefResult (copy), Current (copy), GetClosestItemToCenterModule (upval), p1 (copy), Callback (copy)
 		if not UserGameSettings.ReducedMotion then return end
 		local Current1 = UseRefResult.current
@@ -428,9 +428,9 @@ return function(p1, p2, Callback) --[[ Line: 372 ]]
 			Callback(ClosestItemToCenterModule - 1)
 		end
 	end, {})))
-	ReactModule.useEffect(function() --[[ Line: 473 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ContextActionService (upval), UseRefResult (copy), Current (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval), GetClosestItemToCenterModule (upval), p1 (copy), Callback (copy)
-		ContextActionService:BindCoreAction("CapturesCarouselNavigateShortcutAction", function(_, UserInputState, Input) --[[ Line: 474 ]]
+		ContextActionService:BindCoreAction("CapturesCarouselNavigateShortcutAction", function(_, UserInputState, Input)
 			-- upvalues: UseRefResult (upval), Current (upval), UseAnalyticsModuleResult (upval), EventNamesModule (upval), GetClosestItemToCenterModule (upval), p1 (upval), Callback (upval)
 			local Current1 = UseRefResult.current
 			
@@ -453,14 +453,14 @@ return function(p1, p2, Callback) --[[ Line: 372 ]]
 			end
 		end, false, Enum.KeyCode.Left, Enum.KeyCode.Right)
 		
-		return function() --[[ Line: 496 ]]
+		return function()
 			-- upvalues: ContextActionService (upval)
 			ContextActionService:UnbindCoreAction("CapturesCarouselNavigateShortcutAction")
 		end
 	end, {})
 	
 	return {
-		carouselInputBegan = ReactModule.useCallback(function(p3, Input) --[[ Line: 501 ]]
+		carouselInputBegan = ReactModule.useCallback(function(p3, Input)
 			-- upvalues: Current (copy), UserGameSettings (upval), UseIsHoveredResult2 (copy)
 			if Current.getIsNavigationLocked() then return end
 			if UserGameSettings.ReducedMotion then
@@ -472,7 +472,7 @@ return function(p1, p2, Callback) --[[ Line: 372 ]]
 				UseIsHoveredResult2(p3, Input)
 			end
 		end, { Current.onInputBegan, UseIsHoveredResult2 }),
-		carouselInputEnded = ReactModule.useCallback(function(p3, Input) --[[ Line: 515 ]]
+		carouselInputEnded = ReactModule.useCallback(function(p3, Input)
 			-- upvalues: FFlagUseMediaPlayerInCarousel (upval), UseLastInputResult (copy), Current (copy), UseIsHoveredResult3 (copy)
 			if FFlagUseMediaPlayerInCarousel and UseLastInputResult == "Touch" and not Current.getWasTouched() then
 				Current.onInputBegan(p3, Input)
@@ -480,7 +480,7 @@ return function(p1, p2, Callback) --[[ Line: 372 ]]
 			UseIsHoveredResult3(p3, Input)
 		end, { UseIsHoveredResult3 }),
 		carouselRef = UseRefResult,
-		deleteSelectedItem = ReactModule.useCallback(function(p3) --[[ Line: 522 ]]
+		deleteSelectedItem = ReactModule.useCallback(function(p3)
 			-- upvalues: Current (copy), UseBindingResult2 (copy), UseBindingResult2_1 (copy), p1 (copy), p2 (copy)
 			Current.handleDeleteTransition(UseBindingResult2, UseBindingResult2_1, p1, p2, false, p3)
 		end, { p1, p2, UseBindingResult2 }),

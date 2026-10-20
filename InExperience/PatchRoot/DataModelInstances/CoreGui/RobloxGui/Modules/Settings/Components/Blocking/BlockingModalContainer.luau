@@ -7,7 +7,7 @@ local IsNewInGameMenuEnabledModule = require(Modules.isNewInGameMenuEnabled)
 local Toast = require(CorePackages.Packages.UIBlox).App.Dialog.Toast
 local ActionModalModule = require(script.Parent.ActionModal)
 
-return function(p1) --[[ Line: 30 | Named "BlockingModalContainer" ]]
+return function(p1)
 	-- upvalues: BlockingUtilityModule (copy), ReactModule (copy), IsNewInGameMenuEnabledModule (copy), Modules (copy), UseLocalizationFunction (copy), Toast (copy), ActionModalModule (copy)
 	local Player = p1.player
 	local CloseModalFunction = p1.closeModal
@@ -17,7 +17,7 @@ return function(p1) --[[ Line: 30 | Named "BlockingModalContainer" ]]
 	local OnBlockingSuccessFunction = p1.onBlockingSuccess
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(1000, 1000))
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 42 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: BlockingUtility (copy), Player (copy), Analytics (copy), Source (copy), OnBlockingSuccessFunction (copy), CloseModalFunction (copy), UseStateResult2_1 (copy)
 		if not BlockingUtility:BlockPlayerAsync(Player) then
 			UseStateResult2_1(true)
@@ -37,7 +37,7 @@ return function(p1) --[[ Line: 30 | Named "BlockingModalContainer" ]]
 		Source,
 		OnBlockingSuccessFunction
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 59 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy), Source (copy), IsNewInGameMenuEnabledModule (upval), Modules (upval), Player (copy)
 		UseResult()
 		local Source1 = Source or "BlockingModal"
@@ -73,7 +73,7 @@ return function(p1) --[[ Line: 30 | Named "BlockingModalContainer" ]]
 		Size = UDim2.new(1, 0, 1, 0),
 		BackgroundTransparency = 1,
 		ZIndex = 2,
-		[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 100 ]]
+		[ReactModule.Change.AbsoluteSize] = function(Frame)
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(Frame.AbsoluteSize)
 		end

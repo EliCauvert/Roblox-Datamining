@@ -1,4 +1,4 @@
-﻿return function(Text: string, p1): boolean --[[ Line: 8 ]]
+﻿return function(Text: string, p1): boolean
 	if not Text or Text == "" then
 		return true
 	end

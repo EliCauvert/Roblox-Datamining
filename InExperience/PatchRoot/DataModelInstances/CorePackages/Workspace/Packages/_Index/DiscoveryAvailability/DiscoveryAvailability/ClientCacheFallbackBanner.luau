@@ -12,7 +12,7 @@ local View = FoundationModule.View
 local Enums = FoundationModule.Enums
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1) --[[ Line: 28 ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), UsePageSideMarginFunction (copy), ResponsiveModule (copy), NotificationModalsManagerModule (copy), UIBloxModule (copy), View (copy), Banner (copy), Enums (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -48,13 +48,13 @@ return function(p1) --[[ Line: 28 ]]
 				{
 					text = UseLocalizationResult.refreshButton,
 					isLoading = UseStateResult,
-					onActivated = ReactModule.useCallback(function() --[[ Line: 45 ]]
+					onActivated = ReactModule.useCallback(function()
 						-- upvalues: UseStateResult2 (copy), p1 (copy), NotificationModalsManagerModule (upval), UIBloxModule (upval), UseLocalizationResult (copy)
 						UseStateResult2(true)
-						p1.onRefreshButtonClick():andThen(function(_) --[[ Line: 49 ]]
+						p1.onRefreshButtonClick():andThen(function(_)
 							-- upvalues: UseStateResult2 (upval)
 							UseStateResult2(false)
-						end):catch(function(_) --[[ Line: 52 ]]
+						end):catch(function(_)
 							-- upvalues: UseStateResult2 (upval), NotificationModalsManagerModule (upval), UIBloxModule (upval), UseLocalizationResult (upval)
 							UseStateResult2(false)
 							NotificationModalsManagerModule.SetUIBloxToast({

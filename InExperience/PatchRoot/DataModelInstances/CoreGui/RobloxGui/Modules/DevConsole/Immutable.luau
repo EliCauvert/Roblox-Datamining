@@ -1,5 +1,5 @@
 ﻿return {
-	JoinDictionaries = function(...) --[[ Line: 10 ]]
+	JoinDictionaries = function(...)
 		local t = {}
 		
 		for i = 1, select("#", ...) do
@@ -9,7 +9,7 @@
 		end
 		return t
 	end,
-	JoinLists = function(...) --[[ Line: 26 ]]
+	JoinLists = function(...)
 		local t = {}
 		
 		for i = 1, select("#", ...) do
@@ -22,7 +22,7 @@
 		end
 		return t
 	end,
-	Set = function(List, Key, p1) --[[ Line: 44 ]]
+	Set = function(List, Key, p1)
 		local t = {}
 		
 		for i, value in pairs(List) do
@@ -32,7 +32,7 @@
 		
 		return t
 	end,
-	Append = function(p2, ...) --[[ Line: 59 ]]
+	Append = function(p2, ...)
 		local t = {}
 		local CountP3 = #p2
 		
@@ -44,7 +44,7 @@
 		end
 		return t
 	end,
-	RemoveFromDictionary = function(List, ...) --[[ Line: 77 ]]
+	RemoveFromDictionary = function(List, ...)
 		local t = {}
 		local Flag = nil
 		
@@ -64,7 +64,7 @@
 		end
 		return t
 	end,
-	RemoveFromList = function(p3, p4) --[[ Line: 99 ]]
+	RemoveFromList = function(p3, p4)
 		local List = {}
 		
 		for i = 1, #p3 do
@@ -74,7 +74,7 @@
 		end
 		return List
 	end,
-	RemoveRangeFromList = function(p5, p6, p7) --[[ Line: 114 ]]
+	RemoveRangeFromList = function(p5, p6, p7)
 		local List = {}
 		
 		for i = 1, #p5 do
@@ -84,7 +84,7 @@
 		end
 		return List
 	end,
-	RemoveValueFromList = function(p8, p9) --[[ Line: 129 ]]
+	RemoveValueFromList = function(p8, p9)
 		local List = {}
 		
 		for i = 1, #p8 do

@@ -3,7 +3,7 @@ local AvatarScreenModule = require(AvatarExperienceNavigation.Enums.AvatarScreen
 local ClearScreensModule = require(AvatarExperienceNavigation.NavigationActions.ClearScreens)
 local _ = require(AvatarExperienceNavigation.Types.NavigationType)
 
-return function(p1) --[[ Line: 8 | Named "closeGiftSendFlow" ]]
+return function(p1)
 	-- upvalues: ClearScreensModule (copy), AvatarScreenModule (copy)
 	p1.dispatch(ClearScreensModule({
 		AvatarScreenModule.SendGiftRecipientPicker,

@@ -15,23 +15,23 @@ local CountryCodeSelectorModule = require(AuthCommon.Components.CountryCodeSelec
 local PhoneNumberTextBox = RoactModule.Component:extend("PhoneNumberTextBox")
 PhoneNumberTextBox.defaultProps = { CountryCodeSize = 70, InnerPadding = 12 }
 
-function PhoneNumberTextBox.init(p1) --[[ Line: 30 ]]
+function PhoneNumberTextBox.init(p1)
 	p1:setState({
 		CountryCodeHover = false,
 		CountryCodeSearchVisible = false
 	})
 	
-	function p1.CountryCodeMouseEnter() --[[ Line: 36 ]]
+	function p1.CountryCodeMouseEnter()
 		-- upvalues: p1 (copy)
 		p1:setState({ CountryCodeHover = true })
 	end
 	
-	function p1.CountryCodeMouseLeave() --[[ Line: 42 ]]
+	function p1.CountryCodeMouseLeave()
 		-- upvalues: p1 (copy)
 		p1:setState({ CountryCodeHover = false })
 	end
 	
-	function p1.OpenCountryCode() --[[ Line: 48 ]]
+	function p1.OpenCountryCode()
 		-- upvalues: p1 (copy)
 		p1:setState({ CountryCodeSearchVisible = true })
 		
@@ -40,7 +40,7 @@ function PhoneNumberTextBox.init(p1) --[[ Line: 30 ]]
 		end
 	end
 	
-	function p1.CloseCountryCode() --[[ Line: 58 ]]
+	function p1.CloseCountryCode()
 		-- upvalues: p1 (copy)
 		p1:setState({ CountryCodeSearchVisible = false })
 		
@@ -49,7 +49,7 @@ function PhoneNumberTextBox.init(p1) --[[ Line: 30 ]]
 		end
 	end
 	
-	function p1.SelectCountryCode(p2) --[[ Line: 68 ]]
+	function p1.SelectCountryCode(p2)
 		-- upvalues: p1 (copy)
 		if p1.props.SetCountryCode then
 			p1.props.SetCountryCode(p2)
@@ -58,9 +58,9 @@ function PhoneNumberTextBox.init(p1) --[[ Line: 30 ]]
 	end
 end
 
-function PhoneNumberTextBox.render(p1) --[[ Line: 76 ]]
+function PhoneNumberTextBox.render(p1)
 	-- upvalues: WithStyleFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), RoactModule (copy), ImageSetLabel (copy), GetImageDataFunction (copy), NormalizeFontFaceFunction (copy), CoreGui (copy), CountryCodeSelectorModule (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 77 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: p1 (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Text (upval), RoactModule (upval), ImageSetLabel (upval), GetImageDataFunction (upval), NormalizeFontFaceFunction (upval), CoreGui (upval), CountryCodeSelectorModule (upval)
 		local Color = p1.props.Color
 		local Color1 = p2.Theme.BackgroundMuted.Color

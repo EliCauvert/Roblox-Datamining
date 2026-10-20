@@ -2,17 +2,17 @@
 local CommercePurchasePromptStateEnumModule = require(CommercePurchaseApp.Enums.CommercePurchasePromptStateEnum)
 local _ = require(CommercePurchaseApp.Store.Types)
 
-local function _() --[[ Line: 20 | Named "createInitialState" ]]
+local function _()
 	-- upvalues: CommercePurchasePromptStateEnumModule (copy)
 	return { promptState = CommercePurchasePromptStateEnumModule.None }
 end
 
 return (require(CommercePurchaseApp.Parent.Rodux).createReducer({ promptState = CommercePurchasePromptStateEnumModule.None }, {
-	[require(CommercePurchaseApp.Store.Actions.CommercePurchaseEnded).name] = function(_, _) --[[ Line: 27 ]]
+	[require(CommercePurchaseApp.Store.Actions.CommercePurchaseEnded).name] = function(_, _)
 		-- upvalues: CommercePurchasePromptStateEnumModule (copy)
 		return { promptState = CommercePurchasePromptStateEnumModule.None }
 	end,
-	[require(CommercePurchaseApp.Store.Actions.CommercePurchaseFailed).name] = function(Tbl, p1) --[[ Line: 30 ]]
+	[require(CommercePurchaseApp.Store.Actions.CommercePurchaseFailed).name] = function(Tbl, p1)
 		-- upvalues: CommercePurchasePromptStateEnumModule (copy)
 		local Copy = table.clone(Tbl)
 		Copy.errorCode = p1.errorCode
@@ -20,7 +20,7 @@ return (require(CommercePurchaseApp.Parent.Rodux).createReducer({ promptState = 
 		
 		return Copy
 	end,
-	[require(CommercePurchaseApp.Store.Actions.CommercePurchaseStarted).name] = function(Tbl, p1) --[[ Line: 36 ]]
+	[require(CommercePurchaseApp.Store.Actions.CommercePurchaseStarted).name] = function(Tbl, p1)
 		-- upvalues: CommercePurchasePromptStateEnumModule (copy)
 		local Copy = table.clone(Tbl)
 		Copy.promptState = CommercePurchasePromptStateEnumModule.Started
@@ -28,7 +28,7 @@ return (require(CommercePurchaseApp.Parent.Rodux).createReducer({ promptState = 
 		
 		return Copy
 	end,
-	[require(CommercePurchaseApp.Store.Actions.CommercePurchaseCheckout).name] = function(Tbl, p1) --[[ Line: 42 ]]
+	[require(CommercePurchaseApp.Store.Actions.CommercePurchaseCheckout).name] = function(Tbl, p1)
 		-- upvalues: CommercePurchasePromptStateEnumModule (copy)
 		local Copy = table.clone(Tbl)
 		Copy.promptState = CommercePurchasePromptStateEnumModule.Checkout

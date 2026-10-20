@@ -37,7 +37,7 @@ for i, value in {
 	Patterns[i] = value[1]
 	t[i] = value[2]
 end
-function LexerModule.scan(Text) --[[ Line: 105 ]]
+function LexerModule.scan(Text)
 	-- upvalues: Patterns (copy), t (copy), Keyword (copy), Builtin (copy), Libraries (copy), LexerModule (copy)
 	local Init = 1
 	local CountText = #Text
@@ -45,7 +45,7 @@ function LexerModule.scan(Text) --[[ Line: 105 ]]
 	local Text2 = ""
 	local Text3 = ""
 	local v1 = ""
-	local Thread = coroutine.create(function() --[[ Line: 110 ]]
+	local Thread = coroutine.create(function()
 		-- upvalues: Init (ref), CountText (copy), Patterns (upval), Text (copy), t (upval), Keyword (upval), Builtin (upval), Text1 (ref), v1 (ref), Text2 (ref), Libraries (upval), Text3 (ref), LexerModule (upval)
 		local Init1 = nil
 		local Builtin1 = nil
@@ -124,7 +124,7 @@ function LexerModule.scan(Text) --[[ Line: 105 ]]
 		end
 	end)
 	
-	return function() --[[ Line: 218 ]]
+	return function()
 		-- upvalues: Thread (copy)
 		if coroutine.status(Thread) == "dead" then return end
 		local Success, Result, Resumed3 = coroutine.resume(Thread)
@@ -134,7 +134,7 @@ function LexerModule.scan(Text) --[[ Line: 105 ]]
 	end
 end
 
-function LexerModule.navigator() --[[ Line: 232 ]]
+function LexerModule.navigator()
 	-- upvalues: LexerModule (copy)
 	local config = {
 		Source = "",
@@ -142,20 +142,20 @@ function LexerModule.navigator() --[[ Line: 232 ]]
 		_UserIndex = 0,
 		_ScanThread = nil,
 		TokenCache = table.create(50),
-		Destroy = function(p1) --[[ Line: 242 ]]
+		Destroy = function(p1)
 			p1.Source = nil
 			p1._RealIndex = nil
 			p1._UserIndex = nil
 			p1.TokenCache = nil
 			p1._ScanThread = nil
 		end,
-		SetSource = function(p1, Source) --[[ Line: 250 ]]
+		SetSource = function(p1, Source)
 			-- upvalues: LexerModule (upval)
 			p1.Source = Source
 			p1._RealIndex = 0
 			p1._UserIndex = 0
 			table.clear(p1.TokenCache)
-			p1._ScanThread = coroutine.create(function() --[[ Line: 257 ]]
+			p1._ScanThread = coroutine.create(function()
 				-- upvalues: LexerModule (upval), p1 (copy)
 				for i, value in LexerModule.scan(p1.Source) do
 					p1._RealIndex += 1
@@ -166,7 +166,7 @@ function LexerModule.navigator() --[[ Line: 232 ]]
 		end
 	}
 	
-	function config.Next() --[[ Line: 266 ]]
+	function config.Next()
 		-- upvalues: config (copy)
 		config._UserIndex += 1
 		
@@ -179,7 +179,7 @@ function LexerModule.navigator() --[[ Line: 232 ]]
 		return Result, Resumed3
 	end
 	
-	function config.Peek(p2) --[[ Line: 289 ]]
+	function config.Peek(p2)
 		-- upvalues: config (copy)
 		local NewUserIndex = config._UserIndex + p2
 		

@@ -17,7 +17,7 @@ local UseFormDataModule = require(GenericAbuseReporting.Bedui.Provider.useFormDa
 local _UDim2 = UDim2.fromOffset(180, 101)
 local config = { [AbuseVectorModule.Place] = "THUMBNAIL_IDS" }
 
-return ReactModule.memo(function(p1) --[[ Line: 38 | Named "Selector" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), UseFormDataModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), AbuseVectorModule (copy), GetPlaceMediaAssetIdsModule (copy), config (copy), View (copy), Checkbox (copy), Image (copy), ScaleType (copy), _UDim2 (copy), Text (copy), ComponentSubtextModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState({})
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState({})
@@ -26,10 +26,10 @@ return ReactModule.memo(function(p1) --[[ Line: 38 | Named "Selector" ]]
 	local UpdateAdditionalReportTagsFunction = UseFormDataModule().updateAdditionalReportTags
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
 	local UseRefResult = ReactModule.useRef(`selector-{DateTime.now()}`)
-	ReactModule.useEffect(function() --[[ Line: 52 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), AbuseVectorModule (upval), GetPlaceMediaAssetIdsModule (upval), UseRoactServiceResult (copy), Custom (copy), UseStateResult2 (copy)
 		if p1.abuseVector == AbuseVectorModule.Place then
-			GetPlaceMediaAssetIdsModule(UseRoactServiceResult, (tostring(Custom and Custom.universeId))):andThen(function(Result) --[[ Line: 54 ]]
+			GetPlaceMediaAssetIdsModule(UseRoactServiceResult, (tostring(Custom and Custom.universeId))):andThen(function(Result)
 				-- upvalues: UseStateResult2 (upval)
 				UseStateResult2(Result)
 			end)
@@ -40,9 +40,9 @@ return ReactModule.memo(function(p1) --[[ Line: 38 | Named "Selector" ]]
 		UseRoactServiceResult,
 		Custom and Custom.universeId
 	})
-	local UseResult = ReactModule.useCallback(function(Value) --[[ Line: 61 ]]
+	local UseResult = ReactModule.useCallback(function(Value)
 		-- upvalues: UseStateResult2_1 (copy), p1 (copy), AbuseVectorModule (upval), UpdateAdditionalReportTagsFunction (copy), UseRefResult (copy), config (upval)
-		UseStateResult2_1(function(Tbl) --[[ Line: 62 ]]
+		UseStateResult2_1(function(Tbl)
 			-- upvalues: Value (copy), p1 (upval), AbuseVectorModule (upval), UpdateAdditionalReportTagsFunction (upval), UseRefResult (upval), config (upval)
 			local Copy = table.clone(Tbl)
 			local FoundIndex: number? = table.find(Copy, Value)
@@ -62,7 +62,7 @@ return ReactModule.memo(function(p1) --[[ Line: 38 | Named "Selector" ]]
 			return Copy
 		end)
 	end, { p1.component, p1.abuseVector, UpdateForm })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 85 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseStateResult (copy), ReactModule (upval), View (upval), Checkbox (upval), UseStateResult1 (copy), UseResult (copy), Image (upval), ScaleType (upval), _UDim2 (upval)
 		local Elements = {}
 		
@@ -74,7 +74,7 @@ return ReactModule.memo(function(p1) --[[ Line: 38 | Named "Selector" ]]
 				Checkbox = ReactModule.createElement(Checkbox, {
 					label = "",
 					isChecked = table.find(UseStateResult1, value) ~= nil,
-					onActivated = function() --[[ Line: 97 ]]
+					onActivated = function()
 						-- upvalues: UseResult (upval), value (copy)
 						UseResult(value)
 					end
@@ -83,7 +83,7 @@ return ReactModule.memo(function(p1) --[[ Line: 38 | Named "Selector" ]]
 					Image = `rbxthumb://type=Asset&id={value}&w=768&h=432`,
 					ScaleType = ScaleType.Fit,
 					Size = _UDim2,
-					onActivated = function() --[[ Line: 105 ]]
+					onActivated = function()
 						-- upvalues: UseResult (upval), value (copy)
 						UseResult(value)
 					end

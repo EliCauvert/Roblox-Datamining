@@ -1,8 +1,8 @@
-﻿local function getDirectionForKeycode(KeyCode, Y) --[[ Line: 7 ]]
+﻿local function getDirectionForKeycode(KeyCode, Y)
 	return if KeyCode == Enum.KeyCode.ButtonUp then Vector2.new(0, -Y) elseif KeyCode == Enum.KeyCode.ButtonDown then Vector2.new(0, Y) elseif KeyCode == Enum.KeyCode.ButtonLeft then Vector2.new(-Y, 0) elseif KeyCode == Enum.KeyCode.ButtonRight then Vector2.new(Y, 0) else Vector2.zero
 end
 
-return function(List) --[[ Line: 20 | Named "getDirectionalMoveVector" ]]
+return function(List)
 	-- upvalues: getDirectionForKeycode (copy)
 	local ZeroVector = Vector2.zero
 	

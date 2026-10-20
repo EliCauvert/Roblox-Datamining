@@ -25,14 +25,14 @@ local list = {
 	Color3.fromHex("E74E90")
 }
 
-return function(Frame) --[[ Line: 69 | Named "TextColorSwatchRow" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), UseFormFactorFunction (copy), FormFactor (copy), UseMemoFunction (copy), SignalsModule (copy), UseSignalStateFunction (copy), DashModule (copy), FFlagMomentsTextOverlayV2Redesign (copy), FireAnalyticsEventModule (copy), EventNames (copy), MakeCreationEventFieldsModule (copy), list (copy), ReactModule (copy), View (copy), FoundationModule (copy), ConstantsModule (copy)
 	local Controller = Frame.controller
 	local UseTokensResult = UseTokensFunction()
 	local IsUseFormFactorResultMatch = UseFormFactorFunction() == FormFactor.Wide
-	local UseSignalStateResult = UseSignalStateFunction((UseMemoFunction(function() --[[ Line: 75 ]]
+	local UseSignalStateResult = UseSignalStateFunction((UseMemoFunction(function()
 		-- upvalues: SignalsModule (upval), Controller (copy)
-		return SignalsModule.createComputed(function(p1) --[[ Line: 76 ]]
+		return SignalsModule.createComputed(function(p1)
 			-- upvalues: Controller (upval)
 			local ActiveSession = Controller.getActiveSession(p1)
 			local Draft = if ActiveSession == nil then nil else ActiveSession.getDraft(p1)
@@ -42,7 +42,7 @@ return function(Frame) --[[ Line: 69 | Named "TextColorSwatchRow" ]]
 		end)
 	end, { Controller })))
 	
-	local function onSwatchActivated(FontColor, LayoutOrder) --[[ Line: 85 ]]
+	local function onSwatchActivated(FontColor, LayoutOrder)
 		-- upvalues: Controller (copy), DashModule (upval), FFlagMomentsTextOverlayV2Redesign (upval), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval)
 		local ActiveSession = Controller.getActiveSession(false)
 		
@@ -72,7 +72,7 @@ return function(Frame) --[[ Line: 69 | Named "TextColorSwatchRow" ]]
 			LayoutOrder = LayoutOrder,
 			Size = UDim2.fromOffset(32, 32),
 			backgroundStyle = { Color3 = value },
-			onActivated = function() --[[ Line: 119 ]]
+			onActivated = function()
 				-- upvalues: onSwatchActivated (copy), value (copy), LayoutOrder (copy)
 				onSwatchActivated(value, LayoutOrder)
 			end,

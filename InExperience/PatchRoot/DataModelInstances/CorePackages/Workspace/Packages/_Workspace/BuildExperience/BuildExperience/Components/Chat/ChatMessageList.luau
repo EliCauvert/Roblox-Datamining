@@ -9,7 +9,7 @@ local View = require(Parent.Foundation).View
 local ChatHistoryLoadingStateModule = require(script.Parent.ChatHistoryLoadingState)
 local ChatMessageItemModule = require(script.Parent.ChatMessageItem)
 
-return function(p1) --[[ Line: 35 | Named "ChatMessageList" ]]
+return function(p1)
 	-- upvalues: FFlagBuildExperienceChatHistoryLoadingSkeletonModule (copy), ReactModule (copy), ChatHistoryLoadingStateModule (copy), View (copy), ChatMessageItemModule (copy), ChatConstantsModule (copy), FFlagBuildAgentAdCampaignCardModule (copy)
 	local Elements = {}
 	

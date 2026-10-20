@@ -13,18 +13,18 @@ local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetF
 local _ = require(GenericAbuseReporting.Enums.AbuseVector)
 local UseFocusNavigationRefsModule = require(GenericAbuseReporting.BeduiV2.Hooks.FocusNavigation.useFocusNavigationRefs)
 
-return ReactModule.memo(function(p1) --[[ Line: 34 ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), UseFocusNavigationRefsModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), Sheet (copy), View (copy), IconButton (copy), InputSize (copy), FoundationModule (copy), ButtonVariant (copy), AbuseReportTooltipModule (copy)
 	local AbuseReportFlow = p1.abuseReportFlow
 	local Config = AbuseReportFlow.config
 	local CurrentPageElement = AbuseReportFlow.currentPageElement
 	local CanGoBack = AbuseReportFlow.canGoBack
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Config.display.titleDisclosure and Config.display.titleDisclosure.openByDefault or false)
-	local UseFocusNavigationRefsModuleResult = UseFocusNavigationRefsModule(FocusNavigableSurfaceIdentifierEnum.CentralOverlay, function() --[[ Line: 43 ]]
+	local UseFocusNavigationRefsModuleResult = UseFocusNavigationRefsModule(FocusNavigableSurfaceIdentifierEnum.CentralOverlay, function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end)
-	ReactModule.useEffect(function() --[[ Line: 47 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), p1 (copy)
 		if UseStateResult then
 			p1.takeoverFocus(true)
@@ -34,9 +34,9 @@ return ReactModule.memo(function(p1) --[[ Line: 34 ]]
 			p1.takeoverFocus(false)
 		end
 	end, { p1.takeoverFocus, UseStateResult })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 55 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
-		UseStateResult2(function(p2): boolean --[[ Line: 56 ]]
+		UseStateResult2(function(p2): boolean
 			return not p2
 		end)
 	end, {})

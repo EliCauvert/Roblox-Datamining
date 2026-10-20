@@ -37,7 +37,7 @@ local config = {
 	[ProductPurchaseSurface.SearchPageGameItemShop] = if FFlagEnableSearchGameItemOwnershipUpdate then "SearchPageGameItemShop" else nil
 }
 
-local function _(p1) --[[ Line: 62 | Named "decodePurchasePayload" ]]
+local function _(p1)
 	-- upvalues: HttpService (copy)
 	if type(p1) == "string" and p1 ~= "" then
 		local Success, Result = pcall(HttpService.JSONDecode, HttpService, p1)
@@ -52,7 +52,7 @@ local ParseEconomicRestrictionsFailureReasonFunction = IAPExperienceModule.Utili
 local ParseEconomicRestrictionsExpirationTimeInMinutesFunction = IAPExperienceModule.Utility.parseEconomicRestrictionsExpirationTimeInMinutes
 local list = { NetworkModule, AnalyticsModule }
 
-local function handleGenericPurchaseError(p1, p2, Kind) --[[ Line: 84 ]]
+local function handleGenericPurchaseError(p1, p2, Kind)
 	-- upvalues: IsEconomicRestrictionResponseFunction (copy), ParseEconomicRestrictionsFailureReasonFunction (copy), ParseEconomicRestrictionsExpirationTimeInMinutesFunction (copy), SetEconomicRestrictionErrorModule (copy), ErrorOccurredModule (copy), PurchaseErrorModule (copy), HandlePriceChangedErrorModule (copy)
 	if IsEconomicRestrictionResponseFunction(p2) then
 		p1:dispatch(SetEconomicRestrictionErrorModule(ParseEconomicRestrictionsFailureReasonFunction(p2), (ParseEconomicRestrictionsExpirationTimeInMinutesFunction(p2))))
@@ -70,9 +70,9 @@ local function handleGenericPurchaseError(p1, p2, Kind) --[[ Line: 84 ]]
 	end
 end
 
-return function() --[[ Line: 105 | Named "performLuaPurchase" ]]
+return function()
 	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), AnalyticsModule (copy), ConstantsModule (copy), FFlagEnableRequestLocationTypeForSduiPurchaseModule (copy), config (copy), FFlagEnablePurchasePayloadForDevProductPurchaseModule (copy), HttpService (copy), PerformDevProductEdpPurchaseModule (copy), CompletePurchaseModule (copy), PromiseModule (copy), handleGenericPurchaseError (copy), FFlagEnablePriceChangedErrorHandlingModule (copy), ProductTypeEnum (copy), PerformExperiencePurchaseModule (copy), FFlagPurchasePromptFetchCartPricingForLooks (copy), SelectProductPriceModule (copy), DeriveSelectedOfferIdsFromCartPricingModule (copy), ApplyCartPricingOffersToLineItemsModule (copy), PerformLookPurchaseModule (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), PerformDeveloperSubscriptionRobuxPurchaseModule (copy), PerformDeveloperSubscriptionFiatPurchaseModule (copy)
-	return ThunkModule.new(script.Name, list, function(p1, p2) --[[ Line: 106 ]]
+	return ThunkModule.new(script.Name, list, function(p1, p2)
 		-- upvalues: NetworkModule (upval), AnalyticsModule (upval), ConstantsModule (upval), FFlagEnableRequestLocationTypeForSduiPurchaseModule (upval), config (upval), FFlagEnablePurchasePayloadForDevProductPurchaseModule (upval), HttpService (upval), PerformDevProductEdpPurchaseModule (upval), CompletePurchaseModule (upval), PromiseModule (upval), handleGenericPurchaseError (upval), FFlagEnablePriceChangedErrorHandlingModule (upval), ProductTypeEnum (upval), PerformExperiencePurchaseModule (upval), FFlagPurchasePromptFetchCartPricingForLooks (upval), SelectProductPriceModule (upval), DeriveSelectedOfferIdsFromCartPricingModule (upval), ApplyCartPricingOffersToLineItemsModule (upval), PerformLookPurchaseModule (upval), FFlagEnableUnifiedPurchaseFlowForDevSubs (upval), PerformDeveloperSubscriptionRobuxPurchaseModule (upval), PerformDeveloperSubscriptionFiatPurchaseModule (upval)
 		local v1 = p2[NetworkModule]
 		local v2 = p2[AnalyticsModule]
@@ -107,13 +107,13 @@ return function() --[[ Line: 105 | Named "performLuaPurchase" ]]
 				end
 				config1.purchasePayload = PurchasePayload1
 			end
-			return PerformDevProductEdpPurchaseModule(v1, ProductId, config1):andThen(function(Result) --[[ Line: 149 ]]
+			return PerformDevProductEdpPurchaseModule(v1, ProductId, config1):andThen(function(Result)
 				-- upvalues: p1 (copy), CompletePurchaseModule (upval), v2 (copy), Id (copy), PromiseModule (upval)
 				p1:dispatch(CompletePurchaseModule(Result))
 				v2.signalPurchaseSuccess(Id, Enum.InfoType.Product, nil, Result)
 				
 				return PromiseModule.resolve(Result)
-			end):catch(function(Err) --[[ Line: 156 ]]
+			end):catch(function(Err)
 				-- upvalues: handleGenericPurchaseError (upval), p1 (copy), FFlagEnablePriceChangedErrorHandlingModule (upval), ProductPayload (copy)
 				handleGenericPurchaseError(p1, Err, if FFlagEnablePriceChangedErrorHandlingModule then ProductPayload.kind else nil)
 			end)
@@ -123,12 +123,12 @@ return function() --[[ Line: 105 | Named "performLuaPurchase" ]]
 					expectedCurrency = ConstantsModule.Currency.Robux,
 					expectedPrice = Price,
 					sellerId = ProductInfo.sellerId
-				}):andThen(function(Result) --[[ Line: 170 ]]
+				}):andThen(function(Result)
 					-- upvalues: p1 (copy), CompletePurchaseModule (upval), PromiseModule (upval)
 					p1:dispatch(CompletePurchaseModule(Result))
 					
 					return PromiseModule.resolve(Result)
-				end):catch(function(Err) --[[ Line: 175 ]]
+				end):catch(function(Err)
 					-- upvalues: handleGenericPurchaseError (upval), p1 (copy), FFlagEnablePriceChangedErrorHandlingModule (upval), ProductPayload (copy)
 					handleGenericPurchaseError(p1, Err, if FFlagEnablePriceChangedErrorHandlingModule then ProductPayload.kind else nil)
 				end)
@@ -164,24 +164,24 @@ return function() --[[ Line: 105 | Named "performLuaPurchase" ]]
 					timedOptions = ProductPayload.timedOptions,
 					selectedOfferIds = SelectedOfferIds,
 					bulkPurchaseLineItems = if FFlagPurchasePromptFetchCartPricingForLooks then BulkPurchaseLineItems else nil
-				}):andThen(function(Result) --[[ Line: 231 ]]
+				}):andThen(function(Result)
 					-- upvalues: p1 (copy), CompletePurchaseModule (upval), PromiseModule (upval)
 					p1:dispatch(CompletePurchaseModule(Result))
 					
 					return PromiseModule.resolve(Result)
-				end):catch(function(Err) --[[ Line: 236 ]]
+				end):catch(function(Err)
 					-- upvalues: handleGenericPurchaseError (upval), p1 (copy), FFlagEnablePriceChangedErrorHandlingModule (upval), ProductPayload (copy)
 					handleGenericPurchaseError(p1, Err, if FFlagEnablePriceChangedErrorHandlingModule then ProductPayload.kind else nil)
 				end)
 			elseif not FFlagEnableUnifiedPurchaseFlowForDevSubs or ProductPayload.kind ~= ProductTypeEnum.DeveloperSubscription then return end
 			local SubscriptionId = ProductPayload.subscriptionId
 			
-			return (if ProductPayload.isSubscriptionInRobux then PerformDeveloperSubscriptionRobuxPurchaseModule(v1, SubscriptionId, ProductPayload.expectedPrice) else PerformDeveloperSubscriptionFiatPurchaseModule(v1, SubscriptionId)):andThen(function() --[[ Line: 259 ]]
+			return (if ProductPayload.isSubscriptionInRobux then PerformDeveloperSubscriptionRobuxPurchaseModule(v1, SubscriptionId, ProductPayload.expectedPrice) else PerformDeveloperSubscriptionFiatPurchaseModule(v1, SubscriptionId)):andThen(function()
 				-- upvalues: p1 (copy), CompletePurchaseModule (upval), PromiseModule (upval)
 				p1:dispatch(CompletePurchaseModule())
 				
 				return PromiseModule.resolve()
-			end):catch(function(Err) --[[ Line: 263 ]]
+			end):catch(function(Err)
 				-- upvalues: handleGenericPurchaseError (upval), p1 (copy), FFlagEnablePriceChangedErrorHandlingModule (upval), ProductPayload (copy)
 				handleGenericPurchaseError(p1, Err, if FFlagEnablePriceChangedErrorHandlingModule then ProductPayload.kind else nil)
 			end)

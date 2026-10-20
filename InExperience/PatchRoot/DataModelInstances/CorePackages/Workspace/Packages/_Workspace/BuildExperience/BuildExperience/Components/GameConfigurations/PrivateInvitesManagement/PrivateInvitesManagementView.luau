@@ -8,7 +8,7 @@ local List = FoundationModule.List
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 
-return function(p1) --[[ Line: 33 | Named "PrivateInvitesManagementView" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), List (copy), View (copy), Text (copy), Badge (copy), PickedUserListModule (copy)
 	local TestId = p1.testId or "private-invites-management"
 	local IsInviteDisabled = p1.isInviteDisabled

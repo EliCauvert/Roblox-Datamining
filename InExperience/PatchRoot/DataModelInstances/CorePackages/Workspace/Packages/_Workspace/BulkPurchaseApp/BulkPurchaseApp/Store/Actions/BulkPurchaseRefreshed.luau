@@ -2,7 +2,7 @@
 local _ = require(BulkPurchaseApp.Store.Types)
 local FFlagAXAddOffersToBulkPurchaseModule = require(BulkPurchaseApp.Flags.FFlagAXAddOffersToBulkPurchase)
 
-return require(BulkPurchaseApp.Parent.Rodux).makeActionCreator("BulkPurchaseRefreshed", function(ItemData, OrderRequest, Balance, TotalCost, Options, DiscountInformation, p1) --[[ Line: 25 ]]
+return require(BulkPurchaseApp.Parent.Rodux).makeActionCreator("BulkPurchaseRefreshed", function(ItemData, OrderRequest, Balance, TotalCost, Options, DiscountInformation, p1)
 	-- upvalues: FFlagAXAddOffersToBulkPurchaseModule (copy)
 	return {
 		itemData = ItemData,

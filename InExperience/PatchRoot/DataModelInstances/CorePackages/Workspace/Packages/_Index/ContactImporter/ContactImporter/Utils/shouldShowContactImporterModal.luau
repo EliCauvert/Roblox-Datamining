@@ -1,6 +1,6 @@
 ﻿local ContactImporterModalInfoModule = require(script.Parent.contactImporterModalInfo)
 
-return function(p1) --[[ Line: 14 ]]
+return function(p1)
 	-- upvalues: ContactImporterModalInfoModule (copy)
 	local AppStorageService = p1.appStorageService
 	local Userid = p1.userid

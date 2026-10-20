@@ -3,15 +3,15 @@ local PromiseModule = require(script:FindFirstAncestor("AvatarExperienceCommon")
 local _ = require(script.Parent.types)
 
 return {
-	create = function(InsertService) --[[ Line: 19 ]]
+	create = function(InsertService)
 		-- upvalues: PromiseModule (copy)
-		return function(AssetId) --[[ Line: 20 ]]
+		return function(AssetId)
 			-- upvalues: PromiseModule (upval), InsertService (copy)
-			return PromiseModule.new(function(Callback1, Callback) --[[ Line: 21 ]]
+			return PromiseModule.new(function(Callback1, Callback)
 				-- upvalues: InsertService (upval), AssetId (copy)
-				task.spawn(function() --[[ Line: 22 ]]
+				task.spawn(function()
 					-- upvalues: InsertService (upval), AssetId (upval), Callback (copy), Callback1 (copy)
-					local Success, Result = pcall(function() --[[ Line: 23 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: InsertService (upval), AssetId (upval)
 						return InsertService:LoadAsset(AssetId)
 					end)
@@ -38,13 +38,13 @@ return {
 			end)
 		end
 	end,
-	default = function(AssetId) --[[ Line: 20 ]]
+	default = function(AssetId)
 		-- upvalues: PromiseModule (copy), InsertService (copy)
-		return PromiseModule.new(function(Callback1, Callback) --[[ Line: 21 ]]
+		return PromiseModule.new(function(Callback1, Callback)
 			-- upvalues: InsertService (upval), AssetId (copy)
-			task.spawn(function() --[[ Line: 22 ]]
+			task.spawn(function()
 				-- upvalues: InsertService (upval), AssetId (upval), Callback (copy), Callback1 (copy)
-				local Success, Result = pcall(function() --[[ Line: 23 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: InsertService (upval), AssetId (upval)
 					return InsertService:LoadAsset(AssetId)
 				end)

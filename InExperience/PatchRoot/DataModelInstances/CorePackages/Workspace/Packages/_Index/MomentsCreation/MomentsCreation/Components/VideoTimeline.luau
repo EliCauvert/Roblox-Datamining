@@ -18,7 +18,7 @@ local FFlagMomentsTTSScrubberDragInOverlayModule = require(MomentsCreation.Flags
 local FFlagMomentsScrubberSeekOnReleaseModule = require(MomentsCreation.Flags.FFlagMomentsScrubberSeekOnRelease)
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
 
-return function(p1) --[[ Line: 56 | Named "VideoTimeline" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseSignalStateFunction (copy), UseTimelineSeekControllerModule (copy), UseStateFunction (copy), UseEffectFunction (copy), GetCaptureVideoContentModule (copy), SampleVideoFramesModule (copy), UseMemoFunction (copy), ReactModule (copy), View (copy), SignalsModule (copy), FFlagMomentsScrubberSeekOnReleaseModule (copy), UseSignalBindingFunction (copy), FFlagMomentsTTSScrubberDragInOverlayModule (copy)
 	local Playback = p1.playback
 	local UseTokensResult = UseTokensFunction()
@@ -31,7 +31,7 @@ return function(p1) --[[ Line: 56 | Named "VideoTimeline" ]]
 	local DragDetectorRef = UseTimelineSeekControllerModuleResult.dragDetectorRef
 	local PlayheadDragDetectorRef = UseTimelineSeekControllerModuleResult.playheadDragDetectorRef
 	local UseStateResult, UseStateResult2 = UseStateFunction({})
-	UseEffectFunction(function() --[[ Line: 74 ]]
+	UseEffectFunction(function()
 		-- upvalues: p1 (copy), UseSignalStateResult (copy), GetCaptureVideoContentModule (upval), UseSignalStateResult1 (copy), SampleVideoFramesModule (upval), UseStateResult2 (copy)
 		if p1.capture == nil or UseSignalStateResult <= 0 then return end
 		local CaptureVideoContentModule = GetCaptureVideoContentModule(p1.capture)
@@ -47,7 +47,7 @@ return function(p1) --[[ Line: 56 | Named "VideoTimeline" ]]
 			SampleVideoFramesModule(CaptureVideoContentModule, UseSignalStateResult, UseStateResult2, if UseSignalStateResult1 == nil then 0 else UseSignalStateResult1.startTime)
 		end
 	end, { p1.capture, UseSignalStateResult, UseSignalStateResult1 })
-	local UseMemoResult = UseMemoFunction(function() --[[ Line: 91 ]]
+	local UseMemoResult = UseMemoFunction(function()
 		-- upvalues: UseSignalStateResult (copy), UseStateResult (copy), ReactModule (upval), View (upval)
 		local Elements = {}
 		
@@ -67,9 +67,9 @@ return function(p1) --[[ Line: 56 | Named "VideoTimeline" ]]
 		end
 		return Elements
 	end, { UseSignalStateResult, UseStateResult })
-	local UseSignalBindingResult = UseSignalBindingFunction((UseMemoFunction(function() --[[ Line: 112 ]]
+	local UseSignalBindingResult = UseSignalBindingFunction((UseMemoFunction(function()
 		-- upvalues: SignalsModule (upval), FFlagMomentsScrubberSeekOnReleaseModule (upval), UseTimelineSeekControllerModuleResult (copy), Playback (copy)
-		return SignalsModule.createComputed(function(p2): number --[[ Line: 113 ]]
+		return SignalsModule.createComputed(function(p2): number
 			-- upvalues: FFlagMomentsScrubberSeekOnReleaseModule (upval), UseTimelineSeekControllerModuleResult (upval), Playback (upval)
 			if FFlagMomentsScrubberSeekOnReleaseModule and UseTimelineSeekControllerModuleResult.getDragFraction ~= nil then
 				local DragFraction: number = UseTimelineSeekControllerModuleResult.getDragFraction(p2)
@@ -86,7 +86,7 @@ return function(p1) --[[ Line: 56 | Named "VideoTimeline" ]]
 		Playback,
 		UseTimelineSeekControllerModuleResult.getDragFraction
 	})))
-	local MapResult = if p1.playheadPosition == nil then UseSignalBindingResult:map(function(XScale): UDim2 --[[ Line: 130 ]]
+	local MapResult = if p1.playheadPosition == nil then UseSignalBindingResult:map(function(XScale): UDim2
 		return UDim2.fromScale(XScale, 0.5)
 	end) else UDim2.fromScale(if UseSignalStateResult > 0 then math.clamp(p1.playheadPosition / UseSignalStateResult, 0, 1) else 0, 0.5)
 	

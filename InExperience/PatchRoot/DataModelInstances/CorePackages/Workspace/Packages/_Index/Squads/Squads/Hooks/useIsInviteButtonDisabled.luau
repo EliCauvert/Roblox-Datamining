@@ -2,9 +2,9 @@
 local Cryo = DependenciesModule.Cryo
 local React = DependenciesModule.React
 
-return function(p1, p2, p3) --[[ Line: 15 ]]
+return function(p1, p2, p3)
 	-- upvalues: React (copy), Cryo (copy)
-	return React.useMemo(function(): boolean --[[ Line: 16 ]]
+	return React.useMemo(function(): boolean
 		-- upvalues: p3 (copy), p1 (copy), Cryo (upval), p2 (copy)
 		if p3 == nil then
 			return p1 == 0

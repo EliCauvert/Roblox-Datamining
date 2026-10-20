@@ -18,18 +18,18 @@ local TextKeysModule = require(AvatarExperienceProfilePictureEditor.Common.TextK
 local WidgetLayout = AvatarExperienceUIKitModule.WidgetComponents.WidgetLayout
 local ItemCardThumbnailSkeleton = AvatarExperienceUIKitModule.ItemCardComponents.ItemCardThumbnailSkeleton
 
-return function(p1) --[[ Line: 48 | Named "AssetPickerCarousel" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), View (copy), AssetPickerTileModule (copy), AssetPickerErrorBodyModule (copy), ItemCardThumbnailSkeleton (copy), Radius (copy), ScrollView (copy), Visibility (copy), WidgetLayout (copy), SectionTitleWithActionModule (copy), SectionTitleModule (copy)
 	local Status = p1.status or "ready"
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({ details = TextKeysModule.DetailsButton })
 	local TileSize = p1.tileSize
 	local ShimmerTileCount = p1.shimmerTileCount or 8
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 56 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseLocalizationResult (copy)
 		return { details = UseLocalizationResult.details }
 	end, { UseLocalizationResult.details })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 63 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), ReactModule (upval), View (upval), TileSize (copy), AssetPickerTileModule (upval), UseMemoResult (copy)
 		local Elements = {}
 		

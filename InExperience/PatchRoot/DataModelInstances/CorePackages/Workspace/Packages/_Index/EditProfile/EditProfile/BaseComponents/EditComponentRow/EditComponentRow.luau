@@ -10,7 +10,7 @@ local Text = FoundationModule.Text
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1) --[[ Line: 26 | Named "EditComponentRow" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Text (copy), Skeleton (copy), Radius (copy), Icon (copy), IconName (copy), IconSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Replaced = string.gsub(p1.currentValue, "\n", " ")

@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("ContactImporterUploadContactsMax", 1000)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastInt("ContactImporterUploadContactsMax")
 end

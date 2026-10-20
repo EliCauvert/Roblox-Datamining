@@ -1,4 +1,4 @@
-﻿return function(p1, p2, p3) --[[ Line: 12 | Named "tryGetPathFromData" ]]
+﻿return function(p1, p2, p3)
 	if p1 == nil or p2 == nil then
 		return false, nil
 	end

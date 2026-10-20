@@ -1,15 +1,15 @@
 ﻿local MockableProxyServicesModule = {
 	["jest.config"] = script["jest.config"],
 	game = game,
-	waitProxy = function(p1) --[[ Line: 4 ]]
+	waitProxy = function(p1)
 		wait(p1)
 	end,
-	settingsProxy = function() --[[ Line: 7 ]]
+	settingsProxy = function()
 		return settings()
 	end
 }
 setmetatable(MockableProxyServicesModule, {
-	__index = function(_, ServiceName) --[[ Line: 13 ]]
+	__index = function(_, ServiceName)
 		return game:GetService(ServiceName)
 	end
 })

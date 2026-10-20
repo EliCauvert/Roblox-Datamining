@@ -7,20 +7,20 @@ return {
 	componentType = "modalSelector",
 	fieldLabel = "ReasonForAbuse",
 	componentName = "AbuseReason",
-	getIsVisible = function(_): boolean --[[ Line: 9 ]]
+	getIsVisible = function(_): boolean
 		return true
 	end,
-	getMenuItems = function(p1, p2) --[[ Line: 12 ]]
+	getMenuItems = function(p1, p2)
 		-- upvalues: ConstantsModule (copy), CryoModule (copy)
-		return CryoModule.List.map(CryoModule.Dictionary.values(if p1.methodOfAbuse == ConstantsModule.AbuseMethods.VoiceChat then ConstantsModule.PlayerVoiceAbuseTypes else ConstantsModule.PlayerAbuseTypes), function(Identifier) --[[ Line: 17 ]]
+		return CryoModule.List.map(CryoModule.Dictionary.values(if p1.methodOfAbuse == ConstantsModule.AbuseMethods.VoiceChat then ConstantsModule.PlayerVoiceAbuseTypes else ConstantsModule.PlayerAbuseTypes), function(Identifier)
 			-- upvalues: p2 (copy)
 			return { label = p2[Identifier], identifier = Identifier }
 		end)
 	end,
-	getSelectedValue = function(p1) --[[ Line: 24 ]]
+	getSelectedValue = function(p1)
 		return p1.abuseReason
 	end,
-	onUpdateSelectedOption = function(p1, _, Callback: (any) -> (), p2) --[[ Line: 27 ]]
+	onUpdateSelectedOption = function(p1, _, Callback: (any) -> (), p2)
 		-- upvalues: ConstantsModule (copy)
 		p2.analyticsDispatch({
 			type = ConstantsModule.AnalyticsActions.IncrementReasonChanged

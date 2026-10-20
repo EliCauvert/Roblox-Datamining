@@ -5,10 +5,10 @@ local Image = FoundationModule.Image
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1) --[[ Line: 17 | Named "ImagePreview" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Image (copy)
 	local UseTokensResult = UseTokensFunction()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 20 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseTokensResult (copy)
 		return {
 			{
@@ -29,25 +29,25 @@ return function(p1) --[[ Line: 17 | Named "ImagePreview" ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(1)
 	local UseRefResult = ReactModule.useRef(false)
 	local AutoRotateSecondsRatio = if p1.autoRotateSeconds then p1.autoRotateSeconds / #UseMemoResult else 0
-	ReactModule.useEffect(function() --[[ Line: 33 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: AutoRotateSecondsRatio (copy), UseMemoResult (copy), UseRefResult (copy), UseStateResult2 (copy)
 		if AutoRotateSecondsRatio <= 0 then
-			return function() --[[ Line: 35 ]] end
+			return function() end
 		else
-			task.spawn(function() --[[ Line: 38 ]]
+			task.spawn(function()
 				-- upvalues: UseMemoResult (upval), AutoRotateSecondsRatio (upval), UseRefResult (upval), UseStateResult2 (upval)
 				for _ = 2, #UseMemoResult do
 					task.wait(AutoRotateSecondsRatio)
 					
 					if UseRefResult.current then break end
-					UseStateResult2(function(p2: number): number --[[ Line: 44 ]]
+					UseStateResult2(function(p2: number): number
 						-- upvalues: UseMemoResult (upval)
 						return p2 % #UseMemoResult + 1
 					end)
 				end
 			end)
 			
-			return function() --[[ Line: 50 ]]
+			return function()
 				-- upvalues: UseRefResult (upval)
 				UseRefResult.current = true
 			end
@@ -55,12 +55,12 @@ return function(p1) --[[ Line: 17 | Named "ImagePreview" ]]
 	end, { AutoRotateSecondsRatio, UseMemoResult })
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UseMemoResult[1].style)
 	local Time300 = UseTokensResult.Time.Time_300
-	ReactModule.useEffect(function() --[[ Line: 58 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseBindingResult (copy), UseMemoResult (copy), UseStateResult (copy), Time300 (copy), UseBindingResult2 (copy)
 		local Value = UseBindingResult:getValue()
 		local Style = UseMemoResult[UseStateResult].style
 		local Flag = false
-		task.spawn(function() --[[ Line: 63 ]]
+		task.spawn(function()
 			-- upvalues: Time300 (upval), Flag (ref), UseBindingResult2 (upval), Value (copy), Style (copy)
 			local NewElapsed = 0
 			while NewElapsed < Time300 do
@@ -75,7 +75,7 @@ return function(p1) --[[ Line: 17 | Named "ImagePreview" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 78 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end
@@ -97,7 +97,7 @@ return function(p1) --[[ Line: 17 | Named "ImagePreview" ]]
 				["stroke-standard stroke-default"] = LayoutOrder ~= UseStateResult
 			},
 			backgroundStyle = value.style,
-			onActivated = function() --[[ Line: 93 ]]
+			onActivated = function()
 				-- upvalues: UseRefResult (copy), UseStateResult2 (copy), LayoutOrder (copy)
 				UseRefResult.current = true
 				UseStateResult2(LayoutOrder)
@@ -119,7 +119,7 @@ return function(p1) --[[ Line: 17 | Named "ImagePreview" ]]
 			Image = "rbxassetid://6372755229",
 			testId = "ImagePreviewBackground",
 			backgroundStyle = UseBindingResult,
-			imageStyle = UseBindingResult:map(function(p2) --[[ Line: 115 ]]
+			imageStyle = UseBindingResult:map(function(p2)
 				-- upvalues: UseTokensResult (copy)
 				return {
 					Color3 = UseTokensResult.Color.Extended.White.White_100.Color3,

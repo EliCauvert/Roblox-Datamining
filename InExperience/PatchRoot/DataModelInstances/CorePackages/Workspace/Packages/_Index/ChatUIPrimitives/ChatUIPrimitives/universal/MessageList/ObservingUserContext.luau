@@ -3,7 +3,7 @@ local Context = ReactModule.createContext(nil)
 
 return {
 	Context = Context,
-	useObservingUserId = function() --[[ Line: 7 ]]
+	useObservingUserId = function()
 		-- upvalues: ReactModule (copy), Context (copy)
 		return ReactModule.useContext(Context)
 	end

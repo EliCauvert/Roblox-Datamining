@@ -7,14 +7,14 @@ local SideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums
 local FFlagStandardizeSafetyIcon = require(CorePackages.Workspace.Packages.SharedFlags).FFlagStandardizeSafetyIcon
 local IsNameMatch = false
 local NewResult = require(CorePackages.Workspace.Packages.AppCommonLib).Signal.new()
-local NewResult1 = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(NewResult, function() --[[ Line: 26 ]]
+local NewResult1 = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(NewResult, function()
 	-- upvalues: IsNameMatch (ref)
 	return IsNameMatch
 end)
-task.defer(function() --[[ Line: 31 ]]
+task.defer(function()
 	-- upvalues: RobloxGui (copy), IsNameMatch (ref), NewResult (copy)
 	local SettingsHubModule = require(RobloxGui.Modules.Settings.SettingsHub)
-	SettingsHubModule.CurrentPageSignal:connect(function(Name) --[[ Line: 33 ]]
+	SettingsHubModule.CurrentPageSignal:connect(function(Name)
 		-- upvalues: IsNameMatch (upval), SettingsHubModule (copy), NewResult (upval)
 		IsNameMatch = Name == SettingsHubModule.Instance.ReportAbusePage.Page.Name
 		NewResult:fire()
@@ -26,7 +26,7 @@ return ServiceModule:register({
 	label = "CoreScripts.InGameMenu.QuickActions.Report",
 	initialAvailability = ServiceModule.AvailabilitySignal.Available,
 	sideSheetPlacement = SideSheetPlacement.AboveFold,
-	activated = function(_) --[[ Line: 44 ]]
+	activated = function(_)
 		-- upvalues: RobloxGui (copy), IsNameMatch (ref)
 		local SettingsHubModule = require(RobloxGui.Modules.Settings.SettingsHub)
 		
@@ -45,7 +45,7 @@ return ServiceModule:register({
 	end,
 	isActivated = NewResult1,
 	components = {
-		Icon = function(_) --[[ Line: 58 ]]
+		Icon = function(_)
 			-- upvalues: FFlagStandardizeSafetyIcon (copy), CommonIconModule (copy), NewResult1 (copy)
 			return if FFlagStandardizeSafetyIcon then CommonIconModule("Flag", nil, NewResult1) else CommonIconModule("icons/menu/safety_off", "icons/menu/safety_on", NewResult1)
 		end

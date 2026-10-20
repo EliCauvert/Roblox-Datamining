@@ -3,7 +3,7 @@ local CryoModule = require(VirtualEvents.Parent.Cryo)
 local ReactModule = require(VirtualEvents.Parent.React)
 local UseStyleFunction = require(VirtualEvents.Parent.UIBlox).Core.Style.useStyle
 
-return function(p1) --[[ Line: 15 | Named "SelectableTextLabel" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), CryoModule (copy), ReactModule (copy)
 	local BaseSize = UseStyleFunction().Font.BaseSize
 	

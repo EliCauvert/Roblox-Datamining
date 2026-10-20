@@ -30,7 +30,7 @@ local config = {
 }
 local t = {}
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 94 | Named "ListItem" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), t (copy), FlagsModule (copy), DevAssertModule (copy), UseListModule (copy), InputSizeModule (copy), UseTokensModule (copy), UseListItemVariantsModule (copy), UseListAccessoryVariantsModule (copy), config (copy), ReactModule (copy), ListItemInputTypeModule (copy), ViewModule (copy), ListAccessoryModule (copy), TextModule (copy), EscapeRichTextModule (copy), IconModule (copy), BuilderIconsModule (copy), RadioGroupModule (copy), CheckboxModule (copy), ToggleModule (copy), DividerModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, t)
 	
@@ -45,11 +45,11 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 94 |
 	local Icon = UseListAccessoryVariantsModule(UseTokensModuleResult, Size, "Icon")
 	local Entry = if FlagsModule.FoundationListItemTypographySpacing then config[Size] else "gap-small"
 	local HasOnActivated: boolean = typeof(WithDefaultsModuleResult.onActivated) == "table" and WithDefaultsModuleResult.onActivated.onActivated ~= nil
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 121 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: HasOnActivated (copy), WithDefaultsModuleResult (copy)
 		return if HasOnActivated then WithDefaultsModuleResult.onActivated.onActivated elseif WithDefaultsModuleResult.onActivated == nil then nil else WithDefaultsModuleResult.onActivated
 	end, { WithDefaultsModuleResult.onActivated, HasOnActivated })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 135 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: FlagsModule (upval), WithDefaultsModuleResult (copy), HasOnActivated (copy), ListItemInputTypeModule (upval)
 		if not FlagsModule.FoundationListItemDecoupledInput then
 			return nil
@@ -80,30 +80,30 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 94 |
 		WithDefaultsModuleResult.input,
 		HasOnActivated
 	})
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 154 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: HasOnActivated (copy), WithDefaultsModuleResult (copy)
 		return if HasOnActivated then WithDefaultsModuleResult.onActivated.inputType else nil
 	end, { WithDefaultsModuleResult.onActivated, HasOnActivated })
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 161 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: HasOnActivated (copy), WithDefaultsModuleResult (copy)
 		return if HasOnActivated then WithDefaultsModuleResult.onActivated.isChecked else nil
 	end, { WithDefaultsModuleResult.onActivated, HasOnActivated })
-	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 168 ]]
+	local UseMemoResult4 = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy)
 		return if typeof(WithDefaultsModuleResult.title) == "string" then WithDefaultsModuleResult.title elseif typeof(WithDefaultsModuleResult.title) == "table" then WithDefaultsModuleResult.title.title else nil
 	end, { WithDefaultsModuleResult.title })
-	local UseMemoResult5 = ReactModule.useMemo(function() --[[ Line: 177 ]]
+	local UseMemoResult5 = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy)
 		return if typeof(WithDefaultsModuleResult.title) == "table" then if WithDefaultsModuleResult.title.title == nil then nil else WithDefaultsModuleResult.title.metadata else nil
 	end, { WithDefaultsModuleResult.title })
-	local UseMemoResult6 = ReactModule.useMemo(function(): string --[[ Line: 185 ]]
+	local UseMemoResult6 = ReactModule.useMemo(function(): string
 		-- upvalues: UseMemoResult4 (copy)
 		return UseMemoResult4 and string.gsub(UseMemoResult4, "%s+", "-") or ""
 	end, { UseMemoResult4 })
 	WithDefaultsModuleResult.testId = if WithDefaultsModuleResult.testId then WithDefaultsModuleResult.testId else `{UseListModuleResult.testId}--item-{UseMemoResult6}`
 	local Type = if FlagsModule.FoundationListItemDecoupledInput then if UseMemoResult1 then UseMemoResult1.type else nil else UseMemoResult2
 	local IsChecked = if FlagsModule.FoundationListItemDecoupledInput then if UseMemoResult1 then UseMemoResult1.isChecked else nil else UseMemoResult3
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 202 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: FlagsModule (upval), UseMemoResult1 (copy), UseMemoResult (copy)
 		if FlagsModule.FoundationListItemDecoupledInput and UseMemoResult1 and UseMemoResult1.onActivated then
 			UseMemoResult1.onActivated(p2)
@@ -114,7 +114,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 94 |
 			UseMemoResult()
 		end
 	end, { UseMemoResult1, UseMemoResult })
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 210 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseResult (copy)
 		UseResult(p2 == "radio")
 	end, { UseResult })

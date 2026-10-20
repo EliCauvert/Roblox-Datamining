@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("AuthenticationStatus").Parent.Rodux).makeActionCreator(script.Name, function(Status) --[[ Line: 5 ]]
+﻿return require(script:FindFirstAncestor("AuthenticationStatus").Parent.Rodux).makeActionCreator(script.Name, function(Status)
 	return { status = Status }
 end)

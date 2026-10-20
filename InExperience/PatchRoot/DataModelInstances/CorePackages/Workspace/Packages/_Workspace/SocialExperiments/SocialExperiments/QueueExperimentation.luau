@@ -6,7 +6,7 @@ local ForceEnableQueueAutoJoinNewServer2 = game:DefineFastFlag("ForceEnableQueue
 local ForceEnableQueueJoinNewServerButton2 = game:DefineFastFlag("ForceEnableQueueJoinNewServerButton2", false)
 local PlaceJoinStateEnabledEngineFeature = game:DefineFastFlag("EnableQueueExperimentation2", false) and game:GetEngineFeature("PlaceJoinStateEnabled")
 
-local function _(p1) --[[ Line: 17 | Named "getIsUserInTreatment" ]]
+local function _(p1)
 	-- upvalues: ExperimentCacheManager (copy), FStringQueueExpLayer (copy)
 	local LayerVariables = ExperimentCacheManager.default:getLayerVariables(FStringQueueExpLayer)
 	
@@ -14,7 +14,7 @@ local function _(p1) --[[ Line: 17 | Named "getIsUserInTreatment" ]]
 end
 
 return {
-	getIsJoinNewServerButtonEnabled = function() --[[ Line: 32 ]]
+	getIsJoinNewServerButtonEnabled = function()
 		-- upvalues: ForceEnableQueueJoinNewServerButton2 (copy), PlaceJoinStateEnabledEngineFeature (copy), QueueEnableJoinNewServerVariant (copy), ExperimentCacheManager (copy), FStringQueueExpLayer (copy)
 		local Flag: boolean = ForceEnableQueueJoinNewServerButton2
 		
@@ -32,7 +32,7 @@ return {
 		end
 		return Flag
 	end,
-	getIsAutoJoinNewServerEnabled = function() --[[ Line: 27 ]]
+	getIsAutoJoinNewServerEnabled = function()
 		-- upvalues: ForceEnableQueueAutoJoinNewServer2 (copy), PlaceJoinStateEnabledEngineFeature (copy), QueueEnableAutoJoinNewServerVariant (copy), ExperimentCacheManager (copy), FStringQueueExpLayer (copy)
 		local Flag: boolean = ForceEnableQueueAutoJoinNewServer2
 		
@@ -50,11 +50,11 @@ return {
 		end
 		return Flag
 	end,
-	isInExperiment = function(): boolean --[[ Line: 37 ]]
+	isInExperiment = function(): boolean
 		-- upvalues: PlaceJoinStateEnabledEngineFeature (copy), ExperimentCacheManager (copy), FStringQueueExpLayer (copy)
 		return if PlaceJoinStateEnabledEngineFeature then ExperimentCacheManager.default:getLayerVariables(FStringQueueExpLayer) ~= nil else false
 	end,
-	logExposure = function() --[[ Line: 45 ]]
+	logExposure = function()
 		-- upvalues: PlaceJoinStateEnabledEngineFeature (copy), ExperimentCacheManager (copy), FStringQueueExpLayer (copy)
 		if PlaceJoinStateEnabledEngineFeature and ExperimentCacheManager.default:getLayerVariables(FStringQueueExpLayer) ~= nil then
 			ExperimentCacheManager.default:logLayerExposure(FStringQueueExpLayer)

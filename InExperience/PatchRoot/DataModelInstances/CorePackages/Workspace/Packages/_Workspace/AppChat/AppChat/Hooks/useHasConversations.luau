@@ -4,9 +4,9 @@ local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelec
 local GetDeepValueModule = require(AppChat.Utils.getDeepValue)
 local CryoModule = require(Parent.Cryo)
 
-return function() --[[ Line: 8 ]]
+return function()
 	-- upvalues: UseSelectorFunction (copy), CryoModule (copy), GetDeepValueModule (copy)
-	return UseSelectorFunction(function(p1): boolean --[[ Line: 9 ]]
+	return UseSelectorFunction(function(p1): boolean
 		-- upvalues: CryoModule (upval), GetDeepValueModule (upval)
 		return not CryoModule.isEmpty(GetDeepValueModule(p1, "ChatAppReducer.Conversations") or {})
 	end)

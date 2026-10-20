@@ -10,22 +10,22 @@ local _ = require(ShareSheet.Recipients.Recipient)
 local _ = require(ShareSheet.Types)
 local ShareSheetPeoplePickerSearchDebounceMs = game:DefineFastInt("ShareSheetPeoplePickerSearchDebounceMs", 250)
 
-local function usePeoplePickerSearch() --[[ Line: 50 ]]
+local function usePeoplePickerSearch()
 	-- upvalues: ReactModule (copy), ShareSheetPeoplePickerSearchDebounceMs (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState("")
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState("")
-	ReactModule.useEffect(function() --[[ Line: 54 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseStateResult1 (copy), ShareSheetPeoplePickerSearchDebounceMs (upval), UseStateResult2_1 (copy)
 		if UseStateResult == UseStateResult1 then return end
 		local Flag = false
-		local DelayedThread = task.delay(ShareSheetPeoplePickerSearchDebounceMs / 1000, function() --[[ Line: 60 ]]
+		local DelayedThread = task.delay(ShareSheetPeoplePickerSearchDebounceMs / 1000, function()
 			-- upvalues: Flag (ref), UseStateResult2_1 (upval), UseStateResult (upval)
 			if not Flag then
 				UseStateResult2_1(UseStateResult)
 			end
 		end)
 		
-		return function() --[[ Line: 65 ]]
+		return function()
 			-- upvalues: Flag (ref), DelayedThread (copy)
 			Flag = true
 			pcall(task.cancel, DelayedThread)
@@ -35,7 +35,7 @@ local function usePeoplePickerSearch() --[[ Line: 50 ]]
 	return {
 		debouncedQuery = UseStateResult1,
 		query = UseStateResult,
-		reset = ReactModule.useCallback(function() --[[ Line: 71 ]]
+		reset = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy)
 			UseStateResult2("")
 			UseStateResult2_1("")
@@ -44,7 +44,7 @@ local function usePeoplePickerSearch() --[[ Line: 50 ]]
 	}
 end
 
-return function(p1) --[[ Line: 84 | Named "usePeoplePickerViewModel" ]]
+return function(p1)
 	-- upvalues: usePeoplePickerSearch (copy), UsePeoplePickerPaginationModule (copy), FFlagShareSheetFriendsSort (copy), ReactModule (copy)
 	local UsePeoplePickerSearchResult = usePeoplePickerSearch()
 	local UsePeoplePickerPaginationModuleResult = UsePeoplePickerPaginationModule({
@@ -59,7 +59,7 @@ return function(p1) --[[ Line: 84 | Named "usePeoplePickerViewModel" ]]
 	return {
 		viewModel = {
 			headerProps = {
-				goBack = ReactModule.useCallback(function() --[[ Line: 95 ]]
+				goBack = ReactModule.useCallback(function()
 					-- upvalues: UsePeoplePickerSearchResult (copy), p1 (copy)
 					UsePeoplePickerSearchResult.reset()
 					p1.onBack()

@@ -16,12 +16,12 @@ local config1 = {
 	backends = { "EventIngest" }
 }
 
-return function() --[[ Line: 23 | Named "useLogKeyboardFocusModeEntered" ]]
+return function()
 	-- upvalues: FocusNavigationUtilsModule (copy), ReactModule (copy), TelemetryService (copy), config1 (copy), config (copy)
 	local UseLastInputModeResult = FocusNavigationUtilsModule.useLastInputMode()
 	local UseLastInputResult = FocusNavigationUtilsModule.useLastInputMethod()
 	local UseRefResult = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 28 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseLastInputModeResult (copy), UseLastInputResult (copy), TelemetryService (upval), config1 (upval), config (upval)
 		if not UseRefResult.current and UseLastInputModeResult == "Focus" and UseLastInputResult == "Keyboard" then
 			UseRefResult.current = true

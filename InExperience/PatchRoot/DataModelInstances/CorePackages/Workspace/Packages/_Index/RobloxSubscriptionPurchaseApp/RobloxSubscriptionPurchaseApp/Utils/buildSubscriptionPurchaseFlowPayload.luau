@@ -5,7 +5,7 @@ local FFlagEnablePlusReferralEntrypointTelemetry = require(RobloxSubscriptionPur
 local IsRobloxSubscriptionProductFreeTrialModule = require(RobloxSubscriptionPurchaseApp.Utils.isRobloxSubscriptionProductFreeTrial)
 local _ = require(RobloxSubscriptionPurchaseApp.Models.GetRobloxSubscriptionProductsModel)
 
-return function(Event_name) --[[ Line: 17 | Named "buildSubscriptionPurchaseFlowPayload" ]]
+return function(Event_name)
 	-- upvalues: RobloxSubscriptionStoreModule (copy), IsRobloxSubscriptionProductFreeTrialModule (copy), FFlagEnablePlusReferralTelemetryModule (copy), FFlagEnablePlusReferralEntrypointTelemetry (copy)
 	local GetResult = RobloxSubscriptionStoreModule.get()
 	local EntryContext = GetResult.getEntryContext()

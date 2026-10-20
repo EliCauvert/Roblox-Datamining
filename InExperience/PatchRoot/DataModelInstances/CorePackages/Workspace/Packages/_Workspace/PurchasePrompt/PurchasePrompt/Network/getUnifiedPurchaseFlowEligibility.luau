@@ -4,17 +4,17 @@ local PromiseModule = require(PurchasePrompt.Promise)
 local ProductTypeEnum = require(PurchasePrompt.types).ProductTypeEnum
 local FFlagShipUnifiedPurchaseInExperience = require(PurchasePrompt.Parent.SharedFlags).FFlagShipUnifiedPurchaseInExperience
 
-local function _(): boolean --[[ Line: 14 | Named "getUnifiedPurchaseFlowIsUserEligibleFromStorage" ]]
+local function _(): boolean
 	-- upvalues: AppStorageService (copy)
 	return AppStorageService:GetItem("UnifiedPurchaseFlowIsUserEligible") == "true"
 end
 
-local _ = function(): number --[[ Line: 19 | Named "getUnifiedPurchaseFlowExpirationTimeSecondsUTCFromStorage" ]]
+local _ = function(): number
 	-- upvalues: AppStorageService (copy)
 	return tonumber((AppStorageService:GetItem("UnifiedPurchaseFlowExpirationTimeSecondsUTC"))) or -1
 end
 
-local _ = function(p1, p2) --[[ Line: 24 | Named "persistUnifiedPurchaseFlowMetadata" ]]
+local _ = function(p1, p2)
 	-- upvalues: AppStorageService (copy)
 	if p1 then
 		AppStorageService:SetItem("UnifiedPurchaseFlowIsUserEligible", "true")
@@ -25,7 +25,7 @@ local _ = function(p1, p2) --[[ Line: 24 | Named "persistUnifiedPurchaseFlowMeta
 	AppStorageService:Flush()
 end
 
-return function(p1, DeveloperSubscription) --[[ Line: 36 | Named "getUnifiedPurchaseFlowEligibility" ]]
+return function(p1, DeveloperSubscription)
 	-- upvalues: ProductTypeEnum (copy), PromiseModule (copy), FFlagShipUnifiedPurchaseInExperience (copy), AppStorageService (copy)
 	if DeveloperSubscription == ProductTypeEnum.DeveloperSubscription then
 		return PromiseModule.resolve(true)
@@ -37,7 +37,7 @@ return function(p1, DeveloperSubscription) --[[ Line: 36 | Named "getUnifiedPurc
 		local Timestamp = os.time(os.date("!*t"))
 		local Number: number = tonumber((AppStorageService:GetItem("UnifiedPurchaseFlowExpirationTimeSecondsUTC"))) or -1
 		
-		return if Number == -1 or Timestamp >= Number then p1.getUnifiedPurchaseFlowUserEligibility():andThen(function(Result) --[[ Line: 59 ]]
+		return if Number == -1 or Timestamp >= Number then p1.getUnifiedPurchaseFlowUserEligibility():andThen(function(Result)
 			-- upvalues: PromiseModule (upval), Timestamp (copy), AppStorageService (upval)
 			if not Result then
 				return PromiseModule.reject(false)
@@ -55,10 +55,10 @@ return function(p1, DeveloperSubscription) --[[ Line: 36 | Named "getUnifiedPurc
 			AppStorageService:Flush()
 			
 			return PromiseModule.resolve(IsUserEligibleForUnifiedPurchaseFlow)
-		end, function(_) --[[ Line: 72 ]]
+		end, function(_)
 			-- upvalues: PromiseModule (upval)
 			return PromiseModule.resolve(false)
-		end):catch(function(_) --[[ Line: 76 ]]
+		end):catch(function(_)
 			-- upvalues: PromiseModule (upval)
 			return PromiseModule.resolve(false)
 		end) else PromiseModule.resolve(AppStorageService:GetItem("UnifiedPurchaseFlowIsUserEligible") == "true")

@@ -2,7 +2,7 @@
 local AudioDuckingFastInts = require(script:FindFirstAncestor("MomentsCreation").Parent.MomentsCommon).Media.audioDuckingFastInts
 local self = setmetatable({}, { __mode = "k" })
 
-return function(Target, Volume, p1) --[[ Line: 22 | Named "fadeVolume" ]]
+return function(Target, Volume, p1)
 	-- upvalues: self (copy), AudioDuckingFastInts (copy), TweenService (copy)
 	local SelfEntry = self[Target]
 	

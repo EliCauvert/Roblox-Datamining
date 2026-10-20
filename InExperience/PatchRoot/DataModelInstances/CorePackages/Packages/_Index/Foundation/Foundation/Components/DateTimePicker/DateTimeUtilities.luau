@@ -2,7 +2,7 @@
 local LocalizationService = require(Foundation.Utility.Wrappers).Services.LocalizationService
 local TranslatorModule = require(Foundation.Utility.Localization.Translator)
 
-local function getDaysInMonth(p1, p2: number) --[[ Line: 49 ]]
+local function getDaysInMonth(p1, p2: number)
 	local list = {
 		31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
 	}
@@ -10,7 +10,7 @@ local function getDaysInMonth(p1, p2: number) --[[ Line: 49 ]]
 	return if p1 == 2 and (p2 % 4 == 0 and p2 % 100 ~= 0 or p2 % 400 == 0) then 29 else list[p1]
 end
 
-local function getHoursAndMinutesFromString(Text: string) --[[ Line: 118 ]]
+local function getHoursAndMinutesFromString(Text: string)
 	local S: string = Text:gsub("%s+", "")
 	local Match: string? = string.match(S, "^%d%d?:%d%d[AP]M$")
 	
@@ -44,7 +44,7 @@ local function getHoursAndMinutesFromString(Text: string) --[[ Line: 118 ]]
 end
 
 return {
-	formatLocalTime = function(p1, p2) --[[ Line: 243 ]]
+	formatLocalTime = function(p1, p2)
 		-- upvalues: LocalizationService (copy)
 		local L = p1:FormatLocalTime("L", LocalizationService.RobloxLocaleId)
 		
@@ -53,7 +53,7 @@ return {
 		end
 		return L
 	end,
-	getDateTimeFromText = function(Text: string) --[[ Line: 173 ]]
+	getDateTimeFromText = function(Text: string)
 		-- upvalues: getHoursAndMinutesFromString (copy)
 		local S = nil
 		local S2 = nil
@@ -71,7 +71,7 @@ return {
 		
 		if S then
 			local v1 = S1:find("[/%.%-]")
-			local Success, Result = pcall(function() --[[ Line: 197 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: v1 (copy), S1 (copy), HoursAndMinutesFromString (copy), HoursAndMinutesFromString2 (copy)
 				if v1 == 3 then
 					local DDDD, DDDD2, DDDD3 = S1:match("^(%d%d)[/%.%-](%d%d)[/%.%-](%d%d%d%d)$")
@@ -98,32 +98,32 @@ return {
 		return nil
 	end,
 	getDaysInMonth = getDaysInMonth,
-	getFirstDayOfWeek = function(p1, p2): number --[[ Line: 68 ]]
+	getFirstDayOfWeek = function(p1, p2): number
 		local _DateTime = DateTime.fromLocalTime(p2, p1, 1)
 		
 		return _DateTime and tonumber((_DateTime:FormatLocalTime("d", "en-us"))) or 0
 	end,
-	getLastDayOfWeek = function(p1, p2): number --[[ Line: 80 ]]
+	getLastDayOfWeek = function(p1, p2): number
 		-- upvalues: getDaysInMonth (copy)
 		local _DateTime = DateTime.fromLocalTime(p2, p1, (getDaysInMonth(p1, p2)))
 		
 		return _DateTime and tonumber((_DateTime:FormatLocalTime("d", "en-us"))) or 0
 	end,
-	getNextMonthInfo = function(p1: number, p2: number) --[[ Line: 236 ]]
+	getNextMonthInfo = function(p1: number, p2: number)
 		if p1 == 12 then
 			return 1, p2 + 1
 		else
 			return p1 + 1, p2
 		end
 	end,
-	getPrevMonthInfo = function(p1: number, p2: number) --[[ Line: 229 ]]
+	getPrevMonthInfo = function(p1: number, p2: number)
 		if p1 == 1 then
 			return 12, p2 - 1
 		else
 			return p1 - 1, p2
 		end
 	end,
-	isDateWithinRange = function(p1, p2): boolean --[[ Line: 104 ]]
+	isDateWithinRange = function(p1, p2): boolean
 		local LocalTime = p2.startDate:ToLocalTime()
 		local UnixTimestamp = DateTime.fromLocalTime(LocalTime.Year, LocalTime.Month, LocalTime.Day).UnixTimestamp
 		local LocalTime1 = p2.endDate:ToLocalTime()
@@ -147,17 +147,17 @@ return {
 		[11] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.November"),
 		[12] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.December")
 	},
-	roundDownToNearestMinute = function(p1) --[[ Line: 98 ]]
+	roundDownToNearestMinute = function(p1)
 		local LocalTime = p1:ToLocalTime()
 		
 		return DateTime.fromLocalTime(LocalTime.Year, LocalTime.Month, LocalTime.Day, LocalTime.Hour, LocalTime.Minute, 0)
 	end,
-	roundToStartOfDay = function(p1) --[[ Line: 92 ]]
+	roundToStartOfDay = function(p1)
 		local LocalTime = p1:ToLocalTime()
 		
 		return DateTime.fromLocalTime(LocalTime.Year, LocalTime.Month, LocalTime.Day).UnixTimestamp
 	end,
-	toLocalTime = function(p1) --[[ Line: 63 ]]
+	toLocalTime = function(p1)
 		return (p1:ToLocalTime())
 	end,
 	weekdays = {

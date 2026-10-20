@@ -7,7 +7,7 @@ local _ = require(CorePackages.Packages.ReactOtter)
 local TenFootInterfaceModule = require(script.Parent.Parent.Parent.Parent.TenFootInterface)
 local v1 = require(script.Parent.Parent.Utility.GetStyleTokens)()
 
-local function _(p1) --[[ Line: 34 | Named "withUIScale" ]]
+local function _(p1)
 	-- upvalues: TenFootInterfaceModule (copy)
 	return (if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * p1
 end

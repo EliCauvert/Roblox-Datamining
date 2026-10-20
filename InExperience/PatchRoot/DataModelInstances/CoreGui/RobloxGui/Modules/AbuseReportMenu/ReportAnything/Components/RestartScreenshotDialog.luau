@@ -11,7 +11,7 @@ local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
 local DividerModule = require(script.Parent.Parent.Components.Divider)
 
-return function(p1) --[[ Line: 29 | Named "RestartScreenshotDialog" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), HeaderBar (copy), RobloxTranslatorModule (copy), DividerModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ButtonStack (copy), ButtonType (copy)
 	local UseStyleResult = UseStyleFunction()
 	local Theme = UseStyleResult.Theme
@@ -43,8 +43,8 @@ return function(p1) --[[ Line: 29 | Named "RestartScreenshotDialog" ]]
 				backgroundTransparency = 1,
 				barHeight = 48,
 				LayoutOrder = 1,
-				renderLeft = function() --[[ Line: 66 ]] end,
-				renderRight = function() --[[ Line: 68 ]] end,
+				renderLeft = function() end,
+				renderRight = function() end,
 				title = RobloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Action.RetakeScene")
 			}),
 			Divider = ReactModule.createElement(DividerModule, { LayoutOrder = 2 }),

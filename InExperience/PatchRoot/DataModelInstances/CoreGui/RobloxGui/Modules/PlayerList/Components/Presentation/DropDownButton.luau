@@ -20,7 +20,7 @@ local Images = UIBloxModule.App.ImageSet.Images
 local EnabledFunction = require(CorePackages.Workspace.Packages.Chrome).Enabled
 local FFlagAllowDisplayingFoundationIconsForDropdownModule = require(Parent.Parent.Flags.FFlagAllowDisplayingFoundationIconsForDropdown)
 
-local function _(p1): boolean --[[ Line: 37 | Named "isFoundationIconName" ]]
+local function _(p1): boolean
 	-- upvalues: IconName (copy)
 	return IconName[p1] ~= nil
 end
@@ -42,7 +42,7 @@ DropDownButton.validateProps = TModule.strictInterface({
 	animatingPercentage = TModule.optional(TModule.number)
 })
 
-function DropDownButton.init(p1) --[[ Line: 60 ]]
+function DropDownButton.init(p1)
 	p1.state = {
 		isHovered = false,
 		isPressed = false,
@@ -52,7 +52,7 @@ function DropDownButton.init(p1) --[[ Line: 60 ]]
 	}
 end
 
-function DropDownButton.getColorBackgroundAnimation(p1, p2) --[[ Line: 70 ]]
+function DropDownButton.getColorBackgroundAnimation(p1, p2)
 	if p1.props.animatingPercentage == nil then
 		return 0, 0
 	end
@@ -72,11 +72,11 @@ function DropDownButton.getColorBackgroundAnimation(p1, p2) --[[ Line: 70 ]]
 	return SizeXDeltaDelta, NewDropDownRightOptionSize
 end
 
-function DropDownButton.render(p1) --[[ Line: 91 ]]
+function DropDownButton.render(p1)
 	-- upvalues: WithLayoutValuesFunction (copy), WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), EnabledFunction (copy), Colors (copy), FFlagAllowDisplayingFoundationIconsForDropdownModule (copy), IconName (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), IconSize (copy), RoactModule (copy), FoundationModule (copy), IconVariant (copy), ImageSetLabel (copy), NormalizeFontFaceFunction (copy), IconButtonModule (copy), Images (copy)
-	return WithLayoutValuesFunction(function(p2) --[[ Line: 92 ]]
+	return WithLayoutValuesFunction(function(p2)
 		-- upvalues: WithFoundationOrUIBloxStyleFunction (upval), FoundationFontFaceMigration (upval), EnabledFunction (upval), p1 (copy), Colors (upval), FFlagAllowDisplayingFoundationIconsForDropdownModule (upval), IconName (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), IconSize (upval), RoactModule (upval), FoundationModule (upval), IconVariant (upval), ImageSetLabel (upval), NormalizeFontFaceFunction (upval), IconButtonModule (upval), Images (upval)
-		return WithFoundationOrUIBloxStyleFunction(function(p3, p4) --[[ Line: 93 ]]
+		return WithFoundationOrUIBloxStyleFunction(function(p3, p4)
 			-- upvalues: FoundationFontFaceMigration (upval)
 			return {
 				Tokens = if FoundationFontFaceMigration then p3 else nil,
@@ -119,7 +119,7 @@ function DropDownButton.render(p1) --[[ Line: 91 ]]
 				},
 				Settings = { PreferredTransparency = p4.preferredTransparency }
 			}
-		end, function(p3) --[[ Line: 137 ]]
+		end, function(p3)
 			-- upvalues: EnabledFunction (upval), p2 (copy), p1 (upval), Colors (upval), FFlagAllowDisplayingFoundationIconsForDropdownModule (upval), IconName (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), IconSize (upval), RoactModule (upval), FoundationModule (upval), IconVariant (upval), ImageSetLabel (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), IconButtonModule (upval), Images (upval)
 			local config = {
 				Color = if EnabledFunction() then p3.Theme.BackgroundUIContrast.Color else p3.Theme.BackgroundContrast.Color,
@@ -138,14 +138,14 @@ function DropDownButton.render(p1) --[[ Line: 91 ]]
 			if HasOnDecline1 then
 				NewDropDownPadding += ScaledDropDownRightOptionSize
 			end
-			local function onMouseButton1Down() --[[ Line: 181 ]]
+			local function onMouseButton1Down()
 				-- upvalues: HasOnDecline1 (copy), p1 (upval)
 				if not HasOnDecline1 then
 					p1:setState({ isPressed = true })
 				end
 			end
 			
-			local function onMouseButton1Up() --[[ Line: 189 ]]
+			local function onMouseButton1Up()
 				-- upvalues: p1 (upval)
 				p1:setState({ isPressed = false })
 			end
@@ -214,21 +214,21 @@ function DropDownButton.render(p1) --[[ Line: 91 ]]
 				AutoButtonColor = false,
 				BorderSizePixel = 0,
 				[RoactModule.Event.Activated] = if HasOnDecline1 then nil else p1.props.onActivated or nil,
-				[RoactModule.Event.MouseEnter] = function() --[[ Line: 269 ]]
+				[RoactModule.Event.MouseEnter] = function()
 					-- upvalues: HasOnDecline1 (copy), p1 (upval)
 					if not HasOnDecline1 then
 						p1:setState({ isHovered = true })
 					end
 				end,
-				[RoactModule.Event.MouseLeave] = function() --[[ Line: 277 ]]
+				[RoactModule.Event.MouseLeave] = function()
 					-- upvalues: p1 (upval)
 					p1:setState({ isHovered = false, isPressed = false })
 				end,
-				[RoactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 284 ]]
+				[RoactModule.Change.AbsoluteSize] = function(Frame)
 					-- upvalues: p1 (upval)
 					p1:setState({ sizeX = Frame.AbsoluteSize.X })
 				end,
-				[RoactModule.Change.AbsolutePosition] = function(Frame: Frame) --[[ Line: 290 ]]
+				[RoactModule.Change.AbsolutePosition] = function(Frame: Frame)
 					-- upvalues: p1 (upval)
 					p1:setState({
 						absolutePosX = Frame.AbsolutePosition.X,
@@ -333,7 +333,7 @@ function DropDownButton.render(p1) --[[ Line: 91 ]]
 	end)
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p1) --[[ Line: 417 | Named "mapStateToProps" ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p1)
 	return {
 		screenSizeX = p1.screenSize.X,
 		screenSizeY = p1.screenSize.Y

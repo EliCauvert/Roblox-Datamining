@@ -1,4 +1,4 @@
-﻿return function(p1, p2, p3): number? --[[ Line: 2 | Named "find" ]]
+﻿return function(p1, p2, p3): number?
 	local ValueType = type(p1)
 	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)
 	local P2 = p3 or #p1

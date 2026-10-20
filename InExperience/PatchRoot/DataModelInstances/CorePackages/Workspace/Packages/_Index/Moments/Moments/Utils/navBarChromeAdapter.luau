@@ -1,6 +1,6 @@
 ﻿local AppNavBarModule = require(script:FindFirstAncestor("Moments").Parent.AppNavBar)
 
-return function(p1) --[[ Line: 50 | Named "createNavBarChromeAdapter" ]]
+return function(p1)
 	-- upvalues: AppNavBarModule (copy)
 	local P0 = p1 or {}
 	local VisibilityControl = P0.visibilityControl or AppNavBarModule.VisibilityControl
@@ -8,7 +8,7 @@ return function(p1) --[[ Line: 50 | Named "createNavBarChromeAdapter" ]]
 	
 	return {
 		isEnabled = IsEnabled,
-		setVisible = function(p2) --[[ Line: 61 ]]
+		setVisible = function(p2)
 			-- upvalues: IsEnabled (copy), VisibilityControl (copy)
 			if not IsEnabled then return end
 			if p2 then
@@ -19,7 +19,7 @@ return function(p1) --[[ Line: 50 | Named "createNavBarChromeAdapter" ]]
 				VisibilityControl.hide()
 			end
 		end,
-		dispose = function() --[[ Line: 72 ]]
+		dispose = function()
 			-- upvalues: IsEnabled (copy), VisibilityControl (copy)
 			if IsEnabled then
 				VisibilityControl.show()

@@ -9,23 +9,23 @@ local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local AbbreviateCountFunction = LocalizationModule.abbreviateCount
 local SocialCountsConfigModule = require(script.Parent.Parent.config.SocialCountsConfig)
 
-return function(_, p1, p2, MutualFriendIds) --[[ Line: 25 | Named "useSocialCountsData" ]]
+return function(_, p1, p2, MutualFriendIds)
 	-- upvalues: UseProfileJsonComponentModule (copy), EnumsModule (copy), ReactModule (copy), CryoModule (copy), SocialCountsConfigModule (copy), UseLocalizationFunction (copy), AbbreviateCountFunction (copy)
 	local Counts = UseProfileJsonComponentModule(EnumsModule.Components.UserProfileHeader).counts
-	local UseLocalizationResult = UseLocalizationFunction((ReactModule.useMemo(function() --[[ Line: 33 ]]
+	local UseLocalizationResult = UseLocalizationFunction((ReactModule.useMemo(function()
 		-- upvalues: CryoModule (upval), SocialCountsConfigModule (upval)
-		return CryoModule.Dictionary.map(SocialCountsConfigModule.RowConfig, function(p3) --[[ Line: 34 ]]
+		return CryoModule.Dictionary.map(SocialCountsConfigModule.RowConfig, function(p3)
 			return p3.textKey
 		end)
 	end, {})))
-	local UseLocalizationResult1 = UseLocalizationFunction((ReactModule.useMemo(function() --[[ Line: 41 ]]
+	local UseLocalizationResult1 = UseLocalizationFunction((ReactModule.useMemo(function()
 		-- upvalues: CryoModule (upval), SocialCountsConfigModule (upval)
-		return CryoModule.Dictionary.map(SocialCountsConfigModule.RowConfig, function(p3) --[[ Line: 42 ]]
+		return CryoModule.Dictionary.map(SocialCountsConfigModule.RowConfig, function(p3)
 			return p3.singleTextKey
 		end)
 	end, {})))
 	
-	return ReactModule.useMemo(function() --[[ Line: 49 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: Counts (copy), SocialCountsConfigModule (upval), UseLocalizationResult (copy), UseLocalizationResult1 (copy), MutualFriendIds (copy), AbbreviateCountFunction (upval), p2 (copy), p1 (copy)
 		local List = {}
 		
@@ -48,7 +48,7 @@ return function(_, p1, p2, MutualFriendIds) --[[ Line: 25 | Named "useSocialCoun
 				})
 			end
 		end
-		table.sort(List, function(A, B): boolean --[[ Line: 89 ]]
+		table.sort(List, function(A, B): boolean
 			return A.layoutOrder < B.layoutOrder
 		end)
 		

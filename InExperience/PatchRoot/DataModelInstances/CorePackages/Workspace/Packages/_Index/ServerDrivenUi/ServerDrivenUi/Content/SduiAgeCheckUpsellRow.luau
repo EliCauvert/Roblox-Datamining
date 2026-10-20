@@ -8,12 +8,12 @@ local AgeCheckUpsellDismissedData = require(Parent.GameDetail).AgeCheckUpsellDis
 local LuaAppEdpFaeIxpEnabled = game:DefineFastFlag("LuaAppEdpFaeIxpEnabled", false)
 local LuaAppEdpFaeIxpLayer = game:DefineFastString("LuaAppEdpFaeIxpLayer", "PlayerApp.GameDetailsPage.Exposure")
 
-return ReactModule.memo(function(p1) --[[ Line: 43 | Named "SduiAgeCheckUpsellRow" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: SignalsReactModule (copy), AgeCheckUpsellDismissedData (copy), LuaAppEdpFaeIxpEnabled (copy), ReactModule (copy), IXPService (copy), LuaAppEdpFaeIxpLayer (copy), SduiContentRow (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(AgeCheckUpsellDismissedData.getIsAgeCheckUpsellDismissed)
 	
 	if LuaAppEdpFaeIxpEnabled then
-		ReactModule.useEffect(function() --[[ Line: 47 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseSignalStateResult (copy), IXPService (upval), LuaAppEdpFaeIxpLayer (upval)
 			if not UseSignalStateResult then
 				IXPService:LogFlagLinkedUserLayerExposure(LuaAppEdpFaeIxpLayer)

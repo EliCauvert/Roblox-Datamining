@@ -27,26 +27,26 @@ local AppPage = require(Parent.RobloxAppEnums).AppPage
 local AXEditProfileImageFillCardHeight = game:DefineFastFlag("AXEditProfileImageFillCardHeight", false)
 local EditProfileImageSignalsNavCurrentPage = game:DefineFastFlag("EditProfileImageSignalsNavCurrentPage", false)
 
-local function _(AvatarExperienceWrapper): boolean --[[ Line: 42 | Named "isAppItemDetailsPage" ]]
+local function _(AvatarExperienceWrapper): boolean
 	-- upvalues: AppPage (copy)
 	return AvatarExperienceWrapper == AppPage.AvatarExperienceWrapper or AvatarExperienceWrapper == AppPage.AvatarExperienceWrapperTransparent
 end
 
-return function(p1) --[[ Line: 55 | Named "EditProfileImageContainer" ]]
+return function(p1)
 	-- upvalues: UseProfileWrapperContextModule (copy), UseScreenSizeFunction (copy), UseSelectorFunction (copy), EditProfileImageSignalsNavCurrentPage (copy), FFlagSignalsNavP3hMisc (copy), ReactModule (copy), SignalsModule (copy), GetLegacyNavigationStoreFunction (copy), AppPage (copy), UseSignalStateFunction (copy), Selectors (copy), UseDispatchFunction (copy), CloseProfilePictureEditorFunction (copy), ShowEditProfileImageToast (copy), EnumsModule (copy), FFlagEditProfileImageR15UpgradePrompt (copy), FFlagEditProfileFramesImpression (copy), FFlagEditProfileFramesEnabled (copy), UseReportFramesImpressionModule (copy), Enums (copy), View (copy), AXEditProfileImageFillCardHeight (copy), EditProfileImage (copy)
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	local RenderRecommendedEmotePurchaseFooter = UseProfileWrapperContextModuleResult.renderRecommendedEmotePurchaseFooter
 	assert(RenderRecommendedEmotePurchaseFooter, "Edit Profile Image requires a host purchase-footer renderer")
 	local UseScreenSizeResult = UseScreenSizeFunction()
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 60 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		return p2.GlobalGuiInset
 	end)
 	local IsUseSelectorResultMatch = nil
 	
 	if EditProfileImageSignalsNavCurrentPage and FFlagSignalsNavP3hMisc then
-		IsUseSelectorResultMatch = UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 67 ]]
+		IsUseSelectorResultMatch = UseSignalStateFunction((ReactModule.useMemo(function()
 			-- upvalues: SignalsModule (upval), GetLegacyNavigationStoreFunction (upval), AppPage (upval)
-			return SignalsModule.createComputed(function(p2): boolean --[[ Line: 68 ]]
+			return SignalsModule.createComputed(function(p2): boolean
 				-- upvalues: GetLegacyNavigationStoreFunction (upval), AppPage (upval)
 				local CurrentPageName = GetLegacyNavigationStoreFunction(false).getCurrentPageName(p2)
 				
@@ -58,16 +58,16 @@ return function(p1) --[[ Line: 55 | Named "EditProfileImageContainer" ]]
 		IsUseSelectorResultMatch = UseSelectorResult1 == AppPage.AvatarExperienceWrapper or UseSelectorResult1 == AppPage.AvatarExperienceWrapperTransparent
 	end
 	local UseDispatchResult = UseDispatchFunction()
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 79 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: CloseProfilePictureEditorFunction (upval), p1 (copy)
 		CloseProfilePictureEditorFunction(p1.navigation)
 	end, { p1.navigation })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 83 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: ShowEditProfileImageToast (upval), UseDispatchResult (copy), CloseProfilePictureEditorFunction (upval), p1 (copy)
 		ShowEditProfileImageToast.showSaveSuccessToast(UseDispatchResult)
 		CloseProfilePictureEditorFunction(p1.navigation)
 	end, { UseDispatchResult, p1.navigation })
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 88 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseProfileWrapperContextModuleResult (copy), EnumsModule (upval)
 		local NavigateTo = UseProfileWrapperContextModuleResult.navigateTo
 		local config = { mountAnimation = true }
@@ -80,7 +80,7 @@ return function(p1) --[[ Line: 55 | Named "EditProfileImageContainer" ]]
 			NavigateTo.itemDetails(p2, config)
 		end
 	end, { UseProfileWrapperContextModuleResult.navigateTo })
-	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 99 ]]
+	local UseResult3 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseProfileWrapperContextModuleResult (copy), EnumsModule (upval)
 		local PreparePurchaseItemFunction: (any, any) -> () = UseProfileWrapperContextModuleResult.navigateTo.preparePurchaseItem
 		
@@ -88,7 +88,7 @@ return function(p1) --[[ Line: 55 | Named "EditProfileImageContainer" ]]
 			PreparePurchaseItemFunction(p2, EnumsModule.ItemTypes.Asset)
 		end
 	end, { UseProfileWrapperContextModuleResult.navigateTo })
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 106 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseProfileWrapperContextModuleResult (copy)
 		local ShopForMoreEmotesFunction: () -> () = UseProfileWrapperContextModuleResult.navigateTo.shopForMoreEmotes
 		
@@ -96,7 +96,7 @@ return function(p1) --[[ Line: 55 | Named "EditProfileImageContainer" ]]
 			ShopForMoreEmotesFunction()
 		end
 	end, { UseProfileWrapperContextModuleResult.navigateTo })
-	local UseResult5 = if FFlagEditProfileImageR15UpgradePrompt then ReactModule.useCallback(function(p2) --[[ Line: 115 ]]
+	local UseResult5 = if FFlagEditProfileImageR15UpgradePrompt then ReactModule.useCallback(function(p2)
 		-- upvalues: UseProfileWrapperContextModuleResult (copy)
 		local PromptR15UpgradeFunction: (any) -> () = UseProfileWrapperContextModuleResult.navigateTo.promptR15Upgrade
 		

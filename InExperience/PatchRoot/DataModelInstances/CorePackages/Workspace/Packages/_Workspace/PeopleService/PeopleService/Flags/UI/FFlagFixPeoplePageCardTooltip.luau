@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("FixPeoplePageCardTooltip", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("FixPeoplePageCardTooltip")
 end

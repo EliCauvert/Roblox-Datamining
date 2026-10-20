@@ -14,7 +14,7 @@ local config = {
 	align = require(Foundation.Enums.PopoverAlign).Start
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 66 | Named "Menu" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), PopoverModule (copy), WithCommonPropsModule (copy), RadiusModule (copy), BaseMenuModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()

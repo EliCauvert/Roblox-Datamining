@@ -32,7 +32,7 @@ local FFlagCreateMomentsToastModule = require(Parent.Flags.FFlagCreateMomentsToa
 local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 local IsPlatformMatch: boolean = UserInputService:GetPlatform() == Enum.Platform.Windows or UserInputService:GetPlatform() == Enum.Platform.OSX
 
-local function _(p1): boolean --[[ Line: 79 | Named "isVideoCapture" ]]
+local function _(p1): boolean
 	-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy)
 	if p1 then
 		local CaptureInfo = p1.captureInfo
@@ -47,7 +47,7 @@ local config = {
 	[CapturesToastTypeModule.CaptureSavedToDevice] = {
 		toastTitleKey = "captureSavedToDevice",
 		iconImage = Images["icons/status/success"],
-		onActivated = if IsPlatformMatch then function(p1, _, p2) --[[ Line: 100 ]]
+		onActivated = if IsPlatformMatch then function(p1, _, p2)
 			-- upvalues: EventNamesModule (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy)
 			p1.fireEvent(EventNamesModule.CapturesSavedToDeviceToastOpenButtonActivated)
 			local IsCaptureTypeMatch = nil
@@ -73,7 +73,7 @@ local config = {
 		toastSubtitleKey = "shareCaptureDescription",
 		toastTitleKey = "captureSaved",
 		iconImage = Images["icons/controls/screenshot"],
-		onActivated = function(p1, Callback: (any) -> (), p2) --[[ Line: 114 ]]
+		onActivated = function(p1, Callback: (any) -> (), p2)
 			-- upvalues: EventNamesModule (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), SocialStopwatchModule (copy), ShareCaptureModule (copy), ExternalShareSourceTypeModule (copy)
 			p1.fireEvent(EventNamesModule.CapturesShareToastButtonActivated)
 			local IsCaptureTypeMatch = nil
@@ -98,7 +98,7 @@ local config = {
 	[CapturesToastTypeModule.CaptureTakenWithAction] = {
 		toastTitleKey = "captureSaved",
 		iconImage = Images["icons/controls/screenshot"],
-		onActivated = function(_, _, p1) --[[ Line: 134 ]]
+		onActivated = function(_, _, p1)
 			if p1 and p1.toastAction and p1.captureInfo then
 				p1.toastAction.onActivated(p1.captureInfo)
 			end
@@ -140,7 +140,7 @@ local config = {
 		toastCTAKey = "viewAction",
 		toastTitleKey = "captureSaved",
 		iconImage = Images["icons/controls/screenshot"],
-		onActivated = function(p1, Callback: (any) -> ()) --[[ Line: 173 ]]
+		onActivated = function(p1, Callback: (any) -> ())
 			-- upvalues: EventNamesModule (copy), CarouselOpenedModule (copy)
 			p1.fireEvent(EventNamesModule.CapturesViewToastButtonActivated)
 			Callback(CarouselOpenedModule(1))
@@ -148,7 +148,7 @@ local config = {
 	}
 }
 
-return function(_) --[[ Line: 184 ]]
+return function(_)
 	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), ReactModule (copy), CapturesToastTypeModule (copy), config (copy), ToastVanishedModule (copy), FFlagBuildExperienceInGameCaptureToChat (copy), DashModule (copy), FFlagMomentsCreationFeatureGate (copy), GetMomentsCapabilitiesFunction (copy), FFlagCreateMomentsToastModule (copy), ToastControllerModule (copy), HttpService (copy), StartMomentsCreationFlowModule (copy), EventNamesModule (copy), Toast (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
@@ -172,23 +172,23 @@ return function(_) --[[ Line: 184 ]]
 		videoCaptureOtherError = "Feature.Captures.Toast.VideoCaptureOtherError",
 		viewAction = "Feature.Captures.Action.ViewCapture"
 	})
-	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 209 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p1)
 		-- upvalues: ConstantsModule (upval)
 		return p1[ConstantsModule.RoduxKey].Toast.ToastType
 	end)
-	local UseSelectorResult1 = UseSelectorFunction(function(p1) --[[ Line: 213 ]]
+	local UseSelectorResult1 = UseSelectorFunction(function(p1)
 		-- upvalues: ConstantsModule (upval)
 		return p1[ConstantsModule.RoduxKey].Toast.ToastConfig
 	end)
-	local UseSelectorResult2 = UseSelectorFunction(function(p1) --[[ Line: 217 ]]
+	local UseSelectorResult2 = UseSelectorFunction(function(p1)
 		-- upvalues: ConstantsModule (upval)
 		return p1[ConstantsModule.RoduxKey].Toast.IsDismissed
 	end)
-	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 221 ]]
+	local UseResult = ReactModule.useCallback(function(p1)
 		-- upvalues: UseLocalizationResult (copy)
 		return if p1 then UseLocalizationResult[p1] else nil
 	end)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 228 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseSelectorResult (copy), CapturesToastTypeModule (upval), config (upval), UseDispatchResult (copy), ToastVanishedModule (upval), UseAnalyticsModuleResult (copy), UseSelectorResult1 (copy), ConstantsModule (upval), UseResult (copy), FFlagBuildExperienceInGameCaptureToChat (upval), DashModule (upval)
 		if UseSelectorResult == CapturesToastTypeModule.None then
 			return nil
@@ -198,7 +198,7 @@ return function(_) --[[ Line: 184 ]]
 			return DashModule.join(Entry, {
 				buttonText = if FFlagBuildExperienceInGameCaptureToChat and UseSelectorResult1 and UseSelectorResult1.toastAction then UseSelectorResult1.toastAction.text else UseResult(Entry.toastCTAKey),
 				duration = Entry.duration or ConstantsModule.ToastDuration,
-				onActivated = if Entry.onActivated then function() --[[ Line: 244 ]]
+				onActivated = if Entry.onActivated then function()
 					-- upvalues: Entry (copy), UseAnalyticsModuleResult (upval), UseDispatchResult (upval), UseSelectorResult1 (upval), UseSelectorResult (copy), UseSelectorResult (upval), ToastVanishedModule (upval)
 					Entry.onActivated(UseAnalyticsModuleResult, UseDispatchResult, UseSelectorResult1)
 					
@@ -206,7 +206,7 @@ return function(_) --[[ Line: 184 ]]
 						UseDispatchResult(ToastVanishedModule())
 					end
 				end else nil,
-				onDismissed = function() --[[ Line: 236 ]]
+				onDismissed = function()
 					-- upvalues: UseSelectorResult (copy), UseSelectorResult (upval), UseDispatchResult (upval), ToastVanishedModule (upval)
 					if UseSelectorResult == UseSelectorResult then
 						UseDispatchResult(ToastVanishedModule())
@@ -226,7 +226,7 @@ return function(_) --[[ Line: 184 ]]
 		title = UseResult("momentsTitle"),
 		text = UseResult("discoverPostWatch"),
 		actionText = UseResult("createAction"),
-		onAction = function() --[[ Line: 289 ]]
+		onAction = function()
 			-- upvalues: UseSelectorResult1 (copy), HttpService (upval), UseDispatchResult (copy), StartMomentsCreationFlowModule (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval)
 			if UseSelectorResult1 and UseSelectorResult1.captureInfo then
 				local Guid = HttpService:GenerateGUID(false)
@@ -235,7 +235,7 @@ return function(_) --[[ Line: 184 ]]
 			end
 			UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesCreateMomentToastButtonActivated)
 		end,
-		onDismissed = function() --[[ Line: 299 ]]
+		onDismissed = function()
 			-- upvalues: UseDispatchResult (copy), ToastVanishedModule (upval)
 			UseDispatchResult(ToastVanishedModule())
 		end,
@@ -245,7 +245,7 @@ return function(_) --[[ Line: 184 ]]
 		icon = "icons/brands/moments_large",
 		title = UseResult("momentProcessingTitle"),
 		text = UseResult("momentProcessingDescription"),
-		onDismissed = function() --[[ Line: 310 ]]
+		onDismissed = function()
 			-- upvalues: UseDispatchResult (copy), ToastVanishedModule (upval)
 			UseDispatchResult(ToastVanishedModule())
 		end,

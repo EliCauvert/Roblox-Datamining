@@ -8,7 +8,7 @@ local SduiChip = require(Parent.SduiSharedContent).SduiChip
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseExperienceDetailsShareModule = require(ServerDrivenUi.Content.ExperienceDetails.Hooks.useExperienceDetailsShare)
 
-return ReactModule.memo(function(p1) --[[ Line: 22 | Named "ExperienceDetailsShareChip" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseLocalizationFunction (copy), SignalsReactModule (copy), Game (copy), UseExperienceDetailsShareModule (copy), ReactModule (copy), SduiChip (copy), FoundationModule (copy)
 	local UniverseId = p1.universeId
 	local UseSignalStateResult = SignalsReactModule.useSignalState(Game.getGameInfoStore(false).getAndFetchGameInfo(UniverseId).data)

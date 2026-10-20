@@ -13,7 +13,7 @@ local config1 = {
 	SelectionBehaviorUp = Enum.SelectionBehavior.Stop
 }
 
-return ReactModule.forwardRef(function(p1, Ref) --[[ Line: 26 | Named "BaseFocusRoot" ]]
+return ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: CryoModule (copy), config (copy), config1 (copy), ReactModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1.frameProps or {}, { ref = Ref })
 	

@@ -3,6 +3,6 @@ local Parent = ProfilePlatform.Parent
 local _ = require(ProfilePlatform.Analytics.EventNames)
 
 return require(Parent.React).createContext({
-	fireAnalyticsEvent = function() --[[ Line: 29 ]] end,
+	fireAnalyticsEvent = function() end,
 	scrollViewPositionChangedSignal = require(Parent.AppCommonLib).Signal.new()
 })

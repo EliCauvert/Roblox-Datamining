@@ -14,7 +14,7 @@ local AvatarCreationService = game:GetService("AvatarCreationService")
 local BrowserService = game:GetService("BrowserService")
 local UserInputService = game:GetService("UserInputService")
 
-return function(p1) --[[ Line: 27 ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), UseLegallySensitiveContentAndActionsFunction (copy), ConsentName (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), View (copy), Button (copy), ButtonVariant (copy), UserInputService (copy), BrowserService (copy), LinkingProtocol (copy), AvatarCreationService (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		title = "AvatarGeneration.SelfieConsent.Title",
@@ -33,7 +33,7 @@ return function(p1) --[[ Line: 27 ]]
 				DialogFooter = ReactModule.createElement(Button, {
 					text = UseLocalizationResult.privacyLinkText,
 					variant = ButtonVariant.Link,
-					onActivated = function() --[[ Line: 55 ]]
+					onActivated = function()
 						-- upvalues: UserInputService (upval), BrowserService (upval), LinkingProtocol (upval)
 						if UserInputService:GetPlatform() == Enum.Platform.Android then
 							BrowserService:OpenBrowserWindow("https://en.help.roblox.com/hc/en-us/articles/115004630823-Roblox-Privacy-and-Cookie-Policy")
@@ -52,7 +52,7 @@ return function(p1) --[[ Line: 27 ]]
 				{
 					text = UseLocalizationResult.agreeButton,
 					variant = ButtonVariant.Emphasis,
-					onActivated = function() --[[ Line: 72 ]]
+					onActivated = function()
 						-- upvalues: AvatarCreationService (upval), p1 (copy), InExperiencePhotoToAvatarSelfieConsent2 (copy)
 						AvatarCreationService:HandleSelfieConsentResult(true)
 						p1.displaySelfieConsent(false)
@@ -64,7 +64,7 @@ return function(p1) --[[ Line: 27 ]]
 				{
 					text = UseLocalizationResult.cancelButton,
 					variant = ButtonVariant.Standard,
-					onActivated = function() --[[ Line: 81 ]]
+					onActivated = function()
 						-- upvalues: AvatarCreationService (upval), p1 (copy)
 						AvatarCreationService:HandleSelfieConsentResult(false)
 						p1.displaySelfieConsent(false)

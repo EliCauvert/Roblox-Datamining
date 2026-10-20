@@ -25,7 +25,7 @@ local config = {
 	["nil"] = "Unset"
 }
 
-return function(p1) --[[ Line: 57 ]]
+return function(p1)
 	-- upvalues: Players (copy), DiscoverabilityUpsellNonPrefillDiscoverableUserIdsWhitelistModule (copy), React (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), EventNamesModule (copy), config (copy), ImageSetLabel (copy), Images (copy), IconSize (copy), Checkbox (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), StyledTextLabel (copy), RadioButtonList (copy), PartialPageModal (copy), ButtonType (copy)
 	local PrefillDiscoverabilitySetting = (not Players.LocalPlayer or not DiscoverabilityUpsellNonPrefillDiscoverableUserIdsWhitelistModule.isWhitelistedUserId(Players.LocalPlayer.UserId)) and p1.prefillDiscoverabilitySetting
 	local UseStateResult, UseStateResult2 = React.useState(if PrefillDiscoverabilitySetting then 1 else nil)
@@ -45,13 +45,13 @@ return function(p1) --[[ Line: 57 ]]
 		infoTextPrefillDiscoverable = TextKeysModule.DISCOVERABILITY_INFO_PREFILL_DISCOVERABLE
 	})
 	
-	local function OnActivated(p2) --[[ Line: 85 ]]
+	local function OnActivated(p2)
 		-- upvalues: p1 (copy), EventNamesModule (upval), config (upval), UseStateResult2 (copy)
 		p1.analytics.fireAnalyticsEvent(EventNamesModule.DiscoverabilityModalRadioButtonClick, { selected = config[tostring(p2)] })
 		UseStateResult2(p2)
 	end
 	
-	local function OnActivated1() --[[ Line: 92 ]]
+	local function OnActivated1()
 		-- upvalues: p1 (copy), config (upval), UseStateResult (copy)
 		p1.onActivated(config[tostring(UseStateResult)])
 	end
@@ -63,7 +63,7 @@ return function(p1) --[[ Line: 57 ]]
 	local InfoTextPrefillDiscoverable = nil
 	
 	if PrefillDiscoverabilitySetting then
-		local function OnActivated2() --[[ Line: 98 ]]
+		local function OnActivated2()
 			-- upvalues: UseStateResult (copy), p1 (copy), EventNamesModule (upval), config (upval), UseStateResult2 (copy)
 			local v1: number = if UseStateResult == 1 then 2 else 1
 			p1.analytics.fireAnalyticsEvent(EventNamesModule.DiscoverabilityModalRadioButtonClick, { selected = config[tostring(v1)] })
@@ -160,7 +160,7 @@ return function(p1) --[[ Line: 57 ]]
 	return React.createElement(PartialPageModal, {
 		title = TitleTextPrefillDiscoverable,
 		screenSize = p1.screenSize,
-		onCloseClicked = function() --[[ Line: 195 ]]
+		onCloseClicked = function()
 			-- upvalues: p1 (copy), config (upval), UseStateResult (copy)
 			p1.onCloseClicked(config[tostring(UseStateResult)])
 		end,

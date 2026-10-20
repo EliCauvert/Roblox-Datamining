@@ -10,7 +10,7 @@ local AddEconomicRestrictionKeysToLocalizationFunction = IAPExperienceModule.Uti
 local AlertPromptModule = require(BulkPurchaseApp.Components.AlertPrompt)
 local ErrorCodeEnumModule = require(BulkPurchaseApp.Enums.ErrorCodeEnum)
 
-local function BulkPurchaseErrorText(p1) --[[ Line: 22 ]]
+local function BulkPurchaseErrorText(p1)
 	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy), StyledTextLabel (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	
@@ -56,7 +56,7 @@ local config1 = {
 	[ErrorCodeEnumModule.PlaceInvalid] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainOtherItems"
 }
 
-return function(p1) --[[ Line: 74 | Named "BulkPurchaseError" ]]
+return function(p1)
 	-- upvalues: UseDesignTokensFunction (copy), config (copy), config1 (copy), AddEconomicRestrictionKeysToLocalizationFunction (copy), UseLocalizationFunction (copy), ErrorCodeEnumModule (copy), FormatEconomicRestrictionTextFunction (copy), ReactModule (copy), BulkPurchaseErrorText (copy), AlertPromptModule (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local UseLocalizationResult = nil
@@ -76,7 +76,7 @@ return function(p1) --[[ Line: 74 | Named "BulkPurchaseError" ]]
 		title = UseLocalizationResult.title,
 		dismissCTA = UseLocalizationResult.dismissCTA,
 		onDismiss = p1.onDismiss,
-		middleContent = function() --[[ Line: 89 ]]
+		middleContent = function()
 			-- upvalues: ReactModule (upval), UseDesignTokensResult (copy), BulkPurchaseErrorText (upval), UseLocalizationResult (ref)
 			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,

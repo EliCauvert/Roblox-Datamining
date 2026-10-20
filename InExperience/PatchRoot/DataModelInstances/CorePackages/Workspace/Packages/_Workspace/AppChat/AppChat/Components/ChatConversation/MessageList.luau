@@ -30,7 +30,7 @@ local AppChatPerfChatConversationPaginationInitialRender = game:DefineFastInt("A
 local AppChatPerfChatConversationPaginationOnStartReached = game:DefineFastInt("AppChatPerfChatConversationPaginationOnStartReached", 64)
 local AppChatPerfChatConversationPaginationOnEndReached = game:DefineFastInt("AppChatPerfChatConversationPaginationOnEndReached", 100)
 
-local function isIncomingChatMessage(p1): boolean --[[ Line: 50 ]]
+local function isIncomingChatMessage(p1): boolean
 	-- upvalues: EnumMessageTypesModule (copy)
 	return p1.isIncoming and (p1.messageType == EnumMessageTypesModule.PlainText or p1.messageType == EnumMessageTypesModule.Link)
 end
@@ -54,18 +54,18 @@ MessageList.defaultProps = {
 	scrollToTopOnInitialOsaLoad = false,
 	Size = UDim2.new(1, 0, 1, 0),
 	itemList = {},
-	loadNext = function() --[[ Line: 65 ]] end,
-	markAsRead = function() --[[ Line: 66 ]] end,
-	onDetailsOpened = function() --[[ Line: 68 ]] end,
-	openGameDetailsPage = function(_, _) --[[ Line: 69 ]] end,
-	closeKeyboard = function() --[[ Line: 73 ]] end
+	loadNext = function() end,
+	markAsRead = function() end,
+	onDetailsOpened = function() end,
+	openGameDetailsPage = function(_, _) end,
+	closeKeyboard = function() end
 }
 
-local function compareItemData(p1, p2): boolean --[[ Line: 83 ]]
+local function compareItemData(p1, p2): boolean
 	return p1 ~= nil and p2 ~= nil and (if p1.stable_key == nil then p1.messageId ~= nil and p1.messageId == p2.messageId else p1.stable_key == p2.stable_key or p1.messageId ~= nil and p1.messageId == p2.messageId)
 end
 
-function MessageList.init(p1) --[[ Line: 92 ]]
+function MessageList.init(p1)
 	-- upvalues: FFlagAppChatPerfTrackingModule (copy), MessageModelModule (copy), EnumMessageTypesModule (copy), RoactModule (copy), FFlagAppChatAutotranslationRespectsExperienceChatSettingModule (copy), GetLastMessageWithFilterModule (copy), isIncomingChatMessage (copy), CustomMessageEntryContainerModule (copy), SystemMessageContainerModule (copy), GetFFlagEnableSocialCardsFunction (copy), FFlagAppChatEnableAutotranslationModule (copy), ChatMessageModule (copy), MessageModelModule1 (copy), SystemMessageModule (copy), CreateScrollIntervalTrackerModule (copy), AppChatPerfTrackerModule (copy), FocusNavigationService (copy), CoreGui (copy)
 	p1.state = {
 		width = 0,
@@ -77,7 +77,7 @@ function MessageList.init(p1) --[[ Line: 92 ]]
 	if FFlagAppChatPerfTrackingModule then
 		p1._scrollIntervalTracker = nil
 	end
-	function p1.isValidMessageAndSenderType(MessageType, SenderType): boolean --[[ Line: 105 ]]
+	function p1.isValidMessageAndSenderType(MessageType, SenderType): boolean
 		-- upvalues: MessageModelModule (upval), EnumMessageTypesModule (upval)
 		return if SenderType == MessageModelModule.SenderTypes.System then MessageType == EnumMessageTypesModule.System elseif SenderType == MessageModelModule.SenderTypes.User then MessageType == EnumMessageTypesModule.PlainText or MessageType == EnumMessageTypesModule.Link else MessageType == EnumMessageTypesModule.Custom
 	end
@@ -89,7 +89,7 @@ function MessageList.init(p1) --[[ Line: 92 ]]
 	if p1.props.itemList then
 		p1.lastIncomingChatMessageId = GetLastMessageWithFilterModule(p1.props.itemList, isIncomingChatMessage)
 	end
-	function p1.renderItem(p2) --[[ Line: 130 ]]
+	function p1.renderItem(p2)
 		-- upvalues: p1 (copy), RoactModule (upval), EnumMessageTypesModule (upval), CustomMessageEntryContainerModule (upval), SystemMessageContainerModule (upval), GetFFlagEnableSocialCardsFunction (upval), FFlagAppChatEnableAutotranslationModule (upval), FFlagAppChatAutotranslationRespectsExperienceChatSettingModule (upval), ChatTranslationEnabled (copy), ChatMessageModule (upval), MessageModelModule1 (upval), SystemMessageModule (upval)
 		if not p1.isValidMessageAndSenderType(p2.messageType, p2.senderType) then
 			return RoactModule.createElement(SystemMessageModule, { Text = p1.props.invalidMessageTypeText })
@@ -166,14 +166,14 @@ function MessageList.init(p1) --[[ Line: 92 ]]
 		})
 	end
 	
-	function p1.updateWidth(Frame: Frame) --[[ Line: 226 ]]
+	function p1.updateWidth(Frame: Frame)
 		-- upvalues: p1 (copy)
 		if Frame.AbsoluteSize.X ~= p1.state.width then
 			p1:setState({ width = Frame.AbsoluteSize.X })
 		end
 	end
 	
-	function p1.changeFocus(p2) --[[ Line: 233 ]]
+	function p1.changeFocus(p2)
 		-- upvalues: p1 (copy)
 		p1.isNearBottom = p2.anchorIndex <= p1.props.autoScrollMaxIndex + 1
 		p1.focusIndex = if p1.isNearBottom then 1 else p2.anchorIndex + 1
@@ -183,11 +183,11 @@ function MessageList.init(p1) --[[ Line: 92 ]]
 		end
 	end
 	
-	function p1.identifier(p2): string --[[ Line: 245 ]]
+	function p1.identifier(p2): string
 		return p2.messageId .. "|" .. (p2.position or "")
 	end
 	
-	function p1.getScrollRef() --[[ Line: 249 ]]
+	function p1.getScrollRef()
 		-- upvalues: p1 (copy)
 		if p1.ref.current == nil then
 			return nil
@@ -198,11 +198,11 @@ function MessageList.init(p1) --[[ Line: 92 ]]
 		end
 	end
 	
-	function p1.calculateScrollOffset(ScrollFrame) --[[ Line: 262 ]]
+	function p1.calculateScrollOffset(ScrollFrame)
 		return ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.CanvasPosition.Y - ScrollFrame.AbsoluteWindowSize.Y
 	end
 	
-	function p1.onScroll(ScrollFrame) --[[ Line: 270 ]]
+	function p1.onScroll(ScrollFrame)
 		-- upvalues: FFlagAppChatPerfTrackingModule (upval), p1 (copy), CreateScrollIntervalTrackerModule (upval), AppChatPerfTrackerModule (upval)
 		if FFlagAppChatPerfTrackingModule then
 			if p1._scrollIntervalTracker == nil then
@@ -219,7 +219,7 @@ function MessageList.init(p1) --[[ Line: 92 ]]
 		local ScrollOffset: number = p1.calculateScrollOffset(ScrollFrame)
 		
 		if ScrollOffset < 512 then
-			p1:setState(function(_, p2) --[[ Line: 289 ]]
+			p1:setState(function(_, p2)
 				return { firstItem = p2.itemList[1] }
 			end)
 		end
@@ -233,7 +233,7 @@ function MessageList.init(p1) --[[ Line: 92 ]]
 	p1.focusNavigationService = FocusNavigationService.new(CoreGui)
 end
 
-function MessageList.getDerivedStateFromProps(p1, p2) --[[ Line: 306 ]]
+function MessageList.getDerivedStateFromProps(p1, p2)
 	if p2.firstItem == nil then
 		return { startIndex = 1 }
 	end
@@ -248,7 +248,7 @@ function MessageList.getDerivedStateFromProps(p1, p2) --[[ Line: 306 ]]
 	return if #p1.itemList < StartIndex then { startIndex = 1 } else { startIndex = StartIndex }
 end
 
-function MessageList.didUpdate(p3, DefaultProps, _) --[[ Line: 331 ]]
+function MessageList.didUpdate(p3, DefaultProps, _)
 	-- upvalues: FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), FIntAppChatInitialMessageFetchLimitModule (copy), FIntAppChatMessageInitialFetchMinMessagesModule (copy), AppChatOsaAutoScrollDelayMs (copy), GetLastMessageWithFilterModule (copy), isIncomingChatMessage (copy)
 	if FFlagAppChatPerfTrackingModule and #DefaultProps.itemList < #p3.props.itemList then
 		AppChatPerfTrackerModule.finish(AppChatPerfTrackerModule.Events.PaginationMessageList, { conversationId = p3.props.conversationId })
@@ -279,7 +279,7 @@ function MessageList.didUpdate(p3, DefaultProps, _) --[[ Line: 331 ]]
 		local Current = p3.ref and p3.ref.current
 		
 		if Current and Current.scrollToEnd then
-			task.delay(AppChatOsaAutoScrollDelayMs / 1000, function() --[[ Line: 386 ]]
+			task.delay(AppChatOsaAutoScrollDelayMs / 1000, function()
 				-- upvalues: Current (copy), p3 (copy)
 				Current:scrollToIndex({ animated = false, index = #p3.props.itemList })
 			end)
@@ -290,7 +290,7 @@ function MessageList.didUpdate(p3, DefaultProps, _) --[[ Line: 331 ]]
 	end
 end
 
-function MessageList.didMount(p3) --[[ Line: 397 ]]
+function MessageList.didMount(p3)
 	-- upvalues: FIntAppChatMessageInitialFetchMinMessagesModule (copy)
 	if #p3.props.itemList < FIntAppChatMessageInitialFetchMinMessagesModule and p3.props.loadNext then
 		p3.props.loadNext()
@@ -303,7 +303,7 @@ function MessageList.didMount(p3) --[[ Line: 397 ]]
 	end
 end
 
-function MessageList.willUnmount(p3) --[[ Line: 408 ]]
+function MessageList.willUnmount(p3)
 	-- upvalues: FFlagAppChatPerfTrackingModule (copy)
 	if FFlagAppChatPerfTrackingModule and p3._scrollIntervalTracker then
 		p3._scrollIntervalTracker.cleanup()
@@ -311,7 +311,7 @@ function MessageList.willUnmount(p3) --[[ Line: 408 ]]
 	p3.focusNavigationService:teardown()
 end
 
-function MessageList.renderScrollingFrame(p3) --[[ Line: 415 ]]
+function MessageList.renderScrollingFrame(p3)
 	-- upvalues: RoactModule (copy), BidirectionalFlatList (copy), AppChatPerfChatConversationPaginationWindowSize (copy), AppChatPerfChatConversationPaginationInitialRender (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), PromiseModule (copy), AppChatPerfChatConversationPaginationOnEndReached (copy), AppChatPerfChatConversationPaginationOnStartReached (copy), compareItemData (copy)
 	local ItemList = {}
 	local StartIndex = p3.state.startIndex
@@ -338,7 +338,7 @@ function MessageList.renderScrollingFrame(p3) --[[ Line: 415 ]]
 	until true
 	return RoactModule.createElement(BidirectionalFlatList, {
 		data = ItemList,
-		renderItem = function(p4) --[[ Line: 435 ]]
+		renderItem = function(p4)
 			-- upvalues: p3 (copy)
 			return p3.renderItem(p4.item)
 		end,
@@ -350,13 +350,13 @@ function MessageList.renderScrollingFrame(p3) --[[ Line: 415 ]]
 			Name = "MessageList"
 		},
 		contentContainerStyle = { BackgroundTransparency = 1 },
-		keyExtractor = function(p4, p5) --[[ Line: 449 ]]
+		keyExtractor = function(p4, p5)
 			return p4.stable_key or (p4.messageId or p5)
 		end,
 		windowSize = AppChatPerfChatConversationPaginationWindowSize,
 		initialNumToRender = if p3.props.scrollToTopOnInitialOsaLoad then #ItemList else AppChatPerfChatConversationPaginationInitialRender,
 		onScroll = p3.onScroll,
-		onEndReached = function() --[[ Line: 458 ]]
+		onEndReached = function()
 			-- upvalues: FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), p3 (copy), PromiseModule (upval)
 			if FFlagAppChatPerfTrackingModule then
 				AppChatPerfTrackerModule.start(AppChatPerfTrackerModule.Events.PaginationMessageList, { conversationId = p3.props.conversationId })
@@ -372,7 +372,7 @@ function MessageList.renderScrollingFrame(p3) --[[ Line: 415 ]]
 		[RoactModule.Ref] = p3.ref,
 		autoscrollToTopThreshold = 33,
 		enableAutoscrollToTop = true,
-		ListHeaderComponent = function() --[[ Line: 476 ]]
+		ListHeaderComponent = function()
 			-- upvalues: RoactModule (upval)
 			return RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -380,7 +380,7 @@ function MessageList.renderScrollingFrame(p3) --[[ Line: 415 ]]
 			})
 		end,
 		showDefaultLoadingIndicators = false,
-		onContentSizeChange = function(Width, _) --[[ Line: 483 ]]
+		onContentSizeChange = function(Width, _)
 			-- upvalues: p3 (copy)
 			p3:setState({ width = Width })
 		end,
@@ -389,12 +389,12 @@ function MessageList.renderScrollingFrame(p3) --[[ Line: 415 ]]
 	})
 end
 
-function MessageList.renderEmptyMessageList(p3) --[[ Line: 493 ]]
+function MessageList.renderEmptyMessageList(p3)
 	-- upvalues: RoactModule (copy)
 	return RoactModule.createElement("Frame", { BackgroundTransparency = 1, Size = p3.props.Size })
 end
 
-function MessageList.render(p3) --[[ Line: 500 ]]
+function MessageList.render(p3)
 	-- upvalues: FFlagAppChatConversationLoadingSkeletonModule (copy), RoactModule (copy), ConversationMessageSkeletonListModule (copy)
 	return if FFlagAppChatConversationLoadingSkeletonModule and p3.props.isInitialMessageLoading then RoactModule.createElement(ConversationMessageSkeletonListModule, { size = p3.props.Size }) elseif #p3.props.itemList == 0 then p3:renderEmptyMessageList() else p3:renderScrollingFrame()
 end

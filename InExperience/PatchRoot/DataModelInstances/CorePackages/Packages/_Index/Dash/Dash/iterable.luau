@@ -1,11 +1,11 @@
 ﻿local _ = require(script.Parent.Types)
 
-return function(p1) --[[ Line: 11 | Named "iterable" ]]
+return function(p1)
 	local Count = 1
 	local Flag = true
 	local NextEntry = nil
 	
-	return function() --[[ Line: 16 ]]
+	return function()
 		-- upvalues: Flag (ref), p1 (copy), Count (ref), NextEntry (ref)
 		if Flag then
 			local v1 = p1[Count]

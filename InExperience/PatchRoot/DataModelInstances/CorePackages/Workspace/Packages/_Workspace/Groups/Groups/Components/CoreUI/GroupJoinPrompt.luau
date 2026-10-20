@@ -39,7 +39,7 @@ local config = {
 	[EnumsModule.DisabledReasons.InsufficientVerificationLevelLow] = "subTextInsufficientVerificationLevelLow"
 }
 
-return function(p1) --[[ Line: 64 ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseScreenSizeFunction (copy), ConstantsModule (copy), UseLocalizationFunction (copy), ReactModule (copy), MouseIconOverrideService (copy), EnumsModule (copy), config (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), View (copy), LoadableImage (copy), Text (copy), Skeleton (copy), VerifiedBadgesModule (copy), UseAbbreviatedNumberLocalizationFunction (copy), ButtonVariant (copy), Dialog (copy), DialogSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local NoEnableInputDelayed = p1.enableInputDelayed == nil or p1.enableInputDelayed
@@ -101,11 +101,11 @@ return function(p1) --[[ Line: 64 ]]
 			ownerName = OwnerName or ""
 		}
 	})
-	ReactModule.useEffect(function() --[[ Line: 127 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: MouseIconOverrideService (upval)
 		MouseIconOverrideService.push("GroupJoinPromptOverride", Enum.OverrideMouseIconBehavior.ForceShow)
 		
-		return function() --[[ Line: 130 ]]
+		return function()
 			-- upvalues: MouseIconOverrideService (upval)
 			MouseIconOverrideService.pop("GroupJoinPromptOverride")
 		end
@@ -114,7 +114,7 @@ return function(p1) --[[ Line: 64 ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
-	ReactModule.useEffect(function() --[[ Line: 141 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseStateResult2 (copy), UseStateResult (copy)
 		local Connection = nil
 		
@@ -124,14 +124,14 @@ return function(p1) --[[ Line: 64 ]]
 			if Current.AbsoluteSize.X > 0 then
 				UseStateResult2(Current.AbsoluteSize.X)
 			end
-			Connection = Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 148 ]]
+			Connection = Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: Current (copy), UseStateResult (upval), UseStateResult2 (upval)
 				if Current.AbsoluteSize.X > 0 and Current.AbsoluteSize.X ~= UseStateResult then
 					UseStateResult2(Current.AbsoluteSize.X)
 				end
 			end)
 		end
-		return function() --[[ Line: 154 ]]
+		return function()
 			-- upvalues: Connection (ref)
 			if Connection then
 				Connection:Disconnect()
@@ -139,7 +139,7 @@ return function(p1) --[[ Line: 64 ]]
 			end
 		end
 	end, { UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 162 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), UseStateResult2_1 (copy), UseStateResult1 (copy)
 		local Connection = nil
 		
@@ -149,14 +149,14 @@ return function(p1) --[[ Line: 64 ]]
 			if Current.AbsoluteSize.X > 0 then
 				UseStateResult2_1(Current.AbsoluteSize.X)
 			end
-			Connection = Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 169 ]]
+			Connection = Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: Current (copy), UseStateResult1 (upval), UseStateResult2_1 (upval)
 				if Current.AbsoluteSize.X > 0 and Current.AbsoluteSize.X ~= UseStateResult1 then
 					UseStateResult2_1(Current.AbsoluteSize.X)
 				end
 			end)
 		end
-		return function() --[[ Line: 175 ]]
+		return function()
 			-- upvalues: Connection (ref)
 			if Connection then
 				Connection:Disconnect()
@@ -164,7 +164,7 @@ return function(p1) --[[ Line: 64 ]]
 			end
 		end
 	end, { UseStateResult1 })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 183 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: HasPendingRequest (copy), UseLocalizationResult (copy), IsAlreadyMember (copy), IsEligible (copy), DisabledReason (copy), EnumsModule (upval), config (upval)
 		if HasPendingRequest then
 			return UseLocalizationResult.subTextPendingRequest
@@ -189,7 +189,7 @@ return function(p1) --[[ Line: 64 ]]
 		IsEligible,
 		DisabledReason
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 204 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: NoData (copy), NoData1 (copy), UseLocalizationResult (copy), IsAlreadyMember (copy), HasPendingRequest (copy), IsEligible (copy), GroupName (copy)
 		if NoData then
 			return nil
@@ -207,7 +207,7 @@ return function(p1) --[[ Line: 64 ]]
 	local BodyMediumFont = UseTokensResult.Typography.BodyMedium.Font
 	local FontSize1 = UseTokensResult.Typography.BodyMedium.FontSize
 	local Medium = UseTokensResult.Padding.Medium
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 233 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult1 (copy), UseStateResult (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), FontSize (copy), HeadingSmallFont (copy), TextService (upval)
 		return if UseMemoResult1 and UseMemoResult1 ~= "" and UseStateResult and UseStateResult > 0 then if FoundationFontFaceMigration then GetTextSizeFunction(UseMemoResult1, FontSize, HeadingSmallFont, Vector2.new(UseStateResult, 1e999), { addTemporaryPadding = false }) else TextService:GetTextSize(UseMemoResult1, FontSize, HeadingSmallFont, Vector2.new(UseStateResult, 1e999)) else nil
 	end, {
@@ -216,7 +216,7 @@ return function(p1) --[[ Line: 64 ]]
 		HeadingSmallFont,
 		FontSize
 	})
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 255 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), UseStateResult1 (copy), Medium (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), FontSize1 (copy), BodyMediumFont (copy), TextService (upval)
 		if UseMemoResult and UseStateResult1 and UseStateResult1 > 0 then
 			local UseStateResultDelta = UseStateResult1 - Medium * 2
@@ -233,7 +233,7 @@ return function(p1) --[[ Line: 64 ]]
 		FontSize1,
 		Medium
 	})
-	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 280 ]]
+	local UseMemoResult4 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult2 (copy), UseMemoResult3 (copy)
 		local t = {}
 		
@@ -246,7 +246,7 @@ return function(p1) --[[ Line: 64 ]]
 		return t
 	end, { UseMemoResult2, UseMemoResult3 })
 	local RbxthumbWithTypeSizeAndOptions = if p1.groupId then GetRbxthumbWithTypeSizeAndOptionsFunction(tostring(p1.groupId), Constants.RbxthumbTypes.GroupIcon, ConstantsModule.THUMBNAIL_SIZE) else nil
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 300 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: RbxthumbWithTypeSizeAndOptions (copy), ReactModule (upval), View (upval), UseTokensResult (copy), THUMBNAILSIZESMALL (copy), LoadableImage (upval)
 		return if RbxthumbWithTypeSizeAndOptions then ReactModule.createElement(View, {
 			tag = "col size-full-0 auto-y align-x-center",
@@ -277,7 +277,7 @@ return function(p1) --[[ Line: 64 ]]
 		UseTokensResult,
 		THUMBNAILSIZESMALL
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 329 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: ReactModule (upval), View (upval), UseRefResult (copy), UseMemoResult1 (copy), NoData (copy), UseMemoResult4 (copy), Text (upval), UseTokensResult (copy), UseStateResult (copy), Skeleton (upval), FontSize (copy)
 		return ReactModule.createElement(View, {
 			tag = "col size-full-0 auto-y",
@@ -308,7 +308,7 @@ return function(p1) --[[ Line: 64 ]]
 		UseMemoResult1, NoData, UseMemoResult4, UseStateResult, UseTokensResult,
 		UseRefResult, FontSize
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 367 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: OwnerName (copy), NoData (copy), ReactModule (upval), View (upval), UseTokensResult (copy), VerifiedBadgesModule (upval), OwnerIsVerified (copy), Text (upval), UseLocalizationResult (copy), Skeleton (upval), FontSize1 (copy)
 		return if OwnerName == nil or OwnerName == "" or NoData then if NoData then ReactModule.createElement(View, { tag = "col size-full-0 auto-y", LayoutOrder = 2 }, {
 			UIPadding = ReactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, UseTokensResult.Padding.XSmall) }),
@@ -333,7 +333,7 @@ return function(p1) --[[ Line: 64 ]]
 		FontSize1
 	})
 	local UseAbbreviatedNumberLocalizationResult = UseAbbreviatedNumberLocalizationFunction(MembersCount)
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 408 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: ReactModule (upval), View (upval), UseRefResult1 (copy), UseTokensResult (copy), NoData (copy), Skeleton (upval), FontSize1 (copy), UseMemoResult (copy), UseMemoResult4 (copy), Text (upval), UseStateResult1 (copy), MembersCount (copy), UseAbbreviatedNumberLocalizationResult (copy), NoData1 (copy), UseLocalizationResult (copy)
 		return ReactModule.createElement(View, {
 			tag = "col size-full-0 auto-y",
@@ -367,7 +367,7 @@ return function(p1) --[[ Line: 64 ]]
 		UseLocalizationResult, UseRefResult1, FontSize1
 	})
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 469 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult3 (copy), UseStateResult2_2 (copy), p1 (copy)
 		if not UseStateResult3 then
 			UseStateResult2_2(true)
@@ -377,7 +377,7 @@ return function(p1) --[[ Line: 64 ]]
 			end
 		end
 	end, { p1.onJoin })
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 478 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult3 (copy), p1 (copy)
 		if not UseStateResult3 and p1.onClose then
 			p1.onClose()
@@ -400,7 +400,7 @@ return function(p1) --[[ Line: 64 ]]
 		}),
 		DialogActions = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 2,
-			actions = ReactModule.useMemo(function() --[[ Line: 486 ]]
+			actions = ReactModule.useMemo(function()
 				-- upvalues: NoData (copy), ButtonVariant (upval), IsAlreadyMember (copy), IsEligible (copy), HasPendingRequest (copy), UseLocalizationResult (copy), UseResult5 (copy), UseStateResult3 (copy), NoData1 (copy), UseResult4 (copy), NoEnableInputDelayed (copy), ConstantsModule (upval)
 				return if NoData then {
 					{

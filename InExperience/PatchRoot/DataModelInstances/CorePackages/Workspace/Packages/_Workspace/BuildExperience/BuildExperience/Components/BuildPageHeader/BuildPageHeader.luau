@@ -23,7 +23,7 @@ local GetSearchQueryStoreModule = require(BuildExperience.Stores.GetSearchQueryS
 local _ = require(BuildExperience.Stores.GetSearchQueryStore.createSearchQueryStore)
 local BuildSearchBarWidth = game:DefineFastInt("BuildSearchBarWidth", 400)
 
-local function renderFlyoutLeftHeader(TitleText) --[[ Line: 42 ]]
+local function renderFlyoutLeftHeader(TitleText)
 	-- upvalues: ReactModule (copy), FlyoutLeftHeader (copy), FFlagEnableHomeRobloxLogo (copy), FlyoutSidePanelIXP (copy)
 	return ReactModule.createElement(FlyoutLeftHeader, {
 		isRobloxLogoEnabled = false,
@@ -33,11 +33,11 @@ local function renderFlyoutLeftHeader(TitleText) --[[ Line: 42 ]]
 	})
 end
 
-local function renderEmptyRight() --[[ Line: 56 ]]
+local function renderEmptyRight()
 	return nil
 end
 
-local function HeaderSearch(p1) --[[ Line: 64 ]]
+local function HeaderSearch(p1)
 	-- upvalues: UseScaledValueFunction (copy), BuildSearchBarWidth (copy), UseTokensFunction (copy), SignalsReactModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), SearchBarContainerModule (copy), Button (copy), ButtonVariant (copy), InputSize (copy)
 	local UseScaledValueResult = UseScaledValueFunction(BuildSearchBarWidth)
 	local Size2200 = UseTokensFunction().Size.Size_2200
@@ -48,9 +48,9 @@ local function HeaderSearch(p1) --[[ Line: 64 ]]
 		searchbarPlaceholder = "Feature.Build.Label.SearchGames",
 		cancelText = "Feature.Build.Action.Cancel"
 	})
-	ReactModule.useEffect(function() --[[ Line: 77 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SearchQueryStore (copy)
-		return function() --[[ Line: 78 ]]
+		return function()
 			-- upvalues: SearchQueryStore (upval)
 			SearchQueryStore.setIsSearchActive(false)
 		end
@@ -92,14 +92,14 @@ local function HeaderSearch(p1) --[[ Line: 64 ]]
 	})
 end
 
-local function HeaderCenter(p1) --[[ Line: 131 ]]
+local function HeaderCenter(p1)
 	-- upvalues: DisplayModule (copy), SignalsReactModule (copy), ReactModule (copy), HeaderSearch (copy), GetSearchQueryStoreModule (copy)
 	return if SignalsReactModule.useSignalState(DisplayModule.GetDisplayStore(false).getDisplaySize) == Enum.DisplaySize.Small then nil else ReactModule.createElement(HeaderSearch, {
 		searchQueryStore = p1.searchQueryStore or GetSearchQueryStoreModule()
 	})
 end
 
-return function(Frame) --[[ Line: 144 | Named "BuildPageHeader" ]]
+return function(Frame)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FlyoutSidePanelIXP (copy), DisplayModule (copy), SignalsReactModule (copy), GetSearchQueryStoreModule (copy), ReactModule (copy), HeaderCenter (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), renderEmptyRight (copy), HeaderBar (copy), renderFlyoutLeftHeader (copy)
 	local Title = UseLocalizationFunction({ title = LocalizationStringsModule.BUILD_HEADER_TITLE }).title
 	local IsFlyoutSidePanelEnabled = FlyoutSidePanelIXP.isFlyoutSidePanelEnabled()
@@ -122,16 +122,16 @@ return function(Frame) --[[ Line: 144 | Named "BuildPageHeader" ]]
 			barHeight = Frame.height,
 			paddingLeft = UDim.new(0, 0),
 			paddingRight = UDim.new(0, 0),
-			renderLeft = if IsFlyoutSidePanelEnabled then function() --[[ Line: 202 ]]
+			renderLeft = if IsFlyoutSidePanelEnabled then function()
 				-- upvalues: renderFlyoutLeftHeader (upval), Title (copy)
 				return renderFlyoutLeftHeader(Title)
 			end else nil,
 			title = if IsFlyoutSidePanelEnabled then nil else Title,
-			renderCenter = if IsNotUseSignalStateResultMatch then function() --[[ Line: 159 ]]
+			renderCenter = if IsNotUseSignalStateResultMatch then function()
 				-- upvalues: ReactModule (upval), HeaderCenter (upval), SearchQueryStore (ref)
 				return ReactModule.createElement(HeaderCenter, { searchQueryStore = SearchQueryStore })
 			end else nil,
-			renderRight = if HasOnOpenSearch then function() --[[ Line: 167 ]]
+			renderRight = if HasOnOpenSearch then function()
 				-- upvalues: ReactModule (upval), View (upval), HasOnOpenSearch (ref), IconButton (upval), IconName (upval), Frame (copy), InputSize (upval), ButtonVariant (upval)
 				return ReactModule.createElement(View, {
 					tag = "row align-y-center gap-medium auto-xy",

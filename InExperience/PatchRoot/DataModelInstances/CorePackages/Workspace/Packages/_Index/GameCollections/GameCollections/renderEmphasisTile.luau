@@ -4,7 +4,7 @@ local FFlagLuaAppEmphasisGameTileVideo = require(Parent.SharedFlags).FFlagLuaApp
 local ReactModule = require(Parent.React)
 local EmphasisGameTile = require(Parent.GameTile).EmphasisGameTile
 local _ = require(Parent.VideoUtils)
-local MemoResult = ReactModule.memo(function(p1) --[[ Line: 48 ]]
+local MemoResult = ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), EmphasisGameTile (copy), FFlagLuaAppEmphasisGameTileVideo (copy)
 	return ReactModule.createElement(EmphasisGameTile, {
 		size = p1.item.sizeOverride,
@@ -38,7 +38,7 @@ local MemoResult = ReactModule.memo(function(p1) --[[ Line: 48 ]]
 	})
 end)
 
-return function(p1) --[[ Line: 82 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), MemoResult (copy), GameCollectionItemTypes (copy)
 	return ReactModule.createElement(MemoResult, p1), GameCollectionItemTypes.GameCollectionItemType.EmphasisTile
 end

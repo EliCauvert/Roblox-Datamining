@@ -16,14 +16,14 @@ local CurveUtilModule = require(Parent:WaitForChild("CurveUtil"))
 local WhisperModule = require(ClientChatModules:WaitForChild("CommandModules"):WaitForChild("Whisper"))
 local _ = require(Parent:WaitForChild("MessageSender"))
 local ChatLocalizationModule = nil
-pcall(function() --[[ Line: 35 ]]
+pcall(function()
 	-- upvalues: ChatLocalizationModule (ref)
 	ChatLocalizationModule = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
 
 if ChatLocalizationModule == nil then
 	ChatLocalizationModule = {
-		Get = function(_, _, p1) --[[ Line: 36 ]]
+		Get = function(_, _, p1)
 			return p1
 		end
 	}
@@ -31,7 +31,7 @@ end
 local Module = {}
 Module.__index = Module
 
-function Module.CreateGuiObjects(p1, ChatBarParentFrame) --[[ Line: 43 ]]
+function Module.CreateGuiObjects(p1, ChatBarParentFrame)
 	-- upvalues: ChatSettingsModule (copy)
 	p1.ChatBarParentFrame = ChatBarParentFrame
 	local Frame = Instance.new("Frame")
@@ -119,7 +119,7 @@ function Module.CreateGuiObjects(p1, ChatBarParentFrame) --[[ Line: 43 ]]
 	p1.eGuiObjectsChanged:Fire()
 end
 
-function Module.DoLockChatBar(p1) --[[ Line: 142 ]]
+function Module.DoLockChatBar(p1)
 	-- upvalues: LocalPlayer (ref), ChatLocalizationModule (ref)
 	if p1.TextLabel then
 		if LocalPlayer.UserId > 0 then
@@ -131,26 +131,26 @@ function Module.DoLockChatBar(p1) --[[ Line: 142 ]]
 	end
 	if p1.TextBox then
 		p1.TextBox.Active = false
-		p1.TextBox.Focused:connect(function() --[[ Line: 159 ]]
+		p1.TextBox.Focused:connect(function()
 			-- upvalues: p1 (copy)
 			p1.TextBox:ReleaseFocus()
 		end)
 	end
 end
 
-function Module.SetUpTextBoxEvents(TextBox, TextBox1, Label, Button) --[[ Line: 165 ]]
+function Module.SetUpTextBoxEvents(TextBox, TextBox1, Label, Button)
 	-- upvalues: UserInputService (copy), ChatSettingsModule (copy)
 	for i, textBoxConnection in pairs(TextBox.TextBoxConnections) do
 		textBoxConnection:disconnect()
 		TextBox.TextBoxConnections[i] = nil
 	end
-	TextBox.TextBoxConnections.UserInputBegan = UserInputService.InputBegan:connect(function(Input, _) --[[ Line: 173 ]]
+	TextBox.TextBoxConnections.UserInputBegan = UserInputService.InputBegan:connect(function(Input, _)
 		-- upvalues: TextBox (copy), TextBox1 (copy), ChatSettingsModule (upval)
 		if Input.KeyCode == Enum.KeyCode.Backspace and TextBox:IsFocused() and TextBox1.Text == "" then
 			TextBox:SetChannelTarget(ChatSettingsModule.GeneralChannelName)
 		end
 	end)
-	TextBox.TextBoxConnections.TextBoxChanged = TextBox1.Changed:connect(function(p1) --[[ Line: 181 ]]
+	TextBox.TextBoxConnections.TextBoxChanged = TextBox1.Changed:connect(function(p1)
 		-- upvalues: TextBox (copy), TextBox1 (copy), ChatSettingsModule (upval)
 		if p1 == "AbsoluteSize" then
 			TextBox:CalculateSize()
@@ -179,7 +179,7 @@ function Module.SetUpTextBoxEvents(TextBox, TextBox1, Label, Button) --[[ Line: 
 		end
 	end)
 	
-	local function _(p1) --[[ Line: 210 | Named "UpdateOnFocusStatusChanged" ]]
+	local function _(p1)
 		-- upvalues: TextBox1 (copy), Label (copy)
 		if p1 or TextBox1.Text ~= "" then
 			Label.Visible = false
@@ -190,20 +190,20 @@ function Module.SetUpTextBoxEvents(TextBox, TextBox1, Label, Button) --[[ Line: 
 		end
 	end
 	
-	TextBox.TextBoxConnections.MessageModeClick = Button.MouseButton1Click:connect(function() --[[ Line: 218 ]]
+	TextBox.TextBoxConnections.MessageModeClick = Button.MouseButton1Click:connect(function()
 		-- upvalues: Button (copy), TextBox (copy), ChatSettingsModule (upval)
 		if Button.Text ~= "" then
 			TextBox:SetChannelTarget(ChatSettingsModule.GeneralChannelName)
 		end
 	end)
-	TextBox.TextBoxConnections.TextBoxFocused = TextBox1.Focused:connect(function() --[[ Line: 224 ]]
+	TextBox.TextBoxConnections.TextBoxFocused = TextBox1.Focused:connect(function()
 		-- upvalues: TextBox (copy), Label (copy)
 		if not TextBox.UserHasChatOff then
 			TextBox:CalculateSize()
 			Label.Visible = false
 		end
 	end)
-	TextBox.TextBoxConnections.TextBoxFocusLost = TextBox1.FocusLost:connect(function(_, CauseInput) --[[ Line: 231 ]]
+	TextBox.TextBoxConnections.TextBoxFocusLost = TextBox1.FocusLost:connect(function(_, CauseInput)
 		-- upvalues: TextBox (copy), TextBox1 (copy), Label (copy)
 		TextBox:CalculateSize()
 		
@@ -220,49 +220,49 @@ function Module.SetUpTextBoxEvents(TextBox, TextBox1, Label, Button) --[[ Line: 
 	end)
 end
 
-function Module.GetTextBox(p1) --[[ Line: 240 ]]
+function Module.GetTextBox(p1)
 	return p1.TextBox
 end
 
-function Module.GetMessageModeTextButton(p1) --[[ Line: 244 ]]
+function Module.GetMessageModeTextButton(p1)
 	return p1.GuiObjects.MessageModeTextButton
 end
 
-function Module.GetMessageModeTextLabel(p1) --[[ Line: 250 ]]
+function Module.GetMessageModeTextLabel(p1)
 	return p1:GetMessageModeTextButton()
 end
 
-function Module.IsFocused(p1) --[[ Line: 254 ]]
+function Module.IsFocused(p1)
 	return not p1.UserHasChatOff and p1:GetTextBox():IsFocused()
 end
 
-function Module.GetVisible(p1) --[[ Line: 262 ]]
+function Module.GetVisible(p1)
 	return p1.GuiObject.Visible
 end
 
-function Module.CaptureFocus(p1) --[[ Line: 266 ]]
+function Module.CaptureFocus(p1)
 	if not p1.UserHasChatOff then
 		p1:GetTextBox():CaptureFocus()
 	end
 end
 
-function Module.ReleaseFocus(p1, Submitted) --[[ Line: 272 ]]
+function Module.ReleaseFocus(p1, Submitted)
 	p1:GetTextBox():ReleaseFocus(Submitted)
 end
 
-function Module.ResetText(p1) --[[ Line: 276 ]]
+function Module.ResetText(p1)
 	p1:GetTextBox().Text = ""
 end
 
-function Module.SetText(p1, Text) --[[ Line: 280 ]]
+function Module.SetText(p1, Text)
 	p1:GetTextBox().Text = Text
 end
 
-function Module.GetEnabled(p1) --[[ Line: 284 ]]
+function Module.GetEnabled(p1)
 	return p1.GuiObject.Visible
 end
 
-function Module.SetEnabled(p1, Visible) --[[ Line: 288 ]]
+function Module.SetEnabled(p1, Visible)
 	if p1.UserHasChatOff then
 		p1.GuiObject.Visible = true
 		
@@ -272,31 +272,31 @@ function Module.SetEnabled(p1, Visible) --[[ Line: 288 ]]
 	end
 end
 
-function Module.SetTextLabelText(p1, Text) --[[ Line: 298 ]]
+function Module.SetTextLabelText(p1, Text)
 	if not p1.UserHasChatOff then
 		p1.TextLabel.Text = Text
 	end
 end
 
-function Module.SetTextBoxText(p1, Text) --[[ Line: 304 ]]
+function Module.SetTextBoxText(p1, Text)
 	p1.TextBox.Text = Text
 end
 
-function Module.GetTextBoxText(p1) --[[ Line: 308 ]]
+function Module.GetTextBoxText(p1)
 	return p1.TextBox.Text
 end
 
-function Module.ResetSize(p1) --[[ Line: 312 ]]
+function Module.ResetSize(p1)
 	p1.TargetYSize = 0
 	p1:TweenToTargetYSize()
 end
 
-local function _(Frame) --[[ Line: 317 | Named "measureSize" ]]
+local function _(Frame)
 	-- upvalues: TextService (copy)
 	return TextService:GetTextSize(Frame.Text, Frame.TextSize, Frame.Font, Vector2.new(Frame.AbsoluteSize.X, 10000))
 end
 
-function Module.CalculateSize(TextBox) --[[ Line: 326 ]]
+function Module.CalculateSize(TextBox)
 	-- upvalues: TextService (copy)
 	if TextBox.CalculatingSizeLock then return end
 	TextBox.CalculatingSizeLock = true
@@ -321,7 +321,7 @@ function Module.CalculateSize(TextBox) --[[ Line: 326 ]]
 	TextBox.CalculatingSizeLock = false
 end
 
-function Module.TweenToTargetYSize(p1) --[[ Line: 352 ]]
+function Module.TweenToTargetYSize(p1)
 	local _UDim2 = UDim2.new(1, 0, 1, p1.TargetYSize)
 	local Y = p1.GuiObject.AbsoluteSize.Y
 	p1.GuiObject.Size = _UDim2
@@ -329,7 +329,7 @@ function Module.TweenToTargetYSize(p1) --[[ Line: 352 ]]
 	p1.GuiObject.Size = p1.GuiObject.Size
 	local Smallest = math.min(1, math.abs(Y1 - Y) * (1 / p1.TweenPixelsPerSecond))
 	
-	if not pcall(function() --[[ Line: 364 ]]
+	if not pcall(function()
 		-- upvalues: p1 (copy), _UDim2 (copy), Smallest (copy)
 		p1.GuiObject:TweenSize(_UDim2, Enum.EasingDirection.Out, Enum.EasingStyle.Quad, Smallest, true)
 	end) then
@@ -337,7 +337,7 @@ function Module.TweenToTargetYSize(p1) --[[ Line: 352 ]]
 	end
 end
 
-function Module.SetTextSize(p1, TextSize) --[[ Line: 372 ]]
+function Module.SetTextSize(p1, TextSize)
 	if not p1:IsInCustomState() then
 		if p1.TextBox then
 			p1.TextBox.TextSize = TextSize
@@ -348,12 +348,12 @@ function Module.SetTextSize(p1, TextSize) --[[ Line: 372 ]]
 	end
 end
 
-function Module:GetDefaultChannelNameColor() --[[ Line: 383 ]]
+function Module:GetDefaultChannelNameColor()
 	-- upvalues: ChatSettingsModule (copy)
 	return if ChatSettingsModule.DefaultChannelNameColor then ChatSettingsModule.DefaultChannelNameColor else Color3.fromRGB(35, 76, 142)
 end
 
-function Module.SetChannelTarget(p1, GeneralChannelName) --[[ Line: 390 ]]
+function Module.SetChannelTarget(p1, GeneralChannelName)
 	-- upvalues: ChatSettingsModule (copy), ChatLocalizationModule (ref)
 	local MessageModeTextButton = p1.GuiObjects.MessageModeTextButton
 	local TextBox = p1.TextBox
@@ -390,11 +390,11 @@ function Module.SetChannelTarget(p1, GeneralChannelName) --[[ Line: 390 ]]
 	end
 end
 
-function Module.IsInCustomState(p1) --[[ Line: 430 ]]
+function Module.IsInCustomState(p1)
 	return p1.InCustomState
 end
 
-function Module.ResetCustomState(p1) --[[ Line: 434 ]]
+function Module.ResetCustomState(p1)
 	-- upvalues: ChatLocalizationModule (ref)
 	if p1.InCustomState then
 		p1.CustomState:Destroy()
@@ -406,7 +406,7 @@ function Module.ResetCustomState(p1) --[[ Line: 434 ]]
 	end
 end
 
-function Module.EnterWhisperState(TextBox, Player) --[[ Line: 451 ]]
+function Module.EnterWhisperState(TextBox, Player)
 	-- upvalues: WhisperModule (copy), ChatSettingsModule (copy)
 	TextBox:ResetCustomState()
 	
@@ -419,41 +419,41 @@ function Module.EnterWhisperState(TextBox, Player) --[[ Line: 451 ]]
 	TextBox:CaptureFocus()
 end
 
-function Module.GetCustomMessage(p1) --[[ Line: 475 ]]
+function Module.GetCustomMessage(p1)
 	return if p1.InCustomState then p1.CustomState:GetMessage() else nil
 end
 
-function Module.CustomStateProcessCompletedMessage(p1, _) --[[ Line: 482 ]]
+function Module.CustomStateProcessCompletedMessage(p1, _)
 	return if p1.InCustomState then p1.CustomState:ProcessCompletedMessage() else false
 end
 
-function Module.FadeOutBackground(p1, p2) --[[ Line: 489 ]]
+function Module.FadeOutBackground(p1, p2)
 	-- upvalues: CurveUtilModule (copy)
 	p1.AnimParams.Background_TargetTransparency = 1
 	p1.AnimParams.Background_NormalizedExptValue = CurveUtilModule:NormalizedDefaultExptValueInSeconds(p2)
 	p1:FadeOutText(p2)
 end
 
-function Module.FadeInBackground(p1, p2) --[[ Line: 495 ]]
+function Module.FadeInBackground(p1, p2)
 	-- upvalues: CurveUtilModule (copy)
 	p1.AnimParams.Background_TargetTransparency = 0.6
 	p1.AnimParams.Background_NormalizedExptValue = CurveUtilModule:NormalizedDefaultExptValueInSeconds(p2)
 	p1:FadeInText(p2)
 end
 
-function Module.FadeOutText(p1, p2) --[[ Line: 501 ]]
+function Module.FadeOutText(p1, p2)
 	-- upvalues: CurveUtilModule (copy)
 	p1.AnimParams.Text_TargetTransparency = 1
 	p1.AnimParams.Text_NormalizedExptValue = CurveUtilModule:NormalizedDefaultExptValueInSeconds(p2)
 end
 
-function Module.FadeInText(p1, p2) --[[ Line: 506 ]]
+function Module.FadeInText(p1, p2)
 	-- upvalues: CurveUtilModule (copy)
 	p1.AnimParams.Text_TargetTransparency = 0.4
 	p1.AnimParams.Text_NormalizedExptValue = CurveUtilModule:NormalizedDefaultExptValueInSeconds(p2)
 end
 
-function Module.AnimGuiObjects(p1) --[[ Line: 511 ]]
+function Module.AnimGuiObjects(p1)
 	p1.GuiObject.BackgroundTransparency = p1.AnimParams.Background_CurrentTransparency
 	p1.GuiObjects.TextBoxFrame.BackgroundTransparency = p1.AnimParams.Background_CurrentTransparency
 	p1.GuiObjects.TextLabel.TextTransparency = p1.AnimParams.Text_CurrentTransparency
@@ -461,7 +461,7 @@ function Module.AnimGuiObjects(p1) --[[ Line: 511 ]]
 	p1.GuiObjects.MessageModeTextButton.TextTransparency = p1.AnimParams.Text_CurrentTransparency
 end
 
-function Module.InitializeAnimParams(p1) --[[ Line: 520 ]]
+function Module.InitializeAnimParams(p1)
 	p1.AnimParams.Text_TargetTransparency = 0.4
 	p1.AnimParams.Text_CurrentTransparency = 0.4
 	p1.AnimParams.Text_NormalizedExptValue = 1
@@ -470,14 +470,14 @@ function Module.InitializeAnimParams(p1) --[[ Line: 520 ]]
 	p1.AnimParams.Background_NormalizedExptValue = 1
 end
 
-function Module.Update(p1, p2) --[[ Line: 530 ]]
+function Module.Update(p1, p2)
 	-- upvalues: CurveUtilModule (copy)
 	p1.AnimParams.Text_CurrentTransparency = CurveUtilModule:Expt(p1.AnimParams.Text_CurrentTransparency, p1.AnimParams.Text_TargetTransparency, p1.AnimParams.Text_NormalizedExptValue, p2)
 	p1.AnimParams.Background_CurrentTransparency = CurveUtilModule:Expt(p1.AnimParams.Background_CurrentTransparency, p1.AnimParams.Background_TargetTransparency, p1.AnimParams.Background_NormalizedExptValue, p2)
 	p1:AnimGuiObjects()
 end
 
-function Module.SetChannelNameColor(p1, p2, TextColor3) --[[ Line: 547 ]]
+function Module.SetChannelNameColor(p1, p2, TextColor3)
 	p1.ChannelNameColors[p2] = TextColor3
 	
 	if p1.GuiObjects.MessageModeTextButton.Text == p2 then
@@ -485,11 +485,11 @@ function Module.SetChannelNameColor(p1, p2, TextColor3) --[[ Line: 547 ]]
 	end
 end
 
-function Module.GetChannelNameColor(p1, TargetChannel) --[[ Line: 554 ]]
+function Module.GetChannelNameColor(p1, TargetChannel)
 	return p1.ChannelNameColors[TargetChannel]
 end
 
-function ChatBarModule.new(CommandProcessor, ChatWindow) --[[ Line: 561 ]]
+function ChatBarModule.new(CommandProcessor, ChatWindow)
 	-- upvalues: Module (copy), ChatSettingsModule (copy), Chat (copy), LocalPlayer (ref), RunService (copy)
 	local self = setmetatable({}, Module)
 	self.GuiObject = nil
@@ -513,15 +513,15 @@ function ChatBarModule.new(CommandProcessor, ChatWindow) --[[ Line: 561 ]]
 	self.ChannelNameColors = {}
 	self.UserHasChatOff = false
 	self:InitializeAnimParams()
-	ChatSettingsModule.SettingsChanged:connect(function(p1, TextSize) --[[ Line: 593 ]]
+	ChatSettingsModule.SettingsChanged:connect(function(p1, TextSize)
 		-- upvalues: self (copy)
 		if p1 == "ChatBarTextSize" then
 			self:SetTextSize(TextSize)
 		end
 	end)
-	coroutine.wrap(function() --[[ Line: 599 ]]
+	coroutine.wrap(function()
 		-- upvalues: Chat (upval), LocalPlayer (upval), RunService (upval), self (copy)
-		local Success, Result = pcall(function() --[[ Line: 600 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Chat (upval), LocalPlayer (upval)
 			return Chat:CanUserChatAsync(LocalPlayer.UserId)
 		end)

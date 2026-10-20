@@ -5,7 +5,7 @@ local _ = require(script.Parent.Parent.Config.FlyoutContentSettings)
 local PrimaryNavigationItemModule = require(script.Parent.PrimaryNavigationItem)
 local UseFlyoutItemNavigationModule = require(script.Parent.Parent.Hooks.useFlyoutItemNavigation)
 
-return function(p1) --[[ Line: 19 | Named "FlyoutNavigationItem" ]]
+return function(p1)
 	-- upvalues: UseFlyoutItemNavigationModule (copy), UseLocalizationFunction (copy), ReactModule (copy), PrimaryNavigationItemModule (copy)
 	return ReactModule.createElement(PrimaryNavigationItemModule, {
 		layoutOrder = p1.layoutOrder,

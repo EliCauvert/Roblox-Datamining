@@ -1,6 +1,6 @@
 ﻿local MapCatalogDiscountInfoToPriceDiscountDetailsModule = require(script:FindFirstAncestor("PurchasePrompt").Utils.mapCatalogDiscountInfoToPriceDiscountDetails)
 
-return function(p1, p2, CollectibleItemInstanceId, Days) --[[ Line: 11 | Named "resolveRefreshedProductInfo" ]]
+return function(p1, p2, CollectibleItemInstanceId, Days)
 	-- upvalues: MapCatalogDiscountInfoToPriceDiscountDetailsModule (copy)
 	if CollectibleItemInstanceId and CollectibleItemInstanceId ~= "" then
 		local LowestResalePrice = nil

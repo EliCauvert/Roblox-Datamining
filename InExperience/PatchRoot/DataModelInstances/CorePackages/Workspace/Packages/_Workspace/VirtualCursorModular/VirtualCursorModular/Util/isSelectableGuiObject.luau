@@ -1,6 +1,6 @@
 ﻿local FFlagLuaAppGamepadSelectionRespectsInteractable = require(script:FindFirstAncestor("VirtualCursorModular").Parent.SharedFlags).FFlagLuaAppGamepadSelectionRespectsInteractable
 
-return function(Frame): boolean --[[ Line: 7 | Named "isSelectableGuiObject" ]]
+return function(Frame): boolean
 	-- upvalues: FFlagLuaAppGamepadSelectionRespectsInteractable (copy)
 	if not Frame:IsA("GuiButton") and not Frame:IsA("TextBox") then
 		return false

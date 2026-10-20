@@ -6,9 +6,9 @@ local RegisterSocialComponentsModule = require(SocialServerDrivenUi.System.regis
 local RegisterSocialImpressionsModule = require(SocialServerDrivenUi.Impressions.registerSocialImpressions)
 local FFlagSduiCreateSocialTelemetryRegistriesModule = require(SocialServerDrivenUi.Flags.FFlagSduiCreateSocialTelemetryRegistries)
 
-return ReactModule.memo(function() --[[ Line: 15 | Named "SduiSocialRegister" ]]
+return ReactModule.memo(function()
 	-- upvalues: ReactModule (copy), RegisterSocialComponentsModule (copy), RegisterSocialActionsModule (copy), FFlagSduiCreateSocialTelemetryRegistriesModule (copy), RegisterSocialImpressionsModule (copy), RegisterSocialActionTelemetryHandlersModule (copy)
-	ReactModule.useEffect(function() --[[ Line: 16 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: RegisterSocialComponentsModule (upval), RegisterSocialActionsModule (upval), FFlagSduiCreateSocialTelemetryRegistriesModule (upval), RegisterSocialImpressionsModule (upval), RegisterSocialActionTelemetryHandlersModule (upval)
 		RegisterSocialComponentsModule()
 		RegisterSocialActionsModule()

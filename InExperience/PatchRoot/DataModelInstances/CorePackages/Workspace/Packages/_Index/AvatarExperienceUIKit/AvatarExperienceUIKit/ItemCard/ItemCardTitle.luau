@@ -5,7 +5,7 @@ local Text = FoundationModule.Text
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FFlagAXAddTextXAlignmentProp = require(Parent.AvatarExperienceFlags).FFlagAXAddTextXAlignmentProp
 
-local function ItemCardTitle(Label) --[[ Line: 19 ]]
+local function ItemCardTitle(Label)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Text (copy), FFlagAXAddTextXAlignmentProp (copy)
 	local UseTokensResult = UseTokensFunction()
 	

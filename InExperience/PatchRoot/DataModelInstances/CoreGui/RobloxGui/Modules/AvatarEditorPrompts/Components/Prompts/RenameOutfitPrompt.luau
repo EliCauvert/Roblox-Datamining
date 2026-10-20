@@ -23,24 +23,24 @@ RenameOutfitNamePrompt.validateProps = TModule.strictInterface({
 	showCustomOutfitNames = TModule.boolean
 })
 
-function RenameOutfitNamePrompt.init(p1) --[[ Line: 43 ]]
+function RenameOutfitNamePrompt.init(p1)
 	p1:setState({
 		outfitName = "",
 		alertPosition = UDim2.fromScale(0.5, 0.5)
 	})
 	
-	function p1.textUpdated(OutfitName) --[[ Line: 49 ]]
+	function p1.textUpdated(OutfitName)
 		-- upvalues: p1 (copy)
 		p1:setState({ outfitName = OutfitName })
 	end
 	
-	function p1.confirmRenameOutfit() --[[ Line: 55 ]]
+	function p1.confirmRenameOutfit()
 		-- upvalues: p1 (copy)
 		p1.props.performRenameOutfit(p1.state.outfitName)
 	end
 end
 
-function RenameOutfitNamePrompt.render(p1) --[[ Line: 60 ]]
+function RenameOutfitNamePrompt.render(p1)
 	-- upvalues: RoactModule (copy), InteractiveAlert (copy), RobloxTranslatorModule (copy), ButtonType (copy), PromptWithTextFieldModule (copy)
 	return if p1.props.showCustomOutfitNames then RoactModule.createElement(PromptWithTextFieldModule, {
 		fieldText = p1.state.outfitName,
@@ -88,22 +88,22 @@ function RenameOutfitNamePrompt.render(p1) --[[ Line: 60 ]]
 	})
 end
 
-return (AvatarEditorPromptsPolicyModule.connect(function(p1, _) --[[ Line: 141 ]]
+return (AvatarEditorPromptsPolicyModule.connect(function(p1, _)
 	return { showCustomOutfitNames = p1.getCustomOutfitNames() }
-end)((RoactRoduxModule.connect(function(p1) --[[ Line: 119 | Named "mapStateToProps" ]]
+end)((RoactRoduxModule.connect(function(p1)
 	return {
 		outfitId = p1.promptInfo.outfitId,
 		outfitName = p1.promptInfo.outfitName,
 		screenSize = p1.screenSize
 	}
-end, function(Callback) --[[ Line: 127 | Named "mapDispatchToProps" ]]
+end, function(Callback)
 	-- upvalues: SignalRenameOutfitPermissionDeniedModule (copy), PerformRenameOutfitModule (copy)
 	return {
-		signalRenameOutfitPermissionDenied = function() --[[ Line: 129 ]]
+		signalRenameOutfitPermissionDenied = function()
 			-- upvalues: Callback (copy), SignalRenameOutfitPermissionDeniedModule (upval)
 			return Callback(SignalRenameOutfitPermissionDeniedModule)
 		end,
-		performRenameOutfit = function(p1) --[[ Line: 133 ]]
+		performRenameOutfit = function(p1)
 			-- upvalues: Callback (copy), PerformRenameOutfitModule (upval)
 			return Callback(PerformRenameOutfitModule(p1))
 		end

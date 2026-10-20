@@ -5,20 +5,20 @@ local FoundationModule = require(Parent.Foundation)
 local ReactOtterModule = require(Parent.ReactOtter)
 local AnimationConstantsModule = require(AvatarExperienceCommon.AnimationConstants)
 
-local function useCategoryPillAnimation(TargetX, IsSelected, ShouldShowSubcategories) --[[ Line: 21 ]]
+local function useCategoryPillAnimation(TargetX, IsSelected, ShouldShowSubcategories)
 	-- upvalues: ReactOtterModule (copy), ReactModule (copy), AnimationConstantsModule (copy)
 	local NoIsSelected: boolean = ShouldShowSubcategories and not IsSelected
 	local v1: number = if NoIsSelected then 1 else 0
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(TargetX)
 	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = ReactOtterModule.useAnimatedBinding(v1)
-	ReactModule.useEffect(function() --[[ Line: 31 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), TargetX (copy), AnimationConstantsModule (upval)
 		UseAnimatedBindingResult2(ReactOtterModule.spring(TargetX, {
 			frequency = AnimationConstantsModule.FIntAXCategoryPillPositionAnimationFrequency,
 			dampingRatio = AnimationConstantsModule.FIntAXCategoryPillPositionAnimationDampingRatio
 		}))
 	end, { TargetX, UseAnimatedBindingResult2 })
-	ReactModule.useEffect(function() --[[ Line: 38 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: v1 (copy), UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval), AnimationConstantsModule (upval)
 		if v1 == 1 then
 			UseAnimatedBindingResult2_1(ReactOtterModule.instant(v1))
@@ -35,7 +35,7 @@ local function useCategoryPillAnimation(TargetX, IsSelected, ShouldShowSubcatego
 	return UseAnimatedBindingResult, UseAnimatedBindingResult1, NoIsSelected
 end
 
-return function(p1) --[[ Line: 52 | Named "AnimatedCategoryPill" ]]
+return function(p1)
 	-- upvalues: useCategoryPillAnimation (copy), ReactModule (copy), FoundationModule (copy)
 	local CatInfo = p1.catInfo
 	local PillIndex = p1.pillIndex
@@ -46,7 +46,7 @@ return function(p1) --[[ Line: 52 | Named "AnimatedCategoryPill" ]]
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "auto-xy anchor-center-left padding-x-xxsmall",
 		BackgroundTransparency = 1,
-		Position = UseCategoryPillAnimationResult:map(function(XOffset): UDim2 --[[ Line: 68 ]]
+		Position = UseCategoryPillAnimationResult:map(function(XOffset): UDim2
 			return UDim2.new(0, XOffset, 0.5, 0)
 		end),
 		GroupTransparency = UseCategoryPillAnimationResult2,

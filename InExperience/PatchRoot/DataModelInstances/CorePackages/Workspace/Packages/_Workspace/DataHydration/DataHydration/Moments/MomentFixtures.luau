@@ -36,15 +36,15 @@ local list6 = {
 	"rbxasset://textures/ui/Moments/Reactions/skull-large.png"
 }
 
-local function _(p1: number) --[[ Line: 133 | Named "rngFor" ]]
+local function _(p1: number)
 	return Random.new(p1 * 2654435761 + 2026)
 end
 
-local _ = function(p1, p2: number) --[[ Line: 137 | Named "cycle" ]]
+local _ = function(p1, p2: number)
 	return p1[(p2 - 1) % #p1 + 1]
 end
 
-local function makeMomentFeedItem(p1: number) --[[ Line: 143 ]]
+local function makeMomentFeedItem(p1: number)
 	-- upvalues: list5 (copy), list (copy), list1 (copy), list4 (copy), list6 (copy), list3 (copy), list2 (copy), MomentStatus (copy)
 	local _Random = Random.new(p1 * 2654435761 + 2026)
 	local NextNumberResult: number = _Random:NextNumber()
@@ -97,7 +97,7 @@ end
 
 return {
 	makeMomentFeedItem = makeMomentFeedItem,
-	buildMomentFeedItems = function(p1: number, p2: number) --[[ Line: 245 ]]
+	buildMomentFeedItems = function(p1: number, p2: number)
 		-- upvalues: makeMomentFeedItem (copy)
 		local List = {}
 		

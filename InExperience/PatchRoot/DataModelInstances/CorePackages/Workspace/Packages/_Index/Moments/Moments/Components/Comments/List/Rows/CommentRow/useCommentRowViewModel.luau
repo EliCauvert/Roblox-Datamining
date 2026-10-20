@@ -25,19 +25,19 @@ local GetMomentsCapabilitiesFunction = MomentsCommonModule.Stores.GetMomentsCapa
 local FeedbackManagerInjectionContext = require(Parent.UIBlox).Core.Control.FeedbackManagerInjectionContext
 local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local config = {
-	info = SignalsModule.createComputed(function(_) --[[ Line: 67 ]]
+	info = SignalsModule.createComputed(function(_)
 		return nil
 	end),
-	status = SignalsModule.createComputed(function(_): string --[[ Line: 70 ]]
+	status = SignalsModule.createComputed(function(_): string
 		return "Ready"
 	end)
 }
 
-local function _(p1) --[[ Line: 78 | Named "nonEmpty" ]]
+local function _(p1)
 	return if p1 == nil or p1 == "" then nil else p1
 end
 
-local _ = function(p1, EmoteId) --[[ Line: 82 | Named "countForEmote" ]]
+local _ = function(p1, EmoteId)
 	if p1 == nil or EmoteId == nil then
 		return 0
 	end
@@ -49,9 +49,9 @@ local _ = function(p1, EmoteId) --[[ Line: 82 | Named "countForEmote" ]]
 	return 0
 end
 
-return function(p2) --[[ Line: 94 | Named "useCommentRowViewModel" ]]
+return function(p2)
 	-- upvalues: ReactModule (copy), MomentsGetMomentsCommentsStoreModule (copy), SignalsReactModule (copy), UserProfileModule (copy), config (copy), UseLocalizationFunction (copy), UseCommentTimestampModule (copy), GetCommentReactionsStoreModule (copy), SignalsModule (copy), LocalizationModule (copy), LocalizationService (copy), FFlagMomentsEngagementMetricsFeature (copy), GetMomentsCapabilitiesFunction (copy), UsePreferredInputModule (copy), FeedbackManagerInjectionContext (copy), UseCommentActionsMenuModule (copy), UseCommentBodyClampModule (copy), UseCommentBodyToggleModule (copy), UseCommentBodyPressFeedbackModule (copy), UseMomentGesturesModule (copy), CommentLongPressTimingModule (copy)
-	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function() --[[ Line: 95 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function()
 		-- upvalues: MomentsGetMomentsCommentsStoreModule (upval), p2 (copy)
 		return MomentsGetMomentsCommentsStoreModule(false).getCachedComment(p2.commentId)
 	end, { p2.commentId }).data)
@@ -61,7 +61,7 @@ return function(p2) --[[ Line: 94 | Named "useCommentRowViewModel" ]]
 	if Number ~= nil and Number <= 0 then
 		Number = nil
 	end
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 105 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Number (ref), UserProfileModule (upval), config (upval)
 		return if Number == nil then config else UserProfileModule.getAndFetchUserInfo(Number)
 	end, { Number })
@@ -109,9 +109,9 @@ return function(p2) --[[ Line: 94 | Named "useCommentRowViewModel" ]]
 	local UseCommentTimestampModuleResult = UseCommentTimestampModule(if p2.createdAt == "" then if UseSignalStateResult == nil then "" else UseSignalStateResult.createdAt else p2.createdAt)
 	local Reactions = if UseSignalStateResult == nil then nil else UseSignalStateResult.reactions
 	local CommentReactionsStoreModule = GetCommentReactionsStoreModule(false)
-	local UseSignalStateResult3 = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 130 ]]
+	local UseSignalStateResult3 = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), CommentReactionsStoreModule (copy), p2 (copy), Reactions (copy)
-		return SignalsModule.createComputed(function(p3) --[[ Line: 131 ]]
+		return SignalsModule.createComputed(function(p3)
 			-- upvalues: CommentReactionsStoreModule (upval), p2 (upval), Reactions (upval)
 			return CommentReactionsStoreModule.getProjection(p2.feedItemId, p2.commentId, Reactions, p3)
 		end)
@@ -145,7 +145,7 @@ return function(p2) --[[ Line: 94 | Named "useCommentRowViewModel" ]]
 	local AbbreviateCountResult = LocalizationModule.abbreviateCount(Count, LocalizationService.RobloxLocaleId) or tostring(Count)
 	local Inverted = if FFlagMomentsEngagementMetricsFeature then not SignalsReactModule.useSignalState(GetMomentsCapabilitiesFunction(false).getIsEngagementMetricsEnabled) else nil
 	local NoIsEmoteIdMatch: boolean = HasThumbsUpEmoteId and (not NoCreatorEnabled and not IsEmoteIdMatch)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 161 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: HasThumbsUpEmoteId (copy), NoCreatorEnabled (copy), Reactions (copy), ThumbsUpEmoteId (copy), p2 (copy), IsEmoteIdMatch (copy)
 		if HasThumbsUpEmoteId and not NoCreatorEnabled and Reactions ~= nil and ThumbsUpEmoteId ~= nil then
 			p2.onToggleReaction(p2.commentId, ThumbsUpEmoteId, Reactions, IsEmoteIdMatch)
@@ -156,7 +156,7 @@ return function(p2) --[[ Line: 94 | Named "useCommentRowViewModel" ]]
 		HasThumbsUpEmoteId, NoCreatorEnabled, Reactions, ThumbsUpEmoteId,
 		p2.onToggleReaction, p2.commentId, IsEmoteIdMatch
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 178 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: HasThumbsUpEmoteId (copy), NoCreatorEnabled (copy), IsEmoteIdMatch (copy), Reactions (copy), ThumbsUpEmoteId (copy), p2 (copy)
 		if HasThumbsUpEmoteId and not NoCreatorEnabled and not IsEmoteIdMatch and Reactions ~= nil and ThumbsUpEmoteId ~= nil then
 			p2.onAddReaction(p2.commentId, ThumbsUpEmoteId, Reactions)
@@ -185,20 +185,20 @@ return function(p2) --[[ Line: 94 | Named "useCommentRowViewModel" ]]
 	local UseCommentBodyPressFeedbackModuleResult = UseCommentBodyPressFeedbackModule(p2.commentId, UseCommentBodyToggleModuleResult.canToggle)
 	local NoIsEmoteIdMatch1 = NoIsEmoteIdMatch or (V66 or UseCommentBodyToggleModuleResult.isActive)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-	ReactModule.useLayoutEffect(function() --[[ Line: 223 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(nil)
 	end, { p2.commentId })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 226 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), p2 (copy)
 		UseStateResult2(p2.commentId)
 	end, { p2.commentId })
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 229 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(nil)
 	end, {})
 	local OpenMenuFunction = UseCommentActionsMenuModuleResult.openMenu
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 233 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), UseContextResult (copy), OpenMenuFunction (copy)
 		UseStateResult2(nil)
 		UseContextResult("TileLongPress", "Press")

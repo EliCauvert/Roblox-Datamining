@@ -2,22 +2,22 @@
 local CryoModule = require(Parent.Cryo)
 local SignalsModule = require(Parent.Signals)
 
-return function() --[[ Line: 19 | Named "createStaleInventoryGrantStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy), CryoModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal({})
 	local t = {}
 	
 	return {
 		getStaleSearchUuids = Signal,
-		getRemovedItemIds = function(p1) --[[ Line: 30 ]]
+		getRemovedItemIds = function(p1)
 			-- upvalues: t (copy)
 			return t[p1]
 		end,
-		isSearchUuidStale = function(p1): boolean --[[ Line: 26 ]]
+		isSearchUuidStale = function(p1): boolean
 			-- upvalues: Signal (copy)
 			return Signal(false)[p1] == true
 		end,
-		markSearchUuidStale = function(Key, Tbl) --[[ Line: 34 ]]
+		markSearchUuidStale = function(Key, Tbl)
 			-- upvalues: t (copy), CryoModule (upval), Signal (copy), Signal2 (copy)
 			if Tbl then
 				local Entry = t[Key]
@@ -38,7 +38,7 @@ return function() --[[ Line: 19 | Named "createStaleInventoryGrantStore" ]]
 				return
 			end
 		end,
-		clearSearchUuidStale = function(Key) --[[ Line: 55 ]]
+		clearSearchUuidStale = function(Key)
 			-- upvalues: t (copy), Signal (copy), Signal2 (copy), CryoModule (upval)
 			t[Key] = nil
 			

@@ -7,7 +7,7 @@ local LocalizationRoactContextModule = require(script.Parent.LocalizationRoactCo
 local LocalizeStringsModule = require(script.Parent.localizeStrings)
 local LocalizationConsumer = ReactModule.Component:extend("LocalizationConsumer")
 
-function LocalizationConsumer.init(p1) --[[ Line: 14 ]]
+function LocalizationConsumer.init(p1)
 	-- upvalues: LocalizationService (copy)
 	local Localization = p1.props.localization
 	
@@ -16,7 +16,7 @@ function LocalizationConsumer.init(p1) --[[ Line: 14 ]]
 	end
 	p1.state = { locale = LocalizationService.RobloxLocaleId }
 	
-	function p1:updateLocalization() --[[ Line: 25 ]]
+	function p1:updateLocalization()
 		-- upvalues: Localization (copy), p1 (copy)
 		local Locale = Localization:GetLocale()
 		
@@ -28,13 +28,13 @@ function LocalizationConsumer.init(p1) --[[ Line: 14 ]]
 	p1.connections = { Localization.changed:connect(p1.updateLocalization) }
 end
 
-function LocalizationConsumer.willUnmount(p1) --[[ Line: 39 ]]
+function LocalizationConsumer.willUnmount(p1)
 	for _, connection in pairs(p1.connections) do
 		connection:disconnect()
 	end
 end
 
-function LocalizationConsumer.render(p2) --[[ Line: 45 ]]
+function LocalizationConsumer.render(p2)
 	-- upvalues: ArgCheckModule (copy), LocalizeStringsModule (copy), RobloxLocaleIdKeyModule (copy)
 	local Localization = p2.props.localization
 	local RenderFunction = p2.props.render
@@ -47,10 +47,10 @@ function LocalizationConsumer.render(p2) --[[ Line: 45 ]]
 	return RenderFunction(LocalizeStringsModuleResult)
 end
 
-return function(p2) --[[ Line: 60 | Named "LocalizationContextConsumer" ]]
+return function(p2)
 	-- upvalues: ReactModule (copy), LocalizationRoactContextModule (copy), LocalizationConsumer (copy)
 	return ReactModule.createElement(LocalizationRoactContextModule.Consumer, {
-		render = function(Localization) --[[ Line: 62 ]]
+		render = function(Localization)
 			-- upvalues: ReactModule (upval), LocalizationConsumer (upval), p2 (copy)
 			return ReactModule.createElement(LocalizationConsumer, {
 				localization = Localization,

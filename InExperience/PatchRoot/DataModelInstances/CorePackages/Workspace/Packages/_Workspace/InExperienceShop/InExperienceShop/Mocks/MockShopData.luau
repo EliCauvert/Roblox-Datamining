@@ -187,7 +187,7 @@ local list1 = {
 	}
 }
 
-local function pickRandomItems() --[[ Line: 345 ]]
+local function pickRandomItems()
 	-- upvalues: list (copy), list1 (copy)
 	local Buffer = table.create(#list + #list1)
 	table.move(list, 1, #list, 1, Buffer)
@@ -294,7 +294,7 @@ local list2 = {
 	{ name = "Gear", items = pickRandomItems() }
 }
 
-local function buildShopData() --[[ Line: 384 ]]
+local function buildShopData()
 	-- upvalues: list2 (copy)
 	local Buffer = table.create(#list2)
 	local Sections = {}
@@ -322,7 +322,7 @@ end
 return {
 	MOCK_PRODUCT_ITEMS = list,
 	MOCK_GAMEPASS_ITEMS = list1,
-	buildShopItems = function() --[[ Line: 416 ]]
+	buildShopItems = function()
 		-- upvalues: list2 (copy)
 		local Categories = {}
 		
@@ -339,9 +339,9 @@ return {
 		end
 		return { categories = Categories }
 	end,
-	getShopData = function(p1) --[[ Line: 453 ]]
+	getShopData = function(p1)
 		-- upvalues: PromiseModule (copy), buildShopData (copy)
-		return PromiseModule.delay(if p1 == nil then 0.5 else p1):andThen(function() --[[ Line: 455 ]]
+		return PromiseModule.delay(if p1 == nil then 0.5 else p1):andThen(function()
 			-- upvalues: buildShopData (upval)
 			return (buildShopData())
 		end)

@@ -9,7 +9,7 @@ local Skeleton = FoundationModule.Skeleton
 local Radius = FoundationModule.Enums.Radius
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1) --[[ Line: 22 | Named "InExperienceDetailsPromptPlayButton" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), DataHydrationModule (copy), ReactModule (copy), Skeleton (copy), Radius (copy), Button (copy), IconName (copy), ButtonVariant (copy)
 	local UseTokensResult = UseTokensFunction()
 	

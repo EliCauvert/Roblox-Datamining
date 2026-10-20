@@ -5,7 +5,7 @@ local FFlagEnableVerifiedBadgeStore = SharedFlagsModule.FFlagEnableVerifiedBadge
 local FFlagEnableBlackbirdCheck = SharedFlagsModule.FFlagEnableBlackbirdCheck
 
 return {
-	update = function(p1, p2) --[[ Line: 60 ]]
+	update = function(p1, p2)
 		-- upvalues: FFlagEnableVerifiedBadgeStore (copy), FFlagEnableBlackbirdCheck (copy)
 		if not p2 or type(p2) ~= "table" then return end
 		local Names = p2.names
@@ -63,7 +63,7 @@ return {
 			p1.setHasRobloxSubscription(HasRobloxSubscription)
 		end
 	end,
-	create = function(UserId) --[[ Line: 113 ]]
+	create = function(UserId)
 		-- upvalues: CreateSignalFunction (copy), FFlagEnableVerifiedBadgeStore (copy), FFlagEnableBlackbirdCheck (copy)
 		local Signal, Signal2 = CreateSignalFunction("")
 		local Signal1, Signal2_1 = CreateSignalFunction("")

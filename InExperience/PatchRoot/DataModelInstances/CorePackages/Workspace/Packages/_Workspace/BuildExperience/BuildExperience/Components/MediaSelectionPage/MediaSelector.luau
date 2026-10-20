@@ -26,7 +26,7 @@ local FFlagMediaSelectorErrorLoggingModule = require(BuildExperience.Flags.FFlag
 local FormatErrorModule = require(BuildExperience.utils.formatError)
 local Snackbar = FoundationModule.Snackbar
 
-return function(p1) --[[ Line: 55 | Named "IconThumbnailsEditor" ]]
+return function(p1)
 	-- upvalues: UseCompositionLayoutFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagMediaSelectorErrorLoggingModule (copy), GetGameMediaForUniverseModule (copy), ReactModule (copy), UniverseConfigurationModule (copy), SignalsReactModule (copy), UseTokensFunction (copy), CreateGalleryCaptureSourceModule (copy), UseMediaUpdaterModule (copy), GetGameMediaStoreFunction (copy), FormatErrorModule (copy), UploadCaptureAsyncModule (copy), GetThumbnailUrlAsyncModule (copy), PromiseModule (copy), CreateImageAssetAsyncModule (copy), CaptureSelectionViewModule (copy), FilmstripSlotModule (copy), View (copy), Snackbar (copy), MediaPreviewModule (copy), ScrollView (copy), FoundationModule (copy)
 	local UseCompositionLayoutResult = UseCompositionLayoutFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -37,7 +37,7 @@ return function(p1) --[[ Line: 55 | Named "IconThumbnailsEditor" ]]
 	local CaptureLibrary = UseLocalizationResult.captureLibrary
 	local Delete = UseLocalizationResult.delete
 	local GameMediaForUniverseModule = GetGameMediaForUniverseModule(p1.universeId)
-	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function() --[[ Line: 69 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function()
 		-- upvalues: UniverseConfigurationModule (upval), p1 (copy)
 		return UniverseConfigurationModule.getUniverseConfigurationStore().getAndFetchSummary(p1.universeId)
 	end, { p1.universeId }).data)
@@ -64,7 +64,7 @@ return function(p1) --[[ Line: 55 | Named "IconThumbnailsEditor" ]]
 	UseRefResult4.current = UseStateResult1
 	ReactModule.useRef(UseStateResult).current = UseStateResult
 	local UseMediaUpdaterModuleResult = UseMediaUpdaterModule()
-	ReactModule.useEffect(function() --[[ Line: 101 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseStateResult2_1 (copy), GameMediaForUniverseModule (copy)
 		if UseRefResult.current == 0 then
 			UseStateResult2_1(GameMediaForUniverseModule.thumbnails)
@@ -72,13 +72,13 @@ return function(p1) --[[ Line: 55 | Named "IconThumbnailsEditor" ]]
 			return
 		end
 	end, { GameMediaForUniverseModule.thumbnails })
-	ReactModule.useEffect(function() --[[ Line: 112 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseStateResult2 (copy), GameMediaForUniverseModule (copy)
 		if UseRefResult.current == 0 then
 			UseStateResult2(GameMediaForUniverseModule.icon)
 		end
 	end, { GameMediaForUniverseModule.icon })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 118 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseStateResult1 (copy)
 		local List = {}
 		
@@ -90,9 +90,9 @@ return function(p1) --[[ Line: 55 | Named "IconThumbnailsEditor" ]]
 	local HasText = Text ~= nil
 	local HasText1: boolean = #UseMemoResult < 10 and HasText
 	local Id = if UseMemoResult[1] then UseMemoResult[1].id else nil
-	local UseResult = ReactModule.useCallback(function(p2, p3) --[[ Line: 133 ]]
+	local UseResult = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: UseStateResult2_6 (copy)
-		UseStateResult2_6(function(Tbl) --[[ Line: 134 ]]
+		UseStateResult2_6(function(Tbl)
 			-- upvalues: p2 (copy), p3 (copy)
 			local Copy = table.clone(Tbl)
 			Copy[p2] = if p3 then true else nil
@@ -100,19 +100,19 @@ return function(p1) --[[ Line: 55 | Named "IconThumbnailsEditor" ]]
 			return Copy
 		end)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 141 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy)
 		UseRefResult.current += 1
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 145 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy)
 		UseRefResult.current = math.max(0, UseRefResult.current - 1)
 	end, {})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 149 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_7 (copy)
 		UseStateResult2_7("")
 	end, {})
-	local UseResult4 = ReactModule.useCallback(function(Id1) --[[ Line: 153 ]]
+	local UseResult4 = ReactModule.useCallback(function(Id1)
 		-- upvalues: HasText (copy), CaptureLibrary (copy), Id (copy), Delete (copy)
 		local List = {}
 		
@@ -132,7 +132,7 @@ return function(p1) --[[ Line: 55 | Named "IconThumbnailsEditor" ]]
 		end
 		return { { items = List } }
 	end, { HasText, CaptureLibrary, Delete, Id })
-	local UseResult5 = ReactModule.useCallback(function(p2) --[[ Line: 174 ]]
+	local UseResult5 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult7 (copy), UseRefResult1 (copy), UseStateResult2_4 (copy), UseStateResult2_3 (copy)
 		if not UseStateResult7[p2] and (not UseRefResult1.current or p2 == "icon" or p2 == "empty") then
 			UseStateResult2_4(p2)
@@ -141,7 +141,7 @@ return function(p1) --[[ Line: 55 | Named "IconThumbnailsEditor" ]]
 			return
 		end
 	end, { UseStateResult7 })
-	local UseResult6 = ReactModule.useCallback(function(p2) --[[ Line: 183 ]]
+	local UseResult6 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_3 (copy), UseRefResult1 (copy), UseStateResult5 (copy), HasText (copy), UseStateResult2_5 (copy), Editor2 (copy), Text (copy), UseStateResult7 (copy), UseStateResult1 (copy), UseResult1 (copy), UseResult (copy), UseStateResult2_1 (copy), UseStateResult3 (copy), UseStateResult2_2 (copy), UseMediaUpdaterModuleResult (copy), GetGameMediaStoreFunction (upval), p1 (copy), FFlagMediaSelectorErrorLoggingModule (upval), FormatErrorModule (upval), UseStateResult2_7 (copy), UseLocalizationResult1 (copy), UseResult2 (copy)
 		UseStateResult2_3(false)
 		
@@ -172,7 +172,7 @@ return function(p1) --[[ Line: 55 | Named "IconThumbnailsEditor" ]]
 			UseRefResult1.current = true
 			UseResult1()
 			UseResult(UseStateResult5, true)
-			UseStateResult2_1(function(List) --[[ Line: 219 ]]
+			UseStateResult2_1(function(List)
 				-- upvalues: UseStateResult5 (copy)
 				local List1 = {}
 				
@@ -187,16 +187,16 @@ return function(p1) --[[ Line: 55 | Named "IconThumbnailsEditor" ]]
 			if UseStateResult3.kind == "thumbnail" and UseStateResult3.id == UseStateResult5 then
 				UseStateResult2_2({ kind = "icon" })
 			end
-			UseMediaUpdaterModuleResult.removePreview(Text, AssetResourceName):andThen(function() --[[ Line: 234 ]]
+			UseMediaUpdaterModuleResult.removePreview(Text, AssetResourceName):andThen(function()
 				-- upvalues: GetGameMediaStoreFunction (upval), p1 (upval)
 				GetGameMediaStoreFunction().fetchGameMedia((tostring(p1.universeId)))
-			end):catch(function(Err) --[[ Line: 237 ]]
+			end):catch(function(Err)
 				-- upvalues: FFlagMediaSelectorErrorLoggingModule (upval), FormatErrorModule (upval), UseStateResult2_7 (upval), UseLocalizationResult1 (upval), UseStateResult2_1 (upval), UseStateResult5 (copy), v1 (ref), v3 (copy)
 				if FFlagMediaSelectorErrorLoggingModule then
 					warn(`[BuildExperience] MediaSelector delete failed: {FormatErrorModule(Err)}`)
 					UseStateResult2_7(UseLocalizationResult1.mediaError)
 				end
-				UseStateResult2_1(function(Tbl) --[[ Line: 242 ]]
+				UseStateResult2_1(function(Tbl)
 					-- upvalues: UseStateResult5 (upval), v1 (upval), v3 (upval)
 					for _, value in Tbl do
 						if value.id == UseStateResult5 then
@@ -208,7 +208,7 @@ return function(p1) --[[ Line: 55 | Named "IconThumbnailsEditor" ]]
 					
 					return Copy
 				end)
-			end):finally(function() --[[ Line: 253 ]]
+			end):finally(function()
 				-- upvalues: UseRefResult1 (upval), UseResult (upval), UseStateResult5 (copy), UseResult2 (upval)
 				UseRefResult1.current = false
 				UseResult(UseStateResult5, false)
@@ -220,31 +220,31 @@ return function(p1) --[[ Line: 55 | Named "IconThumbnailsEditor" ]]
 		Text, HasText, UseStateResult7, UseResult1, UseResult2, UseResult,
 		UseLocalizationResult1, p1.universeId
 	})
-	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 276 ]]
+	local UseResult7 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_3 (copy)
 		UseStateResult2_3(false)
 	end, {})
-	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 280 ]]
+	local UseResult8 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_2 (copy)
 		UseStateResult2_2({ kind = "icon" })
 	end, {})
-	local UseResult9 = ReactModule.useCallback(function(Id) --[[ Line: 284 ]]
+	local UseResult9 = ReactModule.useCallback(function(Id)
 		-- upvalues: UseStateResult2_2 (copy)
 		UseStateResult2_2({ kind = "thumbnail", id = Id })
 	end, {})
-	local UseResult10 = ReactModule.useCallback(function() --[[ Line: 288 ]]
+	local UseResult10 = ReactModule.useCallback(function()
 		-- upvalues: UseResult5 (copy)
 		UseResult5("icon")
 	end, { UseResult5 })
-	local UseResult11 = ReactModule.useCallback(function() --[[ Line: 292 ]]
+	local UseResult11 = ReactModule.useCallback(function()
 		-- upvalues: UseResult5 (copy)
 		UseResult5("empty")
 	end, { UseResult5 })
-	local UseResult12 = ReactModule.useCallback(function(p3) --[[ Line: 296 ]]
+	local UseResult12 = ReactModule.useCallback(function(p3)
 		-- upvalues: UseResult5 (copy)
 		UseResult5(p3)
 	end, { UseResult5 })
-	local UseResult13 = ReactModule.useCallback(function(p3) --[[ Line: 301 ]]
+	local UseResult13 = ReactModule.useCallback(function(p3)
 		-- upvalues: UseStateResult6 (copy), Text (copy), UseStateResult7 (copy), Editor2 (copy), UseStateResult2_5 (copy), UseRefResult4 (copy), UseRefResult2 (copy), UseResult1 (copy), UseResult (copy), UseStateResult2_2 (copy), UseStateResult2_1 (copy), UploadCaptureAsyncModule (upval), GetThumbnailUrlAsyncModule (upval), PromiseModule (upval), UseSignalStateResult (copy), CreateImageAssetAsyncModule (upval), UseMediaUpdaterModuleResult (copy), UseStateResult2 (copy), GetGameMediaStoreFunction (upval), p1 (copy), FFlagMediaSelectorErrorLoggingModule (upval), FormatErrorModule (upval), UseStateResult2_7 (copy), UseLocalizationResult1 (copy), UseResult2 (copy)
 		if UseStateResult6 == nil or Text == nil or UseStateResult7[UseStateResult6] then return end
 		Editor2("editor")
@@ -277,7 +277,7 @@ return function(p1) --[[ Line: 55 | Named "IconThumbnailsEditor" ]]
 		if UseStateResult6 == "icon" then
 			UseStateResult2_2({ kind = "icon" })
 		elseif UseStateResult6 == "empty" then
-			UseStateResult2_1(function(Tbl) --[[ Line: 342 ]]
+			UseStateResult2_1(function(Tbl)
 				-- upvalues: ThumbnailName (ref)
 				local Copy = table.clone(Tbl)
 				table.insert(Copy, {
@@ -290,7 +290,7 @@ return function(p1) --[[ Line: 55 | Named "IconThumbnailsEditor" ]]
 			end)
 			UseStateResult2_2({ kind = "thumbnail", id = ThumbnailName })
 		else
-			UseStateResult2_1(function(Tbl) --[[ Line: 353 ]]
+			UseStateResult2_1(function(Tbl)
 				-- upvalues: UseStateResult6 (copy)
 				local Copy = table.clone(Tbl)
 				
@@ -304,10 +304,10 @@ return function(p1) --[[ Line: 55 | Named "IconThumbnailsEditor" ]]
 				return Copy
 			end)
 		end
-		local Promise = UploadCaptureAsyncModule(p3):andThen(function(Result) --[[ Line: 370 ]]
+		local Promise = UploadCaptureAsyncModule(p3):andThen(function(Result)
 			-- upvalues: GetThumbnailUrlAsyncModule (upval)
 			return GetThumbnailUrlAsyncModule(Result.assetId)
-		end):andThen(function(Result) --[[ Line: 373 ]]
+		end):andThen(function(Result)
 			-- upvalues: PromiseModule (upval), UseSignalStateResult (upval), CreateImageAssetAsyncModule (upval), UseStateResult6 (copy)
 			if typeof(Result) == "table" and Result.status == "in_review" then
 				return PromiseModule.reject({
@@ -320,7 +320,7 @@ return function(p1) --[[ Line: 55 | Named "IconThumbnailsEditor" ]]
 				return CreateImageAssetAsyncModule(ImageUrl, nil, UseStateResult6 == "icon", if UseSignalStateResult then {
 					creatorType = UseSignalStateResult.creatorType,
 					creatorTargetId = UseSignalStateResult.creatorTargetId
-				} else nil):andThen(function(Result) --[[ Line: 387 ]]
+				} else nil):andThen(function(Result)
 					-- upvalues: ImageUrl (copy)
 					return {
 						imageAssetId = tostring(Result.assetId),
@@ -329,19 +329,19 @@ return function(p1) --[[ Line: 55 | Named "IconThumbnailsEditor" ]]
 				end)
 			end
 		end)
-		local v6 = Promise:andThen(function(Result) --[[ Line: 395 ]]
+		local v6 = Promise:andThen(function(Result)
 			return Result.imageAssetId
 		end)
-		;(if UseStateResult6 == "icon" then UseMediaUpdaterModuleResult.setIcon(Text, v6) elseif UseStateResult6 == "empty" then UseMediaUpdaterModuleResult.addPreview(Text, v6) else UseMediaUpdaterModuleResult.replacePreview(Text, v6, v5.assetResourceName)):andThen(function() --[[ Line: 413 ]]
+		;(if UseStateResult6 == "icon" then UseMediaUpdaterModuleResult.setIcon(Text, v6) elseif UseStateResult6 == "empty" then UseMediaUpdaterModuleResult.addPreview(Text, v6) else UseMediaUpdaterModuleResult.replacePreview(Text, v6, v5.assetResourceName)):andThen(function()
 			-- upvalues: Promise (copy)
 			return Promise
-		end):andThen(function(Result) --[[ Line: 416 ]]
+		end):andThen(function(Result)
 			-- upvalues: UseStateResult6 (copy), UseStateResult2 (upval), UseStateResult2_1 (upval), ThumbnailName (ref), UseStateResult2_2 (upval), GetGameMediaStoreFunction (upval), p1 (upval)
 			if UseStateResult6 == "icon" then
 				UseStateResult2(Result.displayUrl)
 			else
 				local ImageAssetId = Result.imageAssetId
-				UseStateResult2_1(function(Tbl) --[[ Line: 424 ]]
+				UseStateResult2_1(function(Tbl)
 					-- upvalues: ThumbnailName (upval), ImageAssetId (copy), Result (copy)
 					local Copy = table.clone(Tbl)
 					
@@ -359,13 +359,13 @@ return function(p1) --[[ Line: 55 | Named "IconThumbnailsEditor" ]]
 					end
 					return Copy
 				end)
-				UseStateResult2_2(function(p4) --[[ Line: 439 ]]
+				UseStateResult2_2(function(p4)
 					-- upvalues: ThumbnailName (upval), ImageAssetId (copy)
 					return if p4.kind == "thumbnail" and p4.id == ThumbnailName then { kind = "thumbnail", id = ImageAssetId } else p4
 				end)
 			end
 			GetGameMediaStoreFunction().fetchGameMedia((tostring(p1.universeId)))
-		end):catch(function(Err) --[[ Line: 448 ]]
+		end):catch(function(Err)
 			-- upvalues: FFlagMediaSelectorErrorLoggingModule (upval), FormatErrorModule (upval), UseStateResult2_7 (upval), UseLocalizationResult1 (upval), UseStateResult6 (copy), UseStateResult2_1 (upval), ThumbnailName (ref), UseStateResult2_2 (upval), v5 (ref)
 			if FFlagMediaSelectorErrorLoggingModule then
 				warn(`[BuildExperience] MediaSelector upload failed: {FormatErrorModule(Err)}`)
@@ -373,7 +373,7 @@ return function(p1) --[[ Line: 55 | Named "IconThumbnailsEditor" ]]
 			end
 			if UseStateResult6 == "icon" then return end
 			if UseStateResult6 == "empty" then
-				UseStateResult2_1(function(List) --[[ Line: 456 ]]
+				UseStateResult2_1(function(List)
 					-- upvalues: ThumbnailName (upval)
 					local List1 = {}
 					
@@ -384,7 +384,7 @@ return function(p1) --[[ Line: 55 | Named "IconThumbnailsEditor" ]]
 					end
 					return List1
 				end)
-				UseStateResult2_2(function(p4) --[[ Line: 465 ]]
+				UseStateResult2_2(function(p4)
 					-- upvalues: ThumbnailName (upval)
 					return if p4.kind == "thumbnail" and p4.id == ThumbnailName then { kind = "icon" } else p4
 				end)
@@ -392,7 +392,7 @@ return function(p1) --[[ Line: 55 | Named "IconThumbnailsEditor" ]]
 				return
 			else
 				local v7 = v5
-				UseStateResult2_1(function(Tbl) --[[ Line: 472 ]]
+				UseStateResult2_1(function(Tbl)
 					-- upvalues: ThumbnailName (upval), v7 (copy)
 					local Copy = table.clone(Tbl)
 					
@@ -406,7 +406,7 @@ return function(p1) --[[ Line: 55 | Named "IconThumbnailsEditor" ]]
 					return Copy
 				end)
 			end
-		end):finally(function() --[[ Line: 484 ]]
+		end):finally(function()
 			-- upvalues: UseResult (upval), ThumbnailName (ref), UseResult2 (upval)
 			UseResult(ThumbnailName, false)
 			UseResult2()
@@ -416,26 +416,26 @@ return function(p1) --[[ Line: 55 | Named "IconThumbnailsEditor" ]]
 		UseStateResult7, UseResult1, UseResult2, UseResult, UseLocalizationResult1,
 		p1.universeId
 	})
-	local UseResult14 = ReactModule.useCallback(function() --[[ Line: 503 ]]
+	local UseResult14 = ReactModule.useCallback(function()
 		-- upvalues: Editor2 (copy), UseStateResult2_5 (copy)
 		Editor2("editor")
 		UseStateResult2_5(nil)
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 508 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), Editor (copy), UseResult14 (copy)
 		local BackHandlerRef = p1.backHandlerRef
 		
 		if BackHandlerRef then
 			BackHandlerRef.current = if Editor == "captureSelection" then UseResult14 else nil
 		end
-		return function() --[[ Line: 513 ]]
+		return function()
 			-- upvalues: BackHandlerRef (copy)
 			if BackHandlerRef then
 				BackHandlerRef.current = nil
 			end
 		end
 	end, { Editor, UseResult14, p1.backHandlerRef })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 520 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseStateResult5 (copy), UseResult4 (copy)
 		return if UseStateResult5 then UseResult4(UseStateResult5) else { { items = {} } }
 	end, { UseStateResult5, UseResult4 })
@@ -499,11 +499,11 @@ return function(p1) --[[ Line: 55 | Named "IconThumbnailsEditor" ]]
 			menuItems = if IsUseStateResultMatch then UseMemoResult1 else nil,
 			onMenuActivated = UseResult6,
 			onMenuClose = UseResult7,
-			onSelect = function() --[[ Line: 590 ]]
+			onSelect = function()
 				-- upvalues: UseResult9 (copy), Id1 (copy)
 				UseResult9(Id1)
 			end,
-			onEditPressed = if HasText or Id1 ~= Id then function() --[[ Line: 594 ]]
+			onEditPressed = if HasText or Id1 ~= Id then function()
 				-- upvalues: UseResult12 (copy), Id1 (copy)
 				UseResult12(Id1)
 			end else nil,

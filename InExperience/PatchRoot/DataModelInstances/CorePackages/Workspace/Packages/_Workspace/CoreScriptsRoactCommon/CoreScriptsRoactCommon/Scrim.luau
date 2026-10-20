@@ -4,7 +4,7 @@ local FoundationModule = require(Parent.Foundation)
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, _) --[[ Line: 15 | Named "Scrim" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, _)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy)
 	return ReactModule.createElement(View, {
 		tag = "size-full",

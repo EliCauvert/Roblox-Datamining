@@ -12,7 +12,7 @@ return {
 	},
 	requiredData = { ValidationEnumsModule.SharedDataMember.rootInstance },
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 20 ]]
+	run = function(p1, p2)
 		-- upvalues: ValidationEnumsModule (copy), ErrorSourceStringsModule (copy)
 		if p2.consumerConfig.consumerEnv == ValidationEnumsModule.ConsumerEnv.IEC or p2.consumerConfig.source == "AutoSetup" then return end
 		local RootInstance = p2.rootInstance

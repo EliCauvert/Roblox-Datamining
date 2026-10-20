@@ -32,14 +32,14 @@ local GetFFlagEnableAuditForSinglePageSignUpFunction = SharedFlagsModule.GetFFla
 local GetFFlagAuthCollapsingValidatorFoundationInputFunction = SharedFlagsModule.GetFFlagAuthCollapsingValidatorFoundationInput
 local FFlagAuthValidatorStyleOverrides = SharedFlagsModule.FFlagAuthValidatorStyleOverrides
 
-local function _(p1, State) --[[ Line: 59 | Named "computeIsInErrorState" ]]
+local function _(p1, State)
 	-- upvalues: FFlagSignUpTrackFailedRequest (copy), InputValidity (copy)
 	return if FFlagSignUpTrackFailedRequest and p1.hasFieldFailed then true elseif p1.prerequisiteMet then State.inputTextToValidate ~= "" and (State.isInputTextValid == InputValidity.Invalid and State.interactionBegan) else State.textBoxFocused or State.interactionBegan and State.inputTextToValidate ~= ""
 end
 
 CollapsingTextInputValidator.defaultProps = { prerequisiteMet = true, captureFocusOnTapStart = true }
 
-function CollapsingTextInputValidator.init(p1) --[[ Line: 80 ]]
+function CollapsingTextInputValidator.init(p1)
 	-- upvalues: InputValidity (copy), RoactModule (copy), FFlagAuthValidatorStyleOverrides (copy), GetFFlagLuaAppEnable10ftSignUpViewFunction (copy), FFlagSignUpTrackFailedRequest (copy), WithStyleFunction (copy), EnableAndroidPasswordSuggestionEngineFeature (copy), PasswordBox (copy), GenericTextBox (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), GetFFlagLuaAppEnableOpenTypeSignUpPageFixFunction (copy), OpenTypeSupport (copy), TextInput (copy)
 	p1.state = {
 		inputTextToValidate = "",
@@ -59,7 +59,7 @@ function CollapsingTextInputValidator.init(p1) --[[ Line: 80 ]]
 		p1.foundationProxyText = p1.props.prefilledText or ""
 		p1.foundationTextBoxProxy = nil
 	end
-	function p1.getFrameRef() --[[ Line: 103 ]]
+	function p1.getFrameRef()
 		-- upvalues: p1 (copy)
 		return p1.props.frameRef or p1.frameRef
 	end
@@ -69,23 +69,23 @@ function CollapsingTextInputValidator.init(p1) --[[ Line: 80 ]]
 	p1.issueCheckmarkTransparency, p1.updateIssueCheckmarkTransparency = RoactModule.createBinding(1)
 	p1.issueTrackerHeight, p1.updateIssueTrackerHeight = RoactModule.createBinding(UDim2.new(1, 0, 0, 0))
 	
-	function p1.getContentGap() --[[ Line: 114 ]]
+	function p1.getContentGap()
 		-- upvalues: FFlagAuthValidatorStyleOverrides (upval), p1 (copy), GetFFlagLuaAppEnable10ftSignUpViewFunction (upval)
 		return if FFlagAuthValidatorStyleOverrides and p1.props.contentGapOverride then p1.props.contentGapOverride elseif GetFFlagLuaAppEnable10ftSignUpViewFunction() and p1.props.tokens then p1.props.tokens.boxPadding else 5
 	end
 	
-	p1.issueTrailingPadding = p1.issueTrackerHeight:map(function(p2): UDim --[[ Line: 126 ]]
+	p1.issueTrailingPadding = p1.issueTrackerHeight:map(function(p2): UDim
 		-- upvalues: p1 (copy)
 		return UDim.new(0, -math.max(0, p1.getContentGap() - p2.Y.Offset))
 	end)
 	p1.springOptions = { frequency = 3 }
 	
-	function p1.onSizeChange(p2, Frame) --[[ Line: 134 ]]
+	function p1.onSizeChange(p2, Frame)
 		-- upvalues: p1 (copy)
 		local AbsoluteSize = Frame.AbsoluteSize
 		
 		if AbsoluteSize.X > 0 and AbsoluteSize.Y > 0 then
-			spawn(function() --[[ Line: 140 ]]
+			spawn(function()
 				-- upvalues: p1 (upval), p2 (copy), AbsoluteSize (copy)
 				if p1.isMounted then
 					p1:setState({ [p2] = AbsoluteSize.Y })
@@ -94,19 +94,19 @@ function CollapsingTextInputValidator.init(p1) --[[ Line: 80 ]]
 		end
 	end
 	
-	function p1.onIssueSummarySizeChange(Frame) --[[ Line: 150 ]]
+	function p1.onIssueSummarySizeChange(Frame)
 		-- upvalues: p1 (copy)
 		p1.onSizeChange("issueSummaryHeight", Frame)
 	end
 	
-	function p1.onIssueFullListSizeChange(Frame) --[[ Line: 154 ]]
+	function p1.onIssueFullListSizeChange(Frame)
 		-- upvalues: p1 (copy)
 		p1.onSizeChange("issueFullListHeight", Frame)
 	end
 	
-	function p1.textInputChangedCallback(p2) --[[ Line: 158 ]]
+	function p1.textInputChangedCallback(p2)
 		-- upvalues: p1 (copy), InputValidity (upval)
-		spawn(function() --[[ Line: 159 ]]
+		spawn(function()
 			-- upvalues: p1 (upval), p2 (copy), InputValidity (upval)
 			if p1.isMounted then
 				local Text = p2.Text
@@ -124,19 +124,19 @@ function CollapsingTextInputValidator.init(p1) --[[ Line: 80 ]]
 		end)
 	end
 	
-	function p1.foundationTextInputChangedCallback(FoundationProxyText) --[[ Line: 177 ]]
+	function p1.foundationTextInputChangedCallback(FoundationProxyText)
 		-- upvalues: p1 (copy)
 		p1.foundationProxyText = FoundationProxyText
 		p1.textInputChangedCallback({ Text = FoundationProxyText })
 	end
 	
-	function p1.bindFoundationTextBoxProxy() --[[ Line: 182 ]]
+	function p1.bindFoundationTextBoxProxy()
 		-- upvalues: p1 (copy)
 		local TextBoxRef = p1.props.textBoxRef
 		
 		if TextBoxRef ~= nil and p1.foundationTextBoxProxy == nil then
 			local Current = {
-				CaptureFocus = function() --[[ Line: 189 ]]
+				CaptureFocus = function()
 					-- upvalues: p1 (upval)
 					local Current = p1.foundationTextBoxRef.current
 					
@@ -144,7 +144,7 @@ function CollapsingTextInputValidator.init(p1) --[[ Line: 80 ]]
 						Current.focus()
 					end
 				end,
-				ReleaseFocus = function() --[[ Line: 195 ]]
+				ReleaseFocus = function()
 					-- upvalues: p1 (upval)
 					local Current = p1.foundationTextBoxRef.current
 					
@@ -152,7 +152,7 @@ function CollapsingTextInputValidator.init(p1) --[[ Line: 80 ]]
 						Current.releaseFocus()
 					end
 				end,
-				IsFocused = function(): boolean --[[ Line: 201 ]]
+				IsFocused = function(): boolean
 					-- upvalues: p1 (upval)
 					local Current = p1.foundationTextBoxRef.current
 					
@@ -160,11 +160,11 @@ function CollapsingTextInputValidator.init(p1) --[[ Line: 80 ]]
 				end
 			}
 			setmetatable(Current, {
-				__index = function(_, p2) --[[ Line: 214 ]]
+				__index = function(_, p2)
 					-- upvalues: p1 (upval)
 					return if p2 == "Text" then p1.foundationProxyText or "" else nil
 				end,
-				__newindex = function(_, p2, p3) --[[ Line: 220 ]]
+				__newindex = function(_, p2, p3)
 					-- upvalues: p1 (upval), Current (copy)
 					if p2 == "Text" then
 						local FoundationProxyText = if typeof(p3) == "string" then p3 else ""
@@ -184,9 +184,9 @@ function CollapsingTextInputValidator.init(p1) --[[ Line: 80 ]]
 		end
 	end
 	
-	function p1.onTextValidated(ValidatedInputText, IsInputTextValid, p2) --[[ Line: 235 ]]
+	function p1.onTextValidated(ValidatedInputText, IsInputTextValid, p2)
 		-- upvalues: p1 (copy), FFlagSignUpTrackFailedRequest (upval)
-		spawn(function() --[[ Line: 236 ]]
+		spawn(function()
 			-- upvalues: p1 (upval), ValidatedInputText (copy), FFlagSignUpTrackFailedRequest (upval), IsInputTextValid (copy), p2 (copy)
 			if p1.isMounted and p1.state.inputTextToValidate == ValidatedInputText then
 				local OnInputTextValidatedFunction: (any, any, any) -> () = p1.props.onInputTextValidated
@@ -206,9 +206,9 @@ function CollapsingTextInputValidator.init(p1) --[[ Line: 80 ]]
 		end)
 	end
 	
-	function p1.onTextInputBoxFocused() --[[ Line: 256 ]]
+	function p1.onTextInputBoxFocused()
 		-- upvalues: p1 (copy)
-		spawn(function() --[[ Line: 257 ]]
+		spawn(function()
 			-- upvalues: p1 (upval)
 			if p1.isMounted then
 				local FrameRef = p1.getFrameRef()
@@ -221,23 +221,23 @@ function CollapsingTextInputValidator.init(p1) --[[ Line: 80 ]]
 		end)
 	end
 	
-	function p1.onMouseEnter() --[[ Line: 271 ]]
+	function p1.onMouseEnter()
 		-- upvalues: p1 (copy)
 		if p1.isMounted then
 			p1:setState({ textBoxHover = true })
 		end
 	end
 	
-	function p1.onMouseLeave() --[[ Line: 279 ]]
+	function p1.onMouseLeave()
 		-- upvalues: p1 (copy)
 		if p1.isMounted then
 			p1:setState({ textBoxHover = false })
 		end
 	end
 	
-	function p1.onTextInputBoxFocusLost() --[[ Line: 287 ]]
+	function p1.onTextInputBoxFocusLost()
 		-- upvalues: p1 (copy)
-		spawn(function() --[[ Line: 288 ]]
+		spawn(function()
 			-- upvalues: p1 (upval)
 			if p1.isMounted then
 				if p1.props.textBoxFocusLostCallback then
@@ -248,9 +248,9 @@ function CollapsingTextInputValidator.init(p1) --[[ Line: 80 ]]
 		end)
 	end
 	
-	function p1.onPositionChanged() --[[ Line: 301 ]]
+	function p1.onPositionChanged()
 		-- upvalues: p1 (copy)
-		spawn(function() --[[ Line: 302 ]]
+		spawn(function()
 			-- upvalues: p1 (upval)
 			if p1.isMounted and p1.state.textBoxFocused then
 				local FrameRef = p1.getFrameRef()
@@ -262,7 +262,7 @@ function CollapsingTextInputValidator.init(p1) --[[ Line: 80 ]]
 		end)
 	end
 	
-	function p1.isInErrorState() --[[ Line: 312 ]]
+	function p1.isInErrorState()
 		-- upvalues: p1 (copy), FFlagSignUpTrackFailedRequest (upval), InputValidity (upval)
 		local Props = p1.props
 		local State = p1.state
@@ -293,9 +293,9 @@ function CollapsingTextInputValidator.init(p1) --[[ Line: 80 ]]
 		return TextBoxFocused
 	end
 	
-	function p1.textInputBoxWithBorder() --[[ Line: 319 ]]
+	function p1.textInputBoxWithBorder()
 		-- upvalues: WithStyleFunction (upval), p1 (copy), GetFFlagLuaAppEnable10ftSignUpViewFunction (upval), EnableAndroidPasswordSuggestionEngineFeature (upval), RoactModule (upval), PasswordBox (upval), GenericTextBox (upval), GetFFlagLuaAppEnableOpenTypeSupportFunction (upval), GetFFlagLuaAppEnableOpenTypeSignUpPageFixFunction (upval), OpenTypeSupport (upval)
-		return WithStyleFunction(function(p2) --[[ Line: 320 ]]
+		return WithStyleFunction(function(p2)
 			-- upvalues: p1 (upval), GetFFlagLuaAppEnable10ftSignUpViewFunction (upval), EnableAndroidPasswordSuggestionEngineFeature (upval), RoactModule (upval), PasswordBox (upval), GenericTextBox (upval), GetFFlagLuaAppEnableOpenTypeSupportFunction (upval), GetFFlagLuaAppEnableOpenTypeSignUpPageFixFunction (upval), OpenTypeSupport (upval)
 			local Tokens = p1.props.tokens
 			local BodyFont = p2.Font.Body.Font
@@ -368,7 +368,7 @@ function CollapsingTextInputValidator.init(p1) --[[ Line: 80 ]]
 		end)
 	end
 	
-	function p1.textInputBoxFoundation() --[[ Line: 414 ]]
+	function p1.textInputBoxFoundation()
 		-- upvalues: FFlagAuthValidatorStyleOverrides (upval), p1 (copy), RoactModule (upval), TextInput (upval)
 		local FoundationInputSize = nil
 		local FoundationIconTrailing = nil
@@ -397,12 +397,12 @@ function CollapsingTextInputValidator.init(p1) --[[ Line: 80 ]]
 	end
 end
 
-function CollapsingTextInputValidator.isUsingFoundationTextInput(p1) --[[ Line: 441 ]]
+function CollapsingTextInputValidator.isUsingFoundationTextInput(p1)
 	-- upvalues: FFlagAuthValidatorStyleOverrides (copy), GetFFlagAuthCollapsingValidatorFoundationInputFunction (copy)
 	return if FFlagAuthValidatorStyleOverrides then p1.props.useFoundationTextInput else p1.props.useFoundationTextInput and GetFFlagAuthCollapsingValidatorFoundationInputFunction()
 end
 
-function CollapsingTextInputValidator.didMount(p1) --[[ Line: 449 ]]
+function CollapsingTextInputValidator.didMount(p1)
 	-- upvalues: OtterModule (copy), InputValidity (copy)
 	p1.isMounted = true
 	
@@ -415,14 +415,14 @@ function CollapsingTextInputValidator.didMount(p1) --[[ Line: 449 ]]
 		issueCheckmarkTransparency = 1,
 		issueTrackerHeight = 0
 	})
-	p1.motor:onStep(function(p2) --[[ Line: 463 ]]
+	p1.motor:onStep(function(p2)
 		-- upvalues: p1 (copy)
 		p1.updateIssueSummaryTextTransparency(p2.issueSummaryTextTransparency)
 		p1.updateIssueFullListTextTransparency(p2.issueFullListTextTransparency)
 		p1.updateIssueCheckmarkTransparency(p2.issueCheckmarkTransparency)
 		p1.updateIssueTrackerHeight(UDim2.new(1, 0, 0, p2.issueTrackerHeight))
 	end)
-	p1.motor:onComplete(function() --[[ Line: 470 ]]
+	p1.motor:onComplete(function()
 		-- upvalues: p1 (copy)
 		if p1.props.onAnimationStateChangeCallback then
 			p1.props.onAnimationStateChangeCallback(p1.props.textInputType, false)
@@ -440,7 +440,7 @@ function CollapsingTextInputValidator.didMount(p1) --[[ Line: 449 ]]
 	end
 end
 
-function CollapsingTextInputValidator.didUpdate(p1, p2, State) --[[ Line: 488 ]]
+function CollapsingTextInputValidator.didUpdate(p1, p2, State)
 	-- upvalues: FFlagSignUpTrackFailedRequest (copy), InputValidity (copy), OtterModule (copy)
 	if p1:isUsingFoundationTextInput() and p2.prefilledText ~= p1.props.prefilledText then
 		p1.foundationTextInputChangedCallback(p1.props.prefilledText or "")
@@ -501,7 +501,7 @@ function CollapsingTextInputValidator.didUpdate(p1, p2, State) --[[ Line: 488 ]]
 	end
 end
 
-function CollapsingTextInputValidator.willUnmount(p1) --[[ Line: 579 ]]
+function CollapsingTextInputValidator.willUnmount(p1)
 	p1.isMounted = false
 	p1.motor:destroy()
 	
@@ -511,7 +511,7 @@ function CollapsingTextInputValidator.willUnmount(p1) --[[ Line: 579 ]]
 	end
 end
 
-function CollapsingTextInputValidator.render(p1) --[[ Line: 593 ]]
+function CollapsingTextInputValidator.render(p1)
 	-- upvalues: AuthStatefulRoundCornerBorder (copy), FFlagAuthValidatorStyleOverrides (copy), WithStyleFunction (copy), GetFFlagLuaAppEnable10ftSignUpViewFunction (copy), WithLocalizationFunction (copy), RoactModule (copy), FitChildren (copy), InputLabel (copy), FormatBoldRichTextFunction (copy), FitTextLabel (copy), Loading (copy), IconSize (copy), GetFFlagEnableAuditForSinglePageSignUpFunction (copy), RegisterAuditContent (copy), GetFFlagEnableAuthStatefulTextInputUpdatesFunction (copy), IssueTracker (copy), FFlagSignUpTrackFailedRequest (copy)
 	local LayoutOrder = p1.props.layoutOrder
 	local TitleTextKey = p1.props.titleTextKey
@@ -543,7 +543,7 @@ function CollapsingTextInputValidator.render(p1) --[[ Line: 593 ]]
 		FoundationTitleIsRequired = p1.props.foundationTitleIsRequired
 		IsFoundationTitleIsBold = p1.props.foundationTitleIsBold == true
 	end
-	return WithStyleFunction(function(p2) --[[ Line: 630 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: p1 (copy), GetFFlagLuaAppEnable10ftSignUpViewFunction (upval), Tokens (copy), WithLocalizationFunction (upval), TitleTextKey (copy), SummaryErrorTextKey (copy), RoactModule (upval), FitChildren (upval), LayoutOrder (copy), PaddingTopOverride (ref), UseTrailingPadding (ref), UseFoundationTitle (ref), InputLabel (upval), IsFoundationTitleIsBold (ref), FormatBoldRichTextFunction (upval), FoundationTitleIsRequired (ref), FoundationTitleSize (ref), FitTextLabel (upval), IsUsingFoundationTextInput (copy), AuthStatefulRoundCornerBorder (upval), Error (ref), Loading (upval), IconSize (upval), GetFFlagEnableAuditForSinglePageSignUpFunction (upval), RegisterAuditContent (upval), GetFFlagEnableAuthStatefulTextInputUpdatesFunction (upval), IssueTracker (upval), Validator (copy), ValidatorAdditionalProps (copy), InputTextToValidate (ref), FFlagSignUpTrackFailedRequest (upval), ColorContentOverride (ref)
 		local ScaledBaseSize = p2.Font.BaseSize * p2.Font.CaptionHeader.RelativeSize
 		local ContentGap = p1.getContentGap()
@@ -554,7 +554,7 @@ function CollapsingTextInputValidator.render(p1) --[[ Line: 593 ]]
 		return WithLocalizationFunction({
 			titleText = TitleTextKey,
 			summaryErrorText = SummaryErrorTextKey
-		})(function(p3) --[[ Line: 641 ]]
+		})(function(p3)
 			-- upvalues: RoactModule (upval), FitChildren (upval), LayoutOrder (upval), p1 (upval), ContentGap (copy), PaddingTopOverride (upval), UseTrailingPadding (upval), UseFoundationTitle (upval), InputLabel (upval), IsFoundationTitleIsBold (upval), FormatBoldRichTextFunction (upval), FoundationTitleIsRequired (upval), FoundationTitleSize (upval), FitTextLabel (upval), p2 (copy), ScaledBaseSize (ref), IsUsingFoundationTextInput (upval), AuthStatefulRoundCornerBorder (upval), GetFFlagLuaAppEnable10ftSignUpViewFunction (upval), Tokens (upval), Error (upval), Loading (upval), IconSize (upval), GetFFlagEnableAuditForSinglePageSignUpFunction (upval), RegisterAuditContent (upval), TitleTextKey (upval), GetFFlagEnableAuthStatefulTextInputUpdatesFunction (upval), IssueTracker (upval), Validator (upval), ValidatorAdditionalProps (upval), InputTextToValidate (upval), FFlagSignUpTrackFailedRequest (upval), ColorContentOverride (upval)
 			return RoactModule.createElement(FitChildren.FitFrame, {
 				LayoutOrder = LayoutOrder,

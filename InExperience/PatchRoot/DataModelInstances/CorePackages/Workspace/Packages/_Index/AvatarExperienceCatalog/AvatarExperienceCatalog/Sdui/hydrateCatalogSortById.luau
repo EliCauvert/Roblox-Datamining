@@ -9,7 +9,7 @@ local _ = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListInfoV
 local CollectDedupedHydrationContentModule = require(AvatarExperienceCatalog.Sdui.Utils.collectDedupedHydrationContent)
 local BuildHydrationReduxPayloadModule = require(AvatarExperienceCatalog.Sdui.Utils.buildHydrationReduxPayload)
 
-return function(Callback, p1, Callback1, p2, p3, p4) --[[ Line: 31 | Named "hydrateCatalogSortById" ]]
+return function(Callback, p1, Callback1, p2, p3, p4)
 	-- upvalues: DataHydrationModule (copy), PromiseModule (copy), CollectDedupedHydrationContentModule (copy), BuildHydrationReduxPayloadModule (copy), Logging (copy)
 	local MarketplaceCatalogSort = DataHydrationModule.MarketplaceCatalogSort.getMarketplaceCatalogSortStore(false).getMarketplaceCatalogSort(p3)
 	local DataResult = if MarketplaceCatalogSort and MarketplaceCatalogSort.data then MarketplaceCatalogSort.data(false) else nil
@@ -34,7 +34,7 @@ return function(Callback, p1, Callback1, p2, p3, p4) --[[ Line: 31 | Named "hydr
 	else
 		List = t
 	end
-	return if #List == 0 then PromiseModule.resolve() else p2.HydrateWidgetContent(p1, List):andThen(function(Result) --[[ Line: 76 ]]
+	return if #List == 0 then PromiseModule.resolve() else p2.HydrateWidgetContent(p1, List):andThen(function(Result)
 		-- upvalues: BuildHydrationReduxPayloadModule (upval), List (ref), Callback (copy), Callback1 (copy)
 		local ResponseBody = if Result then Result.responseBody else nil
 		local HydratedContent = if ResponseBody then ResponseBody.hydratedContent else nil
@@ -44,7 +44,7 @@ return function(Callback, p1, Callback1, p2, p3, p4) --[[ Line: 31 | Named "hydr
 			
 			return
 		end
-	end):catch(function(Err) --[[ Line: 86 ]]
+	end):catch(function(Err)
 		-- upvalues: Logging (upval), p3 (copy)
 		Logging.warn("hydrateCatalogSortById: HydrateWidgetContent failed for sort " .. p3 .. ": " .. tostring(Err))
 	end)

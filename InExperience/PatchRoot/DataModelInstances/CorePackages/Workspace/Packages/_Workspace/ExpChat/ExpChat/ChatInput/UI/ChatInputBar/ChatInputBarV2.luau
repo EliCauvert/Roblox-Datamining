@@ -13,7 +13,7 @@ local FFlagExpChatPresetChatEnabled = ExpChatSharedModule.Flags.FFlagExpChatPres
 local FFlagExpChatFixBackspaceNilTargetChannel = ExpChatSharedModule.Flags.FFlagExpChatFixBackspaceNilTargetChannel
 local FFlagExpChatPresetChatGamepadEnabledModule = require(ExpChat.Flags.FFlagExpChatPresetChatGamepadEnabled)
 
-local function renderCustomSendButton(p1, UseTokensResult, HasEmptyInputText, OnSendActivated) --[[ Line: 79 ]]
+local function renderCustomSendButton(p1, UseTokensResult, HasEmptyInputText, OnSendActivated)
 	-- upvalues: ReactModule (copy), FFlagExpChatPresetChatGamepadEnabledModule (copy), FoundationModule (copy)
 	local ActionStandard = if HasEmptyInputText then UseTokensResult.Color.ActionStandard else UseTokensResult.Color.ActionEmphasis
 	local Size800 = UseTokensResult.Size.Size_800
@@ -53,7 +53,7 @@ local function renderCustomSendButton(p1, UseTokensResult, HasEmptyInputText, On
 	})
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 132 | Named "ChatInputBarV2" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), FFlagExpChatInputBarV2CornerAndTruncationFixModule (copy), ChannelChipModule (copy), FFlagExpChatFixBackspaceNilTargetChannel (copy), ConfigModule (copy), FFlagExpChatPresetChatEnabled (copy), FFlagEnableConsoleExpControls (copy), FFlagExpChatComposerInputBarFigmaParityModule (copy), FFlagExpChatInputBarV2CustomSendButtonModule (copy), renderCustomSendButton (copy), FFlagExpChatPresetChatGamepadEnabledModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local SetTransparencyFunction = p1.setTransparency
@@ -109,7 +109,7 @@ return ReactModule.memo(function(p1) --[[ Line: 132 | Named "ChatInputBarV2" ]]
 					TargetChannelChip = ReactModule.createElement(ChannelChipModule, {
 						transparency = SetTransparencyFunction(0, p1.transparencyValue),
 						onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged,
-						onChannelChipActivated = if FFlagExpChatFixBackspaceNilTargetChannel then function() --[[ Line: 194 ]]
+						onChannelChipActivated = if FFlagExpChatFixBackspaceNilTargetChannel then function()
 							-- upvalues: p1 (copy)
 							p1.resetTargetChannel(p1.isGlobalChatTabActive)
 						end else p1.resetTargetChannel,
@@ -125,7 +125,7 @@ return ReactModule.memo(function(p1) --[[ Line: 132 | Named "ChatInputBarV2" ]]
 						Font = ConfigModule.ChatInputBarFont,
 						Text = p1.disabledChatPlaceholderText,
 						Position = UDim2.fromScale(1, 0),
-						Size = TargetChannelWidth:map(function(p2: number): UDim2 --[[ Line: 209 ]]
+						Size = TargetChannelWidth:map(function(p2: number): UDim2
 							return UDim2.new(1, -(p2 + 8), 0, 0)
 						end),
 						TextColor3 = ShowPlaceholderText and ChatInputBarSettings.PlaceholderColor3 or ChatInputBarSettings.TextColor3,
@@ -143,7 +143,7 @@ return ReactModule.memo(function(p1) --[[ Line: 132 | Named "ChatInputBarV2" ]]
 						AnchorPoint = Vector2.new(1, 0),
 						AutomaticSize = Enum.AutomaticSize.Y,
 						Position = UDim2.fromScale(1, 0),
-						Size = TargetChannelWidth:map(function(p2: number): UDim2 --[[ Line: 245 ]]
+						Size = TargetChannelWidth:map(function(p2: number): UDim2
 							return UDim2.new(1, -(p2 + 8), 0, 0)
 						end)
 					}, {

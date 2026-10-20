@@ -4,11 +4,11 @@ local ClockTime = nil
 local Timeline = nil
 local v1 = nil
 
-local function _(p1: number): number --[[ Line: 17 | Named "roundSec" ]]
+local function _(p1: number): number
 	return math.floor(p1 * 1000 + 0.5) / 1000
 end
 
-local function timelineFields() --[[ Line: 32 ]]
+local function timelineFields()
 	-- upvalues: ClockTime (ref), Timeline (ref), v1 (ref)
 	local ClockTime1 = os.clock()
 	local config = {
@@ -26,7 +26,7 @@ local function timelineFields() --[[ Line: 32 ]]
 	return config
 end
 
-local function mergeTimeline(Tbl) --[[ Line: 48 ]]
+local function mergeTimeline(Tbl)
 	-- upvalues: timelineFields (copy)
 	local TimelineFieldsResult = timelineFields()
 	
@@ -49,14 +49,14 @@ local function mergeTimeline(Tbl) --[[ Line: 48 ]]
 	return Copy
 end
 
-local _ = function(p1) --[[ Line: 68 | Named "encode" ]]
+local _ = function(p1)
 	-- upvalues: HttpService (copy)
 	local Success, Result = pcall(HttpService.JSONEncode, HttpService, p1)
 	
 	return if Success and typeof(Result) == "string" then Result else tostring(p1)
 end
 
-local _ = function(Text: string, p1): string? --[[ Line: 76 | Named "previewString" ]]
+local _ = function(Text: string, p1): string?
 	if typeof(Text) == "string" then
 		local EndIndex = p1 or 120
 		
@@ -66,7 +66,7 @@ local _ = function(Text: string, p1): string? --[[ Line: 76 | Named "previewStri
 	end
 end
 
-local function formatRequestState(p1) --[[ Line: 153 ]]
+local function formatRequestState(p1)
 	return if typeof(p1) == "table" then {
 		status = p1.status,
 		error = p1.error,
@@ -77,11 +77,11 @@ end
 
 return {
 	LOG_PREFIX = "[MyStats]",
-	isEnabled = function() --[[ Line: 21 ]]
+	isEnabled = function()
 		-- upvalues: DebugMyStatsExperienceStats (copy)
 		return DebugMyStatsExperienceStats
 	end,
-	log = function(p1, p2, Detail) --[[ Line: 87 ]]
+	log = function(p1, p2, Detail)
 		-- upvalues: DebugMyStatsExperienceStats (copy), mergeTimeline (copy), HttpService (copy)
 		if not DebugMyStatsExperienceStats then return end
 		local v2 = " | %*"
@@ -97,14 +97,14 @@ return {
 			print(`[MyStats] {p2}{FormatResult}`)
 		end
 	end,
-	resetTimeline = function(p1) --[[ Line: 26 ]]
+	resetTimeline = function(p1)
 		-- upvalues: ClockTime (ref), Timeline (ref), v1 (ref)
 		ClockTime = os.clock()
 		Timeline = p1
 		v1 = nil
 	end,
 	timelineFields = timelineFields,
-	formatStudioAskUserQuestions = function(List) --[[ Line: 99 ]]
+	formatStudioAskUserQuestions = function(List)
 		if typeof(List) ~= "table" then
 			return { raw = tostring(List) }
 		end
@@ -142,7 +142,7 @@ return {
 			firstOption = FirstOption
 		}
 	end,
-	formatToolResultPayload = function(p1) --[[ Line: 136 ]]
+	formatToolResultPayload = function(p1)
 		if typeof(p1) == "table" then
 			local Content = p1.content
 			local Text = if typeof(Content) == "table" then Content.text else nil
@@ -160,7 +160,7 @@ return {
 		end
 	end,
 	formatRequestState = formatRequestState,
-	formatTurnState = function(p1) --[[ Line: 165 ]]
+	formatTurnState = function(p1)
 		return if typeof(p1) == "table" then {
 			status = p1.status,
 			isDone = p1.isDone,
@@ -172,7 +172,7 @@ return {
 			sessionId = p1.sessionId
 		} else { raw = tostring(p1) }
 	end,
-	rpcFailureMessage = function(p1, p2): string --[[ Line: 181 ]]
+	rpcFailureMessage = function(p1, p2): string
 		-- upvalues: formatRequestState (copy)
 		local FormatRequestStateResult = formatRequestState(p2)
 		local Status = FormatRequestStateResult.status

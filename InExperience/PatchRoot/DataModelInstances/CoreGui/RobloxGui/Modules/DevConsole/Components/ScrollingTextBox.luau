@@ -5,11 +5,11 @@ local CryoModule = require(CorePackages.Packages.Cryo)
 local RoactModule = require(CorePackages.Packages.Roact)
 local ScrollingTextBox = RoactModule.Component:extend("ScrollingTextBox")
 
-function ScrollingTextBox.init(p1, Label) --[[ Line: 12 ]]
+function ScrollingTextBox.init(p1, Label)
 	-- upvalues: TextService (copy), RoactModule (copy)
 	local ATextSize = TextService:GetTextSize("A", Label.TextSize, Label.Font, Vector2.new(0, 0))
 	
-	function p1.adjustOffset() --[[ Line: 15 ]]
+	function p1.adjustOffset()
 		-- upvalues: p1 (copy)
 		if p1.clipBox.current and p1.textboxRef.current then
 			local FontDims = p1.state.fontDims
@@ -35,10 +35,10 @@ function ScrollingTextBox.init(p1, Label) --[[ Line: 12 ]]
 	p1.state = { innerXOffset = 0, fontDims = ATextSize }
 end
 
-function ScrollingTextBox.didMount(p1) --[[ Line: 49 ]]
+function ScrollingTextBox.didMount(p1)
 	-- upvalues: UserInputService (copy)
 	if not p1.onFocusConnection then
-		p1.onFocusConnection = UserInputService.InputBegan:Connect(function(Input) --[[ Line: 51 ]]
+		p1.onFocusConnection = UserInputService.InputBegan:Connect(function(Input)
 			-- upvalues: p1 (copy)
 			if p1.textboxRef.current and p1.textboxRef.current:IsFocused() then
 				if Input.KeyCode == Enum.KeyCode.Home then
@@ -57,14 +57,14 @@ function ScrollingTextBox.didMount(p1) --[[ Line: 49 ]]
 	end
 end
 
-function ScrollingTextBox.willUnmount(p1) --[[ Line: 66 ]]
+function ScrollingTextBox.willUnmount(p1)
 	if p1.onFocusConnection then
 		p1.onFocusConnection:Disconnect()
 		p1.onFocusConnection = nil
 	end
 end
 
-function ScrollingTextBox.render(p1) --[[ Line: 73 ]]
+function ScrollingTextBox.render(p1)
 	-- upvalues: RoactModule (copy)
 	local InnerXOffset = p1.state.innerXOffset
 	
@@ -94,7 +94,7 @@ function ScrollingTextBox.render(p1) --[[ Line: 73 ]]
 	})
 end
 
-return RoactModule.forwardRef(function(p1, ForwardRef) --[[ Line: 119 ]]
+return RoactModule.forwardRef(function(p1, ForwardRef)
 	-- upvalues: RoactModule (copy), ScrollingTextBox (copy), CryoModule (copy)
 	return RoactModule.createElement(ScrollingTextBox, CryoModule.Dictionary.join(p1, { forwardRef = ForwardRef }))
 end)

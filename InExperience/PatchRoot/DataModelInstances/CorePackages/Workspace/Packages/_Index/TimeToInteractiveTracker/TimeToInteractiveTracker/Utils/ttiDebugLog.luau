@@ -2,12 +2,12 @@
 local _ = require(script.Parent.Parent.Stores.types)
 local FFlagDebugTimeToInteractiveTrackerModule = require(script.Parent.FFlagDebugTimeToInteractiveTracker)
 
-local function _(p1) --[[ Line: 9 | Named "formatPayload" ]]
+local function _(p1)
 	-- upvalues: HttpService (copy)
 	if p1 == nil then
 		return ""
 	elseif type(p1) == "table" then
-		local Success, Result = pcall(function() --[[ Line: 18 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: HttpService (upval), p1 (copy)
 			return HttpService:JSONEncode(p1)
 		end)
@@ -18,7 +18,7 @@ local function _(p1) --[[ Line: 9 | Named "formatPayload" ]]
 	end
 end
 
-local function formatMilestones(List): string --[[ Line: 28 ]]
+local function formatMilestones(List): string
 	if not List or #List == 0 then
 		return ""
 	end
@@ -41,7 +41,7 @@ local function formatMilestones(List): string --[[ Line: 28 ]]
 	return "\n" .. table.concat(List1, "\n")
 end
 
-return function(p1, p2, p3, Input, p4) --[[ Line: 57 ]]
+return function(p1, p2, p3, Input, p4)
 	-- upvalues: FFlagDebugTimeToInteractiveTrackerModule (copy), HttpService (copy), formatMilestones (copy)
 	if not FFlagDebugTimeToInteractiveTrackerModule then return end
 	local TimeToInteractiveTrackerName: string = ("[TimeToInteractiveTracker][%s]"):format(p1)
@@ -50,7 +50,7 @@ return function(p1, p2, p3, Input, p4) --[[ Line: 57 ]]
 	if Input == nil then
 		Text = ""
 	elseif type(Input) == "table" then
-		local Success, Result = pcall(function() --[[ Line: 18 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: HttpService (upval), Input (copy)
 			return HttpService:JSONEncode(Input)
 		end)

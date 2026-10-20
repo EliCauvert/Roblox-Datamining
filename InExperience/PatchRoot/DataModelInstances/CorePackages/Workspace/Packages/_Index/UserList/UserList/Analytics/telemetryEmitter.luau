@@ -6,7 +6,7 @@ return require(Parent.SocialLuaAnalytics).Telemetry.createEmitter({
 		links = "https://github.rbx.com/Roblox/proto-schemas/blob/master/production/eventstream/social/user_list_interactions.proto",
 		throttlingThousandths = game:DefineFastInt("UserListAnalyticsThrottlingThousandths", 10000)
 	},
-	getSharedInfo = function() --[[ Line: 17 ]]
+	getSharedInfo = function()
 		return {}
 	end
 })

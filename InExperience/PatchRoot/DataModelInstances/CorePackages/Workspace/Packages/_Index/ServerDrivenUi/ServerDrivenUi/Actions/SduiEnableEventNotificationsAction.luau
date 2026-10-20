@@ -5,7 +5,7 @@ local CloseCentralOverlayFunction = require(Parent.CentralOverlay).Thunks.CloseC
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local SduiParseHelpers = SduiCoreSystemModule.SduiParseHelpers
 
-return function(p1, _, p2) --[[ Line: 17 | Named "SduiEnableEventNotificationsAction" ]]
+return function(p1, _, p2)
 	-- upvalues: SduiErrorType (copy), VirtualEventsModule (copy), SduiParseHelpers (copy), CloseCentralOverlayFunction (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	
@@ -22,14 +22,14 @@ return function(p1, _, p2) --[[ Line: 17 | Named "SduiEnableEventNotificationsAc
 		local UniverseId = ActionParams.universeId
 		local Channel = ActionParams.channel
 		local Networking = p2.dependencies.networking
-		VirtualEventsModule.enablePushNotifications(Networking):catch(function(Err) --[[ Line: 39 ]]
+		VirtualEventsModule.enablePushNotifications(Networking):catch(function(Err)
 			-- upvalues: p2 (copy), SduiErrorType (upval), SduiParseHelpers (upval)
 			p2.dependencies.logger.reportError(SduiErrorType.ActionNetworkRequestFailed, {
 				name = "EnableEventNotifications",
 				message = "enablePushNotifications failed: " .. SduiParseHelpers.stringifyValue(Err)
 			}, p2.appPage)
 		end)
-		VirtualEventsModule.neverShowNotificationsModalAgain(Networking):catch(function(Err) --[[ Line: 46 ]]
+		VirtualEventsModule.neverShowNotificationsModalAgain(Networking):catch(function(Err)
 			-- upvalues: p2 (copy), SduiErrorType (upval), SduiParseHelpers (upval)
 			p2.dependencies.logger.reportError(SduiErrorType.ActionNetworkRequestFailed, {
 				name = "EnableEventNotifications",

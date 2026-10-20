@@ -12,7 +12,7 @@ local FormatRecommendationContextType = SocialLuaAnalyticsModule.Analytics.Forma
 local FormatPresence = SocialLuaAnalyticsModule.Analytics.Formatters.formatPresence
 local GetFIntShowFriendRecommendationsLimitModule = require(Parent.Flags.getFIntShowFriendRecommendationsLimit)
 
-local function AbsolutePosition(p1) --[[ Line: 20 ]]
+local function AbsolutePosition(p1)
 	return p1
 end
 

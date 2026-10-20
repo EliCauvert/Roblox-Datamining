@@ -1,13 +1,13 @@
 ﻿return {
-	new = function(p1) --[[ Line: 7 ]]
+	new = function(p1)
 		local t = {}
 		setmetatable(t, {
-			__tostring = function(): string --[[ Line: 11 ]]
+			__tostring = function(): string
 				return "Service(PublicBindables)"
 			end
 		})
 		
-		function t.getWindowStateChangedBindable() --[[ Line: 16 ]]
+		function t.getWindowStateChangedBindable()
 			-- upvalues: p1 (copy)
 			return p1.windowStateChangedBindable
 		end

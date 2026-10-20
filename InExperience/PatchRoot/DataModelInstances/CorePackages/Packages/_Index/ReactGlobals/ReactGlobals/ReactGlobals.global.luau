@@ -1,5 +1,5 @@
 ﻿if require(script.Parent.Parent.SafeFlags).createGetFFlag("ReactIsolatedGlobalsEnabled")() then
-	local function _(p1, p2) --[[ Line: 49 | Named "loadFromGlobal" ]]
+	local function _(p1, p2)
 		local Entry = _G[p1]
 		
 		return if Entry == nil then p2 else Entry

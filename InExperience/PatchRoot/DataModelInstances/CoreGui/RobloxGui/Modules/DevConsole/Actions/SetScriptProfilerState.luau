@@ -1,4 +1,4 @@
-﻿return require(script.Parent.Parent.Action)(script.Name, function(IsClientView, UsePercentages, ClientSessionState, ServerSessionState, IsExporting, IsShowingMobileSettings) --[[ Line: 6 ]]
+﻿return require(script.Parent.Parent.Action)(script.Name, function(IsClientView, UsePercentages, ClientSessionState, ServerSessionState, IsExporting, IsShowingMobileSettings)
 	return {
 		isClientView = IsClientView,
 		usePercentages = UsePercentages,

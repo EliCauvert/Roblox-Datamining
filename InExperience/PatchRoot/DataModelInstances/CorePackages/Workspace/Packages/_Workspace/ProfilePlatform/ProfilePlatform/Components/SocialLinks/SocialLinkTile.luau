@@ -5,7 +5,7 @@ local IconButton = UIBloxModule.App.Button.IconButton
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local Medium = UIBloxModule.App.ImageSet.Enum.IconSize.Medium
 
-return function(p1) --[[ Line: 24 ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), IconButton (copy), Medium (copy)
 	local UseStyleResult = UseStyleFunction()
 	local TileSize = p1.tileSize or 80

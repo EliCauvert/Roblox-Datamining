@@ -14,12 +14,12 @@ local InterfaceResult = TModule.interface({
 	immersiveBrandedAdId = TModule.string
 })
 
-return function() --[[ Line: 35 ]]
+return function()
 	-- upvalues: ReactModule (copy), AdService (copy), InterfaceResult (copy), AdsInteractivityTelemetryModule (copy), GetScreenPositionFromGuiObjectInputModule (copy), ImmersiveBrandedAdMenuModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-	ReactModule.useEffect(function() --[[ Line: 39 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: AdService (upval), InterfaceResult (upval), AdsInteractivityTelemetryModule (upval), UseStateResult2 (copy), GetScreenPositionFromGuiObjectInputModule (upval)
-		function AdService.OnImmersiveBrandedAdDisclosureButtonActivated(p1) --[[ Line: 40 ]]
+		function AdService.OnImmersiveBrandedAdDisclosureButtonActivated(p1)
 			-- upvalues: InterfaceResult (upval), AdsInteractivityTelemetryModule (upval), UseStateResult2 (upval), GetScreenPositionFromGuiObjectInputModule (upval)
 			local InterfaceResultResult, _ = InterfaceResult(p1)
 			
@@ -36,12 +36,12 @@ return function() --[[ Line: 35 ]]
 			end
 		end
 		
-		return function() --[[ Line: 55 ]]
+		return function()
 			-- upvalues: AdService (upval)
-			function AdService.OnImmersiveBrandedAdDisclosureButtonActivated() --[[ Line: 56 ]] end
+			function AdService.OnImmersiveBrandedAdDisclosureButtonActivated() end
 		end
 	end, {})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 60 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(nil)
 	end, {})

@@ -11,11 +11,11 @@ local config = {
 	enableTestingTheme = false
 }
 
-function SquadVoiceChangerOverlay(p1) --[[ Line: 27 ]]
+function SquadVoiceChangerOverlay(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseNavigationFunction (copy), ReactModule (copy), FoundationModule (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), SquadVoiceChangersModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseNavigationResult = UseNavigationFunction()
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 31 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy)
 		if UseNavigationResult and UseNavigationResult.pop then
 			UseNavigationResult.pop()
@@ -49,7 +49,7 @@ function SquadVoiceChangerOverlay(p1) --[[ Line: 27 ]]
 				["anchor-bottom-center position-bottom-center"] = not WideModeScreenProps
 			},
 			Size = if WideModeScreenProps then UDim2.new(0.75, 0, 0.9, 0) else UDim2.new(1, 0, 0.9, 0),
-			onActivated = function() --[[ Line: 67 ]] end,
+			onActivated = function() end,
 			testId = if FFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-changer-overlay" else nil
 		}, {
 			SquadVoiceChangers = ReactModule.createElement(SquadVoiceChangersModule, {

@@ -27,22 +27,22 @@ local OptionSelectorGroupSizeModule = require(Foundation.Enums.OptionSelectorGro
 local OrientationModule = require(Foundation.Enums.Orientation)
 local UseOptionSelectorGroupModule = require(script.Parent.Parent.useOptionSelectorGroup)
 
-local function _(p1, p2) --[[ Line: 49 | Named "getTransparency" ]]
-	return p2:map(function(p3) --[[ Line: 53 ]]
+local function _(p1, p2)
+	return p2:map(function(p3)
 		-- upvalues: p1 (copy)
 		return if p1 == nil then p3 else p1 + (1 - p1) * p3
 	end)
 end
 
-local function getTextStyle(TextTransparency, Transparency, ContentColor) --[[ Line: 61 ]]
+local function getTextStyle(TextTransparency, Transparency, ContentColor)
 	-- upvalues: ReactModule (copy)
-	return ReactModule.joinBindings({ TextTransparency, Transparency }):map(function(Entry) --[[ Line: 66 ]]
+	return ReactModule.joinBindings({ TextTransparency, Transparency }):map(function(Entry)
 		-- upvalues: ContentColor (copy)
 		return { Color3 = ContentColor, Transparency = Entry[2] }
 	end)
 end
 
-local function renderIcon(p1) --[[ Line: 75 ]]
+local function renderIcon(p1)
 	-- upvalues: FlagsModule (copy), IsBuilderOrMigratedIconFunction (copy), ReactModule (copy), ImageModule (copy), NormalizeIconNameFunction (copy), IconModule (copy)
 	if not p1.icon then
 		return nil
@@ -53,7 +53,7 @@ local function renderIcon(p1) --[[ Line: 75 ]]
 		return ReactModule.createElement(ImageModule, {
 			Image = p1.icon,
 			Size = UDim2.fromOffset(IconExtent, IconExtent),
-			imageStyle = p1.transparency:map(function(Transparency) --[[ Line: 95 ]]
+			imageStyle = p1.transparency:map(function(Transparency)
 				-- upvalues: p1 (copy)
 				return { Color3 = p1.contentColor, Transparency = Transparency }
 			end),
@@ -65,7 +65,7 @@ local function renderIcon(p1) --[[ Line: 75 ]]
 	local config = {
 		name = NormalizeIconNameResult.name,
 		size = p1.iconSize,
-		style = p1.transparency:map(function(Transparency) --[[ Line: 112 ]]
+		style = p1.transparency:map(function(Transparency)
 			-- upvalues: p1 (copy)
 			return { Color3 = p1.contentColor, Transparency = Transparency }
 		end),
@@ -85,7 +85,7 @@ local config = {
 	width = UDim.new(0, 0)
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 158 | Named "OptionSelectorGroupItem" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseOptionSelectorGroupModule (copy), FlagsModule (copy), InputSizeModule (copy), OptionSelectorGroupSizeModule (copy), OrientationModule (copy), FillBehaviorModule (copy), UseTokensModule (copy), UseOptionSelectorGroupItemVariantsModule (copy), UseOptionSelectorGroupItemMotionStatesModule (copy), ConstantsModule (copy), UseMotionFunction (copy), ReactModule (copy), renderIcon (copy), ViewModule (copy), TextModule (copy), EscapeRichTextModule (copy), getTextStyle (copy), WithCommonPropsModule (copy), IconModule (copy), Icon (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseOptionSelectorGroupModuleResult = UseOptionSelectorGroupModule()
@@ -103,7 +103,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 158 
 	local UseOptionSelectorGroupItemMotionStatesModuleResult = UseOptionSelectorGroupItemMotionStatesModule(0, ConstantsModule.DISABLED_TRANSPARENCY)
 	local UseMotionResult, UseMotionResult2 = UseMotionFunction(UseOptionSelectorGroupItemMotionStatesModuleResult.Default)
 	local UseMotionResult1, _ = UseMotionFunction(UseOptionSelectorGroupItemMotionStatesModuleResult.Default)
-	ReactModule.useEffect(function() --[[ Line: 224 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: WithDefaultsModuleResult (copy), UseMotionResult2 (copy), UseOptionSelectorGroupItemMotionStatesModuleResult (copy)
 		if WithDefaultsModuleResult.isDisabled then
 			UseMotionResult2(UseOptionSelectorGroupItemMotionStatesModuleResult.Disabled)
@@ -113,7 +113,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 158 
 			UseMotionResult2(UseOptionSelectorGroupItemMotionStatesModuleResult.Default)
 		end
 	end, { WithDefaultsModuleResult.isDisabled })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 233 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseOptionSelectorGroupModuleResult (copy), WithDefaultsModuleResult (copy)
 		UseOptionSelectorGroupModuleResult.onValueChanged(if UseOptionSelectorGroupModuleResult.value == WithDefaultsModuleResult.value then nil else WithDefaultsModuleResult.value)
 	end, {
@@ -123,7 +123,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 158 
 		UseOptionSelectorGroupModuleResult.value
 	})
 	WithDefaultsModuleResult.testId = `{UseOptionSelectorGroupModuleResult.testId}--item-{WithDefaultsModuleResult.value}`
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 243 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseOptionSelectorGroupItemVariantsModuleResult (copy), UseTokensModuleResult (copy)
 		return {
 			radius = UDim.new(0, UseOptionSelectorGroupItemVariantsModuleResult.container.radius),
@@ -141,7 +141,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 158 
 		return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
 			stroke = {
 				Color = Stroke.Color3,
-				Transparency = UseMotionResult.transparency:map(function(p2) --[[ Line: 53 ]]
+				Transparency = UseMotionResult.transparency:map(function(p2)
 					-- upvalues: Transparency (copy)
 					return if Transparency == nil then p2 else Transparency + (1 - Transparency) * p2
 				end)
@@ -226,7 +226,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 158 
 		return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
 			stroke = {
 				Color = Stroke.Color3,
-				Transparency = UseMotionResult.transparency:map(function(p2) --[[ Line: 53 ]]
+				Transparency = UseMotionResult.transparency:map(function(p2)
 					-- upvalues: Transparency1 (copy)
 					return if Transparency1 == nil then p2 else Transparency1 + (1 - Transparency1) * p2
 				end)
@@ -257,7 +257,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 158 
 						LayoutOrder = 0,
 						name = WithDefaultsModuleResult.icon,
 						size = UseOptionSelectorGroupItemVariantsModuleResult.icon.size,
-						style = UseMotionResult.transparency:map(function(Transparency) --[[ Line: 390 ]]
+						style = UseMotionResult.transparency:map(function(Transparency)
 							-- upvalues: ContentColor3 (copy)
 							return { Color3 = ContentColor3, Transparency = Transparency }
 						end),
@@ -269,7 +269,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 158 
 						LayoutOrder = 3,
 						name = Icon.CheckLarge,
 						size = UseOptionSelectorGroupItemVariantsModuleResult.icon.size,
-						style = UseMotionResult.transparency:map(function(p2) --[[ Line: 417 ]]
+						style = UseMotionResult.transparency:map(function(p2)
 							-- upvalues: ContentColor3 (copy), IsValueMatch (copy)
 							return {
 								Color3 = ContentColor3,

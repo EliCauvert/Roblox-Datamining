@@ -7,7 +7,7 @@ local Enums = FoundationModule.Enums
 local ConstantsModule = require(AvatarExperienceCommon.Constants)
 local UseArrowNavScrollBehaviorModule = require(AvatarExperienceCommon.Hooks.useArrowNavScrollBehavior)
 
-return function(Frame) --[[ Line: 39 | Named "ArrowNavV2" ]]
+return function(Frame)
 	-- upvalues: UseArrowNavScrollBehaviorModule (copy), ReactModule (copy), ConstantsModule (copy), FoundationModule (copy), Icon (copy), Enums (copy)
 	local UseArrowNavScrollBehaviorModuleResult = UseArrowNavScrollBehaviorModule({
 		navDirection = Frame.navDirection,
@@ -53,7 +53,7 @@ return function(Frame) --[[ Line: 39 | Named "ArrowNavV2" ]]
 			Size = UDim2.fromOffset(Size900, Size900),
 			backgroundStyle = ActionStandard.Background,
 			cornerRadius = UDim.new(0.5, 0),
-			onActivated = ReactModule.useCallback(function() --[[ Line: 52 ]] end, {})
+			onActivated = ReactModule.useCallback(function() end, {})
 		}, {
 			ArrowIcon = ReactModule.createElement(Icon, {
 				name = if Frame.navDirection == ConstantsModule.NAVIGATION_DIRECTION.IS_LEFT then "chevron-small-left" else "chevron-small-right",

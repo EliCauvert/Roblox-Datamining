@@ -7,7 +7,7 @@ local GetPartNamesInHierarchyOrderModule = require(Parent.util.getPartNamesInHie
 local R15plusUtilsModule = require(Parent.util.R15plusUtils)
 local GetAttachmentCFrameInPartSpaceModule = require(Parent.util.getAttachmentCFrameInPartSpace)
 local AssetTraversalUtils = {
-	calculateBounds = function(p1, Child, CF, p2, p3) --[[ Line: 25 ]]
+	calculateBounds = function(p1, Child, CF, p2, p3)
 		-- upvalues: GetExpectedPartSizeModule (copy), CalculateMinMaxModule (copy), ConstantsInterfaceModule (copy), R15plusUtilsModule (copy), GetAttachmentCFrameInPartSpaceModule (copy)
 		if p3 then
 			local ExpectedPartSizeModule: number = GetExpectedPartSizeModule(Child, p3)
@@ -31,7 +31,7 @@ local AssetTraversalUtils = {
 	end
 }
 
-function AssetTraversalUtils.traverseHierarchy(p4, Object, p5, ChildName, ScaledInverted, ChildName1, p6, p7, p8) --[[ Line: 98 ]]
+function AssetTraversalUtils.traverseHierarchy(p4, Object, p5, ChildName, ScaledInverted, ChildName1, p6, p7, p8)
 	-- upvalues: ConstantsInterfaceModule (copy), R15plusUtilsModule (copy), GetAttachmentCFrameInPartSpaceModule (copy), AssetTraversalUtils (copy)
 	assert(p4 ~= nil ~= ((Object and p5) ~= nil))
 	local ChildName2 = if p4 then p4[ChildName1] else Object:FindFirstChild(ChildName1)
@@ -61,7 +61,7 @@ end
 
 local T = nil
 
-local function initRigParentToChild() --[[ Line: 163 ]]
+local function initRigParentToChild()
 	-- upvalues: T (ref), GetPartNamesInHierarchyOrderModule (copy)
 	if T then return end
 	T = {}
@@ -81,7 +81,7 @@ local function initRigParentToChild() --[[ Line: 163 ]]
 	end
 end
 
-function AssetTraversalUtils.getAssetRigChild(p9, p10) --[[ Line: 179 ]]
+function AssetTraversalUtils.getAssetRigChild(p9, p10)
 	-- upvalues: initRigParentToChild (copy), T (ref)
 	initRigParentToChild()
 	

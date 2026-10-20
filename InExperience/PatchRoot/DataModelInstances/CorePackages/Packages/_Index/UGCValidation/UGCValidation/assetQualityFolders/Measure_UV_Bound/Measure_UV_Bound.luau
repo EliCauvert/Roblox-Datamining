@@ -13,7 +13,7 @@ return {
 		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
 	fflag = require(Parent.flags.getFFlagUGCValidateAQMeshQuality),
-	run = function(p1, p2) --[[ Line: 18 ]]
+	run = function(p1, p2)
 		-- upvalues: GetFFlagUGCValidateAQMeshQualityBlockUploadModule (copy), ErrorSourceStringsModule (copy)
 		local MeasureUVBound = p2.aqsSummaryData.Measure_UV_Bound
 		

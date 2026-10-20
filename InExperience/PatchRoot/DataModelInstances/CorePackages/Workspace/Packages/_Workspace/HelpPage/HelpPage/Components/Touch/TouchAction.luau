@@ -10,7 +10,7 @@ local Icon = FoundationModule.Icon
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
 
-return function(p1) --[[ Line: 26 ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), Text (copy), ConstantsModule (copy), Icon (copy)
 	local UseTokensResult = UseTokensFunction()
 	local TOUCHENUMTOICONEntry = ConstantsModule.HELP_PAGE.TOUCH_ENUM_TO_ICON[p1.touchInput]

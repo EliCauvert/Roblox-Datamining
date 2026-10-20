@@ -9,7 +9,7 @@ local LuaAppInfoTableResponsiveProviderOverride = game:DefineFastFlag("LuaAppInf
 local FFlagInfoTableStableItemKeys = require(Parent.SharedFlags).FFlagInfoTableStableItemKeys
 local Breakpoint = FoundationModule.Enums.Breakpoint
 
-local function buildColumnMajorChildren(Items, NumColumns, Size) --[[ Line: 26 ]]
+local function buildColumnMajorChildren(Items, NumColumns, Size)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), FFlagInfoTableStableItemKeys (copy)
 	local CountItems = #Items
 	local Ceiled = math.ceil(CountItems / NumColumns)
@@ -30,7 +30,7 @@ local function buildColumnMajorChildren(Items, NumColumns, Size) --[[ Line: 26 ]
 	return Elements
 end
 
-return ReactModule.memo(function(Frame: Frame) --[[ Line: 77 | Named "InfoTable" ]]
+return ReactModule.memo(function(Frame: Frame)
 	-- upvalues: LuaAppInfoTableResponsiveProviderOverride (copy), ReactModule (copy), buildColumnMajorChildren (copy), FoundationModule (copy), LuaAppInfoTableResponsiveProviderOverride (copy), UseResponsiveFunction (copy), CryoModule (copy), Breakpoint (copy), UseBreakpointFunction (copy), ResponsiveProvider (copy)
 	local NumColumns = if Frame.numColumns and Frame.numColumns > 0 then Frame.numColumns else 1
 	local v1 = nil
@@ -77,10 +77,10 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 77 | Named "InfoTable"
 	end
 	if LuaAppInfoTableResponsiveProviderOverride then
 		local _, UseBreakpointResult2 = UseBreakpointFunction(v2)
-		ReactModule.useEffect(function() --[[ Line: 122 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseBreakpointResult2 (copy), Callback (ref)
 			if UseBreakpointResult2.X > 0 then
-				task.defer(function() --[[ Line: 124 ]]
+				task.defer(function()
 					-- upvalues: Callback (upval)
 					Callback(true)
 				end)

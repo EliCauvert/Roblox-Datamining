@@ -3,22 +3,22 @@ local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local FFlagEnableDrawerAnimatingHook = require(Parent.SharedFlags).FFlagEnableDrawerAnimatingHook
 
-return function() --[[ Line: 20 | Named "createDrawerVisibleStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy), SignalsReactModule (copy), FFlagEnableDrawerAnimatingHook (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(false)
 	local Signal1, Signal2_1 = SignalsModule.createSignal(false)
 	
-	local function useDrawerVisible() --[[ Line: 24 ]]
+	local function useDrawerVisible()
 		-- upvalues: SignalsReactModule (upval), Signal (copy)
 		return SignalsReactModule.useSignalState(Signal)
 	end
 	
-	local function useDrawerShouldMount() --[[ Line: 28 ]]
+	local function useDrawerShouldMount()
 		-- upvalues: SignalsReactModule (upval), Signal1 (copy)
 		return SignalsReactModule.useSignalState(Signal1)
 	end
 	
-	local function SetDrawerVisible(p1) --[[ Line: 32 ]]
+	local function SetDrawerVisible(p1)
 		-- upvalues: Signal2 (copy), Signal2_1 (copy)
 		Signal2(p1)
 		
@@ -34,7 +34,7 @@ return function() --[[ Line: 20 | Named "createDrawerVisibleStore" ]]
 	if FFlagEnableDrawerAnimatingHook then
 		GetDrawerAnimating, SetDrawerAnimating = SignalsModule.createSignal(false)
 		
-		UseDrawerAnimating = function() --[[ Line: 42 ]]
+		UseDrawerAnimating = function()
 			-- upvalues: SignalsReactModule (upval), GetDrawerAnimating (ref)
 			return SignalsReactModule.useSignalState(GetDrawerAnimating)
 		end

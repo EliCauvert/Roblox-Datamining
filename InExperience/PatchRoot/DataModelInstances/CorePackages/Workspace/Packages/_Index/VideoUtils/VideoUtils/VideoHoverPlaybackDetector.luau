@@ -2,9 +2,9 @@
 local ReactModule = require(VideoUtils.Parent.React)
 local VideoEndReason = require(VideoUtils.Analytics.Enums).VideoEndReason
 
-return function(p1) --[[ Line: 14 | Named "VideoHoverPlaybackDetector" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), VideoEndReason (copy)
-	ReactModule.useEffect(function() --[[ Line: 16 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), VideoEndReason (upval)
 		if p1.isHovered then
 			p1.requestVideoPlayback(false)

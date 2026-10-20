@@ -17,15 +17,15 @@ local Constants = require(CorePackages.Workspace.Packages.VoiceChatCore).Constan
 local PlayerMenuActions = ConstantsModule.PlayerMenuActions
 local PreselectedPlayerReportBugfix = game:DefineFastFlag("PreselectedPlayerReportBugfix", false)
 
-local function alphabeticalSort(A, B): boolean --[[ Line: 31 ]]
+local function alphabeticalSort(A, B): boolean
 	return A.Name:lower() < B.Name:lower()
 end
 
-return function(p1) --[[ Line: 35 | Named "ReportPersonMenuItemsContainer" ]]
+return function(p1)
 	-- upvalues: GetMenuItemSizingsModule (copy), ReactModule (copy), ReportPersonUIStateReducerModule (copy), ConstantsModule (copy), PreselectedPlayerReportBugfix (copy), Default (copy), Constants (copy), HandlePreselectedPlayerModule (copy), PlayerMenuActions (copy), alphabeticalSort (copy), Players (copy), CryoModule (copy), GetMenuItemsFromConfigsModule (copy), ReportPlayerMenuItemConfigListModule (copy)
 	local MenuItemSizingsModule = GetMenuItemSizingsModule()
 	local UseReducerResult, UseReducerResult2 = ReactModule.useReducer(ReportPersonUIStateReducerModule, ConstantsModule.InitPersonUIState)
-	ReactModule.useEffect(function() --[[ Line: 39 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), ConstantsModule (upval), PreselectedPlayerReportBugfix (upval), Default (upval), Constants (upval), HandlePreselectedPlayerModule (upval), UseReducerResult2 (copy), PlayerMenuActions (upval)
 		if p1.utilityProps.isReportTabVisible ~= true then return end
 		p1.utilityProps.analyticsDispatch({
@@ -33,13 +33,13 @@ return function(p1) --[[ Line: 35 | Named "ReportPersonMenuItemsContainer" ]]
 		})
 		
 		if not PreselectedPlayerReportBugfix or Default:UserVoiceEnabled() and Default:GetVoiceJoinProgress() ~= Constants.VOICE_JOIN_PROGRESS.Suspended then
-			Default:asyncInit():andThen(function() --[[ Line: 67 ]]
+			Default:asyncInit():andThen(function()
 				-- upvalues: p1 (upval), HandlePreselectedPlayerModule (upval), UseReducerResult2 (upval), PlayerMenuActions (upval)
 				if p1.utilityProps.preselectedPlayer then
 					HandlePreselectedPlayerModule(p1.utilityProps.preselectedPlayer, true, UseReducerResult2, p1.utilityProps.analyticsDispatch)
 				end
 				UseReducerResult2({ enabled = true, type = PlayerMenuActions.SetVoiceEnabled })
-			end):catch(function() --[[ Line: 81 ]]
+			end):catch(function()
 				-- upvalues: p1 (upval), HandlePreselectedPlayerModule (upval), UseReducerResult2 (upval)
 				if p1.utilityProps.preselectedPlayer then
 					HandlePreselectedPlayerModule(p1.utilityProps.preselectedPlayer, false, UseReducerResult2, p1.utilityProps.analyticsDispatch)
@@ -56,7 +56,7 @@ return function(p1) --[[ Line: 35 | Named "ReportPersonMenuItemsContainer" ]]
 			type = PlayerMenuActions.SetVoiceEnabled
 		})
 	end, { p1.utilityProps.isReportTabVisible })
-	ReactModule.useEffect(function() --[[ Line: 96 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseReducerResult (copy), ConstantsModule (upval), Default (upval), alphabeticalSort (upval), Players (upval), CryoModule (upval), UseReducerResult2 (copy), PlayerMenuActions (upval)
 		local List = {}
 		
@@ -73,7 +73,7 @@ return function(p1) --[[ Line: 35 | Named "ReportPersonMenuItemsContainer" ]]
 		local Flag1 = false
 		UseReducerResult2({
 			type = PlayerMenuActions.UpdatePlayerNameMap,
-			playerObjects = CryoModule.List.filter(List, function(Player: Player): boolean --[[ Line: 175 ]]
+			playerObjects = CryoModule.List.filter(List, function(Player: Player): boolean
 				-- upvalues: UseReducerResult (upval), Flag (ref), Flag1 (ref), Players (upval)
 				if UseReducerResult.preselectedPlayer and Player.UserId == UseReducerResult.preselectedPlayer.UserId then
 					Flag = true

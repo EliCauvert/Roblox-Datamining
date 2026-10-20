@@ -4,11 +4,11 @@ local HttpModule = require(Parent.Http)
 local HttpClientModule = require(Parent.HttpClient)
 local PromiseModule = require(Parent.Promise)
 
-local function _(p1) --[[ Line: 75 | Named "nonEmptyString" ]]
+local function _(p1)
 	return if type(p1) == "string" and p1 ~= "" then p1 else nil
 end
 
-local function normalizeLookByOutfit(p1) --[[ Line: 88 ]]
+local function normalizeLookByOutfit(p1)
 	if type(p1) ~= "table" then
 		return nil, `Type table required, got {type(p1)}.`
 	elseif type(p1.look) ~= "table" then
@@ -38,7 +38,7 @@ local function normalizeLookByOutfit(p1) --[[ Line: 88 ]]
 	end
 end
 
-local function isLookNotFound(p1): boolean --[[ Line: 117 ]]
+local function isLookNotFound(p1): boolean
 	-- upvalues: HttpService (copy)
 	if type(p1) ~= "table" then
 		return false
@@ -65,7 +65,7 @@ local function isLookNotFound(p1): boolean --[[ Line: 117 ]]
 	return type(ResponseBody) == "table" and ResponseBody.errorCode == 98
 end
 
-return function(p1, p2) --[[ Line: 148 | Named "fetchLookByOutfit" ]]
+return function(p1, p2)
 	-- upvalues: HttpModule (copy), HttpClientModule (copy), normalizeLookByOutfit (copy), isLookNotFound (copy), PromiseModule (copy)
 	local P4 = p2 or {}
 	
@@ -74,7 +74,7 @@ return function(p1, p2) --[[ Line: 148 | Named "fetchLookByOutfit" ]]
 		analyticsKey = "look-api.get-by-outfit",
 		network = P4.network,
 		url = (P4.baseUrl or HttpModule.Url.APIS_URL) .. "look-api/v2/looks/by-outfit/" .. tostring(p1),
-		decode = function(p3) --[[ Line: 157 ]]
+		decode = function(p3)
 			-- upvalues: normalizeLookByOutfit (upval)
 			local NormalizeLookByOutfitResult, _ = normalizeLookByOutfit(p3)
 			
@@ -83,7 +83,7 @@ return function(p1, p2) --[[ Line: 148 | Named "fetchLookByOutfit" ]]
 			end
 			return NormalizeLookByOutfitResult
 		end
-	}))):catch(function(Err) --[[ Line: 163 ]]
+	}))):catch(function(Err)
 		-- upvalues: isLookNotFound (upval), PromiseModule (upval)
 		return if isLookNotFound(Err) then {} else PromiseModule.reject(Err)
 	end)

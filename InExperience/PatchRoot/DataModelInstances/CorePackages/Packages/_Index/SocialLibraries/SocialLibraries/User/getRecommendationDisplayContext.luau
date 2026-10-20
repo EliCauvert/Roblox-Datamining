@@ -1,10 +1,10 @@
 ﻿local RecommendationContextType = require(script:FindFirstAncestor("SocialLibraries").dependencies).RoduxFriends.Enums.RecommendationContextType
 
-local function _(p1) --[[ Line: 49 ]]
+local function _(p1)
 	return if p1.mutualFriendsCount then p1.mutualFriendsCount else p1.mutualFriendsList and #p1.mutualFriendsList or 0
 end
 
-return function(p1) --[[ Line: 55 ]]
+return function(p1)
 	-- upvalues: RecommendationContextType (copy)
 	local Icon = nil
 	local FeatureFriendsLabelSingularMutualFriend: string? = nil
@@ -13,7 +13,7 @@ return function(p1) --[[ Line: 55 ]]
 	local MutualFriendsCount = if p1.mutualFriendsCount then p1.mutualFriendsCount else p1.mutualFriendsList and #p1.mutualFriendsList or 0
 	
 	if RawValueResult == RecommendationContextType.MutualFriends.rawValue() and MutualFriendsCount > 0 then
-		Formatter = function(Text: string) --[[ Line: 65 ]]
+		Formatter = function(Text: string)
 			-- upvalues: MutualFriendsCount (copy)
 			return if Text then tostring(MutualFriendsCount) .. " " .. string.lower(Text) else nil
 		end

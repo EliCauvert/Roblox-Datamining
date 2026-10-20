@@ -14,19 +14,19 @@ MoreButton.validateProps = T.strictInterface({
 	userId = FFlagLuaMenuPerfImprovementsModule and T.number or nil
 })
 
-function MoreButton.init(p1) --[[ Line: 25 ]]
+function MoreButton.init(p1)
 	-- upvalues: FFlagLuaMenuPerfImprovementsModule (copy)
 	if FFlagLuaMenuPerfImprovementsModule then
-		function p1.onActivated() --[[ Line: 27 ]]
+		function p1.onActivated()
 			-- upvalues: p1 (copy)
 			p1.props.onActivated(p1.props.userId)
 		end
 	end
 end
 
-function MoreButton.render(p1) --[[ Line: 33 ]]
+function MoreButton.render(p1)
 	-- upvalues: WithStyleFunction (copy), FFlagLuaMenuPerfImprovementsModule (copy), Roact (copy), ImageSetButton (copy), AssetsModule (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 34 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: p1 (copy), FFlagLuaMenuPerfImprovementsModule (upval), Roact (upval), ImageSetButton (upval), AssetsModule (upval)
 		return Roact.createElement(ImageSetButton, {
 			Size = UDim2.new(0, 36, 0, 36),

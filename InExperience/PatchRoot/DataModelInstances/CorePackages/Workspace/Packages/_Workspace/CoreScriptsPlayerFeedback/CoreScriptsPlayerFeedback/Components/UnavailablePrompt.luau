@@ -14,14 +14,14 @@ local GuiService = game:GetService("GuiService")
 local UseEscapeDismissModule = require(CoreScriptsPlayerFeedback.Hooks.useEscapeDismiss)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return (ReactModule.memo(function(p1) --[[ Line: 31 ]]
+return (ReactModule.memo(function(p1)
 	-- upvalues: UseScreenSizeFunction (copy), UseStyleFunction (copy), ReactModule (copy), UseLastInputMethodFunction (copy), UseLocalizationFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), UseEscapeDismissModule (copy), GuiService (copy), ButtonType (copy), InteractiveAlert (copy)
 	local UseScreenSizeResult = UseScreenSizeFunction()
 	local UseStyleResult = UseStyleFunction()
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseLastInputMethodResult = UseLastInputMethodFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 39 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseLastInputMethodResult (copy), UseStateResult2 (copy)
 		if not UseStateResult and (UseLastInputMethodResult == "Keyboard" or UseLastInputMethodResult == "Gamepad") then
 			UseStateResult2(true)
@@ -51,7 +51,7 @@ return (ReactModule.memo(function(p1) --[[ Line: 31 ]]
 		HeaderUnder13 = UseLocalizationResult.HeaderDefault
 		HintUnder13 = UseLocalizationResult.HintDefault
 	end
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 71 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStyleResult (copy), ReactModule (upval), HeaderUnder13 (ref), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), HintUnder13 (ref)
 		local Body = UseStyleResult.Font.Body
 		local Header2 = UseStyleResult.Font.Header2 or UseStyleResult.Font.Body
@@ -100,29 +100,29 @@ return (ReactModule.memo(function(p1) --[[ Line: 31 ]]
 			})
 		})
 	end, { UseStyleResult, HeaderUnder13, HintUnder13 })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 125 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		p1.closePrompt()
 	end, { p1.closePrompt })
 	UseEscapeDismissModule("UnavailablePromptCancel", UseResult1)
-	local UseResult2 = ReactModule.useCallback(function(Current) --[[ Line: 131 ]]
+	local UseResult2 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), UseStateResult (copy), GuiService (upval)
 		UseRefResult.current = Current
 		
 		if UseStateResult and Current then
-			pcall(function() --[[ Line: 134 ]]
+			pcall(function()
 				-- upvalues: GuiService (upval), Current (copy)
 				GuiService:Select(Current)
 			end)
 		end
 	end, { UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 140 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseRefResult (copy), GuiService (upval)
 		if not UseStateResult then return end
 		local Current = UseRefResult.current
 		
 		if Current then
-			pcall(function() --[[ Line: 146 ]]
+			pcall(function()
 				-- upvalues: GuiService (upval), Current (copy)
 				GuiService:Select(Current)
 			end)
@@ -132,7 +132,7 @@ return (ReactModule.memo(function(p1) --[[ Line: 31 ]]
 	return ReactModule.createElement(InteractiveAlert, {
 		isMiddleContentFocusable = false,
 		title = UseLocalizationResult.Title,
-		buttonStackInfo = ReactModule.useMemo(function() --[[ Line: 152 ]]
+		buttonStackInfo = ReactModule.useMemo(function()
 			-- upvalues: ButtonType (upval), UseResult1 (copy), UseLocalizationResult (copy), UseResult2 (copy), UseStateResult (copy)
 			return {
 				buttons = {

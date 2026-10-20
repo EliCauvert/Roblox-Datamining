@@ -5,7 +5,7 @@ local _ = require(Parent.Types)
 local FFlagUseRbxstorageInGalleryModule = require(Parent.Flags.FFlagUseRbxstorageInGallery)
 local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 
-function formatBytes(p1: number): string --[[ Line: 12 ]]
+function formatBytes(p1: number): string
 	local list = {
 		"Bytes",
 		"KB",
@@ -24,7 +24,7 @@ function formatBytes(p1: number): string --[[ Line: 12 ]]
 	return if list[Floored + 1] then string.format(Template, Value, list[Floored + 1]) else ""
 end
 
-return function(List) --[[ Line: 31 | Named "getCaptureStorageUsage" ]]
+return function(List)
 	-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), FFlagUseRbxstorageInGalleryModule (copy), CaptureTypeModule (copy), CaptureService (copy)
 	if #List == 0 then return end
 	local FilePaths = {}
@@ -36,7 +36,7 @@ return function(List) --[[ Line: 31 | Named "getCaptureStorageUsage" ]]
 			end
 		end
 	end
-	local _, Result = pcall(function() --[[ Line: 47 ]]
+	local _, Result = pcall(function()
 		-- upvalues: CaptureService (upval), FilePaths (copy)
 		return CaptureService:GetCaptureStorageSizeAsync(FilePaths)
 	end)

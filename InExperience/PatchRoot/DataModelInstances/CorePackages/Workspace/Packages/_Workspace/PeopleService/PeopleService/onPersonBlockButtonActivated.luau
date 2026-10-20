@@ -1,6 +1,6 @@
 ﻿local PromiseModule = require(script:FindFirstAncestor("PeopleService").Parent.Promise)
 
-return function(Player: Player, p1, p2, Source, _, p3) --[[ Line: 36 | Named "onPersonBlockButtonActivated" ]]
+return function(Player: Player, p1, p2, Source, _, p3)
 	-- upvalues: PromiseModule (copy)
 	p1:trackBlockUserButtonClick(Player.UserId, p2, Source)
 	local ResolvePromise = nil
@@ -9,9 +9,9 @@ return function(Player: Player, p1, p2, Source, _, p3) --[[ Line: 36 | Named "on
 		useToastFlow = true,
 		modalProps = {
 			player = Player,
-			closeModal = function() --[[ Line: 61 ]] end,
+			closeModal = function() end,
 			analytics = {
-				action = function(_, _, p4, _) --[[ Line: 46 ]]
+				action = function(_, _, p4, _)
 					-- upvalues: p1 (copy), Player (copy), p2 (copy), Source (copy)
 					if p4 == "blockUser" then
 						p1:trackBlockUser(Player.UserId, p2, Source)
@@ -31,7 +31,7 @@ return function(Player: Player, p1, p2, Source, _, p3) --[[ Line: 36 | Named "on
 			source = Source,
 			onBlockingSuccess = p3 and p3.onBlockingSuccess or nil
 		},
-		promise = PromiseModule.new(function(p4) --[[ Line: 69 ]]
+		promise = PromiseModule.new(function(p4)
 			-- upvalues: ResolvePromise (ref)
 			ResolvePromise = p4
 		end),

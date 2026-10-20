@@ -21,15 +21,15 @@ local CommercePurchaseReducerModule = require(CommercePurchaseApp.Store.Reducers
 local NetworkContext = require(Parent.EconomyCommonCoreScriptHooks).NetworkContext
 local Style = { themeName = "dark", fontName = "gotham" }
 
-local function _() --[[ Line: 32 | Named "createFocusNavigationService" ]]
+local function _()
 	-- upvalues: ReactFocusNavigationModule (copy)
 	return ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
 end
 
-local function createNetworkImpl() --[[ Line: 36 ]]
+local function createNetworkImpl()
 	-- upvalues: HttpRequestModule (copy)
 	return HttpRequestModule.config({
-		requestFunction = function(p1, p2, p3) --[[ Line: 38 ]]
+		requestFunction = function(p1, p2, p3)
 			-- upvalues: HttpRequestModule (upval)
 			return (HttpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3))
 		end,
@@ -38,12 +38,12 @@ local function createNetworkImpl() --[[ Line: 36 ]]
 	})
 end
 
-local _ = function() --[[ Line: 47 | Named "createStore" ]]
+local _ = function()
 	-- upvalues: RoduxModule (copy), CommercePurchaseReducerModule (copy)
 	return RoduxModule.Store.new(CommercePurchaseReducerModule, nil, { RoduxModule.makeThunkMiddleware() })
 end
 
-return function() --[[ Line: 53 | Named "renderCommercePurchaseApp" ]]
+return function()
 	-- upvalues: CoreGui (copy), RoduxModule (copy), CommercePurchaseReducerModule (copy), createNetworkImpl (copy), ReactFocusNavigationModule (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), AppStyleProvider (copy), Style (copy), NetworkContext (copy), RoactRoduxModule (copy), DesignTokenProvider (copy), SelectionCursorProvider (copy), CursorProvider (copy), Provider (copy), CommercePurchaseAppModule (copy), ReactRobloxModule (copy)
 	local CommercePurchaseApp = Instance.new("Folder")
 	CommercePurchaseApp.Name = "CommercePurchaseApp"

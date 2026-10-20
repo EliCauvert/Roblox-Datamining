@@ -8,13 +8,13 @@ local Default = LoggingProtocolModule.default
 local IdentificationUtils = require(Parent.AvatarIdentification).IdentificationUtils
 local Largest = math.max(require(TnSAdIdentification.Flags.GetFIntAdIdentificationMinimumAreaPerMyriad)() / 10000, 0)
 
-function getLocalCharacterPosition(Object) --[[ Line: 30 ]]
+function getLocalCharacterPosition(Object)
 	local HumanoidRootPart = Object:FindFirstChild("HumanoidRootPart")
 	
 	return if HumanoidRootPart then HumanoidRootPart.Position else nil
 end
 
-function checkVisibility(Camera: Camera, p1, Entry, FilterDescendantsInstances): number --[[ Line: 42 ]]
+function checkVisibility(Camera: Camera, p1, Entry, FilterDescendantsInstances): number
 	local Position = Camera.CFrame.Position
 	local ViewportSize = Camera.ViewportSize
 	local RaycastParams1 = RaycastParams.new()
@@ -47,7 +47,7 @@ function checkVisibility(Camera: Camera, p1, Entry, FilterDescendantsInstances):
 	return Count1 / Count
 end
 
-function createSingleVisibleRegionFromWorldSpaceCorners(List, p2, p3) --[[ Line: 90 ]]
+function createSingleVisibleRegionFromWorldSpaceCorners(List, p2, p3)
 	-- upvalues: IdentificationUtils (copy)
 	local Buffer = table.create(#List)
 	
@@ -61,7 +61,7 @@ function createSingleVisibleRegionFromWorldSpaceCorners(List, p2, p3) --[[ Line:
 	}
 end
 
-function getAdCenterAndScreenArea(List, Camera: Camera) --[[ Line: 107 ]]
+function getAdCenterAndScreenArea(List, Camera: Camera)
 	local ViewportSize = Camera.ViewportSize
 	local Total = vector.create(0, 0, 0)
 	local v1 = 0
@@ -76,7 +76,7 @@ function getAdCenterAndScreenArea(List, Camera: Camera) --[[ Line: 107 ]]
 end
 
 return {
-	getAdsForPoint = function(List, Vector) --[[ Line: 175 ]]
+	getAdsForPoint = function(List, Vector)
 		local t = {}
 		
 		for i, value in pairs(List) do
@@ -107,7 +107,7 @@ return {
 		end
 		return t
 	end,
-	getVisibleAds = function() --[[ Line: 211 ]]
+	getVisibleAds = function()
 		-- upvalues: AdService (copy), Players (copy), IdentificationUtils (copy), Largest (copy), Default (copy), LoggingProtocolModule (copy), GetFIntAdIdentifiedTelemetryThrottleHundredthsPercentModule (copy)
 		local t = {}
 		local config = { totalAds = 0, checkedAds = 0, duration = 0 }
@@ -130,14 +130,14 @@ return {
 		local ClockTime = os.clock()
 		config.totalAds = #ReportAdInfo
 		
-		local function _() --[[ Line: 247 ]]
+		local function _()
 			-- upvalues: config (copy), ClockTime (copy)
 			config.duration = os.clock() - ClockTime
 			
 			return config
 		end
 		
-		local _ = function(): boolean --[[ Line: 252 ]]
+		local _ = function(): boolean
 			-- upvalues: ClockTime (copy)
 			return os.clock() - ClockTime > 0.2
 		end

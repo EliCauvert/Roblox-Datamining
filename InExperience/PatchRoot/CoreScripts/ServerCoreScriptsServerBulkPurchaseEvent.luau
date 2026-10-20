@@ -21,9 +21,9 @@ if require(CorePackages.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndB
 		Asset = Enum.MarketplaceProductType.AvatarAsset
 	}
 	
-	local function _(Items) --[[ Line: 77 | Named "getBatchItemDetailsServerSide" ]]
+	local function _(Items)
 		-- upvalues: Url (copy), FFlagAXEnableTimedOptionsServerScript (copy), HttpService (copy), HttpRbxApiService (copy)
-		local Success, Result = pcall(function() --[[ Line: 78 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Url (upval), FFlagAXEnableTimedOptionsServerScript (upval), Items (copy), HttpService (upval), HttpRbxApiService (upval)
 			local Text = Url.CATALOG_URL .. "v1/catalog/items/details"
 			local Json = nil
@@ -44,7 +44,7 @@ if require(CorePackages.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndB
 		return if Success then Result else nil
 	end
 	
-	local function isLimited(p1): boolean --[[ Line: 121 ]]
+	local function isLimited(p1): boolean
 		local ItemRestrictions = p1.itemRestrictions
 		local FoundIndex = ItemRestrictions and table.find(ItemRestrictions, "LimitedUnique")
 		local FoundIndex1 = ItemRestrictions and table.find(ItemRestrictions, "Collectible")
@@ -52,15 +52,15 @@ if require(CorePackages.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndB
 		return (ItemRestrictions and table.find(ItemRestrictions, "Limited")) ~= nil or FoundIndex ~= nil or FoundIndex1 ~= nil
 	end
 	
-	local _ = function(Player: Player): boolean --[[ Line: 132 | Named "validatePlayer" ]]
+	local _ = function(Player: Player): boolean
 		return Player.UserId and Player.UserId > 0 or false
 	end
 	
-	local function validateItem(p1): boolean --[[ Line: 143 ]]
+	local function validateItem(p1): boolean
 		return type(p1) == "table" and p1.id ~= nil and p1.itemType ~= nil and type(p1.itemType) == "number" and type(p1.id) == "number" and p1.id ~= 0 and (p1.itemType == Enum.AvatarItemType.Asset.Value or p1.itemType == Enum.AvatarItemType.Bundle.Value)
 	end
 	
-	local function validateIncomingItems(List) --[[ Line: 161 ]]
+	local function validateIncomingItems(List)
 		-- upvalues: FIntBulkPurchaseRequestLimit (copy), validateItem (copy), FFlagAXEnableTimedOptionsServerScript (copy)
 		local List1 = {}
 		
@@ -89,7 +89,7 @@ if require(CorePackages.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndB
 		return List1
 	end
 	
-	local _ = function(Key): boolean --[[ Line: 195 | Named "isThrottled" ]]
+	local _ = function(Key): boolean
 		-- upvalues: NewCurrentTimes (copy), FIntBulkPurchaseThrottleLimit (copy)
 		local NewCurrentTime = NewCurrentTimes[Key]
 		
@@ -102,11 +102,11 @@ if require(CorePackages.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndB
 		end
 	end
 	
-	Players.PlayerRemoving:Connect(function(Player) --[[ Line: 204 ]]
+	Players.PlayerRemoving:Connect(function(Player)
 		-- upvalues: NewCurrentTimes (copy)
 		NewCurrentTimes[Player] = nil
 	end)
-	ServerSideBulkPurchaseEvent.OnServerEvent:Connect(function(Player: Player, p1) --[[ Line: 208 ]]
+	ServerSideBulkPurchaseEvent.OnServerEvent:Connect(function(Player: Player, p1)
 		-- upvalues: NewCurrentTimes (copy), FIntBulkPurchaseThrottleLimit (copy), validateIncomingItems (copy), Url (copy), FFlagAXEnableTimedOptionsServerScript (copy), HttpService (copy), HttpRbxApiService (copy), isLimited (copy), FFlagFilterOutShopOnlyItemsOnBulkPurchase (copy), Config (copy), config (copy), MarketplaceService (copy)
 		if (not Player.UserId or Player.UserId <= 0) and true then return end
 		local NewCurrentTime = NewCurrentTimes[Player]
@@ -122,7 +122,7 @@ if require(CorePackages.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndB
 		local ValidateIncomingItemsResult = validateIncomingItems(p1)
 		
 		if ValidateIncomingItemsResult == nil or #ValidateIncomingItemsResult == 0 then return end
-		local Success, Result = pcall(function() --[[ Line: 78 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Url (upval), FFlagAXEnableTimedOptionsServerScript (upval), ValidateIncomingItemsResult (copy), HttpService (upval), HttpRbxApiService (upval)
 			local Text = Url.CATALOG_URL .. "v1/catalog/items/details"
 			local Json = nil

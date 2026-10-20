@@ -6,21 +6,21 @@ local FFlagAccountUpgradeInExpGateModule = require(AccountUpgrade.Flags.FFlagAcc
 local FStringAccountUpgradeAmpFeatureNameModule = require(AccountUpgrade.Flags.FStringAccountUpgradeAmpFeatureName)
 local FStringAccountUpgradeAmpNameSpaceModule = require(AccountUpgrade.Flags.FStringAccountUpgradeAmpNameSpace)
 
-local function _(p1) --[[ Line: 28 | Named "malformedAvailability" ]]
+local function _(p1)
 	return {
 		granted = false,
 		access = if type(p1) == "table" and type(p1.access) == "string" then p1.access else "Malformed"
 	}
 end
 
-return function() --[[ Line: 37 | Named "getPioneerAccountUpgradeAvailability" ]]
+return function()
 	-- upvalues: FFlagAccountUpgradeInExpGateModule (copy), FStringAccountUpgradeAmpFeatureNameModule (copy), FStringAccountUpgradeAmpNameSpaceModule (copy), AmpApiProvider (copy), AccessResponseEnum (copy)
 	if not FFlagAccountUpgradeInExpGateModule then
 		return { granted = false, access = "Disabled" }
 	elseif FStringAccountUpgradeAmpFeatureNameModule == "" or FStringAccountUpgradeAmpNameSpaceModule == "" then
 		return { granted = false, access = "Misconfigured" }
 	else
-		local Success, Result = pcall(function() --[[ Line: 49 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: AmpApiProvider (upval), FStringAccountUpgradeAmpFeatureNameModule (copy), FStringAccountUpgradeAmpNameSpaceModule (copy)
 			return AmpApiProvider.getFeatureAccess({ FStringAccountUpgradeAmpFeatureNameModule }, FStringAccountUpgradeAmpNameSpaceModule)
 		end)

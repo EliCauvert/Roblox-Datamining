@@ -17,7 +17,7 @@ local FFlagEnableStickyShortcutBarOnAllPlatforms = SharedFlagsModule.FFlagEnable
 local FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled = require(AppShortcutBar.Flags).FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled
 local GetAuthenticationStatusStore = if FFlagUseSignalsForAuthenticationStatus then require(Parent.AuthenticationStatus).GetAuthenticationStatusStore else nil
 
-local function selectUserLoggedIn(p1): boolean --[[ Line: 28 ]]
+local function selectUserLoggedIn(p1): boolean
 	-- upvalues: LoginStatus (copy)
 	return p1.AuthenticationStatus and p1.AuthenticationStatus.status == LoginStatus.LOGGED_IN
 end
@@ -28,7 +28,7 @@ local GetShortcutBarStatusStoreModule = require(AppShortcutBar.Stores.GetShortcu
 local AppShortcut = require(AppShortcutBar.Components.AppShortcut).AppShortcut
 local UseStickyShortcutBarExposureLoggingModule = require(AppShortcutBar.Hooks.useStickyShortcutBarExposureLogging)
 
-function AppStickyShortcutBar(p1) --[[ Line: 40 ]]
+function AppStickyShortcutBar(p1)
 	-- upvalues: GetShortcutBarStatusStoreModule (copy), UseTokensFunction (copy), UseAppShortcutBarHeightFunction (copy), ResponsiveModule (copy), UseFocusedTextBoxFunction (copy), FFlagEnableStickyShortcutBarOnAllPlatforms (copy), UseIsStickyShortcutBarEnabledFunction (copy), UseSignalStateFunction (copy), DisplayModule (copy), DisallowStickyShortcutBarOnNotLoggedIn (copy), FFlagUseSignalsForAuthenticationStatus (copy), GetAuthenticationStatusStore (copy), LoginStatus (copy), UseSelectorFunction (copy), selectUserLoggedIn (copy), FocusNavigationEventNameEnum (copy), ReactModule (copy), FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled (copy), UseStickyShortcutBarExposureLoggingModule (copy), AppShortcut (copy)
 	local ShortcutBarStatusStoreModule = GetShortcutBarStatusStoreModule(false)
 	local UseTokensResult = UseTokensFunction()
@@ -48,7 +48,7 @@ function AppStickyShortcutBar(p1) --[[ Line: 40 ]]
 	end
 	local IsUseSignalStateResultMatch = if DisallowStickyShortcutBarOnNotLoggedIn then if FFlagUseSignalsForAuthenticationStatus then UseSignalStateFunction(GetAuthenticationStatusStore(false).getStatus) == LoginStatus.LOGGED_IN else UseSelectorFunction(selectUserLoggedIn) else nil
 	local NoUseIsStickyShortcutBarEnabledResult = if not p1.items then if FFlagEnableStickyShortcutBarOnAllPlatforms then not UseIsStickyShortcutBarEnabledResult else not p1.items elseif FFlagEnableStickyShortcutBarOnAllPlatforms then not UseIsStickyShortcutBarEnabledResult else #p1.items == 0 or (#p1.items == 1 and p1.items[1].eventName == FocusNavigationEventNameEnum.NavigateBack or (UseFocusedTextBoxResult or DisallowStickyShortcutBarOnNotLoggedIn and not IsUseSignalStateResultMatch))
-	ReactModule.useEffect(function() --[[ Line: 81 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ShortcutBarStatusStoreModule (copy), NoUseIsStickyShortcutBarEnabledResult (ref)
 		ShortcutBarStatusStoreModule.setShortcutBarVisible(not NoUseIsStickyShortcutBarEnabledResult)
 	end, { NoUseIsStickyShortcutBarEnabledResult })
@@ -58,7 +58,7 @@ function AppStickyShortcutBar(p1) --[[ Line: 40 ]]
 	end
 	if FFlagEnableStickyShortcutBarOnAllPlatforms then
 		local Largest = math.max(UseAppShortcutBarHeightResult - UseSignalStateResult.bottom, 0)
-		ReactModule.useEffect(function() --[[ Line: 94 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: ShortcutBarStatusStoreModule (copy), NoUseIsStickyShortcutBarEnabledResult (ref), Largest (copy)
 			ShortcutBarStatusStoreModule.setShortcutBarReservedHeight(if NoUseIsStickyShortcutBarEnabledResult then 0 else Largest)
 		end, {
@@ -66,9 +66,9 @@ function AppStickyShortcutBar(p1) --[[ Line: 40 ]]
 			Largest,
 			ShortcutBarStatusStoreModule.setShortcutBarReservedHeight
 		})
-		ReactModule.useEffect(function() --[[ Line: 98 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: ShortcutBarStatusStoreModule (copy)
-			return function() --[[ Line: 99 ]]
+			return function()
 				-- upvalues: ShortcutBarStatusStoreModule (upval)
 				ShortcutBarStatusStoreModule.setShortcutBarReservedHeight(0)
 			end

@@ -1,4 +1,4 @@
-﻿local function findBackdrop(Parent) --[[ Line: 16 ]]
+﻿local function findBackdrop(Parent)
 	local LayerCollector = Parent
 	local Backdrop = nil
 	
@@ -16,7 +16,7 @@
 	return nil
 end
 
-return function(Sheet) --[[ Line: 31 | Named "getSheetStructure" ]]
+return function(Sheet)
 	-- upvalues: findBackdrop (copy)
 	local ScrollingFrame = Sheet:FindFirstChildOfClass("ScrollingFrame")
 	local SheetContainer = if ScrollingFrame == nil then nil else ScrollingFrame:FindFirstChild("SheetContainer")

@@ -6,14 +6,14 @@ local ComputeProfileFramesGatingModule = require(AvatarExperienceProfilePictureE
 local GetProfileFrameAmpAccessModule = require(AvatarExperienceProfilePictureEditor.Utils.getProfileFrameAmpAccess)
 local FFlagEditProfileFramesEnabled = require(Parent.SharedFlags).FFlagEditProfileFramesEnabled
 
-return function() --[[ Line: 23 | Named "useProfileFramesGating" ]]
+return function()
 	-- upvalues: FFlagEditProfileFramesEnabled (copy), UseAppPolicyFunction (copy), ReactModule (copy), GetProfileFrameAmpAccessModule (copy), ComputeProfileFramesGatingModule (copy)
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p1) --[[ Line: 25 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p1)
 		return p1.getDisableBlackbirdEntrypoints()
 	end)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 32 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FFlagEditProfileFramesEnabled (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), GetProfileFrameAmpAccessModule (upval)
 		if FFlagEditProfileFramesEnabled then
 			UseStateResult2_1(true)
@@ -26,7 +26,7 @@ return function() --[[ Line: 23 | Named "useProfileFramesGating" ]]
 			UseStateResult2_1(false)
 		end
 	end, { FFlagEditProfileFramesEnabled })
-	ReactModule.useEffect(function() --[[ Line: 44 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult (copy)
 		UseResult()
 	end, { UseResult })

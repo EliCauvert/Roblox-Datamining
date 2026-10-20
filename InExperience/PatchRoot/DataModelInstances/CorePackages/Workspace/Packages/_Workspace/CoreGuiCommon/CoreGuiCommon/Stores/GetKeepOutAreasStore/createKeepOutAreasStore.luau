@@ -6,11 +6,11 @@ local DisplayModule = require(Parent.Display)
 local CreateSignalFunction = SignalsModule.createSignal
 local CreateEffectFunction = SignalsModule.createEffect
 
-return function() --[[ Line: 41 ]]
+return function()
 	-- upvalues: CreateSignalFunction (copy), CryoModule (copy), GuiService (copy), DisplayModule (copy), CreateEffectFunction (copy)
 	local Signal, Signal2 = CreateSignalFunction({}, CryoModule.Dictionary.equals)
 	
-	local function v7(Vector, Vector1, List) --[[ Line: 44 ]]
+	local function v7(Vector, Vector1, List)
 		local List1 = {}
 		local Y = Vector.Y
 		local X: number = Vector1.X
@@ -36,7 +36,7 @@ return function() --[[ Line: 41 ]]
 		return List1
 	end
 	
-	local function v8(List): Rect --[[ Line: 96 ]]
+	local function v8(List): Rect
 		-- upvalues: GuiService (upval), DisplayModule (upval), v7 (copy)
 		local List1 = {}
 		
@@ -47,7 +47,7 @@ return function() --[[ Line: 41 ]]
 				position = value.position
 			})
 		end
-		table.sort(List1, function(A, B): boolean --[[ Line: 111 ]]
+		table.sort(List1, function(A, B): boolean
 			return A.position.X < B.position.X and A.position.X + A.size.X < B.size.X + B.position.X
 		end)
 		local GuiInset, _ = GuiService:GetGuiInset()
@@ -61,19 +61,19 @@ return function() --[[ Line: 41 ]]
 		return v1
 	end
 	
-	local function setKeepOutArea(Id, Position, Size) --[[ Line: 140 ]]
+	local function setKeepOutArea(Id, Position, Size)
 		-- upvalues: Signal2 (copy), CryoModule (upval), Signal (copy)
 		Signal2(CryoModule.Dictionary.join(Signal(false), { [Id] = { id = Id, position = Position, size = Size } }))
 	end
 	
-	local function removeKeepOutArea(Key) --[[ Line: 151 ]]
+	local function removeKeepOutArea(Key)
 		-- upvalues: Signal (copy), Signal2 (copy)
 		local SignalResult = Signal(false)
 		SignalResult[Key] = nil
 		Signal2(SignalResult)
 	end
 	
-	local Effect = CreateEffectFunction(function(p1) --[[ Line: 157 ]]
+	local Effect = CreateEffectFunction(function(p1)
 		-- upvalues: DisplayModule (upval), v8 (copy), Signal (copy), GuiService (upval)
 		local _ = DisplayModule.GetDisplayStore(p1).getViewportSize(p1)
 		local TopbarInset = v8(Signal(p1))
@@ -87,7 +87,7 @@ return function() --[[ Line: 41 ]]
 		getKeepOutAreas = Signal,
 		setKeepOutArea = setKeepOutArea,
 		removeKeepOutArea = removeKeepOutArea,
-		cleanup = function() --[[ Line: 165 ]]
+		cleanup = function()
 			-- upvalues: Effect (copy)
 			Effect()
 		end

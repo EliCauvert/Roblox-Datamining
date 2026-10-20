@@ -20,11 +20,11 @@ SliderEntry.validateProps = T.strictInterface({
 	buttonRef = T.optional(T.table)
 })
 
-function SliderEntry.init(p1) --[[ Line: 29 ]]
+function SliderEntry.init(p1)
 	p1.state = { isFrameSelectable = true }
 end
 
-function SliderEntry.render(p1) --[[ Line: 35 ]]
+function SliderEntry.render(p1)
 	-- upvalues: Roact (copy), GuiService (copy), InputLabelModule (copy), SliderWithInputModule (copy)
 	local ButtonRef = p1.props.buttonRef or Roact.createRef()
 	
@@ -33,7 +33,7 @@ function SliderEntry.render(p1) --[[ Line: 35 ]]
 		Size = UDim2.new(1, 0, 0, 92),
 		LayoutOrder = p1.props.LayoutOrder,
 		Selectable = p1.state.isFrameSelectable,
-		[Roact.Event.SelectionGained] = function() --[[ Line: 45 ]]
+		[Roact.Event.SelectionGained] = function()
 			-- upvalues: GuiService (upval), ButtonRef (copy), p1 (copy)
 			GuiService.SelectedCoreObject = ButtonRef:getValue()
 			p1:setState({ isFrameSelectable = false })
@@ -63,11 +63,11 @@ function SliderEntry.render(p1) --[[ Line: 35 ]]
 			canCaptureFocus = p1.props.canCaptureFocus,
 			isMenuOpen = p1.props.isMenuOpen,
 			sliderDotRef = ButtonRef,
-			onSelectionLost = function() --[[ Line: 81 ]]
+			onSelectionLost = function()
 				-- upvalues: p1 (copy)
 				p1:setState({ isFrameSelectable = true })
 			end,
-			onSelectionGained = function() --[[ Line: 86 ]]
+			onSelectionGained = function()
 				-- upvalues: p1 (copy)
 				p1:setState({ isFrameSelectable = false })
 			end

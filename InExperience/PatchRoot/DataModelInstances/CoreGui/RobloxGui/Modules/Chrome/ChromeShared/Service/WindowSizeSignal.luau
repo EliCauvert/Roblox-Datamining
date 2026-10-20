@@ -6,7 +6,7 @@ local ViewportUtilModule = require(ChromeShared.Service.ViewportUtil)
 local ConstantsModule = require(ChromeShared.Unibar.Constants)
 local FFlagChromeWindowSignalConstraintsToggle = require(CorePackages.Workspace.Packages.SharedFlags).FFlagChromeWindowSignalConstraintsToggle
 
-local function getConstrainedWindowSize(Smallest: number, Smallest1: number, IgnoreConstraints): UDim2 --[[ Line: 18 ]]
+local function getConstrainedWindowSize(Smallest: number, Smallest1: number, IgnoreConstraints): UDim2
 	-- upvalues: ViewportUtilModule (copy), FFlagChromeWindowSignalConstraintsToggle (copy), ConstantsModule (copy)
 	local GetResult = ViewportUtilModule.screenSize:get()
 	local IsXBelow = GetResult.X < GetResult.Y
@@ -28,7 +28,7 @@ end
 local WindowSizeSignalModule = {}
 WindowSizeSignalModule.__index = WindowSizeSignalModule
 
-function WindowSizeSignalModule.new(p1, p2, p3, p4) --[[ Line: 43 ]]
+function WindowSizeSignalModule.new(p1, p2, p3, p4)
 	-- upvalues: FFlagChromeWindowSignalConstraintsToggle (copy), getConstrainedWindowSize (copy), ConstantsModule (copy), Signal (copy), WindowSizeSignalModule (copy)
 	return (setmetatable({
 		_state = if FFlagChromeWindowSignalConstraintsToggle then getConstrainedWindowSize(p1 or ConstantsModule.DEFAULT_WIDTH, p2 or ConstantsModule.DEFAULT_HEIGHT, p4 or false) else getConstrainedWindowSize(p1 or ConstantsModule.DEFAULT_WIDTH, p2 or ConstantsModule.DEFAULT_HEIGHT),
@@ -38,11 +38,11 @@ function WindowSizeSignalModule.new(p1, p2, p3, p4) --[[ Line: 43 ]]
 	}, WindowSizeSignalModule))
 end
 
-function WindowSizeSignalModule:connect(p1) --[[ Line: 67 ]]
+function WindowSizeSignalModule:connect(p1)
 	return self._changeSignal:connect(p1)
 end
 
-function WindowSizeSignalModule:requestSize(Offset, Offset1) --[[ Line: 72 ]]
+function WindowSizeSignalModule:requestSize(Offset, Offset1)
 	-- upvalues: FFlagChromeWindowSignalConstraintsToggle (copy), getConstrainedWindowSize (copy)
 	local ConstrainedWindowSize = if FFlagChromeWindowSignalConstraintsToggle then getConstrainedWindowSize(Offset, Offset1, self._ignoreConstraints) else getConstrainedWindowSize(Offset, Offset1)
 	
@@ -52,21 +52,21 @@ function WindowSizeSignalModule:requestSize(Offset, Offset1) --[[ Line: 72 ]]
 	end
 end
 
-function WindowSizeSignalModule:toggleIsLarge() --[[ Line: 83 ]]
+function WindowSizeSignalModule:toggleIsLarge()
 	local NoIsLarge = not self._isLarge
 	self._isLarge = NoIsLarge
 	self._changeSignal:fire(NoIsLarge)
 end
 
-function WindowSizeSignalModule:get() --[[ Line: 89 ]]
+function WindowSizeSignalModule:get()
 	return self._state
 end
 
-function WindowSizeSignalModule:getIsLarge() --[[ Line: 93 ]]
+function WindowSizeSignalModule:getIsLarge()
 	return self._isLarge
 end
 
-function WindowSizeSignalModule:updateConstraints() --[[ Line: 98 ]]
+function WindowSizeSignalModule:updateConstraints()
 	self:requestSize(self._state.Width.Offset, self._state.Height.Offset)
 end
 

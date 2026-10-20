@@ -17,7 +17,7 @@ local AppPage = require(Parent.RobloxAppEnums).AppPage
 local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 
-return ReactModule.memo(function(p1) --[[ Line: 49 | Named "TextFeedbackFormModal" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), CloseCentralOverlayFunction (copy), UseAppPolicyFunction (copy), AppPage (copy), UrlBuilder (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), Dialog (copy), LuaAppTextFeedbackFormModalStandardInput (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ButtonVariant (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseTokensResult = UseTokensFunction()
@@ -32,7 +32,7 @@ return ReactModule.memo(function(p1) --[[ Line: 49 | Named "TextFeedbackFormModa
 	})
 	local UseRefResult = ReactModule.useRef("")
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 65 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseDispatchResult (copy), CloseCentralOverlayFunction (upval), p1 (copy)
 		UseDispatchResult(CloseCentralOverlayFunction())
 		
@@ -40,7 +40,7 @@ return ReactModule.memo(function(p1) --[[ Line: 49 | Named "TextFeedbackFormModa
 			p1.onClose(p2)
 		end
 	end, { UseDispatchResult, p1.onClose })
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 73 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
 		if not p2 then return end
 		if p2.Text:len() > 500 then
@@ -49,7 +49,7 @@ return ReactModule.memo(function(p1) --[[ Line: 49 | Named "TextFeedbackFormModa
 		UseRefResult.current = p2.Text
 		UseStateResult2(p2.Text:len() >= 10)
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 86 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult (copy), UseResult (copy), p1 (copy), UseRefResult (copy)
 		if UseStateResult then
 			UseResult(true)
@@ -58,10 +58,10 @@ return ReactModule.memo(function(p1) --[[ Line: 49 | Named "TextFeedbackFormModa
 			return
 		end
 	end, { UseStateResult, p1.onSubmit, UseResult })
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 95 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2)
 		return p2.getWebViewSupport()
 	end)
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 100 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: AppPage (upval), UrlBuilder (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval), UseResult (copy)
 		local config = {
 			name = AppPage.GenericWebPage,
@@ -79,7 +79,7 @@ return ReactModule.memo(function(p1) --[[ Line: 49 | Named "TextFeedbackFormModa
 	
 	return ReactModule.createElement(Dialog.Root, {
 		hasBackdrop = true,
-		onClose = ReactModule.useCallback(function() --[[ Line: 123 ]]
+		onClose = ReactModule.useCallback(function()
 			-- upvalues: UseResult (copy)
 			UseResult(false)
 		end, { UseResult })

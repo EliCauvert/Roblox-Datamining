@@ -13,7 +13,7 @@ local _Color3_7 = Color3.fromRGB(255, 220, 0)
 local MoveAssistDebugViewModule = {}
 MoveAssistDebugViewModule.__index = MoveAssistDebugViewModule
 
-local function makeOutline(Name, Color, Parent) --[[ Line: 49 ]]
+local function makeOutline(Name, Color, Parent)
 	local Frame = Instance.new("Frame")
 	Frame.Name = Name
 	Frame.BackgroundTransparency = 1
@@ -28,7 +28,7 @@ local function makeOutline(Name, Color, Parent) --[[ Line: 49 ]]
 	return { rect = Frame, stroke = Stroke }
 end
 
-local function _(Name, BackgroundColor3, Parent) --[[ Line: 63 | Named "makeRay" ]]
+local function _(Name, BackgroundColor3, Parent)
 	local Frame = Instance.new("Frame")
 	Frame.Name = Name
 	Frame.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -41,7 +41,7 @@ local function _(Name, BackgroundColor3, Parent) --[[ Line: 63 | Named "makeRay"
 	return Frame
 end
 
-local function makeCandidateVisual(Parent) --[[ Line: 78 ]]
+local function makeCandidateVisual(Parent)
 	-- upvalues: makeOutline (copy), _Color3_5 (copy)
 	local CandidateRect = makeOutline("CandidateRect", _Color3_5, Parent)
 	local AimDot = Instance.new("Frame")
@@ -62,7 +62,7 @@ local function makeCandidateVisual(Parent) --[[ Line: 78 ]]
 	}
 end
 
-function MoveAssistDebugViewModule.new() --[[ Line: 95 ]]
+function MoveAssistDebugViewModule.new()
 	-- upvalues: makeOutline (copy), _Color3 (copy), _Color3_2 (copy), _Color3_3 (copy), CoreGui (copy), MoveAssistDebugViewModule (copy), UserInputService (copy), M (copy)
 	local MoveAssistDebug = Instance.new("ScreenGui")
 	MoveAssistDebug.Name = "MoveAssistDebug"
@@ -116,7 +116,7 @@ function MoveAssistDebugViewModule.new() --[[ Line: 95 ]]
 		_label = StatsPanel,
 		_candidateVisuals = {}
 	}, MoveAssistDebugViewModule)
-	self._toggleConnection = UserInputService.InputBegan:Connect(function(Input) --[[ Line: 141 ]]
+	self._toggleConnection = UserInputService.InputBegan:Connect(function(Input)
 		-- upvalues: M (upval), self (copy)
 		if Input.KeyCode == M then
 			self:cycleMode()
@@ -126,11 +126,11 @@ function MoveAssistDebugViewModule.new() --[[ Line: 95 ]]
 	return self
 end
 
-function MoveAssistDebugViewModule:cycleMode() --[[ Line: 151 ]]
+function MoveAssistDebugViewModule:cycleMode()
 	self._mode = (self._mode + 1) % 3
 end
 
-function MoveAssistDebugViewModule:_getCandidateVisual(Count) --[[ Line: 155 ]]
+function MoveAssistDebugViewModule:_getCandidateVisual(Count)
 	-- upvalues: makeCandidateVisual (copy)
 	local CandidateVisual = self._candidateVisuals[Count]
 	
@@ -144,7 +144,7 @@ function MoveAssistDebugViewModule:_getCandidateVisual(Count) --[[ Line: 155 ]]
 	end
 end
 
-local _ = function(p1, p2, Direction) --[[ Line: 165 | Named "positionRay" ]]
+local _ = function(p1, p2, Direction)
 	if Direction.Magnitude < 0.001 then
 		p1.Visible = false
 		
@@ -158,16 +158,16 @@ local _ = function(p1, p2, Direction) --[[ Line: 165 | Named "positionRay" ]]
 	end
 end
 
-local _ = function(p1, p2: number) --[[ Line: 178 | Named "candidateColor" ]]
+local _ = function(p1, p2: number)
 	-- upvalues: _Color3_1 (copy), _Color3_6 (copy), _Color3_7 (copy), _Color3_5 (copy)
 	return if p1.state == "committed" then _Color3_1 elseif p1.state == "scored" then _Color3_6:Lerp(_Color3_7, if p2 > 0 then math.clamp(p1.influence / p2, 0, 1) else 0) else _Color3_5
 end
 
-local _ = function(p1): string --[[ Line: 188 | Named "fmt" ]]
+local _ = function(p1): string
 	return string.format("%.2f", p1)
 end
 
-function MoveAssistDebugViewModule:update(p1, p2) --[[ Line: 195 ]]
+function MoveAssistDebugViewModule:update(p1, p2)
 	-- upvalues: _Color3_1 (copy), _Color3_6 (copy), _Color3_7 (copy), _Color3_5 (copy), _Color3_4 (copy), _Color3_3 (copy)
 	if self._mode == 0 or not p1 then
 		self._container.Enabled = false
@@ -243,7 +243,7 @@ function MoveAssistDebugViewModule:update(p1, p2) --[[ Line: 195 ]]
 	self._label.Text = string.format("MoveAssist: %s\nmoveDir: (%s, %s)  mag %s\nbend: (%s, %s)  %s deg\ncommitted: %s\ninfluence: %s\nconfidence: %s (str %s)\ninputFollow: %s\narrival: %s\nintent: %s\nmasterGain: %s\nassistStrength: %s\ncandidates: %d", if p1.active then "ACTIVE" else "idle", string.format("%.2f", p1.finalDir.X), string.format("%.2f", p1.finalDir.Y), string.format("%.2f", p1.inputMagnitude), string.format("%.2f", ScaledFinalDir.X), string.format("%.2f", ScaledFinalDir.Y), string.format("%.2f", (math.deg((math.acos((math.clamp(p1.inputDir:Dot(p1.finalDir), -1, 1))))))), if Committed then Committed.Name else "-", string.format("%.2f", p1.bestInfluence), string.format("%.2f", p1.confidence), string.format("%.2f", p1.confidenceStrength), string.format("%.2f", p1.inputFollowStrength), string.format("%.2f", p1.arrivalFactor), string.format("%.2f", p1.intentFactor), string.format("%.2f", p1.masterGain), string.format("%.2f", p1.assistStrength), Count)
 end
 
-function MoveAssistDebugViewModule:Destroy() --[[ Line: 278 ]]
+function MoveAssistDebugViewModule:Destroy()
 	local ToggleConnection = self._toggleConnection
 	
 	if ToggleConnection then

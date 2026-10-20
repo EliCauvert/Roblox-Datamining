@@ -1,6 +1,6 @@
 ﻿local list = { require(script.Parent.MessageEffect).ChatWindowEnlarge }
 
-return function(List) --[[ Line: 14 | Named "getChatWindowMessageEffects" ]]
+return function(List)
 	-- upvalues: list (copy)
 	local List1 = {}
 	

@@ -14,7 +14,7 @@ local Debug = CreatorAgentChatModule.debug
 local AwaitRequestStateFunction = ToolControllerUtilsModule.awaitRequestState
 local GetToolCallOrderFunction = ToolControllerUtilsModule.getToolCallOrder
 
-local function getSelectedOptionId(GgleOptionInSelection) --[[ Line: 65 ]]
+local function getSelectedOptionId(GgleOptionInSelection)
 	if GgleOptionInSelection == nil then
 		return nil
 	end
@@ -29,7 +29,7 @@ local function getSelectedOptionId(GgleOptionInSelection) --[[ Line: 65 ]]
 	return Ids
 end
 
-local function _(OptimisticAskUserTool, p1) --[[ Line: 82 | Named "makeAnswerStackPrompt" ]]
+local function _(OptimisticAskUserTool, p1)
 	-- upvalues: getSelectedOptionId (copy)
 	return {
 		question = OptimisticAskUserTool.questions[OptimisticAskUserTool.currentIndex],
@@ -41,7 +41,7 @@ local function _(OptimisticAskUserTool, p1) --[[ Line: 82 | Named "makeAnswerSta
 	}
 end
 
-local function buildOptimisticAskUserTool(AnswerFlow, p1) --[[ Line: 93 ]]
+local function buildOptimisticAskUserTool(AnswerFlow, p1)
 	-- upvalues: getSelectedOptionId (copy), FFlagBuildExperienceAnswerFormModule (copy)
 	local Selections = {}
 	
@@ -61,7 +61,7 @@ local function buildOptimisticAskUserTool(AnswerFlow, p1) --[[ Line: 93 ]]
 	}
 end
 
-local function toggleOptionInSelection(Selection, Option) --[[ Line: 117 ]]
+local function toggleOptionInSelection(Selection, Option)
 	local List = {}
 	local Flag = false
 	
@@ -78,13 +78,13 @@ local function toggleOptionInSelection(Selection, Option) --[[ Line: 117 ]]
 	return { option = nil, customResponseText = nil, options = List }
 end
 
-local _ = function(p2, p3, GetSubmittedToolCallIds) --[[ Line: 140 | Named "createAnswerStackSync" ]]
+local _ = function(p2, p3, GetSubmittedToolCallIds)
 	-- upvalues: StudioAskUserTool (copy), Debug (copy), GetToolCallOrderFunction (copy), FFlagBuildExperienceAnswerFormModule (copy), SignalsModule (copy)
 	local SessionId = nil
 	local v1 = nil
 	local v2 = false
 	
-	return function(p4): boolean --[[ Line: 149 ]]
+	return function(p4): boolean
 		-- upvalues: StudioAskUserTool (upval), GetSubmittedToolCallIds (copy), v2 (ref), Debug (upval), SessionId (ref), v1 (ref), p2 (copy), p3 (copy), GetToolCallOrderFunction (upval), FFlagBuildExperienceAnswerFormModule (upval), SignalsModule (upval)
 		local QuestionsInTurnState, QuestionsInTurnState2, _, QuestionsInTurnState4, QuestionsInTurnState5 = StudioAskUserTool.findQuestionsInTurnState(p4, GetSubmittedToolCallIds())
 		
@@ -147,13 +147,13 @@ local _ = function(p2, p3, GetSubmittedToolCallIds) --[[ Line: 140 | Named "crea
 	end
 end
 
-return function(p4, p5, p6, Callback) --[[ Line: 203 | Named "createAskUserController" ]]
+return function(p4, p5, p6, Callback)
 	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), buildOptimisticAskUserTool (copy), FFlagBuildExperienceShowThinkingAfterAskUserSubmitModule (copy), StudioAskUserTool (copy), Debug (copy), GetToolCallOrderFunction (copy), SignalsModule (copy), FFlagBuildExperienceToolResultFailureRecoveryModule (copy), AwaitRequestStateFunction (copy), ChatConstantsModule (copy), toggleOptionInSelection (copy)
 	local AnswerFlow = nil
 	local OnAnswerSelectedImpl = nil
 	local OnAnswerConfirmedImpl = nil
 	
-	local function setAnswerFlow(Value) --[[ Line: 213 ]]
+	local function setAnswerFlow(Value)
 		-- upvalues: FFlagBuildExperienceAnswerFormModule (upval), AnswerFlow (ref)
 		if FFlagBuildExperienceAnswerFormModule and Value == nil and AnswerFlow ~= nil then
 			local Drafts = AnswerFlow.drafts
@@ -167,7 +167,7 @@ return function(p4, p5, p6, Callback) --[[ Line: 203 | Named "createAskUserContr
 		AnswerFlow = Value
 	end
 	
-	local function setCurrentAnswerStackPrompt(p7) --[[ Line: 225 ]]
+	local function setCurrentAnswerStackPrompt(p7)
 		-- upvalues: AnswerFlow (ref), p6 (copy), buildOptimisticAskUserTool (upval), OnAnswerSelectedImpl (ref), OnAnswerConfirmedImpl (ref)
 		local AnswerFlow1 = AnswerFlow
 		
@@ -183,12 +183,12 @@ return function(p4, p5, p6, Callback) --[[ Line: 203 | Named "createAskUserContr
 		end
 	end
 	
-	local function getSubmittedToolCallIds() --[[ Line: 240 ]]
+	local function getSubmittedToolCallIds()
 		-- upvalues: p5 (copy)
 		return p5
 	end
 	
-	local function _(p7) --[[ Line: 244 | Named "resetFailedSubmission" ]]
+	local function _(p7)
 		-- upvalues: FFlagBuildExperienceAnswerFormModule (upval), p6 (copy), buildOptimisticAskUserTool (upval), FFlagBuildExperienceShowThinkingAfterAskUserSubmitModule (upval)
 		p7.submitted = false
 		
@@ -200,7 +200,7 @@ return function(p4, p5, p6, Callback) --[[ Line: 203 | Named "createAskUserContr
 		end
 	end
 	
-	local function recoverFailedSubmission(OptimisticAskUserTool, ErrorCode) --[[ Line: 254 ]]
+	local function recoverFailedSubmission(OptimisticAskUserTool, ErrorCode)
 		-- upvalues: FFlagBuildExperienceAnswerFormModule (upval), p6 (copy), buildOptimisticAskUserTool (upval), FFlagBuildExperienceShowThinkingAfterAskUserSubmitModule (upval), Callback (copy)
 		OptimisticAskUserTool.submitted = false
 		
@@ -225,7 +225,7 @@ return function(p4, p5, p6, Callback) --[[ Line: 203 | Named "createAskUserContr
 	local ToolCallId = nil
 	local v3 = false
 	
-	local function v45(p7): boolean --[[ Line: 149 ]]
+	local function v45(p7): boolean
 		-- upvalues: StudioAskUserTool (upval), getSubmittedToolCallIds (copy), v3 (ref), Debug (upval), SessionId (ref), ToolCallId (ref), setCurrentAnswerStackPrompt (copy), setAnswerFlow (copy), GetToolCallOrderFunction (upval), FFlagBuildExperienceAnswerFormModule (upval), SignalsModule (upval)
 		local QuestionsInTurnState, QuestionsInTurnState2, _, QuestionsInTurnState4, QuestionsInTurnState5 = StudioAskUserTool.findQuestionsInTurnState(p7, getSubmittedToolCallIds())
 		
@@ -289,7 +289,7 @@ return function(p4, p5, p6, Callback) --[[ Line: 203 | Named "createAskUserContr
 	
 	local Flag = false
 	
-	local function submitAskUserResponses(p8) --[[ Line: 271 ]]
+	local function submitAskUserResponses(p8)
 		-- upvalues: StudioAskUserTool (upval), Debug (upval), p4 (copy), FFlagBuildExperienceToolResultFailureRecoveryModule (upval), FFlagBuildExperienceAnswerFormModule (upval), recoverFailedSubmission (copy), p6 (copy), buildOptimisticAskUserTool (upval), FFlagBuildExperienceShowThinkingAfterAskUserSubmitModule (upval), AwaitRequestStateFunction (upval), ChatConstantsModule (upval), p5 (copy), AnswerFlow (ref)
 		local List = {}
 		
@@ -389,7 +389,7 @@ return function(p4, p5, p6, Callback) --[[ Line: 203 | Named "createAskUserContr
 		end
 	end
 	
-	local function submitAskUserCancellation(AnswerFlow1) --[[ Line: 345 ]]
+	local function submitAskUserCancellation(AnswerFlow1)
 		-- upvalues: StudioAskUserTool (upval), p5 (copy), p6 (copy), AnswerFlow (ref), FFlagBuildExperienceAnswerFormModule (upval), p4 (copy), Debug (upval), AwaitRequestStateFunction (upval), ChatConstantsModule (upval)
 		local FormatCancellationContentResult = StudioAskUserTool.formatCancellationContent()
 		p5[AnswerFlow1.toolCallId] = true
@@ -422,7 +422,7 @@ return function(p4, p5, p6, Callback) --[[ Line: 203 | Named "createAskUserContr
 		end
 	end
 	
-	local _ = function(p9): boolean --[[ Line: 364 | Named "advanceToNextQuestion" ]]
+	local _ = function(p9): boolean
 		-- upvalues: p6 (copy), buildOptimisticAskUserTool (upval)
 		if #p9.questions <= p9.currentIndex then
 			return false
@@ -434,7 +434,7 @@ return function(p4, p5, p6, Callback) --[[ Line: 203 | Named "createAskUserContr
 		end
 	end
 	
-	local function commitCurrentSelectionAndAdvance(AnswerFlow) --[[ Line: 374 ]]
+	local function commitCurrentSelectionAndAdvance(AnswerFlow)
 		-- upvalues: p6 (copy), buildOptimisticAskUserTool (upval), FFlagBuildExperienceAnswerFormModule (upval), FFlagBuildExperienceShowThinkingAfterAskUserSubmitModule (upval), submitAskUserResponses (copy)
 		local Flag = nil
 		if #AnswerFlow.questions <= AnswerFlow.currentIndex then
@@ -453,13 +453,13 @@ return function(p4, p5, p6, Callback) --[[ Line: 203 | Named "createAskUserContr
 		if FFlagBuildExperienceShowThinkingAfterAskUserSubmitModule then
 			p6.markSubmitted(AnswerFlow.toolCallId)
 		end
-		task.spawn(function() --[[ Line: 386 ]]
+		task.spawn(function()
 			-- upvalues: submitAskUserResponses (upval), AnswerFlow (copy)
 			submitAskUserResponses(AnswerFlow)
 		end)
 	end
 	
-	OnAnswerSelectedImpl = function(p9, Option, p10) --[[ Line: 391 | Named "onAnswerSelectedImpl" ]]
+	OnAnswerSelectedImpl = function(p9, Option, p10)
 		-- upvalues: AnswerFlow (ref), FFlagBuildExperienceAnswerFormModule (upval), toggleOptionInSelection (upval), p6 (copy), buildOptimisticAskUserTool (upval), Debug (upval), commitCurrentSelectionAndAdvance (copy)
 		local OptimisticAskUserTool = AnswerFlow
 		
@@ -495,7 +495,7 @@ return function(p4, p5, p6, Callback) --[[ Line: 203 | Named "createAskUserContr
 		})
 	end
 	
-	OnAnswerConfirmedImpl = function() --[[ Line: 441 | Named "onAnswerConfirmedImpl" ]]
+	OnAnswerConfirmedImpl = function()
 		-- upvalues: AnswerFlow (ref), Debug (upval), commitCurrentSelectionAndAdvance (copy)
 		local OptimisticAskUserTool = AnswerFlow
 		
@@ -519,7 +519,7 @@ return function(p4, p5, p6, Callback) --[[ Line: 203 | Named "createAskUserContr
 		end
 	end
 	
-	local function submitCustomAnswer(AnswerFlow, Question, Text: string): boolean --[[ Line: 468 ]]
+	local function submitCustomAnswer(AnswerFlow, Question, Text: string): boolean
 		-- upvalues: FFlagBuildExperienceAnswerFormModule (upval), Debug (upval), p6 (copy), buildOptimisticAskUserTool (upval), FFlagBuildExperienceShowThinkingAfterAskUserSubmitModule (upval), submitAskUserResponses (copy)
 		if not FFlagBuildExperienceAnswerFormModule and Question.responseType == "multi_select" then
 			return false
@@ -558,7 +558,7 @@ return function(p4, p5, p6, Callback) --[[ Line: 203 | Named "createAskUserContr
 		if FFlagBuildExperienceShowThinkingAfterAskUserSubmitModule then
 			p6.markSubmitted(AnswerFlow.toolCallId)
 		end
-		task.spawn(function() --[[ Line: 502 ]]
+		task.spawn(function()
 			-- upvalues: submitAskUserResponses (upval), AnswerFlow (copy)
 			submitAskUserResponses(AnswerFlow)
 		end)
@@ -567,7 +567,7 @@ return function(p4, p5, p6, Callback) --[[ Line: 203 | Named "createAskUserContr
 	end
 	
 	return {
-		syncAnswerStack = function(p9): boolean --[[ Line: 532 ]]
+		syncAnswerStack = function(p9): boolean
 			-- upvalues: v45 (copy), Flag (ref)
 			if v45(p9) then
 				Flag = true
@@ -578,11 +578,11 @@ return function(p4, p5, p6, Callback) --[[ Line: 203 | Named "createAskUserContr
 			end
 		end,
 		getSubmittedToolCallIds = getSubmittedToolCallIds,
-		hasDisplayedAnswerStack = function() --[[ Line: 555 ]]
+		hasDisplayedAnswerStack = function()
 			-- upvalues: Flag (ref)
 			return Flag
 		end,
-		stopPendingAnswer = function(): boolean --[[ Line: 540 ]]
+		stopPendingAnswer = function(): boolean
 			-- upvalues: AnswerFlow (ref), submitAskUserCancellation (copy)
 			local AnswerFlow1 = AnswerFlow
 			
@@ -590,7 +590,7 @@ return function(p4, p5, p6, Callback) --[[ Line: 203 | Named "createAskUserContr
 				return false
 			else
 				AnswerFlow1.submitted = true
-				task.spawn(function() --[[ Line: 546 ]]
+				task.spawn(function()
 					-- upvalues: submitAskUserCancellation (upval), AnswerFlow1 (copy)
 					submitAskUserCancellation(AnswerFlow1)
 				end)
@@ -598,7 +598,7 @@ return function(p4, p5, p6, Callback) --[[ Line: 203 | Named "createAskUserContr
 				return true
 			end
 		end,
-		trySubmitComposerText = function(CustomResponseText) --[[ Line: 508 ]]
+		trySubmitComposerText = function(CustomResponseText)
 			-- upvalues: AnswerFlow (ref), submitCustomAnswer (copy)
 			local AnswerFlow1 = AnswerFlow
 			
@@ -610,7 +610,7 @@ return function(p4, p5, p6, Callback) --[[ Line: 203 | Named "createAskUserContr
 				return Question ~= nil and submitCustomAnswer(AnswerFlow1, Question, CustomResponseText)
 			end
 		end,
-		trySubmitAnswerText = function(ToolCallId, Id, CustomResponseText) --[[ Line: 520 ]]
+		trySubmitAnswerText = function(ToolCallId, Id, CustomResponseText)
 			-- upvalues: AnswerFlow (ref), submitCustomAnswer (copy)
 			local OptimisticAskUserTool = AnswerFlow
 			

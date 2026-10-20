@@ -2,7 +2,7 @@
 local UIManagerModule = require(Parent.UIManager)
 local ConstantsModule = require(Parent.Constants)
 
-return function(p1, PanelType) --[[ Line: 7 ]]
+return function(p1, PanelType)
 	-- upvalues: ConstantsModule (copy), UIManagerModule (copy)
 	local CameraFixedPanelProp = nil
 	local ROACTPANELUIGROUP = ConstantsModule.ROACT_PANEL_UIGROUP_MAP[PanelType]

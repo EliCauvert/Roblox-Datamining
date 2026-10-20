@@ -10,7 +10,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 	totalConnections = TModule.number
 })
 
-return function(CustomFields, EventContext) --[[ Line: 18 ]]
+return function(CustomFields, EventContext)
 	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), GameConnectionsPlayedChipClickedThrottleHundredthsPercent (copy), TelemetryService (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	

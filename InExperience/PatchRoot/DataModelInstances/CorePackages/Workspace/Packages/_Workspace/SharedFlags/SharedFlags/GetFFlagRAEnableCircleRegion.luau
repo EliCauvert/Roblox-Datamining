@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("RAEnableCircleRegion", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("RAEnableCircleRegion")
 end

@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("RoduxSquads").Parent.Rodux).makeActionCreator(script.Name, function(ExperienceInvite) --[[ Line: 5 ]]
+﻿return require(script:FindFirstAncestor("RoduxSquads").Parent.Rodux).makeActionCreator(script.Name, function(ExperienceInvite)
 	return { payload = { experienceInvite = ExperienceInvite } }
 end)

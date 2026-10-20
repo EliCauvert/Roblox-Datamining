@@ -26,7 +26,7 @@ local config = {
 }
 local _ = require(BulkPurchaseApp.Store.Types)
 
-return function(p1) --[[ Line: 56 | Named "PriceBox" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), UseDiscountSummaryPropsModule (copy), FFlagAXAddOffersToBulkPurchaseModule (copy), UseTokensFunction (copy), ReactModule (copy), FoundationModule (copy), FFlagAXUpdateBulkPurchaseOfferExpiryBadgeModule (copy), OfferExpiryBadge (copy), View (copy), PriceBoxLineModule (copy), PriceBoxLineVariantEnumModule (copy), DiscountSummary (copy), FFlagAddTimerToBulkPurchaseBuyButtonModule (copy), FIntBulkPurchaseEnabledCountdownMSModule (copy), FFlagAXAddPlusUpsellToBulkPurchaseModule (copy), BlackbirdUpsellBanner (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseDiscountSummaryPropsModuleResult = UseDiscountSummaryPropsModule(p1.discountInformation, p1.totalCost, if FFlagAXAddOffersToBulkPurchaseModule and p1.offerData then p1.offerData.savingsSummary else nil)
@@ -34,7 +34,7 @@ return function(p1) --[[ Line: 56 | Named "PriceBox" ]]
 	
 	if FFlagAXAddOffersToBulkPurchaseModule then
 		local UseTokensResult = UseTokensFunction()
-		UseMemoResult = ReactModule.useMemo(function() --[[ Line: 67 ]]
+		UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: p1 (copy), ReactModule (upval), FoundationModule (upval), UseTokensResult (copy), FFlagAXUpdateBulkPurchaseOfferExpiryBadgeModule (upval), OfferExpiryBadge (upval)
 			local TextButtons = {}
 			local OffersAvailable = if p1.offerData then p1.offerData.offersAvailable else nil
@@ -49,7 +49,7 @@ return function(p1) --[[ Line: 56 | Named "PriceBox" ]]
 						BorderSizePixel = 0,
 						Selectable = false,
 						LayoutOrder = 0,
-						[ReactModule.Event.Activated] = function() --[[ Line: 84 ]]
+						[ReactModule.Event.Activated] = function()
 							-- upvalues: ToggleOfferSelectedFunction (copy), i (copy)
 							ToggleOfferSelectedFunction(i)
 						end
@@ -62,7 +62,7 @@ return function(p1) --[[ Line: 56 | Named "PriceBox" ]]
 								LayoutOrder = 1,
 								label = if FFlagAXUpdateBulkPurchaseOfferExpiryBadgeModule then value.localizedDescription else "",
 								isChecked = value.selected,
-								onActivated = function() --[[ Line: 98 ]]
+								onActivated = function()
 									-- upvalues: ToggleOfferSelectedFunction (copy), i (copy)
 									ToggleOfferSelectedFunction(i)
 								end,
@@ -129,7 +129,7 @@ return function(p1) --[[ Line: 56 | Named "PriceBox" ]]
 		PriceBoxConfirmButton = ReactModule.createElement(FoundationModule.Button, {
 			LayoutOrder = 2,
 			text = if p1.missingRobux then UseLocalizationResult.buyRobuxCTA else UseLocalizationResult.confirmCTA,
-			onActivated = p1.onAccept or function() --[[ Line: 178 ]] end,
+			onActivated = p1.onAccept or function() end,
 			variant = FoundationModule.Enums.ButtonVariant.Emphasis,
 			size = FoundationModule.Enums.InputSize.Medium,
 			width = UDim.new(1, 0),

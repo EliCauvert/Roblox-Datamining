@@ -46,7 +46,7 @@ local config = {
 	SelectionBehaviorRight = Enum.SelectionBehavior.Stop
 }
 
-local function ChatWindowBody(p1) --[[ Line: 109 ]]
+local function ChatWindowBody(p1)
 	-- upvalues: FoundationModule (copy), CreateNextOrderFunction (copy), ReactModule (copy), config (copy), FFlagExpChatTextChannelWindowThemeByBackgroundModule (copy), MessageListAreaModule (copy), TextChatWindowInputBarHostModule (copy), ChatWindowTopBannerModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local NextOrder = CreateNextOrderFunction()
@@ -103,7 +103,7 @@ end
 
 local MemoResult = if FFlagExpChatTCWMemoizeChatWindowBodyModule then ReactModule.memo(ChatWindowBody) else ChatWindowBody
 
-local function ChatAppFocusNav(Tbl) --[[ Line: 180 ]]
+local function ChatAppFocusNav(Tbl)
 	-- upvalues: ReactModule (copy), ResponsiveModule (copy), ExpChatTCWAllowKeyboardNav (copy), FoundationModule (copy), GuiService (copy), ReactFocusNavigationModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UserInputService (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), t (copy), NavigateBacks (copy), UseChatWindowEntryHandoffModule (copy), MemoResult (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local IsUsePreferredInputResultMatch = ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Directional
@@ -112,7 +112,7 @@ local function ChatAppFocusNav(Tbl) --[[ Line: 180 ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local WindowInstance = Tbl.windowInstance
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 196 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: GuiService (upval), WindowInstance (copy)
 		GuiService.SelectedCoreObject = nil
 		
@@ -126,11 +126,11 @@ local function ChatAppFocusNav(Tbl) --[[ Line: 180 ]]
 		shouldRestoreFocus = false,
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
 		eventMap = if UseStateResult or UseStateResult1 then t else NavigateBacks,
-		eventHandlers = ReactModule.useMemo(function() --[[ Line: 204 ]]
+		eventHandlers = ReactModule.useMemo(function()
 			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), UserInputService (upval), UseResult (copy)
 			return {
 				[FocusNavigationEventNameEnum.NavigateBack] = {
-					handler = InputHandlersModule.onRelease(function(p1) --[[ Line: 207 ]]
+					handler = InputHandlersModule.onRelease(function(p1)
 						-- upvalues: UserInputService (upval), UseResult (upval)
 						if UserInputService:GetFocusedTextBox() == nil then
 							UseResult()
@@ -154,7 +154,7 @@ local function ChatAppFocusNav(Tbl) --[[ Line: 180 ]]
 	Copy.focusNavEnabled = HasWindowInstance
 	Copy.selectionCursor = UseCursorResult
 	Copy.focusRootRef = UseFocusRootResult
-	Copy.onLatestUsernameChanged = ReactModule.useCallback(function(Current) --[[ Line: 242 ]]
+	Copy.onLatestUsernameChanged = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
 		local Current1 = UseRefResult.current
 		local Current2 = UseRefResult1.current
@@ -178,18 +178,18 @@ local function ChatAppFocusNav(Tbl) --[[ Line: 180 ]]
 	return ReactModule.createElement(MemoResult, Copy)
 end
 
-local function useReducedMotion() --[[ Line: 273 ]]
+local function useReducedMotion()
 	-- upvalues: ReactModule (copy), UserGameSettings (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(UserGameSettings.ReducedMotion)
-	ReactModule.useEffect(function() --[[ Line: 275 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), UserGameSettings (upval)
 		UseStateResult2(UserGameSettings.ReducedMotion)
-		local Connection = UserGameSettings:GetPropertyChangedSignal("ReducedMotion"):Connect(function() --[[ Line: 277 ]]
+		local Connection = UserGameSettings:GetPropertyChangedSignal("ReducedMotion"):Connect(function()
 			-- upvalues: UseStateResult2 (upval), UserGameSettings (upval)
 			UseStateResult2(UserGameSettings.ReducedMotion)
 		end)
 		
-		return function() --[[ Line: 280 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end
@@ -198,7 +198,7 @@ local function useReducedMotion() --[[ Line: 273 ]]
 	return UseStateResult
 end
 
-return function(Tbl) --[[ Line: 287 | Named "ChatApp" ]]
+return function(Tbl)
 	-- upvalues: FFlagExpChatTextChannelWindowThemeByBackgroundModule (copy), ThemeFromBackgroundColorModule (copy), FoundationModule (copy), FFlagExpChatExpressionTrayReducedMotion (copy), useReducedMotion (copy), FFlagExpChatTextChannelWindowFocusNavModule (copy), ReactModule (copy), ReactFocusNavigationModule (copy), NewResult (copy), Provider (copy), ChatAppFocusNav (copy), MemoResult (copy)
 	local ThemeFromBackgroundColorModuleResult = if FFlagExpChatTextChannelWindowThemeByBackgroundModule and Tbl.backgroundColor then ThemeFromBackgroundColorModule(Tbl.backgroundColor) else FoundationModule.Enums.ColorMode.Dark
 	local UseReducedMotionResult = if FFlagExpChatExpressionTrayReducedMotion then useReducedMotion() else false

@@ -3,7 +3,7 @@ local UpdateFetchingStatus = require(Http.Actions).UpdateFetchingStatus
 local BatchUpdateFetchingStatus = require(Http.Actions).BatchUpdateFetchingStatus
 local CryoModule = require(Http.Parent.Cryo)
 
-local function mapStatusToValue(FetchingStatuses) --[[ Line: 8 ]]
+local function mapStatusToValue(FetchingStatuses)
 	-- upvalues: CryoModule (copy)
 	local Nones = {}
 	
@@ -14,7 +14,7 @@ local function mapStatusToValue(FetchingStatuses) --[[ Line: 8 ]]
 	return Nones
 end
 
-return function(p1, p2) --[[ Line: 27 ]]
+return function(p1, p2)
 	-- upvalues: UpdateFetchingStatus (copy), CryoModule (copy), BatchUpdateFetchingStatus (copy), mapStatusToValue (copy)
 	local P1 = p1 or {}
 	

@@ -14,12 +14,12 @@ return {
 	name = "Moments",
 	roact = ReactModule,
 	reactRoblox = require(Parent.Dev.ReactRoblox),
-	mapStory = function(p1) --[[ Line: 28 ]]
+	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), Localization (copy), LocalizationService (copy), LocalizationProvider (copy), FoundationProvider (copy), config (copy), ColorMode (copy), Device (copy)
-		return function(p2) --[[ Line: 29 ]]
+		return function(p2)
 			-- upvalues: ReactModule (upval), Localization (upval), LocalizationService (upval), LocalizationProvider (upval), FoundationProvider (upval), config (upval), ColorMode (upval), Device (upval), p1 (copy)
 			return ReactModule.createElement(LocalizationProvider, {
-				localization = ReactModule.useMemo(function() --[[ Line: 30 ]]
+				localization = ReactModule.useMemo(function()
 					-- upvalues: Localization (upval), LocalizationService (upval)
 					return Localization.new(LocalizationService.RobloxLocaleId)
 				end, {})

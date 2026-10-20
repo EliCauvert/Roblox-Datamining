@@ -8,12 +8,12 @@ local GetFIntUGCValidateMaxAnimationFPSModule = require(Parent.flags.getFIntUGCV
 local GetFIntUGCValidateMaxMarkerCurveValueLengthModule = require(Parent.flags.getFIntUGCValidateMaxMarkerCurveValueLength)
 local GetFIntUGCValidateMaxTotalInternalMarkersModule = require(Parent.flags.getFIntUGCValidateMaxTotalInternalMarkers)
 
-local function areNumbersGood(...): boolean --[[ Line: 22 ]]
-	local function _(p1): boolean --[[ Line: 23 | Named "isNaN" ]]
+local function areNumbersGood(...): boolean
+	local function _(p1): boolean
 		return p1 ~= p1
 	end
 	
-	local _ = function(p1): boolean --[[ Line: 27 | Named "isInfinite" ]]
+	local _ = function(p1): boolean
 		return p1 == 1e999 or p1 == -1e999
 	end
 	
@@ -37,7 +37,7 @@ return {
 	prereqTests = {
 		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
-	run = function(p1, p2) --[[ Line: 42 ]]
+	run = function(p1, p2)
 		-- upvalues: GetFIntUGCValidateMaxAnimationFPSModule (copy), GetFStringUGCValidateFrameDeltaKeyTimeTolModule (copy), GetFStringUGCValidationMaxAnimationLengthModule (copy), GetFIntUGCValidateMaxTotalInternalMarkersModule (copy), ErrorSourceStringsModule (copy), areNumbersGood (copy), GetFIntUGCValidateMaxMarkerCurveValueLengthModule (copy)
 		local ScaledFIntUGCValidateMaxAnimationFPSModule = 1 / GetFIntUGCValidateMaxAnimationFPSModule() * GetFStringUGCValidateFrameDeltaKeyTimeTolModule.asNumber()
 		local Ceiled = math.ceil(1 / ScaledFIntUGCValidateMaxAnimationFPSModule * GetFStringUGCValidationMaxAnimationLengthModule.asNumber())

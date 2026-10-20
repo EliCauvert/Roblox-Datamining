@@ -5,7 +5,7 @@ local CloseCentralOverlayFunction = require(Parent.CentralOverlay).Thunks.CloseC
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local SduiParseHelpers = SduiCoreSystemModule.SduiParseHelpers
 
-return function(p1, _, p2) --[[ Line: 17 | Named "SduiDismissEventNotificationsModalAction" ]]
+return function(p1, _, p2)
 	-- upvalues: SduiErrorType (copy), VirtualEventsModule (copy), SduiParseHelpers (copy), CloseCentralOverlayFunction (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	
@@ -26,7 +26,7 @@ return function(p1, _, p2) --[[ Line: 17 | Named "SduiDismissEventNotificationsM
 			propName = "eventId"
 		}, p2.appPage)
 	end
-	VirtualEventsModule.neverShowNotificationsModalAgain(p2.dependencies.networking):catch(function(Err) --[[ Line: 44 ]]
+	VirtualEventsModule.neverShowNotificationsModalAgain(p2.dependencies.networking):catch(function(Err)
 		-- upvalues: p2 (copy), SduiErrorType (upval), SduiParseHelpers (upval)
 		p2.dependencies.logger.reportError(SduiErrorType.ActionNetworkRequestFailed, {
 			name = "DismissEventNotificationsModal",

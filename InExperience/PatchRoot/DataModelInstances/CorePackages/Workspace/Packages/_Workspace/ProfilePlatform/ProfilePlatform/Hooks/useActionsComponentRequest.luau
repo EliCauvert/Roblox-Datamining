@@ -13,7 +13,7 @@ local UseCanSeeChatTabModule = require(ProfilePlatform.Hooks.useCanSeeChatTab)
 local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
 local FFlagProfilePlatformEnableCurrencyTransfer = require(Parent.SharedFlags).FFlagProfilePlatformEnableCurrencyTransfer
 
-return function() --[[ Line: 20 ]]
+return function()
 	-- upvalues: UseProfileWrapperContextModule (copy), GetDeepValueModule (copy), UseAreWebViewsSupportedModule (copy), UseIsProfileQrCodeEnabledModule (copy), UseCanRenderTransferOnProfileModule (copy), UseCanSeeChatTabModule (copy), UseLocalUserIdFunction (copy), ReactModule (copy), BuildUserActionsComponentModule (copy), FFlagProfilePlatformEnableCurrencyTransfer (copy)
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	local SourceInfoContextualInfoType = GetDeepValueModule(UseProfileWrapperContextModuleResult, "sourceInfo.contextualInfoType")
@@ -23,7 +23,7 @@ return function() --[[ Line: 20 ]]
 	local UseCanSeeChatTabModuleResult = UseCanSeeChatTabModule()
 	local IsTextMatch = tostring(UseProfileWrapperContextModuleResult.profileId) == tostring((UseLocalUserIdFunction()))
 	
-	return ReactModule.useMemo(function() --[[ Line: 31 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: BuildUserActionsComponentModule (upval), SourceInfoContextualInfoType (copy), UseAreWebViewsSupportedModuleResult (copy), UseIsProfileQrCodeEnabledModuleResult (copy), FFlagProfilePlatformEnableCurrencyTransfer (upval), UseCanRenderTransferOnProfileModuleResult (copy), UseCanSeeChatTabModuleResult (copy), IsTextMatch (copy)
 		return BuildUserActionsComponentModule(SourceInfoContextualInfoType, {
 			areWebViewsSupported = UseAreWebViewsSupportedModuleResult,

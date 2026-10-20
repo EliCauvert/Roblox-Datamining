@@ -7,7 +7,7 @@ local _ = require(SocialLuaAnalytics.Analytics.Enums.Contexts)
 local _ = require(script.Parent.Parent.Types)
 local TelemetryService = nil
 
-local function _() --[[ Line: 14 | Named "getDefaultTelemetryService" ]]
+local function _()
 	-- upvalues: TelemetryService (ref)
 	if TelemetryService == nil then
 		TelemetryService = game:GetService("TelemetryService")
@@ -15,9 +15,9 @@ local function _() --[[ Line: 14 | Named "getDefaultTelemetryService" ]]
 	return TelemetryService
 end
 
-local _ = function(p1, TelemetryPipeline) --[[ Line: 21 ]]
+local _ = function(p1, TelemetryPipeline)
 	-- upvalues: CryoModule (copy), DashModule (copy)
-	return function(p2, IncrementValue, CustomFields, Ctx) --[[ Line: 22 ]]
+	return function(p2, IncrementValue, CustomFields, Ctx)
 		-- upvalues: p1 (copy), CryoModule (upval), TelemetryPipeline (copy), DashModule (upval)
 		if p1 then
 			local JoinResult = CryoModule.Dictionary.join(p2, (if type(IncrementValue) == "string" or type(IncrementValue) == "number" then { value = IncrementValue } else IncrementValue) or {}, CustomFields or {})
@@ -31,9 +31,9 @@ local _ = function(p1, TelemetryPipeline) --[[ Line: 21 ]]
 	end
 end
 
-return function(p1) --[[ Line: 43 ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), DashModule (copy), TelemetryService (ref), SupportedTelemetryBackendsModule (copy)
-	return function(Text, p2, p3, p4) --[[ Line: 65 ]]
+	return function(Text, p2, p3, p4)
 		-- upvalues: p1 (copy), CryoModule (upval), DashModule (upval), TelemetryService (upval), SupportedTelemetryBackendsModule (upval)
 		local Defaults = p1.eventList.defaults
 		local Event = p1.eventList[Text]
@@ -41,7 +41,7 @@ return function(p1) --[[ Line: 43 ]]
 		local TelemetryService1: string = if IsShouldUseTelemetryService then "TelemetryService" else "LoggingProtocol"
 		local LoggerImpl = p1.loggerImpl
 		
-		local function v16(p5, IncrementValue, CustomFields, Ctx) --[[ Line: 22 ]]
+		local function v16(p5, IncrementValue, CustomFields, Ctx)
 			-- upvalues: LoggerImpl (copy), CryoModule (upval), TelemetryService1 (copy), DashModule (upval)
 			if LoggerImpl then
 				local JoinResult = CryoModule.Dictionary.join(p5, (if type(IncrementValue) == "string" or type(IncrementValue) == "number" then { value = IncrementValue } else IncrementValue) or {}, CustomFields or {})

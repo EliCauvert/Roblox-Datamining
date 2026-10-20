@@ -15,7 +15,7 @@ local config = {
 	lastUpdated = { 26, 5, 6 }
 }
 
-return function(CustomFields, EventContext) --[[ Line: 23 | Named "sendPlayButtonContextualMessageImpressionEvent" ]]
+return function(CustomFields, EventContext)
 	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), TelemetryService (copy), config (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	

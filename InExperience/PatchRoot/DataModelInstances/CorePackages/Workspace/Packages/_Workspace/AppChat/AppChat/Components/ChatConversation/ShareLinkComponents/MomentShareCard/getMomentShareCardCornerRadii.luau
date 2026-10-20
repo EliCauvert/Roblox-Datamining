@@ -1,6 +1,6 @@
 ﻿local GetCornerRadiiModule = require(script.Parent.Parent.getCornerRadii)
 
-return function(p1, p2, p3) --[[ Line: 4 | Named "getMomentShareCardCornerRadii" ]]
+return function(p1, p2, p3)
 	-- upvalues: GetCornerRadiiModule (copy)
 	return GetCornerRadiiModule({
 		topLeft = not (not p1 and p2),

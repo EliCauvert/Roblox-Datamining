@@ -9,13 +9,13 @@ local NormalizeFontFaceModule = require(Foundation.Utility.normalizeFontFace)
 local UsePreferencesModule = require(Foundation.Providers.Preferences.usePreferences)
 local TextService = require(Foundation.Utility.Wrappers.Services).TextService
 
-return function(String, p1, p2) --[[ Line: 18 | Named "useTextSize" ]]
+return function(String, p1, p2)
 	-- upvalues: FlagsModule (copy), UsePreferencesModule (copy), NormalizeFontFaceModule (copy), ReactUtilsModule (copy), GetTextBoundsAsyncModule (copy), ReactModule (copy), TextService (copy)
 	if FlagsModule.FoundationFontFaceMigration then
 		local PreferredTextSize = UsePreferencesModule().preferredTextSize
 		local NormalizeFontFaceModuleResult = NormalizeFontFaceModule(p1.Font)
 		local FontSize = p1.FontSize
-		local UseAsyncResult = ReactUtilsModule.useAsync(function() --[[ Line: 25 ]]
+		local UseAsyncResult = ReactUtilsModule.useAsync(function()
 			-- upvalues: String (copy), FontSize (copy), NormalizeFontFaceModuleResult (copy), GetTextBoundsAsyncModule (upval), p2 (copy)
 			return if String == nil or FontSize == nil or typeof(NormalizeFontFaceModuleResult) ~= "Font" then nil else GetTextBoundsAsyncModule(String, NormalizeFontFaceModuleResult, FontSize, if p2 then p2.X else nil)
 		end, {
@@ -26,7 +26,7 @@ return function(String, p1, p2) --[[ Line: 18 | Named "useTextSize" ]]
 			PreferredTextSize
 		})
 		local UseRefResult = ReactModule.useRef(nil)
-		ReactModule.useEffect(function() --[[ Line: 42 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseAsyncResult (copy), UseRefResult (copy)
 			if UseAsyncResult.status == "ok" then
 				UseRefResult.current = UseAsyncResult.value
@@ -36,7 +36,7 @@ return function(String, p1, p2) --[[ Line: 18 | Named "useTextSize" ]]
 		return if UseAsyncResult.status == "ok" then UseAsyncResult.value else UseRefResult.current
 	else
 		local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-		ReactModule.useEffect(function() --[[ Line: 54 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: String (copy), UseStateResult2 (copy), TextService (upval), p1 (copy), p2 (copy)
 			if String == nil then
 				UseStateResult2(nil)

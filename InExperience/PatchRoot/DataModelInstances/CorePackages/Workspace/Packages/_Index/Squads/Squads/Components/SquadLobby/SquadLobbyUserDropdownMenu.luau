@@ -50,12 +50,12 @@ local config = {
 	isInExperience = false,
 	parentChannelId = "",
 	userId = "",
-	onDismiss = function() --[[ Line: 104 ]] end,
-	openViewProfile = function() --[[ Line: 105 ]] end,
-	openVoiceAbuseReport = function() --[[ Line: 106 ]] end
+	onDismiss = function() end,
+	openViewProfile = function() end,
+	openVoiceAbuseReport = function() end
 }
 
-return function(p1) --[[ Line: 111 ]]
+return function(p1)
 	-- upvalues: Cryo (copy), config (copy), React (copy), SquadExternalContractContext (copy), UseDispatchFunction (copy), UseLocalUserIdFunction (copy), UseStoreFunction (copy), UseVoiceStatusFunction (copy), UseSquadUserDropdownMenuButtonsModule (copy), UseIsParticipantMutedLocallyFunction (copy), UseLocalizationFunction (copy), EventNamesModule (copy), SquadPartySheetActionEnumModule (copy), SquadPromptType (copy), GetFFlagEnableCrossExpVoiceFunction (copy), UseBackgroundExperienceFunction (copy), UseParticipantsFunction (copy), FFlagSquadsPresenceStoreMigration (copy), UseGetPresenceByUserId (copy), UseSelectorFunction (copy), PresenceType1 (copy), PresenceType (copy), GameParams (copy), FFlagSquadLaunchExperienceMobileFix (copy), SquadLocationEnum (copy), ExperienceService (copy), IconsControlsHeadphoneDeafenSmall (copy), IconsCommonPlay (copy), IconsActionsLeave (copy), IconsMenuProfile (copy), IconsActionsFeedback (copy), IconsControlsMicrophoneMute (copy), IconsControlsMicrophone (copy), Default (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), ModalBottomSheet (copy)
 	local UnionResult = Cryo.Dictionary.union(config, p1)
 	local UseContextResult = React.useContext(SquadExternalContractContext)
@@ -74,7 +74,7 @@ return function(p1) --[[ Line: 111 ]]
 		muteVoiceButtonText = "Feature.Chat.Action.MuteVoice",
 		unmuteVoiceButtonText = "Feature.Chat.Action.UnmuteVoice"
 	})
-	local UseResult = React.useCallback(function() --[[ Line: 133 ]]
+	local UseResult = React.useCallback(function()
 		-- upvalues: UseContextResult (copy), EventNamesModule (upval), UnionResult (copy), SquadPartySheetActionEnumModule (upval), UseVoiceStatusResult (copy)
 		UseContextResult.fireSquadAnalytics(EventNamesModule.PartySheetAction, {
 			parentChannelId = UnionResult.parentChannelId,
@@ -88,7 +88,7 @@ return function(p1) --[[ Line: 111 ]]
 		UseContextResult.fireSquadAnalytics,
 		UseVoiceStatusResult
 	})
-	local UseResult1 = React.useCallback(function() --[[ Line: 148 ]]
+	local UseResult1 = React.useCallback(function()
 		-- upvalues: UseContextResult (copy), EventNamesModule (upval), UnionResult (copy), SquadPartySheetActionEnumModule (upval), UseVoiceStatusResult (copy), UseStoreResult (copy), SquadPromptType (upval), UseDispatchResult (copy)
 		UseContextResult.fireSquadAnalytics(EventNamesModule.PartySheetAction, {
 			parentChannelId = UnionResult.parentChannelId,
@@ -97,7 +97,7 @@ return function(p1) --[[ Line: 111 ]]
 		})
 		UseContextResult.setSquadPrompt(UseStoreResult, {
 			promptType = SquadPromptType.RemoveFromChat,
-			onConfirm = function() --[[ Line: 157 ]]
+			onConfirm = function()
 				-- upvalues: UnionResult (upval), UseContextResult (upval), EventNamesModule (upval), SquadPartySheetActionEnumModule (upval), UseVoiceStatusResult (upval), UseDispatchResult (upval)
 				if UnionResult.userId == "" or UnionResult.parentChannelId == "" then
 					return nil
@@ -126,7 +126,7 @@ return function(p1) --[[ Line: 111 ]]
 	if GetFFlagEnableCrossExpVoiceFunction() then
 		UseBackgroundExperienceResult = UseBackgroundExperienceFunction()
 		UseParticipantsResult = UseParticipantsFunction() or {}
-		UseMemoResult = React.useMemo(function() --[[ Line: 191 ]]
+		UseMemoResult = React.useMemo(function()
 			-- upvalues: UseParticipantsResult (ref)
 			local List = {}
 			
@@ -135,21 +135,21 @@ return function(p1) --[[ Line: 111 ]]
 			end
 			return List
 		end, { UseParticipantsResult })
-		UseMemoResult1 = React.useMemo(function() --[[ Line: 198 ]]
+		UseMemoResult1 = React.useMemo(function()
 			-- upvalues: UseBackgroundExperienceResult (ref)
 			return if UseBackgroundExperienceResult then UseBackgroundExperienceResult.voiceChannelId else nil
 		end, { UseBackgroundExperienceResult })
-		UseMemoResult2 = React.useMemo(function() --[[ Line: 201 ]]
+		UseMemoResult2 = React.useMemo(function()
 			-- upvalues: UseBackgroundExperienceResult (ref)
 			return if UseBackgroundExperienceResult then UseBackgroundExperienceResult.voiceSessionId else nil
 		end, { UseBackgroundExperienceResult })
 	end
-	local UseResult2 = React.useCallback(function(p2) --[[ Line: 206 ]]
+	local UseResult2 = React.useCallback(function(p2)
 		-- upvalues: UnionResult (copy)
 		return p2.Squad.Presence.byUserId[UnionResult.userId]
 	end, { UnionResult.userId })
 	local UseGetPresenceByUserIdResult = if FFlagSquadsPresenceStoreMigration then UseGetPresenceByUserId((tostring(UnionResult.userId))) else UseSelectorFunction(UseResult2)
-	local UseMemoResult3 = React.useMemo(function() --[[ Line: 214 ]]
+	local UseMemoResult3 = React.useMemo(function()
 		-- upvalues: UseSquadUserDropdownMenuButtonsModuleResult (copy), UseGetPresenceByUserIdResult (copy), FFlagSquadsPresenceStoreMigration (upval), PresenceType1 (upval), PresenceType (upval)
 		local PlaceId = false
 		
@@ -172,7 +172,7 @@ return function(p1) --[[ Line: 111 ]]
 		UseGetPresenceByUserIdResult,
 		UseSquadUserDropdownMenuButtonsModuleResult
 	})
-	local UseResult3 = React.useCallback(function() --[[ Line: 223 ]]
+	local UseResult3 = React.useCallback(function()
 		-- upvalues: UseMemoResult3 (copy), GameParams (upval), UnionResult (copy), FFlagSquadsPresenceStoreMigration (upval), UseGetPresenceByUserIdResult (copy), FFlagSquadLaunchExperienceMobileFix (upval), UseContextResult (copy), SquadLocationEnum (upval), ExperienceService (upval)
 		if UseMemoResult3 then
 			local FromUserIdResult = GameParams.fromUserId(UnionResult.userId, if FFlagSquadsPresenceStoreMigration then UseGetPresenceByUserIdResult and UseGetPresenceByUserIdResult.placeId else UseGetPresenceByUserIdResult.placeId)
@@ -189,7 +189,7 @@ return function(p1) --[[ Line: 111 ]]
 		UnionResult.userId,
 		UseGetPresenceByUserIdResult
 	})
-	local UseMemoResult4 = React.useMemo(function() --[[ Line: 250 ]]
+	local UseMemoResult4 = React.useMemo(function()
 		-- upvalues: IconsControlsHeadphoneDeafenSmall (upval), UseLocalizationResult (copy), IconsCommonPlay (upval), UseResult3 (copy), IconsActionsLeave (upval), UseResult1 (copy), IconsMenuProfile (upval), UseResult (copy), IconsActionsFeedback (upval), UseLocalUserIdResult (copy), UnionResult (copy), UseMemoResult1 (ref), UseMemoResult2 (ref), UseMemoResult (ref), UseIsParticipantMutedLocallyResult (copy), IconsControlsMicrophoneMute (upval), IconsControlsMicrophone (upval), Default (upval), UseSquadUserDropdownMenuButtonsModuleResult (copy)
 		local config = {
 			VoiceIneligibleButton = {
@@ -215,7 +215,7 @@ return function(p1) --[[ Line: 111 ]]
 			ReportButton = {
 				icon = IconsActionsFeedback,
 				text = UseLocalizationResult.reportUserText,
-				onActivated = function() --[[ Line: 275 ]]
+				onActivated = function()
 					-- upvalues: UseLocalUserIdResult (upval), UnionResult (upval), UseMemoResult1 (upval), UseMemoResult2 (upval), UseMemoResult (upval)
 					UnionResult.openSquadVoiceAbuseReport({
 						submitterUserId = tostring(UseLocalUserIdResult),
@@ -231,7 +231,7 @@ return function(p1) --[[ Line: 111 ]]
 			MuteVoiceButton = {
 				icon = if UseIsParticipantMutedLocallyResult then IconsControlsMicrophoneMute else IconsControlsMicrophone,
 				text = if UseIsParticipantMutedLocallyResult then UseLocalizationResult.unmuteVoiceButtonText else UseLocalizationResult.muteVoiceButtonText,
-				onActivated = function() --[[ Line: 293 ]]
+				onActivated = function()
 					-- upvalues: UnionResult (upval), UseIsParticipantMutedLocallyResult (upval), Default (upval)
 					local Number: number? = tonumber(UnionResult.userId)
 					
@@ -280,7 +280,7 @@ return function(p1) --[[ Line: 111 ]]
 			isIsolated = true,
 			customEventHandlers = {
 				[FocusNavigationEventNameEnum.NavigateBack] = {
-					handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 344 ]]
+					handler = InputHandlersModule.onRelease(function(p2)
 						-- upvalues: UnionResult (copy)
 						UnionResult.onDismiss()
 						p2:cancel()
@@ -294,7 +294,7 @@ return function(p1) --[[ Line: 111 ]]
 				screenWidth = 400,
 				showImages = true,
 				buttonModels = UseMemoResult4,
-				onDismiss = function() --[[ Line: 358 ]]
+				onDismiss = function()
 					-- upvalues: UnionResult (copy)
 					UnionResult.onDismiss()
 				end

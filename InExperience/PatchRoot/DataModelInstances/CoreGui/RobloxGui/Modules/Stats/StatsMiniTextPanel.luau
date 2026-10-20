@@ -8,7 +8,7 @@ local _ = require(CoreGui.RobloxGui.Modules.Stats.StatsAggregator)
 local StatsMiniTextPanelModule = {}
 StatsMiniTextPanelModule.__index = StatsMiniTextPanelModule
 
-function StatsMiniTextPanelModule.new(_statType) --[[ Line: 43 ]]
+function StatsMiniTextPanelModule.new(_statType)
 	-- upvalues: StatsMiniTextPanelModule (copy), StatsUtilsModule (copy), _UDim2_1 (copy), _UDim2 (copy), _UDim2_3 (copy), _UDim2_2 (copy)
 	local t = {}
 	setmetatable(t, StatsMiniTextPanelModule)
@@ -39,24 +39,24 @@ function StatsMiniTextPanelModule.new(_statType) --[[ Line: 43 ]]
 	return t
 end
 
-function StatsMiniTextPanelModule:SetZIndex(ZIndex) --[[ Line: 80 ]]
+function StatsMiniTextPanelModule:SetZIndex(ZIndex)
 	self._frame.ZIndex = ZIndex
 	self._titleLabel.ZIndex = ZIndex
 	self.ZIndex = ZIndex
 end
 
-function StatsMiniTextPanelModule:_getTitle() --[[ Line: 86 ]]
+function StatsMiniTextPanelModule:_getTitle()
 	-- upvalues: StatsUtilsModule (copy)
 	return StatsUtilsModule.TypeToShortName[self._statType]
 end
 
-function StatsMiniTextPanelModule:PlaceInParent(Parent, Size, Position) --[[ Line: 90 ]]
+function StatsMiniTextPanelModule:PlaceInParent(Parent, Size, Position)
 	self._frame.Position = Position
 	self._frame.Size = Size
 	self._frame.Parent = Parent
 end
 
-function StatsMiniTextPanelModule:SetStatsAggregator(_aggregator) --[[ Line: 96 ]]
+function StatsMiniTextPanelModule:SetStatsAggregator(_aggregator)
 	if self._aggregator then
 		self._aggregator:RemoveListener(self._listenerId)
 		self._listenerId = nil
@@ -66,17 +66,17 @@ function StatsMiniTextPanelModule:SetStatsAggregator(_aggregator) --[[ Line: 96 
 	self:_refreshVisibility()
 end
 
-function StatsMiniTextPanelModule:SetVisible(Visible) --[[ Line: 108 ]]
+function StatsMiniTextPanelModule:SetVisible(Visible)
 	self.frame.Visible = Visible
 	self:_refreshVisibility()
 end
 
-function StatsMiniTextPanelModule._shouldBeVisible(p1) --[[ Line: 113 ]]
+function StatsMiniTextPanelModule._shouldBeVisible(p1)
 	-- upvalues: StatsUtilsModule (copy)
 	return if StatsUtilsModule.PerformanceStatsShouldBeVisible() then p1._frame.Visible else false
 end
 
-function StatsMiniTextPanelModule:_refreshVisibility() --[[ Line: 122 ]]
+function StatsMiniTextPanelModule:_refreshVisibility()
 	if self:_shouldBeVisible() then
 		self:_startListening()
 		self:_updateFromAggregator()
@@ -87,7 +87,7 @@ function StatsMiniTextPanelModule:_refreshVisibility() --[[ Line: 122 ]]
 	end
 end
 
-function StatsMiniTextPanelModule:_stopListening() --[[ Line: 131 ]]
+function StatsMiniTextPanelModule:_stopListening()
 	if self._aggregator == nil then return end
 	if self._listenerId ~= nil then
 		self._aggregator:RemoveListener(self._listenerId)
@@ -97,10 +97,10 @@ function StatsMiniTextPanelModule:_stopListening() --[[ Line: 131 ]]
 	end
 end
 
-function StatsMiniTextPanelModule:_startListening() --[[ Line: 144 ]]
+function StatsMiniTextPanelModule:_startListening()
 	if self._aggregator == nil then return end
 	if self._listenerId == nil then
-		self._listenerId = self._aggregator:AddListener(function() --[[ Line: 153 ]]
+		self._listenerId = self._aggregator:AddListener(function()
 			-- upvalues: self (copy)
 			self:_updateFromAggregator()
 		end)
@@ -109,11 +109,11 @@ function StatsMiniTextPanelModule:_startListening() --[[ Line: 144 ]]
 	end
 end
 
-function StatsMiniTextPanelModule:OnPerformanceStatsShouldBeVisibleChanged() --[[ Line: 158 ]]
+function StatsMiniTextPanelModule:OnPerformanceStatsShouldBeVisibleChanged()
 	self:_refreshVisibility()
 end
 
-function StatsMiniTextPanelModule:_updateFromAggregator() --[[ Line: 162 ]]
+function StatsMiniTextPanelModule:_updateFromAggregator()
 	-- upvalues: StatsUtilsModule (copy)
 	self._valueLabel.Text = StatsUtilsModule.FormatTypedValue(if self._aggregator == nil then 0 else self._aggregator:GetLatestValue(), self._statType)
 end

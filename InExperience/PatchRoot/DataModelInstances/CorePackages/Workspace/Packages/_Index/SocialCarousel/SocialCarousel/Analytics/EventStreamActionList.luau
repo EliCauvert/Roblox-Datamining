@@ -11,7 +11,7 @@ local ConstantsModule = require(SocialCarousel.Common.Constants)
 local FIntSocialCarouselShowRecsLimit = require(SocialCarousel.Flags).FIntSocialCarouselShowRecsLimit
 local FFlagLuaAppUserSeenCollectionUnifiedFields = SharedFlagsModule.FFlagLuaAppUserSeenCollectionUnifiedFields
 
-local function Source(p1) --[[ Line: 17 ]]
+local function Source(p1)
 	return p1
 end
 

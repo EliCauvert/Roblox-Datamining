@@ -24,14 +24,14 @@ local config1 = {
 	TICKET_CREATION_TEXT_FILTER_ERROR = true,
 	TICKET_CREATION_GIBBERISH_ERROR = true
 }
-local MemoResult = ReactModule.memo(function(p1) --[[ Line: 67 ]]
+local MemoResult = ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), CryoModule (copy), UnavailablePromptModule (copy), PlayerFeedbackPromptModule (copy), PromptConnectionsModule (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState({ promptType = nil, promptData = nil, promptQueue = {} })
 	local PromptData = UseStateResult.promptData
 	local PromptType = UseStateResult.promptType
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 77 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), CryoModule (upval)
-		UseStateResult2(function(p2) --[[ Line: 78 ]]
+		UseStateResult2(function(p2)
 			-- upvalues: CryoModule (upval)
 			local PromptQueue = p2.promptQueue or {}
 			
@@ -48,9 +48,9 @@ local MemoResult = ReactModule.memo(function(p1) --[[ Line: 67 ]]
 			end
 		end)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 96 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), CryoModule (upval)
-		UseStateResult2(function(p2) --[[ Line: 97 ]]
+		UseStateResult2(function(p2)
 			-- upvalues: CryoModule (upval)
 			return if p2.promptType == nil then {
 				promptType = "PromptFeedback",
@@ -63,9 +63,9 @@ local MemoResult = ReactModule.memo(function(p1) --[[ Line: 67 ]]
 			}
 		end)
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function(Reason) --[[ Line: 119 ]]
+	local UseResult2 = ReactModule.useCallback(function(Reason)
 		-- upvalues: UseStateResult2 (copy), CryoModule (upval)
-		UseStateResult2(function(p2) --[[ Line: 120 ]]
+		UseStateResult2(function(p2)
 			-- upvalues: CryoModule (upval), Reason (copy)
 			return if p2.promptType == nil then {
 				promptType = "PromptUnavailable",
@@ -117,7 +117,7 @@ local MemoResult = ReactModule.memo(function(p1) --[[ Line: 67 ]]
 		}, { Prompt = Element }) else Element
 	})
 end)
-local MemoResult1 = ReactModule.memo(function(p1) --[[ Line: 182 ]]
+local MemoResult1 = ReactModule.memo(function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), CryoModule (copy), FFlagPlayerSupportPromptEventIngestModule (copy), PlayerSupportPromptTelemetryModule (copy), ConstantsModule (copy), config (copy), UnavailablePromptModule (copy), PlayerSupportUnavailablePromptModule (copy), config1 (copy), PlayerSupportPromptModule (copy), PlayerFeedbackPromptModule (copy), PromptConnectionsModule (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), PlayerSupportToastModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		ToastSubmitted = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Submitted",
@@ -130,19 +130,19 @@ local MemoResult1 = ReactModule.memo(function(p1) --[[ Line: 182 ]]
 	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(false)
 	local PromptData = UseStateResult.promptData
 	local PromptType = UseStateResult.promptType
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 201 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_2 (copy), UseStateResult2_3 (copy), UseStateResult2_4 (copy)
 		UseStateResult2_2("")
 		UseStateResult2_3("")
 		UseStateResult2_4(false)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 207 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(nil)
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 211 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), CryoModule (upval)
-		UseStateResult2(function(p2) --[[ Line: 212 ]]
+		UseStateResult2(function(p2)
 			-- upvalues: CryoModule (upval)
 			local PromptQueue = p2.promptQueue or {}
 			
@@ -159,9 +159,9 @@ local MemoResult1 = ReactModule.memo(function(p1) --[[ Line: 182 ]]
 			end
 		end)
 	end, {})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 230 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), CryoModule (upval)
-		UseStateResult2(function(p2) --[[ Line: 231 ]]
+		UseStateResult2(function(p2)
 			-- upvalues: CryoModule (upval)
 			return if p2.promptType == nil then {
 				promptType = "PromptFeedback",
@@ -174,9 +174,9 @@ local MemoResult1 = ReactModule.memo(function(p1) --[[ Line: 182 ]]
 			}
 		end)
 	end, {})
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 253 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), CryoModule (upval)
-		UseStateResult2(function(p2) --[[ Line: 254 ]]
+		UseStateResult2(function(p2)
 			-- upvalues: CryoModule (upval)
 			return if p2.promptType == nil then {
 				promptType = "PromptPlayerSupport",
@@ -189,9 +189,9 @@ local MemoResult1 = ReactModule.memo(function(p1) --[[ Line: 182 ]]
 			}
 		end)
 	end, {})
-	local UseResult5 = ReactModule.useCallback(function(Reason) --[[ Line: 276 ]]
+	local UseResult5 = ReactModule.useCallback(function(Reason)
 		-- upvalues: UseStateResult2 (copy), CryoModule (upval)
-		UseStateResult2(function(p2) --[[ Line: 277 ]]
+		UseStateResult2(function(p2)
 			-- upvalues: CryoModule (upval), Reason (copy)
 			return if p2.promptType == nil then {
 				promptType = "PromptUnavailable",
@@ -209,7 +209,7 @@ local MemoResult1 = ReactModule.memo(function(p1) --[[ Line: 182 ]]
 			}
 		end)
 	end, {})
-	local UseResult6 = ReactModule.useCallback(function(Reason) --[[ Line: 302 ]]
+	local UseResult6 = ReactModule.useCallback(function(Reason)
 		-- upvalues: FFlagPlayerSupportPromptEventIngestModule (upval), PlayerSupportPromptTelemetryModule (upval), UseStateResult4 (copy), ConstantsModule (upval), UseStateResult5 (copy), UseStateResult3 (copy), config (upval), UseResult (copy), UseStateResult2_1 (copy), UseLocalizationResult (copy), UseStateResult2 (copy), CryoModule (upval)
 		if FFlagPlayerSupportPromptEventIngestModule then
 			PlayerSupportPromptTelemetryModule.logTicketResult(Reason, {
@@ -226,7 +226,7 @@ local MemoResult1 = ReactModule.memo(function(p1) --[[ Line: 182 ]]
 			
 			return
 		else
-			UseStateResult2(function(p2) --[[ Line: 317 ]]
+			UseStateResult2(function(p2)
 				-- upvalues: CryoModule (upval), Reason (copy)
 				return if p2.promptType == nil then {
 					promptType = "PromptPlayerSupportUnavailable",
@@ -308,7 +308,7 @@ local MemoResult1 = ReactModule.memo(function(p1) --[[ Line: 182 ]]
 	})
 end)
 
-return (ReactModule.memo(function(p1) --[[ Line: 413 ]]
+return (ReactModule.memo(function(p1)
 	-- upvalues: v1 (copy), ReactModule (copy), MemoResult1 (copy), MemoResult (copy)
 	return if v1 then ReactModule.createElement(MemoResult1, p1) else ReactModule.createElement(MemoResult, p1)
 end))

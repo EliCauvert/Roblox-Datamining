@@ -9,7 +9,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local Renderer = InlineRichTextModule.Renderer
 local PrepareRichTextCopyFunction = InlineRichTextModule.prepareRichTextCopy
 
-return function(Frame) --[[ Line: 23 | Named "LegalTextWithLinks" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), CreateLegalLinkRendererModule (copy), PrepareRichTextCopyFunction (copy), View (copy), Renderer (copy)
 	local UseTokensResult = UseTokensFunction()
 	local OnLinkActivatedFunction = Frame.onLinkActivated
@@ -20,14 +20,14 @@ return function(Frame) --[[ Line: 23 | Named "LegalTextWithLinks" ]]
 		testId = Frame.testId
 	}, {
 		Text = ReactModule.createElement(Renderer, {
-			text = ReactModule.useMemo(function() --[[ Line: 35 ]]
+			text = ReactModule.useMemo(function()
 				-- upvalues: PrepareRichTextCopyFunction (upval), Frame (copy)
 				return PrepareRichTextCopyFunction(Frame.text)
 			end, { Frame.text }),
-			renderers = ReactModule.useMemo(function() --[[ Line: 26 ]]
+			renderers = ReactModule.useMemo(function()
 				-- upvalues: CreateLegalLinkRendererModule (upval), OnLinkActivatedFunction (copy)
 				return {
-					LINK = CreateLegalLinkRendererModule(function(p1) --[[ Line: 28 ]]
+					LINK = CreateLegalLinkRendererModule(function(p1)
 						-- upvalues: OnLinkActivatedFunction (upval)
 						if OnLinkActivatedFunction then
 							OnLinkActivatedFunction(p1)

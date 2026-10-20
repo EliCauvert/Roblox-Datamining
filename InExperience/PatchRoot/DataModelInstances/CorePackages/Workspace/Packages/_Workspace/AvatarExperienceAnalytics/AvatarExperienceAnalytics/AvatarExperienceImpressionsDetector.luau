@@ -12,7 +12,7 @@ local UseSignalState = require(Parent.SignalsReact).useSignalState
 local GetLegacyNavigationStore = if FFlagSignalsNavP3gAvatarExperience then require(Parent.NavigationRodux).GetLegacyNavigationStore else nil
 local AvatarExperienceImpressionsDetector: (any) -> any = require(Parent.Roact).PureComponent:extend("AvatarExperienceImpressionsDetector")
 
-local function _(p1) --[[ Line: 27 ]]
+local function _(p1)
 	-- upvalues: FFlagUseNavigationSelectors (copy), Selectors (copy)
 	if FFlagUseNavigationSelectors then
 		return Selectors.selectCurrentPageName(p1)
@@ -39,13 +39,13 @@ AvatarExperienceImpressionsDetector.validateProps = TModule.strictInterface({
 })
 AvatarExperienceImpressionsDetector.defaultProps = { scanDebounceSeconds = 1, viewFillPercent = 0.25 }
 
-function AvatarExperienceImpressionsDetector.init(p1) --[[ Line: 65 ]]
+function AvatarExperienceImpressionsDetector.init(p1)
 	p1.isMounted = false
 	p1.lastImpressionTick = nil
 	p1.nextImpressionTick = nil
 end
 
-function AvatarExperienceImpressionsDetector._isInstanceVisible(p1, Frame: Frame): boolean --[[ Line: 71 ]]
+function AvatarExperienceImpressionsDetector._isInstanceVisible(p1, Frame: Frame): boolean
 	-- upvalues: ArgCheckModule (copy), FFlagAXSduiCatalogScrollImpressions (copy)
 	if not Frame then
 		return false
@@ -89,11 +89,11 @@ function AvatarExperienceImpressionsDetector._isInstanceVisible(p1, Frame: Frame
 	end
 end
 
-function AvatarExperienceImpressionsDetector._defaultObjectCollector(Object) --[[ Line: 139 ]]
+function AvatarExperienceImpressionsDetector._defaultObjectCollector(Object)
 	return Object:GetChildren()
 end
 
-function AvatarExperienceImpressionsDetector._calculateImpressions(p1) --[[ Line: 143 ]]
+function AvatarExperienceImpressionsDetector._calculateImpressions(p1)
 	-- upvalues: ArgCheckModule (copy)
 	if not p1.isMounted then return end
 	if p1.props.pageFilter then
@@ -119,7 +119,7 @@ function AvatarExperienceImpressionsDetector._calculateImpressions(p1) --[[ Line
 	end
 end
 
-function AvatarExperienceImpressionsDetector._requestImpressions(p2) --[[ Line: 183 ]]
+function AvatarExperienceImpressionsDetector._requestImpressions(p2)
 	-- upvalues: ArgCheckModule (copy)
 	if not p2.isMounted then return end
 	if p2.nextImpressionTick ~= nil then return end
@@ -131,7 +131,7 @@ function AvatarExperienceImpressionsDetector._requestImpressions(p2) --[[ Line: 
 		Delay = p2.nextImpressionTick - tick()
 	end
 	if Delay > 0 then
-		task.delay(Delay, function() --[[ Line: 202 ]]
+		task.delay(Delay, function()
 			-- upvalues: ArgCheckModule (upval), p2 (copy)
 			ArgCheckModule.assert(p2.nextImpressionTick ~= nil and p2.nextImpressionTick < tick())
 			p2.nextImpressionTick = nil
@@ -145,23 +145,23 @@ function AvatarExperienceImpressionsDetector._requestImpressions(p2) --[[ Line: 
 	end
 end
 
-function AvatarExperienceImpressionsDetector:render() --[[ Line: 214 ]]
+function AvatarExperienceImpressionsDetector:render()
 	return nil
 end
 
-function AvatarExperienceImpressionsDetector.didMount(p2) --[[ Line: 218 ]]
+function AvatarExperienceImpressionsDetector.didMount(p2)
 	p2.isMounted = true
 	p2:_requestImpressions()
 	
 	if p2.props.onRequestImpressionsSignal then
-		p2.onRequestImpressionsConnection = p2.props.onRequestImpressionsSignal:connect(function() --[[ Line: 222 ]]
+		p2.onRequestImpressionsConnection = p2.props.onRequestImpressionsSignal:connect(function()
 			-- upvalues: p2 (copy)
 			p2:_requestImpressions()
 		end)
 	end
 end
 
-function AvatarExperienceImpressionsDetector.willUnmount(p2) --[[ Line: 228 ]]
+function AvatarExperienceImpressionsDetector.willUnmount(p2)
 	p2.isMounted = false
 	
 	if p2.onRequestImpressionsConnection ~= nil then
@@ -170,12 +170,12 @@ function AvatarExperienceImpressionsDetector.willUnmount(p2) --[[ Line: 228 ]]
 	end
 end
 
-function AvatarExperienceImpressionsDetector.didUpdate(p2, _, _) --[[ Line: 236 ]]
+function AvatarExperienceImpressionsDetector.didUpdate(p2, _, _)
 	p2:_requestImpressions()
 end
 
 if FFlagSignalsNavP3gAvatarExperience then
-	AvatarExperienceImpressionsDetector = function(p2) --[[ Line: 242 ]]
+	AvatarExperienceImpressionsDetector = function(p2)
 		-- upvalues: GetLegacyNavigationStore (copy), UseSignalState (copy), ReactModule (copy), AvatarExperienceImpressionsDetector (copy), CryoModule (copy)
 		return ReactModule.createElement(AvatarExperienceImpressionsDetector, CryoModule.Dictionary.union(p2, {
 			currentPage = UseSignalState(GetLegacyNavigationStore(false).getCurrentPageName)
@@ -184,7 +184,7 @@ if FFlagSignalsNavP3gAvatarExperience then
 	
 	return AvatarExperienceImpressionsDetector
 else
-	return (RoactRoduxModule.connect(function(p2, _) --[[ Line: 255 ]]
+	return (RoactRoduxModule.connect(function(p2, _)
 		-- upvalues: FFlagUseNavigationSelectors (copy), Selectors (copy)
 		local t = {}
 		local SelectCurrentPageNameResult = nil

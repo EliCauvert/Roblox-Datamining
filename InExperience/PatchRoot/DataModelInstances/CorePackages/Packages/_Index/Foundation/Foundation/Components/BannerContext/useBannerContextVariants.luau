@@ -8,13 +8,13 @@ local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant
 local _ = require(Foundation.Providers.Style.Tokens)
 local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-local function _(p1, p2) --[[ Line: 22 | Named "firstLineTextPadding" ]]
+local function _(p1, p2)
 	return {
 		top = UDim.new(0, (math.round((p1.Size.Size_600 - p2) / 2)))
 	}
 end
 
-local function affixedContentPadding(p1, Offset) --[[ Line: 26 ]]
+local function affixedContentPadding(p1, Offset)
 	return {
 		top = UDim.new(0, Offset),
 		right = UDim.new(0, p1.Margin.Medium),
@@ -23,7 +23,7 @@ local function affixedContentPadding(p1, Offset) --[[ Line: 26 ]]
 	}
 end
 
-local function variantsFactory(p1) --[[ Line: 35 ]]
+local function variantsFactory(p1)
 	-- upvalues: BannerContextPresentationModule (copy), IconSizeModule (copy), BannerContextVariantModule (copy), affixedContentPadding (copy)
 	local Padding = {
 		top = UDim.new(0, (math.round((p1.Size.Size_600 - p1.Typography.BodySmall.FontSize) / 2)))
@@ -83,7 +83,7 @@ local function variantsFactory(p1) --[[ Line: 35 ]]
 	}
 end
 
-return function(p1, p2, p3) --[[ Line: 126 | Named "useBannerContextVariants" ]]
+return function(p1, p2, p3)
 	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
 	local BannerContext = VariantsContextModule.useVariants("BannerContext", variantsFactory, p1)
 	

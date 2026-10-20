@@ -8,51 +8,51 @@ local UIBloxModule = require(Parent.UIBlox)
 local AdsEuDsaPromptUIModule = require(script.Parent.AdsEuDsaPromptUI)
 local RobloxTranslatorModule = require(Parent.RobloxTranslator)
 
-local function getBodyText(AdvertiserName, PayerName) --[[ Line: 19 ]]
+local function getBodyText(AdvertiserName, PayerName)
 	-- upvalues: RobloxTranslatorModule (copy)
 	return if AdvertiserName == "" or PayerName ~= "" then if AdvertiserName == "" or PayerName == "" then RobloxTranslatorModule:FormatByKey("CoreScripts.Ads.Label.InExperienceDisclosureStatic") else RobloxTranslatorModule:FormatByKey("CoreScripts.Ads.Label.InExperienceDisclosureDynamicWithPayer", { AdvertiserName = AdvertiserName, PayerName = PayerName }) else RobloxTranslatorModule:FormatByKey("CoreScripts.Ads.Label.InExperienceDisclosureDynamic", { AdvertiserName = AdvertiserName })
 end
 
 local AdsEuDsaPromptHandler = RoactModule.PureComponent:extend("AdsEuDsaPromptHandler")
 
-function AdsEuDsaPromptHandler.init(p1) --[[ Line: 36 ]]
+function AdsEuDsaPromptHandler.init(p1)
 	-- upvalues: AdService (copy), getBodyText (copy)
 	p1:setState({ enabled = false })
 	p1.savedSelectedCoreObject = nil
 	p1:setState({ bodyText = "" })
-	AdService.ShowDynamicEudsaDisclosure:Connect(function(AdvertiserName, PayerName) --[[ Line: 46 ]]
+	AdService.ShowDynamicEudsaDisclosure:Connect(function(AdvertiserName, PayerName)
 		-- upvalues: p1 (copy), getBodyText (upval)
 		p1:setState({ bodyText = getBodyText(AdvertiserName, PayerName) })
 		p1:showPrompt()
 	end)
 end
 
-function AdsEuDsaPromptHandler.saveSelectedObject(p1) --[[ Line: 54 ]]
+function AdsEuDsaPromptHandler.saveSelectedObject(p1)
 	-- upvalues: GuiService (copy)
 	p1.savedSelectedCoreObject = GuiService.SelectedCoreObject
 	GuiService.SelectedCoreObject = nil
 end
 
-function AdsEuDsaPromptHandler.restoreSelectedObject(p1) --[[ Line: 59 ]]
+function AdsEuDsaPromptHandler.restoreSelectedObject(p1)
 	-- upvalues: CoreGui (copy), GuiService (copy)
 	if p1.savedSelectedCoreObject == nil or p1.savedSelectedCoreObject:IsDescendantOf(CoreGui) then
 		GuiService.SelectedCoreObject = p1.savedSelectedCoreObject
 	end
 end
 
-function AdsEuDsaPromptHandler.showPrompt(p1) --[[ Line: 66 ]]
+function AdsEuDsaPromptHandler.showPrompt(p1)
 	p1:saveSelectedObject()
 	p1:setState({ enabled = true })
 end
 
-function AdsEuDsaPromptHandler.hidePrompt(p1) --[[ Line: 73 ]]
+function AdsEuDsaPromptHandler.hidePrompt(p1)
 	-- upvalues: AdService (copy)
 	p1:setState({ enabled = false })
 	AdService:HideEudsaDisclosure()
 	p1:restoreSelectedObject()
 end
 
-function AdsEuDsaPromptHandler.render(Handler) --[[ Line: 81 ]]
+function AdsEuDsaPromptHandler.render(Handler)
 	-- upvalues: UIBloxModule (copy), ColorMode (copy), RoactModule (copy), AdsEuDsaPromptUIModule (copy)
 	return if Handler.state.enabled then RoactModule.createElement("ScreenGui", {
 		ResetOnSpawn = false,

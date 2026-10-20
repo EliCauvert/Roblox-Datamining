@@ -6,7 +6,7 @@ local View = FoundationModule.View
 local Text = FoundationModule.Text
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1) --[[ Line: 19 | Named "SearchNoResults" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), UseTokensFunction (copy), ReactModule (copy), View (copy), Text (copy)
 	local UseLocalizationResult = UseLocalizationFunction({ noChatFound = "Feature.Chat.Label.NoChatFound" })
 	local UseTokensResult = UseTokensFunction()

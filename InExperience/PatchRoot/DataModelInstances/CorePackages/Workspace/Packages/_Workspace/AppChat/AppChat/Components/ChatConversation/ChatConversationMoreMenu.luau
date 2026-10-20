@@ -32,7 +32,7 @@ local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationE
 local UseAppFocusRootFunction = FocusNavigationUtilsModule.useAppFocusRoot
 local FFlagPartyDevAPIToRespectThirdPartySettingsEnabled = require(Parent.SharedFlags).FFlagPartyDevAPIToRespectThirdPartySettingsEnabled
 
-return ReactModule.memo(function(p1) --[[ Line: 59 ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTelemetryModule (copy), ChatConversationTelemetryLayerModule (copy), UseDispatchFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), UseCurrentSquadIdFunction (copy), UseCurrentSquadParentChannelIdFunction (copy), ReactModule (copy), SquadExternalContractContext (copy), FFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseAppFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventNamesModule (copy), ScheduledSquadActionEnum (copy), ScheduledSquadActionSourceEnum (copy), LeaveSquadFunction (copy), SquadPromptType (copy), SquadButtonSourceEnum (copy), SquadButtonClickIntentionEnum (copy), ChatConversationTelemetryEventsModule (copy), ConversationActionTypeModule (copy), IconName (copy), FoundationModule (copy), ScheduledSquadSheetModule (copy), Menu (copy), PopoverSide (copy), PopoverAlign (copy)
 	local UseTelemetryModuleResult = UseTelemetryModule(ChatConversationTelemetryLayerModule.Context)
 	local UseDispatchResult = UseDispatchFunction()
@@ -55,11 +55,11 @@ return ReactModule.memo(function(p1) --[[ Line: 59 ]]
 	local UseAppFocusRootResult = UseAppFocusRootFunction({
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.ContextualMenu,
 		isFocusable = UseStateResult1,
-		customEventHandlers = ReactModule.useMemo(function() --[[ Line: 83 ]]
+		customEventHandlers = ReactModule.useMemo(function()
 			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), UseStateResult2_1 (copy)
 			return {
 				[FocusNavigationEventNameEnum.NavigateBack] = {
-					handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 86 ]]
+					handler = InputHandlersModule.onRelease(function(p2)
 						-- upvalues: UseStateResult2_1 (upval)
 						p2.cancelled = true
 						UseStateResult2_1(false)
@@ -68,7 +68,7 @@ return ReactModule.memo(function(p1) --[[ Line: 59 ]]
 			}
 		end, { UseStateResult2_1 })
 	})
-	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 101 ]]
+	local UseResult = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), UseAppFocusRootResult (copy)
 		UseRefResult.current = Current
 		
@@ -76,7 +76,7 @@ return ReactModule.memo(function(p1) --[[ Line: 59 ]]
 			UseAppFocusRootResult(Current)
 		end
 	end, { UseAppFocusRootResult })
-	ReactModule.useEffect(function() --[[ Line: 108 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy)
 		if UseRefResult and UseRefResult.current then
 			UseRefResult.current.SelectionBehaviorDown = Enum.SelectionBehavior.Stop
@@ -86,7 +86,7 @@ return ReactModule.memo(function(p1) --[[ Line: 59 ]]
 			UseRefResult.current.SelectionGroup = true
 		end
 	end, { UseStateResult1 })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 124 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), UseContextResult (copy), EventNamesModule (upval), ScheduledSquadActionEnum (upval), p1 (copy), ScheduledSquadActionSourceEnum (upval), UseCurrentSquadIdResult (copy)
 		UseStateResult2(true)
 		UseContextResult.fireSquadAnalytics(EventNamesModule.ScheduledSquadAction, {
@@ -103,10 +103,10 @@ return ReactModule.memo(function(p1) --[[ Line: 59 ]]
 		UseContextResult.squadLocation,
 		UseContextResult.fireSquadAnalytics
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 145 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseCurrentSquadIdResult (copy), p1 (copy), UseCurrentSquadParentChannelIdResult (copy), UseDispatchResult (copy), LeaveSquadFunction (upval), SquadPromptType (upval), UseContextResult (copy), NoFFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), EventNamesModule (upval), SquadButtonSourceEnum (upval), SquadButtonClickIntentionEnum (upval)
 		if UseCurrentSquadIdResult and p1.conversationId ~= UseCurrentSquadParentChannelIdResult then
-			UseDispatchResult(LeaveSquadFunction(SquadPromptType.JoinAnotherSquad, UseContextResult.setSquadPrompt, function() --[[ Line: 148 ]]
+			UseDispatchResult(LeaveSquadFunction(SquadPromptType.JoinAnotherSquad, UseContextResult.setSquadPrompt, function()
 				-- upvalues: p1 (upval)
 				p1.navigateToSquadLobby(p1.conversationId)
 			end, UseContextResult.squadLocation, NoFFlagPartyDevAPIToRespectThirdPartySettingsEnabled))
@@ -138,7 +138,7 @@ return ReactModule.memo(function(p1) --[[ Line: 59 ]]
 			},
 			variant = if UseStateResult1 then FoundationModule.Enums.ButtonVariant.Standard else FoundationModule.Enums.ButtonVariant.Utility,
 			LayoutOrder = p1.layoutOrder,
-			onActivated = ReactModule.useCallback(function() --[[ Line: 195 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: UseTelemetryModuleResult (copy), ChatConversationTelemetryEventsModule (upval), UseStateResult1 (copy), ConversationActionTypeModule (upval), UseStateResult2_1 (copy)
 				UseTelemetryModuleResult.emit(ChatConversationTelemetryEventsModule.ConversationMoreMenuBtnClicked, {
 					action = if UseStateResult1 then ConversationActionTypeModule.CloseMoreMenu else ConversationActionTypeModule.OpenMoreMenu
@@ -151,14 +151,14 @@ return ReactModule.memo(function(p1) --[[ Line: 59 ]]
 		ScheduledSquadSheet = ReactModule.createElement(ScheduledSquadSheetModule, {
 			conversationId = p1.conversationId,
 			isOpen = UseStateResult,
-			onClose = function() --[[ Line: 270 ]]
+			onClose = function()
 				-- upvalues: UseStateResult2 (copy)
 				UseStateResult2(false)
 			end
 		}),
 		Menu = ReactModule.createElement(Menu, {
 			anchorRef = UseRefResult1,
-			items = ReactModule.useMemo(function() --[[ Line: 208 ]]
+			items = ReactModule.useMemo(function()
 				-- upvalues: p1 (copy), UseCurrentSquadParentChannelIdResult (copy), UseLocalizationResult (copy), IconName (upval)
 				local List = {}
 				table.insert(List, {
@@ -183,7 +183,7 @@ return ReactModule.memo(function(p1) --[[ Line: 59 ]]
 				UseCurrentSquadParentChannelIdResult
 			}),
 			isOpen = UseStateResult1,
-			onActivated = ReactModule.useCallback(function(p2) --[[ Line: 180 ]]
+			onActivated = ReactModule.useCallback(function(p2)
 				-- upvalues: UseResult2 (copy), UseResult1 (copy), UseStateResult2_1 (copy)
 				if p2 == "createJoinViewParty" then
 					UseResult2()
@@ -192,7 +192,7 @@ return ReactModule.memo(function(p1) --[[ Line: 59 ]]
 				end
 				UseStateResult2_1(false)
 			end, { UseResult2, UseResult1 }),
-			onPressedOutside = ReactModule.useCallback(function() --[[ Line: 119 ]]
+			onPressedOutside = ReactModule.useCallback(function()
 				-- upvalues: UseStateResult2_1 (copy)
 				UseStateResult2_1(false)
 			end, {}),
@@ -205,7 +205,7 @@ return ReactModule.memo(function(p1) --[[ Line: 59 ]]
 				hasArrow = true,
 				align = { offset = 0, position = PopoverAlign.Start },
 				backgroundStyle = UseTokensResult.Inverse.Surface.Surface_0,
-				onPressedOutside = ReactModule.useCallback(function() --[[ Line: 203 ]]
+				onPressedOutside = ReactModule.useCallback(function()
 					-- upvalues: UseStateResult2_2 (copy)
 					UseStateResult2_2(false)
 				end, {})

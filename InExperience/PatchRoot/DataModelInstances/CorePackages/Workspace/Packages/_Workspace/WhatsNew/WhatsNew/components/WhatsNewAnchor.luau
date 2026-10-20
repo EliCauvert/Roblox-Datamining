@@ -4,18 +4,18 @@ local ReactModule = require(Parent.React)
 local GetWhatsNewStoreModule = require(WhatsNew.store.GetWhatsNewStore)
 local View = require(Parent.Foundation).View
 
-local function _(Frame): boolean --[[ Line: 26 | Named "isGuiObjectReady" ]]
+local function _(Frame): boolean
 	local AbsoluteSize = Frame.AbsoluteSize
 	
 	return AbsoluteSize.X > 0 and AbsoluteSize.Y > 0
 end
 
-return ReactModule.memo(function(Frame) --[[ Line: 31 | Named "WhatsNewAnchor" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: GetWhatsNewStoreModule (copy), ReactModule (copy), View (copy)
 	local WhatsNewStoreModule = GetWhatsNewStoreModule()
 	local AnchorId = Frame.anchorId
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 36 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: WhatsNewStoreModule (copy), AnchorId (copy)
 		if Frame ~= nil then
 			local AbsoluteSize = Frame.AbsoluteSize
@@ -24,7 +24,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 31 | Named "WhatsNewAnchor" ]
 			return
 		end
 	end, { WhatsNewStoreModule, AnchorId })
-	local UseResult1 = ReactModule.useCallback(function(Current) --[[ Line: 43 ]]
+	local UseResult1 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), WhatsNewStoreModule (copy), AnchorId (copy), UseResult (copy)
 		if Current == nil then
 			local Current1 = UseRefResult.current
@@ -43,9 +43,9 @@ return ReactModule.memo(function(Frame) --[[ Line: 31 | Named "WhatsNewAnchor" ]
 			end
 		end
 	end, { WhatsNewStoreModule, AnchorId, UseResult })
-	ReactModule.useEffect(function() --[[ Line: 59 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: WhatsNewStoreModule (copy), AnchorId (copy), UseRefResult (copy)
-		return function() --[[ Line: 60 ]]
+		return function()
 			-- upvalues: WhatsNewStoreModule (upval), AnchorId (upval), UseRefResult (upval)
 			WhatsNewStoreModule.unregisterAnchor(AnchorId, UseRefResult.current)
 		end
@@ -55,7 +55,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 31 | Named "WhatsNewAnchor" ]
 		ref = UseResult1,
 		tag = Frame.tag or "size-full-0 auto-y",
 		LayoutOrder = Frame.LayoutOrder,
-		onAbsoluteSizeChanged = ReactModule.useCallback(function(p1) --[[ Line: 65 ]]
+		onAbsoluteSizeChanged = ReactModule.useCallback(function(p1)
 			-- upvalues: UseResult (copy)
 			UseResult(p1)
 		end, { UseResult })

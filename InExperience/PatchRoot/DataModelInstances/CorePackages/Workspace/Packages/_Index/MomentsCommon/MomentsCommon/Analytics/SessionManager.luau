@@ -3,18 +3,18 @@ local _ = require(script:FindFirstAncestor("MomentsCommon").Analytics.FunnelEven
 local Guids = {}
 
 return {
-	startSession = function(Key) --[[ Line: 16 ]]
+	startSession = function(Key)
 		-- upvalues: HttpService (copy), Guids (copy)
 		local Guid = HttpService:GenerateGUID()
 		Guids[Key] = Guid
 		
 		return Guid
 	end,
-	getSessionId = function(p1) --[[ Line: 22 ]]
+	getSessionId = function(p1)
 		-- upvalues: Guids (copy)
 		return Guids[p1]
 	end,
-	endSession = function(Key): boolean --[[ Line: 26 ]]
+	endSession = function(Key): boolean
 		-- upvalues: Guids (copy)
 		if Guids[Key] then
 			Guids[Key] = nil

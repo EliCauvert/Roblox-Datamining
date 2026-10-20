@@ -19,7 +19,7 @@ local config = {
 	placement = require(Foundation.Enums.InputPlacement).Start
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 56 | Named "Checkbox" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: UseInputGroupDefaultsModule (copy), config (copy), UseTokensModule (copy), UseCheckboxVariantsModule (copy), UseUncontrolledStateModule (copy), ReactModule (copy), InternalInputModule (copy), WithCommonPropsModule (copy), ConstantsModule (copy), TextModule (copy), BuilderIconsModule (copy)
 	local UseInputGroupDefaultsModuleResult = UseInputGroupDefaultsModule(p1, config)
 	local UseCheckboxVariantsModuleResult = UseCheckboxVariantsModule(UseTokensModule(), UseInputGroupDefaultsModuleResult.size)

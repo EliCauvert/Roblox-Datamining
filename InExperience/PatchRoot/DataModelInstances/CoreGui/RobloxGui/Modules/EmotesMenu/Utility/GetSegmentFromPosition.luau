@@ -1,6 +1,6 @@
 ﻿local ConstantsModule = require(script.Parent.Parent.Constants)
 
-return function(Vector): number --[[ Line: 6 | Named "GetSegmentIndexFromPosition" ]]
+return function(Vector): number
 	-- upvalues: ConstantsModule (copy)
 	local Degrees = math.deg((math.atan2(Vector.X, Vector.Y)))
 	

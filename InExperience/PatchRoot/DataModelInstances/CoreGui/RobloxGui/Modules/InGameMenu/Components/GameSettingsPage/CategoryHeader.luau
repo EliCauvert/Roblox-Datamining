@@ -7,7 +7,7 @@ local ThemedTextLabelModule = require(script.Parent.Parent.ThemedTextLabel)
 local WithLocalizationModule = require(Parent.Localization.withLocalization)
 local StrictInterfaceResult = T.strictInterface({ LayoutOrder = T.integer, localizationKey = T.string })
 
-return function(Frame) --[[ Line: 20 ]]
+return function(Frame)
 	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), Roact (copy), WithLocalizationModule (copy), ThemedTextLabelModule (copy)
 	if GlobalConfigModule.propValidation then
 		assert(StrictInterfaceResult(Frame))
@@ -17,7 +17,7 @@ return function(Frame) --[[ Line: 20 ]]
 		LayoutOrder = Frame.LayoutOrder,
 		Size = UDim2.new(1, 0, 0, 36)
 	}, {
-		Label = WithLocalizationModule({ text = Frame.localizationKey })(function(p1) --[[ Line: 32 ]]
+		Label = WithLocalizationModule({ text = Frame.localizationKey })(function(p1)
 			-- upvalues: Roact (upval), ThemedTextLabelModule (upval)
 			return Roact.createElement(ThemedTextLabelModule, {
 				fontKey = "Footer",

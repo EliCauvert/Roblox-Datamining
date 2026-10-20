@@ -5,14 +5,14 @@ local ImagesModule = require(script.Parent.Images)
 local CheckIcon = Roact.PureComponent:extend("CheckIcon")
 CheckIcon.defaultProps = {
 	checked = false,
-	onActivated = function() --[[ Line: 11 ]] end
+	onActivated = function() end
 }
 
-function CheckIcon.render(p1) --[[ Line: 14 ]]
+function CheckIcon.render(p1)
 	-- upvalues: ImagesModule (copy), UIBlox (copy), Roact (copy)
 	local CheckFill = p1.props.checked and ImagesModule.checkFill or ImagesModule.checkStroke
 	
-	return UIBlox.Style.withStyle(function(p2) --[[ Line: 16 ]]
+	return UIBlox.Style.withStyle(function(p2)
 		-- upvalues: Roact (upval), CheckFill (copy), p1 (copy)
 		return Roact.createElement("Frame", {
 			BackgroundTransparency = 1,

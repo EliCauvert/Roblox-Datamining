@@ -17,7 +17,7 @@ local UseShareSheetConversationModelModule = require(script.Parent.useShareSheet
 local UseShareSheetSelectionModule = require(script.Parent.useShareSheetSelection)
 local UseShareSheetSendModule = require(script.Parent.useShareSheetSend)
 
-return function(p1) --[[ Line: 46 | Named "useShareSheetViewModel" ]]
+return function(p1)
 	-- upvalues: FFlagShareSheetFriendsSort (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), GetUniversalShareSheetStoreModule (copy), SignalsReactModule (copy), GetExternalChatMessageSenderStoreModule (copy), UseRecipientListModule (copy), RecipientSourceModule (copy), UseShareSheetSelectionModule (copy), UseShareSheetSendModule (copy), UseShareSheetConversationModelModule (copy), UseLocalizationFunction (copy), ReactModule (copy), ShareSheetTelemetryModule (copy), UsePeoplePickerViewModelModule (copy), GetAppFeaturePoliciesFunction (copy)
 	local RecipientSource = if FFlagShareSheetFriendsSort then p1.recipientSource else nil
 	local v1 = nil
@@ -62,7 +62,7 @@ return function(p1) --[[ Line: 46 | Named "useShareSheetViewModel" ]]
 		send = "CommonUI.Features.Action.Send",
 		share = "Feature.SocialShare.Action.Share"
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 91 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: ShareSheetTelemetryModule (upval), p1 (copy), RecipientSource (copy)
 		ShareSheetTelemetryModule.logInteraction({
 			context = p1.context,
@@ -71,7 +71,7 @@ return function(p1) --[[ Line: 46 | Named "useShareSheetViewModel" ]]
 			interactionType = ShareSheetTelemetryModule.InteractionType.CustomMessageComposerFocused
 		})
 	end, { p1.context, RecipientSource, p1.telemetryId })
-	local UseResult1 = ReactModule.useCallback(function(RequestedConversationId) --[[ Line: 100 ]]
+	local UseResult1 = ReactModule.useCallback(function(RequestedConversationId)
 		-- upvalues: UseShareSheetSendModuleResult (copy), SelectedConversationIds (copy), ShareSheetTelemetryModule (upval), p1 (copy), RecipientSource (copy), UseShareSheetSelectionModuleResult (copy)
 		if not UseShareSheetSendModuleResult.isSending then
 			ShareSheetTelemetryModule.logInteraction({
@@ -94,7 +94,7 @@ return function(p1) --[[ Line: 46 | Named "useShareSheetViewModel" ]]
 	local v4 = nil
 	
 	if FFlagShareSheetPeoplePickerEnabledModule then
-		UseResult2 = ReactModule.useCallback(function() --[[ Line: 128 ]]
+		UseResult2 = ReactModule.useCallback(function()
 			-- upvalues: v1 (ref)
 			v1.setIsPeoplePickerDisplayed(true)
 		end, { v1 })
@@ -108,7 +108,7 @@ return function(p1) --[[ Line: 46 | Named "useShareSheetViewModel" ]]
 			listStatus = if FFlagShareSheetFriendsSort then nil else UseShareSheetConversationModelModuleResult.listStatus,
 			loadMore = if FFlagShareSheetFriendsSort then v3.loadMore else nil,
 			listResult = UseShareSheetConversationModelModuleResult.listResult,
-			onBack = ReactModule.useCallback(function() --[[ Line: 131 ]]
+			onBack = ReactModule.useCallback(function()
 				-- upvalues: v1 (ref)
 				v1.setIsPeoplePickerDisplayed(false)
 			end, { v1 }),

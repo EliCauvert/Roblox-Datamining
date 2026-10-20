@@ -1,6 +1,6 @@
 ﻿local NOBACKGROUNDASSETID = require(script.Parent.constants).NO_BACKGROUND_ASSET_ID
 
-return function(NOBACKGROUNDASSETID1) --[[ Line: 5 | Named "normalizeBackgroundId" ]]
+return function(NOBACKGROUNDASSETID1)
 	-- upvalues: NOBACKGROUNDASSETID (copy)
 	return if NOBACKGROUNDASSETID1 == nil or NOBACKGROUNDASSETID1 == NOBACKGROUNDASSETID then nil else NOBACKGROUNDASSETID1
 end

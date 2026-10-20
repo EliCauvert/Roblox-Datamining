@@ -2,7 +2,7 @@
 local v1 = nil
 local Count = 0
 
-local function getNames() --[[ Line: 9 ]]
+local function getNames()
 	-- upvalues: v1 (ref), Count (ref), SduiRuntimeFlagNames (copy)
 	if v1 ~= nil then
 		return v1, Count
@@ -28,7 +28,7 @@ local function getNames() --[[ Line: 9 ]]
 	return List, Count
 end
 
-return function(Callback) --[[ Line: 36 | Named "resolveRuntimeFlagValues" ]]
+return function(Callback)
 	-- upvalues: getNames (copy)
 	local Names, Names2 = getNames()
 	local t = {}

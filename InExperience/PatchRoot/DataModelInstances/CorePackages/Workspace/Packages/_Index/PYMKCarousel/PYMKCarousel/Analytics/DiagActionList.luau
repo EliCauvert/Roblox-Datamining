@@ -14,7 +14,7 @@ local DiagActionListModule = {
 	[EventNamesModule.PYMKCarouselLoadingTime] = {
 		type = SocialLuaAnalyticsModule.Analytics.Enums.DiagEventTypes.Stats,
 		name = EventNamesModule.PYMKCarouselLoadingTime.rawValue(),
-		stats = function(p1) --[[ Line: 24 ]]
+		stats = function(p1)
 			return p1.loadingTime or 0
 		end,
 		platformSpecificity = SocialLuaAnalyticsModule.Analytics.Enums.PlatformSpecificity.BucketsOnly

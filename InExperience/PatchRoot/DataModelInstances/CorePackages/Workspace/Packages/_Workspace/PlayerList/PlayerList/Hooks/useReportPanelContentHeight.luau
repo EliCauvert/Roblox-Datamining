@@ -2,18 +2,18 @@
 local ReactModule = require(Parent.Parent.React)
 local PanelContentHeightStoreModule = require(Parent.Common.PanelContentHeightStore)
 
-return function(p1) --[[ Line: 25 | Named "useReportPanelContentHeight" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), PanelContentHeightStoreModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	
-	return ReactModule.useCallback(function(ScrollFrame) --[[ Line: 28 ]]
+	return ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: UseRefResult (copy), PanelContentHeightStoreModule (upval), p1 (copy)
 		if UseRefResult.current then
 			UseRefResult.current:Disconnect()
 			UseRefResult.current = nil
 		end
 		if ScrollFrame == nil then return end
-		local function report() --[[ Line: 37 ]]
+		local function report()
 			-- upvalues: ScrollFrame (copy), PanelContentHeightStoreModule (upval), p1 (upval)
 			local UIListLayout = ScrollFrame:FindFirstChildOfClass("UIListLayout")
 			

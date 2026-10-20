@@ -1,10 +1,10 @@
-﻿local function _(p1) --[[ Line: 7 | Named "readInputValue" ]]
+﻿local function _(p1)
 	local Kind = if p1 == nil then nil else p1.kind
 	
 	return if Kind == nil then nil else Kind.value
 end
 
-local _ = function(p1): boolean --[[ Line: 12 | Named "isFeed" ]]
+local _ = function(p1): boolean
 	return type(p1) == "table" and type(p1.entry_map) == "table"
 end
 
@@ -13,7 +13,7 @@ local list = {
 	"items", "cards"
 }
 
-local _ = function(p1): boolean --[[ Line: 20 | Named "hasItemList" ]]
+local _ = function(p1): boolean
 	-- upvalues: list (copy)
 	for _, value in list do
 		if type(p1[value]) == "table" then
@@ -23,25 +23,25 @@ local _ = function(p1): boolean --[[ Line: 20 | Named "hasItemList" ]]
 	return false
 end
 
-local _ = function(p2): boolean --[[ Line: 29 | Named "hasSortId" ]]
+local _ = function(p2): boolean
 	local SortId = p2.sort_id
 	
 	return SortId ~= nil and SortId ~= ""
 end
 
-local _ = function(p2) --[[ Line: 34 | Named "readPoolId" ]]
+local _ = function(p2)
 	local PoolId = p2.pool_id
 	
 	return if type(PoolId) == "string" and PoolId ~= "" then PoolId else nil
 end
 
-local _ = function(p2, p3) --[[ Line: 39 | Named "readSortId" ]]
+local _ = function(p2, p3)
 	local SortId = p3.sort_id
 	
 	return if SortId == nil or SortId == "" then p2 else tostring(SortId)
 end
 
-local function countSortItems(p2, p3, p4, p5): number --[[ Line: 47 ]]
+local function countSortItems(p2, p3, p4, p5): number
 	-- upvalues: list (copy)
 	local PoolId = p2.pool_id
 	local PoolId1 = if type(PoolId) == "string" and PoolId ~= "" then PoolId else nil
@@ -73,7 +73,7 @@ local function countSortItems(p2, p3, p4, p5): number --[[ Line: 47 ]]
 	end
 end
 
-return function(p6) --[[ Line: 75 | Named "buildHomeFeedStats" ]]
+return function(p6)
 	-- upvalues: list (copy), countSortItems (copy)
 	local t = {}
 	

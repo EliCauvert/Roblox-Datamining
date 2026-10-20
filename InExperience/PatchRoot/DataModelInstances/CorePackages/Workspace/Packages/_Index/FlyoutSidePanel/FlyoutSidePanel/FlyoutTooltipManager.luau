@@ -4,16 +4,16 @@ local IAFlyoutDailyTooltipMaxShownCount = game:DefineFastInt("IAFlyoutDailyToolt
 local Module = {}
 Module.__index = Module
 
-local function _(p1, p2): boolean --[[ Line: 23 | Named "isSameDate" ]]
+local function _(p1, p2): boolean
 	local DateInfo = os.date("*t", p1)
 	local DateInfo1 = os.date("*t", p2)
 	
 	return DateInfo.year == DateInfo1.year and DateInfo.month == DateInfo1.month and DateInfo.day == DateInfo1.day
 end
 
-local function readStorage() --[[ Line: 29 ]]
+local function readStorage()
 	-- upvalues: AppStorageService (copy)
-	local Success, Result = pcall(function() --[[ Line: 30 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: AppStorageService (upval)
 		return AppStorageService:GetItem("IAFlyoutEntryPointTooltip")
 	end)
@@ -36,23 +36,23 @@ local function readStorage() --[[ Line: 29 ]]
 	return 0, 0, 0
 end
 
-function Module.new() --[[ Line: 51 ]]
+function Module.new()
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		_hasChecked = false,
 		_dailyCount = 0,
 		_totalCount = 0,
-		_getTime = function(): number --[[ Line: 56 ]]
+		_getTime = function(): number
 			return os.time()
 		end
 	}, Module))
 end
 
-function Module:setTimeProvider(_getTime) --[[ Line: 63 ]]
+function Module:setTimeProvider(_getTime)
 	self._getTime = _getTime
 end
 
-function Module:flyoutSidePanelOpened() --[[ Line: 67 ]]
+function Module:flyoutSidePanelOpened()
 	-- upvalues: IAFlyoutTooltipMaxShownCount (copy), AppStorageService (copy)
 	if self._dailyCount < IAFlyoutTooltipMaxShownCount then
 		self._dailyCount = IAFlyoutTooltipMaxShownCount
@@ -61,11 +61,11 @@ function Module:flyoutSidePanelOpened() --[[ Line: 67 ]]
 	end
 end
 
-function Module:getTooltipCount() --[[ Line: 78 ]]
+function Module:getTooltipCount()
 	return self._totalCount
 end
 
-function Module:tooltipSeenTimeHelper(p1): boolean --[[ Line: 82 ]]
+function Module:tooltipSeenTimeHelper(p1): boolean
 	-- upvalues: IAFlyoutDailyTooltipMaxShownCount (copy), IAFlyoutTooltipMaxShownCount (copy)
 	local DateInfo = os.date("*t", (self:_getTime()))
 	local DateInfo1 = os.date("*t", p1)
@@ -76,7 +76,7 @@ function Module:tooltipSeenTimeHelper(p1): boolean --[[ Line: 82 ]]
 	return self._dailyCount < IAFlyoutDailyTooltipMaxShownCount and self._totalCount < IAFlyoutTooltipMaxShownCount
 end
 
-function Module:updateTooltipAppStorageValue() --[[ Line: 92 ]]
+function Module:updateTooltipAppStorageValue()
 	-- upvalues: AppStorageService (copy)
 	self._dailyCount += 1
 	self._totalCount += 1
@@ -84,7 +84,7 @@ function Module:updateTooltipAppStorageValue() --[[ Line: 92 ]]
 	AppStorageService:Flush()
 end
 
-function Module:isTooltipActive(): boolean --[[ Line: 101 ]]
+function Module:isTooltipActive(): boolean
 	-- upvalues: readStorage (copy), IAFlyoutTooltipMaxShownCount (copy)
 	if self._hasChecked then
 		return false

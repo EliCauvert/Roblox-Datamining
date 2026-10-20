@@ -20,18 +20,18 @@ return IxpUtilsModule.defineIXPTest({
 	name = "PlatformExcellence.QualityImprovement.App.VR.AppPanelWidth",
 	recordExposure = false,
 	layer = AppUserLayers.PlatformExcellenceQualityImprovementVR,
-	getDependentFlagsEnabled = function(): boolean --[[ Line: 37 ]]
+	getDependentFlagsEnabled = function(): boolean
 		return true
 	end,
-	getEnabledFlag = function() --[[ Line: 41 ]]
+	getEnabledFlag = function()
 		-- upvalues: GetFFlagVRPanelWidthIXPEnabledFunction (copy)
 		return GetFFlagVRPanelWidthIXPEnabledFunction()
 	end,
-	getEnabledForAllFlag = function(): boolean --[[ Line: 45 ]]
+	getEnabledForAllFlag = function(): boolean
 		return false
 	end,
 	variables = {
-		VrAppPanelWidthMultiplier = function(p1, _) --[[ Line: 51 ]]
+		VrAppPanelWidthMultiplier = function(p1, _)
 			-- upvalues: FFlagVRPanelWidthIXPLocalOverrideEnabled (copy), FIntVrAppPanelWidthMultiplierPercentageOverride (copy)
 			if FFlagVRPanelWidthIXPLocalOverrideEnabled then
 				return FIntVrAppPanelWidthMultiplierPercentageOverride / 100
@@ -41,11 +41,11 @@ return IxpUtilsModule.defineIXPTest({
 				return if Number then Number / 100 else nil
 			end
 		end,
-		VrAppPanelCurvature = function(p1, _) --[[ Line: 60 ]]
+		VrAppPanelCurvature = function(p1, _)
 			-- upvalues: FFlagVRPanelWidthIXPLocalOverrideEnabled (copy), FIntVrAppPanelCurvatureOverride (copy)
 			return if FFlagVRPanelWidthIXPLocalOverrideEnabled then FIntVrAppPanelCurvatureOverride else tonumber(p1.vr_app_panel_curvature) or nil
 		end,
-		VrAvatarPanelsSpreadMultiplier = function(p1, _) --[[ Line: 67 ]]
+		VrAvatarPanelsSpreadMultiplier = function(p1, _)
 			-- upvalues: FFlagVRPanelWidthIXPLocalOverrideEnabled (copy), VrAvatarPanelsSpreadMultiplierPercentageOverrideFastInt (copy)
 			if FFlagVRPanelWidthIXPLocalOverrideEnabled then
 				return VrAvatarPanelsSpreadMultiplierPercentageOverrideFastInt / 100
@@ -55,23 +55,23 @@ return IxpUtilsModule.defineIXPTest({
 				return if Number then Number / 100 else nil
 			end
 		end,
-		VrAvatarPanelsDistanceOffset = function(p1, _): number --[[ Line: 77 ]]
+		VrAvatarPanelsDistanceOffset = function(p1, _): number
 			-- upvalues: FFlagVRPanelWidthIXPLocalOverrideEnabled (copy), VrAvatarPanelsDistanceOffsetOverrideFastString (copy)
 			return if FFlagVRPanelWidthIXPLocalOverrideEnabled then tonumber(VrAvatarPanelsDistanceOffsetOverrideFastString) else tonumber(p1.vr_avatar_panels_distance_offset) or nil
 		end,
-		VrSystemBarXOffSet = function(p1, _): number --[[ Line: 84 ]]
+		VrSystemBarXOffSet = function(p1, _): number
 			-- upvalues: FFlagVRPanelWidthIXPLocalOverrideEnabled (copy), FStringVrSystemBarXOffSetOverride (copy)
 			return if FFlagVRPanelWidthIXPLocalOverrideEnabled then tonumber(FStringVrSystemBarXOffSetOverride) else tonumber(p1.vr_system_bar_x_offset) or nil
 		end,
-		VrSystemBarYOffSet = function(p1, _): number --[[ Line: 91 ]]
+		VrSystemBarYOffSet = function(p1, _): number
 			-- upvalues: FFlagVRPanelWidthIXPLocalOverrideEnabled (copy), FStringVrSystemBarYOffSetOverride (copy)
 			return if FFlagVRPanelWidthIXPLocalOverrideEnabled then tonumber(FStringVrSystemBarYOffSetOverride) else tonumber(p1.vr_system_bar_y_offset) or nil
 		end,
-		VrSystemBarZOffSet = function(p1, _): number --[[ Line: 98 ]]
+		VrSystemBarZOffSet = function(p1, _): number
 			-- upvalues: FFlagVRPanelWidthIXPLocalOverrideEnabled (copy), FStringVrSystemBarZOffSetOverride (copy)
 			return if FFlagVRPanelWidthIXPLocalOverrideEnabled then tonumber(FStringVrSystemBarZOffSetOverride) else tonumber(p1.vr_system_bar_z_offset) or nil
 		end,
-		SystemBarHeightMultiplier = function(p1, _) --[[ Line: 105 ]]
+		SystemBarHeightMultiplier = function(p1, _)
 			-- upvalues: FFlagVRPanelWidthIXPLocalOverrideEnabled (copy), SystemBarHeightMultiplierPercentageOverrideFastInt (copy)
 			if FFlagVRPanelWidthIXPLocalOverrideEnabled then
 				return SystemBarHeightMultiplierPercentageOverrideFastInt / 100

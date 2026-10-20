@@ -9,7 +9,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local UserSearchHeaderInputModule = require(script.Parent.UserSearchHeaderInput)
 local FFlagUserSearchGoBackOnCancel = require(Parent.SharedFlags).FFlagUserSearchGoBackOnCancel
 
-return function(p1) --[[ Line: 28 | Named "UserSearchHeaderBar" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FFlagUserSearchGoBackOnCancel (copy), AppHeaderBarModule (copy), UserSearchHeaderInputModule (copy), IconButton (copy), Images (copy), HeaderBar (copy)
 	local SearchKeyword = p1.searchKeyword
 	local OnSubmitSearch = p1.onSubmitSearch
@@ -24,12 +24,12 @@ return function(p1) --[[ Line: 28 | Named "UserSearchHeaderBar" ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(FocusOnSearchInput)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(SearchKeyword)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 45 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy)
 		UseStateResult2(true)
 		UseStateResult2_1(true)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 50 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: FFlagUserSearchGoBackOnCancel (upval), UseStateResult2_2 (copy), OnBackClickFunction (copy), UseStateResult2 (copy)
 		if FFlagUserSearchGoBackOnCancel then
 			UseStateResult2_2("")
@@ -51,14 +51,14 @@ return function(p1) --[[ Line: 28 | Named "UserSearchHeaderBar" ]]
 		headerBar = ReactModule.createElement(HeaderBar, {
 			isSecondary = true,
 			title = UseLocalizationResult.titleText,
-			renderLeft = ReactModule.useMemo(function() --[[ Line: 60 ]]
+			renderLeft = ReactModule.useMemo(function()
 				-- upvalues: UseStateResult (copy), AppHeaderBarModule (upval), OnBackClickFunction (copy)
-				return if UseStateResult then function() --[[ Line: 62 ]] end else AppHeaderBarModule.makeBackButton(function() --[[ Line: 64 ]]
+				return if UseStateResult then function() end else AppHeaderBarModule.makeBackButton(function()
 					-- upvalues: OnBackClickFunction (upval)
 					OnBackClickFunction()
 				end)
 			end, { UseStateResult, OnBackClickFunction }),
-			renderCenter = ReactModule.useCallback(function() --[[ Line: 70 ]]
+			renderCenter = ReactModule.useCallback(function()
 				-- upvalues: UseStateResult (copy), ReactModule (upval), UserSearchHeaderInputModule (upval), UseStateResult3 (copy), UseLocalizationResult (copy), UseStateResult1 (copy), OnSubmitSearch (copy), UseResult1 (copy)
 				return if UseStateResult then ReactModule.createElement(UserSearchHeaderInputModule, {
 					initialInputText = UseStateResult3,
@@ -72,7 +72,7 @@ return function(p1) --[[ Line: 28 | Named "UserSearchHeaderBar" ]]
 				UseStateResult, SearchKeyword, UseStateResult1, OnSubmitSearch, UseResult1,
 				UseLocalizationResult.placeholderText, UseLocalizationResult.cancelText
 			}),
-			renderRight = ReactModule.useCallback(function() --[[ Line: 94 ]]
+			renderRight = ReactModule.useCallback(function()
 				-- upvalues: UseStateResult (copy), ReactModule (upval), IconButton (upval), Images (upval), UseResult (copy)
 				return if UseStateResult then nil else ReactModule.createElement(IconButton, {
 					size = UDim2.fromOffset(0, 0),

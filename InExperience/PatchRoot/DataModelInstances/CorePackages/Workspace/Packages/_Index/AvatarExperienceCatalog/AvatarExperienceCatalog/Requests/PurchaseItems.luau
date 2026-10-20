@@ -3,7 +3,7 @@ local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
 local FFlagAXMISEnableMultiShoppingUnifiedEvents = require(Parent.AvatarExperienceFlags).FFlagAXMISEnableMultiShoppingUnifiedEvents
 local MarketplaceName: string = `{require(Parent.Http).Url.APIS_URL}cloud/v2/avatar-marketplace-orders`
 
-return function(p1) --[[ Line: 31 | Named "purchaseItems" ]]
+return function(p1)
 	-- upvalues: FFlagAXMISEnableMultiShoppingUnifiedEvents (copy), HttpService (copy), MarketplaceName (copy)
 	local LookIds = {}
 	

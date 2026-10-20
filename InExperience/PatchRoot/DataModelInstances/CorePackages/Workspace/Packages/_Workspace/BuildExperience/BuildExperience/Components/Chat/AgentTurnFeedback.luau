@@ -20,11 +20,11 @@ local IconName = require(Parent.Foundation).Enums.IconName
 local FFlagEnableTeamTestLua = require(Parent.SharedFlags).FFlagEnableTeamTestLua
 local Signal = require(Parent.Signals).createSignal(false)
 
-local function useAgentMessageCopy(Text) --[[ Line: 43 ]]
+local function useAgentMessageCopy(Text)
 	-- upvalues: ReactModule (copy), Default (copy), IconName (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 47 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: Text (copy), Default (upval), UseStateResult2 (copy), UseRefResult (copy)
 		if Text ~= nil and Text ~= "" then
 			Default:setClipboardText({ context = "Build-AgentMessage", text = Text })
@@ -34,15 +34,15 @@ local function useAgentMessageCopy(Text) --[[ Line: 43 ]]
 		if UseRefResult.current ~= nil then
 			task.cancel(UseRefResult.current)
 		end
-		UseRefResult.current = task.delay(2, function() --[[ Line: 58 ]]
+		UseRefResult.current = task.delay(2, function()
 			-- upvalues: UseRefResult (upval), UseStateResult2 (upval)
 			UseRefResult.current = nil
 			UseStateResult2(false)
 		end)
 	end, { Text })
-	ReactModule.useEffect(function() --[[ Line: 64 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy)
-		return function() --[[ Line: 65 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			if UseRefResult.current ~= nil then
 				task.cancel(UseRefResult.current)
@@ -53,7 +53,7 @@ local function useAgentMessageCopy(Text) --[[ Line: 43 ]]
 	return if UseStateResult then IconName.CheckLarge else IconName.TwoStackedSquares, UseResult
 end
 
-return function(Frame) --[[ Line: 75 | Named "AgentTurnFeedback" ]]
+return function(Frame)
 	-- upvalues: FeedbackIconsModule (copy), ReactModule (copy), LocalizationModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagEnableTeamTestLua (copy), FFlagBuildExperienceCopyChatMessagesModule (copy), useAgentMessageCopy (copy), GetPlaytestLoadingStoreModule (copy), SignalsReactModule (copy), GetAgentRollbackRequestStoreModule (copy), Signal (copy), FeedbackActionModule (copy), SendAgentTurnFeedbackModule (copy), UserFeedbackModule (copy), AgentRollbackSnackbarModule (copy), RestoreVersionDialogModule (copy)
 	local TurnFeedbackIds = Frame.turnFeedbackIds
 	local PlaceId = if TurnFeedbackIds == nil then nil else TurnFeedbackIds.placeId
@@ -88,7 +88,7 @@ return function(Frame) --[[ Line: 75 | Named "AgentTurnFeedback" ]]
 	if FFlagBuildExperienceCopyChatMessagesModule then
 		v1, Callback = useAgentMessageCopy(Frame.messageText)
 	end
-	local UseResult = ReactModule.useCallback(function(p1): boolean --[[ Line: 120 ]]
+	local UseResult = ReactModule.useCallback(function(p1): boolean
 		-- upvalues: GetPlaytestLoadingStoreModule (upval), PlaceId (copy)
 		local PlaytestLoadingStoreModule = GetPlaytestLoadingStoreModule(p1)
 		
@@ -97,11 +97,11 @@ return function(Frame) --[[ Line: 75 | Named "AgentTurnFeedback" ]]
 	local UseSignalStateResult = SignalsReactModule.useSignalState(UseResult)
 	local Signal1 = if PlaceId == nil then Signal else GetAgentRollbackRequestStoreModule(false).getIsPendingForPlaceId(PlaceId)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(Signal1)
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 132 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_3 (copy)
 		UseStateResult2_3("")
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function(p1) --[[ Line: 136 ]]
+	local UseResult2 = ReactModule.useCallback(function(p1)
 		-- upvalues: TurnFeedbackIds (copy), FeedbackActionModule (upval), UseStateResult2 (copy), FFlagBuildExperienceCopyChatMessagesModule (upval), Callback (ref), SendAgentTurnFeedbackModule (upval), UseStateResult2_2 (copy)
 		if TurnFeedbackIds == nil then return end
 		if p1.action == FeedbackActionModule.REVERT then
@@ -143,7 +143,7 @@ return function(Frame) --[[ Line: 75 | Named "AgentTurnFeedback" ]]
 			isLoading = UseStateResult1,
 			title = RevertConfirmationTitle,
 			description = RevertConfirmationDescription,
-			onRestore = function() --[[ Line: 192 ]]
+			onRestore = function()
 				-- upvalues: UseResult (copy), Signal1 (copy), UseStateResult2_2 (copy), FeedbackActionModule (upval), SendAgentTurnFeedbackModule (upval), TurnFeedbackIds (copy), UseStateResult2_1 (copy), UseStateResult2_3 (copy), FeedbackIconsModule (upval), UseStateResult2 (copy), RevertFailure (ref)
 				if UseResult(false) then return end
 				if not Signal1(false) then
@@ -151,11 +151,11 @@ return function(Frame) --[[ Line: 75 | Named "AgentTurnFeedback" ]]
 					SendAgentTurnFeedbackModule(FeedbackActionModule.REVERT, TurnFeedbackIds)
 					UseStateResult2_1(true)
 					UseStateResult2_3("")
-					FeedbackIconsModule.requestAgentRollback(TurnFeedbackIds):andThen(function() --[[ Line: 207 ]]
+					FeedbackIconsModule.requestAgentRollback(TurnFeedbackIds):andThen(function()
 						-- upvalues: UseStateResult2_1 (upval), UseStateResult2 (upval)
 						UseStateResult2_1(false)
 						UseStateResult2(false)
-					end):catch(function() --[[ Line: 211 ]]
+					end):catch(function()
 						-- upvalues: UseStateResult2_1 (upval), UseStateResult2_3 (upval), RevertFailure (upval)
 						UseStateResult2_1(false)
 						UseStateResult2_3(RevertFailure)
@@ -164,7 +164,7 @@ return function(Frame) --[[ Line: 75 | Named "AgentTurnFeedback" ]]
 					return
 				end
 			end,
-			onCancel = function() --[[ Line: 216 ]]
+			onCancel = function()
 				-- upvalues: UseStateResult2 (copy)
 				UseStateResult2(false)
 			end

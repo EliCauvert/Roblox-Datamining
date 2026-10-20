@@ -1,6 +1,6 @@
 ﻿local UserProfilesModule = require(script:FindFirstAncestor("UserSearch").Parent.UserProfiles)
 
-return function(p1) --[[ Line: 15 | Named "useProfileNames" ]]
+return function(p1)
 	-- upvalues: UserProfilesModule (copy)
 	local UseUserProfilesFetchResult = UserProfilesModule.Hooks.useUserProfilesFetch({
 		userIds = { p1.userId },

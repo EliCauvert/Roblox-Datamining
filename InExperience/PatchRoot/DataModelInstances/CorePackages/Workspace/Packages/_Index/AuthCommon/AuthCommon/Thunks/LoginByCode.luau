@@ -23,18 +23,18 @@ local FFlagEnableLastLoginMethodTracking = require(Parent.SharedFlags).FFlagEnab
 local FFlagEnableRecordLogin = require(Parent.SharedFlags).FFlagEnableRecordLogin
 local EnableIllegalChildAccountLinkingErrorMessageOnLoginByCode = game:DefineFastFlag("EnableIllegalChildAccountLinkingErrorMessageOnLoginByCode", false)
 
-local function _(p1, p2, p3, p4, p5) --[[ Line: 35 | Named "loginRequest" ]]
+local function _(p1, p2, p3, p4, p5)
 	-- upvalues: GetAppFeaturePoliciesFunction (copy), LoginRequestsModule (copy)
 	return if GetAppFeaturePoliciesFunction().getUseSingleSignOn() then LoginRequestsModule.singleSignOnConnectWithCode(p1, p2, p3) else LoginRequestsModule.loginWithCode(p1, p2, p3, p4, p5)
 end
 
-return function(p1, Cvalue, p2, CaptchaCallback, p3, SecurityQuestionsCallback, p4) --[[ Line: 44 | Named "loginByCode" ]]
+return function(p1, Cvalue, p2, CaptchaCallback, p3, SecurityQuestionsCallback, p4)
 	-- upvalues: GetAppFeaturePoliciesFunction (copy), LoginRequestsModule (copy), LoginResultModule (copy), FFlagEnableLastLoginMethodTracking (copy), AppStorageUtilitiesModule (copy), LoginMethodsModule (copy), FFlagEnableRecordLogin (copy), RecordLoginModule (copy), HttpService (copy), LoginErrorCodesModule (copy), GetDxBlobModule (copy), GetCaptchaDataJsonModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), GetFFlagLuaAppUsingSecurityQuestionsForLuaLoginFunction (copy), EnableIllegalChildAccountLinkingErrorMessageOnLoginByCode (copy), GetLoginByUsernameErrorMessageModule (copy), LoggingProtocolModule (copy), LoginByUsernameSSOErrorsTelemetryModule (copy), PromiseModule (copy)
-	return function(p5) --[[ Line: 53 ]]
+	return function(p5)
 		-- upvalues: GetAppFeaturePoliciesFunction (upval), p1 (copy), Cvalue (copy), p2 (copy), p3 (copy), p4 (copy), LoginRequestsModule (upval), LoginResultModule (upval), FFlagEnableLastLoginMethodTracking (upval), AppStorageUtilitiesModule (upval), LoginMethodsModule (upval), FFlagEnableRecordLogin (upval), RecordLoginModule (upval), HttpService (upval), LoginErrorCodesModule (upval), GetDxBlobModule (upval), GetCaptchaDataJsonModule (upval), AppPage (upval), CaptchaCallback (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval), GetFFlagLuaAppUsingSecurityQuestionsForLuaLoginFunction (upval), EnableIllegalChildAccountLinkingErrorMessageOnLoginByCode (upval), GetLoginByUsernameErrorMessageModule (upval), LoggingProtocolModule (upval), LoginByUsernameSSOErrorsTelemetryModule (upval), PromiseModule (upval), SecurityQuestionsCallback (copy)
 		local UseSingleSignOn = GetAppFeaturePoliciesFunction().getUseSingleSignOn()
 		
-		return (if GetAppFeaturePoliciesFunction().getUseSingleSignOn() then LoginRequestsModule.singleSignOnConnectWithCode(p1, Cvalue, p2) else LoginRequestsModule.loginWithCode(p1, Cvalue, p2, p3, p4)):andThen(function(Entry) --[[ Line: 56 ]]
+		return (if GetAppFeaturePoliciesFunction().getUseSingleSignOn() then LoginRequestsModule.singleSignOnConnectWithCode(p1, Cvalue, p2) else LoginRequestsModule.loginWithCode(p1, Cvalue, p2, p3, p4)):andThen(function(Entry)
 			-- upvalues: LoginResultModule (upval), FFlagEnableLastLoginMethodTracking (upval), AppStorageUtilitiesModule (upval), LoginMethodsModule (upval), FFlagEnableRecordLogin (upval), RecordLoginModule (upval)
 			assert(Entry, "no login attempt result")
 			assert(#Entry == 1, "no result or more than one result")
@@ -46,13 +46,13 @@ return function(p1, Cvalue, p2, CaptchaCallback, p3, SecurityQuestionsCallback, 
 			local FromJsonDataResult = LoginResultModule.fromJsonData(Entry[1])
 			
 			if FFlagEnableRecordLogin then
-				pcall(function() --[[ Line: 65 ]]
+				pcall(function()
 					-- upvalues: RecordLoginModule (upval), FromJsonDataResult (copy), LoginMethodsModule (upval)
 					RecordLoginModule(FromJsonDataResult, LoginMethodsModule.QuickLogin, FromJsonDataResult.user.name)
 				end)
 			end
 			return FromJsonDataResult
-		end, function(p6) --[[ Line: 71 ]]
+		end, function(p6)
 			-- upvalues: HttpService (upval), LoginErrorCodesModule (upval), GetDxBlobModule (upval), GetCaptchaDataJsonModule (upval), AppPage (upval), CaptchaCallback (upval), Cvalue (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), p5 (copy), NavigateDownFunction (upval), GetFFlagLuaAppUsingSecurityQuestionsForLuaLoginFunction (upval), EnableIllegalChildAccountLinkingErrorMessageOnLoginByCode (upval), UseSingleSignOn (copy), GetLoginByUsernameErrorMessageModule (upval), LoggingProtocolModule (upval), LoginByUsernameSSOErrorsTelemetryModule (upval), PromiseModule (upval), SecurityQuestionsCallback (upval)
 			local Data = HttpService:JSONDecode(p6.Body)
 			local Code = Data and (Data.errors and (Data.errors[1] and Data.errors[1].code))

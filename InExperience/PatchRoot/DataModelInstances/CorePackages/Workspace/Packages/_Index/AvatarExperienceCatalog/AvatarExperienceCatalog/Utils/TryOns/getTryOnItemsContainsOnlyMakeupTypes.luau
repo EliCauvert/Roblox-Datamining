@@ -1,6 +1,6 @@
 ﻿local Constants = require(script:FindFirstAncestor("AvatarExperienceCatalog").Parent.AvatarExperienceCommon).Constants
 
-function getTryOnItemsContainsOnlyMakeupTypes(List): boolean --[[ Line: 8 ]]
+function getTryOnItemsContainsOnlyMakeupTypes(List): boolean
 	-- upvalues: Constants (copy)
 	if #List == 0 then
 		return false

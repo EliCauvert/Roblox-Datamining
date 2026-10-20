@@ -8,23 +8,23 @@ local GetUserGameVotesModule = require(GameVotesRodux.UserGameVotes.GetUserGameV
 local SetUserGameVotesModule = require(GameVotesRodux.UserGameVotes.SetUserGameVotes)
 local VoteStatusModule = require(GameVotesRodux.Enums.VoteStatus)
 
-local function _(Enabled) --[[ Line: 11 | Named "getUserVoteStatus" ]]
+local function _(Enabled)
 	-- upvalues: VoteStatusModule (copy)
 	return if Enabled == true then VoteStatusModule.VotedUp elseif Enabled == false then VoteStatusModule.VotedDown elseif Enabled == nil then VoteStatusModule.NotVoted else nil
 end
 
-local _ = function(Text): string --[[ Line: 24 | Named "fetchKeymapper" ]]
+local _ = function(Text): string
 	return "luaapp.gamesapi.user-game-votes" .. Text
 end
 
 return {
-	Fetch = function(p1, Text) --[[ Line: 28 ]]
+	Fetch = function(p1, Text)
 		-- upvalues: PerformFetch (copy), GetUserGameVotesModule (copy), VoteStatusModule (copy), SetUserGameVotesModule (copy), Logging (copy), PromiseModule (copy), SetNetworkingErrorToastFunction (copy)
 		assert(type(Text) == "string", string.format("FetchUserGameVotes thunk expects universeId to be a string, was %s", (type(Text))))
 		
-		return PerformFetch.Single("luaapp.gamesapi.user-game-votes" .. Text, function(p2) --[[ Line: 34 ]]
+		return PerformFetch.Single("luaapp.gamesapi.user-game-votes" .. Text, function(p2)
 			-- upvalues: GetUserGameVotesModule (upval), p1 (copy), Text (copy), VoteStatusModule (upval), SetUserGameVotesModule (upval), Logging (upval), PromiseModule (upval), SetNetworkingErrorToastFunction (upval)
-			return GetUserGameVotesModule(p1, Text):andThen(function(Result) --[[ Line: 35 ]]
+			return GetUserGameVotesModule(p1, Text):andThen(function(Result)
 				-- upvalues: VoteStatusModule (upval), p2 (copy), SetUserGameVotesModule (upval), Text (upval), Logging (upval), PromiseModule (upval)
 				local ResponseBody = Result.responseBody
 				
@@ -43,7 +43,7 @@ return {
 				end
 				p2:dispatch(SetUserGameVotesModule(Text, ResponseBody.canVote, VotedUp, ResponseBody.reasonForNotVoteable))
 				return PromiseModule.resolve(Result)
-			end, function(p3) --[[ Line: 53 ]]
+			end, function(p3)
 				-- upvalues: p2 (copy), SetNetworkingErrorToastFunction (upval), PromiseModule (upval)
 				p2:dispatch(SetNetworkingErrorToastFunction(p3))
 				
@@ -51,7 +51,7 @@ return {
 			end)
 		end)
 	end,
-	GetFetchingStatus = function(p1, Text) --[[ Line: 60 ]]
+	GetFetchingStatus = function(p1, Text)
 		-- upvalues: PerformFetch (copy)
 		return PerformFetch.GetStatus(p1, "luaapp.gamesapi.user-game-votes" .. Text)
 	end

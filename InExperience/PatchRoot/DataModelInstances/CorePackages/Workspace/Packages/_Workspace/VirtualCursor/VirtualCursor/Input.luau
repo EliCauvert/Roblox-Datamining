@@ -21,7 +21,7 @@ local Connection1 = nil
 local Flag2 = false
 local Tbl = {}
 
-local function processThumbstickInput(Vector): Vector2 --[[ Line: 34 ]]
+local function processThumbstickInput(Vector): Vector2
 	-- upvalues: PropertiesModule (copy)
 	local X = 0
 	local ScaledLargest = 0
@@ -36,7 +36,7 @@ local function processThumbstickInput(Vector): Vector2 --[[ Line: 34 ]]
 	return Vector2.new(X, -ScaledLargest)
 end
 
-local function onThumbstick2Input(_, UserInputState, p1) --[[ Line: 47 ]]
+local function onThumbstick2Input(_, UserInputState, p1)
 	-- upvalues: _Vector2_1 (ref)
 	if UserInputState == Enum.UserInputState.Change then
 		_Vector2_1 = Vector2.new(p1.Position.x, p1.Position.y * -1)
@@ -49,11 +49,11 @@ local function onThumbstick2Input(_, UserInputState, p1) --[[ Line: 47 ]]
 	end
 end
 
-local function _(p1) --[[ Line: 58 | Named "getRectCenter" ]]
+local function _(p1)
 	return (p1.Min + p1.Max) / 2
 end
 
-local function processPreviewEnabled(NoSelectedCoreObject) --[[ Line: 62 ]]
+local function processPreviewEnabled(NoSelectedCoreObject)
 	-- upvalues: Flag1 (ref), SelectedObject (ref), InterfaceModule (copy), GuiService (copy), Connection1 (ref)
 	if NoSelectedCoreObject and not Flag1 then
 		if SelectedObject then
@@ -73,7 +73,7 @@ local function processPreviewEnabled(NoSelectedCoreObject) --[[ Line: 62 ]]
 	end
 	if Flag1 and GuiService.SelectedObject then
 		local SelectedObject1 = GuiService.SelectedObject
-		Connection1 = SelectedObject1:GetPropertyChangedSignal("SelectionRect2D"):Connect(function() --[[ Line: 83 ]]
+		Connection1 = SelectedObject1:GetPropertyChangedSignal("SelectionRect2D"):Connect(function()
 			-- upvalues: SelectedObject1 (copy), Flag1 (upval), InterfaceModule (upval)
 			if SelectedObject1 and Flag1 then
 				local SelectionRect2D = SelectedObject1.SelectionRect2D
@@ -87,7 +87,7 @@ local function processPreviewEnabled(NoSelectedCoreObject) --[[ Line: 62 ]]
 	end
 end
 
-local function onThumbstick1Input() --[[ Line: 95 ]]
+local function onThumbstick1Input()
 	-- upvalues: GuiService (copy), UserInputService (copy), processThumbstickInput (copy), Flag2 (ref), processPreviewEnabled (copy), Flag1 (ref), InterfaceModule (copy), Connection1 (ref)
 	if GuiService.SelectedObject then
 		local ZeroVector = Vector2.zero
@@ -113,7 +113,7 @@ local function onThumbstick1Input() --[[ Line: 95 ]]
 		end
 		if Flag1 and GuiService.SelectedObject then
 			local SelectedObject = GuiService.SelectedObject
-			Connection1 = SelectedObject:GetPropertyChangedSignal("SelectionRect2D"):Connect(function() --[[ Line: 83 ]]
+			Connection1 = SelectedObject:GetPropertyChangedSignal("SelectionRect2D"):Connect(function()
 				-- upvalues: SelectedObject (copy), Flag1 (upval), InterfaceModule (upval)
 				if SelectedObject and Flag1 then
 					local SelectionRect2D = SelectedObject.SelectionRect2D
@@ -124,7 +124,7 @@ local function onThumbstick1Input() --[[ Line: 95 ]]
 	end
 end
 
-local function onDirectionalButtonsInput(_, UserInputState, Input) --[[ Line: 120 ]]
+local function onDirectionalButtonsInput(_, UserInputState, Input)
 	-- upvalues: FFlagVirtualCursorForTVRemoteKeycodes (copy), Flag (ref), Tbl (copy), _Vector2 (ref), GetDirectionalMoveVectorModule (copy)
 	if not FFlagVirtualCursorForTVRemoteKeycodes or not Flag then
 		return Enum.ContextActionResult.Pass
@@ -142,21 +142,21 @@ local function onDirectionalButtonsInput(_, UserInputState, Input) --[[ Line: 12
 	return Pass
 end
 
-local function onSelectedObjectChanged() --[[ Line: 140 ]]
+local function onSelectedObjectChanged()
 	-- upvalues: Flag2 (ref), onThumbstick1Input (copy), SelectedObject (ref), GuiService (copy)
 	Flag2 = true
 	onThumbstick1Input()
 	SelectedObject = GuiService.SelectedObject
 end
 
-UserInputService.InputBegan:Connect(function(Input) --[[ Line: 148 ]]
+UserInputService.InputBegan:Connect(function(Input)
 	-- upvalues: Flag (ref), FFlagVirtualCursorForTVRemoteKeycodes (copy), GuiService (copy), InterfaceModule (copy)
 	if not Flag then return end
 	if Input.UserInputType == Enum.UserInputType.Gamepad1 and (Input.KeyCode == Enum.KeyCode.ButtonA or FFlagVirtualCursorForTVRemoteKeycodes and Input.KeyCode == Enum.KeyCode.ButtonCenter) and (GuiService.SelectedObject or GuiService.SelectedCoreObject) then
 		InterfaceModule:PlayCursorTweenActivate()
 	end
 end)
-UserInputService.InputEnded:Connect(function(Input) --[[ Line: 164 ]]
+UserInputService.InputEnded:Connect(function(Input)
 	-- upvalues: Flag (ref), FFlagVirtualCursorForTVRemoteKeycodes (copy), InterfaceModule (copy), onThumbstick1Input (copy)
 	if Flag then
 		if Input.UserInputType == Enum.UserInputType.Gamepad1 and (Input.KeyCode == Enum.KeyCode.ButtonA or FFlagVirtualCursorForTVRemoteKeycodes and Input.KeyCode == Enum.KeyCode.ButtonCenter) then
@@ -168,7 +168,7 @@ UserInputService.InputEnded:Connect(function(Input) --[[ Line: 164 ]]
 		onThumbstick1Input()
 	end
 end)
-UserInputService.InputChanged:Connect(function(Input) --[[ Line: 183 ]]
+UserInputService.InputChanged:Connect(function(Input)
 	-- upvalues: Flag (ref), onThumbstick1Input (copy)
 	if Flag then return end
 	if Input.UserInputType == Enum.UserInputType.Gamepad1 and Input.KeyCode == Enum.KeyCode.Thumbstick1 then
@@ -176,22 +176,22 @@ UserInputService.InputChanged:Connect(function(Input) --[[ Line: 183 ]]
 	end
 end)
 
-function InputModule:GetThumbstickVector() --[[ Line: 194 ]]
+function InputModule:GetThumbstickVector()
 	-- upvalues: _Vector2 (ref)
 	return _Vector2
 end
 
-function InputModule:GetThumbstick2Vector() --[[ Line: 198 ]]
+function InputModule:GetThumbstick2Vector()
 	-- upvalues: _Vector2_1 (ref)
 	return _Vector2_1
 end
 
-function InputModule:EnablePreview() --[[ Line: 202 ]]
+function InputModule:EnablePreview()
 	-- upvalues: Connection (ref), GuiService (copy), onSelectedObjectChanged (copy)
 	Connection = GuiService:GetPropertyChangedSignal("SelectedObject"):Connect(onSelectedObjectChanged)
 end
 
-function InputModule:DisablePreview() --[[ Line: 207 ]]
+function InputModule:DisablePreview()
 	-- upvalues: Connection (ref)
 	if Connection then
 		Connection:Disconnect()
@@ -199,13 +199,13 @@ function InputModule:DisablePreview() --[[ Line: 207 ]]
 	end
 end
 
-function InputModule:EnableInput() --[[ Line: 214 ]]
+function InputModule:EnableInput()
 	-- upvalues: GamepadThumbstick1ChangedConnection (ref), GamepadService (copy), _Vector2 (ref), processThumbstickInput (copy), ContextActionService (copy), onThumbstick2Input (copy), FFlagVirtualCursorForTVRemoteKeycodes (copy), onDirectionalButtonsInput (copy), Flag (ref)
-	GamepadThumbstick1ChangedConnection = GamepadService.GamepadThumbstick1Changed:Connect(function(Event) --[[ Line: 215 ]]
+	GamepadThumbstick1ChangedConnection = GamepadService.GamepadThumbstick1Changed:Connect(function(Event)
 		-- upvalues: _Vector2 (upval), processThumbstickInput (upval)
 		_Vector2 = processThumbstickInput(Event)
 	end)
-	ContextActionService:BindCoreActionAtPriority("VirtualCursorThumbstick1Movement", function(_, _, _) --[[ Line: 221 ]] end, false, Enum.ContextActionPriority.High.Value, Enum.KeyCode.Thumbstick1)
+	ContextActionService:BindCoreActionAtPriority("VirtualCursorThumbstick1Movement", function(_, _, _) end, false, Enum.ContextActionPriority.High.Value, Enum.KeyCode.Thumbstick1)
 	ContextActionService:BindCoreActionAtPriority("VirtualCursorThumbstick2Movement", onThumbstick2Input, false, Enum.ContextActionPriority.High.Value, Enum.KeyCode.Thumbstick2)
 	
 	if FFlagVirtualCursorForTVRemoteKeycodes then
@@ -214,7 +214,7 @@ function InputModule:EnableInput() --[[ Line: 214 ]]
 	Flag = true
 end
 
-function InputModule:DisableInput() --[[ Line: 251 ]]
+function InputModule:DisableInput()
 	-- upvalues: GamepadThumbstick1ChangedConnection (ref), _Vector2 (ref), _Vector2_1 (ref), ContextActionService (copy), FFlagVirtualCursorForTVRemoteKeycodes (copy), Tbl (copy), Flag (ref)
 	if GamepadThumbstick1ChangedConnection then
 		GamepadThumbstick1ChangedConnection:Disconnect()

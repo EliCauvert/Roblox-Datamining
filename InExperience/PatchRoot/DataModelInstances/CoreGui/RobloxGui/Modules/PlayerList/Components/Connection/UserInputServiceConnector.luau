@@ -9,12 +9,12 @@ local EventConnectionModule = require(script.Parent.EventConnection)
 local UserInputServiceConnector = RoactModule.PureComponent:extend("UserInputServiceConnector")
 local PlayerListFilterInputServiceDispatches = game:DefineFastFlag("PlayerListFilterInputServiceDispatches", false)
 
-function UserInputServiceConnector.render(p1) --[[ Line: 19 ]]
+function UserInputServiceConnector.render(p1)
 	-- upvalues: RoactModule (copy), EventConnectionModule (copy), UserInputService (copy), PlayerListFilterInputServiceDispatches (copy)
 	return RoactModule.createFragment({
 		InputBeganConnection = RoactModule.createElement(EventConnectionModule, {
 			event = UserInputService.InputBegan,
-			callback = function(Input, p2) --[[ Line: 23 ]]
+			callback = function(Input, p2)
 				-- upvalues: PlayerListFilterInputServiceDispatches (upval), p1 (copy)
 				if PlayerListFilterInputServiceDispatches and not p1.props.playerDropdownVisible then return end
 				if p2 then return end
@@ -27,7 +27,7 @@ function UserInputServiceConnector.render(p1) --[[ Line: 19 ]]
 		}),
 		LastInputTypeChangedConnection = RoactModule.createElement(EventConnectionModule, {
 			event = UserInputService.LastInputTypeChanged,
-			callback = function(p2) --[[ Line: 41 ]]
+			callback = function(p2)
 				-- upvalues: PlayerListFilterInputServiceDispatches (upval), p1 (copy)
 				local HasGamepad = p2.Name:find("Gamepad") ~= nil
 				
@@ -41,21 +41,21 @@ function UserInputServiceConnector.render(p1) --[[ Line: 19 ]]
 	})
 end
 
-local function mapStateToProps(p1) --[[ Line: 55 ]]
+local function mapStateToProps(p1)
 	return {
 		playerDropdownVisible = p1.playerDropDown.isVisible,
 		isUsingGamepad = p1.displayOptions.isUsingGamepad
 	}
 end
 
-return RoactRoduxModule.connect(PlayerListFilterInputServiceDispatches and mapStateToProps or nil, function(Callback) --[[ Line: 62 | Named "mapDispatchToProps" ]]
+return RoactRoduxModule.connect(PlayerListFilterInputServiceDispatches and mapStateToProps or nil, function(Callback)
 	-- upvalues: ClosePlayerDropDownModule (copy), SetIsUsingGamepadModule (copy)
 	return {
-		closePlayerDropDown = function() --[[ Line: 64 ]]
+		closePlayerDropDown = function()
 			-- upvalues: Callback (copy), ClosePlayerDropDownModule (upval)
 			return Callback(ClosePlayerDropDownModule())
 		end,
-		setIsUsingGamepad = function(p1) --[[ Line: 68 ]]
+		setIsUsingGamepad = function(p1)
 			-- upvalues: Callback (copy), SetIsUsingGamepadModule (upval)
 			return Callback(SetIsUsingGamepadModule(p1))
 		end

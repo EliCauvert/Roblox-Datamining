@@ -7,11 +7,11 @@ local Images = UIBloxModule.App.ImageSet.Images
 local IconSize = UIBloxModule.App.Constant.IconSize
 local Toast = UIBloxModule.App.Dialog.Toast
 
-return function() --[[ Line: 17 ]]
+return function()
 	-- upvalues: ReactModule (copy), UseNavigationFunction (copy), UseNavigationPropsFunction (copy), Images (copy), IconSize (copy), Toast (copy)
 	local UseRefResult = ReactModule.useRef(false)
 	local UseNavigationResult = UseNavigationFunction()
-	local UseNavigationPropsResult = UseNavigationPropsFunction(function(_, p1) --[[ Line: 20 ]]
+	local UseNavigationPropsResult = UseNavigationPropsFunction(function(_, p1)
 		return {
 			toastContent = p1.toastContent,
 			anchorPoint = p1.anchorPoint,
@@ -22,7 +22,7 @@ return function() --[[ Line: 17 ]]
 			show = p1.show
 		}
 	end)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 32 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseNavigationPropsResult (copy), Images (upval), IconSize (upval), UseRefResult (copy), UseNavigationResult (copy)
 		return {
 			toastTitle = UseNavigationPropsResult.toastContent.toastTitle or "",
@@ -31,7 +31,7 @@ return function() --[[ Line: 17 ]]
 			iconImage = if UseNavigationPropsResult.toastContent.shouldHideIcon then nil else UseNavigationPropsResult.toastContent.iconImage or Images["icons/status/alert"],
 			iconSize = if UseNavigationPropsResult.toastContent.shouldHideIcon then nil else UseNavigationPropsResult.toastContent.iconSize or Vector2.new(IconSize.Regular, IconSize.Regular),
 			swipeUpDismiss = UseNavigationPropsResult.toastContent.swipeUpDismiss,
-			onAppeared = function() --[[ Line: 44 ]]
+			onAppeared = function()
 				-- upvalues: UseNavigationPropsResult (upval), UseRefResult (upval)
 				if UseNavigationPropsResult.toastContent.onAppeared then
 					UseNavigationPropsResult.toastContent.onAppeared()
@@ -39,7 +39,7 @@ return function() --[[ Line: 17 ]]
 				UseRefResult.current = false
 			end,
 			onActivated = UseNavigationPropsResult.toastContent.onActivated,
-			onDismissed = function() --[[ Line: 51 ]]
+			onDismissed = function()
 				-- upvalues: UseNavigationPropsResult (upval), UseRefResult (upval), UseNavigationResult (upval)
 				if UseNavigationPropsResult.toastContent.onDismissed then
 					UseNavigationPropsResult.toastContent.onDismissed()
@@ -50,7 +50,7 @@ return function() --[[ Line: 17 ]]
 			end
 		}
 	end, { UseNavigationPropsResult.toastContent })
-	ReactModule.useEffect(function() --[[ Line: 62 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy)
 		UseRefResult.current = true
 	end)

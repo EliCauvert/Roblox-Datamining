@@ -1,4 +1,4 @@
-﻿return function(Vector, Vector1, p1): number --[[ Line: 8 | Named "calculateIntersectionRatio" ]]
+﻿return function(Vector, Vector1, p1): number
 	local ScaledX = Vector1.X * Vector1.Y
 	
 	if ScaledX <= 0 then

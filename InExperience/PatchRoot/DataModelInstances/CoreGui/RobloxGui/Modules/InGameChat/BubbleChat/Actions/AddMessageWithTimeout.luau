@@ -7,11 +7,11 @@ local RemoveMessageModule = require(script.Parent.RemoveMessage)
 local GetSettingsForMessageModule = require(script.Parent.Parent.Helpers.getSettingsForMessage)
 local BubbleChatAddMessageRolloutPercent = game:DefineFastInt("BubbleChatAddMessageRolloutPercent", 100)
 
-return function(p1) --[[ Line: 13 | Named "addMessageWithTimeout" ]]
+return function(p1)
 	-- upvalues: MaybeAssertModule (copy), TypesModule (copy), AddMessageModule (copy), GetSettingsForMessageModule (copy), RemoveMessageModule (copy), RbxAnalyticsService (copy), BubbleChatAddMessageRolloutPercent (copy)
 	MaybeAssertModule(TypesModule.IMessage(p1))
 	
-	return function(p2) --[[ Line: 16 ]]
+	return function(p2)
 		-- upvalues: AddMessageModule (upval), p1 (copy), GetSettingsForMessageModule (upval), RemoveMessageModule (upval), RbxAnalyticsService (upval), BubbleChatAddMessageRolloutPercent (upval)
 		p2:dispatch(AddMessageModule(p1))
 		local SettingsForMessageModule = GetSettingsForMessageModule(p2:getState().chatSettings, p1)

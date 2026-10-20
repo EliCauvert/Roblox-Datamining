@@ -8,7 +8,7 @@ local config = {
 	Context = { LegacyMenu = "ReportAbuseLegacyMenu" }
 }
 
-local function _() --[[ Line: 33 ]]
+local function _()
 	return {
 		previewBackCount = 0,
 		previewAttachCount = 0,
@@ -37,7 +37,7 @@ local config1 = {
 }
 local NewResult = nil
 
-local _ = function() --[[ Line: 51 ]]
+local _ = function()
 	-- upvalues: NewResult (ref), EventIngest (copy), EventIngestService (copy)
 	if not NewResult then
 		NewResult = EventIngest.new(EventIngestService)
@@ -46,59 +46,59 @@ local _ = function() --[[ Line: 51 ]]
 end
 
 return {
-	incrementPreviewBack = function() --[[ Line: 59 ]]
+	incrementPreviewBack = function()
 		-- upvalues: config1 (ref)
 		local config = config1
 		config.previewBackCount += 1
 	end,
-	incrementPreviewAttach = function() --[[ Line: 62 ]]
+	incrementPreviewAttach = function()
 		-- upvalues: config1 (ref)
 		local config = config1
 		config.previewAttachCount += 1
 	end,
-	incrementRetake = function() --[[ Line: 65 ]]
+	incrementRetake = function()
 		-- upvalues: config1 (ref)
 		local config = config1
 		config.retakeCount += 1
 	end,
-	setRetakeAbandon = function() --[[ Line: 68 ]]
+	setRetakeAbandon = function()
 		-- upvalues: config1 (ref)
 		config1.retakeAbandon = true
 	end,
-	incrementHighlightScene = function() --[[ Line: 71 ]]
+	incrementHighlightScene = function()
 		-- upvalues: config1 (ref)
 		local config = config1
 		config.highlightSceneCount += 1
 	end,
-	incrementAnnotationBack = function() --[[ Line: 74 ]]
+	incrementAnnotationBack = function()
 		-- upvalues: config1 (ref)
 		local config = config1
 		config.annotationBackCount += 1
 	end,
-	incrementAnnotationPlace = function() --[[ Line: 77 ]]
+	incrementAnnotationPlace = function()
 		-- upvalues: config1 (ref)
 		local config = config1
 		config.annotationPlaceCount += 1
 	end,
-	incrementAnnotationUndo = function() --[[ Line: 80 ]]
+	incrementAnnotationUndo = function()
 		-- upvalues: config1 (ref)
 		local config = config1
 		config.annotationUndoCount += 1
 	end,
-	incrementAnnotationRedo = function() --[[ Line: 83 ]]
+	incrementAnnotationRedo = function()
 		-- upvalues: config1 (ref)
 		local config = config1
 		config.annotationRedoCount += 1
 	end,
-	setAnnotationNext = function() --[[ Line: 86 ]]
+	setAnnotationNext = function()
 		-- upvalues: config1 (ref)
 		config1.annotationNext = true
 	end,
-	getAccumulatedParameters = function() --[[ Line: 90 ]]
+	getAccumulatedParameters = function()
 		-- upvalues: config1 (ref)
 		return config1
 	end,
-	emitAvatarsIdentifiedStats = function(p1) --[[ Line: 93 ]]
+	emitAvatarsIdentifiedStats = function(p1)
 		-- upvalues: CryoModule (copy), NewResult (ref), EventIngest (copy), EventIngestService (copy), config (copy)
 		local JoinResult = CryoModule.Dictionary.join(p1, { duration = p1.duration * 1000000 })
 		
@@ -107,7 +107,7 @@ return {
 		end
 		NewResult:sendEventDeferred(config.Context.LegacyMenu, config.EventType.AvatarsIdentified, JoinResult)
 	end,
-	clear = function() --[[ Line: 103 ]]
+	clear = function()
 		-- upvalues: config1 (ref)
 		config1 = {
 			previewBackCount = 0,

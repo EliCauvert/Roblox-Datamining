@@ -32,15 +32,15 @@ DropdownMenuList.defaultProps = {
 	menuPositionFixed = false
 }
 
-function DropdownMenuList.init(p1) --[[ Line: 50 ]]
+function DropdownMenuList.init(p1)
 	p1:setState({ visible = false, absolutePosition = Vector2.new(0, 0) })
 	
-	function p1.setAbsolutePosition(Frame) --[[ Line: 56 ]]
+	function p1.setAbsolutePosition(Frame)
 		-- upvalues: p1 (copy)
 		p1:setState({ absolutePosition = Frame.AbsolutePosition })
 	end
 	
-	function p1.dismissMenu() --[[ Line: 62 ]]
+	function p1.dismissMenu()
 		-- upvalues: p1 (copy)
 		if p1.state.visible then
 			p1:setState({ visible = false })
@@ -49,9 +49,9 @@ function DropdownMenuList.init(p1) --[[ Line: 50 ]]
 	end
 end
 
-function DropdownMenuList.render(p1) --[[ Line: 72 ]]
+function DropdownMenuList.render(p1)
 	-- upvalues: WithStyleModule (copy), GuiService (copy), RoactModule (copy), BaseMenuModule (copy)
-	return WithStyleModule(function(p2) --[[ Line: 73 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: GuiService (upval), p1 (copy), RoactModule (upval), BaseMenuModule (upval)
 		local GuiInset, GuiInset2 = GuiService:GetGuiInset()
 		local NewAbsolutePosition = p1.state.absolutePosition + GuiInset
@@ -113,13 +113,13 @@ function DropdownMenuList.render(p1) --[[ Line: 72 ]]
 	end)
 end
 
-function DropdownMenuList.didMount(p1) --[[ Line: 155 ]]
+function DropdownMenuList.didMount(p1)
 	if p1.props.open then
 		p1:setState({ visible = true })
 	end
 end
 
-function DropdownMenuList.didUpdate(p1, p2, _) --[[ Line: 163 ]]
+function DropdownMenuList.didUpdate(p1, p2, _)
 	if p1.props.open ~= p2.open then
 		if p1.props.open then
 			p1:setState({ visible = true })

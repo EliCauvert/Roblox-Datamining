@@ -19,7 +19,7 @@ local GetFFlagDisableVerifyPhoneViewOnSuccessModule = require(PhoneUpsell.Flags.
 local GetFFlagFixIosOtpAutofillModule = require(PhoneUpsell.Flags.GetFFlagFixIosOtpAutofill)
 local FFlagHomePhoneVerificationUpsellNewCopy = require(Parent.SharedFlags).FFlagHomePhoneVerificationUpsellNewCopy
 
-local function CloseUpsell() --[[ Line: 107 ]] end
+local function CloseUpsell() end
 
 local config = {
 	origin = "",
@@ -37,10 +37,10 @@ local config = {
 	onCancelled = CloseUpsell,
 	onExtraButtonClick = CloseUpsell,
 	closeUpsell = CloseUpsell,
-	showWebpage = function(_) --[[ Line: 125 ]] end
+	showWebpage = function(_) end
 }
 
-return function(p1) --[[ Line: 128 | Named "UpsellContainer" ]]
+return function(p1)
 	-- upvalues: MergePropsModule (copy), config (copy), UsePhoneVerificationUpsellPropsModule (copy), ReactModule (copy), Loading (copy), IconSize (copy), GetFFlagPhoneUseParentSizeForScreenSizeModule (copy), RoactModule (copy), PhoneVerificationUpsellStateModule (copy), EntryViewModule (copy), AddPhoneViewModule (copy), GetFFlagLuaUsePhoneNumberTextTypeForPhoneUpsellModule (copy), FFlagHomePhoneVerificationUpsellNewCopy (copy), VerifyPhoneViewModule (copy), GetFFlagDisableVerifyPhoneViewOnSuccessModule (copy), GetFFlagFixIosOtpAutofillModule (copy), PhoneVerificationStatusOverlayModule (copy)
 	local MergePropsModuleResult = MergePropsModule(config, p1)
 	local UsePhoneVerificationUpsellPropsModuleResult = UsePhoneVerificationUpsellPropsModule(MergePropsModuleResult)
@@ -53,7 +53,7 @@ return function(p1) --[[ Line: 128 | Named "UpsellContainer" ]]
 	return ReactModule.createElement(if GetFFlagPhoneUseParentSizeForScreenSizeModule() then "Frame" else ReactModule.Fragment, if GetFFlagPhoneUseParentSizeForScreenSizeModule() then {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0),
-		[RoactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 145 ]]
+		[RoactModule.Change.AbsoluteSize] = function(Frame)
 			-- upvalues: UsePhoneVerificationUpsellPropsModuleResult (copy)
 			UsePhoneVerificationUpsellPropsModuleResult.setParentSize(Frame.AbsoluteSize)
 		end

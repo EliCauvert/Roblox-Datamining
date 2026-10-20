@@ -2,7 +2,7 @@
 local SignalsReactModule = require(InExperienceOffers.Parent.SignalsReact)
 local GetOffersStoreModule = require(InExperienceOffers.Stores.GetOffersStore)
 
-return function() --[[ Line: 12 | Named "useShopHasItems" ]]
+return function()
 	-- upvalues: SignalsReactModule (copy), GetOffersStoreModule (copy)
 	return SignalsReactModule.useSignalState(GetOffersStoreModule(false).getShopHasItems)
 end

@@ -14,17 +14,17 @@ local Frozen = table.freeze({
 	"onScrollOffsetChanged", "onContentLengthChanged"
 })
 
-local function _(p1, p2): boolean --[[ Line: 119 | Named "scrollHostConfigurationChanged" ]]
+local function _(p1, p2): boolean
 	-- upvalues: ShallowTable (copy), Frozen (copy)
 	return not ShallowTable.containsEqual(p1, p2, Frozen)
 end
 
-local function samePinnedItems(PinnedItems, PinnedItems1) --[[ Line: 126 ]]
+local function samePinnedItems(PinnedItems, PinnedItems1)
 	-- upvalues: ShallowTable (copy)
 	return PinnedItems == PinnedItems1 or PinnedItems.isItemStickyHeader == PinnedItems1.isItemStickyHeader and (ShallowTable.equal(PinnedItems.pinnedStartItem or {}, PinnedItems1.pinnedStartItem or {}) and ShallowTable.equal(PinnedItems.pinnedEndItem or {}, PinnedItems1.pinnedEndItem or {}))
 end
 
-local _ = function(Tbl) --[[ Line: 135 | Named "normalizePolicy" ]]
+local _ = function(Tbl)
 	local Copy = table.clone(Tbl)
 	
 	if Copy.overscanPolicy ~= nil then
@@ -33,7 +33,7 @@ local _ = function(Tbl) --[[ Line: 135 | Named "normalizePolicy" ]]
 	return Copy
 end
 
-local function applyCorePolicy(Callback: (any) -> (), p1, Tbl) --[[ Line: 143 ]]
+local function applyCorePolicy(Callback: (any) -> (), p1, Tbl)
 	-- upvalues: samePinnedItems (copy), ShallowTable (copy), ViewRecyclerModule (copy)
 	local Copy = table.clone(Tbl)
 	
@@ -52,7 +52,7 @@ local function applyCorePolicy(Callback: (any) -> (), p1, Tbl) --[[ Line: 143 ]]
 	return Copy
 end
 
-local function createScrollingFrameVirtualizer(p1, Callback, p2) --[[ Line: 162 ]]
+local function createScrollingFrameVirtualizer(p1, Callback, p2)
 	-- upvalues: config (copy), ViewRecyclerModule (copy), applyCorePolicy (copy), ShallowTable (copy), Frozen (copy)
 	local P6 = p2 or config
 	local InitialHostConfiguration = p1.initialHostConfiguration
@@ -71,7 +71,7 @@ local function createScrollingFrameVirtualizer(p1, Callback, p2) --[[ Line: 162 
 	local ScrollingFrameSync = nil
 	local Flag2 = false
 	
-	local function applyVirtualizerUpdate(p3, p4) --[[ Line: 178 ]]
+	local function applyVirtualizerUpdate(p3, p4)
 		-- upvalues: ScrollingFrameSync (ref), Flag2 (ref), ViewRecyclerModule (upval), InitialHostConfiguration (ref)
 		if ScrollingFrameSync ~= nil then
 			ScrollingFrameSync.applyVirtualizerUpdate(p3, p4)
@@ -100,7 +100,7 @@ local function createScrollingFrameVirtualizer(p1, Callback, p2) --[[ Line: 162 
 		end
 	end
 	
-	local function dispatch(p5) --[[ Line: 202 ]]
+	local function dispatch(p5)
 		-- upvalues: ViewRecyclerModule (upval), Flag2 (ref), CoreVirtualizer (ref), InitialHostConfiguration (ref)
 		local DispatchResult = CoreVirtualizer.dispatch(p5)
 		
@@ -125,14 +125,14 @@ local function createScrollingFrameVirtualizer(p1, Callback, p2) --[[ Line: 162 
 		viewportContainer = InitialHostTarget.viewportOverlay,
 		axis = InitialHostConfiguration.axis,
 		selfSizing = InitialHostConfiguration.layout.requiresItemMeasurement(),
-		onItemMeasurements = function(Measurements) --[[ Line: 224 ]]
+		onItemMeasurements = function(Measurements)
 			-- upvalues: dispatch (copy), ViewRecyclerModule (upval)
 			dispatch({
 				type = ViewRecyclerModule.VirtualizerCommandType.SubmitMeasurements,
 				measurements = Measurements
 			})
 		end,
-		onItemViewPresentationChanged = function(p6, p7) --[[ Line: 227 ]]
+		onItemViewPresentationChanged = function(p6, p7)
 			-- upvalues: p1 (copy)
 			local OnItemViewPresentationChangedFunction: (any, any) -> () = p1.onItemViewPresentationChanged
 			
@@ -164,11 +164,11 @@ local function createScrollingFrameVirtualizer(p1, Callback, p2) --[[ Line: 162 
 		dispatch = dispatch,
 		getSnapshot = CoreVirtualizer.getSnapshot,
 		query = CoreVirtualizer.query,
-		getInstance = function() --[[ Line: 258 ]]
+		getInstance = function()
 			-- upvalues: Flag (ref), InitialHostTarget (ref)
 			return if Flag then nil else InitialHostTarget.scrollingFrame
 		end,
-		getConfiguration = function() --[[ Line: 261 ]]
+		getConfiguration = function()
 			-- upvalues: InitialHostConfiguration (ref)
 			return InitialHostConfiguration
 		end
@@ -178,7 +178,7 @@ local function createScrollingFrameVirtualizer(p1, Callback, p2) --[[ Line: 162 
 		dispatch = dispatch,
 		getSnapshot = CoreVirtualizer.getSnapshot,
 		query = CoreVirtualizer.query,
-		connect = function() --[[ Line: 325 ]]
+		connect = function()
 			-- upvalues: Flag (ref), Flag1 (ref), ScrollingFrameSync (ref), Callback1 (ref)
 			assert(not Flag, "ScrollingFrameVirtualizer: cannot connect after destroy")
 			assert(not Flag1, "ScrollingFrameVirtualizer: already connected")
@@ -186,7 +186,7 @@ local function createScrollingFrameVirtualizer(p1, Callback, p2) --[[ Line: 162 
 			local ConnectResult = ScrollingFrameSync.connect()
 			local Flag2 = false
 			
-			local function disconnect() --[[ Line: 331 ]]
+			local function disconnect()
 				-- upvalues: Flag2 (ref), Flag1 (upval), Callback1 (upval), ConnectResult (copy)
 				if not Flag2 then
 					Flag2 = true
@@ -202,7 +202,7 @@ local function createScrollingFrameVirtualizer(p1, Callback, p2) --[[ Line: 162 
 			
 			return disconnect
 		end,
-		update = function(p6) --[[ Line: 266 ]]
+		update = function(p6)
 			-- upvalues: Flag (ref), InitialHostConfiguration (ref), InitialHostTarget (ref), HostPlacement (copy), dispatch (copy), ViewRecyclerModule (upval), Copy1 (ref), applyCorePolicy (upval), ShallowTable (upval), Frozen (upval), ScrollingFrameSync (ref)
 			if Flag then return end
 			local HostConfiguration = p6.hostConfiguration
@@ -254,7 +254,7 @@ local function createScrollingFrameVirtualizer(p1, Callback, p2) --[[ Line: 162 
 			end
 		end,
 		isReady = ScrollingFrameSync.isReady,
-		destroy = function() --[[ Line: 345 ]]
+		destroy = function()
 			-- upvalues: Flag (ref), Callback1 (ref), dispatch (copy), ViewRecyclerModule (upval), HostPlacement (copy)
 			if Flag then return end
 			Flag = true
@@ -270,18 +270,18 @@ local function createScrollingFrameVirtualizer(p1, Callback, p2) --[[ Line: 162 
 end
 
 return {
-	newForRecyclableViews = function(p5, p6) --[[ Line: 360 ]]
+	newForRecyclableViews = function(p5, p6)
 		-- upvalues: createScrollingFrameVirtualizer (copy)
-		return (createScrollingFrameVirtualizer(p5, function(p7, p8) --[[ Line: 368 ]]
+		return (createScrollingFrameVirtualizer(p5, function(p7, p8)
 			local self = setmetatable({}, { __mode = "k" })
 			
-			local function _(Key) --[[ Line: 370 | Named "getPlacementPort" ]]
+			local function _(Key)
 				-- upvalues: self (copy), p7 (copy)
 				local SelfEntry = self[Key]
 				
 				if SelfEntry == nil then
 					SelfEntry = {
-						apply = function(p9) --[[ Line: 374 ]]
+						apply = function(p9)
 							-- upvalues: p7 (upval), Key (copy)
 							p7.applyHostState(Key, p9)
 						end
@@ -293,7 +293,7 @@ return {
 			
 			return {
 				present = nil,
-				prepare = function(Key, p9) --[[ Line: 383 ]]
+				prepare = function(Key, p9)
 					-- upvalues: self (copy), p7 (copy)
 					if p9 == nil then
 						Key.bindPlacement(nil, nil)
@@ -306,7 +306,7 @@ return {
 					
 					if SelfEntry == nil then
 						SelfEntry = {
-							apply = function(p10) --[[ Line: 374 ]]
+							apply = function(p10)
 								-- upvalues: p7 (upval), Key (copy)
 								p7.applyHostState(Key, p10)
 							end
@@ -315,7 +315,7 @@ return {
 					end
 					BindPlacementFunction(v1, SelfEntry)
 				end,
-				postCommit = function(p9, p10) --[[ Line: 392 ]]
+				postCommit = function(p9, p10)
 					-- upvalues: p8 (copy)
 					local SetFunction: (any) -> () = p9.set
 					
@@ -336,12 +336,12 @@ return {
 			}
 		end, p6))
 	end,
-	newForGuiObjects = function(p5, p6) --[[ Line: 411 ]]
+	newForGuiObjects = function(p5, p6)
 		-- upvalues: createScrollingFrameVirtualizer (copy), HostPresentationPhaseModule (copy)
-		return (createScrollingFrameVirtualizer(p5, function(p7, p8) --[[ Line: 419 ]]
+		return (createScrollingFrameVirtualizer(p5, function(p7, p8)
 			-- upvalues: p5 (copy), HostPresentationPhaseModule (upval)
 			return {
-				prepare = function(p9, Assignment) --[[ Line: 421 ]]
+				prepare = function(p9, Assignment)
 					-- upvalues: p7 (copy), p5 (upval), HostPresentationPhaseModule (upval)
 					if Assignment == nil then
 						p7.applyHostState(p9, nil)
@@ -356,7 +356,7 @@ return {
 						})
 					end
 				end,
-				postCommit = function(p9, p10) --[[ Line: 433 ]]
+				postCommit = function(p9, p10)
 					-- upvalues: p8 (copy)
 					local PrepareAssignmentFunction: (any, any) -> () = p8.prepareAssignment
 					
@@ -369,7 +369,7 @@ return {
 						OnItemViewAssignmentChangedFunction(p9, p10)
 					end
 				end,
-				present = function(p9, Assignment) --[[ Line: 443 ]]
+				present = function(p9, Assignment)
 					-- upvalues: p7 (copy), p5 (upval), HostPresentationPhaseModule (upval)
 					p7.applyHostState(p9, {
 						visible = true,

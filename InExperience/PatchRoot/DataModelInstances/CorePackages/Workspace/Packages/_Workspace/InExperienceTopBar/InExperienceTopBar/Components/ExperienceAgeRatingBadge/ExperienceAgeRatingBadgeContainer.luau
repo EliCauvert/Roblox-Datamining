@@ -2,7 +2,7 @@
 local ExperienceAgeRatingBadgeViewModule = require(script.Parent.ExperienceAgeRatingBadgeView)
 local UseExperienceAgeRatingBadgeViewModelModule = require(script.Parent.useExperienceAgeRatingBadgeViewModel)
 
-return function(p1) --[[ Line: 10 | Named "ExperienceAgeRatingBadgeContainer" ]]
+return function(p1)
 	-- upvalues: UseExperienceAgeRatingBadgeViewModelModule (copy), ReactModule (copy), ExperienceAgeRatingBadgeViewModule (copy)
 	local UseExperienceAgeRatingBadgeViewModelModuleResult = UseExperienceAgeRatingBadgeViewModelModule(p1)
 	

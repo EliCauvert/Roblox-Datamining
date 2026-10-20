@@ -7,13 +7,13 @@ local SendAXCounterV2Function = require(Parent.AvatarExperienceAnalytics).sendAX
 local ConstantsModule = require(AvatarExperienceCatalog.Constants)
 local _ = require(script.Parent.createFaeFeatureAccessStore)
 
-return function(p1) --[[ Line: 25 ]]
+return function(p1)
 	-- upvalues: UseNetworkingFunction (copy), ReactModule (copy), SendAXCounterV2Function (copy), ConstantsModule (copy), UseSignalStateFunction (copy)
 	local UseNetworkingResult = UseNetworkingFunction()
-	ReactModule.useEffect(function() --[[ Line: 28 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseNetworkingResult (copy), SendAXCounterV2Function (upval), ConstantsModule (upval)
 		if p1.getFetchStatus(false) == "idle" then
-			p1.fetch(UseNetworkingResult):catch(function(Err) --[[ Line: 32 ]]
+			p1.fetch(UseNetworkingResult):catch(function(Err)
 				-- upvalues: SendAXCounterV2Function (upval), ConstantsModule (upval)
 				if Err then
 					SendAXCounterV2Function(ConstantsModule.COUNTERS.FetchFaeFeatureAccessError)

@@ -6,7 +6,7 @@ local EventTypes = require(Parent.SocialLuaAnalytics).Analytics.Enums.EventTypes
 local SocialUpsellAnalytics = require(Parent.SocialUpsell).Analytics.SocialUpsellAnalytics
 local list = { "upsellEntrySurface", "upsellComponent", "upsellPurpose" }
 
-return function(p1, p2, p3) --[[ Line: 19 | Named "SduiSocialUpsellButtonClickTelemetryHandler" ]]
+return function(p1, p2, p3)
 	-- upvalues: list (copy), GetActionTelemetryFieldValueFunction (copy), SduiErrorType (copy), SocialUpsellAnalytics (copy), EventTypes (copy)
 	local List = {}
 	local t = {}

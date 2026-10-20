@@ -10,7 +10,7 @@ local ShareQRTileModule = require(SocialCarousel.Components.Tiles.ShareQRTile)
 local TileModule = require(SocialCarousel.BaseComponents.Tile)
 local FFlagSocialCarouselInGameTitleMarquee = require(Parent.SharedFlags).FFlagSocialCarouselInGameTitleMarquee
 
-local function renderUserTile(Item, Index, ItemSize, SelectionOrder, OnTileContentChanged, PlayStatus, OnMarqueeFinished, MarqueeRunId, OnMarqueeHover, OnMarqueeHoverEnd) --[[ Line: 15 ]]
+local function renderUserTile(Item, Index, ItemSize, SelectionOrder, OnTileContentChanged, PlayStatus, OnMarqueeFinished, MarqueeRunId, OnMarqueeHover, OnMarqueeHoverEnd)
 	-- upvalues: FFlagSocialCarouselInGameTitleMarquee (copy), ReactModule (copy), UserTileModule (copy)
 	local config = {
 		item = Item,
@@ -33,7 +33,7 @@ end
 return {
 	[Tile.Friend] = renderUserTile,
 	[Tile.Recommendation] = renderUserTile,
-	[Tile.AddFriends] = function(_, Index, ItemSize, SelectionOrder, _) --[[ Line: 59 ]]
+	[Tile.AddFriends] = function(_, Index, ItemSize, SelectionOrder, _)
 		-- upvalues: ReactModule (copy), AddFriendsTileModule (copy)
 		return ReactModule.createElement(AddFriendsTileModule, {
 			index = Index,
@@ -41,7 +41,7 @@ return {
 			selectionOrder = SelectionOrder
 		})
 	end,
-	[Tile.FriendsHint] = function(_, Index, ItemSize, SelectionOrder, _) --[[ Line: 66 ]]
+	[Tile.FriendsHint] = function(_, Index, ItemSize, SelectionOrder, _)
 		-- upvalues: ReactModule (copy), FriendsHintTileModule (copy)
 		return ReactModule.createElement(FriendsHintTileModule, {
 			index = Index,
@@ -49,7 +49,7 @@ return {
 			selectionOrder = SelectionOrder
 		})
 	end,
-	[Tile.StartSquad] = function(Item, Index, ItemSize, SelectionOrder, _) --[[ Line: 73 ]]
+	[Tile.StartSquad] = function(Item, Index, ItemSize, SelectionOrder, _)
 		-- upvalues: ReactModule (copy), StartSquadTileModule (copy)
 		return ReactModule.createElement(StartSquadTileModule, {
 			index = Index,
@@ -58,7 +58,7 @@ return {
 			selectionOrder = SelectionOrder
 		})
 	end,
-	[Tile.ShareQR] = if require(Parent.SharedFlags).FFlagSocialCarouselShareQREnabled then function(_, Index, ItemSize, SelectionOrder, _) --[[ Line: 82 ]]
+	[Tile.ShareQR] = if require(Parent.SharedFlags).FFlagSocialCarouselShareQREnabled then function(_, Index, ItemSize, SelectionOrder, _)
 		-- upvalues: ReactModule (copy), ShareQRTileModule (copy)
 		return ReactModule.createElement(ShareQRTileModule, {
 			index = Index,
@@ -66,7 +66,7 @@ return {
 			selectionOrder = SelectionOrder
 		})
 	end else nil,
-	[Tile.Skeleton] = function(_, Index, ItemSize, _, _) --[[ Line: 90 ]]
+	[Tile.Skeleton] = function(_, Index, ItemSize, _, _)
 		-- upvalues: ReactModule (copy), TileModule (copy)
 		return ReactModule.createElement(TileModule, { isLoading = true, index = Index, itemSize = ItemSize })
 	end

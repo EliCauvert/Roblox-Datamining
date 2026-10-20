@@ -13,7 +13,7 @@ game:DefineFastInt("MomentsPublishedPostPollIntervalSeconds", 10)
 game:DefineFastInt("MomentsPublishedPostMaxPollAttempts", 30)
 local MomentsUpload = nil
 
-local function _() --[[ Line: 44 | Named "getLogger" ]]
+local function _()
 	-- upvalues: MomentsUpload (ref), Parent (copy)
 	if MomentsUpload == nil then
 		MomentsUpload = require(Parent.Loggers).Logger:new("Moments.Upload")
@@ -23,18 +23,18 @@ end
 
 local Count = 0
 
-local function waitForLifecycleChange(WakeVersion, LocalUserId, Largest, Callback): boolean --[[ Line: 97 ]]
+local function waitForLifecycleChange(WakeVersion, LocalUserId, Largest, Callback): boolean
 	-- upvalues: PromiseModule (copy), SignalsModule (copy), PostLifecycleSubscriptionModule (copy)
-	local function Effect() --[[ Line: 103 ]] end
+	local function Effect() end
 	
 	local DeferredThread = nil
 	local _, v1 = PromiseModule.race({
-		PromiseModule.new(function(Callback) --[[ Line: 105 ]]
+		PromiseModule.new(function(Callback)
 			-- upvalues: Effect (ref), SignalsModule (upval), PostLifecycleSubscriptionModule (upval), LocalUserId (copy), WakeVersion (copy), DeferredThread (ref)
-			Effect = SignalsModule.createEffect(function(p1) --[[ Line: 106 ]]
+			Effect = SignalsModule.createEffect(function(p1)
 				-- upvalues: PostLifecycleSubscriptionModule (upval), LocalUserId (upval), WakeVersion (upval), DeferredThread (upval), Callback (copy)
 				if PostLifecycleSubscriptionModule.getWakeVersion(p1, LocalUserId) ~= WakeVersion and DeferredThread == nil then
-					DeferredThread = task.defer(function() --[[ Line: 109 ]]
+					DeferredThread = task.defer(function()
 						-- upvalues: DeferredThread (upval), Callback (upval)
 						DeferredThread = nil
 						Callback(true)
@@ -42,7 +42,7 @@ local function waitForLifecycleChange(WakeVersion, LocalUserId, Largest, Callbac
 				end
 			end)
 		end),
-		(PromiseModule.new(function(Callback1: (any) -> ()) --[[ Line: 116 ]]
+		(PromiseModule.new(function(Callback1: (any) -> ())
 			-- upvalues: Callback (copy), Largest (copy)
 			Callback(Largest)
 			Callback1(false)
@@ -56,13 +56,13 @@ local function waitForLifecycleChange(WakeVersion, LocalUserId, Largest, Callbac
 	return v1 == true
 end
 
-local _ = function(p1, p2, p3) --[[ Line: 128 | Named "fetchPage" ]]
+local _ = function(p1, p2, p3)
 	local v1, v2 = p1.getFreshUserMoments(p2, p3):await()
 	
 	return if v1 then v2 else nil
 end
 
-local function addToSnapshot(p1, p2) --[[ Line: 135 ]]
+local function addToSnapshot(p1, p2)
 	for _, moment in p2.moments do
 		p1.knownMomentIds[moment.momentId] = true
 		local FeedItemId = moment.recommendationMetadata.feedItemId
@@ -77,17 +77,17 @@ local function addToSnapshot(p1, p2) --[[ Line: 135 ]]
 	end
 end
 
-local _ = function(p3, p4): boolean --[[ Line: 149 | Named "isKnown" ]]
+local _ = function(p3, p4): boolean
 	local FeedItemId = p4.recommendationMetadata.feedItemId
 	
 	return p3.knownMomentIds[p4.momentId] == true or FeedItemId ~= nil and p3.knownMomentIds[FeedItemId] == true
 end
 
-local _ = function(p3): string --[[ Line: 155 | Named "trim" ]]
+local _ = function(p3): string
 	return string.match(p3 or "", "^%s*(.-)%s*$") or ""
 end
 
-local function textMatches(Description, Description1): boolean --[[ Line: 160 ]]
+local function textMatches(Description, Description1): boolean
 	local Match: string = string.match(Description or "", "^%s*(.-)%s*$") or ""
 	local Match1: string = string.match(Description1 or "", "^%s*(.-)%s*$") or ""
 	
@@ -116,13 +116,13 @@ local function textMatches(Description, Description1): boolean --[[ Line: 160 ]]
 	return true
 end
 
-local _ = function(p3) --[[ Line: 184 | Named "getMusicAssetId" ]]
+local _ = function(p3)
 	local Music = if p3 == nil then nil else p3.music
 	
 	return if Music == nil then nil else tonumber(Music.assetId)
 end
 
-local function getOverlayTexts(Edits) --[[ Line: 189 ]]
+local function getOverlayTexts(Edits)
 	local List = {}
 	local T = if Edits == nil or Edits.textOverlays == nil then {} else Edits.textOverlays
 	for _, value in T do
@@ -131,11 +131,11 @@ local function getOverlayTexts(Edits) --[[ Line: 189 ]]
 	return List
 end
 
-local _ = function(p3): number --[[ Line: 200 | Named "getTextLength" ]]
+local _ = function(p3): number
 	return (utf8.len(string.match(p3 or "", "^%s*(.-)%s*$") or ""))
 end
 
-local function overlayTextsMatch(Edits, Edits1): boolean --[[ Line: 205 ]]
+local function overlayTextsMatch(Edits, Edits1): boolean
 	-- upvalues: getOverlayTexts (copy), textMatches (copy)
 	local OverlayTexts = getOverlayTexts(Edits)
 	local OverlayTexts1 = getOverlayTexts(Edits1)
@@ -151,15 +151,15 @@ local function overlayTextsMatch(Edits, Edits1): boolean --[[ Line: 205 ]]
 	return true
 end
 
-local _ = function(p3: number): boolean --[[ Line: 219 | Named "isKnownPlace" ]]
+local _ = function(p3: number): boolean
 	return p3 ~= nil and p3 > 0
 end
 
-local _ = function(p3: number, p4: number): boolean --[[ Line: 223 | Named "placeMatches" ]]
+local _ = function(p3: number, p4: number): boolean
 	return not (p3 ~= nil and p3 > 0) or (not (p4 ~= nil and p4 > 0) or p3 == p4)
 end
 
-local function evaluate(Moment, Position, p3) --[[ Line: 227 ]]
+local function evaluate(Moment, Position, p3)
 	-- upvalues: ShouldShowMomentInFeedModule (copy), textMatches (copy), overlayTextsMatch (copy)
 	local Metadata = Moment.metadata
 	local Edits = p3.edits
@@ -182,11 +182,11 @@ local function evaluate(Moment, Position, p3) --[[ Line: 227 ]]
 	}
 end
 
-local _ = function(p3) --[[ Line: 242 | Named "isMatch" ]]
+local _ = function(p3)
 	return p3.visible and (p3.captureType and (p3.caption and (p3.music and (p3.overlays and p3.place))))
 end
 
-local function findPublishedPost(p3, p4, p5) --[[ Line: 251 ]]
+local function findPublishedPost(p3, p4, p5)
 	-- upvalues: evaluate (copy)
 	local v1 = nil
 	local List = {}
@@ -206,7 +206,7 @@ local function findPublishedPost(p3, p4, p5) --[[ Line: 251 ]]
 	return v1, List
 end
 
-local function logIds(p6, List) --[[ Line: 271 ]]
+local function logIds(p6, List)
 	-- upvalues: MomentsUpload (ref), Parent (copy)
 	for i = 1, #List, 6 do
 		local Smallest = math.min(i + 6 - 1, #List)
@@ -218,7 +218,7 @@ local function logIds(p6, List) --[[ Line: 271 ]]
 	end
 end
 
-local function logSnapshotPage(Count, p7, p8) --[[ Line: 278 ]]
+local function logSnapshotPage(Count, p7, p8)
 	-- upvalues: MomentsUpload (ref), Parent (copy), logIds (copy)
 	local ExcludedMomentIds = p8.excludedMomentIds or {}
 	
@@ -235,7 +235,7 @@ local function logSnapshotPage(Count, p7, p8) --[[ Line: 278 ]]
 	logIds("published_post_snapshot_excluded", ExcludedMomentIds)
 end
 
-local function logExpectation(p9) --[[ Line: 296 ]]
+local function logExpectation(p9)
 	-- upvalues: MomentsUpload (ref), Parent (copy), getOverlayTexts (copy)
 	if MomentsUpload == nil then
 		MomentsUpload = require(Parent.Loggers).Logger:new("Moments.Upload")
@@ -245,7 +245,7 @@ local function logExpectation(p9) --[[ Line: 296 ]]
 	MomentsUpload:debug("event=published_post_expectation captureType={} captionLength={} musicAssetId={} overlayCount={} placeId={}", p9.captureType.Name, tostring((utf8.len(string.match(p9.description or "", "^%s*(.-)%s*$") or ""))), tostring(if Music == nil then nil else tonumber(Music.assetId)), tostring(#getOverlayTexts(p9.edits)), (tostring(p9.placeId)))
 end
 
-local function logCandidate(Count, p9) --[[ Line: 307 ]]
+local function logCandidate(Count, p9)
 	-- upvalues: MomentsUpload (ref), Parent (copy), getOverlayTexts (copy)
 	local Moment = p9.moment
 	local Metadata = Moment.metadata
@@ -258,18 +258,18 @@ local function logCandidate(Count, p9) --[[ Line: 307 ]]
 	MomentsUpload:debug("event=published_post_candidate attempt={} position={} momentId={} feedItemId={} assetId={} status={} matched={} visible={} captureType={} caption={} music={} overlays={} place={} storedCaptureType={} storedCaptionLength={} storedMusicAssetId={} storedOverlayCount={} storedPlaceId={}", tostring(Count), tostring(p9.position), Moment.momentId, tostring(Moment.recommendationMetadata.feedItemId), tostring(Moment.assetId), tostring(Moment.status), tostring(p9.visible and (p9.captureType and (p9.caption and (p9.music and (p9.overlays and p9.place))))), tostring(p9.visible), tostring(p9.captureType), tostring(p9.caption), tostring(p9.music), tostring(p9.overlays), tostring(p9.place), Metadata.captureType.Name, tostring((utf8.len(string.match(Metadata.description or "", "^%s*(.-)%s*$") or ""))), tostring(if Music == nil then nil else tonumber(Music.assetId)), tostring(#getOverlayTexts(Metadata.edits)), (tostring(Metadata.placeId)))
 end
 
-return function(p9, p10) --[[ Line: 333 | Named "createPublishedPostResolver" ]]
+return function(p9, p10)
 	-- upvalues: MomentsGetMomentsUserStoreModule (copy), Count (ref), MomentsUpload (ref), Parent (copy), addToSnapshot (copy), logSnapshotPage (copy), GetLocalUserIdModule (copy), logExpectation (copy), PromiseModule (copy), SharedFlagsModule (copy), PostLifecycleSubscriptionModule (copy), waitForLifecycleChange (copy), findPublishedPost (copy), logCandidate (copy)
 	local P37 = p10 or {}
 	local MomentsGetMomentsUserStoreModuleResult = if P37.userStore == nil then MomentsGetMomentsUserStoreModule(false) else P37.userStore
-	local Wait = P37.wait or function(Duration) --[[ Line: 341 ]]
+	local Wait = P37.wait or function(Duration)
 		task.wait(Duration)
 	end
 	local Count1 = 0
 	local LocalUserId = nil
 	local NewResult = nil
 	
-	local function takeSnapshot(LocalUserId) --[[ Line: 353 ]]
+	local function takeSnapshot(LocalUserId)
 		-- upvalues: Wait (copy), MomentsGetMomentsUserStoreModuleResult (copy), MomentsUpload (upval), Parent (upval), Count1 (ref), addToSnapshot (upval), logSnapshotPage (upval)
 		local v2 = nil
 		
@@ -308,7 +308,7 @@ return function(p9, p10) --[[ Line: 333 | Named "createPublishedPostResolver" ]]
 	end
 	
 	return {
-		captureSnapshot = function() --[[ Line: 394 ]]
+		captureSnapshot = function()
 			-- upvalues: Count (upval), Count1 (ref), P37 (copy), LocalUserId (ref), GetLocalUserIdModule (upval), MomentsUpload (upval), Parent (upval), logExpectation (upval), p9 (copy), NewResult (ref), PromiseModule (upval), takeSnapshot (copy)
 			Count += 1
 			Count1 = Count
@@ -320,12 +320,12 @@ return function(p9, p10) --[[ Line: 333 | Named "createPublishedPostResolver" ]]
 			MomentsUpload:debug("event=published_post_snapshot_started resolverId={} hasUser={}", tostring(Count1), (tostring(LocalUserId ~= nil)))
 			logExpectation(p9)
 			local LocalUserId1 = LocalUserId
-			NewResult = PromiseModule.new(function(Callback: (any) -> ()) --[[ Line: 412 ]]
+			NewResult = PromiseModule.new(function(Callback: (any) -> ())
 				-- upvalues: LocalUserId1 (copy), takeSnapshot (upval)
 				Callback(if LocalUserId1 == nil then nil else takeSnapshot(LocalUserId1))
 			end)
 		end,
-		resolve = function(MomentId) --[[ Line: 417 ]]
+		resolve = function(MomentId)
 			-- upvalues: NewResult (ref), MomentsUpload (upval), Parent (upval), LocalUserId (ref), Count1 (ref), SharedFlagsModule (upval), PostLifecycleSubscriptionModule (upval), waitForLifecycleChange (upval), Wait (copy), Count (upval), MomentsGetMomentsUserStoreModuleResult (copy), findPublishedPost (upval), p9 (copy), logCandidate (upval)
 			if NewResult == nil then
 				if MomentsUpload == nil then
@@ -470,7 +470,7 @@ return function(p9, p10) --[[ Line: 333 | Named "createPublishedPostResolver" ]]
 				end
 			end
 		end,
-		isCurrent = function(): boolean --[[ Line: 349 ]]
+		isCurrent = function(): boolean
 			-- upvalues: Count1 (ref), Count (upval)
 			return Count1 ~= 0 and Count1 == Count
 		end

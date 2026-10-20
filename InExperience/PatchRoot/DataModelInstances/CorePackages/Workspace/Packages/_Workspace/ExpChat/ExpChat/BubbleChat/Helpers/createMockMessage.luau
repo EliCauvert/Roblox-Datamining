@@ -1,7 +1,7 @@
 ﻿local Dictionary = require(script:FindFirstAncestor("ExpChat").Parent.llama).Dictionary
 local Timestamp = 0
 
-return function(p1) --[[ Line: 7 | Named "createMockMessage" ]]
+return function(p1)
 	-- upvalues: Timestamp (ref), Dictionary (copy)
 	Timestamp += 1
 	

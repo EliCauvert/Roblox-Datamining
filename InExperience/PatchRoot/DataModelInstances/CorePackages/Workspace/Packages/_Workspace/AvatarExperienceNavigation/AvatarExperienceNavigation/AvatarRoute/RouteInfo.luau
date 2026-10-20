@@ -12,7 +12,7 @@ RouteInfoModule.Interface = TModule.strictInterface({
 	params = TModule.table
 })
 
-function RouteInfoModule.new(Name, Key, p1) --[[ Line: 20 ]]
+function RouteInfoModule.new(Name, Key, p1)
 	-- upvalues: RouteInfoModule (copy)
 	local config = { name = Name, key = Key, params = p1 or {} }
 	setmetatable(config, RouteInfoModule)
@@ -22,11 +22,11 @@ end
 
 RouteInfoModule.EMPTY = RouteInfoModule.new(AvatarScreenModule.None, AvatarScreenModule.None)
 
-function RouteInfoModule:__tostring(): string --[[ Line: 32 ]]
+function RouteInfoModule:__tostring(): string
 	return string.format("%s(key=%s)", self.name, (tostring(self.key)))
 end
 
-function RouteInfoModule.__eq(p1, p2) --[[ Line: 36 ]]
+function RouteInfoModule.__eq(p1, p2)
 	-- upvalues: TutilsModule (copy)
 	return if rawequal(p1, p2) then true else p1.key == p2.key and p1.name == p2.name and TutilsModule.shallowEqual(p1.params, p2.params, nil)
 end

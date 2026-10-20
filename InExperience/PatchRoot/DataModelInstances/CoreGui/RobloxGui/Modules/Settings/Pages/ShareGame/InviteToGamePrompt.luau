@@ -16,7 +16,7 @@ local GetFFlagAbuseReportAnalyticsHasLaunchDataModule = require(Modules.Settings
 local InviteToGamePromptModule = {}
 InviteToGamePromptModule.__index = InviteToGamePromptModule
 
-function InviteToGamePromptModule.new(MountTarget) --[[ Line: 40 ]]
+function InviteToGamePromptModule.new(MountTarget)
 	-- upvalues: InviteToGamePromptModule (copy)
 	local config = { isActive = false, mountTarget = MountTarget }
 	setmetatable(config, InviteToGamePromptModule)
@@ -24,26 +24,26 @@ function InviteToGamePromptModule.new(MountTarget) --[[ Line: 40 ]]
 	return config
 end
 
-function InviteToGamePromptModule:withSocialServiceAndLocalPlayer(SocialService, LocalPlayer) --[[ Line: 50 ]]
+function InviteToGamePromptModule:withSocialServiceAndLocalPlayer(SocialService, LocalPlayer)
 	self.socialService = SocialService
 	self.localPlayer = LocalPlayer
 	
 	return self
 end
 
-function InviteToGamePromptModule:withAnalytics(Analytics) --[[ Line: 56 ]]
+function InviteToGamePromptModule:withAnalytics(Analytics)
 	self.analytics = Analytics
 	
 	return self
 end
 
-function InviteToGamePromptModule:withRequestImpl(RequestImpl) --[[ Line: 61 ]]
+function InviteToGamePromptModule:withRequestImpl(RequestImpl)
 	self.requestImpl = RequestImpl
 	
 	return self
 end
 
-function InviteToGamePromptModule:_createTree(IsVisible, p1) --[[ Line: 66 ]]
+function InviteToGamePromptModule:_createTree(IsVisible, p1)
 	-- upvalues: GetFFlagEnableSharedInviteStoreModule (copy), InviteStoreModule (copy), RoduxModule (copy), AppReducerModule (copy), RenderWithCoreScriptsStyleProviderModule (copy), RoactModule (copy), FullModalShareGameComponentModule (copy)
 	return RenderWithCoreScriptsStyleProviderModule({
 		FullModalShareGame = RoactModule.createElement(FullModalShareGameComponentModule, {
@@ -56,7 +56,7 @@ function InviteToGamePromptModule:_createTree(IsVisible, p1) --[[ Line: 66 ]]
 			launchData = p1 and p1.launchData,
 			isLoading = p1 and p1.isLoading,
 			requestImpl = self.requestImpl,
-			onAfterClosePage = function(_) --[[ Line: 81 ]]
+			onAfterClosePage = function(_)
 				-- upvalues: self (copy)
 				self:hide({})
 			end
@@ -64,7 +64,7 @@ function InviteToGamePromptModule:_createTree(IsVisible, p1) --[[ Line: 66 ]]
 	})
 end
 
-function InviteToGamePromptModule:show(p1) --[[ Line: 95 ]]
+function InviteToGamePromptModule:show(p1)
 	-- upvalues: ConstantsModule (copy), GameInviteEvents (copy), GetFFlagAbuseReportAnalyticsHasLaunchDataModule (copy), RoactModule (copy), ContextActionService (copy)
 	if self.isActive then return end
 	self.isLoading = p1 and p1.isLoading
@@ -82,7 +82,7 @@ function InviteToGamePromptModule:show(p1) --[[ Line: 95 ]]
 	if self.analytics and not self.isLoading then
 		self.analytics:inputShareGameEntryPoint()
 	end
-	ContextActionService:BindCoreAction("hideInvitePrompt", function(_, UserInputState, _) --[[ Line: 124 ]]
+	ContextActionService:BindCoreAction("hideInvitePrompt", function(_, UserInputState, _)
 		-- upvalues: self (copy)
 		if UserInputState == Enum.UserInputState.Begin then
 			self:hide()
@@ -90,7 +90,7 @@ function InviteToGamePromptModule:show(p1) --[[ Line: 95 ]]
 	end, false, Enum.KeyCode.ButtonB, Enum.KeyCode.Backspace)
 end
 
-function InviteToGamePromptModule:hide(_) --[[ Line: 131 ]]
+function InviteToGamePromptModule:hide(_)
 	-- upvalues: RoactModule (copy), ContextActionService (copy), GuiService (copy)
 	if not self.isActive and not self.isLoading then return end
 	self.isLoading = false
@@ -105,7 +105,7 @@ function InviteToGamePromptModule:hide(_) --[[ Line: 131 ]]
 	GuiService:RemoveSelectionGroup("invitePrompt")
 end
 
-function InviteToGamePromptModule:destruct() --[[ Line: 148 ]]
+function InviteToGamePromptModule:destruct()
 	-- upvalues: RoactModule (copy)
 	if self.instance then
 		RoactModule.unmount(self.instance)

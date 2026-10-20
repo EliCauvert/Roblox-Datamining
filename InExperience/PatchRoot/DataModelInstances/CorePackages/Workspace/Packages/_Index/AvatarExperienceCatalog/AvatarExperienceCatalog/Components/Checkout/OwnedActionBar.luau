@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return ReactModule.memo((ReactModule.forwardRef(function(p1, Ref) --[[ Line: 15 ]]
+return ReactModule.memo((ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: FoundationModule (copy), UseLocalizationFunction (copy), ReactModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	

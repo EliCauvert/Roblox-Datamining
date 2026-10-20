@@ -5,7 +5,7 @@ local IntersectBoundsModule = require(script.Parent.intersectBounds)
 local FIntLuaAppUpdateImpressionsViewportBoundsPositionThreshold = SharedFlagsModule.FIntLuaAppUpdateImpressionsViewportBoundsPositionThreshold
 local FIntLuaAppViewportBoundsScreenSizeThreshold = SharedFlagsModule.FIntLuaAppViewportBoundsScreenSizeThreshold
 
-local function getGuiAncestors(Current) --[[ Line: 17 ]]
+local function getGuiAncestors(Current)
 	local List = {}
 	local Parent = Current.Parent
 	while Parent and (Parent ~= game and Parent:IsA("GuiObject")) do
@@ -15,7 +15,7 @@ local function getGuiAncestors(Current) --[[ Line: 17 ]]
 	return List
 end
 
-local function _(Frame: Frame) --[[ Line: 30 | Named "computeBounds" ]]
+local function _(Frame: Frame)
 	local AbsolutePosition = Frame.AbsolutePosition
 	
 	return {
@@ -24,7 +24,7 @@ local function _(Frame: Frame) --[[ Line: 30 | Named "computeBounds" ]]
 	}
 end
 
-local function computeClipBounds(Frames) --[[ Line: 39 ]]
+local function computeClipBounds(Frames)
 	-- upvalues: IntersectBoundsModule (copy)
 	local v1 = nil
 	
@@ -46,10 +46,10 @@ local function computeClipBounds(Frames) --[[ Line: 39 ]]
 	return v1
 end
 
-return function(p1) --[[ Line: 50 | Named "useClipAncestorBounds" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), computeClipBounds (copy), getGuiAncestors (copy), FIntLuaAppUpdateImpressionsViewportBoundsPositionThreshold (copy), FIntLuaAppViewportBoundsScreenSizeThreshold (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-	ReactModule.useEffect(function() --[[ Line: 53 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult2 (copy), computeClipBounds (upval), getGuiAncestors (upval), FIntLuaAppUpdateImpressionsViewportBoundsPositionThreshold (upval), FIntLuaAppViewportBoundsScreenSizeThreshold (upval)
 		local Current = if p1 then p1.current else nil
 		
@@ -62,7 +62,7 @@ return function(p1) --[[ Line: 50 | Named "useClipAncestorBounds" ]]
 		local Frames = {}
 		local DeferredThread = nil
 		
-		local function _() --[[ Line: 64 | Named "cancelPendingUpdate" ]]
+		local function _()
 			-- upvalues: DeferredThread (ref)
 			if DeferredThread then
 				task.cancel(DeferredThread)
@@ -70,10 +70,10 @@ return function(p1) --[[ Line: 50 | Named "useClipAncestorBounds" ]]
 			end
 		end
 		
-		local _ = function() --[[ Line: 72 | Named "scheduleUpdateBounds" ]]
+		local _ = function()
 			-- upvalues: DeferredThread (ref), UseStateResult2 (upval), computeClipBounds (upval), Frames (ref)
 			if not DeferredThread then
-				DeferredThread = task.defer(function() --[[ Line: 76 ]]
+				DeferredThread = task.defer(function()
 					-- upvalues: DeferredThread (upval), UseStateResult2 (upval), computeClipBounds (upval), Frames (upval)
 					DeferredThread = nil
 					UseStateResult2((computeClipBounds(Frames)))
@@ -83,7 +83,7 @@ return function(p1) --[[ Line: 50 | Named "useClipAncestorBounds" ]]
 			end
 		end
 		
-		local function disconnectAncestorConnections() --[[ Line: 82 ]]
+		local function disconnectAncestorConnections()
 			-- upvalues: List (ref)
 			for _, Connection in List do
 				if Connection.Connected then
@@ -93,7 +93,7 @@ return function(p1) --[[ Line: 50 | Named "useClipAncestorBounds" ]]
 			List = {}
 		end
 		
-		local function connectToAncestors() --[[ Line: 91 ]]
+		local function connectToAncestors()
 			-- upvalues: DeferredThread (ref), disconnectAncestorConnections (copy), Frames (ref), getGuiAncestors (upval), Current (copy), UseStateResult2 (upval), computeClipBounds (upval), List (ref), connectToAncestors (copy), FIntLuaAppUpdateImpressionsViewportBoundsPositionThreshold (upval), FIntLuaAppViewportBoundsScreenSizeThreshold (upval)
 			if DeferredThread then
 				task.cancel(DeferredThread)
@@ -109,7 +109,7 @@ return function(p1) --[[ Line: 50 | Named "useClipAncestorBounds" ]]
 				
 				if frame.ClipsDescendants or frame:GetStyled("ClipsDescendants") == true then
 					local AbsolutePosition = frame.AbsolutePosition
-					table.insert(List, frame:GetPropertyChangedSignal("AbsolutePosition"):Connect(function() --[[ Line: 115 ]]
+					table.insert(List, frame:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
 						-- upvalues: frame (copy), FIntLuaAppUpdateImpressionsViewportBoundsPositionThreshold (upval), AbsolutePosition (ref), DeferredThread (upval), UseStateResult2 (upval), computeClipBounds (upval), Frames (upval)
 						local AbsolutePosition1 = frame.AbsolutePosition
 						local AbsolutePositionDelta = AbsolutePosition1 - AbsolutePosition
@@ -118,7 +118,7 @@ return function(p1) --[[ Line: 50 | Named "useClipAncestorBounds" ]]
 						AbsolutePosition = AbsolutePosition1
 						
 						if not DeferredThread then
-							DeferredThread = task.defer(function() --[[ Line: 76 ]]
+							DeferredThread = task.defer(function()
 								-- upvalues: DeferredThread (upval), UseStateResult2 (upval), computeClipBounds (upval), Frames (upval)
 								DeferredThread = nil
 								UseStateResult2((computeClipBounds(Frames)))
@@ -128,7 +128,7 @@ return function(p1) --[[ Line: 50 | Named "useClipAncestorBounds" ]]
 						end
 					end))
 					local AbsoluteSize = frame.AbsoluteSize
-					table.insert(List, frame:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 130 ]]
+					table.insert(List, frame:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 						-- upvalues: frame (copy), FIntLuaAppViewportBoundsScreenSizeThreshold (upval), AbsoluteSize (ref), DeferredThread (upval), UseStateResult2 (upval), computeClipBounds (upval), Frames (upval)
 						local AbsoluteSize1 = frame.AbsoluteSize
 						local AbsoluteSizeDelta = AbsoluteSize1 - AbsoluteSize
@@ -137,7 +137,7 @@ return function(p1) --[[ Line: 50 | Named "useClipAncestorBounds" ]]
 						AbsoluteSize = AbsoluteSize1
 						
 						if not DeferredThread then
-							DeferredThread = task.defer(function() --[[ Line: 76 ]]
+							DeferredThread = task.defer(function()
 								-- upvalues: DeferredThread (upval), UseStateResult2 (upval), computeClipBounds (upval), Frames (upval)
 								DeferredThread = nil
 								UseStateResult2((computeClipBounds(Frames)))
@@ -151,12 +151,12 @@ return function(p1) --[[ Line: 50 | Named "useClipAncestorBounds" ]]
 		end
 		
 		connectToAncestors()
-		local AncestryChangedConnection = Current.AncestryChanged:Connect(function() --[[ Line: 149 ]]
+		local AncestryChangedConnection = Current.AncestryChanged:Connect(function()
 			-- upvalues: connectToAncestors (copy)
 			connectToAncestors()
 		end)
 		
-		return function() --[[ Line: 153 ]]
+		return function()
 			-- upvalues: DeferredThread (ref), AncestryChangedConnection (copy), disconnectAncestorConnections (copy)
 			if DeferredThread then
 				task.cancel(DeferredThread)

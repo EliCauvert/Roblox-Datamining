@@ -39,11 +39,11 @@ local NewUrlBuilder1 = UrlBuilder.new({
 	}
 })
 
-return function(GrantType) --[[ Line: 40 ]]
+return function(GrantType)
 	-- upvalues: HttpRequestModule (copy), NewUrlBuilder (copy), PromiseModule (copy), NewUrlBuilder1 (copy)
 	local NewHttpRequest = HttpRequestModule.new()
 	
-	return NewHttpRequest:get((NewUrlBuilder({ grantType = GrantType }))):andThen(function(Result) --[[ Line: 45 ]]
+	return NewHttpRequest:get((NewUrlBuilder({ grantType = GrantType }))):andThen(function(Result)
 		-- upvalues: PromiseModule (upval), NewUrlBuilder1 (upval), GrantType (copy), NewHttpRequest (copy)
 		local Product = Result and (Result.products and Result.products[1])
 		local Id = Product and (Product.productKey and Product.productKey.id)

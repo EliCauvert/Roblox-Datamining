@@ -11,17 +11,17 @@ local FitChildrenModule = {
 	}
 }
 
-function FitChildrenModule.wrap(p1) --[[ Line: 23 ]]
+function FitChildrenModule.wrap(p1)
 	-- upvalues: RoactModule (copy), FitChildrenModule (copy), Immutable (copy), CryoModule (copy)
 	local ExtendResult = RoactModule.PureComponent:extend(("FitChildren(%s)"):format((tostring(p1))))
 	
-	function ExtendResult.disconnectSignals(p2) --[[ Line: 26 ]]
+	function ExtendResult.disconnectSignals(p2)
 		for _, signal in ipairs(p2.signals) do
 			signal:Disconnect()
 		end
 	end
 	
-	function ExtendResult.resize(p3) --[[ Line: 32 ]]
+	function ExtendResult.resize(p3)
 		-- upvalues: FitChildrenModule (upval)
 		local FitFields = p3.props.fitFields or (if p3.props.fitAxis then { Size = p3.props.fitAxis } else { Size = FitChildrenModule.FitAxis.Both })
 		p3:disconnectSignals()
@@ -32,7 +32,7 @@ function FitChildrenModule.wrap(p1) --[[ Line: 23 ]]
 		local UIGridStyleLayout = Current:FindFirstChildWhichIsA("UIGridStyleLayout")
 		
 		if UIGridStyleLayout then
-			table.insert(p3.signals, (UIGridStyleLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function() --[[ Line: 59 | Named "update" ]]
+			table.insert(p3.signals, (UIGridStyleLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
 				-- upvalues: UIGridStyleLayout (copy), p3 (copy), FitFields (ref)
 				local AbsoluteContentSize = UIGridStyleLayout.AbsoluteContentSize
 				p3:applyFit(FitFields, AbsoluteContentSize.x, AbsoluteContentSize.y)
@@ -44,11 +44,11 @@ function FitChildrenModule.wrap(p1) --[[ Line: 23 ]]
 			
 			for _, Gui in ipairs((Current:GetChildren())) do
 				if Gui:IsA("GuiBase2d") then
-					table.insert(p3.signals, (Gui:GetPropertyChangedSignal("Size"):Connect(function() --[[ Line: 73 ]]
+					table.insert(p3.signals, (Gui:GetPropertyChangedSignal("Size"):Connect(function()
 						-- upvalues: p3 (copy), FitFields (ref)
 						p3:resizeFromChildren(FitFields)
 					end)))
-					table.insert(p3.signals, (Gui:GetPropertyChangedSignal("Position"):Connect(function() --[[ Line: 77 ]]
+					table.insert(p3.signals, (Gui:GetPropertyChangedSignal("Position"):Connect(function()
 						-- upvalues: p3 (copy), FitFields (ref)
 						p3:resizeFromChildren(FitFields)
 					end)))
@@ -57,7 +57,7 @@ function FitChildrenModule.wrap(p1) --[[ Line: 23 ]]
 		end
 	end
 	
-	function ExtendResult.resizeFromChildren(p4, FitFields) --[[ Line: 86 ]]
+	function ExtendResult.resizeFromChildren(p4, FitFields)
 		local Current = p4.ref.current
 		
 		if Current == nil then return end
@@ -76,7 +76,7 @@ function FitChildrenModule.wrap(p1) --[[ Line: 23 ]]
 		p4:applyFit(FitFields, Largest, Largest1)
 	end
 	
-	function ExtendResult.applyFit(p5, FitFields, X, Y) --[[ Line: 108 ]]
+	function ExtendResult.applyFit(p5, FitFields, X, Y)
 		-- upvalues: FitChildrenModule (upval)
 		local Current = p5.ref.current
 		
@@ -86,7 +86,7 @@ function FitChildrenModule.wrap(p1) --[[ Line: 23 ]]
 		local Width = FitChildrenModule.FitAxis.Width
 		local Height = FitChildrenModule.FitAxis.Height
 		
-		local function calculateAxis(Both, Height, p6, X, p7, p8) --[[ Line: 119 ]]
+		local function calculateAxis(Both, Height, p6, X, p7, p8)
 			-- upvalues: FitChildrenModule (upval), UIPadding (copy)
 			local v1 = nil
 			
@@ -117,7 +117,7 @@ function FitChildrenModule.wrap(p1) --[[ Line: 23 ]]
 		end
 	end
 	
-	function ExtendResult.init(p6) --[[ Line: 150 ]]
+	function ExtendResult.init(p6)
 		-- upvalues: ExtendResult (copy), RoactModule (upval)
 		p6.signals = {}
 		local ForwardRefFunction = p6.props.forwardRef
@@ -125,7 +125,7 @@ function FitChildrenModule.wrap(p1) --[[ Line: 23 ]]
 		p6.ref = ForwardRefFunction or RoactModule.createRef()
 	end
 	
-	function ExtendResult.render(p6) --[[ Line: 164 ]]
+	function ExtendResult.render(p6)
 		-- upvalues: Immutable (upval), RoactModule (upval), p1 (copy)
 		local FitAxis = Immutable.RemoveFromDictionary(p6.props, "fitAxis", "fitFields", "forwardRef")
 		FitAxis[RoactModule.Ref] = p6.ref
@@ -133,19 +133,19 @@ function FitChildrenModule.wrap(p1) --[[ Line: 23 ]]
 		return RoactModule.createElement(p1, FitAxis)
 	end
 	
-	function ExtendResult.didMount(p6) --[[ Line: 171 ]]
+	function ExtendResult.didMount(p6)
 		p6:resize()
 	end
 	
-	function ExtendResult.didUpdate(p6) --[[ Line: 175 ]]
+	function ExtendResult.didUpdate(p6)
 		p6:resize()
 	end
 	
-	function ExtendResult.willUnmount(p6) --[[ Line: 179 ]]
+	function ExtendResult.willUnmount(p6)
 		p6:disconnectSignals()
 	end
 	
-	return RoactModule.forwardRef(function(p6, ForwardRef) --[[ Line: 183 ]]
+	return RoactModule.forwardRef(function(p6, ForwardRef)
 		-- upvalues: RoactModule (upval), ExtendResult (copy), CryoModule (upval)
 		return RoactModule.createElement(ExtendResult, CryoModule.Dictionary.join(p6, { forwardRef = ForwardRef }))
 	end)

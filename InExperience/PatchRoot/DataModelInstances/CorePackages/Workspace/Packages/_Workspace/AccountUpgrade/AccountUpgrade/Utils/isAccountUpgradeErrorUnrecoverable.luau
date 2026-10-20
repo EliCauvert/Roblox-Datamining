@@ -8,7 +8,7 @@ local config = {
 	[AccountUpgradeErrorModule.AccountAlreadyUpgraded] = true
 }
 
-return function(p1): boolean --[[ Line: 16 | Named "isAccountUpgradeErrorUnrecoverable" ]]
+return function(p1): boolean
 	-- upvalues: config (copy)
 	return p1 ~= nil and config[p1] == true
 end

@@ -9,7 +9,7 @@ local _ = require(script.Parent.Interfaces)
 local String = LuauPolyfillModule.String
 
 return {
-	forEachDefaultValue = function(p1, Callback) --[[ Line: 26 ]]
+	forEachDefaultValue = function(p1, Callback)
 		-- upvalues: String (copy), GetNamedTypeFunction (copy), Boolean (copy), IsObjectTypeFunction (copy), IsInputObjectTypeFunction (copy)
 		local TypeMap = p1:getTypeMap()
 		

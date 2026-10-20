@@ -1,5 +1,5 @@
 ﻿return {
-	createControlBar = function(p1) --[[ Line: 4 ]]
+	createControlBar = function(p1)
 		p1.ControlBarContainer = Instance.new("Frame")
 		p1.ControlBarContainer.Name = "ControlBarContainer"
 		p1.ControlBarContainer.BackgroundTransparency = 1
@@ -53,14 +53,14 @@
 		p1.HelpBar.Parent = p1.ControlBarContainer
 		p1.maxViewportScalingWidth = p1.maxControlBarHeight * AspectRatio.AspectRatio
 		
-		local function setupControlBarScaling() --[[ Line: 73 ]]
+		local function setupControlBarScaling()
 			-- upvalues: p1 (copy), AspectRatio (copy), Padding (copy)
 			p1.firstThresholdCheck = true
 			p1.lastCheckAboveThreshold = false
 			local CurrentCamera = workspace.CurrentCamera
 			
 			if CurrentCamera then
-				CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function() --[[ Line: 81 ]]
+				CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
 					-- upvalues: CurrentCamera (copy), p1 (upval), AspectRatio (upval), Padding (upval)
 					if p1.maxViewportScalingWidth < CurrentCamera.ViewportSize.X then
 						if not p1.firstBoundaryCheck and p1.lastCheckAboveThreshold then return end
@@ -89,7 +89,7 @@
 		setupControlBarScaling()
 		workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(setupControlBarScaling)
 		
-		function p1.createUIListLayout(Parent, Offset) --[[ Line: 124 ]]
+		function p1.createUIListLayout(Parent, Offset)
 			local ListLayout = Instance.new("UIListLayout")
 			ListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Left
 			ListLayout.VerticalAlignment = Enum.VerticalAlignment.Center

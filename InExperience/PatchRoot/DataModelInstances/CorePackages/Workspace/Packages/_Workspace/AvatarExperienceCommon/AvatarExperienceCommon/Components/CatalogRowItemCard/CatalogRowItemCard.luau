@@ -32,7 +32,7 @@ local ItemTypeToContentMap = CatalogItemCardBadgeMapsModule.itemTypeToContentMap
 local ItemInfoIconMap = CatalogItemCardBadgeMapsModule.itemInfoIconMap
 local ItemStatusIconTypeToIconMap = if FFlagAXMarketplaceItemCardIndicatorStack then CatalogItemCardBadgeMapsModule.itemStatusIconTypeToIconMap else CatalogItemCardBadgeMapsModule.rowItemStatusIconTypeToIconMap
 
-local function buildItemStatusContent(ItemStatus, Icon) --[[ Line: 71 ]]
+local function buildItemStatusContent(ItemStatus, Icon)
 	return if ItemStatus.type == "text" then { type = "text", text = ItemStatus.text } elseif ItemStatus.type == "badge" then {
 		type = "badge",
 		content = {
@@ -42,7 +42,7 @@ local function buildItemStatusContent(ItemStatus, Icon) --[[ Line: 71 ]]
 	} elseif Icon then { type = "icon", icon = Icon } else nil
 end
 
-return (ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 132 ]]
+return (ReactModule.forwardRef(function(Frame: Frame, Ref)
 	-- upvalues: UseTokensFunction (copy), ItemInfoIconMap (copy), ItemTypeToContentMap (copy), FFlagAXMarketplaceItemCardIndicatorStack (copy), ItemStatusIconTypeToIconMap (copy), FFlagAXMarketplaceLicensingItemCards (copy), ReactModule (copy), LicensingBadgeModule (copy), FoundationModule (copy), buildItemStatusContent (copy), ShouldRenderIndicatorStackModule (copy), IndicatorStackModule (copy), ItemCardHeader (copy), ItemCardHeaderCornersOverlay (copy), ItemCardBadge (copy), ItemCardStatus (copy), ItemCardIcon (copy), FFlagAXRemoveDynamicHeadBadge (copy), CatalogRowItemCardFooterModule (copy), FFlagAXDurables2Option (copy), FFlagAXDurablesForMIS (copy), FFlagAXEnableTimedOptionsForCatalogRowCard (copy), FFlagAXGifting (copy), FFlagAXMISOffersChip (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ItemInfoIcon = if Frame.itemInfo then ItemInfoIconMap[Frame.itemInfo] else nil

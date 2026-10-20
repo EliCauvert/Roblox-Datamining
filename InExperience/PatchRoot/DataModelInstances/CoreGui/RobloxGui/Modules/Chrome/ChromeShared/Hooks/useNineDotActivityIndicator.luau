@@ -1,13 +1,13 @@
 ﻿local ReactModule = require(game:GetService("CorePackages").Packages.React)
 local ServiceModule = require(script:FindFirstAncestor("ChromeShared").Service)
 
-return function(p1, p2) --[[ Line: 8 ]]
+return function(p1, p2)
 	-- upvalues: ReactModule (copy), ServiceModule (copy)
-	ReactModule.useEffect(function() --[[ Line: 9 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ServiceModule (upval), p1 (copy), p2 (copy)
 		ServiceModule:setNineDotActivityIndicatorVisible(p1, p2)
 		
-		return function() --[[ Line: 12 ]]
+		return function()
 			-- upvalues: ServiceModule (upval), p1 (upval)
 			ServiceModule:setNineDotActivityIndicatorVisible(p1, false)
 		end

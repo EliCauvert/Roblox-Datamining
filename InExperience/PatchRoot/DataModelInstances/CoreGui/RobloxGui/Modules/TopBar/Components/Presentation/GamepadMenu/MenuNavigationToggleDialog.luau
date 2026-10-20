@@ -19,7 +19,7 @@ local UseObservableValueModule = require(Parent.Parent.Chrome.ChromeShared.Hooks
 local Localization = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization
 local FFlagLocalizeMenuNavigationToggleDialogModule = require(CoreGui.RobloxGui.Modules.TopBar.Flags.FFlagLocalizeMenuNavigationToggleDialog)
 
-return function(p1) --[[ Line: 46 | Named "MenuNavigationToggleDialog" ]]
+return function(p1)
 	-- upvalues: UseDesignTokensFunction (copy), FFlagLocalizeMenuNavigationToggleDialogModule (copy), UserInputService (copy), ReactModule (copy), LocalizationService (copy), UseEventConnectionFunction (copy), Localization (copy), GetTextSizeFunction (copy), EnabledResult (copy), FFlagEnableConsoleExpControls (copy), UseObservableValueModule (copy), GamepadConnectorModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local CaptionMedium = UseDesignTokensResult.Typography.CaptionMedium
@@ -36,11 +36,11 @@ return function(p1) --[[ Line: 46 | Named "MenuNavigationToggleDialog" ]]
 	
 	if FFlagLocalizeMenuNavigationToggleDialogModule then
 		local UseStateResult, UseStateResult2 = ReactModule.useState(LocalizationService.RobloxLocaleId)
-		UseEventConnectionFunction(LocalizationService:GetPropertyChangedSignal("RobloxLocaleId"), function() --[[ Line: 65 ]]
+		UseEventConnectionFunction(LocalizationService:GetPropertyChangedSignal("RobloxLocaleId"), function()
 			-- upvalues: UseStateResult2 (copy), LocalizationService (upval)
 			UseStateResult2(LocalizationService.RobloxLocaleId)
 		end)
-		UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 75 ]]
+		UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function()
 			-- upvalues: Localization (upval), UseStateResult (copy)
 			local NewLocalization = Localization.new(UseStateResult)
 			local Success, Result = pcall(NewLocalization.Format, NewLocalization, "CoreScripts.InGameMenu.VirtualCursorHintPreIcon")
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 46 | Named "MenuNavigationToggleDialog" ]]
 		UseMemoResult = "Some experiences require pressing "
 		UseMemoResult2 = " to toggle menu navigation"
 	end
-	local UseMemoResult1, UseMemoResult2_1 = ReactModule.useMemo(function() --[[ Line: 99 ]]
+	local UseMemoResult1, UseMemoResult2_1 = ReactModule.useMemo(function()
 		-- upvalues: GetTextSizeFunction (upval), UseMemoResult (ref), CaptionMedium (copy), UseMemoResult2 (ref)
 		return GetTextSizeFunction(UseMemoResult, CaptionMedium.FontSize, CaptionMedium.Font, Vector2.new(1e999, 1e999)), (GetTextSizeFunction(UseMemoResult2, CaptionMedium.FontSize, CaptionMedium.Font, Vector2.new(1e999, 1e999)))
 	end, {

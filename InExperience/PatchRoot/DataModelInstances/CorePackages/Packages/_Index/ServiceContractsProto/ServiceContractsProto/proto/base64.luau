@@ -11,7 +11,7 @@ for i = 1, 64 do
 end
 t[61] = 0
 
-local function buildStringFromCodes(p1): string --[[ Line: 46 ]]
+local function buildStringFromCodes(p1): string
 	local List = {}
 	
 	for i = 1, #p1, 4096 do
@@ -21,7 +21,7 @@ local function buildStringFromCodes(p1): string --[[ Line: 46 ]]
 end
 
 return {
-	encode = function(Text: string) --[[ Line: 56 ]]
+	encode = function(Text: string)
 		-- upvalues: ByteValues (copy), buildStringFromCodes (copy)
 		local CountText = #Text
 		local ScaledCeiled = math.ceil(CountText / 3) * 4
@@ -57,7 +57,7 @@ return {
 		end
 		return buildStringFromCodes(Buffer)
 	end,
-	decode = function(Text: string) --[[ Line: 102 ]]
+	decode = function(Text: string)
 		-- upvalues: t (copy), buildStringFromCodes (copy)
 		local CountText = #Text
 		local ScaledCeiled = math.ceil(CountText / 4) * 3

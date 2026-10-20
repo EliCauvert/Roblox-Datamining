@@ -4,7 +4,7 @@ local FoundationModule = require(Parent.Foundation)
 local Text = FoundationModule.Text
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(Frame) --[[ Line: 13 | Named "ItemCardStatus" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	

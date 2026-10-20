@@ -15,7 +15,7 @@ local UseAnalyticsModule = require(ProfileShareLinks.Analytics.useAnalytics)
 local EventNamesModule = require(ProfileShareLinks.Analytics.EventNames)
 local TextKeysModule = require(ProfileShareLinks.Common.TextKeys)
 
-return function(p1) --[[ Line: 31 ]]
+return function(p1)
 	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseProfileSharePolicyModule (copy), UseGetOrGenerateLinkUrlModule (copy), UseShortUrlModule (copy), UseEffectOnceFunction (copy), ProfileSharePolicyEnumModule (copy), ReactModule (copy), EventNamesModule (copy), Default (copy), SetCurrentToastMessageFunction (copy), TextKeysModule (copy)
 	local NoEnableFetch = p1.enableFetch == nil or p1.enableFetch
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
@@ -29,7 +29,7 @@ return function(p1) --[[ Line: 31 ]]
 	return {
 		hasLoaded = HasUseShortUrlModuleResult,
 		policy = UseProfileSharePolicyModuleResult,
-		onActivated = ReactModule.useCallback(function() --[[ Line: 45 ]]
+		onActivated = ReactModule.useCallback(function()
 			-- upvalues: UseProfileSharePolicyModuleResult (copy), ProfileSharePolicyEnumModule (upval), UseShortUrlModuleResult (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval), p1 (copy), Default (upval), UseDispatchResult (copy), SetCurrentToastMessageFunction (upval), TextKeysModule (upval)
 			if UseProfileSharePolicyModuleResult == ProfileSharePolicyEnumModule.Disabled or UseShortUrlModuleResult == nil then return end
 			local Text = tostring(DateTime.now().UnixTimestampMillis)

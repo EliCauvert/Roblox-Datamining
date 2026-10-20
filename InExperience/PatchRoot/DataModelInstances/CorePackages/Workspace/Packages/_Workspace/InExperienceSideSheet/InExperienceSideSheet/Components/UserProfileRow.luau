@@ -16,7 +16,7 @@ local List = if ReadHasRobloxSubscriptionLuaEngineFeature then {
 	"HasRobloxSubscription"
 } else { "Name", "DisplayName", "MembershipType" }
 
-local function _(Player: Player) --[[ Line: 31 | Named "createLocalUserModel" ]]
+local function _(Player: Player)
 	return if Player then {
 		id = tostring(Player.UserId),
 		name = Player.Name,
@@ -25,18 +25,18 @@ local function _(Player: Player) --[[ Line: 31 | Named "createLocalUserModel" ]]
 	} else nil
 end
 
-local _ = function(p1): boolean --[[ Line: 42 | Named "isRobloxSubscriber" ]]
+local _ = function(p1): boolean
 	-- upvalues: ReadHasRobloxSubscriptionLuaEngineFeature (copy)
 	return ReadHasRobloxSubscriptionLuaEngineFeature and (p1 ~= nil and p1.HasRobloxSubscription == true)
 end
 
-local _ = function(p1, p2): boolean --[[ Line: 48 | Named "isSameLocalUserModel" ]]
+local _ = function(p1, p2): boolean
 	return if p1 == nil or p2 == nil then p1 == p2 else p1.id == p2.id and (p1.name == p2.name and p1.displayName == p2.displayName) and p1.membership == p2.membership
 end
 
-local function useLocalUser() --[[ Line: 56 ]]
+local function useLocalUser()
 	-- upvalues: ReactModule (copy), Players (copy), ReadHasRobloxSubscriptionLuaEngineFeature (copy), List (copy)
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 57 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 		-- upvalues: Players (upval)
 		local LocalPlayer = Players.LocalPlayer
 		
@@ -47,17 +47,17 @@ local function useLocalUser() --[[ Line: 56 ]]
 			membership = LocalPlayer.MembershipType
 		} else nil
 	end)
-	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(function(): boolean --[[ Line: 60 ]]
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(function(): boolean
 		-- upvalues: Players (upval), ReadHasRobloxSubscriptionLuaEngineFeature (upval)
 		local LocalPlayer = Players.LocalPlayer
 		
 		return ReadHasRobloxSubscriptionLuaEngineFeature and (LocalPlayer ~= nil and LocalPlayer.HasRobloxSubscription == true)
 	end)
-	ReactModule.useEffect(function() --[[ Line: 64 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy), ReadHasRobloxSubscriptionLuaEngineFeature (upval), List (upval), Players (upval)
 		local Connections = {}
 		
-		local function listenToPlayer(Player: Player) --[[ Line: 67 ]]
+		local function listenToPlayer(Player: Player)
 			-- upvalues: Connections (copy), UseStateResult2 (upval), UseStateResult2_1 (upval), ReadHasRobloxSubscriptionLuaEngineFeature (upval), List (upval)
 			for _, connection in Connections do
 				connection:Disconnect()
@@ -73,9 +73,9 @@ local function useLocalUser() --[[ Line: 56 ]]
 			
 			if Player then
 				for _, PropertyName in List do
-					table.insert(Connections, Player:GetPropertyChangedSignal(PropertyName):Connect(function() --[[ Line: 80 ]]
+					table.insert(Connections, Player:GetPropertyChangedSignal(PropertyName):Connect(function()
 						-- upvalues: UseStateResult2 (upval), Player (copy), UseStateResult2_1 (upval), ReadHasRobloxSubscriptionLuaEngineFeature (upval)
-						UseStateResult2(function(p1) --[[ Line: 81 ]]
+						UseStateResult2(function(p1)
 							-- upvalues: Player (upval)
 							local Config = if Player then {
 								id = tostring(Player.UserId),
@@ -93,13 +93,13 @@ local function useLocalUser() --[[ Line: 56 ]]
 			end
 		end
 		
-		local Connection = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function() --[[ Line: 94 ]]
+		local Connection = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
 			-- upvalues: listenToPlayer (copy), Players (upval)
 			listenToPlayer(Players.LocalPlayer)
 		end)
 		listenToPlayer(Players.LocalPlayer)
 		
-		return function() --[[ Line: 99 ]]
+		return function()
 			-- upvalues: Connection (copy), Connections (copy)
 			Connection:Disconnect()
 			
@@ -112,7 +112,7 @@ local function useLocalUser() --[[ Line: 56 ]]
 	return UseStateResult, UseStateResult1
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 110 | Named "UserProfileRow" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: useLocalUser (copy), ReactModule (copy), View (copy), ProfileCardModule (copy), FFlagEnableBlackbirdCheck (copy), FFlagFlyoutSidePanelUseProfileFrameThumbnail (copy), UnibarListModule (copy)
 	local UseLocalUserResult, UseLocalUserResult2 = useLocalUser()
 	

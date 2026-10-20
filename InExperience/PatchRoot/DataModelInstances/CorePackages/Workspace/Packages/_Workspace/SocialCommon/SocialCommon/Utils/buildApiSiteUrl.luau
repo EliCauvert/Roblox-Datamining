@@ -1,5 +1,5 @@
 ﻿local ContentProvider = game:GetService("ContentProvider")
-local _, _, v1 = (function() --[[ Line: 4 | Named "parseBaseUrlInformation" ]]
+local _, _, v1 = (function()
 	-- upvalues: ContentProvider (copy)
 	local BaseUrl = ContentProvider.BaseUrl
 	
@@ -15,7 +15,7 @@ local _, _, v1 = (function() --[[ Line: 4 | Named "parseBaseUrlInformation" ]]
 	return BaseUrl, BaseUrl:sub(EndIndex + 1, StartIndex - 1), (BaseUrl:sub(EndIndex1 + 1))
 end)()
 
-return function(p1): string --[[ Line: 34 ]]
+return function(p1): string
 	-- upvalues: v1 (copy)
 	assert(type(p1) == "string", "siteName must be a string")
 	

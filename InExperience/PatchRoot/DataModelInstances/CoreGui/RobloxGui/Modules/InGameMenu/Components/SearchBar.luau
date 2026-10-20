@@ -33,11 +33,11 @@ SearchBar.defaultProps = {
 	size = UDim2.fromScale(1, 1)
 }
 
-function SearchBar.init(p1) --[[ Line: 54 ]]
+function SearchBar.init(p1)
 	-- upvalues: Roact (copy)
 	p1.textboxRef = Roact.createRef()
 	
-	function p1.onAbsoluteSizeChanged(Frame: Frame) --[[ Line: 57 ]]
+	function p1.onAbsoluteSizeChanged(Frame: Frame)
 		-- upvalues: p1 (copy)
 		local Flag = false
 		
@@ -54,35 +54,35 @@ function SearchBar.init(p1) --[[ Line: 54 ]]
 		end
 	end
 	
-	function p1.searchTextChanged(p2) --[[ Line: 78 ]]
+	function p1.searchTextChanged(p2)
 		-- upvalues: p1 (copy)
 		if p1.props.onTextChanged then
 			p1.props.onTextChanged(p2.Text)
 		end
 	end
 	
-	function p1:searchBoxFocused() --[[ Line: 84 ]]
+	function p1:searchBoxFocused()
 		-- upvalues: p1 (copy)
 		if p1.props.onFocused then
 			p1.props.onFocused()
 		end
 	end
 	
-	function p1.searchCancel() --[[ Line: 90 ]]
+	function p1.searchCancel()
 		-- upvalues: p1 (copy)
 		if p1.props.onCancelled then
 			p1.props.onCancelled()
 		end
 	end
 	
-	function p1.onFocusLost() --[[ Line: 96 ]]
+	function p1.onFocusLost()
 		-- upvalues: p1 (copy)
 		if p1.props.onFocusLost then
 			p1.props.onFocusLost()
 		end
 	end
 	
-	function p1.onTextboxTouchTap() --[[ Line: 102 ]]
+	function p1.onTextboxTouchTap()
 		-- upvalues: p1 (copy)
 		if p1.props.onTextboxTouchTap then
 			p1.props.onTextboxTouchTap()
@@ -90,27 +90,27 @@ function SearchBar.init(p1) --[[ Line: 54 ]]
 	end
 end
 
-function SearchBar.willUpdate(p1, p2) --[[ Line: 109 ]]
+function SearchBar.willUpdate(p1, p2)
 	if p1.props.autoCaptureFocus and p1.props.visible == false and p2.visible then
 		p1:focus()
 	end
 end
 
-function SearchBar.didMount(p1) --[[ Line: 115 ]]
+function SearchBar.didMount(p1)
 	if p1.props.autoCaptureFocus and p1.props.visible then
 		p1:focus()
 	end
 end
 
-function SearchBar.focus(p1) --[[ Line: 121 ]]
+function SearchBar.focus(p1)
 	if p1.textboxRef then
 		p1.textboxRef.current:CaptureFocus()
 	end
 end
 
-function SearchBar.render(p1) --[[ Line: 127 ]]
+function SearchBar.render(p1)
 	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), WithLocalizationModule (copy), Roact (copy), UserInputService (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Icon (copy), IconSize (copy), ImageSetLabel (copy), Images (copy), NormalizeFontFaceFunction (copy)
-	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 128 ]]
+	return WithFoundationOrUIBloxStyleFunction(function(p2)
 		-- upvalues: FoundationFontFaceMigration (upval)
 		return {
 			Tokens = if FoundationFontFaceMigration then p2 else nil,
@@ -132,12 +132,12 @@ function SearchBar.render(p1) --[[ Line: 127 ]]
 				}
 			}
 		}
-	end, function(p2) --[[ Line: 149 ]]
+	end, function(p2)
 		-- upvalues: WithLocalizationModule (upval), p1 (copy), Roact (upval), UserInputService (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Icon (upval), IconSize (upval), ImageSetLabel (upval), Images (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 		return WithLocalizationModule({
 			search = "CoreScripts.InGameMenu.InviteFriends.Search",
 			cancel = "CoreScripts.InGameMenu.Cancel"
-		})(function(p3) --[[ Line: 153 ]]
+		})(function(p3)
 			-- upvalues: p2 (copy), p1 (upval), Roact (upval), UserInputService (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Icon (upval), IconSize (upval), ImageSetLabel (upval), Images (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 			local Body = p2.Font.Body
 			local Body1 = p2.Font.Body
@@ -231,7 +231,7 @@ function SearchBar.render(p1) --[[ Line: 127 ]]
 	end)
 end
 
-return Roact.forwardRef(function(p1, ForwardRef) --[[ Line: 277 ]]
+return Roact.forwardRef(function(p1, ForwardRef)
 	-- upvalues: Roact (copy), SearchBar (copy), Cryo (copy)
 	return Roact.createElement(SearchBar, Cryo.Dictionary.join(p1, { forwardRef = ForwardRef }))
 end)

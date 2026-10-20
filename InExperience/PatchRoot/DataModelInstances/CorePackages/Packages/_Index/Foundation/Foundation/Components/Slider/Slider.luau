@@ -66,7 +66,7 @@ local SelectionGroup = {
 	SelectionBehaviorDown = Enum.SelectionBehavior.Stop
 }
 
-return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]]
+return ReactModule.forwardRef(function(p1, p2)
 	-- upvalues: WithDefaultsModule (copy), config (copy), OrientationModule (copy), SliderTypeModule (copy), UseTokensModule (copy), ReactModule (copy), ControlStateModule (copy), FlagsModule (copy), UseBindableModule (copy), UseLastInputModeModule (copy), ReactUtilsModule (copy), UseSliderVariantsModule (copy), UseSliderCaptureKeysModule (copy), GuiService (copy), VisibilityModule (copy), CalculateSliderStepValueModule (copy), InputModeModule (copy), CalculateSliderFractionModule (copy), GetGuiInputPositionModule (copy), UseSliderDirectionalInputModule (copy), GetSelectionEntryDirectionModule (copy), UsePresentationContextFunction (copy), GetKnobSizeModule (copy), BlendTransparenciesModule (copy), ViewModule (copy), SliderThumbModule (copy), SelectionGroup (copy), CursorTypeModule (copy), CursorComponentModule (copy), PresentationContextModule (copy), config1 (copy), KnobModule (copy), WithCommonPropsModule (copy), ConstantsModule (copy), config2 (copy), config3 (copy), StateLayerAffordanceModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local IsOrientationMatch = WithDefaultsModuleResult.orientation == OrientationModule.Vertical
@@ -95,7 +95,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 	local UseRefResult2 = if FlagsModule.FoundationSliderCapture then ReactModule.useRef(false) else nil
 	local UseRefResult3 = ReactModule.useRef(false)
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
-	local MapResult = UseBindableModule(Value):map(function(Value: number): number --[[ Line: 163 ]]
+	local MapResult = UseBindableModule(Value):map(function(Value: number): number
 		-- upvalues: WithDefaultsModuleResult (copy)
 		return (math.clamp(Value, WithDefaultsModuleResult.range.Min, WithDefaultsModuleResult.range.Max))
 	end)
@@ -104,7 +104,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 	local UseRefResult5 = ReactModule.useRef(0)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UDim2.new())
 	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(UDim2.new())
-	local UseResult = ReactModule.useCallback(function(YScale: number) --[[ Line: 174 ]]
+	local UseResult = ReactModule.useCallback(function(YScale: number)
 		-- upvalues: IsOrientationMatch (copy), UseBindingResult2 (copy), UseBindingResult2_1 (copy)
 		if IsOrientationMatch then
 			UseBindingResult2(UDim2.fromScale(0, YScale - 1))
@@ -119,14 +119,14 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 	local UseRefResult6 = ReactModule.useRef(0)
 	local UseLastInputModeModuleResult = UseLastInputModeModule()
 	local UseRefResult7 = ReactModule.useRef(nil)
-	ReactModule.useImperativeHandle(p2, function() --[[ Line: 188 ]]
+	ReactModule.useImperativeHandle(p2, function()
 		-- upvalues: UseRefResult7 (copy)
 		return UseRefResult7.current
 	end, {})
 	local UseBindingResult3, UseBindingResult2_2 = ReactModule.useBinding(nil)
 	local UseComposedRefResult = ReactUtilsModule.useComposedRef(UseRefResult7, UseBindingResult2_2)
 	local UseSliderVariantsModuleResult = UseSliderVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size, WithDefaultsModuleResult.variant, IsOrientationMatch)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 197 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseStateResult3 (copy), UseSliderVariantsModuleResult (copy), UseStateResult1 (copy), IsTypeMatch (copy)
 		return if UseStateResult3 then if UseStateResult1 and not IsTypeMatch then UseSliderVariantsModuleResult.knob.dragStyle else UseSliderVariantsModuleResult.knob.style else {
 			Transparency = 1,
@@ -139,7 +139,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 		IsTypeMatch
 	})
 	local IsUseStateResultMatch = UseStateResult == ControlStateModule.Selected or (UseStateResult == ControlStateModule.SelectedPressed or FlagsModule.FoundationSliderCapture and v1)
-	local UseResult1 = if FlagsModule.FoundationSliderCapture then ReactModule.useCallback(function() --[[ Line: 210 ]]
+	local UseResult1 = if FlagsModule.FoundationSliderCapture then ReactModule.useCallback(function()
 		-- upvalues: v1 (ref), IsTypeMatch (copy), Callback1 (ref), v2 (ref), Callback (ref)
 		if not v1 then
 			Callback(true)
@@ -154,15 +154,15 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 		UseSliderCaptureKeysModule(IsUseStateResultMatch and not WithDefaultsModuleResult.isDisabled, UseResult1)
 	end
 	if FlagsModule.FoundationSliderCapture then
-		ReactModule.useEffect(function() --[[ Line: 225 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: WithDefaultsModuleResult (copy), Callback (ref)
 			if WithDefaultsModuleResult.isDisabled then
 				Callback(false)
 			end
 		end, { WithDefaultsModuleResult.isDisabled })
-		ReactModule.useEffect(function() --[[ Line: 231 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: GuiService (upval), UseRefResult7 (copy), UseRefResult (copy), UseRefResult1 (copy)
-			local function redirectDragSelection() --[[ Line: 232 ]]
+			local function redirectDragSelection()
 				-- upvalues: GuiService (upval), UseRefResult7 (upval), UseRefResult (upval), UseRefResult1 (upval)
 				local SelectedObject = GuiService.SelectedObject
 				
@@ -178,29 +178,29 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 			end
 			local Connection = GuiService:GetPropertyChangedSignal("SelectedObject"):Connect(redirectDragSelection)
 			
-			return function() --[[ Line: 250 ]]
+			return function()
 				-- upvalues: Connection (copy)
 				Connection:Disconnect()
 			end
 		end, {})
-		ReactModule.useEffect(function() --[[ Line: 255 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: v1 (ref), GuiService (upval), UseRefResult1 (copy), Callback (ref)
 			if not v1 then return end
 			GuiService.SelectedObject = UseRefResult1.current
-			local Connection = GuiService:GetPropertyChangedSignal("SelectedObject"):Connect(function() --[[ Line: 261 ]]
+			local Connection = GuiService:GetPropertyChangedSignal("SelectedObject"):Connect(function()
 				-- upvalues: GuiService (upval), UseRefResult1 (upval), Callback (upval)
 				if GuiService.SelectedObject ~= UseRefResult1.current then
 					Callback(false)
 				end
 			end)
 			
-			return function() --[[ Line: 266 ]]
+			return function()
 				-- upvalues: Connection (copy)
 				Connection:Disconnect()
 			end
 		end, { v1 })
 	end
-	ReactModule.useEffect(function() --[[ Line: 273 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: WithDefaultsModuleResult (copy), UseStateResult2_2 (copy), VisibilityModule (upval), IsUseStateResultMatch (copy), UseStateResult1 (copy), UseStateResult (copy), ControlStateModule (upval)
 		if WithDefaultsModuleResult.isDisabled then
 			UseStateResult2_2(false)
@@ -226,13 +226,13 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 		WithDefaultsModuleResult.isDisabled,
 		IsUseStateResultMatch
 	})
-	local UseResult2 = ReactModule.useCallback(function(p3) --[[ Line: 298 ]]
+	local UseResult2 = ReactModule.useCallback(function(p3)
 		-- upvalues: MapResult (copy), OnValueChanged (copy)
 		if p3 ~= MapResult:getValue() and OnValueChanged then
 			OnValueChanged(p3)
 		end
 	end, { MapResult, OnValueChanged })
-	local UseResult3 = ReactModule.useCallback(function(p3) --[[ Line: 306 ]]
+	local UseResult3 = ReactModule.useCallback(function(p3)
 		-- upvalues: UseBindableModuleResult (copy), OnValueChanged1 (copy)
 		local Value = UseBindableModuleResult:getValue()
 		
@@ -240,7 +240,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 			OnValueChanged1(p3)
 		end
 	end, { UseBindableModuleResult, OnValueChanged1 })
-	local UseResult4 = ReactModule.useCallback(function(p3) --[[ Line: 316 ]]
+	local UseResult4 = ReactModule.useCallback(function(p3)
 		-- upvalues: UseStateResult2_3 (copy), FlagsModule (upval), Callback1 (ref), UseStateResult2_1 (copy), WithDefaultsModuleResult (copy)
 		UseStateResult2_3(p3)
 		
@@ -253,7 +253,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 			WithDefaultsModuleResult.onDragStarted()
 		end
 	end, { WithDefaultsModuleResult.onDragStarted })
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 327 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy), WithDefaultsModuleResult (copy)
 		UseStateResult2_1(false)
 		
@@ -261,29 +261,29 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 			WithDefaultsModuleResult.onDragEnded()
 		end
 	end, { WithDefaultsModuleResult.onDragEnded })
-	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 334 ]]
+	local UseResult6 = ReactModule.useCallback(function()
 		-- upvalues: UseResult4 (copy)
 		UseResult4(false)
 	end, { UseResult4 })
-	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 337 ]]
+	local UseResult7 = ReactModule.useCallback(function()
 		-- upvalues: UseResult4 (copy)
 		UseResult4(true)
 	end, { UseResult4 })
-	local UseResult8 = ReactModule.useCallback(function(p3): number --[[ Line: 341 ]]
+	local UseResult8 = ReactModule.useCallback(function(p3): number
 		-- upvalues: WithDefaultsModuleResult (copy)
 		return (math.clamp((p3 - WithDefaultsModuleResult.range.Min) / (WithDefaultsModuleResult.range.Max - WithDefaultsModuleResult.range.Min), 0, 1))
 	end, {
 		WithDefaultsModuleResult.range.Min,
 		WithDefaultsModuleResult.range.Max
 	})
-	local UseResult9 = ReactModule.useCallback(function(p3) --[[ Line: 344 ]]
+	local UseResult9 = ReactModule.useCallback(function(p3)
 		-- upvalues: WithDefaultsModuleResult (copy)
 		return WithDefaultsModuleResult.range.Min + p3 * (WithDefaultsModuleResult.range.Max - WithDefaultsModuleResult.range.Min)
 	end, {
 		WithDefaultsModuleResult.range.Min,
 		WithDefaultsModuleResult.range.Max
 	})
-	local UseResult10 = ReactModule.useCallback(function(p3) --[[ Line: 347 ]]
+	local UseResult10 = ReactModule.useCallback(function(p3)
 		-- upvalues: UseResult9 (copy), WithDefaultsModuleResult (copy), CalculateSliderStepValueModule (upval)
 		local UseResultResult = UseResult9(p3)
 		
@@ -293,7 +293,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 		WithDefaultsModuleResult.step,
 		WithDefaultsModuleResult.range
 	})
-	local UseResult11 = ReactModule.useCallback(function() --[[ Line: 353 ]]
+	local UseResult11 = ReactModule.useCallback(function()
 		-- upvalues: UseResult8 (copy), UseBindableModuleResult (copy), WithDefaultsModuleResult (copy), UseResult9 (copy)
 		local UseResultResult = UseResult8(UseBindableModuleResult:getValue().Max)
 		
@@ -308,7 +308,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 		UseResult9,
 		WithDefaultsModuleResult.range.Min
 	})
-	local UseResult12 = ReactModule.useCallback(function() --[[ Line: 371 ]]
+	local UseResult12 = ReactModule.useCallback(function()
 		-- upvalues: UseResult8 (copy), UseBindableModuleResult (copy), WithDefaultsModuleResult (copy), UseResult9 (copy)
 		local UseResultResult = UseResult8(UseBindableModuleResult:getValue().Min)
 		
@@ -323,17 +323,17 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 		UseResult9,
 		WithDefaultsModuleResult.range.Min
 	})
-	local UseResult13 = ReactModule.useCallback(function(p3) --[[ Line: 388 ]]
+	local UseResult13 = ReactModule.useCallback(function(p3)
 		-- upvalues: UseBindableModuleResult (copy), UseResult3 (copy), UseResult10 (copy)
 		local Value = UseBindableModuleResult:getValue()
 		UseResult3(NumberRange.new(math.min(UseResult10(p3), Value.Max), Value.Max))
 	end, { UseBindableModuleResult, UseResult3, UseResult10 })
-	local UseResult14 = ReactModule.useCallback(function(p3) --[[ Line: 392 ]]
+	local UseResult14 = ReactModule.useCallback(function(p3)
 		-- upvalues: UseBindableModuleResult (copy), UseResult3 (copy), UseResult10 (copy)
 		local Value = UseBindableModuleResult:getValue()
 		UseResult3(NumberRange.new(Value.Min, (math.max(UseResult10(p3), Value.Min))))
 	end, { UseBindableModuleResult, UseResult3, UseResult10 })
-	local UseResult15 = ReactModule.useCallback(function(Value: number, p3) --[[ Line: 397 ]]
+	local UseResult15 = ReactModule.useCallback(function(Value: number, p3)
 		-- upvalues: UseResult12 (copy), UseResult14 (copy), UseResult11 (copy), UseResult13 (copy)
 		if p3 then
 			local UseResultResult, UseResultResult2 = UseResult12()
@@ -345,7 +345,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 			UseResult13((math.clamp(Value, UseResultResult1, UseResultResult2_1)))
 		end
 	end, { UseResult12, UseResult11, UseResult14, UseResult13 })
-	local UseResult16 = ReactModule.useCallback(function(_, p3) --[[ Line: 408 ]]
+	local UseResult16 = ReactModule.useCallback(function(_, p3)
 		-- upvalues: IsTypeMatch (copy), UseLastInputModeModuleResult (copy), InputModeModule (upval), UseRefResult7 (copy), CalculateSliderFractionModule (upval), GetGuiInputPositionModule (upval), IsOrientationMatch (copy), UseBindableModuleResult (copy), UseResult8 (copy), UseRefResult3 (copy), FlagsModule (upval), Callback1 (ref), UseResult4 (copy), UseResult15 (copy)
 		if not IsTypeMatch or UseLastInputModeModuleResult == InputModeModule.Directional or not UseRefResult7.current then return end
 		local SliderFractionModule = CalculateSliderFractionModule(GetGuiInputPositionModule(p3, UseRefResult7.current), UseRefResult7.current, IsOrientationMatch)
@@ -364,7 +364,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 		IsTypeMatch, UseLastInputModeModuleResult, IsOrientationMatch,
 		UseBindableModuleResult, UseResult4, UseResult15, UseResult8
 	})
-	local UseResult17 = ReactModule.useCallback(function(_, p3) --[[ Line: 439 ]]
+	local UseResult17 = ReactModule.useCallback(function(_, p3)
 		-- upvalues: IsTypeMatch (copy), UseLastInputModeModuleResult (copy), InputModeModule (upval), UseRefResult7 (copy), GetGuiInputPositionModule (upval), UseResult15 (copy), CalculateSliderFractionModule (upval), IsOrientationMatch (copy), UseRefResult3 (copy)
 		if IsTypeMatch and UseLastInputModeModuleResult ~= InputModeModule.Directional and UseRefResult7.current then
 			UseResult15(CalculateSliderFractionModule(GetGuiInputPositionModule(p3, UseRefResult7.current), UseRefResult7.current, IsOrientationMatch), UseRefResult3.current)
@@ -377,7 +377,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 		IsOrientationMatch,
 		UseResult15
 	})
-	local UseResult18 = ReactModule.useCallback(function() --[[ Line: 448 ]]
+	local UseResult18 = ReactModule.useCallback(function()
 		-- upvalues: IsTypeMatch (copy), UseResult5 (copy)
 		if IsTypeMatch then
 			UseResult5()
@@ -385,16 +385,16 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 			return
 		end
 	end, { IsTypeMatch, UseResult5 })
-	local UseResult19 = if FlagsModule.FoundationSliderCapture then ReactModule.useCallback(function() --[[ Line: 456 ]]
+	local UseResult19 = if FlagsModule.FoundationSliderCapture then ReactModule.useCallback(function()
 		-- upvalues: Callback (ref), GuiService (upval), UseRefResult (copy)
 		Callback(false)
 		GuiService.SelectedObject = UseRefResult.current
 	end, {}) else nil
 	local NoIsDisabled: boolean = IsUseStateResultMatch and not WithDefaultsModuleResult.isDisabled
-	UseSliderDirectionalInputModule(if FlagsModule.FoundationSliderCapture then NoIsDisabled and v1 else NoIsDisabled and not IsTypeMatch, WithDefaultsModuleResult.step, WithDefaultsModuleResult.range, IsOrientationMatch, (ReactModule.useMemo(function() --[[ Line: 463 ]]
+	UseSliderDirectionalInputModule(if FlagsModule.FoundationSliderCapture then NoIsDisabled and v1 else NoIsDisabled and not IsTypeMatch, WithDefaultsModuleResult.step, WithDefaultsModuleResult.range, IsOrientationMatch, (ReactModule.useMemo(function()
 		-- upvalues: FlagsModule (upval), IsTypeMatch (copy), UseBindableModuleResult (copy), v2 (ref), MapResult (copy), UseResult3 (copy), UseResult2 (copy), WithDefaultsModuleResult (copy), CalculateSliderStepValueModule (upval), UseResult19 (copy)
 		return {
-			getValue = function() --[[ Line: 465 ]]
+			getValue = function()
 				-- upvalues: FlagsModule (upval), IsTypeMatch (upval), UseBindableModuleResult (upval), v2 (upval), MapResult (upval)
 				if FlagsModule.FoundationSliderCapture and IsTypeMatch then
 					local Value = UseBindableModuleResult:getValue()
@@ -404,7 +404,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 					return MapResult:getValue()
 				end
 			end,
-			onStep = if FlagsModule.FoundationSliderCapture then function(p3: number) --[[ Line: 473 ]]
+			onStep = if FlagsModule.FoundationSliderCapture then function(p3: number)
 				-- upvalues: IsTypeMatch (upval), UseBindableModuleResult (upval), v2 (upval), UseResult3 (upval), UseResult2 (upval)
 				if not IsTypeMatch then
 					UseResult2(p3)
@@ -420,7 +420,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 				else
 					UseResult3(NumberRange.new(math.min(p3, Value.Max), Value.Max))
 				end
-			end else function(p3) --[[ Line: 485 ]]
+			end else function(p3)
 				-- upvalues: WithDefaultsModuleResult (upval), CalculateSliderStepValueModule (upval), UseResult2 (upval)
 				UseResult2(if WithDefaultsModuleResult.step then CalculateSliderStepValueModule(p3, WithDefaultsModuleResult.step, WithDefaultsModuleResult.range) else p3)
 			end,
@@ -435,7 +435,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 		if FlagsModule.FoundationSliderCapture then UseResult3 else nil,
 		if FlagsModule.FoundationSliderCapture then UseResult19 else nil
 	})))
-	local UseResult20 = ReactModule.useCallback(function(_, _) --[[ Line: 517 ]]
+	local UseResult20 = ReactModule.useCallback(function(_, _)
 		-- upvalues: UseRefResult4 (copy), WithDefaultsModuleResult (copy), IsOrientationMatch (copy), UseLastInputModeModuleResult (copy), InputModeModule (upval), UseRefResult6 (copy), UseRefResult5 (copy), MapResult (copy), UseResult (copy), UseResult2 (copy), CalculateSliderStepValueModule (upval)
 		local Current = UseRefResult4.current
 		
@@ -459,7 +459,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 		UseLastInputModeModuleResult, MapResult, UseResult2, IsOrientationMatch,
 		UseResult
 	})
-	local UseResult21 = ReactModule.useCallback(function(_, p3) --[[ Line: 560 ]]
+	local UseResult21 = ReactModule.useCallback(function(_, p3)
 		-- upvalues: UseStateResult2_1 (copy), WithDefaultsModuleResult (copy), UseRefResult6 (copy), UseLastInputModeModuleResult (copy), InputModeModule (upval), UseRefResult5 (copy), MapResult (copy), UseResult (copy), UseRefResult7 (copy), CalculateSliderFractionModule (upval), GetGuiInputPositionModule (upval), IsOrientationMatch (copy), UseResult2 (copy), CalculateSliderStepValueModule (upval)
 		UseStateResult2_1(true)
 		
@@ -485,7 +485,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 		WithDefaultsModuleResult.range, UseLastInputModeModuleResult, MapResult,
 		UseResult2, IsOrientationMatch, UseResult
 	})
-	local UseResult22 = ReactModule.useCallback(function(_, _) --[[ Line: 608 ]]
+	local UseResult22 = ReactModule.useCallback(function(_, _)
 		-- upvalues: UseStateResult2_1 (copy), WithDefaultsModuleResult (copy)
 		UseStateResult2_1(false)
 		
@@ -493,7 +493,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 			WithDefaultsModuleResult.onDragEnded()
 		end
 	end, { WithDefaultsModuleResult.onDragEnded })
-	local UseResult23 = ReactModule.useCallback(function(SelectedPressed) --[[ Line: 616 ]]
+	local UseResult23 = ReactModule.useCallback(function(SelectedPressed)
 		-- upvalues: UseStateResult2 (copy), FlagsModule (upval), ControlStateModule (upval), IsTypeMatch (copy), UseRefResult2 (copy), Callback1 (ref), GetSelectionEntryDirectionModule (upval), IsOrientationMatch (copy)
 		UseStateResult2(SelectedPressed)
 		
@@ -507,7 +507,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 		end
 	end, { IsTypeMatch, IsOrientationMatch })
 	local UsePresentationContextResult = UsePresentationContextFunction()
-	ReactModule.useEffect(function() --[[ Line: 629 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult4 (copy), UseRefResult7 (copy)
 		local Current = UseRefResult4.current
 		
@@ -518,7 +518,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 		end
 	end, {})
 	local _UDim2: UDim2 = if IsOrientationMatch then UDim2.fromScale(0.5, 0) else UDim2.fromScale(1, 0.5)
-	local MapResult1 = if WithDefaultsModuleResult.isContained then MapResult:map(function(p3): Vector2 --[[ Line: 639 ]]
+	local MapResult1 = if WithDefaultsModuleResult.isContained then MapResult:map(function(p3): Vector2
 		-- upvalues: WithDefaultsModuleResult (copy), IsOrientationMatch (copy)
 		local MinRatio = (p3 - WithDefaultsModuleResult.range.Min) / (WithDefaultsModuleResult.range.Max - WithDefaultsModuleResult.range.Min)
 		
@@ -526,7 +526,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 	end) else Vector2.new(0.5, 0.5)
 	local _UDim = UDim.new(0, GetKnobSizeModule(UseTokensModuleResult, WithDefaultsModuleResult.size).X.Offset)
 	local _UDim2_1: UDim2 = if IsOrientationMatch then UDim2.new(_UDim, WithDefaultsModuleResult.width) else UDim2.new(WithDefaultsModuleResult.width, _UDim)
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 650 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseSliderVariantsModuleResult (copy), BlendTransparenciesModule (upval), UseStateResult3 (copy)
 		local Stroke = UseSliderVariantsModuleResult.knob.stroke
 		
@@ -537,11 +537,11 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 		}
 	end, { UseSliderVariantsModuleResult, UseStateResult3 })
 	local UseBindingResult4, UseBindingResult2_3 = ReactModule.useBinding(Vector2.zero)
-	local UseResult24 = ReactModule.useCallback(function(Frame) --[[ Line: 666 ]]
+	local UseResult24 = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseBindingResult2_3 (copy)
 		UseBindingResult2_3(Frame.AbsoluteSize)
 	end, {})
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 670 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy), UseStateResult3 (copy), UseStateResult1 (copy), UseStateResult4 (copy), UseSliderVariantsModuleResult (copy), UseMemoResult (copy), UseMemoResult1 (copy)
 		return {
 			size = WithDefaultsModuleResult.size,
@@ -554,7 +554,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 		UseStateResult4, UseSliderVariantsModuleResult.knob.dragStyle, UseMemoResult,
 		UseMemoResult1, UseSliderVariantsModuleResult.knob.hasShadow
 	})
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 694 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy), UseStateResult3 (copy), UseStateResult1 (copy), UseStateResult4 (copy), UseSliderVariantsModuleResult (copy), UseMemoResult (copy), UseMemoResult1 (copy)
 		return {
 			size = WithDefaultsModuleResult.size,
@@ -567,24 +567,24 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 		UseStateResult4, UseSliderVariantsModuleResult.knob.dragStyle, UseMemoResult,
 		UseMemoResult1, UseSliderVariantsModuleResult.knob.hasShadow
 	})
-	local MapResult2 = UseBindableModuleResult:map(function(p3) --[[ Line: 718 ]]
+	local MapResult2 = UseBindableModuleResult:map(function(p3)
 		-- upvalues: UseResult8 (copy)
 		return UseResult8(p3.Min)
 	end)
-	local MapResult3 = UseBindableModuleResult:map(function(p3) --[[ Line: 721 ]]
+	local MapResult3 = UseBindableModuleResult:map(function(p3)
 		-- upvalues: UseResult8 (copy)
 		return UseResult8(p3.Max)
 	end)
 	local NoFoundationSliderCapture = IsUseStateResultMatch and (not FlagsModule.FoundationSliderCapture or v1)
 	local MapResult4 = if FlagsModule.FoundationSliderCapture and IsTypeMatch then if v2 then MapResult3 else MapResult2 else nil
-	local MapResult5 = if FlagsModule.FoundationSliderCapture and IsTypeMatch then if WithDefaultsModuleResult.isContained then MapResult4:map(function(X: number): Vector2 --[[ Line: 730 ]]
+	local MapResult5 = if FlagsModule.FoundationSliderCapture and IsTypeMatch then if WithDefaultsModuleResult.isContained then MapResult4:map(function(X: number): Vector2
 		-- upvalues: IsOrientationMatch (copy)
 		return if IsOrientationMatch then Vector2.new(0.5, 1 - X) else Vector2.new(X, 0.5)
 	end) else Vector2.new(0.5, 0.5) else nil
-	local MapResult6 = if FlagsModule.FoundationSliderCapture and IsTypeMatch then if WithDefaultsModuleResult.knob then UseBindingResult4:map(function(Vector): UDim2 --[[ Line: 737 ]]
+	local MapResult6 = if FlagsModule.FoundationSliderCapture and IsTypeMatch then if WithDefaultsModuleResult.knob then UseBindingResult4:map(function(Vector): UDim2
 		return UDim2.fromOffset(Vector.X, Vector.Y)
 	end) else GetKnobSizeModule(UseTokensModuleResult, WithDefaultsModuleResult.size) else nil
-	local UseResult25 = if FlagsModule.FoundationSliderCapture then ReactModule.useCallback(function(_) --[[ Line: 743 ]] end, {}) else nil
+	local UseResult25 = if FlagsModule.FoundationSliderCapture then ReactModule.useCallback(function(_) end, {}) else nil
 	local IsUseStateResultMatch1 = FlagsModule.FoundationSliderCapture and (UseLastInputModeModuleResult == InputModeModule.Directional and IsUseStateResultMatch)
 	local UIDragDetector = if IsUseStateResultMatch1 then nil elseif IsTypeMatch then ReactModule.createElement("UIDragDetector", {
 		DragStyle = Enum.UIDragDetectorDragStyle.Scriptable,
@@ -616,12 +616,12 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 		Fill = ReactModule.createElement(ViewModule, {
 			tag = UseSliderVariantsModuleResult.fill.tag,
 			AnchorPoint = Vector2.new(0, 0),
-			Position = if IsOrientationMatch then MapResult3:map(function(p3: number): UDim2 --[[ Line: 780 ]]
+			Position = if IsOrientationMatch then MapResult3:map(function(p3: number): UDim2
 				return UDim2.fromScale(0, 1 - p3)
-			end) else MapResult2:map(function(XScale): UDim2 --[[ Line: 783 ]]
+			end) else MapResult2:map(function(XScale): UDim2
 				return UDim2.fromScale(XScale, 0)
 			end),
-			Size = UseBindableModuleResult:map(function(p3): UDim2 --[[ Line: 786 ]]
+			Size = UseBindableModuleResult:map(function(p3): UDim2
 				-- upvalues: UseResult8 (copy), IsOrientationMatch (copy)
 				local UseResultResultDelta = UseResult8(p3.Max) - UseResult8(p3.Min)
 				
@@ -669,7 +669,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 			ZIndex = 3,
 			Size = MapResult6,
 			AnchorPoint = MapResult5,
-			Position = MapResult4:map(function(XScale: number): UDim2 --[[ Line: 834 ]]
+			Position = MapResult4:map(function(XScale: number): UDim2
 				-- upvalues: IsOrientationMatch (copy)
 				return if IsOrientationMatch then UDim2.fromScale(0.5, 1 - XScale) else UDim2.fromScale(XScale, 0.5)
 			end),
@@ -693,7 +693,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 			tag = UseSliderVariantsModuleResult.fill.tag,
 			AnchorPoint = if IsOrientationMatch then Vector2.new(0, 1) else nil,
 			Position = if IsOrientationMatch then UDim2.fromScale(0, 1) else nil,
-			Size = MapResult:map(function(p3): UDim2 --[[ Line: 864 ]]
+			Size = MapResult:map(function(p3): UDim2
 				-- upvalues: WithDefaultsModuleResult (copy), IsOrientationMatch (copy)
 				local MinRatio = (p3 - WithDefaultsModuleResult.range.Min) / (WithDefaultsModuleResult.range.Max - WithDefaultsModuleResult.range.Min)
 				
@@ -702,7 +702,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 139 | Named "Slider" ]
 			testId = `{WithDefaultsModuleResult.testId}--fill`
 		}, {
 			SelectionCursor = if NoFoundationSliderCapture then ReactModule.createElement(ViewModule, {
-				Size = if WithDefaultsModuleResult.knob then UseBindingResult4:map(function(Vector): UDim2 --[[ Line: 875 ]]
+				Size = if WithDefaultsModuleResult.knob then UseBindingResult4:map(function(Vector): UDim2
 					return UDim2.fromOffset(Vector.X, Vector.Y)
 				end) else GetKnobSizeModule(UseTokensModuleResult, WithDefaultsModuleResult.size),
 				AnchorPoint = MapResult1,

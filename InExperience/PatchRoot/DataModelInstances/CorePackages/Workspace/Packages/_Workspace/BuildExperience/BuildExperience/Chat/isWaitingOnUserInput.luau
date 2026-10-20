@@ -5,7 +5,7 @@ local StudioAskUserTool = CreatorAgentChatModule.StudioAskUserTool
 local StudioManageDevProductTool = CreatorAgentChatModule.StudioManageDevProductTool
 local StudioProposePlanTool = CreatorAgentChatModule.StudioProposePlanTool
 
-local function isWaitingOnDevProductApproval(p1, Tbl): boolean --[[ Line: 15 ]]
+local function isWaitingOnDevProductApproval(p1, Tbl): boolean
 	-- upvalues: StudioManageDevProductTool (copy)
 	local Copy = table.clone(Tbl)
 	while true do
@@ -22,7 +22,7 @@ local function isWaitingOnDevProductApproval(p1, Tbl): boolean --[[ Line: 15 ]]
 	end
 end
 
-return function(p2, p3) --[[ Line: 33 | Named "isWaitingOnUserInput" ]]
+return function(p2, p3)
 	-- upvalues: StudioAskUserTool (copy), StudioProposePlanTool (copy), FFlagBuildExperienceManageDevProductModule (copy), isWaitingOnDevProductApproval (copy)
 	local _, QuestionsInTurnState2 = StudioAskUserTool.findQuestionsInTurnState(p2, p3)
 	

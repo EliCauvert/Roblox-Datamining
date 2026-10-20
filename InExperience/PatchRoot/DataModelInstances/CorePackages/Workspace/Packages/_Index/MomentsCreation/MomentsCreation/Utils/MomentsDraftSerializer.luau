@@ -2,7 +2,7 @@
 local _ = require(MomentsCreation.Parent.MomentsTypes)
 local FFlagMomentsTTSDraftRestoreModule = require(MomentsCreation.Flags.FFlagMomentsTTSDraftRestore)
 
-local function _(Vector) --[[ Line: 91 | Named "encodeUDim2" ]]
+local function _(Vector)
 	return {
 		xScale = Vector.X.Scale,
 		xOffset = Vector.X.Offset,
@@ -11,11 +11,11 @@ local function _(Vector) --[[ Line: 91 | Named "encodeUDim2" ]]
 	}
 end
 
-local _ = function(p1) --[[ Line: 100 | Named "encodeColor3" ]]
+local _ = function(p1)
 	return { r = p1.R, g = p1.G, b = p1.B }
 end
 
-local function encodeTextOverlay(p1) --[[ Line: 104 ]]
+local function encodeTextOverlay(p1)
 	local TextOverlayStyle = p1.textOverlayStyle
 	local Position = p1.position
 	local FontColor = TextOverlayStyle.fontColor
@@ -40,7 +40,7 @@ local function encodeTextOverlay(p1) --[[ Line: 104 ]]
 	}
 end
 
-local _ = function(p1) --[[ Line: 121 | Named "encodeStickerOverlay" ]]
+local _ = function(p1)
 	local Position = p1.position
 	
 	return {
@@ -58,7 +58,7 @@ local _ = function(p1) --[[ Line: 121 | Named "encodeStickerOverlay" ]]
 	}
 end
 
-local _ = function(Voice) --[[ Line: 132 | Named "encodeVoice" ]]
+local _ = function(Voice)
 	return {
 		text = Voice.text,
 		voiceId = Voice.voiceId,
@@ -66,17 +66,17 @@ local _ = function(Voice) --[[ Line: 132 | Named "encodeVoice" ]]
 	}
 end
 
-local function decodeUDim2(Position) --[[ Line: 186 ]]
+local function decodeUDim2(Position)
 	return if type(Position) == "table" and (type(Position.xScale) == "number" and type(Position.xOffset) == "number" and type(Position.yScale) == "number" and type(Position.yOffset) == "number") then UDim2.new(Position.xScale, Position.xOffset, Position.yScale, Position.yOffset) else nil
 end
 
-local _ = function(p1) --[[ Line: 202 | Named "decodeColor3" ]]
+local _ = function(p1)
 	return if type(p1) == "table" and (type(p1.r) == "number" and type(p1.g) == "number" and type(p1.b) == "number") then Color3.new(p1.r, p1.g, p1.b) else nil
 end
 
-local _ = function(p1, p2) --[[ Line: 213 | Named "safeDecodeEnum" ]]
+local _ = function(p1, p2)
 	if type(p2) == "string" then
-		local Success, Result = pcall(function() --[[ Line: 217 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p1 (copy), p2 (copy)
 			return p1[p2]
 		end)
@@ -87,7 +87,7 @@ local _ = function(p1, p2) --[[ Line: 213 | Named "safeDecodeEnum" ]]
 	end
 end
 
-local function decodeTextOverlay(p1) --[[ Line: 223 ]]
+local function decodeTextOverlay(p1)
 	-- upvalues: decodeUDim2 (copy)
 	if type(p1) ~= "table" or type(p1.textOverlayStyle) ~= "table" then
 		return nil
@@ -99,7 +99,7 @@ local function decodeTextOverlay(p1) --[[ Line: 223 ]]
 	local v1 = nil
 	
 	if type(TextOverlayStyleFont) == "string" then
-		local Success, Result = pcall(function() --[[ Line: 217 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: _Font (copy), TextOverlayStyleFont (copy)
 			return _Font[TextOverlayStyleFont]
 		end)
@@ -114,7 +114,7 @@ local function decodeTextOverlay(p1) --[[ Line: 223 ]]
 	local TextXAlignment2 = nil
 	
 	if type(TextXAlignment1) == "string" then
-		local Success1, Result1 = pcall(function() --[[ Line: 217 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: TextXAlignment (copy), TextXAlignment1 (copy)
 			return TextXAlignment[TextXAlignment1]
 		end)
@@ -137,7 +137,7 @@ local function decodeTextOverlay(p1) --[[ Line: 223 ]]
 	} else nil
 end
 
-local function decodeStickerOverlay(p1) --[[ Line: 265 ]]
+local function decodeStickerOverlay(p1)
 	-- upvalues: decodeUDim2 (copy)
 	if type(p1) == "table" then
 		local DecodeUDimResult = decodeUDim2(p1.position)
@@ -155,15 +155,15 @@ local function decodeStickerOverlay(p1) --[[ Line: 265 ]]
 	end
 end
 
-local function decodeTrim(Trim) --[[ Line: 299 ]]
+local function decodeTrim(Trim)
 	return if type(Trim) == "table" and (type(Trim.startTime) == "number" and type(Trim.endTime) == "number") then { startTime = Trim.startTime, endTime = Trim.endTime } else nil
 end
 
-local function decodeMusic(Music) --[[ Line: 314 ]]
+local function decodeMusic(Music)
 	return if type(Music) == "table" and (type(Music.assetId) == "number" and type(Music.startTime) == "number") then { assetId = Music.assetId, startTime = Music.startTime } else nil
 end
 
-local function decodeVoice(Voice) --[[ Line: 329 ]]
+local function decodeVoice(Voice)
 	return if type(Voice) == "table" and (type(Voice.text) == "string" and Voice.text ~= "" and type(Voice.voiceId) == "number" and type(Voice.startTime) == "number") then {
 		text = Voice.text,
 		voiceId = Voice.voiceId,
@@ -172,7 +172,7 @@ local function decodeVoice(Voice) --[[ Line: 329 ]]
 end
 
 return {
-	serialize = function(p1) --[[ Line: 140 ]]
+	serialize = function(p1)
 		-- upvalues: encodeTextOverlay (copy), FFlagMomentsTTSDraftRestoreModule (copy)
 		local Edits = p1.edits
 		local Edits1 = { trim = Edits.trim, music = Edits.music }
@@ -226,7 +226,7 @@ return {
 			lastSaveTime = p1.lastSaveTime
 		}
 	end,
-	deserialize = function(p2) --[[ Line: 350 ]]
+	deserialize = function(p2)
 		-- upvalues: decodeTrim (copy), decodeMusic (copy), decodeTextOverlay (copy), decodeStickerOverlay (copy), FFlagMomentsTTSDraftRestoreModule (copy), decodeVoice (copy)
 		if type(p2) ~= "table" then
 			return nil
@@ -241,7 +241,7 @@ return {
 		local CaptureType2 = nil
 		
 		if type(CaptureType1) == "string" then
-			local Success, Result = pcall(function() --[[ Line: 217 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: CaptureType (copy), CaptureType1 (copy)
 				return CaptureType[CaptureType1]
 			end)

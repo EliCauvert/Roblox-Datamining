@@ -12,7 +12,7 @@ local IsMakeupAssetTypeModule = require(AvatarExperienceCommon.Utils.isMakeupAss
 local FFlagAXOutfitPageRevamp = require(Parent.AvatarExperienceFlags).FFlagAXOutfitPageRevamp
 local GetHumanoidDescriptionFromStateForOutfitTypeModule = require(AvatarExperienceCommon.Utils.Humanoid.getHumanoidDescriptionFromStateForOutfitType)
 
-return function(p1) --[[ Line: 21 ]]
+return function(p1)
 	-- upvalues: FFlagAXOutfitPageRevamp (copy), GetHumanoidDescriptionFromStateForOutfitTypeModule (copy), ASSETTYPETOACCESSORYTYPE (copy), CreateHumanoidDescriptionAccessoryInfoModule (copy), ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROP (copy), ASSETTYPENAMETOIDSTRING (copy), IsMakeupAssetTypeModule (copy), MutedErrorFunction (copy), SetMakeupDescriptionsModule (copy), HUMANOIDDESCRIPTIONSCALETONAME (copy), SetHumanoidDescriptionColorsFromBodyColor3sModule (copy)
 	local HumanoidDescriptionFromStateForOutfitTypeModule = nil
 	if FFlagAXOutfitPageRevamp then

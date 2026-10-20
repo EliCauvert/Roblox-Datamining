@@ -1,46 +1,46 @@
-﻿return function(p1) --[[ Line: 1 | Named "ChatPolicies" ]]
+﻿return function(p1)
 	return {
-		getChatConversationHeaderGroupDetails = function() --[[ Line: 3 ]]
+		getChatConversationHeaderGroupDetails = function()
 			-- upvalues: p1 (copy)
 			return p1.ChatConversationHeaderGroupDetails or false
 		end,
-		getChatHeaderSearch = function() --[[ Line: 6 ]]
+		getChatHeaderSearch = function()
 			-- upvalues: p1 (copy)
 			return p1.ChatHeaderSearch or false
 		end,
-		getChatHeaderCreateChatGroup = function() --[[ Line: 9 ]]
+		getChatHeaderCreateChatGroup = function()
 			-- upvalues: p1 (copy)
 			return p1.ChatHeaderCreateChatGroup or false
 		end,
-		getChatHeaderHomeButton = function() --[[ Line: 12 ]]
+		getChatHeaderHomeButton = function()
 			-- upvalues: p1 (copy)
 			return p1.ChatHeaderHomeButton or false
 		end,
-		getChatHeaderNotifications = function() --[[ Line: 15 ]]
+		getChatHeaderNotifications = function()
 			-- upvalues: p1 (copy)
 			return p1.ChatHeaderNotifications or false
 		end,
-		getChatPlayTogether = function() --[[ Line: 18 ]]
+		getChatPlayTogether = function()
 			-- upvalues: p1 (copy)
 			return p1.ChatPlayTogether or false
 		end,
-		getChatShareGameToChatFromChat = function() --[[ Line: 21 ]]
+		getChatShareGameToChatFromChat = function()
 			-- upvalues: p1 (copy)
 			return p1.ChatShareGameToChatFromChat or false
 		end,
-		getChatTapConversationThumbnail = function() --[[ Line: 24 ]]
+		getChatTapConversationThumbnail = function()
 			-- upvalues: p1 (copy)
 			return p1.ChatTapConversationThumbnail or false
 		end,
-		getChatReportingDisabled = function() --[[ Line: 27 ]]
+		getChatReportingDisabled = function()
 			-- upvalues: p1 (copy)
 			return p1.ChatReportingDisabled or false
 		end,
-		getChatViewProfileOption = function() --[[ Line: 30 ]]
+		getChatViewProfileOption = function()
 			-- upvalues: p1 (copy)
 			return p1.ChatViewProfileOption or false
 		end,
-		getContactImporterEnabled = function() --[[ Line: 33 ]]
+		getContactImporterEnabled = function()
 			-- upvalues: p1 (copy)
 			return p1.ContactImporterEnabled or false
 		end

@@ -25,15 +25,15 @@ local NetworkContext = require(Parent.EconomyCommonCoreScriptHooks).NetworkConte
 local FFlagAXAddPlusUpsellToBulkPurchaseModule = require(BulkPurchaseApp.Flags.FFlagAXAddPlusUpsellToBulkPurchase)
 local Style = { themeName = "dark", fontName = "gotham" }
 
-local function _() --[[ Line: 37 | Named "createFocusNavigationService" ]]
+local function _()
 	-- upvalues: ReactFocusNavigationModule (copy)
 	return ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
 end
 
-local function createNetworkImpl() --[[ Line: 41 ]]
+local function createNetworkImpl()
 	-- upvalues: HttpRequestModule (copy)
 	return HttpRequestModule.config({
-		requestFunction = function(p1, p2, p3) --[[ Line: 43 ]]
+		requestFunction = function(p1, p2, p3)
 			-- upvalues: HttpRequestModule (upval)
 			return (HttpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3))
 		end,
@@ -42,12 +42,12 @@ local function createNetworkImpl() --[[ Line: 41 ]]
 	})
 end
 
-local _ = function() --[[ Line: 52 | Named "createStore" ]]
+local _ = function()
 	-- upvalues: RoduxModule (copy), BulkPurchaseReducerModule (copy)
 	return RoduxModule.Store.new(BulkPurchaseReducerModule, nil, { RoduxModule.makeThunkMiddleware() })
 end
 
-return function() --[[ Line: 58 | Named "renderBulkPurchaseApp" ]]
+return function()
 	-- upvalues: CoreGui (copy), RoduxModule (copy), BulkPurchaseReducerModule (copy), createNetworkImpl (copy), ReactFocusNavigationModule (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), AppStyleProvider (copy), Style (copy), NetworkContext (copy), RoactRoduxModule (copy), DesignTokenProvider (copy), SelectionCursorProvider (copy), CursorProvider (copy), Provider (copy), FFlagAXAddPlusUpsellToBulkPurchaseModule (copy), UniversalAppPolicy (copy), AppFeaturePolicies (copy), BulkPurchaseAppModule (copy), ReactRobloxModule (copy)
 	local BulkPurchaseApp = Instance.new("Folder")
 	BulkPurchaseApp.Name = "BulkPurchaseApp"

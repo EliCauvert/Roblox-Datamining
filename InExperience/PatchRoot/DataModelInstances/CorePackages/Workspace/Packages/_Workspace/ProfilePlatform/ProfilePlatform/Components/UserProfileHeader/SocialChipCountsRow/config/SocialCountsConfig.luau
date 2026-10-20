@@ -12,10 +12,10 @@ return {
 			textKey = TextKeysModule.MutualsText,
 			singleTextKey = TextKeysModule.MutualText,
 			enabledKey = SocialCountEnableKeys.IsMutualFriendsCountEnabled,
-			getIsDisabled = function(_, _, p1): boolean --[[ Line: 29 ]]
+			getIsDisabled = function(_, _, p1): boolean
 				return not p1
 			end,
-			getLeading = function(p1) --[[ Line: 35 ]]
+			getLeading = function(p1)
 				-- upvalues: AvatarGroupType (copy)
 				local Avatars = {
 					table.unpack(p1.mutualFriendIds, 1, (math.min(2, #p1.mutualFriendIds)))
@@ -36,7 +36,7 @@ return {
 			textKey = TextKeysModule.Friends,
 			singleTextKey = TextKeysModule.Friend,
 			enabledKey = SocialCountEnableKeys.IsFriendsCountEnabled,
-			getIsDisabled = function(p1, p2, p3): boolean --[[ Line: 56 ]]
+			getIsDisabled = function(p1, p2, p3): boolean
 				-- upvalues: FFlagEnableSocialTabsPage (copy)
 				return not p3 or not FFlagEnableSocialTabsPage and (not p2 and not p1)
 			end
@@ -46,7 +46,7 @@ return {
 			textKey = TextKeysModule.Followers,
 			singleTextKey = TextKeysModule.Follower,
 			enabledKey = SocialCountEnableKeys.IsFollowersCountEnabled,
-			getIsDisabled = function(p1, _, p2): boolean --[[ Line: 75 ]]
+			getIsDisabled = function(p1, _, p2): boolean
 				return not p2 or not p1
 			end
 		},
@@ -55,7 +55,7 @@ return {
 			textKey = TextKeysModule.Following,
 			singleTextKey = TextKeysModule.Following,
 			enabledKey = SocialCountEnableKeys.IsFollowingsCountEnabled,
-			getIsDisabled = function(p1, _, p2): boolean --[[ Line: 87 ]]
+			getIsDisabled = function(p1, _, p2): boolean
 				return not p2 or not p1
 			end
 		}

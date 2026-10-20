@@ -12,9 +12,9 @@ return {
 	storyRoot = GameInvite,
 	roact = ReactModule,
 	reactRoblox = require(Parent.ReactRoblox),
-	mapStory = function(Callback) --[[ Line: 18 ]]
+	mapStory = function(Callback)
 		-- upvalues: ReactModule (copy), StyleModule (copy), RoactRoduxModule (copy), RoduxModule (copy), GameInviteReducerModule (copy), FoundationModule (copy)
-		return function(p1) --[[ Line: 19 ]]
+		return function(p1)
 			-- upvalues: ReactModule (upval), StyleModule (upval), RoactRoduxModule (upval), RoduxModule (upval), GameInviteReducerModule (upval), FoundationModule (upval), Callback (copy)
 			return ReactModule.createElement(StyleModule.StyleProviderWithDefaultTheme, { withDarkTheme = true }, {
 				StoreProvider = ReactModule.createElement(RoactRoduxModule.StoreProvider, {

@@ -3,7 +3,7 @@ local DashModule = require(Parent.Dash)
 local BaseTextElementModule = require(script:FindFirstAncestor("InlineLayoutElements").BaseTextElement)
 local Text = require(Parent.Foundation).Text
 
-function mapProps(p1) --[[ Line: 17 ]]
+function mapProps(p1)
 	-- upvalues: DashModule (copy)
 	return DashModule.join(DashModule.omit(p1, { "id", "EngineTags" }), {
 		TextXAlignment = Enum.TextXAlignment.Left,
@@ -13,7 +13,7 @@ function mapProps(p1) --[[ Line: 17 ]]
 end
 
 return {
-	new = function(p1) --[[ Line: 27 ]]
+	new = function(p1)
 		-- upvalues: BaseTextElementModule (copy), Text (copy)
 		return BaseTextElementModule.new(Text, p1, mapProps)
 	end

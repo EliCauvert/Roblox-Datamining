@@ -6,11 +6,11 @@ local config = {
 	[UserModel.PresenceType.OFFLINE] = 0
 }
 
-local function _(p1, p2): boolean --[[ Line: 12 | Named "useLastOnlineForSort" ]]
+local function _(p1, p2): boolean
 	return typeof(p1) == "number" and typeof(p2) == "number" and p1 ~= p2
 end
 
-local _ = function(p1) --[[ Line: 16 | Named "getFriendWeight" ]]
+local _ = function(p1)
 	-- upvalues: config (copy), UserModel (copy)
 	local Entry = if p1 and p1.presence then config[p1.presence] else nil
 	
@@ -20,9 +20,9 @@ local _ = function(p1) --[[ Line: 16 | Named "getFriendWeight" ]]
 	return Entry
 end
 
-return function(p1) --[[ Line: 27 ]]
+return function(p1)
 	-- upvalues: config (copy), UserModel (copy)
-	return function(p2, p3): boolean --[[ Line: 28 ]]
+	return function(p2, p3): boolean
 		-- upvalues: config (upval), UserModel (upval), p1 (copy)
 		local Entry = if p2 and p2.presence then config[p2.presence] else nil
 		

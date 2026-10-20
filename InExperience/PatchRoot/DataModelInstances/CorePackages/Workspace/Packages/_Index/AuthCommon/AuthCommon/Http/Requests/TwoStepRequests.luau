@@ -8,11 +8,11 @@ local GetAppFeaturePoliciesFunction = require(Parent.UniversalAppPolicy).getAppF
 local FFlagEnableLuaAccountSwitch = require(Parent.SharedFlags).FFlagEnableLuaAccountSwitch
 
 return {
-	configuration = function(Callback, p1) --[[ Line: 24 ]]
+	configuration = function(Callback, p1)
 		-- upvalues: Url (copy)
 		return Callback(string.format("%sv1/users/%d/configuration", Url.TWOSTEPVERIFICATION_URL, p1), "GET")
 	end,
-	resend = function(Callback, Username, Ticket) --[[ Line: 30 ]]
+	resend = function(Callback, Username, Ticket)
 		-- upvalues: Url (copy), HttpService (copy)
 		return Callback(string.format("%sv1/twostepverification/resend", Url.AUTH_URL), "POST", {
 			maxRetryCount = 0,
@@ -23,7 +23,7 @@ return {
 			})
 		})
 	end,
-	verify = function(Callback, Username, Ticket, Code, RememberDevice) --[[ Line: 41 ]]
+	verify = function(Callback, Username, Ticket, Code, RememberDevice)
 		-- upvalues: Url (copy), HttpService (copy)
 		return Callback(string.format("%sv1/twostepverification/verify", Url.AUTH_URL), "POST", {
 			maxRetryCount = 0,
@@ -36,7 +36,7 @@ return {
 			})
 		})
 	end,
-	login = function(Callback, p1, ChallengeId, VerificationToken, RememberDevice) --[[ Line: 54 ]]
+	login = function(Callback, p1, ChallengeId, VerificationToken, RememberDevice)
 		-- upvalues: Url (copy), GetAppFeaturePoliciesFunction (copy), HttpService (copy), FFlagEnableLuaAccountSwitch (copy), AppStorageUtilitiesModule (copy), ConsoleAuthRequestWrapperFunction (copy)
 		local Formatted = string.format("%sv3/users/%s/two-step-verification/login", Url.AUTH_URL, p1)
 		local AppFeaturePolicies = GetAppFeaturePoliciesFunction()

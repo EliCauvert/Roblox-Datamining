@@ -3,7 +3,7 @@ local ConstantsModule = require(script.Parent.Parent.Constants)
 local HighlightHeight = ConstantsModule.TabRowFormatting.HighlightHeight
 local FrameHeight = ConstantsModule.TabRowFormatting.FrameHeight
 
-return function(p1) --[[ Line: 10 | Named "TabRowButton" ]]
+return function(p1)
 	-- upvalues: ConstantsModule (copy), RoactModule (copy), FrameHeight (copy), HighlightHeight (copy)
 	local Index = p1.index
 	local IsSelected = p1.isSelected
@@ -21,7 +21,7 @@ return function(p1) --[[ Line: 10 | Named "TabRowButton" ]]
 		BackgroundColor3 = ConstantsModule.Color.UnselectedGray,
 		BorderSizePixel = 0,
 		LayoutOrder = p1.layoutOrder,
-		[RoactModule.Event.Activated] = function(_) --[[ Line: 38 ]]
+		[RoactModule.Event.Activated] = function(_)
 			-- upvalues: OnTabButtonClickedFunction (copy), Index (copy)
 			OnTabButtonClickedFunction(Index)
 		end

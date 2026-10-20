@@ -1,12 +1,12 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("MomentsCommon").Parent.React)
 
-return function() --[[ Line: 6 ]]
+return function()
 	-- upvalues: ReactModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(1e999, 1e999))
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(workspace.CurrentCamera)
-	ReactModule.useEffect(function() --[[ Line: 10 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2_1 (copy), UseStateResult1 (copy), UseStateResult2 (copy)
-		local Connection = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function() --[[ Line: 11 ]]
+		local Connection = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
 			-- upvalues: UseStateResult2_1 (upval)
 			UseStateResult2_1(workspace.CurrentCamera)
 		end)
@@ -14,22 +14,22 @@ return function() --[[ Line: 6 ]]
 		if UseStateResult1 then
 			UseStateResult2(UseStateResult1.ViewportSize)
 		end
-		return function() --[[ Line: 19 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 24 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult1 (copy), UseStateResult2 (copy)
 		if not UseStateResult1 then return end
-		local Connection = UseStateResult1:GetPropertyChangedSignal("ViewportSize"):Connect(function() --[[ Line: 29 ]]
+		local Connection = UseStateResult1:GetPropertyChangedSignal("ViewportSize"):Connect(function()
 			-- upvalues: UseStateResult1 (upval), UseStateResult2 (upval)
 			if UseStateResult1 then
 				UseStateResult2(UseStateResult1.ViewportSize)
 			end
 		end)
 		
-		return function() --[[ Line: 35 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end

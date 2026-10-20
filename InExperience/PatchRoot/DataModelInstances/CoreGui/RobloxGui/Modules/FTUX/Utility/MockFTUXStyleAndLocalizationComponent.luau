@@ -5,7 +5,7 @@ local RenderWithCoreScriptsStyleProviderModule = require(script.Parent.Parent.Pa
 local Localization = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization
 local LocalizationProvider = require(CorePackages.Workspace.Packages.Localization).LocalizationProvider
 
-return function(p1) --[[ Line: 10 ]]
+return function(p1)
 	-- upvalues: RoactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), RenderWithCoreScriptsStyleProviderModule (copy)
 	return RoactModule.createElement(LocalizationProvider, {
 		localization = Localization.new(LocalizationService.RobloxLocaleId)

@@ -9,7 +9,7 @@ local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packa
 local TextButton = UIBloxModule.App.Button.TextButton
 local ReportActionSelection = RoactModule.PureComponent:extend("ReportActionSelection")
 
-local function OnCancelActivated() --[[ Line: 25 ]] end
+local function OnCancelActivated() end
 
 ReportActionSelection.defaultProps = {
 	isMuted = true,
@@ -36,13 +36,13 @@ ReportActionSelection.validateProps = TModule.strictInterface({
 	uiScale = TModule.optional(TModule.number)
 })
 
-function ReportActionSelection.init(DefaultProps) --[[ Line: 53 ]]
-	function DefaultProps.onCancelActivated() --[[ Line: 54 ]]
+function ReportActionSelection.init(DefaultProps)
+	function DefaultProps.onCancelActivated()
 		-- upvalues: DefaultProps (copy)
 		DefaultProps.props.onCancelActivated()
 	end
 	
-	function DefaultProps.onConfirmActivated() --[[ Line: 58 ]]
+	function DefaultProps.onConfirmActivated()
 		-- upvalues: DefaultProps (copy)
 		DefaultProps.props.onConfirmActivated()
 	end
@@ -66,9 +66,9 @@ function ReportActionSelection.init(DefaultProps) --[[ Line: 53 ]]
 	})
 end
 
-function ReportActionSelection.render(DefaultProps) --[[ Line: 82 ]]
+function ReportActionSelection.render(DefaultProps)
 	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), RoactModule (copy), NormalizeFontFaceFunction (copy), TextButton (copy), UIBloxModule (copy)
-	return WithFoundationOrUIBloxStyleFunction(function(p1) --[[ Line: 83 ]]
+	return WithFoundationOrUIBloxStyleFunction(function(p1)
 		-- upvalues: FoundationFontFaceMigration (upval)
 		return {
 			Tokens = if FoundationFontFaceMigration then p1 else nil,
@@ -94,7 +94,7 @@ function ReportActionSelection.render(DefaultProps) --[[ Line: 82 ]]
 				}
 			}
 		}
-	end, function(p1) --[[ Line: 108 ]]
+	end, function(p1)
 		-- upvalues: RoactModule (upval), DefaultProps (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), TextButton (upval), UIBloxModule (upval)
 		local BaseSize = p1.Font.BaseSize
 		

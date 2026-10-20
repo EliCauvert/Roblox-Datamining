@@ -19,11 +19,11 @@ InputBoxWithCharacterCounter.defaultProps = {
 	style = require(SocialLibraries.Components.Style.TestStyle)
 }
 
-function InputBoxWithCharacterCounter.init(p1) --[[ Line: 29 ]]
+function InputBoxWithCharacterCounter.init(p1)
 	-- upvalues: FoundationFontFaceMigration (copy), GetTextBoundsAsyncFunction (copy)
 	p1.state = { inputText = p1.props.initialInputText }
 	
-	function p1.textChangedCallback(InputText) --[[ Line: 34 ]]
+	function p1.textChangedCallback(InputText)
 		-- upvalues: p1 (copy)
 		p1:setState({ inputText = InputText })
 	end
@@ -32,7 +32,7 @@ function InputBoxWithCharacterCounter.init(p1) --[[ Line: 29 ]]
 		p1.isMounted = false
 		p1.measurementId = 0
 		
-		function p1.measureText() --[[ Line: 44 ]]
+		function p1.measureText()
 			-- upvalues: p1 (copy), GetTextBoundsAsyncFunction (upval)
 			local Style = p1.props.style
 			local Text = #p1.state.inputText .. "/" .. p1.props.characterLimit
@@ -45,7 +45,7 @@ function InputBoxWithCharacterCounter.init(p1) --[[ Line: 29 ]]
 				p1.measuredFontSize = ScaledBaseSize
 				p1.measurementId += 1
 				local MeasurementId = p1.measurementId
-				task.spawn(function() --[[ Line: 59 ]]
+				task.spawn(function()
 					-- upvalues: GetTextBoundsAsyncFunction (upval), Text (copy), CaptionSubHeaderFont (copy), ScaledBaseSize (copy), p1 (upval), MeasurementId (copy)
 					local TextBoundsAsync = GetTextBoundsAsyncFunction(Text, CaptionSubHeaderFont, ScaledBaseSize)
 					
@@ -60,7 +60,7 @@ function InputBoxWithCharacterCounter.init(p1) --[[ Line: 29 ]]
 	end
 end
 
-function InputBoxWithCharacterCounter.didMount(p1) --[[ Line: 71 ]]
+function InputBoxWithCharacterCounter.didMount(p1)
 	-- upvalues: FoundationFontFaceMigration (copy)
 	if FoundationFontFaceMigration then
 		p1.isMounted = true
@@ -68,14 +68,14 @@ function InputBoxWithCharacterCounter.didMount(p1) --[[ Line: 71 ]]
 	end
 end
 
-function InputBoxWithCharacterCounter.didUpdate(p1) --[[ Line: 78 ]]
+function InputBoxWithCharacterCounter.didUpdate(p1)
 	-- upvalues: FoundationFontFaceMigration (copy)
 	if FoundationFontFaceMigration then
 		p1.measureText()
 	end
 end
 
-function InputBoxWithCharacterCounter.willUnmount(p1) --[[ Line: 84 ]]
+function InputBoxWithCharacterCounter.willUnmount(p1)
 	-- upvalues: FoundationFontFaceMigration (copy)
 	if FoundationFontFaceMigration then
 		p1.isMounted = false
@@ -83,7 +83,7 @@ function InputBoxWithCharacterCounter.willUnmount(p1) --[[ Line: 84 ]]
 	end
 end
 
-function InputBoxWithCharacterCounter.render(p1) --[[ Line: 91 ]]
+function InputBoxWithCharacterCounter.render(p1)
 	-- upvalues: FoundationFontFaceMigration (copy), Text (copy), Cryo (copy), Roact (copy), CallbackInputBoxModule (copy), NormalizeFontFaceFunction (copy)
 	local Style = p1.props.style
 	local CountInputText = #p1.state.inputText

@@ -9,7 +9,7 @@ local config = {
 	lastUpdated = { 26, 6, 2 }
 }
 
-return function(p1) --[[ Line: 27 | Named "emitRecommendationImpression" ]]
+return function(p1)
 	-- upvalues: config (copy), ConstantsModule (copy), FFlagMomentsRecommendationClientEventTimestampModule (copy)
 	game:GetService("TelemetryService"):LogEvent(config, {
 		standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },

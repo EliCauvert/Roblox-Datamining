@@ -1,4 +1,4 @@
-﻿return function(p1, p2) --[[ Line: 3 ]]
+﻿return function(p1, p2)
 	local P0 = p1 or Vector2.new(0, 0)
 	assert(P0, "")
 	

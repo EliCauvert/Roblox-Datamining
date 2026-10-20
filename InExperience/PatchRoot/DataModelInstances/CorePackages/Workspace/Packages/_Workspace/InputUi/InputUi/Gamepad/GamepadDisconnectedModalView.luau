@@ -13,7 +13,7 @@ local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 local _ = require(script.Parent.GamepadDisconnectTokenMapper)
 local GamepadMessageKeyEngineFeature = game:GetEngineFeature("GamepadMessageKeyEngineFeature")
 
-return function(p1) --[[ Line: 26 ]]
+return function(p1)
 	-- upvalues: UseDesignTokensFunction (copy), GamepadMessageKeyEngineFeature (copy), MemStorageService (copy), UseLocalizationFunction (copy), UserInputService (copy), ReactModule (copy), ImageSetLabel (copy), Images (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local EmphasisColor3 = UseDesignTokensResult.Color.Content.Emphasis.Color3

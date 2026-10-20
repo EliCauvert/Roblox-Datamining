@@ -19,10 +19,10 @@ local config = {
 	actionText = "PLACEHOLDER Action",
 	bodyText = "PLACEHOLDER Body",
 	height = 40,
-	onActivated = function() --[[ Line: 39 ]] end
+	onActivated = function() end
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 42 | Named "ConversationBanner" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseTokensFunction (copy), UseIsInExperienceModule (copy), UseChatPagePaddingModule (copy), UseMemoFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), ReactModule (copy), NormalizeFontFaceFunction (copy), LinkButton (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseStyleResult = UseStyleFunction()
@@ -33,7 +33,7 @@ return ReactModule.memo(function(p1) --[[ Line: 42 | Named "ConversationBanner" 
 	local CaptionBodyFont = Style.Font.CaptionBody.Font
 	local ScaledRelativeSize = Style.Font.CaptionBody.RelativeSize * Style.Font.BaseSize
 	local UseChatPagePaddingModuleResult = UseChatPagePaddingModule()
-	local UseMemoResult = UseMemoFunction(function() --[[ Line: 55 ]]
+	local UseMemoResult = UseMemoFunction(function()
 		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), UnionResult (copy), ScaledRelativeSize (copy), UseTokensResult (copy), Text (upval), CaptionBodyFont (copy)
 		return (if FoundationFontFaceMigration then GetTextSizeFunction(UnionResult.actionText, ScaledRelativeSize + 2, UseTokensResult.Typography.BodySmall.Font, Vector2.new(250, UnionResult.height)) else Text.GetTextBounds(UnionResult.actionText, CaptionBodyFont, ScaledRelativeSize + 2, Vector2.new(250, UnionResult.height))).X
 	end, {

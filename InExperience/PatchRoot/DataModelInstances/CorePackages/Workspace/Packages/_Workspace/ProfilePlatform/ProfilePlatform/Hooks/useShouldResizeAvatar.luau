@@ -8,7 +8,7 @@ local FFlagAXEnableProfileTab = require(Parent.SharedFlags).FFlagAXEnableProfile
 local FFlagProfilePlatformEnableAvatarBackground = require(Parent.SharedFlags).FFlagProfilePlatformEnableAvatarBackground
 local ProfilePlatformMeTabHeroDecoupleAvatarBackground = game:DefineFastFlag("ProfilePlatformMeTabHeroDecoupleAvatarBackground", false)
 
-return function(): boolean --[[ Line: 16 | Named "useShouldResizeAvatar" ]]
+return function(): boolean
 	-- upvalues: FFlagProfilePlatformMeTabMobileProfileHero (copy), FFlagAXEnableProfileTab (copy), ProfilePlatformMeTabHeroDecoupleAvatarBackground (copy), FFlagProfilePlatformEnableAvatarBackground (copy), UseProfileWrapperContextModule (copy), UseProfileFormFactorModule (copy), EnumsModule (copy)
 	if not FFlagProfilePlatformMeTabMobileProfileHero then
 		return false

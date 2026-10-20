@@ -5,7 +5,7 @@ local _ = require(ProfilePlatform.Components.CTARow.Types)
 local ProfileTypes = EnumsModule.ProfileTypes
 
 return {
-	[EnumsModule.ProfileActions.PlayExperience] = function(p1) --[[ Line: 14 ]]
+	[EnumsModule.ProfileActions.PlayExperience] = function(p1)
 		-- upvalues: ButtonVariant (copy), EnumsModule (copy), ProfileTypes (copy)
 		return {
 			variant = ButtonVariant.Emphasis,
@@ -13,7 +13,7 @@ return {
 			isDisabled = not p1.experienceUtilities.isInExperience,
 			text = p1.localized[EnumsModule.ProfileActions.PlayExperience],
 			onActivated = {
-				[ProfileTypes.User] = function() --[[ Line: 21 ]]
+				[ProfileTypes.User] = function()
 					-- upvalues: p1 (copy)
 					p1.experienceUtilities.playExperience()
 				end

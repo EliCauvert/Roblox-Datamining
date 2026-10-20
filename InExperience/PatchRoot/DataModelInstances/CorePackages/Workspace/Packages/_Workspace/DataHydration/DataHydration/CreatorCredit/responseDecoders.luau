@@ -10,11 +10,11 @@ local config1 = {
 	FREE_TRIAL_RESET_PERIOD_MONTHLY = "Monthly"
 }
 
-local function _(p1) --[[ Line: 20 | Named "decodeNumber" ]]
+local function _(p1)
 	return if typeof(p1) == "number" then p1 else typeof(p1) == "string" and tonumber(p1) or 0
 end
 
-local function decodeDailyLimitSettings(LimitSettings) --[[ Line: 30 ]]
+local function decodeDailyLimitSettings(LimitSettings)
 	local LimitSettings1 = if typeof(LimitSettings) == "table" then LimitSettings else {}
 	local LimitSettings2 = if typeof(LimitSettings1.limitSettings) == "table" then LimitSettings1.limitSettings else LimitSettings1
 	local DailyLimit = LimitSettings2.dailyLimit
@@ -26,19 +26,19 @@ local function decodeDailyLimitSettings(LimitSettings) --[[ Line: 30 ]]
 	}
 end
 
-local _ = function(p1) --[[ Line: 40 | Named "decodeQuotaBlockReason" ]]
+local _ = function(p1)
 	-- upvalues: config (copy)
 	return if typeof(p1) == "string" then config[p1] else nil
 end
 
-local _ = function(p1) --[[ Line: 50 | Named "decodeFreeTrialResetPeriod" ]]
+local _ = function(p1)
 	-- upvalues: config1 (copy)
 	return typeof(p1) == "string" and config1[p1] or "Daily"
 end
 
 return {
 	decodeDailyLimitSettings = decodeDailyLimitSettings,
-	decodeQuotaSummary = function(p1) --[[ Line: 57 ]]
+	decodeQuotaSummary = function(p1)
 		-- upvalues: decodeDailyLimitSettings (copy), config (copy), config1 (copy)
 		local T = if typeof(p1) == "table" then p1 else {}
 		local Summary = if typeof(T.summary) == "table" then T.summary else T

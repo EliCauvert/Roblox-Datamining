@@ -3,7 +3,7 @@ local IsVRAppBuildFunction = require(game:GetService("CorePackages").Workspace.P
 local PlatformEnumModule = require(Parent.Enums.PlatformEnum)
 local FTUXConstantsModule = require(Parent.Resources.FTUXConstants)
 
-function IsFTUXExperience(QuestVR): boolean --[[ Line: 10 ]]
+function IsFTUXExperience(QuestVR): boolean
 	-- upvalues: PlatformEnumModule (copy), IsVRAppBuildFunction (copy), FTUXConstantsModule (copy)
 	return QuestVR == PlatformEnumModule.QuestVR and (IsVRAppBuildFunction() and tostring(game.PlaceId) == FTUXConstantsModule[PlatformEnumModule.QuestVR].ExperienceIds.PlaceId)
 end

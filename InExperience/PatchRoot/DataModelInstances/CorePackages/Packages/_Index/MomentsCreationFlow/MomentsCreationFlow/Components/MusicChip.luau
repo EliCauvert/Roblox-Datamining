@@ -8,7 +8,7 @@ local View = FoundationModule.View
 local MusicNote = require(Parent.BuilderIcons).Icon.MusicNote
 local UseMusicInfoModule = require(MomentsCreationFlow.Hooks.useMusicInfo)
 
-return function(p1) --[[ Line: 23 | Named "MusicChip" ]]
+return function(p1)
 	-- upvalues: UseMusicInfoModule (copy), ReactModule (copy), View (copy), Icon (copy), MusicNote (copy), FoundationModule (copy), Text (copy)
 	return ReactModule.createElement(View, {
 		tag = "align-x-center align-y-center auto-x bg-over-media-0 gap-medium padding-x-medium padding-y-xsmall radius-circle row size-0-800",

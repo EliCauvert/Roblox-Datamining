@@ -8,7 +8,7 @@ local list = {
 		descriptionActive = "Feature.InExperienceIntervention.Description.ChatSuspension.Days",
 		descriptionExpired = "Feature.InExperienceIntervention.Description.ChatSuspension.Day.Expired",
 		unitInSeconds = 86400,
-		descriptionActiveFormatFunction = function(p1: number): string --[[ Line: 20 ]]
+		descriptionActiveFormatFunction = function(p1: number): string
 			return (tostring((math.ceil(p1 / 86400))))
 		end
 	},
@@ -19,7 +19,7 @@ local list = {
 		descriptionActive = "Feature.InExperienceIntervention.Description.ChatSuspension.Hours",
 		descriptionExpired = "Feature.InExperienceIntervention.Description.ChatSuspension.Hour.Expired",
 		unitInSeconds = 3600,
-		descriptionActiveFormatFunction = function(p1) --[[ Line: 31 ]]
+		descriptionActiveFormatFunction = function(p1)
 			-- upvalues: LocalizationService (copy)
 			return DateTime.fromUnixTimestamp(p1):FormatUniversalTime("HH:mm", LocalizationService.RobloxLocaleId)
 		end
@@ -31,14 +31,14 @@ local list = {
 		descriptionActive = "Feature.InExperienceIntervention.Description.ChatSuspension.Minutes",
 		descriptionExpired = "Feature.InExperienceIntervention.Description.ChatSuspension.Minute.Expired",
 		unitInSeconds = 60,
-		descriptionActiveFormatFunction = function(p1) --[[ Line: 45 ]]
+		descriptionActiveFormatFunction = function(p1)
 			-- upvalues: LocalizationService (copy)
 			return DateTime.fromUnixTimestamp(p1):FormatUniversalTime("mm:ss", LocalizationService.RobloxLocaleId)
 		end
 	}
 }
 
-local function v3(UnitInSeconds, p1) --[[ Line: 58 ]]
+local function v3(UnitInSeconds, p1)
 	-- upvalues: NewResult (copy), list (copy)
 	if p1 then
 		return NewResult:Format("Feature.InExperienceIntervention.Heading.ChatSuspension.Expired")
@@ -59,7 +59,7 @@ local function v3(UnitInSeconds, p1) --[[ Line: 58 ]]
 	return FormatResult
 end
 
-return function(p2, p3: number) --[[ Line: 83 ]]
+return function(p2, p3: number)
 	-- upvalues: v3 (copy), list (copy), NewResult (copy)
 	if p2 == nil or p3 == nil then
 		return 0, "", ""

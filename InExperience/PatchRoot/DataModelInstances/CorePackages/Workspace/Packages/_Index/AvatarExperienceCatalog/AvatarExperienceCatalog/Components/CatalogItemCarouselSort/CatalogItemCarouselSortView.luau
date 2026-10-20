@@ -19,7 +19,7 @@ local WidgetHeader = AvatarExperienceUIKitModule.WidgetComponents.WidgetHeader
 local WidgetLayout = AvatarExperienceUIKitModule.WidgetComponents.WidgetLayout
 local WidgetListItem = AvatarExperienceUIKitModule.WidgetComponents.WidgetListItem
 
-return ReactModule.forwardRef(function(p1, Ref) --[[ Line: 85 | Named "CatalogItemCarouselSortView" ]]
+return ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: UseImpressionsTaggerFunction (copy), WidgetConstantsModule (copy), UseTokensFunction (copy), ReactModule (copy), WidgetListItem (copy), FFlagAXSduiSortLegacyBottomPadding (copy), FFlagAXCatalogUseFixedWidgetPadding (copy), ResolveWidgetListItemBottomPaddingPxModule (copy), WidgetLayout (copy), WidgetHeader (copy), FFlagAXCatalogItemInformationPopover (copy), FFlagAXSduiSeeAllClickLogging (copy), ScrollingAppCarousel (copy), ScreenSizeImpressionsDetector (copy)
 	UseImpressionsTaggerFunction(p1.containerRef, WidgetConstantsModule.WidgetExposureMetadata.TagName, p1.widgetRow)
 	local UseTokensResult = UseTokensFunction()

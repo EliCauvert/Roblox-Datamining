@@ -10,7 +10,7 @@ local IsStudio = game:GetService("RunService"):IsStudio()
 local config = {
 	[NodeTypeModule.InlineCustom] = {
 		defaultParent = NodeTypeModule.Root,
-		getDefault = function() --[[ Line: 67 ]]
+		getDefault = function()
 			-- upvalues: NodeTypeModule (copy)
 			return {
 				name = "TEXT_SPAN",
@@ -24,7 +24,7 @@ local config = {
 			[NodeTypeModule.EngineTag] = true,
 			[NodeTypeModule.Plaintext] = true
 		},
-		validateRenderResult = function(p1) --[[ Line: 80 ]]
+		validateRenderResult = function(p1)
 			-- upvalues: IsInlineElementFunction (copy)
 			return IsInlineElementFunction(p1)
 		end
@@ -35,13 +35,13 @@ local config = {
 			[NodeTypeModule.EngineTag] = true,
 			[NodeTypeModule.Plaintext] = true
 		},
-		validateRenderResult = function(_): boolean --[[ Line: 91 ]]
+		validateRenderResult = function(_): boolean
 			return true
 		end
 	},
 	[NodeTypeModule.Plaintext] = {
 		defaultParent = NodeTypeModule.InlineCustom,
-		getDefault = function() --[[ Line: 97 ]]
+		getDefault = function()
 			-- upvalues: NodeTypeModule (copy)
 			return {
 				name = "TEXT",
@@ -52,14 +52,14 @@ local config = {
 			}
 		end,
 		children = {},
-		validateRenderResult = function(_): boolean --[[ Line: 107 ]]
+		validateRenderResult = function(_): boolean
 			return true
 		end
 	}
 }
 local UnionResult = require(Parent.Cryo).Dictionary.union(config, {
 	[NodeTypeModule.Root] = {
-		getDefault = function() --[[ Line: 50 ]]
+		getDefault = function()
 			-- upvalues: NodeTypeModule (copy)
 			return {
 				name = "ROOT",
@@ -70,14 +70,14 @@ local UnionResult = require(Parent.Cryo).Dictionary.union(config, {
 			}
 		end,
 		children = { [NodeTypeModule.InlineCustom] = true },
-		validateRenderResult = function(p1) --[[ Line: 60 ]]
+		validateRenderResult = function(p1)
 			-- upvalues: ReactIsModule (copy)
 			return ReactIsModule.isElement(p1)
 		end
 	}
 })
 
-local function getByType(p1) --[[ Line: 115 ]]
+local function getByType(p1)
 	-- upvalues: UnionResult (copy), NewResult (copy)
 	local UnionResultEntry = UnionResult[p1]
 	
@@ -90,7 +90,7 @@ local function getByType(p1) --[[ Line: 115 ]]
 	end
 end
 
-local function getByNode(p2) --[[ Line: 124 ]]
+local function getByNode(p2)
 	-- upvalues: NewResult (copy), UnionResult (copy)
 	if not p2 then
 		NewResult:error("getByNode: No node provided")
@@ -109,7 +109,7 @@ local function getByNode(p2) --[[ Line: 124 ]]
 	end
 end
 
-local function IsDescendant(p3, p4) --[[ Line: 133 ]]
+local function IsDescendant(p3, p4)
 	-- upvalues: IsDescendantModule (copy), UnionResult (copy)
 	return IsDescendantModule(UnionResult, "InlineRichTextNodeConfigGraph", p3.type, p4.type)
 end

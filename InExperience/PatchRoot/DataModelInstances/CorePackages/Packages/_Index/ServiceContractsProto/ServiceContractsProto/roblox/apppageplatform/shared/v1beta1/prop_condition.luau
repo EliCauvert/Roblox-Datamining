@@ -4,14 +4,14 @@ local t = {}
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 259 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 265 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -57,7 +57,7 @@ function Module:encode() --[[ Line: 265 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 310 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy), t (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -142,7 +142,7 @@ function Module.decode(Buf) --[[ Line: 310 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 388 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.kind ~= nil then
@@ -188,7 +188,7 @@ function Module:jsonEncode() --[[ Line: 388 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 414 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy), t (copy)
 	local NewModule = Module.new()
 	
@@ -288,7 +288,7 @@ TypeRegistryModule.default:register(t.PropCondition)
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(p1) --[[ Line: 490 ]]
+function Module1.new(p1)
 	-- upvalues: t (copy), Module1 (copy)
 	return (setmetatable({
 		field = if p1 == nil or p1.field == nil then "" else p1.field,
@@ -297,7 +297,7 @@ function Module1.new(p1) --[[ Line: 490 ]]
 	}, Module1))
 end
 
-function Module1:encode() --[[ Line: 500 ]]
+function Module1:encode()
 	-- upvalues: ProtoModule (copy), t (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -340,7 +340,7 @@ function Module1:encode() --[[ Line: 500 ]]
 	return Buf1
 end
 
-function Module1.decode(Buf) --[[ Line: 547 ]]
+function Module1.decode(Buf)
 	-- upvalues: Module1 (copy), ProtoModule (copy), t (copy)
 	local NewModule = Module1.new()
 	local v2 = 0
@@ -414,7 +414,7 @@ function Module1.decode(Buf) --[[ Line: 547 ]]
 	return NewModule
 end
 
-function Module1:jsonEncode() --[[ Line: 630 ]]
+function Module1:jsonEncode()
 	-- upvalues: t (copy), ProtoModule (copy)
 	local t1 = {}
 	
@@ -462,7 +462,7 @@ function Module1:jsonEncode() --[[ Line: 630 ]]
 	return t1
 end
 
-function Module1:jsonDecode() --[[ Line: 667 ]]
+function Module1:jsonDecode()
 	-- upvalues: Module1 (copy), t (copy), ProtoModule (copy)
 	local NewModule = Module1.new()
 	
@@ -542,27 +542,27 @@ Module1.descriptor = {
 t.ComparisonCondition = Module1
 TypeRegistryModule.default:register(t.ComparisonCondition)
 t.ComparisonCondition_Op = {
-	fromNumber = function(p1) --[[ Line: 750 ]]
+	fromNumber = function(p1)
 		return if p1 == 0 then "OP_INVALID" elseif p1 == 1 then "OP_LT" elseif p1 == 2 then "OP_LTE" elseif p1 == 3 then "OP_GT" elseif p1 == 4 then "OP_GTE" elseif p1 == 5 then "OP_E" elseif p1 == 6 then "OP_NE" else nil
 	end,
-	toNumber = function(p1) --[[ Line: 770 ]]
+	toNumber = function(p1)
 		return if p1 == "OP_INVALID" then 0 elseif p1 == "OP_LT" then 1 elseif p1 == "OP_LTE" then 2 elseif p1 == "OP_GT" then 3 elseif p1 == "OP_GTE" then 4 elseif p1 == "OP_E" then 5 elseif p1 == "OP_NE" then 6 else p1
 	end,
-	fromName = function(p1) --[[ Line: 790 ]]
+	fromName = function(p1)
 		return if p1 == "OP_INVALID" then "OP_INVALID" elseif p1 == "OP_LT" then "OP_LT" elseif p1 == "OP_LTE" then "OP_LTE" elseif p1 == "OP_GT" then "OP_GT" elseif p1 == "OP_GTE" then "OP_GTE" elseif p1 == "OP_E" then "OP_E" elseif p1 == "OP_NE" then "OP_NE" else nil
 	end
 }
 local Module2 = {}
 Module2.__index = Module2
 
-function Module2.new(p1) --[[ Line: 815 ]]
+function Module2.new(p1)
 	-- upvalues: Module2 (copy)
 	return (setmetatable({
 		field = if p1 == nil or p1.field == nil then "" else p1.field
 	}, Module2))
 end
 
-function Module2:encode() --[[ Line: 821 ]]
+function Module2:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -577,7 +577,7 @@ function Module2:encode() --[[ Line: 821 ]]
 	return Buf1
 end
 
-function Module2.decode(Buf) --[[ Line: 835 ]]
+function Module2.decode(Buf)
 	-- upvalues: Module2 (copy), ProtoModule (copy)
 	local NewModule = Module2.new()
 	local v3 = 0
@@ -610,7 +610,7 @@ function Module2.decode(Buf) --[[ Line: 835 ]]
 	return NewModule
 end
 
-function Module2:jsonEncode() --[[ Line: 878 ]]
+function Module2:jsonEncode()
 	local t = {}
 	
 	if self.field ~= nil and self.field ~= "" then
@@ -619,7 +619,7 @@ function Module2:jsonEncode() --[[ Line: 878 ]]
 	return t
 end
 
-function Module2:jsonDecode() --[[ Line: 888 ]]
+function Module2:jsonDecode()
 	-- upvalues: Module2 (copy)
 	local NewModule = Module2.new()
 	
@@ -638,14 +638,14 @@ TypeRegistryModule.default:register(t.IsNullCondition)
 local Module3 = {}
 Module3.__index = Module3
 
-function Module3.new(p1) --[[ Line: 912 ]]
+function Module3.new(p1)
 	-- upvalues: Module3 (copy)
 	return (setmetatable({
 		field = if p1 == nil or p1.field == nil then "" else p1.field
 	}, Module3))
 end
 
-function Module3:encode() --[[ Line: 918 ]]
+function Module3:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -660,7 +660,7 @@ function Module3:encode() --[[ Line: 918 ]]
 	return Buf1
 end
 
-function Module3.decode(Buf) --[[ Line: 932 ]]
+function Module3.decode(Buf)
 	-- upvalues: Module3 (copy), ProtoModule (copy)
 	local NewModule = Module3.new()
 	local v4 = 0
@@ -693,7 +693,7 @@ function Module3.decode(Buf) --[[ Line: 932 ]]
 	return NewModule
 end
 
-function Module3:jsonEncode() --[[ Line: 975 ]]
+function Module3:jsonEncode()
 	local t = {}
 	
 	if self.field ~= nil and self.field ~= "" then
@@ -702,7 +702,7 @@ function Module3:jsonEncode() --[[ Line: 975 ]]
 	return t
 end
 
-function Module3:jsonDecode() --[[ Line: 985 ]]
+function Module3:jsonDecode()
 	-- upvalues: Module3 (copy)
 	local NewModule = Module3.new()
 	
@@ -721,14 +721,14 @@ TypeRegistryModule.default:register(t.IsNotNullCondition)
 local Module4 = {}
 Module4.__index = Module4
 
-function Module4.new(p1) --[[ Line: 1009 ]]
+function Module4.new(p1)
 	-- upvalues: Module4 (copy)
 	return (setmetatable({
 		field = if p1 == nil or p1.field == nil then "" else p1.field
 	}, Module4))
 end
 
-function Module4:encode() --[[ Line: 1015 ]]
+function Module4:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -743,7 +743,7 @@ function Module4:encode() --[[ Line: 1015 ]]
 	return Buf1
 end
 
-function Module4.decode(Buf) --[[ Line: 1029 ]]
+function Module4.decode(Buf)
 	-- upvalues: Module4 (copy), ProtoModule (copy)
 	local NewModule = Module4.new()
 	local v5 = 0
@@ -776,7 +776,7 @@ function Module4.decode(Buf) --[[ Line: 1029 ]]
 	return NewModule
 end
 
-function Module4:jsonEncode() --[[ Line: 1072 ]]
+function Module4:jsonEncode()
 	local t = {}
 	
 	if self.field ~= nil and self.field ~= "" then
@@ -785,7 +785,7 @@ function Module4:jsonEncode() --[[ Line: 1072 ]]
 	return t
 end
 
-function Module4:jsonDecode() --[[ Line: 1082 ]]
+function Module4:jsonDecode()
 	-- upvalues: Module4 (copy)
 	local NewModule = Module4.new()
 	
@@ -804,14 +804,14 @@ TypeRegistryModule.default:register(t.IsEmptyCondition)
 local Module5 = {}
 Module5.__index = Module5
 
-function Module5.new(p1) --[[ Line: 1106 ]]
+function Module5.new(p1)
 	-- upvalues: Module5 (copy)
 	return (setmetatable({
 		field = if p1 == nil or p1.field == nil then "" else p1.field
 	}, Module5))
 end
 
-function Module5:encode() --[[ Line: 1112 ]]
+function Module5:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -826,7 +826,7 @@ function Module5:encode() --[[ Line: 1112 ]]
 	return Buf1
 end
 
-function Module5.decode(Buf) --[[ Line: 1126 ]]
+function Module5.decode(Buf)
 	-- upvalues: Module5 (copy), ProtoModule (copy)
 	local NewModule = Module5.new()
 	local v6 = 0
@@ -859,7 +859,7 @@ function Module5.decode(Buf) --[[ Line: 1126 ]]
 	return NewModule
 end
 
-function Module5:jsonEncode() --[[ Line: 1169 ]]
+function Module5:jsonEncode()
 	local t = {}
 	
 	if self.field ~= nil and self.field ~= "" then
@@ -868,7 +868,7 @@ function Module5:jsonEncode() --[[ Line: 1169 ]]
 	return t
 end
 
-function Module5:jsonDecode() --[[ Line: 1179 ]]
+function Module5:jsonDecode()
 	-- upvalues: Module5 (copy)
 	local NewModule = Module5.new()
 	
@@ -887,7 +887,7 @@ TypeRegistryModule.default:register(t.IsNotEmptyCondition)
 local Module6 = {}
 Module6.__index = Module6
 
-function Module6.new(p1) --[[ Line: 1203 ]]
+function Module6.new(p1)
 	-- upvalues: Module6 (copy)
 	return (setmetatable({
 		field = if p1 == nil or p1.field == nil then "" else p1.field,
@@ -895,7 +895,7 @@ function Module6.new(p1) --[[ Line: 1203 ]]
 	}, Module6))
 end
 
-function Module6:encode() --[[ Line: 1210 ]]
+function Module6:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -919,7 +919,7 @@ function Module6:encode() --[[ Line: 1210 ]]
 	return Buf1
 end
 
-function Module6.decode(Buf) --[[ Line: 1234 ]]
+function Module6.decode(Buf)
 	-- upvalues: Module6 (copy), ProtoModule (copy)
 	local NewModule = Module6.new()
 	local v7 = 0
@@ -963,7 +963,7 @@ function Module6.decode(Buf) --[[ Line: 1234 ]]
 	return NewModule
 end
 
-function Module6:jsonEncode() --[[ Line: 1287 ]]
+function Module6:jsonEncode()
 	local t = {}
 	
 	if self.field ~= nil and self.field ~= "" then
@@ -982,7 +982,7 @@ function Module6:jsonEncode() --[[ Line: 1287 ]]
 	return t
 end
 
-function Module6:jsonDecode() --[[ Line: 1305 ]]
+function Module6:jsonDecode()
 	-- upvalues: Module6 (copy)
 	local NewModule = Module6.new()
 	
@@ -1019,14 +1019,14 @@ TypeRegistryModule.default:register(t.ContainsCondition)
 local Module7 = {}
 Module7.__index = Module7
 
-function Module7.new(p1) --[[ Line: 1345 ]]
+function Module7.new(p1)
 	-- upvalues: Module7 (copy)
 	return (setmetatable({
 		conditions = if p1 == nil or p1.conditions == nil then {} else p1.conditions
 	}, Module7))
 end
 
-function Module7:encode() --[[ Line: 1351 ]]
+function Module7:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1044,7 +1044,7 @@ function Module7:encode() --[[ Line: 1351 ]]
 	return Buf1
 end
 
-function Module7.decode(Buf) --[[ Line: 1368 ]]
+function Module7.decode(Buf)
 	-- upvalues: Module7 (copy), ProtoModule (copy), t (copy)
 	local NewModule = Module7.new()
 	local v8 = 0
@@ -1077,7 +1077,7 @@ function Module7.decode(Buf) --[[ Line: 1368 ]]
 	return NewModule
 end
 
-function Module7:jsonEncode() --[[ Line: 1411 ]]
+function Module7:jsonEncode()
 	local t = {}
 	
 	if self.conditions ~= nil and #self.conditions > 0 then
@@ -1091,7 +1091,7 @@ function Module7:jsonEncode() --[[ Line: 1411 ]]
 	return t
 end
 
-function Module7:jsonDecode() --[[ Line: 1425 ]]
+function Module7:jsonDecode()
 	-- upvalues: Module7 (copy), t (copy)
 	local NewModule = Module7.new()
 	
@@ -1115,14 +1115,14 @@ TypeRegistryModule.default:register(t.AndCondition)
 local Module8 = {}
 Module8.__index = Module8
 
-function Module8.new(p1) --[[ Line: 1454 ]]
+function Module8.new(p1)
 	-- upvalues: Module8 (copy)
 	return (setmetatable({
 		conditions = if p1 == nil or p1.conditions == nil then {} else p1.conditions
 	}, Module8))
 end
 
-function Module8:encode() --[[ Line: 1460 ]]
+function Module8:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1140,7 +1140,7 @@ function Module8:encode() --[[ Line: 1460 ]]
 	return Buf1
 end
 
-function Module8.decode(Buf) --[[ Line: 1477 ]]
+function Module8.decode(Buf)
 	-- upvalues: Module8 (copy), ProtoModule (copy), t (copy)
 	local NewModule = Module8.new()
 	local v9 = 0
@@ -1173,7 +1173,7 @@ function Module8.decode(Buf) --[[ Line: 1477 ]]
 	return NewModule
 end
 
-function Module8:jsonEncode() --[[ Line: 1520 ]]
+function Module8:jsonEncode()
 	local t = {}
 	
 	if self.conditions ~= nil and #self.conditions > 0 then
@@ -1187,7 +1187,7 @@ function Module8:jsonEncode() --[[ Line: 1520 ]]
 	return t
 end
 
-function Module8:jsonDecode() --[[ Line: 1534 ]]
+function Module8:jsonDecode()
 	-- upvalues: Module8 (copy), t (copy)
 	local NewModule = Module8.new()
 	

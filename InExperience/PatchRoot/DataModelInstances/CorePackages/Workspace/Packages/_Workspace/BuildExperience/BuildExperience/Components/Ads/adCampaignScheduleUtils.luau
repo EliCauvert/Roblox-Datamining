@@ -1,6 +1,6 @@
 ﻿return {
 	MS_PER_DAY = 86400000,
-	toStartMs = function(p1) --[[ Line: 34 ]]
+	toStartMs = function(p1)
 		if type(p1) == "string" then
 			local Success, Result = pcall(DateTime.fromIsoDate, p1)
 			
@@ -9,13 +9,13 @@
 			return 0
 		end
 	end,
-	campaignEndMs = function(p1, p2: number): number --[[ Line: 46 ]]
+	campaignEndMs = function(p1, p2: number): number
 		return p1 + math.max(0, p2 - 1) * 86400000
 	end,
-	campaignEndExclusiveMs = function(p1, p2: number): number --[[ Line: 51 ]]
+	campaignEndExclusiveMs = function(p1, p2: number): number
 		return p1 + math.max(0, p2) * 86400000
 	end,
-	hasActiveCampaign = function(List, p1, p2): boolean --[[ Line: 72 ]]
+	hasActiveCampaign = function(List, p1, p2): boolean
 		if List == nil or p1 == nil or p1 == 0 then
 			return false
 		end

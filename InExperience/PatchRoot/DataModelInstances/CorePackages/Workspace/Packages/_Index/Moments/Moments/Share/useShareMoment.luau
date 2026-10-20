@@ -14,14 +14,14 @@ local config = {
 	linkCopyFailed = "Feature.Moments.Label.LinkCopyFailed"
 }
 
-return function(p1) --[[ Line: 32 | Named "useShareMoment" ]]
+return function(p1)
 	-- upvalues: MomentContextModule (copy), ReactModule (copy), FeedContextModule (copy), UseLocalizationFunction (copy), config (copy), MakeRecommendationAttributionModule (copy), SignalActionTypeModule (copy), ShareMomentModule (copy)
 	local MomentId = MomentContextModule.useMoment().momentId
 	local UseContextResult = ReactModule.useContext(FeedContextModule.FeedContext)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	
 	return {
-		onShareActivated = ReactModule.useCallback(function() --[[ Line: 40 ]]
+		onShareActivated = ReactModule.useCallback(function()
 			-- upvalues: MakeRecommendationAttributionModule (upval), p1 (copy), UseContextResult (copy), SignalActionTypeModule (upval), ShareMomentModule (upval), MomentId (copy), UseLocalizationResult (copy)
 			local RecommendationAttributionModule = MakeRecommendationAttributionModule(if p1 then p1.recommendationMetadata else nil)
 			ShareMomentModule({
@@ -29,7 +29,7 @@ return function(p1) --[[ Line: 32 | Named "useShareMoment" ]]
 				feedItemId = if p1 and p1.recommendationMetadata then p1.recommendationMetadata.feedItemId else nil,
 				feedSessionId = if p1 and p1.recommendationMetadata then p1.recommendationMetadata.tracingId else nil,
 				description = if p1 and p1.metadata then p1.metadata.description else nil,
-				logAction = if RecommendationAttributionModule and UseContextResult then function(p2) --[[ Line: 49 ]]
+				logAction = if RecommendationAttributionModule and UseContextResult then function(p2)
 					-- upvalues: UseContextResult (upval), SignalActionTypeModule (upval), RecommendationAttributionModule (copy)
 					return UseContextResult.logAction(SignalActionTypeModule.Share, RecommendationAttributionModule, p2)
 				end else nil,

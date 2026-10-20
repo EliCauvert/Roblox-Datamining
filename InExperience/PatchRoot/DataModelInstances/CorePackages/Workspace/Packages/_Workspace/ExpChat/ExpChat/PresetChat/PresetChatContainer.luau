@@ -26,7 +26,7 @@ local FFlagExpChatPresetChatGamepadEnabledModule = require(ExpChat.Flags.FFlagEx
 local FFlagExpChatPresetChatTabMemoryModule = require(ExpChat.Flags.FFlagExpChatPresetChatTabMemory)
 local FFlagExpChatPresetTrayDismissAnalyticsModule = require(ExpChat.Flags.FFlagExpChatPresetTrayDismissAnalytics)
 
-return ReactModule.memo(function(p1) --[[ Line: 46 | Named "PresetChatContainer" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FoundationModule (copy), GetPresetChatStoreModule (copy), UseDispatchFunction (copy), SignalsReactModule (copy), GetMessagesStoreModule (copy), LocalizationModule (copy), ReactModule (copy), SetIsPresetTrayOpenModule (copy), PresetTrayKeyboardSelectedModule (copy), ExpChatSharedModule (copy), ConstantsModule (copy), FFlagExpChatPresetChatTabMemoryModule (copy), FFlagExpChatPresetChatGamepadEnabledModule (copy), FFlagExpChatPresetTrayDismissAnalyticsModule (copy), InputTypeModule (copy), UserInputService (copy), GuiService (copy), GetTransparencyStoreModule (copy), UseOnPresetActivatedModule (copy), UseOnEmojiActivatedModule (copy), EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy), PresetBorderlessGridButtonModule (copy), PresetMessageButtonModule (copy), Text (copy), PresetCooldownProviderModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local PresetChatStoreModule = GetPresetChatStoreModule(false)
@@ -35,11 +35,11 @@ return ReactModule.memo(function(p1) --[[ Line: 46 | Named "PresetChatContainer"
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(PresetChatStoreModule.getCategoryGroups)
 	local UseSignalStateResult2 = SignalsReactModule.useSignalState(GetMessagesStoreModule(false).getCanLocalUserChat)
 	local UseLocalizationResult = LocalizationModule.useLocalization({ footerDescription = "Feature.Chat.PresetChat.Disclaimer" })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 59 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: SetIsPresetTrayOpenModule (upval), PresetChatStoreModule (copy)
 		SetIsPresetTrayOpenModule(PresetChatStoreModule, false)
 	end, { PresetChatStoreModule })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 63 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy), UseDispatchResult (copy), PresetTrayKeyboardSelectedModule (upval), ExpChatSharedModule (upval), ConstantsModule (upval)
 		UseResult()
 		UseDispatchResult(PresetTrayKeyboardSelectedModule())
@@ -60,14 +60,14 @@ return ReactModule.memo(function(p1) --[[ Line: 46 | Named "PresetChatContainer"
 	else
 		CategoryGroupId1 = UseStateResult
 	end
-	ReactModule.useEffect(function() --[[ Line: 87 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagExpChatPresetChatTabMemoryModule (upval), CategoryGroupId1 (ref), CategoryGroupId (copy), UseStateResult2 (copy)
 		if not FFlagExpChatPresetChatTabMemoryModule and CategoryGroupId1 == "" and CategoryGroupId ~= "" then
 			UseStateResult2(CategoryGroupId)
 		end
 	end, { CategoryGroupId, CategoryGroupId1 })
 	local UseSignalStateResult4 = if FFlagExpChatPresetChatGamepadEnabledModule or FFlagExpChatPresetTrayDismissAnalyticsModule then SignalsReactModule.useSignalState(PresetChatStoreModule.getIsTrayOpen) else nil
-	ReactModule.useEffect(function() --[[ Line: 97 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagExpChatPresetTrayDismissAnalyticsModule (upval), UseSignalStateResult4 (copy), UseSignalStateResult (copy), CategoryGroupId1 (ref), PresetChatStoreModule (copy)
 		if FFlagExpChatPresetTrayDismissAnalyticsModule and UseSignalStateResult4 and not UseSignalStateResult and CategoryGroupId1 ~= "" then
 			PresetChatStoreModule.markGroupViewed(CategoryGroupId1)
@@ -80,11 +80,11 @@ return ReactModule.memo(function(p1) --[[ Line: 46 | Named "PresetChatContainer"
 	})
 	local UseRefResult1 = ReactModule.useRef(nil)
 	
-	local function _(p2) --[[ Line: 105 | Named "isValidSelection" ]]
+	local function _(p2)
 		if p2 == nil then
 			return false
 		else
-			local Success, Result = pcall(function(): boolean --[[ Line: 109 ]]
+			local Success, Result = pcall(function(): boolean
 				-- upvalues: p2 (copy)
 				return p2:IsDescendantOf(game) and p2:FindFirstAncestorOfClass("ScreenGui") ~= nil
 			end)
@@ -93,7 +93,7 @@ return ReactModule.memo(function(p1) --[[ Line: 46 | Named "PresetChatContainer"
 		end
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 116 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagExpChatPresetChatGamepadEnabledModule (upval), UseSignalStateResult4 (copy), UseRefResult (copy), InputTypeModule (upval), UserInputService (upval), UseRefResult1 (copy), GuiService (upval)
 		if FFlagExpChatPresetChatGamepadEnabledModule and not UseSignalStateResult4 then return end
 		local Current = UseRefResult.current
@@ -103,20 +103,20 @@ return ReactModule.memo(function(p1) --[[ Line: 46 | Named "PresetChatContainer"
 		if UseRefResult1.current == nil then
 			UseRefResult1.current = if FFlagExpChatPresetChatGamepadEnabledModule then GuiService.SelectedCoreObject else GuiService.SelectedObject
 		end
-		task.defer(function() --[[ Line: 133 ]]
+		task.defer(function()
 			-- upvalues: Current (copy), FFlagExpChatPresetChatGamepadEnabledModule (upval), GuiService (upval)
 			local v1 = nil
 			if Current == nil then
 				v1 = false
 			else
-				local Success, Result = pcall(function(): boolean --[[ Line: 109 ]]
+				local Success, Result = pcall(function(): boolean
 					-- upvalues: Current (copy)
 					return Current:IsDescendantOf(game) and Current:FindFirstAncestorOfClass("ScreenGui") ~= nil
 				end)
 				v1 = Success and Result
 			end
 			if v1 then
-				pcall(function() --[[ Line: 135 ]]
+				pcall(function()
 					-- upvalues: FFlagExpChatPresetChatGamepadEnabledModule (upval), GuiService (upval), Current (upval)
 					if FFlagExpChatPresetChatGamepadEnabledModule then
 						GuiService.SelectedCoreObject = Current
@@ -129,22 +129,22 @@ return ReactModule.memo(function(p1) --[[ Line: 46 | Named "PresetChatContainer"
 			end
 		end)
 	end, if FFlagExpChatPresetChatGamepadEnabledModule then { CategoryGroupId1, UseSignalStateResult4 } else { CategoryGroupId1 })
-	ReactModule.useEffect(function() --[[ Line: 150 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: GetTransparencyStoreModule (upval), UseRefResult1 (copy), FFlagExpChatPresetChatGamepadEnabledModule (upval), GuiService (upval)
 		local TransparencyStoreModule = GetTransparencyStoreModule(false)
 		TransparencyStoreModule.setContextMenuOpen()
 		
-		return function() --[[ Line: 153 ]]
+		return function()
 			-- upvalues: TransparencyStoreModule (copy), UseRefResult1 (upval), FFlagExpChatPresetChatGamepadEnabledModule (upval), GuiService (upval)
 			TransparencyStoreModule.clearContextMenuOpen()
 			local Current = UseRefResult1.current
-			pcall(function() --[[ Line: 156 ]]
+			pcall(function()
 				-- upvalues: Current (copy), FFlagExpChatPresetChatGamepadEnabledModule (upval), GuiService (upval)
 				local v1 = nil
 				if Current == nil then
 					v1 = false
 				else
-					local Success, Result = pcall(function(): boolean --[[ Line: 109 ]]
+					local Success, Result = pcall(function(): boolean
 						-- upvalues: Current (copy)
 						return Current:IsDescendantOf(game) and Current:FindFirstAncestorOfClass("ScreenGui") ~= nil
 					end)
@@ -292,7 +292,7 @@ return ReactModule.memo(function(p1) --[[ Line: 46 | Named "PresetChatContainer"
 		} else nil
 		
 		if v2 then
-			function config1.onActivated() --[[ Line: 306 ]]
+			function config1.onActivated()
 				-- upvalues: FFlagExpChatPresetChatTabMemoryModule (upval), PresetChatStoreModule (copy), LayoutOrder2 (copy), UseStateResult2 (copy), CategoryGroupId2 (copy)
 				if FFlagExpChatPresetChatTabMemoryModule then
 					PresetChatStoreModule.setSelectedGroupIndex(LayoutOrder2)

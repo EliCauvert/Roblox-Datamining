@@ -5,14 +5,14 @@ local DevConsoleCommandLineModule = require(script.Parent.DevConsoleCommandLine)
 local LogOutputModule = require(script.Parent.LogOutput)
 local ServerLog = RoactModule.Component:extend("ServerLog")
 
-function ServerLog.init(p1) --[[ Line: 15 ]]
-	function p1.initServerLogData() --[[ Line: 16 ]]
+function ServerLog.init(p1)
+	function p1.initServerLogData()
 		-- upvalues: p1 (copy)
 		return p1.props.ServerLogData:getLogData()
 	end
 end
 
-function ServerLog.render(p1) --[[ Line: 21 ]]
+function ServerLog.render(p1)
 	-- upvalues: RoactModule (copy), LogOutputModule (copy), CommandLineHeight (copy), DevConsoleCommandLineModule (copy)
 	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

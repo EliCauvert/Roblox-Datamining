@@ -9,12 +9,12 @@ local t = {}
 for _, value in pairs(AmpRecourseActionModule) do
 	t[value] = true
 end
-function AmpRecourseActionModule.fromValue(p1) --[[ Line: 15 ]]
+function AmpRecourseActionModule.fromValue(p1)
 	-- upvalues: t (copy)
 	return if p1 == nil or not t[p1] then nil else p1
 end
 
-function AmpRecourseActionModule.fromValues(List) --[[ Line: 24 ]]
+function AmpRecourseActionModule.fromValues(List)
 	-- upvalues: AmpRecourseActionModule (copy)
 	if type(List) ~= "table" then
 		return nil

@@ -13,12 +13,12 @@ local CloseCentralOverlayFunction = CentralOverlayModule.Thunks.CloseCentralOver
 local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
 local ExtractAndStyleRichTextLinksFunction = require(Parent.DiscoveryUtils).extractAndStyleRichTextLinks
 
-return function(p1) --[[ Line: 29 | Named "PlayButtonUpsellBody" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), UseRoactServiceFunction (copy), AppLinking (copy), ReactModule (copy), ExtractAndStyleRichTextLinksFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), CloseCentralOverlayFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(AppLinking)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 34 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ExtractAndStyleRichTextLinksFunction (upval), p1 (copy)
 		local ExtractAndStyleRichTextLinksResult, ExtractAndStyleRichTextLinksResult2 = ExtractAndStyleRichTextLinksFunction(p1.bodyText)
 		
@@ -27,12 +27,12 @@ return function(p1) --[[ Line: 29 | Named "PlayButtonUpsellBody" ]]
 			styledText = ExtractAndStyleRichTextLinksResult2
 		}
 	end, { p1.bodyText })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 44 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseMemoResult (copy), p1 (copy), UseDispatchResult (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval), UseRoactServiceResult (copy), CloseCentralOverlayFunction (upval)
 		if UseMemoResult.link then
 			p1.onCloseModal()
 			UseDispatchResult(SetCentralOverlayFunction(CentralOverlayType.LeaveRobloxAlert, {
-				continueFunc = function() --[[ Line: 53 ]]
+				continueFunc = function()
 					-- upvalues: UseRoactServiceResult (upval), UseMemoResult (upval), UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
 					UseRoactServiceResult:openURL(UseMemoResult.link)
 					UseDispatchResult(CloseCentralOverlayFunction())

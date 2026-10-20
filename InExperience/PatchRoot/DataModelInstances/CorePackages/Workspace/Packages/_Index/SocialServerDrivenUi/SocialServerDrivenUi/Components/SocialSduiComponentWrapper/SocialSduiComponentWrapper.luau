@@ -4,7 +4,7 @@ local _ = require(Parent.AppCommonLib)
 local GetSduiComponentWrapperFunction = require(Parent.SduiCoreSystem).getSduiComponentWrapper
 local View = require(Parent.Foundation).View
 
-return ReactModule.memo(function(p1) --[[ Line: 29 | Named "SocialSduiComponentWrapper" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: GetSduiComponentWrapperFunction (copy), ReactModule (copy), View (copy)
 	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y",

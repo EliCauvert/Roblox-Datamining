@@ -26,7 +26,7 @@ if GetFFlagUGCValidateHeadAboveTorsoModule() then
 end
 LegsSeparatedModule.expectedFailures = {}
 
-local function validateAttachmentPosition(p1, RootInstance, AssetType) --[[ Line: 42 ]]
+local function validateAttachmentPosition(p1, RootInstance, AssetType)
 	-- upvalues: GetFStringUGCValidateLegHipAttachmentRangeModule (copy), ErrorSourceStringsModule (copy)
 	if AssetType == Enum.AssetType.RightLeg then
 		local ScaledX = RootInstance.RightUpperLeg.Size.X * GetFStringUGCValidateLegHipAttachmentRangeModule.asNumber()
@@ -55,7 +55,7 @@ local function validateAttachmentPosition(p1, RootInstance, AssetType) --[[ Line
 	end
 end
 
-local function calculateBounds(p1, List) --[[ Line: 73 ]]
+local function calculateBounds(p1, List)
 	-- upvalues: BoundsDataUtilsModule (copy)
 	local CombineBoundsResult = {}
 	
@@ -65,7 +65,7 @@ local function calculateBounds(p1, List) --[[ Line: 73 ]]
 	return CombineBoundsResult
 end
 
-local function buildEditableMeshesFromSharedData(p2) --[[ Line: 81 ]]
+local function buildEditableMeshesFromSharedData(p2)
 	local t = {}
 	
 	for ChildName, value in p2.renderMeshesData do
@@ -78,7 +78,7 @@ local function buildEditableMeshesFromSharedData(p2) --[[ Line: 81 ]]
 	return t
 end
 
-local function createAllBodyPartsFromRootInstance(RootInstance) --[[ Line: 92 ]]
+local function createAllBodyPartsFromRootInstance(RootInstance)
 	local Parts = {}
 	
 	for _, Part in RootInstance:GetChildren() do
@@ -89,7 +89,7 @@ local function createAllBodyPartsFromRootInstance(RootInstance) --[[ Line: 92 ]]
 	return Parts
 end
 
-local function checkLegOverlap(p3, FullBodyPartsMetrics) --[[ Line: 102 ]]
+local function checkLegOverlap(p3, FullBodyPartsMetrics)
 	-- upvalues: calculateBounds (copy), ConstantsModule (copy), BoundsDataUtilsModule (copy), GetFStringUGCValidateAllowedLegOverlapMultiplierModule (copy), ErrorSourceStringsModule (copy)
 	local Bounds = calculateBounds(FullBodyPartsMetrics, {
 		ConstantsModule.NAMED_R15_BODY_PARTS.LeftUpperLeg,
@@ -122,7 +122,7 @@ local function checkLegOverlap(p3, FullBodyPartsMetrics) --[[ Line: 102 ]]
 	end
 end
 
-local function validateFullBodySeparation(p3, p4) --[[ Line: 140 ]]
+local function validateFullBodySeparation(p3, p4)
 	-- upvalues: GetFFlagUGCValidateHeadAboveTorsoModule (copy), checkLegOverlap (copy), createAllBodyPartsFromRootInstance (copy), buildEditableMeshesFromSharedData (copy), ValidationEnumsModule (copy), BoundsCalculatorModule (copy), ErrorSourceStringsModule (copy)
 	if GetFFlagUGCValidateHeadAboveTorsoModule() then
 		local FullBodyPartsMetrics = p4.fullBodyPartsMetrics
@@ -151,11 +151,11 @@ local function validateFullBodySeparation(p3, p4) --[[ Line: 140 ]]
 	end
 end
 
-local function _(p3) --[[ Line: 167 | Named "getAssetTypeFromUploadEnum" ]]
+local function _(p3)
 	return if p3.uploadEnum and p3.uploadEnum.assetType then p3.uploadEnum.assetType else nil
 end
 
-function LegsSeparatedModule.run(p3, p4) --[[ Line: 174 ]]
+function LegsSeparatedModule.run(p3, p4)
 	-- upvalues: ValidationEnumsModule (copy), validateFullBodySeparation (copy), validateAttachmentPosition (copy)
 	if p4.uploadCategory == ValidationEnumsModule.UploadCategory.FULL_BODY then
 		validateFullBodySeparation(p3, p4)

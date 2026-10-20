@@ -3,9 +3,9 @@ local CreateSingleEntityResolverModule = require(DataHydration.createSingleEntit
 local _ = require(DataHydration.DataHydrationTypes)
 local FetchLookByOutfitModule = require(script.Parent.Requests.fetchLookByOutfit)
 
-return function(p1) --[[ Line: 25 | Named "createOutfitLookStore" ]]
+return function(p1)
 	-- upvalues: CreateSingleEntityResolverModule (copy), FetchLookByOutfitModule (copy)
-	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p2) --[[ Line: 26 ]]
+	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p2)
 		-- upvalues: FetchLookByOutfitModule (upval), p1 (copy)
 		return FetchLookByOutfitModule(p2, p1)
 	end, { resolver = { replaceItems = true } })

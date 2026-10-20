@@ -3,14 +3,14 @@ local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 local Url = require(Parent.Http).Url
 
 return {
-	buildFollowingStatusUrl = function(UserId, UniverseId) --[[ Line: 14 ]]
+	buildFollowingStatusUrl = function(UserId, UniverseId)
 		-- upvalues: UrlBuilder (copy), Url (copy)
 		return UrlBuilder.new({
 			path = "v1/users/{userId}/universes/{universeId}/status",
 			base = Url.FOLLOWINGS_URL
 		})({ userId = UserId, universeId = UniverseId })
 	end,
-	buildFollowingUpdateUrl = function(UserId, UniverseId) --[[ Line: 29 ]]
+	buildFollowingUpdateUrl = function(UserId, UniverseId)
 		-- upvalues: UrlBuilder (copy), Url (copy)
 		return UrlBuilder.new({
 			path = "v1/users/{userId}/universes/{universeId}",

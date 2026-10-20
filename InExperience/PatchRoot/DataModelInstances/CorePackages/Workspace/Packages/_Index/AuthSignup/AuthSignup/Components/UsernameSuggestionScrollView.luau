@@ -7,7 +7,7 @@ local AuthAnalyticsModule = require(Parent.AuthAnalytics)
 local UsernameSuggestionShownFunction = AuthAnalyticsModule.Events.usernameSuggestionShown
 local EventStreamConstants = AuthAnalyticsModule.EventStreamConstants
 
-return function(p1) --[[ Line: 19 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), UsernameSuggestionShownFunction (copy), EventStreamConstants (copy), View (copy), ScrollBarVisibility (copy)
 	local Elements = {}
 	
@@ -15,13 +15,13 @@ return function(p1) --[[ Line: 19 ]]
 		Elements[i] = ReactModule.createElement(FoundationModule.Pill, {
 			isDisabled = false,
 			text = suggestionUsername,
-			onActivated = function() --[[ Line: 25 ]]
+			onActivated = function()
 				-- upvalues: p1 (copy), suggestionUsername (copy)
 				p1.onUsernameSelected(suggestionUsername)
 			end
 		})
 	end
-	ReactModule.useEffect(function() --[[ Line: 32 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UsernameSuggestionShownFunction (upval), p1 (copy), EventStreamConstants (upval)
 		UsernameSuggestionShownFunction(p1.eventContext, p1.inputUsername, p1.suggestionUsernames, EventStreamConstants.Field.Username)
 	end, {})

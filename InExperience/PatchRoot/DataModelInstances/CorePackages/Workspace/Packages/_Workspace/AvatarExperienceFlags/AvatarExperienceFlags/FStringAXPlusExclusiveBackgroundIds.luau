@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("AXPlusExclusiveBackgroundIds", "")
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastString("AXPlusExclusiveBackgroundIds")
 end

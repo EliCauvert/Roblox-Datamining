@@ -6,21 +6,21 @@ local InExperienceTransferFlowModule = require(CurrencyTransfers.Flows.InExperie
 local InExperienceTransferUpsellAppModule = require(CurrencyTransfers.Components.InExperienceTransferUpsellApp)
 local UseInExperienceTransferListenerEffectModule = require(CurrencyTransfers.Hooks.useInExperienceTransferListenerEffect)
 
-return function() --[[ Line: 10 | Named "InExperienceTransferApp" ]]
+return function()
 	-- upvalues: ReactModule (copy), UseInExperienceTransferListenerEffectModule (copy), InExperienceTransferFlowModule (copy), SharedFlagsModule (copy), InExperienceTransferUpsellAppModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 24 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(nil)
 	end, {})
-	UseInExperienceTransferListenerEffectModule((ReactModule.useCallback(function(p1) --[[ Line: 13 ]]
+	UseInExperienceTransferListenerEffectModule((ReactModule.useCallback(function(p1)
 		-- upvalues: UseStateResult2 (copy)
-		UseStateResult2(function(p2) --[[ Line: 16 ]]
+		UseStateResult2(function(p2)
 			-- upvalues: p1 (copy)
 			return if p2 == nil then p1 else p2
 		end)
 	end, {})))
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 33 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseStateResult (copy), InExperienceTransferFlowModule (upval), UseResult (copy)
 		return if UseStateResult == nil then nil else InExperienceTransferFlowModule({ initiateResponse = UseStateResult, onClose = UseResult })
 	end, { UseStateResult, UseResult })

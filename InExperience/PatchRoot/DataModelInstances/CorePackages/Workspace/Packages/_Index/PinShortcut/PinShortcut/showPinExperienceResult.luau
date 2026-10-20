@@ -2,7 +2,7 @@
 local SetCentralOverlayFunction = require(Parent.CentralOverlay).Actions.SetCentralOverlay
 local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
 
-return function(Callback: (any) -> (), Status, ExperienceName, p1) --[[ Line: 16 | Named "showPinExperienceResult" ]]
+return function(Callback: (any) -> (), Status, ExperienceName, p1)
 	-- upvalues: SetCentralOverlayFunction (copy), CentralOverlayType (copy)
 	Callback(SetCentralOverlayFunction(CentralOverlayType.PinExperienceResultSnackbar, {
 		status = Status,

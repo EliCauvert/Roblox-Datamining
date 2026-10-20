@@ -11,11 +11,11 @@ local CountUserFriendsInStoreModule = require(script.Parent.utils.countUserFrien
 local _ = require(FriendsRodux.roduxFriendsTypes)
 local config = { byUserId = {}, countsByUserId = {} }
 
-return function(p1) --[[ Line: 21 ]]
+return function(p1)
 	-- upvalues: config (copy), FriendshipCreatedModule (copy), LlamaModule (copy), AddUserModule (copy), FriendshipDestroyedModule (copy), RemoveUserModule (copy), SetFriendshipsInStoreModule (copy), CountUserFriendsInStoreModule (copy), RemoveTargetUserFriendshipInStoreModule (copy)
 	local FriendsNetworking = p1.friendsNetworking
 	
-	return function(p2, p3) --[[ Line: 24 ]]
+	return function(p2, p3)
 		-- upvalues: config (upval), FriendshipCreatedModule (upval), LlamaModule (upval), AddUserModule (upval), FriendshipDestroyedModule (upval), RemoveUserModule (upval), FriendsNetworking (copy), SetFriendshipsInStoreModule (upval), CountUserFriendsInStoreModule (upval), RemoveTargetUserFriendshipInStoreModule (upval)
 		local P1 = p2 or config
 		

@@ -4,7 +4,7 @@ local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local ButtonVariant = require(Parent.Foundation).Enums.ButtonVariant
 
-return function(p1) --[[ Line: 35 | Named "useAdCampaignCardViewModel" ]]
+return function(p1)
 	-- upvalues: LocalizationStringsModule (copy), UseLocalizationFunction (copy), ButtonVariant (copy)
 	local IsActive = p1.variant == "active"
 	local UseLocalizationResult = UseLocalizationFunction({

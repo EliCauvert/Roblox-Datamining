@@ -53,7 +53,7 @@ local list = {
 }
 local FFlagEnableUpsellSuggestionsAnalyticsId = require(Parent.SharedFlags).FFlagEnableUpsellSuggestionsAnalyticsId
 
-local function handleSuccessfulUpsellSuggestions(p1, p2) --[[ Line: 69 ]]
+local function handleSuccessfulUpsellSuggestions(p1, p2)
 	-- upvalues: HasPendingRequestModule (copy), PromptNativeUpsellSuggestionsModule (copy), SendCounterModule (copy), CounterModule (copy)
 	if HasPendingRequestModule(p1:getState()) then
 		p1:dispatch(PromptNativeUpsellSuggestionsModule(p2.products, 1, p2.virtualItemBadgeType, p2.experimentVariant))
@@ -63,7 +63,7 @@ local function handleSuccessfulUpsellSuggestions(p1, p2) --[[ Line: 69 ]]
 	end
 end
 
-local function handleFailedUpsellProduct(p1, _) --[[ Line: 86 ]]
+local function handleFailedUpsellProduct(p1, _)
 	-- upvalues: HasPendingRequestModule (copy), PurchaseFlowModule (copy), SetPromptStateModule (copy), PromptStateModule (copy), SendCounterModule (copy), CounterModule (copy), ErrorOccurredModule (copy), PurchaseErrorModule (copy)
 	if not HasPendingRequestModule(p1:getState()) then return end
 	if p1:getState().purchaseFlow == PurchaseFlowModule.LargeRobuxUpsell then
@@ -77,9 +77,9 @@ local function handleFailedUpsellProduct(p1, _) --[[ Line: 86 ]]
 	end
 end
 
-return function(Player, p1, p2, p3, p4, p5, p6, p7) --[[ Line: 102 | Named "resolvePromptState" ]]
+return function(Player, p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: ThunkModule (copy), list (copy), ABTestModule (copy), AnalyticsModule (copy), ExternalSettingsModule (copy), NetworkModule (copy), ProductInfoReceivedModule (copy), AccountInfoReceivedModule (copy), BalanceInfoRecievedModule (copy), SetIsUserEligibleForUnifiedPurchaseFlowModule (copy), SetPurchaseAnalyticsMetadataModule (copy), GetPurchaseSurfaceModule (copy), GetProductTypeFromRequestTypeModule (copy), FFlagUpdatePriceTelemetry (copy), SelectPriceModule (copy), FFlagUnifiedPurchaseGamepassAddProductUniverseId (copy), SetRobloxSubscriptionProductsModule (copy), MeetsPrerequisitesModule (copy), PurchaseErrorModule (copy), CompleteRequestModule (copy), ErrorOccurredModule (copy), GetPlayerProductInfoPriceModule (copy), UserInputService (copy), SelectCartPricingOverrideModule (copy), GetPaymentPlatformModule (copy), PaymentPlatformModule (copy), SetPurchaseFlowModule (copy), PurchaseFlowModule (copy), SetPostPurchaseActionsModule (copy), LargerRobuxUpsellTestModule (copy), GetFStringLargerRobuxUpsellIxpLayerFunction (copy), FFlagEnableUpsellSuggestionsAnalyticsId (copy), GetRobuxUpsellSuggestionsModule (copy), IsEligibleForRobuxUpsellPlusButtonModule (copy), handleSuccessfulUpsellSuggestions (copy), handleFailedUpsellProduct (copy), RequestTypeModule (copy), CompleteRequestModule1 (copy), SetPromptStateModule (copy), PromptStateModule (copy)
-	return ThunkModule.new(script.Name, list, function(p8, p9) --[[ Line: 112 ]]
+	return ThunkModule.new(script.Name, list, function(p8, p9)
 		-- upvalues: ABTestModule (upval), AnalyticsModule (upval), ExternalSettingsModule (upval), NetworkModule (upval), ProductInfoReceivedModule (upval), Player (copy), AccountInfoReceivedModule (upval), p1 (copy), BalanceInfoRecievedModule (upval), p2 (copy), p6 (copy), SetIsUserEligibleForUnifiedPurchaseFlowModule (upval), SetPurchaseAnalyticsMetadataModule (upval), GetPurchaseSurfaceModule (upval), GetProductTypeFromRequestTypeModule (upval), FFlagUpdatePriceTelemetry (upval), SelectPriceModule (upval), p5 (copy), FFlagUnifiedPurchaseGamepassAddProductUniverseId (upval), p7 (copy), SetRobloxSubscriptionProductsModule (upval), p4 (copy), MeetsPrerequisitesModule (upval), p3 (copy), PurchaseErrorModule (upval), CompleteRequestModule (upval), ErrorOccurredModule (upval), GetPlayerProductInfoPriceModule (upval), UserInputService (upval), SelectCartPricingOverrideModule (upval), GetPaymentPlatformModule (upval), PaymentPlatformModule (upval), SetPurchaseFlowModule (upval), PurchaseFlowModule (upval), SetPostPurchaseActionsModule (upval), LargerRobuxUpsellTestModule (upval), GetFStringLargerRobuxUpsellIxpLayerFunction (upval), FFlagEnableUpsellSuggestionsAnalyticsId (upval), GetRobuxUpsellSuggestionsModule (upval), IsEligibleForRobuxUpsellPlusButtonModule (upval), handleSuccessfulUpsellSuggestions (upval), handleFailedUpsellProduct (upval), RequestTypeModule (upval), CompleteRequestModule1 (upval), SetPromptStateModule (upval), PromptStateModule (upval)
 		local State = p8:getState()
 		local v1 = p9[ABTestModule]
@@ -157,10 +157,10 @@ return function(Player, p1, p2, p3, p4, p5, p6, p7) --[[ Line: 102 | Named "reso
 			end
 			local State2 = p8:getState()
 			
-			return GetRobuxUpsellSuggestionsModule(PlayerProductInfoPriceModule, Robux, PaymentPlatformModule1, IsEligibleForRobuxUpsellPlusButtonModule(State2.isUserEligibleForUnifiedPurchaseFlow, State2.robloxSubscriptionProducts, State2.productPayload, SelectPriceModule(State2), State2.promptRequest.requestType), Player.ProductId, Player.DisplayName, game.GameId, FFlagEnableUpsellSuggestionsAnalyticsId and State.purchaseFlowUUID or nil):andThen(function(Result) --[[ Line: 240 ]]
+			return GetRobuxUpsellSuggestionsModule(PlayerProductInfoPriceModule, Robux, PaymentPlatformModule1, IsEligibleForRobuxUpsellPlusButtonModule(State2.isUserEligibleForUnifiedPurchaseFlow, State2.robloxSubscriptionProducts, State2.productPayload, SelectPriceModule(State2), State2.promptRequest.requestType), Player.ProductId, Player.DisplayName, game.GameId, FFlagEnableUpsellSuggestionsAnalyticsId and State.purchaseFlowUUID or nil):andThen(function(Result)
 				-- upvalues: handleSuccessfulUpsellSuggestions (upval), p8 (copy)
 				return handleSuccessfulUpsellSuggestions(p8, Result)
-			end, function() --[[ Line: 244 ]]
+			end, function()
 				-- upvalues: handleFailedUpsellProduct (upval), p8 (copy), State (copy)
 				return handleFailedUpsellProduct(p8, State)
 			end)

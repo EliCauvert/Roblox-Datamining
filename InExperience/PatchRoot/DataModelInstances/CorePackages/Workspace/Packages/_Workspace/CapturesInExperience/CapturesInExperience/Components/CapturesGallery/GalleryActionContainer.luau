@@ -25,11 +25,11 @@ local EventNamesModule = require(Parent.Analytics.EventNames)
 local GetCaptureStorageUsageModule = require(Parent.Utils.getCaptureStorageUsage)
 local UsePingLazyRenderResizingModule = require(Parent.Hooks.usePingLazyRenderResizing)
 
-return (require(Parent.App.CapturesPolicy).connect(function(p1) --[[ Line: 206 ]]
+return (require(Parent.App.CapturesPolicy).connect(function(p1)
 	return {
 		enableCapturesBulkManagement = p1.enableCapturesBulkManagement()
 	}
-end)(function(Frame) --[[ Line: 47 ]]
+end)(function(Frame)
 	-- upvalues: UseAnalyticsModule (copy), UseStyleFunction (copy), UseDispatchFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), EventNamesModule (copy), CaptureManagerOpenedModule (copy), GetCaptureStorageUsageModule (copy), UsePingLazyRenderResizingModule (copy), IconButton (copy), Images (copy), IconSize (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), WithTooltipFunction (copy), TooltipOrientation (copy), CoreGui (copy), Interactable (copy), ImageSetLabel (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseStyleResult = UseStyleFunction()
@@ -47,31 +47,31 @@ end)(function(Frame) --[[ Line: 47 ]]
 			numberOfCaptures = Frame.itemCount
 		}
 	})
-	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 68 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p1)
 		-- upvalues: ConstantsModule (upval)
 		return p1[ConstantsModule.RoduxKey].Captures
 	end)
-	local UseSelectorResult1 = UseSelectorFunction(function(p1) --[[ Line: 72 ]]
+	local UseSelectorResult1 = UseSelectorFunction(function(p1)
 		-- upvalues: ConstantsModule (upval)
 		return p1[ConstantsModule.RoduxKey].Carousel.IsOpen
 	end)
-	ReactModule.useEffect(function() --[[ Line: 76 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSelectorResult1 (copy), UseStateResult2 (copy)
 		if UseSelectorResult1 then
 			UseStateResult2(false)
 		end
 	end, { UseSelectorResult1 })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 82 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval), UseDispatchResult (copy), CaptureManagerOpenedModule (upval)
 		UseStateResult2(false)
 		UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesManagerOpened)
 		UseDispatchResult(CaptureManagerOpenedModule())
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(_) --[[ Line: 88 ]]
+	local UseResult1 = ReactModule.useCallback(function(_)
 		-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
 		UseStateResult2(not UseStateResult)
 	end, { UseStateResult })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 92 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: GetCaptureStorageUsageModule (upval), UseSelectorResult (copy)
 		return GetCaptureStorageUsageModule(UseSelectorResult)
 	end, { UseSelectorResult })
@@ -142,9 +142,9 @@ end)(function(Frame) --[[ Line: 47 ]]
 					preferredOrientation = TooltipOrientation.Bottom,
 					guiTarget = CoreGui,
 					active = UseStateResult
-				}, function(Callback) --[[ Line: 180 ]]
+				}, function(Callback)
 					-- upvalues: UseStateResult2 (copy), ReactModule (upval), Interactable (upval), UseResult1 (copy), ImageSetLabel (upval), Images (upval)
-					local function v37(p1) --[[ Line: 181 ]]
+					local function v37(p1)
 						-- upvalues: UseStateResult2 (upval), Callback (copy)
 						UseStateResult2(false)
 						Callback(p1)

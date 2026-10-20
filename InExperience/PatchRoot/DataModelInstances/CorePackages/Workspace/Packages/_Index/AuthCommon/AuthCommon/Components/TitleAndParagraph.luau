@@ -20,11 +20,11 @@ TitleAndParagraph.defaultProps = {
 	paragraphTextArgs = {}
 }
 
-function TitleAndParagraph.init(p1) --[[ Line: 35 ]]
+function TitleAndParagraph.init(p1)
 	p1.parametersCache = {}
 end
 
-function TitleAndParagraph.getCachedParameters(p1, p2, List) --[[ Line: 40 ]]
+function TitleAndParagraph.getCachedParameters(p1, p2, List)
 	if type(List) ~= "table" then
 		return nil
 	end
@@ -45,15 +45,15 @@ function TitleAndParagraph.getCachedParameters(p1, p2, List) --[[ Line: 40 ]]
 	return t
 end
 
-local function _(p3): string --[[ Line: 67 ]]
+local function _(p3): string
 	return "paragraphText" .. tostring(p3)
 end
 
-local _ = function(p3): string --[[ Line: 74 ]]
+local _ = function(p3): string
 	return "paragraphTextTemplate" .. tostring(p3)
 end
 
-function TitleAndParagraph.render(p3) --[[ Line: 78 ]]
+function TitleAndParagraph.render(p3)
 	-- upvalues: ArgCheckModule (copy), GetFFlagEnableAuditForSsoFunction (copy), GetFFlagEnableAuditForSinglePageSignUpFunction (copy), WithLocalizationFunction (copy), WithStyleFunction (copy), FormFactor (copy), RoactModule (copy), FitTextLabelModule (copy), FitChildrenModule (copy), RegisterAuditContentModule (copy)
 	local FormFactor1 = p3.props.formFactor
 	local LayoutOrder = p3.props.layoutOrder
@@ -75,9 +75,9 @@ function TitleAndParagraph.render(p3) --[[ Line: 78 ]]
 	if not GetFFlagEnableAuditForSsoFunction() and GetFFlagEnableAuditForSinglePageSignUpFunction() and p3.props.enableAuditContentCapture then
 		config.verificationLinkingTextTemplate = "Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName"
 	end
-	return WithLocalizationFunction(config)(function(p4) --[[ Line: 122 ]]
+	return WithLocalizationFunction(config)(function(p4)
 		-- upvalues: WithStyleFunction (upval), FormFactor1 (copy), FormFactor (upval), RoactModule (upval), FitTextLabelModule (upval), TextXAlignment (copy), FitChildrenModule (upval), ParagraphTextKeys (copy), GetFFlagEnableAuditForSinglePageSignUpFunction (upval), p3 (copy), RegisterAuditContentModule (upval), GetFFlagEnableAuditForSsoFunction (upval), LayoutOrder (copy), _UDim2 (ref)
-		return WithStyleFunction(function(p5) --[[ Line: 123 ]]
+		return WithStyleFunction(function(p5)
 			-- upvalues: FormFactor1 (upval), FormFactor (upval), RoactModule (upval), p4 (copy), FitTextLabelModule (upval), TextXAlignment (upval), FitChildrenModule (upval), ParagraphTextKeys (upval), GetFFlagEnableAuditForSinglePageSignUpFunction (upval), p3 (upval), RegisterAuditContentModule (upval), GetFFlagEnableAuditForSsoFunction (upval), LayoutOrder (upval), _UDim2 (upval)
 			local ScaledBaseSize = p5.Font.BaseSize * p5.Font.Title.RelativeSize
 			local TitleFont = p5.Font.Title.Font
@@ -154,6 +154,6 @@ function TitleAndParagraph.render(p3) --[[ Line: 78 ]]
 	end)
 end
 
-return (RoactRoduxModule.connect(function(p4, _) --[[ Line: 223 ]]
+return (RoactRoduxModule.connect(function(p4, _)
 	return { formFactor = p4.FormFactor }
 end)(TitleAndParagraph))

@@ -2,10 +2,10 @@
 local v1 = nil
 local Flag = false
 
-local function _() --[[ Line: 7 ]]
+local function _()
 	-- upvalues: Flag (ref), v1 (ref)
 	if not Flag then
-		local Success, Result = pcall(function() --[[ Line: 9 ]]
+		local Success, Result = pcall(function()
 			return game:GetService("AudioFocusService")
 		end)
 		
@@ -17,10 +17,10 @@ local function _() --[[ Line: 7 ]]
 	return v1
 end
 
-return function(): boolean --[[ Line: 20 ]]
+return function(): boolean
 	-- upvalues: Flag (ref), v1 (ref), ConstantsModule (copy)
 	if not Flag then
-		local Success, Result = pcall(function() --[[ Line: 9 ]]
+		local Success, Result = pcall(function()
 			return game:GetService("AudioFocusService")
 		end)
 		

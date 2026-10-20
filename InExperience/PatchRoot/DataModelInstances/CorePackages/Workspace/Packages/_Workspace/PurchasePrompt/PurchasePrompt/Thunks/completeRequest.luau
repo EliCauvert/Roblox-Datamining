@@ -15,9 +15,9 @@ local ThunkModule = require(Parent.Thunk)
 local FFlagEnableUnifiedPurchaseFlowForDevSubs = require(Parent.Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
 local list = { AnalyticsModule, PublicBindablesModule }
 
-return function() --[[ Line: 30 | Named "completeRequest" ]]
+return function()
 	-- upvalues: ThunkModule (copy), list (copy), AnalyticsModule (copy), SelectedRobuxPackageModule (copy), PromptStateModule (copy), SendCounterModule (copy), CounterModule (copy), RequestTypeModule (copy), Players (copy), MarketplaceService (copy), PurchaseErrorModule (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), PublicBindablesModule (copy), CompleteRequestModule (copy)
-	return ThunkModule.new(script.Name, list, function(p1, p2) --[[ Line: 31 ]]
+	return ThunkModule.new(script.Name, list, function(p1, p2)
 		-- upvalues: AnalyticsModule (upval), SelectedRobuxPackageModule (upval), PromptStateModule (upval), SendCounterModule (upval), CounterModule (upval), RequestTypeModule (upval), Players (upval), MarketplaceService (upval), PurchaseErrorModule (upval), FFlagEnableUnifiedPurchaseFlowForDevSubs (upval), PublicBindablesModule (upval), CompleteRequestModule (upval)
 		local v1 = p2[AnalyticsModule]
 		local State = p1:getState()
@@ -55,7 +55,7 @@ return function() --[[ Line: 30 | Named "completeRequest" ]]
 			local AssetTypeId = State.productInfo.assetTypeId
 			
 			if HasCompletedPurchase and AssetTypeId then
-				pcall(function() --[[ Line: 74 ]]
+				pcall(function()
 					-- upvalues: MarketplaceService (upval), Players (upval), AssetTypeId (copy)
 					MarketplaceService:SignalAssetTypePurchased(Players.LocalPlayer, AssetTypeId)
 				end)

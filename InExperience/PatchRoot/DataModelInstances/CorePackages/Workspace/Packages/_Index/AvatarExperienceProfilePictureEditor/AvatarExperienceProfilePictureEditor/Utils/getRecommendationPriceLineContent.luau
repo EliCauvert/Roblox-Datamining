@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent.AvatarExperienceUIKit)
 
-return function(p1) --[[ Line: 19 | Named "getRecommendationPriceLineContent" ]]
+return function(p1)
 	local PriceStatus = p1.priceStatus
 	
 	if typeof(PriceStatus) == "string" and PriceStatus ~= "" then

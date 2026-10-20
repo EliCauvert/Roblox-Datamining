@@ -31,31 +31,31 @@ EmoteThumbnailEditor.validateProps = TModule.strictInterface({
 	updateThumbnailCallback = TModule.callback
 })
 
-function EmoteThumbnailEditor.init(p1) --[[ Line: 65 ]]
+function EmoteThumbnailEditor.init(p1)
 	-- upvalues: EmoteThumbnailParametersModule (copy), RoactModule (copy)
 	p1:setState({
 		thumbnailParameters = p1.props.initialThumbnailParameters or EmoteThumbnailParametersModule.defaultParameters
 	})
 	
-	function p1.onCancelPressed() --[[ Line: 73 ]]
+	function p1.onCancelPressed()
 		-- upvalues: p1 (copy)
 		p1.props.closePromptCallback()
 	end
 	
-	function p1.onUpdatePressed() --[[ Line: 77 ]]
+	function p1.onUpdatePressed()
 		-- upvalues: p1 (copy)
 		p1.props.updateThumbnailCallback(p1.state.thumbnailParameters)
 		p1.props.closePromptCallback()
 	end
 	
-	function p1.onRotateChanged(ThumbnailCharacterRotation) --[[ Line: 83 ]]
+	function p1.onRotateChanged(ThumbnailCharacterRotation)
 		-- upvalues: p1 (copy)
 		local Copy = table.clone(p1.state.thumbnailParameters)
 		Copy.thumbnailCharacterRotation = ThumbnailCharacterRotation
 		p1:updateThumbnailParameters(Copy)
 	end
 	
-	function p1.onKeyframeOrTimeChanged(ThumbnailKeyframe) --[[ Line: 89 ]]
+	function p1.onKeyframeOrTimeChanged(ThumbnailKeyframe)
 		-- upvalues: p1 (copy)
 		local Copy = table.clone(p1.state.thumbnailParameters)
 		Copy.thumbnailTime = ThumbnailKeyframe
@@ -68,7 +68,7 @@ function EmoteThumbnailEditor.init(p1) --[[ Line: 65 ]]
 	p1:updateSliderValuesForAnimationClip()
 end
 
-function EmoteThumbnailEditor.updateSliderValuesForAnimationClip(p1) --[[ Line: 103 ]]
+function EmoteThumbnailEditor.updateSliderValuesForAnimationClip(p1)
 	-- upvalues: EmoteUtility (copy)
 	local Props = p1.props
 	local TimeSliderMin: number? = nil
@@ -93,13 +93,13 @@ function EmoteThumbnailEditor.updateSliderValuesForAnimationClip(p1) --[[ Line: 
 	})
 end
 
-function EmoteThumbnailEditor.updateThumbnailParameters(p1, ThumbnailParameters) --[[ Line: 131 ]]
+function EmoteThumbnailEditor.updateThumbnailParameters(p1, ThumbnailParameters)
 	p1:setState({ thumbnailParameters = ThumbnailParameters })
 end
 
-function EmoteThumbnailEditor.renderMiddle(p1, LocalizedStrings) --[[ Line: 137 ]]
+function EmoteThumbnailEditor.renderMiddle(p1, LocalizedStrings)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy), RoactGamepadModule (copy), EmoteThumbnailViewModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), SystemSlider (copy), config (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 138 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: p1 (copy), RoactModule (upval), RoactGamepadModule (upval), EmoteThumbnailViewModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), LocalizedStrings (copy), SystemSlider (upval), config (upval)
 		local _Font = p2.Font
 		local Theme = p2.Theme
@@ -120,7 +120,7 @@ function EmoteThumbnailEditor.renderMiddle(p1, LocalizedStrings) --[[ Line: 137 
 		end
 		local ThumbnailParameters = p1.state.thumbnailParameters
 		
-		local function _(p3) --[[ Line: 164 | Named "getStepIntervalForOption" ]]
+		local function _(p3)
 			return (p3.Range.Max - p3.Range.Min) / (p3.Increments - 1)
 		end
 		
@@ -215,7 +215,7 @@ function EmoteThumbnailEditor.renderMiddle(p1, LocalizedStrings) --[[ Line: 137 
 	end)
 end
 
-function EmoteThumbnailEditor.renderAlertLocalized(p1, LocalizedStrings) --[[ Line: 267 ]]
+function EmoteThumbnailEditor.renderAlertLocalized(p1, LocalizedStrings)
 	-- upvalues: RoactModule (copy), InteractiveAlert (copy), ButtonType (copy)
 	return RoactModule.createElement(InteractiveAlert, {
 		isMiddleContentFocusable = true,
@@ -239,7 +239,7 @@ function EmoteThumbnailEditor.renderAlertLocalized(p1, LocalizedStrings) --[[ Li
 				}
 			}
 		},
-		middleContent = function() --[[ Line: 289 ]]
+		middleContent = function()
 			-- upvalues: p1 (copy), LocalizedStrings (copy)
 			return p1:renderMiddle(LocalizedStrings)
 		end,
@@ -248,7 +248,7 @@ function EmoteThumbnailEditor.renderAlertLocalized(p1, LocalizedStrings) --[[ Li
 	})
 end
 
-local function GetLocalizedStrings() --[[ Line: 298 ]]
+local function GetLocalizedStrings()
 	-- upvalues: RobloxTranslatorModule (copy)
 	return {
 		cancelButtonText = RobloxTranslatorModule:FormatByKey("CoreScripts.EmoteThumbnailEditor.Action.Cancel"),
@@ -259,7 +259,7 @@ local function GetLocalizedStrings() --[[ Line: 298 ]]
 	}
 end
 
-function EmoteThumbnailEditor.render(p1) --[[ Line: 310 ]]
+function EmoteThumbnailEditor.render(p1)
 	-- upvalues: GetLocalizedStrings (copy)
 	return p1:renderAlertLocalized((GetLocalizedStrings()))
 end

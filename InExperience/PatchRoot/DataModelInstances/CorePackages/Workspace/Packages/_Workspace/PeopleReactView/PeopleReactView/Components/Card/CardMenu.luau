@@ -20,7 +20,7 @@ local FFlagPeoplePageDismissCardMenuOnScrollOutOfView = FlagsService.FFlagPeople
 local FFlagVoiceChatVolumePerUserDisableInteractionWhenMutedModule = require(PeopleReactView.Flags.FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted)
 local FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry = FlagsService.FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry
 
-return ReactModule.memo(function(p1) --[[ Line: 42 | Named "CardMenu" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ConstantsModule (copy), FFlagVoiceVolumeControlsPerUserPlayerGridMenu (copy), UseGetPeopleServiceModule (copy), PersonButtonConfigsModule (copy), SignalsReactModule (copy), FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), ReactModule (copy), FFlagPeoplePageDismissCardMenuOnScrollOutOfView (copy), UseDismissWhenOutOfViewModule (copy), IconName (copy), PersonButtonModule (copy), View (copy), CardMenuWithVoiceVolumeModule (copy), FFlagVoiceChatVolumePerUserDisableInteractionWhenMutedModule (copy), Menu (copy), InputSize (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		unblock = ConstantsModule.PEOPLEPAGE.PERSON_BUTTONS.LOCALIZED_STRINGS.UNBLOCK,
@@ -41,17 +41,17 @@ return ReactModule.memo(function(p1) --[[ Line: 42 | Named "CardMenu" ]]
 	local UseSignalStateResult3 = if FFlagVoiceVolumeControlsPerUserPlayerGridMenu then SignalsReactModule.useSignalState(PeopleVoiceChatStore.getShowVolumeControl) else false
 	local ShouldShow = if FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then UseSignalStateResult3 and PersonButtonConfigsModuleResult[Constants.PERSON_BUTTONS.MUTE_PLAYER].shouldShow() else false
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 73 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy), UseStateResult2 (copy)
 		p1.onIsOpenChanged(p2)
 		UseStateResult2(p2)
 	end, { p1.onIsOpenChanged })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 78 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: PeopleAnalyticsManager (copy), UseResult (copy)
 		PeopleAnalyticsManager:trackPersonCardMenuToggled(false)
 		UseResult(false)
 	end, { UseResult })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 84 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult (copy), PeopleAnalyticsManager (copy), FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (upval), ShouldShow (copy), Constants (copy), UseResult (copy)
 		local NoUseStateResult = not UseStateResult
 		PeopleAnalyticsManager:trackPersonCardMenuToggled(NoUseStateResult)
@@ -72,7 +72,7 @@ return ReactModule.memo(function(p1) --[[ Line: 42 | Named "CardMenu" ]]
 		UseRefResult = ReactModule.useRef(nil)
 		UseDismissWhenOutOfViewModule(UseStateResult, UseResult1, UseRefResult)
 	end
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 112 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: PersonButtonConfigsModuleResult (copy), Constants (copy)
 		return PersonButtonConfigsModuleResult[Constants.PERSON_BUTTONS.MUTE_PLAYER].animatedIcon
 	end, { PersonButtonConfigsModuleResult })
@@ -80,12 +80,12 @@ return ReactModule.memo(function(p1) --[[ Line: 42 | Named "CardMenu" ]]
 	
 	if FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then
 		local GetPlayerIsLocalMutedFunction = PeopleVoiceChatStore.getPlayerIsLocalMuted
-		UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 119 ]]
+		UseResult3 = ReactModule.useCallback(function(p2)
 			-- upvalues: GetPlayerIsLocalMutedFunction (copy)
 			return if p2 and GetPlayerIsLocalMutedFunction then GetPlayerIsLocalMutedFunction(p2)(false) else false
 		end, { GetPlayerIsLocalMutedFunction })
 	end
-	local UseMemoResult1 = if FFlagVoiceVolumeControlsPerUserPlayerGridMenu then ReactModule.useMemo(function() --[[ Line: 130 ]]
+	local UseMemoResult1 = if FFlagVoiceVolumeControlsPerUserPlayerGridMenu then ReactModule.useMemo(function()
 		-- upvalues: PersonButtonConfigsModuleResult (copy), Constants (copy), UseSignalStateResult1 (copy), UseLocalizationResult (copy), IconName (upval), UseSignalStateResult3 (copy), UseSignalStateResult (copy), UseResult (copy)
 		local PersonButtonConfigsModuleResultEntry = PersonButtonConfigsModuleResult[Constants.PERSON_BUTTONS.MUTE_PLAYER]
 		local PersonButtonConfigsModuleResultEntry1 = PersonButtonConfigsModuleResult[Constants.PERSON_BUTTONS.BLOCK_PLAYER]
@@ -97,7 +97,7 @@ return ReactModule.memo(function(p1) --[[ Line: 42 | Named "CardMenu" ]]
 			id = "mute",
 			text = if UseSignalStateResult1 then UseLocalizationResult.unmute else UseLocalizationResult.mute,
 			icon = if UseSignalStateResult1 then IconName.SpeakerSlash else IconName.Speaker,
-			onActivated = function() --[[ Line: 145 ]]
+			onActivated = function()
 				-- upvalues: PersonButtonConfigsModuleResultEntry (copy), PEOPLECARD (copy)
 				PersonButtonConfigsModuleResultEntry.onActivated(PEOPLECARD)
 			end
@@ -111,7 +111,7 @@ return ReactModule.memo(function(p1) --[[ Line: 42 | Named "CardMenu" ]]
 				id = "block",
 				text = if UseSignalStateResult then UseLocalizationResult.unblock else UseLocalizationResult.block,
 				icon = IconName.CircleSlash,
-				onActivated = function() --[[ Line: 161 ]]
+				onActivated = function()
 					-- upvalues: PersonButtonConfigsModuleResultEntry1 (copy), PEOPLECARD (copy), UseResult (upval)
 					PersonButtonConfigsModuleResultEntry1.onActivated(PEOPLECARD)
 					UseResult(false)
@@ -123,7 +123,7 @@ return ReactModule.memo(function(p1) --[[ Line: 42 | Named "CardMenu" ]]
 				id = "report",
 				text = UseLocalizationResult.report,
 				icon = IconName.Flag,
-				onActivated = function() --[[ Line: 172 ]]
+				onActivated = function()
 					-- upvalues: PersonButtonConfigsModuleResultEntry2 (copy), PEOPLECARD (copy)
 					PersonButtonConfigsModuleResultEntry2.onActivated(PEOPLECARD)
 				end
@@ -143,7 +143,7 @@ return ReactModule.memo(function(p1) --[[ Line: 42 | Named "CardMenu" ]]
 	end, {
 		UseSignalStateResult, UseSignalStateResult1, UseResult,
 		PersonButtonConfigsModuleResult, UseLocalizationResult, UseSignalStateResult3
-	}) else ReactModule.useMemo(function() --[[ Line: 201 ]]
+	}) else ReactModule.useMemo(function()
 		-- upvalues: PersonButtonConfigsModuleResult (copy), Constants (copy), UseSignalStateResult1 (copy), UseLocalizationResult (copy), IconName (upval), UseSignalStateResult (copy), UseResult (copy)
 		local PersonButtonConfigsModuleResultEntry = PersonButtonConfigsModuleResult[Constants.PERSON_BUTTONS.MUTE_PLAYER]
 		local PersonButtonConfigsModuleResultEntry1 = PersonButtonConfigsModuleResult[Constants.PERSON_BUTTONS.BLOCK_PLAYER]
@@ -155,7 +155,7 @@ return ReactModule.memo(function(p1) --[[ Line: 42 | Named "CardMenu" ]]
 				id = "mute",
 				text = if UseSignalStateResult1 then UseLocalizationResult.unmute else UseLocalizationResult.mute,
 				icon = if UseSignalStateResult1 then IconName.SpeakerSlash else IconName.Speaker,
-				onActivated = function() --[[ Line: 213 ]]
+				onActivated = function()
 					-- upvalues: PersonButtonConfigsModuleResultEntry (copy), Constants (upval)
 					PersonButtonConfigsModuleResultEntry.onActivated(Constants.ANALYTICS.ENTRY_POINT.PEOPLE_CARD)
 				end
@@ -166,7 +166,7 @@ return ReactModule.memo(function(p1) --[[ Line: 42 | Named "CardMenu" ]]
 				id = "block",
 				text = if UseSignalStateResult then UseLocalizationResult.unblock else UseLocalizationResult.block,
 				icon = IconName.CircleSlash,
-				onActivated = function() --[[ Line: 223 ]]
+				onActivated = function()
 					-- upvalues: PersonButtonConfigsModuleResultEntry1 (copy), Constants (upval), UseResult (upval)
 					PersonButtonConfigsModuleResultEntry1.onActivated(Constants.ANALYTICS.ENTRY_POINT.PEOPLE_CARD)
 					UseResult(false)
@@ -178,7 +178,7 @@ return ReactModule.memo(function(p1) --[[ Line: 42 | Named "CardMenu" ]]
 				id = "report",
 				text = UseLocalizationResult.report,
 				icon = IconName.Flag,
-				onActivated = function() --[[ Line: 234 ]]
+				onActivated = function()
 					-- upvalues: PersonButtonConfigsModuleResultEntry2 (copy), Constants (upval)
 					PersonButtonConfigsModuleResultEntry2.onActivated(Constants.ANALYTICS.ENTRY_POINT.PEOPLE_CARD)
 				end

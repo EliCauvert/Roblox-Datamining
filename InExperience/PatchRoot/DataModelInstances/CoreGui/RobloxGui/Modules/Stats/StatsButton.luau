@@ -10,7 +10,7 @@ local _UDim2_3 = UDim2.new(0.5, 0, 1, -StyleWidgetsModule.TabSelectionHeight)
 local StatsButtonModule = {}
 StatsButtonModule.__index = StatsButtonModule
 
-function StatsButtonModule.new(StatType) --[[ Line: 30 ]]
+function StatsButtonModule.new(StatType)
 	-- upvalues: StatsButtonModule (copy), StatsUtilsModule (copy), StatsMiniTextPanelModule (copy), _UDim2_1 (copy), _UDim2 (copy), StatsAnnotatedGraphModule (copy), _UDim2_3 (copy), _UDim2_2 (copy), StyleWidgetsModule (copy)
 	local t = {}
 	setmetatable(t, StatsButtonModule)
@@ -32,7 +32,7 @@ function StatsButtonModule.new(StatType) --[[ Line: 30 ]]
 	return t
 end
 
-function StatsButtonModule:OnPerformanceStatsShouldBeVisibleChanged() --[[ Line: 63 ]]
+function StatsButtonModule:OnPerformanceStatsShouldBeVisibleChanged()
 	if self._graph then
 		self._graph:OnPerformanceStatsShouldBeVisibleChanged()
 	end
@@ -41,32 +41,32 @@ function StatsButtonModule:OnPerformanceStatsShouldBeVisibleChanged() --[[ Line:
 	end
 end
 
-function StatsButtonModule:SetToggleCallbackFunction(Callback) --[[ Line: 73 ]]
-	self._button.MouseButton1Click:connect(function() --[[ Line: 74 ]]
+function StatsButtonModule:SetToggleCallbackFunction(Callback)
+	self._button.MouseButton1Click:connect(function()
 		-- upvalues: Callback (copy), self (copy)
 		Callback(self._statType)
 	end)
 end
 
-function StatsButtonModule:SetSizeAndPosition(Size, Position) --[[ Line: 79 ]]
+function StatsButtonModule:SetSizeAndPosition(Size, Position)
 	self._button.Size = Size
 	self._button.Position = Position
 end
 
-function StatsButtonModule:SetIsSelected(_isSelected) --[[ Line: 84 ]]
+function StatsButtonModule:SetIsSelected(_isSelected)
 	self._isSelected = _isSelected
 	self:_updateTabSelectionState()
 end
 
-function StatsButtonModule:_updateTabSelectionState() --[[ Line: 89 ]]
+function StatsButtonModule:_updateTabSelectionState()
 	self._tabSelection.Visible = self._isSelected
 end
 
-function StatsButtonModule:SetParent(Parent) --[[ Line: 93 ]]
+function StatsButtonModule:SetParent(Parent)
 	self._button.Parent = Parent
 end
 
-function StatsButtonModule:SetStatsAggregator(p1) --[[ Line: 97 ]]
+function StatsButtonModule:SetStatsAggregator(p1)
 	self._textPanel:SetStatsAggregator(p1)
 	self._graph:SetStatsAggregator(p1)
 end

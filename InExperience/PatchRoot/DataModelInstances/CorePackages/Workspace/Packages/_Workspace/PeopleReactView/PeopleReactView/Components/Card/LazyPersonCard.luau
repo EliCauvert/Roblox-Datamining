@@ -16,7 +16,7 @@ local FlagsService = require(Parent.PeopleService).getService("Flags")
 local GetFFlagPeoplePageEnablePersonSignalStoreFunction = FlagsService.GetFFlagPeoplePageEnablePersonSignalStore
 local FFlagPeoplePageRemoveSkeletons = FlagsService.FFlagPeoplePageRemoveSkeletons
 local FFlagPeoplePageRemoveUseMemoElements = FlagsService.FFlagPeoplePageRemoveUseMemoElements
-local MemoResult = ReactModule.memo(function(p1) --[[ Line: 33 ]]
+local MemoResult = ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), FFlagPeoplePageRemoveSkeletons (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy)
 	local UseTokensResult = UseTokensFunction()
 	
@@ -45,15 +45,15 @@ local MemoResult = ReactModule.memo(function(p1) --[[ Line: 33 ]]
 	})
 end)
 
-return ReactModule.memo(function(p1) --[[ Line: 87 ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), GetFFlagPeoplePageEnablePersonSignalStoreFunction (copy), SignalsReactModule (copy), SignalsModule (copy), ReactIsModule (copy), FFlagPeoplePageRemoveUseMemoElements (copy), ReactModule (copy), PersonCardModule (copy), MemoResult (copy), FFlagPeoplePageRemoveSkeletons (copy), View (copy), Skeleton (copy), Radius (copy), LazyScrollingComponentModule (copy)
 	local UseTokensResult = UseTokensFunction()
-	local UseSignalBindingResult = if GetFFlagPeoplePageEnablePersonSignalStoreFunction() then SignalsReactModule.useSignalBinding(SignalsModule.createComputed(function(p2) --[[ Line: 91 ]]
+	local UseSignalBindingResult = if GetFFlagPeoplePageEnablePersonSignalStoreFunction() then SignalsReactModule.useSignalBinding(SignalsModule.createComputed(function(p2)
 		-- upvalues: p1 (copy)
 		return if type(p1.layoutOrder) == "function" then p1.layoutOrder(p2) else p1.layoutOrder or 0
 	end)) else nil
 	local MapResult = nil
-	MapResult = if ReactIsModule.isBinding(p1.width) then p1.width:map(function(XOffset): UDim2 --[[ Line: 101 ]]
+	MapResult = if ReactIsModule.isBinding(p1.width) then p1.width:map(function(XOffset): UDim2
 		-- upvalues: UseTokensResult (copy)
 		return UDim2.new(0, XOffset, 0, XOffset + UseTokensResult.Size.Size_1400)
 	end) else UDim2.new(0, p1.width, 0, p1.width + UseTokensResult.Size.Size_1400)
@@ -65,7 +65,7 @@ return ReactModule.memo(function(p1) --[[ Line: 87 ]]
 		shouldShowMenu = p1.shouldShowMenu,
 		layoutOrder = p1.layoutOrder,
 		isCompactCardLayout = p1.isCompactCardLayout
-	}) else ReactModule.useMemo(function() --[[ Line: 119 ]]
+	}) else ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), PersonCardModule (upval), p1 (copy)
 		return ReactModule.createElement(PersonCardModule, {
 			width = p1.width,
@@ -80,7 +80,7 @@ return ReactModule.memo(function(p1) --[[ Line: 87 ]]
 		p1.width, p1.person, p1.showTooltip, p1.onDismissTooltip, p1.shouldShowMenu,
 		p1.layoutOrder, p1.isCompactCardLayout
 	})
-	local Element1 = if FFlagPeoplePageRemoveUseMemoElements then ReactModule.createElement(MemoResult, { size = MapResult }) else ReactModule.useMemo(function() --[[ Line: 145 ]]
+	local Element1 = if FFlagPeoplePageRemoveUseMemoElements then ReactModule.createElement(MemoResult, { size = MapResult }) else ReactModule.useMemo(function()
 		-- upvalues: FFlagPeoplePageRemoveSkeletons (upval), ReactModule (upval), View (upval), MapResult (ref), Skeleton (upval), Radius (upval), UseTokensResult (copy)
 		return if FFlagPeoplePageRemoveSkeletons then ReactModule.createElement(View, { tag = "bg-surface-100 radius-medium", Size = MapResult }) else ReactModule.createElement(View, {
 			tag = "col bg-surface-100 radius-medium",

@@ -9,7 +9,7 @@ local GetEditableMeshFromContextModule = require(Parent.util.getEditableMeshFrom
 local GetEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule = require(Parent.flags.getEngineFeatureEngineUGCValidationConsolidateAccessorySkinning)
 local GetFFlagUGCValidationEnableR15plusSkinningModule = require(Parent.flags.getFFlagUGCValidationEnableR15plusSkinning)
 local ValidateMeshPartOnlySkinnedToR15Module = {
-	validateMeshPart = function(Child, p1) --[[ Line: 22 ]]
+	validateMeshPart = function(Child, p1)
 		-- upvalues: GetEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule (copy), GetFFlagUGCValidationEnableR15plusSkinningModule (copy), GetEditableMeshFromContextModule (copy), AnalyticsModule (copy), PcallDeferredModule (copy), UGCValidationService (copy), ConstantsModule (copy)
 		if GetEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule() and GetFFlagUGCValidationEnableR15plusSkinningModule() then
 			error("ValidateMeshPartOnlySkinnedToR15 is deprecated. Use RigidSkinnedToSchema / LCSkinnedToSchema / BodySkinnedToSchema instead.")
@@ -23,7 +23,7 @@ local ValidateMeshPartOnlySkinnedToR15Module = {
 				`Could not get editable mesh data for {Child}. Please retry later or make a bug report.`
 			}
 		end
-		local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function() --[[ Line: 46 ]]
+		local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function()
 			-- upvalues: UGCValidationService (upval), MeshId2 (copy)
 			return {
 				UGCValidationService:GetSkinnedJointNamesFromEditableMesh(MeshId2)
@@ -50,7 +50,7 @@ local ValidateMeshPartOnlySkinnedToR15Module = {
 	end
 }
 
-function ValidateMeshPartOnlySkinnedToR15Module.validateBodyParts(Object, p2) --[[ Line: 76 ]]
+function ValidateMeshPartOnlySkinnedToR15Module.validateBodyParts(Object, p2)
 	-- upvalues: GetEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule (copy), GetFFlagUGCValidationEnableR15plusSkinningModule (copy), ConstantsModule (copy), ValidateMeshPartOnlySkinnedToR15Module (copy)
 	if GetEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule() and GetFFlagUGCValidationEnableR15plusSkinningModule() then
 		error("ValidateMeshPartOnlySkinnedToR15 is deprecated. Use RigidSkinnedToSchema / LCSkinnedToSchema / BodySkinnedToSchema instead.")

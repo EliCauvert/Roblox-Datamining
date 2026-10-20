@@ -5,7 +5,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
 local PlayerContext = require(Parent.UIBlox).App.Indicator.PlayerContext
 
-return function(p1) --[[ Line: 16 | Named "ContextualPlayedTogether" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), PlayerContext (copy)
 	local ExperienceName = p1.experienceName
 	

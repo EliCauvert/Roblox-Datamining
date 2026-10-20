@@ -3,7 +3,7 @@ local ReactModule = require(Parent.Parent.React)
 local KeybindContextModule = require(script.Parent.KeybindContext)
 local BindingConfigsModule = require(Parent.Configs.BindingConfigs)
 
-return ReactModule.memo(function(p1) --[[ Line: 14 ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), BindingConfigsModule (copy), KeybindContextModule (copy)
 	local UseStateResult, _ = ReactModule.useState(BindingConfigsModule.ControlGroups)
 	local UseStateResult1, _ = ReactModule.useState(BindingConfigsModule.Controls)

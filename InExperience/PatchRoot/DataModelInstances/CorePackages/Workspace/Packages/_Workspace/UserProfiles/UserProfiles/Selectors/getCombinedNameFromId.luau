@@ -1,6 +1,6 @@
 ﻿local GetUserProfileFromIdModule = require(script.Parent.getUserProfileFromId)
 
-return function(p1, p2) --[[ Line: 3 ]]
+return function(p1, p2)
 	-- upvalues: GetUserProfileFromIdModule (copy)
 	local UserProfileFromIdModule = GetUserProfileFromIdModule(p1, p2)
 	

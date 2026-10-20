@@ -1,13 +1,13 @@
 ﻿local _ = require(script.Parent.Parent.Parent.Parent.LuauPolyfill)
 
-local function defaultMakeData() --[[ Line: 24 ]]
+local function defaultMakeData()
 	return {}
 end
 
 local Module = {}
 Module.__index = Module
 
-function Module.new(Weakness, MakeData) --[[ Line: 67 ]]
+function Module.new(Weakness, MakeData)
 	-- upvalues: defaultMakeData (copy), Module (copy)
 	local Weakness1: boolean = Weakness
 	local MakeData1 = MakeData
@@ -25,11 +25,11 @@ function Module.new(Weakness, MakeData) --[[ Line: 67 ]]
 	return self
 end
 
-function Module:lookup(...) --[[ Line: 88 ]]
+function Module:lookup(...)
 	return self:lookupArray({ ... })
 end
 
-function Module:lookupArray(Tbl) --[[ Line: 97 ]]
+function Module:lookupArray(Tbl)
 	local ChildTrie1 = self
 	
 	for _, value in Tbl do
@@ -41,7 +41,7 @@ function Module:lookupArray(Tbl) --[[ Line: 97 ]]
 	return ChildTrie1.data
 end
 
-function Module:getChildTrie(Key) --[[ Line: 114 ]]
+function Module:getChildTrie(Key)
 	-- upvalues: Module (copy)
 	local Weak = nil
 	if self.weakness then

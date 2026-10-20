@@ -1,4 +1,4 @@
-﻿return function(Parent) --[[ Line: 1 | Named "getAncestors" ]]
+﻿return function(Parent)
 	local List = { Parent }
 	local Parent1 = Parent
 	while Parent1.Parent do

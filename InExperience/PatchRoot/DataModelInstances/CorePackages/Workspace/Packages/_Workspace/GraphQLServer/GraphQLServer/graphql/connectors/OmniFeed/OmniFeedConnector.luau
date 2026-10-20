@@ -11,13 +11,13 @@ local _ = require(script.Parent.Parent.Parent.generatedTypes)
 local OmniRecommendationMetadata = require(Parent.UrlBuilder).UrlBuilder.fromString("apis:discovery-api/omni-recommendation-metadata")
 
 return {
-	findOmniFeedBySessionId = function(p1, p2) --[[ Line: 52 ]]
+	findOmniFeedBySessionId = function(p1, p2)
 		-- upvalues: Fetch (copy), BuildOmniRecommendationsRequestModule (copy), PromiseModule (copy), Response (copy), GraphQLError (copy), Object (copy)
 		local OmniRecommendationsRequestModule = BuildOmniRecommendationsRequestModule(if p2 then p2 else Fetch)
 		
-		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 59 ]]
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 			-- upvalues: OmniRecommendationsRequestModule (copy), p1 (copy), Response (upval), GraphQLError (upval), Object (upval)
-			local v1 = OmniRecommendationsRequestModule(p1.pageType, p1.sessionId, p1.nextPageToken, p1.supportedTreatmentTypes):catch(function() --[[ Line: 65 ]]
+			local v1 = OmniRecommendationsRequestModule(p1.pageType, p1.sessionId, p1.nextPageToken, p1.supportedTreatmentTypes):catch(function()
 				-- upvalues: Response (upval)
 				return Response.error()
 			end):expect()
@@ -27,7 +27,7 @@ return {
 				
 				return nil
 			end
-			local v2 = v1:json():catch(function() --[[ Line: 80 ]]
+			local v2 = v1:json():catch(function()
 				return nil
 			end):expect()
 			
@@ -39,11 +39,11 @@ return {
 			return nil
 		end)
 	end,
-	fetchMoreOmniRecommendationMetadata = function(p1, p2) --[[ Line: 100 ]]
+	fetchMoreOmniRecommendationMetadata = function(p1, p2)
 		-- upvalues: Fetch (copy), PromiseModule (copy), OmniRecommendationMetadata (copy), HttpService (copy), Response (copy), GraphQLError (copy), Object (copy)
 		local Fetch1 = if p2 then p2 else Fetch
 		
-		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 103 ]]
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 			-- upvalues: OmniRecommendationMetadata (upval), Fetch1 (copy), HttpService (upval), p1 (copy), Response (upval), GraphQLError (upval), Object (upval)
 			local v1 = Fetch1(OmniRecommendationMetadata(), {
 				method = "POST",
@@ -52,7 +52,7 @@ return {
 					["Content-Type"] = "application/json",
 					Accept = "application/json"
 				}
-			}):catch(function() --[[ Line: 117 ]]
+			}):catch(function()
 				-- upvalues: Response (upval)
 				return Response.error()
 			end):expect()
@@ -62,7 +62,7 @@ return {
 				
 				return
 			end
-			local v2 = v1:json():catch(function() --[[ Line: 129 ]]
+			local v2 = v1:json():catch(function()
 				return nil
 			end):expect()
 			

@@ -20,11 +20,11 @@ return (ServiceModule:register({
 	startingWindowPosition = UDim2.new(1, -95, 0, 165),
 	windowSize = NewResult,
 	components = {
-		Icon = function(_) --[[ Line: 35 ]]
+		Icon = function(_)
 			-- upvalues: CommonIconModule (copy)
 			return CommonIconModule("icons/menu/avatar_on")
 		end,
-		Window = function(_) --[[ Line: 38 ]]
+		Window = function(_)
 			-- upvalues: ReactModule (copy), ConstantsModule (copy), IconButton (copy), IconsNavigationCycleUp (copy), Flag (ref), NewResult (copy)
 			return ReactModule.createElement("Frame", { BackgroundTransparency = 0, Size = UDim2.new(1, 0, 1, 0) }, {
 				Corner = ReactModule.createElement("UICorner", { CornerRadius = ConstantsModule.CORNER_RADIUS }),
@@ -34,7 +34,7 @@ return (ServiceModule:register({
 					iconSize = ConstantsModule.CLOSE_ICON_SIZE,
 					anchorPoint = Vector2.new(0.5, 1),
 					position = UDim2.new(0.5, 0, 1, 0),
-					onActivated = function() --[[ Line: 52 ]]
+					onActivated = function()
 						-- upvalues: Flag (upval), NewResult (upval), ConstantsModule (upval)
 						if Flag then
 							NewResult:requestSize(ConstantsModule.DEFAULT_WIDTH, ConstantsModule.DEFAULT_HEIGHT)

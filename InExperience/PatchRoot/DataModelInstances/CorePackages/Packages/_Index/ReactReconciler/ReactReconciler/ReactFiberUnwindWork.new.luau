@@ -21,7 +21,7 @@ local PopTopLevelContextObjectFunction = ReactFiberContextNewModule.popTopLevelC
 local PopProviderFunction = require(script.Parent["ReactFiberNewContext.new"]).popProvider
 local PopRenderLanes = nil
 
-local function v13(...) --[[ Line: 47 ]]
+local function v13(...)
 	-- upvalues: PopRenderLanes (ref)
 	if not PopRenderLanes then
 		PopRenderLanes = require(script.Parent["ReactFiberWorkLoop.new"]).popRenderLanes
@@ -32,7 +32,7 @@ end
 local TransferActualDurationFunction = require(script.Parent["ReactProfilerTimer.new"]).transferActualDuration
 local InvariantFunction = require(Parent.Shared).invariant
 
-local function unwindWork(p1, _) --[[ Line: 59 ]]
+local function unwindWork(p1, _)
 	-- upvalues: ReactWorkTagsModule (copy), IsContextProviderFunction (copy), PopContextFunction (copy), ReactFiberFlagsModule (copy), EnableProfilerTimer (copy), ReactTypeOfModeModule (copy), TransferActualDurationFunction (copy), PopHostContainerFunction (copy), PopTopLevelContextObjectFunction (copy), ResetWorkInProgressVersionsFunction (copy), InvariantFunction (copy), PopHostContextFunction (copy), PopSuspenseContextFunction (copy), EnableSuspenseServerRenderer (copy), ResetHydrationStateFunction (copy), PopProviderFunction (copy), v13 (copy)
 	if p1.tag == ReactWorkTagsModule.ClassComponent then
 		if IsContextProviderFunction(p1.type) then
@@ -109,7 +109,7 @@ local function unwindWork(p1, _) --[[ Line: 59 ]]
 	end
 end
 
-function unwindInterruptedWork(p1) --[[ Line: 154 ]]
+function unwindInterruptedWork(p1)
 	-- upvalues: ReactWorkTagsModule (copy), PopContextFunction (copy), PopHostContainerFunction (copy), PopTopLevelContextObjectFunction (copy), ResetWorkInProgressVersionsFunction (copy), PopHostContextFunction (copy), PopSuspenseContextFunction (copy), PopProviderFunction (copy), v13 (copy)
 	if p1.tag == ReactWorkTagsModule.ClassComponent then
 		if (if typeof(p1.type) == "table" then p1.type.childContextTypes else nil) ~= nil then

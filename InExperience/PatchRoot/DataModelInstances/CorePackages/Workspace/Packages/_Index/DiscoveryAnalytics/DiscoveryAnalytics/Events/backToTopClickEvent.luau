@@ -7,7 +7,7 @@ local config = {
 	lastUpdated = { 26, 7, 22 }
 }
 
-return function(EventContext) --[[ Line: 14 ]]
+return function(EventContext)
 	-- upvalues: TelemetryService (copy), config (copy)
 	TelemetryService:LogEvent(config, {
 		eventContext = EventContext,

@@ -5,28 +5,28 @@ local IsTenFootInterfaceFunction = require(Parent.Parent.AppCommonLib).isTenFoot
 local GetFFlagDisableRobuxUpsellModule = require(Parent.Flags.GetFFlagDisableRobuxUpsell)
 
 return {
-	new = function() --[[ Line: 10 ]]
+	new = function()
 		-- upvalues: UserInputService (copy), RunService (copy), IsTenFootInterfaceFunction (copy), GetFFlagDisableRobuxUpsellModule (copy)
 		local t = {}
 		setmetatable(t, {
-			__tostring = function(): string --[[ Line: 14 ]]
+			__tostring = function(): string
 				return "Service(ExternalSettings)"
 			end
 		})
 		
-		function t.getPlatform() --[[ Line: 19 ]]
+		function t.getPlatform()
 			-- upvalues: UserInputService (upval)
 			return UserInputService:GetPlatform()
 		end
 		
-		function t.isStudio() --[[ Line: 23 ]]
+		function t.isStudio()
 			-- upvalues: RunService (upval)
 			return RunService:IsStudio()
 		end
 		
-		function t.isThirdPartyPurchaseAllowed(): boolean --[[ Line: 27 ]]
+		function t.isThirdPartyPurchaseAllowed(): boolean
 			local IsThirdPartyPurchaseAllowed = true
-			pcall(function() --[[ Line: 30 ]]
+			pcall(function()
 				-- upvalues: IsThirdPartyPurchaseAllowed (ref)
 				IsThirdPartyPurchaseAllowed = game:GetService("PermissionsService"):GetIsThirdPartyPurchaseAllowed()
 			end)
@@ -34,28 +34,28 @@ return {
 			return IsThirdPartyPurchaseAllowed
 		end
 		
-		function t.getLuaUseThirdPartyPermissions(): boolean --[[ Line: 36 ]]
+		function t.getLuaUseThirdPartyPermissions(): boolean
 			return true
 		end
 		
-		function t.getFlagBypassThirdPartySettingForRobloxPurchase(): boolean --[[ Line: 40 ]]
+		function t.getFlagBypassThirdPartySettingForRobloxPurchase(): boolean
 			return true
 		end
 		
-		function t.getFlagRestrictSales2() --[[ Line: 45 ]]
+		function t.getFlagRestrictSales2()
 			return settings():GetFFlag("RestrictSales2")
 		end
 		
-		function t.getFlagOrder66() --[[ Line: 49 ]]
+		function t.getFlagOrder66()
 			return settings():GetFFlag("Order66")
 		end
 		
-		function t.isTenFootInterface() --[[ Line: 53 ]]
+		function t.isTenFootInterface()
 			-- upvalues: IsTenFootInterfaceFunction (upval)
 			return IsTenFootInterfaceFunction()
 		end
 		
-		function t.getFFlagDisableRobuxUpsell() --[[ Line: 57 ]]
+		function t.getFFlagDisableRobuxUpsell()
 			-- upvalues: GetFFlagDisableRobuxUpsellModule (upval)
 			return GetFFlagDisableRobuxUpsellModule()
 		end

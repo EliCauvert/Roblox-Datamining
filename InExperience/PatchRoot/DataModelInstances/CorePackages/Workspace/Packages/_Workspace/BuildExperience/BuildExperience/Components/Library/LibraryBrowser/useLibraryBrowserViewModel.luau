@@ -11,14 +11,14 @@ local UseLibraryItemsModule = require(script.Parent.Parent.useLibraryItems)
 local GetFolderPreviewModule = require(script.Parent.Parent.getFolderPreview)
 local _ = require(script.Parent.Parent.LibraryWorldCutout.LibraryWorldCutoutView)
 
-local function useCarousel(Library, UseSignalStateResult, p1, Query) --[[ Line: 39 ]]
+local function useCarousel(Library, UseSignalStateResult, p1, Query)
 	-- upvalues: UseLibraryItemsModule (copy), ReactModule (copy)
 	local UseLibraryItemsModuleResult, UseLibraryItemsModuleResult2, UseLibraryItemsModuleResult3 = UseLibraryItemsModule(Library, UseSignalStateResult, p1, Query, 6)
 	
 	return {
 		items = UseLibraryItemsModuleResult,
 		hasMore = UseLibraryItemsModuleResult2,
-		onScrollChanged = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 46 ]]
+		onScrollChanged = ReactModule.useCallback(function(ScrollFrame)
 			-- upvalues: UseLibraryItemsModuleResult3 (copy)
 			if ScrollFrame.AbsoluteWindowSize.X > 0 and ScrollFrame.AbsoluteCanvasSize.X > 0 and ScrollFrame.AbsoluteCanvasSize.X - 192 <= ScrollFrame.CanvasPosition.X + ScrollFrame.AbsoluteWindowSize.X then
 				UseLibraryItemsModuleResult3()
@@ -27,7 +27,7 @@ local function useCarousel(Library, UseSignalStateResult, p1, Query) --[[ Line: 
 	}
 end
 
-return function(p1) --[[ Line: 59 | Named "useLibraryBrowserViewModel" ]]
+return function(p1)
 	-- upvalues: UseLibraryStringsModule (copy), SignalsReactModule (copy), useCarousel (copy), LibraryCategoriesModule (copy), GetFolderPreviewModule (copy)
 	local UseLibraryStringsModuleResult = UseLibraryStringsModule()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.library.getItems)
@@ -62,7 +62,7 @@ return function(p1) --[[ Line: 59 | Named "useLibraryBrowserViewModel" ]]
 				unavailableText = UseLibraryStringsModuleResult.modelUnavailable,
 				thumbnail = item1.image,
 				model = item1.model,
-				onActivated = if p1.onOpenItem == nil and p1.onOpenCategory == nil then nil else function() --[[ Line: 91 ]]
+				onActivated = if p1.onOpenItem == nil and p1.onOpenCategory == nil then nil else function()
 					-- upvalues: item1 (copy), p1 (copy)
 					if item1.className == "Folder" then
 						if p1.onOpenCategory ~= nil then
@@ -84,7 +84,7 @@ return function(p1) --[[ Line: 59 | Named "useLibraryBrowserViewModel" ]]
 			status = Ready,
 			hasMore = Entry.hasMore,
 			onScrollChanged = Entry.onScrollChanged,
-			onOpenCategory = if p1.onOpenCategory == nil then nil else function() --[[ Line: 104 ]]
+			onOpenCategory = if p1.onOpenCategory == nil then nil else function()
 				-- upvalues: p1 (copy), value1 (copy)
 				p1.onOpenCategory(value1.itemKind, value1.key, value1.title)
 			end

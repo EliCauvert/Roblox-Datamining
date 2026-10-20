@@ -9,23 +9,23 @@ return require(Parent.Rodux).createReducer({
 	tryOnViewState = PeekViewState.Closed,
 	tryOnManagerViewState = PeekViewState.Closed
 }, {
-	[require(AvatarExperienceRodux.Actions.SetItemDetailsPeekViewState).name] = function(p1, p2) --[[ Line: 41 ]]
+	[require(AvatarExperienceRodux.Actions.SetItemDetailsPeekViewState).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, { viewState = p2.viewState })
 	end,
-	[require(AvatarExperienceRodux.Actions.SetItemTryOnPeekViewState).name] = function(p1, p2) --[[ Line: 46 ]]
+	[require(AvatarExperienceRodux.Actions.SetItemTryOnPeekViewState).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, { tryOnViewState = p2.viewState })
 	end,
-	[require(AvatarExperienceRodux.Actions.SetTryOnManagerPeekViewState).name] = function(p1, p2) --[[ Line: 51 ]]
+	[require(AvatarExperienceRodux.Actions.SetTryOnManagerPeekViewState).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, { tryOnManagerViewState = p2.viewState })
 	end,
-	[require(AvatarExperienceRodux.Actions.SetLookDetailsPeekViewSelectedTab).name] = function(p1, p2) --[[ Line: 56 ]]
+	[require(AvatarExperienceRodux.Actions.SetLookDetailsPeekViewSelectedTab).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, { lookDetailsSelectedTab = p2.selectedTab })
 	end,
-	[require(Parent.AvatarExperienceCommon).State.Actions.CharacterHistoryStateChangeButtonActivated.name] = function(p1, p2) --[[ Line: 61 ]]
+	[require(Parent.AvatarExperienceCommon).State.Actions.CharacterHistoryStateChangeButtonActivated.name] = function(p1, p2)
 		-- upvalues: CryoModule (copy), PeekViewState (copy)
 		if p2.tryOn and p2.tryOn.OutfitTryOn then
 			local LookId = p2.tryOn.OutfitTryOn.LookId

@@ -13,7 +13,7 @@ local Images = UIBloxModule.App.ImageSet.Images
 local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
 local HorizontalPageMargin = UIBloxModule.App.Container.HorizontalPageMargin
 
-return function(p1) --[[ Line: 32 | Named "ContactProfileHeader" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), UseStyleFunction (copy), UseStyleMetadataFunction (copy), ReactModule (copy), ImageSetLabel (copy), Images (copy), LoadableImage (copy), ConstantsModule (copy), HorizontalPageMargin (copy), StyledTextLabel (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		contactsProfileBody = {

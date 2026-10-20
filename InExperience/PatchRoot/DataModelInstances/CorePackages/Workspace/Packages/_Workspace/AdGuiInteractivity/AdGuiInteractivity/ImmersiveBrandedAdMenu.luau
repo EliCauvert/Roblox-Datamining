@@ -12,7 +12,7 @@ local PopoverSide = FoundationModule.Enums.PopoverSide
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseMeasurableRefFunction = FoundationModule.Hooks.useMeasurableRef
 
-return function(p1) --[[ Line: 34 ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), UseMeasurableRefFunction (copy), GuiService (copy), AdsInteractivityTelemetryModule (copy), ImmersiveBrandedAdWhyThisAdDialogModule (copy), ImmersiveBrandedAdReportAdDialogModule (copy), Menu (copy), InputSize (copy), PopoverSide (copy)
 	local ScreenPosition = p1.screenPosition
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -21,19 +21,19 @@ return function(p1) --[[ Line: 34 ]]
 	})
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseMeasurableRefResult = UseMeasurableRefFunction(ScreenPosition)
-	ReactModule.useEffect(function() --[[ Line: 44 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: GuiService (upval), p1 (copy)
-		local MenuOpenedConnection = GuiService.MenuOpened:Connect(function() --[[ Line: 45 ]]
+		local MenuOpenedConnection = GuiService.MenuOpened:Connect(function()
 			-- upvalues: p1 (upval)
 			p1.onDismiss()
 		end)
 		
-		return function() --[[ Line: 49 ]]
+		return function()
 			-- upvalues: MenuOpenedConnection (copy)
 			MenuOpenedConnection:Disconnect()
 		end
 	end, { p1.onDismiss })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 54 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseLocalizationResult (copy)
 		return {
 			{
@@ -51,7 +51,7 @@ return function(p1) --[[ Line: 34 ]]
 		UseLocalizationResult.WhyThisAdText,
 		UseLocalizationResult.ReportAdText
 	})
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 69 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: AdsInteractivityTelemetryModule (upval), UseStateResult2 (copy)
 		if p2 == "whyThisAd" then
 			AdsInteractivityTelemetryModule.logImmersiveBrandedAdButtonClickCounter("whyThisAd")

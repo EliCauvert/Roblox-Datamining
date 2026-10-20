@@ -43,7 +43,7 @@ ExtendResult.defaultProps = {
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function ExtendResult.init(p1) --[[ Line: 110 ]]
+function ExtendResult.init(p1)
 	-- upvalues: RoactModule (copy), GetEnableCondenseRobuxUpsellModule (copy), ConstantsModule (copy)
 	p1.contentRef = RoactModule.createRef()
 	p1.state = {
@@ -52,7 +52,7 @@ function ExtendResult.init(p1) --[[ Line: 110 ]]
 		footerSize = Vector2.new(0, 0)
 	}
 	
-	function p1.validateCondensedCondition(Frame) --[[ Line: 118 ]]
+	function p1.validateCondensedCondition(Frame)
 		-- upvalues: GetEnableCondenseRobuxUpsellModule (upval), ConstantsModule (upval), p1 (copy)
 		if not GetEnableCondenseRobuxUpsellModule() then return end
 		local NewY = Frame.AbsoluteSize.Y + ConstantsModule.MODAL_HEIGHT_WITHOUT_CONTENT + ConstantsModule.MODAL_NORMAL_SECTION_PADDING * 2 + ConstantsModule.MODAL_NORMAL_BUTTON_HEIGHT * 2
@@ -70,7 +70,7 @@ function ExtendResult.init(p1) --[[ Line: 110 ]]
 		end
 	end
 	
-	function p1.changeContentSize(Frame: Frame) --[[ Line: 146 ]]
+	function p1.changeContentSize(Frame: Frame)
 		-- upvalues: p1 (copy)
 		p1.validateCondensedCondition(Frame)
 		
@@ -80,7 +80,7 @@ function ExtendResult.init(p1) --[[ Line: 110 ]]
 	end
 end
 
-function ExtendResult:didMount() --[[ Line: 156 ]]
+function ExtendResult:didMount()
 	-- upvalues: FFlagIntroduceMetricsLegacyUpsellModule (copy), LoggerModule (copy), Default (copy), LegacyUpsellCounterModule (copy)
 	if FFlagIntroduceMetricsLegacyUpsellModule then
 		LoggerModule.debug({ message = "Legacy Upsell Modal Shown" })
@@ -88,7 +88,7 @@ function ExtendResult:didMount() --[[ Line: 156 ]]
 	end
 end
 
-function ExtendResult.render(p1) --[[ Line: 165 ]]
+function ExtendResult.render(p1)
 	-- upvalues: SharedFlagsModule (copy), RoactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), FFlagMobilePopularItemBadgingExperimentEnabledModule (copy), MultiTextLocalizerModule (copy)
 	local IAPExperienceRobuxUpsellTextVNGDisclosureTermsURL: string = if p1.props.isVng then "IAPExperience.RobuxUpsell.Text.VNGDisclosureTermsURL" else "IAPExperience.RobuxUpsell.Text.DisclosureTermsURL"
 	
@@ -113,19 +113,19 @@ function ExtendResult.render(p1) --[[ Line: 165 ]]
 				key = "IAPExperience.RobuxUpsell.Text.PurchaseNotAvailableOnHeadSet"
 			}
 		},
-		render = function(p2) --[[ Line: 223 ]]
+		render = function(p2)
 			-- upvalues: p1 (copy)
 			return p1:renderAlert(p2)
 		end
 	})
 end
 
-function ExtendResult.renderAlert(p1, p2) --[[ Line: 229 ]]
+function ExtendResult.renderAlert(p1, p2)
 	-- upvalues: WithStyleFunction (copy), GetEnableCondenseRobuxUpsellModule (copy), RoactModule (copy), InteractiveAlert (copy), FitFrameVertical (copy), ConstantsModule (copy), ProductDetailsModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ButtonType (copy)
 	local Props = p1.props
 	local State = p1.state
 	
-	return WithStyleFunction(function(p3) --[[ Line: 233 ]]
+	return WithStyleFunction(function(p3)
 		-- upvalues: GetEnableCondenseRobuxUpsellModule (upval), State (copy), Props (copy), p2 (copy), RoactModule (upval), InteractiveAlert (upval), FitFrameVertical (upval), ConstantsModule (upval), p1 (copy), ProductDetailsModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), ButtonType (upval)
 		local Theme = p3.Theme
 		local _Font = p3.Font
@@ -147,7 +147,7 @@ function ExtendResult.renderAlert(p1, p2) --[[ Line: 229 ]]
 			position = Props.position,
 			anchorPoint = Props.anchorPoint,
 			title = p2.InsufficientRobuxTitle,
-			middleContent = function() --[[ Line: 269 ]]
+			middleContent = function()
 				-- upvalues: RoactModule (upval), FitFrameVertical (upval), GetEnableCondenseRobuxUpsellModule (upval), State (upval), ConstantsModule (upval), p1 (upval), ProductDetailsModule (upval), Props (upval), Theme (copy), FoundationFontFaceMigration (upval), _Font (copy), NormalizeFontFaceFunction (upval), p3 (copy), Robux (copy), Robux1 (copy), ScaledBaseSize (ref), p2 (upval), Parts (copy), TermsOfUse (ref)
 				return RoactModule.createElement(FitFrameVertical, {
 					BackgroundTransparency = 1,
@@ -306,7 +306,7 @@ function ExtendResult.renderAlert(p1, p2) --[[ Line: 229 ]]
 	end)
 end
 
-function ExtendResult.renderAlertNewProductDetails(p1, _) --[[ Line: 468 ]]
+function ExtendResult.renderAlertNewProductDetails(p1, _)
 	-- upvalues: WithLocalizationFunction (copy), WithStyleFunction (copy), GetEnableCondenseRobuxUpsellModule (copy), ConstantsModule (copy), RoactModule (copy), ProductDetailsNewModule (copy), ProductDetailsModule (copy), InteractiveAlert (copy), FitFrameVertical (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ButtonType (copy)
 	local Props = p1.props
 	local State = p1.state
@@ -324,9 +324,9 @@ function ExtendResult.renderAlertNewProductDetails(p1, _) --[[ Line: 468 ]]
 		NeedMoreRobux = "IAPExperience.RobuxUpsell.Text.NeedMoreRobux",
 		BadgeText = "IAPExperience.RobuxUpsell.Text.PopularItem",
 		DisclosureTermsURL = if p1.props.isVng then "IAPExperience.RobuxUpsell.Text.VNGDisclosureTermsURL" else "IAPExperience.RobuxUpsell.Text.DisclosureTermsURL"
-	})(function(p2) --[[ Line: 486 ]]
+	})(function(p2)
 		-- upvalues: WithStyleFunction (upval), GetEnableCondenseRobuxUpsellModule (upval), State (copy), Props (copy), ConstantsModule (upval), RoactModule (upval), ProductDetailsNewModule (upval), ProductDetailsModule (upval), InteractiveAlert (upval), FitFrameVertical (upval), p1 (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), ButtonType (upval)
-		return WithStyleFunction(function(p3) --[[ Line: 487 ]]
+		return WithStyleFunction(function(p3)
 			-- upvalues: GetEnableCondenseRobuxUpsellModule (upval), State (upval), Props (upval), p2 (copy), ConstantsModule (upval), RoactModule (upval), ProductDetailsNewModule (upval), ProductDetailsModule (upval), InteractiveAlert (upval), FitFrameVertical (upval), p1 (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), ButtonType (upval)
 			local Theme = p3.Theme
 			local _Font = p3.Font
@@ -378,7 +378,7 @@ function ExtendResult.renderAlertNewProductDetails(p1, _) --[[ Line: 468 ]]
 				position = Props.position,
 				anchorPoint = Props.anchorPoint,
 				title = p2.NeedMoreRobux,
-				middleContent = function() --[[ Line: 588 ]]
+				middleContent = function()
 					-- upvalues: RoactModule (upval), FitFrameVertical (upval), GetEnableCondenseRobuxUpsellModule (upval), State (upval), ConstantsModule (upval), p1 (upval), Element (ref), Theme (copy), FoundationFontFaceMigration (upval), _Font (copy), NormalizeFontFaceFunction (upval), p3 (copy), Robux (copy), Robux1 (copy), ScaledBaseSize (ref), p2 (upval), Parts (copy), TermsOfUse (ref), Props (upval)
 					return RoactModule.createElement(FitFrameVertical, {
 						BackgroundTransparency = 1,
@@ -535,7 +535,7 @@ function ExtendResult.renderAlertNewProductDetails(p1, _) --[[ Line: 468 ]]
 	end)
 end
 
-function ExtendResult.renderNewAlert(p1) --[[ Line: 785 ]]
+function ExtendResult.renderNewAlert(p1)
 	-- upvalues: WithLocalizationFunction (copy), WithStyleFunction (copy), GetEnableCondenseRobuxUpsellModule (copy), RoactModule (copy), InteractiveAlert (copy), FitFrameVertical (copy), ConstantsModule (copy), ProductDetailsModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ButtonType (copy)
 	local Props = p1.props
 	local State = p1.state
@@ -554,9 +554,9 @@ function ExtendResult.renderNewAlert(p1) --[[ Line: 785 ]]
 		BonusBannerV1 = "IAPExperience.RobuxUpsell.Text.BonusBannerV1",
 		BonusBannerInfo = "IAPExperience.RobuxUpsell.Text.BonusBannerInfo",
 		DisclosureTermsURL = if p1.props.isVng then "IAPExperience.RobuxUpsell.Text.VNGDisclosureTermsURL" else "IAPExperience.RobuxUpsell.Text.DisclosureTermsURL"
-	})(function(p2) --[[ Line: 805 ]]
+	})(function(p2)
 		-- upvalues: WithStyleFunction (upval), GetEnableCondenseRobuxUpsellModule (upval), State (copy), Props (copy), RoactModule (upval), InteractiveAlert (upval), FitFrameVertical (upval), ConstantsModule (upval), p1 (copy), ProductDetailsModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), ButtonType (upval)
-		return WithStyleFunction(function(p3) --[[ Line: 806 ]]
+		return WithStyleFunction(function(p3)
 			-- upvalues: GetEnableCondenseRobuxUpsellModule (upval), State (upval), Props (upval), p2 (copy), RoactModule (upval), InteractiveAlert (upval), FitFrameVertical (upval), ConstantsModule (upval), p1 (upval), ProductDetailsModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), ButtonType (upval)
 			local Theme = p3.Theme
 			local _Font = p3.Font
@@ -585,7 +585,7 @@ function ExtendResult.renderNewAlert(p1) --[[ Line: 785 ]]
 				position = Props.position,
 				anchorPoint = Props.anchorPoint,
 				title = p2.NeedMoreRobux,
-				middleContent = function() --[[ Line: 863 ]]
+				middleContent = function()
 					-- upvalues: RoactModule (upval), FitFrameVertical (upval), GetEnableCondenseRobuxUpsellModule (upval), State (upval), ConstantsModule (upval), p1 (upval), ProductDetailsModule (upval), Props (upval), Theme (copy), FoundationFontFaceMigration (upval), _Font (copy), NormalizeFontFaceFunction (upval), p3 (copy), Robux (copy), Robux1 (ref), ScaledBaseSize (ref), p2 (upval), ScaledBaseSize1 (copy), Parts (copy), TermsOfUse (ref)
 					return RoactModule.createElement(FitFrameVertical, {
 						BackgroundTransparency = 1,
@@ -741,7 +741,7 @@ function ExtendResult.renderNewAlert(p1) --[[ Line: 785 ]]
 						}
 					}
 				},
-				footerContent = function() --[[ Line: 1055 ]]
+				footerContent = function()
 					-- upvalues: p1 (upval), p3 (copy), Robux2 (ref), p2 (upval)
 					return p1:renderFooterExperiment(p3, Robux2, p2.BonusBannerInfo)
 				end
@@ -750,7 +750,7 @@ function ExtendResult.renderNewAlert(p1) --[[ Line: 785 ]]
 	end)
 end
 
-function ExtendResult.renderFooterExperiment(p1, p2, Text, Text1) --[[ Line: 1063 ]]
+function ExtendResult.renderFooterExperiment(p1, p2, Text, Text1)
 	-- upvalues: Colors (copy), RoactModule (copy), FitFrameVertical (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), FFlagLowCogsBannerInfoIconModule (copy), InfoIconWithTooltipModule (copy)
 	local _Font = p2.Font
 	local Flint = Colors.Flint

@@ -10,9 +10,9 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
-return function(p1) --[[ Line: 26 | Named "InfoPeekView" ]]
+return function(p1)
 	-- upvalues: UseNavigationPropsFunction (copy), ReactModule (copy), UseNavigationFunction (copy), UseTokensFunction (copy), PeekViewState (copy), PeekView (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
-	local UseNavigationPropsResult = UseNavigationPropsFunction(function(_, p2) --[[ Line: 27 ]]
+	local UseNavigationPropsResult = UseNavigationPropsFunction(function(_, p2)
 		return { title = p2.title, body = p2.body }
 	end)
 	local UseRefResult = ReactModule.useRef(nil)
@@ -31,7 +31,7 @@ return function(p1) --[[ Line: 26 | Named "InfoPeekView" ]]
 		thumbstickScrollEnabled = true,
 		briefViewContentHeight = UDim.new(0, 0),
 		contentFrameRef = UseRefResult,
-		viewStateChanged = ReactModule.useCallback(function(Closed, _) --[[ Line: 47 ]]
+		viewStateChanged = ReactModule.useCallback(function(Closed, _)
 			-- upvalues: PeekViewState (upval), UseNavigationResult (copy)
 			if Closed == PeekViewState.Closed or Closed == PeekViewState.Hidden then
 				UseNavigationResult.goBack()

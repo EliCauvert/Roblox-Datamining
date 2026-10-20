@@ -11,7 +11,7 @@ local AssetPickerErrorBodyModule = require(script.Parent.AssetPickerErrorBody)
 local AssetPickerTileModule = require(script.Parent.AssetPickerTile)
 local _ = require(AvatarExperienceProfilePictureEditor.Utils.getAssetPickerStatus)
 
-local function buildLoadingItems(ShimmerTileCount) --[[ Line: 32 ]]
+local function buildLoadingItems(ShimmerTileCount)
 	local List = {}
 	
 	for i = 1, ShimmerTileCount do
@@ -20,7 +20,7 @@ local function buildLoadingItems(ShimmerTileCount) --[[ Line: 32 ]]
 	return List
 end
 
-return function(p1) --[[ Line: 42 | Named "AssetPickerGridBody" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), AssetPickerErrorBodyModule (copy), buildLoadingItems (copy), View (copy), ItemCardThumbnailSkeleton (copy), Radius (copy), AssetPickerTileModule (copy), Grid (copy)
 	if p1.status == "error" then
 		return ReactModule.createElement(AssetPickerErrorBodyModule, { onRetry = p1.onRetry })
@@ -32,10 +32,10 @@ return function(p1) --[[ Line: 42 | Named "AssetPickerGridBody" ]]
 			items = if IsLoading then buildLoadingItems(p1.shimmerTileCount) else p1.items,
 			gapVertical = p1.gap,
 			gapHorizontal = p1.gap,
-			getItemId = function(p2) --[[ Line: 87 ]]
+			getItemId = function(p2)
 				return p2.id
 			end,
-			renderItem = if IsLoading then function(p2) --[[ Line: 55 ]]
+			renderItem = if IsLoading then function(p2)
 				-- upvalues: ReactModule (upval), View (upval), ItemCardThumbnailSkeleton (upval), Radius (upval)
 				return ReactModule.createElement(View, {
 					tag = "size-full-0 auto-y",
@@ -48,7 +48,7 @@ return function(p1) --[[ Line: 42 | Named "AssetPickerGridBody" ]]
 				}, {
 					Shimmer = ReactModule.createElement(ItemCardThumbnailSkeleton, { radius = Radius.Medium })
 				})
-			end else function(p2) --[[ Line: 70 ]]
+			end else function(p2)
 				-- upvalues: ReactModule (upval), AssetPickerTileModule (upval), p1 (copy)
 				return ReactModule.createElement(AssetPickerTileModule, {
 					item = p2.item,

@@ -37,11 +37,11 @@ local v1 = require(RobloxGui.Modules.InGameChat.BubbleChat.Logger)(script.Name)
 local NewResult = nil
 local VoiceStore = if GetFFlagExpChatUseVoiceParticipantsStoreFunction() then ExpChatModule.Stores.GetVoiceStore(false) else nil
 local config = {
-	[VoiceEnabledChangedModule.name] = function(p1) --[[ Line: 67 ]]
+	[VoiceEnabledChangedModule.name] = function(p1)
 		-- upvalues: ExpChatModule (copy)
 		ExpChatModule.Events.VoiceEnabledChanged(p1.enabled)
 	end,
-	[VoiceStateChangedModule.name] = function(p1) --[[ Line: 71 ]]
+	[VoiceStateChangedModule.name] = function(p1)
 		-- upvalues: GetFFlagExpChatUseVoiceParticipantsStoreFunction (copy), VoiceStore (copy), ExpChatModule (copy)
 		if GetFFlagExpChatUseVoiceParticipantsStoreFunction() then
 			VoiceStore.handleVoiceStateChanged(p1.userId, p1.newState)
@@ -51,7 +51,7 @@ local config = {
 			ExpChatModule.Events.VoiceStateChanged(p1.userId, p1.newState)
 		end
 	end,
-	[ParticipantsChangedModule.name] = function(p1) --[[ Line: 79 ]]
+	[ParticipantsChangedModule.name] = function(p1)
 		-- upvalues: GetFFlagExpChatUseVoiceParticipantsStoreFunction (copy), VoiceStore (copy), ExpChatModule (copy)
 		if GetFFlagExpChatUseVoiceParticipantsStoreFunction() then
 			VoiceStore.handleVoiceParticipantsChanged(p1.newParticipants)
@@ -61,20 +61,20 @@ local config = {
 			ExpChatModule.Events.VoiceParticipantsChanged(p1.newParticipants)
 		end
 	end,
-	[ParticipantAddedModule.name] = if GetFFlagExpChatUseVoiceParticipantsStoreFunction() then nil else function(p1) --[[ Line: 90 ]]
+	[ParticipantAddedModule.name] = if GetFFlagExpChatUseVoiceParticipantsStoreFunction() then nil else function(p1)
 		-- upvalues: ExpChatModule (copy)
 		ExpChatModule.Events.VoiceParticipantAdded(p1.userId)
 	end,
-	[ParticipantRemovedModule.name] = if GetFFlagExpChatUseVoiceParticipantsStoreFunction() then nil else function(p1) --[[ Line: 97 ]]
+	[ParticipantRemovedModule.name] = if GetFFlagExpChatUseVoiceParticipantsStoreFunction() then nil else function(p1)
 		-- upvalues: ExpChatModule (copy)
 		ExpChatModule.Events.VoiceParticipantRemoved(p1.userId)
 	end
 }
 NewResult = RoduxModule.Store.new(require(RobloxGui.Modules.InGameChat.BubbleChat.Reducers.chatReducer), nil, {
 	RoduxModule.thunkMiddleware,
-	function(Callback) --[[ Line: 102 ]]
+	function(Callback)
 		-- upvalues: config (copy)
-		return function(p1) --[[ Line: 103 ]]
+		return function(p1)
 			-- upvalues: config (upval), Callback (copy)
 			local Entry: (any) -> () = config[p1.type]
 			
@@ -87,20 +87,20 @@ NewResult = RoduxModule.Store.new(require(RobloxGui.Modules.InGameChat.BubbleCha
 })
 local Connection = nil
 
-local function _(): boolean --[[ Line: 119 | Named "isTextChatServiceOn" ]]
+local function _(): boolean
 	-- upvalues: GetFFlagExpChatAlwaysRunTCSFunction (copy), TextChatService (copy)
 	return if GetFFlagExpChatAlwaysRunTCSFunction() then true else TextChatService.ChatVersion == Enum.ChatVersion.TextChatService
 end
 
 if game:IsLoaded() and (if GetFFlagExpChatAlwaysRunTCSFunction() then true else TextChatService.ChatVersion == Enum.ChatVersion.TextChatService) then return end
-Connection = game.Loaded:Connect(function() --[[ Line: 130 ]]
+Connection = game.Loaded:Connect(function()
 	-- upvalues: Connection (ref)
 	if game:IsLoaded() then
 		Connection:Disconnect()
 	end
 end)
 
-local function validateMessageWithWarning(p1, Message) --[[ Line: 137 ]]
+local function validateMessageWithWarning(p1, Message)
 	-- upvalues: ValidateMessageModule (copy), ConstantsModule (copy)
 	local ValidateMessageModuleResult, ValidateMessageModuleResult2 = ValidateMessageModule(Message)
 	
@@ -115,7 +115,7 @@ local function validateMessageWithWarning(p1, Message) --[[ Line: 137 ]]
 	return ValidateMessageModuleResult
 end
 
-local _ = function(p1, p2) --[[ Line: 151 | Named "validateMessageData" ]]
+local _ = function(p1, p2)
 	-- upvalues: TypesModule (copy)
 	local IMessageDataResult, IMessageDataResult2 = TypesModule.IMessageData(p2)
 	
@@ -135,12 +135,12 @@ local Count = 0
 local Count1 = 0
 local UserIds = {}
 
-local function initBubbleChat() --[[ Line: 166 ]]
+local function initBubbleChat()
 	-- upvalues: ReplicatedStorage (copy), Connection1 (ref), TypesModule (copy), Players (copy), validateMessageWithWarning (copy), NewResult (ref), AddMessageFromEventModule (copy), Connection2 (ref), SetMessageTextModule (copy), GetPlayerFromPartModule (copy), UserIds (copy), Count (ref), GameTranslatorModule (copy), CoreGui (copy), AddMessageWithTimeoutModule (copy), Count1 (ref), ChattedConnection (ref), Chat (copy)
-	coroutine.resume(coroutine.create(function() --[[ Line: 167 ]]
+	coroutine.resume(coroutine.create(function()
 		-- upvalues: ReplicatedStorage (upval), Connection1 (upval), TypesModule (upval), Players (upval), validateMessageWithWarning (upval), NewResult (upval), AddMessageFromEventModule (upval), Connection2 (upval), SetMessageTextModule (upval)
 		local DefaultChatSystemChatEvents = ReplicatedStorage:WaitForChild("DefaultChatSystemChatEvents", 1e999)
-		Connection1 = DefaultChatSystemChatEvents:WaitForChild("OnNewMessage", 1e999).OnClientEvent:Connect(function(Tbl) --[[ Line: 175 ]]
+		Connection1 = DefaultChatSystemChatEvents:WaitForChild("OnNewMessage", 1e999).OnClientEvent:Connect(function(Tbl)
 			-- upvalues: TypesModule (upval), Players (upval), validateMessageWithWarning (upval), NewResult (upval), AddMessageFromEventModule (upval)
 			local IMessageDataResult, IMessageDataResult2 = TypesModule.IMessageData(Tbl)
 			
@@ -156,7 +156,7 @@ local function initBubbleChat() --[[ Line: 166 ]]
 				NewResult:dispatch(AddMessageFromEventModule(Copy))
 			end
 		end)
-		Connection2 = DefaultChatSystemChatEvents:WaitForChild("OnMessageDoneFiltering", 1e999).OnClientEvent:Connect(function(Tbl) --[[ Line: 193 ]]
+		Connection2 = DefaultChatSystemChatEvents:WaitForChild("OnMessageDoneFiltering", 1e999).OnClientEvent:Connect(function(Tbl)
 			-- upvalues: TypesModule (upval), validateMessageWithWarning (upval), NewResult (upval), SetMessageTextModule (upval), AddMessageFromEventModule (upval)
 			local IMessageDataResult, IMessageDataResult2 = TypesModule.IMessageData(Tbl)
 			
@@ -179,7 +179,7 @@ local function initBubbleChat() --[[ Line: 166 ]]
 		end)
 	end))
 	
-	local function addMessageWithId(Model: Model, p1, Count1) --[[ Line: 212 ]]
+	local function addMessageWithId(Model: Model, p1, Count1)
 		-- upvalues: GetPlayerFromPartModule (upval), UserIds (upval), Count (upval), GameTranslatorModule (upval), CoreGui (upval), NewResult (upval), AddMessageWithTimeoutModule (upval)
 		local PrimaryPart = if Model:IsA("Model") then if Model.PrimaryPart then Model.PrimaryPart else Model:FindFirstChildWhichIsA("BasePart", true) else Model
 		local PlayerFromPartModule = if PrimaryPart then GetPlayerFromPartModule(PrimaryPart) else nil
@@ -208,14 +208,14 @@ local function initBubbleChat() --[[ Line: 166 ]]
 		}))
 	end
 	
-	ChattedConnection = Chat.Chatted:Connect(function(Message, Recipient) --[[ Line: 255 | Named "addMessage" ]]
+	ChattedConnection = Chat.Chatted:Connect(function(Message, Recipient)
 		-- upvalues: Count1 (upval), addMessageWithId (copy)
 		Count1 += 1
 		addMessageWithId(Message, Recipient, Count1)
 	end)
 end
 
-local function destroyBubbleChat() --[[ Line: 263 ]]
+local function destroyBubbleChat()
 	-- upvalues: Connection1 (ref), Connection2 (ref), ChattedConnection (ref), Connection4 (ref), Connection3 (ref)
 	if Connection1 then
 		Connection1:Disconnect()
@@ -239,7 +239,7 @@ local function destroyBubbleChat() --[[ Line: 263 ]]
 	end
 end
 
-local function onBubbleChatEnabledChanged() --[[ Line: 287 ]]
+local function onBubbleChatEnabledChanged()
 	-- upvalues: destroyBubbleChat (copy), Chat (copy), initBubbleChat (copy), NewResult (ref), BubbleChatEnabledChangedModule (copy)
 	destroyBubbleChat()
 	local Inverted = not game:GetEngineFeature("EnableBubbleChatFromChatService") or Chat.BubbleChatEnabled
@@ -252,7 +252,7 @@ end
 
 local t = {}
 
-local function setVoiceEnabled(VoiceChatState) --[[ Line: 299 ]]
+local function setVoiceEnabled(VoiceChatState)
 	-- upvalues: Players (copy), NewResult (ref), VoiceEnabledChangedModule (copy), t (ref), v1 (copy), VoiceStateChangedModule (copy), ConstantsModule (copy), GetFFlagLocalMutedNilFix (copy), Default (copy)
 	local Text = tostring(Players.LocalPlayer.UserId)
 	NewResult:dispatch(VoiceEnabledChangedModule(VoiceChatState ~= Enum.VoiceChatState.Ended))
@@ -277,11 +277,11 @@ local function setVoiceEnabled(VoiceChatState) --[[ Line: 299 ]]
 	end
 end
 
-local _ = function(p1): string --[[ Line: 330 | Named "shorten" ]]
+local _ = function(p1): string
 	return "..." .. string.sub(tostring(p1), -4)
 end
 
-local function initVoiceChat() --[[ Line: 334 ]]
+local function initVoiceChat()
 	-- upvalues: GetFFlagEnableVoiceChatVoiceUISyncModule (copy), InitVoiceChatStoreModule (copy), NewResult (ref), v1 (copy), Default (copy), t (ref), ConstantsModule (copy), Players (copy), ParticipantAddedModule (copy), PlayerRemovedModule (copy), ParticipantRemovedModule (copy), VoiceStateChangedModule (copy), GetFFlagBatchVoiceParticipantsUpdatesFunction (copy), ParticipantsChangedModule (copy), BlockingUtilityModule (copy), setVoiceEnabled (copy)
 	if GetFFlagEnableVoiceChatVoiceUISyncModule() then
 		InitVoiceChatStoreModule(NewResult)
@@ -316,24 +316,24 @@ local function initVoiceChat() --[[ Line: 334 ]]
 		v1:trace("Adding existing player {}", "..." .. string.sub(tostring(player.UserId), -4))
 		NewResult:dispatch(ParticipantAddedModule((tostring(player.UserId))))
 	end
-	Players.PlayerAdded:Connect(function(Player) --[[ Line: 370 ]]
+	Players.PlayerAdded:Connect(function(Player)
 		-- upvalues: v1 (upval), NewResult (upval), ParticipantAddedModule (upval)
 		v1:trace("Adding joining player {}", "..." .. string.sub(tostring(Player.UserId), -4))
 		NewResult:dispatch(ParticipantAddedModule((tostring(Player.userId))))
 	end)
-	Players.PlayerRemoving:Connect(function(Player) --[[ Line: 375 ]]
+	Players.PlayerRemoving:Connect(function(Player)
 		-- upvalues: v1 (upval), NewResult (upval), PlayerRemovedModule (upval), ParticipantRemovedModule (upval)
 		v1:trace("Removing player {}", "..." .. string.sub(tostring(Player.UserId), -4))
 		NewResult:dispatch(PlayerRemovedModule((tostring(Player.userId))))
 		NewResult:dispatch(ParticipantRemovedModule((tostring(Player.userId))))
 	end)
 	NewResult:dispatch(VoiceStateChangedModule(UserId, ConstantsModule.VOICE_STATE.HIDDEN))
-	Default.muteChanged.Event:connect(function(p1) --[[ Line: 384 ]]
+	Default.muteChanged.Event:connect(function(p1)
 		-- upvalues: v1 (upval), ConstantsModule (upval), NewResult (upval), VoiceStateChangedModule (upval), UserId (copy)
 		v1:debug("Mute changed to {}", p1)
 		NewResult:dispatch(VoiceStateChangedModule(UserId, p1 and ConstantsModule.VOICE_STATE.MUTED or ConstantsModule.VOICE_STATE.INACTIVE))
 	end)
-	Default.participantsUpdate.Event:Connect(function(List) --[[ Line: 390 ]]
+	Default.participantsUpdate.Event:Connect(function(List)
 		-- upvalues: GetFFlagBatchVoiceParticipantsUpdatesFunction (upval), NewResult (upval), ParticipantsChangedModule (upval), ConstantsModule (upval), v1 (upval), VoiceStateChangedModule (upval)
 		if GetFFlagBatchVoiceParticipantsUpdatesFunction() then
 			NewResult:dispatch(ParticipantsChangedModule(List))
@@ -346,7 +346,7 @@ local function initVoiceChat() --[[ Line: 334 ]]
 			NewResult:dispatch(VoiceStateChangedModule(i, LOCALMUTED))
 		end
 	end)
-	Default.talkingChanged.Event:Connect(function(p1) --[[ Line: 412 ]]
+	Default.talkingChanged.Event:Connect(function(p1)
 		-- upvalues: NewResult (upval), VoiceStateChangedModule (upval), UserId (copy), ConstantsModule (upval)
 		if p1 then
 			NewResult:dispatch(VoiceStateChangedModule(UserId, ConstantsModule.VOICE_STATE.TALKING))
@@ -356,7 +356,7 @@ local function initVoiceChat() --[[ Line: 334 ]]
 			NewResult:dispatch(VoiceStateChangedModule(UserId, ConstantsModule.VOICE_STATE.INACTIVE))
 		end
 	end)
-	BlockingUtilityModule:GetBlockedStatusChangedEvent():Connect(function(p1, p2) --[[ Line: 421 ]]
+	BlockingUtilityModule:GetBlockedStatusChangedEvent():Connect(function(p1, p2)
 		-- upvalues: NewResult (upval), ParticipantRemovedModule (upval), ParticipantAddedModule (upval)
 		if p2 then
 			NewResult:dispatch(ParticipantRemovedModule((tostring(p1))))
@@ -368,7 +368,7 @@ local function initVoiceChat() --[[ Line: 334 ]]
 	end)
 	v1:debug("Initial voice state is {}", Service.VoiceChatState)
 	setVoiceEnabled(Service.VoiceChatState)
-	Service.StateChanged:Connect(function(_, NewState) --[[ Line: 431 ]]
+	Service.StateChanged:Connect(function(_, NewState)
 		-- upvalues: v1 (upval), setVoiceEnabled (upval)
 		v1:debug("Voice state changed to {}", NewState)
 		setVoiceEnabled(NewState)
@@ -387,7 +387,7 @@ end
 NewResult:dispatch(BubbleChatEnabledChangedModule(Inverted))
 
 if game:GetEngineFeature("BubbleChatSettingsApi") then
-	Chat.BubbleChatSettingsChanged:Connect(function(Settings) --[[ Line: 443 ]]
+	Chat.BubbleChatSettingsChanged:Connect(function(Settings)
 		-- upvalues: TypesModule (copy), FFlagExpChatUseChatConfigStore (copy), ExpChatModule (copy), NewResult (ref), UpdateChatSettingsModule (copy)
 		local IChatSettingsResult, IChatSettingsResult2 = TypesModule.IChatSettings(Settings)
 		assert(IChatSettingsResult, "Bad settings object passed to Chat:SetBubbleChatSettings:\n" .. (IChatSettingsResult2 or ""))
@@ -401,7 +401,7 @@ if game:GetEngineFeature("BubbleChatSettingsApi") then
 		end
 	end)
 end
-Default:asyncInit():andThen(initVoiceChat):catch(function() --[[ Line: 458 ]]
+Default:asyncInit():andThen(initVoiceChat):catch(function()
 	-- upvalues: v1 (copy)
 	v1:debug("VoiceChatServiceManager failed to initialize")
 end)

@@ -5,7 +5,7 @@ local FFlagEnableInExperienceOffersPurchaseFlow = require(Parent.SharedFlags).FF
 local OfferCheckboxRowModule = if FFlagEnableInExperienceOffersPurchaseFlow then require(script.Parent.OfferCheckboxRow) else nil
 local _ = require(script.Parent.useCartPricing)
 
-return function(p1) --[[ Line: 24 | Named "buildCartPricingOfferCheckboxes" ]]
+return function(p1)
 	-- upvalues: FFlagEnableInExperienceOffersPurchaseFlow (copy), ReactModule (copy), OfferCheckboxRowModule (copy), Checkbox (copy)
 	local CartPricing = p1.cartPricing
 	local Elements = {}
@@ -23,7 +23,7 @@ return function(p1) --[[ Line: 24 | Named "buildCartPricingOfferCheckboxes" ]]
 				isChecked = cartPricingOffer.selected,
 				isDisabled = p1.isDisabled,
 				expirationTimeUtc = cartPricingOffer.expirationTimeUtc,
-				onActivated = function() --[[ Line: 41 ]]
+				onActivated = function()
 					-- upvalues: CartPricing (copy), OfferId (copy)
 					CartPricing.toggleCartPricingOffer(OfferId)
 				end
@@ -35,7 +35,7 @@ return function(p1) --[[ Line: 24 | Named "buildCartPricingOfferCheckboxes" ]]
 				label = cartPricingOffer.localizedDescription,
 				isChecked = cartPricingOffer.selected,
 				isDisabled = p1.isDisabled,
-				onActivated = function() --[[ Line: 52 ]]
+				onActivated = function()
 					-- upvalues: CartPricing (copy), OfferId (copy)
 					CartPricing.toggleCartPricingOffer(OfferId)
 				end

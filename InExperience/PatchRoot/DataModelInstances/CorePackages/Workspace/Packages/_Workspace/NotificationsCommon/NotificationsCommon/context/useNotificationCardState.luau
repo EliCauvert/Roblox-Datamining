@@ -4,7 +4,7 @@ local ReactModule = require(Parent1.Parent.React)
 local NotificationCardContextModule = require(Parent.NotificationCardContext)
 local _ = require(Parent1.type)
 
-return function(p1) --[[ Line: 8 | Named "useNotificationCardState" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), NotificationCardContextModule (copy)
 	local UseContextResult = ReactModule.useContext(NotificationCardContextModule)
 	

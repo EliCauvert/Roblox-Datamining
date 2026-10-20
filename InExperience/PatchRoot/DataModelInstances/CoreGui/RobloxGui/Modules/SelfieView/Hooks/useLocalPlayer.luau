@@ -1,9 +1,9 @@
 ﻿local ReactModule = require(game:GetService("CorePackages").Packages.React)
 local Players = game:GetService("Players")
 
-return function() --[[ Line: 8 | Named "useLocalPlayer" ]]
+return function()
 	-- upvalues: ReactModule (copy), Players (copy)
-	return ReactModule.useMemo(function() --[[ Line: 9 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: Players (upval)
 		local LocalPlayer = Players.LocalPlayer
 		while not LocalPlayer do

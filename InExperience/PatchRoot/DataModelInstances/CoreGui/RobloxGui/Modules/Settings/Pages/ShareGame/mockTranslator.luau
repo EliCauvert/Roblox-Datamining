@@ -1,5 +1,5 @@
 ﻿return {
-	FormatByKey = function(_, p1, _): string --[[ Line: 3 ]]
+	FormatByKey = function(_, p1, _): string
 		return (tostring(p1))
 	end
 }

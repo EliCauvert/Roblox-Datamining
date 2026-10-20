@@ -4,20 +4,20 @@ local _ = require(Parent.Signals)
 local UseChatWindowModule = require(script.Parent.Parent.Bridge.useChatWindow)
 local NewResult = require(Parent.ExpChatShared).Logger:new(script.Name)
 
-return function(p1) --[[ Line: 44 | Named "FriendsChatMessageList" ]]
+return function(p1)
 	-- upvalues: UseChatWindowModule (copy), ReactModule (copy), NewResult (copy)
 	local UseChatWindowModuleResult = UseChatWindowModule()
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 51 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: NewResult (upval)
 		NewResult:warning("resetTargetChannel called on FriendsChatMessageList; not supported")
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 54 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: NewResult (upval)
 		NewResult:warning("activateWhisperMode called on FriendsChatMessageList; not supported")
 	end, {})
 	local UseRefResult = ReactModule.useRef(nil)
 	local OnViewportAbsoluteSizeChangedFunction = p1.onViewportAbsoluteSizeChanged
-	ReactModule.useEffect(function() --[[ Line: 63 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), OnViewportAbsoluteSizeChangedFunction (copy)
 		local Current = UseRefResult.current
 		

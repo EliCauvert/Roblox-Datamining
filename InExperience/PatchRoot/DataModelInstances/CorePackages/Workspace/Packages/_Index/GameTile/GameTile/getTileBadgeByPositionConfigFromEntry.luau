@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("GameTile").GameTileTypes)
 
-return function(p1) --[[ Line: 14 | Named "getTileBadgeByPositionConfigFromEntry" ]]
+return function(p1)
 	return if p1.badgePosition and p1.badgeAnalyticsId and p1.badgeType and (p1.badgeText or p1.badgeIcon) then {
 		[p1.badgePosition] = {
 			{

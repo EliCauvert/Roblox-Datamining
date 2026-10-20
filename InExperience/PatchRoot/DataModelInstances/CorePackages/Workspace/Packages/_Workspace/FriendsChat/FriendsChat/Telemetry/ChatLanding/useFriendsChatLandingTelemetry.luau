@@ -11,12 +11,12 @@ local FFlagFriendsChatLandingTelemetryFieldsModule = require(FriendsChat.Flags.F
 local GetChatLandingConversationInfoModule = require(script.Parent.getChatLandingConversationInfo)
 local GetChatLandingSharedCountsModule = require(script.Parent.getChatLandingSharedCounts)
 
-local function _() --[[ Line: 26 | Named "getIsChatEnabled" ]]
+local function _()
 	-- upvalues: GetFriendsChatSettingsStoreModule (copy)
 	return GetFriendsChatSettingsStoreModule(false).getChatEnabled(false)
 end
 
-return function(p1) --[[ Line: 48 | Named "useFriendsChatLandingTelemetry" ]]
+return function(p1)
 	-- upvalues: UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), ChatLandingTelemetryStateModule (copy), ReactModule (copy), GetChatLandingSharedCountsModule (copy), ChatLandingTelemetryEventsModule (copy), GetFriendsChatSettingsStoreModule (copy), FFlagFriendsChatLandingTelemetryFieldsModule (copy), GetChatLandingConversationInfoModule (copy)
 	local Emit = UseTelemetryModule(ChatLandingTelemetryLayerModule.Context).emit
 	local UseSetStateResult = ChatLandingTelemetryStateModule.useSetState()
@@ -26,13 +26,13 @@ return function(p1) --[[ Line: 48 | Named "useFriendsChatLandingTelemetry" ]]
 	UseRefResult1.current = p1.isFiltered
 	local UseRefResult2 = ReactModule.useRef(Emit)
 	UseRefResult2.current = Emit
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 62 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: GetChatLandingSharedCountsModule (upval), p1 (copy)
 		return GetChatLandingSharedCountsModule(p1.conversations)
 	end, { p1.conversations })
-	ReactModule.useEffect(function() --[[ Line: 66 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSetStateResult (copy), UseMemoResult (copy)
-		UseSetStateResult(function(Tbl) --[[ Line: 67 ]]
+		UseSetStateResult(function(Tbl)
 			-- upvalues: UseMemoResult (upval)
 			local Copy = table.clone(Tbl)
 			Copy.chatLandingListCount = UseMemoResult.chatLandingListCount
@@ -42,14 +42,14 @@ return function(p1) --[[ Line: 48 | Named "useFriendsChatLandingTelemetry" ]]
 			return Copy
 		end)
 	end, { UseMemoResult, UseSetStateResult })
-	ReactModule.useEffect(function() --[[ Line: 80 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult2 (copy), ChatLandingTelemetryEventsModule (upval), GetFriendsChatSettingsStoreModule (upval)
 		UseRefResult2.current(ChatLandingTelemetryEventsModule.ScreenRendered, {
 			isChatEnabled = GetFriendsChatSettingsStoreModule(false).getChatEnabled(false)
 		})
 	end, {})
 	local EmptyStateType = p1.emptyStateType
-	ReactModule.useEffect(function() --[[ Line: 90 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagFriendsChatLandingTelemetryFieldsModule (upval), EmptyStateType (copy), UseRefResult2 (copy), ChatLandingTelemetryEventsModule (upval)
 		if FFlagFriendsChatLandingTelemetryFieldsModule and EmptyStateType ~= nil then
 			UseRefResult2.current(ChatLandingTelemetryEventsModule.ChatEmptyStateScreenRendered, { emptyStateType = EmptyStateType })
@@ -57,11 +57,11 @@ return function(p1) --[[ Line: 48 | Named "useFriendsChatLandingTelemetry" ]]
 	end, { EmptyStateType })
 	
 	return {
-		fireSearchActivatedEvent = ReactModule.useCallback(function() --[[ Line: 98 ]]
+		fireSearchActivatedEvent = ReactModule.useCallback(function()
 			-- upvalues: UseRefResult2 (copy), ChatLandingTelemetryEventsModule (upval)
 			UseRefResult2.current(ChatLandingTelemetryEventsModule.ChatLandingSearchBtnClicked, {})
 		end, {}),
-		fireConversationClickedEvent = ReactModule.useCallback(function(p2, _, OsaImpressionId) --[[ Line: 103 ]]
+		fireConversationClickedEvent = ReactModule.useCallback(function(p2, _, OsaImpressionId)
 			-- upvalues: GetChatLandingConversationInfoModule (upval), UseRefResult (copy), UseRefResult1 (copy), UseRefResult2 (copy), ChatLandingTelemetryEventsModule (upval)
 			if p2 ~= nil and p2.id ~= nil then
 				local ChatLandingConversationInfoModule = GetChatLandingConversationInfoModule(p2, UseRefResult.current or {}, UseRefResult1.current == true)
@@ -75,7 +75,7 @@ return function(p1) --[[ Line: 48 | Named "useFriendsChatLandingTelemetry" ]]
 				return
 			end
 		end, {}),
-		fireConversationImpressionEvent = ReactModule.useCallback(function(p2) --[[ Line: 122 ]]
+		fireConversationImpressionEvent = ReactModule.useCallback(function(p2)
 			-- upvalues: GetChatLandingConversationInfoModule (upval), UseRefResult (copy), UseRefResult1 (copy), UseRefResult2 (copy), ChatLandingTelemetryEventsModule (upval)
 			if p2 ~= nil and p2.id ~= nil then
 				local ChatLandingConversationInfoModule = GetChatLandingConversationInfoModule(p2, UseRefResult.current or {}, UseRefResult1.current == true)

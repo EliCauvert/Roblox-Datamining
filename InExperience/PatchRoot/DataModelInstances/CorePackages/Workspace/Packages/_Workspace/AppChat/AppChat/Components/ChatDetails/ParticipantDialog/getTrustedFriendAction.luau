@@ -5,7 +5,7 @@ local Sources = require(Parent.SocialLuaAnalytics).Analytics.Enums.Sources
 local GetProfileTrustedFriendActionsModule = require(AppChat.Http.getProfileTrustedFriendActions)
 local FFlagProfilePlatformAddTC = require(Parent.SharedFlags).FFlagProfilePlatformAddTC
 
-local function _(RawActionType, ActionType, IsDisabled, ModalVariantOverride) --[[ Line: 21 | Named "createTrustedFriendAction" ]]
+local function _(RawActionType, ActionType, IsDisabled, ModalVariantOverride)
 	return {
 		rawActionType = RawActionType,
 		actionType = ActionType,
@@ -14,7 +14,7 @@ local function _(RawActionType, ActionType, IsDisabled, ModalVariantOverride) --
 	}
 end
 
-local function normalizeTrustedFriendAction(List) --[[ Line: 35 ]]
+local function normalizeTrustedFriendAction(List)
 	-- upvalues: FFlagProfilePlatformAddTC (copy), Sources (copy)
 	for _, RawActionType in List do
 		if RawActionType == "RemoveTrustedConnection" then
@@ -76,12 +76,12 @@ local function normalizeTrustedFriendAction(List) --[[ Line: 35 ]]
 	return nil
 end
 
-return function(p1) --[[ Line: 61 | Named "getTrustedFriendAction" ]]
+return function(p1)
 	-- upvalues: PromiseModule (copy), GetProfileTrustedFriendActionsModule (copy), normalizeTrustedFriendAction (copy)
-	return if p1 == "" then PromiseModule.resolve(nil) else GetProfileTrustedFriendActionsModule(p1):andThen(function(Result) --[[ Line: 67 ]]
+	return if p1 == "" then PromiseModule.resolve(nil) else GetProfileTrustedFriendActionsModule(p1):andThen(function(Result)
 		-- upvalues: normalizeTrustedFriendAction (upval)
 		return (normalizeTrustedFriendAction(Result))
-	end):catch(function() --[[ Line: 70 ]]
+	end):catch(function()
 		return nil
 	end)
 end

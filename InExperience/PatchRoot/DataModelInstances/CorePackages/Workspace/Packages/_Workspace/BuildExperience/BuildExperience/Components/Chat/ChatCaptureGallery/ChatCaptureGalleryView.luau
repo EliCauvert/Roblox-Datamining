@@ -9,7 +9,7 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local FillBehavior = FoundationModule.Enums.FillBehavior
 local InputSize = FoundationModule.Enums.InputSize
 
-return function(p1) --[[ Line: 36 | Named "ChatCaptureGalleryView" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), Sheet (copy), Text (copy), ChatCaptureGridModule (copy), Button (copy), FillBehavior (copy), InputSize (copy), ButtonVariant (copy)
 	return ReactModule.createElement(Sheet.Root, {
 		defaultSnapPointIndex = 1,

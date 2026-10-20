@@ -16,7 +16,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 local PiiFilterModule = {}
 PiiFilterModule.__index = PiiFilterModule
 
-function PiiFilterModule.new(p1) --[[ Line: 50 ]]
+function PiiFilterModule.new(p1)
 	-- upvalues: StrictInterfaceResult (copy), Players (copy), PiiFilterModule (copy)
 	assert(StrictInterfaceResult(p1))
 	
@@ -30,7 +30,7 @@ function PiiFilterModule.new(p1) --[[ Line: 50 ]]
 	}, PiiFilterModule))
 end
 
-function PiiFilterModule:_addPlayerToEraseMap(Player: Player) --[[ Line: 75 ]]
+function PiiFilterModule:_addPlayerToEraseMap(Player: Player)
 	local DisambiguationIdentifier = self._disambiguationIdentifiers[Player.UserId]
 	
 	if DisambiguationIdentifier == nil then
@@ -43,21 +43,21 @@ function PiiFilterModule:_addPlayerToEraseMap(Player: Player) --[[ Line: 75 ]]
 	self._trackedPii[tostring(Player.DisplayName)] = string.format("DisplayName(%d)", DisambiguationIdentifier)
 end
 
-function PiiFilterModule:_removePlayerFromEraseMap(Player: Player) --[[ Line: 88 ]]
+function PiiFilterModule:_removePlayerFromEraseMap(Player: Player)
 	self._trackedPii[tostring(Player.UserId)] = nil
 	self._trackedPii[tostring(Player.Name)] = nil
 	self._trackedPii[tostring(Player.DisplayName)] = nil
 end
 
-function PiiFilterModule:startTracking() --[[ Line: 94 ]]
+function PiiFilterModule:startTracking()
 	for _, player in ipairs(self._players:GetPlayers()) do
 		self:_addPlayerToEraseMap(player)
 	end
-	self._playerAddedConnection = self._players.PlayerAdded:Connect(function(Player) --[[ Line: 99 ]]
+	self._playerAddedConnection = self._players.PlayerAdded:Connect(function(Player)
 		-- upvalues: self (copy)
 		self:_addPlayerToEraseMap(Player)
 	end)
-	self._playerRemovingConnection = self._players.PlayerRemoving:Connect(function(Player: Player) --[[ Line: 103 ]]
+	self._playerRemovingConnection = self._players.PlayerRemoving:Connect(function(Player: Player)
 		-- upvalues: self (copy)
 		self._waitFn(self._eraseTimeout)
 		
@@ -67,12 +67,12 @@ function PiiFilterModule:startTracking() --[[ Line: 94 ]]
 	end)
 end
 
-function PiiFilterModule:stopTracking() --[[ Line: 116 ]]
+function PiiFilterModule:stopTracking()
 	self._playerAddedConnection:Disconnect()
 	self._playerRemovingConnection:Disconnect()
 end
 
-function PiiFilterModule.cleanPii(p1, Text: string): string --[[ Line: 121 ]]
+function PiiFilterModule.cleanPii(p1, Text: string): string
 	for i, value in pairs(p1._trackedPii) do
 		Text = string.gsub(Text, i, value)
 	end

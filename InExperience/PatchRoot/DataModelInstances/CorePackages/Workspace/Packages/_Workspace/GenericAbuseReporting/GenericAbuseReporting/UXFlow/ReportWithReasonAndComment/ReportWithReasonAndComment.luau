@@ -7,7 +7,7 @@ local OnFormLoadedModule = require(GenericAbuseReporting.Analytics.Actions.OnFor
 local UseAnalyticsSubmitDispatchModule = require(GenericAbuseReporting.Analytics.useAnalyticsSubmitDispatch)
 local UseAnalyticsDispatchModule = require(GenericAbuseReporting.Analytics.useAnalyticsDispatch)
 
-return function(p1) --[[ Line: 34 | Named "ReportWithReasonAndComment" ]]
+return function(p1)
 	-- upvalues: UseAnalyticsSubmitDispatchModule (copy), UseAnalyticsDispatchModule (copy), DefaultLocalizationKeysModule (copy), ReactModule (copy), OnFormLoadedModule (copy), FrameModule (copy), SimpleSubmitDialogModule (copy)
 	local UseAnalyticsSubmitDispatchModuleResult = UseAnalyticsSubmitDispatchModule()
 	local UseAnalyticsDispatchModuleResult = UseAnalyticsDispatchModule()
@@ -17,7 +17,7 @@ return function(p1) --[[ Line: 34 | Named "ReportWithReasonAndComment" ]]
 		p1.localizationKeys.formTitle = p1.localizationKeys.formTitle or DefaultLocalizationKeysModule.formTitle
 		p1.localizationKeys.formSubmit = p1.localizationKeys.formSubmit or DefaultLocalizationKeysModule.formSubmit
 	end
-	ReactModule.useEffect(function() --[[ Line: 44 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseAnalyticsDispatchModuleResult (copy), OnFormLoadedModule (upval), p1 (copy)
 		UseAnalyticsDispatchModuleResult(OnFormLoadedModule({
 			context = p1.analyticsContext,
@@ -33,13 +33,13 @@ return function(p1) --[[ Line: 34 | Named "ReportWithReasonAndComment" ]]
 			localizationKeys = p1.localizationKeys,
 			reportCategories = p1.reportCategories,
 			reportCategoryDefaultKey = p1.reportCategoryDefaultKey,
-			onSubmit = ReactModule.useCallback(function(p2, p3) --[[ Line: 53 ]]
+			onSubmit = ReactModule.useCallback(function(p2, p3)
 				-- upvalues: p1 (copy), UseAnalyticsSubmitDispatchModuleResult (copy)
 				if (if p1.onSubmitProps.hasNextSteps then p1.onSubmitProps.onProceedToNextStep(p2, p3) else p1.onSubmitProps.onSubmit(p2, p3)) and not p1.onSubmitProps.hasNextSteps then
 					UseAnalyticsSubmitDispatchModuleResult("Submit")
 				end
 			end, { UseAnalyticsSubmitDispatchModuleResult, p1.onSubmitProps }),
-			onAbandon = ReactModule.useCallback(function() --[[ Line: 63 ]]
+			onAbandon = ReactModule.useCallback(function()
 				-- upvalues: p1 (copy), UseAnalyticsSubmitDispatchModuleResult (copy)
 				if not p1.onCloseProps then
 					UseAnalyticsSubmitDispatchModuleResult("Abandon")

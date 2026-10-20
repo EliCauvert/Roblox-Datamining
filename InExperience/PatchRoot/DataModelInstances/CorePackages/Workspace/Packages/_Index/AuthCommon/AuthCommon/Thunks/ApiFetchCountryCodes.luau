@@ -8,7 +8,7 @@ local SetCountryCodeListModule = require(AuthCommon.Actions.SetCountryCodeList)
 local FFlagUseSignalsForCountryCodeList = require(Parent.SharedFlags).FFlagUseSignalsForCountryCodeList
 local GetCountryCodeListStoreModule = require(AuthCommon.Stores.GetCountryCodeListStore)
 local ApiFetchCountryCodesModule = {
-	_updateStoreWithCountryCodes = function(p1, p2) --[[ Line: 15 ]]
+	_updateStoreWithCountryCodes = function(p1, p2)
 		-- upvalues: CountryCodeModule (copy), FFlagUseSignalsForCountryCodeList (copy), GetCountryCodeListStoreModule (copy), SetCountryCodeListModule (copy), PromiseModule (copy)
 		local FromJSONResults = {}
 		
@@ -24,18 +24,18 @@ local ApiFetchCountryCodesModule = {
 	end
 }
 
-function ApiFetchCountryCodesModule.Fetch(p3) --[[ Line: 28 ]]
+function ApiFetchCountryCodesModule.Fetch(p3)
 	-- upvalues: PerformFetch (copy), GetCountryCodesModule (copy), ApiFetchCountryCodesModule (copy), PromiseModule (copy)
-	return PerformFetch.Single("luaapp.countriesapi.countrycodes", function(p4) --[[ Line: 29 ]]
+	return PerformFetch.Single("luaapp.countriesapi.countrycodes", function(p4)
 		-- upvalues: GetCountryCodesModule (upval), p3 (copy), ApiFetchCountryCodesModule (upval), PromiseModule (upval)
-		return GetCountryCodesModule(p3):andThen(function(Result) --[[ Line: 30 ]]
+		return GetCountryCodesModule(p3):andThen(function(Result)
 			-- upvalues: ApiFetchCountryCodesModule (upval), p4 (copy), PromiseModule (upval)
 			return if Result and Result.responseBody then ApiFetchCountryCodesModule._updateStoreWithCountryCodes(p4, Result) else PromiseModule.reject()
 		end)
 	end)
 end
 
-function ApiFetchCountryCodesModule.GetFetchingStatus(p3) --[[ Line: 40 ]]
+function ApiFetchCountryCodesModule.GetFetchingStatus(p3)
 	-- upvalues: PerformFetch (copy)
 	return PerformFetch.GetStatus(p3, "luaapp.countriesapi.countrycodes")
 end

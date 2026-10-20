@@ -17,7 +17,7 @@ local RoactNetworking = RoactServiceTagsModule.RoactNetworking
 local SduiLogger = require(Parent.SduiCoreSystem).SduiLogger
 local FFlagLuaAppSduiGameTileFeedback = require(Parent.SharedFlags).FFlagLuaAppSduiGameTileFeedback
 
-return function(Instrumentation) --[[ Line: 32 | Named "useSduiDependencies" ]]
+return function(Instrumentation)
 	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), UseRoactServiceFunction (copy), RoactAnalytics (copy), RoactAnalyticsCommonGameEvents (copy), AppEventIngestService (copy), AppSessionService (copy), ReactModule (copy), RoactNetworking (copy), LocalizationRoactContext (copy), UseCursorFunction (copy), FoundationModule (copy), FFlagLuaAppSduiGameTileFeedback (copy), FeedbackManagerInjectionContext (copy), LinkingProtocol (copy), SduiLogger (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseNavigationResult = UseNavigationFunction()
@@ -27,14 +27,14 @@ return function(Instrumentation) --[[ Line: 32 | Named "useSduiDependencies" ]]
 	local UseRoactServiceResult3 = UseRoactServiceFunction(AppSessionService)
 	local UseRefResult = ReactModule.useRef(UseNavigationResult)
 	UseRefResult.current = UseNavigationResult
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 43 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy)
 		return UseRefResult.current
 	end, { UseRefResult })
 	local UseRoactServiceResult4 = UseRoactServiceFunction(RoactNetworking)
 	local UseContextResult = ReactModule.useContext(LocalizationRoactContext)
 	local UseCursorResult = UseCursorFunction(FoundationModule.Enums.CursorType.RoundedRect)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 50 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseCursorResult (copy)
 		return { tileCursor = UseCursorResult }
 	end, { UseCursorResult })
@@ -44,12 +44,12 @@ return function(Instrumentation) --[[ Line: 32 | Named "useSduiDependencies" ]]
 		local UseContextResult1 = ReactModule.useContext(FeedbackManagerInjectionContext)
 		local UseRefResult1 = ReactModule.useRef(UseContextResult1)
 		UseRefResult1.current = UseContextResult1
-		UseResult1 = ReactModule.useCallback(function(p1, p2, p3, p4) --[[ Line: 63 ]]
+		UseResult1 = ReactModule.useCallback(function(p1, p2, p3, p4)
 			-- upvalues: UseRefResult1 (copy)
 			return UseRefResult1.current(p1, p2, p3, p4)
 		end, { UseRefResult1 })
 	end
-	return (ReactModule.useMemo(function() --[[ Line: 76 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: UseDispatchResult (copy), UseResult (copy), UseRoactServiceResult (copy), UseRoactServiceResult1 (copy), UseRoactServiceResult2 (copy), UseRoactServiceResult3 (copy), LinkingProtocol (upval), SduiLogger (upval), UseMemoResult (copy), Instrumentation (copy), UseContextResult (copy), UseRoactServiceResult4 (copy), FFlagLuaAppSduiGameTileFeedback (upval), UseResult1 (ref)
 		return {
 			dispatch = UseDispatchResult,

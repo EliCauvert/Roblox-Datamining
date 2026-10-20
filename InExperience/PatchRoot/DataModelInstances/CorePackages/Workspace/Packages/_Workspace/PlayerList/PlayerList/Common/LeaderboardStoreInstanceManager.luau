@@ -5,12 +5,12 @@ local Signal2 = nil
 Signal, Signal2 = require(Parent.Signals).createSignal(nil)
 
 return {
-	createLeaderboardStoreInstance = function() --[[ Line: 13 ]]
+	createLeaderboardStoreInstance = function()
 		-- upvalues: Signal2 (ref), LeaderboardStore (copy)
 		Signal2(LeaderboardStore())
 	end,
 	getLeaderboardStoreInstance = Signal,
-	cleanUpInstance = function() --[[ Line: 17 ]]
+	cleanUpInstance = function()
 		-- upvalues: Signal (ref), Signal2 (ref)
 		local SignalResult = Signal(false)
 		

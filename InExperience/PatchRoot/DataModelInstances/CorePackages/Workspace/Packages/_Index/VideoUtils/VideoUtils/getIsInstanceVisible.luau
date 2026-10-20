@@ -1,4 +1,4 @@
-﻿return function(Frame: Frame, p1, p2): boolean --[[ Line: 1 | Named "getIsInstanceVisible" ]]
+﻿return function(Frame: Frame, p1, p2): boolean
 	if not Frame then
 		return false
 	end

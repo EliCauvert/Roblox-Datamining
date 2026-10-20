@@ -25,7 +25,7 @@ local config = {
 	}
 }
 
-local function PassiveLicensingBadge(Frame) --[[ Line: 74 ]]
+local function PassiveLicensingBadge(Frame)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FoundationModule (copy), BadgeSize (copy)
 	return ReactModule.createElement(FoundationModule.Badge, {
 		testId = "LicensingBadge",
@@ -37,29 +37,29 @@ local function PassiveLicensingBadge(Frame) --[[ Line: 74 ]]
 	})
 end
 
-local function InteractiveLicensingBadge(Frame) --[[ Line: 89 ]]
+local function InteractiveLicensingBadge(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), FFlagAXMarketplaceLicensingItemDetails (copy), UseEarlyIsFocusedFunction (copy), FoundationModule (copy), BadgeVariant (copy), BadgeSize (copy), BadgeShape (copy), AXTooltip (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseLocalizationResult = UseLocalizationFunction({ label = Frame.config.label, info = Frame.config.info })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 98 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
-		UseStateResult2(function(p1): boolean --[[ Line: 99 ]]
+		UseStateResult2(function(p1): boolean
 			return not p1
 		end)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 104 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {})
-	ReactModule.useImperativeHandle(Frame.dismissTooltipRef, function() --[[ Line: 108 ]]
+	ReactModule.useImperativeHandle(Frame.dismissTooltipRef, function()
 		-- upvalues: UseResult1 (copy)
 		return UseResult1
 	end, { UseResult1 })
 	
 	if FFlagAXMarketplaceLicensingItemDetails then
 		local UseEarlyIsFocusedResult = UseEarlyIsFocusedFunction()
-		ReactModule.useEffect(function() --[[ Line: 117 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseEarlyIsFocusedResult (copy), UseResult1 (copy)
 			if not UseEarlyIsFocusedResult then
 				UseResult1()
@@ -89,7 +89,7 @@ local function InteractiveLicensingBadge(Frame) --[[ Line: 89 ]]
 	})
 end
 
-return ReactModule.memo(function(Tbl) --[[ Line: 147 | Named "LicensingBadge" ]]
+return ReactModule.memo(function(Tbl)
 	-- upvalues: config (copy), FFlagAXMarketplaceLicensingItemCards (copy), ReactModule (copy), PassiveLicensingBadge (copy), InteractiveLicensingBadge (copy)
 	local Copy = table.clone(Tbl)
 	Copy.config = config[Tbl.itemLicensingInfo.licenseType]

@@ -37,31 +37,31 @@ local FFlagSignalsNavP3Dispatch = SharedFlagsModule.FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 local t = {}
 
-local function getSquareExperienceTileHeight(p1: number): number --[[ Line: 65 ]]
+local function getSquareExperienceTileHeight(p1: number): number
 	return p1 + 42
 end
 
-local function useFavoriteExperiences(_) --[[ Line: 69 ]]
+local function useFavoriteExperiences(_)
 	-- upvalues: UseDispatchFunction (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), t (copy), ReactModule (copy), CryoModule (copy), NetworkingGamesModule (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local Experiences = UseProfileJsonComponentModule(EnumsModule.Components.FavoriteExperiences).experiences or t
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 75 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CryoModule (upval), Experiences (copy)
-		return CryoModule.List.map(Experiences, function(p1, _): string --[[ Line: 76 ]]
+		return CryoModule.List.map(Experiences, function(p1, _): string
 			return (tostring(p1.universeId))
 		end)
 	end, { Experiences })
-	ReactModule.useEffect(function() --[[ Line: 81 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy), CryoModule (upval), UseDispatchResult (copy), NetworkingGamesModule (upval)
 		if UseMemoResult ~= nil and not CryoModule.isEmpty(UseMemoResult) then
-			UseDispatchResult(NetworkingGamesModule.GetExperiencesDetails.API(UseMemoResult)):catch(function(_) --[[ Line: 83 ]] end)
+			UseDispatchResult(NetworkingGamesModule.GetExperiencesDetails.API(UseMemoResult)):catch(function(_) end)
 		end
 	end, { UseMemoResult })
-	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 89 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p1)
 		-- upvalues: GetDeepValueFunction (upval), t (upval)
 		return GetDeepValueFunction(p1, "ProfilePlatform.Games.byGameId") or t
 	end)
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 93 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), UseSelectorResult (copy)
 		local List = {}
 		
@@ -76,14 +76,14 @@ local function useFavoriteExperiences(_) --[[ Line: 69 ]]
 	return if Experiences and #UseMemoResult1 == #UseMemoResult then UseMemoResult1 else t
 end
 
-return function(p1) --[[ Line: 114 | Named "FavoriteExperiences" ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseProfileWrapperContextModule (copy), ProfilePlatformFavoritesEnableProfilePlatformClickAnalytics (copy), UseProfileAnalyticsContextModule (copy), FFlagProfilePlatformEnableImpressions (copy), UseGenerateImpressionsTagModule (copy), EnumsModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), EventNamesModule (copy), ProfilePlatformFavoritesNavigateToWebV2 (copy), AppPage (copy), Url (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), getSquareExperienceTileHeight (copy), useFavoriteExperiences (copy), FFlagProfilePlatformFavoritesEnableGameDetailAnalytics (copy), UseRoactServiceFunction (copy), RoactAnalyticsCommonGameEvents (copy), FFlagProfilePlatformImproveGameDetailsAnalytics (copy), UseRenderExperienceTileModule (copy), UseRenderExperienceTileDEPRECATEDModule (copy), FormatExperienceDetailsForImpressionsModule (copy), UseSendItemImpressionsModule (copy), ContentType (copy), CryoModule (copy), SquareCollectionGridViewModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseProfileAnalyticsContextModuleResult = if ProfilePlatformFavoritesEnableProfilePlatformClickAnalytics then UseProfileAnalyticsContextModule() else nil
 	local UseGenerateImpressionsTagModuleResult = if FFlagProfilePlatformEnableImpressions then UseGenerateImpressionsTagModule(EnumsModule.Components.FavoriteExperiences) else nil
 	local ProfileId = UseProfileWrapperContextModule().profileId
 	local UseLocalizationResult = UseLocalizationFunction({ title = TextKeysModule.Favorites })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 131 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: ProfilePlatformFavoritesEnableProfilePlatformClickAnalytics (upval), UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), ProfilePlatformFavoritesNavigateToWebV2 (upval), AppPage (upval), Url (upval), ProfileId (copy), TextKeysModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 		if ProfilePlatformFavoritesEnableProfilePlatformClickAnalytics and UseProfileAnalyticsContextModuleResult then
 			UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.FavoriteExperienceSeeAll)
@@ -106,7 +106,7 @@ return function(p1) --[[ Line: 114 | Named "FavoriteExperiences" ]]
 	local NoProfilePlatformFavoritesNavigateToWebV2 = not ProfilePlatformFavoritesNavigateToWebV2
 	local UseFavoriteExperiencesResult = useFavoriteExperiences(ProfileId)
 	local UseRoactServiceResult = if FFlagProfilePlatformFavoritesEnableGameDetailAnalytics then UseRoactServiceFunction(RoactAnalyticsCommonGameEvents) else nil
-	local UseResult1 = ReactModule.useCallback(function(p2, PositionInComponent, p3) --[[ Line: 165 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2, PositionInComponent, p3)
 		-- upvalues: ProfilePlatformFavoritesEnableProfilePlatformClickAnalytics (upval), UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), FFlagProfilePlatformFavoritesEnableGameDetailAnalytics (upval), UseFavoriteExperiencesResult (copy), UseRoactServiceResult (copy), AppPage (upval), p1 (copy), FFlagProfilePlatformImproveGameDetailsAnalytics (upval), ProfileId (copy)
 		if ProfilePlatformFavoritesEnableProfilePlatformClickAnalytics then
 			UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.FavoriteExperienceOpened, {
@@ -124,7 +124,7 @@ return function(p1) --[[ Line: 114 | Named "FavoriteExperiences" ]]
 		p1.layoutOrder
 	} else { UseProfileAnalyticsContextModuleResult })
 	local ProfileFavoriteExperienceTile = if FFlagProfilePlatformEnableImpressions then UseRenderExperienceTileModule(UseGenerateImpressionsTagModuleResult, "ProfileFavoriteExperienceTile", UseResult1) else UseRenderExperienceTileDEPRECATEDModule("ProfileFavoriteExperienceTile", UseResult1)
-	local UseMemoResult = if FFlagProfilePlatformEnableImpressions then ReactModule.useMemo(function() --[[ Line: 198 ]]
+	local UseMemoResult = if FFlagProfilePlatformEnableImpressions then ReactModule.useMemo(function()
 		-- upvalues: FormatExperienceDetailsForImpressionsModule (upval), UseFavoriteExperiencesResult (copy)
 		return FormatExperienceDetailsForImpressionsModule(UseFavoriteExperiencesResult)
 	end, { UseFavoriteExperiencesResult }) else nil

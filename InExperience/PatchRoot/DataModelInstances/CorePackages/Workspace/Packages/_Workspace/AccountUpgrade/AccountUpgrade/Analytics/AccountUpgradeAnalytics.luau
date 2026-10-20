@@ -22,17 +22,17 @@ local config = {
 	[AccountUpgradeSurfaceModule.FullPage] = EventStreamConstants.Origin.AccountUpgradeOAuthFullPage
 }
 
-local function _(p1, Flow, Surface, ErrorCode) --[[ Line: 44 | Named "logCounter" ]]
+local function _(p1, Flow, Surface, ErrorCode)
 	-- upvalues: Default (copy)
 	Default:logRobloxTelemetryCounter(p1, 1, { flow = Flow, surface = Surface, errorCode = ErrorCode })
 end
 
 return {
-	getEventOrigin = function(OAuth, p1) --[[ Line: 37 ]]
+	getEventOrigin = function(OAuth, p1)
 		-- upvalues: AccountUpgradeFlowModule (copy), config (copy)
 		return if OAuth == AccountUpgradeFlowModule.OAuth then config[p1] else OAuth
 	end,
-	reportOpened = function(Flow, Surface) --[[ Line: 61 ]]
+	reportOpened = function(Flow, Surface)
 		-- upvalues: AccountUpgradeFlowModule (copy), FFlagAccountUpgradeOAuthTelemetryModule (copy), AuthPageloadFunction (copy), Context (copy), config (copy), TelemetryConfigs (copy), Default (copy)
 		if Flow == AccountUpgradeFlowModule.OAuth then
 			AuthPageloadFunction(Context.AccountUpgrade, if FFlagAccountUpgradeOAuthTelemetryModule then Flow else nil, nil, if Flow == AccountUpgradeFlowModule.OAuth then config[Surface] else Flow)
@@ -41,7 +41,7 @@ return {
 			return
 		end
 	end,
-	reportCloseButtonClicked = function(Flow, Surface) --[[ Line: 71 ]]
+	reportCloseButtonClicked = function(Flow, Surface)
 		-- upvalues: AccountUpgradeFlowModule (copy), config (copy), FFlagAccountUpgradeOAuthTelemetryModule (copy), AuthButtonClickFunction (copy), Context (copy), Button (copy), AuthModalShownFunction (copy), TelemetryConfigs (copy), Default (copy)
 		if Flow == AccountUpgradeFlowModule.OAuth then
 			local Entry = if Flow == AccountUpgradeFlowModule.OAuth then config[Surface] else Flow
@@ -53,7 +53,7 @@ return {
 			return
 		end
 	end,
-	reportCloseWarningBack = function(Flow, Surface) --[[ Line: 82 ]]
+	reportCloseWarningBack = function(Flow, Surface)
 		-- upvalues: AccountUpgradeFlowModule (copy), config (copy), FFlagAccountUpgradeOAuthTelemetryModule (copy), AuthButtonClickFunction (copy), Context (copy), Button (copy), TelemetryConfigs (copy), Default (copy)
 		if Flow == AccountUpgradeFlowModule.OAuth then
 			AuthButtonClickFunction(Context.AccountUpgradeCloseWarning, Button.Back, if FFlagAccountUpgradeOAuthTelemetryModule then Flow else nil, nil, nil, if Flow == AccountUpgradeFlowModule.OAuth then config[Surface] else Flow)
@@ -62,7 +62,7 @@ return {
 			return
 		end
 	end,
-	reportCloseWarningClose = function(Flow, Surface) --[[ Line: 92 ]]
+	reportCloseWarningClose = function(Flow, Surface)
 		-- upvalues: AccountUpgradeFlowModule (copy), config (copy), FFlagAccountUpgradeOAuthTelemetryModule (copy), AuthButtonClickFunction (copy), Context (copy), Button (copy), TelemetryConfigs (copy), Default (copy)
 		if Flow == AccountUpgradeFlowModule.OAuth then
 			AuthButtonClickFunction(Context.AccountUpgradeCloseWarning, Button.Close, if FFlagAccountUpgradeOAuthTelemetryModule then Flow else nil, nil, nil, if Flow == AccountUpgradeFlowModule.OAuth then config[Surface] else Flow)
@@ -71,7 +71,7 @@ return {
 			return
 		end
 	end,
-	reportBirthdayActivated = function(OAuth, p1) --[[ Line: 102 ]]
+	reportBirthdayActivated = function(OAuth, p1)
 		-- upvalues: AccountUpgradeFlowModule (copy), config (copy), AuthFormInteractionFunction (copy), Context (copy), Field (copy), ActionType (copy), State (copy)
 		if OAuth == AccountUpgradeFlowModule.OAuth then
 			local Entry = if OAuth == AccountUpgradeFlowModule.OAuth then config[p1] else OAuth
@@ -81,7 +81,7 @@ return {
 			return
 		end
 	end,
-	reportBirthdayConfirmed = function(OAuth, p1) --[[ Line: 111 ]]
+	reportBirthdayConfirmed = function(OAuth, p1)
 		-- upvalues: AccountUpgradeFlowModule (copy), AuthButtonClickFunction (copy), Context (copy), Button (copy), config (copy)
 		if OAuth == AccountUpgradeFlowModule.OAuth then
 			AuthButtonClickFunction(Context.AccountUpgrade, Button.ConfirmBirthday, OAuth, nil, nil, if OAuth == AccountUpgradeFlowModule.OAuth then config[p1] else OAuth)
@@ -89,7 +89,7 @@ return {
 			return
 		end
 	end,
-	reportBirthdayPickerClosed = function(OAuth, p1) --[[ Line: 118 ]]
+	reportBirthdayPickerClosed = function(OAuth, p1)
 		-- upvalues: AccountUpgradeFlowModule (copy), AuthFormInteractionFunction (copy), Context (copy), Field (copy), State (copy), config (copy)
 		if OAuth == AccountUpgradeFlowModule.OAuth then
 			AuthFormInteractionFunction(Context.AccountUpgrade, Field.BirthdayPicker, State.BirthdayPickerClosedWithoutConfirm, if OAuth == AccountUpgradeFlowModule.OAuth then config[p1] else OAuth)
@@ -97,7 +97,7 @@ return {
 			return
 		end
 	end,
-	reportBirthdayPickerAllPicked = function(OAuth, p1) --[[ Line: 130 ]]
+	reportBirthdayPickerAllPicked = function(OAuth, p1)
 		-- upvalues: AccountUpgradeFlowModule (copy), AuthFormInteractionFunction (copy), Context (copy), Field (copy), State (copy), config (copy)
 		if OAuth == AccountUpgradeFlowModule.OAuth then
 			AuthFormInteractionFunction(Context.AccountUpgrade, Field.BirthdayPicker, State.BirthdayPickerAllPicked, if OAuth == AccountUpgradeFlowModule.OAuth then config[p1] else OAuth)
@@ -105,7 +105,7 @@ return {
 			return
 		end
 	end,
-	reportUsernameFocused = function(OAuth, p1) --[[ Line: 142 ]]
+	reportUsernameFocused = function(OAuth, p1)
 		-- upvalues: AccountUpgradeFlowModule (copy), AuthFormInteractionFunction (copy), Context (copy), Field (copy), ActionType (copy), config (copy)
 		if OAuth == AccountUpgradeFlowModule.OAuth then
 			AuthFormInteractionFunction(Context.AccountUpgrade, Field.Username, ActionType.Focus, if OAuth == AccountUpgradeFlowModule.OAuth then config[p1] else OAuth)
@@ -113,7 +113,7 @@ return {
 			return
 		end
 	end,
-	reportUsernameSuggestionSelected = function(OAuth, p1, p2) --[[ Line: 149 ]]
+	reportUsernameSuggestionSelected = function(OAuth, p1, p2)
 		-- upvalues: AccountUpgradeFlowModule (copy), AuthButtonClickFunction (copy), Context (copy), Button (copy), config (copy)
 		if OAuth == AccountUpgradeFlowModule.OAuth then
 			AuthButtonClickFunction(Context.AccountUpgrade, Button.UsernameSuggestion, p2, nil, nil, if OAuth == AccountUpgradeFlowModule.OAuth then config[p1] else OAuth)
@@ -121,7 +121,7 @@ return {
 			return
 		end
 	end,
-	reportGenderActivated = function(OAuth, p1, Male) --[[ Line: 167 ]]
+	reportGenderActivated = function(OAuth, p1, Male)
 		-- upvalues: AccountUpgradeFlowModule (copy), UserGender (copy), Button (copy), AuthButtonClickFunction (copy), Context (copy), config (copy)
 		if OAuth == AccountUpgradeFlowModule.OAuth then
 			AuthButtonClickFunction(Context.AccountUpgrade, if Male == UserGender.Male then Button.GenderMale else Button.GenderFemale, OAuth, nil, nil, if OAuth == AccountUpgradeFlowModule.OAuth then config[p1] else OAuth)
@@ -129,7 +129,7 @@ return {
 			return
 		end
 	end,
-	reportLegalLinkActivated = function(OAuth, p1, p2) --[[ Line: 179 ]]
+	reportLegalLinkActivated = function(OAuth, p1, p2)
 		-- upvalues: AccountUpgradeFlowModule (copy), Field (copy), AuthFormInteractionFunction (copy), Context (copy), config (copy)
 		if OAuth == AccountUpgradeFlowModule.OAuth then
 			AuthFormInteractionFunction(Context.AccountUpgrade, if p2 == "terms" then Field.TermsOfService else Field.PrivacyPolicy, OAuth, if OAuth == AccountUpgradeFlowModule.OAuth then config[p1] else OAuth)
@@ -137,7 +137,7 @@ return {
 			return
 		end
 	end,
-	reportSucceeded = function(Flow, Surface) --[[ Line: 191 ]]
+	reportSucceeded = function(Flow, Surface)
 		-- upvalues: AccountUpgradeFlowModule (copy), AuthPageloadFunction (copy), Context (copy), State (copy), config (copy), TelemetryConfigs (copy), Default (copy)
 		if Flow == AccountUpgradeFlowModule.OAuth then
 			AuthPageloadFunction(Context.AccountUpgrade, State.UpgradeSuccess, nil, if Flow == AccountUpgradeFlowModule.OAuth then config[Surface] else Flow)
@@ -146,7 +146,7 @@ return {
 			return
 		end
 	end,
-	reportFirstFailure = function(Flow, Surface, p1) --[[ Line: 199 ]]
+	reportFirstFailure = function(Flow, Surface, p1)
 		-- upvalues: AccountUpgradeFlowModule (copy), AuthPageloadFunction (copy), Context (copy), State (copy), config (copy), TelemetryConfigs (copy), Default (copy)
 		if Flow == AccountUpgradeFlowModule.OAuth then
 			AuthPageloadFunction(Context.AccountUpgrade, State.UpgradeFailure, nil, if Flow == AccountUpgradeFlowModule.OAuth then config[Surface] else Flow)

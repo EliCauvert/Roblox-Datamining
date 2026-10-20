@@ -15,7 +15,7 @@ local FFlagEnableConsoleExpControls = SharedFlagsModule.FFlagEnableConsoleExpCon
 local FFlagExpChatWindowSyncUnibar = SharedFlagsModule.FFlagExpChatWindowSyncUnibar
 local TransparencyStore = ExpChatModule.Stores.GetTransparencyStore(false)
 
-local function _(): boolean --[[ Line: 35 | Named "shouldForceLegacyChatToBeHidden" ]]
+local function _(): boolean
 	-- upvalues: IsChatVersionMatch (ref), TextChatService (copy), GetFFlagExpChatAlwaysRunTCSFunction (copy)
 	IsChatVersionMatch = TextChatService.ChatVersion == Enum.ChatVersion.LegacyChatService
 	
@@ -33,11 +33,11 @@ local config1 = { ChatWindow = nil, GetCore = nil, SetCore = nil }
 local EventConnections = {}
 local t = {}
 
-local _ = function(p1, p2, ClassName) --[[ Line: 62 | Named "FindInCollectionByKeyAndType" ]]
+local _ = function(p1, p2, ClassName)
 	return if p1 and p1[p2] and p1[p2]:IsA(ClassName) then p1[p2] else nil
 end
 
-local function DispatchEvent(p1, ...): boolean --[[ Line: 69 ]]
+local function DispatchEvent(p1, ...): boolean
 	-- upvalues: config1 (copy)
 	local ChatWindow = config1.ChatWindow
 	local ChatWindowEntry = if ChatWindow and ChatWindow[p1] and ChatWindow[p1]:IsA("BindableEvent") then ChatWindow[p1] else nil
@@ -51,7 +51,7 @@ local function DispatchEvent(p1, ...): boolean --[[ Line: 69 ]]
 	end
 end
 
-local function AttemptInvokeFunction(p1, ...) --[[ Line: 78 ]]
+local function AttemptInvokeFunction(p1, ...)
 	-- upvalues: config1 (copy)
 	local ChatWindow = config1.ChatWindow
 	local ChatWindowEntry = if ChatWindow and ChatWindow[p1] and ChatWindow[p1]:IsA("BindableFunction") then ChatWindow[p1] else nil
@@ -63,9 +63,9 @@ local function AttemptInvokeFunction(p1, ...) --[[ Line: 78 ]]
 	end
 end
 
-local _ = function(ParameterName) --[[ Line: 87 | Named "DoConnectGetCore" ]]
+local _ = function(ParameterName)
 	-- upvalues: StarterGui (copy), config1 (copy)
-	StarterGui:RegisterGetCore(ParameterName, function(p1) --[[ Line: 88 ]]
+	StarterGui:RegisterGetCore(ParameterName, function(p1)
 		-- upvalues: config1 (upval), ParameterName (copy)
 		local GetCore = config1.GetCore
 		local GetCoreEntry = if GetCore and GetCore[ParameterName] and GetCore[ParameterName]:IsA("BindableFunction") then GetCore[ParameterName] else nil
@@ -74,7 +74,7 @@ local _ = function(ParameterName) --[[ Line: 87 | Named "DoConnectGetCore" ]]
 	end)
 end
 
-function NewChatModule:ToggleVisibility() --[[ Line: 99 ]]
+function NewChatModule:ToggleVisibility()
 	-- upvalues: config (copy), IsChatVersionMatch (ref), TextChatService (copy), GetFFlagExpChatAlwaysRunTCSFunction (copy), NewChatModule (copy), DispatchEvent (copy), FFlagExpChatWindowSyncUnibar (copy), ExpChatModule (copy), TransparencyStore (copy)
 	config.Visible = not config.Visible
 	IsChatVersionMatch = TextChatService.ChatVersion == Enum.ChatVersion.LegacyChatService
@@ -93,7 +93,7 @@ function NewChatModule:ToggleVisibility() --[[ Line: 99 ]]
 	NewChatModule.ChatWindowToggled:fire(config.Visible)
 end
 
-function NewChatModule:SetVisible(Visible) --[[ Line: 121 ]]
+function NewChatModule:SetVisible(Visible)
 	-- upvalues: config (copy), FFlagExpChatWindowSyncUnibar (copy), ExpChatModule (copy), TransparencyStore (copy), NewChatModule (copy), IsChatVersionMatch (ref), TextChatService (copy), GetFFlagExpChatAlwaysRunTCSFunction (copy), DispatchEvent (copy)
 	config.Visible = Visible
 	
@@ -117,67 +117,67 @@ function NewChatModule:SetVisible(Visible) --[[ Line: 121 ]]
 	end
 end
 
-function NewChatModule:FocusChatBar() --[[ Line: 144 ]]
+function NewChatModule:FocusChatBar()
 	-- upvalues: DispatchEvent (copy), ExpChatModule (copy)
 	DispatchEvent("FocusChatBar")
 	ExpChatModule.Events.ChatTopBarFocusActivated()
 end
 
-function NewChatModule:FocusSelectChatBar(p1, p2) --[[ Line: 150 ]]
+function NewChatModule:FocusSelectChatBar(p1, p2)
 	-- upvalues: FFlagEnableConsoleExpControls (copy), ExpChatModule (copy)
 	if FFlagEnableConsoleExpControls then
 		ExpChatModule.Events.ChatTopBarFocusSelect(p1, p2)
 	end
 end
 
-function NewChatModule:EnterWhisperState(p1) --[[ Line: 156 ]]
+function NewChatModule:EnterWhisperState(p1)
 	-- upvalues: DispatchEvent (copy)
 	return DispatchEvent("EnterWhisperState", p1)
 end
 
-function NewChatModule:GetVisibility() --[[ Line: 160 ]]
+function NewChatModule:GetVisibility()
 	-- upvalues: AttemptInvokeFunction (copy), config (copy)
 	local GetVisibility, GetVisibility2 = AttemptInvokeFunction("GetVisibility")
 	
 	return if GetVisibility then GetVisibility2 else config.Visible
 end
 
-function NewChatModule:GetMessageCount() --[[ Line: 169 ]]
+function NewChatModule:GetMessageCount()
 	-- upvalues: AttemptInvokeFunction (copy), config (copy)
 	local GetMessageCount, GetMessageCount2 = AttemptInvokeFunction("GetMessageCount")
 	
 	return if GetMessageCount then GetMessageCount2 else config.MessageCount
 end
 
-function NewChatModule:TopbarEnabledChanged(TopbarEnabled) --[[ Line: 178 ]]
+function NewChatModule:TopbarEnabledChanged(TopbarEnabled)
 	-- upvalues: config (copy), DispatchEvent (copy)
 	config.TopbarEnabled = TopbarEnabled
 	DispatchEvent("TopbarEnabledChanged", config.TopbarEnabled)
 end
 
-function NewChatModule:IsFocused(p1) --[[ Line: 183 ]]
+function NewChatModule:IsFocused(p1)
 	-- upvalues: AttemptInvokeFunction (copy)
 	local IsFocused, IsFocused2 = AttemptInvokeFunction("IsFocused", p1)
 	
 	return if IsFocused then IsFocused2 else false
 end
 
-function NewChatModule:ClassicChatEnabled() --[[ Line: 192 ]]
+function NewChatModule:ClassicChatEnabled()
 	-- upvalues: ClassicChat (ref)
 	return ClassicChat
 end
 
-function NewChatModule:IsBubbleChatOnly(): boolean --[[ Line: 196 ]]
+function NewChatModule:IsBubbleChatOnly(): boolean
 	-- upvalues: BubbleChat (ref), ClassicChat (ref)
 	return BubbleChat and not ClassicChat
 end
 
-function NewChatModule:IsDisabled(): boolean --[[ Line: 200 ]]
+function NewChatModule:IsDisabled(): boolean
 	-- upvalues: BubbleChat (ref), ClassicChat (ref)
 	return not (BubbleChat or ClassicChat)
 end
 
-function SetInitialChatTypes(p1) --[[ Line: 204 ]]
+function SetInitialChatTypes(p1)
 	-- upvalues: Flag (ref), BubbleChat (ref), ClassicChat (ref), NewChatModule (copy)
 	if Flag then return end
 	Flag = true
@@ -205,13 +205,13 @@ NewChatModule.MessagesChanged = ChatUtilModule.Signal()
 NewChatModule.BubbleChatOnlySet = ChatUtilModule.Signal()
 NewChatModule.ChatDisabled = ChatUtilModule.Signal()
 local Chat = game:GetService("Chat")
-Chat:GetPropertyChangedSignal("IsAutoMigrated"):Connect(function() --[[ Line: 237 ]]
+Chat:GetPropertyChangedSignal("IsAutoMigrated"):Connect(function()
 	-- upvalues: Chat (copy), DispatchEvent (copy), NewChatModule (copy)
 	if Chat.IsAutoMigrated and not DispatchEvent("SetVisible", false) then
 		NewChatModule.VisibilityStateChanged:fire(false)
 	end
 end)
-StarterGui.CoreGuiChangedSignal:connect(function(CoreGuiType, CoreGuiEnabled) --[[ Line: 246 ]]
+StarterGui.CoreGuiChangedSignal:connect(function(CoreGuiType, CoreGuiEnabled)
 	-- upvalues: config (copy), DispatchEvent (copy)
 	if CoreGuiType == Enum.CoreGuiType.All or CoreGuiType == Enum.CoreGuiType.Chat then
 		config.CoreGuiEnabled = CoreGuiEnabled
@@ -219,7 +219,7 @@ StarterGui.CoreGuiChangedSignal:connect(function(CoreGuiType, CoreGuiEnabled) --
 	end
 end)
 GuiService:AddSpecialKey(Enum.SpecialKey.ChatHotkey)
-GuiService.SpecialKeyPressed:connect(function(Key, Modifiers) --[[ Line: 254 ]]
+GuiService.SpecialKeyPressed:connect(function(Key, Modifiers)
 	-- upvalues: GuiService (copy), IsChatVersionMatch (ref), TextChatService (copy), GetFFlagExpChatAlwaysRunTCSFunction (copy), DispatchEvent (copy)
 	if GuiService.MenuIsOpen then return end
 	IsChatVersionMatch = TextChatService.ChatVersion == Enum.ChatVersion.LegacyChatService
@@ -229,9 +229,9 @@ GuiService.SpecialKeyPressed:connect(function(Key, Modifiers) --[[ Line: 254 ]]
 	end
 end)
 
-function DoConnectSetCore(ParameterName) --[[ Line: 264 ]]
+function DoConnectSetCore(ParameterName)
 	-- upvalues: StarterGui (copy), config1 (copy), t (copy)
-	StarterGui:RegisterSetCore(ParameterName, function(p1) --[[ Line: 265 ]]
+	StarterGui:RegisterSetCore(ParameterName, function(p1)
 		-- upvalues: config1 (upval), ParameterName (copy), t (upval)
 		local SetCore = config1.SetCore
 		local SetCoreEntry = if SetCore and SetCore[ParameterName] and SetCore[ParameterName]:IsA("BindableEvent") then SetCore[ParameterName] else nil
@@ -253,7 +253,7 @@ DoConnectSetCore("ChatWindowPosition")
 DoConnectSetCore("ChatWindowSize")
 DoConnectSetCore("ChatBarDisabled")
 local v1 = "ChatWindowPosition"
-StarterGui:RegisterGetCore("ChatWindowPosition", function(p1) --[[ Line: 88 ]]
+StarterGui:RegisterGetCore("ChatWindowPosition", function(p1)
 	-- upvalues: config1 (copy), v1 (copy)
 	local GetCore = config1.GetCore
 	local GetCoreEntry = if GetCore and GetCore[v1] and GetCore[v1]:IsA("BindableFunction") then GetCore[v1] else nil
@@ -261,7 +261,7 @@ StarterGui:RegisterGetCore("ChatWindowPosition", function(p1) --[[ Line: 88 ]]
 	return if GetCoreEntry then GetCoreEntry:Invoke(p1) else nil
 end)
 local v2 = "ChatWindowSize"
-StarterGui:RegisterGetCore("ChatWindowSize", function(p1) --[[ Line: 88 ]]
+StarterGui:RegisterGetCore("ChatWindowSize", function(p1)
 	-- upvalues: config1 (copy), v2 (copy)
 	local GetCore = config1.GetCore
 	local GetCoreEntry = if GetCore and GetCore[v2] and GetCore[v2]:IsA("BindableFunction") then GetCore[v2] else nil
@@ -269,7 +269,7 @@ StarterGui:RegisterGetCore("ChatWindowSize", function(p1) --[[ Line: 88 ]]
 	return if GetCoreEntry then GetCoreEntry:Invoke(p1) else nil
 end)
 local v3 = "ChatBarDisabled"
-StarterGui:RegisterGetCore("ChatBarDisabled", function(p1) --[[ Line: 88 ]]
+StarterGui:RegisterGetCore("ChatBarDisabled", function(p1)
 	-- upvalues: config1 (copy), v3 (copy)
 	local GetCore = config1.GetCore
 	local GetCoreEntry = if GetCore and GetCore[v3] and GetCore[v3]:IsA("BindableFunction") then GetCore[v3] else nil
@@ -277,7 +277,7 @@ StarterGui:RegisterGetCore("ChatBarDisabled", function(p1) --[[ Line: 88 ]]
 	return if GetCoreEntry then GetCoreEntry:Invoke(p1) else nil
 end)
 
-local function RegisterCoreGuiConnections(p1) --[[ Line: 287 ]]
+local function RegisterCoreGuiConnections(p1)
 	-- upvalues: EventConnections (ref), config1 (copy), NewChatModule (copy), config (copy), t (copy)
 	if type(p1) == "table" then
 		local ChatWindow = p1.ChatWindow
@@ -301,12 +301,12 @@ local function RegisterCoreGuiConnections(p1) --[[ Line: 287 ]]
 			config1.ChatWindow.IsFocused = if ChatWindow and ChatWindow.IsFocused and ChatWindow.IsFocused:IsA("BindableFunction") then ChatWindow.IsFocused else nil
 			config1.ChatWindow.SpecialKeyPressed = if ChatWindow and ChatWindow.SpecialKeyPressed and ChatWindow.SpecialKeyPressed:IsA("BindableEvent") then ChatWindow.SpecialKeyPressed else nil
 			
-			local function DoConnect(p2) --[[ Line: 320 ]]
+			local function DoConnect(p2)
 				-- upvalues: config1 (upval), ChatWindow (copy), NewChatModule (upval), EventConnections (upval)
 				config1.ChatWindow[p2] = if ChatWindow and ChatWindow[p2] and ChatWindow[p2]:IsA("BindableEvent") then ChatWindow[p2] else nil
 				
 				if config1.ChatWindow[p2] then
-					table.insert(EventConnections, (config1.ChatWindow[p2].Event:connect(function(...) --[[ Line: 324 ]]
+					table.insert(EventConnections, (config1.ChatWindow[p2].Event:connect(function(...)
 						-- upvalues: NewChatModule (upval), p2 (copy)
 						NewChatModule[p2]:fire(...)
 					end)))
@@ -320,7 +320,7 @@ local function RegisterCoreGuiConnections(p1) --[[ Line: 287 ]]
 			config1.ChatWindow.MessagePosted = if ChatWindow and ChatWindow.MessagePosted and ChatWindow.MessagePosted:IsA("BindableEvent") then ChatWindow.MessagePosted else nil
 			
 			if config1.ChatWindow.MessagePosted then
-				table.insert(EventConnections, (config1.ChatWindow.MessagePosted.Event:connect(function(Message) --[[ Line: 340 ]]
+				table.insert(EventConnections, (config1.ChatWindow.MessagePosted.Event:connect(function(Message)
 					game:GetService("Players"):Chat(Message)
 				end)))
 			end
@@ -339,7 +339,7 @@ local function RegisterCoreGuiConnections(p1) --[[ Line: 287 ]]
 			config1.SetCore = {}
 			config1.GetCore = {}
 			
-			local function addSetCore(Key) --[[ Line: 362 ]]
+			local function addSetCore(Key)
 				-- upvalues: SetCore (copy), config1 (upval), t (upval)
 				local SetCoreEntry = if SetCore and SetCore[Key] and SetCore[Key]:IsA("BindableEvent") then SetCore[Key] else nil
 				
@@ -370,7 +370,7 @@ local function RegisterCoreGuiConnections(p1) --[[ Line: 287 ]]
 	end
 end
 
-ExpChatModule.listenToDispatch(function(p2) --[[ Line: 392 ]]
+ExpChatModule.listenToDispatch(function(p2)
 	-- upvalues: NewChatModule (copy)
 	if p2.type == "FocusChatHotKeyActivated" then
 		NewChatModule:SetVisible(true)

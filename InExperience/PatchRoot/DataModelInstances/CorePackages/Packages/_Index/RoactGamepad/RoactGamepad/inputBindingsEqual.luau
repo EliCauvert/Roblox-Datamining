@@ -1,4 +1,4 @@
-﻿return function(List, List1): boolean --[[ Line: 1 | Named "inputBindingsEqual" ]]
+﻿return function(List, List1): boolean
 	if List == List1 then
 		return true
 	end

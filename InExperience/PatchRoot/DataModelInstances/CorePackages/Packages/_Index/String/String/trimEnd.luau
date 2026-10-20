@@ -1,3 +1,3 @@
-﻿return function(Text: string): string --[[ Line: 16 ]]
+﻿return function(Text: string): string
 	return (Text:gsub("[%s]+$", ""))
 end

@@ -21,9 +21,9 @@ local config = {
 	text = "Feature.Moments.Tooltip.ShareFirstMomentBody"
 }
 
-local function noop() --[[ Line: 53 ]] end
+local function noop() end
 
-local function _() --[[ Line: 55 | Named "getAnalyticsFields" ]]
+local function _()
 	-- upvalues: Players (copy)
 	return {
 		identifier = "create_moment",
@@ -32,7 +32,7 @@ local function _() --[[ Line: 55 | Named "getAnalyticsFields" ]]
 	}
 end
 
-return function(p1, p2, ShowHamburger) --[[ Line: 64 | Named "useMomentsHeaderViewModel" ]]
+return function(p1, p2, ShowHamburger)
 	-- upvalues: UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseSetDrawerVisibleFunction (copy), UseIsTvRemoteDeviceFunction (copy), UseCompositionLayoutFunction (copy), UseStatusBarHeightFunction (copy), FFlagMomentsFtuxTooltipCreateCopyModule (copy), UseLocalizationFunction (copy), config (copy), noop (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Players (copy), GetFFlagMomentsAndroidTvEnabledModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
@@ -52,7 +52,7 @@ return function(p1, p2, ShowHamburger) --[[ Line: 64 | Named "useMomentsHeaderVi
 	end
 	local OnFtuxTooltipDismissed = p1.onFtuxTooltipDismissed or noop
 	local OnCreatePressed = p1.onCreatePressed or noop
-	ReactModule.useEffect(function() --[[ Line: 85 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsShowFtuxTooltip (copy), FireAnalyticsEventFunction (upval), EventNames (upval), Players (upval)
 		if IsShowFtuxTooltip then
 			FireAnalyticsEventFunction(EventNames.FTUXTooltipImpression, {
@@ -62,7 +62,7 @@ return function(p1, p2, ShowHamburger) --[[ Line: 64 | Named "useMomentsHeaderVi
 			})
 		end
 	end, { IsShowFtuxTooltip })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 91 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FireAnalyticsEventFunction (upval), EventNames (upval), Players (upval), OnFtuxTooltipDismissed (copy)
 		FireAnalyticsEventFunction(EventNames.FTUXTooltipDismissed, {
 			identifier = "create_moment",
@@ -79,7 +79,7 @@ return function(p1, p2, ShowHamburger) --[[ Line: 64 | Named "useMomentsHeaderVi
 		showFtuxTooltip = IsShowFtuxTooltip,
 		ftuxTooltipTitle = Title,
 		ftuxTooltipText = FtuxTooltipText,
-		onCreateMomentButtonPressed = ReactModule.useCallback(function() --[[ Line: 96 ]]
+		onCreateMomentButtonPressed = ReactModule.useCallback(function()
 			-- upvalues: IsShowFtuxTooltip (copy), UseResult (copy), OnCreatePressed (copy)
 			if IsShowFtuxTooltip then
 				UseResult()
@@ -87,7 +87,7 @@ return function(p1, p2, ShowHamburger) --[[ Line: 64 | Named "useMomentsHeaderVi
 			OnCreatePressed()
 		end, { IsShowFtuxTooltip, UseResult, OnCreatePressed }),
 		onFtuxTooltipClosed = UseResult,
-		onHamburgerPressed = ReactModule.useCallback(function() --[[ Line: 103 ]]
+		onHamburgerPressed = ReactModule.useCallback(function()
 			-- upvalues: UseSetDrawerVisibleResult (copy)
 			UseSetDrawerVisibleResult(true)
 		end, { UseSetDrawerVisibleResult }),

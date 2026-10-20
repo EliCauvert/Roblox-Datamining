@@ -12,21 +12,21 @@ local UseMessageFtuxTooltipConfigModule = require(script.Parent.useMessageFtuxTo
 local ChatConversationTelemetryEventsModule = require(AppChat.Components.ChatConversation.ChatConversationTelemetryEvents)
 local ChatConversationTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatConversationTelemetryLayer)
 local config = {
-	GetItem = function(_, Key) --[[ Line: 26 ]]
+	GetItem = function(_, Key)
 		-- upvalues: AppStorageService (copy)
 		return AppStorageService:GetItem(Key)
 	end,
-	SetItem = function(_, Key, Json) --[[ Line: 29 ]]
+	SetItem = function(_, Key, Json)
 		-- upvalues: AppStorageService (copy)
 		AppStorageService:SetItem(Key, Json)
 	end,
-	Flush = function() --[[ Line: 32 ]]
+	Flush = function()
 		-- upvalues: AppStorageService (copy)
 		AppStorageService:Flush()
 	end
 }
 
-return function(TooltipVariant, p1) --[[ Line: 43 | Named "useMessageFtuxTooltip" ]]
+return function(TooltipVariant, p1)
 	-- upvalues: config (copy), UseMessageFtuxTooltipConfigModule (copy), UseTelemetryModule (copy), ChatConversationTelemetryLayerModule (copy), ReactModule (copy), UseLocalUserIdFunction (copy), ChatConversationTelemetryEventsModule (copy), HttpService (copy), MessageFtuxTooltipDismissSignalModule (copy), UseLocalizationFunction (copy)
 	local P6 = p1 or config
 	local UseMessageFtuxTooltipConfigModuleResult = UseMessageFtuxTooltipConfigModule(TooltipVariant)
@@ -36,20 +36,20 @@ return function(TooltipVariant, p1) --[[ Line: 43 | Named "useMessageFtuxTooltip
 	local UseLocalUserIdResult = UseLocalUserIdFunction() or ""
 	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
 	local UseRefResult1 = ReactModule.useRef({})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 54 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), ChatConversationTelemetryEventsModule (upval), TooltipVariant (copy)
 		UseRefResult.current.emit(ChatConversationTelemetryEventsModule.ConversationMessageFtuxTooltipImpression, { tooltipVariant = TooltipVariant })
 	end, { TooltipVariant })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 60 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), ChatConversationTelemetryEventsModule (upval), TooltipVariant (copy)
 		UseRefResult.current.emit(ChatConversationTelemetryEventsModule.ConversationMessageFtuxTooltipDismissed, { tooltipVariant = TooltipVariant })
 	end, { TooltipVariant })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 67 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult (copy), UseResult1 (copy), UseRefResult1 (copy), UseLocalUserIdResult (copy), UseMessageFtuxTooltipConfigModuleResult (copy), P6 (copy), HttpService (upval), UseStateResult2 (copy)
 		if not UseStateResult then
 			UseResult1()
 			UseRefResult1.current[UseLocalUserIdResult] = UseMessageFtuxTooltipConfigModuleResult.textKey
-			local Success, _ = pcall(function() --[[ Line: 73 ]]
+			local Success, _ = pcall(function()
 				-- upvalues: P6 (upval), UseMessageFtuxTooltipConfigModuleResult (upval), HttpService (upval), UseRefResult1 (upval)
 				P6:SetItem(UseMessageFtuxTooltipConfigModuleResult.storageKey, HttpService:JSONEncode(UseRefResult1.current))
 				P6:Flush()
@@ -63,9 +63,9 @@ return function(TooltipVariant, p1) --[[ Line: 43 | Named "useMessageFtuxTooltip
 		UseMessageFtuxTooltipConfigModuleResult.textKey, UseLocalUserIdResult,
 		UseStateResult, P6, UseResult1
 	})
-	ReactModule.useEffect(function() --[[ Line: 90 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: P6 (copy), UseMessageFtuxTooltipConfigModuleResult (copy), HttpService (upval), UseRefResult1 (copy), UseLocalUserIdResult (copy), UseStateResult2 (copy), UseResult (copy)
-		local Success, Result = pcall(function() --[[ Line: 91 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: P6 (upval), UseMessageFtuxTooltipConfigModuleResult (upval), HttpService (upval)
 			return HttpService:JSONDecode((P6:GetItem(UseMessageFtuxTooltipConfigModuleResult.storageKey)))
 		end)
@@ -83,17 +83,17 @@ return function(TooltipVariant, p1) --[[ Line: 43 | Named "useMessageFtuxTooltip
 		P6,
 		UseResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 111 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), MessageFtuxTooltipDismissSignalModule (upval), TooltipVariant (copy), UseResult2 (copy)
 		if UseStateResult then return end
-		local DismissedConnection = MessageFtuxTooltipDismissSignalModule.dismissed:connect(function(TooltipVariant1) --[[ Line: 115 ]]
+		local DismissedConnection = MessageFtuxTooltipDismissSignalModule.dismissed:connect(function(TooltipVariant1)
 			-- upvalues: TooltipVariant (upval), UseResult2 (upval)
 			if TooltipVariant1 == TooltipVariant then
 				UseResult2()
 			end
 		end)
 		
-		return function() --[[ Line: 120 ]]
+		return function()
 			-- upvalues: DismissedConnection (copy)
 			DismissedConnection:disconnect()
 		end
@@ -102,7 +102,7 @@ return function(TooltipVariant, p1) --[[ Line: 43 | Named "useMessageFtuxTooltip
 		tooltipText = UseMessageFtuxTooltipConfigModuleResult.textKey
 	})
 	
-	return ReactModule.useMemo(function() --[[ Line: 128 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: UseLocalizationResult (copy), UseStateResult (copy), UseResult2 (copy)
 		return {
 			text = UseLocalizationResult.tooltipText,

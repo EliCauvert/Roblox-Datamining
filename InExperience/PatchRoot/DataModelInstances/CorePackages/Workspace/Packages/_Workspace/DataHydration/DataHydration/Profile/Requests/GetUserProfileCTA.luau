@@ -10,7 +10,7 @@ local list = {
 	{ component = "Actions", excludeContextualActions = true }
 }
 
-return function(ProfileIds, p1) --[[ Line: 41 ]]
+return function(ProfileIds, p1)
 	-- upvalues: FFlagJoinabilityCTARefactor (copy), list (copy), MyHttpRequestModule (copy), v1 (copy)
 	return MyHttpRequestModule(v1, "POST", {
 		postBody = if FFlagJoinabilityCTARefactor then {
@@ -23,7 +23,7 @@ return function(ProfileIds, p1) --[[ Line: 41 ]]
 			profileIds = ProfileIds,
 			components = { { component = "Actions" } }
 		}
-	}):catch(function(Err) --[[ Line: 62 ]]
+	}):catch(function(Err)
 		error(Err)
 	end)
 end

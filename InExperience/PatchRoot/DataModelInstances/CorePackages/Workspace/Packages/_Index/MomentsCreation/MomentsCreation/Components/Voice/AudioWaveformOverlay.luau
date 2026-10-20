@@ -12,21 +12,21 @@ local GetFIntMomentsTTSWaveformMinBarHeightPercentModule = require(MomentsCreati
 local GetFIntMomentsTTSWaveformMaxBarHeightPercentModule = require(MomentsCreation.Flags.GetFIntMomentsTTSWaveformMaxBarHeightPercent)
 local GetFFlagMomentsTTSStartTimePositioningModule = require(MomentsCreation.Flags.GetFFlagMomentsTTSStartTimePositioning)
 
-return function(p1) --[[ Line: 55 | Named "AudioWaveformOverlay" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseStateFunction (copy), UseCallbackFunction (copy), UseMemoFunction (copy), GetFFlagMomentsTTSStartTimePositioningModule (copy), GetFIntMomentsTTSWaveformMinBarHeightPercentModule (copy), GetFIntMomentsTTSWaveformMaxBarHeightPercentModule (copy), ResampleWaveformPeaksModule (copy), ReactModule (copy), View (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = UseStateFunction(0)
-	local UseCallbackResult = UseCallbackFunction(function(Frame) --[[ Line: 59 ]]
+	local UseCallbackResult = UseCallbackFunction(function(Frame)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(Frame.AbsoluteSize.X)
 	end, {})
-	local UseMemoResult = UseMemoFunction(function(): number --[[ Line: 63 ]]
+	local UseMemoResult = UseMemoFunction(function(): number
 		-- upvalues: UseStateResult (copy)
 		return if UseStateResult <= 0 then 0 else math.max(1, (math.floor((UseStateResult - 8) / 4)))
 	end, { UseStateResult })
 	local Samples = p1.samples
 	local Floored: number = if GetFFlagMomentsTTSStartTimePositioningModule and p1.audioDuration > 0 and p1.videoDuration > 0 then math.floor(#Samples * math.clamp((p1.videoDuration - (p1.startTime or 0)) / p1.audioDuration, 0, 1) + 0.5) else #Samples
-	local UseMemoResult1 = UseMemoFunction(function() --[[ Line: 81 ]]
+	local UseMemoResult1 = UseMemoFunction(function()
 		-- upvalues: GetFIntMomentsTTSWaveformMinBarHeightPercentModule (upval), GetFIntMomentsTTSWaveformMaxBarHeightPercentModule (upval), Floored (ref), Samples (copy), ResampleWaveformPeaksModule (upval), UseMemoResult (copy), ReactModule (upval), UseTokensResult (copy)
 		local Frames = {}
 		local FIntMomentsTTSWaveformMinBarHeightPercentModuleRatio = GetFIntMomentsTTSWaveformMinBarHeightPercentModule() / 100

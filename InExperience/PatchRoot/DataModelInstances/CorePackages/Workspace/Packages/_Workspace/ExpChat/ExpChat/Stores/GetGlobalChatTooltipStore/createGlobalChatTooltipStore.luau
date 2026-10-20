@@ -3,7 +3,7 @@ local DisplayModule = require(Parent.Display)
 local SignalsModule = require(Parent.Signals)
 local CreateSignalFunction = SignalsModule.createSignal
 
-return function() --[[ Line: 28 ]]
+return function()
 	-- upvalues: CreateSignalFunction (copy), SignalsModule (copy), DisplayModule (copy)
 	local Signal, Signal2 = CreateSignalFunction(false)
 	local Signal1, Signal2_1 = CreateSignalFunction(false)
@@ -19,10 +19,10 @@ return function() --[[ Line: 28 ]]
 		setIsGlobalChatTooltipDismissed = Signal2_2,
 		getIsGlobalChatTooltipEligible = Signal4,
 		setIsGlobalChatTooltipEligible = Signal2_3,
-		getIsScreenWideEnough = SignalsModule.createComputed(function(p1): boolean --[[ Line: 34 ]]
+		getIsScreenWideEnough = SignalsModule.createComputed(function(p1): boolean
 			-- upvalues: DisplayModule (upval)
 			return DisplayModule.GetDisplayStore(p1).getViewportSize(p1).X >= 720
 		end),
-		reportImpression = function() --[[ Line: 49 ]] end
+		reportImpression = function() end
 	}
 end

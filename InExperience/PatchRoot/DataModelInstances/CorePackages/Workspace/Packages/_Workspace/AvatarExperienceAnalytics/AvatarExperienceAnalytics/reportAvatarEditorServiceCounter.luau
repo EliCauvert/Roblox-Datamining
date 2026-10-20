@@ -1,7 +1,7 @@
 ﻿local SendAXCounterV2Module = require(script.Parent.sendAXCounterV2)
 local AVATAREDITORSERVICECOUNTERSTATUS = require(script.Parent.Constants).AVATAR_EDITOR_SERVICE_COUNTER_STATUS
 
-return function(p1, Status, p2) --[[ Line: 11 | Named "reportAvatarEditorServiceCounter" ]]
+return function(p1, Status, p2)
 	-- upvalues: AVATAREDITORSERVICECOUNTERSTATUS (copy), SendAXCounterV2Module (copy)
 	local config = { status = Status }
 	

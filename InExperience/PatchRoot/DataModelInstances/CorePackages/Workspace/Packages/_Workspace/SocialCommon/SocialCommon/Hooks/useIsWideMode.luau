@@ -2,9 +2,9 @@
 local FormFactorModule = require(Parent.FormFactor)
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function() --[[ Line: 7 ]]
+return function()
 	-- upvalues: UseSelectorFunction (copy), FormFactorModule (copy)
-	return UseSelectorFunction(function(p1): boolean --[[ Line: 8 ]]
+	return UseSelectorFunction(function(p1): boolean
 		-- upvalues: FormFactorModule (upval)
 		return p1.FormFactor == FormFactorModule.Enums.FormFactor.WIDE
 	end)

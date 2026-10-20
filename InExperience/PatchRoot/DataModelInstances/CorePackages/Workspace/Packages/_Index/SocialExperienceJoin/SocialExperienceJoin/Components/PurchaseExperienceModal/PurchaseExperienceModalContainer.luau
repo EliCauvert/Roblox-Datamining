@@ -16,11 +16,11 @@ local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 local UseScreenSizeFunction = require(Parent.RobloxAppHooks).useScreenSize
 local PurchaseExperienceStatusModule = require(SocialExperienceJoin.Analytics.PurchaseExperienceStatus)
 
-return function() --[[ Line: 38 ]]
+return function()
 	-- upvalues: UseNavigationFunction (copy), UseDispatchFunction (copy), UseNavigationPropsFunction (copy), UseScreenSizeFunction (copy), ReactModule (copy), InitializeSocialExperienceJoinAnalyticsModule (copy), UseSelectorFunction (copy), RODUXKEY (copy), EventNamesModule (copy), PurchaseExperienceStatusModule (copy), PurchaseProductByIdModule (copy), ConstantsModule (copy), PromiseModule (copy), PurchaseExperienceModalModule (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseDispatchResult = UseDispatchFunction()
-	local UseNavigationPropsResult = UseNavigationPropsFunction(function(UniverseId, p1) --[[ Line: 41 ]]
+	local UseNavigationPropsResult = UseNavigationPropsFunction(function(UniverseId, p1)
 		return {
 			universeId = UniverseId,
 			userId = p1.userId,
@@ -29,16 +29,16 @@ return function() --[[ Line: 38 ]]
 		}
 	end)
 	local UseScreenSizeResult = UseScreenSizeFunction()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 51 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: InitializeSocialExperienceJoinAnalyticsModule (upval), UseNavigationPropsResult (copy)
 		return InitializeSocialExperienceJoinAnalyticsModule(UseNavigationPropsResult.analyticProps)
 	end, { UseNavigationPropsResult.analyticProps })
-	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 56 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p1)
 		-- upvalues: RODUXKEY (upval), UseNavigationPropsResult (copy)
 		return p1[RODUXKEY].Games.productInfoByGameId[UseNavigationPropsResult.universeId]
 	end)
 	
-	local function _() --[[ Line: 63 ]]
+	local function _()
 		-- upvalues: UseMemoResult (copy), EventNamesModule (upval), PurchaseExperienceStatusModule (upval), UseNavigationPropsResult (copy)
 		UseMemoResult.fireAnalyticsEvent(EventNamesModule.PurchaseExperienceAttempt, {
 			status = PurchaseExperienceStatusModule.Success,
@@ -47,7 +47,7 @@ return function() --[[ Line: 38 ]]
 		})
 	end
 	
-	local _ = function(_) --[[ Line: 72 ]]
+	local _ = function(_)
 		-- upvalues: UseMemoResult (copy), EventNamesModule (upval), PurchaseExperienceStatusModule (upval), UseNavigationPropsResult (copy)
 		UseMemoResult.fireAnalyticsEvent(EventNamesModule.PurchaseExperienceAttempt, {
 			status = PurchaseExperienceStatusModule.PurchaseError,
@@ -56,7 +56,7 @@ return function() --[[ Line: 38 ]]
 		})
 	end
 	
-	local _ = function(_) --[[ Line: 81 ]]
+	local _ = function(_)
 		-- upvalues: UseMemoResult (copy), EventNamesModule (upval), PurchaseExperienceStatusModule (upval), UseNavigationPropsResult (copy)
 		UseMemoResult.fireAnalyticsEvent(EventNamesModule.PurchaseExperienceAttempt, {
 			status = PurchaseExperienceStatusModule.NetworkError,
@@ -65,13 +65,13 @@ return function() --[[ Line: 38 ]]
 		})
 	end
 	
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 90 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy)
 		UseNavigationResult.pop()
 	end, { UseNavigationResult })
 	
 	return ReactModule.createElement(PurchaseExperienceModalModule, {
-		cancelPurchase = ReactModule.useCallback(function() --[[ Line: 94 ]]
+		cancelPurchase = ReactModule.useCallback(function()
 			-- upvalues: UseMemoResult (copy), EventNamesModule (upval), UseNavigationPropsResult (copy), UseResult (copy)
 			UseMemoResult.fireAnalyticsEvent(EventNamesModule.CancelPurchaseExperience, {
 				universeId = UseNavigationPropsResult.universeId,
@@ -83,19 +83,19 @@ return function() --[[ Line: 38 ]]
 			UseMemoResult,
 			UseNavigationPropsResult.universeId
 		}),
-		experienceName = UseSelectorFunction(function(p1) --[[ Line: 59 ]]
+		experienceName = UseSelectorFunction(function(p1)
 			-- upvalues: RODUXKEY (upval), UseNavigationPropsResult (copy)
 			return p1[RODUXKEY].Games.byGameId[UseNavigationPropsResult.universeId]
 		end).name,
 		price = UseSelectorResult.price,
-		purchaseExperience = ReactModule.useCallback(function() --[[ Line: 103 ]]
+		purchaseExperience = ReactModule.useCallback(function()
 			-- upvalues: UseMemoResult (copy), EventNamesModule (upval), UseNavigationPropsResult (copy), UseDispatchResult (copy), PurchaseProductByIdModule (upval), UseSelectorResult (copy), ConstantsModule (upval), PromiseModule (upval), UseResult (copy), PurchaseExperienceStatusModule (upval)
 			UseMemoResult.fireAnalyticsEvent(EventNamesModule.PurchaseExperience, {
 				universeId = UseNavigationPropsResult.universeId,
 				profileUserId = UseNavigationPropsResult.userId
 			})
 			
-			local function _() --[[ Line: 109 ]]
+			local function _()
 				-- upvalues: UseDispatchResult (upval), PurchaseProductByIdModule (upval), UseSelectorResult (upval), ConstantsModule (upval)
 				return UseDispatchResult(PurchaseProductByIdModule.API(UseSelectorResult.productId, {
 					expectedCurrency = ConstantsModule.RobuxCurrency,
@@ -108,12 +108,12 @@ return function() --[[ Line: 38 ]]
 				expectedCurrency = ConstantsModule.RobuxCurrency,
 				expectedPrice = UseSelectorResult.price,
 				expectedSellerId = UseSelectorResult.sellerId
-			})):andThen(function(Result) --[[ Line: 118 ]]
+			})):andThen(function(Result)
 				-- upvalues: PromiseModule (upval)
 				local ResponseBody = Result.responseBody
 				
 				return type(ResponseBody) == "table" and ResponseBody or PromiseModule.reject()
-			end):andThen(function(Result) --[[ Line: 122 ]]
+			end):andThen(function(Result)
 				-- upvalues: UseResult (upval), UseMemoResult (upval), EventNamesModule (upval), PurchaseExperienceStatusModule (upval), UseNavigationPropsResult (upval)
 				UseResult()
 				
@@ -132,7 +132,7 @@ return function() --[[ Line: 38 ]]
 						profileUserId = UseNavigationPropsResult.userId
 					})
 				end
-			end):catch(function(_) --[[ Line: 131 ]]
+			end):catch(function(_)
 				-- upvalues: UseResult (upval), UseMemoResult (upval), EventNamesModule (upval), PurchaseExperienceStatusModule (upval), UseNavigationPropsResult (upval)
 				UseResult()
 				UseMemoResult.fireAnalyticsEvent(EventNamesModule.PurchaseExperienceAttempt, {

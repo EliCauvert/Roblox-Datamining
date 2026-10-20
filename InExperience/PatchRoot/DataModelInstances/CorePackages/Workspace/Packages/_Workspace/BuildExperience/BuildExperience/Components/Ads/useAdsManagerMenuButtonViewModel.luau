@@ -16,7 +16,7 @@ local InputSize = FoundationModule.Enums.InputSize
 local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
 local BuildAdsManagerMenuWidth = game:DefineFastInt("BuildAdsManagerMenuWidth", 162)
 
-return function(p1) --[[ Line: 40 | Named "useAdsManagerMenuButtonViewModel" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseScaledValueFunction (copy), BuildAdsManagerMenuWidth (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseRefreshAdsDataModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), GetAdsManagerUrlModule (copy), UseOpenWebViewWithResumeRefreshModule (copy), IconName (copy), InputSize (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseScaledValueResult = UseScaledValueFunction(BuildAdsManagerMenuWidth)
@@ -30,7 +30,7 @@ return function(p1) --[[ Line: 40 | Named "useAdsManagerMenuButtonViewModel" ]]
 	})
 	local UseOpenWebViewWithResumeRefreshModuleResult = nil
 	UseOpenWebViewWithResumeRefreshModuleResult = if FFlagBuildAdsManagerUniverseUrlModule then UseOpenWebViewWithResumeRefreshModule(GetAdsManagerUrlModule.getAdsManagerUrl(UniverseId), AdsManager, UseRefreshAdsDataModuleResult, p1.appLifecycleObserverService) else UseOpenWebViewWithResumeRefreshModule(GetAdsManagerUrlModule.getDefaultAdsManagerUrl(), AdsManager, UseRefreshAdsDataModuleResult, p1.appLifecycleObserverService)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 67 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), UseOpenWebViewWithResumeRefreshModuleResult (ref)
 		UseStateResult2(false)
 		UseOpenWebViewWithResumeRefreshModuleResult()
@@ -43,7 +43,7 @@ return function(p1) --[[ Line: 40 | Named "useAdsManagerMenuButtonViewModel" ]]
 		isMenuOpen = UseStateResult,
 		menuSize = InputSize.Large,
 		menuWidth = UseScaledValueResult,
-		menuItems = ReactModule.useMemo(function() --[[ Line: 88 ]]
+		menuItems = ReactModule.useMemo(function()
 			-- upvalues: AdsManager (copy), IconName (upval)
 			return {
 				{
@@ -53,17 +53,17 @@ return function(p1) --[[ Line: 40 | Named "useAdsManagerMenuButtonViewModel" ]]
 				}
 			}
 		end, { AdsManager }),
-		onToggleMenu = ReactModule.useCallback(function() --[[ Line: 78 ]]
+		onToggleMenu = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (copy)
-			UseStateResult2(function(p2): boolean --[[ Line: 79 ]]
+			UseStateResult2(function(p2): boolean
 				return not p2
 			end)
 		end, {}),
-		onCloseMenu = ReactModule.useCallback(function() --[[ Line: 84 ]]
+		onCloseMenu = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(false)
 		end, {}),
-		onItemActivated = ReactModule.useCallback(function(p2) --[[ Line: 72 ]]
+		onItemActivated = ReactModule.useCallback(function(p2)
 			-- upvalues: UseResult (copy)
 			if p2 == "ads-manager" then
 				UseResult()

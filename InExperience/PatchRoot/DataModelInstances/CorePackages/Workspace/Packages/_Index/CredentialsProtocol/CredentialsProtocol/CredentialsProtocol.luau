@@ -9,7 +9,7 @@ local FFlagLuaAppNormalizeUnifiedPasskeyResponseModule = require(script.Parent.F
 local FFlagCacheCredentialsProtocolIsAvailableModule = require(script.Parent.Flags.FFlagCacheCredentialsProtocolIsAvailable)
 local CredentialsTypes = require(script.Parent.Constants).CredentialsTypes
 
-local function _(p1): boolean --[[ Line: 46 | Named "isNativeIsAvailableReply" ]]
+local function _(p1): boolean
 	return p1.isAvailable ~= nil or (p1.FIDO2 ~= nil or (p1.password ~= nil or p1.iosKeychainPassword ~= nil)) or p1.keystore ~= nil
 end
 
@@ -309,7 +309,7 @@ local CredentialsProtocolModule = {
 }
 CredentialsProtocolModule.__index = CredentialsProtocolModule
 
-function CredentialsProtocolModule.new() --[[ Line: 436 ]]
+function CredentialsProtocolModule.new()
 	-- upvalues: MessageBus (copy), CredentialsProtocolModule (copy)
 	return (setmetatable({
 		getCredentialsRequestInFlight = false,
@@ -320,22 +320,22 @@ function CredentialsProtocolModule.new() --[[ Line: 436 ]]
 	}, CredentialsProtocolModule))
 end
 
-function CredentialsProtocolModule:getCredentials(All, Input, p1) --[[ Line: 450 ]]
+function CredentialsProtocolModule:getCredentials(All, Input, p1)
 	-- upvalues: PromiseModule (copy), FFlagLuaAppNormalizeUnifiedPasskeyResponseModule (copy), CredentialsTypes (copy), NormalizeUnifiedGetCredentialsResponseModule (copy), HttpService (copy), MessageBus (copy)
 	if self.getCredentialsRequestInFlight then
 		return PromiseModule.reject()
 	end
 	local RaceResult = PromiseModule.race({
-		PromiseModule.new(function(Callback, _) --[[ Line: 454 ]]
+		PromiseModule.new(function(Callback, _)
 			-- upvalues: self (copy), All (copy), FFlagLuaAppNormalizeUnifiedPasskeyResponseModule (upval), CredentialsTypes (upval), NormalizeUnifiedGetCredentialsResponseModule (upval), HttpService (upval)
-			self.subscriber:subscribe(self.GET_CREDENTIALS_RESPONSE_DESCRIPTOR[All], function(p2) --[[ Line: 455 ]]
+			self.subscriber:subscribe(self.GET_CREDENTIALS_RESPONSE_DESCRIPTOR[All], function(p2)
 				-- upvalues: self (upval), All (upval), FFlagLuaAppNormalizeUnifiedPasskeyResponseModule (upval), CredentialsTypes (upval), NormalizeUnifiedGetCredentialsResponseModule (upval), HttpService (upval), Callback (copy)
 				self.subscriber:unsubscribe(self.GET_CREDENTIALS_RESPONSE_DESCRIPTOR[All])
 				self.getCredentialsRequestInFlight = false
 				Callback((HttpService:JSONEncode(if FFlagLuaAppNormalizeUnifiedPasskeyResponseModule and All == CredentialsTypes.all then NormalizeUnifiedGetCredentialsResponseModule(p2) else p2)))
 			end)
 		end),
-		PromiseModule.delay(p1):andThen(function() --[[ Line: 466 ]]
+		PromiseModule.delay(p1):andThen(function()
 			-- upvalues: self (copy), All (copy)
 			self.subscriber:unsubscribe(self.GET_CREDENTIALS_RESPONSE_DESCRIPTOR[All])
 			self.getCredentialsRequestInFlight = false
@@ -357,22 +357,22 @@ function CredentialsProtocolModule:getCredentials(All, Input, p1) --[[ Line: 450
 	end
 end
 
-function CredentialsProtocolModule:registerCredentials(CredentialType, Input, p1) --[[ Line: 492 ]]
+function CredentialsProtocolModule:registerCredentials(CredentialType, Input, p1)
 	-- upvalues: PromiseModule (copy), HttpService (copy), MessageBus (copy)
 	if self.registerCredentialsRequestInFlight then
 		return PromiseModule.reject()
 	else
 		local RaceResult = PromiseModule.race({
-			PromiseModule.new(function(Callback, _) --[[ Line: 500 ]]
+			PromiseModule.new(function(Callback, _)
 				-- upvalues: self (copy), CredentialType (copy), HttpService (upval)
-				self.subscriber:subscribe(self.REGISTER_CREDENTIALS_RESPONSE_DESCRIPTOR[CredentialType], function(Input) --[[ Line: 503 ]]
+				self.subscriber:subscribe(self.REGISTER_CREDENTIALS_RESPONSE_DESCRIPTOR[CredentialType], function(Input)
 					-- upvalues: self (upval), CredentialType (upval), HttpService (upval), Callback (copy)
 					self.subscriber:unsubscribe(self.REGISTER_CREDENTIALS_RESPONSE_DESCRIPTOR[CredentialType])
 					self.registerCredentialsRequestInFlight = false
 					Callback((HttpService:JSONEncode(Input)))
 				end)
 			end),
-			PromiseModule.delay(p1):andThen(function() --[[ Line: 511 ]]
+			PromiseModule.delay(p1):andThen(function()
 				-- upvalues: self (copy), CredentialType (copy)
 				self.subscriber:unsubscribe(self.REGISTER_CREDENTIALS_RESPONSE_DESCRIPTOR[CredentialType])
 				self.registerCredentialsRequestInFlight = false
@@ -388,22 +388,22 @@ function CredentialsProtocolModule:registerCredentials(CredentialType, Input, p1
 	end
 end
 
-function CredentialsProtocolModule:deleteAllCredentialsFromiOSKeychain(CredentialType, Input, p1) --[[ Line: 528 ]]
+function CredentialsProtocolModule:deleteAllCredentialsFromiOSKeychain(CredentialType, Input, p1)
 	-- upvalues: PromiseModule (copy), HttpService (copy), MessageBus (copy)
 	if self.deleteIosKeychainCredentialsRequestInFlight then
 		return PromiseModule.reject()
 	else
 		local RaceResult = PromiseModule.race({
-			PromiseModule.new(function(Callback, _) --[[ Line: 536 ]]
+			PromiseModule.new(function(Callback, _)
 				-- upvalues: self (copy), CredentialType (copy), HttpService (upval)
-				self.subscriber:subscribe(self.DELETE_IOS_KEYCHAIN_CREDENTIALS_RESPONSE_DESCRIPTOR[CredentialType], function(Input) --[[ Line: 539 ]]
+				self.subscriber:subscribe(self.DELETE_IOS_KEYCHAIN_CREDENTIALS_RESPONSE_DESCRIPTOR[CredentialType], function(Input)
 					-- upvalues: self (upval), CredentialType (upval), HttpService (upval), Callback (copy)
 					self.subscriber:unsubscribe(self.DELETE_IOS_KEYCHAIN_CREDENTIALS_RESPONSE_DESCRIPTOR[CredentialType])
 					self.deleteIosKeychainCredentialsRequestInFlight = false
 					Callback((HttpService:JSONEncode(Input)))
 				end)
 			end),
-			PromiseModule.delay(p1):andThen(function() --[[ Line: 547 ]]
+			PromiseModule.delay(p1):andThen(function()
 				-- upvalues: self (copy), CredentialType (copy)
 				self.subscriber:unsubscribe(self.DELETE_IOS_KEYCHAIN_CREDENTIALS_RESPONSE_DESCRIPTOR[CredentialType])
 				self.deleteIosKeychainCredentialsRequestInFlight = false
@@ -419,22 +419,22 @@ function CredentialsProtocolModule:deleteAllCredentialsFromiOSKeychain(Credentia
 	end
 end
 
-function CredentialsProtocolModule:deleteAllCredentialsFromKeystore(CredentialType, Input, p1) --[[ Line: 566 ]]
+function CredentialsProtocolModule:deleteAllCredentialsFromKeystore(CredentialType, Input, p1)
 	-- upvalues: PromiseModule (copy), HttpService (copy), MessageBus (copy)
 	if self.deleteKeystoreCredentialsRequestInFlight then
 		return PromiseModule.reject()
 	else
 		local RaceResult = PromiseModule.race({
-			PromiseModule.new(function(Callback, _) --[[ Line: 574 ]]
+			PromiseModule.new(function(Callback, _)
 				-- upvalues: self (copy), CredentialType (copy), HttpService (upval)
-				self.subscriber:subscribe(self.DELETE_KEYSTORE_CREDENTIALS_RESPONSE_DESCRIPTOR[CredentialType], function(Input) --[[ Line: 577 ]]
+				self.subscriber:subscribe(self.DELETE_KEYSTORE_CREDENTIALS_RESPONSE_DESCRIPTOR[CredentialType], function(Input)
 					-- upvalues: self (upval), CredentialType (upval), HttpService (upval), Callback (copy)
 					self.subscriber:unsubscribe(self.DELETE_KEYSTORE_CREDENTIALS_RESPONSE_DESCRIPTOR[CredentialType])
 					self.deleteKeystoreCredentialsRequestInFlight = false
 					Callback((HttpService:JSONEncode(Input)))
 				end)
 			end),
-			PromiseModule.delay(p1):andThen(function() --[[ Line: 585 ]]
+			PromiseModule.delay(p1):andThen(function()
 				-- upvalues: self (copy), CredentialType (copy)
 				self.subscriber:unsubscribe(self.DELETE_KEYSTORE_CREDENTIALS_RESPONSE_DESCRIPTOR[CredentialType])
 				self.deleteKeystoreCredentialsRequestInFlight = false
@@ -450,18 +450,18 @@ function CredentialsProtocolModule:deleteAllCredentialsFromKeystore(CredentialTy
 	end
 end
 
-function CredentialsProtocolModule:sendIsAvailableRequest(CredentialType, p1) --[[ Line: 607 ]]
+function CredentialsProtocolModule:sendIsAvailableRequest(CredentialType, p1)
 	-- upvalues: PromiseModule (copy), MessageBus (copy)
 	local RaceResult = PromiseModule.race({
-		PromiseModule.new(function(Callback, _) --[[ Line: 612 ]]
+		PromiseModule.new(function(Callback, _)
 			-- upvalues: self (copy)
-			self.subscriber:subscribe(self.IS_AVAILABLE_RESPONSE_DESCRIPTOR, function(p2) --[[ Line: 613 ]]
+			self.subscriber:subscribe(self.IS_AVAILABLE_RESPONSE_DESCRIPTOR, function(p2)
 				-- upvalues: self (upval), Callback (copy)
 				self.subscriber:unsubscribe(self.IS_AVAILABLE_RESPONSE_DESCRIPTOR)
 				Callback(p2)
 			end)
 		end),
-		PromiseModule.delay(p1):andThen(function() --[[ Line: 618 ]]
+		PromiseModule.delay(p1):andThen(function()
 			-- upvalues: self (copy), PromiseModule (upval)
 			self.subscriber:unsubscribe(self.IS_AVAILABLE_RESPONSE_DESCRIPTOR)
 			
@@ -473,7 +473,7 @@ function CredentialsProtocolModule:sendIsAvailableRequest(CredentialType, p1) --
 	return RaceResult
 end
 
-function CredentialsProtocolModule:isAvailable(CredentialType, p1) --[[ Line: 639 ]]
+function CredentialsProtocolModule:isAvailable(CredentialType, p1)
 	-- upvalues: FFlagCacheCredentialsProtocolIsAvailableModule (copy), PromiseModule (copy)
 	if not FFlagCacheCredentialsProtocolIsAvailableModule then
 		return self:sendIsAvailableRequest(CredentialType, p1)
@@ -486,7 +486,7 @@ function CredentialsProtocolModule:isAvailable(CredentialType, p1) --[[ Line: 63
 		local SendIsAvailableRequestResult = self:sendIsAvailableRequest(CredentialType, p1)
 		self.isAvailableRequest = SendIsAvailableRequestResult
 		
-		return SendIsAvailableRequestResult:andThen(function(Result) --[[ Line: 662 ]]
+		return SendIsAvailableRequestResult:andThen(function(Result)
 			-- upvalues: self (copy)
 			self.isAvailableRequest = nil
 			
@@ -494,7 +494,7 @@ function CredentialsProtocolModule:isAvailable(CredentialType, p1) --[[ Line: 63
 				self.isAvailableCache = { result = Result, clock = os.clock() }
 			end
 			return Result
-		end):catch(function(Err) --[[ Line: 669 ]]
+		end):catch(function(Err)
 			-- upvalues: self (copy), PromiseModule (upval)
 			self.isAvailableRequest = nil
 			

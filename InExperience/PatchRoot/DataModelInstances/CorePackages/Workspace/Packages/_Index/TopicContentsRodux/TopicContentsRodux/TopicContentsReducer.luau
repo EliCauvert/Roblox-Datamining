@@ -8,7 +8,7 @@ local _ = require(Parent.DiscoveryTypes)
 
 return {
 	key = "TopicContentsKey",
-	reducer = function(p1, p2) --[[ Line: 12 ]]
+	reducer = function(p1, p2)
 		-- upvalues: AddTopicInfos (copy), TopicContentsModelModule (copy), CryoModule (copy), AddTopicContentsModule (copy)
 		local P0 = p1 or {}
 		

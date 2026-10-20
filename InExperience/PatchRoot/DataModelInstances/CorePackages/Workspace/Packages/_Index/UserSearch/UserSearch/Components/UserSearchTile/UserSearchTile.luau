@@ -40,12 +40,12 @@ local RODUXKEY = require(UserSearch.Common.Constants).RODUX_KEY
 local PresenceHelpersModule = require(UserSearch.Utils.PresenceHelpers)
 local UserTileEventHandlers = require(Parent.UserTile).UserTileEventHandlers
 
-local function _(p1, p2) --[[ Line: 89 ]]
+local function _(p1, p2)
 	-- upvalues: GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), FFlagUserSearchUseProfileFrameThumbnailModule (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy)
 	return if p2 then GetStandardSizeAvatarHeadShotRbxthumbFunction(tostring(p1), FFlagUserSearchUseProfileFrameThumbnailModule) else GetRbxthumbWithTypeSizeAndOptionsFunction(tostring(p1), Constants.RbxthumbTypes.Avatar, 720)
 end
 
-return function(p1) --[[ Line: 97 ]]
+return function(p1)
 	-- upvalues: FFlagUserSearchAddFocusActionsSupport (copy), ReactModule (copy), FFlagUserSearchCancelTileActivationOnHoldIntent (copy), UseStyleFunction (copy), FFlagSduiUserSearchTile (copy), FFlagPlayerSearchEnableOnlineFrequentsForAll (copy), ProfileInsightsStore (copy), FFlagUserSearchClassmatesInsight (copy), SignalsReactModule (copy), UseUserExperimentFunction (copy), AppUserLayers (copy), UseLastInputModeFunction (copy), FFlagUserSearchPresenceStoreMigrationModule (copy), UseGetPresenceByUserIdFunction (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), RODUXKEY (copy), UseContextualInfoModule (copy), ResponsiveModule (copy), CryoModule (copy), FFlagLuaAppSearchPeopleUnifiedSchemaFields (copy), HttpService (copy), EventNamesModule (copy), UseSearchTileButtonsModule (copy), UseProfileNamesModule (copy), PresenceHelpersModule (copy), PlayerTile (copy), FFlagBlendedSerpUserPresenceInLineEnabled (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), FFlagUserSearchUseProfileFrameThumbnailModule (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), OpenTypeSupport (copy), UserTileEventHandlers (copy), RoundCTAButtonModule (copy)
 	local UseRefResult = if FFlagUserSearchAddFocusActionsSupport then ReactModule.useRef(nil) else nil
 	local v1 = nil
@@ -54,7 +54,7 @@ return function(p1) --[[ Line: 97 ]]
 	if FFlagUserSearchCancelTileActivationOnHoldIntent then
 		local UseRefResult1 = ReactModule.useRef(false)
 		v1 = UseRefResult1
-		UseResult = ReactModule.useCallback(function(Current) --[[ Line: 104 ]]
+		UseResult = ReactModule.useCallback(function(Current)
 			-- upvalues: UseRefResult1 (copy)
 			UseRefResult1.current = Current
 		end, {})
@@ -63,12 +63,12 @@ return function(p1) --[[ Line: 97 ]]
 	local UseStyleResult = UseStyleFunction()
 	local NoShouldUseCompactTiles: boolean = p1.enablePresenceIndicator and not p1.shouldUseCompactTiles
 	local Size250 = UseStyleResult.Tokens.Size.Size_250
-	local UseUserExperimentResult = UseUserExperimentFunction({ AppUserLayers.OmniSearchResultsPageUXExposureLayer }, function(p2): boolean --[[ Line: 130 ]]
+	local UseUserExperimentResult = UseUserExperimentFunction({ AppUserLayers.OmniSearchResultsPageUXExposureLayer }, function(p2): boolean
 		-- upvalues: AppUserLayers (upval)
 		return (p2[AppUserLayers.OmniSearchResultsPageUXExposureLayer] or {}).userPresenceIndicator == "showPresenceInLine"
 	end, false)
 	local UseLastInputModeResult = UseLastInputModeFunction()
-	local UseGetPresenceByUserIdResult = if FFlagUserSearchPresenceStoreMigrationModule then UseGetPresenceByUserIdFunction((tostring(User.id))) else UseSelectorFunction(function(p2) --[[ Line: 144 ]]
+	local UseGetPresenceByUserIdResult = if FFlagUserSearchPresenceStoreMigrationModule then UseGetPresenceByUserIdFunction((tostring(User.id))) else UseSelectorFunction(function(p2)
 		-- upvalues: GetDeepValueFunction (upval), RODUXKEY (upval), User (copy)
 		return GetDeepValueFunction(p2, string.format("%s.Presence.byUserId.%s", RODUXKEY, User.id)) or {}
 	end)
@@ -76,7 +76,7 @@ return function(p1) --[[ Line: 97 ]]
 		userId = User.id,
 		previousUsernames = User.previousUsernames,
 		searchKeyword = p1.searchParameters.searchKeyword,
-		profileInsight = if FFlagSduiUserSearchTile then SignalsReactModule.useSignalState(ReactModule.useMemo(function() --[[ Line: 113 ]]
+		profileInsight = if FFlagSduiUserSearchTile then SignalsReactModule.useSignalState(ReactModule.useMemo(function()
 			-- upvalues: FFlagPlayerSearchEnableOnlineFrequentsForAll (upval), ProfileInsightsStore (upval), User (copy), FFlagUserSearchClassmatesInsight (upval)
 			local ProfileInfoBoost = if FFlagPlayerSearchEnableOnlineFrequentsForAll then "profile_info_boost" else nil
 			
@@ -90,7 +90,7 @@ return function(p1) --[[ Line: 97 ]]
 	})
 	local IsUsePreferredInputResultMatch = if FFlagUserSearchAddFocusActionsSupport then ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Directional else nil
 	
-	local function v47(PlayerTileClick, p2) --[[ Line: 162 ]]
+	local function v47(PlayerTileClick, p2)
 		-- upvalues: p1 (copy), CryoModule (upval), User (copy), UseContextualInfoModuleResult2 (copy), FFlagLuaAppSearchPeopleUnifiedSchemaFields (upval), HttpService (upval)
 		if p1.fireAnalyticsEvent then
 			p1.fireAnalyticsEvent(PlayerTileClick, CryoModule.Dictionary.join({
@@ -106,7 +106,7 @@ return function(p1) --[[ Line: 97 ]]
 		end
 	end
 	
-	local function OnActivated() --[[ Line: 182 ]]
+	local function OnActivated()
 		-- upvalues: FFlagUserSearchCancelTileActivationOnHoldIntent (upval), v1 (ref), p1 (copy), User (copy), UseContextualInfoModuleResult2 (copy), UseContextualInfoModuleResult (copy), v47 (copy), EventNamesModule (upval)
 		if FFlagUserSearchCancelTileActivationOnHoldIntent and v1.current then
 			v1.current = false
@@ -142,7 +142,7 @@ return function(p1) --[[ Line: 97 ]]
 	} or nil
 	local UseProfileNamesModuleResult = UseProfileNamesModule({ userId = User.id })
 	
-	local function v52(UserPresence, p2) --[[ Line: 223 ]]
+	local function v52(UserPresence, p2)
 		-- upvalues: PresenceHelpersModule (upval), UseStyleResult (copy)
 		if not p2 or not p2.combinedName then
 			return ""

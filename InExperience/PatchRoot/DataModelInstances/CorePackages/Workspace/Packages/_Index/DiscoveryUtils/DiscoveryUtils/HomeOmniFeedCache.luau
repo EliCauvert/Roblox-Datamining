@@ -6,15 +6,15 @@ local LuaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache = game:DefineFastS
 return {
 	HOME_OMNI_FEED_CACHE_VERSION = 2,
 	HOME_SDUI_FEED_CACHE_VERSION = 3,
-	cacheOmniRecommendationsData = function(p1) --[[ Line: 37 ]]
+	cacheOmniRecommendationsData = function(p1)
 		-- upvalues: LuaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache (copy), DiscoveryClientAppStorageModule (copy), DiscoveryEventErrorLoggerModule (copy)
 		assert(p1.pageType, "pageType is required")
 		assert(p1.sorts, "sorts is required")
 		assert(p1.contentMetadata, "contentMetadata is required")
 		assert(p1.contentMetadata.Game, "contentMetadata.Game is required")
-		task.spawn(function() --[[ Line: 43 ]]
+		task.spawn(function()
 			-- upvalues: LuaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache (upval), p1 (copy), DiscoveryClientAppStorageModule (upval), DiscoveryEventErrorLoggerModule (upval)
-			local Success, Result = pcall(function() --[[ Line: 44 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: LuaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache (upval), p1 (upval), DiscoveryClientAppStorageModule (upval)
 				local t = {}
 				
@@ -78,7 +78,7 @@ return {
 			end
 		end)
 	end,
-	getTopicIdToNumCacheItems = function() --[[ Line: 23 ]]
+	getTopicIdToNumCacheItems = function()
 		-- upvalues: LuaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache (copy)
 		local t = {}
 		
@@ -93,11 +93,11 @@ return {
 		end
 		return t
 	end,
-	cacheSduiHomePageData = function(p2) --[[ Line: 117 ]]
+	cacheSduiHomePageData = function(p2)
 		-- upvalues: DiscoveryClientAppStorageModule (copy), DiscoveryEventErrorLoggerModule (copy)
-		task.spawn(function() --[[ Line: 118 ]]
+		task.spawn(function()
 			-- upvalues: DiscoveryClientAppStorageModule (upval), p2 (copy), DiscoveryEventErrorLoggerModule (upval)
-			local Success, Result = pcall(function() --[[ Line: 119 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: DiscoveryClientAppStorageModule (upval), p2 (upval)
 				DiscoveryClientAppStorageModule.setJsonStorageData(DiscoveryClientAppStorageModule.CacheKey.HomeOmniFeedCache, p2, 3)
 			end)
@@ -107,7 +107,7 @@ return {
 			end
 		end)
 	end,
-	getCachedSduiHomePageData = function() --[[ Line: 132 ]]
+	getCachedSduiHomePageData = function()
 		-- upvalues: DiscoveryClientAppStorageModule (copy)
 		local JsonStorageData = DiscoveryClientAppStorageModule.getJsonStorageData(DiscoveryClientAppStorageModule.CacheKey.HomeOmniFeedCache, 3)
 		

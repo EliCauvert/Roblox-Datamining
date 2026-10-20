@@ -8,7 +8,7 @@ local AvatarScreen = require(Parent.AvatarExperienceNavigation).Enums.AvatarScre
 local GetTimeoutStatusStoreModule = require(AvatarExperienceCommon.Stores.TimeoutStatusStore.getTimeoutStatusStore)
 local FormatTimeoutEndTimeModule = require(AvatarExperienceCommon.Utils.formatTimeoutEndTime)
 
-return function(p1) --[[ Line: 28 | Named "useTimeoutBannerProps" ]]
+return function(p1)
 	-- upvalues: GetTimeoutStatusStoreModule (copy), UseSignalStateFunction (copy), UseNavigationFunction (copy), ReactModule (copy), FormatTimeoutEndTimeModule (copy), UseLocalizationFunction (copy), AvatarScreen (copy)
 	local ShouldFetch = if p1 and p1.shouldFetch ~= nil then p1.shouldFetch else false
 	local NoP0 = not p1 or p1.shouldNavigateOnClick == nil or p1.shouldNavigateOnClick
@@ -16,14 +16,14 @@ return function(p1) --[[ Line: 28 | Named "useTimeoutBannerProps" ]]
 	local UseSignalStateResult = UseSignalStateFunction(TimeoutStatusStoreModule.getStatus)
 	local UseSignalStateResult1 = UseSignalStateFunction(TimeoutStatusStoreModule.getIsTimedOut)
 	local UseNavigationResult = UseNavigationFunction()
-	ReactModule.useEffect(function() --[[ Line: 39 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ShouldFetch (copy), TimeoutStatusStoreModule (copy)
 		if ShouldFetch then
 			TimeoutStatusStoreModule.fetchStatus()
 		end
 	end, { ShouldFetch, TimeoutStatusStoreModule })
 	local FormatTimeoutEndTimeModuleResult = FormatTimeoutEndTimeModule(UseSignalStateResult.timeoutAction and UseSignalStateResult.timeoutAction.endTime or UseSignalStateResult.details and UseSignalStateResult.details.endDate)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 54 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy), AvatarScreen (upval)
 		UseNavigationResult.navigate(AvatarScreen.TimeoutStatusPrompt)
 	end, { UseNavigationResult })

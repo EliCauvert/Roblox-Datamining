@@ -15,7 +15,7 @@ local UseStatefulRefModule = require(SduiSharedUtilities.hooks.useStatefulRef)
 local SduiFeatureEntryPointUiModule = require(SduiSharedUtilities.ui.SduiFeatureEntryPointUi)
 local FFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler = require(Parent.SharedFlags).FFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler
 
-return ReactModule.memo(ReactModule.forwardRef(function(Frame: Frame, p1) --[[ Line: 64 | Named "SduiFeatureEntryPoint" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(Frame: Frame, p1)
 	-- upvalues: UseComponentConfigModule (copy), UseComponentLifecycleTimingModule (copy), UseDataUpdatedTimestampModule (copy), UseUiStatusModule (copy), UseStatefulRefModule (copy), UseCreateClientBindingSduiContextModule (copy), UseLocalAnalyticsDataModule (copy), ReactModule (copy), SduiFeatureEntryPointUiModule (copy), GetSduiComponentWrapperFunction (copy), FFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler (copy)
 	local ConfigKey = Frame.configKey
 	local AppPage = Frame.appPage

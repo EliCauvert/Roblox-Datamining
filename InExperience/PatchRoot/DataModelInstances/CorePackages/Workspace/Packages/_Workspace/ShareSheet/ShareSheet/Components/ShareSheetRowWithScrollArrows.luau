@@ -11,21 +11,21 @@ local Visibility = FoundationModule.Enums.Visibility
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(Frame) --[[ Line: 24 | Named "ShareSheetRowWithScrollArrows" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), ScrollView (copy), Visibility (copy), StateLayerAffordance (copy), Icon (copy), IconName (copy), IconSize (copy), IconVariant (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 31 ]]
+	local UseResult = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: UseStateResult2_1 (copy), UseStateResult2_2 (copy)
 		local Largest = math.max(0, ScrollFrame.AbsoluteCanvasSize.X - ScrollFrame.AbsoluteWindowSize.X)
 		local X: number = ScrollFrame.CanvasPosition.X
 		UseStateResult2_1(X > 1)
 		UseStateResult2_2(X < Largest - 1)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(p1) --[[ Line: 38 ]]
+	local UseResult1 = ReactModule.useCallback(function(p1)
 		-- upvalues: UseRefResult (copy), UseResult (copy)
 		local Current = UseRefResult.current
 		
@@ -71,11 +71,11 @@ return function(Frame) --[[ Line: 24 | Named "ShareSheetRowWithScrollArrows" ]]
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			ZIndex = 10,
-			[ReactModule.Event.MouseEnter] = function() --[[ Line: 88 ]]
+			[ReactModule.Event.MouseEnter] = function()
 				-- upvalues: UseStateResult2 (copy)
 				UseStateResult2(true)
 			end,
-			[ReactModule.Event.MouseLeave] = function() --[[ Line: 91 ]]
+			[ReactModule.Event.MouseLeave] = function()
 				-- upvalues: UseStateResult2 (copy)
 				UseStateResult2(false)
 			end,
@@ -88,7 +88,7 @@ return function(Frame) --[[ Line: 24 | Named "ShareSheetRowWithScrollArrows" ]]
 				Position = UDim2.new(0, UseTokensResult.Padding.Medium, 0.5, 0),
 				Visible = UseStateResult and UseStateResult1,
 				backgroundStyle = UseTokensResult.DarkMode.OverMedia.OverMedia_100,
-				onActivated = function() --[[ Line: 101 ]]
+				onActivated = function()
 					-- upvalues: UseResult1 (copy)
 					UseResult1(-1)
 				end,
@@ -111,7 +111,7 @@ return function(Frame) --[[ Line: 24 | Named "ShareSheetRowWithScrollArrows" ]]
 				Position = UDim2.new(1, -UseTokensResult.Padding.Medium, 0.5, 0),
 				Visible = UseStateResult and UseStateResult3,
 				backgroundStyle = UseTokensResult.DarkMode.OverMedia.OverMedia_100,
-				onActivated = function() --[[ Line: 125 ]]
+				onActivated = function()
 					-- upvalues: UseResult1 (copy)
 					UseResult1(1)
 				end,

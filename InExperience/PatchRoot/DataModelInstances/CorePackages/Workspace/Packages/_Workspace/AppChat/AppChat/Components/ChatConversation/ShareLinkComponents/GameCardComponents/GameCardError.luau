@@ -6,7 +6,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local Alert, _ = require(AppChat.Utils.loadFoundationCloudAsset)("pictograms/alert")
 
-function GameCardError() --[[ Line: 14 ]]
+function GameCardError()
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), FoundationModule (copy), Alert (copy)
 	local UseTokensResult = UseTokensFunction()
 	

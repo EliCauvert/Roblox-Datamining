@@ -6,7 +6,7 @@ local UsePulseAnimationBindingFunction = require(Parent.AvatarExperienceCommon).
 local UseSemanticTokensModule = require(AvatarExperienceControlBar.Hooks.useSemanticTokens)
 local UseHoverBindingModule = require(AvatarExperienceControlBar.Hooks.useHoverBinding)
 
-return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 25 | Named "ImageItem" ]]
+return ReactModule.forwardRef(function(Frame, Ref)
 	-- upvalues: UseSemanticTokensModule (copy), UseHoverBindingModule (copy), ReactModule (copy), UsePulseAnimationBindingFunction (copy), FoundationModule (copy)
 	local UseSemanticTokensModuleResult = UseSemanticTokensModule()
 	local UseHoverBindingModuleResult, UseHoverBindingModuleResult2 = UseHoverBindingModule()
@@ -30,7 +30,7 @@ return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 25 | Named "ImageI
 			tag = "radius-circle",
 			Image = Frame.thumbnailUrl,
 			Size = UDim2.fromOffset(Size, Size),
-			backgroundStyle = UseHoverBindingModuleResult:map(function(p1) --[[ Line: 49 ]]
+			backgroundStyle = UseHoverBindingModuleResult:map(function(p1)
 				-- upvalues: UseSemanticTokensModuleResult (copy)
 				return if p1 then UseSemanticTokensModuleResult.hoverThumbnailBackgroundStyle else UseSemanticTokensModuleResult.thumbnailBackgroundStyle
 			end)
@@ -47,10 +47,10 @@ return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 25 | Named "ImageI
 		}),
 		UIStroke = if Frame.enableFocusAnimation then ReactModule.createElement("UIStroke", {
 			Color = UseSemanticTokensModuleResult.imageBorderFocusStyle,
-			Thickness = UsePulseAnimationBindingResult:map(function(p1) --[[ Line: 71 ]]
+			Thickness = UsePulseAnimationBindingResult:map(function(p1)
 				return p1.thickness
 			end),
-			Transparency = UsePulseAnimationBindingResult:map(function(p1) --[[ Line: 74 ]]
+			Transparency = UsePulseAnimationBindingResult:map(function(p1)
 				return p1.transparency
 			end),
 			ref = UseRefResult

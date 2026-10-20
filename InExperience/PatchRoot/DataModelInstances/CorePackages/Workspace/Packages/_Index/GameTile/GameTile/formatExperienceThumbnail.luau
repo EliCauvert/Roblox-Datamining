@@ -1,4 +1,4 @@
-﻿return function(p1, p2, p3): string --[[ Line: 1 | Named "formatExperienceThumbnail" ]]
+﻿return function(p1, p2, p3): string
 	local v1 = 384
 	local v2 = 216
 	

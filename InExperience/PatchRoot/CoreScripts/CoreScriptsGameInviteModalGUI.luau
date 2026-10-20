@@ -8,7 +8,7 @@ local FFlagGameInviteModalUnlockMouse = require(CorePackages.Workspace.Packages.
 local GameInviteModule = require(CorePackages.Workspace.Packages.GameInvite)
 local GameInviteModalManager = GameInviteModule.GameInviteModalManager
 
-local function Callback(p1) --[[ Line: 19 ]]
+local function Callback(p1)
 	-- upvalues: PlayerListManagerModule (copy), FFlagGameInviteModalUnlockMouse (copy), UserInputService (copy), VRService (copy), MouseIconOverrideService (copy)
 	if p1 then
 		PlayerListManagerModule:HideTemp("GameInviteMenu", true)

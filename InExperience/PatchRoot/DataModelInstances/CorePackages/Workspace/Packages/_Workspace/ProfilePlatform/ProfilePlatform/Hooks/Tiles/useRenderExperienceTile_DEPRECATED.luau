@@ -12,14 +12,14 @@ local Constants = UserLibModule.Utils.Constants
 local _ = require(ProfilePlatform.Common.Types)
 local GetRbxthumbWithTypeSizeAndOptionsFunction = UserLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
 
-return function(p1, Callback, _) --[[ Line: 27 | Named "useRenderSquareExperienceTile" ]]
+return function(p1, Callback, _)
 	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), UseStyleFunction (copy), ReactModule (copy), OpenGameDetailsFunction (copy), Constants (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), ExperienceTileV3 (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseNavigationResult = UseNavigationFunction()
 	local UseStyleResult = UseStyleFunction()
 	local P0 = p1 or "ProfileExperienceTile_"
 	
-	return (ReactModule.useCallback(function(p2, LayoutOrder, _, p3) --[[ Line: 44 ]]
+	return (ReactModule.useCallback(function(p2, LayoutOrder, _, p3)
 		-- upvalues: Callback (copy), UseDispatchResult (copy), OpenGameDetailsFunction (upval), UseNavigationResult (copy), Constants (upval), GetRbxthumbWithTypeSizeAndOptionsFunction (upval), ReactModule (upval), ExperienceTileV3 (upval), UseStyleResult (copy), P0 (ref)
 		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -33,7 +33,7 @@ return function(p1, Callback, _) --[[ Line: 27 | Named "useRenderSquareExperienc
 				hasOutline = false,
 				experienceName = p2.name,
 				thumbnail = GetRbxthumbWithTypeSizeAndOptionsFunction(p2.experienceId, Constants.RbxthumbTypes.GameIcon, 150),
-				onActivated = function() --[[ Line: 45 ]]
+				onActivated = function()
 					-- upvalues: Callback (upval), p2 (copy), LayoutOrder (copy), p3 (copy), UseDispatchResult (upval), OpenGameDetailsFunction (upval), UseNavigationResult (upval)
 					if Callback then
 						Callback(p2, LayoutOrder, p3)

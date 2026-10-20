@@ -11,9 +11,9 @@ return {
 	name = "MusicPicker",
 	roact = ReactModule,
 	reactRoblox = require(Parent.Dev.ReactRoblox),
-	mapStory = function(p1) --[[ Line: 22 ]]
+	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), FoundationProvider (copy), config (copy), ColorMode (copy), Device (copy)
-		return function(p2) --[[ Line: 23 ]]
+		return function(p2)
 			-- upvalues: ReactModule (upval), FoundationProvider (upval), config (upval), ColorMode (upval), Device (upval), p1 (copy)
 			return ReactModule.createElement(FoundationProvider, {
 				colorMode = config[p2.theme] or ColorMode.Dark,

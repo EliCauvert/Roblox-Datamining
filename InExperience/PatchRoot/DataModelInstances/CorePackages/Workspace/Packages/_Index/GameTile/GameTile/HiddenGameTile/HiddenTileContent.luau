@@ -24,7 +24,7 @@ local NotInterestedUserSignalTelemetryEventConfigsModule = require(GameTile.NotI
 local UndoGameNotInterestedModule = require(GameTile.undoGameNotInterested)
 local FFlagLuaAppExtractNotInterestedHelper = require(Parent.SharedFlags).FFlagLuaAppExtractNotInterestedHelper
 
-return ReactModule.memo(function(p1) --[[ Line: 49 | Named "HiddenTileContent" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), UseTokensFunction (copy), UseFocusGuiObjectFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UseLocalizationFunction (copy), FFlagLuaAppExtractNotInterestedHelper (copy), GuiService (copy), UndoGameNotInterestedModule (copy), Default (copy), NotInterestedUserSignalTelemetryEventConfigsModule (copy), SetNetworkingErrorToastFunction (copy), PostSendUserSignalFunction (copy), UserSignalTypes (copy), MutedErrorFunction (copy), View (copy), Text (copy), Button (copy), InputSize (copy), ButtonVariant (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseRefResult = ReactModule.useRef(nil)
@@ -50,7 +50,7 @@ return ReactModule.memo(function(p1) --[[ Line: 49 | Named "HiddenTileContent" ]
 		}),
 		UndoButton = ReactModule.createElement(Button, {
 			LayoutOrder = 2,
-			onActivated = ReactModule.useCallback(function() --[[ Line: 61 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: FFlagLuaAppExtractNotInterestedHelper (upval), GuiService (upval), UseRefResult (copy), p1 (copy), UseFocusGuiObjectResult (copy), UndoGameNotInterestedModule (upval), UseDispatchResult (copy), UseRoactServiceResult (copy), Default (upval), NotInterestedUserSignalTelemetryEventConfigsModule (upval), SetNetworkingErrorToastFunction (upval), PostSendUserSignalFunction (upval), UserSignalTypes (upval), MutedErrorFunction (upval)
 				if FFlagLuaAppExtractNotInterestedHelper then
 					UndoGameNotInterestedModule({
@@ -59,10 +59,10 @@ return ReactModule.memo(function(p1) --[[ Line: 49 | Named "HiddenTileContent" ]
 						dispatch = UseDispatchResult,
 						isSponsored = p1.isSponsored,
 						networking = UseRoactServiceResult,
-						onOptimisticUnhide = function() --[[ Line: 63 ]]
+						onOptimisticUnhide = function()
 							-- upvalues: GuiService (upval), UseRefResult (upval), p1 (upval), UseFocusGuiObjectResult (upval)
 							if GuiService.SelectedCoreObject == UseRefResult.current then
-								task.delay(0, function() --[[ Line: 65 ]]
+								task.delay(0, function()
 									-- upvalues: p1 (upval), UseFocusGuiObjectResult (upval)
 									if p1.parentRef then
 										UseFocusGuiObjectResult(p1.parentRef.current)
@@ -85,14 +85,14 @@ return ReactModule.memo(function(p1) --[[ Line: 49 | Named "HiddenTileContent" ]
 				p1.setGameHidden(p1.universeId, false)
 				
 				if GuiService.SelectedCoreObject == UseRefResult.current then
-					task.delay(0, function() --[[ Line: 96 ]]
+					task.delay(0, function()
 						-- upvalues: p1 (upval), UseFocusGuiObjectResult (upval)
 						if p1.parentRef then
 							UseFocusGuiObjectResult(p1.parentRef.current)
 						end
 					end)
 				end
-				local Success, Result = pcall(function() --[[ Line: 103 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: PostSendUserSignalFunction (upval), UseRoactServiceResult (upval), p1 (upval), UserSignalTypes (upval), UseDispatchResult (upval), SetNetworkingErrorToastFunction (upval), Default (upval), NotInterestedUserSignalTelemetryEventConfigsModule (upval)
 					PostSendUserSignalFunction(UseRoactServiceResult, { boolValue = false }, {
 						id = p1.universeId,
@@ -102,7 +102,7 @@ return ReactModule.memo(function(p1) --[[ Line: 49 | Named "HiddenTileContent" ]
 							topicId = p1.collectionId or "",
 							subIds = { p1.collectionId or "" }
 						}
-					}, UserSignalTypes.SignalValueType.Bool, UserSignalTypes.SignalType.NotInterested):catch(function(Err) --[[ Line: 117 ]]
+					}, UserSignalTypes.SignalValueType.Bool, UserSignalTypes.SignalType.NotInterested):catch(function(Err)
 						-- upvalues: p1 (upval), UseDispatchResult (upval), SetNetworkingErrorToastFunction (upval), Default (upval), NotInterestedUserSignalTelemetryEventConfigsModule (upval)
 						p1.setGameHidden(p1.universeId, true)
 						UseDispatchResult(SetNetworkingErrorToastFunction(Err))

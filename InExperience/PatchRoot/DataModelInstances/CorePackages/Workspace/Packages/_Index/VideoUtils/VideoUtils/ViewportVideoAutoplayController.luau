@@ -32,17 +32,17 @@ local config = {
 	isUserIntentWinner = not FFlagLuaAppOneByTwoHoverIdleAutoplay and nil
 }
 
-local function winnerStateEquals(p1, p2): boolean --[[ Line: 75 ]]
+local function winnerStateEquals(p1, p2): boolean
 	-- upvalues: FFlagLuaAppOneByTwoHoverIdleAutoplay (copy)
 	return p1.instance == p2.instance and p1.shouldUseDwell == p2.shouldUseDwell and (not FFlagLuaAppOneByTwoHoverIdleAutoplay or p1.isUserIntentWinner == p2.isUserIntentWinner)
 end
 
-local function _(AppBackgrounded): boolean --[[ Line: 81 | Named "shouldSuppressReelection" ]]
+local function _(AppBackgrounded): boolean
 	-- upvalues: VideoEndReason (copy)
 	return AppBackgrounded == VideoEndReason.TileClicked or (AppBackgrounded == VideoEndReason.ExperienceLaunched or AppBackgrounded == VideoEndReason.AppBackgrounded)
 end
 
-local function reportCandidateOverlap(Frame, Frame1: Frame, X) --[[ Line: 87 ]]
+local function reportCandidateOverlap(Frame, Frame1: Frame, X)
 	-- upvalues: DiscoveryEventErrorLogger (copy)
 	DiscoveryEventErrorLogger.reportError("ViewportAutoplayCandidateOverlap", "Two visible autoplay candidates share identical reading-order position and AbsolutePosition.X", {
 		candidateA = Frame.Name,
@@ -57,7 +57,7 @@ end
 local ViewportVideoAutoplayController = {}
 ViewportVideoAutoplayController.__index = ViewportVideoAutoplayController
 
-function ViewportVideoAutoplayController.new(Coordinator, Enabled, Enabled1, UserIntentWithSelectiveAutoplay) --[[ Line: 130 ]]
+function ViewportVideoAutoplayController.new(Coordinator, Enabled, Enabled1, UserIntentWithSelectiveAutoplay)
 	-- upvalues: SignalsModule (copy), config (copy), winnerStateEquals (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppVideoAutoplayFeedElection (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy), ViewportVideoAutoplayController (copy), ViewportVideoAutoplayModeModule (copy), ViewportAutoplayVideoKeyAttributeModule (copy), VideoEndReason (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(config, winnerStateEquals)
 	local self = setmetatable({
@@ -79,13 +79,13 @@ function ViewportVideoAutoplayController.new(Coordinator, Enabled, Enabled1, Use
 	}, ViewportVideoAutoplayController)
 	
 	if FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback then
-		function Coordinator.onPlaybackReset(p1, p2) --[[ Line: 157 ]]
+		function Coordinator.onPlaybackReset(p1, p2)
 			-- upvalues: self (copy), Coordinator (copy)
 			self:_resetPairedPlayback(Coordinator, p1, p2)
 		end
 	end
 	if FFlagLuaAppOneByTwoHoverIdleAutoplay and UserIntentWithSelectiveAutoplay == ViewportVideoAutoplayModeModule.UserIntentWithSelectiveAutoplay then
-		self.playbackChangedConnection = Coordinator.changed:connect(function(Attribute, AppBackgrounded) --[[ Line: 164 ]]
+		self.playbackChangedConnection = Coordinator.changed:connect(function(Attribute, AppBackgrounded)
 			-- upvalues: self (copy), ViewportAutoplayVideoKeyAttributeModule (upval), config (upval), VideoEndReason (upval)
 			local _Instance = self.getWinnerState(false).instance
 			local Attribute1 = if _Instance then _Instance:GetAttribute(ViewportAutoplayVideoKeyAttributeModule) else nil
@@ -112,12 +112,12 @@ function ViewportVideoAutoplayController.new(Coordinator, Enabled, Enabled1, Use
 	return self
 end
 
-function ViewportVideoAutoplayController:isUserIntentWithSelectiveAutoplay(): boolean --[[ Line: 189 ]]
+function ViewportVideoAutoplayController:isUserIntentWithSelectiveAutoplay(): boolean
 	-- upvalues: ViewportVideoAutoplayModeModule (copy)
 	return self.mode == ViewportVideoAutoplayModeModule.UserIntentWithSelectiveAutoplay
 end
 
-function ViewportVideoAutoplayController:setCandidateUserIntent(CurrentUserIntentCandidate, p1) --[[ Line: 196 ]]
+function ViewportVideoAutoplayController:setCandidateUserIntent(CurrentUserIntentCandidate, p1)
 	-- upvalues: FFlagLuaAppHoverIdleAutoplayDuringScroll (copy)
 	if not self:isUserIntentWithSelectiveAutoplay() then return end
 	if p1 then
@@ -136,11 +136,11 @@ function ViewportVideoAutoplayController:setCandidateUserIntent(CurrentUserInten
 	end
 end
 
-function ViewportVideoAutoplayController:clearUserIntentCandidate() --[[ Line: 224 ]]
+function ViewportVideoAutoplayController:clearUserIntentCandidate()
 	self.currentUserIntentCandidate = nil
 end
 
-function ViewportVideoAutoplayController:requestWinnerPlayback(Object, Callback: (any) -> ()) --[[ Line: 229 ]]
+function ViewportVideoAutoplayController:requestWinnerPlayback(Object, Callback: (any) -> ())
 	-- upvalues: ViewportAutoplayVideoKeyAttributeModule (copy)
 	local WinnerState = self.getWinnerState(false)
 	
@@ -164,7 +164,7 @@ function ViewportVideoAutoplayController:requestWinnerPlayback(Object, Callback:
 	end
 end
 
-function ViewportVideoAutoplayController:onVideoCompleted(CurrentUserIntentCandidate) --[[ Line: 259 ]]
+function ViewportVideoAutoplayController:onVideoCompleted(CurrentUserIntentCandidate)
 	-- upvalues: ViewportAutoplayVideoKeyAttributeModule (copy), VideoEndReason (copy)
 	if not self:isUserIntentWithSelectiveAutoplay() then return end
 	local Attribute = CurrentUserIntentCandidate:GetAttribute(ViewportAutoplayVideoKeyAttributeModule)
@@ -177,19 +177,19 @@ function ViewportVideoAutoplayController:onVideoCompleted(CurrentUserIntentCandi
 	end
 end
 
-function ViewportVideoAutoplayController:getAdsPlaybackCoordinator() --[[ Line: 277 ]]
+function ViewportVideoAutoplayController:getAdsPlaybackCoordinator()
 	local AdsPlaybackCoordinatorInfo = self.adsPlaybackCoordinatorInfo
 	
 	return if AdsPlaybackCoordinatorInfo then AdsPlaybackCoordinatorInfo.coordinator else nil
 end
 
-function ViewportVideoAutoplayController:getWinnerStateForCoordinator(Coordinator) --[[ Line: 284 ]]
+function ViewportVideoAutoplayController:getWinnerStateForCoordinator(Coordinator)
 	local AdsPlaybackCoordinatorInfo = self.adsPlaybackCoordinatorInfo
 	
 	return if AdsPlaybackCoordinatorInfo and AdsPlaybackCoordinatorInfo.coordinator == Coordinator then AdsPlaybackCoordinatorInfo.getWinnerState else self.getWinnerState
 end
 
-function ViewportVideoAutoplayController:completeAdsPlayback(p1, p2) --[[ Line: 293 ]]
+function ViewportVideoAutoplayController:completeAdsPlayback(p1, p2)
 	-- upvalues: VideoEndReason (copy)
 	local AdsPlaybackCoordinatorInfo = self.adsPlaybackCoordinatorInfo
 	
@@ -203,7 +203,7 @@ function ViewportVideoAutoplayController:completeAdsPlayback(p1, p2) --[[ Line: 
 	end
 end
 
-function ViewportVideoAutoplayController:_consumeAdsHandoff(p1): boolean --[[ Line: 311 ]]
+function ViewportVideoAutoplayController:_consumeAdsHandoff(p1): boolean
 	local AdsPlaybackCoordinatorInfo = self.adsPlaybackCoordinatorInfo
 	
 	if AdsPlaybackCoordinatorInfo and AdsPlaybackCoordinatorInfo.handedOffInstances[p1] then
@@ -215,13 +215,13 @@ function ViewportVideoAutoplayController:_consumeAdsHandoff(p1): boolean --[[ Li
 	end
 end
 
-function ViewportVideoAutoplayController:hasCompletedAdsPlayback(p1): boolean --[[ Line: 324 ]]
+function ViewportVideoAutoplayController:hasCompletedAdsPlayback(p1): boolean
 	local AdsPlaybackCoordinatorInfo = self.adsPlaybackCoordinatorInfo
 	
 	return AdsPlaybackCoordinatorInfo ~= nil and AdsPlaybackCoordinatorInfo.completedVideoKeys[p1] == true
 end
 
-function ViewportVideoAutoplayController:attachAdsPlaybackCoordinator(Coordinator, CandidateTag) --[[ Line: 332 ]]
+function ViewportVideoAutoplayController:attachAdsPlaybackCoordinator(Coordinator, CandidateTag)
 	-- upvalues: SignalsModule (copy), config (copy), winnerStateEquals (copy)
 	if not self.adsPlaybackCoordinatorInfo then
 		local Signal, Signal2 = SignalsModule.createSignal(config, winnerStateEquals)
@@ -234,7 +234,7 @@ function ViewportVideoAutoplayController:attachAdsPlaybackCoordinator(Coordinato
 			handedOffInstances = setmetatable({}, { __mode = "k" })
 		}
 		
-		function Coordinator.onPlaybackReset(p1, p2) --[[ Line: 350 ]]
+		function Coordinator.onPlaybackReset(p1, p2)
 			-- upvalues: self (copy), Coordinator (copy)
 			self:_resetPairedPlayback(Coordinator, p1, p2)
 		end
@@ -243,11 +243,11 @@ function ViewportVideoAutoplayController:attachAdsPlaybackCoordinator(Coordinato
 	end
 end
 
-function ViewportVideoAutoplayController._hasUsableViewportBounds(p1): boolean --[[ Line: 355 ]]
+function ViewportVideoAutoplayController._hasUsableViewportBounds(p1): boolean
 	return if p1.viewPortBounds then p1.viewPortBounds.min.X < p1.viewPortBounds.max.X and p1.viewPortBounds.min.Y < p1.viewPortBounds.max.Y else false
 end
 
-function ViewportVideoAutoplayController:_maybeScheduleInitialWinnerUpdate() --[[ Line: 364 ]]
+function ViewportVideoAutoplayController:_maybeScheduleInitialWinnerUpdate()
 	-- upvalues: FFlagLuaAppVideoAutoplayFeedElection (copy)
 	if self.getWinnerState(false).instance ~= nil or self.isScrolling then return end
 	if not self:_hasUsableViewportBounds() then return end
@@ -260,7 +260,7 @@ function ViewportVideoAutoplayController:_maybeScheduleInitialWinnerUpdate() --[
 	end
 end
 
-function ViewportVideoAutoplayController:onCandidateRegistered(Object) --[[ Line: 384 ]]
+function ViewportVideoAutoplayController:onCandidateRegistered(Object)
 	-- upvalues: FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppVideoAutoplayFeedElection (copy)
 	if FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback and self:_consumeAdsHandoff(Object) then return end
 	local Current = if self.feedScopeRef then self.feedScopeRef.current else nil
@@ -285,7 +285,7 @@ function ViewportVideoAutoplayController:onCandidateRegistered(Object) --[[ Line
 		return
 	end
 	if self.pendingUpdateTask == nil then
-		self.pendingUpdateTask = task.defer(function() --[[ Line: 428 ]]
+		self.pendingUpdateTask = task.defer(function()
 			-- upvalues: self (copy)
 			self.pendingUpdateTask = nil
 			
@@ -301,7 +301,7 @@ function ViewportVideoAutoplayController:onCandidateRegistered(Object) --[[ Line
 	end
 end
 
-function ViewportVideoAutoplayController:forceScheduleInitialWinnerUpdate() --[[ Line: 445 ]]
+function ViewportVideoAutoplayController:forceScheduleInitialWinnerUpdate()
 	-- upvalues: FFlagLuaAppVideoAutoplayFeedElection (copy)
 	self:_cancelPendingUpdate()
 	
@@ -314,7 +314,7 @@ function ViewportVideoAutoplayController:forceScheduleInitialWinnerUpdate() --[[
 	end
 end
 
-function ViewportVideoAutoplayController:setViewPortBounds(ViewPortBounds) --[[ Line: 454 ]]
+function ViewportVideoAutoplayController:setViewPortBounds(ViewPortBounds)
 	-- upvalues: FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), VideoEndReason (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy)
 	self.viewPortBounds = ViewPortBounds
 	self:_maybeScheduleInitialWinnerUpdate()
@@ -348,33 +348,33 @@ function ViewportVideoAutoplayController:setViewPortBounds(ViewPortBounds) --[[ 
 	end
 end
 
-function ViewportVideoAutoplayController:setWinnerLineOffsetFromTopBarPx(WinnerLineOffsetFromTopBarPx) --[[ Line: 500 ]]
+function ViewportVideoAutoplayController:setWinnerLineOffsetFromTopBarPx(WinnerLineOffsetFromTopBarPx)
 	self.winnerLineOffsetFromTopBarPx = WinnerLineOffsetFromTopBarPx
 end
 
-function ViewportVideoAutoplayController:setFeedScopeRef(FeedScopeRef) --[[ Line: 510 ]]
+function ViewportVideoAutoplayController:setFeedScopeRef(FeedScopeRef)
 	self.feedScopeRef = FeedScopeRef
 	self:_maybeScheduleInitialWinnerUpdate()
 end
 
-function ViewportVideoAutoplayController:_cancelPendingUpdate() --[[ Line: 516 ]]
+function ViewportVideoAutoplayController:_cancelPendingUpdate()
 	if self.pendingUpdateTask ~= nil then
 		task.cancel(self.pendingUpdateTask)
 		self.pendingUpdateTask = nil
 	end
 end
 
-function ViewportVideoAutoplayController:_cancelPendingAdsUpdate() --[[ Line: 524 ]]
+function ViewportVideoAutoplayController:_cancelPendingAdsUpdate()
 	if self.pendingAdsUpdateTask ~= nil then
 		task.cancel(self.pendingAdsUpdateTask)
 		self.pendingAdsUpdateTask = nil
 	end
 end
 
-function ViewportVideoAutoplayController:_deferApplyAdsWinner() --[[ Line: 531 ]]
+function ViewportVideoAutoplayController:_deferApplyAdsWinner()
 	-- upvalues: VideoEndReason (copy)
 	self:_cancelPendingAdsUpdate()
-	self.pendingAdsUpdateTask = task.defer(function() --[[ Line: 533 ]]
+	self.pendingAdsUpdateTask = task.defer(function()
 		-- upvalues: self (copy), VideoEndReason (upval)
 		self.pendingAdsUpdateTask = nil
 		
@@ -386,17 +386,17 @@ function ViewportVideoAutoplayController:_deferApplyAdsWinner() --[[ Line: 531 ]
 	end)
 end
 
-function ViewportVideoAutoplayController:_cancelScrollUpdate() --[[ Line: 544 ]]
+function ViewportVideoAutoplayController:_cancelScrollUpdate()
 	if self.scrollUpdateTask ~= nil then
 		task.cancel(self.scrollUpdateTask)
 		self.scrollUpdateTask = nil
 	end
 end
 
-function ViewportVideoAutoplayController:_scheduleScrollUpdate() --[[ Line: 552 ]]
+function ViewportVideoAutoplayController:_scheduleScrollUpdate()
 	-- upvalues: LuaAppVideoAutoplayScrollUpdateIntervalMs (copy), FFlagLuaAppHoverIdleAutoplayDuringScroll (copy)
 	if self.scrollUpdateTask == nil and self.isScrolling and self:isUserIntentWithSelectiveAutoplay() then
-		self.scrollUpdateTask = task.delay(LuaAppVideoAutoplayScrollUpdateIntervalMs / 1000, function() --[[ Line: 557 ]]
+		self.scrollUpdateTask = task.delay(LuaAppVideoAutoplayScrollUpdateIntervalMs / 1000, function()
 			-- upvalues: self (copy), FFlagLuaAppHoverIdleAutoplayDuringScroll (upval)
 			self.scrollUpdateTask = nil
 			
@@ -412,7 +412,7 @@ function ViewportVideoAutoplayController:_scheduleScrollUpdate() --[[ Line: 552 
 	end
 end
 
-function ViewportVideoAutoplayController:onScrollStart() --[[ Line: 571 ]]
+function ViewportVideoAutoplayController:onScrollStart()
 	-- upvalues: FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppHoverIdleAutoplayDuringScroll (copy), FFlagLuaAppTileVideoKeepPlayingOnScroll (copy), VideoEndReason (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy)
 	self:_cancelPendingUpdate()
 	self.isScrolling = true
@@ -432,7 +432,7 @@ function ViewportVideoAutoplayController:onScrollStart() --[[ Line: 571 ]]
 	end
 end
 
-function ViewportVideoAutoplayController:onScrollSettled(p1, _, p2) --[[ Line: 596 ]]
+function ViewportVideoAutoplayController:onScrollSettled(p1, _, p2)
 	-- upvalues: FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppTileVideoKeepPlayingOnScroll (copy), VideoEndReason (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy)
 	self:_cancelPendingUpdate()
 	self.isScrolling = false
@@ -464,7 +464,7 @@ function ViewportVideoAutoplayController:onScrollSettled(p1, _, p2) --[[ Line: 5
 	end
 end
 
-function ViewportVideoAutoplayController:_resetPairedPlayback(Coordinator, ExperienceLaunched, p1) --[[ Line: 631 ]]
+function ViewportVideoAutoplayController:_resetPairedPlayback(Coordinator, ExperienceLaunched, p1)
 	-- upvalues: VideoEndReason (copy)
 	if self.isResettingPairedPlayback or ExperienceLaunched ~= VideoEndReason.TileClicked and ExperienceLaunched ~= VideoEndReason.ExperienceLaunched then return end
 	self.isResettingPairedPlayback = true
@@ -483,7 +483,7 @@ function ViewportVideoAutoplayController:_resetPairedPlayback(Coordinator, Exper
 	self.isResettingPairedPlayback = false
 end
 
-function ViewportVideoAutoplayController:reset(p1) --[[ Line: 658 ]]
+function ViewportVideoAutoplayController:reset(p1)
 	-- upvalues: FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy)
 	if FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback then
 		self:_resetOrganicPlayback(p1)
@@ -506,7 +506,7 @@ function ViewportVideoAutoplayController:reset(p1) --[[ Line: 658 ]]
 	})
 end
 
-function ViewportVideoAutoplayController:_resetOrganicPlayback(p1) --[[ Line: 681 ]]
+function ViewportVideoAutoplayController:_resetOrganicPlayback(p1)
 	-- upvalues: FFlagLuaAppOneByTwoHoverIdleAutoplay (copy)
 	self:_cancelPendingUpdate()
 	
@@ -522,7 +522,7 @@ function ViewportVideoAutoplayController:_resetOrganicPlayback(p1) --[[ Line: 68
 	})
 end
 
-function ViewportVideoAutoplayController:resetIfActiveInstance(p1, p2) --[[ Line: 698 ]]
+function ViewportVideoAutoplayController:resetIfActiveInstance(p1, p2)
 	-- upvalues: FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy)
 	if self.getWinnerState(false).instance == p1 then
 		if FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback then
@@ -546,7 +546,7 @@ function ViewportVideoAutoplayController:resetIfActiveInstance(p1, p2) --[[ Line
 	end
 end
 
-function ViewportVideoAutoplayController:onAdsCandidateRegistered(Object) --[[ Line: 724 ]]
+function ViewportVideoAutoplayController:onAdsCandidateRegistered(Object)
 	if not self.adsPlaybackCoordinatorInfo then return end
 	local Current = if self.feedScopeRef then self.feedScopeRef.current else nil
 	
@@ -558,10 +558,10 @@ function ViewportVideoAutoplayController:onAdsCandidateRegistered(Object) --[[ L
 	end
 end
 
-function ViewportVideoAutoplayController:scheduleUpdateWinner(p1, p2, ShouldUseDwell, p3) --[[ Line: 746 ]]
+function ViewportVideoAutoplayController:scheduleUpdateWinner(p1, p2, ShouldUseDwell, p3)
 	-- upvalues: FFlagLuaAppVideoAutoplayFeedElection (copy)
 	if self.pendingUpdateTask == nil then
-		self.pendingUpdateTask = task.defer(function() --[[ Line: 757 ]]
+		self.pendingUpdateTask = task.defer(function()
 			-- upvalues: self (copy), p1 (copy), p2 (copy), ShouldUseDwell (copy), FFlagLuaAppVideoAutoplayFeedElection (upval), p3 (copy)
 			self.pendingUpdateTask = nil
 			
@@ -576,7 +576,7 @@ function ViewportVideoAutoplayController:scheduleUpdateWinner(p1, p2, ShouldUseD
 	end
 end
 
-function ViewportVideoAutoplayController:_updateWinner(p1, p2, ShouldUseDwell, p3) --[[ Line: 774 ]]
+function ViewportVideoAutoplayController:_updateWinner(p1, p2, ShouldUseDwell, p3)
 	-- upvalues: FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), ViewportAutoplayVideoKeyAttributeModule (copy), CollectionService (copy), UserIntentModeAutoplayCandidateTagModule (copy), VideoEndReason (copy), FFlagLuaAppVideoAutoplayFeedElection (copy), FFlagLuaAppVideoAutoplayElectOnNewCandidateModule (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy)
 	if FFlagLuaAppOneByTwoHoverIdleAutoplay and self:isUserIntentWithSelectiveAutoplay() then
 		local WinnerState = self.getWinnerState(false)
@@ -627,7 +627,7 @@ function ViewportVideoAutoplayController:_updateWinner(p1, p2, ShouldUseDwell, p
 	end
 end
 
-function ViewportVideoAutoplayController:_resetAdsPlayback(ScrollStart) --[[ Line: 848 ]]
+function ViewportVideoAutoplayController:_resetAdsPlayback(ScrollStart)
 	local AdsPlaybackCoordinatorInfo = self.adsPlaybackCoordinatorInfo
 	
 	if AdsPlaybackCoordinatorInfo then
@@ -638,7 +638,7 @@ function ViewportVideoAutoplayController:_resetAdsPlayback(ScrollStart) --[[ Lin
 	end
 end
 
-function ViewportVideoAutoplayController:_refreshAdsWinnerForViewportChange() --[[ Line: 858 ]]
+function ViewportVideoAutoplayController:_refreshAdsWinnerForViewportChange()
 	-- upvalues: VideoEndReason (copy)
 	local AdsPlaybackCoordinatorInfo = self.adsPlaybackCoordinatorInfo
 	
@@ -657,7 +657,7 @@ function ViewportVideoAutoplayController:_refreshAdsWinnerForViewportChange() --
 	})
 end
 
-function ViewportVideoAutoplayController:_applyAdsWinner(ShouldUseDwell, ExitViewport) --[[ Line: 875 ]]
+function ViewportVideoAutoplayController:_applyAdsWinner(ShouldUseDwell, ExitViewport)
 	local AdsPlaybackCoordinatorInfo = self.adsPlaybackCoordinatorInfo
 	
 	if not AdsPlaybackCoordinatorInfo then return end
@@ -673,7 +673,7 @@ function ViewportVideoAutoplayController:_applyAdsWinner(ShouldUseDwell, ExitVie
 	})
 end
 
-function ViewportVideoAutoplayController:_selectAdsWinner() --[[ Line: 894 ]]
+function ViewportVideoAutoplayController:_selectAdsWinner()
 	-- upvalues: CollectionService (copy), GetIsInstanceVisibleModule (copy), FIntLuaAppOneByTwoTileVideoVisiblePercent (copy), reportCandidateOverlap (copy)
 	local AdsPlaybackCoordinatorInfo = self.adsPlaybackCoordinatorInfo
 	local ViewPortBounds = self.viewPortBounds
@@ -713,7 +713,7 @@ function ViewportVideoAutoplayController:_selectAdsWinner() --[[ Line: 894 ]]
 	return v1
 end
 
-function ViewportVideoAutoplayController:_selectUserIntentOrAutoplayWinner(p1, p2, p3) --[[ Line: 952 ]]
+function ViewportVideoAutoplayController:_selectUserIntentOrAutoplayWinner(p1, p2, p3)
 	-- upvalues: FFlagLuaAppHoverIdleAutoplayDuringScroll (copy), UserIntentModeAutoplayCandidateTagModule (copy)
 	local SelectUserIntentWinnerResult = self:_selectUserIntentWinner()
 	
@@ -731,7 +731,7 @@ function ViewportVideoAutoplayController:_selectUserIntentOrAutoplayWinner(p1, p
 	end
 end
 
-function ViewportVideoAutoplayController:_selectUserIntentWinner() --[[ Line: 976 ]]
+function ViewportVideoAutoplayController:_selectUserIntentWinner()
 	-- upvalues: CollectionService (copy), ViewportAutoplayCandidateTagModule (copy)
 	local CurrentUserIntentCandidate = self.currentUserIntentCandidate
 	local Current = if self.feedScopeRef then self.feedScopeRef.current else nil
@@ -739,7 +739,7 @@ function ViewportVideoAutoplayController:_selectUserIntentWinner() --[[ Line: 97
 	return if CurrentUserIntentCandidate == nil or Current == nil or not CurrentUserIntentCandidate:IsDescendantOf(Current) or not CollectionService:HasTag(CurrentUserIntentCandidate, ViewportAutoplayCandidateTagModule) then nil else CurrentUserIntentCandidate
 end
 
-function ViewportVideoAutoplayController:_selectCurrentIdleWinner(PlayingVideoKey) --[[ Line: 992 ]]
+function ViewportVideoAutoplayController:_selectCurrentIdleWinner(PlayingVideoKey)
 	-- upvalues: CollectionService (copy), UserIntentModeAutoplayCandidateTagModule (copy), ViewportAutoplayVideoKeyAttributeModule (copy), GetTileRowSpanFunction (copy), FIntLuaAppOneByTwoTileVideoVisiblePercent (copy), FIntLuaAppGameTileVideoVisiblePercent (copy), GetIsInstanceVisibleModule (copy)
 	local Current = if self.feedScopeRef then self.feedScopeRef.current else nil
 	local ViewPortBounds = self.viewPortBounds
@@ -755,7 +755,7 @@ function ViewportVideoAutoplayController:_selectCurrentIdleWinner(PlayingVideoKe
 	return nil
 end
 
-function ViewportVideoAutoplayController:_isCandidateEligibleForSelection(Frame, p1): boolean --[[ Line: 1026 ]]
+function ViewportVideoAutoplayController:_isCandidateEligibleForSelection(Frame, p1): boolean
 	-- upvalues: ViewportAutoplayVideoKeyAttributeModule (copy)
 	if p1 then
 		local Attribute = Frame:GetAttribute(ViewportAutoplayVideoKeyAttributeModule)
@@ -766,7 +766,7 @@ function ViewportVideoAutoplayController:_isCandidateEligibleForSelection(Frame,
 	end
 end
 
-function ViewportVideoAutoplayController:_selectWinner(p1, p2, p3, UserIntentModeAutoplayCandidateTagModule, p4) --[[ Line: 1041 ]]
+function ViewportVideoAutoplayController:_selectWinner(p1, p2, p3, UserIntentModeAutoplayCandidateTagModule, p4)
 	-- upvalues: LuaAppVideoAutoplayMaxDistanceToWinnerLinePercent (copy), reportCandidateOverlap (copy), CollectionService (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), ViewportAutoplayCandidateTagModule (copy), ComputeRowAnchorOverridesFunction (copy), GetTileRowSpanFunction (copy), FIntLuaAppOneByTwoTileVideoVisiblePercent (copy), FIntLuaAppGameTileVideoVisiblePercent (copy), GetIsInstanceVisibleModule (copy), FFlagLuaAppVideoAutoplayFeedElection (copy), ResolveOneByOneHeightFunction (copy), GetReadingOrderPositionsFunction (copy), IsTilePinnedLeftFunction (copy)
 	local ViewPortBounds = self.viewPortBounds
 	
@@ -797,7 +797,7 @@ function ViewportVideoAutoplayController:_selectWinner(p1, p2, p3, UserIntentMod
 		Y = -1
 		Magnitude1 = 1e999
 	end
-	local function _(AbsolutePositionX, Frame): boolean --[[ Line: 1087 | Named "shouldReplaceByLeftmostX" ]]
+	local function _(AbsolutePositionX, Frame): boolean
 		-- upvalues: X (ref), Flag1 (ref), Frame1 (ref), reportCandidateOverlap (upval)
 		if AbsolutePositionX < X then
 			return true
@@ -809,7 +809,7 @@ function ViewportVideoAutoplayController:_selectWinner(p1, p2, p3, UserIntentMod
 		return false
 	end
 	
-	local _ = function(Frame, AbsolutePositionX, p5) --[[ Line: 1097 | Named "considerFoldXCandidate" ]]
+	local _ = function(Frame, AbsolutePositionX, p5)
 		-- upvalues: NewY (copy), Magnitude (ref), X (ref), Frame1 (ref), Flag1 (ref), reportCandidateOverlap (upval)
 		local Magnitude1 = math.abs(p5 - NewY)
 		

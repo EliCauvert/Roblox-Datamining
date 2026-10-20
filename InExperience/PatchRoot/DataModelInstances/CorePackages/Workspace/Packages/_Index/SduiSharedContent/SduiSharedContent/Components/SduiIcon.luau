@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local _ = require(Parent.SduiCompat)
 
-return ReactModule.memo(function(p1) --[[ Line: 32 | Named "SduiIcon" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), FoundationModule (copy)
 	return ReactModule.createElement(FoundationModule.Icon, {
 		name = p1.name,

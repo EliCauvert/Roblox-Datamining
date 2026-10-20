@@ -10,7 +10,7 @@ local Text = FoundationModule.Text
 local DialogSize = FoundationModule.Enums.DialogSize
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
-return function(p1) --[[ Line: 33 | Named "OfferDetailsDialog" ]]
+return function(p1)
 	-- upvalues: UseRemainingTimeTextFunction (copy), UseOfferModalTextModule (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), View (copy), Text (copy), ButtonVariant (copy)
 	local Modal = p1.modal
 	local HasTermsAndConditions = Modal.termsAndConditions ~= nil

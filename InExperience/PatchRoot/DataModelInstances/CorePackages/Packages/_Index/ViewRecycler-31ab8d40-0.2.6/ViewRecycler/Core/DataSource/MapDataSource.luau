@@ -3,7 +3,7 @@ local DataSourceChangeTypeModule = require(ViewRecycler.Core.Enums.DataSourceCha
 local _ = require(ViewRecycler.Core.Types)
 local CreateEventModule = require(ViewRecycler.Internal.createEvent)
 
-local function getItems(ItemCount: number, Callback, p1: number, p2: number) --[[ Line: 16 ]]
+local function getItems(ItemCount: number, Callback, p1: number, p2: number)
 	local Buffer = table.create((math.max(0, p2 - p1 + 1)))
 	
 	for i = p1, math.min(p2, ItemCount) do
@@ -12,14 +12,14 @@ local function getItems(ItemCount: number, Callback, p1: number, p2: number) --[
 	return Buffer
 end
 
-return function(p3, Callback) --[[ Line: 24 | Named "createMapDataSource" ]]
+return function(p3, Callback)
 	-- upvalues: CreateEventModule (copy), DataSourceChangeTypeModule (copy), getItems (copy)
 	local T = {}
 	local EventModule = CreateEventModule()
 	local Count = 0
 	local SubscribeResult = nil
 	
-	local function getItem(Index) --[[ Line: 36 ]]
+	local function getItem(Index)
 		-- upvalues: p3 (copy), Count (ref), Callback (copy), T (ref)
 		local Item = p3.getItem(Index)
 		
@@ -39,9 +39,9 @@ return function(p3, Callback) --[[ Line: 24 | Named "createMapDataSource" ]]
 		end
 	end
 	
-	local function _() --[[ Line: 55 | Named "connectChild" ]]
+	local function _()
 		-- upvalues: SubscribeResult (ref), p3 (copy), DataSourceChangeTypeModule (upval), T (ref), EventModule (copy)
-		SubscribeResult = p3.subscribe(function(p4) --[[ Line: 56 ]]
+		SubscribeResult = p3.subscribe(function(p4)
 			-- upvalues: DataSourceChangeTypeModule (upval), T (upval), EventModule (upval)
 			for _, change in p4.changes do
 				if change.type == DataSourceChangeTypeModule.Reset then
@@ -68,15 +68,15 @@ return function(p3, Callback) --[[ Line: 24 | Named "createMapDataSource" ]]
 		getItemCount = p3.getItemCount,
 		getItem = getItem,
 		getItemKey = p3.getItemKey,
-		getItems = function(p5, p6) --[[ Line: 105 ]]
+		getItems = function(p5, p6)
 			-- upvalues: getItems (upval), p3 (copy), getItem (copy)
 			return (getItems(p3.getItemCount(), getItem, p5, p6))
 		end,
-		subscribe = function(p5) --[[ Line: 78 ]]
+		subscribe = function(p5)
 			-- upvalues: Count (ref), T (ref), SubscribeResult (ref), p3 (copy), DataSourceChangeTypeModule (upval), EventModule (copy)
 			if Count == 0 then
 				T = {}
-				SubscribeResult = p3.subscribe(function(p6) --[[ Line: 56 ]]
+				SubscribeResult = p3.subscribe(function(p6)
 					-- upvalues: DataSourceChangeTypeModule (upval), T (upval), EventModule (upval)
 					for _, change in p6.changes do
 						if change.type == DataSourceChangeTypeModule.Reset then
@@ -102,7 +102,7 @@ return function(p3, Callback) --[[ Line: 24 | Named "createMapDataSource" ]]
 			local ConnectResult = EventModule.connect(p5)
 			local Flag = true
 			
-			return function() --[[ Line: 86 ]]
+			return function()
 				-- upvalues: Flag (ref), ConnectResult (copy), Count (upval), SubscribeResult (upval), T (upval)
 				if not Flag then return end
 				Flag = false

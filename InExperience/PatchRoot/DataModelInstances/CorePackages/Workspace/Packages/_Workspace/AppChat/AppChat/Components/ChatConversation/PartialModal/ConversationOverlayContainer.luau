@@ -26,13 +26,13 @@ local config = {
 	[ConversationOverlay.TrustedConnectionRequestU18] = if FFlagAppChatEnableDoubleOptIn then TrustedConnectionsUpsellContainerModule else nil
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 52 ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseSelectorFunction (copy), GetDeepValue2Module (copy), ModalConfigurationModule (copy), ReactModule (copy), config (copy), UseShouldShowConversationOverlayModule (copy), UseRecordModalSequenceResponseForConversationModule (copy), UseDispatchFunction (copy), FFlagAppChatConsolidateTrustedFriendsModalModule (copy), UseGetOneToOneFriendIdFromConversationIdModule (copy), UseRecordModalSeenWithDelayModule (copy), ModalSequence (copy), FIntAppChatModalSeenImpressionDelayMsModule (copy), AppChatNetworkingModule (copy), NewResult (copy), DismissedChatModalModule (copy), TrustedFriendsUpsellContainerModule (copy)
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 54 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: GetDeepValue2Module (upval), p1 (copy), ModalConfigurationModule (upval)
 		return GetDeepValue2Module(p2, `ChatAppReducer.Modals.conversationOverlays.{p1.conversationId}`) or ModalConfigurationModule.default
 	end)
-	UseSelectorResult = ReactModule.useMemo(function() --[[ Line: 60 ]]
+	UseSelectorResult = ReactModule.useMemo(function()
 		-- upvalues: UseSelectorResult (ref)
 		return UseSelectorResult
 	end, { p1.conversationId })
@@ -51,15 +51,15 @@ return ReactModule.memo(function(p1) --[[ Line: 52 ]]
 		canRecordAction = HasEntry,
 		conversationId = p1.conversationId
 	})
-	ReactModule.useEffect(function() --[[ Line: 82 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: HasEntry (copy), p1 (copy)
 		if not HasEntry then
 			p1.dismissModal()
 		end
 	end, { HasEntry })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 89 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRecordModalSequenceResponseForConversationModuleResult (copy), UseSelectorResult (ref), AppChatNetworkingModule (upval), NewResult (upval), p1 (copy), UseDispatchResult (copy), DismissedChatModalModule (upval)
-		UseRecordModalSequenceResponseForConversationModuleResult(UseSelectorResult.modal_layout.dismissed_record_action, AppChatNetworkingModule.Constants.ModalSequence.ConversationOverlay, UseSelectorResult.modal_layout.id, UseSelectorResult.modal_variant):catch(function(Err) --[[ Line: 95 ]]
+		UseRecordModalSequenceResponseForConversationModuleResult(UseSelectorResult.modal_layout.dismissed_record_action, AppChatNetworkingModule.Constants.ModalSequence.ConversationOverlay, UseSelectorResult.modal_layout.id, UseSelectorResult.modal_variant):catch(function(Err)
 			-- upvalues: NewResult (upval), UseSelectorResult (upval)
 			NewResult:warning(`Error in ConversationOverlayContainer {UseSelectorResult.modal_layout.id} -> RecordModalSequenceResponse: {tostring(Err)}`)
 		end)

@@ -21,7 +21,7 @@ local FFlagAXMISOffersChip = AvatarExperienceFlagsModule.FFlagAXMISOffersChip
 local Icon = FoundationModule.Icon
 local IconSize = FoundationModule.Enums.IconSize
 
-return function(Frame: Frame) --[[ Line: 79 | Named "CatalogRowItemCardFooter" ]]
+return function(Frame: Frame)
 	-- upvalues: UseTokensFunction (copy), FFlagAXDurablesForMIS (copy), FFlagAXEnableTimedOptionsForCatalogRowCard (copy), ReactModule (copy), CryoModule (copy), FFlagAXMISWithOffers (copy), IconSize (copy), FoundationModule (copy), ItemCardPriceLine (copy), FFlagAXMISSmallUIChanges (copy), FFlagAXGifting (copy), FFlagAXDurables2Option (copy), ItemCardTitle (copy), Text (copy), Icon (copy), VerifiedBadgesModule (copy), FFlagAXMISOffersChip (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Price = nil
@@ -31,7 +31,7 @@ return function(Frame: Frame) --[[ Line: 79 | Named "CatalogRowItemCardFooter" ]
 		Price = Frame.selectedTimedOptionPrice
 		SetSelectedTimedOptionPriceFunction = Frame.setSelectedTimedOptionPrice
 	end
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 90 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Frame (copy), CryoModule (upval), FFlagAXDurablesForMIS (upval), FFlagAXEnableTimedOptionsForCatalogRowCard (upval), Price (ref), FFlagAXMISWithOffers (upval), UseTokensResult (copy), IconSize (upval), ReactModule (upval), FoundationModule (upval), ItemCardPriceLine (upval), FFlagAXMISSmallUIChanges (upval)
 		local Elements = {}
 		
@@ -263,7 +263,7 @@ return function(Frame: Frame) --[[ Line: 79 | Named "CatalogRowItemCardFooter" ]
 				WearTimeSelectedOptionInList = if Frame.wearTimeSelectedOptionInList then ReactModule.createElement(Frame.wearTimeSelectedOptionInList, {
 					options = Frame.timedOptions,
 					selectedTimedOptionIndexInReducer = if FFlagAXDurablesForMIS then Frame.selectedTimedOptionIndexInReducer else nil,
-					onOptionActivated = function(p1) --[[ Line: 445 ]]
+					onOptionActivated = function(p1)
 						-- upvalues: Frame (copy), SetSelectedTimedOptionPriceFunction (ref)
 						local TimedOption = Frame.timedOptions[p1]
 						

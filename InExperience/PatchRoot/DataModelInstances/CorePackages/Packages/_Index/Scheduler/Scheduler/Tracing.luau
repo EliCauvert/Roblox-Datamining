@@ -14,7 +14,7 @@ end
 TracingModule.__interactionsRef = v1
 TracingModule.__subscriberRef = v2
 
-function TracingModule.unstable_clear(Callback) --[[ Line: 92 ]]
+function TracingModule.unstable_clear(Callback)
 	-- upvalues: EnableSchedulerTracing (copy), v1 (ref), Set (copy)
 	if not EnableSchedulerTracing then
 		return Callback()
@@ -30,19 +30,19 @@ function TracingModule.unstable_clear(Callback) --[[ Line: 92 ]]
 	return Result
 end
 
-function TracingModule.unstable_getCurrent() --[[ Line: 112 ]]
+function TracingModule.unstable_getCurrent()
 	-- upvalues: EnableSchedulerTracing (copy), v1 (ref)
 	return if EnableSchedulerTracing then v1.current else nil
 end
 
-function TracingModule.unstable_getThreadID(): number --[[ Line: 120 ]]
+function TracingModule.unstable_getThreadID(): number
 	-- upvalues: Count (ref)
 	Count += 1
 	
 	return Count
 end
 
-function TracingModule.unstable_trace(Name, Timestamp, Callback, p1) --[[ Line: 125 ]]
+function TracingModule.unstable_trace(Name, Timestamp, Callback, p1)
 	-- upvalues: EnableSchedulerTracing (copy), Id (ref), v1 (ref), Set (copy), v2 (ref)
 	local v3 = if p1 == nil then 0 else p1
 	
@@ -57,24 +57,24 @@ function TracingModule.unstable_trace(Name, Timestamp, Callback, p1) --[[ Line: 
 	v1.current = NewSet
 	local Current1 = v2.current
 	local v4 = nil
-	local Success, Result = pcall(function() --[[ Line: 159 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: Current1 (copy), config (copy)
 		if Current1 ~= nil then
 			Current1.onInteractionTraced(config)
 		end
 	end)
-	local Success1, Result1 = pcall(function() --[[ Line: 166 ]]
+	local Success1, Result1 = pcall(function()
 		-- upvalues: Current1 (copy), NewSet (copy), v3 (copy)
 		if Current1 ~= nil then
 			Current1.onWorkStarted(NewSet, v3)
 		end
 	end)
-	local Success2, Result2 = pcall(function() --[[ Line: 174 ]]
+	local Success2, Result2 = pcall(function()
 		-- upvalues: v4 (ref), Callback (copy)
 		v4 = Callback()
 	end)
 	v1.current = Current
-	local Success3, Result3 = pcall(function() --[[ Line: 180 ]]
+	local Success3, Result3 = pcall(function()
 		-- upvalues: Current1 (copy), NewSet (copy), v3 (copy)
 		if Current1 ~= nil then
 			Current1.onWorkStopped(NewSet, v3)
@@ -100,7 +100,7 @@ function TracingModule.unstable_trace(Name, Timestamp, Callback, p1) --[[ Line: 
 	return v4
 end
 
-function TracingModule.unstable_wrap(Callback, p1: number) --[[ Line: 213 ]]
+function TracingModule.unstable_wrap(Callback, p1: number)
 	-- upvalues: EnableSchedulerTracing (copy), v1 (ref), v2 (ref)
 	if p1 == nil then
 		p1 = 0
@@ -119,10 +119,10 @@ function TracingModule.unstable_wrap(Callback, p1: number) --[[ Line: 213 ]]
 	end
 	local Flag = false
 	
-	local function Cancel() --[[ Line: 306 ]]
+	local function Cancel()
 		-- upvalues: Current1 (ref), v2 (upval), Current (copy), p1 (ref)
 		Current1 = v2.current
-		local Success, Result = pcall(function() --[[ Line: 309 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Current1 (upval), Current (upval), p1 (upval)
 			if Current1 ~= nil then
 				Current1.onWorkCanceled(Current, p1)
@@ -143,21 +143,21 @@ function TracingModule.unstable_wrap(Callback, p1: number) --[[ Line: 213 ]]
 	
 	local t = {}
 	setmetatable(t, {
-		__call = function(_, ...) --[[ Line: 241 ]]
+		__call = function(_, ...)
 			-- upvalues: v1 (upval), Current (copy), Current1 (ref), v2 (upval), p1 (ref), Callback (copy), Flag (ref)
 			local Current2 = v1.current
 			v1.current = Current
 			Current1 = v2.current
-			local Success, Result = pcall(function(...) --[[ Line: 248 ]]
+			local Success, Result = pcall(function(...)
 				-- upvalues: Current1 (upval), Current (upval), p1 (upval), Callback (upval), v1 (upval), Current2 (copy)
 				local v3 = nil
-				local Success, Result = pcall(function() --[[ Line: 252 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: Current1 (upval), Current (upval), p1 (upval)
 					if Current1 ~= nil then
 						Current1.onWorkStarted(Current, p1)
 					end
 				end)
-				local Success1, Result1 = pcall(function(...) --[[ Line: 259 ]]
+				local Success1, Result1 = pcall(function(...)
 					-- upvalues: v3 (ref), Callback (upval)
 					v3 = Callback(...)
 				end, ...)

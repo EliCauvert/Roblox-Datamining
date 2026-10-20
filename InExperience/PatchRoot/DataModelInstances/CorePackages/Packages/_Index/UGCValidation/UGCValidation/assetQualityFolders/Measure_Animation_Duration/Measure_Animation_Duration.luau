@@ -11,11 +11,11 @@ return {
 	categories = {
 		require(Parent.validationSystem.ValidationEnums).UploadCategory.EMOTE_ANIMATION
 	},
-	fflag = function() --[[ Line: 15 ]]
+	fflag = function()
 		-- upvalues: GetEngineFeatureEngineUGCValidateEmoteAnimationExportModule (copy), GetFFlagUGCValidateAQEmoteDurationModule (copy)
 		return GetEngineFeatureEngineUGCValidateEmoteAnimationExportModule() and GetFFlagUGCValidateAQEmoteDurationModule()
 	end,
-	run = function(p1, p2) --[[ Line: 22 ]]
+	run = function(p1, p2)
 		-- upvalues: GetAQEmotePartDataModule (copy), GetFStringUGCValidateCurveAnimationMinLengthModule (copy), GetFStringUGCValidationMaxAnimationLengthModule (copy), ErrorSourceStringsModule (copy)
 		local AQEmotePartDataModule = GetAQEmotePartDataModule(p2.aqsSummaryData and p2.aqsSummaryData.Measure_Animation_Duration)
 		

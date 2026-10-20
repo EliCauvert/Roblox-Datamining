@@ -4,7 +4,7 @@ local _ = require(script.Parent.custom_options)
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 101 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		id = if p1 == nil or p1.id == nil then nil else p1.id,
@@ -41,7 +41,7 @@ function Module.new(p1) --[[ Line: 101 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 151 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -176,7 +176,7 @@ function Module:encode() --[[ Line: 151 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 315 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -307,7 +307,7 @@ function Module.decode(Buf) --[[ Line: 315 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 508 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.id ~= nil then
@@ -406,7 +406,7 @@ function Module:jsonEncode() --[[ Line: 508 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 638 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy)
 	local NewModule = Module.new()
 	

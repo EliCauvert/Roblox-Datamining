@@ -23,12 +23,12 @@ local UseIsChatUserMessagesEnabledModule = require(AppChat.Hooks.useIsChatUserMe
 local FFlagEnableBlackbirdCheck = require(Parent.SharedFlags).FFlagEnableBlackbirdCheck
 local UseIsRobloxSubscriberFunction = UserProfilesModule.Hooks.useIsRobloxSubscriber
 
-return ReactModule.memo(function(p1) --[[ Line: 37 ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseGetOneToOneFriendIdFromConversationIdModule (copy), UseChatPagePaddingModule (copy), ReactModule (copy), UseIsChatUserMessagesEnabledModule (copy), UseIsRobloxSubscriberFunction (copy), FFlagEnableBlackbirdCheck (copy), UseUserProfilesFetchFunction (copy), UserProfilesModule (copy), UseRecordModalSequenceResponseForConversationModule (copy), UseGetConversationFromIdModule (copy), AppChatNetworkingModule (copy), UseIsGuiInChatVisibleModule (copy), UseSelectorFunction (copy), RoduxNetworkingModule (copy), APIFunction (copy), NewResult (copy), GetUsernameFromIdFunction (copy), GetCombinedNameFromIdFunction (copy), GetThumbnailsForUserIdsModule (copy), FoundationModule (copy), OsaContextCardOneToOneModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseGetOneToOneFriendIdFromConversationIdModuleResult = UseGetOneToOneFriendIdFromConversationIdModule(p1.conversationId) or ""
 	local UseChatPagePaddingModuleResult = UseChatPagePaddingModule()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 41 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseChatPagePaddingModuleResult (copy)
 		return {
 			left = UDim.new(0, UseChatPagePaddingModuleResult.left),
@@ -47,7 +47,7 @@ return ReactModule.memo(function(p1) --[[ Line: 37 ]]
 	})
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseRecordModalSequenceResponseForConversationModuleResult = UseRecordModalSequenceResponseForConversationModule(p1.conversationId)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 64 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), UseGetOneToOneFriendIdFromConversationIdModuleResult (copy)
 		if p1.openViewProfile then
 			p1.openViewProfile(UseGetOneToOneFriendIdFromConversationIdModuleResult)
@@ -58,23 +58,23 @@ return ReactModule.memo(function(p1) --[[ Line: 37 ]]
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseIsGuiInChatVisibleModuleResult = UseIsGuiInChatVisibleModule(UseRefResult, { UseRefResult.current })
 	local UseIsGuiInChatVisibleModuleResult1 = if IsOsaAcknowledgementStatusMatch then UseIsGuiInChatVisibleModuleResult else false
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 79 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: AppChatNetworkingModule (upval), p1 (copy)
 		return AppChatNetworkingModule.rodux.RecordModalSequenceResponse.getStatus(p2, p1.conversationId)
 	end)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
-	ReactModule.useEffect(function() --[[ Line: 87 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsOsaAcknowledgementStatusMatch (copy), UseIsGuiInChatVisibleModuleResult1 (copy), UseSelectorResult (copy), RoduxNetworkingModule (upval), UseStateResult (copy), UseRecordModalSequenceResponseForConversationModuleResult (copy), UseStateResult2 (copy), UseGetConversationFromIdModuleResult (copy), UseDispatchResult (copy), APIFunction (upval), p1 (copy), NewResult (upval)
 		if IsOsaAcknowledgementStatusMatch and UseIsGuiInChatVisibleModuleResult1 and UseSelectorResult ~= RoduxNetworkingModule.Enum.NetworkStatus.Fetching and not UseStateResult and UseRecordModalSequenceResponseForConversationModuleResult then
-			UseRecordModalSequenceResponseForConversationModuleResult("record_has_seen", "conversation_inline_top_modal", nil, "OsaContextCard"):andThen(function() --[[ Line: 96 ]]
+			UseRecordModalSequenceResponseForConversationModuleResult("record_has_seen", "conversation_inline_top_modal", nil, "OsaContextCard"):andThen(function()
 				-- upvalues: UseStateResult2 (upval), UseGetConversationFromIdModuleResult (upval), UseDispatchResult (upval), APIFunction (upval), p1 (upval)
 				UseStateResult2(true)
 				
 				if UseGetConversationFromIdModuleResult and UseGetConversationFromIdModuleResult.source ~= "friends" then
 					UseDispatchResult(APIFunction(p1.conversationId))
 				end
-			end):catch(function(Err) --[[ Line: 104 ]]
+			end):catch(function(Err)
 				-- upvalues: NewResult (upval)
 				NewResult:error("Error in OsaContextCardOneToOneContainer -> recordModalSequenceResponseForConversation -> record_has_seen: " .. tostring(Err))
 			end)
@@ -84,7 +84,7 @@ return ReactModule.memo(function(p1) --[[ Line: 37 ]]
 		UseSelectorResult, UseRecordModalSequenceResponseForConversationModuleResult,
 		UseStateResult, UseDispatchResult, p1.conversationId
 	})
-	ReactModule.useEffect(function() --[[ Line: 123 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseUserProfilesFetchResult (copy), UseGetOneToOneFriendIdFromConversationIdModuleResult (copy), GetUsernameFromIdFunction (upval), UseStateResult2_1 (copy), UseStateResult2_2 (copy), GetCombinedNameFromIdFunction (upval)
 		if UseUserProfilesFetchResult.data and UseGetOneToOneFriendIdFromConversationIdModuleResult then
 			local UsernameFromId = GetUsernameFromIdFunction(UseUserProfilesFetchResult.data, UseGetOneToOneFriendIdFromConversationIdModuleResult)
@@ -103,7 +103,7 @@ return ReactModule.memo(function(p1) --[[ Line: 37 ]]
 		OsaContextCardOneToOne = ReactModule.createElement(OsaContextCardOneToOneModule, {
 			displayName = UseStateResult3,
 			username = UseStateResult1,
-			avatarThumbnail = ReactModule.useMemo(function() --[[ Line: 131 ]]
+			avatarThumbnail = ReactModule.useMemo(function()
 				-- upvalues: GetThumbnailsForUserIdsModule (upval), UseGetOneToOneFriendIdFromConversationIdModuleResult (copy)
 				return GetThumbnailsForUserIdsModule({ UseGetOneToOneFriendIdFromConversationIdModuleResult })[1]
 			end, { UseGetOneToOneFriendIdFromConversationIdModuleResult }),

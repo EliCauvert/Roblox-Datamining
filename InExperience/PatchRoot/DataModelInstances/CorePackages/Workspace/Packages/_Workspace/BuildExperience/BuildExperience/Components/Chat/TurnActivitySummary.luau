@@ -20,13 +20,13 @@ local IconSize = FoundationModule.Enums.IconSize
 local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 local t = {}
 
-local function constantSource(): number --[[ Line: 54 ]]
+local function constantSource(): number
 	return 0
 end
 
-local function useReactiveValue(Callback) --[[ Line: 58 ]]
+local function useReactiveValue(Callback)
 	-- upvalues: ReactModule (copy), constantSource (copy), SignalsReactModule (copy)
-	return (SignalsReactModule.useSignalState((ReactModule.useCallback(function(Callback1: (any) -> ()) --[[ Line: 59 ]]
+	return (SignalsReactModule.useSignalState((ReactModule.useCallback(function(Callback1: (any) -> ())
 		-- upvalues: Callback (copy), constantSource (upval)
 		if typeof(Callback) == "function" then
 			return (Callback(Callback1))
@@ -38,7 +38,7 @@ local function useReactiveValue(Callback) --[[ Line: 58 ]]
 	end, { Callback }))))
 end
 
-local function createThinkingGradient(p1, Enabled) --[[ Line: 72 ]]
+local function createThinkingGradient(p1, Enabled)
 	-- upvalues: ReactModule (copy), ChatConstantsModule (copy)
 	return ReactModule.createElement("UIGradient", {
 		Enabled = Enabled,
@@ -47,14 +47,14 @@ local function createThinkingGradient(p1, Enabled) --[[ Line: 72 ]]
 			NumberSequenceKeypoint.new(0.5, 0),
 			NumberSequenceKeypoint.new(1, 0.55)
 		}),
-		Offset = p1:map(function(p2): Vector2 --[[ Line: 80 ]]
+		Offset = p1:map(function(p2): Vector2
 			-- upvalues: ChatConstantsModule (upval)
 			return Vector2.new(p2 * ChatConstantsModule.THINKING_GRADIENT_ANIMATION_SPEED % ChatConstantsModule.THINKING_GRADIENT_OFFSET - ChatConstantsModule.THINKING_GRADIENT_OFFSET / 2, 0)
 		end)
 	})
 end
 
-local function createActivityText(Text1, LayoutOrder) --[[ Line: 90 ]]
+local function createActivityText(Text1, LayoutOrder)
 	-- upvalues: ReactModule (copy), Text (copy)
 	return ReactModule.createElement(Text, {
 		tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-muted",
@@ -63,7 +63,7 @@ local function createActivityText(Text1, LayoutOrder) --[[ Line: 90 ]]
 	})
 end
 
-local function createActivitySummaryActionText(Text1, LayoutOrder, ClockBinding, Enabled) --[[ Line: 98 ]]
+local function createActivitySummaryActionText(Text1, LayoutOrder, ClockBinding, Enabled)
 	-- upvalues: ReactModule (copy), Text (copy), createThinkingGradient (copy)
 	return ReactModule.createElement(Text, {
 		tag = "size-full-0 auto-y text-body-medium text-no-wrap text-align-x-left text-truncate-end content-muted",
@@ -75,9 +75,9 @@ local function createActivitySummaryActionText(Text1, LayoutOrder, ClockBinding,
 	})
 end
 
-local function _(p1, p2, p3, p4, p5, p6, p7, p8, p9) --[[ Line: 114 | Named "getActivitySummaryActionText" ]]
+local function _(p1, p2, p3, p4, p5, p6, p7, p8, p9)
 	-- upvalues: FFlagBuildExperiencePromptStallMessageModule (copy), ChatConstantsModule (copy), LocalizationStringsModule (copy)
-	return if p2 then p5:map(function(StartedAt) --[[ Line: 129 ]]
+	return if p2 then p5:map(function(StartedAt)
 		-- upvalues: p6 (copy), p3 (copy), FFlagBuildExperiencePromptStallMessageModule (upval), p8 (copy), p9 (copy), ChatConstantsModule (upval), p7 (copy), LocalizationStringsModule (upval), p4 (copy)
 		if not p6.isThinking then
 			return p3
@@ -102,7 +102,7 @@ local function _(p1, p2, p3, p4, p5, p6, p7, p8, p9) --[[ Line: 114 | Named "get
 	end) else p1
 end
 
-local function localizeActivityLabel(CHATTOOL, SummaryToolActivity, p1, Tool, UseContextResult) --[[ Line: 157 ]]
+local function localizeActivityLabel(CHATTOOL, SummaryToolActivity, p1, Tool, UseContextResult)
 	-- upvalues: LocalizationStringsModule (copy)
 	local v1 = p1[CHATTOOL]
 	
@@ -124,7 +124,7 @@ local function localizeActivityLabel(CHATTOOL, SummaryToolActivity, p1, Tool, Us
 	end
 end
 
-return function(Frame) --[[ Line: 196 | Named "TurnActivitySummary" ]]
+return function(Frame)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperiencePromptStallMessageModule (copy), ReactModule (copy), LocalizationRoactContext (copy), useReactiveValue (copy), t (copy), localizeActivityLabel (copy), createActivityText (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FoundationModule (copy), ChatConstantsModule (copy), View (copy), createActivitySummaryActionText (copy), Text (copy), StateLayerAffordance (copy), Icon (copy), IconName (copy), IconSize (copy), ScrollView (copy)
 	local Segment = Frame.segment
 	local ActionCount: number = Segment.actionCount
@@ -156,7 +156,7 @@ return function(Frame) --[[ Line: 196 | Named "TurnActivitySummary" ]]
 	}
 	local LocalizeActivityLabelResult = if ActionCount == nil or ActionCount <= 1 or Segment.summaryToolActivity ~= nil then localizeActivityLabel(UseReactiveValueResult, Segment.summaryToolActivity, config, UseLocalizationResult.tool, UseContextResult) else UseLocalizationResult.taskCount
 	
-	local function v45(p1, LayoutOrder) --[[ Line: 245 ]]
+	local function v45(p1, LayoutOrder)
 		-- upvalues: localizeActivityLabel (upval), LocalizationStringsModule (upval), config (copy), UseLocalizationResult (copy), UseContextResult (copy), createActivityText (upval)
 		return if p1.kind == "tool_call" then createActivityText(localizeActivityLabel(LocalizationStringsModule.CHAT_TOOL, p1, config, UseLocalizationResult.tool, UseContextResult), LayoutOrder) else nil
 	end
@@ -199,19 +199,19 @@ return function(Frame) --[[ Line: 196 | Named "TurnActivitySummary" ]]
 		end
 		v1 = Current1
 	end
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 304 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FFlagBuildExperienceChatAccordionScrollAnchorModule (upval), Callback (ref), UseRefResult1 (ref), UseStateResult2 (copy)
 		if FFlagBuildExperienceChatAccordionScrollAnchorModule and Callback ~= nil and UseRefResult1 ~= nil then
 			Callback(UseRefResult1.current)
 		end
-		UseStateResult2(function(p1): boolean --[[ Line: 308 ]]
+		UseStateResult2(function(p1): boolean
 			return not p1
 		end)
 	end, { Callback })
-	local UseResult1 = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 313 ]]
+	local UseResult1 = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: UseRefResult (copy)
 		if ScrollFrame ~= nil then
-			task.defer(function() --[[ Line: 318 ]]
+			task.defer(function()
 				-- upvalues: UseRefResult (upval), ScrollFrame (copy)
 				if UseRefResult.current == ScrollFrame then
 					ScrollFrame.CanvasPosition = Vector2.new(0, (math.max(0, ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y)))
@@ -223,7 +223,7 @@ return function(Frame) --[[ Line: 196 | Named "TurnActivitySummary" ]]
 			return
 		end
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function(Current) --[[ Line: 329 ]]
+	local UseResult2 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), UseResult1 (copy)
 		UseRefResult.current = Current
 		
@@ -231,20 +231,20 @@ return function(Frame) --[[ Line: 196 | Named "TurnActivitySummary" ]]
 			UseResult1(Current)
 		end
 	end, { UseResult1 })
-	local UseResult3 = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 336 ]]
+	local UseResult3 = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: UseBindingResult2 (copy), UseResult1 (copy)
 		UseBindingResult2(ScrollFrame.AbsoluteCanvasSize.Y)
 		UseResult1(ScrollFrame)
 	end, { UseBindingResult2, UseResult1 })
-	local UseResult4 = ReactModule.useCallback(function(p1) --[[ Line: 341 ]]
+	local UseResult4 = ReactModule.useCallback(function(p1)
 		-- upvalues: UseResult1 (copy)
 		UseResult1(p1)
 	end, { UseResult1 })
-	ReactModule.useEffect(function() --[[ Line: 345 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult1 (copy), UseRefResult (copy)
 		UseResult1(UseRefResult.current)
 		
-		return function() --[[ Line: 347 ]] end
+		return function() end
 	end, { UseResult1, UseReactiveValueResult1 })
 	local t1 = {}
 	local Count = 0
@@ -264,7 +264,7 @@ return function(Frame) --[[ Line: 196 | Named "TurnActivitySummary" ]]
 	if UseReactiveValueResult2 then
 		local CreateElementFunction = ReactModule.createElement
 		local config1 = {
-			CurrentAction = createActivitySummaryActionText(if IsUseReactiveValueResultMatch then ClockBinding:map(function(StartedAt) --[[ Line: 129 ]]
+			CurrentAction = createActivitySummaryActionText(if IsUseReactiveValueResultMatch then ClockBinding:map(function(StartedAt)
 				-- upvalues: Current (copy), AssistantLoading (copy), FFlagBuildExperiencePromptStallMessageModule (upval), v72 (copy), AssistantTakingLonger (copy), ChatConstantsModule (upval), UseContextResult (copy), LocalizationStringsModule (upval), AssistantStillWorking (copy)
 				if not Current.isThinking then
 					return AssistantLoading
@@ -326,7 +326,7 @@ return function(Frame) --[[ Line: 196 | Named "TurnActivitySummary" ]]
 			LayoutOrder = 2,
 			tag = "size-full-0 clip",
 			testId = "TurnActivitySummary.ActivityHistory",
-			Size = UseBindingResult:map(function(Value: number): UDim2 --[[ Line: 421 ]]
+			Size = UseBindingResult:map(function(Value: number): UDim2
 				return UDim2.new(1, 0, 0, (math.clamp(Value, 24, 220)))
 			end),
 			scrollingFrameRef = UseResult2,

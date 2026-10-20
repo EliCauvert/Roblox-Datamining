@@ -18,7 +18,7 @@ local WrapResult = require(CorePackages.Workspace.Packages.ArgCheck).wrap(TModul
 	layoutOrder = TModule.number
 }))
 
-return function(p1) --[[ Line: 48 | Named "DropdownMenu" ]]
+return function(p1)
 	-- upvalues: WrapResult (copy), UseStyleFunction (copy), ReactModule (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ImageSetLabel (copy), IconsActionsTruncationExpandSmall (copy), BaseMenu (copy)
 	assert(WrapResult(p1))
 	local UseStyleResult = UseStyleFunction()
@@ -27,11 +27,11 @@ return function(p1) --[[ Line: 48 | Named "DropdownMenu" ]]
 	local ControlInputBackground = if UseStyleResult.UIBloxThemeEnabled then UseStyleResult.color("ControlInputBackground") else Color3.fromRGB(79, 84, 95)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState({})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 61 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
 		UseStateResult2(not UseStateResult)
 	end)
-	ReactModule.useEffect(function() --[[ Line: 65 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), CaptionHeader (copy), UseStateResult2 (copy), UseStateResult2_1 (copy)
 		local t = {}
 		
@@ -44,7 +44,7 @@ return function(p1) --[[ Line: 48 | Named "DropdownMenu" ]]
 					Font = CaptionHeader.Font,
 					RelativeSize = CaptionHeader.RelativeSize
 				},
-				onActivated = function() --[[ Line: 74 ]]
+				onActivated = function()
 					-- upvalues: p1 (upval), i (copy), UseStateResult2 (upval)
 					p1.onSelection(i)
 					UseStateResult2(false)

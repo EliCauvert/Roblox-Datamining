@@ -24,7 +24,7 @@ local list = {
 	"guilded"
 }
 
-return function(p1) --[[ Line: 44 | Named "SocialLinks" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), list (copy), ReactModule (copy), Button (copy), config (copy), InputSize (copy), ButtonVariant (copy), View (copy), Text (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		socialLinks = TextKeysModule.SocialLinks,
@@ -45,7 +45,7 @@ return function(p1) --[[ Line: 44 | Named "SocialLinks" ]]
 					icon = config[value],
 					size = InputSize.Small,
 					variant = ButtonVariant.Utility,
-					onActivated = function() --[[ Line: 60 ]] end
+					onActivated = function() end
 				})
 			end
 		end

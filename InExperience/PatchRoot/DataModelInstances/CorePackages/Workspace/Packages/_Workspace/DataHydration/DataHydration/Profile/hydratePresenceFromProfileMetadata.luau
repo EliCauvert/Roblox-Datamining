@@ -2,7 +2,7 @@
 local PresenceStoreModule = require(DataHydration.Presence.PresenceStore)
 local NormalizePresenceRawDataModule = require(DataHydration.Presence.normalizePresenceRawData)
 
-return function(p1, p2) --[[ Line: 19 | Named "hydratePresenceFromProfileMetadata" ]]
+return function(p1, p2)
 	-- upvalues: NormalizePresenceRawDataModule (copy), PresenceStoreModule (copy)
 	local Presence = p2 and p2.presence
 	

@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local View = require(Parent.Foundation).View
 local InstantStatCardModule = require(script.Parent.InstantStatCard)
 
-return function(p1) --[[ Line: 17 | Named "InstantStatsRow" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), InstantStatCardModule (copy)
 	local Elements = {}
 	

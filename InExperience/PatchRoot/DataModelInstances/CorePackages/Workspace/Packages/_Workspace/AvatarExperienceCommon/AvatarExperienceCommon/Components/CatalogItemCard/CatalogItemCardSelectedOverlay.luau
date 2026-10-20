@@ -19,7 +19,7 @@ local FFlagAXFixBadgeStatusConfigOptions = AvatarExperienceFlagsModule.FFlagAXFi
 local FFlagAXShowFaeUpsell = AvatarExperienceFlagsModule.FFlagAXShowFaeUpsell
 local FFlagAXMarketplaceItemCardIndicatorStack = AvatarExperienceFlagsModule.FFlagAXMarketplaceItemCardIndicatorStack
 
-local function v17(Badge) --[[ Line: 44 ]]
+local function v17(Badge)
 	local List = { { type = "icon", icon = Badge.icon } }
 	
 	if Badge.text then
@@ -28,7 +28,7 @@ local function v17(Badge) --[[ Line: 44 ]]
 	return List
 end
 
-return function(p1) --[[ Line: 56 | Named "CatalogItemCardSelectedOverlay" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), FFlagAXMarketplaceItemCardIndicatorStack (copy), UseSelectedOverlayButtonModule (copy), UseLastInputFunction (copy), UseIsSpatialFunction (copy), ResponsiveModule (copy), ReactModule (copy), View (copy), ItemCardBadge (copy), FFlagAXFixBadgeStatusConfigOptions (copy), FFlagAXShowFaeUpsell (copy), v17 (copy), FFlagAXInventoryDurablesSupport (copy), ItemCardIcon (copy), Button (copy), ButtonType (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsVisible = nil

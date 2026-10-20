@@ -11,7 +11,7 @@ local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SduiActionType = SduiCoreSystemModule.SduiActionType
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 
-return function(p1, _, p2, _) --[[ Line: 24 ]]
+return function(p1, _, p2, _)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), UpdateUserSettingsFunction (copy), FFlagEnableAdConsentUserSettingsPublish (copy), FFlagAdConsentForwardCachedRegion (copy), ReadCachedAdConsentRegionFunction (copy), AdConsentAttributionAdapter (copy), LinkingProtocol (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	
@@ -44,24 +44,24 @@ return function(p1, _, p2, _) --[[ Line: 24 ]]
 		
 		return
 	end
-	local Success, Result = pcall(function() --[[ Line: 58 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: UpdateUserSettingsFunction (upval), Settings (copy), AuditData (copy), FFlagEnableAdConsentUserSettingsPublish (upval), FFlagAdConsentForwardCachedRegion (upval), ReadCachedAdConsentRegionFunction (upval), AdConsentAttributionAdapter (upval), LinkingProtocol (upval), p2 (copy), SduiErrorType (upval), SduiActionType (upval)
 		local UpdateUserSettingsResult = UpdateUserSettingsFunction(Settings, AuditData)
 		
 		if FFlagEnableAdConsentUserSettingsPublish then
-			UpdateUserSettingsResult = UpdateUserSettingsResult:andThen(function() --[[ Line: 64 ]]
+			UpdateUserSettingsResult = UpdateUserSettingsResult:andThen(function()
 				-- upvalues: Settings (upval), FFlagAdConsentForwardCachedRegion (upval), ReadCachedAdConsentRegionFunction (upval), AdConsentAttributionAdapter (upval), LinkingProtocol (upval)
 				local AllowSellShareData = Settings.allowSellShareData
 				
 				if AllowSellShareData ~= nil then
-					AdConsentAttributionAdapter.resolveAndPublish(LinkingProtocol.default, "ConsentChanged", function() --[[ Line: 68 ]]
+					AdConsentAttributionAdapter.resolveAndPublish(LinkingProtocol.default, "ConsentChanged", function()
 						-- upvalues: AllowSellShareData (copy)
 						return AllowSellShareData
 					end, if FFlagAdConsentForwardCachedRegion then ReadCachedAdConsentRegionFunction() else nil)
 				end
 			end)
 		end
-		UpdateUserSettingsResult:catch(function(Err) --[[ Line: 74 ]]
+		UpdateUserSettingsResult:catch(function(Err)
 			-- upvalues: p2 (upval), SduiErrorType (upval), SduiActionType (upval)
 			p2.dependencies.logger.reportError(SduiErrorType.FailedToExecuteAction, {
 				name = SduiActionType.UpdateUserSettings,

@@ -1,7 +1,7 @@
 ﻿local ReactGlobalsModule = require(script.Parent.Parent.Parent.ReactGlobals)
 local ExtraStackFrame = nil
 local ReactDebugCurrentFrameModule = {
-	setExtraStackFrame = function(Value) --[[ Line: 19 ]]
+	setExtraStackFrame = function(Value)
 		-- upvalues: ReactGlobalsModule (copy), ExtraStackFrame (ref)
 		if ReactGlobalsModule.__DEV__ then
 			ExtraStackFrame = Value
@@ -12,7 +12,7 @@ local ReactDebugCurrentFrameModule = {
 if ReactGlobalsModule.__DEV__ then
 	ReactDebugCurrentFrameModule.getCurrentStack = nil
 	
-	function ReactDebugCurrentFrameModule.getStackAddendum(): string --[[ Line: 36 ]]
+	function ReactDebugCurrentFrameModule.getStackAddendum(): string
 		-- upvalues: ExtraStackFrame (ref), ReactDebugCurrentFrameModule (copy)
 		local Text = ""
 		

@@ -10,12 +10,12 @@ local _ = require(MomentsCommon.Media.mediaNodeRegistry)
 local FFlagMomentsOverlayContainerScaleFallbackModule = require(MomentsCommon.Flags.FFlagMomentsOverlayContainerScaleFallback)
 local Signal = SignalsModule.createSignal(Enum.ScaleType.Crop)
 
-local function TextOverlayLayer(p1) --[[ Line: 78 ]]
+local function TextOverlayLayer(p1)
 	-- upvalues: ReactModule (copy), SignalsModule (copy), UseSignalStateFunction (copy), Signal (copy), FFlagMomentsOverlayContainerScaleFallbackModule (copy), TextOverlayDisplayModule (copy)
 	local GetResolutionFunction = p1.getResolution
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 90 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), GetResolutionFunction (copy)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 91 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: GetResolutionFunction (upval)
 			return GetResolutionFunction(p2)
 		end)
@@ -35,7 +35,7 @@ end
 
 return {
 	kind = "text",
-	create = function(p1, _) --[[ Line: 120 ]]
+	create = function(p1, _)
 		-- upvalues: ReactModule (copy), TextOverlayLayer (copy)
 		local Overlay = p1.overlay
 		assert(Overlay ~= nil, "createTextOverlayNode: spec.overlay (a TextOverlayEdit) is required")
@@ -44,12 +44,12 @@ return {
 			kind = "text",
 			usesDecoder = false,
 			id = p1.id,
-			assets = function() --[[ Line: 128 ]]
+			assets = function()
 				return {}
 			end,
-			download = function() --[[ Line: 145 ]] end,
+			download = function() end,
 			zIndex = p1.zIndex or Overlay.zIndex,
-			render = function(p2) --[[ Line: 132 ]]
+			render = function(p2)
 				-- upvalues: ReactModule (upval), TextOverlayLayer (upval), Overlay (copy)
 				return ReactModule.createElement(TextOverlayLayer, {
 					overlay = Overlay,
@@ -58,7 +58,7 @@ return {
 					getScaleType = p2.getScaleType
 				})
 			end,
-			dispose = function() --[[ Line: 149 ]] end
+			dispose = function() end
 		}
 	end
 }

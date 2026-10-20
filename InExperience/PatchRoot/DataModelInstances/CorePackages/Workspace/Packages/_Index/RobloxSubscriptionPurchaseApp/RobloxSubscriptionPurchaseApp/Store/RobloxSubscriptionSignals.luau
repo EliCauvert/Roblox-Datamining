@@ -4,17 +4,17 @@ local AXSubscriptionSignalsPlayersServiceOverride = game:DefineFastFlag("AXSubsc
 local v1 = nil
 local PlayersServiceForTesting = nil
 
-local function _() --[[ Line: 28 | Named "getPlayersService" ]]
+local function _()
 	-- upvalues: AXSubscriptionSignalsPlayersServiceOverride (copy), PlayersServiceForTesting (ref), Players (copy)
 	return if AXSubscriptionSignalsPlayersServiceOverride and PlayersServiceForTesting ~= nil then PlayersServiceForTesting else Players
 end
 
-local function v6() --[[ Line: 35 ]]
+local function v6()
 	-- upvalues: AXSubscriptionSignalsPlayersServiceOverride (copy), PlayersServiceForTesting (ref), Players (copy), SignalsModule (copy)
 	local LocalPlayer = (if AXSubscriptionSignalsPlayersServiceOverride and PlayersServiceForTesting ~= nil then PlayersServiceForTesting else Players).LocalPlayer
 	local Signal, Signal2 = SignalsModule.createSignal(LocalPlayer.HasRobloxSubscription == true)
 	local Signal1, Signal2_1 = SignalsModule.createSignal(false)
-	local Connection = LocalPlayer:GetPropertyChangedSignal("HasRobloxSubscription"):Connect(function() --[[ Line: 43 ]]
+	local Connection = LocalPlayer:GetPropertyChangedSignal("HasRobloxSubscription"):Connect(function()
 		-- upvalues: LocalPlayer (copy), Signal (copy), Signal2 (copy), Signal2_1 (copy)
 		local IsHasRobloxSubscription = LocalPlayer.HasRobloxSubscription == true
 		local SignalResult = Signal()
@@ -30,7 +30,7 @@ local function v6() --[[ Line: 35 ]]
 		getGainedRobloxSubscriptionThisSession = Signal1,
 		setHasRobloxSubscriptionForTesting = Signal2,
 		setGainedRobloxSubscriptionThisSessionForTesting = Signal2_1,
-		cleanup = function() --[[ Line: 61 ]]
+		cleanup = function()
 			-- upvalues: Connection (copy)
 			if Connection then
 				Connection:Disconnect()
@@ -40,20 +40,20 @@ local function v6() --[[ Line: 35 ]]
 end
 
 return {
-	get = function() --[[ Line: 71 ]]
+	get = function()
 		-- upvalues: v1 (ref), SignalsModule (copy), v6 (copy)
 		if v1 == nil then
 			v1 = SignalsModule.createComputed(v6)(false)
 		end
 		return v1
 	end,
-	setPlayersServiceForTesting = function(Value) --[[ Line: 78 ]]
+	setPlayersServiceForTesting = function(Value)
 		-- upvalues: AXSubscriptionSignalsPlayersServiceOverride (copy), PlayersServiceForTesting (ref)
 		if AXSubscriptionSignalsPlayersServiceOverride then
 			PlayersServiceForTesting = Value
 		end
 	end,
-	cleanup = function() --[[ Line: 84 ]]
+	cleanup = function()
 		-- upvalues: v1 (ref), PlayersServiceForTesting (ref)
 		v1 = nil
 		PlayersServiceForTesting = nil

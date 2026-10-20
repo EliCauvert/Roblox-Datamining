@@ -8,7 +8,7 @@ local Dialog = FoundationModule.Dialog
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local DialogSize = FoundationModule.Enums.DialogSize
 
-return function(p1) --[[ Line: 25 | Named "PlaytestersOnlyShareDialog" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ButtonVariant (copy), ReactModule (copy), Dialog (copy), DialogSize (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		cancel = LocalizationStringsModule.SHARE_AUDIENCE_CANCEL,

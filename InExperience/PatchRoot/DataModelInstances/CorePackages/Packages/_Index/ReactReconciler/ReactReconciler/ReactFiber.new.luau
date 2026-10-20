@@ -79,7 +79,7 @@ local Callback3 = nil
 local Callback4 = nil
 local _debugID = 1
 
-local function createFiber(Tag, PendingProps, Key, Mode, ElementType, ElementType1, StateNode, p1) --[[ Line: 167 ]]
+local function createFiber(Tag, PendingProps, Key, Mode, ElementType, ElementType1, StateNode, p1)
 	-- upvalues: NoFlags (copy), NoLanes (copy), EnableProfilerTimer (copy), DEV (copy), _debugID (ref)
 	local config = {
 		index = 1,
@@ -113,11 +113,11 @@ local function createFiber(Tag, PendingProps, Key, Mode, ElementType, ElementTyp
 	return config
 end
 
-function _shouldConstruct(Callback): boolean --[[ Line: 267 ]]
+function _shouldConstruct(Callback): boolean
 	return type(Callback) ~= "function" and not not Callback.isReactComponent
 end
 
-local function createFiberFromTypeAndProps(ElementType, Key, PendingProps, _debugOwner, Value: number, p1) --[[ Line: 552 ]]
+local function createFiberFromTypeAndProps(ElementType, Key, PendingProps, _debugOwner, Value: number, p1)
 	-- upvalues: IndeterminateComponent (copy), DEV (copy), ResolveFunctionForHotReloadingFunction (copy), ClassComponent (copy), ResolveClassForHotReloadingFunction (copy), HostComponent (copy), REACTFRAGMENTTYPE (copy), Callback2 (ref), REACTDEBUGTRACINGMODETYPE (copy), Mode (copy), DebugTracingMode (copy), REACTSTRICTMODETYPE (copy), StrictMode (copy), REACTPROFILERTYPE (copy), Callback (ref), REACTSUSPENSETYPE (copy), Callback1 (ref), REACTOFFSCREENTYPE (copy), Callback3 (ref), REACTLEGACYHIDDENTYPE (copy), Callback4 (ref), REACTPROVIDERTYPE (copy), ContextProvider (copy), REACTCONTEXTTYPE (copy), ContextConsumer (copy), REACTFORWARDREFTYPE (copy), ForwardRef (copy), ResolveForwardRefForHotReloadingFunction (copy), REACTMEMOTYPE (copy), MemoComponent (copy), REACTLAZYTYPE (copy), LazyComponent (copy), Object (copy), InspectFunction (copy), GetComponentNameFunction (copy), Array (copy), REACTELEMENTTYPE (copy), InvariantFunction (copy), createFiber (copy)
 	local Tag = IndeterminateComponent
 	local ElementType1 = ElementType
@@ -228,17 +228,17 @@ local function createFiberFromTypeAndProps(ElementType, Key, PendingProps, _debu
 	return Fiber
 end
 
-Callback2 = function(Children, Mode, p1, Key) --[[ Line: 734 | Named "createFiberFromFragment" ]]
+Callback2 = function(Children, Mode, p1, Key)
 	-- upvalues: createFiber (copy), Fragment (copy)
 	return (createFiber(Fragment, Children, Key, Mode, nil, nil, nil, p1))
 end
 
-local function _(ElementType, PendingProps, Mode, p1, Key) --[[ Line: 772 | Named "createFiberFromScope" ]]
+local function _(ElementType, PendingProps, Mode, p1, Key)
 	-- upvalues: createFiber (copy), ScopeComponent (copy)
 	return (createFiber(ScopeComponent, PendingProps, Key, Mode, ElementType, ElementType, nil, p1))
 end
 
-Callback = function(PendingProps, Value: number, p1, Key) --[[ Line: 789 | Named "createFiberFromProfiler" ]]
+Callback = function(PendingProps, Value: number, p1, Key)
 	-- upvalues: DEV (copy), Console (copy), createFiber (copy), Profiler (copy), ProfileMode (copy), REACTPROFILERTYPE (copy), EnableProfilerTimer (copy)
 	if DEV and typeof(PendingProps.id) ~= "string" then
 		Console.error("Profiler must specify an \"id\" as a prop")
@@ -246,26 +246,26 @@ Callback = function(PendingProps, Value: number, p1, Key) --[[ Line: 789 | Named
 	return (createFiber(Profiler, PendingProps, Key, bit32.bor(Value, ProfileMode), REACTPROFILERTYPE, REACTPROFILERTYPE, if EnableProfilerTimer then { effectDuration = 0, passiveEffectDuration = 0 } else nil, p1))
 end
 
-Callback1 = function(PendingProps, Mode, p1, Key) --[[ Line: 833 | Named "createFiberFromSuspense" ]]
+Callback1 = function(PendingProps, Mode, p1, Key)
 	-- upvalues: createFiber (copy), SuspenseComponent (copy), REACTSUSPENSETYPE (copy)
 	return (createFiber(SuspenseComponent, PendingProps, Key, Mode, REACTSUSPENSETYPE, REACTSUSPENSETYPE, nil, p1))
 end
 
-Callback3 = function(PendingProps, Mode, p1, Key) --[[ Line: 891 | Named "createFiberFromOffscreen" ]]
+Callback3 = function(PendingProps, Mode, p1, Key)
 	-- upvalues: createFiber (copy), OffscreenComponent (copy), REACTOFFSCREENTYPE (copy), DEV (copy)
 	return (createFiber(OffscreenComponent, PendingProps, Key, Mode, REACTOFFSCREENTYPE, if DEV then REACTOFFSCREENTYPE else nil, nil, p1))
 end
 
-Callback4 = function(PendingProps, Mode, p1, Key) --[[ Line: 920 | Named "createFiberFromLegacyHidden" ]]
+Callback4 = function(PendingProps, Mode, p1, Key)
 	-- upvalues: createFiber (copy), LegacyHiddenComponent (copy), REACTLEGACYHIDDENTYPE (copy), DEV (copy)
 	return (createFiber(LegacyHiddenComponent, PendingProps, Key, Mode, REACTLEGACYHIDDENTYPE, if DEV then REACTLEGACYHIDDENTYPE else nil, nil, p1))
 end
 
 return {
-	isSimpleFunctionComponent = function(Callback): boolean --[[ Line: 274 ]]
+	isSimpleFunctionComponent = function(Callback): boolean
 		return type(Callback) == "function"
 	end,
-	resolveLazyComponentTag = function(p1) --[[ Line: 282 ]]
+	resolveLazyComponentTag = function(p1)
 		-- upvalues: FunctionComponent (copy), ClassComponent (copy), REACTFORWARDREFTYPE (copy), ForwardRef (copy), REACTMEMOTYPE (copy), MemoComponent (copy), IndeterminateComponent (copy)
 		local ValueType = typeof(p1)
 		
@@ -286,7 +286,7 @@ return {
 		end
 		return IndeterminateComponent
 	end,
-	createWorkInProgress = function(Alternate, PendingProps) --[[ Line: 305 ]]
+	createWorkInProgress = function(Alternate, PendingProps)
 		-- upvalues: createFiber (copy), DEV (copy), ReactFeatureFlags (copy), NoFlags (copy), EnableProfilerTimer (copy), StaticMask (copy), IndeterminateComponent (copy), FunctionComponent (copy), SimpleMemoComponent (copy), ResolveFunctionForHotReloadingFunction (copy), ClassComponent (copy), ResolveClassForHotReloadingFunction (copy), ForwardRef (copy), ResolveForwardRefForHotReloadingFunction (copy)
 		local Alternate1 = Alternate.alternate
 		
@@ -399,7 +399,7 @@ return {
 		end
 		return Alternate1
 	end,
-	resetWorkInProgress = function(p1, Lanes) --[[ Line: 456 ]]
+	resetWorkInProgress = function(p1, Lanes)
 		-- upvalues: StaticMask (copy), Placement (copy), NoLanes (copy), NoFlags (copy), EnableProfilerTimer (copy)
 		p1.flags = bit32.band(p1.flags, (bit32.bor(StaticMask, Placement)))
 		local Alternate = p1.alternate
@@ -448,7 +448,7 @@ return {
 		end
 		return p1
 	end,
-	createHostRootFiber = function(BlockingRoot1) --[[ Line: 531 ]]
+	createHostRootFiber = function(BlockingRoot1)
 		-- upvalues: ConcurrentRoot (copy), ConcurrentMode (copy), BlockingMode (copy), StrictMode (copy), BlockingRoot (copy), NoMode (copy), EnableProfilerTimer (copy), IsDevToolsPresentFunction (copy), ProfileMode (copy), createFiber (copy), HostRoot (copy)
 		local Bits = if BlockingRoot1 == ConcurrentRoot then bit32.bor(ConcurrentMode, BlockingMode, StrictMode) elseif BlockingRoot1 == BlockingRoot then bit32.bor(BlockingMode, StrictMode) else NoMode
 		
@@ -458,7 +458,7 @@ return {
 		return (createFiber(HostRoot, nil, nil, Bits))
 	end,
 	createFiberFromTypeAndProps = createFiberFromTypeAndProps,
-	createFiberFromElement = function(p1, p2, p3) --[[ Line: 706 ]]
+	createFiberFromElement = function(p1, p2, p3)
 		-- upvalues: DEV (copy), createFiberFromTypeAndProps (copy)
 		local FiberFromTypeAndProps = createFiberFromTypeAndProps(p1.type, p1.key, p1.props, if DEV then p1._owner else nil, p2, p3)
 		
@@ -469,30 +469,30 @@ return {
 		return FiberFromTypeAndProps
 	end,
 	createFiberFromFragment = Callback2,
-	createFiberFromFundamental = function(ElementType, PendingProps, Mode, p1, Key) --[[ Line: 747 ]]
+	createFiberFromFundamental = function(ElementType, PendingProps, Mode, p1, Key)
 		-- upvalues: createFiber (copy), FundamentalComponent (copy)
 		return (createFiber(FundamentalComponent, PendingProps, Key, Mode, ElementType, ElementType, nil, p1))
 	end,
 	createFiberFromSuspense = Callback1,
-	createFiberFromSuspenseList = function(PendingProps, Mode, p1, Key) --[[ Line: 862 ]]
+	createFiberFromSuspenseList = function(PendingProps, Mode, p1, Key)
 		-- upvalues: createFiber (copy), SuspenseListComponent (copy), REACTSUSPENSELISTTYPE (copy), DEV (copy)
 		return (createFiber(SuspenseListComponent, PendingProps, Key, Mode, REACTSUSPENSELISTTYPE, if DEV then REACTSUSPENSELISTTYPE else nil, nil, p1))
 	end,
 	createFiberFromOffscreen = Callback3,
 	createFiberFromLegacyHidden = Callback4,
-	createFiberFromText = function(PendingProps, Mode, p1) --[[ Line: 949 ]]
+	createFiberFromText = function(PendingProps, Mode, p1)
 		-- upvalues: createFiber (copy), HostText (copy)
 		return (createFiber(HostText, PendingProps, nil, Mode, nil, nil, nil, p1))
 	end,
-	createFiberFromHostInstanceForDeletion = function() --[[ Line: 957 ]]
+	createFiberFromHostInstanceForDeletion = function()
 		-- upvalues: createFiber (copy), HostComponent (copy), NoMode (copy)
 		return (createFiber(HostComponent, nil, nil, NoMode, "DELETED", "DELETED"))
 	end,
-	createFiberFromDehydratedFragment = function(StateNode) --[[ Line: 967 ]]
+	createFiberFromDehydratedFragment = function(StateNode)
 		-- upvalues: createFiber (copy), DehydratedFragment (copy), NoMode (copy)
 		return (createFiber(DehydratedFragment, nil, nil, NoMode, nil, nil, StateNode))
 	end,
-	createFiberFromPortal = function(p1, Mode, p2) --[[ Line: 976 ]]
+	createFiberFromPortal = function(p1, Mode, p2)
 		-- upvalues: createFiber (copy), HostPortal (copy)
 		return (createFiber(HostPortal, if p1.children == nil then {} else p1.children, p1.key, Mode, nil, nil, {
 			pendingChildren = nil,
@@ -500,7 +500,7 @@ return {
 			implementation = p1.implementation
 		}, p2))
 	end,
-	assignFiberPropertiesInDEV = function(p1, p2) --[[ Line: 1000 ]]
+	assignFiberPropertiesInDEV = function(p1, p2)
 		-- upvalues: createFiber (copy), IndeterminateComponent (copy), NoMode (copy), EnableProfilerTimer (copy)
 		if p1 == nil then
 			p1 = createFiber(IndeterminateComponent, nil, nil, NoMode)

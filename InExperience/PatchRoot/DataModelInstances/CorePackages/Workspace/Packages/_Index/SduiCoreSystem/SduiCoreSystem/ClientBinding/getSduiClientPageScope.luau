@@ -1,7 +1,7 @@
 ﻿local SignalsModule = require(script:FindFirstAncestor("SduiCoreSystem").Parent.Signals)
 local self = setmetatable({}, { __mode = "v" })
 
-local function _(p1, Key) --[[ Line: 17 | Named "ensureFieldSignal" ]]
+local function _(p1, Key)
 	-- upvalues: SignalsModule (copy)
 	local v1 = p1[Key]
 	
@@ -16,7 +16,7 @@ local function _(p1, Key) --[[ Line: 17 | Named "ensureFieldSignal" ]]
 	end
 end
 
-return function(Key) --[[ Line: 40 | Named "getSduiClientPageScope" ]]
+return function(Key)
 	-- upvalues: self (copy), SignalsModule (copy)
 	local SelfEntry = self[Key]
 	
@@ -25,7 +25,7 @@ return function(Key) --[[ Line: 40 | Named "getSduiClientPageScope" ]]
 	else
 		local t = {}
 		local config = {
-			get = function(Key) --[[ Line: 49 ]]
+			get = function(Key)
 				-- upvalues: t (copy), SignalsModule (upval)
 				local Entry = t[Key]
 				local Entry1 = nil
@@ -40,7 +40,7 @@ return function(Key) --[[ Line: 40 | Named "getSduiClientPageScope" ]]
 				end
 				return Entry1.get(false)
 			end,
-			set = function(Key, p1) --[[ Line: 52 ]]
+			set = function(Key, p1)
 				-- upvalues: t (copy), SignalsModule (upval)
 				local Entry = t[Key]
 				local Entry1 = nil
@@ -55,7 +55,7 @@ return function(Key) --[[ Line: 40 | Named "getSduiClientPageScope" ]]
 				end
 				Entry1.set(p1)
 			end,
-			getSignal = function(Key) --[[ Line: 55 ]]
+			getSignal = function(Key)
 				-- upvalues: t (copy), SignalsModule (upval)
 				local Entry = t[Key]
 				local Entry1 = nil

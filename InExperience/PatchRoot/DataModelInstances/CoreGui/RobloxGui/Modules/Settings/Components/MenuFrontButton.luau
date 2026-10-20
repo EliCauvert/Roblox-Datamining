@@ -24,7 +24,7 @@ MenuFrontButton.defaultProps = {
 	frontEnabled = ShowTeleportHistoryFrontButton and FrontButtonControllerModule.hasReturnUniverse()
 }
 
-function MenuFrontButton.init(p1) --[[ Line: 38 ]]
+function MenuFrontButton.init(p1)
 	-- upvalues: FrontButtonControllerModule (copy), RoactModule (copy)
 	p1:setState({ text = FrontButtonControllerModule.getMenuText() })
 	p1.sizeBinding, p1.updateSizeBinding = RoactModule.createBinding(nil)
@@ -36,20 +36,20 @@ function MenuFrontButton.init(p1) --[[ Line: 38 ]]
 	p1.textLabelRef = RoactModule.createRef()
 end
 
-function MenuFrontButton.didMount(p1) --[[ Line: 50 ]]
+function MenuFrontButton.didMount(p1)
 	p1.updateSizeBinding(p1.props.HubBar.Size)
 	p1.updateVisibleBinding(p1.props.HubBar.Visible)
 	p1:updateViewport()
 end
 
-function MenuFrontButton.didUpdate(p1, p2) --[[ Line: 55 ]]
+function MenuFrontButton.didUpdate(p1, p2)
 	if p1.props.HubBar ~= p2.HubBar then
 		p1.updateSizeBinding(p1.props.HubBar.Size)
 		p1.updateVisibleBinding(p1.props.HubBar.Visible)
 	end
 end
 
-function MenuFrontButton.updateViewport(p1) --[[ Line: 61 ]]
+function MenuFrontButton.updateViewport(p1)
 	-- upvalues: ThemeModule (copy), UtilityModule (copy), IsEnabled (copy)
 	local TextSizeResult = if UtilityModule:IsSmallTouchScreen() then ThemeModule.textSize(18) elseif IsEnabled then ThemeModule.textSize(36) else ThemeModule.textSize(24)
 	p1.updateTextSizeConstraintBinding(TextSizeResult)
@@ -68,7 +68,7 @@ function MenuFrontButton.updateViewport(p1) --[[ Line: 61 ]]
 	end
 end
 
-function MenuFrontButton.render(p1) --[[ Line: 85 ]]
+function MenuFrontButton.render(p1)
 	-- upvalues: RoactModule (copy), ExternalEventConnection (copy), ThemeModule (copy), FrontButtonControllerModule (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), FoundationModule (copy), ImageSetLabel (copy), Images (copy)
 	return RoactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -76,11 +76,11 @@ function MenuFrontButton.render(p1) --[[ Line: 85 ]]
 		AnchorPoint = Vector2.new(1, 0),
 		Position = UDim2.new(1, 0, 0, 0),
 		LayoutOrder = p1.props.LayoutOrder,
-		Visible = RoactModule.joinBindings({ p1.state.text, p1.visibleBinding }):map(function(Entry) --[[ Line: 94 ]]
+		Visible = RoactModule.joinBindings({ p1.state.text, p1.visibleBinding }):map(function(Entry)
 			-- upvalues: p1 (copy)
 			return p1.props.frontEnabled and (Entry[1] ~= nil and Entry[2])
 		end),
-		Size = RoactModule.joinBindings({ p1.sizeBinding, p1.buttonHeightBinding }):map(function(Entry): UDim2 --[[ Line: 97 ]]
+		Size = RoactModule.joinBindings({ p1.sizeBinding, p1.buttonHeightBinding }):map(function(Entry): UDim2
 			local Entry1 = Entry[1]
 			local Entry2: number = Entry[2]
 			
@@ -90,21 +90,21 @@ function MenuFrontButton.render(p1) --[[ Line: 85 ]]
 	}, {
 		SizeConnection = RoactModule.createElement(ExternalEventConnection, {
 			event = p1.props.HubBar:GetPropertyChangedSignal("Size"),
-			callback = function() --[[ Line: 113 ]]
+			callback = function()
 				-- upvalues: p1 (copy)
 				p1.updateSizeBinding(p1.props.HubBar.Size)
 			end
 		}),
 		VisibleConnection = RoactModule.createElement(ExternalEventConnection, {
 			event = p1.props.HubBar:GetPropertyChangedSignal("Visible"),
-			callback = function() --[[ Line: 119 ]]
+			callback = function()
 				-- upvalues: p1 (copy)
 				p1.updateVisibleBinding(p1.props.HubBar.Visible)
 			end
 		}),
 		ViewportSizeChangedConnection = RoactModule.createElement(ExternalEventConnection, {
 			event = workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"),
-			callback = function() --[[ Line: 125 ]]
+			callback = function()
 				-- upvalues: p1 (copy)
 				p1:updateViewport()
 			end
@@ -119,23 +119,23 @@ function MenuFrontButton.render(p1) --[[ Line: 85 ]]
 			BackgroundColor3 = ThemeModule.color("DefaultButton"),
 			BackgroundTransparency = ThemeModule.transparency("DefaultButton", 1),
 			Position = UDim2.new(0, 0, 0, 0),
-			Size = p1.buttonHeightBinding:map(function(YOffset): UDim2 --[[ Line: 139 ]]
+			Size = p1.buttonHeightBinding:map(function(YOffset): UDim2
 				return if YOffset then UDim2.new(0, 0, 0, YOffset) else UDim2.new()
 			end),
 			AutomaticSize = Enum.AutomaticSize.X,
 			ScaleType = Enum.ScaleType.Stretch,
 			SliceCenter = Rect.new(8, 6, 46, 44),
-			[RoactModule.Event.MouseEnter] = function(p2) --[[ Line: 149 ]]
+			[RoactModule.Event.MouseEnter] = function(p2)
 				-- upvalues: ThemeModule (upval)
 				p2.BackgroundColor3 = ThemeModule.color("DefaultButtonHover")
 				p2.BackgroundTransparency = ThemeModule.transparency("DefaultButtonHover")
 			end,
-			[RoactModule.Event.MouseLeave] = function(p2) --[[ Line: 153 ]]
+			[RoactModule.Event.MouseLeave] = function(p2)
 				-- upvalues: ThemeModule (upval)
 				p2.BackgroundColor3 = ThemeModule.color("DefaultButton")
 				p2.BackgroundTransparency = ThemeModule.transparency("DefaultButton")
 			end,
-			[RoactModule.Event.Activated] = function(_) --[[ Line: 157 ]]
+			[RoactModule.Event.Activated] = function(_)
 				-- upvalues: FrontButtonControllerModule (upval)
 				FrontButtonControllerModule.initiateFrontButtonTeleport()
 			end

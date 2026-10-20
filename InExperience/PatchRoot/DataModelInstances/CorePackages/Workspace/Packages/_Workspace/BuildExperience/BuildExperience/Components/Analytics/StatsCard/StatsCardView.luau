@@ -12,7 +12,7 @@ local IconSize = FoundationModule.Enums.IconSize
 local IconVariant = FoundationModule.Enums.IconVariant
 local Radius = FoundationModule.Enums.Radius
 
-return function(p1) --[[ Line: 57 | Named "StatsCardView" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), IconName (copy), IconPosition (copy), ReactModule (copy), View (copy), Text (copy), Skeleton (copy), Radius (copy), Icon (copy), IconSize (copy), IconVariant (copy)
 	local UseTokensResult = UseTokensFunction()
 	local TestId = p1.testId or "StatsCardView"

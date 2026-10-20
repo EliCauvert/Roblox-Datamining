@@ -4,7 +4,7 @@ local ButtonVariant = require(Parent.Foundation).Enums.ButtonVariant
 local _ = require(script.Parent.Types)
 local ActionFactoriesModule = require(script.Parent.actionFactories)
 
-return function(p1, p2) --[[ Line: 13 | Named "resolveJoinCardActions" ]]
+return function(p1, p2)
 	-- upvalues: ActionFactoriesModule (copy), ButtonVariant (copy)
 	local List = {}
 	

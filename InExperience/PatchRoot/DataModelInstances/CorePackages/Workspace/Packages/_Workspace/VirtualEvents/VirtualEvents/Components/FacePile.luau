@@ -3,11 +3,11 @@ local CryoModule = require(VirtualEvents.Parent.Cryo)
 local ReactModule = require(VirtualEvents.Parent.React)
 local _UDim = UDim.new(0, 12)
 
-return function(p1) --[[ Line: 19 | Named "FacePile" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), CryoModule (copy), _UDim (copy)
 	local ImageLabels = {}
 	
-	for LayoutOrder, value in ReactModule.useMemo(function() --[[ Line: 22 ]]
+	for LayoutOrder, value in ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), CryoModule (upval)
 		if p1.desiredFirstUserId then
 			local FindResult = CryoModule.List.find(p1.userIds, p1.desiredFirstUserId)

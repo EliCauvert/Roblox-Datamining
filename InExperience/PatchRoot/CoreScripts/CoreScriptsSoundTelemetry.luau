@@ -18,7 +18,7 @@ local t = {}
 local NewResult = require(Modules.AggregatedData).new()
 local NewResult1 = require(Modules.PlayingSounds).new(NewResult)
 
-local function logSessionEvent() --[[ Line: 39 ]]
+local function logSessionEvent()
 	-- upvalues: NewResult (copy), RbxAnalyticsService (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), Default (copy), config (copy)
 	local List = {}
 	local List1 = {}
@@ -44,7 +44,7 @@ local function logSessionEvent() --[[ Line: 39 ]]
 	Default:logRobloxTelemetryEvent(config, nil, config1)
 end
 
-local function aggregateEndSessionData() --[[ Line: 67 ]]
+local function aggregateEndSessionData()
 	-- upvalues: NewResult1 (copy), logSessionEvent (copy)
 	for i, sound in pairs(NewResult1.sounds) do
 		for i1, _ in pairs(sound.instances) do
@@ -54,54 +54,54 @@ local function aggregateEndSessionData() --[[ Line: 67 ]]
 	logSessionEvent()
 end
 
-local function _(Sound): boolean --[[ Line: 79 | Named "isAudible" ]]
+local function _(Sound): boolean
 	-- upvalues: UserGameSettings (copy)
 	return UserGameSettings.MasterVolume * (if Sound.SoundGroup then Sound.SoundGroup.Volume else 1) * Sound.Volume * Sound.RollOffGain > 0.01
 end
 
-local _ = function(Sound: Sound) --[[ Line: 91 | Named "onPlayed" ]]
+local _ = function(Sound: Sound)
 	-- upvalues: GetFFlagEnableSoundSessionTelemetryModule (copy), UserGameSettings (copy), NewResult1 (copy)
 	if GetFFlagEnableSoundSessionTelemetryModule() and UserGameSettings.MasterVolume * (if Sound.SoundGroup then Sound.SoundGroup.Volume else 1) * Sound.Volume * Sound.RollOffGain > 0.01 then
 		NewResult1:addSound(Sound.SoundId, Sound:GetDebugId(10))
 	end
 end
 
-local _ = function(Sound) --[[ Line: 97 | Named "onPaused" ]]
+local _ = function(Sound)
 	-- upvalues: GetFFlagEnableSoundSessionTelemetryModule (copy), NewResult1 (copy)
 	if GetFFlagEnableSoundSessionTelemetryModule() then
 		NewResult1:removeSound(Sound.SoundId, Sound:GetDebugId(10))
 	end
 end
 
-local _ = function(Sound) --[[ Line: 103 | Named "onStopped" ]]
+local _ = function(Sound)
 	-- upvalues: GetFFlagEnableSoundSessionTelemetryModule (copy), NewResult1 (copy)
 	if GetFFlagEnableSoundSessionTelemetryModule() then
 		NewResult1:removeSound(Sound.SoundId, Sound:GetDebugId(10))
 	end
 end
 
-local _ = function(Sound) --[[ Line: 109 | Named "onEnded" ]]
+local _ = function(Sound)
 	-- upvalues: GetFFlagEnableSoundSessionTelemetryModule (copy), NewResult1 (copy)
 	if GetFFlagEnableSoundSessionTelemetryModule() then
 		NewResult1:removeSound(Sound.SoundId, Sound:GetDebugId(10))
 	end
 end
 
-local _ = function(Sound: Sound) --[[ Line: 115 | Named "onResumed" ]]
+local _ = function(Sound: Sound)
 	-- upvalues: GetFFlagEnableSoundSessionTelemetryModule (copy), UserGameSettings (copy), NewResult1 (copy)
 	if GetFFlagEnableSoundSessionTelemetryModule() and UserGameSettings.MasterVolume * (if Sound.SoundGroup then Sound.SoundGroup.Volume else 1) * Sound.Volume * Sound.RollOffGain > 0.01 then
 		NewResult1:addSound(Sound.SoundId, Sound:GetDebugId(10))
 	end
 end
 
-local _ = function(Sound, _) --[[ Line: 121 | Named "onLooped" ]]
+local _ = function(Sound, _)
 	-- upvalues: GetFFlagEnableSoundSessionTelemetryModule (copy), NewResult1 (copy)
 	if GetFFlagEnableSoundSessionTelemetryModule() then
 		NewResult1:loopSound(Sound.SoundId, Sound:GetDebugId(10))
 	end
 end
 
-local function unhookSoundEvents(Sound) --[[ Line: 127 ]]
+local function unhookSoundEvents(Sound)
 	-- upvalues: t (copy), GetFFlagEnableSoundSessionTelemetryModule (copy), NewResult1 (copy)
 	local Entry = t[Sound]
 	
@@ -116,17 +116,17 @@ local function unhookSoundEvents(Sound) --[[ Line: 127 ]]
 	t[Sound] = nil
 end
 
-local function hookupSoundEvents(Sound: Sound) --[[ Line: 140 ]]
+local function hookupSoundEvents(Sound: Sound)
 	-- upvalues: GetFFlagEnableSoundSessionTelemetryModule (copy), UserGameSettings (copy), NewResult1 (copy), unhookSoundEvents (copy), t (copy)
 	if Sound.Playing and GetFFlagEnableSoundSessionTelemetryModule() and UserGameSettings.MasterVolume * (if Sound.SoundGroup then Sound.SoundGroup.Volume else 1) * Sound.Volume * Sound.RollOffGain > 0.01 then
 		NewResult1:addSound(Sound.SoundId, Sound:GetDebugId(10))
 	end
 	t[Sound] = {
-		Sound.Played:Connect(function() --[[ Line: 146 ]]
+		Sound.Played:Connect(function()
 			-- upvalues: Sound (copy), GetFFlagEnableSoundSessionTelemetryModule (upval), UserGameSettings (upval), NewResult1 (upval)
 			if Sound.TimeLength == 0 or not Sound.IsLoaded then
 				local Sound1 = nil
-				Sound1 = Sound.Loaded:Connect(function() --[[ Line: 150 ]]
+				Sound1 = Sound.Loaded:Connect(function()
 					-- upvalues: Sound (upval), GetFFlagEnableSoundSessionTelemetryModule (upval), UserGameSettings (upval), NewResult1 (upval), Sound1 (ref)
 					if GetFFlagEnableSoundSessionTelemetryModule() and UserGameSettings.MasterVolume * (if Sound.SoundGroup then Sound.SoundGroup.Volume else 1) * Sound.Volume * Sound.RollOffGain > 0.01 then
 						NewResult1:addSound(Sound.SoundId, Sound:GetDebugId(10))
@@ -142,37 +142,37 @@ local function hookupSoundEvents(Sound: Sound) --[[ Line: 140 ]]
 				NewResult1:addSound(Sound1.SoundId, Sound1:GetDebugId(10))
 			end
 		end),
-		Sound.Paused:Connect(function() --[[ Line: 159 ]]
+		Sound.Paused:Connect(function()
 			-- upvalues: Sound (copy), GetFFlagEnableSoundSessionTelemetryModule (upval), NewResult1 (upval)
 			if GetFFlagEnableSoundSessionTelemetryModule() then
 				NewResult1:removeSound(Sound.SoundId, Sound:GetDebugId(10))
 			end
 		end),
-		Sound.Stopped:Connect(function() --[[ Line: 163 ]]
+		Sound.Stopped:Connect(function()
 			-- upvalues: Sound (copy), GetFFlagEnableSoundSessionTelemetryModule (upval), NewResult1 (upval)
 			if GetFFlagEnableSoundSessionTelemetryModule() then
 				NewResult1:removeSound(Sound.SoundId, Sound:GetDebugId(10))
 			end
 		end),
-		Sound.Ended:Connect(function() --[[ Line: 167 ]]
+		Sound.Ended:Connect(function()
 			-- upvalues: Sound (copy), GetFFlagEnableSoundSessionTelemetryModule (upval), NewResult1 (upval)
 			if GetFFlagEnableSoundSessionTelemetryModule() then
 				NewResult1:removeSound(Sound.SoundId, Sound:GetDebugId(10))
 			end
 		end),
-		Sound.Resumed:Connect(function() --[[ Line: 171 ]]
+		Sound.Resumed:Connect(function()
 			-- upvalues: Sound (copy), GetFFlagEnableSoundSessionTelemetryModule (upval), UserGameSettings (upval), NewResult1 (upval)
 			if GetFFlagEnableSoundSessionTelemetryModule() and UserGameSettings.MasterVolume * (if Sound.SoundGroup then Sound.SoundGroup.Volume else 1) * Sound.Volume * Sound.RollOffGain > 0.01 then
 				NewResult1:addSound(Sound.SoundId, Sound:GetDebugId(10))
 			end
 		end),
-		Sound.DidLoop:Connect(function(_, _) --[[ Line: 175 ]]
+		Sound.DidLoop:Connect(function(_, _)
 			-- upvalues: Sound (copy), GetFFlagEnableSoundSessionTelemetryModule (upval), NewResult1 (upval)
 			if GetFFlagEnableSoundSessionTelemetryModule() then
 				NewResult1:loopSound(Sound.SoundId, Sound:GetDebugId(10))
 			end
 		end),
-		(Sound.AncestryChanged:Connect(function(Child, _) --[[ Line: 179 ]]
+		(Sound.AncestryChanged:Connect(function(Child, _)
 			-- upvalues: unhookSoundEvents (upval), Sound (copy)
 			if Child:FindFirstAncestorOfClass("DataModel") == nil then
 				unhookSoundEvents(Sound)
@@ -183,14 +183,14 @@ end
 
 if GetFFlagEnableSoundSessionTelemetryModule() then
 	if game:GetEngineFeature("AudioInstanceAddedApiEnabled") then
-		SoundService.AudioInstanceAdded:Connect(function(Sound: Sound) --[[ Line: 192 ]]
+		SoundService.AudioInstanceAdded:Connect(function(Sound: Sound)
 			-- upvalues: t (copy), hookupSoundEvents (copy)
 			if Sound:IsA("Sound") and not t[Sound] then
 				hookupSoundEvents(Sound)
 			end
 		end)
 	end
-	game.Close:Connect(function() --[[ Line: 201 ]]
+	game.Close:Connect(function()
 		-- upvalues: aggregateEndSessionData (copy)
 		aggregateEndSessionData()
 	end)

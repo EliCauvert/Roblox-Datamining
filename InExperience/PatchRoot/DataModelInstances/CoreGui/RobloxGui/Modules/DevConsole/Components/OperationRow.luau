@@ -16,7 +16,7 @@ local config = {
 	}
 }
 
-return function(p1) --[[ Line: 34 | Named "OperationRow" ]]
+return function(p1)
 	-- upvalues: config (copy), RoactModule (copy), ConstantsModule (copy), _UDim (copy)
 	local Entry = config[p1.tag]
 	

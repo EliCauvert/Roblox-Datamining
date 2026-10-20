@@ -22,21 +22,21 @@ local PresenceType = DataHydrationModule.Presence.PresenceEnums.PresenceType
 local GetResult = DataHydrationModule.Presence.PresenceStore.get()
 local GetResult1 = require(Parent.UserProfiles.Stores).UserProfileStore.get()
 
-local function noop() --[[ Line: 47 ]] end
+local function noop() end
 
-local function _(p1): boolean --[[ Line: 49 | Named "isInGame" ]]
+local function _(p1): boolean
 	-- upvalues: PresenceType (copy)
 	return p1 ~= nil and (p1.userPresenceType == PresenceType.InGame and p1.universeId ~= "")
 end
 
-return function(p1) --[[ Line: 53 | Named "useInExperienceGameJoinCardViewModel" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), SignalsModule (copy), GetResult (copy), DataStatus (copy), SignalsReactModule (copy), PresenceType (copy), GetResult1 (copy), UseExperienceBannerImageFunction (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UserCtaAction (copy), ButtonVariant (copy), InputSize (copy), noop (copy)
 	local UserId = p1.userId
 	local OnJoinFunction = p1.onJoin
 	local OnCloseFunction = p1.onClose
-	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 58 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), GetResult (upval), UserId (copy), DataStatus (upval)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 59 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: GetResult (upval), UserId (upval), DataStatus (upval)
 			local PresenceByUserId = GetResult.GetPresenceByUserId(UserId)
 			local DataResult = PresenceByUserId.data(p2)
@@ -49,13 +49,13 @@ return function(p1) --[[ Line: 53 | Named "useInExperienceGameJoinCardViewModel"
 	end, { UserId })))
 	local Presence = UseSignalStateResult.presence
 	local IsNotUniverseIdMatch: boolean = Presence ~= nil and (Presence.userPresenceType == PresenceType.InGame and Presence.universeId ~= "")
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 72 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: GetResult1 (upval), UserId (copy)
 		return GetResult1.fetchNamesByUserIds({ UserId })
 	end, { UserId })
-	local UseSignalStateResult1 = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 75 ]]
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), UseMemoResult (copy)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 76 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: UseMemoResult (upval)
 			local UseMemoResultResult = UseMemoResult(p2)
 			local Entry = UseMemoResultResult and (UseMemoResultResult.data and UseMemoResultResult.data[1])
@@ -68,7 +68,7 @@ return function(p1) --[[ Line: 53 | Named "useInExperienceGameJoinCardViewModel"
 		end)
 	end, { UseMemoResult })))
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-	ReactModule.useEffect(function() --[[ Line: 89 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsNotUniverseIdMatch (copy), UseStateResult2 (copy), Presence (copy)
 		if IsNotUniverseIdMatch then
 			UseStateResult2(Presence)
@@ -76,7 +76,7 @@ return function(p1) --[[ Line: 53 | Named "useInExperienceGameJoinCardViewModel"
 	end, { Presence, IsNotUniverseIdMatch })
 	local Presence1 = if IsNotUniverseIdMatch then Presence else UseStateResult
 	local UniverseId = if Presence1 then Presence1.universeId else ""
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 105 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: IsNotUniverseIdMatch (copy), Presence (copy), UserId (copy)
 		return if IsNotUniverseIdMatch and Presence ~= nil then {
 			userId = UserId,
@@ -86,7 +86,7 @@ return function(p1) --[[ Line: 53 | Named "useInExperienceGameJoinCardViewModel"
 		} else nil
 	end, { UserId, Presence, IsNotUniverseIdMatch })
 	local UseRefResult = ReactModule.useRef(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 118 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UseMemoResult1 (copy), OnJoinFunction (copy), OnCloseFunction (copy)
 		if not UseRefResult.current and UseMemoResult1 ~= nil then
 			UseRefResult.current = true

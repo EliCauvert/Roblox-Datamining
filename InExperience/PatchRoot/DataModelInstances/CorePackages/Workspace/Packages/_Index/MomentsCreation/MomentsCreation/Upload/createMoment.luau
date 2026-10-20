@@ -14,7 +14,7 @@ local v1 = game
 local CaptureServiceUploadUniverseIdOverrideEngineFeature = game:GetEngineFeature("CaptureServiceUploadUniverseIdOverride")
 game:DefineFastString("MomentsUploadUniverseId", "8357232245")
 
-local function _(Tbl) --[[ Line: 61 | Named "injectUniverseIdOverride" ]]
+local function _(Tbl)
 	-- upvalues: v1 (copy)
 	local GameId: number = v1.GameId
 	
@@ -28,7 +28,7 @@ local function _(Tbl) --[[ Line: 61 | Named "injectUniverseIdOverride" ]]
 	end
 end
 
-return function(Capture, Tbl, FeedRegistrationInfo, p1, p2) --[[ Line: 71 | Named "createMoment" ]]
+return function(Capture, Tbl, FeedRegistrationInfo, p1, p2)
 	-- upvalues: CaptureServiceUploadUniverseIdOverrideEngineFeature (copy), v1 (copy), NormalizeMomentMetadataModule (copy), GetFFlagMomentsUseUploadPostAsyncFunction (copy), MakePostMetadataModule (copy), GetFFlagMomentsUseMomentsServiceForUploadFunction (copy), CaptureService (copy), MakeCreationEventFieldsModule (copy), FireAnalyticsEventModule (copy), EventNames (copy)
 	local Tbl1 = nil
 	if CaptureServiceUploadUniverseIdOverrideEngineFeature then
@@ -50,7 +50,7 @@ return function(Capture, Tbl, FeedRegistrationInfo, p1, p2) --[[ Line: 71 | Name
 	
 	if GetFFlagMomentsUseUploadPostAsyncFunction() then
 		local PostMetadataModule = MakePostMetadataModule(Tbl, if GetFFlagMomentsUseMomentsServiceForUploadFunction() then Capture else nil)
-		Success, Result = pcall(function() --[[ Line: 90 ]]
+		Success, Result = pcall(function()
 			-- upvalues: GetFFlagMomentsUseMomentsServiceForUploadFunction (upval), p2 (copy), PostMetadataModule (copy), CaptureService (upval), Capture (copy)
 			if GetFFlagMomentsUseMomentsServiceForUploadFunction() then
 				(p2 or game:GetService("MomentsService")):CreatePostAsync(PostMetadataModule)
@@ -61,7 +61,7 @@ return function(Capture, Tbl, FeedRegistrationInfo, p1, p2) --[[ Line: 71 | Name
 			end
 		end)
 	else
-		Success, Result = pcall(function() --[[ Line: 99 ]]
+		Success, Result = pcall(function()
 			-- upvalues: CaptureService (upval), Capture (copy), NormalizeMomentMetadataModuleResult (ref), FeedRegistrationInfo (copy)
 			CaptureService:UploadCaptureAndPostMoment(Capture, NormalizeMomentMetadataModuleResult, FeedRegistrationInfo)
 		end)

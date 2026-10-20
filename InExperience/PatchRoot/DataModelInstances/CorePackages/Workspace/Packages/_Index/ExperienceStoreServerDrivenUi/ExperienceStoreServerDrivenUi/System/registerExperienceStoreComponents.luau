@@ -6,17 +6,17 @@ local SduiComponentType = SduiCoreSystemModule.SduiComponentType
 local FFlagSduiGameItemsComponent = require(Parent.SharedFlags).FFlagSduiGameItemsComponent
 local FFlagSduiLocalFeedFilter = require(Parent.SharedFlags).FFlagSduiLocalFeedFilter
 
-return function() --[[ Line: 18 | Named "registerExperienceStoreComponents" ]]
+return function()
 	-- upvalues: SduiComponentType (copy), FFlagSduiLocalFeedFilter (copy), ExperienceStoreServerDrivenUi (copy), FFlagSduiGameItemsComponent (copy), GetSduiComponentRegistryFunction (copy)
 	GetSduiComponentRegistryFunction().registerComponentDefinitions({
 		[SduiComponentType.PillTabsCarousel] = if FFlagSduiLocalFeedFilter then {
-			getLazyComponent = function() --[[ Line: 22 ]]
+			getLazyComponent = function()
 				-- upvalues: ExperienceStoreServerDrivenUi (upval)
 				return require(ExperienceStoreServerDrivenUi.Components.SduiPillTabsCarousel)
 			end
 		} else nil,
 		[SduiComponentType.VirtualGameItemText] = if FFlagSduiGameItemsComponent then {
-			getLazyComponent = function() --[[ Line: 29 ]]
+			getLazyComponent = function()
 				-- upvalues: ExperienceStoreServerDrivenUi (upval)
 				return require(ExperienceStoreServerDrivenUi.Components.SduiVirtualGameItemText)
 			end

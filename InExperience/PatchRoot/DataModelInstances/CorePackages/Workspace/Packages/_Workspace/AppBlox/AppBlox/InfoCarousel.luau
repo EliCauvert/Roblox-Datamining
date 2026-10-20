@@ -3,13 +3,13 @@ local ReactModule = require(Parent.React)
 local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 local InfoCarouselCellModule = require(script.Parent.InfoCarouselCell)
 
-return function(Frame) --[[ Line: 18 ]]
+return function(Frame)
 	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy), InfoCarouselCellModule (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local Padding = Frame.padding or UseDesignTokensResult.Size.Size_600
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	
-	local function v7(Frame) --[[ Line: 24 ]]
+	local function v7(Frame)
 		-- upvalues: UseBindingResult2 (copy)
 		UseBindingResult2(Frame.AbsoluteSize.Y)
 	end
@@ -31,7 +31,7 @@ return function(Frame) --[[ Line: 18 ]]
 			Elements["Divider" .. i] = ReactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				LayoutOrder = i * 2 + 1,
-				Size = UseBindingResult:map(function(p1: number): UDim2 --[[ Line: 42 ]]
+				Size = UseBindingResult:map(function(p1: number): UDim2
 					return UDim2.fromOffset(1, p1 / 2)
 				end),
 				BorderColor3 = UseDesignTokensResult.Color.Stroke.Emphasis.Color3,

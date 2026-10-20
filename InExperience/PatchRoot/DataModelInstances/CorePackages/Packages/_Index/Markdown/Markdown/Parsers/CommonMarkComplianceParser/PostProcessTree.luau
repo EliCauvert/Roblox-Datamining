@@ -9,7 +9,7 @@ local GetNodeTypeModule = require(script.Parent.Parent.getNodeType)
 local IsNodeBlockModule = require(script.Parent.Parent.isNodeBlock)
 local t = {}
 
-local function trimLeadingWhitespace(Children, IsSegmentMatch) --[[ Line: 26 ]]
+local function trimLeadingWhitespace(Children, IsSegmentMatch)
 	-- upvalues: InsertFunction (copy)
 	local t = {}
 	local IsSegmentMatch1: boolean = IsSegmentMatch
@@ -28,7 +28,7 @@ local function trimLeadingWhitespace(Children, IsSegmentMatch) --[[ Line: 26 ]]
 	return t
 end
 
-function t.postProcessTree(Node, p1) --[[ Line: 43 ]]
+function t.postProcessTree(Node, p1)
 	-- upvalues: CONTAINERS (copy), INLINETEXT (copy), t (copy), InsertFunction (copy), PLAINTEXT (copy), IsNodeBlockModule (copy), trimLeadingWhitespace (copy)
 	local t1 = {}
 	local Total = 1
@@ -94,7 +94,7 @@ function t.postProcessTree(Node, p1) --[[ Line: 43 ]]
 	return t1
 end
 
-function t.buildParagraph(Children, Total: number, p2, p3) --[[ Line: 115 ]]
+function t.buildParagraph(Children, Total: number, p2, p3)
 	-- upvalues: INLINETEXT (copy), PLAINTEXT (copy), t (copy), InsertFunction (copy), trimLeadingWhitespace (copy), GetNodeTypeModule (copy)
 	local Children1 = {}
 	local Count = 0
@@ -143,7 +143,7 @@ function t.buildParagraph(Children, Total: number, p2, p3) --[[ Line: 115 ]]
 	}
 end
 
-function t.outputRichText(p4, p5) --[[ Line: 174 ]]
+function t.outputRichText(p4, p5)
 	-- upvalues: STYLEDTEXT (copy), t (copy)
 	local STYLEDTEXTEntry = if p4.attributes then STYLEDTEXT[p4.attributes.style] else nil
 	
@@ -159,7 +159,7 @@ function t.outputRichText(p4, p5) --[[ Line: 174 ]]
 	end
 end
 
-function t.buildList(Children, Count, p6) --[[ Line: 188 ]]
+function t.buildList(Children, Count, p6)
 	-- upvalues: t (copy), InsertFunction (copy), GetNodeTypeModule (copy)
 	local Count1 = 0
 	local Depth = Children[Count].attributes.depth
@@ -192,7 +192,7 @@ function t.buildList(Children, Count, p6) --[[ Line: 188 ]]
 	}
 end
 
-local function isEmptyQuoteLine(Children): boolean --[[ Line: 228 ]]
+local function isEmptyQuoteLine(Children): boolean
 	for _, child in Children do
 		if child.name ~= "TEXT" or child.text and #child.text > 0 then
 			return false
@@ -201,7 +201,7 @@ local function isEmptyQuoteLine(Children): boolean --[[ Line: 228 ]]
 	return true
 end
 
-function t.buildQuote(Children, Total, p7) --[[ Line: 240 ]]
+function t.buildQuote(Children, Total, p7)
 	-- upvalues: t (copy), InsertFunction (copy), isEmptyQuoteLine (copy), GetNodeTypeModule (copy)
 	local Count = 0
 	local t2 = {}
@@ -245,7 +245,7 @@ function t.buildQuote(Children, Total, p7) --[[ Line: 240 ]]
 	return Count, Child
 end
 
-function t.buildTable(Children, Total, p8) --[[ Line: 285 ]]
+function t.buildTable(Children, Total, p8)
 	-- upvalues: t (copy), InsertFunction (copy), GetNodeTypeModule (copy)
 	local Count = 0
 	local Children1 = {}
@@ -272,7 +272,7 @@ function t.buildTable(Children, Total, p8) --[[ Line: 285 ]]
 	}
 end
 
-function t.buildTableCells(p9, p10) --[[ Line: 315 ]]
+function t.buildTableCells(p9, p10)
 	-- upvalues: GetNodeTypeModule (copy), t (copy), InsertFunction (copy)
 	local t3 = {}
 	local Children = {}
@@ -301,7 +301,7 @@ function t.buildTableCells(p9, p10) --[[ Line: 315 ]]
 	return if v1 then nil else t3
 end
 
-function t.mergeTextNodes(Children, Count, p11, p12) --[[ Line: 348 ]]
+function t.mergeTextNodes(Children, Count, p11, p12)
 	-- upvalues: PLAINTEXT (copy), GetNodeTypeModule (copy)
 	local Text = ""
 	local Count1 = 0
@@ -325,7 +325,7 @@ function t.mergeTextNodes(Children, Count, p11, p12) --[[ Line: 348 ]]
 	}
 end
 
-function t.applyCodeSpanRules(Children) --[[ Line: 379 ]]
+function t.applyCodeSpanRules(Children)
 	local v3 = nil
 	local v4 = nil
 	local Flag = false

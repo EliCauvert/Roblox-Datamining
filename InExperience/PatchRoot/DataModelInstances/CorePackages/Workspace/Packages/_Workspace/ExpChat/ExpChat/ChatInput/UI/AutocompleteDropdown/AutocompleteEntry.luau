@@ -7,7 +7,7 @@ local ConfigModule = require(ExpChat.Config)
 local PresetEntryTextModule = require(ExpChat.Autocomplete.PresetEntryText)
 local FFlagExpChatPresetChatAutocompleteEnabledModule = require(ExpChat.Flags.FFlagExpChatPresetChatAutocompleteEnabled)
 
-return function(p1) --[[ Line: 16 ]]
+return function(p1)
 	-- upvalues: UseCursorFunction (copy), ReactModule (copy), ConfigModule (copy), EmojiListModule (copy), FFlagExpChatPresetChatAutocompleteEnabledModule (copy), PresetEntryTextModule (copy)
 	return ReactModule.createElement("Frame", {
 		AutomaticSize = Enum.AutomaticSize.Y,

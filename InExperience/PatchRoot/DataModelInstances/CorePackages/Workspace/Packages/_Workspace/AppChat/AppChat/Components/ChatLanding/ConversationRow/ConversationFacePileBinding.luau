@@ -17,7 +17,7 @@ local UseCumulativeBackgroundFunction = FoundationModule.Hooks.useCumulativeBack
 local GetResult = DataHydrationModule.Presence.PresenceStore.get()
 local PresenceType = DataHydrationModule.Presence.PresenceEnums.PresenceType
 
-local function _(p1) --[[ Line: 37 | Named "getParticipantId" ]]
+local function _(p1)
 	if type(p1) == "table" then
 		local Id = p1.id or p1.userId
 		
@@ -27,7 +27,7 @@ local function _(p1) --[[ Line: 37 | Named "getParticipantId" ]]
 	end
 end
 
-local function getParticipantIds(p1, p2) --[[ Line: 45 ]]
+local function getParticipantIds(p1, p2)
 	-- upvalues: GetConversationStoreModule (copy)
 	local PresentationSignalResult = p1.presentationSignal(p2)
 	local Text: string = if PresentationSignalResult.localUserId == nil then "" else tostring(PresentationSignalResult.localUserId)
@@ -55,7 +55,7 @@ local function getParticipantIds(p1, p2) --[[ Line: 45 ]]
 	return List
 end
 
-local _ = function(p3, p4) --[[ Line: 68 | Named "getAvatarIds" ]]
+local _ = function(p3, p4)
 	-- upvalues: getParticipantIds (copy)
 	local ParticipantIds = getParticipantIds(p3, p4)
 	
@@ -65,16 +65,16 @@ local _ = function(p3, p4) --[[ Line: 68 | Named "getAvatarIds" ]]
 	}
 end
 
-local function getHeadshotImage(UserId, HasSecondary, FFlagAppChatUseProfileFrameThumbnailModule) --[[ Line: 77 ]]
+local function getHeadshotImage(UserId, HasSecondary, FFlagAppChatUseProfileFrameThumbnailModule)
 	-- upvalues: GetStandardSizeAvatarHeadShotRbxthumbFunction (copy)
 	return if HasSecondary and UserId ~= 0 then GetStandardSizeAvatarHeadShotRbxthumbFunction(tostring(UserId), FFlagAppChatUseProfileFrameThumbnailModule) else ""
 end
 
-return function(p3) --[[ Line: 84 | Named "ConversationFacePileBinding" ]]
+return function(p3)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), getParticipantIds (copy), GetResult (copy), PresenceType (copy), SignalsReactModule (copy), FFlagAppChatBindingFacePileUserTileParityModule (copy), UseCumulativeBackgroundFunction (copy), Image (copy), getHeadshotImage (copy), FFlagAppChatUseProfileFrameThumbnailModule (copy), View (copy), Avatar (copy), AvatarSize (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local Shift300 = UseTokensResult.Color.Shift.Shift_300
-	local UseResult = ReactModule.useCallback(function(p4, p5): number --[[ Line: 88 ]]
+	local UseResult = ReactModule.useCallback(function(p4, p5): number
 		-- upvalues: getParticipantIds (upval)
 		local ParticipantIds = getParticipantIds(p4, p5)
 		
@@ -83,7 +83,7 @@ return function(p3) --[[ Line: 84 | Named "ConversationFacePileBinding" ]]
 			secondary = ParticipantIds[2]
 		}).primary) or 0
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(p4, p5): number --[[ Line: 91 ]]
+	local UseResult1 = ReactModule.useCallback(function(p4, p5): number
 		-- upvalues: getParticipantIds (upval)
 		local ParticipantIds = getParticipantIds(p4, p5)
 		
@@ -92,7 +92,7 @@ return function(p3) --[[ Line: 84 | Named "ConversationFacePileBinding" ]]
 			secondary = ParticipantIds[2]
 		}).secondary) or 0
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function(p4, p5): boolean --[[ Line: 94 ]]
+	local UseResult2 = ReactModule.useCallback(function(p4, p5): boolean
 		-- upvalues: getParticipantIds (upval)
 		local ParticipantIds = getParticipantIds(p4, p5)
 		
@@ -101,7 +101,7 @@ return function(p3) --[[ Line: 84 | Named "ConversationFacePileBinding" ]]
 			secondary = ParticipantIds[2]
 		}).secondary ~= nil
 	end, {})
-	local UseResult3 = ReactModule.useCallback(function(p4, p5): boolean --[[ Line: 97 ]]
+	local UseResult3 = ReactModule.useCallback(function(p4, p5): boolean
 		-- upvalues: getParticipantIds (upval), GetResult (upval), PresenceType (upval)
 		for _, value in getParticipantIds(p4, p5) do
 			local DataResult = GetResult.GetPresenceByUserId(value).data(p5)
@@ -116,19 +116,19 @@ return function(p3) --[[ Line: 84 | Named "ConversationFacePileBinding" ]]
 		end
 		return false
 	end, {})
-	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(function(p6) --[[ Line: 114 ]]
+	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(function(p6)
 		-- upvalues: UseResult (copy), p3 (copy)
 		return UseResult(p3.itemSignal(p6), p6)
 	end)
-	local UseSignalBindingResult1 = SignalsReactModule.useSignalBinding(function(p6) --[[ Line: 117 ]]
+	local UseSignalBindingResult1 = SignalsReactModule.useSignalBinding(function(p6)
 		-- upvalues: UseResult1 (copy), p3 (copy)
 		return UseResult1(p3.itemSignal(p6), p6)
 	end)
-	local UseSignalBindingResult2 = SignalsReactModule.useSignalBinding(function(p6) --[[ Line: 120 ]]
+	local UseSignalBindingResult2 = SignalsReactModule.useSignalBinding(function(p6)
 		-- upvalues: UseResult2 (copy), p3 (copy)
 		return UseResult2(p3.itemSignal(p6), p6)
 	end)
-	local MapResult = UseSignalBindingResult2:map(function(p6): boolean --[[ Line: 126 ]]
+	local MapResult = UseSignalBindingResult2:map(function(p6): boolean
 		return not p6
 	end)
 	local UseCumulativeBackgroundResult = if FFlagAppChatBindingFacePileUserTileParityModule then UseCumulativeBackgroundFunction(UseTokensResult.Color.Surface.Surface_0, Shift300) else nil
@@ -139,7 +139,7 @@ return function(p3) --[[ Line: 84 | Named "ConversationFacePileBinding" ]]
 		testId = "conversation-face-pile-presence",
 		Position = UDim2.new(0.8536, UseTokensResult.Stroke.Thicker, 0.8536, UseTokensResult.Stroke.Thicker),
 		Size = UDim2.new(0.125, 4, 0.125, 4),
-		Visible = SignalsReactModule.useSignalBinding(function(p6) --[[ Line: 123 ]]
+		Visible = SignalsReactModule.useSignalBinding(function(p6)
 			-- upvalues: UseResult3 (copy), p3 (copy)
 			return UseResult3(p3.itemSignal(p6), p6)
 		end),
@@ -168,7 +168,7 @@ return function(p3) --[[ Line: 84 | Named "ConversationFacePileBinding" ]]
 					tag = "position-center-center anchor-center-center size-full aspect-1-1 radius-circle",
 					testId = "conversation-face-pile-primary--image",
 					backgroundStyle = Shift300,
-					Image = JoinBindingsResult:map(function(p6) --[[ Line: 152 ]]
+					Image = JoinBindingsResult:map(function(p6)
 						-- upvalues: getHeadshotImage (upval), FFlagAppChatUseProfileFrameThumbnailModule (upval)
 						return getHeadshotImage(p6.userId, not p6.hasSecondary, FFlagAppChatUseProfileFrameThumbnailModule)
 					end)
@@ -184,7 +184,7 @@ return function(p3) --[[ Line: 84 | Named "ConversationFacePileBinding" ]]
 					testId = "conversation-face-pile-group-primary--image",
 					ZIndex = 2,
 					backgroundStyle = UseCumulativeBackgroundResult,
-					Image = JoinBindingsResult:map(function(p6) --[[ Line: 155 ]]
+					Image = JoinBindingsResult:map(function(p6)
 						-- upvalues: getHeadshotImage (upval)
 						return getHeadshotImage(p6.userId, p6.hasSecondary)
 					end),
@@ -198,7 +198,7 @@ return function(p3) --[[ Line: 84 | Named "ConversationFacePileBinding" ]]
 					Image = ReactModule.joinBindings({
 						userId = UseSignalBindingResult1,
 						hasSecondary = UseSignalBindingResult2
-					}):map(function(p6) --[[ Line: 159 ]]
+					}):map(function(p6)
 						-- upvalues: getHeadshotImage (upval)
 						return getHeadshotImage(p6.userId, p6.hasSecondary)
 					end),

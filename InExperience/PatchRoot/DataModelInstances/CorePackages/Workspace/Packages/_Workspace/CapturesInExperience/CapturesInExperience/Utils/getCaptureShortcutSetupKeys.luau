@@ -1,3 +1,3 @@
-﻿return function() --[[ Line: 1 ]]
+﻿return function()
 	return { Enum.KeyCode.LeftAlt, Enum.KeyCode.RightAlt }
 end

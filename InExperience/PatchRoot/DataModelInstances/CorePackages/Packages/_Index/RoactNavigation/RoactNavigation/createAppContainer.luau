@@ -11,11 +11,11 @@ local GetNavigationModule = require(Parent.getNavigation)
 local Callback = assert
 local UrlToPathAndParamsFunction = require(Parent.routers.pathUtils).urlToPathAndParams
 
-local function _(p1): boolean --[[ Line: 20 | Named "isStateful" ]]
+local function _(p1): boolean
 	return not p1.navigation
 end
 
-local function validateProps(Tbl) --[[ Line: 24 ]]
+local function validateProps(Tbl)
 	-- upvalues: Object (copy), Callback (copy)
 	if Tbl.persistenceKey then
 		warn("You passed persistenceKey prop to a navigator. The persistenceKey prop was replaced by a more flexible persistence mechanism, please see the navigation state persistence docs for more information. Passing the persistenceKey prop is a no-op.")
@@ -40,20 +40,20 @@ end
 local Count = 0
 
 return {
-	createAppContainer = function(p1, p2) --[[ Line: 117 ]]
+	createAppContainer = function(p1, p2)
 		-- upvalues: Callback (copy), ReactModule (copy), validateProps (copy), NavigationActionsModule (copy), UrlToPathAndParamsFunction (copy), Console (copy), Count (ref), EventsModule (copy), GetNavigationModule (copy), NavigationContextModule (copy), Object (copy)
 		Callback(type(p1) == "table" and p1.router ~= nil, "AppComponent must be a navigator or a stateful Roact component with a 'router' field")
 		local ExtendResult = ReactModule.Component:extend((string.format("NavigationContainer(%s)", (tostring(p1)))))
 		ExtendResult.router = p1.router
 		
-		function ExtendResult.getDerivedStateFromProps(p3) --[[ Line: 128 ]]
+		function ExtendResult.getDerivedStateFromProps(p3)
 			-- upvalues: validateProps (upval)
 			validateProps(p3)
 			
 			return nil
 		end
 		
-		function ExtendResult.init(p3) --[[ Line: 133 ]]
+		function ExtendResult.init(p3)
 			-- upvalues: validateProps (upval), NavigationActionsModule (upval), p1 (copy)
 			validateProps(p3.props)
 			p3._actionEventSubscribers = {}
@@ -63,7 +63,7 @@ return {
 			}
 		end
 		
-		function ExtendResult._updateExternalDispatchConnector(p3) --[[ Line: 155 ]]
+		function ExtendResult._updateExternalDispatchConnector(p3)
 			if p3._disconnectExternalDispatch then
 				p3._disconnectExternalDispatch()
 				p3._disconnectExternalDispatch = nil
@@ -71,22 +71,22 @@ return {
 			local ExternalDispatchConnectorFunction = p3.props.externalDispatchConnector
 			
 			if ExternalDispatchConnectorFunction ~= nil then
-				p3._disconnectExternalDispatch = ExternalDispatchConnectorFunction(function(...) --[[ Line: 163 ]]
+				p3._disconnectExternalDispatch = ExternalDispatchConnectorFunction(function(...)
 					-- upvalues: p3 (copy)
 					return if p3._isMounted then p3:dispatch(...) else false
 				end)
 			end
 		end
 		
-		function ExtendResult._renderLoading(p3) --[[ Line: 174 ]]
+		function ExtendResult._renderLoading(p3)
 			return p3.props.renderLoading and p3.props.renderLoading()
 		end
 		
-		function ExtendResult._isStateful(p3): boolean --[[ Line: 178 ]]
+		function ExtendResult._isStateful(p3): boolean
 			return not p3.props.navigation
 		end
 		
-		function ExtendResult._handleOpenURL(p3, p4) --[[ Line: 182 ]]
+		function ExtendResult._handleOpenURL(p3, p4)
 			-- upvalues: UrlToPathAndParamsFunction (upval), p1 (copy)
 			local Url = p4.url
 			local UriPrefix = p3.props.uriPrefix
@@ -103,7 +103,7 @@ return {
 			end
 		end
 		
-		function ExtendResult._onNavigationStateChange(p3, NavState, Nav, Action) --[[ Line: 201 ]]
+		function ExtendResult._onNavigationStateChange(p3, NavState, Nav, Action)
 			-- upvalues: Console (upval)
 			local OnNavigationStateChangeFunction: (any, any, any) -> () = p3.props.onNavigationStateChange
 			
@@ -120,7 +120,7 @@ return {
 			end
 		end
 		
-		function ExtendResult.didUpdate(p3, p4) --[[ Line: 218 ]]
+		function ExtendResult.didUpdate(p3, p4)
 			if p3._navState == p3.state.nav then
 				p3._navState = nil
 			end
@@ -129,7 +129,7 @@ return {
 			end
 		end
 		
-		function ExtendResult.didMount(p3) --[[ Line: 231 ]]
+		function ExtendResult.didMount(p3)
 			-- upvalues: Count (upval), Console (upval), p2 (copy), p1 (copy), EventsModule (upval)
 			p3._isMounted = true
 			p3:_updateExternalDispatchConnector()
@@ -141,7 +141,7 @@ return {
 			Count += 1
 			
 			if p2 then
-				p2:listenForLuaURLs(function(Url) --[[ Line: 256 ]]
+				p2:listenForLuaURLs(function(Url)
 					-- upvalues: p3 (copy)
 					p3:_handleOpenURL({ url = Url })
 				end, false)
@@ -165,7 +165,7 @@ return {
 					UserProvidedStartupState1 = p1.router.getStateForAction(ActionForPathAndParams, UserProvidedStartupState1)
 				end
 			end
-			local function dispatchAction() --[[ Line: 300 ]]
+			local function dispatchAction()
 				-- upvalues: p3 (copy), EventsModule (upval), InitialAction (ref)
 				for actionEventSubscriber in p3._actionEventSubscribers do
 					actionEventSubscriber({
@@ -186,7 +186,7 @@ return {
 			end
 		end
 		
-		function ExtendResult.getStartupParams(p4) --[[ Line: 326 ]]
+		function ExtendResult.getStartupParams(p4)
 			-- upvalues: p2 (copy), UrlToPathAndParamsFunction (upval)
 			local Props = p4.props
 			local UriPrefix = Props.uriPrefix
@@ -195,13 +195,13 @@ return {
 			local UserProvidedStartupState = nil
 			
 			if p2 then
-				pcall(function() --[[ Line: 334 ]]
+				pcall(function()
 					-- upvalues: LastLuaURL (ref), p2 (upval)
 					LastLuaURL = p2:getLastLuaURL()
 				end)
 			end
 			if LoadNavigationStateFunction then
-				pcall(function() --[[ Line: 340 ]]
+				pcall(function()
 					-- upvalues: UserProvidedStartupState (ref), LoadNavigationStateFunction (copy)
 					UserProvidedStartupState = LoadNavigationStateFunction()
 				end)
@@ -212,7 +212,7 @@ return {
 			}
 		end
 		
-		function ExtendResult._persistNavigationState(p4, Nav) --[[ Line: 353 ]]
+		function ExtendResult._persistNavigationState(p4, Nav)
 			local PersistNavigationState = p4.props.persistNavigationState
 			
 			if PersistNavigationState then
@@ -224,7 +224,7 @@ return {
 			end
 		end
 		
-		function ExtendResult.willUnmount(p4) --[[ Line: 369 ]]
+		function ExtendResult.willUnmount(p4)
 			-- upvalues: p2 (copy), Count (upval)
 			p4._isMounted = false
 			
@@ -240,7 +240,7 @@ return {
 			end
 		end
 		
-		function ExtendResult.dispatch(p4, Action) --[[ Line: 395 ]]
+		function ExtendResult.dispatch(p4, Action)
 			-- upvalues: Callback (upval), p1 (copy), EventsModule (upval)
 			if p4.props.navigation then
 				return p4.props.navigation.dispatch(Action)
@@ -251,7 +251,7 @@ return {
 			local StateForAction = p1.router.getStateForAction(Action, NavState)
 			local NavState1 = if StateForAction == nil then NavState else StateForAction
 			
-			local function dispatchActionEvents() --[[ Line: 411 ]]
+			local function dispatchActionEvents()
 				-- upvalues: p4 (copy), EventsModule (upval), Action (copy), NavState1 (ref), NavState (copy)
 				for actionEventSubscriber in p4._actionEventSubscribers do
 					actionEventSubscriber({
@@ -273,7 +273,7 @@ return {
 				return false
 			else
 				p4._navState = NavState1
-				p4:setState({ nav = NavState1 }, function() --[[ Line: 436 ]]
+				p4:setState({ nav = NavState1 }, function()
 					-- upvalues: p4 (copy), NavState (copy), NavState1 (ref), Action (copy), dispatchActionEvents (copy)
 					p4:_onNavigationStateChange(NavState, NavState1, Action)
 					task.defer(dispatchActionEvents)
@@ -284,7 +284,7 @@ return {
 			end
 		end
 		
-		function ExtendResult._getScreenProps(p5, p6, p7) --[[ Line: 450 ]]
+		function ExtendResult._getScreenProps(p5, p6, p7)
 			if p6 == nil then
 				return p5.props.screenProps
 			else
@@ -294,7 +294,7 @@ return {
 			end
 		end
 		
-		function ExtendResult.render(p5) --[[ Line: 465 ]]
+		function ExtendResult.render(p5)
 			-- upvalues: GetNavigationModule (upval), p1 (copy), Callback (upval), ReactModule (upval), NavigationContextModule (upval), Object (upval)
 			local Navigation = p5.props.navigation
 			
@@ -305,13 +305,13 @@ return {
 					return p5:_renderLoading()
 				end
 				if not p5._navigation or p5._navigation.state ~= Nav then
-					p5._navigation = GetNavigationModule(p1.router, Nav, function(...) --[[ Line: 478 ]]
+					p5._navigation = GetNavigationModule(p1.router, Nav, function(...)
 						-- upvalues: p5 (copy)
 						return p5:dispatch(...)
-					end, p5._actionEventSubscribers, function(...) --[[ Line: 482 ]]
+					end, p5._actionEventSubscribers, function(...)
 						-- upvalues: p5 (copy)
 						return p5:_getScreenProps(...)
-					end, function() --[[ Line: 485 ]]
+					end, function()
 						-- upvalues: p5 (copy)
 						return p5._navigation
 					end)
@@ -327,7 +327,7 @@ return {
 		
 		return ExtendResult
 	end,
-	_TESTING_ONLY_reset_container_count = function() --[[ Line: 72 ]]
+	_TESTING_ONLY_reset_container_count = function()
 		-- upvalues: Count (ref)
 		Count = 0
 	end

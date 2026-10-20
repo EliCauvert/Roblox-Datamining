@@ -5,7 +5,7 @@ local FlatList = require(Parent.VirtualizedList).FlatList
 local View = require(Parent.Foundation).View
 local _ = require(InExperienceShop.Types)
 
-return function(Frame) --[[ Line: 26 | Named "ShopHomePageView" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), View (copy), FlatList (copy)
 	return ReactModule.createElement(View, {
 		tag = "fill size-full-0 padding-x-xlarge",

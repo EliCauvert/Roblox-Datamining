@@ -8,21 +8,21 @@ local UsePausableTimeoutModule = require(ExpChat.Stores.GetTransparencyStore.use
 local DictationAnalyticsModule = require(script.Parent.DictationAnalytics)
 local DictationFTUXStorageModule = require(script.Parent.DictationFTUXStorage)
 
-return function(p1) --[[ Line: 44 | Named "useDictationFTUX" ]]
+return function(p1)
 	-- upvalues: UseIsChatBackgroundVisibleModule (copy), GetTransparencyStoreModule (copy), SignalsReactModule (copy), ReactModule (copy), DictationFTUXStorageModule (copy), DictationAnalyticsModule (copy), UsePausableTimeoutModule (copy)
 	local UseIsChatBackgroundVisibleModuleResult = UseIsChatBackgroundVisibleModule()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetTransparencyStoreModule(false).getIsTextBoxFocused)
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 53 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 		-- upvalues: DictationFTUXStorageModule (upval)
 		return DictationFTUXStorageModule.hasBeenDismissed()
 	end)
-	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(function() --[[ Line: 56 ]]
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(function()
 		-- upvalues: DictationFTUXStorageModule (upval)
 		return DictationFTUXStorageModule.hasBeenUsed()
 	end)
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 60 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2 (copy), DictationFTUXStorageModule (upval), DictationAnalyticsModule (upval)
-		UseStateResult2(function(p3) --[[ Line: 63 ]]
+		UseStateResult2(function(p3)
 			-- upvalues: DictationFTUXStorageModule (upval), DictationAnalyticsModule (upval), p2 (copy)
 			if p3 then
 				return p3
@@ -37,9 +37,9 @@ return function(p1) --[[ Line: 44 | Named "useDictationFTUX" ]]
 			end
 		end)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 77 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy), DictationFTUXStorageModule (upval)
-		UseStateResult2_1(function(p2) --[[ Line: 78 ]]
+		UseStateResult2_1(function(p2)
 			-- upvalues: DictationFTUXStorageModule (upval)
 			if p2 then
 				return p2
@@ -51,12 +51,12 @@ return function(p1) --[[ Line: 44 | Named "useDictationFTUX" ]]
 		end)
 	end, {})
 	local UseIsChatBackgroundVisibleModuleResult1 = UseStateResult1 and (not UseStateResult and (p1.isEligible and (not p1.isComposing and (not p1.isActive and (not UseSignalStateResult and UseIsChatBackgroundVisibleModuleResult)))))
-	UsePausableTimeoutModule(UseIsChatBackgroundVisibleModuleResult1, 10, (ReactModule.useCallback(function() --[[ Line: 102 ]]
+	UsePausableTimeoutModule(UseIsChatBackgroundVisibleModuleResult1, 10, (ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy), DictationAnalyticsModule (upval)
 		UseResult(DictationAnalyticsModule.DismissReasons.Visibility)
 	end, { UseResult })))
 	local UseRefResult = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 111 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseIsChatBackgroundVisibleModuleResult1 (copy), UseRefResult (copy), DictationAnalyticsModule (upval)
 		if UseIsChatBackgroundVisibleModuleResult1 and not UseRefResult.current then
 			UseRefResult.current = true

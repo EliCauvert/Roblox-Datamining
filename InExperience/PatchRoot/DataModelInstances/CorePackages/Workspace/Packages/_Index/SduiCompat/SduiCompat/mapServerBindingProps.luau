@@ -1,6 +1,6 @@
 ﻿local t = {}
 
-local function _(Text: string): boolean --[[ Line: 7 | Named "isPascalCase" ]]
+local function _(Text: string): boolean
 	-- upvalues: t (copy)
 	if t[Text] then
 		return true
@@ -17,7 +17,7 @@ local function _(Text: string): boolean --[[ Line: 7 | Named "isPascalCase" ]]
 	return IsSegmentMatch
 end
 
-return function(List1, p1) --[[ Line: 34 | Named "mapServerBindingProps" ]]
+return function(List1, p1)
 	-- upvalues: t (copy)
 	local v1 = nil
 	local List = nil

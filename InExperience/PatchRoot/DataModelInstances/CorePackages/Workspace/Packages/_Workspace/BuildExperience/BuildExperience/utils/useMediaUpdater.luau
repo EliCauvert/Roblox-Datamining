@@ -5,28 +5,28 @@ local GetAssetUserAuthStoreFunction = require(Parent.DataHydration.AssetUserAuth
 local Debug = require(Parent.DataHydration.CreatorAgentChat).debug
 local FormatErrorModule = require(script.Parent.formatError)
 
-return function(p1) --[[ Line: 34 | Named "useMediaUpdater" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), PromiseModule (copy), Debug (copy), GetAssetUserAuthStoreFunction (copy), FormatErrorModule (copy)
 	local UseRefResult = ReactModule.useRef(PromiseModule.resolve())
 	local OnSuccess = p1 and p1.onSuccess
 	local OnError = p1 and p1.onError
-	local UseResult = ReactModule.useCallback(function(p2, p3) --[[ Line: 39 ]]
+	local UseResult = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: Debug (upval), UseRefResult (copy), GetAssetUserAuthStoreFunction (upval), PromiseModule (upval), OnSuccess (copy), FormatErrorModule (upval), OnError (copy)
 		Debug.log("info", `media_updater {p3} enqueued`)
-		local Promise = UseRefResult.current:catch(function() --[[ Line: 42 ]]
+		local Promise = UseRefResult.current:catch(function()
 			return nil
-		end):andThen(p2):andThen(function(Result) --[[ Line: 46 ]]
+		end):andThen(p2):andThen(function(Result)
 			-- upvalues: GetAssetUserAuthStoreFunction (upval)
 			return GetAssetUserAuthStoreFunction().pollUntilDone(Result)
-		end):andThen(function(Result) --[[ Line: 49 ]]
+		end):andThen(function(Result)
 			-- upvalues: PromiseModule (upval)
 			return if typeof(Result) == "table" and Result.status == "timed_out" then PromiseModule.reject("Operation did not complete in time") elseif Result.status == "done" then Result.operation else Result
 		end)
-		UseRefResult.current = Promise:catch(function() --[[ Line: 56 ]]
+		UseRefResult.current = Promise:catch(function()
 			return nil
 		end)
 		
-		return Promise:andThen(function(Result) --[[ Line: 61 ]]
+		return Promise:andThen(function(Result)
 			-- upvalues: Debug (upval), p3 (copy), OnSuccess (upval)
 			Debug.log("info", `media_updater {p3} succeeded`)
 			
@@ -34,7 +34,7 @@ return function(p1) --[[ Line: 34 | Named "useMediaUpdater" ]]
 				OnSuccess()
 			end
 			return Result
-		end):catch(function(Err) --[[ Line: 68 ]]
+		end):catch(function(Err)
 			-- upvalues: FormatErrorModule (upval), Debug (upval), p3 (copy), OnError (upval), PromiseModule (upval)
 			local FormatErrorModuleResult = FormatErrorModule(Err)
 			Debug.log("warn", `media_updater {p3} failed`, { error = FormatErrorModuleResult })
@@ -47,25 +47,25 @@ return function(p1) --[[ Line: 34 | Named "useMediaUpdater" ]]
 	end, { OnSuccess, OnError })
 	
 	return {
-		setIcon = ReactModule.useCallback(function(p2, p3) --[[ Line: 78 ]]
+		setIcon = ReactModule.useCallback(function(p2, p3)
 			-- upvalues: UseResult (copy), PromiseModule (upval), GetAssetUserAuthStoreFunction (upval)
-			return UseResult(function() --[[ Line: 79 ]]
+			return UseResult(function()
 				-- upvalues: PromiseModule (upval), p3 (copy), GetAssetUserAuthStoreFunction (upval), p2 (copy)
-				return PromiseModule.resolve(p3):andThen(function(Result) --[[ Line: 80 ]]
+				return PromiseModule.resolve(p3):andThen(function(Result)
 					-- upvalues: GetAssetUserAuthStoreFunction (upval), p2 (upval)
 					return GetAssetUserAuthStoreFunction().updateIcon(p2, Result)
 				end)
 			end, "setIcon")
 		end, { UseResult }),
-		addPreview = ReactModule.useCallback(function(p2, p3) --[[ Line: 87 ]]
+		addPreview = ReactModule.useCallback(function(p2, p3)
 			-- upvalues: UseResult (copy), GetAssetUserAuthStoreFunction (upval), PromiseModule (upval)
-			return UseResult(function() --[[ Line: 88 ]]
+			return UseResult(function()
 				-- upvalues: GetAssetUserAuthStoreFunction (upval), PromiseModule (upval), p3 (copy), p2 (copy)
 				local AssetUserAuthStore = GetAssetUserAuthStoreFunction()
 				
-				return PromiseModule.resolve(p3):andThen(function(Result) --[[ Line: 90 ]]
+				return PromiseModule.resolve(p3):andThen(function(Result)
 					-- upvalues: AssetUserAuthStore (copy), p2 (upval)
-					return AssetUserAuthStore.getPreviews(p2):andThen(function(Tbl) --[[ Line: 91 ]]
+					return AssetUserAuthStore.getPreviews(p2):andThen(function(Tbl)
 						-- upvalues: Result (copy), AssetUserAuthStore (upval), p2 (upval)
 						local Copy = table.clone(Tbl)
 						table.insert(Copy, { asset = `assets/{Result}` })
@@ -75,15 +75,15 @@ return function(p1) --[[ Line: 34 | Named "useMediaUpdater" ]]
 				end)
 			end, "addPreview")
 		end, { UseResult }),
-		replacePreview = ReactModule.useCallback(function(p2, p3, Asset) --[[ Line: 103 ]]
+		replacePreview = ReactModule.useCallback(function(p2, p3, Asset)
 			-- upvalues: UseResult (copy), GetAssetUserAuthStoreFunction (upval), PromiseModule (upval)
-			return UseResult(function() --[[ Line: 104 ]]
+			return UseResult(function()
 				-- upvalues: GetAssetUserAuthStoreFunction (upval), PromiseModule (upval), p3 (copy), p2 (copy), Asset (copy)
 				local AssetUserAuthStore = GetAssetUserAuthStoreFunction()
 				
-				return PromiseModule.resolve(p3):andThen(function(Result) --[[ Line: 106 ]]
+				return PromiseModule.resolve(p3):andThen(function(Result)
 					-- upvalues: AssetUserAuthStore (copy), p2 (upval), Asset (upval), PromiseModule (upval)
-					return AssetUserAuthStore.getPreviews(p2):andThen(function(Tbl) --[[ Line: 107 ]]
+					return AssetUserAuthStore.getPreviews(p2):andThen(function(Tbl)
 						-- upvalues: Asset (upval), PromiseModule (upval), Result (copy), AssetUserAuthStore (upval), p2 (upval)
 						local v1 = nil
 						
@@ -107,13 +107,13 @@ return function(p1) --[[ Line: 34 | Named "useMediaUpdater" ]]
 				end)
 			end, "replacePreview")
 		end, { UseResult }),
-		removePreview = ReactModule.useCallback(function(p4, Asset) --[[ Line: 130 ]]
+		removePreview = ReactModule.useCallback(function(p4, Asset)
 			-- upvalues: UseResult (copy), GetAssetUserAuthStoreFunction (upval), PromiseModule (upval)
-			return UseResult(function() --[[ Line: 131 ]]
+			return UseResult(function()
 				-- upvalues: GetAssetUserAuthStoreFunction (upval), p4 (copy), Asset (copy), PromiseModule (upval)
 				local AssetUserAuthStore = GetAssetUserAuthStoreFunction()
 				
-				return AssetUserAuthStore.getPreviews(p4):andThen(function(Tbl) --[[ Line: 133 ]]
+				return AssetUserAuthStore.getPreviews(p4):andThen(function(Tbl)
 					-- upvalues: Asset (upval), PromiseModule (upval), AssetUserAuthStore (copy), p4 (upval)
 					local Index = nil
 					

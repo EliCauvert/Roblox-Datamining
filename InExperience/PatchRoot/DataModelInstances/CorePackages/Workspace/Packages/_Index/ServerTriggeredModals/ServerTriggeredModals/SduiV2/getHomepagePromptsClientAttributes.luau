@@ -18,7 +18,7 @@ local PushNotificationsUpsellPromptsClientAttributesTimeoutMs = game:DefineFastI
 local HomePageSessionTimestamp = nil
 local Count = 0
 
-local function _(p1): number --[[ Line: 43 | Named "homePageSessionOrdinalFor" ]]
+local function _(p1): number
 	-- upvalues: HomePageSessionTimestamp (ref), Count (ref)
 	if p1 ~= nil and p1 ~= HomePageSessionTimestamp then
 		HomePageSessionTimestamp = p1
@@ -27,7 +27,7 @@ local function _(p1): number --[[ Line: 43 | Named "homePageSessionOrdinalFor" ]
 	return Count
 end
 
-local _ = function(p1) --[[ Line: 52 | Named "readStoredNumber" ]]
+local _ = function(p1)
 	-- upvalues: AppStorageService (copy)
 	local Success, Result = pcall(AppStorageService.GetItem, AppStorageService, p1)
 	
@@ -38,7 +38,7 @@ local _ = function(p1) --[[ Line: 52 | Named "readStoredNumber" ]]
 	end
 end
 
-local function getExistingHomepageClientAttributes() --[[ Line: 61 ]]
+local function getExistingHomepageClientAttributes()
 	-- upvalues: FFlagSplitPaneEducationalTour (copy), Parent (copy), AppStorageService (copy), FFlagHomepagePromptsHalloween2026ThemeModule (copy), FFlagAppThemeHalloween2026Module (copy), FFlagAppThemeHalloween2026ForAllModule (copy)
 	local t = {}
 	
@@ -58,26 +58,26 @@ local function getExistingHomepageClientAttributes() --[[ Line: 61 ]]
 end
 
 return {
-	get = function() --[[ Line: 84 ]]
+	get = function()
 		-- upvalues: getExistingHomepageClientAttributes (copy)
 		local ExistingHomepageClientAttributes = getExistingHomepageClientAttributes()
 		
 		return if next(ExistingHomepageClientAttributes) == nil then nil else ExistingHomepageClientAttributes
 	end,
-	use = function(HomepageLaunch, p1) --[[ Line: 90 ]]
+	use = function(HomepageLaunch, p1)
 		-- upvalues: PromptsEntryPointModule (copy), FFlagEdpGameLeavePromptsHandlerEnabled (copy), UseLocalUserIdFunction (copy), UseSelectorFunction (copy), AppPage (copy), ReactModule (copy), getExistingHomepageClientAttributes (copy), NotificationsUpsellModule (copy), AppStorageService (copy), HomePageSessionTimestamp (ref), Count (ref), PromiseModule (copy), PushNotificationsUpsellPromptsClientAttributesTimeoutMs (copy)
 		local Inverted: boolean = HomepageLaunch == PromptsEntryPointModule.HomepageLaunch and not (FFlagEdpGameLeavePromptsHandlerEnabled and p1 ~= nil)
 		local UseLocalUserIdResult = UseLocalUserIdFunction()
-		local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 97 ]]
+		local UseSelectorResult = UseSelectorFunction(function(p2)
 			return p2.LaunchContext
 		end)
-		local UseSelectorResult1 = UseSelectorFunction(function(p2) --[[ Line: 100 ]]
+		local UseSelectorResult1 = UseSelectorFunction(function(p2)
 			-- upvalues: AppPage (upval)
 			return p2.Personalization and p2.Personalization.PageSessionTimestamp[AppPage.Home]
 		end)
 		local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 		local Number: number = tonumber(UseLocalUserIdResult) or 0
-		ReactModule.useEffect(function() --[[ Line: 106 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: Inverted (copy), UseSelectorResult (copy), getExistingHomepageClientAttributes (upval), NotificationsUpsellModule (upval), AppStorageService (upval), UseSelectorResult1 (copy), HomePageSessionTimestamp (upval), Count (upval), UseStateResult2 (copy), Number (copy), PromiseModule (upval), PushNotificationsUpsellPromptsClientAttributesTimeoutMs (upval)
 			if not Inverted then return end
 			local Flag = true
@@ -116,7 +116,7 @@ return {
 			local Count1: number = Count
 			local Flag3 = false
 			
-			local function resolveWithNativeStatus(Result) --[[ Line: 122 ]]
+			local function resolveWithNativeStatus(Result)
 				-- upvalues: Flag3 (ref), ExistingHomepageClientAttributes1 (copy), UseSelectorResult2 (copy), UseSelectorResult1 (upval), Count1 (copy), Flag1 (copy), Flag2 (copy), Number1 (copy), Number2 (copy), Flag (ref), UseStateResult2 (upval), Number (upval)
 				if Flag3 then return end
 				Flag3 = true
@@ -142,12 +142,12 @@ return {
 			end
 			
 			NotificationsUpsellModule.setupPushNotificationsUpsell.GetPushNotificationPermissionUpsellStatus():andThen(resolveWithNativeStatus)
-			PromiseModule.delay(PushNotificationsUpsellPromptsClientAttributesTimeoutMs / 1000):andThen(function() --[[ Line: 153 ]]
+			PromiseModule.delay(PushNotificationsUpsellPromptsClientAttributesTimeoutMs / 1000):andThen(function()
 				-- upvalues: resolveWithNativeStatus (copy)
 				resolveWithNativeStatus("TIMEOUT")
 			end)
 			
-			return function() --[[ Line: 157 ]]
+			return function()
 				-- upvalues: Flag (ref)
 				Flag = false
 			end

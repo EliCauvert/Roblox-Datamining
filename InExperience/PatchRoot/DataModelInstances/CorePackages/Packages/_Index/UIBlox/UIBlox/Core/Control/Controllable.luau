@@ -8,14 +8,14 @@ local ControlStateModule = require(Parent.Enum.ControlState)
 local StateTableModule = require(Parent1.StateTable.StateTable)
 local Controllable = RoactModule.PureComponent:extend("Controllable")
 
-function Controllable.init(p1) --[[ Line: 23 ]]
+function Controllable.init(p1)
 	-- upvalues: ControlStateModule (copy), StateTableModule (copy)
 	p1.isMounted = false
 	local Initialize = ControlStateModule.Initialize
 	p1.state = { currentState = Initialize }
 	local Formatted = string.format("Controllable(%s)", (tostring(p1)))
 	
-	function p1.setDisabled(IsDisabled) --[[ Line: 31 ]]
+	function p1.setDisabled(IsDisabled)
 		-- upvalues: p1 (copy)
 		if IsDisabled then
 			p1.stateTable.events.Disable()
@@ -61,7 +61,7 @@ function Controllable.init(p1) --[[ Line: 23 ]]
 		},
 		[ControlStateModule.Disabled] = { Enable = { nextState = ControlStateModule.Default } }
 	})
-	p1.stateTable:onStateChange(function(p2, CurrentState) --[[ Line: 77 ]]
+	p1.stateTable:onStateChange(function(p2, CurrentState)
 		-- upvalues: p1 (copy)
 		p1:setState({ currentState = CurrentState })
 		
@@ -83,7 +83,7 @@ Controllable.validateProps = TModule.strictInterface({
 })
 Controllable.defaultProps = { userInteractionEnabled = true, isDisabled = false }
 
-function Controllable.render(p1) --[[ Line: 115 ]]
+function Controllable.render(p1)
 	-- upvalues: ControlStateModule (copy), CryoModule (copy), RoactModule (copy)
 	local ControlComponent = p1.props.controlComponent
 	local UserInteractionEnabled = p1.props.userInteractionEnabled
@@ -99,7 +99,7 @@ function Controllable.render(p1) --[[ Line: 115 ]]
 	return RoactModule.createElement(ControlComponent.component, CryoModule.Dictionary.join(p1.props, ControlComponent.props or {}, {
 		Selectable = Selectable,
 		Active = not p1.props.isDisabled,
-		[RoactModule.Event.MouseEnter] = function(...) --[[ Line: 131 ]]
+		[RoactModule.Event.MouseEnter] = function(...)
 			-- upvalues: UserInteractionEnabled (copy), p1 (copy), ControlComponent (copy), RoactModule (upval)
 			if UserInteractionEnabled then
 				p1.stateTable.events.StartHover()
@@ -109,7 +109,7 @@ function Controllable.render(p1) --[[ Line: 115 ]]
 				return nil
 			end
 		end,
-		[RoactModule.Event.MouseLeave] = function(...) --[[ Line: 141 ]]
+		[RoactModule.Event.MouseLeave] = function(...)
 			-- upvalues: UserInteractionEnabled (copy), p1 (copy), ControlComponent (copy), RoactModule (upval)
 			if UserInteractionEnabled then
 				p1.stateTable.events.EndHover()
@@ -119,7 +119,7 @@ function Controllable.render(p1) --[[ Line: 115 ]]
 				return nil
 			end
 		end,
-		[RoactModule.Event.InputBegan] = function(...) --[[ Line: 151 ]]
+		[RoactModule.Event.InputBegan] = function(...)
 			-- upvalues: UserInteractionEnabled (copy), p1 (copy), ControlComponent (copy), RoactModule (upval)
 			if not UserInteractionEnabled then
 				return nil
@@ -131,7 +131,7 @@ function Controllable.render(p1) --[[ Line: 115 ]]
 			end
 			return if ControlComponent.props[RoactModule.Event.InputBegan] == nil then nil else ControlComponent.props[RoactModule.Event.InputBegan](...)
 		end,
-		[RoactModule.Event.InputEnded] = function(...) --[[ Line: 168 ]]
+		[RoactModule.Event.InputEnded] = function(...)
 			-- upvalues: UserInteractionEnabled (copy), p1 (copy), ControlComponent (copy), RoactModule (upval)
 			if not UserInteractionEnabled then
 				return nil
@@ -145,7 +145,7 @@ function Controllable.render(p1) --[[ Line: 115 ]]
 			end
 			return if ControlComponent.props[RoactModule.Event.InputEnded] == nil then nil else ControlComponent.props[RoactModule.Event.InputEnded](...)
 		end,
-		[RoactModule.Event.SelectionGained] = function(...) --[[ Line: 187 ]]
+		[RoactModule.Event.SelectionGained] = function(...)
 			-- upvalues: UserInteractionEnabled (copy), p1 (copy), ControlComponent (copy), RoactModule (upval)
 			if UserInteractionEnabled then
 				p1.stateTable.events.OnSelectionGained()
@@ -155,7 +155,7 @@ function Controllable.render(p1) --[[ Line: 115 ]]
 				return nil
 			end
 		end,
-		[RoactModule.Event.SelectionLost] = function(...) --[[ Line: 197 ]]
+		[RoactModule.Event.SelectionLost] = function(...)
 			-- upvalues: UserInteractionEnabled (copy), p1 (copy), ControlComponent (copy), RoactModule (upval)
 			if UserInteractionEnabled then
 				p1.stateTable.events.OnSelectionLost()
@@ -165,7 +165,7 @@ function Controllable.render(p1) --[[ Line: 115 ]]
 				return nil
 			end
 		end,
-		[RoactModule.Event.Activated] = function(...) --[[ Line: 207 ]]
+		[RoactModule.Event.Activated] = function(...)
 			-- upvalues: UserInteractionEnabled (copy), ControlComponent (copy), RoactModule (upval), p1 (copy), ControlStateModule (upval)
 			return if UserInteractionEnabled and (ControlComponent.props[RoactModule.Event.Activated] and p1.state.currentState ~= ControlStateModule.Disabled and p1.isMounted) then ControlComponent.props[RoactModule.Event.Activated](...) else nil
 		end,
@@ -179,18 +179,18 @@ function Controllable.render(p1) --[[ Line: 115 ]]
 	}), ControlComponent.children)
 end
 
-function Controllable.didMount(p1) --[[ Line: 233 ]]
+function Controllable.didMount(p1)
 	p1.isMounted = true
 	p1.setDisabled(p1.props.isDisabled)
 end
 
-function Controllable.didUpdate(p1, p2) --[[ Line: 238 ]]
+function Controllable.didUpdate(p1, p2)
 	if p1.props.isDisabled ~= p2.isDisabled then
 		p1.setDisabled(p1.props.isDisabled)
 	end
 end
 
-function Controllable.willUnmount(p1) --[[ Line: 244 ]]
+function Controllable.willUnmount(p1)
 	p1.isMounted = false
 end
 

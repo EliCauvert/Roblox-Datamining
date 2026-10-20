@@ -2,7 +2,7 @@
 local _ = require(CorePackages.Packages.Cryo)
 
 return require(CorePackages.Packages.Rodux).createReducer({ name = "", description = "" }, {
-	[require(script.Parent.Parent.Actions.SetPlaceInfo).name] = function(_, p1) --[[ Line: 13 ]]
+	[require(script.Parent.Parent.Actions.SetPlaceInfo).name] = function(_, p1)
 		return { name = p1.name, description = p1.description }
 	end
 })

@@ -13,7 +13,7 @@ local _ = require(Parent.SduiCoreSystem)
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 
-return ReactModule.memo(function(p1) --[[ Line: 30 | Named "SduiPlayButtonContextualMessage" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseRoactServiceFunction (copy), RoactServiceTagsModule (copy), UseTokensFunction (copy), ReactModule (copy), SduiFeedContextModule (copy), UsePlayButtonStateFunction (copy), UsePlayButtonContextualMessageFunction (copy), View (copy), Text (copy), GamePlayButtonModule (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactServiceTagsModule.RoactNetworking)
 	local UseTokensResult = UseTokensFunction()

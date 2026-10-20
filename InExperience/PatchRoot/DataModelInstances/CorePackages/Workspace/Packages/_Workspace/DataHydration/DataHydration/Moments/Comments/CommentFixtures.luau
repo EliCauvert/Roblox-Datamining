@@ -65,7 +65,7 @@ local config2 = {
 			userReaction = { emoteId = config.unknownEmoteId }
 		}
 	},
-	makeComment = function(List) --[[ Line: 97 ]]
+	makeComment = function(List)
 		-- upvalues: config1 (copy)
 		local config = {
 			commentId = "c-1",
@@ -84,7 +84,7 @@ local config2 = {
 		end
 		return config
 	end,
-	makeEnvelope = function(List) --[[ Line: 115 ]]
+	makeEnvelope = function(List)
 		local config = {
 			count = 25,
 			countIsCapped = false,

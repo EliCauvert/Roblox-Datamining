@@ -17,7 +17,7 @@ local CollectionItemSize = CollectionViewsModule.CollectionViewTypes.CollectionI
 local FFlagLuaAppAddSocialLinkClickTelemetryToEdp = require(Parent.SharedFlags).FFlagLuaAppAddSocialLinkClickTelemetryToEdp
 local SocialLinkClickTelemetryThrottlePermyriad = if FFlagLuaAppAddSocialLinkClickTelemetryToEdp then nil else game:DefineFastInt("SocialLinkClickTelemetryThrottlePermyriad", 0)
 
-return function(p1) --[[ Line: 42 ]]
+return function(p1)
 	-- upvalues: UseProfileWrapperContextModule (copy), UseRoactServiceFunction (copy), AppLinking (copy), ReactModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseDynamicSizeMarginModule (copy), UseCollectionLayoutParamsFunction (copy), CollectionItemSize (copy), FFlagLuaAppAddSocialLinkClickTelemetryToEdp (copy), SendSocialLinkClickEventFunction (copy), SocialLinkClickTelemetryThrottlePermyriad (copy), TelemetryService (copy), SocialLinkTileModule (copy), CollectionCarousel (copy)
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	local OpenLeaveRobloxAlertUIBloxFunction = UseProfileWrapperContextModuleResult.navigateTo.openLeaveRobloxAlertUIBlox
@@ -29,9 +29,9 @@ return function(p1) --[[ Line: 42 ]]
 	local UseDynamicSizeMarginModuleResult, UseDynamicSizeMarginModuleResult2 = UseDynamicSizeMarginModule()
 	local UseCollectionLayoutParamsResult = UseCollectionLayoutParamsFunction(CollectionItemSize.XSmall, UseStateResult, true, { sideMargin = UseDynamicSizeMarginModuleResult })
 	
-	local function _(Social_link_type, Social_link_url) --[[ Line: 62 ]]
+	local function _(Social_link_type, Social_link_url)
 		-- upvalues: FFlagLuaAppAddSocialLinkClickTelemetryToEdp (upval), SendSocialLinkClickEventFunction (upval), UseProfileWrapperContextModuleResult (copy), SocialLinkClickTelemetryThrottlePermyriad (upval), TelemetryService (upval), UseRoactServiceResult (copy), CloseLeaveRobloxAlertFunction (copy)
-		return function() --[[ Line: 63 ]]
+		return function()
 			-- upvalues: FFlagLuaAppAddSocialLinkClickTelemetryToEdp (upval), SendSocialLinkClickEventFunction (upval), UseProfileWrapperContextModuleResult (upval), Social_link_type (copy), Social_link_url (copy), SocialLinkClickTelemetryThrottlePermyriad (upval), TelemetryService (upval), UseRoactServiceResult (upval), CloseLeaveRobloxAlertFunction (upval)
 			if FFlagLuaAppAddSocialLinkClickTelemetryToEdp then
 				SendSocialLinkClickEventFunction({
@@ -60,7 +60,7 @@ return function(p1) --[[ Line: 42 ]]
 				})
 			end
 			if UseRoactServiceResult then
-				UseRoactServiceResult:openURL(Social_link_url):andThen(function(Enabled) --[[ Line: 93 ]]
+				UseRoactServiceResult:openURL(Social_link_url):andThen(function(Enabled)
 					-- upvalues: UseRoactServiceResult (upval), Social_link_url (upval)
 					if Enabled == false then
 						UseRoactServiceResult:openURL(Social_link_url)
@@ -73,14 +73,14 @@ return function(p1) --[[ Line: 42 ]]
 		end
 	end
 	
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 106 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: OpenLeaveRobloxAlertUIBloxFunction (copy), UseRoactServiceResult (copy), FFlagLuaAppAddSocialLinkClickTelemetryToEdp (upval), SendSocialLinkClickEventFunction (upval), UseProfileWrapperContextModuleResult (copy), SocialLinkClickTelemetryThrottlePermyriad (upval), TelemetryService (upval), CloseLeaveRobloxAlertFunction (copy)
-		return function() --[[ Line: 107 ]]
+		return function()
 			-- upvalues: OpenLeaveRobloxAlertUIBloxFunction (upval), UseRoactServiceResult (upval), p2 (copy), FFlagLuaAppAddSocialLinkClickTelemetryToEdp (upval), SendSocialLinkClickEventFunction (upval), UseProfileWrapperContextModuleResult (upval), SocialLinkClickTelemetryThrottlePermyriad (upval), TelemetryService (upval), CloseLeaveRobloxAlertFunction (upval)
 			if OpenLeaveRobloxAlertUIBloxFunction and UseRoactServiceResult and p2.url then
 				local Key = p2.key
 				local Url = p2.url
-				OpenLeaveRobloxAlertUIBloxFunction(function() --[[ Line: 63 ]]
+				OpenLeaveRobloxAlertUIBloxFunction(function()
 					-- upvalues: FFlagLuaAppAddSocialLinkClickTelemetryToEdp (upval), SendSocialLinkClickEventFunction (upval), UseProfileWrapperContextModuleResult (upval), Key (copy), Url (copy), SocialLinkClickTelemetryThrottlePermyriad (upval), TelemetryService (upval), UseRoactServiceResult (upval), CloseLeaveRobloxAlertFunction (upval)
 					if FFlagLuaAppAddSocialLinkClickTelemetryToEdp then
 						SendSocialLinkClickEventFunction({
@@ -109,7 +109,7 @@ return function(p1) --[[ Line: 42 ]]
 						})
 					end
 					if UseRoactServiceResult then
-						UseRoactServiceResult:openURL(Url):andThen(function(Enabled) --[[ Line: 93 ]]
+						UseRoactServiceResult:openURL(Url):andThen(function(Enabled)
 							-- upvalues: UseRoactServiceResult (upval), Url (upval)
 							if Enabled == false then
 								UseRoactServiceResult:openURL(Url)
@@ -144,7 +144,7 @@ return function(p1) --[[ Line: 42 ]]
 			scrollingFrameRef = UseRefResult,
 			title = UseLocalizationResult.title,
 			items = p1.items,
-			renderItem = ReactModule.useCallback(function(p2, LayoutOrder, _) --[[ Line: 115 ]]
+			renderItem = ReactModule.useCallback(function(p2, LayoutOrder, _)
 				-- upvalues: ReactModule (upval), SocialLinkTileModule (upval), UseResult (copy)
 				return ReactModule.createElement(SocialLinkTileModule, {
 					tileSize = 80,
@@ -154,7 +154,7 @@ return function(p1) --[[ Line: 42 ]]
 					layoutOrder = LayoutOrder
 				}), p2.key
 			end, { UseResult }),
-			getItemHeight = ReactModule.useCallback(function(p2: number): number --[[ Line: 58 ]]
+			getItemHeight = ReactModule.useCallback(function(p2: number): number
 				return p2 + 36
 			end, {}),
 			numColumns = UseCollectionLayoutParamsResult.numColumns,

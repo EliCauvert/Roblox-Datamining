@@ -8,7 +8,7 @@ local config = {
 	lastUpdated = { 24, 8, 2 }
 }
 
-return function(Endpoint_name, p1, Default1) --[[ Line: 23 | Named "logResponseTelemetry" ]]
+return function(Endpoint_name, p1, Default1)
 	-- upvalues: Default (copy), config (copy)
 	if Default1 == nil then
 		Default1 = Default

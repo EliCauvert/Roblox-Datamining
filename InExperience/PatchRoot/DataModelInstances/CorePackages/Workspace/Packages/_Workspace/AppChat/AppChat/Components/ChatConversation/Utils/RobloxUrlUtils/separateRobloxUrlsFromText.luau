@@ -13,16 +13,16 @@ local NewResult = UrlMatchingModule.UrlProcessor.new({
 	protocolStrict = false,
 	subdomainStrict = false,
 	trimPunctuation = true,
-	domainsPatterns = CryoModule.List.map(ConstantsModule.ROBLOX_DOMAIN_PATTERNS, function(Text): string --[[ Line: 22 ]]
+	domainsPatterns = CryoModule.List.map(ConstantsModule.ROBLOX_DOMAIN_PATTERNS, function(Text): string
 		-- upvalues: ZeroOrOneOfResult (copy)
 		return Text .. ZeroOrOneOfResult
 	end),
 	subdomainPatterns = { UrlMatchingModule.Constants.ANY_DOMAIN_NAME }
 }, (require(script.Parent.RobloxUrlMap)))
 
-local function _(p1, Text) --[[ Line: 36 | Named "prepareMatchesForMessages" ]]
+local function _(p1, Text)
 	-- upvalues: CryoModule (copy)
-	return CryoModule.List.filterMap(p1, function(p2) --[[ Line: 40 ]]
+	return CryoModule.List.filterMap(p1, function(p2)
 		-- upvalues: CryoModule (upval), Text (copy)
 		local Result = p2.result
 		
@@ -34,13 +34,13 @@ local function _(p1, Text) --[[ Line: 36 | Named "prepareMatchesForMessages" ]]
 	end)
 end
 
-return function(Text1: string) --[[ Line: 58 ]]
+return function(Text1: string)
 	-- upvalues: NewResult (copy), FFlagAppChatShareLinkV2FallbacksModule (copy), CryoModule (copy), FFlagAppChatFullPlaintextBeforeGameCardsModule (copy), AddMessageModule (copy), Text (copy)
 	local List = {}
 	local ProcessResult = NewResult:process(Text1)
 	
 	if FFlagAppChatShareLinkV2FallbacksModule then
-		ProcessResult = CryoModule.List.filterMap(ProcessResult, function(p1) --[[ Line: 40 ]]
+		ProcessResult = CryoModule.List.filterMap(ProcessResult, function(p1)
 			-- upvalues: CryoModule (upval), Text1 (copy)
 			local Result = p1.result
 			

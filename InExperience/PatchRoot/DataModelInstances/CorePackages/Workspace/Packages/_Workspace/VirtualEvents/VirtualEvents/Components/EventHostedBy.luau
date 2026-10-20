@@ -13,7 +13,7 @@ local CellTailDescription = UIBloxModule.App.Table.CellTailDescription
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local config = { size = UDim2.new(1, 0, 0, 52) }
 
-return function(p1) --[[ Line: 29 | Named "EventHostedBy" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), UseCursorFunction (copy), FoundationModule (copy), ReactModule (copy), Cell (copy), CellHeadDetail (copy), CellTailDescription (copy), EventHostNameModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseStyleResult = UseStyleFunction()
@@ -24,7 +24,7 @@ return function(p1) --[[ Line: 29 | Named "EventHostedBy" ]]
 		layoutWraps = true,
 		selectionCursor = UseCursorFunction(FoundationModule.Enums.CursorType.RoundedRect),
 		size = JoinResult.size,
-		onActivated = ReactModule.useCallback(function() --[[ Line: 38 ]]
+		onActivated = ReactModule.useCallback(function()
 			-- upvalues: JoinResult (ref)
 			if JoinResult.onActivated then
 				JoinResult.onActivated(JoinResult.host)
@@ -38,7 +38,7 @@ return function(p1) --[[ Line: 29 | Named "EventHostedBy" ]]
 		tail = ReactModule.createElement(CellTailDescription, {
 			text = "",
 			showArrow = true,
-			renderTextOverride = function() --[[ Line: 57 ]]
+			renderTextOverride = function()
 				-- upvalues: ReactModule (upval), EventHostNameModule (upval), JoinResult (ref)
 				return ReactModule.createElement(EventHostNameModule, { host = JoinResult.host })
 			end

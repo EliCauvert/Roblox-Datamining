@@ -68,7 +68,7 @@ local config = {
 	}
 }
 
-return function(p1) --[[ Line: 117 | Named "getFlowSpec" ]]
+return function(p1)
 	-- upvalues: config (copy)
 	return config[p1]
 end

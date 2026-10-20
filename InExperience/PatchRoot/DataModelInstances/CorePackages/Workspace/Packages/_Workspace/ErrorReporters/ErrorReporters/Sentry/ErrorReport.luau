@@ -5,9 +5,9 @@ local _ = require(Parent.SentrySdk)
 local ProcessErrorStackModule = require(script.Parent.Parent.ProcessErrorStack)
 local ConstantsModule = require(script.Parent.Constants)
 local OptionalResult = TModule.optional(TModule.map(TModule.string, TModule.some(TModule.string, TModule.number, TModule.boolean)))
-local OptionalResult1 = TModule.optional(TModule.map(TModule.string, function(p1) --[[ Line: 58 ]]
+local OptionalResult1 = TModule.optional(TModule.map(TModule.string, function(p1)
 	-- upvalues: TModule (copy)
-	local function checkTypeRecursive(List) --[[ Line: 59 ]]
+	local function checkTypeRecursive(List)
 		-- upvalues: checkTypeRecursive (copy), TModule (upval)
 		if type(List) ~= "table" then
 			return TModule.some(TModule.string, TModule.number, TModule.boolean)(List), nil
@@ -72,12 +72,12 @@ local ErrorReportModule = {
 }
 ErrorReportModule.__index = ErrorReportModule
 
-function ErrorReportModule.validate(p2) --[[ Line: 170 ]]
+function ErrorReportModule.validate(p2)
 	-- upvalues: IntersectionResult (copy)
 	return IntersectionResult(p2)
 end
 
-function ErrorReportModule.new() --[[ Line: 180 ]]
+function ErrorReportModule.new()
 	-- upvalues: ErrorReportModule (copy)
 	local config = {
 		threads = {},
@@ -91,7 +91,7 @@ function ErrorReportModule.new() --[[ Line: 180 ]]
 	return config
 end
 
-function ErrorReportModule:addAttributes(p2) --[[ Line: 199 ]]
+function ErrorReportModule:addAttributes(p2)
 	-- upvalues: CryoModule (copy)
 	if type(p2) == "table" then
 		self.attributes = CryoModule.Dictionary.join(self.attributes, p2)
@@ -102,7 +102,7 @@ function ErrorReportModule:addAttributes(p2) --[[ Line: 199 ]]
 	end
 end
 
-function ErrorReportModule:addAnnotations(Annotations) --[[ Line: 217 ]]
+function ErrorReportModule:addAnnotations(Annotations)
 	-- upvalues: CryoModule (copy)
 	if type(Annotations) == "table" then
 		self.annotations = CryoModule.Dictionary.join(self.annotations, Annotations)
@@ -113,7 +113,7 @@ function ErrorReportModule:addAnnotations(Annotations) --[[ Line: 217 ]]
 	end
 end
 
-local function sanitizeCustomMetadataGroup(List) --[[ Line: 239 ]]
+local function sanitizeCustomMetadataGroup(List)
 	if type(List) ~= "table" then
 		return nil
 	end
@@ -129,7 +129,7 @@ local function sanitizeCustomMetadataGroup(List) --[[ Line: 239 ]]
 	return if next(t) == nil then nil else t
 end
 
-function ErrorReportModule:addCustomMetadata(List) --[[ Line: 271 ]]
+function ErrorReportModule:addCustomMetadata(List)
 	-- upvalues: sanitizeCustomMetadataGroup (copy), CryoModule (copy)
 	if type(List) ~= "table" then
 		warn("Cannot add custom metadata of type: ", (type(List)))
@@ -154,7 +154,7 @@ function ErrorReportModule:addCustomMetadata(List) --[[ Line: 271 ]]
 	self.customMetadata = CustomMetadata
 end
 
-function ErrorReportModule:addBreadcrumb(p2) --[[ Line: 304 ]]
+function ErrorReportModule:addBreadcrumb(p2)
 	if type(p2) == "table" then
 		table.insert(self.breadcrumbs, {
 			type = p2.type or "default",
@@ -172,7 +172,7 @@ function ErrorReportModule:addBreadcrumb(p2) --[[ Line: 304 ]]
 	end
 end
 
-function ErrorReportModule:addBreadcrumbs(List) --[[ Line: 331 ]]
+function ErrorReportModule:addBreadcrumbs(List)
 	if type(List) ~= "table" then
 		warn("Cannot add breadcrumbs of type: ", (type(List)))
 		
@@ -183,7 +183,7 @@ function ErrorReportModule:addBreadcrumbs(List) --[[ Line: 331 ]]
 	end
 end
 
-function ErrorReportModule.fromMessageAndStack(Message, Stack, Level) --[[ Line: 350 ]]
+function ErrorReportModule.fromMessageAndStack(Message, Stack, Level)
 	-- upvalues: ErrorReportModule (copy), ConstantsModule (copy), ProcessErrorStackModule (copy)
 	local NewErrorReport = ErrorReportModule.new()
 	NewErrorReport.message = Message
@@ -202,7 +202,7 @@ function ErrorReportModule.fromMessageAndStack(Message, Stack, Level) --[[ Line:
 	return NewErrorReport
 end
 
-function ErrorReportModule:fromDetails() --[[ Line: 382 ]]
+function ErrorReportModule:fromDetails()
 	-- upvalues: ErrorReportModule (copy), ConstantsModule (copy)
 	local FromMessageAndStackResult = nil
 	if self.stack then

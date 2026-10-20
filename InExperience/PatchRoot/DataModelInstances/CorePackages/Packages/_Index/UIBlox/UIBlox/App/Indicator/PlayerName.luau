@@ -14,7 +14,7 @@ local UIBloxConfigModule = require(Parent1.UIBloxConfig)
 local OpenTypeSupportModule = require(Parent1.Utility.OpenTypeSupport)
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
-local function _(p1) --[[ Line: 84 | Named "getStyleDefaults" ]]
+local function _(p1)
 	return {
 		iconLabelSpacing = p1.Size.Size_50,
 		iconSize = p1.Size.Size_400,
@@ -24,7 +24,7 @@ local function _(p1) --[[ Line: 84 | Named "getStyleDefaults" ]]
 	}
 end
 
-local _ = function(p1) --[[ Line: 94 | Named "getDisplayNameStyleDefaults" ]]
+local _ = function(p1)
 	return {
 		iconLabelSpacing = p1.Size.Size_50,
 		iconSize = p1.Size.Size_400,
@@ -33,7 +33,7 @@ local _ = function(p1) --[[ Line: 94 | Named "getDisplayNameStyleDefaults" ]]
 	}
 end
 
-local _ = function(p1) --[[ Line: 103 | Named "getUserNameStyleDefaults" ]]
+local _ = function(p1)
 	return {
 		iconLabelSpacing = p1.Size.Size_50,
 		iconSize = p1.Size.Size_300,
@@ -43,7 +43,7 @@ local _ = function(p1) --[[ Line: 103 | Named "getUserNameStyleDefaults" ]]
 	}
 end
 
-local function NameItem(p1) --[[ Line: 113 ]]
+local function NameItem(p1)
 	-- upvalues: CryoModule (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), Label (copy), Skeleton (copy), UIBloxConfigModule (copy)
 	local IsReversed = p1.isReversed
 	local ItemProps = p1.itemProps
@@ -120,7 +120,7 @@ local function NameItem(p1) --[[ Line: 113 ]]
 	})
 end
 
-return function(p1) --[[ Line: 220 | Named "PlayerName" ]]
+return function(p1)
 	-- upvalues: UseStyleModule (copy), ReactModule (copy), NameItem (copy), UIBloxConfigModule (copy), OpenTypeSupportModule (copy)
 	local UseStyleModuleResult = UseStyleModule()
 	local DisplayNameItem = p1.displayNameItem

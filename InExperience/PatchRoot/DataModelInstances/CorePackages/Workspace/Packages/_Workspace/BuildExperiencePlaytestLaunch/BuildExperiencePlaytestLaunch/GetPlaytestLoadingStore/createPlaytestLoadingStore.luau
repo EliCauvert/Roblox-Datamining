@@ -1,10 +1,10 @@
 ﻿local SignalsModule = require(script:FindFirstAncestor("BuildExperiencePlaytestLaunch").Parent.Signals)
 
-return function() --[[ Line: 22 | Named "createPlaytestLoadingStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy)
 	local t = {}
 	
-	local function getLoadingSignal(Key) --[[ Line: 35 ]]
+	local function getLoadingSignal(Key)
 		-- upvalues: t (copy), SignalsModule (upval)
 		local Entry = t[Key]
 		
@@ -16,11 +16,11 @@ return function() --[[ Line: 22 | Named "createPlaytestLoadingStore" ]]
 				setAgentStatus = Idle2,
 				getPlaytestStatus = Idle1,
 				setPlaytestStatus = Idle2_1,
-				getStatus = SignalsModule.createComputed(function(p1): string --[[ Line: 41 ]]
+				getStatus = SignalsModule.createComputed(function(p1): string
 					-- upvalues: Idle (copy), Idle1 (copy)
 					return if Idle(p1) == "Loading" or Idle1(p1) == "Loading" then "Loading" elseif Idle(p1) == "Completed" or Idle1(p1) == "Completed" then "Completed" else "Idle"
 				end),
-				getIsPlaytestLoading = SignalsModule.createComputed(function(p1): boolean --[[ Line: 51 ]]
+				getIsPlaytestLoading = SignalsModule.createComputed(function(p1): boolean
 					-- upvalues: Idle1 (copy)
 					return Idle1(p1) == "Loading"
 				end)
@@ -31,31 +31,31 @@ return function() --[[ Line: 22 | Named "createPlaytestLoadingStore" ]]
 	end
 	
 	return {
-		getAgentStatusForPlaceId = function(p1) --[[ Line: 67 ]]
+		getAgentStatusForPlaceId = function(p1)
 			-- upvalues: getLoadingSignal (copy)
 			return getLoadingSignal(p1).getAgentStatus
 		end,
-		getPlaytestStatusForPlaceId = function(p1) --[[ Line: 71 ]]
+		getPlaytestStatusForPlaceId = function(p1)
 			-- upvalues: getLoadingSignal (copy)
 			return getLoadingSignal(p1).getPlaytestStatus
 		end,
-		getStatusForPlaceId = function(p1) --[[ Line: 75 ]]
+		getStatusForPlaceId = function(p1)
 			-- upvalues: getLoadingSignal (copy)
 			return getLoadingSignal(p1).getStatus
 		end,
-		getIsPlaytestLoadingForPlaceId = function(p1) --[[ Line: 79 ]]
+		getIsPlaytestLoadingForPlaceId = function(p1)
 			-- upvalues: getLoadingSignal (copy)
 			return getLoadingSignal(p1).getIsPlaytestLoading
 		end,
-		setAgentStatusForPlaceId = function(p1, p2) --[[ Line: 83 ]]
+		setAgentStatusForPlaceId = function(p1, p2)
 			-- upvalues: getLoadingSignal (copy)
 			getLoadingSignal(p1).setAgentStatus(p2)
 		end,
-		setPlaytestStatusForPlaceId = function(p1, p2) --[[ Line: 87 ]]
+		setPlaytestStatusForPlaceId = function(p1, p2)
 			-- upvalues: getLoadingSignal (copy)
 			getLoadingSignal(p1).setPlaytestStatus(p2)
 		end,
-		clearCompletedStatusForPlaceId = function(p1) --[[ Line: 91 ]]
+		clearCompletedStatusForPlaceId = function(p1)
 			-- upvalues: getLoadingSignal (copy)
 			local LoadingSignal = getLoadingSignal(p1)
 			

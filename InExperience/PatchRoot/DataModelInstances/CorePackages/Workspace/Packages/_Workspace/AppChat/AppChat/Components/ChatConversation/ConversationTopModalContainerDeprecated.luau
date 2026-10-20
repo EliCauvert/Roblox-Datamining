@@ -30,8 +30,8 @@ local ConversationModalModule = require(script.Parent.ConversationModal.Conversa
 local ConversationBannerDeprecatedModule = require(script.Parent.ConversationBanner.ConversationBannerDeprecated)
 local config = {
 	conversation = {},
-	navigateToScreen = function(...) --[[ Line: 50 ]] end,
-	setModalHeight = function(_) --[[ Line: 51 ]] end
+	navigateToScreen = function(...) end,
+	setModalHeight = function(_) end
 }
 local config1 = {
 	conversation_banner_group_phone_verification = true,
@@ -48,7 +48,7 @@ local config2 = {
 	conversation_banner_learn_more = "ConversationLearnMoreBanner"
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 71 | Named "ConversationTopModalContainer" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseAnalyticsModule (copy), UseDispatchFunction (copy), UseRefFunction (copy), UseEffectFunction (copy), UseSelectorFunction (copy), GetDeepValue2Module (copy), UseConversationTopModalModule (copy), config2 (copy), config1 (copy), UseCallbackFunction (copy), EventNamesModule (copy), AppChatNetworkingModule (copy), DismissedConversationTopModalModule (copy), AppPage (copy), UnfilteredThreadsAMPFeatureNameModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), AccessResponseEnum (copy), RefreshAllUnfilteredThreadsDetailsModule (copy), NavigateDownFunction (copy), CreateUnfilteredChatPartialModal (copy), LearnMorePartialModal (copy), ReactModule (copy), ConversationBannerDeprecatedModule (copy), ConversationModalModule (copy), FoundationModule (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseStyleResult = UseStyleFunction()
@@ -56,20 +56,20 @@ return ReactModule.memo(function(p1) --[[ Line: 71 | Named "ConversationTopModal
 	local UseDispatchResult = UseDispatchFunction()
 	local Size1000 = UseStyleResult.Tokens.Size.Size_1000
 	local UseRefResult = UseRefFunction(UnionResult.setModalHeight)
-	UseEffectFunction(function() --[[ Line: 80 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseRefResult (copy), UnionResult (copy)
 		UseRefResult.current = UnionResult.setModalHeight
 	end, { UnionResult.setModalHeight })
-	UseEffectFunction(function() --[[ Line: 83 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseRefResult (copy)
-		return function() --[[ Line: 84 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			if UseRefResult.current then
 				UseRefResult.current(0)
 			end
 		end
 	end, {})
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 91 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: GetDeepValue2Module (upval), UnionResult (copy)
 		return GetDeepValue2Module(p2, `ChatAppReducer.Modals.conversationTopModalsDismissed.{UnionResult.conversation.id}`) or {}
 	end)
@@ -83,7 +83,7 @@ return ReactModule.memo(function(p1) --[[ Line: 71 | Named "ConversationTopModal
 	local ModalLayoutButtons = GetDeepValue2Module(UseConversationTopModalModuleResult, "modal_layout.buttons")
 	local ModalLayoutButton = ModalLayoutButtons and ModalLayoutButtons[1]
 	local ModalLayoutButton1 = ModalLayoutButtons and ModalLayoutButtons[2]
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 107 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: UseAnalyticsModuleResult (copy), Entry (copy), EventNamesModule (upval), UnionResult (copy)
 		if UseAnalyticsModuleResult and Entry then
 			UseAnalyticsModuleResult.fireAnalyticsEvent(EventNamesModule[`{Entry}ActionClicked`], { conversationId = UnionResult.conversation.id })
@@ -93,9 +93,9 @@ return ReactModule.memo(function(p1) --[[ Line: 71 | Named "ConversationTopModal
 		Entry,
 		UnionResult.conversation.id
 	})
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 115 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: UseDispatchResult (copy), AppChatNetworkingModule (upval), ModalLayoutDismissRecordAction (copy), ModalLayoutId (copy), DismissedConversationTopModalModule (upval), UnionResult (copy), ModalVariant (copy)
-		UseDispatchResult(AppChatNetworkingModule.rodux.RecordModalSequenceResponse.API(ModalLayoutDismissRecordAction, "conversation_top_modal", ModalLayoutId)):catch(function(Err) --[[ Line: 122 ]]
+		UseDispatchResult(AppChatNetworkingModule.rodux.RecordModalSequenceResponse.API(ModalLayoutDismissRecordAction, "conversation_top_modal", ModalLayoutId)):catch(function(Err)
 			warn("Error in ConversationTopModalContainer -> RecordModalSequenceResponse dismissed: " .. tostring(Err))
 		end)
 		UseDispatchResult(DismissedConversationTopModalModule(UnionResult.conversation.id, ModalVariant))
@@ -106,14 +106,14 @@ return ReactModule.memo(function(p1) --[[ Line: 71 | Named "ConversationTopModal
 		ModalLayoutId,
 		UnionResult.conversation.id
 	})
-	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 127 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function()
 		-- upvalues: UseCallbackResult (copy), AppPage (upval), UnfilteredThreadsAMPFeatureNameModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval), AccessResponseEnum (upval), RefreshAllUnfilteredThreadsDetailsModule (upval), UnionResult (copy), NavigateDownFunction (upval)
 		UseCallbackResult()
 		local config = {
 			name = AppPage.AmpWizardContainer,
 			extraProps = {
 				featureName = UnfilteredThreadsAMPFeatureNameModule,
-				completionCallback = function(Granted, _) --[[ Line: 133 ]]
+				completionCallback = function(Granted, _)
 					-- upvalues: FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateBackFunction (upval), AccessResponseEnum (upval), RefreshAllUnfilteredThreadsDetailsModule (upval), UnionResult (upval)
 					if FFlagSignalsNavP3Dispatch then
 						NavigationCommands.back(true)
@@ -139,20 +139,20 @@ return ReactModule.memo(function(p1) --[[ Line: 71 | Named "ConversationTopModal
 		UseDispatchResult,
 		UnionResult.conversation.id
 	})
-	local UseCallbackResult3 = UseCallbackFunction(function() --[[ Line: 153 ]]
+	local UseCallbackResult3 = UseCallbackFunction(function()
 		-- upvalues: UseCallbackResult (copy), UnionResult (copy), CreateUnfilteredChatPartialModal (upval)
 		UseCallbackResult()
 		UnionResult.navigateToScreen(CreateUnfilteredChatPartialModal, {}, true)
 	end, { UnionResult.navigateToScreen, UseCallbackResult })
-	local UseCallbackResult4 = UseCallbackFunction(function() --[[ Line: 157 ]]
+	local UseCallbackResult4 = UseCallbackFunction(function()
 		-- upvalues: UseCallbackResult (copy), UnionResult (copy), LearnMorePartialModal (upval)
 		UseCallbackResult()
 		UnionResult.navigateToScreen(LearnMorePartialModal, {}, true)
 	end, { UnionResult.navigateToScreen, UseCallbackResult })
-	UseEffectFunction(function() --[[ Line: 163 ]]
+	UseEffectFunction(function()
 		-- upvalues: Inverted (copy), UseDispatchResult (copy), AppChatNetworkingModule (upval), ModalLayoutSeenRecordAction (copy), ModalLayoutId (copy)
 		if Inverted then
-			UseDispatchResult(AppChatNetworkingModule.rodux.RecordModalSequenceResponse.API(ModalLayoutSeenRecordAction, "conversation_top_modal", ModalLayoutId)):catch(function(Err) --[[ Line: 171 ]]
+			UseDispatchResult(AppChatNetworkingModule.rodux.RecordModalSequenceResponse.API(ModalLayoutSeenRecordAction, "conversation_top_modal", ModalLayoutId)):catch(function(Err)
 				warn("Error in ConversationTopModalContainer -> RecordModalSequenceResponse seen: " .. tostring(Err))
 			end)
 		end
@@ -163,7 +163,7 @@ return ReactModule.memo(function(p1) --[[ Line: 71 | Named "ConversationTopModal
 		ModalLayoutId,
 		UnionResult.conversation.id
 	})
-	UseEffectFunction(function() --[[ Line: 188 ]]
+	UseEffectFunction(function()
 		-- upvalues: Inverted (copy), UseAnalyticsModuleResult (copy), Entry (copy), EventNamesModule (upval), UnionResult (copy)
 		if Inverted and UseAnalyticsModuleResult and Entry then
 			UseAnalyticsModuleResult.fireAnalyticsEvent(EventNamesModule[`{Entry}Rendered`], { conversationId = UnionResult.conversation.id })
@@ -207,7 +207,7 @@ return ReactModule.memo(function(p1) --[[ Line: 71 | Named "ConversationTopModal
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.new(1, 0, 0, 0),
 		LayoutOrder = UnionResult.layoutOrder,
-		onAbsoluteSizeChanged = function(Frame) --[[ Line: 242 ]]
+		onAbsoluteSizeChanged = function(Frame)
 			-- upvalues: UnionResult (copy)
 			UnionResult.setModalHeight(Frame.AbsoluteSize.Y)
 		end

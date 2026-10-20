@@ -11,7 +11,7 @@ local BatchGetAssetsModule = require(Parent.Thunks.BatchGetAssets)
 local FFlagAXEnableRegionalFilteringofAssetsModule = require(Parent.Flags.FFlagAXEnableRegionalFilteringofAssets)
 local t = {}
 
-local function getAssetIds(Humanoid: Humanoid) --[[ Line: 18 ]]
+local function getAssetIds(Humanoid: Humanoid)
 	-- upvalues: ConstantsModule (copy), AssetInfoModule (copy)
 	local FromHumanoidDescriptionResults = {}
 	
@@ -35,9 +35,9 @@ local function getAssetIds(Humanoid: Humanoid) --[[ Line: 18 ]]
 	return FromHumanoidDescriptionResults
 end
 
-return function(Humanoid, p1) --[[ Line: 52 | Named "GetAssetsFromHumanoidDescription" ]]
+return function(Humanoid, p1)
 	-- upvalues: ThunkModule (copy), t (copy), getAssetIds (copy), FFlagAXEnableRegionalFilteringofAssetsModule (copy), BatchGetAssetsModule (copy), GetProductInfoModule (copy), GetAssetBundlesModule (copy), GetVersionInfoModule (copy), SetAssetsModule (copy), SetEquippedAssetsModule (copy)
-	return ThunkModule.new(script.Name, t, function(p2, _) --[[ Line: 53 ]]
+	return ThunkModule.new(script.Name, t, function(p2, _)
 		-- upvalues: getAssetIds (upval), Humanoid (copy), p1 (copy), FFlagAXEnableRegionalFilteringofAssetsModule (upval), BatchGetAssetsModule (upval), GetProductInfoModule (upval), GetAssetBundlesModule (upval), GetVersionInfoModule (upval), SetAssetsModule (upval), SetEquippedAssetsModule (upval)
 		local AssetIds = getAssetIds(Humanoid)
 		
@@ -52,7 +52,7 @@ return function(Humanoid, p1) --[[ Line: 52 | Named "GetAssetsFromHumanoidDescri
 			return
 		end
 		for _, assetId in ipairs(AssetIds) do
-			coroutine.wrap(function() --[[ Line: 61 ]]
+			coroutine.wrap(function()
 				-- upvalues: p2 (copy), GetProductInfoModule (upval), assetId (copy), GetAssetBundlesModule (upval), GetVersionInfoModule (upval)
 				p2:dispatch(GetProductInfoModule(assetId.assetId))
 				

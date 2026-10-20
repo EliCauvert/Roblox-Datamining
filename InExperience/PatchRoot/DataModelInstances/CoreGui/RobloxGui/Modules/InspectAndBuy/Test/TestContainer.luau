@@ -11,7 +11,7 @@ local RenderWithCoreScriptsStyleProviderModule = require(Parent.Parent.Common.re
 local InspectAndBuyContextModule = require(Parent.Components.InspectAndBuyContext)
 local TestContainer = RoactModule.Component:extend("TestContainer")
 
-function TestContainer.init(p1) --[[ Line: 23 ]]
+function TestContainer.init(p1)
 	-- upvalues: RoduxModule (copy), InspectAndBuyReducerModule (copy), ConstantsModule (copy), CompactViewModule (copy), WideViewModule (copy)
 	p1.store = p1.props.overrideStore or RoduxModule.Store.new(InspectAndBuyReducerModule, {}, { RoduxModule.thunkMiddleware })
 	p1.views = {}
@@ -19,7 +19,7 @@ function TestContainer.init(p1) --[[ Line: 23 ]]
 	p1.views[ConstantsModule.View.Wide] = WideViewModule
 end
 
-function TestContainer.render(p1) --[[ Line: 33 ]]
+function TestContainer.render(p1)
 	-- upvalues: RoactModule (copy), InspectAndBuyContextModule (copy), RoactRoduxModule (copy), RenderWithCoreScriptsStyleProviderModule (copy)
 	local Count = 0
 	

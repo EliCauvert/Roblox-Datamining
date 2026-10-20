@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.Parent.util.Types)
 
-local function destroyHelper(List) --[[ Line: 6 ]]
+local function destroyHelper(List)
 	for _, value in List do
 		for _, value1 in value do
 			if value1.created and value1.instance then
@@ -10,7 +10,7 @@ local function destroyHelper(List) --[[ Line: 6 ]]
 	end
 end
 
-return function(p1, p2) --[[ Line: 18 ]]
+return function(p1, p2)
 	-- upvalues: destroyHelper (copy)
 	destroyHelper(p1)
 	destroyHelper(p2)

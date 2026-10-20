@@ -15,7 +15,7 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local FillBehavior = FoundationModule.Enums.FillBehavior
 local InputSize = FoundationModule.Enums.InputSize
 
-return function(Frame) --[[ Line: 32 | Named "PushNotificationsUpsellCard" ]]
+return function(Frame)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), UseChatCardEmphasisModule (copy), ChatCardPriorityModule (copy), ReactModule (copy), View (copy), Text (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), FFlagBuildExperienceDontAskAgainPushUpsellModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		disabledDescription = LocalizationStringsModule.CHAT_NOTIFICATION_DISABLED_DESCRIPTION,

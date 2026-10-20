@@ -5,7 +5,7 @@ local ArgCheckModule = require(Parent.ArgCheck)
 local Url = require(Parent.Http).Url
 local _ = require(GenericAbuseReporting.Enums.AbuseVector)
 
-return function(Callback, p1) --[[ Line: 12 ]]
+return function(Callback, p1)
 	-- upvalues: ArgCheckModule (copy), LocalizationService (copy), Url (copy)
 	ArgCheckModule.assert(p1, "abuseVector is required")
 	ArgCheckModule.isType(p1, "string", "fetchBeduiData expects abuseVector as a string")

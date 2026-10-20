@@ -13,21 +13,21 @@ local UseScreenSizeModule = require(game:GetService("CoreGui").RobloxGui.Modules
 local ExperienceService = require(CorePackages.Workspace.Packages.ExperienceService).ExperienceService
 local CloseOverlayModule = require(script.Parent.Parent.Actions.CloseOverlay)
 
-return function(p1) --[[ Line: 32 | Named "AttributionTraversal" ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseScreenSizeModule (copy), UseStyleFunction (copy), ReactModule (copy), CloseOverlayModule (copy), ExperienceService (copy), UseSelectorFunction (copy), InteractiveAlert (copy), RobloxTranslatorModule (copy), ImageSetLabel (copy), StyledTextLabel (copy), ButtonType (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseScreenSizeModuleResult = UseScreenSizeModule()
 	local UseStyleResult = UseStyleFunction()
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 37 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseDispatchResult (copy), CloseOverlayModule (upval)
 		UseDispatchResult(CloseOverlayModule())
 	end, { UseDispatchResult })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 41 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), ExperienceService (upval), UseDispatchResult (copy), CloseOverlayModule (upval)
 		ExperienceService:LaunchExperience({ placeId = p1.rootPlaceId })
 		UseDispatchResult(CloseOverlayModule())
 	end, { UseDispatchResult, p1.rootPlaceId })
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 50 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		return p2.locale
 	end)
 	local Theme = UseStyleResult.Theme
@@ -37,7 +37,7 @@ return function(p1) --[[ Line: 32 | Named "AttributionTraversal" ]]
 	return ReactModule.createElement(InteractiveAlert, {
 		isMiddleContentFocusable = false,
 		title = RobloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Attribution.GoToExperience", UseSelectorResult),
-		middleContent = function() --[[ Line: 60 ]]
+		middleContent = function()
 			-- upvalues: ReactModule (upval), UseStyleResult (copy), Theme (copy), ImageSetLabel (upval), p1 (copy), StyledTextLabel (upval), RobloxTranslatorModule (upval), UseSelectorResult (copy), Name (copy), UseStyleResultFont (copy)
 			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,

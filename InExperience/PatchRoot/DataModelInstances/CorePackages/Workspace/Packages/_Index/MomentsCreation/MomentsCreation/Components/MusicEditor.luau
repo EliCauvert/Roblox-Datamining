@@ -26,7 +26,7 @@ local _ = require(Parent.MomentsTypes)
 local SegmentSelectorWidth = require(MomentsCreation.Constants).AudioWaveform.SegmentSelectorWidth
 local _UDim2 = UDim2.new(0, 48, 1, 0)
 
-return function(p1) --[[ Line: 60 | Named "MusicEditor" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseCreationFlowStringsModule (copy), UseToggleStateFunction (copy), ReactModule (copy), UseMusicInfoModule (copy), UseEffectFunction (copy), SignalsModule (copy), UseCallbackFunction (copy), FFlagMomentsCreationStartAudioOnLoadModule (copy), UseMusicEditorControllerModule (copy), UseMemoFunction (copy), UseSignalBindingFunction (copy), View (copy), Button (copy), FoundationModule (copy), GradientBackdrop (copy), _UDim2 (copy), SegmentSelectorWidth (copy), WaveformModule (copy), Loading (copy), MusicPreviewItemModule (copy)
 	local Playback = p1.controller.preview.playback
 	local UseTokensResult = UseTokensFunction()
@@ -38,27 +38,27 @@ return function(p1) --[[ Line: 60 | Named "MusicEditor" ]]
 	local UseMusicInfoModuleResult = UseMusicInfoModule(p1.musicEdit.assetId)
 	local Duration = if UseMusicInfoModuleResult == nil or UseMusicInfoModuleResult.Duration == nil then 0 else UseMusicInfoModuleResult.Duration
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Playback.getDuration(false))
-	UseEffectFunction(function() --[[ Line: 75 ]]
+	UseEffectFunction(function()
 		-- upvalues: SignalsModule (upval), UseStateResult2 (copy), Playback (copy)
-		return SignalsModule.createEffect(function(p2) --[[ Line: 76 ]]
+		return SignalsModule.createEffect(function(p2)
 			-- upvalues: UseStateResult2 (upval), Playback (upval)
 			UseStateResult2(Playback.getDuration(p2))
 		end)
 	end, { Playback })
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 81 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: Playback (copy), UseToggleStateResult1 (copy)
 		Playback.setMuted(true)
 		Playback.seek(0)
 		Playback.pause()
 		UseToggleStateResult1.enable()
 	end, { Playback, UseToggleStateResult1.enable })
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 88 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: Playback (copy), UseToggleStateResult1 (copy)
 		Playback.setMuted(false)
 		Playback.play()
 		UseToggleStateResult1.disable()
 	end, { Playback, UseToggleStateResult1.disable })
-	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 94 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function()
 		-- upvalues: FFlagMomentsCreationStartAudioOnLoadModule (upval), UseRefResult (copy), p1 (copy), Playback (copy), UseToggleStateResult (copy)
 		if FFlagMomentsCreationStartAudioOnLoadModule and UseRefResult.current ~= p1.musicEdit.assetId then
 			UseRefResult.current = p1.musicEdit.assetId
@@ -72,7 +72,7 @@ return function(p1) --[[ Line: 60 | Named "MusicEditor" ]]
 		p1.musicEdit.assetId,
 		UseToggleStateResult.enable
 	})
-	UseEffectFunction(function() --[[ Line: 104 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseToggleStateResult (copy)
 		UseToggleStateResult.disable()
 	end, { p1.musicEdit.assetId, UseToggleStateResult.disable })
@@ -80,9 +80,9 @@ return function(p1) --[[ Line: 60 | Named "MusicEditor" ]]
 	local WaveformRef = UseMusicEditorControllerModuleResult.waveformRef
 	local WaveformPosition = UseMusicEditorControllerModuleResult.waveformPosition
 	local WaveformDisplayRef = UseMusicEditorControllerModuleResult.waveformDisplayRef
-	local UseSignalBindingResult = UseSignalBindingFunction((UseMemoFunction(function() --[[ Line: 122 ]]
+	local UseSignalBindingResult = UseSignalBindingFunction((UseMemoFunction(function()
 		-- upvalues: SignalsModule (upval), Playback (copy)
-		return SignalsModule.createComputed(function(p2): number --[[ Line: 123 ]]
+		return SignalsModule.createComputed(function(p2): number
 			-- upvalues: Playback (upval)
 			local Duration: number = Playback.getDuration(p2)
 			
@@ -154,7 +154,7 @@ return function(p1) --[[ Line: 60 | Named "MusicEditor" ]]
 					WaveformDisplay = ReactModule.createElement(WaveformModule, {
 						zIndex = 1,
 						audioAssetId = p1.musicEdit.assetId,
-						position = WaveformPosition:map(function(XScale): UDim2 --[[ Line: 209 ]]
+						position = WaveformPosition:map(function(XScale): UDim2
 							return UDim2.fromScale(XScale, 0.5)
 						end),
 						onWaveformReady = UseCallbackResult2,
@@ -175,7 +175,7 @@ return function(p1) --[[ Line: 60 | Named "MusicEditor" ]]
 			}, {
 				Scrubber = if UseToggleStateResult.enabled and not UseToggleStateResult1.enabled then ReactModule.createElement(View, {
 					tag = "anchor-center-center size-100-1900 radius-circle bg-system-contrast",
-					Position = UseSignalBindingResult:map(function(XScale): UDim2 --[[ Line: 233 ]]
+					Position = UseSignalBindingResult:map(function(XScale): UDim2
 						return UDim2.fromScale(XScale, 0.5)
 					end)
 				}) else nil,

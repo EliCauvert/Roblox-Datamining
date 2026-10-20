@@ -19,7 +19,7 @@ local config = {
 	lastUpdated = { 25, 9, 24 }
 }
 
-local function reportSingleResult(ValidationEnum, p1, Status, TelemetryContext, Duration) --[[ Line: 42 ]]
+local function reportSingleResult(ValidationEnum, p1, Status, TelemetryContext, Duration)
 	-- upvalues: TelemetryService (copy), config (copy)
 	TelemetryService:LogEvent(config, {
 		customFields = {
@@ -33,7 +33,7 @@ local function reportSingleResult(ValidationEnum, p1, Status, TelemetryContext, 
 	})
 end
 
-local function getMissingData(p1, ConditionalData) --[[ Line: 61 ]]
+local function getMissingData(p1, ConditionalData)
 	-- upvalues: FetchAllDesiredDataModule (copy)
 	local List = {}
 	
@@ -45,7 +45,7 @@ local function getMissingData(p1, ConditionalData) --[[ Line: 61 ]]
 	return List
 end
 
-local function _(ValidationEnum, p2, p3) --[[ Line: 72 | Named "complete" ]]
+local function _(ValidationEnum, p2, p3)
 	-- upvalues: reportSingleResult (copy)
 	local CompleteResult = p3:complete()
 	reportSingleResult(ValidationEnum, p2, CompleteResult.status, CompleteResult.telemetryContext, CompleteResult.duration)
@@ -53,7 +53,7 @@ local function _(ValidationEnum, p2, p3) --[[ Line: 72 | Named "complete" ]]
 	return CompleteResult
 end
 
-return function(ValidationEnum, p2, p3) --[[ Line: 78 | Named "ValidationTestWrapper" ]]
+return function(ValidationEnum, p2, p3)
 	-- upvalues: ValidationModuleLoaderModule (copy), ValidationReporterModule (copy), ValidationEnumsModule (copy), reportSingleResult (copy), getMissingData (copy), ValidationConstantsModule (copy), ErrorSourceStringsModule (copy), GetFFlagUGCValidationFetchErrorMethodModule (copy), GetFFlagDebugUGCValidationPrintNewStructureResultsModule (copy)
 	local ValidationModule = ValidationModuleLoaderModule.getValidationModule(ValidationEnum)
 	local NewValidationReporter = ValidationReporterModule.new(ValidationEnum, p2)
@@ -110,7 +110,7 @@ return function(ValidationEnum, p2, p3) --[[ Line: 78 | Named "ValidationTestWra
 		
 		return CompleteResult
 	end
-	local Success, Result = pcall(function() --[[ Line: 133 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: ValidationModule (copy), NewValidationReporter (copy), p2 (copy)
 		ValidationModule.run(NewValidationReporter, p2)
 	end)

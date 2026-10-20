@@ -12,7 +12,7 @@ local config = {
 	style = require(AppChat.SocialLibraries).Components.TestStyle
 }
 
-function SectionHeader(p1) --[[ Line: 30 ]]
+function SectionHeader(p1)
 	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), RoactFitComponents (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local Style = JoinResult.style

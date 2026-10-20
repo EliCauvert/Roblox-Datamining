@@ -10,7 +10,7 @@ local _ = require(script.Parent.BulkPurchaseRequestItem)
 local _ = require(script.Parent.BulkPurchaseRequestOwnedItem)
 local _ = require(script.Parent.BulkPurchaseRequestUnpurchasableItem)
 
-local function _(Tbl, Id) --[[ Line: 36 | Named "toCardPropsWithId" ]]
+local function _(Tbl, Id)
 	local Copy = table.clone(Tbl)
 	Copy.id = Id
 	
@@ -18,7 +18,7 @@ local function _(Tbl, Id) --[[ Line: 36 | Named "toCardPropsWithId" ]]
 end
 
 return {
-	mapItemsToRowPresentation = function(List, p1) --[[ Line: 44 ]]
+	mapItemsToRowPresentation = function(List, p1)
 		-- upvalues: FFlagBulkPurchaseEnablePurchaseOptionsModule (copy), ReactModule (copy), ItemCardThumbnail (copy)
 		local List1 = {}
 		
@@ -49,7 +49,7 @@ return {
 		end
 		return List1
 	end,
-	mapOwnedItemsToRowPresentation = function(List, ColorStyle, p2) --[[ Line: 76 ]]
+	mapOwnedItemsToRowPresentation = function(List, ColorStyle, p2)
 		-- upvalues: ReactModule (copy), ItemCardThumbnail (copy)
 		local List1 = {}
 		
@@ -70,7 +70,7 @@ return {
 		end
 		return List1
 	end,
-	mapUnpurchasableItemsToRowPresentation = function(List, p3, p4, p5) --[[ Line: 98 ]]
+	mapUnpurchasableItemsToRowPresentation = function(List, p3, p4, p5)
 		-- upvalues: ItemStatusToItemStatusKeyModule (copy), ReactModule (copy), ItemCardThumbnail (copy)
 		local List1 = {}
 		

@@ -3,7 +3,7 @@ local ReactModule = require(Foundation.Parent.React)
 local _ = require(Foundation.Components.Types)
 local ViewModule = require(Foundation.Components.View)
 
-return function(p1) --[[ Line: 17 | Named "PopoverArrow" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ViewModule (copy)
 	return ReactModule.createElement(ViewModule, {
 		Rotation = 45,

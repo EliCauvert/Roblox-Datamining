@@ -3,7 +3,7 @@ local DataHydration = script:FindFirstAncestor("DataHydration")
 local Url = require(DataHydration.Parent.Http).Url
 local MyHttpRequestModule = require(DataHydration.TrustedConnections.Networking.myHttpRequest)
 
-return function(Input, p1) --[[ Line: 10 ]]
+return function(Input, p1)
 	-- upvalues: HttpService (copy), Url (copy), MyHttpRequestModule (copy)
 	local List = {}
 	
@@ -18,7 +18,7 @@ return function(Input, p1) --[[ Line: 10 ]]
 	if #List > 0 then
 		Formatted = string.format("%s?%s", Formatted, table.concat(List, "&"))
 	end
-	return MyHttpRequestModule(Formatted, "GET"):andThen(function(Result) --[[ Line: 24 ]]
+	return MyHttpRequestModule(Formatted, "GET"):andThen(function(Result)
 		return Result and Result.responseBody
 	end)
 end

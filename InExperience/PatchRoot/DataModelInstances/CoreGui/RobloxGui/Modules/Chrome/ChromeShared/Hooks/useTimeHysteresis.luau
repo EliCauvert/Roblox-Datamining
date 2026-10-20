@@ -1,6 +1,6 @@
 ﻿local ReactModule = require(game:GetService("CorePackages").Packages.React)
 
-return function(p1, Current, MaxValue, p2, _) --[[ Line: 32 ]]
+return function(p1, Current, MaxValue, p2, _)
 	-- upvalues: ReactModule (copy)
 	if not MaxValue then
 		MaxValue = Current
@@ -9,16 +9,16 @@ return function(p1, Current, MaxValue, p2, _) --[[ Line: 32 ]]
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(p2 or 0)
 	local UseRefResult1 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 48 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseStateResult2_1 (copy), UseStateResult1 (copy), UseStateResult (copy), Current (copy), p1 (copy), UseRefResult1 (copy), MaxValue (ref)
 		local CurrentTime = tick()
 		local DelayedThread = nil
 		local Flag = false
 		
-		local function _(Delay: number, p3, Current) --[[ Line: 53 ]]
+		local function _(Delay: number, p3, Current)
 			-- upvalues: DelayedThread (ref), Flag (ref), UseRefResult (upval), UseStateResult2_1 (upval), UseStateResult1 (upval)
 			if Delay > 0 then
-				DelayedThread = task.delay(Delay, function() --[[ Line: 55 ]]
+				DelayedThread = task.delay(Delay, function()
 					-- upvalues: Flag (upval), DelayedThread (upval), UseRefResult (upval), Current (copy), UseStateResult2_1 (upval), p3 (copy)
 					Flag = true
 					DelayedThread = nil
@@ -39,7 +39,7 @@ return function(p1, Current, MaxValue, p2, _) --[[ Line: 32 ]]
 			
 			if CurrentDelta > 0 then
 				local v1 = true
-				DelayedThread = task.delay(CurrentDelta, function() --[[ Line: 55 ]]
+				DelayedThread = task.delay(CurrentDelta, function()
 					-- upvalues: Flag (ref), DelayedThread (ref), UseRefResult (upval), Current (copy), UseStateResult2_1 (upval), v1 (copy)
 					Flag = true
 					DelayedThread = nil
@@ -55,7 +55,7 @@ return function(p1, Current, MaxValue, p2, _) --[[ Line: 32 ]]
 			
 			if CurrentDelta1 > 0 then
 				local v2 = false
-				DelayedThread = task.delay(CurrentDelta1, function() --[[ Line: 55 ]]
+				DelayedThread = task.delay(CurrentDelta1, function()
 					-- upvalues: Flag (ref), DelayedThread (ref), UseRefResult (upval), p1 (copy), UseStateResult2_1 (upval), v2 (copy)
 					Flag = true
 					DelayedThread = nil
@@ -67,7 +67,7 @@ return function(p1, Current, MaxValue, p2, _) --[[ Line: 32 ]]
 				UseStateResult2_1(false)
 			end
 		end
-		return function() --[[ Line: 74 ]]
+		return function()
 			-- upvalues: Flag (ref), DelayedThread (ref), UseRefResult1 (upval), CurrentTime (copy), UseStateResult (copy), UseRefResult (upval), MaxValue (upval)
 			if not Flag then
 				if DelayedThread then
@@ -92,7 +92,7 @@ return function(p1, Current, MaxValue, p2, _) --[[ Line: 32 ]]
 		MaxValue
 	})
 	
-	return UseStateResult1, (ReactModule.useCallback(function(p3, Current) --[[ Line: 91 ]]
+	return UseStateResult1, (ReactModule.useCallback(function(p3, Current)
 		-- upvalues: UseRefResult1 (copy), UseRefResult (copy), MaxValue (ref), UseStateResult2 (copy)
 		UseRefResult1.current = Current
 		

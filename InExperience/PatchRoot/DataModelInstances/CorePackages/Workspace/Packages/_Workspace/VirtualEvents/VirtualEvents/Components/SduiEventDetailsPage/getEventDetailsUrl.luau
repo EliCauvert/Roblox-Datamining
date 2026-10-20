@@ -7,7 +7,7 @@ local NewUrlBuilder = UrlBuilder.new({
 	base = require(Parent.Http).Url.APIS_URL
 })
 
-return function(EventId) --[[ Line: 14 | Named "getEventDetailsUrl" ]]
+return function(EventId)
 	-- upvalues: FFlagSduiCapabilityBindings (copy), Parent (copy), SduiCapabilities (copy), UrlBuilder (copy), NewUrlBuilder (copy)
 	local config = { eventId = EventId }
 	

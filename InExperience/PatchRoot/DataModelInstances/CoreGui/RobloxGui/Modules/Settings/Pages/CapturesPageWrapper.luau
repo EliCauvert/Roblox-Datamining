@@ -32,25 +32,25 @@ local UIPadding = NewPage.Page:FindFirstChildWhichIsA("UIPadding")
 if UIPadding then
 	UIPadding:Destroy()
 end
-function NewPage:ConnectHubToApp(p1, Frame: Frame, p2) --[[ Line: 65 ]]
+function NewPage:ConnectHubToApp(p1, Frame: Frame, p2)
 	-- upvalues: NewPage (copy), GetFFlagFixIGMTabTransitionsModule (copy)
 	NewPage:SetHub(p1)
 	local YDelta = Frame.AbsoluteSize.Y - 20
 	NewPage.Page.Size = UDim2.new(1, 0, 0, YDelta)
-	Frame:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 70 ]]
+	Frame:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 		-- upvalues: YDelta (ref), Frame (copy), NewPage (upval)
 		YDelta = Frame.AbsoluteSize.Y - 20
 		NewPage.Page.Size = UDim2.new(1, 0, 0, YDelta)
 	end)
 	local DisplayFunction = NewPage.Display
 	
-	function NewPage:Display(...) --[[ Line: 76 ]]
+	function NewPage:Display(...)
 		-- upvalues: p2 (copy), DisplayFunction (copy), NewPage (upval)
 		p2.openMenu()
 		DisplayFunction(NewPage, ...)
 	end
 	
-	NewPage.Hidden.Event:Connect(function() --[[ Line: 81 ]]
+	NewPage.Hidden.Event:Connect(function()
 		-- upvalues: GetFFlagFixIGMTabTransitionsModule (upval), p2 (copy)
 		if not GetFFlagFixIGMTabTransitionsModule() then
 			p2.closeMenu()
@@ -58,7 +58,7 @@ function NewPage:ConnectHubToApp(p1, Frame: Frame, p2) --[[ Line: 65 ]]
 	end)
 	local HideFunction = NewPage.Hide
 	
-	function NewPage:Hide(...) --[[ Line: 90 ]]
+	function NewPage:Hide(...)
 		-- upvalues: GetFFlagFixIGMTabTransitionsModule (upval), p2 (copy), HideFunction (copy), NewPage (upval)
 		if GetFFlagFixIGMTabTransitionsModule() then
 			p2.closeMenu()

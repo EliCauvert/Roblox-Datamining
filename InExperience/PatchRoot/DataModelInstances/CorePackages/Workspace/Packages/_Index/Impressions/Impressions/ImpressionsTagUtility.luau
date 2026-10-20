@@ -2,7 +2,7 @@
 local ConstantsModule = require(script.Parent.Constants)
 
 return {
-	AddTag = function(p1, Tag, Tag1) --[[ Line: 4 ]]
+	AddTag = function(p1, Tag, Tag1)
 		-- upvalues: ConstantsModule (copy), CollectionService (copy)
 		local Current = p1 and p1.current or nil
 		
@@ -20,7 +20,7 @@ return {
 			end
 		end
 	end,
-	RemoveTag = function(p1, Tag, Tag1) --[[ Line: 18 ]]
+	RemoveTag = function(p1, Tag, Tag1)
 		-- upvalues: ConstantsModule (copy), CollectionService (copy)
 		local Current = p1 and p1.current or nil
 		

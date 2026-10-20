@@ -2,7 +2,7 @@
 local EnumsModule = require(ProfilePlatform.Common.Enums)
 local GetProfilePlatformModule = require(ProfilePlatform.Networking.getProfilePlatform)
 
-function GetProfilePlatform(ProfileId) --[[ Line: 7 ]]
+function GetProfilePlatform(ProfileId)
 	-- upvalues: GetProfilePlatformModule (copy), EnumsModule (copy)
 	return GetProfilePlatformModule.API({
 		includeComponentOrdering = false,

@@ -6,7 +6,7 @@ local _ = require(Parent.AvatarExperienceRodux)
 local TutilsModule = require(Parent.tutils)
 local ItemTypeEnum = require(Parent.AvatarExperienceModel).Enums.ItemTypeEnum
 
-local function buildCollectibleItemDetails(p1, CollectibleItemDetails) --[[ Line: 19 ]]
+local function buildCollectibleItemDetails(p1, CollectibleItemDetails)
 	-- upvalues: TutilsModule (copy)
 	local Collectibles = p1.Collectibles
 	local CollectibleItemId = CollectibleItemDetails.collectibleItemId
@@ -28,7 +28,7 @@ local function buildCollectibleItemDetails(p1, CollectibleItemDetails) --[[ Line
 	}
 end
 
-local function buildAssetsInBundle(Items) --[[ Line: 69 ]]
+local function buildAssetsInBundle(Items)
 	if not Items then
 		return nil
 	end
@@ -43,7 +43,7 @@ local function buildAssetsInBundle(Items) --[[ Line: 69 ]]
 	return List
 end
 
-return function(p1, Id, Bundle) --[[ Line: 93 | Named "buildItemDataFromAXRodux" ]]
+return function(p1, Id, Bundle)
 	-- upvalues: ItemTypeEnum (copy), buildCollectibleItemDetails (copy), buildAssetsInBundle (copy)
 	if not p1 then
 		return nil

@@ -10,7 +10,7 @@ local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
 local _UDim2 = UDim2.fromScale(0.375, 0.5555555555555556)
 local _UDim2_1 = UDim2.fromScale(0.671875, 0.4444444444444444)
 
-local function PictogramCard(p1) --[[ Line: 29 ]]
+local function PictogramCard(p1)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), GetIconRichTextFunction (copy)
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "align-x-center align-y-center anchor-center-center size-2500-2500 stroke-emphasis radius-medium bg-surface-100",
@@ -27,7 +27,7 @@ local function PictogramCard(p1) --[[ Line: 29 ]]
 	})
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 51 | Named "GiftAgeCheckView" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), Sheet (copy), DialogSize (copy), FoundationModule (copy), PictogramCard (copy), IconName (copy), _UDim2 (copy), _UDim2_1 (copy), ButtonVariant (copy), FillBehavior (copy)
 	return ReactModule.createElement(Sheet.Root, {
 		preferCenterSheet = true,

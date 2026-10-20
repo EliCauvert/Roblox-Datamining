@@ -4,7 +4,7 @@ local MyStatsExperienceStatsPath = game:DefineFastString("MyStatsExperienceStats
 return {
 	ProtocolVersion = 2,
 	CapRtnNamespace = "AssistantPlugin",
-	acpUrl = function(): string --[[ Line: 12 ]]
+	acpUrl = function(): string
 		-- upvalues: UrlBase (copy), MyStatsExperienceStatsPath (copy)
 		return UrlBase.APIS .. MyStatsExperienceStatsPath
 	end,
@@ -45,7 +45,7 @@ return {
 		MissingThumbnail = -32009
 	},
 	AskTool = { Name = "ask_tool" },
-	extractSessionNewProject = function(p1) --[[ Line: 56 ]]
+	extractSessionNewProject = function(p1)
 		if typeof(p1) == "table" then
 			local Roblox = p1._meta and p1._meta._roblox
 			
@@ -54,7 +54,7 @@ return {
 			return nil
 		end
 	end,
-	buildSessionNewWireParams = function(p1) --[[ Line: 67 ]]
+	buildSessionNewWireParams = function(p1)
 		local config = {
 			universeId = p1.project.universeId,
 			placeId = p1.project.placeId
@@ -72,7 +72,7 @@ return {
 			_meta = { _roblox = config }
 		}
 	end,
-	buildSessionPromptWireParams = function(p1) --[[ Line: 101 ]]
+	buildSessionPromptWireParams = function(p1)
 		local config = { sessionId = p1.sessionId, prompt = p1.prompt }
 		
 		if p1.experiment == nil then

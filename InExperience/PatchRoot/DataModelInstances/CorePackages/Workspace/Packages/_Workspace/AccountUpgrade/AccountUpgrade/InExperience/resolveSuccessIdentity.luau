@@ -1,8 +1,8 @@
-﻿local function _(p1): boolean --[[ Line: 26 | Named "isBlank" ]]
+﻿local function _(p1): boolean
 	return p1 == nil or p1 == ""
 end
 
-return function(p1, p2) --[[ Line: 30 | Named "resolveSuccessIdentity" ]]
+return function(p1, p2)
 	local Username = nil
 	repeat
 		if p1 then

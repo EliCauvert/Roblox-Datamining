@@ -1,10 +1,10 @@
 ﻿local RunService = game:GetService("RunService")
 local ReactModule = require(script:FindFirstAncestor("CollectionViews").Parent.React)
 
-return function(p1, p2) --[[ Line: 9 | Named "useCarouselScrollingBinding" ]]
+return function(p1, p2)
 	-- upvalues: ReactModule (copy), RunService (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(false)
-	ReactModule.useEffect(function() --[[ Line: 15 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), p2 (copy), UseBindingResult2 (copy), RunService (upval)
 		local Current = p1.current
 		
@@ -12,13 +12,13 @@ return function(p1, p2) --[[ Line: 9 | Named "useCarouselScrollingBinding" ]]
 			assert(Current, "scrollingFrame must exist")
 			local NewClockTime = 0
 			local HeartbeatConnection = nil
-			local Connection = Current:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ Line: 25 ]]
+			local Connection = Current:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
 				-- upvalues: NewClockTime (ref), HeartbeatConnection (ref), UseBindingResult2 (upval), RunService (upval)
 				NewClockTime = os.clock() + 0.01
 				
 				if not HeartbeatConnection then
 					UseBindingResult2(true)
-					HeartbeatConnection = RunService.Heartbeat:Connect(function() --[[ Line: 29 ]]
+					HeartbeatConnection = RunService.Heartbeat:Connect(function()
 						-- upvalues: NewClockTime (upval), UseBindingResult2 (upval), HeartbeatConnection (upval)
 						if NewClockTime <= os.clock() then
 							UseBindingResult2(false)
@@ -32,7 +32,7 @@ return function(p1, p2) --[[ Line: 9 | Named "useCarouselScrollingBinding" ]]
 				end
 			end)
 			
-			return function() --[[ Line: 41 ]]
+			return function()
 				-- upvalues: Connection (copy), HeartbeatConnection (ref)
 				Connection:Disconnect()
 				

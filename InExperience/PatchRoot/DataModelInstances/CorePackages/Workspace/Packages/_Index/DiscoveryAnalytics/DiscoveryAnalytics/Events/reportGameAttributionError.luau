@@ -23,7 +23,7 @@ local config = {
 	lastUpdated = { 25, 7, 30 }
 }
 
-return function(p1, p2) --[[ Line: 36 | Named "reportGameAttributionError" ]]
+return function(p1, p2)
 	-- upvalues: StrictInterfaceResult (copy), ReportWarningModule (copy), LoggingProtocolModule (copy), config (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(p2)
 	

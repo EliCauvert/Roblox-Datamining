@@ -14,7 +14,7 @@ local Orientation = FoundationModule.Enums.Orientation
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseMobilePageModule = require(AccountUpgrade.MobilePage.useMobilePage)
 
-return function(p1) --[[ Line: 30 | Named "CloseConfirmationDialog" ]]
+return function(p1)
 	-- upvalues: FoundationModule (copy), UseMobilePageModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), UseLocalizationFunction (copy), ReactModule (copy), ButtonVariant (copy), Dialog (copy), DialogSize (copy), View (copy), Text (copy), Orientation (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseMobilePageModuleResult = UseMobilePageModule()
@@ -63,7 +63,7 @@ return function(p1) --[[ Line: 30 | Named "CloseConfirmationDialog" ]]
 				{
 					text = UseLocalizationResult.continueSetupText,
 					variant = ButtonVariant.Emphasis,
-					onActivated = ReactModule.useCallback(function() --[[ Line: 62 ]]
+					onActivated = ReactModule.useCallback(function()
 						-- upvalues: UseRefResult (copy), OnBackFunction (copy)
 						if not UseRefResult.current then
 							OnBackFunction()
@@ -74,7 +74,7 @@ return function(p1) --[[ Line: 30 | Named "CloseConfirmationDialog" ]]
 				{
 					text = UseLocalizationResult.cancelText,
 					variant = ButtonVariant.Standard,
-					onActivated = ReactModule.useCallback(function() --[[ Line: 52 ]]
+					onActivated = ReactModule.useCallback(function()
 						-- upvalues: UseRefResult (copy), UseStateResult2 (copy), OnSignOutFunction (copy)
 						if not UseRefResult.current then
 							UseRefResult.current = true

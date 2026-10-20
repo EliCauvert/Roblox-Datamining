@@ -6,7 +6,7 @@ return {
 	Slot = Slot,
 	bind = BindFunction,
 	noContext = Slot.noContext,
-	setTimeout = function(p1, p2) --[[ Line: 27 ]]
+	setTimeout = function(p1, p2)
 		-- upvalues: SetTimeoutFunction (copy), BindFunction (copy)
 		return SetTimeoutFunction(BindFunction(p1), p2)
 	end

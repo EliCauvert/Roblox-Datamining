@@ -1,18 +1,18 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
 
-return function() --[[ Line: 7 | Named "useClock" ]]
+return function()
 	-- upvalues: ReactModule (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
-	ReactModule.useEffect(function() --[[ Line: 10 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseBindingResult2 (copy), UseBindingResult (copy)
-		local SpawnedThread = task.spawn(function() --[[ Line: 11 ]]
+		local SpawnedThread = task.spawn(function()
 			-- upvalues: UseBindingResult2 (upval), UseBindingResult (upval)
 			while true do
 				UseBindingResult2(UseBindingResult:getValue() + task.wait())
 			end
 		end)
 		
-		return function() --[[ Line: 18 ]]
+		return function()
 			-- upvalues: SpawnedThread (copy)
 			task.cancel(SpawnedThread)
 		end

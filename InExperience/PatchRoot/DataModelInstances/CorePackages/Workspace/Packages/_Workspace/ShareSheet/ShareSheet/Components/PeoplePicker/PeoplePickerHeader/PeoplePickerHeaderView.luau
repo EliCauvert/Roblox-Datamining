@@ -9,7 +9,7 @@ local IconName = FoundationModule.Enums.IconName
 local InputSize = FoundationModule.Enums.InputSize
 local SearchInputShape = FoundationModule.Enums.SearchInputShape
 
-return function(p1) --[[ Line: 25 | Named "PeoplePickerHeaderView" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), SearchInput (copy), SearchInputShape (copy)
 	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-small size-full-0 auto-y padding-y-small",

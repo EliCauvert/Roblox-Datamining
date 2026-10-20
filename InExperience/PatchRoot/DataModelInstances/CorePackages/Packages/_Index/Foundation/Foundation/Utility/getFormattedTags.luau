@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("Foundation").Components.Types)
 
-return function(List) --[[ Line: 6 | Named "getFormattedTags" ]]
+return function(List)
 	if List ~= nil then
 		if typeof(List) == "table" then
 			local List1 = {}

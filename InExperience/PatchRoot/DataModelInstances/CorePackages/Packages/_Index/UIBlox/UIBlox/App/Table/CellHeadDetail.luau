@@ -19,9 +19,9 @@ CellHeadDetail.validateProps = TModule.strictInterface({
 	openTypeFeatures = TModule.optional(TModule.string)
 })
 
-function CellHeadDetail.render(p1) --[[ Line: 30 ]]
+function CellHeadDetail.render(p1)
 	-- upvalues: WithStyleModule (copy), RoactModule (copy), GenericTextLabelModule (copy)
-	return WithStyleModule(function(p2) --[[ Line: 31 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: p1 (copy), RoactModule (upval), GenericTextLabelModule (upval)
 		local SubLabelText = p1.props.subLabelText
 		local SubLabelTextColor = p1.props.subLabelTextColor or p2.Theme.TextDefault

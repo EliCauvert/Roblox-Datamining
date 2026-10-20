@@ -2,16 +2,16 @@
 local APIURLModule = require(Parent.API_URL)
 local _ = require(Parent.networkingShareLinkTypes)
 
-return function(p1) --[[ Line: 6 ]]
+return function(p1)
 	-- upvalues: APIURLModule (copy)
-	local GetMetadata = p1.roduxNetworking.POST("get-metadata", function(Callback, p2) --[[ Line: 11 ]]
+	local GetMetadata = p1.roduxNetworking.POST("get-metadata", function(Callback, p2)
 		-- upvalues: APIURLModule (upval)
 		return Callback(APIURLModule):path("sharelinks"):path("v1"):path("get-metadata"):body({ linkType = p2.linkType, linkId = p2.linkId })
 	end)
 	
 	if p1.useMockedResponse then
 		GetMetadata.Mock.clear()
-		GetMetadata.Mock.reply(function() --[[ Line: 21 ]]
+		GetMetadata.Mock.reply(function()
 			return {
 				responseBody = { data = "{ \"universeId\": 123, \"placeId\": 456 }" }
 			}

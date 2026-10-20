@@ -7,9 +7,9 @@ local FFlagSduiRequestPushNotificationPermissionActionHandler = SharedFlagsModul
 local RegisterPromptsActionsModule = require(PromptsServerDrivenUi.Actions.registerPromptsActions)
 local RegisterPromptsImpressionsModule = require(PromptsServerDrivenUi.Impressions.registerPromptsImpressions)
 
-return ReactModule.memo(function() --[[ Line: 13 | Named "SduiPromptsRegister" ]]
+return ReactModule.memo(function()
 	-- upvalues: ReactModule (copy), FFlagLuaAppSduiMovePromptsActions (copy), FFlagSduiRequestPushNotificationPermissionActionHandler (copy), RegisterPromptsActionsModule (copy), RegisterPromptsImpressionsModule (copy)
-	ReactModule.useEffect(function() --[[ Line: 14 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagLuaAppSduiMovePromptsActions (upval), FFlagSduiRequestPushNotificationPermissionActionHandler (upval), RegisterPromptsActionsModule (upval), RegisterPromptsImpressionsModule (upval)
 		if FFlagLuaAppSduiMovePromptsActions or FFlagSduiRequestPushNotificationPermissionActionHandler then
 			RegisterPromptsActionsModule()

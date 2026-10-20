@@ -1,9 +1,9 @@
 ﻿local _ = require(script.Parent.Parent.types)
 
-return function(Callback) --[[ Line: 7 ]]
-	return function(p1) --[[ Line: 8 ]]
+return function(Callback)
+	return function(p1)
 		-- upvalues: Callback (copy)
-		Callback(function(Tbl) --[[ Line: 9 ]]
+		Callback(function(Tbl)
 			-- upvalues: p1 (copy)
 			if Tbl[p1] == nil then
 				return Tbl

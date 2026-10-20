@@ -1,4 +1,4 @@
-﻿local function prettyPrint(List, p1): string --[[ Line: 3 ]]
+﻿local function prettyPrint(List, p1): string
 	-- upvalues: prettyPrint (copy)
 	local P1 = p1 or 0
 	local List1 = {}

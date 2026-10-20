@@ -3,7 +3,7 @@ local PromiseModule = require(game:GetService("CorePackages").Packages.Promise)
 local HumanoidDescription = nil
 local v1 = nil
 
-local function removeDefaultClothing(Object, Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 14 ]]
+local function removeDefaultClothing(Object, Callback1: (any) -> (), Callback: (any) -> ())
 	-- upvalues: AvatarEditorService (copy)
 	local AvatarRulesAsync = AvatarEditorService:GetAvatarRulesAsync()
 	
@@ -37,16 +37,16 @@ local function removeDefaultClothing(Object, Callback1: (any) -> (), Callback: (
 	Callback1(v2 or Object)
 end
 
-return function(HumanoidDescription1, p1) --[[ Line: 48 | Named "GetConformedHumanoidDescription" ]]
+return function(HumanoidDescription1, p1)
 	-- upvalues: HumanoidDescription (ref), PromiseModule (copy), v1 (ref), removeDefaultClothing (copy), AvatarEditorService (copy)
-	return if HumanoidDescription1 == HumanoidDescription then if p1 then PromiseModule.resolve(v1) else PromiseModule.new(function(p2, p3) --[[ Line: 53 ]]
+	return if HumanoidDescription1 == HumanoidDescription then if p1 then PromiseModule.resolve(v1) else PromiseModule.new(function(p2, p3)
 		-- upvalues: removeDefaultClothing (upval), v1 (upval)
 		removeDefaultClothing(v1, p2, p3)
-	end) else PromiseModule.new(function(Callback, Callback1) --[[ Line: 59 ]]
+	end) else PromiseModule.new(function(Callback, Callback1)
 		-- upvalues: AvatarEditorService (upval), HumanoidDescription1 (copy), HumanoidDescription (upval), v1 (upval), p1 (copy), removeDefaultClothing (upval)
-		coroutine.wrap(function() --[[ Line: 60 ]]
+		coroutine.wrap(function()
 			-- upvalues: AvatarEditorService (upval), HumanoidDescription1 (upval), HumanoidDescription (upval), v1 (upval), p1 (upval), Callback (copy), removeDefaultClothing (upval), Callback1 (copy)
-			local Success, Result = pcall(function() --[[ Line: 61 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: AvatarEditorService (upval), HumanoidDescription1 (upval)
 				return AvatarEditorService:ConformToAvatarRulesAsync(HumanoidDescription1)
 			end)

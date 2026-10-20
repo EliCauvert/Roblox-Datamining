@@ -19,30 +19,30 @@ local list = {
 	{
 		text = "Cancel",
 		variant = ButtonVariantModule.Standard,
-		onActivated = function() --[[ Line: 80 ]] end
+		onActivated = function() end
 	},
 	{
 		text = "Confirm",
 		variant = ButtonVariantModule.Emphasis,
-		onActivated = function() --[[ Line: 85 ]] end
+		onActivated = function() end
 	}
 }
 
-local function makeScrollableListItems(p1) --[[ Line: 89 ]]
+local function makeScrollableListItems(p1)
 	-- upvalues: ReactModule (copy), ListModule (copy)
 	local Elements = {}
 	
 	for i = 1, p1 do
 		Elements[`Item{i}`] = ReactModule.createElement(ListModule.Item, {
 			title = `Item {i}`,
-			onActivated = function() --[[ Line: 94 ]] end,
+			onActivated = function() end,
 			LayoutOrder = i
 		})
 	end
 	return Elements
 end
 
-local function dialogStoryList(p2, LayoutOrder) --[[ Line: 101 ]]
+local function dialogStoryList(p2, LayoutOrder)
 	-- upvalues: ReactModule (copy), ListModule (copy), InputSizeModule (copy), makeScrollableListItems (copy)
 	return ReactModule.createElement(ListModule.Root, {
 		LayoutOrder = LayoutOrder,
@@ -52,7 +52,7 @@ local function dialogStoryList(p2, LayoutOrder) --[[ Line: 101 ]]
 	}, (makeScrollableListItems(p2)))
 end
 
-local function makeDialogChildren(p2) --[[ Line: 116 ]]
+local function makeDialogChildren(p2)
 	-- upvalues: ReactModule (copy), DialogModule (copy), list (copy)
 	local P3 = p2 or {}
 	local HeroMedia = P3.heroMedia
@@ -82,7 +82,7 @@ local function makeDialogChildren(p2) --[[ Line: 116 ]]
 	}
 end
 
-local function DialogExample(p2) --[[ Line: 229 ]]
+local function DialogExample(p2)
 	-- upvalues: ReactModule (copy), DialogModule (copy), Medium (copy)
 	return ReactModule.createElement(DialogModule.Root, {
 		hasBackdrop = true,
@@ -107,7 +107,7 @@ return {
 		DialogSizeModule.Medium,
 		DialogSizeModule.Large
 	},
-	Section = function(p2) --[[ Line: 190 ]]
+	Section = function(p2)
 		-- upvalues: ReactModule (copy), ViewModule (copy), TextModule (copy)
 		return ReactModule.createElement(ViewModule, {
 			tag = "col gap-medium size-full-0 auto-y",
@@ -136,18 +136,18 @@ return {
 		})
 	end,
 	makeDialogChildren = makeDialogChildren,
-	minimalDialogChildren = function(Title, Content) --[[ Line: 162 ]]
+	minimalDialogChildren = function(Title, Content)
 		-- upvalues: makeDialogChildren (copy)
 		return (makeDialogChildren({ title = Title, content = Content }))
 	end,
-	listDialogChildren = function(p2, ContentSelectable) --[[ Line: 169 ]]
+	listDialogChildren = function(p2, ContentSelectable)
 		-- upvalues: makeDialogChildren (copy), dialogStoryList (copy)
 		return (makeDialogChildren({
 			contentSelectable = ContentSelectable,
 			contentChildren = { List = dialogStoryList(p2) }
 		}))
 	end,
-	heroMediaDialogChildren = function(p2) --[[ Line: 178 ]]
+	heroMediaDialogChildren = function(p2)
 		-- upvalues: DashModule (copy), makeDialogChildren (copy)
 		local P8 = p2 or {}
 		
@@ -158,7 +158,7 @@ return {
 	end,
 	dialogStoryList = dialogStoryList,
 	DialogExample = DialogExample,
-	LabeledDialogTrigger = function(p2) --[[ Line: 247 ]]
+	LabeledDialogTrigger = function(p2)
 		-- upvalues: ReactModule (copy), ViewModule (copy), TextModule (copy), ButtonModule (copy), ButtonVariantModule (copy), DialogExample (copy)
 		local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 		
@@ -174,7 +174,7 @@ return {
 			OpenButton = ReactModule.createElement(ViewModule, { tag = "auto-xy", LayoutOrder = 2 }, {
 				Button = ReactModule.createElement(ButtonModule, {
 					text = if UseStateResult then "Close" else p2.buttonText or "Open",
-					onActivated = function() --[[ Line: 273 ]]
+					onActivated = function()
 						-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
 						UseStateResult2(not UseStateResult)
 					end,
@@ -183,7 +183,7 @@ return {
 			}),
 			DialogRoot = if UseStateResult then ReactModule.createElement(DialogExample, {
 				size = p2.size,
-				onClose = function() --[[ Line: 282 ]]
+				onClose = function()
 					-- upvalues: UseStateResult2 (copy)
 					UseStateResult2(false)
 				end,
@@ -191,14 +191,14 @@ return {
 			}) else nil
 		})
 	end,
-	RootStory = function(p2) --[[ Line: 291 ]]
+	RootStory = function(p2)
 		-- upvalues: ReactModule (copy), ViewModule (copy), ButtonModule (copy), ButtonVariantModule (copy), DialogExample (copy), makeDialogChildren (copy)
 		local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 		
 		return ReactModule.createElement(ViewModule, { tag = "auto-xy" }, {
 			ToggleButton = ReactModule.createElement(ButtonModule, {
 				text = if UseStateResult then "Close Dialog" else "Open Dialog",
-				onActivated = function() --[[ Line: 299 ]]
+				onActivated = function()
 					-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
 					UseStateResult2(not UseStateResult)
 				end,
@@ -206,7 +206,7 @@ return {
 			}),
 			DialogRoot = if UseStateResult then ReactModule.createElement(DialogExample, {
 				size = p2.controls.size,
-				onClose = function() --[[ Line: 307 ]]
+				onClose = function()
 					-- upvalues: UseStateResult2 (copy)
 					UseStateResult2(false)
 				end,

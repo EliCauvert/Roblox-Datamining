@@ -16,7 +16,7 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local FillBehavior = FoundationModule.Enums.FillBehavior
 local InputSize = FoundationModule.Enums.InputSize
 
-return function(Frame) --[[ Line: 36 | Named "PlaytestCompletedCard" ]]
+return function(Frame)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), UseChatCardEmphasisModule (copy), ChatCardPriorityModule (copy), ReactModule (copy), View (copy), Button (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), Text (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		description = LocalizationStringsModule.CHAT_COMPLETED_GAME_CREATION_DESCRIPTION,

@@ -7,7 +7,7 @@ local GetTransparencyStoreModule = require(ExpChat.Stores.GetTransparencyStore)
 local GetChatTooltipStoreModule = require(ExpChat.Stores.GetChatTooltipStore)
 local _ = require(ExpChat.Stores.GetChatTooltipStore.createChatTooltipStore)
 
-return function(p1) --[[ Line: 49 | Named "useChatTooltipLifecycle" ]]
+return function(p1)
 	-- upvalues: GetChatTooltipStoreModule (copy), GetTransparencyStoreModule (copy), SignalsReactModule (copy), ReactModule (copy), ConfigModule (copy)
 	local TooltipKey = p1.tooltipKey
 	local TargetTextChannel = p1.targetTextChannel
@@ -24,7 +24,7 @@ return function(p1) --[[ Line: 49 | Named "useChatTooltipLifecycle" ]]
 	local UseRefResult2 = ReactModule.useRef(TargetTextChannel)
 	local SetIsDismissedFunction = ChatTooltipStoreModule.setIsDismissed
 	local ReportImpressionFunction = ChatTooltipStoreModule.reportImpression
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 71 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), ReportImpressionFunction (copy), TooltipKey (copy), SetIsDismissedFunction (copy)
 		if not UseRefResult.current then
 			UseRefResult.current = true
@@ -36,7 +36,7 @@ return function(p1) --[[ Line: 49 | Named "useChatTooltipLifecycle" ]]
 		SetIsDismissedFunction,
 		ReportImpressionFunction
 	})
-	ReactModule.useEffect(function() --[[ Line: 79 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult3 (copy), UseStateResult2 (copy), ConfigModule (upval), UseSignalStateResult2 (copy)
 		if UseSignalStateResult3 then
 			UseStateResult2(true)
@@ -51,27 +51,27 @@ return function(p1) --[[ Line: 49 | Named "useChatTooltipLifecycle" ]]
 			return nil
 		else
 			UseStateResult2(true)
-			local DelayedThread = task.delay(ChatWindowBackgroundFadeOutTimeDelta, function() --[[ Line: 93 ]]
+			local DelayedThread = task.delay(ChatWindowBackgroundFadeOutTimeDelta, function()
 				-- upvalues: UseStateResult2 (upval)
 				UseStateResult2(false)
 			end)
 			
-			return function() --[[ Line: 96 ]]
+			return function()
 				-- upvalues: DelayedThread (copy)
 				task.cancel(DelayedThread)
 			end
 		end
 	end, { UseSignalStateResult2, UseSignalStateResult3 })
-	ReactModule.useEffect(function() --[[ Line: 105 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseSignalStateResult1 (copy), UseStateResult1 (copy), UseSignalStateResult (copy), UseRefResult1 (copy), UseStateResult2_1 (copy)
 		if UseStateResult and UseSignalStateResult1 and not UseStateResult1 and UseSignalStateResult then
 			local ClockTime = os.clock()
-			local DelayedThread = task.delay(math.max(0, 10 - UseRefResult1.current), function() --[[ Line: 112 ]]
+			local DelayedThread = task.delay(math.max(0, 10 - UseRefResult1.current), function()
 				-- upvalues: UseStateResult2_1 (upval)
 				UseStateResult2_1(true)
 			end)
 			
-			return function() --[[ Line: 115 ]]
+			return function()
 				-- upvalues: UseRefResult1 (upval), ClockTime (copy), DelayedThread (copy)
 				UseRefResult1.current += os.clock() - ClockTime
 				task.cancel(DelayedThread)
@@ -85,15 +85,15 @@ return function(p1) --[[ Line: 49 | Named "useChatTooltipLifecycle" ]]
 		UseStateResult1,
 		UseSignalStateResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 122 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult1 (copy), UseResult (copy)
 		if UseStateResult1 then
-			local DelayedThread = task.delay(1, function() --[[ Line: 126 ]]
+			local DelayedThread = task.delay(1, function()
 				-- upvalues: UseResult (upval)
 				UseResult()
 			end)
 			
-			return function() --[[ Line: 129 ]]
+			return function()
 				-- upvalues: DelayedThread (copy)
 				task.cancel(DelayedThread)
 			end
@@ -101,7 +101,7 @@ return function(p1) --[[ Line: 49 | Named "useChatTooltipLifecycle" ]]
 			return nil
 		end
 	end, { UseStateResult1, UseResult })
-	ReactModule.useEffect(function() --[[ Line: 135 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult2 (copy), TargetTextChannel (copy), UseSignalStateResult (copy), UseStateResult1 (copy), UseStateResult2_1 (copy)
 		local Current = UseRefResult2.current
 		UseRefResult2.current = TargetTextChannel

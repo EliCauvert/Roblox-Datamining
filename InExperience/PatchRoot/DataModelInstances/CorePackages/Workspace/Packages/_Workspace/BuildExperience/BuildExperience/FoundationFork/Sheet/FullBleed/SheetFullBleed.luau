@@ -9,7 +9,7 @@ local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local SheetContextModule = require(script:FindFirstAncestor("Sheet").SheetContext)
 local config = { sticky = false, height = UDim.new(1, 0) }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 36 | Named "SheetFullBleed" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), SheetContextModule (copy), ImageModule (copy), GradientModule (copy), ViewModule (copy), ConstantsModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseContextResult = ReactModule.useContext(SheetContextModule)
@@ -20,17 +20,17 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 36 |
 	local HasRadius = UseContextResult.hasRadius
 	local TestId = UseContextResult.testId
 	assert(SetFullBleedHeightFunction and (HasHeader and TestId), "SheetFullBleed must be used within a Sheet")
-	ReactModule.useEffect(function() --[[ Line: 48 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: WithDefaultsModuleResult (copy), HasHeader (copy)
 		assert(not (WithDefaultsModuleResult.sticky and HasHeader:getValue()), "Sheet.FullBleed with sticky=true is unsupported when used with Sheet.Header")
 	end, { WithDefaultsModuleResult.sticky, HasHeader })
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 55 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: SetFullBleedHeightFunction (copy)
 		SetFullBleedHeightFunction(Frame.AbsoluteSize.Y)
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 59 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SetFullBleedHeightFunction (copy)
-		return function() --[[ Line: 60 ]]
+		return function()
 			-- upvalues: SetFullBleedHeightFunction (upval)
 			SetFullBleedHeightFunction(0)
 		end
@@ -67,7 +67,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 36 |
 	local Element = ReactModule.createElement(ViewModule, {
 		ClipsDescendants = true,
 		ZIndex = 2,
-		Size = if WithDefaultsModuleResult.sticky then _UDim2 elseif InnerScrollY and FullBleedHeight then ReactModule.joinBindings({ scrollY = InnerScrollY, height = FullBleedHeight }):map(function(p2): UDim2 --[[ Line: 76 ]]
+		Size = if WithDefaultsModuleResult.sticky then _UDim2 elseif InnerScrollY and FullBleedHeight then ReactModule.joinBindings({ scrollY = InnerScrollY, height = FullBleedHeight }):map(function(p2): UDim2
 			return if p2.height == 0 then UDim2.fromScale(1, 1) else UDim2.new(1, 0, 0, (math.max(0, p2.height - p2.scrollY)))
 		end) else nil,
 		aspectRatio = if WithDefaultsModuleResult.sticky then WithDefaultsModuleResult.aspectRatio else nil,

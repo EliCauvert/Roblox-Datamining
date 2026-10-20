@@ -5,7 +5,7 @@ local _ = require(Parent.Types)
 local config = { IsOpen = false, Capture = nil, SessionId = nil }
 
 return require(Parent1.Rodux).createReducer(config, {
-	[require(Parent.Actions.MomentsCreationFlowOpened).name] = function(p1, p2) --[[ Line: 25 ]]
+	[require(Parent.Actions.MomentsCreationFlowOpened).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, {
 			IsOpen = true,
@@ -13,7 +13,7 @@ return require(Parent1.Rodux).createReducer(config, {
 			SessionId = p2.sessionId
 		})
 	end,
-	[require(Parent.Actions.MomentsCreationFlowClosed).name] = function(_, _) --[[ Line: 33 ]]
+	[require(Parent.Actions.MomentsCreationFlowClosed).name] = function(_, _)
 		-- upvalues: config (copy)
 		return config
 	end

@@ -10,7 +10,7 @@ local InputSize = FoundationModule.Enums.InputSize
 local Menu = FoundationModule.Menu
 local OverlayProvider = FoundationModule.OverlayProvider
 
-local function _() --[[ Line: 38 | Named "getVROverlaySurfaceGui" ]]
+local function _()
 	-- upvalues: FFlagProfileFixMenuNavigation (copy), CoreGui (copy)
 	if FFlagProfileFixMenuNavigation then
 		local LuaAppScreenGui = CoreGui:FindFirstChild("LuaAppScreenGui")
@@ -21,7 +21,7 @@ local function _() --[[ Line: 38 | Named "getVROverlaySurfaceGui" ]]
 	end
 end
 
-return function(p1) --[[ Line: 50 | Named "ProfileContextualMenu" ]]
+return function(p1)
 	-- upvalues: FFlagProfileFixMenuNavigation (copy), UseIsSpatialFunction (copy), CoreGui (copy), PopoverSide (copy), ReactModule (copy), OverlayProvider (copy), Menu (copy), PopoverAlign (copy), InputSize (copy)
 	local MainAppScreenSurfaceGui = nil
 	if FFlagProfileFixMenuNavigation and UseIsSpatialFunction() then

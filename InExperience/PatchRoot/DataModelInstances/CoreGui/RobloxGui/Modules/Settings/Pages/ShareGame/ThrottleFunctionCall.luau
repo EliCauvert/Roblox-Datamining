@@ -1,11 +1,11 @@
-﻿return function(Delay, Callback) --[[ Line: 1 ]]
+﻿return function(Delay, Callback)
 	local Flag = false
 	
-	return function(...) --[[ Line: 3 ]]
+	return function(...)
 		-- upvalues: Flag (ref), Delay (copy), Callback (copy)
 		if Flag then return end
 		Flag = true
-		task.delay(Delay, function() --[[ Line: 8 ]]
+		task.delay(Delay, function()
 			-- upvalues: Flag (upval)
 			Flag = false
 		end)

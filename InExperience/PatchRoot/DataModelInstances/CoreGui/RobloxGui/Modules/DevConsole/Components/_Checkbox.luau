@@ -4,7 +4,7 @@ local ConstantsModule = require(script.Parent.Parent.Constants)
 local CheckboxInnerPadding = ConstantsModule.UtilityBarFormatting.CheckboxInnerPadding
 local Checkbox = RoactModule.Component:extend("Checkbox")
 
-function Checkbox.render(p1) --[[ Line: 10 ]]
+function Checkbox.render(p1)
 	-- upvalues: ConstantsModule (copy), TextService (copy), RoactModule (copy), CheckboxInnerPadding (copy)
 	local CheckboxHeight: number = p1.props.checkboxHeight
 	local FrameHeight = p1.props.frameHeight
@@ -28,7 +28,7 @@ function Checkbox.render(p1) --[[ Line: 10 ]]
 		Size = UDim2.new(0, CheckboxHeight + TextService:GetTextSize(Name, FontSize, PropsFont, Vector2.new(0, FrameHeight)).X + CheckboxInnerPadding * 2, 0, FrameHeight),
 		BackgroundTransparency = 1,
 		LayoutOrder = LayoutOrder,
-		[RoactModule.Event.Activated] = function(_) --[[ Line: 43 ]]
+		[RoactModule.Event.Activated] = function(_)
 			-- upvalues: OnCheckboxClickedFunction (copy), Name (copy), IsSelected (copy)
 			OnCheckboxClickedFunction(Name, not IsSelected)
 		end

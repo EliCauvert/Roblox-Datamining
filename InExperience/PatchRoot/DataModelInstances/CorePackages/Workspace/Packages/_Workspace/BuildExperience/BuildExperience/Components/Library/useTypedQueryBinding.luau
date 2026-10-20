@@ -1,10 +1,10 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
 
-return function(p1) --[[ Line: 9 | Named "useTypedQueryBinding" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(p1 or "")
 	local UseRefResult = ReactModule.useRef({})
-	ReactModule.useEffect(function() --[[ Line: 13 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseRefResult (copy), UseBindingResult (copy), UseBindingResult2 (copy)
 		local P0 = p1 or ""
 		local Current = UseRefResult.current
@@ -24,7 +24,7 @@ return function(p1) --[[ Line: 9 | Named "useTypedQueryBinding" ]]
 		end
 	end, { p1 })
 	
-	return UseBindingResult, (ReactModule.useCallback(function(p2) --[[ Line: 29 ]]
+	return UseBindingResult, (ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult (copy), UseBindingResult2 (copy)
 		table.insert(UseRefResult.current, p2)
 		UseBindingResult2(p2)

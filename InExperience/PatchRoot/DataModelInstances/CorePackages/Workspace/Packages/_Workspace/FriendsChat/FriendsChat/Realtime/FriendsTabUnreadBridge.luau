@@ -10,7 +10,7 @@ local FriendsChatTabNameModule = require(script.Parent.Parent.FriendsChatTabName
 local NewResult = require(Parent.ExpChatShared).Logger:new(script.Name)
 local FFlagExpChatEnableFriendsTab = require(Parent.SharedFlags).FFlagExpChatEnableFriendsTab
 
-return function(p1) --[[ Line: 59 | Named "FriendsTabUnreadBridge" ]]
+return function(p1)
 	-- upvalues: FFlagExpChatEnableFriendsTab (copy), GetFriendsChatRealtimeStoreModule (copy), GetFriendsChatNavigationStoreModule (copy), SignalsReactModule (copy), FriendsChatTabNameModule (copy), ReactModule (copy), InExperienceAppChatModalModule (copy), AppChatNetworkingModule (copy), NewResult (copy), SignalsModule (copy)
 	if FFlagExpChatEnableFriendsTab then
 		local SetTabUnreadFunction = p1.setTabUnread
@@ -19,20 +19,20 @@ return function(p1) --[[ Line: 59 | Named "FriendsTabUnreadBridge" ]]
 		local FriendsChatRealtimeStoreModule = GetFriendsChatRealtimeStoreModule(false)
 		local UseSignalStateResult = SignalsReactModule.useSignalState(GetFriendsChatNavigationStoreModule(false).getEffectiveConversationId)
 		
-		local function _(): boolean --[[ Line: 71 | Named "readHasLocalUnread" ]]
+		local function _(): boolean
 			-- upvalues: FriendsChatRealtimeStoreModule (copy)
 			return next(FriendsChatRealtimeStoreModule.getLocalUnreadConversationIds(false)) ~= nil
 		end
 		
 		local IsSelectedTabNameMatch: boolean = IsChatWindowVisible == true and SelectedTabName == FriendsChatTabNameModule
 		local NoUseSignalStateResult: boolean = IsSelectedTabNameMatch and UseSignalStateResult == nil
-		ReactModule.useEffect(function() --[[ Line: 94 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: IsSelectedTabNameMatch (copy), InExperienceAppChatModalModule (upval), AppChatNetworkingModule (upval), NewResult (upval), SetTabUnreadFunction (copy), FriendsChatRealtimeStoreModule (copy)
-			local function onGlobalCount() --[[ Line: 95 ]]
+			local function onGlobalCount()
 				-- upvalues: IsSelectedTabNameMatch (upval), InExperienceAppChatModalModule (upval), AppChatNetworkingModule (upval), NewResult (upval), SetTabUnreadFunction (upval), FriendsChatRealtimeStoreModule (upval)
 				if IsSelectedTabNameMatch and (InExperienceAppChatModalModule.default.unreadCount or 0) > 0 then
 					InExperienceAppChatModalModule:setUnreadCount(0)
-					AppChatNetworkingModule.http.ClearGlobalUnreadCount():catch(function(Err) --[[ Line: 102 ]]
+					AppChatNetworkingModule.http.ClearGlobalUnreadCount():catch(function(Err)
 						-- upvalues: NewResult (upval)
 						NewResult:warning(`Failed to clear global unread count: {tostring(Err)}`)
 					end)
@@ -43,14 +43,14 @@ return function(p1) --[[ Line: 59 | Named "FriendsTabUnreadBridge" ]]
 			onGlobalCount()
 			local EventConnection = InExperienceAppChatModalModule.default.unreadCountSignal.Event:Connect(onGlobalCount)
 			
-			return function() --[[ Line: 112 ]]
+			return function()
 				-- upvalues: EventConnection (copy)
 				EventConnection:Disconnect()
 			end
 		end, { IsSelectedTabNameMatch, SetTabUnreadFunction })
-		ReactModule.useEffect(function() --[[ Line: 126 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: SignalsModule (upval), FriendsChatRealtimeStoreModule (copy), IsSelectedTabNameMatch (copy), UseSignalStateResult (copy), NoUseSignalStateResult (copy), SetTabUnreadFunction (copy), InExperienceAppChatModalModule (upval)
-			local Effect = SignalsModule.createEffect(function(p2) --[[ Line: 127 ]]
+			local Effect = SignalsModule.createEffect(function(p2)
 				-- upvalues: FriendsChatRealtimeStoreModule (upval), IsSelectedTabNameMatch (upval), UseSignalStateResult (upval), NoUseSignalStateResult (upval), SetTabUnreadFunction (upval), InExperienceAppChatModalModule (upval)
 				local LocalUnreadConversationIds = FriendsChatRealtimeStoreModule.getLocalUnreadConversationIds(p2)
 				
@@ -60,7 +60,7 @@ return function(p1) --[[ Line: 59 | Named "FriendsTabUnreadBridge" ]]
 				SetTabUnreadFunction((InExperienceAppChatModalModule.default.unreadCount or 0) > 0 or next(FriendsChatRealtimeStoreModule.getLocalUnreadConversationIds(false)) ~= nil)
 			end)
 			
-			return function() --[[ Line: 143 ]]
+			return function()
 				-- upvalues: Effect (copy)
 				Effect()
 			end

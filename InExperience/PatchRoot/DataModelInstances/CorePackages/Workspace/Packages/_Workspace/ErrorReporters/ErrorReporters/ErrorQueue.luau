@@ -11,7 +11,7 @@ local TupleResult = TModule.tuple(TModule.callback, TModule.optional(TModule.str
 	flushImmediately = TModule.optional(TModule.boolean)
 })))
 
-function ErrorQueueModule.new(_reportMethod, p1) --[[ Line: 57 ]]
+function ErrorQueueModule.new(_reportMethod, p1)
 	-- upvalues: TupleResult (copy), ErrorQueueModule (copy)
 	assert(TupleResult(_reportMethod, p1))
 	local P1 = p1 or {}
@@ -32,11 +32,11 @@ function ErrorQueueModule.new(_reportMethod, p1) --[[ Line: 57 ]]
 	return config
 end
 
-function ErrorQueueModule:hasError(p1): boolean --[[ Line: 84 ]]
+function ErrorQueueModule:hasError(p1): boolean
 	return type(p1) == "string" and p1 ~= "" and self._errors[p1] ~= nil
 end
 
-function ErrorQueueModule:addError(p1, Data) --[[ Line: 92 ]]
+function ErrorQueueModule:addError(p1, Data)
 	if type(p1) ~= "string" or p1 == "" then return end
 	if self._errors[p1] then
 		self._errors[p1].count += 1
@@ -51,11 +51,11 @@ function ErrorQueueModule:addError(p1, Data) --[[ Line: 92 ]]
 	end
 end
 
-function ErrorQueueModule:isReadyToReport(): boolean --[[ Line: 116 ]]
+function ErrorQueueModule:isReadyToReport(): boolean
 	return self._queueKeyLimit <= self._totalKeyCount or (self._queueErrorLimit <= self._totalErrorCount or self._totalErrorCount > 0 and self._queueTimeLimit <= self._runningTime)
 end
 
-function ErrorQueueModule:reportAllErrors() --[[ Line: 122 ]]
+function ErrorQueueModule:reportAllErrors()
 	-- upvalues: CryoModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(self._errors, {})
 	self._errors = {}
@@ -68,7 +68,7 @@ function ErrorQueueModule:reportAllErrors() --[[ Line: 122 ]]
 	end
 end
 
-function ErrorQueueModule:_onRenderStep(p1) --[[ Line: 137 ]]
+function ErrorQueueModule:_onRenderStep(p1)
 	self._runningTime += p1
 	
 	if self:isReadyToReport() then
@@ -76,18 +76,18 @@ function ErrorQueueModule:_onRenderStep(p1) --[[ Line: 137 ]]
 	end
 end
 
-function ErrorQueueModule:startTimer() --[[ Line: 145 ]]
+function ErrorQueueModule:startTimer()
 	-- upvalues: RunService (copy)
 	if self._renderSteppedConnection == nil then
 		self._runningTime = if self._flushImmediately then self._queueTimeLimit else 0
-		self._renderSteppedConnection = RunService.renderStepped:Connect(function(p1) --[[ Line: 149 ]]
+		self._renderSteppedConnection = RunService.renderStepped:Connect(function(p1)
 			-- upvalues: self (copy)
 			self:_onRenderStep(p1)
 		end)
 	end
 end
 
-function ErrorQueueModule:stopTimer() --[[ Line: 155 ]]
+function ErrorQueueModule:stopTimer()
 	if self._renderSteppedConnection ~= nil then
 		self._renderSteppedConnection:Disconnect()
 		self._runningTime = 0

@@ -3,11 +3,11 @@ local ReactModule = require(Parent.React)
 local GetSduiClientPageScopeFunction = require(Parent.SduiSharedUtilities).getSduiClientPageScope
 local ContainerWidth = require(script.Parent.ExperienceDetailsPageScopeFields).ContainerWidth
 
-return function(p1, Callback) --[[ Line: 12 | Named "usePublishContainerWidth" ]]
+return function(p1, Callback)
 	-- upvalues: ReactModule (copy), GetSduiClientPageScopeFunction (copy), ContainerWidth (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	
-	return ReactModule.useCallback(function(Frame: Frame) --[[ Line: 14 ]]
+	return ReactModule.useCallback(function(Frame: Frame)
 		-- upvalues: Callback (copy), UseRefResult (copy), GetSduiClientPageScopeFunction (upval), p1 (copy), ContainerWidth (upval)
 		if Callback then
 			Callback(Frame)
@@ -20,7 +20,7 @@ return function(p1, Callback) --[[ Line: 12 | Named "usePublishContainerWidth" ]
 			local SduiClientPageScope = GetSduiClientPageScopeFunction(p1)
 			local X = nil
 			
-			local function publishAbsoluteSize() --[[ Line: 27 ]]
+			local function publishAbsoluteSize()
 				-- upvalues: Frame (copy), X (ref), SduiClientPageScope (copy), ContainerWidth (upval)
 				local X1 = Frame.AbsoluteSize.X
 				

@@ -6,7 +6,7 @@ local _ = require(DataHydration.DataHydrationTypes)
 local FetchPreviewSpecsModule = require(script.Parent.fetchPreviewSpecs)
 local _ = require(script.Parent.PreviewSpecsTypes)
 
-return function(p1) --[[ Line: 24 | Named "createPreviewSpecsStore" ]]
+return function(p1)
 	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), FetchPreviewSpecsModule (copy)
 	local P0 = p1 or {}
 	local config = { network = P0.network, baseUrl = P0.baseUrl }
@@ -14,14 +14,14 @@ return function(p1) --[[ Line: 24 | Named "createPreviewSpecsStore" ]]
 		supportsMultiGet = false,
 		replaceItems = true,
 		cache = CreateDataCacheModule(),
-		fetchFn = function(_, _) --[[ Line: 33 ]]
+		fetchFn = function(_, _)
 			-- upvalues: FetchPreviewSpecsModule (upval), config (copy)
 			return FetchPreviewSpecsModule(config)
 		end
 	})
 	
 	return {
-		refreshPreviewSpecs = function() --[[ Line: 39 ]]
+		refreshPreviewSpecs = function()
 			-- upvalues: DataResolverModule (copy)
 			DataResolverModule.clear()
 			

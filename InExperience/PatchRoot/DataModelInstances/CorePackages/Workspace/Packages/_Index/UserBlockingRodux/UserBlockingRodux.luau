@@ -7,14 +7,14 @@ local UserBlockingReducerModule = require(v1.Reducers.UserBlockingReducer)
 
 return {
 	["jest.config"] = script["jest.config"],
-	config = function(p1) --[[ Line: 11 ]]
+	config = function(p1)
 		-- upvalues: CryoModule (copy), UserBlockingNetworkingModule (copy), RoduxNetworkingModule (copy), UserBlockingReducerModule (copy)
 		local JoinResult = CryoModule.Dictionary.join(p1, {
 			userBlockingNetworking = UserBlockingNetworkingModule.config({ roduxNetworking = RoduxNetworkingModule.mock() })
 		})
 		
 		return {
-			installReducer = function() --[[ Line: 19 ]]
+			installReducer = function()
 				-- upvalues: UserBlockingReducerModule (upval), JoinResult (ref)
 				return UserBlockingReducerModule(JoinResult)
 			end

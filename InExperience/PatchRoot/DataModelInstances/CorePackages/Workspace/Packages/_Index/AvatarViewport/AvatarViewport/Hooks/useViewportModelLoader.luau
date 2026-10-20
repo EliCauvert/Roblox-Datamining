@@ -2,7 +2,7 @@
 local ReactModule = require(AvatarViewport.Parent.React)
 local _ = require(AvatarViewport.Types)
 
-local function _(p1) --[[ Line: 25 | Named "destroyLoadedModel" ]]
+local function _(p1)
 	local Current = p1.current
 	
 	if Current then
@@ -11,7 +11,7 @@ local function _(p1) --[[ Line: 25 | Named "destroyLoadedModel" ]]
 	end
 end
 
-return function(p1) --[[ Line: 33 | Named "useViewportModelLoader" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
@@ -22,7 +22,7 @@ return function(p1) --[[ Line: 33 | Named "useViewportModelLoader" ]]
 	local UseRefResult3 = ReactModule.useRef(p1.onLoadFailed)
 	UseRefResult2.current = p1.onModelReady
 	UseRefResult3.current = p1.onLoadFailed
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 45 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy), UseRefResult (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseRefResult1 (copy), UseRefResult3 (copy), UseRefResult2 (copy)
 		local ModelSourceFunction = p1.modelSource
 		UseRefResult.current += 1
@@ -39,10 +39,10 @@ return function(p1) --[[ Line: 33 | Named "useViewportModelLoader" ]]
 			Current1:Destroy()
 			UseRefResult1.current = nil
 		end
-		task.spawn(function() --[[ Line: 57 ]]
+		task.spawn(function()
 			-- upvalues: UseRefResult (upval), Current (copy), ModelSourceFunction (copy), p2 (copy), UseStateResult2 (upval), UseRefResult3 (upval), p1 (upval), UseRefResult1 (upval), UseStateResult2_2 (upval), UseStateResult2_1 (upval), UseRefResult2 (upval)
 			local ModelSourceResult = ModelSourceFunction({
-				isCancelled = function(): boolean --[[ Line: 58 ]]
+				isCancelled = function(): boolean
 					-- upvalues: UseRefResult (upval), Current (upval)
 					return UseRefResult.current ~= Current
 				end
@@ -87,11 +87,11 @@ return function(p1) --[[ Line: 33 | Named "useViewportModelLoader" ]]
 			end
 		end)
 	end, { p1.modelSource, p1.worldModelRef })
-	ReactModule.useLayoutEffect(function() --[[ Line: 104 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseResult (copy), UseRefResult (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseRefResult1 (copy)
 		UseResult(true)
 		
-		return function() --[[ Line: 106 ]]
+		return function()
 			-- upvalues: UseRefResult (upval), UseStateResult2_1 (upval), UseStateResult2_2 (upval), UseRefResult1 (upval)
 			UseRefResult.current += 1
 			UseStateResult2_1(false)

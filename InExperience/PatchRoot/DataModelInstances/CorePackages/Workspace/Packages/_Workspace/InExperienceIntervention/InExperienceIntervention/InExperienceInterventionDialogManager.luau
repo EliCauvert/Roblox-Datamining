@@ -22,7 +22,7 @@ local ReportChatSuspensionDialogVisibilityModule = require(InExperienceIntervent
 local GetFFlagGameJoinTimeoutChatAttemptEnabledFunction = require(Parent.SharedFlags).GetFFlagGameJoinTimeoutChatAttemptEnabled
 local FFlagTemporaryAvatarKickWarningDialogModule = require(Parent.InterventionShared.FFlagTemporaryAvatarKickWarningDialog)
 local FFlagExpChatDictationContinuousSafetyReminder = require(Parent.SharedFlags).FFlagExpChatDictationContinuousSafetyReminder
-local MemoResult = ReactModule.memo(function(p1) --[[ Line: 40 ]]
+local MemoResult = ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), ReactFocusNavigationModule (copy), NewResult (copy), Provider (copy), CursorProvider (copy)
 	return ReactModule.createElement(ReactFocusNavigationModule.FocusNavigationContext.Provider, { value = NewResult }, {
 		RegistryProvider = ReactModule.createElement(Provider, nil, {
@@ -31,9 +31,9 @@ local MemoResult = ReactModule.memo(function(p1) --[[ Line: 40 ]]
 	})
 end)
 
-function InExperienceInterventionDialogManager(p1) --[[ Line: 50 ]]
+function InExperienceInterventionDialogManager(p1)
 	-- upvalues: ReactModule (copy), Constants (copy), FFlagTemporaryAvatarKickWarningDialogModule (copy), FFlagExpChatDictationContinuousSafetyReminder (copy), ReportChatSuspensionDialogVisibilityModule (copy), ChatNudgeCustomDialogModule (copy), ChatTimeoutCustomDialogModule (copy), ChatNudgeToastModule (copy), ChatTimeoutToastModule (copy), GetFFlagGameJoinTimeoutChatAttemptEnabledFunction (copy), MemoResult (copy), PartyChatNudgeCustomDialog (copy), PartyChatTimeoutCustomDialog (copy), ChatTimeoutCustomDialogV2Module (copy), ChatNudgeCustomDialogV2Module (copy), UniversalFeatureRestrictionDialog (copy), DictationSafetyReminderToastModule (copy), TemporaryAvatarKickWarningDialogModule (copy)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 51 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), Constants (upval)
 		p1.uiStateDispatch({
 			isShown = false,
@@ -47,7 +47,7 @@ function InExperienceInterventionDialogManager(p1) --[[ Line: 50 ]]
 	local Options = if Detail then Detail.options else nil
 	local Extras = if FFlagTemporaryAvatarKickWarningDialogModule and Detail then Detail.extras else nil
 	local IsShown = (not FFlagExpChatDictationContinuousSafetyReminder or TreatmentType ~= Constants.TreatmentType.DictationSafetyReminderToast) and UiState.isShown
-	ReactModule.useEffect(function() --[[ Line: 76 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ReportChatSuspensionDialogVisibilityModule (upval), IsShown (ref)
 		ReportChatSuspensionDialogVisibilityModule(IsShown)
 	end, { IsShown })

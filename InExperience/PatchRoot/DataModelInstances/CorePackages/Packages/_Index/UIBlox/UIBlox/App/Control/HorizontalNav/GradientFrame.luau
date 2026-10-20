@@ -4,7 +4,7 @@ local ReactModule = require(Parent1.Parent.React)
 local _ = require(Parent.Style.StyleTypes)
 local UseStyleModule = require(Parent1.Core.Style.useStyle)
 
-return function(p1) --[[ Line: 29 | Named "GradientFrame" ]]
+return function(p1)
 	-- upvalues: UseStyleModule (copy), ReactModule (copy)
 	local FrameRef = p1.frameRef
 	local GradientStyle = p1.gradientStyle

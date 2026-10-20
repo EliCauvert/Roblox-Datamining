@@ -13,7 +13,7 @@ local FFlagLuaAppCompositionAlways = require(Parent.SharedFlags).FFlagLuaAppComp
 local SduiOmniFeedItemLogDelayMsRatio = game:DefineFastInt("SduiOmniFeedItemLogDelayMs", 500) / 1000
 local UseSduiItemCollectionSignalModule = require(ServerDrivenUi.DataStore.useSduiItemCollectionSignal)
 
-return ReactModule.memo(function(p1) --[[ Line: 46 | Named "SduiOmniFeedItem" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: OmniFeedPropsKey (copy), FFlagLuaAppCompositionAlways (copy), ArgCheckModule (copy), ReactModule (copy), UsePageSideMarginFunction (copy), AppPage (copy), UseSduiItemCollectionSignalModule (copy), SduiOmniFeedItemLogDelayMsRatio (copy), SduiErrors (copy), GetSduiComponentWrapperFunction (copy), FIntLuaAppDelayImpressionsMaxUpdates (copy)
 	local AppPage1 = p1[OmniFeedPropsKey].appPage
 	local FeedItemStartRow = p1[OmniFeedPropsKey].feedItemStartRow
@@ -26,22 +26,22 @@ return ReactModule.memo(function(p1) --[[ Line: 46 | Named "SduiOmniFeedItem" ]]
 	ArgCheckModule.assert(p1.topicId ~= nil, "topicId id must exist")
 	ArgCheckModule.assert(p1.sortIndex ~= nil, "sortIndex id must exist")
 	local UseRefResult = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 62 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy)
 		UseRefResult.current = true
 		
-		return function() --[[ Line: 64 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			UseRefResult.current = false
 		end
 	end, {})
 	local UsePageSideMarginResult = if FFlagLuaAppCompositionAlways then nil else UsePageSideMarginFunction(VerticalScrollingFrameRef.current)
-	local UseSduiItemCollectionSignalModuleResult = UseSduiItemCollectionSignalModule(AppPage1, p1.topicId, p1.sortIndex, (ReactModule.useMemo(function() --[[ Line: 72 ]]
+	local UseSduiItemCollectionSignalModuleResult = UseSduiItemCollectionSignalModule(AppPage1, p1.topicId, p1.sortIndex, (ReactModule.useMemo(function()
 		-- upvalues: AppPage1 (copy), AppPage (upval), p1 (copy)
 		return if AppPage1 == AppPage.SearchPage and p1.searchUuid then `{AppPage1}_{p1.searchUuid}` else nil
 	end, { AppPage1, p1.searchUuid })))
 	local SduiConfig = UseSduiItemCollectionSignalModuleResult and UseSduiItemCollectionSignalModuleResult.sduiConfig or nil
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 83 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		return { collectionPosition = p1.sortIndex }
 	end, { p1.sortIndex })
@@ -50,7 +50,7 @@ return ReactModule.memo(function(p1) --[[ Line: 46 | Named "SduiOmniFeedItem" ]]
 	UseRefResult1.current = SduiConfig
 	
 	if SduiConfig == nil then
-		task.delay(SduiOmniFeedItemLogDelayMsRatio, function() --[[ Line: 94 ]]
+		task.delay(SduiOmniFeedItemLogDelayMsRatio, function()
 			-- upvalues: UseRefResult (copy), UseRefResult1 (copy), SduiContext (copy), SduiErrors (upval), SduiOmniFeedItemName (copy), p1 (copy)
 			if UseRefResult.current and UseRefResult1.current == nil then
 				SduiContext.dependencies.logger.reportError(SduiErrors.SduiErrorType.NilComponentConfig, {
@@ -60,7 +60,7 @@ return ReactModule.memo(function(p1) --[[ Line: 46 | Named "SduiOmniFeedItem" ]]
 			end
 		end)
 	end
-	return (ReactModule.useMemo(function() --[[ Line: 106 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: SduiConfig (copy), GetSduiComponentWrapperFunction (upval), ReactModule (upval), SduiOmniFeedItemName (copy), SduiContext (copy), ScrollViewPositionChangedSignal (copy), VerticalScrollingFrameRef (copy), p1 (copy), AppCompositionEnabled (copy), UsePageSideMarginResult (copy), FeedItemStartRow (copy), FIntLuaAppDelayImpressionsMaxUpdates (upval), SelectionOrderBase (copy), UseMemoResult (copy)
 		return if SduiConfig == nil then nil else ReactModule.createElement(GetSduiComponentWrapperFunction(SduiConfig), {
 			debugName = SduiOmniFeedItemName,

@@ -6,7 +6,7 @@ local DrawerModule = require(script.Parent.Drawer)
 local _ = require(script.Parent.Parent.Types)
 local FFlagFixOverlayTopInsetForDeviceSafeInsets = require(Parent.SharedFlags).FFlagFixOverlayTopInsetForDeviceSafeInsets
 
-return ReactModule.memo(function(p1) --[[ Line: 11 ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactRobloxModule (copy), ReactModule (copy), FFlagFixOverlayTopInsetForDeviceSafeInsets (copy), DrawerModule (copy), CoreGui (copy)
 	return ReactRobloxModule.createPortal({
 		Drawer = ReactModule.createElement("ScreenGui", {

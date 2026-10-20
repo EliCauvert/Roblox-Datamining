@@ -5,7 +5,7 @@ local AccountUpgradeContainerModule = require(AccountUpgrade.Components.AccountU
 local _ = require(AccountUpgrade.Components.useAccountUpgradeViewModel)
 local IsAccountUpgradeErrorUnrecoverableModule = require(AccountUpgrade.Utils.isAccountUpgradeErrorUnrecoverable)
 
-return function(p1) --[[ Line: 37 | Named "AccountUpgradeAppShellFlow" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), IsAccountUpgradeErrorUnrecoverableModule (copy), AccountUpgradeContainerModule (copy)
 	local OnCompleteFunction = p1.onComplete
 	local OnUnrecoverableFailureFunction = p1.onUnrecoverableFailure
@@ -17,13 +17,13 @@ return function(p1) --[[ Line: 37 | Named "AccountUpgradeAppShellFlow" ]]
 		onClose = p1.onDismiss,
 		onSignOut = p1.onSignOut,
 		onLegalLinkSelected = p1.onLegalLinkSelected,
-		onSignUpComplete = ReactModule.useCallback(function(p2) --[[ Line: 39 ]]
+		onSignUpComplete = ReactModule.useCallback(function(p2)
 			-- upvalues: OnCompleteFunction (copy)
 			if p2.isSuccess then
 				OnCompleteFunction(p2)
 			end
 		end, { OnCompleteFunction }),
-		onSignUpFailed = ReactModule.useCallback(function(p2) --[[ Line: 46 ]]
+		onSignUpFailed = ReactModule.useCallback(function(p2)
 			-- upvalues: OnUnrecoverableFailureFunction (copy), IsAccountUpgradeErrorUnrecoverableModule (upval)
 			if OnUnrecoverableFailureFunction and IsAccountUpgradeErrorUnrecoverableModule(p2) then
 				OnUnrecoverableFailureFunction()

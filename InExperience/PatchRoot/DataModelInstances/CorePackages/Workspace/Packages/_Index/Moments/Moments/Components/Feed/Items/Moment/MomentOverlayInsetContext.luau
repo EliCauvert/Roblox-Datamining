@@ -3,7 +3,7 @@ local Context = ReactModule.createContext(0)
 
 return {
 	Context = Context,
-	useMomentOverlayInset = function() --[[ Line: 22 ]]
+	useMomentOverlayInset = function()
 		-- upvalues: ReactModule (copy), Context (copy)
 		return ReactModule.useContext(Context)
 	end

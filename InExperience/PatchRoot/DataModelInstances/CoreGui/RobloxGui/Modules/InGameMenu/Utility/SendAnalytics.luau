@@ -4,12 +4,12 @@ local ConstantsModule = require(script.Parent.Parent.Resources.Constants)
 local RbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
 local InputTypeMap = ConstantsModule.InputTypeMap
 
-return function(EventContext, EventName, AdditionalArgs, Enabled, RbxAnalyticsService1) --[[ Line: 11 ]]
+return function(EventContext, EventName, AdditionalArgs, Enabled, RbxAnalyticsService1)
 	-- upvalues: RbxAnalyticsService (copy), UserInputService (copy), ConstantsModule (copy), InputTypeMap (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy)
 	if RbxAnalyticsService1 == nil then
 		RbxAnalyticsService1 = RbxAnalyticsService
 	end
-	local function reportSettingsForAnalytics() --[[ Line: 17 ]]
+	local function reportSettingsForAnalytics()
 		-- upvalues: UserInputService (upval)
 		local GameSettings = UserSettings().GameSettings
 		local t = {}

@@ -16,13 +16,13 @@ local ConstantsModule = require(FriendsMenu.Constants)
 local SelectedUsersContextModule = require(FriendsMenu.Context.SelectedUsersContext)
 local _UDim = UDim.new(1, 0)
 
-return (ReactModule.forwardRef(function(p1, Ref) --[[ Line: 27 ]]
+return (ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: ReactModule (copy), SelectedUsersContextModule (copy), UseStyleFunction (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), FFlagFriendsMenuUseProfileFrameThumbnailModule (copy), Interactable (copy), ConstantsModule (copy), _UDim (copy), ImageSetLabel (copy), Images (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseContextResult = ReactModule.useContext(SelectedUsersContextModule)
 	local UseStyleResult = UseStyleFunction()
 	local Theme = UseStyleResult.Theme
 	local UseStyleResultFont = UseStyleResult.Font
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 37 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), UseContextResult (copy)
 		if p1.onRemoved then
 			p1.onRemoved()

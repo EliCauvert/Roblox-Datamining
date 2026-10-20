@@ -6,20 +6,20 @@ local SendAudioPlayerAnalyticsFunction = SongbirdModule.Analytics.sendAudioPlaye
 local AnalyticActions = SongbirdModule.Analytics.AnalyticActions
 local _ = require(MusicPicker.Types.MusicPickerTypes)
 
-local function _(p1, p2): string --[[ Line: 51 | Named "thumbnailIdFor" ]]
+local function _(p1, p2): string
 	local v1 = p1[p2]
 	
 	return if v1 == nil then "-1" else tostring(v1.thumbnailAssetId)
 end
 
-return function(p1) --[[ Line: 56 | Named "useMusicPickerAnalytics" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), SendAudioPlayerAnalyticsFunction (copy), AnalyticActions (copy)
 	local Source = p1.source
 	local PreviewingId = p1.previewingId
 	local SavedIds = p1.savedIds
 	local ItemsById = p1.itemsById
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 66 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), PreviewingId (copy), SendAudioPlayerAnalyticsFunction (upval), AnalyticActions (upval), Source (copy), ItemsById (copy)
 		local Current = UseRefResult.current
 		local Text = if PreviewingId == nil then nil else tostring(PreviewingId)
@@ -51,9 +51,9 @@ return function(p1) --[[ Line: 56 | Named "useMusicPickerAnalytics" ]]
 	end, { PreviewingId, Source, ItemsById })
 	local UseRefResult1 = ReactModule.useRef(Source)
 	UseRefResult1.current = Source
-	ReactModule.useEffect(function() --[[ Line: 103 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), SendAudioPlayerAnalyticsFunction (upval), AnalyticActions (upval), UseRefResult1 (copy)
-		return function() --[[ Line: 104 ]]
+		return function()
 			-- upvalues: UseRefResult (upval), SendAudioPlayerAnalyticsFunction (upval), AnalyticActions (upval), UseRefResult1 (upval)
 			local Current = UseRefResult.current
 			
@@ -69,7 +69,7 @@ return function(p1) --[[ Line: 56 | Named "useMusicPickerAnalytics" ]]
 		end
 	end, {})
 	local UseRefResult2 = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 121 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult2 (copy), SavedIds (copy), SendAudioPlayerAnalyticsFunction (upval), AnalyticActions (upval), ItemsById (copy), Source (copy)
 		local Current = UseRefResult2.current
 		UseRefResult2.current = SavedIds
@@ -99,7 +99,7 @@ return function(p1) --[[ Line: 56 | Named "useMusicPickerAnalytics" ]]
 		end
 	end, { SavedIds, Source, ItemsById })
 	
-	return ReactModule.useCallback(function(p2) --[[ Line: 154 ]]
+	return ReactModule.useCallback(function(p2)
 		-- upvalues: SendAudioPlayerAnalyticsFunction (upval), AnalyticActions (upval), ItemsById (copy), Source (copy)
 		local ItemsByIdEntry = ItemsById[p2]
 		SendAudioPlayerAnalyticsFunction({

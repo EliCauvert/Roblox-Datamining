@@ -48,13 +48,13 @@ ExpandableTextArea.defaultProps = {
 	isRoactGamepadEnabled = true
 }
 
-function ExpandableTextArea.init(p1) --[[ Line: 74 ]]
+function ExpandableTextArea.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.state = { isExpanded = false, frameWidth = 0 }
 	
-	function p1.onClick() --[[ Line: 80 ]]
+	function p1.onClick()
 		-- upvalues: p1 (copy)
-		p1:setState(function(p2) --[[ Line: 81 ]]
+		p1:setState(function(p2)
 			return { isExpanded = not p2.isExpanded }
 		end)
 		
@@ -67,11 +67,11 @@ function ExpandableTextArea.init(p1) --[[ Line: 74 ]]
 	p1.layoutRef = RoactModule.createRef()
 end
 
-function ExpandableTextArea.getRef(p1) --[[ Line: 95 ]]
+function ExpandableTextArea.getRef(p1)
 	return p1.props.frameRef or p1.ref
 end
 
-function ExpandableTextArea.applyFit(p1, Y1) --[[ Line: 99 ]]
+function ExpandableTextArea.applyFit(p1, Y1)
 	-- upvalues: Y (ref), X (ref)
 	local Ref = p1:getRef()
 	
@@ -89,7 +89,7 @@ function ExpandableTextArea.applyFit(p1, Y1) --[[ Line: 99 ]]
 	end
 end
 
-function ExpandableTextArea.didMount(p1) --[[ Line: 114 ]]
+function ExpandableTextArea.didMount(p1)
 	p1.isMounted = true
 	local Current = p1.layoutRef.current
 	
@@ -98,11 +98,11 @@ function ExpandableTextArea.didMount(p1) --[[ Line: 114 ]]
 	end
 end
 
-function ExpandableTextArea.willUnmount(p1) --[[ Line: 123 ]]
+function ExpandableTextArea.willUnmount(p1)
 	p1.isMounted = false
 end
 
-function ExpandableTextArea.render(p1) --[[ Line: 127 ]]
+function ExpandableTextArea.render(p1)
 	-- upvalues: Y (ref), X (ref), WithStyleModule (copy), WithSelectionCursorProviderModule (copy), ExpandableTextUtilsModule (copy), RoactGamepadModule (copy), RoactModule (copy), SpringAnimatedItemModule (copy), SpringOptions (copy), GenericTextLabelModule (copy), WrapResult (copy), GradientGradient0100 (copy), SpringOptions1 (copy), _UDim2_1 (copy), ImageSetComponentModule (copy), TruncateArrowsActionsTruncationCollapse (copy), TruncateArrowsActionsTruncationExpand (copy), _UDim2 (copy)
 	local Text = p1.props.Text
 	local Position = p1.props.Position
@@ -115,9 +115,9 @@ function ExpandableTextArea.render(p1) --[[ Line: 127 ]]
 	Y = Padding and Padding.Y or 30
 	X = Padding and Padding.X or 5
 	
-	return WithStyleModule(function(p2) --[[ Line: 140 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: WithSelectionCursorProviderModule (upval), ExpandableTextUtilsModule (upval), p1 (copy), Text (copy), CompactNumberOfLines (copy), X (upval), RoactGamepadModule (upval), RoactModule (upval), LayoutOrder (copy), Position (copy), Width (copy), Ref (copy), Y (upval), SpringAnimatedItemModule (upval), SpringOptions (upval), GenericTextLabelModule (upval), WrapResult (upval), GradientGradient0100 (upval), GradientColor (copy), SpringOptions1 (upval), _UDim2_1 (upval), ImageSetComponentModule (upval), TruncateArrowsActionsTruncationCollapse (upval), TruncateArrowsActionsTruncationExpand (upval), _UDim2 (upval)
-		return WithSelectionCursorProviderModule(function(_) --[[ Line: 141 ]]
+		return WithSelectionCursorProviderModule(function(_)
 			-- upvalues: p2 (copy), ExpandableTextUtilsModule (upval), p1 (upval), Text (upval), CompactNumberOfLines (upval), X (upval), RoactGamepadModule (upval), RoactModule (upval), LayoutOrder (upval), Position (upval), Width (upval), Ref (upval), Y (upval), SpringAnimatedItemModule (upval), SpringOptions (upval), GenericTextLabelModule (upval), WrapResult (upval), GradientGradient0100 (upval), GradientColor (upval), SpringOptions1 (upval), _UDim2_1 (upval), ImageSetComponentModule (upval), TruncateArrowsActionsTruncationCollapse (upval), TruncateArrowsActionsTruncationExpand (upval), _UDim2 (upval)
 			local Theme = p2.Theme
 			local _Font = p2.Font
@@ -138,7 +138,7 @@ function ExpandableTextArea.render(p1) --[[ Line: 127 ]]
 				AutomaticSize = Enum.AutomaticSize.Y,
 				SelectionImageObject = p1.props.selectionCursor,
 				[RoactModule.Ref] = Ref,
-				[RoactModule.Change.AbsoluteSize] = function(Frame: Frame) --[[ Line: 174 ]]
+				[RoactModule.Change.AbsoluteSize] = function(Frame: Frame)
 					-- upvalues: p1 (upval)
 					if p1.state.frameWidth ~= Frame.AbsoluteSize.X then
 						p1:setState({ frameWidth = Frame.AbsoluteSize.X })
@@ -156,7 +156,7 @@ function ExpandableTextArea.render(p1) --[[ Line: 127 ]]
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					FillDirection = Enum.FillDirection.Vertical,
 					Padding = UDim.new(0, 10),
-					[RoactModule.Change.AbsoluteContentSize] = function(p3) --[[ Line: 198 ]]
+					[RoactModule.Change.AbsoluteContentSize] = function(p3)
 						-- upvalues: p1 (upval)
 						p1:applyFit(p3.AbsoluteContentSize.y)
 					end,
@@ -165,7 +165,7 @@ function ExpandableTextArea.render(p1) --[[ Line: 127 ]]
 				UIPadding = RoactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, Y) }),
 				ExpandableContainer = RoactModule.createElement(SpringAnimatedItemModule.AnimatedFrame, {
 					animatedValues = { height = _UDim2_3_1.Y.Offset },
-					mapValuesToProps = function(p3) --[[ Line: 211 ]]
+					mapValuesToProps = function(p3)
 						-- upvalues: _UDim2_3_1 (copy)
 						return { Size = UDim2.new(1, 0, _UDim2_3_1.Y.Scale, p3.height) }
 					end,
@@ -192,7 +192,7 @@ function ExpandableTextArea.render(p1) --[[ Line: 127 ]]
 						animatedValues = {
 							height = if NoIsExpandableTextHeightsBelow then 0 else 30
 						},
-						mapValuesToProps = function(p3) --[[ Line: 239 ]]
+						mapValuesToProps = function(p3)
 							return { Size = UDim2.new(1, 0, 0, p3.height) }
 						end,
 						regularProps = {
@@ -237,7 +237,7 @@ function ExpandableTextArea.render(p1) --[[ Line: 127 ]]
 	end)
 end
 
-return RoactModule.forwardRef(function(p1, FrameRef) --[[ Line: 286 ]]
+return RoactModule.forwardRef(function(p1, FrameRef)
 	-- upvalues: UseCursorByTypeModule (copy), CursorTypeModule (copy), CryoModule (copy), RoactModule (copy), ExpandableTextArea (copy)
 	return RoactModule.createElement(ExpandableTextArea, CryoModule.Dictionary.join(CryoModule.Dictionary.join(p1, {
 		selectionCursor = UseCursorByTypeModule(CursorTypeModule.RoundedRect)

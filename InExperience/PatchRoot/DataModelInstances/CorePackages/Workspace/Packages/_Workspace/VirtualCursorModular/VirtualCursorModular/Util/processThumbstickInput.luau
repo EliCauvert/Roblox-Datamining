@@ -1,6 +1,6 @@
 ﻿local PropertiesModule = require(script.Parent.Parent.Properties)
 
-return function(Vector): Vector2 --[[ Line: 7 | Named "processThumbstickInput" ]]
+return function(Vector): Vector2
 	-- upvalues: PropertiesModule (copy)
 	local X = 0
 	local ScaledLargest = 0

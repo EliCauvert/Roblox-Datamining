@@ -10,9 +10,9 @@ local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local ScrollButton = RoactModule.PureComponent:extend("ScrollButton")
 ScrollButton.validateProps = TModule.strictInterface({ icon = TModule.table, callback = TModule.callback })
 
-function ScrollButton.render(p1) --[[ Line: 24 ]]
+function ScrollButton.render(p1)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy), Interactable (copy), ImageSetLabel (copy), GetIconSizeFunction (copy), IconSize (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 25 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: RoactModule (upval), Interactable (upval), p1 (copy), ImageSetLabel (upval), GetIconSizeFunction (upval), IconSize (upval)
 		return RoactModule.createElement(Interactable, {
 			AutoButtonColor = false,
@@ -21,7 +21,7 @@ function ScrollButton.render(p1) --[[ Line: 24 ]]
 			BackgroundTransparency = p2.Theme.BackgroundUIContrast.Transparency,
 			BorderSizePixel = 0,
 			[RoactModule.Event.Activated] = p1.props.callback,
-			onStateChanged = function() --[[ Line: 34 ]] end
+			onStateChanged = function() end
 		}, {
 			Icon = RoactModule.createElement(ImageSetLabel, {
 				BackgroundTransparency = 1,

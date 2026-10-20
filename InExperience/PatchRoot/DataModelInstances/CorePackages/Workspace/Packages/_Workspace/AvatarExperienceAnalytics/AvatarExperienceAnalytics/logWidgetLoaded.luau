@@ -8,13 +8,13 @@ local SendUnifiedEventLogModule = require(script.Parent.sendUnifiedEventLog)
 local GetUnifiedDeferredEventStoreModule = require(script.Parent.Store.getUnifiedDeferredEventStore)
 local WIDGETLOADED = UnifiedEventLogEnumsModule.MarketplaceUnifiedAction.WIDGET_LOADED
 
-local function logWidgetLoaded(List, RequestId, Callback) --[[ Line: 22 ]]
+local function logWidgetLoaded(List, RequestId, Callback)
 	-- upvalues: FFlagAXDeferWidgetLoadedUntilMarketplaceEntered (copy), GetUnifiedDeferredEventStoreModule (copy), WIDGETLOADED (copy), logWidgetLoaded (copy), FFlagAXUnifiedEventCounters (copy), FFlagAXLimitWidgetLoadedItemCount (copy), FIntAXWidgetLoadedItemCountLimit (copy), SendUnifiedEventLogModule (copy), UnifiedEventLogEnumsModule (copy)
 	if FFlagAXDeferWidgetLoadedUntilMarketplaceEntered then
 		local UnifiedDeferredEventStoreModule = GetUnifiedDeferredEventStoreModule(false)
 		
 		if not UnifiedDeferredEventStoreModule.isEntered(false) then
-			UnifiedDeferredEventStoreModule.enqueue(WIDGETLOADED, function() --[[ Line: 26 ]]
+			UnifiedDeferredEventStoreModule.enqueue(WIDGETLOADED, function()
 				-- upvalues: logWidgetLoaded (upval), List (copy), RequestId (copy), FFlagAXUnifiedEventCounters (upval), Callback (copy)
 				logWidgetLoaded(List, RequestId, if FFlagAXUnifiedEventCounters then Callback else nil)
 			end)

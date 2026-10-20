@@ -1,11 +1,11 @@
 ﻿local ToRectModule = require(script.Parent.toRect)
 local ReturnValueModule = require(script.Parent.returnValue)
 
-local function _(Vector, p1): boolean --[[ Line: 4 | Named "isPointInside" ]]
+local function _(Vector, p1): boolean
 	return p1.Min.X <= Vector.X and (Vector.X <= p1.Max.X and p1.Min.Y <= Vector.Y) and Vector.Y <= p1.Max.Y
 end
 
-return function(p1, p2) --[[ Line: 26 | Named "inside" ]]
+return function(p1, p2)
 	-- upvalues: ToRectModule (copy), ReturnValueModule (copy)
 	local RectModule = ToRectModule(p1)
 	local RectModule1 = ToRectModule(p2)

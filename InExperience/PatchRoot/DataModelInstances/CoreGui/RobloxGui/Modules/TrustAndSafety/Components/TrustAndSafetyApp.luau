@@ -15,9 +15,9 @@ local VoiceStateContextModule = require(RobloxGui.Modules.VoiceChat.VoiceStateCo
 local TrustAndSafetyApp = RoactModule.PureComponent:extend("TrustAndSafetyApp")
 TrustAndSafetyApp.validateProps = TModule.strictInterface({ setScreenSize = TModule.callback })
 
-function TrustAndSafetyApp:init() --[[ Line: 29 ]] end
+function TrustAndSafetyApp:init() end
 
-function TrustAndSafetyApp.render(p1) --[[ Line: 31 ]]
+function TrustAndSafetyApp.render(p1)
 	-- upvalues: RoactModule (copy), VoiceStateContextModule (copy), ReportCategoryDialogModule (copy), ReportMenuModule (copy), ReportDialogModule (copy), ReportSentDialogModule (copy), ToastModule (copy), RenderWithCoreScriptsStyleProviderModule (copy)
 	return RenderWithCoreScriptsStyleProviderModule({
 		VoiceStateContextProvider = RoactModule.createElement(VoiceStateContextModule.Provider, {}, {
@@ -41,10 +41,10 @@ function TrustAndSafetyApp.render(p1) --[[ Line: 31 ]]
 	})
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 58 ]]
+return RoactRoduxModule.UNSTABLE_connect2(nil, function(Callback)
 	-- upvalues: SetScreenSizeModule (copy)
 	return {
-		setScreenSize = function(Frame) --[[ Line: 60 ]]
+		setScreenSize = function(Frame)
 			-- upvalues: Callback (copy), SetScreenSizeModule (upval)
 			Callback(SetScreenSizeModule(Frame.AbsoluteSize))
 		end

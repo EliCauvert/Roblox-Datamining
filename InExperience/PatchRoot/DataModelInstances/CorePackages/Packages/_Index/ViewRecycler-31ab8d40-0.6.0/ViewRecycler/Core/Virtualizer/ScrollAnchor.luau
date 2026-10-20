@@ -6,7 +6,7 @@ local ScrollAlignmentModule = require(ViewRecycler.Core.Enums.ScrollAlignment)
 local TypesModule = require(ViewRecycler.Core.Types)
 local _ = require(ViewRecycler.Core.Virtualizer.Viewport)
 
-local function projectIndex(IndexHint: number, p1) --[[ Line: 81 ]]
+local function projectIndex(IndexHint: number, p1)
 	-- upvalues: DataSourceChangeTypeModule (copy)
 	if IndexHint == nil or p1.type == DataSourceChangeTypeModule.Reset or p1.type == DataSourceChangeTypeModule.Reorder then
 		return nil
@@ -26,12 +26,12 @@ local function projectIndex(IndexHint: number, p1) --[[ Line: 81 ]]
 	return IndexHint
 end
 
-return function(p1) --[[ Line: 108 | Named "createScrollAnchor" ]]
+return function(p1)
 	-- upvalues: TypesModule (copy), projectIndex (copy), DiagnosticsModule (copy), ScrollAlignmentModule (copy)
 	local Viewport = p1.viewport
 	local Config = nil
 	
-	local function findKeyIndex(AnchorKey, AnchorIndex: number): number? --[[ Line: 112 ]]
+	local function findKeyIndex(AnchorKey, AnchorIndex: number): number?
 		-- upvalues: p1 (copy)
 		local ItemSequence = p1.getItemSequence()
 		local ItemCount = ItemSequence.getItemCount()
@@ -47,7 +47,7 @@ return function(p1) --[[ Line: 108 | Named "createScrollAnchor" ]]
 		return nil
 	end
 	
-	local function captureViewport(ScrollOffset: number, FirstIndex) --[[ Line: 126 ]]
+	local function captureViewport(ScrollOffset: number, FirstIndex)
 		-- upvalues: p1 (copy), Viewport (copy), TypesModule (upval)
 		local ItemSequence = p1.getItemSequence()
 		local ItemCount: number = ItemSequence.getItemCount()
@@ -91,7 +91,7 @@ return function(p1) --[[ Line: 108 | Named "createScrollAnchor" ]]
 		}
 	end
 	
-	local function captureEvidence() --[[ Line: 167 ]]
+	local function captureEvidence()
 		-- upvalues: Viewport (copy), TypesModule (upval), p1 (copy)
 		local ScrollOffset = Viewport.getScrollOffset()
 		local Length = Viewport.getLength()
@@ -118,7 +118,7 @@ return function(p1) --[[ Line: 108 | Named "createScrollAnchor" ]]
 		}
 	end
 	
-	local function prepareDataChange(DataSourceChange, p2) --[[ Line: 188 ]]
+	local function prepareDataChange(DataSourceChange, p2)
 		-- upvalues: Config (ref), projectIndex (upval), findKeyIndex (copy), p1 (copy)
 		local Config1 = Config
 		
@@ -163,7 +163,7 @@ return function(p1) --[[ Line: 108 | Named "createScrollAnchor" ]]
 		Config = nil
 	end
 	
-	local function resolve(p3) --[[ Line: 223 ]]
+	local function resolve(p3)
 		-- upvalues: Config (ref), captureViewport (copy), Viewport (copy), findKeyIndex (copy), DiagnosticsModule (upval), p1 (copy)
 		local Config1 = Config
 		
@@ -222,7 +222,7 @@ return function(p1) --[[ Line: 108 | Named "createScrollAnchor" ]]
 	end
 	
 	return {
-		setItemTarget = function(Value: number, p3) --[[ Line: 290 ]]
+		setItemTarget = function(Value: number, p3)
 			-- upvalues: p1 (copy), Config (ref), ScrollAlignmentModule (upval)
 			local ItemSequence = p1.getItemSequence()
 			local ItemCount: number = ItemSequence.getItemCount()
@@ -241,7 +241,7 @@ return function(p1) --[[ Line: 108 | Named "createScrollAnchor" ]]
 				}
 			end
 		end,
-		setViewport = function(ScrollOffset) --[[ Line: 276 ]]
+		setViewport = function(ScrollOffset)
 			-- upvalues: Config (ref), captureViewport (copy)
 			local Config1 = Config
 			
@@ -257,7 +257,7 @@ return function(p1) --[[ Line: 108 | Named "createScrollAnchor" ]]
 			end
 			Config = captureViewport(ScrollOffset, nil)
 		end,
-		observeHost = function(ScrollOffset) --[[ Line: 306 ]]
+		observeHost = function(ScrollOffset)
 			-- upvalues: Config (ref), captureViewport (copy)
 			if Config == nil or Config.kind == "viewport" then
 				local Config1 = Config
@@ -275,11 +275,11 @@ return function(p1) --[[ Line: 108 | Named "createScrollAnchor" ]]
 				Config = captureViewport(ScrollOffset, nil)
 			end
 		end,
-		restore = function(p3, ScrollOffset) --[[ Line: 311 ]]
+		restore = function(p3, ScrollOffset)
 			-- upvalues: findKeyIndex (copy), Config (ref), captureViewport (copy)
 			Config = captureViewport(ScrollOffset, if p3.anchorKey == nil then nil else findKeyIndex(p3.anchorKey, p3.anchorIndex))
 		end,
-		snapshotOffset = function(p3) --[[ Line: 317 ]]
+		snapshotOffset = function(p3)
 			-- upvalues: findKeyIndex (copy), Viewport (copy)
 			if p3.anchorKey ~= nil then
 				local KeyIndex = findKeyIndex(p3.anchorKey, p3.anchorIndex)
@@ -290,7 +290,7 @@ return function(p1) --[[ Line: 108 | Named "createScrollAnchor" ]]
 			end
 			return p3.fallbackScrollOffset
 		end,
-		preserve = function(p3, Callback: () -> ()) --[[ Line: 326 ]]
+		preserve = function(p3, Callback: () -> ())
 			-- upvalues: prepareDataChange (copy), captureEvidence (copy), resolve (copy)
 			if p3.dataSourceChange ~= nil then
 				prepareDataChange(p3.dataSourceChange, (captureEvidence()))
@@ -299,11 +299,11 @@ return function(p1) --[[ Line: 108 | Named "createScrollAnchor" ]]
 			
 			return (resolve(p3))
 		end,
-		allowsPolicyOffset = function(): boolean --[[ Line: 333 ]]
+		allowsPolicyOffset = function(): boolean
 			-- upvalues: Config (ref)
 			return Config == nil or Config.kind == "viewport"
 		end,
-		getAnchoredItem = function() --[[ Line: 336 ]]
+		getAnchoredItem = function()
 			-- upvalues: Config (ref), p1 (copy), ScrollAlignmentModule (upval)
 			local Config1 = Config
 			
@@ -318,7 +318,7 @@ return function(p1) --[[ Line: 108 | Named "createScrollAnchor" ]]
 				})
 			end
 		end,
-		reset = function() --[[ Line: 352 ]]
+		reset = function()
 			-- upvalues: Config (ref)
 			Config = nil
 		end

@@ -16,7 +16,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 local UseOptimisticUpdateStatusModule = require(ServerDrivenUi.Content.ExperienceDetails.Hooks.useOptimisticUpdateStatus)
 
-return ReactModule.memo(function(p1) --[[ Line: 39 | Named "ExperienceDetailsNotifyChip" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseDispatchFunction (copy), SignalsReactModule (copy), Game1 (copy), UseLocalizationFunction (copy), ReactModule (copy), Players (copy), GameFollowFunction (copy), FFlagLuaAppAddUniverseIdToEngagementEvents (copy), SetCurrentToastMessageFunction (copy), ToastType (copy), UseOptimisticUpdateStatusModule (copy), UseAppPolicyFunction (copy), SduiChip (copy), FoundationModule (copy)
 	local LayoutOrder = p1.layoutOrder
 	local UniverseId = p1.universeId
@@ -37,7 +37,7 @@ return ReactModule.memo(function(p1) --[[ Line: 39 | Named "ExperienceDetailsNot
 		}
 	})
 	local RootPlaceId = UseSignalStateResult1 and UseSignalStateResult1.rootPlaceId or nil
-	local UseOptimisticUpdateStatusModuleResult = UseOptimisticUpdateStatusModule(ReactModule.useCallback(function() --[[ Line: 60 ]]
+	local UseOptimisticUpdateStatusModuleResult = UseOptimisticUpdateStatusModule(ReactModule.useCallback(function()
 		-- upvalues: IsFollowing (copy), RootPlaceId (copy), Players (upval), GameFollowFunction (upval), FFlagLuaAppAddUniverseIdToEngagementEvents (upval), UniverseId (copy), Game1 (upval)
 		local NoIsFollowing = not IsFollowing
 		
@@ -51,7 +51,7 @@ return ReactModule.memo(function(p1) --[[ Line: 39 | Named "ExperienceDetailsNot
 			}, "ExperienceDetailsNotifyChip")
 		end
 		return Game1.getFollowingsStore(false).updateFollowing(UniverseId, NoIsFollowing)
-	end, { UniverseId, RootPlaceId, IsFollowing }), (ReactModule.useCallback(function(p2) --[[ Line: 77 ]]
+	end, { UniverseId, RootPlaceId, IsFollowing }), (ReactModule.useCallback(function(p2)
 		-- upvalues: UseDispatchResult (copy), SetCurrentToastMessageFunction (upval), ToastType (upval), UseLocalizationResult (copy)
 		if not p2 then return end
 		if p2.type == "error" then
@@ -80,7 +80,7 @@ return ReactModule.memo(function(p1) --[[ Line: 39 | Named "ExperienceDetailsNot
 		end
 	end, { UseDispatchResult, Name, UseLocalizationResult })))
 	
-	return if UseAppPolicyFunction(function(p2) --[[ Line: 115 ]]
+	return if UseAppPolicyFunction(function(p2)
 		return p2.getNotificationsCanReceiveExperience()
 	end) then ReactModule.createElement(SduiChip, {
 		text = UseLocalizationResult.notifications,

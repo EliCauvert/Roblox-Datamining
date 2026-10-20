@@ -9,7 +9,7 @@ local TextButton = require(CorePackages.Packages.UIBlox).App.Button.TextButton
 local CheckboxRowModule = require(script.Parent.CheckboxRow)
 local ReportActionSelection = RoactModule.PureComponent:extend("ReportActionSelection")
 
-local function OnBlockCheckboxActivated() --[[ Line: 28 ]] end
+local function OnBlockCheckboxActivated() end
 
 ReportActionSelection.defaultProps = {
 	titleText = "Thanks for your report!",
@@ -43,20 +43,20 @@ ReportActionSelection.validateProps = TModule.interface({
 	ZIndex = TModule.number
 })
 
-function ReportActionSelection.init(DefaultProps) --[[ Line: 63 ]]
-	function DefaultProps.onMuteCheckboxActivated(IsVoiceMuted) --[[ Line: 64 ]]
+function ReportActionSelection.init(DefaultProps)
+	function DefaultProps.onMuteCheckboxActivated(IsVoiceMuted)
 		-- upvalues: DefaultProps (copy)
 		DefaultProps:setState({ isVoiceMuted = IsVoiceMuted })
 		DefaultProps.props.onMuteCheckboxActivated(IsVoiceMuted)
 	end
 	
-	function DefaultProps.onBlockCheckboxActivated(IsBlocked) --[[ Line: 72 ]]
+	function DefaultProps.onBlockCheckboxActivated(IsBlocked)
 		-- upvalues: DefaultProps (copy)
 		DefaultProps:setState({ isBlocked = IsBlocked })
 		DefaultProps.props.onBlockCheckboxActivated(IsBlocked)
 	end
 	
-	function DefaultProps.onDoneActivated() --[[ Line: 80 ]]
+	function DefaultProps.onDoneActivated()
 		-- upvalues: DefaultProps (copy)
 		DefaultProps.props.onDoneActivated(DefaultProps.state.isBlocked, DefaultProps.state.isVoiceMuted)
 	end
@@ -67,9 +67,9 @@ function ReportActionSelection.init(DefaultProps) --[[ Line: 63 ]]
 	})
 end
 
-function ReportActionSelection.render(DefaultProps) --[[ Line: 90 ]]
+function ReportActionSelection.render(DefaultProps)
 	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), RoactModule (copy), NormalizeFontFaceFunction (copy), CheckboxRowModule (copy), TextButton (copy)
-	return WithFoundationOrUIBloxStyleFunction(function(p1) --[[ Line: 91 ]]
+	return WithFoundationOrUIBloxStyleFunction(function(p1)
 		-- upvalues: FoundationFontFaceMigration (upval)
 		return {
 			Tokens = if FoundationFontFaceMigration then p1 else nil,
@@ -103,7 +103,7 @@ function ReportActionSelection.render(DefaultProps) --[[ Line: 90 ]]
 				}
 			}
 		}
-	end, function(p1) --[[ Line: 124 ]]
+	end, function(p1)
 		-- upvalues: RoactModule (upval), DefaultProps (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), CheckboxRowModule (upval), TextButton (upval)
 		local BaseSize = p1.Font.BaseSize
 		

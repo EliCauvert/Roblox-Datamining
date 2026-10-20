@@ -6,22 +6,22 @@ local ScreenshotDialogModule = require(Parent.Components.ScreenshotDialog)
 local ScreenshotReviewDialogModule = require(Parent.Components.ScreenshotReviewDialog)
 local _ = require(script.Parent.Parent.Parent.Components.Types)
 
-return function(p1) --[[ Line: 25 | Named "ScreenshotFlowStepHandler" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ScreenshotReviewDialogModule (copy), RobloxTranslatorModule (copy), ScreenshotDialogModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(if p1.initialPageNumber == nil then 1 else p1.initialPageNumber)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(1.7777777777777777)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(800)
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(800)
 	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(true)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 32 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(2)
 	end, { UseStateResult2 })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 35 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(1)
 	end, { UseStateResult2 })
-	ReactModule.useEffect(function() --[[ Line: 39 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseStateResult2_3 (copy), UseStateResult2_4 (copy)
 		local CurrentCamera = game.Workspace.CurrentCamera
 		

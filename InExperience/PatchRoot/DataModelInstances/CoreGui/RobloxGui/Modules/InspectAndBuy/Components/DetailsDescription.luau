@@ -8,7 +8,7 @@ local ColorsModule = require(Parent.Colors)
 local UtilityFunctionsModule = require(Parent.UtilityFunctions)
 local DetailsDescription = RoactModule.PureComponent:extend("DetailsDescription")
 
-function DetailsDescription.setText(p1) --[[ Line: 18 ]]
+function DetailsDescription.setText(p1)
 	-- upvalues: UtilityFunctionsModule (copy)
 	local AssetInfo = p1.props.assetInfo or {}
 	local BundleInfo = p1.props.bundleInfo or {}
@@ -26,13 +26,13 @@ function DetailsDescription.setText(p1) --[[ Line: 18 ]]
 	end
 end
 
-function DetailsDescription.init(p1) --[[ Line: 34 ]]
+function DetailsDescription.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.description = ""
 	p1.descriptionRef = RoactModule.createRef()
 end
 
-function DetailsDescription.render(p1) --[[ Line: 39 ]]
+function DetailsDescription.render(p1)
 	-- upvalues: RoactModule (copy), AppFonts (copy), ColorsModule (copy)
 	p1:setText()
 	
@@ -51,13 +51,13 @@ function DetailsDescription.render(p1) --[[ Line: 39 ]]
 	})
 end
 
-function DetailsDescription.calculateSize(p1) --[[ Line: 58 ]]
+function DetailsDescription.calculateSize(p1)
 	-- upvalues: TextService (copy), AppFonts (copy)
 	if not p1.descriptionRef.current or not p1.props.assetInfo then return end
 	return TextService:GetTextSize(p1.description, 16, AppFonts.default:getDefault(), Vector2.new(p1.descriptionRef.current.AbsoluteSize.X, 5000)).Y
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 70 ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	return {
 		view = p1.view,
 		assetInfo = p1.assets[p1.detailsInformation.assetId],

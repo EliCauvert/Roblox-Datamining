@@ -3,7 +3,7 @@ local _ = require(UniversalFeatureRestrictions.Common.AbuseVector)
 local FeatureRestrictionDisplayDirectSignalModule = require(UniversalFeatureRestrictions.Signals.featureRestrictionDisplayDirectSignal)
 local _ = require(UniversalFeatureRestrictions.Parent.ModerationCommon.Types)
 
-return function(AbuseVector, ModerationDetail, Options) --[[ Line: 26 | Named "showFeatureRestrictionDirect" ]]
+return function(AbuseVector, ModerationDetail, Options)
 	-- upvalues: FeatureRestrictionDisplayDirectSignalModule (copy)
 	FeatureRestrictionDisplayDirectSignalModule:fire({
 		abuseVector = AbuseVector,

@@ -1,4 +1,4 @@
-﻿return function(Purchase_flow_uuid, Text, Purchase_flow, View_name, Event_metadata) --[[ Line: 1 ]]
+﻿return function(Purchase_flow_uuid, Text, Purchase_flow, View_name, Event_metadata)
 	local Purchase_flow1: string = Purchase_flow
 	
 	if Text then

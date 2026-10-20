@@ -15,7 +15,7 @@ local UseMissingRootWarningModule = require(SduiSharedUtilities.hooks.useMissing
 local FFlagDataHydrationAccountReset = require(Parent.SharedFlags).FFlagDataHydrationAccountReset
 local _ = require(SduiSharedUtilities.SduiLoadTimer)
 
-local function SduiPageWholeContent(p1) --[[ Line: 36 ]]
+local function SduiPageWholeContent(p1)
 	-- upvalues: ReactModule (copy), PageContext (copy), FFlagAppPageShellScrollToTopFocus (copy), FFlagLuaAppsDefaultSelection (copy), FFlagSduiPageCanvasCollectionLayout (copy), GetSduiComponentWrapperFunction (copy)
 	local UseContextResult = ReactModule.useContext(PageContext)
 	local VerticalScrollingFrameRef = UseContextResult.verticalScrollingFrameRef
@@ -25,7 +25,7 @@ local function SduiPageWholeContent(p1) --[[ Line: 36 ]]
 		componentConfig = p1.config,
 		sduiContext = p1.sduiContext,
 		localAnalyticsData = p1.localAnalyticsData,
-		extraLocalProps = ReactModule.useMemo(function() --[[ Line: 41 ]]
+		extraLocalProps = ReactModule.useMemo(function()
 			-- upvalues: VerticalScrollingFrameRef (copy), UseContextResult (copy), p1 (copy), FFlagAppPageShellScrollToTopFocus (upval), FFlagLuaAppsDefaultSelection (upval), FFlagSduiPageCanvasCollectionLayout (upval)
 			return {
 				scrollToSelectionAnimationManagedByParent = true,
@@ -45,7 +45,7 @@ local function SduiPageWholeContent(p1) --[[ Line: 36 ]]
 	})
 end
 
-local function buildWholePageContent(Config, p1) --[[ Line: 85 ]]
+local function buildWholePageContent(Config, p1)
 	-- upvalues: ReactModule (copy), SduiPageWholeContent (copy), FFlagAppPageShellScrollToTopFocus (copy), FFlagLuaAppsDefaultSelection (copy)
 	return {
 		ReactModule.createElement(SduiPageWholeContent, {
@@ -59,7 +59,7 @@ local function buildWholePageContent(Config, p1) --[[ Line: 85 ]]
 	}
 end
 
-return function(p1) --[[ Line: 100 | Named "useSduiPageContent" ]]
+return function(p1)
 	-- upvalues: UseComponentConfigModule (copy), FFlagDataHydrationAccountReset (copy), UseMissingRootWarningModule (copy), UseComponentLifecycleTimingModule (copy), PageContentMode (copy), ReactModule (copy), buildWholePageContent (copy)
 	local UseComponentConfigModuleResult = UseComponentConfigModule(p1.configKey, p1.contentIdentifier)
 	
@@ -72,7 +72,7 @@ return function(p1) --[[ Line: 100 | Named "useSduiPageContent" ]]
 	return {
 		contentMode = ContentMode,
 		content = {
-			contentSlot = ReactModule.useMemo(function() --[[ Line: 110 ]]
+			contentSlot = ReactModule.useMemo(function()
 				-- upvalues: UseComponentConfigModuleResult (copy), ContentMode (copy), PageContentMode (upval), buildWholePageContent (upval), p1 (copy)
 				return if UseComponentConfigModuleResult == nil then nil elseif ContentMode == PageContentMode.Scroll then buildWholePageContent(UseComponentConfigModuleResult, p1) else buildWholePageContent(UseComponentConfigModuleResult, p1)
 			end, { UseComponentConfigModuleResult, p1, ContentMode })

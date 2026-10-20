@@ -17,13 +17,13 @@ local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local _ = require(Foundation.Providers.Style.Tokens)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 
-local function createNumberInputElement(p1, ControlsVariant, p2) --[[ Line: 38 ]]
+local function createNumberInputElement(p1, ControlsVariant, p2)
 	-- upvalues: ReactModule (copy), NumberInputModule (copy), DashModule (copy)
 	local Value = p1.value:getValue()
 	
 	return if Value == nil then ReactModule.createElement(NumberInputModule, DashModule.join({
 		value = -1,
-		onChanged = function(p3) --[[ Line: 51 ]]
+		onChanged = function(p3)
 			-- upvalues: p1 (copy)
 			if p3 ~= -1 then
 				p1.handler(p3, p1.component)
@@ -34,12 +34,12 @@ local function createNumberInputElement(p1, ControlsVariant, p2) --[[ Line: 38 ]
 		maximum = p1.maximum or 255,
 		step = p1.step or 1,
 		precision = p1.precision or 0,
-		formatAsString = function(_): string --[[ Line: 61 ]]
+		formatAsString = function(_): string
 			return ""
 		end
 	}, p2)) else ReactModule.createElement(NumberInputModule, DashModule.join({
 		value = Value,
-		onChanged = function(p3) --[[ Line: 72 ]]
+		onChanged = function(p3)
 			-- upvalues: p1 (copy)
 			p1.handler(p3, p1.component)
 		end,
@@ -51,7 +51,7 @@ local function createNumberInputElement(p1, ControlsVariant, p2) --[[ Line: 38 ]
 	}, p2))
 end
 
-local function renderInput(_, p1, LayoutOrder, Lowered, TestId) --[[ Line: 84 ]]
+local function renderInput(_, p1, LayoutOrder, Lowered, TestId)
 	-- upvalues: InputSizeModule (copy), ColorInputModeModule (copy), ReactModule (copy), ViewModule (copy), TextInputModule (copy), createNumberInputElement (copy), NumberInputControlsVariantModule (copy)
 	local config = {
 		label = "",
@@ -65,7 +65,7 @@ local function renderInput(_, p1, LayoutOrder, Lowered, TestId) --[[ Line: 84 ]]
 		Input = ReactModule.createElement(TextInputModule, {
 			label = "",
 			text = p1.value:getValue(),
-			onChanged = function(p2) --[[ Line: 109 ]]
+			onChanged = function(p2)
 				-- upvalues: p1 (copy)
 				p1.handler(p2, p1.component)
 			end,
@@ -81,7 +81,7 @@ end
 
 local config = { alpha = ReactModule.createBinding(1) }
 
-return function(p2) --[[ Line: 143 | Named "ColorInputs" ]]
+return function(p2)
 	-- upvalues: ColorInputModeModule (copy), WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), ColorUtilsModule (copy), ViewModule (copy), TextInputModule (copy), InputSizeModule (copy), ColorInputUtilsModule (copy), renderInput (copy), WithCommonPropsModule (copy), DashModule (copy), DropdownModule (copy)
 	local AvailableModes = p2.availableModes or {
 		ColorInputModeModule.RGB,
@@ -94,7 +94,7 @@ return function(p2) --[[ Line: 143 | Named "ColorInputs" ]]
 	local Mode = WithDefaultsModuleResult.mode or ColorInputModeModule.RGB
 	local Color = WithDefaultsModuleResult.color
 	local Alpha = WithDefaultsModuleResult.alpha
-	local UseResult = ReactModule.useCallback(function(p3) --[[ Line: 153 ]]
+	local UseResult = ReactModule.useCallback(function(p3)
 		-- upvalues: WithDefaultsModuleResult (copy)
 		if WithDefaultsModuleResult.onColorChanged then
 			WithDefaultsModuleResult.onColorChanged(p3)
@@ -102,7 +102,7 @@ return function(p2) --[[ Line: 143 | Named "ColorInputs" ]]
 	end, { WithDefaultsModuleResult.onColorChanged })
 	local OnAlphaChangedFunction = WithDefaultsModuleResult.onAlphaChanged
 	local HasOnAlphaChanged = WithDefaultsModuleResult.onAlphaChanged ~= nil
-	local MapResult = Color:map(function(p3) --[[ Line: 163 ]]
+	local MapResult = Color:map(function(p3)
 		-- upvalues: ColorUtilsModule (upval)
 		if ColorUtilsModule.isPartialHSV(p3) then
 			return { r = nil, g = nil, b = nil }
@@ -116,7 +116,7 @@ return function(p2) --[[ Line: 143 | Named "ColorInputs" ]]
 			}
 		end
 	end)
-	local MapResult1 = Color:map(function(p3) --[[ Line: 176 ]]
+	local MapResult1 = Color:map(function(p3)
 		if type(p3) == "table" then
 			return { h = p3.H, s = p3.S, v = p3.V }
 		else
@@ -129,10 +129,10 @@ return function(p2) --[[ Line: 143 | Named "ColorInputs" ]]
 			}
 		end
 	end)
-	local MapResult2 = MapResult:map(function(p3): string --[[ Line: 189 ]]
+	local MapResult2 = MapResult:map(function(p3): string
 		return if p3.r == nil or p3.g == nil or p3.b == nil then "" else string.format("#%02X%02X%02X", p3.r, p3.g, p3.b)
 	end)
-	local UseResult1 = ReactModule.useCallback(function(Value: number, Key) --[[ Line: 197 ]]
+	local UseResult1 = ReactModule.useCallback(function(Value: number, Key)
 		-- upvalues: MapResult (copy), UseResult (copy)
 		local Copy = table.clone(MapResult:getValue())
 		Copy[Key] = math.clamp(Value, 0, 255)
@@ -143,13 +143,13 @@ return function(p2) --[[ Line: 143 | Named "ColorInputs" ]]
 			return
 		end
 	end, { MapResult, UseResult })
-	local UseResult2 = ReactModule.useCallback(function(p3) --[[ Line: 213 ]]
+	local UseResult2 = ReactModule.useCallback(function(p3)
 		-- upvalues: OnAlphaChangedFunction (copy)
 		if OnAlphaChangedFunction then
 			OnAlphaChangedFunction(p3)
 		end
 	end, { OnAlphaChangedFunction })
-	local UseResult3 = ReactModule.useCallback(function(Value: number, Key) --[[ Line: 219 ]]
+	local UseResult3 = ReactModule.useCallback(function(Value: number, Key)
 		-- upvalues: MapResult1 (copy), UseResult (copy)
 		local Copy = table.clone(MapResult1:getValue())
 		
@@ -160,7 +160,7 @@ return function(p2) --[[ Line: 143 | Named "ColorInputs" ]]
 			return
 		end
 	end, { MapResult1, UseResult })
-	local UseResult4 = ReactModule.useCallback(function(Text: string) --[[ Line: 233 ]]
+	local UseResult4 = ReactModule.useCallback(function(Text: string)
 		-- upvalues: UseResult (copy)
 		local Uppered: string = Text:gsub("#", ""):upper()
 		
@@ -174,7 +174,7 @@ return function(p2) --[[ Line: 143 | Named "ColorInputs" ]]
 			end
 		end
 	end, { UseResult })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 249 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ColorInputModeModule (upval), HasOnAlphaChanged (copy), AvailableModes (copy)
 		local List = {
 			{
@@ -218,7 +218,7 @@ return function(p2) --[[ Line: 143 | Named "ColorInputs" ]]
 		end
 		return List1
 	end, { HasOnAlphaChanged })
-	ReactModule.useEffect(function() --[[ Line: 284 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Mode (copy), ColorInputModeModule (upval), HasOnAlphaChanged (copy), WithDefaultsModuleResult (copy)
 		if Mode == ColorInputModeModule.RGBA and not HasOnAlphaChanged and WithDefaultsModuleResult.onModeChanged then
 			WithDefaultsModuleResult.onModeChanged(ColorInputModeModule.RGB)
@@ -230,7 +230,7 @@ return function(p2) --[[ Line: 143 | Named "ColorInputs" ]]
 			label = "",
 			items = UseMemoResult,
 			value = Mode,
-			onItemChanged = function(p3) --[[ Line: 344 ]]
+			onItemChanged = function(p3)
 				-- upvalues: WithDefaultsModuleResult (copy)
 				if WithDefaultsModuleResult.onModeChanged then
 					WithDefaultsModuleResult.onModeChanged(p3)
@@ -240,7 +240,7 @@ return function(p2) --[[ Line: 143 | Named "ColorInputs" ]]
 			width = UDim.new(0, UseTokensModuleResult.Size.Size_1600),
 			testId = `{WithDefaultsModuleResult.testId}--mode-dropdown`
 		}) else nil
-	}, ((function() --[[ Line: 292 ]]
+	}, ((function()
 		-- upvalues: Mode (copy), ColorInputModeModule (upval), ReactModule (upval), ViewModule (upval), TextInputModule (upval), Color (copy), InputSizeModule (upval), WithDefaultsModuleResult (copy), ColorInputUtilsModule (upval), MapResult (copy), MapResult1 (copy), MapResult2 (copy), Alpha (copy), UseResult1 (copy), UseResult3 (copy), UseResult4 (copy), UseResult2 (copy), UseTokensModuleResult (copy), renderInput (upval)
 		if Mode == ColorInputModeModule.Brick then
 			return {
@@ -249,7 +249,7 @@ return function(p2) --[[ Line: 143 | Named "ColorInputs" ]]
 						isDisabled = true,
 						label = "",
 						text = BrickColor.new(Color:getValue()).Name,
-						onChanged = function() --[[ Line: 301 ]] end,
+						onChanged = function() end,
 						size = InputSizeModule.XSmall,
 						width = UDim.new(1, 0),
 						testId = `{WithDefaultsModuleResult.testId}-brick-name`

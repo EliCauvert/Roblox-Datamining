@@ -13,20 +13,20 @@ local DataStatus = require(Parent.DataHydration).DataStatus
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseNavigationFunction = require(Parent.Navigation).useNavigation
 
-return function(p1) --[[ Line: 41 | Named "useLatestVersionCardViewModel" ]]
+return function(p1)
 	-- upvalues: PlaceVersionHistoryModule (copy), ReactModule (copy), SignalsReactModule (copy), GetPlaytestLoadingStoreModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseNavigationFunction (copy), SendBuildExperienceEventModule (copy), LaunchPlaytestWithLoadingStateModule (copy), VersionHistoryUtilsModule (copy), DataStatus (copy)
 	local PlaceVersionHistoryStore = PlaceVersionHistoryModule.getPlaceVersionHistoryStore()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 43 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: PlaceVersionHistoryStore (copy), p1 (copy)
 		return PlaceVersionHistoryStore.getLiveVersion(p1.placeId)
 	end, { p1.placeId, PlaceVersionHistoryStore })
 	local UseSignalStateResult = SignalsReactModule.useSignalState(UseMemoResult.data)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(UseMemoResult.status)
-	ReactModule.useEffect(function() --[[ Line: 50 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: PlaceVersionHistoryStore (copy), p1 (copy)
 		PlaceVersionHistoryStore.fetchLiveVersion(p1.placeId)
 	end, { p1.placeId, PlaceVersionHistoryStore })
-	local UseSignalStateResult2 = SignalsReactModule.useSignalState((ReactModule.useCallback(function(p2) --[[ Line: 54 ]]
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState((ReactModule.useCallback(function(p2)
 		-- upvalues: GetPlaytestLoadingStoreModule (upval), p1 (copy)
 		return GetPlaytestLoadingStoreModule(p2).getIsPlaytestLoadingForPlaceId(p1.placeId)(p2)
 	end, { p1.placeId })))
@@ -35,12 +35,12 @@ return function(p1) --[[ Line: 41 | Named "useLatestVersionCardViewModel" ]]
 		publish = LocalizationStringsModule.BUILD_MENU_PUBLISH
 	})
 	local UseNavigationResult = UseNavigationFunction()
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 65 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: SendBuildExperienceEventModule (upval), p1 (copy), LaunchPlaytestWithLoadingStateModule (upval)
 		SendBuildExperienceEventModule("PLAYTEST_CLICK", { universeId = p1.universeId, placeId = p1.placeId }, { context = "LatestVersionCard" })
 		LaunchPlaytestWithLoadingStateModule(p1.placeId, "LatestVersionCard", true)
 	end, { p1.placeId, p1.universeId })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 73 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy), SendBuildExperienceEventModule (upval), p1 (copy)
 		if UseNavigationResult == nil then return end
 		SendBuildExperienceEventModule("PUBLISH_CLICK", { universeId = p1.universeId, placeId = p1.placeId }, { context = "LatestVersionCard" })

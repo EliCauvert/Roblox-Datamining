@@ -2,20 +2,20 @@
 local Active = nil
 local Active1 = nil
 local RegroupPromptNotificationStateModule = {
-	setActive = function(Value, Value1) --[[ Line: 7 ]]
+	setActive = function(Value, Value1)
 		-- upvalues: Active (ref), Active1 (ref)
 		Active = Value
 		Active1 = Value1
 	end,
-	getActiveNotifId = function() --[[ Line: 12 ]]
+	getActiveNotifId = function()
 		-- upvalues: Active (ref)
 		return Active
 	end,
-	getActiveSquadId = function() --[[ Line: 16 ]]
+	getActiveSquadId = function()
 		-- upvalues: Active1 (ref)
 		return Active1
 	end,
-	clearActive = function(NotificationId) --[[ Line: 20 ]]
+	clearActive = function(NotificationId)
 		-- upvalues: Active (ref), Active1 (ref)
 		if NotificationId == nil or Active == NotificationId then
 			Active = nil
@@ -24,10 +24,10 @@ local RegroupPromptNotificationStateModule = {
 	end
 }
 
-function RegroupPromptNotificationStateModule.dismissNotification(NotificationId) --[[ Line: 27 ]]
+function RegroupPromptNotificationStateModule.dismissNotification(NotificationId)
 	-- upvalues: GuiService (copy), RegroupPromptNotificationStateModule (copy)
 	if NotificationId ~= nil then
-		pcall(function() --[[ Line: 31 ]]
+		pcall(function()
 			-- upvalues: GuiService (upval), NotificationId (copy)
 			GuiService:DismissNotification(NotificationId)
 		end)

@@ -5,7 +5,7 @@ local GetDefaultQualityLevelFunction = require(game:GetService("CorePackages").W
 local SendAnalyticsModule = require(Parent.Utility.SendAnalytics)
 local ConstantsModule = require(Parent.Resources.Constants)
 
-return function() --[[ Line: 12 ]]
+return function()
 	-- upvalues: SendAnalyticsModule (copy), ConstantsModule (copy), GuiService (copy), RunService (copy), GetDefaultQualityLevelFunction (copy)
 	SendAnalyticsModule(ConstantsModule.AnalyticsInGameMenuName, ConstantsModule.AnalyticsLeaveGameName, { confirmed = ConstantsModule.AnalyticsConfirmedName })
 	GuiService.SelectedCoreObject = nil

@@ -2,11 +2,11 @@
 local ObservableValueModule = {}
 ObservableValueModule.__index = ObservableValueModule
 
-local function defaultCompareFn(p1, p2): boolean --[[ Line: 44 ]]
+local function defaultCompareFn(p1, p2): boolean
 	return p1 == p2
 end
 
-function ObservableValueModule.new(_value, p1) --[[ Line: 48 ]]
+function ObservableValueModule.new(_value, p1)
 	-- upvalues: defaultCompareFn (copy), Signal (copy), ObservableValueModule (copy)
 	return (setmetatable({
 		_isEqual = if p1 then p1 else defaultCompareFn,
@@ -15,18 +15,18 @@ function ObservableValueModule.new(_value, p1) --[[ Line: 48 ]]
 	}, ObservableValueModule))
 end
 
-function ObservableValueModule:get() --[[ Line: 57 ]]
+function ObservableValueModule:get()
 	return self._value
 end
 
-function ObservableValueModule:set(_value) --[[ Line: 61 ]]
+function ObservableValueModule:set(_value)
 	if not self._isEqual(self._value, _value) then
 		self._value = _value
 		self._changeSignal:fire(_value)
 	end
 end
 
-function ObservableValueModule:connect(Callback: (any) -> (), Enabled) --[[ Line: 68 ]]
+function ObservableValueModule:connect(Callback: (any) -> (), Enabled)
 	local ChangeSignalConnection = self._changeSignal:connect(Callback)
 	
 	if Enabled == true then
@@ -35,7 +35,7 @@ function ObservableValueModule:connect(Callback: (any) -> (), Enabled) --[[ Line
 	return ChangeSignalConnection
 end
 
-function ObservableValueModule:__tostring(): string --[[ Line: 77 ]]
+function ObservableValueModule:__tostring(): string
 	return "ObservableValue(" .. tostring(self._value) .. ")"
 end
 

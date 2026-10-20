@@ -11,9 +11,9 @@ local Formatted = string.format("https://develop.%s", Url.DOMAIN)
 local AXEnableIaBRbxClientFeature = game:DefineFastFlag("AXEnableIaBRbxClientFeature", false)
 local InspectAndBuyFeature = game:DefineFastString("InspectAndBuyFeature", "InspectAndBuy")
 
-local function _(Options, p1, p2, p3) --[[ Line: 29 | Named "request" ]]
+local function _(Options, p1, p2, p3)
 	-- upvalues: HttpService (copy)
-	return HttpService:RequestInternal(Options):Start(function(p4, p5) --[[ Line: 30 ]]
+	return HttpService:RequestInternal(Options):Start(function(p4, p5)
 		-- upvalues: p1 (copy), HttpService (upval), p2 (copy), p3 (copy)
 		if not p4 or p5.StatusCode ~= 200 then
 			p3(p5)
@@ -38,17 +38,17 @@ local function _(Options, p1, p2, p3) --[[ Line: 29 | Named "request" ]]
 	end)
 end
 
-local function createYieldingPromise(Options, p1) --[[ Line: 52 ]]
+local function createYieldingPromise(Options, p1)
 	-- upvalues: AXEnableIaBRbxClientFeature (copy), InspectAndBuyFeature (copy), PromiseModule (copy), HttpService (copy)
 	if AXEnableIaBRbxClientFeature then
 		Options.Headers = Options.Headers or {}
 		Options.Headers["rbx-client-feature"] = InspectAndBuyFeature
 	end
-	return PromiseModule.new(function(Callback1, Callback) --[[ Line: 57 ]]
+	return PromiseModule.new(function(Callback1, Callback)
 		-- upvalues: Options (copy), p1 (copy), HttpService (upval)
-		coroutine.wrap(function() --[[ Line: 58 ]]
+		coroutine.wrap(function()
 			-- upvalues: Options (upval), p1 (upval), Callback1 (copy), Callback (copy), HttpService (upval)
-			local _ = HttpService:RequestInternal(Options):Start(function(p2, p3) --[[ Line: 30 ]]
+			local _ = HttpService:RequestInternal(Options):Start(function(p2, p3)
 				-- upvalues: p1 (copy), HttpService (upval), Callback1 (copy), Callback (copy)
 				if not p2 or p3.StatusCode ~= 200 then
 					Callback(p3)
@@ -75,7 +75,7 @@ local function createYieldingPromise(Options, p1) --[[ Line: 52 ]]
 	end)
 end
 
-local function getPreviewAvatar(Assets) --[[ Line: 67 ]]
+local function getPreviewAvatar(Assets)
 	-- upvalues: Url (copy), HttpService (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "POST",
@@ -85,11 +85,11 @@ local function getPreviewAvatar(Assets) --[[ Line: 67 ]]
 	}, true)
 end
 
-local function getProductInfo(AssetId) --[[ Line: 85 ]]
+local function getProductInfo(AssetId)
 	-- upvalues: PromiseModule (copy), MarketplaceService (copy)
-	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any, any) -> ()) --[[ Line: 86 ]]
+	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any, any) -> ())
 		-- upvalues: MarketplaceService (upval), AssetId (copy)
-		local Success, Result = pcall(function() --[[ Line: 87 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: MarketplaceService (upval), AssetId (upval)
 			return MarketplaceService:GetProductInfoAsync(AssetId)
 		end)
@@ -104,11 +104,11 @@ local function getProductInfo(AssetId) --[[ Line: 85 ]]
 	end)
 end
 
-local function getBatchItemDetails(ItemIds, ItemType) --[[ Line: 102 ]]
+local function getBatchItemDetails(ItemIds, ItemType)
 	-- upvalues: PromiseModule (copy), AvatarEditorService (copy)
-	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any, any) -> ()) --[[ Line: 103 ]]
+	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any, any) -> ())
 		-- upvalues: AvatarEditorService (upval), ItemIds (copy), ItemType (copy)
-		local Success, Result = pcall(function() --[[ Line: 104 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: AvatarEditorService (upval), ItemIds (upval), ItemType (upval)
 			return AvatarEditorService:GetBatchItemDetailsAsync(ItemIds, ItemType)
 		end)
@@ -123,7 +123,7 @@ local function getBatchItemDetails(ItemIds, ItemType) --[[ Line: 102 ]]
 	end)
 end
 
-local function getBatchItemDetailsV2(Items) --[[ Line: 121 ]]
+local function getBatchItemDetailsV2(Items)
 	-- upvalues: Url (copy), HttpService (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "POST",
@@ -133,11 +133,11 @@ local function getBatchItemDetailsV2(Items) --[[ Line: 121 ]]
 	}, true)
 end
 
-local function getItemDetails(ItemId, ItemType) --[[ Line: 139 ]]
+local function getItemDetails(ItemId, ItemType)
 	-- upvalues: PromiseModule (copy), AvatarEditorService (copy)
-	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any, any) -> ()) --[[ Line: 140 ]]
+	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any, any) -> ())
 		-- upvalues: AvatarEditorService (upval), ItemId (copy), ItemType (copy)
-		local Success, Result = pcall(function() --[[ Line: 141 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: AvatarEditorService (upval), ItemId (upval), ItemType (upval)
 			return AvatarEditorService:GetItemDetailsAsync(ItemId, ItemType)
 		end)
@@ -152,11 +152,11 @@ local function getItemDetails(ItemId, ItemType) --[[ Line: 139 ]]
 	end)
 end
 
-local function getPlayerName(UserId) --[[ Line: 156 ]]
+local function getPlayerName(UserId)
 	-- upvalues: PromiseModule (copy), Players (copy)
-	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any, any) -> ()) --[[ Line: 157 ]]
+	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any, any) -> ())
 		-- upvalues: Players (upval), UserId (copy)
-		local Success, Result = pcall(function() --[[ Line: 158 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Players (upval), UserId (upval)
 			return Players:GetNameFromUserIdAsync(UserId)
 		end)
@@ -171,7 +171,7 @@ local function getPlayerName(UserId) --[[ Line: 156 ]]
 	end)
 end
 
-local function getAssetBundles(p1) --[[ Line: 173 ]]
+local function getAssetBundles(p1)
 	-- upvalues: Url (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "GET",
@@ -179,11 +179,11 @@ local function getAssetBundles(p1) --[[ Line: 173 ]]
 	}, true)
 end
 
-local function getHumanoidDescriptionFromCostumeId(OutfitId) --[[ Line: 186 ]]
+local function getHumanoidDescriptionFromCostumeId(OutfitId)
 	-- upvalues: PromiseModule (copy), Players (copy)
-	return PromiseModule.new(function(Callback, _) --[[ Line: 187 ]]
+	return PromiseModule.new(function(Callback, _)
 		-- upvalues: Players (upval), OutfitId (copy)
-		spawn(function() --[[ Line: 188 ]]
+		spawn(function()
 			-- upvalues: Players (upval), OutfitId (upval), Callback (copy)
 			local HumanoidDescriptionFromOutfitIdAsync = Players:GetHumanoidDescriptionFromOutfitIdAsync(OutfitId)
 			
@@ -194,7 +194,7 @@ local function getHumanoidDescriptionFromCostumeId(OutfitId) --[[ Line: 186 ]]
 	end)
 end
 
-local function getAssetFavoriteCount(p1) --[[ Line: 201 ]]
+local function getAssetFavoriteCount(p1)
 	-- upvalues: Url (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "GET",
@@ -202,7 +202,7 @@ local function getAssetFavoriteCount(p1) --[[ Line: 201 ]]
 	}, false)
 end
 
-local function getBundleFavoriteCount(p1) --[[ Line: 214 ]]
+local function getBundleFavoriteCount(p1)
 	-- upvalues: Url (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "GET",
@@ -210,7 +210,7 @@ local function getBundleFavoriteCount(p1) --[[ Line: 214 ]]
 	}, false)
 end
 
-local function getFavoriteForAsset(p1) --[[ Line: 227 ]]
+local function getFavoriteForAsset(p1)
 	-- upvalues: Players (copy), Url (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "GET",
@@ -218,7 +218,7 @@ local function getFavoriteForAsset(p1) --[[ Line: 227 ]]
 	}, true)
 end
 
-local function getFavoriteForBundle(p1) --[[ Line: 246 ]]
+local function getFavoriteForBundle(p1)
 	-- upvalues: Players (copy), Url (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "GET",
@@ -226,7 +226,7 @@ local function getFavoriteForBundle(p1) --[[ Line: 246 ]]
 	}, true)
 end
 
-local function createFavoriteForAsset(p1) --[[ Line: 265 ]]
+local function createFavoriteForAsset(p1)
 	-- upvalues: Players (copy), Url (copy), HttpService (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "POST",
@@ -235,7 +235,7 @@ local function createFavoriteForAsset(p1) --[[ Line: 265 ]]
 	}, true)
 end
 
-local function deleteFavoriteForAsset(p1) --[[ Line: 285 ]]
+local function deleteFavoriteForAsset(p1)
 	-- upvalues: Players (copy), Url (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "DELETE",
@@ -243,7 +243,7 @@ local function deleteFavoriteForAsset(p1) --[[ Line: 285 ]]
 	}, true)
 end
 
-local function createFavoriteForBundle(p1) --[[ Line: 304 ]]
+local function createFavoriteForBundle(p1)
 	-- upvalues: Players (copy), Url (copy), HttpService (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "POST",
@@ -252,7 +252,7 @@ local function createFavoriteForBundle(p1) --[[ Line: 304 ]]
 	}, true)
 end
 
-local function deleteFavoriteForBundle(p1) --[[ Line: 324 ]]
+local function deleteFavoriteForBundle(p1)
 	-- upvalues: Players (copy), Url (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "DELETE",
@@ -260,7 +260,7 @@ local function deleteFavoriteForBundle(p1) --[[ Line: 324 ]]
 	}, true)
 end
 
-local function getEconomyProductInfo(p1) --[[ Line: 343 ]]
+local function getEconomyProductInfo(p1)
 	-- upvalues: Url (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "GET",
@@ -268,11 +268,11 @@ local function getEconomyProductInfo(p1) --[[ Line: 343 ]]
 	}, true)
 end
 
-local function getModelFromUserId(UserId) --[[ Line: 356 ]]
+local function getModelFromUserId(UserId)
 	-- upvalues: PromiseModule (copy), Players (copy)
-	return PromiseModule.new(function(Callback, Callback1) --[[ Line: 357 ]]
+	return PromiseModule.new(function(Callback, Callback1)
 		-- upvalues: Players (upval), UserId (copy)
-		spawn(function() --[[ Line: 358 ]]
+		spawn(function()
 			-- upvalues: Players (upval), UserId (upval), Callback (copy), Callback1 (copy)
 			local HumanoidModelFromUserIdAsync = Players:CreateHumanoidModelFromUserIdAsync(UserId)
 			
@@ -287,7 +287,7 @@ local function getModelFromUserId(UserId) --[[ Line: 356 ]]
 	end)
 end
 
-local function getCollectibleResellableInstances(p1, p2) --[[ Line: 373 ]]
+local function getCollectibleResellableInstances(p1, p2)
 	-- upvalues: Url (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "GET",
@@ -300,7 +300,7 @@ local function getCollectibleResellableInstances(p1, p2) --[[ Line: 373 ]]
 	}, true)
 end
 
-local function getVersionInfo(p1) --[[ Line: 390 ]]
+local function getVersionInfo(p1)
 	-- upvalues: Formatted (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "GET",
@@ -308,7 +308,7 @@ local function getVersionInfo(p1) --[[ Line: 390 ]]
 	}, true)
 end
 
-local function getExperiencePlayability(p1) --[[ Line: 399 ]]
+local function getExperiencePlayability(p1)
 	-- upvalues: Url (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "GET",
@@ -316,7 +316,7 @@ local function getExperiencePlayability(p1) --[[ Line: 399 ]]
 	}, true)
 end
 
-local function getExperienceInfo(p1) --[[ Line: 408 ]]
+local function getExperienceInfo(p1)
 	-- upvalues: Url (copy), createYieldingPromise (copy)
 	return createYieldingPromise({
 		Method = "GET",
@@ -325,7 +325,7 @@ local function getExperienceInfo(p1) --[[ Line: 408 ]]
 end
 
 return {
-	new = function() --[[ Line: 419 ]]
+	new = function()
 		-- upvalues: getProductInfo (copy), getEconomyProductInfo (copy), getPlayerName (copy), getAssetBundles (copy), getHumanoidDescriptionFromCostumeId (copy), getAssetFavoriteCount (copy), getBundleFavoriteCount (copy), getFavoriteForAsset (copy), getFavoriteForBundle (copy), createFavoriteForAsset (copy), deleteFavoriteForAsset (copy), createFavoriteForBundle (copy), deleteFavoriteForBundle (copy), getModelFromUserId (copy), getCollectibleResellableInstances (copy), getVersionInfo (copy), getExperiencePlayability (copy), getExperienceInfo (copy), getItemDetails (copy), getPreviewAvatar (copy), getBatchItemDetails (copy), getBatchItemDetailsV2 (copy)
 		local config = {
 			getProductInfo = getProductInfo,
@@ -352,7 +352,7 @@ return {
 			getBatchItemDetailsV2 = getBatchItemDetailsV2
 		}
 		setmetatable(config, {
-			__tostring = function(): string --[[ Line: 452 ]]
+			__tostring = function(): string
 				return "Service(Network)"
 			end
 		})

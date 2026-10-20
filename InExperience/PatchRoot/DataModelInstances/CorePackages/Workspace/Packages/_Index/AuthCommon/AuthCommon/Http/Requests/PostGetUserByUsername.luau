@@ -6,7 +6,7 @@ local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
 	base = require(Parent.Http).Url.USERS_URL
 })
 
-return function(Callback, p1, p2) --[[ Line: 40 ]]
+return function(Callback, p1, p2)
 	-- upvalues: NewResult (copy), HttpService (copy)
 	return Callback(NewResult(), "POST", {
 		postBody = HttpService:JSONEncode({ usernames = { p1 }, excludeBannedUsers = p2 or false })

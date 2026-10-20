@@ -43,17 +43,17 @@ local config4 = {
 	ingameStatusLabel = "Common.Presence.Label.InExperience"
 }
 
-return function(p1) --[[ Line: 65 | Named "useFoundationPresence" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config4 (copy), ReactModule (copy), FFlagAppChatPresenceStoreMigrationModule (copy), UseGetPresenceByUserIdFunction (copy), UseSelectorFunction (copy), RoduxPresenceModule (copy), PresenceType1 (copy), PresenceType (copy), config3 (copy), config2 (copy), config1 (copy), config (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config4)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UseLocalizationResult.offlinePresenceText)
 	local None, None2 = ReactModule.useState("None")
 	local UseGetPresenceByUserIdResult = nil
-	UseGetPresenceByUserIdResult = if FFlagAppChatPresenceStoreMigrationModule then UseGetPresenceByUserIdFunction(p1) else UseSelectorFunction(function(p2) --[[ Line: 75 ]]
+	UseGetPresenceByUserIdResult = if FFlagAppChatPresenceStoreMigrationModule then UseGetPresenceByUserIdFunction(p1) else UseSelectorFunction(function(p2)
 		-- upvalues: p1 (copy), RoduxPresenceModule (upval)
 		return if p1 and p1 ~= "" then if p2 == nil or p2.ChatAppReducer == nil or p2.ChatAppReducer.Presence == nil or p2.ChatAppReducer.Presence.byUserId == nil then nil else RoduxPresenceModule.Selectors.getUserPresenceByUserId(p2, p1) else nil
 	end)
-	ReactModule.useEffect(function() --[[ Line: 91 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseLocalizationResult (copy), FFlagAppChatPresenceStoreMigrationModule (upval), PresenceType1 (upval), PresenceType (upval), UseGetPresenceByUserIdResult (ref), config3 (upval), config2 (upval), config1 (upval), config (upval), None2 (copy), UseBindingResult2 (copy)
 		local OfflinePresenceText = UseLocalizationResult.offlinePresenceText
 		local Offline = if FFlagAppChatPresenceStoreMigrationModule then PresenceType1.Offline else PresenceType.Offline
@@ -67,7 +67,7 @@ return function(p1) --[[ Line: 65 | Named "useFoundationPresence" ]]
 		UseBindingResult2(OfflinePresenceText)
 	end, { UseGetPresenceByUserIdResult, UseLocalizationResult })
 	
-	return ReactModule.useMemo(function() --[[ Line: 119 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: None (copy), UseBindingResult (copy)
 		return { presence = None, presenceText = UseBindingResult }
 	end, { None, UseBindingResult })

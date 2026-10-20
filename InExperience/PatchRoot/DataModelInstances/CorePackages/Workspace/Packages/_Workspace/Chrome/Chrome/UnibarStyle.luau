@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local Context = ReactModule.createContext({})
 
-local function UnibarStyleConstants() --[[ Line: 10 ]]
+local function UnibarStyleConstants()
 	-- upvalues: UseTokensFunction (copy)
 	local UseTokensResult = UseTokensFunction()
 	
@@ -34,11 +34,11 @@ end
 
 return {
 	Context = Context,
-	Provider = function(p1) --[[ Line: 38 ]]
+	Provider = function(p1)
 		-- upvalues: ReactModule (copy), Context (copy), UnibarStyleConstants (copy)
 		return ReactModule.createElement(Context.Provider, { value = UnibarStyleConstants() }, p1.children)
 	end,
-	use = function() --[[ Line: 44 ]]
+	use = function()
 		-- upvalues: ReactModule (copy), Context (copy)
 		local UseContextResult = ReactModule.useContext(Context)
 		

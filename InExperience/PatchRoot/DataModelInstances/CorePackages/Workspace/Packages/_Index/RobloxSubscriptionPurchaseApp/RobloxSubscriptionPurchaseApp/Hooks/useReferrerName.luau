@@ -4,17 +4,17 @@ local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local UserProfilesModule = require(Parent.UserProfiles)
 
-return function(p1) --[[ Line: 9 | Named "useReferrerName" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UserProfilesModule (copy), SignalsModule (copy), SignalsReactModule (copy)
 	local v1: boolean = p1 ~= nil and p1 ~= 0
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 12 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: v1 (copy), p1 (copy), UserProfilesModule (upval)
 		return if v1 and p1 then UserProfilesModule.Stores.UserProfileStore.get().fetchNamesByUserIds({ (tostring(p1)) }) else nil
 	end, { v1, p1 })
 	
-	return SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 21 ]]
+	return SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), SignalsModule (upval)
-		return if UseMemoResult then SignalsModule.createComputed(function(p2) --[[ Line: 27 ]]
+		return if UseMemoResult then SignalsModule.createComputed(function(p2)
 			-- upvalues: UseMemoResult (upval)
 			local UseMemoResultResult = UseMemoResult(p2)
 			
@@ -26,7 +26,7 @@ return function(p1) --[[ Line: 9 | Named "useReferrerName" ]]
 			else
 				return nil
 			end
-		end) else function(_) --[[ Line: 23 ]]
+		end) else function(_)
 			return nil
 		end
 	end, { UseMemoResult })))

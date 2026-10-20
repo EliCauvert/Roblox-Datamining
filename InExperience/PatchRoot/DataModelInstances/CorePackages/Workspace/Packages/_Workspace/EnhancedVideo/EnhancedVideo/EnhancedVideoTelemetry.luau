@@ -15,7 +15,7 @@ local config = {
 }
 
 return {
-	logServeEnhancedVideoError = function(p1) --[[ Line: 19 ]]
+	logServeEnhancedVideoError = function(p1)
 		-- upvalues: TelemetryService (copy), config (copy), StandardizedFields (copy)
 		TelemetryService:LogEvent(config, {
 			standardizedFields = StandardizedFields,

@@ -26,16 +26,16 @@ local FFlagEnableFlyoutUncheckedBadge = SharedFlagsModule.FFlagEnableFlyoutUnche
 local FFlagEnableDrawerFocusNav = SharedFlagsModule.FFlagEnableDrawerFocusNav
 local FFlagFlyoutSidePanelUseProfileFrameThumbnail = SharedFlagsModule.FFlagFlyoutSidePanelUseProfileFrameThumbnail
 
-return function(p1) --[[ Line: 45 | Named "FlyoutProfileCard" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), FFlagEnableFlyoutUncheckedBadge (copy), UseLocalizationFunction (copy), UseAppPolicyFunction (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), ReactModule (copy), FlyoutAnalyticsModule (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), FFlagFlyoutSidePanelUseProfileFrameThumbnail (copy), FFlagEnableBlackbirdCheck (copy), FFlagHidePremiumIconography (copy), FoundationModule (copy), FFlagLuaAppAddTestIdsForArrow (copy), GetTestIdFunction (copy), FFlagEnableDrawerFocusNav (copy), LoadableImage (copy), Text (copy), Icon (copy), BuilderIconsModule (copy), IconSize (copy), IconName (copy), Badge (copy), BadgeVariant (copy), ChevronSmallDownButtonModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = if FFlagEnableFlyoutUncheckedBadge then UseLocalizationFunction({ Unchecked = "CommonUI.Features.Label.Unchecked" }) else nil
-	local UseAppPolicyResult = if FFlagEnableFlyoutUncheckedBadge then UseAppPolicyFunction(function(p2) --[[ Line: 55 ]]
+	local UseAppPolicyResult = if FFlagEnableFlyoutUncheckedBadge then UseAppPolicyFunction(function(p2)
 		return p2.getShowUncheckedBadge()
 	end) else nil
 	local UseRoactServiceResult = UseRoactServiceFunction(AppEventIngestService)
 	local LocalUserModel = p1.localUserModel
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 70 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		p1.closeDrawer()
 		
@@ -43,7 +43,7 @@ return function(p1) --[[ Line: 45 | Named "FlyoutProfileCard" ]]
 			p1.onSwitchAccountActivated()
 		end
 	end, { p1.onSwitchAccountActivated, p1.closeDrawer })
-	local UseMemoResult = ReactModule.useMemo(function(): boolean --[[ Line: 87 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): boolean
 		-- upvalues: LocalUserModel (copy)
 		return LocalUserModel and LocalUserModel.membership == Enum.MembershipType.Premium
 	end, { LocalUserModel })
@@ -64,7 +64,7 @@ return function(p1) --[[ Line: 45 | Named "FlyoutProfileCard" ]]
 			Text = "",
 			AutomaticSize = if FFlagEnableFlyoutUncheckedBadge then Enum.AutomaticSize.Y else Enum.AutomaticSize.XY,
 			LayoutOrder = if FFlagEnableFlyoutUncheckedBadge then 1 else nil,
-			[ReactModule.Event.Activated] = ReactModule.useCallback(function() --[[ Line: 62 ]]
+			[ReactModule.Event.Activated] = ReactModule.useCallback(function()
 				-- upvalues: p1 (copy), LocalUserModel (copy), FlyoutAnalyticsModule (upval), UseRoactServiceResult (copy)
 				p1.closeDrawer()
 				
@@ -98,7 +98,7 @@ return function(p1) --[[ Line: 45 | Named "FlyoutProfileCard" ]]
 				Size = UDim2.new(0, UseTokensResult.Size.Size_1600, 0, UseTokensResult.Size.Size_1600),
 				BackgroundColor3 = UseTokensResult.Color.Common.Shimmer.Color3,
 				BackgroundTransparency = UseTokensResult.Color.Common.Shimmer.Transparency,
-				Image = ReactModule.useMemo(function() --[[ Line: 77 ]]
+				Image = ReactModule.useMemo(function()
 					-- upvalues: LocalUserModel (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (upval), FFlagFlyoutSidePanelUseProfileFrameThumbnail (upval)
 					return if LocalUserModel and LocalUserModel.id then GetStandardSizeAvatarHeadShotRbxthumbFunction(LocalUserModel.id, FFlagFlyoutSidePanelUseProfileFrameThumbnail) else nil
 				end, { LocalUserModel }),

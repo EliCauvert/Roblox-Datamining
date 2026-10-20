@@ -28,7 +28,7 @@ return {
 	},
 	requiredData = { ValidationEnumsModule.SharedDataMember.rootInstance },
 	fflag = R15plusUtilsModule.checkFlagEnabledForAllowHrd,
-	run = function(p1, p2) --[[ Line: 36 ]]
+	run = function(p1, p2)
 		-- upvalues: GetAllInstancesWithNameModule (copy), R15plusUtilsModule (copy), ErrorSourceStringsModule (copy), config (copy), GetDiffBetweenOrientationsModule (copy), UGCValidationJointRotationMaximumDegreeOrientationOffset (copy), ValueToStringModule (copy), UGCValidationJointRotationMaximumHundredthPositionOffset (copy)
 		local config1 = {
 			LeftShoulderRigAttachment = 0,

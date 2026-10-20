@@ -12,46 +12,46 @@ local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXEnhancedAvatarHeadsFtuxUseMemStorage = AvatarExperienceFlagsModule.FFlagAXEnhancedAvatarHeadsFtuxUseMemStorage
 local FIntAXEnhancedAvatarHeadsFtuxDelay = AvatarExperienceFlagsModule.FIntAXEnhancedAvatarHeadsFtuxDelay
 
-local function v9(p1) --[[ Line: 25 ]]
+local function v9(p1)
 	return p1.ScreenSize
 end
 
-return function() --[[ Line: 29 | Named "useEnhancedAvatarHeadsFtux" ]]
+return function()
 	-- upvalues: UseNavigationFunction (copy), UseAvatarRouteFunction (copy), UseSelectorFunction (copy), v9 (copy), ReactModule (copy), SafeAppStorageServiceModule (copy), FFlagAXEnhancedAvatarHeadsFtuxUseMemStorage (copy), UseIsSpatialFunction (copy), AvatarScreen (copy), FIntAXEnhancedAvatarHeadsFtuxDelay (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseAvatarRouteResult = UseAvatarRouteFunction()
 	local UseSelectorResult = UseSelectorFunction(v9)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 34 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseAvatarRouteResult (copy)
 		return UseAvatarRouteResult and (UseAvatarRouteResult.opaque and UseAvatarRouteResult.opaque.name)
 	end, { UseAvatarRouteResult })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 38 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: SafeAppStorageServiceModule (upval), FFlagAXEnhancedAvatarHeadsFtuxUseMemStorage (upval)
 		return SafeAppStorageServiceModule.getItem("AXEnhancedAvatarHeadsFtux", FFlagAXEnhancedAvatarHeadsFtuxUseMemStorage)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 42 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: SafeAppStorageServiceModule (upval), FFlagAXEnhancedAvatarHeadsFtuxUseMemStorage (upval)
 		SafeAppStorageServiceModule.setItem("AXEnhancedAvatarHeadsFtux", "true", FFlagAXEnhancedAvatarHeadsFtuxUseMemStorage)
 		SafeAppStorageServiceModule.flush()
 	end, {})
 	local UseIsSpatialResult = UseIsSpatialFunction()
-	ReactModule.useEffect(function() --[[ Line: 50 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseIsSpatialResult (copy), UseResult (copy), UseMemoResult (copy), AvatarScreen (upval), FIntAXEnhancedAvatarHeadsFtuxDelay (upval), UseNavigationResult (copy), UseSelectorResult (copy), UseResult1 (copy)
 		if UseIsSpatialResult then return end
 		if UseResult() == "true" then return end
 		if UseMemoResult ~= AvatarScreen.AvatarEditor then return end
-		local DelayedThread = task.delay(FIntAXEnhancedAvatarHeadsFtuxDelay / 1000, function() --[[ Line: 65 ]]
+		local DelayedThread = task.delay(FIntAXEnhancedAvatarHeadsFtuxDelay / 1000, function()
 			-- upvalues: UseNavigationResult (upval), AvatarScreen (upval), UseSelectorResult (upval), UseResult1 (upval)
 			UseNavigationResult.navigate(AvatarScreen.EnhancedAvatarHeadsFtuxPrompt, {
 				screenSize = UseSelectorResult,
-				onConfirm = function() --[[ Line: 68 ]]
+				onConfirm = function()
 					-- upvalues: UseResult1 (upval)
 					UseResult1()
 				end
 			})
 		end)
 		
-		return function() --[[ Line: 74 ]]
+		return function()
 			-- upvalues: DelayedThread (copy)
 			if DelayedThread then
 				task.cancel(DelayedThread)

@@ -4,7 +4,7 @@ local SurfaceNameModule = require(RobloxSubscriptionPurchaseApp.Enums.SurfaceNam
 local RobloxSubscriptionStoreModule = require(RobloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
 local _ = require(RobloxSubscriptionPurchaseApp.types)
 
-function logRobloxSubscriptionUpsellTelemetryEvent(p1, List) --[[ Line: 12 ]]
+function logRobloxSubscriptionUpsellTelemetryEvent(p1, List)
 	-- upvalues: RobloxSubscriptionStoreModule (copy), SurfaceNameModule (copy), LoggingProtocolModule (copy)
 	local EntryContext = RobloxSubscriptionStoreModule.get().getEntryContext()
 	local config = {

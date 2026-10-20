@@ -1,8 +1,8 @@
 ﻿return (require(script.Parent.Parent.Parent.Parent.React).createContext({
-	getCursor = function() --[[ Line: 5 ]]
+	getCursor = function()
 		return nil
 	end,
-	getCursorByType = function() --[[ Line: 8 ]]
+	getCursorByType = function()
 		return nil
 	end
 }))

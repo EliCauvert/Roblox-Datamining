@@ -24,7 +24,7 @@ local Constants = {
 	}
 }
 
-local function v7(AnnotationPoints) --[[ Line: 96 ]]
+local function v7(AnnotationPoints)
 	local t = {}
 	
 	for _, annotationPoint in ipairs(AnnotationPoints) do
@@ -33,7 +33,7 @@ local function v7(AnnotationPoints) --[[ Line: 96 ]]
 	return t
 end
 
-local function v8(IdentifiedAds) --[[ Line: 104 ]]
+local function v8(IdentifiedAds)
 	local t = {}
 	
 	for _, identifiedAd in pairs(IdentifiedAds) do
@@ -54,7 +54,7 @@ local function v8(IdentifiedAds) --[[ Line: 104 ]]
 	return t
 end
 
-local function v9(IdentifiedAvatars) --[[ Line: 125 ]]
+local function v9(IdentifiedAvatars)
 	-- upvalues: v7 (copy)
 	local t = {}
 	
@@ -84,7 +84,7 @@ local function v9(IdentifiedAvatars) --[[ Line: 125 ]]
 	return t
 end
 
-local function _(p1, p2) --[[ Line: 155 ]]
+local function _(p1, p2)
 	-- upvalues: GetFFlagGetHumanoidDescriptionUpdatesV2EFunction (copy), GetHumanoidDescriptionFunction (copy)
 	if not GetFFlagGetHumanoidDescriptionUpdatesV2EFunction() then
 		local HumanoidDescription, HumanoidDescription2 = GetHumanoidDescriptionFunction(p1)
@@ -102,7 +102,7 @@ local function _(p1, p2) --[[ Line: 155 ]]
 	end
 end
 
-local function InterpretAnnotations(p1) --[[ Line: 177 ]]
+local function InterpretAnnotations(p1)
 	-- upvalues: GetFFlagRAEnableCircleRegionFunction (copy), GetAvatarsForRegionFunction (copy), GetAvatarsForPointFunction (copy), GetFFlagReportAnythingEnableAdReportFunction (copy), GetAdsForPointFunction (copy)
 	local t = {}
 	local t1 = {}
@@ -146,7 +146,7 @@ local function InterpretAnnotations(p1) --[[ Line: 177 ]]
 	return Players, IdentifiedAds
 end
 
-local function v12(p2, _, Input) --[[ Line: 242 ]]
+local function v12(p2, _, Input)
 	-- upvalues: GetFFlagReportAnythingEnableAdReportFunction (copy), HttpService (copy), v9 (copy), v8 (copy), v7 (copy)
 	local Flag = false
 	
@@ -217,7 +217,7 @@ local function v12(p2, _, Input) --[[ Line: 242 ]]
 end
 
 return {
-	buildExperienceReportRequest = function(p3, p4, p5) --[[ Line: 338 ]]
+	buildExperienceReportRequest = function(p3, p4, p5)
 		-- upvalues: Constants (copy), InterpretAnnotations (copy), v12 (copy), GetFFlagReportAnythingEnableAdReportFunction (copy), HttpService (copy), v8 (copy)
 		local config = {
 			tags = {
@@ -247,7 +247,7 @@ return {
 		end
 		return HttpService:JSONEncode(config)
 	end,
-	buildOtherReportRequest = function(p3, p4, p5) --[[ Line: 417 ]]
+	buildOtherReportRequest = function(p3, p4, p5)
 		-- upvalues: Constants (copy), InterpretAnnotations (copy), v12 (copy), GetFFlagGetHumanoidDescriptionFunction (copy), GetFFlagGetHumanoidDescriptionUpdatesV2EFunction (copy), GetHumanoidDescriptionFunction (copy), HttpService (copy)
 		local config = {
 			tags = {

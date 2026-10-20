@@ -5,7 +5,7 @@ local PeekViewState = PeekViewModule.PeekViewState
 local PeekView = PeekViewModule.PeekView
 local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
 
-return function(p1) --[[ Line: 25 ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), PeekViewState (copy), PeekView (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
@@ -37,7 +37,7 @@ return function(p1) --[[ Line: 25 ]]
 				bottomDockedContainerHeight = 0,
 				briefViewContentHeight = p1.briefViewContentHeight,
 				mountAsFullView = p1.mountAsFullView,
-				viewStateChanged = ReactModule.useCallback(function(Closed, _) --[[ Line: 33 ]]
+				viewStateChanged = ReactModule.useCallback(function(Closed, _)
 					-- upvalues: p1 (copy), PeekViewState (upval)
 					local OnPeekViewClosedFunction: () -> () = p1.onPeekViewClosed
 					
@@ -45,7 +45,7 @@ return function(p1) --[[ Line: 25 ]]
 						OnPeekViewClosedFunction()
 					end
 				end, { p1.onPeekViewClosed }),
-				briefToFullTransitionPercent = ReactModule.useCallback(function(p2) --[[ Line: 29 ]]
+				briefToFullTransitionPercent = ReactModule.useCallback(function(p2)
 					-- upvalues: UseStateResult2 (copy)
 					UseStateResult2(p2)
 				end, {})

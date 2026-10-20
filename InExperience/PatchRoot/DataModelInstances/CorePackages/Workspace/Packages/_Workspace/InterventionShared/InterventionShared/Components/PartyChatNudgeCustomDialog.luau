@@ -13,11 +13,11 @@ local InterventionTreatmentShownSignalModule = require(InterventionShared.Signal
 local InterventionDialogModule = require(InterventionShared.Components.InterventionDialog)
 local FFlagUFRFriendsChatIXPExposureModule = require(InterventionShared.Flags.FFlagUFRFriendsChatIXPExposure)
 
-return ReactModule.memo(function(p1) --[[ Line: 26 ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ConstantsModule (copy), ReactModule (copy), FFlagUFRFriendsChatIXPExposureModule (copy), IXPService (copy), AppUserLayers (copy), InterventionTreatmentShownSignalModule (copy), InterventionDialogModule (copy), IconSize (copy), InterventionAnalyticsModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction(ConstantsModule.localizationKeys)
-	ReactModule.useEffect(function() --[[ Line: 29 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagUFRFriendsChatIXPExposureModule (upval), IXPService (upval), AppUserLayers (upval), InterventionTreatmentShownSignalModule (upval), ConstantsModule (upval)
 		if FFlagUFRFriendsChatIXPExposureModule and game:GetEngineFeature("EnableLogFlagLinkedUserLayerExposure") then
 			IXPService:LogFlagLinkedUserLayerExposure(AppUserLayers.FriendsChatRestrictionUserIDLayer)

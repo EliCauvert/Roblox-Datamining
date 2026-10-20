@@ -12,7 +12,7 @@ local Images = UIBloxModule.App.ImageSet.Images
 local StandardButtonSize = UIBloxModule.App.Button.Enum.StandardButtonSize
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 
-return function(Frame) --[[ Line: 26 | Named "GamePlayerFeedbackPrompt" ]]
+return function(Frame)
 	-- upvalues: UseLocalizationFunction (copy), GetFFlagEdpPlayerFeedbackPromptTitleOnlyFunction (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), ReactModule (copy), PlayerFeedbackEventsModule (copy), InlinePrompt (copy), Images (copy), ButtonType (copy), StandardButtonSize (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		buttonLabelKey = "PlayerFeedbacks.VoteForm.PromptBanner.GiveFeedbackButton",
@@ -21,7 +21,7 @@ return function(Frame) --[[ Line: 26 | Named "GamePlayerFeedbackPrompt" ]]
 		titleOnlyKey = if GetFFlagEdpPlayerFeedbackPromptTitleOnlyFunction() then "PlayerFeedbacks.VoteForm.PromptBanner.TitleOnly" else nil
 	})
 	local UseRoactServiceResult = UseRoactServiceFunction(AppEventIngestService)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 36 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: PlayerFeedbackEventsModule (upval), UseRoactServiceResult (copy), Frame (copy)
 		PlayerFeedbackEventsModule.ClickPlayerFeedbackPromptCta(UseRoactServiceResult, Frame.placeId)
 		Frame.onButtonClick()
@@ -30,12 +30,12 @@ return function(Frame) --[[ Line: 26 | Named "GamePlayerFeedbackPrompt" ]]
 		Frame.placeId,
 		Frame.onButtonClick
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 41 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: PlayerFeedbackEventsModule (upval), UseRoactServiceResult (copy), Frame (copy)
 		PlayerFeedbackEventsModule.DismissPlayerFeedbackPrompt(UseRoactServiceResult, Frame.placeId)
 		Frame.onDimiss()
 	end, { UseRoactServiceResult, Frame.placeId, Frame.onDimiss })
-	ReactModule.useEffect(function() --[[ Line: 46 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: PlayerFeedbackEventsModule (upval), UseRoactServiceResult (copy), Frame (copy)
 		PlayerFeedbackEventsModule.PlayerFeedbackPromptMounted(UseRoactServiceResult, Frame.placeId)
 	end, { UseRoactServiceResult, Frame.placeId })

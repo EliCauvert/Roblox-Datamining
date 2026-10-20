@@ -16,7 +16,7 @@ local ReceiveErrorSheetModule = require(CurrencyTransfers.Components.Receive.Rec
 local GetFFlagCurrencyTransferSuccessModalModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferSuccessModal)
 local UseTransferStoreModule = require(CurrencyTransfers.Hooks.useTransferStore)
 
-return function(_) --[[ Line: 30 | Named "TransferRobuxContainer" ]]
+return function(_)
 	-- upvalues: UseTransferStoreModule (copy), SignalsReactModule (copy), PromptStateModule (copy), ReactModule (copy), TransferRobuxInputSheetModule (copy), InsufficientBalanceSheetModule (copy), TransferRobuxConfirmSheetModule (copy), GetFFlagCurrencyTransferSuccessModalModule (copy), TransferRobuxSuccessModalModule (copy), TransferRobuxSuccessToastModule (copy), TransferRobuxErrorSheetModule (copy), TransferBlockSheetModule (copy), ReceiveRobuxSuccessToastModule (copy), ReceiveBlockSheetModule (copy), ReceiveErrorSheetModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(UseTransferStoreModule().getPromptState)
 	

@@ -7,7 +7,7 @@ return {
 		require(Parent.validationSystem.ValidationEnums).UploadCategory.FULL_BODY
 	},
 	fflag = require(Parent.flags.getFFlagUGCValidateAQRiggingQuality),
-	run = function(p1, p2) --[[ Line: 11 ]]
+	run = function(p1, p2)
 		-- upvalues: ErrorSourceStringsModule (copy)
 		local MeasureJointNumber = p2.aqsSummaryData.Measure_Joint_Number
 		

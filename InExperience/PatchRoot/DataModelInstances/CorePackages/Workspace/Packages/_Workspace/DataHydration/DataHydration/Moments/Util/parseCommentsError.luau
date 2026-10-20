@@ -1,7 +1,7 @@
 ﻿local HttpService = game:GetService("HttpService")
 local _ = require(script:FindFirstAncestor("DataHydration").Parent.MomentsTypes)
 
-return function(Text: string) --[[ Line: 14 | Named "parseCommentsError" ]]
+return function(Text: string)
 	-- upvalues: HttpService (copy)
 	if type(Text) == "string" and Text ~= "" then
 		local FoundAt: number? = string.find(Text, "{", 1, true)

@@ -4,7 +4,7 @@ local FeatureSettingsHubPromptWindowsWithDeeplink = RobloxTranslatorModule:Forma
 local FeatureSettingsHubPromptAndroidWithoutDeeplink = RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.AndroidWithoutDeeplink")
 local FeatureSettingsHubPromptWindowsWithoutDeeplink = RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.WindowsWithoutDeeplink")
 
-return function(p1, UserInputService) --[[ Line: 12 ]]
+return function(p1, UserInputService)
 	-- upvalues: FeatureSettingsHubPromptAndroidWithDeeplink (copy), FeatureSettingsHubPromptAndroidWithoutDeeplink (copy), FeatureSettingsHubPromptWindowsWithDeeplink (copy), FeatureSettingsHubPromptWindowsWithoutDeeplink (copy)
 	local Platform = UserInputService:GetPlatform()
 	

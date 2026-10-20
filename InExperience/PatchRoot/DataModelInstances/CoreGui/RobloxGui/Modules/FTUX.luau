@@ -10,7 +10,7 @@ local GetFeaturesModule = require(script.Features.GetFeatures)
 local _ = require(script.Enums.PlatformEnum)
 
 return {
-	mountFtuxMenu = function(Platform) --[[ Line: 22 ]]
+	mountFtuxMenu = function(Platform)
 		-- upvalues: RoactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), RenderWithCoreScriptsStyleProviderModule (copy), FTUXPanelModule (copy), GetFeaturesModule (copy), CoreGui (copy)
 		game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList, false)
 		game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.Chat, false)

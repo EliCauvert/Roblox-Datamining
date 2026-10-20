@@ -1,22 +1,22 @@
 ﻿local SignalModule = require(script:FindFirstAncestor("ViewRecycler").Parent.Signal)
 
-return function() --[[ Line: 15 | Named "createEvent" ]]
+return function()
 	-- upvalues: SignalModule (copy)
 	local Signal, Signal2 = SignalModule.createSignal()
 	
 	return {
-		fire = function(...) --[[ Line: 21 ]]
+		fire = function(...)
 			-- upvalues: Signal2 (copy)
 			Signal2(table.pack(...))
 		end,
-		connect = function(Callback) --[[ Line: 25 ]]
+		connect = function(Callback)
 			-- upvalues: Signal (copy)
-			local SubscribeResult = Signal:subscribe(function(p1) --[[ Line: 26 ]]
+			local SubscribeResult = Signal:subscribe(function(p1)
 				-- upvalues: Callback (copy)
 				Callback(table.unpack(p1, 1, p1.n))
 			end)
 			
-			return function() --[[ Line: 29 ]]
+			return function()
 				-- upvalues: SubscribeResult (copy)
 				SubscribeResult:unsubscribe()
 			end

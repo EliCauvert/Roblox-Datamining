@@ -8,18 +8,18 @@ local CreateProfileCompletionPromptsConfigFunction = require(Parent.ProfilePlatf
 local FetchFramesPromptIdModule = require(ProfilePlatform.Hooks.fetchFramesPromptId)
 local ProfileFramesUpsellPromptType = game:DefineFastString("ProfileFramesUpsellPromptType", "ProfileFramesUpsell")
 
-return function() --[[ Line: 15 | Named "useReportFramesImpression" ]]
+return function()
 	-- upvalues: ReactModule (copy), ReportPromptImpressionFunction (copy), FetchFramesPromptIdModule (copy), ProfileFramesUpsellPromptType (copy), FetchPromptsFunction (copy), CreateProfileCompletionPromptsConfigFunction (copy)
-	ReactModule.useEffect(function() --[[ Line: 16 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ReportPromptImpressionFunction (upval), FetchFramesPromptIdModule (upval), ProfileFramesUpsellPromptType (upval), FetchPromptsFunction (upval), CreateProfileCompletionPromptsConfigFunction (upval)
 		if ReportPromptImpressionFunction then
-			FetchFramesPromptIdModule():andThen(function(Result) --[[ Line: 19 ]]
+			FetchFramesPromptIdModule():andThen(function(Result)
 				-- upvalues: ReportPromptImpressionFunction (upval), ProfileFramesUpsellPromptType (upval)
 				return ReportPromptImpressionFunction(ProfileFramesUpsellPromptType, Result)
-			end):andThen(function() --[[ Line: 22 ]]
+			end):andThen(function()
 				-- upvalues: FetchPromptsFunction (upval), CreateProfileCompletionPromptsConfigFunction (upval)
 				FetchPromptsFunction(CreateProfileCompletionPromptsConfigFunction(), true)
-			end):catch(function() --[[ Line: 25 ]] end)
+			end):catch(function() end)
 		end
 	end, {})
 end

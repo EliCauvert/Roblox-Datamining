@@ -18,12 +18,12 @@
 local Module = {}
 Module.__index = Module
 
-local function createSignalTracker() --[[ Line: 32 ]]
+local function createSignalTracker()
 	-- upvalues: Module (copy)
 	return (setmetatable({ _totalCount = 0, _payload = {}, _counts = {} }, Module))
 end
 
-function Module.recordSignal(p1, p2, p3, p4) --[[ Line: 41 ]]
+function Module.recordSignal(p1, p2, p3, p4)
 	-- upvalues: config (copy)
 	local Entry = config[p3]
 	
@@ -63,11 +63,11 @@ function Module.recordSignal(p1, p2, p3, p4) --[[ Line: 41 ]]
 	end
 end
 
-function Module.getSignalsPayload(p1) --[[ Line: 82 ]]
+function Module.getSignalsPayload(p1)
 	return if p1._totalCount == 0 then nil else p1._payload
 end
 
-function Module.getSignalCount(p1) --[[ Line: 90 ]]
+function Module.getSignalCount(p1)
 	return p1._totalCount
 end
 

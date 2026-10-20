@@ -5,7 +5,7 @@ local AbortSignal = require(script.Parent.AbortSignal).AbortSignal
 local self = setmetatable({}, { __index = Body })
 self.__index = self
 
-function self.new(Body1, p1) --[[ Line: 92 ]]
+function self.new(Body1, p1)
 	-- upvalues: InstanceofFunction (copy), self (copy), Body (copy), Headers (copy), AbortSignal (copy)
 	local P1 = p1 or {}
 	local Url = nil
@@ -47,7 +47,7 @@ function self.new(Body1, p1) --[[ Line: 92 ]]
 	return self1
 end
 
-function self.clone(p1) --[[ Line: 137 ]]
+function self.clone(p1)
 	-- upvalues: self (copy)
 	return self.new(p1)
 end

@@ -1,4 +1,4 @@
-﻿return function(Text: string): Vector2? --[[ Line: 9 | Named "getThumbSizeVectorFromParamString" ]]
+﻿return function(Text: string): Vector2?
 	local Parts = string.split(Text, "&")
 	
 	if #Parts == 2 then

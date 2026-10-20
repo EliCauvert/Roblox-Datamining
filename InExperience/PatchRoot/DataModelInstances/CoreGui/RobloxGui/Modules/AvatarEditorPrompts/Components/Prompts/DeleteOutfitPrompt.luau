@@ -22,9 +22,9 @@ DeleteOutfitPrompt.validateProps = TModule.strictInterface({
 	showCustomOutfitNames = TModule.boolean
 })
 
-function DeleteOutfitPrompt.init(p1) --[[ Line: 43 ]]
+function DeleteOutfitPrompt.init(p1)
 	-- upvalues: RoactModule (copy), LoadableImage (copy)
-	function p1.renderAlertMiddleContent() --[[ Line: 44 ]]
+	function p1.renderAlertMiddleContent()
 		-- upvalues: p1 (copy), RoactModule (upval), LoadableImage (upval)
 		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -43,7 +43,7 @@ function DeleteOutfitPrompt.init(p1) --[[ Line: 43 ]]
 	end
 end
 
-function DeleteOutfitPrompt.render(p1) --[[ Line: 64 ]]
+function DeleteOutfitPrompt.render(p1)
 	-- upvalues: RobloxTranslatorModule (copy), RoactModule (copy), InteractiveAlert (copy), ButtonType (copy)
 	return RoactModule.createElement(InteractiveAlert, {
 		isMiddleContentFocusable = false,
@@ -74,22 +74,22 @@ function DeleteOutfitPrompt.render(p1) --[[ Line: 64 ]]
 	})
 end
 
-return (AvatarEditorPromptsPolicyModule.connect(function(p1, _) --[[ Line: 125 ]]
+return (AvatarEditorPromptsPolicyModule.connect(function(p1, _)
 	return { showCustomOutfitNames = p1.getCustomOutfitNames() }
-end)((RoactRoduxModule.connect(function(p1) --[[ Line: 103 | Named "mapStateToProps" ]]
+end)((RoactRoduxModule.connect(function(p1)
 	return {
 		screenSize = p1.screenSize,
 		outfitId = p1.promptInfo.outfitId,
 		outfitName = p1.promptInfo.outfitName
 	}
-end, function(Callback) --[[ Line: 111 | Named "mapDispatchToProps" ]]
+end, function(Callback)
 	-- upvalues: SignalDeleteOutfitPermissionDeniedModule (copy), PerformDeleteOutfitModule (copy)
 	return {
-		signalDeleteOutfitPermissionDenied = function() --[[ Line: 113 ]]
+		signalDeleteOutfitPermissionDenied = function()
 			-- upvalues: Callback (copy), SignalDeleteOutfitPermissionDeniedModule (upval)
 			return Callback(SignalDeleteOutfitPermissionDeniedModule)
 		end,
-		performDeleteOutfit = function() --[[ Line: 117 ]]
+		performDeleteOutfit = function()
 			-- upvalues: Callback (copy), PerformDeleteOutfitModule (upval)
 			return Callback(PerformDeleteOutfitModule)
 		end

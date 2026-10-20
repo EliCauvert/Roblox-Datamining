@@ -8,10 +8,10 @@ local StrictInterfaceResult = TModule.strictInterface({
 	state = TModule.union(TModule.literal("on"), TModule.literal("off")),
 	ctx = TModule.string,
 	uid = TModule.string,
-	universeId = if require(Parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents then TModule.optional(TModule.string) else nil
+	targetId = if require(Parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents then TModule.optional(TModule.string) else nil
 })
 
-return function(CustomFields, EventContext) --[[ Line: 21 ]]
+return function(CustomFields, EventContext)
 	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), GameFavoriteThrottleHundrethsPercent (copy), TelemetryService (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	

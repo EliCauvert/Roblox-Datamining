@@ -22,7 +22,7 @@ local PopoverSide = FoundationModule.Enums.PopoverSide
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local _ = require(script.Parent.types)
 
-return function(Frame: Frame) --[[ Line: 48 | Named "FilmstripSlot" ]]
+return function(Frame: Frame)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseTokensFunction (copy), ReactModule (copy), Menu (copy), PopoverSide (copy), PopoverAlign (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy), InputSize (copy), Image (copy), IconButton (copy), Badge (copy), IconPosition (copy), BadgeVariant (copy), BadgeShape (copy), BadgeSize (copy)
 	local Video = UseLocalizationFunction({ video = LocalizationStringsModule.MEDIA_SELECTION_VIDEO }).video
 	local UseTokensResult = UseTokensFunction()
@@ -128,7 +128,7 @@ return function(Frame: Frame) --[[ Line: 48 | Named "FilmstripSlot" ]]
 			BackgroundTransparency = 1,
 			Text = "",
 			ZIndex = 1,
-			[ReactModule.Event.Activated] = Frame.onEmptySlotPressed or function() --[[ Line: 93 ]] end
+			[ReactModule.Event.Activated] = Frame.onEmptySlotPressed or function() end
 		}),
 		PlusIcon = ReactModule.createElement(View, {
 			tag = "align-x-center align-y-center",

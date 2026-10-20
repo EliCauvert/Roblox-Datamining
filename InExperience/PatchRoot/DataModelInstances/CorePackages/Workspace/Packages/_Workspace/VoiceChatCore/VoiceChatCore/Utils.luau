@@ -3,19 +3,19 @@ local Players = game:GetService("Players")
 local Module = {}
 Module.__index = Module
 
-function Module.new() --[[ Line: 18 ]]
+function Module.new()
 	-- upvalues: Module (copy)
 	return (setmetatable({ listeners = {} }, Module))
 end
 
-function Module:addListener(p1, p2) --[[ Line: 26 ]]
+function Module:addListener(p1, p2)
 	if not self.listeners[p1] then
 		self.listeners[p1] = {}
 	end
 	table.insert(self.listeners[p1], p2)
 end
 
-function Module:removeListener(p1, Value) --[[ Line: 33 ]]
+function Module:removeListener(p1, Value)
 	local Listener = self.listeners[p1]
 	
 	if not Listener then return end
@@ -30,16 +30,16 @@ function Module:removeListener(p1, Value) --[[ Line: 33 ]]
 	end
 end
 
-function Module:removeAllListeners() --[[ Line: 48 ]]
+function Module:removeAllListeners()
 	table.clear(self.listeners)
 end
 
-function Module:emit(p1, ...) --[[ Line: 52 ]]
+function Module:emit(p1, ...)
 	local Listener = self.listeners[p1]
 	
 	if not Listener then return end
 	for _, value in table.clone(Listener) do
-		pcall(function(...) --[[ Line: 60 ]]
+		pcall(function(...)
 			-- upvalues: value (copy)
 			value(...)
 			
@@ -49,9 +49,9 @@ function Module:emit(p1, ...) --[[ Line: 52 ]]
 end
 
 return {
-	jsonDecode = function(Input) --[[ Line: 67 ]]
+	jsonDecode = function(Input)
 		-- upvalues: HttpService (copy)
-		local Success, Result = pcall(function() --[[ Line: 68 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: HttpService (upval), Input (copy)
 			return HttpService:JSONDecode(Input)
 		end)
@@ -59,13 +59,13 @@ return {
 		return if Success and Result then Result else {}
 	end,
 	EventEmitter = Module,
-	shorten = function(p2): string --[[ Line: 78 ]]
+	shorten = function(p2): string
 		return "..." .. string.sub(tostring(p2), -4)
 	end,
-	avoidEmitting = function(Object) --[[ Line: 82 ]]
-		Object.DescendantAdded:Connect(function(Descendant) --[[ Line: 83 | Named "prune" ]]
+	avoidEmitting = function(Object)
+		Object.DescendantAdded:Connect(function(Descendant)
 			if Descendant:HasTag("RbxDefaultVoiceEmitter") then
-				task.defer(function() --[[ Line: 86 ]]
+				task.defer(function()
 					-- upvalues: Descendant (copy)
 					Descendant:Destroy()
 				end)
@@ -74,14 +74,14 @@ return {
 		
 		for _, descendant in Object:GetDescendants() do
 			if descendant:HasTag("RbxDefaultVoiceEmitter") then
-				task.defer(function() --[[ Line: 86 ]]
+				task.defer(function()
 					-- upvalues: descendant (copy)
 					descendant:Destroy()
 				end)
 			end
 		end
 	end,
-	destroyDefaultEmitter = function(Object) --[[ Line: 97 ]]
+	destroyDefaultEmitter = function(Object)
 		-- upvalues: Players (copy)
 		local LocalPlayer = Players.LocalPlayer
 		
@@ -90,14 +90,14 @@ return {
 		
 		if not Character then return end
 		if Object:IsDescendantOf(Character) then
-			task.defer(function() --[[ Line: 108 ]]
+			task.defer(function()
 				-- upvalues: Object (copy)
 				Object:Destroy()
 			end)
 		end
 	end,
-	bind = function(p2, p3) --[[ Line: 114 ]]
-		return function(...) --[[ Line: 115 ]]
+	bind = function(p2, p3)
+		return function(...)
 			-- upvalues: p2 (copy), p3 (copy)
 			return p2[p3](p2, ...)
 		end

@@ -9,7 +9,7 @@ local IsBuilderIconFunction = FoundationModule.Utility.isBuilderIcon
 local FFlagAXMigrateBuilderIcons = require(Parent.AvatarExperienceFlags).FFlagAXMigrateBuilderIcons
 local FFlagAXResetAvatarButton = require(Parent.AvatarExperienceFlags).FFlagAXResetAvatarButton
 
-return (ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 29 ]]
+return (ReactModule.forwardRef(function(Frame, Ref)
 	-- upvalues: UseSemanticTokensModule (copy), UseHoverBindingModule (copy), UseLocalizationFunction (copy), FFlagAXMigrateBuilderIcons (copy), IsBuilderIconFunction (copy), ReactModule (copy), FoundationModule (copy), FFlagAXResetAvatarButton (copy)
 	local UseSemanticTokensModuleResult = UseSemanticTokensModule()
 	local UseHoverBindingModuleResult, UseHoverBindingModuleResult2 = UseHoverBindingModule()
@@ -24,7 +24,7 @@ return (ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 29 ]]
 		ref = Ref,
 		onStateChanged = UseHoverBindingModuleResult2,
 		GroupTransparency = if FFlagAXResetAvatarButton then if Frame.disabled then UseSemanticTokensModuleResult.contentDisabledTransparency else UseSemanticTokensModuleResult.contentForegroundStyle.Transparency else nil,
-		backgroundStyle = UseHoverBindingModuleResult:map(function(p1) --[[ Line: 55 ]]
+		backgroundStyle = UseHoverBindingModuleResult:map(function(p1)
 			-- upvalues: UseSemanticTokensModuleResult (copy)
 			return {
 				Color3 = UseSemanticTokensModuleResult.hoverIconBackgroundStyle.Color3,

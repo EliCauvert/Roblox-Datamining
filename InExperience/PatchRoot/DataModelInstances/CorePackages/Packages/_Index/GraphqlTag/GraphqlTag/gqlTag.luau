@@ -12,17 +12,17 @@ local NewMap1 = Map.new(nil)
 local Flag = true
 local ExperimentalFragmentVariables = false
 
-local function normalize(Text: string) --[[ Line: 30 ]]
+local function normalize(Text: string)
 	-- upvalues: String (copy)
 	return String.trim((Text:gsub(",+%s+", " ")))
 end
 
-local function _(p1) --[[ Line: 35 | Named "cacheKeyFromLoc" ]]
+local function _(p1)
 	-- upvalues: normalize (copy)
 	return normalize(p1.source.body:sub(p1.start, p1._end))
 end
 
-local function processFragments(p1) --[[ Line: 39 ]]
+local function processFragments(p1)
 	-- upvalues: Set (copy), String (copy), NewMap1 (copy), Flag (ref), Console (copy), Object (copy)
 	local NewSet = Set.new(nil)
 	local Definitions = {}
@@ -57,7 +57,7 @@ local function processFragments(p1) --[[ Line: 39 ]]
 	return Object.assign({}, p1, { definitions = Definitions })
 end
 
-local function stripLoc(p2) --[[ Line: 83 ]]
+local function stripLoc(p2)
 	-- upvalues: Set (copy), Object (copy), Array (copy)
 	local NewSet = Set.new(nil)
 	
@@ -84,7 +84,7 @@ local function stripLoc(p2) --[[ Line: 83 ]]
 	return p2
 end
 
-local function parseDocument(Text: string) --[[ Line: 107 ]]
+local function parseDocument(Text: string)
 	-- upvalues: String (copy), NewMap (copy), ParseFunction (copy), ExperimentalFragmentVariables (ref), stripLoc (copy), processFragments (copy)
 	local TrimResult = String.trim((Text:gsub(",+%s+", " ")))
 	
@@ -101,7 +101,7 @@ local function parseDocument(Text: string) --[[ Line: 107 ]]
 	return (NewMap:get(TrimResult))
 end
 
-local function gql(p3) --[[ Line: 130 ]]
+local function gql(p3)
 	-- upvalues: parseDocument (copy)
 	if typeof(p3) == "string" then
 		return (parseDocument(p3))
@@ -112,23 +112,23 @@ local function gql(p3) --[[ Line: 130 ]]
 	end
 end
 
-function resetCaches() --[[ Line: 159 ]]
+function resetCaches()
 	-- upvalues: NewMap (copy), NewMap1 (copy)
 	NewMap:clear()
 	NewMap1:clear()
 end
 
-function disableFragmentWarnings() --[[ Line: 164 ]]
+function disableFragmentWarnings()
 	-- upvalues: Flag (ref)
 	Flag = false
 end
 
-function enableExperimentalFragmentVariables() --[[ Line: 168 ]]
+function enableExperimentalFragmentVariables()
 	-- upvalues: ExperimentalFragmentVariables (ref)
 	ExperimentalFragmentVariables = true
 end
 
-function disableExperimentalFragmentVariables() --[[ Line: 172 ]]
+function disableExperimentalFragmentVariables()
 	-- upvalues: ExperimentalFragmentVariables (ref)
 	ExperimentalFragmentVariables = false
 end

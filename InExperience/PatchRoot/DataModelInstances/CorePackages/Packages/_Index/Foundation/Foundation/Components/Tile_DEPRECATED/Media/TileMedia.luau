@@ -18,7 +18,7 @@ local config = {
 }
 local config1 = { LayoutOrder = 1, shape = MediaShapeModule.Square }
 
-return function(p1) --[[ Line: 54 | Named "TileMedia" ]]
+return function(p1)
 	-- upvalues: WithDefaultsModule (copy), config1 (copy), UseTileModule (copy), ReactModule (copy), GetRbxThumbModule (copy), ImageModule (copy), ViewModule (copy), config (copy), MediaShapeModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config1)
 	local UseTileModuleResult = UseTileModule()
@@ -47,7 +47,7 @@ return function(p1) --[[ Line: 54 | Named "TileMedia" ]]
 		testId = `{UseTileModuleResult.testId}--media`
 	}, {
 		Image = ReactModule.createElement(ImageModule, {
-			Image = ReactModule.useMemo(function() --[[ Line: 62 ]]
+			Image = ReactModule.useMemo(function()
 				-- upvalues: WithDefaultsModuleResult (copy), GetRbxThumbModule (upval)
 				return if WithDefaultsModuleResult.id == nil or WithDefaultsModuleResult.type == nil then nil else GetRbxThumbModule(WithDefaultsModuleResult.type, WithDefaultsModuleResult.id)
 			end, {

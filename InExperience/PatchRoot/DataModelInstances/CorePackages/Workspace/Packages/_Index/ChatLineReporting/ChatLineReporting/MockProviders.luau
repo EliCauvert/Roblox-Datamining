@@ -5,7 +5,7 @@ local StyleProviderWithDefaultTheme = require(Parent.Style).StyleProviderWithDef
 local LocalizationProvider = require(Parent.Localization).LocalizationProvider
 local LayerCollectorProvider = require(Parent.UIBlox).Core.Layout.LayerCollector.LayerCollectorProvider
 
-return function(p1) --[[ Line: 22 | Named "MockProviders" ]]
+return function(p1)
 	-- upvalues: StyleProviderWithDefaultTheme (copy), LocalizationProvider (copy), LayerCollectorProvider (copy), ReactModule (copy), ProviderContainer (copy)
 	local List = {}
 	table.insert(List, {
@@ -16,7 +16,7 @@ return function(p1) --[[ Line: 22 | Named "MockProviders" ]]
 		class = LocalizationProvider,
 		props = {
 			localization = {
-				Format = function(_, p2) --[[ Line: 36 ]]
+				Format = function(_, p2)
 					return p2
 				end
 			}

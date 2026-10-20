@@ -16,7 +16,7 @@ local SocialTabsContextModule = require(SocialTabsPage.Contexts.SocialTabsContex
 local UseLocalizedTabsModule = require(SocialTabsPage.Hooks.useLocalizedTabs)
 local _ = require(SocialTabsPage.Common.Types)
 
-return function(p1) --[[ Line: 24 | Named "SocialTabsPageComponent" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseLocalizedTabsModule (copy), UseTokensFunction (copy), UseNavigationFunction (copy), FFlagSocialTabsPageDockedPanelSafeAreaModule (copy), UseSignalStateFunction (copy), DisplayModule (copy), View (copy), SocialTabsHeaderModule (copy), SocialTabBarModule (copy), StateLayerAffordance (copy), SocialTabsContextModule (copy), FullscreenPageWithSafeArea (copy)
 	local RenderNavigatorFunction = p1.renderNavigator
 	local RenderHeaderFunction = p1.renderHeader
@@ -25,7 +25,7 @@ return function(p1) --[[ Line: 24 | Named "SocialTabsPageComponent" ]]
 	local Title = p1.title
 	local InitialTabId = p1.initialTabId
 	local PageWidth = p1.pageWidth
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 33 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ProfileId (copy), Title (copy)
 		return { profileId = ProfileId, title = Title }
 	end, { ProfileId, Title })
@@ -34,11 +34,11 @@ return function(p1) --[[ Line: 24 | Named "SocialTabsPageComponent" ]]
 	local UseNavigationResult = UseNavigationFunction()
 	local UseSignalStateResult = if FFlagSocialTabsPageDockedPanelSafeAreaModule then UseSignalStateFunction(DisplayModule.GetDisplayStore().getDeviceSafePadding) else nil
 	local UseRefResult = ReactModule.useRef(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 48 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy)
 		UseNavigationResult.goBack()
 	end, { UseNavigationResult })
-	ReactModule.useEffect(function() --[[ Line: 52 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), InitialTabId (copy), TabConfig (copy), UseNavigationResult (copy)
 		if UseRefResult.current then return end
 		if not InitialTabId or #TabConfig == 0 then return end
@@ -98,7 +98,7 @@ return function(p1) --[[ Line: 24 | Named "SocialTabsPageComponent" ]]
 						bottom = UDim.new(0, UseSignalStateResult.bottom)
 					} else nil,
 					stateLayer = StateLayer,
-					onActivated = function() --[[ Line: 138 ]] end
+					onActivated = function() end
 				}, { Content = Element })
 			})
 		}

@@ -6,11 +6,11 @@ local FriendsLandingContextModule = require(FriendsLanding.FriendsLandingContext
 local PlayerSearchWrapper = Roact.PureComponent:extend("PlayerSearchWrapper")
 PlayerSearchWrapper.defaultProps = { layoutOrder = 1, onActivated = nil, searchText = "" }
 
-function PlayerSearchWrapper.render(p1) --[[ Line: 18 ]]
+function PlayerSearchWrapper.render(p1)
 	-- upvalues: FriendsLandingContextModule (copy), WithStyleFunction (copy), Roact (copy)
-	return FriendsLandingContextModule.with(function(p2) --[[ Line: 19 ]]
+	return FriendsLandingContextModule.with(function(p2)
 		-- upvalues: WithStyleFunction (upval), p1 (copy), Roact (upval)
-		return WithStyleFunction(function(p3) --[[ Line: 20 ]]
+		return WithStyleFunction(function(p3)
 			-- upvalues: p1 (upval), Roact (upval), p2 (copy)
 			return Roact.createElement("Frame", {
 				BackgroundTransparency = 0,

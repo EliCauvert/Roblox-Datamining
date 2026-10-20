@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local ReactGlobalsModule = require(Parent.ReactGlobals)
 local WarnOnceModule = require(script.Parent.warnOnce)
 
-return function(p1) --[[ Line: 22 | Named "oneChild" ]]
+return function(p1)
 	-- upvalues: ReactGlobalsModule (copy), WarnOnceModule (copy), ReactModule (copy)
 	if ReactGlobalsModule.__DEV__ and ReactGlobalsModule.__COMPAT_WARNINGS__ then
 		WarnOnceModule("oneChild", "You likely don't need this at all! If you were assigning children via `React.oneChild(someChildren)`, you can simply use `someChildren` directly.")

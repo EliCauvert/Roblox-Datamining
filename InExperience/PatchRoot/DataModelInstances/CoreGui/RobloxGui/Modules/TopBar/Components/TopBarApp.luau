@@ -145,11 +145,11 @@ local TopBarAppPolicyModule = require(script.Parent.Parent.TopBarAppPolicy)
 local EnabledResult1 = EnabledFunction()
 local VRBottomUnibarModule = if IsInExperienceUIVREnabled and EnabledFunction() then require(script.Parent.VRBottomUnibar) else require(RobloxGui.Modules.VR.VRBottomBar.VRBottomBar)
 
-local function _(p1) --[[ Line: 207 | Named "selectMenuOpen" ]]
+local function _(p1)
 	return p1.displayOptions.menuOpen or p1.displayOptions.inspectMenuOpen
 end
 
-local _ = function(): boolean --[[ Line: 211 | Named "canShowAssistantBuild" ]]
+local _ = function(): boolean
 	-- upvalues: BuildModeLaunchModule (copy), VRService (copy)
 	return BuildModeLaunchModule:hasBuildMode() and not VRService.VREnabled
 end
@@ -164,11 +164,11 @@ TopBarApp.validateProps = TModule.strictInterface({
 	showGameAgeRating = TModule.optional(TModule.boolean)
 })
 
-function TopBarApp.init(p1) --[[ Line: 229 ]]
+function TopBarApp.init(p1)
 	-- upvalues: RoactModule (copy), SignalsModule (copy), DisplayModule (copy), FFlagAddUILessMode (copy), Stores (copy), FIntAddUILessModeVariant (copy), TweenService (copy), LocalStoreModule (ref), ConstantsModule1 (ref), UILessTooltipDuration (copy), SettingsHubModule (copy), ConstantsModule (copy), ContextActionService (copy), FFlagTopBarSignalizeMenuOpen (copy), SettingsShowSignal (copy), FFlagTopBarSignalizeKeepOutAreas (copy), CoreGuiCommonModule (copy), FFlagExperienceAgeRatingBadge (copy), IsSpatialFunction (copy), ReactModule (copy), ExperienceAgeRatingPolicyModule (copy), EnabledFunction (copy), Chrome (copy), FFlagEnableConsoleExpControls (copy), GamepadConnectorModule (ref), FFlagEnableInExperienceShop1 (copy), EnabledResult (copy), InExperienceShopModule (copy), FFlagCenterInExperienceShopWindow (copy), TextChatService (copy), FFlagShowSwitchServerButton1 (copy), GetSwitchServerStoreFunction (copy)
 	p1.unibarRightSidePosition, p1.setUnibarRightSidePosition = RoactModule.createBinding(UDim2.new())
 	p1.closeButtonState, p1.setCloseButtonState = RoactModule.createBinding(false)
-	p1.disposeUiScaleEffect = SignalsModule.createEffect(function(p2) --[[ Line: 232 ]]
+	p1.disposeUiScaleEffect = SignalsModule.createEffect(function(p2)
 		-- upvalues: DisplayModule (upval), p1 (copy)
 		p1:setState({
 			UiScale = DisplayModule.GetDisplayStore(p2).getUIScale(p2)
@@ -182,16 +182,16 @@ function TopBarApp.init(p1) --[[ Line: 229 ]]
 			p1.uiLessTooltipVisible, p1.setUILessTooltipVisible = RoactModule.createBinding(false)
 			p1.uiLessTooltipTransparency, p1.setUILessTooltipTransparency = RoactModule.createBinding(0)
 			
-			function p1.fadeOutUILessTooltip() --[[ Line: 246 ]]
+			function p1.fadeOutUILessTooltip()
 				-- upvalues: p1 (copy), TweenService (upval)
 				local NumValue = Instance.new("NumberValue")
 				NumValue.Value = 0
-				NumValue:GetPropertyChangedSignal("Value"):Connect(function() --[[ Line: 249 ]]
+				NumValue:GetPropertyChangedSignal("Value"):Connect(function()
 					-- upvalues: p1 (upval), NumValue (copy)
 					p1.setUILessTooltipTransparency(NumValue.Value)
 				end)
 				p1.uiLessTooltipTween = TweenService:Create(NumValue, TweenInfo.new(0.5), { Value = 1 })
-				p1.uiLessTooltipTween.Completed:Connect(function() --[[ Line: 256 ]]
+				p1.uiLessTooltipTween.Completed:Connect(function()
 					-- upvalues: p1 (upval)
 					p1.setUILessTooltipVisible(false)
 					p1.uiLessTooltipTween = nil
@@ -199,7 +199,7 @@ function TopBarApp.init(p1) --[[ Line: 229 ]]
 				p1.uiLessTooltipTween:Play()
 			end
 			
-			function p1.cleanupUILessTooltip() --[[ Line: 264 ]]
+			function p1.cleanupUILessTooltip()
 				-- upvalues: p1 (copy)
 				if p1.uiLessTooltipTween then
 					p1.uiLessTooltipTween:Cancel()
@@ -224,19 +224,19 @@ function TopBarApp.init(p1) --[[ Line: 229 ]]
 				end
 				if IsMAXNUMUNIVERSESSHOWNAbove then
 					p1.setUILessTooltipVisible(true)
-					p1.uiLessTooltipTimer = task.delay(UILessTooltipDuration, function() --[[ Line: 293 ]]
+					p1.uiLessTooltipTimer = task.delay(UILessTooltipDuration, function()
 						-- upvalues: p1 (copy)
 						p1.fadeOutUILessTooltip()
 						p1.uiLessTooltipTimer = nil
 					end)
 				end
 			end
-			ContextActionService:BindCoreAction("ToggleUILess", function(_, UserInputState) --[[ Line: 300 ]]
+			ContextActionService:BindCoreAction("ToggleUILess", function(_, UserInputState)
 				-- upvalues: p1 (copy), FIntAddUILessModeVariant (upval), SettingsHubModule (upval), ConstantsModule (upval)
 				if UserInputState ~= Enum.UserInputState.Begin then return end
 				if p1.uiLessStore.getUILessModeEnabled(false) then
 					if FIntAddUILessModeVariant == 1 then
-						p1.uiLessStore.setUIVisible(function(Visibility): boolean --[[ Line: 307 ]]
+						p1.uiLessStore.setUIVisible(function(Visibility): boolean
 							-- upvalues: SettingsHubModule (upval), ConstantsModule (upval)
 							if Visibility == SettingsHubModule:GetVisibility() then
 								SettingsHubModule:PopMenu(false, true, ConstantsModule.AnalyticsMenuOpenTypes.Keyboard)
@@ -249,7 +249,7 @@ function TopBarApp.init(p1) --[[ Line: 229 ]]
 						return
 					end
 					if FIntAddUILessModeVariant == 2 then
-						p1.uiLessStore.setUIVisible(function(p2): boolean --[[ Line: 318 ]]
+						p1.uiLessStore.setUIVisible(function(p2): boolean
 							return not p2
 						end)
 						
@@ -270,11 +270,11 @@ function TopBarApp.init(p1) --[[ Line: 229 ]]
 	if FFlagTopBarSignalizeMenuOpen then
 		p1.tiltMenuOpen, p1.setTiltMenuOpen = RoactModule.createBinding(false)
 		p1.inspectMenuOpen, p1.setInspectMenuOpen = RoactModule.createBinding(false)
-		p1.inspectMenuDisposeEffect = SignalsModule.createEffect(function(p2) --[[ Line: 340 ]]
+		p1.inspectMenuDisposeEffect = SignalsModule.createEffect(function(p2)
 			-- upvalues: Stores (upval), p1 (copy)
 			p1.setInspectMenuOpen((Stores.GetInspectAndBuyStore(p2).getInspectAndBuyOpen(p2)))
 		end)
-		SettingsShowSignal:connect(function(p2) --[[ Line: 345 ]]
+		SettingsShowSignal:connect(function(p2)
 			-- upvalues: p1 (copy)
 			p1.setTiltMenuOpen(p2)
 		end)
@@ -287,23 +287,23 @@ function TopBarApp.init(p1) --[[ Line: 229 ]]
 		p1.ageRatingControlsVisible, p1.setAgeRatingControlsVisible = ReactModule.createBinding(true)
 		p1.ageRatingControlsWidth, p1.setAgeRatingControlsWidth = ReactModule.createBinding(0)
 		
-		function p1.onAgeRatingControlsSizeChanged(Frame) --[[ Line: 357 ]]
+		function p1.onAgeRatingControlsSizeChanged(Frame)
 			-- upvalues: p1 (copy)
 			p1.setAgeRatingControlsWidth(Frame.AbsoluteSize.X)
 		end
 		
-		function p1.onAgeRatingUnibarAreaChanged(p2, p3, p4) --[[ Line: 360 ]]
+		function p1.onAgeRatingUnibarAreaChanged(p2, p3, p4)
 			-- upvalues: p1 (copy), FFlagTopBarSignalizeKeepOutAreas (upval)
 			p1.setAgeRatingControlsWidth(p4.X);
 			(if FFlagTopBarSignalizeKeepOutAreas then p1.keepOutAreasStore.setKeepOutArea else p1.props.setKeepOutArea)(p2, p3, p4)
 		end
 		
-		function p1.onAgeRatingAreaChanged(Frame: Frame) --[[ Line: 367 ]]
+		function p1.onAgeRatingAreaChanged(Frame: Frame)
 			-- upvalues: FFlagTopBarSignalizeKeepOutAreas (upval), p1 (copy), ExperienceAgeRatingPolicyModule (upval)
 			(if FFlagTopBarSignalizeKeepOutAreas then p1.keepOutAreasStore.setKeepOutArea else p1.props.setKeepOutArea)(ExperienceAgeRatingPolicyModule.keepOutAreaId, if Frame then Frame.AbsolutePosition else Vector2.zero, if Frame then Frame.AbsoluteSize else Vector2.zero)
 		end
 	end
-	function p1:onCloseBtnStateChange(p2) --[[ Line: 379 ]]
+	function p1:onCloseBtnStateChange(p2)
 		-- upvalues: p1 (copy)
 		p1.setCloseButtonState(p2)
 	end
@@ -320,7 +320,7 @@ function TopBarApp.init(p1) --[[ Line: 229 ]]
 			p1.menuIconRef = RoactModule.createRef()
 		end
 		if FFlagEnableInExperienceShop1 and not EnabledResult then
-			p1.shopGlobalIconDisposeEffect = SignalsModule.createEffect(function(p2) --[[ Line: 398 ]]
+			p1.shopGlobalIconDisposeEffect = SignalsModule.createEffect(function(p2)
 				-- upvalues: InExperienceShopModule (upval), p1 (copy)
 				local GetShopGlobalIconStoreFunction = InExperienceShopModule.GetShopGlobalIconStore
 				
@@ -335,7 +335,7 @@ function TopBarApp.init(p1) --[[ Line: 229 ]]
 				end
 			end)
 			
-			function p1.onShopGlobalIconActivated() --[[ Line: 409 ]]
+			function p1.onShopGlobalIconActivated()
 				-- upvalues: FFlagCenterInExperienceShopWindow (upval), Chrome (upval), ServiceModule (copy), ConstantsModule1 (upval)
 				if FFlagCenterInExperienceShopWindow then
 					require(Chrome.Integrations.InExperienceShop.ShopWindowLayout).toggleInExperienceShopWindow()
@@ -347,7 +347,7 @@ function TopBarApp.init(p1) --[[ Line: 229 ]]
 			end
 			
 			p1.shopGlobalIconCleanup = InExperienceShopModule.initShopGlobalIcon and InExperienceShopModule.initShopGlobalIcon()
-			p1.shopIsActiveMappedSignal = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(ServiceModule:onIntegrationStatusChanged(), function() --[[ Line: 420 ]]
+			p1.shopIsActiveMappedSignal = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(ServiceModule:onIntegrationStatusChanged(), function()
 				-- upvalues: ServiceModule (copy), ConstantsModule1 (upval)
 				return ServiceModule:isWindowOpen(ConstantsModule1.IN_EXPERIENCE_SHOP_ID)
 			end)
@@ -356,13 +356,13 @@ function TopBarApp.init(p1) --[[ Line: 229 ]]
 	p1:setState({ chatVersion = TextChatService.ChatVersion })
 	
 	if not game:IsLoaded() then
-		game.Loaded:Connect(function() --[[ Line: 434 ]]
+		game.Loaded:Connect(function()
 			-- upvalues: p1 (copy), TextChatService (upval)
 			p1:setState({ chatVersion = TextChatService.ChatVersion })
 		end)
 	end
 	if FFlagShowSwitchServerButton1 then
-		p1.disposeSwitchServerEffect = SignalsModule.createEffect(function(p2) --[[ Line: 442 ]]
+		p1.disposeSwitchServerEffect = SignalsModule.createEffect(function(p2)
 			-- upvalues: GetSwitchServerStoreFunction (upval), p1 (copy)
 			local SwitchServerStore = GetSwitchServerStoreFunction(false)
 			p1:setState({
@@ -374,38 +374,38 @@ function TopBarApp.init(p1) --[[ Line: 229 ]]
 	end
 end
 
-function TopBarApp.didMount(p1) --[[ Line: 453 ]]
+function TopBarApp.didMount(p1)
 	-- upvalues: FFlagExperienceAgeRatingBadge (copy), GamepadConnectorModule (ref), FFlagAddUILessMode (copy), FIntAddUILessModeVariant (copy), SignalsModule (copy), VRService (copy), IsSpatialFunction (copy), EnabledFunction (copy), Chrome (copy), FFlagEnableInExperienceShop1 (copy), EnabledResult (copy), ConstantsModule1 (ref), FFlagEnableConsoleExpControls (copy)
 	if FFlagExperienceAgeRatingBadge then
 		if GamepadConnectorModule then
 			local ShowTopBar = GamepadConnectorModule:getShowTopBar()
-			p1.ageRatingVisibilityConnection = ShowTopBar:connect(function() --[[ Line: 457 ]]
+			p1.ageRatingVisibilityConnection = ShowTopBar:connect(function()
 				-- upvalues: p1 (copy), ShowTopBar (copy)
 				p1.setAgeRatingControlsVisible(ShowTopBar:get())
 			end, true)
 		end
 		if FFlagAddUILessMode and FIntAddUILessModeVariant ~= 0 and p1.uiLessStore then
-			p1.ageRatingVisibilityEffect = SignalsModule.createEffect(function(p2) --[[ Line: 462 ]]
+			p1.ageRatingVisibilityEffect = SignalsModule.createEffect(function(p2)
 				-- upvalues: p1 (copy)
 				if p1.uiLessStore.getUILessModeEnabled(p2) then
 					p1.setAgeRatingControlsVisible(p1.uiLessStore.getUIVisible(p2))
 				end
 			end)
 		end
-		p1.ageRatingSpatialConnection = VRService:GetPropertyChangedSignal("VREnabled"):Connect(function() --[[ Line: 468 ]]
+		p1.ageRatingSpatialConnection = VRService:GetPropertyChangedSignal("VREnabled"):Connect(function()
 			-- upvalues: p1 (copy), IsSpatialFunction (upval)
 			p1:setState({ ageRatingSpatial = IsSpatialFunction() })
 		end)
 	end
 	if EnabledFunction() then
 		local ServiceModule = require(Chrome.Service)
-		p1.orderAlignmentConnection = ServiceModule:orderAlignment():connect(function() --[[ Line: 474 ]]
+		p1.orderAlignmentConnection = ServiceModule:orderAlignment():connect(function()
 			-- upvalues: p1 (copy), ServiceModule (copy)
 			p1:setState({ unibarAlignment = ServiceModule:orderAlignment():get() })
 		end)
 		
 		if FFlagEnableInExperienceShop1 and not EnabledResult then
-			p1.shopIsActiveConnection = ServiceModule:onIntegrationStatusChanged():connect(function() --[[ Line: 481 ]]
+			p1.shopIsActiveConnection = ServiceModule:onIntegrationStatusChanged():connect(function()
 				-- upvalues: p1 (copy), ServiceModule (copy), ConstantsModule1 (upval)
 				p1:setState({
 					shopGlobalIconIsActive = ServiceModule:isWindowOpen(ConstantsModule1.IN_EXPERIENCE_SHOP_ID)
@@ -416,7 +416,7 @@ function TopBarApp.didMount(p1) --[[ Line: 453 ]]
 			if not IsSpatialFunction() then
 				p1.GamepadConnector:connectToTopbar()
 			end
-			p1.vrEnabledConnection = VRService:GetPropertyChangedSignal("VREnabled"):Connect(function() --[[ Line: 492 ]]
+			p1.vrEnabledConnection = VRService:GetPropertyChangedSignal("VREnabled"):Connect(function()
 				-- upvalues: IsSpatialFunction (upval), p1 (copy)
 				if IsSpatialFunction() then
 					p1.GamepadConnector:disconnectFromTopbar()
@@ -430,7 +430,7 @@ function TopBarApp.didMount(p1) --[[ Line: 453 ]]
 	end
 end
 
-function TopBarApp.willUnmount(p1) --[[ Line: 503 ]]
+function TopBarApp.willUnmount(p1)
 	-- upvalues: EnabledFunction (copy), FFlagEnableConsoleExpControls (copy), FFlagEnableInExperienceShop1 (copy), EnabledResult (copy), FFlagAddUILessMode (copy), FIntAddUILessModeVariant (copy), ContextActionService (copy), FFlagTopBarSignalizeMenuOpen (copy), FFlagTopBarSignalizeKeepOutAreas (copy), FFlagShowSwitchServerButton1 (copy)
 	if p1.ageRatingVisibilityConnection then
 		p1.ageRatingVisibilityConnection:disconnect()
@@ -495,9 +495,9 @@ function TopBarApp.willUnmount(p1) --[[ Line: 503 ]]
 	end
 end
 
-function TopBarApp.render(p1) --[[ Line: 578 ]]
+function TopBarApp.render(p1)
 	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy)
-	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 579 ]]
+	return WithFoundationOrUIBloxStyleFunction(function(p2)
 		return {
 			Theme = {
 				Overlay = {
@@ -536,13 +536,13 @@ function TopBarApp.render(p1) --[[ Line: 578 ]]
 				Semantic = { Radius = { Small = p2.Radius.Small } }
 			}
 		}
-	end, function(p2) --[[ Line: 630 ]]
+	end, function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithStyle(p2)
 	end)
 end
 
-function TopBarApp.renderUnibarFrame(p1, p2, IsEligible) --[[ Line: 635 ]]
+function TopBarApp.renderUnibarFrame(p1, p2, IsEligible)
 	-- upvalues: IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), FFlagEnableConsoleExpControls (copy), FFlagShowGameAgeRating1 (copy), ReactModule (copy), MenuIconContextModule (copy), UnibarModule (ref), FFlagAddTraversalBackButton (copy), FFlagTopBarSignalizeKeepOutAreas (copy), EnabledResult (copy), RoactModule (copy)
 	return if IsInExperienceUIVREnabled and IsSpatialFunction() then nil elseif FFlagEnableConsoleExpControls or FFlagShowGameAgeRating1 then ReactModule.createElement(MenuIconContextModule.Provider, {
 		value = {
@@ -553,7 +553,7 @@ function TopBarApp.renderUnibarFrame(p1, p2, IsEligible) --[[ Line: 635 ]]
 		ReactModule.createElement(UnibarModule, {
 			layoutOrder = 1,
 			onAreaChanged = if FFlagShowGameAgeRating1 and not FFlagAddTraversalBackButton then p1.onAgeRatingUnibarAreaChanged elseif FFlagTopBarSignalizeKeepOutAreas then p1.keepOutAreasStore.setKeepOutArea else p1.props.setKeepOutArea,
-			onMinWidthChanged = if EnabledResult then nil else function(XOffset) --[[ Line: 656 ]]
+			onMinWidthChanged = if EnabledResult then nil else function(XOffset)
 				-- upvalues: p1 (copy)
 				p1.setUnibarRightSidePosition(UDim2.new(0, XOffset, 0, 0))
 			end,
@@ -562,14 +562,14 @@ function TopBarApp.renderUnibarFrame(p1, p2, IsEligible) --[[ Line: 635 ]]
 	}) else RoactModule.createElement(UnibarModule, {
 		layoutOrder = 1,
 		onAreaChanged = if FFlagTopBarSignalizeKeepOutAreas then p1.keepOutAreasStore.setKeepOutArea else p1.props.setKeepOutArea,
-		onMinWidthChanged = if EnabledResult then nil else function(XOffset) --[[ Line: 671 ]]
+		onMinWidthChanged = if EnabledResult then nil else function(XOffset)
 			-- upvalues: p1 (copy)
 			p1.setUnibarRightSidePosition(UDim2.new(0, XOffset, 0, 0))
 		end
 	})
 end
 
-function TopBarApp.renderWithStyle(p1, p2) --[[ Line: 678 ]]
+function TopBarApp.renderWithStyle(p1, p2)
 	-- upvalues: EnabledFunction (copy), ExperienceAgeRatingPolicyModule (copy), FFlagExperienceAgeRatingBadge (copy), IsSpatialFunction (copy), ConstantsModule2 (copy), EnabledResult (copy), FFlagEnableInExperienceShop1 (copy), FFlagAppNavMyStatsTab (copy), BuildModeLaunchModule (copy), VRService (copy), ConstantsModule1 (ref), FFlagTopBarSignalizeMenuOpen (copy), TenFootInterfaceModule (copy), RoactModule (copy), VoiceStateContextModule (copy), VRBottomUnibarModule (copy), Default (copy), IsInExperienceUIVREnabled (copy), MenuIconModule (copy), FFlagEnableConsoleExpControls (copy), FFlagTopBarSignalizeKeepOutAreas (copy), SelectionCursorProvider (copy), FFlagEnablePlaytestModeUnibar (copy), PlaytestModeThemeProviderModule (copy), ReactModule (copy), View (copy), ExperienceAgeRatingBadgeModule (copy), FFlagTopBarSignalizeScreenSize (copy), ConnectionModule (copy), PlaytestModeTooltipModule (copy), FFlagEnableTeamTestLua (copy), UnpublishedPlaytestModeTooltip (copy), FFlagEnableUISelector (copy), CoreGuiCommonModule (copy), GamepadMenuModule (ref), FFlagAddMenuNavigationToggleDialog (ref), MenuNavigationToggleDialogModule (ref), FFlagGamepadNavigationDialogABTestModule (copy), GamepadNavigationDialogModule (copy), FFlagShowSwitchServerButton1 (copy), SwitchServerConfirmation (copy), UseNewHeadsetDisconnectDialog (copy), HeadsetDisconnectDialog (copy), HeadsetMenuModule (copy), KeepOutAreasHandlerModule (ref), HurtOverlayModule (copy), IsSideSheetEnabledModule (copy), IsNewTiltIconEnabledModule (copy), FFlagAddUILessMode (copy), FIntAddUILessModeVariant (copy), WithLocalizationFunction (copy), UnibarModule (ref), IsNewInGameMenuEnabledModule (copy), Interactable (copy), RobloxGui (copy), ControlState (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), CloseIngame (copy), ImageSetButton (copy), SongbirdModule (copy), JoinVoiceBinderModule (ref), GetFFlagEnableCrossExpVoiceFunction (copy), PartyMicBinderModule (copy), AnalyticsModule (ref), FFlagAddTraversalBackButton (copy), TraversalBackButtonModule (copy), ShopIconModule (ref), FFlagShowGameAgeRating1 (copy), EnabledResult1 (copy), HealthBarModule (copy), BuildPillMenuPortalHost (copy), ShopGlobalIcon (copy), FFlagExperienceShopNewIconography (copy), Callback (ref), ChatIconModule (copy), MoreMenuModule (copy)
 	local EnabledResult2 = EnabledFunction()
 	local Right = if p1.state.unibarAlignment == nil then Enum.HorizontalAlignment.Right else p1.state.unibarAlignment
@@ -590,7 +590,7 @@ function TopBarApp.renderWithStyle(p1, p2) --[[ Line: 678 ]]
 		ScaledScreenSideOffset = ConstantsModule2.ScreenSideOffsetTenFoot
 		ScaledTopBarHeight = ConstantsModule2.TopBarHeightTenFoot
 	end
-	local MapResult = if FFlagTopBarSignalizeMenuOpen then RoactModule.joinBindings({ p1.tiltMenuOpen, p1.inspectMenuOpen }):map(function(Entry): boolean --[[ Line: 719 ]]
+	local MapResult = if FFlagTopBarSignalizeMenuOpen then RoactModule.joinBindings({ p1.tiltMenuOpen, p1.inspectMenuOpen }):map(function(Entry): boolean
 		return not (Entry[0] or Entry[1])
 	end) else not (p1.props.menuOpen or p1.props.inspectMenuOpen)
 	local _UDim2 = UDim2.new(0, 0, 0, ScaledTopBarTopMargin)
@@ -600,7 +600,7 @@ function TopBarApp.renderWithStyle(p1, p2) --[[ Line: 678 ]]
 	local _UDim2_3 = UDim2.new(1, -ScaledScreenSideOffset, 0, ScaledTopBarTopMargin)
 	local _UDim2_4 = UDim2.new(0, 0, 0.5, 0)
 	local Element = RoactModule.createElement(VoiceStateContextModule.Provider, {}, {
-		VRBottomBar = VoiceStateContextModule.withVoiceState(function(p3) --[[ Line: 732 ]]
+		VRBottomBar = VoiceStateContextModule.withVoiceState(function(p3)
 			-- upvalues: RoactModule (upval), VRBottomUnibarModule (upval), Default (upval), IsInExperienceUIVREnabled (upval), p1 (copy)
 			return RoactModule.createElement(VRBottomUnibarModule, {
 				voiceChatServiceManager = Default,
@@ -630,7 +630,7 @@ function TopBarApp.renderWithStyle(p1, p2) --[[ Line: 678 ]]
 		LayoutOrder = 3,
 		Size = UDim2.fromOffset(0, ConstantsModule2.TopBarButtonHeight * p1.state.UiScale),
 		padding = if EnabledResult then {
-			left = p1.ageRatingControlsVisible:map(function(p3): UDim --[[ Line: 775 ]]
+			left = p1.ageRatingControlsVisible:map(function(p3): UDim
 				-- upvalues: ScaledTopBarPadding (copy)
 				return UDim.new(0, if p3 then ScaledTopBarPadding else 0)
 			end)
@@ -647,7 +647,7 @@ function TopBarApp.renderWithStyle(p1, p2) --[[ Line: 678 ]]
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
 		AutoLocalize = false,
 		DisplayOrder = 6,
-		[RoactModule.Change.AbsoluteSize] = if FFlagTopBarSignalizeScreenSize then nil else function(Frame) --[[ Line: 798 ]]
+		[RoactModule.Change.AbsoluteSize] = if FFlagTopBarSignalizeScreenSize then nil else function(Frame)
 			-- upvalues: p1 (copy)
 			p1.props.setScreenSize(Frame.AbsoluteSize)
 		end
@@ -683,7 +683,7 @@ function TopBarApp.renderWithStyle(p1, p2) --[[ Line: 678 ]]
 		UILessTooltip = if FFlagAddUILessMode and FIntAddUILessModeVariant ~= 0 then WithLocalizationFunction({
 			uiLessTooltipTitle = ConstantsModule2.LocalizedKeys.UILessTooltipTitle,
 			uiLessTooltipDescription = ConstantsModule2.LocalizedKeys.UILessTooltipDescription
-		})(function(p3) --[[ Line: 870 ]]
+		})(function(p3)
 			-- upvalues: RoactModule (upval), p2 (copy), ScaledScreenSideOffset (ref), ScaledTopBarTopMargin (copy), p1 (copy)
 			return RoactModule.createElement("Frame", {
 				BackgroundColor3 = p2.Tokens.Color.Extended.White.White_100.Color3,
@@ -743,7 +743,7 @@ function TopBarApp.renderWithStyle(p1, p2) --[[ Line: 678 ]]
 				AnchorPoint = Vector2.new(0, 0.5),
 				Size = UDim2.new(0, ScaledLegacyCloseMenuIconSize, 0, ScaledLegacyCloseMenuIconSize),
 				BackgroundColor3 = p2.Theme.Overlay.Color,
-				[RoactModule.Event.Activated] = function() --[[ Line: 934 ]]
+				[RoactModule.Event.Activated] = function()
 					-- upvalues: RobloxGui (upval)
 					require(RobloxGui.Modules.Settings.SettingsHub):ToggleVisibility()
 				end
@@ -769,11 +769,11 @@ function TopBarApp.renderWithStyle(p1, p2) --[[ Line: 678 ]]
 				}),
 				StateOverlayRound = if EnabledResult2 then nil else RoactModule.createElement("Frame", {
 					ZIndex = 2,
-					BackgroundTransparency = p1.closeButtonState:map(function(Hover) --[[ Line: 964 ]]
+					BackgroundTransparency = p1.closeButtonState:map(function(Hover)
 						-- upvalues: ControlState (upval), p2 (copy)
 						return if Hover == ControlState.Pressed then p2.Theme.BackgroundOnPress.Transparency elseif Hover == ControlState.Hover then p2.Theme.BackgroundOnHover.Transparency else 1
 					end),
-					BackgroundColor3 = p1.closeButtonState:map(function(Hover) --[[ Line: 973 ]]
+					BackgroundColor3 = p1.closeButtonState:map(function(Hover)
 						-- upvalues: ControlState (upval), p2 (copy)
 						return if Hover == ControlState.Pressed then p2.Theme.BackgroundOnPress.Color elseif Hover == ControlState.Hover then p2.Theme.BackgroundOnHover.Color else Color3.new(1, 1, 1)
 					end),
@@ -788,7 +788,7 @@ function TopBarApp.renderWithStyle(p1, p2) --[[ Line: 678 ]]
 				AnchorPoint = Vector2.new(0, 0.5),
 				Size = UDim2.new(0, ScaledLegacyCloseMenuIconSize, 0, ScaledLegacyCloseMenuIconSize),
 				Image = CloseIngame,
-				onActivated = function() --[[ Line: 998 ]]
+				onActivated = function()
 					-- upvalues: RobloxGui (upval)
 					require(RobloxGui.Modules.Settings.SettingsHub):ToggleVisibility()
 				end
@@ -799,7 +799,7 @@ function TopBarApp.renderWithStyle(p1, p2) --[[ Line: 678 ]]
 				AnchorPoint = Vector2.new(0, 0.5),
 				Size = UDim2.new(0, ScaledLegacyCloseMenuIconSize, 0, ScaledLegacyCloseMenuIconSize),
 				Image = CloseIngame,
-				[RoactModule.Event.Activated] = function() --[[ Line: 1010 ]]
+				[RoactModule.Event.Activated] = function()
 					-- upvalues: RobloxGui (upval)
 					require(RobloxGui.Modules.Settings.SettingsHub):ToggleVisibility()
 				end
@@ -818,7 +818,7 @@ function TopBarApp.renderWithStyle(p1, p2) --[[ Line: 678 ]]
 			Padding = RoactModule.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, ScaledPaddingTop),
 				PaddingBottom = UDim.new(0, ScaledPaddingBottom),
-				PaddingLeft = if IsEligible then p1.ageRatingControlsVisible:map(function(p3): UDim --[[ Line: 1039 ]]
+				PaddingLeft = if IsEligible then p1.ageRatingControlsVisible:map(function(p3): UDim
 					-- upvalues: ScaledPaddingLeft (copy), ScaledScreenSideOffset (ref)
 					return UDim.new(0, if p3 then ScaledPaddingLeft else 2 * ScaledScreenSideOffset)
 				end) else UDim.new(0, ScaledPaddingLeft)
@@ -853,7 +853,7 @@ function TopBarApp.renderWithStyle(p1, p2) --[[ Line: 678 ]]
 				Position = if IsEligible and not EnabledResult then RoactModule.joinBindings({
 					width = p1.ageRatingControlsWidth,
 					visible = p1.ageRatingControlsVisible
-				}):map(function(p3): UDim2 --[[ Line: 1105 ]]
+				}):map(function(p3): UDim2
 					-- upvalues: FFlagAddTraversalBackButton (upval)
 					return UDim2.fromOffset(if FFlagAddTraversalBackButton or p3.visible then p3.width else 0, 0)
 				end) else p1.unibarRightSidePosition,
@@ -863,7 +863,7 @@ function TopBarApp.renderWithStyle(p1, p2) --[[ Line: 678 ]]
 					PaddingLeft = if IsEligible and not EnabledResult then RoactModule.joinBindings({
 						visible = p1.ageRatingControlsVisible,
 						width = p1.ageRatingControlsWidth
-					}):map(function(p3): UDim --[[ Line: 1116 ]]
+					}):map(function(p3): UDim
 						-- upvalues: FFlagAddTraversalBackButton (upval), ScaledTopBarPadding1 (copy)
 						local Visible = p3.visible or FFlagAddTraversalBackButton and p3.width > 0
 						
@@ -988,7 +988,7 @@ function TopBarApp.renderWithStyle(p1, p2) --[[ Line: 678 ]]
 	})
 end
 
-local function mapStateToProps(p1) --[[ Line: 1260 ]]
+local function mapStateToProps(p1)
 	-- upvalues: FFlagTopBarSignalizeMenuOpen (copy)
 	return if FFlagTopBarSignalizeMenuOpen then nil else {
 		menuOpen = p1.displayOptions.menuOpen,
@@ -996,24 +996,24 @@ local function mapStateToProps(p1) --[[ Line: 1260 ]]
 	}
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(if FFlagTopBarSignalizeMenuOpen then nil else mapStateToProps, function(Callback) --[[ Line: 1285 | Named "mapDispatchToProps" ]]
+return RoactRoduxModule.UNSTABLE_connect2(if FFlagTopBarSignalizeMenuOpen then nil else mapStateToProps, function(Callback)
 	-- upvalues: FFlagTopBarSignalizeScreenSize (copy), SetScreenSizeModule (copy), FFlagTopBarSignalizeKeepOutAreas (copy), SetKeepOutAreaModule (copy), RemoveKeepOutAreaModule (copy)
 	return {
-		setScreenSize = if FFlagTopBarSignalizeScreenSize then nil else function(p1) --[[ Line: 1289 ]]
+		setScreenSize = if FFlagTopBarSignalizeScreenSize then nil else function(p1)
 			-- upvalues: Callback (copy), SetScreenSizeModule (upval)
 			return Callback(SetScreenSizeModule(p1))
 		end,
-		setKeepOutArea = if FFlagTopBarSignalizeKeepOutAreas then nil else function(p1, p2, p3) --[[ Line: 1294 ]]
+		setKeepOutArea = if FFlagTopBarSignalizeKeepOutAreas then nil else function(p1, p2, p3)
 			-- upvalues: Callback (copy), SetKeepOutAreaModule (upval)
 			return Callback(SetKeepOutAreaModule(p1, p2, p3))
 		end,
-		removeKeepOutArea = if FFlagTopBarSignalizeKeepOutAreas then nil else function(p1) --[[ Line: 1299 ]]
+		removeKeepOutArea = if FFlagTopBarSignalizeKeepOutAreas then nil else function(p1)
 			-- upvalues: Callback (copy), RemoveKeepOutAreaModule (upval)
 			return Callback(RemoveKeepOutAreaModule(p1))
 		end
 	}
-end)(if FFlagShowGameAgeRating then UniversalAppPolicyModule.UniversalAppPolicy.connect(function(p1, _) --[[ Line: 1274 ]]
+end)(if FFlagShowGameAgeRating then UniversalAppPolicyModule.UniversalAppPolicy.connect(function(p1, _)
 	return { showGameAgeRating = p1.getShowGameAgeRating() }
-end)(TopBarApp) else TopBarAppPolicyModule.connect(function(p1, _) --[[ Line: 1279 ]]
+end)(TopBarApp) else TopBarAppPolicyModule.connect(function(p1, _)
 	return { showGameAgeRating = p1.showBadgeOver12() }
 end)(TopBarApp))

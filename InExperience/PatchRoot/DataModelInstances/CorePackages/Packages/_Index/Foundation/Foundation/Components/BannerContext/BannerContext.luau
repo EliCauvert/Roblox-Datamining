@@ -12,7 +12,7 @@ local config = {
 	presentation = require(Foundation.Enums.BannerContextPresentation).Inline
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 42 | Named "BannerContext" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseBannerContextVariantsModule (copy), ReactModule (copy), InternalNoticeModule (copy), WithCommonPropsModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	

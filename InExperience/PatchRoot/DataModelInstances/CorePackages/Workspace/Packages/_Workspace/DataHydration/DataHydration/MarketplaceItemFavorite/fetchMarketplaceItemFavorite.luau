@@ -6,12 +6,12 @@ local GetLocalPlayerUserIdFunction = require(DataHydration.DataHydrationUtils).g
 local _ = require(script.Parent.MarketplaceItemFavoriteStoreTypes)
 local MarketplaceItemFavoriteUrlBuilderModule = require(script.Parent.MarketplaceItemFavoriteUrlBuilder)
 
-return function(p1, p2) --[[ Line: 14 | Named "fetchMarketplaceItemFavorite" ]]
+return function(p1, p2)
 	-- upvalues: GetLocalPlayerUserIdFunction (copy), PromiseModule (copy), MarketplaceItemFavoriteUrlBuilderModule (copy), HttpRequestModule (copy)
 	local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
 	
 	return if LocalPlayerUserId then HttpRequestModule.config({
-		requestFunction = function(p3, p4, p5) --[[ Line: 26 ]]
+		requestFunction = function(p3, p4, p5)
 			-- upvalues: HttpRequestModule (upval)
 			return HttpRequestModule.requestFunctions.HttpRbxApi(p3, p4, p5)
 		end

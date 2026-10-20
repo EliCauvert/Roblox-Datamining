@@ -3,7 +3,7 @@ local MagicMockModule = require(Parent.MagicMock)
 local SpyModule = require(Parent.Spy)
 local GetCallsModule = require(Parent.getCalls)
 
-return function(p1, Count: number) --[[ Line: 6 ]]
+return function(p1, Count: number)
 	-- upvalues: MagicMockModule (copy), SpyModule (copy), GetCallsModule (copy)
 	if not MagicMockModule.is(p1) and not SpyModule.is(p1) then
 		return {

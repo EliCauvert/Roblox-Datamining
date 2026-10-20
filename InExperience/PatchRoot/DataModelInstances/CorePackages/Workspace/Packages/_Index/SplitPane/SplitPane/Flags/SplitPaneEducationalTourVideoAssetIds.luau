@@ -1,4 +1,4 @@
-﻿local function _(Text: string, p1): string --[[ Line: 3 | Named "toVideoAssetId" ]]
+﻿local function _(Text: string, p1): string
 	return "rbxassetid://" .. (string.match(Text, "^%s*(%d+)%s*$") or (string.match(Text, "^%s*rbxassetid://(%d+)%s*$") or p1))
 end
 

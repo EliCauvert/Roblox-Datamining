@@ -1,6 +1,6 @@
 ﻿local Frame = nil
 local CreateTemporaryOverlayModule = {
-	hideOverlay = function() --[[ Line: 12 ]]
+	hideOverlay = function()
 		-- upvalues: Frame (ref)
 		if Frame then
 			Frame:Destroy()
@@ -9,7 +9,7 @@ local CreateTemporaryOverlayModule = {
 	end
 }
 
-function CreateTemporaryOverlayModule.showOverlay(Text, Duration, Parent) --[[ Line: 25 ]]
+function CreateTemporaryOverlayModule.showOverlay(Text, Duration, Parent)
 	-- upvalues: CreateTemporaryOverlayModule (copy), Frame (ref)
 	CreateTemporaryOverlayModule.hideOverlay()
 	local TextOverlay = Instance.new("Frame")
@@ -35,7 +35,7 @@ function CreateTemporaryOverlayModule.showOverlay(Text, Duration, Parent) --[[ L
 	OverlayLabel.ZIndex = 200
 	TextOverlay.Parent = Parent
 	Frame = TextOverlay
-	task.spawn(function() --[[ Line: 66 ]]
+	task.spawn(function()
 		-- upvalues: Duration (copy), Frame (upval), TextOverlay (copy), CreateTemporaryOverlayModule (upval)
 		task.wait(Duration)
 		

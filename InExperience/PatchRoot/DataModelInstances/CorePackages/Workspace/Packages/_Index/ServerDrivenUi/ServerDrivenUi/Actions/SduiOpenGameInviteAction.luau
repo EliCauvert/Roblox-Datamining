@@ -6,7 +6,7 @@ local GameInviteModule = require(Parent.GameInvite)
 local GameInviteModalManager = GameInviteModule.GameInviteModalManager
 local GameInviteAnalyticsManager = GameInviteModule.GameInviteAnalyticsManager
 
-return function(p1, _, p2) --[[ Line: 16 ]]
+return function(p1, _, p2)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), GameInviteAnalyticsManager (copy), GameInviteModalManager (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	

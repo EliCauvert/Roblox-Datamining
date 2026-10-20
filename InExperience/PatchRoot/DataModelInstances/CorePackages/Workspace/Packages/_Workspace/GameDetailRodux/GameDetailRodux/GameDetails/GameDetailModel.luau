@@ -3,12 +3,12 @@ local _DateTime = require(Parent.Time).DateTime
 local GetZendeskUrlFunction = require(Parent.DiscoveryUtils).getZendeskUrl
 local FFlagLuaAppEdpNonSduiBuildAttribution = require(Parent.SharedFlags).FFlagLuaAppEdpNonSduiBuildAttribution
 local GameDetailModelModule = {
-	new = function() --[[ Line: 53 ]]
+	new = function()
 		return {}
 	end
 }
 
-function GameDetailModelModule.mock(Id, Name, p1) --[[ Line: 59 ]]
+function GameDetailModelModule.mock(Id, Name, p1)
 	-- upvalues: GameDetailModelModule (copy), _DateTime (copy)
 	local NewGameDetailModel = GameDetailModelModule.new()
 	local NewResult = _DateTime.new()
@@ -42,7 +42,7 @@ function GameDetailModelModule.mock(Id, Name, p1) --[[ Line: 59 ]]
 	return NewGameDetailModel
 end
 
-function GameDetailModelModule.fromJsonData(p1) --[[ Line: 93 ]]
+function GameDetailModelModule.fromJsonData(p1)
 	-- upvalues: GameDetailModelModule (copy), GetZendeskUrlFunction (copy), FFlagLuaAppEdpNonSduiBuildAttribution (copy)
 	local NewGameDetailModel = GameDetailModelModule.new()
 	NewGameDetailModel.id = tostring(p1.id)

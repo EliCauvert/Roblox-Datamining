@@ -5,9 +5,9 @@ local GetOtherParticipantsModule = require(AppChat.Conversations.getOtherPartici
 local _ = require(AppChat.Models.ConversationChannels)
 local FriendConversationCreatedModule = require(AppChat.Conversations.Actions.FriendConversationCreated)
 
-return function(OldFriendConversationId, p1) --[[ Line: 9 | Named "createFriendConversation" ]]
+return function(OldFriendConversationId, p1)
 	-- upvalues: NewResult (copy), GetOtherParticipantsModule (copy), CreateConversationModule (copy), FriendConversationCreatedModule (copy)
-	return function(p2) --[[ Line: 10 ]]
+	return function(p2)
 		-- upvalues: OldFriendConversationId (copy), NewResult (upval), GetOtherParticipantsModule (upval), CreateConversationModule (upval), p1 (copy), FriendConversationCreatedModule (upval)
 		local State = p2:getState()
 		local Conversation = State.ChatAppReducer.Conversations[OldFriendConversationId]
@@ -24,7 +24,7 @@ return function(OldFriendConversationId, p1) --[[ Line: 9 | Named "createFriendC
 			
 			return
 		else
-			return p2:dispatch(CreateConversationModule("one_to_one", { (tostring(OtherParticipantsModule[1])) }, p1, "userSentMessageToFriendPlaceholder")):tap(function(p3) --[[ Line: 41 ]]
+			return p2:dispatch(CreateConversationModule("one_to_one", { (tostring(OtherParticipantsModule[1])) }, p1, "userSentMessageToFriendPlaceholder")):tap(function(p3)
 				-- upvalues: p2 (copy), FriendConversationCreatedModule (upval), OldFriendConversationId (upval)
 				p2:dispatch(FriendConversationCreatedModule({
 					newConversationId = p3.id,

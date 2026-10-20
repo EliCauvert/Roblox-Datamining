@@ -9,7 +9,7 @@ local List = FoundationModule.List
 local InputSize = FoundationModule.Enums.InputSize
 local Frozen = table.freeze({})
 
-return ReactModule.memo(function(p1) --[[ Line: 38 | Named "SduiListRoot" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: Frozen (copy), SduiBuilder (copy), SduiErrors (copy), GetSduiComponentWrapperFunction (copy), ReactModule (copy), List (copy), InputSize (copy)
 	local Elements = {}
 	

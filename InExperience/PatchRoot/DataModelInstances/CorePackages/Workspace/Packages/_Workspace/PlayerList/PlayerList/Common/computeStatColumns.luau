@@ -1,15 +1,15 @@
 ﻿local _ = require(script.Parent.Parent.Parent.LeaderboardStore)
 
-return function(p1, p2) --[[ Line: 19 | Named "computeStatColumns" ]]
+return function(p1, p2)
 	if not p1 then
 		return {}
 	end
 	local List = {}
-	p1.iterateData(function(Name, p3) --[[ Line: 25 ]]
+	p1.iterateData(function(Name, p3)
 		-- upvalues: List (copy)
 		table.insert(List, { name = Name, order = p3.order(false) })
 	end, false)
-	table.sort(List, function(A, B): boolean --[[ Line: 29 ]]
+	table.sort(List, function(A, B): boolean
 		return A.order < B.order
 	end)
 	local List1 = {}

@@ -61,14 +61,14 @@ MoreMenu.validateProps = TModule.strictInterface({
 	removeKeepOutArea = if FFlagTopBarSignalizeKeepOutAreas then nil else TModule.callback
 })
 
-function MoreMenu.init(p1) --[[ Line: 110 ]]
+function MoreMenu.init(p1)
 	-- upvalues: RoactModule (copy), v1 (copy), AnalyticsModule (copy), SignalsModule (copy), DisplayModule (copy), FFlagMountCoreGuiBackpackModule (copy), StarterGui (copy), FFlagTopBarSignalizeKeepOutAreas (copy), CoreGuiCommonModule (copy), FFlagTopBarSignalizeScreenSize (copy)
 	p1.rootRef = RoactModule.createRef()
 	
 	if v1 then
 		p1.analytics = AnalyticsModule.default
 	end
-	p1.disposeUiScaleEffect = SignalsModule.createEffect(function(p2) --[[ Line: 115 ]]
+	p1.disposeUiScaleEffect = SignalsModule.createEffect(function(p2)
 		-- upvalues: DisplayModule (upval), p1 (copy)
 		p1:setState({
 			UiScale = DisplayModule.GetDisplayStore(p2).getUIScale(p2)
@@ -80,7 +80,7 @@ function MoreMenu.init(p1) --[[ Line: 110 ]]
 			vrShowMenuIcon = false,
 			mountBackpack = StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.Backpack)
 		})
-		StarterGui.CoreGuiChangedSignal:Connect(function(CoreGuiType, MountBackpack) --[[ Line: 128 ]]
+		StarterGui.CoreGuiChangedSignal:Connect(function(CoreGuiType, MountBackpack)
 			-- upvalues: p1 (copy)
 			if CoreGuiType == Enum.CoreGuiType.Backpack or CoreGuiType == Enum.CoreGuiType.All then
 				p1:setState({ mountBackpack = MountBackpack })
@@ -92,7 +92,7 @@ function MoreMenu.init(p1) --[[ Line: 110 ]]
 	p1.chatWasHidden = false
 	p1.boundAction = false
 	
-	function p1.moreButtonActivated() --[[ Line: 145 ]]
+	function p1.moreButtonActivated()
 		-- upvalues: p1 (copy)
 		p1.props.setMoreMenuOpen(not p1.props.moreMenuOpen)
 		
@@ -106,14 +106,14 @@ function MoreMenu.init(p1) --[[ Line: 110 ]]
 	end
 	if FFlagTopBarSignalizeScreenSize then
 		local GetViewportSizeFunction = DisplayModule.GetDisplayStore(false).getViewportSize
-		p1.disposeScreenSize = SignalsModule.createEffect(function(p2) --[[ Line: 159 ]]
+		p1.disposeScreenSize = SignalsModule.createEffect(function(p2)
 			-- upvalues: p1 (copy), GetViewportSizeFunction (copy)
 			p1:setState({ screenSize = GetViewportSizeFunction(p2) })
 		end)
 	end
 end
 
-function MoreMenu.willUnmount(p1) --[[ Line: 167 ]]
+function MoreMenu.willUnmount(p1)
 	-- upvalues: FFlagTopBarSignalizeScreenSize (copy)
 	if FFlagTopBarSignalizeScreenSize then
 		p1.disposeScreenSize()
@@ -123,7 +123,7 @@ function MoreMenu.willUnmount(p1) --[[ Line: 167 ]]
 	end
 end
 
-function MoreMenu.renderWithStyle(p1, p2) --[[ Line: 176 ]]
+function MoreMenu.renderWithStyle(p1, p2)
 	-- upvalues: RobloxTranslatorModule (copy), VRService (copy), RobloxGui (copy), PlayerListManagerModule (copy), IconsControlsEmoteOn (copy), IconsControlsEmoteOff (copy), ConstantsModule1 (copy), EmotesMenuMasterModule (copy), ChatSelectorModule (copy), FFlagMountCoreGuiBackpackModule (copy), FFlagEnableNewBackpack (copy), Features (copy), BackpackScriptModule (copy), FFlagTopBarSignalizeScreenSize (copy), TenFootInterfaceModule (copy), FFlagTopBarSignalizeKeepOutAreas (copy), ConstantsModule (copy), RoactModule (copy), IconButtonModule (copy), ContextualMenu (copy), MenuDirection (copy), ExternalEventConnection (copy), VRHub (copy)
 	local List = {}
 	local Flag = false
@@ -132,7 +132,7 @@ function MoreMenu.renderWithStyle(p1, p2) --[[ Line: 176 ]]
 		table.insert(List, {
 			icon = if p1.props.leaderboardOpen then "rbxasset://textures/ui/TopBar/leaderboardOn.png" else "rbxasset://textures/ui/TopBar/leaderboardOff.png",
 			text = RobloxTranslatorModule:FormatByKey("CoreScripts.TopBar.Leaderboard"),
-			onActivated = function() --[[ Line: 189 ]]
+			onActivated = function()
 				-- upvalues: p1 (copy), VRService (upval), RobloxGui (upval), PlayerListManagerModule (upval)
 				local LeaderboardOpen = p1.props.leaderboardOpen
 				
@@ -154,7 +154,7 @@ function MoreMenu.renderWithStyle(p1, p2) --[[ Line: 176 ]]
 		table.insert(List, {
 			icon = if p1.props.emotesOpen then IconsControlsEmoteOn else IconsControlsEmoteOff,
 			text = RobloxTranslatorModule:FormatByKey("CoreScripts.TopBar.Emotes"),
-			onActivated = function() --[[ Line: 217 ]]
+			onActivated = function()
 				-- upvalues: EmotesMenuMasterModule (upval), p1 (copy), ChatSelectorModule (upval)
 				if EmotesMenuMasterModule:isOpen() then
 					EmotesMenuMasterModule:close()
@@ -178,7 +178,7 @@ function MoreMenu.renderWithStyle(p1, p2) --[[ Line: 176 ]]
 		table.insert(List, {
 			icon = if p1.props.backpackOpen then "rbxasset://textures/ui/TopBar/inventoryOn.png" else "rbxasset://textures/ui/TopBar/inventoryOff.png",
 			text = RobloxTranslatorModule:FormatByKey("CoreScripts.TopBar.Inventory"),
-			onActivated = function() --[[ Line: 252 ]]
+			onActivated = function()
 				-- upvalues: FFlagEnableNewBackpack (upval), Features (upval), p1 (copy), BackpackScriptModule (upval)
 				if FFlagEnableNewBackpack then
 					Features.toggleVisibility(Features.FeatureName.Backpack)
@@ -206,7 +206,7 @@ function MoreMenu.renderWithStyle(p1, p2) --[[ Line: 176 ]]
 	local MoreOnPng: string = if p1.props.moreMenuOpen then "rbxasset://textures/ui/TopBar/moreOn.png" else "rbxasset://textures/ui/TopBar/moreOff.png"
 	local NoVREnabled: boolean = not TenFootInterfaceModule:IsEnabled() and (p1.props.topBarEnabled and (Flag and not VRService.VREnabled))
 	
-	local function v52(Frame: Frame) --[[ Line: 288 ]]
+	local function v52(Frame: Frame)
 		-- upvalues: NoVREnabled (copy), FFlagTopBarSignalizeKeepOutAreas (upval), p1 (copy), ConstantsModule (upval)
 		if NoVREnabled and Frame then
 			if FFlagTopBarSignalizeKeepOutAreas then
@@ -259,7 +259,7 @@ function MoreMenu.renderWithStyle(p1, p2) --[[ Line: 176 ]]
 				openPositionY = UDim.new(0, ConstantsModule.TopBarHeight * p1.state.UiScale + 12),
 				background = p2.Theme.BackgroundUIContrast,
 				screenSize = ScreenSize,
-				onDismiss = function() --[[ Line: 342 ]]
+				onDismiss = function()
 					-- upvalues: p1 (copy), PlayerListManagerModule (upval)
 					p1.props.setMoreMenuOpen(false)
 					PlayerListManagerModule:SetMinimized(false)
@@ -268,7 +268,7 @@ function MoreMenu.renderWithStyle(p1, p2) --[[ Line: 176 ]]
 		}),
 		ShowTopBarListener = RoactModule.createElement(ExternalEventConnection, {
 			event = VRHub.ShowTopBarChanged.Event,
-			callback = function() --[[ Line: 350 ]]
+			callback = function()
 				-- upvalues: p1 (copy), VRService (upval), VRHub (upval), Flag (ref)
 				p1:setState({
 					vrShowMenuIcon = VRService.VREnabled and (VRHub.ShowTopBar and Flag)
@@ -278,18 +278,18 @@ function MoreMenu.renderWithStyle(p1, p2) --[[ Line: 176 ]]
 	})
 end
 
-function MoreMenu.render(p1) --[[ Line: 359 ]]
+function MoreMenu.render(p1)
 	-- upvalues: WithStyleFunction (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 360 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithStyle(p2)
 	end)
 end
 
-function MoreMenu.updateActionBound(p1) --[[ Line: 365 ]]
+function MoreMenu.updateActionBound(p1)
 	-- upvalues: ContextActionService (copy)
 	if p1.props.moreMenuOpen then
-		ContextActionService:BindCoreAction("CloseMoreMenuAction", function(_, UserInputState, _) --[[ Line: 367 ]]
+		ContextActionService:BindCoreAction("CloseMoreMenuAction", function(_, UserInputState, _)
 			-- upvalues: p1 (copy)
 			if UserInputState == Enum.UserInputState.Begin then
 				p1.props.setMoreMenuOpen(false)
@@ -309,7 +309,7 @@ function MoreMenu.updateActionBound(p1) --[[ Line: 365 ]]
 	end
 end
 
-function MoreMenu.didUpdate(p1, p2, _) --[[ Line: 383 ]]
+function MoreMenu.didUpdate(p1, p2, _)
 	-- upvalues: PlayerListManagerModule (copy), FFlagTopBarSignalizeScreenSize (copy), ChatSelectorModule (copy)
 	if p1.props.moreMenuOpen ~= p2.moreMenuOpen then
 		PlayerListManagerModule:SetMinimized(p1.props.moreMenuOpen)
@@ -330,7 +330,7 @@ function MoreMenu.didUpdate(p1, p2, _) --[[ Line: 383 ]]
 	end
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p1) --[[ Line: 404 | Named "mapStateToProps" ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p1)
 	-- upvalues: FFlagTopBarSignalizeScreenSize (copy), FFlagMountCoreGuiBackpackModule (copy)
 	return {
 		screenSize = if FFlagTopBarSignalizeScreenSize then nil else p1.displayOptions.screenSize,
@@ -344,18 +344,18 @@ return RoactRoduxModule.UNSTABLE_connect2(function(p1) --[[ Line: 404 | Named "m
 		backpackOpen = p1.moreMenu.backpackOpen,
 		emotesOpen = p1.moreMenu.emotesOpen
 	}
-end, function(Callback) --[[ Line: 422 | Named "mapDispatchToProps" ]]
+end, function(Callback)
 	-- upvalues: SetMoreMenuOpenModule (copy), FFlagTopBarSignalizeKeepOutAreas (copy), SetKeepOutAreaModule (copy), RemoveKeepOutAreaModule (copy)
 	return {
-		setMoreMenuOpen = function(p1) --[[ Line: 424 ]]
+		setMoreMenuOpen = function(p1)
 			-- upvalues: Callback (copy), SetMoreMenuOpenModule (upval)
 			return Callback(SetMoreMenuOpenModule(p1))
 		end,
-		setKeepOutArea = if FFlagTopBarSignalizeKeepOutAreas then nil else function(p1, p2, p3) --[[ Line: 429 ]]
+		setKeepOutArea = if FFlagTopBarSignalizeKeepOutAreas then nil else function(p1, p2, p3)
 			-- upvalues: Callback (copy), SetKeepOutAreaModule (upval)
 			return Callback(SetKeepOutAreaModule(p1, p2, p3))
 		end,
-		removeKeepOutArea = if FFlagTopBarSignalizeKeepOutAreas then nil else function(p1) --[[ Line: 434 ]]
+		removeKeepOutArea = if FFlagTopBarSignalizeKeepOutAreas then nil else function(p1)
 			-- upvalues: Callback (copy), RemoveKeepOutAreaModule (upval)
 			return Callback(RemoveKeepOutAreaModule(p1))
 		end

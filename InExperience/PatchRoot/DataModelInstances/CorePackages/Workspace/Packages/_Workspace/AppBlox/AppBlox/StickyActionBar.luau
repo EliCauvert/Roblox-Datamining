@@ -31,24 +31,24 @@ StickyActionBar.defaultProps = {
 	width = nil
 }
 
-function StickyActionBar.init(p1) --[[ Line: 77 ]]
+function StickyActionBar.init(p1)
 	-- upvalues: GetTextSizeFunction (copy)
 	p1.state = { containerWidth = nil }
 	
-	function p1.onContainerSizeChange(Frame) --[[ Line: 81 ]]
+	function p1.onContainerSizeChange(Frame)
 		-- upvalues: p1 (copy)
-		p1:setState(function(_, _) --[[ Line: 82 ]]
+		p1:setState(function(_, _)
 			-- upvalues: Frame (copy)
 			return { containerWidth = Frame.AbsoluteSize.X }
 		end)
 	end
 	
-	local function _(): UDim2 --[[ Line: 89 ]]
+	local function _(): UDim2
 		-- upvalues: p1 (copy)
 		return UDim2.fromOffset(p1.props.actionBarWidth, 48)
 	end
 	
-	local _ = function(p2: number, p3, p4) --[[ Line: 93 ]]
+	local _ = function(p2: number, p3, p4)
 		-- upvalues: p1 (copy)
 		if p4 and p4.infoSectionWidth then
 			return p4.infoSectionWidth
@@ -59,7 +59,7 @@ function StickyActionBar.init(p1) --[[ Line: 77 ]]
 		end
 	end
 	
-	local function v13(p2: number, NewX: number, p3, p4) --[[ Line: 104 ]]
+	local function v13(p2: number, NewX: number, p3, p4)
 		-- upvalues: p1 (copy)
 		if p4 or not p3 then
 			return {
@@ -77,12 +77,12 @@ function StickyActionBar.init(p1) --[[ Line: 77 ]]
 		end
 	end
 	
-	local _ = function(p2, p3, p4) --[[ Line: 128 ]]
+	local _ = function(p2, p3, p4)
 		-- upvalues: GetTextSizeFunction (upval)
 		return GetTextSizeFunction(p2, p3.RelativeSize * p4.Font.BaseSize, p3.Font, (Vector2.new(10000, 10000))).X
 	end
 	
-	function p1.getLayoutConfig(p2: number, HasActionBarProps, InfoProps, XOffset: number, Title, Header, p3) --[[ Line: 135 ]]
+	function p1.getLayoutConfig(p2: number, HasActionBarProps, InfoProps, XOffset: number, Title, Header, p3)
 		-- upvalues: p1 (copy), GetTextSizeFunction (upval), v13 (copy)
 		local v1: boolean = if p1.props.infoProps and p1.props.infoProps.enableInfoAtStart then true else false
 		local NewX = GetTextSizeFunction(Title, Header.RelativeSize * p3.Font.BaseSize, Header.Font, (Vector2.new(10000, 10000))).X + XOffset + (if XOffset > 0 then 12 else 0)
@@ -107,14 +107,14 @@ function StickyActionBar.init(p1) --[[ Line: 77 ]]
 	end
 end
 
-function StickyActionBar.render(p1) --[[ Line: 176 ]]
+function StickyActionBar.render(p1)
 	-- upvalues: WithStyleFunction (copy), IconSize (copy), RoactModule (copy), ActionBar (copy), FFlagUIBloxEnableActionBarButtonOverride1 (copy), ImageSetLabel (copy), StyledTextLabel (copy)
 	local HasActionBarProps = p1.props.actionBarProps ~= nil
 	local HasInfoProps = p1.props.infoProps ~= nil
 	local Width = p1.props.width or p1.state.containerWidth
 	assert(HasActionBarProps or HasInfoProps, "Either actionbar or info should be present!")
 	
-	return WithStyleFunction(function(p2) --[[ Line: 181 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: HasInfoProps (copy), p1 (copy), IconSize (upval), Width (copy), HasActionBarProps (copy), RoactModule (upval), ActionBar (upval), FFlagUIBloxEnableActionBarButtonOverride1 (upval), ImageSetLabel (upval), StyledTextLabel (upval)
 		local IconSize1 = HasInfoProps and p1.props.infoProps.icon and IconSize or 0
 		local Title = HasInfoProps and p1.props.infoProps.title or ""
@@ -175,7 +175,7 @@ function StickyActionBar.render(p1) --[[ Line: 176 ]]
 	end)
 end
 
-function StickyActionBar:renderHorizontalLayout(p1, p2) --[[ Line: 255 ]]
+function StickyActionBar:renderHorizontalLayout(p1, p2)
 	-- upvalues: RoactModule (copy)
 	return RoactModule.createElement("Frame", {
 		Size = p1.size and p1.size or UDim2.new(0, p1.width, 0, 0),

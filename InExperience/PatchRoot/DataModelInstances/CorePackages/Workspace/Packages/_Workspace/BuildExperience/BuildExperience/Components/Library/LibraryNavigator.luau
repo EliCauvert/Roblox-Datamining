@@ -13,7 +13,7 @@ local _ = require(script.Parent.LibraryTypes)
 local _ = require(script.Parent.LibraryWorldCutout.LibraryWorldCutoutView)
 local UserGameSettings = UserSettings():GetService("UserGameSettings")
 
-local function CategoryScreen(p1) --[[ Line: 72 ]]
+local function CategoryScreen(p1)
 	-- upvalues: ReactModule (copy), LibraryCategoryContainerModule (copy)
 	local ScreenProps = p1.screenProps
 	local Params = p1.navigation.state.params
@@ -37,7 +37,7 @@ end
 return RoactNavigationModule.createAppContainer(RoactNavigationModule.createRobloxStackNavigator({
 	{
 		Browser = {
-			screen = function(p1) --[[ Line: 60 ]]
+			screen = function(p1)
 				-- upvalues: ReactModule (copy), LibraryBrowserContainerModule (copy)
 				local ScreenProps = p1.screenProps
 				
@@ -55,12 +55,12 @@ return RoactNavigationModule.createAppContainer(RoactNavigationModule.createRobl
 	{ Category = { screen = CategoryScreen } },
 	{
 		Search = {
-			screen = function(p1) --[[ Line: 91 ]]
+			screen = function(p1)
 				-- upvalues: FoundationModule (copy), UserGameSettings (copy), MotionModule (copy), ReactModule (copy), CategoryScreen (copy)
 				local ReducedMotion = FoundationModule.Hooks.usePreferences().reducedMotion or UserGameSettings.ReducedMotion
 				local IsNotQueryMatch = p1.screenProps.query ~= ""
 				local UseMotionResult, UseMotionResult2 = MotionModule.useMotion({ transparency = if ReducedMotion then 0 else 1 })
-				ReactModule.useEffect(function() --[[ Line: 95 ]]
+				ReactModule.useEffect(function()
 					-- upvalues: UseMotionResult2 (copy), MotionModule (upval), IsNotQueryMatch (copy), ReducedMotion (copy)
 					UseMotionResult2(MotionModule.createState({ transparency = if IsNotQueryMatch then 0 else 1 }, {
 						default = MotionModule.transition({ duration = if ReducedMotion then 0 else 0.15 })
@@ -78,7 +78,7 @@ return RoactNavigationModule.createAppContainer(RoactNavigationModule.createRobl
 	},
 	{
 		Detail = {
-			screen = function(p1) --[[ Line: 109 ]]
+			screen = function(p1)
 				-- upvalues: ReactModule (copy), LibraryDetailContainerModule (copy)
 				local ScreenProps = p1.screenProps
 				local State = p1.navigation.state
@@ -90,7 +90,7 @@ return RoactNavigationModule.createAppContainer(RoactNavigationModule.createRobl
 					itemKind = State.params.itemKind,
 					library = ScreenProps.library,
 					isReady = ScreenProps.isReady,
-					onBack = function() --[[ Line: 119 ]]
+					onBack = function()
 						-- upvalues: IsActiveRouteKeyMatch (copy), ScreenProps (copy)
 						if IsActiveRouteKeyMatch then
 							ScreenProps.onBack()
@@ -105,7 +105,7 @@ return RoactNavigationModule.createAppContainer(RoactNavigationModule.createRobl
 	}
 }, {
 	initialRouteName = "Browser",
-	transitionConfig = function(p1, p2) --[[ Line: 19 ]]
+	transitionConfig = function(p1, p2)
 		-- upvalues: RoactNavigationModule (copy), UserGameSettings (copy)
 		local RouteName = if p2 == nil then nil else p2.scene.route.routeName
 		local RouteName1 = p1.scene.route.routeName
@@ -113,7 +113,7 @@ return RoactNavigationModule.createAppContainer(RoactNavigationModule.createRobl
 		if (RouteName1 == "Search" or RouteName == "Search") and not (RouteName1 == "Detail" or RouteName == "Detail") then
 			local Copy = table.clone(RoactNavigationModule.StackViewTransitionConfigs.FadeInPlace)
 			
-			function Copy.screenInterpolator(p3) --[[ Line: 26 ]]
+			function Copy.screenInterpolator(p3)
 				-- upvalues: p1 (copy), p2 (copy)
 				return {
 					initialPosition = UDim2.fromScale(0, 0),

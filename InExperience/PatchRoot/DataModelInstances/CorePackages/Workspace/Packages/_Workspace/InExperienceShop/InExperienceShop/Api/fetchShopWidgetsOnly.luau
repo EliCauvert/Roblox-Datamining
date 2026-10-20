@@ -5,9 +5,9 @@ local _ = require(InExperienceShop.Types)
 local FetchShopItemIdsModule = require(script.Parent.fetchShopItemIds)
 local BuildShopDataFromWidgetsModule = require(script.Parent.buildShopDataFromWidgets)
 
-return function() --[[ Line: 30 | Named "fetchShopWidgetsOnly" ]]
+return function()
 	-- upvalues: HttpService (copy), FetchShopItemIdsModule (copy), BuildShopDataFromWidgetsModule (copy)
-	return FetchShopItemIdsModule((HttpService:GenerateGUID(false))):andThen(function(Result) --[[ Line: 35 ]]
+	return FetchShopItemIdsModule((HttpService:GenerateGUID(false))):andThen(function(Result)
 		-- upvalues: BuildShopDataFromWidgetsModule (upval)
 		return BuildShopDataFromWidgetsModule(Result, nil)
 	end)

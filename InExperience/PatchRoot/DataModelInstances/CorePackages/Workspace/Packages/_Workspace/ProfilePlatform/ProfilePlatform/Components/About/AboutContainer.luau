@@ -18,7 +18,7 @@ local FFlagProfileAboutDetailsUseSheet = SharedFlagsModule.FFlagProfileAboutDeta
 local FFlagSignalsNavP3Dispatch = SharedFlagsModule.FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p1) --[[ Line: 31 | Named "AboutDescriptionContainer" ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), FFlagProfilePlatformNewProfileHeader (copy), UseAboutSectionsModule (copy), UseProfileWrapperContextModule (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), ReactModule (copy), ParseSectionsFromDataModule (copy), FFlagProfileAboutDetailsUseSheet (copy), UseLocalizationFunction (copy), TextKeysModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), DescriptionModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local AboutDetails = nil
@@ -31,7 +31,7 @@ return function(p1) --[[ Line: 31 | Named "AboutDescriptionContainer" ]]
 	else
 		local ProfileType = UseProfileWrapperContextModule().profileType
 		AboutDetails = UseProfileJsonComponentModule(EnumsModule.Components.About)
-		AboutSections = ReactModule.useMemo(function() --[[ Line: 43 ]]
+		AboutSections = ReactModule.useMemo(function()
 			-- upvalues: ParseSectionsFromDataModule (upval), AboutDetails (ref), ProfileType (copy), EnumsModule (upval)
 			return ParseSectionsFromDataModule(AboutDetails, ProfileType, if ProfileType == EnumsModule.ProfileTypes.User then `@{AboutDetails.name}` else AboutDetails.name)
 		end, { AboutDetails, ProfileType, AboutDetails.name })
@@ -46,7 +46,7 @@ return function(p1) --[[ Line: 31 | Named "AboutDescriptionContainer" ]]
 	return ReactModule.createElement(DescriptionModule, {
 		description = Description,
 		layoutOrder = p1.layoutOrder,
-		onActivateMoreButton = ReactModule.useCallback(function() --[[ Line: 69 ]]
+		onActivateMoreButton = ReactModule.useCallback(function()
 			-- upvalues: AppPage (upval), AboutSections (ref), Text (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 			local config = {
 				name = AppPage.AboutDetailsSheet,

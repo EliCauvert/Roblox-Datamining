@@ -6,7 +6,7 @@ local InspectAndBuyClusterCompositionTimeoutMs = game:DefineFastInt("InspectAndB
 local CharacterModelPoolModule = {}
 CharacterModelPoolModule.__index = CharacterModelPoolModule
 
-local function setupCharacterModels(X) --[[ Line: 25 ]]
+local function setupCharacterModels(X)
 	-- upvalues: Players (copy), RobloxReplicatedStorage (copy)
 	local HumanoidModelFromDescriptionAsync = Players:CreateHumanoidModelFromDescriptionAsync(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R6)
 	local HumanoidModelFromDescriptionAsync1 = Players:CreateHumanoidModelFromDescriptionAsync(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R15)
@@ -22,7 +22,7 @@ local function setupCharacterModels(X) --[[ Line: 25 ]]
 	return HumanoidModelFromDescriptionAsync, HumanoidModelFromDescriptionAsync1
 end
 
-function CharacterModelPoolModule.new(WorldModelRef, p1, AvatarType, MockApplyDescription) --[[ Line: 51 ]]
+function CharacterModelPoolModule.new(WorldModelRef, p1, AvatarType, MockApplyDescription)
 	-- upvalues: CharacterModelPoolModule (copy), setupCharacterModels (copy), RobloxReplicatedStorage (copy)
 	local t = {}
 	setmetatable(t, CharacterModelPoolModule)
@@ -42,7 +42,7 @@ function CharacterModelPoolModule.new(WorldModelRef, p1, AvatarType, MockApplyDe
 	return t
 end
 
-function CharacterModelPoolModule:setupAnimations(p1, Object) --[[ Line: 83 ]]
+function CharacterModelPoolModule:setupAnimations(p1, Object)
 	p1.Parent = self.r6
 	Object.Parent = self.r15current
 	Object.Archivable = true
@@ -52,21 +52,21 @@ function CharacterModelPoolModule:setupAnimations(p1, Object) --[[ Line: 83 ]]
 	Object.Archivable = false
 end
 
-function CharacterModelPoolModule.getCurrentCharacter(p1) --[[ Line: 93 ]]
+function CharacterModelPoolModule.getCurrentCharacter(p1)
 	return if p1.avatarType == Enum.HumanoidRigType.R15 then p1.r15current else p1.r6
 end
 
-function CharacterModelPoolModule:isR15(): boolean --[[ Line: 101 ]]
+function CharacterModelPoolModule:isR15(): boolean
 	return self.avatarType == Enum.HumanoidRigType.R15
 end
 
-function CharacterModelPoolModule:syncRotation(Character, Character1) --[[ Line: 105 ]]
+function CharacterModelPoolModule:syncRotation(Character, Character1)
 	local _, _, _, ComponentsResult4, ComponentsResult5, ComponentsResult6, ComponentsResult7, ComponentsResult8, ComponentsResult9, ComponentsResult10, ComponentsResult11, ComponentsResult12 = Character.HumanoidRootPart.CFrame:components()
 	local P = Character1.HumanoidRootPart.CFrame.p
 	Character1.HumanoidRootPart.CFrame = CFrame.new(P.X, P.Y, P.Z, ComponentsResult4, ComponentsResult5, ComponentsResult6, ComponentsResult7, ComponentsResult8, ComponentsResult9, ComponentsResult10, ComponentsResult11, ComponentsResult12)
 end
 
-local function hasLayeredAccessoryUpdates(Humanoid: Humanoid, Humanoid1: Humanoid): boolean --[[ Line: 113 ]]
+local function hasLayeredAccessoryUpdates(Humanoid: Humanoid, Humanoid1: Humanoid): boolean
 	local Accessories = Humanoid:GetAccessories(false)
 	local Accessories1 = Humanoid1:GetAccessories(false)
 	
@@ -89,13 +89,13 @@ local function hasLayeredAccessoryUpdates(Humanoid: Humanoid, Humanoid1: Humanoi
 	return false
 end
 
-local function _(Object): boolean --[[ Line: 139 | Named "hasWrapLayer" ]]
+local function _(Object): boolean
 	return Object:FindFirstChildWhichIsA("WrapLayer", true) ~= nil
 end
 
-function CharacterModelPoolModule._doUpdateR6(p1, HumanoidDescription) --[[ Line: 143 ]]
+function CharacterModelPoolModule._doUpdateR6(p1, HumanoidDescription)
 	-- upvalues: PromiseModule (copy)
-	return PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 144 ]]
+	return PromiseModule.new(function(Callback: (any) -> (), _)
 		-- upvalues: p1 (copy), HumanoidDescription (copy)
 		p1.r6.Parent = p1.worldModelRef:getValue()
 		
@@ -108,9 +108,9 @@ function CharacterModelPoolModule._doUpdateR6(p1, HumanoidDescription) --[[ Line
 	end)
 end
 
-function CharacterModelPoolModule._doSimpleUpdateR15(p1, Humanoid) --[[ Line: 156 ]]
+function CharacterModelPoolModule._doSimpleUpdateR15(p1, Humanoid)
 	-- upvalues: PromiseModule (copy)
-	return PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 157 ]]
+	return PromiseModule.new(function(Callback: (any) -> (), _)
 		-- upvalues: p1 (copy), Humanoid (copy)
 		p1.r15current.Parent = p1.worldModelRef:getValue()
 		
@@ -123,9 +123,9 @@ function CharacterModelPoolModule._doSimpleUpdateR15(p1, Humanoid) --[[ Line: 15
 	end)
 end
 
-function CharacterModelPoolModule._updateOffscreenR15(p1, Humanoid) --[[ Line: 169 ]]
+function CharacterModelPoolModule._updateOffscreenR15(p1, Humanoid)
 	-- upvalues: PromiseModule (copy), _CFrame (copy)
-	return PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 170 ]]
+	return PromiseModule.new(function(Callback: (any) -> (), _)
 		-- upvalues: p1 (copy), _CFrame (upval), Humanoid (copy)
 		p1.r15offScreen.HumanoidRootPart.CFrame = _CFrame
 		p1.r15offScreen.Parent = p1.worldModelRef:getValue()
@@ -139,17 +139,17 @@ function CharacterModelPoolModule._updateOffscreenR15(p1, Humanoid) --[[ Line: 1
 	end)
 end
 
-local function waitForClusterCompositionFinished(Result) --[[ Line: 186 ]]
+local function waitForClusterCompositionFinished(Result)
 	-- upvalues: PromiseModule (copy), InspectAndBuyClusterCompositionTimeoutMs (copy)
 	return if Result:FindFirstChildWhichIsA("WrapLayer", true) ~= nil then PromiseModule.race({
 		PromiseModule.fromEvent(Result.Humanoid.ClusterCompositionFinished),
 		PromiseModule.delay(InspectAndBuyClusterCompositionTimeoutMs * 0.001)
-	}):andThen(function(): boolean --[[ Line: 193 ]]
+	}):andThen(function(): boolean
 		return true
 	end) else PromiseModule.resolve(false)
 end
 
-function CharacterModelPoolModule:_completeUpdate() --[[ Line: 201 ]]
+function CharacterModelPoolModule:_completeUpdate()
 	-- upvalues: _CFrame (copy), RobloxReplicatedStorage (copy)
 	self.r15offScreen.HumanoidRootPart.CFrame = self.r15current.HumanoidRootPart.CFrame
 	self.r15current.HumanoidRootPart.CFrame = _CFrame
@@ -161,10 +161,10 @@ function CharacterModelPoolModule:_completeUpdate() --[[ Line: 201 ]]
 	return self.r15current
 end
 
-function CharacterModelPoolModule:_doUpdateR15(Humanoid) --[[ Line: 213 ]]
+function CharacterModelPoolModule:_doUpdateR15(Humanoid)
 	-- upvalues: hasLayeredAccessoryUpdates (copy), waitForClusterCompositionFinished (copy)
 	if hasLayeredAccessoryUpdates(self.r15current.Humanoid:GetAppliedDescription(), Humanoid) then
-		self.inProgressPromise = self:_updateOffscreenR15(Humanoid):andThen(waitForClusterCompositionFinished):andThen(function() --[[ Line: 221 ]]
+		self.inProgressPromise = self:_updateOffscreenR15(Humanoid):andThen(waitForClusterCompositionFinished):andThen(function()
 			-- upvalues: self (copy)
 			return self:_completeUpdate()
 		end)
@@ -175,7 +175,7 @@ function CharacterModelPoolModule:_doUpdateR15(Humanoid) --[[ Line: 213 ]]
 	end
 end
 
-function CharacterModelPoolModule:maybeUpdateCharacter(p1) --[[ Line: 234 ]]
+function CharacterModelPoolModule:maybeUpdateCharacter(p1)
 	-- upvalues: PromiseModule (copy)
 	if self.avatarType == Enum.HumanoidRigType.R6 then
 		self.r6Promise = self:_doUpdateR6(p1)
@@ -186,7 +186,7 @@ function CharacterModelPoolModule:maybeUpdateCharacter(p1) --[[ Line: 234 ]]
 		return self:_doUpdateR15(p1)
 	end
 	local WaitingPromise = self.waitingPromise
-	self.waitingPromise = self.inProgressPromise:andThen(function() --[[ Line: 245 ]]
+	self.waitingPromise = self.inProgressPromise:andThen(function()
 		-- upvalues: self (copy), p1 (copy)
 		return self:_doUpdateR15(p1)
 	end)
@@ -197,7 +197,7 @@ function CharacterModelPoolModule:maybeUpdateCharacter(p1) --[[ Line: 234 ]]
 	return self.waitingPromise
 end
 
-function CharacterModelPoolModule:switchAvatarType(AvatarType) --[[ Line: 260 ]]
+function CharacterModelPoolModule:switchAvatarType(AvatarType)
 	-- upvalues: RobloxReplicatedStorage (copy)
 	if AvatarType == self.avatarType then
 		return self:getCurrentCharacter()
@@ -221,15 +221,15 @@ function CharacterModelPoolModule:switchAvatarType(AvatarType) --[[ Line: 260 ]]
 	return R6
 end
 
-function CharacterModelPoolModule:start() --[[ Line: 286 ]] end
+function CharacterModelPoolModule:start() end
 
-local _ = function(p1) --[[ Line: 288 | Named "cancelPromise" ]]
+local _ = function(p1)
 	if p1 then
 		p1:cancel()
 	end
 end
 
-function CharacterModelPoolModule:_cancelPromises() --[[ Line: 294 ]]
+function CharacterModelPoolModule:_cancelPromises()
 	local InProgressPromise = self.inProgressPromise
 	
 	if InProgressPromise then
@@ -250,7 +250,7 @@ function CharacterModelPoolModule:_cancelPromises() --[[ Line: 294 ]]
 	self.r6Promise = nil
 end
 
-function CharacterModelPoolModule:stop() --[[ Line: 303 ]]
+function CharacterModelPoolModule:stop()
 	-- upvalues: RobloxReplicatedStorage (copy)
 	self.r6.Parent = RobloxReplicatedStorage
 	self.r15current.Parent = RobloxReplicatedStorage
@@ -258,7 +258,7 @@ function CharacterModelPoolModule:stop() --[[ Line: 303 ]]
 	self:_cancelPromises()
 end
 
-function CharacterModelPoolModule:onDestroy() --[[ Line: 311 ]]
+function CharacterModelPoolModule:onDestroy()
 	self:_cancelPromises()
 	self.r6:Destroy()
 	self.r15current:Destroy()

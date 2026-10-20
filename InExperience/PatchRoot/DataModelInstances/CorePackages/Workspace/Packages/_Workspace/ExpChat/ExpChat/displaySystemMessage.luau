@@ -4,7 +4,7 @@ local NewResult = require(Parent.ExpChatShared).Logger:new("ExpChat/" .. script.
 local SanitizeForRichTextModule = require(script.Parent.sanitizeForRichText)
 local FFlagEnableClientSummarySystemMessageOnLua = require(Parent.SharedFlags).FFlagEnableClientSummarySystemMessageOnLua
 
-return function(p1, p2, Metadata, Translator, TextChannel, p3, Callback) --[[ Line: 12 | Named "displaySystemMessage" ]]
+return function(p1, p2, Metadata, Translator, TextChannel, p3, Callback)
 	-- upvalues: NewResult (copy), List (copy), FFlagEnableClientSummarySystemMessageOnLua (copy), SanitizeForRichTextModule (copy)
 	NewResult:debug("Display system message: {}", Metadata)
 	local Joined = nil
@@ -12,7 +12,7 @@ return function(p1, p2, Metadata, Translator, TextChannel, p3, Callback) --[[ Li
 	if type(p1) == "string" then
 		if p1 ~= "" then
 			local Success
-			Success, Joined = pcall(function() --[[ Line: 27 ]]
+			Success, Joined = pcall(function()
 				-- upvalues: Translator (copy), p1 (copy), p2 (copy)
 				return Translator:FormatByKey(p1, p2)
 			end)
@@ -22,7 +22,7 @@ return function(p1, p2, Metadata, Translator, TextChannel, p3, Callback) --[[ Li
 			end
 		end
 	else
-		Joined = table.concat(List.map(p1, function(p4) --[[ Line: 38 ]]
+		Joined = table.concat(List.map(p1, function(p4)
 			-- upvalues: Translator (copy), p2 (copy)
 			return Translator:FormatByKey(p4, p2)
 		end), "\n")

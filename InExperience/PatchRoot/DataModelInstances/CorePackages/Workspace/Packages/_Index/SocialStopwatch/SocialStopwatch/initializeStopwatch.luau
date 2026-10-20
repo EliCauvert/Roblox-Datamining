@@ -9,13 +9,13 @@ local LoggingProtocolModule = require(Parent.LoggingProtocol)
 local StopwatchTelemetryConfigModule = require(SocialStopwatch.StopwatchTelemetryConfig)
 local _ = require(script.Parent.Types)
 
-return function() --[[ Line: 21 ]]
+return function()
 	-- upvalues: TimersFunction (copy), LoggingProtocolModule (copy), EventRegisterModule (copy), StopwatchTelemetryConfigModule (copy), EventModesModule (copy), HttpService (copy)
 	local StartResults = {}
 	local TimersResult = TimersFunction()
 	local Default = LoggingProtocolModule.default
 	
-	local function _(Text) --[[ Line: 26 ]]
+	local function _(Text)
 		-- upvalues: EventRegisterModule (upval)
 		local EventRegisterModuleEntry = EventRegisterModule[Text]
 		
@@ -25,9 +25,9 @@ return function() --[[ Line: 21 ]]
 		return EventRegisterModuleEntry
 	end
 	
-	local _ = function(p1) --[[ Line: 34 ]]
+	local _ = function(p1)
 		-- upvalues: EventRegisterModule (upval), StartResults (ref), Default (copy), StopwatchTelemetryConfigModule (upval), EventModesModule (upval), TimersResult (copy)
-		return function(Key) --[[ Line: 35 ]]
+		return function(Key)
 			-- upvalues: EventRegisterModule (upval), StartResults (upval), Default (upval), StopwatchTelemetryConfigModule (upval), p1 (copy), EventModesModule (upval), TimersResult (upval)
 			local EventRegisterModuleEntry = EventRegisterModule[Key]
 			
@@ -53,7 +53,7 @@ return function() --[[ Line: 21 ]]
 	
 	local v1 = "Get"
 	
-	local function Get(Key) --[[ Line: 35 ]]
+	local function Get(Key)
 		-- upvalues: EventRegisterModule (upval), StartResults (ref), Default (copy), StopwatchTelemetryConfigModule (upval), v1 (copy), EventModesModule (upval), TimersResult (copy)
 		local EventRegisterModuleEntry = EventRegisterModule[Key]
 		
@@ -78,7 +78,7 @@ return function() --[[ Line: 21 ]]
 	
 	local v2 = "Stop"
 	
-	local function v17(Key) --[[ Line: 35 ]]
+	local function v17(Key)
 		-- upvalues: EventRegisterModule (upval), StartResults (ref), Default (copy), StopwatchTelemetryConfigModule (upval), v2 (copy), EventModesModule (upval), TimersResult (copy)
 		local EventRegisterModuleEntry = EventRegisterModule[Key]
 		
@@ -102,7 +102,7 @@ return function() --[[ Line: 21 ]]
 	end
 	
 	return {
-		start = function(Text, p1) --[[ Line: 65 ]]
+		start = function(Text, p1)
 			-- upvalues: EventRegisterModule (upval), TimersResult (copy), HttpService (upval), StartResults (ref), Default (copy), StopwatchTelemetryConfigModule (upval), EventModesModule (upval)
 			local EventRegisterModuleEntry = EventRegisterModule[Text]
 			
@@ -126,13 +126,13 @@ return function() --[[ Line: 21 ]]
 			}
 		end,
 		get = Get,
-		stop = function(Key) --[[ Line: 90 ]]
+		stop = function(Key)
 			-- upvalues: v17 (copy), StartResults (ref)
 			StartResults[Key] = nil
 			
 			return (v17(Key))
 		end,
-		_unsafeClearEventLog = function() --[[ Line: 95 ]]
+		_unsafeClearEventLog = function()
 			-- upvalues: StartResults (ref)
 			StartResults = {}
 		end

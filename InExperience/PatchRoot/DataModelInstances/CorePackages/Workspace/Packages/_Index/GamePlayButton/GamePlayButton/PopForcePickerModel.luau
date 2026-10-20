@@ -20,12 +20,12 @@
 	SYD = "Sydney"
 }
 
-local function _(p1: number): boolean --[[ Line: 34 | Named "isReachablePing" ]]
+local function _(p1: number): boolean
 	return type(p1) == "number" and p1 >= 0 and p1 < 1e999
 end
 
 return {
-	buildRoster = function(List, PopCode) --[[ Line: 38 ]]
+	buildRoster = function(List, PopCode)
 		local t = {}
 		local List1 = {}
 		
@@ -50,30 +50,30 @@ return {
 		if PopCode ~= "" and t[PopCode] == nil then
 			table.insert(List1, { popCode = PopCode })
 		end
-		table.sort(List1, function(A, B): boolean --[[ Line: 62 ]]
+		table.sort(List1, function(A, B): boolean
 			return if A.rttMs == nil or B.rttMs == nil then A.rttMs ~= nil or B.rttMs == nil and A.popCode < B.popCode elseif A.rttMs == B.rttMs then A.popCode < B.popCode else A.rttMs < B.rttMs
 		end)
 		
 		return List1
 	end,
-	getDisplayCode = function(Text: string): string --[[ Line: 76 ]]
+	getDisplayCode = function(Text: string): string
 		return string.upper(Text)
 	end,
-	getLocationName = function(Text: string) --[[ Line: 80 ]]
+	getLocationName = function(Text: string)
 		-- upvalues: config (copy)
 		local Uppered = string.upper(Text)
 		local Match: string? = string.match(Uppered, "^([A-Z][A-Z][A-Z])%d*$")
 		
 		return Match and config[Match] or Uppered
 	end,
-	formatPing = function(p1: number): string --[[ Line: 86 ]]
+	formatPing = function(p1: number): string
 		if p1 == nil or (type(p1) ~= "number" or (p1 < 0 or p1 >= 1e999)) then
 			return "Ping unavailable"
 		else
 			return (string.format("%.0f ms", (math.floor(p1 + 0.5))))
 		end
 	end,
-	getVisibleRoster = function(Tbl, PopCode, p1) --[[ Line: 92 ]]
+	getVisibleRoster = function(Tbl, PopCode, p1)
 		if p1 then
 			return table.clone(Tbl)
 		end

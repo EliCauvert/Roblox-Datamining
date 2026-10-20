@@ -10,12 +10,12 @@ local Milestone = TimeToInteractiveTracker.Milestone
 local Hooks = TimeToInteractiveTracker.Hooks or nil
 local TrackMilestone = TimeToInteractiveTracker.trackMilestone or nil
 
-return function(p1) --[[ Line: 48 | Named "useTTINavigationTracking" ]]
+return function(p1)
 	-- upvalues: Hooks (copy), UseNavigationFunction (copy), TimeToInteractiveTracker (copy), TrackMilestone (copy), Milestone (copy), FFlagEnableOnScreenAPIIntegration (copy), UseOnScreenNavigationListener (copy), ReactModule (copy), RoactNavigationModule (copy)
 	Hooks.useTTIRenderAndMountedTracking(p1)
 	local UseNavigationResult = UseNavigationFunction()
 	
-	local function onWillFocus() --[[ Line: 57 ]]
+	local function onWillFocus()
 		-- upvalues: TimeToInteractiveTracker (upval), p1 (copy), TrackMilestone (upval), Milestone (upval)
 		local Event = TimeToInteractiveTracker.getEvents(false)[p1]
 		
@@ -24,7 +24,7 @@ return function(p1) --[[ Line: 48 | Named "useTTINavigationTracking" ]]
 		end
 	end
 	
-	local function onDidFocus() --[[ Line: 63 ]]
+	local function onDidFocus()
 		-- upvalues: TimeToInteractiveTracker (upval), p1 (copy), TrackMilestone (upval), Milestone (upval)
 		local Event = TimeToInteractiveTracker.getEvents(false)[p1]
 		
@@ -37,7 +37,7 @@ return function(p1) --[[ Line: 48 | Named "useTTINavigationTracking" ]]
 	end
 	
 	if FFlagEnableOnScreenAPIIntegration then
-		UseOnScreenNavigationListener(function() --[[ Line: 76 ]]
+		UseOnScreenNavigationListener(function()
 			-- upvalues: UseNavigationResult (copy), TimeToInteractiveTracker (upval), p1 (copy), TrackMilestone (upval), Milestone (upval)
 			if UseNavigationResult.isFocused() then return end
 			local Event = TimeToInteractiveTracker.getEvents(false)[p1]
@@ -54,13 +54,13 @@ return function(p1) --[[ Line: 48 | Named "useTTINavigationTracking" ]]
 			end
 		end, nil)
 	end
-	ReactModule.useEffect(function() --[[ Line: 85 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: TimeToInteractiveTracker (upval), p1 (copy), UseNavigationResult (copy), RoactNavigationModule (upval), onWillFocus (copy), onDidFocus (copy)
 		TimeToInteractiveTracker.trackEnd(p1)
 		local AddListenerResult = UseNavigationResult.addListener(RoactNavigationModule.Events.WillFocus, onWillFocus)
 		local AddListenerResult1 = UseNavigationResult.addListener(RoactNavigationModule.Events.DidFocus, onDidFocus)
 		
-		return function() --[[ Line: 91 ]]
+		return function()
 			-- upvalues: AddListenerResult (copy), AddListenerResult1 (copy)
 			AddListenerResult.remove()
 			AddListenerResult1.remove()

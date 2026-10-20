@@ -2,7 +2,7 @@
 local Analytics = require(Parent.MomentsCommon).Analytics
 local MomentStatus = require(Parent.MomentsTypes).Enums.MomentStatus
 
-return function(p1, p2) --[[ Line: 24 | Named "reportUnavailableFeedItem" ]]
+return function(p1, p2)
 	-- upvalues: MomentStatus (copy), Analytics (copy)
 	if p1.status == MomentStatus.Deleted then
 		Analytics.reportMomentsFeedItemFiltered("deleted", p2)

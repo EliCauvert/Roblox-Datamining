@@ -1,4 +1,4 @@
-﻿return function(Text: string) --[[ Line: 1 | Named "getUserIdsFromString" ]]
+﻿return function(Text: string)
 	local t = {}
 	
 	for _, value in string.split(Text, ",") do

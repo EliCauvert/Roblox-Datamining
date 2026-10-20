@@ -1,6 +1,6 @@
 ﻿local UseLocalizationFunction = require(script:FindFirstAncestor("InExperienceShop").Parent.Localization).Hooks.useLocalization
 
-return function(Description, p1) --[[ Line: 9 | Named "useOfferModalText" ]]
+return function(Description, p1)
 	-- upvalues: UseLocalizationFunction (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		viewTerms = "Feature.Catalog.Action.ViewTerms",

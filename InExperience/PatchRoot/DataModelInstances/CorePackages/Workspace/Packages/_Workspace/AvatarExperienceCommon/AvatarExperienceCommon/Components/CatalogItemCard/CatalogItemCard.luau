@@ -42,12 +42,12 @@ local ItemTypeToContentMap = CatalogItemCardBadgeMapsModule.itemTypeToContentMap
 local ItemInfoIconMap = CatalogItemCardBadgeMapsModule.itemInfoIconMap
 local ItemStatusIconTypeToIconMap = CatalogItemCardBadgeMapsModule.itemStatusIconTypeToIconMap
 
-local function selectIsPortrait(p1): boolean --[[ Line: 104 ]]
+local function selectIsPortrait(p1): boolean
 	-- upvalues: ResponsiveModule (copy)
 	return p1.DeviceOrientation == ResponsiveModule.Keys.Portrait
 end
 
-local function buildBadgeStatusContent(Icon, Text) --[[ Line: 108 ]]
+local function buildBadgeStatusContent(Icon, Text)
 	local List = { { type = "icon", icon = Icon } }
 	
 	if Text then
@@ -56,7 +56,7 @@ local function buildBadgeStatusContent(Icon, Text) --[[ Line: 108 ]]
 	return List
 end
 
-local function buildItemStatusContent(ItemStatus, Icon, Text, IsSelected) --[[ Line: 121 ]]
+local function buildItemStatusContent(ItemStatus, Icon, Text, IsSelected)
 	-- upvalues: ItemStatusTypeEnumModule (copy), FFlagAXFixBadgeStatusConfigOptions (copy), FFlagAXShowFaeUpsell (copy), buildBadgeStatusContent (copy), CatalogItemCardStatusIconTypeEnumModule (copy), FFlagAXInventoryDurablesSupport (copy), DURABLEICON (copy)
 	if ItemStatus then
 		local BadgeStatusContent = if ItemStatus.type == ItemStatusTypeEnumModule.Badge then if FFlagAXFixBadgeStatusConfigOptions or FFlagAXShowFaeUpsell then buildBadgeStatusContent(Icon, ItemStatus.text) else {
@@ -88,7 +88,7 @@ local function buildItemStatusContent(ItemStatus, Icon, Text, IsSelected) --[[ L
 	} else nil
 end
 
-local function buildSelectedOverlayBadge(ItemStatus, Icon, Text) --[[ Line: 166 ]]
+local function buildSelectedOverlayBadge(ItemStatus, Icon, Text)
 	-- upvalues: FFlagAXShowFaeUpsell (copy), CatalogItemCardStatusIconTypeEnumModule (copy), FAEICON (copy), FFlagAXInventoryDurablesSupport (copy), DURABLEICON (copy)
 	local IconType = ItemStatus and ItemStatus.iconType
 	local Text1 = ItemStatus and ItemStatus.text
@@ -96,7 +96,7 @@ local function buildSelectedOverlayBadge(ItemStatus, Icon, Text) --[[ Line: 166 
 	return if FFlagAXShowFaeUpsell and IconType == CatalogItemCardStatusIconTypeEnumModule.FAE then { icon = FAEICON } elseif Icon and Text1 then { icon = Icon, text = Text1 } elseif FFlagAXInventoryDurablesSupport and Text and IconType ~= CatalogItemCardStatusIconTypeEnumModule.Moderated then { icon = DURABLEICON, text = Text } else nil
 end
 
-local function SelectedIndicatorCorners(p1) --[[ Line: 193 ]]
+local function SelectedIndicatorCorners(p1)
 	-- upvalues: UseSelectedOverlayButtonModule (copy), ReactModule (copy), ItemCardHeaderCornersOverlay (copy), FFlagAXMarketplaceLicensingItemCards (copy)
 	local UseSelectedOverlayButtonModuleResult = UseSelectedOverlayButtonModule(p1.hasOverlayButton)
 	
@@ -108,7 +108,7 @@ local function SelectedIndicatorCorners(p1) --[[ Line: 193 ]]
 	})
 end
 
-return (ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 208 ]]
+return (ReactModule.forwardRef(function(Frame: Frame, Ref)
 	-- upvalues: FFlagAXModeratedItemIconUpdates (copy), FFlagAXMarketplaceLicensingItemCards (copy), UseTokensFunction (copy), ReactModule (copy), ItemInfoIconMap (copy), ItemTypeToContentMap (copy), UseSelectorFunction (copy), selectIsPortrait (copy), ItemStatusTypeEnumModule (copy), ItemStatusIconTypeToIconMap (copy), LicensingBadgeModule (copy), BadgeSize (copy), FFlagAXMarketplaceItemCardIndicatorStack (copy), buildItemStatusContent (copy), ShouldRenderIndicatorStackModule (copy), IndicatorStackModule (copy), FoundationModule (copy), Icon (copy), IconSize (copy), ItemCard (copy), ItemCardHeader (copy), SelectedIndicatorCorners (copy), ItemCardHeaderCornersOverlay (copy), CatalogItemCardSelectedOverlayModule (copy), FFlagAXFixBadgeStatusConfigOptions (copy), buildSelectedOverlayBadge (copy), FFlagAXShowFaeUpsell (copy), CatalogItemCardStatusIconTypeEnumModule (copy), FAEICON (copy), FFlagAXInventoryDurablesSupport (copy), DURABLEICON (copy), ItemCardStatus (copy), ItemCardBadge (copy), buildBadgeStatusContent (copy), ItemCardIcon (copy), FFlagAXRemoveDynamicHeadBadge (copy), ItemCardFooter (copy)
 	local UseTokensResult = if FFlagAXModeratedItemIconUpdates or FFlagAXMarketplaceLicensingItemCards then UseTokensFunction() else nil
 	local v1 = false
@@ -122,11 +122,11 @@ return (ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 208 ]]
 		local UseRefResult = ReactModule.useRef(UseStateResult)
 		local UseRefResult1 = ReactModule.useRef(nil)
 		Ref1 = UseRefResult1
-		ReactModule.useImperativeHandle(Ref, function() --[[ Line: 222 ]]
+		ReactModule.useImperativeHandle(Ref, function()
 			-- upvalues: UseRefResult1 (copy)
 			return UseRefResult1.current
 		end, {})
-		local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 225 ]]
+		local UseResult = ReactModule.useCallback(function(Frame)
 			-- upvalues: Size3000 (copy), UseRefResult (copy), UseStateResult2 (copy)
 			local X = Frame.AbsoluteSize.X
 			
@@ -139,7 +139,7 @@ return (ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 208 ]]
 			end
 		end, { Size3000 })
 		OnAbsoluteSizeChanged = UseResult
-		ReactModule.useLayoutEffect(function() --[[ Line: 238 ]]
+		ReactModule.useLayoutEffect(function()
 			-- upvalues: UseRefResult1 (copy), UseResult (copy)
 			if UseRefResult1.current then
 				UseResult(UseRefResult1.current)
@@ -226,7 +226,7 @@ return (ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 208 ]]
 			}),
 			BackgroundTransparency = if BackgroundLayers then 1 else nil,
 			Size = Frame.headerSize
-		}, (function() --[[ Line: 280 | Named "renderPresentationSlot" ]]
+		}, (function()
 			-- upvalues: Frame (copy), ItemStatusTypeEnumModule (upval), ReactModule (upval), FoundationModule (upval), FFlagAXModeratedItemIconUpdates (upval), Icon (upval), ItemStatusIconTypeToIconMap (upval), UseTokensResult (copy), UseSelectorResult (copy), IconSize (upval)
 			return if Frame.itemStatus and Frame.itemStatus.type == ItemStatusTypeEnumModule.Placeholder then if Frame.itemStatus.iconType then ReactModule.createElement(FoundationModule.View, {
 				tag = "size-full clip radius-medium row align-x-center align-y-center"

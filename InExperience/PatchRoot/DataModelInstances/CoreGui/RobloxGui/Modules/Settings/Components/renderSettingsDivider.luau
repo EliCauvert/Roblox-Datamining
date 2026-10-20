@@ -10,7 +10,7 @@ local Divider = FoundationModule.Divider
 local DividerOrientation = FoundationModule.Enums.DividerOrientation
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function DividerContainer() --[[ Line: 23 ]]
+local function DividerContainer()
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Divider (copy), DividerOrientation (copy)
 	local UseTokensResult = UseTokensFunction()
 	
@@ -26,7 +26,7 @@ local function DividerContainer() --[[ Line: 23 ]]
 	})
 end
 
-return function(p1) --[[ Line: 39 | Named "renderSettingsDivider" ]]
+return function(p1)
 	-- upvalues: CreateFunction (copy), SettingsShowSignal (copy), ReactRobloxModule (copy), ReactModule (copy), InExperienceMenuReactModule (copy), DividerContainer (copy)
 	local v1 = CreateFunction("Frame")({
 		Name = "DividerWrapper",
@@ -37,7 +37,7 @@ return function(p1) --[[ Line: 39 | Named "renderSettingsDivider" ]]
 		Parent = p1.parent
 	})
 	local Root = nil
-	SettingsShowSignal:connect(function(p2) --[[ Line: 50 ]]
+	SettingsShowSignal:connect(function(p2)
 		-- upvalues: Root (ref), v1 (copy), p1 (copy), ReactRobloxModule (upval), ReactModule (upval), InExperienceMenuReactModule (upval), DividerContainer (upval)
 		if p2 then
 			v1.Parent = p1.parent

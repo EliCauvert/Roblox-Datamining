@@ -6,7 +6,7 @@ local Divider = FoundationModule.Divider
 local DividerOrientation = FoundationModule.Enums.DividerOrientation
 local _ = require(AvatarExperienceInspectAndBuy.Enums.ViewType)
 
-return function(Frame) --[[ Line: 78 | Named "ResponsivePanelLayout" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), Divider (copy), DividerOrientation (copy)
 	local PanelConfig = Frame.panelConfig
 	

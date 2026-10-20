@@ -15,14 +15,14 @@ local GetUserInputEventDataModule = require(Parent1.Utility.getUserInputEventDat
 local VerifiedParentalConsentDialog = require(Parent2.VerifiedParentalConsentDialog).VerifiedParentalConsentDialog
 local ExtendResult = RoactModule.Component:extend(script.Name)
 
-function ExtendResult.init(p1) --[[ Line: 62 ]]
+function ExtendResult.init(p1)
 	-- upvalues: HttpService (copy)
 	p1.state = {
 		analyticId = if p1.props.analyticId then p1.props.analyticId else HttpService:GenerateGUID(false)
 	}
 end
 
-function ExtendResult.didUpdate(p1, p2, _) --[[ Line: 68 ]]
+function ExtendResult.didUpdate(p1, p2, _)
 	local Props = p1.props
 	
 	if p2.purchaseState ~= Props.purchaseState then
@@ -31,20 +31,20 @@ function ExtendResult.didUpdate(p1, p2, _) --[[ Line: 68 ]]
 	end
 end
 
-function ExtendResult.dispatchAndRenderModal(p1, Props) --[[ Line: 78 ]]
+function ExtendResult.dispatchAndRenderModal(p1, Props)
 	-- upvalues: BuyRobuxFlowStateModule (copy), ConstantsModule (copy), RoactModule (copy), PurchaseErrorPromptModule (copy), U13ConfirmPromptModule (copy), VerifiedParentalConsentDialog (copy)
 	if Props.purchaseState == BuyRobuxFlowStateModule.Error then
 		Props.dispatchCentralOverlay(ConstantsModule.CENTRAL_OVERLAY_TYPE_ANIMATOR, {
 			shouldAnimate = Props.shouldAnimate,
 			shouldShow = Props.purchaseState == BuyRobuxFlowStateModule.Error,
-			renderChildren = function() --[[ Line: 83 ]]
+			renderChildren = function()
 				-- upvalues: RoactModule (upval), PurchaseErrorPromptModule (upval), Props (copy), p1 (copy)
 				return RoactModule.createElement(PurchaseErrorPromptModule, {
 					screenSize = Props.screenSize,
 					errorType = Props.errorType,
 					economicRestrictionError = Props.economicRestrictionError,
 					doneControllerIcon = Props.acceptControllerIcon,
-					doneActivated = function() --[[ Line: 92 ]]
+					doneActivated = function()
 						-- upvalues: p1 (upval), Props (upval)
 						p1:reportUserInput("Done")
 						Props.flowComplete()
@@ -60,18 +60,18 @@ function ExtendResult.dispatchAndRenderModal(p1, Props) --[[ Line: 78 ]]
 		Props.dispatchCentralOverlay(ConstantsModule.CENTRAL_OVERLAY_TYPE_ANIMATOR, {
 			shouldAnimate = Props.shouldAnimate,
 			shouldShow = Props.purchaseState == BuyRobuxFlowStateModule.PurchaseWarning,
-			renderChildren = function() --[[ Line: 107 ]]
+			renderChildren = function()
 				-- upvalues: RoactModule (upval), U13ConfirmPromptModule (upval), Props (copy), p1 (copy)
 				return RoactModule.createElement(U13ConfirmPromptModule, {
 					screenSize = Props.screenSize,
 					modalType = Props.u13ConfirmType,
-					doneActivated = function() --[[ Line: 113 ]]
+					doneActivated = function()
 						-- upvalues: p1 (upval), Props (upval)
 						p1:reportUserInput("Confirm")
 						Props.acceptPurchaseWarning()
 						Props.dispatchCentralOverlay()
 					end,
-					cancelActivated = function() --[[ Line: 118 ]]
+					cancelActivated = function()
 						-- upvalues: p1 (upval), Props (upval)
 						p1:reportUserInput("Cancel")
 						Props.cancelPurchase()
@@ -87,13 +87,13 @@ function ExtendResult.dispatchAndRenderModal(p1, Props) --[[ Line: 78 ]]
 		Props.dispatchCentralOverlay(ConstantsModule.CENTRAL_OVERLAY_TYPE_ANIMATOR, {
 			shouldAnimate = Props.shouldAnimate,
 			shouldShow = Props.purchaseState == BuyRobuxFlowStateModule.PurchaseVPC,
-			renderChildren = function() --[[ Line: 133 ]]
+			renderChildren = function()
 				-- upvalues: RoactModule (upval), VerifiedParentalConsentDialog (upval), Props (copy), p1 (copy)
 				return RoactModule.createElement(VerifiedParentalConsentDialog, {
 					isActionable = false,
 					screenSize = Props.screenSize,
 					modalType = Props.purchaseVPCType,
-					onDismiss = function() --[[ Line: 138 ]]
+					onDismiss = function()
 						-- upvalues: p1 (upval), Props (upval)
 						p1:reportUserInput("Close")
 						Props.flowComplete()
@@ -105,7 +105,7 @@ function ExtendResult.dispatchAndRenderModal(p1, Props) --[[ Line: 78 ]]
 	end
 end
 
-function ExtendResult.reportModalShown(p1) --[[ Line: 149 ]]
+function ExtendResult.reportModalShown(p1)
 	-- upvalues: GetModalShownEventDataModule (copy), BuyRobuxFlowStateModule (copy)
 	local Props = p1.props
 	local State = p1.state
@@ -117,7 +117,7 @@ function ExtendResult.reportModalShown(p1) --[[ Line: 149 ]]
 	end
 end
 
-function ExtendResult.reportUserInput(p1, p2) --[[ Line: 163 ]]
+function ExtendResult.reportUserInput(p1, p2)
 	-- upvalues: GetUserInputEventDataModule (copy), BuyRobuxFlowStateModule (copy)
 	local Props = p1.props
 	local State = p1.state
@@ -129,12 +129,12 @@ function ExtendResult.reportUserInput(p1, p2) --[[ Line: 163 ]]
 	end
 end
 
-function ExtendResult:purchaseStateToOverlayState(PurchaseState) --[[ Line: 182 ]]
+function ExtendResult:purchaseStateToOverlayState(PurchaseState)
 	-- upvalues: BuyRobuxFlowStateModule (copy), LoadingOverlayStateModule (copy)
 	return if PurchaseState == BuyRobuxFlowStateModule.Loading then LoadingOverlayStateModule.Loading elseif PurchaseState == BuyRobuxFlowStateModule.RobuxPurchasePending then LoadingOverlayStateModule.PurchasingRobux elseif PurchaseState == BuyRobuxFlowStateModule.RobuxGrantPending then LoadingOverlayStateModule.WaitingForRobux elseif PurchaseState == BuyRobuxFlowStateModule.PurchaseWarning then LoadingOverlayStateModule.None elseif PurchaseState == BuyRobuxFlowStateModule.None then LoadingOverlayStateModule.None else nil
 end
 
-function ExtendResult.render(p1) --[[ Line: 198 ]]
+function ExtendResult.render(p1)
 	-- upvalues: RoactModule (copy), BuyRobuxPageModule (copy), BuyRobuxFlowStateModule (copy), LoadingOverlayModule (copy)
 	local Props = p1.props
 	local PurchaseStateToOverlayStateResult = p1:purchaseStateToOverlayState(Props.purchaseState)
@@ -146,7 +146,7 @@ function ExtendResult.render(p1) --[[ Line: 198 ]]
 			isConsoleSize = Props.isConsoleSize,
 			robuxBalance = Props.robuxBalance,
 			robuxPackages = Props.robuxPackages,
-			robuxPackageActivated = function(p2) --[[ Line: 217 ]]
+			robuxPackageActivated = function(p2)
 				-- upvalues: p1 (copy), Props (copy)
 				p1:reportUserInput("Confirm")
 				Props.purchaseRobux(p2)

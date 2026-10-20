@@ -18,10 +18,10 @@ local config = {
 	titleKey = "Feature.Chat.Heading.ExpressiveChat",
 	bodyKey = "Feature.Chat.Description.ExpressiveChatLearnMore",
 	cancelAlertKey = "CommonUI.Features.Action.Close",
-	onDismissed = function() --[[ Line: 33 ]] end
+	onDismissed = function() end
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 40 | Named "LearnMorePartialModalContainer" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseScreenSizeFunction (copy), UseLayerCollectorFunction (copy), UseAnalyticsModule (copy), UseEffectOnMountFunction (copy), EventNamesModule (copy), UseCallbackFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), PartialModalModule (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseStyleResult = UseStyleFunction()
@@ -32,13 +32,13 @@ return ReactModule.memo(function(p1) --[[ Line: 40 | Named "LearnMorePartialModa
 		UseScreenSizeResult = UseLayerCollectorResult.absoluteSize
 	end
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
-	UseEffectOnMountFunction(function() --[[ Line: 50 ]]
+	UseEffectOnMountFunction(function()
 		-- upvalues: UseAnalyticsModuleResult (copy), EventNamesModule (upval), UnionResult (copy)
 		if UseAnalyticsModuleResult then
 			UseAnalyticsModuleResult.fireAnalyticsEvent(EventNamesModule.ConversationLearnMoreDialogRendered, { conversationId = UnionResult.conversationId })
 		end
 	end)
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 58 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: UseAnalyticsModuleResult (copy), EventNamesModule (upval), UnionResult (copy)
 		if UseAnalyticsModuleResult then
 			UseAnalyticsModuleResult.fireAnalyticsEvent(EventNamesModule.ConversationLearnMoreDialogDismissed, { conversationId = UnionResult.conversationId })

@@ -24,12 +24,12 @@ local PlaytestModeTooltipDisplayOrder = game:DefineFastInt("PlaytestModeTooltipD
 local Flag = false
 local NewObservableValue = if PlaytestModeDismissTooltip then ObservableValue.new(false) else nil
 
-local function _(p1, Enabled): boolean --[[ Line: 49 | Named "getCanShow" ]]
+local function _(p1, Enabled): boolean
 	-- upvalues: PlaytestModeTooltipExcludeBuildMode (copy), BuildModeLaunchModule (copy), Flag (ref), PlaytestModeDismissTooltip (copy)
 	return (not PlaytestModeTooltipExcludeBuildMode or not BuildModeLaunchModule:hasBuildMode()) and (not Flag and (p1 ~= nil and (p1.current ~= nil and (not PlaytestModeDismissTooltip or Enabled ~= false))))
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 57 | Named "PlaytestModeTooltip" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseLocalizationFunction (copy), UseIsPlaytestModeModule (copy), PlaytestModeDismissTooltip (copy), UseObservableValueModule (copy), GamepadConnectorModule (copy), NewObservableValue (copy), ReactModule (copy), PlaytestModeTooltipExcludeBuildMode (copy), BuildModeLaunchModule (copy), Flag (ref), LinkingProtocol (copy), PlaytestModeTooltipLearnMoreUrl (copy), SettingsShowSignal (copy), OverlayProvider (copy), PlaytestModeTooltipDisplayOrder (copy), EducationalTooltip (copy), PopoverSide (copy), PopoverAlign (copy), ButtonVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		title = "CoreScripts.FTUX.Heading.ReadyToPlaytest",
@@ -41,12 +41,12 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "PlaytestModeTooltip"
 	local UseObservableValueModuleResult = if PlaytestModeDismissTooltip then UseObservableValueModule(if GamepadConnectorModule == nil then NewObservableValue else GamepadConnectorModule:getShowTopBar()) else nil
 	local AnchorRef = p1.anchorRef
 	local UseStateResult, UseStateResult2 = ReactModule.useState((not PlaytestModeTooltipExcludeBuildMode or not BuildModeLaunchModule:hasBuildMode()) and (not Flag and (AnchorRef ~= nil and (AnchorRef.current ~= nil and (not PlaytestModeDismissTooltip or (if PlaytestModeDismissTooltip then UseObservableValueModuleResult else nil) ~= false)))))
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 78 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: Flag (upval), UseStateResult2 (copy)
 		Flag = true
 		UseStateResult2(false)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 83 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: LinkingProtocol (upval), PlaytestModeTooltipLearnMoreUrl (upval), PlaytestModeDismissTooltip (upval), UseResult (copy), Flag (upval), UseStateResult2 (copy)
 		LinkingProtocol.default:openURL(PlaytestModeTooltipLearnMoreUrl)
 		
@@ -59,7 +59,7 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "PlaytestModeTooltip"
 			UseStateResult2(false)
 		end
 	end, { if PlaytestModeDismissTooltip then UseResult else nil })
-	ReactModule.useEffect(function() --[[ Line: 93 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), p1 (copy), PlaytestModeDismissTooltip (upval), UseObservableValueModuleResult (ref), PlaytestModeTooltipExcludeBuildMode (upval), BuildModeLaunchModule (upval), Flag (upval)
 		local AnchorRef = p1.anchorRef
 		UseStateResult2((not PlaytestModeTooltipExcludeBuildMode or not BuildModeLaunchModule:hasBuildMode()) and (not Flag and (AnchorRef ~= nil and (AnchorRef.current ~= nil and (not PlaytestModeDismissTooltip or (if PlaytestModeDismissTooltip then UseObservableValueModuleResult else nil) ~= false)))))
@@ -69,22 +69,22 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "PlaytestModeTooltip"
 	})
 	
 	if PlaytestModeDismissTooltip then
-		ReactModule.useEffect(function() --[[ Line: 98 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseStateResult (copy), UseObservableValueModuleResult (ref), UseResult (copy)
 			if UseStateResult and not UseObservableValueModuleResult then
 				UseResult()
 			end
 		end, { UseStateResult, UseObservableValueModuleResult })
-		ReactModule.useEffect(function() --[[ Line: 104 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: SettingsShowSignal (upval), UseResult (copy)
-			local Connection = SettingsShowSignal:connect(function(p2) --[[ Line: 105 ]]
+			local Connection = SettingsShowSignal:connect(function(p2)
 				-- upvalues: UseResult (upval)
 				if p2 then
 					UseResult()
 				end
 			end)
 			
-			return function() --[[ Line: 111 ]]
+			return function()
 				-- upvalues: Connection (copy)
 				Connection:Disconnect()
 			end

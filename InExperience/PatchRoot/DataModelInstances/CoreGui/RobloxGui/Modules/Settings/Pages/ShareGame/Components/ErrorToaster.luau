@@ -11,10 +11,10 @@ local InviteStatus = ConstantsModule.InviteStatus
 local Translator = require(ShareGame.getTranslator)()
 local ErrorToaster = RoactModule.PureComponent:extend("ErrorToaster")
 
-function ErrorToaster.restartTimer(p1) --[[ Line: 26 ]]
+function ErrorToaster.restartTimer(p1)
 	-- upvalues: RunService (copy)
 	if not p1.timerConnection then
-		p1.timerConnection = RunService.RenderStepped:Connect(function() --[[ Line: 28 ]]
+		p1.timerConnection = RunService.RenderStepped:Connect(function()
 			-- upvalues: p1 (copy)
 			local FailedInvites = p1.props.failedInvites
 			
@@ -30,7 +30,7 @@ function ErrorToaster.restartTimer(p1) --[[ Line: 26 ]]
 	end
 end
 
-function ErrorToaster.stopTimer(p1) --[[ Line: 47 ]]
+function ErrorToaster.stopTimer(p1)
 	if p1.timerConnection then
 		p1.timerConnection:Disconnect()
 		p1.timerConnection = nil
@@ -38,13 +38,13 @@ function ErrorToaster.stopTimer(p1) --[[ Line: 47 ]]
 	p1.props.stoppedTimerDispatch()
 end
 
-function ErrorToaster.didUpdate(p1) --[[ Line: 56 ]]
+function ErrorToaster.didUpdate(p1)
 	if #p1.props.failedInvites ~= 0 then
 		p1:restartTimer()
 	end
 end
 
-function ErrorToaster.render(p1) --[[ Line: 64 ]]
+function ErrorToaster.render(p1)
 	-- upvalues: ConstantsModule (copy), InviteStatus (copy), RoactModule (copy), ThemeModule (copy), Translator (copy)
 	local FailedInvites = p1.props.failedInvites
 	local TOASTHEIGHT = ConstantsModule.LayoutSpecific[p1.props.deviceLayout].TOAST_HEIGHT
@@ -87,15 +87,15 @@ function ErrorToaster.render(p1) --[[ Line: 64 ]]
 	})
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p1) --[[ Line: 113 | Named "mapStateToProps" ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p1)
 	return {
 		deviceLayout = p1.DeviceInfo.DeviceLayout,
 		failedInvites = p1.Toasts.failedInvites
 	}
-end, function(Callback) --[[ Line: 120 | Named "mapDispatchToProps" ]]
+end, function(Callback)
 	-- upvalues: StoppedToastTimerModule (copy)
 	return {
-		stoppedTimerDispatch = function() --[[ Line: 122 ]]
+		stoppedTimerDispatch = function()
 			-- upvalues: Callback (copy), StoppedToastTimerModule (upval)
 			Callback(StoppedToastTimerModule())
 		end

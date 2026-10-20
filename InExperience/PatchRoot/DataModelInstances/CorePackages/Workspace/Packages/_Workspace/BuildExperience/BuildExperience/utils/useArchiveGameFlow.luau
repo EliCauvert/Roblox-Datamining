@@ -2,24 +2,24 @@
 local ReactModule = require(BuildExperience.Parent.React)
 local GameConfigurationActionsModule = require(BuildExperience.utils.GameConfigurationActions)
 
-return function() --[[ Line: 15 | Named "useArchiveGameFlow" ]]
+return function()
 	-- upvalues: ReactModule (copy), GameConfigurationActionsModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	
 	return {
 		isOpen = UseStateResult ~= nil,
-		requestArchive = ReactModule.useCallback(function(p1) --[[ Line: 18 ]]
+		requestArchive = ReactModule.useCallback(function(p1)
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(p1)
 		end, {}),
-		confirm = ReactModule.useCallback(function() --[[ Line: 26 ]]
+		confirm = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult (copy), GameConfigurationActionsModule (upval), UseStateResult2 (copy)
 			if UseStateResult ~= nil then
 				GameConfigurationActionsModule.archiveGame(UseStateResult)
 			end
 			UseStateResult2(nil)
 		end, { UseStateResult }),
-		cancel = ReactModule.useCallback(function() --[[ Line: 22 ]]
+		cancel = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(nil)
 		end, {})

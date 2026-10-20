@@ -16,24 +16,24 @@ local config1 = {
 	[Levels.Trace] = 5
 }
 
-local function _(p1): string --[[ Line: 28 | Named "maxLevelToGraphvizAttr" ]]
+local function _(p1): string
 	-- upvalues: config (copy)
 	local Entry = config[p1]
 	
 	return Entry and string.format(" fillcolor=%s style=filled", Entry) or ""
 end
 
-local _ = function(p1) --[[ Line: 33 | Named "getLevelRank" ]]
+local _ = function(p1)
 	-- upvalues: config1 (copy)
 	return config1[p1] or 0
 end
 
-local _ = function(p1, p2) --[[ Line: 37 | Named "maxLogLevel" ]]
+local _ = function(p1, p2)
 	-- upvalues: config1 (copy)
 	return (config1[p2] or 0) < (config1[p1] or 0) and p1 or p2
 end
 
-local function dfsGraphviz(p1, p2): string --[[ Line: 41 ]]
+local function dfsGraphviz(p1, p2): string
 	-- upvalues: config1 (copy), config (copy), dfsGraphviz (copy)
 	local v1 = ""
 	local Text = tostring(p1.name)
@@ -52,7 +52,7 @@ local function dfsGraphviz(p1, p2): string --[[ Line: 41 ]]
 	return Text1
 end
 
-return function(): string --[[ Line: 56 ]]
+return function(): string
 	-- upvalues: LogTreeModule (copy), dfsGraphviz (copy)
 	return "digraph {\n" .. dfsGraphviz((LogTreeModule.logger("*"))) .. "}\n"
 end

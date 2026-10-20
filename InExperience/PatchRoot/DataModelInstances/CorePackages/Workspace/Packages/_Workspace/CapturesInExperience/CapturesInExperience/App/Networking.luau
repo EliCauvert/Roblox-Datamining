@@ -7,7 +7,7 @@ local NewResult = require(Parent1.Lumberyak).Logger.new(nil, require(Parent.Cons
 local ConfigResult = LuaSocialLibrariesDepsModule.RoduxNetworking.config({
 	keyPath = "NetworkStatus",
 	networkImpl = HttpRequest.config({
-		requestFunction = function(p1, p2, p3) --[[ Line: 19 ]]
+		requestFunction = function(p1, p2, p3)
 			-- upvalues: NewResult (copy), HttpRequest (copy)
 			NewResult:debug(`Request: [ requestMethod = {p2}, url = {p1} ]`)
 			

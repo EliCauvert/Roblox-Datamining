@@ -1,3 +1,3 @@
-﻿return function(Text: string): boolean --[[ Line: 1 | Named "isErrorReasonContainsEconomicRestrictions" ]]
+﻿return function(Text: string): boolean
 	return string.find(Text, "EconomicRestrictions") ~= nil
 end

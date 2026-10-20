@@ -6,7 +6,7 @@ local ItemDetailsViewModule = require(script.Parent.ItemDetailsView)
 local UseItemDetailsViewModelModule = require(script.Parent.useItemDetailsViewModel)
 local ShopAbuseReportOverlayModule = if require(Parent.SharedFlags).FFlagEnableReportingFlowForExperienceShop then require(InExperienceShop.Components.ShopAbuseReportOverlay) else nil
 
-return function(p1) --[[ Line: 16 | Named "ItemDetailsContainer" ]]
+return function(p1)
 	-- upvalues: UseItemDetailsViewModelModule (copy), ReactModule (copy), View (copy), ItemDetailsViewModule (copy), ShopAbuseReportOverlayModule (copy)
 	local UseItemDetailsViewModelModuleResult = UseItemDetailsViewModelModule(p1)
 	local ReportSession = UseItemDetailsViewModelModuleResult.reportSession

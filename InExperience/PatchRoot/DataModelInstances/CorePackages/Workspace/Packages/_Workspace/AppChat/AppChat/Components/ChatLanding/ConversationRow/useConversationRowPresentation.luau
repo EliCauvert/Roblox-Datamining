@@ -20,15 +20,15 @@ local UseActivationOnFocusFunction = require(Parent.FocusNavigationUtils).useAct
 local UseConversationRowActivationModule = require(script.Parent.useConversationRowActivation)
 local NormalizeConversationForTelemetryModule = require(script.Parent.normalizeConversationForTelemetry)
 
-local function _(p1, p2, Enabled) --[[ Line: 64 | Named "isShowingSquadButton" ]]
+local function _(p1, p2, Enabled)
 	return Enabled == true and (p1 and p2)
 end
 
-return function(p1) --[[ Line: 68 | Named "useConversationRowPresentation" ]]
+return function(p1)
 	-- upvalues: GetConversationStoreModule (copy), GetConversationViewModelStoreModule (copy), ReactModule (copy), SignalsModule (copy), SignalsReactModule (copy), UseChatPagePaddingModule (copy), ChatPlacementContextModule (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), UseRelativeTimestampBindingModule (copy), UseLocalizationFunction (copy), UseGetOneToOneFriendIdFromConversationIdModule (copy), UseIsRobloxSubscriberFunction (copy), FFlagEnableBlackbirdCheck (copy), UseConversationRowActivationModule (copy), FFlagAppChatUseActivationOnFocus (copy), UseActivationOnFocusFunction (copy), ReactFocusNavigationModule (copy), NormalizeConversationForTelemetryModule (copy)
 	local ConversationStoreModule = GetConversationStoreModule(false)
 	local ConversationViewModelStoreModule = GetConversationViewModelStoreModule(false)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 71 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ConversationViewModelStoreModule (copy), p1 (copy)
 		return {
 			title = ConversationViewModelStoreModule.getTitle(p1.conversationId),
@@ -44,9 +44,9 @@ return function(p1) --[[ Line: 68 | Named "useConversationRowPresentation" ]]
 			locatorTitle = ConversationViewModelStoreModule.getLocatorTitle(p1.conversationId)
 		}
 	end, { ConversationViewModelStoreModule, p1.conversationId })
-	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 86 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), ConversationStoreModule (copy), p1 (copy)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 87 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: ConversationStoreModule (upval), p1 (upval)
 			return ConversationStoreModule.getConversation(p1.conversationId, p2)
 		end)
@@ -88,42 +88,42 @@ return function(p1) --[[ Line: 68 | Named "useConversationRowPresentation" ]]
 	local NoUseSignalStateResult3: boolean = HasUseSignalStateResult and (UseSignalStateResult4 and not UseSignalStateResult3)
 	local PendingSubtitleText = if HasUseSignalStateResult and UseSignalStateResult3 then UseLocalizationResult.pendingSubtitleText elseif HasUseSignalStateResult then UseSignalStateResult2 else ""
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 135 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseConversationRowActivationModuleResult (copy)
 		UseConversationRowActivationModuleResult.onActivated()
 	end, { UseConversationRowActivationModuleResult.onActivated })
 	local IsIsWideMode = p1.isWideMode == true
 	
 	if FFlagAppChatUseActivationOnFocus then
-		UseActivationOnFocusFunction(IsIsWideMode, UseRefResult, UseResult, nil, (ReactModule.useCallback(function() --[[ Line: 142 ]]
+		UseActivationOnFocusFunction(IsIsWideMode, UseRefResult, UseResult, nil, (ReactModule.useCallback(function()
 			-- upvalues: p1 (copy)
 			return p1.conversationId
 		end, { p1.conversationId })))
 	else
 		local UseContextResult = ReactModule.useContext(ReactFocusNavigationModule.FocusNavigationContext)
-		ReactModule.useEffect(function() --[[ Line: 148 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: IsIsWideMode (copy), UseContextResult (copy), UseRefResult (copy), UseResult (copy)
 			if IsIsWideMode and UseContextResult then
-				local SubscribeResult = UseContextResult.focusedGuiObject:subscribe(function(Current) --[[ Line: 152 ]]
+				local SubscribeResult = UseContextResult.focusedGuiObject:subscribe(function(Current)
 					-- upvalues: UseRefResult (upval), UseResult (upval)
 					if UseRefResult.current and Current == UseRefResult.current then
 						UseResult()
 					end
 				end)
 				
-				return function() --[[ Line: 157 ]]
+				return function()
 					-- upvalues: SubscribeResult (copy)
 					SubscribeResult:unsubscribe()
 				end
 			else
-				return function() --[[ Line: 150 ]] end
+				return function() end
 			end
 		end, { UseResult, IsIsWideMode, UseContextResult })
 	end
 	local UseRefResult1 = ReactModule.useRef(p1.fireImpressionEvent)
 	local UseRefResult2 = ReactModule.useRef(nil)
 	UseRefResult1.current = p1.fireImpressionEvent
-	ReactModule.useEffect(function() --[[ Line: 167 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), HasUseSignalStateResult (copy), UseRefResult2 (copy), p1 (copy), ConversationStoreModule (copy), NormalizeConversationForTelemetryModule (upval)
 		if UseRefResult1.current == nil or not HasUseSignalStateResult then return end
 		if UseRefResult2.current == p1.conversationId then return end

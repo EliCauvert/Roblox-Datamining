@@ -1,4 +1,4 @@
-﻿return function(Vector, Frame) --[[ Line: 1 | Named "getClosestItemToCenter" ]]
+﻿return function(Vector, Frame)
 	local CanvasPosition = Frame.CanvasPosition
 	local NewFloored = math.floor((CanvasPosition.X + Frame.AbsoluteSize.X / 2) / Vector.X) + 1
 	

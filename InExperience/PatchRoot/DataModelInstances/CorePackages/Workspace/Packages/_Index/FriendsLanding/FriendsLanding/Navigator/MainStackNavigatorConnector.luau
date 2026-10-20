@@ -6,7 +6,7 @@ local IsFromConnectionsHubModule = require(FriendsLanding.Navigator.isFromConnec
 local FFlagCreateConnectionsHub = require(FriendsLanding.Parent.SharedFlags).FFlagCreateConnectionsHub
 local MainStackNavigatorConnector = Roact.PureComponent:extend("MainStackNavigatorConnector")
 
-function MainStackNavigatorConnector.render(p1) --[[ Line: 13 ]]
+function MainStackNavigatorConnector.render(p1)
 	-- upvalues: FFlagCreateConnectionsHub (copy), IsFromConnectionsHubModule (copy), Roact (copy), FriendsLandingHeaderBarModule (copy), MainStackNavigatorModule (copy)
 	local Navigation = p1.props.navigation
 	local IsFromConnectionsHubModule1 = FFlagCreateConnectionsHub and IsFromConnectionsHubModule(Navigation)

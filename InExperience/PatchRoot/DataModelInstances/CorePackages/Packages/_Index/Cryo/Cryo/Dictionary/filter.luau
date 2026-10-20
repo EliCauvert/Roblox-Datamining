@@ -1,4 +1,4 @@
-﻿return function(List, Callback) --[[ Line: 6 | Named "filter" ]]
+﻿return function(List, Callback)
 	local t = {}
 	
 	for i, value in List do

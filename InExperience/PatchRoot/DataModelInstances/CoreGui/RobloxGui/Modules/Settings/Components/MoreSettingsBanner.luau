@@ -10,7 +10,7 @@ local IconSize = FoundationModule.Enums.IconSize
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 
-return function(p1) --[[ Line: 23 | Named "MoreSettingsBanner" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), UseTokensFunction (copy), ShouldShowMoreSettingsBannerModule (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy)
 	local IsPioneerLaunch = p1.isPioneerLaunch
 	local GetAvailability = p1.getAvailability
@@ -19,10 +19,10 @@ return function(p1) --[[ Line: 23 | Named "MoreSettingsBanner" ]]
 		text = "CoreScripts.InGameMenu.GameSettings.MoreSettingsAvailable"
 	})
 	local UseTokensResult = UseTokensFunction()
-	ReactModule.useEffect(function() --[[ Line: 31 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ShouldShowMoreSettingsBannerModule (upval), IsPioneerLaunch (copy), GetAvailability (copy), UseStateResult2 (copy)
 		local Flag = false
-		task.spawn(function() --[[ Line: 34 ]]
+		task.spawn(function()
 			-- upvalues: ShouldShowMoreSettingsBannerModule (upval), IsPioneerLaunch (upval), GetAvailability (upval), Flag (ref), UseStateResult2 (upval)
 			local ShouldShowMoreSettingsBannerModule1 = ShouldShowMoreSettingsBannerModule(IsPioneerLaunch, GetAvailability)
 			
@@ -31,7 +31,7 @@ return function(p1) --[[ Line: 23 | Named "MoreSettingsBanner" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 41 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end

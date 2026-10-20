@@ -1,4 +1,4 @@
-﻿local function _(List, Key, p1) --[[ Line: 1 | Named "addToMap" ]]
+﻿local function _(List, Key, p1)
 	local t = {}
 	
 	for i, value in pairs(List) do
@@ -9,7 +9,7 @@
 	return t
 end
 
-local _ = function(List, p2) --[[ Line: 13 | Named "removeFromMap" ]]
+local _ = function(List, p2)
 	local t = {}
 	
 	for i, value in pairs(List) do
@@ -20,11 +20,11 @@ local _ = function(List, p2) --[[ Line: 13 | Named "removeFromMap" ]]
 	return t
 end
 
-return function() --[[ Line: 25 | Named "createSignal" ]]
+return function()
 	local t = {}
 	
 	return {
-		subscribe = function(_, Callback) --[[ Line: 28 ]]
+		subscribe = function(_, Callback)
 			-- upvalues: t (ref)
 			assert(typeof(Callback) == "function", "Can only subscribe to signals with a function.")
 			local config = { callback = Callback }
@@ -36,7 +36,7 @@ return function() --[[ Line: 25 | Named "createSignal" ]]
 			t1[Callback] = config
 			t = t1
 			
-			return function() --[[ Line: 37 | Named "disconnect" ]]
+			return function()
 				-- upvalues: config (copy), t (upval), Callback (copy)
 				assert(not config.disconnected, "Listeners can only be disconnected once.")
 				config.disconnected = true
@@ -50,7 +50,7 @@ return function() --[[ Line: 25 | Named "createSignal" ]]
 				t = t2
 			end
 		end,
-		fire = function(_, ...) --[[ Line: 47 ]]
+		fire = function(_, ...)
 			-- upvalues: t (ref)
 			for i, value in pairs(t) do
 				if not value.disconnected then

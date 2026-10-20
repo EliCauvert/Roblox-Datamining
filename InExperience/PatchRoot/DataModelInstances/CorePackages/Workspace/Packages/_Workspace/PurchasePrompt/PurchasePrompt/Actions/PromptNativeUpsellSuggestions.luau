@@ -1,6 +1,6 @@
 ﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
 local _ = require(PurchasePrompt.Models.RobuxUpsell)
-local ActionCreator = require(PurchasePrompt.Parent.Rodux).makeActionCreator(script.Name, function(Products, Selection, VirtualItemBadgeType, ExperimentVariant) --[[ Line: 10 ]]
+local ActionCreator = require(PurchasePrompt.Parent.Rodux).makeActionCreator(script.Name, function(Products, Selection, VirtualItemBadgeType, ExperimentVariant)
 	return {
 		products = Products,
 		selection = Selection,
@@ -10,7 +10,7 @@ local ActionCreator = require(PurchasePrompt.Parent.Rodux).makeActionCreator(scr
 end)
 local PromptNativeUpsellSuggestionsModule = {
 	name = ActionCreator.name,
-	__call = function(_, p1, p2, p3, p4) --[[ Line: 29 ]]
+	__call = function(_, p1, p2, p3, p4)
 		-- upvalues: ActionCreator (copy)
 		return ActionCreator(p1, p2, p3, p4)
 	end

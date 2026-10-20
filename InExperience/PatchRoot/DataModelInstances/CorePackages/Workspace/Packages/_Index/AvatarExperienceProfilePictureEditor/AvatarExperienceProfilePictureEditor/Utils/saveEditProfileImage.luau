@@ -3,9 +3,9 @@ local ProfileRefreshSignal = require(AvatarExperienceProfilePictureEditor.Parent
 local UserAvatarConfigurationsCacheModule = require(AvatarExperienceProfilePictureEditor.Api.userAvatarConfigurationsCache)
 local SaveCloseupAndFullBodyFunction = require(AvatarExperienceProfilePictureEditor.Shared.savePPEConfig).saveCloseupAndFullBody
 
-return function(p1): boolean --[[ Line: 25 | Named "saveEditProfileImage" ]]
+return function(p1): boolean
 	-- upvalues: SaveCloseupAndFullBodyFunction (copy), UserAvatarConfigurationsCacheModule (copy), ProfileRefreshSignal (copy)
-	local Success, Result = pcall(function() --[[ Line: 26 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: SaveCloseupAndFullBodyFunction (upval), p1 (copy)
 		return SaveCloseupAndFullBodyFunction({
 			emoteAssetId = p1.emoteAssetId,

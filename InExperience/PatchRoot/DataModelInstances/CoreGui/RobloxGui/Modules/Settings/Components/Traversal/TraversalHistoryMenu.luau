@@ -25,7 +25,7 @@ local UseHistoryItemsFunction = Traversal.useHistoryItems
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FFlagAddTraversalHistoryReactMenuButtonsModule = require(Parent.Flags.FFlagAddTraversalHistoryReactMenuButtons)
 
-local function historyToMenuItems(List) --[[ Line: 44 ]]
+local function historyToMenuItems(List)
 	-- upvalues: GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy)
 	local List1 = {}
 	
@@ -39,17 +39,17 @@ local function historyToMenuItems(List) --[[ Line: 44 ]]
 	return List1
 end
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, _) --[[ Line: 56 | Named "TraversalHistoryMenu" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, _)
 	-- upvalues: ReactModule (copy), FFlagAddTraversalHistoryReactMenuButtonsModule (copy), UseHistoryItemsFunction (copy), historyToMenuItems (copy), Constants (copy), UseTokensFunction (copy), SignalsReactModule (copy), ReactPageSignalModule (copy), SettingsShowSignal (copy), GuiService (copy), UserInputService (copy), GetInputModeStoreFunction (copy), Input (copy), UtilityModule (copy), EnumReactPageModule (copy), Default (copy), View (copy), HistoryMenu (copy), TraversalLeaveConfirmationModule (copy)
 	local AnchorRef = if FFlagAddTraversalHistoryReactMenuButtonsModule and p1.anchorRef then p1.anchorRef else ReactModule.useRef(p1.anchorParent)
 	local UseHistoryItemsResult = UseHistoryItemsFunction()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 62 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: historyToMenuItems (upval), UseHistoryItemsResult (copy)
 		return (historyToMenuItems(UseHistoryItemsResult))
 	end, { UseHistoryItemsResult })
 	local DEFAULTCHEVRONBUTTONSTATE = if p1.idleButtonStateIsDown == nil then Constants.DEFAULT_CHEVRON_BUTTON_STATE else p1.idleButtonStateIsDown
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Enum.SelectionBehavior.Stop)
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 68 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: DEFAULTCHEVRONBUTTONSTATE (copy), UseBindingResult (copy)
 		return {
 			SelectionBehaviorUp = if DEFAULTCHEVRONBUTTONSTATE then UseBindingResult else Enum.SelectionBehavior.Stop,
@@ -59,20 +59,20 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, _) --[[ Line: 56 | N
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Constants.NO_UNIVERSE_ID)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactPageSignalModule)
-	local UseResult = ReactModule.useCallback(function(Callback) --[[ Line: 77 ]]
+	local UseResult = ReactModule.useCallback(function(Callback)
 		-- upvalues: SettingsShowSignal (upval), FFlagAddTraversalHistoryReactMenuButtonsModule (upval), p1 (copy), GuiService (upval)
 		return {
-			onSettingsVisible = SettingsShowSignal:connect(function(p2) --[[ Line: 79 ]]
+			onSettingsVisible = SettingsShowSignal:connect(function(p2)
 				-- upvalues: Callback (copy)
 				if not p2 then
 					Callback()
 				end
 			end),
-			onPageChanged = if FFlagAddTraversalHistoryReactMenuButtonsModule and not p1.currentPageChangeSignal then nil else p1.currentPageChangeSignal:connect(function() --[[ Line: 85 ]]
+			onPageChanged = if FFlagAddTraversalHistoryReactMenuButtonsModule and not p1.currentPageChangeSignal then nil else p1.currentPageChangeSignal:connect(function()
 				-- upvalues: Callback (copy)
 				Callback()
 			end),
-			onNativeClose = GuiService.NativeClose:Connect(function() --[[ Line: 89 ]]
+			onNativeClose = GuiService.NativeClose:Connect(function()
 				-- upvalues: Callback (copy)
 				Callback()
 			end)
@@ -82,12 +82,12 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, _) --[[ Line: 56 | N
 		SettingsShowSignal,
 		GuiService.NativeClose
 	})
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 96 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2 (copy), UseBindingResult2 (copy)
 		UseStateResult2(p2)
 		UseBindingResult2(Enum.SelectionBehavior.Stop)
 	end, { UseStateResult2 })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 101 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), Constants (upval), UserInputService (upval), GetInputModeStoreFunction (upval), Input (upval), AnchorRef (ref), GuiService (upval)
 		UseStateResult2(Constants.NO_UNIVERSE_ID)
 		local LastInputType = UserInputService:GetLastInputType()
@@ -97,7 +97,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, _) --[[ Line: 56 | N
 			GuiService.SelectedCoreObject = AnchorRef.current
 		end
 	end, {})
-	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 111 ]]
+	local UseResult3 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseBindingResult2 (copy)
 		if p2 then
 			UseBindingResult2(Enum.SelectionBehavior.Escape)
@@ -107,7 +107,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, _) --[[ Line: 56 | N
 			UseBindingResult2(Enum.SelectionBehavior.Stop)
 		end
 	end, {})
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 119 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: FFlagAddTraversalHistoryReactMenuButtonsModule (upval), p1 (copy), UseTokensResult (copy)
 		return if FFlagAddTraversalHistoryReactMenuButtonsModule and p1.isDarkOnDarkMode then UseTokensResult.Color.Surface.Surface_0 else {
 			Transparency = 0.33,
@@ -115,20 +115,20 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, _) --[[ Line: 56 | N
 		}
 	end, {})
 	local IsSmallTouchScreen = UtilityModule:IsSmallTouchScreen()
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 132 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: IsSmallTouchScreen (copy)
 		return {
 			["padding-small"] = IsSmallTouchScreen,
 			["padding-medium"] = not IsSmallTouchScreen
 		}
 	end, { IsSmallTouchScreen })
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 139 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseSignalStateResult (copy), EnumReactPageModule (upval), UseBindingResult2 (copy)
 		UseSignalStateResult.setCurrentReactPage(EnumReactPageModule.TraversalHistory)
 		UseBindingResult2(Enum.SelectionBehavior.Stop)
 	end, { UseSignalStateResult })
 	
-	return ReactModule.useMemo(function(): boolean --[[ Line: 144 ]]
+	return ReactModule.useMemo(function(): boolean
 		-- upvalues: Default (upval)
 		return #Default:getUniverseHistory() > 0
 	end, {}) and ReactModule.createElement(View, {

@@ -4,7 +4,7 @@ local SignalsModule = require(ViewRecycler.Parent.Signals)
 local BuildPlacementPlanModule = require(ViewRecycler.Core.PinnedItems.buildPlacementPlan)
 local list = { 1000, 100000 }
 
-local function createItems(Items) --[[ Line: 54 ]]
+local function createItems(Items)
 	local Buffer = table.create(Items)
 	
 	for i = 1, Items do
@@ -13,7 +13,7 @@ local function createItems(Items) --[[ Line: 54 ]]
 	return Buffer
 end
 
-local function createOffsets(Items: number, OperationsPerSample: number, ScrollPattern) --[[ Line: 65 ]]
+local function createOffsets(Items: number, OperationsPerSample: number, ScrollPattern)
 	local Largest = math.max(0, Items * 40 - 480)
 	local Buffer = table.create(OperationsPerSample)
 	
@@ -29,7 +29,7 @@ local function createOffsets(Items: number, OperationsPerSample: number, ScrollP
 	return Buffer
 end
 
-local function snapshotPlacementChecksum(Snapshot): number --[[ Line: 80 ]]
+local function snapshotPlacementChecksum(Snapshot): number
 	local NewStartOffset = 0
 	
 	for _, entry in Snapshot.entries do
@@ -38,11 +38,11 @@ local function snapshotPlacementChecksum(Snapshot): number --[[ Line: 80 ]]
 	return NewStartOffset
 end
 
-local function _(p1): number --[[ Line: 90 | Named "consumeCommittedSnapshot" ]]
+local function _(p1): number
 	return p1.version + #p1.entries
 end
 
-local _ = function() --[[ Line: 94 | Named "createCounters" ]]
+local _ = function()
 	return {
 		synchronizations = 0,
 		reassignedAssignments = 0,
@@ -52,7 +52,7 @@ local _ = function() --[[ Line: 94 | Named "createCounters" ]]
 	}
 end
 
-local _ = function(Counters) --[[ Line: 104 | Named "resetCounters" ]]
+local _ = function(Counters)
 	Counters.synchronizations = 0
 	Counters.reassignedAssignments = 0
 	Counters.acquiredAssignments = 0
@@ -60,7 +60,7 @@ local _ = function(Counters) --[[ Line: 104 | Named "resetCounters" ]]
 	Counters.acceptedMeasurements = 0
 end
 
-local function createVirtualizer(p1, Items, p2) --[[ Line: 112 ]]
+local function createVirtualizer(p1, Items, p2)
 	-- upvalues: createItems (copy)
 	local Count = 0
 	local config = {
@@ -74,26 +74,26 @@ local function createVirtualizer(p1, Items, p2) --[[ Line: 112 ]]
 	local RecyclingScope = p1.Adapter.createRecyclingScope({
 		maxPoolSize = 4,
 		adapter = {
-			create = function(): number --[[ Line: 120 ]]
+			create = function(): number
 				-- upvalues: Count (ref)
 				Count += 1
 				
 				return Count
 			end,
-			destroy = function() --[[ Line: 124 ]] end
+			destroy = function() end
 		}
 	})
 	local Virtualizer = p1.Adapter.createVirtualizer({
 		overscan = 2,
-		dataSource = p1.DataSource.snapshot(createItems(Items), function(p3): string --[[ Line: 129 ]]
+		dataSource = p1.DataSource.snapshot(createItems(Items), function(p3): string
 			return (tostring(p3.id))
 		end),
 		layout = MeasuredResult,
 		recyclingScope = RecyclingScope,
-		getItemViewType = function(p3) --[[ Line: 134 ]]
+		getItemViewType = function(p3)
 			return p3.kind
 		end,
-		diagnostics = function(p3) --[[ Line: 138 ]]
+		diagnostics = function(p3)
 			-- upvalues: config (copy)
 			if p3.kind == "itemViewsSynchronized" then
 				config.synchronizations += 1
@@ -117,7 +117,7 @@ local function createVirtualizer(p1, Items, p2) --[[ Line: 112 ]]
 	return Virtualizer, MeasuredResult, config, RecyclingScope
 end
 
-local function measureTraversal(p1, p2, p3, Items, ScrollStepCount, p4, SubmitsMeasurements, ScrollPattern, Workload, Description, LayoutGeometry, p5) --[[ Line: 158 ]]
+local function measureTraversal(p1, p2, p3, Items, ScrollStepCount, p4, SubmitsMeasurements, ScrollPattern, Workload, Description, LayoutGeometry, p5)
 	-- upvalues: createVirtualizer (copy), createOffsets (copy), snapshotPlacementChecksum (copy)
 	local Virtualizer, Virtualizer2, Virtualizer3, Virtualizer4 = createVirtualizer(p1, Items, p4)
 	local Offsets = createOffsets(Items, ScrollStepCount, ScrollPattern)
@@ -127,7 +127,7 @@ local function measureTraversal(p1, p2, p3, Items, ScrollStepCount, p4, SubmitsM
 	local SubmittedMeasurements = 0
 	local NewVersion = 0
 	
-	local function runTraversal(p6) --[[ Line: 180 ]]
+	local function runTraversal(p6)
 		-- upvalues: Virtualizer3 (copy), SubmittedMeasurements (ref), ObservablePlacementChecksum (ref), NewVersion (ref), NewFirstIndex (ref), v1 (ref), Offsets (copy), Virtualizer (copy), p1 (copy), snapshotPlacementChecksum (upval), SubmitsMeasurements (copy)
 		Virtualizer3.synchronizations = 0
 		Virtualizer3.reassignedAssignments = 0
@@ -189,7 +189,7 @@ local function measureTraversal(p1, p2, p3, Items, ScrollStepCount, p4, SubmitsM
 		NewFirstIndex += VisibleRange.firstIndex + VisibleRange.lastIndex
 	end
 	
-	local MeasureResult = p2.measure(function() --[[ Line: 226 ]]
+	local MeasureResult = p2.measure(function()
 		-- upvalues: runTraversal (copy)
 		runTraversal(false)
 	end, p5)
@@ -238,24 +238,24 @@ local function measureTraversal(p1, p2, p3, Items, ScrollStepCount, p4, SubmitsM
 	})
 end
 
-local function measureCoordinator(p7, p8, p9, Items, OperationsPerSample, Pattern, p10) --[[ Line: 282 ]]
+local function measureCoordinator(p7, p8, p9, Items, OperationsPerSample, Pattern, p10)
 	-- upvalues: ResponsibilityCatalogModule (copy)
-	local function createFixture(p11) --[[ Line: 291 ]]
+	local function createFixture(p11)
 		-- upvalues: p7 (copy), Items (copy), Pattern (copy), OperationsPerSample (copy)
 		local Count = 0
 		local Count1 = 0
 		local Total = 0
 		local RecyclingScope = p7.Adapter.createRecyclingScope({
 			adapter = {
-				create = function(): number --[[ Line: 297 ]]
+				create = function(): number
 					-- upvalues: Count (ref)
 					Count += 1
 					
 					return Count
 				end,
-				destroy = function() --[[ Line: 301 ]] end
+				destroy = function() end
 			},
-			onPoolChanged = if p11 then function() --[[ Line: 304 ]]
+			onPoolChanged = if p11 then function()
 				-- upvalues: Count1 (ref)
 				Count1 += 1
 			end else nil
@@ -271,7 +271,7 @@ local function measureCoordinator(p7, p8, p9, Items, OperationsPerSample, Patter
 		local t1 = {}
 		local t2 = {}
 		
-		local function synchronize(List) --[[ Line: 328 ]]
+		local function synchronize(List)
 			-- upvalues: t1 (ref), RecyclingScope (copy), t2 (copy), Total (ref), t (ref)
 			local List1 = {}
 			local List2 = {}
@@ -311,23 +311,23 @@ local function measureCoordinator(p7, p8, p9, Items, OperationsPerSample, Patter
 		local Inverted = false
 		
 		return {
-			run = function() --[[ Line: 361 ]]
+			run = function()
 				-- upvalues: OperationsPerSample (upval), Inverted (ref), synchronize (copy), Buffer1 (copy), Buffer (copy)
 				for _ = 1, OperationsPerSample do
 					Inverted = not Inverted
 					synchronize(if Inverted then Buffer1 else Buffer)
 				end
 			end,
-			getDiagnosticEvents = function() --[[ Line: 367 ]]
+			getDiagnosticEvents = function()
 				-- upvalues: Count1 (ref)
 				return Count1
 			end,
-			getLeaseTokensObserved = function() --[[ Line: 370 ]]
+			getLeaseTokensObserved = function()
 				-- upvalues: Total (ref)
 				return Total
 			end,
 			getScopeInventory = RecyclingScope.getScopeInventory,
-			destroy = function() --[[ Line: 374 ]]
+			destroy = function()
 				-- upvalues: RecyclingScope (copy), t2 (copy), t (ref), t1 (ref)
 				RecyclingScope.exchange(t2, t, {})
 				t = {}
@@ -378,9 +378,9 @@ local function measureCoordinator(p7, p8, p9, Items, OperationsPerSample, Patter
 	})
 end
 
-local function measureWithinBand(p12, p13, p14, Items, OperationsPerSample, p15) --[[ Line: 424 ]]
+local function measureWithinBand(p12, p13, p14, Items, OperationsPerSample, p15)
 	-- upvalues: createVirtualizer (copy), snapshotPlacementChecksum (copy), ResponsibilityCatalogModule (copy)
-	local function createArm(p16) --[[ Line: 432 ]]
+	local function createArm(p16)
 		-- upvalues: createVirtualizer (upval), p12 (copy), Items (copy), OperationsPerSample (copy), snapshotPlacementChecksum (upval)
 		local Virtualizer, Virtualizer2, Virtualizer3, Virtualizer4 = createVirtualizer(p12, Items, p16)
 		local Negated = 1
@@ -388,7 +388,7 @@ local function measureWithinBand(p12, p13, p14, Items, OperationsPerSample, p15)
 		local NewVersion = 0
 		
 		return {
-			run = function(p17) --[[ Line: 437 ]]
+			run = function(p17)
 				-- upvalues: Virtualizer3 (copy), Total (ref), NewVersion (ref), OperationsPerSample (upval), Virtualizer (copy), p12 (upval), Negated (ref), snapshotPlacementChecksum (upval)
 				Virtualizer3.synchronizations = 0
 				Virtualizer3.reassignedAssignments = 0
@@ -413,19 +413,19 @@ local function measureWithinBand(p12, p13, p14, Items, OperationsPerSample, p15)
 				Negated = -Negated
 			end,
 			counters = Virtualizer3,
-			getObservablePlacementChecksum = function() --[[ Line: 456 ]]
+			getObservablePlacementChecksum = function()
 				-- upvalues: Total (ref)
 				return Total
 			end,
-			getCommittedSnapshotTouch = function() --[[ Line: 459 ]]
+			getCommittedSnapshotTouch = function()
 				-- upvalues: NewVersion (ref)
 				return NewVersion
 			end,
-			prepareCanonicalEvidence = function() --[[ Line: 462 ]]
+			prepareCanonicalEvidence = function()
 				-- upvalues: Negated (ref)
 				Negated = 1
 			end,
-			destroy = function() --[[ Line: 465 ]]
+			destroy = function()
 				-- upvalues: Virtualizer (copy), p12 (upval), Virtualizer4 (copy), Virtualizer2 (copy)
 				Virtualizer.dispatch({ type = p12.VirtualizerCommandType.Destroy })
 				Virtualizer4.destroy()
@@ -436,11 +436,11 @@ local function measureWithinBand(p12, p13, p14, Items, OperationsPerSample, p15)
 	
 	local Arm = createArm(false)
 	local Arm1 = createArm(true)
-	local MeasureResult = p13.measure(function() --[[ Line: 475 ]]
+	local MeasureResult = p13.measure(function()
 		-- upvalues: Arm (copy)
 		Arm.run(false)
 	end, p15)
-	local MeasureResult1 = p13.measure(function() --[[ Line: 478 ]]
+	local MeasureResult1 = p13.measure(function()
 		-- upvalues: Arm1 (copy)
 		Arm1.run(false)
 	end, p15)
@@ -482,7 +482,7 @@ local function measureWithinBand(p12, p13, p14, Items, OperationsPerSample, p15)
 	})
 end
 
-local function measureProgrammaticScroll(p16, p17, p18, Items, OperationsPerSample, p19) --[[ Line: 528 ]]
+local function measureProgrammaticScroll(p16, p17, p18, Items, OperationsPerSample, p19)
 	-- upvalues: createVirtualizer (copy), snapshotPlacementChecksum (copy), ResponsibilityCatalogModule (copy)
 	local Virtualizer, Virtualizer2, _, Virtualizer4 = createVirtualizer(p16, Items, false)
 	local SnapshotsCaptured = 0
@@ -490,7 +490,7 @@ local function measureProgrammaticScroll(p16, p17, p18, Items, OperationsPerSamp
 	local Total = 0
 	local NewVersion = 0
 	
-	local function runProgrammaticScroll(p20) --[[ Line: 541 ]]
+	local function runProgrammaticScroll(p20)
 		-- upvalues: SnapshotsCaptured (ref), NewResult (ref), Total (ref), NewVersion (ref), OperationsPerSample (copy), Items (copy), Virtualizer (copy), p16 (copy), snapshotPlacementChecksum (upval)
 		SnapshotsCaptured = 0
 		NewResult = 0
@@ -537,7 +537,7 @@ local function measureProgrammaticScroll(p16, p17, p18, Items, OperationsPerSamp
 		end
 	end
 	
-	local MeasureResult = p17.measure(function() --[[ Line: 576 ]]
+	local MeasureResult = p17.measure(function()
 		-- upvalues: runProgrammaticScroll (copy)
 		runProgrammaticScroll(false)
 	end, p19)
@@ -573,7 +573,7 @@ local function measureProgrammaticScroll(p16, p17, p18, Items, OperationsPerSamp
 	})
 end
 
-local function measureMeasurementAnchoring(p20, p21, p22, Items, MeasurementUpdates, Tbl) --[[ Line: 621 ]]
+local function measureMeasurementAnchoring(p20, p21, p22, Items, MeasurementUpdates, Tbl)
 	-- upvalues: createVirtualizer (copy), snapshotPlacementChecksum (copy), ResponsibilityCatalogModule (copy)
 	local Virtualizer, Virtualizer2, _, Virtualizer4 = createVirtualizer(p20, Items, true)
 	Virtualizer.dispatch({
@@ -601,7 +601,7 @@ local function measureMeasurementAnchoring(p20, p21, p22, Items, MeasurementUpda
 	local NewMagnitude = 0
 	local NewVersion = 0
 	
-	local function runMeasurementAnchoring() --[[ Line: 645 ]]
+	local function runMeasurementAnchoring()
 		-- upvalues: ScrollCorrections (ref), NewMagnitude (ref), NewVersion (ref), MeasurementUpdates (copy), Virtualizer (copy), p20 (copy), v2 (ref)
 		ScrollCorrections = 0
 		NewMagnitude = 0
@@ -686,7 +686,7 @@ local function measureMeasurementAnchoring(p20, p21, p22, Items, MeasurementUpda
 	})
 end
 
-local function measureCrossAxisTraversal(p23, p24, p25, Items, ScrollStepCount, Layout, p26) --[[ Line: 729 ]]
+local function measureCrossAxisTraversal(p23, p24, p25, Items, ScrollStepCount, Layout, p26)
 	-- upvalues: createItems (copy), snapshotPlacementChecksum (copy), ResponsibilityCatalogModule (copy)
 	local Buffer = table.create(Items)
 	
@@ -696,27 +696,27 @@ local function measureCrossAxisTraversal(p23, p24, p25, Items, ScrollStepCount, 
 	local GridResult = if Layout == "grid" then p23.Layout.grid({ itemLength = 40, crossAxisCount = 3 }) else p23.Layout.masonry({
 		crossAxisCount = 3,
 		spacing = 4,
-		getItemLength = function(p27) --[[ Line: 745 ]]
+		getItemLength = function(p27)
 			-- upvalues: Buffer (copy)
 			return Buffer[p27]
 		end
 	})
 	local RecyclingScope = p23.Adapter.createRecyclingScope({
 		adapter = {
-			create = function() --[[ Line: 753 ]]
+			create = function()
 				return {}
 			end,
-			destroy = function() --[[ Line: 756 ]] end
+			destroy = function() end
 		}
 	})
 	local Virtualizer = p23.Adapter.createVirtualizer({
 		overscan = 1,
-		dataSource = p23.DataSource.snapshot(createItems(Items), function(p27): string --[[ Line: 760 ]]
+		dataSource = p23.DataSource.snapshot(createItems(Items), function(p27): string
 			return (tostring(p27.id))
 		end),
 		layout = GridResult,
 		recyclingScope = RecyclingScope,
-		getItemViewType = function(): string --[[ Line: 765 ]]
+		getItemViewType = function(): string
 			return "row"
 		end
 	})
@@ -730,7 +730,7 @@ local function measureCrossAxisTraversal(p23, p24, p25, Items, ScrollStepCount, 
 	local ObservablePlacementChecksum = 0
 	local NewVersion = 0
 	
-	local function runCrossAxisTraversal(p27) --[[ Line: 779 ]]
+	local function runCrossAxisTraversal(p27)
 		-- upvalues: ObservablePlacementChecksum (ref), NewVersion (ref), NewCrossAxisCount (ref), ScrollStepCount (copy), Virtualizer (copy), p23 (copy), snapshotPlacementChecksum (upval)
 		ObservablePlacementChecksum = 0
 		NewVersion = 0
@@ -756,7 +756,7 @@ local function measureCrossAxisTraversal(p23, p24, p25, Items, ScrollStepCount, 
 		end
 	end
 	
-	local MeasureResult = p24.measure(function() --[[ Line: 797 ]]
+	local MeasureResult = p24.measure(function()
 		-- upvalues: runCrossAxisTraversal (copy)
 		runCrossAxisTraversal(false)
 	end, p26)
@@ -801,9 +801,9 @@ local function measureCrossAxisTraversal(p23, p24, p25, Items, ScrollStepCount, 
 	})
 end
 
-local function measureAtomicMutation(p27, p28, p29, Items, Responsibility, Workload, p30) --[[ Line: 843 ]]
+local function measureAtomicMutation(p27, p28, p29, Items, Responsibility, Workload, p30)
 	-- upvalues: createItems (copy), snapshotPlacementChecksum (copy)
-	local SequenceResult = p27.DataSource.sequence(createItems(Items), function(p31): string --[[ Line: 852 ]]
+	local SequenceResult = p27.DataSource.sequence(createItems(Items), function(p31): string
 		return (tostring(p31.id))
 	end)
 	local UniformResult = p27.Layout.uniform({ itemLength = 40 })
@@ -812,20 +812,20 @@ local function measureAtomicMutation(p27, p28, p29, Items, Responsibility, Workl
 	local ScrollCorrections = 0
 	local NewMagnitude = 0
 	local Count = 0
-	SequenceResult.subscribe(function(p31) --[[ Line: 861 ]]
+	SequenceResult.subscribe(function(p31)
 		-- upvalues: Batches (ref), Changes (ref)
 		Batches += 1
 		Changes += #p31.changes
 	end)
 	local RecyclingScope = p27.Adapter.createRecyclingScope({
 		adapter = {
-			create = function(): number --[[ Line: 867 ]]
+			create = function(): number
 				-- upvalues: Count (ref)
 				Count += 1
 				
 				return Count
 			end,
-			destroy = function() --[[ Line: 871 ]] end
+			destroy = function() end
 		}
 	})
 	local Virtualizer = p27.Adapter.createVirtualizer({
@@ -834,10 +834,10 @@ local function measureAtomicMutation(p27, p28, p29, Items, Responsibility, Workl
 		dataSource = SequenceResult,
 		layout = UniformResult,
 		recyclingScope = RecyclingScope,
-		getItemViewType = function(p31) --[[ Line: 878 ]]
+		getItemViewType = function(p31)
 			return p31.kind
 		end,
-		onUpdate = function(_, p31) --[[ Line: 883 ]]
+		onUpdate = function(_, p31)
 			-- upvalues: p27 (copy), ScrollCorrections (ref), NewMagnitude (ref)
 			for _, effect in p31.effects do
 				if effect.type == p27.VirtualizerEffectType.ScrollCorrection then
@@ -859,13 +859,13 @@ local function measureAtomicMutation(p27, p28, p29, Items, Responsibility, Workl
 	})
 	local Count1 = 0
 	local NewVersion = 0
-	local MeasureResult = p28.measure(function() --[[ Line: 902 ]]
+	local MeasureResult = p28.measure(function()
 		-- upvalues: Count1 (ref), NewVersion (ref), Virtualizer (copy), SequenceResult (copy)
 		Count1 += 1
 		NewVersion = 0
 		local FirstIndex = Virtualizer.getSnapshot().visibleRange.firstIndex
 		local Item = SequenceResult.getItem(FirstIndex)
-		SequenceResult.transaction(function() --[[ Line: 907 ]]
+		SequenceResult.transaction(function()
 			-- upvalues: SequenceResult (upval), FirstIndex (copy), Item (copy), Count1 (upval)
 			SequenceResult.setItem(FirstIndex, { id = Item.id, kind = Item.kind })
 			SequenceResult.prepend({ kind = "row", id = -Count1 })
@@ -924,7 +924,7 @@ local function measureAtomicMutation(p27, p28, p29, Items, Responsibility, Workl
 	})
 end
 
-local function measureOverscanPrefetch(p32, p33, p34, Items, ScrollStepCount: number, p35) --[[ Line: 972 ]]
+local function measureOverscanPrefetch(p32, p33, p34, Items, ScrollStepCount: number, p35)
 	-- upvalues: createItems (copy), ResponsibilityCatalogModule (copy)
 	local PolicyCalls = 0
 	local PrefetchRequests = 0
@@ -932,23 +932,23 @@ local function measureOverscanPrefetch(p32, p33, p34, Items, ScrollStepCount: nu
 	local UniformResult = p32.Layout.uniform({ itemLength = 40 })
 	local RecyclingScope = p32.Adapter.createRecyclingScope({
 		adapter = {
-			create = function() --[[ Line: 986 ]]
+			create = function()
 				return {}
 			end,
-			destroy = function() --[[ Line: 989 ]] end
+			destroy = function() end
 		}
 	})
 	local Virtualizer = p32.Adapter.createVirtualizer({
-		dataSource = p32.DataSource.snapshot(createItems(Items), function(p36): string --[[ Line: 993 ]]
+		dataSource = p32.DataSource.snapshot(createItems(Items), function(p36): string
 			return (tostring(p36.id))
 		end),
 		layout = UniformResult,
 		recyclingScope = RecyclingScope,
-		getItemViewType = function(): string --[[ Line: 998 ]]
+		getItemViewType = function(): string
 			return "row"
 		end,
 		overscanPolicy = {
-			compute = function(p36) --[[ Line: 1002 ]]
+			compute = function(p36)
 				-- upvalues: PolicyCalls (ref)
 				PolicyCalls += 1
 				
@@ -963,7 +963,7 @@ local function measureOverscanPrefetch(p32, p33, p34, Items, ScrollStepCount: nu
 		crossAxisLength = 800,
 		type = p32.VirtualizerCommandType.SetViewportSize
 	})
-	local MeasureResult = p33.measure(function() --[[ Line: 1020 ]]
+	local MeasureResult = p33.measure(function()
 		-- upvalues: ScrollStepCount (copy), Virtualizer (copy), p32 (copy), PrefetchRequests (ref), CurrentRequestsObserved (ref)
 		for i = 1, ScrollStepCount do
 			for _, effect in Virtualizer.dispatch({
@@ -1041,11 +1041,11 @@ local function measureOverscanPrefetch(p32, p33, p34, Items, ScrollStepCount: nu
 	}
 end
 
-local function measurePinnedSticky(p36, p37, p38, Items, OperationsPerSample, p39) --[[ Line: 1095 ]]
+local function measurePinnedSticky(p36, p37, p38, Items, OperationsPerSample, p39)
 	-- upvalues: createItems (copy), BuildPlacementPlanModule (copy), snapshotPlacementChecksum (copy), ResponsibilityCatalogModule (copy)
 	local UniformResult = p36.Layout.uniform({ itemLength = 40 })
 	local PinnedItems = {
-		isItemStickyHeader = function(p40): boolean --[[ Line: 1105 ]]
+		isItemStickyHeader = function(p40): boolean
 			return p40.kind == "header"
 		end,
 		pinnedStartItem = {
@@ -1065,15 +1065,15 @@ local function measurePinnedSticky(p36, p37, p38, Items, OperationsPerSample, p3
 			value = { id = -2, kind = "pinned" }
 		}
 	}
-	local SnapshotResult = p36.DataSource.snapshot(createItems(Items), function(p40): string --[[ Line: 1125 ]]
+	local SnapshotResult = p36.DataSource.snapshot(createItems(Items), function(p40): string
 		return (tostring(p40.id))
 	end)
 	local RecyclingScope = p36.Adapter.createRecyclingScope({
 		adapter = {
-			create = function() --[[ Line: 1130 ]]
+			create = function()
 				return {}
 			end,
-			destroy = function() --[[ Line: 1133 ]] end
+			destroy = function() end
 		}
 	})
 	local Virtualizer = p36.Adapter.createVirtualizer({
@@ -1081,7 +1081,7 @@ local function measurePinnedSticky(p36, p37, p38, Items, OperationsPerSample, p3
 		dataSource = SnapshotResult,
 		layout = UniformResult,
 		recyclingScope = RecyclingScope,
-		getItemViewType = function(p40) --[[ Line: 1140 ]]
+		getItemViewType = function(p40)
 			return p40.kind
 		end,
 		isItemStickyHeader = PinnedItems.isItemStickyHeader,
@@ -1150,7 +1150,7 @@ local function measurePinnedSticky(p36, p37, p38, Items, OperationsPerSample, p3
 	local NewVersion = 0
 	local v5 = nil
 	local Snapshot = nil
-	local MeasureResult = p37.measure(function() --[[ Line: 1206 ]]
+	local MeasureResult = p37.measure(function()
 		-- upvalues: NewVersion (ref), OperationsPerSample (copy), Virtualizer (copy), p36 (copy), Snapshot (ref), v5 (ref), BuildPlacementPlanModule (upval), SnapshotResult (copy), UniformResult (copy), PinnedItems (copy), NewMainAxisLength (ref)
 		NewVersion = 0
 		
@@ -1220,24 +1220,24 @@ local function measurePinnedSticky(p36, p37, p38, Items, OperationsPerSample, p3
 	})
 end
 
-local function measureScrollPolicy(p40, p41, p42, OperationsPerSample, p43) --[[ Line: 1278 ]]
+local function measureScrollPolicy(p40, p41, p42, OperationsPerSample, p43)
 	-- upvalues: ResponsibilityCatalogModule (copy)
 	local InitialScrolls = 0
 	local EndFollowWrites = 0
 	local PaginationHits = 0
 	local HostOffsetChecksum = 0
 	
-	local function runScrollPolicy() --[[ Line: 1289 ]]
+	local function runScrollPolicy()
 		-- upvalues: OperationsPerSample (copy), p40 (copy), InitialScrolls (ref), EndFollowWrites (ref), HostOffsetChecksum (ref), PaginationHits (ref)
 		for _ = 1, OperationsPerSample do
 			local ContentLength = 200
 			local ScrollOffset = 170
 			local Flag = true
 			local Coordinator = p40.Adapter.ScrollPolicy.createCoordinator({
-				getItemCount = function(): number --[[ Line: 1295 ]]
+				getItemCount = function(): number
 					return 20
 				end,
-				getScrollState = function() --[[ Line: 1298 ]]
+				getScrollState = function()
 					-- upvalues: ContentLength (ref), ScrollOffset (ref)
 					local Largest = math.max(0, ContentLength - 30 - ScrollOffset)
 					
@@ -1250,10 +1250,10 @@ local function measureScrollPolicy(p40, p41, p42, OperationsPerSample, p43) --[[
 						atEnd = Largest <= 1
 					}
 				end,
-				getScrollOffsetForItem = function(p44: number): number --[[ Line: 1309 ]]
+				getScrollOffsetForItem = function(p44: number): number
 					return p44 * 10
 				end,
-				applyScrollAnchorOffset = function(Amount) --[[ Line: 1312 ]]
+				applyScrollAnchorOffset = function(Amount)
 					-- upvalues: Flag (ref), InitialScrolls (upval), EndFollowWrites (upval), ScrollOffset (ref), HostOffsetChecksum (upval)
 					if Flag then
 						InitialScrolls += 1
@@ -1266,27 +1266,27 @@ local function measureScrollPolicy(p40, p41, p42, OperationsPerSample, p43) --[[
 					
 					return Amount
 				end,
-				getViewportState = function() --[[ Line: 1323 ]]
+				getViewportState = function()
 					-- upvalues: ScrollOffset (ref)
 					return { viewportLength = 30, scrollOffset = ScrollOffset }
 				end,
-				getInitialScrollAlignment = function() --[[ Line: 1326 ]]
+				getInitialScrollAlignment = function()
 					-- upvalues: p40 (upval)
 					return p40.ScrollAlignment.End
 				end,
-				getAutoScrollPolicy = function() --[[ Line: 1329 ]]
+				getAutoScrollPolicy = function()
 					-- upvalues: p40 (upval)
 					return p40.AutoScrollPolicy.WhenAtEnd
 				end,
-				getStartReachedThreshold = function(): number --[[ Line: 1332 ]]
+				getStartReachedThreshold = function(): number
 					return 0
 				end,
-				getOnStartReached = function() --[[ Line: 1335 ]]
+				getOnStartReached = function()
 					return nil
 				end,
-				getOnEndReached = function() --[[ Line: 1338 ]]
+				getOnEndReached = function()
 					-- upvalues: PaginationHits (upval)
-					return function() --[[ Line: 1339 ]]
+					return function()
 						-- upvalues: PaginationHits (upval)
 						PaginationHits += 1
 					end
@@ -1354,7 +1354,7 @@ local function measureScrollPolicy(p40, p41, p42, OperationsPerSample, p43) --[[
 	})
 end
 
-local function measureRecyclingScopeRetention(p44, p45, p46, ItemsPerBatch, Batches, p47) --[[ Line: 1405 ]]
+local function measureRecyclingScopeRetention(p44, p45, p46, ItemsPerBatch, Batches, p47)
 	-- upvalues: ResponsibilityCatalogModule (copy)
 	local Creations = 0
 	local Evictions = 0
@@ -1362,20 +1362,20 @@ local function measureRecyclingScopeRetention(p44, p45, p46, ItemsPerBatch, Batc
 	local RecyclingScope = p44.Adapter.createRecyclingScope({
 		maxPoolSize = 4,
 		adapter = {
-			create = function() --[[ Line: 1418 ]]
+			create = function()
 				-- upvalues: Creations (ref)
 				Creations += 1
 				
 				return { id = Creations }
 			end,
-			destroy = function() --[[ Line: 1422 ]]
+			destroy = function()
 				-- upvalues: Evictions (ref)
 				Evictions += 1
 			end
 		}
 	})
 	local t = {}
-	local MeasureResult = p45.measure(function() --[[ Line: 1429 ]]
+	local MeasureResult = p45.measure(function()
 		-- upvalues: Batches (copy), ItemsPerBatch (copy), RecyclingScope (copy), t (copy), LeaseTokensObserved (ref)
 		for _ = 1, Batches do
 			local Buffer = table.create(ItemsPerBatch)
@@ -1421,29 +1421,29 @@ local function measureRecyclingScopeRetention(p44, p45, p46, ItemsPerBatch, Batc
 	})
 end
 
-local function measureActiveToggle(p48, p49, p50, Items, OperationsPerSample, p51) --[[ Line: 1479 ]]
+local function measureActiveToggle(p48, p49, p50, Items, OperationsPerSample, p51)
 	-- upvalues: SignalsModule (copy), createItems (copy), ResponsibilityCatalogModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(true)
 	local ReleasedAssignments = 0
 	local UniformResult = p48.Layout.uniform({ itemLength = 40 })
 	local RecyclingScope = p48.Adapter.createRecyclingScope({
 		adapter = {
-			create = function() --[[ Line: 1492 ]]
+			create = function()
 				return {}
 			end,
-			destroy = function() --[[ Line: 1495 ]] end
+			destroy = function() end
 		}
 	})
 	local Virtualizer = p48.Adapter.createVirtualizer({
-		dataSource = p48.DataSource.snapshot(createItems(Items), function(p52): string --[[ Line: 1499 ]]
+		dataSource = p48.DataSource.snapshot(createItems(Items), function(p52): string
 			return (tostring(p52.id))
 		end),
 		layout = UniformResult,
 		recyclingScope = RecyclingScope,
-		getItemViewType = function(): string --[[ Line: 1504 ]]
+		getItemViewType = function(): string
 			return "row"
 		end,
-		postCommitAssignment = function(_, p52) --[[ Line: 1507 ]]
+		postCommitAssignment = function(_, p52)
 			-- upvalues: ReleasedAssignments (ref)
 			if p52 == nil then
 				ReleasedAssignments += 1
@@ -1457,7 +1457,7 @@ local function measureActiveToggle(p48, p49, p50, Items, OperationsPerSample, p5
 		crossAxisLength = 800,
 		type = p48.VirtualizerCommandType.SetViewportSize
 	})
-	local MeasureResult = p49.measure(function() --[[ Line: 1520 | Named "runActiveToggle" ]]
+	local MeasureResult = p49.measure(function()
 		-- upvalues: OperationsPerSample (copy), Signal2 (copy)
 		for _ = 1, OperationsPerSample do
 			Signal2(false)
@@ -1499,34 +1499,34 @@ local function measureActiveToggle(p48, p49, p50, Items, OperationsPerSample, p5
 	})
 end
 
-local function measureLifecycle(p52, p53, p54, Items, Responsibility, Workload, p55) --[[ Line: 1562 ]]
+local function measureLifecycle(p52, p53, p54, Items, Responsibility, Workload, p55)
 	-- upvalues: createItems (copy)
 	local Initialized = 0
 	local Destroyed = 0
 	local MountedAssignments = 0
 	local ReleasedAssignments = 0
 	
-	local function runLifecycle() --[[ Line: 1575 ]]
+	local function runLifecycle()
 		-- upvalues: p52 (copy), createItems (upval), Items (copy), ReleasedAssignments (ref), Initialized (ref), MountedAssignments (ref), Destroyed (ref)
 		local UniformResult = p52.Layout.uniform({ itemLength = 40 })
 		local RecyclingScope = p52.Adapter.createRecyclingScope({
 			adapter = {
-				create = function() --[[ Line: 1579 ]]
+				create = function()
 					return {}
 				end,
-				destroy = function() --[[ Line: 1582 ]] end
+				destroy = function() end
 			}
 		})
 		local Virtualizer = p52.Adapter.createVirtualizer({
-			dataSource = p52.DataSource.snapshot(createItems(Items), function(p56): string --[[ Line: 1586 ]]
+			dataSource = p52.DataSource.snapshot(createItems(Items), function(p56): string
 				return (tostring(p56.id))
 			end),
 			layout = UniformResult,
 			recyclingScope = RecyclingScope,
-			getItemViewType = function(): string --[[ Line: 1591 ]]
+			getItemViewType = function(): string
 				return "row"
 			end,
-			postCommitAssignment = function(_, p56) --[[ Line: 1594 ]]
+			postCommitAssignment = function(_, p56)
 				-- upvalues: ReleasedAssignments (upval)
 				if p56 == nil then
 					ReleasedAssignments += 1
@@ -1581,7 +1581,7 @@ local function measureLifecycle(p52, p53, p54, Items, Responsibility, Workload, 
 end
 
 return {
-	run = function(p52, p53, p54, p55) --[[ Line: 1652 ]]
+	run = function(p52, p53, p54, p55)
 		-- upvalues: list (copy), measureTraversal (copy), ResponsibilityCatalogModule (copy), measureCrossAxisTraversal (copy), measureCoordinator (copy), measureWithinBand (copy), measureLifecycle (copy), measureAtomicMutation (copy), measureOverscanPrefetch (copy), measureProgrammaticScroll (copy), measureMeasurementAnchoring (copy), measurePinnedSticky (copy), measureScrollPolicy (copy), measureRecyclingScopeRetention (copy), measureActiveToggle (copy)
 		local P129 = p55 or {}
 		local ItemCounts = P129.itemCounts or list

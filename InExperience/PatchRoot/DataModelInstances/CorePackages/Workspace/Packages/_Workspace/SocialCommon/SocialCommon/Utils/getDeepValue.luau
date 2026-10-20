@@ -1,4 +1,4 @@
-﻿return function(p1, Text: string) --[[ Line: 17 ]]
+﻿return function(p1, Text: string)
 	local v1 = p1
 	
 	if not v1 then

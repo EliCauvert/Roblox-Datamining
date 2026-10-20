@@ -4,7 +4,7 @@ local FailureReasonModule = require(CurrencyTransfers.Enums.FailureReason)
 local GetFFlagEnableLimitHit2SVUpsellModule = require(CurrencyTransfers.Flags.GetFFlagEnableLimitHit2SVUpsell)
 local ErrorTransferModelModule = {}
 
-function ErrorTransferModelModule.new(p1) --[[ Line: 20 ]]
+function ErrorTransferModelModule.new(p1)
 	-- upvalues: ErrorTransferModelModule (copy)
 	assert(ErrorTransferModelModule.isValid(p1))
 	ErrorTransferModelModule.__index = ErrorTransferModelModule
@@ -13,7 +13,7 @@ function ErrorTransferModelModule.new(p1) --[[ Line: 20 ]]
 	return p1
 end
 
-function ErrorTransferModelModule.mock(p1) --[[ Line: 32 ]]
+function ErrorTransferModelModule.mock(p1)
 	-- upvalues: ErrorTransferModelModule (copy)
 	local P1 = p1 or {}
 	
@@ -25,7 +25,7 @@ function ErrorTransferModelModule.mock(p1) --[[ Line: 32 ]]
 	}))
 end
 
-function ErrorTransferModelModule.format(p1) --[[ Line: 45 ]]
+function ErrorTransferModelModule.format(p1)
 	-- upvalues: GetFFlagEnableLimitHit2SVUpsellModule (copy), FailureReasonModule (copy), ErrorTransferModelModule (copy)
 	local FailureReason = p1.FailureReason or p1.failureReason
 	local ErrorMessage = p1.ErrorMessage or (p1.errorMessage or "")

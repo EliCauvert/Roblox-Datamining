@@ -10,7 +10,7 @@ local GetEnableChatInputBarConfigurationAutocompleteEnabledModule = require(ExpC
 local ExtendedStandardizedFields = ConstantsModule.Analytics.ExtendedStandardizedFields
 local t = {}
 
-return function(p1) --[[ Line: 74 | Named "usePresetAutocompleteAnalytics" ]]
+return function(p1)
 	-- upvalues: t (copy), GetEnableChatInputBarConfigurationAutocompleteEnabledModule (copy), ReactModule (copy), ExpChatSharedModule (copy), ConstantsModule (copy), HttpService (copy), ExtendedStandardizedFields (copy), PresetSearchModule (copy), GetPresetChatStoreModule (copy)
 	local AutocompleteDropdownReducer = p1.autocompleteDropdownReducer
 	local T = if AutocompleteDropdownReducer == nil then t else AutocompleteDropdownReducer.results
@@ -20,7 +20,7 @@ return function(p1) --[[ Line: 74 | Named "usePresetAutocompleteAnalytics" ]]
 	local UseRefResult2 = ReactModule.useRef({})
 	local UseRefResult3 = ReactModule.useRef({})
 	local UseRefResult4 = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 103 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UseRefResult3 (copy), UseRefResult1 (copy), UseRefResult4 (copy), UseRefResult2 (copy), ExpChatSharedModule (upval), ConstantsModule (upval), HttpService (upval), ExtendedStandardizedFields (upval)
 		local Current = UseRefResult.current
 		
@@ -52,7 +52,7 @@ return function(p1) --[[ Line: 74 | Named "usePresetAutocompleteAnalytics" ]]
 			preset_items = HttpService:JSONEncode(List)
 		}, ExtendedStandardizedFields)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 150 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult (copy), PresetSearchModule (upval), GetPresetChatStoreModule (upval), UseRefResult4 (copy)
 		if UseRefResult.current == nil then return end
 		local PresetIdForValue = PresetSearchModule.getPresetIdForValue(GetPresetChatStoreModule(false), p2)
@@ -63,7 +63,7 @@ return function(p1) --[[ Line: 74 | Named "usePresetAutocompleteAnalytics" ]]
 			return
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 163 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: EnableChatInputBarConfigurationAutocompleteEnabledModule (copy), GetPresetChatStoreModule (upval), T (copy), PresetSearchModule (upval), UseRefResult2 (copy), UseRefResult1 (copy), UseRefResult3 (copy)
 		if not EnableChatInputBarConfigurationAutocompleteEnabledModule then return end
 		local PresetChatStoreModule = GetPresetChatStoreModule(false)
@@ -87,7 +87,7 @@ return function(p1) --[[ Line: 74 | Named "usePresetAutocompleteAnalytics" ]]
 		EnableChatInputBarConfigurationAutocompleteEnabledModule,
 		T
 	})
-	ReactModule.useEffect(function() --[[ Line: 183 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: EnableChatInputBarConfigurationAutocompleteEnabledModule (copy), UseResult (copy), UseRefResult (copy), HttpService (upval), ExpChatSharedModule (upval), ConstantsModule (upval), ExtendedStandardizedFields (upval)
 		if not EnableChatInputBarConfigurationAutocompleteEnabledModule then
 			UseResult()
@@ -109,9 +109,9 @@ return function(p1) --[[ Line: 74 | Named "usePresetAutocompleteAnalytics" ]]
 		EnableChatInputBarConfigurationAutocompleteEnabledModule,
 		UseResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 205 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult (copy)
-		return function() --[[ Line: 206 ]]
+		return function()
 			-- upvalues: UseResult (upval)
 			UseResult()
 		end

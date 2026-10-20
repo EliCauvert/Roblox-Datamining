@@ -19,9 +19,9 @@ local config = { language = "en-us" }
 local config1 = { Light = ColorMode.Light, Dark = ColorMode.Dark }
 local config2 = { Console = Device.Console, Desktop = Device.Desktop }
 
-local function v17(State) --[[ Line: 43 ]]
+local function v17(State)
 	-- upvalues: RoduxModule (copy), CryoModule (copy)
-	return RoduxModule.Store.new(function() --[[ Line: 44 ]]
+	return RoduxModule.Store.new(function()
 		-- upvalues: CryoModule (upval), State (copy)
 		return CryoModule.Dictionary.join(State, {
 			ScreenSize = Vector2.new(600, 600),
@@ -37,15 +37,15 @@ return {
 	roact = ReactModule,
 	reactRoblox = require(Parent.Dev.ReactRoblox),
 	roactRodux = RoactRoduxModule,
-	mapDefinition = function(p1) --[[ Line: 66 ]]
+	mapDefinition = function(p1)
 		-- upvalues: CryoModule (copy), config (copy)
 		return CryoModule.Dictionary.join(p1, {
 			controls = CryoModule.Dictionary.join(config, p1.controls or {})
 		})
 	end,
-	mapStory = function(p1) --[[ Line: 70 ]]
+	mapStory = function(p1)
 		-- upvalues: config1 (copy), ReactModule (copy), StyleProviderWithDefaultTheme (copy), RoactRoduxModule (copy), v17 (copy), UniversalAppPolicyModule (copy), ApolloClientModule (copy), MockApolloClientFunction (copy), FoundationProvider (copy), config2 (copy), DesignTokenProvider (copy), MockLocaleFunction (copy)
-		return function(p2) --[[ Line: 71 ]]
+		return function(p2)
 			-- upvalues: config1 (upval), ReactModule (upval), StyleProviderWithDefaultTheme (upval), RoactRoduxModule (upval), v17 (upval), UniversalAppPolicyModule (upval), ApolloClientModule (upval), MockApolloClientFunction (upval), FoundationProvider (upval), config2 (upval), DesignTokenProvider (upval), MockLocaleFunction (upval), p1 (copy)
 			return ReactModule.createElement(StyleProviderWithDefaultTheme, { withDarkTheme = true, withUiModeSupport = false }, {
 				storeProvider = ReactModule.createElement(RoactRoduxModule.StoreProvider, { store = v17(p2.definition.state or {}) }, {

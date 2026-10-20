@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 local UseCursorFunction = require(Parent.UIBlox).App.SelectionCursor.useCursor
 
-return function(Frame) --[[ Line: 15 | Named "FullPagePromptScrollList" ]]
+return function(Frame)
 	-- upvalues: UseDesignTokensFunction (copy), UseCursorFunction (copy), ReactModule (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local UseCursorResult = UseCursorFunction(UDim.new(0, UseDesignTokensResult.Radius.Small), UseDesignTokensResult.Size.Size_200)
@@ -22,7 +22,7 @@ return function(Frame) --[[ Line: 15 | Named "FullPagePromptScrollList" ]]
 		CanvasSize = UDim2.new(1, -Size350, 0, 0),
 		SelectionImageObject = UseCursorResult,
 		Selectable = UseBindingResult,
-		[ReactModule.Change.AbsoluteCanvasSize] = function(ScrollFrame) --[[ Line: 35 ]]
+		[ReactModule.Change.AbsoluteCanvasSize] = function(ScrollFrame)
 			-- upvalues: UseBindingResult2 (copy)
 			UseBindingResult2(ScrollFrame.AbsoluteWindowSize.Y < ScrollFrame.AbsoluteCanvasSize.Y)
 		end

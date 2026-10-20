@@ -4,11 +4,11 @@ local JsonModule = require("@std/json")
 local NetModule = require("@std/net")
 local ProcessModule = require("@std/process")
 
-local function _(p1) --[[ Line: 32 | Named "parentDir" ]]
+local function _(p1)
 	return p1:match("^(.*)/[^/]+$") or "."
 end
 
-local _ = function(Text) --[[ Line: 37 | Named "isModuleDir" ]]
+local _ = function(Text)
 	-- upvalues: FsModule (copy)
 	return FsModule.exists(Text .. "/init.lua") or FsModule.exists(Text .. "/init.luau")
 end
@@ -34,20 +34,20 @@ for _, value in {
 	end
 end
 local HttpService = {
-	JSONEncode = function(_, p1) --[[ Line: 68 ]]
+	JSONEncode = function(_, p1)
 		-- upvalues: JsonModule (copy)
 		return JsonModule.serialize(p1)
 	end,
-	JSONDecode = function(_, p1) --[[ Line: 71 ]]
+	JSONDecode = function(_, p1)
 		-- upvalues: JsonModule (copy)
 		return JsonModule.deserialize(p1)
 	end,
-	RequestInternal = function(_, p1) --[[ Line: 74 ]]
+	RequestInternal = function(_, p1)
 		-- upvalues: NetModule (copy)
 		return {
-			Start = function(_, Callback: (any, any) -> ()) --[[ Line: 76 ]]
+			Start = function(_, Callback: (any, any) -> ())
 				-- upvalues: NetModule (upval), p1 (copy)
-				local Success, Result = pcall(function() --[[ Line: 77 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: NetModule (upval), p1 (upval)
 					return NetModule.request(p1.Url, { method = p1.Method, headers = p1.Headers, body = p1.Body })
 				end)
@@ -72,36 +72,36 @@ local config = {
 	HttpService = HttpService,
 	RunService = {
 		renderStepped = {
-			Connect = function() --[[ Line: 103 ]]
-				return { Disconnect = function() --[[ Line: 105 ]] end }
+			Connect = function()
+				return { Disconnect = function() end }
 			end
 		},
-		IsStudio = function(_): boolean --[[ Line: 110 ]]
+		IsStudio = function(_): boolean
 			return false
 		end,
-		GetRobloxVersion = function(_): string --[[ Line: 113 ]]
+		GetRobloxVersion = function(_): string
 			return "version-9.999.0.9999999"
 		end
 	}
 }
 local self = setmetatable({ PlaceId = 0, JobId = "lute-test-job" }, {})
 
-function self:GetService(p1) --[[ Line: 119 ]]
+function self:GetService(p1)
 	-- upvalues: config (copy)
 	return config[p1]
 end
 
-function self:DefineFastFlag(p1, p2) --[[ Line: 122 ]]
+function self:DefineFastFlag(p1, p2)
 	return p1 == "SentryReportBreadcrumbs" or p2
 end
 
-function self:DefineFastInt(_, p1) --[[ Line: 129 ]]
+function self:DefineFastInt(_, p1)
 	return p1
 end
 
 local config1 = {
 	Dictionary = {
-		join = function(...) --[[ Line: 140 ]]
+		join = function(...)
 			local t = {}
 			
 			for i = 1, select("#", ...) do
@@ -118,9 +118,9 @@ local config1 = {
 	}
 }
 local self1 = setmetatable({}, {
-	__index = function() --[[ Line: 159 ]]
-		return function() --[[ Line: 160 ]]
-			return function(): boolean --[[ Line: 161 ]]
+	__index = function()
+		return function()
+			return function(): boolean
 				return true
 			end
 		end
@@ -164,13 +164,13 @@ local t1 = {}
 local v3 = nil
 local _ = nil
 
-local _ = function(p1, p2, p3) --[[ Line: 215 | Named "makeNode" ]]
+local _ = function(p1, p2, p3)
 	-- upvalues: v3 (ref)
 	return (setmetatable({ __path = p1, __name = p2, __parent = p3 }, v3))
 end
 
 v3 = {
-	__index = function(p1, Text: string) --[[ Line: 224 ]]
+	__index = function(p1, Text: string)
 		-- upvalues: v3 (ref)
 		if type(Text) == "string" and Text:sub(1, 2) == "__" then
 			return (rawget(p1, Text))
@@ -179,7 +179,7 @@ v3 = {
 		elseif Text == "Name" then
 			return p1.__name
 		elseif Text == "FindFirstAncestor" then
-			return function(_, Name) --[[ Line: 237 ]]
+			return function(_, Name)
 				-- upvalues: p1 (copy)
 				local Parent = p1.__parent
 				while Parent ~= nil do
@@ -202,7 +202,7 @@ v3 = {
 	end
 }
 
-local function v22(ErrorReport) --[[ Line: 259 ]]
+local function v22(ErrorReport)
 	-- upvalues: FsModule (copy), t1 (copy), LuauModule (copy), v22 (ref), t (copy), config2 (copy)
 	assert(type(ErrorReport) == "table" and ErrorReport.__path, "custom require expects a module node")
 	
@@ -247,7 +247,7 @@ local v5 = v22(self21.Sentry.ErrorReport)
 local v6 = Arg:match("@([^/]+)") or "?"
 local TestingTestErrorReporter = nil
 
-local function summarizeBreadcrumbs(): string --[[ Line: 337 ]]
+local function summarizeBreadcrumbs(): string
 	-- upvalues: TestingTestErrorReporter (ref)
 	local List = {}
 	
@@ -262,7 +262,7 @@ local NewResult = v4.new({
 	release = "error-reporter-test",
 	httpService = HttpService,
 	dsn = Arg,
-	sentryClientSuccessCallback = function() --[[ Line: 359 ]]
+	sentryClientSuccessCallback = function()
 		-- upvalues: v6 (copy), TestingTestErrorReporter (ref), HttpService (copy), summarizeBreadcrumbs (copy)
 		print("---- Sentry report accepted ----")
 		print("  environment:", "development")
@@ -279,7 +279,7 @@ local NewResult = v4.new({
 		end
 		print("--------------------------------")
 	end,
-	sentryClientFailureCallback = function(p2) --[[ Line: 374 ]]
+	sentryClientFailureCallback = function(p2)
 		print("[callback] sentryClientFailureCallback fired:", (tostring(p2)))
 	end
 })

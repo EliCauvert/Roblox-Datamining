@@ -12,14 +12,14 @@ TileSelectionOverlay.validateProps = TModule.strictInterface({
 })
 TileSelectionOverlay.defaultProps = { cornerRadius = UDim.new(0, 0) }
 
-function TileSelectionOverlay.render(p1) --[[ Line: 26 ]]
+function TileSelectionOverlay.render(p1)
 	-- upvalues: ImagesModule (copy), WithStyleModule (copy), RoactModule (copy), ImageSetComponentModule (copy)
 	local ZIndex = p1.props.ZIndex
 	local CornerRadius = p1.props.cornerRadius
 	local IconsActionsSelectOn = ImagesModule["icons/actions/selectOn"]
 	local ImageRectSizeRatio = IconsActionsSelectOn.ImageRectSize / ImagesModule.ImagesResolutionScale
 	
-	return WithStyleModule(function(p2) --[[ Line: 33 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: RoactModule (upval), ZIndex (copy), ImageSetComponentModule (upval), IconsActionsSelectOn (copy), ImageRectSizeRatio (copy), CornerRadius (copy)
 		local Theme = p2.Theme
 		local Tokens = p2.Tokens

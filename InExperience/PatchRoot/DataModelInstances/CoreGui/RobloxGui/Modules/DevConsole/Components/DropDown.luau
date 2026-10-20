@@ -10,17 +10,17 @@ local DropDownArrowHeightRatio = DropDownArrowHeight / 2
 local DownArrow = ConstantsModule.Image.DownArrow
 local DropDown = RoactModule.Component:extend("DropDown")
 
-function DropDown.init(p1) --[[ Line: 19 ]]
+function DropDown.init(p1)
 	-- upvalues: DevConsoleDropdownFlipFix (copy), RoactModule (copy)
 	if DevConsoleDropdownFlipFix then
 		p1.guiInset = game:GetService("GuiService"):GetGuiInset()
 	end
-	function p1:onMainButtonPressed(_) --[[ Line: 24 ]]
+	function p1:onMainButtonPressed(_)
 		-- upvalues: p1 (copy)
 		p1:setState({ showDropDown = true })
 	end
 	
-	function p1:nonDropDownSelection(Input) --[[ Line: 30 ]]
+	function p1:nonDropDownSelection(Input)
 		-- upvalues: p1 (copy)
 		if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch and Input.UserInputState == Enum.UserInputState.End then
 			p1:setState({ showDropDown = false })
@@ -31,7 +31,7 @@ function DropDown.init(p1) --[[ Line: 19 ]]
 	p1.ref = RoactModule.createRef()
 end
 
-function DropDown.render(p1) --[[ Line: 48 ]]
+function DropDown.render(p1)
 	-- upvalues: DevConsoleDropdownMultiSelect (copy), RoactModule (copy), ConstantsModule (copy), UtilBar1 (copy), UtilBar (copy), DevConsoleDropdownFlipFix (copy), DownArrow (copy), DropDownArrowHeight (copy), DropDownArrowHeightRatio (copy)
 	local ButtonSize = p1.props.buttonSize
 	local DropDownList = p1.props.dropDownList
@@ -71,7 +71,7 @@ function DropDown.render(p1) --[[ Line: 48 ]]
 				BackgroundTransparency = 0,
 				BorderSizePixel = 0,
 				LayoutOrder = LayoutOrder1,
-				[RoactModule.Event.Activated] = function() --[[ Line: 106 ]]
+				[RoactModule.Event.Activated] = function()
 					-- upvalues: HasOnToggleFunction (copy), OnToggleFunction (copy), LayoutOrder1 (copy), OnSelectionFunction (copy), p1 (copy)
 					if HasOnToggleFunction then
 						OnToggleFunction(LayoutOrder1)

@@ -2,7 +2,7 @@
 local _ = require(script.Parent.ExpChatConversationListAdapter)
 local IsInboxInitialLoadingModule = require(script.Parent.isInboxInitialLoading)
 
-return function(p1, p2) --[[ Line: 43 | Named "resolveListState" ]]
+return function(p1, p2)
 	-- upvalues: IsInboxInitialLoadingModule (copy)
 	if p2 == nil then
 		local IsTotalCountMatch: boolean = p1.hasError and p1.totalCount == 0

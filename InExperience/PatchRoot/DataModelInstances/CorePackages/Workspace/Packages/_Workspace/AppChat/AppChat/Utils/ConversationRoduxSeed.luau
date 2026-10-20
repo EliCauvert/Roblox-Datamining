@@ -4,15 +4,15 @@ local CryoModule = require(Parent.Cryo)
 local _DateTime = require(Parent.Time).DateTime
 local ConversationChannelsModule = require(AppChat.Models.ConversationChannels)
 
-local function _(p1): boolean --[[ Line: 19 | Named "hasIteratorMember" ]]
+local function _(p1): boolean
 	return type(p1) == "table" and p1.CreateIterator ~= nil
 end
 
 return {
-	isFriendsPlaceholderConversationId = function(Text: string): boolean --[[ Line: 25 ]]
+	isFriendsPlaceholderConversationId = function(Text: string): boolean
 		return type(Text) == "string" and string.sub(Text, 1, 8) == "friends:"
 	end,
-	normalizeStoreConversationForRodux = function(p1) --[[ Line: 29 ]]
+	normalizeStoreConversationForRodux = function(p1)
 		-- upvalues: _DateTime (copy), ConversationChannelsModule (copy), CryoModule (copy)
 		local LastUpdated = p1.lastUpdated
 		local FromUnixTimestampResult = if typeof(LastUpdated) == "DateTime" then _DateTime.fromUnixTimestamp(LastUpdated.UnixTimestamp) elseif type(LastUpdated) == "table" and typeof(LastUpdated.dateTime) == "DateTime" then _DateTime.fromUnixTimestamp(LastUpdated.dateTime.UnixTimestamp) else nil

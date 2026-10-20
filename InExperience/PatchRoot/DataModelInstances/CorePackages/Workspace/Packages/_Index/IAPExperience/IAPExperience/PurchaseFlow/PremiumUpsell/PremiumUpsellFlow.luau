@@ -17,11 +17,11 @@ local VerifiedParentalConsentDialog = require(Parent2.VerifiedParentalConsentDia
 local CompleteFlowInStudioAccept = game:DefineFastFlag("CompleteFlowInStudioAccept", false)
 local ExtendResult = RoactModule.Component:extend(script.Name)
 
-function ExtendResult.init(p1) --[[ Line: 64 ]]
+function ExtendResult.init(p1)
 	-- upvalues: HttpService (copy)
 	p1.state = { analyticId = HttpService:GenerateGUID(false) }
 	
-	function p1.closeModal() --[[ Line: 69 ]]
+	function p1.closeModal()
 		-- upvalues: p1 (copy)
 		local Props = p1.props
 		p1:reportUserInput("Cancel")
@@ -31,7 +31,7 @@ function ExtendResult.init(p1) --[[ Line: 64 ]]
 	end
 end
 
-function ExtendResult.didUpdate(p1, p2, _) --[[ Line: 79 ]]
+function ExtendResult.didUpdate(p1, p2, _)
 	local Props = p1.props
 	
 	if p2.purchaseState ~= Props.purchaseState then
@@ -40,21 +40,21 @@ function ExtendResult.didUpdate(p1, p2, _) --[[ Line: 79 ]]
 	end
 end
 
-function ExtendResult.UnbindActions(p1) --[[ Line: 88 ]]
+function ExtendResult.UnbindActions(p1)
 	-- upvalues: GetEnableCentralOverlayForUpsellPromptModule (copy), ContextActionService (copy), ConstantsModule (copy)
 	if GetEnableCentralOverlayForUpsellPromptModule() and p1.props.dispatchCentralOverlay then
 		ContextActionService:UnbindAction(ConstantsModule.CLOSE_MODAL_ACTION)
 	end
 end
 
-function ExtendResult.BindCancelAction(p1) --[[ Line: 94 ]]
+function ExtendResult.BindCancelAction(p1)
 	-- upvalues: GetEnableCentralOverlayForUpsellPromptModule (copy), ContextActionService (copy), ConstantsModule (copy)
 	if GetEnableCentralOverlayForUpsellPromptModule() and p1.props.dispatchCentralOverlay then
 		ContextActionService:BindAction(ConstantsModule.CLOSE_MODAL_ACTION, p1.closeModal, false, Enum.KeyCode.ButtonB, Enum.KeyCode.Escape)
 	end
 end
 
-function ExtendResult.closeCentralOverlay(p1) --[[ Line: 110 ]]
+function ExtendResult.closeCentralOverlay(p1)
 	-- upvalues: GetEnableCentralOverlayForUpsellPromptModule (copy)
 	local Props = p1.props
 	
@@ -63,7 +63,7 @@ function ExtendResult.closeCentralOverlay(p1) --[[ Line: 110 ]]
 	end
 end
 
-function ExtendResult.constructPremiumUpsellPromptAnimatorObj(p1) --[[ Line: 118 ]]
+function ExtendResult.constructPremiumUpsellPromptAnimatorObj(p1)
 	-- upvalues: GetPartialPageModalMiddleContentWidthFunction (copy), PremiumUpsellFlowStateModule (copy), RoactModule (copy), PremiumUpsellPromptModule (copy), CompleteFlowInStudioAccept (copy)
 	local Props = p1.props
 	
@@ -71,7 +71,7 @@ function ExtendResult.constructPremiumUpsellPromptAnimatorObj(p1) --[[ Line: 118
 		shouldAnimate = true,
 		shouldShow = Props.purchaseState == PremiumUpsellFlowStateModule.PurchaseModal,
 		animateDown = GetPartialPageModalMiddleContentWidthFunction(Props.screenSize.X) == 492,
-		renderChildren = function() --[[ Line: 127 ]]
+		renderChildren = function()
 			-- upvalues: RoactModule (upval), PremiumUpsellPromptModule (upval), Props (copy), p1 (copy), CompleteFlowInStudioAccept (upval)
 			return RoactModule.createElement(PremiumUpsellPromptModule, {
 				screenSize = Props.screenSize,
@@ -80,7 +80,7 @@ function ExtendResult.constructPremiumUpsellPromptAnimatorObj(p1) --[[ Line: 118
 				robuxPrice = Props.robuxPrice,
 				robuxAmount = Props.robuxAmount,
 				acceptControllerIcon = Props.acceptControllerIcon,
-				purchasePremiumActivated = function() --[[ Line: 139 ]]
+				purchasePremiumActivated = function()
 					-- upvalues: p1 (upval), Props (upval), CompleteFlowInStudioAccept (upval)
 					p1:reportUserInput("Subscribe")
 					Props.purchasePremium()
@@ -90,7 +90,7 @@ function ExtendResult.constructPremiumUpsellPromptAnimatorObj(p1) --[[ Line: 118
 					end
 					p1:closeCentralOverlay()
 				end,
-				cancelPurchaseActivated = function() --[[ Line: 147 ]]
+				cancelPurchaseActivated = function()
 					-- upvalues: p1 (upval), Props (upval)
 					p1:reportUserInput("Cancel")
 					Props.cancelPurchase()
@@ -101,21 +101,21 @@ function ExtendResult.constructPremiumUpsellPromptAnimatorObj(p1) --[[ Line: 118
 	}
 end
 
-function ExtendResult.constructPurchaseErrorPromptAnimatorObj(p1) --[[ Line: 157 ]]
+function ExtendResult.constructPurchaseErrorPromptAnimatorObj(p1)
 	-- upvalues: PremiumUpsellFlowStateModule (copy), RoactModule (copy), PurchaseErrorPromptModule (copy)
 	local Props = p1.props
 	
 	return {
 		shouldAnimate = true,
 		shouldShow = Props.purchaseState == PremiumUpsellFlowStateModule.Error,
-		renderChildren = function() --[[ Line: 163 ]]
+		renderChildren = function()
 			-- upvalues: RoactModule (upval), PurchaseErrorPromptModule (upval), Props (copy), p1 (copy)
 			return RoactModule.createElement(PurchaseErrorPromptModule, {
 				screenSize = Props.screenSize,
 				errorType = Props.errorType,
 				economicRestrictionError = Props.economicRestrictionError,
 				doneControllerIcon = Props.acceptControllerIcon,
-				doneActivated = function() --[[ Line: 172 ]]
+				doneActivated = function()
 					-- upvalues: p1 (upval), Props (upval)
 					p1:reportUserInput("Done")
 					Props.flowComplete()
@@ -126,7 +126,7 @@ function ExtendResult.constructPurchaseErrorPromptAnimatorObj(p1) --[[ Line: 157
 	}
 end
 
-function ExtendResult.constructPurchaseVPCPromptAnimatorObj(p1) --[[ Line: 182 ]]
+function ExtendResult.constructPurchaseVPCPromptAnimatorObj(p1)
 	-- upvalues: PremiumUpsellFlowStateModule (copy), RoactModule (copy), VerifiedParentalConsentDialog (copy)
 	local Props = p1.props
 	p1:BindCancelAction()
@@ -134,13 +134,13 @@ function ExtendResult.constructPurchaseVPCPromptAnimatorObj(p1) --[[ Line: 182 ]
 	return {
 		shouldAnimate = true,
 		shouldShow = Props.purchaseState == PremiumUpsellFlowStateModule.PurchaseVPCModal,
-		renderChildren = function() --[[ Line: 190 ]]
+		renderChildren = function()
 			-- upvalues: RoactModule (upval), VerifiedParentalConsentDialog (upval), Props (copy), p1 (copy)
 			return RoactModule.createElement(VerifiedParentalConsentDialog, {
 				isActionable = false,
 				screenSize = Props.screenSize,
 				modalType = Props.purchaseVPCType,
-				onDismiss = function() --[[ Line: 195 ]]
+				onDismiss = function()
 					-- upvalues: p1 (upval), Props (upval)
 					p1:reportUserInput("Cancel")
 					Props.cancelPurchase()
@@ -151,7 +151,7 @@ function ExtendResult.constructPurchaseVPCPromptAnimatorObj(p1) --[[ Line: 182 ]
 	}
 end
 
-function ExtendResult.dispatchCentralOverlayAndRenderModal(p1, Props) --[[ Line: 205 ]]
+function ExtendResult.dispatchCentralOverlayAndRenderModal(p1, Props)
 	-- upvalues: GetEnableCentralOverlayForUpsellPromptModule (copy), PremiumUpsellFlowStateModule (copy), ConstantsModule (copy)
 	if not GetEnableCentralOverlayForUpsellPromptModule() or not Props.dispatchCentralOverlay then return end
 	local PurchaseState = Props.purchaseState
@@ -167,7 +167,7 @@ function ExtendResult.dispatchCentralOverlayAndRenderModal(p1, Props) --[[ Line:
 	end
 end
 
-function ExtendResult.reportModalShown(p1) --[[ Line: 236 ]]
+function ExtendResult.reportModalShown(p1)
 	-- upvalues: GetModalShownEventDataModule (copy), PremiumUpsellFlowStateModule (copy), HttpService (copy)
 	local Props = p1.props
 	local State = p1.state
@@ -179,7 +179,7 @@ function ExtendResult.reportModalShown(p1) --[[ Line: 236 ]]
 	end
 end
 
-function ExtendResult.reportUserInput(p1, p2) --[[ Line: 257 ]]
+function ExtendResult.reportUserInput(p1, p2)
 	-- upvalues: GetUserInputEventDataModule (copy), PremiumUpsellFlowStateModule (copy), HttpService (copy)
 	local Props = p1.props
 	local State = p1.state
@@ -191,7 +191,7 @@ function ExtendResult.reportUserInput(p1, p2) --[[ Line: 257 ]]
 	end
 end
 
-function ExtendResult.getChildrenElements(p1) --[[ Line: 280 ]]
+function ExtendResult.getChildrenElements(p1)
 	-- upvalues: RoactModule (copy), AnimatorModule (copy)
 	return {
 		PremiumUpsellPromptAnimator = RoactModule.createElement(AnimatorModule, p1:constructPremiumUpsellPromptAnimatorObj()),
@@ -200,7 +200,7 @@ function ExtendResult.getChildrenElements(p1) --[[ Line: 280 ]]
 	}
 end
 
-function ExtendResult.render(p1) --[[ Line: 288 ]]
+function ExtendResult.render(p1)
 	-- upvalues: GetEnableCentralOverlayForUpsellPromptModule (copy), RoactModule (copy)
 	local Props = p1.props
 	

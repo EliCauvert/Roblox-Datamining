@@ -8,10 +8,10 @@ local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local _ = require(script.Parent.PrivateInvitesManagementView)
 
-return function(p1) --[[ Line: 26 | Named "usePrivateInvitesManagementViewModel" ]]
+return function(p1)
 	-- upvalues: GetPrivatePlaytestersStoreFunction (copy), ReactModule (copy), SignalsReactModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), SendBuildExperienceEventModule (copy)
 	local PrivatePlaytestersStore = GetPrivatePlaytestersStoreFunction(false)
-	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function() --[[ Line: 28 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function()
 		-- upvalues: PrivatePlaytestersStore (copy), p1 (copy)
 		return PrivatePlaytestersStore.getAndFetchInvitedPlayers(p1.universeId)
 	end, { PrivatePlaytestersStore, p1.universeId }).players)
@@ -36,7 +36,7 @@ return function(p1) --[[ Line: 26 | Named "usePrivateInvitesManagementViewModel"
 	local Title = UseLocalizationResult.title
 	local UniverseId = p1.universeId
 	local UseRefResult = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 55 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), SendBuildExperienceEventModule (upval), UniverseId (copy)
 		if not UseRefResult.current then
 			UseRefResult.current = true
@@ -54,21 +54,21 @@ return function(p1) --[[ Line: 26 | Named "usePrivateInvitesManagementViewModel"
 		inviteButtonText = InviteButton,
 		userIds = UseSignalStateResult,
 		removingUserIds = UseStateResult,
-		onRemove = ReactModule.useCallback(function(p2) --[[ Line: 65 ]]
+		onRemove = ReactModule.useCallback(function(p2)
 			-- upvalues: UseStateResult2 (copy), PrivatePlaytestersStore (copy), UniverseId (copy), SendBuildExperienceEventModule (upval)
-			UseStateResult2(function(Tbl) --[[ Line: 66 ]]
+			UseStateResult2(function(Tbl)
 				-- upvalues: p2 (copy)
 				local Copy = table.clone(Tbl)
 				Copy[p2] = true
 				
 				return Copy
 			end)
-			PrivatePlaytestersStore.removeInvite(UniverseId, p2):andThen(function() --[[ Line: 73 ]]
+			PrivatePlaytestersStore.removeInvite(UniverseId, p2):andThen(function()
 				-- upvalues: SendBuildExperienceEventModule (upval), UniverseId (upval)
 				SendBuildExperienceEventModule("PLAYTESTER_REMOVED", { universeId = UniverseId })
-			end):finally(function() --[[ Line: 76 ]]
+			end):finally(function()
 				-- upvalues: UseStateResult2 (upval), p2 (copy)
-				UseStateResult2(function(Tbl) --[[ Line: 77 ]]
+				UseStateResult2(function(Tbl)
 					-- upvalues: p2 (upval)
 					local Copy = table.clone(Tbl)
 					Copy[p2] = nil
@@ -78,7 +78,7 @@ return function(p1) --[[ Line: 26 | Named "usePrivateInvitesManagementViewModel"
 			end)
 		end, { PrivatePlaytestersStore, UniverseId }),
 		isInviteDisabled = MAXINVITES <= CountUseSignalStateResult,
-		onOpenInvitePicker = ReactModule.useCallback(function() --[[ Line: 85 ]]
+		onOpenInvitePicker = ReactModule.useCallback(function()
 			-- upvalues: SendBuildExperienceEventModule (upval), UniverseId (copy), p1 (copy)
 			SendBuildExperienceEventModule("ADD_TO_PLAYTEST_CLICK", { universeId = UniverseId }, { source = "management_page" })
 			p1.onOpenInvitePicker()

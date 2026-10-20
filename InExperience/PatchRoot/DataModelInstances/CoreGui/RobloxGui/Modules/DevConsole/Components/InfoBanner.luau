@@ -2,7 +2,7 @@
 local CellLabelModule = require(script.Parent.CellLabel)
 local ConstantsModule = require(script.Parent.Parent.Constants)
 
-return function(p1) --[[ Line: 17 | Named "InfoBanner" ]]
+return function(p1)
 	-- upvalues: RoactModule (copy), ConstantsModule (copy), CellLabelModule (copy)
 	return RoactModule.createElement("Frame", {
 		BorderSizePixel = 0,

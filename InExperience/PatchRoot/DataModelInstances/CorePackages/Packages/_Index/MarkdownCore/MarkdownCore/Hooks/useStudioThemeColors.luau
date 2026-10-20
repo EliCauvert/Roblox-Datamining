@@ -4,17 +4,17 @@ local ThemeModule = require(Parent.Utils.Highlighter.Theme)
 local _ = require(Parent.Types)
 local IsCliModule = require(Parent.Utils.isCli)
 
-return function() --[[ Line: 8 | Named "useStudioThemeColors" ]]
+return function()
 	-- upvalues: ReactModule (copy), ThemeModule (copy), IsCliModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(ThemeModule.defaultColors)
-	ReactModule.useEffect(function() --[[ Line: 11 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsCliModule (upval), ThemeModule (upval), UseStateResult2 (copy)
-		local function getTokens() --[[ Line: 12 ]]
+		local function getTokens()
 			-- upvalues: IsCliModule (upval), ThemeModule (upval)
 			if IsCliModule() then
 				return ThemeModule.defaultColors
 			else
-				local Success, Result = pcall(function() --[[ Line: 17 ]]
+				local Success, Result = pcall(function()
 					return settings().Studio.Theme
 				end)
 				
@@ -33,15 +33,15 @@ return function() --[[ Line: 8 | Named "useStudioThemeColors" ]]
 		end
 		
 		UseStateResult2((getTokens()))
-		local Success, Result = pcall(function() --[[ Line: 40 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: UseStateResult2 (upval), getTokens (copy)
-			return settings().Studio.ThemeChanged:Connect(function() --[[ Line: 41 ]]
+			return settings().Studio.ThemeChanged:Connect(function()
 				-- upvalues: UseStateResult2 (upval), getTokens (upval)
 				UseStateResult2((getTokens()))
 			end)
 		end)
 		
-		return function() --[[ Line: 46 ]]
+		return function()
 			-- upvalues: Success (copy), Result (copy)
 			if Success and Result then
 				Result:Disconnect()

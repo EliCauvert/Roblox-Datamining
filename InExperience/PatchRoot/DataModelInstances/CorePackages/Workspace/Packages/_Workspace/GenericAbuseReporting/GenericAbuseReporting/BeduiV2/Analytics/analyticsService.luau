@@ -34,13 +34,13 @@ local LinkOpenedSource = { Footer = "footer", NextAction = "next_action" }
 local SubmitSource = { Flow = "flow", SceneSelection = "sceneSelection" }
 local list = { "errorMessage", "message", "error" }
 
-local function _(p1, p2: number) --[[ Line: 96 | Named "getBoundedUtf8String" ]]
+local function _(p1, p2: number)
 	local Text = tostring(p1)
 	
 	return if utf8.len(Text) == nil then nil elseif #Text <= p2 then Text else string.sub(Text, 1, utf8.offset(Text, 0, p2 + 1) - 1)
 end
 
-local _ = function(Segments, Key, p1) --[[ Line: 109 | Named "setBoundedMetadata" ]]
+local _ = function(Segments, Key, p1)
 	if p1 ~= nil then
 		local Text = tostring(p1)
 		local Text1 = if utf8.len(Text) == nil then nil elseif #Text <= 1000 then Text else string.sub(Text, 1, utf8.offset(Text, 0, 1001) - 1)
@@ -51,7 +51,7 @@ local _ = function(Segments, Key, p1) --[[ Line: 109 | Named "setBoundedMetadata
 	end
 end
 
-local _ = function(p1) --[[ Line: 118 | Named "getFallbackErrorMessage" ]]
+local _ = function(p1)
 	-- upvalues: list (copy)
 	if type(p1) ~= "table" then
 		return nil
@@ -67,7 +67,7 @@ local _ = function(p1) --[[ Line: 118 | Named "getFallbackErrorMessage" ]]
 	return nil
 end
 
-local function getHeader(Headers, Text: string) --[[ Line: 132 ]]
+local function getHeader(Headers, Text: string)
 	if type(Headers) ~= "table" then
 		return nil
 	end
@@ -81,7 +81,7 @@ local function getHeader(Headers, Text: string) --[[ Line: 132 ]]
 	return nil
 end
 
-local _ = function(Segments, Key, p2, p3) --[[ Line: 146 | Named "setBoundedNumericHeaderMetadata" ]]
+local _ = function(Segments, Key, p2, p3)
 	-- upvalues: getHeader (copy)
 	local Number: number? = tonumber((getHeader(p2, p3)))
 	
@@ -95,7 +95,7 @@ local _ = function(Segments, Key, p2, p3) --[[ Line: 146 | Named "setBoundedNume
 	end
 end
 
-local function formatErrorDetailForAnalytics(p2, p3, p4) --[[ Line: 160 ]]
+local function formatErrorDetailForAnalytics(p2, p3, p4)
 	-- upvalues: getHeader (copy), list (copy), DashModule (copy)
 	local v2 = if type(p3) == "string" then p3 else nil
 	local Error_metadata = {}
@@ -256,7 +256,7 @@ local function formatErrorDetailForAnalytics(p2, p3, p4) --[[ Line: 160 ]]
 	}
 end
 
-local _ = function(List): boolean --[[ Line: 248 | Named "isArray" ]]
+local _ = function(List): boolean
 	local Count = 0
 	
 	for _ in List do
@@ -265,7 +265,7 @@ local _ = function(List): boolean --[[ Line: 248 | Named "isArray" ]]
 	return Count == #List and Count > 0
 end
 
-local function flattenForTelemetry(JoinResult) --[[ Line: 261 ]]
+local function flattenForTelemetry(JoinResult)
 	local t = {}
 	
 	for i, value in JoinResult do
@@ -303,10 +303,10 @@ local config = {
 	throttlingPercentage = game:DefineFastInt("DynamicAbuseReportV2ThrottleHundredthsPercent", 0)
 }
 
-local _ = function() --[[ Line: 303 | Named "getCoreScriptVersion" ]]
+local _ = function()
 	-- upvalues: RunService (copy)
 	if game:GetEngineFeature("CoreScriptVersionEnabled") then
-		local Success, Result = pcall(function() --[[ Line: 308 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: RunService (upval)
 			return RunService:GetCoreScriptVersion()
 		end)
@@ -319,7 +319,7 @@ end
 local Client_version = nil
 
 if game:GetEngineFeature("CoreScriptVersionEnabled") then
-	local Success, Result = pcall(function() --[[ Line: 308 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: RunService (copy)
 		return RunService:GetCoreScriptVersion()
 	end)
@@ -328,7 +328,7 @@ else
 	Client_version = nil
 end
 return {
-	sendAnalyticsEvent = function(p5, p6) --[[ Line: 317 ]]
+	sendAnalyticsEvent = function(p5, p6)
 		-- upvalues: LocalPlayer (copy), Client_version (copy), flattenForTelemetry (copy), DashModule (copy), FFlagAbuseReportImproveErrorEventsModule (copy), HttpService (copy), TelemetryService (copy), config (copy)
 		local FlattenForTelemetryResult = flattenForTelemetry(DashModule.join(p5, p6, {
 			user_id = LocalPlayer and LocalPlayer.UserId or nil,

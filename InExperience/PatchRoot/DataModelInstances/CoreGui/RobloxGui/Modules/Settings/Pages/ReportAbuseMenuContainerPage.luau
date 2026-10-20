@@ -22,26 +22,26 @@ local FFlagReportFocusNavCloseButtonModule = require(RobloxGui.Modules.AbuseRepo
 local FFlagStandardizeSafetyIcon = SharedFlagsModule.FFlagStandardizeSafetyIcon
 local SwitchOverToAbuseReportMenuV2 = game:DefineFastFlag("SwitchOverToAbuseReportMenuV2", false)
 local v1 = nil
-v1 = (function() --[[ Line: 38 | Named "Initialize" ]]
+v1 = (function()
 	-- upvalues: RobloxGui (copy), UtilityModule (copy), Uiblox (copy), FFlagStandardizeSafetyIcon (copy), IconName (copy), IconVariant (copy), BuilderIconsModule (copy), IsSideSheetEnabledModule (copy), SwitchOverToAbuseReportMenuV2 (copy), RoactModule (copy), AbuseReportMenuV2 (copy), LegacyAbuseReportMenu (copy), FFlagInExperienceReportClosingBugfix (copy), EnabledResult (copy), ServiceModule (copy), FFlagHideShortcutsOnReportDropdownModule (copy), FFlagReportFocusNavIEMButtonsModule (copy), FFlagReportFocusNavCloseButtonModule (copy)
 	local NewPage = require(RobloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	
-	function NewPage._onHiddenCallback() --[[ Line: 42 ]] end
+	function NewPage._onHiddenCallback() end
 	
-	function NewPage._onDisplayedCallback() --[[ Line: 43 ]] end
+	function NewPage._onDisplayedCallback() end
 	
-	function NewPage._onDisplayingCallback() --[[ Line: 44 ]] end
+	function NewPage._onDisplayingCallback() end
 	
-	function NewPage._onSettingsHiddenCallback() --[[ Line: 45 ]] end
+	function NewPage._onSettingsHiddenCallback() end
 	
-	function NewPage._setNextPlayerToReportCallback() --[[ Line: 46 ]] end
+	function NewPage._setNextPlayerToReportCallback() end
 	
-	function NewPage._onMenuWidthChange() --[[ Line: 47 ]] end
+	function NewPage._onMenuWidthChange() end
 	
-	function NewPage:SetHub(HubRef) --[[ Line: 49 ]]
+	function NewPage:SetHub(HubRef)
 		-- upvalues: NewPage (copy)
 		NewPage.HubRef = HubRef
-		NewPage.HubRef.SettingsShowSignal:connect(function(p1) --[[ Line: 53 ]]
+		NewPage.HubRef.SettingsShowSignal:connect(function(p1)
 			-- upvalues: NewPage (upval)
 			if not p1 then
 				NewPage:onSettingsHidden()
@@ -51,47 +51,47 @@ v1 = (function() --[[ Line: 38 | Named "Initialize" ]]
 		return NewPage
 	end
 	
-	function NewPage:showAlert(p1, p2, p3) --[[ Line: 62 ]]
+	function NewPage:showAlert(p1, p2, p3)
 		-- upvalues: UtilityModule (upval), NewPage (copy)
 		UtilityModule:ShowAlert(p1, p2, NewPage.HubRef, p3)
 	end
 	
-	function NewPage:showReportSentPage(p1) --[[ Line: 66 ]]
+	function NewPage:showReportSentPage(p1)
 		-- upvalues: NewPage (copy)
 		NewPage.HubRef.ReportSentPageV2:ShowReportedPlayer(p1, true)
 	end
 	
-	function NewPage:HideMenu() --[[ Line: 70 ]]
+	function NewPage:HideMenu()
 		-- upvalues: NewPage (copy)
 		NewPage.HubRef:SetVisibility(false, true)
 	end
 	
-	function NewPage:ShowMenu() --[[ Line: 74 ]]
+	function NewPage:ShowMenu()
 		-- upvalues: NewPage (copy)
 		NewPage.HubRef:SetVisibility(true, true, NewPage, nil, "ScreenshotUnhide")
 	end
 	
-	function NewPage:onHidden() --[[ Line: 78 ]]
+	function NewPage:onHidden()
 		-- upvalues: NewPage (copy)
 		NewPage._onHiddenCallback()
 	end
 	
-	function NewPage:onSettingsHidden() --[[ Line: 82 ]]
+	function NewPage:onSettingsHidden()
 		-- upvalues: NewPage (copy)
 		NewPage._onSettingsHiddenCallback()
 	end
 	
-	function NewPage:onDisplayed() --[[ Line: 86 ]]
+	function NewPage:onDisplayed()
 		-- upvalues: NewPage (copy)
 		NewPage._onDisplayedCallback()
 	end
 	
-	function NewPage:onDisplaying() --[[ Line: 90 ]]
+	function NewPage:onDisplaying()
 		-- upvalues: NewPage (copy)
 		NewPage._onDisplayingCallback()
 	end
 	
-	function NewPage:setNextPlayerToReport(p1) --[[ Line: 94 ]]
+	function NewPage:setNextPlayerToReport(p1)
 		-- upvalues: NewPage (copy)
 		NewPage._setNextPlayerToReportCallback(p1)
 	end
@@ -106,84 +106,84 @@ v1 = (function() --[[ Line: 38 | Named "Initialize" ]]
 	NewPage.ShouldShowHubBar = true
 	NewPage.ShouldDisableDefaultScroll = SwitchOverToAbuseReportMenuV2
 	RoactModule.mount(RoactModule.createElement(if SwitchOverToAbuseReportMenuV2 then AbuseReportMenuV2 else LegacyAbuseReportMenu, {
-		hideReportTab = function() --[[ Line: 120 ]]
+		hideReportTab = function()
 			-- upvalues: NewPage (copy)
 			NewPage:HideMenu()
 		end,
-		showReportTab = function() --[[ Line: 123 ]]
+		showReportTab = function()
 			-- upvalues: NewPage (copy)
 			NewPage:ShowMenu()
 		end,
-		registerOnReportTabHidden = function(_onHiddenCallback) --[[ Line: 126 ]]
+		registerOnReportTabHidden = function(_onHiddenCallback)
 			-- upvalues: NewPage (copy)
 			NewPage._onHiddenCallback = _onHiddenCallback
 		end,
-		registerOnReportTabDisplayed = function(_onDisplayedCallback) --[[ Line: 129 ]]
+		registerOnReportTabDisplayed = function(_onDisplayedCallback)
 			-- upvalues: NewPage (copy)
 			NewPage._onDisplayedCallback = _onDisplayedCallback
 		end,
-		registerOnReportTabDisplaying = function(_onDisplayingCallback) --[[ Line: 132 ]]
+		registerOnReportTabDisplaying = function(_onDisplayingCallback)
 			-- upvalues: NewPage (copy)
 			NewPage._onDisplayingCallback = _onDisplayingCallback
 		end,
-		registerOnMenuWidthChange = function(_onMenuWidthChange) --[[ Line: 135 ]]
+		registerOnMenuWidthChange = function(_onMenuWidthChange)
 			-- upvalues: NewPage (copy)
 			NewPage._onMenuWidthChange = _onMenuWidthChange
 		end,
-		registerSetNextPlayerToReport = function(_setNextPlayerToReportCallback) --[[ Line: 138 ]]
+		registerSetNextPlayerToReport = function(_setNextPlayerToReportCallback)
 			-- upvalues: NewPage (copy)
 			NewPage._setNextPlayerToReportCallback = _setNextPlayerToReportCallback
 		end,
-		registerOnSettingsHidden = function(_onSettingsHiddenCallback) --[[ Line: 141 ]]
+		registerOnSettingsHidden = function(_onSettingsHiddenCallback)
 			-- upvalues: NewPage (copy)
 			NewPage._onSettingsHiddenCallback = _onSettingsHiddenCallback
 		end,
-		showReportSentPage = function(p1) --[[ Line: 144 ]]
+		showReportSentPage = function(p1)
 			-- upvalues: NewPage (copy)
 			NewPage:showReportSentPage(p1)
 		end,
-		onReportComplete = function(p1) --[[ Line: 147 ]]
+		onReportComplete = function(p1)
 			-- upvalues: FFlagInExperienceReportClosingBugfix (upval), EnabledResult (upval), ServiceModule (upval), NewPage (copy)
 			if FFlagInExperienceReportClosingBugfix and EnabledResult then
 				ServiceModule:setShortcutBar(nil)
 			end
-			NewPage:showAlert(p1, "Ok", function() --[[ Line: 151 ]]
+			NewPage:showAlert(p1, "Ok", function()
 				-- upvalues: NewPage (upval)
 				NewPage:HideMenu()
 			end)
 		end,
-		onDropdownMenuOpenChange = if FFlagHideShortcutsOnReportDropdownModule and EnabledResult then function(p1) --[[ Line: 157 ]]
+		onDropdownMenuOpenChange = if FFlagHideShortcutsOnReportDropdownModule and EnabledResult then function(p1)
 			-- upvalues: ServiceModule (upval)
 			ServiceModule:setHideShortcutBar("InExperienceReportDropdown", p1)
 		end else nil,
-		getSettingsHubRef = if FFlagReportFocusNavIEMButtonsModule or FFlagReportFocusNavCloseButtonModule then function() --[[ Line: 162 ]]
+		getSettingsHubRef = if FFlagReportFocusNavIEMButtonsModule or FFlagReportFocusNavCloseButtonModule then function()
 			-- upvalues: NewPage (copy)
 			return NewPage.HubRef
 		end else nil
 	}), NewPage.Page, "AbuseReportMenu")
 	NewPage.Page.Size = UDim2.new(1, 0, 0, 0)
 	NewPage.Page.AutomaticSize = Enum.AutomaticSize.Y
-	NewPage.Page:GetPropertyChangedSignal("AbsolutePosition"):Connect(function() --[[ Line: 176 ]]
+	NewPage.Page:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
 		-- upvalues: NewPage (copy)
 		NewPage._onMenuWidthChange(NewPage.Page.AbsoluteSize.X)
 	end)
 	
 	return NewPage
 end)()
-v1.Displayed.Event:connect(function() --[[ Line: 186 ]]
+v1.Displayed.Event:connect(function()
 	-- upvalues: v1 (ref)
 	v1:onDisplayed()
 end)
-v1.Displaying.Event:connect(function() --[[ Line: 190 ]]
+v1.Displaying.Event:connect(function()
 	-- upvalues: v1 (ref)
 	v1:onDisplaying()
 end)
-v1.Hidden.Event:connect(function() --[[ Line: 194 ]]
+v1.Hidden.Event:connect(function()
 	-- upvalues: v1 (ref)
 	v1:onHidden()
 end)
 
-function v1:ReportPlayer(p1, p2) --[[ Line: 198 ]]
+function v1:ReportPlayer(p1, p2)
 	-- upvalues: ReportAbuseAnalytics (copy), v1 (ref)
 	if p1 then
 		ReportAbuseAnalytics:startAbuseReportSession(p2)

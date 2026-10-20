@@ -21,7 +21,7 @@ if not require(Parent.Flags.FFlagPlayerListRemoveTopStat) then
 end
 local TopStatConnector = RoactModule.PureComponent:extend("TopStatConnector")
 
-function TopStatConnector.render(p1) --[[ Line: 44 ]]
+function TopStatConnector.render(p1)
 	-- upvalues: SetupTopStatResult (ref)
 	if SetupTopStatResult then
 		SetupTopStatResult:SetTopStatEnabled(p1.props.displayOptions.playerlistCoreGuiEnabled)
@@ -29,7 +29,7 @@ function TopStatConnector.render(p1) --[[ Line: 44 ]]
 	return nil
 end
 
-local function mapStateToProps(p1) --[[ Line: 51 ]]
+local function mapStateToProps(p1)
 	return { displayOptions = p1.displayOptions }
 end
 

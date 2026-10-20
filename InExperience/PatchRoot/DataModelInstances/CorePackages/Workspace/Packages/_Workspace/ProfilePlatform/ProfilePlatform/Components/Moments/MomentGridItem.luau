@@ -22,13 +22,13 @@ local MomentMediaTile = MomentsCommonModule.Media.MomentMediaTile
 local GradientBackdrop = MomentsCommonModule.Components.GradientBackdrop
 local ThumbUp = require(Parent.BuilderIcons).Icon.ThumbUp
 
-return function(p1) --[[ Line: 52 | Named "MomentGridItem" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), FFlagMomentsEngagementMetricsFeature (copy), UseSignalStateFunction (copy), GetMomentsCapabilitiesFunction (copy), ReactModule (copy), MakeProfileTileFieldsModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), ToMediaItemModule (copy), ControlState (copy), FFlagProfileMomentsOrderingAndReactions (copy), View (copy), StateLayerAffordance (copy), MomentMediaTile (copy), GradientBackdrop (copy), MomentEngagementCountModule (copy), ThumbUp (copy)
 	local Moment = p1.moment
 	local OnHoverChangedFunction = p1.onHoverChanged
 	local UseTokensResult = UseTokensFunction()
 	local UseSignalStateResult = if FFlagMomentsEngagementMetricsFeature then UseSignalStateFunction(GetMomentsCapabilitiesFunction(false).getIsEngagementMetricsEnabled) else nil
-	ReactModule.useEffect(function() --[[ Line: 64 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), Moment (copy), MakeProfileTileFieldsModule (upval), FireAnalyticsEventFunction (upval), EventNames (upval)
 		if p1.userId and Moment.recommendationMetadata then
 			local Grid = MakeProfileTileFieldsModule.makeProfileTileImpressionFields(Moment, p1.userId, "grid", p1.index or 0)
@@ -44,14 +44,14 @@ return function(p1) --[[ Line: 52 | Named "MomentGridItem" ]]
 		tag = "clip",
 		Size = UDim2.fromScale(1, 1),
 		onActivated = p1.onActivated,
-		onStateChanged = ReactModule.useCallback(function(Hover) --[[ Line: 82 ]]
+		onStateChanged = ReactModule.useCallback(function(Hover)
 			-- upvalues: OnHoverChangedFunction (copy), ControlState (upval)
 			OnHoverChangedFunction(Hover == ControlState.Hover)
 		end, { OnHoverChangedFunction }),
 		stateLayer = { affordance = StateLayerAffordance.None }
 	}, {
 		Media = ReactModule.createElement(MomentMediaTile, {
-			mediaItem = ReactModule.useMemo(function() --[[ Line: 78 ]]
+			mediaItem = ReactModule.useMemo(function()
 				-- upvalues: ToMediaItemModule (upval), Moment (copy)
 				return (ToMediaItemModule({ kind = "moment", moment = Moment }))
 			end, { Moment.momentId }),

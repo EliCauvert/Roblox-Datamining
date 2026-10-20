@@ -8,7 +8,7 @@ local NoDataPlaceholderModule = require(BuildExperience.Components.Analytics.noD
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 
-local function metricCell(LayoutOrder, Text1, AdClicks, RobloxLocaleId, TestId) --[[ Line: 31 ]]
+local function metricCell(LayoutOrder, Text1, AdClicks, RobloxLocaleId, TestId)
 	-- upvalues: ReactModule (copy), View (copy), Text (copy), NumberLocalization (copy), NoDataPlaceholderModule (copy)
 	return ReactModule.createElement(View, {
 		tag = "col fill gap-xxsmall auto-y",
@@ -28,7 +28,7 @@ local function metricCell(LayoutOrder, Text1, AdClicks, RobloxLocaleId, TestId) 
 	})
 end
 
-return function(p1) --[[ Line: 50 | Named "PastCampaignRow" ]]
+return function(p1)
 	-- upvalues: LocalizationService (copy), ReactModule (copy), View (copy), Text (copy), metricCell (copy)
 	local TestId = p1.testId or "PastCampaignRow"
 	local RobloxLocaleId = LocalizationService.RobloxLocaleId

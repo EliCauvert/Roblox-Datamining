@@ -7,7 +7,7 @@ local LineItemLayoutModule = require(script.Parent.LineItemLayout)
 local PriceDEPRECATEDModule = require(script.Parent.Price_DEPRECATED)
 local PriceBoxLineVariantEnumModule = require(BulkPurchaseApp.Enums.PriceBoxLineVariantEnum)
 
-return function(Frame) --[[ Line: 21 | Named "PriceBoxLine_DEPRECATED" ]]
+return function(Frame)
 	-- upvalues: UseDesignTokensFunction (copy), PriceBoxLineVariantEnumModule (copy), ReactModule (copy), LineItemLayoutModule (copy), StyledTextLabel (copy), PriceDEPRECATEDModule (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local Config = if Frame.variant == PriceBoxLineVariantEnumModule.Danger then {

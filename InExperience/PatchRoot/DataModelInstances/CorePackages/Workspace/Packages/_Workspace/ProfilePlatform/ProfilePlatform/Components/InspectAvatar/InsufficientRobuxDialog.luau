@@ -29,7 +29,7 @@ local Orientation = FoundationModule.Enums.Orientation
 local IconName = FoundationModule.Enums.IconName
 local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
 
-local function AmountLine(p1) --[[ Line: 44 ]]
+local function AmountLine(p1)
 	-- upvalues: NumberLocalization (copy), LocalizationService (copy), ReactModule (copy), View (copy), Text (copy), GetIconRichTextFunction (copy), IconName (copy)
 	local TextTitleMediumContentAlert: string = if p1.isAlert then "text-title-medium content-alert" else "text-body-medium content-default"
 	
@@ -53,7 +53,7 @@ local function AmountLine(p1) --[[ Line: 44 ]]
 	})
 end
 
-return function(p1) --[[ Line: 83 | Named "InsufficientRobuxDialog" ]]
+return function(p1)
 	-- upvalues: UseNavigationFunction (copy), FFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module (copy), UseProfileAnalyticsContextModule (copy), FFlagProfileInspectAndBuyRefreshBalanceAfterPurchaseModule (copy), RobloxAppHooksModule (copy), ReactModule (copy), EventNamesModule (copy), UseLocalizationFunction (copy), UseOpenRobuxUpsellModule (copy), FFlagProfileInspectAndBuyKeepUpsellDialogOpenModule (copy), FFlagProfileInspectAndBuyAutoFocusModule (copy), ReactFocusNavigationModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), AppFocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), Dialog (copy), DialogSize (copy), View (copy), AmountLine (copy), Orientation (copy), ButtonVariant (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseProfileAnalyticsContextModuleResult = if FFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then UseProfileAnalyticsContextModule() else nil
@@ -64,7 +64,7 @@ return function(p1) --[[ Line: 83 | Named "InsufficientRobuxDialog" ]]
 	local Largest = math.max(TotalPrice - UseLocalRobuxBalanceResult1, 0)
 	
 	if FFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then
-		ReactModule.useEffect(function() --[[ Line: 99 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), TotalPrice (copy)
 			UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.InspectAvatarInsufficientRobuxShown, { totalPrice = TotalPrice })
 		end, { UseProfileAnalyticsContextModuleResult, TotalPrice })
@@ -76,12 +76,12 @@ return function(p1) --[[ Line: 83 | Named "InsufficientRobuxDialog" ]]
 		orderTotal = "IAPExperience.PurchasePrompt.Label.TotalPriceV2",
 		buyRobux = "IAPExperience.InsufficientRobux.Action.BuyRobux"
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 114 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy)
 		UseNavigationResult.goBack()
 	end, { UseNavigationResult })
 	local UseOpenRobuxUpsellModuleResult = UseOpenRobuxUpsellModule(TotalPrice)
-	local UseResult1 = if FFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then ReactModule.useCallback(function() --[[ Line: 120 ]]
+	local UseResult1 = if FFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then ReactModule.useCallback(function()
 		-- upvalues: UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), TotalPrice (copy), UseOpenRobuxUpsellModuleResult (copy)
 		UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.InspectAvatarBuyRobuxClicked, { totalPrice = TotalPrice })
 		UseOpenRobuxUpsellModuleResult()
@@ -92,7 +92,7 @@ return function(p1) --[[ Line: 83 | Named "InsufficientRobuxDialog" ]]
 	}) else nil
 	
 	if FFlagProfileInspectAndBuyKeepUpsellDialogOpenModule then
-		ReactModule.useEffect(function() --[[ Line: 129 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseLocalRobuxBalanceResult1 (copy), TotalPrice (copy), UseResult (copy)
 			if TotalPrice <= UseLocalRobuxBalanceResult1 then
 				UseResult()
@@ -109,11 +109,11 @@ return function(p1) --[[ Line: 83 | Named "InsufficientRobuxDialog" ]]
 		isAutoFocusRoot = true,
 		isIsolated = true,
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay,
-		customEventHandlers = ReactModule.useMemo(function() --[[ Line: 141 ]]
+		customEventHandlers = ReactModule.useMemo(function()
 			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), UseResult (copy)
 			return {
 				[FocusNavigationEventNameEnum.NavigateBack] = {
-					handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 144 ]]
+					handler = InputHandlersModule.onRelease(function(p2)
 						-- upvalues: UseResult (upval)
 						p2:cancel()
 						UseResult()

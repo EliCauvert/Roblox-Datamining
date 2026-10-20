@@ -46,16 +46,16 @@ FriendTile.defaultProps = {
 	buttons = nil,
 	trustedConnection = false,
 	user = { username = "" },
-	openPlayerProfileHandle = function() --[[ Line: 65 ]] end
+	openPlayerProfileHandle = function() end
 }
 
-function FriendTile.init(p1) --[[ Line: 72 ]]
+function FriendTile.init(p1)
 	-- upvalues: MemoizeFunction (copy), CreateRelevancyInfoModule (copy), Roact (copy), FFlagFriendsPageUserListEnabled (copy), SocialCommonModule (copy)
 	p1.state = { isFirstRender = true }
 	p1.makeRelevancyInfo = MemoizeFunction(CreateRelevancyInfoModule)
 	p1.playerTileRef = Roact.createRef()
 	
-	function p1.checkAndSetSelected() --[[ Line: 77 ]]
+	function p1.checkAndSetSelected()
 		-- upvalues: p1 (copy)
 		if p1.props.selected and p1.props.focusGuiObject then
 			local Value = p1.playerTileRef:getValue()
@@ -66,25 +66,25 @@ function FriendTile.init(p1) --[[ Line: 72 ]]
 		end
 	end
 	
-	p1.getPresenceType = if FFlagFriendsPageUserListEnabled then function(p2): string --[[ Line: 87 ]]
+	p1.getPresenceType = if FFlagFriendsPageUserListEnabled then function(p2): string
 		-- upvalues: SocialCommonModule (upval)
 		return string.gsub(tostring(p2 or ""), "PresenceType%.", "") or SocialCommonModule.Enums.PresenceTypes.Offline
 	end else nil
 	
-	function p1.openProfilePeekViewHandle() --[[ Line: 93 ]]
+	function p1.openProfilePeekViewHandle()
 		-- upvalues: p1 (copy)
 		return p1.props.openPlayerProfileHandle(p1.props.user.id, p1.props.index, p1.props.user)
 	end
 end
 
-function FriendTile.didMount(p1) --[[ Line: 98 ]]
+function FriendTile.didMount(p1)
 	if p1.props.pageLoadingTimeReport then
 		p1.props.pageLoadingTimeReport()
 	end
 	p1.checkAndSetSelected()
 end
 
-function FriendTile.render(p1) --[[ Line: 106 ]]
+function FriendTile.render(p1)
 	-- upvalues: GetCorrectUserPresenceModule (copy), UserPresenceTextModule (copy), UserPresenceIconModule (copy), WithStyleFunction (copy), WithLocalizationFunction (copy), FFlagFriendsPageUserListEnabled (copy), FFlagFriendsPageUserListCtaEnabledModule (copy), FFlagFriendsPageViewBtnEnabled (copy), ButtonTypes (copy), ButtonVariant (copy), UserProfilesModule (copy), React (copy), FriendTileWithTrustedIndicatorModule (copy), FFlagEnableBlackbirdCheck (copy)
 	local User = p1.props.user
 	local CorrectUserPresenceModule = GetCorrectUserPresenceModule(User)
@@ -94,13 +94,13 @@ function FriendTile.render(p1) --[[ Line: 106 ]]
 	if not p1.playerTileRef:getValue() then
 		p1:setState({ isFirstRender = false })
 	end
-	return WithStyleFunction(function(p2) --[[ Line: 121 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: WithLocalizationFunction (upval), UserPresenceTextModuleEntry (copy), FFlagFriendsPageUserListEnabled (upval), p1 (copy), User (copy), UserPresenceIconModuleEntry (copy), CorrectUserPresenceModule (copy), FFlagFriendsPageUserListCtaEnabledModule (upval), FFlagFriendsPageViewBtnEnabled (upval), ButtonTypes (upval), ButtonVariant (upval), UserProfilesModule (upval), React (upval), FriendTileWithTrustedIndicatorModule (upval), FFlagEnableBlackbirdCheck (upval)
 		return WithLocalizationFunction({
 			accountDeletedText = "Feature.Friends.Action.AccountDeleted",
 			trustedText = "Feature.Friends.TrustedConnection.Label.Trusted",
 			presenceText = UserPresenceTextModuleEntry
-		})(function(p3) --[[ Line: 126 ]]
+		})(function(p3)
 			-- upvalues: FFlagFriendsPageUserListEnabled (upval), p1 (upval), User (upval), UserPresenceIconModuleEntry (upval), p2 (copy), CorrectUserPresenceModule (upval), FFlagFriendsPageUserListCtaEnabledModule (upval), FFlagFriendsPageViewBtnEnabled (upval), ButtonTypes (upval), ButtonVariant (upval), UserProfilesModule (upval), React (upval), FriendTileWithTrustedIndicatorModule (upval), FFlagEnableBlackbirdCheck (upval)
 			local PresenceText = p3.presenceText or nil
 			local AccountDeletedText = p3.accountDeletedText

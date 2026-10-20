@@ -6,7 +6,7 @@ local UseBaseQueryFunction = require(script.Parent.utils.useBaseQuery).useBaseQu
 local _ = require(Parent.core)
 
 return {
-	useQuery = function(p1, p2) --[[ Line: 27 ]]
+	useQuery = function(p1, p2)
 		-- upvalues: UseBaseQueryFunction (copy)
 		return UseBaseQueryFunction(p1, p2, false)
 	end

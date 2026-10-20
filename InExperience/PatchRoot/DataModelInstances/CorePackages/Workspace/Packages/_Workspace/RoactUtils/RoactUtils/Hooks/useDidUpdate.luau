@@ -1,10 +1,10 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("RoactUtils").Parent.React)
 
-return function(Callback) --[[ Line: 10 ]]
+return function(Callback)
 	-- upvalues: ReactModule (copy)
 	local UseRefResult = ReactModule.useRef(false)
 	local UseRefResult1 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 14 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), Callback (copy)
 		if not UseRefResult.current then
 			UseRefResult.current = true

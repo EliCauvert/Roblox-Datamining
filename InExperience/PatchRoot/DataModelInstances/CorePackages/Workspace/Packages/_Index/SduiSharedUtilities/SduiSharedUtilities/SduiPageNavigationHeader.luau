@@ -13,22 +13,22 @@ local AppHeaderBarModule = require(Parent.AppHeaderBar)
 local NavButtonType = require(SduiSharedUtilities.SduiIntegrationTypes).NavButtonType
 local UseScrollAwayHeaderPositionModule = require(SduiSharedUtilities.useScrollAwayHeaderPosition)
 
-local function calculateSize(p1): UDim2 --[[ Line: 39 ]]
+local function calculateSize(p1): UDim2
 	-- upvalues: GetDisplayStoreFunction (copy)
 	local DisplayStore = GetDisplayStoreFunction(p1)
 	
 	return UDim2.new(1, 0, 0, DisplayStore.getTopBarHeight(p1) - DisplayStore.getGuiInset(p1).top or 0)
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 47 | Named "SduiPageNavigationHeader" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), SignalsReactModule (copy), calculateSize (copy), ReactModule (copy), NavButtonType (copy), IconButton (copy), FoundationModule (copy), BuilderIconsModule (copy), AppHeaderBarModule (copy), UseScrollAwayHeaderPositionModule (copy)
 	local CloseCallback = p1.closeCallback
 	local UseTokensResult = UseTokensFunction()
 	local IsUsePreferredInputResultMatch = UsePreferredInputFunction() == ResponsiveModule.Input.Directional
 	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(calculateSize)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 55 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: IsUsePreferredInputResultMatch (copy), CloseCallback (copy), p1 (copy), NavButtonType (upval), ReactModule (upval), UseTokensResult (copy), IconButton (upval), FoundationModule (upval), BuilderIconsModule (upval)
-		return if IsUsePreferredInputResultMatch or not CloseCallback or p1.navButtonType ~= NavButtonType.back and p1.navButtonType ~= NavButtonType.close then nil else function() --[[ Line: 60 ]]
+		return if IsUsePreferredInputResultMatch or not CloseCallback or p1.navButtonType ~= NavButtonType.back and p1.navButtonType ~= NavButtonType.close then nil else function()
 			-- upvalues: ReactModule (upval), UseTokensResult (upval), IconButton (upval), CloseCallback (upval), FoundationModule (upval), p1 (upval), NavButtonType (upval), BuilderIconsModule (upval)
 			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,

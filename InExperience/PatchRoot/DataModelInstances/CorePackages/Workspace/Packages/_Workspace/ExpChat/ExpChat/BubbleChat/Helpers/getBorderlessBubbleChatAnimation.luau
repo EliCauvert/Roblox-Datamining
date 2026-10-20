@@ -1,4 +1,4 @@
-﻿return function(p1: number) --[[ Line: 26 | Named "getBorderlessBubbleChatAnimation" ]]
+﻿return function(p1: number)
 	if p1 < 0.5 then
 		local LargestRatio = math.max(p1, 0) / 0.5
 		

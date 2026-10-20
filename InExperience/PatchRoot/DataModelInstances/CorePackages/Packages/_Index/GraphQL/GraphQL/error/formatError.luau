@@ -5,7 +5,7 @@ local _ = require(Parent.language.location)
 local _ = require(script.Parent.GraphQLError)
 
 return {
-	formatError = function(p1) --[[ Line: 25 ]]
+	formatError = function(p1)
 		-- upvalues: DevAssertFunction (copy)
 		DevAssertFunction(p1, "Received nil error.")
 		local Message = if p1.message and string.len(p1.message) > 0 then p1.message else "An unknown error occurred."

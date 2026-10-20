@@ -1,7 +1,7 @@
 ﻿local TelemetryService = game:GetService("TelemetryService")
 local ShouldSampleHundredthsPercentModule = require(script:FindFirstAncestor("BuildExperience").Telemetry.shouldSampleHundredthsPercent)
 
-return function(p1) --[[ Line: 21 | Named "sendBuildExperienceStat" ]]
+return function(p1)
 	-- upvalues: ShouldSampleHundredthsPercentModule (copy), TelemetryService (copy)
 	local SampleHundredthsPercent = p1.sampleHundredthsPercent
 	

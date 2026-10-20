@@ -23,7 +23,7 @@ local DefaultTextContentPadding = ConstantsModule.DefaultTextContentPadding
 local _Vector2 = Vector2.new(36, 36)
 local IsUserThumbnailFunction = require(Parent1.utils.toastNotificationHelper).isUserThumbnail
 
-return function(p1) --[[ Line: 39 ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), UseNotificationCardDataModule (copy), IsUserThumbnailFunction (copy), UseNotificationCardStateModule (copy), ReactModule (copy), ConstantsModule (copy), NormalizeFontFaceFunction (copy), DefaultContentPadding (copy), _Vector2 (copy), NotificationThumbnailModule (copy), DefaultTextContentPadding (copy), NotificationStyledTextModule (copy), ToastHoldButtonModule (copy), Interactable (copy), ImageSetLabel (copy), TypeModule (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseTokensResult = if FoundationFontFaceMigration then UseTokensFunction() else nil
@@ -34,7 +34,7 @@ return function(p1) --[[ Line: 39 ]]
 	
 	if IsUserThumbnailFunction then
 		local Thumbnail = UseNotificationCardStateModule("thumbnail")
-		UseMemoResult = ReactModule.useMemo(function() --[[ Line: 55 ]]
+		UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: Thumbnail (copy), IsUserThumbnailFunction (upval), UseStyleResult (copy), CardSize (ref), ConstantsModule (upval)
 			local Flag = false
 			
@@ -148,8 +148,8 @@ return function(p1) --[[ Line: 39 ]]
 			BackgroundColor3 = UseStyleResult.Theme.UIMuted.Color,
 			BackgroundTransparency = 0.9,
 			LayoutOrder = 2,
-			onStateChanged = function() --[[ Line: 186 ]] end,
-			[ReactModule.Event.Activated] = function() --[[ Line: 187 ]]
+			onStateChanged = function() end,
+			[ReactModule.Event.Activated] = function()
 				-- upvalues: HandleActionsFunction (copy), SingleMetaActionEntry (copy)
 				if HandleActionsFunction then
 					HandleActionsFunction(SingleMetaActionEntry)

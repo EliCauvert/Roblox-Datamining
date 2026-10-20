@@ -15,7 +15,7 @@ local UnselectedGray = ConstantsModule.Color.UnselectedGray
 local ButtonWidth = ConstantsModule.MicroProfilerFormatting.ButtonWidth
 local ProfilerExportView = RoactModule.PureComponent:extend("ProfilerExportView")
 
-local function _(p1, p2, Text): string --[[ Line: 31 | Named "generateDefaultExportName" ]]
+local function _(p1, p2, Text): string
 	local DateInfo = ""
 	local Client: string = if p1 then "client" else "server"
 	local SessionStartTime = p2 and p2.SessionStartTime
@@ -26,9 +26,9 @@ local function _(p1, p2, Text): string --[[ Line: 31 | Named "generateDefaultExp
 	return "scriptprofiler-" .. DateInfo .. Client .. Text
 end
 
-function ProfilerExportView:init() --[[ Line: 45 ]] end
+function ProfilerExportView:init() end
 
-function ProfilerExportView.didMount(p1) --[[ Line: 47 ]]
+function ProfilerExportView.didMount(p1)
 	local t = {}
 	local Data = p1.props.client.data
 	local DateInfo = ""
@@ -49,9 +49,9 @@ function ProfilerExportView.didMount(p1) --[[ Line: 47 ]]
 	p1:setState(t)
 end
 
-function ProfilerExportView:didUpdate() --[[ Line: 54 ]] end
+function ProfilerExportView:didUpdate() end
 
-function ProfilerExportView.renderExportInputAndButton(p1, p2, Text, SerializedData) --[[ Line: 56 ]]
+function ProfilerExportView.renderExportInputAndButton(p1, p2, Text, SerializedData)
 	-- upvalues: RoactModule (copy), UnselectedGray (copy), ButtonTextSize (copy), MainWindow (copy), ConstantsModule (copy), ScrollingTextBoxModule (copy), MainWindowHeader (copy), ScriptProfilerService (copy)
 	return RoactModule.createElement("TextLabel", {
 		BackgroundTransparency = 0,
@@ -74,7 +74,7 @@ function ProfilerExportView.renderExportInputAndButton(p1, p2, Text, SerializedD
 			Position = UDim2.new(0, 0, 0, 0),
 			TextColor3 = ConstantsModule.Color.Text,
 			TextXAlignment = Enum.TextXAlignment.Left,
-			TextBoxFocusLost = function(p3, _, _) --[[ Line: 86 ]]
+			TextBoxFocusLost = function(p3, _, _)
 				-- upvalues: p2 (copy), p1 (copy)
 				if p2 then
 					p1:setState({ exportFilenameClient = p3.text })
@@ -95,7 +95,7 @@ function ProfilerExportView.renderExportInputAndButton(p1, p2, Text, SerializedD
 			TextXAlignment = Enum.TextXAlignment.Center,
 			TextYAlignment = Enum.TextYAlignment.Center,
 			BackgroundColor3 = UnselectedGray,
-			[RoactModule.Event.Activated] = function() --[[ Line: 110 ]]
+			[RoactModule.Event.Activated] = function()
 				-- upvalues: ScriptProfilerService (upval), SerializedData (copy), Text (copy), p2 (copy), p1 (copy)
 				local SaveScriptProfilingDataResult = ScriptProfilerService:SaveScriptProfilingData(SerializedData, Text)
 				
@@ -111,7 +111,7 @@ function ProfilerExportView.renderExportInputAndButton(p1, p2, Text, SerializedD
 	} else {})
 end
 
-function ProfilerExportView.renderExportSection(p1, p2, Text) --[[ Line: 129 ]]
+function ProfilerExportView.renderExportSection(p1, p2, Text)
 	-- upvalues: RoactModule (copy), ButtonWidth (copy), MainWindowHeader (copy), ButtonTextSize (copy), ConstantsModule (copy), UnselectedGray (copy)
 	local ExportFilenameClient = nil
 	local SerializedData = nil
@@ -164,7 +164,7 @@ function ProfilerExportView.renderExportSection(p1, p2, Text) --[[ Line: 129 ]]
 	})
 end
 
-function ProfilerExportView.render(p1) --[[ Line: 188 ]]
+function ProfilerExportView.render(p1)
 	-- upvalues: RoactModule (copy), ConstantsModule (copy), MainRowPadding (copy)
 	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -186,7 +186,7 @@ function ProfilerExportView.render(p1) --[[ Line: 188 ]]
 	})
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 212 | Named "mapStateToProps" ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	return {
 		client = p1.ScriptProfiler.client,
 		server = p1.ScriptProfiler.server

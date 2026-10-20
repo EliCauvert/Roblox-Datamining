@@ -37,12 +37,12 @@ ToastFrame.defaultProps = {
 	textFrameSize = UDim2.new(1, 0, 1, 0)
 }
 
-local function renderToastIcon(IconProps, IconChildren) --[[ Line: 48 ]]
+local function renderToastIcon(IconProps, IconChildren)
 	-- upvalues: RoactModule (copy), ToastIconModule (copy), CryoModule (copy)
 	return if IconProps then if type(IconProps.Image) == "function" then IconProps.Image(IconProps) else RoactModule.createElement(ToastIconModule, CryoModule.Dictionary.join(IconProps, { LayoutOrder = 1 }), IconChildren) else nil
 end
 
-function ToastFrame.render(p1) --[[ Line: 65 ]]
+function ToastFrame.render(p1)
 	-- upvalues: ButtonTypeModule (copy), UIBloxConfigModule (copy), RoactModule (copy), renderToastIcon (copy), ToastTextModule (copy), CryoModule (copy), ButtonModule (copy), StandardButtonSizeModule (copy)
 	local ButtonProps = p1.props.buttonProps
 	local ButtonText = ButtonProps and ButtonProps.buttonText

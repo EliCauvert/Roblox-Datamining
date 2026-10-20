@@ -17,7 +17,7 @@ local FFlagLuaAppDataHydrationUpdateItem = require(Parent.SharedFlags).FFlagLuaA
 local FFlagMigrateGameInfoToStore = require(Parent.SharedFlags).FFlagMigrateGameInfoToStore
 local FIntLuaAppThrottleRefreshPlayabilityIntervalSeconds = if FFlagLuaAppInExperienceDetailsPrompt then GetFIntLuaAppThrottleRefreshPlayabilityIntervalSecondsFunction() else nil
 
-local function sanitizeGameInfo(p1) --[[ Line: 36 ]]
+local function sanitizeGameInfo(p1)
 	-- upvalues: TrimFunction (copy)
 	if p1.name then
 		p1.name = TrimFunction(p1.name)
@@ -25,11 +25,11 @@ local function sanitizeGameInfo(p1) --[[ Line: 36 ]]
 	return p1
 end
 
-return function() --[[ Line: 43 | Named "createGameInfoStore" ]]
+return function()
 	-- upvalues: FFlagLuaAppInExperienceDetailsPrompt (copy), CreateDataCacheModule (copy), FIntLuaAppThrottleRefreshPlayabilityIntervalSeconds (copy), sanitizeGameInfo (copy), CreateDataResolverModule (copy), LogResponseErrorFunction (copy), DiscoveryEventErrorLogger (copy), DashModule (copy), FetchGameDetailsModule (copy), GameInfoStoreTypesModule (copy), FFlagLuaAppDataHydrationPlayerCountGameInfoStore (copy), FFlagMigrateGameInfoToStore (copy), FFlagLuaAppDataHydrationUpdateItem (copy)
 	local t = {}
 	
-	local function _(p1, p2) --[[ Line: 49 | Named "indexPlaceId" ]]
+	local function _(p1, p2)
 		-- upvalues: t (copy)
 		if p2 and p2.rootPlaceId then
 			t[tostring(p2.rootPlaceId)] = p1
@@ -39,7 +39,7 @@ return function() --[[ Line: 43 | Named "createGameInfoStore" ]]
 	local DataCacheModule = if FFlagLuaAppInExperienceDetailsPrompt then CreateDataCacheModule(FIntLuaAppThrottleRefreshPlayabilityIntervalSeconds, nil, { sanitizeItem = sanitizeGameInfo }) else CreateDataCacheModule(nil, nil, { sanitizeItem = sanitizeGameInfo })
 	local DataResolverModule = CreateDataResolverModule({
 		cache = DataCacheModule,
-		logError = if FFlagLuaAppInExperienceDetailsPrompt then function(p1) --[[ Line: 61 ]]
+		logError = if FFlagLuaAppInExperienceDetailsPrompt then function(p1)
 			-- upvalues: LogResponseErrorFunction (upval), DiscoveryEventErrorLogger (upval)
 			if type(p1) == "table" then
 				if p1.responseCode then
@@ -54,11 +54,11 @@ return function() --[[ Line: 43 | Named "createGameInfoStore" ]]
 				DiscoveryEventErrorLogger.reportError("FetchGameDetailsError", (tostring(p1)))
 			end
 		end else nil,
-		fetchFn = function(p1) --[[ Line: 79 ]]
+		fetchFn = function(p1)
 			-- upvalues: DashModule (upval), FetchGameDetailsModule (upval), FFlagLuaAppInExperienceDetailsPrompt (upval), GameInfoStoreTypesModule (upval), FFlagLuaAppDataHydrationPlayerCountGameInfoStore (upval), FFlagMigrateGameInfoToStore (upval), t (copy)
 			local KeysResult = DashModule.keys(p1)
 			
-			return FetchGameDetailsModule(KeysResult):andThen(function(Result) --[[ Line: 84 ]]
+			return FetchGameDetailsModule(KeysResult):andThen(function(Result)
 				-- upvalues: FFlagLuaAppInExperienceDetailsPrompt (upval), KeysResult (copy), GameInfoStoreTypesModule (upval), FFlagLuaAppDataHydrationPlayerCountGameInfoStore (upval), DashModule (upval), FFlagMigrateGameInfoToStore (upval), t (upval)
 				if FFlagLuaAppInExperienceDetailsPrompt then
 					if not Result or not Result.responseBody then
@@ -116,7 +116,7 @@ return function() --[[ Line: 43 | Named "createGameInfoStore" ]]
 						end
 					end
 				else
-					DashModule.forEach(Data, function(p2) --[[ Line: 148 ]]
+					DashModule.forEach(Data, function(p2)
 						-- upvalues: t1 (copy), FFlagLuaAppDataHydrationPlayerCountGameInfoStore (upval)
 						t1[tostring(p2.id)] = {
 							name = p2.name,
@@ -135,13 +135,13 @@ return function() --[[ Line: 43 | Named "createGameInfoStore" ]]
 					end
 				end
 				return t1
-			end):catch(function(Err) --[[ Line: 169 ]]
+			end):catch(function(Err)
 				error(Err)
 			end)
 		end
 	})
 	
-	local function updateGameInfo(p2, p3, p4) --[[ Line: 208 ]]
+	local function updateGameInfo(p2, p3, p4)
 		-- upvalues: t (copy), FFlagMigrateGameInfoToStore (upval), DataCacheModule (copy)
 		if p3 and p3.rootPlaceId then
 			t[tostring(p3.rootPlaceId)] = p2
@@ -155,7 +155,7 @@ return function() --[[ Line: 43 | Named "createGameInfoStore" ]]
 		end
 	end
 	
-	local function updateGameInfos(List, p2) --[[ Line: 217 ]]
+	local function updateGameInfos(List, p2)
 		-- upvalues: t (copy), FFlagMigrateGameInfoToStore (upval), DataCacheModule (copy)
 		for i, value in List do
 			if value and value.rootPlaceId then
@@ -171,12 +171,12 @@ return function() --[[ Line: 43 | Named "createGameInfoStore" ]]
 		end
 	end
 	
-	local function getUniverseIdForPlaceId(p3) --[[ Line: 228 ]]
+	local function getUniverseIdForPlaceId(p3)
 		-- upvalues: t (copy)
 		return t[tostring(p3)]
 	end
 	
-	local function clear() --[[ Line: 232 ]]
+	local function clear()
 		-- upvalues: FFlagLuaAppInExperienceDetailsPrompt (upval), DataCacheModule (copy), DataResolverModule (copy)
 		if not FFlagLuaAppInExperienceDetailsPrompt then
 			DataCacheModule.clear()
@@ -184,7 +184,7 @@ return function() --[[ Line: 43 | Named "createGameInfoStore" ]]
 		end
 	end
 	
-	local function dispose() --[[ Line: 239 ]]
+	local function dispose()
 		-- upvalues: FFlagLuaAppInExperienceDetailsPrompt (upval), DataCacheModule (copy), DataResolverModule (copy)
 		if not FFlagLuaAppInExperienceDetailsPrompt then
 			DataCacheModule.dispose()
@@ -202,7 +202,7 @@ return function() --[[ Line: 43 | Named "createGameInfoStore" ]]
 		updateGameInfo = if FFlagLuaAppDataHydrationUpdateItem then if FFlagMigrateGameInfoToStore then updateGameInfo else DataCacheModule.updateItem else nil,
 		updateGameInfos = if FFlagMigrateGameInfoToStore then updateGameInfos else DataCacheModule.updateItems,
 		getUniverseIdForPlaceId = if FFlagMigrateGameInfoToStore then getUniverseIdForPlaceId else nil,
-		applyVoteChange = function(p3, Enabled1, Enabled) --[[ Line: 175 ]]
+		applyVoteChange = function(p3, Enabled1, Enabled)
 			-- upvalues: DataResolverModule (copy), FFlagMigrateGameInfoToStore (upval), DataCacheModule (copy)
 			local CachedItem = DataResolverModule.getCachedItem(p3)
 			local DataResult = CachedItem and CachedItem.data(false)

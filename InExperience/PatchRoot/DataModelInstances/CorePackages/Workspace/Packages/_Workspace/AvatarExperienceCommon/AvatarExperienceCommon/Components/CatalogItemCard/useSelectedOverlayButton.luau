@@ -2,7 +2,7 @@
 local ResponsiveModule = require(Parent.Responsive)
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 
-return function(p1) --[[ Line: 18 | Named "useSelectedOverlayButton" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ResponsiveModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseIsSpatialResult = ResponsiveModule.useIsSpatial()

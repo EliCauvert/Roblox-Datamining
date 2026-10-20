@@ -1,6 +1,6 @@
 ﻿local SignalsModule = require(script:FindFirstAncestor("AuthCommon").Parent.Signals)
 
-return function() --[[ Line: 17 ]]
+return function()
 	-- upvalues: SignalsModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(false)
 	local Signal1, Signal2_1 = SignalsModule.createSignal(false)

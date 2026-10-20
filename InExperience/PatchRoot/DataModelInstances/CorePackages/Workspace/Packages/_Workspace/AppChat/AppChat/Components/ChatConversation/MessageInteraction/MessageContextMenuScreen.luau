@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local UseNavigationFunction = require(Parent.Navigation).useNavigation
 local MessageContextMenuContainerModule = require(script.Parent.MessageContextMenuContainer)
 
-function MessageContextMenuScreen() --[[ Line: 12 ]]
+function MessageContextMenuScreen()
 	-- upvalues: UseNavigationFunction (copy), ReactModule (copy), MessageContextMenuContainerModule (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	

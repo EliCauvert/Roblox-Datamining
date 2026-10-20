@@ -1,10 +1,10 @@
 ﻿local GetSduiApiStoreModule = require(script:FindFirstAncestor("SduiSharedUtilities").getSduiApiStore)
 
 return {
-	findInputData = function(p1, Callback) --[[ Line: 15 ]]
+	findInputData = function(p1, Callback)
 		-- upvalues: GetSduiApiStoreModule (copy)
 		local v1 = nil
-		GetSduiApiStoreModule().forEachInputData(p1, function(_, p2): boolean --[[ Line: 17 ]]
+		GetSduiApiStoreModule().forEachInputData(p1, function(_, p2): boolean
 			-- upvalues: Callback (copy), v1 (ref)
 			if Callback(p2) then
 				v1 = p2
@@ -17,11 +17,11 @@ return {
 		
 		return v1
 	end,
-	updateInputDataField = function(p1, Callback1, p2, Callback): boolean --[[ Line: 30 ]]
+	updateInputDataField = function(p1, Callback1, p2, Callback): boolean
 		-- upvalues: GetSduiApiStoreModule (copy)
 		local SduiApiStoreModule = GetSduiApiStoreModule()
 		local SetInputDataFieldResult = false
-		SduiApiStoreModule.forEachInputData(p1, function(p3, p4): boolean --[[ Line: 38 ]]
+		SduiApiStoreModule.forEachInputData(p1, function(p3, p4): boolean
 			-- upvalues: Callback1 (copy), p2 (copy), SetInputDataFieldResult (ref), SduiApiStoreModule (copy), p1 (copy), Callback (copy)
 			if not Callback1(p4) then
 				return false

@@ -13,7 +13,7 @@ local config = {
 	cancel = "R15_UPGRADE_CANCEL"
 }
 
-local function buildSaveElementMetadata(p1) --[[ Line: 75 ]]
+local function buildSaveElementMetadata(p1)
 	-- upvalues: HttpService (copy)
 	local config = {
 		mode = p1.mode,
@@ -29,7 +29,7 @@ local function buildSaveElementMetadata(p1) --[[ Line: 75 ]]
 	return HttpService:JSONEncode(config)
 end
 
-local function buildSubscribeElementMetadata(Input) --[[ Line: 92 ]]
+local function buildSubscribeElementMetadata(Input)
 	-- upvalues: HttpService (copy)
 	local config = {
 		mode = Input.mode,
@@ -44,7 +44,7 @@ local function buildSubscribeElementMetadata(Input) --[[ Line: 92 ]]
 end
 
 return {
-	logPageView = function(p1) --[[ Line: 106 ]]
+	logPageView = function(p1)
 		-- upvalues: FFlagEditProfileImageV2Telemetry (copy), SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), HttpService (copy), SendAXCounterV2Function (copy)
 		if FFlagEditProfileImageV2Telemetry then
 			SendUnifiedEventLogFunction({
@@ -57,7 +57,7 @@ return {
 			return
 		end
 	end,
-	logSave = function(p1) --[[ Line: 124 ]]
+	logSave = function(p1)
 		-- upvalues: FFlagEditProfileImageV2Telemetry (copy), SendAXCounterV2Function (copy), SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), buildSaveElementMetadata (copy), ReportAvatarEventCounterV1Function (copy), Constants (copy)
 		if not FFlagEditProfileImageV2Telemetry then return end
 		SendAXCounterV2Function("EditProfileImageSave", {
@@ -78,7 +78,7 @@ return {
 			return
 		end
 	end,
-	logSubscribe = function(Input) --[[ Line: 149 ]]
+	logSubscribe = function(Input)
 		-- upvalues: FFlagEditProfileImageV2Telemetry (copy), SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), buildSubscribeElementMetadata (copy), SendAXCounterV2Function (copy)
 		if FFlagEditProfileImageV2Telemetry then
 			SendUnifiedEventLogFunction({
@@ -92,7 +92,7 @@ return {
 			return
 		end
 	end,
-	logClose = function(p1) --[[ Line: 167 ]]
+	logClose = function(p1)
 		-- upvalues: FFlagEditProfileImageV2Telemetry (copy), SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), HttpService (copy), SendAXCounterV2Function (copy)
 		if FFlagEditProfileImageV2Telemetry then
 			SendUnifiedEventLogFunction({
@@ -106,7 +106,7 @@ return {
 			return
 		end
 	end,
-	logBack = function(p1) --[[ Line: 187 ]]
+	logBack = function(p1)
 		-- upvalues: FFlagEditProfileImageV2Telemetry (copy), SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), HttpService (copy), SendAXCounterV2Function (copy)
 		if FFlagEditProfileImageV2Telemetry then
 			SendUnifiedEventLogFunction({
@@ -124,7 +124,7 @@ return {
 			return
 		end
 	end,
-	logFetchFailure = function(p1) --[[ Line: 209 ]]
+	logFetchFailure = function(p1)
 		-- upvalues: FFlagEditProfileImageV2Telemetry (copy), SendAXCounterV2Function (copy)
 		if FFlagEditProfileImageV2Telemetry then
 			SendAXCounterV2Function("EditProfileImageFetchFailure", { asset_type = tostring(p1.assetType) })
@@ -132,7 +132,7 @@ return {
 			return
 		end
 	end,
-	logRetry = function(p1) --[[ Line: 219 ]]
+	logRetry = function(p1)
 		-- upvalues: FFlagEditProfileImageV2Telemetry (copy), SendAXCounterV2Function (copy)
 		if FFlagEditProfileImageV2Telemetry then
 			SendAXCounterV2Function("EditProfileImageRetry", { mode = p1.mode, asset_type = tostring(p1.assetType) })
@@ -140,7 +140,7 @@ return {
 			return
 		end
 	end,
-	logR15UpgradePromptShown = function() --[[ Line: 230 ]]
+	logR15UpgradePromptShown = function()
 		-- upvalues: SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), SendAXCounterV2Function (copy)
 		SendUnifiedEventLogFunction({
 			elementName = "R15_UPGRADE_PROMPT",
@@ -149,7 +149,7 @@ return {
 		})
 		SendAXCounterV2Function("EditProfileImageR15UpgradePromptShown")
 	end,
-	logR15UpgradePromptInteraction = function(p1) --[[ Line: 240 ]]
+	logR15UpgradePromptInteraction = function(p1)
 		-- upvalues: SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), config (copy), SendAXCounterV2Function (copy)
 		SendUnifiedEventLogFunction({
 			action = UnifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,

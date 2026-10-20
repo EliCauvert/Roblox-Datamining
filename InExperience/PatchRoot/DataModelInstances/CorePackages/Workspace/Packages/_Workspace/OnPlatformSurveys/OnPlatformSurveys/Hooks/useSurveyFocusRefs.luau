@@ -18,11 +18,11 @@ local EventMap = {
 	[Enum.KeyCode.RightBracket] = FocusNavigationEventNameEnum.ScrollDown
 }
 
-local function _(ScrollingFrame) --[[ Line: 38 | Named "getScrollableAncestor" ]]
+local function _(ScrollingFrame)
 	return if ScrollingFrame == nil then nil elseif ScrollingFrame:IsA("ScrollingFrame") then ScrollingFrame else ScrollingFrame:FindFirstAncestorWhichIsA("ScrollingFrame")
 end
 
-local _ = function(ScrollFrame, Y: number) --[[ Line: 48 | Named "scrollTo" ]]
+local _ = function(ScrollFrame, Y: number)
 	local YDelta = ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y
 	
 	if Y > 0 and YDelta - 350 <= ScrollFrame.CanvasPosition.Y then
@@ -39,8 +39,8 @@ local _ = function(ScrollFrame, Y: number) --[[ Line: 48 | Named "scrollTo" ]]
 	end
 end
 
-local _ = function(p1, p2) --[[ Line: 61 | Named "mergeRefs" ]]
-	return function(Current) --[[ Line: 62 ]]
+local _ = function(p1, p2)
+	return function(Current)
 		-- upvalues: p1 (copy), p2 (copy)
 		if type(p1) == "function" then
 			p1(Current)
@@ -58,7 +58,7 @@ local _ = function(p1, p2) --[[ Line: 61 | Named "mergeRefs" ]]
 	end
 end
 
-return function(SurfaceIdentifier, p1) --[[ Line: 77 | Named "useSurveyFocusRefs" ]]
+return function(SurfaceIdentifier, p1)
 	-- upvalues: UseDefaultFocusBehaviorFunction (copy), InlineSurveyFocusRoot (copy), UseFocusedGuiObjectFunction (copy), ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), EventMap (copy), UseAppFocusRootFunction (copy)
 	local UseDefaultFocusBehaviorResult = UseDefaultFocusBehaviorFunction()
 	local UseFocusRootResult = nil
@@ -69,7 +69,7 @@ return function(SurfaceIdentifier, p1) --[[ Line: 77 | Named "useSurveyFocusRefs
 		UseFocusRootResult = UseFocusRootFunction({
 			isAutoFocusRoot = true,
 			surfaceIdentifier = SurfaceIdentifier,
-			eventHandlers = ReactModule.useMemo(function() --[[ Line: 85 ]]
+			eventHandlers = ReactModule.useMemo(function()
 				-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), p1 (copy), UseFocusedGuiObjectResult1 (copy)
 				local config = {
 					[FocusNavigationEventNameEnum.NavigateBack] = { handler = InputHandlersModule.onRelease(p1) }
@@ -77,7 +77,7 @@ return function(SurfaceIdentifier, p1) --[[ Line: 77 | Named "useSurveyFocusRefs
 				
 				if UseFocusedGuiObjectResult1 then
 					config[FocusNavigationEventNameEnum.ScrollUp] = {
-						handler = InputHandlersModule.onRelease(function() --[[ Line: 94 ]]
+						handler = InputHandlersModule.onRelease(function()
 							-- upvalues: UseFocusedGuiObjectResult1 (upval)
 							local _ = UseFocusedGuiObjectResult1.AbsoluteCanvasSize.Y - UseFocusedGuiObjectResult1.AbsoluteWindowSize.Y
 							
@@ -91,7 +91,7 @@ return function(SurfaceIdentifier, p1) --[[ Line: 77 | Named "useSurveyFocusRefs
 						end)
 					}
 					config[FocusNavigationEventNameEnum.ScrollDown] = {
-						handler = InputHandlersModule.onRelease(function() --[[ Line: 99 ]]
+						handler = InputHandlersModule.onRelease(function()
 							-- upvalues: UseFocusedGuiObjectResult1 (upval)
 							local YDelta = UseFocusedGuiObjectResult1.AbsoluteCanvasSize.Y - UseFocusedGuiObjectResult1.AbsoluteWindowSize.Y
 							
@@ -118,11 +118,11 @@ return function(SurfaceIdentifier, p1) --[[ Line: 77 | Named "useSurveyFocusRefs
 			}
 		})
 	end
-	return ReactModule.useMemo(function() --[[ Line: 126 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: UseFocusRootResult (ref), UseDefaultFocusBehaviorResult (copy)
 		local Callback = UseFocusRootResult
 		
-		return function(Current) --[[ Line: 62 ]]
+		return function(Current)
 			-- upvalues: Callback (copy), UseDefaultFocusBehaviorResult (copy)
 			if type(Callback) == "function" then
 				Callback(Current)

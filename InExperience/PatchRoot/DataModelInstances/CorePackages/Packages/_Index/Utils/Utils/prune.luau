@@ -24,7 +24,7 @@ local Callback1 = nil
 local Callback = nil
 local Callback2 = nil
 local PruneModule = {
-	pruneSchema = function(p1, p2) --[[ Line: 69 ]]
+	pruneSchema = function(p1, p2)
 		-- upvalues: Callback1 (ref), String (copy), Callback (ref), MapSchemaFunction (copy), MapperKind (copy), Boolean (copy), IsSpecifiedScalarTypeFunction (copy), IsUnionTypeFunction (copy), IsInputObjectTypeFunction (copy), IsInterfaceTypeFunction (copy), IsObjectTypeFunction (copy), IsScalarTypeFunction (copy), Object (copy)
 		local T = if p2 == nil then {} else p2
 		local SkipEmptyCompositeTypePruning = T.skipEmptyCompositeTypePruning
@@ -54,7 +54,7 @@ local PruneModule = {
 			end
 			List = {}
 			v1 = MapSchemaFunction(v1, {
-				[MapperKind.TYPE] = function(p3) --[[ Line: 111 ]]
+				[MapperKind.TYPE] = function(p3)
 					-- upvalues: Boolean (upval), CallbackResult (ref), IsSpecifiedScalarTypeFunction (upval), IsUnionTypeFunction (upval), IsInputObjectTypeFunction (upval), IsInterfaceTypeFunction (upval), IsObjectTypeFunction (upval), IsScalarTypeFunction (upval), SkipUnusedTypesPruning (copy), SkipEmptyUnionPruning (copy), SkipEmptyCompositeTypePruning (copy), SkipUnimplementedInterfacesPruning (copy), List (ref), Object (upval)
 					if Boolean.toJSBoolean(CallbackResult:has(p3.name)) or Boolean.toJSBoolean(IsSpecifiedScalarTypeFunction(p3)) then
 						return p3
@@ -80,7 +80,7 @@ local PruneModule = {
 	end
 }
 
-Callback1 = function(p1) --[[ Line: 216 | Named "visitSchema" ]]
+Callback1 = function(p1)
 	-- upvalues: GetRootTypesFunction (copy), Callback (ref)
 	local ConcatResult = {}
 	
@@ -90,7 +90,7 @@ Callback1 = function(p1) --[[ Line: 216 | Named "visitSchema" ]]
 	return Callback(ConcatResult, p1)
 end
 
-Callback = function(List, p2, p3) --[[ Line: 227 | Named "visitQueue" ]]
+Callback = function(List, p2, p3)
 	-- upvalues: Set (copy), Map (copy), Boolean (copy), IsUnionTypeFunction (copy), Array (copy), IsInterfaceTypeFunction (copy), GetImplementingTypesFunction (copy), IsEnumTypeFunction (copy), Callback2 (ref), IsObjectTypeFunction (copy), GetNamedTypeFunction (copy)
 	local NewSet = if p3 == nil then Set.new() else p3
 	local NewMap = Map.new()
@@ -102,7 +102,7 @@ Callback = function(List, p2, p3) --[[ Line: 227 | Named "visitQueue" ]]
 		
 		if not Boolean.toJSBoolean(Type) or not Type then continue end
 		if Boolean.toJSBoolean(IsUnionTypeFunction(Type)) then
-			List = Array.concat(List, Array.map(Type:getTypes(), function(p4) --[[ Line: 262 ]]
+			List = Array.concat(List, Array.map(Type:getTypes(), function(p4)
 				return p4.name
 			end))
 		end
@@ -111,13 +111,13 @@ Callback = function(List, p2, p3) --[[ Line: 227 | Named "visitQueue" ]]
 			NewMap[tostring(Removed)] = false
 		end
 		if Boolean.toJSBoolean(IsEnumTypeFunction(Type)) then
-			List = Array.concat(List, Array.flatMap(Type:getValues(), function(p4) --[[ Line: 301 ]]
+			List = Array.concat(List, Array.flatMap(Type:getValues(), function(p4)
 				-- upvalues: Callback2 (upval), p2 (copy)
 				return if p4.astNode then Callback2(p2, p4.astNode) else {}
 			end))
 		end
 		if Type.getInterfaces ~= nil then
-			List = Array.concat(List, Array.map(Type:getInterfaces(), function(p4) --[[ Line: 322 ]]
+			List = Array.concat(List, Array.map(Type:getInterfaces(), function(p4)
 				return p4.name
 			end))
 		end
@@ -129,7 +129,7 @@ Callback = function(List, p2, p3) --[[ Line: 227 | Named "visitQueue" ]]
 				local v1 = value[2]
 				
 				if Boolean.toJSBoolean(IsObjectTypeFunction(Type)) then
-					List = Array.concat(List, Array.flatMap(v1.args, function(p4) --[[ Line: 368 ]]
+					List = Array.concat(List, Array.flatMap(v1.args, function(p4)
 						-- upvalues: GetNamedTypeFunction (upval), Array (upval), Callback2 (upval), p2 (copy)
 						local ConcatResult = { GetNamedTypeFunction(p4.type).name }
 						
@@ -158,13 +158,13 @@ Callback = function(List, p2, p3) --[[ Line: 227 | Named "visitQueue" ]]
 	return NewSet
 end
 
-Callback2 = function(p4, AstNode) --[[ Line: 421 | Named "getDirectivesArgumentsTypeNames" ]]
+Callback2 = function(p4, AstNode)
 	-- upvalues: Array (copy), GetNamedTypeFunction (copy)
-	return Array.flatMap(AstNode.directives or {}, function(p5) --[[ Line: 432 ]]
+	return Array.flatMap(AstNode.directives or {}, function(p5)
 		-- upvalues: p4 (copy), Array (upval), GetNamedTypeFunction (upval)
 		local Directive = p4:getDirective(p5.name.value)
 		local Args = if typeof(Directive) == "table" then Directive.args else nil
-		local MapResult = if Args == nil then nil else Array.map(Args, function(p6) --[[ Line: 436 ]]
+		local MapResult = if Args == nil then nil else Array.map(Args, function(p6)
 			-- upvalues: GetNamedTypeFunction (upval)
 			return GetNamedTypeFunction(p6.type).name
 		end)

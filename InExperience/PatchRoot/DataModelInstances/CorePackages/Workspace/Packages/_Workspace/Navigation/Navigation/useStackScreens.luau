@@ -8,9 +8,9 @@ local FFlagLuaAppDerivedStackAndSwitchState = require(Parent.SharedFlags).FFlagL
 local ViewStateModule = require(script.Parent.ViewState)
 local _ = require(script.Parent.types)
 
-local function RouteViewStatesReducer(Tbl, p1) --[[ Line: 73 ]]
+local function RouteViewStatesReducer(Tbl, p1)
 	-- upvalues: Array (copy), RouteViewStatesReducer (copy), ViewStateModule (copy), Object (copy)
-	local Index = Array.findIndex(Tbl, function(p2): boolean --[[ Line: 74 ]]
+	local Index = Array.findIndex(Tbl, function(p2): boolean
 		-- upvalues: p1 (copy)
 		return p2.descriptor.key == p1.key
 	end)
@@ -75,7 +75,7 @@ local function RouteViewStatesReducer(Tbl, p1) --[[ Line: 73 ]]
 	end
 end
 
-return function(p2) --[[ Line: 147 | Named "useStackScreens" ]]
+return function(p2)
 	-- upvalues: ReactModule (copy), RouteViewStatesReducer (copy), FFlagLuaAppDerivedStackAndSwitchState (copy), StackActions (copy), Array (copy), Object (copy)
 	local Navigation = p2.navigation
 	local State = Navigation.state
@@ -83,7 +83,7 @@ return function(p2) --[[ Line: 147 | Named "useStackScreens" ]]
 	local UseReducerResult, UseReducerResult2 = ReactModule.useReducer(RouteViewStatesReducer, {})
 	
 	if FFlagLuaAppDerivedStackAndSwitchState then
-		ReactModule.useMemo(function() --[[ Line: 158 ]]
+		ReactModule.useMemo(function()
 			-- upvalues: UseReducerResult2 (copy), State (copy), Descriptors (copy)
 			UseReducerResult2({
 				type = "SetCurrent",
@@ -92,7 +92,7 @@ return function(p2) --[[ Line: 147 | Named "useStackScreens" ]]
 			})
 		end, { State, Descriptors })
 	else
-		ReactModule.useLayoutEffect(function() --[[ Line: 166 ]]
+		ReactModule.useLayoutEffect(function()
 			-- upvalues: UseReducerResult2 (copy), State (copy), Descriptors (copy)
 			UseReducerResult2({
 				type = "SetCurrent",
@@ -101,32 +101,32 @@ return function(p2) --[[ Line: 147 | Named "useStackScreens" ]]
 			})
 		end, { State, Descriptors })
 	end
-	local UseResult = ReactModule.useCallback(function(ToChildKey) --[[ Line: 175 ]]
+	local UseResult = ReactModule.useCallback(function(ToChildKey)
 		-- upvalues: Navigation (copy), StackActions (upval)
 		if Navigation.state.isTransitioning then
 			Navigation.dispatch(StackActions.completeTransition({ key = Navigation.state.key, toChildKey = ToChildKey }))
 		end
 	end, { Navigation })
-	local UseResult1 = ReactModule.useCallback(function(p3) --[[ Line: 184 ]]
+	local UseResult1 = ReactModule.useCallback(function(p3)
 		-- upvalues: UseReducerResult2 (copy), UseResult (copy)
 		UseReducerResult2({ type = "SetOpened", key = p3.descriptor.key })
 		UseResult(p3.descriptor.key)
 	end, { UseResult })
-	local UseResult2 = ReactModule.useCallback(function(p3) --[[ Line: 192 ]]
+	local UseResult2 = ReactModule.useCallback(function(p3)
 		-- upvalues: UseReducerResult2 (copy)
 		UseReducerResult2({ type = "SetClosed", key = p3.descriptor.key })
 	end, {})
 	
-	return (ReactModule.useMemo(function() --[[ Line: 199 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: Array (upval), UseReducerResult (copy), Object (upval), UseResult1 (copy), UseResult2 (copy)
-		return Array.map(UseReducerResult, function(p3) --[[ Line: 200 ]]
+		return Array.map(UseReducerResult, function(p3)
 			-- upvalues: Object (upval), UseResult1 (upval), UseResult2 (upval)
 			return Object.assign({}, p3, {
-				setOpened = function() --[[ Line: 202 ]]
+				setOpened = function()
 					-- upvalues: UseResult1 (upval), p3 (copy)
 					UseResult1(p3)
 				end,
-				setClosed = function() --[[ Line: 205 ]]
+				setClosed = function()
 					-- upvalues: UseResult2 (upval), p3 (copy)
 					UseResult2(p3)
 				end

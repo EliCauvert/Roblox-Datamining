@@ -19,7 +19,7 @@ local config = {
 	[AiOverviewSentiment.ThumbsDown] = true
 }
 
-local function _(p1, Message, PropName) --[[ Line: 43 | Named "reportInvalidParam" ]]
+local function _(p1, Message, PropName)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy)
 	p1.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 		name = SduiActionType.AiOverviewFeedback,
@@ -28,9 +28,9 @@ local function _(p1, Message, PropName) --[[ Line: 43 | Named "reportInvalidPara
 	}, p1.appPage)
 end
 
-local function sendUserSignal(p1, Networking, SearchSessionId, Unknown, AiOverviewExplicitFeedback, Input) --[[ Line: 51 ]]
+local function sendUserSignal(p1, Networking, SearchSessionId, Unknown, AiOverviewExplicitFeedback, Input)
 	-- upvalues: PostSendUserSignalFunction (copy), HttpService (copy), UserSignalTypes (copy), SduiErrorType (copy), SduiActionType (copy)
-	local Success, Result = pcall(function() --[[ Line: 59 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: PostSendUserSignalFunction (upval), Networking (copy), HttpService (upval), Input (copy), SearchSessionId (copy), UserSignalTypes (upval), Unknown (copy), AiOverviewExplicitFeedback (copy), p1 (copy), SduiErrorType (upval), SduiActionType (upval)
 		PostSendUserSignalFunction(Networking, { stringValue = HttpService:JSONEncode(Input) }, {
 			id = SearchSessionId,
@@ -40,7 +40,7 @@ local function sendUserSignal(p1, Networking, SearchSessionId, Unknown, AiOvervi
 				productSurface = Unknown,
 				subIds = { "PowerSearch" }
 			}
-		}, UserSignalTypes.SignalValueType.String, AiOverviewExplicitFeedback):catch(function(Err) --[[ Line: 70 ]]
+		}, UserSignalTypes.SignalValueType.String, AiOverviewExplicitFeedback):catch(function(Err)
 			-- upvalues: p1 (upval), SduiErrorType (upval), SduiActionType (upval)
 			p1.dependencies.logger.reportError(SduiErrorType.ActionNetworkRequestFailed, {
 				name = SduiActionType.AiOverviewFeedback,
@@ -57,7 +57,7 @@ local function sendUserSignal(p1, Networking, SearchSessionId, Unknown, AiOvervi
 	end
 end
 
-return function(p1, p2, p3, _) --[[ Line: 86 | Named "SduiAiOverviewFeedbackAction" ]]
+return function(p1, p2, p3, _)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), config (copy), FindAnalyticsFieldInAncestorsFunction (copy), sendUserSignal (copy), UserSignalTypes (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), ButtonVariant (copy), AiOverviewExplicitFeedbackFunction (copy), AiOverviewSentimentFunction (copy)
 	local ActionParams = if p1 then p1.actionParams else nil
 	
@@ -91,7 +91,7 @@ return function(p1, p2, p3, _) --[[ Line: 86 | Named "SduiAiOverviewFeedbackActi
 			dialogText = ActionParams.dialogText,
 			placeholderText = ActionParams.placeholderText,
 			buttonVariant = ButtonVariant.Emphasis,
-			onSubmit = function(FeedbackText) --[[ Line: 135 ]]
+			onSubmit = function(FeedbackText)
 				-- upvalues: sendUserSignal (upval), p3 (copy), Networking (copy), SearchSessionId (copy), ProductSurface1 (copy), UserSignalTypes (upval), Sentiment (copy), SearchQuery (copy), AiOverviewExplicitFeedbackFunction (upval), AppPage (copy)
 				sendUserSignal(p3, Networking, SearchSessionId, ProductSurface1, UserSignalTypes.SignalType.AiOverviewExplicitFeedback, {
 					sentiment = Sentiment,
@@ -106,7 +106,7 @@ return function(p1, p2, p3, _) --[[ Line: 86 | Named "SduiAiOverviewFeedbackActi
 					feedbackText = FeedbackText
 				}, AppPage)
 			end,
-			onClose = function(p4) --[[ Line: 157 ]]
+			onClose = function(p4)
 				-- upvalues: sendUserSignal (upval), p3 (copy), Networking (copy), SearchSessionId (copy), ProductSurface1 (copy), UserSignalTypes (upval), Sentiment (copy), SearchQuery (copy), AiOverviewExplicitFeedbackFunction (upval), AppPage (copy)
 				if not p4 then
 					sendUserSignal(p3, Networking, SearchSessionId, ProductSurface1, UserSignalTypes.SignalType.AiOverviewExplicitFeedback, {

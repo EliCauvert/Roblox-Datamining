@@ -28,7 +28,7 @@ local config3 = {
 	lastUpdated = { 26, 8, 26 }
 }
 
-local function makeFunnelConfig(EventName, Description) --[[ Line: 73 ]]
+local function makeFunnelConfig(EventName, Description)
 	return {
 		throttlingPercentage = 10000,
 		links = "https://roblox.atlassian.net/browse/ADS-11511",
@@ -44,7 +44,7 @@ local OneByTwoTilePlaced = if FFlagLuaAppEnableOneByTwoTileFunnelTelemetry then 
 local OneByTwoTileSkipped = if FFlagLuaAppEnableOneByTwoTileFunnelTelemetry then makeFunnelConfig("OneByTwoTileSkipped", "Fired when a OneByTwoTile cannot be placed into any grid.") else nil
 local OneByTwoTileRendered = if FFlagLuaAppEnableOneByTwoTileFunnelTelemetry then makeFunnelConfig("OneByTwoTileRendered", "Fired when a OneByTwoTile component mounts.") else nil
 
-local function _(Config, CustomFields) --[[ Line: 103 | Named "logFunnelEvent" ]]
+local function _(Config, CustomFields)
 	-- upvalues: T (copy), TelemetryService (copy), List (copy)
 	local Text: string = `{Config.eventName}:{CustomFields.oneByTwoTileFlowId}`
 	
@@ -58,19 +58,19 @@ end
 
 return {
 	CtaType = { GameJoin = "GameJoin", Clickout = "Clickout" },
-	logOneByTwoTileActivated = function() --[[ Line: 119 ]]
+	logOneByTwoTileActivated = function()
 		-- upvalues: TelemetryService (copy), config (copy)
 		TelemetryService:LogCounter(config, {}, 1)
 	end,
-	logOneByTwoTileCtaActivated = function(CtaType) --[[ Line: 123 ]]
+	logOneByTwoTileCtaActivated = function(CtaType)
 		-- upvalues: TelemetryService (copy), config1 (copy)
 		TelemetryService:LogCounter(config1, { customFields = { CtaType = CtaType } }, 1)
 	end,
-	logOneByTwoTileGameJoinInitiated = function() --[[ Line: 127 ]]
+	logOneByTwoTileGameJoinInitiated = function()
 		-- upvalues: TelemetryService (copy), config2 (copy)
 		TelemetryService:LogCounter(config2, {}, 1)
 	end,
-	logOneByTwoTileVideoLoaded = function(VideoLengthSec, LoadDurationSec, NativeAdData) --[[ Line: 131 ]]
+	logOneByTwoTileVideoLoaded = function(VideoLengthSec, LoadDurationSec, NativeAdData)
 		-- upvalues: TelemetryService (copy), config3 (copy)
 		TelemetryService:LogEvent(config3, {
 			standardizedFields = { "addOSInfo", "addSessionInfo", "addSessionId" },
@@ -81,7 +81,7 @@ return {
 			}
 		})
 	end,
-	logOneByTwoTileResponseReceived = function(CustomFields) --[[ Line: 146 ]]
+	logOneByTwoTileResponseReceived = function(CustomFields)
 		-- upvalues: OneByTwoTileResponseReceived (copy), T (copy), TelemetryService (copy), List (copy)
 		local Text: string = `{OneByTwoTileResponseReceived.eventName}:{CustomFields.oneByTwoTileFlowId}`
 		
@@ -92,7 +92,7 @@ return {
 			return
 		end
 	end,
-	logOneByTwoTilePlaced = function(CustomFields) --[[ Line: 150 ]]
+	logOneByTwoTilePlaced = function(CustomFields)
 		-- upvalues: OneByTwoTilePlaced (copy), T (copy), TelemetryService (copy), List (copy)
 		local Text: string = `{OneByTwoTilePlaced.eventName}:{CustomFields.oneByTwoTileFlowId}`
 		
@@ -103,7 +103,7 @@ return {
 			return
 		end
 	end,
-	logOneByTwoTileSkipped = function(CustomFields) --[[ Line: 154 ]]
+	logOneByTwoTileSkipped = function(CustomFields)
 		-- upvalues: OneByTwoTileSkipped (copy), T (copy), TelemetryService (copy), List (copy)
 		local Text: string = `{OneByTwoTileSkipped.eventName}:{CustomFields.oneByTwoTileFlowId}`
 		
@@ -114,7 +114,7 @@ return {
 			return
 		end
 	end,
-	logOneByTwoTileRendered = function(CustomFields) --[[ Line: 158 ]]
+	logOneByTwoTileRendered = function(CustomFields)
 		-- upvalues: OneByTwoTileRendered (copy), T (copy), TelemetryService (copy), List (copy)
 		local Text: string = `{OneByTwoTileRendered.eventName}:{CustomFields.oneByTwoTileFlowId}`
 		

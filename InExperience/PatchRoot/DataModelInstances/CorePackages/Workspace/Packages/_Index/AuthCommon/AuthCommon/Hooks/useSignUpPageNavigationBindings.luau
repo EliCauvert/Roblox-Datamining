@@ -11,9 +11,9 @@ local config = {
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-return function(Callback) --[[ Line: 20 | Named "useSignUpPageNavigationBindings" ]]
+return function(Callback)
 	-- upvalues: ReactModule (copy), FFlagEnableConfirmSignifierOnSignUpPage (copy), ReactFocusNavigationModule (copy), config (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy)
-	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 22 ]]
+	local UseResult = ReactModule.useCallback(function(p1)
 		-- upvalues: Callback (copy)
 		p1:cancel()
 		
@@ -23,12 +23,12 @@ return function(Callback) --[[ Line: 20 | Named "useSignUpPageNavigationBindings
 		end
 	end, if Callback then { Callback } else {})
 	
-	return if FFlagEnableConfirmSignifierOnSignUpPage then ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function() --[[ Line: 35 ]]
+	return if FFlagEnableConfirmSignifierOnSignUpPage then ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function()
 		-- upvalues: FocusNavigationEventNameEnum (upval), UseResult (copy), InputHandlersModule (upval)
 		return {
 			[FocusNavigationEventNameEnum.NavigateBack] = { handler = UseResult },
 			[FocusNavigationEventNameEnum.Confirm] = {
-				handler = InputHandlersModule.onRelease(function() --[[ Line: 41 ]] end)
+				handler = InputHandlersModule.onRelease(function() end)
 			}
 		}
 	end, {}), (ReactFocusNavigationModule.useEventMap(config))) else ReactFocusNavigationModule.useEventHandler(FocusNavigationEventNameEnum.NavigateBack, UseResult)

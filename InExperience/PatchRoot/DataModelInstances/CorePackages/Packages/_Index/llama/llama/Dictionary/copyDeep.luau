@@ -1,4 +1,4 @@
-﻿local function copyDeep(List) --[[ Line: 2 ]]
+﻿local function copyDeep(List)
 	-- upvalues: copyDeep (copy)
 	local ValueType = type(List)
 	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)

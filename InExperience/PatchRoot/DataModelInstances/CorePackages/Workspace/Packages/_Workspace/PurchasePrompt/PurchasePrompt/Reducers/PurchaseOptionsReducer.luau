@@ -7,7 +7,7 @@ return (require(Parent.PurchasePromptDeps).Rodux.createReducer({
 	shouldSkipOwnershipCheck = false,
 	shouldFetchCartPricing = false
 }, {
-	[require(PurchasePrompt.Actions.SetPurchaseOptions).name] = function(_, p1) --[[ Line: 18 ]]
+	[require(PurchasePrompt.Actions.SetPurchaseOptions).name] = function(_, p1)
 		return p1.purchaseOptions
 	end
 }))

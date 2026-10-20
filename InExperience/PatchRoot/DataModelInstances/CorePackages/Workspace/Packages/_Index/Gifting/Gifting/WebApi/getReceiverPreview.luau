@@ -7,7 +7,7 @@ local FetchGiftingModule = require(Gifting.WebApi.fetchGifting)
 local UrlsModule = require(Gifting.WebApi.Urls)
 local _ = require(Gifting.Types)
 
-return function(p1, Network) --[[ Line: 17 | Named "getReceiverPreview" ]]
+return function(p1, Network)
 	-- upvalues: GiftModelUtilsModule (copy), PromiseModule (copy), GiftErrorModelModule (copy), FetchGiftingModule (copy), UrlsModule (copy), ReceiverPreviewResponseModelModule (copy)
 	local NonEmptyStringResult, NonEmptyStringResult2 = GiftModelUtilsModule.nonEmptyString(p1)
 	

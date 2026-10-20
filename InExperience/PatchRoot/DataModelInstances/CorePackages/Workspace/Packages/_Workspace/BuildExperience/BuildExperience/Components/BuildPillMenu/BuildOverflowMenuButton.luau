@@ -33,11 +33,11 @@ local _ = require(BuildExperience.Stores.GetBuildOverflowMenuStore.createBuildOv
 local ReleaseAnyFocusModule = require(Parent.BuildExperiencePlaytestLaunch.releaseAnyFocus)
 local BuildOverflowMenuWidth = game:DefineFastInt("BuildOverflowMenuWidth", 172)
 
-local function _(p1, p2) --[[ Line: 90 | Named "getSourceText" ]]
+local function _(p1, p2)
 	return if p1.getText == nil then p1.text else p1.getText(p2)
 end
 
-return function(p1) --[[ Line: 94 | Named "BuildOverflowMenuButton" ]]
+return function(p1)
 	-- upvalues: UseScaledValueFunction (copy), BuildOverflowMenuWidth (copy), UseOpenWebViewFunction (copy), ReactModule (copy), UseExperienceShareFlowModule (copy), UseSharePublishedExperienceFunction (copy), FFlagEnableBuildAdPromotionModule (copy), UseGetAdCampaignEligibilityModule (copy), AdCampaignEligibilityUtilsModule (copy), FFlagEnableBuildOverflowMenuForNewGamesModule (copy), UseLocalizationFunction (copy), UseCreatorCreditMenuItemFunction (copy), BadgeVariant (copy), FFlagBuildExperienceReleaseFocusOnOverflowOpenModule (copy), UserInputService (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), DeveloperProducts (copy), LocalizationStringsModule (copy), ReleaseAnyFocusModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), LeaveExperienceModule (copy), VersionHistoryContainerModule (copy), Menu (copy), PopoverSide (copy), InputSize (copy), PopoverAlign (copy), IconButton (copy), ButtonVariant (copy), ExperienceShareOverlaysModule (copy), FriendsOnlyShareDialogModule (copy)
 	local UseScaledValueResult = UseScaledValueFunction(BuildOverflowMenuWidth)
 	local UseOpenWebViewResult = UseOpenWebViewFunction()
@@ -56,7 +56,7 @@ return function(p1) --[[ Line: 94 | Named "BuildOverflowMenuButton" ]]
 	local HasOnOpenCreatorCreditPage1: boolean = FFlagEnableBuildOverflowMenuForNewGamesModule and (p1.target.universeId == nil and HasOnOpenCreatorCreditPage)
 	local IsIsDisabled: boolean = p1.isDisabled == true or p1.target.universeId == nil and not HasOnOpenCreatorCreditPage1
 	local IsHasPublishedTurn = p1.hasPublishedTurn == true
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 132 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), UseExperienceShareFlowModuleResult (copy), IsHasPublishedTurn (copy), IsNotUniverseIdMatch (copy), IsUserEligible (copy), IsIsUniversePublic (copy), FreeCreditsRemainingResult (copy)
 		return if p1.target.universeId == nil then nil else {
 			universeId = p1.target.universeId,
@@ -95,12 +95,12 @@ return function(p1) --[[ Line: 94 | Named "BuildOverflowMenuButton" ]]
 	local UseLocalizationResult = UseLocalizationFunction(TrailingTexts)
 	local UseCreatorCreditMenuItemResult = UseCreatorCreditMenuItemFunction({ onOpenCreatorCreditPage = p1.onOpenCreatorCreditPage })
 	
-	local function _(p2) --[[ Line: 182 | Named "getItemText" ]]
+	local function _(p2)
 		-- upvalues: UseLocalizationResult (copy)
 		return UseLocalizationResult[p2.id]
 	end
 	
-	local _ = function(p2) --[[ Line: 188 | Named "getItemTrailing" ]]
+	local _ = function(p2)
 		-- upvalues: UseMemoResult (copy), UseLocalizationResult (copy), BadgeVariant (upval)
 		return if p2.getTrailingText == nil then nil elseif p2.getTrailingText(UseMemoResult) == nil then nil else {
 			type = "Badge",
@@ -109,11 +109,11 @@ return function(p1) --[[ Line: 94 | Named "BuildOverflowMenuButton" ]]
 		}
 	end
 	
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 335 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(false)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 340 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult3 (copy), UseStateResult2_2 (copy), UseSharePublishedExperienceResult (copy)
 		UseStateResult2_2(nil)
 		
@@ -121,7 +121,7 @@ return function(p1) --[[ Line: 94 | Named "BuildOverflowMenuButton" ]]
 			UseSharePublishedExperienceResult(UseStateResult3)
 		end
 	end, { UseStateResult3, UseSharePublishedExperienceResult })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 348 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_2 (copy)
 		UseStateResult2_2(nil)
 	end, {})
@@ -129,7 +129,7 @@ return function(p1) --[[ Line: 94 | Named "BuildOverflowMenuButton" ]]
 	return ReactModule.createElement(ReactModule.Fragment, nil, {
 		Menu = ReactModule.createElement(Menu, {
 			isOpen = UseStateResult and not IsIsDisabled,
-			items = (function() --[[ Line: 200 | Named "buildMenuItems" ]]
+			items = (function()
 				-- upvalues: IsIsDisabled (copy), UseMemoResult (copy), UseItemsResult (copy), UseLocalizationResult (copy), BadgeVariant (upval), HasOnOpenCreatorCreditPage (copy), UseCreatorCreditMenuItemResult (copy)
 				local List = {}
 				
@@ -163,11 +163,11 @@ return function(p1) --[[ Line: 94 | Named "BuildOverflowMenuButton" ]]
 			side = PopoverSide.Bottom,
 			size = InputSize.Large,
 			align = PopoverAlign.End,
-			onPressedOutside = ReactModule.useCallback(function() --[[ Line: 251 ]]
+			onPressedOutside = ReactModule.useCallback(function()
 				-- upvalues: UseStateResult2 (copy)
 				UseStateResult2(false)
 			end, {}),
-			onActivated = ReactModule.useCallback(function(Id) --[[ Line: 256 ]]
+			onActivated = ReactModule.useCallback(function(Id)
 				-- upvalues: UserInputService (upval), HasOnOpenCreatorCreditPage (copy), UseCreatorCreditMenuItemResult (copy), UseStateResult2 (copy), UseMemoResult (copy), UseItemsResult (copy), FFlagBuildExperienceMonetizationNativeUIModule (upval), UseOpenWebViewResult (copy), DeveloperProducts (upval), LocalizationStringsModule (upval), p1 (copy), ReleaseAnyFocusModule (upval), UseStateResult2_1 (copy), FFlagBuildExperiencePrivateInvitesModule (upval), OnShareFunction (copy), UseSharePublishedExperienceResult (copy), UseStateResult2_2 (copy), LeaveExperienceModule (upval)
 				local FocusedTextBox = UserInputService:GetFocusedTextBox()
 				
@@ -241,7 +241,7 @@ return function(p1) --[[ Line: 94 | Named "BuildOverflowMenuButton" ]]
 			variant = ButtonVariant.Utility,
 			size = InputSize.Medium,
 			isDisabled = IsIsDisabled,
-			onActivated = ReactModule.useCallback(function() --[[ Line: 233 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: IsIsDisabled (copy), FFlagBuildExperienceReleaseFocusOnOverflowOpenModule (upval), UserInputService (upval), UseStateResult2 (copy), p1 (copy)
 				if IsIsDisabled then return end
 				if FFlagBuildExperienceReleaseFocusOnOverflowOpenModule then
@@ -251,7 +251,7 @@ return function(p1) --[[ Line: 94 | Named "BuildOverflowMenuButton" ]]
 						FocusedTextBox:ReleaseFocus()
 					end
 				end
-				UseStateResult2(function(p2): boolean --[[ Line: 243 ]]
+				UseStateResult2(function(p2): boolean
 					return not p2
 				end)
 				

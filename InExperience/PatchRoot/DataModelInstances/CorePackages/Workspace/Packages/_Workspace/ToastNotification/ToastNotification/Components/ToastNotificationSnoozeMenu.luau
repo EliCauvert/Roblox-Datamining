@@ -44,7 +44,7 @@ config1 = {
 	[4] = { textKey = "untilITurnItBackOn", durationMinutes = -1 }
 }
 
-return function() --[[ Line: 84 ]]
+return function()
 	-- upvalues: UseStyleFunction (copy), FFlagEnableAppChatSnoozeMenuFocus (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), Cryo (copy), config (copy), React (copy), ShowNotificationSnoozeMenuSignal (copy), GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction (copy), DismissNotificationSnoozeMenuSignal (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), NotificationSnoozeMenuVisibleSignal (copy), UseCursorFunction (copy), config1 (ref), NormalizeFontFaceFunction (copy), Colors (copy), Default (copy), Interactable (copy), FocusRoot (copy), EventMap (copy), FocusNavigableSurfaceIdentifierEnum (copy), SnoozeMenuTextXAlignment (copy), Roact (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseTokensResult = if FFlagEnableAppChatSnoozeMenuFocus or FoundationFontFaceMigration then UseTokensFunction() else nil
@@ -58,24 +58,24 @@ return function() --[[ Line: 84 ]]
 	})))
 	local UseStateResult, UseStateResult2 = React.useState(false)
 	local UseStateResult1, UseStateResult2_1 = React.useState({})
-	local UseResult = React.useCallback(function() --[[ Line: 101 ]]
+	local UseResult = React.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, { UseStateResult2 })
-	React.useEffect(function() --[[ Line: 105 ]]
+	React.useEffect(function()
 		-- upvalues: ShowNotificationSnoozeMenuSignal (upval), UseStateResult2_1 (copy), UseStateResult2 (copy), GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction (upval), DismissNotificationSnoozeMenuSignal (upval), UseResult (copy)
 		local Connection = nil
-		Connection = ShowNotificationSnoozeMenuSignal:connect(function(p1) --[[ Line: 107 ]]
+		Connection = ShowNotificationSnoozeMenuSignal:connect(function(p1)
 			-- upvalues: UseStateResult2_1 (upval), UseStateResult2 (upval)
 			UseStateResult2_1(p1)
 			UseStateResult2(true)
 		end)
-		local Connection1 = if GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction() then DismissNotificationSnoozeMenuSignal:connect(function() --[[ Line: 119 ]]
+		local Connection1 = if GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction() then DismissNotificationSnoozeMenuSignal:connect(function()
 			-- upvalues: UseResult (upval)
 			UseResult()
 		end) else nil
 		
-		return function() --[[ Line: 124 ]]
+		return function()
 			-- upvalues: Connection (ref), GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction (upval), Connection1 (ref)
 			Connection:disconnect()
 			
@@ -87,11 +87,11 @@ return function() --[[ Line: 84 ]]
 	local UseMemoResult = nil
 	
 	if FFlagEnableAppChatSnoozeMenuFocus then
-		UseMemoResult = React.useMemo(function() --[[ Line: 134 ]]
+		UseMemoResult = React.useMemo(function()
 			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), UseResult (copy)
 			return {
 				[FocusNavigationEventNameEnum.NavigateBack] = {
-					handler = InputHandlersModule.onRelease(function(p1) --[[ Line: 137 ]]
+					handler = InputHandlersModule.onRelease(function(p1)
 						-- upvalues: UseResult (upval)
 						UseResult()
 						p1:cancel()
@@ -99,13 +99,13 @@ return function() --[[ Line: 84 ]]
 				}
 			}
 		end, { UseResult })
-		React.useEffect(function() --[[ Line: 145 ]]
+		React.useEffect(function()
 			-- upvalues: NotificationSnoozeMenuVisibleSignal (upval), UseStateResult (copy)
 			NotificationSnoozeMenuVisibleSignal:fire({ visible = UseStateResult })
 		end, { UseStateResult })
 	end
 	local UseCursorResult = if FFlagEnableAppChatSnoozeMenuFocus then UseCursorFunction() else nil
-	local UseMemoResult1 = React.useMemo(function() --[[ Line: 152 ]]
+	local UseMemoResult1 = React.useMemo(function()
 		-- upvalues: config1 (upval), React (upval), FFlagEnableAppChatSnoozeMenuFocus (upval), UseTokensResult (copy), FoundationFontFaceMigration (upval), UseStyleResult (copy), NormalizeFontFaceFunction (upval), UseCursorResult (copy), UseLocalizationResult (copy), Colors (upval), UseStateResult1 (copy), Default (upval), UseStateResult2 (copy)
 		local List = {}
 		
@@ -122,7 +122,7 @@ return function() --[[ Line: 84 ]]
 				TextColor3 = Colors.White,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Center,
-				[React.Event.Activated] = function() --[[ Line: 177 ]]
+				[React.Event.Activated] = function()
 					-- upvalues: UseStateResult1 (upval), Default (upval), value (copy), UseLocalizationResult (upval), UseStateResult2 (upval)
 					if UseStateResult1.notificationType then
 						Default:snoozeNotification({
@@ -159,7 +159,7 @@ return function() --[[ Line: 84 ]]
 		AutoButtonColor = false,
 		BackgroundColor3 = Colors.Black,
 		BackgroundTransparency = 0.6,
-		onStateChanged = function() --[[ Line: 229 ]] end,
+		onStateChanged = function() end,
 		[React.Event.Activated] = UseResult
 	}, {
 		SnoozeMenu = React.createElement(if FFlagEnableAppChatSnoozeMenuFocus then FocusRoot else Interactable, if FFlagEnableAppChatSnoozeMenuFocus then {
@@ -184,7 +184,7 @@ return function() --[[ Line: 84 ]]
 			AutomaticSize = Enum.AutomaticSize.Y,
 			BackgroundColor3 = UseStyleResult.Theme.BackgroundDefault.Color,
 			BackgroundTransparency = UseStyleResult.Theme.BackgroundDefault.Transparency,
-			onStateChanged = function() --[[ Line: 258 ]] end
+			onStateChanged = function() end
 		}, {
 			UICorner = React.createElement("UICorner", {
 				CornerRadius = UDim.new(0, UseStyleResult.Tokens.Radius.Large)

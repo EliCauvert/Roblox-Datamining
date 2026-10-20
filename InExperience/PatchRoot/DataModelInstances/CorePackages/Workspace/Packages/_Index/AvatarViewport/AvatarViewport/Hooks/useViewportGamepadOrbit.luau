@@ -6,7 +6,7 @@ local ReactModule = require(AvatarViewport.Parent.React)
 local ConstantsModule = require(AvatarViewport.Constants)
 local ViewportGamepadInputModule = require(AvatarViewport.ViewportGamepadInput)
 
-return function(p1) --[[ Line: 26 | Named "useViewportGamepadOrbit" ]]
+return function(p1)
 	-- upvalues: ConstantsModule (copy), ViewportGamepadInputModule (copy), ReactModule (copy), UserInputService (copy), ContextActionService (copy), RunService (copy)
 	local NoEnabled = p1.enabled == nil or p1.enabled
 	local ActionName = p1.actionName or ConstantsModule.GamepadOrbitActionName
@@ -23,12 +23,12 @@ return function(p1) --[[ Line: 26 | Named "useViewportGamepadOrbit" ]]
 	UseRefResult2.current = p1.applyYawDelta
 	UseRefResult3.current = p1.applyZoomGesture
 	UseRefResult4.current = p1.onOrbitEnded
-	ReactModule.useEffect(function() --[[ Line: 46 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: NoEnabled (copy), UserInputService (upval), ContextActionService (upval), ActionName (copy), UseRefResult (copy), ViewportGamepadInputModule (upval), ThumbstickDeadzone (copy), ZoomAxisThreshold (copy), UseRefResult1 (copy), UseRefResult4 (copy), ThumbstickKeyCode (copy), RunService (upval), YawSpeedDegPerSecond (copy), UseRefResult2 (copy), ZoomGestureSpeedPerSecond (copy), UseRefResult3 (copy)
 		if not NoEnabled or not UserInputService.GamepadEnabled then return end
 		local ZeroVector = Vector2.zero
 		ContextActionService:UnbindCoreAction(ActionName)
-		ContextActionService:BindCoreAction(ActionName, function(_, UserInputState, p2) --[[ Line: 57 ]]
+		ContextActionService:BindCoreAction(ActionName, function(_, UserInputState, p2)
 			-- upvalues: ZeroVector (ref), UseRefResult (upval), ViewportGamepadInputModule (upval), ThumbstickDeadzone (upval), ZoomAxisThreshold (upval), UseRefResult1 (upval), UseRefResult4 (upval)
 			if UserInputState == Enum.UserInputState.Change then
 				ZeroVector = Vector2.new(p2.Position.X, p2.Position.Y)
@@ -48,7 +48,7 @@ return function(p1) --[[ Line: 26 | Named "useViewportGamepadOrbit" ]]
 			end
 			return Enum.ContextActionResult.Sink
 		end, false, ThumbstickKeyCode)
-		local RenderSteppedConnection = RunService.RenderStepped:Connect(function(DeltaTime) --[[ Line: 80 ]]
+		local RenderSteppedConnection = RunService.RenderStepped:Connect(function(DeltaTime)
 			-- upvalues: ViewportGamepadInputModule (upval), ZeroVector (ref), YawSpeedDegPerSecond (upval), ThumbstickDeadzone (upval), UseRefResult2 (upval), ZoomGestureSpeedPerSecond (upval), ZoomAxisThreshold (upval), UseRefResult3 (upval)
 			local YawDeltaDegrees = ViewportGamepadInputModule.computeYawDeltaDegrees(ZeroVector, DeltaTime, YawSpeedDegPerSecond, ThumbstickDeadzone)
 			
@@ -62,7 +62,7 @@ return function(p1) --[[ Line: 26 | Named "useViewportGamepadOrbit" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 103 ]]
+		return function()
 			-- upvalues: ContextActionService (upval), ActionName (upval), RenderSteppedConnection (copy), ZeroVector (ref), UseRefResult (upval), UseRefResult1 (upval)
 			ContextActionService:UnbindCoreAction(ActionName)
 			RenderSteppedConnection:Disconnect()

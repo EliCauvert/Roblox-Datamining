@@ -7,7 +7,7 @@ local CloseProfilePictureEditorModule = require(AvatarExperienceProfilePictureEd
 local ShowEditProfileImageToastModule = require(AvatarExperienceProfilePictureEditor.Utils.showEditProfileImageToast)
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 
-return require(Parent.RoactNavigation).withNavigationFocus(function(p1) --[[ Line: 27 | Named "EditProfileImageScreen" ]]
+return require(Parent.RoactNavigation).withNavigationFocus(function(p1)
 	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), CloseProfilePictureEditorModule (copy), ShowEditProfileImageToastModule (copy), EnumsModule (copy), EditProfileImageModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	
@@ -16,11 +16,11 @@ return require(Parent.RoactNavigation).withNavigationFocus(function(p1) --[[ Lin
 		initialFrameAssetId = p1.initialFrameAssetId,
 		initialFrameSelectionRequestId = p1.initialFrameSelectionRequestId,
 		showCloseButton = p1.isFocused ~= false,
-		onClose = ReactModule.useCallback(function() --[[ Line: 30 ]]
+		onClose = ReactModule.useCallback(function()
 			-- upvalues: CloseProfilePictureEditorModule (upval), p1 (copy)
 			CloseProfilePictureEditorModule(p1.navigation)
 		end, { p1.navigation }),
-		onSaveSuccess = ReactModule.useCallback(function() --[[ Line: 34 ]]
+		onSaveSuccess = ReactModule.useCallback(function()
 			-- upvalues: ShowEditProfileImageToastModule (upval), UseDispatchResult (copy), CloseProfilePictureEditorModule (upval), p1 (copy)
 			ShowEditProfileImageToastModule.showSaveSuccessToast(UseDispatchResult)
 			CloseProfilePictureEditorModule(p1.navigation)

@@ -6,7 +6,7 @@ local ItemCardCreatorNameModule = require(script.Parent.ItemCardCreatorName)
 local ItemCardTitleModule = require(script.Parent.ItemCardTitle)
 local FFlagAXAddTextXAlignmentProp = require(Parent.AvatarExperienceFlags).FFlagAXAddTextXAlignmentProp
 
-local function ItemCardFooter(Label) --[[ Line: 27 ]]
+local function ItemCardFooter(Label)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ItemCardTitleModule (copy), FFlagAXAddTextXAlignmentProp (copy), ItemCardCreatorNameModule (copy), ItemCardPriceLineModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	

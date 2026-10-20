@@ -7,7 +7,7 @@ local OpenInfoPeekViewFunction = require(Parent.DiscoveryRouting).OpenInfoPeekVi
 local OpenCloseOnlyInteractiveAlertFunction = require(Parent.DiscoveryRouting).OpenCloseOnlyInteractiveAlert
 local SduiResponsiveHelpers = require(Parent.SduiCoreSystem).SduiResponsiveHelpers
 
-return function(_, _, p1) --[[ Line: 19 ]]
+return function(_, _, p1)
 	-- upvalues: LocalizeStringsFunction (copy), SduiResponsiveHelpers (copy), GetInputModeStoreFunction (copy), ResponsiveModule (copy), OpenInfoPeekViewFunction (copy), OpenCloseOnlyInteractiveAlertFunction (copy), CloseCentralOverlayFunction (copy)
 	local DispatchFunction: (any) -> () = p1.dependencies.dispatch
 	local LocalizeStringsResult = LocalizeStringsFunction(p1.dependencies.localization, {
@@ -23,7 +23,7 @@ return function(_, _, p1) --[[ Line: 19 ]]
 		
 		return
 	else
-		DispatchFunction(OpenCloseOnlyInteractiveAlertFunction(SponsoredTitle, SponsoredDisclosure, function() --[[ Line: 38 ]]
+		DispatchFunction(OpenCloseOnlyInteractiveAlertFunction(SponsoredTitle, SponsoredDisclosure, function()
 			-- upvalues: DispatchFunction (copy), CloseCentralOverlayFunction (upval)
 			return DispatchFunction(CloseCentralOverlayFunction())
 		end))

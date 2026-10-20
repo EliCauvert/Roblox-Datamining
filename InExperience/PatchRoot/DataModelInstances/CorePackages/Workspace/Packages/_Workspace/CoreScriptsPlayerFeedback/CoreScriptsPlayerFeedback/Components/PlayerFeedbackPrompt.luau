@@ -20,13 +20,13 @@ local TelemetryService = game:GetService("TelemetryService")
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local ComponentAssetsCircle21 = UIBloxModule.App.ImageSet.Images["component_assets/circle_21"]
 
-return (ReactModule.memo(function(p1) --[[ Line: 45 ]]
+return (ReactModule.memo(function(p1)
 	-- upvalues: UseScreenSizeFunction (copy), UseStyleFunction (copy), UseLastInputMethodFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), GuiService (copy), ConstantsModule (copy), MouseIconOverrideService (copy), TelemetryService (copy), UseEscapeDismissModule (copy), ContextActionService (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ImageSetLabel (copy), ComponentAssetsCircle21 (copy), ButtonType (copy), InteractiveAlert (copy)
 	local UseScreenSizeResult = UseScreenSizeFunction()
 	local UseStyleResult = UseStyleFunction()
 	local UseLastInputMethodResult = UseLastInputMethodFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 51 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseLastInputMethodResult (copy), UseStateResult2 (copy)
 		if not UseStateResult and (UseLastInputMethodResult == "Keyboard" or UseLastInputMethodResult == "Gamepad") then
 			UseStateResult2(true)
@@ -43,13 +43,13 @@ return (ReactModule.memo(function(p1) --[[ Line: 45 ]]
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState("")
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 70 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseRefResult (copy), GuiService (upval)
 		if not UseStateResult then return end
 		local Current = UseRefResult.current
 		
 		if Current then
-			pcall(function() --[[ Line: 77 ]]
+			pcall(function()
 				-- upvalues: GuiService (upval), Current (copy)
 				GuiService:Select(Current)
 			end)
@@ -58,28 +58,28 @@ return (ReactModule.memo(function(p1) --[[ Line: 45 ]]
 	local MINFEEDBACKLENGTH = ConstantsModule.MIN_FEEDBACK_LENGTH
 	local MAXFEEDBACKLENGTH = ConstantsModule.MAX_FEEDBACK_LENGTH
 	local DELAYEDINPUTANIMSEC = ConstantsModule.DELAYED_INPUT_ANIM_SEC
-	ReactModule.useEffect(function() --[[ Line: 87 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: MouseIconOverrideService (upval)
 		MouseIconOverrideService.push("PlayerFeedbackPromptOverride", Enum.OverrideMouseIconBehavior.ForceShow)
 		
-		return function() --[[ Line: 89 ]]
+		return function()
 			-- upvalues: MouseIconOverrideService (upval)
 			MouseIconOverrideService.pop("PlayerFeedbackPromptOverride")
 		end
 	end, {})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 94 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult1 (copy), MINFEEDBACKLENGTH (copy), MAXFEEDBACKLENGTH (copy), UseStateResult2_2 (copy), TelemetryService (upval), p1 (copy)
 		if #UseStateResult1 < MINFEEDBACKLENGTH then return end
 		if MAXFEEDBACKLENGTH >= #UseStateResult1 then
 			UseStateResult2_2(true)
-			pcall(function() --[[ Line: 102 ]]
+			pcall(function()
 				-- upvalues: TelemetryService (upval)
 				TelemetryService:LogCounter({
 					eventName = "FeedbackPrompt_Submitted",
 					backends = { "RobloxTelemetryCounter" }
 				}, { customFields = {} }, 1)
 			end)
-			pcall(function() --[[ Line: 109 ]]
+			pcall(function()
 				-- upvalues: UseStateResult1 (upval)
 				local SocialService = game:GetService("SocialService")
 				
@@ -92,16 +92,16 @@ return (ReactModule.memo(function(p1) --[[ Line: 45 ]]
 			return
 		end
 	end, { UseStateResult1 })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 118 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: TelemetryService (upval), p1 (copy)
-		pcall(function() --[[ Line: 119 ]]
+		pcall(function()
 			-- upvalues: TelemetryService (upval)
 			TelemetryService:LogCounter({
 				eventName = "FeedbackPrompt_Cancelled",
 				backends = { "RobloxTelemetryCounter" }
 			}, { customFields = {} }, 1)
 		end)
-		pcall(function() --[[ Line: 126 ]]
+		pcall(function()
 			local SocialService = game:GetService("SocialService")
 			
 			if SocialService.SignalFeedbackSubmissionPermissionDenied then
@@ -111,12 +111,12 @@ return (ReactModule.memo(function(p1) --[[ Line: 45 ]]
 		p1.closePrompt()
 	end, {})
 	UseEscapeDismissModule("FeedbackPromptCancel", UseResult1)
-	ReactModule.useEffect(function() --[[ Line: 137 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ContextActionService (upval), GuiService (upval), UseResult (copy)
-		ContextActionService:BindCoreActionAtPriority("FeedbackPromptDisableGameControls", function(_, _, Input) --[[ Line: 140 ]]
+		ContextActionService:BindCoreActionAtPriority("FeedbackPromptDisableGameControls", function(_, _, Input)
 			return if Input and Input.KeyCode == Enum.KeyCode.Escape then Enum.ContextActionResult.Pass else Enum.ContextActionResult.Sink
 		end, false, Enum.ContextActionPriority.Low.Value, Enum.PlayerActions.CharacterForward, Enum.PlayerActions.CharacterBackward, Enum.PlayerActions.CharacterLeft, Enum.PlayerActions.CharacterRight, Enum.PlayerActions.CharacterJump)
-		ContextActionService:BindCoreAction("FeedbackPromptSubmit", function(_, UserInputState) --[[ Line: 155 ]]
+		ContextActionService:BindCoreAction("FeedbackPromptSubmit", function(_, UserInputState)
 			-- upvalues: GuiService (upval), UseResult (upval)
 			if UserInputState ~= Enum.UserInputState.Begin then
 				return Enum.ContextActionResult.Pass
@@ -132,20 +132,20 @@ return (ReactModule.memo(function(p1) --[[ Line: 45 ]]
 			end
 		end, false, Enum.KeyCode.ButtonA, Enum.KeyCode.Return)
 		
-		return function() --[[ Line: 167 ]]
+		return function()
 			-- upvalues: ContextActionService (upval)
 			ContextActionService:UnbindCoreAction("FeedbackPromptDisableGameControls")
 			ContextActionService:UnbindCoreAction("FeedbackPromptSubmit")
 		end
 	end, { UseResult, UseResult1 })
-	ReactModule.useEffect(function() --[[ Line: 173 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), GuiService (upval)
-		local function trySelect() --[[ Line: 174 ]]
+		local function trySelect()
 			-- upvalues: UseRefResult (upval), GuiService (upval)
 			local Current = UseRefResult.current
 			
 			if Current then
-				pcall(function() --[[ Line: 177 ]]
+				pcall(function()
 					-- upvalues: GuiService (upval), Current (copy)
 					GuiService:Select(Current)
 				end)
@@ -157,7 +157,7 @@ return (ReactModule.memo(function(p1) --[[ Line: 45 ]]
 		task.delay(0.15000000000000002, trySelect)
 		task.delay(0.2, trySelect)
 		task.delay(0.25, trySelect)
-		local Connection = GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ Line: 185 ]]
+		local Connection = GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function()
 			-- upvalues: GuiService (upval), UseRefResult (upval)
 			local SelectedCoreObject = GuiService.SelectedCoreObject
 			
@@ -165,7 +165,7 @@ return (ReactModule.memo(function(p1) --[[ Line: 45 ]]
 				local Current = UseRefResult.current
 				
 				if Current then
-					pcall(function() --[[ Line: 177 ]]
+					pcall(function()
 						-- upvalues: GuiService (upval), Current (copy)
 						GuiService:Select(Current)
 					end)
@@ -173,7 +173,7 @@ return (ReactModule.memo(function(p1) --[[ Line: 45 ]]
 			end
 		end)
 		
-		return function() --[[ Line: 191 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end
@@ -181,7 +181,7 @@ return (ReactModule.memo(function(p1) --[[ Line: 45 ]]
 	local Submitting = UseStateResult3 and UseLocalizationResult.Submitting or UseLocalizationResult.Submit
 	local Placeholder = UseLocalizationResult.Placeholder
 	local IsMAXFEEDBACKLENGTHAbove: boolean = MINFEEDBACKLENGTH <= #UseStateResult1 and #UseStateResult1 <= MAXFEEDBACKLENGTH
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 202 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(p2.Text)
 	end, {})
@@ -191,7 +191,7 @@ return (ReactModule.memo(function(p1) --[[ Line: 45 ]]
 		isMiddleContentFocusable = true,
 		title = UseLocalizationResult.Title,
 		onCloseClicked = UseResult1,
-		buttonStackInfo = ReactModule.useMemo(function() --[[ Line: 297 ]]
+		buttonStackInfo = ReactModule.useMemo(function()
 			-- upvalues: ButtonType (upval), UseResult (copy), Submitting (copy), p1 (copy), DELAYEDINPUTANIMSEC (copy), IsMAXFEEDBACKLENGTHAbove (copy), UseStateResult3 (copy)
 			return {
 				buttons = {
@@ -216,7 +216,7 @@ return (ReactModule.memo(function(p1) --[[ Line: 45 ]]
 			IsMAXFEEDBACKLENGTHAbove,
 			UseStateResult3
 		}),
-		middleContent = ReactModule.useCallback(function() --[[ Line: 207 ]]
+		middleContent = ReactModule.useCallback(function()
 			-- upvalues: UseStyleResult (copy), UseScreenSizeResult (copy), ConstantsModule (upval), ReactModule (upval), UseLocalizationResult (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), ImageSetLabel (upval), ComponentAssetsCircle21 (upval), UseStateResult1 (copy), Placeholder (copy), UseRefResult (copy), UseResult2 (copy)
 			local Body = UseStyleResult.Font.Body
 			local Floored = math.floor(Body.RelativeSize * UseStyleResult.Font.BaseSize)
@@ -300,7 +300,7 @@ return (ReactModule.memo(function(p1) --[[ Line: 45 ]]
 		screenSize = UseScreenSizeResult,
 		defaultChildRef = if UseStateResult then UseRefResult else nil,
 		isRoactGamepadEnabled = UseStateResult,
-		footerContent = ReactModule.useCallback(function() --[[ Line: 318 ]]
+		footerContent = ReactModule.useCallback(function()
 			-- upvalues: Footer (copy), ReactModule (upval), UseStyleResult (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 			local Text: string = Footer
 			

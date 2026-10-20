@@ -39,7 +39,7 @@ local NormalizeTableFn1 = if FFlagAXUpdateOffersEndsUIWithBadge then MakeNormali
 	selected = { fn = NormalizeBoolean }
 })
 
-return function(p1) --[[ Line: 57 | Named "normalizeCartPricingForOffersResponse" ]]
+return function(p1)
 	-- upvalues: MakeNormalizeListFnFunction (copy), NormalizeTableFn (copy), NormalizeTableFn1 (copy), NormalizeNotEmptyStringFunction (copy)
 	if p1 == nil then
 		return nil, nil

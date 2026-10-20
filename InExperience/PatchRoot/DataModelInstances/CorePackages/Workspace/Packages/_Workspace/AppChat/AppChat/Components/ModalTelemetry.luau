@@ -9,9 +9,9 @@ local NamedCounterConfigurationAndFormatFunction = DefaultTelemetryEventsModule.
 local EventIngestWithFormatFunctionFunction = DefaultTelemetryEventsModule.eventIngestWithFormatFunction
 local CryoModule = require(Parent.Cryo)
 
-local function eventIngestWithModalFormatFunction(Callback, ModalSequence) --[[ Line: 37 ]]
+local function eventIngestWithModalFormatFunction(Callback, ModalSequence)
 	-- upvalues: CryoModule (copy), EventIngestWithFormatFunctionFunction (copy)
-	return EventIngestWithFormatFunctionFunction(function(p1, p2) --[[ Line: 38 ]]
+	return EventIngestWithFormatFunctionFunction(function(p1, p2)
 		-- upvalues: Callback (copy), CryoModule (upval), ModalSequence (copy)
 		return CryoModule.Dictionary.join({ modalSequence = ModalSequence }, (Callback(p1, p2)))
 	end)
@@ -19,7 +19,7 @@ end
 
 return {
 	Events = {
-		modalRenderedWithSequence = function(p1) --[[ Line: 48 ]]
+		modalRenderedWithSequence = function(p1)
 			-- upvalues: NamedCounterConfigurationAndFormatFunction (copy), eventIngestWithModalFormatFunction (copy), TelemetryModule (copy)
 			local List = {}
 			local CounterFormat = p1.counterFormat
@@ -38,7 +38,7 @@ return {
 				backendsList = List
 			}))
 		end,
-		modalActionWithSequence = function(p1) --[[ Line: 79 ]]
+		modalActionWithSequence = function(p1)
 			-- upvalues: NamedCounterConfigurationAndFormatFunction (copy), eventIngestWithModalFormatFunction (copy), TelemetryModule (copy)
 			local List = {}
 			local CounterFormat = p1.counterFormat
@@ -57,7 +57,7 @@ return {
 				backendsList = List
 			}))
 		end,
-		modalActionResultWithSequence = function(p1) --[[ Line: 113 ]]
+		modalActionResultWithSequence = function(p1)
 			-- upvalues: NamedCounterConfigurationAndFormatFunction (copy), eventIngestWithModalFormatFunction (copy), TelemetryModule (copy)
 			local List = {}
 			local CounterFormat = p1.counterFormat

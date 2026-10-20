@@ -12,24 +12,24 @@ local _ = require(script.Parent.CommunityUserMembershipStoreTypes)
 local RequestJoinCommunityModule = require(script.Parent.requestJoinCommunity)
 local GroupsName: string = `{require(Parent.Http).Url.GROUPS_URL}v1/groups/`
 
-return function() --[[ Line: 23 | Named "createCommunityUserMembershipStore" ]]
+return function()
 	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy), SignalsModule (copy), RequestJoinCommunityModule (copy), LogResponseErrorFunction (copy), GroupsName (copy), DiscoveryEventErrorLogger (copy)
 	local DataCacheModule = CreateDataCacheModule()
 	local DataResolverModule = CreateDataResolverModule({
 		supportsMutations = true,
 		cache = DataCacheModule,
-		fetchFn = function(_) --[[ Line: 27 ]]
+		fetchFn = function(_)
 			-- upvalues: PromiseModule (upval)
 			return PromiseModule.resolve({})
 		end
 	})
 	
-	local function applyOptimisticMembership(CommunityId) --[[ Line: 35 ]]
+	local function applyOptimisticMembership(CommunityId)
 		-- upvalues: SignalsModule (upval), DataResolverModule (copy)
 		local Signal, Signal2 = SignalsModule.createSignal(nil)
 		DataResolverModule.setMutation(CommunityId, { canJoin = false })
 		
-		return Signal, function(p1) --[[ Line: 44 ]]
+		return Signal, function(p1)
 			-- upvalues: DataResolverModule (upval), CommunityId (copy), Signal2 (copy)
 			if p1 and p1.type == "error" then
 				DataResolverModule.clearMutation(CommunityId)
@@ -45,13 +45,13 @@ return function() --[[ Line: 23 | Named "createCommunityUserMembershipStore" ]]
 		getMemberships = DataResolverModule.getOptimisticCachedItems,
 		updateMembership = DataCacheModule.updateItem,
 		updateMemberships = DataCacheModule.updateItems,
-		joinCommunity = function(CommunityId) --[[ Line: 58 ]]
+		joinCommunity = function(CommunityId)
 			-- upvalues: applyOptimisticMembership (copy), RequestJoinCommunityModule (upval), LogResponseErrorFunction (upval), GroupsName (upval), DiscoveryEventErrorLogger (upval)
 			local ApplyOptimisticMembershipResult, ApplyOptimisticMembershipResult2 = applyOptimisticMembership(CommunityId)
-			RequestJoinCommunityModule(CommunityId):andThen(function() --[[ Line: 62 ]]
+			RequestJoinCommunityModule(CommunityId):andThen(function()
 				-- upvalues: ApplyOptimisticMembershipResult2 (copy)
 				ApplyOptimisticMembershipResult2({ type = "success" })
-			end):catch(function(Err) --[[ Line: 65 ]]
+			end):catch(function(Err)
 				-- upvalues: ApplyOptimisticMembershipResult2 (copy), LogResponseErrorFunction (upval), GroupsName (upval), DiscoveryEventErrorLogger (upval), CommunityId (copy)
 				local StatusCode = if type(Err) == "table" and Err.StatusCode then Err.StatusCode else nil
 				local StatusMessage = if type(Err) == "table" and Err.StatusMessage then Err.StatusMessage elseif type(Err) == "string" then Err else nil

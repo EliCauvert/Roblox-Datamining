@@ -36,16 +36,16 @@ local FFlagSkipBuyDelayForExperienceShopModule = require(PurchasePrompt.Flags.FF
 local FFlagLuaAppsEnablePromptVIPServerPurchase = require(Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 local _ = require(Parent.IAPExperience)
 
-function ExtendResult.init(p1) --[[ Line: 124 ]]
+function ExtendResult.init(p1)
 	-- upvalues: FFlagSkipBuyDelayForExperienceShopModule (copy), LogUnifiedPurchaseTelemetryCounterModule (copy), UnifiedPurchaseTelemetryModule (copy), UnifiedPurchaseEventNameEnumModule (copy), Players (copy), PromptStateModule (copy), PurchaseErrorModule (copy), FFlagFixCountersForUpsellModalShownModule (copy), FFlagAddPerformanceMetricsToUnifiedPurchaseModal (copy), EmitPerformanceMetricsModule (copy), ConstantsModule (copy)
-	function p1.shouldUseDelayedInput(): boolean --[[ Line: 127 ]]
+	function p1.shouldUseDelayedInput(): boolean
 		-- upvalues: FFlagSkipBuyDelayForExperienceShopModule (upval), p1 (copy)
 		return not FFlagSkipBuyDelayForExperienceShopModule or not p1.props.isFromInExperienceShop
 	end
 	
 	p1.state = { canAcceptInput = not p1.shouldUseDelayedInput() }
 	
-	function p1.dispatchFetchPurchaseWarning() --[[ Line: 138 ]]
+	function p1.dispatchFetchPurchaseWarning()
 		-- upvalues: p1 (copy), LogUnifiedPurchaseTelemetryCounterModule (upval), UnifiedPurchaseTelemetryModule (upval), UnifiedPurchaseEventNameEnumModule (upval)
 		local Props = p1.props
 		
@@ -57,25 +57,25 @@ function ExtendResult.init(p1) --[[ Line: 124 ]]
 		return p1.props.dispatchFetchPurchaseWarning(Props.robuxProviderId)
 	end
 	
-	function p1.promptRobuxPurchase() --[[ Line: 153 ]]
+	function p1.promptRobuxPurchase()
 		-- upvalues: p1 (copy)
 		local Props = p1.props
 		p1.props.promptRobuxPurchase(p1.props.networking, Props.robuxProviderId, Props.robuxProductId)
 	end
 	
-	function p1.onDelayedInputComplete() --[[ Line: 158 ]]
+	function p1.onDelayedInputComplete()
 		-- upvalues: p1 (copy)
 		p1:setState({ canAcceptInput = true })
 	end
 	
-	function p1.canAcceptInput() --[[ Line: 164 ]]
+	function p1.canAcceptInput()
 		-- upvalues: p1 (copy), Players (upval)
 		local State = p1.state
 		
 		return (not Players or not Players.LocalPlayer or not Players.LocalPlayer.GameplayPaused) and State.canAcceptInput
 	end
 	
-	function p1.confirmButtonPressed() --[[ Line: 174 ]]
+	function p1.confirmButtonPressed()
 		-- upvalues: p1 (copy), PromptStateModule (upval), PurchaseErrorModule (upval)
 		local Props = p1.props
 		local PromptState = Props.promptState
@@ -112,12 +112,12 @@ function ExtendResult.init(p1) --[[ Line: 124 ]]
 		end
 	end
 	
-	function p1.cancelButtonPressed() --[[ Line: 214 ]]
+	function p1.cancelButtonPressed()
 		-- upvalues: p1 (copy)
 		p1.props.endPurchase()
 	end
 	
-	function p1:onBuyItemButtonMounted() --[[ Line: 220 ]]
+	function p1:onBuyItemButtonMounted()
 		-- upvalues: p1 (copy), FFlagFixCountersForUpsellModalShownModule (upval), LogUnifiedPurchaseTelemetryCounterModule (upval), UnifiedPurchaseTelemetryModule (upval), UnifiedPurchaseEventNameEnumModule (upval), FFlagAddPerformanceMetricsToUnifiedPurchaseModal (upval), EmitPerformanceMetricsModule (upval), ConstantsModule (upval)
 		local PurchaseAnalyticsMetadata = p1.props.purchaseAnalyticsMetadata or {}
 		
@@ -134,15 +134,15 @@ function ExtendResult.init(p1) --[[ Line: 124 ]]
 	end
 end
 
-function ExtendResult.didMount(p1) --[[ Line: 249 ]]
+function ExtendResult.didMount(p1)
 	-- upvalues: ContextActionService (copy)
-	ContextActionService:BindCoreAction("ProductPurchaseConfirmButtonBind", function(_, UserInputState, _) --[[ Line: 250 ]]
+	ContextActionService:BindCoreAction("ProductPurchaseConfirmButtonBind", function(_, UserInputState, _)
 		-- upvalues: p1 (copy)
 		if UserInputState == Enum.UserInputState.Begin then
 			p1.confirmButtonPressed()
 		end
 	end, false, Enum.KeyCode.ButtonA)
-	ContextActionService:BindCoreAction("ProductPurchaseCancelButtonBind", function(_, UserInputState, _) --[[ Line: 255 ]]
+	ContextActionService:BindCoreAction("ProductPurchaseCancelButtonBind", function(_, UserInputState, _)
 		-- upvalues: p1 (copy)
 		if UserInputState == Enum.UserInputState.Begin then
 			p1.cancelButtonPressed()
@@ -150,13 +150,13 @@ function ExtendResult.didMount(p1) --[[ Line: 249 ]]
 	end, false, Enum.KeyCode.ButtonB)
 end
 
-function ExtendResult:willUnmount() --[[ Line: 262 ]]
+function ExtendResult:willUnmount()
 	-- upvalues: ContextActionService (copy)
 	ContextActionService:UnbindCoreAction("ProductPurchaseConfirmButtonBind")
 	ContextActionService:UnbindCoreAction("ProductPurchaseCancelButtonBind")
 end
 
-function ExtendResult.getFlowState(p1) --[[ Line: 267 ]]
+function ExtendResult.getFlowState(p1)
 	-- upvalues: PromptStateModule (copy), RobuxUpsellFlowState (copy), PurchaseErrorModule (copy)
 	local Props = p1.props
 	local PromptState = Props.promptState
@@ -165,26 +165,26 @@ function ExtendResult.getFlowState(p1) --[[ Line: 267 ]]
 	return if PromptState == PromptStateModule.RobuxUpsell then RobuxUpsellFlowState.PurchaseModal elseif PromptState == PromptStateModule.LargeRobuxUpsell then RobuxUpsellFlowState.LargeRobuxPurchaseModal elseif PromptState == PromptStateModule.PurchaseInProgress then RobuxUpsellFlowState.ItemPurchasePending elseif PromptState == PromptStateModule.UpsellInProgress then RobuxUpsellFlowState.RobuxPurchasePending elseif PromptState == PromptStateModule.PollingBalance then RobuxUpsellFlowState.RobuxGrantPending elseif PromptState == PromptStateModule.U13PaymentModal then RobuxUpsellFlowState.PurchaseWarning elseif PromptState == PromptStateModule.U13MonthlyThreshold1Modal then RobuxUpsellFlowState.PurchaseWarning elseif PromptState == PromptStateModule.U13MonthlyThreshold2Modal then RobuxUpsellFlowState.PurchaseWarning elseif PromptState == PromptStateModule.PurchaseComplete then RobuxUpsellFlowState.Success elseif PromptState == PromptStateModule.LeaveRobloxWarning then RobuxUpsellFlowState.LeaveRobloxWarning elseif PromptState == PromptStateModule.EnablePurchaseVPCModal then RobuxUpsellFlowState.PurchaseVPCModal elseif PromptState == PromptStateModule.Error then if PurchaseError == PurchaseErrorModule.TwoFactorNeeded or PurchaseError == PurchaseErrorModule.TwoFactorNeededSettings then RobuxUpsellFlowState.TwoStepRequired else RobuxUpsellFlowState.Error else RobuxUpsellFlowState.None
 end
 
-function ExtendResult.getU13ConfirmType(p1) --[[ Line: 305 ]]
+function ExtendResult.getU13ConfirmType(p1)
 	-- upvalues: PromptStateModule (copy), U13ConfirmType (copy)
 	local PromptState = p1.props.promptState
 	
 	return if PromptState == PromptStateModule.U13PaymentModal then U13ConfirmType.U13PaymentModal elseif PromptState == PromptStateModule.U13MonthlyThreshold1Modal then U13ConfirmType.U13MonthlyThreshold1Modal elseif PromptState == PromptStateModule.U13MonthlyThreshold2Modal then U13ConfirmType.U13MonthlyThreshold2Modal elseif PromptState == PromptStateModule.ParentalConsentWarningPaymentModal13To17 then U13ConfirmType.ParentalConsentWarningPaymentModal13To17 else U13ConfirmType.None
 end
 
-function ExtendResult.getErrorType(p1) --[[ Line: 323 ]]
+function ExtendResult.getErrorType(p1)
 	-- upvalues: PurchaseErrorModule (copy), PurchaseErrorType (copy), AppContextModule (copy)
 	local Props = p1.props
 	
 	return if Props.purchaseError == PurchaseErrorModule.AlreadyOwn then PurchaseErrorType.AlreadyOwn elseif Props.purchaseError == PurchaseErrorModule.NotEnoughRobux or Props.purchaseError == PurchaseErrorModule.NotEnoughRobuxXbox or Props.purchaseError == PurchaseErrorModule.NotEnoughRobuxNoUpsell then if Props.useUnifiedProductPurchaseModal and AppContextModule.get() == AppContextModule.Enum.IN_APP then PurchaseErrorType.NotEnoughRobuxInApp else PurchaseErrorType.NotEnoughRobux elseif Props.purchaseError == PurchaseErrorModule.Limited then PurchaseErrorType.Limited elseif Props.purchaseError == PurchaseErrorModule.NotForSale then PurchaseErrorType.NotForSale elseif Props.purchaseError == PurchaseErrorModule.NotForSaleHere then PurchaseErrorType.NotForSaleExperience elseif Props.purchaseError == PurchaseErrorModule.PremiumOnly then PurchaseErrorType.PremiumOnly elseif Props.purchaseError == PurchaseErrorModule.ThirdPartyDisabled then PurchaseErrorType.ThirdPartyDisabled elseif Props.purchaseError == PurchaseErrorModule.Under13 then PurchaseErrorType.Under13 elseif Props.purchaseError == PurchaseErrorModule.InvalidFunds then PurchaseErrorType.FailedGrant elseif Props.purchaseError == PurchaseErrorModule.InvalidFundsUnknown then PurchaseErrorType.FailedGrantUnknown elseif Props.purchaseError == PurchaseErrorModule.EconomicRestriction then PurchaseErrorType.EconomicRestriction else PurchaseErrorType.Unknown
 end
 
-function ExtendResult.getVPCModalType(p1) --[[ Line: 360 ]]
+function ExtendResult.getVPCModalType(p1)
 	-- upvalues: PromptStateModule (copy), VPCModalTypeModule (copy)
 	return if p1.props.promptState == PromptStateModule.EnablePurchaseVPCModal then VPCModalTypeModule.toRawValue(VPCModalTypeModule.EnablePurchase) else VPCModalTypeModule.toRawValue(VPCModalTypeModule.None)
 end
 
-function ExtendResult.emitUnifiedPurchaseTelemetry(p1, Event_name) --[[ Line: 372 ]]
+function ExtendResult.emitUnifiedPurchaseTelemetry(p1, Event_name)
 	-- upvalues: DeriveUnifiedPurchaseEventRobuxPriceModule (copy), FFlagUnifiedPurchaseGamepassAddProductUniverseId (copy), HttpService (copy), SendUnifiedPurchaseEventLogModule (copy)
 	local Props = p1.props
 	local PurchaseAnalyticsMetadata = Props.purchaseAnalyticsMetadata or {}
@@ -206,7 +206,7 @@ function ExtendResult.emitUnifiedPurchaseTelemetry(p1, Event_name) --[[ Line: 37
 	})
 end
 
-function ExtendResult.render(p1) --[[ Line: 400 ]]
+function ExtendResult.render(p1)
 	-- upvalues: ExternalSettingsModule (copy), Roact (copy), RobuxUpsellFlow (copy), GetUnifiedPurchaseModalTypeModule (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), GetFFlagDisablePurchasePromptFunctionForMaquettesModule (copy), GetPaymentPlatformModule (copy), PaymentPlatformModule (copy)
 	local Props = p1.props
 	local NewExternalSettings = ExternalSettingsModule.new()

@@ -11,10 +11,10 @@ local StrictInterfaceResult = TModule.strictInterface({
 	shareToAppsflyer = TModule.optional(TModule.boolean),
 	stamp = TModule.optional(TModule.string),
 	linkId = TModule.optional(TModule.string),
-	universeId = if require(Parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents then TModule.optional(TModule.string) else nil
+	targetId = if require(Parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents then TModule.optional(TModule.string) else nil
 })
 
-return function(CustomFields, EventContext) --[[ Line: 25 ]]
+return function(CustomFields, EventContext)
 	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), GameShareExperienceLinkThrottleHundrethsPercent (copy), TelemetryService (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	

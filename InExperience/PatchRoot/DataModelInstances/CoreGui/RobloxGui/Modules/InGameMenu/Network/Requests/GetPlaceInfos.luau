@@ -1,6 +1,6 @@
 ﻿local UrlModule = require(script.Parent.Parent.Parent.Network.Url)
 
-return function(Callback, PlaceIds) --[[ Line: 4 ]]
+return function(Callback, PlaceIds)
 	-- upvalues: UrlModule (copy)
 	for i, placeId in ipairs(PlaceIds) do
 		PlaceIds[i] = tostring(placeId)

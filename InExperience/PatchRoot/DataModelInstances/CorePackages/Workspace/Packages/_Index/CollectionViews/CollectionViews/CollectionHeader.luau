@@ -24,7 +24,7 @@ local config = {
 	Size = UDim2.new(1, 0, 0, 0)
 }
 
-local function HeaderButton(Frame: Frame) --[[ Line: 88 ]]
+local function HeaderButton(Frame: Frame)
 	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy), ImageSetLabel (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local Size400 = UseDesignTokensResult.Size.Size_400
@@ -43,11 +43,11 @@ local function HeaderButton(Frame: Frame) --[[ Line: 88 ]]
 	})
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 115 | Named "CollectionHeader" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), UsePreferredInputFunction (copy), UseDesignTokensFunction (copy), ResponsiveModule (copy), CheckAndFormatPossibleLinkModule (copy), FFlagLuaAppSortHeaderAnchorTag (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), HeaderButton (copy), IconsActionsCycleRight (copy), IconsActionsTruncationCollapseSmall (copy), IconWithTooltip (copy), TooltipOrientation (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 119 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseBindingResult2 (copy)
 		UseBindingResult2(Frame.AbsoluteSize.X)
 	end, {})
@@ -141,7 +141,7 @@ return ReactModule.memo(function(p1) --[[ Line: 115 | Named "CollectionHeader" ]
 					TextXAlignment = Enum.TextXAlignment.Left
 				}, {
 					UISizeConstraint = ReactModule.createElement("UISizeConstraint", {
-						MaxSize = UseBindingResult:map(function(p2) --[[ Line: 240 ]]
+						MaxSize = UseBindingResult:map(function(p2)
 							-- upvalues: Size (copy), NewSize (copy)
 							local SizeDelta = p2 - Size - NewSize
 							
@@ -191,7 +191,7 @@ return ReactModule.memo(function(p1) --[[ Line: 115 | Named "CollectionHeader" ]
 					RichText = CheckAndFormatPossibleLinkModuleResult
 				}, {
 					UISizeConstraint = ReactModule.createElement("UISizeConstraint", {
-						MaxSize = UseBindingResult:map(function(p2) --[[ Line: 297 ]]
+						MaxSize = UseBindingResult:map(function(p2)
 							-- upvalues: XOffset (copy)
 							local X = p2 - XOffset
 							

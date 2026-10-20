@@ -2,11 +2,11 @@
 local SelfViewIsOpenAndVisible = false
 
 return {
-	getSelfViewIsOpenAndVisible = function() --[[ Line: 8 ]]
+	getSelfViewIsOpenAndVisible = function()
 		-- upvalues: SelfViewIsOpenAndVisible (ref)
 		return SelfViewIsOpenAndVisible
 	end,
-	setSelfViewIsOpenAndVisible = function(Value) --[[ Line: 14 ]]
+	setSelfViewIsOpenAndVisible = function(Value)
 		-- upvalues: SelfViewIsOpenAndVisible (ref), SelfViewVisibilityUpdatedSignalModule (copy)
 		SelfViewIsOpenAndVisible = Value
 		SelfViewVisibilityUpdatedSignalModule:fire()

@@ -4,7 +4,7 @@ local ReactModule = require(Parent.React)
 local UseUserProfileInfoModule = require(BuildExperience.Components.UserPicker.useUserProfileInfo)
 local Text = require(Parent.Foundation).Text
 
-return function(p1) --[[ Line: 20 | Named "PrivateInviteUserRow" ]]
+return function(p1)
 	-- upvalues: UseUserProfileInfoModule (copy), ReactModule (copy), Text (copy)
 	local UseUserProfileInfoModuleResult = UseUserProfileInfoModule(p1.userId)
 	

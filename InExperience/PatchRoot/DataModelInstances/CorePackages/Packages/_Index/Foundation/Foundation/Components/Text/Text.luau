@@ -20,7 +20,7 @@ local config = {
 	isDisabled = false
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 52 | Named "Text" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseDefaultTagsModule (copy), UseStyleTagsModule (copy), ReactModule (copy), FlagsModule (copy), NormalizeFontFaceModule (copy), ReactIsModule (copy), FontScalesModule (copy), WithGuiObjectPropsModule (copy), IndexBindableModule (copy), InteractableModule (copy), GuiObjectChildrenModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local HasOnStateChanged: boolean = WithDefaultsModuleResult.onStateChanged ~= nil or WithDefaultsModuleResult.onActivated ~= nil or WithDefaultsModuleResult.onSecondaryActivated ~= nil
@@ -30,7 +30,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 52 |
 		GuiObjectDefaultsTextDefaultsTextSizeDefaultsTextColorDefaults ..= " x-default-text-size"
 	end
 	local UseStyleTagsModuleResult = UseStyleTagsModule((UseDefaultTagsModule(WithDefaultsModuleResult.tag, GuiObjectDefaultsTextDefaultsTextSizeDefaultsTextColorDefaults)))
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 65 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FlagsModule (upval), WithDefaultsModuleResult (copy), NormalizeFontFaceModule (upval), ReactIsModule (upval)
 		if FlagsModule.FoundationFontFaceMigration then
 			return NormalizeFontFaceModule(if WithDefaultsModuleResult.fontStyle == nil then nil else WithDefaultsModuleResult.fontStyle.Font)
@@ -40,7 +40,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 52 |
 			return if typeof(FontStyleFont) == "table" and not ReactIsModule.isBinding(FontStyleFont) then Font.new(FontStyleFont.Family, FontStyleFont.Weight, FontStyleFont.Style) elseif typeof(FontStyleFont) == "EnumItem" then Font.fromEnum(FontStyleFont) else FontStyleFont
 		end
 	end, { WithDefaultsModuleResult.fontStyle })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 84 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy), UseMemoResult (copy), ReactIsModule (upval), FontScalesModule (upval)
 		if WithDefaultsModuleResult.fontStyle == nil or WithDefaultsModuleResult.fontStyle.LineHeight == nil or WithDefaultsModuleResult.fontStyle.FontSize == nil or UseMemoResult == nil then
 			return 0

@@ -8,25 +8,25 @@ local UseInterpolatedClientSettingsModule = require(ExpChat.ClientSettings.useIn
 local EnableChatButtonTelemetryEnabledEngineFeature = game:GetEngineFeature("EnableChatButtonTelemetryEnabled")
 local FFlagExpChatNewInputBarModule = require(ExpChat.Flags.FFlagExpChatNewInputBar)
 
-local function _(p1, p2) --[[ Line: 36 | Named "setTransparency" ]]
-	return p2:map(function(p3): number --[[ Line: 37 ]]
+local function _(p1, p2)
+	return p2:map(function(p3): number
 		-- upvalues: p1 (copy)
 		return p1 + p3 * (1 - p1)
 	end)
 end
 
-return require(ExpChat.Localization).connect(function() --[[ Line: 124 ]]
+return require(ExpChat.Localization).connect(function()
 	return {
 		EnableChatButtonText = "CoreScripts.TextChat.EnableChatButton.Label.UnlockChat"
 	}
-end)(function(Frame) --[[ Line: 42 | Named "EnableChatButton" ]]
+end)(function(Frame)
 	-- upvalues: UseCursorFunction (copy), UseInterpolatedClientSettingsModule (copy), ReactModule (copy), EnableChatButtonTelemetryEnabledEngineFeature (copy), TextChatService (copy), FFlagExpChatNewInputBarModule (copy), ConfigModule (copy)
 	local UseCursorResult = UseCursorFunction()
 	local IsSpatialUIEnabled = Frame.isSpatialUIEnabled
 	local ChatWindowSettings = Frame.chatWindowSettings
 	local BackgroundTransparency = UseInterpolatedClientSettingsModule(ChatWindowSettings).BackgroundTransparency
 	local BackgroundColor3 = UseInterpolatedClientSettingsModule(ChatWindowSettings).BackgroundColor3
-	ReactModule.useEffect(function() --[[ Line: 55 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: EnableChatButtonTelemetryEnabledEngineFeature (upval), Frame (copy), TextChatService (upval)
 		if EnableChatButtonTelemetryEnabledEngineFeature and Frame.visible then
 			TextChatService:SendEnableChatButtonShown()
@@ -38,7 +38,7 @@ end)(function(Frame) --[[ Line: 42 | Named "EnableChatButton" ]]
 	return ReactModule.createElement("Frame", {
 		AutomaticSize = Enum.AutomaticSize.Y,
 		BackgroundColor3 = BackgroundColor3,
-		BackgroundTransparency = if FFlagExpChatNewInputBarModule then 1 else Frame.transparencyValue:map(function(p1): number --[[ Line: 37 ]]
+		BackgroundTransparency = if FFlagExpChatNewInputBarModule then 1 else Frame.transparencyValue:map(function(p1): number
 			-- upvalues: BackgroundTransparency (copy)
 			return BackgroundTransparency + p1 * (1 - BackgroundTransparency)
 		end),
@@ -59,7 +59,7 @@ end)(function(Frame) --[[ Line: 42 | Named "EnableChatButton" ]]
 		EnableChatButton = ReactModule.createElement("TextButton", {
 			AutomaticSize = Enum.AutomaticSize.XY,
 			BackgroundColor3 = ConfigModule.EnableChatButtonBackgroundColor,
-			BackgroundTransparency = Frame.transparencyValue:map(function(p1): number --[[ Line: 37 ]]
+			BackgroundTransparency = Frame.transparencyValue:map(function(p1): number
 				-- upvalues: EnableChatButtonBackgroundTransparency (copy)
 				return EnableChatButtonBackgroundTransparency + p1 * (1 - EnableChatButtonBackgroundTransparency)
 			end),
@@ -70,7 +70,7 @@ end)(function(Frame) --[[ Line: 42 | Named "EnableChatButton" ]]
 			Text = if Frame.EnableChatButtonText == nil or Frame.EnableChatButtonText == "" then "Unlock chat" else Frame.EnableChatButtonText,
 			TextColor3 = ConfigModule.ChatInputBarTextColor3,
 			TextSize = if IsSpatialUIEnabled then ConfigModule.ChatInputBarSpatialPanelTextSize else ConfigModule.ChatInputBarTextSize,
-			TextTransparency = Frame.transparencyValue:map(function(p1): number --[[ Line: 37 ]]
+			TextTransparency = Frame.transparencyValue:map(function(p1): number
 				-- upvalues: v1 (copy)
 				return v1 + p1 * (1 - v1)
 			end),
@@ -78,7 +78,7 @@ end)(function(Frame) --[[ Line: 42 | Named "EnableChatButton" ]]
 			TextXAlignment = Enum.TextXAlignment.Center,
 			TextYAlignment = Enum.TextYAlignment.Center,
 			ZIndex = 2,
-			[ReactModule.Event.Activated] = function() --[[ Line: 104 ]]
+			[ReactModule.Event.Activated] = function()
 				-- upvalues: EnableChatButtonTelemetryEnabledEngineFeature (upval), TextChatService (upval), Frame (copy)
 				if EnableChatButtonTelemetryEnabledEngineFeature then
 					TextChatService:SendEnableChatButtonClicked()

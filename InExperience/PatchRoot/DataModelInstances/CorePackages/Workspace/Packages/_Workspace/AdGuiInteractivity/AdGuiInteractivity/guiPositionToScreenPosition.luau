@@ -8,7 +8,7 @@ local config = {
 	[Enum.NormalId.Bottom] = CFrame.fromEulerAnglesYXZ(-1.5707963267948966, -1.5707963267948966, 0)
 }
 
-return function(Object, p1, Camera: Camera) --[[ Line: 21 | Named "guiPositionToScreenPosition" ]]
+return function(Object, p1, Camera: Camera)
 	-- upvalues: GuiService (copy), config (copy)
 	local Vector = p1 / Object.AbsoluteSize
 	

@@ -4,7 +4,7 @@ local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXAddTransparencyToItemCardHeader = AvatarExperienceFlagsModule.FFlagAXAddTransparencyToItemCardHeader
 
-local function ItemCardHeader(Frame: Frame) --[[ Line: 20 ]]
+local function ItemCardHeader(Frame: Frame)
 	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy), FFlagAXAddTransparencyToItemCardHeader (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local Shimmer = UseDesignTokensResult.Color.Common.Shimmer

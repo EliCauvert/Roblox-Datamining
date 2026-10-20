@@ -7,7 +7,7 @@ local list = {
 	512
 }
 
-return function(p1) --[[ Line: 15 ]]
+return function(p1)
 	-- upvalues: ArgCheckModule (copy), list (copy)
 	ArgCheckModule.isNonNegativeNumber(p1, "Game Icon Size")
 	local CountList = #list

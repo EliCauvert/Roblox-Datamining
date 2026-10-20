@@ -6,7 +6,7 @@ local IGMResetGfxLv5Only = game:DefineFastFlag("IGMResetGfxLv5Only", false)
 local IGMAlwaysResetGfxLv5 = game:DefineFastFlag("IGMAlwaysResetGfxLv5", false)
 local IGMTempOverrideGfxLv5 = game:DefineFastInt("IGMTempOverrideGfxLv5", 0)
 
-local function _(p1) --[[ Line: 16 | Named "SavedQualitySettingEnumFromValue" ]]
+local function _(p1)
 	for _, enumItem in Enum.SavedQualitySetting:GetEnumItems() do
 		if enumItem.Value == p1 then
 			return enumItem
@@ -15,7 +15,7 @@ local function _(p1) --[[ Line: 16 | Named "SavedQualitySettingEnumFromValue" ]]
 	return Enum.SavedQualitySetting.Automatic
 end
 
-local function RunGfxReset() --[[ Line: 26 ]]
+local function RunGfxReset()
 	-- upvalues: IGMAlwaysResetGfxLv5 (copy), GameSettings (copy), IGMRevertGfxQuality (copy), IGMRevertGfxLv5Only (copy), IGMResetGfxQuality (copy), IGMResetGfxLv5Only (copy)
 	local IsSavedQualityLevelMatch = GameSettings.SavedQualityLevel == Enum.SavedQualitySetting.QualityLevel5
 	
@@ -58,7 +58,7 @@ local function RunGfxReset() --[[ Line: 26 ]]
 	end
 end
 
-function applicationId() --[[ Line: 67 ]]
+function applicationId()
 	local AppStorageService = game:GetService("AppStorageService")
 	
 	if AppStorageService then
@@ -73,7 +73,7 @@ end
 
 return {
 	RunGfxReset = RunGfxReset,
-	TemporaryOverride = function(SavedQualitySetting) --[[ Line: 93 ]]
+	TemporaryOverride = function(SavedQualitySetting)
 		-- upvalues: IGMTempOverrideGfxLv5 (copy)
 		if ((applicationId() or 0) + 329) % 1000 < IGMTempOverrideGfxLv5 and (SavedQualitySetting == Enum.SavedQualitySetting.QualityLevel5 or SavedQualitySetting == Enum.SavedQualitySetting.QualityLevel5.Value) then
 			return true, Enum.SavedQualitySetting.Automatic.Value

@@ -30,14 +30,14 @@ local UseEffectOnceFunction = require(Parent1.RoactUtils).Hooks.useEffectOnce
 local CallbackInputBox = DependenciesModule.SocialLibraries.Components.CallbackInputBox
 local FFlagSetAliasFixFocusNavigationModule = require(Parent.Flags.FFlagSetAliasFixFocusNavigation)
 
-return function(p1) --[[ Line: 62 ]]
+return function(p1)
 	-- upvalues: React (copy), UseEffectOnceFunction (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseAnalyticsFunction (copy), EventNames (copy), FFlagSetAliasFixFocusNavigationModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), InteractiveAlert (copy), FitFrameVertical (copy), FitTextLabel (copy), Skeleton (copy), Radius (copy), ImageSetLabel (copy), Images (copy), CallbackInputBox (copy), IconSize (copy), ButtonType (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
 	local UseRefResult = React.useRef(nil)
 	local UseStateResult, UseStateResult2 = React.useState(Vector2.new(0, 0))
 	local UseStateResult1, UseStateResult2_1 = React.useState(p1.alias)
 	local Length: number = p1.alias and utf8.len(p1.alias) or 0
 	local UseStateResult3, UseStateResult2_2 = React.useState(Length)
-	UseEffectOnceFunction(function() --[[ Line: 69 ]]
+	UseEffectOnceFunction(function()
 		-- upvalues: UseStateResult2_1 (copy), p1 (copy), UseStateResult2_2 (copy), Length (copy)
 		UseStateResult2_1(p1.alias)
 		UseStateResult2_2(Length)
@@ -60,14 +60,14 @@ return function(p1) --[[ Line: 62 ]]
 	})
 	local UseAnalyticsResult = UseAnalyticsFunction()
 	local UseRefResult1 = React.useRef(false)
-	local UseResult = React.useCallback(function(Frame: Frame) --[[ Line: 97 ]]
+	local UseResult = React.useCallback(function(Frame: Frame)
 		-- upvalues: UseStateResult (copy), UseStateResult2 (copy)
 		if UseStateResult.X ~= Frame.AbsoluteSize.X then
 			UseStateResult2(Frame.AbsoluteSize)
 		end
 	end, { UseStateResult })
 	
-	local function OnActivated() --[[ Line: 107 ]]
+	local function OnActivated()
 		-- upvalues: UseAnalyticsResult (copy), EventNames (upval), p1 (copy)
 		if UseAnalyticsResult then
 			UseAnalyticsResult.fireAnalyticsEvent(EventNames.CustomizeNameModalClosed)
@@ -75,7 +75,7 @@ return function(p1) --[[ Line: 62 ]]
 		p1.cancelOnActivated()
 	end
 	
-	local function TextChangedCallback(Text: string) --[[ Line: 114 ]]
+	local function TextChangedCallback(Text: string)
 		-- upvalues: UseStateResult3 (copy), UseStateResult1 (copy), UseRefResult (copy), UseStateResult2_2 (copy), UseStateResult2_1 (copy), p1 (copy), UseAnalyticsResult (copy), EventNames (upval), UseRefResult1 (copy)
 		local Length = utf8.len(Text)
 		
@@ -109,11 +109,11 @@ return function(p1) --[[ Line: 62 ]]
 		end
 	end
 	
-	local UseMemoResult = if FFlagSetAliasFixFocusNavigationModule then React.useMemo(function() --[[ Line: 164 ]]
+	local UseMemoResult = if FFlagSetAliasFixFocusNavigationModule then React.useMemo(function()
 		-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), UseAnalyticsResult (copy), EventNames (upval), p1 (copy)
 		return {
 			[FocusNavigationEventNameEnum.NavigateBack] = {
-				handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 167 ]]
+				handler = InputHandlersModule.onRelease(function(p2)
 					-- upvalues: UseAnalyticsResult (upval), EventNames (upval), p1 (upval)
 					if UseAnalyticsResult then
 						UseAnalyticsResult.fireAnalyticsEvent(EventNames.CustomizeNameModalClosed)
@@ -129,7 +129,7 @@ return function(p1) --[[ Line: 62 ]]
 		screenSize = p1.screenSize,
 		anchorPoint = Vector2.new(0.5, 0),
 		position = UDim2.new(0.5, 0, 0, UseStateResult.Y),
-		middleContent = function() --[[ Line: 181 ]]
+		middleContent = function()
 			-- upvalues: React (upval), FitFrameVertical (upval), UseResult (copy), FitTextLabel (upval), UseStateResult (copy), UseStyleResultFont (copy), UseLocalizationResult (copy), Theme (copy), p1 (copy), Skeleton (upval), ScaledBaseSize (copy), Radius (upval), ImageSetLabel (upval), Images (upval), CallbackInputBox (upval), IconSize (upval), TextChangedCallback (copy), UseRefResult (copy), UseStateResult3 (copy)
 			return React.createElement(FitFrameVertical, {
 				BackgroundTransparency = 1,
@@ -272,7 +272,7 @@ return function(p1) --[[ Line: 62 ]]
 				{
 					buttonType = ButtonType.PrimarySystem,
 					props = {
-						onActivated = function() --[[ Line: 103 ]]
+						onActivated = function()
 							-- upvalues: p1 (copy), UseStateResult1 (copy)
 							p1.saveOnActivated(UseStateResult1)
 						end,

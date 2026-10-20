@@ -47,30 +47,30 @@ local EmotesStayOpenWithChat = game:DefineFastFlag("EmotesStayOpenWithChat", fal
 local Module = {}
 Module.__index = Module
 
-local function _(): boolean --[[ Line: 72 | Named "isClient" ]]
+local function _(): boolean
 	-- upvalues: RunService (copy)
 	return RunService:IsClient() and (not RunService:IsEdit() and not RunService:IsRunMode())
 end
 
-function Module:isOpen() --[[ Line: 76 ]]
+function Module:isOpen()
 	return self.store:getState().displayOptions.menuVisible
 end
 
-function Module:isEmotesLoaded(): boolean --[[ Line: 80 ]]
+function Module:isEmotesLoaded(): boolean
 	return self.store:getState().emotesPage.numberEmotesLoaded > 0
 end
 
-function Module:open() --[[ Line: 84 ]]
+function Module:open()
 	-- upvalues: OpenMenuModule (copy)
 	self.store:dispatch(OpenMenuModule())
 end
 
-function Module:close() --[[ Line: 88 ]]
+function Module:close()
 	-- upvalues: HideMenuModule (copy)
 	self.store:dispatch(HideMenuModule())
 end
 
-function Module:setTopBarEnabled(TopBarEnabled) --[[ Line: 92 ]]
+function Module:setTopBarEnabled(TopBarEnabled)
 	-- upvalues: StarterGui (copy)
 	self.topBarEnabled = TopBarEnabled
 	local CoreGuiEnabled = StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.EmotesMenu)
@@ -84,10 +84,10 @@ function Module:setTopBarEnabled(TopBarEnabled) --[[ Line: 92 ]]
 	end
 end
 
-function Module._connectCoreGuiListeners(p1) --[[ Line: 103 ]]
+function Module._connectCoreGuiListeners(p1)
 	-- upvalues: FFlagEnableNewBackpack (copy), Features (copy), BackpackScriptModule (copy), EmotesStayOpenWithChat (copy), ChatSelectorModule (copy), InExperienceAppChatModalModule (copy)
 	if FFlagEnableNewBackpack then
-		Features.onVisibilityChanged(Features.FeatureName.Backpack, function(p2) --[[ Line: 105 ]]
+		Features.onVisibilityChanged(Features.FeatureName.Backpack, function(p2)
 			-- upvalues: p1 (copy)
 			if not p2 then return end
 			if p1:isOpen() then
@@ -95,7 +95,7 @@ function Module._connectCoreGuiListeners(p1) --[[ Line: 103 ]]
 			end
 		end)
 	else
-		BackpackScriptModule.StateChanged.Event:Connect(function(p2) --[[ Line: 115 ]]
+		BackpackScriptModule.StateChanged.Event:Connect(function(p2)
 			-- upvalues: p1 (copy)
 			if not p2 then return end
 			if p1:isOpen() then
@@ -104,7 +104,7 @@ function Module._connectCoreGuiListeners(p1) --[[ Line: 103 ]]
 		end)
 	end
 	if not EmotesStayOpenWithChat then
-		ChatSelectorModule.VisibilityStateChanged:connect(function(p2) --[[ Line: 127 ]]
+		ChatSelectorModule.VisibilityStateChanged:connect(function(p2)
 			-- upvalues: p1 (copy)
 			if not p2 then return end
 			if p1:isOpen() then
@@ -113,7 +113,7 @@ function Module._connectCoreGuiListeners(p1) --[[ Line: 103 ]]
 		end)
 	end
 	if not EmotesStayOpenWithChat then
-		InExperienceAppChatModalModule.default.visibilitySignal.Event:Connect(function(p2) --[[ Line: 139 ]]
+		InExperienceAppChatModalModule.default.visibilitySignal.Event:Connect(function(p2)
 			-- upvalues: p1 (copy)
 			if p2 and p1:isOpen() then
 				p1:close()
@@ -122,9 +122,9 @@ function Module._connectCoreGuiListeners(p1) --[[ Line: 103 ]]
 	end
 end
 
-function Module._connectApiListeners(p1) --[[ Line: 147 ]]
+function Module._connectApiListeners(p1)
 	-- upvalues: StarterGui (copy), GuiService (copy)
-	StarterGui.CoreGuiChangedSignal:connect(function(CoreGuiType, Enabled) --[[ Line: 148 ]]
+	StarterGui.CoreGuiChangedSignal:connect(function(CoreGuiType, Enabled)
 		-- upvalues: p1 (copy)
 		if not p1.topBarEnabled then return end
 		if not p1.canPlayEmotes then return end
@@ -137,7 +137,7 @@ function Module._connectApiListeners(p1) --[[ Line: 147 ]]
 			p1:_unmount()
 		end
 	end)
-	GuiService.EmotesMenuOpenChanged:Connect(function(IsOpen) --[[ Line: 166 ]]
+	GuiService.EmotesMenuOpenChanged:Connect(function(IsOpen)
 		-- upvalues: p1 (copy)
 		if IsOpen then
 			if not p1:isOpen() then
@@ -151,23 +151,23 @@ function Module._connectApiListeners(p1) --[[ Line: 147 ]]
 	end)
 end
 
-function Module:_onEquippedEmotesChanged(EquippedEmotes) --[[ Line: 179 ]]
+function Module:_onEquippedEmotesChanged(EquippedEmotes)
 	-- upvalues: EquippedEmotesChangedModule (copy)
 	self.store:dispatch(EquippedEmotesChangedModule(EquippedEmotes))
 end
 
-function Module:_onEmotesChanged(Emotes) --[[ Line: 183 ]]
+function Module:_onEmotesChanged(Emotes)
 	-- upvalues: EmotesChangedModule (copy)
 	self.store:dispatch(EmotesChangedModule(Emotes))
 end
 
-function Module:_onNumberEmotesLoadedChanged(NumberEmotesLoaded: number) --[[ Line: 187 ]]
+function Module:_onNumberEmotesLoadedChanged(NumberEmotesLoaded: number)
 	-- upvalues: NumberEmotesLoadedChangedModule (copy)
 	self.store:dispatch(NumberEmotesLoadedChangedModule(NumberEmotesLoaded))
 	self.EmotesLoaded:Fire(NumberEmotesLoaded > 0)
 end
 
-function Module:_onHumanoidDescriptionChanged(HumanoidDescription) --[[ Line: 192 ]]
+function Module:_onHumanoidDescriptionChanged(HumanoidDescription)
 	-- upvalues: FFlagFixEmotesMenuAvailabilityModule (copy)
 	if self.equippedEmotesChangedConn then
 		self.equippedEmotesChangedConn:Disconnect()
@@ -186,17 +186,17 @@ function Module:_onHumanoidDescriptionChanged(HumanoidDescription) --[[ Line: 19
 		self.humanoidDescriptionAncestryConn = nil
 	end
 	if HumanoidDescription then
-		self.equippedEmotesChangedConn = HumanoidDescription.EquippedEmotesChanged:Connect(function(NewEquippedEmotes) --[[ Line: 214 ]]
+		self.equippedEmotesChangedConn = HumanoidDescription.EquippedEmotesChanged:Connect(function(NewEquippedEmotes)
 			-- upvalues: self (copy)
 			self:_onEquippedEmotesChanged(NewEquippedEmotes)
 		end)
 		self:_onEquippedEmotesChanged(HumanoidDescription:GetEquippedEmotes())
-		self.emotesChangedConn = HumanoidDescription.EmotesChanged:Connect(function(NewEmotes) --[[ Line: 219 ]]
+		self.emotesChangedConn = HumanoidDescription.EmotesChanged:Connect(function(NewEmotes)
 			-- upvalues: self (copy)
 			self:_onEmotesChanged(NewEmotes)
 		end)
 		self:_onEmotesChanged(HumanoidDescription:GetEmotes())
-		self.numberEmotesLoadedChangedConn = HumanoidDescription:GetPropertyChangedSignal("NumberEmotesLoaded"):Connect(function(p1) --[[ Line: 226 ]]
+		self.numberEmotesLoadedChangedConn = HumanoidDescription:GetPropertyChangedSignal("NumberEmotesLoaded"):Connect(function(p1)
 			-- upvalues: FFlagFixEmotesMenuAvailabilityModule (upval), self (copy), HumanoidDescription (copy)
 			if FFlagFixEmotesMenuAvailabilityModule then
 				self:_onNumberEmotesLoadedChanged(HumanoidDescription.NumberEmotesLoaded)
@@ -207,7 +207,7 @@ function Module:_onHumanoidDescriptionChanged(HumanoidDescription) --[[ Line: 19
 			end
 		end)
 		self:_onNumberEmotesLoadedChanged(HumanoidDescription.NumberEmotesLoaded)
-		self.humanoidDescriptionAncestryConn = HumanoidDescription.AncestryChanged:Connect(function(Child, NewParent) --[[ Line: 235 ]]
+		self.humanoidDescriptionAncestryConn = HumanoidDescription.AncestryChanged:Connect(function(Child, NewParent)
 			-- upvalues: HumanoidDescription (copy), self (copy)
 			if Child == HumanoidDescription and NewParent == nil then
 				self:_onHumanoidDescriptionChanged(nil)
@@ -222,7 +222,7 @@ function Module:_onHumanoidDescriptionChanged(HumanoidDescription) --[[ Line: 19
 	end
 end
 
-function Module:_onHumanoidChanged(Humanoid) --[[ Line: 247 ]]
+function Module:_onHumanoidChanged(Humanoid)
 	if self.humanoidChildAddedConn then
 		self.humanoidChildAddedConn:Disconnect()
 		self.humanoidChildAddedConn = nil
@@ -236,7 +236,7 @@ function Module:_onHumanoidChanged(Humanoid) --[[ Line: 247 ]]
 		
 		return
 	end
-	self.humanoidChildAddedConn = Humanoid.ChildAdded:Connect(function(Child) --[[ Line: 259 ]]
+	self.humanoidChildAddedConn = Humanoid.ChildAdded:Connect(function(Child)
 		-- upvalues: self (copy)
 		if Child:IsA("HumanoidDescription") then
 			self:_onHumanoidDescriptionChanged(Child)
@@ -247,7 +247,7 @@ function Module:_onHumanoidChanged(Humanoid) --[[ Line: 247 ]]
 	if HumanoidDescription then
 		self:_onHumanoidDescriptionChanged(HumanoidDescription)
 	end
-	self.humanoidAncestryChangedConn = Humanoid.AncestryChanged:Connect(function(Child, NewParent) --[[ Line: 270 ]]
+	self.humanoidAncestryChangedConn = Humanoid.AncestryChanged:Connect(function(Child, NewParent)
 		-- upvalues: Humanoid (copy), self (copy)
 		if Child == Humanoid and NewParent == nil then
 			self:_onHumanoidChanged(nil)
@@ -255,12 +255,12 @@ function Module:_onHumanoidChanged(Humanoid) --[[ Line: 247 ]]
 	end)
 end
 
-function Module:_onCharacterAdded(Character) --[[ Line: 280 ]]
+function Module:_onCharacterAdded(Character)
 	if self.characterChildAddedConn then
 		self.characterChildAddedConn:Disconnect()
 		self.characterChildAddedConn = nil
 	end
-	self.characterChildAddedConn = Character.ChildAdded:Connect(function(Child: Humanoid) --[[ Line: 286 ]]
+	self.characterChildAddedConn = Character.ChildAdded:Connect(function(Child: Humanoid)
 		-- upvalues: self (copy)
 		if Child:IsA("Humanoid") then
 			self:_onHumanoidChanged(Child)
@@ -273,11 +273,11 @@ function Module:_onCharacterAdded(Character) --[[ Line: 280 ]]
 	end
 end
 
-function Module:_connectListeners() --[[ Line: 298 ]]
+function Module:_connectListeners()
 	-- upvalues: LocalPlayer (ref), LocalizationService (copy), SetLocaleModule (copy), CanPlayEmotesModule (copy), StarterGui (copy), FFlagTopBarSignalizeSetCores (copy), SignalsModule (copy), InExperienceTopBarModule (copy)
 	self:_connectCoreGuiListeners()
 	self:_connectApiListeners()
-	LocalPlayer.CharacterAdded:Connect(function(Character) --[[ Line: 302 ]]
+	LocalPlayer.CharacterAdded:Connect(function(Character)
 		-- upvalues: self (copy)
 		self:_onCharacterAdded(Character)
 	end)
@@ -285,11 +285,11 @@ function Module:_connectListeners() --[[ Line: 298 ]]
 	if LocalPlayer.Character then
 		self:_onCharacterAdded(LocalPlayer.Character)
 	end
-	LocalizationService:GetPropertyChangedSignal("RobloxLocaleId"):Connect(function() --[[ Line: 310 ]]
+	LocalizationService:GetPropertyChangedSignal("RobloxLocaleId"):Connect(function()
 		-- upvalues: self (copy), SetLocaleModule (upval), LocalizationService (upval)
 		self.store:dispatch(SetLocaleModule(LocalizationService.RobloxLocaleId))
 	end)
-	CanPlayEmotesModule.ChangedEvent.Event:connect(function(CanPlayEmotes) --[[ Line: 314 ]]
+	CanPlayEmotesModule.ChangedEvent.Event:connect(function(CanPlayEmotes)
 		-- upvalues: self (copy), StarterGui (upval)
 		self.canPlayEmotes = CanPlayEmotes
 		local CoreGuiEnabled = StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.EmotesMenu)
@@ -304,7 +304,7 @@ function Module:_connectListeners() --[[ Line: 298 ]]
 	end)
 	
 	if FFlagTopBarSignalizeSetCores then
-		self.disposeEffect = SignalsModule.createEffect(function(p1) --[[ Line: 326 ]]
+		self.disposeEffect = SignalsModule.createEffect(function(p1)
 			-- upvalues: InExperienceTopBarModule (upval), self (copy)
 			local GetTopBarStoreFunction = InExperienceTopBarModule.Stores.GetTopBarStore
 			
@@ -315,7 +315,7 @@ function Module:_connectListeners() --[[ Line: 298 ]]
 	end
 end
 
-function Module:_onStateChanged(p1, p2) --[[ Line: 335 ]]
+function Module:_onStateChanged(p1, p2)
 	-- upvalues: GuiService (copy)
 	if p2.displayOptions.menuVisible ~= p1.displayOptions.menuVisible then
 		self.EmotesMenuToggled:Fire(p1.displayOptions.menuVisible)
@@ -323,7 +323,7 @@ function Module:_onStateChanged(p1, p2) --[[ Line: 335 ]]
 	end
 end
 
-function Module:_mount() --[[ Line: 343 ]]
+function Module:_mount()
 	-- upvalues: ColorMode (copy), Constants (copy), RoactModule (copy), RoactRoduxModule (copy), UiModeStyleProvider (copy), EmotesMenuModule (copy), RobloxGui (copy)
 	local Style = {
 		themeName = ColorMode.Dark,
@@ -339,7 +339,7 @@ function Module:_mount() --[[ Line: 343 ]]
 	end
 end
 
-function Module:_unmount() --[[ Line: 371 ]]
+function Module:_unmount()
 	-- upvalues: RoactModule (copy)
 	if self.instance then
 		RoactModule.unmount(self.instance)
@@ -349,7 +349,7 @@ function Module:_unmount() --[[ Line: 371 ]]
 	end
 end
 
-function Module.new() --[[ Line: 381 ]]
+function Module.new()
 	-- upvalues: Module (copy), CanPlayEmotesModule (copy), RoduxModule (copy), EmotesMenuReducerModule (copy), RunService (copy), SetLocaleModule (copy), LocalizationService (copy), TenFootInterfaceModule (copy), SetLayoutModule (copy), ConstantsModule1 (copy), ConstantsModule (copy), RobloxGui (copy), SetGuiInsetModule (copy)
 	local self = setmetatable({}, Module)
 	self.canPlayEmotes = CanPlayEmotesModule.Value
@@ -363,7 +363,7 @@ function Module.new() --[[ Line: 381 ]]
 	if not RunService:IsClient() or (RunService:IsEdit() or RunService:IsRunMode()) then
 		return self
 	end
-	self.store.changed:connect(function(Value, p1) --[[ Line: 411 ]]
+	self.store.changed:connect(function(Value, p1)
 		-- upvalues: self (copy)
 		self:_onStateChanged(Value, p1)
 	end)

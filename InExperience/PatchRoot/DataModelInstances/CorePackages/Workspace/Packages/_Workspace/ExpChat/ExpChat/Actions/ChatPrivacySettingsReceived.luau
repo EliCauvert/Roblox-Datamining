@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("ExpChat").Parent.Rodux).makeActionCreator(script.Name, function(CanUserChat) --[[ Line: 10 ]]
+﻿return require(script:FindFirstAncestor("ExpChat").Parent.Rodux).makeActionCreator(script.Name, function(CanUserChat)
 	return { canUserChat = CanUserChat }
 end)

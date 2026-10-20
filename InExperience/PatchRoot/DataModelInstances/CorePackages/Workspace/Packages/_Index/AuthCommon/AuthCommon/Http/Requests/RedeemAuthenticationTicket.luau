@@ -5,7 +5,7 @@ local HttpModule = require(Parent.Http)
 local AppStorageUtilitiesModule = require(AuthCommon.Utils.AppStorageUtilities)
 local FFlagEnableLuaAccountSwitch = require(Parent.SharedFlags).FFlagEnableLuaAccountSwitch
 
-return function(Callback, AuthenticationTicket) --[[ Line: 16 ]]
+return function(Callback, AuthenticationTicket)
 	-- upvalues: HttpService (copy), FFlagEnableLuaAccountSwitch (copy), AppStorageUtilitiesModule (copy), HttpModule (copy)
 	return (Callback(string.format("%sv1/authentication-ticket/redeem", HttpModule.Url.AUTH_URL), "POST", {
 		postBody = HttpService:JSONEncode({

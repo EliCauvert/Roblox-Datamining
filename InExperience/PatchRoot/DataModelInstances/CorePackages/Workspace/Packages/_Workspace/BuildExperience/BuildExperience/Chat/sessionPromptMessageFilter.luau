@@ -1,7 +1,7 @@
 ﻿local Patterns = { "<system_reminder>.-</system_reminder>" }
 
 return {
-	shouldOptimisticallyDisplay = function(Text: string): boolean --[[ Line: 5 ]]
+	shouldOptimisticallyDisplay = function(Text: string): boolean
 		-- upvalues: Patterns (copy)
 		for _, pattern in Patterns do
 			if string.find(Text, pattern) ~= nil then

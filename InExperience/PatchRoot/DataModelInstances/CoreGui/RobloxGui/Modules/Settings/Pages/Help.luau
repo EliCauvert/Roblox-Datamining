@@ -18,7 +18,7 @@ local IsSpatialFunction = require(CorePackages.Workspace.Packages.AppCommonLib).
 local IsInExperienceUIVREnabled = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
 local NewResult = if IsInExperienceUIVREnabled then require(CorePackages.Workspace.Packages.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId) else nil
 local HelpConstantsModule = if IsInExperienceUIVREnabled then require(RobloxGui.Modules.Settings.Resources.HelpConstants) else nil
-v1 = (function() --[[ Line: 66 | Named "Initialize" ]]
+v1 = (function()
 	-- upvalues: RobloxGui (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), UserInputService (copy), CreateFunction (copy), ThemeModule (copy), RobloxTranslatorModule (copy), CachedPolicyServiceModule (copy), IsEnabled (copy), TextService (copy), UtilityModule (copy), GuiService (copy), HelpConstantsModule (copy), NewResult (ref), GameSettings (copy), Uiblox (copy), BuilderIconsModule (copy)
 	local NewPage = require(RobloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	NewPage.HelpPages = {}
@@ -26,7 +26,7 @@ v1 = (function() --[[ Line: 66 | Named "Initialize" ]]
 	NewPage.ActiveHelpScheme = nil
 	local LastInputType = nil
 	
-	function NewPage:GetCurrentInputType(): string --[[ Line: 75 ]]
+	function NewPage:GetCurrentInputType(): string
 		-- upvalues: IsInExperienceUIVREnabled (upval), IsSpatialFunction (upval), LastInputType (ref), UserInputService (upval)
 		if IsInExperienceUIVREnabled and IsSpatialFunction() then
 			return "SpatialGamepad"
@@ -39,9 +39,9 @@ v1 = (function() --[[ Line: 66 | Named "Initialize" ]]
 		end
 	end
 	
-	local function createPCHelp(Parent) --[[ Line: 107 ]]
+	local function createPCHelp(Parent)
 		-- upvalues: CreateFunction (upval), ThemeModule (upval), UserInputService (upval), RobloxTranslatorModule (upval), CachedPolicyServiceModule (upval)
-		local function createPCGroup(Text, p1) --[[ Line: 108 ]]
+		local function createPCGroup(Text, p1)
 			-- upvalues: CreateFunction (upval), ThemeModule (upval)
 			local Parent = CreateFunction("Frame")({
 				BackgroundTransparency = 1,
@@ -225,7 +225,7 @@ v1 = (function() --[[ Line: 66 | Named "Initialize" ]]
 		Parent.Size = UDim2.new(Parent.Size.X.Scale, Parent.Size.X.Offset, 0, MenuItems.Size.Y.Offset + MenuItems.Position.Y.Offset)
 	end
 	
-	local function createGamepadHelp(Frame: Frame) --[[ Line: 312 ]]
+	local function createGamepadHelp(Frame: Frame)
 		-- upvalues: NewPage (copy), CreateFunction (upval), IsEnabled (upval), ThemeModule (upval), TextService (upval), RobloxTranslatorModule (upval)
 		local Largest = math.max(NewPage.Page.AbsoluteSize.X * 0.58, 270)
 		local _UDim2 = UDim2.new(0, Largest, 0, Largest * 0.64)
@@ -242,7 +242,7 @@ v1 = (function() --[[ Line: 66 | Named "Initialize" ]]
 		local FontSizeResult = IsEnabled and ThemeModule.fontSize(Enum.FontSize.Size36) or ThemeModule.fontSize(Enum.FontSize.Size24)
 		local TextSizeResult = FontSizeResult == ThemeModule.fontSize(Enum.FontSize.Size36) and ThemeModule.textSize(36) or ThemeModule.textSize(24)
 		
-		local function createGamepadLabel(Text, Position, Size, p2) --[[ Line: 332 ]]
+		local function createGamepadLabel(Text, Position, Size, p2)
 			-- upvalues: CreateFunction (upval), ThemeModule (upval), FontSizeResult (copy), Parent (copy), TextService (upval), TextSizeResult (copy), Frame (copy)
 			local Label = CreateFunction("TextLabel")({
 				BackgroundTransparency = 1,
@@ -263,7 +263,7 @@ v1 = (function() --[[ Line: 66 | Named "Initialize" ]]
 			local X = TextService:GetTextSize(Text, TextSizeResult, ThemeModule.font(Enum.Font.SourceSansBold, "Bold"), Vector2.new(0, 0)).X
 			local Magnitude = math.abs(Position.X.Offset)
 			
-			local function updateNameLabelSize() --[[ Line: 356 ]]
+			local function updateNameLabelSize()
 				-- upvalues: p2 (copy), Frame (copy), Magnitude (copy), Label (copy), TextSizeResult (upval), X (copy), FontSizeResult (upval)
 				local XDelta: number = p2 and Frame.AbsoluteSize.X / 2 + 30 - Magnitude or Frame.AbsoluteSize.X / 2 - 30 - Magnitude
 				Label.Size = UDim2.new(Label.Size.X.Scale, XDelta, Label.Size.Y.Scale, TextSizeResult * 2)
@@ -274,7 +274,7 @@ v1 = (function() --[[ Line: 66 | Named "Initialize" ]]
 				end
 			end
 			
-			local _ = Frame:GetPropertyChangedSignal("AbsoluteSize"):connect(function() --[[ Line: 369 ]]
+			local _ = Frame:GetPropertyChangedSignal("AbsoluteSize"):connect(function()
 				-- upvalues: updateNameLabelSize (copy)
 				updateNameLabelSize()
 			end)
@@ -296,7 +296,7 @@ v1 = (function() --[[ Line: 66 | Named "Initialize" ]]
 		createGamepadLabel("Camera Zoom", UDim2.new(0.5, XOffset1, 0.77, -10), UDim2.new(0, 122, 0, TextSizeResult))
 	end
 	
-	local function updateTouchLayout(TouchMovementMode) --[[ Line: 401 ]]
+	local function updateTouchLayout(TouchMovementMode)
 		-- upvalues: NewPage (copy), UtilityModule (upval)
 		NewPage.ActiveHelpScheme = TouchMovementMode
 		local IsPortrait = UtilityModule:IsPortrait()
@@ -304,7 +304,7 @@ v1 = (function() --[[ Line: 66 | Named "Initialize" ]]
 		if NewPage.HelpPages.Touch then
 			local Touch = NewPage.HelpPageContents.Touch
 			
-			local function _(p2) --[[ Line: 409 | Named "hideUneeded" ]]
+			local function _(p2)
 				-- upvalues: Touch (copy)
 				if p2 then
 					for i, value in pairs(Touch) do
@@ -352,12 +352,12 @@ v1 = (function() --[[ Line: 66 | Named "Initialize" ]]
 		end
 	end
 	
-	local function createTouchHelp(Parent) --[[ Line: 457 ]]
+	local function createTouchHelp(Parent)
 		-- upvalues: UtilityModule (upval), GuiService (upval), CreateFunction (upval), ThemeModule (upval)
 		local IsSmallTouchScreen = UtilityModule:IsSmallTouchScreen()
 		Parent.Size = UDim2.new(1, 0, 0, if IsSmallTouchScreen then GuiService:GetScreenResolution().y - 100 else GuiService:GetScreenResolution().y - 350)
 		
-		local function createTouchLabel(Text, Position, Size, Parent) --[[ Line: 466 ]]
+		local function createTouchLabel(Text, Position, Size, Parent)
 			-- upvalues: CreateFunction (upval), ThemeModule (upval), IsSmallTouchScreen (copy)
 			local Parent1 = CreateFunction("TextLabel")({
 				BackgroundTransparency = 1,
@@ -401,7 +401,7 @@ v1 = (function() --[[ Line: 66 | Named "Initialize" ]]
 			return Parent1
 		end
 		
-		local function _(Name, Image, Position, Size, Parent) --[[ Line: 516 | Named "createTouchGestureImage" ]]
+		local function _(Name, Image, Position, Size, Parent)
 			-- upvalues: CreateFunction (upval)
 			return (CreateFunction("ImageLabel")({
 				BackgroundTransparency = 1,
@@ -481,7 +481,7 @@ v1 = (function() --[[ Line: 66 | Named "Initialize" ]]
 		return config
 	end
 	
-	local function createSpatialGamepadHelp(Parent) --[[ Line: 556 ]]
+	local function createSpatialGamepadHelp(Parent)
 		-- upvalues: HelpConstantsModule (upval), CreateFunction (upval), NewPage (copy), NewResult (upval), ThemeModule (upval)
 		local GamepadQuest = HelpConstantsModule.Images.GamepadQuest
 		local QuestGamepadLabels = HelpConstantsModule.Labels.QuestGamepadLabels
@@ -521,7 +521,7 @@ v1 = (function() --[[ Line: 66 | Named "Initialize" ]]
 		end
 	end
 	
-	local function createHelpDisplay(p2) --[[ Line: 608 ]]
+	local function createHelpDisplay(p2)
 		-- upvalues: CreateFunction (upval), createPCHelp (copy), createGamepadHelp (copy), createTouchHelp (copy), IsInExperienceUIVREnabled (upval), createSpatialGamepadHelp (copy)
 		local v2 = nil
 		local Parent = CreateFunction("Frame")({
@@ -552,7 +552,7 @@ v1 = (function() --[[ Line: 66 | Named "Initialize" ]]
 		return Parent, v2
 	end
 	
-	local function displayHelp(HelpPage) --[[ Line: 642 ]]
+	local function displayHelp(HelpPage)
 		-- upvalues: NewPage (copy), IsEnabled (upval), UserInputService (upval)
 		for _, helpPage in pairs(NewPage.HelpPages) do
 			if helpPage == HelpPage then
@@ -572,7 +572,7 @@ v1 = (function() --[[ Line: 66 | Named "Initialize" ]]
 		end
 	end
 	
-	local function switchToHelp(CurrentInputType) --[[ Line: 660 ]]
+	local function switchToHelp(CurrentInputType)
 		-- upvalues: NewPage (copy), displayHelp (copy), GameSettings (upval), updateTouchLayout (copy), createHelpDisplay (copy), switchToHelp (copy)
 		local HelpPage = NewPage.HelpPages[CurrentInputType]
 		
@@ -594,15 +594,15 @@ v1 = (function() --[[ Line: 66 | Named "Initialize" ]]
 		end
 	end
 	
-	local function _() --[[ Line: 677 | Named "showTypeOfHelp" ]]
+	local function _()
 		-- upvalues: switchToHelp (copy), NewPage (copy)
 		switchToHelp(NewPage:GetCurrentInputType())
 	end
 	
-	function NewPage:PageDisplayed() --[[ Line: 681 ]]
+	function NewPage:PageDisplayed()
 		-- upvalues: NewPage (copy), UserInputService (upval), LastInputType (ref), switchToHelp (copy)
 		if not NewPage.LastInputTypeChangedConnection then
-			NewPage.LastInputTypeChangedConnection = UserInputService.LastInputTypeChanged:Connect(function(UserInputType) --[[ Line: 683 ]]
+			NewPage.LastInputTypeChangedConnection = UserInputService.LastInputTypeChanged:Connect(function(UserInputType)
 				-- upvalues: LastInputType (upval), switchToHelp (upval), NewPage (upval)
 				if UserInputType ~= Enum.UserInputType.Focus and UserInputType ~= Enum.UserInputType.None then
 					LastInputType = UserInputType
@@ -614,7 +614,7 @@ v1 = (function() --[[ Line: 66 | Named "Initialize" ]]
 		switchToHelp(NewPage:GetCurrentInputType())
 	end
 	
-	function NewPage:PageHidden() --[[ Line: 694 ]]
+	function NewPage:PageHidden()
 		-- upvalues: NewPage (copy)
 		if NewPage.LastInputTypeChangedConnection then
 			NewPage.LastInputTypeChangedConnection:Disconnect()
@@ -622,7 +622,7 @@ v1 = (function() --[[ Line: 66 | Named "Initialize" ]]
 		end
 	end
 	
-	local function adjustForScreenLayout(p2) --[[ Line: 701 ]]
+	local function adjustForScreenLayout(p2)
 		-- upvalues: NewPage (copy), GameSettings (upval), UtilityModule (upval), GuiService (upval), updateTouchLayout (copy)
 		if NewPage:GetCurrentInputType() == "Touch" then
 			local TouchMovementMode = GameSettings.TouchMovementMode
@@ -639,7 +639,7 @@ v1 = (function() --[[ Line: 66 | Named "Initialize" ]]
 	NewPage.TabHeader.TabLabel.Icon.Text = IconsMenuHelp.name
 	NewPage.TabHeader.TabLabel.Title.Text = "Help"
 	NewPage.Page.Name = "Help"
-	UtilityModule:OnResized(NewPage, function(p2, _) --[[ Line: 725 ]]
+	UtilityModule:OnResized(NewPage, function(p2, _)
 		-- upvalues: NewPage (copy), adjustForScreenLayout (copy)
 		if NewPage.HelpPages.Touch then
 			adjustForScreenLayout(p2)
@@ -648,7 +648,7 @@ v1 = (function() --[[ Line: 66 | Named "Initialize" ]]
 	
 	return NewPage
 end)()
-v1.Displayed.Event:connect(function() --[[ Line: 739 ]]
+v1.Displayed.Event:connect(function()
 	-- upvalues: v1 (ref)
 	v1:PageDisplayed()
 	
@@ -656,7 +656,7 @@ v1.Displayed.Event:connect(function() --[[ Line: 739 ]]
 		v1.HubRef.VersionContainer.Visible = true
 	end
 end)
-v1.Hidden.Event:connect(function() --[[ Line: 746 ]]
+v1.Hidden.Event:connect(function()
 	-- upvalues: v1 (ref)
 	v1:PageHidden()
 	v1.HubRef.PageViewClipper.ClipsDescendants = true

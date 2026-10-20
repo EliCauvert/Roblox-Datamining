@@ -2,9 +2,9 @@
 local UseSelectorFunction = require(ProfileQRCode.Parent.RoactUtils).Hooks.RoactRodux.useSelector
 local CreateOrGetProfileShareUrlModule = require(ProfileQRCode.Networking.createOrGetProfileShareUrl)
 
-return function() --[[ Line: 7 ]]
+return function()
 	-- upvalues: UseSelectorFunction (copy), CreateOrGetProfileShareUrlModule (copy)
-	return UseSelectorFunction(function(p1) --[[ Line: 8 ]]
+	return UseSelectorFunction(function(p1)
 		-- upvalues: CreateOrGetProfileShareUrlModule (upval)
 		return CreateOrGetProfileShareUrlModule.getStatus(p1)
 	end)

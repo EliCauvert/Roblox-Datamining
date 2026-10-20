@@ -3,7 +3,7 @@ local MessageFtuxTooltipDismissSignalModule = {
 	dismissed = require(script:FindFirstAncestor("AppChat").Parent.AppCommonLib).Signal.new()
 }
 
-function MessageFtuxTooltipDismissSignalModule.dismiss(p1) --[[ Line: 17 ]]
+function MessageFtuxTooltipDismissSignalModule.dismiss(p1)
 	-- upvalues: MessageFtuxTooltipDismissSignalModule (copy)
 	MessageFtuxTooltipDismissSignalModule.dismissed:fire(p1)
 end

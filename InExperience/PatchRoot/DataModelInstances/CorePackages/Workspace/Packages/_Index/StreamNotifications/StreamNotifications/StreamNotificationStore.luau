@@ -8,7 +8,7 @@ return {
 	getStreamPresented = Signal,
 	getActiveBellId = Signal1,
 	setActiveBellId = Signal2_1,
-	isBellActive = function(p1, p2, p3, Enabled1, Enabled): boolean --[[ Line: 26 ]]
+	isBellActive = function(p1, p2, p3, Enabled1, Enabled): boolean
 		return if p1 and Enabled ~= false then if p2 == "StreamNotificationPrimaryBell" then Enabled1 == true else p2 == p3 or p2 == nil and Enabled1 == true else false
 	end
 }

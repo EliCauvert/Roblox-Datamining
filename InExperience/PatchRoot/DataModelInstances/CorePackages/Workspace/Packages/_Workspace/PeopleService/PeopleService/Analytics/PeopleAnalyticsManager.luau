@@ -231,7 +231,7 @@ local TelemetryConfigs = {
 PeopleAnalyticsManager.TelemetryConfigs = TelemetryConfigs
 local GameInviteAnalyticsManager = GameInviteModule.GameInviteAnalyticsManager
 
-function PeopleAnalyticsManager:trackGameInviteEntryPoint() --[[ Line: 286 ]]
+function PeopleAnalyticsManager:trackGameInviteEntryPoint()
 	-- upvalues: PeopleAnalyticsManager (copy), TelemetryConfigs (copy), TelemetryService (copy), GameInviteAnalyticsManager (copy)
 	local GameInviteEntryPoint = TelemetryConfigs.GameInviteEntryPoint
 	TelemetryService:LogEvent(GameInviteEntryPoint.eventConfig, {
@@ -245,7 +245,7 @@ function PeopleAnalyticsManager:trackGameInviteEntryPoint() --[[ Line: 286 ]]
 	GameInviteAnalyticsManager:withButtonName(PeopleAnalyticsManager.ButtonName.SettingsHub)
 end
 
-function PeopleAnalyticsManager:trackToggleMuteSelf(p1) --[[ Line: 300 ]]
+function PeopleAnalyticsManager:trackToggleMuteSelf(p1)
 	-- upvalues: TelemetryService (copy), TelemetryConfigs (copy)
 	if p1 then
 		TelemetryService:LogEvent(TelemetryConfigs.UnmuteSelf.eventConfig, {})
@@ -256,7 +256,7 @@ function PeopleAnalyticsManager:trackToggleMuteSelf(p1) --[[ Line: 300 ]]
 	end
 end
 
-function PeopleAnalyticsManager:trackInspectButton(p1, Playsessionid, Entrypoint) --[[ Line: 308 ]]
+function PeopleAnalyticsManager:trackInspectButton(p1, Playsessionid, Entrypoint)
 	-- upvalues: GetFFlagAddPeoplePageCardLayoutFunction (copy), TelemetryConfigs (copy), TelemetryService (copy)
 	local CustomFields = { playsessionid = Playsessionid, universeid = tostring(p1) }
 	
@@ -269,7 +269,7 @@ function PeopleAnalyticsManager:trackInspectButton(p1, Playsessionid, Entrypoint
 	})
 end
 
-function PeopleAnalyticsManager:trackToggleMuteAll(p1) --[[ Line: 324 ]]
+function PeopleAnalyticsManager:trackToggleMuteAll(p1)
 	-- upvalues: TelemetryService (copy), TelemetryConfigs (copy)
 	if p1 then
 		TelemetryService:LogEvent(TelemetryConfigs.UnmuteAll.eventConfig, {})
@@ -280,7 +280,7 @@ function PeopleAnalyticsManager:trackToggleMuteAll(p1) --[[ Line: 324 ]]
 	end
 end
 
-function PeopleAnalyticsManager:trackToggleMutePlayer(MutedUserId, p1, p2) --[[ Line: 332 ]]
+function PeopleAnalyticsManager:trackToggleMutePlayer(MutedUserId, p1, p2)
 	-- upvalues: TelemetryService (copy), TelemetryConfigs (copy), GetFFlagAddPeoplePageCardLayoutFunction (copy)
 	if p1 then
 		TelemetryService:LogEvent(TelemetryConfigs.UnmutePlayer.eventConfig, {
@@ -301,7 +301,7 @@ function PeopleAnalyticsManager:trackToggleMutePlayer(MutedUserId, p1, p2) --[[ 
 	end
 end
 
-function PeopleAnalyticsManager:trackRequestFriendship(p1) --[[ Line: 350 ]]
+function PeopleAnalyticsManager:trackRequestFriendship(p1)
 	-- upvalues: GetFFlagAddPeoplePageCardLayoutFunction (copy), TelemetryConfigs (copy), TelemetryService (copy)
 	local RequestFriendship = TelemetryConfigs.RequestFriendship
 	TelemetryService:LogEvent(RequestFriendship.eventConfig, {
@@ -315,7 +315,7 @@ function PeopleAnalyticsManager:trackRequestFriendship(p1) --[[ Line: 350 ]]
 	TelemetryService:LogCounter(RequestFriendship.counterConfig, { customFields = { selectedItem = "RequestFriendship" } }, 1)
 end
 
-function PeopleAnalyticsManager:trackBlockUserButtonClick(BlockeeUserId, BlockerUserId, Source) --[[ Line: 365 ]]
+function PeopleAnalyticsManager:trackBlockUserButtonClick(BlockeeUserId, BlockerUserId, Source)
 	-- upvalues: TelemetryConfigs (copy), TelemetryService (copy)
 	TelemetryService:LogEvent(TelemetryConfigs.BlockUserButtonClick.eventConfig, {
 		customFields = {
@@ -326,7 +326,7 @@ function PeopleAnalyticsManager:trackBlockUserButtonClick(BlockeeUserId, Blocker
 	})
 end
 
-function PeopleAnalyticsManager:trackBlockUser(BlockeeUserId, BlockerUserId, Source) --[[ Line: 376 ]]
+function PeopleAnalyticsManager:trackBlockUser(BlockeeUserId, BlockerUserId, Source)
 	-- upvalues: TelemetryConfigs (copy), TelemetryService (copy)
 	TelemetryService:LogEvent(TelemetryConfigs.BlockUser.eventConfig, {
 		customFields = {
@@ -337,7 +337,7 @@ function PeopleAnalyticsManager:trackBlockUser(BlockeeUserId, BlockerUserId, Sou
 	})
 end
 
-function PeopleAnalyticsManager:trackUnblockUser(BlockeeUserId, BlockerUserId, p1) --[[ Line: 387 ]]
+function PeopleAnalyticsManager:trackUnblockUser(BlockeeUserId, BlockerUserId, p1)
 	-- upvalues: GetFFlagAddPeoplePageCardLayoutFunction (copy), TelemetryConfigs (copy), TelemetryService (copy)
 	TelemetryService:LogEvent(TelemetryConfigs.UnblockUser.eventConfig, {
 		customFields = {
@@ -349,7 +349,7 @@ function PeopleAnalyticsManager:trackUnblockUser(BlockeeUserId, BlockerUserId, p
 end
 
 if GetFFlagAddPeoplePageCardLayoutFunction() then
-	function PeopleAnalyticsManager:trackPeoplePageLayoutChanged(p1) --[[ Line: 399 ]]
+	function PeopleAnalyticsManager:trackPeoplePageLayoutChanged(p1)
 		-- upvalues: TelemetryConfigs (copy), TelemetryService (copy)
 		TelemetryService:LogEvent(TelemetryConfigs.PeoplePageLayoutChanged.eventConfig, {
 			customFields = { layout = p1.Name },
@@ -362,7 +362,7 @@ if GetFFlagAddPeoplePageCardLayoutFunction() then
 		})
 	end
 	
-	function PeopleAnalyticsManager:trackPersonCardMenuToggled(p1) --[[ Line: 411 ]]
+	function PeopleAnalyticsManager:trackPersonCardMenuToggled(p1)
 		-- upvalues: TelemetryConfigs (copy), TelemetryService (copy)
 		TelemetryService:LogEvent(TelemetryConfigs.PersonCardMenuToggled.eventConfig, {
 			customFields = { is_toggled_on = tostring(p1) },
@@ -382,12 +382,12 @@ local config = {
 	reported = false
 }
 
-local function _() --[[ Line: 442 | Named "getPerUserVoiceVolumeUxVariant" ]]
+local function _()
 	-- upvalues: FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted (copy), UXVARIANT (copy), FFlagVoiceChatVolumePerUserMuteVolumeSync (copy)
 	return if FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted then UXVARIANT.DISABLE_WHEN_MUTED elseif FFlagVoiceChatVolumePerUserMuteVolumeSync then UXVARIANT.SYNC else UXVARIANT.INDEPENDENT
 end
 
-local _ = function() --[[ Line: 452 | Named "resetPerUserVoiceVolumeSessionState" ]]
+local _ = function()
 	-- upvalues: config (copy)
 	config.openedVolumeUiList = false
 	config.openedVolumeUiCard = false
@@ -395,12 +395,12 @@ local _ = function() --[[ Line: 452 | Named "resetPerUserVoiceVolumeSessionState
 	config.reported = false
 end
 
-function PeopleAnalyticsManager.getPerUserVoiceVolumeUxVariant() --[[ Line: 459 ]]
+function PeopleAnalyticsManager.getPerUserVoiceVolumeUxVariant()
 	-- upvalues: FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted (copy), UXVARIANT (copy), FFlagVoiceChatVolumePerUserMuteVolumeSync (copy)
 	return if FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted then UXVARIANT.DISABLE_WHEN_MUTED elseif FFlagVoiceChatVolumePerUserMuteVolumeSync then UXVARIANT.SYNC else UXVARIANT.INDEPENDENT
 end
 
-function PeopleAnalyticsManager:recordPerUserVoiceVolumeUiOpened(PEOPLECARD) --[[ Line: 463 ]]
+function PeopleAnalyticsManager:recordPerUserVoiceVolumeUiOpened(PEOPLECARD)
 	-- upvalues: FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), ENTRYPOINT (copy), config (copy)
 	if not FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then return end
 	if PEOPLECARD == ENTRYPOINT.PEOPLE_LIST then
@@ -413,7 +413,7 @@ function PeopleAnalyticsManager:recordPerUserVoiceVolumeUiOpened(PEOPLECARD) --[
 	end
 end
 
-function PeopleAnalyticsManager:trackPerUserVoiceVolumeSliderTouch(EntryPoint) --[[ Line: 475 ]]
+function PeopleAnalyticsManager:trackPerUserVoiceVolumeSliderTouch(EntryPoint)
 	-- upvalues: FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted (copy), UXVARIANT (copy), FFlagVoiceChatVolumePerUserMuteVolumeSync (copy), TelemetryService (copy), TelemetryConfigs (copy)
 	if FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then
 		TelemetryService:LogCounter(TelemetryConfigs.PerUserVoiceVolumeSliderTouch.counterConfig, {
@@ -427,7 +427,7 @@ function PeopleAnalyticsManager:trackPerUserVoiceVolumeSliderTouch(EntryPoint) -
 	end
 end
 
-function PeopleAnalyticsManager:trackPerUserVoiceVolumeChanged(p1) --[[ Line: 490 ]]
+function PeopleAnalyticsManager:trackPerUserVoiceVolumeChanged(p1)
 	-- upvalues: FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted (copy), UXVARIANT (copy), FFlagVoiceChatVolumePerUserMuteVolumeSync (copy), VOICEVOLUME (copy), UserGameSettings (copy), TelemetryService (copy), TelemetryConfigs (copy), config (copy)
 	if not FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then return end
 	if p1.newVolume == p1.oldVolume then return end
@@ -473,7 +473,7 @@ function PeopleAnalyticsManager:trackPerUserVoiceVolumeChanged(p1) --[[ Line: 49
 	end
 end
 
-function PeopleAnalyticsManager:flushPerUserVoiceVolumeSession(PlaySessionId, VoiceSessionId) --[[ Line: 552 ]]
+function PeopleAnalyticsManager:flushPerUserVoiceVolumeSession(PlaySessionId, VoiceSessionId)
 	-- upvalues: FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), config (copy), FFlagVoiceVolumeControlsPerUserPlayerListButton (copy), FFlagVoiceVolumeControlsPerUserPlayerGridMenu (copy), FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted (copy), UXVARIANT (copy), FFlagVoiceChatVolumePerUserMuteVolumeSync (copy), TelemetryService (copy), TelemetryConfigs (copy)
 	if not FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then return end
 	if not config.reported then
@@ -500,7 +500,7 @@ function PeopleAnalyticsManager:flushPerUserVoiceVolumeSession(PlaySessionId, Vo
 	end
 end
 
-function PeopleAnalyticsManager:resetPerUserVoiceVolumeSession() --[[ Line: 590 ]]
+function PeopleAnalyticsManager:resetPerUserVoiceVolumeSession()
 	-- upvalues: FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), config (copy)
 	if FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then
 		config.openedVolumeUiList = false

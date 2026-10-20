@@ -10,7 +10,7 @@ local FFlagEnableBlackbirdCheck = require(Parent.SharedFlags).FFlagEnableBlackbi
 local UseIsRobloxSubscriberFunction = UserProfilesModule.Hooks.useIsRobloxSubscriber
 local GetResult = require(Parent.DataHydration).TrustedConnections.TrustedConnectionsStore.get()
 
-return function(p1) --[[ Line: 19 | Named "FriendTileContainer" ]]
+return function(p1)
 	-- upvalues: FFlagFriendsPageUserListEnabled (copy), UserProfilesModule (copy), FFlagEnableBlackbirdCheck (copy), UseIsRobloxSubscriberFunction (copy), ReactModule (copy), SignalsModule (copy), GetResult (copy), UseSignalStateFunction (copy), FriendTileModule (copy), DashModule (copy)
 	local UseUserProfilesFetchResult = if FFlagFriendsPageUserListEnabled then nil else UserProfilesModule.Hooks.useUserProfilesFetch({
 		userIds = { p1.user.id },
@@ -20,9 +20,9 @@ return function(p1) --[[ Line: 19 | Named "FriendTileContainer" ]]
 	
 	return ReactModule.createElement(FriendTileModule, DashModule.join(p1, {
 		userProfile = if FFlagFriendsPageUserListEnabled then nil elseif UseUserProfilesFetchResult.data then UseUserProfilesFetchResult.data.userProfiles[1] else nil,
-		trustedConnection = UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 33 ]]
+		trustedConnection = UseSignalStateFunction((ReactModule.useMemo(function()
 			-- upvalues: SignalsModule (upval), p1 (copy), GetResult (upval)
-			return SignalsModule.createComputed(function(p2) --[[ Line: 34 ]]
+			return SignalsModule.createComputed(function(p2)
 				-- upvalues: p1 (upval), GetResult (upval)
 				return if p1.user and p1.user.id and p1.user.id ~= "" then GetResult.getIsTrustedConnection(p1.user.id).data(p2) else nil
 			end)

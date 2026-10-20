@@ -1,7 +1,7 @@
 ﻿local VersionModule = require(script.Parent.Version)
 
 return {
-	parse_dsn = function(p1) --[[ Line: 14 ]]
+	parse_dsn = function(p1)
 		if not p1 or p1 == "" then
 			return nil, "DSN is required"
 		end
@@ -39,13 +39,13 @@ return {
 			return nil, "Could not extract project ID from DSN"
 		end
 	end,
-	build_ingest_url = function(p1): string --[[ Line: 59 ]]
+	build_ingest_url = function(p1): string
 		return `https://{p1.host}/api/{p1.project_id}/store/`
 	end,
-	build_envelope_url = function(p1): string --[[ Line: 63 ]]
+	build_envelope_url = function(p1): string
 		return `https://{p1.host}/api/{p1.project_id}/envelope/`
 	end,
-	build_auth_header = function(p1): string --[[ Line: 67 ]]
+	build_auth_header = function(p1): string
 		-- upvalues: VersionModule (copy)
 		return `Sentry sentry_version={VersionModule.SENTRY_VERSION}, sentry_key={p1.public_key}, sentry_client=sentry-lua/{VersionModule.SDK_VERSION}`
 	end

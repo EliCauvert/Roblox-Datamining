@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local AvatarSize = FoundationModule.Enums.AvatarSize
 
-return ReactModule.memo(function(Frame) --[[ Line: 20 | Named "RecipientRowView" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), AvatarSize (copy)
 	local Number: number? = tonumber(Frame.userId)
 	

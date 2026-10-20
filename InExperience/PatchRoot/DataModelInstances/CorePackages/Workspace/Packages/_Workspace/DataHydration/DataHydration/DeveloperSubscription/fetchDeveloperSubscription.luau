@@ -3,15 +3,15 @@ local PromiseModule = require(DataHydration.Parent.Promise)
 local CreatorApiHttpModule = require(DataHydration.creatorApiHttp)
 local _ = require(script.Parent.DeveloperSubscriptionTypes)
 
-local function collectionUrl(BaseUrlResult, p1): string --[[ Line: 50 ]]
+local function collectionUrl(BaseUrlResult, p1): string
 	return ("%s/experience-subscriptions/v1/experiences/%d/experience-subscriptions"):format(BaseUrlResult, p1)
 end
 
-local function subscriptionUrl(BaseUrlResult, p1, Id): string --[[ Line: 54 ]]
+local function subscriptionUrl(BaseUrlResult, p1, Id): string
 	return ("%s/%s"):format(("%s/experience-subscriptions/v1/experiences/%d/experience-subscriptions"):format(BaseUrlResult, p1), Id)
 end
 
-local function _(Tbl) --[[ Line: 58 | Named "normalize" ]]
+local function _(Tbl)
 	local Copy = table.clone(Tbl)
 	
 	if Copy.productType == nil and Copy.developerSubscriptionProductType ~= nil then
@@ -23,13 +23,13 @@ local function _(Tbl) --[[ Line: 58 | Named "normalize" ]]
 	return Copy
 end
 
-local _ = function(p1) --[[ Line: 71 | Named "successDecoder" ]]
+local _ = function(p1)
 	-- upvalues: CreatorApiHttpModule (copy)
-	local JsonDecoderResult = CreatorApiHttpModule.jsonDecoder(function(p2) --[[ Line: 74 ]]
+	local JsonDecoderResult = CreatorApiHttpModule.jsonDecoder(function(p2)
 		return p2
 	end)
 	
-	return function(p2) --[[ Line: 77 ]]
+	return function(p2)
 		-- upvalues: JsonDecoderResult (copy), p1 (copy)
 		local v1, v2, v3 = JsonDecoderResult(p2)
 		
@@ -48,13 +48,13 @@ local _ = function(p1) --[[ Line: 71 | Named "successDecoder" ]]
 	end
 end
 
-local _ = function(Id) --[[ Line: 95 | Named "imageSuccessDecoder" ]]
+local _ = function(Id)
 	-- upvalues: CreatorApiHttpModule (copy)
-	local JsonDecoderResult = CreatorApiHttpModule.jsonDecoder(function(p1) --[[ Line: 98 ]]
+	local JsonDecoderResult = CreatorApiHttpModule.jsonDecoder(function(p1)
 		return p1
 	end)
 	
-	return function(p1) --[[ Line: 101 ]]
+	return function(p1)
 		-- upvalues: JsonDecoderResult (copy), Id (copy)
 		local v1, v2, v3 = JsonDecoderResult(p1)
 		
@@ -73,9 +73,9 @@ local _ = function(Id) --[[ Line: 95 | Named "imageSuccessDecoder" ]]
 	end
 end
 
-local function v9(p1) --[[ Line: 119 ]]
+local function v9(p1)
 	-- upvalues: CreatorApiHttpModule (copy)
-	local v1, v2, v3 = CreatorApiHttpModule.jsonDecoder(function(p2) --[[ Line: 120 ]]
+	local v1, v2, v3 = CreatorApiHttpModule.jsonDecoder(function(p2)
 		return p2
 	end)(p1)
 	
@@ -102,9 +102,9 @@ local function v9(p1) --[[ Line: 119 ]]
 	return config, nil, nil
 end
 
-local function listPage(UniverseId, Cursor, p1) --[[ Line: 177 ]]
+local function listPage(UniverseId, Cursor, p1)
 	-- upvalues: CreatorApiHttpModule (copy)
-	return CreatorApiHttpModule.get(p1, CreatorApiHttpModule.withQuery(("%s/experience-subscriptions/v1/experiences/%d/experience-subscriptions"):format(CreatorApiHttpModule.baseUrl(p1), UniverseId), { resultsPerPage = "50", cursor = Cursor }), "developer-subscription.list", function(p2) --[[ Line: 182 ]]
+	return CreatorApiHttpModule.get(p1, CreatorApiHttpModule.withQuery(("%s/experience-subscriptions/v1/experiences/%d/experience-subscriptions"):format(CreatorApiHttpModule.baseUrl(p1), UniverseId), { resultsPerPage = "50", cursor = Cursor }), "developer-subscription.list", function(p2)
 		return {
 			developerSubscriptions = p2.developerSubscriptions or {},
 			nextCursor = p2.nextCursor,
@@ -114,27 +114,27 @@ local function listPage(UniverseId, Cursor, p1) --[[ Line: 177 ]]
 end
 
 return {
-	getPermission = function(p1, p2) --[[ Line: 147 ]]
+	getPermission = function(p1, p2)
 		-- upvalues: CreatorApiHttpModule (copy), collectionUrl (copy)
-		return CreatorApiHttpModule.get(p2, ("%s/permission"):format(collectionUrl(CreatorApiHttpModule.baseUrl(p2), p1)), "developer-subscription.permission", function(p3) --[[ Line: 155 ]]
+		return CreatorApiHttpModule.get(p2, ("%s/permission"):format(collectionUrl(CreatorApiHttpModule.baseUrl(p2), p1)), "developer-subscription.permission", function(p3)
 			return { canEdit = p3.canUserEditExperienceSubscription == true }
 		end)
 	end,
-	getPrices = function(p1, p2) --[[ Line: 162 ]]
+	getPrices = function(p1, p2)
 		-- upvalues: CreatorApiHttpModule (copy), collectionUrl (copy)
-		return CreatorApiHttpModule.get(p2, ("%s/prices"):format(collectionUrl(CreatorApiHttpModule.baseUrl(p2), p1)), "developer-subscription.prices", function(p3) --[[ Line: 170 ]]
+		return CreatorApiHttpModule.get(p2, ("%s/prices"):format(collectionUrl(CreatorApiHttpModule.baseUrl(p2), p1)), "developer-subscription.prices", function(p3)
 			return { priceTierPrices = p3.priceTierPrices or {} }
 		end)
 	end,
-	list = function(UniverseId, p1) --[[ Line: 192 ]]
+	list = function(UniverseId, p1)
 		-- upvalues: listPage (copy), PromiseModule (copy)
 		local DeveloperSubscriptions = {}
 		local t = {}
 		local t1 = {}
 		
-		local function fetchNext(Cursor, p2) --[[ Line: 200 ]]
+		local function fetchNext(Cursor, p2)
 			-- upvalues: listPage (upval), UniverseId (copy), p1 (copy), t1 (copy), DeveloperSubscriptions (copy), PromiseModule (upval), t (copy), fetchNext (copy)
-			return listPage(UniverseId, Cursor, p1):andThen(function(Result) --[[ Line: 201 ]]
+			return listPage(UniverseId, Cursor, p1):andThen(function(Result)
 				-- upvalues: UniverseId (upval), t1 (upval), DeveloperSubscriptions (upval), PromiseModule (upval), t (upval), p2 (copy), fetchNext (upval)
 				for _, developerSubscription in Result.developerSubscriptions do
 					local Copy = table.clone(developerSubscription)
@@ -176,9 +176,9 @@ return {
 		
 		return fetchNext(nil, 1)
 	end,
-	get = function(UniverseId, PermissionName, p2) --[[ Line: 244 ]]
+	get = function(UniverseId, PermissionName, p2)
 		-- upvalues: CreatorApiHttpModule (copy)
-		return CreatorApiHttpModule.get(p2, ("%s/%s"):format(("%s/experience-subscriptions/v1/experiences/%d/experience-subscriptions"):format(CreatorApiHttpModule.baseUrl(p2), UniverseId), PermissionName), "developer-subscription.get", function(Tbl) --[[ Line: 253 ]]
+		return CreatorApiHttpModule.get(p2, ("%s/%s"):format(("%s/experience-subscriptions/v1/experiences/%d/experience-subscriptions"):format(CreatorApiHttpModule.baseUrl(p2), UniverseId), PermissionName), "developer-subscription.get", function(Tbl)
 			-- upvalues: PermissionName (copy), UniverseId (copy)
 			local Copy = table.clone(Tbl)
 			
@@ -193,7 +193,7 @@ return {
 			return Copy
 		end)
 	end,
-	create = function(p2, p3, p4) --[[ Line: 269 ]]
+	create = function(p2, p3, p4)
 		-- upvalues: CreatorApiHttpModule (copy), v9 (copy)
 		return CreatorApiHttpModule.json(CreatorApiHttpModule.mutatingNetwork(p4), "POST", ("%s/experience-subscriptions/v1/experiences/%d/experience-subscriptions"):format(CreatorApiHttpModule.baseUrl(p4), p2), {
 			productName = p3.name,
@@ -205,9 +205,9 @@ return {
 			isRegionalPricingEnabled = p3.isRegionalPricingEnabled
 		}, "developer-subscription.create", v9)
 	end,
-	update = function(p2, Id, p3, p4) --[[ Line: 292 ]]
+	update = function(p2, Id, p3, p4)
 		-- upvalues: CreatorApiHttpModule (copy)
-		local function v32() --[[ Line: 311 ]]
+		local function v32()
 			-- upvalues: Id (copy), p3 (copy)
 			return {
 				id = Id,
@@ -218,7 +218,7 @@ return {
 			}
 		end
 		
-		local JsonDecoderResult = CreatorApiHttpModule.jsonDecoder(function(p5) --[[ Line: 74 ]]
+		local JsonDecoderResult = CreatorApiHttpModule.jsonDecoder(function(p5)
 			return p5
 		end)
 		
@@ -229,7 +229,7 @@ return {
 			currencyType = p3.currencyType,
 			priceInRobux = p3.priceInRobux,
 			isRegionalPricingEnabled = p3.isRegionalPricingEnabled
-		}, "developer-subscription.update", function(p5) --[[ Line: 77 ]]
+		}, "developer-subscription.update", function(p5)
 			-- upvalues: JsonDecoderResult (copy), v32 (copy)
 			local v1, v2, v3 = JsonDecoderResult(p5)
 			
@@ -247,16 +247,16 @@ return {
 			end
 		end)
 	end,
-	uploadImage = function(p2, Id, p3, p4, p5) --[[ Line: 323 ]]
+	uploadImage = function(p2, Id, p3, p4, p5)
 		-- upvalues: CreatorApiHttpModule (copy), subscriptionUrl (copy)
-		local JsonDecoderResult = CreatorApiHttpModule.jsonDecoder(function(p6) --[[ Line: 98 ]]
+		local JsonDecoderResult = CreatorApiHttpModule.jsonDecoder(function(p6)
 			return p6
 		end)
 		
 		return CreatorApiHttpModule.multipart(CreatorApiHttpModule.mutatingNetwork(p5), "POST", ("%s/upload-image"):format(subscriptionUrl(CreatorApiHttpModule.baseUrl(p5), p2, Id)), {
 			{ name = "ActingUserId", value = tostring(p3) },
 			CreatorApiHttpModule.imagePart(p4)
-		}, "developer-subscription.upload-image", function(p6) --[[ Line: 101 ]]
+		}, "developer-subscription.upload-image", function(p6)
 			-- upvalues: JsonDecoderResult (copy), Id (copy)
 			local v1, v2, v3 = JsonDecoderResult(p6)
 			
@@ -274,18 +274,18 @@ return {
 			end
 		end)
 	end,
-	activate = function(p2, Id, p3) --[[ Line: 340 ]]
+	activate = function(p2, Id, p3)
 		-- upvalues: CreatorApiHttpModule (copy), subscriptionUrl (copy)
-		local function v35() --[[ Line: 351 ]]
+		local function v35()
 			-- upvalues: Id (copy)
 			return { id = Id }
 		end
 		
-		local JsonDecoderResult = CreatorApiHttpModule.jsonDecoder(function(p4) --[[ Line: 74 ]]
+		local JsonDecoderResult = CreatorApiHttpModule.jsonDecoder(function(p4)
 			return p4
 		end)
 		
-		return CreatorApiHttpModule.json(CreatorApiHttpModule.mutatingNetwork(p3), "POST", ("%s/activate"):format(subscriptionUrl(CreatorApiHttpModule.baseUrl(p3), p2, Id)), nil, "developer-subscription.activate", function(p4) --[[ Line: 77 ]]
+		return CreatorApiHttpModule.json(CreatorApiHttpModule.mutatingNetwork(p3), "POST", ("%s/activate"):format(subscriptionUrl(CreatorApiHttpModule.baseUrl(p3), p2, Id)), nil, "developer-subscription.activate", function(p4)
 			-- upvalues: JsonDecoderResult (copy), v35 (copy)
 			local v1, v2, v3 = JsonDecoderResult(p4)
 			
@@ -303,18 +303,18 @@ return {
 			end
 		end)
 	end,
-	deactivate = function(p2, Id, p3, p4) --[[ Line: 357 ]]
+	deactivate = function(p2, Id, p3, p4)
 		-- upvalues: CreatorApiHttpModule (copy), subscriptionUrl (copy)
-		local function v37() --[[ Line: 373 ]]
+		local function v37()
 			-- upvalues: Id (copy)
 			return { id = Id }
 		end
 		
-		local JsonDecoderResult = CreatorApiHttpModule.jsonDecoder(function(p5) --[[ Line: 74 ]]
+		local JsonDecoderResult = CreatorApiHttpModule.jsonDecoder(function(p5)
 			return p5
 		end)
 		
-		return CreatorApiHttpModule.json(CreatorApiHttpModule.mutatingNetwork(p4), "POST", CreatorApiHttpModule.withQuery(("%s/deactivate"):format(subscriptionUrl(CreatorApiHttpModule.baseUrl(p4), p2, Id)), { cancelRenewals = tostring(p3) }), nil, "developer-subscription.deactivate", function(p5) --[[ Line: 77 ]]
+		return CreatorApiHttpModule.json(CreatorApiHttpModule.mutatingNetwork(p4), "POST", CreatorApiHttpModule.withQuery(("%s/deactivate"):format(subscriptionUrl(CreatorApiHttpModule.baseUrl(p4), p2, Id)), { cancelRenewals = tostring(p3) }), nil, "developer-subscription.deactivate", function(p5)
 			-- upvalues: JsonDecoderResult (copy), v37 (copy)
 			local v1, v2, v3 = JsonDecoderResult(p5)
 			
@@ -332,18 +332,18 @@ return {
 			end
 		end)
 	end,
-	delete = function(p2, Id, p3) --[[ Line: 379 ]]
+	delete = function(p2, Id, p3)
 		-- upvalues: CreatorApiHttpModule (copy)
-		local function v39() --[[ Line: 390 ]]
+		local function v39()
 			-- upvalues: Id (copy)
 			return { id = Id }
 		end
 		
-		local JsonDecoderResult = CreatorApiHttpModule.jsonDecoder(function(p4) --[[ Line: 74 ]]
+		local JsonDecoderResult = CreatorApiHttpModule.jsonDecoder(function(p4)
 			return p4
 		end)
 		
-		return CreatorApiHttpModule.json(CreatorApiHttpModule.mutatingNetwork(p3), "DELETE", ("%s/%s"):format(("%s/experience-subscriptions/v1/experiences/%d/experience-subscriptions"):format(CreatorApiHttpModule.baseUrl(p3), p2), Id), nil, "developer-subscription.delete", function(p4) --[[ Line: 77 ]]
+		return CreatorApiHttpModule.json(CreatorApiHttpModule.mutatingNetwork(p3), "DELETE", ("%s/%s"):format(("%s/experience-subscriptions/v1/experiences/%d/experience-subscriptions"):format(CreatorApiHttpModule.baseUrl(p3), p2), Id), nil, "developer-subscription.delete", function(p4)
 			-- upvalues: JsonDecoderResult (copy), v39 (copy)
 			local v1, v2, v3 = JsonDecoderResult(p4)
 			

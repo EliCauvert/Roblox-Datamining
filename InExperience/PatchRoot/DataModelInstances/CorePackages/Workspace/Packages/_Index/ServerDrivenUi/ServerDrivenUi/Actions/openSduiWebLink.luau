@@ -7,14 +7,14 @@ local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local SduiCounterName = SduiCoreSystemModule.SduiErrors.SduiCounterName
 
-local function _() --[[ Line: 16 | Named "isWebViewSupported" ]]
+local function _()
 	-- upvalues: GetAppFeaturePoliciesFunction (copy)
 	return GetAppFeaturePoliciesFunction().getWebViewSupport()
 end
 
-return function(p1, Text, TitleKey, Callback) --[[ Line: 23 | Named "openSduiWebLink" ]]
+return function(p1, Text, TitleKey, Callback)
 	-- upvalues: UrlBuilder (copy), SduiErrorType (copy), DeepLinkSource (copy), GetAppFeaturePoliciesFunction (copy), AppPage (copy), SduiCounterName (copy)
-	local Success, Result = pcall(function() --[[ Line: 26 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: UrlBuilder (upval), Text (copy)
 		return UrlBuilder.fromString(if string.find(Text, "/") == 1 then Text:gsub("/", "www:", 1) else Text)()
 	end)
@@ -30,9 +30,9 @@ return function(p1, Text, TitleKey, Callback) --[[ Line: 23 | Named "openSduiWeb
 		}, p1.appPage)
 	end
 	local LinkingProtocol = p1.dependencies.linkingProtocol
-	local Success1, Result1 = pcall(function() --[[ Line: 41 ]]
+	local Success1, Result1 = pcall(function()
 		-- upvalues: LinkingProtocol (copy), Detail (ref), DeepLinkSource (upval), GetAppFeaturePoliciesFunction (upval), p1 (copy), TitleKey (copy), Callback (copy), AppPage (upval), SduiCounterName (upval)
-		LinkingProtocol:isURLRegistered(Detail):andThen(function(Result) --[[ Line: 42 ]]
+		LinkingProtocol:isURLRegistered(Detail):andThen(function(Result)
 			-- upvalues: LinkingProtocol (upval), Detail (upval), DeepLinkSource (upval), GetAppFeaturePoliciesFunction (upval), p1 (upval), TitleKey (upval), Callback (upval), AppPage (upval), SduiCounterName (upval)
 			if not Result then
 				if not GetAppFeaturePoliciesFunction().getWebViewSupport() then
@@ -44,7 +44,7 @@ return function(p1, Text, TitleKey, Callback) --[[ Line: 23 | Named "openSduiWeb
 				local ExtraProps = { titleKey = TitleKey }
 				
 				if Callback then
-					function ExtraProps.onClose() --[[ Line: 54 ]]
+					function ExtraProps.onClose()
 						-- upvalues: Callback (upval)
 						Callback()
 					end

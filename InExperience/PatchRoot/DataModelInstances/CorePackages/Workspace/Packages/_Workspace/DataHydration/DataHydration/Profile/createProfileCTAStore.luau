@@ -13,7 +13,7 @@ local FFlagProfileCTAHydratePresenceFromMetadataModule = require(DataHydration.F
 local FFlagJoinabilityCTARefactor = require(Parent.SharedFlags).FFlagJoinabilityCTARefactor
 game:DefineFastInt("ProfileCTAStoreProcessDelaySec", 1)
 
-local function _() --[[ Line: 59 ]]
+local function _()
 	return game:GetFastInt("ProfileCTAStoreProcessDelaySec")
 end
 
@@ -23,18 +23,18 @@ local list = {
 }
 local list1 = { { component = "JoinUserActions" } }
 
-return function(p1) --[[ Line: 80 | Named "createProfileCTAStore" ]]
+return function(p1)
 	-- upvalues: CreateDataCacheModule (copy), FFlagJoinabilityCTARefactor (copy), list (copy), CryoModule (copy), RequestsModule (copy), FFlagProfileCTAHydratePresenceFromMetadataModule (copy), HydratePresenceFromProfileMetadataModule (copy), CreateDataResolverModule (copy), ProfileJoinUserActionsProcessDelaySec (copy), NewResult (copy), list1 (copy), DataHydration (copy), PromiseModule (copy)
 	local DataCacheModule = CreateDataCacheModule()
 	local DataCacheModule1 = if FFlagJoinabilityCTARefactor then CreateDataCacheModule() else nil
 	local Components = if FFlagJoinabilityCTARefactor and p1 and p1.components then p1.components else list
 	local Component = if FFlagJoinabilityCTARefactor and Components[1] then Components[1].component else "Actions"
 	
-	local function fetchComponent(p2, Components, Component, p3) --[[ Line: 95 ]]
+	local function fetchComponent(p2, Components, Component, p3)
 		-- upvalues: CryoModule (upval), RequestsModule (upval), FFlagProfileCTAHydratePresenceFromMetadataModule (upval), HydratePresenceFromProfileMetadataModule (upval)
 		local KeysResult = CryoModule.Dictionary.keys(p2)
 		
-		return RequestsModule.GetUserProfileCTA(KeysResult, Components):andThen(function(Result) --[[ Line: 102 ]]
+		return RequestsModule.GetUserProfileCTA(KeysResult, Components):andThen(function(Result)
 			-- upvalues: KeysResult (copy), Component (copy), FFlagProfileCTAHydratePresenceFromMetadataModule (upval), p3 (copy), HydratePresenceFromProfileMetadataModule (upval)
 			local Components = {}
 			
@@ -57,14 +57,14 @@ return function(p1) --[[ Line: 80 | Named "createProfileCTAStore" ]]
 		requestBatchSize = 25,
 		cache = DataCacheModule,
 		queueProcessDelaySec = game:GetFastInt("ProfileCTAStoreProcessDelaySec"),
-		fetchFn = function(p4) --[[ Line: 126 ]]
+		fetchFn = function(p4)
 			-- upvalues: FFlagJoinabilityCTARefactor (upval), fetchComponent (copy), Components (copy), Component (copy), CryoModule (upval), RequestsModule (upval), FFlagProfileCTAHydratePresenceFromMetadataModule (upval), HydratePresenceFromProfileMetadataModule (upval)
 			if FFlagJoinabilityCTARefactor then
 				return fetchComponent(p4, Components, Component, true)
 			else
 				local KeysResult = CryoModule.Dictionary.keys(p4)
 				
-				return RequestsModule.GetUserProfileCTA(KeysResult):andThen(function(Result) --[[ Line: 133 ]]
+				return RequestsModule.GetUserProfileCTA(KeysResult):andThen(function(Result)
 					-- upvalues: KeysResult (copy), FFlagProfileCTAHydratePresenceFromMetadataModule (upval), HydratePresenceFromProfileMetadataModule (upval)
 					local t = {}
 					
@@ -80,7 +80,7 @@ return function(p1) --[[ Line: 80 | Named "createProfileCTAStore" ]]
 						end
 					end
 					return t
-				end):catch(function(_) --[[ Line: 151 ]]
+				end):catch(function(_)
 					return {}
 				end)
 			end
@@ -91,18 +91,18 @@ return function(p1) --[[ Line: 80 | Named "createProfileCTAStore" ]]
 		replaceItems = true,
 		cache = DataCacheModule1,
 		queueProcessDelaySec = ProfileJoinUserActionsProcessDelaySec,
-		logError = function(p5) --[[ Line: 163 ]]
+		logError = function(p5)
 			-- upvalues: NewResult (upval)
 			NewResult:warning(`Failed to fetch JoinUserActions: {tostring(p5)}`)
 		end,
-		fetchFn = function(p5) --[[ Line: 166 ]]
+		fetchFn = function(p5)
 			-- upvalues: list1 (upval), CryoModule (upval), RequestsModule (upval), FFlagProfileCTAHydratePresenceFromMetadataModule (upval), HydratePresenceFromProfileMetadataModule (upval), DataHydration (upval), PromiseModule (upval)
 			local Component = list1[1].component
 			local KeysResult = CryoModule.Dictionary.keys(p5)
 			local v1 = true
 			local JoinUserActionsTelemetryModule = require(DataHydration.Profile.JoinUserActionsTelemetry)
 			
-			return RequestsModule.GetUserProfileCTA(KeysResult, list1):andThen(function(Result) --[[ Line: 102 ]]
+			return RequestsModule.GetUserProfileCTA(KeysResult, list1):andThen(function(Result)
 				-- upvalues: KeysResult (copy), Component (copy), FFlagProfileCTAHydratePresenceFromMetadataModule (upval), v1 (copy), HydratePresenceFromProfileMetadataModule (upval)
 				local Components = {}
 				
@@ -118,12 +118,12 @@ return function(p1) --[[ Line: 80 | Named "createProfileCTAStore" ]]
 					end
 				end
 				return Components
-			end):andThen(function(Result) --[[ Line: 177 ]]
+			end):andThen(function(Result)
 				-- upvalues: JoinUserActionsTelemetryModule (copy)
 				JoinUserActionsTelemetryModule.logFetchResult("Success")
 				
 				return Result
-			end):catch(function(Err) --[[ Line: 181 ]]
+			end):catch(function(Err)
 				-- upvalues: JoinUserActionsTelemetryModule (copy), PromiseModule (upval)
 				JoinUserActionsTelemetryModule.logFetchResult("Failed")
 				
@@ -133,28 +133,28 @@ return function(p1) --[[ Line: 80 | Named "createProfileCTAStore" ]]
 	}) else nil
 	
 	return {
-		getCTA = function(p6, Enabled) --[[ Line: 189 ]]
+		getCTA = function(p6, Enabled)
 			-- upvalues: DataResolverModule (copy)
 			local v2: ((any) -> any)? = nil
 			
 			if Enabled ~= nil then
 				local IsEnabled = Enabled == true
 				
-				v2 = function(_) --[[ Line: 193 ]]
+				v2 = function(_)
 					-- upvalues: IsEnabled (copy)
 					return IsEnabled
 				end
 			end
 			return DataResolverModule.getAndFetchItem(p6, v2)
 		end,
-		getBatchCTAs = function(p6, p7) --[[ Line: 200 ]]
+		getBatchCTAs = function(p6, p7)
 			-- upvalues: DataResolverModule (copy)
 			local v2: ((any) -> boolean)? = nil
 			
 			if p7 then
 				local Count = 0
 				
-				v2 = function(_): boolean --[[ Line: 207 ]]
+				v2 = function(_): boolean
 					-- upvalues: Count (ref), p6 (copy), p7 (copy)
 					Count += 1
 					local v3 = p6[Count]
@@ -164,21 +164,21 @@ return function(p1) --[[ Line: 80 | Named "createProfileCTAStore" ]]
 			end
 			return DataResolverModule.getAndFetchItems(p6, v2)
 		end,
-		getJoinUserActions = if FFlagJoinabilityCTARefactor then function(p6, Enabled) --[[ Line: 220 ]]
+		getJoinUserActions = if FFlagJoinabilityCTARefactor then function(p6, Enabled)
 			-- upvalues: DataResolverModule1 (copy)
 			local v2: ((any) -> any)? = nil
 			
 			if Enabled ~= nil then
 				local IsEnabled = Enabled == true
 				
-				v2 = function(_) --[[ Line: 224 ]]
+				v2 = function(_)
 					-- upvalues: IsEnabled (copy)
 					return IsEnabled
 				end
 			end
 			return DataResolverModule1.getAndFetchItem(p6, v2)
 		end else nil,
-		clear = function() --[[ Line: 232 ]]
+		clear = function()
 			-- upvalues: DataCacheModule (copy), DataResolverModule (copy), FFlagJoinabilityCTARefactor (upval), DataCacheModule1 (copy), DataResolverModule1 (copy)
 			DataCacheModule.clear()
 			DataResolverModule.clear()
@@ -188,7 +188,7 @@ return function(p1) --[[ Line: 80 | Named "createProfileCTAStore" ]]
 				DataResolverModule1.clear()
 			end
 		end,
-		dispose = function() --[[ Line: 241 ]]
+		dispose = function()
 			-- upvalues: DataResolverModule (copy), FFlagJoinabilityCTARefactor (upval), DataResolverModule1 (copy)
 			DataResolverModule.dispose()
 			

@@ -1,22 +1,22 @@
 ﻿local ArraySetModule = {}
 
-function ArraySetModule.__index(p1, p2) --[[ Line: 55 ]]
+function ArraySetModule.__index(p1, p2)
 	-- upvalues: ArraySetModule (copy)
 	return if type(p2) == "number" then p1:at(p2) else ArraySetModule[p2]
 end
 
-function ArraySetModule:__len() --[[ Line: 63 ]]
+function ArraySetModule:__len()
 	return self:size()
 end
 
-function ArraySetModule:__newindex(p1, p2) --[[ Line: 67 ]]
+function ArraySetModule:__newindex(p1, p2)
 	self._indexToValue[p1] = p2
 end
 
-function ArraySetModule.__iter(p1) --[[ Line: 71 ]]
+function ArraySetModule.__iter(p1)
 	local Count = 0
 	
-	return function() --[[ Line: 73 ]]
+	return function()
 		-- upvalues: Count (ref), p1 (copy)
 		Count += 1
 		
@@ -24,7 +24,7 @@ function ArraySetModule.__iter(p1) --[[ Line: 71 ]]
 	end
 end
 
-function ArraySetModule:add(p1): boolean --[[ Line: 83 ]]
+function ArraySetModule:add(p1): boolean
 	if self._valueToIndex[p1] then
 		return false
 	else
@@ -37,7 +37,7 @@ function ArraySetModule:add(p1): boolean --[[ Line: 83 ]]
 	end
 end
 
-function ArraySetModule:prependAll(List): boolean --[[ Line: 101 ]]
+function ArraySetModule:prependAll(List): boolean
 	local List1 = {}
 	local t = {}
 	
@@ -66,7 +66,7 @@ function ArraySetModule:prependAll(List): boolean --[[ Line: 101 ]]
 	return true
 end
 
-function ArraySetModule:remove(p1): boolean --[[ Line: 136 ]]
+function ArraySetModule:remove(p1): boolean
 	if not self._valueToIndex[p1] then
 		return false
 	end
@@ -83,42 +83,42 @@ function ArraySetModule:remove(p1): boolean --[[ Line: 136 ]]
 	return true
 end
 
-function ArraySetModule:has(p2): boolean --[[ Line: 159 ]]
+function ArraySetModule:has(p2): boolean
 	return self._valueToIndex[p2] ~= nil
 end
 
-function ArraySetModule:clear() --[[ Line: 163 ]]
+function ArraySetModule:clear()
 	self._valueToIndex = {}
 	self._indexToValue = {}
 	self._size = 0
 end
 
-function ArraySetModule:size() --[[ Line: 169 ]]
+function ArraySetModule:size()
 	return self._size
 end
 
-function ArraySetModule.at(p2, p3: number) --[[ Line: 174 ]]
+function ArraySetModule.at(p2, p3: number)
 	return if p3 < 1 or p2._size < p3 then nil else p2._indexToValue[p3]
 end
 
-function ArraySetModule:indexOf(p2) --[[ Line: 183 ]]
+function ArraySetModule:indexOf(p2)
 	return self._valueToIndex[p2]
 end
 
-function ArraySetModule:toArray() --[[ Line: 188 ]]
+function ArraySetModule:toArray()
 	return table.clone(self._indexToValue)
 end
 
-function ArraySetModule:values() --[[ Line: 194 ]]
+function ArraySetModule:values()
 	return self._indexToValue
 end
 
-function ArraySetModule:clone() --[[ Line: 199 ]]
+function ArraySetModule:clone()
 	-- upvalues: ArraySetModule (copy)
 	return ArraySetModule.new(self._indexToValue)
 end
 
-function ArraySetModule.new(IndexToValue) --[[ Line: 203 ]]
+function ArraySetModule.new(IndexToValue)
 	-- upvalues: ArraySetModule (copy)
 	local self = setmetatable({ _size = 0, _valueToIndex = {}, _indexToValue = {} }, ArraySetModule)
 	

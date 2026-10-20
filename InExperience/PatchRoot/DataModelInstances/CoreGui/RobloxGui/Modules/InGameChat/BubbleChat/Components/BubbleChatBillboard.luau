@@ -45,7 +45,7 @@ BubbleChatBillboard.validateProps = TModule.strictInterface({
 	voiceState = TModule.optional(TModule.string)
 })
 
-function getEasierUnmutingDistance(p1) --[[ Line: 72 ]]
+function getEasierUnmutingDistance(p1)
 	-- upvalues: Players (copy), EasierUnmutingBasedOnCamera (copy)
 	if p1 then
 		local HumanoidRootPart = Players.LocalPlayer and (Players.LocalPlayer.Character and Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart"))
@@ -58,7 +58,7 @@ function getEasierUnmutingDistance(p1) --[[ Line: 72 ]]
 	end
 end
 
-function BubbleChatBillboard.init(p1) --[[ Line: 98 ]]
+function BubbleChatBillboard.init(p1)
 	-- upvalues: PublicApiModule (copy), StarterGui (copy), EasierUnmuting3 (copy), EasierUnmutingHideIfMuted (copy), RoactModule (copy), OtterModule (copy), Players (copy), ConstantsModule (copy), Default (copy), GetFFlagMicConnectingToastModule (copy), ConstantsModule1 (copy), VoiceIndicatorModule (copy), SelfViewVisibilityUpdatedSignalModule (copy), IXPServiceWrapper (copy), EasierUnmutingIXPLayerName (copy), EasierUnmutingIXPLayerValue (copy)
 	p1:setState({
 		adornee = nil,
@@ -78,20 +78,20 @@ function BubbleChatBillboard.init(p1) --[[ Line: 98 ]]
 	p1.isMounted = false
 	p1.offset, p1.updateOffset = RoactModule.createBinding((Vector3.new()))
 	p1.offsetMotor = OtterModule.createSingleMotor(0)
-	p1.offsetMotor:onStep(function(Y) --[[ Line: 121 ]]
+	p1.offsetMotor:onStep(function(Y)
 		-- upvalues: p1 (copy)
 		p1.updateOffset((Vector3.new(0, Y, 0)))
 	end)
 	p1.offsetGoal = 0
 	
-	function p1.onSelfViewVisibilityUpdated() --[[ Line: 126 ]]
+	function p1.onSelfViewVisibilityUpdated()
 		-- upvalues: p1 (copy), PublicApiModule (upval)
 		p1:setState({
 			selfViewOpen = PublicApiModule.getSelfViewIsOpenAndVisible()
 		})
 	end
 	
-	function p1.onLastBubbleFadeOut() --[[ Line: 132 ]]
+	function p1.onLastBubbleFadeOut()
 		-- upvalues: p1 (copy)
 		if p1.props.onFadeOut and not p1.isFadingOut then
 			p1.isFadingOut = true
@@ -104,7 +104,7 @@ function BubbleChatBillboard.init(p1) --[[ Line: 98 ]]
 	
 	if p1.props.voiceEnabled then
 		local OnClicked = nil
-		OnClicked = if p1.props.userId == tostring(Players.LocalPlayer.UserId) then function() --[[ Line: 148 ]]
+		OnClicked = if p1.props.userId == tostring(Players.LocalPlayer.UserId) then function()
 			-- upvalues: p1 (copy), ConstantsModule (upval), Default (upval), GetFFlagMicConnectingToastModule (upval)
 			if p1.props.voiceState == ConstantsModule.VOICE_STATE.ERROR then
 				Default:RejoinPreviousChannel()
@@ -118,14 +118,14 @@ function BubbleChatBillboard.init(p1) --[[ Line: 98 ]]
 			else
 				Default:ToggleMic("LegacyBubbleChat")
 			end
-		end else function() --[[ Line: 158 ]]
+		end else function()
 			-- upvalues: Default (upval), p1 (copy), ConstantsModule1 (upval)
 			Default:ToggleMutePlayer(tonumber(p1.props.userId), if p1:isShowingDueToEasierUnmuting() then ConstantsModule1.VOICE_CONTEXT_TYPE.EASIER_UNMUTING else ConstantsModule1.VOICE_CONTEXT_TYPE.BUBBLE_CHAT)
 		end
 		local UserId = p1.props.userId
 		local MicDark: string = if UserId == tostring(Players.LocalPlayer.UserId) then "MicDark" else "SpeakerDark"
 		
-		function p1.renderInsert() --[[ Line: 172 ]]
+		function p1.renderInsert()
 			-- upvalues: RoactModule (upval), VoiceIndicatorModule (upval), OnClicked (ref), UserId (copy), MicDark (copy)
 			return RoactModule.createElement(VoiceIndicatorModule, {
 				onClicked = OnClicked,
@@ -136,7 +136,7 @@ function BubbleChatBillboard.init(p1) --[[ Line: 98 ]]
 		
 		p1.insertSize = Vector2.new(28, 28)
 	end
-	function p1.onCoreGuiChanged() --[[ Line: 183 ]]
+	function p1.onCoreGuiChanged()
 		-- upvalues: StarterGui (upval), p1 (copy)
 		local CoreGuiEnabled = StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.SelfView)
 		
@@ -145,7 +145,7 @@ function BubbleChatBillboard.init(p1) --[[ Line: 98 ]]
 		end
 	end
 	
-	p1.selfViewVisibilityUpdatedSignal = SelfViewVisibilityUpdatedSignalModule:connect(function() --[[ Line: 192 ]]
+	p1.selfViewVisibilityUpdatedSignal = SelfViewVisibilityUpdatedSignalModule:connect(function()
 		-- upvalues: p1 (copy), PublicApiModule (upval)
 		p1:setState({
 			selfViewOpen = PublicApiModule.getSelfViewIsOpenAndVisible()
@@ -153,7 +153,7 @@ function BubbleChatBillboard.init(p1) --[[ Line: 98 ]]
 	end)
 	
 	if EasierUnmuting3 then
-		local Success, Result = pcall(function() --[[ Line: 199 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: IXPServiceWrapper (upval), EasierUnmutingIXPLayerName (upval)
 			return IXPServiceWrapper:GetLayerData(EasierUnmutingIXPLayerName)
 		end)
@@ -163,7 +163,7 @@ function BubbleChatBillboard.init(p1) --[[ Line: 98 ]]
 		end
 	end
 	if EasierUnmuting3 and p1.state.isInEasierUnmutingTreatment and EasierUnmutingHideIfMuted then
-		p1.participantsUpdateConnection = Default.participantsUpdate.Event:Connect(function(p2) --[[ Line: 216 ]]
+		p1.participantsUpdateConnection = Default.participantsUpdate.Event:Connect(function(p2)
 			-- upvalues: p1 (copy)
 			local v2 = p2[p1.props.userId]
 			
@@ -175,16 +175,16 @@ function BubbleChatBillboard.init(p1) --[[ Line: 98 ]]
 	end
 end
 
-function BubbleChatBillboard.isShowingDueToEasierUnmuting(p1): boolean --[[ Line: 233 ]]
+function BubbleChatBillboard.isShowingDueToEasierUnmuting(p1): boolean
 	-- upvalues: EasierUnmuting3 (copy), ConstantsModule (copy), EasierUnmutingHideIfMuted (copy)
 	return EasierUnmuting3 and (p1.state.isInEasierUnmutingTreatment and (p1.props.voiceState == ConstantsModule.VOICE_STATE.LOCAL_MUTED and (p1.state.isInsideEasierUnmutingDistance and not (EasierUnmutingHideIfMuted and p1.state.isMuted))))
 end
 
-function BubbleChatBillboard.checkCounterForTimeout(p1, VoiceStateCounter) --[[ Line: 241 ]]
+function BubbleChatBillboard.checkCounterForTimeout(p1, VoiceStateCounter)
 	-- upvalues: Players (copy), ConstantsModule (copy), BubbleVoiceTimeoutMillis (copy)
 	if p1.props.userId ~= tostring(Players.LocalPlayer.UserId) and p1.state.lastVoiceState ~= ConstantsModule.VOICE_STATE.TALKING and p1.state.voiceStateCounter ~= VoiceStateCounter then
 		local VoiceStateCounter1 = p1.state.voiceStateCounter
-		delay(BubbleVoiceTimeoutMillis / 1000, function() --[[ Line: 250 ]]
+		delay(BubbleVoiceTimeoutMillis / 1000, function()
 			-- upvalues: p1 (copy), VoiceStateCounter1 (copy)
 			if p1.state.voiceStateCounter == VoiceStateCounter1 and p1.isMounted then
 				p1:setState({ voiceTimedOut = true })
@@ -193,7 +193,7 @@ function BubbleChatBillboard.checkCounterForTimeout(p1, VoiceStateCounter) --[[ 
 	end
 end
 
-function BubbleChatBillboard.checkCounterForTimeoutWithEasierUnmuting(p1, p2) --[[ Line: 261 ]]
+function BubbleChatBillboard.checkCounterForTimeoutWithEasierUnmuting(p1, p2)
 	-- upvalues: EasierUnmuting3 (copy), Players (copy), ConstantsModule (copy), BubbleVoiceTimeoutMillis (copy)
 	local VoiceStateCounter = if p2 then p2.voiceStateCounter else nil
 	
@@ -205,7 +205,7 @@ function BubbleChatBillboard.checkCounterForTimeoutWithEasierUnmuting(p1, p2) --
 	
 	if p1.props.userId ~= tostring(Players.LocalPlayer.UserId) and IsNotVoiceStateCounterMatch and IsNotLastVoiceStateMatch then
 		local VoiceStateCounter1 = p1.state.voiceStateCounter
-		delay(BubbleVoiceTimeoutMillis / 1000, function() --[[ Line: 279 ]]
+		delay(BubbleVoiceTimeoutMillis / 1000, function()
 			-- upvalues: p1 (copy), VoiceStateCounter1 (copy)
 			if p1.state.voiceStateCounter == VoiceStateCounter1 and p1.isMounted then
 				p1:setState({ voiceTimedOut = true })
@@ -214,7 +214,7 @@ function BubbleChatBillboard.checkCounterForTimeoutWithEasierUnmuting(p1, p2) --
 	end
 end
 
-function BubbleChatBillboard.didMount(p1) --[[ Line: 292 ]]
+function BubbleChatBillboard.didMount(p1)
 	-- upvalues: OtterModule (copy), Players (copy), RunService (copy), EasierUnmuting3 (copy), EasierUnmutingDisplayDistance (copy), ConstantsModule (copy), config (copy)
 	p1.isMounted = true
 	local Adornee = p1.props.lastMessage and p1.props.lastMessage.adornee
@@ -231,17 +231,17 @@ function BubbleChatBillboard.didMount(p1) --[[ Line: 292 ]]
 	end
 	if Player then
 		if Player.Character then
-			coroutine.wrap(function() --[[ Line: 313 ]]
+			coroutine.wrap(function()
 				-- upvalues: p1 (copy), Player (ref)
 				p1:onCharacterAdded(Player, Player.Character)
 			end)()
 		end
-		p1.characterConn = Player.CharacterAdded:Connect(function(Character) --[[ Line: 317 ]]
+		p1.characterConn = Player.CharacterAdded:Connect(function(Character)
 			-- upvalues: p1 (copy), Player (ref)
 			p1:onCharacterAdded(Player, Character)
 		end)
 	end
-	p1.heartbeatConn = RunService.Heartbeat:Connect(function() --[[ Line: 323 ]]
+	p1.heartbeatConn = RunService.Heartbeat:Connect(function()
 		-- upvalues: p1 (copy), EasierUnmuting3 (upval), EasierUnmutingDisplayDistance (upval), ConstantsModule (upval), OtterModule (upval), config (upval)
 		local AdorneeInstance = p1:getAdorneeInstance(p1.state.adornee)
 		
@@ -282,7 +282,7 @@ function BubbleChatBillboard.didMount(p1) --[[ Line: 292 ]]
 	end
 end
 
-function BubbleChatBillboard.willUnmount(p1) --[[ Line: 368 ]]
+function BubbleChatBillboard.willUnmount(p1)
 	-- upvalues: v1 (copy), EasierUnmuting3 (copy), EasierUnmutingHideIfMuted (copy)
 	v1:trace("Unmounting billboards for {}", p1.state.shortId)
 	p1.isMounted = false
@@ -311,11 +311,11 @@ function BubbleChatBillboard.willUnmount(p1) --[[ Line: 368 ]]
 	end
 end
 
-local function waitForFirst(...) --[[ Line: 396 ]]
+local function waitForFirst(...)
 	local BindableEvent = Instance.new("BindableEvent")
 	local Connections = { ... }
 	
-	local function fire(...) --[[ Line: 400 ]]
+	local function fire(...)
 		-- upvalues: Connections (copy), BindableEvent (copy)
 		for i = 1, #Connections do
 			Connections[i]:Disconnect()
@@ -329,7 +329,7 @@ local function waitForFirst(...) --[[ Line: 396 ]]
 	return BindableEvent.Event:Wait()
 end
 
-local function findFirstChildByNameAndClass(Object, Name, ClassName) --[[ Line: 415 ]]
+local function findFirstChildByNameAndClass(Object, Name, ClassName)
 	for _, child in ipairs(Object:GetChildren()) do
 		if child.Name == Name and child:IsA(ClassName) then
 			return child
@@ -337,7 +337,7 @@ local function findFirstChildByNameAndClass(Object, Name, ClassName) --[[ Line: 
 	end
 end
 
-function BubbleChatBillboard.onCharacterAdded(p1, Player: Player, Object) --[[ Line: 424 ]]
+function BubbleChatBillboard.onCharacterAdded(p1, Player: Player, Object)
 	-- upvalues: waitForFirst (copy), v1 (copy), GetFFlagBubbleChatInexistantAdorneeFixModule (copy), findFirstChildByNameAndClass (copy)
 	if not Object.Parent then
 		waitForFirst(Object.AncestryChanged, Player.CharacterAdded)
@@ -370,7 +370,7 @@ function BubbleChatBillboard.onCharacterAdded(p1, Player: Player, Object) --[[ L
 			p1.humanoidDiedConn:Disconnect()
 			p1.humanoidDiedConn = nil
 		end
-		p1.humanoidDiedConn = Humanoid.Died:Connect(function() --[[ Line: 474 ]]
+		p1.humanoidDiedConn = Humanoid.Died:Connect(function()
 			-- upvalues: p1 (copy), findFirstChildByNameAndClass (upval), Object (copy)
 			p1:setState({
 				adornee = findFirstChildByNameAndClass(Object, "Head", "BasePart") or Object
@@ -379,7 +379,7 @@ function BubbleChatBillboard.onCharacterAdded(p1, Player: Player, Object) --[[ L
 	end
 end
 
-function BubbleChatBillboard.getVerticalOffset(p2, Model: Model) --[[ Line: 484 ]]
+function BubbleChatBillboard.getVerticalOffset(p2, Model: Model)
 	if Model and Model:IsA("Model") then
 		local BoundingCFrame, BoundingSize = Model:GetBoundingBox()
 		local AdorneeInstance = p2:getAdorneeInstance(Model)
@@ -390,7 +390,7 @@ function BubbleChatBillboard.getVerticalOffset(p2, Model: Model) --[[ Line: 484 
 	end
 end
 
-function BubbleChatBillboard.getAdorneeInstance(p2, Model) --[[ Line: 506 ]]
+function BubbleChatBillboard.getAdorneeInstance(p2, Model)
 	-- upvalues: GetFFlagBubbleChatInexistantAdorneeFixModule (copy)
 	if not Model then return end
 	if Model:IsA("Model") then
@@ -407,16 +407,16 @@ function BubbleChatBillboard.getAdorneeInstance(p2, Model) --[[ Line: 506 ]]
 	end
 end
 
-function BubbleChatBillboard.getRenderVoiceAndCameraBubble(p2): boolean --[[ Line: 522 ]]
+function BubbleChatBillboard.getRenderVoiceAndCameraBubble(p2): boolean
 	-- upvalues: DebugAllowControlButtonsNoVoiceChat (copy), Players (copy), VRService (copy), EnabledFunction (copy)
 	return if p2.props.voiceEnabled or DebugAllowControlButtonsNoVoiceChat then if p2.props.userId == tostring(Players.LocalPlayer.UserId) then not VRService.VREnabled and not EnabledFunction() and not p2.state.selfViewOpen else p2.props.voiceEnabled and not p2.state.voiceTimedOut else false
 end
 
-function BubbleChatBillboard.shouldRenderCarat(p2): boolean --[[ Line: 552 ]]
+function BubbleChatBillboard.shouldRenderCarat(p2): boolean
 	return p2.props.chatSettings.TailVisible and not p2:getRenderVoiceAndCameraBubble()
 end
 
-function BubbleChatBillboard.render(p2) --[[ Line: 556 ]]
+function BubbleChatBillboard.render(p2)
 	-- upvalues: Players (copy), v1 (copy), EasierUnmuting3 (copy), ConstantsModule (copy), EasierUnmutingHideIfMuted (copy), VRService (copy), EnabledFunction (copy), RoactModule (copy), VoiceBubbleModule (copy), BubbleChatListModule (copy), ChatBubbleDistantModule (copy)
 	local AdorneeInstance = p2:getAdorneeInstance(p2.state.adornee)
 	local IsUserIdMatch = p2.props.userId == tostring(Players.LocalPlayer.UserId)
@@ -483,7 +483,7 @@ function BubbleChatBillboard.render(p2) --[[ Line: 556 ]]
 	}, t)
 end
 
-function BubbleChatBillboard.didUpdate(p2, _, p3) --[[ Line: 652 ]]
+function BubbleChatBillboard.didUpdate(p2, _, p3)
 	-- upvalues: EasierUnmuting3 (copy), Players (copy), ConstantsModule (copy), IXPServiceWrapper (copy), EasierUnmutingIXPLayerName (copy)
 	if (not p2.props.messageIds or #p2.props.messageIds == 0) and not p2.state.isInsideRenderDistance then
 		p2.onLastBubbleFadeOut()
@@ -504,7 +504,7 @@ function BubbleChatBillboard.didUpdate(p2, _, p3) --[[ Line: 652 ]]
 	end
 end
 
-function BubbleChatBillboard.getDerivedStateFromProps(p2, DerivedStateFromProps) --[[ Line: 689 ]]
+function BubbleChatBillboard.getDerivedStateFromProps(p2, DerivedStateFromProps)
 	local Text = "..." .. string.sub(tostring(p2.userId), -4)
 	local v2: boolean = not DerivedStateFromProps.hasMessage and (p2.messageIds and #p2.messageIds > 0)
 	local VoiceState = nil
@@ -526,7 +526,7 @@ function BubbleChatBillboard.getDerivedStateFromProps(p2, DerivedStateFromProps)
 	}
 end
 
-return RoactRoduxModule.connect(function(p2, p3) --[[ Line: 719 | Named "mapStateToProps" ]]
+return RoactRoduxModule.connect(function(p2, p3)
 	-- upvalues: GetSettingsForMessageModule (copy)
 	local UserMessage = p2.userMessages[p3.userId]
 	local UserMessageEntry = UserMessage and (#UserMessage >= 1 and UserMessage[#UserMessage])

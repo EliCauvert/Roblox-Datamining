@@ -1,4 +1,4 @@
-﻿return function(List, LanguageCode) --[[ Line: 19 ]]
+﻿return function(List, LanguageCode)
 	if List == nil or LanguageCode == nil then
 		return nil
 	end

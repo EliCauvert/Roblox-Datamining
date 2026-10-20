@@ -5,19 +5,19 @@ local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local GetScrollingFrameStoreModule = require(PeopleReactView.Stores.GetScrollingFrameStore)
 
-local function _(p1, p2, p3, p4): boolean --[[ Line: 10 | Named "isGuiObjectOutOfScrollingFrameView" ]]
+local function _(p1, p2, p3, p4): boolean
 	return p1 + p2 < p3 or p3 + p4 < p1
 end
 
-return function(p1, Callback, p2) --[[ Line: 24 | Named "useDismissWhenOutOfView" ]]
+return function(p1, Callback, p2)
 	-- upvalues: SignalsReactModule (copy), GetScrollingFrameStoreModule (copy), ReactModule (copy), SignalsModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetScrollingFrameStoreModule)
-	ReactModule.useEffect(function() --[[ Line: 27 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), p2 (copy), UseSignalStateResult (copy), Callback (copy), SignalsModule (upval)
 		if not p1 then return end
 		local Flag = false
 		
-		local function dismissIfOutOfView() --[[ Line: 34 ]]
+		local function dismissIfOutOfView()
 			-- upvalues: Flag (ref), p2 (upval), UseSignalStateResult (upval), Callback (upval)
 			if Flag then return end
 			local Current = p2.current
@@ -35,7 +35,7 @@ return function(p1, Callback, p2) --[[ Line: 24 | Named "useDismissWhenOutOfView
 			end
 		end
 		
-		local Effect = SignalsModule.createEffect(function(p3) --[[ Line: 62 ]]
+		local Effect = SignalsModule.createEffect(function(p3)
 			-- upvalues: UseSignalStateResult (upval), dismissIfOutOfView (copy)
 			local _ = UseSignalStateResult.getCanvasPositionY(p3)
 			local _ = UseSignalStateResult.getAbsolutePositionY(p3)
@@ -44,7 +44,7 @@ return function(p1, Callback, p2) --[[ Line: 24 | Named "useDismissWhenOutOfView
 		end)
 		local Connection = if p2.current then p2.current:GetPropertyChangedSignal("AbsolutePosition"):Connect(dismissIfOutOfView) else nil
 		
-		return function() --[[ Line: 77 ]]
+		return function()
 			-- upvalues: Effect (copy), Connection (ref)
 			Effect()
 			

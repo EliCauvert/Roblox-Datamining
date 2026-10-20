@@ -3,7 +3,7 @@ local _ = require(script.Parent.Types)
 local SmartSuggestionsChipRowModule = require(script.Parent.SmartSuggestionsChipRow)
 local UseSmartSuggestionsModule = require(script.Parent.useSmartSuggestions)
 
-return ReactModule.memo(function(Frame) --[[ Line: 27 | Named "SmartSuggestionsChipRowContainer" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseSmartSuggestionsModule (copy), ReactModule (copy), SmartSuggestionsChipRowModule (copy)
 	local UseSmartSuggestionsModuleResult = UseSmartSuggestionsModule(Frame.conversationId, Frame.sendMessage, Frame.sendGameLinkChatMessage)
 	local Suggestions = Frame.suggestions or UseSmartSuggestionsModuleResult.suggestions

@@ -13,10 +13,10 @@ local FFlagLuaAppFixInlineSignalsReactPattern = require(Parent.SharedFlags).FFla
 local FFlagLuaAppSduiGameTileMetadataFontStyle = require(Parent.SharedFlags).FFlagLuaAppSduiGameTileMetadataFontStyle
 local FFlagSduiGameTileUseFooterComponentAsDefault = require(Parent.SharedFlags).FFlagSduiGameTileUseFooterComponentAsDefault
 
-return ReactModule.memo(function(p1) --[[ Line: 42 | Named "SduiGameTileFooter" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: SduiInGameFriendsDataModule (copy), FFlagLuaAppFixInlineSignalsReactPattern (copy), ReactModule (copy), SignalsReactModule (copy), SduiTileFooterModule (copy), FFlagLuaAppSduiGameTileMetadataFontStyle (copy), SduiGameTileActiveFriendsFooterModule (copy), FFlagSduiGameTileUseFooterComponentAsDefault (copy), Images (copy), AbbreviateCountFunction (copy)
 	local GetInGameFriendsByGameFunction = SduiInGameFriendsDataModule.getInGameFriendsByGame
-	local UseSignalStateResult = if FFlagLuaAppFixInlineSignalsReactPattern then SignalsReactModule.useSignalState((ReactModule.useCallback(function(p2): boolean --[[ Line: 47 ]]
+	local UseSignalStateResult = if FFlagLuaAppFixInlineSignalsReactPattern then SignalsReactModule.useSignalState((ReactModule.useCallback(function(p2): boolean
 		-- upvalues: GetInGameFriendsByGameFunction (copy), p1 (copy)
 		local InGameFriendsByGameEntry = GetInGameFriendsByGameFunction(p2)[p1.universeId]
 		
@@ -26,7 +26,7 @@ return ReactModule.memo(function(p1) --[[ Line: 42 | Named "SduiGameTileFooter" 
 			end
 		end
 		return false
-	end, { GetInGameFriendsByGameFunction, p1.universeId }))) else SignalsReactModule.useSignalState(function(p3): boolean --[[ Line: 59 ]]
+	end, { GetInGameFriendsByGameFunction, p1.universeId }))) else SignalsReactModule.useSignalState(function(p3): boolean
 		-- upvalues: GetInGameFriendsByGameFunction (copy), p1 (copy)
 		local InGameFriendsByGameEntry = GetInGameFriendsByGameFunction(p3)[p1.universeId]
 		

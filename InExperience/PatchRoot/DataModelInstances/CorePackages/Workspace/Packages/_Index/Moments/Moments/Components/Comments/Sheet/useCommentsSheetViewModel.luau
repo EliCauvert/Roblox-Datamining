@@ -18,14 +18,14 @@ local GetCommentsSheetStoreModule = require(script.Parent.getCommentsSheetStore)
 local GetCommentsVideoLiftModule = require(script.Parent.getCommentsVideoLift)
 local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
-return function() --[[ Line: 33 | Named "useCommentsSheetViewModel" ]]
+return function()
 	-- upvalues: GetCommentsSheetStoreModule (copy), SignalsReactModule (copy), MomentsGetMomentsCommentsStoreModule (copy), ReactModule (copy), UseCommentCapabilitiesModule (copy), GetCommentCollectionStoreModule (copy), LocalizationModule (copy), LocalizationService (copy), GetCommentsPanelStateModule (copy), UseLocalizationFunction (copy), FoundationModule (copy), GetCommentsVideoLiftModule (copy), UserInputService (copy)
 	local CommentsSheetStoreModule = GetCommentsSheetStoreModule(false)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(CommentsSheetStoreModule.getIsOpen)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(CommentsSheetStoreModule.getFeedItemId)
 	local UseSignalStateResult2 = SignalsReactModule.useSignalState(CommentsSheetStoreModule.getOpenSessionId)
 	local MomentsGetMomentsCommentsStoreModuleResult = MomentsGetMomentsCommentsStoreModule(false)
-	local UseSignalStateResult3 = SignalsReactModule.useSignalState(ReactModule.useMemo(function() --[[ Line: 39 ]]
+	local UseSignalStateResult3 = SignalsReactModule.useSignalState(ReactModule.useMemo(function()
 		-- upvalues: MomentsGetMomentsCommentsStoreModuleResult (copy), UseSignalStateResult1 (copy)
 		return MomentsGetMomentsCommentsStoreModuleResult.getCachedMomentComments(UseSignalStateResult1 or "")
 	end, {
@@ -34,7 +34,7 @@ return function() --[[ Line: 33 | Named "useCommentsSheetViewModel" ]]
 	}).data)
 	local UseCommentCapabilitiesModuleResult = UseCommentCapabilitiesModule()
 	local CloseFunction = CommentsSheetStoreModule.close
-	ReactModule.useEffect(function() --[[ Line: 46 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult (copy), UseCommentCapabilitiesModuleResult (copy), CloseFunction (copy)
 		if UseSignalStateResult and not UseCommentCapabilitiesModuleResult.canRead then
 			CloseFunction()
@@ -48,7 +48,7 @@ return function() --[[ Line: 33 | Named "useCommentsSheetViewModel" ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local CommentCollectionStoreModule = GetCommentCollectionStoreModule(false)
 	local UseSignalStateResult1_1 = UseSignalStateResult1 or ""
-	local UseSignalStateResult4 = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 55 ]]
+	local UseSignalStateResult4 = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: CommentCollectionStoreModule (copy), UseSignalStateResult1_1 (copy)
 		return CommentCollectionStoreModule.getState(UseSignalStateResult1_1)
 	end, { CommentCollectionStoreModule, UseSignalStateResult1_1 })))
@@ -65,14 +65,14 @@ return function() --[[ Line: 33 | Named "useCommentsSheetViewModel" ]]
 	}).title
 	local CanCompose = UseSignalStateResult and (UseSignalStateResult1 ~= nil and (UseSignalStateResult1 ~= "" and (UseCommentCapabilitiesModuleResult.canRead and (UseCommentCapabilitiesModuleResult.canWrite and CommentsPanelStateModule.canCompose))))
 	local SetSnapPointIndexFunction = CommentsSheetStoreModule.setSnapPointIndex
-	local UseResult = ReactModule.useCallback(function(_, p1) --[[ Line: 83 ]]
+	local UseResult = ReactModule.useCallback(function(_, p1)
 		-- upvalues: SetSnapPointIndexFunction (copy)
 		SetSnapPointIndexFunction(p1)
 	end, { SetSnapPointIndexFunction })
 	local UseOverlayResult = FoundationModule.Hooks.useOverlay()
 	local GetVideoLiftFunction = CommentsSheetStoreModule.getVideoLift
 	local SetVideoLiftFunction = CommentsSheetStoreModule.setVideoLift
-	local UseResult1 = ReactModule.useCallback(function(p1) --[[ Line: 90 ]]
+	local UseResult1 = ReactModule.useCallback(function(p1)
 		-- upvalues: UseOverlayResult (copy), SetVideoLiftFunction (copy), GetCommentsVideoLiftModule (upval), UserInputService (upval), GetVideoLiftFunction (copy)
 		if UseOverlayResult == nil then
 			SetVideoLiftFunction(nil)
@@ -91,9 +91,9 @@ return function() --[[ Line: 33 | Named "useCommentsSheetViewModel" ]]
 		GetVideoLiftFunction,
 		SetVideoLiftFunction
 	})
-	ReactModule.useEffect(function() --[[ Line: 103 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SetVideoLiftFunction (copy)
-		return function() --[[ Line: 104 ]]
+		return function()
 			-- upvalues: SetVideoLiftFunction (upval)
 			SetVideoLiftFunction(nil)
 		end

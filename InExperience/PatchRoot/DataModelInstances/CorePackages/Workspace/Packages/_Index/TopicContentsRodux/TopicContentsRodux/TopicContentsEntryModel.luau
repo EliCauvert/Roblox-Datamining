@@ -10,10 +10,10 @@ local FFlagLuaAppEnableOneByTwoTileFunnelTelemetry = require(Parent.SharedFlags)
 local FFlagLuaAppSponsoredGamePreviewVideo = require(Parent.SharedFlags).FFlagLuaAppSponsoredGamePreviewVideo
 local T = if FFlagLuaAppEnableOneByTwoTileFunnelTelemetry then {} else nil
 local TopicContentsEntryModelModule = {
-	new = function() --[[ Line: 23 ]]
+	new = function()
 		return {}
 	end,
-	mock = function(p1) --[[ Line: 29 ]]
+	mock = function(p1)
 		-- upvalues: OmniRecommendationsContentType (copy), FFlagLuaAppEnableOneByTwoTileFunnelTelemetry (copy)
 		local config = {
 			contentType = OmniRecommendationsContentType.Game,
@@ -58,7 +58,7 @@ local TopicContentsEntryModelModule = {
 	end
 }
 
-function TopicContentsEntryModelModule.fromGamesApiData(p1) --[[ Line: 70 ]]
+function TopicContentsEntryModelModule.fromGamesApiData(p1)
 	-- upvalues: ResultModule (copy), TopicContentsEntryModelModule (copy), OmniRecommendationsContentType (copy)
 	if type(p1.universeId) ~= "number" and type(p1.universeId) ~= "string" then
 		return ResultModule.error("TopicContentsEntryModel.fromGamesApiData expects universeId to be a number or a string")
@@ -89,7 +89,7 @@ function TopicContentsEntryModelModule.fromGamesApiData(p1) --[[ Line: 70 ]]
 end
 
 if FFlagSearchOmniAutocompletePage then
-	function TopicContentsEntryModelModule.fromOmniAutocompleteApi(p1) --[[ Line: 103 ]]
+	function TopicContentsEntryModelModule.fromOmniAutocompleteApi(p1)
 		-- upvalues: ResultModule (copy), TopicContentsEntryModelModule (copy), OmniRecommendationsContentType (copy)
 		if type(p1.universeId) ~= "number" and type(p1.universeId) ~= "string" then
 			return ResultModule.error("TopicContentsEntryModel.fromOmniAutocomplete expects universeId to be a number or a string")
@@ -110,7 +110,7 @@ if FFlagSearchOmniAutocompletePage then
 		return ResultModule.success(NewTopicContentsEntryModel)
 	end
 end
-function TopicContentsEntryModelModule.fromExploreApiData(p1) --[[ Line: 130 ]]
+function TopicContentsEntryModelModule.fromExploreApiData(p1)
 	-- upvalues: ResultModule (copy), TopicContentsEntryModelModule (copy), OmniRecommendationsContentType (copy)
 	if type(p1.universeId) ~= "number" and type(p1.universeId) ~= "string" then
 		return ResultModule.error("TopicContentsEntryModel.fromExploreApiData expects universeId to be a number or a string")
@@ -135,7 +135,7 @@ function TopicContentsEntryModelModule.fromExploreApiData(p1) --[[ Line: 130 ]]
 end
 
 if FFlagEnableTopSongsSort then
-	function TopicContentsEntryModelModule.songFromExploreApiData(p1) --[[ Line: 156 ]]
+	function TopicContentsEntryModelModule.songFromExploreApiData(p1)
 		-- upvalues: ResultModule (copy), TopicContentsEntryModelModule (copy), OmniRecommendationsContentType (copy)
 		if type(p1.assetId) == "number" or type(p1.assetId) == "string" then
 			local NewTopicContentsEntryModel = TopicContentsEntryModelModule.new()
@@ -149,7 +149,7 @@ if FFlagEnableTopSongsSort then
 		end
 	end
 end
-function TopicContentsEntryModelModule.fromOmniRecommendations(p1, RecommendationsRequestId) --[[ Line: 171 ]]
+function TopicContentsEntryModelModule.fromOmniRecommendations(p1, RecommendationsRequestId)
 	-- upvalues: TopicContentsEntryModelModule (copy), FFlagLuaAppSponsoredGamePreviewVideo (copy), ParseBooleanStringFunction (copy), FFlagLuaAppEnableHomepageOneByTwoTile (copy), FFlagLuaAppEnableOneByTwoTileFunnelTelemetry (copy), T (copy), HttpService (copy), ResultModule (copy)
 	local NewTopicContentsEntryModel = TopicContentsEntryModelModule.new()
 	NewTopicContentsEntryModel.contentType = p1.contentType

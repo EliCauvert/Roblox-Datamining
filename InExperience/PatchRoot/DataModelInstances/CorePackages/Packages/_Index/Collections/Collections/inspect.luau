@@ -8,7 +8,7 @@ local Callback4 = nil
 local Callback3 = nil
 local Callback2 = nil
 
-local function inspect(p1, p2) --[[ Line: 51 ]]
+local function inspect(p1, p2)
 	-- upvalues: Callback (ref)
 	local P1 = p2 or { depth = 2 }
 	local Depth = P1.depth or 2
@@ -17,11 +17,11 @@ local function inspect(p1, p2) --[[ Line: 51 ]]
 	return Callback(p1, {}, P1)
 end
 
-local function _(Value: number, p1): boolean --[[ Line: 58 | Named "isIndexKey" ]]
+local function _(Value: number, p1): boolean
 	return type(Value) == "number" and (Value <= p1 and Value >= 1) and math.floor(Value) == Value
 end
 
-local _ = function(p1): number --[[ Line: 65 | Named "getTableLength" ]]
+local _ = function(p1): number
 	local Count = 1
 	local RawValue = rawget(p1, Count)
 	while RawValue ~= nil do
@@ -31,18 +31,18 @@ local _ = function(p1): number --[[ Line: 65 | Named "getTableLength" ]]
 	return Count - 1
 end
 
-local function sortKeysForPrinting(A, B): boolean --[[ Line: 75 ]]
+local function sortKeysForPrinting(A, B): boolean
 	local ValueType = type(A)
 	local ValueType1 = type(B)
 	
 	return if ValueType == ValueType1 and (ValueType == "number" or ValueType == "string") then A < B else ValueType < ValueType1
 end
 
-local _ = function(p2) --[[ Line: 88 | Named "rawpairs" ]]
+local _ = function(p2)
 	return next, p2, nil
 end
 
-local function getFragmentedKeys(p2) --[[ Line: 92 ]]
+local function getFragmentedKeys(p2)
 	-- upvalues: sortKeysForPrinting (copy)
 	local List = {}
 	local Count = 0
@@ -65,7 +65,7 @@ local function getFragmentedKeys(p2) --[[ Line: 92 ]]
 	return List, Count, CountDelta
 end
 
-Callback = function(JSON, p3, p4) --[[ Line: 106 | Named "formatValue" ]]
+Callback = function(JSON, p3, p4)
 	-- upvalues: HttpService (copy), Callback1 (ref)
 	local ValueType = typeof(JSON)
 	
@@ -87,7 +87,7 @@ Callback = function(JSON, p3, p4) --[[ Line: 106 | Named "formatValue" ]]
 	return Text .. "]"
 end
 
-Callback1 = function(Value, List, p3) --[[ Line: 139 | Named "formatObjectValue" ]]
+Callback1 = function(Value, List, p3)
 	-- upvalues: Callback (ref), IsArrayModule (copy), Callback4 (ref), Callback3 (ref)
 	if table.find(List, Value) ~= nil then
 		return "[Circular]"
@@ -107,7 +107,7 @@ Callback1 = function(Value, List, p3) --[[ Line: 139 | Named "formatObjectValue"
 	return Callback3(Value, List1, p3)
 end
 
-Callback3 = function(p3, p4, p5): string --[[ Line: 164 | Named "formatObject" ]]
+Callback3 = function(p3, p4, p5): string
 	-- upvalues: getFragmentedKeys (copy), Callback2 (ref), Callback (ref)
 	local Text = ""
 	local Meta = getmetatable(p3)
@@ -139,7 +139,7 @@ Callback3 = function(p3, p4, p5): string --[[ Line: 164 | Named "formatObject" ]
 	return Text .. "{ " .. table.concat(List, ", ") .. " }"
 end
 
-Callback4 = function(p6, p7, p8): string --[[ Line: 200 | Named "formatArray" ]]
+Callback4 = function(p6, p7, p8): string
 	-- upvalues: Callback (ref)
 	local CountP15 = #p6
 	
@@ -164,7 +164,7 @@ Callback4 = function(p6, p7, p8): string --[[ Line: 200 | Named "formatArray" ]]
 	return "[" .. table.concat(List, ", ") .. "]"
 end
 
-Callback2 = function(_): string --[[ Line: 226 | Named "getObjectTag" ]]
+Callback2 = function(_): string
 	return "Object"
 end
 

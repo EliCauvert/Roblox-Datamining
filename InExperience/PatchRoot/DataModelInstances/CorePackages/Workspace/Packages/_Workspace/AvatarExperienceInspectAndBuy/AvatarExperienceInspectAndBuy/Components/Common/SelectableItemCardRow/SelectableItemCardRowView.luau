@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local CatalogRowItemCard = require(Parent.AXCommon).Components.CatalogItemCard.CatalogRowItemCard
 
-return function(Frame) --[[ Line: 49 | Named "SelectableItemCardRowView" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), CatalogRowItemCard (copy)
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "row align-y-top gap-medium auto-xy",

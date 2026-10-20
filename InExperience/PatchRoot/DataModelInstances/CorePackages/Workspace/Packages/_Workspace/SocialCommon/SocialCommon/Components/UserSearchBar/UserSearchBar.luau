@@ -28,12 +28,12 @@ local config = {
 	captureFocusOnMount = false,
 	cancelCallback = nil,
 	textChangedCallback = nil,
-	focusChangedCallback = function() --[[ Line: 75 ]] end
+	focusChangedCallback = function() end
 }
 
-return function(p1) --[[ Line: 78 ]]
+return function(p1)
 	-- upvalues: FFlagDisableAutocorrectSocialUserSearch (copy), RoactAppExperimentModule (copy), DisableAutocorrectExperimentLayer (copy), FFlagLuaAppLogSocialUserSearchUXExposure (copy), DashModule (copy), config (copy), UseStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), TextButton (copy), ImageSetLabel (copy), Icon (copy), Enums (copy), NormalizeFontFaceFunction (copy), CallbackInputBox (copy), IconsActionsEditClearSmall (copy), IconSize (copy)
-	local UseUserExperimentResult = if FFlagDisableAutocorrectSocialUserSearch then RoactAppExperimentModule.useUserExperiment({ DisableAutocorrectExperimentLayer }, function(p2) --[[ Line: 80 ]]
+	local UseUserExperimentResult = if FFlagDisableAutocorrectSocialUserSearch then RoactAppExperimentModule.useUserExperiment({ DisableAutocorrectExperimentLayer }, function(p2)
 		-- upvalues: DisableAutocorrectExperimentLayer (upval)
 		return (p2[DisableAutocorrectExperimentLayer] or {}).disableAutocorrectSocialUserSearch
 	end, not FFlagLuaAppLogSocialUserSearchUXExposure) else nil
@@ -42,7 +42,7 @@ return function(p1) --[[ Line: 78 ]]
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
-	ReactModule.useEffect(function() --[[ Line: 93 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: JoinResult (copy)
 		if JoinResult.onSelectCallback then
 			JoinResult.onSelectCallback()
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 78 ]]
 	local Body = UseStyleResult.Font.Body
 	local ScaledBaseSize1 = UseStyleResult.Font.BaseSize * Body.RelativeSize
 	
-	local function FocusChangedCallback(p2, p3) --[[ Line: 124 ]]
+	local function FocusChangedCallback(p2, p3)
 		-- upvalues: JoinResult (copy), UseStateResult2 (copy), UseStyleResult (copy), UseStateResult2_1 (copy)
 		if JoinResult.focusChangedCallback then
 			JoinResult.focusChangedCallback(p2, p3)

@@ -1,8 +1,8 @@
-﻿local function _(Text: string, p1): string --[[ Line: 10 | Named "charAt" ]]
+﻿local function _(Text: string, p1): string
 	return Text:sub(p1, p1)
 end
 
-return function(Frame): string --[[ Line: 27 | Named "truncateTextToCursor" ]]
+return function(Frame): string
 	local CursorPosition: number = Frame.CursorPosition
 	
 	if CursorPosition == -1 then

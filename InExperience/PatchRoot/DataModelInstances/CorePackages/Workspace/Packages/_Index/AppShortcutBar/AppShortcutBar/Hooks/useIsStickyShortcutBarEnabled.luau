@@ -15,12 +15,12 @@ local FFlagUseSignalsForAuthenticationStatus = SharedFlagsModule.FFlagUseSignals
 local FFlagLuaSupportMicroGamepadPreferredInput = SharedFlagsModule.FFlagLuaSupportMicroGamepadPreferredInput
 local GetAuthenticationStatusStore = if FFlagUseSignalsForAuthenticationStatus then require(Parent.AuthenticationStatus).GetAuthenticationStatusStore else nil
 
-local function selectUserLoggedIn(p1): boolean --[[ Line: 25 ]]
+local function selectUserLoggedIn(p1): boolean
 	-- upvalues: LoginStatus (copy)
 	return p1.AuthenticationStatus and p1.AuthenticationStatus.status == LoginStatus.LOGGED_IN
 end
 
-return function(AdjustScreen): boolean --[[ Line: 29 | Named "useIsStickyShortcutBarEnabled" ]]
+return function(AdjustScreen): boolean
 	-- upvalues: ReactFocusNavigationModule (copy), ResponsiveModule (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy), UsePropertyFunction (copy), UserInputService (copy), UseIsTvRemoteDeviceFunction (copy), FFlagUseSignalsForAuthenticationStatus (copy), UseSignalStateFunction (copy), GetAuthenticationStatusStore (copy), LoginStatus (copy), UseSelectorFunction (copy), selectUserLoggedIn (copy), AppPage (copy)
 	local HasUseFocusedGuiObjectResult = ReactFocusNavigationModule.useFocusedGuiObject() ~= nil
 	local IsUsePreferredInputResultMatch = ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Directional

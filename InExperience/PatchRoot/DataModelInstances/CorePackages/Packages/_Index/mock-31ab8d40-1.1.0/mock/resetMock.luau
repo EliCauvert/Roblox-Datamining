@@ -1,6 +1,6 @@
 ﻿local SymbolsModule = require(script.Parent.symbols)
 
-local function resetMock(p1, p2) --[[ Line: 3 ]]
+local function resetMock(p1, p2)
 	-- upvalues: SymbolsModule (copy), resetMock (copy)
 	local Meta = getmetatable(p1)
 	Meta[SymbolsModule.Calls] = {}
@@ -13,7 +13,7 @@ local function resetMock(p1, p2) --[[ Line: 3 ]]
 	end
 end
 
-return function(p3) --[[ Line: 15 ]]
+return function(p3)
 	-- upvalues: resetMock (copy)
 	resetMock(p3, {})
 end

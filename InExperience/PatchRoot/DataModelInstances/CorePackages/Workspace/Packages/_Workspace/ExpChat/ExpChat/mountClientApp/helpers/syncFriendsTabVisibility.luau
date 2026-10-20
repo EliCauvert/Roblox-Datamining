@@ -8,12 +8,12 @@ local GetFriendsTabVisibilityStoreModule = require(Parent.FriendsChat.GetFriends
 local FriendsChatTabNameModule = require(Parent.FriendsChat.FriendsChatTabName)
 local FFlagExpChatUseChannelTabsStore = require(Parent.SharedFlags).FFlagExpChatUseChannelTabsStore
 
-return function(p1) --[[ Line: 15 | Named "syncFriendsTabVisibility" ]]
+return function(p1)
 	-- upvalues: GetFriendsTabVisibilityStoreModule (copy), FFlagExpChatUseChannelTabsStore (copy), GetChannelTabsStoreModule (copy), SignalsModule (copy), FriendsChatTabNameModule (copy), FriendsChatChannelAddedModule (copy), FriendsChatChannelRemovedModule (copy)
 	local FriendsTabVisibilityStoreModule = GetFriendsTabVisibilityStoreModule(false)
 	local ChannelTabsStoreModule = if FFlagExpChatUseChannelTabsStore then GetChannelTabsStoreModule(false) else nil
 	
-	return SignalsModule.createEffect(function(p2) --[[ Line: 19 ]]
+	return SignalsModule.createEffect(function(p2)
 		-- upvalues: FriendsTabVisibilityStoreModule (copy), ChannelTabsStoreModule (copy), FriendsChatTabNameModule (upval), p1 (copy), FriendsChatChannelAddedModule (upval), FriendsChatChannelRemovedModule (upval)
 		if FriendsTabVisibilityStoreModule.getIsFriendsTabVisible(p2) then
 			if ChannelTabsStoreModule then

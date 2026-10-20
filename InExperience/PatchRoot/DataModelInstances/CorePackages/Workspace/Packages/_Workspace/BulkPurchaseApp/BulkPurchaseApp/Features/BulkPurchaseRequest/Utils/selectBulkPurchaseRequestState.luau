@@ -7,7 +7,7 @@ local CreateUnpurchasableItemModule = require(script.Parent.createUnpurchasableI
 local FFlagAXAddPlusUpsellToBulkPurchaseModule = require(BulkPurchaseApp.Flags.FFlagAXAddPlusUpsellToBulkPurchase)
 local FFlagAXAddOffersToBulkPurchaseModule = require(BulkPurchaseApp.Flags.FFlagAXAddOffersToBulkPurchase)
 
-return function(p1) --[[ Line: 14 | Named "selectBulkPurchaseRequestState" ]]
+return function(p1)
 	-- upvalues: PurchasableStateEnumModule (copy), CreatePurchasableItemModule (copy), CreateOwnedItemModule (copy), CreateUnpurchasableItemModule (copy), FFlagAXAddOffersToBulkPurchaseModule (copy), FFlagAXAddPlusUpsellToBulkPurchaseModule (copy)
 	local Items = {}
 	local OwnedItems = {}

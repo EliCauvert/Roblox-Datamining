@@ -3,14 +3,14 @@ local CategoriesModule = require(script.Parent.Parent.Enums.Categories)
 local _ = require(script.Parent.Parent.Types)
 local BodyAssetTypes = require(script.Parent.Parent.Constants).BodyAssetTypes
 
-return function(Body, List) --[[ Line: 11 | Named "getAssetTypesByCategory" ]]
+return function(Body, List)
 	-- upvalues: CategoriesModule (copy), CryoModule (copy), BodyAssetTypes (copy)
 	local t = {}
-	local MapResult = if Body == CategoriesModule.Body then CryoModule.List.map(BodyAssetTypes, function(p1): string --[[ Line: 18 ]]
+	local MapResult = if Body == CategoriesModule.Body then CryoModule.List.map(BodyAssetTypes, function(p1): string
 		return (tostring(p1.Value))
 	end) else {}
 	for _, value in List do
-		MapResult = CryoModule.List.join(MapResult or {}, CryoModule.List.map(CryoModule.List.filter(value.assetTypes, function(Key): boolean --[[ Line: 32 ]]
+		MapResult = CryoModule.List.join(MapResult or {}, CryoModule.List.map(CryoModule.List.filter(value.assetTypes, function(Key): boolean
 			-- upvalues: t (copy)
 			if t[Key] then
 				return false
@@ -19,7 +19,7 @@ return function(Body, List) --[[ Line: 11 | Named "getAssetTypesByCategory" ]]
 				
 				return true
 			end
-		end), function(p1): string --[[ Line: 39 ]]
+		end), function(p1): string
 			return (tostring(p1.Value))
 		end))
 	end

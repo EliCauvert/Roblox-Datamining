@@ -14,7 +14,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local MusicPickerRowModule = require(MusicPicker.Components.MusicPickerRow)
 local _ = require(MusicPicker.Types.MusicPickerTypes)
 
-return function(Frame: Frame) --[[ Line: 40 | Named "MusicPickerList" ]]
+return function(Frame: Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Icon (copy), Text (copy), Skeleton (copy), Radius (copy), Button (copy), FoundationModule (copy), MusicPickerRowModule (copy), ScrollView (copy), ScrollBarVisibility (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Content = Frame.content
@@ -22,7 +22,7 @@ return function(Frame: Frame) --[[ Line: 40 | Named "MusicPickerList" ]]
 	local OnLoadMoreFunction = Content.onLoadMore
 	local IsIsLoadingMore = Content.isLoadingMore == true
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 48 ]]
+	local UseResult = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: OnLoadMoreFunction (copy), IsIsLoadingMore (copy)
 		if OnLoadMoreFunction == nil or IsIsLoadingMore then return end
 		local Y: number = ScrollFrame.AbsoluteCanvasSize.Y
@@ -33,7 +33,7 @@ return function(Frame: Frame) --[[ Line: 40 | Named "MusicPickerList" ]]
 			OnLoadMoreFunction()
 		end
 	end, { OnLoadMoreFunction, IsIsLoadingMore })
-	ReactModule.useEffect(function() --[[ Line: 67 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseResult (copy)
 		local Current = UseRefResult.current
 		

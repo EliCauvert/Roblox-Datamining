@@ -1,4 +1,4 @@
-﻿return function(p1, Key, Callback) --[[ Line: 13 | Named "getOrSet" ]]
+﻿return function(p1, Key, Callback)
 	if p1[Key] == nil then
 		p1[Key] = Callback(p1, Key)
 	end

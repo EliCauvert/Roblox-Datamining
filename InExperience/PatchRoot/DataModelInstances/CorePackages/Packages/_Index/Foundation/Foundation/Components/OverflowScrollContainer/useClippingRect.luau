@@ -6,11 +6,11 @@ local Connection = WrappersModule.Connection
 local WrappersModuleInstance = WrappersModule.Instance
 local Signal = WrappersModule.Signal
 
-return function(p1) --[[ Line: 21 | Named "useClippingRect" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FlagsModule (copy), Signal (copy), WrappersModuleInstance (copy), Connection (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Rect.new(Vector2.zero, Vector2.zero))
 	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
-	ReactModule.useEffect(function() --[[ Line: 27 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), FlagsModule (upval), UseStateResult2 (copy), UseBindingResult2 (copy), Signal (upval), WrappersModuleInstance (upval), Connection (upval)
 		local Current = p1.current
 		
@@ -39,7 +39,7 @@ return function(p1) --[[ Line: 21 | Named "useClippingRect" ]]
 				end
 			end
 		end
-		local function update() --[[ Line: 58 ]]
+		local function update()
 			-- upvalues: Frame (ref), Current (copy), UseBindingResult2 (upval)
 			if Frame then
 				local AbsolutePosition = Current.AbsolutePosition
@@ -59,7 +59,7 @@ return function(p1) --[[ Line: 21 | Named "useClippingRect" ]]
 			local AbsolutePosition = Current.AbsolutePosition
 			UseBindingResult2(Rect.new(Frame.AbsolutePosition - AbsolutePosition, Frame.AbsolutePosition + Frame.AbsoluteSize - AbsolutePosition))
 		end
-		return function() --[[ Line: 86 ]]
+		return function()
 			-- upvalues: ConnectResults (copy), Connection (upval)
 			for _, connectResult in ConnectResults do
 				Connection.Disconnect(connectResult)

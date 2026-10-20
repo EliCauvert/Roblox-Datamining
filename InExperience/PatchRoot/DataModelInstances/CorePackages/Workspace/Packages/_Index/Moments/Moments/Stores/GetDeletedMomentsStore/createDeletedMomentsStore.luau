@@ -2,13 +2,13 @@
 local CryoModule = require(Parent.Cryo)
 local CreateSignalFunction = require(Parent.Signals).createSignal
 
-return function() --[[ Line: 27 | Named "createDeletedMomentsStore" ]]
+return function()
 	-- upvalues: CreateSignalFunction (copy), CryoModule (copy)
 	local Signal, Signal2 = CreateSignalFunction({})
 	
 	return {
 		getDeletedIds = Signal,
-		markDeleted = function(Value) --[[ Line: 30 ]]
+		markDeleted = function(Value)
 			-- upvalues: Signal (copy), Signal2 (copy), CryoModule (upval)
 			local SignalResult = Signal(false)
 			

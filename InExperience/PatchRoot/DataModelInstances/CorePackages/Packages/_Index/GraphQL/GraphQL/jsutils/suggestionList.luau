@@ -2,7 +2,7 @@
 local NaturalCompareFunction = require(script.Parent.naturalCompare).naturalCompare
 local Module = {}
 
-local function suggestionList(Text, p1) --[[ Line: 34 ]]
+local function suggestionList(Text, p1)
 	-- upvalues: Module (copy), Object (copy), NaturalCompareFunction (copy)
 	local MeasureResults = {}
 	local NewModule = Module.new(Text)
@@ -17,7 +17,7 @@ local function suggestionList(Text, p1) --[[ Line: 34 ]]
 		end
 	end
 	local KeysResult = Object.keys(MeasureResults)
-	table.sort(KeysResult, function(A, B): boolean --[[ Line: 49 ]]
+	table.sort(KeysResult, function(A, B): boolean
 		-- upvalues: MeasureResults (copy), NaturalCompareFunction (upval)
 		local MeasureResultDelta = MeasureResults[A] - MeasureResults[B]
 		
@@ -30,7 +30,7 @@ end
 local Callback = nil
 Module.__index = Module
 
-function Module.new(Text: string) --[[ Line: 78 ]]
+function Module.new(Text: string)
 	-- upvalues: Module (copy), Callback (ref)
 	local self = setmetatable({}, Module)
 	self._input = Text
@@ -46,7 +46,7 @@ function Module.new(Text: string) --[[ Line: 78 ]]
 	return self
 end
 
-function Module:measure(Text: string, NewFloored) --[[ Line: 93 ]]
+function Module:measure(Text: string, NewFloored)
 	-- upvalues: Callback (ref)
 	if self._input == Text then
 		return 0
@@ -101,7 +101,7 @@ function Module:measure(Text: string, NewFloored) --[[ Line: 93 ]]
 	return if RowEntry <= NewFloored then RowEntry else nil
 end
 
-Callback = function(Text: string) --[[ Line: 168 | Named "stringToArray" ]]
+Callback = function(Text: string)
 	local ByteValues = {}
 	
 	for i = 1, Text:len() do

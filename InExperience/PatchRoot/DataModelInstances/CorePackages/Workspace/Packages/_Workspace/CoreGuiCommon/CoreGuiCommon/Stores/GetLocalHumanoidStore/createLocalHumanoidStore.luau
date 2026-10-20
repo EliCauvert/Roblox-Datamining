@@ -3,7 +3,7 @@ local Parent = script:FindFirstAncestor("CoreGuiCommon").Parent
 local CryoModule = require(Parent.Cryo)
 local CreateSignalFunction = require(Parent.Signals).createSignal
 
-return function() --[[ Line: 24 ]]
+return function()
 	-- upvalues: CreateSignalFunction (copy), CryoModule (copy), Players (copy)
 	local Signal, Signal2 = CreateSignalFunction(nil)
 	local Signal1, Signal2_1 = CreateSignalFunction({}, CryoModule.Dictionary.equals)
@@ -15,7 +15,7 @@ return function() --[[ Line: 24 ]]
 		Players:GetPropertyChangedSignal("LocalPlayer"):Wait()
 		LocalPlayer = Players.LocalPlayer
 	end
-	local function updateHealthValue() --[[ Line: 41 ]]
+	local function updateHealthValue()
 		-- upvalues: Signal (copy), Signal2_1 (copy)
 		local SignalResult = Signal(false)
 		Signal2_1(if SignalResult then {
@@ -25,7 +25,7 @@ return function() --[[ Line: 24 ]]
 		} else {})
 	end
 	
-	local function _() --[[ Line: 52 | Named "unobserveHumanoid" ]]
+	local function _()
 		-- upvalues: ChildAddedConnection (ref), HealthChangedConnection (ref), DiedConnection (ref), Signal2 (copy)
 		if ChildAddedConnection then
 			ChildAddedConnection:Disconnect()
@@ -42,7 +42,7 @@ return function() --[[ Line: 24 ]]
 		Signal2(nil)
 	end
 	
-	local function observeHumanoid() --[[ Line: 69 ]]
+	local function observeHumanoid()
 		-- upvalues: ChildAddedConnection (ref), HealthChangedConnection (ref), DiedConnection (ref), Signal2 (copy), LocalPlayer (copy), updateHealthValue (copy), observeHumanoid (copy)
 		if ChildAddedConnection then
 			ChildAddedConnection:Disconnect()
@@ -67,7 +67,7 @@ return function() --[[ Line: 24 ]]
 				HealthChangedConnection = Humanoid.HealthChanged:Connect(updateHealthValue)
 				DiedConnection = Humanoid.Died:Connect(updateHealthValue)
 			else
-				ChildAddedConnection = Character.ChildAdded:Connect(function(Child: Humanoid) --[[ Line: 79 ]]
+				ChildAddedConnection = Character.ChildAdded:Connect(function(Child: Humanoid)
 					-- upvalues: observeHumanoid (upval)
 					if Child:IsA("Humanoid") then
 						observeHumanoid()
@@ -85,7 +85,7 @@ return function() --[[ Line: 24 ]]
 	return {
 		getLocalHumanoid = Signal,
 		getHealthValue = Signal1,
-		cleanup = function() --[[ Line: 93 ]]
+		cleanup = function()
 			-- upvalues: CharacterAddedConnection (copy), CharacterRemovingConnection (copy), ChildAddedConnection (ref), HealthChangedConnection (ref), DiedConnection (ref), Signal2 (copy)
 			CharacterAddedConnection:Disconnect()
 			CharacterRemovingConnection:Disconnect()

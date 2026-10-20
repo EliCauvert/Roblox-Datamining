@@ -8,9 +8,9 @@ local InputSize = FoundationModule.Enums.InputSize
 local SearchInputShape = FoundationModule.Enums.SearchInputShape
 local SnapPoints = { 0.93 }
 
-return ReactModule.memo(function(p1) --[[ Line: 43 | Named "RecipientPickerView" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), RecipientRowViewModule (copy), FoundationModule (copy), InputSize (copy), SearchInputShape (copy), GiftStateViewModule (copy), GiftSheetLayoutViewModule (copy), SnapPoints (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 44 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), ReactModule (upval), RecipientRowViewModule (upval)
 		local Elements = {}
 		
@@ -22,7 +22,7 @@ return ReactModule.memo(function(p1) --[[ Line: 43 | Named "RecipientPickerView"
 				isAvailable = row.isAvailable,
 				unavailableLabel = p1.unavailableLabel,
 				avatarBackgroundStyle = p1.avatarBackgroundStyle,
-				onActivated = function() --[[ Line: 54 ]]
+				onActivated = function()
 					-- upvalues: p1 (upval), row (copy)
 					p1.onRecipientSelected(row.userId)
 				end,

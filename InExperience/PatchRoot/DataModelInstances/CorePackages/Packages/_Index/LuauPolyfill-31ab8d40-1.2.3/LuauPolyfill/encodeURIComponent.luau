@@ -2,7 +2,7 @@
 local CharCodeAtFunction = require(script.Parent.Parent.String).charCodeAt
 local ErrorModule = require(script.Parent.Error)
 
-return function(Text) --[[ Line: 25 | Named "encodeURIComponent" ]]
+return function(Text)
 	-- upvalues: CharCodeAtFunction (copy), ErrorModule (copy), HttpService (copy)
 	local Length = utf8.len(Text)
 	

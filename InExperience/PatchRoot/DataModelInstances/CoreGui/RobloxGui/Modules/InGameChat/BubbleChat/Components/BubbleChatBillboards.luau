@@ -16,19 +16,19 @@ ChatBillboards.validateProps = TModule.strictInterface({
 	participants = TModule.map(TModule.string, TModule.string)
 })
 
-function ChatBillboards.getDerivedStateFromProps(p1, p2) --[[ Line: 33 ]]
+function ChatBillboards.getDerivedStateFromProps(p1, p2)
 	-- upvalues: CryoModule (copy)
 	return {
 		userMessages = CryoModule.Dictionary.join(p2.userMessages or {}, p1.userMessages)
 	}
 end
 
-function ChatBillboards.init(p1) --[[ Line: 42 ]]
+function ChatBillboards.init(p1)
 	-- upvalues: v1 (copy), CryoModule (copy)
 	v1:debug("Initializing")
 	p1:setState({ userMessages = {} })
 	
-	function p1.onBillboardFadeOut(p2) --[[ Line: 48 ]]
+	function p1.onBillboardFadeOut(p2)
 		-- upvalues: p1 (copy), CryoModule (upval)
 		p1:setState({
 			userMessages = CryoModule.Dictionary.join(p1.state.userMessages, { [p2] = CryoModule.None })
@@ -36,7 +36,7 @@ function ChatBillboards.init(p1) --[[ Line: 42 ]]
 	end
 end
 
-function ChatBillboards.render(p1) --[[ Line: 55 ]]
+function ChatBillboards.render(p1)
 	-- upvalues: ConstantsModule (copy), v1 (copy), RoactModule (copy), BubbleChatBillboardModule (copy)
 	if not p1.props.voiceEnabled and not p1.props.bubbleChatEnabled then return end
 	local t = {}
@@ -63,7 +63,7 @@ function ChatBillboards.render(p1) --[[ Line: 55 ]]
 	return RoactModule.createElement("ScreenGui", { ResetOnSpawn = false }, Elements)
 end
 
-return RoactRoduxModule.connect(function(p2) --[[ Line: 93 | Named "mapStateToProps" ]]
+return RoactRoduxModule.connect(function(p2)
 	-- upvalues: GetFFlagBubbleVoiceIndicatorSettingModule (copy)
 	return {
 		userMessages = p2.userMessages,

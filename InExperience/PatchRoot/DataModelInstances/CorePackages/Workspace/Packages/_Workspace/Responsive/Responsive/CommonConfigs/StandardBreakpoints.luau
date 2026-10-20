@@ -161,13 +161,13 @@ return {
 	sizesMinMaxY = SizesMinMaxY,
 	rules = { default = Default, Y = list, Orientation = Orientation },
 	keyIndex = KeyIndex,
-	getMinWidthFor = function(p1) --[[ Line: 86 ]]
+	getMinWidthFor = function(p1)
 		-- upvalues: SizesMinMax (copy)
 		local SizesMinMaxEntry = SizesMinMax[p1]
 		
 		return if SizesMinMaxEntry == nil then 0 else SizesMinMaxEntry.minWidth
 	end,
-	getMinHeightFor = function(p1) --[[ Line: 93 ]]
+	getMinHeightFor = function(p1)
 		-- upvalues: SizesMinMaxY (copy)
 		local SizesMinMaxYEntry = SizesMinMaxY[p1]
 		

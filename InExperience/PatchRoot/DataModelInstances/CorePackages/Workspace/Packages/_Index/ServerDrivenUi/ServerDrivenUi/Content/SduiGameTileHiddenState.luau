@@ -5,18 +5,18 @@ local View = require(Parent.Foundation).View
 local GetSduiComponentWrapperFunction = require(Parent.SduiCoreSystem).getSduiComponentWrapper
 local UseFocusGuiObjectFunction = require(Parent.ReactFocusNavigation).useFocusGuiObject
 
-return ReactModule.memo(function(p1) --[[ Line: 33 | Named "SduiGameTileHiddenState" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), UseFocusGuiObjectFunction (copy), GuiService (copy), GetSduiComponentWrapperFunction (copy), View (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 37 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), GuiService (upval), UseRefResult (copy), UseFocusGuiObjectResult (copy)
 		if not p1.onUndoActivated then return end
 		local IsSelectedCoreObjectMatch = GuiService.SelectedCoreObject == UseRefResult.current
 		p1.onUndoActivated()
 		
 		if IsSelectedCoreObjectMatch then
-			task.defer(function() --[[ Line: 47 ]]
+			task.defer(function()
 				-- upvalues: p1 (upval), UseFocusGuiObjectResult (upval)
 				local Current = if p1.parentRef then p1.parentRef.current else nil
 				

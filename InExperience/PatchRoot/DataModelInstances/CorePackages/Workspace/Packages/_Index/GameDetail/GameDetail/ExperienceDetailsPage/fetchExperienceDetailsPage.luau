@@ -15,7 +15,7 @@ local FFlagSduiAdvertiseRuntimeSupportSets = SharedFlagsModule.FFlagSduiAdvertis
 local FFlagInfoTableStableItemKeys = SharedFlagsModule.FFlagInfoTableStableItemKeys
 local FFlagLuaAppEdpMomentVideo = SharedFlagsModule.FFlagLuaAppEdpMomentVideo
 
-return function(p1, LoadTimer, p2) --[[ Line: 21 | Named "fetchExperienceDetailsPage" ]]
+return function(p1, LoadTimer, p2)
 	-- upvalues: GetExperienceDetailsUrlModule (copy), Parent (copy), FFlagSduiEdpClientTemplateCache (copy), FFlagSduiAdvertiseRuntimeSupportSets (copy), SduiCapabilities (copy), FFlagSduiEdpTemplatePrewarm (copy), FFlagLuaAppEdpMomentVideo (copy), FFlagInfoTableStableItemKeys (copy), GetSduiTemplateStoreFunction (copy), AppPage (copy), SduiApiStorePostConfigContentType (copy), GetSduiApiStoreFunction (copy), SduiResponseType (copy), GetExperienceDetailsPageKeyModule (copy)
 	local ExperienceDetailsUrlModule = GetExperienceDetailsUrlModule(p1)
 	local ServiceContractsProtoModule = require(Parent.ServiceContractsProto)

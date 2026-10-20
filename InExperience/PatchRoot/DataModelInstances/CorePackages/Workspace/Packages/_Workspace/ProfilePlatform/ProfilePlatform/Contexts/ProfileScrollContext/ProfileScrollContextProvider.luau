@@ -7,13 +7,13 @@ local UseProfileFormFactorModule = require(ProfilePlatform.Hooks.useProfileFormF
 local FFlagFixCommunityProfileWideCoverLayoutModule = require(ProfilePlatform.Flags.FFlagFixCommunityProfileWideCoverLayout)
 local ProfileScrollContextModule = require(script.Parent.ProfileScrollContext)
 
-return function(p1) --[[ Line: 15 ]]
+return function(p1)
 	-- upvalues: UseProfileFormFactorModule (copy), ReactModule (copy), EnumsModule (copy), UseTopBarHeightFunction (copy), FFlagFixCommunityProfileWideCoverLayoutModule (copy), ProfileScrollContextModule (copy)
 	local UseProfileFormFactorModuleResult = UseProfileFormFactorModule()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(if UseProfileFormFactorModuleResult.formFactor == EnumsModule.ProfileFormFactor.PeekView then 0 else 1)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
 	local UseTopBarHeightResult = UseTopBarHeightFunction()
-	local UseMemoResult = ReactModule.useMemo(function(): number --[[ Line: 23 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): number
 		-- upvalues: FFlagFixCommunityProfileWideCoverLayoutModule (upval), UseProfileFormFactorModuleResult (copy), EnumsModule (upval), UseTopBarHeightResult (copy), UseStateResult1 (copy)
 		local UseTopBarHeightResult1 = if FFlagFixCommunityProfileWideCoverLayoutModule then if UseProfileFormFactorModuleResult.isFullView or UseProfileFormFactorModuleResult.formFactor == EnumsModule.ProfileFormFactor.Wide then 0 else UseTopBarHeightResult elseif UseProfileFormFactorModuleResult.isFullView then 0 else UseTopBarHeightResult
 		
@@ -28,7 +28,7 @@ return function(p1) --[[ Line: 15 ]]
 	})
 	
 	return ReactModule.createElement(ProfileScrollContextModule.Provider, {
-		value = ReactModule.useMemo(function() --[[ Line: 44 ]]
+		value = ReactModule.useMemo(function()
 			-- upvalues: UseMemoResult (copy), UseStateResult2_1 (copy), UseStateResult (copy), UseStateResult2 (copy)
 			return {
 				scrollY = UseMemoResult,

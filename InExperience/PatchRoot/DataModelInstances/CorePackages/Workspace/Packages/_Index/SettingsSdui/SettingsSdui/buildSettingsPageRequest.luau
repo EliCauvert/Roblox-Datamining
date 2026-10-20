@@ -1,4 +1,4 @@
-﻿return function(p1, p2) --[[ Line: 7 | Named "buildSettingsPageRequest" ]]
+﻿return function(p1, p2)
 	local t = {}
 	
 	if p2 then

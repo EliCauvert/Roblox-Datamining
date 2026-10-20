@@ -2,7 +2,7 @@
 local IsPioneerLaunch = require(CorePackages.Workspace.Packages.PioneerUtils).isPioneerLaunch
 local v1 = nil
 
-local function _() --[[ Line: 12 | Named "getAccessResponseEnum" ]]
+local function _()
 	-- upvalues: v1 (ref), CorePackages (copy)
 	local v2 = v1
 	
@@ -16,14 +16,14 @@ local function _() --[[ Line: 12 | Named "getAccessResponseEnum" ]]
 	end
 end
 
-local function defaultGetAvailability() --[[ Line: 28 ]]
+local function defaultGetAvailability()
 	-- upvalues: CorePackages (copy)
 	return require(CorePackages.Workspace.Packages.AccountUpgrade.Eligibility).getAvailability(require(CorePackages.Workspace.Packages.AccountUpgrade.AccountUpgradeFlow).Pioneer)
 end
 
 local self = setmetatable({}, { __mode = "k" })
 
-local _ = function(Callback) --[[ Line: 36 | Named "getAvailabilityOnce" ]]
+local _ = function(Callback)
 	-- upvalues: self (copy), v1 (ref), CorePackages (copy)
 	local SelfEntry = self[Callback]
 	
@@ -48,7 +48,7 @@ local _ = function(Callback) --[[ Line: 36 | Named "getAvailabilityOnce" ]]
 	return CallbackResult
 end
 
-return function(p1, p2): boolean --[[ Line: 51 | Named "shouldShowMoreSettingsBanner" ]]
+return function(p1, p2): boolean
 	-- upvalues: IsPioneerLaunch (copy), defaultGetAvailability (copy), self (copy), v1 (ref), CorePackages (copy)
 	if not (p1 or IsPioneerLaunch)() then
 		return false

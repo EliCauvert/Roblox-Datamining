@@ -5,7 +5,7 @@ local SetDevConsoleVisibilityModule = require(script.Parent.Parent.Actions.SetDe
 local SetDevConsoleMinimizedModule = require(script.Parent.Parent.Actions.SetDevConsoleMinimized)
 local ReportDevConsoleTabEventsThrottleHundredthsPercent = game:DefineFastInt("ReportDevConsoleTabEventsThrottleHundredthsPercent", 0)
 
-function ReportDevConsoleOpenClose(p1, p2) --[[ Line: 23 ]]
+function ReportDevConsoleOpenClose(p1, p2)
 	-- upvalues: SetDevConsoleVisibilityModule (copy), RbxAnalyticsService (copy)
 	if p2.type == SetDevConsoleVisibilityModule.name then
 		local VisibleStartTime = p1:getState().DisplayOptions.visibleStartTime
@@ -21,11 +21,11 @@ function ReportDevConsoleOpenClose(p1, p2) --[[ Line: 23 ]]
 	end
 end
 
-function getTabAnalyticsKeyName(p1, p2): string --[[ Line: 39 ]]
+function getTabAnalyticsKeyName(p1, p2): string
 	return if p2 == nil then string.format("%s", p1) else string.format("%s_%s", p1, if p2 then "Client" else "Server")
 end
 
-function dispatchTabAnalytics(p1) --[[ Line: 47 ]]
+function dispatchTabAnalytics(p1)
 	-- upvalues: DashModule (copy), RbxAnalyticsService (copy), ReportDevConsoleTabEventsThrottleHundredthsPercent (copy)
 	RbxAnalyticsService:ReportInfluxSeries("devConsoleMetric", DashModule.join({
 		calledFrom = "devConsoleTabChange",
@@ -33,7 +33,7 @@ function dispatchTabAnalytics(p1) --[[ Line: 47 ]]
 	}, p1), ReportDevConsoleTabEventsThrottleHundredthsPercent)
 end
 
-function ReportTabChange(p1, p2) --[[ Line: 59 ]]
+function ReportTabChange(p1, p2)
 	-- upvalues: SetActiveTabModule (copy), SetDevConsoleVisibilityModule (copy), SetDevConsoleMinimizedModule (copy)
 	if p2.type == SetActiveTabModule.name then
 		local MainView = p1:getState().MainView
@@ -74,8 +74,8 @@ function ReportTabChange(p1, p2) --[[ Line: 59 ]]
 	end
 end
 
-return function(Callback, p1) --[[ Line: 117 ]]
-	return function(p2) --[[ Line: 118 ]]
+return function(Callback, p1)
+	return function(p2)
 		-- upvalues: p1 (copy), Callback (copy)
 		ReportTabChange(p1, p2)
 		ReportDevConsoleOpenClose(p1, p2)

@@ -7,24 +7,24 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(script.Parent.CreatorCreditBalanceChipView)
 local UseOpenBuyRobuxWebViewModule = require(script.Parent.Parent.useOpenBuyRobuxWebView)
 
-local function _(Value: number) --[[ Line: 17 | Named "formatBalance" ]]
+local function _(Value: number)
 	-- upvalues: NumberLocalization (copy), LocalizationService (copy)
 	return NumberLocalization.localize(string.format("%.0f", (math.floor(Value))), LocalizationService.RobloxLocaleId)
 end
 
-return function() --[[ Line: 21 | Named "useCreatorCreditBalanceChipViewModel" ]]
+return function()
 	-- upvalues: CreatorCreditModule (copy), ReactModule (copy), SignalsReactModule (copy), UseOpenBuyRobuxWebViewModule (copy), NumberLocalization (copy), LocalizationService (copy)
 	local CreatorCreditStore = CreatorCreditModule.getCreatorCreditStore(false)
-	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function() --[[ Line: 23 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function()
 		-- upvalues: CreatorCreditStore (copy)
 		return CreatorCreditStore.getQuotaSummary()
 	end, { CreatorCreditStore }).data)
 	
 	return {
 		balanceText = if UseSignalStateResult == nil then nil else NumberLocalization.localize(string.format("%.0f", (math.floor(UseSignalStateResult.robuxBalance))), LocalizationService.RobloxLocaleId),
-		onActivated = UseOpenBuyRobuxWebViewModule((ReactModule.useCallback(function() --[[ Line: 27 ]]
+		onActivated = UseOpenBuyRobuxWebViewModule((ReactModule.useCallback(function()
 			-- upvalues: CreatorCreditStore (copy)
-			CreatorCreditStore.refreshQuotaSummary():catch(function() --[[ Line: 28 ]] end)
+			CreatorCreditStore.refreshQuotaSummary():catch(function() end)
 		end, { CreatorCreditStore })))
 	}
 end

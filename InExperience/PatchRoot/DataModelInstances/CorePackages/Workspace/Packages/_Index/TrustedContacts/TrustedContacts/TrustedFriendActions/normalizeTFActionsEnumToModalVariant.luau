@@ -14,7 +14,7 @@ local config = {
 	[TFActionsEnumModule.PendingIncomingTrustedConnection] = TrustedConnectionStatus.RequestReceived
 }
 
-return function(p1) --[[ Line: 24 | Named "normalizeTFActionsEnumToModalVariant" ]]
+return function(p1)
 	-- upvalues: config (copy)
 	return config[p1]
 end

@@ -16,14 +16,14 @@ local config = {
 	placement = require(Foundation.Enums.InputPlacement).Start
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 49 | Named "RadioGroupItem" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: UseInputGroupDefaultsModule (copy), config (copy), UseRadioGroupModule (copy), UseTokensModule (copy), ReactModule (copy), UseRadioGroupItemVariantsModule (copy), InternalInputModule (copy), WithCommonPropsModule (copy), ConstantsModule (copy), ViewModule (copy)
 	local UseInputGroupDefaultsModuleResult = UseInputGroupDefaultsModule(p1, config)
 	local IsDisabled = UseInputGroupDefaultsModuleResult.isDisabled
 	local UseRadioGroupModuleResult = UseRadioGroupModule()
 	local IsValueMatch = UseRadioGroupModuleResult.value == UseInputGroupDefaultsModuleResult.value
 	local Label = UseInputGroupDefaultsModuleResult.label or UseInputGroupDefaultsModuleResult.value
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 59 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRadioGroupModuleResult (copy), UseInputGroupDefaultsModuleResult (copy)
 		UseRadioGroupModuleResult.onValueChanged(UseInputGroupDefaultsModuleResult.value)
 	end, {

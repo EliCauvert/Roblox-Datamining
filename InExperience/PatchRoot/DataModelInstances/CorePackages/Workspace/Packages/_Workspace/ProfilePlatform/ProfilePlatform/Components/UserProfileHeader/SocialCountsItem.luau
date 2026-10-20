@@ -5,9 +5,9 @@ local FoundationModule = require(Parent.Foundation)
 local Text = FoundationModule.Text
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function NOOP() --[[ Line: 19 ]] end
+local function NOOP() end
 
-return function(p1) --[[ Line: 21 | Named "SocialCountsItem" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Interactable (copy), NOOP (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsNot_0: boolean = not p1.isDisabled and p1.count ~= "0"

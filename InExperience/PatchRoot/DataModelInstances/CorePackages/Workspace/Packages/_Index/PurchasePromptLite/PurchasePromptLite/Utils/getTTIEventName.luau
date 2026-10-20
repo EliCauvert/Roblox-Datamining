@@ -1,5 +1,5 @@
 ﻿local _ = require(script.Parent.Parent.Enums.ProductPurchaseSurface)
 
-return function(Text): string --[[ Line: 6 ]]
+return function(Text): string
 	return "PurchaseStarted_" .. Text
 end

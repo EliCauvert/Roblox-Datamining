@@ -4,7 +4,7 @@ local _ = require(Graphing.Types)
 local InputDetectorModule = require(Graphing.Components.InputDetector)
 local StyleUtilModule = require(Graphing.Util.StyleUtil)
 
-function ScrollbarButton(Frame: Frame) --[[ Line: 36 ]]
+function ScrollbarButton(Frame: Frame)
 	-- upvalues: ReactModule (copy), StyleUtilModule (copy), InputDetectorModule (copy)
 	return ReactModule.createElement("ImageButton", {
 		AnchorPoint = Frame.AnchorPoint,
@@ -17,13 +17,13 @@ function ScrollbarButton(Frame: Frame) --[[ Line: 36 ]]
 	}, {
 		MouseDetector = ReactModule.createElement(InputDetectorModule, {
 			AnchorPoint = Frame.AnchorPoint,
-			OnClick = function() --[[ Line: 48 ]]
+			OnClick = function()
 				-- upvalues: Frame (copy)
 				if Frame.OnClick then
 					Frame.OnClick()
 				end
 			end,
-			OnDragMoved = function(p1) --[[ Line: 53 ]]
+			OnDragMoved = function(p1)
 				-- upvalues: Frame (copy)
 				if Frame.OnMoved then
 					Frame.OnMoved(p1)

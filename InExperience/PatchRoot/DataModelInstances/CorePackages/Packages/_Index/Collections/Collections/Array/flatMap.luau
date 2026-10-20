@@ -4,7 +4,7 @@ local FlatModule = require(Parent.flat)
 local MapModule = require(Parent.map)
 local _ = require(Parent.Parent.Parent.ES7Types)
 
-return function(p1, p2, p3) --[[ Line: 25 | Named "flatMap" ]]
+return function(p1, p2, p3)
 	-- upvalues: DEV (copy), FlatModule (copy), MapModule (copy)
 	if DEV then
 		if typeof(p1) ~= "table" then

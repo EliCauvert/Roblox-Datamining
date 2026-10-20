@@ -7,7 +7,7 @@ local UseInputTypeFunction = require(Parent.RoactUtils).Hooks.useInputType
 local UseIsTvRemoteDeviceFunction = require(Parent.RoactUtils).Hooks.useIsTvRemoteDevice
 local LogInputTypeChangedTvRemote1 = game:DefineFastFlag("LogInputTypeChangedTvRemote1", false)
 
-local function getConnectedGamepadTypes(ConnectedGamepads) --[[ Line: 11 ]]
+local function getConnectedGamepadTypes(ConnectedGamepads)
 	-- upvalues: UserInputService (copy)
 	if ConnectedGamepads == nil then
 		return nil
@@ -24,7 +24,7 @@ local function getConnectedGamepadTypes(ConnectedGamepads) --[[ Line: 11 ]]
 	return List
 end
 
-local function anyFullGamepadConnected(ConnectedGamepads): boolean? --[[ Line: 27 ]]
+local function anyFullGamepadConnected(ConnectedGamepads): boolean?
 	-- upvalues: UserInputService (copy)
 	if ConnectedGamepads == nil then
 		return nil
@@ -37,7 +37,7 @@ local function anyFullGamepadConnected(ConnectedGamepads): boolean? --[[ Line: 2
 	return false
 end
 
-return function(p1, PlaySessionId) --[[ Line: 40 | Named "useLogInputTypeChanged" ]]
+return function(p1, PlaySessionId)
 	-- upvalues: UseInputTypeFunction (copy), LogInputTypeChangedTvRemote1 (copy), UseIsTvRemoteDeviceFunction (copy), UserInputService (copy), anyFullGamepadConnected (copy), getConnectedGamepadTypes (copy), ReactModule (copy), LogInputTypeChangedModule (copy)
 	local UseInputTypeResult = UseInputTypeFunction()
 	local UseIsTvRemoteDeviceResult = if LogInputTypeChangedTvRemote1 then UseIsTvRemoteDeviceFunction() else nil
@@ -45,7 +45,7 @@ return function(p1, PlaySessionId) --[[ Line: 40 | Named "useLogInputTypeChanged
 	local AnyFullGamepadConnectedResult = if LogInputTypeChangedTvRemote1 then anyFullGamepadConnected(ConnectedGamepads) else nil
 	local ConnectedGamepadTypes = if LogInputTypeChangedTvRemote1 then getConnectedGamepadTypes(ConnectedGamepads) else nil
 	local Joined = if ConnectedGamepadTypes then table.concat(ConnectedGamepadTypes, ",") else nil
-	ReactModule.useEffect(function() --[[ Line: 57 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UserInputService (upval), LogInputTypeChangedModule (upval), p1 (copy), UseInputTypeResult (copy), AnyFullGamepadConnectedResult (copy), Joined (copy), UseIsTvRemoteDeviceResult (copy), PlaySessionId (copy)
 		LogInputTypeChangedModule(p1, "inputTypeChanged", {
 			inputType = UseInputTypeResult,

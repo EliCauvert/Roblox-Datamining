@@ -68,7 +68,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 	seeAllFlag = TModule.optional(TModule.number)
 })
 
-local function _(p1) --[[ Line: 90 | Named "addMobileAdvertisingIdToEventParams" ]]
+local function _(p1)
 	-- upvalues: AppStorageService (copy)
 	local MobileAdvertisingIdItem = AppStorageService:GetItem("MobileAdvertisingId")
 	
@@ -77,7 +77,7 @@ local function _(p1) --[[ Line: 90 | Named "addMobileAdvertisingIdToEventParams"
 	end
 end
 
-return function(p1, EventContext, Tbl) --[[ Line: 97 ]]
+return function(p1, EventContext, Tbl)
 	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), HttpService (copy), FFlagLuaAppGameDetailEventMobileAdsId (copy), AppStorageService (copy), CryoModule (copy), FFlagLuaAppMigrateGameEventsTelemetryService (copy), TelemetryService (copy), Config (ref), GetPlatformTargetFunction (copy), FFlagLuaAppGameEventsTelemetryServiceShadowTraffic (copy), Config1 (ref)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(Tbl)
 	

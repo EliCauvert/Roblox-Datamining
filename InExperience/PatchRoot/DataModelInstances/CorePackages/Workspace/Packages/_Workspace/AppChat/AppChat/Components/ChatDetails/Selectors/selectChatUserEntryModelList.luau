@@ -1,7 +1,7 @@
 ﻿local PopulateUserWithStateModule = require(script:FindFirstAncestor("AppChat").Users.populateUserWithState)
 local LoggerModule = require(script.Parent.Parent.Logger)
 
-return function(p1, List, p2) --[[ Line: 5 ]]
+return function(p1, List, p2)
 	-- upvalues: PopulateUserWithStateModule (copy), LoggerModule (copy)
 	local Users = p1.Users
 	local t = {}

@@ -14,14 +14,14 @@ local GetFFlagTextChatEnableUniverseChatTabsFunction = ExpChatSharedModule.Flags
 local FFlagExpChatBlockExpressionTrayFromRBXWhisperModule = require(ExpChat.Flags.FFlagExpChatBlockExpressionTrayFromRBXWhisper)
 local UseOnEmojiActivated = ExpChatSharedModule.Logger:new("ExpChat/PresetChat/useOnEmojiActivated")
 
-local function _() --[[ Line: 48 | Named "getRBXGeneralChannel" ]]
+local function _()
 	-- upvalues: TextChatService (copy)
 	local RBXGeneral = TextChatService:FindFirstChild("RBXGeneral", true)
 	
 	return if RBXGeneral and RBXGeneral:IsA("TextChannel") then RBXGeneral else nil
 end
 
-return function(p1) --[[ Line: 56 | Named "useOnEmojiActivated" ]]
+return function(p1)
 	-- upvalues: UseStoreFunction (copy), SignalsReactModule (copy), GetMessagesStoreModule (copy), ReactModule (copy), FFlagExpChatPresetTrayDismissAnalyticsModule (copy), GetPresetChatStoreModule (copy), EmojiUnicodeToIdModule (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), SelectSelectedTabNameModule (copy), UseOnEmojiActivated (copy), FFlagExpChatBlockExpressionTrayFromRBXWhisperModule (copy), TextChatService (copy)
 	local UseStoreResult = UseStoreFunction()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetMessagesStoreModule(false).getCanLocalUserChat)
@@ -30,7 +30,7 @@ return function(p1) --[[ Line: 56 | Named "useOnEmojiActivated" ]]
 	local OnSendGlobalChatFunction = p1.onSendGlobalChat
 	local ClosePresetTrayFunction = p1.closePresetTray
 	
-	return ReactModule.useCallback(function(p2) --[[ Line: 65 ]]
+	return ReactModule.useCallback(function(p2)
 		-- upvalues: FFlagExpChatPresetTrayDismissAnalyticsModule (upval), GetPresetChatStoreModule (upval), EmojiUnicodeToIdModule (upval), GetFFlagTextChatEnableUniverseChatTabsFunction (upval), SelectSelectedTabNameModule (upval), UseStoreResult (copy), UseSignalStateResult (copy), UseOnEmojiActivated (upval), OnSendGlobalChatFunction (copy), OnSendChatFunction (copy), FFlagExpChatBlockExpressionTrayFromRBXWhisperModule (upval), TextChannel (copy), TextChatService (upval), ClosePresetTrayFunction (copy)
 		if FFlagExpChatPresetTrayDismissAnalyticsModule then
 			local PresetChatStoreModule = GetPresetChatStoreModule(false)

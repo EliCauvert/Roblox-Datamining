@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("TempFixInfiniteHomePYMK", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("TempFixInfiniteHomePYMK")
 end

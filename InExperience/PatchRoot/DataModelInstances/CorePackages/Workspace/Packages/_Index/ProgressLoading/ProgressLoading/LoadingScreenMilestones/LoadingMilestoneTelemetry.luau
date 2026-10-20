@@ -6,9 +6,9 @@ local ConstantsModule = require(script.Parent.Constants)
 local TryMilestoneOperationModule = require(script.Parent.tryMilestoneOperation)
 
 return {
-	reportHoldGateHit = function(Tbl, HoldGateHit) --[[ Line: 65 ]]
+	reportHoldGateHit = function(Tbl, HoldGateHit)
 		-- upvalues: TryMilestoneOperationModule (copy), ConstantsModule (copy), TelemetryService (copy)
-		return TryMilestoneOperationModule(function() --[[ Line: 66 ]]
+		return TryMilestoneOperationModule(function()
 			-- upvalues: Tbl (copy), ConstantsModule (upval), HoldGateHit (copy), TelemetryService (upval)
 			local Copy = table.clone(Tbl)
 			Copy.dismissSource = ConstantsModule.DismissSource.NormalReady
@@ -22,9 +22,9 @@ return {
 			}, { customFields = Copy }, 1)
 		end)
 	end,
-	reportContentVisibility = function(Tbl, TitleVisible, CreatorVisible, ThumbnailVisible) --[[ Line: 42 ]]
+	reportContentVisibility = function(Tbl, TitleVisible, CreatorVisible, ThumbnailVisible)
 		-- upvalues: TryMilestoneOperationModule (copy), TelemetryService (copy), ConstantsModule (copy)
-		return TryMilestoneOperationModule(function() --[[ Line: 48 ]]
+		return TryMilestoneOperationModule(function()
 			-- upvalues: Tbl (copy), TitleVisible (copy), CreatorVisible (copy), ThumbnailVisible (copy), TelemetryService (upval), ConstantsModule (upval)
 			local Copy = table.clone(Tbl)
 			Copy.titleVisible = TitleVisible
@@ -40,9 +40,9 @@ return {
 			}, { customFields = Copy }, 1)
 		end)
 	end,
-	reportAddedWait = function(Tbl, Value, DismissSource) --[[ Line: 24 ]]
+	reportAddedWait = function(Tbl, Value, DismissSource)
 		-- upvalues: TryMilestoneOperationModule (copy), TelemetryService (copy)
-		return TryMilestoneOperationModule(function() --[[ Line: 29 ]]
+		return TryMilestoneOperationModule(function()
 			-- upvalues: Tbl (copy), DismissSource (copy), TelemetryService (upval), Value (copy)
 			local Copy = table.clone(Tbl)
 			Copy.dismissSource = DismissSource
@@ -55,7 +55,7 @@ return {
 			}, { customFields = Copy }, Value)
 		end)
 	end,
-	getMilestoneSessionMetadata = function(Subcategory) --[[ Line: 11 ]]
+	getMilestoneSessionMetadata = function(Subcategory)
 		-- upvalues: ConstantsModule (copy), RunService (copy), UserInputService (copy)
 		return {
 			category = ConstantsModule.CATEGORY,
@@ -66,9 +66,9 @@ return {
 			Platform = tostring(UserInputService:GetPlatform())
 		}
 	end,
-	countMilestonesStarted = function(CustomFields) --[[ Line: 80 ]]
+	countMilestonesStarted = function(CustomFields)
 		-- upvalues: TryMilestoneOperationModule (copy), TelemetryService (copy), ConstantsModule (copy)
-		return TryMilestoneOperationModule(function() --[[ Line: 81 ]]
+		return TryMilestoneOperationModule(function()
 			-- upvalues: TelemetryService (upval), ConstantsModule (upval), CustomFields (copy)
 			TelemetryService:LogCounter({
 				description = "Instrumented Tilt loading screens, before tracker initialization.",
@@ -79,9 +79,9 @@ return {
 			}, { customFields = CustomFields }, 1)
 		end)
 	end,
-	countMilestonesOutcome = function(Tbl, Outcome) --[[ Line: 92 ]]
+	countMilestonesOutcome = function(Tbl, Outcome)
 		-- upvalues: TryMilestoneOperationModule (copy), TelemetryService (copy), ConstantsModule (copy)
-		return TryMilestoneOperationModule(function() --[[ Line: 93 ]]
+		return TryMilestoneOperationModule(function()
 			-- upvalues: Tbl (copy), Outcome (copy), TelemetryService (upval), ConstantsModule (upval)
 			local Copy = table.clone(Tbl)
 			Copy.outcome = Outcome

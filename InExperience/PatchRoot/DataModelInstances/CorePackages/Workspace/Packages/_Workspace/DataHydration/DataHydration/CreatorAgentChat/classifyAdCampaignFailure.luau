@@ -6,7 +6,7 @@ local config = {
 	[ErrorCodes.MissingThumbnail] = "missing_thumbnail"
 }
 
-return function(p1) --[[ Line: 10 | Named "classifyAdCampaignFailure" ]]
+return function(p1)
 	-- upvalues: config (copy)
 	local ResponseCode = if type(p1) == "table" and type(p1.responseCode) == "number" then p1.responseCode else nil
 	

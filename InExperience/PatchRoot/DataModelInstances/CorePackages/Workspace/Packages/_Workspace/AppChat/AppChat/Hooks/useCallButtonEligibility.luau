@@ -12,11 +12,11 @@ local FFlagFriendsCallingClientGateDEV = require(Parent.SharedFlags).FFlagFriend
 local FFlagAppChatConversationStoreModule = require(AppChat.Flags.FFlagAppChatConversationStore)
 local GetConversationStoreModule = if FFlagAppChatConversationStoreModule then require(AppChat.Stores.GetConversationStore) else nil
 
-return function(Id) --[[ Line: 20 | Named "useCallButtonEligibility" ]]
+return function(Id)
 	-- upvalues: FFlagFriendsCallingClientGateDEV (copy), FFlagAppChatConversationStoreModule (copy), ReactModule (copy), SignalsModule (copy), GetConversationStoreModule (copy), SignalsReactModule (copy), UseGetConversationFromIdModule (copy), ConversationRoduxSeedModule (copy), UseDispatchFunction (copy), FetchLatestConversationDetailsModule (copy)
-	local UseSignalStateResult = if FFlagFriendsCallingClientGateDEV then if FFlagAppChatConversationStoreModule then SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 25 ]]
+	local UseSignalStateResult = if FFlagFriendsCallingClientGateDEV then if FFlagAppChatConversationStoreModule then SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), Id (copy), GetConversationStoreModule (upval)
-		return SignalsModule.createComputed(function(p1) --[[ Line: 26 ]]
+		return SignalsModule.createComputed(function(p1)
 			-- upvalues: Id (upval), GetConversationStoreModule (upval)
 			return if Id then GetConversationStoreModule(false).getConversation(Id, p1) else nil
 		end)
@@ -25,7 +25,7 @@ return function(Id) --[[ Line: 20 | Named "useCallButtonEligibility" ]]
 	local IsFriendsPlaceholderConversationId = ConversationRoduxSeedModule.isFriendsPlaceholderConversationId(Id)
 	local CallButtonEligibility = if UseSignalStateResult1 and not IsFriendsPlaceholderConversationId then UseSignalStateResult1.callButtonEligibility else nil
 	local UseDispatchResult = UseDispatchFunction()
-	ReactModule.useEffect(function() --[[ Line: 49 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagFriendsCallingClientGateDEV (upval), Id (copy), IsFriendsPlaceholderConversationId (copy), CallButtonEligibility (copy), UseDispatchResult (copy), FetchLatestConversationDetailsModule (upval)
 		if FFlagFriendsCallingClientGateDEV and Id and not IsFriendsPlaceholderConversationId and CallButtonEligibility == nil then
 			UseDispatchResult(FetchLatestConversationDetailsModule(Id))

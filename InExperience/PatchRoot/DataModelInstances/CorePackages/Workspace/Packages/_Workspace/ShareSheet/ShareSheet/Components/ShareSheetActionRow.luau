@@ -12,7 +12,7 @@ local ShareLinkModule = require(ShareSheet.shareLink)
 local IconName = require(Parent.Foundation).Enums.IconName
 local FFlagShareSheetPeoplePickerEnabledModule = require(ShareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
 
-return function(Frame) --[[ Line: 33 | Named "ShareSheetActionRow" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), CopyLinkModule (copy), ShareSheetTelemetryModule (copy), FFlagShareSheetFriendsSort (copy), ShareLinkModule (copy), ShareSheetRowModule (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), ShareSheetItemContainerModule (copy), IconName (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(nil)
@@ -21,20 +21,20 @@ return function(Frame) --[[ Line: 33 | Named "ShareSheetActionRow" ]]
 		copyLink = "Feature.SocialShare.Action.CopyLink",
 		share = "Feature.SocialShare.Action.Share"
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 41 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), UseRefResult (copy)
 		UseStateResult2(true)
 		
 		if UseRefResult.current then
 			task.cancel(UseRefResult.current)
 		end
-		UseRefResult.current = task.delay(2, function() --[[ Line: 46 ]]
+		UseRefResult.current = task.delay(2, function()
 			-- upvalues: UseRefResult (upval), UseStateResult2 (upval)
 			UseRefResult.current = nil
 			UseStateResult2(false)
 		end)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 52 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: CopyLinkModule (upval), Frame (copy), UseResult (copy), ShareSheetTelemetryModule (upval), FFlagShareSheetFriendsSort (upval)
 		CopyLinkModule({ context = Frame.context, url = Frame.url })
 		UseResult()
@@ -51,7 +51,7 @@ return function(Frame) --[[ Line: 33 | Named "ShareSheetActionRow" ]]
 		Frame.url,
 		UseResult
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 73 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: ShareLinkModule (upval), Frame (copy), ShareSheetTelemetryModule (upval), FFlagShareSheetFriendsSort (upval)
 		ShareLinkModule({ context = Frame.context, url = Frame.url })
 		ShareSheetTelemetryModule.logInteraction({
@@ -66,9 +66,9 @@ return function(Frame) --[[ Line: 33 | Named "ShareSheetActionRow" ]]
 		Frame.telemetryId,
 		Frame.url
 	})
-	ReactModule.useEffect(function() --[[ Line: 85 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy)
-		return function() --[[ Line: 86 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			if UseRefResult.current then
 				task.cancel(UseRefResult.current)

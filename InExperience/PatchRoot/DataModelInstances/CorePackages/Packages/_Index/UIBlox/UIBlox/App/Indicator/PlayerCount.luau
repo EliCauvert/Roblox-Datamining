@@ -15,12 +15,12 @@ local UIBloxConfigModule = require(Parent.UIBloxConfig)
 local _ = require(Parent.App.Style.StyleTypes)
 local IconSizeModule1 = GetIconSizeModule(IconSizeModule.Large)
 
-local function _(p1, p2, p3) --[[ Line: 35 | Named "getTextWidth" ]]
+local function _(p1, p2, p3)
 	-- upvalues: FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy)
 	return GetTextSizeModule(p1, p2.RelativeSize * p3.Font.BaseSize, if FoundationFontFaceMigration then GetFontFromFontStyleModule(p2) else p2.Font, (Vector2.new(10000, 10000))).X
 end
 
-local _ = function(p1, p2): number --[[ Line: 43 | Named "getMeasuredSectionWidth" ]]
+local _ = function(p1, p2): number
 	-- upvalues: UIBloxConfigModule (copy), GetIconSizeModule (copy), IconSizeModule (copy), IconSizeModule1 (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy)
 	local Title = p2.Font.Title
 	local CaptionHeader = p2.Font.CaptionHeader
@@ -28,7 +28,7 @@ local _ = function(p1, p2): number --[[ Line: 43 | Named "getMeasuredSectionWidt
 	return math.max(GetTextSizeModule(p1.countText, Title.RelativeSize * p2.Font.BaseSize, if FoundationFontFaceMigration then GetFontFromFontStyleModule(Title) else Title.Font, (Vector2.new(10000, 10000))).X, GetTextSizeModule(p1.labelText, CaptionHeader.RelativeSize * p2.Font.BaseSize, if FoundationFontFaceMigration then GetFontFromFontStyleModule(CaptionHeader) else CaptionHeader.Font, (Vector2.new(10000, 10000))).X) + (if UIBloxConfigModule.enableScalingForSomeEdpIcons then GetIconSizeModule(IconSizeModule.Large, p2) else IconSizeModule1) + 12
 end
 
-return function(p1) --[[ Line: 50 | Named "PlayerCount" ]]
+return function(p1)
 	-- upvalues: UseStyleModule (copy), UIBloxConfigModule (copy), GetIconSizeModule (copy), IconSizeModule (copy), IconSizeModule1 (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy), ReactModule (copy), StatWidgetModule (copy)
 	local UseStyleModuleResult = UseStyleModule()
 	local CountLeft = p1.countLeft

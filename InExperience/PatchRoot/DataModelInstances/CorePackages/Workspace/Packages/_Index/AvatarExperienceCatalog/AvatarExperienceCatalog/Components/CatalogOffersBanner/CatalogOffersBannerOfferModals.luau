@@ -18,18 +18,18 @@ local _UDim2 = UDim2.new(0.5, -82, 0.5, 12)
 local _UDim2_1 = UDim2.new(0.5, 92, 0.5, -19)
 local v1: number = if AXUpdateOffersModalHero then 230 else 540
 
-local function selectScreenSize(p1) --[[ Line: 53 ]]
+local function selectScreenSize(p1)
 	return p1.ScreenSize
 end
 
-local function _(Vector): number --[[ Line: 57 | Named "getTermsScrollHeight" ]]
+local function _(Vector): number
 	-- upvalues: v1 (copy)
 	local IsXBelow = Vector.X < 540
 	
 	return (math.clamp(math.floor(Vector.Y * (if IsXBelow then 0.35 else 0.5)), 180, if IsXBelow then 280 else v1))
 end
 
-local function RichTextBlock(p1) --[[ Line: 71 ]]
+local function RichTextBlock(p1)
 	-- upvalues: ReactModule (copy), FoundationModule (copy)
 	return ReactModule.createElement(FoundationModule.Text, {
 		RichText = true,
@@ -39,7 +39,7 @@ local function RichTextBlock(p1) --[[ Line: 71 ]]
 	})
 end
 
-local function HeroFrame(p1) --[[ Line: 90 ]]
+local function HeroFrame(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FoundationModule (copy), IconVariant (copy)
 	local UseTokensResult = UseTokensFunction()
 	
@@ -65,7 +65,7 @@ local function HeroFrame(p1) --[[ Line: 90 ]]
 	})
 end
 
-return function(p1) --[[ Line: 127 | Named "CatalogOffersBannerOfferModals" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), UseSelectorFunction (copy), selectScreenSize (copy), v1 (copy), ReactModule (copy), FoundationModule (copy), RichTextBlock (copy), AXPartialPageModal (copy), FFlagAXPartialPageModalBackgroundShim (copy), ButtonVariant (copy), InputSize (copy), AXUpdateOffersModalHero (copy), GetFoundationIconNameModule (copy), IconVariant (copy), HeroFrame (copy), _UDim2 (copy), IconName (copy), _UDim2_1 (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({ viewTermsButtonText = "Feature.Catalog.Action.ViewTerms" })

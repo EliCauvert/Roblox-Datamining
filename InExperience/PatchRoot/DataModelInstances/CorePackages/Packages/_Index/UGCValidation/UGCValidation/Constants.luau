@@ -9,7 +9,7 @@ local UGCValidateMakeupDecalUVProperties = game:DefineFastFlag("UGCValidateMakeu
 local GetFFlagUGCValidateMakeupCategoryParityModule = require(Parent.flags.getFFlagUGCValidateMakeupCategoryParity)
 local GetFFlagUGCValidateDisallowAeroMeshDataModule = require(Parent.flags.getFFlagUGCValidateDisallowAeroMeshData)
 
-local function _(List) --[[ Line: 16 | Named "convertArrayToTable" ]]
+local function _(List)
 	local t = {}
 	
 	for _, value in pairs(List) do
@@ -58,7 +58,7 @@ for _, r15BODYPART in config.R15_BODY_PARTS do
 end
 config.NAMED_R15_BODY_PARTS.Head = "Head"
 setmetatable(config.NAMED_R15_BODY_PARTS, {
-	__index = function() --[[ Line: 105 ]]
+	__index = function()
 		error("NAMED_R15_BODY_PARTS key does not exist")
 		
 		return nil
@@ -195,7 +195,7 @@ config.COMPARISON_METHODS = {
 	FOUND_IN = "one of the following:"
 }
 setmetatable(config.COMPARISON_METHODS, {
-	__index = function(_, p1) --[[ Line: 298 ]]
+	__index = function(_, p1)
 		return error("Invalid COMPARISON_METHOD " .. tostring(p1))
 	end
 })
@@ -205,7 +205,7 @@ config.INCLUSION_METHODS = {
 	EXCLUSION_LIST = "EXCLUSION_LIST"
 }
 setmetatable(config.INCLUSION_METHODS, {
-	__index = function(_, p1) --[[ Line: 313 ]]
+	__index = function(_, p1)
 		return error("Invalid INCLUSION_METHOD " .. tostring(p1))
 	end
 })

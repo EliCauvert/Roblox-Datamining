@@ -8,7 +8,7 @@ local config = {
 }
 local StandardizedFields = { "addOSInfo", "addSessionInfo" }
 
-return function(CollectionServiceAnchorTag, HasMedia) --[[ Line: 18 | Named "sendCoachmarkImpression" ]]
+return function(CollectionServiceAnchorTag, HasMedia)
 	-- upvalues: TelemetryService (copy), config (copy), StandardizedFields (copy)
 	TelemetryService:LogEvent(config, {
 		standardizedFields = StandardizedFields,

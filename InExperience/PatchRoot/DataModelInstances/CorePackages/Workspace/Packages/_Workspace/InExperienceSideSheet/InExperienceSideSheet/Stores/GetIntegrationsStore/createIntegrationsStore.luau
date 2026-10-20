@@ -2,7 +2,7 @@
 local _ = require(Parent.Chrome)
 local SignalsModule = require(Parent.Signals)
 
-return function() --[[ Line: 25 | Named "createIntegrationsStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal({})
 	local Signal1, Signal2_1 = SignalsModule.createSignal({})

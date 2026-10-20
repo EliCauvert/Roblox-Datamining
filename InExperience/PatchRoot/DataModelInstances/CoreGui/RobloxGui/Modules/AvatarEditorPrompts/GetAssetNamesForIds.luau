@@ -1,11 +1,11 @@
 ﻿local AvatarEditorService = game:GetService("AvatarEditorService")
 local PromiseModule = require(game:GetService("CorePackages").Packages.Promise)
 
-return function(ItemIds) --[[ Line: 6 ]]
+return function(ItemIds)
 	-- upvalues: PromiseModule (copy), AvatarEditorService (copy)
-	return PromiseModule.new(function(Callback1: (any) -> (), Callback: () -> ()) --[[ Line: 7 ]]
+	return PromiseModule.new(function(Callback1: (any) -> (), Callback: () -> ())
 		-- upvalues: AvatarEditorService (upval), ItemIds (copy)
-		local Success, Result = pcall(function() --[[ Line: 8 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: AvatarEditorService (upval), ItemIds (upval)
 			return AvatarEditorService:GetBatchItemDetailsAsync(ItemIds, Enum.AvatarItemType.Asset)
 		end)

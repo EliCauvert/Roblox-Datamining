@@ -8,7 +8,7 @@ local InExperienceInterventionAnalyticsModule = require(InExperienceIntervention
 local Toast = UIBloxModule.App.Dialog.Toast
 local InExperienceInterventionToastDuration = game:DefineFastInt("InExperienceInterventionToastDuration", 5)
 
-function ChatNudgeToast(p1) --[[ Line: 25 ]]
+function ChatNudgeToast(p1)
 	-- upvalues: ReactModule (copy), UseTokensFunction (copy), InExperienceInterventionAnalyticsModule (copy), Toast (copy), Images (copy), InExperienceInterventionToastDuration (copy)
 	local UseRefResult = ReactModule.useRef(DateTime.now().UnixTimestampMillis)
 	local UseTokensResult = UseTokensFunction()
@@ -28,14 +28,14 @@ function ChatNudgeToast(p1) --[[ Line: 25 ]]
 				},
 				iconImage = Images["icons/status/error_large"],
 				iconSize = Vector2.new(36, 36),
-				onAppeared = function() --[[ Line: 29 ]]
+				onAppeared = function()
 					-- upvalues: UseRefResult (copy), InExperienceInterventionAnalyticsModule (upval), p1 (copy)
 					UseRefResult.current = DateTime.now().UnixTimestampMillis
 					InExperienceInterventionAnalyticsModule.sendAnalyticsEvent(p1.toastAppearEventName, p1.interventionType, UseRefResult.current, p1.eventId, p1.violatingChatLine, p1.remainingDurationSec)
 				end,
 				toastSubtitle = p1.toastBody,
 				sequenceNumber = DateTime.now().UnixTimestamp,
-				onTouchSwipeUp = function() --[[ Line: 41 ]]
+				onTouchSwipeUp = function()
 					-- upvalues: InExperienceInterventionAnalyticsModule (upval), p1 (copy), UseRefResult (copy)
 					InExperienceInterventionAnalyticsModule.sendAnalyticsEvent(p1.toastDismissEventName, p1.interventionType, UseRefResult.current, p1.eventId, p1.violatingChatLine, p1.remainingDurationSec)
 				end

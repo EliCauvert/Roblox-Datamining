@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.Parent.Parent.App.Style.StyleTypes)
 
 return {
-	getBaseMenuDefaultTokens = function(p1) --[[ Line: 27 ]]
+	getBaseMenuDefaultTokens = function(p1)
 		assert(p1.Tokens ~= nil, "Design token support is not enabled!")
 		
 		return {
@@ -13,7 +13,7 @@ return {
 			}
 		}
 	end,
-	getCellDefaultTokens = function(p1) --[[ Line: 7 ]]
+	getCellDefaultTokens = function(p1)
 		assert(p1.Tokens ~= nil, "Design token support is not enabled!")
 		
 		return {
@@ -33,7 +33,7 @@ return {
 			selectedIconPaddingRight = p1.Tokens.Size.Size_300
 		}
 	end,
-	getDropdownMenuCellDefaultTokens = function(p1) --[[ Line: 39 ]]
+	getDropdownMenuCellDefaultTokens = function(p1)
 		return {
 			iconSize = p1.Tokens.Size.Size_900,
 			containerPadding = {
@@ -48,7 +48,7 @@ return {
 			}
 		}
 	end,
-	getDropdownMenuDefaultTokens = function(p1) --[[ Line: 55 ]]
+	getDropdownMenuDefaultTokens = function(p1)
 		return {
 			height = UDim.new(0, p1.Tokens.Size.Size_1200),
 			menuStateColors = {

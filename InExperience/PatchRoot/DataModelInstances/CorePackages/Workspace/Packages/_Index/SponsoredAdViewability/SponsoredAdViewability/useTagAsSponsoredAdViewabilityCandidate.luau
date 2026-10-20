@@ -4,7 +4,7 @@ local _ = require(Parent.DiscoveryTypes)
 local SponsoredAdViewabilityRegistryModule = require(script.Parent.sponsoredAdViewabilityRegistry)
 local _ = require(script.Parent.sponsoredAdViewabilityTypes)
 
-return function(p1, p2) --[[ Line: 15 | Named "useTagAsSponsoredAdViewabilityCandidate" ]]
+return function(p1, p2)
 	-- upvalues: ReactModule (copy), SponsoredAdViewabilityRegistryModule (copy)
 	local EncryptedAdTrackingData = if p2 then p2.encryptedAdTrackingData else nil
 	local TileType = if p2 then p2.tileType else nil
@@ -12,7 +12,7 @@ return function(p1, p2) --[[ Line: 15 | Named "useTagAsSponsoredAdViewabilityCan
 	local VideoPlaybackStateRef = if p2 then p2.videoPlaybackStateRef else nil
 	local VideoSource = if p2 then p2.videoSource else nil
 	local IsFullscreen = if p2 then p2.isFullscreen else nil
-	ReactModule.useEffect(function() --[[ Line: 24 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: EncryptedAdTrackingData (copy), TileType (copy), MediaType (copy), p1 (copy), SponsoredAdViewabilityRegistryModule (upval), VideoPlaybackStateRef (copy), VideoSource (copy), IsFullscreen (copy)
 		if EncryptedAdTrackingData == nil or TileType == nil or MediaType == nil then return end
 		local Current = p1.current

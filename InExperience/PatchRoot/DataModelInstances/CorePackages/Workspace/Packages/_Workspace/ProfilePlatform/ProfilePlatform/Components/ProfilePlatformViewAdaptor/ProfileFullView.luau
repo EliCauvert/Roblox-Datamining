@@ -18,7 +18,7 @@ local IconButton = FoundationModule.IconButton
 local IconSize = FoundationModule.Enums.IconSize
 local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
 
-return function(p1) --[[ Line: 48 | Named "ProfileFullView" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), FFlagAXEnableProfileTab (copy), UseProfileWrapperContextModule (copy), UseIsMeTabModule (copy), UseProfileJsonComponentModule (copy), ConstantsModule (copy), ReactModule (copy), FFlagProfilePlatformMeTabScrollAwayModule (copy), VisibilityControl (copy), UserInputService (copy), View (copy), IconButton (copy), IconSize (copy), FullscreenPageWithSafeArea (copy)
 	local Theme = UseStyleFunction().Theme
 	local IsFormFactorMatch = UseProfileFormFactorModule().formFactor == EnumsModule.ProfileFormFactor.Wide
@@ -35,7 +35,7 @@ return function(p1) --[[ Line: 48 | Named "ProfileFullView" ]]
 	local IsForceFullView1 = if FFlagProfilePlatformMeTabScrollAwayModule then IsForceFullView else nil
 	local UseRefResult = if FFlagProfilePlatformMeTabScrollAwayModule then ReactModule.useRef(false) else nil
 	local UseRefResult1 = if FFlagProfilePlatformMeTabScrollAwayModule then ReactModule.useRef(0) else nil
-	local UseResult = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 93 ]]
+	local UseResult = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: UseStateResult2 (copy), IsForceFullView1 (copy), UseRefResult (copy), UseRefResult1 (copy), VisibilityControl (upval)
 		local CanvasPosition = ScrollFrame.CanvasPosition
 		UseStateResult2((math.abs(CanvasPosition.Y)))
@@ -55,27 +55,27 @@ return function(p1) --[[ Line: 48 | Named "ProfileFullView" ]]
 	})
 	
 	if FFlagProfilePlatformMeTabScrollAwayModule then
-		ReactModule.useEffect(function() --[[ Line: 116 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: IsForceFullView1 (copy), UserInputService (upval), UseRefResult (copy), VisibilityControl (upval)
 			if IsForceFullView1 then
-				local TouchStartedConnection = UserInputService.TouchStarted:Connect(function() --[[ Line: 120 ]]
+				local TouchStartedConnection = UserInputService.TouchStarted:Connect(function()
 					-- upvalues: UseRefResult (upval)
 					UseRefResult.current = true
 				end)
-				local TouchEndedConnection = UserInputService.TouchEnded:Connect(function() --[[ Line: 123 ]]
+				local TouchEndedConnection = UserInputService.TouchEnded:Connect(function()
 					-- upvalues: UseRefResult (upval), VisibilityControl (upval)
 					UseRefResult.current = false
 					VisibilityControl.onTouchEnded()
 				end)
 				
-				return function() --[[ Line: 127 ]]
+				return function()
 					-- upvalues: TouchStartedConnection (copy), TouchEndedConnection (copy), VisibilityControl (upval)
 					TouchStartedConnection:Disconnect()
 					TouchEndedConnection:Disconnect()
 					VisibilityControl.show()
 				end
 			else
-				return function() --[[ Line: 118 ]] end
+				return function() end
 			end
 		end, { IsForceFullView1 })
 	end

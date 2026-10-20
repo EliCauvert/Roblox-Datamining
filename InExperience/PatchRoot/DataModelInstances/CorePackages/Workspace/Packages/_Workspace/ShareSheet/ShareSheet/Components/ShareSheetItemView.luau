@@ -14,11 +14,11 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UserTile = UserTileModule.UserTile
 local LayoutMode = UserTileModule.LayoutMode
 
-local function AnimatedIcon(p1) --[[ Line: 27 ]]
+local function AnimatedIcon(p1)
 	-- upvalues: UseTokensFunction (copy), UsePreferencesFunction (copy), ReactModule (copy), MotionModule (copy), View (copy), Icon (copy), IconSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ReducedMotion = UsePreferencesFunction().reducedMotion
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 30 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: MotionModule (upval), ReducedMotion (copy), UseTokensResult (copy)
 		return {
 			compressed = MotionModule.createState({ scale = 0.75 }, { default = MotionModule.transition({ duration = 0 }) }),
@@ -31,11 +31,11 @@ local function AnimatedIcon(p1) --[[ Line: 27 ]]
 		}
 	end, { ReducedMotion, UseTokensResult })
 	local UseMotionResult, UseMotionResult2 = MotionModule.useMotion(UseMemoResult.rest)
-	ReactModule.useEffect(function() --[[ Line: 49 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseMotionResult2 (copy), UseMemoResult (copy)
 		if p1.shouldAnimate then
 			UseMotionResult2(UseMemoResult.compressed, {
-				onAnimationComplete = function(Enabled) --[[ Line: 55 ]]
+				onAnimationComplete = function(Enabled)
 					-- upvalues: UseMotionResult2 (upval), UseMemoResult (upval)
 					if Enabled == true then
 						UseMotionResult2(UseMemoResult.rest)
@@ -52,7 +52,7 @@ local function AnimatedIcon(p1) --[[ Line: 27 ]]
 	})
 end
 
-return function(Frame) --[[ Line: 86 | Named "ShareSheetItemView" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), UserTile (copy), LayoutMode (copy), Icon (copy), IconName (copy), IconSize (copy), IconVariant (copy), AnimatedIcon (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	

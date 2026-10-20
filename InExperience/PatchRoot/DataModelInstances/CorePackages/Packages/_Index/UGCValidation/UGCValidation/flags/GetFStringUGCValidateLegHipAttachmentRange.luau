@@ -1,11 +1,11 @@
 ﻿game:DefineFastString("UGCValidateLegHipAttachmentRange", "0.25")
 local GetFStringUGCValidateLegHipAttachmentRangeModule = {
-	asString = function() --[[ Line: 9 ]]
+	asString = function()
 		return game:GetFastString("UGCValidateLegHipAttachmentRange")
 	end
 }
 
-function GetFStringUGCValidateLegHipAttachmentRangeModule.asNumber(): number --[[ Line: 13 ]]
+function GetFStringUGCValidateLegHipAttachmentRangeModule.asNumber(): number
 	-- upvalues: GetFStringUGCValidateLegHipAttachmentRangeModule (copy)
 	return (tonumber(GetFStringUGCValidateLegHipAttachmentRangeModule.asString()))
 end

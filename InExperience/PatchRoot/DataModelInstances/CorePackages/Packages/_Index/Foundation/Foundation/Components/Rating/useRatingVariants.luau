@@ -6,7 +6,7 @@ local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant
 local _ = require(Foundation.Providers.Style.Tokens)
 local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p1) --[[ Line: 40 ]]
+local function variantsFactory(p1)
 	-- upvalues: ChipSizeModule (copy), IconSizeModule (copy)
 	return {
 		common = {
@@ -61,7 +61,7 @@ local function variantsFactory(p1) --[[ Line: 40 ]]
 	}
 end
 
-return function(p1, p2) --[[ Line: 90 ]]
+return function(p1, p2)
 	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
 	local Rating = VariantsContextModule.useVariants("Rating", variantsFactory, p1)
 	local Size = Rating.sizes[p2]

@@ -5,7 +5,7 @@ local AbuseReportAnalytics = require(GenericAbuseReporting.Logger):new("AbuseRep
 
 return {
 	reducer = require(Parent.Rodux).createReducer({}, {
-		[require(GenericAbuseReporting.Analytics.Actions.OnFormLoaded).name] = function(p1, p2) --[[ Line: 37 ]]
+		[require(GenericAbuseReporting.Analytics.Actions.OnFormLoaded).name] = function(p1, p2)
 			-- upvalues: AbuseReportAnalytics (copy), Dictionary (copy)
 			AbuseReportAnalytics:trace("OnFormLoaded")
 			
@@ -15,7 +15,7 @@ return {
 				accumulated_time_ms = p2.accumulated_time_ms
 			})
 		end,
-		[require(GenericAbuseReporting.Analytics.Actions.OnFormReasonSelected).name] = function(p1, p2) --[[ Line: 45 ]]
+		[require(GenericAbuseReporting.Analytics.Actions.OnFormReasonSelected).name] = function(p1, p2)
 			-- upvalues: AbuseReportAnalytics (copy), Dictionary (copy)
 			AbuseReportAnalytics:trace("OnFormReasonSelected - reason_selection: {}", p2.reason_selection)
 			
@@ -24,7 +24,7 @@ return {
 				reason_change_count = p1.reason_change_count + 1
 			})
 		end,
-		[require(GenericAbuseReporting.Analytics.Actions.OnFormCommentUpdated).name] = function(p1, p2) --[[ Line: 52 ]]
+		[require(GenericAbuseReporting.Analytics.Actions.OnFormCommentUpdated).name] = function(p1, p2)
 			-- upvalues: AbuseReportAnalytics (copy), Dictionary (copy)
 			AbuseReportAnalytics:trace("OnFormCommentUpdated - comment_added: {}", p2.comment_added)
 			

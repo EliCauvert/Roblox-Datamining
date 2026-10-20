@@ -18,18 +18,18 @@ local FFlagVoiceVolumeControlsPerUserPlayerListButton = FlagsService.FFlagVoiceV
 local FFlagSideSheetOpenPeoplePage = require(Parent.SharedFlags).FFlagSideSheetOpenPeoplePage
 local FFlagPeopleListButtonOverflowModule = require(PeopleReactView.Flags.FFlagPeopleListButtonOverflow)
 
-local function MemoizedButton(p1) --[[ Line: 33 ]]
+local function MemoizedButton(p1)
 	-- upvalues: GetFFlagAddPeoplePageCardLayoutFunction (copy), ReactModule (copy), PeopleServiceModule (copy), PersonButtonModule (copy)
 	local Config = p1.config
-	local UseMemoResult = if GetFFlagAddPeoplePageCardLayoutFunction() then ReactModule.useMemo(function() --[[ Line: 41 ]]
+	local UseMemoResult = if GetFFlagAddPeoplePageCardLayoutFunction() then ReactModule.useMemo(function()
 		-- upvalues: PeopleServiceModule (upval)
 		return PeopleServiceModule.getService("Constants")
 	end, {}) else nil
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 46 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy)
 		p1.onButtonMount(p2, p1.buttonId)
 	end, { p1.onButtonMount })
-	local UseResult1 = if GetFFlagAddPeoplePageCardLayoutFunction() then ReactModule.useCallback(function() --[[ Line: 51 ]]
+	local UseResult1 = if GetFFlagAddPeoplePageCardLayoutFunction() then ReactModule.useCallback(function()
 		-- upvalues: Config (copy), UseMemoResult (copy)
 		if Config.id == UseMemoResult.PERSON_BUTTONS.BLOCK_PLAYER then
 			Config.onActivated("ingame_menu")
@@ -45,7 +45,7 @@ local function MemoizedButton(p1) --[[ Line: 33 ]]
 		end
 	end, { Config.id, Config.onActivated }) else nil
 	
-	return ReactModule.useMemo(function() --[[ Line: 62 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), PersonButtonModule (upval), Config (copy), GetFFlagAddPeoplePageCardLayoutFunction (upval), UseResult1 (copy), UseResult (copy)
 		return ReactModule.createElement(PersonButtonModule, {
 			text = Config.text,
@@ -67,26 +67,26 @@ local function MemoizedButton(p1) --[[ Line: 33 ]]
 	})
 end
 
-return function(p1) --[[ Line: 96 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), PeoplePageLayoutContextModule (copy), PersonButtonConfigsModule (copy), FFlagPeopleListButtonOverflowModule (copy), UseDeviceOrientationFunction (copy), RobloxAppEnumsModule (copy), PeopleServiceModule (copy), FFlagVoiceVolumeControlsPerUserPlayerListButton (copy), UseSignalStateFunction (copy), GetFFlagAddPeoplePageCardLayoutFunction (copy), FFlagSideSheetOpenPeoplePage (copy), SideSheetFocusContextModule (copy), GetPersonButtonRowSelectionBehaviorLeftModule (copy), MuteVolumeButtonModule (copy), MemoizedButton (copy), View (copy)
 	local UseContextResult = ReactModule.useContext(PeoplePageLayoutContextModule)
 	local PersonButtonConfigsModuleResult = PersonButtonConfigsModule(p1.userId, if FFlagPeopleListButtonOverflowModule then UseContextResult.isCompact else false)
 	local IsUseDeviceOrientationResultMatch = UseDeviceOrientationFunction() == RobloxAppEnumsModule.DeviceOrientationMode.Portrait or FFlagPeopleListButtonOverflowModule and UseContextResult.isCompact
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 106 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: PeopleServiceModule (upval)
 		return PeopleServiceModule.getService("FocusNavigationService")
 	end, {})
-	local UseMemoResult1 = if FFlagVoiceVolumeControlsPerUserPlayerListButton then ReactModule.useMemo(function() --[[ Line: 111 ]]
+	local UseMemoResult1 = if FFlagVoiceVolumeControlsPerUserPlayerListButton then ReactModule.useMemo(function()
 		-- upvalues: PeopleServiceModule (upval)
 		return PeopleServiceModule.getService("Constants")
 	end, {}) else nil
-	local UseMemoResult2 = if FFlagVoiceVolumeControlsPerUserPlayerListButton then ReactModule.useMemo(function() --[[ Line: 117 ]]
+	local UseMemoResult2 = if FFlagVoiceVolumeControlsPerUserPlayerListButton then ReactModule.useMemo(function()
 		-- upvalues: PeopleServiceModule (upval)
 		return PeopleServiceModule.getService("PeopleVoiceChatStore")
 	end, {}) else nil
 	local UseSignalStateResult = if FFlagVoiceVolumeControlsPerUserPlayerListButton then UseSignalStateFunction(UseMemoResult2.getShowVolumeControl) else false
 	local UseRefResult = ReactModule.useRef({})
-	local UseResult = ReactModule.useCallback(function(p2, p3) --[[ Line: 128 ]]
+	local UseResult = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: UseRefResult (copy)
 		if p2 then
 			UseRefResult.current[p3] = p2
@@ -96,7 +96,7 @@ return function(p1) --[[ Line: 96 ]]
 			UseRefResult.current[p3] = nil
 		end
 	end, {})
-	local UseMemoResult3 = ReactModule.useMemo(function(): string --[[ Line: 136 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function(): string
 		-- upvalues: GetFFlagAddPeoplePageCardLayoutFunction (upval), PersonButtonConfigsModuleResult (copy)
 		local List = {}
 		
@@ -117,12 +117,12 @@ return function(p1) --[[ Line: 96 ]]
 		
 		return table.concat(List, ",")
 	end, { PersonButtonConfigsModuleResult })
-	ReactModule.useEffect(function() --[[ Line: 156 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagVoiceVolumeControlsPerUserPlayerListButton (upval), UseRefResult (copy), UseSignalStateResult (copy), UseMemoResult1 (copy), GetFFlagAddPeoplePageCardLayoutFunction (upval), PersonButtonConfigsModuleResult (copy), p1 (copy), UseMemoResult (copy)
 		local List = {}
 		
 		if FFlagVoiceVolumeControlsPerUserPlayerListButton then
-			local function _(p2) --[[ Line: 161 | Named "appendVisibleConfig" ]]
+			local function _(p2)
 				-- upvalues: UseRefResult (upval), List (copy), UseSignalStateResult (upval), UseMemoResult1 (upval)
 				if not p2.shouldShow() then return end
 				local CurrentEntry = UseRefResult.current[p2.id]
@@ -196,7 +196,7 @@ return function(p1) --[[ Line: 96 ]]
 			end
 		end
 		if #List > 0 then
-			table.sort(List, function(A, B): boolean --[[ Line: 209 ]]
+			table.sort(List, function(A, B): boolean
 				return A.LayoutOrder < B.LayoutOrder
 			end)
 			UseMemoResult.registerButtonRow(p1.userId, List, p1.index or 0)
@@ -208,25 +208,25 @@ return function(p1) --[[ Line: 96 ]]
 		UseMemoResult3,
 		UseSignalStateResult
 	} else { p1.userId, p1.index, UseMemoResult, UseMemoResult3 })
-	ReactModule.useEffect(function() --[[ Line: 234 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy), p1 (copy)
-		return function() --[[ Line: 235 ]]
+		return function()
 			-- upvalues: UseMemoResult (upval), p1 (upval)
 			UseMemoResult.handlePersonRemoved(p1.userId)
 			UseMemoResult.unregisterButtonRow(p1.userId)
 		end
 	end, { p1.userId, UseMemoResult })
-	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 241 ]]
+	local UseMemoResult4 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), p1 (copy)
 		return UseMemoResult.hasSelectablePlatformButton(p1.userId)
 	end, { p1.userId, UseMemoResult })
 	local UseContextResult1 = if FFlagSideSheetOpenPeoplePage then ReactModule.useContext(SideSheetFocusContextModule) else false
-	local UseMemoResult5 = ReactModule.useMemo(function() --[[ Line: 248 ]]
+	local UseMemoResult5 = ReactModule.useMemo(function()
 		-- upvalues: FFlagSideSheetOpenPeoplePage (upval), GetPersonButtonRowSelectionBehaviorLeftModule (upval), UseMemoResult4 (copy), UseContextResult1 (copy)
 		return if FFlagSideSheetOpenPeoplePage then GetPersonButtonRowSelectionBehaviorLeftModule(UseMemoResult4, UseContextResult1) elseif UseMemoResult4 then Enum.SelectionBehavior.Escape else Enum.SelectionBehavior.Stop
 	end, { UseContextResult1, UseMemoResult4 })
 	
-	if not ReactModule.useMemo(function(): boolean --[[ Line: 256 ]]
+	if not ReactModule.useMemo(function(): boolean
 		-- upvalues: GetFFlagAddPeoplePageCardLayoutFunction (upval), PersonButtonConfigsModuleResult (copy)
 		if GetFFlagAddPeoplePageCardLayoutFunction() then
 			for _, value in PersonButtonConfigsModuleResult do

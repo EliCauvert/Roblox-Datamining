@@ -19,19 +19,19 @@ local config = {
 	[Enum.KeyCode.Return] = FocusNavigationEventNameEnum.Confirm
 }
 
-local function useFocusNavigationBindings(p1) --[[ Line: 29 ]]
+local function useFocusNavigationBindings(p1)
 	-- upvalues: ReactFocusNavigationModule (copy), config (copy), ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy)
-	return ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function() --[[ Line: 31 ]]
+	return ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function()
 		-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval)
 		return {
 			[FocusNavigationEventNameEnum.Confirm] = {
-				handler = InputHandlersModule.onRelease(function() --[[ Line: 34 ]] end)
+				handler = InputHandlersModule.onRelease(function() end)
 			}
 		}
 	end, {}), (ReactFocusNavigationModule.useEventMap(config, p1)))
 end
 
-return function(p1) --[[ Line: 46 | Named "SignUpExitModal" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), UseFocusGuiObjectFunction (copy), ReactModule (copy), useFocusNavigationBindings (copy), AuthModalShownFunction (copy), EventStreamConstants (copy), AuthButtonClickFunction (copy), Dialog (copy), DialogSize (copy), FoundationModule (copy), ButtonVariant (copy), InputSize (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		cancel = "Authentication.SignUp.Action.Cancel",
@@ -42,7 +42,7 @@ return function(p1) --[[ Line: 46 | Named "SignUpExitModal" ]]
 	local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseFocusNavigationBindingsResult = useFocusNavigationBindings(nil)
-	ReactModule.useEffect(function() --[[ Line: 58 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseFocusGuiObjectResult (copy), UseRefResult (copy), AuthModalShownFunction (upval), EventStreamConstants (upval)
 		UseFocusGuiObjectResult(UseRefResult.current)
 		AuthModalShownFunction(EventStreamConstants.Context.SignUpExitModal, EventStreamConstants.State.Success)
@@ -64,7 +64,7 @@ return function(p1) --[[ Line: 46 | Named "SignUpExitModal" ]]
 					size = InputSize.Small,
 					width = UDim.new(1, 0),
 					TextTruncate = Enum.TextTruncate.None,
-					onActivated = ReactModule.useCallback(function() --[[ Line: 63 ]]
+					onActivated = ReactModule.useCallback(function()
 						-- upvalues: AuthButtonClickFunction (upval), EventStreamConstants (upval), p1 (copy)
 						AuthButtonClickFunction(EventStreamConstants.Context.SignUpExitModal, EventStreamConstants.Button.SignUpExitModalLeave)
 						p1.onConfirm()
@@ -77,7 +77,7 @@ return function(p1) --[[ Line: 46 | Named "SignUpExitModal" ]]
 					size = InputSize.Small,
 					width = UDim.new(1, 0),
 					TextTruncate = Enum.TextTruncate.None,
-					onActivated = ReactModule.useCallback(function() --[[ Line: 71 ]]
+					onActivated = ReactModule.useCallback(function()
 						-- upvalues: AuthButtonClickFunction (upval), EventStreamConstants (upval), p1 (copy)
 						AuthButtonClickFunction(EventStreamConstants.Context.SignUpExitModal, EventStreamConstants.Button.SignUpExitModalCancel)
 						p1.onClose()

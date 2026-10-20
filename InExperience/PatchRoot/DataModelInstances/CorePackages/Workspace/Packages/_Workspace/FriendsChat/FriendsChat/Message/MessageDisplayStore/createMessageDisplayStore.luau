@@ -10,7 +10,7 @@ local BuildRowDisplayModule = require(script.Parent.buildRowDisplay)
 local GetLocalUserIdModule = require(script.Parent.Parent.Parent.Utils.getLocalUserId)
 local t = {}
 
-local function _(p1) --[[ Line: 59 | Named "messageSortTime" ]]
+local function _(p1)
 	local CreatedAt = if p1 then p1.created_at else nil
 	
 	if CreatedAt == nil then
@@ -27,7 +27,7 @@ local function _(p1) --[[ Line: 59 | Named "messageSortTime" ]]
 	end
 end
 
-local function resolveProfileNameInfo(p1, p2) --[[ Line: 78 ]]
+local function resolveProfileNameInfo(p1, p2)
 	if p1 == nil or p1.names == nil then
 		return { name = nil, username = nil }
 	else
@@ -45,7 +45,7 @@ local function resolveProfileNameInfo(p1, p2) --[[ Line: 78 ]]
 	end
 end
 
-local function resolveNameInfos(List, p1) --[[ Line: 106 ]]
+local function resolveNameInfos(List, p1)
 	-- upvalues: UserProfileStore (copy), resolveProfileNameInfo (copy)
 	local List1 = {}
 	local t = {}
@@ -68,11 +68,11 @@ local function resolveNameInfos(List, p1) --[[ Line: 106 ]]
 	return t1
 end
 
-return function(Callback, p2) --[[ Line: 128 | Named "createMessageDisplayStore" ]]
+return function(Callback, p2)
 	-- upvalues: SignalsModule (copy), GetConversationStoreModule (copy), ConversationModule (copy), resolveNameInfos (copy), GetLocalUserIdModule (copy), GetConversationMessageStoreModule (copy), t (copy), ClassifyMessageModule (copy), CryoModule (copy), BuildRowDisplayModule (copy)
 	local t2 = {}
 	local t3 = {}
-	local Computed = SignalsModule.createComputed(function(p3): boolean --[[ Line: 135 ]]
+	local Computed = SignalsModule.createComputed(function(p3): boolean
 		-- upvalues: p2 (copy), GetConversationStoreModule (upval), ConversationModule (upval)
 		if p2 == nil then
 			return false
@@ -83,7 +83,7 @@ return function(Callback, p2) --[[ Line: 128 | Named "createMessageDisplayStore"
 		end
 	end)
 	
-	local function resolveForRowSpec(p3, p4) --[[ Line: 144 ]]
+	local function resolveForRowSpec(p3, p4)
 		-- upvalues: resolveNameInfos (upval), GetLocalUserIdModule (upval), Computed (copy)
 		return if p3.kind == "userText" or p3.kind == "hiddenUser" then {
 			namesByUserId = resolveNameInfos({ p3.senderUserId }, p4)
@@ -94,12 +94,12 @@ return function(Callback, p2) --[[ Line: 128 | Named "createMessageDisplayStore"
 		} else {}
 	end
 	
-	local function _(Key) --[[ Line: 158 | Named "getMessageRowSpecs" ]]
+	local function _(Key)
 		-- upvalues: t2 (copy), SignalsModule (upval), GetConversationMessageStoreModule (upval), t (upval), ClassifyMessageModule (upval)
 		local Entry = t2[Key]
 		
 		if Entry == nil then
-			Entry = SignalsModule.createComputed(function(p3) --[[ Line: 161 ]]
+			Entry = SignalsModule.createComputed(function(p3)
 				-- upvalues: GetConversationMessageStoreModule (upval), Key (copy), t (upval), ClassifyMessageModule (upval)
 				local Message = GetConversationMessageStoreModule(p3).getMessage(Key, p3)
 				
@@ -110,7 +110,7 @@ return function(Callback, p2) --[[ Line: 128 | Named "createMessageDisplayStore"
 		return Entry
 	end
 	
-	local _ = function(Key, p3) --[[ Line: 184 | Named "getFrozenMessageSortTime" ]]
+	local _ = function(Key, p3)
 		-- upvalues: t3 (copy), GetConversationMessageStoreModule (upval)
 		local Entry = t3[Key]
 		
@@ -142,7 +142,7 @@ return function(Callback, p2) --[[ Line: 128 | Named "createMessageDisplayStore"
 		return UnixTimestampMillis
 	end
 	
-	local Computed1 = SignalsModule.createComputed(function(p3) --[[ Line: 201 ]]
+	local Computed1 = SignalsModule.createComputed(function(p3)
 		-- upvalues: Callback (copy), t2 (copy), SignalsModule (upval), GetConversationMessageStoreModule (upval), t (upval), ClassifyMessageModule (upval), t3 (copy)
 		local List = {}
 		local Total = 0
@@ -151,7 +151,7 @@ return function(Callback, p2) --[[ Line: 128 | Named "createMessageDisplayStore"
 			local Entry = t2[SourceId]
 			
 			if Entry == nil then
-				Entry = SignalsModule.createComputed(function(p4) --[[ Line: 161 ]]
+				Entry = SignalsModule.createComputed(function(p4)
 					-- upvalues: GetConversationMessageStoreModule (upval), SourceId (copy), t (upval), ClassifyMessageModule (upval)
 					local Message = GetConversationMessageStoreModule(p4).getMessage(SourceId, p4)
 					
@@ -199,7 +199,7 @@ return function(Callback, p2) --[[ Line: 128 | Named "createMessageDisplayStore"
 				table.insert(List, config)
 			end
 		end
-		table.sort(List, function(A, B): boolean --[[ Line: 227 ]]
+		table.sort(List, function(A, B): boolean
 			return if A.sortTime == B.sortTime then A.sourceId < B.sourceId else A.sortTime < B.sortTime
 		end)
 		local IdList = {}
@@ -216,11 +216,11 @@ return function(Callback, p2) --[[ Line: 128 | Named "createMessageDisplayStore"
 	end)
 	
 	return {
-		getDisplayIds = SignalsModule.createComputed(function(p4) --[[ Line: 247 ]]
+		getDisplayIds = SignalsModule.createComputed(function(p4)
 			-- upvalues: Computed1 (copy)
 			return Computed1(p4).idList
 		end, CryoModule.List.equals),
-		getDisplayFromId = function(p4, p5, p6) --[[ Line: 255 ]]
+		getDisplayFromId = function(p4, p5, p6)
 			-- upvalues: Computed1 (copy), t2 (copy), SignalsModule (upval), GetConversationMessageStoreModule (upval), t (upval), ClassifyMessageModule (upval), BuildRowDisplayModule (upval), resolveForRowSpec (copy)
 			if p4 == nil then
 				return nil
@@ -234,7 +234,7 @@ return function(Callback, p2) --[[ Line: 128 | Named "createMessageDisplayStore"
 			local Entry = t2[MessageId]
 			
 			if Entry == nil then
-				Entry = SignalsModule.createComputed(function(p7) --[[ Line: 161 ]]
+				Entry = SignalsModule.createComputed(function(p7)
 					-- upvalues: GetConversationMessageStoreModule (upval), MessageId (copy), t (upval), ClassifyMessageModule (upval)
 					local Message = GetConversationMessageStoreModule(p7).getMessage(MessageId, p7)
 					
@@ -246,7 +246,7 @@ return function(Callback, p2) --[[ Line: 128 | Named "createMessageDisplayStore"
 			
 			return if EntryResultEntry == nil then nil else BuildRowDisplayModule(EntryResultEntry, resolveForRowSpec(EntryResultEntry, p5), p6 or {})
 		end,
-		getMessageIdFromDisplayId = function(p4) --[[ Line: 274 ]]
+		getMessageIdFromDisplayId = function(p4)
 			-- upvalues: Computed1 (copy)
 			if p4 == nil then
 				return nil

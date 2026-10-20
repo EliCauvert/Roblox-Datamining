@@ -10,7 +10,7 @@ local config = {
 }
 
 return {
-	logSlimTintModeSelected = function(p1) --[[ Line: 23 ]]
+	logSlimTintModeSelected = function(p1)
 		-- upvalues: RunService (copy), RbxAnalyticsService (copy), TelemetryService (copy), config (copy)
 		if p1.Name ~= "None" then
 			TelemetryService:LogEvent(config, {

@@ -35,7 +35,7 @@ local config2 = {
 	[CardDensityModule.Comfortable] = CardHeaderSizeModule.Large
 }
 
-local function resolveMedia(Src) --[[ Line: 109 ]]
+local function resolveMedia(Src)
 	-- upvalues: CardMediaPlacementModule (copy), config (copy), Ratio2x1 (copy)
 	if typeof(Src) == "string" then
 		return {
@@ -58,12 +58,12 @@ local function resolveMedia(Src) --[[ Line: 109 ]]
 	end
 end
 
-local function _(p1, p2): number --[[ Line: 140 | Named "getBottomMediaHeight" ]]
+local function _(p1, p2): number
 	-- upvalues: CardMediaPlacementModule (copy)
 	return if p1 == nil or p1.placement ~= CardMediaPlacementModule.Bottom then 0 else math.round(p2 / p1.aspectRatio)
 end
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 148 | Named "Card" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config1 (copy), UseTokensModule (copy), config2 (copy), resolveMedia (copy), CardMediaPlacementModule (copy), CardHeightModule (copy), UseCardVariantsModule (copy), ReactModule (copy), CardActionsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), CardHeaderModule (copy), CardMediaModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config1)
 	local UseTokensModuleResult = UseTokensModule()
@@ -97,10 +97,10 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 148 
 	}), {
 		Body = ReactModule.createElement(ViewModule, {
 			tag = UseCardVariantsModuleResult.body.tag,
-			onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 174 ]]
+			onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
 				-- upvalues: UseStateResult2 (copy)
 				local X = Frame.AbsoluteSize.X
-				UseStateResult2(function(X1) --[[ Line: 176 ]]
+				UseStateResult2(function(X1)
 					-- upvalues: X (copy)
 					return if X1 == X then X1 else X
 				end)
@@ -109,7 +109,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 148 
 			Content = ReactModule.createElement(ViewModule, {
 				LayoutOrder = 1,
 				tag = UseCardVariantsModuleResult.content.tag,
-				onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 181 ]]
+				onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
 					-- upvalues: UseStateResult2_1 (copy)
 					UseStateResult2_1(Frame.AbsoluteSize.Y)
 				end, {})

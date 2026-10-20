@@ -25,9 +25,9 @@ local config1 = {
 	SelectionBehaviorUp = Enum.SelectionBehavior.Stop
 }
 
-local function _(p1, p2, Ref) --[[ Line: 43 | Named "useWrappedFrameProps" ]]
+local function _(p1, p2, Ref)
 	-- upvalues: ReactModule (copy), t (copy), CryoModule (copy), config1 (copy), config (copy)
-	return ReactModule.useMemo(function() --[[ Line: 45 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: p2 (copy), t (upval), p1 (copy), CryoModule (upval), config1 (upval), config (upval), Ref (copy)
 		local JoinResult = p2 or t
 		
@@ -38,7 +38,7 @@ local function _(p1, p2, Ref) --[[ Line: 43 | Named "useWrappedFrameProps" ]]
 	end, { p1, p2, Ref })
 end
 
-return function(p1) --[[ Line: 74 | Named "FocusRoot" ]]
+return function(p1)
 	-- upvalues: FFlagFocusRootUseHooksModule (copy), UseFocusRootModule (copy), ReactModule (copy), BaseFocusRootModule (copy), t (copy), ReactFocusNavigationModule (copy), UseFocusNavigableSurfaceRegistryConnectionModule (copy), UseDescendantHasFocusModule (copy), UseAutoFocusModule (copy), UseLastInputModeModule (copy), GuiService (copy), CryoModule (copy), config1 (copy), config (copy)
 	if FFlagFocusRootUseHooksModule then
 		return ReactModule.createElement(BaseFocusRootModule, {
@@ -60,11 +60,11 @@ return function(p1) --[[ Line: 74 | Named "FocusRoot" ]]
 		local UseAutoFocusModuleResult = UseAutoFocusModule({ UseStateResult }, 0.1)
 		local IsFocus = UseLastInputModeModule() == "Focus"
 		local NoUseDescendantHasFocusModuleResult: boolean = p1.isAutoFocusRoot and (NoIsFocusable and (IsFocus and (UseStateResult and not UseDescendantHasFocusModuleResult)))
-		ReactModule.useEffect(function() --[[ Line: 113 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: NoUseDescendantHasFocusModuleResult (copy), UseAutoFocusModuleResult (copy)
 			local UseAutoFocusModuleResultResult = if NoUseDescendantHasFocusModuleResult then UseAutoFocusModuleResult() else nil
 			
-			return function() --[[ Line: 118 ]]
+			return function()
 				-- upvalues: UseAutoFocusModuleResultResult (ref)
 				if UseAutoFocusModuleResultResult then
 					UseAutoFocusModuleResultResult.cancel()
@@ -75,15 +75,15 @@ return function(p1) --[[ Line: 74 | Named "FocusRoot" ]]
 			UseAutoFocusModuleResult
 		})
 		local UseRefResult = ReactModule.useRef(UseStateResult)
-		ReactModule.useEffect(function() --[[ Line: 126 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseStateResult (ref), UseRefResult (copy)
 			if UseStateResult then
 				UseRefResult.current = UseStateResult
 			end
 		end, { UseStateResult })
-		ReactModule.useEffect(function() --[[ Line: 132 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRefResult (copy), GuiService (upval)
-			return function() --[[ Line: 133 ]]
+			return function()
 				-- upvalues: UseRefResult (upval), GuiService (upval)
 				if not UseRefResult.current then return end
 				local SelectedCoreObject = GuiService.SelectedCoreObject
@@ -97,7 +97,7 @@ return function(p1) --[[ Line: 74 | Named "FocusRoot" ]]
 		local IsIsolated = p1.isIsolated
 		local FrameProps = p1.frameProps
 		
-		return ReactModule.createElement("Frame", ReactModule.useMemo(function() --[[ Line: 45 ]]
+		return ReactModule.createElement("Frame", ReactModule.useMemo(function()
 			-- upvalues: FrameProps (copy), t (upval), IsIsolated (copy), CryoModule (upval), config1 (upval), config (upval), UseMostRecentFocusBehaviorResult1 (copy)
 			local JoinResult = FrameProps or t
 			

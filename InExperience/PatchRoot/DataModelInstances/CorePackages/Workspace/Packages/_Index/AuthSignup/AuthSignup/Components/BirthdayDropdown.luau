@@ -20,7 +20,7 @@ local TimeUnit = TimeModule.TimeUnit
 local DateHelper = TimeModule.DateHelper
 local DropdownWithPopover = AuthCommonModule.Components.DropdownWithPopover
 
-local function v16(p1) --[[ Line: 34 ]]
+local function v16(p1)
 	local List = {}
 	
 	for i = 1, 12 do
@@ -31,7 +31,7 @@ end
 
 local config = { minAgeAllowed = 0, maxAgeAllowed = 99 }
 
-return ReactModule.memo(function(p2) --[[ Line: 63 | Named "BirthdayDropdown" ]]
+return ReactModule.memo(function(p2)
 	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), DateHelper (copy), UseStateFunction (copy), TimeUnit (copy), ReactModule (copy), v16 (copy), UseEffectFunction (copy), Birthday (copy), ValidateBirthdayModule (copy), EventStreamConstants (copy), AuthFormInteractionFunction (copy), View (copy), DropdownWithPopover (copy), Text (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p2)
 	local UseTokensResult = UseTokensFunction()
@@ -54,20 +54,20 @@ return ReactModule.memo(function(p2) --[[ Line: 63 | Named "BirthdayDropdown" ]]
 	local DateTypeOrderEntry1 = DateTypeOrderEntry[TimeUnit.Months]
 	local DateTypeOrderEntry2 = DateTypeOrderEntry[TimeUnit.Days]
 	local DateTypeOrderEntry3 = DateTypeOrderEntry[TimeUnit.Years]
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 91 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: DateHelper (upval), CurrentDateEntryDelta (copy), CurrentDateEntryDelta1 (copy)
 		return DateHelper:generateYearCellDatas(CurrentDateEntryDelta, CurrentDateEntryDelta1)
 	end, { CurrentDateEntryDelta, CurrentDateEntryDelta1 })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 94 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: v16 (upval), UseLocalizationResult1 (copy)
 		return (v16(UseLocalizationResult1))
 	end, { UseLocalizationResult1 })
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 97 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: DateHelper (upval)
 		return DateHelper:generateDayCellDatas()
 	end, {})
 	local FocusOnMount = JoinResult.focusOnMount
-	UseEffectFunction(function() --[[ Line: 103 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseStateResult1 (copy), UseStateResult (copy), UseStateResult3 (copy), Birthday (upval), ValidateBirthdayModule (upval), MinAgeAllowed (copy), JoinResult (copy), UseStateResult2_3 (copy), EventStreamConstants (upval), AuthFormInteractionFunction (upval)
 		if UseStateResult1 == nil or UseStateResult == nil or UseStateResult3 == nil then return end
 		local NewBirthday = Birthday.new({

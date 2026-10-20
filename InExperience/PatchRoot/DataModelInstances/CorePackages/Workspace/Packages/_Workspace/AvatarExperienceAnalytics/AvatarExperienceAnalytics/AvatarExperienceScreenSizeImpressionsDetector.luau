@@ -22,7 +22,7 @@ AvatarExperienceScreenSizeImpressionsDetector.validateProps = TModule.strictInte
 	shortcutBarHeight = if FFlagUnifyShortcutBarFixImpressions then TModule.optional(TModule.number) else nil
 })
 
-function AvatarExperienceScreenSizeImpressionsDetector.render(p1) --[[ Line: 35 ]]
+function AvatarExperienceScreenSizeImpressionsDetector.render(p1)
 	-- upvalues: FFlagUnifyShortcutBarFixImpressions (copy), RoactModule (copy), AvatarExperienceImpressionsDetectorModule (copy)
 	local ScreenSize = p1.props.screenSize
 	
@@ -41,7 +41,7 @@ function AvatarExperienceScreenSizeImpressionsDetector.render(p1) --[[ Line: 35 
 	})
 end
 
-local v1 = RoactRoduxModule.connect(function(p1, _) --[[ Line: 56 ]]
+local v1 = RoactRoduxModule.connect(function(p1, _)
 	return {
 		topBarHeight = p1.TopBar.topBarHeight,
 		globalGuiInset = p1.GlobalGuiInset,
@@ -49,7 +49,7 @@ local v1 = RoactRoduxModule.connect(function(p1, _) --[[ Line: 56 ]]
 	}
 end)(AvatarExperienceScreenSizeImpressionsDetector)
 
-return if FFlagUnifyShortcutBarFixImpressions then function(p1) --[[ Line: 66 ]]
+return if FFlagUnifyShortcutBarFixImpressions then function(p1)
 	-- upvalues: SignalsReactModule (copy), GetShortcutBarStatusStoreFunction (copy), RoactModule (copy), v1 (copy), CryoModule (copy)
 	return RoactModule.createElement(v1, CryoModule.Dictionary.join(p1, {
 		shortcutBarHeight = SignalsReactModule.useSignalState(GetShortcutBarStatusStoreFunction(false).getShortcutBarReservedHeight)

@@ -2,11 +2,11 @@
 local v1 = require(script.createFaeFeatureAccessStore)()
 
 return {
-	getFaeFeatureAccessStore = function() --[[ Line: 11 ]]
+	getFaeFeatureAccessStore = function()
 		-- upvalues: v1 (copy)
 		return v1
 	end,
-	useFaeFeatureAccess = function() --[[ Line: 14 ]]
+	useFaeFeatureAccess = function()
 		-- upvalues: UseFaeFeatureAccessModule (copy), v1 (copy)
 		return UseFaeFeatureAccessModule(v1)
 	end

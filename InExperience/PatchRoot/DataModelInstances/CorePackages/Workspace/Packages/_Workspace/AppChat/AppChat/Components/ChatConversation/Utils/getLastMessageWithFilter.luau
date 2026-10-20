@@ -1,6 +1,6 @@
 ﻿local CryoModule = require(script:FindFirstAncestor("AppChat").Parent.Cryo)
 
-return function(p1, p2) --[[ Line: 13 | Named "getLastMessageWithFilter" ]]
+return function(p1, p2)
 	-- upvalues: CryoModule (copy)
 	if p1 and #p1 ~= 0 then
 		local Where = CryoModule.List.findWhere(p1, p2)

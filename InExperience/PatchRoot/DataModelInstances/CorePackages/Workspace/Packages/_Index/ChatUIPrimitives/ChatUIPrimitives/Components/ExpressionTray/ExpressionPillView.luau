@@ -5,7 +5,7 @@ local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local _ = require(ChatUIPrimitives.UniversalMessage.Types)
 
-return ReactModule.memo(function(p1) --[[ Line: 36 | Named "ExpressionPillView" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), TweenService (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local Circle = UseTokensResult.Radius.Circle
@@ -14,17 +14,17 @@ return ReactModule.memo(function(p1) --[[ Line: 36 | Named "ExpressionPillView" 
 	local IsClockTimeBelow: boolean = CooldownEndsAt ~= nil and os.clock() < CooldownEndsAt
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 46 ]]
+	local UseResult = ReactModule.useCallback(function(Frame: Frame)
 		-- upvalues: UseStateResult (copy), UseStateResult2 (copy)
 		if UseStateResult == nil and Frame and Frame.AbsoluteSize.X > 0 then
 			UseStateResult2(Frame.AbsoluteSize)
 		end
 	end, { UseStateResult })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 52 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		p1.onActivated(p1.content)
 	end, { p1.onActivated, p1.content })
-	ReactModule.useEffect(function() --[[ Line: 56 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: CooldownEndsAt (copy), UseStateResult (copy), UseRefResult (copy), CooldownDurationSeconds (copy), TweenService (upval)
 		if CooldownEndsAt == nil or UseStateResult == nil then return end
 		local Current = UseRefResult.current
@@ -37,7 +37,7 @@ return ReactModule.memo(function(p1) --[[ Line: 36 | Named "ExpressionPillView" 
 		local Tween = TweenService:Create(Current, TweenInfo.new(CooldownEndsAtDelta, Enum.EasingStyle.Linear), { Size = UDim2.fromOffset(0, UseStateResult.Y) })
 		Tween:Play()
 		
-		return function() --[[ Line: 74 ]]
+		return function()
 			-- upvalues: Tween (copy)
 			Tween:Cancel()
 			Tween:Destroy()

@@ -18,7 +18,7 @@ return {
 	prereqTests = {
 		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
-	run = function(p1, p2) --[[ Line: 20 ]]
+	run = function(p1, p2)
 		-- upvalues: GetFIntUGCValidateMaxAnimationFPSModule (copy), GetFStringUGCValidationMaxAnimationDeltasModule (copy), ErrorSourceStringsModule (copy)
 		local AnimFrames = p2.curveAnimComputedFrames.animFrames
 		local v1 = 1 / GetFIntUGCValidateMaxAnimationFPSModule()

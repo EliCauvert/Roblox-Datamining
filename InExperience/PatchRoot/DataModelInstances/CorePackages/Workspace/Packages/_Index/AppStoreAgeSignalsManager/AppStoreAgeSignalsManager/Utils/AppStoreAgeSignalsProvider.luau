@@ -18,13 +18,13 @@ local NewUrlBuilder1 = UrlBuilder.new({
 })
 
 return {
-	checkEligibility = function() --[[ Line: 27 ]]
+	checkEligibility = function()
 		-- upvalues: FetchFunction (copy), UserInputService (copy), PromiseModule (copy), NewUrlBuilder (copy), Response (copy)
 		local Name = UserInputService:GetPlatform().Name
 		
-		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 30 ]]
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 			-- upvalues: NewUrlBuilder (upval), Name (copy), FetchFunction (copy), Response (upval)
-			local v1 = FetchFunction(NewUrlBuilder({ signalSource = Name }), { method = "GET" }):catch(function() --[[ Line: 33 ]]
+			local v1 = FetchFunction(NewUrlBuilder({ signalSource = Name }), { method = "GET" }):catch(function()
 				-- upvalues: Response (upval)
 				return Response.error()
 			end):expect()
@@ -34,7 +34,7 @@ return {
 				
 				return
 			end
-			local v2 = v1:json():catch(function() --[[ Line: 45 ]]
+			local v2 = v1:json():catch(function()
 				return nil
 			end):expect()
 			
@@ -47,9 +47,9 @@ return {
 			end
 		end)
 	end,
-	publishResult = function(SignalSource, EncodedSignals, ResultType) --[[ Line: 62 ]]
+	publishResult = function(SignalSource, EncodedSignals, ResultType)
 		-- upvalues: FetchFunction (copy), PromiseModule (copy), NewUrlBuilder1 (copy), HttpService (copy), Response (copy)
-		return PromiseModule.new(function(Callback1: () -> (), Callback: (any) -> ()) --[[ Line: 64 ]]
+		return PromiseModule.new(function(Callback1: () -> (), Callback: (any) -> ())
 			-- upvalues: NewUrlBuilder1 (upval), FetchFunction (copy), HttpService (upval), SignalSource (copy), EncodedSignals (copy), ResultType (copy), Response (upval)
 			local v1 = FetchFunction(NewUrlBuilder1(), {
 				method = "POST",
@@ -62,7 +62,7 @@ return {
 					["Content-Type"] = "application/json",
 					Accept = "application/json"
 				}
-			}):catch(function() --[[ Line: 78 ]]
+			}):catch(function()
 				-- upvalues: Response (upval)
 				return Response.error()
 			end):expect()

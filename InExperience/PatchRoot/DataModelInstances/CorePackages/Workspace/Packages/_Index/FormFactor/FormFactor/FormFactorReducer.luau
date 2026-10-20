@@ -1,7 +1,7 @@
 ﻿local FormFactorModule = require(script.Parent.FormFactor)
 local SetFormFactorModule = require(script.Parent.SetFormFactor)
 
-return function(p1, p2) --[[ Line: 6 ]]
+return function(p1, p2)
 	-- upvalues: FormFactorModule (copy), SetFormFactorModule (copy)
 	local P0 = p1 or FormFactorModule.UNKNOWN
 	

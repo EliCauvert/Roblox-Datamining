@@ -18,7 +18,7 @@ local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfi
 local FFlagFixCommunityProfileWideCoverLayoutModule = require(ProfilePlatform.Flags.FFlagFixCommunityProfileWideCoverLayout)
 local View = require(Parent.Foundation).View
 
-return function(p1) --[[ Line: 37 ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), UseSignalStateFunction (copy), DisplayModule (copy), FFlagProfileModalViewStatusBarOffsetModule (copy), UseStatusBarHeightFunction (copy), FFlagProfileModalViewBottomSafeAreaModule (copy), FFlagFixCommunityProfileWideCoverLayoutModule (copy), UseProfileWrapperContextModule (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), ReactModule (copy), InputHandlersModule (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigableSurfaceIdentifierEnum (copy), FocusNavigationEventNameEnum (copy), View (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseSignalStateResult = UseSignalStateFunction(DisplayModule.GetDisplayStore().getDeviceSafePadding)
@@ -49,9 +49,9 @@ return function(p1) --[[ Line: 37 ]]
 			},
 			customEventHandlers = {
 				[FocusNavigationEventNameEnum.NavigateBack] = {
-					handler = ReactModule.useMemo(function() --[[ Line: 82 ]]
+					handler = ReactModule.useMemo(function()
 						-- upvalues: InputHandlersModule (upval), p1 (copy)
-						return InputHandlersModule.onRelease(function(p2) --[[ Line: 83 ]]
+						return InputHandlersModule.onRelease(function(p2)
 							-- upvalues: p1 (upval)
 							p2:cancel()
 							p1.navigateBack()
@@ -60,7 +60,7 @@ return function(p1) --[[ Line: 37 ]]
 				}
 			}
 		}, {
-			ReactModule.useCallback(function(p2) --[[ Line: 72 ]]
+			ReactModule.useCallback(function(p2)
 				-- upvalues: ReactModule (upval)
 				return ReactModule.createElement("TextButton", {
 					BackgroundTransparency = 1,

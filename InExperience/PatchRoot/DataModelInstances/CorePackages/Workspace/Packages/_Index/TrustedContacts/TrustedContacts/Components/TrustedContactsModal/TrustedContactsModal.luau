@@ -30,16 +30,16 @@ local EventMap = {
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p1) --[[ Line: 56 ]]
+return function(p1)
 	-- upvalues: ResponsiveModule (copy), FFlagTrustedContactsModalFixFocusNavigationModule (copy), ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), FFlagTrustedContactsSheetFocusNavigationModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseMostRecentOrDefaultFocusBehaviorFunction (copy), UseFocusOnMountFunction (copy), TCMountMinLoadingTimeMs (copy), Loading (copy), IconSize (copy), Sheet (copy), Text (copy), FFlagTCLearnMoreLinkModule (copy), View (copy), SocialMetadataSectionModule (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy), FocusRoot (copy)
 	local IsVerticallyConstrained = p1.isVerticallyConstrained
 	local UseOrientationResult = ResponsiveModule.useOrientation()
 	local OnCloseModalFunction = p1.onCloseModal
-	local UseMemoResult = if FFlagTrustedContactsModalFixFocusNavigationModule then ReactModule.useMemo(function() --[[ Line: 62 ]]
+	local UseMemoResult = if FFlagTrustedContactsModalFixFocusNavigationModule then ReactModule.useMemo(function()
 		-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), OnCloseModalFunction (copy)
 		return {
 			[FocusNavigationEventNameEnum.NavigateBack] = {
-				handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 65 ]]
+				handler = InputHandlersModule.onRelease(function(p2)
 					-- upvalues: OnCloseModalFunction (upval)
 					OnCloseModalFunction()
 					p2:cancel()
@@ -65,14 +65,14 @@ return function(p1) --[[ Line: 56 ]]
 	local IsUseOrientationResultMatch = UseOrientationResult == ResponsiveModule.DefaultKey
 	local UseStateResult, UseStateResult2 = ReactModule.useState(IsUseOrientationResultMatch)
 	local UseRefResult = ReactModule.useRef(os.clock())
-	ReactModule.useEffect(function() --[[ Line: 98 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsUseOrientationResultMatch (copy), UseRefResult (copy), TCMountMinLoadingTimeMs (upval), UseStateResult2 (copy)
 		if not IsUseOrientationResultMatch then
 			local Elapsed = os.clock() - UseRefResult.current
 			local TCMountMinLoadingTimeMsRatio = TCMountMinLoadingTimeMs / 1000
 			
 			if Elapsed < TCMountMinLoadingTimeMsRatio then
-				delay(TCMountMinLoadingTimeMsRatio - Elapsed, function() --[[ Line: 104 ]]
+				delay(TCMountMinLoadingTimeMsRatio - Elapsed, function()
 					-- upvalues: UseStateResult2 (upval)
 					UseStateResult2(false)
 				end)

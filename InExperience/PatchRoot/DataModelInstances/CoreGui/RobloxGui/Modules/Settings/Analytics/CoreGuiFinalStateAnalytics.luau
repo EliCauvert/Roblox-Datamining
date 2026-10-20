@@ -4,7 +4,7 @@ local EventStream = require(game:GetService("CorePackages").Workspace.Packages.A
 local CoreGuiFinalStateAnalyticsModule = {}
 CoreGuiFinalStateAnalyticsModule.__index = CoreGuiFinalStateAnalyticsModule
 
-function CoreGuiFinalStateAnalyticsModule.new() --[[ Line: 22 ]]
+function CoreGuiFinalStateAnalyticsModule.new()
 	-- upvalues: EventStream (copy), RbxAnalyticsService (copy), CoreGuiFinalStateAnalyticsModule (copy)
 	local config = { evenStream = EventStream.new(RbxAnalyticsService) }
 	setmetatable(config, CoreGuiFinalStateAnalyticsModule)
@@ -12,7 +12,7 @@ function CoreGuiFinalStateAnalyticsModule.new() --[[ Line: 22 ]]
 	return config
 end
 
-function CoreGuiFinalStateAnalyticsModule:sendCoreGuiFinalAnalytic() --[[ Line: 30 ]]
+function CoreGuiFinalStateAnalyticsModule:sendCoreGuiFinalAnalytic()
 	-- upvalues: RbxAnalyticsService (copy), StarterGui (copy)
 	local config = {
 		placeid = tostring(game.PlaceId),
@@ -24,7 +24,7 @@ function CoreGuiFinalStateAnalyticsModule:sendCoreGuiFinalAnalytic() --[[ Line: 
 		config[enumItem.Name] = tostring(StarterGui:GetCoreGuiEnabled(enumItem))
 	end
 	local Text = ""
-	pcall(function() --[[ Line: 43 ]]
+	pcall(function()
 		-- upvalues: Text (ref), StarterGui (upval)
 		Text = tostring(StarterGui:GetCore("ResetButtonCallback"))
 	end)

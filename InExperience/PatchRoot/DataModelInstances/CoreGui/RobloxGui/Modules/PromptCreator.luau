@@ -12,7 +12,7 @@ local NewResult = nil
 local PromptDialog = nil
 local ContainerFrame = nil
 
-function getViewportSize() --[[ Line: 32 ]]
+function getViewportSize()
 	while not game.Workspace.CurrentCamera do
 		game.Workspace.Changed:Wait()
 	end
@@ -72,7 +72,7 @@ end
 if IsEnabled or Flag then
 	TextSize = 42
 end
-local function createFrame(Name, Size, Position, BackgroundTransparency, StripeColor) --[[ Line: 125 ]]
+local function createFrame(Name, Size, Position, BackgroundTransparency, StripeColor)
 	local Frame = Instance.new("Frame")
 	Frame.Name = Name
 	Frame.Size = Size
@@ -85,7 +85,7 @@ local function createFrame(Name, Size, Position, BackgroundTransparency, StripeC
 	return Frame
 end
 
-local function createTextLabel(Name, Size, Position, SourceSansBold, TextSize, WindowTitle) --[[ Line: 138 ]]
+local function createTextLabel(Name, Size, Position, SourceSansBold, TextSize, WindowTitle)
 	local Label = Instance.new("TextLabel")
 	Label.Name = Name
 	Label.Size = Size or UDim2.new(0, 0, 0, 0)
@@ -100,7 +100,7 @@ local function createTextLabel(Name, Size, Position, SourceSansBold, TextSize, W
 	return Label
 end
 
-local function createScrollingTextLabel(Name, Size, Position, SourceSansBold, TextSize, MainText, ScrollBarThickness: number) --[[ Line: 153 ]]
+local function createScrollingTextLabel(Name, Size, Position, SourceSansBold, TextSize, MainText, ScrollBarThickness: number)
 	-- upvalues: createTextLabel (copy), TextService (copy)
 	local TextLabel = createTextLabel(Name, Size, Position, SourceSansBold, TextSize, MainText)
 	TextLabel.TextXAlignment = Enum.TextXAlignment.Left
@@ -132,11 +132,11 @@ local function createScrollingTextLabel(Name, Size, Position, SourceSansBold, Te
 		ScrollingFrame.SelectionImageObject.BackgroundTransparency = 1
 		ScrollingFrame.SelectionImageObject.Image = ""
 		ScrollingFrame.Active = false
-		ScrollingFrame.SelectionGained:connect(function() --[[ Line: 189 ]]
+		ScrollingFrame.SelectionGained:connect(function()
 			-- upvalues: ScrollingTextParent (copy)
 			ScrollingTextParent.BackgroundTransparency = 0.15
 		end)
-		ScrollingFrame.SelectionLost:connect(function() --[[ Line: 193 ]]
+		ScrollingFrame.SelectionLost:connect(function()
 			-- upvalues: ScrollingTextParent (copy)
 			ScrollingTextParent.BackgroundTransparency = 1
 		end)
@@ -151,7 +151,7 @@ local function createScrollingTextLabel(Name, Size, Position, SourceSansBold, Te
 	end
 end
 
-local function _(Name, Size, Position, Image, Callback: (any) -> ()) --[[ Line: 210 | Named "createImageLabel" ]]
+local function _(Name, Size, Position, Image, Callback: (any) -> ())
 	local Image1 = Instance.new("ImageLabel")
 	Image1.Name = Name
 	Image1.Size = Size
@@ -165,7 +165,7 @@ local function _(Name, Size, Position, Image, Callback: (any) -> ()) --[[ Line: 
 	return Image1
 end
 
-local function createImageButtonWithText(Name, Size, Position, Image, Image1, ConfirmationText, SourceSans) --[[ Line: 225 ]]
+local function createImageButtonWithText(Name, Size, Position, Image, Image1, ConfirmationText, SourceSans)
 	-- upvalues: createTextLabel (copy), TextSize (ref)
 	local ImageButton = Instance.new("ImageButton")
 	ImageButton.Name = Name
@@ -184,23 +184,23 @@ local function createImageButtonWithText(Name, Size, Position, Image, Image1, Co
 	local TextLabel = createTextLabel(Name .. "Text", UDim2.new(1, 0, 1, 0), UDim2.new(0, 0, 0, 0), SourceSans, TextSize, ConfirmationText)
 	TextLabel.ZIndex = 9
 	TextLabel.Parent = ImageButton
-	ImageButton.MouseEnter:connect(function() --[[ Line: 245 ]]
+	ImageButton.MouseEnter:connect(function()
 		-- upvalues: ImageButton (copy), Image1 (copy)
 		ImageButton.Image = Image1
 	end)
-	ImageButton.MouseLeave:connect(function() --[[ Line: 248 ]]
+	ImageButton.MouseLeave:connect(function()
 		-- upvalues: ImageButton (copy), Image (copy)
 		ImageButton.Image = Image
 	end)
-	ImageButton.MouseButton1Click:connect(function() --[[ Line: 251 ]]
+	ImageButton.MouseButton1Click:connect(function()
 		-- upvalues: ImageButton (copy), Image (copy)
 		ImageButton.Image = Image
 	end)
-	ImageButton.SelectionGained:connect(function() --[[ Line: 254 ]]
+	ImageButton.SelectionGained:connect(function()
 		-- upvalues: ImageButton (copy), Image1 (copy)
 		ImageButton.Image = Image1
 	end)
-	ImageButton.SelectionLost:connect(function() --[[ Line: 257 ]]
+	ImageButton.SelectionLost:connect(function()
 		-- upvalues: ImageButton (copy), Image (copy)
 		ImageButton.Image = Image
 	end)
@@ -208,7 +208,7 @@ local function createImageButtonWithText(Name, Size, Position, Image, Image1, Co
 	return ImageButton
 end
 
-local function createPromptDialog() --[[ Line: 265 ]]
+local function createPromptDialog()
 	-- upvalues: PromptDialog (ref), createFrame (copy), _UDim2 (ref), _UDim2_1 (ref), RobloxGui (copy), ContainerFrame (ref)
 	PromptDialog = createFrame("PromptDialog", _UDim2, _UDim2_1, 1, nil)
 	PromptDialog.Visible = false
@@ -219,7 +219,7 @@ local function createPromptDialog() --[[ Line: 265 ]]
 	ContainerFrame.Parent = PromptDialog
 end
 
-local _ = function() --[[ Line: 276 | Named "destroyPromptDialog" ]]
+local _ = function()
 	-- upvalues: PromptDialog (ref), ContainerFrame (ref)
 	if PromptDialog then
 		PromptDialog:Destroy()
@@ -228,7 +228,7 @@ local _ = function() --[[ Line: 276 | Named "destroyPromptDialog" ]]
 	end
 end
 
-function AddDefaultsToPromptOptions(p1, List) --[[ Line: 284 ]]
+function AddDefaultsToPromptOptions(p1, List)
 	for i, value in pairs(List) do
 		if p1[i] == nil then
 			p1[i] = value
@@ -236,7 +236,7 @@ function AddDefaultsToPromptOptions(p1, List) --[[ Line: 284 ]]
 	end
 end
 
-function CreatePromptVRorConsole(p2) --[[ Line: 293 ]]
+function CreatePromptVRorConsole(p2)
 	-- upvalues: ContainerFrame (ref), createTextLabel (copy), createFrame (copy), createScrollingTextLabel (copy), createImageButtonWithText (copy)
 	local XOffset = 90
 	
@@ -273,7 +273,7 @@ function CreatePromptVRorConsole(p2) --[[ Line: 293 ]]
 	ConfirmButton.Parent = ContainerFrame
 	ConfirmButton.ScaleType = Slice
 	ConfirmButton.SliceCenter = _Rect
-	ConfirmButton.MouseButton1Click:connect(function() --[[ Line: 330 ]]
+	ConfirmButton.MouseButton1Click:connect(function()
 		OnPromptEnded(true)
 	end)
 	
@@ -282,13 +282,13 @@ function CreatePromptVRorConsole(p2) --[[ Line: 293 ]]
 		CancelButton.Parent = ContainerFrame
 		CancelButton.ScaleType = Slice
 		CancelButton.SliceCenter = _Rect
-		CancelButton.MouseButton1Click:connect(function() --[[ Line: 342 ]]
+		CancelButton.MouseButton1Click:connect(function()
 			OnPromptEnded(false)
 		end)
 	end
 end
 
-function CreatePromptPCorTablet(p2) --[[ Line: 348 ]]
+function CreatePromptPCorTablet(p2)
 	-- upvalues: createTextLabel (copy), YOffset (ref), ContainerFrame (ref), createFrame (copy), NoIsYBelow (copy), createScrollingTextLabel (copy), createImageButtonWithText (copy)
 	local WindowTitle = createTextLabel("WindowTitle", UDim2.new(1, 0, 0, YOffset), UDim2.new(0, 0, 0, 0), Enum.Font.SourceSansBold, 24, p2.WindowTitle)
 	WindowTitle.Parent = ContainerFrame
@@ -326,7 +326,7 @@ function CreatePromptPCorTablet(p2) --[[ Line: 348 ]]
 	ConfirmButton.Parent = ContainerFrame
 	ConfirmButton.ScaleType = Slice
 	ConfirmButton.SliceCenter = _Rect
-	ConfirmButton.MouseButton1Click:connect(function() --[[ Line: 414 ]]
+	ConfirmButton.MouseButton1Click:connect(function()
 		OnPromptEnded(true)
 	end)
 	
@@ -335,7 +335,7 @@ function CreatePromptPCorTablet(p2) --[[ Line: 348 ]]
 		CancelButton.Parent = ContainerFrame
 		CancelButton.ScaleType = Slice
 		CancelButton.SliceCenter = _Rect
-		CancelButton.MouseButton1Click:connect(function() --[[ Line: 432 ]]
+		CancelButton.MouseButton1Click:connect(function()
 			OnPromptEnded(false)
 		end)
 		CancelButton.NextSelectionLeft = ConfirmButton
@@ -343,7 +343,7 @@ function CreatePromptPCorTablet(p2) --[[ Line: 348 ]]
 	end
 end
 
-function CreatePromptPhone(p2) --[[ Line: 441 ]]
+function CreatePromptPhone(p2)
 	-- upvalues: createTextLabel (copy), YOffset (ref), ContainerFrame (ref), createFrame (copy), createScrollingTextLabel (copy), createImageButtonWithText (copy)
 	local WindowTitle = createTextLabel("WindowTitle", UDim2.new(1, 0, 0, YOffset), UDim2.new(0, 0, 0, 0), Enum.Font.SourceSansBold, 24, p2.WindowTitle)
 	WindowTitle.Parent = ContainerFrame
@@ -381,7 +381,7 @@ function CreatePromptPhone(p2) --[[ Line: 441 ]]
 	ConfirmButton.Parent = ContainerFrame
 	ConfirmButton.ScaleType = Slice
 	ConfirmButton.SliceCenter = _Rect
-	ConfirmButton.MouseButton1Click:connect(function() --[[ Line: 487 ]]
+	ConfirmButton.MouseButton1Click:connect(function()
 		OnPromptEnded(true)
 	end)
 	
@@ -390,13 +390,13 @@ function CreatePromptPhone(p2) --[[ Line: 441 ]]
 		CancelButton.Parent = ContainerFrame
 		CancelButton.ScaleType = Slice
 		CancelButton.SliceCenter = _Rect
-		CancelButton.MouseButton1Click:connect(function() --[[ Line: 498 ]]
+		CancelButton.MouseButton1Click:connect(function()
 			OnPromptEnded(false)
 		end)
 	end
 end
 
-function CreatePromptFromOptions(p2) --[[ Line: 504 ]]
+function CreatePromptFromOptions(p2)
 	-- upvalues: ContainerFrame (ref), Flag (ref), IsEnabled (copy), IsYBelow (copy)
 	ContainerFrame:ClearAllChildren()
 	
@@ -414,7 +414,7 @@ function CreatePromptFromOptions(p2) --[[ Line: 504 ]]
 	end
 end
 
-function SetSelectedObject() --[[ Line: 516 ]]
+function SetSelectedObject()
 	-- upvalues: ContainerFrame (ref), GuiService (copy)
 	local CancelButton = ContainerFrame:FindFirstChild("CancelButton")
 	
@@ -430,16 +430,16 @@ function SetSelectedObject() --[[ Line: 516 ]]
 	end
 end
 
-function OnTweenInFinished() --[[ Line: 528 ]]
+function OnTweenInFinished()
 	-- upvalues: Flag2 (ref), IsEnabled (copy)
 	if Flag2 or IsEnabled then
 		SetSelectedObject()
 	end
 end
 
-function ConnectActiveEvents() --[[ Line: 534 ]]
+function ConnectActiveEvents()
 	-- upvalues: Flag (ref), Flag2 (ref), List (ref), UserInputService (copy), GuiService (copy), Flag1 (ref), CoreGuiNavigationEnabled (ref), GuiNavigationEnabled (ref), AutoSelectGuiEnabled (ref)
-	local function OnInputChanged(Input) --[[ Line: 535 ]]
+	local function OnInputChanged(Input)
 		-- upvalues: Flag (upval), Flag2 (upval)
 		local UserInputType = Input.UserInputType
 		local UserInputType1 = Enum.UserInputType
@@ -466,7 +466,7 @@ function ConnectActiveEvents() --[[ Line: 534 ]]
 	
 	table.insert(List, UserInputService.InputChanged:connect(OnInputChanged))
 	table.insert(List, UserInputService.InputBegan:connect(OnInputChanged))
-	table.insert(List, GuiService.Changed:connect(function(p2) --[[ Line: 554 ]]
+	table.insert(List, GuiService.Changed:connect(function(p2)
 		-- upvalues: Flag1 (upval), GuiService (upval), CoreGuiNavigationEnabled (upval), GuiNavigationEnabled (upval), AutoSelectGuiEnabled (upval)
 		if Flag1 then
 			if p2 == "CoreGuiNavigationEnabled" then
@@ -491,7 +491,7 @@ function ConnectActiveEvents() --[[ Line: 534 ]]
 	end))
 end
 
-function DisconnectActiveEvents() --[[ Line: 576 ]]
+function DisconnectActiveEvents()
 	-- upvalues: List (ref)
 	for _, Connection in ipairs(List) do
 		Connection:Disconnect()
@@ -499,7 +499,7 @@ function DisconnectActiveEvents() --[[ Line: 576 ]]
 	List = {}
 end
 
-function ShowPrompt() --[[ Line: 583 ]]
+function ShowPrompt()
 	-- upvalues: PromptDialog (ref), IsEnabled (copy), UserInputService (copy), Flag (ref), NewResult (ref), DialogModule (copy), _UDim2_2 (ref)
 	PromptDialog.Visible = true
 	
@@ -522,9 +522,9 @@ function ShowPrompt() --[[ Line: 583 ]]
 	DisableControllerMovement()
 end
 
-function HidePrompt() --[[ Line: 603 ]]
+function HidePrompt()
 	-- upvalues: Flag1 (ref), GuiService (copy), CoreGuiNavigationEnabled (ref), GuiNavigationEnabled (ref), AutoSelectGuiEnabled (ref), IsEnabled (copy), UserInputService (copy), PromptCreatorTransientDialog (copy), PromptDialog (ref), ContainerFrame (ref), Flag (ref), _UDim2_1 (ref), NewResult (ref)
-	local function onClosed() --[[ Line: 604 ]]
+	local function onClosed()
 		-- upvalues: Flag1 (upval), GuiService (upval), CoreGuiNavigationEnabled (upval), GuiNavigationEnabled (upval), AutoSelectGuiEnabled (upval), IsEnabled (upval), UserInputService (upval), PromptCreatorTransientDialog (upval), PromptDialog (upval), ContainerFrame (upval)
 		Flag1 = false
 		GuiService.CoreGuiNavigationEnabled = CoreGuiNavigationEnabled
@@ -584,7 +584,7 @@ function HidePrompt() --[[ Line: 603 ]]
 	end
 end
 
-function DoCreatePrompt(p2) --[[ Line: 631 ]]
+function DoCreatePrompt(p2)
 	-- upvalues: PromptCompletedCallback (ref), config (copy), v1 (ref)
 	PromptCompletedCallback = p2.PromptCompletedCallback
 	AddDefaultsToPromptOptions(p2, config)
@@ -593,16 +593,16 @@ function DoCreatePrompt(p2) --[[ Line: 631 ]]
 	ShowPrompt()
 end
 
-function OnPromptEnded(p2) --[[ Line: 639 ]]
+function OnPromptEnded(p2)
 	-- upvalues: PromptCompletedCallback (ref), v1 (ref)
 	if PromptCompletedCallback then
 		if v1.CancelActive then
-			spawn(function() --[[ Line: 642 ]]
+			spawn(function()
 				-- upvalues: PromptCompletedCallback (upval), p2 (copy)
 				PromptCompletedCallback(p2)
 			end)
 		else
-			spawn(function() --[[ Line: 644 ]]
+			spawn(function()
 				-- upvalues: PromptCompletedCallback (upval)
 				PromptCompletedCallback(true)
 			end)
@@ -613,30 +613,30 @@ function OnPromptEnded(p2) --[[ Line: 639 ]]
 	DisableControllerInput()
 end
 
-function NoOpFunc() --[[ Line: 654 ]] end
+function NoOpFunc() end
 
-function EnableControllerMovement() --[[ Line: 656 ]]
+function EnableControllerMovement()
 	-- upvalues: ContextActionService (copy)
 	ContextActionService:UnbindCoreAction("doNothingThumbstick2PromptCreator")
 	ContextActionService:UnbindCoreAction("doNothingAButtonPromptCreator")
 end
 
-function DisableControllerMovement() --[[ Line: 661 ]]
+function DisableControllerMovement()
 	-- upvalues: ContextActionService (copy)
 	ContextActionService:BindCoreAction("doNothingThumbstick2PromptCreator", NoOpFunc, false, Enum.KeyCode.Thumbstick2)
 	ContextActionService:BindCoreAction("doNothingAButtonPromptCreator", NoOpFunc, false, Enum.KeyCode.ButtonA)
 end
 
-function EnableControllerInput() --[[ Line: 666 ]]
+function EnableControllerInput()
 	-- upvalues: ContextActionService (copy), v1 (ref), GuiService (copy)
-	ContextActionService:BindCoreAction("CoreScriptPromptCreatorCancel", function(_, UserInputState, _) --[[ Line: 669 ]]
+	ContextActionService:BindCoreAction("CoreScriptPromptCreatorCancel", function(_, UserInputState, _)
 		-- upvalues: v1 (upval)
 		if UserInputState ~= Enum.UserInputState.Begin then return end
 		if v1.CancelActive then
 			OnPromptEnded(false)
 		end
 	end, false, Enum.KeyCode.ButtonB)
-	ContextActionService:BindCoreAction("CoreScriptPromptCreatorSelect", function(_, UserInputState, _) --[[ Line: 682 ]]
+	ContextActionService:BindCoreAction("CoreScriptPromptCreatorSelect", function(_, UserInputState, _)
 		-- upvalues: GuiService (upval)
 		if UserInputState ~= Enum.UserInputState.Begin then return end
 		if GuiService.SelectedCoreObject == nil then
@@ -645,13 +645,13 @@ function EnableControllerInput() --[[ Line: 666 ]]
 	end, false, Enum.KeyCode.ButtonSelect)
 end
 
-function DisableControllerInput() --[[ Line: 694 ]]
+function DisableControllerInput()
 	-- upvalues: ContextActionService (copy)
 	ContextActionService:UnbindCoreAction("CoreScriptPromptCreatorCancel")
 	ContextActionService:UnbindCoreAction("CoreScriptPromptCreatorSelect")
 end
 
-function valueInTable(p2, List): boolean --[[ Line: 699 ]]
+function valueInTable(p2, List): boolean
 	for _, value in pairs(List) do
 		if value == p2 then
 			return true
@@ -660,7 +660,7 @@ function valueInTable(p2, List): boolean --[[ Line: 699 ]]
 	return false
 end
 
-function SetupGamepadSelection() --[[ Line: 708 ]]
+function SetupGamepadSelection()
 	-- upvalues: CoreGuiNavigationEnabled (ref), GuiService (copy), GuiNavigationEnabled (ref), AutoSelectGuiEnabled (ref)
 	CoreGuiNavigationEnabled = GuiService.CoreGuiNavigationEnabled
 	GuiNavigationEnabled = GuiService.GuiNavigationEnabled
@@ -674,7 +674,7 @@ end
 if not PromptCreatorTransientDialog then
 	createPromptDialog()
 	
-	local function OnInputChanged(Input) --[[ Line: 723 ]]
+	local function OnInputChanged(Input)
 		-- upvalues: Flag (ref), Flag2 (ref)
 		local UserInputType = Input.UserInputType
 		local UserInputType1 = Enum.UserInputType
@@ -702,7 +702,7 @@ if not PromptCreatorTransientDialog then
 	UserInputService.InputChanged:connect(OnInputChanged)
 	UserInputService.InputBegan:connect(OnInputChanged)
 	
-	local _ = function(p3) --[[ Line: 741 | Named "OnVREnabled" ]]
+	local _ = function(p3)
 		-- upvalues: NewResult (ref), DialogModule (copy), PromptDialog (ref), Flag (ref), RobloxGui (copy)
 		if p3 then
 			if not NewResult then
@@ -722,7 +722,7 @@ if not PromptCreatorTransientDialog then
 		end
 	end
 	
-	spawn(function() --[[ Line: 757 ]]
+	spawn(function()
 		-- upvalues: UserInputService (copy), NewResult (ref), DialogModule (copy), PromptDialog (ref), Flag (ref), RobloxGui (copy)
 		if UserInputService.VREnabled then
 			if not NewResult then
@@ -741,7 +741,7 @@ if not PromptCreatorTransientDialog then
 			PromptDialog.Parent = RobloxGui
 		end
 	end)
-	UserInputService.Changed:connect(function(Property) --[[ Line: 761 ]]
+	UserInputService.Changed:connect(function(Property)
 		-- upvalues: UserInputService (copy), NewResult (ref), DialogModule (copy), PromptDialog (ref), Flag (ref), RobloxGui (copy)
 		if Property == "VREnabled" then
 			if UserInputService.VREnabled then
@@ -762,7 +762,7 @@ if not PromptCreatorTransientDialog then
 			end
 		end
 	end)
-	GuiService.Changed:connect(function(Property) --[[ Line: 767 ]]
+	GuiService.Changed:connect(function(Property)
 		-- upvalues: Flag1 (ref), GuiService (copy), CoreGuiNavigationEnabled (ref), GuiNavigationEnabled (ref), AutoSelectGuiEnabled (ref)
 		if Flag1 then
 			if Property == "CoreGuiNavigationEnabled" then
@@ -786,7 +786,7 @@ if not PromptCreatorTransientDialog then
 		end
 	end)
 end
-function t:CreatePrompt(p3): boolean --[[ Line: 790 ]]
+function t:CreatePrompt(p3): boolean
 	-- upvalues: Flag1 (ref), PromptCreatorTransientDialog (copy), createPromptDialog (copy)
 	if Flag1 then
 		return false
@@ -803,7 +803,7 @@ function t:CreatePrompt(p3): boolean --[[ Line: 790 ]]
 	return true
 end
 
-function t:IsCurrentlyPrompting() --[[ Line: 806 ]]
+function t:IsCurrentlyPrompting()
 	-- upvalues: Flag1 (ref)
 	return Flag1
 end

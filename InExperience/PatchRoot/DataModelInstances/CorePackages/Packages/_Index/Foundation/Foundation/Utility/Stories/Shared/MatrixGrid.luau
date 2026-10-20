@@ -12,11 +12,11 @@ local config = {
 local config1 = { left = "align-x-left", center = "align-x-center" }
 local config2 = { top = "align-y-top", center = "align-y-center" }
 
-local function _(p1, p2) --[[ Line: 84 | Named "getCellColumnWidth" ]]
+local function _(p1, p2)
 	return if p1.cellColumnWidths then p1.cellColumnWidths[p2] else p1.cellColumnWidth
 end
 
-local function renderCells(p1, Cells, p2) --[[ Line: 91 ]]
+local function renderCells(p1, Cells, p2)
 	-- upvalues: ReactModule (copy), ViewModule (copy)
 	local Elements = {}
 	
@@ -31,9 +31,9 @@ local function renderCells(p1, Cells, p2) --[[ Line: 91 ]]
 	return Elements
 end
 
-local function renderHeaderRow(p3, p4, XOffset, NoShowLabelColumn, Message, Tag, LayoutOrder) --[[ Line: 111 ]]
+local function renderHeaderRow(p3, p4, XOffset, NoShowLabelColumn, Message, Tag, LayoutOrder)
 	-- upvalues: DashModule (copy), ReactModule (copy), TextModule (copy), ViewModule (copy)
-	local MapResult = DashModule.map(p3.columnHeaders, function(Text, LayoutOrder) --[[ Line: 120 ]]
+	local MapResult = DashModule.map(p3.columnHeaders, function(Text, LayoutOrder)
 		-- upvalues: p3 (copy), ReactModule (upval), TextModule (upval), p4 (copy)
 		local CellColumnWidth = if p3.cellColumnWidths then p3.cellColumnWidths[LayoutOrder] else p3.cellColumnWidth
 		
@@ -67,7 +67,7 @@ local function renderHeaderRow(p3, p4, XOffset, NoShowLabelColumn, Message, Tag,
 	}, MapResult)
 end
 
-local function rowView(Frame) --[[ Line: 162 ]]
+local function rowView(Frame)
 	-- upvalues: ReactModule (copy), ViewModule (copy)
 	return ReactModule.createElement(ViewModule, {
 		tag = Frame.tag,
@@ -82,7 +82,7 @@ local function rowView(Frame) --[[ Line: 162 ]]
 end
 
 return {
-	MatrixGrid = function(p3) --[[ Line: 184 ]]
+	MatrixGrid = function(p3)
 		-- upvalues: config (copy), config1 (copy), config2 (copy), renderHeaderRow (copy), ReactModule (copy), ViewModule (copy), renderCells (copy), rowView (copy)
 		local NoShowLabelColumn = p3.showLabelColumn == nil or p3.showLabelColumn
 		local LabelColumnWidth = p3.labelColumnWidth or 80
@@ -124,20 +124,20 @@ return {
 		end
 		return ReactModule.createElement(ViewModule, { tag = "col auto-xy" }, Elements)
 	end,
-	enumHeaders = function(p4) --[[ Line: 54 ]]
+	enumHeaders = function(p4)
 		-- upvalues: DashModule (copy)
-		return DashModule.map(p4, function(p5): string --[[ Line: 55 ]]
+		return DashModule.map(p4, function(p5): string
 			return (tostring(p5))
 		end)
 	end,
-	matrixLabel = function(Text) --[[ Line: 60 ]]
+	matrixLabel = function(Text)
 		-- upvalues: ReactModule (copy), TextModule (copy)
 		return ReactModule.createElement(TextModule, {
 			tag = "auto-xy text-caption-small text-align-x-left content-default",
 			Text = Text
 		})
 	end,
-	matrixInfoLabel = function(Text, Text1) --[[ Line: 67 ]]
+	matrixInfoLabel = function(Text, Text1)
 		-- upvalues: ReactModule (copy), ViewModule (copy), TextModule (copy)
 		return ReactModule.createElement(ViewModule, { tag = "col gap-xsmall size-full-0 auto-y" }, {
 			Title = ReactModule.createElement(TextModule, {

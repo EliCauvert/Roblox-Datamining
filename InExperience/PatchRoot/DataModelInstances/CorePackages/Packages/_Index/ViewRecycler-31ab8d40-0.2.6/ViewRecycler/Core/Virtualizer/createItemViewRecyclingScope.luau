@@ -2,18 +2,18 @@
 local DiagnosticsModule = require(ViewRecycler.Core.Diagnostics)
 local RecyclingScopeModule = require(ViewRecycler.Core.RecyclingScope)
 
-local function directBatch(Callback: () -> ()) --[[ Line: 20 ]]
+local function directBatch(Callback: () -> ())
 	Callback()
 end
 
-return function(p1) --[[ Line: 24 | Named "createItemViewRecyclingScope" ]]
+return function(p1)
 	-- upvalues: directBatch (copy), RecyclingScopeModule (copy), DiagnosticsModule (copy)
 	local ItemViewAdapter = p1.itemViewAdapter
 	local t = {}
 	local CreateResults = {}
 	local Keys = {}
 	
-	local function flushLifecycleNotifications() --[[ Line: 35 ]]
+	local function flushLifecycleNotifications()
 		-- upvalues: Keys (ref), ItemViewAdapter (copy), CreateResults (ref), t (copy)
 		if #Keys > 0 and ItemViewAdapter.onEvicted ~= nil then
 			ItemViewAdapter.onEvicted(Keys)
@@ -39,7 +39,7 @@ return function(p1) --[[ Line: 24 | Named "createItemViewRecyclingScope" ]]
 	
 	return RecyclingScopeModule({
 		adapter = {
-			create = function(p2) --[[ Line: 66 ]]
+			create = function(p2)
 				-- upvalues: ItemViewAdapter (copy), t (copy), CreateResults (ref)
 				local NewItemViewAdapter = ItemViewAdapter.create(p2)
 				t[NewItemViewAdapter] = true
@@ -47,12 +47,12 @@ return function(p1) --[[ Line: 24 | Named "createItemViewRecyclingScope" ]]
 				
 				return NewItemViewAdapter
 			end,
-			destroy = function(Key) --[[ Line: 72 ]]
+			destroy = function(Key)
 				-- upvalues: t (copy), Keys (ref)
 				t[Key] = nil
 				table.insert(Keys, Key)
 			end,
-			batch = function(p2) --[[ Line: 55 ]]
+			batch = function(p2)
 				-- upvalues: Batch (copy), flushLifecycleNotifications (copy)
 				local Success, Result = pcall(Batch, p2)
 				flushLifecycleNotifications()
@@ -63,7 +63,7 @@ return function(p1) --[[ Line: 24 | Named "createItemViewRecyclingScope" ]]
 			end
 		},
 		maxPoolSize = p1.maxPoolSize,
-		onPoolChanged = if DiagnosticsFunction == nil then nil else function(p2) --[[ Line: 81 ]]
+		onPoolChanged = if DiagnosticsFunction == nil then nil else function(p2)
 			-- upvalues: DiagnosticsFunction (copy), DiagnosticsModule (upval)
 			DiagnosticsFunction({
 				kind = DiagnosticsModule.EventKind.PoolChanged,

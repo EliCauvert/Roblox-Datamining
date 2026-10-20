@@ -39,13 +39,13 @@ local _ = CreateFunction("ImageLabel")({
 RecenterCountdown:SetVisible(false)
 local Flag = false
 
-local function _() --[[ Line: 55 | Named "cancelCountdown" ]]
+local function _()
 	-- upvalues: Flag (ref), RecenterCountdown (copy)
 	Flag = false
 	RecenterCountdown:SetVisible(false)
 end
 
-VRHub.ModuleOpened.Event:connect(function(ModuleName) --[[ Line: 60 ]]
+VRHub.ModuleOpened.Event:connect(function(ModuleName)
 	-- upvalues: RecenterModule (copy), VRHub (copy), Flag (ref), RecenterCountdown (copy)
 	if ModuleName ~= RecenterModule.ModuleName and VRHub:GetModule(ModuleName).VRIsExclusive then
 		Flag = false
@@ -53,7 +53,7 @@ VRHub.ModuleOpened.Event:connect(function(ModuleName) --[[ Line: 60 ]]
 	end
 end)
 
-function RecenterModule:SetVisible(Value) --[[ Line: 69 ]]
+function RecenterModule:SetVisible(Value)
 	-- upvalues: Visible (ref), Flag (ref), RecenterCountdown (copy), VRHub (copy), RecenterModule (copy), ContextActionService (copy), v1 (copy), UserInputService (copy)
 	Visible = Value
 	
@@ -72,11 +72,11 @@ function RecenterModule:SetVisible(Value) --[[ Line: 69 ]]
 		return
 	else
 		VRHub:FireModuleOpened(RecenterModule.ModuleName)
-		spawn(function() --[[ Line: 81 ]]
+		spawn(function()
 			-- upvalues: Flag (upval), RecenterCountdown (upval), ContextActionService (upval), v1 (upval), UserInputService (upval), VRHub (upval), RecenterModule (upval)
 			Flag = true
 			RecenterCountdown:SetVisible(true)
-			ContextActionService:BindCoreAction("CancelRecenterShortcut", function(_, UserInputState, _) --[[ Line: 85 ]]
+			ContextActionService:BindCoreAction("CancelRecenterShortcut", function(_, UserInputState, _)
 				-- upvalues: Flag (upval), RecenterCountdown (upval)
 				if UserInputState == Enum.UserInputState.Begin then
 					Flag = false
@@ -107,7 +107,7 @@ function RecenterModule:SetVisible(Value) --[[ Line: 69 ]]
 	end
 end
 
-function RecenterModule:IsVisible() --[[ Line: 115 ]]
+function RecenterModule:IsVisible()
 	-- upvalues: Visible (ref)
 	return Visible
 end

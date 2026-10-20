@@ -1,6 +1,6 @@
 ﻿local ConstantsModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Constants)
 
-return function(p1) --[[ Line: 5 ]]
+return function(p1)
 	-- upvalues: ConstantsModule (copy)
 	local EquippedAssets = p1.AvatarExperience.AvatarEditor.Character.EquippedAssets
 	

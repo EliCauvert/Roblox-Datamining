@@ -1,4 +1,4 @@
-﻿return function(List, List1): boolean --[[ Line: 8 | Named "shallowEqual" ]]
+﻿return function(List, List1): boolean
 	if List == List1 then
 		return true
 	end

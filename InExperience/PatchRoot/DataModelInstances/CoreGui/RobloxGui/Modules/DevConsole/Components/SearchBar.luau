@@ -3,7 +3,7 @@ local ScrollingTextBoxModule = require(script.Parent.ScrollingTextBox)
 local ConstantsModule = require(script.Parent.Parent.Constants)
 local SearchBar = RoactModule.Component:extend("SearchBar")
 
-function SearchBar.render(p1) --[[ Line: 18 ]]
+function SearchBar.render(p1)
 	-- upvalues: RoactModule (copy), ConstantsModule (copy), ScrollingTextBoxModule (copy)
 	local FrameHeight: number = p1.props.frameHeight
 	local SearchTerm = p1.props.searchTerm

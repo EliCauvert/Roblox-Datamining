@@ -8,7 +8,7 @@ local HttpRequestModule = require(CurrencyTransfers.NetworkRequests.HttpRequest)
 local UrlBuilder = UrlBuilderModule.UrlBuilder
 local UrlBase = UrlBuilderModule.UrlBase
 
-local function _(p1) --[[ Line: 21 | Named "processTransferUrl" ]]
+local function _(p1)
 	-- upvalues: UrlBuilder (copy), UrlBase (copy)
 	return UrlBuilder.new({
 		base = UrlBase.APIS,
@@ -21,17 +21,17 @@ local StrictInterfaceResult = TModule.strictInterface({
 	robuxAmount = TModule.number
 })
 
-return function(p1, p2, p3) --[[ Line: 33 | Named "processTransferRequest" ]]
+return function(p1, p2, p3)
 	-- upvalues: StrictInterfaceResult (copy), HttpRequestModule (copy), UrlBuilder (copy), UrlBase (copy), ProcessTransferModelModule (copy), PromiseModule (copy)
 	assert(StrictInterfaceResult(p1))
 	
 	return (if p3 == nil then HttpRequestModule.new(p2) else HttpRequestModule.fromNetworkImpl(p3)):post(UrlBuilder.new({
 		base = UrlBase.APIS,
 		path = `transfer/v1/robux-transfer/process-transfer/{p1.transferRequestId}`
-	})(), { robuxAmount = p1.robuxAmount }):andThen(function(Result) --[[ Line: 43 ]]
+	})(), { robuxAmount = p1.robuxAmount }):andThen(function(Result)
 		-- upvalues: ProcessTransferModelModule (upval)
 		return ProcessTransferModelModule.format(Result)
-	end):catch(function(Err) --[[ Line: 46 ]]
+	end):catch(function(Err)
 		-- upvalues: PromiseModule (upval)
 		return PromiseModule.reject(Err)
 	end)

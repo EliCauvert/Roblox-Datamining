@@ -12,7 +12,7 @@ local FFlagCreateConnectionsHub = require(Parent.SharedFlags).FFlagCreateConnect
 local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p1) --[[ Line: 26 | Named "CarouselContainer" ]]
+return function(p1)
 	-- upvalues: UseSocialCarouselAnalyticsModule (copy), UseTilesSeenCollectionModule (copy), UseDispatchFunction (copy), UseNavigationFunction (copy), ReactModule (copy), FFlagCreateConnectionsHub (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), CarouselModule (copy)
 	local UseSocialCarouselAnalyticsModuleResult = UseSocialCarouselAnalyticsModule()
 	local UseTilesSeenCollectionModuleResult = UseTilesSeenCollectionModule()
@@ -21,7 +21,7 @@ return function(p1) --[[ Line: 26 | Named "CarouselContainer" ]]
 	local UseRefResult = ReactModule.useRef({ startIndex = 1, endIndex = 1 })
 	
 	return ReactModule.createElement(CarouselModule, {
-		onActivateHeader = ReactModule.useCallback(function() --[[ Line: 33 ]]
+		onActivateHeader = ReactModule.useCallback(function()
 			-- upvalues: UseSocialCarouselAnalyticsModuleResult (copy), FFlagCreateConnectionsHub (upval), UseNavigationResult (copy), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 			UseSocialCarouselAnalyticsModuleResult.friendsHeaderPressed()
 			
@@ -38,7 +38,7 @@ return function(p1) --[[ Line: 26 | Named "CarouselContainer" ]]
 				UseDispatchResult(NavigateDownFunction({ name = AppPage.ViewFriends }))
 			end
 		end, { UseDispatchResult, UseNavigationResult }),
-		onTileContentChanged = ReactModule.useCallback(function(p2, p3, p4) --[[ Line: 44 ]]
+		onTileContentChanged = ReactModule.useCallback(function(p2, p3, p4)
 			-- upvalues: UseRefResult (copy), UseTilesSeenCollectionModuleResult (copy)
 			local Current = UseRefResult.current
 			

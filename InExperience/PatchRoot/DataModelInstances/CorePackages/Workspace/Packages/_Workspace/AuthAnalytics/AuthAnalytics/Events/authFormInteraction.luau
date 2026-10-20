@@ -1,6 +1,6 @@
 ﻿local CheckAndSendEventModule = require(script.Parent.Parent.Utils.checkAndSendEvent)
 
-return function(p1, Field, State, Origin, p2, AssociatedText) --[[ Line: 4 ]]
+return function(p1, Field, State, Origin, p2, AssociatedText)
 	-- upvalues: CheckAndSendEventModule (copy)
 	local t = {}
 	

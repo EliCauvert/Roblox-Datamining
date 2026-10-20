@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 local RoactGamepadModule = require(Parent.RoactGamepad)
 
-return (ReactModule.forwardRef(function(Gui, Ref) --[[ Line: 28 ]]
+return (ReactModule.forwardRef(function(Gui, Ref)
 	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy), RoactGamepadModule (copy)
 	local HorizontalMargin = Gui.horizontalMargin or 0
 	local UseDesignTokensResult = UseDesignTokensFunction()

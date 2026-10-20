@@ -22,12 +22,12 @@ local FFlagLuaAppSduiVideoThumbnail = require(Parent.SharedFlags).FFlagLuaAppSdu
 local FFlagLuaAppHomeMomentVideoFallback = require(Parent.SharedFlags).FFlagLuaAppHomeMomentVideoFallback
 local VideoPlayerPlaybackEndThresholdInMsRatio = game:DefineFastInt("VideoPlayerPlaybackEndThresholdInMs", 100) / 1000
 
-return function(Image) --[[ Line: 89 | Named "VideoPlayer" ]]
+return function(Image)
 	-- upvalues: FFlagLuaAppEdpMediaGalleryFullScreen (copy), ReactModule (copy), FFlagLuaAppEdpMediaGalleryAutoAdvance (copy), FFlagLuaAppEdpConsoleMediaGalleryVideo (copy), FFlagLuaAppEnableHomepageOneByTwoTile (copy), RunService (copy), ReportWarningFunction (copy), LoggingProtocolModule (copy), VideoLoggerModule (copy), VideoPlayerPlaybackEndThresholdInMsRatio (copy), ResponsiveModule (copy), VideoActions (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), FFlagLuaAppVideoTileDisableActivation (copy), LoadableVideoFrameModule (copy), FFlagLuaAppHomeMomentVideoFallback (copy), FFlagLuaAppSduiVideoThumbnail (copy), FFlagLuaAppVideoTileHideCenterPlayButton (copy), RoundIconButtonModule (copy), VideoPlayerBottomOverlayModule (copy)
 	local ShowMuteButton = Image.showMuteButton or FFlagLuaAppEdpMediaGalleryFullScreen and (Image.showPlayButton or Image.showProgressBar)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Image.muted)
-	local UseResult = ReactModule.useCallback(function(p1, p2) --[[ Line: 97 ]]
+	local UseResult = ReactModule.useCallback(function(p1, p2)
 		-- upvalues: UseStateResult2 (copy), Image (copy)
 		UseStateResult2(true)
 		
@@ -35,15 +35,15 @@ return function(Image) --[[ Line: 89 | Named "VideoPlayer" ]]
 			Image.onVideoLoaded(p1, p2)
 		end
 	end, { Image.onVideoLoaded })
-	ReactModule.useEffect(function() --[[ Line: 105 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Image (copy), UseStateResult1 (copy)
 		if Image.onMutedChanged then
 			Image.onMutedChanged(UseStateResult1)
 		end
 	end, { Image.onMutedChanged, UseStateResult1 })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 111 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy), Image (copy)
-		UseStateResult2_1(function(p1): boolean --[[ Line: 112 ]]
+		UseStateResult2_1(function(p1): boolean
 			-- upvalues: Image (upval)
 			if Image.onMuteButtonActivated then
 				Image.onMuteButtonActivated(p1)
@@ -51,7 +51,7 @@ return function(Image) --[[ Line: 89 | Named "VideoPlayer" ]]
 			return not p1
 		end)
 	end, { Image.onMuteButtonActivated })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 120 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Image (copy), UseStateResult1 (copy), UseResult1 (copy)
 		return if Image.showMuteButton then {
 			muted = UseStateResult1,
@@ -66,12 +66,12 @@ return function(Image) --[[ Line: 89 | Named "VideoPlayer" ]]
 		ProgressBinding, Callback = ReactModule.useBinding(0)
 	end
 	if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen then
-		ReactModule.useEffect(function() --[[ Line: 147 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRefResult (ref), Image (copy), FFlagLuaAppEdpMediaGalleryAutoAdvance (upval), FFlagLuaAppEdpMediaGalleryFullScreen (upval), RunService (upval), Callback (ref)
 			local Current = UseRefResult.current
 			
 			if Image.shouldStartPlayback and (FFlagLuaAppEdpMediaGalleryAutoAdvance and Image.onVideoProgressChanged or FFlagLuaAppEdpMediaGalleryFullScreen and Image.showProgressBar) and Current then
-				local RenderSteppedConnection = RunService.RenderStepped:Connect(function() --[[ Line: 155 ]]
+				local RenderSteppedConnection = RunService.RenderStepped:Connect(function()
 					-- upvalues: FFlagLuaAppEdpMediaGalleryAutoAdvance (upval), Image (upval), Current (copy), FFlagLuaAppEdpMediaGalleryFullScreen (upval), Callback (upval)
 					if FFlagLuaAppEdpMediaGalleryAutoAdvance and Image.onVideoProgressChanged then
 						Image.onVideoProgressChanged(if Current.TimeLength > 0 then Current.TimePosition / Current.TimeLength else 0)
@@ -81,7 +81,7 @@ return function(Image) --[[ Line: 89 | Named "VideoPlayer" ]]
 					end
 				end)
 				
-				return function() --[[ Line: 169 ]]
+				return function()
 					-- upvalues: RenderSteppedConnection (copy), FFlagLuaAppEdpMediaGalleryAutoAdvance (upval), Image (upval), FFlagLuaAppEdpMediaGalleryFullScreen (upval), Callback (upval)
 					RenderSteppedConnection:Disconnect()
 					
@@ -102,14 +102,14 @@ return function(Image) --[[ Line: 89 | Named "VideoPlayer" ]]
 		})
 	end
 	if FFlagLuaAppEnableHomepageOneByTwoTile then
-		ReactModule.useEffect(function() --[[ Line: 193 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: Image (copy), UseRefResult (ref)
 			local OnAspectRatioChangedFunction: (any) -> () = Image.onAspectRatioChanged
 			local Current = UseRefResult and UseRefResult.current
 			
 			if not OnAspectRatioChangedFunction or not Current then return end
 			local XRatio = nil
-			local Connection = Current:GetPropertyChangedSignal("Resolution"):Connect(function() --[[ Line: 201 | Named "report" ]]
+			local Connection = Current:GetPropertyChangedSignal("Resolution"):Connect(function()
 				-- upvalues: Current (copy), XRatio (ref), OnAspectRatioChangedFunction (copy)
 				local Resolution = Current.Resolution
 				
@@ -132,7 +132,7 @@ return function(Image) --[[ Line: 89 | Named "VideoPlayer" ]]
 					OnAspectRatioChangedFunction(XRatio1)
 				end
 			end
-			return function() --[[ Line: 215 ]]
+			return function()
 				-- upvalues: Connection (copy)
 				Connection:Disconnect()
 			end
@@ -148,7 +148,7 @@ return function(Image) --[[ Line: 89 | Named "VideoPlayer" ]]
 	
 	if FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo then
 		IsVideoPlaying, UseStateResult2_2 = ReactModule.useState(false)
-		local UseResult3 = ReactModule.useCallback(function(p1) --[[ Line: 231 ]]
+		local UseResult3 = ReactModule.useCallback(function(p1)
 			-- upvalues: UseRefResult (ref), ReportWarningFunction (upval), LoggingProtocolModule (upval), Image (copy), VideoLoggerModule (upval)
 			local Current = UseRefResult.current
 			
@@ -181,7 +181,7 @@ return function(Image) --[[ Line: 89 | Named "VideoPlayer" ]]
 				volumeLevel = if Current.Volume == 0 then 0 else 1
 			})
 		end, { Image.video, Image.videoAnalyticsContext })
-		Callback1 = ReactModule.useCallback(function() --[[ Line: 272 ]]
+		Callback1 = ReactModule.useCallback(function()
 			-- upvalues: UseRefResult (ref), IsVideoPlaying (ref), VideoPlayerPlaybackEndThresholdInMsRatio (upval)
 			local Current = UseRefResult.current
 			
@@ -197,7 +197,7 @@ return function(Image) --[[ Line: 89 | Named "VideoPlayer" ]]
 			Current:Play()
 		end, { IsVideoPlaying })
 		IsUsePreferredInputResultMatch = ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Directional
-		ReactModule.useEffect(function() --[[ Line: 292 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: Image (copy), Callback1 (ref), UseResult1 (copy)
 			local List = {}
 			
@@ -207,7 +207,7 @@ return function(Image) --[[ Line: 89 | Named "VideoPlayer" ]]
 			if Image.toggleMuteSignal then
 				table.insert(List, Image.toggleMuteSignal:connect(UseResult1))
 			end
-			return function() --[[ Line: 300 ]]
+			return function()
 				-- upvalues: List (copy)
 				for _, value in List do
 					if value then
@@ -221,7 +221,7 @@ return function(Image) --[[ Line: 89 | Named "VideoPlayer" ]]
 			Callback1,
 			UseResult1
 		})
-		UseResult2 = ReactModule.useCallback(function() --[[ Line: 311 ]]
+		UseResult2 = ReactModule.useCallback(function()
 			-- upvalues: Image (copy), Callback1 (ref)
 			if Image.onVideoPlayerActivated then
 				Image.onVideoPlayerActivated()
@@ -231,38 +231,38 @@ return function(Image) --[[ Line: 89 | Named "VideoPlayer" ]]
 				Callback1()
 			end
 		end, { Image.onVideoPlayerActivated, Callback1 })
-		UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 321 ]]
+		UseMemoResult1 = ReactModule.useMemo(function()
 			-- upvalues: Image (copy), IsVideoPlaying (ref), Callback1 (ref)
 			return if Image.showPlayButton then {
 				isVideoPlaying = IsVideoPlaying,
 				onPlayButtonActivated = Callback1
 			} else nil
 		end, { Image.showPlayButton, IsVideoPlaying, Callback1 })
-		UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 330 ]]
+		UseMemoResult2 = ReactModule.useMemo(function()
 			-- upvalues: Image (copy), ProgressBinding (ref)
 			return if Image.showProgressBar then { progressBinding = ProgressBinding } else nil
 		end, { Image.showProgressBar, ProgressBinding })
-		ReactModule.useEffect(function() --[[ Line: 338 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRefResult (ref), Image (copy), UseStateResult2_2 (ref), UseResult3 (copy), VideoActions (upval)
 			local Current = UseRefResult.current
 			
 			if Image.shouldStartPlayback and Current then
-				local PlayedConnection = Current.Played:Connect(function() --[[ Line: 345 ]]
+				local PlayedConnection = Current.Played:Connect(function()
 					-- upvalues: UseStateResult2_2 (upval), UseResult3 (upval), VideoActions (upval)
 					UseStateResult2_2(true)
 					UseResult3(VideoActions.play)
 				end)
-				local PausedConnection = Current.Paused:Connect(function() --[[ Line: 350 ]]
+				local PausedConnection = Current.Paused:Connect(function()
 					-- upvalues: UseStateResult2_2 (upval), UseResult3 (upval), VideoActions (upval)
 					UseStateResult2_2(false)
 					UseResult3(VideoActions.pause)
 				end)
-				local EndedConnection = Current.Ended:Connect(function() --[[ Line: 355 ]]
+				local EndedConnection = Current.Ended:Connect(function()
 					-- upvalues: UseStateResult2_2 (upval)
 					UseStateResult2_2(false)
 				end)
 				
-				return function() --[[ Line: 359 ]]
+				return function()
 					-- upvalues: PlayedConnection (copy), PausedConnection (copy), EndedConnection (copy)
 					PlayedConnection:Disconnect()
 					PausedConnection:Disconnect()
@@ -272,7 +272,7 @@ return function(Image) --[[ Line: 89 | Named "VideoPlayer" ]]
 				return nil
 			end
 		end, { Image.shouldStartPlayback, UseResult3 })
-		ReactModule.useEffect(function() --[[ Line: 367 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: Image (copy), UseStateResult2 (copy), UseStateResult2_2 (ref)
 			if not Image.shouldStartPlayback then
 				UseStateResult2(false)
@@ -282,13 +282,13 @@ return function(Image) --[[ Line: 89 | Named "VideoPlayer" ]]
 		end, { Image.shouldStartPlayback })
 		
 		if FFlagLuaAppMediaGalleryGamepadSupport then
-			ReactModule.useEffect(function() --[[ Line: 378 ]]
+			ReactModule.useEffect(function()
 				-- upvalues: Image (copy), IsVideoPlaying (ref)
 				if Image.onPlayingChanged then
 					Image.onPlayingChanged(IsVideoPlaying)
 				end
 			end, { Image.onPlayingChanged, IsVideoPlaying })
-			ReactModule.useEffect(function() --[[ Line: 385 ]]
+			ReactModule.useEffect(function()
 				-- upvalues: Image (copy), UseStateResult (copy)
 				if Image.onVideoLoadedChanged then
 					Image.onVideoLoadedChanged(UseStateResult)

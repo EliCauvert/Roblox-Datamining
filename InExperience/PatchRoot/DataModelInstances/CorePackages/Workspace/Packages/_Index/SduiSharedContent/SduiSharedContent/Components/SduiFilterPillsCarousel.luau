@@ -13,7 +13,7 @@ local ReportUnifiedLoggingImpressionsFunction = SduiCoreSystemModule.reportUnifi
 local SduiComponentType = SduiCoreSystemModule.SduiComponentType
 local UseCollectionAnalyticsContextModule = require(script.Parent.useCollectionAnalyticsContext)
 
-local function buildSelectionsFromGroups(FilterGroups) --[[ Line: 66 ]]
+local function buildSelectionsFromGroups(FilterGroups)
 	local SelectedOptionIds = {}
 	
 	if not FilterGroups then
@@ -27,7 +27,7 @@ local function buildSelectionsFromGroups(FilterGroups) --[[ Line: 66 ]]
 	return SelectedOptionIds
 end
 
-local function convertToFilterModel(p1, SelectedOptionId) --[[ Line: 79 ]]
+local function convertToFilterModel(p1, SelectedOptionId)
 	local DisplayName = p1.displayName
 	local FilterOptions = {}
 	
@@ -64,23 +64,23 @@ local function convertToFilterModel(p1, SelectedOptionId) --[[ Line: 79 ]]
 	}
 end
 
-return ReactModule.memo(function(p2) --[[ Line: 117 | Named "SduiFilterPillsCarousel" ]]
+return ReactModule.memo(function(p2)
 	-- upvalues: ReactModule (copy), buildSelectionsFromGroups (copy), convertToFilterModel (copy), UseCollectionAnalyticsContextModule (copy), SduiComponentType (copy), GetOptionContextTagFunction (copy), ReportUnifiedLoggingImpressionsFunction (copy), CryoModule (copy), View (copy), FilterPillCarousel (copy)
 	local FilterGroups = p2.filterGroups
 	local SduiContext = p2.sduiContext
 	local AnalyticsContext = p2.analyticsContext
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 122 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 		-- upvalues: buildSelectionsFromGroups (upval), FilterGroups (copy)
 		return (buildSelectionsFromGroups(FilterGroups))
 	end)
-	ReactModule.useEffect(function() --[[ Line: 126 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FilterGroups (copy), UseStateResult2 (copy), buildSelectionsFromGroups (upval)
 		if FilterGroups then
 			UseStateResult2((buildSelectionsFromGroups(FilterGroups)))
 		end
 	end, { FilterGroups })
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 134 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FilterGroups (copy), UseStateResult (copy), convertToFilterModel (upval)
 		if not FilterGroups then
 			return {}
@@ -94,7 +94,7 @@ return ReactModule.memo(function(p2) --[[ Line: 117 | Named "SduiFilterPillsCaro
 		return List
 	end, { FilterGroups, UseStateResult })
 	local _, UseCollectionAnalyticsContextModuleResult2 = UseCollectionAnalyticsContextModule(AnalyticsContext, SduiComponentType.FilterPillsCarousel, #UseMemoResult, #UseMemoResult, SduiContext, nil)
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 156 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), GetOptionContextTagFunction (upval)
 		local List = {}
 		
@@ -110,7 +110,7 @@ return ReactModule.memo(function(p2) --[[ Line: 117 | Named "SduiFilterPillsCaro
 		end
 		return List
 	end, { UseMemoResult })
-	local UseResult = ReactModule.useCallback(function(p3) --[[ Line: 173 ]]
+	local UseResult = ReactModule.useCallback(function(p3)
 		-- upvalues: ReportUnifiedLoggingImpressionsFunction (upval), SduiContext (copy), UseMemoResult1 (copy), UseCollectionAnalyticsContextModuleResult2 (copy), p2 (copy)
 		ReportUnifiedLoggingImpressionsFunction(SduiContext, p3, UseMemoResult1, UseCollectionAnalyticsContextModuleResult2.current, nil, p2.impressionEventName, p2.skipItemImpressionsLog)
 	end, {
@@ -120,7 +120,7 @@ return ReactModule.memo(function(p2) --[[ Line: 117 | Named "SduiFilterPillsCaro
 		p2.impressionEventName,
 		p2.skipItemImpressionsLog
 	})
-	local UseResult1 = ReactModule.useCallback(function(ButtonName, FilterId, SelectedOptionId, PreviousOptionId, SelectedOptionContextTag, PreviousOptionContextTag, IsActive) --[[ Line: 194 ]]
+	local UseResult1 = ReactModule.useCallback(function(ButtonName, FilterId, SelectedOptionId, PreviousOptionId, SelectedOptionContextTag, PreviousOptionContextTag, IsActive)
 		-- upvalues: p2 (copy)
 		if p2.onFilterClick then
 			p2.onFilterClick(nil, nil, {
@@ -134,9 +134,9 @@ return ReactModule.memo(function(p2) --[[ Line: 117 | Named "SduiFilterPillsCaro
 			})
 		end
 	end, { p2.onFilterClick })
-	local UseResult2 = ReactModule.useCallback(function(p3, p4) --[[ Line: 218 ]]
+	local UseResult2 = ReactModule.useCallback(function(p3, p4)
 		-- upvalues: UseStateResult2 (copy), CryoModule (upval), p2 (copy)
-		UseStateResult2(function(p5) --[[ Line: 219 ]]
+		UseStateResult2(function(p5)
 			-- upvalues: CryoModule (upval), p3 (copy), p4 (copy), p2 (upval)
 			local JoinResult = CryoModule.Dictionary.join(p5, { [p3] = p4 })
 			

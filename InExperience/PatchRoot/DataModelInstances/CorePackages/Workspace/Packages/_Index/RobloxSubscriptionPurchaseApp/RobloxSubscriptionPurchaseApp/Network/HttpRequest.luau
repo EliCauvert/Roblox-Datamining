@@ -2,7 +2,7 @@
 local HttpRequestModule = {}
 HttpRequestModule.__index = HttpRequestModule
 
-function HttpRequestModule.new(p1) --[[ Line: 9 ]]
+function HttpRequestModule.new(p1)
 	-- upvalues: HttpRequestModule (copy)
 	local self = setmetatable({}, HttpRequestModule)
 	self.http = p1 or game:GetService("HttpService")
@@ -10,15 +10,15 @@ function HttpRequestModule.new(p1) --[[ Line: 9 ]]
 	return self
 end
 
-function HttpRequestModule.get(p1, Url) --[[ Line: 15 ]]
+function HttpRequestModule.get(p1, Url)
 	-- upvalues: PromiseModule (copy)
-	return PromiseModule.new(function(Callback, Callback1) --[[ Line: 16 ]]
+	return PromiseModule.new(function(Callback, Callback1)
 		-- upvalues: p1 (copy), Url (copy)
 		p1.http:RequestInternal({
 			Method = "GET",
 			Url = Url,
 			Headers = { Accept = "application/json" }
-		}):Start(function(_, p2) --[[ Line: 25 ]]
+		}):Start(function(_, p2)
 			-- upvalues: Callback (copy), p1 (upval), Callback1 (copy)
 			if p2.StatusCode == 200 then
 				Callback(p1.http:JSONDecode(p2.Body))
@@ -31,9 +31,9 @@ function HttpRequestModule.get(p1, Url) --[[ Line: 15 ]]
 	end)
 end
 
-function HttpRequestModule.post(p1, Url, Input) --[[ Line: 38 ]]
+function HttpRequestModule.post(p1, Url, Input)
 	-- upvalues: PromiseModule (copy)
-	return PromiseModule.new(function(Callback1, Callback) --[[ Line: 39 ]]
+	return PromiseModule.new(function(Callback1, Callback)
 		-- upvalues: p1 (copy), Url (copy), Input (copy)
 		p1.http:RequestInternal({
 			Method = "POST",
@@ -43,7 +43,7 @@ function HttpRequestModule.post(p1, Url, Input) --[[ Line: 38 ]]
 				Accept = "application/json"
 			},
 			Body = p1.http:JSONEncode(Input)
-		}):Start(function(_, p2) --[[ Line: 50 ]]
+		}):Start(function(_, p2)
 			-- upvalues: Callback1 (copy), p1 (upval), Callback (copy)
 			if p2.StatusCode == 200 then
 				Callback1(p1.http:JSONDecode(p2.Body))

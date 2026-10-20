@@ -1,8 +1,8 @@
-﻿function getIconSrc(Text, Text1): string --[[ Line: 4 ]]
+﻿function getIconSrc(Text, Text1): string
 	return "rbxasset://textures/ui/VoiceChat/" .. (Text1 and Text1 .. "/" or "") .. Text .. ".png"
 end
 
-return function(p1, p2, p3) --[[ Line: 9 ]]
+return function(p1, p2, p3)
 	if p1 == "Unmuted" then
 		local ScaledFloored = math.floor(0.5 + 5 * (p3 or math.random())) * 20
 		

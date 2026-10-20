@@ -6,11 +6,11 @@ local FFlagMomentsTextOverlayV2Redesign = require(Parent.MomentsCommon).Flags.FF
 local FFlagMomentsCommentsCreatorControlModule = require(MomentsCreation.Flags.FFlagMomentsCommentsCreatorControl)
 local MomentsPostCtaUseCaptureUniverse = game:DefineFastFlag("MomentsPostCtaUseCaptureUniverse", false)
 
-local function _(p1) --[[ Line: 20 | Named "enumName" ]]
+local function _(p1)
 	return if typeof(p1) == "EnumItem" then p1.Name else p1
 end
 
-local function convertTextOverlayStyle(TextOverlayStyle) --[[ Line: 24 ]]
+local function convertTextOverlayStyle(TextOverlayStyle)
 	-- upvalues: FFlagMomentsTextOverlayV2Redesign (copy)
 	local t = {}
 	local Name = nil
@@ -41,7 +41,7 @@ local function convertTextOverlayStyle(TextOverlayStyle) --[[ Line: 24 ]]
 	return t
 end
 
-local function convertTextOverlay(p1) --[[ Line: 35 ]]
+local function convertTextOverlay(p1)
 	-- upvalues: convertTextOverlayStyle (copy)
 	return {
 		text = p1.text,
@@ -53,7 +53,7 @@ local function convertTextOverlay(p1) --[[ Line: 35 ]]
 	}
 end
 
-return function(p1, Capture) --[[ Line: 46 | Named "makePostMetadata" ]]
+return function(p1, Capture)
 	-- upvalues: FFlagMomentsCommentsCreatorControlModule (copy), convertTextOverlay (copy), GetFFlagMomentsTTSAudioOverlayModule (copy), MomentsPostCtaUseCaptureUniverse (copy), FFlagMomentsTextOverlayV2Redesign (copy)
 	local config = { caption = p1.description }
 	

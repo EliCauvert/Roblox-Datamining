@@ -26,7 +26,7 @@ local FocusRoot = FocusNavigationUtilsModule.FocusRoot
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
 
-local function ScreenshotReviewDialogSmallPortraitModeHeaderRight(p1) --[[ Line: 60 ]]
+local function ScreenshotReviewDialogSmallPortraitModeHeaderRight(p1)
 	-- upvalues: ReactModule (copy), RobloxTranslatorModule (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
 	
@@ -55,11 +55,11 @@ local function ScreenshotReviewDialogSmallPortraitModeHeaderRight(p1) --[[ Line:
 			text = RobloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Action.Retake"),
 			fitContent = true,
 			standardSize = StandardButtonSize.XSmall,
-			onActivated = ReactModule.useCallback(function() --[[ Line: 65 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: p1 (copy)
 				p1.setShowRestartDialog(true)
 			end, { p1.setShowRestartDialog }),
-			[ReactModule.Change.AbsoluteSize] = ReactModule.useCallback(function(Frame) --[[ Line: 62 ]]
+			[ReactModule.Change.AbsoluteSize] = ReactModule.useCallback(function(Frame)
 				-- upvalues: UseStateResult2 (copy)
 				UseStateResult2(Frame.AbsoluteSize.X)
 			end, { UseStateResult2 })
@@ -67,34 +67,34 @@ local function ScreenshotReviewDialogSmallPortraitModeHeaderRight(p1) --[[ Line:
 	})
 end
 
-return function(p1) --[[ Line: 106 | Named "ScreenshotReviewDialog" ]]
+return function(p1)
 	-- upvalues: UsePreferredInputFunction (copy), ResponsiveModule (copy), RobloxTranslatorModule (copy), ReactModule (copy), UseStyleFunction (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), RestartScreenshotDialogModule (copy), ImageSetButton (copy), AssetsModule (copy), HeaderBar (copy), IconButton (copy), IconSize (copy), Images (copy), ScreenshotReviewDialogSmallPortraitModeHeaderRight (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy), DividerModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ButtonStack (copy)
 	local IsUsePreferredInputResultMatch = UsePreferredInputFunction() == ResponsiveModule.Input.Directional
 	
 	if RobloxTranslatorModule then
 		local YOffset: number = if p1.isSmallPortraitMode then 104 else 60
-		local UseResult = ReactModule.useCallback(function() --[[ Line: 118 ]]
+		local UseResult = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy)
 			p1.reportAnythingAnalytics.incrementPreviewBack()
 			p1.onBack()
 		end, { p1.onBack, p1.reportAnythingAnalytics })
-		local UseResult1 = ReactModule.useCallback(function() --[[ Line: 123 ]]
+		local UseResult1 = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy)
 			p1.reportAnythingAnalytics.incrementPreviewAttach()
 			p1.onSkip()
 		end, { p1.onSkip, p1.reportAnythingAnalytics })
 		local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-		local UseResult2 = ReactModule.useCallback(function() --[[ Line: 130 ]]
+		local UseResult2 = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy), UseStateResult2 (copy)
 			p1.reportAnythingAnalytics.incrementRetake()
 			UseStateResult2(true)
 		end, { UseStateResult2, p1.reportAnythingAnalytics })
-		local UseResult3 = ReactModule.useCallback(function() --[[ Line: 135 ]]
+		local UseResult3 = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy)
 			p1.reportAnythingAnalytics.setRetakeAbandon()
 			p1.onRestart()
 		end, { p1.onRestart, p1.reportAnythingAnalytics })
-		local UseResult4 = ReactModule.useCallback(function() --[[ Line: 140 ]]
+		local UseResult4 = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy)
 			p1.reportAnythingAnalytics.incrementHighlightScene()
 			p1.onNextPage()
@@ -133,7 +133,7 @@ return function(p1) --[[ Line: 106 | Named "ScreenshotReviewDialog" ]]
 						DialogBody = ReactModule.createElement(RestartScreenshotDialogModule, {
 							ZIndex = 3,
 							isSmallPortraitMode = p1.isSmallPortraitMode,
-							onCancel = function() --[[ Line: 185 ]]
+							onCancel = function()
 								-- upvalues: UseStateResult2 (copy)
 								UseStateResult2(false)
 							end,
@@ -192,7 +192,7 @@ return function(p1) --[[ Line: 106 | Named "ScreenshotReviewDialog" ]]
 								backgroundTransparency = 1,
 								barHeight = 48,
 								margin = 12,
-								renderLeft = function() --[[ Line: 245 ]]
+								renderLeft = function()
 									-- upvalues: ReactModule (upval), IconButton (upval), IconSize (upval), Images (upval), UseResult (copy)
 									return ReactModule.createElement(IconButton, {
 										iconSize = IconSize.Medium,
@@ -200,7 +200,7 @@ return function(p1) --[[ Line: 106 | Named "ScreenshotReviewDialog" ]]
 										onActivated = UseResult
 									})
 								end,
-								renderRight = function() --[[ Line: 253 ]]
+								renderRight = function()
 									-- upvalues: p1 (copy), ReactModule (upval), ScreenshotReviewDialogSmallPortraitModeHeaderRight (upval), UseResult2 (copy), UseStyleResultFont (copy), Theme (copy), Button (upval), ButtonType (upval), RobloxTranslatorModule (upval), StandardButtonSize (upval)
 									return if p1.isSmallPortraitMode then ReactModule.createElement(ScreenshotReviewDialogSmallPortraitModeHeaderRight, {
 										onActivated = UseResult2,

@@ -21,11 +21,11 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local Text = FoundationModule.Text
 local _UDim2 = UDim2.new(1, 0, 0, 0)
 
-local function selectScreenSize(p1) --[[ Line: 44 ]]
+local function selectScreenSize(p1)
 	return p1.ScreenSize
 end
 
-return function(p1) --[[ Line: 48 | Named "VPCNewParentUpsell" ]]
+return function(p1)
 	-- upvalues: UseSelectorFunction (copy), selectScreenSize (copy), UseOnScreenKeyboardHeightModule (copy), GetShouldUseFoundationUIVPCUpsellModule (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), CryoModule (copy), GetFFlagEnableVPCUpsellFoundationDialogHardeningModule (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), _UDim2 (copy), Text (copy), TextField (copy), LinkButton (copy), ButtonVariant (copy), StyledTextLabel (copy), InteractiveAlert (copy), ButtonType (copy)
 	local OnCollectEmailAndSendRequestFunction = p1.onCollectEmailAndSendRequest
 	local OnCancel = p1.onCancel
@@ -143,7 +143,7 @@ return function(p1) --[[ Line: 48 | Named "VPCNewParentUpsell" ]]
 				{
 					text = ButtonText,
 					variant = ButtonVariant.Standard,
-					onActivated = function() --[[ Line: 187 ]]
+					onActivated = function()
 						-- upvalues: OnCollectEmailAndSendRequestFunction (copy), TextInput (copy)
 						OnCollectEmailAndSendRequestFunction(TextInput)
 					end,
@@ -247,7 +247,7 @@ return function(p1) --[[ Line: 48 | Named "VPCNewParentUpsell" ]]
 				{
 					text = ButtonText,
 					variant = ButtonVariant.Standard,
-					onActivated = function() --[[ Line: 301 ]]
+					onActivated = function()
 						-- upvalues: OnCollectEmailAndSendRequestFunction (copy), TextInput (copy)
 						OnCollectEmailAndSendRequestFunction(TextInput)
 					end,
@@ -266,7 +266,7 @@ return function(p1) --[[ Line: 48 | Named "VPCNewParentUpsell" ]]
 				{
 					buttonType = ButtonType.PrimarySystem,
 					props = {
-						onActivated = function() --[[ Line: 321 ]]
+						onActivated = function()
 							-- upvalues: OnCollectEmailAndSendRequestFunction (copy), TextInput (copy)
 							OnCollectEmailAndSendRequestFunction(TextInput)
 						end,
@@ -277,7 +277,7 @@ return function(p1) --[[ Line: 48 | Named "VPCNewParentUpsell" ]]
 			}
 		},
 		onCloseClicked = OnCancel,
-		middleContent = function() --[[ Line: 332 ]]
+		middleContent = function()
 			-- upvalues: ReactModule (upval), StyledTextLabel (upval), Formatted (ref), UseStyleResult (copy), TextFieldHeaderText (copy), TextField (upval), TextInput (copy), UseLocalizationResult (copy), ErrorText (copy), OnTextChange (copy), LinkButton (upval), OpenPrivacyPolicyLink (copy)
 			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,

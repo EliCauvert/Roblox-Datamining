@@ -22,7 +22,7 @@ local SendExpressionModule = require(script.Parent.TextChannelWindowExpressionTr
 local ChatInputBarView = ChatUIPrimitivesModule.ChatInputBarView
 local UseFocusInputBarFunction = ChatUIPrimitivesModule.Hooks.useFocusInputBar
 
-return ReactModule.memo(function(p1) --[[ Line: 57 | Named "TextChatWindowInputBarHost" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FoundationModule (copy), GuiService (copy), UseCanSendToChannelFunction (copy), UseInExperienceLocalizationFunction (copy), ReactModule (copy), MessageWriterContextModule (copy), GetFFlagExpChatUseChatMuteStoreModule (copy), RunVirtualChatCommandsModule (copy), MessageModule (copy), GetFFlagExpChatProtectedChatInternalAPIsFunction (copy), TextChannelWindowAnalyticsModule (copy), LoggerModule (copy), UseFocusInputBarFunction (copy), SendExpressionModule (copy), FFlagExpChatTextChannelWindowExpressionTrayModule (copy), FFlagExpChatComposerFigmaParity (copy), FFlagDebugExpChatTextChannelWindowStaticExpressionsModule (copy), GetDebugExpressionCatalogModule (copy), FFlagExpChatTextChannelWindowFocusNavModule (copy), ChatInputBarView (copy), FFlagExpChatTextChannelWindowThemeByBackgroundModule (copy)
 	local TargetChannel = p1.targetChannel
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
@@ -31,7 +31,7 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "TextChatWindowInputB
 	local TextBoxRef = p1.textBoxRef
 	local UseCanSendToChannelResult = UseCanSendToChannelFunction(p1.targetChannel, p1.localUserId)
 	local UseInExperienceLocalizationResult = UseInExperienceLocalizationFunction()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 67 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseInExperienceLocalizationResult (copy)
 		return {
 			placeholder = UseInExperienceLocalizationResult("CoreScripts.TextChat.InputBar.Hint.Touch"),
@@ -43,7 +43,7 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "TextChatWindowInputB
 	end, { UseInExperienceLocalizationResult })
 	local UseMessageWriterResult = MessageWriterContextModule.useMessageWriter()
 	local Name = if TargetChannel then TargetChannel.Name else nil
-	local UseResult = ReactModule.useCallback(function(Message) --[[ Line: 81 ]]
+	local UseResult = ReactModule.useCallback(function(Message)
 		-- upvalues: UseCanSendToChannelResult (copy), TargetChannel (copy), FocusNavEnabled (copy), TextBoxRef (copy), GuiService1 (copy), GetFFlagExpChatUseChatMuteStoreModule (upval), p1 (copy), RunVirtualChatCommandsModule (upval), UseMessageWriterResult (copy), MessageModule (upval), UseInExperienceLocalizationResult (copy), GetFFlagExpChatProtectedChatInternalAPIsFunction (upval), TextChannelWindowAnalyticsModule (upval), Name (copy), LoggerModule (upval)
 		if not UseCanSendToChannelResult then return end
 		if TargetChannel and Message ~= "" then
@@ -64,9 +64,9 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "TextChatWindowInputB
 					return
 				end
 			end
-			task.spawn(function() --[[ Line: 110 ]]
+			task.spawn(function()
 				-- upvalues: GetFFlagExpChatProtectedChatInternalAPIsFunction (upval), TargetChannel (upval), Message (copy), TextChannelWindowAnalyticsModule (upval), Name (upval), LoggerModule (upval)
-				local Success, Result = pcall(function() --[[ Line: 111 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: GetFFlagExpChatProtectedChatInternalAPIsFunction (upval), TargetChannel (upval), Message (upval)
 					if GetFFlagExpChatProtectedChatInternalAPIsFunction() then
 						TargetChannel:SendInternalAsync(Message)
@@ -102,11 +102,11 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "TextChatWindowInputB
 	})
 	local NoCanLocalUserChat = p1.canLocalUserChat == nil or p1.canLocalUserChat
 	local UseCanSendToChannelResult1 = NoCanLocalUserChat and (TargetChannel ~= nil and UseCanSendToChannelResult)
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 167 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		return { commands = nil, emojis = true }
 	end, {})
 	local UseFocusInputBarResult = UseFocusInputBarFunction(p1.textBoxRef)
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 175 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: SendExpressionModule (upval), TargetChannel (copy)
 		return SendExpressionModule(p2, TargetChannel)
 	end, { TargetChannel })

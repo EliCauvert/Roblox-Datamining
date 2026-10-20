@@ -1,11 +1,11 @@
 ﻿local LocalizationContextModule = {}
 LocalizationContextModule.__index = LocalizationContextModule
 
-function LocalizationContextModule:getBaseLanguage() --[[ Line: 47 ]]
+function LocalizationContextModule:getBaseLanguage()
 	return self:match("^(%w+)[-_]")
 end
 
-function LocalizationContextModule.new(_translations) --[[ Line: 51 ]]
+function LocalizationContextModule.new(_translations)
 	-- upvalues: LocalizationContextModule (copy)
 	local config = { _translations = _translations }
 	setmetatable(config, LocalizationContextModule)
@@ -13,11 +13,11 @@ function LocalizationContextModule.new(_translations) --[[ Line: 51 ]]
 	return config
 end
 
-function LocalizationContextModule:addTranslations(_translations) --[[ Line: 65 ]]
+function LocalizationContextModule:addTranslations(_translations)
 	self._translations = _translations
 end
 
-function LocalizationContextModule.getRelevantLanguages(p1) --[[ Line: 75 ]]
+function LocalizationContextModule.getRelevantLanguages(p1)
 	-- upvalues: LocalizationContextModule (copy)
 	local List = {}
 	table.insert(List, p1)
@@ -31,13 +31,13 @@ function LocalizationContextModule.getRelevantLanguages(p1) --[[ Line: 75 ]]
 	return List
 end
 
-function LocalizationContextModule:_getSourceString(BaseLanguage, p1) --[[ Line: 92 ]]
+function LocalizationContextModule:_getSourceString(BaseLanguage, p1)
 	local Translation = self._translations[BaseLanguage]
 	
 	return if Translation then Translation[p1] else nil
 end
 
-function LocalizationContextModule:getString(p1, p2, p3) --[[ Line: 107 ]]
+function LocalizationContextModule:getString(p1, p2, p3)
 	-- upvalues: LocalizationContextModule (copy)
 	local BaseLanguage = LocalizationContextModule.getBaseLanguage(p1)
 	local SourceString = if BaseLanguage then self:_getSourceString(BaseLanguage, p2) else nil

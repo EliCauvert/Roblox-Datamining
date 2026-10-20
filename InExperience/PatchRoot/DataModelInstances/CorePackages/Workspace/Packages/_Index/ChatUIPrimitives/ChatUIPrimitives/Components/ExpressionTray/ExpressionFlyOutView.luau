@@ -10,7 +10,7 @@ local config = {
 	SelectionBehaviorRight = Enum.SelectionBehavior.Stop
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 39 | Named "ExpressionFlyOutView" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseDismissOnEscapeOrMenuModule (copy), ReactModule (copy), FoundationModule (copy), config (copy)
 	UseDismissOnEscapeOrMenuModule(p1.isOpen, p1.onPressedOutside)
 	

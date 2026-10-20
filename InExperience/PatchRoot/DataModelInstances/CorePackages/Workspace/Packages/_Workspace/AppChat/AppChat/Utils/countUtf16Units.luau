@@ -1,4 +1,4 @@
-﻿return function(Text): number --[[ Line: 2 | Named "countUtf16Units" ]]
+﻿return function(Text): number
 	if utf8.len(Text) == nil then
 		return #Text
 	end

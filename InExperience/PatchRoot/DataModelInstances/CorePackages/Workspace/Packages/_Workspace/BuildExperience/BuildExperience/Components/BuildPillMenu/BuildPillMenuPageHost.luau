@@ -33,7 +33,7 @@ local config = {
 	BuildCreatorCredit = "BuildPillMenuCreatorCredit"
 }
 
-local function _(p1, Name) --[[ Line: 95 | Named "findGroup" ]]
+local function _(p1, Name)
 	if p1 == nil or Name == nil then
 		return nil
 	end
@@ -48,11 +48,11 @@ end
 local List = {
 	{
 		BuildPillMenuLauncher = {
-			screen = function(p2) --[[ Line: 109 ]]
+			screen = function(p2)
 				-- upvalues: ReactModule (copy), BuildOverflowMenuScreensModule (copy)
 				local Navigation = p2.navigation
 				local ScreenProps = p2.screenProps
-				ReactModule.useEffect(function() --[[ Line: 113 ]]
+				ReactModule.useEffect(function()
 					-- upvalues: ScreenProps (copy), BuildOverflowMenuScreensModule (upval), Navigation (copy)
 					if ScreenProps.initialPage ~= nil then
 						local SCREENBYPAGEEntry = BuildOverflowMenuScreensModule.SCREEN_BY_PAGE[ScreenProps.initialPage]
@@ -114,7 +114,7 @@ local List = {
 	},
 	{
 		BuildPillMenuAgents = {
-			screen = function(p2) --[[ Line: 135 ]]
+			screen = function(p2)
 				-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), SubagentStatusModule (copy), OverflowMenuPageShellModule (copy)
 				local Navigation = p2.navigation
 				local ScreenProps = p2.screenProps
@@ -130,7 +130,7 @@ local List = {
 					content = ReactModule.createElement(SubagentStatusModule.AgentsList, {
 						testId = "BuildPillMenu.AgentsList",
 						groups = if SubagentTaskState == nil then {} else SubagentTaskState.groups,
-						onAgentActivated = ReactModule.useCallback(function(p3) --[[ Line: 144 ]]
+						onAgentActivated = ReactModule.useCallback(function(p3)
 							-- upvalues: Navigation (copy), ScreenProps (copy)
 							Navigation.navigate("BuildPillMenuAgentDetails", {
 								target = ScreenProps.target,
@@ -144,7 +144,7 @@ local List = {
 	},
 	{
 		BuildPillMenuAgentDetails = {
-			screen = function(p2) --[[ Line: 166 ]]
+			screen = function(p2)
 				-- upvalues: BuildNavigationParamsModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), SubagentStatusModule (copy), View (copy), OverflowMenuPageShellModule (copy), FFlagBuildBackButtonChevronModule (copy), IconName (copy)
 				local Navigation = p2.navigation
 				local ScreenProps = p2.screenProps
@@ -172,7 +172,7 @@ local List = {
 					scrollPerformanceIntervalName = "LuaApp_Build_AgentDetails_Scroll",
 					testId = "BuildPillMenu.AgentDetailsPage",
 					title = SubagentTaskGroupName or Agents,
-					onClose = ReactModule.useCallback(function() --[[ Line: 177 ]]
+					onClose = ReactModule.useCallback(function()
 						-- upvalues: Navigation (copy)
 						Navigation.goBack()
 					end, { Navigation }),
@@ -184,7 +184,7 @@ local List = {
 	},
 	{
 		BuildPillMenuCreatorCredit = {
-			screen = function(p3) --[[ Line: 200 ]]
+			screen = function(p3)
 				-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), CreatorCreditPageContainerModule (copy), OverflowMenuPageShellModule (copy), CreatorCreditBalanceChipContainerModule (copy)
 				local ScreenProps = p3.screenProps
 				
@@ -194,7 +194,7 @@ local List = {
 					title = UseLocalizationFunction({
 						pageTitle = LocalizationStringsModule.CREATOR_CREDIT_PAGE_TITLE
 					}).pageTitle,
-					onClose = ReactModule.useCallback(function() --[[ Line: 207 ]]
+					onClose = ReactModule.useCallback(function()
 						-- upvalues: ScreenProps (copy)
 						ScreenProps.onClose()
 					end, { ScreenProps.onClose }),
@@ -227,24 +227,24 @@ if FFlagMyStatsMediaSelector then
 end
 local AppContainer = RoactNavigationModule.createAppContainer(RoactNavigationModule.createRobloxStackNavigator(List, { initialRouteName = "BuildPillMenuLauncher" }))
 
-local _ = function(ScreenGui) --[[ Line: 307 | Named "getOverlayScreenGui" ]]
+local _ = function(ScreenGui)
 	return if ScreenGui:IsA("ScreenGui") then ScreenGui else ScreenGui:FindFirstAncestorOfClass("ScreenGui")
 end
 
-local _ = function(p3) --[[ Line: 315 | Named "getInitialPage" ]]
+local _ = function(p3)
 	return if p3 == nil or p3.type ~= "overflow" then nil else p3.page
 end
 
-local _ = function(p3) --[[ Line: 319 | Named "getInitialScreen" ]]
+local _ = function(p3)
 	-- upvalues: BuildOverflowMenuScreensModule (copy)
 	return if p3 == nil then nil elseif p3.type == "agents" then "BuildPillMenuAgents" elseif p3.type == "invitePicker" then BuildOverflowMenuScreensModule.Screens.BuildPrivateInvitesPicker elseif p3.type == "creator-credit" then "BuildPillMenuCreatorCredit" elseif p3.type == "screen" then p3.screen else nil
 end
 
-local _ = function(p3) --[[ Line: 340 | Named "getScreenTarget" ]]
+local _ = function(p3)
 	return if p3 == nil or p3.type ~= "screen" then nil else p3.target
 end
 
-return ReactModule.memo(function(p3) --[[ Line: 344 | Named "BuildPillMenuPageHost" ]]
+return ReactModule.memo(function(p3)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOverlayFunction (copy), ReactModule (copy), config (copy), BuildOverflowMenuScreensModule (copy), CreatorAgentChatModule (copy), UseSessionSummaryModule (copy), PrivateInvitesPickerContainerModule (copy), View (copy), OverflowMenuPageShellModule (copy), FFlagBuildBackButtonChevronModule (copy), IconName (copy), PrivateInvitesManagementContainerModule (copy), AppContainer (copy), ReactRobloxModule (copy), BuildExperienceCompositionStyleSheetModule (copy), OverlayProvider (copy)
 	local PrivateInvitesPageTitle = UseLocalizationFunction({
 		privateInvitesPageTitle = LocalizationStringsModule.PRIVATE_INVITES_PAGE_TITLE
@@ -257,7 +257,7 @@ return ReactModule.memo(function(p3) --[[ Line: 344 | Named "BuildPillMenuPageHo
 	local BuildAgents = if ActivePage1 == nil then nil elseif ActivePage1.type == "agents" then config.BuildAgents elseif ActivePage1.type == "invitePicker" then BuildOverflowMenuScreensModule.Screens.BuildPrivateInvitesPicker elseif ActivePage1.type == "creator-credit" then config.BuildCreatorCredit elseif ActivePage1.type == "screen" then ActivePage1.screen else nil
 	local ActivePage2 = p3.activePage
 	local Target = if ActivePage2 == nil or ActivePage2.type ~= "screen" then nil else ActivePage2.target
-	local SubagentTaskState = UseSessionSummaryModule((ReactModule.useMemo(function() --[[ Line: 354 ]]
+	local SubagentTaskState = UseSessionSummaryModule((ReactModule.useMemo(function()
 		-- upvalues: CreatorAgentChatModule (upval), p3 (copy)
 		return CreatorAgentChatModule.getCreatorAgentChatStore().getSessionForProject(p3.target.universeId, p3.target.placeId, p3.target.sessionId)
 	end, {
@@ -268,7 +268,7 @@ return ReactModule.memo(function(p3) --[[ Line: 344 | Named "BuildPillMenuPageHo
 	local UseOverlayResult1 = if UseOverlayResult == nil then nil elseif UseOverlayResult:IsA("ScreenGui") then UseOverlayResult else UseOverlayResult:FindFirstAncestorOfClass("ScreenGui")
 	local UseOverlayResult2 = if UseOverlayResult1 == nil or UseOverlayResult1.Parent == nil then UseOverlayResult else UseOverlayResult1.Parent
 	local DisplayOrder = if UseOverlayResult1 == nil then 0 else UseOverlayResult1.DisplayOrder
-	ReactModule.useEffect(function() --[[ Line: 365 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p3 (copy), UseStateResult2 (copy)
 		if p3.activePage == nil then
 			UseStateResult2(nil)

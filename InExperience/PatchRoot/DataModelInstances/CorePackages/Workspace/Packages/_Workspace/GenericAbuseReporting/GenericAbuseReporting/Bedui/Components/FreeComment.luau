@@ -10,7 +10,7 @@ local ComponentSubtextModule = require(GenericAbuseReporting.Bedui.Components.Co
 local CommentTextFieldModule = require(GenericAbuseReporting.Common.CommentTextField)
 local UseFormDataModule = require(GenericAbuseReporting.Bedui.Provider.useFormData)
 
-return ReactModule.memo(function(p1) --[[ Line: 24 | Named "FreeComment" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), UseFormDataModule (copy), View (copy), Text (copy), CommentTextFieldModule (copy), ComponentSubtextModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState("")
@@ -35,7 +35,7 @@ return ReactModule.memo(function(p1) --[[ Line: 24 | Named "FreeComment" ]]
 				placeholderText = p1.component.freeComment.placeholder,
 				backgroundColor3 = UseTokensResult.Color.Shift.Shift_100.Color3,
 				backgroundTransparency = UseTokensResult.Color.Shift.Shift_100.Transparency,
-				onUpdate = ReactModule.useCallback(function(p2) --[[ Line: 29 ]]
+				onUpdate = ReactModule.useCallback(function(p2)
 					-- upvalues: UseStateResult2 (copy), UpdateFormFunction (copy), p1 (copy)
 					UseStateResult2(p2)
 					UpdateFormFunction(p1.component.formDataKey, p2)

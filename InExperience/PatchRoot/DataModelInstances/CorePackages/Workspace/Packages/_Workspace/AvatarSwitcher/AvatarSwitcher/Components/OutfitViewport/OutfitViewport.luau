@@ -10,7 +10,7 @@ local AvatarSwitcherPlayRandomEmote = game:DefineFastFlag("AvatarSwitcherPlayRan
 local FFlagAvatarSwitcherAccurateAvatarWarning = require(Parent.AvatarExperienceFlags).FFlagAvatarSwitcherAccurateAvatarWarning
 local _Color3 = Color3.fromRGB(218, 203, 173)
 
-return ReactModule.memo(function(p1) --[[ Line: 37 | Named "OutfitViewport" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), UseOutfitViewportInteractionsModule (copy), HttpService (copy), FFlagAvatarSwitcherAccurateAvatarWarning (copy), OutfitViewportUtilsModule (copy), AvatarSwitcherPlayRandomEmote (copy), _Color3 (copy), FoundationModule (copy), EventConnection (copy), UserInputService (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
@@ -20,7 +20,7 @@ return ReactModule.memo(function(p1) --[[ Line: 37 | Named "OutfitViewport" ]]
 	local UseRefResult4 = ReactModule.useRef(0)
 	local NoUseStateResult = not UseStateResult
 	local UseOutfitViewportInteractionsModuleResult = UseOutfitViewportInteractionsModule({ defaultCameraDistanceRef = UseRefResult4 })
-	local UseResult = ReactModule.useCallback(function(p2, p3) --[[ Line: 50 ]]
+	local UseResult = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: UseStateResult2 (copy), UseRefResult (copy), HttpService (upval), UseRefResult3 (copy), FFlagAvatarSwitcherAccurateAvatarWarning (upval), OutfitViewportUtilsModule (upval), p1 (copy), UseRefResult4 (copy), AvatarSwitcherPlayRandomEmote (upval)
 		UseStateResult2(true)
 		
@@ -35,7 +35,7 @@ return ReactModule.memo(function(p1) --[[ Line: 37 | Named "OutfitViewport" ]]
 		
 		if FFlagAvatarSwitcherAccurateAvatarWarning then
 			local Success, Result3
-			Success, Result, Result3 = pcall(function() --[[ Line: 71 ]]
+			Success, Result, Result3 = pcall(function()
 				-- upvalues: OutfitViewportUtilsModule (upval), p2 (copy), p3 (copy)
 				return OutfitViewportUtilsModule.buildOutfitModel(p2, p3)
 			end)
@@ -66,7 +66,7 @@ return ReactModule.memo(function(p1) --[[ Line: 37 | Named "OutfitViewport" ]]
 				return
 			end
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 99 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: OutfitViewportUtilsModule (upval), p2 (copy), p3 (copy)
 				return OutfitViewportUtilsModule.buildOutfitModel(p2, p3)
 			end)
@@ -110,20 +110,20 @@ return ReactModule.memo(function(p1) --[[ Line: 37 | Named "OutfitViewport" ]]
 		end
 		UseStateResult2(false)
 	end, { p1.onLoadingFailed })
-	ReactModule.useEffect(function() --[[ Line: 143 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult (copy), p1 (copy)
-		task.spawn(function() --[[ Line: 144 ]]
+		task.spawn(function()
 			-- upvalues: UseResult (upval), p1 (upval)
 			UseResult(p1.outfitId, p1.rigType)
 		end)
 	end, { p1.outfitId, p1.rigType, UseResult })
-	ReactModule.useLayoutEffect(function() --[[ Line: 150 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseRefResult2 (copy), UseRefResult1 (copy)
 		if UseRefResult2.current then
 			UseRefResult2.current.CurrentCamera = UseRefResult1.current
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(Interactable) --[[ Line: 159 ]]
+	local UseResult1 = ReactModule.useCallback(function(Interactable)
 		-- upvalues: UseRefResult2 (copy)
 		local ScreenGui = UseRefResult2.current and UseRefResult2.current:FindFirstAncestorOfClass("ScreenGui")
 		local InputWrapper = ScreenGui and ScreenGui:FindFirstChild("InputWrapper", true)
@@ -140,11 +140,11 @@ return ReactModule.memo(function(p1) --[[ Line: 37 | Named "OutfitViewport" ]]
 		BackgroundTransparency = 1,
 		ref = UseRefResult2,
 		[ReactModule.Event.InputBegan] = if NoUseStateResult then UseOutfitViewportInteractionsModuleResult.onInputBegan else nil,
-		[ReactModule.Event.MouseEnter] = function() --[[ Line: 176 ]]
+		[ReactModule.Event.MouseEnter] = function()
 			-- upvalues: UseResult1 (copy)
 			UseResult1(false)
 		end,
-		[ReactModule.Event.MouseLeave] = function() --[[ Line: 179 ]]
+		[ReactModule.Event.MouseLeave] = function()
 			-- upvalues: UseResult1 (copy)
 			UseResult1(true)
 		end

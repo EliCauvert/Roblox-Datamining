@@ -5,31 +5,31 @@ local WithGetPolicyImplementationResult = PolicyProvider.withGetPolicyImplementa
 local GetFIntEducationalPopupDisplayMaxCountModule = require(script.Parent.Parent.Flags.GetFIntEducationalPopupDisplayMaxCount)
 local IsSubjectToDesktopPoliciesFunction = require(CorePackages.Workspace.Packages.SharedFlags).isSubjectToDesktopPolicies
 
-function WithGetPolicyImplementationResult.Mapper(p1) --[[ Line: 15 ]]
+function WithGetPolicyImplementationResult.Mapper(p1)
 	-- upvalues: IsSubjectToDesktopPoliciesFunction (copy), GetFFlagGateEducationalPopupVisibilityViaGUACFunction (copy), GetFIntEducationalPopupDisplayMaxCountModule (copy)
 	return {
-		enableInGameHomeIcon = function() --[[ Line: 17 ]]
+		enableInGameHomeIcon = function()
 			-- upvalues: IsSubjectToDesktopPoliciesFunction (upval)
 			return IsSubjectToDesktopPoliciesFunction()
 		end,
-		enableEducationalPopup = function() --[[ Line: 21 ]]
+		enableEducationalPopup = function()
 			-- upvalues: IsSubjectToDesktopPoliciesFunction (upval), GetFFlagGateEducationalPopupVisibilityViaGUACFunction (upval), p1 (copy)
 			local NativeCloseInterceptEngineFeature = game:GetEngineFeature("NativeCloseIntercept")
 			
 			return if IsSubjectToDesktopPoliciesFunction() and NativeCloseInterceptEngineFeature then not GetFFlagGateEducationalPopupVisibilityViaGUACFunction() or (p1.InExperienceCanViewEducationalPopup == nil or p1.InExperienceCanViewEducationalPopup) else false
 		end,
-		educationalPopupMaxDisplayCount = function() --[[ Line: 34 ]]
+		educationalPopupMaxDisplayCount = function()
 			-- upvalues: IsSubjectToDesktopPoliciesFunction (upval), GetFIntEducationalPopupDisplayMaxCountModule (upval)
 			return IsSubjectToDesktopPoliciesFunction() and GetFIntEducationalPopupDisplayMaxCountModule() or 0
 		end,
-		getGameInfoShowChatFeatures = function(): boolean --[[ Line: 38 ]]
+		getGameInfoShowChatFeatures = function(): boolean
 			return false
 		end,
-		enableFullscreenTitleBar = function() --[[ Line: 42 ]]
+		enableFullscreenTitleBar = function()
 			-- upvalues: p1 (copy)
 			return p1.FullscreenTitleBarEnabled or false
 		end,
-		getDisplayCheckboxInVoiceConsent = function() --[[ Line: 46 ]]
+		getDisplayCheckboxInVoiceConsent = function()
 			-- upvalues: p1 (copy)
 			return p1.DisplayCheckboxInVoiceConsent == nil or p1.DisplayCheckboxInVoiceConsent
 		end

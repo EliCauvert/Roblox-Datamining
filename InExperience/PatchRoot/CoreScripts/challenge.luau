@@ -1,34 +1,34 @@
 ﻿arg0, arg1 = ...
 
-local function x1(p1, p2) --[[ Line: 6 ]]
+local function x1(p1, p2)
 	return p1 + p2
 end
 
-local function x2(p1, p2) --[[ Line: 7 ]]
+local function x2(p1, p2)
 	return p1 - p2
 end
 
-local function x3(p1, p2) --[[ Line: 8 ]]
+local function x3(p1, p2)
 	return p2 - p1
 end
 
-local function x4(p1: number, p2: number): number --[[ Line: 9 ]]
+local function x4(p1: number, p2: number): number
 	return (tonumber(tostring(p2 % 1000) .. tostring((math.abs(p1 % 1000)))))
 end
 
-local function x5(p1: number, p2: number): number --[[ Line: 10 ]]
+local function x5(p1: number, p2: number): number
 	return (tonumber(tostring(p2 % 1337) .. tostring((math.abs(p1 % 1337)))))
 end
 
-local function x6(p1: number, p2: number): number --[[ Line: 11 ]]
+local function x6(p1: number, p2: number): number
 	return p1 % 1000 * (p2 % 1000)
 end
 
-local function x7(p1: number, p2: number): number --[[ Line: 12 ]]
+local function x7(p1: number, p2: number): number
 	return p1 % 1337 * (p2 % 1337)
 end
 
-local function x8(p1, p2): number --[[ Line: 13 ]]
+local function x8(p1, p2): number
 	return (p1 + p2) % 1000 * ((p1 - p2) % 1000)
 end
 
@@ -55,7 +55,7 @@ local config = {
 	[list[8]] = x8
 }
 
-return ((function(p1: number, p2: number): number --[[ Line: 35 | Named "x9" ]]
+return ((function(p1: number, p2: number): number
 	-- upvalues: config (copy)
 	local v1 = 393
 	local Count = 1

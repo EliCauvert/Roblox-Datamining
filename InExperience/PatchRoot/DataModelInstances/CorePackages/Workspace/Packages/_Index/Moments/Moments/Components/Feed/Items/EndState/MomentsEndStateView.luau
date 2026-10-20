@@ -26,11 +26,11 @@ local config1 = {
 	description = "Feature.Moments.Label.FeedEndBody"
 }
 
-local function _(p1, p2) --[[ Line: 54 | Named "resolveLocalized" ]]
+local function _(p1, p2)
 	return if p1 == nil or p1 == "" then p2 else p1
 end
 
-return function(Frame) --[[ Line: 86 | Named "MomentsEndStateView" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), UseFormFactorFunction (copy), FormFactor (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), UseLocalizationFunction (copy), config1 (copy), config (copy), ReactModule (copy), View (copy), Icon (copy), IconSize (copy), Text (copy), Button (copy), FillBehavior (copy), InputSize (copy), ButtonVariant (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsUseFormFactorResultMatch = UseFormFactorFunction() == FormFactor.Wide

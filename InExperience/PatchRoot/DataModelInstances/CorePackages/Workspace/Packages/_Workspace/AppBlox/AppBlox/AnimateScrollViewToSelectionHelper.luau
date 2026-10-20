@@ -7,7 +7,7 @@ local CenterOnFocusScrollModule = require(AppBlox.CenterOnFocusScroll)
 local FFlagLuaAppMediaGalleryGamepadSupport = require(AppBlox.Parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
 local AnimateScrollViewIgnoreStaleSelection = game:DefineFastFlag("AnimateScrollViewIgnoreStaleSelection", false)
 
-function AnimateScrollViewToSelectionHelper(Frame: Frame, Duration, Callback, p1) --[[ Line: 12 ]]
+function AnimateScrollViewToSelectionHelper(Frame: Frame, Duration, Callback, p1)
 	-- upvalues: GamepadService (copy), AnimateScrollViewIgnoreStaleSelection (copy), GuiService (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), CenterOnFocusScrollModule (copy), UserGameSettings (copy), TweenService (copy)
 	local List = {}
 	local CreateResult = nil
@@ -15,15 +15,15 @@ function AnimateScrollViewToSelectionHelper(Frame: Frame, Duration, Callback, p1
 	if Frame then
 		local Y = Frame.AbsolutePosition.Y
 		local Y1 = Frame.AbsoluteWindowSize.Y
-		table.insert(List, Frame:GetPropertyChangedSignal("AbsolutePosition"):Connect(function() --[[ Line: 29 ]]
+		table.insert(List, Frame:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
 			-- upvalues: Y (ref), Frame (copy)
 			Y = Frame.AbsolutePosition.Y
 		end))
-		table.insert(List, Frame:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function() --[[ Line: 35 ]]
+		table.insert(List, Frame:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
 			-- upvalues: Y1 (ref), Frame (copy)
 			Y1 = Frame.AbsoluteWindowSize.Y
 		end))
-		table.insert(List, Frame.SelectionChanged:Connect(function(_, _, Frame1: Frame) --[[ Line: 41 ]]
+		table.insert(List, Frame.SelectionChanged:Connect(function(_, _, Frame1: Frame)
 			-- upvalues: Frame (copy), GamepadService (upval), AnimateScrollViewIgnoreStaleSelection (upval), GuiService (upval), CreateResult (ref), FFlagLuaAppMediaGalleryGamepadSupport (upval), p1 (copy), CenterOnFocusScrollModule (upval), Y (ref), Y1 (ref), UserGameSettings (upval), Callback (copy), TweenService (upval), Duration (copy)
 			if not Frame1 or not Frame1:IsDescendantOf(Frame) or GamepadService.GamepadCursorEnabled then return end
 			if AnimateScrollViewIgnoreStaleSelection and Frame1 ~= GuiService.SelectedCoreObject and Frame1 ~= GuiService.SelectedObject then return end

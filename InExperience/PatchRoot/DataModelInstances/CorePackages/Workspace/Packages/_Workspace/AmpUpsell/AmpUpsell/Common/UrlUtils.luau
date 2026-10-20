@@ -1,7 +1,7 @@
 ﻿local UrlBase = require(script:FindFirstAncestor("AmpUpsell").Parent.UrlBuilder).UrlBase
 
 return {
-	buildAmpWizardUrl = function(Text, Text1, Text2, Text3): string --[[ Line: 17 ]]
+	buildAmpWizardUrl = function(Text, Text1, Text2, Text3): string
 		-- upvalues: UrlBase (copy)
 		local Text4 = UrlBase.new("www") .. "/amp-wizard?feature_name=" .. Text .. "&namespace=" .. Text1
 		

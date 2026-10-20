@@ -7,7 +7,7 @@ local FFlagBuildExperienceDeveloperProductContextModule = require(BuildExperienc
 local GetBuildPromptDraftStoreModule = require(BuildExperience.Stores.GetBuildPromptDraftStore)
 local ChatTypesModule = require(script.Parent.chatTypes)
 
-return function(UniverseId, SessionId, Callback, Callback1, Enabled, Current) --[[ Line: 19 | Named "useBuildPromptDraft" ]]
+return function(UniverseId, SessionId, Callback, Callback1, Enabled, Current)
 	-- upvalues: GetBuildPromptDraftStoreModule (copy), SignalsReactModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), ReactModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), ChatTypesModule (copy)
 	local BuildPromptDraftStoreModule = GetBuildPromptDraftStoreModule()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(BuildPromptDraftStoreModule.getPendingDraft)
@@ -18,7 +18,7 @@ return function(UniverseId, SessionId, Callback, Callback1, Enabled, Current) --
 		UseRefResult.current = Current
 		v1 = UseRefResult
 	end
-	ReactModule.useEffect(function() --[[ Line: 37 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagBuildExperienceMonetizationNativeUIModule (upval), Enabled (copy), BuildPromptDraftStoreModule (copy), UseSignalStateResult (copy), UniverseId (copy), SessionId (copy), FFlagBuildExperienceDeveloperProductContextModule (upval), v1 (ref), ChatTypesModule (upval), Callback (copy), Callback1 (copy)
 		if FFlagBuildExperienceMonetizationNativeUIModule and (Enabled == false or BuildPromptDraftStoreModule.getPendingDraft() ~= UseSignalStateResult) then return end
 		if UseSignalStateResult == nil or UseSignalStateResult.universeId ~= UniverseId or UseSignalStateResult.sessionId ~= nil and UseSignalStateResult.sessionId ~= SessionId or not FFlagBuildExperienceDeveloperProductContextModule and UseSignalStateResult.resourceAttachments ~= nil then return end

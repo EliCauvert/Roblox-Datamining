@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("DataHydration").Parent.MomentsTypes)
 
-local function decodeEmoji(p1) --[[ Line: 11 ]]
+local function decodeEmoji(p1)
 	return if type(p1) == "table" and (type(p1.id) == "string" and p1.id ~= "" and (type(p1.name) == "string" and p1.name ~= "")) then {
 		id = p1.id,
 		name = p1.name,
@@ -9,7 +9,7 @@ local function decodeEmoji(p1) --[[ Line: 11 ]]
 	} else nil
 end
 
-local function decodeEmojiSet(p1) --[[ Line: 30 ]]
+local function decodeEmojiSet(p1)
 	-- upvalues: decodeEmoji (copy)
 	if type(p1) ~= "table" then
 		return nil
@@ -41,7 +41,7 @@ local function decodeEmojiSet(p1) --[[ Line: 30 ]]
 end
 
 return {
-	decodeGetEmojiSetsResponse = function(p2) --[[ Line: 60 ]]
+	decodeGetEmojiSetsResponse = function(p2)
 		-- upvalues: decodeEmojiSet (copy)
 		local EmojiSets = {}
 		
@@ -60,7 +60,7 @@ return {
 			previousCursor = if type(p2) == "table" and type(p2.previous_cursor) == "string" then p2.previous_cursor else nil
 		}
 	end,
-	flattenEmojis = function(p3) --[[ Line: 82 ]]
+	flattenEmojis = function(p3)
 		if p3 == nil then
 			return {}
 		end

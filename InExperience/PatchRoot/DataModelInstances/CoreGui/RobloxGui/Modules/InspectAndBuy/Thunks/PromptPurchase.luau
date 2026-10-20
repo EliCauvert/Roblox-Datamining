@@ -11,9 +11,9 @@ local FFlagAXIaBSinglePurchaseUnifiedEventsModule = require(Parent.Flags.FFlagAX
 local FixInspectAndBuyThirdPartySales = game:DefineFastFlag("FixInspectAndBuyThirdPartySales", false)
 local list = { AnalyticsModule }
 
-return function(AssetId, Bundle, CollectibleItemId, CollectibleProductId, CollectibleItemInstanceId, ExpectedPrice, p1) --[[ Line: 22 | Named "PromptPurchase" ]]
+return function(AssetId, Bundle, CollectibleItemId, CollectibleProductId, CollectibleItemInstanceId, ExpectedPrice, p1)
 	-- upvalues: ThunkModule (copy), list (copy), AnalyticsModule (copy), ConstantsModule (copy), FFlagAXIaBSinglePurchaseUnifiedEventsModule (copy), SetItemBeingPurchasedModule (copy), MarketplaceService (copy), Players (copy), SendCounterModule (copy), FixInspectAndBuyThirdPartySales (copy), ReportPurchaseAttemptUnifiedEventModule (copy)
-	return ThunkModule.new(script.Name, list, function(p2, p3) --[[ Line: 31 ]]
+	return ThunkModule.new(script.Name, list, function(p2, p3)
 		-- upvalues: AnalyticsModule (upval), CollectibleProductId (copy), Bundle (copy), ConstantsModule (upval), FFlagAXIaBSinglePurchaseUnifiedEventsModule (upval), ExpectedPrice (copy), SetItemBeingPurchasedModule (upval), AssetId (copy), MarketplaceService (upval), Players (upval), CollectibleItemId (copy), CollectibleItemInstanceId (copy), SendCounterModule (upval), p1 (copy), FixInspectAndBuyThirdPartySales (upval), ReportPurchaseAttemptUnifiedEventModule (upval)
 		local v1 = p3[AnalyticsModule]
 		local IsNotBundleMatch: boolean = CollectibleProductId ~= nil and Bundle ~= ConstantsModule.ItemType.Bundle

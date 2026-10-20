@@ -11,7 +11,7 @@ local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
-return function(p1) --[[ Line: 20 | Named "SocialTabsHeader" ]]
+return function(p1)
 	-- upvalues: UseSocialTabsContextModule (copy), UseNavigationFunction (copy), ReactModule (copy), View (copy), IconButton (copy), IconName (copy), IconSize (copy), ButtonVariant (copy), Text (copy)
 	local UseSocialTabsContextModuleResult = UseSocialTabsContextModule()
 	local UseNavigationResult = UseNavigationFunction()
@@ -25,7 +25,7 @@ return function(p1) --[[ Line: 20 | Named "SocialTabsHeader" ]]
 			icon = IconName.ChevronLargeLeft,
 			size = IconSize.Medium,
 			variant = ButtonVariant.Utility,
-			onActivated = ReactModule.useCallback(function() --[[ Line: 24 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: UseNavigationResult (copy)
 				UseNavigationResult.goBack()
 			end, { UseNavigationResult })

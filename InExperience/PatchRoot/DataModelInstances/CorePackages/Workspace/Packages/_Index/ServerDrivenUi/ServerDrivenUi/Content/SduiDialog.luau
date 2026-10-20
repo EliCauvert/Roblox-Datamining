@@ -6,10 +6,10 @@ local Dialog = FoundationModule.Dialog
 local Orientation = FoundationModule.Enums.Orientation
 local SduiDialogHeroMediaProps2 = game:DefineFastFlag("SduiDialogHeroMediaProps2", false)
 
-return ReactModule.memo(function(p1) --[[ Line: 53 | Named "SduiDialog" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), ButtonVariant (copy), Dialog (copy), SduiDialogHeroMediaProps2 (copy), Orientation (copy)
 	local BodyText = p1.bodyText or p1.bodyComponent
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 56 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		if p1.primaryButtonAction then
 			p1.primaryButtonAction()
@@ -19,7 +19,7 @@ return ReactModule.memo(function(p1) --[[ Line: 53 | Named "SduiDialog" ]]
 			end
 		end
 	end, { p1.primaryButtonAction, p1.primaryButtonSideEffectAction })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 65 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		if p1.secondaryButtonAction then
 			p1.secondaryButtonAction()

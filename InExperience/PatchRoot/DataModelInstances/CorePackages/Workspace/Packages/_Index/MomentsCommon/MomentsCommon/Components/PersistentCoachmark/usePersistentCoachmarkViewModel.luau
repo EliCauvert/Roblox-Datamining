@@ -2,12 +2,12 @@
 local _ = require(Parent.Utils.createCoachmarkImpressionCache)
 local ReactModule = require(Parent.Parent.React)
 
-return function(p1) --[[ Line: 42 | Named "usePersistentCoachmarkViewModel" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy)
 	local ImpressionCache = p1.impressionCache
 	local OnSessionHandledFunction = p1.onSessionHandled
 	local AutoDismissSeconds = p1.autoDismissSeconds
-	local UseMemoResult = ReactModule.useMemo(function(): boolean --[[ Line: 49 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): boolean
 		-- upvalues: p1 (copy), ImpressionCache (copy)
 		if p1.isSessionHandled then
 			return false
@@ -20,7 +20,7 @@ return function(p1) --[[ Line: 42 | Named "usePersistentCoachmarkViewModel" ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(UseMemoResult)
 	local UseRefResult = ReactModule.useRef(false)
 	local UseRefResult1 = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 63 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy), UseRefResult (copy), ImpressionCache (copy), OnSessionHandledFunction (copy), p1 (copy)
 		if UseMemoResult and not UseRefResult.current then
 			UseRefResult.current = true
@@ -32,15 +32,15 @@ return function(p1) --[[ Line: 42 | Named "usePersistentCoachmarkViewModel" ]]
 			end
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 74 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), AutoDismissSeconds (copy), UseRefResult1 (copy), UseStateResult2 (copy)
 		if not UseStateResult or AutoDismissSeconds == nil then return end
-		UseRefResult1.current = task.delay(AutoDismissSeconds, function() --[[ Line: 79 ]]
+		UseRefResult1.current = task.delay(AutoDismissSeconds, function()
 			-- upvalues: UseStateResult2 (upval)
 			UseStateResult2(false)
 		end)
 		
-		return function() --[[ Line: 83 ]]
+		return function()
 			-- upvalues: UseRefResult1 (upval)
 			if UseRefResult1.current ~= nil then
 				task.cancel(UseRefResult1.current)
@@ -51,7 +51,7 @@ return function(p1) --[[ Line: 42 | Named "usePersistentCoachmarkViewModel" ]]
 	
 	return {
 		isOpen = UseStateResult,
-		onClose = ReactModule.useCallback(function() --[[ Line: 92 ]]
+		onClose = ReactModule.useCallback(function()
 			-- upvalues: ImpressionCache (copy), p1 (copy), UseStateResult2 (copy)
 			ImpressionCache.dismissValue()
 			

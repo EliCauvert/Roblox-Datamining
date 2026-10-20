@@ -16,7 +16,7 @@ local config = {
 }
 local BackgroundStyle1 = { Transparency = 1 }
 
-return (ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 48 | Named "TabGroupTabComponent" ]]
+return (ReactModule.forwardRef(function(Frame, Ref)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), BackgroundStyle (copy), FFlagAXCategoryMenuVisualFixes (copy), GetFixedTabHeightModule (copy), config (copy), Text (copy), BackgroundStyle1 (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Padding = Frame.padding or Vector2.new(UseTokensResult.Padding.Small, UseTokensResult.Padding.Medium)

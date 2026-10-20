@@ -2,7 +2,7 @@
 local UseQueryFunction = require(Parent.ApolloClient).useQuery
 local Queries = require(Parent.ApolloLocalState).queries
 
-return function(p1) --[[ Line: 17 | Named "useProfileInsightsByUserIds" ]]
+return function(p1)
 	-- upvalues: UseQueryFunction (copy), Queries (copy)
 	return (UseQueryFunction(Queries.profilesInsightsByUserIds, {
 		errorPolicy = "all",

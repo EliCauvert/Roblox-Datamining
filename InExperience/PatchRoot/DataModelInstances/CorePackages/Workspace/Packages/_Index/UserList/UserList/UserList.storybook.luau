@@ -10,9 +10,9 @@ local FoundationProvider = FoundationModule.FoundationProvider
 local StyleProviderWithDefaultTheme = StyleModule.StyleProviderWithDefaultTheme
 local DesignTokenProvider = StyleModule.DesignTokenProvider
 
-local function createStore(_) --[[ Line: 18 ]]
+local function createStore(_)
 	-- upvalues: RoduxModule (copy)
-	return RoduxModule.Store.new(function() --[[ Line: 19 ]]
+	return RoduxModule.Store.new(function()
 		return {
 			ScreenSize = Vector2.new(600, 600),
 			TopBar = { topBarHeight = 100 },
@@ -21,21 +21,21 @@ local function createStore(_) --[[ Line: 18 ]]
 	end, {}, { RoduxModule.thunkMiddleware })
 end
 
-local function mockNavigation(Child) --[[ Line: 35 ]]
+local function mockNavigation(Child)
 	-- upvalues: ReactModule (copy), RoactNavigationModule (copy)
 	return ReactModule.createElement(RoactNavigationModule.Provider, {
 		value = {
 			state = { routeName = "appPage" },
-			isFocused = function(): boolean --[[ Line: 41 ]]
+			isFocused = function(): boolean
 				return true
 			end,
-			addListener = function() --[[ Line: 44 ]]
-				return { remove = function() --[[ Line: 46 ]] end }
+			addListener = function()
+				return { remove = function() end }
 			end,
-			getParam = function(_, p1) --[[ Line: 49 ]]
+			getParam = function(_, p1)
 				return p1
 			end,
-			navigate = function() --[[ Line: 52 ]] end
+			navigate = function() end
 		}
 	}, { Child = Child })
 end
@@ -45,9 +45,9 @@ return {
 	storyRoot = UserList,
 	roact = ReactModule,
 	reactRoblox = require(Parent.ReactRoblox),
-	mapStory = function(Callback) --[[ Line: 64 ]]
+	mapStory = function(Callback)
 		-- upvalues: ReactModule (copy), StyleProviderWithDefaultTheme (copy), RoactRoduxModule (copy), createStore (copy), mockNavigation (copy), FoundationProvider (copy), FoundationModule (copy), DesignTokenProvider (copy)
-		return function(p1) --[[ Line: 65 ]]
+		return function(p1)
 			-- upvalues: ReactModule (upval), StyleProviderWithDefaultTheme (upval), RoactRoduxModule (upval), createStore (upval), mockNavigation (upval), FoundationProvider (upval), FoundationModule (upval), DesignTokenProvider (upval), Callback (copy)
 			return ReactModule.createElement(StyleProviderWithDefaultTheme, { withDarkTheme = true, withUiModeSupport = false }, {
 				ReactModule.createElement(RoactRoduxModule.StoreProvider, { store = createStore(nil) }, {

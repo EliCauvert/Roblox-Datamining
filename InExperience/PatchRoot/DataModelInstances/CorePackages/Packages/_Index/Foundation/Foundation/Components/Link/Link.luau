@@ -23,7 +23,7 @@ local config1 = {
 	size = require(Foundation.Enums.InputSize).Medium
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 52 | Named "Link" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config1 (copy), UseTokensModule (copy), UseLinkVariantsModule (copy), ReactModule (copy), config (copy), ViewModule (copy), WithCommonPropsModule (copy), StateLayerAffordanceModule (copy), TextModule (copy), EscapeRichTextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config1)
 	local UseTokensModuleResult = UseTokensModule()
@@ -34,7 +34,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 52 |
 	
 	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
 		tag = UseLinkVariantsModuleResult.container.tag,
-		cursor = ReactModule.useMemo(function() --[[ Line: 64 ]]
+		cursor = ReactModule.useMemo(function()
 			-- upvalues: UseTokensModuleResult (copy)
 			return {
 				radius = UDim.new(0, UseTokensModuleResult.Radius.XSmall),
@@ -44,7 +44,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 52 |
 		end, { UseTokensModuleResult }),
 		stateLayer = { affordance = StateLayerAffordanceModule.None },
 		onActivated = WithDefaultsModuleResult.onActivated,
-		onStateChanged = ReactModule.useCallback(function(p2) --[[ Line: 60 ]]
+		onStateChanged = ReactModule.useCallback(function(p2)
 			-- upvalues: UseStateResult2 (copy), config (upval)
 			UseStateResult2(config[p2] == true)
 		end, {}),

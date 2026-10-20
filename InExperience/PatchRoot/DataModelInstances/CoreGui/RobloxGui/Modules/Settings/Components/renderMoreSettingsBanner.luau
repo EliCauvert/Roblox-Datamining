@@ -7,7 +7,7 @@ local CreateFunction = require(CorePackages.Workspace.Packages.AppCommonLib).Cre
 local IsPioneerLaunch = require(CorePackages.Workspace.Packages.PioneerUtils).isPioneerLaunch
 local SettingsShowSignal = require(CorePackages.Workspace.Packages.CoreScriptsCommon).SettingsShowSignal
 
-return function(p1) --[[ Line: 21 | Named "renderMoreSettingsBanner" ]]
+return function(p1)
 	-- upvalues: IsPioneerLaunch (copy), CreateFunction (copy), SettingsShowSignal (copy), ReactRobloxModule (copy), ReactModule (copy), InExperienceMenuReactModule (copy), MoreSettingsBannerModule (copy)
 	if (p1.isPioneerLaunch or IsPioneerLaunch)() then
 		local v1 = CreateFunction("Frame")({
@@ -19,7 +19,7 @@ return function(p1) --[[ Line: 21 | Named "renderMoreSettingsBanner" ]]
 			Parent = p1.parent
 		})
 		local Root = nil
-		SettingsShowSignal:connect(function(p2) --[[ Line: 37 ]]
+		SettingsShowSignal:connect(function(p2)
 			-- upvalues: Root (ref), v1 (copy), p1 (copy), ReactRobloxModule (upval), ReactModule (upval), InExperienceMenuReactModule (upval), MoreSettingsBannerModule (upval)
 			if p2 then
 				v1.Parent = p1.parent

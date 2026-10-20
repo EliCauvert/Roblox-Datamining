@@ -2,9 +2,9 @@
 local SendAXCounterV2Module = require(script.Parent.Parent.sendAXCounterV2)
 local PageProvider = nil
 
-local function _() --[[ Line: 31 | Named "fallbackPageName" ]]
+local function _()
 	-- upvalues: GetLegacyNavigationStoreFunction (copy)
-	local Success, Result = pcall(function() --[[ Line: 32 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: GetLegacyNavigationStoreFunction (upval)
 		return GetLegacyNavigationStoreFunction(false).getCurrentLegacyRoute(false)
 	end)
@@ -15,11 +15,11 @@ end
 return {
 	UNKNOWN = "Unknown",
 	UNREGISTERED = "Unregistered",
-	setPageProvider = function(Value) --[[ Line: 21 ]]
+	setPageProvider = function(Value)
 		-- upvalues: PageProvider (ref)
 		PageProvider = Value
 	end,
-	getPageFields = function() --[[ Line: 42 ]]
+	getPageFields = function()
 		-- upvalues: PageProvider (ref), SendAXCounterV2Module (copy), GetLegacyNavigationStoreFunction (copy)
 		local PageProvider1 = PageProvider
 		
@@ -35,7 +35,7 @@ return {
 				}
 			end
 		end
-		local Success1, Result1 = pcall(function() --[[ Line: 32 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: GetLegacyNavigationStoreFunction (upval)
 			return GetLegacyNavigationStoreFunction(false).getCurrentLegacyRoute(false)
 		end)

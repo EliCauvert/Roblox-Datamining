@@ -5,7 +5,7 @@ local t = {}
 local t1 = {}
 
 return {
-	fetchGamePassTrialAvailabilities = function(_) --[[ Line: 12 ]]
+	fetchGamePassTrialAvailabilities = function(_)
 		-- upvalues: t (copy), t1 (copy), PromiseModule (copy)
 		local config = { available = {}, active = {} }
 		

@@ -23,25 +23,25 @@ local UseSignalBindingFunction = SignalsReactModule.useSignalBinding
 local UseSignalStateFunction = SignalsReactModule.useSignalState
 local GetFormatTimeModule = require(MomentsCreation.Utils.getFormatTime)
 
-return function(p1) --[[ Line: 53 | Named "PlaybackControls" ]]
+return function(p1)
 	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), ReactModule (copy), SignalsModule (copy), UseSignalBindingFunction (copy), GetFormatTimeModule (copy), UseSignalStateFunction (copy), View (copy), GradientBackdrop (copy), Slider (copy), FoundationModule (copy), IconButton (copy), PauseLarge (copy), PlayLarge (copy), SpeakerSlash (copy), Speaker (copy), Text (copy), TwoArrowsFromCenter (copy), TwoArrowsToCenter (copy)
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseTokensResult = UseTokensFunction()
 	local Playback = p1.preview.playback
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UDim2.fromScale(1, 0))
 	local UseRefResult = ReactModule.useRef(false)
-	local UseSignalBindingResult = UseSignalBindingFunction((ReactModule.useMemo(function() --[[ Line: 62 ]]
+	local UseSignalBindingResult = UseSignalBindingFunction((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), Playback (copy)
-		return SignalsModule.createComputed(function(p2): number --[[ Line: 63 ]]
+		return SignalsModule.createComputed(function(p2): number
 			-- upvalues: Playback (upval)
 			local Duration: number = Playback.getDuration(p2)
 			
 			return if Duration <= 0 then 0 else math.clamp(Playback.getPosition(p2) / Duration, 0, 1)
 		end)
 	end, { Playback })))
-	local UseSignalBindingResult1 = UseSignalBindingFunction((ReactModule.useMemo(function() --[[ Line: 73 ]]
+	local UseSignalBindingResult1 = UseSignalBindingFunction((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), GetFormatTimeModule (upval), Playback (copy)
-		return SignalsModule.createComputed(function(p2): string --[[ Line: 74 ]]
+		return SignalsModule.createComputed(function(p2): string
 			-- upvalues: GetFormatTimeModule (upval), Playback (upval)
 			return `{GetFormatTimeModule(Playback.getPosition(p2))} / {GetFormatTimeModule(Playback.getDuration(p2))}`
 		end)
@@ -59,7 +59,7 @@ return function(p1) --[[ Line: 53 | Named "PlaybackControls" ]]
 		Controls = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "col gap-xxsmall size-full-0 auto-y",
-			onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 107 ]]
+			onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
 				-- upvalues: UseBindingResult2 (copy)
 				UseBindingResult2(UDim2.new(0, Frame.AbsoluteSize.X, 1, 0))
 			end, {}),
@@ -75,7 +75,7 @@ return function(p1) --[[ Line: 53 | Named "PlaybackControls" ]]
 				size = FoundationModule.Enums.InputSize.XSmall,
 				knobVisibility = FoundationModule.Enums.Visibility.None,
 				variant = FoundationModule.Enums.SliderVariant.Standard,
-				onValueChanged = ReactModule.useCallback(function(p2) --[[ Line: 99 ]]
+				onValueChanged = ReactModule.useCallback(function(p2)
 					-- upvalues: Playback (copy), OnSeekFunction (copy)
 					local ScaledDuration = p2 * Playback.getDuration(false)
 					Playback.seek(ScaledDuration)
@@ -84,14 +84,14 @@ return function(p1) --[[ Line: 53 | Named "PlaybackControls" ]]
 						OnSeekFunction(ScaledDuration)
 					end
 				end, { Playback, OnSeekFunction }),
-				onDragStarted = ReactModule.useCallback(function() --[[ Line: 84 ]]
+				onDragStarted = ReactModule.useCallback(function()
 					-- upvalues: Playback (copy), UseRefResult (copy)
 					if Playback.getIsPlaying(false) then
 						UseRefResult.current = true
 						Playback.toggle()
 					end
 				end, { Playback }),
-				onDragEnded = ReactModule.useCallback(function() --[[ Line: 91 ]]
+				onDragEnded = ReactModule.useCallback(function()
 					-- upvalues: UseRefResult (copy), Playback (copy)
 					if UseRefResult.current and not Playback.getIsPlaying(false) then
 						Playback.toggle()
@@ -107,7 +107,7 @@ return function(p1) --[[ Line: 53 | Named "PlaybackControls" ]]
 					PlaybackToggle = ReactModule.createElement(IconButton, {
 						LayoutOrder = 1,
 						icon = if UseSignalStateResult then PauseLarge else PlayLarge,
-						onActivated = ReactModule.useCallback(function() --[[ Line: 111 ]]
+						onActivated = ReactModule.useCallback(function()
 							-- upvalues: Playback (copy)
 							Playback.toggle()
 						end, { Playback }),
@@ -116,7 +116,7 @@ return function(p1) --[[ Line: 53 | Named "PlaybackControls" ]]
 					MuteToggle = ReactModule.createElement(IconButton, {
 						LayoutOrder = 2,
 						icon = if UseSignalStateResult1 then SpeakerSlash else Speaker,
-						onActivated = ReactModule.useCallback(function() --[[ Line: 115 ]]
+						onActivated = ReactModule.useCallback(function()
 							-- upvalues: Playback (copy)
 							Playback.toggleMute()
 						end, { Playback }),

@@ -12,7 +12,7 @@ local ConstantsModule = require(Parent.Constants)
 local FailureReasonsAccumulatorModule = require(Parent.util.FailureReasonsAccumulator)
 local GetFStringUGCValidationReferenceMeshIdWhitelistForIECModule = require(Parent.flags.getFStringUGCValidationReferenceMeshIdWhitelistForIEC)
 
-local function getWhitelistIds() --[[ Line: 34 ]]
+local function getWhitelistIds()
 	-- upvalues: GetFStringUGCValidationReferenceMeshIdWhitelistForIECModule (copy)
 	local t = {}
 	local FStringUGCValidationReferenceMeshIdWhitelistForIECModule: string = GetFStringUGCValidationReferenceMeshIdWhitelistForIECModule()
@@ -26,9 +26,9 @@ local function getWhitelistIds() --[[ Line: 34 ]]
 	return t
 end
 
-local function _(Url, AssetIds, RestrictedEntities, p1, UniverseId) --[[ Line: 48 | Named "createCanPublishPromise" ]]
+local function _(Url, AssetIds, RestrictedEntities, p1, UniverseId)
 	-- upvalues: PromiseModule (copy), HttpService (copy), ConstantsModule (copy)
-	return if #AssetIds == 0 then PromiseModule.resolve() else PromiseModule.new(function(Callback, Callback1) --[[ Line: 52 ]]
+	return if #AssetIds == 0 then PromiseModule.resolve() else PromiseModule.new(function(Callback, Callback1)
 		-- upvalues: HttpService (upval), AssetIds (copy), RestrictedEntities (copy), UniverseId (copy), Url (copy), ConstantsModule (upval), p1 (copy)
 		HttpService:RequestInternal({
 			Method = "POST",
@@ -42,7 +42,7 @@ local function _(Url, AssetIds, RestrictedEntities, p1, UniverseId) --[[ Line: 4
 				[ConstantsModule.ExperienceAuthHeaderKey] = p1,
 				[ConstantsModule.ContentType] = ConstantsModule.ApplicationJson
 			}
-		}):Start(function(p2, p3) --[[ Line: 69 ]]
+		}):Start(function(p2, p3)
 			-- upvalues: HttpService (upval), Callback (copy), Callback1 (copy)
 			if p2 and p3.StatusCode == 200 then
 				Callback((HttpService:JSONDecode(p3.Body)))
@@ -55,7 +55,7 @@ local function _(Url, AssetIds, RestrictedEntities, p1, UniverseId) --[[ Line: 4
 	end)
 end
 
-return function(List, p1) --[[ Line: 81 | Named "validateAssetCreator" ]]
+return function(List, p1)
 	-- upvalues: Formatted (copy), FailureReasonsAccumulatorModule (copy), UGCValidationMaxAssetSizeAllowedFastInt (copy), AnalyticsModule (copy), UGCValidationCanPublishRequestPageSizeFastInt (copy), PromiseModule (copy), HttpService (copy), ConstantsModule (copy), GetFStringUGCValidationReferenceMeshIdWhitelistForIECModule (copy), getWhitelistIds (copy)
 	local IsServer = p1.isServer
 	local RestrictedUserIds = if p1.restrictedUserIds then p1.restrictedUserIds else {}
@@ -90,7 +90,7 @@ return function(List, p1) --[[ Line: 81 | Named "validateAssetCreator" ]]
 		table.insert(AssetIds, i1)
 		
 		if UGCValidationCanPublishRequestPageSizeFastInt <= #AssetIds then
-			table.insert(List1, if #AssetIds == 0 then PromiseModule.resolve() else PromiseModule.new(function(Callback, Callback1) --[[ Line: 52 ]]
+			table.insert(List1, if #AssetIds == 0 then PromiseModule.resolve() else PromiseModule.new(function(Callback, Callback1)
 				-- upvalues: HttpService (upval), AssetIds (copy), RestrictedUserIds (copy), UniverseId (copy), Text (copy), ConstantsModule (upval), Token (copy)
 				HttpService:RequestInternal({
 					Method = "POST",
@@ -104,7 +104,7 @@ return function(List, p1) --[[ Line: 81 | Named "validateAssetCreator" ]]
 						[ConstantsModule.ExperienceAuthHeaderKey] = Token,
 						[ConstantsModule.ContentType] = ConstantsModule.ApplicationJson
 					}
-				}):Start(function(p2, p3) --[[ Line: 69 ]]
+				}):Start(function(p2, p3)
 					-- upvalues: HttpService (upval), Callback (copy), Callback1 (copy)
 					if p2 and p3.StatusCode == 200 then
 						Callback((HttpService:JSONDecode(p3.Body)))
@@ -119,7 +119,7 @@ return function(List, p1) --[[ Line: 81 | Named "validateAssetCreator" ]]
 		end
 	end
 	if #AssetIds > 0 then
-		table.insert(List1, if #AssetIds == 0 then PromiseModule.resolve() else PromiseModule.new(function(Callback, Callback1) --[[ Line: 52 ]]
+		table.insert(List1, if #AssetIds == 0 then PromiseModule.resolve() else PromiseModule.new(function(Callback, Callback1)
 			-- upvalues: HttpService (upval), AssetIds (copy), RestrictedUserIds (copy), UniverseId (copy), Text (copy), ConstantsModule (upval), Token (copy)
 			HttpService:RequestInternal({
 				Method = "POST",
@@ -133,7 +133,7 @@ return function(List, p1) --[[ Line: 81 | Named "validateAssetCreator" ]]
 					[ConstantsModule.ExperienceAuthHeaderKey] = Token,
 					[ConstantsModule.ContentType] = ConstantsModule.ApplicationJson
 				}
-			}):Start(function(p2, p3) --[[ Line: 69 ]]
+			}):Start(function(p2, p3)
 				-- upvalues: HttpService (upval), Callback (copy), Callback1 (copy)
 				if p2 and p3.StatusCode == 200 then
 					Callback((HttpService:JSONDecode(p3.Body)))

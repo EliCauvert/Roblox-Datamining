@@ -4,9 +4,9 @@ local Debug = require(Parent.DataHydration.CreatorAgentChat).debug
 local CaptureService = game:GetService("CaptureService")
 local AssetIds = {}
 
-return function(Capture) --[[ Line: 20 | Named "uploadCaptureAsync" ]]
+return function(Capture)
 	-- upvalues: PromiseModule (copy), AssetIds (copy), Debug (copy), CaptureService (copy)
-	local Success, Result = pcall(function() --[[ Line: 21 ]]
+	local Success, Result = pcall(function()
 		return game:GetEngineFeature("CaptureServiceStartUploadCoreScriptBypass")
 	end)
 	
@@ -20,9 +20,9 @@ return function(Capture) --[[ Line: 20 | Named "uploadCaptureAsync" ]]
 	else
 		Debug.log("info", "capture_upload starting")
 		
-		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 35 ]]
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 			-- upvalues: CaptureService (upval), Capture (copy), Debug (upval), AssetIds (upval)
-			local Success, Result, Result3 = pcall(function() --[[ Line: 36 ]]
+			local Success, Result, Result3 = pcall(function()
 				-- upvalues: CaptureService (upval), Capture (upval)
 				return CaptureService:StartUploadCaptureAsync(Capture)
 			end)
@@ -44,7 +44,7 @@ return function(Capture) --[[ Line: 20 | Named "uploadCaptureAsync" ]]
 			for _ = 1, 30 do
 				task.wait(2)
 				local Success1
-				Success1, Result1, Result3_1 = pcall(function() --[[ Line: 55 ]]
+				Success1, Result1, Result3_1 = pcall(function()
 					-- upvalues: CaptureService (upval), Result3 (copy)
 					return CaptureService:CheckUploadCaptureStatusAsync(Result3)
 				end)

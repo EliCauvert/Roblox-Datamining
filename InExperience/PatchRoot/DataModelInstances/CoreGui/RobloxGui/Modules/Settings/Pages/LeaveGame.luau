@@ -43,7 +43,7 @@ local Text = FoundationModule.Text
 local View = FoundationModule.View
 local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
 
-local function LeaveButtonsContainer(p1) --[[ Line: 84 ]]
+local function LeaveButtonsContainer(p1)
 	-- upvalues: ReactModule (copy), UseLastInputFunction (copy), UseFocusGuiObjectFunction (copy), UseLocalizationFunction (copy), IsPioneerLaunchFunction (copy), LocalizationKeys (copy), ConstantsModule1 (copy), Input (copy), LeaveGameModule (copy), UtilityModule (copy), View (copy), IsEnabled (copy), Text (copy), Button (copy), InputSize (copy), FFlagConfirmationButtonsUseGreyButtonsModule (copy), ButtonVariant (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseLastInputResult = UseLastInputFunction()
@@ -53,7 +53,7 @@ local function LeaveButtonsContainer(p1) --[[ Line: 84 ]]
 		LeaveGame = if IsPioneerLaunchFunction() then LocalizationKeys.QuitButton else ConstantsModule1.LeaveGameLocalizedKey,
 		DontLeaveGame = if IsPioneerLaunchFunction() then LocalizationKeys.Resume else ConstantsModule1.DontLeaveGameLocalizedKey
 	})
-	ReactModule.useEffect(function() --[[ Line: 102 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseLastInputResult (copy), Input (upval), UseFocusGuiObjectResult (copy), UseRefResult (copy)
 		if UseLastInputResult == Input.Touch then
 			UseFocusGuiObjectResult(nil)
@@ -90,7 +90,7 @@ local function LeaveButtonsContainer(p1) --[[ Line: 84 ]]
 				variant = if FFlagConfirmationButtonsUseGreyButtonsModule then ButtonVariant.Standard else ButtonVariant.SoftEmphasis,
 				width = UDim.new(0, if IsEnabled then 300 else 200),
 				ref = UseRefResult,
-				onActivated = ReactModule.useCallback(function() --[[ Line: 110 ]]
+				onActivated = ReactModule.useCallback(function()
 					-- upvalues: IsPioneerLaunchFunction (upval), LeaveGameModule (upval)
 					if IsPioneerLaunchFunction() then
 						LeaveGameModule(false, { shouldNativeExit = true })
@@ -107,7 +107,7 @@ local function LeaveButtonsContainer(p1) --[[ Line: 84 ]]
 				size = InputSize.Large,
 				variant = ButtonVariant.Subtle,
 				width = UDim.new(0, if IsEnabled then 300 else 200),
-				onActivated = ReactModule.useCallback(function() --[[ Line: 121 ]]
+				onActivated = ReactModule.useCallback(function()
 					-- upvalues: p1 (copy), UtilityModule (upval)
 					p1.dontLeaveFromButton(UtilityModule:IsUsingGamepad())
 				end, { UtilityModule, p1.dontLeaveFromButton })
@@ -116,7 +116,7 @@ local function LeaveButtonsContainer(p1) --[[ Line: 84 ]]
 	})
 end
 
-local function LeaveGameContainer(p1) --[[ Line: 165 ]]
+local function LeaveGameContainer(p1)
 	-- upvalues: Localization (copy), LocalizationService (copy), ReactModule (copy), LocalizationProvider (copy), FoundationProvider (copy), FoundationModule (copy), ReactFocusNavigationModule (copy), NewResult (copy), LeaveButtonsContainer (copy)
 	return ReactModule.createElement(LocalizationProvider, {
 		localization = Localization.new(LocalizationService.RobloxLocaleId)
@@ -129,7 +129,7 @@ local function LeaveGameContainer(p1) --[[ Line: 165 ]]
 	})
 end
 
-v1 = (function() --[[ Line: 183 | Named "Initialize" ]]
+v1 = (function()
 	-- upvalues: RobloxGui (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy), ConstantsModule1 (copy), FFlagRefactorMenuConfirmationButtonsModule (copy), ReactRobloxModule (copy), ReactModule (copy), LeaveGameContainer (copy), IsPioneerLaunchFunction (copy), RobloxTranslatorModule (copy), LocalizationKeys (copy), CreateFunction (copy), ThemeModule (copy), IsEnabled (copy), UtilityModule (copy), LeaveGameModule (copy)
 	local NewPage = require(RobloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	NewPage.playsessionid = ""
@@ -137,7 +137,7 @@ v1 = (function() --[[ Line: 183 | Named "Initialize" ]]
 	if RbxAnalyticsServiceExposePlaySessionIdEngineFeature then
 		NewPage.playsessionid = RbxAnalyticsService:GetPlaySessionId()
 	end
-	function NewPage.DontLeaveFunc(IsUserInputTypeMatch) --[[ Line: 192 ]]
+	function NewPage.DontLeaveFunc(IsUserInputTypeMatch)
 		-- upvalues: NewPage (copy), RbxAnalyticsService (upval), ConstantsModule1 (upval)
 		if NewPage.HubRef then
 			NewPage.HubRef:PopMenu(IsUserInputTypeMatch, true)
@@ -150,14 +150,14 @@ v1 = (function() --[[ Line: 183 | Named "Initialize" ]]
 		})
 	end
 	
-	function NewPage:DontLeaveFromHotkey(UserInputState, Input) --[[ Line: 209 ]]
+	function NewPage:DontLeaveFromHotkey(UserInputState, Input)
 		-- upvalues: NewPage (copy)
 		if UserInputState == Enum.UserInputState.Begin then
 			NewPage.DontLeaveFunc(Input.UserInputType == Enum.UserInputType.Gamepad1 or (Input.UserInputType == Enum.UserInputType.Gamepad2 or (Input.UserInputType == Enum.UserInputType.Gamepad3 or Input.UserInputType == Enum.UserInputType.Gamepad4)))
 		end
 	end
 	
-	function NewPage.DontLeaveFromButton(p1) --[[ Line: 217 ]]
+	function NewPage.DontLeaveFromButton(p1)
 		-- upvalues: NewPage (copy)
 		NewPage.DontLeaveFunc(p1)
 	end
@@ -168,13 +168,13 @@ v1 = (function() --[[ Line: 183 | Named "Initialize" ]]
 	NewPage.ShouldShowHubBar = false
 	
 	if FFlagRefactorMenuConfirmationButtonsModule then
-		function NewPage.RenderPage() --[[ Line: 230 ]]
+		function NewPage.RenderPage()
 			-- upvalues: NewPage (copy), ReactRobloxModule (upval), ReactModule (upval), LeaveGameContainer (upval)
 			NewPage.PageRoot = ReactRobloxModule.createRoot(NewPage.Page)
 			NewPage.PageRoot:render(ReactModule.createElement(LeaveGameContainer, { dontLeaveFromButton = NewPage.DontLeaveFromButton }))
 		end
 		
-		function NewPage.UnmountPage() --[[ Line: 237 ]]
+		function NewPage.UnmountPage()
 			-- upvalues: NewPage (copy)
 			if NewPage.PageRoot then
 				NewPage.PageRoot:unmount()
@@ -222,7 +222,7 @@ v1 = (function() --[[ Line: 183 | Named "Initialize" ]]
 	elseif IsEnabled then
 		Parent.FontSize = Enum.FontSize.Size48
 	end
-	NewPage.LeaveGameButton = UtilityModule:MakeStyledButton("LeaveGame", if IsPioneerLaunchFunction() then RobloxTranslatorModule:FormatByKey(LocalizationKeys.QuitButton) else "Leave", nil, function() --[[ Line: 295 ]]
+	NewPage.LeaveGameButton = UtilityModule:MakeStyledButton("LeaveGame", if IsPioneerLaunchFunction() then RobloxTranslatorModule:FormatByKey(LocalizationKeys.QuitButton) else "Leave", nil, function()
 		-- upvalues: IsPioneerLaunchFunction (upval), LeaveGameModule (upval)
 		if IsPioneerLaunchFunction() then
 			LeaveGameModule(false, { shouldNativeExit = true })
@@ -241,7 +241,7 @@ v1 = (function() --[[ Line: 183 | Named "Initialize" ]]
 	
 	return NewPage
 end)()
-v1.Displayed.Event:connect(function() --[[ Line: 329 ]]
+v1.Displayed.Event:connect(function()
 	-- upvalues: FFlagRefactorMenuConfirmationButtonsModule (copy), v1 (ref), GuiService (copy), FFlagEnableConsoleExpControls (copy), EnabledResult (copy), FFlagChromeShortcutRemoveRespawnOnLeavePage (copy), ServiceModule (copy), ConstantsModule (copy), ContextActionService (copy)
 	if FFlagRefactorMenuConfirmationButtonsModule then
 		v1.RenderPage()
@@ -263,7 +263,7 @@ v1.Displayed.Event:connect(function() --[[ Line: 329 ]]
 		end
 	end
 end)
-v1.Hidden.Event:connect(function() --[[ Line: 349 ]]
+v1.Hidden.Event:connect(function()
 	-- upvalues: FFlagRefactorMenuConfirmationButtonsModule (copy), v1 (ref), ContextActionService (copy)
 	if FFlagRefactorMenuConfirmationButtonsModule then
 		v1.UnmountPage()

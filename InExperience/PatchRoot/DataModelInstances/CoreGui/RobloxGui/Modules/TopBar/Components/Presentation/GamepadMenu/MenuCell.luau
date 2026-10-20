@@ -19,9 +19,9 @@ MenuCell.validateProps = TModule.strictInterface({
 	isSelected = TModule.boolean
 })
 
-function MenuCell.render(p1) --[[ Line: 36 ]]
+function MenuCell.render(p1)
 	-- upvalues: WithStyleFunction (copy), RobloxTranslatorModule (copy), RoactModule (copy), ImageSetLabel (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 37 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: RobloxTranslatorModule (upval), p1 (copy), RoactModule (upval), ImageSetLabel (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 		local Theme = p2.Theme
 		local _Font = p2.Font

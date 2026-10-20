@@ -4,21 +4,21 @@ local MockableWarnFunction = FocusNavigationUtilsModule.mockableWarn
 local EventPropagationEventModule = require(script.Parent.eventPropagationEvent)
 local DEBUGEVENTPROPAGATION = _G.__DEBUG_EVENT_PROPAGATION__
 
-local function describeFunction(EventHandlerEntry): string --[[ Line: 113 ]]
+local function describeFunction(EventHandlerEntry): string
 	return table.concat(table.pack(debug.info(EventHandlerEntry, "sln")), " ")
 end
 
-local function _(p1, p2) --[[ Line: 117 | Named "getEventsFromRegistry" ]]
+local function _(p1, p2)
 	return p1[p2]
 end
 
-local _ = function(p1, p2, p3) --[[ Line: 121 | Named "getEventPhasesFromRegistry" ]]
+local _ = function(p1, p2, p3)
 	local v1 = p1[p2]
 	
 	return if v1 then v1[p3] else nil
 end
 
-local _ = function(p1, p2, p3, p4) --[[ Line: 130 | Named "getEventHandler" ]]
+local _ = function(p1, p2, p3, p4)
 	local v1 = p1[p2]
 	local v2 = if v1 then v1[p3] else nil
 	
@@ -28,7 +28,7 @@ end
 local EventPropagationService = {}
 EventPropagationService.__index = EventPropagationService
 
-function EventPropagationService:registerEventHandler(p1, p2, Handler, Phase) --[[ Line: 143 ]]
+function EventPropagationService:registerEventHandler(p1, p2, Handler, Phase)
 	-- upvalues: DEBUGEVENTPROPAGATION (copy), MockableWarnFunction (copy), describeFunction (copy)
 	if DEBUGEVENTPROPAGATION then
 		print("+++ register handler", p2, tostring(p1), Phase or "Bubble")
@@ -47,7 +47,7 @@ function EventPropagationService:registerEventHandler(p1, p2, Handler, Phase) --
 	self.eventHandlerRegistry[p1][p2][Phase1] = Handler
 end
 
-function EventPropagationService:registerEventHandlers(p1, List) --[[ Line: 174 ]]
+function EventPropagationService:registerEventHandlers(p1, List)
 	if not self.eventHandlerRegistry[p1] then
 		self.eventHandlerRegistry[p1] = {}
 	end
@@ -56,14 +56,14 @@ function EventPropagationService:registerEventHandlers(p1, List) --[[ Line: 174 
 	end
 end
 
-function EventPropagationService:deregisterEventHandlers(p2, List) --[[ Line: 183 ]]
+function EventPropagationService:deregisterEventHandlers(p2, List)
 	if not self.eventHandlerRegistry[p2] then return end
 	for i, value in List do
 		self:deregisterEventHandler(p2, i, value.handler, value.phase)
 	end
 end
 
-function EventPropagationService:deregisterEventHandler(p3, p4, Callback, Phase) --[[ Line: 192 ]]
+function EventPropagationService:deregisterEventHandler(p3, p4, Callback, Phase)
 	-- upvalues: DEBUGEVENTPROPAGATION (copy), MockableWarnFunction (copy)
 	if DEBUGEVENTPROPAGATION then
 		print("--- deregister handler", p4, tostring(p3), Phase or "Bubble")
@@ -88,7 +88,7 @@ function EventPropagationService:deregisterEventHandler(p3, p4, Callback, Phase)
 	end
 end
 
-function EventPropagationService:getRegisteredEventHandlers(p3) --[[ Line: 233 ]]
+function EventPropagationService:getRegisteredEventHandlers(p3)
 	local EventHandler = self.eventHandlerRegistry[p3]
 	
 	if not EventHandler then
@@ -102,12 +102,12 @@ function EventPropagationService:getRegisteredEventHandlers(p3) --[[ Line: 233 ]
 	return t
 end
 
-function EventPropagationService:propagateEvent(p4, p5, p6, p7) --[[ Line: 247 ]]
+function EventPropagationService:propagateEvent(p4, p5, p6, p7)
 	-- upvalues: EventPropagationEventModule (copy), GetAncestorsFunction (copy), DEBUGEVENTPROPAGATION (copy)
 	local P31 = p7 or {}
 	local Synthetic = P31.synthetic or false
 	
-	local function _(p8, p9) --[[ Line: 257 | Named "runEventHandler" ]]
+	local function _(p8, p9)
 		-- upvalues: self (copy), p5 (copy), EventPropagationEventModule (upval), p4 (copy), Synthetic (copy), p6 (copy)
 		local EventHandler = self.eventHandlerRegistry[p8]
 		local EventHandlerEntry = if EventHandler then EventHandler[p5] else nil
@@ -178,7 +178,7 @@ function EventPropagationService:propagateEvent(p4, p5, p6, p7) --[[ Line: 247 ]
 	end
 end
 
-function EventPropagationService.new() --[[ Line: 304 ]]
+function EventPropagationService.new()
 	-- upvalues: EventPropagationService (copy)
 	local config = {
 		eventHandlerRegistry = setmetatable({}, { __mode = "k" })

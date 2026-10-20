@@ -14,16 +14,16 @@ local ToTimeoutEntryModule = require(AppChat.Utils.toTimeoutEntry)
 local FFlagAppChatReactiveFeatureRestrictions = require(Parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
 local NewResult = require(AppChat.Logger):new(script.Name)
 
-local function areChatTimeoutDetailsEqual(p1, p2): boolean --[[ Line: 31 ]]
+local function areChatTimeoutDetailsEqual(p1, p2): boolean
 	-- upvalues: FFlagAppChatReactiveFeatureRestrictions (copy)
 	return p1.isTimedOut == p2.isTimedOut and (p1.timeoutEndTimestamp == p2.timeoutEndTimestamp and (p1.decisionEventId == p2.decisionEventId and p1.duration == p2.duration)) and (not FFlagAppChatReactiveFeatureRestrictions or p1.requiresAcknowledgement == p2.requiresAcknowledgement)
 end
 
-return function(p1) --[[ Line: 42 | Named "useChatTimeoutDetailsFromHydration" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy), CreateCurrentTimeSignalFunction (copy), GetChatModerationStatusDataHydrationModule (copy), NewResult (copy), SignalsModule (copy), GetEffectiveChatTimeoutDetailsModule (copy), DataHydrationModule (copy), ToTimeoutEntryModule (copy), areChatTimeoutDetailsEqual (copy), ClearTimeoutFunction (copy), SetTimeoutFunction (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 43 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FFlagAppChatReactiveFeatureRestrictions (upval), CreateCurrentTimeSignalFunction (upval)
-		return if FFlagAppChatReactiveFeatureRestrictions then function() --[[ Line: 45 ]]
+		return if FFlagAppChatReactiveFeatureRestrictions then function()
 			return DateTime.now().UnixTimestamp
 		end else CreateCurrentTimeSignalFunction(1)
 	end, {})
@@ -47,10 +47,10 @@ return function(p1) --[[ Line: 42 | Named "useChatTimeoutDetailsFromHydration" ]
 			ConversationStatus = ChatModerationStatusDataHydrationModule.getConversationStatus(ConversationId)
 		end
 	end
-	ReactModule.useEffect(function() --[[ Line: 73 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagAppChatReactiveFeatureRestrictions (upval), v1 (ref), v2 (ref), ChatModerationStatusDataHydrationModule (copy), ConversationId (copy), NewResult (upval)
 		if FFlagAppChatReactiveFeatureRestrictions and (v1 or v2) then
-			ChatModerationStatusDataHydrationModule.refreshStatuses(if ConversationId then { ConversationId } else nil):catch(function() --[[ Line: 75 ]]
+			ChatModerationStatusDataHydrationModule.refreshStatuses(if ConversationId then { ConversationId } else nil):catch(function()
 				-- upvalues: NewResult (upval)
 				NewResult:warning("Failed to fetch Party Chat moderation status")
 			end)
@@ -61,9 +61,9 @@ return function(p1) --[[ Line: 42 | Named "useChatTimeoutDetailsFromHydration" ]
 		ChatModerationStatusDataHydrationModule,
 		v1
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 82 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), CachedUserStatus (ref), ConversationStatus (ref), GetEffectiveChatTimeoutDetailsModule (upval), DataHydrationModule (upval), ToTimeoutEntryModule (upval), ConversationId (copy), p1 (copy), UseMemoResult (copy), areChatTimeoutDetailsEqual (upval)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 83 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: CachedUserStatus (upval), ConversationStatus (upval), GetEffectiveChatTimeoutDetailsModule (upval), DataHydrationModule (upval), ToTimeoutEntryModule (upval), ConversationId (upval), p1 (upval), UseMemoResult (upval)
 			local DataResult = CachedUserStatus.data(p2)
 			local DataResult1 = ConversationStatus.data(p2)
@@ -78,10 +78,10 @@ return function(p1) --[[ Line: 42 | Named "useChatTimeoutDetailsFromHydration" ]
 	})
 	
 	if FFlagAppChatReactiveFeatureRestrictions then
-		ReactModule.useEffect(function() --[[ Line: 111 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: SignalsModule (upval), ClearTimeoutFunction (upval), UseMemoResult1 (copy), SetTimeoutFunction (upval), ChatModerationStatusDataHydrationModule (copy), ConversationId (copy), NewResult (upval)
 			local v3 = nil
-			local Effect = SignalsModule.createEffect(function(p2) --[[ Line: 114 ]]
+			local Effect = SignalsModule.createEffect(function(p2)
 				-- upvalues: v3 (ref), ClearTimeoutFunction (upval), UseMemoResult1 (upval), SetTimeoutFunction (upval), ChatModerationStatusDataHydrationModule (upval), ConversationId (upval), NewResult (upval)
 				local v4 = v3
 				
@@ -93,10 +93,10 @@ return function(p1) --[[ Line: 42 | Named "useChatTimeoutDetailsFromHydration" ]
 				local UnixTimestamp = DateTime.now().UnixTimestamp
 				
 				if UseMemoResultResult.isTimedOut and UnixTimestamp < UseMemoResultResult.timeoutEndTimestamp then
-					v3 = SetTimeoutFunction(function() --[[ Line: 125 ]]
+					v3 = SetTimeoutFunction(function()
 						-- upvalues: v3 (upval), ChatModerationStatusDataHydrationModule (upval), ConversationId (upval), NewResult (upval)
 						v3 = nil
-						ChatModerationStatusDataHydrationModule.refreshStatuses(if ConversationId then { ConversationId } else nil):catch(function() --[[ Line: 127 ]]
+						ChatModerationStatusDataHydrationModule.refreshStatuses(if ConversationId then { ConversationId } else nil):catch(function()
 							-- upvalues: NewResult (upval)
 							NewResult:warning("Failed to refresh expired Party Chat restriction")
 						end)
@@ -104,7 +104,7 @@ return function(p1) --[[ Line: 42 | Named "useChatTimeoutDetailsFromHydration" ]
 				end
 			end)
 			
-			return function() --[[ Line: 134 ]]
+			return function()
 				-- upvalues: v3 (ref), ClearTimeoutFunction (upval), Effect (copy)
 				local v4 = v3
 				

@@ -3,9 +3,9 @@ local PromiseModule = require(InExperienceShop.Parent.Promise)
 local GetProductInfoModule = require(script.Parent.getProductInfo)
 local ShopDebugLoggerModule = require(InExperienceShop.Internal.ShopDebugLogger)
 
-return function(List) --[[ Line: 39 | Named "multiGetProductInfo" ]]
+return function(List)
 	-- upvalues: ShopDebugLoggerModule (copy), GetProductInfoModule (copy), PromiseModule (copy)
-	ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 42 ]]
+	ShopDebugLoggerModule.logLazy(function(): string
 		-- upvalues: List (copy)
 		return "multiGetProductInfo: start batchSize=" .. #List
 	end)
@@ -13,16 +13,16 @@ return function(List) --[[ Line: 39 | Named "multiGetProductInfo" ]]
 	local Buffer = table.create(#List)
 	
 	for i, Request in ipairs(List) do
-		Buffer[i] = GetProductInfoModule(Request.id, Request.infoType):andThen(function(Result) --[[ Line: 49 ]]
+		Buffer[i] = GetProductInfoModule(Request.id, Request.infoType):andThen(function(Result)
 			-- upvalues: Request (copy)
 			return { ok = true, request = Request, value = Result }
-		end):catch(function(Err) --[[ Line: 52 ]]
+		end):catch(function(Err)
 			-- upvalues: Request (copy)
 			return { ok = false, request = Request, err = Err }
 		end)
 	end
 	return ShopDebugLoggerModule.tracePromise(PromiseModule.all(Buffer), {
-		onSuccess = function(List) --[[ Line: 57 ]]
+		onSuccess = function(List)
 			-- upvalues: ShopDebugLoggerModule (upval), StartTimerResult (copy)
 			local Count = 0
 			local Count1 = 0
@@ -34,7 +34,7 @@ return function(List) --[[ Line: 39 | Named "multiGetProductInfo" ]]
 					Count1 += 1
 				end
 			end
-			ShopDebugLoggerModule.logElapsedLazy(function(): string --[[ Line: 66 ]]
+			ShopDebugLoggerModule.logElapsedLazy(function(): string
 				-- upvalues: Count (ref), Count1 (ref)
 				return "multiGetProductInfo: done succeeded=" .. Count .. " failed=" .. Count1
 			end, StartTimerResult)

@@ -8,7 +8,7 @@ local IsCanonicalNonzeroUuidModule = require(DataHydration.Moments.Util.isCanoni
 local CommentFixturesModule = require(script.Parent.CommentFixtures)
 local MockCommentsPagesModule = require(script.Parent.MockCommentsPages)
 
-local function parseQuery(Text: string) --[[ Line: 39 ]]
+local function parseQuery(Text: string)
 	local t = {}
 	local FoundAt: number? = string.find(Text, "?", 1, true)
 	
@@ -25,23 +25,23 @@ local function parseQuery(Text: string) --[[ Line: 39 ]]
 	return t
 end
 
-local function _(Text: string): string --[[ Line: 54 | Named "feedItemIdFromCommentsUrl" ]]
+local function _(Text: string): string
 	return string.match(Text, "/moments/([^/]+)/comments") or "feed-1"
 end
 
-local _ = function(Text: string): string --[[ Line: 59 | Named "commentIdFromDeleteUrl" ]]
+local _ = function(Text: string): string
 	return string.match(Text, "/comments/([^/?]+)$")
 end
 
-local _ = function(Text: string): string --[[ Line: 63 | Named "reactionIdsFromUrl" ]]
+local _ = function(Text: string): string
 	return string.match(Text, "/moments/([^/]+)/comments/([^/]+)/reactions$")
 end
 
-local _ = function(p1, p2): string --[[ Line: 67 | Named "commentKey" ]]
+local _ = function(p1, p2): string
 	return `{p1}:{p2}`
 end
 
-local function decodeBody(Body) --[[ Line: 71 ]]
+local function decodeBody(Body)
 	-- upvalues: HttpService (copy)
 	if type(Body) == "string" and Body ~= "" then
 		local Success, Result = pcall(HttpService.JSONDecode, HttpService, Body)
@@ -52,7 +52,7 @@ local function decodeBody(Body) --[[ Line: 71 ]]
 	end
 end
 
-local _ = function(StatusCode, Input, Headers) --[[ Line: 82 | Named "json" ]]
+local _ = function(StatusCode, Input, Headers)
 	-- upvalues: HttpService (copy)
 	return {
 		statusCode = StatusCode,
@@ -61,7 +61,7 @@ local _ = function(StatusCode, Input, Headers) --[[ Line: 82 | Named "json" ]]
 	}
 end
 
-local function toApiComment(Comment) --[[ Line: 90 ]]
+local function toApiComment(Comment)
 	return {
 		commentId = Comment.commentId,
 		feedItemId = Comment.feedItemId,
@@ -73,7 +73,7 @@ local function toApiComment(Comment) --[[ Line: 90 ]]
 	}
 end
 
-local function cloneReactions(p1) --[[ Line: 102 ]]
+local function cloneReactions(p1)
 	local Buffer = table.create(#p1.counts)
 	
 	for _, count in p1.counts do
@@ -85,10 +85,10 @@ local function cloneReactions(p1) --[[ Line: 102 ]]
 	}
 end
 
-local function scheduleDelay(Delay, p2) --[[ Line: 113 ]]
+local function scheduleDelay(Delay, p2)
 	local DelayedThread = task.delay(Delay, p2)
 	
-	return function() --[[ Line: 115 ]]
+	return function()
 		-- upvalues: DelayedThread (copy)
 		if coroutine.status(DelayedThread) == "suspended" then
 			task.cancel(DelayedThread)
@@ -96,7 +96,7 @@ local function scheduleDelay(Delay, p2) --[[ Line: 113 ]]
 	end
 end
 
-return function(p2) --[[ Line: 122 | Named "createCommentsMockNetwork" ]]
+return function(p2)
 	-- upvalues: CommentFixturesModule (copy), MockCommentsPagesModule (copy), toApiComment (copy), cloneReactions (copy), HttpClientModule (copy), decodeBody (copy), IsCanonicalNonzeroUuidModule (copy), HttpService (copy), parseQuery (copy), scheduleDelay (copy)
 	local P9 = p2 or {}
 	local UnixTimestamp = DateTime.now().UnixTimestamp
@@ -106,7 +106,7 @@ return function(p2) --[[ Line: 122 | Named "createCommentsMockNetwork" ]]
 	local t2 = {}
 	local t3 = {}
 	
-	local function _(ApiComment) --[[ Line: 131 | Named "indexVisibleComment" ]]
+	local function _(ApiComment)
 		-- upvalues: t2 (copy)
 		local Entry = t2[ApiComment.feedItemId]
 		
@@ -117,7 +117,7 @@ return function(p2) --[[ Line: 122 | Named "createCommentsMockNetwork" ]]
 		Entry[ApiComment.commentId] = ApiComment
 	end
 	
-	local _ = function(p3, p4) --[[ Line: 140 | Named "visibleComment" ]]
+	local _ = function(p3, p4)
 		-- upvalues: t2 (copy), t1 (copy)
 		local Entry = t2[p3]
 		
@@ -138,7 +138,7 @@ return function(p2) --[[ Line: 122 | Named "createCommentsMockNetwork" ]]
 			Entry[comment.commentId] = comment
 		end
 	end
-	local function pageWithMutations(Match, Cursor, PageForCursorResult) --[[ Line: 159 ]]
+	local function pageWithMutations(Match, Cursor, PageForCursorResult)
 		-- upvalues: t (copy), t1 (copy), t2 (copy), toApiComment (upval), t3 (copy), P9 (copy), cloneReactions (upval)
 		local List = {}
 		
@@ -187,7 +187,7 @@ return function(p2) --[[ Line: 122 | Named "createCommentsMockNetwork" ]]
 		routes = {
 			{
 				pattern = "/reactions",
-				respond = function(p3) --[[ Line: 202 ]]
+				respond = function(p3)
 					-- upvalues: decodeBody (upval), IsCanonicalNonzeroUuidModule (upval), HttpService (upval), t2 (copy), t1 (copy), P9 (copy), CommentFixturesModule (upval), t3 (copy), cloneReactions (upval)
 					local Match, Match2 = string.match(p3.url, "/moments/([^/]+)/comments/([^/]+)/reactions$")
 					local DecodeBodyResult = decodeBody(p3.body)
@@ -302,7 +302,7 @@ return function(p2) --[[ Line: 122 | Named "createCommentsMockNetwork" ]]
 			},
 			{
 				pattern = "/comments",
-				respond = function(p4) --[[ Line: 295 ]]
+				respond = function(p4)
 					-- upvalues: parseQuery (upval), MockCommentsPagesModule (upval), UnixTimestamp (copy), pageWithMutations (copy), HttpService (upval), decodeBody (upval), P9 (copy), CommentFixturesModule (upval), Comments (copy), toApiComment (upval), t (copy), t2 (copy), t1 (copy)
 					local Method = p4.method
 					
@@ -437,7 +437,7 @@ return function(p2) --[[ Line: 122 | Named "createCommentsMockNetwork" ]]
 		}
 	})
 	
-	local _ = function(p4) --[[ Line: 376 | Named "latencyForRequest" ]]
+	local _ = function(p4)
 		-- upvalues: P9 (copy)
 		if string.find(p4.url, "/reactions", 1, true) then
 			return P9.reactionLatencySeconds or P9.latencySeconds
@@ -449,7 +449,7 @@ return function(p2) --[[ Line: 122 | Named "createCommentsMockNetwork" ]]
 	end
 	
 	return {
-		request = function(p4, p5) --[[ Line: 391 ]]
+		request = function(p4, p5)
 			-- upvalues: P9 (copy), MockNetwork (copy), scheduleDelay (upval)
 			local ReactionLatencySeconds = nil
 			if string.find(p4.url, "/reactions", 1, true) then
@@ -461,14 +461,14 @@ return function(p2) --[[ Line: 122 | Named "createCommentsMockNetwork" ]]
 			if type(ReactionLatencySeconds) == "number" and ReactionLatencySeconds > 0 then
 				local Flag = false
 				local RequestResult = nil
-				local Callback = (P9.schedule or scheduleDelay)(ReactionLatencySeconds, function() --[[ Line: 402 ]]
+				local Callback = (P9.schedule or scheduleDelay)(ReactionLatencySeconds, function()
 					-- upvalues: Flag (ref), RequestResult (ref), MockNetwork (upval), p4 (copy), p5 (copy)
 					if not Flag then
 						RequestResult = MockNetwork.request(p4, p5)
 					end
 				end)
 				
-				return function() --[[ Line: 408 ]]
+				return function()
 					-- upvalues: Flag (ref), Callback (copy), RequestResult (ref)
 					if Flag then return end
 					Flag = true

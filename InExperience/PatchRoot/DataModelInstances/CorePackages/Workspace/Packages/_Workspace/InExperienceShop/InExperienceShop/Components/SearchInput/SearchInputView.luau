@@ -10,7 +10,7 @@ local config = {
 	clear = "Feature.Avatar.Action.Clear"
 }
 
-return function(p1) --[[ Line: 33 | Named "SearchInputView" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), config (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ReactModule (copy), FoundationModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction(config)

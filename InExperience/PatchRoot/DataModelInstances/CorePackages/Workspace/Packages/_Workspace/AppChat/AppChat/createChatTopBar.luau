@@ -19,11 +19,11 @@ local CreateBackFuncModule = require(AppChat.Components.TopBar.createBackFunc)
 local FlyoutSidePanelIXP = require(Parent.SharedExperimentDefinition).FlyoutSidePanelIXP
 local FlyoutLeftHeader = if FlyoutSidePanelIXP.isFlyoutSidePanelEnabled() then require(Parent.FlyoutSidePanel).Components.FlyoutLeftHeader else nil
 
-local function noOpt() --[[ Line: 28 ]]
+local function noOpt()
 	return nil
 end
 
-return function(p1) --[[ Line: 35 ]]
+return function(p1)
 	-- upvalues: FFlagAppIaScrollAway (copy), FlyoutSidePanelIXP (copy), AppHeaderBarModule (copy), WithLocalizationFunction (copy), CreateBackFuncModule (copy), FFlagAppChatDomLocatorFoundationMigrationModule (copy), ReactModule (copy), FoundationModule (copy), noOpt (copy), RoactModule (copy), FlyoutLeftHeader (ref), FFlagEnableHomeRobloxLogo (copy), HeaderBarTitleLeftAlignedModule (copy), AppNavBarModule (copy), VisibilityControl (copy), WithStyleFunction (copy), HeaderBar (copy)
 	local IsInExperienceScreenProps = if FFlagAppIaScrollAway or FlyoutSidePanelIXP.isFlyoutSidePanelEnabled() then p1.navigation.getScreenProps("isInExperience", false) else nil
 	local TopBarHeightScreenProps = p1.navigation.getScreenProps("topBarHeight", 0)
@@ -35,7 +35,7 @@ return function(p1) --[[ Line: 35 ]]
 	
 	return WithLocalizationFunction({
 		headerText = HeaderText.shouldLocalize and HeaderText.raw or nil
-	})(function(p2) --[[ Line: 51 ]]
+	})(function(p2)
 		-- upvalues: HeaderText (copy), HasRenderCenter (copy), p1 (copy), CreateBackFuncModule (upval), NavigateToRootStackScreenProps (copy), MakeBackButtonFunction (copy), FFlagAppChatDomLocatorFoundationMigrationModule (upval), ReactModule (upval), FoundationModule (upval), MakeCloseButtonFunction (copy), noOpt (upval), FlyoutSidePanelIXP (upval), IsInExperienceScreenProps (copy), RoactModule (upval), FlyoutLeftHeader (upval), FFlagEnableHomeRobloxLogo (upval), HeaderBarTitleLeftAlignedModule (upval), FFlagAppIaScrollAway (upval), AppNavBarModule (upval), VisibilityControl (upval), TopBarHeightScreenProps (copy), WithStyleFunction (upval), HeaderBar (upval)
 		local HeaderText1 = HeaderText.shouldLocalize and p2.headerText or HeaderText.raw
 		local RenderRight = nil
@@ -48,7 +48,7 @@ return function(p1) --[[ Line: 35 ]]
 			NoOpt = nil
 			RenderCenter = p1.renderCenter
 		else
-			RenderRight = function() --[[ Line: 62 ]]
+			RenderRight = function()
 				-- upvalues: p1 (upval)
 				return p1.renderRight and not p1.rightHidden and p1.renderRight() or nil
 			end
@@ -61,7 +61,7 @@ return function(p1) --[[ Line: 35 ]]
 				closeInputBar = p1.closeInputBar
 			})
 			
-			local function v32() --[[ Line: 76 ]]
+			local function v32()
 				-- upvalues: BackFuncModule (copy)
 				BackFuncModule()
 			end
@@ -72,7 +72,7 @@ return function(p1) --[[ Line: 35 ]]
 				if FFlagAppChatDomLocatorFoundationMigrationModule and p1.backButtonTestId then
 					local Callback = NoOpt
 					
-					NoOpt = function() --[[ Line: 84 ]]
+					NoOpt = function()
 						-- upvalues: ReactModule (upval), FoundationModule (upval), p1 (upval), Callback (copy)
 						return ReactModule.createElement(FoundationModule.View, { tag = "auto-xy", testId = p1.backButtonTestId }, { backButton = Callback() })
 					end
@@ -84,7 +84,7 @@ return function(p1) --[[ Line: 35 ]]
 		local NoHasRenderCenter: boolean = not p1.backButtonEnabled and not HasRenderCenter
 		
 		if FlyoutSidePanelIXP.isFlyoutSidePanelEnabled() and not IsInExperienceScreenProps and NoHasRenderCenter and not p1.conversationId then
-			NoOpt = function() --[[ Line: 106 ]]
+			NoOpt = function()
 				-- upvalues: RoactModule (upval), FlyoutLeftHeader (upval), HeaderText1 (ref), FFlagEnableHomeRobloxLogo (upval), FlyoutSidePanelIXP (upval)
 				return RoactModule.createElement(FlyoutLeftHeader, {
 					isRobloxLogoEnabled = false,
@@ -97,7 +97,7 @@ return function(p1) --[[ Line: 35 ]]
 		if p1.shouldBoldHeader and NoOpt == noOpt then
 			NoOpt = nil
 		end
-		local function v34() --[[ Line: 124 ]]
+		local function v34()
 			-- upvalues: RoactModule (upval), HeaderBarTitleLeftAlignedModule (upval), NoOpt (ref), noOpt (upval), RenderRight (ref), HeaderText1 (ref), p1 (upval)
 			return RoactModule.createElement(HeaderBarTitleLeftAlignedModule, {
 				renderLeft = if NoOpt == noOpt then nil else NoOpt,
@@ -118,7 +118,7 @@ return function(p1) --[[ Line: 35 ]]
 		if p1.rightPaddingOverride ~= nil then
 			_UDim1 = UDim.new(0, p1.rightPaddingOverride)
 		end
-		local MapResult = if FFlagAppIaScrollAway and not IsInExperienceScreenProps and AppNavBarModule.getScrollAwayEnabled() then VisibilityControl.getHeaderBinding():map(function(p3: number): UDim2 --[[ Line: 147 ]]
+		local MapResult = if FFlagAppIaScrollAway and not IsInExperienceScreenProps and AppNavBarModule.getScrollAwayEnabled() then VisibilityControl.getHeaderBinding():map(function(p3: number): UDim2
 			-- upvalues: TopBarHeightScreenProps (upval)
 			return UDim2.new(0, 0, 0, (p3 - 1) * (TopBarHeightScreenProps + 36))
 		end) else nil
@@ -131,7 +131,7 @@ return function(p1) --[[ Line: 35 ]]
 			ZIndex = if FFlagAppIaScrollAway then 2 else nil,
 			Position = if FFlagAppIaScrollAway then MapResult else nil
 		}, {
-			headerBar = WithStyleFunction(function(p3) --[[ Line: 165 ]]
+			headerBar = WithStyleFunction(function(p3)
 				-- upvalues: RoactModule (upval), HeaderBar (upval), p1 (upval), NoHasRenderCenter1 (copy), HeaderText1 (ref), TopBarHeightScreenProps (upval), NoOpt (ref), v34 (copy), RenderCenter (ref), RenderRight (ref), _UDim (ref), _UDim1 (ref), FFlagAppIaScrollAway (upval), IsInExperienceScreenProps (upval)
 				return RoactModule.createElement(HeaderBar, {
 					title = if p1.conversationId or NoHasRenderCenter1 then nil else HeaderText1,
@@ -154,7 +154,7 @@ return function(p1) --[[ Line: 35 ]]
 			ZIndex = if FFlagAppIaScrollAway then 2 else nil,
 			Position = if FFlagAppIaScrollAway then MapResult else nil
 		}, {
-			headerBar = WithStyleFunction(function(p3) --[[ Line: 193 ]]
+			headerBar = WithStyleFunction(function(p3)
 				-- upvalues: RoactModule (upval), HeaderBar (upval), p1 (upval), NoHasRenderCenter1 (copy), HeaderText1 (ref), TopBarHeightScreenProps (upval), NoHasRenderCenter (copy), NoOpt (ref), v34 (copy), RenderCenter (ref), RenderRight (ref), _UDim (ref), _UDim1 (ref), FFlagAppIaScrollAway (upval), IsInExperienceScreenProps (upval)
 				return RoactModule.createElement(HeaderBar, {
 					title = if p1.conversationId or NoHasRenderCenter1 then nil else HeaderText1,

@@ -21,11 +21,11 @@ local UseAppFocusRootFunction = FocusNavigationUtilsModule.useAppFocusRoot
 local ShowStartupMessageOnUnhide = game:DefineFastFlag("ShowStartupMessageOnUnhide", false)
 local StartupMessageActionButtonEnabledEngineFeature = game:GetEngineFeature("StartupMessageActionButtonEnabled")
 
-local function selectScreenSize(p1) --[[ Line: 30 ]]
+local function selectScreenSize(p1)
 	return p1.ScreenSize
 end
 
-return function() --[[ Line: 34 | Named "useStartupMessageProps" ]]
+return function()
 	-- upvalues: UseRoactServiceFunction (copy), AppLinking (copy), AppLogging (copy), ShowStartupMessageOnUnhide (copy), AppAppLifecycleObserverService (copy), AppStartupMessageService (copy), UseSelectorFunction (copy), selectScreenSize (copy), UseDispatchFunction (copy), UseDesignTokensFunction (copy), ReactModule (copy), StartupMessageActionButtonEnabledEngineFeature (copy), UseLocalizationFunction (copy), DashModule (copy), LocalizationService (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), UseAppFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(AppLinking)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(AppLogging)
@@ -33,24 +33,24 @@ return function() --[[ Line: 34 | Named "useStartupMessageProps" ]]
 	local UseRoactServiceResult3 = UseRoactServiceFunction(AppStartupMessageService)
 	local UseSelectorResult = UseSelectorFunction(selectScreenSize)
 	local UseDispatchResult = UseDispatchFunction()
-	local UseDesignTokensResult = UseDesignTokensFunction(function(p1) --[[ Line: 43 ]]
+	local UseDesignTokensResult = UseDesignTokensFunction(function(p1)
 		return p1.Color.Common.Scrim
 	end)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
-	local UseResult = if ShowStartupMessageOnUnhide then ReactModule.useCallback(function() --[[ Line: 50 ]]
+	local UseResult = if ShowStartupMessageOnUnhide then ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy)
 		UseStateResult2(false)
 		UseStateResult2_1(false)
 	end, {}) else nil
 	
 	if ShowStartupMessageOnUnhide then
-		ReactModule.useEffect(function() --[[ Line: 57 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRoactServiceResult2 (copy), UseResult (copy)
 			if not UseRoactServiceResult2 then return end
 			local OnUnhideConnection = UseRoactServiceResult2.OnUnhide:Connect(UseResult)
 			
-			return function() --[[ Line: 63 ]]
+			return function()
 				-- upvalues: OnUnhideConnection (copy)
 				if OnUnhideConnection then
 					OnUnhideConnection:Disconnect()
@@ -66,10 +66,10 @@ return function() --[[ Line: 34 | Named "useStartupMessageProps" ]]
 	local ActionButtonLocalizationKey = if StartupMessageActionButtonEnabledEngineFeature then StartupMessage1.actionButtonLocalizationKey else nil
 	local LoggingEventName = StartupMessage1.loggingEventName
 	local Links = StartupMessage1.links or {}
-	local UseLocalizationResult = UseLocalizationFunction(DashModule.map(Links, function(p1) --[[ Line: 83 ]]
+	local UseLocalizationResult = UseLocalizationFunction(DashModule.map(Links, function(p1)
 		return p1.localizationKey
 	end))
-	local ReduceResult = DashModule.reduce(Links, function(p1, p2, p3) --[[ Line: 86 ]]
+	local ReduceResult = DashModule.reduce(Links, function(p1, p2, p3)
 		-- upvalues: DashModule (upval), UseLocalizationResult (copy)
 		return DashModule.append(p1, { { label = UseLocalizationResult[p3], url = p2.url } })
 	end, {})
@@ -86,19 +86,19 @@ return function() --[[ Line: 34 | Named "useStartupMessageProps" ]]
 		bodyText = BodyLocalizationKey and { BodyLocalizationKey, date = Date },
 		actionButtonText = ActionButtonLocalizationKey
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 109 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(true)
 	end, {})
 	
-	local function onActionButtonActivated() --[[ Line: 113 ]]
+	local function onActionButtonActivated()
 		-- upvalues: UseRoactServiceResult3 (copy)
 		UseRoactServiceResult3:executeActionButton()
 	end
 	
-	local UseResult2 = ReactModule.useCallback(function(Detail, Title) --[[ Line: 117 ]]
+	local UseResult2 = ReactModule.useCallback(function(Detail, Title)
 		-- upvalues: UseRoactServiceResult (copy), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
-		UseRoactServiceResult:isURLRegistered(Detail):andThen(function(Result) --[[ Line: 118 ]]
+		UseRoactServiceResult:isURLRegistered(Detail):andThen(function(Result)
 			-- upvalues: UseRoactServiceResult (upval), Detail (copy), AppPage (upval), Title (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateDownFunction (upval)
 			if not Result then
 				local config = {
@@ -130,7 +130,7 @@ return function() --[[ Line: 34 | Named "useStartupMessageProps" ]]
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay,
 		isFocusable = not UseStateResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 149 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult1 (copy), NoUseStateResult (copy), LoggingEventName (copy), UseRoactServiceResult1 (copy), UseStateResult2_1 (copy)
 		if not UseStateResult1 and NoUseStateResult and LoggingEventName then
 			UseRoactServiceResult1:logEphemeralCounterEvent({

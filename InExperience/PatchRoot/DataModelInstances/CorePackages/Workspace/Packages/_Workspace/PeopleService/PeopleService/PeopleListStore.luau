@@ -7,7 +7,7 @@ local CreatePersonStoreModule = require(Parent.createPersonStore)
 local PeopleUtilityModule = require(Parent.PeopleUtility)
 local GetFFlagPeoplePageEnablePersonSignalStoreFunction = require(Parent.Flags).GetFFlagPeoplePageEnablePersonSignalStore
 
-local function createPeopleListStore(p1) --[[ Line: 36 ]]
+local function createPeopleListStore(p1)
 	-- upvalues: GetFFlagPeoplePageEnablePersonSignalStoreFunction (copy), CreateSignalMapFunction (copy), PeopleUtilityModule (copy), SignalsModule (copy), CryoModule (copy), CreatePersonStoreModule (copy)
 	local P0 = p1 or game:GetService("Players")
 	local T = if GetFFlagPeoplePageEnablePersonSignalStoreFunction() then {} else nil
@@ -17,11 +17,11 @@ local function createPeopleListStore(p1) --[[ Line: 36 ]]
 	local Signal1, Signal2_1 = SignalsModule.createSignal({})
 	local JoinResult = {}
 	local JoinResult1 = {}
-	local MapResult = CryoModule.List.map(SortPeopleResult, function(Player) --[[ Line: 62 ]]
+	local MapResult = CryoModule.List.map(SortPeopleResult, function(Player)
 		return Player.UserId
 	end)
 	
-	local function fetchProfiles(MapResult) --[[ Line: 67 ]]
+	local function fetchProfiles(MapResult)
 		-- upvalues: JoinResult (ref), PeopleUtilityModule (upval), CryoModule (upval), Signal2_1 (copy)
 		local List = {}
 		
@@ -38,7 +38,7 @@ local function createPeopleListStore(p1) --[[ Line: 36 ]]
 		end
 	end
 	
-	local function fetchPlatformData(MapResult) --[[ Line: 90 ]]
+	local function fetchPlatformData(MapResult)
 		-- upvalues: JoinResult1 (ref), PeopleUtilityModule (upval), CryoModule (upval)
 		local List = {}
 		
@@ -54,7 +54,7 @@ local function createPeopleListStore(p1) --[[ Line: 36 ]]
 		end
 	end
 	
-	local Callback: (any) -> () = if GetFFlagPeoplePageEnablePersonSignalStoreFunction() then function(Player: Player) --[[ Line: 112 ]]
+	local Callback: (any) -> () = if GetFFlagPeoplePageEnablePersonSignalStoreFunction() then function(Player: Player)
 		-- upvalues: T (copy), CreatePersonStoreModule (upval), SignalMap (copy), PeopleUtilityModule (upval)
 		if not T[Player.UserId] then
 			local PersonStoreModule = CreatePersonStoreModule(Player)
@@ -69,7 +69,7 @@ local function createPeopleListStore(p1) --[[ Line: 36 ]]
 		end
 	end else nil
 	
-	local function addPerson(Player: Player) --[[ Line: 130 ]]
+	local function addPerson(Player: Player)
 		-- upvalues: GetFFlagPeoplePageEnablePersonSignalStoreFunction (upval), Callback (copy), SortPeopleResult (ref), PeopleUtilityModule (upval), CryoModule (upval), Signal2 (copy), MapResult (ref), fetchProfiles (copy), fetchPlatformData (copy)
 		if GetFFlagPeoplePageEnablePersonSignalStoreFunction() then
 			Callback(Player)
@@ -92,13 +92,13 @@ local function createPeopleListStore(p1) --[[ Line: 36 ]]
 		fetchPlatformData({ Player.UserId })
 	end
 	
-	local function removePerson(Player: Player) --[[ Line: 171 ]]
+	local function removePerson(Player: Player)
 		-- upvalues: GetFFlagPeoplePageEnablePersonSignalStoreFunction (upval), T (copy), SignalMap (copy), CryoModule (upval), SortPeopleResult (ref), Signal2 (copy), MapResult (ref), JoinResult (ref), JoinResult1 (ref), Signal2_1 (copy)
 		if GetFFlagPeoplePageEnablePersonSignalStoreFunction() and T[Player.UserId] then
 			T[Player.UserId] = nil
 			SignalMap.removeData(Player.UserId, false)
 		end
-		local FilterResult = CryoModule.List.filter(SortPeopleResult, function(Player1): boolean --[[ Line: 180 ]]
+		local FilterResult = CryoModule.List.filter(SortPeopleResult, function(Player1): boolean
 			-- upvalues: Player (copy)
 			return Player1 ~= Player
 		end)
@@ -107,7 +107,7 @@ local function createPeopleListStore(p1) --[[ Line: 36 ]]
 			SortPeopleResult = FilterResult
 			Signal2(SortPeopleResult)
 			local UserId = Player.UserId
-			MapResult = CryoModule.List.filter(MapResult, function(UserId1): boolean --[[ Line: 195 ]]
+			MapResult = CryoModule.List.filter(MapResult, function(UserId1): boolean
 				-- upvalues: UserId (copy)
 				return UserId1 ~= UserId
 			end)
@@ -120,7 +120,7 @@ local function createPeopleListStore(p1) --[[ Line: 36 ]]
 		end
 	end
 	
-	local function getProfile(p2) --[[ Line: 207 ]]
+	local function getProfile(p2)
 		-- upvalues: JoinResult (ref), fetchProfiles (copy)
 		local Text = tostring(p2)
 		
@@ -130,7 +130,7 @@ local function createPeopleListStore(p1) --[[ Line: 36 ]]
 		return JoinResult[Text]
 	end
 	
-	local function getPlatformName(p2) --[[ Line: 219 ]]
+	local function getPlatformName(p2)
 		-- upvalues: JoinResult1 (ref), fetchPlatformData (copy)
 		local Text = tostring(p2)
 		
@@ -140,7 +140,7 @@ local function createPeopleListStore(p1) --[[ Line: 36 ]]
 		return JoinResult1[Text].platformName
 	end
 	
-	local function getPlatformProfileId(p2) --[[ Line: 231 ]]
+	local function getPlatformProfileId(p2)
 		-- upvalues: JoinResult1 (ref), fetchPlatformData (copy)
 		local Text = tostring(p2)
 		

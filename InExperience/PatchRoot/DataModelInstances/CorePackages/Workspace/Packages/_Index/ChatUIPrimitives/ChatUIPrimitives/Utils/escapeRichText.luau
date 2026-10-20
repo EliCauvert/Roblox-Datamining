@@ -5,7 +5,7 @@
 	["'"] = "&apos;"
 }
 
-return function(Text: string): string --[[ Line: 20 | Named "escapeRichText" ]]
+return function(Text: string): string
 	-- upvalues: config (copy)
 	local Replaced = string.gsub(Text, "&", "&amp;")
 	

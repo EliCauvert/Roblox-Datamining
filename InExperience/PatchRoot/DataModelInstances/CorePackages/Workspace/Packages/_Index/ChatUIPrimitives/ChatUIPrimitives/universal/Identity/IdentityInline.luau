@@ -6,7 +6,7 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local CreateNextOrderFunction = require(Parent.ReactUtils).createNextOrder
 local _ = require(script.Parent.Parent.Types)
 
-return function(Frame) --[[ Line: 17 | Named "IdentityInline" ]]
+return function(Frame)
 	-- upvalues: CreateNextOrderFunction (copy), SignalsReactModule (copy), ReactModule (copy), FoundationModule (copy)
 	local NextOrder = CreateNextOrderFunction()
 	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(Frame.getIdentity)
@@ -17,14 +17,14 @@ return function(Frame) --[[ Line: 17 | Named "IdentityInline" ]]
 	}, {
 		avatar = ReactModule.createElement(FoundationModule.Image, {
 			tag = "size-400-400 stroke-standard stroke-default radius-circle",
-			Image = UseSignalBindingResult:map(function(p1) --[[ Line: 27 ]]
+			Image = UseSignalBindingResult:map(function(p1)
 				return if p1 and p1.avatarContent then p1.avatarContent else ""
 			end),
 			LayoutOrder = NextOrder()
 		}),
 		displayName = ReactModule.createElement(FoundationModule.Text, {
 			tag = "auto-xy",
-			Text = UseSignalBindingResult:map(function(p1): string --[[ Line: 36 ]]
+			Text = UseSignalBindingResult:map(function(p1): string
 				return if p1 then `{p1.displayName}:` else ""
 			end),
 			LayoutOrder = NextOrder()

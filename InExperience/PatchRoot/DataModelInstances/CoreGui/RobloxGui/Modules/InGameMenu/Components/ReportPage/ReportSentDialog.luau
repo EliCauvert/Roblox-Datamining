@@ -18,25 +18,25 @@ ReportSentDialog.validateProps = T.strictInterface({
 	inputType = T.optional(T.string)
 })
 
-function ReportSentDialog.init(p1) --[[ Line: 34 ]]
+function ReportSentDialog.init(p1)
 	-- upvalues: Roact (copy)
 	p1.buttonRef = Roact.createRef()
 end
 
-function ReportSentDialog.renderFocusHandler(p1) --[[ Line: 38 ]]
+function ReportSentDialog.renderFocusHandler(p1)
 	-- upvalues: Roact (copy), FocusHandlerModule (copy), ConstantsModule (copy), GuiService (copy), ContextActionService (copy)
 	return Roact.createElement(FocusHandlerModule, {
 		isFocused = p1.props.inputType == ConstantsModule.InputType.Gamepad and p1.props.isReportSentOpen,
-		didFocus = function() --[[ Line: 41 ]]
+		didFocus = function()
 			-- upvalues: GuiService (upval), p1 (copy), ContextActionService (upval)
 			GuiService:RemoveSelectionGroup("ReportSentDialogGroup")
 			GuiService:AddSelectionParent("ReportSentDialogGroup", p1.buttonRef:getValue())
 			GuiService.SelectedCoreObject = p1.buttonRef:getValue()
-			ContextActionService:BindCoreAction("ReporSentDialogSinkAction", function(_, _) --[[ Line: 47 ]]
+			ContextActionService:BindCoreAction("ReporSentDialogSinkAction", function(_, _)
 				return Enum.ContextActionResult.Sink
 			end, false, Enum.KeyCode.ButtonB, Enum.KeyCode.ButtonY, Enum.KeyCode.ButtonX)
 		end,
-		didBlur = function() --[[ Line: 51 ]]
+		didBlur = function()
 			-- upvalues: ContextActionService (upval), GuiService (upval)
 			ContextActionService:UnbindCoreAction("ReporSentDialogSinkAction")
 			GuiService:RemoveSelectionGroup("ReportSentDialogGroup")
@@ -44,13 +44,13 @@ function ReportSentDialog.renderFocusHandler(p1) --[[ Line: 38 ]]
 	})
 end
 
-function ReportSentDialog.render(p1) --[[ Line: 58 ]]
+function ReportSentDialog.render(p1)
 	-- upvalues: WithLocalizationModule (copy), Roact (copy), InfoDialogModule (copy), AssetsModule (copy)
 	return WithLocalizationModule({
 		titleText = "CoreScripts.InGameMenu.Report.ThanksForReport",
 		bodyText = "CoreScripts.InGameMenu.Report.WillReviewBody",
 		dismissText = "CoreScripts.InGameMenu.Ok"
-	})(function(p2) --[[ Line: 63 ]]
+	})(function(p2)
 		-- upvalues: Roact (upval), InfoDialogModule (upval), AssetsModule (upval), p1 (copy)
 		return Roact.createFragment({
 			Dialog = Roact.createElement(InfoDialogModule, {
@@ -67,15 +67,15 @@ function ReportSentDialog.render(p1) --[[ Line: 58 ]]
 	end)
 end
 
-return RoactRodux.UNSTABLE_connect2(function(p1, _) --[[ Line: 79 ]]
+return RoactRodux.UNSTABLE_connect2(function(p1, _)
 	return {
 		isReportSentOpen = p1.report.reportSentOpen,
 		inputType = p1.displayOptions.inputType
 	}
-end, function(Callback) --[[ Line: 84 ]]
+end, function(Callback)
 	-- upvalues: CloseReportSentDialogModule (copy)
 	return {
-		onDismiss = function() --[[ Line: 86 ]]
+		onDismiss = function()
 			-- upvalues: Callback (copy), CloseReportSentDialogModule (upval)
 			Callback(CloseReportSentDialogModule())
 		end

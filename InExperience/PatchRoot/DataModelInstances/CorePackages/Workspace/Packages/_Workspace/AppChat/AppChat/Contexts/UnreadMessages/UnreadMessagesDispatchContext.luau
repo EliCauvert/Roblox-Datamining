@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("AppChat").Parent.React).createContext(function(_) --[[ Line: 6 ]] end)
+﻿return require(script:FindFirstAncestor("AppChat").Parent.React).createContext(function(_) end)

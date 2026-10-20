@@ -40,7 +40,7 @@ local Orientation = FoundationModule.Enums.Orientation
 local IconName = FoundationModule.Enums.IconName
 local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
 
-return function(p1) --[[ Line: 65 | Named "PurchaseConfirmationModal" ]]
+return function(p1)
 	-- upvalues: UseNavigationFunction (copy), UseProfileAnalyticsContextModule (copy), UseDispatchFunction (copy), UseProfileWrapperContextModule (copy), ReactModule (copy), AvatarSaveContext (copy), FFlagProfileUnifiedPurchaseLoggingModule (copy), RobloxAppHooksModule (copy), EnumsModule (copy), UseLocalizationFunction (copy), FFlagSocialEnableProfileInspectAndBuyAnalytics (copy), EventNamesModule (copy), SendProfilePurchaseEventsModule (copy), MarketplaceUnifiedAction (copy), PurchaseBulkItemsModule (copy), HandlePurchaseItemsSuccessModule (copy), GetIsInsufficientRobuxErrorFunction (copy), SetCurrentToastMessageFunction (copy), NumberLocalization (copy), LocalizationService (copy), GetIconRichTextFunction (copy), IconName (copy), View (copy), Text (copy), FFlagSocialEnableProfileInspectAndBuyConsoleFocusNav (copy), InputHandlersModule (copy), FFlagProfileInspectAndBuyAutoFocusModule (copy), ReactFocusNavigationModule (copy), Dialog (copy), DialogSize (copy), Checkbox (copy), InputSize (copy), Orientation (copy), ButtonVariant (copy), AppFocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), FocusNavigationEventNameEnum (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseProfileAnalyticsContextModuleResult = UseProfileAnalyticsContextModule()
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 65 | Named "PurchaseConfirmationModal" ]]
 	local WearTypeMap = Params.wearTypeMap or {}
 	local UseLocalRobuxBalanceResult = RobloxAppHooksModule.useLocalRobuxBalance()
 	local RobuxBalance = if UseLocalRobuxBalanceResult == nil then Params.robuxBalance or 0 else UseLocalRobuxBalanceResult
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 83 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy), EnumsModule (upval), TotalPrice (copy), RobuxBalance (copy)
 		UseNavigationResult.navigate(EnumsModule.Screens.InsufficientRobuxDialog, { totalPrice = TotalPrice, robuxBalance = RobuxBalance })
 	end, { UseNavigationResult, TotalPrice, RobuxBalance })
@@ -77,7 +77,7 @@ return function(p1) --[[ Line: 65 | Named "PurchaseConfirmationModal" ]]
 			numItems = #PurchasableLineItems
 		}
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 104 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseLocalizationResult (copy)
 		return {
 			purchaseSuccessSingular = UseLocalizationResult.purchaseSuccessSingular,
@@ -91,7 +91,7 @@ return function(p1) --[[ Line: 65 | Named "PurchaseConfirmationModal" ]]
 	})
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(true)
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 119 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult (copy), UseNavigationResult (copy)
 		if not UseStateResult then
 			UseNavigationResult.goBack()
@@ -99,7 +99,7 @@ return function(p1) --[[ Line: 65 | Named "PurchaseConfirmationModal" ]]
 			return
 		end
 	end, { UseStateResult, UseNavigationResult })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 127 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult (copy), PurchasableLineItems (copy), UseStateResult2 (copy), FFlagSocialEnableProfileInspectAndBuyAnalytics (upval), UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), UseProfileWrapperContextModuleResult (copy), FFlagProfileUnifiedPurchaseLoggingModule (upval), SendProfilePurchaseEventsModule (upval), MarketplaceUnifiedAction (upval), PurchasedItems (copy), PurchaseBulkItemsModule (upval), UserId (copy), HandlePurchaseItemsSuccessModule (upval), UseStateResult1 (copy), PurchasedWearIds (copy), OwnedAssetIds (copy), WearTypeMap (copy), UseContextResult (copy), UseDispatchResult (copy), UseMemoResult (copy), UseNavigationResult (copy), GetIsInsufficientRobuxErrorFunction (upval), UseResult (copy), SetCurrentToastMessageFunction (upval), UseLocalizationResult (copy)
 		if UseStateResult or #PurchasableLineItems == 0 then return end
 		UseStateResult2(true)
@@ -114,7 +114,7 @@ return function(p1) --[[ Line: 65 | Named "PurchaseConfirmationModal" ]]
 		if FFlagProfileUnifiedPurchaseLoggingModule then
 			SendProfilePurchaseEventsModule(MarketplaceUnifiedAction.PURCHASE_ATTEMPT, PurchasedItems or {}, UseProfileWrapperContextModuleResult.profileType)
 		end
-		PurchaseBulkItemsModule({ userId = UserId, lineItems = PurchasableLineItems }):andThen(function(Result) --[[ Line: 156 ]]
+		PurchaseBulkItemsModule({ userId = UserId, lineItems = PurchasableLineItems }):andThen(function(Result)
 			-- upvalues: HandlePurchaseItemsSuccessModule (upval), UseStateResult1 (upval), PurchasedWearIds (upval), OwnedAssetIds (upval), WearTypeMap (upval), FFlagProfileUnifiedPurchaseLoggingModule (upval), PurchasedItems (upval), UseProfileWrapperContextModuleResult (upval), UseContextResult (upval), UseDispatchResult (upval), UseMemoResult (upval), UseNavigationResult (upval)
 			HandlePurchaseItemsSuccessModule({
 				result = Result,
@@ -129,7 +129,7 @@ return function(p1) --[[ Line: 65 | Named "PurchaseConfirmationModal" ]]
 				localized = UseMemoResult
 			})
 			UseNavigationResult.goBack()
-		end):catch(function(Err) --[[ Line: 171 ]]
+		end):catch(function(Err)
 			-- upvalues: GetIsInsufficientRobuxErrorFunction (upval), UseResult (upval), UseDispatchResult (upval), SetCurrentToastMessageFunction (upval), UseLocalizationResult (upval), UseNavigationResult (upval)
 			if GetIsInsufficientRobuxErrorFunction(Err) then
 				UseResult()
@@ -143,7 +143,7 @@ return function(p1) --[[ Line: 65 | Named "PurchaseConfirmationModal" ]]
 				}))
 				UseNavigationResult.goBack()
 			end
-		end):finally(function() --[[ Line: 183 ]]
+		end):finally(function()
 			-- upvalues: UseStateResult2 (upval)
 			UseStateResult2(false)
 		end)
@@ -182,7 +182,7 @@ return function(p1) --[[ Line: 65 | Named "PurchaseConfirmationModal" ]]
 					LayoutOrder = 1,
 					tag = "auto-xy text-title-medium content-emphasis text-align-x-right padding-y-xsmall",
 					RichText = true,
-					Text = ReactModule.useMemo(function(): string --[[ Line: 210 ]]
+					Text = ReactModule.useMemo(function(): string
 						-- upvalues: NumberLocalization (upval), TotalPrice (copy), LocalizationService (upval), GetIconRichTextFunction (upval), IconName (upval)
 						return `{GetIconRichTextFunction(IconName.Robux)} {NumberLocalization.localize(TotalPrice, LocalizationService.RobloxLocaleId)}`
 					end, { TotalPrice, LocalizationService.RobloxLocaleId })
@@ -190,9 +190,9 @@ return function(p1) --[[ Line: 65 | Named "PurchaseConfirmationModal" ]]
 			})
 		})
 	})
-	local UseMemoResult1 = if FFlagSocialEnableProfileInspectAndBuyConsoleFocusNav then ReactModule.useMemo(function() --[[ Line: 249 ]]
+	local UseMemoResult1 = if FFlagSocialEnableProfileInspectAndBuyConsoleFocusNav then ReactModule.useMemo(function()
 		-- upvalues: InputHandlersModule (upval), UseResult1 (copy)
-		return InputHandlersModule.onRelease(function(p2) --[[ Line: 250 ]]
+		return InputHandlersModule.onRelease(function(p2)
 			-- upvalues: UseResult1 (upval)
 			p2:cancel()
 			UseResult1()
@@ -219,7 +219,7 @@ return function(p1) --[[ Line: 65 | Named "PurchaseConfirmationModal" ]]
 					label = UseLocalizationResult.wearAfterPurchase,
 					size = InputSize.XSmall,
 					isChecked = UseStateResult1,
-					onActivated = function() --[[ Line: 284 ]]
+					onActivated = function()
 						-- upvalues: UseStateResult2_1 (copy), UseStateResult1 (copy)
 						UseStateResult2_1(not UseStateResult1)
 					end,

@@ -11,7 +11,7 @@ local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(Frame) --[[ Line: 29 | Named "SignUpBirthdayField" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), InputLabel (copy), FormatBoldRichTextFunction (copy), InputLabelSize (copy), Text (copy), Icon (copy), IconName (copy), IconSize (copy)
 	local IsNotTextMatch: boolean = Frame.text ~= nil and Frame.text ~= ""
 	

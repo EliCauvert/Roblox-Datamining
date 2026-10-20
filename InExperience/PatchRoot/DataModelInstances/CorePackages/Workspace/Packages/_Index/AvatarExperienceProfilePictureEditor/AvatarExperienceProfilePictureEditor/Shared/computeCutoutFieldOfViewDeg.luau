@@ -1,6 +1,6 @@
 ﻿local ConstantsModule = require(script.Parent.Parent.Constants)
 
-return function(p1): number --[[ Line: 18 | Named "computeCutoutFieldOfViewDeg" ]]
+return function(p1): number
 	-- upvalues: ConstantsModule (copy)
 	local ViewportHeightPix: number = p1.viewportHeightPix
 	local X = ViewportHeightPix / 2 / math.tan(math.rad(p1.cameraFieldOfViewDeg or ConstantsModule.CameraFieldOfViewDeg) / 2)

@@ -24,16 +24,16 @@ local MotorOverrideOptions = {
 	close = { targetValue = 0 }
 }
 
-function FriendsLandingContextualMenu.init(p1) --[[ Line: 40 ]]
+function FriendsLandingContextualMenu.init(p1)
 	-- upvalues: MemoizeFunction (copy), EnumScreensModule (copy), FFlagMigrateFriendshipStatusesRemainingActions (copy), GetResult (copy), Images (copy)
-	function p1.onClose() --[[ Line: 41 ]]
+	function p1.onClose()
 		-- upvalues: p1 (copy)
 		if p1.props.navigation then
 			p1.props.navigation.goBack()
 		end
 	end
 	
-	p1.onUnfriend = MemoizeFunction(function(ToastTitle, IconImage) --[[ Line: 47 ]]
+	p1.onUnfriend = MemoizeFunction(function(ToastTitle, IconImage)
 		-- upvalues: p1 (copy), EnumScreensModule (upval)
 		p1.props.navigation.navigate(EnumScreensModule.GenericToast, {
 			toastProps = {
@@ -41,9 +41,9 @@ function FriendsLandingContextualMenu.init(p1) --[[ Line: 40 ]]
 			}
 		})
 	end)
-	p1.onActivated = MemoizeFunction(function(p2, p3) --[[ Line: 58 ]]
+	p1.onActivated = MemoizeFunction(function(p2, p3)
 		-- upvalues: p1 (copy), FFlagMigrateFriendshipStatusesRemainingActions (upval), GetResult (upval), Images (upval)
-		return function() --[[ Line: 59 ]]
+		return function()
 			-- upvalues: p1 (upval), FFlagMigrateFriendshipStatusesRemainingActions (upval), GetResult (upval), p2 (copy), Images (upval), p3 (copy)
 			local UserId = p1.props.navigation.state.params.userId
 			
@@ -51,10 +51,10 @@ function FriendsLandingContextualMenu.init(p1) --[[ Line: 40 ]]
 				(if FFlagMigrateFriendshipStatusesRemainingActions then GetResult.Unfriend(UserId) else p1.props.unfriendTargetUserId({
 					targetUserId = UserId,
 					currentUserId = p1.props.localUserId
-				})):andThen(function() --[[ Line: 69 ]]
+				})):andThen(function()
 					-- upvalues: p1 (upval), p2 (upval), Images (upval)
 					p1.onUnfriend(p2, Images["icons/actions/friends/friendRemove"])
-				end):catch(function() --[[ Line: 72 ]]
+				end):catch(function()
 					-- upvalues: p1 (upval), p3 (upval)
 					p1.onUnfriend(p3)
 				end)
@@ -64,15 +64,15 @@ function FriendsLandingContextualMenu.init(p1) --[[ Line: 40 ]]
 	end)
 end
 
-function FriendsLandingContextualMenu.render(p1) --[[ Line: 81 ]]
+function FriendsLandingContextualMenu.render(p1)
 	-- upvalues: WithStyleFunction (copy), WithLocalizationFunction (copy), Roact (copy), ContextualMenu (copy), Images (copy), MenuDirection (copy), MotorOverrideOptions (copy)
-	return WithStyleFunction(function(_) --[[ Line: 82 ]]
+	return WithStyleFunction(function(_)
 		-- upvalues: WithLocalizationFunction (upval), Roact (upval), ContextualMenu (upval), Images (upval), p1 (copy), MenuDirection (upval), MotorOverrideOptions (upval)
 		return WithLocalizationFunction({
 			unfriend = "Feature.Friends.Action.Unfriend",
 			error = "Feature.Toast.NetworkingError.SomethingIsWrong",
 			success = "Feature.Friends.Action.FriendRemoved"
-		})(function(p2) --[[ Line: 87 ]]
+		})(function(p2)
 			-- upvalues: Roact (upval), ContextualMenu (upval), Images (upval), p1 (upval), MenuDirection (upval), MotorOverrideOptions (upval)
 			return Roact.createElement(ContextualMenu, {
 				open = true,
@@ -94,14 +94,14 @@ function FriendsLandingContextualMenu.render(p1) --[[ Line: 81 ]]
 	end)
 end
 
-return ComposeFunction(RoactRodux.connect(MapStateToPropsModule, function(Callback) --[[ Line: 113 ]]
+return ComposeFunction(RoactRodux.connect(MapStateToPropsModule, function(Callback)
 	-- upvalues: FriendsNetworking (copy)
 	return {
-		unfriendTargetUserId = function(p1) --[[ Line: 115 ]]
+		unfriendTargetUserId = function(p1)
 			-- upvalues: Callback (copy), FriendsNetworking (upval)
 			return Callback(FriendsNetworking.UnfriendTargetUserId.API(p1))
 		end
 	}
-end), FriendsLandingContextModule.connect(function(p1, _) --[[ Line: 120 ]]
+end), FriendsLandingContextModule.connect(function(p1, _)
 	return { screenSize = p1.screenSize }
 end))(FriendsLandingContextualMenu)

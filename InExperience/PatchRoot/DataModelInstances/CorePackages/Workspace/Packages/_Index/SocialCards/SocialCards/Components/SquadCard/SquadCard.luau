@@ -18,17 +18,17 @@ local SetIntervalFunction = LuauPolyfillModule.setInterval
 local SquadStartedCardModule = require(SocialCards.Components.SquadCard.SquadStartedCard)
 local SquadEndedCardModule = require(SocialCards.Components.SquadCard.SquadEndedCard)
 
-return function(p1) --[[ Line: 35 | Named "SquadCard" ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseLocalUserIdFunction (copy), ReactModule (copy), SquadExternalContractContext (copy), UseCurrentSquadSelectorFunction (copy), CryoModule (copy), UseNavigationFocusFunction (copy), SquadViewFlags (copy), NetworkingSquads (copy), HttpModule (copy), SetIntervalFunction (copy), ClearIntervalFunction (copy), SquadStartedCardModule (copy), SquadEndedCardModule (copy), FoundationModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseContextResult = ReactModule.useContext(SquadExternalContractContext)
 	local UseCurrentSquadSelectorResult = UseCurrentSquadSelectorFunction()
 	local IsSquadIdMatch: boolean = if UseCurrentSquadSelectorResult then UseCurrentSquadSelectorResult.squadId == p1.group_up_id else false
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 48 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: IsSquadIdMatch (copy), UseCurrentSquadSelectorResult (copy), CryoModule (upval), UseLocalUserIdResult (copy)
 		if not IsSquadIdMatch then
-			return CryoModule.List.filter(p2, function(p3): boolean --[[ Line: 56 ]]
+			return CryoModule.List.filter(p2, function(p3): boolean
 				-- upvalues: UseLocalUserIdResult (upval)
 				return tostring(p3) ~= UseLocalUserIdResult
 			end)
@@ -48,12 +48,12 @@ return function(p1) --[[ Line: 35 | Named "SquadCard" ]]
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(UseResult(p1.participant_user_ids))
 	local UseNavigationFocusResult = UseNavigationFocusFunction()
 	local UseNavigationFocusResult1 = IsSquadIdMatch and UseNavigationFocusResult
-	ReactModule.useEffect(function() --[[ Line: 68 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseNavigationFocusResult1 (copy), UseContextResult (copy), SquadViewFlags (upval)
 		if UseNavigationFocusResult1 then
 			UseContextResult.updateSquadViewFlags(SquadViewFlags.SquadSystemMessage, true)
 		end
-		return function() --[[ Line: 72 ]]
+		return function()
 			-- upvalues: UseNavigationFocusResult1 (upval), UseContextResult (upval), SquadViewFlags (upval)
 			if UseNavigationFocusResult1 then
 				UseContextResult.updateSquadViewFlags(SquadViewFlags.SquadSystemMessage, false)
@@ -63,13 +63,13 @@ return function(p1) --[[ Line: 35 | Named "SquadCard" ]]
 		UseContextResult.updateSquadViewFlags,
 		UseNavigationFocusResult1
 	})
-	ReactModule.useEffect(function() --[[ Line: 79 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2_1 (copy), UseResult (copy), p1 (copy)
 		UseStateResult2_1(UseResult(p1.participant_user_ids))
 	end, { UseStateResult2_1, p1.participant_user_ids, UseResult })
-	local UseResult1 = ReactModule.useCallback(function(SquadId) --[[ Line: 84 ]]
+	local UseResult1 = ReactModule.useCallback(function(SquadId)
 		-- upvalues: UseDispatchResult (copy), NetworkingSquads (upval), UseStateResult2_1 (copy), HttpModule (upval), UseStateResult2 (copy)
-		UseDispatchResult(NetworkingSquads.GetSquadFromSquadId.API({ squadId = SquadId })):andThen(function(Result) --[[ Line: 86 ]]
+		UseDispatchResult(NetworkingSquads.GetSquadFromSquadId.API({ squadId = SquadId })):andThen(function(Result)
 			-- upvalues: UseStateResult2_1 (upval)
 			if Result and Result.responseBody and Result.responseBody.groupUp and Result.responseBody.groupUp.members then
 				local List = {}
@@ -79,7 +79,7 @@ return function(p1) --[[ Line: 35 | Named "SquadCard" ]]
 				end
 				UseStateResult2_1(List)
 			end
-		end):catch(function(Err) --[[ Line: 100 ]]
+		end):catch(function(Err)
 			-- upvalues: HttpModule (upval), UseStateResult2 (upval)
 			if Err.StatusCode == HttpModule.StatusCodes.NOT_FOUND then
 				UseStateResult2(false)
@@ -90,14 +90,14 @@ return function(p1) --[[ Line: 35 | Named "SquadCard" ]]
 			end
 		end)
 	end, { UseDispatchResult })
-	ReactModule.useEffect(function() --[[ Line: 109 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), IsSquadIdMatch (copy), SetIntervalFunction (upval), UseResult1 (copy), p1 (copy), ClearIntervalFunction (upval)
-		local SetIntervalResult = if UseStateResult and not IsSquadIdMatch then SetIntervalFunction(function() --[[ Line: 113 ]]
+		local SetIntervalResult = if UseStateResult and not IsSquadIdMatch then SetIntervalFunction(function()
 			-- upvalues: UseResult1 (upval), p1 (upval)
 			UseResult1(p1.group_up_id)
 		end, 10000) else nil
 		
-		return function() --[[ Line: 118 ]]
+		return function()
 			-- upvalues: SetIntervalResult (ref), ClearIntervalFunction (upval)
 			if SetIntervalResult then
 				ClearIntervalFunction(SetIntervalResult)
@@ -113,7 +113,7 @@ return function(p1) --[[ Line: 35 | Named "SquadCard" ]]
 	return ReactModule.createElement(FoundationModule.View, {
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.new(0, 280, 0, 0)
-	}, (ReactModule.useMemo(function() --[[ Line: 125 ]]
+	}, (ReactModule.useMemo(function()
 		-- upvalues: UseStateResult (copy), ReactModule (upval), SquadStartedCardModule (upval), p1 (copy), UseStateResult1 (copy), SquadEndedCardModule (upval)
 		return if UseStateResult then ReactModule.createElement(SquadStartedCardModule, {
 			conversationId = p1.conversation_id,

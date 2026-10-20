@@ -1,4 +1,4 @@
-﻿return function(p1, Callback) --[[ Line: 5 | Named "filter" ]]
+﻿return function(p1, Callback)
 	local t = {}
 	local Count = 1
 	

@@ -10,7 +10,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 local IconsNavigationPushRight = UIBloxModule.App.ImageSet.Images["icons/navigation/pushRight"]
 
-function SeeAllTile(p1) --[[ Line: 30 ]]
+function SeeAllTile(p1)
 	-- upvalues: UseDesignTokensFunction (copy), UseLocalizationFunction (copy), UseCursorFunction (copy), IconsNavigationPushRight (copy), ReactModule (copy), ImageSetLabel (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local Size = p1.size
 	local LayoutOrder = p1.layoutOrder

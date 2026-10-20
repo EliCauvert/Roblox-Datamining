@@ -33,7 +33,7 @@ local config = {
 	SelectionBehaviorDown = Enum.SelectionBehavior.Escape
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 90 | Named "BaseRow" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), FFlagUserListSurfaceExtensions (copy), UserListUseActionAddTranslation (copy), UseLocalizationFunction (copy), TextKeysModule (copy), EnumsModule (copy), FFlagFriendsPageViewBtnEnabled (copy), FFlagUserListCtaIntegrationEnabled (copy), ReactModule (copy), View (copy), ConstantsModule (copy), UserTile (copy), FoundationModule (copy), FFlagEnableBlackbirdCheck (copy), config (copy), FFlagAddStatusIndicatorToBaseRow (copy), StatusIndicator (copy), StatusIndicatorVariant (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), Skeleton (copy), Radius (copy), IconButton (copy), IconSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsDisableRowActivation: boolean = FFlagUserListSurfaceExtensions and p1.disableRowActivation == true

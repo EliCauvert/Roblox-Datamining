@@ -5,21 +5,21 @@ local UserInputService = game:GetService("UserInputService")
 local NotificationType = require(Parent.RobloxAppEnums).NotificationType
 local ReactModule = require(Parent.React)
 
-local function v6(Style) --[[ Line: 18 ]]
+local function v6(Style)
 	-- upvalues: UserInputService (copy), GuiService (copy), HttpService (copy), NotificationType (copy)
 	if UserInputService:GetPlatform() == Enum.Platform.IOS then
 		GuiService:BroadcastNotification(HttpService:JSONEncode({ style = Style }), NotificationType.SET_STATUS_BAR_STYLE)
 	end
 end
 
-return function(p1, p2) --[[ Line: 30 | Named "useIOSStatusBarStyler" ]]
+return function(p1, p2)
 	-- upvalues: v6 (copy), ReactModule (copy)
 	local Callback = p2 or v6
-	ReactModule.useEffect(function() --[[ Line: 33 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), Callback (copy)
 		Callback(if p1 then "lightcontent" else "default")
 		
-		return function() --[[ Line: 36 ]]
+		return function()
 			-- upvalues: Callback (upval)
 			Callback("default")
 		end

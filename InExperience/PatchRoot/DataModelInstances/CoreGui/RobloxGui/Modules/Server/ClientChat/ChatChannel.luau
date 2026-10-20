@@ -1,10 +1,10 @@
 ﻿local Result1 = nil
-local Success, Result = pcall(function() --[[ Line: 7 ]]
+local Success, Result = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserFlagRemoveMessageFromMessageLog")
 end)
 Result1 = Success and Result
 local Result2_1 = false
-local Success1, Result2 = pcall(function() --[[ Line: 15 ]]
+local Success1, Result2 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserIsChatTranslationEnabled2")
 end)
 Result2_1 = Success1 and Result2
@@ -18,7 +18,7 @@ if Result2_1 then
 	
 	if ChatTranslationEnabled == nil then
 		local Connection = nil
-		Connection = Parent.ChildAdded:Connect(function(Child) --[[ Line: 35 ]]
+		Connection = Parent.ChildAdded:Connect(function(Child)
 			-- upvalues: ChatTranslationEnabled (ref), Connection (ref)
 			if Child.Name == "ChatTranslationEnabled" then
 				ChatTranslationEnabled = Child
@@ -30,11 +30,11 @@ end
 local Module = {}
 Module.__index = Module
 
-function Module.Destroy(p1) --[[ Line: 50 ]]
+function Module.Destroy(p1)
 	p1.Destroyed = true
 end
 
-function Module.SetActive(p1, Enabled) --[[ Line: 54 ]]
+function Module.SetActive(p1, Enabled)
 	if Enabled == p1.Active then return end
 	if Enabled == false then
 		p1.MessageLogDisplay:Clear()
@@ -48,7 +48,7 @@ function Module.SetActive(p1, Enabled) --[[ Line: 54 ]]
 	p1.Active = Enabled
 end
 
-function Module.UpdateMessageFiltered(p2, p3) --[[ Line: 69 ]]
+function Module.UpdateMessageFiltered(p2, p3)
 	-- upvalues: Result2_1 (ref), ChatTranslationEnabled (ref), Result1 (ref)
 	local Index = 1
 	local MessageLog = p2.MessageLog
@@ -85,7 +85,7 @@ function Module.UpdateMessageFiltered(p2, p3) --[[ Line: 69 ]]
 	end
 end
 
-function Module.AddMessageToChannel(p4, p5) --[[ Line: 105 ]]
+function Module.AddMessageToChannel(p4, p5)
 	-- upvalues: ChatSettingsModule (copy)
 	table.insert(p4.MessageLog, p5)
 	
@@ -97,7 +97,7 @@ function Module.AddMessageToChannel(p4, p5) --[[ Line: 105 ]]
 	end
 end
 
-function Module.InternalAddMessageAtTimeStamp(p4, p5) --[[ Line: 115 ]]
+function Module.InternalAddMessageAtTimeStamp(p4, p5)
 	for i = 1, #p4.MessageLog do
 		if p5.Time < p4.MessageLog[i].Time then
 			table.insert(p4.MessageLog, i, p5)
@@ -108,7 +108,7 @@ function Module.InternalAddMessageAtTimeStamp(p4, p5) --[[ Line: 115 ]]
 	table.insert(p4.MessageLog, p5)
 end
 
-function Module.AddMessagesToChannelByTimeStamp(p6, p7, p8) --[[ Line: 125 ]]
+function Module.AddMessagesToChannelByTimeStamp(p6, p7, p8)
 	-- upvalues: ChatSettingsModule (copy)
 	for i = p8, #p7 do
 		p6:InternalAddMessageAtTimeStamp(p7[i])
@@ -125,7 +125,7 @@ function Module.AddMessagesToChannelByTimeStamp(p6, p7, p8) --[[ Line: 125 ]]
 	end
 end
 
-function Module.AddMessageToChannelByTimeStamp(p9, p10) --[[ Line: 140 ]]
+function Module.AddMessageToChannelByTimeStamp(p9, p10)
 	-- upvalues: ChatSettingsModule (copy)
 	if #p9.MessageLog < 1 then
 		p9:AddMessageToChannel(p10)
@@ -154,7 +154,7 @@ function Module.AddMessageToChannelByTimeStamp(p9, p10) --[[ Line: 140 ]]
 	end
 end
 
-function Module.RemoveLastMessageFromChannel(p11) --[[ Line: 170 ]]
+function Module.RemoveLastMessageFromChannel(p11)
 	table.remove(p11.MessageLog, 1)
 	
 	if p11.Active then
@@ -162,7 +162,7 @@ function Module.RemoveLastMessageFromChannel(p11) --[[ Line: 170 ]]
 	end
 end
 
-function Module.ClearMessageLog(p11) --[[ Line: 178 ]]
+function Module.ClearMessageLog(p11)
 	p11.MessageLog = {}
 	
 	if p11.Active then
@@ -170,11 +170,11 @@ function Module.ClearMessageLog(p11) --[[ Line: 178 ]]
 	end
 end
 
-function Module.RegisterChannelTab(p11, ChannelTab) --[[ Line: 186 ]]
+function Module.RegisterChannelTab(p11, ChannelTab)
 	p11.ChannelTab = ChannelTab
 end
 
-function t.new(Name, MessageLogDisplay) --[[ Line: 193 ]]
+function t.new(Name, MessageLogDisplay)
 	-- upvalues: Module (copy)
 	local self = setmetatable({}, Module)
 	self.Destroyed = false

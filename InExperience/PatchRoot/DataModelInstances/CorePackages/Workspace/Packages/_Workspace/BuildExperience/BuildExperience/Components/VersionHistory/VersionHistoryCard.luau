@@ -11,7 +11,7 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local FillBehavior = FoundationModule.Enums.FillBehavior
 local InputSize = FoundationModule.Enums.InputSize
 
-return function(p1) --[[ Line: 27 | Named "VersionHistoryCard" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), View (copy), Text (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy)
 	local TestId = p1.testId or "version-history-card"
 	
@@ -64,7 +64,7 @@ return function(p1) --[[ Line: 27 | Named "VersionHistoryCard" ]]
 						variant = ButtonVariant.Standard,
 						fillBehavior = FillBehavior.Fill,
 						isDisabled = p1.isRestoreDisabled,
-						onActivated = ReactModule.useCallback(function() --[[ Line: 36 ]]
+						onActivated = ReactModule.useCallback(function()
 							-- upvalues: p1 (copy)
 							p1.onRestore()
 						end, { p1.onRestore }),

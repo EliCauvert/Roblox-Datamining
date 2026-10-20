@@ -20,14 +20,14 @@ local config1 = {
 }
 local config2 = { duration = 0.75, easingStyle = { 0.37, 0, 0.63, 1 } }
 
-return function(Frame) --[[ Line: 63 | Named "MomentUnavailableView" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), config (copy), config1 (copy), ReactModule (copy), ReactOtterModule (copy), config2 (copy), View (copy), Text (copy), StateLayerAffordance (copy), Icon (copy), BuilderIconsModule (copy), IconSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction(if Frame.isModerated then config else config1)
 	local Animate = Frame.animate
 	local UseRefResult = ReactModule.useRef(Animate)
 	local UseRefResult1 = ReactModule.useRef(nil)
-	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0, (ReactModule.useCallback(function(p1: number) --[[ Line: 71 ]]
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0, (ReactModule.useCallback(function(p1: number)
 		-- upvalues: UseRefResult1 (copy), UseRefResult (copy), ReactOtterModule (upval), config2 (upval)
 		local CurrentFunction: (any) -> () = UseRefResult1.current
 		
@@ -35,7 +35,7 @@ return function(Frame) --[[ Line: 63 | Named "MomentUnavailableView" ]]
 			CurrentFunction(ReactOtterModule.ease(if p1 >= 0.5 then 0 else 1, config2))
 		end
 	end, {})))
-	ReactModule.useEffect(function() --[[ Line: 79 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), Animate (copy), UseRefResult1 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config2 (upval)
 		UseRefResult.current = Animate
 		UseRefResult1.current = UseAnimatedBindingResult2
@@ -91,7 +91,7 @@ return function(Frame) --[[ Line: 63 | Named "MomentUnavailableView" ]]
 				Arrow = ReactModule.createElement(Icon, {
 					testId = "moments-unavailable-next-arrow",
 					AnchorPoint = Vector2.new(0.5, 0.5),
-					Position = UseAnimatedBindingResult:map(function(p1): UDim2 --[[ Line: 92 ]]
+					Position = UseAnimatedBindingResult:map(function(p1): UDim2
 						-- upvalues: v1 (copy)
 						return UDim2.fromScale(0.5, 0.5 + p1 * v1)
 					end),

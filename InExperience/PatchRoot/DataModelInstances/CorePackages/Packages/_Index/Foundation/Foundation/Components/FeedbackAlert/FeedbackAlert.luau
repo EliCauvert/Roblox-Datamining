@@ -23,14 +23,14 @@ local IconVariant = require(Parent.BuilderIcons).IconVariant
 local UseFeedbackAlertVariantsModule = require(script.Parent.useFeedbackAlertVariants)
 local config = { testId = "--foundation-feedback-alert" }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 50 | Named "FeedbackAlert" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseFeedbackAlertVariantsModule (copy), ReactUtilsModule (copy), EscapeRichTextModule (copy), ReactModule (copy), ControlStateModule (copy), ViewModule (copy), WithCommonPropsModule (copy), IconModule (copy), AlertConstantsModule (copy), IconSizeModule (copy), IconVariant (copy), TextModule (copy), StateLayerAffordanceModule (copy), CloseAffordanceModule (copy), InputSizeModule (copy), CloseAffordanceVariantModule (copy), AlertActionsModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseFeedbackAlertVariantsModuleResult = UseFeedbackAlertVariantsModule(UseTokensModule(), WithDefaultsModuleResult.severity)
 	local UseComposedRefResult = ReactUtilsModule.useComposedRef(p2)
 	local EscapeRichTextModuleResult = if WithDefaultsModuleResult.link then EscapeRichTextModule(WithDefaultsModuleResult.link.text) else nil
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function(Hover) --[[ Line: 60 ]]
+	local UseResult = ReactModule.useCallback(function(Hover)
 		-- upvalues: UseStateResult2 (copy), ControlStateModule (upval)
 		UseStateResult2(Hover == ControlStateModule.Hover)
 	end, {})

@@ -14,7 +14,7 @@ local FFlagSduiChartsSortDetailGenreFilter = require(Parent.SharedFlags).FFlagSd
 local FFlagSduiOptionSelectorAnchorTag = require(Parent.SharedFlags).FFlagSduiOptionSelectorAnchorTag
 local LuaAppNilCheckOptionItemConfigs = game:DefineFastFlag("LuaAppNilCheckOptionItemConfigs", false)
 
-return ReactModule.memo(function(p1) --[[ Line: 72 | Named "SduiOptionSelectorCollection" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), SduiErrorType (copy), SduiComponentType (copy), FFlagSduiChartsSortDetailGenreFilter (copy), LuaAppNilCheckOptionItemConfigs (copy), FFlagSduiOptionSelectorAnchorTag (copy), CryoModule (copy), SduiVariableItemWidthCarouselModule (copy), FFlagSduiOptionImpressionsEventName (copy), FFlagSduiOptionSelectorHeaderComponent (copy), SduiPlaceholderWrapper (copy)
 	local SduiContext = p1.sduiContext
 	local UseTokensResult = UseTokensFunction()
@@ -22,11 +22,11 @@ return ReactModule.memo(function(p1) --[[ Line: 72 | Named "SduiOptionSelectorCo
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseStateResult1 = UseStateResult or p1.selectedOption
 	local UseRefResult = ReactModule.useRef(0)
-	ReactModule.useEffect(function() --[[ Line: 86 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(nil)
 	end, { p1.selectedOption })
-	local UseResult = ReactModule.useCallback(function(SelectedOption) --[[ Line: 90 ]]
+	local UseResult = ReactModule.useCallback(function(SelectedOption)
 		-- upvalues: SduiContext (copy), SduiErrorType (upval), SduiComponentType (upval), UseStateResult (copy), FFlagSduiChartsSortDetailGenreFilter (upval), UseStateResult2 (copy), UseRefResult (copy), p1 (copy)
 		if typeof(SelectedOption) ~= "string" or SelectedOption == "" then
 			SduiContext.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
@@ -54,7 +54,7 @@ return ReactModule.memo(function(p1) --[[ Line: 72 | Named "SduiOptionSelectorCo
 			Current = UseRefResult.current
 		end
 		if typeof(OnOptionActivatedResult) == "table" and typeof(OnOptionActivatedResult.finally) == "function" then
-			OnOptionActivatedResult:finally(function() --[[ Line: 137 ]]
+			OnOptionActivatedResult:finally(function()
 				-- upvalues: UseRefResult (upval), Current (ref), UseStateResult2 (upval)
 				if UseRefResult.current == Current then
 					UseStateResult2(nil)
@@ -76,7 +76,7 @@ return ReactModule.memo(function(p1) --[[ Line: 72 | Named "SduiOptionSelectorCo
 		UseStateResult,
 		UseRefResult
 	})
-	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 145 ]]
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: LuaAppNilCheckOptionItemConfigs (upval), p1 (copy), SduiContext (copy), SduiErrorType (upval), SduiComponentType (upval), FFlagSduiOptionSelectorAnchorTag (upval), CryoModule (upval), UseStateResult1 (copy), UseResult (copy)
 		if LuaAppNilCheckOptionItemConfigs and (not p1.optionItemConfigs or not p1.optionsData) then
 			SduiContext.dependencies.logger.reportError(SduiErrorType.InvalidProps, {
@@ -100,7 +100,7 @@ return ReactModule.memo(function(p1) --[[ Line: 72 | Named "SduiOptionSelectorCo
 			local Copy = table.clone(optionItemConfig)
 			Copy.props = CryoModule.Dictionary.join(optionItemConfig.props or {}, {
 				isChecked = Id ~= nil and Id == UseStateResult1,
-				onActivated = function() --[[ Line: 173 ]]
+				onActivated = function()
 					-- upvalues: UseResult (upval), Id (copy)
 					UseResult(Id)
 				end
@@ -160,7 +160,7 @@ return ReactModule.memo(function(p1) --[[ Line: 72 | Named "SduiOptionSelectorCo
 			mountRealDuringPlaceholder = false,
 			isPlaceholder = UseStateResult ~= nil,
 			transitionDurationSeconds = p1.placeholderTransitionDurationSeconds,
-			real = ReactModule.useMemo(function() --[[ Line: 185 ]]
+			real = ReactModule.useMemo(function()
 				-- upvalues: p1 (copy), ReactModule (upval), CryoModule (upval)
 				return ReactModule.cloneElement(p1.collectionComponent, {
 					extraLocalProps = CryoModule.Dictionary.join(p1.collectionComponent.props and p1.collectionComponent.props.extraLocalProps or {}, {

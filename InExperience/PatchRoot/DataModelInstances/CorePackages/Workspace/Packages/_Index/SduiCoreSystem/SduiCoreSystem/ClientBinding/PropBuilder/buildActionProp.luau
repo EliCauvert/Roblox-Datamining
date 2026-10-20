@@ -17,7 +17,7 @@ local _ = require(SduiCoreSystem.SduiConfigTypes)
 local _ = require(SduiCoreSystem.SduiComponentType)
 local FFlagSduiExperimentalComponent = require(Parent.SharedFlags).FFlagSduiExperimentalComponent
 
-local function mergeTemplateParamsWithOverrides(Tbl, List) --[[ Line: 37 ]]
+local function mergeTemplateParamsWithOverrides(Tbl, List)
 	if typeof(List) ~= "table" then
 		return Tbl
 	end
@@ -28,14 +28,14 @@ local function mergeTemplateParamsWithOverrides(Tbl, List) --[[ Line: 37 ]]
 	return Copy
 end
 
-local function buildActionProp(p1, p2, p3, p4, p5, p6) --[[ Line: 51 ]]
+local function buildActionProp(p1, p2, p3, p4, p5, p6)
 	-- upvalues: FFlagSduiExperimentalComponent (copy), SduiActionTypeModule (copy), ProtoVariableMapperModule (copy), GetSduiActionHandlerRegistryModule (copy), GetSduiServiceDependenciesStoreModule (copy), SduiClientBindingBuilderModule (copy), PropResultCategory (copy), BuildPropTableFunction (copy), mergeTemplateParamsWithOverrides (copy), LogActionTelemetryModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), SduiPropUtilsModule (copy), buildActionProp (copy)
 	local CurrentComponentType = p5.currentComponentType
 	local CurrentParserName = p5.currentParserName
 	
 	if p1 == "value" then
 		local MapActionTypeToLuaResult = nil
-		local Success, Result = pcall(function() --[[ Line: 64 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p5 (copy), p2 (copy), FFlagSduiExperimentalComponent (upval), MapActionTypeToLuaResult (ref), SduiActionTypeModule (upval), ProtoVariableMapperModule (upval), GetSduiActionHandlerRegistryModule (upval), GetSduiServiceDependenciesStoreModule (upval), SduiClientBindingBuilderModule (upval), p3 (copy), p4 (copy), p6 (copy), PropResultCategory (upval), BuildPropTableFunction (upval), mergeTemplateParamsWithOverrides (upval), LogActionTelemetryModule (upval)
 			local AppPage = p5.appPage
 			local Value = typeof(p2) == "table" and p2.kind and p2.kind.value or nil
@@ -50,7 +50,7 @@ local function buildActionProp(p1, p2, p3, p4, p5, p6) --[[ Line: 51 ]]
 			if not ActionHandlerConfig then
 				error(`Could not find action for actionType: {MapActionTypeToLuaResult}`)
 			end
-			return function(_, p7, p8) --[[ Line: 96 ]]
+			return function(_, p7, p8)
 				-- upvalues: GetSduiServiceDependenciesStoreModule (upval), AppPage (copy), p5 (upval), p2 (upval), SduiClientBindingBuilderModule (upval), p3 (upval), p4 (upval), p6 (upval), PropResultCategory (upval), Value (copy), MapActionTypeToLuaResult (upval), BuildPropTableFunction (upval), mergeTemplateParamsWithOverrides (upval), LogActionTelemetryModule (upval), ActionHandlerConfig (copy)
 				local config = {
 					dependencies = GetSduiServiceDependenciesStoreModule().getDependencies(AppPage),
@@ -106,7 +106,7 @@ local function buildActionProp(p1, p2, p3, p4, p5, p6) --[[ Line: 51 ]]
 		if Success then
 			return Result, PropResultCategory.Literal
 		else
-			return function(_, _, _) --[[ Line: 177 ]]
+			return function(_, _, _)
 				-- upvalues: SduiLoggerModule (upval), SduiErrorsModule (upval), MapActionTypeToLuaResult (ref), CurrentComponentType (copy), CurrentParserName (copy)
 				SduiLoggerModule.reportCounter(SduiErrorsModule.SduiCounterName.ExecutedInvalidAction, {
 					name = MapActionTypeToLuaResult,

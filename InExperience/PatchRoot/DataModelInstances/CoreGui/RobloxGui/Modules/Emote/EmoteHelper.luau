@@ -13,13 +13,13 @@ local EmoteHelper = {
 	}
 }
 
-local function _(Connection) --[[ Line: 21 | Named "clearConnection" ]]
+local function _(Connection)
 	if Connection then
 		Connection:Disconnect()
 	end
 end
 
-function EmoteHelper.getAnyActiveDefaultChatTriggeredEmoteTrack(Player: Player) --[[ Line: 30 ]]
+function EmoteHelper.getAnyActiveDefaultChatTriggeredEmoteTrack(Player: Player)
 	-- upvalues: EmoteHelper (copy)
 	if not Player.Character then
 		return nil
@@ -42,13 +42,13 @@ function EmoteHelper.getAnyActiveDefaultChatTriggeredEmoteTrack(Player: Player) 
 	return nil
 end
 
-local function waitForEmoteEventInternal(Player, AnimationTrack, p1, Callback: () -> ()) --[[ Line: 63 ]]
+local function waitForEmoteEventInternal(Player, AnimationTrack, p1, Callback: () -> ())
 	-- upvalues: NewResult (copy), EmoteHelper (copy), waitForEmoteEventInternal (copy)
 	local BindableEvent = Instance.new("BindableEvent")
 	local ClockTime = os.clock()
 	local Flag = true
 	
-	local function _() --[[ Line: 72 ]]
+	local function _()
 		-- upvalues: Flag (ref), BindableEvent (copy)
 		if Flag and BindableEvent then
 			Flag = false
@@ -56,7 +56,7 @@ local function waitForEmoteEventInternal(Player, AnimationTrack, p1, Callback: (
 		end
 	end
 	
-	local StoppedConnection = AnimationTrack.Stopped:Connect(function() --[[ Line: 80 ]]
+	local StoppedConnection = AnimationTrack.Stopped:Connect(function()
 		-- upvalues: NewResult (upval), Flag (ref), BindableEvent (copy)
 		NewResult:trace("EmoteHelper.waitForEmoteEventInternal: Stopped")
 		
@@ -65,7 +65,7 @@ local function waitForEmoteEventInternal(Player, AnimationTrack, p1, Callback: (
 			BindableEvent:Fire()
 		end
 	end)
-	local KeyframeReachedConnection = AnimationTrack.KeyframeReached:Connect(function(KeyframeName) --[[ Line: 90 ]]
+	local KeyframeReachedConnection = AnimationTrack.KeyframeReached:Connect(function(KeyframeName)
 		-- upvalues: AnimationTrack (copy), p1 (copy), NewResult (upval), Flag (ref), BindableEvent (copy), ClockTime (ref)
 		if KeyframeName == "End" and (not AnimationTrack.Looped or p1) then
 			NewResult:trace("EmoteHelper.waitForEmoteEventInternal: KeyframeReached")
@@ -80,7 +80,7 @@ local function waitForEmoteEventInternal(Player, AnimationTrack, p1, Callback: (
 			ClockTime = os.clock()
 		end
 	end)
-	task.spawn(function() --[[ Line: 101 ]]
+	task.spawn(function()
 		-- upvalues: ClockTime (ref), Flag (ref), EmoteHelper (upval), NewResult (upval), BindableEvent (copy)
 		local Elapsed = os.clock() - ClockTime
 		while Flag and Elapsed < EmoteHelper.EMOTE_LOOP_WAIT_TIMEOUT do
@@ -119,10 +119,10 @@ local function waitForEmoteEventInternal(Player, AnimationTrack, p1, Callback: (
 	end
 end
 
-function EmoteHelper.createEmoteFinishEvent(p2, p3, p4) --[[ Line: 139 ]]
+function EmoteHelper.createEmoteFinishEvent(p2, p3, p4)
 	-- upvalues: waitForEmoteEventInternal (copy)
 	local BindableEvent = Instance.new("BindableEvent")
-	task.spawn(waitForEmoteEventInternal, p2, p3, p4, function() --[[ Line: 144 ]]
+	task.spawn(waitForEmoteEventInternal, p2, p3, p4, function()
 		-- upvalues: BindableEvent (copy)
 		BindableEvent:Fire()
 		BindableEvent:Destroy()

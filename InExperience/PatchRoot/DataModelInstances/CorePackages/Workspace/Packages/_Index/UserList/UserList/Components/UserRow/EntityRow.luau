@@ -8,10 +8,10 @@ local ContactRowModule = require(script.Parent.ContactRow)
 local FFlagUserListCtaIntegrationEnabled = require(Parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
 local FFlagAddStatusIndicatorToBaseRow = require(Parent.SharedFlags).FFlagAddStatusIndicatorToBaseRow
 
-return ReactModule.memo(function(p1) --[[ Line: 43 | Named "EntityRow" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), EnumsModule (copy), ContactRowModule (copy), UserRowModule (copy), FFlagUserListCtaIntegrationEnabled (copy), FFlagAddStatusIndicatorToBaseRow (copy)
 	local Entity = p1.entity
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 46 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), Entity (copy)
 		if p1.onActivated then
 			p1.onActivated(Entity.id, Entity.type)

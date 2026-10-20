@@ -8,16 +8,16 @@ local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags
 local FFlagCaptureServiceRetrieveCapturesSafeguardModule = require(Parent.Flags.FFlagCaptureServiceRetrieveCapturesSafeguard)
 local FFlagCapturesFetchUseSharedUtilityModule = require(Parent.Flags.FFlagCapturesFetchUseSharedUtility)
 
-local function _(p1) --[[ Line: 16 | Named "getSelectedCapture" ]]
+local function _(p1)
 	-- upvalues: ConstantsModule (copy)
 	local SelectedCaptureIndex = p1[ConstantsModule.RoduxKey].Carousel.SelectedCaptureIndex
 	
 	return if SelectedCaptureIndex == nil then nil else p1[ConstantsModule.RoduxKey].Captures[SelectedCaptureIndex]
 end
 
-return function() --[[ Line: 25 ]]
+return function()
 	-- upvalues: ConstantsModule (copy), FFlagCapturesFetchUseSharedUtilityModule (copy), FetchCapturesFromGalleryModule (copy), CapturesRetrievedModule (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureService (copy), FFlagCaptureServiceRetrieveCapturesSafeguardModule (copy)
-	return function(p1) --[[ Line: 26 ]]
+	return function(p1)
 		-- upvalues: ConstantsModule (upval), FFlagCapturesFetchUseSharedUtilityModule (upval), FetchCapturesFromGalleryModule (upval), CapturesRetrievedModule (upval), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (upval), CaptureService (upval), FFlagCaptureServiceRetrieveCapturesSafeguardModule (upval)
 		local State = p1:getState()
 		local SelectedCaptureIndex = State[ConstantsModule.RoduxKey].Carousel.SelectedCaptureIndex
@@ -29,7 +29,7 @@ return function() --[[ Line: 25 ]]
 			return
 		end
 		if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then
-			local Success, Result = pcall(function() --[[ Line: 34 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: CaptureService (upval)
 				local CapturesFromGalleryAsync, CapturesFromGalleryAsync2 = CaptureService:ReadCapturesFromGalleryAsync()
 				
@@ -53,7 +53,7 @@ return function() --[[ Line: 25 ]]
 			
 			return
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 54 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: CaptureService (upval)
 				return CaptureService:RetrieveCaptures()
 			end)

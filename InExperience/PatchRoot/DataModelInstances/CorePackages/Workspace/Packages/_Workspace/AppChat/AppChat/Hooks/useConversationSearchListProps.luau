@@ -24,12 +24,12 @@ local FFlagAppChatDerivedConversationLatestActivityModule = require(AppChat.Flag
 local t = {}
 local t1 = {}
 
-local function _(p1) --[[ Line: 32 | Named "toLuaDateTime" ]]
+local function _(p1)
 	-- upvalues: _DateTime (copy)
 	return if typeof(p1) == "DateTime" then _DateTime.fromUnixTimestamp(p1.UnixTimestamp) elseif type(p1) == "table" and typeof(p1.dateTime) == "DateTime" then p1 else nil
 end
 
-local function getInboxRowFields(Id) --[[ Line: 43 ]]
+local function getInboxRowFields(Id)
 	-- upvalues: GetConversationStoreModule (copy), GetConversationViewModelStoreModule (copy), _DateTime (copy)
 	if GetConversationStoreModule(false).getConversation(Id, false) == nil then
 		return nil, nil
@@ -41,7 +41,7 @@ local function getInboxRowFields(Id) --[[ Line: 43 ]]
 	end
 end
 
-local function buildSearchItemList(Items, p1, p2) --[[ Line: 57 ]]
+local function buildSearchItemList(Items, p1, p2)
 	-- upvalues: CryoModule (copy), GetOtherParticipantsModule (copy), _DateTime (copy), GetLastMessageContentModule (copy), FFlagAppChatDerivedConversationLatestActivityModule (copy), getInboxRowFields (copy), GetConversationTitleModule (copy), GetConversationTimestampModule (copy)
 	local JoinResults = {}
 	
@@ -71,19 +71,19 @@ local function buildSearchItemList(Items, p1, p2) --[[ Line: 57 ]]
 	return JoinResults
 end
 
-return function(p3, p4, p5, p6, Callback) --[[ Line: 103 | Named "useConversationSearchListProps" ]]
+return function(p3, p4, p5, p6, Callback)
 	-- upvalues: UseConversationSearchModule (copy), UseDispatchFunction (copy), UseStoreFunction (copy), ReactModule (copy), GetConversationStoreModule (copy), SearchIntroducedConversationIdsModule (copy), SignalsExperimentalModule (copy), ReceivedConversationModule (copy), ConversationRoduxSeedModule (copy), FetchLatestConversationDetailsModule (copy), t (copy), buildSearchItemList (copy), FFlagAppChatSearchSessionTelemetryModule (copy), UseChatSearchResultsTelemetryModule (copy), t1 (copy), RoactPaginator (copy)
 	local UseConversationSearchModuleResult = UseConversationSearchModule(p3, p4)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseStoreResult = UseStoreFunction()
-	local UseResult = ReactModule.useCallback(function(p7) --[[ Line: 119 ]]
+	local UseResult = ReactModule.useCallback(function(p7)
 		-- upvalues: GetConversationStoreModule (upval), UseStoreResult (copy), SearchIntroducedConversationIdsModule (upval), SignalsExperimentalModule (upval), UseDispatchResult (copy), ReceivedConversationModule (upval), ConversationRoduxSeedModule (upval), FetchLatestConversationDetailsModule (upval), Callback (copy)
 		local Conversation = GetConversationStoreModule(false).getConversation(p7, false)
 		local State = UseStoreResult:getState()
 		local NoConversation: boolean = Conversation ~= nil and State.ChatAppReducer.Conversations[p7] == nil
 		
 		if NoConversation or SearchIntroducedConversationIdsModule.has(p7) then
-			SignalsExperimentalModule.batch(function() --[[ Line: 129 ]]
+			SignalsExperimentalModule.batch(function()
 				-- upvalues: NoConversation (copy), UseDispatchResult (upval), ReceivedConversationModule (upval), ConversationRoduxSeedModule (upval), Conversation (copy), SearchIntroducedConversationIdsModule (upval), p7 (copy)
 				if NoConversation then
 					UseDispatchResult(ReceivedConversationModule(ConversationRoduxSeedModule.normalizeStoreConversationForRodux(Conversation)))
@@ -99,7 +99,7 @@ return function(p3, p4, p5, p6, Callback) --[[ Line: 103 | Named "useConversatio
 			Callback(p7)
 		end
 	end, { UseDispatchResult, Callback, UseStoreResult })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 150 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseConversationSearchModuleResult (copy), t (upval), buildSearchItemList (upval), p5 (copy), p6 (copy)
 		return if UseConversationSearchModuleResult.isActive then buildSearchItemList(UseConversationSearchModuleResult.items, p5, p6) else t
 	end, {
@@ -118,7 +118,7 @@ return function(p3, p4, p5, p6, Callback) --[[ Line: 103 | Named "useConversatio
 			conversationsIsFetching = UseConversationSearchModuleResult.isFetching,
 			isSearchAwaitingResults = UseConversationSearchModuleResult.isAwaitingResults,
 			oldestConversationIsFetched = UseConversationSearchModuleResult.nextCursor == nil,
-			[RoactPaginator.loadNext] = function() --[[ Line: 176 ]]
+			[RoactPaginator.loadNext] = function()
 				-- upvalues: UseConversationSearchModuleResult (copy)
 				UseConversationSearchModuleResult.loadNext()
 			end,

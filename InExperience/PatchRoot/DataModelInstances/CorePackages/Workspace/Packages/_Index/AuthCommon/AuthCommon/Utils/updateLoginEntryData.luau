@@ -2,7 +2,7 @@
 local AppStorageUtilitiesModule = require(AuthCommon.Utils.AppStorageUtilities)
 local CryoModule = require(AuthCommon.Parent.Cryo)
 
-return function(Key, p1): boolean --[[ Line: 7 | Named "updateLoginEntryData" ]]
+return function(Key, p1): boolean
 	-- upvalues: AppStorageUtilitiesModule (copy), CryoModule (copy)
 	local PreviousAccountsList = AppStorageUtilitiesModule.getPreviousAccountsList()
 	local PreviousAccounts = PreviousAccountsList[Key]

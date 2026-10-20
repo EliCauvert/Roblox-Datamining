@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("ForceChatBubbleColorCS", true)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("ForceChatBubbleColorCS")
 end

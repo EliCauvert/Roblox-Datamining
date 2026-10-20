@@ -9,12 +9,12 @@ local ReactRobloxModule = require(Parent.ReactRoblox)
 local BuildExperienceCompositionStyleSheetModule = require(BuildExperience.Components.BuildExperienceCompositionStyleSheet)
 local InstanceSelectionShellModule = require(script.Parent.InstanceSelectionShell)
 
-local function isTouchInput(): boolean --[[ Line: 15 ]]
+local function isTouchInput(): boolean
 	-- upvalues: UserInputService (copy)
 	return UserInputService.PreferredInput == Enum.PreferredInput.Touch
 end
 
-return function() --[[ Line: 19 | Named "mountInstanceSelection" ]]
+return function()
 	-- upvalues: ExperienceStateCaptureService (copy), CoreGui (copy), ReactRobloxModule (copy), ReactModule (copy), FoundationModule (copy), BuildExperienceCompositionStyleSheetModule (copy), InstanceSelectionShellModule (copy), isTouchInput (copy)
 	local ExperienceStateCaptureSelectionMode = Enum.ExperienceStateCaptureSelectionMode
 	

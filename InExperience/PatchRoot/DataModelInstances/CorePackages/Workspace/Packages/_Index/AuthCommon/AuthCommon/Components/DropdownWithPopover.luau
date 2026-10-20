@@ -20,11 +20,11 @@ local View = FoundationModule.View
 local SideModalDropdownButtonModule = require(AuthCommon.Components.SideModalDropdownButton)
 local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
 
-local function selectScreenSize(p1) --[[ Line: 52 ]]
+local function selectScreenSize(p1)
 	return p1.ScreenSize
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 56 | Named "DropdownWithPopover" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), UseSelectorFunction (copy), selectScreenSize (copy), ReactModule (copy), UseLastInputModeFunction (copy), ReactFocusNavigationModule (copy), View (copy), Text (copy), Popover (copy), SideModalDropdownButtonModule (copy), PopoverAlign (copy), PopoverSide (copy), AppFocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), ScrollView (copy), ScrollBarVisibility (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseSelectorResult = UseSelectorFunction(selectScreenSize)
@@ -36,7 +36,7 @@ return ReactModule.memo(function(p1) --[[ Line: 56 | Named "DropdownWithPopover"
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local IsFocus = UseLastInputModeFunction() == "Focus"
 	local UseFocusGuiObjectResult = ReactFocusNavigationModule.useFocusGuiObject()
-	ReactModule.useEffect(function() --[[ Line: 70 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult2_1 (copy)
 		if p1.value == nil then
 			UseStateResult2_1({})
@@ -50,14 +50,14 @@ return ReactModule.memo(function(p1) --[[ Line: 56 | Named "DropdownWithPopover"
 			end
 		end
 	end, { p1.value, p1.cellDatas })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 84 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseFocusGuiObjectResult (copy), IsFocus (copy), UseRefResult (copy), UseStateResult2 (copy)
 		if UseFocusGuiObjectResult and IsFocus then
 			UseFocusGuiObjectResult(UseRefResult.current)
 		end
 		UseStateResult2(false)
 	end, { UseRefResult.current, IsFocus, UseFocusGuiObjectResult })
-	ReactModule.useEffect(function() --[[ Line: 91 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseFocusGuiObjectResult (copy), p1 (copy), UseRefResult (copy)
 		if UseFocusGuiObjectResult and p1.focusOnMount then
 			UseFocusGuiObjectResult(UseRefResult.current)
@@ -67,7 +67,7 @@ return ReactModule.memo(function(p1) --[[ Line: 56 | Named "DropdownWithPopover"
 		UseFocusGuiObjectResult,
 		p1.focusOnMount
 	})
-	ReactModule.useEffect(function() --[[ Line: 97 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult (copy)
 		if p1.onDropdownOpened then
 			p1.onDropdownOpened(UseStateResult)
@@ -77,7 +77,7 @@ return ReactModule.memo(function(p1) --[[ Line: 56 | Named "DropdownWithPopover"
 	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y",
 		ref = UseRefResult,
-		onAbsoluteSizeChanged = function(Frame) --[[ Line: 152 ]]
+		onAbsoluteSizeChanged = function(Frame)
 			-- upvalues: UseStateResult2_2 (copy)
 			UseStateResult2_2(Frame.AbsoluteSize)
 		end,
@@ -88,7 +88,7 @@ return ReactModule.memo(function(p1) --[[ Line: 56 | Named "DropdownWithPopover"
 				Size = UDim2.new(0, UseStateResult3.X, 0, UseStateResult3.Y)
 			}, {
 				DropdownButton = ReactModule.createElement(SideModalDropdownButtonModule, {
-					onActivated = ReactModule.useCallback(function() --[[ Line: 145 ]]
+					onActivated = ReactModule.useCallback(function()
 						-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
 						UseStateResult2(not UseStateResult)
 					end, { UseStateResult }),
@@ -126,18 +126,18 @@ return ReactModule.memo(function(p1) --[[ Line: 56 | Named "DropdownWithPopover"
 							BaseMenu = ReactModule.createElement(View, {
 								tag = "auto-y col align-y-center gap-xsmall padding-xsmall",
 								Size = UDim2.new(0, UseStateResult3.X + UseTokensResult.Stroke.Standard * 2, 0, 0),
-								onAbsoluteSizeChanged = function(Frame) --[[ Line: 227 ]]
+								onAbsoluteSizeChanged = function(Frame)
 									-- upvalues: UseStateResult2_3 (copy)
 									UseStateResult2_3(Frame.AbsoluteSize)
 								end,
 								ref = UseRefResult1
-							}, (ReactModule.useMemo(function() --[[ Line: 104 ]]
+							}, (ReactModule.useMemo(function()
 								-- upvalues: p1 (copy), UseResult (copy), ReactModule (upval), View (upval), UseStateResult1 (copy), Text (upval)
 								local Elements = {}
 								
 								for _, cellData in ipairs(p1.cellDatas) do
 									table.insert(Elements, ReactModule.createElement(View, {
-										onActivated = function() --[[ Line: 107 ]]
+										onActivated = function()
 											-- upvalues: p1 (upval), cellData (copy), UseResult (upval)
 											p1.onChange(cellData.value)
 											UseResult()

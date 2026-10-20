@@ -8,7 +8,7 @@ local ControlState = FoundationModule.Enums.ControlState
 local IconSize = FoundationModule.Enums.IconSize
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1) --[[ Line: 30 | Named "SideModalDropdown" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ControlState (copy), View (copy), Text (copy), Icon (copy), IconSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
@@ -23,7 +23,7 @@ return function(p1) --[[ Line: 30 | Named "SideModalDropdown" ]]
 			["padding-xxsmall"] = true,
 			["bg-shift-100"] = true
 		},
-		onStateChanged = ReactModule.useCallback(function(Hover) --[[ Line: 33 ]]
+		onStateChanged = ReactModule.useCallback(function(Hover)
 			-- upvalues: ControlState (upval), UseStateResult2 (copy)
 			if Hover == ControlState.Hover then
 				UseStateResult2(true)

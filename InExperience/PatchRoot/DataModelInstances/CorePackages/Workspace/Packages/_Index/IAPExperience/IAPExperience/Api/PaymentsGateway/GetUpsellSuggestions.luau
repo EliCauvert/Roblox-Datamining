@@ -10,7 +10,7 @@ local FFlagEnableRobuxUpsellPlusButtonExperimentModule = require(Parent.Flags.FF
 local Text = require(Parent1.Http).Url.APIS_URL .. "payments-gateway/v1/products/get-upsell-suggestions"
 local EnableUpsellVirtualItemBadge = game:DefineFastFlag("EnableUpsellVirtualItemBadge", false)
 
-return function(Upsell_platform, User_robux_balance, Attempt_robux_amount, Max_packages, Item_product_id, Item_name, Universe_id, Analytic_id, Enabled) --[[ Line: 23 ]]
+return function(Upsell_platform, User_robux_balance, Attempt_robux_amount, Max_packages, Item_product_id, Item_name, Universe_id, Analytic_id, Enabled)
 	-- upvalues: EnableUpsellVirtualItemBadge (copy), LoggerModule (copy), IXPServiceWrapper (copy), FStringIXPLayerMobileUpsellModule (copy), FFlagEnableRobuxUpsellPlusButtonExperimentModule (copy), Text (copy), HttpRbxApiService (copy), HttpService (copy), GetUpsellSuggestionsTypesModule (copy)
 	local BadgingV2Variant = nil
 	
@@ -52,7 +52,7 @@ return function(Upsell_platform, User_robux_balance, Attempt_robux_amount, Max_p
 		url = Text,
 		data = Data
 	})
-	local Success, Result = pcall(function() --[[ Line: 82 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: HttpRbxApiService (upval), Text (upval), HttpService (upval), Data (copy)
 		return HttpRbxApiService:PostAsyncFullUrl(Text, HttpService:JSONEncode(Data))
 	end)

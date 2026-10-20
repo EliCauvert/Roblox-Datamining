@@ -121,17 +121,17 @@ for _, value in list do
 	t[value.id] = value
 end
 local VoiceCatalogModule = {
-	getDefaultVoiceId = function() --[[ Line: 53 ]]
+	getDefaultVoiceId = function()
 		-- upvalues: GetFIntMomentsTTSDefaultVoiceIdModule (copy)
 		return GetFIntMomentsTTSDefaultVoiceIdModule()
 	end,
-	getVoiceById = function(p1) --[[ Line: 57 ]]
+	getVoiceById = function(p1)
 		-- upvalues: t (copy)
 		return t[p1]
 	end
 }
 
-function VoiceCatalogModule.getOrderedVoices() --[[ Line: 62 ]]
+function VoiceCatalogModule.getOrderedVoices()
 	-- upvalues: VoiceCatalogModule (copy), t (copy), list (copy)
 	local DefaultVoiceId = VoiceCatalogModule.getDefaultVoiceId()
 	local List = {}

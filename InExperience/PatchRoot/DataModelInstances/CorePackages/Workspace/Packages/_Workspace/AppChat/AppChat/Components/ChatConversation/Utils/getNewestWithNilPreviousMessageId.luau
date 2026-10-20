@@ -1,6 +1,6 @@
 ﻿local GetDeepValueModule = require(script:FindFirstAncestor("AppChat").Utils.getDeepValue)
 
-return function(p1) --[[ Line: 4 ]]
+return function(p1)
 	-- upvalues: GetDeepValueModule (copy)
 	local Keys = GetDeepValueModule(p1, "keys")
 	local Values = GetDeepValueModule(p1, "values")

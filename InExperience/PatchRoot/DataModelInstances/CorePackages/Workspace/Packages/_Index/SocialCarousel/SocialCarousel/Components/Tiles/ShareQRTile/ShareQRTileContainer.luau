@@ -17,16 +17,16 @@ local FFlagCreateConnectionsHub = require(Parent.SharedFlags).FFlagCreateConnect
 local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p1) --[[ Line: 32 | Named "ShareQRTileContainer" ]]
+return function(p1)
 	-- upvalues: UseNavigationFunction (copy), UseDispatchFunction (copy), UseSocialCarouselAnalyticsModule (copy), UseSocialCarouselContextModule (copy), ReactModule (copy), FFlagSocialCarouselShareQRBackToAddFriends (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), FFlagCreateConnectionsHub (copy), AppPage (copy), NavigateDownFunction (copy), ConstantsModule (copy), ShareQRTileModule (copy), CryoModule (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseSocialCarouselAnalyticsModuleResult = UseSocialCarouselAnalyticsModule()
 	local UseSocialCarouselContextModuleResult = UseSocialCarouselContextModule()
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 39 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseSocialCarouselAnalyticsModuleResult (copy), p1 (copy), FFlagSocialCarouselShareQRBackToAddFriends (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval), FFlagCreateConnectionsHub (upval), UseNavigationResult (copy), AppPage (upval), NavigateDownFunction (upval), UseSocialCarouselContextModuleResult (copy), ConstantsModule (upval)
 		UseSocialCarouselAnalyticsModuleResult.shareQRPressed(p1.index)
-		local OnClose = if FFlagSocialCarouselShareQRBackToAddFriends then function() --[[ Line: 43 ]]
+		local OnClose = if FFlagSocialCarouselShareQRBackToAddFriends then function()
 			-- upvalues: FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateBackFunction (upval), FFlagCreateConnectionsHub (upval), UseNavigationResult (upval), AppPage (upval), NavigateDownFunction (upval)
 			if FFlagSignalsNavP3Dispatch then
 				NavigationCommands.back(true)
@@ -60,7 +60,7 @@ return function(p1) --[[ Line: 32 | Named "ShareQRTileContainer" ]]
 		UseSocialCarouselAnalyticsModuleResult.shareQRPressed,
 		UseSocialCarouselContextModuleResult.navigateToQRCodePage
 	})
-	ReactModule.useEffect(function() --[[ Line: 76 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSocialCarouselContextModuleResult (copy), ConstantsModule (upval)
 		UseSocialCarouselContextModuleResult.onSuccessfulRender(ConstantsModule.ANALYTICS.UI_LOADING_EVENTS.SHARE_QR)
 	end, {})

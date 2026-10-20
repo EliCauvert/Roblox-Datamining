@@ -13,9 +13,9 @@ local BorderState = {
 local AuthStatefulRoundCornerBorder = RoactModule.PureComponent:extend("AuthStatefulRoundCornerBorder")
 AuthStatefulRoundCornerBorder.defaultProps = { borderState = BorderState.Default }
 
-function AuthStatefulRoundCornerBorder.render(p1) --[[ Line: 27 ]]
+function AuthStatefulRoundCornerBorder.render(p1)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy), BorderState (copy), ImageSetLabel (copy), GetImageDataFunction (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 28 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: p1 (copy), RoactModule (upval), BorderState (upval), ImageSetLabel (upval), GetImageDataFunction (upval)
 		local Size = p1.props.size
 		local BorderState1 = p1.props.borderState

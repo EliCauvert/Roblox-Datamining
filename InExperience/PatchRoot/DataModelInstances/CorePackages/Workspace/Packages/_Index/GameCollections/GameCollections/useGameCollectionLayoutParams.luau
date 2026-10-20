@@ -12,7 +12,7 @@ local config = {
 	[GameTileLayoutType.Narrow] = CollectionItemSize.Small
 }
 
-return function(p1, p2, p3, p4, p5) --[[ Line: 29 | Named "useGameCollectionLayoutParams" ]]
+return function(p1, p2, p3, p4, p5)
 	-- upvalues: config (copy), CollectionItemSize (copy), UseCollectionLayoutParamsFunction (copy), GameCollectionLayoutCalculatorsModule (copy)
 	return UseCollectionLayoutParamsFunction(config[p1] or CollectionItemSize.Small, p2, p3, p4, GameCollectionLayoutCalculatorsModule, p5)
 end

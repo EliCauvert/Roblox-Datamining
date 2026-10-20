@@ -1,29 +1,29 @@
 ﻿local DebugLuaArgCheck = game:DefineFastFlag("DebugLuaArgCheck", false)
 local IsStudio = game:GetService("RunService"):IsStudio()
 local ArgCheckModule = {
-	isEnabled = function() --[[ Line: 7 ]]
+	isEnabled = function()
 		-- upvalues: DebugLuaArgCheck (copy), IsStudio (copy)
 		return DebugLuaArgCheck or (_G.__TESTEZ_RUNNING_TEST__ or IsStudio)
 	end
 }
 
-local function _(p1, p2) --[[ Line: 11 | Named "assert_" ]]
+local function _(p1, p2)
 	-- upvalues: ArgCheckModule (copy)
 	if ArgCheckModule.isEnabled() then
 		assert(p1, p2)
 	end
 end
 
-local function stubArgCheckFunction(): boolean --[[ Line: 17 ]]
+local function stubArgCheckFunction(): boolean
 	return true
 end
 
-function ArgCheckModule.wrap(p1) --[[ Line: 43 ]]
+function ArgCheckModule.wrap(p1)
 	-- upvalues: ArgCheckModule (copy), stubArgCheckFunction (copy)
 	return if ArgCheckModule.isEnabled() then p1 else stubArgCheckFunction
 end
 
-function ArgCheckModule.isNonNegativeNumber(p1: number, p2): number --[[ Line: 47 ]]
+function ArgCheckModule.isNonNegativeNumber(p1: number, p2): number
 	-- upvalues: ArgCheckModule (copy)
 	local v1: boolean = typeof(p1) == "number" and p1 >= 0
 	local Formatted = string.format("expects %s to be a non-negative number!", p2)
@@ -34,7 +34,7 @@ function ArgCheckModule.isNonNegativeNumber(p1: number, p2): number --[[ Line: 4
 	return p1
 end
 
-function ArgCheckModule.isType(p1, ValueType, p2) --[[ Line: 54 ]]
+function ArgCheckModule.isType(p1, ValueType, p2)
 	-- upvalues: ArgCheckModule (copy)
 	local IsValueTypeMatch = typeof(p1) == ValueType
 	local Formatted = string.format("expects %s to be a %s! it was: %s", p2, ValueType, (typeof(p1)))
@@ -45,7 +45,7 @@ function ArgCheckModule.isType(p1, ValueType, p2) --[[ Line: 54 ]]
 	return p1
 end
 
-function ArgCheckModule.isInTypes(p1, List, p2) --[[ Line: 63 ]]
+function ArgCheckModule.isInTypes(p1, List, p2)
 	-- upvalues: ArgCheckModule (copy)
 	for _, value in ipairs(List) do
 		if typeof(p1) == value then
@@ -60,7 +60,7 @@ function ArgCheckModule.isInTypes(p1, List, p2) --[[ Line: 63 ]]
 	return p1
 end
 
-function ArgCheckModule.isTypeOrNil(p3, ValueType, p4) --[[ Line: 75 ]]
+function ArgCheckModule.isTypeOrNil(p3, ValueType, p4)
 	-- upvalues: ArgCheckModule (copy)
 	local v1: boolean = p3 == nil or typeof(p3) == ValueType
 	local Formatted = string.format("expects %s to be a %s! it was: %s", p4, ValueType, (typeof(p3)))
@@ -71,7 +71,7 @@ function ArgCheckModule.isTypeOrNil(p3, ValueType, p4) --[[ Line: 75 ]]
 	return p3
 end
 
-function ArgCheckModule.isNotNil(p3, p4) --[[ Line: 84 ]]
+function ArgCheckModule.isNotNil(p3, p4)
 	-- upvalues: ArgCheckModule (copy)
 	local v1 = p3 ~= nil
 	local Formatted = string.format("expects %s to be not nil!", p4)
@@ -82,7 +82,7 @@ function ArgCheckModule.isNotNil(p3, p4) --[[ Line: 84 ]]
 	return p3
 end
 
-function ArgCheckModule.isNonEmptyString(p3, p4) --[[ Line: 90 ]]
+function ArgCheckModule.isNonEmptyString(p3, p4)
 	-- upvalues: ArgCheckModule (copy)
 	local v1: boolean = typeof(p3) == "string" and p3 ~= ""
 	local Formatted = string.format("expects %s to be a non-empty string!", p4)
@@ -93,7 +93,7 @@ function ArgCheckModule.isNonEmptyString(p3, p4) --[[ Line: 90 ]]
 	return p3
 end
 
-function ArgCheckModule.isEqual(p3, p4, p5) --[[ Line: 96 ]]
+function ArgCheckModule.isEqual(p3, p4, p5)
 	-- upvalues: ArgCheckModule (copy)
 	local v1 = p3 == p4
 	local Formatted = string.format("expects %s to equal %s! it was: %s", p5, tostring(p4), (tostring(p3)))
@@ -104,7 +104,7 @@ function ArgCheckModule.isEqual(p3, p4, p5) --[[ Line: 96 ]]
 	return p3
 end
 
-function ArgCheckModule.representsInteger(p3, p4) --[[ Line: 106 ]]
+function ArgCheckModule.representsInteger(p3, p4)
 	-- upvalues: ArgCheckModule (copy)
 	local Number: number? = tonumber(p3)
 	local HasNumber = Number ~= nil
@@ -122,7 +122,7 @@ function ArgCheckModule.representsInteger(p3, p4) --[[ Line: 106 ]]
 	return p3
 end
 
-function ArgCheckModule.matchesInterface(List, Entry, Text, p3) --[[ Line: 137 ]]
+function ArgCheckModule.matchesInterface(List, Entry, Text, p3)
 	-- upvalues: ArgCheckModule (copy)
 	if ArgCheckModule.isEnabled() then
 		local config = {
@@ -172,7 +172,7 @@ function ArgCheckModule.matchesInterface(List, Entry, Text, p3) --[[ Line: 137 ]
 	return List
 end
 
-function ArgCheckModule.assert(...) --[[ Line: 179 ]]
+function ArgCheckModule.assert(...)
 	-- upvalues: ArgCheckModule (copy)
 	local v1, v2 = ...
 	

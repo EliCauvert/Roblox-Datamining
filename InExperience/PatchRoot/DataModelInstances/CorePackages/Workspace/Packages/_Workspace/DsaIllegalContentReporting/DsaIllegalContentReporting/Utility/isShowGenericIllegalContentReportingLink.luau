@@ -5,7 +5,7 @@ local CountriesWithGenericIllegalContentReporting2 = game:DefineFastString("Coun
 local Flag = false
 
 if EnableGenericIllegalContentReporting3 then
-	task.spawn(function() --[[ Line: 18 ]]
+	task.spawn(function()
 		-- upvalues: Players (copy), LocalizationService (copy), CountriesWithGenericIllegalContentReporting2 (copy), Flag (ref)
 		local LocalPlayer = Players.LocalPlayer
 		while not LocalPlayer do
@@ -23,7 +23,7 @@ if EnableGenericIllegalContentReporting3 then
 		end
 	end)
 end
-return function() --[[ Line: 42 | Named "isShowGenericIllegalContentReportingLink" ]]
+return function()
 	-- upvalues: EnableGenericIllegalContentReporting3 (copy), Flag (ref)
 	return EnableGenericIllegalContentReporting3 and Flag
 end

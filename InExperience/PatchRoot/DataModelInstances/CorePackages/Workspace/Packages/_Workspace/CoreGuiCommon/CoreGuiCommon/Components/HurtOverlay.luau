@@ -32,16 +32,16 @@ local config = {
 	})
 }
 
-function HurtOverlay(p1) --[[ Line: 51 ]]
+function HurtOverlay(p1)
 	-- upvalues: StarterGui (copy), MotionModule (copy), config (copy), ReactModule (copy), SignalsReactModule (copy), GetLocalHumanoidStore (copy), SignalsModule (copy), ConstantsModule (copy), FFlagUseNewHurtOverlayImage (copy), _Color3 (copy), CachedPolicyServiceModule (copy), _Color3_1 (copy), Image (copy), FFlagUseNewHurtOverlayAnimation (copy)
 	local MockStarterGui = p1.mockStarterGui or StarterGui
 	local UseMotionResult, UseMotionResult2 = MotionModule.useMotion(config.hideOverlay)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(MockStarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.Health))
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetLocalHumanoidStore)
 	local UseRefResult = ReactModule.useRef(UseSignalStateResult.getHealthValue(false))
-	ReactModule.useEffect(function() --[[ Line: 60 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SignalsModule (upval), UseSignalStateResult (copy), UseRefResult (copy), ConstantsModule (upval), UseMotionResult2 (copy), config (upval), MockStarterGui (copy), UseStateResult2 (copy)
-		local Effect = SignalsModule.createEffect(function(p2) --[[ Line: 61 ]]
+		local Effect = SignalsModule.createEffect(function(p2)
 			-- upvalues: UseSignalStateResult (upval), UseRefResult (upval), ConstantsModule (upval), UseMotionResult2 (upval), config (upval)
 			local HealthValue = UseSignalStateResult.getHealthValue(p2)
 			local Current = UseRefResult.current
@@ -50,7 +50,7 @@ function HurtOverlay(p1) --[[ Line: 51 ]]
 			if not HealthValue.health or not HealthValue.maxHealth or not Current.health or HealthValue.isDead and Current.isDead then return end
 			if (Current.health - HealthValue.health) / HealthValue.maxHealth >= ConstantsModule.HealthPercentForOverlay then
 				UseMotionResult2(config.showOverlay, {
-					onAnimationComplete = function(Enabled) --[[ Line: 79 ]]
+					onAnimationComplete = function(Enabled)
 						-- upvalues: UseMotionResult2 (upval), config (upval)
 						if Enabled == true then
 							UseMotionResult2(config.hideOverlay)
@@ -61,14 +61,14 @@ function HurtOverlay(p1) --[[ Line: 51 ]]
 				return
 			end
 		end)
-		local CoreGuiChangedSignalConnection = MockStarterGui.CoreGuiChangedSignal:Connect(function(CoreGuiType, Enabled) --[[ Line: 88 ]]
+		local CoreGuiChangedSignalConnection = MockStarterGui.CoreGuiChangedSignal:Connect(function(CoreGuiType, Enabled)
 			-- upvalues: UseStateResult2 (upval)
 			if CoreGuiType == Enum.CoreGuiType.Health or CoreGuiType == Enum.CoreGuiType.All then
 				UseStateResult2(Enabled)
 			end
 		end)
 		
-		return function() --[[ Line: 95 ]]
+		return function()
 			-- upvalues: Effect (copy), CoreGuiChangedSignalConnection (copy)
 			Effect()
 			CoreGuiChangedSignalConnection:Disconnect()
@@ -81,7 +81,7 @@ function HurtOverlay(p1) --[[ Line: 51 ]]
 		tag = "anchor-center-center position-center-center",
 		testId = "hurt-overlay",
 		Image = HurtOverlayAssetPng,
-		imageStyle = UseMotionResult.transparency:map(function(Transparency) --[[ Line: 114 ]]
+		imageStyle = UseMotionResult.transparency:map(function(Transparency)
 			-- upvalues: Color (ref)
 			return { Color3 = Color, Transparency = Transparency }
 		end),

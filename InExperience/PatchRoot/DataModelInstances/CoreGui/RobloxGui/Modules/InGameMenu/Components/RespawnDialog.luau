@@ -9,27 +9,27 @@ local ConfirmationDialogModule = require(script.Parent.ConfirmationDialog)
 local SendAnalyticsModule = require(Parent.Utility.SendAnalytics)
 local ConstantsModule = require(Parent.Resources.Constants)
 
-return InGameMenuDependenciesModule.RoactRodux.UNSTABLE_connect2(function(p1, _) --[[ Line: 55 ]]
+return InGameMenuDependenciesModule.RoactRodux.UNSTABLE_connect2(function(p1, _)
 	return {
 		isRespawning = p1.respawn.dialogOpen,
 		inputType = p1.displayOptions.inputType
 	}
-end, function(Callback) --[[ Line: 60 ]]
+end, function(Callback)
 	-- upvalues: SetRespawningModule (copy), SendAnalyticsModule (copy), ConstantsModule (copy), RespawnPlayerModule (copy)
 	return {
-		onCancel = function() --[[ Line: 62 ]]
+		onCancel = function()
 			-- upvalues: Callback (copy), SetRespawningModule (upval), SendAnalyticsModule (upval), ConstantsModule (upval)
 			Callback(SetRespawningModule(false))
 			SendAnalyticsModule(ConstantsModule.AnalyticsInGameMenuName, ConstantsModule.AnalyticsRespawnCharacterName, { confirmed = ConstantsModule.AnalyticsCancelledName })
 		end,
-		onConfirm = function() --[[ Line: 70 ]]
+		onConfirm = function()
 			-- upvalues: Callback (copy), RespawnPlayerModule (upval)
 			Callback(RespawnPlayerModule)
 		end
 	}
-end)(function(p1) --[[ Line: 22 | Named "RespawnDialog" ]]
+end)(function(p1)
 	-- upvalues: Roact (copy), IGMRespawnControllerBarModule (copy), WithLocalizationModule (copy), ConfirmationDialogModule (copy)
-	local function _() --[[ Line: 23 | Named "renderRespawnDialogControllerBar" ]]
+	local function _()
 		-- upvalues: Roact (upval), IGMRespawnControllerBarModule (upval), p1 (copy)
 		return Roact.createElement(IGMRespawnControllerBarModule, { inputType = p1.inputType })
 	end
@@ -39,7 +39,7 @@ end)(function(p1) --[[ Line: 22 | Named "RespawnDialog" ]]
 		bodyText = "CoreScripts.InGameMenu.RespawnCharacterDialogBody",
 		confirmText = "CoreScripts.InGameMenu.RespawnCharacterDialogConfirm",
 		cancelText = "CoreScripts.InGameMenu.Cancel"
-	})(function(p2) --[[ Line: 34 ]]
+	})(function(p2)
 		-- upvalues: Roact (upval), p1 (copy), IGMRespawnControllerBarModule (upval), ConfirmationDialogModule (upval)
 		return Roact.createFragment({
 			RespawnDialogControllerBar = p1.isRespawning and Roact.createElement(IGMRespawnControllerBarModule, { inputType = p1.inputType }) or nil,

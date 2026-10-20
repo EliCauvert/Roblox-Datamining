@@ -10,7 +10,7 @@ local config = {
 	isTextBoxFocused = false
 }
 
-local function reset(p1) --[[ Line: 31 ]]
+local function reset(p1)
 	-- upvalues: Dictionary (copy), config (copy)
 	local ClockTime = os.clock()
 	
@@ -21,7 +21,7 @@ local function reset(p1) --[[ Line: 31 ]]
 	})
 end
 
-local function resetTextOnly(p1) --[[ Line: 41 ]]
+local function resetTextOnly(p1)
 	-- upvalues: Dictionary (copy)
 	return Dictionary.join(p1, {
 		isTextBoxFocused = p1.isTextBoxFocused,
@@ -30,23 +30,23 @@ local function resetTextOnly(p1) --[[ Line: 41 ]]
 end
 
 return require(Parent.Rodux).createReducer(config, {
-	[require(Actions.ChatInputBarConfigurationEnabled).name] = function(p1, p2) --[[ Line: 51 ]]
+	[require(Actions.ChatInputBarConfigurationEnabled).name] = function(p1, p2)
 		-- upvalues: reset (copy)
 		return if p2.enabled then reset(p1) else p1
 	end,
-	[require(Actions.ChatTopBarButtonActivated).name] = function(p1, p2) --[[ Line: 59 ]]
+	[require(Actions.ChatTopBarButtonActivated).name] = function(p1, p2)
 		-- upvalues: reset (copy)
 		return if p2.isVisible then reset(p1) else p1
 	end,
-	[require(Actions.SetCoreGuiEnabledChanged).name] = function(p1, p2) --[[ Line: 67 ]]
+	[require(Actions.SetCoreGuiEnabledChanged).name] = function(p1, p2)
 		-- upvalues: reset (copy)
 		return if p2.enabled then reset(p1) else p1
 	end,
-	[require(Parent.ExpChatShared).Actions.ClientAppLoaded.name] = function(p1, _) --[[ Line: 75 ]]
+	[require(Parent.ExpChatShared).Actions.ClientAppLoaded.name] = function(p1, _)
 		-- upvalues: reset (copy)
 		return reset(p1)
 	end,
-	[require(ExpChat.Actions.UserInteraction).name] = function(p1, p2) --[[ Line: 79 ]]
+	[require(ExpChat.Actions.UserInteraction).name] = function(p1, p2)
 		-- upvalues: Dictionary (copy), config (copy), reset (copy)
 		if p2.interaction == "focus" then
 			local ClockTime = os.clock()
@@ -68,7 +68,7 @@ return require(Parent.Rodux).createReducer(config, {
 			return reset(p1)
 		end
 	end,
-	[require(Actions.IncomingMessageReceived).name] = function(p1, _) --[[ Line: 93 ]]
+	[require(Actions.IncomingMessageReceived).name] = function(p1, _)
 		-- upvalues: resetTextOnly (copy)
 		return resetTextOnly(p1)
 	end

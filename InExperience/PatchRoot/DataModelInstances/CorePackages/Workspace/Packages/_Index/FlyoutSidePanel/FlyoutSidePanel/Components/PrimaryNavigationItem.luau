@@ -11,7 +11,7 @@ local ConstantsModule = require(script.Parent.Parent.Constants)
 local GetTestIdFunction = require(Parent.RoactUtils).getTestId
 local FFlagLuaAppAddTestIdsForArrow = require(Parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
 
-return function(p1) --[[ Line: 24 | Named "PrimaryNavigationItem" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FoundationModule (copy), FFlagLuaAppAddTestIdsForArrow (copy), GetTestIdFunction (copy), Icon (copy), IconSize (copy), Text (copy), StatusIndicator (copy), StatusIndicatorVariant (copy), ConstantsModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	

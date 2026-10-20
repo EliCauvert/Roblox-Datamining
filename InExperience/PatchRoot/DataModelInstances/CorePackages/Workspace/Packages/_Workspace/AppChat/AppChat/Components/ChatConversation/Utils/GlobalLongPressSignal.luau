@@ -2,7 +2,7 @@
 
 return {
 	dismissed = NewResult,
-	dismiss = function() --[[ Line: 14 ]]
+	dismiss = function()
 		-- upvalues: NewResult (copy)
 		NewResult:fire()
 	end

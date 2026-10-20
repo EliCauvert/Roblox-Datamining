@@ -6,11 +6,11 @@ local EventTypes = Enums.EventTypes
 local EventNamesModule = require(script.Parent.EventNames)
 local FFlagLuaAppSearchPeopleUnifiedSchemaFields = require(Parent.SharedFlags).FFlagLuaAppSearchPeopleUnifiedSchemaFields
 
-local function concatToString(List): string --[[ Line: 17 ]]
+local function concatToString(List): string
 	return if List then table.concat(List, ",") else ""
 end
 
-local function acceptAnyValue(p1) --[[ Line: 21 ]]
+local function acceptAnyValue(p1)
 	return p1
 end
 

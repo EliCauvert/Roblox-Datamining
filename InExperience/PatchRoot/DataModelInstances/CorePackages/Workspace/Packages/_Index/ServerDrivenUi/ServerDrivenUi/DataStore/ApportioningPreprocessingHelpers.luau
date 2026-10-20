@@ -1,12 +1,12 @@
 ﻿local FlaggedMutedErrorFunction = require(script:FindFirstAncestor("ServerDrivenUi").Parent.Loggers).flaggedMutedError
 
-local function v0(p1, Key, Capacity, SortIndex) --[[ Line: 11 ]]
+local function v0(p1, Key, Capacity, SortIndex)
 	p1[Key] = {
 		gridApportioningMetadata = { { sortIndex = SortIndex, capacity = Capacity } }
 	}
 end
 
-local function v1(p1, Capacity, SortIndex) --[[ Line: 22 ]]
+local function v1(p1, Capacity, SortIndex)
 	-- upvalues: FlaggedMutedErrorFunction (copy)
 	for i, value in p1.gridApportioningMetadata do
 		if value.sortIndex == SortIndex then
@@ -21,7 +21,7 @@ local function v1(p1, Capacity, SortIndex) --[[ Line: 22 ]]
 end
 
 return {
-	addToApportioningData = function(p2, p3, Capacity, SortIndex) --[[ Line: 43 ]]
+	addToApportioningData = function(p2, p3, Capacity, SortIndex)
 		-- upvalues: v1 (copy), v0 (copy)
 		local v1 = p2[p3]
 		
@@ -33,7 +33,7 @@ return {
 			v0(p2, p3, Capacity, SortIndex)
 		end
 	end,
-	populateStartingItemIndices = function(List) --[[ Line: 53 ]]
+	populateStartingItemIndices = function(List)
 		for _, value in List do
 			local NewCapacity = 1
 			

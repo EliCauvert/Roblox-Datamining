@@ -19,19 +19,19 @@ FillCircle.validateProps = TModule.strictInterface({
 	BackgroundColor = TModule.Color3
 })
 
-local function _(p1: number): number --[[ Line: 36 | Named "getFillRingZIndex" ]]
+local function _(p1: number): number
 	return if p1 > 0.75 then 8 elseif p1 > 0.5 then 6 elseif p1 > 0.25 then 4 elseif p1 > 0 then 2 else 0
 end
 
-local _ = function(p1, p2: number, p3: number): number --[[ Line: 49 | Named "linearTween" ]]
+local _ = function(p1, p2: number, p3: number): number
 	return (p1 - p2 / 30) / ((p3 - p2) / 30)
 end
 
-local _ = function(p1, p2: number, p3: number): boolean --[[ Line: 54 | Named "isBetweenFrames" ]]
+local _ = function(p1, p2: number, p3: number): boolean
 	return p2 / 30 <= p1 and p1 <= p3 / 30
 end
 
-local function largerCircleAnimation(p1: number, p2, p3, Callback: () -> ()) --[[ Line: 58 ]]
+local function largerCircleAnimation(p1: number, p2, p3, Callback: () -> ())
 	if p3 then
 		p1 = 0.26666666666666666 - p1
 	end
@@ -58,7 +58,7 @@ local function largerCircleAnimation(p1: number, p2, p3, Callback: () -> ()) --[
 	end
 end
 
-local function popCircleAnimation(p1: number, p2, _, Callback: () -> ()) --[[ Line: 86 ]]
+local function popCircleAnimation(p1: number, p2, _, Callback: () -> ())
 	if p1 >= 0 and p1 <= 0.1 then
 		local XOffset = 20 + 4 * ((p1 - 0) / 0.1)
 		p2.size(UDim2.new(0, XOffset, 0, XOffset))
@@ -76,7 +76,7 @@ local function popCircleAnimation(p1: number, p2, _, Callback: () -> ()) --[[ Li
 	end
 end
 
-local function shakeCircleAnimation(p1: number, p2, _, Callback: () -> ()) --[[ Line: 107 ]]
+local function shakeCircleAnimation(p1: number, p2, _, Callback: () -> ())
 	if p1 >= 0 and p1 <= 0.1 then
 		p2.positionOffset(UDim2.new(0, -4 * ((p1 - 0) / 0.1), 0, 0))
 		
@@ -112,10 +112,10 @@ local function shakeCircleAnimation(p1: number, p2, _, Callback: () -> ()) --[[ 
 	end
 end
 
-function FillCircle.init(p1) --[[ Line: 142 ]]
+function FillCircle.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.sizeBinding, p1.sizeBindingUpdate = RoactModule.createBinding(UDim2.new(0, 16, 0, 16))
-	p1.largerSizeBinding = p1.sizeBinding:map(function(p2): UDim2 --[[ Line: 145 ]]
+	p1.largerSizeBinding = p1.sizeBinding:map(function(p2): UDim2
 		return p2 + UDim2.new(0, 2, 0, 2)
 	end)
 	p1.positionOffsetBinding, p1.positionOffsetBindingUpdate = RoactModule.createBinding(UDim2.new(0, 0, 0, 0))
@@ -129,7 +129,7 @@ function FillCircle.init(p1) --[[ Line: 142 ]]
 	p1.renderSteppedConnection = nil
 end
 
-function FillCircle.render(p1) --[[ Line: 161 ]]
+function FillCircle.render(p1)
 	-- upvalues: _Color3_2 (copy), _Color3_1 (copy), RoactModule (copy), _Color3 (copy), ImageSetLabel (copy), ComponentAssetsCircle29 (copy)
 	local Props = p1.props
 	local _Color3_2_1 = Props.fillFraction >= 1 and _Color3_2 or _Color3_1
@@ -243,7 +243,7 @@ function FillCircle.render(p1) --[[ Line: 161 ]]
 	})
 end
 
-function FillCircle.didUpdate(p1, p2, _) --[[ Line: 284 ]]
+function FillCircle.didUpdate(p1, p2, _)
 	-- upvalues: largerCircleAnimation (copy), popCircleAnimation (copy), shakeCircleAnimation (copy)
 	local IsFillFractionAbove = p1.props.fillFraction >= p1.props.largerCircleFraction
 	
@@ -262,19 +262,19 @@ function FillCircle.didUpdate(p1, p2, _) --[[ Line: 284 ]]
 	end
 end
 
-function FillCircle.playAnimation(p1, AnimationFunction, ReverseAnimation) --[[ Line: 304 ]]
+function FillCircle.playAnimation(p1, AnimationFunction, ReverseAnimation)
 	-- upvalues: RunService (copy)
 	if p1.animationFunction then
-		p1.animationFunction(100, p1.updateBindings, p1.reverseAnimation, function() --[[ Line: 307 ]] end)
+		p1.animationFunction(100, p1.updateBindings, p1.reverseAnimation, function() end)
 	end
 	p1.animationStartTime = tick()
 	p1.animationFunction = AnimationFunction
 	p1.reverseAnimation = ReverseAnimation
 	
 	if not p1.renderSteppedConnection then
-		p1.renderSteppedConnection = RunService.RenderStepped:Connect(function() --[[ Line: 313 ]]
+		p1.renderSteppedConnection = RunService.RenderStepped:Connect(function()
 			-- upvalues: p1 (copy)
-			p1.animationFunction(tick() - p1.animationStartTime, p1.updateBindings, p1.reverseAnimation, function() --[[ Line: 318 ]]
+			p1.animationFunction(tick() - p1.animationStartTime, p1.updateBindings, p1.reverseAnimation, function()
 				-- upvalues: p1 (upval)
 				p1:stopAnimation()
 			end)
@@ -282,14 +282,14 @@ function FillCircle.playAnimation(p1, AnimationFunction, ReverseAnimation) --[[ 
 	end
 end
 
-function FillCircle.stopAnimation(p1) --[[ Line: 326 ]]
+function FillCircle.stopAnimation(p1)
 	if p1.renderSteppedConnection then
 		p1.renderSteppedConnection:Disconnect()
 		p1.renderSteppedConnection = nil
 	end
 end
 
-function FillCircle.willUnmount(p1) --[[ Line: 333 ]]
+function FillCircle.willUnmount(p1)
 	p1:stopAnimation()
 end
 

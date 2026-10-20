@@ -5,7 +5,7 @@ local ShallowEqualFunction = require(Parent.Dash).shallowEqual
 local CommentCollectionTypesModule = require(Moments.Components.Comments.GetCommentCollectionStore.CommentCollectionTypes)
 local _ = require(script.Parent.CommentRowTypes)
 
-local function reusePreviousRows(List, List1) --[[ Line: 15 ]]
+local function reusePreviousRows(List, List1)
 	-- upvalues: ShallowEqualFunction (copy)
 	local t = {}
 	
@@ -24,7 +24,7 @@ local function reusePreviousRows(List, List1) --[[ Line: 15 ]]
 	return if v1 then List else List1
 end
 
-return function(p1, Callback, p2, p3) --[[ Line: 31 | Named "buildCommentRows" ]]
+return function(p1, Callback, p2, p3)
 	-- upvalues: CommentCollectionTypesModule (copy), reusePreviousRows (copy)
 	local Buffer = table.create(#p1.orderedCommentIds + (if p1.pendingSubmission == nil then 0 else 1))
 	local PendingSubmission = p1.pendingSubmission

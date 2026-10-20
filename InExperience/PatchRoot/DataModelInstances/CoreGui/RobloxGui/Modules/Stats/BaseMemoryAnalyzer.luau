@@ -10,7 +10,7 @@ local _UDim2_3 = UDim2.new(1, -100, 0, 0)
 local _UDim2_4 = UDim2.new(0, 100, 0, 20)
 local _ = game:GetService("CoreGui")
 
-local function _(Label) --[[ Line: 36 | Named "__StyleAndSizeButton" ]]
+local function _(Label)
 	-- upvalues: _Color3_2 (copy), _Color3_4 (copy), _UDim2_1 (copy), _UDim2_2 (copy)
 	Label.TextXAlignment = Enum.TextXAlignment.Center
 	Label.TextColor3 = _Color3_2
@@ -21,7 +21,7 @@ local function _(Label) --[[ Line: 36 | Named "__StyleAndSizeButton" ]]
 	Label.Size = _UDim2_2
 end
 
-local _ = function(Label) --[[ Line: 47 | Named "__StyleAndSizeLabel" ]]
+local _ = function(Label)
 	-- upvalues: _Color3_2 (copy)
 	Label.TextXAlignment = Enum.TextXAlignment.Left
 	Label.TextColor3 = _Color3_2
@@ -30,7 +30,7 @@ local _ = function(Label) --[[ Line: 47 | Named "__StyleAndSizeLabel" ]]
 	Label.Size = UDim2.new(1, -10, 1, 0)
 end
 
-local _ = function(p1) --[[ Line: 56 | Named "__StyleRowCellFrame" ]]
+local _ = function(p1)
 	-- upvalues: _Color3_3 (copy)
 	p1.BorderColor3 = _Color3_3
 	p1.BorderSizePixel = 1
@@ -40,7 +40,7 @@ end
 local Module = {}
 Module.__index = Module
 
-function Module.new(_treeViewItem) --[[ Line: 74 ]]
+function Module.new(_treeViewItem)
 	-- upvalues: Module (copy), _UDim2 (copy), _Color3_3 (copy), _Color3_2 (copy), _Color3_4 (copy), _UDim2_1 (copy), _UDim2_2 (copy), _UDim2_3 (copy), _UDim2_4 (copy)
 	local t = {}
 	setmetatable(t, Module)
@@ -71,7 +71,7 @@ function Module.new(_treeViewItem) --[[ Line: 74 ]]
 	Button.BorderSizePixel = 1
 	Button.Position = _UDim2_1
 	Button.Size = _UDim2_2
-	t._button.MouseButton1Click:connect(function() --[[ Line: 102 ]]
+	t._button.MouseButton1Click:connect(function()
 		-- upvalues: t (copy)
 		t:__toggleExpansion()
 	end)
@@ -119,19 +119,19 @@ function Module.new(_treeViewItem) --[[ Line: 74 ]]
 	return t
 end
 
-function Module:isExpanded() --[[ Line: 143 ]]
+function Module:isExpanded()
 	return self._expanded
 end
 
-function Module:valueHasBeenNonZero() --[[ Line: 147 ]]
+function Module:valueHasBeenNonZero()
 	return self._valueHasBeenNonZero
 end
 
-function Module:setExpansionToggleCallback(_expansionToggleCallback) --[[ Line: 151 ]]
+function Module:setExpansionToggleCallback(_expansionToggleCallback)
 	self._expansionToggleCallback = _expansionToggleCallback
 end
 
-function Module:__toggleExpansion() --[[ Line: 155 ]]
+function Module:__toggleExpansion()
 	self._expanded = not self._expanded
 	self:__updateButtonState()
 	
@@ -140,7 +140,7 @@ function Module:__toggleExpansion() --[[ Line: 155 ]]
 	end
 end
 
-function Module:__updateButtonState() --[[ Line: 164 ]]
+function Module:__updateButtonState()
 	if #self._treeViewItem:getChildren() == 0 then
 		self._button.Visible = false
 		
@@ -157,28 +157,28 @@ function Module:__updateButtonState() --[[ Line: 164 ]]
 	end
 end
 
-function Module:updateValue() --[[ Line: 178 ]]
+function Module:updateValue()
 	if self._treeViewItem:getValue() >= 0.001 then
 		self._valueHasBeenNonZero = true
 	end
 	self._valueTextLabel.Text = string.format("%.3f", self._treeViewItem:getValue())
 end
 
-function Module:setZIndex(ZIndex) --[[ Line: 190 ]]
+function Module:setZIndex(ZIndex)
 	self._frame.ZIndex = ZIndex
 	self._labelTextLabel.ZIndex = ZIndex
 	self._valueTextLabel.ZIndex = ZIndex
 end
 
-function Module:setRowValue(p1) --[[ Line: 196 ]]
+function Module:setRowValue(p1)
 	self._valueTextLabel.Text = string.format("%.3f", p1)
 end
 
-function Module:getFrame() --[[ Line: 200 ]]
+function Module:getFrame()
 	return self._frame
 end
 
-function Module:setRowNumber(HeightInPixRatio: number) --[[ Line: 204 ]]
+function Module:setRowNumber(HeightInPixRatio: number)
 	-- upvalues: _Color3 (copy), _Color3_1 (copy)
 	if HeightInPixRatio % 2 == 1 then
 		self._buttonFrame.BackgroundColor3 = _Color3
@@ -197,7 +197,7 @@ local BaseMemoryAnalyzerModule = {}
 BaseMemoryAnalyzerModule.__index = BaseMemoryAnalyzerModule
 BaseMemoryAnalyzerModule.Indent = string.rep(" ", 4)
 
-function BaseMemoryAnalyzerModule.new(Parent) --[[ Line: 227 ]]
+function BaseMemoryAnalyzerModule.new(Parent)
 	-- upvalues: BaseMemoryAnalyzerModule (copy)
 	local t = {}
 	setmetatable(t, BaseMemoryAnalyzerModule)
@@ -214,19 +214,19 @@ function BaseMemoryAnalyzerModule.new(Parent) --[[ Line: 227 ]]
 	return t
 end
 
-function BaseMemoryAnalyzerModule:getMemoryUsageTree() --[[ Line: 254 ]]
+function BaseMemoryAnalyzerModule:getMemoryUsageTree()
 	return nil
 end
 
-function BaseMemoryAnalyzerModule:setHeightChangedCallback(_heightChangedCallback) --[[ Line: 258 ]]
+function BaseMemoryAnalyzerModule:setHeightChangedCallback(_heightChangedCallback)
 	self._heightChangedCallback = _heightChangedCallback
 end
 
-function BaseMemoryAnalyzerModule:__getOrMakeRowForTreeViewItem(TreeViewItem) --[[ Line: 262 ]]
+function BaseMemoryAnalyzerModule:__getOrMakeRowForTreeViewItem(TreeViewItem)
 	-- upvalues: Module (copy)
 	if self._rowsByTreeViewItem[TreeViewItem] == nil then
 		local NewModule = Module.new(TreeViewItem)
-		NewModule:setExpansionToggleCallback(function() --[[ Line: 265 ]]
+		NewModule:setExpansionToggleCallback(function()
 			-- upvalues: self (copy)
 			self:__layoutRows()
 		end)
@@ -237,7 +237,7 @@ function BaseMemoryAnalyzerModule:__getOrMakeRowForTreeViewItem(TreeViewItem) --
 	return self._rowsByTreeViewItem[TreeViewItem]
 end
 
-function BaseMemoryAnalyzerModule:__recursiveUpdateStatValue(MemoryUsageTree) --[[ Line: 277 ]]
+function BaseMemoryAnalyzerModule:__recursiveUpdateStatValue(MemoryUsageTree)
 	self:__getOrMakeRowForTreeViewItem(MemoryUsageTree):updateValue()
 	
 	for _, child in ipairs((MemoryUsageTree:getChildren())) do
@@ -245,7 +245,7 @@ function BaseMemoryAnalyzerModule:__recursiveUpdateStatValue(MemoryUsageTree) --
 	end
 end
 
-function BaseMemoryAnalyzerModule:renderUpdates() --[[ Line: 288 ]]
+function BaseMemoryAnalyzerModule:renderUpdates()
 	local MemoryUsageTree = self:getMemoryUsageTree()
 	
 	if MemoryUsageTree ~= nil then
@@ -256,7 +256,7 @@ function BaseMemoryAnalyzerModule:renderUpdates() --[[ Line: 288 ]]
 	end
 end
 
-function BaseMemoryAnalyzerModule:__layoutRows() --[[ Line: 300 ]]
+function BaseMemoryAnalyzerModule:__layoutRows()
 	self._layoutDirty = false
 	self._heightInPix = 0
 	
@@ -271,7 +271,7 @@ function BaseMemoryAnalyzerModule:__layoutRows() --[[ Line: 300 ]]
 	end
 end
 
-function BaseMemoryAnalyzerModule:__recursiveLayoutTreeViewItem(MemoryUsageTree, p1) --[[ Line: 317 ]]
+function BaseMemoryAnalyzerModule:__recursiveLayoutTreeViewItem(MemoryUsageTree, p1)
 	local OrMakeRowForTreeViewItem = self:__getOrMakeRowForTreeViewItem(MemoryUsageTree)
 	local Frame = OrMakeRowForTreeViewItem:getFrame()
 	local ValueHasBeenNonZeroResult = p1 and OrMakeRowForTreeViewItem:valueHasBeenNonZero()
@@ -291,7 +291,7 @@ function BaseMemoryAnalyzerModule:__recursiveLayoutTreeViewItem(MemoryUsageTree,
 	end
 end
 
-function BaseMemoryAnalyzerModule:getHeightInPix() --[[ Line: 343 ]]
+function BaseMemoryAnalyzerModule:getHeightInPix()
 	return self._heightInPix
 end
 

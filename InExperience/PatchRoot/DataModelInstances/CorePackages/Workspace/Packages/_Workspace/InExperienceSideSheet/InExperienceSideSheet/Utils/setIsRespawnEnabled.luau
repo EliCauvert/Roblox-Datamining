@@ -2,7 +2,7 @@
 local EnumsModule = require(InExperienceSideSheet.Common.Enums)
 local GetActionBindingsStoreModule = require(InExperienceSideSheet.Stores.GetActionBindingsStore)
 
-return function(p1) --[[ Line: 7 | Named "setIsRespawnEnabled" ]]
+return function(p1)
 	-- upvalues: GetActionBindingsStoreModule (copy), EnumsModule (copy)
 	local SessionActionBinding = GetActionBindingsStoreModule().sessionActionBindings[EnumsModule.ActionBinding.Respawn]
 	

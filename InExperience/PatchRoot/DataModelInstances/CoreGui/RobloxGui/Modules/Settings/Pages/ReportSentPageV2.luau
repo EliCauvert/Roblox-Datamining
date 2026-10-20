@@ -22,7 +22,7 @@ local ServiceModule = if EnabledResult then require(Chrome.Service) else nil
 local FFlagEnableConsoleExpControls = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableConsoleExpControls
 local ReportSentPageV2 = nil
 
-local function _() --[[ Line: 33 ]]
+local function _()
 	-- upvalues: ReportSentPageV2 (ref), RoactModule (copy)
 	if ReportSentPageV2 ~= nil then
 		RoactModule.unmount(ReportSentPageV2)
@@ -37,7 +37,7 @@ while not LocalPlayer do
 end
 local NewReportAbuseAnalytics = ReportAbuseAnalytics.new(EventIngest.new(EventIngestService), NewResult.Diag, ReportAbuseAnalytics.MenuContexts.LegacySentPage)
 local NewBlockingAnalytics = BlockingAnalyticsModule.new(LocalPlayer.UserId, { EventStream = RbxAnalyticsService })
-local v1 = (function() --[[ Line: 54 | Named "Initialize" ]]
+local v1 = (function()
 	-- upvalues: SettingsPageFactoryModule (copy), CreateFunction (copy)
 	local NewPage = SettingsPageFactoryModule:CreateNewPage()
 	NewPage.TabHeader = nil
@@ -58,7 +58,7 @@ local v1 = (function() --[[ Line: 54 | Named "Initialize" ]]
 	return NewPage
 end)()
 
-function v1.UpdateMenu(p1) --[[ Line: 78 ]]
+function v1.UpdateMenu(p1)
 	-- upvalues: ReportSentPageV2 (ref), RoactModule (copy), NewReportAbuseAnalytics (copy), NewBlockingAnalytics (copy), CoreScriptsRootProvider (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), ReportConfirmationContainerModule (copy), EnabledResult (copy), FFlagEnableConsoleExpControls (copy), ServiceModule (copy)
 	local ReportedPlayer = p1.ReportedPlayer
 	
@@ -70,14 +70,14 @@ function v1.UpdateMenu(p1) --[[ Line: 78 ]]
 		p1.settingsShowChangedSignal:disconnect()
 		p1.settingsShowChangedSignal = nil
 	end
-	p1.settingsShowChangedSignal = p1.HubRef.SettingsShowSignal:connect(function(p2) --[[ Line: 87 ]]
+	p1.settingsShowChangedSignal = p1.HubRef.SettingsShowSignal:connect(function(p2)
 		-- upvalues: p1 (copy)
 		if not p2 then
 			p1:HandleDone()
 		end
 	end)
 	local BindableEvent = Instance.new("BindableEvent")
-	p1.SizeChangedSignal = p1.Root:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 95 ]]
+	p1.SizeChangedSignal = p1.Root:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 		-- upvalues: BindableEvent (copy), p1 (copy)
 		BindableEvent:Fire(p1.Root.AbsoluteSize)
 	end)
@@ -93,7 +93,7 @@ function v1.UpdateMenu(p1) --[[ Line: 78 ]]
 					Name = ReportedPlayer.Name,
 					DisplayName = ReportedPlayer.DisplayName
 				},
-				closeMenu = function() --[[ Line: 105 ]]
+				closeMenu = function()
 					-- upvalues: p1 (copy)
 					p1:HandleDone()
 				end,
@@ -112,7 +112,7 @@ function v1.UpdateMenu(p1) --[[ Line: 78 ]]
 	ReportSentPageV2 = RoactModule.mount(Element, p1.Root, "ReportSentPageV2")
 end
 
-function v1.ShowReportedPlayer(p1, ReportedPlayer, IsVoiceReport) --[[ Line: 135 ]]
+function v1.ShowReportedPlayer(p1, ReportedPlayer, IsVoiceReport)
 	-- upvalues: v1 (copy)
 	p1.ReportedPlayer = ReportedPlayer
 	p1.isVoiceReport = IsVoiceReport
@@ -120,7 +120,7 @@ function v1.ShowReportedPlayer(p1, ReportedPlayer, IsVoiceReport) --[[ Line: 135
 	p1.HubRef:SwitchToPage(v1, true)
 end
 
-function v1.HandleDone(p1) --[[ Line: 143 ]]
+function v1.HandleDone(p1)
 	-- upvalues: EnabledResult (copy), FFlagEnableConsoleExpControls (copy), ServiceModule (copy), ReportSentPageV2 (ref), RoactModule (copy)
 	if EnabledResult and FFlagEnableConsoleExpControls then
 		ServiceModule:setHideShortcutBar("ReportSentPageV2", false)

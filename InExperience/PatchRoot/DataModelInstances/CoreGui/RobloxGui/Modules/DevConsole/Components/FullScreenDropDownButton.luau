@@ -9,14 +9,14 @@ local DropDownArrowHeightRatio = DropDownArrowHeight / 2
 local DownArrow = ConstantsModule.Image.DownArrow
 local FullScreenDropDownButton = RoactModule.Component:extend("FullScreenDropDownButton")
 
-function FullScreenDropDownButton.init(p1) --[[ Line: 19 ]]
+function FullScreenDropDownButton.init(p1)
 	-- upvalues: RobloxGui (copy)
-	function p1.startDropDownView() --[[ Line: 20 ]]
+	function p1.startDropDownView()
 		-- upvalues: p1 (copy)
 		p1:setState({ selectionScreenExpanded = true })
 	end
 	
-	function p1:noSelection(Input) --[[ Line: 26 ]]
+	function p1:noSelection(Input)
 		-- upvalues: p1 (copy)
 		if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch and Input.UserInputState == Enum.UserInputState.End then
 			p1:setState({ selectionScreenExpanded = false })
@@ -29,7 +29,7 @@ function FullScreenDropDownButton.init(p1) --[[ Line: 19 ]]
 	}
 end
 
-function FullScreenDropDownButton.render(p1) --[[ Line: 43 ]]
+function FullScreenDropDownButton.render(p1)
 	-- upvalues: RoactModule (copy), ConstantsModule (copy), DropDownEntryHeight (copy), ExternalEventConnection (copy), RobloxGui (copy), DropDownArrowHeight (copy), DropDownArrowHeightRatio (copy), DownArrow (copy)
 	local ButtonSize = p1.props.buttonSize
 	local DropDownList = p1.props.dropDownList
@@ -61,7 +61,7 @@ function FullScreenDropDownButton.render(p1) --[[ Line: 43 ]]
 					BackgroundColor3 = LayoutOrder1 == SelectedIndex and ConstantsModule.Color.SelectedGray or ConstantsModule.Color.UnselectedGray,
 					LayoutOrder = LayoutOrder1,
 					BorderSizePixel = 0,
-					[RoactModule.Event.Activated] = function(_) --[[ Line: 80 ]]
+					[RoactModule.Event.Activated] = function(_)
 						-- upvalues: p1 (copy), OnSelectionFunction (copy), LayoutOrder1 (copy)
 						p1:setState({ selectionScreenExpanded = false })
 						OnSelectionFunction(LayoutOrder1)
@@ -83,7 +83,7 @@ function FullScreenDropDownButton.render(p1) --[[ Line: 43 ]]
 	}, {
 		SizeChangeEvent = RoactModule.createElement(ExternalEventConnection, {
 			event = RobloxGui:GetPropertyChangedSignal("AbsoluteSize"),
-			callback = function() --[[ Line: 106 ]]
+			callback = function()
 				-- upvalues: p1 (copy), RobloxGui (upval)
 				p1:setState({ guiSizeY = RobloxGui.AbsoluteSize.Y })
 			end

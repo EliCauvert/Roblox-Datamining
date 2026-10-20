@@ -2,11 +2,11 @@
 local ChatSettingsModule = require(Parent:WaitForChild("ChatSettings"))
 local ChatConstantsModule = require(Parent:WaitForChild("ChatConstants"))
 local UtilModule = require(script.Parent:WaitForChild("Util"))
-pcall(function() --[[ Line: 12 ]]
+pcall(function()
 	ChatLocalization = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
 
-function CreateWelcomeMessageLabel(p1, OriginalChannel) --[[ Line: 14 ]]
+function CreateWelcomeMessageLabel(p1, OriginalChannel)
 	-- upvalues: ChatSettingsModule (copy), UtilModule (copy)
 	local Message = p1.Message
 	
@@ -26,7 +26,7 @@ function CreateWelcomeMessageLabel(p1, OriginalChannel) --[[ Line: 14 ]]
 		AddChannelButtonToBaseMessageResult = UtilModule:AddChannelButtonToBaseMessage(BaseMessage2, ChannelColor, Formatted, p1.OriginalChannel)
 		BaseMessage2.Text = UtilModule:CreateLeadingSpaces(UtilModule:GetNumberOfSpaces(Formatted, _Font, FontSize) + 1) .. UtilModule:SanitizeForRichText(Message)
 	end
-	local function GetHeightFunction(p2) --[[ Line: 39 ]]
+	local function GetHeightFunction(p2)
 		-- upvalues: UtilModule (upval), BaseMessage2 (copy), BaseMessage (copy)
 		return UtilModule:GetMessageHeight(BaseMessage2, BaseMessage, p2)
 	end

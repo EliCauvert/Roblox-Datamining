@@ -5,7 +5,7 @@ local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
 
-return function(p1) --[[ Line: 16 | Named "ReportTextEntry" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseStyleResult = UseStyleFunction()
 	local BodyFont = UseStyleResult.Font.Body.Font
@@ -47,7 +47,7 @@ return function(p1) --[[ Line: 16 | Named "ReportTextEntry" ]]
 			ClearTextOnFocus = false,
 			OverlayNativeInput = true,
 			ClipsDescendants = true,
-			[ReactModule.Change.Text] = function(p2) --[[ Line: 62 ]]
+			[ReactModule.Change.Text] = function(p2)
 				-- upvalues: p1 (copy)
 				if p1.text ~= p2.Text then
 					p1.onUpdate(p2.Text)

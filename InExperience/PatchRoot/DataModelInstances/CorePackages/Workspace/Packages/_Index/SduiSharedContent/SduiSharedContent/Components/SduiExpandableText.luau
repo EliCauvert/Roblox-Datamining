@@ -4,7 +4,7 @@ local ReportUnifiedLoggingActionFunction = require(Parent.SduiCoreSystem).report
 local ExpandableText = require(Parent.AppBlox).ExpandableText
 local View = require(Parent.Foundation).View
 
-return ReactModule.memo(function(p1) --[[ Line: 24 | Named "SduiExpandableText" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), ReportUnifiedLoggingActionFunction (copy), View (copy), ExpandableText (copy)
 	local LayoutOrder = p1.layoutOrder
 	local config = {
@@ -16,7 +16,7 @@ return ReactModule.memo(function(p1) --[[ Line: 24 | Named "SduiExpandableText" 
 		pressedTextStyle = p1.pressedTextStyle,
 		expandedInitially = p1.expandedInitially,
 		avoidBlankLineClip = p1.avoidBlankLineClip,
-		onExpandChanged = ReactModule.useCallback(function(IsExpanded) --[[ Line: 27 ]]
+		onExpandChanged = ReactModule.useCallback(function(IsExpanded)
 			-- upvalues: p1 (copy), ReportUnifiedLoggingActionFunction (upval)
 			if p1.onExpandChanged then
 				p1.onExpandChanged(IsExpanded)

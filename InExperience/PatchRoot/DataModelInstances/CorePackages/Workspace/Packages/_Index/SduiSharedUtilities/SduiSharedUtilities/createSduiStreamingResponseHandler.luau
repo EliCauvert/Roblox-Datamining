@@ -1,13 +1,13 @@
 ﻿local SduiStreamingResponseUtilsModule = require(script:FindFirstAncestor("SduiSharedUtilities").SduiStreamingResponseUtils)
 
-return function(p1) --[[ Line: 20 | Named "createSduiStreamingResponseHandler" ]]
+return function(p1)
 	-- upvalues: SduiStreamingResponseUtilsModule (copy)
 	local Count = 0
 	local Value = nil
 	local Value1 = nil
 	local Text = ""
 	
-	local function processExtractedFrames(List) --[[ Line: 28 ]]
+	local function processExtractedFrames(List)
 		-- upvalues: p1 (copy), Count (ref), Value (ref), Value1 (ref)
 		local ProcessFrameResult2 = nil
 		for _, value in List do
@@ -23,7 +23,7 @@ return function(p1) --[[ Line: 20 | Named "createSduiStreamingResponseHandler" ]
 		end
 	end
 	
-	local function _(p2) --[[ Line: 41 | Named "extractAndProcessFrames" ]]
+	local function _(p2)
 		-- upvalues: SduiStreamingResponseUtilsModule (upval), Value1 (ref), Text (ref), processExtractedFrames (copy)
 		local Success, Result, Result3 = pcall(SduiStreamingResponseUtilsModule.extractFrames, p2)
 		
@@ -38,7 +38,7 @@ return function(p1) --[[ Line: 20 | Named "createSduiStreamingResponseHandler" ]
 	end
 	
 	return {
-		handleChunk = function(Text1) --[[ Line: 52 ]]
+		handleChunk = function(Text1)
 			-- upvalues: p1 (copy), Value1 (ref), Text (ref), SduiStreamingResponseUtilsModule (upval), processExtractedFrames (copy)
 			p1.loadTimer.logUiStreamChunkReceived()
 			
@@ -55,7 +55,7 @@ return function(p1) --[[ Line: 20 | Named "createSduiStreamingResponseHandler" ]
 				Value1 = Result
 			end
 		end,
-		finalize = function(Buf) --[[ Line: 63 ]]
+		finalize = function(Buf)
 			-- upvalues: Count (ref), SduiStreamingResponseUtilsModule (upval), Text (ref), Value1 (ref), processExtractedFrames (copy), p1 (copy), Value (ref)
 			if Count == 0 and not SduiStreamingResponseUtilsModule.isEmptyResponseBody(Buf) then
 				local Text1 = if typeof(Buf) == "buffer" then buffer.tostring(Buf) else Buf

@@ -3,11 +3,11 @@ local Character = utf8.char(8220)
 local Character1 = utf8.char(8221)
 local Character2 = utf8.char(8217)
 
-local function decodeQuoteEntities(Text: string) --[[ Line: 24 ]]
+local function decodeQuoteEntities(Text: string)
 	return Text:gsub("&amp;quot;", "\""):gsub("&amp;apos;", "'"):gsub("&quot;", "\""):gsub("&apos;", "'"):gsub("&#34;", "\""):gsub("&#39;", "'")
 end
 
-local function toTypographicQuotesOutsideTags(Text: string): string --[[ Line: 31 ]]
+local function toTypographicQuotesOutsideTags(Text: string): string
 	-- upvalues: Character (copy), Character1 (copy), Character2 (copy)
 	local List = {}
 	local Flag = false
@@ -36,7 +36,7 @@ local function toTypographicQuotesOutsideTags(Text: string): string --[[ Line: 3
 	return table.concat(List)
 end
 
-return function(p1) --[[ Line: 60 | Named "prepareRichTextCopy" ]]
+return function(p1)
 	-- upvalues: decodeQuoteEntities (copy), FFlagInlineRichTextSkipPlaintextEscape (copy), toTypographicQuotesOutsideTags (copy)
 	local DecodeQuoteEntitiesResult = decodeQuoteEntities(p1)
 	

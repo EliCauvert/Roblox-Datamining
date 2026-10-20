@@ -5,7 +5,7 @@ local ConstantsModule = require(AbuseReportMenu.Components.Constants)
 local _ = require(AbuseReportMenu.ReportAnything.Utility.ReportAnythingAnalytics)
 local AbuseReportBuilderModule = require(AbuseReportMenu.ReportAnything.Utility.AbuseReportBuilder)
 
-local function v6(p1, p2, p3) --[[ Line: 12 ]]
+local function v6(p1, p2, p3)
 	-- upvalues: AbuseReportBuilderModule (copy), CryoModule (copy)
 	local Floored = math.floor(workspace:GetServerTimeNow() * 1000)
 	local Floored1: number = if p1.menuOpenedUnixTimestampMilliseconds > 0 then math.floor(Floored - p1.menuOpenedUnixTimestampMilliseconds) else 0
@@ -35,7 +35,7 @@ local function v6(p1, p2, p3) --[[ Line: 12 ]]
 end
 
 return {
-	forPersonReport = function(p1, p2, p3) --[[ Line: 59 ]]
+	forPersonReport = function(p1, p2, p3)
 		-- upvalues: v6 (copy), ConstantsModule (copy)
 		local v1 = v6(p1, p2, p3)
 		local TypeofabuseSelection = nil
@@ -52,7 +52,7 @@ return {
 		
 		return v1
 	end,
-	forExperienceReport = function(p4, p5, p6) --[[ Line: 81 ]]
+	forExperienceReport = function(p4, p5, p6)
 		-- upvalues: v6 (copy), ConstantsModule (copy)
 		local v2 = v6(p4, p5, p6)
 		v2.typeofabuseSelection = ConstantsModule.AnalyticsAbuseMethods.Game

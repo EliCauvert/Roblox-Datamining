@@ -17,17 +17,17 @@ local AvoidShowingMobileUpsellDialogOnDesktopHackyLuaFix = game:DefineFastFlag("
 local PassInPinShortcutTargetDestinationToUpsellResolver = game:DefineFastFlag("PassInPinShortcutTargetDestinationToUpsellResolver", false)
 local FFlagEdpGameLeavePromptsPassIsRecentInstall = SharedFlagsModule.FFlagEdpGameLeavePromptsPassIsRecentInstall
 
-return function(p1) --[[ Line: 34 | Named "EdpGameLeavePromptsHandler" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), IsPinShortcutAvailableModule (copy), FFlagEdpGameLeavePromptsPassCustomAppEntryPointAutoJoin (copy), IsCustomAppEntryPointAutoJoinAvailableModule (copy), FFlagEdpGameLeavePromptsPassIsRecentInstall (copy), UseLocalUserIdFunction (copy), FFlagAddPinExperienceTargetDestinationGUACPolicy (copy), GetAppFeaturePoliciesFunction (copy), FFlagEdpGameLeavePromptsPassPinShortcutAvailable (copy), AvoidShowingMobileUpsellDialogOnDesktopHackyLuaFix (copy), IsRecentInstallModule (copy), PassInPinShortcutTargetDestinationToUpsellResolver (copy), MessageBus (copy), TModule (copy), PromptsHandler (copy), PromptsEntryPointModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
 	local UseMemoResult = ReactModule.useMemo(IsPinShortcutAvailableModule, {})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 38 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: FFlagEdpGameLeavePromptsPassCustomAppEntryPointAutoJoin (upval), IsCustomAppEntryPointAutoJoinAvailableModule (upval)
 		return FFlagEdpGameLeavePromptsPassCustomAppEntryPointAutoJoin and IsCustomAppEntryPointAutoJoinAvailableModule()
 	end, {})
 	local UseLocalUserIdResult = if FFlagEdpGameLeavePromptsPassIsRecentInstall then UseLocalUserIdFunction() else nil
 	local PinExperienceTargetDestination = if FFlagAddPinExperienceTargetDestinationGUACPolicy then GetAppFeaturePoliciesFunction().getPinExperienceTargetDestination() else "HomeScreen"
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 48 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), FFlagEdpGameLeavePromptsPassPinShortcutAvailable (upval), AvoidShowingMobileUpsellDialogOnDesktopHackyLuaFix (upval), FFlagAddPinExperienceTargetDestinationGUACPolicy (upval), PinExperienceTargetDestination (copy), UseMemoResult (copy), FFlagEdpGameLeavePromptsPassCustomAppEntryPointAutoJoin (upval), UseMemoResult1 (copy), FFlagEdpGameLeavePromptsPassIsRecentInstall (upval), UseStateResult (copy), IsRecentInstallModule (upval), UseLocalUserIdResult (copy), PassInPinShortcutTargetDestinationToUpsellResolver (upval), GetAppFeaturePoliciesFunction (upval)
 		if p1.universeId == nil then
 			return nil
@@ -60,20 +60,20 @@ return function(p1) --[[ Line: 34 | Named "EdpGameLeavePromptsHandler" ]]
 		p1.universeId, UseMemoResult, UseMemoResult1, PinExperienceTargetDestination,
 		UseLocalUserIdResult, UseStateResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 100 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), FFlagEdpGameLeavePromptsPassPinShortcutAvailable (upval), UseMemoResult (copy), MessageBus (upval), TModule (upval), UseStateResult2 (copy)
 		if p1.universeId == nil then return end
 		if not FFlagEdpGameLeavePromptsPassPinShortcutAvailable and not UseMemoResult then return end
 		local NewResult = MessageBus.Subscriber.new()
 		local GameMessageId = MessageBus.getMessageId("Game", "onGameLeave")
-		NewResult:subscribe({ mid = GameMessageId, validateParams = TModule.table }, function() --[[ Line: 113 ]]
+		NewResult:subscribe({ mid = GameMessageId, validateParams = TModule.table }, function()
 			-- upvalues: UseStateResult2 (upval)
-			UseStateResult2(function(p2: number): number --[[ Line: 114 ]]
+			UseStateResult2(function(p2: number): number
 				return p2 + 1
 			end)
 		end)
 		
-		return function() --[[ Line: 119 ]]
+		return function()
 			-- upvalues: NewResult (copy), GameMessageId (copy)
 			NewResult:unsubscribeWithMsgId(GameMessageId)
 		end

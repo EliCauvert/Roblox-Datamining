@@ -4,7 +4,7 @@ local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local FloatEqualsModule = require(Parent.util.floatEquals)
 
-local function validateMeshMin(p1, OriginalSize, MeshName) --[[ Line: 31 ]]
+local function validateMeshMin(p1, OriginalSize, MeshName)
 	-- upvalues: FloatEqualsModule (copy), ErrorSourceStringsModule (copy)
 	local List = {}
 	
@@ -29,7 +29,7 @@ return {
 		ValidationEnumsModule.SharedDataMember.renderMeshesData
 	},
 	expectedFailures = {},
-	run = function(p2, p3) --[[ Line: 49 ]]
+	run = function(p2, p3)
 		-- upvalues: validateMeshMin (copy)
 		for i, value in p3.renderMeshesData do
 			validateMeshMin(p2, value.originalSize, i)

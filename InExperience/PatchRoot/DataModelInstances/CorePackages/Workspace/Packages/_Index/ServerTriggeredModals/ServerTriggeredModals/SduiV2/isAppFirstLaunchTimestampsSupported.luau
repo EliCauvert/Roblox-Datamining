@@ -1,3 +1,3 @@
-﻿return function() --[[ Line: 4 ]]
+﻿return function()
 	return game:GetEngineFeature("AppFirstLaunchTimestampsStorageKey")
 end

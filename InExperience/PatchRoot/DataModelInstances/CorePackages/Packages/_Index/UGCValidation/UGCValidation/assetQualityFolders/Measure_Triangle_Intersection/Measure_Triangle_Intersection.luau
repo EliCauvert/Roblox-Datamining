@@ -18,7 +18,7 @@ return {
 		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
 	fflag = require(Parent.flags.getFFlagUGCValidateAQMeshQuality),
-	run = function(p1, p2) --[[ Line: 25 ]]
+	run = function(p1, p2)
 		-- upvalues: GetFFlagUGCValidateAQMeshQualityBlockUploadModule (copy), config (copy), ErrorSourceStringsModule (copy), UGCValidationTriangleIntersectionMaxPercent (copy)
 		local MeasureTriangleIntersection = p2.aqsSummaryData.Measure_Triangle_Intersection
 		local Entry = GetFFlagUGCValidateAQMeshQualityBlockUploadModule() and config[p2.uploadCategory]

@@ -1,6 +1,6 @@
 ﻿local CreateSignalFunction = require(script:FindFirstAncestor("ExpChat").Parent.Signals).createSignal
 
-return function() --[[ Line: 75 ]]
+return function()
 	-- upvalues: CreateSignalFunction (copy)
 	local Signal, Signal2 = CreateSignalFunction(false)
 	local Signal1, Signal2_1 = CreateSignalFunction(true)
@@ -39,14 +39,14 @@ return function() --[[ Line: 75 ]]
 		setPresetCooldownEndsAt = Signal2_7,
 		setChatWindowBottomY = Signal2_8,
 		setPresetClickCounts = Signal2_9,
-		incrementPresetClickCount = function(Key) --[[ Line: 89 ]]
+		incrementPresetClickCount = function(Key)
 			-- upvalues: Signal10 (copy), Signal2_9 (copy)
 			local Copy = table.clone(Signal10(false))
 			Copy[Key] = if Copy[Key] then Copy[Key] + 1 else 1
 			Signal2_9(Copy)
 		end,
 		setViewedGroupIds = Signal2_10,
-		markGroupViewed = function(Key) --[[ Line: 95 ]]
+		markGroupViewed = function(Key)
 			-- upvalues: Signal11 (copy), Signal2_10 (copy)
 			if not Signal11(false)[Key] then
 				local Copy = table.clone(Signal11(false))

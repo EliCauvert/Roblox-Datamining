@@ -3,7 +3,7 @@ local GetMutualFriendsTextModule = require(SocialCommon.Utils.getMutualFriendsTe
 local RecommendationContextTypeModule = require(SocialCommon.Enums.RecommendationContextType)
 local Images = require(SocialCommon.Parent.UIBlox).App.ImageSet.Images
 
-return function(p1) --[[ Line: 43 ]]
+return function(p1)
 	-- upvalues: RecommendationContextTypeModule (copy), GetMutualFriendsTextModule (copy), Images (copy)
 	local ConnectionRequests = nil
 	local IconsStatusPlayerFriend = nil

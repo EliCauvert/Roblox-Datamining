@@ -19,15 +19,15 @@ local ScreenshotHighlighterModule = require(InGameAssetReporting.InGameAssetRepo
 local BuildReportModule = require(InGameAssetReporting.Utility.buildReport)
 local InGameAssetReportAnalyticsModule = require(InGameAssetReporting.InGameAssetReportUI.Resources.InGameAssetReportAnalytics)
 
-local function v19(p1) --[[ Line: 43 ]]
+local function v19(p1)
 	return p1.point
 end
 
-local function v20(p1) --[[ Line: 47 ]]
+local function v20(p1)
 	return p1.interpretationResult
 end
 
-return function(p1) --[[ Line: 51 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), AnalyticsReducerModule (copy), ConstantsModule (copy), SceneAnalysisModule (copy), ExperienceStateCaptureService (copy), ScreenshotManager (copy), CryoModule (copy), v20 (copy), InGameAssetReportAnalyticsModule (copy), v19 (copy), BuildReportModule (copy), Players (copy), UserInputService (copy), WithLocalizationFunction (copy), InGameAssetReportPortraitHeaderFooterModule (copy), InGameAssetReportLandscapeHeaderModule (copy), ScreenshotHighlighterModule (copy), InGameAssetReportErrorModalModule (copy), InGameAssetReportSubmitDialogModule (copy), InGameAssetReportCompleteModalModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState({})
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState({})
@@ -42,7 +42,7 @@ return function(p1) --[[ Line: 51 ]]
 	local UseStateResult10, UseStateResult2_9 = ReactModule.useState(nil)
 	local ViewportSize = game.Workspace.CurrentCamera.ViewportSize
 	local IsSmallPortraitMode = p1.getIsSmallPortraitMode(ViewportSize)
-	ReactModule.useEffect(function() --[[ Line: 70 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseReducerResult2 (copy), ConstantsModule (upval)
 		UseReducerResult2({
 			type = ConstantsModule.AnalyticsActions.AccumulateForTimeSpent,
@@ -53,13 +53,13 @@ return function(p1) --[[ Line: 51 ]]
 			place_id = game.PlaceId
 		})
 	end, {})
-	local UseResult = ReactModule.useCallback(function(Point, p2) --[[ Line: 82 ]]
+	local UseResult = ReactModule.useCallback(function(Point, p2)
 		-- upvalues: SceneAnalysisModule (upval), ViewportSize (copy), ExperienceStateCaptureService (upval), UseStateResult (copy), UseStateResult6 (copy), ScreenshotManager (upval), UseStateResult2_5 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), UseReducerResult2 (copy), ConstantsModule (upval)
 		local config = {
 			point = Point,
-			interpretationResult = SceneAnalysisModule.interpretAnnotation(Point * ViewportSize, p2 * math.max(ViewportSize.X, ViewportSize.Y), function() --[[ Line: 88 ]] end)
+			interpretationResult = SceneAnalysisModule.interpretAnnotation(Point * ViewportSize, p2 * math.max(ViewportSize.X, ViewportSize.Y), function() end)
 		}
-		config.signalConnection = ExperienceStateCaptureService.ItemSelectedInCaptureMode:Once(function(EngineSignalItem) --[[ Line: 92 ]]
+		config.signalConnection = ExperienceStateCaptureService.ItemSelectedInCaptureMode:Once(function(EngineSignalItem)
 			-- upvalues: config (copy)
 			config.engineSignalItem = EngineSignalItem
 		end)
@@ -84,7 +84,7 @@ return function(p1) --[[ Line: 51 ]]
 		UseStateResult2_1,
 		UseStateResult6
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 119 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult (copy), UseStateResult1 (copy), UseStateResult2_1 (copy), UseStateResult2 (copy), UseReducerResult2 (copy), ConstantsModule (upval)
 		if #UseStateResult > 0 then
 			local Copy = table.clone(UseStateResult)
@@ -102,7 +102,7 @@ return function(p1) --[[ Line: 51 ]]
 		UseStateResult2_1,
 		UseStateResult1
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 136 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult1 (copy), UseStateResult (copy), UseStateResult2_1 (copy), UseStateResult2 (copy), UseReducerResult2 (copy), ConstantsModule (upval)
 		if #UseStateResult1 > 0 then
 			local Copy = table.clone(UseStateResult)
@@ -115,19 +115,19 @@ return function(p1) --[[ Line: 51 ]]
 			})
 		end
 	end, { UseStateResult, UseStateResult1 })
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 155 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult (copy), UseStateResult6 (copy), ScreenshotManager (upval), UseStateResult2_5 (copy), CryoModule (upval), SceneAnalysisModule (upval), UseStateResult2_7 (copy), v20 (upval), UseStateResult2_6 (copy), UseStateResult2_2 (copy), UseReducerResult2 (copy), ConstantsModule (upval), ViewportSize (copy), IsSmallPortraitMode (copy)
 		if #UseStateResult == 0 and UseStateResult6 == "" then
 			ScreenshotManager:TakeScreenshotWithCallback(UseStateResult2_5, nil)
 		end
 		local ExtractItemsFromInterpretationsResult = SceneAnalysisModule.extractItemsFromInterpretations({
-			(SceneAnalysisModule.interpretInstanceListForGUIObjects((CryoModule.List.map(UseStateResult, function(p3) --[[ Line: 161 ]]
+			(SceneAnalysisModule.interpretInstanceListForGUIObjects((CryoModule.List.map(UseStateResult, function(p3)
 				return p3.engineSignalItem
 			end))))
-		}, function() --[[ Line: 167 ]] end)
+		}, function() end)
 		UseStateResult2_7(ExtractItemsFromInterpretationsResult)
 		task.defer(ExtractItemsFromInterpretationsResult.computation)
-		local ExtractItemsFromInterpretationsResult1 = SceneAnalysisModule.extractItemsFromInterpretations(CryoModule.List.map(UseStateResult, v20), function() --[[ Line: 173 ]] end)
+		local ExtractItemsFromInterpretationsResult1 = SceneAnalysisModule.extractItemsFromInterpretations(CryoModule.List.map(UseStateResult, v20), function() end)
 		UseStateResult2_6(ExtractItemsFromInterpretationsResult1)
 		UseStateResult2_2(true)
 		UseReducerResult2({
@@ -144,13 +144,13 @@ return function(p1) --[[ Line: 51 ]]
 		UseStateResult, UseStateResult2_2, UseStateResult2_6, UseStateResult6,
 		ViewportSize, IsSmallPortraitMode
 	})
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 191 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: InGameAssetReportAnalyticsModule (upval), UseReducerResult (copy), p1 (copy)
 		InGameAssetReportAnalyticsModule(UseReducerResult, 2)
 		p1.backAction()
 	end, { p1.backAction, UseReducerResult })
 	local MapResult = CryoModule.List.map(UseStateResult, v19)
-	local UseResult5 = ReactModule.useCallback(function(Reason_selection, Surface_selection, p3) --[[ Line: 203 ]]
+	local UseResult5 = ReactModule.useCallback(function(Reason_selection, Surface_selection, p3)
 		-- upvalues: UseStateResult2_2 (copy), UseStateResult2_3 (copy), UseReducerResult2 (copy), ConstantsModule (upval), UseStateResult7 (copy), UseStateResult (copy), BuildReportModule (upval), Players (upval), UseStateResult6 (copy), MapResult (copy), UseStateResult8 (copy)
 		UseStateResult2_2(false)
 		UseStateResult2_3(true)
@@ -180,12 +180,12 @@ return function(p1) --[[ Line: 51 ]]
 		UseStateResult7, UseStateResult8, UseStateResult2_2, UseStateResult2_3,
 		UseStateResult6, UseStateResult, MapResult
 	})
-	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 255 ]]
+	local UseResult6 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_6 (copy), UseStateResult2_2 (copy)
 		UseStateResult2_6(nil)
 		UseStateResult2_2(false)
 	end, { UseStateResult2_2, UseStateResult2_6 })
-	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 261 ]]
+	local UseResult7 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_3 (copy), InGameAssetReportAnalyticsModule (upval), UseReducerResult (copy), p1 (copy)
 		UseStateResult2_3(false)
 		InGameAssetReportAnalyticsModule(UseReducerResult, 1)
@@ -196,18 +196,18 @@ return function(p1) --[[ Line: 51 ]]
 		UseStateResult2_3,
 		UseReducerResult
 	})
-	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 268 ]]
+	local UseResult8 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult (copy), UseStateResult2_4 (copy)
 		for _, value in ipairs(UseStateResult) do
 			value.signalConnection:Disconnect()
 		end
 		UseStateResult2_4(true)
 	end, { UseStateResult2_4, UseStateResult })
-	local UseResult9 = ReactModule.useCallback(function() --[[ Line: 279 ]]
+	local UseResult9 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_4 (copy)
 		UseStateResult2_4(false)
 	end, {})
-	local UseResult10 = ReactModule.useCallback(function() --[[ Line: 283 ]]
+	local UseResult10 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult9 (copy), UseStateResult2_8 (copy), UseReducerResult2 (copy), ConstantsModule (upval), UseStateResult3 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy)
 		if UseStateResult9 then
 			UseStateResult2_8(false)
@@ -224,12 +224,12 @@ return function(p1) --[[ Line: 51 ]]
 	end, { UseStateResult9, UseStateResult3 })
 	local IsUndoEnabled = #UseStateResult > 0
 	local IsRedoEnabled = #UseStateResult1 > 0
-	ReactModule.useEffect(function() --[[ Line: 305 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult10 (copy), UserInputService (upval), UseResult4 (copy), UseStateResult2_9 (copy)
 		if UseStateResult10 then
 			UseStateResult10:Disconnect()
 		end
-		UseStateResult2_9((UserInputService.InputEnded:Connect(function(Input) --[[ Line: 310 ]]
+		UseStateResult2_9((UserInputService.InputEnded:Connect(function(Input)
 			-- upvalues: UseResult4 (upval)
 			if Input.KeyCode == Enum.KeyCode.Escape then
 				UseResult4()
@@ -240,7 +240,7 @@ return function(p1) --[[ Line: 51 ]]
 	return WithLocalizationFunction({
 		mainTitle = "Feature.ReportAbuse.Label.HighlightProblem",
 		next = "CommonUI.Controls.Action.Continue"
-	})(function(p3) --[[ Line: 322 ]]
+	})(function(p3)
 		-- upvalues: ReactModule (upval), UseResult10 (copy), IsSmallPortraitMode (copy), InGameAssetReportPortraitHeaderFooterModule (upval), UseResult4 (copy), UseResult1 (copy), UseResult2 (copy), IsRedoEnabled (copy), IsUndoEnabled (copy), UseStateResult (copy), InGameAssetReportLandscapeHeaderModule (upval), UseResult3 (copy), ScreenshotHighlighterModule (upval), MapResult (copy), UseResult (copy), UseResult8 (copy), UseStateResult5 (copy), InGameAssetReportErrorModalModule (upval), ViewportSize (copy), UseResult9 (copy), UseStateResult3 (copy), InGameAssetReportSubmitDialogModule (upval), UseResult5 (copy), UseResult6 (copy), UseReducerResult2 (copy), UseStateResult4 (copy), InGameAssetReportCompleteModalModule (upval), UseResult7 (copy)
 		return ReactModule.createElement("Frame", {
 			Size = UDim2.new(1, 0, 1, 0),

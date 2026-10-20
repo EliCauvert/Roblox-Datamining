@@ -3,8 +3,8 @@ local PlaytestRejoinModule = require(script.Parent.PlaytestRejoin)
 local LeaveExperienceModule = require(script.Parent.leaveExperience)
 local TeamCreateUtilsModule = require(script.Parent.teamCreateUtils)
 
-local function _(p1): boolean --[[ Line: 8 | Named "isTeamTest" ]]
-	local Success, Result = pcall(function() --[[ Line: 9 ]]
+local function _(p1): boolean
+	local Success, Result = pcall(function()
 		-- upvalues: p1 (copy)
 		return p1:GetService("RunService"):IsTeamTest()
 	end)
@@ -13,7 +13,7 @@ local function _(p1): boolean --[[ Line: 8 | Named "isTeamTest" ]]
 end
 
 return {
-	getRelaunchPlaceId = function(p1) --[[ Line: 15 ]]
+	getRelaunchPlaceId = function(p1)
 		-- upvalues: BuildModeLaunchModule (copy), TeamCreateUtilsModule (copy)
 		local P1 = p1 or game
 		
@@ -21,7 +21,7 @@ return {
 			return nil
 		end
 		if P1.PlaceId ~= 0 then
-			local Success, Result = pcall(function() --[[ Line: 9 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: P1 (copy)
 				return P1:GetService("RunService"):IsTeamTest()
 			end)
@@ -35,7 +35,7 @@ return {
 		end
 		return BuildModeLaunchModule:getTeamTestPlaceId()
 	end,
-	relaunch = function(p1) --[[ Line: 28 ]]
+	relaunch = function(p1)
 		-- upvalues: PlaytestRejoinModule (copy), LeaveExperienceModule (copy)
 		PlaytestRejoinModule.request(p1, "BuildPlaytestReconnect", true)
 		LeaveExperienceModule()

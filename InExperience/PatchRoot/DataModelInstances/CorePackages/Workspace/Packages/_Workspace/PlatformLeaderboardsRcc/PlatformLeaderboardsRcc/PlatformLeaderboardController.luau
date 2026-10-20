@@ -13,7 +13,7 @@ local FFlagPlatformLeaderboardDebugLogging = require(Parent.Parent.SharedFlags).
 local PlatformLeaderboardController = {}
 PlatformLeaderboardController.__index = PlatformLeaderboardController
 
-function PlatformLeaderboardController.new(_configService, _fetcher) --[[ Line: 51 ]]
+function PlatformLeaderboardController.new(_configService, _fetcher)
 	-- upvalues: PlatformLeaderboardController (copy)
 	return (setmetatable({
 		_cache = nil,
@@ -26,7 +26,7 @@ function PlatformLeaderboardController.new(_configService, _fetcher) --[[ Line: 
 	}, PlatformLeaderboardController))
 end
 
-function PlatformLeaderboardController:_onConfigChanged(p1, Config) --[[ Line: 66 ]]
+function PlatformLeaderboardController:_onConfigChanged(p1, Config)
 	-- upvalues: EventType (copy)
 	self:_pushToAll({ type = EventType.ConfigUpdate, config = Config })
 	
@@ -49,11 +49,11 @@ function PlatformLeaderboardController:_onConfigChanged(p1, Config) --[[ Line: 6
 	end
 end
 
-function PlatformLeaderboardController:_initializeCache(Fetcher) --[[ Line: 86 ]]
+function PlatformLeaderboardController:_initializeCache(Fetcher)
 	-- upvalues: PlatformLeaderboardCacheModule (copy), EventType (copy), Players (copy)
 	self._cache = PlatformLeaderboardCacheModule.new(self._fetcher, Fetcher)
 	local Cache = self._cache
-	table.insert(self._conns, Cache:onGlobalUpdated(function(Data, p1) --[[ Line: 92 ]]
+	table.insert(self._conns, Cache:onGlobalUpdated(function(Data, p1)
 		-- upvalues: self (copy), EventType (upval)
 		self:_pushToGlobalViewers({ type = EventType.GlobalLeaderboardData, data = Data })
 		
@@ -61,7 +61,7 @@ function PlatformLeaderboardController:_initializeCache(Fetcher) --[[ Line: 86 ]
 			self._configService:updateConfig(p1)
 		end
 	end))
-	table.insert(self._conns, Cache:onFriendsUpdated(function(UserId, Data, p1) --[[ Line: 102 ]]
+	table.insert(self._conns, Cache:onFriendsUpdated(function(UserId, Data, p1)
 		-- upvalues: Players (upval), self (copy), EventType (upval)
 		local Player = Players:GetPlayerByUserId(UserId)
 		
@@ -76,7 +76,7 @@ function PlatformLeaderboardController:_initializeCache(Fetcher) --[[ Line: 86 ]
 			self._configService:updateConfig(p1)
 		end
 	end))
-	table.insert(self._conns, Cache:onUserScoreUpdated(function(UserId, Entry) --[[ Line: 118 ]]
+	table.insert(self._conns, Cache:onUserScoreUpdated(function(UserId, Entry)
 		-- upvalues: Players (upval), self (copy), EventType (upval)
 		local Player = Players:GetPlayerByUserId(UserId)
 		
@@ -90,7 +90,7 @@ function PlatformLeaderboardController:_initializeCache(Fetcher) --[[ Line: 86 ]
 	end))
 end
 
-function PlatformLeaderboardController:initialize() --[[ Line: 127 ]]
+function PlatformLeaderboardController:initialize()
 	-- upvalues: RemoteEventName (copy), RobloxReplicatedStorage (copy), EventType (copy), Players (copy)
 	self._pushEvent = Instance.new("RemoteEvent")
 	self._pushEvent.Name = RemoteEventName.Push
@@ -101,13 +101,13 @@ function PlatformLeaderboardController:initialize() --[[ Line: 127 ]]
 	local RemoteEvent1 = Instance.new("RemoteEvent")
 	RemoteEvent1.Name = RemoteEventName.TabClosed
 	RemoteEvent1.Parent = RobloxReplicatedStorage
-	self._pushEvent.OnServerEvent:Connect(function() --[[ Line: 143 ]] end)
+	self._pushEvent.OnServerEvent:Connect(function() end)
 	local Config = self._configService:getConfig()
 	
 	if Config then
 		self:_initializeCache(Config)
 	end
-	table.insert(self._conns, self._configService:onConfigChanged(function(p1, p2) --[[ Line: 155 ]]
+	table.insert(self._conns, self._configService:onConfigChanged(function(p1, p2)
 		-- upvalues: self (copy)
 		self:_onConfigChanged(p1, p2)
 	end))
@@ -115,7 +115,7 @@ function PlatformLeaderboardController:initialize() --[[ Line: 127 ]]
 		type = EventType.ConfigUpdate,
 		config = self._configService:getConfig()
 	})
-	table.insert(self._conns, RemoteEvent.OnServerEvent:Connect(function(Player: Player, p1) --[[ Line: 167 ]]
+	table.insert(self._conns, RemoteEvent.OnServerEvent:Connect(function(Player: Player, p1)
 		-- upvalues: self (copy)
 		if self:_isRateLimited(Player.UserId) then return end
 		local ValidateTabPayloadResult = self:_validateTabPayload(Player, p1)
@@ -124,7 +124,7 @@ function PlatformLeaderboardController:initialize() --[[ Line: 127 ]]
 			self:_onTabOpened(Player, ValidateTabPayloadResult)
 		end
 	end))
-	table.insert(self._conns, RemoteEvent1.OnServerEvent:Connect(function(Player: Player, p1) --[[ Line: 179 ]]
+	table.insert(self._conns, RemoteEvent1.OnServerEvent:Connect(function(Player: Player, p1)
 		-- upvalues: self (copy)
 		if self:_isRateLimited(Player.UserId) then return end
 		local ValidateTabPayloadResult = self:_validateTabPayload(Player, p1)
@@ -133,9 +133,9 @@ function PlatformLeaderboardController:initialize() --[[ Line: 127 ]]
 			self:_onTabClosed(Player, ValidateTabPayloadResult)
 		end
 	end))
-	table.insert(self._conns, Players.PlayerAdded:Connect(function(Player) --[[ Line: 192 ]]
+	table.insert(self._conns, Players.PlayerAdded:Connect(function(Player)
 		-- upvalues: self (copy), EventType (upval)
-		task.defer(function() --[[ Line: 193 ]]
+		task.defer(function()
 			-- upvalues: self (upval), Player (copy), EventType (upval)
 			self:_pushToPlayer(Player, {
 				type = EventType.ConfigUpdate,
@@ -143,13 +143,13 @@ function PlatformLeaderboardController:initialize() --[[ Line: 127 ]]
 			})
 		end)
 	end))
-	table.insert(self._conns, Players.PlayerRemoving:Connect(function(Player) --[[ Line: 204 ]]
+	table.insert(self._conns, Players.PlayerRemoving:Connect(function(Player)
 		-- upvalues: self (copy)
 		self:_removePlayerFromAllTabs(Player.UserId)
 	end))
 end
 
-function PlatformLeaderboardController:_isRateLimited(UserId): boolean --[[ Line: 215 ]]
+function PlatformLeaderboardController:_isRateLimited(UserId): boolean
 	-- upvalues: PlatformLeaderboardTabEventRateWindowSeconds (copy), PlatformLeaderboardTabEventRateLimit (copy)
 	local ClockTime = os.clock()
 	local RateLimit = self._rateLimits[UserId]
@@ -167,7 +167,7 @@ function PlatformLeaderboardController:_isRateLimited(UserId): boolean --[[ Line
 	end
 end
 
-function PlatformLeaderboardController:_validateTabPayload(Player, p1) --[[ Line: 232 ]]
+function PlatformLeaderboardController:_validateTabPayload(Player, p1)
 	if typeof(p1) ~= "table" then
 		return nil
 	end
@@ -182,7 +182,7 @@ function PlatformLeaderboardController:_validateTabPayload(Player, p1) --[[ Line
 	end
 end
 
-function PlatformLeaderboardController:_removePlayerFromAllTabs(UserId) --[[ Line: 247 ]]
+function PlatformLeaderboardController:_removePlayerFromAllTabs(UserId)
 	if self._cache then
 		self._cache:cleanupForUserId(UserId)
 	end
@@ -190,7 +190,7 @@ function PlatformLeaderboardController:_removePlayerFromAllTabs(UserId) --[[ Lin
 	self._rateLimits[UserId] = nil
 end
 
-function PlatformLeaderboardController:_onTabOpened(Player: Player, ValidateTabPayloadResult) --[[ Line: 255 ]]
+function PlatformLeaderboardController:_onTabOpened(Player: Player, ValidateTabPayloadResult)
 	-- upvalues: LeaderboardType (copy), EventType (copy), FFlagPlatformLeaderboardDebugLogging (copy)
 	local Cache = self._cache
 	
@@ -243,7 +243,7 @@ function PlatformLeaderboardController:_onTabOpened(Player: Player, ValidateTabP
 	end
 end
 
-function PlatformLeaderboardController:_onTabClosed(Player: Player, ValidateTabPayloadResult) --[[ Line: 294 ]]
+function PlatformLeaderboardController:_onTabClosed(Player: Player, ValidateTabPayloadResult)
 	-- upvalues: LeaderboardType (copy)
 	if not self._cache then return end
 	local Cache = self._cache
@@ -261,13 +261,13 @@ function PlatformLeaderboardController:_onTabClosed(Player: Player, ValidateTabP
 	end
 end
 
-function PlatformLeaderboardController:_pushToAll(p1) --[[ Line: 310 ]]
+function PlatformLeaderboardController:_pushToAll(p1)
 	if self._pushEvent then
 		self._pushEvent:FireAllClients(p1)
 	end
 end
 
-function PlatformLeaderboardController:_pushToGlobalViewers(p1) --[[ Line: 316 ]]
+function PlatformLeaderboardController:_pushToGlobalViewers(p1)
 	-- upvalues: Players (copy)
 	if not self._pushEvent then return end
 	for _, player in Players:GetPlayers() do
@@ -279,13 +279,13 @@ function PlatformLeaderboardController:_pushToGlobalViewers(p1) --[[ Line: 316 ]
 	end
 end
 
-function PlatformLeaderboardController:_pushToPlayer(Player, p2) --[[ Line: 328 ]]
+function PlatformLeaderboardController:_pushToPlayer(Player, p2)
 	if self._pushEvent then
 		self._pushEvent:FireClient(Player, p2)
 	end
 end
 
-function PlatformLeaderboardController:destroy() --[[ Line: 334 ]]
+function PlatformLeaderboardController:destroy()
 	for _, conn in self._conns do
 		if typeof(conn) == "table" and conn.disconnect then
 			conn:disconnect()

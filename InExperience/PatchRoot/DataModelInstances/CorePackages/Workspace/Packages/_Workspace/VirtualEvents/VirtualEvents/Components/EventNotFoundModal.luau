@@ -6,11 +6,11 @@ local UseLocalizationFunction = require(VirtualEvents.Parent.Localization).Hooks
 local PartialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
 local EmptyState = UIBloxModule.App.Indicator.EmptyState
 
-local function selectScreenSize(p1) --[[ Line: 11 ]]
+local function selectScreenSize(p1)
 	return p1.ScreenSize
 end
 
-return function(p1) --[[ Line: 19 | Named "EventNotFoundModal" ]]
+return function(p1)
 	-- upvalues: UseSelectorFunction (copy), selectScreenSize (copy), UseLocalizationFunction (copy), ReactModule (copy), PartialPageModal (copy), EmptyState (copy)
 	return ReactModule.createElement(PartialPageModal, {
 		position = UDim2.fromScale(0.5, 0.5),

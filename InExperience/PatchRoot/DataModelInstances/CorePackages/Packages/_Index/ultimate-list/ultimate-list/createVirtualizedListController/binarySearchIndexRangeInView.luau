@@ -4,9 +4,9 @@ local _ = require(UltimateList.DataSources)
 local _ = require(UltimateList.Dimensions)
 local ExhaustiveMatchModule = require(UltimateList.Util.exhaustiveMatch)
 
-return function(p1, Callback, p2, p3, p4) --[[ Line: 8 | Named "binarySearchIndexRangeInView" ]]
+return function(p1, Callback, p2, p3, p4)
 	-- upvalues: ExhaustiveMatchModule (copy), DataSourceMethodsModule (copy)
-	local function compareInView(p5): string --[[ Line: 18 ]]
+	local function compareInView(p5): string
 		-- upvalues: p4 (copy), ExhaustiveMatchModule (upval), p2 (copy), p3 (copy)
 		local Offset = if p4 == "x" then p5.position.X.Offset elseif p4 == "y" then p5.position.Y.Offset else ExhaustiveMatchModule(p4)
 		local Offset1 = if p4 == "x" then p5.size.X.Offset elseif p4 == "y" then p5.size.Y.Offset else ExhaustiveMatchModule(p4)

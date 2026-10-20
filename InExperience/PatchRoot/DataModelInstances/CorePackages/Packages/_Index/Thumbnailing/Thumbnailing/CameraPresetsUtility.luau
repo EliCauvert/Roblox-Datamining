@@ -4,11 +4,11 @@ local CharacterUtilityModule = require(script.Parent.CharacterUtility)
 local MannequinUtilityModule = require(script.Parent.MannequinUtility)
 local CameraPresetHeadshotExtentScaleHundredths = game:DefineFastInt("CameraPresetHeadshotExtentScaleHundredths", 130)
 
-local function _(Object) --[[ Line: 18 | Named "getTorsoOrUpperTorso" ]]
+local function _(Object)
 	return Object:FindFirstChild("Torso") or Object:FindFirstChild("UpperTorso")
 end
 
-local function getMannequinBodyParts(Object, Humanoid: Humanoid) --[[ Line: 22 ]]
+local function getMannequinBodyParts(Object, Humanoid: Humanoid)
 	-- upvalues: MannequinUtilityModule (copy)
 	local List = {}
 	
@@ -35,12 +35,12 @@ local CameraPresetsUtilityModule = {
 	GOLDEN_RATIO = game:DefineFastInt("AvatarGoldenRatio", 618) / 1000,
 	UPVECTOR_ORENTATION_TRESHOLD = game:DefineFastInt("UpVectorOrentationThreshold1", -60) / 100,
 	AVATAR_ROTATION_DEGREE = game:DefineFastInt("LookAvatarRotationDegree1", 23),
-	GetCharacterTorsoCFrame = function(Object) --[[ Line: 43 ]]
+	GetCharacterTorsoCFrame = function(Object)
 		return (Object:FindFirstChild("Torso") or Object:FindFirstChild("UpperTorso")).CFrame
 	end
 }
 
-function CameraPresetsUtilityModule.GetFullBodyCameraCFrame(Object, Callback: () -> (), p1, p2, p3) --[[ Line: 61 ]]
+function CameraPresetsUtilityModule.GetFullBodyCameraCFrame(Object, Callback: () -> (), p1, p2, p3)
 	-- upvalues: CameraPresetsUtilityModule (copy), getMannequinBodyParts (copy), CharacterUtilityModule (copy), CameraUtilityModule (copy)
 	local P6 = p2 or 56
 	local P7 = p3 or CameraPresetsUtilityModule.GetCharacterTorsoCFrame(Object)
@@ -84,7 +84,7 @@ end
 
 CameraPresetsUtilityModule.GetCameraCFrame_ForAvatarR15Action_LookAtGoldenRatioOfTheHumanoid = CameraPresetsUtilityModule.GetFullBodyCameraCFrame
 
-function CameraPresetsUtilityModule.GetHeadshotCameraCFrame(Object, Callback: () -> (), p1, p2) --[[ Line: 163 ]]
+function CameraPresetsUtilityModule.GetHeadshotCameraCFrame(Object, Callback: () -> (), p1, p2)
 	-- upvalues: CameraPresetsUtilityModule (copy), CFrameUtilityModule (copy), CharacterUtilityModule (copy), CameraUtilityModule (copy), CameraPresetHeadshotExtentScaleHundredths (copy)
 	local P10 = p2 or 30
 	

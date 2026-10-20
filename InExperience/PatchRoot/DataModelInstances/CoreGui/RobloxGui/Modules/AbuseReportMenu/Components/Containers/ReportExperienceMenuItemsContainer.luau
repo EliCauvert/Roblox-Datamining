@@ -9,11 +9,11 @@ local ConstantsModule = require(AbuseReportMenu.Components.Constants)
 local CryoModule = require(CorePackages.Packages.Cryo)
 local ReportExperienceUIStateReducerModule = require(AbuseReportMenu.Reducers.reportExperienceUIStateReducer)
 
-return function(p1) --[[ Line: 17 | Named "ReportExperienceMenuItemsContainer" ]]
+return function(p1)
 	-- upvalues: GetMenuItemSizingsModule (copy), ReactModule (copy), ReportExperienceUIStateReducerModule (copy), ConstantsModule (copy), GetMenuItemsFromConfigsModule (copy), ReportExperienceMenuItemConfigListModule (copy), CryoModule (copy)
 	local MenuItemSizingsModule = GetMenuItemSizingsModule()
 	local UseReducerResult, UseReducerResult2 = ReactModule.useReducer(ReportExperienceUIStateReducerModule, ConstantsModule.InitExperienceUIState)
-	ReactModule.useEffect(function() --[[ Line: 21 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), ConstantsModule (upval)
 		if p1.utilityProps.isReportTabVisible then
 			p1.utilityProps.analyticsDispatch({

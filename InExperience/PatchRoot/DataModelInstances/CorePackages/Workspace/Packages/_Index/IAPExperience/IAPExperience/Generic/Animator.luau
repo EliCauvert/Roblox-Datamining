@@ -9,7 +9,7 @@ local OtterModule = require(Parent1.Otter)
 local ExtendResult = RoactModule.Component:extend(script.Name)
 local config = { dampingRatio = 1, frequency = 1.6 }
 
-function ExtendResult.init(p1) --[[ Line: 35 ]]
+function ExtendResult.init(p1)
 	-- upvalues: RoactModule (copy), OtterModule (copy), config (copy)
 	p1.state = { shouldRenderChildren = p1.props.shouldShow }
 	local Binding, Binding2 = RoactModule.createBinding(1)
@@ -17,7 +17,7 @@ function ExtendResult.init(p1) --[[ Line: 35 ]]
 	p1.motor:start()
 	p1.motor:onStep(Binding2)
 	p1.animationProgress = Binding
-	p1.motor:onComplete(function() --[[ Line: 48 ]]
+	p1.motor:onComplete(function()
 		-- upvalues: p1 (copy)
 		local Props = p1.props
 		
@@ -44,7 +44,7 @@ function ExtendResult.init(p1) --[[ Line: 35 ]]
 	end
 end
 
-function ExtendResult.didUpdate(p1, p2, _) --[[ Line: 72 ]]
+function ExtendResult.didUpdate(p1, p2, _)
 	-- upvalues: OtterModule (copy), config (copy)
 	local Props = p1.props
 	
@@ -63,11 +63,11 @@ function ExtendResult.didUpdate(p1, p2, _) --[[ Line: 72 ]]
 	end
 end
 
-function ExtendResult.willUnmount(p1) --[[ Line: 90 ]]
+function ExtendResult.willUnmount(p1)
 	p1.motor:destroy()
 end
 
-function ExtendResult.renderWithoutLocale(p1) --[[ Line: 94 ]]
+function ExtendResult.renderWithoutLocale(p1)
 	-- upvalues: RoactModule (copy)
 	local Props = p1.props
 	
@@ -75,7 +75,7 @@ function ExtendResult.renderWithoutLocale(p1) --[[ Line: 94 ]]
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0),
-		Position = p1.animationProgress:map(function(p2: number): UDim2 --[[ Line: 102 ]]
+		Position = p1.animationProgress:map(function(p2: number): UDim2
 			-- upvalues: Props (copy)
 			return if Props.animateDown then UDim2.new(0, 0, -1 * p2, 0) else UDim2.new(0, 0, 1 * p2, 0)
 		end),
@@ -83,7 +83,7 @@ function ExtendResult.renderWithoutLocale(p1) --[[ Line: 94 ]]
 	}, p1.state.shouldRenderChildren and Props.renderChildren() or nil) elseif Props.shouldShow then Props.renderChildren() else nil
 end
 
-function ExtendResult.render(p1) --[[ Line: 120 ]]
+function ExtendResult.render(p1)
 	-- upvalues: RoactModule (copy), LocaleProviderModule (copy), LocalizationService (copy), LocalizationProvider (copy), Localization (copy)
 	return RoactModule.createElement(LocaleProviderModule, {
 		locale = LocalizationService and LocalizationService.RobloxLocaleId

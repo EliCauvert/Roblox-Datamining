@@ -14,7 +14,7 @@ local config = {
 	[ItemTileEnumsModule.ItemIconType.DynamicHead] = ImagesModule["icons/status/dynamicHead_small"]
 }
 ItemIcon.validateProps = TModule.strictInterface({
-	itemIconType = TModule.intersection(ItemTileEnumsModule.ItemIconType.isEnumValue, function(Text) --[[ Line: 24 | Named "isValidItemIconType" ]]
+	itemIconType = TModule.intersection(ItemTileEnumsModule.ItemIconType.isEnumValue, function(Text)
 		-- upvalues: config (copy)
 		if config[Text] then
 			return true
@@ -24,12 +24,12 @@ ItemIcon.validateProps = TModule.strictInterface({
 	end)
 })
 
-function ItemIcon.render(p1) --[[ Line: 37 ]]
+function ItemIcon.render(p1)
 	-- upvalues: config (copy), ImagesModule (copy), WithStyleModule (copy), RoactModule (copy), ImageSetComponentModule (copy)
 	local Entry = config[p1.props.itemIconType]
 	local ImageRectSizeRatio = Entry.ImageRectSize / ImagesModule.ImagesResolutionScale
 	
-	return WithStyleModule(function(p2) --[[ Line: 43 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: RoactModule (upval), ImageSetComponentModule (upval), Entry (copy), ImageRectSizeRatio (copy)
 		local Theme = p2.Theme
 		local Tokens = p2.Tokens

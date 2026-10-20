@@ -35,11 +35,11 @@ local config = {
 	playtimeSeconds = 0
 }
 
-local function _(p1: number): number --[[ Line: 66 | Named "toPlaytimeMinutes" ]]
+local function _(p1: number): number
 	return p1 / 60
 end
 
-local function formatDateRange(Text: string, StartMs: number, EndMs): string? --[[ Line: 75 ]]
+local function formatDateRange(Text: string, StartMs: number, EndMs): string?
 	-- upvalues: LocalizationStringsModule (copy)
 	if StartMs == nil or EndMs == nil or StartMs <= 0 then
 		return nil
@@ -49,14 +49,14 @@ local function formatDateRange(Text: string, StartMs: number, EndMs): string? --
 			endDate = LocalizationStringsModule.formatCampaignDate(EndMs)
 		}
 		
-		return (string.gsub(Text, "{(%w+)}", function(Match) --[[ Line: 83 ]]
+		return (string.gsub(Text, "{(%w+)}", function(Match)
 			-- upvalues: config (copy)
 			return config[Match] or "{" .. Match .. "}"
 		end))
 	end
 end
 
-local _ = function(Title, StatValue, StatIcon, HasData) --[[ Line: 89 | Named "scalarCard" ]]
+local _ = function(Title, StatValue, StatIcon, HasData)
 	-- upvalues: AnalyticsUnitModule (copy), StatsCardValueFormatModule (copy), IconPosition (copy)
 	return {
 		deltaValue = 0,
@@ -71,7 +71,7 @@ local _ = function(Title, StatValue, StatIcon, HasData) --[[ Line: 89 | Named "s
 	}
 end
 
-return function(p1, p2, p3, p4, p5, p6) --[[ Line: 103 | Named "useAdsStatsPageViewModel" ]]
+return function(p1, p2, p3, p4, p5, p6)
 	-- upvalues: UseGetAdCampaignsModule (copy), UseGetCampaignStatsModule (copy), UseGetAdCampaignEligibilityModule (copy), UseCreateAdCampaignModule (copy), ReactModule (copy), FFlagEnablePaidAdsModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), LocalizationModule (copy), WINDOWDAYS (copy), MSPERDAY (copy), config (copy), ToStartMsFunction (copy), CampaignEndMsFunction (copy), CampaignEndExclusiveMsFunction (copy), IconName (copy), AnalyticsUnitModule (copy), StatsCardValueFormatModule (copy), IconPosition (copy), formatDateRange (copy), AdCampaignEligibilityUtilsModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), GetAdsManagerUrlModule (copy), UseOpenWebViewWithResumeRefreshModule (copy)
 	local UseGetAdCampaignsModuleResult, UseGetAdCampaignsModuleResult2 = UseGetAdCampaignsModule(p2)
 	local Flag = false
@@ -99,7 +99,7 @@ return function(p1, p2, p3, p4, p5, p6) --[[ Line: 103 | Named "useAdsStatsPageV
 	end
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 151 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), FFlagEnablePaidAdsModule (upval), UseCreateAdCampaignModuleResult (copy)
 		UseStateResult2(false)
 		
@@ -108,12 +108,12 @@ return function(p1, p2, p3, p4, p5, p6) --[[ Line: 103 | Named "useAdsStatsPageV
 		end
 	end, { UseCreateAdCampaignModuleResult.clearCreateError })
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 162 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_3 (copy)
 		UseStateResult2_3(false)
 	end, {})
 	local UseRefResult1 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 169 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), UseCreateAdCampaignModuleResult (copy), UseStateResult2 (copy), UseStateResult2_3 (copy), UseStateResult2_2 (copy), UseRefResult (copy)
 		local Current = UseRefResult1.current
 		UseRefResult1.current = UseCreateAdCampaignModuleResult.isCreatePending
@@ -127,7 +127,7 @@ return function(p1, p2, p3, p4, p5, p6) --[[ Line: 103 | Named "useAdsStatsPageV
 		UseCreateAdCampaignModuleResult.isCreatePending,
 		UseCreateAdCampaignModuleResult.hasCreateError
 	})
-	ReactModule.useEffect(function() --[[ Line: 184 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseGetAdCampaignEligibilityModuleResult2 (copy), UseGetAdCampaignEligibilityModuleResult (copy), UseRefResult (copy), UseStateResult3 (copy), UseStateResult2_2 (copy)
 		local IsNotUseGetAdCampaignEligibilityModuleResultMatch: boolean = UseGetAdCampaignEligibilityModuleResult2 == "Ready" and (UseGetAdCampaignEligibilityModuleResult ~= nil and UseGetAdCampaignEligibilityModuleResult ~= UseRefResult.current)
 		
@@ -140,7 +140,7 @@ return function(p1, p2, p3, p4, p5, p6) --[[ Line: 103 | Named "useAdsStatsPageV
 		UseGetAdCampaignEligibilityModuleResult2,
 		UseGetAdCampaignEligibilityModuleResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 202 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseStateResult2_2 (copy), FFlagEnablePaidAdsModule (upval), Callback (ref)
 		UseRefResult.current = nil
 		UseStateResult2_2(false)
@@ -149,7 +149,7 @@ return function(p1, p2, p3, p4, p5, p6) --[[ Line: 103 | Named "useAdsStatsPageV
 			Callback(nil)
 		end
 	end, { p1 })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 211 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p4 (copy)
 		return if p4 == nil then DateTime.now().UnixTimestampMillis else p4
 	end, { p4 })
@@ -174,7 +174,7 @@ return function(p1, p2, p3, p4, p5, p6) --[[ Line: 103 | Named "useAdsStatsPageV
 	local AdViews = UseLocalizationResult.adViews
 	local PlayTime = UseLocalizationResult.playTime
 	local DateRange = UseLocalizationResult.dateRange
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 245 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseGetAdCampaignsModuleResult (copy), UseGetCampaignStatsModuleResult (copy), UseMemoResult (copy), WINDOWDAYS (upval), MSPERDAY (upval), p1 (copy), config (upval), ToStartMsFunction (upval), CampaignEndMsFunction (upval), CampaignEndExclusiveMsFunction (upval), GamePlays (copy), IconName (upval), UseGetCampaignStatsModuleResult3 (copy), AnalyticsUnitModule (upval), StatsCardValueFormatModule (upval), IconPosition (upval), AdClicks (copy), AdViews (copy), PlayTime (copy), formatDateRange (upval), DateRange (copy)
 		local UseGetCampaignStatsModuleResult1 = UseGetCampaignStatsModuleResult or {}
 		local UseMemoResultDelta = UseMemoResult - WINDOWDAYS * MSPERDAY
@@ -206,14 +206,14 @@ return function(p1, p2, p3, p4, p5, p6) --[[ Line: 103 | Named "useAdsStatsPageV
 				end
 			end
 		end
-		table.sort(List, function(A, B): boolean --[[ Line: 286 ]]
+		table.sort(List, function(A, B): boolean
 			return if A.startMs == B.startMs then A.id < B.id else B.startMs < A.startMs
 		end)
-		table.sort(List1, function(A, B): boolean --[[ Line: 293 ]]
+		table.sort(List1, function(A, B): boolean
 			return B.endMs < A.endMs
 		end)
 		
-		local function buildSummaryCards(Stats) --[[ Line: 298 ]]
+		local function buildSummaryCards(Stats)
 			-- upvalues: GamePlays (upval), IconName (upval), UseGetCampaignStatsModuleResult3 (upval), AnalyticsUnitModule (upval), StatsCardValueFormatModule (upval), IconPosition (upval), AdClicks (upval), AdViews (upval), PlayTime (upval)
 			return {
 				{
@@ -334,7 +334,7 @@ return function(p1, p2, p3, p4, p5, p6) --[[ Line: 103 | Named "useAdsStatsPageV
 		adCampaignOffers = AdCampaignOffers,
 		adCampaignRunStartTimeMs = UseStateResult1,
 		adCampaignRunEndTimeMs = if UseStateResult1 == nil or DurationDays == nil then nil else UseStateResult1 + math.max(0, DurationDays - 1) * MSPERDAY,
-		onCreatePrimary = ReactModule.useCallback(function() --[[ Line: 420 ]]
+		onCreatePrimary = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult3 (copy), CanCreateCampaign (copy), UseStateResult2_3 (copy), FFlagEnablePaidAdsModule (upval), UseCreateAdCampaignModuleResult (copy), UseStateResult2_1 (copy), Callback (ref), SelectableOffers (copy), UseStateResult2 (copy), UseOpenWebViewWithResumeRefreshModuleResult (ref)
 			if UseStateResult3 then return end
 			if not CanCreateCampaign then
@@ -350,7 +350,7 @@ return function(p1, p2, p3, p4, p5, p6) --[[ Line: 103 | Named "useAdsStatsPageV
 			UseStateResult2_1(DateTime.now().UnixTimestampMillis)
 			
 			if FFlagEnablePaidAdsModule then
-				Callback(function(p7) --[[ Line: 433 ]]
+				Callback(function(p7)
 					-- upvalues: UseCreateAdCampaignModuleResult (upval), SelectableOffers (upval)
 					return if UseCreateAdCampaignModuleResult.hasCreateError and p7 ~= nil then p7 else SelectableOffers
 				end)
@@ -363,7 +363,7 @@ return function(p1, p2, p3, p4, p5, p6) --[[ Line: 103 | Named "useAdsStatsPageV
 			UseCreateAdCampaignModuleResult.hasCreateError, SelectableOffers
 		}),
 		onClosePromotionSheet = UseResult,
-		onCreateCampaign = ReactModule.useCallback(function(p7) --[[ Line: 453 ]]
+		onCreateCampaign = ReactModule.useCallback(function(p7)
 			-- upvalues: UseRefResult (copy), UseGetAdCampaignEligibilityModuleResult (copy), UseCreateAdCampaignModuleResult (copy), FFlagEnablePaidAdsModule (upval)
 			UseRefResult.current = UseGetAdCampaignEligibilityModuleResult
 			UseCreateAdCampaignModuleResult.createCampaign(if FFlagEnablePaidAdsModule then p7 else nil)

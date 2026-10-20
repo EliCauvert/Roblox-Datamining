@@ -15,7 +15,7 @@ local config = {
 	isLastMessageInMessageGroup = false
 }
 
-return function(p1) --[[ Line: 39 | Named "HiddenMessage" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), FoundationModule (copy), ReactModule (copy), ChatBubbleContainerModule (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()

@@ -3,7 +3,7 @@ local ReactModule = require(AvatarExperienceControlBar.Parent.React)
 local UseAdvancedCustomizationControlBarPropsModule = require(AvatarExperienceControlBar.useAdvancedCustomizationControlBarProps)
 local BaseControlBarContainerModule = require(AvatarExperienceControlBar.BaseControlBarContainer)
 
-return ReactModule.memo(function(Frame) --[[ Line: 9 | Named "AdvancedCustomizationControlBarContainer" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseAdvancedCustomizationControlBarPropsModule (copy), ReactModule (copy), BaseControlBarContainerModule (copy)
 	return ReactModule.createElement(BaseControlBarContainerModule, {
 		config = UseAdvancedCustomizationControlBarPropsModule(Frame).config,

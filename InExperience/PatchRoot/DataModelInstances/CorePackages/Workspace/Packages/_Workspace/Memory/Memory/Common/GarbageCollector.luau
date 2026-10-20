@@ -1,9 +1,9 @@
-﻿function trigger() --[[ Line: 3 ]]
+﻿function trigger()
 	return collectgarbage("collect")
 end
 
 return {
-	collect = function() --[[ Line: 8 ]]
+	collect = function()
 		pcall(trigger)
 		pcall(trigger)
 		task.wait()

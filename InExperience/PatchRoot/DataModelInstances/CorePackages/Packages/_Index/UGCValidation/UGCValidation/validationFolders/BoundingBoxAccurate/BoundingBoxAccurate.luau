@@ -5,11 +5,11 @@ local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStri
 local BodyAssetMasksRendererModule = require(Parent.util.bodyAssetMasksRenderer)
 local AccurateBoundingBoxRasterUtilModule = require(Parent.util.AccurateBoundingBoxRasterUtil)
 
-local function _(p1) --[[ Line: 33 | Named "getAssetTypeFromUploadEnum" ]]
+local function _(p1)
 	return if p1.uploadEnum and p1.uploadEnum.assetType then p1.uploadEnum.assetType else nil
 end
 
-local function buildEditableMeshesFromSharedData(p1) --[[ Line: 40 ]]
+local function buildEditableMeshesFromSharedData(p1)
 	local t = {}
 	
 	for ChildName, value in p1.renderMeshesData do
@@ -35,7 +35,7 @@ return {
 		ValidationEnumsModule.SharedDataMember.renderMeshesData
 	},
 	expectedFailures = {},
-	run = function(p2, p3) --[[ Line: 57 ]]
+	run = function(p2, p3)
 		-- upvalues: buildEditableMeshesFromSharedData (copy), ValidationEnumsModule (copy), AccurateBoundingBoxRasterUtilModule (copy), BodyAssetMasksRendererModule (copy), ErrorSourceStringsModule (copy)
 		local AssetType = if p3.uploadEnum and p3.uploadEnum.assetType then p3.uploadEnum.assetType else nil
 		

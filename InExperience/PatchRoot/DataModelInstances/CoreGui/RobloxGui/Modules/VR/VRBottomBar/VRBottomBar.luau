@@ -69,7 +69,7 @@ local SplashScreenManager = require(CorePackages.Workspace.Packages.SplashScreen
 local v1 = (require(RobloxGui.Modules.Flags.GetFIntVRScaleGuiDistance) or 100)() * 0.01
 local FixVRBottomBarAnalytics = game:DefineFastFlag("FixVRBottomBarAnalytics", false)
 
-local function _(p1) --[[ Line: 105 | Named "safeRequire" ]]
+local function _(p1)
 	local Success, Result = pcall(require, p1)
 	
 	if Success then
@@ -91,7 +91,7 @@ local config1 = {
 local config2 = {
 	iconOn = "rbxasset://textures/ui/MenuBar/icon_menu.png",
 	iconOff = "rbxasset://textures/ui/MenuBar/icon_menu.png",
-	onActivated = function() --[[ Line: 140 ]]
+	onActivated = function()
 		-- upvalues: VRHub (copy), InGameMenuInitModule (copy), InGameMenuConstantsModule (copy), FixVRBottomBarAnalytics (copy), VRBottomBarAnalyticsModule (copy), VRBottomBarTypeModule (copy), RbxAnalyticsService (copy)
 		VRHub:SetShowTopBar(true)
 		
@@ -114,7 +114,7 @@ local config2 = {
 local config3 = {
 	iconOn = "rbxasset://textures/ui/MenuBar/icon_maximize.png",
 	iconOff = "rbxasset://textures/ui/MenuBar/icon_minimize.png",
-	onActivated = function() --[[ Line: 164 ]]
+	onActivated = function()
 		-- upvalues: VRHub (copy), InGameMenuInitModule (copy), FixVRBottomBarAnalytics (copy), VRBottomBarAnalyticsModule (copy), VRBottomBarTypeModule (copy), RbxAnalyticsService (copy)
 		if VRHub.ShowTopBar then
 			VRHub:SetShowTopBar(false)
@@ -136,7 +136,7 @@ local config3 = {
 local config4 = {
 	iconOn = "rbxasset://textures/ui/MenuBar/icon__backpack.png",
 	iconOff = "rbxasset://textures/ui/MenuBar/icon__backpack.png",
-	onActivated = function() --[[ Line: 189 ]]
+	onActivated = function()
 		-- upvalues: FFlagEnableNewBackpack (copy), VRHub (copy), Features (copy), FixVRBottomBarAnalytics (copy), VRBottomBarAnalyticsModule (copy), VRBottomBarTypeModule (copy), BackpackModule (copy), RbxAnalyticsService (copy)
 		if FFlagEnableNewBackpack then
 			if VRHub.ShowTopBar then
@@ -176,7 +176,7 @@ local config4 = {
 local config5 = {
 	iconOn = "rbxasset://textures/ui/MenuBar/icon_leaderboard.png",
 	iconOff = "rbxasset://textures/ui/MenuBar/icon_leaderboard.png",
-	onActivated = function() --[[ Line: 229 ]]
+	onActivated = function()
 		-- upvalues: VRHub (copy), PlayerListManagerModule (copy), FixVRBottomBarAnalytics (copy), VRBottomBarAnalyticsModule (copy), VRBottomBarTypeModule (copy), RbxAnalyticsService (copy)
 		if VRHub.ShowTopBar then
 			PlayerListManagerModule:SetVisibility(not PlayerListManagerModule:GetSetVisible())
@@ -200,7 +200,7 @@ local config5 = {
 local config6 = {
 	iconOn = "rbxasset://textures/ui/MenuBar/icon_emote.png",
 	iconOff = "rbxasset://textures/ui/MenuBar/icon_emote.png",
-	onActivated = function() --[[ Line: 255 ]]
+	onActivated = function()
 		-- upvalues: VRHub (copy), EmotesMenuMasterModule (copy), FixVRBottomBarAnalytics (copy), VRBottomBarAnalyticsModule (copy), VRBottomBarTypeModule (copy), RbxAnalyticsService (copy)
 		if VRHub.ShowTopBar then
 			if EmotesMenuMasterModule:isOpen() then
@@ -228,7 +228,7 @@ local config6 = {
 local config7 = {
 	iconOn = "rbxasset://textures/ui/MenuBar/icon_chat.png",
 	iconOff = "rbxasset://textures/ui/MenuBar/icon_chat.png",
-	onActivated = function() --[[ Line: 285 ]]
+	onActivated = function()
 		-- upvalues: VRHub (copy), ChatSelectorModule (copy), GameSettings (copy), FixVRBottomBarAnalytics (copy), VRBottomBarAnalyticsModule (copy), VRBottomBarTypeModule (copy), RbxAnalyticsService (copy)
 		if VRHub.ShowTopBar then
 			ChatSelectorModule:ToggleVisibility()
@@ -254,7 +254,7 @@ local config7 = {
 local config8 = {
 	iconOn = "rbxasset://textures/ui/MenuBar/icon_safety_on.png",
 	iconOff = "rbxasset://textures/ui/MenuBar/icon_safety_on.png",
-	onActivated = function() --[[ Line: 313 ]]
+	onActivated = function()
 		-- upvalues: VRHub (copy), FixVRBottomBarAnalytics (copy), VRBottomBarAnalyticsModule (copy), VRBottomBarTypeModule (copy), RbxAnalyticsService (copy)
 		VRHub:ToggleSafetyBubble()
 		
@@ -271,7 +271,7 @@ local config8 = {
 local config9 = {
 	iconOn = "rbxasset://textures/ui/MenuBar/icon_safety_off.png",
 	iconOff = "rbxasset://textures/ui/MenuBar/icon_safety_off.png",
-	onActivated = function() --[[ Line: 331 ]]
+	onActivated = function()
 		-- upvalues: VRHub (copy), FixVRBottomBarAnalytics (copy), VRBottomBarAnalyticsModule (copy), VRBottomBarTypeModule (copy), RbxAnalyticsService (copy)
 		VRHub:ToggleSafetyBubble()
 		
@@ -288,7 +288,7 @@ local config9 = {
 local config10 = {
 	iconOn = "rbxasset://textures/ui/MenuBar/icon_leave.png",
 	iconOff = "rbxasset://textures/ui/MenuBar/icon_leave.png",
-	onActivated = function() --[[ Line: 349 ]]
+	onActivated = function()
 		-- upvalues: VRHub (copy), InGameMenuInitModule (copy), InGameMenuConstantsModule (copy), FixVRBottomBarAnalytics (copy), VRBottomBarAnalyticsModule (copy), VRBottomBarTypeModule (copy), RbxAnalyticsService (copy)
 		VRHub:SetShowTopBar(true)
 		VRHub:SetShowMoreMenu(false)
@@ -317,7 +317,7 @@ local config11 = {
 local config12 = {
 	iconOn = "rbxasset://textures/ui/MenuBar/icon_more.png",
 	iconOff = "rbxasset://textures/ui/MenuBar/icon_more.png",
-	onActivated = function() --[[ Line: 381 ]]
+	onActivated = function()
 		-- upvalues: VRHub (copy), FixVRBottomBarAnalytics (copy), VRBottomBarAnalyticsModule (copy), VRBottomBarTypeModule (copy), RbxAnalyticsService (copy)
 		VRHub:SetShowTopBar(true)
 		VRHub:SetShowMoreMenu(not VRHub.ShowMoreMenu)
@@ -339,7 +339,7 @@ local config13 = {
 local config14 = {
 	icon = "rbxasset://textures/ui/MenuBar/icon_emote.png",
 	text = RobloxTranslatorModule:FormatByKey("CoreScripts.TopBar.Emotes"),
-	onActivated = function() --[[ Line: 405 ]]
+	onActivated = function()
 		-- upvalues: config6 (copy), RbxAnalyticsService (copy)
 		config6.onActivated()
 		RbxAnalyticsService:ReportCounter("VR-BottomBar-MoreMenu-Emotes")
@@ -348,7 +348,7 @@ local config14 = {
 local config15 = {
 	icon = "rbxasset://textures/ui/MenuBar/icon_leaderboard.png",
 	text = RobloxTranslatorModule:FormatByKey("CoreScripts.TopBar.Leaderboard"),
-	onActivated = function() --[[ Line: 414 ]]
+	onActivated = function()
 		-- upvalues: config5 (copy), RbxAnalyticsService (copy)
 		config5.onActivated()
 		RbxAnalyticsService:ReportCounter("VR-BottomBar-MoreMenu-PlayerList")
@@ -357,7 +357,7 @@ local config15 = {
 local config16 = {
 	icon = "rbxasset://textures/ui/MenuBar/icon__backpack.png",
 	text = RobloxTranslatorModule:FormatByKey("CoreScripts.TopBar.Inventory"),
-	onActivated = function() --[[ Line: 423 ]]
+	onActivated = function()
 		-- upvalues: config4 (copy), RbxAnalyticsService (copy)
 		config4.onActivated()
 		RbxAnalyticsService:ReportCounter("VR-BottomBar-MoreMenu-Backpack")
@@ -367,7 +367,7 @@ local config17 = {
 	text = "Join Voice",
 	iconOn = Images["icons/controls/publicAudioJoin"],
 	iconOff = Images["icons/controls/publicAudioJoin"],
-	onActivated = function() --[[ Line: 433 ]]
+	onActivated = function()
 		-- upvalues: Default (copy), ConstantsModule (copy), EnableJoinVoiceVrTelemetry (copy), VRBottomBarAnalyticsModule (copy), VRBottomBarTypeModule (copy)
 		Default.pendingConnectionSource = ConstantsModule.VOICE_CONNECTION_SOURCE.IN_EXPERIENCE
 		Default:JoinVoice()
@@ -382,11 +382,11 @@ local config17 = {
 	end
 }
 
-local _ = function(p1: number): number --[[ Line: 448 | Named "roundOffset" ]]
+local _ = function(p1: number): number
 	return p1 >= 0 and math.floor(p1 * 10 + 0.5) / 10 or math.ceil(p1 * 10 - 0.5) / 10
 end
 
-function TopBarApp.init(p1) --[[ Line: 453 ]]
+function TopBarApp.init(p1)
 	-- upvalues: config (copy), v1 (copy), VRService (copy), RobloxGui (copy), RoactModule (copy), SplashScreenManager (copy), ReactModule (copy), VRBarVoiceIconModule (copy), CryoModule (copy), Players (copy), FixVRBottomBarAnalytics (copy), VRBottomBarAnalyticsModule (copy), VRBottomBarTypeModule (copy), RbxAnalyticsService (copy), config2 (copy), config13 (copy), config3 (copy), config10 (copy), IsSpatialRobloxGuiEnabledModule (copy), VRHub (copy), VRUtil (copy), OtterModule (copy), config1 (copy), FFlagVRBottomBarDebugPositionConfigModule (copy)
 	local config4 = {
 		moreMenuOpen = false,
@@ -417,24 +417,24 @@ function TopBarApp.init(p1) --[[ Line: 453 ]]
 	p1.backpackHasItems = false
 	p1.emotesLoaded = false
 	
-	function p1.onTargetFPSSTateChange(p2) --[[ Line: 467 ]]
+	function p1.onTargetFPSSTateChange(p2)
 		-- upvalues: p1 (copy)
 		p1:setState({ hidden = not p2 })
 	end
 	
 	SplashScreenManager.addStatusChangeListener(p1.onTargetFPSSTateChange)
 	
-	function p1.getVoiceIcon() --[[ Line: 472 ]]
+	function p1.getVoiceIcon()
 		-- upvalues: ReactModule (upval), VRBarVoiceIconModule (upval), CryoModule (upval), Players (upval), p1 (copy), FixVRBottomBarAnalytics (upval), VRBottomBarAnalyticsModule (upval), VRBottomBarTypeModule (upval), RbxAnalyticsService (upval)
 		return {
-			iconImageComponent = function(p2) --[[ Line: 474 ]]
+			iconImageComponent = function(p2)
 				-- upvalues: ReactModule (upval), VRBarVoiceIconModule (upval), CryoModule (upval), Players (upval)
 				return ReactModule.createElement(VRBarVoiceIconModule, CryoModule.Dictionary.join(p2, {
 					iconStyle = "MicLight",
 					userId = tostring(Players.LocalPlayer.UserId)
 				}))
 			end,
-			onActivated = function() --[[ Line: 483 ]]
+			onActivated = function()
 				-- upvalues: p1 (upval), FixVRBottomBarAnalytics (upval), VRBottomBarAnalyticsModule (upval), VRBottomBarTypeModule (upval), RbxAnalyticsService (upval)
 				if p1.props.voiceState == Enum.VoiceChatState.Failed then
 					p1.props.voiceChatServiceManager:RejoinPreviousChannel()
@@ -453,58 +453,58 @@ function TopBarApp.init(p1) --[[ Line: 453 ]]
 		}
 	end
 	
-	function p1.getDebugYOffsetUp() --[[ Line: 508 ]]
+	function p1.getDebugYOffsetUp()
 		-- upvalues: p1 (copy)
 		return {
 			iconOn = "rbxasset://textures/ui/MenuBar/arrow_up.png",
 			iconOff = "rbxasset://textures/ui/MenuBar/arrow_up.png",
-			onActivated = function() --[[ Line: 512 ]]
+			onActivated = function()
 				-- upvalues: p1 (upval)
 				p1:setState({ yOffset = p1.state.yOffset + 0.1 })
 			end
 		}
 	end
 	
-	function p1.getDebugYOffsetDown() --[[ Line: 521 ]]
+	function p1.getDebugYOffsetDown()
 		-- upvalues: p1 (copy)
 		return {
 			iconOn = "rbxasset://textures/ui/MenuBar/arrow_down.png",
 			iconOff = "rbxasset://textures/ui/MenuBar/arrow_down.png",
-			onActivated = function() --[[ Line: 525 ]]
+			onActivated = function()
 				-- upvalues: p1 (upval)
 				p1:setState({ yOffset = p1.state.yOffset - 0.1 })
 			end
 		}
 	end
 	
-	function p1.getDebugZOffsetUp() --[[ Line: 534 ]]
+	function p1.getDebugZOffsetUp()
 		-- upvalues: p1 (copy)
 		return {
 			iconOn = "rbxasset://textures/ui/MenuBar/arrow_left.png",
 			iconOff = "rbxasset://textures/ui/MenuBar/arrow_left.png",
-			onActivated = function() --[[ Line: 538 ]]
+			onActivated = function()
 				-- upvalues: p1 (upval)
 				p1:setState({ zOffset = p1.state.zOffset + 0.1 })
 			end
 		}
 	end
 	
-	function p1.getDebugZOffsetDown() --[[ Line: 547 ]]
+	function p1.getDebugZOffsetDown()
 		-- upvalues: p1 (copy)
 		return {
 			iconOn = "rbxasset://textures/ui/MenuBar/arrow_right.png",
 			iconOff = "rbxasset://textures/ui/MenuBar/arrow_right.png",
-			onActivated = function() --[[ Line: 551 ]]
+			onActivated = function()
 				-- upvalues: p1 (upval)
 				p1:setState({ zOffset = p1.state.zOffset - 0.1 })
 			end
 		}
 	end
 	
-	function p1.getDebugTextLabel() --[[ Line: 560 ]]
+	function p1.getDebugTextLabel()
 		-- upvalues: p1 (copy), RoactModule (upval)
 		return {
-			iconComponent = function(p2) --[[ Line: 562 ]]
+			iconComponent = function(p2)
 				-- upvalues: p1 (upval), RoactModule (upval)
 				local YOffset: number = p1.state.yOffset
 				local ZOffset: number = p1.state.zOffset
@@ -534,7 +534,7 @@ function TopBarApp.init(p1) --[[ Line: 453 ]]
 		moreItemList = {}
 	})
 	
-	function p1.onShowTopBarChanged() --[[ Line: 585 ]]
+	function p1.onShowTopBarChanged()
 		-- upvalues: IsSpatialRobloxGuiEnabledModule (upval), VRHub (upval), p1 (copy)
 		if IsSpatialRobloxGuiEnabledModule then return end
 		if not VRHub.ShowTopBar then
@@ -543,12 +543,12 @@ function TopBarApp.init(p1) --[[ Line: 453 ]]
 		p1:setState({ vrMenuOpen = VRHub.ShowTopBar })
 	end
 	
-	function p1.onShowMoreMenuChanged() --[[ Line: 597 ]]
+	function p1.onShowMoreMenuChanged()
 		-- upvalues: p1 (copy), VRHub (upval)
 		p1:setState({ moreMenuOpen = VRHub.ShowMoreMenu })
 	end
 	
-	function p1.updateItemListState() --[[ Line: 603 ]]
+	function p1.updateItemListState()
 		-- upvalues: p1 (copy)
 		local UpdateItemsResult, UpdateItemsResult2 = p1:updateItems()
 		p1:setState({
@@ -557,7 +557,7 @@ function TopBarApp.init(p1) --[[ Line: 453 ]]
 		})
 	end
 	
-	function p1.onBackpackItemAdded() --[[ Line: 611 ]]
+	function p1.onBackpackItemAdded()
 		-- upvalues: p1 (copy)
 		if not p1.backpackHasItems then
 			p1.backpackHasItems = true
@@ -565,7 +565,7 @@ function TopBarApp.init(p1) --[[ Line: 453 ]]
 		end
 	end
 	
-	function p1.onBackpackEmpty() --[[ Line: 618 ]]
+	function p1.onBackpackEmpty()
 		-- upvalues: p1 (copy)
 		if p1.backpackHasItems then
 			p1.backpackHasItems = false
@@ -573,7 +573,7 @@ function TopBarApp.init(p1) --[[ Line: 453 ]]
 		end
 	end
 	
-	function p1.onEmotesLoaded(EmotesLoaded) --[[ Line: 625 ]]
+	function p1.onEmotesLoaded(EmotesLoaded)
 		-- upvalues: p1 (copy)
 		if EmotesLoaded ~= p1.emotesLoaded then
 			p1.emotesLoaded = EmotesLoaded
@@ -581,7 +581,7 @@ function TopBarApp.init(p1) --[[ Line: 453 ]]
 		end
 	end
 	
-	function p1.onVREnabledChanged() --[[ Line: 632 ]]
+	function p1.onVREnabledChanged()
 		-- upvalues: p1 (copy), VRService (upval), RobloxGui (upval), RoactModule (upval)
 		local t = {}
 		local None = nil
@@ -604,7 +604,7 @@ function TopBarApp.init(p1) --[[ Line: 453 ]]
 		p1:setState(t)
 	end
 	
-	function p1.onRenderStepped() --[[ Line: 638 ]]
+	function p1.onRenderStepped()
 		-- upvalues: VRUtil (upval), p1 (copy)
 		local IsYAbove = VRUtil.GetUserCFrameWorldSpace(Enum.UserCFrame.Head).LookVector.Y > -0.2
 		
@@ -618,7 +618,7 @@ function TopBarApp.init(p1) --[[ Line: 453 ]]
 	p1.fadeTransparencyMotor:onStep(p1.setFadeTransparency)
 	p1.fadeTransparencyMotor:setGoal(OtterModule.spring(0, config1.Default))
 	
-	function p1.getAlignedPanelPart() --[[ Line: 653 ]]
+	function p1.getAlignedPanelPart()
 		-- upvalues: p1 (copy)
 		local Panel = if p1.state.userGui then p1.state.userGui:getPanel() else nil
 		local Part = Panel and Panel:GetPart()
@@ -627,7 +627,7 @@ function TopBarApp.init(p1) --[[ Line: 453 ]]
 		return Part
 	end
 	
-	function p1.bottomBarPanelOffsetCallback(p2) --[[ Line: 664 ]]
+	function p1.bottomBarPanelOffsetCallback(p2)
 		-- upvalues: p1 (copy), VRUtil (upval)
 		local FinalPosition = p2.finalPosition
 		local CameraHeadScale = p2.cameraHeadScale
@@ -640,7 +640,7 @@ function TopBarApp.init(p1) --[[ Line: 453 ]]
 		return FinalPosition
 	end
 	
-	function p1.moreMenuPanelOffsetCallback(p2) --[[ Line: 687 ]]
+	function p1.moreMenuPanelOffsetCallback(p2)
 		-- upvalues: p1 (copy), VRUtil (upval), v1 (upval), FFlagVRBottomBarDebugPositionConfigModule (upval)
 		local FinalPosition = p2.finalPosition
 		local CameraHeadScale = p2.cameraHeadScale
@@ -653,7 +653,7 @@ function TopBarApp.init(p1) --[[ Line: 453 ]]
 		return FinalPosition
 	end
 	
-	function p1.moreMenuPanelTiltCallback(p2) --[[ Line: 716 ]]
+	function p1.moreMenuPanelTiltCallback(p2)
 		-- upvalues: p1 (copy)
 		local PanelCFrame = p2.panelCFrame
 		local AlignedPanelPart = p1.getAlignedPanelPart()
@@ -665,14 +665,14 @@ function TopBarApp.init(p1) --[[ Line: 453 ]]
 	end
 end
 
-function TopBarApp.didMount(p1) --[[ Line: 727 ]]
+function TopBarApp.didMount(p1)
 	-- upvalues: EmotesMenuMasterModule (copy), BackpackModule (copy)
 	p1.emotesLoaded = EmotesMenuMasterModule:isEmotesLoaded()
 	p1.backpackHasItems = BackpackModule.IsInventoryEmpty()
 	p1.updateItemListState()
 end
 
-function TopBarApp.updateItems(p1) --[[ Line: 734 ]]
+function TopBarApp.updateItems(p1)
 	-- upvalues: StarterGui (copy), IsSpatialRobloxGuiEnabledModule (copy), config2 (copy), config13 (copy), FFlagVRBottomBarDebugPositionConfigModule (copy), config3 (copy), StarterPlayer (copy), config7 (copy), GetFFlagEnableVrVoiceConnectDisconnectFunction (copy), Default (copy), config17 (copy), GetFFlagEnableVrVoiceParityFunction (copy), VRHub (copy), config8 (copy), config9 (copy), config11 (copy), config10 (copy), config14 (copy), config15 (copy), config16 (copy), config12 (copy)
 	local CoreGuiEnabled = StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.PlayerList)
 	local List = if IsSpatialRobloxGuiEnabledModule then if FFlagVRBottomBarDebugPositionConfigModule then {
@@ -726,7 +726,7 @@ function TopBarApp.updateItems(p1) --[[ Line: 734 ]]
 	return List, List1
 end
 
-function TopBarApp.renderWithStyle(p1, p2) --[[ Line: 824 ]]
+function TopBarApp.renderWithStyle(p1, p2)
 	-- upvalues: v1 (copy), FFlagVRBottomBarDebugPositionConfigModule (copy), RoactModule (copy), Panel3D (copy), IsSpatialRobloxGuiEnabledModule (copy), Constants1 (ref), Constants (copy), EnableVRBottomBarWorksBehindObjectsEngineFeature (copy), GuiService (copy), RegisterRoactPanelFunction (ref), PanelType (ref), UIManager (ref), SystemBar (copy), Placement (copy), BaseMenu (copy), ImageSetLabel (copy), ExternalEventConnection (copy), VRHub (copy), StarterGui (copy), BackpackModule (copy), EmotesMenuMasterModule (copy), RunService (copy), VRService (copy)
 	local ScaledZOffset = (0.2 + p1.state.zOffset / 10) * v1
 	local ItemList = p1.state.itemList
@@ -747,7 +747,7 @@ function TopBarApp.renderWithStyle(p1, p2) --[[ Line: 824 ]]
 			anchoring = if IsSpatialRobloxGuiEnabledModule then Constants.AnchoringTypes.PanelManaged else Constants.AnchoringTypes.Head,
 			alwaysOnTop = if EnableVRBottomBarWorksBehindObjectsEngineFeature then true else nil,
 			parent = EnableVRBottomBarWorksBehindObjectsEngineFeature and GuiService.CoreGuiFolder or nil,
-			connectPanelManagerFunction = if IsSpatialRobloxGuiEnabledModule then function(p3) --[[ Line: 861 ]]
+			connectPanelManagerFunction = if IsSpatialRobloxGuiEnabledModule then function(p3)
 				-- upvalues: RegisterRoactPanelFunction (upval), PanelType (upval), UIManager (upval)
 				if p3 then
 					RegisterRoactPanelFunction(p3, PanelType.BottomBar)
@@ -773,7 +773,7 @@ function TopBarApp.renderWithStyle(p1, p2) --[[ Line: 824 ]]
 					selection = if p1.state.vrMenuOpen then if p1.state.moreMenuOpen and #MoreItemList > 0 then #ItemList elseif FFlagVRBottomBarDebugPositionConfigModule then 7 else 1 elseif FFlagVRBottomBarDebugPositionConfigModule then 9 else 3,
 					placement = Placement.Bottom,
 					hidden = p1.state.hidden,
-					onSafeAreaChanged = function() --[[ Line: 881 ]] end,
+					onSafeAreaChanged = function() end,
 					size = UDim2.new(1, 0, 1, 0),
 					position = UDim2.new(),
 					sortOrder = Enum.SortOrder.LayoutOrder
@@ -794,7 +794,7 @@ function TopBarApp.renderWithStyle(p1, p2) --[[ Line: 824 ]]
 			anchoring = if IsSpatialRobloxGuiEnabledModule then Constants.AnchoringTypes.PanelManaged else Constants.AnchoringTypes.Head,
 			alwaysOnTop = if EnableVRBottomBarWorksBehindObjectsEngineFeature then true else nil,
 			parent = EnableVRBottomBarWorksBehindObjectsEngineFeature and GuiService.CoreGuiFolder or nil,
-			connectPanelManagerFunction = if IsSpatialRobloxGuiEnabledModule then function(p3) --[[ Line: 913 ]]
+			connectPanelManagerFunction = if IsSpatialRobloxGuiEnabledModule then function(p3)
 				-- upvalues: RegisterRoactPanelFunction (upval), PanelType (upval), UIManager (upval)
 				if p3 then
 					RegisterRoactPanelFunction(p3, PanelType.MoreMenu)
@@ -865,15 +865,15 @@ function TopBarApp.renderWithStyle(p1, p2) --[[ Line: 824 ]]
 	})
 end
 
-function TopBarApp.render(p1) --[[ Line: 987 ]]
+function TopBarApp.render(p1)
 	-- upvalues: WithStyleFunction (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 988 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithStyle(p2)
 	end)
 end
 
-function TopBarApp.didUpdate(p1, p2, p3) --[[ Line: 993 ]]
+function TopBarApp.didUpdate(p1, p2, p3)
 	-- upvalues: OtterModule (copy), config1 (copy), VRHub (copy)
 	if p3.lookAway ~= p1.state.lookAway or p3.vrMenuOpen ~= p1.state.vrMenuOpen then
 		if not p1.state.vrMenuOpen and p1.state.lookAway then
@@ -895,7 +895,7 @@ function TopBarApp.didUpdate(p1, p2, p3) --[[ Line: 993 ]]
 	end
 end
 
-function TopBarApp.willUnmount(p1) --[[ Line: 1015 ]]
+function TopBarApp.willUnmount(p1)
 	p1.fadeTransparencyMotor:stop()
 end
 

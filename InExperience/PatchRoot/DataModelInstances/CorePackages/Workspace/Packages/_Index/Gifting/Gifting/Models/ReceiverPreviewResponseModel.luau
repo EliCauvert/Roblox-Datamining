@@ -8,7 +8,7 @@ local InterfaceResult = TModule.interface({
 	rejectGiftRequest = TModule.any
 })
 
-local function formatReceiverPreviewItem(p1) --[[ Line: 35 ]]
+local function formatReceiverPreviewItem(p1)
 	-- upvalues: TModule (copy), GiftModelUtilsModule (copy)
 	local v1, v2 = TModule.table(p1)
 	
@@ -29,7 +29,7 @@ local function formatReceiverPreviewItem(p1) --[[ Line: 35 ]]
 end
 
 return {
-	format = function(p1) --[[ Line: 55 ]]
+	format = function(p1)
 		-- upvalues: InterfaceResult (copy), GiftModelUtilsModule (copy), formatReceiverPreviewItem (copy)
 		local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult(p1)
 		

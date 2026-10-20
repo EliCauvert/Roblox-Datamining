@@ -25,18 +25,18 @@ local config = {
 	bodyTextLocalizationProps = nil
 }
 
-local function _() --[[ Line: 39 | Named "getFFlagRenameFriendsToConnectionsPartyLobby" ]]
+local function _()
 	-- upvalues: UniversalAppPolicyModule (copy)
 	return UniversalAppPolicyModule.getAppFeaturePolicies().getRenameFriendsToConnections()
 end
 
-return function(p1) --[[ Line: 43 ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), SquadExternalContractContextModule (copy), UseDispatchFunction (copy), UseCurrentSquadIdModule (copy), UseScreenSizeFunction (copy), EventNamesModule (copy), EnableSquadPromptAnalytics (copy), SquadPromptTypeModule (copy), UniversalAppPolicyModule (copy), UseLocalizationFunction (copy), ButtonType (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), InteractiveAlert (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseContextResult = ReactModule.useContext(SquadExternalContractContextModule)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseCurrentSquadIdModuleResult = UseCurrentSquadIdModule() or ""
-	local UseResult = ReactModule.useCallback(function(ResponseType) --[[ Line: 51 ]]
+	local UseResult = ReactModule.useCallback(function(ResponseType)
 		-- upvalues: UseContextResult (copy), EventNamesModule (upval), JoinResult (copy), UseCurrentSquadIdModuleResult (copy)
 		UseContextResult.fireSquadAnalytics(EventNamesModule.SquadPromptResponded, {
 			promptType = JoinResult.promptType,
@@ -48,7 +48,7 @@ return function(p1) --[[ Line: 43 ]]
 		UseCurrentSquadIdModuleResult,
 		UseContextResult.fireSquadAnalytics
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 59 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: EnableSquadPromptAnalytics (upval), UseResult (copy), UseDispatchResult (copy), UseContextResult (copy), JoinResult (copy)
 		if EnableSquadPromptAnalytics then
 			UseResult("cancel")
@@ -64,7 +64,7 @@ return function(p1) --[[ Line: 43 ]]
 		UseContextResult.closeSquadPrompt,
 		UseResult
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 71 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: EnableSquadPromptAnalytics (upval), UseResult (copy), UseDispatchResult (copy), UseContextResult (copy), JoinResult (copy)
 		if EnableSquadPromptAnalytics then
 			UseResult("confirm")
@@ -80,7 +80,7 @@ return function(p1) --[[ Line: 43 ]]
 		UseContextResult.closeSquadPrompt,
 		UseResult
 	})
-	local UseResult3 = ReactModule.useCallback(function(AddFriends) --[[ Line: 83 ]]
+	local UseResult3 = ReactModule.useCallback(function(AddFriends)
 		-- upvalues: SquadPromptTypeModule (upval), UniversalAppPolicyModule (upval), JoinResult (copy)
 		local CancelButtonText = "CommonUI.Controls.Action.Cancel"
 		local FeatureSquadsDescriptionInviteConnectionsToParty = nil
@@ -182,7 +182,7 @@ return function(p1) --[[ Line: 43 ]]
 			cancelButtonText = CancelButtonText
 		}
 	end, {})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 184 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseResult3 (copy), JoinResult (copy)
 		return UseResult3(JoinResult.promptType)
 	end, { JoinResult.promptType })
@@ -196,11 +196,11 @@ return function(p1) --[[ Line: 43 ]]
 	return (ReactModule.createElement(FocusRoot, {
 		isAutoFocusRoot = true,
 		isIsolated = true,
-		eventHandlers = ReactModule.useMemo(function() --[[ Line: 223 ]]
+		eventHandlers = ReactModule.useMemo(function()
 			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), UseResult1 (copy)
 			return {
 				[FocusNavigationEventNameEnum.NavigateBack] = {
-					handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 226 ]]
+					handler = InputHandlersModule.onRelease(function(p2)
 						-- upvalues: UseResult1 (upval)
 						UseResult1()
 						p2:cancel()
@@ -215,7 +215,7 @@ return function(p1) --[[ Line: 43 ]]
 			title = UseLocalizationResult.title,
 			bodyText = UseLocalizationResult.bodyText,
 			buttonStackInfo = {
-				buttons = ReactModule.useCallback(function() --[[ Line: 195 ]]
+				buttons = ReactModule.useCallback(function()
 					-- upvalues: JoinResult (copy), UseResult1 (copy), UseLocalizationResult (copy), ButtonType (upval), UseResult2 (copy)
 					local List = {}
 					

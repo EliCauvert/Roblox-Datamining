@@ -8,12 +8,12 @@ local ScaleTickModule = require(Graphing.Components.ScaleTick)
 local GridUtilModule = require(Graphing.Util.GridUtil)
 local StyleUtilModule = require(Graphing.Util.StyleUtil)
 
-local function _(SIDEBOTTOM): boolean --[[ Line: 44 | Named "isX" ]]
+local function _(SIDEBOTTOM): boolean
 	-- upvalues: TypesModule (copy)
 	return SIDEBOTTOM == TypesModule.SIDE_TOP or SIDEBOTTOM == TypesModule.SIDE_BOTTOM
 end
 
-function Scale(Frame: Frame) --[[ Line: 48 ]]
+function Scale(Frame: Frame)
 	-- upvalues: StyleUtilModule (copy), ReactModule (copy), CanvasContextModule (copy), SignalsReactModule (copy), TypesModule (copy), GridUtilModule (copy), ScaleTickModule (copy)
 	local Size = Frame.Size or StyleUtilModule.SCALE_SIZE
 	local UseContextResult = ReactModule.useContext(CanvasContextModule)

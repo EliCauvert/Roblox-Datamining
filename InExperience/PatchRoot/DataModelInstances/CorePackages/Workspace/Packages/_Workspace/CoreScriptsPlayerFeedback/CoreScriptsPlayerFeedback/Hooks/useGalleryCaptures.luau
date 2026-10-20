@@ -3,7 +3,7 @@ local ReactModule = require(CoreScriptsPlayerFeedback.Parent.React)
 local _ = require(CoreScriptsPlayerFeedback.CaptureTypes)
 local FetchGalleryCapturesModule = require(CoreScriptsPlayerFeedback.Utils.fetchGalleryCaptures)
 
-return function() --[[ Line: 28 | Named "useGalleryCaptures" ]]
+return function()
 	-- upvalues: ReactModule (copy), FetchGalleryCapturesModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState({})
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
@@ -11,7 +11,7 @@ return function() --[[ Line: 28 | Named "useGalleryCaptures" ]]
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseRefResult2 = ReactModule.useRef({})
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(true)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 36 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult2 (copy), UseStateResult2 (copy)
 		local Current = UseRefResult2.current
 		
@@ -27,7 +27,7 @@ return function() --[[ Line: 28 | Named "useGalleryCaptures" ]]
 			table.insert(Current1, Current[i1])
 		end
 		UseRefResult2.current = Current1
-		UseStateResult2(function(Tbl) --[[ Line: 50 ]]
+		UseStateResult2(function(Tbl)
 			-- upvalues: List (copy)
 			local Copy = table.clone(Tbl)
 			
@@ -37,7 +37,7 @@ return function() --[[ Line: 28 | Named "useGalleryCaptures" ]]
 			return Copy
 		end)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 59 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult1 (copy), UseStateResult2_2 (copy), UseStateResult2_1 (copy), UseRefResult2 (copy), UseResult (copy)
 		local Current = UseRefResult1.current
 		
@@ -48,11 +48,11 @@ return function() --[[ Line: 28 | Named "useGalleryCaptures" ]]
 			return
 		else
 			UseStateResult2_1(true)
-			task.spawn(function() --[[ Line: 67 ]]
+			task.spawn(function()
 				-- upvalues: UseRefResult2 (upval), Current (copy), UseStateResult2_1 (upval), UseStateResult2_2 (upval), UseResult (upval)
 				local GameId = game.GameId
 				while #UseRefResult2.current == 0 do
-					if not pcall(function() --[[ Line: 71 ]]
+					if not pcall(function()
 						-- upvalues: Current (upval)
 						Current:AdvanceToNextPageAsync()
 					end) then
@@ -79,12 +79,12 @@ return function() --[[ Line: 28 | Named "useGalleryCaptures" ]]
 		captures = UseStateResult,
 		isLoading = UseStateResult1,
 		hasMore = UseStateResult3,
-		load = ReactModule.useCallback(function() --[[ Line: 95 ]]
+		load = ReactModule.useCallback(function()
 			-- upvalues: UseRefResult (copy), UseStateResult1 (copy), UseStateResult2_1 (copy), FetchGalleryCapturesModule (upval), UseStateResult2_2 (copy), UseRefResult1 (copy), UseRefResult2 (copy), UseResult (copy)
 			if not UseRefResult.current and not UseStateResult1 then
 				UseRefResult.current = true
 				UseStateResult2_1(true)
-				task.spawn(function() --[[ Line: 101 ]]
+				task.spawn(function()
 					-- upvalues: FetchGalleryCapturesModule (upval), UseStateResult2_1 (upval), UseStateResult2_2 (upval), UseRefResult1 (upval), UseRefResult2 (upval), UseResult (upval)
 					local GalleryCapturesModule = FetchGalleryCapturesModule()
 					
@@ -102,7 +102,7 @@ return function() --[[ Line: 28 | Named "useGalleryCaptures" ]]
 								table.insert(UseRefResult2.current, value)
 							end
 						end
-					until #UseRefResult2.current >= 30 or GalleryCapturesModule.IsFinished or not pcall(function() --[[ Line: 121 ]]
+					until #UseRefResult2.current >= 30 or GalleryCapturesModule.IsFinished or not pcall(function()
 						-- upvalues: GalleryCapturesModule (copy)
 						GalleryCapturesModule:AdvanceToNextPageAsync()
 					end)
@@ -114,7 +114,7 @@ return function() --[[ Line: 28 | Named "useGalleryCaptures" ]]
 				return
 			end
 		end, { UseStateResult1, UseResult }),
-		loadMore = ReactModule.useCallback(function() --[[ Line: 134 ]]
+		loadMore = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult1 (copy), UseRefResult2 (copy), UseResult (copy), UseRefResult1 (copy), UseStateResult2_2 (copy), UseResult1 (copy)
 			if UseStateResult1 then return end
 			if #UseRefResult2.current > 0 then

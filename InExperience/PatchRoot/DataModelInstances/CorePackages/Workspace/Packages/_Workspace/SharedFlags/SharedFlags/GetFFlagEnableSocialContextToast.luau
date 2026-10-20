@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableSocialContextToast", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("EnableSocialContextToast")
 end

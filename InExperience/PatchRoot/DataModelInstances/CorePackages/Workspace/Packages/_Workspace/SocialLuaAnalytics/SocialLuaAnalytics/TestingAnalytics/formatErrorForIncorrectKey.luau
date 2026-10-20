@@ -1,5 +1,5 @@
-﻿return function(Callback) --[[ Line: 2 ]]
-	return function(p1, Text) --[[ Line: 3 ]]
+﻿return function(Callback)
+	return function(p1, Text)
 		-- upvalues: Callback (copy)
 		local CallbackResult, CallbackResult2 = Callback(p1)
 		

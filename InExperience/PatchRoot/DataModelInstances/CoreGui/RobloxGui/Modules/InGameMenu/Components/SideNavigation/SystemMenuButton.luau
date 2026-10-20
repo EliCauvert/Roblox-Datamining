@@ -16,38 +16,38 @@ SystemMenuButton.validateProps = T.strictInterface({
 })
 SystemMenuButton.defaultProps = { on = false, canCaptureFocus = false }
 
-function SystemMenuButton.tryCaptureFocus(p1, DefaultProps) --[[ Line: 28 ]]
+function SystemMenuButton.tryCaptureFocus(p1, DefaultProps)
 	-- upvalues: GuiService (copy)
 	if p1.props.canCaptureFocus and not DefaultProps.canCaptureFocus or p1.props.canCaptureFocus and p1.props.on ~= DefaultProps.on and p1.state.isIconFocused then
 		GuiService.SelectedCoreObject = p1.iconRef:getValue()
 	end
 end
 
-function SystemMenuButton.init(p1) --[[ Line: 37 ]]
+function SystemMenuButton.init(p1)
 	-- upvalues: Roact (copy)
 	p1.iconRef = Roact.createRef()
 	p1:setState({ isIconFocused = false })
 	
-	function p1.onIconSelectionGained() --[[ Line: 44 ]]
+	function p1.onIconSelectionGained()
 		-- upvalues: p1 (copy)
 		p1:setState({ isIconFocused = true })
 	end
 	
-	function p1.onIconSelectionLost() --[[ Line: 50 ]]
+	function p1.onIconSelectionLost()
 		-- upvalues: p1 (copy)
 		p1:setState({ isIconFocused = false })
 	end
 end
 
-function SystemMenuButton.didMount(p1) --[[ Line: 57 ]]
+function SystemMenuButton.didMount(p1)
 	p1:tryCaptureFocus({ canCaptureFocus = false })
 end
 
-function SystemMenuButton.didUpdate(p1, p2) --[[ Line: 62 ]]
+function SystemMenuButton.didUpdate(p1, p2)
 	p1:tryCaptureFocus(p2)
 end
 
-function SystemMenuButton.render(p1) --[[ Line: 66 ]]
+function SystemMenuButton.render(p1)
 	-- upvalues: Roact (copy), CloseMenuButtonModule (copy), GameIconButtonModule (copy)
 	return if p1.props.on then Roact.createElement(CloseMenuButtonModule, {
 		onActivated = p1.props.onClose,

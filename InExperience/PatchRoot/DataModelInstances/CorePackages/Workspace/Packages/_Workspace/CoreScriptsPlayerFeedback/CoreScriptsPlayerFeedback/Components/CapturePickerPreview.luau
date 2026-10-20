@@ -2,7 +2,7 @@
 local ReactModule = require(CoreScriptsPlayerFeedback.Parent.React)
 local _ = require(CoreScriptsPlayerFeedback.CaptureTypes)
 
-return (ReactModule.memo(function(p1) --[[ Line: 15 ]]
+return (ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy)
 	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

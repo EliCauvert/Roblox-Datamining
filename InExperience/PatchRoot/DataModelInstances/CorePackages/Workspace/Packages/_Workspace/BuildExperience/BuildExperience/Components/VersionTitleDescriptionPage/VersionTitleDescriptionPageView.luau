@@ -13,7 +13,7 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local IconName = FoundationModule.Enums.IconName
 local InputSize = FoundationModule.Enums.InputSize
 
-return function(p1) --[[ Line: 30 | Named "VersionTitleDescriptionPageView" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), Text (copy), TextInput (copy), TextArea (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		descriptionLabel = LocalizationStringsModule.TITLE_DESCRIPTION_DESCRIPTION_LABEL,

@@ -16,16 +16,16 @@ local ShouldShowJoinCtaModule = require(GameInvite.utils.shouldShowJoinCta)
 local FFlagGameInviteInExpJoinCtaModule = require(GameInvite.Flags.FFlagGameInviteInExpJoinCta)
 local User = require(Parent.UserList).Enums.EntityType.User
 
-local function ignoreRowSelection() --[[ Line: 40 ]] end
+local function ignoreRowSelection() end
 
-local function onJoinActivated(_) --[[ Line: 43 ]] end
+local function onJoinActivated(_) end
 
-local function isJoinVisible(p1): boolean --[[ Line: 45 ]]
+local function isJoinVisible(p1): boolean
 	-- upvalues: IsInThisServerModule (copy)
 	return not IsInThisServerModule(p1, game.JobId)
 end
 
-local function createJoinCtaConfig(p1) --[[ Line: 49 ]]
+local function createJoinCtaConfig(p1)
 	-- upvalues: GameInviteConstantsModule (copy), onJoinActivated (copy), isJoinVisible (copy), IsJoinExpectedModule (copy)
 	return {
 		supportedActions = { "JoinExperience" },
@@ -34,7 +34,7 @@ local function createJoinCtaConfig(p1) --[[ Line: 49 ]]
 		join = {
 			onActivated = onJoinActivated,
 			isVisible = isJoinVisible,
-			isJoinExpected = function(p2, p3) --[[ Line: 57 ]]
+			isJoinExpected = function(p2, p3)
 				-- upvalues: IsJoinExpectedModule (upval), p1 (copy)
 				return IsJoinExpectedModule(p3, p1[p2], game.JobId)
 			end
@@ -42,21 +42,21 @@ local function createJoinCtaConfig(p1) --[[ Line: 49 ]]
 	}
 end
 
-local function useJoinCtaConfig(FriendsById, UseContextResult) --[[ Line: 64 ]]
+local function useJoinCtaConfig(FriendsById, UseContextResult)
 	-- upvalues: ShouldShowJoinCtaModule (copy), ReactModule (copy), createJoinCtaConfig (copy)
 	local ShouldShowJoinCtaModule1 = ShouldShowJoinCtaModule(UseContextResult)
 	
-	return ReactModule.useMemo(function() --[[ Line: 69 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: ShouldShowJoinCtaModule1 (copy), createJoinCtaConfig (upval), FriendsById (copy)
 		return if ShouldShowJoinCtaModule1 then createJoinCtaConfig(FriendsById) else nil
 	end, { ShouldShowJoinCtaModule1, FriendsById })
 end
 
-return function(p1) --[[ Line: 74 | Named "useGameInviteFriendsListViewModel" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FriendsMenuModule (copy), GameDetailsContextModule (copy), UseAppPolicyFunction (copy), User (copy), FFlagGameInviteInExpJoinCtaModule (copy), useJoinCtaConfig (copy), GameInviteFriendRowModule (copy), ignoreRowSelection (copy), CanShareGameInviteLinkModule (copy)
 	local Friends = ReactModule.useContext(FriendsMenuModule.FriendsListContext).friends
 	local UseContextResult = ReactModule.useContext(GameDetailsContextModule)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 81 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Friends (copy), User (upval)
 		local Entities = {}
 		local FriendsById = {}
@@ -76,7 +76,7 @@ return function(p1) --[[ Line: 74 | Named "useGameInviteFriendsListViewModel" ]]
 		layoutOrder = p1.layoutOrder,
 		size = p1.size,
 		entities = UseMemoResult.entities,
-		renderRow = ReactModule.useCallback(function(CreateRow, p2, RowNumber) --[[ Line: 98 ]]
+		renderRow = ReactModule.useCallback(function(CreateRow, p2, RowNumber)
 			-- upvalues: FriendsById (copy), ReactModule (upval), GameInviteFriendRowModule (upval)
 			local FriendsByIdEntry = FriendsById[p2.id]
 			
@@ -87,7 +87,7 @@ return function(p1) --[[ Line: 74 | Named "useGameInviteFriendsListViewModel" ]]
 			})
 		end, { FriendsById }),
 		onRowSelected = ignoreRowSelection,
-		showShareGameInviteLink = CanShareGameInviteLinkModule(game.GameId, UseContextResult, (UseAppPolicyFunction(function(p2) --[[ Line: 77 ]]
+		showShareGameInviteLink = CanShareGameInviteLinkModule(game.GameId, UseContextResult, (UseAppPolicyFunction(function(p2)
 			return p2.getExperienceInviteShareLinkEnabled()
 		end))),
 		ctaConfig = if FFlagGameInviteInExpJoinCtaModule then UseJoinCtaConfigResult else nil

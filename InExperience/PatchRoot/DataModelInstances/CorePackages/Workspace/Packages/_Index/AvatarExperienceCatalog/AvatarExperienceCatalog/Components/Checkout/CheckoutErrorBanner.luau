@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return ReactModule.memo(function(p1) --[[ Line: 14 | Named "CheckoutErrorBanner" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FoundationModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		checkoutErrorTitleSingular = "Feature.Catalog.Title.Checkout.PurchaseFailedSingular",

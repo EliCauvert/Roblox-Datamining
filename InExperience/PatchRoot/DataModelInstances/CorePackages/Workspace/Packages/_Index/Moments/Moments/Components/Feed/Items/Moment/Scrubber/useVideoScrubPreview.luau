@@ -6,7 +6,7 @@ local RunService = game:GetService("RunService")
 local VideoService = game:GetService("VideoService")
 local DefaultConfig = SampleWindowModule.defaultConfig
 
-return function(p1, p2, Callback) --[[ Line: 59 | Named "useVideoScrubPreview" ]]
+return function(p1, p2, Callback)
 	-- upvalues: ReactModule (copy), VideoService (copy), SampleWindowModule (copy), DefaultConfig (copy), RunService (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(nil)
 	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(nil)
@@ -31,7 +31,7 @@ return function(p1, p2, Callback) --[[ Line: 59 | Named "useVideoScrubPreview" ]
 	end
 	local Current = UseRefResult12.current
 	
-	local function rebuildCache() --[[ Line: 89 ]]
+	local function rebuildCache()
 		-- upvalues: Current (copy)
 		local Set = {}
 		local List = {}
@@ -45,20 +45,20 @@ return function(p1, p2, Callback) --[[ Line: 59 | Named "useVideoScrubPreview" ]
 		Current.times = List
 	end
 	
-	local function getRange() --[[ Line: 103 ]]
+	local function getRange()
 		-- upvalues: p1 (copy), UseRefResult4 (copy)
 		return if p1 == nil or p1.region == nil then { min = 0, max = UseRefResult4.current } else { min = p1.region.startTime, max = p1.region.endTime }
 	end
 	
-	local function _() --[[ Line: 110 | Named "ensureSampler" ]]
+	local function _()
 		-- upvalues: UseRefResult2 (copy), UseRefResult3 (copy), p1 (copy), UseRefResult7 (copy), VideoService (upval), UseRefResult4 (copy)
 		if UseRefResult2.current == nil and not UseRefResult3.current and p1 ~= nil then
 			UseRefResult3.current = true
 			local Current = UseRefResult7.current
 			local Content = p1.content
-			task.spawn(function() --[[ Line: 117 ]]
+			task.spawn(function()
 				-- upvalues: VideoService (upval), Content (copy), Current (copy), UseRefResult7 (upval), UseRefResult3 (upval), UseRefResult2 (upval), UseRefResult4 (upval)
-				local Success, Result = pcall(function() --[[ Line: 118 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: VideoService (upval), Content (upval)
 					return VideoService:CreateVideoSamplerAsync(Content, { Size = Enum.VideoSampleSize.Small })
 				end)
@@ -80,14 +80,14 @@ return function(p1, p2, Callback) --[[ Line: 59 | Named "useVideoScrubPreview" ]
 		end
 	end
 	
-	local _ = function(p3) --[[ Line: 136 | Named "runFetch" ]]
+	local _ = function(p3)
 		-- upvalues: UseRefResult5 (copy), UseRefResult7 (copy), UseRefResult2 (copy), Current (copy), rebuildCache (copy)
 		UseRefResult5.current = true
 		local Current1 = UseRefResult7.current
-		task.spawn(function() --[[ Line: 139 ]]
+		task.spawn(function()
 			-- upvalues: UseRefResult2 (upval), p3 (copy), Current1 (copy), UseRefResult7 (upval), UseRefResult5 (upval), Current (upval), rebuildCache (upval)
 			local Current = UseRefResult2.current
-			local Success, Result = pcall(function() --[[ Line: 141 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: Current (copy), p3 (upval)
 				return Current:GetSamplesAtTimesAsync(p3)
 			end)
@@ -107,7 +107,7 @@ return function(p1, p2, Callback) --[[ Line: 59 | Named "useVideoScrubPreview" ]
 		end)
 	end
 	
-	local function tick() --[[ Line: 161 ]]
+	local function tick()
 		-- upvalues: Callback (copy), getRange (copy), UseRefResult11 (copy), SampleWindowModule (upval), DefaultConfig (upval), Current (copy), rebuildCache (copy), UseRefResult5 (copy), UseRefResult2 (copy), UseRefResult7 (copy), UseRefResult9 (copy), UseBindingResult3 (copy), UseRefResult (copy), UseRefResult1 (copy), UseRefResult10 (copy), UseBindingResult2_2 (copy), UseRefResult6 (copy), UseStateResult2 (copy), UseRefResult8 (copy), UseBindingResult2 (copy), UseBindingResult2_1 (copy)
 		local CallbackResult = Callback()
 		
@@ -134,10 +134,10 @@ return function(p1, p2, Callback) --[[ Line: 59 | Named "useVideoScrubPreview" ]
 			local Fetch = DiffResult.fetch
 			UseRefResult5.current = true
 			local Current2 = UseRefResult7.current
-			task.spawn(function() --[[ Line: 139 ]]
+			task.spawn(function()
 				-- upvalues: UseRefResult2 (upval), Fetch (copy), Current2 (copy), UseRefResult7 (upval), UseRefResult5 (upval), Current (upval), rebuildCache (upval)
 				local Current = UseRefResult2.current
-				local Success, Result = pcall(function() --[[ Line: 141 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: Current (copy), Fetch (upval)
 					return Current:GetSamplesAtTimesAsync(Fetch)
 				end)
@@ -187,16 +187,16 @@ return function(p1, p2, Callback) --[[ Line: 59 | Named "useVideoScrubPreview" ]
 		end
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 231 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p2 (copy), p1 (copy), UseRefResult2 (copy), UseRefResult3 (copy), UseRefResult7 (copy), VideoService (upval), UseRefResult4 (copy), UseRefResult11 (copy), RunService (upval), tick (copy)
 		if not p2 or p1 == nil then return end
 		if UseRefResult2.current == nil and not UseRefResult3.current and p1 ~= nil then
 			UseRefResult3.current = true
 			local Current = UseRefResult7.current
 			local Content = p1.content
-			task.spawn(function() --[[ Line: 117 ]]
+			task.spawn(function()
 				-- upvalues: VideoService (upval), Content (copy), Current (copy), UseRefResult7 (upval), UseRefResult3 (upval), UseRefResult2 (upval), UseRefResult4 (upval)
-				local Success, Result = pcall(function() --[[ Line: 118 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: VideoService (upval), Content (upval)
 					return VideoService:CreateVideoSamplerAsync(Content, { Size = Enum.VideoSampleSize.Small })
 				end)
@@ -217,20 +217,20 @@ return function(p1, p2, Callback) --[[ Line: 59 | Named "useVideoScrubPreview" ]
 		UseRefResult11.current = {}
 		local RenderSteppedConnection = RunService.RenderStepped:Connect(tick)
 		
-		return function() --[[ Line: 238 ]]
+		return function()
 			-- upvalues: RenderSteppedConnection (copy)
 			RenderSteppedConnection:Disconnect()
 		end
 	end, { p2, p1 })
-	ReactModule.useEffect(function() --[[ Line: 244 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult7 (copy), UseRefResult2 (copy), UseRefResult12 (copy)
-		return function() --[[ Line: 245 ]]
+		return function()
 			-- upvalues: UseRefResult7 (upval), UseRefResult2 (upval), UseRefResult12 (upval)
 			UseRefResult7.current += 1
 			local Current = UseRefResult2.current
 			
 			if Current ~= nil then
-				pcall(function() --[[ Line: 249 ]]
+				pcall(function()
 					-- upvalues: Current (copy)
 					Current:Destroy()
 				end)

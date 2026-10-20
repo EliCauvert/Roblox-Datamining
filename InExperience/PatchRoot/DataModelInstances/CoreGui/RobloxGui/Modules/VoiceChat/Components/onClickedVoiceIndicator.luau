@@ -4,7 +4,7 @@ local Constants = require(game:GetService("CorePackages").Workspace.Packages.Voi
 local Default = require(RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
 local NewResult = require(RobloxGui.Modules.SelfView.Analytics).new()
 
-return function(p1, CONNECTING, p2) --[[ Line: 11 ]]
+return function(p1, CONNECTING, p2)
 	-- upvalues: Players (copy), Constants (copy), Default (copy), NewResult (copy)
 	local LocalPlayer = Players.LocalPlayer
 	

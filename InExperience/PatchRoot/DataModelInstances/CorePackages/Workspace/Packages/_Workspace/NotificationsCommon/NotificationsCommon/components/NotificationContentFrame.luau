@@ -25,7 +25,7 @@ local MetaActionsWidth = ConstantsModule.MetaActionsWidth
 local TimestampWidth = ConstantsModule.TimestampWidth
 local TimestampHeight = ConstantsModule.TimestampHeight
 
-return function() --[[ Line: 32 ]]
+return function()
 	-- upvalues: UseStyleFunction (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), UseNotificationCardDataModule (copy), ConstantsModule (copy), UseNotificationCardStateModule (copy), NormalizeFontFaceFunction (copy), DefaultTextContentPadding (copy), MetaActionsWidth (copy), TimestampWidth (copy), TimestampHeight (copy), React (copy), DefaultContentPadding (copy), NotificationThumbnailModule (copy), NotificationStyledTextModule (copy), IconButton (copy), IconSize (copy), IconsCommonOverflow (copy), NotificationActionsFrameModule (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseTokensResult = if FoundationFontFaceMigration then UseTokensFunction() else nil
@@ -86,7 +86,7 @@ return function() --[[ Line: 32 ]]
 		Text = "",
 		AutoButtonColor = false,
 		BorderSizePixel = 0,
-		[React.Event.Activated] = function() --[[ Line: 116 ]]
+		[React.Event.Activated] = function()
 			-- upvalues: HandleActionsFunction (copy), TextBodyEntry (copy), NotificationPayload (copy)
 			if HandleActionsFunction and TextBodyEntry and NotificationPayload then
 				HandleActionsFunction(TextBodyEntry, NotificationPayload)
@@ -148,7 +148,7 @@ return function() --[[ Line: 32 ]]
 					size = UDim2.fromOffset(0, 0),
 					iconSize = IconSize.Medium,
 					icon = IconsCommonOverflow,
-					onActivated = function() --[[ Line: 191 ]]
+					onActivated = function()
 						-- upvalues: OpenMetaActionsFunction (copy), NotificationPayload (copy)
 						OpenMetaActionsFunction(NotificationPayload)
 					end

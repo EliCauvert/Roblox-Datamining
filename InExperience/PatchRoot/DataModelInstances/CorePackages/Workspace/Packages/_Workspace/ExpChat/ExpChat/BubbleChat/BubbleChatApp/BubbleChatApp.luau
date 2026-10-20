@@ -24,14 +24,14 @@ local BillboardUpdateFrequencyIXPLayerValue = game:DefineFastString("BillboardUp
 local BillboardGuiModule = require(script:FindFirstAncestor("BubbleChat").BillboardGui)
 
 if not ExpChatRemoveBubbleChatAppUserMessagesState then
-	function BubbleChatApp.getDerivedStateFromProps(p1, p2) --[[ Line: 41 ]]
+	function BubbleChatApp.getDerivedStateFromProps(p1, p2)
 		-- upvalues: Dictionary (copy)
 		return {
 			userMessages = Dictionary.join(p2.userMessages or {}, p1.userMessages)
 		}
 	end
 end
-function BubbleChatApp.init(p1) --[[ Line: 51 ]]
+function BubbleChatApp.init(p1)
 	-- upvalues: NewResult (copy), ExpChatRemoveBubbleChatAppUserMessagesState (copy), Dictionary (copy), None (copy), ExpChatBubbleChatRerenderOnAncestryChange (copy), IXPServiceWrapperModule (copy), GetFStringVoicePerformanceIXPLayerNameModule (copy), BillboardUpdateFrequencyIXPLayerValue (copy)
 	NewResult:debug("Initializing")
 	p1:setState({
@@ -40,7 +40,7 @@ function BubbleChatApp.init(p1) --[[ Line: 51 ]]
 		userMessages = if ExpChatRemoveBubbleChatAppUserMessagesState then nil else {}
 	})
 	
-	function p1.onBillboardFadeOut(p2) --[[ Line: 59 ]]
+	function p1.onBillboardFadeOut(p2)
 		-- upvalues: ExpChatRemoveBubbleChatAppUserMessagesState (upval), p1 (copy), Dictionary (upval), None (upval)
 		if not ExpChatRemoveBubbleChatAppUserMessagesState then
 			p1:setState({
@@ -49,7 +49,7 @@ function BubbleChatApp.init(p1) --[[ Line: 51 ]]
 		end
 	end
 	
-	function p1.setCameraPermissionStateFromControl(HasCameraPermissions) --[[ Line: 67 ]]
+	function p1.setCameraPermissionStateFromControl(HasCameraPermissions)
 		-- upvalues: p1 (copy)
 		p1:setState({ hasCameraPermissions = HasCameraPermissions })
 	end
@@ -58,10 +58,10 @@ function BubbleChatApp.init(p1) --[[ Line: 51 ]]
 		p1.isMounted = false
 		p1.ancestryConnections = {}
 		
-		function p1.onTrackedAncestryChanged() --[[ Line: 76 ]]
+		function p1.onTrackedAncestryChanged()
 			-- upvalues: p1 (copy)
 			if p1.isMounted then
-				p1:setState(function(p2) --[[ Line: 80 ]]
+				p1:setState(function(p2)
 					return {
 						ancestryRerenderToken = (p2.ancestryRerenderToken or 0) + 1
 					}
@@ -69,7 +69,7 @@ function BubbleChatApp.init(p1) --[[ Line: 51 ]]
 			end
 		end
 	end
-	local Success, Result = pcall(function() --[[ Line: 87 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: IXPServiceWrapperModule (upval), GetFStringVoicePerformanceIXPLayerNameModule (upval)
 		return IXPServiceWrapperModule:GetLayerData(GetFStringVoicePerformanceIXPLayerNameModule())
 	end)
@@ -81,8 +81,8 @@ function BubbleChatApp.init(p1) --[[ Line: 51 ]]
 	end
 end
 
-function BubbleChatApp.getPermissions(p1) --[[ Line: 101 ]]
-	local function v26(HasCameraPermissions, HasMicPermissions) --[[ Line: 102 ]]
+function BubbleChatApp.getPermissions(p1)
+	local function v26(HasCameraPermissions, HasMicPermissions)
 		-- upvalues: p1 (copy)
 		p1:setState({
 			hasCameraPermissions = HasCameraPermissions,
@@ -95,9 +95,9 @@ function BubbleChatApp.getPermissions(p1) --[[ Line: 101 ]]
 	end
 end
 
-function BubbleChatApp.getMicPermission(p1) --[[ Line: 117 ]]
+function BubbleChatApp.getMicPermission(p1)
 	-- upvalues: Permissions (copy)
-	local function v27(_, HasMicPermissions) --[[ Line: 118 ]]
+	local function v27(_, HasMicPermissions)
 		-- upvalues: p1 (copy)
 		p1:setState({ hasMicPermissions = HasMicPermissions })
 	end
@@ -107,9 +107,9 @@ function BubbleChatApp.getMicPermission(p1) --[[ Line: 117 ]]
 	end
 end
 
-function BubbleChatApp.getCameraPermissionWithoutRequest(p1) --[[ Line: 132 ]]
+function BubbleChatApp.getCameraPermissionWithoutRequest(p1)
 	-- upvalues: Permissions (copy)
-	local function v28(HasCameraPermissions, _) --[[ Line: 133 ]]
+	local function v28(HasCameraPermissions, _)
 		-- upvalues: p1 (copy)
 		p1:setState({ hasCameraPermissions = HasCameraPermissions })
 	end
@@ -119,7 +119,7 @@ function BubbleChatApp.getCameraPermissionWithoutRequest(p1) --[[ Line: 132 ]]
 	end
 end
 
-function BubbleChatApp.updateTrackedAncestryConnections(p1) --[[ Line: 147 ]]
+function BubbleChatApp.updateTrackedAncestryConnections(p1)
 	local t = {}
 	
 	if p1.props.characters then
@@ -149,7 +149,7 @@ function BubbleChatApp.updateTrackedAncestryConnections(p1) --[[ Line: 147 ]]
 	end
 end
 
-function BubbleChatApp.didMount(p2) --[[ Line: 178 ]]
+function BubbleChatApp.didMount(p2)
 	-- upvalues: ExpChatBubbleChatRerenderOnAncestryChange (copy), GlobalFlagsModule (copy), NewResult (copy), Players (copy), VoiceChatService (copy), IXPServiceWrapperModule (copy), GetFStringVoicePerformanceIXPLayerNameModule (copy)
 	if ExpChatBubbleChatRerenderOnAncestryChange then
 		p2.isMounted = true
@@ -157,10 +157,10 @@ function BubbleChatApp.didMount(p2) --[[ Line: 178 ]]
 	end
 	if GlobalFlagsModule.AvatarChatEnabled or GlobalFlagsModule.ChromeEnabled then
 		if p2.props.isVoiceServiceInitialized then
-			p2.props.isVoiceServiceInitialized():andThen(function() --[[ Line: 190 ]]
+			p2.props.isVoiceServiceInitialized():andThen(function()
 				-- upvalues: p2 (copy)
 				p2:getMicPermission()
-			end):catch(function() --[[ Line: 193 ]]
+			end):catch(function()
 				-- upvalues: NewResult (upval)
 				NewResult:debug("VoiceChatServiceManager failed to initialize inside TextChatService bubblechat")
 			end)
@@ -169,9 +169,9 @@ function BubbleChatApp.didMount(p2) --[[ Line: 178 ]]
 		end
 		p2:getCameraPermissionWithoutRequest()
 	end
-	task.spawn(function() --[[ Line: 202 ]]
+	task.spawn(function()
 		-- upvalues: Players (upval), VoiceChatService (upval), NewResult (upval), p2 (copy), IXPServiceWrapperModule (upval), GetFStringVoicePerformanceIXPLayerNameModule (upval)
-		local Success, Result = pcall(function() --[[ Line: 203 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Players (upval), VoiceChatService (upval)
 			return if Players.LocalPlayer then VoiceChatService:IsVoiceEnabledForUserIdAsync(Players.LocalPlayer.UserId) else false
 		end)
@@ -188,14 +188,14 @@ function BubbleChatApp.didMount(p2) --[[ Line: 178 ]]
 	end)
 end
 
-function BubbleChatApp.didUpdate(p2) --[[ Line: 224 ]]
+function BubbleChatApp.didUpdate(p2)
 	-- upvalues: ExpChatBubbleChatRerenderOnAncestryChange (copy)
 	if ExpChatBubbleChatRerenderOnAncestryChange then
 		p2:updateTrackedAncestryConnections()
 	end
 end
 
-function BubbleChatApp.willUnmount(p2) --[[ Line: 230 ]]
+function BubbleChatApp.willUnmount(p2)
 	-- upvalues: ExpChatBubbleChatRerenderOnAncestryChange (copy)
 	if ExpChatBubbleChatRerenderOnAncestryChange then
 		p2.isMounted = false
@@ -207,7 +207,7 @@ function BubbleChatApp.willUnmount(p2) --[[ Line: 230 ]]
 	end
 end
 
-function BubbleChatApp.render(p3) --[[ Line: 240 ]]
+function BubbleChatApp.render(p3)
 	-- upvalues: GlobalFlagsModule (copy), Players (copy), RoactModule (copy), Dictionary (copy), BillboardGuiModule (copy)
 	local t = {}
 	
@@ -235,7 +235,7 @@ function BubbleChatApp.render(p3) --[[ Line: 240 ]]
 	if GlobalFlagsModule.AvatarChatEnabled and p3.state.hasCameraPermissions and Players.LocalPlayer then
 		t[tostring(Players.LocalPlayer.UserId)] = true
 	end
-	return RoactModule.createElement("ScreenGui", { ResetOnSpawn = false }, Dictionary.map(t, function(p4, UserId) --[[ Line: 285 ]]
+	return RoactModule.createElement("ScreenGui", { ResetOnSpawn = false }, Dictionary.map(t, function(p4, UserId)
 		-- upvalues: RoactModule (upval), BillboardGuiModule (upval), p3 (copy)
 		return RoactModule.createElement(BillboardGuiModule, {
 			userId = UserId,
@@ -260,7 +260,7 @@ function BubbleChatApp.render(p3) --[[ Line: 240 ]]
 	end))
 end
 
-local function mapStateToProps(p4, p5) --[[ Line: 311 ]]
+local function mapStateToProps(p4, p5)
 	-- upvalues: ExpChatSharedModule (copy), ExpChatRemoveBubbleChatAppUserMessagesState (copy), GetFFlagUseCharacterStoreFunction (copy), GetFFlagExpChatUseVoiceParticipantsStoreFunction (copy)
 	local MockUserIdToPartOrModel = p4.Messages.mockUserIdToPartOrModel
 	

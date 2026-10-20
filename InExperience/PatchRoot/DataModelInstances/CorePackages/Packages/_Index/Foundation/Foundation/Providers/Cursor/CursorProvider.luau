@@ -15,22 +15,22 @@ local _ = require(Foundation.Enums.ColorNamespace)
 local _ = require(Foundation.Components.Types)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 
-return function(p1) --[[ Line: 28 | Named "CursorProvider" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseRefCacheFunction (copy), UseTokensModule (copy), KeyUtilitiesModule (copy), DashModule (copy), CursorModule (copy), CursorComponentModule (copy), IsPluginSecurityModule (copy), CoreGui (copy), GuiService (copy), CursorContextModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState({})
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
 	local UseRefCacheResult = UseRefCacheFunction()
 	local UseTokensModuleResult = UseTokensModule()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 35 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseRefCacheResult (copy), UseStateResult2 (copy), KeyUtilitiesModule (upval), UseTokensModuleResult (copy), DashModule (upval)
 		return {
 			refCache = UseRefCacheResult,
 			setMountedCursors = UseStateResult2,
-			getCursor = function(p2) --[[ Line: 39 ]]
+			getCursor = function(p2)
 				-- upvalues: KeyUtilitiesModule (upval), UseTokensModuleResult (upval), UseStateResult2 (upval), DashModule (upval), UseRefCacheResult (upval)
 				local MapCursorToKeyResult = KeyUtilitiesModule.mapCursorToKey(p2, UseTokensModuleResult)
-				UseStateResult2(function(p3) --[[ Line: 42 ]]
+				UseStateResult2(function(p3)
 					-- upvalues: MapCursorToKeyResult (copy), DashModule (upval)
 					return if p3[MapCursorToKeyResult] == nil then DashModule.union(p3, { [MapCursorToKeyResult] = true }) else p3
 				end)
@@ -44,7 +44,7 @@ return function(p1) --[[ Line: 28 | Named "CursorProvider" ]]
 		UseTokensModuleResult
 	})
 	
-	local function v23() --[[ Line: 56 ]]
+	local function v23()
 		-- upvalues: UseStateResult (copy), UseRefCacheResult (copy), UseStateResult1 (copy), KeyUtilitiesModule (upval), ReactModule (upval), CursorModule (upval), CursorComponentModule (upval)
 		local Elements = {}
 		
@@ -75,14 +75,14 @@ return function(p1) --[[ Line: 28 | Named "CursorProvider" ]]
 		return Elements
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 93 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), IsPluginSecurityModule (upval), CoreGui (upval), GuiService (upval), UseStateResult2_1 (copy)
 		if UseRefResult.current == nil or not game:IsAncestorOf(UseRefResult.current) then return end
 		local IsDescendantOf = IsPluginSecurityModule() and UseRefResult.current:IsDescendantOf(CoreGui)
 		
-		local function setUpSelectionImageObjectConnection() --[[ Line: 100 ]]
+		local function setUpSelectionImageObjectConnection()
 			-- upvalues: IsDescendantOf (copy), GuiService (upval), UseStateResult2_1 (upval)
-			return if IsDescendantOf then GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ Line: 105 ]]
+			return if IsDescendantOf then GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function()
 				-- upvalues: GuiService (upval), UseStateResult2_1 (upval)
 				if GuiService.SelectedCoreObject == nil then
 					UseStateResult2_1(nil)
@@ -91,7 +91,7 @@ return function(p1) --[[ Line: 28 | Named "CursorProvider" ]]
 				else
 					UseStateResult2_1(GuiService.SelectedCoreObject.SelectionImageObject)
 				end
-			end) else GuiService:GetPropertyChangedSignal("SelectedObject"):Connect(function() --[[ Line: 113 ]]
+			end) else GuiService:GetPropertyChangedSignal("SelectedObject"):Connect(function()
 				-- upvalues: GuiService (upval), UseStateResult2_1 (upval)
 				if GuiService.SelectedObject == nil then
 					UseStateResult2_1(nil)
@@ -104,13 +104,13 @@ return function(p1) --[[ Line: 28 | Named "CursorProvider" ]]
 		end
 		
 		local SetUpSelectionImageObjectConnectionResult = setUpSelectionImageObjectConnection()
-		local AncestryChangedConnection = UseRefResult.current.AncestryChanged:Connect(function() --[[ Line: 124 ]]
+		local AncestryChangedConnection = UseRefResult.current.AncestryChanged:Connect(function()
 			-- upvalues: SetUpSelectionImageObjectConnectionResult (ref), setUpSelectionImageObjectConnection (copy)
 			SetUpSelectionImageObjectConnectionResult:Disconnect()
 			SetUpSelectionImageObjectConnectionResult = setUpSelectionImageObjectConnection()
 		end)
 		
-		return function() --[[ Line: 134 ]]
+		return function()
 			-- upvalues: SetUpSelectionImageObjectConnectionResult (ref), AncestryChangedConnection (copy)
 			SetUpSelectionImageObjectConnectionResult:Disconnect()
 			AncestryChangedConnection:Disconnect()

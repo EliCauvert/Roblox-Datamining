@@ -4,7 +4,7 @@ local CommandErrorCodes = { ChattingToSelf = 1, NoMatches = 2, MultipleMatches =
 
 return {
 	CommandErrorCodes = CommandErrorCodes,
-	getUserNameFromChattedName = function(Text: string, Name, p1) --[[ Line: 14 ]]
+	getUserNameFromChattedName = function(Text: string, Name, p1)
 		-- upvalues: CommandErrorCodes (copy), Players (copy), ChatSettingsModule (copy)
 		if Name == Text then
 			return Name, CommandErrorCodes.ChattingToSelf
@@ -38,7 +38,7 @@ return {
 		elseif Count < 2 then return end
 		return Text, CommandErrorCodes.MultipleMatches
 	end,
-	getUsersWithDisplayNameString = function(Text: string, Name): string --[[ Line: 56 ]]
+	getUsersWithDisplayNameString = function(Text: string, Name): string
 		-- upvalues: Players (copy)
 		local List = {}
 		local Text1 = ""

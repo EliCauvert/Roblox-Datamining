@@ -1,7 +1,7 @@
 ﻿return {
 	SHOP_ITEM_MEDIA_HEIGHT_SCALE = 0.85,
 	MEDIA_HEIGHT_SCALE_FALLBACK = 0.425,
-	computeShopRowTileWidths = function(p1: number, p2, p3: number, p4) --[[ Line: 21 ]]
+	computeShopRowTileWidths = function(p1: number, p2, p3: number, p4)
 		if p1 <= 0 or p3 <= 0 then
 			return {
 				shopWidth = 0,
@@ -16,7 +16,7 @@
 			}
 		end
 	end,
-	computeRobuxPackageMediaHeightScale = function(p1: number, p2): number --[[ Line: 44 ]]
+	computeRobuxPackageMediaHeightScale = function(p1: number, p2): number
 		if p1 <= 0 then
 			return 0.425
 		else

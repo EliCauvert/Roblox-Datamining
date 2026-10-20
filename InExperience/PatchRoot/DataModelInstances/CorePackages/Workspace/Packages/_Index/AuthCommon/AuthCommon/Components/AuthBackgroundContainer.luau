@@ -4,7 +4,7 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local Background2026 = require(AuthCommon.Common.AuthBackgroundConstants).Background2026
 
-local function renderScrim(BackgroundTransparency) --[[ Line: 44 ]]
+local function renderScrim(BackgroundTransparency)
 	-- upvalues: ReactModule (copy)
 	return ReactModule.createElement("ImageLabel", {
 		ZIndex = 2,
@@ -18,7 +18,7 @@ local function renderScrim(BackgroundTransparency) --[[ Line: 44 ]]
 	})
 end
 
-local function renderImage(Image) --[[ Line: 57 ]]
+local function renderImage(Image)
 	-- upvalues: ReactModule (copy), FoundationModule (copy)
 	return ReactModule.createElement(FoundationModule.Image, {
 		BorderSizePixel = 0,
@@ -30,7 +30,7 @@ local function renderImage(Image) --[[ Line: 57 ]]
 	})
 end
 
-local function renderGradientFrame(BackgroundColor3, YScale, ZIndex, NumberSequence1) --[[ Line: 68 ]]
+local function renderGradientFrame(BackgroundColor3, YScale, ZIndex, NumberSequence1)
 	-- upvalues: ReactModule (copy)
 	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -42,7 +42,7 @@ local function renderGradientFrame(BackgroundColor3, YScale, ZIndex, NumberSeque
 	})
 end
 
-local function renderMobileFade(Image, BackgroundColor) --[[ Line: 82 ]]
+local function renderMobileFade(Image, BackgroundColor)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), renderGradientFrame (copy)
 	return {
 		Media = ReactModule.createElement(FoundationModule.Image, {
@@ -67,7 +67,7 @@ local function renderMobileFade(Image, BackgroundColor) --[[ Line: 82 ]]
 	}
 end
 
-return function(p1) --[[ Line: 116 | Named "AuthBackgroundContainer" ]]
+return function(p1)
 	-- upvalues: Background2026 (copy), ReactModule (copy), renderMobileFade (copy), renderImage (copy), renderScrim (copy)
 	local IsSCRIMTRANSPARENCYBelow = Background2026.SCRIM_TRANSPARENCY < 1
 	local NoShowImage = p1.showImage == nil or p1.showImage

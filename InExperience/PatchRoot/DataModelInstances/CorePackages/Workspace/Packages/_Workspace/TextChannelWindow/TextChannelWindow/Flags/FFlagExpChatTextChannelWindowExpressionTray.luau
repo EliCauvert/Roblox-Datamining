@@ -2,7 +2,7 @@
 local FFlagDebugExpChatTextChannelWindowStaticExpressionsModule = require(script.Parent.FFlagDebugExpChatTextChannelWindowStaticExpressions)
 local ExpChatPresetChatVREnabled = game:DefineFastFlag("ExpChatPresetChatVREnabled", false)
 
-local function _() --[[ Line: 9 | Named "isSupportedPlatform" ]]
+local function _()
 	-- upvalues: UserInputService (copy), ExpChatPresetChatVREnabled (copy)
 	return not UserInputService.VREnabled or ExpChatPresetChatVREnabled
 end

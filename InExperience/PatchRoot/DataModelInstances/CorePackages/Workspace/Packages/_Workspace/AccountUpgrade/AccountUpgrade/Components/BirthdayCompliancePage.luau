@@ -26,23 +26,23 @@ local UseStoreFunction = RoactUtilsModule.Hooks.RoactRodux.useStore
 local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
 local RoactServiceTagsModule = require(Parent.RoactServiceTags)
 
-local function renderLandingArt() --[[ Line: 48 ]]
+local function renderLandingArt()
 	-- upvalues: ReactModule (copy), AuthBackgroundContainer (copy)
 	return ReactModule.createElement(AuthBackgroundContainer)
 end
 
-return function(p1) --[[ Line: 53 | Named "BirthdayCompliancePage" ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseRoactServiceFunction (copy), RoactServiceTagsModule (copy), UseSelectorFunction (copy), ReactModule (copy), UseStoreFunction (copy), FFlagAccountUpgradeHideAccountOnSignOutModule (copy), User (copy), LogoutReasonNames (copy), UpdateLoginEntryDataFunction (copy), AppStorageService (copy), AuthLocalStorageKeys (copy), FFlagAccountUpgradeOAuthDialogFitsContentModule (copy), UseOpenDisclaimerLinksFunction (copy), IsLoggedOutUserIdFunction (copy), FFlagAccountUpgradeFullPageOnPhoneModule (copy), UseMobilePageModule (copy), AccountUpgradePageModule (copy), OAuth (copy), FullscreenPageWithSafeArea (copy), renderLandingArt (copy), AccountUpgradeAppShellFlowModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactServiceTagsModule.RoactNetworking)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(RoactServiceTagsModule.AppGuiService)
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 58 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		local User = if p2.Users and p2.LocalUserId then p2.Users[p2.LocalUserId] else nil
 		
 		return if User then User.name else nil
 	end)
 	local RefreshUserAccessFunction = p1.refreshUserAccess
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 67 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseDispatchResult (copy), RefreshUserAccessFunction (copy), UseRoactServiceResult (copy)
 		UseDispatchResult(RefreshUserAccessFunction(UseRoactServiceResult))
 	end, {
@@ -51,7 +51,7 @@ return function(p1) --[[ Line: 53 | Named "BirthdayCompliancePage" ]]
 		UseRoactServiceResult
 	})
 	local RefreshUserAccessAfterUpgrade = p1.refreshUserAccessAfterUpgrade or RefreshUserAccessFunction
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 73 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseDispatchResult (copy), RefreshUserAccessAfterUpgrade (copy), UseRoactServiceResult (copy)
 		UseDispatchResult(RefreshUserAccessAfterUpgrade(UseRoactServiceResult))
 	end, {
@@ -61,9 +61,9 @@ return function(p1) --[[ Line: 53 | Named "BirthdayCompliancePage" ]]
 	})
 	local UseStoreResult = UseStoreFunction()
 	local LogoutThunkFunction = p1.LogoutThunk
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 79 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: LogoutThunkFunction (copy), UseStoreResult (copy), FFlagAccountUpgradeHideAccountOnSignOutModule (upval), User (upval), UseDispatchResult (copy), UseRoactServiceResult (copy), UseRoactServiceResult1 (copy), LogoutReasonNames (upval), UpdateLoginEntryDataFunction (upval), AppStorageService (upval), AuthLocalStorageKeys (upval)
-		return if LogoutThunkFunction == nil then nil else function() --[[ Line: 83 ]]
+		return if LogoutThunkFunction == nil then nil else function()
 			-- upvalues: UseStoreResult (upval), FFlagAccountUpgradeHideAccountOnSignOutModule (upval), User (upval), UseDispatchResult (upval), LogoutThunkFunction (upval), UseRoactServiceResult (upval), UseRoactServiceResult1 (upval), LogoutReasonNames (upval), UpdateLoginEntryDataFunction (upval), AppStorageService (upval), AuthLocalStorageKeys (upval)
 			local LocalUserId = UseStoreResult:getState().LocalUserId
 			local Username = if FFlagAccountUpgradeHideAccountOnSignOutModule then User.fromLocalStorage().username else nil
@@ -89,7 +89,7 @@ return function(p1) --[[ Line: 53 | Named "BirthdayCompliancePage" ]]
 	
 	if FFlagAccountUpgradeOAuthDialogFitsContentModule then
 		local UseOpenDisclaimerLinksResult = UseOpenDisclaimerLinksFunction()
-		OnLegalLinkSelected = ReactModule.useCallback(function(p2) --[[ Line: 102 ]]
+		OnLegalLinkSelected = ReactModule.useCallback(function(p2)
 			-- upvalues: UseOpenDisclaimerLinksResult (copy)
 			if p2 == "terms" then
 				UseOpenDisclaimerLinksResult.openTerms()
@@ -102,12 +102,12 @@ return function(p1) --[[ Line: 53 | Named "BirthdayCompliancePage" ]]
 	end
 	local SetDarkThemeOverrideFunction = p1.setDarkThemeOverride
 	local ClearThemeOverrideFunction = p1.clearThemeOverride
-	ReactModule.useEffect(function() --[[ Line: 113 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SetDarkThemeOverrideFunction (copy), ClearThemeOverrideFunction (copy), IsLoggedOutUserIdFunction (upval), UseStoreResult (copy)
 		if SetDarkThemeOverrideFunction then
 			SetDarkThemeOverrideFunction()
 		end
-		return function() --[[ Line: 117 ]]
+		return function()
 			-- upvalues: ClearThemeOverrideFunction (upval), IsLoggedOutUserIdFunction (upval), UseStoreResult (upval)
 			if ClearThemeOverrideFunction and not IsLoggedOutUserIdFunction(UseStoreResult:getState().LocalUserId) then
 				ClearThemeOverrideFunction()

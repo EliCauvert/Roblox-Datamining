@@ -25,17 +25,17 @@ ExtendResult.defaultProps = {
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function ExtendResult:getErrorTitle(p1, ErrorType, FlowType) --[[ Line: 49 ]]
+function ExtendResult:getErrorTitle(p1, ErrorType, FlowType)
 	-- upvalues: PurchaseErrorTypeModule (copy), PurchaseFlowTypeModule (copy)
 	return if ErrorType == PurchaseErrorTypeModule.FailedRobuxPurchase then p1.robuxFailedPurchaseTitle elseif ErrorType == PurchaseErrorTypeModule.AlreadySubscribed then p1.alreadySubscribedTitle elseif FlowType == PurchaseFlowTypeModule.Subscription then p1.cantSubscribeTitle else p1.titleText
 end
 
-function ExtendResult:getErrorMessage(p1, ErrorType, EconomicRestrictionError) --[[ Line: 61 ]]
+function ExtendResult:getErrorMessage(p1, ErrorType, EconomicRestrictionError)
 	-- upvalues: PurchaseErrorTypeModule (copy)
 	return if ErrorType == PurchaseErrorTypeModule.AlreadyOwn then p1.alreadyOwnText elseif ErrorType == PurchaseErrorTypeModule.FailedGrant then p1.failedGrantText elseif ErrorType == PurchaseErrorTypeModule.FailedGrantUnknown then p1.failedGrantUnknownText elseif ErrorType == PurchaseErrorTypeModule.Limited then p1.limitedText elseif ErrorType == PurchaseErrorTypeModule.NotEnoughRobux then p1.notEnoughRobuxText elseif ErrorType == PurchaseErrorTypeModule.NotForSale then p1.notForSaleText elseif ErrorType == PurchaseErrorTypeModule.NotForSaleExperience then p1.notForSaleExperienceText elseif ErrorType == PurchaseErrorTypeModule.PremiumOnly then p1.premiumOnlyText elseif ErrorType == PurchaseErrorTypeModule.ThirdPartyDisabled then p1.thirdPartyDisabledText elseif ErrorType == PurchaseErrorTypeModule.Under13 then p1.under13Text elseif ErrorType == PurchaseErrorTypeModule.PremiumPlatformUnavailable then p1.premiumPlatformUnavailable elseif ErrorType == PurchaseErrorTypeModule.AlreadyPremium then p1.alreadyPremium elseif ErrorType == PurchaseErrorTypeModule.PurchaseLimit then p1.purchaseLimitText elseif ErrorType == PurchaseErrorTypeModule.ParentalLimit then p1.parentalLimitText elseif ErrorType == PurchaseErrorTypeModule.FailedRobuxPurchase then p1.robuxFailedPurchaseText elseif ErrorType == PurchaseErrorTypeModule.AlreadySubscribed then p1.alreadySubscribedText elseif ErrorType == PurchaseErrorTypeModule.SubscriptionNotForSale then p1.subscriptionNotForSaleText elseif ErrorType == PurchaseErrorTypeModule.SubscriptionExceededUserSpendLimit then p1.parentalRestrictionSubscriptionText elseif ErrorType == PurchaseErrorTypeModule.SubscriptionUnsupportedLocale then p1.subscriptionUnsupportedLocaleText elseif ErrorType == PurchaseErrorTypeModule.RestrictedUser then p1.restrictedUserText elseif ErrorType == PurchaseErrorTypeModule.SubscriptionPurchasePlatformNotSupported or ErrorType == PurchaseErrorTypeModule.SubscriptionInvalidSaleLocation then p1.subscriptionUnsupportedPlatformText elseif ErrorType == PurchaseErrorTypeModule.VpcRequired then p1.vpcRequiredText elseif ErrorType == PurchaseErrorTypeModule.ExceedParentalSpendLimit then p1.exceedParentalSpendLimitText elseif ErrorType == PurchaseErrorTypeModule.EconomicRestriction then formatEconomicRestrictionText(p1, EconomicRestrictionError) else p1.unknownText
 end
 
-function formatEconomicRestrictionText(p1, p2) --[[ Line: 123 ]]
+function formatEconomicRestrictionText(p1, p2)
 	-- upvalues: Default (copy), EconomicRestrictionsPromptShownCounter (copy), GetAppContextModule (copy), LoggerModule (copy)
 	local TimeoutMinutes: number = p2.timeoutMinutes
 	local ViolationType = p2.violationType
@@ -60,7 +60,7 @@ function formatEconomicRestrictionText(p1, p2) --[[ Line: 123 ]]
 	end
 end
 
-function getEconomicRestrictionViolationLabel(p1, ViolationType) --[[ Line: 154 ]]
+function getEconomicRestrictionViolationLabel(p1, ViolationType)
 	-- upvalues: EconomicRestrictionsViolationTypeModule (copy), LoggerModule (copy)
 	if ViolationType == EconomicRestrictionsViolationTypeModule.Chargeback then
 		return p1.chargebackViolationLabel
@@ -92,17 +92,17 @@ function getEconomicRestrictionViolationLabel(p1, ViolationType) --[[ Line: 154 
 	end
 end
 
-function getIsAlreadyOwnedError(AlreadyOwn): boolean --[[ Line: 185 ]]
+function getIsAlreadyOwnedError(AlreadyOwn): boolean
 	-- upvalues: PurchaseErrorTypeModule (copy)
 	return AlreadyOwn == PurchaseErrorTypeModule.AlreadyOwn or (AlreadyOwn == PurchaseErrorTypeModule.AlreadyPremium or AlreadyOwn == PurchaseErrorTypeModule.AlreadySubscribed)
 end
 
-function getErrorTitleIcon(p1) --[[ Line: 191 ]]
+function getErrorTitleIcon(p1)
 	-- upvalues: Images (copy)
 	return if getIsAlreadyOwnedError(p1) then Images["icons/status/success_large"] else Images["icons/status/error_large"]
 end
 
-function ExtendResult.renderNewAlertWithLocalization(p1) --[[ Line: 198 ]]
+function ExtendResult.renderNewAlertWithLocalization(p1)
 	-- upvalues: WithLocalizationFunction (copy)
 	return WithLocalizationFunction({
 		titleText = "IAPExperience.PurchaseError.Title.Error",
@@ -146,20 +146,20 @@ function ExtendResult.renderNewAlertWithLocalization(p1) --[[ Line: 198 ]]
 		fraudVirtualEconomyAbuseViolationLabel = "Feature.NotApproved.Label.Sublabel.FraudVirtualEconomyAbuse",
 		economicRestrictionBaseTextHours = "IAPExperience.PurchaseError.Text.EconomicRestrictionsHours",
 		economicRestrictionBaseTextDays = "IAPExperience.PurchaseError.Text.EconomicRestrictionsDays"
-	})(function(p2) --[[ Line: 241 ]]
+	})(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderAlert(p2)
 	end)
 end
 
-function ExtendResult.render(p1) --[[ Line: 246 ]]
+function ExtendResult.render(p1)
 	-- upvalues: RoactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy)
 	return RoactModule.createElement(LocalizationProvider, {
 		localization = Localization.new(LocalizationService.RobloxLocaleId)
 	}, { Alert = p1:renderNewAlertWithLocalization() })
 end
 
-function ExtendResult.renderAlert(p1, p2) --[[ Line: 254 ]]
+function ExtendResult.renderAlert(p1, p2)
 	-- upvalues: PurchaseErrorTypeModule (copy), LoggerModule (copy), GetAppContextModule (copy), Default (copy), PurchaseErrorPromptShownCounter (copy), RoactModule (copy), InteractiveAlert (copy), ButtonType (copy)
 	local Props = p1.props
 	local RawValue = Props.errorType and PurchaseErrorTypeModule.toRawValue(Props.errorType) or tostring(Props.errorType)

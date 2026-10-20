@@ -6,13 +6,13 @@ local SQUADVOICEEUMODALSEENKEY = require(SquadsCore.Common.Constants).SQUAD_VOIC
 local SquadPromptTypeModule = require(SquadsCore.Enums.SquadPromptType)
 local SetTableAppStorageKeyFunction = require(SquadsCore.Utils.appStorageAccess).setTableAppStorageKey
 
-return function(Callback, p1, Input, Input1) --[[ Line: 13 ]]
+return function(Callback, p1, Input, Input1)
 	-- upvalues: SquadPromptTypeModule (copy), SetTableAppStorageKeyFunction (copy), SQUADVOICEEUMODALSEENKEY (copy), HttpService (copy), SQUADVOICEEUMODALCONSENTGIVENKEY (copy), Default (copy)
-	return function(p2) --[[ Line: 19 ]]
+	return function(p2)
 		-- upvalues: Callback (copy), SquadPromptTypeModule (upval), Input (copy), p1 (copy), Input1 (copy), SetTableAppStorageKeyFunction (upval), SQUADVOICEEUMODALSEENKEY (upval), HttpService (upval), SQUADVOICEEUMODALCONSENTGIVENKEY (upval), Default (upval)
 		Callback(p2, {
 			promptType = SquadPromptTypeModule.EuVoiceConsentPrompt,
-			onConfirm = function() --[[ Line: 22 ]]
+			onConfirm = function()
 				-- upvalues: Input (upval), p1 (upval), Input1 (upval), SetTableAppStorageKeyFunction (upval), SQUADVOICEEUMODALSEENKEY (upval), HttpService (upval), SQUADVOICEEUMODALCONSENTGIVENKEY (upval), Default (upval)
 				Input[p1] = true
 				Input1[p1] = true
@@ -20,7 +20,7 @@ return function(Callback, p1, Input, Input1) --[[ Line: 13 ]]
 				SetTableAppStorageKeyFunction(SQUADVOICEEUMODALCONSENTGIVENKEY, HttpService:JSONEncode(Input1))
 				Default.default.VoiceEuModalConsented:Fire()
 			end,
-			onCancel = function() --[[ Line: 32 ]]
+			onCancel = function()
 				-- upvalues: Input (upval), p1 (upval), SetTableAppStorageKeyFunction (upval), SQUADVOICEEUMODALSEENKEY (upval), HttpService (upval), Default (upval)
 				Input[p1] = true
 				SetTableAppStorageKeyFunction(SQUADVOICEEUMODALSEENKEY, HttpService:JSONEncode(Input))

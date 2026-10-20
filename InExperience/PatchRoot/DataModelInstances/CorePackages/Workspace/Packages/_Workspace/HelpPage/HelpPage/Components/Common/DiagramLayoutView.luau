@@ -2,7 +2,7 @@
 local ReactModule = require(Parent.React)
 local View = require(Parent.Foundation).View
 
-return ReactModule.memo(function(p1) --[[ Line: 32 | Named "DiagramLayoutView" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), View (copy)
 	local Layout = p1.layout
 	

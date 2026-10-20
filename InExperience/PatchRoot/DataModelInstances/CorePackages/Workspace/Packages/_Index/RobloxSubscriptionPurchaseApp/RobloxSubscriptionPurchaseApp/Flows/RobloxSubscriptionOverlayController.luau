@@ -19,7 +19,7 @@ local RobloxSubscriptionStoreModule = require(RobloxSubscriptionPurchaseApp.Stor
 local Callback: (() -> ())? = nil
 local list = { RoduxModule.thunkMiddleware }
 
-local function close() --[[ Line: 42 ]]
+local function close()
 	-- upvalues: Callback (ref)
 	if Callback then
 		Callback()
@@ -27,10 +27,10 @@ local function close() --[[ Line: 42 ]]
 	end
 end
 
-local function ThemedOverlay(p1) --[[ Line: 49 ]]
+local function ThemedOverlay(p1)
 	-- upvalues: UseSelectedThemeFunction (copy), ReactModule (copy), RoduxModule (copy), list (copy), RoactRoduxModule (copy), StyleProviderWithDefaultTheme (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), SelectionCursorProvider (copy), CursorProvider (copy), FoundationProvider (copy), ProviderContainer (copy), RobloxSubscriptionContainerModule (copy)
 	local UseSelectedThemeResult = UseSelectedThemeFunction()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 52 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: RoduxModule (upval), list (upval)
 		return RoduxModule.Store.new(RoduxModule.combineReducers({}), nil, list)
 	end, {})
@@ -39,7 +39,7 @@ local function ThemedOverlay(p1) --[[ Line: 49 ]]
 		colorMode = if UseSelectedThemeResult == "light" then "Light" else "Dark"
 	}, {
 		Providers = ReactModule.createElement(ProviderContainer, {
-			providers = ReactModule.useMemo(function() --[[ Line: 56 ]]
+			providers = ReactModule.useMemo(function()
 				-- upvalues: RoactRoduxModule (upval), UseMemoResult (copy), StyleProviderWithDefaultTheme (upval), UseSelectedThemeResult (copy), LocalizationProvider (upval), Localization (upval), LocalizationService (upval), SelectionCursorProvider (upval), CursorProvider (upval)
 				local List = {}
 				table.insert(List, {
@@ -75,7 +75,7 @@ local function ThemedOverlay(p1) --[[ Line: 49 ]]
 end
 
 return {
-	render = function(Params) --[[ Line: 94 ]]
+	render = function(Params)
 		-- upvalues: RobloxSubscriptionStoreModule (copy), ReactRobloxModule (copy), ReactModule (copy), ThemedOverlay (copy), close (copy), Callback (ref)
 		local GetResult = RobloxSubscriptionStoreModule.get()
 		GetResult.triggerUnmountUI()
@@ -85,7 +85,7 @@ return {
 		local Root = ReactRobloxModule.createRoot(RobloxSubscriptionPurchaseOverlay)
 		Root:render(ReactModule.createElement(ThemedOverlay, { params = Params, onClose = close }))
 		
-		local function cleanup() --[[ Line: 108 ]]
+		local function cleanup()
 			-- upvalues: Root (copy), RobloxSubscriptionPurchaseOverlay (copy)
 			Root:unmount()
 			RobloxSubscriptionPurchaseOverlay:Destroy()

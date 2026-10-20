@@ -4,7 +4,7 @@ local _ = require(SduiSharedUtilities.SduiIntegrationTypes)
 local FFlagLuaAppSduiStreamingFirstDataTiming = require(SduiSharedUtilities.Parent.SharedFlags).FFlagLuaAppSduiStreamingFirstDataTiming
 
 return {
-	createLoadTimer = function(PageKey, Callback) --[[ Line: 86 ]]
+	createLoadTimer = function(PageKey, Callback)
 		-- upvalues: FFlagLuaAppSduiStreamingFirstDataTiming (copy), SduiPageAnalyticsModule (copy)
 		local ClockTime = nil
 		local ClockTime1 = nil
@@ -14,7 +14,7 @@ return {
 		local RequestStatus = nil
 		local v3 = nil
 		
-		local function _(p1, p2) --[[ Line: 100 | Named "calculateDuration" ]]
+		local function _(p1, p2)
 			-- upvalues: ClockTimes (copy)
 			local ClockTime = ClockTimes[p1]
 			local ClockTime1 = ClockTimes[p2]
@@ -22,7 +22,7 @@ return {
 			return if ClockTime and ClockTime1 then (ClockTime1 - ClockTime) * 1000 else nil
 		end
 		
-		local function finish() --[[ Line: 117 ]]
+		local function finish()
 			-- upvalues: v2 (ref), ClockTime (ref), ClockTime1 (ref), FFlagLuaAppSduiStreamingFirstDataTiming (upval), ClockTimes (copy), v1 (ref), RequestStatus (ref), PageKey (copy), v3 (ref), Callback (copy), SduiPageAnalyticsModule (upval)
 			if v2 ~= "Running" or ClockTime == nil then return end
 			v2 = "Finished"
@@ -76,19 +76,19 @@ return {
 			end
 		end
 		
-		local _ = function(Key) --[[ Line: 174 | Named "logTimestamp" ]]
+		local _ = function(Key)
 			-- upvalues: ClockTimes (copy)
 			ClockTimes[Key] = os.clock()
 		end
 		
 		return {
-			start = function(p1) --[[ Line: 110 ]]
+			start = function(p1)
 				-- upvalues: ClockTime (ref), v2 (ref), v3 (ref)
 				ClockTime = os.clock()
 				v2 = "Running"
 				v3 = p1
 			end,
-			logUiRequestQueued = function() --[[ Line: 184 ]]
+			logUiRequestQueued = function()
 				-- upvalues: v2 (ref), ClockTime (ref), v3 (ref), ClockTimes (copy)
 				if v2 == "NotStarted" then
 					ClockTime = os.clock()
@@ -97,7 +97,7 @@ return {
 				end
 				ClockTimes.UiRequestQueued = os.clock()
 			end,
-			logUiRequestSent = function() --[[ Line: 192 ]]
+			logUiRequestSent = function()
 				-- upvalues: v2 (ref), ClockTime (ref), v3 (ref), ClockTimes (copy)
 				if v2 == "NotStarted" then
 					ClockTime = os.clock()
@@ -106,11 +106,11 @@ return {
 				end
 				ClockTimes.UiRequestSent = os.clock()
 			end,
-			logUiResponseReceived = function() --[[ Line: 200 ]]
+			logUiResponseReceived = function()
 				-- upvalues: ClockTimes (copy)
 				ClockTimes.UiResponseReceived = os.clock()
 			end,
-			logUiStreamChunkReceived = function() --[[ Line: 204 ]]
+			logUiStreamChunkReceived = function()
 				-- upvalues: FFlagLuaAppSduiStreamingFirstDataTiming (upval), ClockTimes (copy)
 				if not FFlagLuaAppSduiStreamingFirstDataTiming or ClockTimes.UiStreamChunkReceived == nil then
 					ClockTimes.UiStreamChunkReceived = os.clock()
@@ -118,43 +118,43 @@ return {
 					return
 				end
 			end,
-			logResponseDecodeBegin = function() --[[ Line: 213 ]]
+			logResponseDecodeBegin = function()
 				-- upvalues: ClockTimes (copy)
 				ClockTimes.ResponseDecodeBegin = os.clock()
 			end,
-			logResponseDecodeEnd = function() --[[ Line: 218 ]]
+			logResponseDecodeEnd = function()
 				-- upvalues: ClockTimes (copy)
 				ClockTimes.ResponseDecodeEnd = os.clock()
 			end,
-			logResponseDataUpdateBegin = function() --[[ Line: 223 ]]
+			logResponseDataUpdateBegin = function()
 				-- upvalues: ClockTimes (copy)
 				ClockTimes.ResponseDataUpdateBegin = os.clock()
 			end,
-			logResponseDataUpdateEnd = function() --[[ Line: 228 ]]
+			logResponseDataUpdateEnd = function()
 				-- upvalues: ClockTimes (copy)
 				ClockTimes.ResponseDataUpdateEnd = os.clock()
 			end,
-			logSduiTreeBuildBegin = function() --[[ Line: 233 ]]
+			logSduiTreeBuildBegin = function()
 				-- upvalues: ClockTimes (copy)
 				ClockTimes.SduiTreeBuildBegin = os.clock()
 			end,
-			logSduiTreeBuildEnd = function() --[[ Line: 238 ]]
+			logSduiTreeBuildEnd = function()
 				-- upvalues: ClockTimes (copy)
 				ClockTimes.SduiTreeBuildEnd = os.clock()
 			end,
-			logSduiClientHintsBegin = function() --[[ Line: 243 ]]
+			logSduiClientHintsBegin = function()
 				-- upvalues: ClockTimes (copy)
 				ClockTimes.SduiClientHintsBegin = os.clock()
 			end,
-			logSduiClientHintsEnd = function() --[[ Line: 248 ]]
+			logSduiClientHintsEnd = function()
 				-- upvalues: ClockTimes (copy)
 				ClockTimes.SduiClientHintsEnd = os.clock()
 			end,
-			logComponentMounted = function() --[[ Line: 253 ]]
+			logComponentMounted = function()
 				-- upvalues: ClockTimes (copy)
 				ClockTimes.SduiComponentMounted = os.clock()
 			end,
-			logComponentReady = function() --[[ Line: 259 ]]
+			logComponentReady = function()
 				-- upvalues: ClockTimes (copy), v2 (ref), finish (copy)
 				ClockTimes.SduiComponentReady = os.clock()
 				
@@ -162,7 +162,7 @@ return {
 					finish()
 				end
 			end,
-			logRefreshComplete = function() --[[ Line: 268 ]]
+			logRefreshComplete = function()
 				-- upvalues: ClockTimes (copy), v2 (ref), finish (copy)
 				ClockTimes.RefreshComplete = os.clock()
 				
@@ -170,11 +170,11 @@ return {
 					finish()
 				end
 			end,
-			logNetRequestStats = function(p1) --[[ Line: 179 ]]
+			logNetRequestStats = function(p1)
 				-- upvalues: v1 (ref)
 				v1 = p1
 			end,
-			updateRequestStatus = function(p1) --[[ Line: 276 ]]
+			updateRequestStatus = function(p1)
 				-- upvalues: RequestStatus (ref)
 				RequestStatus = p1
 			end,

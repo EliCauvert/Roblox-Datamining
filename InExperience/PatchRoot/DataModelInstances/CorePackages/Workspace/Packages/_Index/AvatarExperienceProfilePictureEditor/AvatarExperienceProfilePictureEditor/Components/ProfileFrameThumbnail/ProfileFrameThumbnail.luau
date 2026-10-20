@@ -12,7 +12,7 @@ local Radius = FoundationModule.Enums.Radius
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local MapWidgetContentToFrameItemsModule = require(AvatarExperienceProfilePictureEditor.Utils.mapWidgetContentToFrameItems)
 
-return function(p1) --[[ Line: 25 | Named "ProfileFramePreviewThumbnail" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Skeleton (copy), Radius (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy), MapWidgetContentToFrameItemsModule (copy), Image (copy)
 	local UseTokensResult = UseTokensFunction()
 	local PreviewSize = p1.previewSize or UseTokensResult.Size.Size_800

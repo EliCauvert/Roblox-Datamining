@@ -2,7 +2,7 @@
 local ChatCardEmphasisContextModule = require(script.Parent.ChatCardEmphasisContext)
 local CreateChatCardEmphasisStoreModule = require(script.Parent.createChatCardEmphasisStore)
 
-return function(p1) --[[ Line: 13 | Named "ChatCardEmphasisProvider" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), CreateChatCardEmphasisStoreModule (copy), ChatCardEmphasisContextModule (copy)
 	return ReactModule.createElement(ChatCardEmphasisContextModule.Provider, {
 		value = ReactModule.useMemo(CreateChatCardEmphasisStoreModule, {})

@@ -11,14 +11,14 @@ local UseOpenBuyRobuxWebViewModule = require(script.Parent.useOpenBuyRobuxWebVie
 local UseRefreshCreatorCreditOnUnhideModule = require(script.Parent.useRefreshCreatorCreditOnUnhide)
 local DataStatus = require(Parent.DataHydration).DataStatus
 
-return function() --[[ Line: 23 | Named "useCreatorCreditPageViewModel" ]]
+return function()
 	-- upvalues: CreatorCreditModule (copy), ReactModule (copy), SignalsReactModule (copy), DataStatus (copy), UseOpenBuyRobuxWebViewModule (copy), UseRefreshCreatorCreditOnUnhideModule (copy), GetHoursUntilResetModule (copy), CreatorCreditConfigModule (copy)
 	local CreatorCreditStore = CreatorCreditModule.getCreatorCreditStore(false)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 29 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CreatorCreditStore (copy)
 		return CreatorCreditStore.getDailyLimit()
 	end, { CreatorCreditStore })
-	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function() --[[ Line: 26 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function()
 		-- upvalues: CreatorCreditStore (copy)
 		return CreatorCreditStore.getQuotaSummary()
 	end, { CreatorCreditStore }).data)
@@ -35,7 +35,7 @@ return function() --[[ Line: 23 | Named "useCreatorCreditPageViewModel" ]]
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(0)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 48 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy)
 		UseRefResult.current += 1
 		UseStateResult2_1(true)
@@ -43,7 +43,7 @@ return function() --[[ Line: 23 | Named "useCreatorCreditPageViewModel" ]]
 		
 		return UseRefResult.current
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(Current, p1) --[[ Line: 54 ]]
+	local UseResult1 = ReactModule.useCallback(function(Current, p1)
 		-- upvalues: UseRefResult (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy)
 		if UseRefResult.current == Current then
 			UseStateResult2_1(false)
@@ -52,7 +52,7 @@ return function() --[[ Line: 23 | Named "useCreatorCreditPageViewModel" ]]
 			return
 		end
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function(AdditionalUsageEnabled) --[[ Line: 62 ]]
+	local UseResult2 = ReactModule.useCallback(function(AdditionalUsageEnabled)
 		-- upvalues: HasUseSignalStateResult1 (copy), UseStateResult1 (copy), UseSignalStateResult1_1 (copy), UseResult (copy), CreatorCreditStore (copy), UseResult1 (copy)
 		if HasUseSignalStateResult1 and not UseStateResult1 and UseSignalStateResult1_1 ~= nil then
 			local UseResultResult = UseResult()
@@ -60,10 +60,10 @@ return function() --[[ Line: 23 | Named "useCreatorCreditPageViewModel" ]]
 				additionalUsageEnabled = AdditionalUsageEnabled,
 				dailyLimitSet = UseSignalStateResult1_1.dailyLimitSet,
 				dailyLimit = UseSignalStateResult1_1.dailyLimit
-			}):andThen(function() --[[ Line: 73 ]]
+			}):andThen(function()
 				-- upvalues: UseResult1 (upval), UseResultResult (copy)
 				UseResult1(UseResultResult, false)
-			end):catch(function() --[[ Line: 76 ]]
+			end):catch(function()
 				-- upvalues: UseResult1 (upval), UseResultResult (copy)
 				UseResult1(UseResultResult, true)
 			end)
@@ -74,14 +74,14 @@ return function() --[[ Line: 23 | Named "useCreatorCreditPageViewModel" ]]
 		UseResult, CreatorCreditStore, UseResult1, UseStateResult1,
 		UseSignalStateResult1_1, HasUseSignalStateResult1
 	})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 80 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: HasUseSignalStateResult1 (copy), UseStateResult1 (copy), UseStateResult2_2 (copy), UseStateResult2 (copy)
 		if HasUseSignalStateResult1 and not UseStateResult1 then
 			UseStateResult2_2(false)
 			UseStateResult2(true)
 		end
 	end, { UseStateResult1, HasUseSignalStateResult1 })
-	local UseResult4 = ReactModule.useCallback(function(p1) --[[ Line: 86 ]]
+	local UseResult4 = ReactModule.useCallback(function(p1)
 		-- upvalues: HasUseSignalStateResult1 (copy), UseStateResult1 (copy), UseSignalStateResult1_1 (copy), UseResult (copy), CreatorCreditStore (copy), UseRefResult (copy), UseResult1 (copy), UseStateResult2 (copy)
 		if HasUseSignalStateResult1 and not UseStateResult1 and UseSignalStateResult1_1 ~= nil then
 			local UseResultResult = UseResult()
@@ -89,13 +89,13 @@ return function() --[[ Line: 23 | Named "useCreatorCreditPageViewModel" ]]
 				additionalUsageEnabled = UseSignalStateResult1_1.additionalUsageEnabled,
 				dailyLimitSet = p1 ~= nil,
 				dailyLimit = p1 or 0
-			}):andThen(function() --[[ Line: 97 ]]
+			}):andThen(function()
 				-- upvalues: UseRefResult (upval), UseResultResult (copy), UseResult1 (upval), UseStateResult2 (upval)
 				if UseRefResult.current == UseResultResult then
 					UseResult1(UseResultResult, false)
 					UseStateResult2(false)
 				end
-			end):catch(function() --[[ Line: 103 ]]
+			end):catch(function()
 				-- upvalues: UseResult1 (upval), UseResultResult (copy)
 				UseResult1(UseResultResult, true)
 			end)
@@ -106,13 +106,13 @@ return function() --[[ Line: 23 | Named "useCreatorCreditPageViewModel" ]]
 		UseResult, CreatorCreditStore, UseResult1, UseStateResult1,
 		UseSignalStateResult1_1, HasUseSignalStateResult1
 	})
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 107 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {})
-	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 110 ]]
+	local UseResult6 = ReactModule.useCallback(function()
 		-- upvalues: CreatorCreditStore (copy)
-		CreatorCreditStore.refreshQuotaSummary():catch(function() --[[ Line: 111 ]] end)
+		CreatorCreditStore.refreshQuotaSummary():catch(function() end)
 	end, { CreatorCreditStore })
 	local UseOpenBuyRobuxWebViewModuleResult = UseOpenBuyRobuxWebViewModule(UseResult6)
 	UseRefreshCreatorCreditOnUnhideModule(UseResult6)

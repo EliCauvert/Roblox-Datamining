@@ -5,7 +5,7 @@ local ComposerDebugModule = require(script.Parent.composerDebug)
 local TextService = game:GetService("TextService")
 local FoundationFontFaceMigration = require(AppBlox.Parent.Foundation).Utility.Flags.FoundationFontFaceMigration
 
-return function(p1) --[[ Line: 28 | Named "measureTextLineCount" ]]
+return function(p1)
 	-- upvalues: GetVisibleLineCountModule (copy), ComposerDebugModule (copy), FoundationFontFaceMigration (copy), StyleModule (copy), TextService (copy)
 	local VisibleLineCountModule = GetVisibleLineCountModule(p1.text, p1.maxLines)
 	local Count = 1

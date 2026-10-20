@@ -24,7 +24,7 @@ local FFlagSduiFormatStringPercentSafeGsubModule = require(SduiCoreSystem.FFlagS
 local Frozen = table.freeze({ status = DataStatus.Failed })
 local Frozen1 = table.freeze({})
 
-local function resolveHydrationBinding(Entry, p1, p2, p3) --[[ Line: 80 ]]
+local function resolveHydrationBinding(Entry, p1, p2, p3)
 	-- upvalues: SduiDataBindingContentTypeModule (copy), SduiDataBinderModule (copy)
 	local Joined = table.concat(Entry, ".")
 	local Entry1 = Entry[1]
@@ -48,7 +48,7 @@ local function resolveHydrationBinding(Entry, p1, p2, p3) --[[ Line: 80 ]]
 	end
 end
 
-local function resolveBindingPathValue(p4, Entry, Callback2, Callback, Callback1, p5, p6) --[[ Line: 130 ]]
+local function resolveBindingPathValue(p4, Entry, Callback2, Callback, Callback1, p5, p6)
 	-- upvalues: TryGetPathFromDataModule (copy), SduiDataBinderModule (copy), resolveHydrationBinding (copy)
 	local TryGetPathFromDataModuleResult, TryGetPathFromDataModuleResult2 = TryGetPathFromDataModule(Callback(p4), Entry)
 	
@@ -70,11 +70,11 @@ local function resolveBindingPathValue(p4, Entry, Callback2, Callback, Callback1
 	return ResolveHydrationBindingResult, ResolveHydrationBindingResult2
 end
 
-local function generateStaticPropValue(p4, Callback) --[[ Line: 182 ]]
+local function generateStaticPropValue(p4, Callback)
 	return if Callback then Callback(p4) else p4
 end
 
-local function generateDynamicBindingPropValue(Value, p4, p5, p6, p7, p8) --[[ Line: 206 ]]
+local function generateDynamicBindingPropValue(Value, p4, p5, p6, p7, p8)
 	-- upvalues: SplitDottedPathModule (copy), SignalsModule (copy), resolveBindingPathValue (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), SduiParseHelpersModule (copy), Frozen (copy), TutilsModule (copy)
 	local CurrentComponentType = p5.currentComponentType
 	local CurrentParserName = p5.currentParserName
@@ -83,9 +83,9 @@ local function generateDynamicBindingPropValue(Value, p4, p5, p6, p7, p8) --[[ L
 	if not SplitDottedPathModuleResult or #SplitDottedPathModuleResult == 0 then
 		error(`Invalid bindingPath: {Value}`)
 	end
-	return SignalsModule.createComputed(function(p9) --[[ Line: 222 ]]
+	return SignalsModule.createComputed(function(p9)
 		-- upvalues: resolveBindingPathValue (upval), SplitDottedPathModuleResult (copy), p4 (copy), p6 (copy), p7 (copy), p8 (copy), p5 (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), Value (copy), SduiParseHelpersModule (upval), CurrentComponentType (copy), CurrentParserName (copy), Frozen (upval)
-		local Success, Result, Result3 = pcall(function() --[[ Line: 223 ]]
+		local Success, Result, Result3 = pcall(function()
 			-- upvalues: resolveBindingPathValue (upval), p9 (copy), SplitDottedPathModuleResult (upval), p4 (upval), p6 (upval), p7 (upval), p8 (upval), p5 (upval)
 			local ResolveBindingPathValueResult, ResolveBindingPathValueResult2 = resolveBindingPathValue(p9, SplitDottedPathModuleResult, p4, p6, p7, p8, p5)
 			
@@ -108,13 +108,13 @@ local function generateDynamicBindingPropValue(Value, p4, p5, p6, p7, p8) --[[ L
 	end, TutilsModule.shallowEqual)
 end
 
-local function generateTokenBindingPropValue(p4, p5, Callback) --[[ Line: 262 ]]
+local function generateTokenBindingPropValue(p4, p5, Callback)
 	-- upvalues: SplitDottedPathModule (copy), SignalsModule (copy), GetSduiTokensStoreModule (copy), TryGetPathFromDataModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), Frozen (copy), DataStatus (copy), TutilsModule (copy)
 	local CurrentComponentType = p5.currentComponentType
 	local CurrentParserName = p5.currentParserName
 	local SplitDottedPathModuleResult = SplitDottedPathModule(p4)
 	
-	return SignalsModule.createComputed(function(p6) --[[ Line: 272 ]]
+	return SignalsModule.createComputed(function(p6)
 		-- upvalues: GetSduiTokensStoreModule (upval), p5 (copy), TryGetPathFromDataModule (upval), SplitDottedPathModuleResult (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), CurrentComponentType (copy), CurrentParserName (copy), Frozen (upval), Callback (copy), DataStatus (upval)
 		local TryGetPathFromDataModuleResult, TryGetPathFromDataModuleResult2 = TryGetPathFromDataModule(GetSduiTokensStoreModule().getTokens(p6, p5.appPage), SplitDottedPathModuleResult)
 		
@@ -138,14 +138,14 @@ local function generateTokenBindingPropValue(p4, p5, Callback) --[[ Line: 262 ]]
 	end, TutilsModule.shallowEqual)
 end
 
-local function _(Text: string, Text1, p4): string --[[ Line: 298 | Named "substituteFormatArg" ]]
-	return Text:gsub("{" .. Text1 .. "}", function() --[[ Line: 300 ]]
+local function _(Text: string, Text1, p4): string
+	return Text:gsub("{" .. Text1 .. "}", function()
 		-- upvalues: p4 (copy)
 		return p4
 	end)
 end
 
-local function generateFormatStringPropValue(p4, p5, p6, p7, Callback) --[[ Line: 326 ]]
+local function generateFormatStringPropValue(p4, p5, p6, p7, Callback)
 	-- upvalues: ApplyFormatArgFormatterFunction (copy), Frozen (copy), FFlagSduiFormatStringPercentSafeGsubModule (copy), generateDynamicBindingPropValue (copy), SignalsModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), TutilsModule (copy)
 	local CurrentComponentType = p6.currentComponentType
 	local CurrentParserName = p6.currentParserName
@@ -176,13 +176,13 @@ local function generateFormatStringPropValue(p4, p5, p6, p7, Callback) --[[ Line
 				local ApplyFormatArgFormatterResult = ApplyFormatArgFormatterFunction(Value, arg.formatter, p6.appPage)
 				
 				if ApplyFormatArgFormatterResult == nil then
-					return function() --[[ Line: 370 ]]
+					return function()
 						-- upvalues: Frozen (upval)
 						return Frozen
 					end
 				end
 				if FFlagSduiFormatStringPercentSafeGsubModule then
-					Str = Str:gsub("{" .. i .. "}", function() --[[ Line: 300 ]]
+					Str = Str:gsub("{" .. i .. "}", function()
 						-- upvalues: ApplyFormatArgFormatterResult (copy)
 						return ApplyFormatArgFormatterResult
 					end)
@@ -191,7 +191,7 @@ local function generateFormatStringPropValue(p4, p5, p6, p7, Callback) --[[ Line
 				end
 			elseif FFlagSduiFormatStringPercentSafeGsubModule then
 				local Text = tostring(Value)
-				Str = Str:gsub("{" .. i .. "}", function() --[[ Line: 300 ]]
+				Str = Str:gsub("{" .. i .. "}", function()
 					-- upvalues: Text (copy)
 					return Text
 				end)
@@ -208,7 +208,7 @@ local function generateFormatStringPropValue(p4, p5, p6, p7, Callback) --[[ Line
 			warn(`Unrecognized argType in buildFormatString {Type}`)
 		end
 	end
-	return SignalsModule.createComputed(function(p8) --[[ Line: 396 ]]
+	return SignalsModule.createComputed(function(p8)
 		-- upvalues: Str (ref), t (copy), Formatters (copy), ApplyFormatArgFormatterFunction (upval), p6 (copy), Frozen (upval), FFlagSduiFormatStringPercentSafeGsubModule (upval), Callback (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), CurrentComponentType (copy), CurrentParserName (copy)
 		local Text = Str
 		local Status = nil
@@ -233,7 +233,7 @@ local function generateFormatStringPropValue(p4, p5, p6, p7, Callback) --[[ Line
 					Text = Text and Text:gsub("{" .. i .. "}", ApplyFormatArgFormatterResult)
 					continue
 				else
-					Text = Text and Text:gsub("{" .. i .. "}", function() --[[ Line: 300 ]]
+					Text = Text and Text:gsub("{" .. i .. "}", function()
 						-- upvalues: ApplyFormatArgFormatterResult (copy)
 						return ApplyFormatArgFormatterResult
 					end)
@@ -248,7 +248,7 @@ local function generateFormatStringPropValue(p4, p5, p6, p7, Callback) --[[ Line
 				
 				if Replaced then
 					local Text1 = tostring(Data)
-					Replaced = Text:gsub("{" .. i .. "}", function() --[[ Line: 300 ]]
+					Replaced = Text:gsub("{" .. i .. "}", function()
 						-- upvalues: Text1 (copy)
 						return Text1
 					end)
@@ -260,7 +260,7 @@ local function generateFormatStringPropValue(p4, p5, p6, p7, Callback) --[[ Line
 		if not Callback then
 			return { data = Text }
 		end
-		local Success, Result = pcall(function() --[[ Line: 429 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Callback (upval), Text (ref)
 			return Callback(Text)
 		end)
@@ -281,7 +281,7 @@ local function generateFormatStringPropValue(p4, p5, p6, p7, Callback) --[[ Line
 	end, TutilsModule.shallowEqual)
 end
 
-local function validateNumbers(Op, p9: number?, p10: number?) --[[ Line: 458 ]]
+local function validateNumbers(Op, p9: number?, p10: number?)
 	if typeof(p9) ~= "number" then
 		p9 = tonumber(p9)
 	end
@@ -294,11 +294,11 @@ local function validateNumbers(Op, p9: number?, p10: number?) --[[ Line: 458 ]]
 	return p9, p10
 end
 
-local _ = function(p9): boolean --[[ Line: 477 | Named "isEmpty" ]]
+local _ = function(p9): boolean
 	return p9 == nil or (if type(p9) == "string" then p9 == "" else type(p9) == "table" and next(p9) == nil)
 end
 
-local function isSame(Number, Number1): boolean --[[ Line: 502 ]]
+local function isSame(Number, Number1): boolean
 	-- upvalues: SduiParsersModule (copy)
 	if Number == Number1 then
 		return true
@@ -323,7 +323,7 @@ end
 local Callback: ((any, any) -> any)? = nil
 
 if FFlagSduiDismissPromptPageScope then
-	local function contains(List, Number): boolean --[[ Line: 525 ]]
+	local function contains(List, Number): boolean
 		-- upvalues: isSame (copy)
 		if typeof(List) ~= "table" or typeof(Number) ~= "string" then
 			return false
@@ -339,7 +339,7 @@ if FFlagSduiDismissPromptPageScope then
 		return false
 	end
 	
-	Callback = function(p9, Callback) --[[ Line: 545 ]]
+	Callback = function(p9, Callback)
 		-- upvalues: DataStatus (copy), contains (copy)
 		local CallbackResult, CallbackResult2 = Callback(p9.field)
 		
@@ -370,7 +370,7 @@ if FFlagSduiDismissPromptPageScope then
 		return (contains(CallbackResult, v3))
 	end
 end
-local function evaluateCondition(p9, Condition, p10, p11, p12) --[[ Line: 604 ]]
+local function evaluateCondition(p9, Condition, p10, p11, p12)
 	-- upvalues: SplitDottedPathModule (copy), resolveBindingPathValue (copy), DataStatus (copy), validateNumbers (copy), isSame (copy), FFlagSduiDismissPromptPageScope (copy), Callback (ref), evaluateCondition (copy)
 	if Condition == nil then
 		return true
@@ -384,10 +384,10 @@ local function evaluateCondition(p9, Condition, p10, p11, p12) --[[ Line: 604 ]]
 	if Value == nil then
 		error("nil conditionValue in condition")
 	end
-	local function getFieldObject(p13) --[[ Line: 624 ]]
+	local function getFieldObject(p13)
 		-- upvalues: SplitDottedPathModule (upval), resolveBindingPathValue (upval), p9 (copy), p10 (copy), p12 (copy), p11 (copy)
 		local SplitDottedPathModuleResult = SplitDottedPathModule(p13)
-		local Success, Result, Result3 = pcall(function() --[[ Line: 628 ]]
+		local Success, Result, Result3 = pcall(function()
 			-- upvalues: resolveBindingPathValue (upval), p9 (upval), SplitDottedPathModuleResult (copy), p10 (upval), p12 (upval), p11 (upval)
 			return resolveBindingPathValue(p9, SplitDottedPathModuleResult, p10, p12, nil, true, p11)
 		end)
@@ -401,7 +401,7 @@ local function evaluateCondition(p9, Condition, p10, p11, p12) --[[ Line: 604 ]]
 	
 	if Type == "comparison" then
 		local SplitDottedPathModuleResult = SplitDottedPathModule(Value.field)
-		local Success, Result, Result3 = pcall(function() --[[ Line: 628 ]]
+		local Success, Result, Result3 = pcall(function()
 			-- upvalues: resolveBindingPathValue (upval), p9 (copy), SplitDottedPathModuleResult (copy), p10 (copy), p12 (copy), p11 (copy)
 			return resolveBindingPathValue(p9, SplitDottedPathModuleResult, p10, p12, nil, true, p11)
 		end)
@@ -450,7 +450,7 @@ local function evaluateCondition(p9, Condition, p10, p11, p12) --[[ Line: 604 ]]
 		error(`Unknown operator for comparison {Op}`)
 	elseif Type == "is_null" then
 		local SplitDottedPathModuleResult1 = SplitDottedPathModule(Value.field)
-		local Success1, Result1, Result3_1 = pcall(function() --[[ Line: 628 ]]
+		local Success1, Result1, Result3_1 = pcall(function()
 			-- upvalues: resolveBindingPathValue (upval), p9 (copy), SplitDottedPathModuleResult1 (copy), p10 (copy), p12 (copy), p11 (copy)
 			return resolveBindingPathValue(p9, SplitDottedPathModuleResult1, p10, p12, nil, true, p11)
 		end)
@@ -471,7 +471,7 @@ local function evaluateCondition(p9, Condition, p10, p11, p12) --[[ Line: 604 ]]
 		end
 	elseif Type == "is_not_null" then
 		local SplitDottedPathModuleResult2 = SplitDottedPathModule(Value.field)
-		local Success2, Result4, Result3_2 = pcall(function() --[[ Line: 628 ]]
+		local Success2, Result4, Result3_2 = pcall(function()
 			-- upvalues: resolveBindingPathValue (upval), p9 (copy), SplitDottedPathModuleResult2 (copy), p10 (copy), p12 (copy), p11 (copy)
 			return resolveBindingPathValue(p9, SplitDottedPathModuleResult2, p10, p12, nil, true, p11)
 		end)
@@ -492,7 +492,7 @@ local function evaluateCondition(p9, Condition, p10, p11, p12) --[[ Line: 604 ]]
 		end
 	elseif Type == "is_empty" then
 		local SplitDottedPathModuleResult3 = SplitDottedPathModule(Value.field)
-		local Success3, Result6, Result3_3 = pcall(function() --[[ Line: 628 ]]
+		local Success3, Result6, Result3_3 = pcall(function()
 			-- upvalues: resolveBindingPathValue (upval), p9 (copy), SplitDottedPathModuleResult3 (copy), p10 (copy), p12 (copy), p11 (copy)
 			return resolveBindingPathValue(p9, SplitDottedPathModuleResult3, p10, p12, nil, true, p11)
 		end)
@@ -513,7 +513,7 @@ local function evaluateCondition(p9, Condition, p10, p11, p12) --[[ Line: 604 ]]
 		end
 	elseif Type == "is_not_empty" then
 		local SplitDottedPathModuleResult4 = SplitDottedPathModule(Value.field)
-		local Success4, Result8, Result3_4 = pcall(function() --[[ Line: 628 ]]
+		local Success4, Result8, Result3_4 = pcall(function()
 			-- upvalues: resolveBindingPathValue (upval), p9 (copy), SplitDottedPathModuleResult4 (copy), p10 (copy), p12 (copy), p11 (copy)
 			return resolveBindingPathValue(p9, SplitDottedPathModuleResult4, p10, p12, nil, true, p11)
 		end)
@@ -567,7 +567,7 @@ local function evaluateCondition(p9, Condition, p10, p11, p12) --[[ Line: 604 ]]
 	return nil
 end
 
-local function selectConditionalOption(p13, Options, p14, p15, p16) --[[ Line: 751 ]]
+local function selectConditionalOption(p13, Options, p14, p15, p16)
 	-- upvalues: evaluateCondition (copy), DataStatus (copy)
 	local EvaluateConditionResult = nil
 	local EvaluateConditionResult2 = nil
@@ -583,7 +583,7 @@ local function selectConditionalOption(p13, Options, p14, p15, p16) --[[ Line: 7
 	return nil
 end
 
-local function resolveTablePropValue(p17, p18, List, p19, _, _, _, _, _) --[[ Line: 852 ]]
+local function resolveTablePropValue(p17, p18, List, p19, _, _, _, _, _)
 	-- upvalues: CryoModule (copy), Frozen1 (copy), DataStatus (copy)
 	local JoinResult = CryoModule.Dictionary.join(p19 or Frozen1, p18 or Frozen1)
 	local v3 = nil
@@ -606,15 +606,15 @@ return {
 	generateDynamicBindingPropValue = generateDynamicBindingPropValue,
 	generateTokenBindingPropValue = generateTokenBindingPropValue,
 	generateFormatStringPropValue = generateFormatStringPropValue,
-	generateConditionalPropValue = function(p20, p21, p22, p23, p24, Callback, p25, IsNestedComponentConfig) --[[ Line: 787 ]]
+	generateConditionalPropValue = function(p20, p21, p22, p23, p24, Callback, p25, IsNestedComponentConfig)
 		-- upvalues: SignalsModule (copy), selectConditionalOption (copy), PropResultCategory (copy), DataStatus (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), SduiParseHelpersModule (copy), Frozen (copy), TutilsModule (copy)
 		local CurrentComponentType = p22.currentComponentType
 		local CurrentParserName = p22.currentParserName
 		local Options = p20.options
 		
-		return SignalsModule.createComputed(function(p26) --[[ Line: 802 ]]
+		return SignalsModule.createComputed(function(p26)
 			-- upvalues: selectConditionalOption (upval), Options (copy), p21 (copy), p22 (copy), p24 (copy), Callback (copy), p23 (copy), p25 (copy), PropResultCategory (upval), DataStatus (upval), IsNestedComponentConfig (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), SduiParseHelpersModule (upval), CurrentComponentType (copy), CurrentParserName (copy), Frozen (upval)
-			local Success, Result, Result3 = pcall(function() --[[ Line: 803 ]]
+			local Success, Result, Result3 = pcall(function()
 				-- upvalues: selectConditionalOption (upval), p26 (copy), Options (upval), p21 (upval), p22 (upval), p24 (upval), Callback (upval), p23 (upval), p25 (upval), PropResultCategory (upval), DataStatus (upval)
 				local SelectConditionalOptionResult, SelectConditionalOptionResult2 = selectConditionalOption(p26, Options, p21, p22, p24)
 				
@@ -652,15 +652,15 @@ return {
 			end
 		end, TutilsModule.shallowEqual)
 	end,
-	generateTablePropSignalValue = function(p20, p21, p22, p23, p24, Callback, Callback1) --[[ Line: 880 ]]
+	generateTablePropSignalValue = function(p20, p21, p22, p23, p24, Callback, Callback1)
 		-- upvalues: SignalsModule (copy), resolveTablePropValue (copy), SduiParseHelpersModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), Frozen (copy), TutilsModule (copy)
 		local CurrentComponentType = p22.currentComponentType
 		local CurrentParserName = p22.currentParserName
 		local CallbackResult, CallbackResult2, CallbackResult3 = Callback(p20, p21, p24, p22, p23)
 		
-		return SignalsModule.createComputed(function(p25) --[[ Line: 899 ]]
+		return SignalsModule.createComputed(function(p25)
 			-- upvalues: resolveTablePropValue (upval), CallbackResult (copy), CallbackResult2 (copy), CallbackResult3 (copy), p21 (copy), p22 (copy), p23 (copy), p24 (copy), Callback (copy), Callback1 (copy), SduiParseHelpersModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval), CurrentComponentType (copy), CurrentParserName (copy), Frozen (upval)
-			local Success, Result, Result3 = pcall(function() --[[ Line: 900 ]]
+			local Success, Result, Result3 = pcall(function()
 				-- upvalues: resolveTablePropValue (upval), p25 (copy), CallbackResult (upval), CallbackResult2 (upval), CallbackResult3 (upval), p21 (upval), p22 (upval), p23 (upval), p24 (upval), Callback (upval)
 				local ResolveTablePropValueResult, ResolveTablePropValueResult2 = resolveTablePropValue(p25, CallbackResult, CallbackResult2, CallbackResult3, p21, p22, p23, p24, Callback)
 				
@@ -678,7 +678,7 @@ return {
 				return Frozen
 			end
 			if Callback1 and Result ~= nil then
-				local Success1, Result1 = pcall(function() --[[ Line: 917 ]]
+				local Success1, Result1 = pcall(function()
 					-- upvalues: Callback1 (upval), Result (ref)
 					return Callback1(Result)
 				end)
@@ -704,29 +704,29 @@ return {
 	resolveHydrationBinding = resolveHydrationBinding,
 	resolveBindingPathValue = resolveBindingPathValue,
 	resolveTablePropValue = resolveTablePropValue,
-	resolveSourceArray = function(p20, p21, p22, p23, p24, p25) --[[ Line: 960 ]]
+	resolveSourceArray = function(p20, p21, p22, p23, p24, p25)
 		-- upvalues: SplitDottedPathModule (copy), resolveBindingPathValue (copy)
 		return if p20 == "binding_path" then resolveBindingPathValue(p22, SplitDottedPathModule(p21), p23, p24, nil, nil, p25) elseif p20 == "literal" then p21 and p21.items else nil
 	end,
-	resolveFieldMap = function(p20, p21, p22, p23, p24, p25, Callback) --[[ Line: 993 ]]
+	resolveFieldMap = function(p20, p21, p22, p23, p24, p25, Callback)
 		-- upvalues: resolveTablePropValue (copy)
 		local CallbackResult, CallbackResult2 = Callback(p20, p21, p22, p23, p24)
 		
 		return resolveTablePropValue(p25, CallbackResult, CallbackResult2, nil, p21, p23, p24, p22, nil)
 	end,
-	mapArrayWithFieldMap = function(List, p20, p21, p22, p23, p24, Callback) --[[ Line: 1033 ]]
+	mapArrayWithFieldMap = function(List, p20, p21, p22, p23, p24, Callback)
 		-- upvalues: BuildDataBindingSourcesForTemplateModule (copy), resolveTablePropValue (copy)
 		local List1 = {}
 		
 		for _, value in List do
 			local DataBindingSourcesForTemplateModule = BuildDataBindingSourcesForTemplateModule(value, p20)
 			
-			local function v163() --[[ Line: 1045 ]]
+			local function v163()
 				-- upvalues: DataBindingSourcesForTemplateModule (copy)
 				return DataBindingSourcesForTemplateModule
 			end
 			
-			local function v164() --[[ Line: 1048 ]]
+			local function v164()
 				-- upvalues: value (copy)
 				return value
 			end
@@ -736,10 +736,10 @@ return {
 		end
 		return List1
 	end,
-	isComponentVisible = function(p25, p26): boolean --[[ Line: 1065 ]]
+	isComponentVisible = function(p25, p26): boolean
 		return p25.isComponentFilteredSignal == nil or p25.isComponentFilteredSignal(p26).data ~= true
 	end,
-	resolveTemplate = function(p25, p26, p27) --[[ Line: 1101 ]]
+	resolveTemplate = function(p25, p26, p27)
 		if p26 ~= nil then
 			return p26
 		end
@@ -753,7 +753,7 @@ return {
 		end
 		return TemplateForRobloxComponent
 	end,
-	resolveTemplateFromData = function(p28, p29) --[[ Line: 1126 ]]
+	resolveTemplateFromData = function(p28, p29)
 		local InlineComponent = p28.inline_component
 		local RobloxComponent = p28.roblox_component
 		

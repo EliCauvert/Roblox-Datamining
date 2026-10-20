@@ -11,7 +11,7 @@ local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local CreateSignalFunction = require(Parent.Signals).createSignal
 
-local function defaultCreateTtsInstance(PlayerGui) --[[ Line: 54 ]]
+local function defaultCreateTtsInstance(PlayerGui)
 	-- upvalues: Players (copy), AudioDuckingFastInts (copy)
 	if not game:GetEngineFeature("TextToSpeechPlatformPreview") then
 		return nil
@@ -44,9 +44,9 @@ local function defaultCreateTtsInstance(PlayerGui) --[[ Line: 54 ]]
 	return AudioTextToSpeech
 end
 
-return function(p1, PlayerGui) --[[ Line: 94 | Named "createTTSAudioManager" ]]
+return function(p1, PlayerGui)
 	-- upvalues: defaultCreateTtsInstance (copy), CreateSignalFunction (copy), RunService (copy), ClassifyTTSErrorModule (copy), GetFIntMomentsTTSWaveformSamplesPerSecondModule (copy), GetFIntMomentsTTSWaveformMinSamplesModule (copy), GetFIntMomentsTTSWaveformMaxSamplesModule (copy), NormalizeWaveformModule (copy)
-	local Callback = p1 or function() --[[ Line: 99 ]]
+	local Callback = p1 or function()
 		-- upvalues: defaultCreateTtsInstance (upval), PlayerGui (copy)
 		return (defaultCreateTtsInstance(PlayerGui))
 	end
@@ -65,7 +65,7 @@ return function(p1, PlayerGui) --[[ Line: 94 | Named "createTTSAudioManager" ]]
 	local EndedConnection = nil
 	local Flag = false
 	
-	local function _() --[[ Line: 119 | Named "stopTimeTracking" ]]
+	local function _()
 		-- upvalues: RenderSteppedConnection (ref)
 		if RenderSteppedConnection then
 			RenderSteppedConnection:Disconnect()
@@ -73,13 +73,13 @@ return function(p1, PlayerGui) --[[ Line: 94 | Named "createTTSAudioManager" ]]
 		end
 	end
 	
-	local _ = function() --[[ Line: 126 | Named "startTimeTracking" ]]
+	local _ = function()
 		-- upvalues: RenderSteppedConnection (ref), RunService (upval), v1 (ref), Signal2_2 (copy)
 		if RenderSteppedConnection then
 			RenderSteppedConnection:Disconnect()
 			RenderSteppedConnection = nil
 		end
-		RenderSteppedConnection = RunService.RenderStepped:Connect(function() --[[ Line: 128 ]]
+		RenderSteppedConnection = RunService.RenderStepped:Connect(function()
 			-- upvalues: v1 (upval), Signal2_2 (upval)
 			if v1 then
 				Signal2_2(v1.TimePosition)
@@ -87,7 +87,7 @@ return function(p1, PlayerGui) --[[ Line: 94 | Named "createTTSAudioManager" ]]
 		end)
 	end
 	
-	local _ = function() --[[ Line: 135 | Named "ensureGraph" ]]
+	local _ = function()
 		-- upvalues: v1 (ref), Callback (copy), Parent (ref), EndedConnection (ref), Flag (ref), Idle2 (copy), Signal2_2 (copy), RenderSteppedConnection (ref)
 		if v1 ~= nil then
 			return v1
@@ -99,7 +99,7 @@ return function(p1, PlayerGui) --[[ Line: 94 | Named "createTTSAudioManager" ]]
 		else
 			v1 = CallbackResult
 			Parent = CallbackResult.Parent
-			EndedConnection = CallbackResult.Ended:Connect(function() --[[ Line: 150 ]]
+			EndedConnection = CallbackResult.Ended:Connect(function()
 				-- upvalues: Flag (upval), Idle2 (upval), Signal2_2 (upval), RenderSteppedConnection (upval)
 				if Flag then return end
 				Idle2("ready")
@@ -115,7 +115,7 @@ return function(p1, PlayerGui) --[[ Line: 94 | Named "createTTSAudioManager" ]]
 		end
 	end
 	
-	local function failGeneration(p2) --[[ Line: 163 ]]
+	local function failGeneration(p2)
 		-- upvalues: Signal2_4 (copy), Signal2_5 (copy), Signal2_3 (copy), Signal2_1 (copy), Signal2_6 (copy), Signal2 (copy), Idle2 (copy)
 		Signal2_4("")
 		Signal2_5(0)
@@ -135,7 +135,7 @@ return function(p1, PlayerGui) --[[ Line: 94 | Named "createTTSAudioManager" ]]
 		getLoadedText = Signal5,
 		getLoadedVoiceId = Signal6,
 		getWaveform = Signal7,
-		generate = function(Text, p2) --[[ Line: 173 ]]
+		generate = function(Text, p2)
 			-- upvalues: Flag (ref), Signal5 (copy), Signal6 (copy), Idle (copy), v1 (ref), Callback (copy), Parent (ref), EndedConnection (ref), Idle2 (copy), Signal2_2 (copy), RenderSteppedConnection (ref), Signal2 (copy), Count (ref), Signal2_6 (copy), Signal2_4 (copy), Signal2_5 (copy), failGeneration (copy), ClassifyTTSErrorModule (upval), GetFIntMomentsTTSWaveformSamplesPerSecondModule (upval), GetFIntMomentsTTSWaveformMinSamplesModule (upval), GetFIntMomentsTTSWaveformMaxSamplesModule (upval), Signal2_1 (copy), Signal2_3 (copy), NormalizeWaveformModule (upval)
 			if Flag then return end
 			if Text == Signal5(false) and p2 == Signal6(false) and Idle(false) ~= "error" then return end
@@ -148,7 +148,7 @@ return function(p1, PlayerGui) --[[ Line: 94 | Named "createTTSAudioManager" ]]
 				else
 					v1 = CallbackResult
 					Parent = CallbackResult.Parent
-					EndedConnection = CallbackResult.Ended:Connect(function() --[[ Line: 150 ]]
+					EndedConnection = CallbackResult.Ended:Connect(function()
 						-- upvalues: Flag (upval), Idle2 (upval), Signal2_2 (upval), RenderSteppedConnection (upval)
 						if Flag then return end
 						Idle2("ready")
@@ -184,12 +184,12 @@ return function(p1, PlayerGui) --[[ Line: 94 | Named "createTTSAudioManager" ]]
 			Signal2_6({})
 			Signal2_4("")
 			Signal2_5(0)
-			task.spawn(function() --[[ Line: 204 ]]
+			task.spawn(function()
 				-- upvalues: Flag (upval), Sound (copy), Text (copy), p2 (copy), Count (upval), Count1 (copy), failGeneration (upval), ClassifyTTSErrorModule (upval), GetFIntMomentsTTSWaveformSamplesPerSecondModule (upval), GetFIntMomentsTTSWaveformMinSamplesModule (upval), GetFIntMomentsTTSWaveformMaxSamplesModule (upval), Signal2_4 (upval), Signal2_5 (upval), Signal2_1 (upval), Signal2_3 (upval), Signal2_2 (upval), Signal2_6 (upval), NormalizeWaveformModule (upval), Idle2 (upval)
 				if Flag then return end
 				Sound.Text = Text
 				Sound.VoiceId = tostring(p2)
-				local Success, Result = pcall(function() --[[ Line: 212 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: Sound (upval)
 					return Sound:LoadPlatformAsync()
 				end)
@@ -206,7 +206,7 @@ return function(p1, PlayerGui) --[[ Line: 94 | Named "createTTSAudioManager" ]]
 					return
 				end
 				local ClampedValue = math.clamp(math.round(Sound.TimeLength * GetFIntMomentsTTSWaveformSamplesPerSecondModule()), GetFIntMomentsTTSWaveformMinSamplesModule(), GetFIntMomentsTTSWaveformMaxSamplesModule())
-				local Success1, Result1 = pcall(function() --[[ Line: 235 ]]
+				local Success1, Result1 = pcall(function()
 					-- upvalues: Sound (upval), ClampedValue (copy)
 					return Sound:GetWaveformAsync(NumberRange.new(0, Sound.TimeLength), ClampedValue)
 				end)
@@ -224,7 +224,7 @@ return function(p1, PlayerGui) --[[ Line: 94 | Named "createTTSAudioManager" ]]
 				Idle2("ready")
 			end)
 		end,
-		play = function() --[[ Line: 259 ]]
+		play = function()
 			-- upvalues: Flag (ref), v1 (ref), Idle2 (copy), RenderSteppedConnection (ref), RunService (upval), Signal2_2 (copy)
 			if Flag then return end
 			local v2 = v1
@@ -237,7 +237,7 @@ return function(p1, PlayerGui) --[[ Line: 94 | Named "createTTSAudioManager" ]]
 					RenderSteppedConnection:Disconnect()
 					RenderSteppedConnection = nil
 				end
-				RenderSteppedConnection = RunService.RenderStepped:Connect(function() --[[ Line: 128 ]]
+				RenderSteppedConnection = RunService.RenderStepped:Connect(function()
 					-- upvalues: v1 (upval), Signal2_2 (upval)
 					if v1 then
 						Signal2_2(v1.TimePosition)
@@ -245,7 +245,7 @@ return function(p1, PlayerGui) --[[ Line: 94 | Named "createTTSAudioManager" ]]
 				end)
 			end
 		end,
-		pause = function() --[[ Line: 271 ]]
+		pause = function()
 			-- upvalues: Flag (ref), v1 (ref), RenderSteppedConnection (ref), Idle (copy), Idle2 (copy)
 			if Flag then return end
 			local v2 = v1
@@ -262,7 +262,7 @@ return function(p1, PlayerGui) --[[ Line: 94 | Named "createTTSAudioManager" ]]
 				end
 			end
 		end,
-		seek = function(Value: number) --[[ Line: 285 ]]
+		seek = function(Value: number)
 			-- upvalues: Flag (ref), v1 (ref), Signal1 (copy), Signal2_2 (copy)
 			if Flag then return end
 			local v2 = v1
@@ -273,7 +273,7 @@ return function(p1, PlayerGui) --[[ Line: 94 | Named "createTTSAudioManager" ]]
 				Signal2_2(ClampedValue)
 			end
 		end,
-		setVolume = function(Volume) --[[ Line: 297 ]]
+		setVolume = function(Volume)
 			-- upvalues: Flag (ref), v1 (ref)
 			if Flag then return end
 			local v2 = v1
@@ -282,7 +282,7 @@ return function(p1, PlayerGui) --[[ Line: 94 | Named "createTTSAudioManager" ]]
 				v2.Volume = Volume
 			end
 		end,
-		reset = function() --[[ Line: 311 ]]
+		reset = function()
 			-- upvalues: Flag (ref), Count (ref), v1 (ref), RenderSteppedConnection (ref), Signal2 (copy), Idle2 (copy), Signal2_2 (copy), Signal2_1 (copy), Signal2_3 (copy), Signal2_4 (copy), Signal2_5 (copy), Signal2_6 (copy)
 			if Flag then return end
 			Count += 1
@@ -303,7 +303,7 @@ return function(p1, PlayerGui) --[[ Line: 94 | Named "createTTSAudioManager" ]]
 			Signal2_5(0)
 			Signal2_6({})
 		end,
-		destroy = function() --[[ Line: 331 ]]
+		destroy = function()
 			-- upvalues: Flag (ref), RenderSteppedConnection (ref), EndedConnection (ref), Parent (ref), v1 (ref)
 			if Flag then return end
 			Flag = true

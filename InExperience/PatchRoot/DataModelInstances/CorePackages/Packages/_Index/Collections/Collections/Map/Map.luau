@@ -8,7 +8,7 @@ local InstanceOfModule = require(Parent1.InstanceOf)
 local _ = require(Parent1.ES7Types)
 local MapModule = {}
 
-function MapModule.new(Entry) --[[ Line: 39 ]]
+function MapModule.new(Entry)
 	-- upvalues: IsArrayModule (copy), DEV (copy), InstanceOfModule (copy), MapModule (copy)
 	local List = nil
 	local _map = nil
@@ -45,7 +45,7 @@ function MapModule.new(Entry) --[[ Line: 39 ]]
 	return (setmetatable({ size = #List, _map = _map, _array = List }, MapModule))
 end
 
-function MapModule:set(p1, p2) --[[ Line: 88 ]]
+function MapModule:set(p1, p2)
 	if self._map[p1] == nil then
 		self.size += 1
 		table.insert(self._array, p1)
@@ -55,18 +55,18 @@ function MapModule:set(p1, p2) --[[ Line: 88 ]]
 	return self
 end
 
-function MapModule:get(p1) --[[ Line: 100 ]]
+function MapModule:get(p1)
 	return self._map[p1]
 end
 
-function MapModule:clear() --[[ Line: 104 ]]
+function MapModule:clear()
 	local v2 = table
 	self.size = 0
 	v2.clear(self._map)
 	v2.clear(self._array)
 end
 
-function MapModule:delete(Value): boolean --[[ Line: 111 ]]
+function MapModule:delete(Value): boolean
 	if self._map[Value] == nil then
 		return false
 	end
@@ -80,12 +80,12 @@ function MapModule:delete(Value): boolean --[[ Line: 111 ]]
 	return true
 end
 
-function MapModule:forEach(Callback, p1) --[[ Line: 127 ]]
+function MapModule:forEach(Callback, p1)
 	-- upvalues: DEV (copy), ForEachModule (copy)
 	if DEV and typeof(Callback) ~= "function" then
 		error("callback is not a function")
 	end
-	ForEachModule(self._array, function(p2) --[[ Line: 134 ]]
+	ForEachModule(self._array, function(p2)
 		-- upvalues: self (copy), p1 (copy), Callback (copy)
 		local MapEntry = self._map[p2]
 		
@@ -99,31 +99,31 @@ function MapModule:forEach(Callback, p1) --[[ Line: 127 ]]
 	end)
 end
 
-function MapModule:has(p1): boolean --[[ Line: 145 ]]
+function MapModule:has(p1): boolean
 	return self._map[p1] ~= nil
 end
 
-function MapModule:keys() --[[ Line: 149 ]]
+function MapModule:keys()
 	return self._array
 end
 
-function MapModule:values() --[[ Line: 153 ]]
+function MapModule:values()
 	-- upvalues: MapModule1 (copy)
-	return MapModule1(self._array, function(p1) --[[ Line: 154 ]]
+	return MapModule1(self._array, function(p1)
 		-- upvalues: self (copy)
 		return self._map[p1]
 	end)
 end
 
-function MapModule:entries() --[[ Line: 159 ]]
+function MapModule:entries()
 	-- upvalues: MapModule1 (copy)
-	return MapModule1(self._array, function(p1) --[[ Line: 160 ]]
+	return MapModule1(self._array, function(p1)
 		-- upvalues: self (copy)
 		return { p1, self._map[p1] }
 	end)
 end
 
-function MapModule:ipairs() --[[ Line: 165 ]]
+function MapModule:ipairs()
 	-- upvalues: DEV (copy)
 	if DEV then
 		warn(debug.traceback("`for _,_ in myMap:ipairs() do` is deprecated and will be removed in a future release, please use `for _,_ in myMap do` instead\n", 2))
@@ -131,11 +131,11 @@ function MapModule:ipairs() --[[ Line: 165 ]]
 	return ipairs(self:entries())
 end
 
-function MapModule:__iter() --[[ Line: 177 ]]
+function MapModule:__iter()
 	return next, self:entries()
 end
 
-function MapModule.__index(p1, p2) --[[ Line: 181 ]]
+function MapModule.__index(p1, p2)
 	-- upvalues: MapModule (copy), DEV (copy)
 	local RawValue = rawget(MapModule, p2)
 	
@@ -148,7 +148,7 @@ function MapModule.__index(p1, p2) --[[ Line: 181 ]]
 	return MapModule.get(p1, p2)
 end
 
-function MapModule:__newindex(p1, p2) --[[ Line: 197 ]]
+function MapModule:__newindex(p1, p2)
 	self:set(p1, p2)
 end
 

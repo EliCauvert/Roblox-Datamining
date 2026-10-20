@@ -8,7 +8,7 @@ local AvatarSwitcherTooltipStorageKey = game:DefineFastString("AvatarSwitcherToo
 local AvatarSwitcherTooltipShowDelay = game:DefineFastInt("AvatarSwitcherTooltipShowDelay", 1000)
 local AvatarSwitcherTooltipDismissDelay = game:DefineFastInt("AvatarSwitcherTooltipDismissDelay", 8500)
 
-return function(p1) --[[ Line: 19 | Named "AvatarSwitcherFtuxTooltip" ]]
+return function(p1)
 	-- upvalues: ServiceModule (copy), ConstantsModule (copy), UseMappedSignalFunction (copy), CommonFtuxTooltipModule (copy), AvatarSwitcherTooltipPriority (copy), AvatarSwitcherTooltipStorageKey (copy), AvatarSwitcherTooltipShowDelay (copy), AvatarSwitcherTooltipDismissDelay (copy)
 	local IntegrationsResultEntry = ServiceModule:integrations()[ConstantsModule.AVATAR_SWITCHER_ID]
 	

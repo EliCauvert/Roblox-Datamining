@@ -1,8 +1,8 @@
 ﻿local RegisterInGameMenuPeoplePageActionsModule = require(script:FindFirstAncestor("InExperienceSideSheet").Utils.registerInGameMenuPeoplePageActions)
 
-return function(p1) --[[ Line: 23 ]]
+return function(p1)
 	-- upvalues: RegisterInGameMenuPeoplePageActionsModule (copy)
-	RegisterInGameMenuPeoplePageActionsModule.registerOpenPeoplePage(function() --[[ Line: 24 ]]
+	RegisterInGameMenuPeoplePageActionsModule.registerOpenPeoplePage(function()
 		-- upvalues: p1 (copy)
 		local PlayersPage = p1.PlayersPage
 		
@@ -15,7 +15,7 @@ return function(p1) --[[ Line: 23 ]]
 			p1:SetVisibility(true, false, PlayersPage)
 		end
 	end)
-	RegisterInGameMenuPeoplePageActionsModule.registerClosePeoplePage(function() --[[ Line: 37 ]]
+	RegisterInGameMenuPeoplePageActionsModule.registerClosePeoplePage(function()
 		-- upvalues: p1 (copy)
 		local PlayersPage = p1.PlayersPage
 		local Pages = p1.Pages

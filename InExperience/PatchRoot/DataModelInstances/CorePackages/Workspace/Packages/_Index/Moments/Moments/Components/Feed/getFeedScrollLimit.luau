@@ -1,4 +1,4 @@
-﻿return function(p1, p2, Callback) --[[ Line: 7 | Named "getFeedScrollLimit" ]]
+﻿return function(p1, p2, Callback)
 	if p1 and not p2 then
 		return nil
 	else

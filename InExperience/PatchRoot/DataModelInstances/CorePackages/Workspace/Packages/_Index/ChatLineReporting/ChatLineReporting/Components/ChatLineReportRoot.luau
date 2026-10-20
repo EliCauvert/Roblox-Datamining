@@ -15,7 +15,7 @@ local FoundationProvider = require(Parent.Foundation).FoundationProvider
 local NewResult = nil
 local ChatLineReportRoot = nil
 
-local function Unmount() --[[ Line: 26 ]]
+local function Unmount()
 	-- upvalues: ChatLineReportRoot (ref), RoactModule (copy), NewResult (ref)
 	if ChatLineReportRoot then
 		RoactModule.unmount(ChatLineReportRoot)
@@ -24,7 +24,7 @@ local function Unmount() --[[ Line: 26 ]]
 end
 
 return {
-	initialize = function(Messages) --[[ Line: 33 ]]
+	initialize = function(Messages)
 		-- upvalues: ReactModule (copy), LayerCollectorProvider (copy), RoactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), FoundationProvider (copy), StyleProviderWithDefaultTheme (copy), ChatLineReportStepHandlerModule (copy), Unmount (copy), NewResult (ref), ReactFocusNavigationModule (copy), ChatLineReportRoot (ref), Provider (copy), CoreGui (copy)
 		NewResult = ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
 		ChatLineReportRoot = RoactModule.mount(ReactModule.createElement(ReactFocusNavigationModule.FocusNavigationContext.Provider, { value = NewResult }, {

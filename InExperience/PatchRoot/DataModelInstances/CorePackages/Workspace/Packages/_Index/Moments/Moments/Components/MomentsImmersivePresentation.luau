@@ -55,12 +55,12 @@ local UseMomentsGatingFunction = MomentsCommonModule.Hooks.useMomentsGating
 local CreateRecommendationTelemetryFunction = FeedModule.createRecommendationTelemetry
 local CreateMockFeedSourceFunction = FeedModule.createMockFeedSource
 
-local function PushedFeedSafeAreaProvider(p1) --[[ Line: 121 ]]
+local function PushedFeedSafeAreaProvider(p1)
 	-- upvalues: UseDeviceInsetsFunction (copy), ReactModule (copy), MomentPushedFeedSafeAreaContextModule (copy)
 	return ReactModule.createElement(MomentPushedFeedSafeAreaContextModule.Context.Provider, { value = UseDeviceInsetsFunction() }, { Content = p1.children })
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 131 | Named "MomentsImmersivePresentation" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), CreateMomentsStoreModule (copy), FFlagEnableArgus (copy), CreateSignalTrackerFunction (copy), FFlagMomentsOptimisticProfilePending (copy), FFlagMomentsFlyoutCreateButtonModule (copy), UseCreationEntryModule (copy), UseUploadHostModule (copy), LogCreateIntentModule (copy), FunnelEventNames (copy), FFlagMomentsCreationFeatureGate (copy), UseMomentsGatingFunction (copy), ImmersiveFeedKind (copy), GetDeepLinkStoreModule (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), CreateUserMomentsFeedSourceModule (copy), IsStudioModule (copy), GetFFlagArgusStudioMockFeedModule (copy), CreateMockFeedSourceFunction (copy), CreateMomentsFeedSourceModule (copy), CreateRecommendationTelemetryFunction (copy), LogMomentsLayerExposureFunction (copy), FStringMomentsExperienceJoinActionTextIxpLayerModule (copy), Moments (copy), FireAnalyticsEventFunction (copy), EventNames (copy), FFlagMomentsRealtimeSessionTelemetry (copy), Analytics (copy), FFlagMomentsSessionHeartbeat (copy), UseNavigationFocusFunction (copy), UseSignalStateFunction (copy), FeedPlaybackSuspension (copy), GetMomentsPreferencesStoreModule (copy), ReportModalCovering (copy), FFlagMomentsFlushDwellBeforeNavigationModule (copy), UseNavigationFunction (copy), RoactNavigationModule (copy), FFlagMomentsNavigationEventModule (copy), NavigationDestinationTypeModule (copy), MomentsImmersiveNavigationMenu (copy), MomentsBackHeaderModule (copy), MomentsFeedSurfaceModule (copy), PushedFeedSafeAreaProvider (copy), View (copy), ConstantsModule (copy), CreationFlowScreen (copy), FTUXEducationScreenModule (copy), MomentsHostShellModule (copy), FFlagMomentsAvatarLookTryOn (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
@@ -90,7 +90,7 @@ return ReactModule.memo(function(p1) --[[ Line: 131 | Named "MomentsImmersivePre
 		})
 	end
 	local OnCreatePressed = if v1 == nil then nil else v1.onCreatePressed
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 167 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: OnCreatePressed (copy), LogCreateIntentModule (upval), FunnelEventNames (upval)
 		if OnCreatePressed ~= nil then
 			LogCreateIntentModule(FunnelEventNames.CreationIntentSource.TopBar)
@@ -119,7 +119,7 @@ return ReactModule.memo(function(p1) --[[ Line: 131 | Named "MomentsImmersivePre
 			UseRefResult3.current = Text
 		end
 	end
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 203 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FeedKind (copy), ImmersiveFeedKind (upval), CreateUserMomentsFeedSourceModule (upval), TargetUserId (copy), InitialIndex (copy), InitialMomentId (copy), IsStudioModule (upval), GetFFlagArgusStudioMockFeedModule (upval), CreateMockFeedSourceFunction (upval), CreateMomentsFeedSourceModule (upval), Current (copy), Current1 (copy)
 		return if FeedKind == ImmersiveFeedKind.User then CreateUserMomentsFeedSourceModule(TargetUserId or 0, {
 			initialIndex = InitialIndex,
@@ -128,7 +128,7 @@ return ReactModule.memo(function(p1) --[[ Line: 131 | Named "MomentsImmersivePre
 	end, {
 		FeedKind, TargetUserId, InitialIndex, InitialMomentId, Current, Current1
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 218 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: FeedKind (copy), ImmersiveFeedKind (upval), FFlagEnableArgus (upval), CreateRecommendationTelemetryFunction (upval), Current (copy), Current1 (copy)
 		return if FeedKind == ImmersiveFeedKind.Trending and FFlagEnableArgus then CreateRecommendationTelemetryFunction({
 			getMomentsSessionId = Current.getMomentsSessionId,
@@ -136,7 +136,7 @@ return ReactModule.memo(function(p1) --[[ Line: 131 | Named "MomentsImmersivePre
 		}) else nil
 	end, { FeedKind, Current, Current1 })
 	local SessionSource = p1.sessionSource
-	ReactModule.useEffect(function() --[[ Line: 234 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Current (copy), SessionSource (copy), LogMomentsLayerExposureFunction (upval), FStringMomentsExperienceJoinActionTextIxpLayerModule (upval), Moments (upval), FireAnalyticsEventFunction (upval), EventNames (upval), FFlagMomentsRealtimeSessionTelemetry (upval), Analytics (upval), FFlagMomentsSessionHeartbeat (upval)
 		Current.setSessionSource(SessionSource)
 		LogMomentsLayerExposureFunction(FStringMomentsExperienceJoinActionTextIxpLayerModule)
@@ -157,7 +157,7 @@ return ReactModule.memo(function(p1) --[[ Line: 131 | Named "MomentsImmersivePre
 		if MomentsSessionHeartbeat ~= nil then
 			MomentsSessionHeartbeat.start(SessionSource)
 		end
-		return function() --[[ Line: 257 ]]
+		return function()
 			-- upvalues: MomentsSessionHeartbeat (copy), Current (upval), FireAnalyticsEventFunction (upval), EventNames (upval), SessionSource (upval), FFlagMomentsRealtimeSessionTelemetry (upval), Analytics (upval)
 			if MomentsSessionHeartbeat ~= nil then
 				MomentsSessionHeartbeat.stop()
@@ -178,7 +178,7 @@ return ReactModule.memo(function(p1) --[[ Line: 131 | Named "MomentsImmersivePre
 	local UseSignalStateResult1 = UseSignalStateFunction(GetMomentsPreferencesStoreModule(false).getIsTeleporting)
 	local UseSignalStateResult2 = UseSignalStateFunction(ReportModalCovering.getCovering)
 	local NoIsCreating: boolean = UseNavigationFocusResult and (not UseSignalStateResult and (not UseSignalStateResult1 and (not UseSignalStateResult2 and not IsCreating)))
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 289 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult (copy)
 		local Current = UseRefResult.current
 		
@@ -186,7 +186,7 @@ return ReactModule.memo(function(p1) --[[ Line: 131 | Named "MomentsImmersivePre
 			Current.flushView(p2)
 		end
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 295 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult (copy)
 		local Current = UseRefResult.current
 		
@@ -195,15 +195,15 @@ return ReactModule.memo(function(p1) --[[ Line: 131 | Named "MomentsImmersivePre
 		end
 	end, {})
 	local UseNavigationResult = if FFlagMomentsFlushDwellBeforeNavigationModule then UseNavigationFunction() else nil
-	ReactModule.useEffect(function() --[[ Line: 307 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagMomentsFlushDwellBeforeNavigationModule (upval), UseNavigationResult (ref), RoactNavigationModule (upval), UseResult1 (copy)
 		if FFlagMomentsFlushDwellBeforeNavigationModule and UseNavigationResult ~= nil and UseNavigationResult.addListener ~= nil then
-			local AddListenerResult = UseNavigationResult.addListener(RoactNavigationModule.Events.WillBlur, function() --[[ Line: 312 ]]
+			local AddListenerResult = UseNavigationResult.addListener(RoactNavigationModule.Events.WillBlur, function()
 				-- upvalues: UseResult1 (upval)
 				UseResult1()
 			end)
 			
-			return function() --[[ Line: 315 ]]
+			return function()
 				-- upvalues: AddListenerResult (copy)
 				AddListenerResult.remove()
 			end
@@ -212,20 +212,20 @@ return ReactModule.memo(function(p1) --[[ Line: 131 | Named "MomentsImmersivePre
 		end
 	end, { UseNavigationResult, UseResult1 })
 	local OnBackFunction = p1.onBack
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 321 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: FFlagMomentsFlushDwellBeforeNavigationModule (upval), UseResult1 (copy), FFlagMomentsNavigationEventModule (upval), NavigationDestinationTypeModule (upval), OnBackFunction (copy)
 		if FFlagMomentsFlushDwellBeforeNavigationModule then
 			UseResult1(if FFlagMomentsNavigationEventModule then NavigationDestinationTypeModule.Exit else nil)
 		end
 		OnBackFunction()
 	end, { OnBackFunction, UseResult1 })
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 327 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: FireAnalyticsEventFunction (upval), EventNames (upval), UseResult2 (copy), FFlagMomentsNavigationEventModule (upval), NavigationDestinationTypeModule (upval)
 		FireAnalyticsEventFunction(EventNames.FeedHomeButtonPressed)
 		UseResult2(if FFlagMomentsNavigationEventModule then NavigationDestinationTypeModule.Trending else nil)
 	end, { UseResult2 })
 	local OpenOwnMomentsFunction = p1.openOwnMoments
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 332 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: FireAnalyticsEventFunction (upval), EventNames (upval), OpenOwnMomentsFunction (copy), FFlagMomentsFlushDwellBeforeNavigationModule (upval), UseResult1 (copy), FFlagMomentsNavigationEventModule (upval), NavigationDestinationTypeModule (upval)
 		FireAnalyticsEventFunction(EventNames.MyCreationButtonPressed)
 		
@@ -244,7 +244,7 @@ return ReactModule.memo(function(p1) --[[ Line: 131 | Named "MomentsImmersivePre
 		active = UseNavigationFocusResult and (not UseSignalStateResult2 and not IsCreating),
 		playbackActive = NoIsCreating,
 		initialIndex = InitialIndex,
-		header = ReactModule.useMemo(function() --[[ Line: 343 ]]
+		header = ReactModule.useMemo(function()
 			-- upvalues: ReactModule (upval), MomentsBackHeaderModule (upval), UseResult3 (copy), NoFFlagMomentsCreationFeatureGate (copy), UseResult (copy), IsFeedKindMatch (copy), UseResult4 (copy), UseResult5 (copy)
 			return ReactModule.createElement(MomentsBackHeaderModule, {
 				onBack = UseResult3,

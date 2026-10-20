@@ -7,7 +7,7 @@ local Text = FoundationModule.Text
 local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 local _ = require(BuildExperience.Analytics.AnalyticsWindow)
 
-return function(p1) --[[ Line: 33 | Named "WindowSegmentedControl" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), StateLayerAffordance (copy), Text (copy)
 	local TestId = p1.testId or "WindowSegmentedControl"
 	local Elements = {}
@@ -21,7 +21,7 @@ return function(p1) --[[ Line: 33 | Named "WindowSegmentedControl" ]]
 				["bg-shift-300"] = IsIdMatch
 			},
 			stateLayer = { affordance = StateLayerAffordance.Background },
-			onActivated = function() --[[ Line: 48 ]]
+			onActivated = function()
 				-- upvalues: p1 (copy), window (copy)
 				p1.onWindowSelected(window.id)
 			end,

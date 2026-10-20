@@ -1,4 +1,4 @@
-﻿local function parseEligibleOffers(EligibleOffers) --[[ Line: 51 ]]
+﻿local function parseEligibleOffers(EligibleOffers)
 	assert(type(EligibleOffers) == "table", "Expected EligibleOffers to be a table")
 	local List = {}
 	
@@ -13,7 +13,7 @@
 	return List
 end
 
-local function parseRobloxSubscriptionDiscounts(PrivateServerDiscounts) --[[ Line: 67 ]]
+local function parseRobloxSubscriptionDiscounts(PrivateServerDiscounts)
 	if type(PrivateServerDiscounts) ~= "table" then
 		return nil
 	end
@@ -31,7 +31,7 @@ local function parseRobloxSubscriptionDiscounts(PrivateServerDiscounts) --[[ Lin
 	return List
 end
 
-local function parseFeatureConfig(FeatureConfig) --[[ Line: 84 ]]
+local function parseFeatureConfig(FeatureConfig)
 	-- upvalues: parseRobloxSubscriptionDiscounts (copy)
 	assert(type(FeatureConfig) == "table", "Expected FeatureConfig to be a table")
 	
@@ -44,14 +44,14 @@ local function parseFeatureConfig(FeatureConfig) --[[ Line: 84 ]]
 	}
 end
 
-local function _(p1) --[[ Line: 96 | Named "parseRobloxSubscriptionProductDetails" ]]
+local function _(p1)
 	-- upvalues: parseFeatureConfig (copy)
 	assert(type(p1) == "table", "Expected RobloxSubscriptionProductDetails to be a table")
 	
 	return { FeatureConfig = parseFeatureConfig(p1.FeatureConfig) }
 end
 
-local _ = function(p1) --[[ Line: 103 | Named "parseProductTypeDetails" ]]
+local _ = function(p1)
 	-- upvalues: parseFeatureConfig (copy)
 	assert(type(p1) == "table", "Expected ProductTypeDetails to be a table")
 	local t = {}
@@ -64,7 +64,7 @@ local _ = function(p1) --[[ Line: 103 | Named "parseProductTypeDetails" ]]
 	return t
 end
 
-local function parseLocalizedPrice(LocalizedPrice) --[[ Line: 110 ]]
+local function parseLocalizedPrice(LocalizedPrice)
 	assert(type(LocalizedPrice) == "table", "Expected LocalizedPrice to be a table")
 	
 	return {
@@ -74,14 +74,14 @@ local function parseLocalizedPrice(LocalizedPrice) --[[ Line: 110 ]]
 	}
 end
 
-local function parseProductKey(ProductKey) --[[ Line: 119 ]]
+local function parseProductKey(ProductKey)
 	return if type(ProductKey) == "table" then {
 		Id = tostring(ProductKey.Id or ""),
 		Type = tostring(ProductKey.Type or "")
 	} else { Id = "", Type = "" }
 end
 
-local function parseEligibleOffersFromRest(EligibleOffers) --[[ Line: 129 ]]
+local function parseEligibleOffersFromRest(EligibleOffers)
 	if type(EligibleOffers) ~= "table" then
 		return {}
 	end
@@ -100,7 +100,7 @@ local function parseEligibleOffersFromRest(EligibleOffers) --[[ Line: 129 ]]
 	return List
 end
 
-local function parseDiscountsFromRest(PrivateServerDiscounts) --[[ Line: 148 ]]
+local function parseDiscountsFromRest(PrivateServerDiscounts)
 	if type(PrivateServerDiscounts) ~= "table" then
 		return nil
 	end
@@ -118,7 +118,7 @@ local function parseDiscountsFromRest(PrivateServerDiscounts) --[[ Line: 148 ]]
 	return List
 end
 
-local function parseFeatureConfigFromRest(FeatureConfig) --[[ Line: 165 ]]
+local function parseFeatureConfigFromRest(FeatureConfig)
 	-- upvalues: parseDiscountsFromRest (copy)
 	local FeatureConfig1 = if type(FeatureConfig) == "table" then FeatureConfig else {}
 	
@@ -131,7 +131,7 @@ local function parseFeatureConfigFromRest(FeatureConfig) --[[ Line: 165 ]]
 	}
 end
 
-local function parseLocalizedPriceFromRest(LocalizedPrice) --[[ Line: 176 ]]
+local function parseLocalizedPriceFromRest(LocalizedPrice)
 	local LocalizedPrice1 = if type(LocalizedPrice) == "table" then LocalizedPrice else {}
 	
 	return {
@@ -141,7 +141,7 @@ local function parseLocalizedPriceFromRest(LocalizedPrice) --[[ Line: 176 ]]
 	}
 end
 
-local function parseProductKeyFromRest(ProductKey) --[[ Line: 185 ]]
+local function parseProductKeyFromRest(ProductKey)
 	return if type(ProductKey) == "table" then {
 		Id = tostring(ProductKey.id or ""),
 		Type = tostring(ProductKey.type or "")
@@ -149,12 +149,12 @@ local function parseProductKeyFromRest(ProductKey) --[[ Line: 185 ]]
 end
 
 local GetRobloxSubscriptionProductsModelModule = {
-	new = function(p1) --[[ Line: 197 ]]
+	new = function(p1)
 		return p1
 	end
 }
 
-function GetRobloxSubscriptionProductsModelModule.format(List) --[[ Line: 202 ]]
+function GetRobloxSubscriptionProductsModelModule.format(List)
 	-- upvalues: parseEligibleOffers (copy), parseLocalizedPrice (copy), parseProductKey (copy), parseFeatureConfig (copy), GetRobloxSubscriptionProductsModelModule (copy)
 	assert(type(List) == "table", "Expected products response to be a table")
 	local List1 = {}
@@ -186,7 +186,7 @@ function GetRobloxSubscriptionProductsModelModule.format(List) --[[ Line: 202 ]]
 	return List1
 end
 
-function GetRobloxSubscriptionProductsModelModule.formatFromRest(p1) --[[ Line: 227 ]]
+function GetRobloxSubscriptionProductsModelModule.formatFromRest(p1)
 	-- upvalues: parseEligibleOffersFromRest (copy), parseLocalizedPriceFromRest (copy), parseProductKeyFromRest (copy), parseFeatureConfigFromRest (copy), GetRobloxSubscriptionProductsModelModule (copy)
 	assert(type(p1) == "table", "Expected products response to be a table")
 	local Products = p1.products
@@ -215,7 +215,7 @@ function GetRobloxSubscriptionProductsModelModule.formatFromRest(p1) --[[ Line: 
 	return List
 end
 
-function GetRobloxSubscriptionProductsModelModule.mock(List) --[[ Line: 259 ]]
+function GetRobloxSubscriptionProductsModelModule.mock(List)
 	-- upvalues: GetRobloxSubscriptionProductsModelModule (copy)
 	local config = {
 		LocalizedPriceDisplayString = "$12.99",

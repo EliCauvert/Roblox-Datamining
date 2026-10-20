@@ -10,7 +10,7 @@ local Debug = CreatorAgentChatModule.debug
 local AwaitRequestStateFunction = ToolControllerUtilsModule.awaitRequestState
 local GetToolCallOrderFunction = ToolControllerUtilsModule.getToolCallOrder
 
-local function _(p1) --[[ Line: 44 | Named "buildOptimisticPlanTool" ]]
+local function _(p1)
 	return {
 		toolCallId = p1.toolCallId,
 		callOrder = p1.proposal.callOrder or 0,
@@ -19,13 +19,13 @@ local function _(p1) --[[ Line: 44 | Named "buildOptimisticPlanTool" ]]
 	}
 end
 
-local _ = function(p1, p2, p3) --[[ Line: 53 | Named "createPlanProposalSync" ]]
+local _ = function(p1, p2, p3)
 	-- upvalues: StudioProposePlanTool (copy), Debug (copy), GetToolCallOrderFunction (copy)
 	local v1 = nil
 	local v2 = nil
 	local v3 = false
 	
-	return function(p4): boolean --[[ Line: 62 ]]
+	return function(p4): boolean
 		-- upvalues: StudioProposePlanTool (upval), p3 (copy), v3 (ref), Debug (upval), v1 (ref), v2 (ref), p1 (copy), p2 (copy), GetToolCallOrderFunction (upval)
 		local PlanInTurnState, PlanInTurnState2, PlanInTurnState3, PlanInTurnState4, PlanInTurnState5 = StudioProposePlanTool.findPlanInTurnState(p4, p3())
 		
@@ -74,17 +74,17 @@ local _ = function(p1, p2, p3) --[[ Line: 53 | Named "createPlanProposalSync" ]]
 	end
 end
 
-return function(p1, p2, p3, Callback) --[[ Line: 111 | Named "createProposePlanController" ]]
+return function(p1, p2, p3, Callback)
 	-- upvalues: Debug (copy), FFlagBuildExperienceToolResultFailureRecoveryModule (copy), AwaitRequestStateFunction (copy), ChatConstantsModule (copy), StudioProposePlanTool (copy), GetToolCallOrderFunction (copy)
 	local PlanFlow = nil
 	local OnPlanAcceptedImpl = nil
 	
-	local function setPlanFlow(Value) --[[ Line: 120 ]]
+	local function setPlanFlow(Value)
 		-- upvalues: PlanFlow (ref)
 		PlanFlow = Value
 	end
 	
-	local function recoverFailedSubmission(p4, p5, ErrorCode) --[[ Line: 124 ]]
+	local function recoverFailedSubmission(p4, p5, ErrorCode)
 		-- upvalues: Callback (copy), p3 (copy)
 		p4.submitted = false
 		
@@ -110,7 +110,7 @@ return function(p1, p2, p3, Callback) --[[ Line: 111 | Named "createProposePlanC
 		end
 	end
 	
-	local function submitPlanResult(PlanFlow1, FormatAcceptedContentResult, ResultKind, p4) --[[ Line: 143 ]]
+	local function submitPlanResult(PlanFlow1, FormatAcceptedContentResult, ResultKind, p4)
 		-- upvalues: Debug (upval), p1 (copy), FFlagBuildExperienceToolResultFailureRecoveryModule (upval), recoverFailedSubmission (copy), AwaitRequestStateFunction (upval), ChatConstantsModule (upval), p2 (copy), p3 (copy), PlanFlow (ref)
 		Debug.log("info", "present_plan tool_result submitting", {
 			sessionId = PlanFlow1.sessionId,
@@ -175,17 +175,17 @@ return function(p1, p2, p3, Callback) --[[ Line: 111 | Named "createProposePlanC
 		end
 	end
 	
-	local function _(p4) --[[ Line: 205 | Named "submitPlanAccepted" ]]
+	local function _(p4)
 		-- upvalues: submitPlanResult (copy), StudioProposePlanTool (upval)
 		submitPlanResult(p4, StudioProposePlanTool.formatAcceptedContent(), "accept", nil)
 	end
 	
-	local _ = function(p4, p5) --[[ Line: 209 | Named "submitPlanFeedback" ]]
+	local _ = function(p4, p5)
 		-- upvalues: submitPlanResult (copy), StudioProposePlanTool (upval), FFlagBuildExperienceToolResultFailureRecoveryModule (upval)
 		submitPlanResult(p4, StudioProposePlanTool.formatFeedbackContent(p5), "feedback", if FFlagBuildExperienceToolResultFailureRecoveryModule then p5 else nil)
 	end
 	
-	local function setCurrentPlanProposal(Proposal) --[[ Line: 218 ]]
+	local function setCurrentPlanProposal(Proposal)
 		-- upvalues: PlanFlow (ref), p3 (copy), OnPlanAcceptedImpl (ref)
 		if Proposal == nil then
 			local PlanFlow2 = PlanFlow
@@ -210,7 +210,7 @@ return function(p1, p2, p3, Callback) --[[ Line: 111 | Named "createProposePlanC
 		end
 	end
 	
-	local function getSubmittedToolCallIds() --[[ Line: 235 ]]
+	local function getSubmittedToolCallIds()
 		-- upvalues: p2 (copy)
 		return p2
 	end
@@ -219,7 +219,7 @@ return function(p1, p2, p3, Callback) --[[ Line: 111 | Named "createProposePlanC
 	local v1 = nil
 	local v2 = false
 	
-	OnPlanAcceptedImpl = function() --[[ Line: 240 | Named "onPlanAcceptedImpl" ]]
+	OnPlanAcceptedImpl = function()
 		-- upvalues: PlanFlow (ref), setCurrentPlanProposal (copy), submitPlanResult (copy), StudioProposePlanTool (upval)
 		local PlanFlow1 = PlanFlow
 		
@@ -235,7 +235,7 @@ return function(p1, p2, p3, Callback) --[[ Line: 111 | Named "createProposePlanC
 				callOrder = PlanFlow1.proposal.callOrder
 			}
 			setCurrentPlanProposal(PlanFlow1.proposal)
-			task.spawn(function() --[[ Line: 257 ]]
+			task.spawn(function()
 				-- upvalues: PlanFlow1 (copy), submitPlanResult (upval), StudioProposePlanTool (upval)
 				submitPlanResult(PlanFlow1, StudioProposePlanTool.formatAcceptedContent(), "accept", nil)
 			end)
@@ -245,7 +245,7 @@ return function(p1, p2, p3, Callback) --[[ Line: 111 | Named "createProposePlanC
 	end
 	
 	return {
-		syncPlanProposal = function(p4): boolean --[[ Line: 62 ]]
+		syncPlanProposal = function(p4): boolean
 			-- upvalues: StudioProposePlanTool (upval), getSubmittedToolCallIds (copy), v2 (ref), Debug (upval), ToolCallId (ref), v1 (ref), setCurrentPlanProposal (copy), setPlanFlow (copy), GetToolCallOrderFunction (upval)
 			local PlanInTurnState, PlanInTurnState2, PlanInTurnState3, PlanInTurnState4, PlanInTurnState5 = StudioProposePlanTool.findPlanInTurnState(p4, getSubmittedToolCallIds())
 			
@@ -292,7 +292,7 @@ return function(p1, p2, p3, Callback) --[[ Line: 111 | Named "createProposePlanC
 				return true
 			end
 		end,
-		stopPendingPlan = function(): boolean --[[ Line: 287 ]]
+		stopPendingPlan = function(): boolean
 			-- upvalues: PlanFlow (ref), p3 (copy)
 			local PlanFlow1 = PlanFlow
 			
@@ -307,7 +307,7 @@ return function(p1, p2, p3, Callback) --[[ Line: 111 | Named "createProposePlanC
 				return true
 			end
 		end,
-		trySubmitComposerText = function(FeedbackText): boolean --[[ Line: 263 ]]
+		trySubmitComposerText = function(FeedbackText): boolean
 			-- upvalues: PlanFlow (ref), setCurrentPlanProposal (copy), submitPlanResult (copy), StudioProposePlanTool (upval), FFlagBuildExperienceToolResultFailureRecoveryModule (upval)
 			local PlanFlow1 = PlanFlow
 			
@@ -325,7 +325,7 @@ return function(p1, p2, p3, Callback) --[[ Line: 111 | Named "createProposePlanC
 					feedbackText = FeedbackText
 				}
 				setCurrentPlanProposal(PlanFlow1.proposal)
-				task.spawn(function() --[[ Line: 281 ]]
+				task.spawn(function()
 					-- upvalues: PlanFlow1 (copy), FeedbackText (copy), submitPlanResult (upval), StudioProposePlanTool (upval), FFlagBuildExperienceToolResultFailureRecoveryModule (upval)
 					submitPlanResult(PlanFlow1, StudioProposePlanTool.formatFeedbackContent(FeedbackText), "feedback", if FFlagBuildExperienceToolResultFailureRecoveryModule then FeedbackText else nil)
 				end)

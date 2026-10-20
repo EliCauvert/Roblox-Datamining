@@ -2,7 +2,7 @@
 local TimeZoneModule = require(script.Parent.TimeZone)
 local DateTimeModule = {}
 
-function DateTimeModule.new(p1, p2, p3, p4, p5, p6, p7) --[[ Line: 27 ]]
+function DateTimeModule.new(p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: DateTimeModule (copy)
 	local config = {
 		dateTime = DateTime.fromUniversalTime(p1 or 1970, p2 or 1, p3 or 1, p4 or 0, p5 or 0, p6 or 0, p7 or 0)
@@ -12,7 +12,7 @@ function DateTimeModule.new(p1, p2, p3, p4, p5, p6, p7) --[[ Line: 27 ]]
 	return config
 end
 
-function DateTimeModule.now() --[[ Line: 45 ]]
+function DateTimeModule.now()
 	-- upvalues: DateTimeModule (copy)
 	local config = { dateTime = DateTime.now() }
 	setmetatable(config, DateTimeModule)
@@ -20,7 +20,7 @@ function DateTimeModule.now() --[[ Line: 45 ]]
 	return config
 end
 
-function DateTimeModule.fromUnixTimestamp(p1: number) --[[ Line: 58 ]]
+function DateTimeModule.fromUnixTimestamp(p1: number)
 	-- upvalues: DateTimeModule (copy)
 	assert(type(p1) == "number", "Invalid argument #1 to fromUnixTimestamp, expected number.")
 	local config = { dateTime = DateTime.fromUnixTimestampMillis(p1 * 1000) }
@@ -29,7 +29,7 @@ function DateTimeModule.fromUnixTimestamp(p1: number) --[[ Line: 58 ]]
 	return config
 end
 
-function DateTimeModule.fromIsoDate(p1) --[[ Line: 74 ]]
+function DateTimeModule.fromIsoDate(p1)
 	-- upvalues: DateTimeModule (copy)
 	assert(type(p1) == "string", "Invalid argument #1 to DateTime.fromIsoDate, expected string.")
 	local config = { dateTime = DateTime.fromIsoDate(p1) }
@@ -38,7 +38,7 @@ function DateTimeModule.fromIsoDate(p1) --[[ Line: 74 ]]
 	return config
 end
 
-function DateTimeModule:Format(p1, p2, p3) --[[ Line: 91 ]]
+function DateTimeModule:Format(p1, p2, p3)
 	-- upvalues: TimeZoneModule (copy), LocalizationService (copy)
 	assert(type(p1) == "string", "Invalid argument #1 to Format, expected string.")
 	local P11 = p2 or TimeZoneModule.Current
@@ -53,7 +53,7 @@ function DateTimeModule:Format(p1, p2, p3) --[[ Line: 91 ]]
 	end
 end
 
-function DateTimeModule:GetValues(p1) --[[ Line: 114 ]]
+function DateTimeModule:GetValues(p1)
 	-- upvalues: TimeZoneModule (copy)
 	local P14 = p1 or TimeZoneModule.Current
 	
@@ -66,19 +66,19 @@ function DateTimeModule:GetValues(p1) --[[ Line: 114 ]]
 	end
 end
 
-function DateTimeModule.GetUnixTimestamp(p1) --[[ Line: 129 ]]
+function DateTimeModule.GetUnixTimestamp(p1)
 	return if p1.dateTime:ToUniversalTime().Millisecond > 0 then p1.dateTime.UnixTimestamp + p1.dateTime.UnixTimestampMillis % 1000 / 1000 else p1.dateTime.UnixTimestamp
 end
 
-function DateTimeModule:GetIsoDate() --[[ Line: 143 ]]
+function DateTimeModule:GetIsoDate()
 	return self.dateTime:ToIsoDate()
 end
 
-function DateTimeModule:GetLongRelativeTime(_, p1, p2) --[[ Line: 151 ]]
+function DateTimeModule:GetLongRelativeTime(_, p1, p2)
 	return self:Format("lll", p1, p2)
 end
 
-function DateTimeModule:GetShortRelativeTime(_, p1, p2) --[[ Line: 160 ]]
+function DateTimeModule:GetShortRelativeTime(_, p1, p2)
 	-- upvalues: TimeZoneModule (copy)
 	return self:Format("ll", p1 or TimeZoneModule.Current, p2)
 end

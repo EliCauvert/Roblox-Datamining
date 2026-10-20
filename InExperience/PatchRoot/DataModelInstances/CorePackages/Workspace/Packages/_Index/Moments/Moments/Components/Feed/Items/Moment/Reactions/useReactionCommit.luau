@@ -10,14 +10,14 @@ local UseFeedOptionalFunction = require(Moments.Components.Feed.FeedContext).use
 local GetMomentsCapabilitiesFunction = require(Parent.MomentsCommon).Stores.GetMomentsCapabilities
 local UseReactionEffectsFunction = require(script.Parent.ReactionEffectsContext).useReactionEffects
 
-return function() --[[ Line: 34 | Named "useReactionCommit" ]]
+return function()
 	-- upvalues: MomentContextModule (copy), UseReactionEffectsFunction (copy), UseFeedOptionalFunction (copy), FFlagMomentsReactFeatureGate (copy), SignalsReactModule (copy), GetMomentsCapabilitiesFunction (copy), ReactModule (copy), ReactionTruthTableModule (copy), SignalActionTypeModule (copy)
 	local Store = MomentContextModule.useMoment().store
 	local UseReactionEffectsResult = UseReactionEffectsFunction()
 	local UseFeedOptionalResult = UseFeedOptionalFunction()
 	local NoFFlagMomentsReactFeatureGate = not FFlagMomentsReactFeatureGate or SignalsReactModule.useSignalState(GetMomentsCapabilitiesFunction(false).getCanReactToMoments)
 	
-	return ReactModule.useCallback(function(p1, p2, p3) --[[ Line: 47 ]]
+	return ReactModule.useCallback(function(p1, p2, p3)
 		-- upvalues: FFlagMomentsReactFeatureGate (upval), NoFFlagMomentsReactFeatureGate (copy), Store (copy), ReactionTruthTableModule (upval), UseFeedOptionalResult (copy), SignalActionTypeModule (upval), UseReactionEffectsResult (copy)
 		if FFlagMomentsReactFeatureGate and not NoFFlagMomentsReactFeatureGate then return end
 		local DecideResult = ReactionTruthTableModule.decide(Store.getSelectedReaction(false), p1, p3)
@@ -33,7 +33,7 @@ return function() --[[ Line: 34 | Named "useReactionCommit" ]]
 			
 			if FeedItemId ~= nil and FeedItemId ~= "" then
 				local config = { itemId = FeedItemId, tracingId = Data.feedSessionId }
-				local Success, Result = pcall(function() --[[ Line: 75 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: DecideResult (copy), UseFeedOptionalResult (upval), SignalActionTypeModule (upval), config (copy)
 					if DecideResult.action == "commit" and DecideResult.reaction ~= nil then
 						UseFeedOptionalResult.logAction(SignalActionTypeModule.AddReaction, config, { reactionType = DecideResult.reaction })

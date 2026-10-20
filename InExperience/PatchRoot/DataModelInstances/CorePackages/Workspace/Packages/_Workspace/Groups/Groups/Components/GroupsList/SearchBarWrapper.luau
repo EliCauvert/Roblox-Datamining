@@ -4,33 +4,33 @@ local FoundationModule = require(Parent.Foundation)
 local TextInput = FoundationModule.TextInput
 local IconName = FoundationModule.Enums.IconName
 
-return function(p1) --[[ Line: 24 | Named "SearchBar" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), TextInput (copy), IconName (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState("")
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 28 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy)
 		if UseRefResult.current then
 			task.cancel(UseRefResult.current)
 			UseRefResult.current = nil
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 35 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2 (copy), UseResult (copy), UseRefResult (copy), p1 (copy)
 		UseStateResult2(p2)
 		UseResult()
-		UseRefResult.current = task.delay(0.4, function() --[[ Line: 39 ]]
+		UseRefResult.current = task.delay(0.4, function()
 			-- upvalues: p1 (upval), p2 (copy)
 			if p1.onTextChanged then
 				p1.onTextChanged(p2)
 			end
 		end)
 	end, { p1.onTextChanged, UseResult })
-	ReactModule.useEffect(function() --[[ Line: 46 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult (copy)
 		return UseResult
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 50 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy), UseStateResult2 (copy), p1 (copy)
 		UseResult()
 		UseStateResult2("")

@@ -21,7 +21,7 @@ local FFlagAppChatMigrateFriendshipStatusesModule = require(AppChat.Flags.FFlagA
 local FFlagSkipBlockModal = require(Parent.SharedFlags).FFlagSkipBlockModal
 local UseGetPresenceByUserId = if FFlagAppChatPresenceStoreMigrationModule then require(Parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
 
-function PlayerContextualMenuWrapper(p1) --[[ Line: 47 ]]
+function PlayerContextualMenuWrapper(p1)
 	-- upvalues: UseDispatchFunction (copy), ResponsiveModule (copy), FFlagAppChatPresenceStoreMigrationModule (copy), UseGetPresenceByUserId (copy), UseSelectorFunction (copy), ConvertUserPresenceTypeToStringFunction (copy), FFlagAppChatMigrateFriendshipStatusesModule (copy), UseGetFriendshipStatusFunction (copy), UseEffectFunction (copy), NetworkingFriendsModule (copy), UseIsInExperienceModule (copy), ReactModule (copy), Interactable (copy), Component (copy), NewResult (copy), FFlagSkipBlockModal (copy), Images (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseBreakpointXOrSmallerResult = ResponsiveModule.useBreakpointXOrSmaller(ResponsiveModule.Keys.Small)
@@ -37,7 +37,7 @@ function PlayerContextualMenuWrapper(p1) --[[ Line: 47 ]]
 			status = UseGetPresenceByUserIdResult.userPresenceType
 		} else nil
 	else
-		local UseSelectorResultEntry = UseSelectorFunction(function(p2) --[[ Line: 67 ]]
+		local UseSelectorResultEntry = UseSelectorFunction(function(p2)
 			return p2.ChatAppReducer.Presence.byUserId
 		end)[p1.participantId]
 		Config = if UseSelectorResultEntry then {
@@ -52,10 +52,10 @@ function PlayerContextualMenuWrapper(p1) --[[ Line: 47 ]]
 	if FFlagAppChatMigrateFriendshipStatusesModule then
 		UseGetFriendshipStatusResult = UseGetFriendshipStatusFunction(p1.participantId)
 	else
-		UseGetFriendshipStatusResult = UseSelectorFunction(function(p2) --[[ Line: 87 ]]
+		UseGetFriendshipStatusResult = UseSelectorFunction(function(p2)
 			return p2.ChatAppReducer.Friends.friendshipStatus
 		end)[p1.participantId]
-		UseEffectFunction(function() --[[ Line: 92 ]]
+		UseEffectFunction(function()
 			-- upvalues: UseDispatchResult (copy), NetworkingFriendsModule (upval), p1 (copy)
 			UseDispatchResult(NetworkingFriendsModule.GetExtendedFriendshipStatus.API({ targetUserId = p1.participantId }))
 		end, { p1.participantId })
@@ -63,7 +63,7 @@ function PlayerContextualMenuWrapper(p1) --[[ Line: 47 ]]
 	return ReactModule.createElement(Interactable, {
 		Size = UDim2.new(1, 0, 1, 0),
 		BackgroundTransparency = 1,
-		onStateChanged = function() --[[ Line: 105 ]] end,
+		onStateChanged = function() end,
 		Selectable = false,
 		[ReactModule.Event.Activated] = p1.onDismiss
 	}, {
@@ -72,13 +72,13 @@ function PlayerContextualMenuWrapper(p1) --[[ Line: 47 ]]
 			subjectPresence = Config,
 			subjectUserId = p1.participantId,
 			robloxFriendshipStatus = UseGetFriendshipStatusResult,
-			closeCentralOverlayThunk = function() --[[ Line: 117 ]] end,
-			onReportActivated = p1.openReportUser and function() --[[ Line: 118 ]]
+			closeCentralOverlayThunk = function() end,
+			onReportActivated = p1.openReportUser and function()
 				-- upvalues: NewResult (upval), p1 (copy)
 				NewResult:info("User activated reportUser | userId: {}, conversationId: {}", p1.participantId, p1.conversationId)
 				p1.openReportUser(p1.participantId, p1.conversationId)
 			end,
-			onBlockActivated = p1.openBlockingModal and function() --[[ Line: 127 ]]
+			onBlockActivated = p1.openBlockingModal and function()
 				-- upvalues: p1 (copy)
 				p1.openBlockingModal(p1.participantId, p1.conversationId)
 			end,
@@ -87,7 +87,7 @@ function PlayerContextualMenuWrapper(p1) --[[ Line: 47 ]]
 				{
 					icon = Images["icons/actions/leave"],
 					text = p1.removeFromGroupText,
-					onActivated = function() --[[ Line: 138 ]]
+					onActivated = function()
 						-- upvalues: p1 (copy)
 						p1.openRemoveUserDialog(p1.participantId, p1.conversationId)
 					end

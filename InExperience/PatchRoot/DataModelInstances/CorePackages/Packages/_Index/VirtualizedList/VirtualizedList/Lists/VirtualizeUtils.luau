@@ -3,7 +3,7 @@ local Error1 = require(Parent.Parent.LuauPolyfill).Error
 local HttpService = game:GetService("HttpService")
 local InvariantModule = require(Parent.jsUtils.invariant)
 
-local function elementsThatOverlapOffsets(Input, ItemCount, Callback) --[[ Line: 26 ]]
+local function elementsThatOverlapOffsets(Input, ItemCount, Callback)
 	-- upvalues: InvariantModule (copy), HttpService (copy)
 	local t = {}
 	local Count = 0
@@ -31,10 +31,10 @@ end
 
 return {
 	elementsThatOverlapOffsets = elementsThatOverlapOffsets,
-	newRangeCount = function(Visible, Visible1): number --[[ Line: 65 ]]
+	newRangeCount = function(Visible, Visible1): number
 		return Visible1.last - Visible1.first + 1 - math.max(0, math.min(Visible1.last, Visible.last) + 1 - math.max(Visible1.first, Visible.first))
 	end,
-	computeWindowedRenderLimits = function(p1, Callback, p2: number, p3: number, Visible, Callback1, p4) --[[ Line: 82 ]]
+	computeWindowedRenderLimits = function(p1, Callback, p2: number, p3: number, Visible, Callback1, p4)
 		-- upvalues: elementsThatOverlapOffsets (copy), Error1 (copy), HttpService (copy)
 		local CallbackResult: number = Callback(p1)
 		
@@ -104,7 +104,7 @@ return {
 		end
 		return { first = Unpacked2, last = Unpacked3 }
 	end,
-	keyExtractor = function(p5, p6) --[[ Line: 204 ]]
+	keyExtractor = function(p5, p6)
 		return if typeof(p5) == "table" and p5.key ~= nil then p5.key elseif typeof(p5) == "table" and p5.id ~= nil then p5.id else tostring(p6)
 	end
 }

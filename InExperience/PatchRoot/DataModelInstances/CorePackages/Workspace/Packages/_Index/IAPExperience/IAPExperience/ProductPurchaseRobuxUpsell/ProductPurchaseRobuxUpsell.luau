@@ -63,7 +63,7 @@ ExtendResult.defaultProps = {
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function ExtendResult.init(p1) --[[ Line: 92 ]]
+function ExtendResult.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.contentRef = RoactModule.createRef()
 	p1.footerRef = RoactModule.createRef()
@@ -72,14 +72,14 @@ function ExtendResult.init(p1) --[[ Line: 92 ]]
 		footerSize = Vector2.new(0, 0)
 	}
 	
-	function p1.changeContentSize(Frame: Frame) --[[ Line: 100 ]]
+	function p1.changeContentSize(Frame: Frame)
 		-- upvalues: p1 (copy)
 		if p1.state.contentSize ~= Frame.AbsoluteSize then
 			p1:setState({ contentSize = Frame.AbsoluteSize })
 		end
 	end
 	
-	function p1.changeFooterSize(Frame: Frame) --[[ Line: 108 ]]
+	function p1.changeFooterSize(Frame: Frame)
 		-- upvalues: p1 (copy)
 		if p1.state.footerSize ~= Frame.AbsoluteSize then
 			p1:setState({ footerSize = Frame.AbsoluteSize })
@@ -87,7 +87,7 @@ function ExtendResult.init(p1) --[[ Line: 92 ]]
 	end
 end
 
-function ExtendResult:didMount() --[[ Line: 117 ]]
+function ExtendResult:didMount()
 	-- upvalues: FFlagIntroduceMetricsLegacyUpsellModule (copy), LoggerModule (copy), Default (copy), LegacyUpsellCounterModule (copy)
 	if FFlagIntroduceMetricsLegacyUpsellModule then
 		LoggerModule.debug({ message = "Legacy Upsell Modal Shown" })
@@ -95,7 +95,7 @@ function ExtendResult:didMount() --[[ Line: 117 ]]
 	end
 end
 
-function ExtendResult.render(p1) --[[ Line: 126 ]]
+function ExtendResult.render(p1)
 	-- upvalues: SharedFlagsModule (copy), RoactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), MultiTextLocalizerModule (copy)
 	local IAPExperienceRobuxUpsellTextBuyRobuxQuestionWithWarning: string = if p1.props.isLuobu then "IAPExperience.RobuxUpsell.Text.BuyRobuxQuestionWithWarning" else "IAPExperience.RobuxUpsell.Text.BuyRobuxQuestion"
 	local IAPExperienceRobuxUpsellTextVNGDisclosureTerms: string = if p1.props.isVng then "IAPExperience.RobuxUpsell.Text.VNGDisclosureTerms" else "IAPExperience.RobuxUpsell.Text.DisclosureTerms"
@@ -117,16 +117,16 @@ function ExtendResult.render(p1) --[[ Line: 126 ]]
 			ButtonCancel = { key = "IAPExperience.RobuxUpsell.Action.Cancel" },
 			LoadingText = { key = "IAPExperience.RobuxUpsell.Text.Loading" }
 		},
-		render = function(p2) --[[ Line: 171 ]]
+		render = function(p2)
 			-- upvalues: p1 (copy)
 			return p1:renderAlert(p2)
 		end
 	})
 end
 
-function ExtendResult.renderAlert(p1, p2) --[[ Line: 177 ]]
+function ExtendResult.renderAlert(p1, p2)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy), InteractiveAlert (copy), FitFrameVertical (copy), ProductDetailsModule (copy), FitTextLabel (copy), ImageSetLabel (copy), IconsCommonRobux (copy), ButtonType (copy), IconSize (copy)
-	return WithStyleFunction(function(p3) --[[ Line: 178 ]]
+	return WithStyleFunction(function(p3)
 		-- upvalues: p1 (copy), RoactModule (upval), InteractiveAlert (upval), p2 (copy), FitFrameVertical (upval), ProductDetailsModule (upval), FitTextLabel (upval), ImageSetLabel (upval), IconsCommonRobux (upval), ButtonType (upval), IconSize (upval)
 		local Theme = p3.Theme
 		local _Font = p3.Font
@@ -137,7 +137,7 @@ function ExtendResult.renderAlert(p1, p2) --[[ Line: 177 ]]
 			position = p1.props.position,
 			anchorPoint = p1.props.anchorPoint,
 			title = p2.InsufficientFundsTitle,
-			middleContent = function() --[[ Line: 193 ]]
+			middleContent = function()
 				-- upvalues: RoactModule (upval), FitFrameVertical (upval), p1 (upval), ProductDetailsModule (upval), Theme (copy), FitTextLabel (upval), _Font (copy), p2 (upval), ImageSetLabel (upval), IconsCommonRobux (upval)
 				return RoactModule.createElement(FitFrameVertical, {
 					BackgroundTransparency = 1,
@@ -259,7 +259,7 @@ function ExtendResult.renderAlert(p1, p2) --[[ Line: 177 ]]
 					}
 				}
 			},
-			footerContent = function() --[[ Line: 324 ]]
+			footerContent = function()
 				-- upvalues: p2 (upval), RoactModule (upval), FitFrameVertical (upval), p1 (upval), FitTextLabel (upval), _Font (copy), Theme (copy), ImageSetLabel (upval), IconSize (upval), IconsCommonRobux (upval), Text (copy)
 				local Parts = string.split(p2.RemainingBalance, " {robux} ")
 				
@@ -316,7 +316,7 @@ function ExtendResult.renderAlert(p1, p2) --[[ Line: 177 ]]
 	end)
 end
 
-function ExtendResult.renderNewAlert(p1) --[[ Line: 396 ]]
+function ExtendResult.renderNewAlert(p1)
 	-- upvalues: WithLocalizationFunction (copy), WithStyleFunction (copy), RoactModule (copy), InteractiveAlert (copy), FitFrameVertical (copy), ProductDetailsModule (copy), FitTextLabel (copy), ButtonType (copy)
 	return WithLocalizationFunction({
 		InsufficientFundsTitle = "IAPExperience.RobuxUpsell.Title.InsufficientFunds",
@@ -330,9 +330,9 @@ function ExtendResult.renderNewAlert(p1) --[[ Line: 396 ]]
 		BonusBannerInfo = "IAPExperience.RobuxUpsell.Text.BonusBannerInfo",
 		BuyRobuxQuestion = if p1.props.isLuobu then "IAPExperience.RobuxUpsell.Text.BuyRobuxQuestionWithWarning" else "IAPExperience.RobuxUpsell.Text.BuyRobuxQuestion",
 		DisclosureTerms = if p1.props.isVng then "IAPExperience.RobuxUpsell.Text.VNGDisclosureTerms" else "IAPExperience.RobuxUpsell.Text.DisclosureTerms"
-	})(function(p2) --[[ Line: 414 ]]
+	})(function(p2)
 		-- upvalues: WithStyleFunction (upval), p1 (copy), RoactModule (upval), InteractiveAlert (upval), FitFrameVertical (upval), ProductDetailsModule (upval), FitTextLabel (upval), ButtonType (upval)
-		return WithStyleFunction(function(p3) --[[ Line: 415 ]]
+		return WithStyleFunction(function(p3)
 			-- upvalues: p2 (copy), p1 (upval), RoactModule (upval), InteractiveAlert (upval), FitFrameVertical (upval), ProductDetailsModule (upval), FitTextLabel (upval), ButtonType (upval)
 			local Theme = p3.Theme
 			local _Font = p3.Font
@@ -348,7 +348,7 @@ function ExtendResult.renderNewAlert(p1) --[[ Line: 396 ]]
 				position = p1.props.position,
 				anchorPoint = p1.props.anchorPoint,
 				title = p2.NeedMoreRobux,
-				middleContent = function() --[[ Line: 445 ]]
+				middleContent = function()
 					-- upvalues: RoactModule (upval), FitFrameVertical (upval), p1 (upval), ProductDetailsModule (upval), Theme (copy), FitTextLabel (upval), _Font (copy), Text (ref), p2 (upval)
 					return RoactModule.createElement(FitFrameVertical, {
 						BackgroundTransparency = 1,
@@ -452,7 +452,7 @@ function ExtendResult.renderNewAlert(p1) --[[ Line: 396 ]]
 						}
 					}
 				},
-				footerContent = function() --[[ Line: 555 ]]
+				footerContent = function()
 					-- upvalues: p1 (upval), p3 (copy), Robux (ref), p2 (upval)
 					return p1:renderFooterExperiment(p3, Robux, p2.BonusBannerInfo)
 				end
@@ -461,7 +461,7 @@ function ExtendResult.renderNewAlert(p1) --[[ Line: 396 ]]
 	end)
 end
 
-function ExtendResult.renderFooterExperiment(p1, p2, Text, Text1) --[[ Line: 563 ]]
+function ExtendResult.renderFooterExperiment(p1, p2, Text, Text1)
 	-- upvalues: Colors (copy), RoactModule (copy), FitFrameVertical (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), FFlagLowCogsBannerInfoIconModule (copy), InfoIconWithTooltipModule (copy)
 	local _Font = p2.Font
 	local Flint = Colors.Flint

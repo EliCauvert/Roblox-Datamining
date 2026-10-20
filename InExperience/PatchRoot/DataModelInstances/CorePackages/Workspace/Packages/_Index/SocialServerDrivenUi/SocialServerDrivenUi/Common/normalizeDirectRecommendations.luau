@@ -3,7 +3,7 @@ local _ = require(Parent.PYMKCarousel)
 local ContextType = require(Parent.DataHydration.FriendsRecommendations).Enums.ContextType
 local RecommendationType = require(Parent.HomeStore).FriendRecommendations.RecommendationType
 
-return function(List, p1) --[[ Line: 21 | Named "normalizeDirectRecommendations" ]]
+return function(List, p1)
 	-- upvalues: RecommendationType (copy), ContextType (copy)
 	local List1 = {}
 	

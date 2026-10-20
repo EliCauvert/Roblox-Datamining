@@ -13,23 +13,23 @@ local ThrottleFunction = require(Parent.NotificationsCommon).Throttle
 local Popover = FoundationModule.Popover
 local PopoverAlign = FoundationModule.Enums.PopoverAlign
 
-return function(p1) --[[ Line: 27 ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), DeviceInfo (copy), ReactModule (copy), ShareLinksNetworking (copy), ShareLinksRodux (copy), Default (copy), UseLocalizationFunction (copy), FoundationModule (copy), ThrottleFunction (copy), Popover (copy), IconSize (copy), PopoverAlign (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local IsDesktopDevice = DeviceInfo.isDesktopDevice()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	
-	local function v15() --[[ Line: 31 ]]
+	local function v15()
 		-- upvalues: IsDesktopDevice (copy), UseStateResult (copy), UseDispatchResult (copy), ShareLinksNetworking (upval), ShareLinksRodux (upval), Default (upval)
 		if not IsDesktopDevice or not UseStateResult then
 			UseDispatchResult(ShareLinksNetworking.GenerateLink.API({
 				linkType = ShareLinksRodux.Enums.LinkType.ExperienceInvite.rawValue()
-			})):andThen(function(Result) --[[ Line: 40 ]]
+			})):andThen(function(Result)
 				-- upvalues: Default (upval)
 				if Result and Result.responseBody and Result.responseBody.shortUrl and Default then
 					Default:shareUrl({ context = "V1Menu", url = Result.responseBody.shortUrl })
 				end
-			end):catch(function(Err) --[[ Line: 53 ]]
+			end):catch(function(Err)
 				warn(Err)
 			end)
 			
@@ -45,13 +45,13 @@ return function(p1) --[[ Line: 27 ]]
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "row size-full-1400 padding-x-xxlarge gap-medium align-y-center",
 		LayoutOrder = p1.layoutOrder,
-		onActivated = ThrottleFunction(function() --[[ Line: 66 ]]
+		onActivated = ThrottleFunction(function()
 			-- upvalues: v15 (copy), IsDesktopDevice (copy), UseStateResult2 (copy)
 			v15()
 			
 			if IsDesktopDevice then
 				UseStateResult2(true)
-				task.delay(2, function() --[[ Line: 70 ]]
+				task.delay(2, function()
 					-- upvalues: UseStateResult2 (upval)
 					UseStateResult2(false)
 				end)

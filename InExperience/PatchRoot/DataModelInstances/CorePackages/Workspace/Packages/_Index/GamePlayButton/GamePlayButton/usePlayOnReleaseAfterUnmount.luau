@@ -5,14 +5,14 @@ local IsPointInsideBoundsFunction = PressCaptureUtilsModule.isPointInsideBounds
 local GetInputPositionFunction = PressCaptureUtilsModule.getInputPosition
 local IsPressInputFunction = PressCaptureUtilsModule.isPressInput
 
-local function _(p1) --[[ Line: 21 | Named "disconnectGlobalInputEnded" ]]
+local function _(p1)
 	if p1.inputEndedConnection then
 		p1.inputEndedConnection:Disconnect()
 		p1.inputEndedConnection = nil
 	end
 end
 
-local _ = function(p1) --[[ Line: 28 | Named "disconnectInstanceListeners" ]]
+local _ = function(p1)
 	if p1.destroyingConnection then
 		p1.destroyingConnection:Disconnect()
 		p1.destroyingConnection = nil
@@ -23,7 +23,7 @@ local _ = function(p1) --[[ Line: 28 | Named "disconnectInstanceListeners" ]]
 	end
 end
 
-local _ = function(p1) --[[ Line: 39 | Named "clearPressTracking" ]]
+local _ = function(p1)
 	p1.isPressed = false
 	p1.boundsPosition = nil
 	p1.boundsSize = nil
@@ -38,7 +38,7 @@ local _ = function(p1) --[[ Line: 39 | Named "clearPressTracking" ]]
 	end
 end
 
-local _ = function(p1) --[[ Line: 46 | Named "disconnectAllPressCapture" ]]
+local _ = function(p1)
 	p1.isPressed = false
 	p1.boundsPosition = nil
 	p1.boundsSize = nil
@@ -57,7 +57,7 @@ local _ = function(p1) --[[ Line: 46 | Named "disconnectAllPressCapture" ]]
 	end
 end
 
-return function(Current) --[[ Line: 51 ]]
+return function(Current)
 	-- upvalues: ReactModule (copy), GetInputPositionFunction (copy), IsPointInsideBoundsFunction (copy), UserInputService (copy), IsPressInputFunction (copy)
 	local UseRefResult = ReactModule.useRef(Current)
 	UseRefResult.current = Current
@@ -72,7 +72,7 @@ return function(Current) --[[ Line: 51 ]]
 	local UseRefResult2 = ReactModule.useRef(nil)
 	local UseRefResult3 = ReactModule.useRef(nil)
 	local UseRefResult4 = ReactModule.useRef(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 72 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult1 (copy), UseRefResult4 (copy), UseRefResult (copy)
 		local Current = UseRefResult1.current
 		
@@ -98,7 +98,7 @@ return function(Current) --[[ Line: 51 ]]
 		end
 		UseRefResult.current()
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(p1) --[[ Line: 87 ]]
+	local UseResult1 = ReactModule.useCallback(function(p1)
 		-- upvalues: UseRefResult1 (copy), GetInputPositionFunction (upval), IsPointInsideBoundsFunction (upval), UseResult (copy)
 		local Current = UseRefResult1.current
 		
@@ -144,12 +144,12 @@ return function(Current) --[[ Line: 51 ]]
 			end
 		end
 	end, { UseResult })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 103 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult1 (copy), UserInputService (upval), IsPressInputFunction (upval), UseResult1 (copy)
 		local Current = UseRefResult1.current
 		
 		if not Current.inputEndedConnection then
-			Current.inputEndedConnection = UserInputService.InputEnded:Connect(function(Input) --[[ Line: 109 ]]
+			Current.inputEndedConnection = UserInputService.InputEnded:Connect(function(Input)
 				-- upvalues: IsPressInputFunction (upval), UseResult1 (upval)
 				if IsPressInputFunction(Input) then
 					UseResult1(Input)
@@ -161,12 +161,12 @@ return function(Current) --[[ Line: 51 ]]
 			return
 		end
 	end, { UseResult1 })
-	local UseResult3 = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 117 ]]
+	local UseResult3 = ReactModule.useCallback(function(Frame: Frame)
 		-- upvalues: UseRefResult1 (copy), UseResult2 (copy), IsPressInputFunction (upval), UseRefResult4 (copy)
 		if Frame == nil then
-			return function() --[[ Line: 119 ]] end
+			return function() end
 		else
-			local function onPressInstanceDestroyed() --[[ Line: 122 ]]
+			local function onPressInstanceDestroyed()
 				-- upvalues: UseRefResult1 (upval), UseResult2 (upval)
 				if not UseRefResult1.current.isPressed then return end
 				local Current = UseRefResult1.current
@@ -182,7 +182,7 @@ return function(Current) --[[ Line: 51 ]]
 				UseResult2()
 			end
 			
-			local InputBeganConnection = Frame.InputBegan:Connect(function(Input) --[[ Line: 130 ]]
+			local InputBeganConnection = Frame.InputBegan:Connect(function(Input)
 				-- upvalues: IsPressInputFunction (upval), UseRefResult1 (upval), UseRefResult4 (upval), Frame (copy), onPressInstanceDestroyed (copy)
 				if not IsPressInputFunction(Input) then return end
 				local Current = UseRefResult1.current
@@ -200,7 +200,7 @@ return function(Current) --[[ Line: 51 ]]
 					Current.instanceInputEndedConnection = nil
 				end
 				Current.destroyingConnection = Frame.Destroying:Connect(onPressInstanceDestroyed)
-				Current.instanceInputEndedConnection = Frame.InputEnded:Connect(function(Input) --[[ Line: 143 ]]
+				Current.instanceInputEndedConnection = Frame.InputEnded:Connect(function(Input)
 					-- upvalues: IsPressInputFunction (upval), UseRefResult1 (upval)
 					if not IsPressInputFunction(Input) then return end
 					if UseRefResult1.current.isPressed then
@@ -225,13 +225,13 @@ return function(Current) --[[ Line: 51 ]]
 				end)
 			end)
 			
-			return function() --[[ Line: 153 ]]
+			return function()
 				-- upvalues: InputBeganConnection (copy)
 				InputBeganConnection:Disconnect()
 			end
 		end
 	end, { UseResult2 })
-	local UseResult4 = ReactModule.useCallback(function(Gui) --[[ Line: 158 ]]
+	local UseResult4 = ReactModule.useCallback(function(Gui)
 		-- upvalues: UseRefResult2 (copy), UseResult3 (copy)
 		if UseRefResult2.current then
 			UseRefResult2.current()
@@ -241,7 +241,7 @@ return function(Current) --[[ Line: 51 ]]
 			UseRefResult2.current = UseResult3(Gui)
 		end
 	end, { UseResult3 })
-	local UseResult5 = ReactModule.useCallback(function(Gui) --[[ Line: 169 ]]
+	local UseResult5 = ReactModule.useCallback(function(Gui)
 		-- upvalues: UseRefResult3 (copy), UseResult3 (copy)
 		if UseRefResult3.current then
 			UseRefResult3.current()
@@ -251,9 +251,9 @@ return function(Current) --[[ Line: 51 ]]
 			UseRefResult3.current = UseResult3(Gui)
 		end
 	end, { UseResult3 })
-	ReactModule.useEffect(function() --[[ Line: 180 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult2 (copy), UseRefResult3 (copy), UseRefResult1 (copy), UseResult2 (copy)
-		return function() --[[ Line: 181 ]]
+		return function()
 			-- upvalues: UseRefResult2 (upval), UseRefResult3 (upval), UseRefResult1 (upval), UseResult2 (upval)
 			if UseRefResult2.current then
 				UseRefResult2.current()

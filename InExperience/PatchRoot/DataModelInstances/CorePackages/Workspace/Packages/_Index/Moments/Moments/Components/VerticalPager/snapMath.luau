@@ -1,5 +1,5 @@
 ﻿local SnapMathModule = {
-	advanceCriticalDampedSpring = function(p1, p2, p3, p4, p5: number) --[[ Line: 25 ]]
+	advanceCriticalDampedSpring = function(p1, p2, p3, p4, p5: number)
 		local v1 = 6.283185307179586 * p5
 		local v2 = p1 - p3
 		local v3 = v1 * p4
@@ -8,18 +8,18 @@
 		
 		return p3 + (v2 + v4 * p4) * Exponential, (p2 - v4 * v3) * Exponential
 	end,
-	offsetForIndex = function(p1: number, p2) --[[ Line: 45 ]]
+	offsetForIndex = function(p1: number, p2)
 		return (p1 - 1) * p2
 	end,
-	clampIndex = function(Value: number, MaxValue: number): number --[[ Line: 50 ]]
+	clampIndex = function(Value: number, MaxValue: number): number
 		return if MaxValue <= 0 then 1 else math.clamp(Value, 1, MaxValue)
 	end,
-	projectSnapOffset = function(p1, p2, p3) --[[ Line: 62 ]]
+	projectSnapOffset = function(p1, p2, p3)
 		return p1 - p2 * p3
 	end
 }
 
-function SnapMathModule.resolveSnapIndex(p1, p2, p3: number, p4: number, p5) --[[ Line: 77 ]]
+function SnapMathModule.resolveSnapIndex(p1, p2, p3: number, p4: number, p5)
 	-- upvalues: SnapMathModule (copy)
 	if p4 <= 0 or p3 <= 0 then
 		return 1
@@ -32,7 +32,7 @@ function SnapMathModule.resolveSnapIndex(p1, p2, p3: number, p4: number, p5) --[
 	end
 end
 
-function SnapMathModule.getVisibleWindow(p1, p2, p3: number) --[[ Line: 109 ]]
+function SnapMathModule.getVisibleWindow(p1, p2, p3: number)
 	-- upvalues: SnapMathModule (copy)
 	if p3 <= 0 then
 		return { startIndex = 1, endIndex = 0 }
@@ -46,21 +46,21 @@ function SnapMathModule.getVisibleWindow(p1, p2, p3: number) --[[ Line: 109 ]]
 	end
 end
 
-function SnapMathModule.reindexAfterRemoval(p1: number, p2, p3: number) --[[ Line: 130 ]]
+function SnapMathModule.reindexAfterRemoval(p1: number, p2, p3: number)
 	-- upvalues: SnapMathModule (copy)
 	return if p3 <= 0 then 1 elseif p2 < p1 then SnapMathModule.clampIndex(p1 - 1, p3) else SnapMathModule.clampIndex(p1, p3)
 end
 
-function SnapMathModule.neighborForRemoval(p1: number, p2): number --[[ Line: 145 ]]
+function SnapMathModule.neighborForRemoval(p1: number, p2): number
 	return if p1 < p2 then p1 + 1 else p1 - 1
 end
 
-function SnapMathModule.nearestIndexForOffset(p1, p2: number, p3: number) --[[ Line: 155 ]]
+function SnapMathModule.nearestIndexForOffset(p1, p2: number, p3: number)
 	-- upvalues: SnapMathModule (copy)
 	return if p3 <= 0 then 1 elseif p2 <= 0 then 1 else SnapMathModule.clampIndex(math.round(p1 / p2) + 1, p3)
 end
 
-function SnapMathModule.resolveSettleIndex(p1: number, p2, p3: number, p4: number, p5, p6: number) --[[ Line: 178 ]]
+function SnapMathModule.resolveSettleIndex(p1: number, p2, p3: number, p4: number, p5, p6: number)
 	-- upvalues: SnapMathModule (copy)
 	if p4 <= 0 or p3 <= 0 then
 		return SnapMathModule.clampIndex(p1, p4)

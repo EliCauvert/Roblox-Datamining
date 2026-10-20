@@ -31,48 +31,48 @@ else
 		isGamepadNavigationDialogOpen = not FFlagGamepadNavigationDialogABTestModule and nil,
 		keepOutAreas = {}
 	}, {
-		[if FFlagTopBarSignalizeMenuOpen then "" else SetMenuOpenModule.name] = if FFlagTopBarSignalizeMenuOpen then nil else function(p1, p2) --[[ Line: 51 ]]
+		[if FFlagTopBarSignalizeMenuOpen then "" else SetMenuOpenModule.name] = if FFlagTopBarSignalizeMenuOpen then nil else function(p1, p2)
 			-- upvalues: CryoModule (copy)
 			return CryoModule.Dictionary.join(p1, {
 				menuOpen = p2.menuOpen,
 				isGamepadMenuOpen = (p1.menuOpen or not p2.menuOpen) and p1.isGamepadMenuOpen
 			})
 		end,
-		[require(Actions.SetTopBarEnabled).name] = function(p1, p2) --[[ Line: 64 ]]
+		[require(Actions.SetTopBarEnabled).name] = function(p1, p2)
 			-- upvalues: CryoModule (copy)
 			return CryoModule.Dictionary.join(p1, { topbarEnabled = p2.enabled })
 		end,
-		[require(Actions.SetSmallTouchDevice).name] = function(p1, p2) --[[ Line: 70 ]]
+		[require(Actions.SetSmallTouchDevice).name] = function(p1, p2)
 			-- upvalues: CryoModule (copy)
 			return CryoModule.Dictionary.join(p1, { isSmallTouchDevice = p2.isSmallTouchDevice })
 		end,
-		[if FFlagTopBarSignalizeScreenSize then "" else SetScreenSizeModule.name] = if FFlagTopBarSignalizeScreenSize then nil else function(p1, p2) --[[ Line: 76 ]]
+		[if FFlagTopBarSignalizeScreenSize then "" else SetScreenSizeModule.name] = if FFlagTopBarSignalizeScreenSize then nil else function(p1, p2)
 			-- upvalues: CryoModule (copy)
 			return CryoModule.Dictionary.join(p1, { screenSize = p2.screenSize })
 		end,
-		[if FFlagTopBarSignalizeMenuOpen then "" else SetInspectMenuOpenModule.name] = if FFlagTopBarSignalizeMenuOpen then nil else function(p1, p2) --[[ Line: 82 ]]
+		[if FFlagTopBarSignalizeMenuOpen then "" else SetInspectMenuOpenModule.name] = if FFlagTopBarSignalizeMenuOpen then nil else function(p1, p2)
 			-- upvalues: CryoModule (copy)
 			return CryoModule.Dictionary.join(p1, { inspectMenuOpen = p2.inspectMenuOpen })
 		end,
-		[require(Actions.SetGamepadMenuOpen).name] = function(p1, p2) --[[ Line: 88 ]]
+		[require(Actions.SetGamepadMenuOpen).name] = function(p1, p2)
 			-- upvalues: CryoModule (copy), FFlagGamepadNavigationDialogABTestModule (copy)
 			return CryoModule.Dictionary.join(p1, {
 				isGamepadMenuOpen = p2.open,
 				isGamepadNavigationDialogOpen = not FFlagGamepadNavigationDialogABTestModule and nil
 			})
 		end,
-		[require(Actions.SetGamepadNavigationDialogOpen).name] = if FFlagGamepadNavigationDialogABTestModule then function(p1, p2) --[[ Line: 96 ]]
+		[require(Actions.SetGamepadNavigationDialogOpen).name] = if FFlagGamepadNavigationDialogABTestModule then function(p1, p2)
 			-- upvalues: CryoModule (copy)
 			return CryoModule.Dictionary.join(p1, { isGamepadNavigationDialogOpen = p2.open })
 		end else nil,
-		[if FFlagTopBarSignalizeKeepOutAreas then "" else SetKeepOutAreaModule.name] = if FFlagTopBarSignalizeKeepOutAreas then nil else function(p1, p2) --[[ Line: 103 ]]
+		[if FFlagTopBarSignalizeKeepOutAreas then "" else SetKeepOutAreaModule.name] = if FFlagTopBarSignalizeKeepOutAreas then nil else function(p1, p2)
 			-- upvalues: CryoModule (copy)
 			local Copy = table.clone(p1.keepOutAreas)
 			Copy[p2.id] = { size = p2.size, position = p2.position }
 			
 			return CryoModule.Dictionary.join(p1, { keepOutAreas = Copy })
 		end,
-		[if FFlagTopBarSignalizeKeepOutAreas then "" else RemoveKeepOutAreaModule.name] = if FFlagTopBarSignalizeKeepOutAreas then nil else function(p1, p2) --[[ Line: 115 ]]
+		[if FFlagTopBarSignalizeKeepOutAreas then "" else RemoveKeepOutAreaModule.name] = if FFlagTopBarSignalizeKeepOutAreas then nil else function(p1, p2)
 			-- upvalues: CryoModule (copy)
 			local Copy = table.clone(p1.keepOutAreas)
 			Copy[p2.id] = nil

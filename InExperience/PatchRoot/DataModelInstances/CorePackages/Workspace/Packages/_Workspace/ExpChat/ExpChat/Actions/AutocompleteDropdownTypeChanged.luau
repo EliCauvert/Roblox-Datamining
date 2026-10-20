@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("ExpChat").Parent.Rodux).makeActionCreator(script.Name, function(AutocompleteType) --[[ Line: 9 ]]
+﻿return require(script:FindFirstAncestor("ExpChat").Parent.Rodux).makeActionCreator(script.Name, function(AutocompleteType)
 	return { autocompleteType = AutocompleteType }
 end)

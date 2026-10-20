@@ -23,19 +23,19 @@ local Signal = require(Parent.Signals).createSignal({
 })
 local FIntVideoPlaybackDetectorScanDebounceInMillisecondsRatio = if FFlagVideoPlaybackDetectorCancelPendingScanTask then FIntVideoPlaybackDetectorScanDebounceInMilliseconds / 1000 else 0.5
 
-return function(p1) --[[ Line: 69 | Named "VideoViewportPlaybackDetector" ]]
+return function(p1)
 	-- upvalues: FFlagEnableOnScreenAPIIntegration (copy), UseIsRouteOnScreen (copy), UseNavigationFocusFunction (copy), UseSelectorFunction (copy), ReactModule (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy), SignalsReactModule (copy), Signal (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppEdpMediaGalleryFullScreen (copy), VideoEndReason (copy), AppLifecycleObserverService (copy), ExperienceService (copy), FIntVideoPlaybackDetectorScanDebounceInMillisecondsRatio (copy), FFlagVideoPlaybackDetectorCancelPendingScanTask (copy)
 	local UseIsRouteOnScreenResult = if FFlagEnableOnScreenAPIIntegration then UseIsRouteOnScreen() else UseNavigationFocusFunction()
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 72 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		return p2.ScreenSize
 	end)
-	local UseSelectorResult1 = UseSelectorFunction(function(p2) --[[ Line: 76 ]]
+	local UseSelectorResult1 = UseSelectorFunction(function(p2)
 		return p2.TopBar.topBarHeight
 	end)
-	local UseSelectorResult2 = UseSelectorFunction(function(p2) --[[ Line: 80 ]]
+	local UseSelectorResult2 = UseSelectorFunction(function(p2)
 		return p2.GlobalGuiInset
 	end)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 84 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseSelectorResult1 (copy), UseSelectorResult (copy), UseSelectorResult2 (copy)
 		return {
 			min = Vector2.new(0, UseSelectorResult1),
@@ -50,7 +50,7 @@ return function(p1) --[[ Line: 69 | Named "VideoViewportPlaybackDetector" ]]
 	local UseSignalStateResult = SignalsReactModule.useSignalState(if FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback and p1.viewportVideoAutoplayController then p1.viewportVideoAutoplayController:getWinnerStateForCoordinator(p1.videoPlaybackCoordinator) elseif p1.viewportVideoAutoplayController then p1.viewportVideoAutoplayController.getWinnerState else Signal)
 	
 	if FFlagLuaAppOneByTwoHoverIdleAutoplay then
-		ReactModule.useEffect(function() --[[ Line: 105 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p1 (copy)
 			local ViewportVideoAutoplayController = p1.viewportVideoAutoplayController
 			local Current = p1.itemFrameRef.current
@@ -58,7 +58,7 @@ return function(p1) --[[ Line: 69 | Named "VideoViewportPlaybackDetector" ]]
 			if not ViewportVideoAutoplayController or not ViewportVideoAutoplayController:isUserIntentWithSelectiveAutoplay() or not Current then return end
 			ViewportVideoAutoplayController:setCandidateUserIntent(Current, p1.hasVideoPlaybackUserIntent == true)
 			
-			return function() --[[ Line: 114 ]]
+			return function()
 				-- upvalues: ViewportVideoAutoplayController (copy), Current (copy)
 				ViewportVideoAutoplayController:setCandidateUserIntent(Current, false)
 			end
@@ -68,7 +68,7 @@ return function(p1) --[[ Line: 69 | Named "VideoViewportPlaybackDetector" ]]
 			p1.hasVideoPlaybackUserIntent
 		})
 	end
-	ReactModule.useEffect(function() --[[ Line: 127 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseSignalStateResult (copy), UseIsRouteOnScreenResult (copy), FFlagLuaAppEdpMediaGalleryFullScreen (upval), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (upval), IsAdsPlaybackCoordinatorMatch (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (upval), VideoEndReason (upval)
 		local ViewportVideoAutoplayController = p1.viewportVideoAutoplayController
 		
@@ -106,27 +106,27 @@ return function(p1) --[[ Line: 69 | Named "VideoViewportPlaybackDetector" ]]
 		UseIsRouteOnScreenResult, UseSignalStateResult,
 		if FFlagLuaAppEdpMediaGalleryFullScreen then p1.isItemOccluded else nil
 	})
-	ReactModule.useEffect(function() --[[ Line: 175 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), AppLifecycleObserverService (upval), ExperienceService (upval)
 		local ViewportVideoAutoplayController = p1.viewportVideoAutoplayController
 		
 		if not ViewportVideoAutoplayController then return end
-		local OnUnhideConnection = AppLifecycleObserverService.OnUnhide:Connect(function() --[[ Line: 181 ]]
+		local OnUnhideConnection = AppLifecycleObserverService.OnUnhide:Connect(function()
 			-- upvalues: ViewportVideoAutoplayController (copy)
 			ViewportVideoAutoplayController:scheduleUpdateWinner("Y", nil, true)
 		end)
-		local RegisterForExperienceLeaveResult = ExperienceService:RegisterForExperienceLeave(function() --[[ Line: 186 ]]
+		local RegisterForExperienceLeaveResult = ExperienceService:RegisterForExperienceLeave(function()
 			-- upvalues: ViewportVideoAutoplayController (copy)
 			ViewportVideoAutoplayController:scheduleUpdateWinner("Y", nil, true)
 		end)
 		
-		return function() --[[ Line: 191 ]]
+		return function()
 			-- upvalues: OnUnhideConnection (copy), RegisterForExperienceLeaveResult (copy)
 			OnUnhideConnection:Disconnect()
 			RegisterForExperienceLeaveResult:Disconnect()
 		end
 	end, { p1.viewportVideoAutoplayController })
-	ReactModule.useEffect(function() --[[ Line: 200 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseIsRouteOnScreenResult (copy), FFlagLuaAppEdpMediaGalleryFullScreen (upval), UseMemoResult (copy), VideoEndReason (upval), FIntVideoPlaybackDetectorScanDebounceInMillisecondsRatio (upval), FFlagVideoPlaybackDetectorCancelPendingScanTask (upval), AppLifecycleObserverService (upval), ExperienceService (upval)
 		if p1.viewportVideoAutoplayController ~= nil then return end
 		local List = {}
@@ -137,7 +137,7 @@ return function(p1) --[[ Line: 69 | Named "VideoViewportPlaybackDetector" ]]
 			local CurrentTime = nil
 			local v2 = nil
 			
-			local function requestPlaybackIfEligible() --[[ Line: 213 ]]
+			local function requestPlaybackIfEligible()
 				-- upvalues: CurrentTime (ref), p1 (upval), UseIsRouteOnScreenResult (upval), FFlagLuaAppEdpMediaGalleryFullScreen (upval), UseMemoResult (upval), VideoEndReason (upval)
 				CurrentTime = tick()
 				
@@ -150,7 +150,7 @@ return function(p1) --[[ Line: 69 | Named "VideoViewportPlaybackDetector" ]]
 				end
 			end
 			
-			local function onItemFrameLayoutChange() --[[ Line: 231 ]]
+			local function onItemFrameLayoutChange()
 				-- upvalues: v2 (ref), CurrentTime (ref), FIntVideoPlaybackDetectorScanDebounceInMillisecondsRatio (upval), requestPlaybackIfEligible (copy), FFlagVideoPlaybackDetectorCancelPendingScanTask (upval), v1 (ref)
 				if v2 ~= nil then return end
 				local Delay = 0
@@ -160,7 +160,7 @@ return function(p1) --[[ Line: 69 | Named "VideoViewportPlaybackDetector" ]]
 					Delay = v2 - tick()
 				end
 				if Delay > 0 then
-					local DelayedThread = task.delay(Delay, function() --[[ Line: 244 ]]
+					local DelayedThread = task.delay(Delay, function()
 						-- upvalues: v2 (upval), requestPlaybackIfEligible (upval)
 						v2 = nil
 						requestPlaybackIfEligible()
@@ -178,7 +178,7 @@ return function(p1) --[[ Line: 69 | Named "VideoViewportPlaybackDetector" ]]
 			end
 			
 			requestPlaybackIfEligible()
-			local RegisterForExperienceLeaveResult = ExperienceService:RegisterForExperienceLeave(function() --[[ Line: 267 ]]
+			local RegisterForExperienceLeaveResult = ExperienceService:RegisterForExperienceLeave(function()
 				-- upvalues: requestPlaybackIfEligible (copy)
 				requestPlaybackIfEligible()
 			end)
@@ -186,13 +186,13 @@ return function(p1) --[[ Line: 69 | Named "VideoViewportPlaybackDetector" ]]
 				Current:GetPropertyChangedSignal("AbsolutePosition"):Connect(onItemFrameLayoutChange),
 				Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(onItemFrameLayoutChange)
 			}
-			table.insert(List, (AppLifecycleObserverService.OnUnhide:Connect(function() --[[ Line: 261 ]]
+			table.insert(List, (AppLifecycleObserverService.OnUnhide:Connect(function()
 				-- upvalues: requestPlaybackIfEligible (copy)
 				requestPlaybackIfEligible()
 			end)))
 			table.insert(List, RegisterForExperienceLeaveResult)
 		end
-		return function() --[[ Line: 280 ]]
+		return function()
 			-- upvalues: FFlagVideoPlaybackDetectorCancelPendingScanTask (upval), v1 (ref), List (ref)
 			if FFlagVideoPlaybackDetectorCancelPendingScanTask and v1 then
 				task.cancel(v1)

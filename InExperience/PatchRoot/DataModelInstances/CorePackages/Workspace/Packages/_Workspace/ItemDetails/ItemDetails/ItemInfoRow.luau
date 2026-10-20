@@ -15,7 +15,7 @@ local IconsNavigationPushRightSmall = UIBloxModule.App.ImageSet.Images["icons/na
 local _Vector2 = Vector2.new(14, 14)
 local _UDim2 = UDim2.new(0.3, 0, 0.8, 0)
 
-return (ReactModule.forwardRef(function(Label, Ref) --[[ Line: 49 ]]
+return (ReactModule.forwardRef(function(Label, Ref)
 	-- upvalues: UseStyleFunction (copy), UseSelectionCursorFunction (copy), CursorKind (copy), _Vector2 (copy), Focusable (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), VerifiedBadgesModule (copy), Skeleton (copy), _UDim2 (copy), ImageSetLabel (copy), IconsNavigationPushRightSmall (copy)
 	local LayoutOrder = Label.LayoutOrder
 	local InfoName = Label.infoName

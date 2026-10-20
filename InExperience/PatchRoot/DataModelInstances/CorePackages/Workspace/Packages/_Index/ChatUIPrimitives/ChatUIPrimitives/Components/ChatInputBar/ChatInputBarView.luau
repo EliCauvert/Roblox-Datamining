@@ -14,21 +14,21 @@ local UseChatAutocompleteEngineModule = require(script.Parent.Autocomplete.useCh
 local ExpressionTrayViewModule = require(ChatUIPrimitives.Components.ExpressionTray.ExpressionTrayView)
 local UseExpressionTrayModule = require(ChatUIPrimitives.Hooks.useExpressionTray)
 
-local function _(p1: number, p2): number --[[ Line: 28 | Named "fade" ]]
+local function _(p1: number, p2): number
 	return p1 + p2 * (1 - p1)
 end
 
-local function deriveTransparency(p1: number, TransparencyValue) --[[ Line: 32 ]]
+local function deriveTransparency(p1: number, TransparencyValue)
 	-- upvalues: ReactIsModule (copy)
-	return if ReactIsModule.isBinding(TransparencyValue) then TransparencyValue:map(function(p2): number --[[ Line: 37 ]]
+	return if ReactIsModule.isBinding(TransparencyValue) then TransparencyValue:map(function(p2): number
 		-- upvalues: p1 (copy)
 		return p1 + p2 * (1 - p1)
 	end) else p1 + TransparencyValue * (1 - p1)
 end
 
-local function deriveBackgroundStyle(SurfaceColor, p1: number, TransparencyValue) --[[ Line: 47 ]]
+local function deriveBackgroundStyle(SurfaceColor, p1: number, TransparencyValue)
 	-- upvalues: ReactIsModule (copy)
-	return if ReactIsModule.isBinding(TransparencyValue) then TransparencyValue:map(function(p2) --[[ Line: 53 ]]
+	return if ReactIsModule.isBinding(TransparencyValue) then TransparencyValue:map(function(p2)
 		-- upvalues: SurfaceColor (copy), p1 (copy)
 		return { Color3 = SurfaceColor, Transparency = p1 + p2 * (1 - p1) }
 	end) else {
@@ -37,14 +37,14 @@ local function deriveBackgroundStyle(SurfaceColor, p1: number, TransparencyValue
 	}
 end
 
-local _ = function(Tbl, Variant) --[[ Line: 62 | Named "withVariant" ]]
+local _ = function(Tbl, Variant)
 	local Copy = table.clone(Tbl)
 	Copy.variant = Variant
 	
 	return Copy
 end
 
-local function renderDropdown(p1) --[[ Line: 149 ]]
+local function renderDropdown(p1)
 	-- upvalues: ReactModule (copy), ChatAutocompleteDropdownModule (copy)
 	if p1.props.autocomplete then
 		local Autocomplete = p1.autocomplete
@@ -65,7 +65,7 @@ local function renderDropdown(p1) --[[ Line: 149 ]]
 	end
 end
 
-local function renderSideChip(p1) --[[ Line: 167 ]]
+local function renderSideChip(p1)
 	-- upvalues: ReactModule (copy), ChannelChipModule (copy)
 	return ReactModule.createElement(ChannelChipModule, {
 		transparency = p1.transparencyValue,
@@ -76,7 +76,7 @@ local function renderSideChip(p1) --[[ Line: 167 ]]
 	})
 end
 
-local function renderSendButton(p1) --[[ Line: 177 ]]
+local function renderSendButton(p1)
 	-- upvalues: ReactModule (copy), FoundationModule (copy)
 	return ReactModule.createElement(FoundationModule.IconButton, {
 		isCircular = true,
@@ -88,12 +88,12 @@ local function renderSendButton(p1) --[[ Line: 177 ]]
 	})
 end
 
-local function renderFallbackDisabledOverlay(p1) --[[ Line: 190 ]]
+local function renderFallbackDisabledOverlay(p1)
 	-- upvalues: FFlagExpChatEnableFriendsTab (copy), ReactModule (copy), FoundationModule (copy)
 	return if FFlagExpChatEnableFriendsTab or p1.canChat or not p1.props.disabledOverlay then nil else ReactModule.createElement(FoundationModule.View, { ZIndex = 5, Size = UDim2.fromScale(1, 1) }, { Overlay = p1.props.disabledOverlay })
 end
 
-local function renderLegacy(p1) --[[ Line: 202 ]]
+local function renderLegacy(p1)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), renderDropdown (copy), deriveBackgroundStyle (copy), ReactIsModule (copy), renderSideChip (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), renderSendButton (copy), renderFallbackDisabledOverlay (copy)
 	local Tokens = p1.tokens
 	local Props = p1.props
@@ -101,7 +101,7 @@ local function renderLegacy(p1) --[[ Line: 202 ]]
 	local NoHasLeadingAction = not p1.shouldReplaceDisabledContent and (not p1.hasLeadingAction or not p1.isEmpty and p1.canChat)
 	local XOffset: number = if p1.showLeadingAction then 36 else 0
 	local NewSendButtonContainerWidth: number = if NoHasLeadingAction then p1.sendButtonContainerWidth + 6 else 0
-	local MapResult = p1.channelChipWidth:map(function(p2): UDim2 --[[ Line: 210 ]]
+	local MapResult = p1.channelChipWidth:map(function(p2): UDim2
 		-- upvalues: Tokens (copy)
 		return UDim2.new(1, -(p2 + Tokens.Size.Size_200), 0, 0)
 	end)
@@ -132,7 +132,7 @@ local function renderLegacy(p1) --[[ Line: 202 ]]
 		backgroundStyle = deriveBackgroundStyle(p1.surfaceColor, 0.2, p1.transparencyValue),
 		stroke = {
 			Color = Tokens.Color.Stroke.Default.Color3,
-			Transparency = if ReactIsModule.isBinding(TransparencyValue) then TransparencyValue:map(function(p2): number --[[ Line: 37 ]]
+			Transparency = if ReactIsModule.isBinding(TransparencyValue) then TransparencyValue:map(function(p2): number
 				-- upvalues: Transparency (copy)
 				return Transparency + p2 * (1 - Transparency)
 			end) else Transparency + TransparencyValue * (1 - Transparency)
@@ -188,7 +188,7 @@ local function renderLegacy(p1) --[[ Line: 202 ]]
 			
 			if ReactIsModule.isBinding(TransparencyValue1) then
 				local v1 = 0.5
-				MapResult1 = TransparencyValue1:map(function(p2): number --[[ Line: 37 ]]
+				MapResult1 = TransparencyValue1:map(function(p2): number
 					-- upvalues: v1 (copy)
 					return v1 + p2 * (1 - v1)
 				end)
@@ -231,7 +231,7 @@ local function renderLegacy(p1) --[[ Line: 202 ]]
 			
 			if ReactIsModule.isBinding(TransparencyValue2) then
 				local v3 = 0
-				MapResult2 = TransparencyValue2:map(function(p2): number --[[ Line: 37 ]]
+				MapResult2 = TransparencyValue2:map(function(p2): number
 					-- upvalues: v3 (copy)
 					return v3 + p2 * (1 - v3)
 				end)
@@ -280,14 +280,14 @@ local function renderLegacy(p1) --[[ Line: 202 ]]
 	return CreateElementFunction6(View, config, config1)
 end
 
-local function renderComposer(p1) --[[ Line: 342 ]]
+local function renderComposer(p1)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), renderDropdown (copy), renderSideChip (copy), ReactIsModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), renderSendButton (copy), renderFallbackDisabledOverlay (copy)
 	local Tokens = p1.tokens
 	local Props = p1.props
 	local FontSize = Tokens.Typography.BodyMedium.FontSize
 	local NoShouldReplaceDisabledContent = not p1.shouldReplaceDisabledContent
 	local NewSendButtonContainerWidth = p1.sendButtonContainerWidth + 6
-	local MapResult = p1.channelChipWidth:map(function(p2: number): UDim2 --[[ Line: 348 ]]
+	local MapResult = p1.channelChipWidth:map(function(p2: number): UDim2
 		-- upvalues: Tokens (copy)
 		return UDim2.new(1, -(if p2 > 0 then p2 + Tokens.Size.Size_200 else 0), 0, 0)
 	end)
@@ -356,7 +356,7 @@ local function renderComposer(p1) --[[ Line: 342 ]]
 			
 			if ReactIsModule.isBinding(TransparencyValue) then
 				local v1 = 0.5
-				MapResult1 = TransparencyValue:map(function(p2): number --[[ Line: 37 ]]
+				MapResult1 = TransparencyValue:map(function(p2): number
 					-- upvalues: v1 (copy)
 					return v1 + p2 * (1 - v1)
 				end)
@@ -424,7 +424,7 @@ local function renderComposer(p1) --[[ Line: 342 ]]
 	return CreateElementFunction(View, config, config1)
 end
 
-return ReactModule.memo(function(Props) --[[ Line: 474 | Named "ChatInputBarView" ]]
+return ReactModule.memo(function(Props)
 	-- upvalues: FoundationModule (copy), FFlagExpChatEnableFriendsTab (copy), ReactModule (copy), ReactIsModule (copy), deriveBackgroundStyle (copy), deriveTransparency (copy), UseChatAutocompleteEngineModule (copy), FFlagChatInputBarGuardInvalidUtf8 (copy), GetTextLengthIfValidUtf8Module (copy), UseExpressionTrayModule (copy), ExpressionTrayViewModule (copy), renderComposer (copy), renderLegacy (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local ThemedColors = Props.themedColors
@@ -439,14 +439,14 @@ return ReactModule.memo(function(Props) --[[ Line: 474 | Named "ChatInputBarView
 	local MaximumCharacterLimit = Props.maximumCharacterLimit
 	local HasDisabledOverlay: boolean = FFlagExpChatEnableFriendsTab and (not CanLocalUserChat and Props.disabledOverlay ~= nil)
 	local PillStrokeStyle = Props.pillStrokeStyle
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 500 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CanLocalUserChat (copy), PillStrokeStyle (copy), TransparencyValue (copy), ReactIsModule (upval)
 		if CanLocalUserChat or PillStrokeStyle ~= nil then
 			return TransparencyValue
 		elseif ReactIsModule.isBinding(TransparencyValue) then
 			local v1 = 0.5
 			
-			return (TransparencyValue:map(function(p1): number --[[ Line: 37 ]]
+			return (TransparencyValue:map(function(p1): number
 				-- upvalues: v1 (copy)
 				return v1 + p1 * (1 - v1)
 			end))
@@ -454,18 +454,18 @@ return ReactModule.memo(function(Props) --[[ Line: 474 | Named "ChatInputBarView
 			return TransparencyValue * 0.5 + 0.5
 		end
 	end, { CanLocalUserChat, TransparencyValue, PillStrokeStyle })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 505 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: deriveBackgroundStyle (upval), SurfaceColor3 (copy), UseMemoResult (copy)
 		return deriveBackgroundStyle(SurfaceColor3, 0.2, UseMemoResult)
 	end, { SurfaceColor3, UseMemoResult })
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 508 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: PillStrokeStyle (copy), TransparencyValue (copy), ReactIsModule (upval), UseTokensResult (copy), UseMemoResult (copy)
 		if PillStrokeStyle then
 			local Transparency = PillStrokeStyle.Transparency or 0
 			
 			return {
 				Color = PillStrokeStyle.Color3,
-				Transparency = if ReactIsModule.isBinding(TransparencyValue) then TransparencyValue:map(function(p1): number --[[ Line: 37 ]]
+				Transparency = if ReactIsModule.isBinding(TransparencyValue) then TransparencyValue:map(function(p1): number
 					-- upvalues: Transparency (copy)
 					return Transparency + p1 * (1 - Transparency)
 				end) else Transparency + TransparencyValue * (1 - Transparency)
@@ -475,7 +475,7 @@ return ReactModule.memo(function(Props) --[[ Line: 474 | Named "ChatInputBarView
 			
 			return {
 				Color = UseTokensResult.Color.Stroke.Default.Color3,
-				Transparency = if ReactIsModule.isBinding(UseMemoResult) then UseMemoResult:map(function(p1): number --[[ Line: 37 ]]
+				Transparency = if ReactIsModule.isBinding(UseMemoResult) then UseMemoResult:map(function(p1): number
 					-- upvalues: Transparency1 (copy)
 					return Transparency1 + p1 * (1 - Transparency1)
 				end) else Transparency1 + UseMemoResult * (1 - Transparency1)
@@ -487,7 +487,7 @@ return ReactModule.memo(function(Props) --[[ Line: 474 | Named "ChatInputBarView
 		PillStrokeStyle,
 		TransparencyValue
 	})
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 520 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: deriveTransparency (upval), TransparencyValue (copy)
 		return deriveTransparency(0, TransparencyValue)
 	end, { TransparencyValue })
@@ -496,16 +496,16 @@ return ReactModule.memo(function(Props) --[[ Line: 474 | Named "ChatInputBarView
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseChatAutocompleteEngineModuleResult = UseChatAutocompleteEngineModule(TextBoxRef, Props.autocomplete)
 	local UseRefResult11 = ReactModule.useRef(Props.defaultValue or "")
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean --[[ Line: 529 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean
 		-- upvalues: Props (copy)
 		return (Props.defaultValue or "") == ""
 	end)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 535 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseBindingResult2 (copy)
 		UseBindingResult2(Frame.AbsoluteSize.X)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 539 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: TextBoxRef (copy), OnSendFunction (copy), UseStateResult2 (copy)
 		local Current = TextBoxRef.current
 		local Text = if Current then Current.Text else ""
@@ -518,7 +518,7 @@ return ReactModule.memo(function(Props) --[[ Line: 474 | Named "ChatInputBarView
 		end
 		UseStateResult2(true)
 	end, { OnSendFunction, TextBoxRef })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 552 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: TextBoxRef (copy)
 		local Current = TextBoxRef.current
 		
@@ -526,7 +526,7 @@ return ReactModule.memo(function(Props) --[[ Line: 474 | Named "ChatInputBarView
 			Current:ReleaseFocus(true)
 		end
 	end, { TextBoxRef })
-	local UseResult3 = ReactModule.useCallback(function(p1) --[[ Line: 559 ]]
+	local UseResult3 = ReactModule.useCallback(function(p1)
 		-- upvalues: MaximumCharacterLimit (copy), FFlagChatInputBarGuardInvalidUtf8 (upval), GetTextLengthIfValidUtf8Module (upval), UseRefResult11 (copy), UseStateResult2 (copy), OnChangeFunction (copy), UseChatAutocompleteEngineModuleResult (copy)
 		local Text = p1.Text
 		
@@ -564,13 +564,13 @@ return ReactModule.memo(function(Props) --[[ Line: 474 | Named "ChatInputBarView
 		MaximumCharacterLimit,
 		UseChatAutocompleteEngineModuleResult.onTextChanged
 	})
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 591 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: Props (copy)
 		if Props.onFocusGained then
 			Props.onFocusGained()
 		end
 	end, { Props.onFocusGained })
-	local UseResult5 = ReactModule.useCallback(function(_, p1) --[[ Line: 598 ]]
+	local UseResult5 = ReactModule.useCallback(function(_, p1)
 		-- upvalues: TextBoxRef (copy), UseChatAutocompleteEngineModuleResult (copy), UseResult1 (copy), Props (copy)
 		local Current = TextBoxRef.current
 		
@@ -586,7 +586,7 @@ return ReactModule.memo(function(Props) --[[ Line: 474 | Named "ChatInputBarView
 		TextBoxRef,
 		UseChatAutocompleteEngineModuleResult.interceptSend
 	})
-	ReactModule.useEffect(function() --[[ Line: 617 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: CanLocalUserChat (copy), UseStateResult2 (copy)
 		if not CanLocalUserChat then
 			UseStateResult2(true)

@@ -1,4 +1,4 @@
-﻿function identityFunc(p1) --[[ Line: 12 ]]
+﻿function identityFunc(p1)
 	return p1
 end
 

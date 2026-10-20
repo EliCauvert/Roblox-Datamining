@@ -6,16 +6,16 @@ if require(Parent.SharedFlags).GetFFlagMigrateRoactUtilsToReactUtils() then
 else
 	local ReactModule = require(Parent.React)
 	
-	return function(Signal, Callback) --[[ Line: 17 | Named "useExternalEvent" ]]
+	return function(Signal, Callback)
 		-- upvalues: ReactModule (copy)
-		ReactModule.useEffect(function() --[[ Line: 18 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: Signal (copy), Callback (copy)
 			if Signal == nil then
 				return nil
 			else
 				local Connection = Signal:Connect(Callback)
 				
-				return function() --[[ Line: 24 ]]
+				return function()
 					-- upvalues: Connection (copy)
 					Connection:Disconnect()
 				end

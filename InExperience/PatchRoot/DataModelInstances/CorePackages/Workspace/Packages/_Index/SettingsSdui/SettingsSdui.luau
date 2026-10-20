@@ -4,7 +4,7 @@
 	fetchSettingsPage = require(script.fetchSettingsPage),
 	SduiUserSettingsRegister = require(script.SduiUserSettingsRegister),
 	registerUserSettingsActions = require(script.registerUserSettingsActions),
-	getSduiUpdateUserSettingsAction = function() --[[ Line: 7 ]]
+	getSduiUpdateUserSettingsAction = function()
 		return require(script.SduiUpdateUserSettingsAction)
 	end
 }

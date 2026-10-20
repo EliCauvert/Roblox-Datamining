@@ -7,12 +7,12 @@ local UsePropertyFunction = require(Parent.GuiObjectUtils).useProperty
 local ThirdPartyChatSettingsLoadedModule = require(AppChat.Actions.ThirdPartyChatSettingsLoaded)
 local ThirdPartyUserService = game:GetService("ThirdPartyUserService")
 
-return function() --[[ Line: 10 | Named "AppChatThirdPartySettingsEventReceiver" ]]
+return function()
 	-- upvalues: UseDispatchFunction (copy), UsePropertyFunction (copy), ThirdPartyUserService (copy), ResponsiveModule (copy), ReactModule (copy), ThirdPartyChatSettingsLoadedModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local FriendCommunicationRestrictionStatus = UsePropertyFunction(ThirdPartyUserService, "FriendCommunicationRestrictionStatus")
 	local UsePreferredInputResult = ResponsiveModule.usePreferredInput()
-	ReactModule.useEffect(function() --[[ Line: 14 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseDispatchResult (copy), FriendCommunicationRestrictionStatus (copy), UsePreferredInputResult (copy), ResponsiveModule (upval), ThirdPartyChatSettingsLoadedModule (upval)
 		if UseDispatchResult and FriendCommunicationRestrictionStatus then
 			UseDispatchResult(ThirdPartyChatSettingsLoadedModule(if UsePreferredInputResult == ResponsiveModule.Input.Directional or FriendCommunicationRestrictionStatus ~= Enum.ChatRestrictionStatus.Unknown then FriendCommunicationRestrictionStatus else Enum.ChatRestrictionStatus.NotRestricted))

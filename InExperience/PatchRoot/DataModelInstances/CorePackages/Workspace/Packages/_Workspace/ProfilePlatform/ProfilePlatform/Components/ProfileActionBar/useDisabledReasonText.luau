@@ -16,7 +16,7 @@ local config = {
 	[EnumsModule.DisabledReasons.InsufficientVerificationLevelLow] = nil
 }
 
-return function(p1) --[[ Line: 24 ]]
+return function(p1)
 	-- upvalues: config (copy), UseLocalizationFunction (copy)
 	return UseLocalizationFunction({ disabledReasonText = if p1 then config[p1] else nil }).disabledReasonText
 end

@@ -2,7 +2,7 @@
 local Fragments = require(ApolloPresence.Parent.ApolloLocalState).fragments
 local FormattersModule = require(ApolloPresence.Formatters)
 
-return function(p1, p2) --[[ Line: 9 | Named "updateUserPresenceCache" ]]
+return function(p1, p2)
 	-- upvalues: Fragments (copy), FormattersModule (copy)
 	return (p1.cache:writeFragment({
 		id = p1.cache:identify({ __typename = "UserPresence", id = p2.id }),

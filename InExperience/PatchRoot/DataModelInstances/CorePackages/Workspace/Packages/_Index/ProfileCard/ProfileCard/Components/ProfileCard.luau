@@ -19,15 +19,15 @@ local FFlagEnableDrawerFocusNav = SharedFlagsModule.FFlagEnableDrawerFocusNav
 local FFlagHidePremiumIconography = SharedFlagsModule.FFlagHidePremiumIconography
 local FFlagEnableBlackbirdCheck = SharedFlagsModule.FFlagEnableBlackbirdCheck
 
-return ReactModule.memo(function(p1) --[[ Line: 46 | Named "ProfileCard" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), FFlagEnableFlyoutUncheckedBadge (copy), UseLocalizationFunction (copy), UseAppPolicyFunction (copy), ReactModule (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), FFlagEnableBlackbirdCheck (copy), FFlagHidePremiumIconography (copy), FoundationModule (copy), FFlagEnableDrawerFocusNav (copy), LoadableImage (copy), Text (copy), Icon (copy), BuilderIconsModule (copy), IconSize (copy), IconName (copy), Badge (copy), BadgeVariant (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = if FFlagEnableFlyoutUncheckedBadge then UseLocalizationFunction({ Unchecked = "CommonUI.Features.Label.Unchecked" }) else nil
-	local UseAppPolicyResult = if FFlagEnableFlyoutUncheckedBadge then UseAppPolicyFunction(function(p2) --[[ Line: 56 ]]
+	local UseAppPolicyResult = if FFlagEnableFlyoutUncheckedBadge then UseAppPolicyFunction(function(p2)
 		return p2.getShowUncheckedBadge()
 	end) else nil
 	local LocalUserModel = p1.localUserModel
-	local UseMemoResult = ReactModule.useMemo(function(): boolean --[[ Line: 69 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): boolean
 		-- upvalues: LocalUserModel (copy)
 		return LocalUserModel and LocalUserModel.membership == Enum.MembershipType.Premium
 	end, { LocalUserModel })
@@ -53,7 +53,7 @@ return ReactModule.memo(function(p1) --[[ Line: 46 | Named "ProfileCard" ]]
 			Selectable = OnProfileActivatedFunction ~= nil,
 			AutomaticSize = if FFlagEnableFlyoutUncheckedBadge then Enum.AutomaticSize.Y else Enum.AutomaticSize.XY,
 			LayoutOrder = if FFlagEnableFlyoutUncheckedBadge then 1 else nil,
-			[ReactModule.Event.Activated] = ReactModule.useCallback(function() --[[ Line: 79 ]]
+			[ReactModule.Event.Activated] = ReactModule.useCallback(function()
 				-- upvalues: OnProfileActivatedFunction (copy)
 				if OnProfileActivatedFunction then
 					OnProfileActivatedFunction()
@@ -79,7 +79,7 @@ return ReactModule.memo(function(p1) --[[ Line: 46 | Named "ProfileCard" ]]
 				Size = UDim2.fromOffset(Size1000, Size1000),
 				BackgroundColor3 = UseTokensResult.Color.Common.Shimmer.Color3,
 				BackgroundTransparency = UseTokensResult.Color.Common.Shimmer.Transparency,
-				Image = ReactModule.useMemo(function() --[[ Line: 62 ]]
+				Image = ReactModule.useMemo(function()
 					-- upvalues: LocalUserModel (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (upval), p1 (copy)
 					return if LocalUserModel and LocalUserModel.id then GetStandardSizeAvatarHeadShotRbxthumbFunction(LocalUserModel.id, p1.useProfileFrameThumbnail == true) else nil
 				end, { LocalUserModel, p1.useProfileFrameThumbnail }),

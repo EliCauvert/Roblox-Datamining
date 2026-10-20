@@ -9,18 +9,18 @@ local MakeAppSliderModule = require(Parent.makeAppSlider)
 local WithStyleModule = require(Parent2.Core.Style.withStyle)
 local ValidateStyleModule = require(Parent1.Style.Validator.validateStyle)
 
-local function wrapStyleAndRef(ExtendResult) --[[ Line: 15 ]]
+local function wrapStyleAndRef(ExtendResult)
 	-- upvalues: RoactModule (copy), WithStyleModule (copy), CryoModule (copy)
-	return RoactModule.forwardRef(function(p1, ForwardedRef) --[[ Line: 16 ]]
+	return RoactModule.forwardRef(function(p1, ForwardedRef)
 		-- upvalues: WithStyleModule (upval), CryoModule (upval), RoactModule (upval), ExtendResult (copy)
-		return WithStyleModule(function(Style) --[[ Line: 17 ]]
+		return WithStyleModule(function(Style)
 			-- upvalues: CryoModule (upval), p1 (copy), ForwardedRef (copy), RoactModule (upval), ExtendResult (upval)
 			return RoactModule.createElement(ExtendResult, (CryoModule.Dictionary.join(p1, { style = Style, forwardedRef = ForwardedRef })))
 		end)
 	end)
 end
 
-return function(Text) --[[ Line: 28 | Named "makeAppTwoKnobSlider" ]]
+return function(Text)
 	-- upvalues: RoactModule (copy), MakeAppSliderModule (copy), TModule (copy), ValidateStyleModule (copy), wrapStyleAndRef (copy)
 	local ExtendResult = RoactModule.PureComponent:extend("TwoKnobAppSliderFor" .. Text)
 	local AppSliderModule = MakeAppSliderModule(Text, true)
@@ -44,7 +44,7 @@ return function(Text) --[[ Line: 28 | Named "makeAppTwoKnobSlider" ]]
 		NextSelectionDown = TModule.optional(TModule.table),
 		focusController = TModule.optional(TModule.table),
 		style = ValidateStyleModule
-	}), function(p1) --[[ Line: 76 | Named "valueValidator" ]]
+	}), function(p1)
 		if p1.upperValue < p1.lowerValue then
 			return false, "The upper value must be greater than or equal to the lower"
 		else
@@ -53,7 +53,7 @@ return function(Text) --[[ Line: 28 | Named "makeAppTwoKnobSlider" ]]
 	end)
 	ExtendResult.defaultProps = { stepInterval = 1, width = UDim.new(1, 0) }
 	
-	function ExtendResult.render(p1) --[[ Line: 91 ]]
+	function ExtendResult.render(p1)
 		-- upvalues: RoactModule (upval), AppSliderModule (copy)
 		return RoactModule.createElement(AppSliderModule, p1.props)
 	end

@@ -1,7 +1,7 @@
 ﻿local CreatorAgentChatModule = require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.CreatorAgentChat)
 local _ = require(script.Parent.chatTypes)
 
-return function(p1, p2, p3) --[[ Line: 5 | Named "getActiveAnswerForm" ]]
+return function(p1, p2, p3)
 	-- upvalues: CreatorAgentChatModule (copy)
 	if p1 == nil or p1.isDone then
 		return nil

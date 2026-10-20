@@ -6,7 +6,7 @@ local config = {
 	[AccountUpgradeErrorModule.InvalidEmailAddress] = "Authentication.SignUp.Response.InvalidEmail"
 }
 
-return function(p1) --[[ Line: 16 | Named "getAccountUpgradeErrorTextKey" ]]
+return function(p1)
 	-- upvalues: config (copy)
 	return if p1 == nil then "Authentication.SignUp.Response.ErrorTryAgain2" else config[p1] or "Authentication.SignUp.Response.ErrorTryAgain2"
 end

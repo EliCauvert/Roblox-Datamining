@@ -1,18 +1,18 @@
 ﻿local HttpService = game:GetService("HttpService")
 local SquadPromptTypeModule = require(script:FindFirstAncestor("SquadsCore").Enums.SquadPromptType)
 
-return function(p1) --[[ Line: 7 ]]
+return function(p1)
 	-- upvalues: HttpService (copy), SquadPromptTypeModule (copy)
-	return function(p2) --[[ Line: 15 ]]
+	return function(p2)
 		-- upvalues: p1 (copy), HttpService (upval), SquadPromptTypeModule (upval)
-		p2:dispatch(p1.squadContext.createConversation(p1.conversationType, p1.userIds, nil, p1.source)):andThen(function(Result) --[[ Line: 20 ]]
+		p2:dispatch(p1.squadContext.createConversation(p1.conversationType, p1.userIds, nil, p1.source)):andThen(function(Result)
 			-- upvalues: p1 (upval)
 			if p1.onSuccessCallback then
 				p1.onSuccessCallback(Result.id)
 			end
-		end):catch(function(Err) --[[ Line: 25 ]]
+		end):catch(function(Err)
 			-- upvalues: HttpService (upval), p1 (upval), p2 (copy), SquadPromptTypeModule (upval)
-			local Success, Result = pcall(function() --[[ Line: 26 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: HttpService (upval), Err (copy)
 				return HttpService:JSONDecode(Err.Body)
 			end)

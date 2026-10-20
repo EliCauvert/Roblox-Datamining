@@ -12,7 +12,7 @@ local EventMap = {
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-return function(SurfaceIdentifier, p1, p2, p3) --[[ Line: 37 | Named "useInExpFocusNavigationRefs" ]]
+return function(SurfaceIdentifier, p1, p2, p3)
 	-- upvalues: UseDefaultFocusBehaviorFunction (copy), UseScrollNavigationBindingsModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), EventMap (copy), ReactModule (copy), ComposeRefsModule (copy)
 	local UseDefaultFocusBehaviorResult = UseDefaultFocusBehaviorFunction()
 	local UseScrollNavigationBindingsModuleResult = UseScrollNavigationBindingsModule()
@@ -26,7 +26,7 @@ return function(SurfaceIdentifier, p1, p2, p3) --[[ Line: 37 | Named "useInExpFo
 		isAutoFocusRoot = p2 == nil or p2
 	})
 	
-	return (ReactModule.useMemo(function() --[[ Line: 60 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: ComposeRefsModule (upval), UseFocusRootResult (copy), UseDefaultFocusBehaviorResult (copy), UseScrollNavigationBindingsModuleResult (copy)
 		return ComposeRefsModule(UseFocusRootResult, UseDefaultFocusBehaviorResult, UseScrollNavigationBindingsModuleResult)
 	end, {

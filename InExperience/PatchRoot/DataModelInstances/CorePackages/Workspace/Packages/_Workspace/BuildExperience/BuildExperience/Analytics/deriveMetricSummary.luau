@@ -8,9 +8,9 @@ local config = {
 	priorValue = nil
 }
 
-local function deriveSimpleSummary(Tbl) --[[ Line: 36 ]]
+local function deriveSimpleSummary(Tbl)
 	local Copy = table.clone(Tbl)
-	table.sort(Copy, function(A, B): boolean --[[ Line: 38 ]]
+	table.sort(Copy, function(A, B): boolean
 		return A.time < B.time
 	end)
 	local Value = Copy[1].value
@@ -24,7 +24,7 @@ local function deriveSimpleSummary(Tbl) --[[ Line: 36 ]]
 	}
 end
 
-local function _(p1, p2, p3): number --[[ Line: 58 | Named "averageRange" ]]
+local function _(p1, p2, p3): number
 	local v1 = p3 - p2 + 1
 	
 	if v1 < 1 then
@@ -38,7 +38,7 @@ local function _(p1, p2, p3): number --[[ Line: 58 | Named "averageRange" ]]
 	return NewValue / v1
 end
 
-return function(p4, p5) --[[ Line: 70 | Named "deriveMetricSummary" ]]
+return function(p4, p5)
 	-- upvalues: config (copy), MetricGranularity (copy), deriveSimpleSummary (copy), FillMetricSeriesGapsModule (copy)
 	local DataPoints = if p4 == nil then nil else p4.dataPoints
 	

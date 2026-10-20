@@ -18,10 +18,10 @@ local AppFeaturePolicies = require(Parent.UniversalAppPolicy).AppFeaturePolicies
 local ChatPolicies = require(Parent.SocialPolicies).ChatPolicies
 local GetFFlagIsSquadEnabledFunction = require(Parent.SharedFlags).GetFFlagIsSquadEnabled
 
-return function(p1) --[[ Line: 46 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ParentContainerProvider (copy), UnreadMessagesProvider (copy), RoactRoduxModule (copy), ApolloProvider (copy), UniversalAppPolicy (copy), AppFeaturePolicies (copy), ChatPolicies (copy), GetFFlagIsSquadEnabledFunction (copy), SquadExternalContractProvider (copy), InExperienceSquadContract (copy), SquadLocationEnum (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), ProviderContainer (copy)
 	return ReactModule.createElement(ProviderContainer, {
-		providers = ReactModule.useMemo(function() --[[ Line: 47 ]]
+		providers = ReactModule.useMemo(function()
 			-- upvalues: ParentContainerProvider (upval), p1 (copy), UnreadMessagesProvider (upval), RoactRoduxModule (upval), ApolloProvider (upval), UniversalAppPolicy (upval), AppFeaturePolicies (upval), ChatPolicies (upval), GetFFlagIsSquadEnabledFunction (upval), SquadExternalContractProvider (upval), InExperienceSquadContract (upval), SquadLocationEnum (upval), LocalizationProvider (upval), Localization (upval), LocalizationService (upval)
 			local List = {}
 			table.insert(List, {

@@ -5,15 +5,15 @@ local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
 local GetFriendsChatNavigationStoreModule = require(FriendsChat.Stores.GetFriendsChatNavigationStore)
 local FFlagFriendsChatConversationListFocusNav = require(Parent.SharedFlags).FFlagFriendsChatConversationListFocusNav
 
-return function(p1, p2) --[[ Line: 19 | Named "useFocusInputBarOnWindowEnter" ]]
+return function(p1, p2)
 	-- upvalues: ReactModule (copy), ReactFocusNavigationModule (copy), FFlagFriendsChatConversationListFocusNav (copy), GetFriendsChatNavigationStoreModule (copy)
 	local UseContextResult = ReactModule.useContext(ReactFocusNavigationModule.FocusNavigationContext)
-	ReactModule.useEffect(function() --[[ Line: 24 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagFriendsChatConversationListFocusNav (upval), UseContextResult (copy), GetFriendsChatNavigationStoreModule (upval), p1 (copy), p2 (copy)
 		if not FFlagFriendsChatConversationListFocusNav or UseContextResult == nil then return end
 		local FriendsChatNavigationStoreModule = GetFriendsChatNavigationStoreModule(false)
 		
-		local function _(Object) --[[ Line: 29 | Named "isInsideWindow" ]]
+		local function _(Object)
 			-- upvalues: p1 (upval), p2 (upval)
 			if Object == nil then
 				return false
@@ -26,7 +26,7 @@ return function(p1, p2) --[[ Line: 19 | Named "useFocusInputBarOnWindowEnter" ]]
 		end
 		
 		local Value = UseContextResult.focusedGuiObject:getValue()
-		local SubscribeResult = UseContextResult.focusedGuiObject:subscribe(function(Object) --[[ Line: 39 ]]
+		local SubscribeResult = UseContextResult.focusedGuiObject:subscribe(function(Object)
 			-- upvalues: p1 (upval), p2 (upval), Value (ref), FriendsChatNavigationStoreModule (copy)
 			local IsDescendantOf = nil
 			if Object == nil then
@@ -54,7 +54,7 @@ return function(p1, p2) --[[ Line: 19 | Named "useFocusInputBarOnWindowEnter" ]]
 			Value = Object
 		end)
 		
-		return function() --[[ Line: 49 ]]
+		return function()
 			-- upvalues: SubscribeResult (copy)
 			SubscribeResult:unsubscribe()
 		end

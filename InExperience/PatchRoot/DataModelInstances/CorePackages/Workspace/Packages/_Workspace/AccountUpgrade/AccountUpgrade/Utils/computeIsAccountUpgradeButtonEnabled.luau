@@ -7,7 +7,7 @@ local list = {
 	AccountUpgradeFieldModule.Password
 }
 
-return function(p1): boolean --[[ Line: 30 | Named "computeIsAccountUpgradeButtonEnabled" ]]
+return function(p1): boolean
 	-- upvalues: list (copy), AccountUpgradeFieldModule (copy), InputValidity (copy)
 	if p1.isSubmitting then
 		return false

@@ -1,5 +1,5 @@
 ﻿local ContentProvider = game:GetService("ContentProvider")
-local _, _, v1 = (function() --[[ Line: 54 | Named "parseBaseUrlInformation" ]]
+local _, _, v1 = (function()
 	-- upvalues: ContentProvider (copy)
 	local BaseUrl = ContentProvider.BaseUrl
 	

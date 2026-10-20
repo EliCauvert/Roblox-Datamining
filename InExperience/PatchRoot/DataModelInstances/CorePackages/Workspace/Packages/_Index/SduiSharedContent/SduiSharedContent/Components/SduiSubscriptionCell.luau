@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local View = FoundationModule.View
 
-return ReactModule.memo(function(p1) --[[ Line: 49 | Named "SduiSubscriptionCell" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), View (copy), FoundationModule (copy)
 	return ReactModule.createElement(View, {
 		tag = if p1.tag then p1.tag else "col size-full-0 auto-y gap-medium padding-medium bg-surface-100 radius-medium",

@@ -9,7 +9,7 @@
 	[tostring(Enum.AssetType.DynamicHead.Value)] = true
 }
 
-return function(p1): boolean --[[ Line: 21 | Named "getDoesBundleHaveClothingOrAccessories" ]]
+return function(p1): boolean
 	-- upvalues: config (copy)
 	if p1 then
 		if p1.itemType ~= Enum.AvatarItemType.Bundle.Name then

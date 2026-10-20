@@ -7,7 +7,7 @@ local NewResult = require(AppChat.Logger):new(script.Name)
 local GetNewestWithNilPreviousMessageIdModule = require(AppChat.Components.ChatConversation.Utils.getNewestWithNilPreviousMessageId)
 local AppChatMessageFetchRetryDelayMs = game:DefineFastInt("AppChatMessageFetchRetryDelayMs", 500)
 
-local function fetchNextBatch(p1, Callback, p2, p3, p4) --[[ Line: 15 ]]
+local function fetchNextBatch(p1, Callback, p2, p3, p4)
 	-- upvalues: NewResult (copy), PromiseModule (copy), AppChatNetworkingModule (copy), RoduxNetworkingModule (copy), AppChatMessageFetchRetryDelayMs (copy), fetchNextBatch (copy), GetNewestWithNilPreviousMessageIdModule (copy)
 	if p3 <= p4 then
 		NewResult:info("Max depth reached ({}), stopping recursive message fetching", p4)
@@ -34,7 +34,7 @@ local function fetchNextBatch(p1, Callback, p2, p3, p4) --[[ Line: 15 ]]
 	elseif AppChatNetworkingModule.rodux.GetOlderMessages.getStatus(p1:getState(), p2) == RoduxNetworkingModule.Enum.NetworkStatus.Fetching then
 		NewResult:info("Messages are currently being fetched, waiting before trying again")
 		
-		return PromiseModule.delay(AppChatMessageFetchRetryDelayMs / 1000):andThen(function() --[[ Line: 51 ]]
+		return PromiseModule.delay(AppChatMessageFetchRetryDelayMs / 1000):andThen(function()
 			-- upvalues: fetchNextBatch (upval), p1 (copy), Callback (copy), p2 (copy), p3 (copy), p4 (copy)
 			return fetchNextBatch(p1, Callback, p2, p3, p4)
 		end)
@@ -42,7 +42,7 @@ local function fetchNextBatch(p1, Callback, p2, p3, p4) --[[ Line: 15 ]]
 		local NewestWithNilPreviousMessageIdModule = GetNewestWithNilPreviousMessageIdModule(Conversation.messages)
 		NewResult:info("Fetching batch {} of older messages for conversation {}", p4, p2)
 		
-		return p1:dispatch(Callback(p2, NewestWithNilPreviousMessageIdModule, Conversation.nextCursor)):andThen(function() --[[ Line: 61 ]]
+		return p1:dispatch(Callback(p2, NewestWithNilPreviousMessageIdModule, Conversation.nextCursor)):andThen(function()
 			-- upvalues: NewResult (upval), p4 (copy), fetchNextBatch (upval), p1 (copy), Callback (copy), p2 (copy), p3 (copy)
 			NewResult:info("Fetched batch {}, continuing to fetch next batch", p4)
 			
@@ -51,13 +51,13 @@ local function fetchNextBatch(p1, Callback, p2, p3, p4) --[[ Line: 15 ]]
 	end
 end
 
-return function(p1, p2, p3) --[[ Line: 67 ]]
+return function(p1, p2, p3)
 	-- upvalues: NewResult (copy), fetchNextBatch (copy), PromiseModule (copy)
 	NewResult:info("Starting to fetch all remaining older messages for conversation {}", p2)
 	
-	return function(p4) --[[ Line: 69 ]]
+	return function(p4)
 		-- upvalues: fetchNextBatch (upval), p1 (copy), p2 (copy), p3 (copy), NewResult (upval), PromiseModule (upval)
-		return fetchNextBatch(p4, p1, p2, p3, 0):catch(function(Err) --[[ Line: 70 ]]
+		return fetchNextBatch(p4, p1, p2, p3, 0):catch(function(Err)
 			-- upvalues: NewResult (upval), PromiseModule (upval)
 			NewResult:warning("Error fetching all remaining older messages: {}", Err)
 			

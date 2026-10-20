@@ -4,7 +4,7 @@ local IsSearchTypeInOmniSearchFunction = require(Parent.DiscoveryUtils).isSearch
 local _ = require(Parent.SduiCoreSystem)
 
 return {
-	resolveSearchQuery = function(p1) --[[ Line: 18 ]]
+	resolveSearchQuery = function(p1)
 		local ActionParams = if p1 then p1.actionParams else nil
 		
 		if ActionParams == nil then
@@ -15,7 +15,7 @@ return {
 			return if typeof(SearchQuery) == "string" and SearchQuery ~= "" then SearchQuery else nil
 		end
 	end,
-	resolveSearchType = function(p1) --[[ Line: 32 ]]
+	resolveSearchType = function(p1)
 		-- upvalues: SearchTypes (copy), IsSearchTypeInOmniSearchFunction (copy)
 		local ActionParams = if p1 then p1.actionParams else nil
 		local SearchType = if ActionParams then ActionParams.searchType else nil

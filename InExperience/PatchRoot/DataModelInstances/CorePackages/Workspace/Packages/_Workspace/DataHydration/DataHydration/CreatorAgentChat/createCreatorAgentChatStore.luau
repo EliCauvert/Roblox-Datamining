@@ -19,11 +19,11 @@ local _ = require(script.Parent.types)
 local WithCsrfRetryModule = require(DataHydration.withCsrfRetry)
 local FFlagBuildExperiencePromptFailureTelemetry = require(Parent.SharedFlags).FFlagBuildExperiencePromptFailureTelemetry
 
-local function _(p1) --[[ Line: 50 | Named "normalizeNextPageToken" ]]
+local function _(p1)
 	return if typeof(p1) == "string" and p1 ~= "" then p1 else nil
 end
 
-local function appendSessionListEntries(List, Sessions) --[[ Line: 57 ]]
+local function appendSessionListEntries(List, Sessions)
 	local t = {}
 	local List1 = {}
 	
@@ -46,32 +46,32 @@ local function appendSessionListEntries(List, Sessions) --[[ Line: 57 ]]
 	return List1
 end
 
-local _ = function(Text) --[[ Line: 82 | Named "normalizePrompt" ]]
+local _ = function(Text)
 	return if typeof(Text) == "string" then { { type = "text", text = Text } } else Text
 end
 
 local config = {
-	debug = function() --[[ Line: 90 ]] end,
-	info = function() --[[ Line: 91 ]] end,
-	warning = function() --[[ Line: 92 ]] end,
-	error = function() --[[ Line: 93 ]] end
+	debug = function() end,
+	info = function() end,
+	warning = function() end,
+	error = function() end
 }
 
-return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
+return function(p1)
 	-- upvalues: WithCsrfRetryModule (copy), HttpClientModule (copy), AcpProtocolModule (copy), config (copy), RpcDecoderModule (copy), SignalsModule (copy), OnTerminalModule (copy), appendSessionListEntries (copy), FFlagBuildAgentAdCampaignCardModule (copy), DecodeAdCampaignToolCallStatusResultModule (copy), CreateTurnHandleModule (copy), ExperimentOverrideModule (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), ClassifyRequestFailureModule (copy), HistoryIngestModule (copy), SessionRegistryModule (copy), ConstantsModule (copy), IngestFrameHandlerModule (copy), FFlagBuildAgentAdCampaignToolCallStatusFallback (copy)
 	local P4 = p1 or {}
 	local Network = P4.network or WithCsrfRetryModule(HttpClientModule.createRequestInternalNetwork())
 	local BaseUrl = P4.baseUrl or AcpProtocolModule.acpUrl()
 	local Logger = P4.logger or config
 	
-	local function _() --[[ Line: 103 | Named "authHeaders" ]]
+	local function _()
 		-- upvalues: P4 (copy)
 		return if P4.getAuthHeaders then P4.getAuthHeaders() else {}
 	end
 	
 	local Count = 0
 	
-	local _ = function() --[[ Line: 108 | Named "nextId" ]]
+	local _ = function()
 		-- upvalues: P4 (copy), Count (ref)
 		if P4.generateRequestId then
 			return P4.generateRequestId()
@@ -86,11 +86,11 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 	local t1 = {}
 	local t2 = {}
 	
-	local _ = function(p2) --[[ Line: 120 | Named "requestIdKey" ]]
+	local _ = function(p2)
 		return if p2 == nil then nil else tostring(p2)
 	end
 	
-	local function unregisterHandle(p2) --[[ Line: 124 ]]
+	local function unregisterHandle(p2)
 		-- upvalues: t (copy), t2 (copy), t1 (copy)
 		for i, value in t do
 			if value == p2 then
@@ -107,7 +107,7 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 		end
 	end
 	
-	local function rpcCall(RequestId, SessionCancel: string, SessionPromptWireParams, p3) --[[ Line: 138 ]]
+	local function rpcCall(RequestId, SessionCancel: string, SessionPromptWireParams, p3)
 		-- upvalues: Logger (copy), HttpClientModule (upval), Network (copy), BaseUrl (copy), P4 (copy), RpcDecoderModule (upval)
 		Logger:debug(`[CAS] -> {SessionCancel} id={tostring(RequestId)}`)
 		
@@ -127,7 +127,7 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 		})
 	end
 	
-	local function rpcCallSync(AdCampaignCreate, SessionNewWireParams, DecodeAdCampaignCheckFundsResultModule) --[[ Line: 161 ]]
+	local function rpcCallSync(AdCampaignCreate, SessionNewWireParams, DecodeAdCampaignCheckFundsResultModule)
 		-- upvalues: rpcCall (copy), P4 (copy), Count (ref)
 		local RequestId = nil
 		if P4.generateRequestId then
@@ -139,7 +139,7 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 		return rpcCall(RequestId, AdCampaignCreate, SessionNewWireParams, DecodeAdCampaignCheckFundsResultModule)
 	end
 	
-	local function submitToolResult(p3) --[[ Line: 165 ]]
+	local function submitToolResult(p3)
 		-- upvalues: P4 (copy), Count (ref), AcpProtocolModule (upval), HttpClientModule (upval), Network (copy), BaseUrl (copy), RpcDecoderModule (upval)
 		assert(typeof(p3.sessionId) == "string" and p3.sessionId ~= "", "sessionId is required")
 		assert(typeof(p3.content) == "table" and typeof(p3.content.text) == "string", "content.text is required")
@@ -181,12 +181,12 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 		})
 	end
 	
-	local function initialize(p3) --[[ Line: 205 ]]
+	local function initialize(p3)
 		-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval)
 		return rpcCallSync(AcpProtocolModule.Methods.Initialize, p3 or { protocolVersion = AcpProtocolModule.ProtocolVersion })
 	end
 	
-	local function sessionNew(p3) --[[ Line: 209 ]]
+	local function sessionNew(p3)
 		-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval)
 		assert(p3 ~= nil, "sessionNew requires params")
 		assert(typeof(p3.project) == "table", "sessionNew requires params.project")
@@ -202,7 +202,7 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 		}))
 	end
 	
-	local function sessionList(p3) --[[ Line: 226 ]]
+	local function sessionList(p3)
 		-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval)
 		return rpcCallSync(AcpProtocolModule.Methods.SessionList, p3 or {})
 	end
@@ -219,7 +219,7 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 		getNextPageToken = Signal1,
 		getStatus = Pending,
 		getLoadMoreStatus = Signal3,
-		refresh = function() --[[ Line: 238 ]]
+		refresh = function()
 			-- upvalues: v1 (ref), Count1 (ref), v2 (ref), Pending2 (copy), Signal2_2 (copy), AcpProtocolModule (upval), rpcCall (copy), P4 (copy), Count (ref), OnTerminalModule (upval), Signal2 (copy), Signal2_1 (copy)
 			if v1 ~= nil then
 				if v1.state(false).status == "pending" then
@@ -244,7 +244,7 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 			end
 			local RpcCallResult = rpcCall(RequestId, SessionList, t, nil)
 			v1 = RpcCallResult
-			OnTerminalModule(RpcCallResult.state, function(p3) --[[ Line: 255 ]]
+			OnTerminalModule(RpcCallResult.state, function(p3)
 				-- upvalues: Count2 (copy), Count1 (upval), v1 (upval), Signal2 (upval), Signal2_1 (upval), Pending2 (upval)
 				if Count2 == Count1 then
 					v1 = nil
@@ -256,7 +256,7 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 					
 					return
 				end
-			end, function(_) --[[ Line: 265 ]]
+			end, function(_)
 				-- upvalues: Count2 (copy), Count1 (upval), v1 (upval), Pending2 (upval)
 				if Count2 == Count1 then
 					v1 = nil
@@ -268,7 +268,7 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 			
 			return RpcCallResult
 		end,
-		loadMore = function() --[[ Line: 275 ]]
+		loadMore = function()
 			-- upvalues: Signal1 (copy), v1 (ref), v2 (ref), Pending (copy), Count1 (ref), Signal2_2 (copy), AcpProtocolModule (upval), rpcCall (copy), P4 (copy), Count (ref), OnTerminalModule (upval), appendSessionListEntries (upval), Signal (copy), Signal2 (copy), Signal2_1 (copy)
 			local SignalResult = Signal1(false)
 			
@@ -298,7 +298,7 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 			end
 			local RpcCallResult = rpcCall(RequestId, SessionList, Config, nil)
 			v2 = RpcCallResult
-			OnTerminalModule(RpcCallResult.state, function(p3) --[[ Line: 297 ]]
+			OnTerminalModule(RpcCallResult.state, function(p3)
 				-- upvalues: Count2 (copy), Count1 (upval), v2 (upval), appendSessionListEntries (upval), Signal (upval), Signal2 (upval), Signal2_1 (upval), Signal2_2 (upval)
 				if Count2 == Count1 then
 					v2 = nil
@@ -310,7 +310,7 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 					
 					return
 				end
-			end, function(_) --[[ Line: 308 ]]
+			end, function(_)
 				-- upvalues: Count2 (copy), Count1 (upval), v2 (upval), Signal2_2 (upval)
 				if Count2 == Count1 then
 					v2 = nil
@@ -324,7 +324,7 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 		end
 	}
 	
-	local function sessionLoad(SessionId, p3) --[[ Line: 335 ]]
+	local function sessionLoad(SessionId, p3)
 		-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval)
 		assert(typeof(SessionId) == "string" and SessionId ~= "", "sessionId is required")
 		
@@ -336,12 +336,12 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 		})
 	end
 	
-	local _ = function(SessionId) --[[ Line: 353 | Named "postSessionCancel" ]]
+	local _ = function(SessionId)
 		-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval)
 		return rpcCallSync(AcpProtocolModule.Methods.SessionCancel, { sessionId = SessionId })
 	end
 	
-	local function adCampaignToolCallStatus(p3) --[[ Line: 425 ]]
+	local function adCampaignToolCallStatus(p3)
 		-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval), DecodeAdCampaignToolCallStatusResultModule (upval)
 		assert(typeof(p3) == "table", "adCampaignToolCallStatus requires params")
 		assert(typeof(p3.toolCallId) == "string" and p3.toolCallId ~= "", "toolCallId is required")
@@ -349,9 +349,9 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 		return rpcCallSync(AcpProtocolModule.Methods.AdCampaignToolCallStatus, p3, DecodeAdCampaignToolCallStatusResultModule)
 	end
 	
-	local _ = function(Key, p3, p4, p5) --[[ Line: 445 | Named "registerTurnHandle" ]]
+	local _ = function(Key, p3, p4, p5)
 		-- upvalues: CreateTurnHandleModule (upval), AcpProtocolModule (upval), rpcCall (copy), P4 (copy), Count (ref), OnTerminalModule (upval), t (copy), t2 (copy), t1 (copy)
-		local TurnHandleModule, TurnHandleModule2 = CreateTurnHandleModule(Key, p3, function() --[[ Line: 451 ]]
+		local TurnHandleModule, TurnHandleModule2 = CreateTurnHandleModule(Key, p3, function()
 			-- upvalues: Key (copy), AcpProtocolModule (upval), rpcCall (upval), P4 (upval), Count (upval), OnTerminalModule (upval), t (upval), t2 (upval), t1 (upval)
 			assert(typeof(Key) == "string" and Key ~= "", "sessionId is required")
 			local SessionCancel = AcpProtocolModule.Methods.SessionCancel
@@ -364,7 +364,7 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 				Count += 1
 				RequestId = Count
 			end
-			OnTerminalModule(rpcCall(RequestId, SessionCancel, config, nil).state, function() --[[ Line: 360 ]]
+			OnTerminalModule(rpcCall(RequestId, SessionCancel, config, nil).state, function()
 				-- upvalues: t (upval), Key (copy), t2 (upval), t1 (upval)
 				local v3 = t[Key]
 				
@@ -396,7 +396,7 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 		return TurnHandleModule
 	end
 	
-	local function sessionPrompt(p6) --[[ Line: 462 ]]
+	local function sessionPrompt(p6)
 		-- upvalues: P4 (copy), Count (ref), CreateTurnHandleModule (upval), AcpProtocolModule (upval), rpcCall (copy), OnTerminalModule (upval), t (copy), t2 (copy), t1 (copy), ExperimentOverrideModule (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), ClassifyRequestFailureModule (upval)
 		assert(p6 and (typeof(p6.sessionId) == "string" and p6.sessionId ~= ""), "sessionId is required")
 		assert(p6.prompt, "prompt is required")
@@ -409,7 +409,7 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 			Count += 1
 			RequestId = Count
 		end
-		local TurnHandleModule, TurnHandleModule2 = CreateTurnHandleModule(SessionId, RequestId, function() --[[ Line: 451 ]]
+		local TurnHandleModule, TurnHandleModule2 = CreateTurnHandleModule(SessionId, RequestId, function()
 			-- upvalues: SessionId (copy), AcpProtocolModule (upval), rpcCall (upval), P4 (upval), Count (upval), OnTerminalModule (upval), t (upval), t2 (upval), t1 (upval)
 			assert(typeof(SessionId) == "string" and SessionId ~= "", "sessionId is required")
 			local SessionCancel = AcpProtocolModule.Methods.SessionCancel
@@ -422,7 +422,7 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 				Count += 1
 				RequestId = Count
 			end
-			OnTerminalModule(rpcCall(RequestId, SessionCancel, config, nil).state, function() --[[ Line: 360 ]]
+			OnTerminalModule(rpcCall(RequestId, SessionCancel, config, nil).state, function()
 				-- upvalues: t (upval), SessionId (copy), t2 (upval), t1 (upval)
 				local v3 = t[SessionId]
 				
@@ -459,10 +459,10 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 			meta = p6._meta,
 			experiment = if ExperimentOverrideModule.isEnabled() then p6.experiment else nil
 		})))
-		OnTerminalModule(RpcCallResult.state, nil, function(p7, p8) --[[ Line: 480 ]]
+		OnTerminalModule(RpcCallResult.state, nil, function(p7, p8)
 			-- upvalues: FFlagBuildExperiencePromptFailureTelemetry (upval), ClassifyRequestFailureModule (upval), RpcCallResult (copy), Entry (copy), t (upval), t2 (upval), t1 (upval)
 			local ClassifyRequestFailureModuleResult = if FFlagBuildExperiencePromptFailureTelemetry then ClassifyRequestFailureModule(RpcCallResult.state(false)) else nil
-			task.defer(function() --[[ Line: 484 ]]
+			task.defer(function()
 				-- upvalues: Entry (upval), p7 (copy), p8 (copy), ClassifyRequestFailureModuleResult (copy), t (upval), t2 (upval), t1 (upval)
 				if Entry.isDone() then return end
 				Entry.fail(p7, p8, ClassifyRequestFailureModuleResult)
@@ -486,15 +486,15 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 		return TurnHandleModule
 	end
 	
-	local function getActiveTurnHandle(p7) --[[ Line: 512 ]]
+	local function getActiveTurnHandle(p7)
 		-- upvalues: t2 (copy)
 		return t2[p7]
 	end
 	
-	local function ingestSessionHistory(p7, p8, p9) --[[ Line: 516 ]]
+	local function ingestSessionHistory(p7, p8, p9)
 		-- upvalues: HistoryIngestModule (upval), t (copy), unregisterHandle (copy)
 		return HistoryIngestModule.ingestSessionHistory({
-			getActiveTurnInternals = function(p10) --[[ Line: 522 ]]
+			getActiveTurnInternals = function(p10)
 				-- upvalues: t (upval)
 				return t[p10]
 			end,
@@ -510,7 +510,7 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 		ingestSessionHistory = ingestSessionHistory,
 		submitToolResult = submitToolResult,
 		getActiveTurnHandle = getActiveTurnHandle,
-		onCasSessionIdChanged = function(_) --[[ Line: 537 ]] end,
+		onCasSessionIdChanged = function(_) end,
 		rpcTimeoutSeconds = ConstantsModule.getRpcTimeoutSeconds()
 	})
 	
@@ -518,11 +518,11 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 		initialize = initialize,
 		sessionNew = sessionNew,
 		sessionList = sessionList,
-		getSessionListStore = function() --[[ Line: 560 ]]
+		getSessionListStore = function()
 			-- upvalues: config1 (copy)
 			return config1
 		end,
-		sessionFindByUniverse = function(p7) --[[ Line: 327 ]]
+		sessionFindByUniverse = function(p7)
 			-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval)
 			assert(typeof(p7) == "table", "sessionFindByUniverse requires params")
 			assert(typeof(p7.universeId) == "number" and p7.universeId ~= 0, "universeId is required")
@@ -530,7 +530,7 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 			return rpcCallSync(AcpProtocolModule.Methods.SessionFindByUniverse, p7)
 		end,
 		sessionLoad = sessionLoad,
-		sessionReadTasks = function(SessionId) --[[ Line: 348 ]]
+		sessionReadTasks = function(SessionId)
 			-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval)
 			assert(typeof(SessionId) == "string" and SessionId ~= "", "sessionId is required")
 			
@@ -538,7 +538,7 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 		end,
 		sessionPrompt = sessionPrompt,
 		submitToolResult = submitToolResult,
-		sessionCancel = function(SessionId) --[[ Line: 357 ]]
+		sessionCancel = function(SessionId)
 			-- upvalues: AcpProtocolModule (upval), rpcCall (copy), P4 (copy), Count (ref), OnTerminalModule (upval), t (copy), t2 (copy), t1 (copy)
 			assert(typeof(SessionId) == "string" and SessionId ~= "", "sessionId is required")
 			local SessionCancel = AcpProtocolModule.Methods.SessionCancel
@@ -552,7 +552,7 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 				RequestId = Count
 			end
 			local RpcCallResult = rpcCall(RequestId, SessionCancel, config, nil)
-			OnTerminalModule(RpcCallResult.state, function() --[[ Line: 360 ]]
+			OnTerminalModule(RpcCallResult.state, function()
 				-- upvalues: t (upval), SessionId (copy), t2 (upval), t1 (upval)
 				local v3 = t[SessionId]
 				
@@ -577,7 +577,7 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 			
 			return RpcCallResult
 		end,
-		sessionDelete = function(SessionId) --[[ Line: 370 ]]
+		sessionDelete = function(SessionId)
 			-- upvalues: AcpProtocolModule (upval), rpcCall (copy), P4 (copy), Count (ref), OnTerminalModule (upval), t (copy), t2 (copy), t1 (copy)
 			assert(typeof(SessionId) == "string" and SessionId ~= "", "sessionId is required")
 			local SessionDelete = AcpProtocolModule.Methods.SessionDelete
@@ -591,7 +591,7 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 				RequestId = Count
 			end
 			local RpcCallResult = rpcCall(RequestId, SessionDelete, config, nil)
-			OnTerminalModule(RpcCallResult.state, function() --[[ Line: 373 ]]
+			OnTerminalModule(RpcCallResult.state, function()
 				-- upvalues: t (upval), SessionId (copy), AcpProtocolModule (upval), t2 (upval), t1 (upval)
 				local Entry = t[SessionId]
 				
@@ -616,13 +616,13 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 			
 			return RpcCallResult
 		end,
-		sessionUpdateInfo = function(SessionId, Title) --[[ Line: 383 ]]
+		sessionUpdateInfo = function(SessionId, Title)
 			-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval)
 			assert(typeof(SessionId) == "string" and SessionId ~= "", "sessionId is required")
 			
 			return rpcCallSync(AcpProtocolModule.Methods.SessionUpdateInfo, { sessionId = SessionId, title = Title })
 		end,
-		sessionSaveAndPublish = function(p7) --[[ Line: 388 ]]
+		sessionSaveAndPublish = function(p7)
 			-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval)
 			assert(typeof(p7) == "table", "sessionSaveAndPublish requires params")
 			assert(typeof(p7.placeId) == "number" and p7.placeId > 0, "placeId must be a positive number")
@@ -631,21 +631,21 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 			
 			return rpcCallSync(AcpProtocolModule.Methods.SessionSaveAndPublish, p7)
 		end,
-		adCampaignEligibility = function(p7) --[[ Line: 398 ]]
+		adCampaignEligibility = function(p7)
 			-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval)
 			assert(typeof(p7) == "table", "adCampaignEligibility requires params")
 			assert(typeof(p7.universeId) == "number" and p7.universeId > 0, "universeId must be a positive number")
 			
 			return rpcCallSync(AcpProtocolModule.Methods.AdCampaignEligibility, p7, (require(script.Parent.decodeAdCampaignEligibilityResult)))
 		end,
-		adCampaignCheckFunds = function(p7) --[[ Line: 433 ]]
+		adCampaignCheckFunds = function(p7)
 			-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval)
 			assert(typeof(p7) == "table", "adCampaignCheckFunds requires params")
 			assert(p7.campaignOption == "feedback" or p7.campaignOption == "plays", "campaignOption must be feedback or plays")
 			
 			return rpcCallSync(AcpProtocolModule.Methods.AdCampaignCheckFunds, p7, (require(script.Parent.decodeAdCampaignCheckFundsResult)))
 		end,
-		adCampaignCreate = function(p7) --[[ Line: 407 ]]
+		adCampaignCreate = function(p7)
 			-- upvalues: FFlagBuildAgentAdCampaignCardModule (upval), rpcCallSync (copy), AcpProtocolModule (upval)
 			assert(typeof(p7) == "table", "adCampaignCreate requires params")
 			assert(typeof(p7.universeId) == "number" and p7.universeId > 0, "universeId must be a positive number")
@@ -655,7 +655,7 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 			if FFlagBuildAgentAdCampaignCardModule and p7.toolCallId ~= nil then
 				assert(typeof(p7.toolCallId) == "string" and p7.toolCallId ~= "", "toolCallId is required")
 				
-				return rpcCallSync(AcpProtocolModule.Methods.AdCampaignCreate, p7, function(p8) --[[ Line: 414 ]]
+				return rpcCallSync(AcpProtocolModule.Methods.AdCampaignCreate, p7, function(p8)
 					-- upvalues: DecodeAdCampaignCreateResultModule (copy), p7 (copy)
 					local DecodeAdCampaignCreateResultModuleResult, DecodeAdCampaignCreateResultModuleResult2 = DecodeAdCampaignCreateResultModule(p8)
 					
@@ -671,24 +671,24 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 		end,
 		adCampaignToolCallStatus = if FFlagBuildAgentAdCampaignToolCallStatusFallback then adCampaignToolCallStatus else nil,
 		ingestSessionHistory = ingestSessionHistory,
-		ingestFrame = function(p7, p8) --[[ Line: 541 ]]
+		ingestFrame = function(p7, p8)
 			-- upvalues: IngestFrameHandlerModule (upval), Logger (copy), SessionRegistry (copy), t (copy), t1 (copy), unregisterHandle (copy)
 			IngestFrameHandlerModule.ingestFrame({
 				logger = Logger,
 				getSessionByCasSessionId = SessionRegistry.getSessionByCasSessionId,
 				getSessionForProject = SessionRegistry.getSessionForProject,
-				getActiveTurnBySession = function(p9) --[[ Line: 546 ]]
+				getActiveTurnBySession = function(p9)
 					-- upvalues: t (upval)
 					return t[p9]
 				end,
-				getActiveTurnByRequestId = function(p9) --[[ Line: 549 ]]
+				getActiveTurnByRequestId = function(p9)
 					-- upvalues: t1 (upval)
 					return t1[p9]
 				end,
 				onTurnDone = unregisterHandle
 			}, p7, p8)
 		end,
-		resumeTurnFromHistory = function(Key, p7, p8) --[[ Line: 496 ]]
+		resumeTurnFromHistory = function(Key, p7, p8)
 			-- upvalues: t2 (copy), CreateTurnHandleModule (upval), AcpProtocolModule (upval), rpcCall (copy), P4 (copy), Count (ref), OnTerminalModule (upval), t (copy), t1 (copy)
 			assert(typeof(Key) == "string" and Key ~= "", "sessionId is required")
 			
@@ -698,7 +698,7 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 			local Entry = t2[Key]
 			
 			if Entry == nil then
-				local TurnHandleModule, TurnHandleModule2 = CreateTurnHandleModule(Key, nil, function() --[[ Line: 451 ]]
+				local TurnHandleModule, TurnHandleModule2 = CreateTurnHandleModule(Key, nil, function()
 					-- upvalues: Key (copy), AcpProtocolModule (upval), rpcCall (upval), P4 (upval), Count (upval), OnTerminalModule (upval), t (upval), t2 (upval), t1 (upval)
 					assert(typeof(Key) == "string" and Key ~= "", "sessionId is required")
 					local SessionCancel = AcpProtocolModule.Methods.SessionCancel
@@ -711,7 +711,7 @@ return function(p1) --[[ Line: 96 | Named "createCreatorAgentChatStore" ]]
 						Count += 1
 						RequestId = Count
 					end
-					OnTerminalModule(rpcCall(RequestId, SessionCancel, config, nil).state, function() --[[ Line: 360 ]]
+					OnTerminalModule(rpcCall(RequestId, SessionCancel, config, nil).state, function()
 						-- upvalues: t (upval), Key (copy), t2 (upval), t1 (upval)
 						local v3 = t[Key]
 						

@@ -107,9 +107,9 @@ Button.defaultProps = {
 	buttonType = ButtonTypeModule.PrimarySystem
 }
 
-function Button.render(p1) --[[ Line: 173 ]]
+function Button.render(p1)
 	-- upvalues: WithSelectionCursorProviderModule (copy), ReactModule (copy), RoactGamepadModule (copy), GenericButtonModule (copy), CursorKindModule (copy), config4 (copy), config2 (copy), config3 (copy), config (copy), config1 (copy)
-	return WithSelectionCursorProviderModule(function(Callback) --[[ Line: 174 ]]
+	return WithSelectionCursorProviderModule(function(Callback)
 		-- upvalues: p1 (copy), ReactModule (upval), RoactGamepadModule (upval), GenericButtonModule (upval), CursorKindModule (upval), config4 (upval), config2 (upval), config3 (upval), config (upval), config1 (upval)
 		return ReactModule.createElement(if p1.props.isRoactGamepadEnabled then RoactGamepadModule.Focusable[GenericButtonModule] else GenericButtonModule, {
 			[ReactModule.Tag] = p1.props[ReactModule.Tag],
@@ -152,12 +152,12 @@ function Button.render(p1) --[[ Line: 173 ]]
 	end)
 end
 
-local function v27(p1) --[[ Line: 227 ]]
+local function v27(p1)
 	-- upvalues: UseCursorModule (copy), _UDim (copy), CryoModule (copy), ReactModule (copy), Button (copy)
 	return ReactModule.createElement(Button, (CryoModule.Dictionary.join({ cursor = UseCursorModule(_UDim) }, p1)))
 end
 
-local ForwardRefResult = ReactModule.forwardRef(function(p1, p2) --[[ Line: 235 ]]
+local ForwardRefResult = ReactModule.forwardRef(function(p1, p2)
 	-- upvalues: UIBloxConfigModule (copy), FoundationModule (copy), CryoModule (copy), Button (copy), FoundationButtonUtilsModule (copy), ReactModule (copy), RoactGamepadModule (copy), v27 (copy)
 	if UIBloxConfigModule.useFoundationButton and not p1.DO_NOT_USE_useUIBloxButton then
 		local UseTokensResult = FoundationModule.Hooks.useTokens()
@@ -166,7 +166,7 @@ local ForwardRefResult = ReactModule.forwardRef(function(p1, p2) --[[ Line: 235 
 		local MaxWidth = FoundationButtonUtilsModule.getMaxWidth(JoinResult.standardSize, JoinResult.maxWidth)
 		local UseRefResult = ReactModule.useRef(nil)
 		local ButtonRef = p1.buttonRef or (p2 or UseRefResult)
-		ReactModule.useLayoutEffect(function() --[[ Line: 246 ]]
+		ReactModule.useLayoutEffect(function()
 			-- upvalues: MaxWidth (copy), ButtonRef (copy)
 			local UISizeConstraint = nil
 			
@@ -175,7 +175,7 @@ local ForwardRefResult = ReactModule.forwardRef(function(p1, p2) --[[ Line: 235 
 				UISizeConstraint.MaxSize = Vector2.new(MaxWidth, 1e999)
 				UISizeConstraint.Parent = ButtonRef.current
 			end
-			return function() --[[ Line: 254 ]]
+			return function()
 				-- upvalues: UISizeConstraint (ref)
 				if UISizeConstraint then
 					UISizeConstraint.Parent = nil

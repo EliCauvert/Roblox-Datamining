@@ -4,7 +4,7 @@ local CHATPLATFORMBASEURLModule = require(AppChatNetworking.url.CHAT_PLATFORM_BA
 local Default = require(AppChatNetworking.url.HttpRequest).default
 local _ = require(AppChatNetworking.responses.SharedTypes)
 
-return function(p1, p2) --[[ Line: 17 ]]
+return function(p1, p2)
 	-- upvalues: Default (copy), HttpService (copy), CHATPLATFORMBASEURLModule (copy)
 	return (p1 or Default)(`{CHATPLATFORMBASEURLModule}/v1/record-modal-sequence-response`, "POST", {
 		maxRetryCount = 0,

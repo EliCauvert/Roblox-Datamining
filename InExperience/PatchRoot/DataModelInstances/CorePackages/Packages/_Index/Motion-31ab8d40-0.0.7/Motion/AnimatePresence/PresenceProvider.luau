@@ -3,7 +3,7 @@ local ReactModule = require(Motion.Parent.React)
 local PresenceContextModule = require(Motion.AnimatePresence.PresenceContext)
 local UseIdFallbackFunction = require(Motion.AnimatePresence.utils).useIdFallback
 
-return function(p1) --[[ Line: 30 | Named "PresenceProvider" ]]
+return function(p1)
 	-- upvalues: UseIdFallbackFunction (copy), ReactModule (copy), PresenceContextModule (copy)
 	if p1 == nil then
 		error("PresenceProvider: props cannot be nil")
@@ -16,7 +16,7 @@ return function(p1) --[[ Line: 30 | Named "PresenceProvider" ]]
 	end
 	local PassThroughData = p1.passThroughData
 	local Id: string? = nil
-	local Success, Result = pcall(function() --[[ Line: 53 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: Id (ref), UseIdFallbackFunction (upval)
 		Id = UseIdFallbackFunction()
 	end)
@@ -26,7 +26,7 @@ return function(p1) --[[ Line: 30 | Named "PresenceProvider" ]]
 		Id = "presence-" .. UseIdFallbackFunction()
 	end
 	local UseRefResult = nil
-	local Success1, Result1 = pcall(function() --[[ Line: 64 ]]
+	local Success1, Result1 = pcall(function()
 		-- upvalues: UseRefResult (ref), ReactModule (upval)
 		UseRefResult = ReactModule.useRef({})
 	end)
@@ -38,16 +38,16 @@ return function(p1) --[[ Line: 30 | Named "PresenceProvider" ]]
 	local config = {
 		id = Id,
 		isPresent = IsPresent,
-		register = function(p2) --[[ Line: 95 ]]
+		register = function(p2)
 			-- upvalues: UseRefResult (ref)
 			UseRefResult.current[p2] = false
 			
-			return function() --[[ Line: 99 ]]
+			return function()
 				-- upvalues: UseRefResult (upval), p2 (copy)
 				UseRefResult.current[p2] = nil
 			end
 		end,
-		onExitComplete = function(p2) --[[ Line: 74 ]]
+		onExitComplete = function(p2)
 			-- upvalues: UseRefResult (ref), p1 (copy)
 			if UseRefResult.current then
 				UseRefResult.current[p2] = true
@@ -67,7 +67,7 @@ return function(p1) --[[ Line: 30 | Named "PresenceProvider" ]]
 		passThroughData = PassThroughData
 	}
 	local Element = nil
-	local Success2, Result2 = pcall(function() --[[ Line: 114 ]]
+	local Success2, Result2 = pcall(function()
 		-- upvalues: Element (ref), ReactModule (upval), PresenceContextModule (upval), config (copy), Children (copy)
 		Element = ReactModule.createElement(PresenceContextModule.Provider, { value = config }, Children)
 	end)

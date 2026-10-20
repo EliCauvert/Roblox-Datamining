@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("IDVPollDelay", 15)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastInt("IDVPollDelay")
 end

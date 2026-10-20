@@ -8,9 +8,9 @@ local ReportAbuseAnalyticsModule = require(AbuseReportMenu.Analytics.ReportAbuse
 local CollectAnalyticsParametersModule = require(AbuseReportMenu.Analytics.collectAnalyticsParameters)
 local NewReportAbuseAnalytics = ReportAbuseAnalyticsModule.new(require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.EventIngest.new((game:GetService("EventIngestService"))), require(CorePackages.Workspace.Packages.Analytics).Analytics.new((game:GetService("RbxAnalyticsService"))).Diag, ReportAbuseAnalyticsModule.MenuContexts.NewMenu)
 
-return function(p1, Callback, Callback1, Person) --[[ Line: 22 ]]
+return function(p1, Callback, Callback1, Person)
 	-- upvalues: ReportTypes (copy), CollectAnalyticsParametersModule (copy), ReportAnythingAnalyticsModule (copy), NewReportAbuseAnalytics (copy), ConstantsModule (copy)
-	return function(p2, Callback2: (any) -> ()) --[[ Line: 28 ]]
+	return function(p2, Callback2: (any) -> ())
 		-- upvalues: p1 (copy), Person (copy), ReportTypes (upval), CollectAnalyticsParametersModule (upval), ReportAnythingAnalyticsModule (upval), NewReportAbuseAnalytics (upval), ConstantsModule (upval), Callback (copy), Callback1 (copy)
 		if p1.menuEverShown then
 			NewReportAbuseAnalytics:reportInGameAbuseReportInteraction(if Person == ReportTypes.Person then CollectAnalyticsParametersModule.forPersonReport(p1, p2, ReportAnythingAnalyticsModule.getAccumulatedParameters()) else CollectAnalyticsParametersModule.forExperienceReport(p1, p2, ReportAnythingAnalyticsModule.getAccumulatedParameters()))

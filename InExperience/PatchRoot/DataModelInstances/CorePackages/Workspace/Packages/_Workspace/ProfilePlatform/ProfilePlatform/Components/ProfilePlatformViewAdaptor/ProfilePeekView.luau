@@ -12,13 +12,13 @@ local FFlagProfilePlatformPeekDraggerContrast = require(Parent.SharedFlags).FFla
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 local v1: number = if FFlagProfilePlatformNewProfileHeader then 0 else 25
 
-return function(p1) --[[ Line: 40 | Named "ProfilePeekView" ]]
+return function(p1)
 	-- upvalues: UseSelectorFunction (copy), FFlagProfilePlatformNewProfileHeader (copy), UseStyleFunction (copy), ReactModule (copy), PeekViewState (copy), v1 (copy), FFlagProfilePlatformPeekDraggerContrast (copy), EnumsModule (copy), View (copy), PeekView (copy)
-	local StatusBarHeight = p1.statusBarHeight or UseSelectorFunction(function(p2) --[[ Line: 42 ]]
+	local StatusBarHeight = p1.statusBarHeight or UseSelectorFunction(function(p2)
 		return p2.TopBar.statusBarHeight
 	end)
 	local UseStyleResult = if FFlagProfilePlatformNewProfileHeader then UseStyleFunction() else nil
-	local UseResult = ReactModule.useCallback(function(Closed, p2, p3) --[[ Line: 47 ]]
+	local UseResult = ReactModule.useCallback(function(Closed, p2, p3)
 		-- upvalues: PeekViewState (upval), p1 (copy)
 		if Closed == PeekViewState.Closed and p1.onClosed then
 			p1.onClosed()
@@ -53,7 +53,7 @@ return function(p1) --[[ Line: 40 | Named "ProfilePeekView" ]]
 				mountAsFullView = p1.mountAsFullView,
 				mountAnimation = p1.mountAnimation,
 				viewStateChanged = UseResult,
-				briefToFullTransitionPercent = function(p2) --[[ Line: 60 ]]
+				briefToFullTransitionPercent = function(p2)
 					-- upvalues: UseBindingResult2 (copy), p1 (copy)
 					UseBindingResult2(p2)
 					
@@ -79,7 +79,7 @@ return function(p1) --[[ Line: 40 | Named "ProfilePeekView" ]]
 			ZIndex = 1000,
 			Position = UDim2.new(0, 0, 0, 0),
 			Size = UDim2.new(1, 0, 0, StatusBarHeight + 56),
-			GroupTransparency = UseBindingResult:map(function(p2: number): number --[[ Line: 131 ]]
+			GroupTransparency = UseBindingResult:map(function(p2: number): number
 				return 1 - p2
 			end)
 		}, {
@@ -102,7 +102,7 @@ return function(p1) --[[ Line: 40 | Named "ProfilePeekView" ]]
 			ZIndex = 1000,
 			Size = UDim2.new(1, 0, 0, 56),
 			Position = UDim2.new(0, 0, 0, StatusBarHeight),
-			GroupTransparency = UseBindingResult:map(function(p2: number): number --[[ Line: 160 ]]
+			GroupTransparency = UseBindingResult:map(function(p2: number): number
 				return 1 - p2
 			end)
 		}, { TopBar = p1.topBarSlot })

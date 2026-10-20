@@ -11,7 +11,7 @@ local _ = require(Parent1.RobloxAppEnums)
 local View = require(Parent1.Foundation).View
 local UseDeviceOrientationFunction = require(Parent1.RobloxAppHooks).useDeviceOrientation
 
-local function _(Directional, p1, p2) --[[ Line: 22 ]]
+local function _(Directional, p1, p2)
 	-- upvalues: InputTypesEnumModule (copy), ResponsiveModule (copy)
 	if p1 then
 		return InputTypesEnumModule.InputType.SPATIAL_GAMEPAD
@@ -22,7 +22,7 @@ local function _(Directional, p1, p2) --[[ Line: 22 ]]
 	return if Directional == ResponsiveModule.Input.Pointer then InputTypesEnumModule.InputType.KEYBOARD elseif Directional == ResponsiveModule.Input.Directional then InputTypesEnumModule.InputType.GAMEPAD elseif Directional == ResponsiveModule.Input.Touch then InputTypesEnumModule.InputType.TOUCH else InputTypesEnumModule.InputType.KEYBOARD
 end
 
-return ReactModule.memo(function() --[[ Line: 43 | Named "HelpPageContainer" ]]
+return ReactModule.memo(function()
 	-- upvalues: ResponsiveModule (copy), InputTypesEnumModule (copy), UseDeviceOrientationFunction (copy), ReactModule (copy), HelpPageTelemetryModule (copy), KeyboardHelpPageModule (copy), GamepadHelpPageModule (copy), TouchHelpPageModule (copy), View (copy)
 	local UsePreferredInputResult = ResponsiveModule.usePreferredInput()
 	local UseLastInputResult = ResponsiveModule.useLastInput()
@@ -37,7 +37,7 @@ return ReactModule.memo(function() --[[ Line: 43 | Named "HelpPageContainer" ]]
 		SPATIALGAMEPAD = if UseLastInputResult == ResponsiveModule.Input.Pointer then InputTypesEnumModule.InputType.KEYBOARD elseif UseLastInputResult == ResponsiveModule.Input.Directional then InputTypesEnumModule.InputType.GAMEPAD elseif UseLastInputResult == ResponsiveModule.Input.Touch then InputTypesEnumModule.InputType.TOUCH else InputTypesEnumModule.InputType.KEYBOARD
 	end
 	local UseDeviceOrientationResult = UseDeviceOrientationFunction()
-	ReactModule.useEffect(function() --[[ Line: 50 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: HelpPageTelemetryModule (upval), UseDeviceOrientationResult (copy), SPATIALGAMEPAD (copy)
 		HelpPageTelemetryModule.default:logHelpPageInteraction("Help_Interaction", {
 			orientation = UseDeviceOrientationResult,

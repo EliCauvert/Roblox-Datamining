@@ -2,7 +2,7 @@
 local ReactModule = require(CorePackages.Packages.React)
 local StyleProviderWithDefaultTheme = require(CorePackages.Workspace.Packages.Style).StyleProviderWithDefaultTheme
 
-return function(p1, p2) --[[ Line: 7 ]]
+return function(p1, p2)
 	-- upvalues: ReactModule (copy), StyleProviderWithDefaultTheme (copy)
 	return ReactModule.createElement(StyleProviderWithDefaultTheme, {
 		withUiModeSupport = if p2 then p2.withUiModeSupport else false,

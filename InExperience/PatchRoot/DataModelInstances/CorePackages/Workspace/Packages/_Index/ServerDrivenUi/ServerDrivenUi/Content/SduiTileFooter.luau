@@ -7,7 +7,7 @@ local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFon
 local ImageSetLabel = require(Parent.UIBlox).Core.ImageSet.ImageSetLabel
 local TextSizeModule = require(Parent.TextSize)
 
-return ReactModule.memo(function(p1) --[[ Line: 61 | Named "SduiTileFooter" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: TextSizeModule (copy), UseTokensFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ReactModule (copy), ImageSetLabel (copy)
 	local LayoutOrder = p1.layoutOrder
 	local AnchorPoint = p1.anchorPoint

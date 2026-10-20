@@ -23,10 +23,10 @@ local FIntMaximumTraversalHistoryItemsFetch = Traversal.Flags.FIntMaximumTravers
 local FFlagTraversalExpPagePaddingFixes = Traversal.Flags.FFlagTraversalExpPagePaddingFixes
 local FFlagIntegrateTraversalHistoryInSideSheet = require(CorePackages.Workspace.Packages.SharedFlags).FFlagIntegrateTraversalHistoryInSideSheet
 
-return ReactModule.memo(ReactModule.forwardRef(function(_, p1) --[[ Line: 36 | Named "TraversalHistoryPage" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(_, p1)
 	-- upvalues: ReactModule (copy), FIntMaximumTraversalHistoryItemsFetch (copy), UseHistoryItemsFunction (copy), Constants (copy), SignalsReactModule (copy), ReactPageSignalModule (copy), UserInputService (copy), GetInputModeStoreFunction (copy), Input (copy), GuiService (copy), CryoModule (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), Default (copy), View (copy), FFlagIntegrateTraversalHistoryInSideSheet (copy), FFlagTraversalExpPagePaddingFixes (copy), HistoryPage (copy), TraversalLeaveConfirmationModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useImperativeHandle(p1, function() --[[ Line: 38 ]]
+	ReactModule.useImperativeHandle(p1, function()
 		-- upvalues: UseRefResult (copy)
 		return UseRefResult.current
 	end, {})
@@ -34,7 +34,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(_, p1) --[[ Line: 36 | N
 	local UseHistoryItemsResult = UseHistoryItemsFunction(UseStateResult)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Constants.NO_UNIVERSE_ID)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactPageSignalModule)
-	ReactModule.useEffect(function() --[[ Line: 45 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UserInputService (upval), GetInputModeStoreFunction (upval), Input (upval), UseRefResult (copy), GuiService (upval)
 		local LastInputType = UserInputService:GetLastInputType()
 		local LastInputType1 = GetInputModeStoreFunction().getLastInputType()
@@ -43,11 +43,11 @@ return ReactModule.memo(ReactModule.forwardRef(function(_, p1) --[[ Line: 36 | N
 			GuiService.SelectedCoreObject = UseRefResult.current
 		end
 	end, {})
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 54 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(p2)
 	end, { UseStateResult2_1 })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 58 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy), Constants (upval), UserInputService (upval), GetInputModeStoreFunction (upval), Input (upval), UseRefResult (copy), GuiService (upval)
 		UseStateResult2_1(Constants.NO_UNIVERSE_ID)
 		local LastInputType = UserInputService:GetLastInputType()
@@ -57,9 +57,9 @@ return ReactModule.memo(ReactModule.forwardRef(function(_, p1) --[[ Line: 36 | N
 			GuiService.SelectedCoreObject = UseRefResult.current
 		end
 	end, {})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 68 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CryoModule (upval), UseHistoryItemsResult (copy), GetRbxThumbFunction (upval), ThumbnailType (upval), ThumbnailSize (upval)
-		return (CryoModule.List.map(UseHistoryItemsResult, function(p2) --[[ Line: 69 ]]
+		return (CryoModule.List.map(UseHistoryItemsResult, function(p2)
 			-- upvalues: GetRbxThumbFunction (upval), ThumbnailType (upval), ThumbnailSize (upval)
 			return {
 				placeId = p2.placeId,
@@ -70,7 +70,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(_, p1) --[[ Line: 36 | N
 			}
 		end))
 	end, { UseHistoryItemsResult })
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 81 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult (copy), Default (upval), UseStateResult2 (copy)
 		if #Default:getUniverseHistory() > UseStateResult then
 			UseStateResult2(UseStateResult + p2)
@@ -84,7 +84,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(_, p1) --[[ Line: 36 | N
 	}, {
 		HistoryPage = ReactModule.createElement(HistoryPage, {
 			historyItems = UseMemoResult,
-			onHistoryClose = function() --[[ Line: 93 ]]
+			onHistoryClose = function()
 				-- upvalues: UseSignalStateResult (copy)
 				UseSignalStateResult.setCurrentReactPage(nil)
 			end,

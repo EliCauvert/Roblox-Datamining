@@ -7,11 +7,11 @@ local Icon = FoundationModule.Icon
 local View = FoundationModule.View
 local GameSettings = UserSettings().GameSettings
 
-return ReactModule.memo(function(Frame) --[[ Line: 20 | Named "LayoutToggleButton" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: ReactModule (copy), GameSettings (copy), View (copy), Icon (copy), IconName (copy), InputSize (copy)
-	local UseResult = ReactModule.useCallback(function(PeoplePageLayout) --[[ Line: 21 ]]
+	local UseResult = ReactModule.useCallback(function(PeoplePageLayout)
 		-- upvalues: GameSettings (upval), Frame (copy)
-		return function() --[[ Line: 22 ]]
+		return function()
 			-- upvalues: GameSettings (upval), PeoplePageLayout (copy), Frame (upval)
 			GameSettings.PeoplePageLayout = PeoplePageLayout
 			Frame.setLayout(PeoplePageLayout)

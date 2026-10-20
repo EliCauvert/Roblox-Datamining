@@ -2,7 +2,7 @@
 local ReactModule = require(Parent.React)
 local View = require(Parent.Foundation).View
 
-return function(p1) --[[ Line: 14 | Named "ItemCardIndicatorStack" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy)
 	return ReactModule.createElement(View, {
 		tag = "row align-x-right align-y-center gap-xsmall auto-xy",

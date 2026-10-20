@@ -12,7 +12,7 @@ local PartialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
 local GetPartialPageModalMiddleContentWidthFunction = UIBloxModule.App.Dialog.Modal.getPartialPageModalMiddleContentWidth
 local MergePropsModule = require(PhoneUpsell.Utils.mergeProps)
 
-local function noOp() --[[ Line: 34 ]] end
+local function noOp() end
 
 local config = {
 	isButtonDisabled = false,
@@ -21,7 +21,7 @@ local config = {
 	onExtraButtonClick = noOp
 }
 
-local function getButtonStackProps(Text, OnActivated, IsDisabled, Text1, OnActivated1, IsDisabled1) --[[ Line: 43 ]]
+local function getButtonStackProps(Text, OnActivated, IsDisabled, Text1, OnActivated1, IsDisabled1)
 	-- upvalues: ButtonType (copy)
 	local Buttons = {
 		{
@@ -51,7 +51,7 @@ local function getButtonStackProps(Text, OnActivated, IsDisabled, Text1, OnActiv
 	}
 end
 
-return function(p1) --[[ Line: 79 | Named "EntryView" ]]
+return function(p1)
 	-- upvalues: MergePropsModule (copy), config (copy), GetPartialPageModalMiddleContentWidthFunction (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), PartialPageModal (copy), getButtonStackProps (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local MergePropsModuleResult = MergePropsModule(config, p1)
 	local PartialPageModalMiddleContentWidth = GetPartialPageModalMiddleContentWidthFunction(MergePropsModuleResult.screenSize.X)

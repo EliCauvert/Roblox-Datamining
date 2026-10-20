@@ -12,7 +12,7 @@ local list1 = {
 }
 local t = {}
 
-local function canStartInterval(Key) --[[ Line: 53 ]]
+local function canStartInterval(Key)
 	-- upvalues: AppChatPerfEventInfoModule (copy), AppChatTTITrackerModule (copy)
 	local ParentTTI = AppChatPerfEventInfoModule.getParentTTI(Key)
 	local TTIPage = AppChatPerfEventInfoModule.getTTIPage(ParentTTI)
@@ -29,13 +29,13 @@ local function canStartInterval(Key) --[[ Line: 53 ]]
 	end
 end
 
-local function _(ScrollConversationList) --[[ Line: 73 | Named "getMetricsToTrack" ]]
+local function _(ScrollConversationList)
 	-- upvalues: AppChatPerfEventModule (copy), list1 (copy), list (copy)
 	return if ScrollConversationList == AppChatPerfEventModule.ScrollConversationList or ScrollConversationList == AppChatPerfEventModule.ScrollMessageList then list1 else list
 end
 
 local AppChatIntervalTrackerModule = {
-	start = function(Key, _, p1): boolean --[[ Line: 86 ]]
+	start = function(Key, _, p1): boolean
 		-- upvalues: AppChatPerfEventInfoModule (copy), canStartInterval (copy), AppChatPerf (copy), IntervalPerformanceTracker (copy), AppChatPerfEventModule (copy), list1 (copy), list (copy), t (copy)
 		local IntervalName = AppChatPerfEventInfoModule.getIntervalName(Key)
 		local CanStartInterval, CanStartInterval2 = canStartInterval(Key)
@@ -52,7 +52,7 @@ local AppChatIntervalTrackerModule = {
 			return false
 		end
 	end,
-	finish = function(Key): boolean --[[ Line: 109 ]]
+	finish = function(Key): boolean
 		-- upvalues: AppChatPerfEventInfoModule (copy), t (copy), AppChatPerf (copy), IntervalPerformanceTracker (copy)
 		local IntervalName = AppChatPerfEventInfoModule.getIntervalName(Key)
 		
@@ -66,7 +66,7 @@ local AppChatIntervalTrackerModule = {
 			return false
 		end
 	end,
-	cancel = function(Key): boolean --[[ Line: 120 ]]
+	cancel = function(Key): boolean
 		-- upvalues: AppChatPerfEventInfoModule (copy), t (copy), AppChatPerf (copy), IntervalPerformanceTracker (copy)
 		local IntervalName = AppChatPerfEventInfoModule.getIntervalName(Key)
 		
@@ -80,11 +80,11 @@ local AppChatIntervalTrackerModule = {
 			return false
 		end
 	end,
-	isActive = function(p1): boolean --[[ Line: 131 ]]
+	isActive = function(p1): boolean
 		-- upvalues: t (copy)
 		return t[p1] == true
 	end,
-	cancelIntervalsForTTI = function(p1, p2) --[[ Line: 137 ]]
+	cancelIntervalsForTTI = function(p1, p2)
 		-- upvalues: AppChatPerfEventInfoModule (copy), t (copy), AppChatPerf (copy), IntervalPerformanceTracker (copy)
 		for _, value in AppChatPerfEventInfoModule.getIntervalsForTTI(p1) do
 			if t[value] then
@@ -96,7 +96,7 @@ local AppChatIntervalTrackerModule = {
 		end
 	end
 }
-AppChatTTITrackerModule.setOnConversationSwitch(function(p3) --[[ Line: 150 ]]
+AppChatTTITrackerModule.setOnConversationSwitch(function(p3)
 	-- upvalues: AppChatIntervalTrackerModule (copy)
 	AppChatIntervalTrackerModule.cancelIntervalsForTTI(p3, "conversation_switch")
 end)

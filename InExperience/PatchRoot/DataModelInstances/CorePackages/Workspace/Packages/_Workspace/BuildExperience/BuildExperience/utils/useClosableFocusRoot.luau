@@ -10,7 +10,7 @@ local EventMap = {
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p1) --[[ Line: 30 | Named "useClosableFocusRoot" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), EventMap (copy)
 	local OnCloseFunction = p1.onClose
 	
@@ -20,11 +20,11 @@ return function(p1) --[[ Line: 30 | Named "useClosableFocusRoot" ]]
 		isFocusable = p1.isOpen,
 		shouldRestoreFocus = p1.shouldRestoreFocus,
 		eventMap = EventMap,
-		eventHandlers = ReactModule.useMemo(function() --[[ Line: 32 ]]
+		eventHandlers = ReactModule.useMemo(function()
 			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), OnCloseFunction (copy)
 			return {
 				[FocusNavigationEventNameEnum.NavigateBack] = {
-					handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 35 ]]
+					handler = InputHandlersModule.onRelease(function(p2)
 						-- upvalues: OnCloseFunction (upval)
 						OnCloseFunction()
 						p2:cancel()

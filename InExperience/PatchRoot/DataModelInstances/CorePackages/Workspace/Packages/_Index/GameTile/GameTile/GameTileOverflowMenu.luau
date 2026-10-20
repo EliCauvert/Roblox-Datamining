@@ -56,7 +56,7 @@ local FFlagLuaAppEnableHomepageOneByTwoTile = SharedFlagsModule.FFlagLuaAppEnabl
 local FFlagLuaAppGameTileNotInterestedDirectAction = SharedFlagsModule.FFlagLuaAppGameTileNotInterestedDirectAction
 local FFlagLuaAppExtractNotInterestedHelper = SharedFlagsModule.FFlagLuaAppExtractNotInterestedHelper
 
-return ReactModule.memo(function(p1) --[[ Line: 106 | Named "GameTileOverflowMenu" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FFlagLuaAppGameTileNotInterestedDirectAction (copy), UseTokensFunction (copy), UseLastInputFunction (copy), GetOverflowMenuSignalStoreFunction (copy), ReactModule (copy), FFlagLuaAppEnableHomepageOneByTwoTile (copy), GameTileOverflowMenuActionFunction (copy), FFlagLuaAppFixExplicitFeedbackConsoleTelemetry (copy), UseGameTileOverflowMenuFocusNavigationModule (copy), UseGameTileActionsModule (copy), FFlagSignalsNavP3fGameDetails (copy), UseSignalStateFunction (copy), GetLegacyNavigationStore (copy), UseSelectorFunction (copy), FFlagUseNavigationSelectors (copy), Selectors (copy), UserInputService (copy), OverflowMenu (copy), ResponsiveModule (copy), IconSize (copy), UseDispatchFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UseLocalizationFunction (copy), FFlagLuaAppContinueSortInstantPlay (copy), FFlagLuaAppEnableReportExperience (copy), UserSignalTypes (copy), FlaggedMutedErrorFunction (copy), OpenDynamicAbuseReportModule (copy), AbuseVectorModule (copy), CloseCentralOverlayFunction (copy), Default (copy), NotInterestedUserSignalTelemetryEventConfigsModule (copy), SetNetworkingErrorToastFunction (copy), PostSendUserSignalFunction (copy), HttpService (copy), MutedErrorFunction (copy), FFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), SendNotInterestedFeedbackFormAnalyticsModule (copy), FFlagLuaAppMakeDisclaimerOptInForFeedbackForm (copy), TileOverflowMenuItems (copy), FFlagLuaAppExtractNotInterestedHelper (copy), ActivateGameNotInterestedModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), IconName (copy), FFlagEnableNewReportFlowGameTile (copy), FFlagAddThumbnailSelectorReport (copy)
 	if FFlagLuaAppGameTileNotInterestedDirectAction then
 		local UseTokensResult = UseTokensFunction()
@@ -72,14 +72,14 @@ return ReactModule.memo(function(p1) --[[ Line: 106 | Named "GameTileOverflowMen
 			table.insert(List, i)
 		end
 		local Joined = table.concat(List, ",")
-		local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 121 ]]
+		local UseResult = ReactModule.useCallback(function(p2)
 			-- upvalues: p1 (copy), Joined (copy)
 			if p1.onMenuOpenChanged then
 				p1.onMenuOpenChanged(p2, Joined)
 			end
 		end, { p1.onMenuOpenChanged, Joined })
 		local UseGameTileOverflowMenuFocusNavigationModuleResult = if FFlagLuaAppFixExplicitFeedbackConsoleTelemetry then nil else UseGameTileOverflowMenuFocusNavigationModule(MenuKey, p1.isSelected, p1.parentRef)
-		local UseGameTileActionsModuleResult = UseGameTileActionsModule(p1, (ReactModule.useCallback(function(MenuItem) --[[ Line: 128 ]]
+		local UseGameTileActionsModuleResult = UseGameTileActionsModule(p1, (ReactModule.useCallback(function(MenuItem)
 			-- upvalues: p1 (copy), CollectionId (copy), Joined (copy), FFlagLuaAppEnableHomepageOneByTwoTile (upval), GameTileOverflowMenuActionFunction (upval)
 			GameTileOverflowMenuActionFunction({
 				actionType = "GameTileOverflowMenuItemActivated",
@@ -101,12 +101,12 @@ return ReactModule.memo(function(p1) --[[ Line: 106 | Named "GameTileOverflowMen
 			UseGameTileOverflowMenuFocusNavigationModuleResult = UseGameTileOverflowMenuFocusNavigationModule(MenuKey, p1.isSelected, p1.parentRef, UseResult)
 		end
 		local UseSignalStateResult = nil
-		UseSignalStateResult = if FFlagSignalsNavP3fGameDetails then UseSignalStateFunction(GetLegacyNavigationStore(false).getCurrentRouteKey) else UseSelectorFunction(function(p2) --[[ Line: 165 ]]
+		UseSignalStateResult = if FFlagSignalsNavP3fGameDetails then UseSignalStateFunction(GetLegacyNavigationStore(false).getCurrentRouteKey) else UseSelectorFunction(function(p2)
 			-- upvalues: FFlagUseNavigationSelectors (upval), Selectors (upval)
 			return (if FFlagUseNavigationSelectors then Selectors.selectCurrentRoactNavigationRoute(p2).key else p2.Navigation.currentRoute.key) or ""
 		end)
 		local UseRefResult = ReactModule.useRef(UseSignalStateResult)
-		ReactModule.useEffect(function() --[[ Line: 174 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseSignalStateResult (ref), UseRefResult (copy), OverflowMenuSignalStore (copy), MenuKey (copy)
 			if UseSignalStateResult ~= UseRefResult.current then
 				OverflowMenuSignalStore.closeMenu(MenuKey)
@@ -116,16 +116,16 @@ return ReactModule.memo(function(p1) --[[ Line: 106 | Named "GameTileOverflowMen
 			MenuKey,
 			OverflowMenuSignalStore.closeMenu
 		})
-		ReactModule.useEffect(function() --[[ Line: 180 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p1 (copy), UserInputService (upval), OverflowMenuSignalStore (copy), MenuKey (copy)
-			local InputBeganConnection = if p1.menuOpen then UserInputService.InputBegan:Connect(function(Input, _) --[[ Line: 184 ]]
+			local InputBeganConnection = if p1.menuOpen then UserInputService.InputBegan:Connect(function(Input, _)
 				-- upvalues: p1 (upval), OverflowMenuSignalStore (upval), MenuKey (upval)
 				if Input.UserInputType == Enum.UserInputType.MouseButton1 and not p1.isHovered then
 					OverflowMenuSignalStore.closeMenu(MenuKey)
 				end
 			end) else nil
 			
-			return function() --[[ Line: 193 ]]
+			return function()
 				-- upvalues: InputBeganConnection (ref)
 				if InputBeganConnection then
 					InputBeganConnection:Disconnect()
@@ -182,7 +182,7 @@ return ReactModule.memo(function(p1) --[[ Line: 106 | Named "GameTileOverflowMen
 			SetFocusRef = UseGameTileOverflowMenuFocusNavigationModule(MenuKey1, UseSignalStateResult, p1.parentRef)
 		end
 		local UseSignalStateResult = { UseLocalizationResult }
-		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 245 ]]
+		local UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: UserSignalTypes (upval), UseLocalizationResult (copy)
 			return {
 				{
@@ -209,7 +209,7 @@ return ReactModule.memo(function(p1) --[[ Line: 106 | Named "GameTileOverflowMen
 			}
 		end, UseSignalStateResult)
 		
-		UseSignalStateResult = function(p2, TextResponse) --[[ Line: 272 ]]
+		UseSignalStateResult = function(p2, TextResponse)
 			-- upvalues: UseMemoResult (copy), UserSignalTypes (upval), p1 (copy), FlaggedMutedErrorFunction (upval), UseDispatchResult (copy), OpenDynamicAbuseReportModule (upval), AbuseVectorModule (upval), CloseCentralOverlayFunction (upval), Default (upval), NotInterestedUserSignalTelemetryEventConfigsModule (upval), SetNetworkingErrorToastFunction (upval), PostSendUserSignalFunction (upval), UseRoactServiceResult (copy), HttpService (upval), CollectionId1 (copy), MutedErrorFunction (upval), FFlagLuaAppNotInterestedFeedbackFormTelemetry (upval), SendNotInterestedFeedbackFormAnalyticsModule (upval)
 			local Flag = false
 			local Items = {}
@@ -226,7 +226,7 @@ return ReactModule.memo(function(p1) --[[ Line: 106 | Named "GameTileOverflowMen
 					UseDispatchResult(OpenDynamicAbuseReportModule({
 						abuseVector = AbuseVectorModule.Place,
 						targetId = p1.placeId,
-						onClose = function() --[[ Line: 294 ]]
+						onClose = function()
 							-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
 							UseDispatchResult(CloseCentralOverlayFunction())
 						end
@@ -241,7 +241,7 @@ return ReactModule.memo(function(p1) --[[ Line: 106 | Named "GameTileOverflowMen
 				
 				return
 			end
-			local Success, Result = pcall(function() --[[ Line: 310 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: PostSendUserSignalFunction (upval), UseRoactServiceResult (upval), HttpService (upval), UserSignalTypes (upval), TextResponse (copy), Items (copy), p1 (upval), CollectionId1 (upval), UseDispatchResult (upval), SetNetworkingErrorToastFunction (upval), Default (upval), NotInterestedUserSignalTelemetryEventConfigsModule (upval)
 				PostSendUserSignalFunction(UseRoactServiceResult, {
 					stringValue = HttpService:JSONEncode({
@@ -258,7 +258,7 @@ return ReactModule.memo(function(p1) --[[ Line: 106 | Named "GameTileOverflowMen
 						topicId = CollectionId1,
 						subIds = { CollectionId1 }
 					}
-				}, UserSignalTypes.SignalValueType.String, UserSignalTypes.SignalType.NotInterestedFeedback):catch(function(Err) --[[ Line: 329 ]]
+				}, UserSignalTypes.SignalValueType.String, UserSignalTypes.SignalType.NotInterestedFeedback):catch(function(Err)
 					-- upvalues: UseDispatchResult (upval), SetNetworkingErrorToastFunction (upval), Default (upval), NotInterestedUserSignalTelemetryEventConfigsModule (upval)
 					UseDispatchResult(SetNetworkingErrorToastFunction(Err))
 					Default:logRobloxTelemetryCounter(NotInterestedUserSignalTelemetryEventConfigsModule.NotInterestedUserSignalFailed, 1)
@@ -285,7 +285,7 @@ return ReactModule.memo(function(p1) --[[ Line: 106 | Named "GameTileOverflowMen
 		local UseResult1 = nil
 		
 		if FFlagLuaAppNotInterestedFeedbackFormTelemetry then
-			UseSignalStateResult = ReactModule.useCallback(function(p3) --[[ Line: 366 ]]
+			UseSignalStateResult = ReactModule.useCallback(function(p3)
 				-- upvalues: SendNotInterestedFeedbackFormAnalyticsModule (upval), p1 (copy), CollectionId1 (copy)
 				if not p3 then
 					SendNotInterestedFeedbackFormAnalyticsModule({
@@ -297,7 +297,7 @@ return ReactModule.memo(function(p1) --[[ Line: 106 | Named "GameTileOverflowMen
 					return
 				end
 			end, { p1.appPage, p1.universeId, CollectionId1 })
-			UseResult1 = ReactModule.useCallback(function() --[[ Line: 379 ]]
+			UseResult1 = ReactModule.useCallback(function()
 				-- upvalues: SendNotInterestedFeedbackFormAnalyticsModule (upval), p1 (copy), CollectionId1 (copy)
 				SendNotInterestedFeedbackFormAnalyticsModule({
 					actionType = "NotInterestedFeedbackFormOpened",
@@ -306,7 +306,7 @@ return ReactModule.memo(function(p1) --[[ Line: 106 | Named "GameTileOverflowMen
 				}, p1.appPage)
 			end, { p1.appPage, p1.universeId, CollectionId1 })
 		end
-		local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 388 ]]
+		local UseMemoResult1 = ReactModule.useMemo(function()
 			-- upvalues: UseLocalizationResult (copy), UseMemoResult (copy), UseResult (copy), FFlagLuaAppNotInterestedFeedbackFormTelemetry (upval), UseSignalStateResult (ref), FFlagLuaAppMakeDisclaimerOptInForFeedbackForm (upval)
 			return {
 				dialogTitle = UseLocalizationResult.dialogTitle,
@@ -324,13 +324,13 @@ return ReactModule.memo(function(p1) --[[ Line: 106 | Named "GameTileOverflowMen
 			table.insert(List, i1)
 		end
 		local Joined1 = table.concat(List, ",")
-		local UseResult2 = ReactModule.useCallback(function(p3) --[[ Line: 406 ]]
+		local UseResult2 = ReactModule.useCallback(function(p3)
 			-- upvalues: p1 (copy), Joined1 (copy)
 			if p1.onMenuOpenChanged then
 				p1.onMenuOpenChanged(p3, Joined1)
 			end
 		end, { p1.onMenuOpenChanged, Joined1 })
-		local UseResult3 = ReactModule.useCallback(function(MenuItem) --[[ Line: 413 ]]
+		local UseResult3 = ReactModule.useCallback(function(MenuItem)
 			-- upvalues: p1 (copy), CollectionId1 (copy), Joined1 (copy), FFlagLuaAppEnableHomepageOneByTwoTile (upval), GameTileOverflowMenuActionFunction (upval)
 			GameTileOverflowMenuActionFunction({
 				actionType = "GameTileOverflowMenuItemActivated",
@@ -351,7 +351,7 @@ return ReactModule.memo(function(p1) --[[ Line: 106 | Named "GameTileOverflowMen
 		if FFlagLuaAppFixExplicitFeedbackConsoleTelemetry then
 			SetFocusRef = UseGameTileOverflowMenuFocusNavigationModule(MenuKey1, p1.isSelected, p1.parentRef, UseResult2)
 		end
-		local UseResult4 = if FFlagLuaAppContinueSortInstantPlay then ReactModule.useCallback(function() --[[ Line: 440 ]]
+		local UseResult4 = if FFlagLuaAppContinueSortInstantPlay then ReactModule.useCallback(function()
 			-- upvalues: p1 (copy), UseResult3 (copy), TileOverflowMenuItems (upval)
 			if p1.onGameDetailsActivated then
 				p1.onGameDetailsActivated()
@@ -359,7 +359,7 @@ return ReactModule.memo(function(p1) --[[ Line: 106 | Named "GameTileOverflowMen
 			UseResult3(TileOverflowMenuItems.GameDetails)
 		end, { p1.onGameDetailsActivated, UseResult3 }) else nil
 		local UseResult5 = nil
-		UseResult5 = if FFlagLuaAppExtractNotInterestedHelper then ReactModule.useCallback(function() --[[ Line: 452 ]]
+		UseResult5 = if FFlagLuaAppExtractNotInterestedHelper then ReactModule.useCallback(function()
 			-- upvalues: ActivateGameNotInterestedModule (upval), p1 (copy), CollectionId1 (copy), UseDispatchResult (copy), UseLocalizationResult (copy), UseRoactServiceResult (copy), UseResult3 (copy), TileOverflowMenuItems (upval)
 			if ActivateGameNotInterestedModule({
 				appPage = p1.appPage,
@@ -378,7 +378,7 @@ return ReactModule.memo(function(p1) --[[ Line: 106 | Named "GameTileOverflowMen
 			CollectionId1, UseDispatchResult, UseLocalizationResult, UseRoactServiceResult,
 			UseResult3, p1.appPage, p1.isSponsored, p1.placeId, p1.setGameHidden,
 			p1.universeId
-		}) else ReactModule.useCallback(function() --[[ Line: 484 ]]
+		}) else ReactModule.useCallback(function()
 			-- upvalues: p1 (copy), Default (upval), NotInterestedUserSignalTelemetryEventConfigsModule (upval), UseDispatchResult (copy), SetNetworkingErrorToastFunction (upval), SetCentralOverlayFunction (upval), CentralOverlayType (upval), UseMemoResult1 (copy), IconName (upval), FFlagLuaAppNotInterestedFeedbackFormTelemetry (upval), UseResult1 (ref), PostSendUserSignalFunction (upval), UseRoactServiceResult (copy), UserSignalTypes (upval), CollectionId1 (copy), MutedErrorFunction (upval), UseResult3 (copy), TileOverflowMenuItems (upval)
 			if not p1.appPage then
 				Default:logRobloxTelemetryCounter(NotInterestedUserSignalTelemetryEventConfigsModule.NotInterestedMissingAppPage, 1)
@@ -392,7 +392,7 @@ return ReactModule.memo(function(p1) --[[ Line: 106 | Named "GameTileOverflowMen
 				toastIcon = IconName.CircleMinus,
 				onToastActivated = if FFlagLuaAppNotInterestedFeedbackFormTelemetry then UseResult1 else nil
 			}))
-			local Success, Result = pcall(function() --[[ Line: 503 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: PostSendUserSignalFunction (upval), UseRoactServiceResult (upval), p1 (upval), UserSignalTypes (upval), CollectionId1 (upval), UseDispatchResult (upval), SetNetworkingErrorToastFunction (upval), Default (upval), NotInterestedUserSignalTelemetryEventConfigsModule (upval)
 				PostSendUserSignalFunction(UseRoactServiceResult, { boolValue = true }, {
 					id = p1.universeId,
@@ -402,7 +402,7 @@ return ReactModule.memo(function(p1) --[[ Line: 106 | Named "GameTileOverflowMen
 						topicId = CollectionId1,
 						subIds = { CollectionId1 }
 					}
-				}, UserSignalTypes.SignalValueType.Bool, UserSignalTypes.SignalType.NotInterested):catch(function(Err) --[[ Line: 517 ]]
+				}, UserSignalTypes.SignalValueType.Bool, UserSignalTypes.SignalType.NotInterested):catch(function(Err)
 					-- upvalues: p1 (upval), UseDispatchResult (upval), SetNetworkingErrorToastFunction (upval), Default (upval), NotInterestedUserSignalTelemetryEventConfigsModule (upval)
 					p1.setGameHidden(p1.universeId, false)
 					UseDispatchResult(SetNetworkingErrorToastFunction(Err))
@@ -419,7 +419,7 @@ return ReactModule.memo(function(p1) --[[ Line: 106 | Named "GameTileOverflowMen
 			UseRoactServiceResult, p1.setGameHidden, UseDispatchResult, UseMemoResult1,
 			p1.universeId, CollectionId1, p1.appPage, UseResult3, p1.isSponsored
 		})
-		local UseResult6 = ReactModule.useCallback(function() --[[ Line: 550 ]]
+		local UseResult6 = ReactModule.useCallback(function()
 			-- upvalues: UseDispatchResult (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval), p1 (copy), FFlagLuaAppEnableHomepageOneByTwoTile (upval), UseResult3 (copy), TileOverflowMenuItems (upval)
 			UseDispatchResult(SetCentralOverlayFunction(CentralOverlayType.WhyThisAdModal, {
 				universeId = p1.universeId,
@@ -433,13 +433,13 @@ return ReactModule.memo(function(p1) --[[ Line: 106 | Named "GameTileOverflowMen
 			if FFlagLuaAppEnableHomepageOneByTwoTile then p1.contentType else nil,
 			UseResult3
 		})
-		local UseResult7 = ReactModule.useCallback(function() --[[ Line: 571 ]]
+		local UseResult7 = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy), FlaggedMutedErrorFunction (upval), UseDispatchResult (copy), OpenDynamicAbuseReportModule (upval), AbuseVectorModule (upval), CloseCentralOverlayFunction (upval), UseResult3 (copy), TileOverflowMenuItems (upval)
 			if p1.adId then
 				UseDispatchResult(OpenDynamicAbuseReportModule({
 					abuseVector = AbuseVectorModule.AdV2,
 					targetId = p1.adId,
-					onClose = function() --[[ Line: 580 ]]
+					onClose = function()
 						-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
 						UseDispatchResult(CloseCentralOverlayFunction())
 					end
@@ -451,14 +451,14 @@ return ReactModule.memo(function(p1) --[[ Line: 106 | Named "GameTileOverflowMen
 				FlaggedMutedErrorFunction("ReportSponsoredAdError", "Report ad clicked without valid target ad id")
 			end
 		end, { UseDispatchResult, p1.adId, UseResult3 })
-		local UseResult8 = if FFlagLuaAppEnableReportExperience then ReactModule.useCallback(function() --[[ Line: 596 ]]
+		local UseResult8 = if FFlagLuaAppEnableReportExperience then ReactModule.useCallback(function()
 			-- upvalues: p1 (copy), FlaggedMutedErrorFunction (upval), UseDispatchResult (copy), OpenDynamicAbuseReportModule (upval), FFlagEnableNewReportFlowGameTile (upval), AbuseVectorModule (upval), FFlagAddThumbnailSelectorReport (upval), CloseCentralOverlayFunction (upval), UseResult3 (copy), TileOverflowMenuItems (upval)
 			if p1.placeId then
 				UseDispatchResult(OpenDynamicAbuseReportModule({
 					abuseVector = if FFlagEnableNewReportFlowGameTile then AbuseVectorModule.GameTile else AbuseVectorModule.Place,
 					targetId = p1.placeId,
 					custom = if FFlagAddThumbnailSelectorReport then { universeId = p1.universeId } else nil,
-					onClose = function() --[[ Line: 613 ]]
+					onClose = function()
 						-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
 						UseDispatchResult(CloseCentralOverlayFunction())
 					end
@@ -470,7 +470,7 @@ return ReactModule.memo(function(p1) --[[ Line: 106 | Named "GameTileOverflowMen
 				FlaggedMutedErrorFunction("ReportExperienceError", "Report experience clicked without valid target place id")
 			end
 		end, { UseDispatchResult, p1.placeId, p1.universeId, UseResult3 }) else nil
-		local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 630 ]]
+		local UseMemoResult2 = ReactModule.useMemo(function()
 			-- upvalues: FFlagLuaAppContinueSortInstantPlay (upval), p1 (copy), TileOverflowMenuItems (upval), UseLocalizationResult (copy), UseResult4 (copy), UseResult5 (ref), UseResult6 (copy), IconName (upval), UseResult7 (copy), FFlagLuaAppEnableReportExperience (upval), UseResult8 (copy)
 			local List = {}
 			
@@ -523,27 +523,27 @@ return ReactModule.memo(function(p1) --[[ Line: 106 | Named "GameTileOverflowMen
 			p1.availableMenuItems
 		})
 		local UseSignalStateResult1 = nil
-		UseSignalStateResult1 = if FFlagSignalsNavP3fGameDetails then UseSignalStateFunction(GetLegacyNavigationStore(false).getCurrentRouteKey) else UseSelectorFunction(function(p3) --[[ Line: 699 ]]
+		UseSignalStateResult1 = if FFlagSignalsNavP3fGameDetails then UseSignalStateFunction(GetLegacyNavigationStore(false).getCurrentRouteKey) else UseSelectorFunction(function(p3)
 			-- upvalues: FFlagUseNavigationSelectors (upval), Selectors (upval)
 			return (if FFlagUseNavigationSelectors then Selectors.selectCurrentRoactNavigationRoute(p3).key else p3.Navigation.currentRoute.key) or ""
 		end)
 		local UseRefResult1 = ReactModule.useRef(UseSignalStateResult1)
-		ReactModule.useEffect(function() --[[ Line: 708 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseSignalStateResult1 (ref), UseRefResult1 (copy), OverflowMenuSignalStore1 (copy), MenuKey1 (copy)
 			if UseSignalStateResult1 ~= UseRefResult1.current then
 				OverflowMenuSignalStore1.closeMenu(MenuKey1)
 			end
 		end, { UseSignalStateResult1, MenuKey1 })
-		ReactModule.useEffect(function() --[[ Line: 714 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p1 (copy), UserInputService (upval), OverflowMenuSignalStore1 (copy), MenuKey1 (copy)
-			local InputBeganConnection = if p1.menuOpen then UserInputService.InputBegan:Connect(function(Input, _) --[[ Line: 717 ]]
+			local InputBeganConnection = if p1.menuOpen then UserInputService.InputBegan:Connect(function(Input, _)
 				-- upvalues: p1 (upval), OverflowMenuSignalStore1 (upval), MenuKey1 (upval)
 				if Input.UserInputType == Enum.UserInputType.MouseButton1 and not p1.isHovered then
 					OverflowMenuSignalStore1.closeMenu(MenuKey1)
 				end
 			end) else nil
 			
-			return function() --[[ Line: 725 ]]
+			return function()
 				-- upvalues: InputBeganConnection (ref)
 				if InputBeganConnection then
 					InputBeganConnection:Disconnect()

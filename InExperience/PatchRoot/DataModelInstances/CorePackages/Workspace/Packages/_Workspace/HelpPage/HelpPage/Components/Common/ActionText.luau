@@ -5,7 +5,7 @@ local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalizat
 local Text = require(Parent1.Foundation).Text
 local EscapeRichTextModule = require(Parent.Utils.escapeRichText)
 
-return (ReactModule.memo(function(Frame) --[[ Line: 23 ]]
+return (ReactModule.memo(function(Frame)
 	-- upvalues: UseLocalizationFunction (copy), EscapeRichTextModule (copy), ReactModule (copy), Text (copy)
 	local ActionLabels = Frame.actionLabels
 	local Labels = {}

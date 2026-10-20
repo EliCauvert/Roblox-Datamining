@@ -2,19 +2,19 @@
 local VideoService = game:GetService("VideoService")
 local Full = Enum.VideoSampleSize.Full
 
-return function(Content) --[[ Line: 18 | Named "useVideoPosterFrame" ]]
+return function(Content)
 	-- upvalues: ReactModule (copy), VideoService (copy), Full (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-	ReactModule.useEffect(function() --[[ Line: 21 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), Content (copy), VideoService (upval), Full (upval)
 		UseStateResult2(nil)
 		
 		if Content == nil then return end
 		local Flag = false
-		task.spawn(function() --[[ Line: 28 ]]
+		task.spawn(function()
 			-- upvalues: VideoService (upval), Content (upval), Full (upval), Flag (ref), UseStateResult2 (upval)
 			local VideoSamplerAsync = nil
-			local Success, Result = pcall(function() --[[ Line: 30 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: VideoSamplerAsync (ref), VideoService (upval), Content (upval), Full (upval)
 				VideoSamplerAsync = VideoService:CreateVideoSamplerAsync(Content, { Size = Full })
 				
@@ -22,7 +22,7 @@ return function(Content) --[[ Line: 18 | Named "useVideoPosterFrame" ]]
 			end)
 			
 			if VideoSamplerAsync ~= nil then
-				pcall(function() --[[ Line: 37 ]]
+				pcall(function()
 					-- upvalues: VideoSamplerAsync (ref)
 					VideoSamplerAsync:Destroy()
 				end)
@@ -35,7 +35,7 @@ return function(Content) --[[ Line: 18 | Named "useVideoPosterFrame" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 50 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end

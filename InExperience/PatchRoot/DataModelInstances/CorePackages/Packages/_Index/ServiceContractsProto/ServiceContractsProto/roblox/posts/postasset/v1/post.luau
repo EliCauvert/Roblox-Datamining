@@ -5,7 +5,7 @@ local DurationModule = require(script.Parent.Parent.Parent.Parent.Parent.google.
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 545 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		metadata = if p1 == nil or p1.metadata == nil then nil else p1.metadata,
@@ -13,7 +13,7 @@ function Module.new(p1) --[[ Line: 545 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 552 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -36,7 +36,7 @@ function Module:encode() --[[ Line: 552 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 575 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -73,7 +73,7 @@ function Module.decode(Buf) --[[ Line: 575 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 623 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.metadata ~= nil then
@@ -90,7 +90,7 @@ function Module:jsonEncode() --[[ Line: 623 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 641 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy), Label (copy)
 	local NewModule = Module.new()
 	
@@ -117,7 +117,7 @@ TypeRegistryModule.default:register(Label.Post)
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(p1) --[[ Line: 674 ]]
+function Module1.new(p1)
 	-- upvalues: Label (copy), Module1 (copy)
 	return (setmetatable({
 		origin = if p1 == nil or p1.origin == nil then assert(Label.PostOrigin.fromNumber(0), "Enum has no 0 default") else p1.origin,
@@ -127,7 +127,7 @@ function Module1.new(p1) --[[ Line: 674 ]]
 	}, Module1))
 end
 
-function Module1:encode() --[[ Line: 685 ]]
+function Module1:encode()
 	-- upvalues: Label (copy), ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -155,7 +155,7 @@ function Module1:encode() --[[ Line: 685 ]]
 	return Buf1
 end
 
-function Module1.decode(Buf) --[[ Line: 718 ]]
+function Module1.decode(Buf)
 	-- upvalues: Module1 (copy), ProtoModule (copy), Label (copy), DurationModule (copy)
 	local NewModule = Module1.new()
 	local v2 = 0
@@ -202,7 +202,7 @@ function Module1.decode(Buf) --[[ Line: 718 ]]
 	return NewModule
 end
 
-function Module1:jsonEncode() --[[ Line: 776 ]]
+function Module1:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -221,7 +221,7 @@ function Module1:jsonEncode() --[[ Line: 776 ]]
 	return t
 end
 
-function Module1:jsonDecode() --[[ Line: 803 ]]
+function Module1:jsonDecode()
 	-- upvalues: Module1 (copy), Label (copy), DurationModule (copy)
 	local NewModule = Module1.new()
 	
@@ -255,7 +255,7 @@ TypeRegistryModule.default:register(Label.PostMetadata)
 local Module2 = {}
 Module2.__index = Module2
 
-function Module2.new(p1) --[[ Line: 849 ]]
+function Module2.new(p1)
 	-- upvalues: Label (copy), Module2 (copy)
 	return (setmetatable({
 		type = if p1 == nil or p1.type == nil then assert(Label.TrackType.fromNumber(0), "Enum has no 0 default") else p1.type,
@@ -263,7 +263,7 @@ function Module2.new(p1) --[[ Line: 849 ]]
 	}, Module2))
 end
 
-function Module2:encode() --[[ Line: 858 ]]
+function Module2:encode()
 	-- upvalues: Label (copy), ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -285,7 +285,7 @@ function Module2:encode() --[[ Line: 858 ]]
 	return Buf1
 end
 
-function Module2.decode(Buf) --[[ Line: 882 ]]
+function Module2.decode(Buf)
 	-- upvalues: Module2 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module2.new()
 	local v3 = 0
@@ -324,7 +324,7 @@ function Module2.decode(Buf) --[[ Line: 882 ]]
 	return NewModule
 end
 
-function Module2:jsonEncode() --[[ Line: 930 ]]
+function Module2:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -342,7 +342,7 @@ function Module2:jsonEncode() --[[ Line: 930 ]]
 	return t
 end
 
-function Module2:jsonDecode() --[[ Line: 952 ]]
+function Module2:jsonDecode()
 	-- upvalues: Module2 (copy), Label (copy)
 	local NewModule = Module2.new()
 	
@@ -369,7 +369,7 @@ TypeRegistryModule.default:register(Label.Track)
 local Module3 = {}
 Module3.__index = Module3
 
-function Module3.new(p1) --[[ Line: 987 ]]
+function Module3.new(p1)
 	-- upvalues: Module3 (copy)
 	return (setmetatable({
 		slot_id = if p1 == nil or p1.slot_id == nil then "" else p1.slot_id,
@@ -378,7 +378,7 @@ function Module3.new(p1) --[[ Line: 987 ]]
 	}, Module3))
 end
 
-function Module3:encode() --[[ Line: 995 ]]
+function Module3:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -417,7 +417,7 @@ function Module3:encode() --[[ Line: 995 ]]
 	return Buf1
 end
 
-function Module3.decode(Buf) --[[ Line: 1035 ]]
+function Module3.decode(Buf)
 	-- upvalues: Module3 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module3.new()
 	local v4 = 0
@@ -479,7 +479,7 @@ function Module3.decode(Buf) --[[ Line: 1035 ]]
 	return NewModule
 end
 
-function Module3:jsonEncode() --[[ Line: 1104 ]]
+function Module3:jsonEncode()
 	local t = {}
 	
 	if self.slot_id ~= nil and self.slot_id ~= "" then
@@ -511,7 +511,7 @@ function Module3:jsonEncode() --[[ Line: 1104 ]]
 	return t
 end
 
-function Module3:jsonDecode() --[[ Line: 1130 ]]
+function Module3:jsonDecode()
 	-- upvalues: Module3 (copy), Label (copy)
 	local NewModule = Module3.new()
 	
@@ -575,7 +575,7 @@ TypeRegistryModule.default:register(Label.Slot)
 local Module4 = {}
 Module4.__index = Module4
 
-function Module4.new(p1) --[[ Line: 1200 ]]
+function Module4.new(p1)
 	-- upvalues: Module4 (copy)
 	return (setmetatable({
 		z_index = if p1 == nil or p1.z_index == nil then 0 else p1.z_index,
@@ -584,7 +584,7 @@ function Module4.new(p1) --[[ Line: 1200 ]]
 	}, Module4))
 end
 
-function Module4:encode() --[[ Line: 1208 ]]
+function Module4:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -623,7 +623,7 @@ function Module4:encode() --[[ Line: 1208 ]]
 	return Buf1
 end
 
-function Module4.decode(Buf) --[[ Line: 1248 ]]
+function Module4.decode(Buf)
 	-- upvalues: Module4 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module4.new()
 	local v5 = 0
@@ -679,7 +679,7 @@ function Module4.decode(Buf) --[[ Line: 1248 ]]
 	return NewModule
 end
 
-function Module4:jsonEncode() --[[ Line: 1316 ]]
+function Module4:jsonEncode()
 	local t = {}
 	
 	if self.z_index ~= nil and self.z_index ~= 0 then
@@ -711,7 +711,7 @@ function Module4:jsonEncode() --[[ Line: 1316 ]]
 	return t
 end
 
-function Module4:jsonDecode() --[[ Line: 1342 ]]
+function Module4:jsonDecode()
 	-- upvalues: Module4 (copy), Label (copy)
 	local NewModule = Module4.new()
 	
@@ -766,7 +766,7 @@ TypeRegistryModule.default:register(Label.VisualSlot)
 local Module5 = {}
 Module5.__index = Module5
 
-function Module5.new(p1) --[[ Line: 1394 ]]
+function Module5.new(p1)
 	-- upvalues: Module5 (copy)
 	return (setmetatable({
 		asset_id = if p1 == nil or p1.asset_id == nil then 0 else p1.asset_id,
@@ -774,7 +774,7 @@ function Module5.new(p1) --[[ Line: 1394 ]]
 	}, Module5))
 end
 
-function Module5:encode() --[[ Line: 1401 ]]
+function Module5:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -794,7 +794,7 @@ function Module5:encode() --[[ Line: 1401 ]]
 	return Buf1
 end
 
-function Module5.decode(Buf) --[[ Line: 1421 ]]
+function Module5.decode(Buf)
 	-- upvalues: Module5 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module5.new()
 	local v6 = 0
@@ -831,7 +831,7 @@ function Module5.decode(Buf) --[[ Line: 1421 ]]
 	return NewModule
 end
 
-function Module5:jsonEncode() --[[ Line: 1469 ]]
+function Module5:jsonEncode()
 	local t = {}
 	
 	if self.asset_id ~= nil and self.asset_id ~= 0 then
@@ -843,7 +843,7 @@ function Module5:jsonEncode() --[[ Line: 1469 ]]
 	return t
 end
 
-function Module5:jsonDecode() --[[ Line: 1483 ]]
+function Module5:jsonDecode()
 	-- upvalues: Module5 (copy), Label (copy)
 	local NewModule = Module5.new()
 	
@@ -868,14 +868,14 @@ TypeRegistryModule.default:register(Label.VideoSlot)
 local Module6 = {}
 Module6.__index = Module6
 
-function Module6.new(p1) --[[ Line: 1515 ]]
+function Module6.new(p1)
 	-- upvalues: Module6 (copy)
 	return (setmetatable({
 		asset_id = if p1 == nil or p1.asset_id == nil then 0 else p1.asset_id
 	}, Module6))
 end
 
-function Module6:encode() --[[ Line: 1521 ]]
+function Module6:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -890,7 +890,7 @@ function Module6:encode() --[[ Line: 1521 ]]
 	return Buf1
 end
 
-function Module6.decode(Buf) --[[ Line: 1535 ]]
+function Module6.decode(Buf)
 	-- upvalues: Module6 (copy), ProtoModule (copy)
 	local NewModule = Module6.new()
 	local v7 = 0
@@ -921,7 +921,7 @@ function Module6.decode(Buf) --[[ Line: 1535 ]]
 	return NewModule
 end
 
-function Module6:jsonEncode() --[[ Line: 1578 ]]
+function Module6:jsonEncode()
 	local t = {}
 	
 	if self.asset_id ~= nil and self.asset_id ~= 0 then
@@ -930,7 +930,7 @@ function Module6:jsonEncode() --[[ Line: 1578 ]]
 	return t
 end
 
-function Module6:jsonDecode() --[[ Line: 1588 ]]
+function Module6:jsonDecode()
 	-- upvalues: Module6 (copy)
 	local NewModule = Module6.new()
 	
@@ -952,7 +952,7 @@ TypeRegistryModule.default:register(Label.ImageSlot)
 local Module7 = {}
 Module7.__index = Module7
 
-function Module7.new(p1) --[[ Line: 1616 ]]
+function Module7.new(p1)
 	-- upvalues: Label (copy), Module7 (copy)
 	return (setmetatable({
 		text = if p1 == nil or p1.text == nil then "" else p1.text,
@@ -963,7 +963,7 @@ function Module7.new(p1) --[[ Line: 1616 ]]
 	}, Module7))
 end
 
-function Module7:encode() --[[ Line: 1628 ]]
+function Module7:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -996,7 +996,7 @@ function Module7:encode() --[[ Line: 1628 ]]
 	return Buf1
 end
 
-function Module7.decode(Buf) --[[ Line: 1671 ]]
+function Module7.decode(Buf)
 	-- upvalues: Module7 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module7.new()
 	local v8 = 0
@@ -1047,7 +1047,7 @@ function Module7.decode(Buf) --[[ Line: 1671 ]]
 	return NewModule
 end
 
-function Module7:jsonEncode() --[[ Line: 1734 ]]
+function Module7:jsonEncode()
 	-- upvalues: Label (copy), ProtoModule (copy)
 	local t = {}
 	
@@ -1069,7 +1069,7 @@ function Module7:jsonEncode() --[[ Line: 1734 ]]
 	return t
 end
 
-function Module7:jsonDecode() --[[ Line: 1768 ]]
+function Module7:jsonDecode()
 	-- upvalues: Module7 (copy), Label (copy), ProtoModule (copy)
 	local NewModule = Module7.new()
 	
@@ -1109,7 +1109,7 @@ TypeRegistryModule.default:register(Label.TextLabelSlot)
 local Module8 = {}
 Module8.__index = Module8
 
-function Module8.new(p1) --[[ Line: 1824 ]]
+function Module8.new(p1)
 	-- upvalues: Module8 (copy)
 	return (setmetatable({
 		asset_id = if p1 == nil or p1.asset_id == nil then 0 else p1.asset_id,
@@ -1117,7 +1117,7 @@ function Module8.new(p1) --[[ Line: 1824 ]]
 	}, Module8))
 end
 
-function Module8:encode() --[[ Line: 1831 ]]
+function Module8:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1136,7 +1136,7 @@ function Module8:encode() --[[ Line: 1831 ]]
 	return Buf1
 end
 
-function Module8.decode(Buf) --[[ Line: 1850 ]]
+function Module8.decode(Buf)
 	-- upvalues: Module8 (copy), ProtoModule (copy)
 	local NewModule = Module8.new()
 	local v9 = 0
@@ -1171,7 +1171,7 @@ function Module8.decode(Buf) --[[ Line: 1850 ]]
 	return NewModule
 end
 
-function Module8:jsonEncode() --[[ Line: 1898 ]]
+function Module8:jsonEncode()
 	-- upvalues: ProtoModule (copy)
 	local t = {}
 	
@@ -1184,7 +1184,7 @@ function Module8:jsonEncode() --[[ Line: 1898 ]]
 	return t
 end
 
-function Module8:jsonDecode() --[[ Line: 1912 ]]
+function Module8:jsonDecode()
 	-- upvalues: Module8 (copy), ProtoModule (copy)
 	local NewModule = Module8.new()
 	
@@ -1212,7 +1212,7 @@ TypeRegistryModule.default:register(Label.SceneSlot)
 local Module9 = {}
 Module9.__index = Module9
 
-function Module9.new(p1) --[[ Line: 1948 ]]
+function Module9.new(p1)
 	-- upvalues: Label (copy), Module9 (copy)
 	return (setmetatable({
 		asset_id = if p1 == nil or p1.asset_id == nil then 0 else p1.asset_id,
@@ -1222,7 +1222,7 @@ function Module9.new(p1) --[[ Line: 1948 ]]
 	}, Module9))
 end
 
-function Module9:encode() --[[ Line: 1959 ]]
+function Module9:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1251,7 +1251,7 @@ function Module9:encode() --[[ Line: 1959 ]]
 	return Buf1
 end
 
-function Module9.decode(Buf) --[[ Line: 1995 ]]
+function Module9.decode(Buf)
 	-- upvalues: Module9 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module9.new()
 	local v10 = 0
@@ -1299,7 +1299,7 @@ function Module9.decode(Buf) --[[ Line: 1995 ]]
 	return NewModule
 end
 
-function Module9:jsonEncode() --[[ Line: 2053 ]]
+function Module9:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -1318,7 +1318,7 @@ function Module9:jsonEncode() --[[ Line: 2053 ]]
 	return t
 end
 
-function Module9:jsonDecode() --[[ Line: 2082 ]]
+function Module9:jsonDecode()
 	-- upvalues: Module9 (copy), Label (copy)
 	local NewModule = Module9.new()
 	
@@ -1355,7 +1355,7 @@ TypeRegistryModule.default:register(Label.AudioSlot)
 local Module10 = {}
 Module10.__index = Module10
 
-function Module10.new(p1) --[[ Line: 2130 ]]
+function Module10.new(p1)
 	-- upvalues: Module10 (copy)
 	return (setmetatable({
 		text = if p1 == nil or p1.text == nil then "" else p1.text,
@@ -1365,7 +1365,7 @@ function Module10.new(p1) --[[ Line: 2130 ]]
 	}, Module10))
 end
 
-function Module10:encode() --[[ Line: 2139 ]]
+function Module10:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1392,7 +1392,7 @@ function Module10:encode() --[[ Line: 2139 ]]
 	return Buf1
 end
 
-function Module10.decode(Buf) --[[ Line: 2168 ]]
+function Module10.decode(Buf)
 	-- upvalues: Module10 (copy), ProtoModule (copy)
 	local NewModule = Module10.new()
 	local v11 = 0
@@ -1435,7 +1435,7 @@ function Module10.decode(Buf) --[[ Line: 2168 ]]
 	return NewModule
 end
 
-function Module10:jsonEncode() --[[ Line: 2226 ]]
+function Module10:jsonEncode()
 	-- upvalues: ProtoModule (copy)
 	local t = {}
 	
@@ -1454,7 +1454,7 @@ function Module10:jsonEncode() --[[ Line: 2226 ]]
 	return t
 end
 
-function Module10:jsonDecode() --[[ Line: 2248 ]]
+function Module10:jsonDecode()
 	-- upvalues: Module10 (copy), ProtoModule (copy)
 	local NewModule = Module10.new()
 	
@@ -1485,7 +1485,7 @@ TypeRegistryModule.default:register(Label.TtsAudioContext)
 local Module11 = {}
 Module11.__index = Module11
 
-function Module11.new(p1) --[[ Line: 2288 ]]
+function Module11.new(p1)
 	-- upvalues: Module11 (copy)
 	return (setmetatable({
 		universe_id = if p1 == nil or p1.universe_id == nil then 0 else p1.universe_id,
@@ -1493,7 +1493,7 @@ function Module11.new(p1) --[[ Line: 2288 ]]
 	}, Module11))
 end
 
-function Module11:encode() --[[ Line: 2295 ]]
+function Module11:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1512,7 +1512,7 @@ function Module11:encode() --[[ Line: 2295 ]]
 	return Buf1
 end
 
-function Module11.decode(Buf) --[[ Line: 2314 ]]
+function Module11.decode(Buf)
 	-- upvalues: Module11 (copy), ProtoModule (copy)
 	local NewModule = Module11.new()
 	local v12 = 0
@@ -1545,7 +1545,7 @@ function Module11.decode(Buf) --[[ Line: 2314 ]]
 	return NewModule
 end
 
-function Module11:jsonEncode() --[[ Line: 2362 ]]
+function Module11:jsonEncode()
 	local t = {}
 	
 	if self.universe_id ~= nil and self.universe_id ~= 0 then
@@ -1557,7 +1557,7 @@ function Module11:jsonEncode() --[[ Line: 2362 ]]
 	return t
 end
 
-function Module11:jsonDecode() --[[ Line: 2376 ]]
+function Module11:jsonDecode()
 	-- upvalues: Module11 (copy)
 	local NewModule = Module11.new()
 	
@@ -1585,14 +1585,14 @@ TypeRegistryModule.default:register(Label.ExperienceAnnotationSlot)
 local Module12 = {}
 Module12.__index = Module12
 
-function Module12.new(p1) --[[ Line: 2412 ]]
+function Module12.new(p1)
 	-- upvalues: Module12 (copy)
 	return (setmetatable({
 		outfit_id = if p1 == nil or p1.outfit_id == nil then 0 else p1.outfit_id
 	}, Module12))
 end
 
-function Module12:encode() --[[ Line: 2418 ]]
+function Module12:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1607,7 +1607,7 @@ function Module12:encode() --[[ Line: 2418 ]]
 	return Buf1
 end
 
-function Module12.decode(Buf) --[[ Line: 2432 ]]
+function Module12.decode(Buf)
 	-- upvalues: Module12 (copy), ProtoModule (copy)
 	local NewModule = Module12.new()
 	local v13 = 0
@@ -1638,7 +1638,7 @@ function Module12.decode(Buf) --[[ Line: 2432 ]]
 	return NewModule
 end
 
-function Module12:jsonEncode() --[[ Line: 2475 ]]
+function Module12:jsonEncode()
 	local t = {}
 	
 	if self.outfit_id ~= nil and self.outfit_id ~= 0 then
@@ -1647,7 +1647,7 @@ function Module12:jsonEncode() --[[ Line: 2475 ]]
 	return t
 end
 
-function Module12:jsonDecode() --[[ Line: 2485 ]]
+function Module12:jsonDecode()
 	-- upvalues: Module12 (copy)
 	local NewModule = Module12.new()
 	
@@ -1669,7 +1669,7 @@ TypeRegistryModule.default:register(Label.AvatarAnnotationSlot)
 local Module13 = {}
 Module13.__index = Module13
 
-function Module13.new(p1) --[[ Line: 2513 ]]
+function Module13.new(p1)
 	-- upvalues: Module13 (copy)
 	return (setmetatable({
 		offset_duration = if p1 == nil or p1.offset_duration == nil then nil else p1.offset_duration,
@@ -1677,7 +1677,7 @@ function Module13.new(p1) --[[ Line: 2513 ]]
 	}, Module13))
 end
 
-function Module13:encode() --[[ Line: 2520 ]]
+function Module13:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1698,7 +1698,7 @@ function Module13:encode() --[[ Line: 2520 ]]
 	return Buf1
 end
 
-function Module13.decode(Buf) --[[ Line: 2541 ]]
+function Module13.decode(Buf)
 	-- upvalues: Module13 (copy), ProtoModule (copy), DurationModule (copy)
 	local NewModule = Module13.new()
 	local v14 = 0
@@ -1735,7 +1735,7 @@ function Module13.decode(Buf) --[[ Line: 2541 ]]
 	return NewModule
 end
 
-function Module13:jsonEncode() --[[ Line: 2589 ]]
+function Module13:jsonEncode()
 	local t = {}
 	
 	if self.offset_duration ~= nil then
@@ -1747,7 +1747,7 @@ function Module13:jsonEncode() --[[ Line: 2589 ]]
 	return t
 end
 
-function Module13:jsonDecode() --[[ Line: 2603 ]]
+function Module13:jsonDecode()
 	-- upvalues: Module13 (copy), DurationModule (copy)
 	local NewModule = Module13.new()
 	
@@ -1772,7 +1772,7 @@ TypeRegistryModule.default:register(Label.TimeRange)
 local Module14 = {}
 Module14.__index = Module14
 
-function Module14.new(p1) --[[ Line: 2635 ]]
+function Module14.new(p1)
 	-- upvalues: Module14 (copy)
 	return (setmetatable({
 		position = if p1 == nil or p1.position == nil then nil else p1.position,
@@ -1781,7 +1781,7 @@ function Module14.new(p1) --[[ Line: 2635 ]]
 	}, Module14))
 end
 
-function Module14:encode() --[[ Line: 2643 ]]
+function Module14:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1805,7 +1805,7 @@ function Module14:encode() --[[ Line: 2643 ]]
 	return Buf1
 end
 
-function Module14.decode(Buf) --[[ Line: 2668 ]]
+function Module14.decode(Buf)
 	-- upvalues: Module14 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module14.new()
 	local v15 = 0
@@ -1844,7 +1844,7 @@ function Module14.decode(Buf) --[[ Line: 2668 ]]
 	return NewModule
 end
 
-function Module14:jsonEncode() --[[ Line: 2721 ]]
+function Module14:jsonEncode()
 	-- upvalues: ProtoModule (copy)
 	local t = {}
 	
@@ -1860,7 +1860,7 @@ function Module14:jsonEncode() --[[ Line: 2721 ]]
 	return t
 end
 
-function Module14:jsonDecode() --[[ Line: 2739 ]]
+function Module14:jsonDecode()
 	-- upvalues: Module14 (copy), Label (copy), ProtoModule (copy)
 	local NewModule = Module14.new()
 	
@@ -1885,7 +1885,7 @@ TypeRegistryModule.default:register(Label.Transform)
 local Module15 = {}
 Module15.__index = Module15
 
-function Module15.new(Vector) --[[ Line: 2771 ]]
+function Module15.new(Vector)
 	-- upvalues: Module15 (copy)
 	return (setmetatable({
 		x = if Vector == nil or Vector.x == nil then 0 else Vector.x,
@@ -1893,7 +1893,7 @@ function Module15.new(Vector) --[[ Line: 2771 ]]
 	}, Module15))
 end
 
-function Module15:encode() --[[ Line: 2778 ]]
+function Module15:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1912,7 +1912,7 @@ function Module15:encode() --[[ Line: 2778 ]]
 	return Buf1
 end
 
-function Module15.decode(Buf) --[[ Line: 2797 ]]
+function Module15.decode(Buf)
 	-- upvalues: Module15 (copy), ProtoModule (copy)
 	local NewModule = Module15.new()
 	local v16 = 0
@@ -1945,7 +1945,7 @@ function Module15.decode(Buf) --[[ Line: 2797 ]]
 	return NewModule
 end
 
-function Module15:jsonEncode() --[[ Line: 2845 ]]
+function Module15:jsonEncode()
 	-- upvalues: ProtoModule (copy)
 	local t = {}
 	
@@ -1958,7 +1958,7 @@ function Module15:jsonEncode() --[[ Line: 2845 ]]
 	return t
 end
 
-function Module15:jsonDecode() --[[ Line: 2859 ]]
+function Module15:jsonDecode()
 	-- upvalues: Module15 (copy), ProtoModule (copy)
 	local NewModule = Module15.new()
 	
@@ -1980,7 +1980,7 @@ TypeRegistryModule.default:register(Label.Vec2)
 local Module16 = {}
 Module16.__index = Module16
 
-function Module16.new(p1) --[[ Line: 2887 ]]
+function Module16.new(p1)
 	-- upvalues: Module16 (copy)
 	return (setmetatable({
 		r = if p1 == nil or p1.r == nil then 0 else p1.r,
@@ -1989,7 +1989,7 @@ function Module16.new(p1) --[[ Line: 2887 ]]
 	}, Module16))
 end
 
-function Module16:encode() --[[ Line: 2895 ]]
+function Module16:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -2012,7 +2012,7 @@ function Module16:encode() --[[ Line: 2895 ]]
 	return Buf1
 end
 
-function Module16.decode(Buf) --[[ Line: 2919 ]]
+function Module16.decode(Buf)
 	-- upvalues: Module16 (copy), ProtoModule (copy)
 	local NewModule = Module16.new()
 	local v17 = 0
@@ -2047,7 +2047,7 @@ function Module16.decode(Buf) --[[ Line: 2919 ]]
 	return NewModule
 end
 
-function Module16:jsonEncode() --[[ Line: 2972 ]]
+function Module16:jsonEncode()
 	-- upvalues: ProtoModule (copy)
 	local t = {}
 	
@@ -2063,7 +2063,7 @@ function Module16:jsonEncode() --[[ Line: 2972 ]]
 	return t
 end
 
-function Module16:jsonDecode() --[[ Line: 2990 ]]
+function Module16:jsonDecode()
 	-- upvalues: Module16 (copy), ProtoModule (copy)
 	local NewModule = Module16.new()
 	
@@ -2088,14 +2088,14 @@ TypeRegistryModule.default:register(Label.Color3)
 local Module17 = {}
 Module17.__index = Module17
 
-function Module17.new(p1) --[[ Line: 3022 ]]
+function Module17.new(p1)
 	-- upvalues: Module17 (copy)
 	return (setmetatable({
 		font_source = if p1 == nil or p1.font_source == nil then nil else p1.font_source
 	}, Module17))
 end
 
-function Module17:encode() --[[ Line: 3028 ]]
+function Module17:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -2115,7 +2115,7 @@ function Module17:encode() --[[ Line: 3028 ]]
 	return Buf1
 end
 
-function Module17.decode(Buf) --[[ Line: 3048 ]]
+function Module17.decode(Buf)
 	-- upvalues: Module17 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module17.new()
 	local v18 = 0
@@ -2155,7 +2155,7 @@ function Module17.decode(Buf) --[[ Line: 3048 ]]
 	return NewModule
 end
 
-function Module17:jsonEncode() --[[ Line: 3099 ]]
+function Module17:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -2172,7 +2172,7 @@ function Module17:jsonEncode() --[[ Line: 3099 ]]
 	return t
 end
 
-function Module17:jsonDecode() --[[ Line: 3115 ]]
+function Module17:jsonDecode()
 	-- upvalues: Module17 (copy), Label (copy)
 	local NewModule = Module17.new()
 	
@@ -2204,57 +2204,57 @@ Module17.descriptor = {
 Label.FontInfo = Module17
 TypeRegistryModule.default:register(Label.FontInfo)
 Label.PostOrigin = {
-	fromNumber = function(p1) --[[ Line: 3158 ]]
+	fromNumber = function(p1)
 		return if p1 == 0 then "POST_ORIGIN_INVALID" elseif p1 == 1 then "POST_ORIGIN_CAPTURE_VIDEO" elseif p1 == 2 then "POST_ORIGIN_CAPTURE_SCREENSHOT" elseif p1 == 3 then "POST_ORIGIN_INFLUENCER_UPLOAD" elseif p1 == 4 then "POST_ORIGIN_AVATAR" else nil
 	end,
-	toNumber = function(p1) --[[ Line: 3174 ]]
+	toNumber = function(p1)
 		return if p1 == "POST_ORIGIN_INVALID" then 0 elseif p1 == "POST_ORIGIN_CAPTURE_VIDEO" then 1 elseif p1 == "POST_ORIGIN_CAPTURE_SCREENSHOT" then 2 elseif p1 == "POST_ORIGIN_INFLUENCER_UPLOAD" then 3 elseif p1 == "POST_ORIGIN_AVATAR" then 4 else p1
 	end,
-	fromName = function(p1) --[[ Line: 3190 ]]
+	fromName = function(p1)
 		return if p1 == "POST_ORIGIN_INVALID" then "POST_ORIGIN_INVALID" elseif p1 == "POST_ORIGIN_CAPTURE_VIDEO" then "POST_ORIGIN_CAPTURE_VIDEO" elseif p1 == "POST_ORIGIN_CAPTURE_SCREENSHOT" then "POST_ORIGIN_CAPTURE_SCREENSHOT" elseif p1 == "POST_ORIGIN_INFLUENCER_UPLOAD" then "POST_ORIGIN_INFLUENCER_UPLOAD" elseif p1 == "POST_ORIGIN_AVATAR" then "POST_ORIGIN_AVATAR" else nil
 	end
 }
 Label.TrackType = {
-	fromNumber = function(p1) --[[ Line: 3208 ]]
+	fromNumber = function(p1)
 		return if p1 == 0 then "TRACK_TYPE_INVALID" elseif p1 == 1 then "TRACK_TYPE_VISUAL" elseif p1 == 2 then "TRACK_TYPE_AUDIO" elseif p1 == 3 then "TRACK_TYPE_ANNOTATION" else nil
 	end,
-	toNumber = function(p1) --[[ Line: 3222 ]]
+	toNumber = function(p1)
 		return if p1 == "TRACK_TYPE_INVALID" then 0 elseif p1 == "TRACK_TYPE_VISUAL" then 1 elseif p1 == "TRACK_TYPE_AUDIO" then 2 elseif p1 == "TRACK_TYPE_ANNOTATION" then 3 else p1
 	end,
-	fromName = function(p1) --[[ Line: 3236 ]]
+	fromName = function(p1)
 		return if p1 == "TRACK_TYPE_INVALID" then "TRACK_TYPE_INVALID" elseif p1 == "TRACK_TYPE_VISUAL" then "TRACK_TYPE_VISUAL" elseif p1 == "TRACK_TYPE_AUDIO" then "TRACK_TYPE_AUDIO" elseif p1 == "TRACK_TYPE_ANNOTATION" then "TRACK_TYPE_ANNOTATION" else nil
 	end
 }
 Label.AudioType = {
-	fromNumber = function(p1) --[[ Line: 3252 ]]
+	fromNumber = function(p1)
 		return if p1 == 0 then "AUDIO_TYPE_INVALID" elseif p1 == 1 then "AUDIO_TYPE_MUSIC" elseif p1 == 2 then "AUDIO_TYPE_TTS" elseif p1 == 3 then "AUDIO_TYPE_VOICE_OVER" else nil
 	end,
-	toNumber = function(p1) --[[ Line: 3266 ]]
+	toNumber = function(p1)
 		return if p1 == "AUDIO_TYPE_INVALID" then 0 elseif p1 == "AUDIO_TYPE_MUSIC" then 1 elseif p1 == "AUDIO_TYPE_TTS" then 2 elseif p1 == "AUDIO_TYPE_VOICE_OVER" then 3 else p1
 	end,
-	fromName = function(p1) --[[ Line: 3280 ]]
+	fromName = function(p1)
 		return if p1 == "AUDIO_TYPE_INVALID" then "AUDIO_TYPE_INVALID" elseif p1 == "AUDIO_TYPE_MUSIC" then "AUDIO_TYPE_MUSIC" elseif p1 == "AUDIO_TYPE_TTS" then "AUDIO_TYPE_TTS" elseif p1 == "AUDIO_TYPE_VOICE_OVER" then "AUDIO_TYPE_VOICE_OVER" else nil
 	end
 }
 Label.EnumeratedFont = {
-	fromNumber = function(p1) --[[ Line: 3296 ]]
+	fromNumber = function(p1)
 		return if p1 == 0 then "ENUMERATED_FONT_INVALID" elseif p1 == 1 then "ENUMERATED_FONT_GOTHAM_BOLD" elseif p1 == 2 then "ENUMERATED_FONT_GOTHAM_BLACK" elseif p1 == 3 then "ENUMERATED_FONT_SOURCE_SANS" elseif p1 == 4 then "ENUMERATED_FONT_SOURCE_SANS_BOLD" elseif p1 == 5 then "ENUMERATED_FONT_FREDOKA_ONE" elseif p1 == 6 then "ENUMERATED_FONT_BANGERS" elseif p1 == 7 then "ENUMERATED_FONT_BUILDER_SANS_MEDIUM" elseif p1 == 8 then "ENUMERATED_FONT_LUCKIEST_GUY" elseif p1 == 9 then "ENUMERATED_FONT_PERMANENT_MARKER" elseif p1 == 10 then "ENUMERATED_FONT_CREEPSTER" elseif p1 == 11 then "ENUMERATED_FONT_ARCADE" elseif p1 == 12 then "ENUMERATED_FONT_SCI_FI" elseif p1 == 13 then "ENUMERATED_FONT_INDIE_FLOWER" elseif p1 == 14 then "ENUMERATED_FONT_GRENZE_GOTISCH" elseif p1 == 15 then "ENUMERATED_FONT_SPECIAL_ELITE" else nil
 	end,
-	toNumber = function(p1) --[[ Line: 3334 ]]
+	toNumber = function(p1)
 		return if p1 == "ENUMERATED_FONT_INVALID" then 0 elseif p1 == "ENUMERATED_FONT_GOTHAM_BOLD" then 1 elseif p1 == "ENUMERATED_FONT_GOTHAM_BLACK" then 2 elseif p1 == "ENUMERATED_FONT_SOURCE_SANS" then 3 elseif p1 == "ENUMERATED_FONT_SOURCE_SANS_BOLD" then 4 elseif p1 == "ENUMERATED_FONT_FREDOKA_ONE" then 5 elseif p1 == "ENUMERATED_FONT_BANGERS" then 6 elseif p1 == "ENUMERATED_FONT_BUILDER_SANS_MEDIUM" then 7 elseif p1 == "ENUMERATED_FONT_LUCKIEST_GUY" then 8 elseif p1 == "ENUMERATED_FONT_PERMANENT_MARKER" then 9 elseif p1 == "ENUMERATED_FONT_CREEPSTER" then 10 elseif p1 == "ENUMERATED_FONT_ARCADE" then 11 elseif p1 == "ENUMERATED_FONT_SCI_FI" then 12 elseif p1 == "ENUMERATED_FONT_INDIE_FLOWER" then 13 elseif p1 == "ENUMERATED_FONT_GRENZE_GOTISCH" then 14 elseif p1 == "ENUMERATED_FONT_SPECIAL_ELITE" then 15 else p1
 	end,
-	fromName = function(p1) --[[ Line: 3372 ]]
+	fromName = function(p1)
 		return if p1 == "ENUMERATED_FONT_INVALID" then "ENUMERATED_FONT_INVALID" elseif p1 == "ENUMERATED_FONT_GOTHAM_BOLD" then "ENUMERATED_FONT_GOTHAM_BOLD" elseif p1 == "ENUMERATED_FONT_GOTHAM_BLACK" then "ENUMERATED_FONT_GOTHAM_BLACK" elseif p1 == "ENUMERATED_FONT_SOURCE_SANS" then "ENUMERATED_FONT_SOURCE_SANS" elseif p1 == "ENUMERATED_FONT_SOURCE_SANS_BOLD" then "ENUMERATED_FONT_SOURCE_SANS_BOLD" elseif p1 == "ENUMERATED_FONT_FREDOKA_ONE" then "ENUMERATED_FONT_FREDOKA_ONE" elseif p1 == "ENUMERATED_FONT_BANGERS" then "ENUMERATED_FONT_BANGERS" elseif p1 == "ENUMERATED_FONT_BUILDER_SANS_MEDIUM" then "ENUMERATED_FONT_BUILDER_SANS_MEDIUM" elseif p1 == "ENUMERATED_FONT_LUCKIEST_GUY" then "ENUMERATED_FONT_LUCKIEST_GUY" elseif p1 == "ENUMERATED_FONT_PERMANENT_MARKER" then "ENUMERATED_FONT_PERMANENT_MARKER" elseif p1 == "ENUMERATED_FONT_CREEPSTER" then "ENUMERATED_FONT_CREEPSTER" elseif p1 == "ENUMERATED_FONT_ARCADE" then "ENUMERATED_FONT_ARCADE" elseif p1 == "ENUMERATED_FONT_SCI_FI" then "ENUMERATED_FONT_SCI_FI" elseif p1 == "ENUMERATED_FONT_INDIE_FLOWER" then "ENUMERATED_FONT_INDIE_FLOWER" elseif p1 == "ENUMERATED_FONT_GRENZE_GOTISCH" then "ENUMERATED_FONT_GRENZE_GOTISCH" elseif p1 == "ENUMERATED_FONT_SPECIAL_ELITE" then "ENUMERATED_FONT_SPECIAL_ELITE" else nil
 	end
 }
 Label.TextXAlignment = {
-	fromNumber = function(p1) --[[ Line: 3412 ]]
+	fromNumber = function(p1)
 		return if p1 == 0 then "TEXT_X_ALIGNMENT_INVALID" elseif p1 == 1 then "TEXT_X_ALIGNMENT_LEFT" elseif p1 == 2 then "TEXT_X_ALIGNMENT_CENTER" elseif p1 == 3 then "TEXT_X_ALIGNMENT_RIGHT" else nil
 	end,
-	toNumber = function(p1) --[[ Line: 3426 ]]
+	toNumber = function(p1)
 		return if p1 == "TEXT_X_ALIGNMENT_INVALID" then 0 elseif p1 == "TEXT_X_ALIGNMENT_LEFT" then 1 elseif p1 == "TEXT_X_ALIGNMENT_CENTER" then 2 elseif p1 == "TEXT_X_ALIGNMENT_RIGHT" then 3 else p1
 	end,
-	fromName = function(p1) --[[ Line: 3440 ]]
+	fromName = function(p1)
 		return if p1 == "TEXT_X_ALIGNMENT_INVALID" then "TEXT_X_ALIGNMENT_INVALID" elseif p1 == "TEXT_X_ALIGNMENT_LEFT" then "TEXT_X_ALIGNMENT_LEFT" elseif p1 == "TEXT_X_ALIGNMENT_CENTER" then "TEXT_X_ALIGNMENT_CENTER" elseif p1 == "TEXT_X_ALIGNMENT_RIGHT" then "TEXT_X_ALIGNMENT_RIGHT" else nil
 	end
 }

@@ -20,7 +20,7 @@ local PopoverAlign = FoundationModule.Enums.PopoverAlign
 local PopoverSide = FoundationModule.Enums.PopoverSide
 local PrivacyType = require(Parent.DataHydration.UniverseConfiguration).PrivacyType
 
-return function(p1) --[[ Line: 47 | Named "ExperienceRowActionsMenu" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseScaledValueFunction (copy), UseExperienceShareFlowModule (copy), UseArchiveGameFlowModule (copy), PrivacyType (copy), FFlagBuildExperiencePrivateInvitesModule (copy), ReactModule (copy), UseClosableFocusRootModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), Menu (copy), PopoverSide (copy), PopoverAlign (copy), InputSize (copy), ExperienceShareOverlaysModule (copy), ArchiveGameDialogModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		archiveGame = LocalizationStringsModule.GAME_CONFIGURATION_ARCHIVE_GAME,
@@ -52,7 +52,7 @@ return function(p1) --[[ Line: 47 | Named "ExperienceRowActionsMenu" ]]
 				onClose = OnCloseFunction
 			}),
 			isOpen = HasAnchor,
-			items = ReactModule.useMemo(function() --[[ Line: 75 ]]
+			items = ReactModule.useMemo(function()
 				-- upvalues: Publish (copy), Share (copy), NoAudience (copy), Settings (copy), ArchiveGame (copy)
 				return {
 					{ id = "publish", text = Publish },
@@ -67,7 +67,7 @@ return function(p1) --[[ Line: 47 | Named "ExperienceRowActionsMenu" ]]
 				Settings,
 				Share
 			}),
-			anchorRef = ReactModule.useMemo(function() --[[ Line: 71 ]]
+			anchorRef = ReactModule.useMemo(function()
 				-- upvalues: p1 (copy)
 				return { current = p1.anchor }
 			end, { p1.anchor }),
@@ -75,7 +75,7 @@ return function(p1) --[[ Line: 47 | Named "ExperienceRowActionsMenu" ]]
 			align = if p1.isAtPointer then PopoverAlign.Start else PopoverAlign.End,
 			size = InputSize.Large,
 			width = UDim.new(0, UseScaledValueResult),
-			onActivated = ReactModule.useCallback(function(p2) --[[ Line: 88 ]]
+			onActivated = ReactModule.useCallback(function(p2)
 				-- upvalues: OnCloseFunction (copy), Target (copy), OnOpenConfigurationPageFunction (copy), OnShareFunction (copy), RequestArchiveFunction (copy)
 				OnCloseFunction()
 				

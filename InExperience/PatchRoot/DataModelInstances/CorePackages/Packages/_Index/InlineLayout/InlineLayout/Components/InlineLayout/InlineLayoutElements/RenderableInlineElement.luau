@@ -7,7 +7,7 @@ local RenderableInlineElementModule = {}
 RenderableInlineElementModule.__index = RenderableInlineElementModule
 RenderableInlineElementModule.__type = require(Parent.Utils.InlineElementType)
 
-function RenderableInlineElementModule.new(Element, Props, p1) --[[ Line: 46 ]]
+function RenderableInlineElementModule.new(Element, Props, p1)
 	-- upvalues: RenderableInlineElementModule (copy), DashModule (copy)
 	local self = setmetatable({}, RenderableInlineElementModule)
 	self.props = Props
@@ -17,16 +17,16 @@ function RenderableInlineElementModule.new(Element, Props, p1) --[[ Line: 46 ]]
 	return self
 end
 
-function RenderableInlineElementModule:getWidth() --[[ Line: 54 ]]
+function RenderableInlineElementModule:getWidth()
 	return self.props.Size.Width.Offset
 end
 
-function RenderableInlineElementModule:split() --[[ Line: 58 ]]
+function RenderableInlineElementModule:split()
 	-- upvalues: RenderableInlineElementModule (copy), JoinFunction (copy)
 	return RenderableInlineElementModule.new(self.Element, JoinFunction(self.props))
 end
 
-function RenderableInlineElementModule:render(Id, LayoutOrder) --[[ Line: 62 ]]
+function RenderableInlineElementModule:render(Id, LayoutOrder)
 	-- upvalues: ReactModule (copy), DashModule (copy)
 	return ReactModule.createElement(self.Element, self.mapProps(DashModule.assign(self.props, {
 		id = Id,

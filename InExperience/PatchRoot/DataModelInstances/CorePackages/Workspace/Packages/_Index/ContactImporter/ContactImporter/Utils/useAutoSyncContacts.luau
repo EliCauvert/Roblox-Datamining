@@ -10,13 +10,13 @@ local UseEffectOnceFunction = DependenciesModule.useEffectOnce
 local AutoSyncContactsModule = require(Parent.Networking.AutoSyncContacts)
 local FFlagGateContactAutoSyncByPolicyModule = require(Parent.Flags.FFlagGateContactAutoSyncByPolicy)
 
-return function(p1, p2) --[[ Line: 23 ]]
+return function(p1, p2)
 	-- upvalues: UseDispatchFunction (copy), UseSelectorFunction (copy), AutoSyncContactsModule (copy), ContactsProtocol (copy), AppStorageService (copy), FFlagGateContactAutoSyncByPolicyModule (copy), UseEffectOnceFunction (copy), ReactModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
-	local UseSelectorResult = UseSelectorFunction(function(p3) --[[ Line: 25 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p3)
 		return p3.LocalUserId
 	end)
-	local v1 = if p2 then p2 else function() --[[ Line: 30 ]]
+	local v1 = if p2 then p2 else function()
 		-- upvalues: UseDispatchResult (copy), AutoSyncContactsModule (upval), UseSelectorResult (copy), ContactsProtocol (upval), AppStorageService (upval)
 		UseDispatchResult(AutoSyncContactsModule(UseSelectorResult, ContactsProtocol.default, AppStorageService))
 	end

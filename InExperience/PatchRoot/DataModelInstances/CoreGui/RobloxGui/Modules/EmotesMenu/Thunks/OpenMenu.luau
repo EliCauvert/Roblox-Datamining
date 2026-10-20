@@ -9,9 +9,9 @@ local BackpackScriptModule = if FFlagEnableNewBackpack then nil else require(Par
 local ShowMenuModule = require(Parent.Actions.ShowMenu)
 local WithEventStreamResult = require(Parent.Analytics).new():withEventStream(require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.EventStream.new((game:GetService("RbxAnalyticsService"))))
 
-return function(_) --[[ Line: 23 | Named "OpenMenu" ]]
+return function(_)
 	-- upvalues: GuiService (copy), VRService (copy), FFlagEnableNewBackpack (copy), Features (copy), BackpackScriptModule (copy), WithEventStreamResult (copy), ShowMenuModule (copy)
-	return function(p1) --[[ Line: 24 ]]
+	return function(p1)
 		-- upvalues: GuiService (upval), VRService (upval), FFlagEnableNewBackpack (upval), Features (upval), BackpackScriptModule (upval), WithEventStreamResult (upval), ShowMenuModule (upval)
 		if GuiService.MenuIsOpen then
 			if not VRService.VREnabled then return end

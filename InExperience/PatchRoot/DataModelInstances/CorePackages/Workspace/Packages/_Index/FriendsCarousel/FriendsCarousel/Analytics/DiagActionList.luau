@@ -40,31 +40,31 @@ return {
 	},
 	[EventNamesModule.PaginatedFriendsCarouselLoadingTime] = {
 		type = DiagEventTypes.Stats,
-		name = function(p1) --[[ Line: 71 ]]
+		name = function(p1)
 			-- upvalues: FetchNamesModule (copy), config1 (copy), config (copy), config2 (copy)
 			return if p1.fetch == FetchNamesModule.AllFriends then if p1.nextPage then config1[p1.status] else config[p1.status] else config2[p1.status]
 		end,
-		stats = function(p1) --[[ Line: 78 ]]
+		stats = function(p1)
 			return p1.loadingTime or 0
 		end
 	},
 	[EventNamesModule.FriendsEndpointLoadingTime] = {
 		type = DiagEventTypes.Stats,
-		name = function(p1) --[[ Line: 84 ]]
+		name = function(p1)
 			-- upvalues: config3 (copy)
 			return config3[p1.status]
 		end,
-		stats = function(p1) --[[ Line: 87 ]]
+		stats = function(p1)
 			return p1.loadingTime or 0
 		end
 	},
 	[EventNamesModule.FriendsCarouselUILoadingTime] = {
 		type = DiagEventTypes.Stats,
-		name = function(p1): string --[[ Line: 93 ]]
+		name = function(p1): string
 			-- upvalues: FriendsCarouselUILoadingTimeStats (copy)
 			return `{FriendsCarouselUILoadingTimeStats}_{p1.fetch}`
 		end,
-		stats = function(p1) --[[ Line: 96 ]]
+		stats = function(p1)
 			return p1.loadingTime or 0
 		end
 	},

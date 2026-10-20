@@ -4,14 +4,14 @@ local _ = require(script.Parent.Types.acpSession)
 local Signal, Signal2 = SignalsModule.createSignal({})
 local Signal1, Signal2_1 = SignalsModule.createSignal({})
 
-local function _(Key, p1) --[[ Line: 36 | Named "writeDisplay" ]]
+local function _(Key, p1)
 	-- upvalues: Signal (copy), Signal2 (copy)
 	local Copy = table.clone(Signal(false))
 	Copy[Key] = if p1 == nil or p1 == "" or p1 == "latest" then "" else p1
 	Signal2(Copy)
 end
 
-local _ = function(Key, p1) --[[ Line: 42 | Named "setPendingFlag" ]]
+local _ = function(Key, p1)
 	-- upvalues: Signal1 (copy), Signal2_1 (copy)
 	if (Key ~= nil and Signal1(false)[Key] == true) == p1 then return end
 	local Copy = table.clone(Signal1(false))
@@ -26,7 +26,7 @@ end
 
 local Count = 0
 
-local function buildPromptPayload(p1) --[[ Line: 106 ]]
+local function buildPromptPayload(p1)
 	return {
 		specVersion = p1.specVersion or "",
 		clientToolConfig = { mode = "exclude", tools = {} }
@@ -34,23 +34,23 @@ local function buildPromptPayload(p1) --[[ Line: 106 ]]
 end
 
 return {
-	isEnabled = function() --[[ Line: 117 ]]
+	isEnabled = function()
 		-- upvalues: DebugMyStatsExperienceAgentSpec (copy)
 		return DebugMyStatsExperienceAgentSpec
 	end,
-	getKey = function(p1) --[[ Line: 58 ]]
+	getKey = function(p1)
 		return if p1 == nil or p1 == "" then nil else `session:{p1}`
 	end,
-	normalize = function(p1) --[[ Line: 20 ]]
+	normalize = function(p1)
 		return if p1 == nil or p1 == "" or p1 == "latest" then "" else p1
 	end,
-	createPendingKey = function(): string --[[ Line: 67 ]]
+	createPendingKey = function(): string
 		-- upvalues: Count (ref)
 		Count += 1
 		
 		return `pending:{Count}`
 	end,
-	getState = function(p1, p2) --[[ Line: 24 ]]
+	getState = function(p1, p2)
 		-- upvalues: Signal (copy)
 		local SignalResultEntry = if p1 == nil then nil else Signal(p2 or false)[p1]
 		
@@ -59,9 +59,9 @@ return {
 			specVersion = if SignalResultEntry == "" then nil else SignalResultEntry
 		}
 	end,
-	getStateSignal = function(p1) --[[ Line: 124 ]]
+	getStateSignal = function(p1)
 		-- upvalues: SignalsModule (copy), Signal (copy)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 125 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: p1 (copy), Signal (upval)
 			local SignalResultEntry = if p1 == nil then nil else Signal(p2 or false)[p1]
 			
@@ -71,7 +71,7 @@ return {
 			}
 		end)
 	end,
-	get = function(p1) --[[ Line: 129 ]]
+	get = function(p1)
 		-- upvalues: Signal (copy)
 		local SignalResultEntry = if p1 == nil then nil else Signal(false)[p1]
 		
@@ -80,7 +80,7 @@ return {
 			specVersion = if SignalResultEntry == "" then nil else SignalResultEntry
 		}).specVersion
 	end,
-	has = function(p1) --[[ Line: 132 ]]
+	has = function(p1)
 		-- upvalues: Signal (copy)
 		local SignalResultEntry = if p1 == nil then nil else Signal(false)[p1]
 		
@@ -89,11 +89,11 @@ return {
 			specVersion = if SignalResultEntry == "" then nil else SignalResultEntry
 		}).isSet
 	end,
-	isPending = function(p1): boolean --[[ Line: 32 ]]
+	isPending = function(p1): boolean
 		-- upvalues: Signal1 (copy)
 		return p1 ~= nil and Signal1(false)[p1] == true
 	end,
-	set = function(Key, p1) --[[ Line: 72 ]]
+	set = function(Key, p1)
 		-- upvalues: Signal (copy), Signal2 (copy), Signal1 (copy), Signal2_1 (copy)
 		if Key == nil then return end
 		local Copy = table.clone(Signal(false))
@@ -108,7 +108,7 @@ return {
 			return
 		end
 	end,
-	hydrate = function(Key, p1) --[[ Line: 82 ]]
+	hydrate = function(Key, p1)
 		-- upvalues: Signal1 (copy), Signal (copy), Signal2 (copy)
 		if Key ~= nil and (Key == nil or Signal1(false)[Key] ~= true) then
 			local Copy = table.clone(Signal(false))
@@ -118,7 +118,7 @@ return {
 			return
 		end
 	end,
-	clear = function(Key) --[[ Line: 89 ]]
+	clear = function(Key)
 		-- upvalues: Signal (copy), Signal2 (copy), Signal1 (copy), Signal2_1 (copy)
 		if Key == nil then return end
 		local Copy = table.clone(Signal(false))
@@ -133,7 +133,7 @@ return {
 			return
 		end
 	end,
-	consumePending = function(Key) --[[ Line: 99 ]]
+	consumePending = function(Key)
 		-- upvalues: Signal1 (copy), Signal2_1 (copy)
 		if Key == nil or (Key == nil or Signal1(false)[Key] ~= true) then return end
 		if Key ~= nil and Signal1(false)[Key] == true then
@@ -144,7 +144,7 @@ return {
 			return
 		end
 	end,
-	move = function(Key, Key1) --[[ Line: 140 ]]
+	move = function(Key, Key1)
 		-- upvalues: Signal (copy), Signal2 (copy), Signal1 (copy), Signal2_1 (copy)
 		local SignalResult = Signal(false)
 		
@@ -170,7 +170,7 @@ return {
 		end
 		Signal2_1(Copy2)
 	end,
-	getExperiment = function(p1) --[[ Line: 155 ]]
+	getExperiment = function(p1)
 		-- upvalues: Signal (copy), DebugMyStatsExperienceAgentSpec (copy)
 		local SignalResultEntry = if p1 == nil then nil else Signal(false)[p1]
 		local config = {
@@ -183,7 +183,7 @@ return {
 			clientToolConfig = { mode = "exclude", tools = {} }
 		} else nil
 	end,
-	getPromptExperiment = function(p1) --[[ Line: 172 ]]
+	getPromptExperiment = function(p1)
 		-- upvalues: Signal (copy), DebugMyStatsExperienceAgentSpec (copy), Signal1 (copy), buildPromptPayload (copy)
 		local SignalResultEntry = if p1 == nil then nil else Signal(false)[p1]
 		local config = {

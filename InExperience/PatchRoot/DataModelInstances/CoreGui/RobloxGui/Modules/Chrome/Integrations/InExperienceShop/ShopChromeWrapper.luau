@@ -9,11 +9,11 @@ local _ = require(Chrome.ChromeShared.Service.WindowSizeSignal)
 local ConstantsModule = require(Chrome.ChromeShared.Unibar.Constants)
 local ShopContainer = require(CorePackages.Workspace.Packages.InExperienceShop).ShopContainer
 
-return function(p1) --[[ Line: 23 | Named "ShopChromeWrapper" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), GuiService (copy), UseEventConnectionFunction (copy), ViewportUtilModule (copy), ServiceModule (copy), ConstantsModule (copy), ShopContainer (copy)
 	local WindowSize = p1.windowSize
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function(Vector) --[[ Line: 27 ]]
+	local UseResult = ReactModule.useCallback(function(Vector)
 		-- upvalues: GuiService (upval), p1 (copy), WindowSize (copy), UseStateResult2 (copy)
 		local Y = GuiService.TopbarInset.Max.Y
 		local IsXBelow: boolean = Vector.X < p1.maxWindowWidth or Vector.Y - Y < p1.maxWindowHeight
@@ -25,16 +25,16 @@ return function(p1) --[[ Line: 23 | Named "ShopChromeWrapper" ]]
 		end
 		UseStateResult2(IsXBelow)
 	end, { WindowSize, p1.maxWindowWidth, p1.maxWindowHeight })
-	UseEventConnectionFunction(GuiService:GetPropertyChangedSignal("TopbarInset"), function() --[[ Line: 42 ]]
+	UseEventConnectionFunction(GuiService:GetPropertyChangedSignal("TopbarInset"), function()
 		-- upvalues: UseResult (copy), ViewportUtilModule (upval)
 		UseResult(ViewportUtilModule.screenSize:get())
 	end)
-	ReactModule.useEffect(function() --[[ Line: 46 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ViewportUtilModule (upval), UseResult (copy)
 		local ScreenSizeConnection = ViewportUtilModule.screenSize:connect(UseResult)
 		UseResult(ViewportUtilModule.screenSize:get())
 		
-		return function() --[[ Line: 49 ]]
+		return function()
 			-- upvalues: ScreenSizeConnection (copy)
 			ScreenSizeConnection:disconnect()
 		end
@@ -42,7 +42,7 @@ return function(p1) --[[ Line: 23 | Named "ShopChromeWrapper" ]]
 	
 	return ReactModule.createElement(ShopContainer, {
 		fullScreen = UseStateResult,
-		toggleWindow = ReactModule.useCallback(function() --[[ Line: 54 ]]
+		toggleWindow = ReactModule.useCallback(function()
 			-- upvalues: ServiceModule (upval), ConstantsModule (upval)
 			ServiceModule:toggleWindow(ConstantsModule.IN_EXPERIENCE_SHOP_ID)
 		end, {})

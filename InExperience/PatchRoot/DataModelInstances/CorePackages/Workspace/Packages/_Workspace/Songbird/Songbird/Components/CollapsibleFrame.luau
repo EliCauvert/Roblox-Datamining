@@ -9,16 +9,16 @@ local UsePreviousFunction = require(Songbird.Parent.ReactUtils).usePrevious
 local UseAnimatedBindingFunction = ReactOtterModule.useAnimatedBinding
 local config = { stiffness = 300, damping = 30, mass = 1 }
 
-return function(p1) --[[ Line: 31 | Named "CollapsibleFrame" ]]
+return function(p1)
 	-- upvalues: UsePreviousFunction (copy), UseBindingFunction (copy), UseAnimatedBindingFunction (copy), UseCallbackFunction (copy), UseEffectFunction (copy), ReactOtterModule (copy), config (copy), ReactModule (copy), FoundationModule (copy)
 	local UsePreviousResult = UsePreviousFunction(p1.isCollapsed)
 	local UseBindingResult, UseBindingResult2 = UseBindingFunction(Vector2.new(1e999, 1e999))
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = UseAnimatedBindingFunction(if p1.isCollapsed then 0 else 1)
-	local UseCallbackResult = UseCallbackFunction(function(ScrollFrame) --[[ Line: 36 ]]
+	local UseCallbackResult = UseCallbackFunction(function(ScrollFrame)
 		-- upvalues: UseBindingResult2 (copy)
 		UseBindingResult2(ScrollFrame.AbsoluteCanvasSize)
 	end, {})
-	UseEffectFunction(function() --[[ Line: 40 ]]
+	UseEffectFunction(function()
 		-- upvalues: UsePreviousResult (copy), p1 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval)
 		if UsePreviousResult ~= nil then
 			if not p1.isCollapsed and UsePreviousResult then
@@ -38,7 +38,7 @@ return function(p1) --[[ Line: 31 | Named "CollapsibleFrame" ]]
 			MaxSize = ReactModule.joinBindings({
 				maxSize = UseBindingResult,
 				alpha = UseAnimatedBindingResult
-			}):map(function(p2): Vector2 --[[ Line: 53 ]]
+			}):map(function(p2): Vector2
 				return Vector2.new(1e999, (math.max(p2.maxSize.Y * p2.alpha, 0)))
 			end)
 		}

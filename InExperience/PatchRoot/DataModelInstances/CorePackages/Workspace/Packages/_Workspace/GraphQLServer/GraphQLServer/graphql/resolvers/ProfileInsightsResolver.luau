@@ -8,7 +8,7 @@ local FindProfileInsightsByUserIdsFunction = ProfileInsightsConnectorModule.find
 local FindProfileInsightsByUserIdsFeedFunction = ProfileInsightsConnectorModule.findProfileInsightsByUserIdsFeed
 local FFlagPlayerSearchEnableOnlineFrequents = require(Parent.SharedFlags).FFlagPlayerSearchEnableOnlineFrequents
 
-local function _(p1, p2) --[[ Line: 25 ]]
+local function _(p1, p2)
 	for _, profileInsight in p1.profileInsights do
 		if profileInsight[p2] then
 			return profileInsight[p2]
@@ -19,10 +19,10 @@ end
 
 return {
 	ProfileInsights = {
-		targetUserId = function(p3) --[[ Line: 39 ]]
+		targetUserId = function(p3)
 			return p3.targetUser
 		end,
-		mutualFriends = function(p3) --[[ Line: 42 ]]
+		mutualFriends = function(p3)
 			-- upvalues: CryoModule (copy)
 			local MutualFriendInsight = nil
 			for _, profileInsight in p3.profileInsights do
@@ -30,7 +30,7 @@ return {
 					MutualFriendInsight = profileInsight.mutualFriendInsight
 					local MutualFriends = if MutualFriendInsight then MutualFriendInsight.mutualFriends else {}
 					
-					return if MutualFriends then CryoModule.List.foldLeft(CryoModule.Dictionary.keys(MutualFriends), function(List, Id) --[[ Line: 53 ]]
+					return if MutualFriends then CryoModule.List.foldLeft(CryoModule.Dictionary.keys(MutualFriends), function(List, Id)
 						-- upvalues: MutualFriends (copy)
 						local MutualFriend = MutualFriends[Id]
 						table.insert(List, {
@@ -45,7 +45,7 @@ return {
 			end
 			MutualFriendInsight = {}
 		end,
-		isOfflineFrequents = function(p4): boolean --[[ Line: 64 ]]
+		isOfflineFrequents = function(p4): boolean
 			-- upvalues: FFlagPlayerSearchEnableOnlineFrequents (copy)
 			local OfflineFrequentsInsight = nil
 			for _, profileInsight in p4.profileInsights do
@@ -75,7 +75,7 @@ return {
 			end
 			OfflineFrequentsInsight = {}
 		end,
-		friendshipAgeUnixSeconds = function(p5) --[[ Line: 80 ]]
+		friendshipAgeUnixSeconds = function(p5)
 			local FriendshipAgeInsight = nil
 			for _, profileInsight in p5.profileInsights do
 				if profileInsight.friendshipAgeInsight then
@@ -85,7 +85,7 @@ return {
 			end
 			FriendshipAgeInsight = {}
 		end,
-		friendRequestOriginSource = function(p6) --[[ Line: 85 ]]
+		friendRequestOriginSource = function(p6)
 			local FriendRequestOriginInsight = nil
 			for _, profileInsight in p6.profileInsights do
 				if profileInsight.friendRequestOriginInsight then
@@ -95,7 +95,7 @@ return {
 			end
 			FriendRequestOriginInsight = {}
 		end,
-		accountCreationDateUnixSeconds = function(p7) --[[ Line: 90 ]]
+		accountCreationDateUnixSeconds = function(p7)
 			local AccountCreationDateInsight = nil
 			for _, profileInsight in p7.profileInsights do
 				if profileInsight.accountCreationDateInsight then
@@ -105,7 +105,7 @@ return {
 			end
 			AccountCreationDateInsight = {}
 		end,
-		localizedCountryName = function(p8) --[[ Line: 98 ]]
+		localizedCountryName = function(p8)
 			local AccountLocationInsight = nil
 			for _, profileInsight in p8.profileInsights do
 				if profileInsight.accountLocationInsight then
@@ -115,7 +115,7 @@ return {
 			end
 			AccountLocationInsight = {}
 		end,
-		userAgeVerifiedBracket = function(p9): string --[[ Line: 102 ]]
+		userAgeVerifiedBracket = function(p9): string
 			local UserAgeVerifiedInsight = nil
 			for _, profileInsight in p9.profileInsights do
 				if profileInsight.userAgeVerifiedInsight then
@@ -127,20 +127,20 @@ return {
 		end
 	},
 	ProfileInsightsPages = {
-		id = function(p10) --[[ Line: 118 ]]
+		id = function(p10)
 			-- upvalues: HttpService (copy)
 			return if p10.pageId then p10.pageId else HttpService:GenerateGUID(false)
 		end,
-		profileInsights = function(p10) --[[ Line: 121 ]]
+		profileInsights = function(p10)
 			return p10.profileInsights
 		end
 	},
 	Query = {
-		profilesInsights = function(_, p10, p11) --[[ Line: 127 ]]
+		profilesInsights = function(_, p10, p11)
 			-- upvalues: FindProfileInsightsByUserIdsFeedFunction (copy), FFlagPlayerSearchEnableOnlineFrequents (copy)
 			return FindProfileInsightsByUserIdsFeedFunction(p10.userIds, p10.count, p10.pageId, if FFlagPlayerSearchEnableOnlineFrequents then p10.rankingStrategy else nil, p11.fetchImpl)
 		end,
-		profilesInsightsByUserIds = function(_, p10, p11) --[[ Line: 136 ]]
+		profilesInsightsByUserIds = function(_, p10, p11)
 			-- upvalues: FindProfileInsightsByUserIdsFunction (copy)
 			return FindProfileInsightsByUserIdsFunction(p10.userIds, p10.count, p10.rankingStrategy, p11.fetchImpl)
 		end

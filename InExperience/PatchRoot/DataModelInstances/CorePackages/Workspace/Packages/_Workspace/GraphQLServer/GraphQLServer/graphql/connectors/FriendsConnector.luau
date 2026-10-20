@@ -34,7 +34,7 @@ local NewUrlBuilder1 = UrlBuilder.new({
 	}
 })
 
-local function _(): string --[[ Line: 98 ]]
+local function _(): string
 	-- upvalues: HttpService (copy)
 	return string.format("friends-sort-%s", HttpService:GenerateGUID(false))
 end
@@ -45,7 +45,7 @@ local Emitter = SocialLuaAnalyticsModule.Telemetry.createEmitter({
 		links = "https://docs.google.com/document/d/1uRCdl8pEuiW9wDiOTL39JPMGLhgxtpvVgiXovE8Xof4",
 		throttlingThousandths = game:DefineFastInt("FriendsCommonAnalyticsThrottlingThousandths", 10000)
 	},
-	getSharedInfo = function() --[[ Line: 108 ]]
+	getSharedInfo = function()
 		return {}
 	end
 })
@@ -56,7 +56,7 @@ local FriendsSortFeFindFriendsResponse = SocialLuaAnalyticsModule.Telemetry.new(
 	backendsList = {
 		{
 			type = SupportedTelemetryBackends.EventIngest,
-			format = function(p1, _) --[[ Line: 120 ]]
+			format = function(p1, _)
 				return p1
 			end
 		}
@@ -69,14 +69,14 @@ local NewResult = SocialLuaAnalyticsModule.Telemetry.new({
 	backendsList = {
 		{
 			type = SupportedTelemetryBackends.EventIngest,
-			format = function(p1, _) --[[ Line: 134 ]]
+			format = function(p1, _)
 				return p1
 			end
 		}
 	}
 })
 
-local _ = function(RequestId, List, p1, SortType) --[[ Line: 141 ]]
+local _ = function(RequestId, List, p1, SortType)
 	-- upvalues: Emitter (copy)
 	Emitter.emit(p1, {
 		requestId = RequestId,
@@ -85,17 +85,17 @@ local _ = function(RequestId, List, p1, SortType) --[[ Line: 141 ]]
 	})
 end
 
-local function fireLoadingEvent(p1, p2, p3) --[[ Line: 261 ]]
+local function fireLoadingEvent(p1, p2, p3)
 	-- upvalues: CreateDiagMetricStringFunction (copy), GetPlatformSuffixFunction (copy), PlatformSpecificity (copy), Diag (copy)
 	Diag:reportStats(CreateDiagMetricStringFunction(p1, p2) .. GetPlatformSuffixFunction(PlatformSpecificity.BucketsOnly), p3)
 end
 
 return {
-	getAllFriendsByUserId = ReportPromiseLoadingTimeWrapperFunction(function(p1, p2) --[[ Line: 150 | Named "getAllFriendsByUserId" ]]
+	getAllFriendsByUserId = ReportPromiseLoadingTimeWrapperFunction(function(p1, p2)
 		-- upvalues: Fetch (copy), PromiseModule (copy), NewUrlBuilder (copy), HttpService (copy), Response (copy), GraphQLError (copy), FriendsSortFeFindFriendsResponse (copy), Emitter (copy)
 		local Fetch1 = if p2 then p2 else Fetch
 		
-		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 153 ]]
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 			-- upvalues: NewUrlBuilder (upval), p1 (copy), HttpService (upval), Fetch1 (copy), Response (upval), GraphQLError (upval), FriendsSortFeFindFriendsResponse (upval), Emitter (upval)
 			local Formatted = string.format("friends-sort-%s", HttpService:GenerateGUID(false))
 			local v1 = Fetch1(NewUrlBuilder({
@@ -106,7 +106,7 @@ return {
 			}), {
 				method = "GET",
 				headers = { ["friends-sort"] = Formatted }
-			}):catch(function(Err) --[[ Line: 163 ]]
+			}):catch(function(Err)
 				-- upvalues: Response (upval)
 				local v2 = Response.error()
 				v2.statusText = Err.message
@@ -121,7 +121,7 @@ return {
 				
 				return
 			end
-			local v2 = v1:json():catch(function() --[[ Line: 182 ]]
+			local v2 = v1:json():catch(function()
 				return nil
 			end):expect()
 			
@@ -144,23 +144,23 @@ return {
 				friendIds = table.concat(List, ",")
 			})
 		end)
-	end, function(p3) --[[ Line: 269 ]]
+	end, function(p3)
 		return {
 			fetch = "friends_find",
 			nextPage = p3.pageCursor and p3.pageCursor ~= ""
 		}
 	end, { fireEvent = fireLoadingEvent }),
-	getOnlineFriendsByUserId = ReportPromiseLoadingTimeWrapperFunction(function(p3, p4) --[[ Line: 206 | Named "getOnlineFriendsByUserId" ]]
+	getOnlineFriendsByUserId = ReportPromiseLoadingTimeWrapperFunction(function(p3, p4)
 		-- upvalues: Fetch (copy), PromiseModule (copy), NewUrlBuilder1 (copy), HttpService (copy), Response (copy), GraphQLError (copy), NewResult (copy), Emitter (copy)
 		local Fetch1 = if p4 then p4 else Fetch
 		
-		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 209 ]]
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 			-- upvalues: NewUrlBuilder1 (upval), p3 (copy), HttpService (upval), Fetch1 (copy), Response (upval), GraphQLError (upval), NewResult (upval), Emitter (upval)
 			local Formatted = string.format("friends-sort-%s", HttpService:GenerateGUID(false))
 			local v1 = Fetch1(NewUrlBuilder1({ userId = p3.userId, userSort = p3.sort }), {
 				method = "GET",
 				headers = { ["friends-sort"] = Formatted }
-			}):catch(function(Err) --[[ Line: 217 ]]
+			}):catch(function(Err)
 				-- upvalues: Response (upval)
 				local v2 = Response.error()
 				v2.statusText = Err.message
@@ -175,7 +175,7 @@ return {
 				
 				return
 			end
-			local v2 = v1:json():catch(function() --[[ Line: 236 ]]
+			local v2 = v1:json():catch(function()
 				return nil
 			end):expect()
 			
@@ -199,7 +199,7 @@ return {
 				friendIds = table.concat(List, ",")
 			})
 		end)
-	end, function(_) --[[ Line: 277 ]]
+	end, function(_)
 		return { fetch = "friends_online" }
 	end, { fireEvent = fireLoadingEvent })
 }

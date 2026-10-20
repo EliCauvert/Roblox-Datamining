@@ -2,7 +2,7 @@
 local GetInExperienceShopStoreModule = require(InExperienceShop.Stores.getInExperienceShopStore)
 local IsSideSheetEnabledModule = require(InExperienceShop.Parent.InExperienceSideSheetUtils.isSideSheetEnabled)
 
-return function() --[[ Line: 7 | Named "requestOpenToRobuxTab" ]]
+return function()
 	-- upvalues: IsSideSheetEnabledModule (copy), GetInExperienceShopStoreModule (copy)
 	if IsSideSheetEnabledModule then
 		GetInExperienceShopStoreModule(false).setShouldOpenToRobuxTab(true)

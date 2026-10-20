@@ -6,7 +6,7 @@ local OpenInfoPeekViewFunction = require(Parent.DiscoveryRouting).OpenInfoPeekVi
 local OpenCloseOnlyInteractiveAlertFunction = require(Parent.DiscoveryRouting).OpenCloseOnlyInteractiveAlert
 local SduiResponsiveHelpers = require(Parent.SduiCoreSystem).SduiResponsiveHelpers
 
-return function(p1, _, p2) --[[ Line: 18 ]]
+return function(p1, _, p2)
 	-- upvalues: SduiResponsiveHelpers (copy), GetInputModeStoreFunction (copy), ResponsiveModule (copy), OpenInfoPeekViewFunction (copy), OpenCloseOnlyInteractiveAlertFunction (copy), CloseCentralOverlayFunction (copy)
 	local DispatchFunction: (any) -> () = p2.dependencies.dispatch
 	local IsPortraitOrientation = SduiResponsiveHelpers.isPortraitOrientation()
@@ -18,7 +18,7 @@ return function(p1, _, p2) --[[ Line: 18 ]]
 		
 		return
 	else
-		DispatchFunction(OpenCloseOnlyInteractiveAlertFunction(TooltipTitle, TooltipInfoText, function() --[[ Line: 34 ]]
+		DispatchFunction(OpenCloseOnlyInteractiveAlertFunction(TooltipTitle, TooltipInfoText, function()
 			-- upvalues: DispatchFunction (copy), CloseCentralOverlayFunction (upval)
 			return DispatchFunction(CloseCentralOverlayFunction())
 		end))

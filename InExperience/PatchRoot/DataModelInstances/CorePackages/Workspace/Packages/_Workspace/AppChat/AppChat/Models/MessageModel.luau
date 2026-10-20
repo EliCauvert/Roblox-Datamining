@@ -7,7 +7,7 @@ local LoggerModule = require(script.Parent.Logger)
 local GetFFlagEnableSocialCardsFunction = require(Parent.SharedFlags).GetFFlagEnableSocialCards
 local FFlagAppChatEnableAutotranslationModule = require(AppChat.Flags.FFlagAppChatEnableAutotranslation)
 local config = {
-	new = function(p1) --[[ Line: 18 ]]
+	new = function(p1)
 		return { universeId = tostring(p1) }
 	end
 }
@@ -36,7 +36,7 @@ local MessageModelModule = {
 	}
 }
 
-function MessageModelModule.new(p1) --[[ Line: 51 ]]
+function MessageModelModule.new(p1)
 	-- upvalues: MessageModelModule (copy)
 	MessageModelModule.__index = MessageModelModule
 	local P1 = p1 or {}
@@ -45,7 +45,7 @@ function MessageModelModule.new(p1) --[[ Line: 51 ]]
 	return P1
 end
 
-function MessageModelModule.fromWeb(p1, p2, PreviousMessageId) --[[ Line: 61 ]]
+function MessageModelModule.fromWeb(p1, p2, PreviousMessageId)
 	-- upvalues: MessageModelModule (copy), _DateTime (copy)
 	if MessageModelModule.DoRequiredFieldsPresent(p1) then
 		local NewMessageModel = MessageModelModule.new()
@@ -65,7 +65,7 @@ function MessageModelModule.fromWeb(p1, p2, PreviousMessageId) --[[ Line: 61 ]]
 	end
 end
 
-function MessageModelModule.fromSentWeb(p1, p2) --[[ Line: 81 ]]
+function MessageModelModule.fromSentWeb(p1, p2)
 	-- upvalues: MessageModelModule (copy), Players (copy), _DateTime (copy)
 	if MessageModelModule.DoRequiredFieldsPresentForSent(p1) then
 		local NewMessageModel = MessageModelModule.new()
@@ -85,12 +85,12 @@ function MessageModelModule.fromSentWeb(p1, p2) --[[ Line: 81 ]]
 	end
 end
 
-function MessageModelModule.newSendingId(): string --[[ Line: 102 ]]
+function MessageModelModule.newSendingId(): string
 	-- upvalues: GenerateStringIdFunction (copy)
 	return "sending-message-" .. GenerateStringIdFunction()
 end
 
-function MessageModelModule.newSending(p1) --[[ Line: 106 ]]
+function MessageModelModule.newSending(p1)
 	-- upvalues: MessageModelModule (copy), Players (copy)
 	assert(p1, "props argument is missing")
 	assert(p1.id, "props.id argument is missing")
@@ -108,15 +108,15 @@ function MessageModelModule.newSending(p1) --[[ Line: 106 ]]
 	return NewMessageModel
 end
 
-function MessageModelModule.DoRequiredFieldsPresent(p1) --[[ Line: 126 ]]
+function MessageModelModule.DoRequiredFieldsPresent(p1)
 	return p1 and (p1.id and (p1.messageType and (p1.senderTargetId and p1.sent)))
 end
 
-function MessageModelModule.DoRequiredFieldsPresentForSent(p1) --[[ Line: 129 ]]
+function MessageModelModule.DoRequiredFieldsPresentForSent(p1)
 	return p1 and (p1.messageId and (p1.messageType and p1.sent))
 end
 
-function MessageModelModule.parseContentWeb(p1, p2) --[[ Line: 133 ]]
+function MessageModelModule.parseContentWeb(p1, p2)
 	-- upvalues: MessageModelModule (copy), config (copy)
 	p1:parseContent(p2)
 	
@@ -125,7 +125,7 @@ function MessageModelModule.parseContentWeb(p1, p2) --[[ Line: 133 ]]
 	end
 end
 
-function MessageModelModule.parseContentSentWeb(p1, p2) --[[ Line: 142 ]]
+function MessageModelModule.parseContentSentWeb(p1, p2)
 	-- upvalues: MessageModelModule (copy), config (copy)
 	p1:parseContent(p2)
 	
@@ -134,7 +134,7 @@ function MessageModelModule.parseContentSentWeb(p1, p2) --[[ Line: 142 ]]
 	end
 end
 
-function MessageModelModule.parseContent(p1, p2) --[[ Line: 151 ]]
+function MessageModelModule.parseContent(p1, p2)
 	-- upvalues: MessageModelModule (copy)
 	p1.messageType = p2.messageType
 	
@@ -147,7 +147,7 @@ function MessageModelModule.parseContent(p1, p2) --[[ Line: 151 ]]
 	end
 end
 
-function MessageModelModule.fromChannelsApi(RepliesTo, p1, PreviousMessageId, _) --[[ Line: 164 ]]
+function MessageModelModule.fromChannelsApi(RepliesTo, p1, PreviousMessageId, _)
 	-- upvalues: MessageModelModule (copy), _DateTime (copy), GetFFlagEnableSocialCardsFunction (copy), FFlagAppChatEnableAutotranslationModule (copy)
 	if not MessageModelModule.DoRequiredFieldsPresentFromChannelsApi(RepliesTo) then
 		return nil
@@ -182,7 +182,7 @@ function MessageModelModule.fromChannelsApi(RepliesTo, p1, PreviousMessageId, _)
 	return NewMessageModel
 end
 
-function MessageModelModule.serializeForUserMessage(p1, p2) --[[ Line: 201 ]]
+function MessageModelModule.serializeForUserMessage(p1, p2)
 	-- upvalues: MessageModelModule (copy), LoggerModule (copy)
 	p1.senderTargetId = tostring(p2.sender_user_id)
 	p1.senderType = MessageModelModule.SenderTypes.User
@@ -198,24 +198,24 @@ function MessageModelModule.serializeForUserMessage(p1, p2) --[[ Line: 201 ]]
 	p1.messageType = MessageModelModule.MessageTypes.PlainText
 end
 
-function MessageModelModule.serializeForSystemMessage(p1, _) --[[ Line: 219 ]]
+function MessageModelModule.serializeForSystemMessage(p1, _)
 	-- upvalues: MessageModelModule (copy)
 	p1.senderType = MessageModelModule.SenderTypes.System
 	p1.messageType = MessageModelModule.MessageTypes.System
 end
 
-function MessageModelModule.DoRequiredFieldsPresentFromChannelsApi(p1) --[[ Line: 225 ]]
+function MessageModelModule.DoRequiredFieldsPresentFromChannelsApi(p1)
 	-- upvalues: MessageModelModule (copy)
 	return if p1 then if p1.type == MessageModelModule.SenderTypes.User then p1.id and (p1.sender_user_id and p1.created_at) else p1.type == MessageModelModule.SenderTypes.System and (p1.id and p1.created_at) else false
 end
 
-function MessageModelModule.parseContentFromChannelsApi(p1, p2) --[[ Line: 239 ]]
+function MessageModelModule.parseContentFromChannelsApi(p1, p2)
 	-- upvalues: MessageModelModule (copy)
 	p1.messageType = MessageModelModule.MessageTypes.PlainText
 	p1.content = p2.content
 end
 
-function MessageModelModule.fromSentChannelsApi(p1, p2, p3) --[[ Line: 245 ]]
+function MessageModelModule.fromSentChannelsApi(p1, p2, p3)
 	-- upvalues: MessageModelModule (copy), _DateTime (copy), LoggerModule (copy)
 	if not MessageModelModule.DoRequiredFieldsPresentForSentFromChannelsApi(p1) then
 		return nil
@@ -249,7 +249,7 @@ function MessageModelModule.fromSentChannelsApi(p1, p2, p3) --[[ Line: 245 ]]
 	end
 end
 
-function MessageModelModule.DoRequiredFieldsPresentForSentFromChannelsApi(p1) --[[ Line: 283 ]]
+function MessageModelModule.DoRequiredFieldsPresentForSentFromChannelsApi(p1)
 	return p1 and (p1.messages and (#p1.messages > 0 and (p1.messages[1].id and p1.messages[1].created_at)))
 end
 

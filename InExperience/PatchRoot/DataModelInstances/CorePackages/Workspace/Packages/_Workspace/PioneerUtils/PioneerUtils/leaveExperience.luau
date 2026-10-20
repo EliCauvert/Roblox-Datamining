@@ -2,7 +2,7 @@
 local ExperienceService = require(PioneerUtils.Parent.ExperienceService).ExperienceService
 local _ = require(PioneerUtils.PioneerLeaveReason)
 
-return function(Reason) --[[ Line: 10 | Named "leaveExperience" ]]
+return function(Reason)
 	-- upvalues: ExperienceService (copy)
 	ExperienceService:LeaveExperienceWithReason(Reason)
 end

@@ -8,7 +8,7 @@ local SectionHeaderModule = require(AvatarExperienceProfilePictureEditor.Compone
 local AssetPickerGridModule = require(AvatarExperienceProfilePictureEditor.Components.AssetPicker.AssetPickerGrid)
 local GetAssetPickerStatusModule = require(AvatarExperienceProfilePictureEditor.Utils.getAssetPickerStatus)
 
-return function(p1) --[[ Line: 40 | Named "AssetGridScrollSection" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ScrollSectionModule (copy), View (copy), SectionHeaderModule (copy), AssetPickerGridModule (copy), GetAssetPickerStatusModule (copy)
 	return ReactModule.createElement(ScrollSectionModule, {
 		pinHeader = true,

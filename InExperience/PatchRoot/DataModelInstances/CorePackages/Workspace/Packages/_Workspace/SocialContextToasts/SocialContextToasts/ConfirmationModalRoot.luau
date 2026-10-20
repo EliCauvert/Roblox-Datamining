@@ -3,9 +3,9 @@ local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelec
 local ReactModule = require(Parent.React)
 local DeeplinkConfirmationModal = require(Parent.NotificationsCommon).DeeplinkConfirmationModal
 
-return function() --[[ Line: 10 | Named "ConfirmationModalRoot" ]]
+return function()
 	-- upvalues: UseSelectorFunction (copy), ReactModule (copy), DeeplinkConfirmationModal (copy)
-	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 11 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p1)
 		return p1.ConfirmationModal
 	end)
 	

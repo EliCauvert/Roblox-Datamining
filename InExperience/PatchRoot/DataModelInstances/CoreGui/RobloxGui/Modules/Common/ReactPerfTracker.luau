@@ -1,6 +1,6 @@
 ﻿local ReactPerfTrackerKibana = game:DefineFastInt("ReactPerfTrackerKibana", 0)
 
-function applicationId() --[[ Line: 47 ]]
+function applicationId()
 	local AppStorageService = game:GetService("AppStorageService")
 	
 	if AppStorageService then
@@ -43,7 +43,7 @@ if ReactPerfTrackerKibana1 > 0 then
 	local ReactPerfTrackerModule = {}
 	ReactPerfTrackerModule.__index = ReactPerfTrackerModule
 	
-	function ReactPerfTrackerModule.new() --[[ Line: 117 ]]
+	function ReactPerfTrackerModule.new()
 		-- upvalues: LoggingProtocolModule (copy), ReactPerfTrackerModule (copy)
 		return (setmetatable({
 			totalTime = 0,
@@ -58,9 +58,9 @@ if ReactPerfTrackerKibana1 > 0 then
 		}, ReactPerfTrackerModule))
 	end
 	
-	function ReactPerfTrackerModule:start() --[[ Line: 132 ]]
+	function ReactPerfTrackerModule:start()
 		-- upvalues: config (copy), ReactRobloxModule (copy)
-		self.eventSender = coroutine.create(function() --[[ Line: 134 ]]
+		self.eventSender = coroutine.create(function()
 			-- upvalues: self (copy), config (upval)
 			while true do
 				local Removed = table.remove(self.outgoingEvents, 1)
@@ -72,7 +72,7 @@ if ReactPerfTrackerKibana1 > 0 then
 				end
 			end
 		end)
-		ReactRobloxModule.robloxReactProfiling.startTimerSampling(function(p1) --[[ Line: 147 ]]
+		ReactRobloxModule.robloxReactProfiling.startTimerSampling(function(p1)
 			-- upvalues: self (copy)
 			local Id = p1.id
 			local ScaledEndTime = (p1.endTime - p1.startTime) * 1000
@@ -104,7 +104,7 @@ if ReactPerfTrackerKibana1 > 0 then
 		end)
 	end
 	
-	function ReactPerfTrackerModule:genEvents() --[[ Line: 180 ]]
+	function ReactPerfTrackerModule:genEvents()
 		-- upvalues: RbxAnalyticsService (copy)
 		local Summary_num_components = 0
 		
@@ -130,7 +130,7 @@ if ReactPerfTrackerKibana1 > 0 then
 		})
 	end
 	
-	function ReactPerfTrackerModule:sendEvents() --[[ Line: 206 ]]
+	function ReactPerfTrackerModule:sendEvents()
 		if self.sampleCount ~= 0 then
 			self:genEvents()
 			self:resetCounts()
@@ -140,7 +140,7 @@ if ReactPerfTrackerKibana1 > 0 then
 		end
 	end
 	
-	function ReactPerfTrackerModule:resetCounts() --[[ Line: 218 ]]
+	function ReactPerfTrackerModule:resetCounts()
 		self.componentTotalTime = {}
 		self.componentMaxTime = {}
 		self.componentCount = {}

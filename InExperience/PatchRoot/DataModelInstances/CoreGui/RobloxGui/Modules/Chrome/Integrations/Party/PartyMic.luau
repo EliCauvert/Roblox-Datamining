@@ -13,15 +13,15 @@ local Enabled = nil
 local v1 = false
 local NewSignal = Signal.new()
 local NewSignal1 = Signal.new()
-NewSignal:connect(function(p1) --[[ Line: 27 ]]
+NewSignal:connect(function(p1)
 	-- upvalues: Enabled (ref)
 	Enabled = p1
 end)
-NewSignal1:connect(function(p1) --[[ Line: 31 ]]
+NewSignal1:connect(function(p1)
 	-- upvalues: v1 (ref)
 	v1 = p1
 end)
-local NewMappedSignal = MappedSignal.new(NewSignal, function(): boolean --[[ Line: 35 ]]
+local NewMappedSignal = MappedSignal.new(NewSignal, function(): boolean
 	-- upvalues: v1 (ref), Enabled (ref)
 	return v1 and Enabled == false
 end)
@@ -32,7 +32,7 @@ return if GetFFlagEnableCrossExpVoiceFunction() then ServiceModule:register({
 	label = if FFlagChangeToggleMicTextModule then "CoreScripts.TopBar.Mic" else "CoreScripts.TopBar.ToggleMic",
 	sideSheetPlacement = SideSheetPlacement.Unibar,
 	isActivated = NewMappedSignal,
-	activated = function() --[[ Line: 49 ]]
+	activated = function()
 		-- upvalues: Players (copy), v1 (ref), Enabled (ref), Default (copy)
 		local UserId = Players and Players.LocalPlayer and Players.LocalPlayer.UserId or -1
 		
@@ -46,7 +46,7 @@ return if GetFFlagEnableCrossExpVoiceFunction() then ServiceModule:register({
 		end
 	end,
 	components = {
-		Icon = function() --[[ Line: 60 ]]
+		Icon = function()
 			-- upvalues: PartyMicIconModule (copy), NewSignal (copy), NewSignal1 (copy)
 			return PartyMicIconModule({
 				isLocalPlayerMutedSignal = NewSignal,

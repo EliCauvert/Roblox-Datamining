@@ -14,7 +14,7 @@ local config1 = {
 
 return {
 	_hasFetchedLocalization = false,
-	_getTranslator = function(p1) --[[ Line: 27 ]]
+	_getTranslator = function(p1)
 		-- upvalues: Chat (copy), LocalizationService (copy)
 		if not p1._translator and not p1._hasFetchedLocalization then
 			p1._hasFetchedLocalization = true
@@ -22,7 +22,7 @@ return {
 			
 			if ChatLocalization then
 				p1._translator = ChatLocalization:GetTranslator(LocalizationService.RobloxLocaleId)
-				LocalizationService:GetPropertyChangedSignal("RobloxLocaleId"):Connect(function() --[[ Line: 35 ]]
+				LocalizationService:GetPropertyChangedSignal("RobloxLocaleId"):Connect(function()
 					-- upvalues: p1 (copy)
 					p1._hasFetchedLocalization = false
 					p1._translator = nil
@@ -33,9 +33,9 @@ return {
 		end
 		return p1._translator
 	end,
-	Get = function(p1, Segment, Segment1, p2) --[[ Line: 47 ]]
+	Get = function(p1, Segment, Segment1, p2)
 		local FormatByKeyResult = Segment1
-		pcall(function() --[[ Line: 49 ]]
+		pcall(function()
 			-- upvalues: p1 (copy), FormatByKeyResult (ref), Segment (copy), p2 (copy)
 			local Translator = p1:_getTranslator()
 			
@@ -50,7 +50,7 @@ return {
 		
 		return FormatByKeyResult
 	end,
-	LocalizeFormattedMessage = function(p1, Text: string) --[[ Line: 60 ]]
+	LocalizeFormattedMessage = function(p1, Text: string)
 		local StartIndex, EndIndex = string.find(Text, "{RBX_LOCALIZATION_KEY}")
 		
 		if not StartIndex then
@@ -75,10 +75,10 @@ return {
 		end
 		return p1:Get(Segment, Segment1, t)
 	end,
-	FormatMessageToSend = function(_, Text, Text1, Text2, Text3): string --[[ Line: 89 ]]
+	FormatMessageToSend = function(_, Text, Text1, Text2, Text3): string
 		return if Text2 and Text3 then "{RBX_LOCALIZATION_KEY}" .. Text .. "{RBX_LOCALIZATION_DEFAULT}" .. Text1 .. "{RBX_LOCALIZATION_PARAMS}" .. Text2 .. "=" .. Text3 else "{RBX_LOCALIZATION_KEY}" .. Text .. "{RBX_LOCALIZATION_DEFAULT}" .. Text1
 	end,
-	tryLocalize = function(p2, Text: string) --[[ Line: 100 ]]
+	tryLocalize = function(p2, Text: string)
 		-- upvalues: config (copy), config1 (copy)
 		if config[Text] then
 			return p2:Get(config[Text], Text)

@@ -5,21 +5,21 @@ local XboxPrimaryNavABIXPVariable = game:DefineFastString("XboxPrimaryNavABIXPVa
 local ExperimentState = {}
 
 return {
-	isEnabled = function() --[[ Line: 37 ]]
+	isEnabled = function()
 		-- upvalues: XboxPrimaryNavABIXPEnrolledForAll (copy), XboxPrimaryNavABIXPEnabled (copy)
 		return XboxPrimaryNavABIXPEnrolledForAll or XboxPrimaryNavABIXPEnabled
 	end,
-	isEnrolledForAll = function() --[[ Line: 33 ]]
+	isEnrolledForAll = function()
 		-- upvalues: XboxPrimaryNavABIXPEnrolledForAll (copy)
 		return XboxPrimaryNavABIXPEnrolledForAll
 	end,
-	isUserEnrolled = function() --[[ Line: 41 ]]
+	isUserEnrolled = function()
 		-- upvalues: XboxPrimaryNavABIXPEnrolledForAll (copy), XboxPrimaryNavABIXPEnabled (copy), ExperimentState (ref), AppUserLayers (copy), XboxPrimaryNavABIXPVariable (copy)
 		return if XboxPrimaryNavABIXPEnrolledForAll then true else (XboxPrimaryNavABIXPEnrolledForAll or XboxPrimaryNavABIXPEnabled) and (ExperimentState[AppUserLayers.XboxClassicUILayer] or {})[XboxPrimaryNavABIXPVariable] or false
 	end,
 	layer = AppUserLayers.XboxClassicUILayer,
 	experiment = require(script.Parent.makeExperiment)("OnUserLayerLoadingStatusChanged", "GetUserLayerLoadingStatus", "GetUserLayerVariables", "LogUserLayerExposure", "GetUserStatusForLayer"),
-	setExperimentState = function(Value) --[[ Line: 29 ]]
+	setExperimentState = function(Value)
 		-- upvalues: ExperimentState (ref)
 		ExperimentState = Value
 	end

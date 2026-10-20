@@ -30,7 +30,7 @@ local UseCurrentSquadIdFunction = require(Parent.SquadsCore.Hooks).useCurrentSqu
 local ScheduledSquadActionEnumModule = require(Squads.Enums.ScheduledSquadActionEnum)
 local ScheduledSquadActionSourceEnumModule = require(Squads.Enums.ScheduledSquadActionSourceEnum)
 
-return function(p1) --[[ Line: 49 ]]
+return function(p1)
 	-- upvalues: UseLocalUserIdFunction (copy), UseNavigationFunction (copy), UseTokensFunction (copy), UseStoreFunction (copy), ReactModule (copy), SquadExternalContractContext (copy), UseCurrentSquadIdFunction (copy), UseLocalizationFunction (copy), GetSubscribedScheduledSquadsFunction (copy), SquadPromptType (copy), CryoModule (copy), View (copy), EventNamesModule (copy), ScheduledSquadActionEnumModule (copy), ScheduledSquadActionSourceEnumModule (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), Text (copy), LocalizationService (copy), AvatarGroup (copy), AvatarGroupType (copy), InputSize (copy), Button (copy), UnsubscribeFromScheduledSquadFunction (copy), SubscribeToScheduledSquadFunction (copy), ButtonVariant (copy), Sheet (copy), Loading (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseNavigationResult = UseNavigationFunction()
@@ -48,20 +48,20 @@ return function(p1) --[[ Line: 49 ]]
 	})
 	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState({})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 69 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		if p1.onClose then
 			p1.onClose()
 		end
 	end, { p1.onClose })
-	ReactModule.useEffect(function() --[[ Line: 76 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), GetSubscribedScheduledSquadsFunction (upval), UseStateResult2 (copy), UseStateResult2_1 (copy), UseContextResult (copy), UseStoreResult (copy), SquadPromptType (upval), UseResult (copy)
 		if p1.isOpen then
-			GetSubscribedScheduledSquadsFunction(function(p2) --[[ Line: 78 ]]
+			GetSubscribedScheduledSquadsFunction(function(p2)
 				-- upvalues: UseStateResult2 (upval), UseStateResult2_1 (upval)
 				UseStateResult2(false)
 				UseStateResult2_1(p2.scheduledGroupUps)
-			end, function() --[[ Line: 81 ]]
+			end, function()
 				-- upvalues: UseContextResult (upval), UseStoreResult (upval), SquadPromptType (upval), UseResult (upval)
 				UseContextResult.setSquadPrompt(UseStoreResult, {
 					hideCancelButton = true,
@@ -74,23 +74,23 @@ return function(p1) --[[ Line: 49 ]]
 		GetSubscribedScheduledSquadsFunction, p1.isOpen, UseResult, UseStateResult2,
 		UseStateResult2_1, UseContextResult.setSquadPrompt, UseStoreResult
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 101 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseContextResult (copy), UseStoreResult (copy), SquadPromptType (upval)
 		UseContextResult.setSquadPrompt(UseStoreResult, {
 			hideCancelButton = true,
 			promptType = SquadPromptType.Error
 		})
 	end, { UseContextResult.setSquadPrompt, UseStoreResult })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 108 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseStateResult1 (copy), UseLocalUserIdResult (copy), CryoModule (upval), ReactModule (upval), View (upval), UseResult (copy), UseNavigationResult (copy), UseContextResult (copy), EventNamesModule (upval), ScheduledSquadActionEnumModule (upval), ScheduledSquadActionSourceEnumModule (upval), UseCurrentSquadIdResult (copy), FFlagSquadsEnableFoundationTestIdsModule (upval), Text (upval), UseLocalizationResult (copy), LocalizationService (upval), AvatarGroup (upval), UseTokensResult (copy), AvatarGroupType (upval), InputSize (upval), Button (upval), UseStoreResult (copy), SquadPromptType (upval), UnsubscribeFromScheduledSquadFunction (upval), UseStateResult2_1 (copy), UseResult1 (copy), SubscribeToScheduledSquadFunction (upval), ButtonVariant (upval)
 		local Elements = {}
 		
 		for i, AdditionalInfo in UseStateResult1 do
 			local IsTextMatch = tostring(AdditionalInfo.initiatorId) == tostring(UseLocalUserIdResult)
-			local MapResult = CryoModule.List.map(AdditionalInfo.subscribers, function(p2) --[[ Line: 114 ]]
+			local MapResult = CryoModule.List.map(AdditionalInfo.subscribers, function(p2)
 				return p2.userId
 			end)
-			local IsTextMatch1: boolean = IsTextMatch or CryoModule.List.findWhere(MapResult, function(p2): boolean --[[ Line: 119 ]]
+			local IsTextMatch1: boolean = IsTextMatch or CryoModule.List.findWhere(MapResult, function(p2): boolean
 				-- upvalues: UseLocalUserIdResult (upval)
 				return tostring(p2) == tostring(UseLocalUserIdResult)
 			end) ~= nil
@@ -99,7 +99,7 @@ return function(p1) --[[ Line: 49 ]]
 			table.insert(Elements, ReactModule.createElement(View, {
 				tag = "size-full-0 auto-y col gap-xsmall radius-large padding-y-small padding-x-medium",
 				LayoutOrder = #Elements + 1,
-				onActivated = function() --[[ Line: 131 ]]
+				onActivated = function()
 					-- upvalues: UseResult (upval), UseNavigationResult (upval), AdditionalInfo (copy), UseContextResult (upval), EventNamesModule (upval), ScheduledSquadActionEnumModule (upval), ScheduledSquadActionSourceEnumModule (upval), UseCurrentSquadIdResult (upval)
 					UseResult()
 					UseNavigationResult.navigate("ChatConversation", { conversationId = AdditionalInfo.parentChannelId })
@@ -152,7 +152,7 @@ return function(p1) --[[ Line: 49 ]]
 				ActionButton = ReactModule.createElement(Button, {
 					LayoutOrder = 4,
 					testId = if FFlagSquadsEnableFoundationTestIdsModule then `{ScheduledName}--action-button` else nil,
-					onActivated = function() --[[ Line: 187 ]]
+					onActivated = function()
 						-- upvalues: IsTextMatch (copy), UseResult (upval), UseContextResult (upval), UseStoreResult (upval), AdditionalInfo (copy), SquadPromptType (upval), IsTextMatch1 (copy), UnsubscribeFromScheduledSquadFunction (upval), CryoModule (upval), UseLocalUserIdResult (upval), UseStateResult2_1 (upval), UseStateResult1 (upval), i (copy), UseResult1 (upval), SubscribeToScheduledSquadFunction (upval), EventNamesModule (upval), ScheduledSquadActionEnumModule (upval), ScheduledSquadActionSourceEnumModule (upval), UseCurrentSquadIdResult (upval)
 						if IsTextMatch then
 							UseResult()
@@ -162,17 +162,17 @@ return function(p1) --[[ Line: 49 ]]
 								promptType = SquadPromptType.ScheduleSquad
 							})
 						elseif IsTextMatch1 then
-							UnsubscribeFromScheduledSquadFunction({ scheduledGroupUpId = AdditionalInfo.scheduledGroupUpId }, function() --[[ Line: 201 ]]
+							UnsubscribeFromScheduledSquadFunction({ scheduledGroupUpId = AdditionalInfo.scheduledGroupUpId }, function()
 								-- upvalues: CryoModule (upval), AdditionalInfo (upval), UseLocalUserIdResult (upval), UseStateResult2_1 (upval), UseStateResult1 (upval), i (upval)
 								UseStateResult2_1(CryoModule.List.replaceIndex(UseStateResult1, i, (CryoModule.Dictionary.join(AdditionalInfo, {
-									subscribers = CryoModule.List.filter(AdditionalInfo.subscribers, function(p2): boolean --[[ Line: 205 ]]
+									subscribers = CryoModule.List.filter(AdditionalInfo.subscribers, function(p2): boolean
 										-- upvalues: UseLocalUserIdResult (upval)
 										return tostring(p2.userId) ~= tostring(UseLocalUserIdResult)
 									end)
 								}))))
 							end, UseResult1)
 						else
-							SubscribeToScheduledSquadFunction({ scheduledGroupUpId = AdditionalInfo.scheduledGroupUpId }, function() --[[ Line: 219 ]]
+							SubscribeToScheduledSquadFunction({ scheduledGroupUpId = AdditionalInfo.scheduledGroupUpId }, function()
 								-- upvalues: CryoModule (upval), AdditionalInfo (upval), UseLocalUserIdResult (upval), UseStateResult2_1 (upval), UseStateResult1 (upval), i (upval)
 								UseStateResult2_1(CryoModule.List.replaceIndex(UseStateResult1, i, (CryoModule.Dictionary.join(AdditionalInfo, {
 									subscribers = CryoModule.List.join(AdditionalInfo.subscribers, { { userId = UseLocalUserIdResult } })

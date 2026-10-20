@@ -7,10 +7,10 @@ local MediaGalleryConstantsModule = require(MediaGallery.MediaGalleryConstants)
 local VIDEOVISIBLEPERCENT = MediaGalleryConstantsModule.VIDEO_VISIBLE_PERCENT
 local VISIBILITYSCANDEBOUNCESEC = MediaGalleryConstantsModule.VISIBILITY_SCAN_DEBOUNCE_SEC
 
-return function(p1, p2, Callback1, Callback) --[[ Line: 24 | Named "useGuiObjectVisibility" ]]
+return function(p1, p2, Callback1, Callback)
 	-- upvalues: ReactModule (copy), GetIsInstanceVisibleFunction (copy), VIDEOVISIBLEPERCENT (copy), RunService (copy), VISIBILITYSCANDEBOUNCESEC (copy)
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 32 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p2 (copy), p1 (copy), GetIsInstanceVisibleFunction (upval), VIDEOVISIBLEPERCENT (upval), UseRefResult (copy), Callback (copy), RunService (upval), Callback1 (copy), VISIBILITYSCANDEBOUNCESEC (upval)
 		if not p2 or not p1.current then
 			return nil
@@ -20,7 +20,7 @@ return function(p1, p2, Callback1, Callback) --[[ Line: 24 | Named "useGuiObject
 		local DelayedThread = nil
 		local CurrentTime = 0
 		
-		local function _() --[[ Line: 43 | Named "getViewportBounds" ]]
+		local function _()
 			local CurrentCamera = workspace.CurrentCamera
 			
 			return if CurrentCamera then {
@@ -29,7 +29,7 @@ return function(p1, p2, Callback1, Callback) --[[ Line: 24 | Named "useGuiObject
 			} else nil
 		end
 		
-		local _ = function() --[[ Line: 51 | Named "isVisible" ]]
+		local _ = function()
 			-- upvalues: GetIsInstanceVisibleFunction (upval), Current (copy), VIDEOVISIBLEPERCENT (upval)
 			local CurrentCamera = workspace.CurrentCamera
 			local Config = if CurrentCamera then {
@@ -43,7 +43,7 @@ return function(p1, p2, Callback1, Callback) --[[ Line: 24 | Named "useGuiObject
 		local v1 = nil
 		local Callback2 = nil
 		
-		local _ = function() --[[ Line: 62 | Named "disconnectRenderStep" ]]
+		local _ = function()
 			-- upvalues: UseRefResult (upval), Callback (upval)
 			if UseRefResult.current then
 				UseRefResult.current:Disconnect()
@@ -55,7 +55,7 @@ return function(p1, p2, Callback1, Callback) --[[ Line: 24 | Named "useGuiObject
 			end
 		end
 		
-		local function disconnectLayoutSignals() --[[ Line: 72 ]]
+		local function disconnectLayoutSignals()
 			-- upvalues: Connections (ref), DelayedThread (ref)
 			for _, connection in Connections do
 				connection:Disconnect()
@@ -68,11 +68,11 @@ return function(p1, p2, Callback1, Callback) --[[ Line: 24 | Named "useGuiObject
 			end
 		end
 		
-		v1 = function() --[[ Line: 83 ]]
+		v1 = function()
 			-- upvalues: UseRefResult (upval), disconnectLayoutSignals (copy), RunService (upval), GetIsInstanceVisibleFunction (upval), Current (copy), VIDEOVISIBLEPERCENT (upval), Callback1 (upval), Callback (upval), Callback2 (ref)
 			if not UseRefResult.current then
 				disconnectLayoutSignals()
-				UseRefResult.current = RunService.RenderStepped:Connect(function(DeltaTime) --[[ Line: 90 ]]
+				UseRefResult.current = RunService.RenderStepped:Connect(function(DeltaTime)
 					-- upvalues: GetIsInstanceVisibleFunction (upval), Current (upval), VIDEOVISIBLEPERCENT (upval), Callback1 (upval), UseRefResult (upval), Callback (upval), Callback2 (upval)
 					local CurrentCamera = workspace.CurrentCamera
 					local Config = if CurrentCamera then {
@@ -101,16 +101,16 @@ return function(p1, p2, Callback1, Callback) --[[ Line: 24 | Named "useGuiObject
 			end
 		end
 		
-		Callback2 = function() --[[ Line: 102 ]]
+		Callback2 = function()
 			-- upvalues: Connections (ref), DelayedThread (ref), CurrentTime (ref), VISIBILITYSCANDEBOUNCESEC (upval), GetIsInstanceVisibleFunction (upval), Current (copy), VIDEOVISIBLEPERCENT (upval), v1 (ref)
 			if #Connections <= 0 then
-				local function onLayoutChange() --[[ Line: 107 ]]
+				local function onLayoutChange()
 					-- upvalues: DelayedThread (upval), CurrentTime (upval), VISIBILITYSCANDEBOUNCESEC (upval), GetIsInstanceVisibleFunction (upval), Current (upval), VIDEOVISIBLEPERCENT (upval), v1 (upval)
 					if DelayedThread then return end
 					local Largest = math.max(0, CurrentTime + VISIBILITYSCANDEBOUNCESEC - tick())
 					
 					if Largest > 0 then
-						DelayedThread = task.delay(Largest, function() --[[ Line: 113 ]]
+						DelayedThread = task.delay(Largest, function()
 							-- upvalues: DelayedThread (upval), CurrentTime (upval), GetIsInstanceVisibleFunction (upval), Current (upval), VIDEOVISIBLEPERCENT (upval), v1 (upval)
 							DelayedThread = nil
 							CurrentTime = tick()
@@ -159,7 +159,7 @@ return function(p1, p2, Callback1, Callback) --[[ Line: 24 | Named "useGuiObject
 		else
 			Callback2()
 		end
-		return function() --[[ Line: 140 ]]
+		return function()
 			-- upvalues: disconnectLayoutSignals (copy), UseRefResult (upval), Callback (upval)
 			disconnectLayoutSignals()
 			

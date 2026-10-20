@@ -1,13 +1,13 @@
 ﻿local Count = 0
 
 return {
-	create = function(Callback, p1) --[[ Line: 23 ]]
+	create = function(Callback, p1)
 		-- upvalues: Count (ref)
 		local Tbl = {}
 		local Message: string = `{p1}: keys must be strings`
 		local Message1: string = `{p1}: setItem must preserve the existing key`
 		
-		local function _(p2, p3) --[[ Line: 28 | Named "resolve" ]]
+		local function _(p2, p3)
 			-- upvalues: Callback (copy), Count (upval), Message (copy)
 			local CallbackResult = nil
 			if Callback == nil then
@@ -22,7 +22,7 @@ return {
 		end
 		
 		return {
-			claim = function(p2, p3): string --[[ Line: 34 ]]
+			claim = function(p2, p3): string
 				-- upvalues: Callback (copy), Count (upval), Message (copy), Tbl (ref), p1 (copy)
 				local CallbackResult = nil
 				if Callback == nil then
@@ -41,7 +41,7 @@ return {
 				
 				return RecyclerName
 			end,
-			assertPreserved = function(RecyclerName, p2, p3) --[[ Line: 75 ]]
+			assertPreserved = function(RecyclerName, p2, p3)
 				-- upvalues: Callback (copy), Count (upval), Message (copy), Message1 (copy)
 				if Callback ~= nil then
 					local CallbackResult = nil
@@ -55,18 +55,18 @@ return {
 					assert(CallbackResult == RecyclerName, Message1)
 				end
 			end,
-			release = function(Key) --[[ Line: 80 ]]
+			release = function(Key)
 				-- upvalues: Tbl (ref), p1 (copy)
 				if Tbl[Key] == nil then
 					assert(false, `{p1}: cannot release missing key "{Key}"`)
 				end
 				Tbl[Key] = nil
 			end,
-			adopt = function(Key) --[[ Line: 86 ]]
+			adopt = function(Key)
 				-- upvalues: Tbl (ref)
 				Tbl[Key] = true
 			end,
-			replace = function(Key, p2, p3): string --[[ Line: 43 ]]
+			replace = function(Key, p2, p3): string
 				-- upvalues: Callback (copy), Count (upval), Message (copy), Tbl (ref), p1 (copy)
 				local CallbackResult = nil
 				if Callback == nil then
@@ -90,7 +90,7 @@ return {
 				end
 				return Key1
 			end,
-			rebuild = function(List) --[[ Line: 58 ]]
+			rebuild = function(List)
 				-- upvalues: Callback (copy), Count (upval), Message (copy), p1 (copy), Tbl (ref)
 				local Buffer = table.create(#List)
 				local t = {}
@@ -116,21 +116,21 @@ return {
 				
 				return Buffer
 			end,
-			clear = function() --[[ Line: 91 ]]
+			clear = function()
 				-- upvalues: Tbl (ref)
 				Tbl = {}
 			end,
-			snapshot = function() --[[ Line: 94 ]]
+			snapshot = function()
 				-- upvalues: Tbl (ref)
 				return table.clone(Tbl)
 			end,
-			restore = function(Tbl1) --[[ Line: 97 ]]
+			restore = function(Tbl1)
 				-- upvalues: Tbl (ref)
 				Tbl = table.clone(Tbl1)
 			end
 		}
 	end,
-	generatedKey = function(): string --[[ Line: 18 ]]
+	generatedKey = function(): string
 		-- upvalues: Count (ref)
 		Count += 1
 		

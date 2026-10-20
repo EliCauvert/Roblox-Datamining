@@ -2,16 +2,16 @@
 local APIURLModule = require(Parent.API_URL)
 local _ = require(Parent.networkingShareLinkTypes)
 
-return function(p1) --[[ Line: 6 ]]
+return function(p1)
 	-- upvalues: APIURLModule (copy)
-	local ResolveLink = p1.roduxNetworking.POST("resolve-link", function(Callback, p2) --[[ Line: 11 ]]
+	local ResolveLink = p1.roduxNetworking.POST("resolve-link", function(Callback, p2)
 		-- upvalues: APIURLModule (upval)
 		return Callback(APIURLModule):path("sharelinks"):path("v1"):path("resolve-link"):body({ linkType = p2.linkType, linkId = p2.linkId })
 	end)
 	
 	if p1.useMockedResponse then
 		ResolveLink.Mock.clear()
-		ResolveLink.Mock.reply(function() --[[ Line: 21 ]]
+		ResolveLink.Mock.reply(function()
 			return {
 				responseBody = {
 					experienceInviteData = {

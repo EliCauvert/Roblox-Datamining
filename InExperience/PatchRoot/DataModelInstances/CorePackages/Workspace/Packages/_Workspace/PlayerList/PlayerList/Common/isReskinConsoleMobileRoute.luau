@@ -4,11 +4,11 @@ local FFlagEnableMobilePlayerListOnConsoleModule = require(Parent.Flags.FFlagEna
 local FFlagEnableMobilePlayerListOnGamepadModule = require(Parent.Flags.FFlagEnableMobilePlayerListOnGamepad)
 local FFlagLuaSupportMicroGamepadPreferredInput = require(Parent.Parent.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
 
-local function _(PreferredInput, p1): boolean --[[ Line: 25 | Named "isGamepadPreferredInput" ]]
+local function _(PreferredInput, p1): boolean
 	return PreferredInput == Enum.PreferredInput.Gamepad or p1 and PreferredInput == Enum.PreferredInput.MicroGamepad
 end
 
-return function(p1, p2): boolean --[[ Line: 34 | Named "isReskinConsoleMobileRoute" ]]
+return function(p1, p2): boolean
 	-- upvalues: FFlagPlayerListReskinModule (copy), FFlagEnableMobilePlayerListOnConsoleModule (copy), FFlagEnableMobilePlayerListOnGamepadModule (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy)
 	local FFlagEnableMobilePlayerListOnConsoleModule1 = if p2 == nil then FFlagEnableMobilePlayerListOnConsoleModule else p2.isConsoleMobileEnabled
 	local FFlagEnableMobilePlayerListOnGamepadModule1 = if p2 == nil then FFlagEnableMobilePlayerListOnGamepadModule else p2.isGamepadMobileEnabled

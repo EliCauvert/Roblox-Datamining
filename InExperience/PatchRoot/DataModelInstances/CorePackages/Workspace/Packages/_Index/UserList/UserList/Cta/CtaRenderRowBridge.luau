@@ -5,7 +5,7 @@ local _ = require(UserList.Common.Types)
 local UseCtaRenderRowModule = require(UserList.Hooks.useCtaRenderRow)
 local FFlagUserListComposeRenderRowWithCta = require(Parent.SharedFlags).FFlagUserListComposeRenderRowWithCta
 
-return function(p1) --[[ Line: 23 | Named "CtaRenderRowBridge" ]]
+return function(p1)
 	-- upvalues: UseCtaRenderRowModule (copy), FFlagUserListComposeRenderRowWithCta (copy)
 	return p1.render((UseCtaRenderRowModule(p1.ctaConfig, if FFlagUserListComposeRenderRowWithCta then p1.renderRow else nil)))
 end

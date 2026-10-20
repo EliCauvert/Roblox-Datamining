@@ -1,3 +1,3 @@
-﻿return function() --[[ Line: 2 ]]
+﻿return function()
 	return game:GetEngineFeature("EnableDisplayWakeLock")
 end

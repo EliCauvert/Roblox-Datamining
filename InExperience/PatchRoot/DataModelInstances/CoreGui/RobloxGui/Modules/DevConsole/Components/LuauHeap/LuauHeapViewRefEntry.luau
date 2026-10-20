@@ -14,7 +14,7 @@ local ValuePadding = ConstantsModule.LuauHeapFormatting.ValuePadding
 local LuauHeapViewPathEntryModule = require(script.Parent.LuauHeapViewPathEntry)
 local LuauHeapViewRefEntry = RoactModule.PureComponent:extend("LuauHeapViewRefEntry")
 
-local function BorderedCellLabel(p1) --[[ Line: 33 ]]
+local function BorderedCellLabel(p1)
 	-- upvalues: RoactModule (copy), CellLabelModule (copy), LineWidth (copy), ValuePadding (copy), LineColor (copy)
 	return RoactModule.createFragment({
 		Label = RoactModule.createElement(CellLabelModule, {
@@ -33,18 +33,18 @@ local function BorderedCellLabel(p1) --[[ Line: 33 ]]
 	})
 end
 
-function LuauHeapViewRefEntry.init(p1) --[[ Line: 51 ]]
+function LuauHeapViewRefEntry.init(p1)
 	p1.state = { expanded = false }
 	
-	function p1.onButtonPress() --[[ Line: 56 ]]
+	function p1.onButtonPress()
 		-- upvalues: p1 (copy)
-		p1:setState(function(p2) --[[ Line: 57 ]]
+		p1:setState(function(p2)
 			return { expanded = not p2.expanded }
 		end)
 	end
 end
 
-function LuauHeapViewRefEntry:renderValues(List) --[[ Line: 65 ]]
+function LuauHeapViewRefEntry:renderValues(List)
 	-- upvalues: ValueCellWidth (copy), ValuePadding (copy), RefEntryFrameHeight (copy), RoactModule (copy), BorderedCellLabel (copy)
 	local Elements = {}
 	local _UDim2 = UDim2.new(ValueCellWidth, -ValuePadding, 0, RefEntryFrameHeight)
@@ -60,7 +60,7 @@ function LuauHeapViewRefEntry:renderValues(List) --[[ Line: 65 ]]
 	return Elements
 end
 
-function LuauHeapViewRefEntry.renderChildren(p1, Paths) --[[ Line: 80 ]]
+function LuauHeapViewRefEntry.renderChildren(p1, Paths)
 	-- upvalues: RoactModule (copy), LuauHeapViewPathEntryModule (copy)
 	local Elements = {}
 	
@@ -77,7 +77,7 @@ function LuauHeapViewRefEntry.renderChildren(p1, Paths) --[[ Line: 80 ]]
 	return Elements
 end
 
-function LuauHeapViewRefEntry.render(p2) --[[ Line: 97 ]]
+function LuauHeapViewRefEntry.render(p2)
 	-- upvalues: RefEntryFrameHeight (copy), ValueCellWidth (copy), RoactModule (copy), BannerButtonModule (copy), CellLabelModule (copy), CellPadding (copy)
 	local Props = p2.props
 	local Data = Props.data

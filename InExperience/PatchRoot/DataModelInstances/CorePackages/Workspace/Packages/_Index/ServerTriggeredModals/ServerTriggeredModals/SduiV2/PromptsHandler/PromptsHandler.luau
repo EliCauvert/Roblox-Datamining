@@ -40,7 +40,7 @@ local FFlagHomepagePromptsPaddingFix = SharedFlagsModule.FFlagHomepagePromptsPad
 local FFlagHomepagePromptsHandlerPassClientAttributes = SharedFlagsModule.FFlagHomepagePromptsHandlerPassClientAttributes
 local FFlagPromptsEdpOpenReplaceOnFetch = SharedFlagsModule.FFlagPromptsEdpOpenReplaceOnFetch
 
-return ReactModule.memo(function(p1) --[[ Line: 95 | Named "PromptsHandler" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseDispatchFunction (copy), FFlagSduiDismissPromptAction (copy), UseStoreFunction (copy), UseModalSignalStoreModule (copy), FFlagEdpGameLeavePromptsHandlerEnabled (copy), FFlagEdpOpenPromptsHandlerEnabled (copy), FFlagPromptsEdpOpenReplaceOnFetch (copy), FFlagPushNotificationsUpsellPassClientAttributesToPrompts (copy), GetHomepagePromptsClientAttributesModule (copy), ReactModule (copy), GetEntryPointSurfaceConfigModule (copy), SignalsReactModule (copy), FFlagHomepagePromptsHandlerPassClientAttributes (copy), PromptsEntryPointModule (copy), FFlagSduiAllowNoConfigsBuilt (copy), SduiLoadTimer (copy), FetchPromptsModule (copy), UsePromptEntriesModule (copy), PromptStyleModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), FFlagPromptsImpressionUsesTitle (copy), ReportPromptImpressionModule (copy), LoggerModule (copy), SendModalImpressionEventFunction (copy), FFlagPromptsHandlerCoachmarkEnabled (copy), FFlagSduiSurfaceBannerScrollAwaySticky (copy), FFlagAppIaScrollAway (copy), AppNavBarModule (copy), FFlagSduiSurfaceBannerAlwaysMounted (copy), FFlagSduiSystemBannerComponent (copy), SurfaceBannerModule (copy), SduiFeatureEntryPoint (copy), FFlagPromptsActionEventLoggingModule (copy), FFlagHomepagePromptsPaddingFix (copy), View (copy), CoachmarkRendererModule (copy)
 	local EntryPoint = p1.entryPoint
 	local PromptStyle = p1.promptStyle
@@ -50,7 +50,7 @@ return ReactModule.memo(function(p1) --[[ Line: 95 | Named "PromptsHandler" ]]
 	local UniverseId = if FFlagEdpGameLeavePromptsHandlerEnabled or FFlagEdpOpenPromptsHandlerEnabled then if p1.clientAttributes == nil then nil else p1.clientAttributes.universeId else nil
 	local ReplaceOnFetch = if FFlagPromptsEdpOpenReplaceOnFetch then p1.replaceOnFetch else nil
 	local UseResult = if FFlagPushNotificationsUpsellPassClientAttributesToPrompts then GetHomepagePromptsClientAttributesModule.use(EntryPoint, p1.clientAttributes) else nil
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 112 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FFlagEdpGameLeavePromptsHandlerEnabled (upval), FFlagEdpOpenPromptsHandlerEnabled (upval), GetEntryPointSurfaceConfigModule (upval), EntryPoint (copy), UniverseId (copy)
 		return if FFlagEdpGameLeavePromptsHandlerEnabled or FFlagEdpOpenPromptsHandlerEnabled then GetEntryPointSurfaceConfigModule(EntryPoint, UniverseId) else GetEntryPointSurfaceConfigModule(EntryPoint)
 	end, if FFlagEdpGameLeavePromptsHandlerEnabled or FFlagEdpOpenPromptsHandlerEnabled then { EntryPoint, UniverseId } else { EntryPoint })
@@ -60,11 +60,11 @@ return ReactModule.memo(function(p1) --[[ Line: 95 | Named "PromptsHandler" ]]
 	local UseMemoResult1 = nil
 	
 	if FFlagHomepagePromptsHandlerPassClientAttributes then
-		UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 136 ]]
+		UseMemoResult1 = ReactModule.useMemo(function()
 			-- upvalues: FFlagPushNotificationsUpsellPassClientAttributesToPrompts (upval), EntryPoint (copy), PromptsEntryPointModule (upval), FFlagEdpGameLeavePromptsHandlerEnabled (upval), FFlagEdpOpenPromptsHandlerEnabled (upval), p1 (copy), UseResult (copy), GetHomepagePromptsClientAttributesModule (upval)
 			return if FFlagPushNotificationsUpsellPassClientAttributesToPrompts and EntryPoint == PromptsEntryPointModule.HomepageLaunch and (not FFlagEdpGameLeavePromptsHandlerEnabled and not FFlagEdpOpenPromptsHandlerEnabled or p1.clientAttributes == nil) then UseResult elseif (FFlagEdpGameLeavePromptsHandlerEnabled or FFlagEdpOpenPromptsHandlerEnabled) and p1.clientAttributes ~= nil then p1.clientAttributes elseif EntryPoint == PromptsEntryPointModule.HomepageLaunch then GetHomepagePromptsClientAttributesModule.get() else nil
 		end, { EntryPoint, UseResult, p1.clientAttributes })
-		UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 165 ]]
+		UseMemoResult2 = ReactModule.useMemo(function()
 			-- upvalues: EntryPoint (copy), UseMemoResult (copy), FFlagSduiAllowNoConfigsBuilt (upval), SduiLoadTimer (upval), UseMemoResult1 (ref), FFlagPromptsEdpOpenReplaceOnFetch (upval), ReplaceOnFetch (copy)
 			return {
 				clearOnEmptyResponse = true,
@@ -83,7 +83,7 @@ return ReactModule.memo(function(p1) --[[ Line: 95 | Named "PromptsHandler" ]]
 			if FFlagPromptsEdpOpenReplaceOnFetch then ReplaceOnFetch else nil
 		})
 	else
-		UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 186 ]]
+		UseMemoResult2 = ReactModule.useMemo(function()
 			-- upvalues: EntryPoint (copy), UseMemoResult (copy), FFlagSduiAllowNoConfigsBuilt (upval), SduiLoadTimer (upval), FFlagEdpGameLeavePromptsHandlerEnabled (upval), FFlagEdpOpenPromptsHandlerEnabled (upval), p1 (copy), FFlagPromptsEdpOpenReplaceOnFetch (upval), ReplaceOnFetch (copy)
 			return {
 				clearOnEmptyResponse = true,
@@ -107,7 +107,7 @@ return ReactModule.memo(function(p1) --[[ Line: 95 | Named "PromptsHandler" ]]
 		})
 	end
 	if FFlagPushNotificationsUpsellPassClientAttributesToPrompts then
-		ReactModule.useEffect(function() --[[ Line: 217 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: EntryPoint (copy), PromptsEntryPointModule (upval), FFlagEdpGameLeavePromptsHandlerEnabled (upval), FFlagEdpOpenPromptsHandlerEnabled (upval), p1 (copy), UseMemoResult1 (ref), FetchPromptsModule (upval), UseMemoResult2 (ref)
 			local Inverted: boolean = EntryPoint == PromptsEntryPointModule.HomepageLaunch and not (if FFlagEdpGameLeavePromptsHandlerEnabled then p1.clientAttributes ~= nil else FFlagEdpOpenPromptsHandlerEnabled and p1.clientAttributes ~= nil)
 			
@@ -128,7 +128,7 @@ return ReactModule.memo(function(p1) --[[ Line: 95 | Named "PromptsHandler" ]]
 			UseMemoResult1
 		})
 	else
-		ReactModule.useEffect(function() --[[ Line: 239 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: FFlagEdpOpenPromptsHandlerEnabled (upval), EntryPoint (copy), PromptsEntryPointModule (upval), FetchPromptsModule (upval), UseMemoResult2 (ref)
 			local IsEntryPointMatch = if FFlagEdpOpenPromptsHandlerEnabled then EntryPoint == PromptsEntryPointModule.ExperienceDetailsPageOpen else nil
 			FetchPromptsModule(UseMemoResult2, if FFlagEdpOpenPromptsHandlerEnabled and IsEntryPointMatch then true else nil)
@@ -141,7 +141,7 @@ return ReactModule.memo(function(p1) --[[ Line: 95 | Named "PromptsHandler" ]]
 	local UsePromptEntriesModuleResultEntry = UsePromptEntriesModuleResult[1]
 	local UseRefResult = if FFlagSduiDismissPromptAction then ReactModule.useRef(nil) else nil
 	local UseRefResult1 = if FFlagSduiDismissPromptAction then ReactModule.useRef(nil) else nil
-	ReactModule.useEffect(function() --[[ Line: 266 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult (copy), UseSignalStateResult1 (copy), UsePromptEntriesModuleResultEntry (copy), UseModalSignalStoreModuleResult (copy), EntryPoint (copy), UseDispatchResult (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval), UseMemoResult (copy), FFlagPromptsImpressionUsesTitle (upval), FFlagSduiDismissPromptAction (upval), UseRefResult (copy), UseRefResult1 (copy)
 		if UseSignalStateResult then return end
 		if UseSignalStateResult1 then return end
@@ -165,7 +165,7 @@ return ReactModule.memo(function(p1) --[[ Line: 95 | Named "PromptsHandler" ]]
 	})
 	
 	if FFlagSduiDismissPromptAction then
-		ReactModule.useEffect(function() --[[ Line: 317 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRefResult (copy), UsePromptEntriesModuleResult (copy), UseRefResult1 (copy), UseStoreResult (copy), CentralOverlayType (upval), UseDispatchResult (copy), SetCentralOverlayFunction (upval)
 			local Current = UseRefResult.current
 			
@@ -197,20 +197,20 @@ return ReactModule.memo(function(p1) --[[ Line: 95 | Named "PromptsHandler" ]]
 	local UsePromptEntriesModuleResultEntry2 = if IsPromptStyleMatch1 then UsePromptEntriesModuleResult2[1] else nil
 	local Identifier1 = UsePromptEntriesModuleResultEntry2 and UsePromptEntriesModuleResultEntry2.identifier or nil
 	local Title1 = if UsePromptEntriesModuleResultEntry2 then if FFlagPromptsImpressionUsesTitle then UsePromptEntriesModuleResultEntry2.title else UsePromptEntriesModuleResultEntry2.robloxComponentType else nil
-	ReactModule.useEffect(function() --[[ Line: 366 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Identifier (copy), Title (copy), ReportPromptImpressionModule (upval), LoggerModule (upval), SendModalImpressionEventFunction (upval)
 		if Identifier and Title then
-			ReportPromptImpressionModule(Title, Identifier):catch(function() --[[ Line: 368 ]]
+			ReportPromptImpressionModule(Title, Identifier):catch(function()
 				-- upvalues: LoggerModule (upval)
 				LoggerModule:warning("Failed to report prompt impression")
 			end)
 			SendModalImpressionEventFunction(Identifier, Title)
 		end
 	end, { Identifier, Title })
-	ReactModule.useEffect(function() --[[ Line: 375 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Identifier1 (copy), Title1 (copy), ReportPromptImpressionModule (upval), LoggerModule (upval), SendModalImpressionEventFunction (upval)
 		if Identifier1 and Title1 then
-			ReportPromptImpressionModule(Title1, Identifier1):catch(function() --[[ Line: 377 ]]
+			ReportPromptImpressionModule(Title1, Identifier1):catch(function()
 				-- upvalues: LoggerModule (upval)
 				LoggerModule:warning("Failed to report prompt impression")
 			end)

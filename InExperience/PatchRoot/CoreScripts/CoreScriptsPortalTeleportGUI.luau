@@ -67,12 +67,12 @@ Label.TextScaled = true
 Label.Parent = TeleportEffectGui
 local Flag = false
 
-function spinSpinner() --[[ Line: 93 ]]
+function spinSpinner()
 	-- upvalues: Flag (ref), RunService (copy), SpinnerRobloxTilt (copy)
 	if not Flag then
 		Flag = true
 		local ClockTime = os.clock()
-		RunService:BindToRenderStep("PortalLoadingSpinner", Enum.RenderPriority.Last.Value, function() --[[ Line: 97 ]]
+		RunService:BindToRenderStep("PortalLoadingSpinner", Enum.RenderPriority.Last.Value, function()
 			-- upvalues: SpinnerRobloxTilt (upval), ClockTime (copy)
 			if not SpinnerRobloxTilt or not SpinnerRobloxTilt.Parent then
 				stopSpinner()
@@ -97,13 +97,13 @@ function spinSpinner() --[[ Line: 93 ]]
 	end
 end
 
-function stopSpinner() --[[ Line: 119 ]]
+function stopSpinner()
 	-- upvalues: RunService (copy), Flag (ref)
 	RunService:UnbindFromRenderStep("PortalLoadingSpinner")
 	Flag = false
 end
 
-function cover() --[[ Line: 124 ]]
+function cover()
 	-- upvalues: Count (ref), ColorCorrect (ref), Lighting (copy), TweenService (copy), TeleportEffectGui (copy), TopFrame (copy), TopFrameClone (copy), SpinnerRobloxTilt (copy), Label (copy)
 	Count += 1
 	local Count1: number = Count
@@ -118,7 +118,7 @@ function cover() --[[ Line: 124 ]]
 	ColorCorrect.Name = "TeleportColorCorrectionEffect"
 	ColorCorrect.Parent = Lighting
 	TweenService:Create(ColorCorrect, TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { Brightness = 1 }):Play()
-	task.delay(0.25, function() --[[ Line: 144 ]]
+	task.delay(0.25, function()
 		-- upvalues: Count1 (copy), Count (upval), TeleportEffectGui (upval), TopFrame (upval), TopFrameClone (upval), TweenService (upval)
 		if Count1 ~= Count then return end
 		if TeleportEffectGui and TeleportEffectGui.Parent then
@@ -129,7 +129,7 @@ function cover() --[[ Line: 124 ]]
 			TweenService:Create(TopFrameClone, TweenInfo.new(1, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { Position = UDim2.new(0.5, 0, 0.5, 0) }):Play()
 		end
 	end)
-	task.delay(1.25, function() --[[ Line: 165 ]]
+	task.delay(1.25, function()
 		-- upvalues: Count1 (copy), Count (upval), SpinnerRobloxTilt (upval), TweenService (upval), Label (upval)
 		if Count1 ~= Count then return end
 		if SpinnerRobloxTilt and SpinnerRobloxTilt.Parent then
@@ -142,7 +142,7 @@ function cover() --[[ Line: 124 ]]
 	end)
 end
 
-function uncover() --[[ Line: 187 ]]
+function uncover()
 	-- upvalues: Count (ref), SpinnerRobloxTilt (copy), TweenService (copy), Label (copy), ColorCorrect (ref), TopFrame (copy), TopFrameClone (copy), TeleportEffectGui (copy)
 	Count += 1
 	local Count1: number = Count
@@ -160,7 +160,7 @@ function uncover() --[[ Line: 187 ]]
 		TweenService:Create(TopFrame, TweenInfo.new(3, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { Position = UDim2.new(0.5, 0, 0, 0) }):Play()
 		TweenService:Create(TopFrameClone, TweenInfo.new(3, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { Position = UDim2.new(0.5, 0, 1, 0) }):Play()
 	end
-	task.delay(3, function() --[[ Line: 226 ]]
+	task.delay(3, function()
 		-- upvalues: Count1 (copy), Count (upval), ColorCorrect (upval), TeleportEffectGui (upval)
 		if Count1 ~= Count then return end
 		if ColorCorrect then

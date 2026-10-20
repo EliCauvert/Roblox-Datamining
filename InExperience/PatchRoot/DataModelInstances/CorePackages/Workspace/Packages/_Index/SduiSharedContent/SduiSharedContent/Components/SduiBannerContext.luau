@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local _ = require(Parent.SduiCompat)
 local BannerContext = require(Parent.Foundation).BannerContext
 
-return ReactModule.memo(function(p1) --[[ Line: 28 | Named "SduiBannerContext" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), BannerContext (copy)
 	return ReactModule.createElement(BannerContext, {
 		text = p1.text,

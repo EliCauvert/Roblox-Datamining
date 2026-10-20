@@ -12,7 +12,7 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local InputSize = FoundationModule.Enums.InputSize
 local UseMultiItemShoppingFtuxModule = require(AvatarExperienceCatalog.Hooks.useMultiItemShoppingFtux)
 
-return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(function(p1) --[[ Line: 23 | Named "WearAvatarReplaceAllItemsPrompt" ]]
+return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(function(p1)
 	-- upvalues: UseLocalizationFunction (copy), UseMultiItemShoppingFtuxModule (copy), ReactModule (copy), RoactNavigationModule (copy), View (copy), Text (copy), Checkbox (copy), InputSize (copy), AXPartialPageModal (copy), ButtonVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		confirmButtonText = "Feature.Catalog.Action.Checkout.Wear",
@@ -23,12 +23,12 @@ return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(fu
 	})
 	local UseMultiItemShoppingFtuxModuleResult = UseMultiItemShoppingFtuxModule()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 36 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), RoactNavigationModule (upval), UseMultiItemShoppingFtuxModuleResult (copy)
 		p1.navigation.dispatch(RoactNavigationModule.Actions.back(nil))
 		UseMultiItemShoppingFtuxModuleResult.incrementWearAvatarReplaceAllItemsPromptCount()
 	end, { p1.navigation })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 47 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy)
 		UseResult()
 	end, { UseResult })
@@ -40,7 +40,7 @@ return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(fu
 			buttons = {
 				{
 					props = {
-						onActivated = ReactModule.useCallback(function() --[[ Line: 42 ]]
+						onActivated = ReactModule.useCallback(function()
 							-- upvalues: UseResult (copy), p1 (copy), UseStateResult (copy)
 							UseResult()
 							p1.onConfirm(UseStateResult)
@@ -60,7 +60,7 @@ return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(fu
 				}
 			}
 		}
-	}, ((function() --[[ Line: 51 ]]
+	}, ((function()
 		-- upvalues: ReactModule (upval), View (upval), Text (upval), UseLocalizationResult (copy), Checkbox (upval), UseStateResult (copy), UseStateResult2 (copy), InputSize (upval)
 		return {
 			ViewFrame = ReactModule.createElement(View, {
@@ -79,7 +79,7 @@ return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(fu
 				DontWarnCheckbox = ReactModule.createElement(Checkbox, {
 					LayoutOrder = 3,
 					isChecked = UseStateResult,
-					onActivated = function() --[[ Line: 68 ]]
+					onActivated = function()
 						-- upvalues: UseStateResult2 (upval), UseStateResult (upval)
 						UseStateResult2(not UseStateResult)
 					end,

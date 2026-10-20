@@ -24,7 +24,7 @@ local UseCurrentSquadIdFunction = require(Parent.SquadsCore.Hooks).useCurrentSqu
 local UseScheduledSquadFunction = require(Parent.SquadsCore.Hooks).useScheduledSquad
 local ScheduledSquadJustStartedThreshold = game:DefineFastInt("ScheduledSquadJustStartedThreshold", 300)
 
-return function(p1) --[[ Line: 40 ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseNavigationFunction (copy), ReactModule (copy), SquadExternalContractContext (copy), UseCurrentSquadIdFunction (copy), UseScheduledSquadFunction (copy), ScheduledSquadJustStartedThreshold (copy), CryoModule (copy), GetScheduledSquadsStoreFunction (copy), UserProfileStore (copy), UseLocalizationFunction (copy), LocalizationService (copy), EventNamesModule (copy), ScheduledSquadActionEnum (copy), ScheduledSquadActionSourceEnum (copy), FoundationModule (copy), AvatarGroup (copy), InputSize (copy), AvatarGroupType (copy), SquadComponentAccessWrapper (copy), SquadJoinButton (copy), SquadButtonSourceEnum (copy), ScheduledSquadsMoreInfoSheet (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseNavigationResult = UseNavigationFunction()
@@ -37,38 +37,38 @@ return function(p1) --[[ Line: 40 ]]
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState("")
 	local UseScheduledSquadResult = UseScheduledSquadFunction(p1.scheduledGroupUpId)
 	local UseStateResult1_1 = UseStateResult1 or UseStateResult3
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 59 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		return if p1.startTime then DateTime.fromIsoDate(p1.startTime) else nil
 	end, { p1.startTime })
-	local UseMemoResult1 = ReactModule.useMemo(function(): boolean --[[ Line: 62 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function(): boolean
 		-- upvalues: UseMemoResult (copy)
 		return UseMemoResult and UseMemoResult.UnixTimestamp < DateTime.now().UnixTimestamp
 	end, { UseMemoResult })
-	local UseMemoResult2 = ReactModule.useMemo(function(): boolean --[[ Line: 65 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function(): boolean
 		-- upvalues: UseMemoResult (copy), ScheduledSquadJustStartedThreshold (upval)
 		return UseMemoResult and (UseMemoResult.UnixTimestamp <= DateTime.now().UnixTimestamp and DateTime.now().UnixTimestamp - UseMemoResult.UnixTimestamp < ScheduledSquadJustStartedThreshold)
 	end, { UseMemoResult })
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 71 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: UseScheduledSquadResult (copy), p1 (copy), CryoModule (upval)
-		return CryoModule.List.map((UseScheduledSquadResult or p1).subscribers, function(p2) --[[ Line: 73 ]]
+		return CryoModule.List.map((UseScheduledSquadResult or p1).subscribers, function(p2)
 			return p2.userId
 		end)
 	end, { UseScheduledSquadResult, p1 })
-	ReactModule.useEffect(function() --[[ Line: 79 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: NoStartTime (copy), UseMemoResult1 (copy), GetScheduledSquadsStoreFunction (upval), p1 (copy), UseStateResult2_2 (copy)
 		if NoStartTime or UseMemoResult1 then
 			UseStateResult2_2(false)
 			
 			return
 		else
-			GetScheduledSquadsStoreFunction(false).fetchAndCacheScheduledSquadStatus(p1.scheduledGroupUpId, function() --[[ Line: 81 ]]
+			GetScheduledSquadsStoreFunction(false).fetchAndCacheScheduledSquadStatus(p1.scheduledGroupUpId, function()
 				-- upvalues: UseStateResult2_2 (upval)
 				UseStateResult2_2(false)
 			end)
 		end
 	end, { NoStartTime, UseMemoResult1, p1.scheduledGroupUpId })
-	ReactModule.useEffect(function() --[[ Line: 90 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: NoStartTime (copy), UseMemoResult1 (copy), UseStateResult2_1 (copy), UserProfileStore (upval), UseScheduledSquadResult (copy), p1 (copy), UseStateResult2_3 (copy)
 		if NoStartTime or UseMemoResult1 then
 			UseStateResult2_1(false)
@@ -77,7 +77,7 @@ return function(p1) --[[ Line: 40 ]]
 		else
 			UserProfileStore.get().fetchNamesByUserIds({
 				(tostring(if UseScheduledSquadResult then UseScheduledSquadResult.initiatorId else p1.initiatorId))
-			}, function(p2) --[[ Line: 96 ]]
+			}, function(p2)
 				-- upvalues: UseStateResult2_3 (upval), UseStateResult2_1 (upval)
 				local Status = p2.status
 				local Data = p2.data
@@ -110,7 +110,7 @@ return function(p1) --[[ Line: 40 ]]
 		}
 	})
 	local Llll = if UseMemoResult then UseMemoResult:FormatLocalTime("llll", LocalizationService.RobloxLocaleId) else ""
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 128 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), UseContextResult (copy), EventNamesModule (upval), ScheduledSquadActionEnum (upval), p1 (copy), UseScheduledSquadResult (copy), p1 (copy), ScheduledSquadActionSourceEnum (upval), UseCurrentSquadIdResult (copy)
 		UseStateResult2(true)
 		UseContextResult.fireSquadAnalytics(EventNamesModule.ScheduledSquadAction, {
@@ -127,11 +127,11 @@ return function(p1) --[[ Line: 40 ]]
 		UseStateResult2, UseContextResult.fireSquadAnalytics,
 		UseContextResult.squadLocation
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 153 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, { UseStateResult2 })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 157 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy), p1 (copy)
 		UseNavigationResult.navigate("SquadLobby", {
 			conversationId = p1.parentChannelId,

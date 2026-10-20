@@ -11,7 +11,7 @@ local config = {
 	pixelColor3 = Color3.fromRGB(0, 0, 0)
 }
 
-local function _(p1, Degrees: number) --[[ Line: 36 | Named "getQrCodeImageSize" ]]
+local function _(p1, Degrees: number)
 	if not Degrees then
 		return p1
 	end
@@ -26,7 +26,7 @@ local function _(p1, Degrees: number) --[[ Line: 36 | Named "getQrCodeImageSize"
 	end
 end
 
-return function(p1) --[[ Line: 51 ]]
+return function(p1)
 	-- upvalues: DashModule (copy), config (copy), ReactModule (copy), AssetService (copy), DrawImageModule (copy)
 	local JoinResult = DashModule.join(config, p1)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
@@ -47,7 +47,7 @@ return function(p1) --[[ Line: 51 ]]
 	else
 		X = SideLength
 	end
-	ReactModule.useEffect(function() --[[ Line: 58 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Ref (copy), X (copy), AssetService (upval), UseStateResult2 (copy), DrawImageModule (upval), JoinResult (copy)
 		if not Ref.current or Ref.current.Size.X ~= X then
 			Ref.current = AssetService:CreateEditableImage({ Size = Vector2.new(X, X) })

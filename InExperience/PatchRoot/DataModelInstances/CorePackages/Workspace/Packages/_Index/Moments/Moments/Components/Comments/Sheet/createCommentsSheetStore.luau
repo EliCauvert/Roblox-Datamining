@@ -6,7 +6,7 @@ local CommentsSheetSnapPointsModule = require(script.Parent.CommentsSheetSnapPoi
 local _ = require(script.Parent.getCommentsVideoLift)
 local _ = require(script.Parent.Parent.createCommentsAnalyticsSession)
 
-return function() --[[ Line: 43 | Named "createCommentsSheetStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy), FFlagMomentsComments (copy), CommentsSheetSnapPointsModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(false)
 	local Signal1, Signal2_1 = SignalsModule.createSignal(nil)
@@ -24,15 +24,15 @@ return function() --[[ Line: 43 | Named "createCommentsSheetStore" ]]
 		getIsListScrollingEnabled = Signal4,
 		getVideoLift = Signal5,
 		getIsExpanded = Signal6,
-		getRecommendationSession = function(p1, p2) --[[ Line: 125 ]]
+		getRecommendationSession = function(p1, p2)
 			-- upvalues: Signal1 (copy), Signal3 (copy), v1 (ref)
 			return if Signal1(false) == p1 and Signal3(false) == p2 then v1 else nil
 		end,
-		getAnalyticsSession = function(p1, p2) --[[ Line: 131 ]]
+		getAnalyticsSession = function(p1, p2)
 			-- upvalues: Signal1 (copy), Signal3 (copy), v2 (ref)
 			return if Signal1(false) == p1 and Signal3(false) == p2 then v2 else nil
 		end,
-		open = function(p1, p2, p3) --[[ Line: 56 ]]
+		open = function(p1, p2, p3)
 			-- upvalues: FFlagMomentsComments (upval), v2 (ref), v1 (ref), Signal2_1 (copy), Signal2_2 (copy), Signal3 (copy), Signal2_3 (copy), Signal2_4 (copy), Signal2_5 (copy), Signal2 (copy)
 			if FFlagMomentsComments then
 				if v2 ~= nil then
@@ -57,7 +57,7 @@ return function() --[[ Line: 43 | Named "createCommentsSheetStore" ]]
 			Signal2_5(false)
 			Signal2(true)
 		end,
-		close = function(p1) --[[ Line: 84 ]]
+		close = function(p1)
 			-- upvalues: FFlagMomentsComments (upval), v2 (ref), v1 (ref), Signal2_5 (copy), Signal2 (copy)
 			if FFlagMomentsComments and v2 ~= nil then
 				v2.finishView(p1 or "closed")
@@ -68,7 +68,7 @@ return function() --[[ Line: 43 | Named "createCommentsSheetStore" ]]
 			Signal2_5(false)
 			Signal2(false)
 		end,
-		reset = function() --[[ Line: 96 ]]
+		reset = function()
 			-- upvalues: FFlagMomentsComments (upval), v2 (ref), v1 (ref), Signal2 (copy), Signal2_1 (copy), Signal2_2 (copy), Signal3 (copy), Signal2_3 (copy), Signal2_4 (copy), Signal2_5 (copy)
 			if FFlagMomentsComments and v2 ~= nil then
 				v2.cancel()
@@ -85,7 +85,7 @@ return function() --[[ Line: 43 | Named "createCommentsSheetStore" ]]
 			Signal2_4(nil)
 			Signal2_5(false)
 		end,
-		setSnapPointIndex = function(Count) --[[ Line: 113 ]]
+		setSnapPointIndex = function(Count)
 			-- upvalues: Signal2_3 (copy), CommentsSheetSnapPointsModule (upval), Signal2_5 (copy)
 			Signal2_3(Count == #CommentsSheetSnapPointsModule)
 			Signal2_5(Count == #CommentsSheetSnapPointsModule)

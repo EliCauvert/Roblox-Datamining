@@ -21,18 +21,18 @@ local FFlagSduiAllowNoConfigsBuilt = SharedFlagsModule.FFlagSduiAllowNoConfigsBu
 local FFlagEnableHomepagePromptsForModalsAndBanners = SharedFlagsModule.FFlagEnableHomepagePromptsForModalsAndBanners
 local FFlagPromptsImpressionUsesTitle = SharedFlagsModule.FFlagPromptsImpressionUsesTitle
 
-local function _(p1): boolean --[[ Line: 38 | Named "isValidPromptEntry" ]]
+local function _(p1): boolean
 	return p1 ~= nil and (p1.config ~= nil and (p1.identifier ~= nil and (p1.robloxComponentType ~= nil and p1.title ~= nil)))
 end
 
-return ReactModule.memo((require(Parent.RoactNavigation).withNavigationFocus(function(p1) --[[ Line: 46 | Named "CheckForPrompts" ]]
+return ReactModule.memo((require(Parent.RoactNavigation).withNavigationFocus(function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseModalSignalStoreModule (copy), UseSignalStateFunction (copy), EntryPointModule (copy), ReactModule (copy), PromptsEntryPointModule (copy), FFlagSduiAllowNoConfigsBuilt (copy), SduiLoadTimer (copy), FetchPromptsModule (copy), FFlagEnableHomepagePromptsForModalsAndBanners (copy), UsePromptEntriesModule (copy), PromptStyleModule (copy), GetSduiApiStoreFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), AppPage (copy), FFlagPromptsImpressionUsesTitle (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseModalSignalStoreModuleResult = UseModalSignalStoreModule()
 	local UseSignalStateResult = UseSignalStateFunction(UseModalSignalStoreModuleResult.getMetadataGetter(EntryPointModule.HomepageLaunch))
 	local UseSignalStateResult1 = UseSignalStateFunction(UseModalSignalStoreModuleResult.getHasShownGetter(EntryPointModule.HomepageLaunch))
 	local IsFocused = p1.isFocused
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 53 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: PromptsEntryPointModule (upval), FFlagSduiAllowNoConfigsBuilt (upval), SduiLoadTimer (upval)
 		return {
 			surfaceKey = "HomepagePrompts",
@@ -45,18 +45,18 @@ return ReactModule.memo((require(Parent.RoactNavigation).withNavigationFocus(fun
 			loadTimer = SduiLoadTimer.createLoadTimer("HomepagePrompts")
 		}
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 66 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FetchPromptsModule (upval), UseMemoResult (copy)
 		FetchPromptsModule(UseMemoResult)
 	end, { UseMemoResult })
 	local HomepagePrompt = nil
-	HomepagePrompt = if FFlagEnableHomepagePromptsForModalsAndBanners then UsePromptEntriesModule("HomepagePrompts", PromptStyleModule.Modal)[1] else UseSignalStateFunction((ReactModule.useCallback(function(p2) --[[ Line: 76 ]]
+	HomepagePrompt = if FFlagEnableHomepagePromptsForModalsAndBanners then UsePromptEntriesModule("HomepagePrompts", PromptStyleModule.Modal)[1] else UseSignalStateFunction((ReactModule.useCallback(function(p2)
 		-- upvalues: GetSduiApiStoreFunction (upval)
 		local DataResult = GetSduiApiStoreFunction().getData("HomepagePrompts").data(p2)
 		
 		return DataResult and DataResult.HomepagePrompts
 	end, {})))
-	ReactModule.useEffect(function() --[[ Line: 84 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult1 (copy), UseSignalStateResult (copy), IsFocused (copy), HomepagePrompt (ref), UseModalSignalStoreModuleResult (copy), EntryPointModule (upval), UseDispatchResult (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval), AppPage (upval), FFlagPromptsImpressionUsesTitle (upval)
 		if UseSignalStateResult1 then return end
 		if UseSignalStateResult then return end

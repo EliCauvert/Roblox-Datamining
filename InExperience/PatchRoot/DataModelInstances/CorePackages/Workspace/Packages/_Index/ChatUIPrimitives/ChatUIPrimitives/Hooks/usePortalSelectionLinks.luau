@@ -2,11 +2,11 @@
 local ReactModule = require(script:FindFirstAncestor("ChatUIPrimitives").Parent.React)
 local RestoreSelectionIfStrandedModule = require(script.Parent.restoreSelectionIfStranded)
 
-local function _(Callback) --[[ Line: 33 | Named "resolveTarget" ]]
+local function _(Callback)
 	return if type(Callback) == "function" then Callback() else Callback.current
 end
 
-return function(p1) --[[ Line: 49 | Named "usePortalSelectionLinks" ]]
+return function(p1)
 	-- upvalues: GuiService (copy), ReactModule (copy), RestoreSelectionIfStrandedModule (copy)
 	local GuiService1 = p1.guiService or GuiService
 	local Enabled = p1.enabled
@@ -15,12 +15,12 @@ return function(p1) --[[ Line: 49 | Named "usePortalSelectionLinks" ]]
 	local RestoreHome = p1.restoreHome
 	local UseRefResult = ReactModule.useRef(p1.edges)
 	UseRefResult.current = p1.edges
-	ReactModule.useEffect(function() --[[ Line: 60 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Enabled (copy), Active (copy), UseRefResult (copy)
 		if not Enabled or not Active then return end
 		local Flag = false
 		local List = {}
-		task.delay(0, function() --[[ Line: 69 ]]
+		task.delay(0, function()
 			-- upvalues: Flag (ref), UseRefResult (upval), List (copy)
 			if Flag then return end
 			for _, value in UseRefResult.current do
@@ -37,12 +37,12 @@ return function(p1) --[[ Line: 49 | Named "usePortalSelectionLinks" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 85 ]]
+		return function()
 			-- upvalues: Flag (ref), List (copy)
 			Flag = true
 			
 			for _, value in List do
-				pcall(function() --[[ Line: 89 ]]
+				pcall(function()
 					-- upvalues: value (copy)
 					value.from[value.prop] = nil
 				end)
@@ -50,7 +50,7 @@ return function(p1) --[[ Line: 49 | Named "usePortalSelectionLinks" ]]
 		end
 	end, { Enabled, Active, RearmKey or "", GuiService1 })
 	local UseRefResult1 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 99 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Enabled (copy), UseRefResult1 (copy), Active (copy), RestoreSelectionIfStrandedModule (upval), GuiService1 (copy), RestoreHome (copy)
 		if Enabled and UseRefResult1.current and not Active then
 			RestoreSelectionIfStrandedModule(GuiService1, if RestoreHome then RestoreHome.current else nil)

@@ -5,10 +5,10 @@ local _ = require(SduiCoreSystem.SduiBuilderTypes)
 local _ = require(SduiCoreSystem.SduiConfigTypes)
 local SduiErrorsModule = require(SduiCoreSystem.SduiErrors)
 
-return function(p1, p2, p3) --[[ Line: 16 | Named "reportUnifiedLoggingAction" ]]
+return function(p1, p2, p3)
 	-- upvalues: SduiCollectionAnalyticsBuilderModule (copy), SduiErrorsModule (copy), UnifiedLoggingModule (copy)
 	local CollectionData = p3.getCollectionData and p3.getCollectionData() or nil
-	local AndValidateItemAnalyticsData = SduiCollectionAnalyticsBuilderModule.buildAndValidateItemAnalyticsData(p1, p3.analyticsData, p3.ancestorAnalyticsData, nil, p2.actionType, function(_) --[[ Line: 29 ]]
+	local AndValidateItemAnalyticsData = SduiCollectionAnalyticsBuilderModule.buildAndValidateItemAnalyticsData(p1, p3.analyticsData, p3.ancestorAnalyticsData, nil, p2.actionType, function(_)
 		-- upvalues: CollectionData (ref), p1 (copy), SduiErrorsModule (upval), p2 (copy)
 		if CollectionData ~= nil then
 			p1.dependencies.logger.reportCounter(SduiErrorsModule.SduiCounterName.LogActionInvalidItemData, { name = p2.actionType })

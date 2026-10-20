@@ -7,20 +7,20 @@ local GetCropSizeModule = require(Parent.Utils.getCropSize)
 local GetFitSizeModule = require(Parent.Utils.getFitSize)
 local FFlagUseRbxStorageInCapturesCommonModule = require(Parent.Flags.FFlagUseRbxStorageInCapturesCommon)
 
-return function(p1) --[[ Line: 25 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), GetFitSizeModule (copy), GetCropSizeModule (copy), CaptureTypeModule (copy), FFlagUseRbxStorageInCapturesCommonModule (copy), MediaPlayerModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Vector2.new(0, 0))
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(UDim2.fromScale(1, 1))
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 30 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(p2.Resolution)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(Frame) --[[ Line: 35 ]]
+	local UseResult1 = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(Frame.AbsoluteSize)
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 39 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult2_2 (copy), GetFitSizeModule (upval), UseStateResult (copy), UseStateResult1 (copy), GetCropSizeModule (upval)
 		if p1.scaleType == Enum.ScaleType.Fit then
 			UseStateResult2_2(GetFitSizeModule(UseStateResult, UseStateResult1))

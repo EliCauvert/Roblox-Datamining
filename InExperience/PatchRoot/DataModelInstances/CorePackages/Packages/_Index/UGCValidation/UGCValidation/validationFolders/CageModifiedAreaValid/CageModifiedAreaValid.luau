@@ -29,7 +29,7 @@ local config = {
 	}
 }
 
-local function gatherUVs(AllowedParts) --[[ Line: 80 ]]
+local function gatherUVs(AllowedParts)
 	-- upvalues: WrapTargetCageUVReferenceValuesModule (copy)
 	local List = {}
 	
@@ -41,7 +41,7 @@ local function gatherUVs(AllowedParts) --[[ Line: 80 ]]
 	return List
 end
 
-local function lazyGetUVsExcludedForAssetType(p1) --[[ Line: 92 ]]
+local function lazyGetUVsExcludedForAssetType(p1)
 	-- upvalues: WrapTargetCageUVReferenceValuesModule (copy), gatherUVs (copy)
 	if not p1.uVsDisallowedForAssetType then
 		local t = {}
@@ -56,7 +56,7 @@ local function lazyGetUVsExcludedForAssetType(p1) --[[ Line: 92 ]]
 	return p1.uVsDisallowedForAssetType
 end
 
-local function _(p2) --[[ Line: 106 | Named "lazyGetUVsForAssetType" ]]
+local function _(p2)
 	-- upvalues: gatherUVs (copy)
 	if not p2.uVsForAssetType then
 		p2.uVsForAssetType = gatherUVs(p2.allowedParts)
@@ -64,7 +64,7 @@ local function _(p2) --[[ Line: 106 | Named "lazyGetUVsForAssetType" ]]
 	return p2.uVsForAssetType
 end
 
-local _ = function(p2) --[[ Line: 113 | Named "lazyGetMainUVsForAssetType" ]]
+local _ = function(p2)
 	-- upvalues: gatherUVs (copy)
 	if not p2.mainUVsForAssetType then
 		p2.mainUVsForAssetType = gatherUVs(p2.mainParts)
@@ -81,7 +81,7 @@ return {
 	},
 	conditionalData = {},
 	expectedFailures = {},
-	run = function(p2, p3) --[[ Line: 120 ]]
+	run = function(p2, p3)
 		-- upvalues: config (copy), lazyGetUVsExcludedForAssetType (copy), UGCValidationService (copy), UGCValidateExcludedUVModifyRequirements (copy), ErrorSourceStringsModule (copy), StringUtilModule (copy), gatherUVs (copy), UGCValidatePartUVModifyRequirements (copy), Number (copy), CollisionTestUtilModule (copy), UGCValidateRenderMeshInsideModifiedArea (copy)
 		local AssetType = p3.uploadEnum.assetType
 		local Entry = config[AssetType]

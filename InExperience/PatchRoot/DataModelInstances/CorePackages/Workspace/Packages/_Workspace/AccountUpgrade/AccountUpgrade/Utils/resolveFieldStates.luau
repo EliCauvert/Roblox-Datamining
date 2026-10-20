@@ -2,7 +2,7 @@
 local _ = require(AccountUpgrade.AccountUpgradeField)
 local _ = require(AccountUpgrade.FlowSpec)
 
-return function(p1) --[[ Line: 23 | Named "resolveFieldStates" ]]
+return function(p1)
 	local t = {}
 	
 	for _, optionalField in ipairs(p1.spec.optionalFields) do

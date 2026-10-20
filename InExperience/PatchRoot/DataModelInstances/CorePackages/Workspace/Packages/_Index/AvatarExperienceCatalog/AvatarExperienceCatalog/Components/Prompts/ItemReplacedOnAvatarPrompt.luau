@@ -14,22 +14,22 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local InputSize = FoundationModule.Enums.InputSize
 local IconSize = FoundationModule.Enums.IconSize
 
-local function _(p1, p2): string --[[ Line: 34 ]]
+local function _(p1, p2): string
 	return `rbxthumb://type={p2}&id={p1}&w=150&h=150`
 end
 
-return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(function(p1) --[[ Line: 38 | Named "ItemReplacedOnAvatarPrompt" ]]
+return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), RoactNavigationModule (copy), View (copy), CatalogItemCard (copy), ItemCardThumbnail (copy), FoundationModule (copy), BuilderIconsModule (copy), IconSize (copy), Text (copy), AXPartialPageModal (copy), ButtonVariant (copy), InputSize (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		confirmButtonText = "CommonUI.Controls.Action.OK",
 		titleText = "Feature.Catalog.Title.Checkout.ItemReplacedOnAvatarTitle",
 		bodyText = "Feature.Catalog.Label.Checkout.ItemReplacedOnAvatarBody"
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 45 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), RoactNavigationModule (upval)
 		p1.navigation.dispatch(RoactNavigationModule.Actions.back(nil))
 	end, { p1.navigation })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 49 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy), p1 (copy)
 		UseResult()
 		p1.onConfirm()
@@ -50,7 +50,7 @@ return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(fu
 				}
 			}
 		}
-	}, ((function() --[[ Line: 54 ]]
+	}, ((function()
 		-- upvalues: ReactModule (upval), View (upval), CatalogItemCard (upval), ItemCardThumbnail (upval), p1 (copy), FoundationModule (upval), BuilderIconsModule (upval), IconSize (upval), Text (upval), UseLocalizationResult (copy)
 		return {
 			ViewFrame = ReactModule.createElement(View, {

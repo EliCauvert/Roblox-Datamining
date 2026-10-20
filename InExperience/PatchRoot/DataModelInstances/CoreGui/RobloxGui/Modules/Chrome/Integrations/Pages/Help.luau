@@ -11,13 +11,13 @@ return ServiceModule:register({
 	label = "CoreScripts.Feedback.Help.MainHeader",
 	initialAvailability = ServiceModule.AvailabilitySignal.Available,
 	sideSheetPlacement = if require(CorePackages.Workspace.Packages.PioneerUtils).isPioneerLaunch() then SideSheetPlacement.AboveFold else SideSheetPlacement.BelowFold,
-	activated = function(_) --[[ Line: 20 ]]
+	activated = function(_)
 		-- upvalues: InGameMenuIntegrationUtilsModule (copy), HelpPage (copy)
 		InGameMenuIntegrationUtilsModule.toggleIGMPage("HelpPage", HelpPage:get())
 	end,
 	isActivated = HelpPage,
 	components = {
-		Icon = function(_) --[[ Line: 25 ]]
+		Icon = function(_)
 			-- upvalues: CommonIconModule (copy), HelpPage (copy)
 			return CommonIconModule("CircleQuestion", nil, HelpPage)
 		end

@@ -44,13 +44,13 @@ local AppChatFixChatLandingContainerKeyPropConflict = game:DefineFastFlag("AppCh
 local FFlagAppChatConsoleFocusFixesModule = require(AppChat.Flags.FFlagAppChatConsoleFocusFixes)
 local ArgoPartyExperimentation = require(Parent.SocialExperiments).ArgoPartyExperimentation
 
-local function LeftContainerTelemetryProviders(p1) --[[ Line: 61 ]]
+local function LeftContainerTelemetryProviders(p1)
 	-- upvalues: UseGetAndSetRefModule (copy), ReactModule (copy), FFlagAppChatWideAlwaysVisibleSearchBoxModule (copy), UseIsChatSearchAllowedModule (copy), ChatLandingTelemetryStateModule (copy), ChatLandingTelemetryLayerModule (copy)
 	local UseGetAndSetRefModuleResult, UseGetAndSetRefModuleResult2 = UseGetAndSetRefModule({})
 	local UseIsChatSearchAllowedModuleResult = if FFlagAppChatWideAlwaysVisibleSearchBoxModule then UseIsChatSearchAllowedModule() else false
 	
 	return ReactModule.createElement(ChatLandingTelemetryStateModule.Provider, {
-		value = ReactModule.useMemo(function() --[[ Line: 74 ]]
+		value = ReactModule.useMemo(function()
 			-- upvalues: UseGetAndSetRefModuleResult (copy), UseGetAndSetRefModuleResult2 (copy)
 			return {
 				get = UseGetAndSetRefModuleResult,
@@ -62,7 +62,7 @@ local function LeftContainerTelemetryProviders(p1) --[[ Line: 61 ]]
 		})
 	}, {
 		ReactModule.createElement(ChatLandingTelemetryLayerModule.Provider, {
-			value = ReactModule.useCallback(function() --[[ Line: 64 ]]
+			value = ReactModule.useCallback(function()
 				-- upvalues: UseGetAndSetRefModuleResult (copy)
 				local UseGetAndSetRefModuleResultResult = UseGetAndSetRefModuleResult()
 				
@@ -78,10 +78,10 @@ local function LeftContainerTelemetryProviders(p1) --[[ Line: 61 ]]
 	})
 end
 
-local function RightContainerTelemetryProviders(p1) --[[ Line: 102 ]]
+local function RightContainerTelemetryProviders(p1)
 	-- upvalues: UseGetAndSetRefModule (copy), ReactModule (copy), ChatDetailsTelemetryStateModule (copy), ChatDetailsTelemetryLayerModule (copy), ChatConversationTelemetryStateModule (copy), ChatConversationTelemetryLayerModule (copy)
 	local UseGetAndSetRefModuleResult, UseGetAndSetRefModuleResult2 = UseGetAndSetRefModule({})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 105 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseGetAndSetRefModuleResult (copy)
 		local UseGetAndSetRefModuleResultResult = UseGetAndSetRefModuleResult()
 		
@@ -95,7 +95,7 @@ local function RightContainerTelemetryProviders(p1) --[[ Line: 102 ]]
 	local UseGetAndSetRefModuleResult1, UseGetAndSetRefModuleResult2_1 = UseGetAndSetRefModule({})
 	
 	return ReactModule.createElement(ChatConversationTelemetryStateModule.Provider, {
-		value = ReactModule.useMemo(function() --[[ Line: 130 ]]
+		value = ReactModule.useMemo(function()
 			-- upvalues: UseGetAndSetRefModuleResult (copy), UseGetAndSetRefModuleResult2 (copy)
 			return {
 				get = UseGetAndSetRefModuleResult,
@@ -107,7 +107,7 @@ local function RightContainerTelemetryProviders(p1) --[[ Line: 102 ]]
 		})
 	}, {
 		ReactModule.createElement(ChatConversationTelemetryLayerModule.Provider, { value = UseResult }, (ReactModule.createElement(ChatDetailsTelemetryStateModule.Provider, {
-			value = ReactModule.useMemo(function() --[[ Line: 124 ]]
+			value = ReactModule.useMemo(function()
 				-- upvalues: UseGetAndSetRefModuleResult1 (copy), UseGetAndSetRefModuleResult2_1 (copy)
 				return {
 					get = UseGetAndSetRefModuleResult1,
@@ -118,7 +118,7 @@ local function RightContainerTelemetryProviders(p1) --[[ Line: 102 ]]
 				UseGetAndSetRefModuleResult2_1
 			})
 		}, ReactModule.createElement(ChatDetailsTelemetryLayerModule.Provider, {
-			value = ReactModule.useCallback(function() --[[ Line: 117 ]]
+			value = ReactModule.useCallback(function()
 				-- upvalues: UseGetAndSetRefModuleResult1 (copy)
 				local UseGetAndSetRefModuleResultResult = UseGetAndSetRefModuleResult1()
 				
@@ -139,32 +139,32 @@ local ChatLandingScreenWithSwitchNavigator = RoactModule.PureComponent:extend("C
 ChatLandingScreenWithSwitchNavigator.router = ConversationSwitchNavigatorModule.router
 ChatLandingScreenWithSwitchNavigator.defaultProps = { navigation = nil }
 
-function ChatLandingScreenWithSwitchNavigator.init(p1) --[[ Line: 171 ]]
+function ChatLandingScreenWithSwitchNavigator.init(p1)
 	-- upvalues: FFlagAppChatIxpScreenExposureModule (copy), IXPNavigationUtilsModule (copy), FFlagAppChatIxpParallelScreenLayersModule (copy), FStringAppChatLandingConversationRowsIxpLayerModule (copy), FStringAppChatLandingConversationListIxpLayerModule (copy), FStringAppChatLandingPerformanceIxpLayerModule (copy), LoggerModule (copy), EnumScreensModule (copy), GetCurrentRouteModule (copy), FFlagEnablePartyQuickStartButton (copy), ResetForSquadLobbyForWideModeModule (copy), RoactNavigationModule (copy), GetTopBarStoreModule (copy), RoactModule (copy), ReactFocusNavigationModule (copy)
 	p1.ixpSubscription = if FFlagAppChatIxpScreenExposureModule then IXPNavigationUtilsModule.registerExposureOnFocus(p1.props.navigation, "Party.LandingPage") else nil
 	p1.conversationRowsIxpSubscription = if FFlagAppChatIxpScreenExposureModule and FFlagAppChatIxpParallelScreenLayersModule then IXPNavigationUtilsModule.registerExposureOnFocus(p1.props.navigation, FStringAppChatLandingConversationRowsIxpLayerModule) else nil
 	p1.conversationListIxpSubscription = if FFlagAppChatIxpScreenExposureModule and FFlagAppChatIxpParallelScreenLayersModule then IXPNavigationUtilsModule.registerExposureOnFocus(p1.props.navigation, FStringAppChatLandingConversationListIxpLayerModule) else nil
 	p1.performanceIxpSubscription = if FFlagAppChatIxpScreenExposureModule and FFlagAppChatIxpParallelScreenLayersModule then IXPNavigationUtilsModule.registerExposureOnFocus(p1.props.navigation, FStringAppChatLandingPerformanceIxpLayerModule) else nil
 	
-	function p1.navigateToConversation(ConversationId) --[[ Line: 191 ]]
+	function p1.navigateToConversation(ConversationId)
 		-- upvalues: LoggerModule (upval), p1 (copy), EnumScreensModule (upval)
 		LoggerModule:info("Navigate To Conversation: {} from {screen}", ConversationId)
 		p1.props.navigation.navigate(EnumScreensModule.ChatConversation, { conversationId = ConversationId })
 	end
 	
-	function p1.navigateToCreateChat() --[[ Line: 196 ]]
+	function p1.navigateToCreateChat()
 		-- upvalues: LoggerModule (upval), p1 (copy), EnumScreensModule (upval)
 		LoggerModule:info("Navigate To CreateNewChat from {screen}")
 		p1.props.navigation.navigate(EnumScreensModule.CreateNewChat)
 	end
 	
-	function p1.navigateToToast(p2) --[[ Line: 201 ]]
+	function p1.navigateToToast(p2)
 		-- upvalues: LoggerModule (upval), p1 (copy), EnumScreensModule (upval)
 		LoggerModule:info("Navigate To Toast from {screen}")
 		p1.props.navigation.navigate(EnumScreensModule.RoactChatToast, p2)
 	end
 	
-	function p1.navigateToNotifications() --[[ Line: 206 ]]
+	function p1.navigateToNotifications()
 		-- upvalues: p1 (copy), EnumScreensModule (upval), LoggerModule (upval)
 		local NavigateToLuaAppPagesScreenProp: () -> () = p1.props.navigation.getScreenProps("navigateToLuaAppPages", {})[EnumScreensModule.Notifications]
 		
@@ -178,7 +178,7 @@ function ChatLandingScreenWithSwitchNavigator.init(p1) --[[ Line: 171 ]]
 		end
 	end
 	
-	function p1.navigateToPrivacy() --[[ Line: 217 ]]
+	function p1.navigateToPrivacy()
 		-- upvalues: p1 (copy), EnumScreensModule (upval), LoggerModule (upval)
 		local NavigateToLuaAppPagesScreenProp: () -> () = p1.props.navigation.getScreenProps("navigateToLuaAppPages", {})[EnumScreensModule.PrivacySettings]
 		
@@ -192,7 +192,7 @@ function ChatLandingScreenWithSwitchNavigator.init(p1) --[[ Line: 171 ]]
 		end
 	end
 	
-	function p1.navigateToSquadLobby(ConversationId) --[[ Line: 228 ]]
+	function p1.navigateToSquadLobby(ConversationId)
 		-- upvalues: LoggerModule (upval), GetCurrentRouteModule (upval), p1 (copy), EnumScreensModule (upval), FFlagEnablePartyQuickStartButton (upval), ResetForSquadLobbyForWideModeModule (upval), RoactNavigationModule (upval)
 		LoggerModule:info("Navigate To SquadLobby from {screen}")
 		local CurrentRouteModule = GetCurrentRouteModule(p1.props.navigation.state)
@@ -223,7 +223,7 @@ function ChatLandingScreenWithSwitchNavigator.init(p1) --[[ Line: 171 ]]
 		end
 	end
 	
-	function p1.setScreenTopBar(ChatLanding) --[[ Line: 265 ]]
+	function p1.setScreenTopBar(ChatLanding)
 		-- upvalues: GetTopBarStoreModule (upval), EnumScreensModule (upval)
 		GetTopBarStoreModule(false).setScreenTopBar(EnumScreensModule.ChatLanding, ChatLanding)
 	end
@@ -240,7 +240,7 @@ function ChatLandingScreenWithSwitchNavigator.init(p1) --[[ Line: 171 ]]
 	p1.focusNavigationService = ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
 end
 
-function ChatLandingScreenWithSwitchNavigator.render(p1) --[[ Line: 281 ]]
+function ChatLandingScreenWithSwitchNavigator.render(p1)
 	-- upvalues: LoggerModule (copy), ArgCheckModule (copy), WithStyleFunction (copy), FFlagAppChatWideAlwaysVisibleSearchBoxModule (copy), RoactModule (copy), TopBarProviderModule (copy), EnumScreensModule (copy), ChatLandingSearchRowModule (copy), ChatSearchBoxModule (copy), FFlagAppChatConsoleFocusFixesModule (copy), ChatLandingTopBarModule (copy), ProviderModule (copy), AppChatFixChatLandingContainerKeyPropConflict (copy), ChatLandingContainerModule (copy), LeftContainerTelemetryProviders (copy), RightContainerTelemetryProviders (copy), ConversationSwitchNavigatorModule (copy), ReactModule (copy), ContextModule (copy), ConversationStackNavigationFocusListenerModule (copy)
 	LoggerModule:info("{screen} render")
 	local NavigationInChatLandingScreenWithSwitchNavigator = ArgCheckModule.isNotNil(p1.props.navigation, "navigation in ChatLandingScreenWithSwitchNavigator")
@@ -249,7 +249,7 @@ function ChatLandingScreenWithSwitchNavigator.render(p1) --[[ Line: 281 ]]
 	local TopBarHeightScreenProps = NavigationInChatLandingScreenWithSwitchNavigator.getScreenProps("topBarHeight", 0)
 	local IsInExperienceScreenProps = NavigationInChatLandingScreenWithSwitchNavigator.getScreenProps("isInExperience", false)
 	
-	return WithStyleFunction(function(p2) --[[ Line: 289 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: FFlagAppChatWideAlwaysVisibleSearchBoxModule (upval), IsInExperienceScreenProps (copy), ShowSearchRowScreenProps (copy), RoactModule (upval), TopBarProviderModule (upval), EnumScreensModule (upval), ArgCheckModule (upval), ChatLandingSearchRowModule (upval), TopBarHeightScreenProps (copy), NavigationInChatLandingScreenWithSwitchNavigator (copy), ChatSearchBoxModule (upval), FFlagAppChatConsoleFocusFixesModule (upval), p1 (copy), ChatLandingTopBarModule (upval), ProviderModule (upval), AppChatFixChatLandingContainerKeyPropConflict (upval), ChatLandingContainerModule (upval), KeyParam (copy), LeftContainerTelemetryProviders (upval), RightContainerTelemetryProviders (upval), ConversationSwitchNavigatorModule (upval), ReactModule (upval), ContextModule (upval), ConversationStackNavigationFocusListenerModule (upval)
 		return ReactModule.createElement(ContextModule.Provider, { value = p1.wideModeFocusValue }, {
 			FocusListener = RoactModule.createElement(ConversationStackNavigationFocusListenerModule, {
@@ -260,7 +260,7 @@ function ChatLandingScreenWithSwitchNavigator.render(p1) --[[ Line: 281 ]]
 				conversationPanelRef = p1.conversationPanelRef
 			}, {
 				LeftContainerProviders = RoactModule.createElement(LeftContainerTelemetryProviders, {
-					renderChildren = function(p3) --[[ Line: 290 ]]
+					renderChildren = function(p3)
 						-- upvalues: FFlagAppChatWideAlwaysVisibleSearchBoxModule (upval), IsInExperienceScreenProps (upval), ShowSearchRowScreenProps (upval), RoactModule (upval), TopBarProviderModule (upval), EnumScreensModule (upval), ArgCheckModule (upval), ChatLandingSearchRowModule (upval), TopBarHeightScreenProps (upval), NavigationInChatLandingScreenWithSwitchNavigator (upval), ChatSearchBoxModule (upval), FFlagAppChatConsoleFocusFixesModule (upval), p1 (upval), ChatLandingTopBarModule (upval), ProviderModule (upval), p2 (copy), AppChatFixChatLandingContainerKeyPropConflict (upval), ChatLandingContainerModule (upval), KeyParam (upval)
 						local P9 = FFlagAppChatWideAlwaysVisibleSearchBoxModule and (not IsInExperienceScreenProps and p3)
 						local ShowSearchRowScreenProps1 = ShowSearchRowScreenProps or P9
@@ -268,7 +268,7 @@ function ChatLandingScreenWithSwitchNavigator.render(p1) --[[ Line: 281 ]]
 						return {
 							LeftContainer = RoactModule.createElement(TopBarProviderModule, {
 								screenName = EnumScreensModule.ChatLanding,
-								render = function(p4) --[[ Line: 298 ]]
+								render = function(p4)
 									-- upvalues: EnumScreensModule (upval), ArgCheckModule (upval), ShowSearchRowScreenProps1 (copy), P9 (copy), RoactModule (upval), ChatLandingSearchRowModule (upval), TopBarHeightScreenProps (upval), NavigationInChatLandingScreenWithSwitchNavigator (upval), ChatSearchBoxModule (upval), FFlagAppChatConsoleFocusFixesModule (upval), p1 (upval), ChatLandingTopBarModule (upval), ProviderModule (upval), p2 (upval), AppChatFixChatLandingContainerKeyPropConflict (upval), ChatLandingContainerModule (upval), KeyParam (upval)
 									local ScreenTopBar = p4.getScreenTopBar(EnumScreensModule.ChatLanding)
 									ArgCheckModule.isType(ScreenTopBar, "table", "screenTopBar")
@@ -299,7 +299,7 @@ function ChatLandingScreenWithSwitchNavigator.render(p1) --[[ Line: 281 ]]
 										}) else RoactModule.createElement(ChatSearchBoxModule, {
 											height = TopBarHeightScreenProps,
 											initialText = ScreenTopBar.filterText,
-											onFilter = function(FilterText) --[[ Line: 323 ]]
+											onFilter = function(FilterText)
 												-- upvalues: p4 (copy), EnumScreensModule (upval)
 												p4.setScreenTopBar(EnumScreensModule.ChatLanding, { filterText = FilterText })
 											end
@@ -382,7 +382,7 @@ function ChatLandingScreenWithSwitchNavigator.render(p1) --[[ Line: 281 ]]
 	end)
 end
 
-function ChatLandingScreenWithSwitchNavigator.didMount(p1) --[[ Line: 461 ]]
+function ChatLandingScreenWithSwitchNavigator.didMount(p1)
 	-- upvalues: LoggerModule (copy), GetFFlagEnableAppChatInExperienceFunction (copy), SharedFlagsModule (copy), ArgoPartyExperimentation (copy), UniversalAppPolicyModule (copy), GetFFlagIsSquadEnabledFunction (copy), FocusBehaviorsModule (copy)
 	LoggerModule:info("{screen} mounted")
 	local Navigation = p1.props.navigation
@@ -425,7 +425,7 @@ function ChatLandingScreenWithSwitchNavigator.didMount(p1) --[[ Line: 461 ]]
 	end
 end
 
-function ChatLandingScreenWithSwitchNavigator.willUnmount(p1) --[[ Line: 516 ]]
+function ChatLandingScreenWithSwitchNavigator.willUnmount(p1)
 	if p1.ixpSubscription then
 		p1.ixpSubscription.remove()
 	end

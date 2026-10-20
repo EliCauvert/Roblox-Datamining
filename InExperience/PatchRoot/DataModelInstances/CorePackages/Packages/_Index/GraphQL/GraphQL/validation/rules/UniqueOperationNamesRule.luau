@@ -1,12 +1,12 @@
 ﻿local GraphQLError = require(script.Parent.Parent.Parent.error.GraphQLError).GraphQLError
 
 return {
-	UniqueOperationNamesRule = function(p1) --[[ Line: 19 ]]
+	UniqueOperationNamesRule = function(p1)
 		-- upvalues: GraphQLError (copy)
 		local Names = {}
 		
 		return {
-			OperationDefinition = function(_, p2): boolean --[[ Line: 22 ]]
+			OperationDefinition = function(_, p2): boolean
 				-- upvalues: Names (copy), p1 (copy), GraphQLError (upval)
 				local Name = p2.name
 				
@@ -19,7 +19,7 @@ return {
 				end
 				return false
 			end,
-			FragmentDefinition = function(): boolean --[[ Line: 40 ]]
+			FragmentDefinition = function(): boolean
 				return false
 			end
 		}

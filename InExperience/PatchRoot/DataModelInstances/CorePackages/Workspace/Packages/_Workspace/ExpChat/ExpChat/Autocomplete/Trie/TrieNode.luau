@@ -1,7 +1,7 @@
 ﻿local TrieNodeModule = {}
 TrieNodeModule.__index = TrieNodeModule
 
-function TrieNodeModule.new(Data) --[[ Line: 4 ]]
+function TrieNodeModule.new(Data)
 	-- upvalues: TrieNodeModule (copy)
 	local t = {}
 	setmetatable(t, TrieNodeModule)

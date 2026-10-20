@@ -13,14 +13,14 @@ local FFlagExpChatEmojiDropdownShowAnalyticsModule = require(ExpChat.Flags.FFlag
 local FFlagExpChatEmojiDropdownDismissAnalyticsModule = require(ExpChat.Flags.FFlagExpChatEmojiDropdownDismissAnalytics)
 local UseEmojiDropdownDismissAnalyticsModule = require(script.Parent.useEmojiDropdownDismissAnalytics)
 
-return ReactModule.memo(function(p1) --[[ Line: 25 | Named "AutoCompleteDropdown" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), UseStyleFunction (copy), FFlagExpChatEmojiDropdownShowAnalyticsModule (copy), ExpChatSharedModule (copy), ConstantsModule (copy), FFlagExpChatEmojiDropdownDismissAnalyticsModule (copy), UseEmojiDropdownDismissAnalyticsModule (copy), Dictionary (copy), AutocompleteEntryModule (copy), List (copy), ConfigModule (copy), TextChatService (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local Theme = UseStyleFunction().Theme
 	
 	if FFlagExpChatEmojiDropdownShowAnalyticsModule then
 		local IsIsChatInputBarVisible: boolean = p1.activated and (#p1.results > 0 and p1.autocompleteType == "emojis" and p1.isChatInputBarVisible ~= false)
-		ReactModule.useEffect(function() --[[ Line: 37 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: IsIsChatInputBarVisible (copy), ExpChatSharedModule (upval), ConstantsModule (upval)
 			if IsIsChatInputBarVisible then
 				ExpChatSharedModule.Analytics:TelemetryLogEvent(ExpChatSharedModule.Analytics.ExpChatPresetActionConfig, {
@@ -34,9 +34,9 @@ return ReactModule.memo(function(p1) --[[ Line: 25 | Named "AutoCompleteDropdown
 			UseEmojiDropdownDismissAnalyticsModule(IsIsChatInputBarVisible, p1.results, p1.chosenEmojiForAnalyticsRef)
 		end
 	end
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 51 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: Dictionary (upval), ReactModule (upval), AutocompleteEntryModule (upval), p1 (copy), List (upval)
-		local MapResult = Dictionary.map(p2, function(Result, LayoutOrder) --[[ Line: 52 ]]
+		local MapResult = Dictionary.map(p2, function(Result, LayoutOrder)
 			-- upvalues: ReactModule (upval), AutocompleteEntryModule (upval), p1 (upval), List (upval), p2 (copy)
 			return ReactModule.createElement(AutocompleteEntryModule, {
 				result = Result,
@@ -56,7 +56,7 @@ return ReactModule.memo(function(p1) --[[ Line: 25 | Named "AutoCompleteDropdown
 		return MapResult
 	end)
 	
-	local function setCanvasPosition(): Vector2 --[[ Line: 76 ]]
+	local function setCanvasPosition(): Vector2
 		-- upvalues: UseRefResult (copy), p1 (copy), ConfigModule (upval)
 		if not UseRefResult.current then
 			return Vector2.new(0, 0)

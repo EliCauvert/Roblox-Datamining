@@ -13,7 +13,7 @@ local _ = require(script.Parent.types)
 return {
 	name = script.Name,
 	alias = { "/unmute", "/um" },
-	clientRun = function(p1, p2, Text: string, p3) --[[ Line: 20 ]]
+	clientRun = function(p1, p2, Text: string, p3)
 		-- upvalues: FFlagExpChatUseChatMuteStore (copy), ChatMuteModule (copy), config (copy), GetPlayersFromStringModule (copy)
 		if FFlagExpChatUseChatMuteStore then
 			local ResolveUnmuteTargetResult = ChatMuteModule.resolveUnmuteTarget(string.split(Text, " ")[2], (tostring(p2)))

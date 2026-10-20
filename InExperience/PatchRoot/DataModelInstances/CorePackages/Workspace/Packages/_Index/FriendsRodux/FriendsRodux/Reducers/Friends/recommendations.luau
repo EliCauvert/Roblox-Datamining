@@ -3,7 +3,7 @@ local ByUserIdModule = require(script.byUserId)
 local BySourceModule = require(script.bySource)
 local HasIncomingFriendRequestModule = require(script.hasIncomingFriendRequest)
 
-return function(p1) --[[ Line: 8 ]]
+return function(p1)
 	-- upvalues: RoduxModule (copy), ByUserIdModule (copy), BySourceModule (copy), HasIncomingFriendRequestModule (copy)
 	return RoduxModule.combineReducers({
 		byUserId = ByUserIdModule(p1),

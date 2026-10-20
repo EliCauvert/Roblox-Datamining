@@ -12,7 +12,7 @@ local FFlagUseTeleportTraversalHistory = FlagsModule.FFlagUseTeleportTraversalHi
 local LocalTraversalHistoryModule = {}
 LocalTraversalHistoryModule.__index = LocalTraversalHistoryModule
 
-function LocalTraversalHistoryModule.new(Local) --[[ Line: 51 ]]
+function LocalTraversalHistoryModule.new(Local)
 	-- upvalues: SignalsModule (copy), LocalTraversalHistoryModule (copy), MemStorageService (copy), HttpService (copy)
 	local Signal, Signal2 = SignalsModule.createSignal({})
 	local config = {
@@ -26,7 +26,7 @@ function LocalTraversalHistoryModule.new(Local) --[[ Line: 51 ]]
 	if Local == nil or Local == "" then
 		return (setmetatable(config, LocalTraversalHistoryModule))
 	else
-		local function initLocalHistory() --[[ Line: 62 ]]
+		local function initLocalHistory()
 			-- upvalues: config (copy), Local (copy), MemStorageService (upval), HttpService (upval)
 			config._historyKey = "TraversalHistory" .. Local
 			local Item = MemStorageService:GetItem(config._historyKey)
@@ -46,7 +46,7 @@ function LocalTraversalHistoryModule.new(Local) --[[ Line: 51 ]]
 			config._setHistorySignal(config._history)
 		end
 		
-		table.insert(config._connections, game.Loaded:Connect(function() --[[ Line: 82 ]]
+		table.insert(config._connections, game.Loaded:Connect(function()
 			-- upvalues: initLocalHistory (copy)
 			initLocalHistory()
 		end))
@@ -55,18 +55,18 @@ function LocalTraversalHistoryModule.new(Local) --[[ Line: 51 ]]
 	end
 end
 
-function LocalTraversalHistoryModule:addHistoryEntry(p1) --[[ Line: 90 ]]
+function LocalTraversalHistoryModule:addHistoryEntry(p1)
 	table.insert(self._history, 1, p1)
 	self._setHistorySignal(self._history)
 end
 
-function LocalTraversalHistoryModule:addHistoryEntries(p1) --[[ Line: 95 ]]
+function LocalTraversalHistoryModule:addHistoryEntries(p1)
 	-- upvalues: CryoModule (copy)
 	self._history = CryoModule.List.join(p1, self._history)
 	self._setHistorySignal(self._history)
 end
 
-local function _(p1, p2) --[[ Line: 101 | Named "getNMostRecent" ]]
+local function _(p1, p2)
 	if p2 == nil then
 		return p1
 	end
@@ -78,7 +78,7 @@ local function _(p1, p2) --[[ Line: 101 | Named "getNMostRecent" ]]
 	return List
 end
 
-function LocalTraversalHistoryModule:getHistory(p3) --[[ Line: 112 ]]
+function LocalTraversalHistoryModule:getHistory(p3)
 	local History = self._history
 	
 	if p3 == nil then
@@ -92,9 +92,9 @@ function LocalTraversalHistoryModule:getHistory(p3) --[[ Line: 112 ]]
 	return List
 end
 
-function LocalTraversalHistoryModule.getUniverseHistorySignal(p4, p5) --[[ Line: 115 ]]
+function LocalTraversalHistoryModule.getUniverseHistorySignal(p4, p5)
 	-- upvalues: SignalsModule (copy)
-	return SignalsModule.createComputed(function(p6) --[[ Line: 116 ]]
+	return SignalsModule.createComputed(function(p6)
 		-- upvalues: p4 (copy), p5 (copy)
 		local HistorySignalResult = p4._historySignal(p6)
 		local HistorySignalResult1 = nil
@@ -118,7 +118,7 @@ function LocalTraversalHistoryModule.getUniverseHistorySignal(p4, p5) --[[ Line:
 	end)
 end
 
-function LocalTraversalHistoryModule:getUniverseHistory(p7) --[[ Line: 127 ]]
+function LocalTraversalHistoryModule:getUniverseHistory(p7)
 	-- upvalues: FFlagUseTeleportTraversalHistory (copy), UseTeleportedPlacesBackHistory2EngineFeature (copy), TeleportService (copy), CryoModule (copy)
 	local List = {}
 	
@@ -157,19 +157,19 @@ function LocalTraversalHistoryModule:getUniverseHistory(p7) --[[ Line: 127 ]]
 	end
 end
 
-function LocalTraversalHistoryModule:writeHistory() --[[ Line: 143 ]]
+function LocalTraversalHistoryModule:writeHistory()
 	-- upvalues: MemStorageService (copy), HttpService (copy)
 	MemStorageService:SetItem(self._historyKey, HttpService:JSONEncode(self._history))
 end
 
-function LocalTraversalHistoryModule:disconnect() --[[ Line: 147 ]]
+function LocalTraversalHistoryModule:disconnect()
 	for _, connection in self._connections do
 		connection:Disconnect()
 	end
 	self._connections = {}
 end
 
-local _ = function(): string --[[ Line: 154 | Named "getDefaultId" ]]
+local _ = function(): string
 	-- upvalues: Players (copy)
 	local UserId = Players.LocalPlayer and Players.LocalPlayer.UserId or nil
 	

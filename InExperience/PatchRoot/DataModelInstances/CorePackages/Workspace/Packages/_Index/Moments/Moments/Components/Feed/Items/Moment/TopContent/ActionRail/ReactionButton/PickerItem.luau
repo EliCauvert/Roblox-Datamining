@@ -12,36 +12,36 @@ local ReactionSize = MomentsCommonModule.Enums.ReactionSize
 local config = { frequency = 4, dampingRatio = 0.65 }
 local config1 = { frequency = 4, dampingRatio = 1 }
 
-return ReactModule.memo(function(p1) --[[ Line: 33 | Named "PickerItem" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UsePreferencesFunction (copy), ReactModule (copy), ReactOtterModule (copy), config (copy), config1 (copy), ControlState (copy), View (copy), StateLayerAffordance (copy), Reaction (copy), ReactionSize (copy)
 	local ReducedMotion = UsePreferencesFunction().reducedMotion
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 37 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), p1 (copy)
 		local Current = UseRefResult.current
 		p1.onSelect(p1.reaction, if Current == nil then nil else Current.AbsolutePosition + Current.AbsoluteSize / 2)
 	end, { p1.onSelect, p1.reaction })
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
 	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = ReactOtterModule.useAnimatedBinding(0)
-	ReactModule.useEffect(function() --[[ Line: 50 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ReducedMotion (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), p1 (copy), config (upval)
 		if ReducedMotion then
 			UseAnimatedBindingResult2(ReactOtterModule.instant(1))
 			
 			return
 		end
-		local DelayedThread = task.delay((p1.index - 1) * 0.04, function() --[[ Line: 55 ]]
+		local DelayedThread = task.delay((p1.index - 1) * 0.04, function()
 			-- upvalues: UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval)
 			UseAnimatedBindingResult2((ReactOtterModule.spring(1, config)))
 		end)
 		
-		return function() --[[ Line: 58 ]]
+		return function()
 			-- upvalues: DelayedThread (copy)
 			task.cancel(DelayedThread)
 		end
 	end, { p1.index, ReducedMotion })
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 65 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), ReducedMotion (copy), UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval), config1 (upval)
 		local v1: number = if UseStateResult then 1 else 0
 		
@@ -57,7 +57,7 @@ return ReactModule.memo(function(p1) --[[ Line: 33 | Named "PickerItem" ]]
 	return ReactModule.createElement(View, {
 		tag = "size-800-800",
 		onActivated = UseResult,
-		onStateChanged = ReactModule.useCallback(function(Hover) --[[ Line: 74 ]]
+		onStateChanged = ReactModule.useCallback(function(Hover)
 			-- upvalues: UseStateResult2 (copy), ControlState (upval)
 			UseStateResult2(Hover == ControlState.Hover or (Hover == ControlState.Pressed or (Hover == ControlState.Selected or Hover == ControlState.SelectedPressed)))
 		end, {}),
@@ -73,13 +73,13 @@ return ReactModule.memo(function(p1) --[[ Line: 33 | Named "PickerItem" ]]
 			Position = ReactModule.joinBindings({
 				entry = UseAnimatedBindingResult,
 				hover = UseAnimatedBindingResult1
-			}):map(function(p2): UDim2 --[[ Line: 94 ]]
+			}):map(function(p2): UDim2
 				return UDim2.new(0.5, 0, 0.5, (1 - p2.entry) * 12 - p2.hover * 8)
 			end),
 			scale = ReactModule.joinBindings({
 				entry = UseAnimatedBindingResult,
 				hover = UseAnimatedBindingResult1
-			}):map(function(p2) --[[ Line: 88 ]]
+			}):map(function(p2)
 				return p2.entry * (p2.hover * 0.1 + 1)
 			end)
 		})

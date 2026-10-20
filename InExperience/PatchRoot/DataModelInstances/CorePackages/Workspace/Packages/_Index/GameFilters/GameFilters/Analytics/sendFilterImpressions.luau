@@ -6,7 +6,7 @@ local FilterImpressionsEventModule = require(GameFilters.Analytics.filterImpress
 local GetOptionContextTagModule = require(GameFilters.Analytics.getOptionContextTag)
 local FFlagLuaAppChartsFilterOptionTextTag = require(Parent.SharedFlags).FFlagLuaAppChartsFilterOptionTextTag
 
-return function(p1, List, p2, p3, p4) --[[ Line: 12 | Named "sendFilterImpressions" ]]
+return function(p1, List, p2, p3, p4)
 	-- upvalues: FFlagLuaAppChartsFilterOptionTextTag (copy), GetOptionContextTagModule (copy), ArgCheckModule (copy), FilterImpressionsEventModule (copy)
 	if not p1 then return end
 	if not List or #List == 0 then return end

@@ -11,7 +11,7 @@ local FlagsModule = require(Foundation.Utility.Flags)
 local _ = require(Foundation.Providers.Style.Tokens)
 local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-function variantsFactory(p1) --[[ Line: 36 ]]
+function variantsFactory(p1)
 	-- upvalues: FlagsModule (copy), BadgeVariantModule (copy), BadgeSizeModule (copy), IconSizeModule (copy), BadgeShapeModule (copy), IconPositionModule (copy), DashModule (copy)
 	local Config = if FlagsModule.FoundationBadgeBetaUpdate then nil else {
 		[true] = { container = { tag = "size-600" } },
@@ -136,7 +136,7 @@ function variantsFactory(p1) --[[ Line: 36 ]]
 	}
 end
 
-return function(p1, p2, p3, p4, p5, p6) --[[ Line: 227 ]]
+return function(p1, p2, p3, p4, p5, p6)
 	-- upvalues: VariantsContextModule (copy), ComposeStyleVariantModule (copy), FlagsModule (copy), DashModule (copy)
 	local Badge = VariantsContextModule.useVariants("Badge", variantsFactory, p1)
 	

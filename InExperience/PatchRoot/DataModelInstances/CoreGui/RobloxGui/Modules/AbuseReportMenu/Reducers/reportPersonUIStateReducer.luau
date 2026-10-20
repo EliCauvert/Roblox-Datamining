@@ -3,7 +3,7 @@ local ConstantsModule = require(AbuseReportMenu.Components.Constants)
 local _ = require(AbuseReportMenu.Components.Types)
 local PlayerMenuActions = ConstantsModule.PlayerMenuActions
 
-return function(Tbl, p1) --[[ Line: 7 | Named "reportPersonUIStateReducer" ]]
+return function(Tbl, p1)
 	-- upvalues: PlayerMenuActions (copy), ConstantsModule (copy)
 	local Copy = table.clone(Tbl)
 	local Type = p1.type

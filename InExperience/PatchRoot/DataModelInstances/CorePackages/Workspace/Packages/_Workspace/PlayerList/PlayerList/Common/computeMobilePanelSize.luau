@@ -1,10 +1,10 @@
 ﻿local ConstantsModule = require(script.Parent.Parent.Common.Constants)
 
-local function _(p1, p2, p3, p4, p5) --[[ Line: 14 | Named "lerpRange" ]]
+local function _(p1, p2, p3, p4, p5)
 	return (p1 - p2) * (p5 - p4) / (p3 - p2) + p4
 end
 
-return function(Vector, p1, p2, p3): Vector2 --[[ Line: 22 | Named "computeMobilePanelSize" ]]
+return function(Vector, p1, p2, p3): Vector2
 	-- upvalues: ConstantsModule (copy)
 	local Smallest = math.min(Vector.X, Vector.Y)
 	local Largest = math.max(Vector.X, Vector.Y)

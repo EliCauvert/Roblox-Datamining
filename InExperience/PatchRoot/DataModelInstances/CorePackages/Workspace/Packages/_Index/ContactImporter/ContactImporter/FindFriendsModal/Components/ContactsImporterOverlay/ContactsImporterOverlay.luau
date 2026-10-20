@@ -27,7 +27,7 @@ ContactsImporterOverlay.validateProps = T.strictInterface({
 	isFromSignup = T.optional(T.boolean)
 })
 
-function ContactsImporterOverlay.render(p1) --[[ Line: 52 ]]
+function ContactsImporterOverlay.render(p1)
 	-- upvalues: WithLocalizationFunction (copy), TextKeysModule (copy), WithStyleFunction (copy), ButtonType (copy), Roact (copy), PartialPageModal (copy), ImageSetLabel (copy), Images (copy), IconSize (copy), StyledTextLabel (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	return WithLocalizationFunction({
 		connectWithFriends = TextKeysModule.CONTACTS_LIST_TITLE,
@@ -37,9 +37,9 @@ function ContactsImporterOverlay.render(p1) --[[ Line: 52 ]]
 		closeModal = TextKeysModule.CLOSE_MODAL,
 		goToAddFriends = TextKeysModule.NOT_NOW,
 		learnMore = TextKeysModule.LEARN_MORE
-	})(function(p2) --[[ Line: 61 ]]
+	})(function(p2)
 		-- upvalues: WithStyleFunction (upval), p1 (copy), ButtonType (upval), Roact (upval), PartialPageModal (upval), ImageSetLabel (upval), Images (upval), IconSize (upval), StyledTextLabel (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
-		return WithStyleFunction(function(p3) --[[ Line: 62 ]]
+		return WithStyleFunction(function(p3)
 			-- upvalues: p1 (upval), ButtonType (upval), p2 (copy), Roact (upval), PartialPageModal (upval), ImageSetLabel (upval), Images (upval), IconSize (upval), StyledTextLabel (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 			local Theme = p3.Theme
 			local _Font = p3.Font

@@ -15,15 +15,15 @@ local _ = require(AvatarSwitcher.types)
 local FFlagAvatarSwitcherUseAvatarInventoryEndpoint = require(Parent.AvatarExperienceFlags).FFlagAvatarSwitcherUseAvatarInventoryEndpoint
 local FFlagAXBackgroundsInOutfitThumbnails = require(Parent.SharedFlags).FFlagAXBackgroundsInOutfitThumbnails
 
-return ReactModule.memo(function(Frame) --[[ Line: 39 | Named "OutfitTile" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: SignalsReactModule (copy), GetAvatarSwitcherStoreModule (copy), ReactModule (copy), UseTokensFunction (copy), AddUnifiedEventLoggingFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), SessionService (copy), SignalsModule (copy), FoundationModule (copy), FFlagAvatarSwitcherUseAvatarInventoryEndpoint (copy), FFlagAXBackgroundsInOutfitThumbnails (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetAvatarSwitcherStoreModule)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseTokensResult = UseTokensFunction()
 	local Id = Frame.outfitInfo.id
-	ReactModule.useEffect(function() --[[ Line: 46 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: AddUnifiedEventLoggingFunction (upval), UseRefResult (copy), UnifiedEventLogEnums (upval), UnifiedLoggingSurface (upval), Frame (copy), Id (copy), SessionService (upval)
-		task.delay(0, function() --[[ Line: 49 ]]
+		task.delay(0, function()
 			-- upvalues: AddUnifiedEventLoggingFunction (upval), UseRefResult (upval), UnifiedEventLogEnums (upval), UnifiedLoggingSurface (upval), Frame (upval), Id (upval), SessionService (upval)
 			AddUnifiedEventLoggingFunction(UseRefResult, {
 				elementName = "OUTFIT_TILE",
@@ -35,14 +35,14 @@ return ReactModule.memo(function(Frame) --[[ Line: 39 | Named "OutfitTile" ]]
 			}, { sessionTagName = SessionService:GetSessionTag("level2a") })
 		end)
 	end, { Frame.gridPosition, Id })
-	local NoDisabled: boolean = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 63 ]]
+	local NoDisabled: boolean = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), Id (copy), UseSignalStateResult (copy)
-		return SignalsModule.createComputed(function(p1): boolean --[[ Line: 64 ]]
+		return SignalsModule.createComputed(function(p1): boolean
 			-- upvalues: Id (upval), UseSignalStateResult (upval)
 			return Id ~= nil and UseSignalStateResult.getSelectedOutfitId(p1) == Id
 		end)
 	end, { UseSignalStateResult, Id }))) and not Frame.disabled
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 70 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseSignalStateResult (copy), Id (copy)
 		UseSignalStateResult.selectOutfit(Id)
 	end, { UseSignalStateResult, Id })

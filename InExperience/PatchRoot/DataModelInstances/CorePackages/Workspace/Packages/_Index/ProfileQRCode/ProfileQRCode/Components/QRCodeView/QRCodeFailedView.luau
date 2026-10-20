@@ -16,7 +16,7 @@ local _Color3 = Color3.new(1, 1, 1)
 local IconsCommonRefresh = Images["icons/common/refresh"]
 local IconsGraphicErrorXlarge = Images["icons/graphic/error_xlarge"]
 
-return function(p1) --[[ Line: 30 ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), _Color3 (copy), IconSize (copy), ImageSetLabel (copy), IconsGraphicErrorXlarge (copy), StyledTextLabel (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy), IconsCommonRefresh (copy)
 	local UseStyleResult = UseStyleFunction()
 	

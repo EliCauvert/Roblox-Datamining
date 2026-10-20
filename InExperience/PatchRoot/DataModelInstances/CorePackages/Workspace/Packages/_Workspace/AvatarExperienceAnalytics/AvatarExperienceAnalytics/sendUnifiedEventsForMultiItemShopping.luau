@@ -10,7 +10,7 @@ local ConstantsModule = require(script.Parent.Constants)
 local UnifiedEventLogEnumsModule = require(AvatarExperienceAnalytics.UnifiedEventLogEnums)
 local FFlagAXFixSearchPurchaseSurface = require(Parent.AvatarExperienceFlags).FFlagAXFixSearchPurchaseSurface
 
-return function(List, p1) --[[ Line: 16 ]]
+return function(List, p1)
 	-- upvalues: UnifiedSelectionListStoreModule (copy), UnifiedEventLogConstantsModule (copy), UnifiedEventLoggingUtilsModule (copy), CryoModule (copy), FFlagAXFixSearchPurchaseSurface (copy), UnifiedEventLogEnumsModule (copy), ReportAvatarEventCounterV1Module (copy), ConstantsModule (copy), SendUnifiedEventLogModule (copy)
 	local SelectionList = UnifiedSelectionListStoreModule.getSelectionList()
 	local Text = UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemId"

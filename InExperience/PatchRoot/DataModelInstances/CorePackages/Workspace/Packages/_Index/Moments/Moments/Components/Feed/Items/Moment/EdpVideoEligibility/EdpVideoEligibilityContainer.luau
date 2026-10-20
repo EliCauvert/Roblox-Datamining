@@ -1,7 +1,7 @@
 ﻿local _ = require(script:FindFirstAncestor("Moments").Parent.React)
 local UseEdpVideoEligibilityViewModelModule = require(script.Parent.useEdpVideoEligibilityViewModel)
 
-return function(p1) --[[ Line: 13 | Named "EdpVideoEligibilityContainer" ]]
+return function(p1)
 	-- upvalues: UseEdpVideoEligibilityViewModelModule (copy)
 	local UseEdpVideoEligibilityViewModelModuleResult = UseEdpVideoEligibilityViewModelModule({ momentId = p1.momentId, universeId = p1.universeId })
 	

@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local ItemInfoRowModule = require(script.Parent.ItemInfoRow)
 local CryoModule = require(Parent.Cryo)
 
-return function(Frame) --[[ Line: 42 | Named "ItemInfoList" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), CryoModule (copy), ItemInfoRowModule (copy)
 	local config = {
 		layout = ReactModule.createElement("UIListLayout", {

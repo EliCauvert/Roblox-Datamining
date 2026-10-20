@@ -1,6 +1,6 @@
 ﻿local FFlagSduiAlwaysCacheWithIdentifier = require(script:FindFirstAncestor("SduiSharedUtilities").Parent.SharedFlags).FFlagSduiAlwaysCacheWithIdentifier
 
-return function(List, p1, p2) --[[ Line: 15 | Named "resolveSduiCacheEntry" ]]
+return function(List, p1, p2)
 	-- upvalues: FFlagSduiAlwaysCacheWithIdentifier (copy)
 	if not List then
 		return nil

@@ -12,7 +12,7 @@ local IsSubsetOfLanesFunction = ReactFiberLaneModule.isSubsetOfLanes
 local MergeLanesFunction = ReactFiberLaneModule.mergeLanes
 local ReactFiberNewContextNewModule = nil
 
-local function _() --[[ Line: 115 | Named "enterDisallowedContextReadInDEV" ]]
+local function _()
 	-- upvalues: ReactFiberNewContextNewModule (ref)
 	if not ReactFiberNewContextNewModule then
 		ReactFiberNewContextNewModule = require(script.Parent["ReactFiberNewContext.new"])
@@ -20,7 +20,7 @@ local function _() --[[ Line: 115 | Named "enterDisallowedContextReadInDEV" ]]
 	ReactFiberNewContextNewModule.enterDisallowedContextReadInDEV()
 end
 
-local _ = function() --[[ Line: 121 | Named "exitDisallowedContextReadInDEV" ]]
+local _ = function()
 	-- upvalues: ReactFiberNewContextNewModule (ref)
 	if not ReactFiberNewContextNewModule then
 		ReactFiberNewContextNewModule = require(script.Parent["ReactFiberNewContext.new"])
@@ -55,7 +55,7 @@ if DEV then
 	Flag1 = false
 	Shared = nil
 	
-	function ReactUpdateQueueModule.resetCurrentlyProcessingQueue() --[[ Line: 182 ]]
+	function ReactUpdateQueueModule.resetCurrentlyProcessingQueue()
 		-- upvalues: Shared (ref)
 		Shared = nil
 	end
@@ -73,7 +73,7 @@ for i = 1, 210 do
 		next = nil
 	}
 end
-function ReactUpdateQueueModule.initializeUpdateQueue(p1) --[[ Line: 203 ]]
+function ReactUpdateQueueModule.initializeUpdateQueue(p1)
 	p1.updateQueue = {
 		firstBaseUpdate = nil,
 		lastBaseUpdate = nil,
@@ -83,7 +83,7 @@ function ReactUpdateQueueModule.initializeUpdateQueue(p1) --[[ Line: 203 ]]
 	}
 end
 
-function ReactUpdateQueueModule.cloneUpdateQueue(p1, p2) --[[ Line: 217 ]]
+function ReactUpdateQueueModule.cloneUpdateQueue(p1, p2)
 	local UpdateQueue = p1.updateQueue
 	
 	if p2.updateQueue == UpdateQueue then
@@ -91,7 +91,7 @@ function ReactUpdateQueueModule.cloneUpdateQueue(p1, p2) --[[ Line: 217 ]]
 	end
 end
 
-function ReactUpdateQueueModule.createUpdate(EventTime, Lane, Payload, Callback) --[[ Line: 231 ]]
+function ReactUpdateQueueModule.createUpdate(EventTime, Lane, Payload, Callback)
 	-- upvalues: Count (ref), Buffer (copy)
 	if Count > 0 then
 		local BufferEntry = Buffer[Count]
@@ -116,7 +116,7 @@ function ReactUpdateQueueModule.createUpdate(EventTime, Lane, Payload, Callback)
 	end
 end
 
-function ReactUpdateQueueModule.enqueueUpdate(p1, Pending) --[[ Line: 281 ]]
+function ReactUpdateQueueModule.enqueueUpdate(p1, Pending)
 	-- upvalues: DEV (copy), Shared (ref), Flag1 (ref), Console (copy)
 	local UpdateQueue = p1.updateQueue
 	
@@ -138,7 +138,7 @@ function ReactUpdateQueueModule.enqueueUpdate(p1, Pending) --[[ Line: 281 ]]
 	end
 end
 
-function ReactUpdateQueueModule.enqueueCapturedUpdate(p1, LastBaseUpdate) --[[ Line: 313 ]]
+function ReactUpdateQueueModule.enqueueCapturedUpdate(p1, LastBaseUpdate)
 	local UpdateQueue = p1.updateQueue
 	local Alternate = p1.alternate
 	
@@ -204,7 +204,7 @@ function ReactUpdateQueueModule.enqueueCapturedUpdate(p1, LastBaseUpdate) --[[ L
 	UpdateQueue.lastBaseUpdate = LastBaseUpdate
 end
 
-local function getStateFromUpdate(p1, _, Update, Tbl, p2, _) --[[ Line: 394 ]]
+local function getStateFromUpdate(p1, _, Update, Tbl, p2, _)
 	-- upvalues: DEV (copy), ReactFiberNewContextNewModule (ref), DebugRenderPhaseSideEffectsForStrictMode (copy), StrictMode (copy), DisableLogsFunction (copy), YOLO (copy), DescribeError (copy), ReenableLogsFunction (copy), ShouldCapture (copy), DidCapture (copy), EnableAllocationTrims (copy), Object (copy), Flag (ref)
 	local Tag = Update.tag
 	
@@ -300,7 +300,7 @@ end
 
 ReactUpdateQueueModule.getStateFromUpdate = getStateFromUpdate
 
-function ReactUpdateQueueModule.processUpdateQueue(p1, p2, p3, p4) --[[ Line: 514 ]]
+function ReactUpdateQueueModule.processUpdateQueue(p1, p2, p3, p4)
 	-- upvalues: Flag (ref), DEV (copy), Shared (ref), NoLanes (copy), IsSubsetOfLanesFunction (copy), MergeLanesFunction (copy), NoLane (copy), getStateFromUpdate (copy), Callback (copy), MarkSkippedUpdateLanesFunction (copy)
 	local UpdateQueue = p1.updateQueue
 	Flag = false
@@ -420,24 +420,24 @@ function ReactUpdateQueueModule.processUpdateQueue(p1, p2, p3, p4) --[[ Line: 51
 	end
 end
 
-local _ = function(Callback: (any) -> (), p1) --[[ Line: 706 | Named "callCallback" ]]
+local _ = function(Callback: (any) -> (), p1)
 	if type(Callback) ~= "function" then
 		error(string.format("Invalid argument passed as callback. Expected a function. Instead received: %s", (tostring(Callback))))
 	end
 	Callback(p1)
 end
 
-function ReactUpdateQueueModule.resetHasForceUpdateBeforeProcessing() --[[ Line: 721 ]]
+function ReactUpdateQueueModule.resetHasForceUpdateBeforeProcessing()
 	-- upvalues: Flag (ref)
 	Flag = false
 end
 
-function ReactUpdateQueueModule.checkHasForceUpdateAfterProcessing() --[[ Line: 725 ]]
+function ReactUpdateQueueModule.checkHasForceUpdateAfterProcessing()
 	-- upvalues: Flag (ref)
 	return Flag
 end
 
-function ReactUpdateQueueModule:commitUpdateQueue(p1, p2) --[[ Line: 729 ]]
+function ReactUpdateQueueModule:commitUpdateQueue(p1, p2)
 	-- upvalues: Buffer (copy), Count (ref)
 	local Effects = p1.effects
 	p1.effects = nil

@@ -1,6 +1,6 @@
 ﻿local Players = game:GetService("Players")
 
-return function(Object) --[[ Line: 4 | Named "getPlayerFromPart" ]]
+return function(Object)
 	-- upvalues: Players (copy)
 	if not Object then
 		return nil

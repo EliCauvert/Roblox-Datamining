@@ -7,49 +7,49 @@ local GetFFlagEnableMultiPageSignupFunction = require(Parent.SharedFlags).GetFFl
 local _ = require(AuthCommon.Utils.PreviousAccountEntry)
 local GameParams = require(Parent.ExperienceService).GameParams
 local AppStorageUtilitiesModule = {
-	setRobloxLocaleId = function(Value) --[[ Line: 19 ]]
+	setRobloxLocaleId = function(Value)
 		-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
 		AppStorageService:SetItem(AuthLocalStorageKeysModule.RobloxLocaleId, Value)
 	end,
-	setGameLocaleId = function(Value) --[[ Line: 24 ]]
+	setGameLocaleId = function(Value)
 		-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
 		AppStorageService:SetItem(AuthLocalStorageKeysModule.GameLocaleId, Value)
 	end,
-	getAuthenticatedTheme = function() --[[ Line: 28 ]]
+	getAuthenticatedTheme = function()
 		-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
 		return AppStorageService:GetItem(AuthLocalStorageKeysModule.AuthenticatedTheme)
 	end,
-	setAuthenticatedTheme = function(Value) --[[ Line: 32 ]]
+	setAuthenticatedTheme = function(Value)
 		-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
 		AppStorageService:SetItem(AuthLocalStorageKeysModule.AuthenticatedTheme, Value)
 	end,
-	getAccountBlob = function() --[[ Line: 36 ]]
+	getAccountBlob = function()
 		-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
 		return game:GetEngineFeature("AccountSwitchFeatureEnabled") and AppStorageService:GetItem(AuthLocalStorageKeysModule.AccountBlob) or ""
 	end,
-	setAccountBlob = function(p1) --[[ Line: 43 ]]
+	setAccountBlob = function(p1)
 		-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
 		if game:GetEngineFeature("AccountSwitchFeatureEnabled") then
 			AppStorageService:SetItem(AuthLocalStorageKeysModule.AccountBlob, p1 or "")
 		end
 	end,
-	getDefaultUsername = function() --[[ Line: 49 ]]
+	getDefaultUsername = function()
 		-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
 		return AppStorageService:GetItem(AuthLocalStorageKeysModule.CredentialValue)
 	end,
-	getSignupActionRequired = function() --[[ Line: 53 ]]
+	getSignupActionRequired = function()
 		-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
 		return AppStorageService:GetItem(AuthLocalStorageKeysModule.SignupActionRequired)
 	end,
-	setSignupActionRequired = function(Value) --[[ Line: 57 ]]
+	setSignupActionRequired = function(Value)
 		-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
 		AppStorageService:SetItem(AuthLocalStorageKeysModule.SignupActionRequired, Value)
 	end,
-	getAccountSwitcherMetadataMap = function() --[[ Line: 61 ]]
+	getAccountSwitcherMetadataMap = function()
 		-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
 		return game:GetEngineFeature("AccountSwitcherMetadataMapKeyAvailable") and AppStorageService:GetItem(AuthLocalStorageKeysModule.AccountSwitcherMetadataMap) or ""
 	end,
-	setAccountSwitcherMetadataMap = function(Json) --[[ Line: 68 ]]
+	setAccountSwitcherMetadataMap = function(Json)
 		-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
 		if game:GetEngineFeature("AccountSwitcherMetadataMapKeyAvailable") then
 			AppStorageService:SetItem(AuthLocalStorageKeysModule.AccountSwitcherMetadataMap, Json or "")
@@ -57,7 +57,7 @@ local AppStorageUtilitiesModule = {
 	end
 }
 
-function AppStorageUtilitiesModule.setAccountSwitchStartupQueryParams(AccountSwitchStartupQueryParams) --[[ Line: 74 ]]
+function AppStorageUtilitiesModule.setAccountSwitchStartupQueryParams(AccountSwitchStartupQueryParams)
 	-- upvalues: HttpService (copy), AppStorageUtilitiesModule (copy)
 	if typeof(AccountSwitchStartupQueryParams) == "table" then
 		AccountSwitchStartupQueryParams = HttpService:JSONEncode(AccountSwitchStartupQueryParams)
@@ -78,12 +78,12 @@ function AppStorageUtilitiesModule.setAccountSwitchStartupQueryParams(AccountSwi
 	end
 end
 
-function AppStorageUtilitiesModule.clearAccountSwitchStartupGameParams() --[[ Line: 95 ]]
+function AppStorageUtilitiesModule.clearAccountSwitchStartupGameParams()
 	-- upvalues: AppStorageUtilitiesModule (copy)
 	AppStorageUtilitiesModule.setAccountSwitchStartupQueryParams("")
 end
 
-function AppStorageUtilitiesModule.getAccountSwitchStartupGameParams() --[[ Line: 99 ]]
+function AppStorageUtilitiesModule.getAccountSwitchStartupGameParams()
 	-- upvalues: AppStorageUtilitiesModule (copy), HttpService (copy), GameParams (copy)
 	if not game:GetEngineFeature("AccountSwitcherMetadataMapKeyAvailable") then
 		return nil
@@ -105,7 +105,7 @@ function AppStorageUtilitiesModule.getAccountSwitchStartupGameParams() --[[ Line
 	end
 	local Data1 = HttpService:JSONDecode(AccountSwitchStartupQueryParams)
 	
-	local function _(p1) --[[ Line: 123 ]]
+	local function _(p1)
 		local Number: number? = tonumber(p1)
 		
 		return if Number then Number else p1 == "true" or p1 ~= "false" and p1
@@ -120,7 +120,7 @@ function AppStorageUtilitiesModule.getAccountSwitchStartupGameParams() --[[ Line
 	return FromParamsResult
 end
 
-function AppStorageUtilitiesModule.getAccountSwitchTargetUsername() --[[ Line: 151 ]]
+function AppStorageUtilitiesModule.getAccountSwitchTargetUsername()
 	-- upvalues: AppStorageUtilitiesModule (copy), HttpService (copy)
 	if not game:GetEngineFeature("AccountSwitcherMetadataMapKeyAvailable") then
 		return ""
@@ -136,7 +136,7 @@ function AppStorageUtilitiesModule.getAccountSwitchTargetUsername() --[[ Line: 1
 	end
 end
 
-function AppStorageUtilitiesModule.setAccountSwitchTargetUsername(AccountSwitchTargetUsername) --[[ Line: 172 ]]
+function AppStorageUtilitiesModule.setAccountSwitchTargetUsername(AccountSwitchTargetUsername)
 	-- upvalues: AppStorageUtilitiesModule (copy), HttpService (copy)
 	if game:GetEngineFeature("AccountSwitcherMetadataMapKeyAvailable") then
 		local AccountSwitcherMetadataMap = AppStorageUtilitiesModule.getAccountSwitcherMetadataMap()
@@ -154,7 +154,7 @@ function AppStorageUtilitiesModule.setAccountSwitchTargetUsername(AccountSwitchT
 	end
 end
 
-function AppStorageUtilitiesModule.getAccountSwitchStatus() --[[ Line: 188 ]]
+function AppStorageUtilitiesModule.getAccountSwitchStatus()
 	-- upvalues: AppStorageUtilitiesModule (copy), HttpService (copy)
 	if not game:GetEngineFeature("AccountSwitcherMetadataMapKeyAvailable") then
 		return ""
@@ -170,7 +170,7 @@ function AppStorageUtilitiesModule.getAccountSwitchStatus() --[[ Line: 188 ]]
 	end
 end
 
-function AppStorageUtilitiesModule.setAccountSwitchStatus(AccountSwitchStatus) --[[ Line: 210 ]]
+function AppStorageUtilitiesModule.setAccountSwitchStatus(AccountSwitchStatus)
 	-- upvalues: AppStorageUtilitiesModule (copy), HttpService (copy)
 	if game:GetEngineFeature("AccountSwitcherMetadataMapKeyAvailable") then
 		local AccountSwitcherMetadataMap = AppStorageUtilitiesModule.getAccountSwitcherMetadataMap()
@@ -186,17 +186,17 @@ function AppStorageUtilitiesModule.setAccountSwitchStatus(AccountSwitchStatus) -
 	end
 end
 
-function AppStorageUtilitiesModule.getMultipageSignupMetadataMap() --[[ Line: 226 ]]
+function AppStorageUtilitiesModule.getMultipageSignupMetadataMap()
 	-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
 	return AppStorageService:GetItem(AuthLocalStorageKeysModule.MultipageSignupMetadataMap) or ""
 end
 
-function AppStorageUtilitiesModule.setMultipageSignupMetadataMap(Json) --[[ Line: 230 ]]
+function AppStorageUtilitiesModule.setMultipageSignupMetadataMap(Json)
 	-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
 	AppStorageService:SetItem(AuthLocalStorageKeysModule.MultipageSignupMetadataMap, Json or "")
 end
 
-function AppStorageUtilitiesModule.getIncompleteSignupUserId() --[[ Line: 234 ]]
+function AppStorageUtilitiesModule.getIncompleteSignupUserId()
 	-- upvalues: AppStorageUtilitiesModule (copy), HttpService (copy)
 	local MultipageSignupMetadataMap = AppStorageUtilitiesModule.getMultipageSignupMetadataMap()
 	
@@ -209,7 +209,7 @@ function AppStorageUtilitiesModule.getIncompleteSignupUserId() --[[ Line: 234 ]]
 	end
 end
 
-function AppStorageUtilitiesModule.setIncompleteSignupUserId(IncompleteSignupUserId) --[[ Line: 252 ]]
+function AppStorageUtilitiesModule.setIncompleteSignupUserId(IncompleteSignupUserId)
 	-- upvalues: GetFFlagEnableMultiPageSignupFunction (copy), AppStorageUtilitiesModule (copy), HttpService (copy)
 	if GetFFlagEnableMultiPageSignupFunction() then
 		local MultipageSignupMetadataMap = AppStorageUtilitiesModule.getMultipageSignupMetadataMap()
@@ -225,7 +225,7 @@ function AppStorageUtilitiesModule.setIncompleteSignupUserId(IncompleteSignupUse
 	end
 end
 
-function AppStorageUtilitiesModule.getIncompleteSignupUsername() --[[ Line: 268 ]]
+function AppStorageUtilitiesModule.getIncompleteSignupUsername()
 	-- upvalues: AppStorageUtilitiesModule (copy), HttpService (copy)
 	local MultipageSignupMetadataMap = AppStorageUtilitiesModule.getMultipageSignupMetadataMap()
 	
@@ -238,7 +238,7 @@ function AppStorageUtilitiesModule.getIncompleteSignupUsername() --[[ Line: 268 
 	end
 end
 
-function AppStorageUtilitiesModule.setIncompleteSignupUsername(IncompleteSignupUsername) --[[ Line: 286 ]]
+function AppStorageUtilitiesModule.setIncompleteSignupUsername(IncompleteSignupUsername)
 	-- upvalues: GetFFlagEnableMultiPageSignupFunction (copy), AppStorageUtilitiesModule (copy), HttpService (copy)
 	if GetFFlagEnableMultiPageSignupFunction() then
 		local MultipageSignupMetadataMap = AppStorageUtilitiesModule.getMultipageSignupMetadataMap()
@@ -254,7 +254,7 @@ function AppStorageUtilitiesModule.setIncompleteSignupUsername(IncompleteSignupU
 	end
 end
 
-function getMultiPageSignupKey(p1) --[[ Line: 302 ]]
+function getMultiPageSignupKey(p1)
 	-- upvalues: AppStorageUtilitiesModule (copy), HttpService (copy)
 	local MultipageSignupMetadataMap = AppStorageUtilitiesModule.getMultipageSignupMetadataMap()
 	
@@ -267,7 +267,7 @@ function getMultiPageSignupKey(p1) --[[ Line: 302 ]]
 	end
 end
 
-function setMultiPageSignupKey(Key, p1) --[[ Line: 314 ]]
+function setMultiPageSignupKey(Key, p1)
 	-- upvalues: AppStorageUtilitiesModule (copy), HttpService (copy)
 	if game:GetEngineFeature("MultipageSignupMetadataMapKeyAvailable") then
 		local MultipageSignupMetadataMap = AppStorageUtilitiesModule.getMultipageSignupMetadataMap()
@@ -283,15 +283,15 @@ function setMultiPageSignupKey(Key, p1) --[[ Line: 314 ]]
 	end
 end
 
-function AppStorageUtilitiesModule.getPasskeySignupUsername() --[[ Line: 330 ]]
+function AppStorageUtilitiesModule.getPasskeySignupUsername()
 	return getMultiPageSignupKey("PasskeySignupName")
 end
 
-function AppStorageUtilitiesModule.setPasskeySignupUsername(p1) --[[ Line: 334 ]]
+function AppStorageUtilitiesModule.setPasskeySignupUsername(p1)
 	setMultiPageSignupKey("PasskeySignupName", p1)
 end
 
-function AppStorageUtilitiesModule.getPreviousAccountsList() --[[ Line: 338 ]]
+function AppStorageUtilitiesModule.getPreviousAccountsList()
 	-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy), HttpService (copy)
 	if game:GetEngineFeature("PreviousAccountsListAvailable") then
 		local Item = AppStorageService:GetItem(AuthLocalStorageKeysModule.PreviousAccountsList) or ""
@@ -302,7 +302,7 @@ function AppStorageUtilitiesModule.getPreviousAccountsList() --[[ Line: 338 ]]
 	end
 end
 
-function AppStorageUtilitiesModule.setPreviousAccountsList(Input) --[[ Line: 352 ]]
+function AppStorageUtilitiesModule.setPreviousAccountsList(Input)
 	-- upvalues: HttpService (copy), AppStorageService (copy), AuthLocalStorageKeysModule (copy)
 	if game:GetEngineFeature("PreviousAccountsListAvailable") then
 		AppStorageService:SetItem(AuthLocalStorageKeysModule.PreviousAccountsList, (HttpService:JSONEncode(Input)))
@@ -310,26 +310,26 @@ function AppStorageUtilitiesModule.setPreviousAccountsList(Input) --[[ Line: 352
 	end
 end
 
-function AppStorageUtilitiesModule.getLastSuccessfulSignInMethod() --[[ Line: 363 ]]
+function AppStorageUtilitiesModule.getLastSuccessfulSignInMethod()
 	-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
 	return if game:GetEngineFeature("LastSuccessfulSignInMethodKeyAvailable") then AppStorageService:GetItem(AuthLocalStorageKeysModule.LastSuccessfulSignInMethod) else ""
 end
 
-function AppStorageUtilitiesModule.setLastSuccessfulSignInMethod(Value) --[[ Line: 370 ]]
+function AppStorageUtilitiesModule.setLastSuccessfulSignInMethod(Value)
 	-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
 	if game:GetEngineFeature("LastSuccessfulSignInMethodKeyAvailable") then
 		AppStorageService:SetItem(AuthLocalStorageKeysModule.LastSuccessfulSignInMethod, Value)
 	end
 end
 
-function AppStorageUtilitiesModule.setDiscoveryClientFallbackCache(Value) --[[ Line: 376 ]]
+function AppStorageUtilitiesModule.setDiscoveryClientFallbackCache(Value)
 	-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
 	if game:GetEngineFeature("UniversalAppDiscoveryClientFallbackCacheStorageKey") then
 		AppStorageService:SetItem(AuthLocalStorageKeysModule.DiscoveryClientFallbackCache, Value)
 	end
 end
 
-function AppStorageUtilitiesModule.flush() --[[ Line: 382 ]]
+function AppStorageUtilitiesModule.flush()
 	-- upvalues: AppStorageService (copy)
 	AppStorageService:flush()
 end

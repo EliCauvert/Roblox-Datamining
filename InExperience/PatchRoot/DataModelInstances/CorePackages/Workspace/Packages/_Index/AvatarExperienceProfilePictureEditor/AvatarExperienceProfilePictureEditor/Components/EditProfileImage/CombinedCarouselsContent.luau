@@ -13,7 +13,7 @@ local GetAssetPickerStatusModule = require(AvatarExperienceProfilePictureEditor.
 local TextKeysModule = require(AvatarExperienceProfilePictureEditor.Common.TextKeys)
 local UseEditProfileImageActionsFunction = require(AvatarExperienceProfilePictureEditor.Context.EditProfileImageActionsContext).useEditProfileImageActions
 
-return function(p1) --[[ Line: 52 | Named "CombinedCarouselsContent" ]]
+return function(p1)
 	-- upvalues: UseEditProfileImageActionsFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), GetAssetPickerStatusModule (copy), ReactModule (copy), ShopMoreCarouselTileModule (copy), ScrollSectionModule (copy), View (copy), AssetPickerCarouselModule (copy), IconName (copy)
 	local UseEditProfileImageActionsResult = UseEditProfileImageActionsFunction()
 	local UseLocalizationResult = UseLocalizationFunction({

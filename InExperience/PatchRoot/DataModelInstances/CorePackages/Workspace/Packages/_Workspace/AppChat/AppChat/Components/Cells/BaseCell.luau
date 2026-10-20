@@ -23,29 +23,29 @@ local config = {
 	Size = UDim2.new(1, 0, 0, 48),
 	BackgroundColor3 = Color3.fromRGB(255, 255, 255),
 	onPressedBackgroundColor3 = Color3.fromRGB(242, 242, 242),
-	onActivated = function() --[[ Line: 51 ]]
+	onActivated = function()
 		print("BaseCell onActivated")
 	end,
 	dividerColor3 = Color3.fromRGB(227, 227, 227)
 }
 
-return MemoFunction(function(p1) --[[ Line: 61 | Named "BaseCell" ]]
+return MemoFunction(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStateFunction (copy), ControlState (copy), ReactModule (copy), UseMemoFunction (copy), UseCursorFunction (copy), FoundationModule (copy), MemoResult (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseStateResult, UseStateResult2 = UseStateFunction(ControlState.Initialize)
-	local UseResult = ReactModule.useCallback(function(_, p2) --[[ Line: 65 ]]
+	local UseResult = ReactModule.useCallback(function(_, p2)
 		-- upvalues: JoinResult (copy), UseStateResult2 (copy)
 		if not JoinResult.isDisabled then
 			UseStateResult2(p2)
 		end
 	end, { JoinResult.isDisabled })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 71 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: JoinResult (copy)
 		if not JoinResult.isDisabled then
 			JoinResult.onActivated()
 		end
 	end, { JoinResult.isDisabled, JoinResult.onActivated })
-	local UseMemoResult = UseMemoFunction(function() --[[ Line: 77 ]]
+	local UseMemoResult = UseMemoFunction(function()
 		-- upvalues: UseStateResult (copy), ControlState (upval), ReactModule (upval), JoinResult (copy)
 		return if UseStateResult == ControlState.Pressed then ReactModule.createElement("ImageLabel", {
 			BorderSizePixel = 0,
@@ -58,7 +58,7 @@ return MemoFunction(function(p1) --[[ Line: 61 | Named "BaseCell" ]]
 		JoinResult.onPressedBackground3,
 		JoinResult.onPressedBackgroundTransparency
 	})
-	local UseMemoResult1 = UseMemoFunction(function() --[[ Line: 87 ]]
+	local UseMemoResult1 = UseMemoFunction(function()
 		-- upvalues: JoinResult (copy), ReactModule (upval)
 		return if JoinResult.showDivider then ReactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
 			layout = ReactModule.createElement("UIListLayout", {
@@ -92,7 +92,7 @@ return MemoFunction(function(p1) --[[ Line: 61 | Named "BaseCell" ]]
 		BackgroundTransparency = JoinResult.BackgroundTransparency,
 		LayoutOrder = JoinResult.LayoutOrder,
 		BorderSizePixel = 0
-	}, (UseMemoFunction(function() --[[ Line: 113 ]]
+	}, (UseMemoFunction(function()
 		-- upvalues: CryoModule (upval), JoinResult (copy), UseMemoResult (copy), UseMemoResult1 (copy)
 		return CryoModule.Dictionary.join(JoinResult.children or {}, { overlay = UseMemoResult, divider = UseMemoResult1 })
 	end, { JoinResult.children, UseMemoResult, UseMemoResult1 })))

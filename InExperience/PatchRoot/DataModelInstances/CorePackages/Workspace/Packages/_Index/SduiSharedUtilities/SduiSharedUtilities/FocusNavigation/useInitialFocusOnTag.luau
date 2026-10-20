@@ -5,12 +5,12 @@ local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
 local ResponsiveModule = require(Parent.Responsive)
 local FFlagLuaAppMediaGalleryGamepadSupport = require(Parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
 
-return function(Tag, p1) --[[ Line: 13 | Named "useInitialFocusOnTag" ]]
+return function(Tag, p1)
 	-- upvalues: FFlagLuaAppMediaGalleryGamepadSupport (copy), ResponsiveModule (copy), ReactFocusNavigationModule (copy), ReactModule (copy), CollectionService (copy)
 	local IsUseLastInputResultMatch: boolean = if FFlagLuaAppMediaGalleryGamepadSupport then ResponsiveModule.useLastInput() == ResponsiveModule.Input.Directional else ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Directional
 	local UseFocusGuiObjectResult = ReactFocusNavigationModule.useFocusGuiObject()
 	local UseRefResult = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 20 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsUseLastInputResultMatch (copy), p1 (copy), CollectionService (upval), Tag (copy), UseRefResult (copy), UseFocusGuiObjectResult (copy)
 		if not IsUseLastInputResultMatch then return end
 		local Current = p1.current
@@ -24,7 +24,7 @@ return function(Tag, p1) --[[ Line: 13 | Named "useInitialFocusOnTag" ]]
 				return
 			end
 		end
-		local Connection = CollectionService:GetInstanceAddedSignal(Tag):Connect(function(Tagged) --[[ Line: 38 ]]
+		local Connection = CollectionService:GetInstanceAddedSignal(Tag):Connect(function(Tagged)
 			-- upvalues: UseRefResult (upval), Current (copy), UseFocusGuiObjectResult (upval)
 			if not UseRefResult.current and Current and Tagged:IsDescendantOf(Current) then
 				UseRefResult.current = true
@@ -32,7 +32,7 @@ return function(Tag, p1) --[[ Line: 13 | Named "useInitialFocusOnTag" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 45 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end

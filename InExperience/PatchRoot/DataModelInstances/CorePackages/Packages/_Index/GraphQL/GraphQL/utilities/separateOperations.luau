@@ -9,7 +9,7 @@ local VisitFunction = require(Parent.language.visitor).visit
 local Callback = nil
 local Callback1 = nil
 
-local function separateOperations(p1) --[[ Line: 38 ]]
+local function separateOperations(p1)
 	-- upvalues: Kind (copy), Callback (ref), Set (copy), Callback1 (ref), Array (copy)
 	local List = {}
 	local t = {}
@@ -33,7 +33,7 @@ local function separateOperations(p1) --[[ Line: 38 ]]
 		end
 		t1[value.name and value.name.value or ""] = {
 			kind = Kind.DOCUMENT,
-			definitions = Array.filter(p1.definitions, function(p2) --[[ Line: 81 ]]
+			definitions = Array.filter(p1.definitions, function(p2)
 				-- upvalues: value (copy), Kind (upval), NewSet (copy)
 				return p2 == value or p2.kind == Kind.FRAGMENT_DEFINITION and NewSet:has(p2.name.value)
 			end)
@@ -42,7 +42,7 @@ local function separateOperations(p1) --[[ Line: 38 ]]
 	return t1
 end
 
-Callback1 = function(NewResult, p2, p3) --[[ Line: 95 | Named "collectTransitiveDependencies" ]]
+Callback1 = function(NewResult, p2, p3)
 	-- upvalues: Callback1 (ref)
 	if not NewResult:has(p3) then
 		NewResult:add(p3)
@@ -56,11 +56,11 @@ Callback1 = function(NewResult, p2, p3) --[[ Line: 95 | Named "collectTransitive
 	end
 end
 
-Callback = function(SelectionSet) --[[ Line: 112 | Named "collectDependencies" ]]
+Callback = function(SelectionSet)
 	-- upvalues: VisitFunction (copy)
 	local List = {}
 	VisitFunction(SelectionSet, {
-		FragmentSpread = function(_, p4) --[[ Line: 116 ]]
+		FragmentSpread = function(_, p4)
 			-- upvalues: List (copy)
 			table.insert(List, p4.name.value)
 		end

@@ -20,7 +20,7 @@ local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXMigrateBuilderIcons = AvatarExperienceFlagsModule.FFlagAXMigrateBuilderIcons
 local FFlagAXHideHeadAdjustmentForDefaultHead = AvatarExperienceFlagsModule.FFlagAXHideHeadAdjustmentForDefaultHead
 
-return function(p1) --[[ Line: 37 | Named "useAdvancedCustomizationControlBarProps" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseNavigationFunction (copy), UseAvatarRouteFunction (copy), UseSelectorFunction (copy), SelectColorAdjustmentButtonColor (copy), ReactModule (copy), AvatarScreen (copy), SlotBasedEditorAnalytics (copy), MenuItemEnumModule (copy), FFlagAXHideHeadAdjustmentForDefaultHead (copy), SelectHasDynamicHead (copy), FFlagAXMigrateBuilderIcons (copy), IconName (copy), IconVariant (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseNavigationResult = UseNavigationFunction()
@@ -28,7 +28,7 @@ return function(p1) --[[ Line: 37 | Named "useAdvancedCustomizationControlBarPro
 	local UseSelectorResult = UseSelectorFunction(SelectColorAdjustmentButtonColor)
 	local Size600 = UseTokensResult.Size.Size_600
 	local Name = p1.avatarRoute and (p1.avatarRoute.opaque and p1.avatarRoute.opaque.name)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 48 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), UseAvatarRouteResult (copy), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
 		UseNavigationResult.navigate(AvatarScreen.AccessoryAdjustment)
 		
@@ -36,7 +36,7 @@ return function(p1) --[[ Line: 37 | Named "useAdvancedCustomizationControlBarPro
 			SlotBasedEditorAnalytics.trackAdvancedCustomizationControlBarClickFromSurface(MenuItemEnumModule.AvatarRefinement.AdjustAccessory, UseAvatarRouteResult.opaque.name)
 		end
 	end, { UseNavigationResult, UseAvatarRouteResult })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 58 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), UseAvatarRouteResult (copy), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
 		UseNavigationResult.navigate(AvatarScreen.BodyShape)
 		
@@ -44,7 +44,7 @@ return function(p1) --[[ Line: 37 | Named "useAdvancedCustomizationControlBarPro
 			SlotBasedEditorAnalytics.trackAdvancedCustomizationControlBarClickFromSurface(MenuItemEnumModule.AvatarRefinement.BodyScale, UseAvatarRouteResult.opaque.name)
 		end
 	end, { UseNavigationResult, UseAvatarRouteResult })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 68 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), UseAvatarRouteResult (copy), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
 		UseNavigationResult.navigate(AvatarScreen.HeadRefinement)
 		
@@ -52,7 +52,7 @@ return function(p1) --[[ Line: 37 | Named "useAdvancedCustomizationControlBarPro
 			SlotBasedEditorAnalytics.trackAdvancedCustomizationControlBarClickFromSurface(MenuItemEnumModule.AvatarRefinement.CustomizeHead, UseAvatarRouteResult.opaque.name)
 		end
 	end, { UseNavigationResult, UseAvatarRouteResult })
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 78 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseAvatarRouteResult (copy), AvatarScreen (upval), UseNavigationResult (copy), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
 		if UseAvatarRouteResult and UseAvatarRouteResult.current and UseAvatarRouteResult.current.name == AvatarScreen.LayeredMakeupSort then
 			UseNavigationResult.pop()
@@ -63,7 +63,7 @@ return function(p1) --[[ Line: 37 | Named "useAdvancedCustomizationControlBarPro
 			SlotBasedEditorAnalytics.trackAdvancedCustomizationControlBarClickFromSurface(MenuItemEnumModule.AvatarRefinement.ClothingLayers, UseAvatarRouteResult.opaque.name)
 		end
 	end, { UseNavigationResult, UseAvatarRouteResult })
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 93 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseAvatarRouteResult (copy), AvatarScreen (upval), UseNavigationResult (copy), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
 		if UseAvatarRouteResult and UseAvatarRouteResult.current and UseAvatarRouteResult.current.name == AvatarScreen.LayeredClothingSort then
 			UseNavigationResult.pop()
@@ -74,7 +74,7 @@ return function(p1) --[[ Line: 37 | Named "useAdvancedCustomizationControlBarPro
 			SlotBasedEditorAnalytics.trackAdvancedCustomizationControlBarClickFromSurface(MenuItemEnumModule.AvatarRefinement.MakeupLayers, UseAvatarRouteResult.opaque.name)
 		end
 	end, { UseNavigationResult, UseAvatarRouteResult })
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 108 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), UseAvatarRouteResult (copy), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
 		UseNavigationResult.navigate(AvatarScreen.ColorAdjustment)
 		
@@ -85,7 +85,7 @@ return function(p1) --[[ Line: 37 | Named "useAdvancedCustomizationControlBarPro
 	local UseSelectorResult1 = if FFlagAXHideHeadAdjustmentForDefaultHead then UseSelectorFunction(SelectHasDynamicHead) else nil
 	
 	return {
-		config = ReactModule.useMemo(function() --[[ Line: 121 ]]
+		config = ReactModule.useMemo(function()
 			-- upvalues: MenuItemEnumModule (upval), FFlagAXMigrateBuilderIcons (upval), IconName (upval), IconVariant (upval), UseResult (copy), Name (copy), AvatarScreen (upval), Size600 (copy), UseResult1 (copy), UseResult2 (copy), FFlagAXHideHeadAdjustmentForDefaultHead (upval), UseSelectorResult1 (copy), UseResult3 (copy), UseResult4 (copy), UseSelectorResult (copy), UseResult5 (copy)
 			return {
 				{

@@ -16,12 +16,12 @@ local config = {
 	unavailableBody = "Feature.Moments.Label.MomentUnavailableDefault"
 }
 
-return function(p1) --[[ Line: 34 | Named "ModeratedMomentItem" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), Players (copy), ReactModule (copy), UseImageLoadingStateFunction (copy), Image (copy), Skeleton (copy), View (copy), ConstantsModule (copy), Text (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local LocalPlayer = Players.LocalPlayer
 	local UserId = if LocalPlayer then LocalPlayer.UserId else nil
-	local UseMemoResult = ReactModule.useMemo(function(): boolean --[[ Line: 39 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): boolean
 		-- upvalues: UserId (copy), p1 (copy)
 		return UserId ~= nil and p1.creatorId == UserId
 	end, { p1.creatorId, UserId or false })

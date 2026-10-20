@@ -7,10 +7,10 @@ local Flag = false
 local v1 = nil
 local v2 = nil
 
-return function() --[[ Line: 12 ]]
+return function()
 	-- upvalues: FriendshipNotifsUseSendrExperimentV2 (copy), Flag (ref), v1 (ref), v2 (ref), IXPServiceWrapper (copy), FriendshipNotifsUseSendrLayerName (copy), FriendshipNotifsUseSendrEnabledForAll (copy), FriendshipNotifsUseSendrLayerValue (copy)
 	if FriendshipNotifsUseSendrExperimentV2 and not Flag then
-		v1, v7 = pcall(function() --[[ Line: 14 ]]
+		v1, v7 = pcall(function()
 			-- upvalues: Flag (upval), IXPServiceWrapper (upval), FriendshipNotifsUseSendrLayerName (upval)
 			Flag = true
 			

@@ -8,7 +8,7 @@ local Dialog = FoundationModule.Dialog
 local DialogSize = FoundationModule.Enums.DialogSize
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
-return function(p1) --[[ Line: 27 | Named "ArchiveGameDialog" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), ButtonVariant (copy), Dialog (copy), DialogSize (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		archiveGame = LocalizationStringsModule.ARCHIVE_GAME_ARCHIVE,
@@ -17,15 +17,15 @@ return function(p1) --[[ Line: 27 | Named "ArchiveGameDialog" ]]
 		title = LocalizationStringsModule.ARCHIVE_GAME_TITLE
 	})
 	local TestId = p1.testId or "archive-game-dialog"
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 35 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		p1.onArchive()
 	end, { p1.onArchive })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 38 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		p1.onCancel()
 	end, { p1.onCancel })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 42 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseLocalizationResult (copy), ButtonVariant (upval), UseResult (copy), UseResult1 (copy)
 		return {
 			LayoutOrder = 3,

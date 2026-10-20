@@ -16,7 +16,7 @@ local EventMap = {
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-return function(Frame) --[[ Line: 38 | Named "CommentActionsMenu" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), FoundationModule (copy), PopoverSide (copy), PopoverAlign (copy), ThreeDotsHorizontal (copy), InputSize (copy)
 	local OnCloseFunction = Frame.onClose
 	
@@ -32,11 +32,11 @@ return function(Frame) --[[ Line: 38 | Named "CommentActionsMenu" ]]
 			surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.ContextualMenu,
 			isFocusable = Frame.isOpen,
 			eventMap = EventMap,
-			eventHandlers = ReactModule.useMemo(function() --[[ Line: 40 ]]
+			eventHandlers = ReactModule.useMemo(function()
 				-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), OnCloseFunction (copy)
 				return {
 					[FocusNavigationEventNameEnum.NavigateBack] = {
-						handler = InputHandlersModule.onRelease(function(p1) --[[ Line: 43 ]]
+						handler = InputHandlersModule.onRelease(function(p1)
 							-- upvalues: OnCloseFunction (upval)
 							OnCloseFunction()
 							p1:cancel()

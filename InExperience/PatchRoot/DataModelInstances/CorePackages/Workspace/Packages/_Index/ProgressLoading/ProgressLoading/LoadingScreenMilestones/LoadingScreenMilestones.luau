@@ -9,13 +9,13 @@ local Outcome = ConstantsModule.Outcome
 local Milestone = ConstantsModule.Milestone
 local v1 = nil
 
-local function _(p1): string --[[ Line: 24 | Named "getTreatmentSubcategory" ]]
+local function _(p1): string
 	-- upvalues: ConstantsModule (copy)
 	return (if p1.host == ConstantsModule.Host.DeferredJoin then "DeferredJoin_" else "") .. (if p1.reducedMotion then "ReducedMotion_" else "") .. (if p1.holdEnabled then "HoldOn" else "HoldOff")
 end
 
 return {
-	start = function(p1) --[[ Line: 30 ]]
+	start = function(p1)
 		-- upvalues: v1 (ref), AbortReason (copy), ConstantsModule (copy), LoadingMilestoneTrackerModule (copy), LoadingMilestoneTelemetryModule (copy), Outcome (copy), Milestone (copy), TryMilestoneOperationModule (copy), Parent (copy)
 		if v1 then
 			v1.abort(AbortReason.Replaced)
@@ -31,7 +31,7 @@ return {
 			subcategory = Text
 		}
 		
-		local function _() --[[ Line: 46 | Named "discard" ]]
+		local function _()
 			-- upvalues: v2 (ref), LoadingMilestoneTrackerModule (upval)
 			local v4 = v2
 			v2 = nil
@@ -39,12 +39,12 @@ return {
 			return not v4 or LoadingMilestoneTrackerModule.discardMilestoneTracker(v4)
 		end
 		
-		local _ = function(p2) --[[ Line: 55 | Named "reportOutcome" ]]
+		local _ = function(p2)
 			-- upvalues: LoadingMilestoneTelemetryModule (upval), MilestoneSessionMetadata (ref)
 			LoadingMilestoneTelemetryModule.countMilestonesOutcome(MilestoneSessionMetadata, p2)
 		end
 		
-		local _ = function(Text, Text1) --[[ Line: 59 | Named "record" ]]
+		local _ = function(Text, Text1)
 			-- upvalues: v1 (upval), v3 (ref), t (copy), v2 (ref), LoadingMilestoneTrackerModule (upval), Outcome (upval), LoadingMilestoneTelemetryModule (upval), MilestoneSessionMetadata (ref)
 			local Text2 = if Text1 then Text .. "/" .. Text1 else Text
 			
@@ -65,7 +65,7 @@ return {
 		end
 		
 		v3 = {
-			dismissRequested = function(Text) --[[ Line: 74 ]]
+			dismissRequested = function(Text)
 				-- upvalues: v1 (upval), v3 (ref), NormalReady (ref), Milestone (upval), t (copy), v2 (ref), LoadingMilestoneTrackerModule (upval), Outcome (upval), LoadingMilestoneTelemetryModule (upval), MilestoneSessionMetadata (ref)
 				if v1 == v3 then
 					NormalReady = NormalReady or Text
@@ -90,7 +90,7 @@ return {
 					end
 				end
 			end,
-			contentVisible = function(Text) --[[ Line: 80 ]]
+			contentVisible = function(Text)
 				-- upvalues: t (copy), Milestone (upval), v1 (upval), v3 (ref), v2 (ref), LoadingMilestoneTrackerModule (upval), Outcome (upval), LoadingMilestoneTelemetryModule (upval), MilestoneSessionMetadata (ref)
 				if not t[Milestone.ScreenVisible] or t[Milestone.DismissStarted] then return end
 				local ContentVisible = Milestone.ContentVisible
@@ -113,7 +113,7 @@ return {
 					end
 				end
 			end,
-			record = function(Key) --[[ Line: 86 ]]
+			record = function(Key)
 				-- upvalues: v1 (upval), v3 (ref), t (copy), v2 (ref), LoadingMilestoneTrackerModule (upval), Outcome (upval), LoadingMilestoneTelemetryModule (upval), MilestoneSessionMetadata (ref)
 				if v1 == v3 then
 					if t[Key] then return end
@@ -132,7 +132,7 @@ return {
 					end
 				end
 			end,
-			complete = function() --[[ Line: 89 ]]
+			complete = function()
 				-- upvalues: v1 (upval), v3 (ref), Outcome (upval), v2 (ref), LoadingMilestoneTrackerModule (upval), NormalReady (ref), t (copy), Milestone (upval), Text (copy), ConstantsModule (upval), LoadingMilestoneTelemetryModule (upval), MilestoneSessionMetadata (ref)
 				if v1 ~= v3 then return end
 				v1 = nil
@@ -164,7 +164,7 @@ return {
 				v2 = nil
 				LoadingMilestoneTelemetryModule.countMilestonesOutcome(MilestoneSessionMetadata, Completed)
 			end,
-			abort = function(InitializationFailed) --[[ Line: 129 ]]
+			abort = function(InitializationFailed)
 				-- upvalues: v1 (upval), v3 (ref), v2 (ref), LoadingMilestoneTrackerModule (upval), Outcome (upval), LoadingMilestoneTelemetryModule (upval), MilestoneSessionMetadata (ref)
 				if v1 == v3 then
 					v1 = nil
@@ -180,7 +180,7 @@ return {
 		v1 = v3
 		local StartMilestoneTrackerResult = false
 		
-		if TryMilestoneOperationModule(function() --[[ Line: 141 ]]
+		if TryMilestoneOperationModule(function()
 			-- upvalues: MilestoneSessionMetadata (ref), LoadingMilestoneTelemetryModule (upval), Text (copy), Parent (upval), v2 (ref), StartMilestoneTrackerResult (ref), LoadingMilestoneTrackerModule (upval)
 			MilestoneSessionMetadata = LoadingMilestoneTelemetryModule.getMilestoneSessionMetadata(Text)
 			

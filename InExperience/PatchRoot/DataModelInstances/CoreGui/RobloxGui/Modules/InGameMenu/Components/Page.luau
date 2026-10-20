@@ -17,9 +17,9 @@ local ImageSetButton = UIBlox.Core.ImageSet.ImageSetButton
 local Image = FoundationModule.Image
 local ThemedTextLabelModule = require(script.Parent.ThemedTextLabel)
 
-local function renderWithSelectionCursor(p1, Callback) --[[ Line: 37 ]]
+local function renderWithSelectionCursor(p1, Callback)
 	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Roact (copy), Image (copy), AssetsModule (copy), CursorType (copy), ImageSetButton (copy), ThemedTextLabelModule (copy), ConstantsModule (copy), ZonePortalModule (copy), DirectionModule (copy)
-	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 38 ]]
+	return WithFoundationOrUIBloxStyleFunction(function(p2)
 		return {
 			Theme = {
 				IconEmphasis = {
@@ -32,7 +32,7 @@ local function renderWithSelectionCursor(p1, Callback) --[[ Line: 37 ]]
 				}
 			}
 		}
-	end, function(p2) --[[ Line: 51 ]]
+	end, function(p2)
 		-- upvalues: p1 (copy), FFlagCoreUiMigrateUIBloxToFoundation (upval), Roact (upval), Image (upval), AssetsModule (upval), Callback (copy), CursorType (upval), ImageSetButton (upval), ThemedTextLabelModule (upval), ConstantsModule (upval), ZonePortalModule (upval), DirectionModule (upval)
 		return Roact.createElement("TextButton", {
 			AutoButtonColor = false,
@@ -91,17 +91,17 @@ local function renderWithSelectionCursor(p1, Callback) --[[ Line: 37 ]]
 	end)
 end
 
-return InGameMenuDependenciesModule.RoactRodux.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 123 ]]
+return InGameMenuDependenciesModule.RoactRodux.UNSTABLE_connect2(nil, function(Callback)
 	-- upvalues: NavigateUpModule (copy)
 	return {
-		navigateUp = function() --[[ Line: 125 ]]
+		navigateUp = function()
 			-- upvalues: Callback (copy), NavigateUpModule (upval)
 			Callback(NavigateUpModule)
 		end
 	}
-end)(function(p1) --[[ Line: 117 | Named "Page" ]]
+end)(function(p1)
 	-- upvalues: WithCursorMigration (copy), renderWithSelectionCursor (copy)
-	return WithCursorMigration(function(p2) --[[ Line: 118 ]]
+	return WithCursorMigration(function(p2)
 		-- upvalues: renderWithSelectionCursor (upval), p1 (copy)
 		return renderWithSelectionCursor(p1, p2)
 	end)

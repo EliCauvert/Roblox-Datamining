@@ -16,7 +16,7 @@ ReportConfirmationContainer.defaultProps = {
 	isVoiceReport = false,
 	blockingUtility = require(CorePackages.Workspace.Packages.BlockingUtility),
 	voiceChatServiceManager = require(RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default,
-	closeMenu = function() --[[ Line: 36 ]] end
+	closeMenu = function() end
 }
 ReportConfirmationContainer.validateProps = TModule.interface({
 	player = TModule.strictInterface({
@@ -30,22 +30,22 @@ ReportConfirmationContainer.validateProps = TModule.interface({
 	reportAbuseAnalytics = TModule.optional(TModule.table)
 })
 
-local function _(p1, p2) --[[ Line: 57 | Named "getIsPlayerBlockedByUserId" ]]
+local function _(p1, p2)
 	-- upvalues: PromiseModule (copy)
-	return PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 58 ]]
+	return PromiseModule.new(function(Callback: (any) -> (), _)
 		-- upvalues: p1 (copy), p2 (copy)
 		Callback(p1:IsPlayerBlockedByUserId(p2))
 	end)
 end
 
-function ReportConfirmationContainer.init(p1) --[[ Line: 63 ]]
+function ReportConfirmationContainer.init(p1)
 	-- upvalues: GetFFlagVoiceARUnblockingUnmutingEnabledModule (copy), ConstantsModule (copy), ReportPages (copy), PromiseModule (copy)
 	local Player = p1.props.player
 	local Participants = p1.props.voiceChatServiceManager.participants
 	p1:setState({ absoluteWidth = 0 })
 	
 	if p1.props.onSizeChanged then
-		p1.props.onSizeChanged:Connect(function(p2) --[[ Line: 72 ]]
+		p1.props.onSizeChanged:Connect(function(p2)
 			-- upvalues: p1 (copy)
 			p1:setState({ absoluteWidth = p2.X })
 		end)
@@ -53,17 +53,17 @@ function ReportConfirmationContainer.init(p1) --[[ Line: 63 ]]
 	local Participant = Participants[tostring(Player.UserId)]
 	p1.userFullName = Player.DisplayName .. "(@" .. Player.Name .. ")"
 	
-	function p1.onMuteCheckboxActivated(MuteFlipped) --[[ Line: 82 ]]
+	function p1.onMuteCheckboxActivated(MuteFlipped)
 		-- upvalues: p1 (copy)
 		p1:setState({ muteFlipped = MuteFlipped })
 	end
 	
-	function p1.onBlockCheckboxActivated(BlockFlipped) --[[ Line: 88 ]]
+	function p1.onBlockCheckboxActivated(BlockFlipped)
 		-- upvalues: p1 (copy)
 		p1:setState({ blockFlipped = BlockFlipped })
 	end
 	
-	function p1.processMuteAndBlocking() --[[ Line: 94 ]]
+	function p1.processMuteAndBlocking()
 		-- upvalues: p1 (copy), Player (copy), GetFFlagVoiceARUnblockingUnmutingEnabledModule (upval), ConstantsModule (upval)
 		local BlockFlipped = p1.state.blockFlipped
 		local MuteFlipped = p1.state.muteFlipped
@@ -95,7 +95,7 @@ function ReportConfirmationContainer.init(p1) --[[ Line: 63 ]]
 		p1.props.closeMenu()
 	end
 	
-	function p1.onActionSelectionDoneActivated(BlockFlipped, MuteFlipped) --[[ Line: 151 ]]
+	function p1.onActionSelectionDoneActivated(BlockFlipped, MuteFlipped)
 		-- upvalues: p1 (copy), ReportPages (upval)
 		p1:setState({ blockFlipped = BlockFlipped, muteFlipped = MuteFlipped })
 		
@@ -108,12 +108,12 @@ function ReportConfirmationContainer.init(p1) --[[ Line: 63 ]]
 		end
 	end
 	
-	function p1.onYesOrNoConfirmation() --[[ Line: 174 ]]
+	function p1.onYesOrNoConfirmation()
 		-- upvalues: p1 (copy)
 		p1.processMuteAndBlocking()
 	end
 	
-	function p1.onYesOrNoCancel() --[[ Line: 178 ]]
+	function p1.onYesOrNoCancel()
 		-- upvalues: p1 (copy), ReportPages (upval)
 		p1:setState({ currentPage = ReportPages.SelectActions })
 	end
@@ -130,16 +130,16 @@ function ReportConfirmationContainer.init(p1) --[[ Line: 63 ]]
 	end
 	local BlockingUtility = p1.props.blockingUtility
 	local UserId = Player.UserId
-	PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 58 ]]
+	PromiseModule.new(function(Callback: (any) -> (), _)
 		-- upvalues: BlockingUtility (copy), UserId (copy)
 		Callback(BlockingUtility:IsPlayerBlockedByUserId(UserId))
-	end):andThen(function(Result) --[[ Line: 201 ]]
+	end):andThen(function(Result)
 		-- upvalues: p1 (copy)
 		p1:setState({ targetInitiallyBlocked = Result, blockFlipped = Result })
 	end)
 end
 
-function ReportConfirmationContainer.renderContent(p1) --[[ Line: 209 ]]
+function ReportConfirmationContainer.renderContent(p1)
 	-- upvalues: RoactModule (copy), ReportActionSelectionModule (copy), RobloxTranslatorModule (copy), ReportActionAreYouSureModule (copy), ReportPages (copy)
 	local CurrentPage = p1.state.currentPage
 	local UiScale = 1.3
@@ -193,9 +193,9 @@ function ReportConfirmationContainer.renderContent(p1) --[[ Line: 209 ]]
 	return v1
 end
 
-function ReportConfirmationContainer.render(p1) --[[ Line: 297 ]]
+function ReportConfirmationContainer.render(p1)
 	-- upvalues: FFlagCoreUiMigrateUIBloxToFoundation (copy), WithStyleFunction (copy)
-	return if FFlagCoreUiMigrateUIBloxToFoundation then p1:renderContent() else WithStyleFunction(function(_) --[[ Line: 301 ]]
+	return if FFlagCoreUiMigrateUIBloxToFoundation then p1:renderContent() else WithStyleFunction(function(_)
 		-- upvalues: p1 (copy)
 		return p1:renderContent()
 	end)

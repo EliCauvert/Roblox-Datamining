@@ -15,9 +15,9 @@ local UseLibraryChatComposerModule = require(script.Parent.useLibraryChatCompose
 local ChatTypesModule = require(BuildExperience.Chat.chatTypes)
 local FFlagBuildExperienceAnswerFormModule = require(BuildExperience.Flags.FFlagBuildExperienceAnswerForm)
 
-local function noop() --[[ Line: 20 ]] end
+local function noop() end
 
-return function(p1) --[[ Line: 22 | Named "useLibraryChatSheetViewModel" ]]
+return function(p1)
 	-- upvalues: noop (copy), SignalsReactModule (copy), GetAssistantBuildStoreModule (copy), GetCreatorAgentResumeStoreModule (copy), GetCurrentExperienceProjectModule (copy), UseChatSessionCoreModule (copy), GetLibraryStoreModule (copy), UseChatPlaytestFooterModule (copy), UseLibraryChatComposerModule (copy), ReactModule (copy), ChatTypesModule (copy), FoundationModule (copy), FFlagBuildExperienceAnswerFormModule (copy)
 	local OnClose = p1.onClose or noop
 	local NoIsOpen = p1.isOpen == nil or p1.isOpen
@@ -36,13 +36,13 @@ return function(p1) --[[ Line: 22 | Named "useLibraryChatSheetViewModel" ]]
 	})
 	local ChatSheetPlaytestCta = UseChatPlaytestFooterModule(UseChatSessionCoreModuleResult, "ChatSheetPlaytestCta")
 	local UseLibraryChatComposerModuleResult = UseLibraryChatComposerModule(UseChatSessionCoreModuleResult, NoIsOpen)
-	ReactModule.useEffect(function() --[[ Line: 42 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: NoIsOpen (copy), UseSignalStateResult (copy), OnClose (copy)
 		if NoIsOpen and UseSignalStateResult then
 			OnClose()
 		end
 	end, { NoIsOpen, UseSignalStateResult, OnClose })
-	ReactModule.useEffect(function() --[[ Line: 48 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: NoIsOpen (copy), CreatorAgentResumeStoreModule (copy), UniverseId (copy), p1 (copy)
 		if not NoIsOpen then
 			CreatorAgentResumeStoreModule.setActiveTarget(nil)
@@ -51,7 +51,7 @@ return function(p1) --[[ Line: 22 | Named "useLibraryChatSheetViewModel" ]]
 		end
 		CreatorAgentResumeStoreModule.setActiveTarget({ universeId = UniverseId, sessionId = p1.sessionId })
 		
-		return function() --[[ Line: 57 ]]
+		return function()
 			-- upvalues: CreatorAgentResumeStoreModule (upval)
 			CreatorAgentResumeStoreModule.setActiveTarget(nil)
 		end
@@ -88,7 +88,7 @@ return function(p1) --[[ Line: 22 | Named "useLibraryChatSheetViewModel" ]]
 		onComposerImagesChanged = UseChatSessionCoreModuleResult.setComposerImages,
 		onRetryComposerImage = UseChatSessionCoreModuleResult.retryComposerImage,
 		composerResourceAttachments = UseChatSessionCoreModuleResult.composerResourceAttachments,
-		onRemoveComposerResourceAttachment = ReactModule.useCallback(function(p2) --[[ Line: 64 ]]
+		onRemoveComposerResourceAttachment = ReactModule.useCallback(function(p2)
 			-- upvalues: ComposerResourceAttachments (copy), RemoveComposerResourceAttachmentAtIndexFunction (copy), GetLibraryStoreModule (upval), ChatTypesModule (upval)
 			local ComposerResourceAttachment = ComposerResourceAttachments[p2]
 			RemoveComposerResourceAttachmentAtIndexFunction(p2)
@@ -102,7 +102,7 @@ return function(p1) --[[ Line: 22 | Named "useLibraryChatSheetViewModel" ]]
 			ComposerResourceAttachments,
 			RemoveComposerResourceAttachmentAtIndexFunction
 		}),
-		onActivateComposerResourceAttachment = ReactModule.useCallback(function(p2) --[[ Line: 71 ]]
+		onActivateComposerResourceAttachment = ReactModule.useCallback(function(p2)
 			-- upvalues: ComposerResourceAttachments (copy), GetLibraryStoreModule (upval), ChatTypesModule (upval)
 			local ComposerResourceAttachment = ComposerResourceAttachments[p2]
 			
@@ -120,7 +120,7 @@ return function(p1) --[[ Line: 22 | Named "useLibraryChatSheetViewModel" ]]
 		canSendWhileResponding = UseChatSessionCoreModuleResult.canSendWhileResponding,
 		allowsComposerTypingWhileResponding = true,
 		reservesHandleSpace = true,
-		onSend = ReactModule.useCallback(function(p2) --[[ Line: 78 ]]
+		onSend = ReactModule.useCallback(function(p2)
 			-- upvalues: ComposerResourceAttachments (copy), ChatTypesModule (upval), SendMessageFunction (copy), GetLibraryStoreModule (upval)
 			local List = {}
 			

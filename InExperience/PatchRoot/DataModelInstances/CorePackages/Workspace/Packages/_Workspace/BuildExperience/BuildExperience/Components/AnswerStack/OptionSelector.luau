@@ -8,7 +8,7 @@ local config = {
 	affordance = FoundationModule.Enums.StateLayerAffordance.None
 }
 
-return function(Frame: Frame) --[[ Line: 24 | Named "OptionSelector" ]]
+return function(Frame: Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), config (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsIsSelected = Frame.isSelected == true

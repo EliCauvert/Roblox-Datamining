@@ -2,7 +2,7 @@
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1, JoinResult, IdsDelimiter) --[[ Line: 7 ]]
+function Module.new(p1, JoinResult, IdsDelimiter)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		ids = Module.makeArray(JoinResult),
@@ -10,23 +10,23 @@ function Module.new(p1, JoinResult, IdsDelimiter) --[[ Line: 7 ]]
 	}, p1))
 end
 
-function Module:setIds(p1) --[[ Line: 14 ]]
+function Module:setIds(p1)
 	-- upvalues: Module (copy)
 	self.ids = Module.makeArray(p1)
 end
 
-function Module.makeArray(p1) --[[ Line: 18 ]]
+function Module.makeArray(p1)
 	return if type(p1) == "table" then p1 else { p1 }
 end
 
-function Module:__tostring(): string --[[ Line: 25 ]]
+function Module:__tostring(): string
 	return table.concat(self.ids, self.delimiter)
 end
 
 local RequestBuilderModule = {}
 RequestBuilderModule.__index = RequestBuilderModule
 
-function RequestBuilderModule.new(Text: string, p1) --[[ Line: 54 ]]
+function RequestBuilderModule.new(Text: string, p1)
 	-- upvalues: RequestBuilderModule (copy)
 	local config = {
 		configurableIds = nil,
@@ -45,13 +45,13 @@ function RequestBuilderModule.new(Text: string, p1) --[[ Line: 54 ]]
 	return config
 end
 
-function RequestBuilderModule:path(Text: string) --[[ Line: 80 ]]
+function RequestBuilderModule:path(Text: string)
 	table.insert(self.pathElements, (Text:gsub("^/", ""):gsub("/$", "")))
 	
 	return self
 end
 
-function RequestBuilderModule:id(p1, p2) --[[ Line: 87 ]]
+function RequestBuilderModule:id(p1, p2)
 	-- upvalues: Module (copy)
 	if not p2 and #self.pathElements < 1 then
 		warn("Cannot name id or ids because there is no leading path segment and no name is provided")
@@ -63,7 +63,7 @@ function RequestBuilderModule:id(p1, p2) --[[ Line: 87 ]]
 	return self
 end
 
-function RequestBuilderModule:queryArgWithIds(p1, p2) --[[ Line: 99 ]]
+function RequestBuilderModule:queryArgWithIds(p1, p2)
 	-- upvalues: CryoModule (copy), Module (copy)
 	local JoinResult = CryoModule.List.join(p2, self.namedIds[p1] or {})
 	self.namedIds[p1] = JoinResult
@@ -73,14 +73,14 @@ function RequestBuilderModule:queryArgWithIds(p1, p2) --[[ Line: 99 ]]
 	return self
 end
 
-function RequestBuilderModule:expandedQueryArgsWithIds(p1, p2) --[[ Line: 109 ]]
+function RequestBuilderModule:expandedQueryArgsWithIds(p1, p2)
 	self.useExpandedForm[p1] = true
 	self:queryArgWithIds(p1, p2)
 	
 	return self
 end
 
-function RequestBuilderModule:queryArgs(p1) --[[ Line: 115 ]]
+function RequestBuilderModule:queryArgs(p1)
 	-- upvalues: CryoModule (copy)
 	self.args = CryoModule.Dictionary.join(self.args, p1)
 	self.options.queryArgs = CryoModule.Dictionary.join(p1, self.options.queryArgs or {})
@@ -88,30 +88,30 @@ function RequestBuilderModule:queryArgs(p1) --[[ Line: 115 ]]
 	return self
 end
 
-function RequestBuilderModule:body(PostBody) --[[ Line: 121 ]]
+function RequestBuilderModule:body(PostBody)
 	self.options.postBody = PostBody
 	
 	return self
 end
 
-function RequestBuilderModule:headers(Headers) --[[ Line: 126 ]]
+function RequestBuilderModule:headers(Headers)
 	self.options.headers = Headers
 	
 	return self
 end
 
-function RequestBuilderModule.makeKeyMapper(p1) --[[ Line: 131 ]]
-	return function(p2) --[[ Line: 132 ]]
+function RequestBuilderModule.makeKeyMapper(p1)
+	return function(p2)
 		-- upvalues: p1 (copy)
 		return p1:getStatusIds() and p1:makeStatusUrl(p2) or p1:makeNamedIdsUrl(p2)
 	end
 end
 
-function RequestBuilderModule:_normalize(Text: string): string --[[ Line: 139 ]]
+function RequestBuilderModule:_normalize(Text: string): string
 	return Text:gsub("/+", "/")
 end
 
-function RequestBuilderModule:makeUri() --[[ Line: 143 ]]
+function RequestBuilderModule:makeUri()
 	local Text = ""
 	
 	for _, pathElement in ipairs(self.pathElements) do
@@ -120,7 +120,7 @@ function RequestBuilderModule:makeUri() --[[ Line: 143 ]]
 	return self:_normalize(Text)
 end
 
-local function concatArguments(Text, p1, p2, UseExpandedFormEntry) --[[ Line: 151 ]]
+local function concatArguments(Text, p1, p2, UseExpandedFormEntry)
 	-- upvalues: concatArguments (copy)
 	if not UseExpandedFormEntry then
 		local Text1 = tostring(p1) .. "=" .. tostring(p2)
@@ -133,7 +133,7 @@ local function concatArguments(Text, p1, p2, UseExpandedFormEntry) --[[ Line: 15
 	return Text
 end
 
-function RequestBuilderModule:makeQueryArgs(p3, p4): string --[[ Line: 168 ]]
+function RequestBuilderModule:makeQueryArgs(p3, p4): string
 	-- upvalues: concatArguments (copy)
 	self:_plugInConfigurableIds(p3)
 	local Text = ""
@@ -146,13 +146,13 @@ function RequestBuilderModule:makeQueryArgs(p3, p4): string --[[ Line: 168 ]]
 	return if Text:len() > 1 then "?" .. Text else ""
 end
 
-function RequestBuilderModule:makeUrl(p5, p6): string --[[ Line: 184 ]]
+function RequestBuilderModule:makeUrl(p5, p6): string
 	self:_plugInConfigurableIds(p5)
 	
 	return self.baseUrl .. self:makeUri() .. self:makeQueryArgs(p5, p6)
 end
 
-function RequestBuilderModule:makeStatusUrl(p5): string --[[ Line: 190 ]]
+function RequestBuilderModule:makeStatusUrl(p5): string
 	local Text = self.baseUrl .. self:makeUri()
 	
 	if not p5 then
@@ -166,29 +166,29 @@ function RequestBuilderModule:makeStatusUrl(p5): string --[[ Line: 190 ]]
 	return Text .. "?" .. v1
 end
 
-function RequestBuilderModule:makeNamedIdsUrl(p6) --[[ Line: 205 ]]
+function RequestBuilderModule:makeNamedIdsUrl(p6)
 	return self:makeUrl(p6, true)
 end
 
-function RequestBuilderModule:makeOptions() --[[ Line: 209 ]]
+function RequestBuilderModule:makeOptions()
 	return self.options
 end
 
-function RequestBuilderModule:_plugInConfigurableIds(p6) --[[ Line: 213 ]]
+function RequestBuilderModule:_plugInConfigurableIds(p6)
 	if p6 ~= nil and self.configurableIds then
 		self.configurableIds:setIds(p6)
 	end
 end
 
-function RequestBuilderModule.getIds(p6) --[[ Line: 219 ]]
+function RequestBuilderModule.getIds(p6)
 	return if p6.configurableIds and p6.configurableIds.ids then p6.configurableIds.ids elseif p6.statusIds then p6.statusIds else {}
 end
 
-function RequestBuilderModule:getNamedIds() --[[ Line: 229 ]]
+function RequestBuilderModule:getNamedIds()
 	return self.namedIds
 end
 
-function RequestBuilderModule:setStatusIds(p6) --[[ Line: 233 ]]
+function RequestBuilderModule:setStatusIds(p6)
 	-- upvalues: CryoModule (copy)
 	if self.configurableIds then
 		warn("Cannot set statusIds because ids already provided in URl")
@@ -201,11 +201,11 @@ function RequestBuilderModule:setStatusIds(p6) --[[ Line: 233 ]]
 	end
 end
 
-function RequestBuilderModule.getStatusIds(p6) --[[ Line: 242 ]]
+function RequestBuilderModule.getStatusIds(p6)
 	return if p6.configurableIds then nil else p6.statusIds
 end
 
-function RequestBuilderModule:getAdditionalData() --[[ Line: 250 ]]
+function RequestBuilderModule:getAdditionalData()
 	return self.additionalData or {}
 end
 

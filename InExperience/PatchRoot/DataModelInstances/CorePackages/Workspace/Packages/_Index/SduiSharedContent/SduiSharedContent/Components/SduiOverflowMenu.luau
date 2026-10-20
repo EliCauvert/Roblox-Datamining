@@ -9,7 +9,7 @@ local _ = require(Parent.SduiCompat)
 local FoundationModule = require(Parent.Foundation)
 local FFlagLuaAppSduiGameTileFeedback = require(Parent.SharedFlags).FFlagLuaAppSduiGameTileFeedback
 
-local function addMenuItemTelemetry(List) --[[ Line: 57 ]]
+local function addMenuItemTelemetry(List)
 	local List1 = {}
 	
 	for _, value in List do
@@ -24,7 +24,7 @@ local function addMenuItemTelemetry(List) --[[ Line: 57 ]]
 		if value1.onActivated and typeof(value1.id) == "string" and value1.id ~= "" then
 			local Copy = table.clone(value1)
 			
-			function Copy:onActivated(_, _) --[[ Line: 74 ]]
+			function Copy:onActivated(_, _)
 				-- upvalues: value1 (copy), Joined (copy)
 				value1.onActivated(nil, nil, { menuItemId = value1.id, availableMenuItemIds = Joined })
 			end
@@ -37,7 +37,7 @@ local function addMenuItemTelemetry(List) --[[ Line: 57 ]]
 	return List2
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 86 | Named "SduiOverflowMenu" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseUidRefStringFunction (copy), FFlagLuaAppSduiGameTileFeedback (copy), ReactModule (copy), addMenuItemTelemetry (copy), GetOverflowMenuSignalStoreFunction (copy), UseBackButtonBindingFunction (copy), FoundationModule (copy), OverflowMenu (copy)
 	local UseUidRefStringResult = UseUidRefStringFunction()
 	local MenuKey = if FFlagLuaAppSduiGameTileFeedback and p1.menuKey then p1.menuKey else `sdui-overflow-menu-{UseUidRefStringResult.current}`
@@ -50,11 +50,11 @@ return ReactModule.memo(function(p1) --[[ Line: 86 | Named "SduiOverflowMenu" ]]
 		NoHasOverflowButton = p1.hasOverflowButton == nil or p1.hasOverflowButton
 		NoShouldShowAnchor = p1.shouldShowAnchor == nil or p1.shouldShowAnchor
 	end
-	local UseMemoResult = if FFlagLuaAppSduiGameTileFeedback then ReactModule.useMemo(function() --[[ Line: 104 ]]
+	local UseMemoResult = if FFlagLuaAppSduiGameTileFeedback then ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), addMenuItemTelemetry (upval)
 		return if p1.includeMenuItemTelemetry then addMenuItemTelemetry(p1.items) else p1.items
 	end, { p1.items, p1.includeMenuItemTelemetry }) else nil
-	local UseBackButtonBindingResult = UseBackButtonBindingFunction((ReactModule.useCallback(function() --[[ Line: 114 ]]
+	local UseBackButtonBindingResult = UseBackButtonBindingFunction((ReactModule.useCallback(function()
 		-- upvalues: GetOverflowMenuSignalStoreFunction (upval), MenuKey (copy)
 		GetOverflowMenuSignalStoreFunction().closeMenu(MenuKey)
 	end, { MenuKey })))

@@ -9,7 +9,7 @@ local ChatLandingWithDialogsNavigatorModule = require(script.Parent.chatLandingW
 local ChatLandingWithDialogsNavigatorConnector = RoactModule.Component:extend("ChatLandingWithDialogsNavigatorConnector")
 ChatLandingWithDialogsNavigatorConnector.router = ChatLandingWithDialogsNavigatorModule.router
 
-function ChatLandingWithDialogsNavigatorConnector.render(p1) --[[ Line: 17 ]]
+function ChatLandingWithDialogsNavigatorConnector.render(p1)
 	-- upvalues: RoactModule (copy), ChatLandingWithDialogsNavigatorModule (copy)
 	return RoactModule.createElement(ChatLandingWithDialogsNavigatorModule, p1.props)
 end

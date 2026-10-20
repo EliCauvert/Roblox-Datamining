@@ -6,12 +6,12 @@ local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local GetUniverseIdModule = require(InExperienceSideSheet.Utils.getUniverseId)
 
-return function() --[[ Line: 16 | Named "useExperienceDetails" ]]
+return function()
 	-- upvalues: GetUniverseIdModule (copy), ReactModule (copy), SignalsModule (copy), DataHydrationModule (copy), SignalsReactModule (copy)
 	local UniverseIdModule = GetUniverseIdModule()
-	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 21 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), UniverseIdModule (copy), DataHydrationModule (upval)
-		return SignalsModule.createComputed(function(p1) --[[ Line: 22 ]]
+		return SignalsModule.createComputed(function(p1)
 			-- upvalues: UniverseIdModule (upval), DataHydrationModule (upval)
 			if UniverseIdModule then
 				local AndFetchGameInfo = DataHydrationModule.Game.getGameInfoStore(p1).getAndFetchGameInfo(UniverseIdModule)

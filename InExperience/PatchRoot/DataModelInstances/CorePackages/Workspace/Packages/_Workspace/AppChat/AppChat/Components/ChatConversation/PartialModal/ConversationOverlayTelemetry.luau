@@ -6,19 +6,19 @@ return {
 	Events = {
 		ModalRendered = ModalTelemetryModule.Events.modalRenderedWithSequence({
 			modalSequence = ModalTelemetryModule.Enums.ModalSequence.ConversationOverlay,
-			counterFormat = function(p1, _) --[[ Line: 12 ]]
+			counterFormat = function(p1, _)
 				return { modalVariant = p1.modalVariant }
 			end
 		}),
 		ModalAction = ModalTelemetryModule.Events.modalActionWithSequence({
 			modalSequence = ModalTelemetryModule.Enums.ModalSequence.ConversationOverlay,
-			counterFormat = function(p1, _) --[[ Line: 20 ]]
+			counterFormat = function(p1, _)
 				return { modalVariant = p1.modalVariant, action = p1.action }
 			end
 		}),
 		ModalActionResult = ModalTelemetryModule.Events.modalActionResultWithSequence({
 			modalSequence = ModalTelemetryModule.Enums.ModalSequence.ConversationOverlay,
-			counterFormat = function(p1, _) --[[ Line: 32 ]]
+			counterFormat = function(p1, _)
 				return {
 					modalVariant = p1.modalVariant,
 					action = p1.action,

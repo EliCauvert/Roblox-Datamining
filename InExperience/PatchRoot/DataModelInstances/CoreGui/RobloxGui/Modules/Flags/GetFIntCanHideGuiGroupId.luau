@@ -1,5 +1,5 @@
-﻿return function() --[[ Line: 1 ]]
-	local Success, Result = pcall(function() --[[ Line: 2 ]]
+﻿return function()
+	local Success, Result = pcall(function()
 		return game:GetFastInt("CanHideGuiGroupId")
 	end)
 	

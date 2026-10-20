@@ -4,7 +4,7 @@ local CryoModule = require(Parent.Cryo)
 local ConfigResult = require(Parent.LuaSocialLibrariesDeps).SocialLibraries.config({})
 local StatusCodesToRetryModule = require(script.Parent.StatusCodesToRetry)
 
-local function _(p1) --[[ Line: 10 | Named "shouldRetryRequest" ]]
+local function _(p1)
 	-- upvalues: ConfigResult (copy), StatusCodesToRetryModule (copy)
 	if p1.error then
 		local ErrorGraphQLErrorsDeepValue = ConfigResult.Dictionary.getDeepValue(p1, "error.graphQLErrors")
@@ -16,11 +16,11 @@ local function _(p1) --[[ Line: 10 | Named "shouldRetryRequest" ]]
 	return false
 end
 
-return function(p1, p2) --[[ Line: 22 | Named "useApolloAutoRetry" ]]
+return function(p1, p2)
 	-- upvalues: ReactModule (copy), ConfigResult (copy), StatusCodesToRetryModule (copy), CryoModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 26 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), ConfigResult (upval), StatusCodesToRetryModule (upval), UseStateResult (copy), p2 (copy), UseStateResult1 (copy), UseStateResult2_1 (copy), UseStateResult2 (copy)
 		local v1 = nil
 		repeat
@@ -36,7 +36,7 @@ return function(p1, p2) --[[ Line: 22 | Named "useApolloAutoRetry" ]]
 		until true
 		if v1 and UseStateResult < p2.retryCount and not UseStateResult1 then
 			UseStateResult2_1(true)
-			task.delay(2 ^ UseStateResult + math.random(), function() --[[ Line: 30 ]]
+			task.delay(2 ^ UseStateResult + math.random(), function()
 				-- upvalues: p1 (upval), UseStateResult2_1 (upval), UseStateResult2 (upval), UseStateResult (upval)
 				p1:refetch()
 				UseStateResult2_1(false)
@@ -45,7 +45,7 @@ return function(p1, p2) --[[ Line: 22 | Named "useApolloAutoRetry" ]]
 		end
 	end, { p1, UseStateResult1, UseStateResult })
 	
-	return (ReactModule.useMemo(function() --[[ Line: 38 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: CryoModule (upval), p1 (copy), ConfigResult (upval), StatusCodesToRetryModule (upval), UseStateResult (copy), p2 (copy)
 		local JoinFunction = CryoModule.Dictionary.join
 		local t = {}

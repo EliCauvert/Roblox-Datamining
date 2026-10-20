@@ -16,7 +16,7 @@ local HiddenChallengeWebViewTimeoutSeconds = game:DefineFastInt("HiddenChallenge
 local ChallengeWebViewModule = {}
 ChallengeWebViewModule.__index = ChallengeWebViewModule
 
-function ChallengeWebViewModule.new(RawResponseHeaders) --[[ Line: 76 ]]
+function ChallengeWebViewModule.new(RawResponseHeaders)
 	-- upvalues: GetFFlagEnableUnifiedWebViewsFunction (copy), WebViewService (copy), BrowserService (copy), ChallengeHeadersModule (copy), FFlagHideChallengeWebViewsUntilDisplayedModule (copy), GenericTypeModule (copy), BuildChallengeWebViewUrlModule (copy), ChallengeWebViewModule (copy)
 	local t = {}
 	
@@ -52,10 +52,10 @@ function ChallengeWebViewModule.new(RawResponseHeaders) --[[ Line: 76 ]]
 	return (setmetatable(t, ChallengeWebViewModule))
 end
 
-function ChallengeWebViewModule:setCloseCallback(Callback) --[[ Line: 134 ]]
+function ChallengeWebViewModule:setCloseCallback(Callback)
 	-- upvalues: GetFFlagEnableUnifiedWebViewsFunction (copy)
 	if GetFFlagEnableUnifiedWebViewsFunction() then
-		function self.closeCallback() --[[ Line: 137 ]]
+		function self.closeCallback()
 			-- upvalues: self (copy), Callback (copy)
 			self.webViewService:CloseWindow()
 			Callback()
@@ -67,15 +67,15 @@ function ChallengeWebViewModule:setCloseCallback(Callback) --[[ Line: 134 ]]
 	end
 end
 
-function ChallengeWebViewModule:setOpenCallback(OpenCallback) --[[ Line: 146 ]]
+function ChallengeWebViewModule:setOpenCallback(OpenCallback)
 	self.openCallback = OpenCallback
 end
 
-function ChallengeWebViewModule:setHybridCallback(HybridCallback) --[[ Line: 151 ]]
+function ChallengeWebViewModule:setHybridCallback(HybridCallback)
 	self.hybridCallback = HybridCallback
 end
 
-local function openUnifiedWebView(WebViewService, ChallengeUrl, Title, IsVisible) --[[ Line: 156 ]]
+local function openUnifiedWebView(WebViewService, ChallengeUrl, Title, IsVisible)
 	-- upvalues: FFlagHideChallengeWebViewsUntilDisplayedModule (copy), WebViewHasHideHeaderEngineFeature (copy)
 	if FFlagHideChallengeWebViewsUntilDisplayedModule and WebViewHasHideHeaderEngineFeature and not IsVisible then
 		WebViewService:OpenWindowV2(ChallengeUrl, { Title = Title, IsVisible = IsVisible })
@@ -86,7 +86,7 @@ local function openUnifiedWebView(WebViewService, ChallengeUrl, Title, IsVisible
 	end
 end
 
-local function _() --[[ Line: 167 | Named "releaseFocusedTextBox" ]]
+local function _()
 	-- upvalues: UserInputService (copy)
 	local FocusedTextBox = UserInputService:GetFocusedTextBox()
 	
@@ -95,11 +95,11 @@ local function _() --[[ Line: 167 | Named "releaseFocusedTextBox" ]]
 	end
 end
 
-local _ = function(WebViewService, Url, Title, IsVisible) --[[ Line: 174 | Named "mutateUnifiedWebViewVisibility" ]]
+local _ = function(WebViewService, Url, Title, IsVisible)
 	WebViewService:MutateWindow(Url, Title, IsVisible, "")
 end
 
-function ChallengeWebViewModule:setVisible(Visible) --[[ Line: 183 ]]
+function ChallengeWebViewModule:setVisible(Visible)
 	-- upvalues: FFlagReleaseTextBoxFocusOnChallengeOpenModule (copy), UserInputService (copy), GetFFlagEnableUnifiedWebViewsFunction (copy), HttpService (copy)
 	if self.visible == Visible or not self.isOpen then return end
 	self.visible = Visible
@@ -120,7 +120,7 @@ function ChallengeWebViewModule:setVisible(Visible) --[[ Line: 183 ]]
 	end
 end
 
-function ChallengeWebViewModule:open() --[[ Line: 204 ]]
+function ChallengeWebViewModule:open()
 	-- upvalues: GetFFlagEnableUnifiedWebViewsFunction (copy), FFlagReleaseTextBoxFocusOnChallengeOpenModule (copy), UserInputService (copy), openUnifiedWebView (copy), HttpService (copy), HiddenChallengeWebViewTimeoutSeconds (copy)
 	assert(self.hybridCallback ~= nil, "hybrid callback has not been initialized")
 	
@@ -132,7 +132,7 @@ function ChallengeWebViewModule:open() --[[ Line: 204 ]]
 	else
 		self.hybridCallbackConnection = self.browserService.JavaScriptCallback:Connect(self.hybridCallback)
 	end
-	local CloseCallback = if not self.opensVisible then function() --[[ Line: 217 ]]
+	local CloseCallback = if not self.opensVisible then function()
 		-- upvalues: self (copy)
 		self.isOpen = false
 		self.visible = self.opensVisible
@@ -182,7 +182,7 @@ function ChallengeWebViewModule:open() --[[ Line: 204 ]]
 			Delay = 3
 		end
 		local OpenGeneration = self.openGeneration
-		task.delay(Delay, function() --[[ Line: 262 ]]
+		task.delay(Delay, function()
 			-- upvalues: self (copy), OpenGeneration (copy)
 			if self.isOpen and self.openGeneration == OpenGeneration and not self.visible then
 				self:setVisible(true)
@@ -191,7 +191,7 @@ function ChallengeWebViewModule:open() --[[ Line: 204 ]]
 	end
 end
 
-function ChallengeWebViewModule:close() --[[ Line: 270 ]]
+function ChallengeWebViewModule:close()
 	-- upvalues: GetFFlagEnableUnifiedWebViewsFunction (copy)
 	self.isOpen = false
 	self.visible = self.opensVisible

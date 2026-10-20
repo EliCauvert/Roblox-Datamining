@@ -32,12 +32,12 @@ local Layout1 = {
 }
 local FlexItem = { FlexMode = Enum.UIFlexMode.Fill }
 
-local function CategoryMenuButtonGroup(Frame: Frame) --[[ Line: 75 ]]
+local function CategoryMenuButtonGroup(Frame: Frame)
 	-- upvalues: AXCategoryMenuBadgePositionTokens2 (copy), FoundationModule (copy), ReactModule (copy), FFlagAXMigrateAllTabToSduiDev (copy), IconVariant (copy), View (copy), IconButton (copy), InputSize (copy), Badge (copy), BadgeVariant (copy)
 	local UseTokensResult = if AXCategoryMenuBadgePositionTokens2 then FoundationModule.Hooks.useTokens() else nil
 	local BackgroundColor3 = Frame.BackgroundColor3
 	local BackgroundTransparency = Frame.BackgroundTransparency
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 79 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), Frame (copy), AXCategoryMenuBadgePositionTokens2 (upval), FFlagAXMigrateAllTabToSduiDev (upval), IconVariant (upval), View (upval), IconButton (upval), InputSize (upval), BackgroundColor3 (copy), BackgroundTransparency (copy), Badge (upval), BadgeVariant (upval), UseTokensResult (copy)
 		local Elements = {
 			FlexItem = ReactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.None }),
@@ -104,7 +104,7 @@ local function CategoryMenuButtonGroup(Frame: Frame) --[[ Line: 75 ]]
 	
 	if AXCategoryMenuBadgePositionTokens2 then
 		local PaddingRight = Frame.paddingRight
-		UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 154 ]]
+		UseMemoResult1 = ReactModule.useMemo(function()
 			-- upvalues: PaddingRight (copy)
 			return if PaddingRight then { right = PaddingRight } else nil
 		end, { PaddingRight })
@@ -116,7 +116,7 @@ local function CategoryMenuButtonGroup(Frame: Frame) --[[ Line: 75 ]]
 	}, UseMemoResult)
 end
 
-return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 205 | Named "CategoryMenu" ]]
+return ReactModule.forwardRef(function(Frame, Ref)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), FFlagAXCategoryMenuVisualFixes (copy), CategoryMenuButtonsLocationEnumModule (copy), AXCategoryMenuBadgePositionTokens2 (copy), View (copy), Layout1 (copy), Layout (copy), CategoryMenuButtonGroup (copy), FlexItem (copy), TabGroupModule (copy), Coachmark (copy), PopoverSide (copy), PopoverAlign (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
@@ -126,7 +126,7 @@ return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 205 | Named "Categ
 		local UseRefResult1 = ReactModule.useRef(nil)
 		ControllerRef = UseRefResult1
 		local UseRefResult2 = ReactModule.useRef(false)
-		ReactModule.useEffect(function() --[[ Line: 218 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRefResult2 (copy), UseRefResult1 (copy)
 			if not UseRefResult2.current then
 				UseRefResult2.current = true
@@ -179,7 +179,7 @@ return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 205 | Named "Categ
 				flexItem = FlexItem
 			}, {
 				TabGroup = ReactModule.createElement(TabGroupModule, {
-					items = ReactModule.useMemo(function() --[[ Line: 233 ]]
+					items = ReactModule.useMemo(function()
 						-- upvalues: Tooltip (copy), Frame (copy), UseRefResult (copy)
 						local List = {}
 						

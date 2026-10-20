@@ -8,7 +8,7 @@ local config = {
 if require(Parent.SharedFlags).FFlagAppIaHomeSubTab then
 	config[NavigationRoduxModule.Constants.HomeContainerName] = true
 end
-return function(Route) --[[ Line: 20 ]]
+return function(Route)
 	-- upvalues: config (copy)
 	if not Route then
 		return nil

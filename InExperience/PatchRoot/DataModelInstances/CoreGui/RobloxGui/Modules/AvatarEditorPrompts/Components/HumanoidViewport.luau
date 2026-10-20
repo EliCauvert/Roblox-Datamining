@@ -17,7 +17,7 @@ HumanoidViewport.validateProps = TModule.strictInterface({
 	rigType = TModule.optional(TModule.enum(Enum.HumanoidRigType))
 })
 
-function HumanoidViewport.init(p1) --[[ Line: 34 ]]
+function HumanoidViewport.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1:setState({ loading = true, loadingFailed = false })
 	p1.cameraRef = RoactModule.createRef()
@@ -27,7 +27,7 @@ function HumanoidViewport.init(p1) --[[ Line: 34 ]]
 	p1.humanoidModel = nil
 	p1.mounted = false
 	
-	function p1.onRetryLoading() --[[ Line: 50 ]]
+	function p1.onRetryLoading()
 		-- upvalues: p1 (copy)
 		p1:setState({ loading = true, loadingFailed = false })
 		
@@ -41,22 +41,22 @@ function HumanoidViewport.init(p1) --[[ Line: 34 ]]
 	end
 end
 
-local function _(Vector) --[[ Line: 64 | Named "rotateLookVector" ]]
+local function _(Vector)
 	-- upvalues: _CFrame (copy)
 	return (CFrame.new(vector.create(0, 0, 0), if math.abs(Vector.Y) > 0.95 then vector.create(0, 0, -1) else Vector3.new(Vector.X, 0, Vector.Z).unit) * _CFrame).lookVector
 end
 
-local _ = function(Degrees: number, Vector): number --[[ Line: 77 | Named "getCameraOffset" ]]
+local _ = function(Degrees: number, Vector): number
 	return math.max(Vector.X, Vector.Y) / 2 * (1 / math.tan(math.rad(Degrees) / 2)) + Vector.Z / 2
 end
 
-local _ = function(Model: Model, p1, p2) --[[ Line: 87 | Named "zoomExtents" ]]
+local _ = function(Model: Model, p1, p2)
 	local ExtentsSize = Model:GetExtentsSize()
 	
 	return p2 - p2.p + Model:GetModelCFrame().p + p1 * ((math.max(ExtentsSize.X, ExtentsSize.Y) / 2 * 1.4281480067421146 + ExtentsSize.Z / 2) * 1)
 end
 
-function HumanoidViewport.positionCamera(p1) --[[ Line: 98 ]]
+function HumanoidViewport.positionCamera(p1)
 	-- upvalues: _CFrame (copy)
 	local HumanoidModel = p1.humanoidModel
 	local ModelCFrame = HumanoidModel:GetModelCFrame()
@@ -73,7 +73,7 @@ function HumanoidViewport.positionCamera(p1) --[[ Line: 98 ]]
 	p1.updateCameraFocusBinding(ModelCFrame)
 end
 
-function HumanoidViewport:loadIdleAnimation(Object) --[[ Line: 115 ]]
+function HumanoidViewport:loadIdleAnimation(Object)
 	local Humanoid = Object:FindFirstChildOfClass("Humanoid")
 	
 	if Humanoid.HumanoidDescription.IdleAnimation == 0 then return end
@@ -94,14 +94,14 @@ function HumanoidViewport:loadIdleAnimation(Object) --[[ Line: 115 ]]
 	end
 end
 
-function HumanoidViewport.loadHumanoidModel(p1) --[[ Line: 143 ]]
+function HumanoidViewport.loadHumanoidModel(p1)
 	-- upvalues: Players (copy), PromiseModule (copy), AXClusterCompositionTimeoutMs (copy)
 	local HumanoidDescription = p1.props.humanoidDescription
 	local RigType = p1.props.rigType
-	coroutine.wrap(function() --[[ Line: 147 ]]
+	coroutine.wrap(function()
 		-- upvalues: Players (upval), HumanoidDescription (copy), RigType (copy), p1 (copy), PromiseModule (upval), AXClusterCompositionTimeoutMs (upval)
 		local HumanoidModelFromDescriptionAsync = nil
-		pcall(function() --[[ Line: 149 ]]
+		pcall(function()
 			-- upvalues: HumanoidModelFromDescriptionAsync (ref), Players (upval), HumanoidDescription (upval), RigType (upval)
 			HumanoidModelFromDescriptionAsync = Players:CreateHumanoidModelFromDescriptionAsync(HumanoidDescription, RigType)
 		end)
@@ -135,7 +135,7 @@ function HumanoidViewport.loadHumanoidModel(p1) --[[ Line: 143 ]]
 	end)()
 end
 
-function HumanoidViewport.render(p1) --[[ Line: 201 ]]
+function HumanoidViewport.render(p1)
 	-- upvalues: RoactModule (copy), Skeleton (copy), EmptyState (copy), RobloxTranslatorModule (copy)
 	local LoadingFailed = p1.props.loadingFailed or p1.state.loadingFailed
 	
@@ -182,7 +182,7 @@ function HumanoidViewport.render(p1) --[[ Line: 201 ]]
 	})
 end
 
-function HumanoidViewport.didMount(p1) --[[ Line: 257 ]]
+function HumanoidViewport.didMount(p1)
 	p1.mounted = true
 	
 	if p1.props.humanoidDescription then
@@ -190,7 +190,7 @@ function HumanoidViewport.didMount(p1) --[[ Line: 257 ]]
 	end
 end
 
-function HumanoidViewport.didUpdate(p1, p2) --[[ Line: 265 ]]
+function HumanoidViewport.didUpdate(p1, p2)
 	if p1.worldModelRef:getValue() and p1.humanoidModel then
 		p1.humanoidModel.Parent = p1.worldModelRef:getValue()
 	end
@@ -206,7 +206,7 @@ function HumanoidViewport.didUpdate(p1, p2) --[[ Line: 265 ]]
 	end
 end
 
-function HumanoidViewport.willUnmount(p1) --[[ Line: 287 ]]
+function HumanoidViewport.willUnmount(p1)
 	p1.mounted = false
 end
 

@@ -10,14 +10,14 @@ local SelectCommerceProductIdModule = require(CommercePurchaseApp.Store.Selector
 local _ = require(CommercePurchaseApp.Enums.ErrorCodeEnum)
 local _ = require(script.Parent.CommercePurchaseError)
 
-return function() --[[ Line: 15 | Named "useCommercePurchaseErrorProps" ]]
+return function()
 	-- upvalues: UseSelectorFunction (copy), SelectErrorCodeModule (copy), SelectCommerceProductIdModule (copy), UseDispatchFunction (copy), ReactModule (copy), CommerceService (copy), CommercePurchaseEndedModule (copy)
 	local UseSelectorResult = UseSelectorFunction(SelectErrorCodeModule)
 	local UseSelectorResult1 = UseSelectorFunction(SelectCommerceProductIdModule)
 	local UseDispatchResult = UseDispatchFunction()
 	
 	return {
-		onDismiss = ReactModule.useCallback(function() --[[ Line: 20 ]]
+		onDismiss = ReactModule.useCallback(function()
 			-- upvalues: CommerceService (upval), UseSelectorResult1 (copy), UseDispatchResult (copy), CommercePurchaseEndedModule (upval)
 			CommerceService:SignalPromptCommerceProductPurchaseFinished(UseSelectorResult1, false)
 			UseDispatchResult(CommercePurchaseEndedModule())

@@ -1,9 +1,9 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("CollectionViews").Parent.React)
 
-return function(p1, p2, Callback, p3) --[[ Line: 5 | Named "useHorizontalScrolledToEndThreshold" ]]
+return function(p1, p2, Callback, p3)
 	-- upvalues: ReactModule (copy)
 	local UseRefResult = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 20 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p3 (copy), p1 (copy), Callback (copy), p2 (copy), UseRefResult (copy)
 		if not p3 then
 			return nil
@@ -13,7 +13,7 @@ return function(p1, p2, Callback, p3) --[[ Line: 5 | Named "useHorizontalScrolle
 		if p1.current ~= nil and (Callback ~= nil and p2 ~= nil) then
 			local Current = p1.current
 			
-			local function _() --[[ Line: 32 | Named "checkThreshold" ]]
+			local function _()
 				-- upvalues: Current (copy), p2 (upval), UseRefResult (upval), Callback (upval)
 				local XDelta = Current.AbsoluteCanvasSize.X - Current.AbsoluteWindowSize.X - p2
 				local X = Current.CanvasPosition.X
@@ -29,7 +29,7 @@ return function(p1, p2, Callback, p3) --[[ Line: 5 | Named "useHorizontalScrolle
 				end
 			end
 			
-			table.insert(List, Current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function() --[[ Line: 46 ]]
+			table.insert(List, Current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
 				-- upvalues: Current (copy), p2 (upval), UseRefResult (upval), Callback (upval)
 				local XDelta = Current.AbsoluteCanvasSize.X - Current.AbsoluteWindowSize.X - p2
 				local X = Current.CanvasPosition.X
@@ -44,7 +44,7 @@ return function(p1, p2, Callback, p3) --[[ Line: 5 | Named "useHorizontalScrolle
 					Callback()
 				end
 			end))
-			table.insert(List, Current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function() --[[ Line: 53 ]]
+			table.insert(List, Current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function()
 				-- upvalues: Current (copy), p2 (upval), UseRefResult (upval), Callback (upval)
 				local XDelta = Current.AbsoluteCanvasSize.X - Current.AbsoluteWindowSize.X - p2
 				local X = Current.CanvasPosition.X
@@ -59,7 +59,7 @@ return function(p1, p2, Callback, p3) --[[ Line: 5 | Named "useHorizontalScrolle
 					Callback()
 				end
 			end))
-			table.insert(List, Current:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ Line: 59 ]]
+			table.insert(List, Current:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
 				-- upvalues: Current (copy), p2 (upval), UseRefResult (upval), Callback (upval)
 				local XDelta = Current.AbsoluteCanvasSize.X - Current.AbsoluteWindowSize.X - p2
 				local X = Current.CanvasPosition.X
@@ -84,7 +84,7 @@ return function(p1, p2, Callback, p3) --[[ Line: 5 | Named "useHorizontalScrolle
 				Callback()
 			end
 		end
-		return function() --[[ Line: 65 ]]
+		return function()
 			-- upvalues: List (copy)
 			for _, Connection in List do
 				Connection:Disconnect()

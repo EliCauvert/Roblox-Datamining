@@ -4,12 +4,12 @@ local UserInputService = require(Foundation.Utility.Wrappers.Services).UserInput
 local _ = require(Foundation.Enums.InputPlatform)
 local DetectInputPlatformModule = require(script.Parent.detectInputPlatform)
 
-return function() --[[ Line: 24 | Named "useInputPlatform" ]]
+return function()
 	-- upvalues: ReactModule (copy), DetectInputPlatformModule (copy), UserInputService (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(DetectInputPlatformModule)
-	ReactModule.useEffect(function() --[[ Line: 27 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), DetectInputPlatformModule (upval), UserInputService (upval)
-		local function refresh() --[[ Line: 28 ]]
+		local function refresh()
 			-- upvalues: UseStateResult2 (upval), DetectInputPlatformModule (upval)
 			UseStateResult2(DetectInputPlatformModule())
 		end
@@ -18,7 +18,7 @@ return function() --[[ Line: 24 | Named "useInputPlatform" ]]
 		local GamepadDisconnectedConnection = UserInputService.GamepadDisconnected:Connect(refresh)
 		UseStateResult2(DetectInputPlatformModule())
 		
-		return function() --[[ Line: 37 ]]
+		return function()
 			-- upvalues: GamepadConnectedConnection (copy), GamepadDisconnectedConnection (copy)
 			GamepadConnectedConnection:Disconnect()
 			GamepadDisconnectedConnection:Disconnect()

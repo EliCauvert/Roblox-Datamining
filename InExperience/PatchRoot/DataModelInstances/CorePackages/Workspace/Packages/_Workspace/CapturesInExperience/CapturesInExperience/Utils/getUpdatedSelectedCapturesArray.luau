@@ -1,4 +1,4 @@
-﻿function getUpdatedSelectedCapturesArray(List, p1) --[[ Line: 1 ]]
+﻿function getUpdatedSelectedCapturesArray(List, p1)
 	local List1 = {}
 	local Flag = false
 	

@@ -25,7 +25,7 @@ local ActiveSquadPollingIdleIntervalSeconds = game:DefineFastInt("ActiveSquadPol
 local ActiveSquadInitPollingDelaySeconds = game:DefineFastInt("ActiveSquadInitPollingDelaySeconds", 3)
 local RealtimeMessageId = MessageBusService:GetMessageId("Realtime", "appResume")
 
-return function(p1) --[[ Line: 41 ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseLocalUserIdFunction (copy), ReactModule (copy), SquadExternalContractContextModule (copy), UseSquadStateModule (copy), SetTimeoutFunction (copy), FetchActiveSquadModule (copy), ActiveSquadInitPollingDelaySeconds (copy), ClearTimeoutFunction (copy), SquadViewFlagsModule (copy), ActiveSquadPollingCardIntervalSeconds (copy), ActiveSquadPollingLobbyIntervalSeconds (copy), ActiveSquadPollingIdleIntervalSeconds (copy), SetIntervalFunction (copy), ClearIntervalFunction (copy), RealtimeDeliveryModule (copy), ConstantsModule (copy), LoggerModule (copy), SerializeTableModule (copy), RoduxSquadsModule (copy), SquadStateModule (copy), MessageBusService (copy), RealtimeMessageId (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local Number: number = tonumber(UseLocalUserIdFunction()) or 0
@@ -33,32 +33,32 @@ return function(p1) --[[ Line: 41 ]]
 	local UseSquadViewFlagsResult = ReactModule.useContext(SquadExternalContractContextModule).useSquadViewFlags()
 	local UseSquadStateModuleResult = UseSquadStateModule()
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(-1)
-	ReactModule.useEffect(function() --[[ Line: 54 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), p1 (copy), SetTimeoutFunction (upval), UseDispatchResult (copy), FetchActiveSquadModule (upval), ActiveSquadInitPollingDelaySeconds (upval), ClearTimeoutFunction (upval)
 		UseStateResult2(false)
-		local SetTimeoutResult = if p1.currentSquadId == "" then nil else SetTimeoutFunction(function() --[[ Line: 57 ]]
+		local SetTimeoutResult = if p1.currentSquadId == "" then nil else SetTimeoutFunction(function()
 			-- upvalues: UseDispatchResult (upval), FetchActiveSquadModule (upval), UseStateResult2 (upval)
 			UseDispatchResult(FetchActiveSquadModule())
 			UseStateResult2(true)
 		end, ActiveSquadInitPollingDelaySeconds * 1000)
 		
-		return function() --[[ Line: 63 ]]
+		return function()
 			-- upvalues: SetTimeoutResult (copy), ClearTimeoutFunction (upval)
 			if SetTimeoutResult then
 				ClearTimeoutFunction(SetTimeoutResult)
 			end
 		end
 	end, { p1.currentSquadId })
-	ReactModule.useEffect(function() --[[ Line: 73 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSquadViewFlagsResult (copy), SquadViewFlagsModule (upval), ActiveSquadPollingCardIntervalSeconds (upval), ActiveSquadPollingLobbyIntervalSeconds (upval), ActiveSquadPollingIdleIntervalSeconds (upval), UseStateResult (copy), p1 (copy), SetIntervalFunction (upval), UseDispatchResult (copy), FetchActiveSquadModule (upval), ClearIntervalFunction (upval)
 		local ActiveSquadPollingIdleIntervalSeconds1 = if bit32.band(UseSquadViewFlagsResult, SquadViewFlagsModule.SquadSystemMessage) == 0 then if bit32.band(UseSquadViewFlagsResult, SquadViewFlagsModule.SquadLobby) == 0 then ActiveSquadPollingIdleIntervalSeconds else ActiveSquadPollingLobbyIntervalSeconds else ActiveSquadPollingCardIntervalSeconds
 		local SetIntervalResult = nil
-		SetIntervalResult = if UseStateResult and p1.currentSquadId ~= "" then SetIntervalFunction(function() --[[ Line: 85 ]]
+		SetIntervalResult = if UseStateResult and p1.currentSquadId ~= "" then SetIntervalFunction(function()
 			-- upvalues: UseDispatchResult (upval), FetchActiveSquadModule (upval)
 			UseDispatchResult(FetchActiveSquadModule())
 		end, ActiveSquadPollingIdleIntervalSeconds1 * 1000) else nil
 		
-		return function() --[[ Line: 90 ]]
+		return function()
 			-- upvalues: SetIntervalResult (ref), ClearIntervalFunction (upval)
 			if SetIntervalResult then
 				ClearIntervalFunction(SetIntervalResult)
@@ -70,10 +70,10 @@ return function(p1) --[[ Line: 41 ]]
 		UseStateResult1,
 		UseStateResult
 	})
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 101 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult1 (copy), UseDispatchResult (copy), FetchActiveSquadModule (upval), UseStateResult2_1 (copy)
 		if UseStateResult1 < p2 then
-			UseDispatchResult(FetchActiveSquadModule()):andThen(function() --[[ Line: 103 ]]
+			UseDispatchResult(FetchActiveSquadModule()):andThen(function()
 				-- upvalues: UseStateResult2_1 (upval), p2 (copy)
 				UseStateResult2_1(p2)
 			end)
@@ -84,7 +84,7 @@ return function(p1) --[[ Line: 41 ]]
 		UseStateResult2_1,
 		UseStateResult1
 	})
-	RealtimeDeliveryModule.useRealtimeNamespace(ConstantsModule.COMMUNICATION_CHANNEL_RTN_NAMESPACE, function(p2) --[[ Line: 110 ]]
+	RealtimeDeliveryModule.useRealtimeNamespace(ConstantsModule.COMMUNICATION_CHANNEL_RTN_NAMESPACE, function(p2)
 		-- upvalues: ConstantsModule (upval), LoggerModule (upval), SerializeTableModule (upval), p1 (copy), Number (copy), UseDispatchResult (copy), RoduxSquadsModule (upval), UseResult (copy), UseSquadStateModuleResult (copy), SquadStateModule (upval)
 		if p2.ChannelType == ConstantsModule.SQUAD_CHANNEL_TYPE then
 			LoggerModule:debug("Squad RTN received. Detail: {}, CurrentSquadId: {}, LocalUserId: {}", SerializeTableModule(p2), p1.currentSquadId, Number)
@@ -120,16 +120,16 @@ return function(p1) --[[ Line: 41 ]]
 		UseResult,
 		UseSquadStateModuleResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 166 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: MessageBusService (upval), RealtimeMessageId (upval), p1 (copy), UseDispatchResult (copy), FetchActiveSquadModule (upval)
-		local SubscribeResult = MessageBusService:Subscribe(RealtimeMessageId, function() --[[ Line: 167 ]]
+		local SubscribeResult = MessageBusService:Subscribe(RealtimeMessageId, function()
 			-- upvalues: p1 (upval), UseDispatchResult (upval), FetchActiveSquadModule (upval)
 			if p1.currentSquadId ~= "" then
 				UseDispatchResult(FetchActiveSquadModule())
 			end
 		end, false, true)
 		
-		return function() --[[ Line: 172 ]]
+		return function()
 			-- upvalues: SubscribeResult (copy)
 			if SubscribeResult then
 				SubscribeResult:Disconnect()

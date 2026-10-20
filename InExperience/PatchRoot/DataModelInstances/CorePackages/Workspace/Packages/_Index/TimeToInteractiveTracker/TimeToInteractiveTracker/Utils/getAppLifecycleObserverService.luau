@@ -1,5 +1,5 @@
-﻿return function() --[[ Line: 2 ]]
-	local Success, Result = pcall(function() --[[ Line: 3 ]]
+﻿return function()
+	local Success, Result = pcall(function()
 		return game:GetService("AppLifecycleObserverService")
 	end)
 	

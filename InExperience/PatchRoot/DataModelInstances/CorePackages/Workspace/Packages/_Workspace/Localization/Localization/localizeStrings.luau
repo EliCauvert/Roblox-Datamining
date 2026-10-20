@@ -1,13 +1,13 @@
 ﻿local ArgCheckModule = require(script:FindFirstAncestor("Localization").Parent.ArgCheck)
 
-return function(p1, List) --[[ Line: 6 | Named "localizeStrings" ]]
+return function(p1, List)
 	-- upvalues: ArgCheckModule (copy)
 	local t = {}
 	
 	for i, value in pairs(List) do
 		if typeof(value) == "table" then
 			if typeof(value[1]) == "string" then
-				local Success, Result = pcall(function() --[[ Line: 12 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: p1 (copy), value (copy)
 					return p1:Format(value[1], value)
 				end)
@@ -17,7 +17,7 @@ return function(p1, List) --[[ Line: 6 | Named "localizeStrings" ]]
 				error(string.format("%s[1] in stringsToBeLocalized must be a string, got %s instead", i, (typeof(value[1]))))
 			end
 		elseif typeof(value) == "string" then
-			local Success1, Result1 = pcall(function() --[[ Line: 37 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: p1 (copy), value (copy)
 				return p1:Format(value)
 			end)

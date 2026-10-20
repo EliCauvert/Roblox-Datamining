@@ -6,20 +6,20 @@ local EnumsModule = require(EditProfile.Common.Enums)
 local HttpService = game:GetService("HttpService")
 local Url = require(Parent.Http).Url
 local ConfigResult = HttpRequestModule.config({
-	requestFunction = function(p1, p2, p3) --[[ Line: 15 ]]
+	requestFunction = function(p1, p2, p3)
 		-- upvalues: HttpRequestModule (copy)
 		return HttpRequestModule.requestFunctions.RequestInternal(p1, p2, p3)
 	end
 })
 
-return function(Description) --[[ Line: 20 | Named "updateUserDescription" ]]
+return function(Description)
 	-- upvalues: Url (copy), ConfigResult (copy), EnumsModule (copy), HttpService (copy), PromiseModule (copy)
 	return ConfigResult(string.format("%s/description", Url.USERS_URL), EnumsModule.RequestMethods.POST, {
 		postBody = HttpService:JSONEncode({ description = Description })
-	}):andThen(function(Result) --[[ Line: 28 ]]
+	}):andThen(function(Result)
 		-- upvalues: Description (copy)
 		return Result.responseBody and Result.responseBody.description or Description
-	end):catch(function(Err) --[[ Line: 31 ]]
+	end):catch(function(Err)
 		-- upvalues: HttpService (upval), PromiseModule (upval)
 		if not Err then
 			return PromiseModule.reject(Err)
@@ -27,7 +27,7 @@ return function(Description) --[[ Line: 20 | Named "updateUserDescription" ]]
 		local config = { statusCode = Err.StatusCode, errors = {} }
 		
 		if Err.Body then
-			local Success, Result = pcall(function() --[[ Line: 38 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: HttpService (upval), Err (copy)
 				return HttpService:JSONDecode(Err.Body)
 			end)

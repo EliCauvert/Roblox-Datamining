@@ -17,9 +17,9 @@ local GetFFlagEnableSubscriptionPurchaseToastModule = require(PurchasePrompt.Fla
 local GetFFlagEnableVpcForInExperienceSubscriptionPurchaseModule = require(PurchasePrompt.Flags.GetFFlagEnableVpcForInExperienceSubscriptionPurchase)
 local ExtendResult = Roact.PureComponent:extend(script.Name)
 
-function ExtendResult.init(p1) --[[ Line: 63 ]]
+function ExtendResult.init(p1)
 	-- upvalues: PromptStateModule (copy)
-	function p1.confirmButtonPressed() --[[ Line: 64 ]]
+	function p1.confirmButtonPressed()
 		-- upvalues: p1 (copy), PromptStateModule (upval)
 		local Props = p1.props
 		local PromptState = Props.promptState
@@ -41,13 +41,13 @@ function ExtendResult.init(p1) --[[ Line: 63 ]]
 		end
 	end
 	
-	function p1.cancelButtonPressed() --[[ Line: 80 ]]
+	function p1.cancelButtonPressed()
 		-- upvalues: p1 (copy)
 		p1.props.endPurchase()
 	end
 end
 
-function ExtendResult.getFlowState(p1) --[[ Line: 87 ]]
+function ExtendResult.getFlowState(p1)
 	-- upvalues: PromptStateModule (copy), SubscriptionPurchaseFlowState (copy), GetFFlagEnableVpcForInExperienceSubscriptionPurchaseModule (copy), PurchaseErrorModule (copy)
 	local Props = p1.props
 	local PromptState = Props.promptState
@@ -55,19 +55,19 @@ function ExtendResult.getFlowState(p1) --[[ Line: 87 ]]
 	return if PromptState == PromptStateModule.PromptSubscriptionPurchase then SubscriptionPurchaseFlowState.PurchaseModal elseif PromptState == PromptStateModule.Error then if GetFFlagEnableVpcForInExperienceSubscriptionPurchaseModule() and Props.purchaseError == PurchaseErrorModule.VpcRequired then SubscriptionPurchaseFlowState.PurchaseVPCModal else SubscriptionPurchaseFlowState.Error else SubscriptionPurchaseFlowState.None
 end
 
-function ExtendResult.getErrorType(p1) --[[ Line: 106 ]]
+function ExtendResult.getErrorType(p1)
 	-- upvalues: PurchaseErrorModule (copy), PurchaseErrorType (copy)
 	local Props = p1.props
 	
 	return if Props.purchaseError == PurchaseErrorModule.AlreadySubscribed then PurchaseErrorType.AlreadySubscribed elseif Props.purchaseError == PurchaseErrorModule.SubscriptionExceededUserSpendLimit then PurchaseErrorType.SubscriptionExceededUserSpendLimit elseif Props.purchaseError == PurchaseErrorModule.SubscriptionUnsupportedLocale then PurchaseErrorType.SubscriptionUnsupportedLocale elseif Props.purchaseError == PurchaseErrorModule.RestrictedUser then PurchaseErrorType.RestrictedUser elseif Props.purchaseError == PurchaseErrorModule.SubscriptionPurchasePlatformNotSupported then PurchaseErrorType.SubscriptionPurchasePlatformNotSupported elseif Props.purchaseError == PurchaseErrorModule.SubscriptionInvalidSaleLocation then PurchaseErrorType.SubscriptionInvalidSaleLocation elseif Props.purchaseError == PurchaseErrorModule.SubscriptionNotForSale then PurchaseErrorType.SubscriptionNotForSale elseif Props.purchaseError == PurchaseErrorModule.VpcRequired then PurchaseErrorType.VpcRequired elseif Props.purchaseError == PurchaseErrorModule.ExceedParentalSpendLimit then PurchaseErrorType.ExceedParentalSpendLimit elseif Props.purchaseError == PurchaseErrorModule.EconomicRestriction then PurchaseErrorType.EconomicRestriction else PurchaseErrorType.Unknown
 end
 
-function ExtendResult:getVPCModalType(FlowState) --[[ Line: 134 ]]
+function ExtendResult:getVPCModalType(FlowState)
 	-- upvalues: SubscriptionPurchaseFlowState (copy), VPCModalTypeModule (copy)
 	return if FlowState == SubscriptionPurchaseFlowState.PurchaseVPCModal then VPCModalTypeModule.toRawValue(VPCModalTypeModule.EnablePurchase) else VPCModalTypeModule.toRawValue(VPCModalTypeModule.None)
 end
 
-function ExtendResult.render(p1) --[[ Line: 141 ]]
+function ExtendResult.render(p1)
 	-- upvalues: Roact (copy), SubscriptionPurchaseFlow (copy)
 	local Props = p1.props
 	local FlowState = p1:getFlowState()
@@ -100,7 +100,7 @@ function ExtendResult.render(p1) --[[ Line: 141 ]]
 	})
 end
 
-function ExtendResult.didUpdate(p1) --[[ Line: 183 ]]
+function ExtendResult.didUpdate(p1)
 	-- upvalues: GetFFlagEnableSubscriptionPurchaseToastModule (copy), SubscriptionPurchaseFlowState (copy), PurchaseErrorType (copy), RobloxTranslatorModule (copy), ToastType (copy)
 	if GetFFlagEnableSubscriptionPurchaseToastModule() then
 		local ErrorType = p1:getErrorType()

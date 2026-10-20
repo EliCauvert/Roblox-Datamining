@@ -3,7 +3,7 @@ local _ = require(AbuseReportMenu.Components.Types)
 local ConstantsModule = require(AbuseReportMenu.Components.Constants)
 local ReportAnythingActions = ConstantsModule.ReportAnythingActions
 
-return function(Tbl, p1) --[[ Line: 7 | Named "reportAnythingReducer" ]]
+return function(Tbl, p1)
 	-- upvalues: ReportAnythingActions (copy), ConstantsModule (copy)
 	local Copy = table.clone(Tbl)
 	local Type = p1.type

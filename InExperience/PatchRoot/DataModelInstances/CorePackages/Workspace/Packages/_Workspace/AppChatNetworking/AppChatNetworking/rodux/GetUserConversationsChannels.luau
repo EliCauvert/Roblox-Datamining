@@ -4,7 +4,7 @@ local Parent = AppChatNetworking.Parent
 local GetFFlagIsSquadEnabledFunction = require(Parent.SharedFlags).GetFFlagIsSquadEnabled
 local GetFFlagEnableSocialCardsFunction = require(Parent.SharedFlags).GetFFlagEnableSocialCards
 
-return require(script.Parent.RoduxNetworking).GET(script.Name, function(Callback, Cursor) --[[ Line: 9 ]]
+return require(script.Parent.RoduxNetworking).GET(script.Name, function(Callback, Cursor)
 	-- upvalues: CHATPLATFORMBASEURLModule (copy), GetFFlagEnableSocialCardsFunction (copy), GetFFlagIsSquadEnabledFunction (copy)
 	return Callback(CHATPLATFORMBASEURLModule):path("v1"):path("get-user-conversations"):queryArgs({
 		include_user_data = true,

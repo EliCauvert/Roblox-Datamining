@@ -7,12 +7,12 @@ local FloatEqualsModule = require(Parent.util.floatEquals)
 local GetMeshSizeModule = require(Parent.util.getMeshSize)
 local GetEditableMeshFromContextModule = require(Parent.util.getEditableMeshFromContext)
 
-local function _(Vector, Vector1) --[[ Line: 27 | Named "vector3Equals" ]]
+local function _(Vector, Vector1)
 	-- upvalues: FloatEqualsModule (copy)
 	return FloatEqualsModule(Vector.X, Vector1.X, 0.00001) and (FloatEqualsModule(Vector.Y, Vector1.Y, 0.00001) and FloatEqualsModule(Vector.Z, Vector1.Z, 0.00001))
 end
 
-local function validateSingleMeshPart(RootInstance, p1, p2) --[[ Line: 32 ]]
+local function validateSingleMeshPart(RootInstance, p1, p2)
 	-- upvalues: GetEditableMeshFromContextModule (copy), ErrorSourceStringsModule (copy), GetMeshSizeModule (copy), FloatEqualsModule (copy)
 	local config = {
 		fieldName = "MeshId",
@@ -48,7 +48,7 @@ return {
 	},
 	conditionalData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 55 ]]
+	run = function(p1, p2)
 		-- upvalues: ValidationEnumsModule (copy), validateSingleMeshPart (copy), ConstantsModule (copy)
 		local RootInstance = p2.rootInstance
 		local AssetType = p2.uploadEnum.assetType

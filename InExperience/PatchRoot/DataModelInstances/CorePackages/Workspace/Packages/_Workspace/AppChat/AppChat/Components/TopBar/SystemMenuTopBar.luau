@@ -7,7 +7,7 @@ local RoactModule = require(Parent.Roact)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
-return function(p1) --[[ Line: 27 | Named "SystemMenuTopBar" ]]
+return function(p1)
 	-- upvalues: GetTopBarStoreModule (copy), UseSignalStateFunction (copy), UseLocalizationFunction (copy), CreateSystemMenuButtonModule (copy), RoactModule (copy), ChatTopBarBaseModule (copy)
 	local ScreenName = p1.screenName
 	local Navigation = p1.navigation
@@ -24,7 +24,7 @@ return function(p1) --[[ Line: 27 | Named "SystemMenuTopBar" ]]
 	return RoactModule.createElement(ChatTopBarBaseModule, {
 		screenName = ScreenName,
 		navigation = Navigation,
-		renderRight = function() --[[ Line: 46 ]]
+		renderRight = function()
 			-- upvalues: CreateSystemMenuButtonModule (upval), UseLocalizationResult (copy), SystemButtonEnabled (copy), SystemButtonActivated (copy)
 			return CreateSystemMenuButtonModule({
 				localizedStrings = UseLocalizationResult,

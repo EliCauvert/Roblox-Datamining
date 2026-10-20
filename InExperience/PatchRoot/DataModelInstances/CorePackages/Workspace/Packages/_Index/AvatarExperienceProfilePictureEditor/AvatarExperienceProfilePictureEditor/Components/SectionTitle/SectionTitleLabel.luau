@@ -6,7 +6,7 @@ local Text = FoundationModule.Text
 local Icon = FoundationModule.Icon
 local IconSize = FoundationModule.Enums.IconSize
 
-return function(p1) --[[ Line: 19 | Named "SectionTitleLabel" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), Text (copy), Icon (copy), IconSize (copy), View (copy)
 	local config = {
 		Title = ReactModule.createElement(Text, {

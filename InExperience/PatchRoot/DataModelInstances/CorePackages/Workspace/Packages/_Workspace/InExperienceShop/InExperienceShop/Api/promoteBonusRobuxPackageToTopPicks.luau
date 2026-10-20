@@ -8,7 +8,7 @@ local FFlagEnableRobuxInExperienceShop = SharedFlagsModule.FFlagEnableRobuxInExp
 local FFlagEnableBonusJwtInShop = SharedFlagsModule.FFlagEnableBonusJwtInShop
 local BonusPromotionEligibilityModule = require(InExperienceShop.Api.BonusPromotionEligibility)
 
-local function findFirstBonusRobuxPackageWithPaymentSession(List) --[[ Line: 18 ]]
+local function findFirstBonusRobuxPackageWithPaymentSession(List)
 	for _, value in List do
 		local RobuxPackages = value.robuxPackages
 		
@@ -23,7 +23,7 @@ local function findFirstBonusRobuxPackageWithPaymentSession(List) --[[ Line: 18 
 	return nil, nil, nil
 end
 
-local function withoutFeaturedPromotion(Tbl) --[[ Line: 40 ]]
+local function withoutFeaturedPromotion(Tbl)
 	-- upvalues: FindTopPicksSectionIndexModule (copy)
 	local TopPicksSectionIndexModule = FindTopPicksSectionIndexModule(Tbl)
 	
@@ -51,7 +51,7 @@ local function withoutFeaturedPromotion(Tbl) --[[ Line: 40 ]]
 	end
 end
 
-local function _(p1, p2): boolean --[[ Line: 73 | Named "canPromoteBonusPackage" ]]
+local function _(p1, p2): boolean
 	-- upvalues: BonusPromotionEligibilityModule (copy)
 	local BonusItem = p1.bonusItem
 	local Text = if BonusItem == nil or BonusItem.type ~= "GamePass" then nil else tostring(BonusItem.id)
@@ -60,19 +60,19 @@ local function _(p1, p2): boolean --[[ Line: 73 | Named "canPromoteBonusPackage"
 end
 
 return {
-	findFirstBonusRobuxPackage = function(p1) --[[ Line: 35 ]]
+	findFirstBonusRobuxPackage = function(p1)
 		-- upvalues: findFirstBonusRobuxPackageWithPaymentSession (copy)
 		local FirstBonusRobuxPackageWithPaymentSession, _, _ = findFirstBonusRobuxPackageWithPaymentSession(p1)
 		
 		return FirstBonusRobuxPackageWithPaymentSession
 	end,
-	getBonusGamePassId = function(p1) --[[ Line: 65 ]]
+	getBonusGamePassId = function(p1)
 		local BonusItem = p1.bonusItem
 		
 		return if BonusItem == nil or BonusItem.type ~= "GamePass" then nil else tostring(BonusItem.id)
 	end,
 	withoutFeaturedPromotion = withoutFeaturedPromotion,
-	promoteBonusRobuxPackageToTopPicks = function(Tbl, p1) --[[ Line: 96 ]]
+	promoteBonusRobuxPackageToTopPicks = function(Tbl, p1)
 		-- upvalues: FFlagEnableRobuxInExperienceShop (copy), FFlagPromoteRobuxInTopPicksModule (copy), withoutFeaturedPromotion (copy), findFirstBonusRobuxPackageWithPaymentSession (copy), FFlagEnableBonusJwtInShop (copy), FFlagHideBonusInShopWhenNotClaimableModule (copy), FindTopPicksSectionIndexModule (copy), BonusPromotionEligibilityModule (copy)
 		if not FFlagEnableRobuxInExperienceShop or not FFlagPromoteRobuxInTopPicksModule then
 			return (withoutFeaturedPromotion(Tbl))

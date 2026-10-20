@@ -3,14 +3,14 @@ local _ = require(RoduxSquads.Persists.PersistManager.createInternalPersistManag
 local CreatePauseFunction = require(RoduxSquads.Persists.Actions).createPause
 local CreatePersistAndUpdateStateFunction = require(RoduxSquads.Persists.Actions).createPersistAndUpdateState
 
-return function(p1, p2) --[[ Line: 15 ]]
+return function(p1, p2)
 	-- upvalues: CreatePersistAndUpdateStateFunction (copy), CreatePauseFunction (copy)
 	return if p2 then {
-		reset = function() --[[ Line: 21 ]]
+		reset = function()
 			-- upvalues: p2 (copy)
 			p2.update(nil)
 		end,
-		persistAndUpdateState = function(Callback: (any) -> ()) --[[ Line: 25 ]]
+		persistAndUpdateState = function(Callback: (any) -> ())
 			-- upvalues: CreatePersistAndUpdateStateFunction (upval), p1 (copy)
 			local PersistAndUpdateState = CreatePersistAndUpdateStateFunction(p1)
 			
@@ -18,7 +18,7 @@ return function(p1, p2) --[[ Line: 15 ]]
 				Callback(PersistAndUpdateState())
 			end
 		end,
-		pause = function(Callback: (any) -> ()) --[[ Line: 32 ]]
+		pause = function(Callback: (any) -> ())
 			-- upvalues: CreatePauseFunction (upval), p1 (copy)
 			local Pause = CreatePauseFunction(p1)
 			

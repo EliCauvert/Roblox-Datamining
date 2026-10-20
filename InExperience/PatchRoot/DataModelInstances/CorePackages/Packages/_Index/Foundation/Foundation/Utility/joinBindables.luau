@@ -4,7 +4,7 @@ local ReactModule = require(Parent.React)
 local ReactIsModule = require(Parent.ReactIs)
 local _ = require(Foundation.Components.Types)
 
-return function(List, Callback) --[[ Line: 9 | Named "joinBindables" ]]
+return function(List, Callback)
 	-- upvalues: ReactIsModule (copy), ReactModule (copy)
 	local t = {}
 	local Tbl = {}
@@ -18,7 +18,7 @@ return function(List, Callback) --[[ Line: 9 | Named "joinBindables" ]]
 			Tbl[i] = value
 		end
 	end
-	return if Flag then ReactModule.joinBindings(t):map(function(List) --[[ Line: 30 ]]
+	return if Flag then ReactModule.joinBindings(t):map(function(List)
 		-- upvalues: Tbl (copy), Callback (copy)
 		local Copy = table.clone(Tbl)
 		

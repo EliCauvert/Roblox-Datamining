@@ -16,13 +16,13 @@ local ModalHistory = UrlBuilder.fromString("apis:virtual-events/v1/notifications
 local Preferences = UrlBuilder.fromString("apis:virtual-events/v1/notifications/preferences")
 
 return {
-	findVirtualEventById = function(Id1, p1) --[[ Line: 34 ]]
+	findVirtualEventById = function(Id1, p1)
 		-- upvalues: Fetch (copy), PromiseModule (copy), Id (copy), Response (copy), GraphQLError (copy)
 		local Fetch1 = if p1 then p1 else Fetch
 		
-		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 37 ]]
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 			-- upvalues: Id (upval), Id1 (copy), Fetch1 (copy), Response (upval), GraphQLError (upval)
-			local v1 = Fetch1(Id({ id = Id1 }), { method = "GET" }):catch(function() --[[ Line: 40 ]]
+			local v1 = Fetch1(Id({ id = Id1 }), { method = "GET" }):catch(function()
 				-- upvalues: Response (upval)
 				return Response.error()
 			end):expect()
@@ -32,7 +32,7 @@ return {
 				
 				return
 			end
-			local v2 = v1:json():catch(function() --[[ Line: 52 ]]
+			local v2 = v1:json():catch(function()
 				return nil
 			end):expect()
 			
@@ -45,18 +45,18 @@ return {
 			end
 		end)
 	end,
-	findVirtualEventsByUniverseId = function(Id, p1, p2) --[[ Line: 75 ]]
+	findVirtualEventsByUniverseId = function(Id, p1, p2)
 		-- upvalues: Fetch (copy), PromiseModule (copy), VirtualEventsCursorCursorLimitLimitFromUtcFromUtc (copy), Response (copy), GraphQLError (copy)
 		local Fetch1 = if p2 then p2 else Fetch
 		
-		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 82 ]]
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 			-- upvalues: VirtualEventsCursorCursorLimitLimitFromUtcFromUtc (upval), Id (copy), p1 (copy), Fetch1 (copy), Response (upval), GraphQLError (upval)
 			local v1 = Fetch1(VirtualEventsCursorCursorLimitLimitFromUtcFromUtc({
 				id = Id,
 				cursor = if p1 and p1.cursor then p1.cursor else "",
 				limit = if p1 and p1.limit then p1.limit else 25,
 				fromUtc = if p1 and p1.fromUtc then p1.fromUtc else ""
-			}), { method = "GET" }):catch(function() --[[ Line: 91 ]]
+			}), { method = "GET" }):catch(function()
 				-- upvalues: Response (upval)
 				return Response.error()
 			end):expect()
@@ -66,7 +66,7 @@ return {
 				
 				return
 			end
-			local v2 = v1:json():catch(function() --[[ Line: 103 ]]
+			local v2 = v1:json():catch(function()
 				return nil
 			end):expect()
 			
@@ -79,13 +79,13 @@ return {
 			end
 		end)
 	end,
-	findRsvpsByVirtualEventId = function(Id, p1) --[[ Line: 131 ]]
+	findRsvpsByVirtualEventId = function(Id, p1)
 		-- upvalues: Fetch (copy), PromiseModule (copy), Rsvps (copy), Response (copy), GraphQLError (copy)
 		local Fetch1 = if p1 then p1 else Fetch
 		
-		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 134 ]]
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 			-- upvalues: Rsvps (upval), Id (copy), Fetch1 (copy), Response (upval), GraphQLError (upval)
-			local v1 = Fetch1(Rsvps({ id = Id }), { method = "GET" }):catch(function() --[[ Line: 137 ]]
+			local v1 = Fetch1(Rsvps({ id = Id }), { method = "GET" }):catch(function()
 				-- upvalues: Response (upval)
 				return Response.error()
 			end):expect()
@@ -95,7 +95,7 @@ return {
 				
 				return
 			end
-			local v2 = v1:json():catch(function() --[[ Line: 150 ]]
+			local v2 = v1:json():catch(function()
 				return nil
 			end):expect()
 			
@@ -108,13 +108,13 @@ return {
 			end
 		end)
 	end,
-	findRsvpCountersByVirtualEventId = function(Id, p1) --[[ Line: 173 ]]
+	findRsvpCountersByVirtualEventId = function(Id, p1)
 		-- upvalues: Fetch (copy), PromiseModule (copy), Counters (copy), Response (copy), GraphQLError (copy)
 		local Fetch1 = if p1 then p1 else Fetch
 		
-		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 176 ]]
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 			-- upvalues: Counters (upval), Id (copy), Fetch1 (copy), Response (upval), GraphQLError (upval)
-			local v1 = Fetch1(Counters({ id = Id }), { method = "GET" }):catch(function() --[[ Line: 179 ]]
+			local v1 = Fetch1(Counters({ id = Id }), { method = "GET" }):catch(function()
 				-- upvalues: Response (upval)
 				return Response.error()
 			end):expect()
@@ -124,7 +124,7 @@ return {
 				
 				return
 			end
-			local v2 = v1:json():catch(function() --[[ Line: 194 ]]
+			local v2 = v1:json():catch(function()
 				return nil
 			end):expect()
 			
@@ -137,11 +137,11 @@ return {
 			end
 		end)
 	end,
-	updateRsvpStatus = function(Id, RsvpStatus, p1) --[[ Line: 217 ]]
+	updateRsvpStatus = function(Id, RsvpStatus, p1)
 		-- upvalues: Fetch (copy), PromiseModule (copy), Rsvps (copy), HttpService (copy), Response (copy), GraphQLError (copy)
 		local Fetch1 = if p1 then p1 else Fetch
 		
-		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 224 ]]
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 			-- upvalues: Rsvps (upval), Id (copy), Fetch1 (copy), HttpService (upval), RsvpStatus (copy), Response (upval), GraphQLError (upval)
 			local v1 = Fetch1(Rsvps({ id = Id }), {
 				method = "POST",
@@ -150,7 +150,7 @@ return {
 					["Content-Type"] = "application/json",
 					Accept = "application/json"
 				}
-			}):catch(function() --[[ Line: 236 ]]
+			}):catch(function()
 				-- upvalues: Response (upval)
 				return Response.error()
 			end):expect()
@@ -160,7 +160,7 @@ return {
 				
 				return
 			end
-			local v2 = v1:json():catch(function() --[[ Line: 251 ]]
+			local v2 = v1:json():catch(function()
 				return nil
 			end):expect()
 			
@@ -176,13 +176,13 @@ return {
 			end
 		end)
 	end,
-	neverShowNotificationModalAgain = function(p1) --[[ Line: 282 ]]
+	neverShowNotificationModalAgain = function(p1)
 		-- upvalues: Fetch (copy), PromiseModule (copy), ModalHistory (copy), Response (copy), GraphQLError (copy)
 		local Fetch1 = if p1 then p1 else Fetch
 		
-		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 285 ]]
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 			-- upvalues: ModalHistory (upval), Fetch1 (copy), Response (upval), GraphQLError (upval)
-			if Fetch1(ModalHistory(), { method = "POST" }):catch(function() --[[ Line: 290 ]]
+			if Fetch1(ModalHistory(), { method = "POST" }):catch(function()
 				-- upvalues: Response (upval)
 				return Response.error()
 			end):expect().ok then
@@ -194,11 +194,11 @@ return {
 			end
 		end)
 	end,
-	enablePushNotifications = function(p1) --[[ Line: 306 ]]
+	enablePushNotifications = function(p1)
 		-- upvalues: Fetch (copy), PromiseModule (copy), Preferences (copy), HttpService (copy), Response (copy), GraphQLError (copy)
 		local Fetch1 = if p1 then p1 else Fetch
 		
-		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 309 ]]
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 			-- upvalues: Preferences (upval), Fetch1 (copy), HttpService (upval), Response (upval), GraphQLError (upval)
 			if Fetch1(Preferences(), {
 				method = "POST",
@@ -207,7 +207,7 @@ return {
 					["Content-Type"] = "application/json",
 					Accept = "application/json"
 				}
-			}):catch(function() --[[ Line: 322 ]]
+			}):catch(function()
 				-- upvalues: Response (upval)
 				return Response.error()
 			end):expect().ok then

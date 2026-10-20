@@ -4,7 +4,7 @@ local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local StudioAskUserTool = CreatorAgentChatModule.StudioAskUserTool
 local StudioProposePlanTool = CreatorAgentChatModule.StudioProposePlanTool
 
-local function _(p1) --[[ Line: 20 | Named "parseEmittedTimeMillis" ]]
+local function _(p1)
 	if typeof(p1) == "string" and p1 ~= "" then
 		local _DateTime = DateTime.fromIsoDate(p1)
 		
@@ -14,18 +14,18 @@ local function _(p1) --[[ Line: 20 | Named "parseEmittedTimeMillis" ]]
 	end
 end
 
-local _ = function(p1): boolean --[[ Line: 28 | Named "toolCallIsLocalPrompt" ]]
+local _ = function(p1): boolean
 	-- upvalues: StudioProposePlanTool (copy), StudioAskUserTool (copy)
 	return StudioProposePlanTool.extractPlanFromToolCall(p1) ~= nil or StudioAskUserTool.extractQuestionsFromToolCall(p1) ~= nil
 end
 
-local _ = function(p1): boolean --[[ Line: 69 | Named "isActiveToolActivity" ]]
+local _ = function(p1): boolean
 	return p1.kind == "tool_call" and (p1.status == "pending" or (p1.status == "in_progress" or p1.status == nil))
 end
 
 return {
 	ASSISTANT_STOPPED_TEXT = LocalizationStringsModule.CHAT_ASSISTANT_STOPPED,
-	countToolCalls = function(List): number --[[ Line: 76 ]]
+	countToolCalls = function(List): number
 		local Count = 0
 		
 		for _, value in List do
@@ -35,11 +35,11 @@ return {
 		end
 		return Count
 	end,
-	getAskUserActivityLabel = function(p1, p2) --[[ Line: 107 ]]
+	getAskUserActivityLabel = function(p1, p2)
 		-- upvalues: LocalizationStringsModule (copy)
 		return if p2 == 0 then LocalizationStringsModule.CHAT_QUESTION_COMPOSER_ANSWER elseif p1 == 1 then LocalizationStringsModule.CHAT_QUESTION_SINGLE else LocalizationStringsModule.CHAT_QUESTION_MULTIPLE
 	end,
-	getLocalToolWaitSeconds = function(p1): number --[[ Line: 36 ]]
+	getLocalToolWaitSeconds = function(p1): number
 		-- upvalues: StudioProposePlanTool (copy), StudioAskUserTool (copy)
 		local EventMetaBySequenceId = p1.eventMetaBySequenceId
 		
@@ -82,7 +82,7 @@ return {
 		end
 		return Total / 1000
 	end,
-	getSummaryToolActivity = function(List, p2) --[[ Line: 86 ]]
+	getSummaryToolActivity = function(List, p2)
 		if p2 == "active" then
 			local Entry = nil
 			for i = #List, 1, -1 do

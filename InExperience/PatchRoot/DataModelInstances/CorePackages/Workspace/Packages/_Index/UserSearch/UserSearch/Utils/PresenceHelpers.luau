@@ -6,11 +6,11 @@ local FFlagUserSearchPresenceStoreMigrationModule = require(UserSearch.Flags.FFl
 local PresenceType1 = if FFlagUserSearchPresenceStoreMigrationModule then require(Parent.DataHydration).Presence.PresenceEnums.PresenceType else nil
 
 return {
-	isUserOnline = function(InGame): boolean --[[ Line: 13 ]]
+	isUserOnline = function(InGame): boolean
 		-- upvalues: FFlagUserSearchPresenceStoreMigrationModule (copy), PresenceType1 (copy), PresenceType (copy)
 		return if FFlagUserSearchPresenceStoreMigrationModule then InGame == PresenceType1.Online or (InGame == PresenceType1.InStudio or InGame == PresenceType1.InGame) else InGame == PresenceType.Online or (InGame == PresenceType.InStudio or InGame == PresenceType.InGame)
 	end,
-	isUserInGame = function(p1): boolean --[[ Line: 29 ]]
+	isUserInGame = function(p1): boolean
 		-- upvalues: FFlagUserSearchPresenceStoreMigrationModule (copy), PresenceType1 (copy), PresenceType (copy)
 		return if p1 and p1.universeId then if FFlagUserSearchPresenceStoreMigrationModule then p1.userPresenceType == PresenceType1.InGame else p1.userPresenceType == PresenceType.InGame else false
 	end

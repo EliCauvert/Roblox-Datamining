@@ -6,12 +6,12 @@ local GetSduiApiStoreFunction = SduiSharedUtilitiesModule.getSduiApiStore
 local GetSduiClientPageScopeFunction = SduiSharedUtilitiesModule.getSduiClientPageScope
 local ChartsSortDetailScopeFieldsModule = require(Charts.ChartsSortDetailPage.ChartsSortDetailScopeFields)
 
-local function _(p1): boolean --[[ Line: 25 | Named "canStartGenreRefresh" ]]
+local function _(p1): boolean
 	-- upvalues: GetSduiApiStoreFunction (copy)
 	return not GetSduiApiStoreFunction().isInFlight(p1)
 end
 
-local _ = function(p1, p2) --[[ Line: 29 | Named "finishRefresh" ]]
+local _ = function(p1, p2)
 	-- upvalues: GetSduiClientPageScopeFunction (copy), ChartsSortDetailScopeFieldsModule (copy)
 	local SduiClientPageScope = GetSduiClientPageScopeFunction(p1)
 	
@@ -24,7 +24,7 @@ local _ = function(p1, p2) --[[ Line: 29 | Named "finishRefresh" ]]
 	end
 end
 
-local function settleGenreRefresh(ConfigKey, p1) --[[ Line: 40 ]]
+local function settleGenreRefresh(ConfigKey, p1)
 	-- upvalues: PromiseModule (copy), GetSduiClientPageScopeFunction (copy), ChartsSortDetailScopeFieldsModule (copy)
 	if typeof(p1) == "table" then
 		local SduiClientPageScope = GetSduiClientPageScopeFunction(ConfigKey)
@@ -36,7 +36,7 @@ local function settleGenreRefresh(ConfigKey, p1) --[[ Line: 40 ]]
 	end
 end
 
-return function(p1) --[[ Line: 54 | Named "refreshChartsSortDetailGenre" ]]
+return function(p1)
 	-- upvalues: GetSduiApiStoreFunction (copy), GetSduiClientPageScopeFunction (copy), ChartsSortDetailScopeFieldsModule (copy), settleGenreRefresh (copy), PromiseModule (copy)
 	local ConfigKey = p1.configKey
 	local SelectedGenre = p1.selectedGenre
@@ -48,10 +48,10 @@ return function(p1) --[[ Line: 54 | Named "refreshChartsSortDetailGenre" ]]
 	elseif not GetSduiApiStoreFunction().isInFlight(ConfigKey) then
 		GetSduiClientPageScopeFunction(ConfigKey).set(ChartsSortDetailScopeFieldsModule.DesiredGenre, SelectedGenre)
 		
-		return GetSduiApiStoreFunction().refreshFromApi({ configKey = ConfigKey, loadTimer = p1.loadTimer }):andThen(function(Result) --[[ Line: 76 ]]
+		return GetSduiApiStoreFunction().refreshFromApi({ configKey = ConfigKey, loadTimer = p1.loadTimer }):andThen(function(Result)
 			-- upvalues: settleGenreRefresh (upval), ConfigKey (copy)
 			return settleGenreRefresh(ConfigKey, Result)
-		end):catch(function(Err) --[[ Line: 79 ]]
+		end):catch(function(Err)
 			-- upvalues: ConfigKey (copy), GetSduiClientPageScopeFunction (upval), ChartsSortDetailScopeFieldsModule (upval), PromiseModule (upval)
 			local SduiClientPageScope = GetSduiClientPageScopeFunction(ConfigKey)
 			SduiClientPageScope.set(ChartsSortDetailScopeFieldsModule.DesiredGenre, (SduiClientPageScope.get(ChartsSortDetailScopeFieldsModule.SafeGenre)))

@@ -21,7 +21,7 @@ local Url1 = UrlBuilder.new({
 local CustomPrompts = nil
 
 return {
-	fetchAllTooltipEligibility = function(Callback: (any) -> (), Callback1) --[[ Line: 87 ]]
+	fetchAllTooltipEligibility = function(Callback: (any) -> (), Callback1)
 		-- upvalues: FFlagExpChatUseUnifiedTooltipStore (copy), CustomPrompts (ref), HttpService (copy), Url (copy), NewResult (copy)
 		if not FFlagExpChatUseUnifiedTooltipStore then return end
 		if CustomPrompts == nil then
@@ -29,10 +29,10 @@ return {
 				Method = "GET",
 				Url = Url,
 				Headers = { Accept = "application/json" }
-			}):Start(function(_, p1) --[[ Line: 107 ]]
+			}):Start(function(_, p1)
 				-- upvalues: HttpService (upval), CustomPrompts (upval), Callback (copy), NewResult (upval), Callback1 (copy)
 				if p1.StatusCode == 200 then
-					local Success, Result = pcall(function() --[[ Line: 109 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: HttpService (upval), p1 (copy)
 						return HttpService:JSONDecode(p1.Body)
 					end)
@@ -76,7 +76,7 @@ return {
 			Callback({ customPrompts = CustomPrompts })
 		end
 	end,
-	reportImpression = function(PromptId) --[[ Line: 50 ]]
+	reportImpression = function(PromptId)
 		-- upvalues: FFlagExpChatUseUnifiedTooltipStore (copy), HttpService (copy), Url1 (copy), NewResult (copy)
 		if FFlagExpChatUseUnifiedTooltipStore then
 			HttpService:RequestInternal({
@@ -84,7 +84,7 @@ return {
 				Url = Url1,
 				Headers = { ["Content-Type"] = "application/json" },
 				Body = HttpService:JSONEncode({ promptType = PromptId, promptId = PromptId })
-			}):Start(function(_, p1) --[[ Line: 69 ]]
+			}):Start(function(_, p1)
 				-- upvalues: NewResult (upval), PromptId (copy)
 				if p1.StatusCode == 200 then
 					NewResult:debug("ChatTooltip impression reported: {}", PromptId)

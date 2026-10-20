@@ -8,7 +8,7 @@ local GridLineModule = require(Graphing.Components.GridLine)
 local GridUtilModule = require(Graphing.Util.GridUtil)
 local StyleUtilModule = require(Graphing.Util.StyleUtil)
 
-function Grid(p1) --[[ Line: 34 ]]
+function Grid(p1)
 	-- upvalues: ReactModule (copy), CanvasContextModule (copy), SignalsReactModule (copy), GridUtilModule (copy), TypesModule (copy), GridLineModule (copy), StyleUtilModule (copy)
 	local UseContextResult = ReactModule.useContext(CanvasContextModule)
 	SignalsReactModule.useSignalState(UseContextResult.viewportRectGetter)

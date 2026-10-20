@@ -28,19 +28,19 @@ local Icon1 = {
 	variant = IconVariant.Filled
 }
 
-local function _(ScrollFrame): boolean --[[ Line: 39 | Named "scrollingFrameCanScrollLeft" ]]
+local function _(ScrollFrame): boolean
 	return ScrollFrame.CanvasPosition.X > 0
 end
 
-local _ = function(ScrollFrame): boolean --[[ Line: 43 | Named "scrollingFrameCanScrollRight" ]]
+local _ = function(ScrollFrame): boolean
 	return ScrollFrame.AbsoluteSize.X < ScrollFrame.AbsoluteCanvasSize.X - ScrollFrame.CanvasPosition.X
 end
 
-local function getCanvasPosition(X): Vector2 --[[ Line: 47 ]]
+local function getCanvasPosition(X): Vector2
 	return Vector2.new(X, 0)
 end
 
-local function gradientTransparency(Entry, ScaledSize, BackgroundTransparency: number): NumberSequence? --[[ Line: 51 ]]
+local function gradientTransparency(Entry, ScaledSize, BackgroundTransparency: number): NumberSequence?
 	local v1 = 1 - BackgroundTransparency
 	local ScaledEntry = v1 * Entry[1]
 	local ScaledEntry1 = v1 * Entry[2]
@@ -69,23 +69,23 @@ local function gradientTransparency(Entry, ScaledSize, BackgroundTransparency: n
 	return NumberSequence.new(List)
 end
 
-local _ = function(p1, p2) --[[ Line: 88 | Named "makeGradientTransparency" ]]
+local _ = function(p1, p2)
 	-- upvalues: FFlagAXFixScrollingFrameGradientOverlap (copy), GradientTransparencyModule (copy), gradientTransparency (copy)
-	return function(p3) --[[ Line: 89 ]]
+	return function(p3)
 		-- upvalues: FFlagAXFixScrollingFrameGradientOverlap (upval), GradientTransparencyModule (upval), p1 (copy), p2 (copy), gradientTransparency (upval)
 		return if FFlagAXFixScrollingFrameGradientOverlap then GradientTransparencyModule.fittedGradientTransparency(p3, p1, p2) else gradientTransparency(p3, p1, p2)
 	end
 end
 
-local function makeButtonTransparency(Entry): number --[[ Line: 97 ]]
+local function makeButtonTransparency(Entry): number
 	return 1 - Entry[1] * Entry[2]
 end
 
-local function isVisibleFromTransparency(p1: number): boolean --[[ Line: 103 ]]
+local function isVisibleFromTransparency(p1: number): boolean
 	return p1 < 1
 end
 
-return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 126 | Named "ScrollingFrameWithIndicators" ]]
+return ReactModule.forwardRef(function(Frame: Frame, Ref)
 	-- upvalues: UseTokensFunction (copy), FFlagAXCategoryMenuVisualFixes (copy), UseAnimatedBindingFunction (copy), ReactModule (copy), ResponsiveModule (copy), ShouldShowScrollArrowsForInputTypeModule (copy), getCanvasPosition (copy), FFlagAXFixScrollingFrameGradientOverlap (copy), GradientTransparencyModule (copy), gradientTransparency (copy), makeButtonTransparency (copy), isVisibleFromTransparency (copy), ReactOtterModule (copy), MakeOtterSpringValueModule (copy), config (copy), GetFixedTabHeightModule (copy), View (copy), IconButton (copy), InputSize (copy), Icon (copy), Icon1 (copy)
 	local UseTokensResult = UseTokensFunction()
 	local BackgroundTransparency = Frame.BackgroundTransparency or UseTokensResult.Color.Common.NavigationBar.Transparency
@@ -100,11 +100,11 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 126 | Named
 	local ShouldShowScrollArrowsForInputTypeModule1 = if FFlagAXCategoryMenuVisualFixes then ShouldShowScrollArrowsForInputTypeModule((ResponsiveModule.useLastInput())) else nil
 	local UseAnimatedBindingResult4, UseAnimatedBindingResult2_3 = UseAnimatedBindingFunction(0)
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 155 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseAnimatedBindingResult4 (copy), getCanvasPosition (upval)
 		return UseAnimatedBindingResult4:map(getCanvasPosition)
 	end, {})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 159 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), UseAnimatedBindingResult (copy), UseAnimatedBindingResult1 (copy), UseBindingResult (copy), UseTokensResult (copy), BackgroundTransparency (copy), FFlagAXFixScrollingFrameGradientOverlap (upval), GradientTransparencyModule (upval), gradientTransparency (upval)
 		local ScaledSize = UseTokensResult.Size.Size_300 * 2
 		
@@ -112,28 +112,28 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 126 | Named
 			UseAnimatedBindingResult,
 			UseAnimatedBindingResult1,
 			UseBindingResult
-		}):map(function(p1) --[[ Line: 89 ]]
+		}):map(function(p1)
 			-- upvalues: FFlagAXFixScrollingFrameGradientOverlap (upval), GradientTransparencyModule (upval), ScaledSize (copy), BackgroundTransparency (copy), gradientTransparency (upval)
 			return if FFlagAXFixScrollingFrameGradientOverlap then GradientTransparencyModule.fittedGradientTransparency(p1, ScaledSize, BackgroundTransparency) else gradientTransparency(p1, ScaledSize, BackgroundTransparency)
 		end)
 	end, { UseTokensResult, BackgroundTransparency })
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 167 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), UseAnimatedBindingResult1 (copy), UseAnimatedBindingResult3 (copy), makeButtonTransparency (upval)
 		return ReactModule.joinBindings({ UseAnimatedBindingResult1, UseAnimatedBindingResult3 }):map(makeButtonTransparency)
 	end, {})
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 171 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), UseAnimatedBindingResult (copy), UseAnimatedBindingResult3 (copy), makeButtonTransparency (upval)
 		return ReactModule.joinBindings({ UseAnimatedBindingResult, UseAnimatedBindingResult3 }):map(makeButtonTransparency)
 	end, {})
-	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 178 ]]
+	local UseMemoResult4 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult3 (copy), isVisibleFromTransparency (upval)
 		return UseMemoResult3:map(isVisibleFromTransparency)
 	end, {})
-	local UseMemoResult5 = ReactModule.useMemo(function() --[[ Line: 182 ]]
+	local UseMemoResult5 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult2 (copy), isVisibleFromTransparency (upval)
 		return UseMemoResult2:map(isVisibleFromTransparency)
 	end, {})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 186 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UseAnimatedBindingResult2_3 (copy), ReactOtterModule (upval), MakeOtterSpringValueModule (upval), config (upval)
 		local Current = UseRefResult.current
 		
@@ -142,7 +142,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 126 | Named
 			UseAnimatedBindingResult2_3(MakeOtterSpringValueModule(Current.AbsoluteCanvasSize.X - Current.AbsoluteSize.X, config))
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 199 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UseAnimatedBindingResult2_3 (copy), ReactOtterModule (upval), MakeOtterSpringValueModule (upval), config (upval)
 		local Current = UseRefResult.current
 		
@@ -152,7 +152,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 126 | Named
 		end
 	end, {})
 	
-	local function onMouseEnter() --[[ Line: 209 ]]
+	local function onMouseEnter()
 		-- upvalues: FFlagAXCategoryMenuVisualFixes (upval), ShouldShowScrollArrowsForInputTypeModule1 (ref), UseAnimatedBindingResult2_2 (copy), MakeOtterSpringValueModule (upval), config (upval), UseStateResult2 (copy)
 		if not FFlagAXCategoryMenuVisualFixes or ShouldShowScrollArrowsForInputTypeModule1 then
 			UseAnimatedBindingResult2_2(MakeOtterSpringValueModule(1, config))
@@ -162,7 +162,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 126 | Named
 		end
 	end
 	
-	local function onMouseLeave() --[[ Line: 217 ]]
+	local function onMouseLeave()
 		-- upvalues: FFlagAXCategoryMenuVisualFixes (upval), ShouldShowScrollArrowsForInputTypeModule1 (ref), UseAnimatedBindingResult2_2 (copy), MakeOtterSpringValueModule (upval), config (upval), UseStateResult2 (copy)
 		if not FFlagAXCategoryMenuVisualFixes or ShouldShowScrollArrowsForInputTypeModule1 then
 			UseAnimatedBindingResult2_2(MakeOtterSpringValueModule(0, config))
@@ -173,7 +173,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 126 | Named
 	end
 	
 	if FFlagAXCategoryMenuVisualFixes then
-		ReactModule.useEffect(function() --[[ Line: 228 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: ShouldShowScrollArrowsForInputTypeModule1 (ref), UseAnimatedBindingResult2_2 (copy), ReactOtterModule (upval), UseStateResult2 (copy)
 			if not ShouldShowScrollArrowsForInputTypeModule1 then
 				UseAnimatedBindingResult2_2(ReactOtterModule.instant(0))
@@ -181,7 +181,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 126 | Named
 			end
 		end, { ShouldShowScrollArrowsForInputTypeModule1 })
 	end
-	local function onCanvasChanged(ScrollFrame) --[[ Line: 236 ]]
+	local function onCanvasChanged(ScrollFrame)
 		-- upvalues: UseAnimatedBindingResult2 (copy), MakeOtterSpringValueModule (upval), config (upval), UseAnimatedBindingResult2_1 (copy)
 		local IsXAbove = ScrollFrame.CanvasPosition.X > 0
 		UseAnimatedBindingResult2(MakeOtterSpringValueModule(if IsXAbove then 1 else 0, config))
@@ -189,12 +189,12 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 126 | Named
 		UseAnimatedBindingResult2_1(MakeOtterSpringValueModule(if IsXBelow then 1 else 0, config))
 	end
 	
-	local function onSizeChanged(Frame) --[[ Line: 243 ]]
+	local function onSizeChanged(Frame)
 		-- upvalues: UseBindingResult2 (copy)
 		UseBindingResult2(Frame.AbsoluteSize.X)
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 247 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseAnimatedBindingResult2_1 (copy)
 		local Current = UseRefResult.current
 		
@@ -207,7 +207,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 126 | Named
 	end, {})
 	
 	if FFlagAXCategoryMenuVisualFixes then
-		local UseResult2 = ReactModule.useCallback(function(p1) --[[ Line: 262 ]]
+		local UseResult2 = ReactModule.useCallback(function(p1)
 			-- upvalues: UseRefResult (copy), UseAnimatedBindingResult2_3 (copy), ReactOtterModule (upval), MakeOtterSpringValueModule (upval), config (upval)
 			local Current = UseRefResult.current
 			
@@ -216,18 +216,18 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 126 | Named
 				UseAnimatedBindingResult2_3(MakeOtterSpringValueModule(p1, config))
 			end
 		end, {})
-		local UseResult3 = ReactModule.useCallback(function(p1) --[[ Line: 271 ]]
+		local UseResult3 = ReactModule.useCallback(function(p1)
 			-- upvalues: UseRefResult (copy), UseAnimatedBindingResult2_3 (copy), ReactOtterModule (upval)
 			if UseRefResult.current then
 				UseAnimatedBindingResult2_3(ReactOtterModule.instant(p1))
 			end
 		end, {})
-		ReactModule.useImperativeHandle(Frame.controllerRef, function() --[[ Line: 278 ]]
+		ReactModule.useImperativeHandle(Frame.controllerRef, function()
 			-- upvalues: UseResult2 (copy), UseResult3 (copy), UseRefResult (copy)
 			return {
 				scrollToOffset = UseResult2,
 				setOffset = UseResult3,
-				getScrollingFrame = function() --[[ Line: 282 ]]
+				getScrollingFrame = function()
 					-- upvalues: UseRefResult (upval)
 					return UseRefResult.current
 				end

@@ -17,34 +17,34 @@ local FFlagAppChatUnreadMessageCountStoreModule = require(AppChat.Flags.FFlagApp
 local GetUnreadMessageCountStoreModule = if FFlagAppChatUnreadMessageCountStoreModule then require(AppChat.Stores.GetUnreadMessageCountStore) else nil
 local NewResult = require(AppChat.Logger):new(script.Name)
 
-return ReactModule.memo(function(p1) --[[ Line: 30 | Named "AppChatNotificationEventReceiver" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseAnalyticsModule (copy), UseUnreadMessagesDispatchModule (copy), UseDispatchFunction (copy), FFlagAppChatUnreadMessageCountStoreModule (copy), UseSignalStateFunction (copy), GetUnreadMessageCountStoreModule (copy), UseSelectorFunction (copy), UseChatIsVisibleModule (copy), ReactModule (copy), InExperienceAppChatModalModule (copy), FFlagExpChatEnableFriendsTab (copy), NewResult (copy), AppChatNetworkingModule (copy), EventNamesModule (copy), UseRealtimePlatformChatModule (copy), RealtimeDeliveryModule (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseUnreadMessagesDispatchModuleResult = UseUnreadMessagesDispatchModule()
 	local UseDispatchResult = UseDispatchFunction()
-	local UseSignalStateResult = if FFlagAppChatUnreadMessageCountStoreModule then UseSignalStateFunction(GetUnreadMessageCountStoreModule(false).getUnreadMessageCount) else UseSelectorFunction(function(p2) --[[ Line: 37 ]]
+	local UseSignalStateResult = if FFlagAppChatUnreadMessageCountStoreModule then UseSignalStateFunction(GetUnreadMessageCountStoreModule(false).getUnreadMessageCount) else UseSelectorFunction(function(p2)
 		return p2.ChatAppReducer.unreadMessageCount
 	end)
 	local UseChatIsVisibleModuleResult = UseChatIsVisibleModule()
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 42 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 		-- upvalues: InExperienceAppChatModalModule (upval)
 		return InExperienceAppChatModalModule:getVisible()
 	end)
-	ReactModule.useEffect(function() --[[ Line: 46 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: InExperienceAppChatModalModule (upval), UseStateResult2 (copy)
 		local EventConnection = InExperienceAppChatModalModule.default.visibilitySignal.Event:Connect(UseStateResult2)
 		UseStateResult2(InExperienceAppChatModalModule:getVisible())
 		
-		return function() --[[ Line: 49 ]]
+		return function()
 			-- upvalues: EventConnection (copy)
 			EventConnection:Disconnect()
 		end
 	end, {})
 	local UseStateResult1 = if FFlagExpChatEnableFriendsTab and p1.isInExperience then UseStateResult else UseChatIsVisibleModuleResult
-	ReactModule.useEffect(function() --[[ Line: 64 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: NewResult (upval), UseDispatchResult (copy), AppChatNetworkingModule (upval), FFlagExpChatEnableFriendsTab (upval), p1 (copy), InExperienceAppChatModalModule (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval)
 		NewResult:debug("Fetching conversation metadata to get unread count")
-		UseDispatchResult(AppChatNetworkingModule.rodux.GetConversationMetadata.API()):andThen(function(Result) --[[ Line: 68 ]]
+		UseDispatchResult(AppChatNetworkingModule.rodux.GetConversationMetadata.API()):andThen(function(Result)
 			-- upvalues: NewResult (upval), FFlagExpChatEnableFriendsTab (upval), p1 (upval), InExperienceAppChatModalModule (upval), UseAnalyticsModuleResult (upval), EventNamesModule (upval)
 			local GlobalUnreadMessageCount = Result.responseBody.global_unread_message_count
 			NewResult:info("Initial unread message count: {}", GlobalUnreadMessageCount)
@@ -53,13 +53,13 @@ return ReactModule.memo(function(p1) --[[ Line: 30 | Named "AppChatNotificationE
 				InExperienceAppChatModalModule:markInitialUnreadCountReceived(GlobalUnreadMessageCount or 0)
 			end
 			UseAnalyticsModuleResult.fireAnalyticsEvent(EventNamesModule.preloadSocialTabDataEvent, { unreadConversationCount = GlobalUnreadMessageCount })
-		end):catch(function(Err) --[[ Line: 82 ]]
+		end):catch(function(Err)
 			-- upvalues: NewResult (upval), UseAnalyticsModuleResult (upval), EventNamesModule (upval)
 			NewResult:error("Failure in GetConversationMetadata. Error: {}", (tostring(Err)))
 			UseAnalyticsModuleResult.fireAnalyticsEvent(EventNamesModule.preloadSocialTabDataFailedEvent, {})
 		end)
 	end, { UseDispatchResult, UseAnalyticsModuleResult })
-	ReactModule.useEffect(function() --[[ Line: 88 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: NewResult (upval), UseSignalStateResult (copy), UseUnreadMessagesDispatchModuleResult (copy)
 		NewResult:info("Dispatching unread messsage count as {}", UseSignalStateResult)
 		UseUnreadMessagesDispatchModuleResult(UseSignalStateResult)
@@ -67,42 +67,42 @@ return ReactModule.memo(function(p1) --[[ Line: 30 | Named "AppChatNotificationE
 		UseUnreadMessagesDispatchModuleResult,
 		UseSignalStateResult
 	})
-	UseRealtimePlatformChatModule(function(p2) --[[ Line: 93 ]]
+	UseRealtimePlatformChatModule(function(p2)
 		-- upvalues: NewResult (upval), UseStateResult1 (copy), UseDispatchResult (copy), AppChatNetworkingModule (upval)
 		if p2.Type == "ChannelMetadataUpdated" or p2.Type == "ChannelMarkedRead" then
 			NewResult:info("Received event {}, fetching conversation metadata to get unread count", p2.Type)
 			
 			if UseStateResult1 then
 				NewResult:info("Chat tab is visible during realtime event, calling clear endpoint")
-				UseDispatchResult(AppChatNetworkingModule.rodux.ClearGlobalUnreadCount.API()):catch(function(Err) --[[ Line: 101 ]]
+				UseDispatchResult(AppChatNetworkingModule.rodux.ClearGlobalUnreadCount.API()):catch(function(Err)
 					-- upvalues: NewResult (upval)
 					NewResult:error("Failure in ClearGlobalUnreadCount. Error: {}", (tostring(Err)))
 				end)
 				
 				return
 			else
-				UseDispatchResult(AppChatNetworkingModule.rodux.GetConversationMetadata.API()):catch(function(Err) --[[ Line: 105 ]]
+				UseDispatchResult(AppChatNetworkingModule.rodux.GetConversationMetadata.API()):catch(function(Err)
 					-- upvalues: NewResult (upval)
 					NewResult:error("Failure in GetConversationMetadata. Error: {}", (tostring(Err)))
 				end)
 			end
 		end
 	end, { UseDispatchResult, UseStateResult1 })
-	RealtimeDeliveryModule.useRealtimeConnectionStateChanged("CommunicationChannels", function(ConnectionState, p2) --[[ Line: 115 ]]
+	RealtimeDeliveryModule.useRealtimeConnectionStateChanged("CommunicationChannels", function(ConnectionState, p2)
 		-- upvalues: NewResult (upval), UseStateResult1 (copy), UseDispatchResult (copy), AppChatNetworkingModule (upval)
 		if ConnectionState == Enum.ConnectionState.Connected and p2 then
 			NewResult:info("Connection re-established, fetching conversation metadata to get unread count")
 			
 			if UseStateResult1 then
 				NewResult:info("Chat tab is visible during connection recovery, calling clear endpoint")
-				UseDispatchResult(AppChatNetworkingModule.rodux.ClearGlobalUnreadCount.API()):catch(function(Err) --[[ Line: 121 ]]
+				UseDispatchResult(AppChatNetworkingModule.rodux.ClearGlobalUnreadCount.API()):catch(function(Err)
 					-- upvalues: NewResult (upval)
 					NewResult:error("Failure in ClearGlobalUnreadCount. Error: {}", (tostring(Err)))
 				end)
 				
 				return
 			else
-				UseDispatchResult(AppChatNetworkingModule.rodux.GetConversationMetadata.API()):catch(function(Err) --[[ Line: 125 ]]
+				UseDispatchResult(AppChatNetworkingModule.rodux.GetConversationMetadata.API()):catch(function(Err)
 					-- upvalues: NewResult (upval)
 					NewResult:error("Failure in GetConversationMetadata. Error: {}", (tostring(Err)))
 				end)

@@ -7,7 +7,7 @@ local GetFFlagInviteListRerankFunction = require(CorePackages.Workspace.Packages
 local NewInviteMenuExperimentManager = {}
 NewInviteMenuExperimentManager.__index = NewInviteMenuExperimentManager
 
-function NewInviteMenuExperimentManager.new(p1) --[[ Line: 20 ]]
+function NewInviteMenuExperimentManager.new(p1)
 	-- upvalues: IXPServiceWrapper (copy), GetFFlagInviteListRerankFunction (copy), NewInviteMenuExperimentManager (copy)
 	local config = {
 		_styleEnabled = false,
@@ -21,27 +21,27 @@ function NewInviteMenuExperimentManager.new(p1) --[[ Line: 20 ]]
 	return config
 end
 
-function NewInviteMenuExperimentManager:getStyleEnabled() --[[ Line: 32 ]]
+function NewInviteMenuExperimentManager:getStyleEnabled()
 	return self._styleEnabled
 end
 
-function NewInviteMenuExperimentManager:getCustomizationEnabled() --[[ Line: 36 ]]
+function NewInviteMenuExperimentManager:getCustomizationEnabled()
 	return self._customizationEnabled
 end
 
-function NewInviteMenuExperimentManager:getNewSendEndpointEnabled() --[[ Line: 40 ]]
+function NewInviteMenuExperimentManager:getNewSendEndpointEnabled()
 	return self._newSendEndpointEnabled
 end
 
 if GetFFlagInviteListRerankFunction() then
-	function NewInviteMenuExperimentManager:getInviteListSortOrder() --[[ Line: 45 ]]
+	function NewInviteMenuExperimentManager:getInviteListSortOrder()
 		return self._inviteListSortOrder
 	end
 end
-function NewInviteMenuExperimentManager.initialize(p1) --[[ Line: 50 ]]
+function NewInviteMenuExperimentManager.initialize(p1)
 	-- upvalues: GetFFlagEnableNewInviteMenuIXPModule (copy), GetFStringInExperienceNotificationsLayerModule (copy), GetFFlagInviteListRerankFunction (copy)
 	if GetFFlagEnableNewInviteMenuIXPModule() then
-		task.spawn(function() --[[ Line: 55 ]]
+		task.spawn(function()
 			-- upvalues: p1 (copy), GetFStringInExperienceNotificationsLayerModule (upval), GetFFlagInviteListRerankFunction (upval)
 			p1._ixpServiceWrapper:WaitForInitialization()
 			local LayerData = p1._ixpServiceWrapper:GetLayerData(GetFStringInExperienceNotificationsLayerModule())

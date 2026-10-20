@@ -17,7 +17,7 @@ local ConversationUtilsModule = if FFlagShareSheetPeoplePickerEnabledModule then
 local Players = game:GetService("Players")
 local _ = require(ShareSheet.Types)
 
-local function _(List, p1) --[[ Line: 42 | Named "getOtherParticipants" ]]
+local function _(List, p1)
 	local List1 = {}
 	
 	for _, value in List do
@@ -28,7 +28,7 @@ local function _(List, p1) --[[ Line: 42 | Named "getOtherParticipants" ]]
 	return List1
 end
 
-local function createSkeletonItems() --[[ Line: 52 ]]
+local function createSkeletonItems()
 	-- upvalues: ShareSheetConstantsModule (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy)
 	local Elements = {}
 	
@@ -62,11 +62,11 @@ local function createSkeletonItems() --[[ Line: 52 ]]
 	return Elements
 end
 
-local function ShareSheetConversationItem(Frame) --[[ Line: 94 ]]
+local function ShareSheetConversationItem(Frame)
 	-- upvalues: ReactModule (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), ConversationUtilsModule (copy), ShareSheetItemContainerModule (copy)
 	local Conversation = Frame.conversation
 	local Id = Conversation.id
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 97 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: Frame (copy), Id (copy)
 		Frame.onConversationActivated(Id)
 	end, { Id, Frame.onConversationActivated })
@@ -101,7 +101,7 @@ local function ShareSheetConversationItem(Frame) --[[ Line: 94 ]]
 	})
 end
 
-local function ShareSheetRecipientItem(Frame) --[[ Line: 133 ]]
+local function ShareSheetRecipientItem(Frame)
 	-- upvalues: ReactModule (copy), RecipientModule (copy), ShareSheetItemContainerModule (copy)
 	local Id = Frame.recipient.id
 	local ParticipantIds = RecipientModule.getParticipantIds(Frame.recipient, Frame.localUserId)
@@ -111,7 +111,7 @@ local function ShareSheetRecipientItem(Frame) --[[ Line: 133 ]]
 		secondUserId = ParticipantIds[2],
 		isSelected = Frame.isSelected,
 		label = RecipientModule.getName(Frame.recipient),
-		onActivated = ReactModule.useCallback(function() --[[ Line: 135 ]]
+		onActivated = ReactModule.useCallback(function()
 			-- upvalues: Frame (copy), Id (copy)
 			Frame.onConversationActivated(Id)
 		end, { Id, Frame.onConversationActivated }),
@@ -119,7 +119,7 @@ local function ShareSheetRecipientItem(Frame) --[[ Line: 133 ]]
 	})
 end
 
-return function(Frame) --[[ Line: 150 | Named "ShareSheetSocialRow" ]]
+return function(Frame)
 	-- upvalues: Players (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), UseLocalizationFunction (copy), FFlagShareSheetFriendsSort (copy), createSkeletonItems (copy), ReactModule (copy), ShareSheetRecipientItem (copy), ShareSheetConversationItem (copy), ShareSheetItemContainerModule (copy), IconName (copy), ShareSheetRowModule (copy)
 	local Text = tostring(Players.LocalPlayer and Players.LocalPlayer.UserId or 0)
 	local UseLocalizationResult = if FFlagShareSheetPeoplePickerEnabledModule then UseLocalizationFunction({ more = "CommonUI.Features.Label.More" }) else nil

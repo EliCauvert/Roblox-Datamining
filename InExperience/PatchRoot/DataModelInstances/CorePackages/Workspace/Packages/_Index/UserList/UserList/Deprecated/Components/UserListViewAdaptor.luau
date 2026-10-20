@@ -12,12 +12,12 @@ local config = {
 	anchorPoint = Vector2.new(0, 0)
 }
 
-return function(p1) --[[ Line: 28 | Named "UserListViewAdaptor" ]]
+return function(p1)
 	-- upvalues: UseListFormFactorModule (copy), AppFormFactor (copy), ReactModule (copy), config (copy), View (copy), UserListPeekViewModule (copy)
 	local UseListFormFactorModuleResult = UseListFormFactorModule()
 	local IsFormFactorMatch = UseListFormFactorModuleResult.formFactor == AppFormFactor.Compact
 	local HasWideModePeekViewLayout: boolean = not IsFormFactorMatch and p1.wideModePeekViewLayout ~= nil
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 32 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: HasWideModePeekViewLayout (copy), p1 (copy), config (upval)
 		return if HasWideModePeekViewLayout then p1.wideModePeekViewLayout else config
 	end, {

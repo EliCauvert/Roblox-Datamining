@@ -6,11 +6,11 @@ local IconButton = FoundationModule.IconButton
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 
-local function _(p1: number): string --[[ Line: 29 | Named "formatTime" ]]
+local function _(p1: number): string
 	return string.format("%02d:%02d", math.floor(p1 / 60), (math.floor(p1 % 60)))
 end
 
-return function(p1) --[[ Line: 35 | Named "ProgressBar" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), IconButton (copy), ButtonSize (copy), Text (copy)
 	local TimePositionRatio = p1.timePosition / p1.timeLength
 	local TimePosition: number = p1.timePosition
@@ -19,15 +19,15 @@ return function(p1) --[[ Line: 35 | Named "ProgressBar" ]]
 	local Formatted1 = string.format("%02d:%02d", math.floor(TimeLength / 60), (math.floor(TimeLength % 60)))
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
-	ReactModule.useEffect(function() --[[ Line: 42 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
 		if not UseRefResult or not UseRefResult.current then return end
-		local InputBeganConnection = UseRefResult.current.InputBegan:Connect(function(Input) --[[ Line: 49 ]]
+		local InputBeganConnection = UseRefResult.current.InputBegan:Connect(function(Input)
 			-- upvalues: UseStateResult2 (upval)
 			UseStateResult2(Input.Position.X)
 		end)
 		
-		return function() --[[ Line: 53 ]]
+		return function()
 			-- upvalues: InputBeganConnection (copy)
 			InputBeganConnection:Disconnect()
 		end
@@ -43,7 +43,7 @@ return function(p1) --[[ Line: 35 | Named "ProgressBar" ]]
 		ProgressBarContainer = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "radius-small bg-over-media-0 size-full-200",
-			onActivated = ReactModule.useCallback(function() --[[ Line: 58 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: UseRefResult (copy), p1 (copy), UseStateResult (copy)
 				if UseRefResult and UseRefResult.current then
 					p1.onProgressBarActivated((UseStateResult - UseRefResult.current.AbsolutePosition.X) / UseRefResult.current.AbsoluteSize.X)

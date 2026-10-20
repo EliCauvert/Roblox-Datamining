@@ -188,7 +188,7 @@ local config = {
 	}) else nil
 }
 
-return function(p1, EventContext, CustomFields) --[[ Line: 237 ]]
+return function(p1, EventContext, CustomFields)
 	-- upvalues: AppPage (copy), StrictInterfaceResult1 (copy), config (copy), DiscoveryEventErrorLogger (copy), FFlagLuaAppGameImpressionsAddUnifiedFields (copy), CryoModule (copy), HttpService (copy), ContentType (copy), FFlagLuaAppMigrateGameEventsTelemetryService (copy), TelemetryService (copy), Config (ref), GetPlatformTargetFunction (copy), FFlagLuaAppGameEventsTelemetryServiceShadowTraffic (copy), Config1 (ref)
 	local StrictInterfaceResult = if CustomFields.seeAllFlag and (EventContext == AppPage.Home or EventContext == AppPage.Games) then StrictInterfaceResult1 else config[EventContext]
 	

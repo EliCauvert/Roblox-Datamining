@@ -15,15 +15,15 @@ local FFlagEnableSocialTabsPage = require(Parent.SharedFlags).FFlagEnableSocialT
 local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(ProfileId, p1, p2, MutualFriendIds, Title) --[[ Line: 35 | Named "useSocialCountsActions" ]]
+return function(ProfileId, p1, p2, MutualFriendIds, Title)
 	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), FFlagEnableSocialTabsPage (copy), UseProfileFormFactorModule (copy), ReactModule (copy), AppPage (copy), EventNamesModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), Url (copy), TextKeysModule (copy), FFlagCreateConnectionsHub (copy), UrlBuilder (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseNavigationResult = UseNavigationFunction()
 	local NoIsFullView = if FFlagEnableSocialTabsPage then not UseProfileFormFactorModule().isFullView else nil
 	
-	return ReactModule.useMemo(function() --[[ Line: 48 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: MutualFriendIds (copy), AppPage (upval), p2 (copy), EventNamesModule (upval), FFlagEnableSocialTabsPage (upval), p1 (copy), ProfileId (copy), Title (copy), NoIsFullView (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval), Url (upval), TextKeysModule (upval), FFlagCreateConnectionsHub (upval), UseNavigationResult (copy), UrlBuilder (upval)
-		local function buildTabConfig() --[[ Line: 49 ]]
+		local function buildTabConfig()
 			-- upvalues: MutualFriendIds (upval), AppPage (upval)
 			local List = {}
 			
@@ -42,7 +42,7 @@ return function(ProfileId, p1, p2, MutualFriendIds, Title) --[[ Line: 35 | Named
 		end
 		
 		return {
-			mutualFriendsCount = function() --[[ Line: 62 ]]
+			mutualFriendsCount = function()
 				-- upvalues: p2 (upval), EventNamesModule (upval), FFlagEnableSocialTabsPage (upval), p1 (upval), AppPage (upval), ProfileId (upval), Title (upval), buildTabConfig (copy), NoIsFullView (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateDownFunction (upval), MutualFriendIds (upval)
 				p2.fireAnalyticsEvent(EventNamesModule.MutualFriendsButton)
 				
@@ -83,7 +83,7 @@ return function(ProfileId, p1, p2, MutualFriendIds, Title) --[[ Line: 35 | Named
 					end
 				end
 			end,
-			followersCount = function() --[[ Line: 97 ]]
+			followersCount = function()
 				-- upvalues: p2 (upval), EventNamesModule (upval), AppPage (upval), Url (upval), ProfileId (upval), TextKeysModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateDownFunction (upval)
 				p2.fireAnalyticsEvent(EventNamesModule.FollowersButton)
 				local config = {
@@ -100,7 +100,7 @@ return function(ProfileId, p1, p2, MutualFriendIds, Title) --[[ Line: 35 | Named
 					UseDispatchResult(NavigateDownFunction(config))
 				end
 			end,
-			followingsCount = function() --[[ Line: 113 ]]
+			followingsCount = function()
 				-- upvalues: p2 (upval), EventNamesModule (upval), AppPage (upval), Url (upval), ProfileId (upval), TextKeysModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateDownFunction (upval)
 				p2.fireAnalyticsEvent(EventNamesModule.FollowingsButton)
 				local config = {
@@ -117,7 +117,7 @@ return function(ProfileId, p1, p2, MutualFriendIds, Title) --[[ Line: 35 | Named
 					UseDispatchResult(NavigateDownFunction(config))
 				end
 			end,
-			friendsCount = function() --[[ Line: 129 ]]
+			friendsCount = function()
 				-- upvalues: p2 (upval), EventNamesModule (upval), p1 (upval), FFlagCreateConnectionsHub (upval), UseNavigationResult (upval), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateDownFunction (upval), FFlagEnableSocialTabsPage (upval), ProfileId (upval), Title (upval), buildTabConfig (copy), NoIsFullView (upval), UrlBuilder (upval), TextKeysModule (upval)
 				p2.fireAnalyticsEvent(EventNamesModule.FriendsButton)
 				

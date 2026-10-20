@@ -11,7 +11,7 @@ ExtendResult.validateProps = T.interface({
 	onHidden = T.optional(T.callback)
 })
 
-function ExtendResult.init(p1) --[[ Line: 24 ]]
+function ExtendResult.init(p1)
 	-- upvalues: Roact (copy), Otter (copy), config (copy)
 	local Binding, Binding2 = Roact.createBinding(1)
 	p1.motor = Otter.createSingleMotor(1)
@@ -20,7 +20,7 @@ function ExtendResult.init(p1) --[[ Line: 24 ]]
 	p1.animationProgress = Binding
 	p1.setProgress = Binding2
 	
-	function p1.onComplete() --[[ Line: 34 ]]
+	function p1.onComplete()
 		-- upvalues: p1 (copy)
 		if p1.props.shouldShow then
 			if p1.props.onShown then
@@ -39,7 +39,7 @@ function ExtendResult.init(p1) --[[ Line: 24 ]]
 	if p1.props.skipAnimation then
 		p1.motor:stop()
 		Binding2(v1)
-		task.defer(function() --[[ Line: 52 ]]
+		task.defer(function()
 			-- upvalues: p1 (copy)
 			p1.onComplete()
 		end)
@@ -50,7 +50,7 @@ function ExtendResult.init(p1) --[[ Line: 24 ]]
 	end
 end
 
-function ExtendResult.didUpdate(p1, p2, _) --[[ Line: 60 ]]
+function ExtendResult.didUpdate(p1, p2, _)
 	-- upvalues: Otter (copy), config (copy)
 	if p2.shouldShow ~= p1.props.shouldShow or p2.skipAnimation ~= p1.props.skipAnimation then
 		local v1: number = if p1.props.shouldShow then 0 else 1
@@ -58,7 +58,7 @@ function ExtendResult.didUpdate(p1, p2, _) --[[ Line: 60 ]]
 		if p1.props.skipAnimation then
 			p1.motor:stop()
 			p1.setProgress(v1)
-			task.defer(function() --[[ Line: 67 ]]
+			task.defer(function()
 				-- upvalues: p1 (copy)
 				p1.onComplete()
 			end)
@@ -70,13 +70,13 @@ function ExtendResult.didUpdate(p1, p2, _) --[[ Line: 60 ]]
 	end
 end
 
-function ExtendResult.render(p1) --[[ Line: 76 ]]
+function ExtendResult.render(p1)
 	-- upvalues: Roact (copy)
 	return Roact.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0),
-		Position = p1.animationProgress:map(function(p2: number): UDim2 --[[ Line: 81 ]]
+		Position = p1.animationProgress:map(function(p2: number): UDim2
 			return UDim2.new(0, 0, -1 * p2, 0)
 		end)
 	}, p1.props[Roact.Children])

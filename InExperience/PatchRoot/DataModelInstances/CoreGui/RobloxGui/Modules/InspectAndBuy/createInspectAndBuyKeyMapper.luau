@@ -1,5 +1,5 @@
-﻿return function(p1) --[[ Line: 7 | Named "createInspectAndBuyKeyMapper" ]]
-	return function(Text, ...): string --[[ Line: 9 ]]
+﻿return function(p1)
+	return function(Text, ...): string
 		-- upvalues: p1 (copy)
 		local Text1 = "inspectAndBuy." .. Text .. "." .. p1
 		

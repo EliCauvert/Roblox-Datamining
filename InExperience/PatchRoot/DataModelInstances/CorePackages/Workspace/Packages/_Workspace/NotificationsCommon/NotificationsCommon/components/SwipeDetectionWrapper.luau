@@ -1,14 +1,14 @@
 ﻿local UserInputService = game:GetService("UserInputService")
 local ReactModule = require(script.Parent.Parent.Parent.React)
 
-return function(Frame) --[[ Line: 19 ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), UserInputService (copy)
 	local Ref = ReactModule.createRef()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 23 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy), UserInputService (upval), Ref (copy), UseStateResult2 (copy), UseStateResult (copy)
 		if Frame.swipeEnabled and Frame.swipeCallback then
-			local TouchStartedConnection = UserInputService.TouchStarted:Connect(function(Touch) --[[ Line: 29 ]]
+			local TouchStartedConnection = UserInputService.TouchStarted:Connect(function(Touch)
 				-- upvalues: Ref (upval), UseStateResult2 (upval)
 				local Current = Ref and Ref.current
 				
@@ -19,18 +19,18 @@ return function(Frame) --[[ Line: 19 ]]
 					UseStateResult2(true)
 				end
 			end)
-			local TouchEndedConnection = UserInputService.TouchEnded:Connect(function() --[[ Line: 46 ]]
+			local TouchEndedConnection = UserInputService.TouchEnded:Connect(function()
 				-- upvalues: UseStateResult2 (upval)
 				UseStateResult2(false)
 			end)
-			local TouchSwipeConnection = if UseStateResult then UserInputService.TouchSwipe:Connect(function(SwipeDirection) --[[ Line: 50 ]]
+			local TouchSwipeConnection = if UseStateResult then UserInputService.TouchSwipe:Connect(function(SwipeDirection)
 				-- upvalues: UseStateResult (upval), Frame (upval)
 				if UseStateResult then
 					Frame.swipeCallback(SwipeDirection)
 				end
 			end) else nil
 			
-			return function() --[[ Line: 57 ]]
+			return function()
 				-- upvalues: TouchStartedConnection (copy), TouchEndedConnection (copy), TouchSwipeConnection (copy)
 				TouchStartedConnection:Disconnect()
 				TouchEndedConnection:Disconnect()

@@ -14,15 +14,15 @@ local _ = require(PYMKCarousel.Common.DirectRecommendationTypes)
 local FFlagLuaAppUserSeenCollectionUnifiedFields = SharedFlagsModule.FFlagLuaAppUserSeenCollectionUnifiedFields
 local FFlagLuaAppEnableSduiHomePage = SharedFlagsModule.FFlagLuaAppEnableSduiHomePage
 
-return function(p1) --[[ Line: 53 | Named "PYMKCarouselEntryPoint" ]]
+return function(p1)
 	-- upvalues: UseLocalUserIdFunction (copy), FFlagLuaAppEnableSduiHomePage (copy), UseSelectorFunction (copy), GetSessionIdByKeyFunction (copy), RECOMMENDATIONSESSIONIDKEY (copy), React (copy), SetupFireEventFunction (copy), PYMKCollectionCarouselModule (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local RecommendationSessionId = nil
-	RecommendationSessionId = if FFlagLuaAppEnableSduiHomePage then p1.recommendationSessionId else UseSelectorFunction(function(p2) --[[ Line: 60 ]]
+	RecommendationSessionId = if FFlagLuaAppEnableSduiHomePage then p1.recommendationSessionId else UseSelectorFunction(function(p2)
 		-- upvalues: GetSessionIdByKeyFunction (upval), RECOMMENDATIONSESSIONIDKEY (upval)
 		return GetSessionIdByKeyFunction(p2)(RECOMMENDATIONSESSIONIDKEY)
 	end)
-	local UseMemoResult = React.useMemo(function() --[[ Line: 65 ]]
+	local UseMemoResult = React.useMemo(function()
 		-- upvalues: SetupFireEventFunction (upval), UseLocalUserIdResult (copy), RecommendationSessionId (ref), p1 (copy)
 		return SetupFireEventFunction({
 			infoForAllEvents = {

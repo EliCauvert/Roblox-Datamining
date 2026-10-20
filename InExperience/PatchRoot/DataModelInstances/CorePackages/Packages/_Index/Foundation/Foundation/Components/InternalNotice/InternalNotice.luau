@@ -14,12 +14,12 @@ local UseInternalNoticeVariantsPropsModule = require(script.Parent.useInternalNo
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 43 | Named "InternalNotice" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: UseTokensModule (copy), ReactModule (copy), UseInternalNoticeLayoutModule (copy), UseInternalNoticeVariantsPropsModule (copy), IconModule (copy), ViewModule (copy), TextModule (copy), EscapeRichTextModule (copy), StateLayerAffordanceModule (copy), CloseAffordanceModule (copy), InputSizeModule (copy), CloseAffordanceVariantModule (copy), WithCommonPropsModule (copy)
 	local TestId = p1.testId or "--foundation-internal-notice"
 	local Size600 = UseTokensModule().Size.Size_600
 	local _UDim2 = UDim2.fromOffset(0, Size600)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 50 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Size600 (copy)
 		return { MinSize = Vector2.new(0, Size600) }
 	end, { Size600 })

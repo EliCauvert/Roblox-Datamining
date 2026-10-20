@@ -35,7 +35,7 @@ local config = {
 	tooltipAlign = FoundationModule.Enums.PopoverAlign.Center
 }
 
-local function NavigationTabTooltip(p1) --[[ Line: 114 ]]
+local function NavigationTabTooltip(p1)
 	-- upvalues: UseStyleModule (copy), ReactModule (copy), Popover (copy), Radius (copy), View (copy), Text (copy)
 	local Tokens = UseStyleModule().Tokens
 	
@@ -60,7 +60,7 @@ local function NavigationTabTooltip(p1) --[[ Line: 114 ]]
 	})
 end
 
-return (ReactModule.forwardRef(function(p1, Ref) --[[ Line: 148 ]]
+return (ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleModule (copy), UIBloxConfigModule (copy), NavigationTabLayoutModule (copy), ReactModule (copy), LoggerModule (copy), ControlStateModule (copy), FoundationFontFaceMigration (copy), GetTextSizeModule (copy), _Vector2 (copy), TextService (copy), IsBuilderIconFunction (copy), View (copy), Icon (copy), InputSize (copy), Label (copy), StatusIndicator (copy), MigrateBadgeVariantModule (copy), NormalizeFontFaceFunction (copy), StateLayerModule (copy), NavigationTabTooltip (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local Tokens = UseStyleModule().Tokens
@@ -68,7 +68,7 @@ return (ReactModule.forwardRef(function(p1, Ref) --[[ Line: 148 ]]
 	local Scale = if JoinResult.width then JoinResult.width.Scale else 0
 	local Offset = if JoinResult.width then JoinResult.width.Offset else 0
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.zero)
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 159 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseBindingResult (copy), HasWidth (copy), UseBindingResult2 (copy)
 		local AbsoluteSize = Frame.AbsoluteSize
 		local Value = UseBindingResult:getValue()
@@ -77,9 +77,9 @@ return (ReactModule.forwardRef(function(p1, Ref) --[[ Line: 148 ]]
 			UseBindingResult2(AbsoluteSize)
 		end
 	end, { HasWidth })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 168 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseBindingResult (copy), HasWidth (copy), Scale (copy), Offset (copy)
-		return UseBindingResult:map(function(Vector): UDim2 --[[ Line: 169 ]]
+		return UseBindingResult:map(function(Vector): UDim2
 			-- upvalues: HasWidth (upval), Scale (upval), Offset (upval)
 			return if HasWidth then UDim2.new(Scale, Offset, 0, Vector.Y) else UDim2.fromOffset(Vector.X, Vector.Y)
 		end)
@@ -92,18 +92,18 @@ return (ReactModule.forwardRef(function(p1, Ref) --[[ Line: 148 ]]
 		LoggerModule:warning("NavigationTab enableTooltip requires hasLabel and labelText")
 	end
 	local UseRefResult1 = ReactModule.useRef(nil)
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 197 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult1 (copy)
 		if UseRefResult1.current then
 			task.cancel(UseRefResult1.current)
 			UseRefResult1.current = nil
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 204 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult1 (copy)
 		return UseResult1
 	end, { UseResult1 })
-	local UseResult2 = ReactModule.useCallback(function(p2, Hover) --[[ Line: 208 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2, Hover)
 		-- upvalues: JoinResult (copy), HasLabelText (copy), UseResult1 (copy), ControlStateModule (upval), UseStateResult2 (copy), Tokens (copy), UseRefResult1 (copy)
 		if JoinResult.onStateChanged then
 			JoinResult.onStateChanged(p2, Hover)
@@ -113,7 +113,7 @@ return (ReactModule.forwardRef(function(p1, Ref) --[[ Line: 148 ]]
 		
 		if Hover == ControlStateModule.Hover or Hover == ControlStateModule.Selected or Hover == ControlStateModule.SelectedPressed then
 			local Current = nil
-			Current = task.delay(Tokens.Time.Time_500, function() --[[ Line: 229 ]]
+			Current = task.delay(Tokens.Time.Time_500, function()
 				-- upvalues: UseRefResult1 (upval), Current (ref), UseStateResult2 (upval)
 				if UseRefResult1.current == Current then
 					UseRefResult1.current = nil
@@ -143,7 +143,7 @@ return (ReactModule.forwardRef(function(p1, Ref) --[[ Line: 148 ]]
 			FontSize = FontSize:getValue()
 		end
 	end
-	local UseMemoResult1 = ReactModule.useMemo(function(): UDim2? --[[ Line: 249 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function(): UDim2?
 		-- upvalues: JoinResult (copy), FoundationFontFaceMigration (upval), GetTextSizeModule (upval), FontSize (ref), _Vector2 (upval), TextService (upval)
 		if JoinResult.hasLabel and JoinResult.labelText and JoinResult.labelTypography then
 			local TextSizeModule = if FoundationFontFaceMigration then GetTextSizeModule(JoinResult.labelText, FontSize, JoinResult.labelTypography.Font, _Vector2) else TextService:GetTextSize(JoinResult.labelText, FontSize, JoinResult.labelTypography.Font, _Vector2)

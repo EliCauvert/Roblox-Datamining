@@ -15,7 +15,7 @@ local FFlagEnableVerifiedBadgeStore = require(CorePackages.Workspace.Packages.Sh
 local Module = {}
 Module.__index = Module
 
-function Module.new(Player) --[[ Line: 27 ]]
+function Module.new(Player)
 	-- upvalues: Module (copy)
 	local self = setmetatable({}, Module)
 	self.player = Player
@@ -29,7 +29,7 @@ function Module.new(Player) --[[ Line: 27 ]]
 	return self
 end
 
-function Module:getGroupDataAsync() --[[ Line: 39 ]]
+function Module:getGroupDataAsync()
 	if self.groupData then
 		return self.groupData
 	else
@@ -40,7 +40,7 @@ function Module:getGroupDataAsync() --[[ Line: 39 ]]
 	end
 end
 
-function Module:getCanManageAsync() --[[ Line: 50 ]]
+function Module:getCanManageAsync()
 	if self.canManage == nil then
 		table.insert(self.pendingCanManage, (coroutine.running()))
 		coroutine.yield()
@@ -51,7 +51,7 @@ function Module:getCanManageAsync() --[[ Line: 50 ]]
 	end
 end
 
-function Module:getProfileSettingsAsync() --[[ Line: 61 ]]
+function Module:getProfileSettingsAsync()
 	if self.profileSettings == nil then
 		table.insert(self.pendingProfileSettings, (coroutine.running()))
 		coroutine.yield()
@@ -62,7 +62,7 @@ function Module:getProfileSettingsAsync() --[[ Line: 61 ]]
 	end
 end
 
-function Module:setGroupData(GroupData) --[[ Line: 72 ]]
+function Module:setGroupData(GroupData)
 	self.groupData = GroupData
 	local PendingGroupData = self.pendingGroupData
 	self.pendingGroupData = {}
@@ -72,7 +72,7 @@ function Module:setGroupData(GroupData) --[[ Line: 72 ]]
 	end
 end
 
-function Module:setCanManage(p1) --[[ Line: 81 ]]
+function Module:setCanManage(p1)
 	self.canManage = if p1 then true else false
 	local PendingCanManage = self.pendingCanManage
 	self.pendingCanManage = {}
@@ -82,7 +82,7 @@ function Module:setCanManage(p1) --[[ Line: 81 ]]
 	end
 end
 
-function Module:setProfileSettings(ProfileSettings) --[[ Line: 91 ]]
+function Module:setProfileSettings(ProfileSettings)
 	self.profileSettings = ProfileSettings
 	local PendingProfileSettings = self.pendingProfileSettings
 	self.pendingProfileSettings = {}
@@ -92,7 +92,7 @@ function Module:setProfileSettings(ProfileSettings) --[[ Line: 91 ]]
 	end
 end
 
-function Module.destroy(p2) --[[ Line: 100 ]]
+function Module.destroy(p2)
 	-- upvalues: FFlagInExperienceUserProfileSettingsEnabledModule (copy)
 	for _, value in pairs(p2.pendingGroupData) do
 		coroutine.resume(value)
@@ -109,7 +109,7 @@ end
 
 local NewResults = {}
 
-local function _(Player) --[[ Line: 118 | Named "getPlayerInfo" ]]
+local function _(Player)
 	-- upvalues: NewResults (copy), Module (copy)
 	local NewResult = NewResults[Player]
 	
@@ -120,9 +120,9 @@ local function _(Player) --[[ Line: 118 | Named "getPlayerInfo" ]]
 	return NewResult
 end
 
-spawn(function() --[[ Line: 127 ]]
+spawn(function()
 	-- upvalues: Players (copy), NewResults (copy), Module (copy)
-	game:GetService("RobloxReplicatedStorage"):WaitForChild("NewPlayerGroupDetails", 1e999).OnClientEvent:Connect(function(...) --[[ Line: 131 ]]
+	game:GetService("RobloxReplicatedStorage"):WaitForChild("NewPlayerGroupDetails", 1e999).OnClientEvent:Connect(function(...)
 		-- upvalues: Players (upval), NewResults (upval), Module (upval)
 		local list = { ... }
 		
@@ -165,9 +165,9 @@ spawn(function() --[[ Line: 127 ]]
 		end
 	end)
 end)
-coroutine.wrap(function() --[[ Line: 162 ]]
+coroutine.wrap(function()
 	-- upvalues: Players (copy), NewResults (copy), Module (copy)
-	game:GetService("RobloxReplicatedStorage"):WaitForChild("NewPlayerCanManageDetails", 1e999).OnClientEvent:Connect(function(p3, p4) --[[ Line: 168 ]]
+	game:GetService("RobloxReplicatedStorage"):WaitForChild("NewPlayerCanManageDetails", 1e999).OnClientEvent:Connect(function(p3, p4)
 		-- upvalues: Players (upval), NewResults (upval), Module (upval)
 		local Player = Players:GetPlayerByUserId((tonumber(p3)))
 		
@@ -188,10 +188,10 @@ coroutine.wrap(function() --[[ Line: 162 ]]
 end)()
 
 if FFlagInExperienceUserProfileSettingsEnabledModule then
-	coroutine.wrap(function() --[[ Line: 180 ]]
+	coroutine.wrap(function()
 		-- upvalues: Players (copy), NewResults (copy), Module (copy), FFlagEnableVerifiedBadgeStore (copy), VerifiedBadgeDisplayStore (copy), FFlagInExperienceRequestProfileSettingsModule (copy)
 		local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
-		RobloxReplicatedStorage:WaitForChild("SendPlayerProfileSettings", 1e999).OnClientEvent:Connect(function(p3, ProfileSettings) --[[ Line: 186 ]]
+		RobloxReplicatedStorage:WaitForChild("SendPlayerProfileSettings", 1e999).OnClientEvent:Connect(function(p3, ProfileSettings)
 			-- upvalues: Players (upval), NewResults (upval), Module (upval), FFlagEnableVerifiedBadgeStore (upval), VerifiedBadgeDisplayStore (upval)
 			local Player = Players:GetPlayerByUserId((tonumber(p3)))
 			
@@ -218,7 +218,7 @@ if FFlagInExperienceUserProfileSettingsEnabledModule then
 		end
 	end)()
 end
-Players.PlayerRemoving:Connect(function(Player) --[[ Line: 212 ]]
+Players.PlayerRemoving:Connect(function(Player)
 	-- upvalues: NewResults (copy)
 	if NewResults[Player] then
 		NewResults[Player] = nil
@@ -226,9 +226,9 @@ Players.PlayerRemoving:Connect(function(Player) --[[ Line: 212 ]]
 	end
 end)
 
-local _ = function(p3) --[[ Line: 220 | Named "NewInGroupFunctionFactory" ]]
+local _ = function(p3)
 	-- upvalues: NewResults (copy), Module (copy)
-	return function(Player): boolean --[[ Line: 221 ]]
+	return function(Player): boolean
 		-- upvalues: NewResults (upval), Module (upval), p3 (copy)
 		local NewResult = NewResults[Player]
 		
@@ -254,7 +254,7 @@ local v2 = "BrazilianLocalizationExpert"
 local v3 = "FrenchLocalizationExpert"
 local v4 = "GermanLocalizationExpert"
 local list = {
-	function(Player): boolean --[[ Line: 221 ]]
+	function(Player): boolean
 		-- upvalues: NewResults (copy), Module (copy), v1 (copy)
 		local NewResult = NewResults[Player]
 		
@@ -273,7 +273,7 @@ local list = {
 		end
 		return false
 	end,
-	function(Player): boolean --[[ Line: 221 ]]
+	function(Player): boolean
 		-- upvalues: NewResults (copy), Module (copy), v2 (copy)
 		local NewResult = NewResults[Player]
 		
@@ -292,7 +292,7 @@ local list = {
 		end
 		return false
 	end,
-	function(Player): boolean --[[ Line: 221 ]]
+	function(Player): boolean
 		-- upvalues: NewResults (copy), Module (copy), v3 (copy)
 		local NewResult = NewResults[Player]
 		
@@ -311,7 +311,7 @@ local list = {
 		end
 		return false
 	end,
-	function(Player): boolean --[[ Line: 221 ]]
+	function(Player): boolean
 		-- upvalues: NewResults (copy), Module (copy), v4 (copy)
 		local NewResult = NewResults[Player]
 		
@@ -332,9 +332,9 @@ local list = {
 	end
 }
 
-local _ = function() --[[ Line: 240 | Named "NewIsLocalizationExpertFunctionFactory" ]]
+local _ = function()
 	-- upvalues: list (copy)
-	return function(p3): boolean --[[ Line: 241 ]]
+	return function(p3): boolean
 		-- upvalues: list (upval)
 		for i = 1, #list do
 			if list[i](p3) then
@@ -345,12 +345,12 @@ local _ = function() --[[ Line: 240 | Named "NewIsLocalizationExpertFunctionFact
 	end
 end
 
-local _ = function() --[[ Line: 251 | Named "IsPlaceOwnerFunctionFactory" ]]
+local _ = function()
 	-- upvalues: NewResults (copy), Module (copy)
 	if game.CreatorType == Enum.CreatorType.Group then
 		local v5 = "PlaceCreator"
 		
-		return function(Player): boolean --[[ Line: 221 ]]
+		return function(Player): boolean
 			-- upvalues: NewResults (upval), Module (upval), v5 (copy)
 			local NewResult = NewResults[Player]
 			
@@ -370,13 +370,13 @@ local _ = function() --[[ Line: 251 | Named "IsPlaceOwnerFunctionFactory" ]]
 			return false
 		end
 	else
-		return function(Player): boolean --[[ Line: 255 ]]
+		return function(Player): boolean
 			return Player.UserId == game.CreatorId
 		end
 	end
 end
 
-local function CanPlayerManagePlace(Player) --[[ Line: 260 ]]
+local function CanPlayerManagePlace(Player)
 	-- upvalues: NewResults (copy), Module (copy)
 	local NewResult = NewResults[Player]
 	
@@ -387,7 +387,7 @@ local function CanPlayerManagePlace(Player) --[[ Line: 260 ]]
 	return NewResult and NewResult:getCanManageAsync() or false
 end
 
-local function IsPlayerInExperienceNameEnabled(Player) --[[ Line: 269 ]]
+local function IsPlayerInExperienceNameEnabled(Player)
 	-- upvalues: NewResults (copy), Module (copy)
 	local NewResult = NewResults[Player]
 	
@@ -407,9 +407,9 @@ local function IsPlayerInExperienceNameEnabled(Player) --[[ Line: 269 ]]
 	return false
 end
 
-local function SetPlayerInExperienceNameEnabled(_, IsInExperienceNameEnabled) --[[ Line: 280 ]]
+local function SetPlayerInExperienceNameEnabled(_, IsInExperienceNameEnabled)
 	-- upvalues: Url (copy), HttpService (copy), HttpRbxApiService (copy)
-	pcall(function() --[[ Line: 281 ]]
+	pcall(function()
 		-- upvalues: Url (upval), HttpService (upval), IsInExperienceNameEnabled (copy), HttpRbxApiService (upval)
 		local UpdatePlayerProfileSettings = game:GetService("RobloxReplicatedStorage"):WaitForChild("UpdatePlayerProfileSettings", 1e999)
 		HttpRbxApiService:PostAsyncFullUrl(Url.APIS_URL .. "user-profile-api/v1/user/profiles/settings", HttpService:JSONEncode({
@@ -421,7 +421,7 @@ end
 
 local v5 = "Admin"
 
-function t.IsPlayerAdminAsync(Player): boolean --[[ Line: 221 ]]
+function t.IsPlayerAdminAsync(Player): boolean
 	-- upvalues: NewResults (copy), Module (copy), v5 (copy)
 	local NewResult = NewResults[Player]
 	
@@ -443,7 +443,7 @@ end
 
 local v6 = "Intern"
 
-function t.IsPlayerInternAsync(Player): boolean --[[ Line: 221 ]]
+function t.IsPlayerInternAsync(Player): boolean
 	-- upvalues: NewResults (copy), Module (copy), v6 (copy)
 	local NewResult = NewResults[Player]
 	
@@ -465,7 +465,7 @@ end
 
 local v7 = "Star"
 
-function t.IsPlayerStarAsync(Player): boolean --[[ Line: 221 ]]
+function t.IsPlayerStarAsync(Player): boolean
 	-- upvalues: NewResults (copy), Module (copy), v7 (copy)
 	local NewResult = NewResults[Player]
 	
@@ -485,7 +485,7 @@ function t.IsPlayerStarAsync(Player): boolean --[[ Line: 221 ]]
 	return false
 end
 
-function t.IsPlayerLocalizationExpertAsync(p3): boolean --[[ Line: 241 ]]
+function t.IsPlayerLocalizationExpertAsync(p3): boolean
 	-- upvalues: list (copy)
 	for i = 1, #list do
 		if list[i](p3) then
@@ -498,7 +498,7 @@ end
 if game.CreatorType == Enum.CreatorType.Group then
 	local v8 = "PlaceCreator"
 	
-	local function IsPlayerPlaceOwnerAsync(Player): boolean --[[ Line: 221 ]]
+	local function IsPlayerPlaceOwnerAsync(Player): boolean
 		-- upvalues: NewResults (copy), Module (copy), v8 (copy)
 		local NewResult = NewResults[Player]
 		
@@ -518,7 +518,7 @@ if game.CreatorType == Enum.CreatorType.Group then
 		return false
 	end
 else
-	local function IsPlayerPlaceOwnerAsync(Player): boolean --[[ Line: 255 ]]
+	local function IsPlayerPlaceOwnerAsync(Player): boolean
 		return Player.UserId == game.CreatorId
 	end
 end

@@ -8,18 +8,18 @@ local CreateProfileCompletionPromptsConfigFunction = require(Parent.ProfilePlatf
 local GetSduiApiStoreFunction = require(Parent.SduiSharedUtilities).getSduiApiStore
 local FetchPromptsFunction = require(Parent.ServerTriggeredModals).fetchPrompts
 
-return function() --[[ Line: 26 | Named "useProfileCompletionData" ]]
+return function()
 	-- upvalues: ReactModule (copy), CreateProfileCompletionPromptsConfigFunction (copy), FetchPromptsFunction (copy), GetSduiApiStoreFunction (copy), EnumsModule (copy), SignalsReactModule (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 27 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CreateProfileCompletionPromptsConfigFunction (upval)
 		return CreateProfileCompletionPromptsConfigFunction()
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 31 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FetchPromptsFunction (upval), UseMemoResult (copy)
 		FetchPromptsFunction(UseMemoResult, true)
 	end, { UseMemoResult })
 	
-	return SignalsReactModule.useSignalState((ReactModule.useCallback(function(p1) --[[ Line: 39 ]]
+	return SignalsReactModule.useSignalState((ReactModule.useCallback(function(p1)
 		-- upvalues: GetSduiApiStoreFunction (upval), EnumsModule (upval)
 		local DataResult = GetSduiApiStoreFunction().getData(EnumsModule.Components.ProfileCompletion).data(p1)
 		
@@ -40,7 +40,7 @@ return function() --[[ Line: 26 | Named "useProfileCompletionData" ]]
 			end
 		end
 		return v1
-	end, {}))), (ReactModule.useCallback(function() --[[ Line: 35 ]]
+	end, {}))), (ReactModule.useCallback(function()
 		-- upvalues: FetchPromptsFunction (upval), CreateProfileCompletionPromptsConfigFunction (upval)
 		FetchPromptsFunction(CreateProfileCompletionPromptsConfigFunction(), true)
 	end, {}))

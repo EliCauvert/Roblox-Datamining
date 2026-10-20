@@ -15,7 +15,7 @@ local UIBloxConfigModule = require(Parent2.UIBloxConfig)
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local config = { width = UDim.new(0, 400) }
 
-return function(Frame) --[[ Line: 60 | Named "TextField" ]]
+return function(Frame)
 	-- upvalues: UseStyleModule (copy), ReactModule (copy), UseCursorModule (copy), config (copy), InputLabelModule (copy), ImageSetComponentModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), UIBloxConfigModule (copy), HelperTextModule (copy)
 	local Tokens = UseStyleModule().Tokens
 	local UseRefResult = ReactModule.useRef(nil)
@@ -30,8 +30,8 @@ return function(Frame) --[[ Line: 60 | Named "TextField" ]]
 	local UseCursorModuleResult = UseCursorModule(UDim.new(0, Tokens.Radius.Medium), Thick, Thick)
 	local UseCursorModuleResult1 = UseCursorModule(UDim.new(0.5), Size400 / 2, Thick)
 	
-	local function _(): boolean --[[ Line: 81 | Named "canUseTextInputType" ]]
-		local Success, Result = pcall(function() --[[ Line: 82 ]]
+	local function _(): boolean
+		local Success, Result = pcall(function()
 			local CoreGui = game:GetService("CoreGui")
 			local _ = CoreGui.Name
 			
@@ -41,7 +41,7 @@ return function(Frame) --[[ Line: 60 | Named "TextField" ]]
 		return Success and Result ~= nil
 	end
 	
-	local _ = function(): number --[[ Line: 90 | Named "getTextBoxWidthOffset" ]]
+	local _ = function(): number
 		-- upvalues: Frame (copy), Size400 (copy), Tokens (copy)
 		local v1 = 0
 		
@@ -54,7 +54,7 @@ return function(Frame) --[[ Line: 60 | Named "TextField" ]]
 		return v1
 	end
 	
-	local function onTextChange(p1) --[[ Line: 103 ]]
+	local function onTextChange(p1)
 		-- upvalues: Frame (copy)
 		if p1 == nil then
 			Frame.onChange("")
@@ -65,7 +65,7 @@ return function(Frame) --[[ Line: 60 | Named "TextField" ]]
 		end
 	end
 	
-	local function onFocusGained() --[[ Line: 111 ]]
+	local function onFocusGained()
 		-- upvalues: Frame (copy), UseRefResult (copy), UseStateResult2_1 (copy)
 		if Frame.disabled and UseRefResult.current then
 			UseRefResult.current:ReleaseFocus()
@@ -79,7 +79,7 @@ return function(Frame) --[[ Line: 60 | Named "TextField" ]]
 		end
 	end
 	
-	local function onFocusLost() --[[ Line: 122 ]]
+	local function onFocusLost()
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(false)
 	end
@@ -122,17 +122,17 @@ return function(Frame) --[[ Line: 60 | Named "TextField" ]]
 		Selectable = not Frame.disabled,
 		Image = "",
 		SelectionImageObject = UseCursorModuleResult,
-		[ReactModule.Event.Activated] = function() --[[ Line: 160 ]]
+		[ReactModule.Event.Activated] = function()
 			-- upvalues: UseRefResult (copy)
 			if UseRefResult.current then
 				UseRefResult.current:CaptureFocus()
 			end
 		end,
-		[ReactModule.Event.MouseEnter] = function() --[[ Line: 165 ]]
+		[ReactModule.Event.MouseEnter] = function()
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(true)
 		end,
-		[ReactModule.Event.MouseLeave] = function() --[[ Line: 168 ]]
+		[ReactModule.Event.MouseLeave] = function()
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(false)
 		end
@@ -183,7 +183,7 @@ return function(Frame) --[[ Line: 60 | Named "TextField" ]]
 	local CreateElementFunction = ReactModule.createElement
 	local v5 = "TextBox"
 	local Label = { ref = UseRefResult, Text = Frame.text }
-	local Success, Result = pcall(function() --[[ Line: 82 ]]
+	local Success, Result = pcall(function()
 		local CoreGui = game:GetService("CoreGui")
 		local _ = CoreGui.Name
 		

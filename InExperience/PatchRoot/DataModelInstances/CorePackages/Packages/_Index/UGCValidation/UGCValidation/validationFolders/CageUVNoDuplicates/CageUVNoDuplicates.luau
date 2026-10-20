@@ -17,7 +17,7 @@ return {
 	},
 	conditionalData = {},
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 37 ]]
+	run = function(p1, p2)
 		-- upvalues: WrapTargetCageUVReferenceValuesModule (copy), UGCValidationService (copy), GetFIntUGCValidateCageDuplicateUVThresholdModule (copy), ErrorSourceStringsModule (copy)
 		local List = {}
 		
@@ -26,7 +26,7 @@ return {
 				table.insert(List, value1)
 			end
 		end
-		local function checkCage(InnerCagesData, p3) --[[ Line: 46 ]]
+		local function checkCage(InnerCagesData, p3)
 			-- upvalues: UGCValidationService (upval), List (copy), GetFIntUGCValidateCageDuplicateUVThresholdModule (upval), p1 (copy), ErrorSourceStringsModule (upval)
 			for PartName, value in InnerCagesData do
 				local ValidateEditableMeshUVDuplicatesResult = UGCValidationService:ValidateEditableMeshUVDuplicates(List, value.editable)

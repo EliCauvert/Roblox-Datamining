@@ -4,9 +4,9 @@ local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelec
 local RoduxNetworkingModule = require(AppChat.Http.RoduxNetworking)
 local AppChatNetworkingModule = require(Parent.AppChatNetworking)
 
-return function() --[[ Line: 8 ]]
+return function()
 	-- upvalues: UseSelectorFunction (copy), AppChatNetworkingModule (copy), RoduxNetworkingModule (copy)
-	return UseSelectorFunction(function(p1): boolean --[[ Line: 9 ]]
+	return UseSelectorFunction(function(p1): boolean
 		-- upvalues: AppChatNetworkingModule (upval), RoduxNetworkingModule (upval)
 		return AppChatNetworkingModule.rodux.GetUserConversations.getStatus(p1, 1) == RoduxNetworkingModule.Enum.NetworkStatus.Fetching
 	end)

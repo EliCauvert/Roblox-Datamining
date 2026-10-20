@@ -5,24 +5,24 @@ local _ = require(script.Parent.Parent.ValidationContext)
 local _ = require(Parent.language.ast)
 
 return {
-	UniqueInputFieldNamesRule = function(p1) --[[ Line: 30 ]]
+	UniqueInputFieldNamesRule = function(p1)
 		-- upvalues: GraphQLError (copy)
 		local List = {}
 		local Removed = {}
 		
 		return {
 			ObjectValue = {
-				enter = function() --[[ Line: 36 ]]
+				enter = function()
 					-- upvalues: List (copy), Removed (ref)
 					table.insert(List, Removed)
 					Removed = {}
 				end,
-				leave = function() --[[ Line: 40 ]]
+				leave = function()
 					-- upvalues: Removed (ref), List (copy)
 					Removed = table.remove(List)
 				end
 			},
-			ObjectField = function(_, p2) --[[ Line: 45 ]]
+			ObjectField = function(_, p2)
 				-- upvalues: Removed (ref), p1 (copy), GraphQLError (upval)
 				local Value = p2.name.value
 				

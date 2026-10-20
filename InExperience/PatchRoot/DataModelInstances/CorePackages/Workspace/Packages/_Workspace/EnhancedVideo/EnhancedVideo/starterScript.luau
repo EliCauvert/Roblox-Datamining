@@ -19,7 +19,7 @@ local EnhancedVideoStoreModule = require(Parent.EnhancedVideoStore)
 local DispatchEnhancedVideoConfigModule = if FFlagLuaAppEnableEnhancedVideoExperienceAssetAndTimelineModule then require(Parent.dispatchEnhancedVideoConfig) else nil
 local RequestInternalWrapperResult = require(Parent1.Http).NetworkLayers.requestInternalWrapper(nil)
 
-return function() --[[ Line: 38 | Named "starterScript" ]]
+return function()
 	-- upvalues: LuaAppEnableEnhancedVideoExperienceGroupIdCheck (copy), CreatorId (copy), LuaAppIsEnhancedVideoUniverse (copy), Localization (copy), LocalizationService (copy), FFlagLuaAppEnableEnhancedVideoExperienceAssetAndTimelineModule (copy), EnhancedVideoStoreModule (copy), RequestInternalWrapperResult (copy), DispatchEnhancedVideoConfigModule (copy), ReplicatedStorage (copy), CoreGui (copy), ReactRobloxModule (copy), ReactModule (copy), LocalizationProvider (copy), FoundationProvider (copy), Enums (copy), AdLabelModule (copy)
 	if LuaAppEnableEnhancedVideoExperienceGroupIdCheck then
 		if game.CreatorType ~= Enum.CreatorType.Group or game.CreatorId ~= CreatorId then return end
@@ -27,7 +27,7 @@ return function() --[[ Line: 38 | Named "starterScript" ]]
 	local NewLocalization = Localization.new(LocalizationService.RobloxLocaleId)
 	
 	if FFlagLuaAppEnableEnhancedVideoExperienceAssetAndTimelineModule then
-		EnhancedVideoStoreModule(false).fetchInitialData(RequestInternalWrapperResult, game.GameId):andThen(function(Result) --[[ Line: 53 ]]
+		EnhancedVideoStoreModule(false).fetchInitialData(RequestInternalWrapperResult, game.GameId):andThen(function(Result)
 			-- upvalues: DispatchEnhancedVideoConfigModule (upval)
 			if Result then
 				DispatchEnhancedVideoConfigModule(Result)
@@ -44,7 +44,7 @@ return function() --[[ Line: 38 | Named "starterScript" ]]
 		LocalizationProvider = ReactModule.createElement(LocalizationProvider, { localization = NewLocalization }, {
 			FoundationProvider = ReactModule.createElement(FoundationProvider, { colorMode = Enums.ColorMode.Dark }, {
 				AdLabel = ReactModule.createElement(AdLabelModule, {
-					sendPauseEvent = function() --[[ Line: 79 ]]
+					sendPauseEvent = function()
 						-- upvalues: AdDisclosurePauseEvent (copy)
 						AdDisclosurePauseEvent:Fire()
 					end

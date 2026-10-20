@@ -26,34 +26,34 @@ local config = {
 	filterPredicate = require(script.Parent.Utils.searchFilterPredicate),
 	sortComparator = require(script.Parent.Utils.sortComparator),
 	conversation = { participants = {} },
-	navigateToToast = function(_) --[[ Line: 64 ]] end,
-	selectedUsersChanged = function(_, _) --[[ Line: 65 ]] end
+	navigateToToast = function(_) end,
+	selectedUsersChanged = function(_, _) end
 }
 
-function SelectChatMembersContainer(p1) --[[ Line: 70 ]]
+function SelectChatMembersContainer(p1)
 	-- upvalues: CryoModule (copy), config (copy), GetSelectedUsersStoreModule (copy), FFlagFixPaginatedChatMembersCutoffModule (copy), UseNavigationFunction (copy), ReactModule (copy), SignalsModule (copy), UseLocalizationFunction (copy), GetFFlagIsSquadEnabledFunction (copy), ConstantsModule (copy), UseFetchPaginatedFriendIdsModule (copy), IsUserInConversationModule (copy), UseIsInExperienceModule (copy), UseAppChatIsWideModeModule (copy), View (copy), SelectChatMembersModule (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local SelectedUsersStoreModule = GetSelectedUsersStoreModule(false)
 	local TopBarHeightScreenProps = if FFlagFixPaginatedChatMembersCutoffModule then UseNavigationFunction().getScreenProps("topBarHeight", 0) else nil
-	ReactModule.useEffect(function() --[[ Line: 80 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SelectedUsersStoreModule (copy), UnionResult (copy)
 		SelectedUsersStoreModule.setMaxSize(UnionResult.maxSelections)
 		
-		return function() --[[ Line: 82 ]]
+		return function()
 			-- upvalues: SelectedUsersStoreModule (upval)
 			SelectedUsersStoreModule.clearStore()
 		end
 	end, { UnionResult.maxSelections })
-	ReactModule.useEffect(function() --[[ Line: 87 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SignalsModule (upval), SelectedUsersStoreModule (copy), CryoModule (upval), UnionResult (copy)
-		local Effect = SignalsModule.createEffect(function(p2) --[[ Line: 88 ]]
+		local Effect = SignalsModule.createEffect(function(p2)
 			-- upvalues: SelectedUsersStoreModule (upval), CryoModule (upval), UnionResult (upval)
-			UnionResult.selectedUsersChanged(CryoModule.List.map(SelectedUsersStoreModule.getSelectedUserIdsArray()(p2), function(Id) --[[ Line: 93 ]]
+			UnionResult.selectedUsersChanged(CryoModule.List.map(SelectedUsersStoreModule.getSelectedUserIdsArray()(p2), function(Id)
 				return { id = Id }
 			end), UnionResult.minSelections)
 		end)
 		
-		return function() --[[ Line: 99 ]]
+		return function()
 			-- upvalues: Effect (copy)
 			Effect()
 		end
@@ -70,7 +70,7 @@ function SelectChatMembersContainer(p1) --[[ Line: 70 ]]
 		},
 		tooManyFriendsTextSingular = if GetFFlagIsSquadEnabledFunction() then "Feature.Chat.Message.AddFriendsPartyLimitSingular" else "Feature.Chat.Message.GroupFriendLimitSingular"
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 122 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UnionResult (copy), UseLocalizationResult (copy)
 		UnionResult.navigateToToast({
 			toastProps = {
@@ -84,11 +84,11 @@ function SelectChatMembersContainer(p1) --[[ Line: 70 ]]
 		UnionResult.navigateToToast,
 		UseLocalizationResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 128 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SelectedUsersStoreModule (copy), UseResult (copy)
 		local OnMaxSizeExceededResult = SelectedUsersStoreModule.onMaxSizeExceeded(UseResult)
 		
-		return function() --[[ Line: 130 ]]
+		return function()
 			-- upvalues: OnMaxSizeExceededResult (copy)
 			OnMaxSizeExceededResult()
 		end
@@ -99,9 +99,9 @@ function SelectChatMembersContainer(p1) --[[ Line: 70 ]]
 		Size = UDim2.new(1, 0, 1, if not UseAppChatIsWideModeModule((UseIsInExperienceModule())) then 0 else -(if FFlagFixPaginatedChatMembersCutoffModule then TopBarHeightScreenProps else 56))
 	}, {
 		SelectMembers = ReactModule.createElement(SelectChatMembersModule, {
-			friendIds = ReactModule.useMemo(function() --[[ Line: 137 ]]
+			friendIds = ReactModule.useMemo(function()
 				-- upvalues: CryoModule (upval), UseFetchPaginatedFriendIdsModuleResult (copy), IsUserInConversationModule (upval), UnionResult (copy)
-				return CryoModule.List.filter(UseFetchPaginatedFriendIdsModuleResult, function(p2): boolean --[[ Line: 138 ]]
+				return CryoModule.List.filter(UseFetchPaginatedFriendIdsModuleResult, function(p2): boolean
 					-- upvalues: IsUserInConversationModule (upval), UnionResult (upval)
 					return not IsUserInConversationModule(p2, UnionResult.conversation)
 				end)
@@ -109,7 +109,7 @@ function SelectChatMembersContainer(p1) --[[ Line: 70 ]]
 				UseFetchPaginatedFriendIdsModuleResult,
 				UnionResult.conversation
 			}),
-			fetchMoreFriends = ReactModule.useCallback(function() --[[ Line: 143 ]]
+			fetchMoreFriends = ReactModule.useCallback(function()
 				-- upvalues: UseFetchPaginatedFriendIdsModuleResult2 (copy), UseFetchPaginatedFriendIdsModuleResult3 (copy)
 				if UseFetchPaginatedFriendIdsModuleResult2 and not UseFetchPaginatedFriendIdsModuleResult3 then
 					UseFetchPaginatedFriendIdsModuleResult2()

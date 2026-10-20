@@ -9,7 +9,7 @@ local MountLibraryModule = require(BuildExperience.mountLibrary)
 local Flag = false
 local Flag1 = false
 
-return function(p1, p2) --[[ Line: 18 | Named "mountTeamCreateViewer" ]]
+return function(p1, p2)
 	-- upvalues: Flag (ref), BuildModeLaunchModule (copy), MountLibraryModule (copy), Flag1 (ref), StarterGui (copy), CreateTeamCreateFreeCameraModule (copy), GetLibraryStoreModule (copy), RunService (copy), MountChatSheetModule (copy)
 	if not Flag then
 		Flag = true

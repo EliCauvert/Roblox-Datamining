@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("SduiCoreSystem").ClientBinding.SduiClientBindingTypes)
 
-local function tryResolveTemplatePair(RobloxComponent, InlineComponent, p1) --[[ Line: 69 ]]
+local function tryResolveTemplatePair(RobloxComponent, InlineComponent, p1)
 	if InlineComponent ~= nil then
 		return InlineComponent, true
 	end
@@ -14,7 +14,7 @@ local function tryResolveTemplatePair(RobloxComponent, InlineComponent, p1) --[[
 	return nil, false
 end
 
-local function resolveItemOverrides(List, p1) --[[ Line: 98 ]]
+local function resolveItemOverrides(List, p1)
 	if List == nil or next(List) == nil then
 		return nil
 	end
@@ -51,7 +51,7 @@ local function resolveItemOverrides(List, p1) --[[ Line: 98 ]]
 	return t
 end
 
-local function _(p2, BoundEntry, p3, p4, p5) --[[ Line: 123 | Named "pickTemplate" ]]
+local function _(p2, BoundEntry, p3, p4, p5)
 	local RobloxComponent = if typeof(p2) == "table" then p2.roblox_component else nil
 	local InlineComponent = if typeof(p2) == "table" then p2.inline_component else nil
 	local InlineComponent1 = nil
@@ -83,7 +83,7 @@ local function _(p2, BoundEntry, p3, p4, p5) --[[ Line: 123 | Named "pickTemplat
 	end
 end
 
-local _ = function(p2, p3) --[[ Line: 148 | Named "resolveDefaultTemplate" ]]
+local _ = function(p2, p3)
 	-- upvalues: tryResolveTemplatePair (copy)
 	if p2 == nil then
 		return nil, false
@@ -92,7 +92,7 @@ local _ = function(p2, p3) --[[ Line: 148 | Named "resolveDefaultTemplate" ]]
 	end
 end
 
-local function buildBoundEntry(Item, Identifier, p2, p3, Inputs, SortRank, p4, p5) --[[ Line: 193 ]]
+local function buildBoundEntry(Item, Identifier, p2, p3, Inputs, SortRank, p4, p5)
 	local BoundEntry = if p4 and Identifier then p4[Identifier] else nil
 	local RobloxComponent = if typeof(Item) == "table" then Item.roblox_component else nil
 	local InlineComponent = if typeof(Item) == "table" then Item.inline_component else nil
@@ -140,7 +140,7 @@ local function buildBoundEntry(Item, Identifier, p2, p3, Inputs, SortRank, p4, p
 end
 
 return {
-	normalizeLiteralItems = function(Items, p2, p3) --[[ Line: 160 ]]
+	normalizeLiteralItems = function(Items, p2, p3)
 		local Inputs = if p2 then p2.inputs else nil
 		local SortRank = if p2 then p2.sort_rank else nil
 		local v1 = nil
@@ -224,7 +224,7 @@ return {
 		end
 		return List
 	end,
-	normalizeBoundData = function(Entry, p4, p5, p6) --[[ Line: 227 ]]
+	normalizeBoundData = function(Entry, p4, p5, p6)
 		-- upvalues: resolveItemOverrides (copy), buildBoundEntry (copy)
 		if typeof(Entry) ~= "table" then
 			return {}

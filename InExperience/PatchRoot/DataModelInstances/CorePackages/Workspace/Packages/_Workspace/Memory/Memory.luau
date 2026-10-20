@@ -6,7 +6,7 @@ return {
 	["jest.config"] = script["jest.config"],
 	MemoryTracker = MemoryTrackerModule,
 	MemoryScope = require(script.Common.MemoryScope),
-	start = function(p1, p2, p3) --[[ Line: 6 ]]
+	start = function(p1, p2, p3)
 		-- upvalues: MemoryTrackerModule (copy), FFlagEnableMemoryShellModule (copy), MemoryShellModule (copy)
 		if p1 then
 			local MemoryTrackerModuleResult = MemoryTrackerModule(p2, p3)

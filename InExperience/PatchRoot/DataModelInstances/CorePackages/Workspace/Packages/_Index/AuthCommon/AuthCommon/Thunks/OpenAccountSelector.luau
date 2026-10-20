@@ -6,9 +6,9 @@ local AppPage = require(Parent.RobloxAppEnums).AppPage
 local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(ExtraProps, p1, p2) --[[ Line: 13 ]]
+return function(ExtraProps, p1, p2)
 	-- upvalues: SetCentralOverlayFunction (copy), CentralOverlayType (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
-	return function(p3) --[[ Line: 14 ]]
+	return function(p3)
 		-- upvalues: p1 (copy), p2 (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval), ExtraProps (copy), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval)
 		if not p1 then
 			p3:dispatch(SetCentralOverlayFunction(CentralOverlayType.AccountSelector, ExtraProps))

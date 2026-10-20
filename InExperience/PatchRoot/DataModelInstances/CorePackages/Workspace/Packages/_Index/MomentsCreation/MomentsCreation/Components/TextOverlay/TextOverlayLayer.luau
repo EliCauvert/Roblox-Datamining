@@ -57,7 +57,7 @@ local NumberSequence1 = NumberSequence.new({
 	NumberSequenceKeypoint.new(1, 0.2)
 })
 
-local function GenerateTextButton(p1) --[[ Line: 144 ]]
+local function GenerateTextButton(p1)
 	-- upvalues: UseTokensFunction (copy), UseCreationFlowStringsModule (copy), UseSignalStateFunction (copy), UseCallbackFunction (copy), ReactModule (copy), View (copy), Button (copy), FoundationModule (copy), BuilderIconsModule (copy)
 	local Controller = p1.controller
 	local UseTokensResult = UseTokensFunction()
@@ -75,7 +75,7 @@ local function GenerateTextButton(p1) --[[ Line: 144 ]]
 			icon = BuilderIconsModule.Icon.TagSparkle,
 			text = UseCreationFlowStringsModule().GenerateTextCta,
 			variant = FoundationModule.Enums.ButtonVariant.Emphasis,
-			onActivated = UseCallbackFunction(function() --[[ Line: 150 ]]
+			onActivated = UseCallbackFunction(function()
 				-- upvalues: Controller (copy)
 				Controller.beginTool("generateText")
 			end, { Controller }),
@@ -85,7 +85,7 @@ local function GenerateTextButton(p1) --[[ Line: 144 ]]
 	})
 end
 
-return function(p1) --[[ Line: 176 | Named "TextOverlayLayer" ]]
+return function(p1)
 	-- upvalues: UseSignalStateFunction (copy), GetScaleFunction (copy), UseMemoFunction (copy), SignalsModule (copy), CreationFlowStateModule (copy), UseRefFunction (copy), UseBindingFunction (copy), UseOnScreenKeyboardHeightModule (copy), FFlagMomentsTextOverlayModalTextFixModule (copy), FFlagMomentsTextOverlayV2Redesign (copy), ConstantsModule (copy), FFlagMomentsTextOverlayEdgeClipFix (copy), TextService (copy), FitTextOverlayFontSizeModule (copy), UseCallbackFunction (copy), GetFFlagMomentsStickerButtonFunction (copy), DashModule (copy), GetFFlagEnableMomentTextGenerationFunction (copy), FireAnalyticsEventModule (copy), EventNames (copy), MakeCreationEventFieldsModule (copy), UseDeviceInsetsFunction (copy), UseAnimatedBindingFunction (copy), UseIsMultiTouchActiveFunction (copy), UIDragDetectorFixEventPositionEnabledEngineFeature (copy), GuiService (copy), IsPointOverTrashTargetModule (copy), ReactOtterModule (copy), config (copy), UseEffectFunction (copy), MakeTextOverlayEditsForEditorModule (copy), MakeDefaultTextOverlayEditModule (copy), FFlagMomentsTextOverlayChipGrowAboveKeyboard (copy), ComputeEditorChipLayoutModule (copy), FFlagMomentsTextOverlayChipGrowWidthModule (copy), ReactModule (copy), View (copy), FoundationModule (copy), TextOverlay (copy), GetFFlagMomentsGenerateTextInTextOverlayModule (copy), GenerateTextButton (copy), VerticalFontSizeSliderModule (copy), NumberSequence1 (copy), TextOverlayToolbarModule (copy), OverlayDisplay (copy), TextOverlayDisplay (copy), TextOverlayTrashZoneModule (copy)
 	local Controller = p1.controller
 	local UseSignalStateResult = UseSignalStateFunction(Controller.getStep)
@@ -93,9 +93,9 @@ return function(p1) --[[ Line: 176 | Named "TextOverlayLayer" ]]
 	local UseSignalStateResult2 = UseSignalStateFunction(p1.ctx.getItemResolution)
 	local TextOverlays = UseSignalStateFunction(Controller.getComposedEdits).textOverlays
 	local Scale: number = GetScaleFunction(UseSignalStateResult1, UseSignalStateResult2, Enum.ScaleType.Crop)
-	local UseSignalStateResult3 = UseSignalStateFunction((UseMemoFunction(function() --[[ Line: 187 ]]
+	local UseSignalStateResult3 = UseSignalStateFunction((UseMemoFunction(function()
 		-- upvalues: SignalsModule (upval), Controller (copy)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 188 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: Controller (upval)
 			local ActiveSession = Controller.getActiveSession(p2)
 			
@@ -112,7 +112,7 @@ return function(p1) --[[ Line: 176 | Named "TextOverlayLayer" ]]
 	local HasUseSignalStateResult: boolean = FFlagMomentsTextOverlayModalTextFixModule and UseSignalStateResult4 ~= nil
 	local Scale1 = if FFlagMomentsTextOverlayModalTextFixModule then if FFlagMomentsTextOverlayV2Redesign and Scale > 0 then 1 / Scale else 1 else nil
 	local UseMemoResult = nil
-	UseMemoResult = if FFlagMomentsTextOverlayV2Redesign then UseMemoFunction(function() --[[ Line: 234 ]]
+	UseMemoResult = if FFlagMomentsTextOverlayV2Redesign then UseMemoFunction(function()
 		-- upvalues: UseSignalStateResultEntry (copy), ConstantsModule (upval), UseOnScreenKeyboardHeightModuleResult (copy), UseSignalStateResult1 (copy), FFlagMomentsTextOverlayEdgeClipFix (upval), TextService (upval), FitTextOverlayFontSizeModule (upval)
 		if UseSignalStateResultEntry == nil then
 			return ConstantsModule.TextOverlay.DefaultFontSize
@@ -126,19 +126,19 @@ return function(p1) --[[ Line: 176 | Named "TextOverlayLayer" ]]
 		UseOnScreenKeyboardHeightModuleResult,
 		UseSignalStateResult1
 	}) elseif UseSignalStateResultEntry == nil then ConstantsModule.TextOverlay.DefaultFontSize else UseSignalStateResultEntry.textOverlayStyle.fontSize
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 271 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: UseRefResult (copy)
 		if UseRefResult.current then
 			UseRefResult.current:CaptureFocus()
 		end
 	end, {})
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 279 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: UseRefResult (copy)
 		if UseRefResult.current then
 			UseRefResult.current:ReleaseFocus()
 		end
 	end, {})
-	local UseCallbackResult2 = UseCallbackFunction(function(p2) --[[ Line: 285 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function(p2)
 		-- upvalues: Controller (copy), GetFFlagMomentsStickerButtonFunction (upval), DashModule (upval)
 		local ActiveSession = Controller.getActiveSession(false)
 		
@@ -162,7 +162,7 @@ return function(p1) --[[ Line: 176 | Named "TextOverlayLayer" ]]
 		end
 		ActiveSession.update({ DashModule.joinDeep(DraftEntry, { text = p2.Text }) })
 	end, { Controller })
-	local UseCallbackResult3 = UseCallbackFunction(function() --[[ Line: 312 ]]
+	local UseCallbackResult3 = UseCallbackFunction(function()
 		-- upvalues: GetFFlagEnableMomentTextGenerationFunction (upval), Controller (copy)
 		if GetFFlagEnableMomentTextGenerationFunction() and Controller.getIsGenerating(false) then
 			Controller.onDisabledToolActivated("text")
@@ -172,7 +172,7 @@ return function(p1) --[[ Line: 176 | Named "TextOverlayLayer" ]]
 			Controller.beginTool("text")
 		end
 	end, { Controller })
-	local UseCallbackResult4 = UseCallbackFunction(function(p2) --[[ Line: 325 ]]
+	local UseCallbackResult4 = UseCallbackFunction(function(p2)
 		-- upvalues: Controller (copy)
 		Controller.updateCommittedEdit("text", p2)
 	end, { Controller })
@@ -186,7 +186,7 @@ return function(p1) --[[ Line: 176 | Named "TextOverlayLayer" ]]
 		UseRefResult2 = UseRefFunction(false)
 		UseRefResult3 = UseRefFunction(false)
 		v3 = UseRefFunction(false)
-		v1 = UseCallbackFunction(function(Scale) --[[ Line: 343 ]]
+		v1 = UseCallbackFunction(function(Scale)
 			-- upvalues: Controller (copy), DashModule (upval), UseRefResult2 (ref), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval)
 			local TextOverlays = Controller.getComposedEdits(false).textOverlays
 			local TextOverlay = TextOverlays and TextOverlays[1]
@@ -199,7 +199,7 @@ return function(p1) --[[ Line: 176 | Named "TextOverlayLayer" ]]
 				FireAnalyticsEventModule(EventNames.EditingFlowTextOverlayRescaleUsed, MakeCreationEventFieldsModule.makeTextOverlayEventFields())
 			end
 		end, { Controller })
-		v2 = UseCallbackFunction(function(Rotation) --[[ Line: 360 ]]
+		v2 = UseCallbackFunction(function(Rotation)
 			-- upvalues: Controller (copy), DashModule (upval), UseRefResult3 (ref), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval)
 			local TextOverlays = Controller.getComposedEdits(false).textOverlays
 			local TextOverlay = TextOverlays and TextOverlays[1]
@@ -222,7 +222,7 @@ return function(p1) --[[ Line: 176 | Named "TextOverlayLayer" ]]
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = UseAnimatedBindingFunction(1)
 	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = UseAnimatedBindingFunction(1)
 	local UseIsMultiTouchActiveResult = if FFlagMomentsTextOverlayV2Redesign then UseIsMultiTouchActiveFunction(UseSignalStateResult == CreationFlowStateModule.Preview) else false
-	local UseCallbackResult5 = UseCallbackFunction(function(p2) --[[ Line: 402 ]]
+	local UseCallbackResult5 = UseCallbackFunction(function(p2)
 		-- upvalues: UseRefResult4 (copy), FFlagMomentsTextOverlayV2Redesign (upval), UIDragDetectorFixEventPositionEnabledEngineFeature (upval), UseDeviceInsetsResult (ref), GuiService (upval), IsPointOverTrashTargetModule (upval)
 		local Current = UseRefResult4.current
 		
@@ -240,7 +240,7 @@ return function(p1) --[[ Line: 176 | Named "TextOverlayLayer" ]]
 		end
 		return IsPointOverTrashTargetModule(p2, ZeroVector, Current.AbsolutePosition, Current.AbsoluteSize, v4)
 	end, { UseDeviceInsetsResult })
-	local UseCallbackResult6 = UseCallbackFunction(function() --[[ Line: 421 ]]
+	local UseCallbackResult6 = UseCallbackFunction(function()
 		-- upvalues: FFlagMomentsTextOverlayV2Redesign (upval), p1 (copy), UseRefResult5 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseAnimatedBindingResult2_1 (copy), UseBindingResult2_1 (copy), v3 (ref), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval)
 		if not FFlagMomentsTextOverlayV2Redesign then return end
 		if p1.ctx.setIsOverlayDragging then
@@ -261,7 +261,7 @@ return function(p1) --[[ Line: 176 | Named "TextOverlayLayer" ]]
 		UseAnimatedBindingResult2_1,
 		UseBindingResult2_1
 	})
-	local UseCallbackResult7 = UseCallbackFunction(function(p2) --[[ Line: 442 ]]
+	local UseCallbackResult7 = UseCallbackFunction(function(p2)
 		-- upvalues: FFlagMomentsTextOverlayV2Redesign (upval), UseCallbackResult5 (copy), UseRefResult5 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval), UseAnimatedBindingResult2_1 (copy)
 		if not FFlagMomentsTextOverlayV2Redesign then return end
 		local UseCallbackResultResult = UseCallbackResult5(p2)
@@ -278,7 +278,7 @@ return function(p1) --[[ Line: 176 | Named "TextOverlayLayer" ]]
 		UseAnimatedBindingResult2,
 		UseAnimatedBindingResult2_1
 	})
-	local UseCallbackResult8 = UseCallbackFunction(function(p2) --[[ Line: 462 ]]
+	local UseCallbackResult8 = UseCallbackFunction(function(p2)
 		-- upvalues: FFlagMomentsTextOverlayV2Redesign (upval), UseCallbackResult4 (copy), p1 (copy), UseRefResult5 (copy), UseBindingResult2_1 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval), Controller (copy), UseAnimatedBindingResult2_1 (copy)
 		if not FFlagMomentsTextOverlayV2Redesign then
 			UseCallbackResult4(p2)
@@ -306,7 +306,7 @@ return function(p1) --[[ Line: 176 | Named "TextOverlayLayer" ]]
 		p1.ctx, Controller, UseCallbackResult4, UseBindingResult2_1,
 		UseAnimatedBindingResult2, UseAnimatedBindingResult2_1
 	})
-	UseEffectFunction(function() --[[ Line: 504 ]]
+	UseEffectFunction(function()
 		-- upvalues: FFlagMomentsTextOverlayV2Redesign (upval), TextOverlays (copy), UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval)
 		if not FFlagMomentsTextOverlayV2Redesign then return end
 		if TextOverlays == nil or #TextOverlays == 0 then
@@ -315,7 +315,7 @@ return function(p1) --[[ Line: 176 | Named "TextOverlayLayer" ]]
 	end, { TextOverlays })
 	
 	if FFlagMomentsTextOverlayV2Redesign then
-		UseEffectFunction(function() --[[ Line: 519 ]]
+		UseEffectFunction(function()
 			-- upvalues: FFlagMomentsTextOverlayV2Redesign (upval), UseIsMultiTouchActiveResult (ref), UseRefResult5 (copy), UseBindingResult2_1 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseAnimatedBindingResult2_1 (copy), p1 (copy)
 			if not FFlagMomentsTextOverlayV2Redesign or not UseIsMultiTouchActiveResult then return end
 			UseRefResult5.current = false
@@ -334,7 +334,7 @@ return function(p1) --[[ Line: 176 | Named "TextOverlayLayer" ]]
 			UseAnimatedBindingResult2_1
 		})
 	end
-	UseEffectFunction(function() --[[ Line: 543 ]]
+	UseEffectFunction(function()
 		-- upvalues: IsUseSignalStateResultMatch (copy), Controller (copy), MakeTextOverlayEditsForEditorModule (upval), TextOverlays (copy), MakeDefaultTextOverlayEditModule (upval), Scale (copy)
 		if not IsUseSignalStateResultMatch then return end
 		local ActiveSession = Controller.getActiveSession(false)
@@ -351,7 +351,7 @@ return function(p1) --[[ Line: 176 | Named "TextOverlayLayer" ]]
 		Scale
 	})
 	local UseRefResult6 = UseRefFunction(false)
-	UseEffectFunction(function() --[[ Line: 559 ]]
+	UseEffectFunction(function()
 		-- upvalues: IsUseSignalStateResultMatch (copy), UseRefResult6 (copy), UseRefResult (copy), UseSignalStateResultEntry (copy), UseCallbackResult (copy)
 		if not IsUseSignalStateResultMatch then
 			UseRefResult6.current = false
@@ -375,7 +375,7 @@ return function(p1) --[[ Line: 176 | Named "TextOverlayLayer" ]]
 	
 	if FFlagMomentsTextOverlayModalTextFixModule then
 		local UseRefResult7 = UseRefFunction(false)
-		UseEffectFunction(function() --[[ Line: 580 ]]
+		UseEffectFunction(function()
 			-- upvalues: UseRefResult (copy), HasUseSignalStateResult (copy), UseRefResult7 (copy), IsUseSignalStateResultMatch (copy), UseCallbackResult (copy)
 			local Current = UseRefResult.current
 			
@@ -399,7 +399,7 @@ return function(p1) --[[ Line: 176 | Named "TextOverlayLayer" ]]
 			UseCallbackResult
 		})
 	end
-	UseEffectFunction(function() --[[ Line: 596 ]]
+	UseEffectFunction(function()
 		-- upvalues: IsUseSignalStateResultMatch (copy), UseSignalStateResultEntry (copy), FFlagMomentsTextOverlayV2Redesign (upval), FFlagMomentsTextOverlayChipGrowAboveKeyboard (upval), UseOnScreenKeyboardHeightModuleResult (copy), UseBindingResult2 (copy), TextService (upval), UseMemoResult (ref), UseSignalStateResult1 (copy)
 		if not IsUseSignalStateResultMatch or UseSignalStateResultEntry == nil then return end
 		if FFlagMomentsTextOverlayV2Redesign and FFlagMomentsTextOverlayChipGrowAboveKeyboard then return end

@@ -29,9 +29,9 @@ local ShouldSaveScreenshotToAlbumModule = require(RobloxGui.Modules.shouldSaveSc
 local FixOnBadgeAwardedError = game:DefineFastFlag("FixOnBadgeAwardedError", false)
 local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
 
-local function _(p1, Text) --[[ Line: 54 | Named "LocalizedGetString" ]]
+local function _(p1, Text)
 	-- upvalues: RobloxTranslatorModule (copy)
-	pcall(function() --[[ Line: 55 ]]
+	pcall(function()
 		-- upvalues: Text (ref), RobloxTranslatorModule (upval), p1 (copy)
 		Text = RobloxTranslatorModule:FormatByKey(p1)
 	end)
@@ -80,12 +80,12 @@ local InOut = Enum.EasingDirection.InOut
 local Sine = Enum.EasingStyle.Sine
 local v5 = 5
 
-local function translateString(Text, p1) --[[ Line: 125 ]]
+local function translateString(Text, p1)
 	-- upvalues: LocalizationService (copy), Localization (copy), Logging (copy)
 	local RobloxLocaleId = LocalizationService.RobloxLocaleId
 	local NewLocalization = Localization.new(RobloxLocaleId)
 	NewLocalization:SetLocale(RobloxLocaleId)
-	local Success, Result = pcall(function() --[[ Line: 130 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: NewLocalization (copy), Text (copy), p1 (copy)
 		return NewLocalization:Format(Text, p1)
 	end)
@@ -99,35 +99,35 @@ local function translateString(Text, p1) --[[ Line: 125 ]]
 	end
 end
 
-local Success, Result = pcall(function(): number --[[ Line: 140 ]]
+local Success, Result = pcall(function(): number
 	return (tonumber(settings():GetFVariable("FriendRequestNotificationThrottle")))
 end)
 
 if Success and Result ~= nil then
 	v5 = Result
 end
-StarterGui:RegisterSetCore("PointsNotificationsActive", function(p1) --[[ Line: 147 ]]
+StarterGui:RegisterSetCore("PointsNotificationsActive", function(p1)
 	-- upvalues: v1 (ref)
 	if type(p1) == "boolean" then
 		v1 = p1
 	end
 end)
-StarterGui:RegisterSetCore("BadgesNotificationsActive", function(p1) --[[ Line: 152 ]]
+StarterGui:RegisterSetCore("BadgesNotificationsActive", function(p1)
 	-- upvalues: v2 (ref)
 	if type(p1) == "boolean" then
 		v2 = p1
 	end
 end)
-StarterGui:RegisterGetCore("PointsNotificationsActive", function() --[[ Line: 158 ]]
+StarterGui:RegisterGetCore("PointsNotificationsActive", function()
 	-- upvalues: v1 (ref)
 	return v1
 end)
-StarterGui:RegisterGetCore("BadgesNotificationsActive", function() --[[ Line: 161 ]]
+StarterGui:RegisterGetCore("BadgesNotificationsActive", function()
 	-- upvalues: v2 (ref)
 	return v2
 end)
 
-local _ = function(Name, Size, Position, BackgroundTransparency) --[[ Line: 168 | Named "createFrame" ]]
+local _ = function(Name, Size, Position, BackgroundTransparency)
 	local Frame = Instance.new("Frame")
 	Frame.Name = Name
 	Frame.Size = Size
@@ -137,7 +137,7 @@ local _ = function(Name, Size, Position, BackgroundTransparency) --[[ Line: 168 
 	return Frame
 end
 
-local function createTextButton(Name, Position) --[[ Line: 178 ]]
+local function createTextButton(Name, Position)
 	-- upvalues: YOffset (copy), ScaledPreferredTransparency (ref), Size42_1 (copy), Offset (copy), MaxTextSize (copy), MinTextSize (copy)
 	local Button = Instance.new("TextButton")
 	Button.Name = Name
@@ -178,7 +178,7 @@ else
 	NotificationFrame.ZIndex = 2
 end
 NotificationFrame.Parent = Parent
-local Object = (function() --[[ Line: 220 | Named "createDefaultNotification" ]]
+local Object = (function()
 	-- upvalues: YOffset1 (copy), ScaledPreferredTransparency (ref)
 	local _UDim2 = UDim2.new(0, 0, 0, 0)
 	local BackgroundTransparency = ScaledPreferredTransparency
@@ -264,12 +264,12 @@ PopupText.Parent = PopupFrame
 local v6 = nil
 local Callback = nil
 
-local _ = function(p1) --[[ Line: 305 | Named "getFriendImage" ]]
+local _ = function(p1)
 	-- upvalues: SocialUtilModule (copy)
 	return SocialUtilModule.GetPlayerImage(p1, Enum.ThumbnailSize.Size48x48, Enum.ThumbnailType.HeadShot, 5)
 end
 
-local function createNotification(Text, Text1, Image) --[[ Line: 316 ]]
+local function createNotification(Text, Text1, Image)
 	-- upvalues: Object (copy), YOffset1 (copy), NotificationTitle (copy), NotificationText (copy), TextService (copy), v3 (copy), NotificationFrame (copy), v4 (copy), XOffset2 (copy), XOffset1 (copy), NotificationImage (copy), GuiService (copy), HttpService (copy)
 	local ObjectClone = Object:Clone()
 	ObjectClone.Position = UDim2.new(1, 4, 1, -YOffset1 - 4)
@@ -281,7 +281,7 @@ local function createNotification(Text, Text1, Image) --[[ Line: 316 ]]
 	NotificationTextClone.Parent = ObjectClone
 	local Flag = false
 	
-	local function updateNotificationForMultiLineTitle() --[[ Line: 329 ]]
+	local function updateNotificationForMultiLineTitle()
 		-- upvalues: Flag (ref), NotificationTitleClone (copy), TextService (upval), v3 (upval), NotificationTextClone (copy), ObjectClone (copy)
 		Flag = true
 		NotificationTitleClone.TextWrapped = true
@@ -376,7 +376,7 @@ local function createNotification(Text, Text1, Image) --[[ Line: 316 ]]
 	return ObjectClone
 end
 
-local _ = function(p1): number? --[[ Line: 485 | Named "findNotification" ]]
+local _ = function(p1): number?
 	-- upvalues: List (copy)
 	for i = 1, #List do
 		if List[i] == p1 then
@@ -385,7 +385,7 @@ local _ = function(p1): number? --[[ Line: 485 | Named "findNotification" ]]
 	end
 end
 
-local function updateNotifications() --[[ Line: 494 ]]
+local function updateNotifications()
 	-- upvalues: List (copy), YOffset1 (copy), InOut (copy), Sine (copy)
 	local Count = 1
 	local Total = 0
@@ -398,7 +398,7 @@ local function updateNotifications() --[[ Line: 494 ]]
 			
 			if Frame and Frame.Parent and (Entry.IsFriend and (YOffset1 + 2) * 1.5 or true) then
 				Total += Entry.IsFriend and Frame.Size.Y.Offset + (YOffset1 + 2) * 0.5 or Frame.Size.Y.Offset
-				Frame:TweenPositionInternal(UDim2.new(0, 0, 1, -Total - Count * 4), InOut, Sine, 0.35, true, function() --[[ Line: 514 ]]
+				Frame:TweenPositionInternal(UDim2.new(0, 0, 1, -Total - Count * 4), InOut, Sine, 0.35, true, function()
 					-- upvalues: Entry (copy)
 					if Entry.TweenOutCallback then
 						Entry.TweenOutCallback()
@@ -412,9 +412,9 @@ end
 
 local CurrentTime = 0
 
-v6 = function(p2) --[[ Line: 527 ]]
+v6 = function(p2)
 	-- upvalues: List (copy), List1 (copy), NotificationFrame (copy), Callback (ref), CurrentTime (ref), updateNotifications (copy)
-	spawn(function() --[[ Line: 528 ]]
+	spawn(function()
 		-- upvalues: p2 (copy), List (upval), List1 (upval), NotificationFrame (upval), Callback (upval), CurrentTime (upval), updateNotifications (upval)
 		p2.IsActive = true
 		local CountList = #List
@@ -427,7 +427,7 @@ v6 = function(p2) --[[ Line: 527 ]]
 		end
 		List[CountList + 1] = p2
 		p2.Frame.Parent = NotificationFrame
-		spawn(function() --[[ Line: 543 ]]
+		spawn(function()
 			-- upvalues: p2 (upval), Callback (upval)
 			wait(0.7)
 			while p2.Duration > 0 do
@@ -444,7 +444,7 @@ v6 = function(p2) --[[ Line: 527 ]]
 	end)
 end
 
-Callback = function(p3) --[[ Line: 566 ]]
+Callback = function(p3)
 	-- upvalues: List (copy), InOut (copy), Sine (copy), List1 (copy), v6 (ref), updateNotifications (copy)
 	if not p3 then return end
 	local v7 = p3
@@ -462,11 +462,11 @@ Callback = function(p3) --[[ Line: 566 ]]
 	
 	if Frame and Frame.Parent then
 		p3.IsActive = false
-		spawn(function() --[[ Line: 576 ]]
+		spawn(function()
 			-- upvalues: Frame (copy), InOut (upval), Sine (upval), p3 (ref)
-			local function doTweenOut() --[[ Line: 582 ]]
+			local function doTweenOut()
 				-- upvalues: Frame (upval), InOut (upval), Sine (upval), p3 (upval)
-				return if Frame:IsDescendantOf(game) then Frame:TweenPositionInternal(UDim2.new(1, 0, 1, Frame.Position.Y.Offset), InOut, Sine, 0.35, false, function() --[[ Line: 590 ]]
+				return if Frame:IsDescendantOf(game) then Frame:TweenPositionInternal(UDim2.new(1, 0, 1, Frame.Position.Y.Offset), InOut, Sine, 0.35, false, function()
 					-- upvalues: Frame (upval), p3 (upval)
 					Frame:Destroy()
 					p3 = nil
@@ -491,20 +491,20 @@ Callback = function(p3) --[[ Line: 566 ]]
 	end
 end
 
-local _ = function(p4) --[[ Line: 619 | Named "sendNotificationInfo" ]]
+local _ = function(p4)
 	-- upvalues: SendNotificationInfo (copy)
 	p4.Duration = p4.Duration or 5
 	SendNotificationInfo:Fire(p4)
 end
 
-local _ = function(Text, ButtonType, p4) --[[ Line: 624 | Named "createNotificationButtonDetails" ]]
+local _ = function(Text, ButtonType, p4)
 	return {
 		Text = Text,
 		ButtonType = ButtonType,
-		OnActivated = function() --[[ Line: 628 ]]
+		OnActivated = function()
 			-- upvalues: p4 (copy), Text (copy)
 			if p4 and type(p4) ~= "function" then
-				pcall(function() --[[ Line: 630 ]]
+				pcall(function()
 					-- upvalues: p4 (upval), Text (upval)
 					p4:Invoke(Text)
 				end)
@@ -518,7 +518,7 @@ local _ = function(Text, ButtonType, p4) --[[ Line: 624 | Named "createNotificat
 	}
 end
 
-SendNotificationInfo.Event:connect(function(p4) --[[ Line: 640 | Named "onSendNotificationInfo" ]]
+SendNotificationInfo.Event:connect(function(p4)
 	-- upvalues: VRService (copy), ClientToastNotificationsEnabledEngineFeature (copy), GetFFlagClientToastNotificationsRedirectModule (copy), GameTranslatorModule (copy), CoreGui (copy), GuiService (copy), createNotification (copy), createTextButton (copy), Callback (ref), YOffset (copy), v6 (ref)
 	if VRService.VREnabled then return end
 	local CallbackFunction = p4.Callback
@@ -532,10 +532,10 @@ SendNotificationInfo.Event:connect(function(p4) --[[ Line: 640 | Named "onSendNo
 			table.insert(List, {
 				Text = Button1Text,
 				ButtonType = Enum.NotificationButtonType.Primary,
-				OnActivated = function() --[[ Line: 628 ]]
+				OnActivated = function()
 					-- upvalues: CallbackFunction (copy), Button1Text (copy)
 					if CallbackFunction and type(CallbackFunction) ~= "function" then
-						pcall(function() --[[ Line: 630 ]]
+						pcall(function()
 							-- upvalues: CallbackFunction (upval), Button1Text (upval)
 							CallbackFunction:Invoke(Button1Text)
 						end)
@@ -552,10 +552,10 @@ SendNotificationInfo.Event:connect(function(p4) --[[ Line: 640 | Named "onSendNo
 			table.insert(List, {
 				Text = Button2Text,
 				ButtonType = Enum.NotificationButtonType.Secondary,
-				OnActivated = function() --[[ Line: 628 ]]
+				OnActivated = function()
 					-- upvalues: CallbackFunction (copy), Button2Text (copy)
 					if CallbackFunction and type(CallbackFunction) ~= "function" then
-						pcall(function() --[[ Line: 630 ]]
+						pcall(function()
 							-- upvalues: CallbackFunction (upval), Button2Text (upval)
 							CallbackFunction:Invoke(Button2Text)
 						end)
@@ -594,7 +594,7 @@ SendNotificationInfo.Event:connect(function(p4) --[[ Line: 640 | Named "onSendNo
 			end
 			Button1.Parent = Notification
 			local MouseButton1ClickConnection = nil
-			MouseButton1ClickConnection = Button1.MouseButton1Click:connect(function() --[[ Line: 709 ]]
+			MouseButton1ClickConnection = Button1.MouseButton1Click:connect(function()
 				-- upvalues: MouseButton1ClickConnection (ref), Callback (upval), t (copy), CallbackFunction (copy), Button1Text (copy)
 				if MouseButton1ClickConnection then
 					MouseButton1ClickConnection:disconnect()
@@ -602,7 +602,7 @@ SendNotificationInfo.Event:connect(function(p4) --[[ Line: 640 | Named "onSendNo
 					Callback(t)
 					
 					if CallbackFunction and type(CallbackFunction) ~= "function" then
-						pcall(function() --[[ Line: 715 ]]
+						pcall(function()
 							-- upvalues: CallbackFunction (upval), Button1Text (upval)
 							CallbackFunction:Invoke(Button1Text)
 						end)
@@ -626,7 +626,7 @@ SendNotificationInfo.Event:connect(function(p4) --[[ Line: 640 | Named "onSendNo
 			end
 			Button2.Parent = Notification
 			local MouseButton1ClickConnection1 = nil
-			MouseButton1ClickConnection1 = Button2.MouseButton1Click:connect(function() --[[ Line: 739 ]]
+			MouseButton1ClickConnection1 = Button2.MouseButton1Click:connect(function()
 				-- upvalues: MouseButton1ClickConnection1 (ref), Callback (upval), t (copy), CallbackFunction (copy), Button2Text (copy), p4 (copy)
 				if MouseButton1ClickConnection1 then
 					MouseButton1ClickConnection1:disconnect()
@@ -634,7 +634,7 @@ SendNotificationInfo.Event:connect(function(p4) --[[ Line: 640 | Named "onSendNo
 					Callback(t)
 					
 					if CallbackFunction and type(CallbackFunction) ~= "function" then
-						pcall(function() --[[ Line: 745 ]]
+						pcall(function()
 							-- upvalues: CallbackFunction (upval), Button2Text (upval)
 							CallbackFunction:Invoke(Button2Text)
 						end)
@@ -654,7 +654,7 @@ SendNotificationInfo.Event:connect(function(p4) --[[ Line: 640 | Named "onSendNo
 		v6(t)
 	end
 end)
-StarterGui:RegisterSetCore("SendNotification", function(p4) --[[ Line: 766 | Named "createDeveloperNotification" ]]
+StarterGui:RegisterSetCore("SendNotification", function(p4)
 	-- upvalues: ClientToastNotificationsEnabledEngineFeature (copy), GetFFlagClientToastNotificationsRedirectModule (copy), SendNotificationInfo (copy)
 	if type(p4) == "table" and type(p4.Title) == "string" and type(p4.Text) == "string" then
 		local Icon = type(p4.Icon) == "string" and p4.Icon or ""
@@ -688,7 +688,7 @@ end)
 local v8 = nil
 local NewCurrentTimes = {}
 
-v8 = function(Player): boolean --[[ Line: 817 ]]
+v8 = function(Player): boolean
 	-- upvalues: NewCurrentTimes (copy), v5 (ref)
 	local NewCurrentTime = NewCurrentTimes[Player]
 	
@@ -701,7 +701,7 @@ v8 = function(Player): boolean --[[ Line: 817 ]]
 	end
 end
 
-local function sendFriendNotification(Player: Player) --[[ Line: 831 ]]
+local function sendFriendNotification(Player: Player)
 	-- upvalues: v8 (ref), NotificationsRenameFriendRequestToConnection (copy), UniversalAppPolicyModule (copy), translateString (copy), SocialUtilModule (copy), RbxAnalyticsService (copy), LocalPlayer (ref), t (copy), SendNotificationInfo (copy)
 	if not v8(Player) then
 		local RenameFriendsToConnections = NotificationsRenameFriendRequestToConnection and UniversalAppPolicyModule.getAppFeaturePolicies().getRenameFriendsToConnections()
@@ -714,7 +714,7 @@ local function sendFriendNotification(Player: Player) --[[ Line: 831 ]]
 			Text = if RenameFriendsToConnections then translateString("InGame.NotificationScript2.Message.FriendRequestEvent.Sent") else "Sent you a friend request!",
 			DetailText = Player.DisplayName,
 			Image = SocialUtilModule.GetPlayerImage(Player.UserId, Enum.ThumbnailSize.Size48x48, Enum.ThumbnailType.HeadShot, 5),
-			Callback = function(Value) --[[ Line: 852 ]]
+			Callback = function(Value)
 				-- upvalues: RbxAnalyticsService (upval), LocalPlayer (upval), Player (copy), t (upval)
 				if Value == "Accept" then
 					RbxAnalyticsService:ReportCounter("NotificationScript-RequestFriendship")
@@ -731,12 +731,12 @@ local function sendFriendNotification(Player: Player) --[[ Line: 831 ]]
 					t[Player] = true
 				end
 			end,
-			OnDisplay = function() --[[ Line: 871 ]]
+			OnDisplay = function()
 				-- upvalues: RbxAnalyticsService (upval)
 				RbxAnalyticsService:ReportCounter("NotificationScript-FriendshipNotificationDisplayed")
 				RbxAnalyticsService:TrackEvent("Game", "FriendshipNotificationDisplayed", "NotificationScript")
 			end,
-			OnDismiss = function() --[[ Line: 875 ]]
+			OnDismiss = function()
 				-- upvalues: RbxAnalyticsService (upval)
 				RbxAnalyticsService:ReportCounter("NotificationScript-FriendshipNotificationDismissed")
 				RbxAnalyticsService:TrackEvent("Game", "FriendshipNotificationDismissed", "NotificationScript")
@@ -749,7 +749,7 @@ local function sendFriendNotification(Player: Player) --[[ Line: 831 ]]
 	end
 end
 
-local function onFriendRequestEvent(Player: Player, Player1: Player, FriendRequestEvent) --[[ Line: 882 ]]
+local function onFriendRequestEvent(Player: Player, Player1: Player, FriendRequestEvent)
 	-- upvalues: LocalPlayer (ref), NotificationsRenameFriendRequestToConnection (copy), UniversalAppPolicyModule (copy), translateString (copy), FriendingUtilityModule (copy), GetFFlagFriendshipNotifsUseSendrModule (copy), RobloxTranslatorModule (copy), SocialUtilModule (copy), SendNotificationInfo (copy), t (copy), sendFriendNotification (copy)
 	if Player ~= LocalPlayer and Player1 ~= LocalPlayer then return end
 	local RenameFriendsToConnections = NotificationsRenameFriendRequestToConnection and UniversalAppPolicyModule.getAppFeaturePolicies().getRenameFriendsToConnections()
@@ -797,7 +797,7 @@ local function onFriendRequestEvent(Player: Player, Player1: Player, FriendReque
 	end
 end
 
-local function onPointsAwarded(UserId, PointsAwarded: number, _, _) --[[ Line: 942 ]]
+local function onPointsAwarded(UserId, PointsAwarded: number, _, _)
 	-- upvalues: v1 (ref), LocalPlayer (ref), RobloxTranslatorModule (copy), SendNotificationInfo (copy)
 	if v1 and UserId == LocalPlayer.UserId then
 		local Title: string? = nil
@@ -827,14 +827,14 @@ local function onPointsAwarded(UserId, PointsAwarded: number, _, _) --[[ Line: 9
 	end
 end
 
-local function onBadgeAwarded(UserId, CreatorId, BadgeId) --[[ Line: 980 ]]
+local function onBadgeAwarded(UserId, CreatorId, BadgeId)
 	-- upvalues: t1 (copy), v2 (ref), LocalPlayer (ref), GroupService (copy), Players (copy), BadgeService (copy), FixOnBadgeAwardedError (copy), RobloxTranslatorModule (copy), RbxAnalyticsService (copy), SendNotificationInfo (copy)
 	if not t1[BadgeId] and v2 and UserId == LocalPlayer.UserId then
 		t1[BadgeId] = true
 		local Name = ""
 		
 		if game.CreatorType == Enum.CreatorType.Group then
-			local Success, Result = pcall(function() --[[ Line: 985 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: GroupService (upval), CreatorId (copy)
 				return GroupService:GetGroupInfoAsync(CreatorId)
 			end)
@@ -847,7 +847,7 @@ local function onBadgeAwarded(UserId, CreatorId, BadgeId) --[[ Line: 980 ]]
 			end
 		elseif game.CreatorType == Enum.CreatorType.User then
 			local Success2
-			Success2, Name = pcall(function() --[[ Line: 997 ]]
+			Success2, Name = pcall(function()
 				-- upvalues: Players (upval), CreatorId (copy)
 				return Players:GetNameFromUserIdAsync(CreatorId)
 			end)
@@ -856,7 +856,7 @@ local function onBadgeAwarded(UserId, CreatorId, BadgeId) --[[ Line: 980 ]]
 				Name = ""
 			end
 		end
-		local Success1, Result1 = pcall(function() --[[ Line: 1005 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: BadgeService (upval), BadgeId (copy)
 			return BadgeService:GetBadgeInfoAsync(BadgeId)
 		end)
@@ -872,7 +872,7 @@ local function onBadgeAwarded(UserId, CreatorId, BadgeId) --[[ Line: 980 ]]
 		})
 		local FormatByKeyResult = nil
 		local v9 = "InGame.NotificationScript2.onBadgeAwardedTitle"
-		pcall(function() --[[ Line: 55 ]]
+		pcall(function()
 			-- upvalues: FormatByKeyResult (ref), RobloxTranslatorModule (upval), v9 (copy)
 			FormatByKeyResult = RobloxTranslatorModule:FormatByKey(v9)
 		end)
@@ -883,12 +883,12 @@ local function onBadgeAwarded(UserId, CreatorId, BadgeId) --[[ Line: 980 ]]
 			Title = FormatByKeyResult,
 			Text = InGameNotificationScript2OnBadgeAwardedDetail,
 			DetailText = InGameNotificationScript2OnBadgeAwardedDetail,
-			OnDisplay = function() --[[ Line: 1030 ]]
+			OnDisplay = function()
 				-- upvalues: RbxAnalyticsService (upval)
 				RbxAnalyticsService:ReportCounter("NotificationScript-BadgeAwardNotificationDisplayed")
 				RbxAnalyticsService:TrackEvent("Game", "BadgeAwardNotificationDisplayed", "NotificationScript")
 			end,
-			OnDismiss = function() --[[ Line: 1034 ]]
+			OnDismiss = function()
 				-- upvalues: RbxAnalyticsService (upval)
 				RbxAnalyticsService:ReportCounter("NotificationScript-BadgeAwardNotificationDismissed")
 				RbxAnalyticsService:TrackEvent("Game", "BadgeAwardNotificationDismissed", "NotificationScript")
@@ -899,7 +899,7 @@ local function onBadgeAwarded(UserId, CreatorId, BadgeId) --[[ Line: 980 ]]
 	end
 end
 
-function onGameSettingsChanged(p4, p5) --[[ Line: 1042 ]]
+function onGameSettingsChanged(p4, p5)
 	-- upvalues: GameSettings (copy), Value (ref), RobloxTranslatorModule (copy), SendNotificationInfo (copy)
 	if p4 == "SavedQualityLevel" then
 		local NewValue = GameSettings.SavedQualityLevel.Value + p5
@@ -933,13 +933,13 @@ end
 if not IsEnabled then
 	Players.FriendRequestEvent:connect(onFriendRequestEvent)
 	PointsService.PointsAwarded:connect(onPointsAwarded)
-	game.GraphicsQualityChangeRequest:Connect(function(_) --[[ Line: 1093 ]]
+	game.GraphicsQualityChangeRequest:Connect(function(_)
 		onGameSettingsChanged("SavedQualityLevel", 0)
 	end)
 end
 if not CachedPolicyServiceModule:IsSubjectToChinaPolicies() then
 	if not ShouldSaveScreenshotToAlbumModule() then
-		game.ScreenshotReady:Connect(function(_) --[[ Line: 1103 ]]
+		game.ScreenshotReady:Connect(function(_)
 			-- upvalues: RobloxTranslatorModule (copy), SendNotificationInfo (copy)
 			local InGameNotificationScript2ScreenshotButtonText = RobloxTranslatorModule:FormatByKey("InGame.NotificationScript2.Screenshot.ButtonText")
 			local config = {
@@ -947,7 +947,7 @@ if not CachedPolicyServiceModule:IsSubjectToChinaPolicies() then
 				Title = RobloxTranslatorModule:FormatByKey("InGame.NotificationScript2.Screenshot.Title"),
 				Text = RobloxTranslatorModule:FormatByKey("InGame.NotificationScript2.Screenshot.Description"),
 				Button1Text = InGameNotificationScript2ScreenshotButtonText,
-				Callback = function(Value) --[[ Line: 1113 ]]
+				Callback = function(Value)
 					-- upvalues: InGameNotificationScript2ScreenshotButtonText (copy)
 					if Value == InGameNotificationScript2ScreenshotButtonText then
 						game:OpenScreenshotsFolder()
@@ -958,7 +958,7 @@ if not CachedPolicyServiceModule:IsSubjectToChinaPolicies() then
 			SendNotificationInfo:Fire(config)
 		end)
 	end
-	settings():GetService("GameSettings").VideoRecordingChangeRequest:Connect(function(Recording) --[[ Line: 1123 ]]
+	settings():GetService("GameSettings").VideoRecordingChangeRequest:Connect(function(Recording)
 		-- upvalues: RobloxTranslatorModule (copy), SendNotificationInfo (copy)
 		if not Recording then
 			local InGameNotificationScript2VideoButtonText = RobloxTranslatorModule:FormatByKey("InGame.NotificationScript2.Video.ButtonText")
@@ -967,7 +967,7 @@ if not CachedPolicyServiceModule:IsSubjectToChinaPolicies() then
 				Title = RobloxTranslatorModule:FormatByKey("InGame.NotificationScript2.Video.Title"),
 				Text = RobloxTranslatorModule:FormatByKey("InGame.NotificationScript2.Video.Description"),
 				Button1Text = InGameNotificationScript2VideoButtonText,
-				Callback = function(Value) --[[ Line: 1134 ]]
+				Callback = function(Value)
 					-- upvalues: InGameNotificationScript2VideoButtonText (copy)
 					if Value == InGameNotificationScript2VideoButtonText then
 						game:OpenVideosFolder()
@@ -979,7 +979,7 @@ if not CachedPolicyServiceModule:IsSubjectToChinaPolicies() then
 		end
 	end)
 end
-function GuiService.SendCoreUiNotification(p4, p5) --[[ Line: 1144 ]]
+function GuiService.SendCoreUiNotification(p4, p5)
 	-- upvalues: createNotification (copy), Parent (copy), InOut (copy), Sine (copy)
 	local Notification = createNotification(p4, p5, "")
 	Notification.BackgroundTransparency = 0.5
@@ -996,13 +996,13 @@ function GuiService.SendCoreUiNotification(p4, p5) --[[ Line: 1144 ]]
 	end
 end
 
-MarketplaceService.ClientLuaDialogRequested:connect(function(Text, Text1, Text2): boolean --[[ Line: 1160 | Named "onClientLuaDialogRequested" ]]
+MarketplaceService.ClientLuaDialogRequested:connect(function(Text, Text1, Text2): boolean
 	-- upvalues: PopupText (copy), GuiService (copy), PopupFrame (copy), PopupAcceptButton (copy), MarketplaceService (copy), PopupDeclineButton (copy), PopupOKButton (copy)
 	PopupText.Text = Text
 	local MouseButton1ClickConnection = nil
 	local MouseButton1ClickConnection1 = nil
 	
-	local function _() --[[ Line: 1164 | Named "disconnectCns" ]]
+	local function _()
 		-- upvalues: MouseButton1ClickConnection (ref), MouseButton1ClickConnection1 (ref), GuiService (upval), PopupFrame (upval)
 		if MouseButton1ClickConnection then
 			MouseButton1ClickConnection:disconnect()
@@ -1014,7 +1014,7 @@ MarketplaceService.ClientLuaDialogRequested:connect(function(Text, Text1, Text2)
 		PopupFrame.Visible = false
 	end
 	
-	MouseButton1ClickConnection = PopupAcceptButton.MouseButton1Click:connect(function() --[[ Line: 1176 ]]
+	MouseButton1ClickConnection = PopupAcceptButton.MouseButton1Click:connect(function()
 		-- upvalues: MouseButton1ClickConnection (ref), MouseButton1ClickConnection1 (ref), GuiService (upval), PopupFrame (upval), MarketplaceService (upval)
 		if MouseButton1ClickConnection then
 			MouseButton1ClickConnection:disconnect()
@@ -1026,7 +1026,7 @@ MarketplaceService.ClientLuaDialogRequested:connect(function(Text, Text1, Text2)
 		PopupFrame.Visible = false
 		MarketplaceService:SignalServerLuaDialogClosed(true)
 	end)
-	MouseButton1ClickConnection1 = PopupDeclineButton.MouseButton1Click:connect(function() --[[ Line: 1180 ]]
+	MouseButton1ClickConnection1 = PopupDeclineButton.MouseButton1Click:connect(function()
 		-- upvalues: MouseButton1ClickConnection (ref), MouseButton1ClickConnection1 (ref), GuiService (upval), PopupFrame (upval), MarketplaceService (upval)
 		if MouseButton1ClickConnection then
 			MouseButton1ClickConnection:disconnect()
@@ -1039,9 +1039,9 @@ MarketplaceService.ClientLuaDialogRequested:connect(function(Text, Text1, Text2)
 		MarketplaceService:SignalServerLuaDialogClosed(false)
 	end)
 	
-	if not pcall(function() --[[ Line: 1185 ]]
+	if not pcall(function()
 		-- upvalues: GuiService (upval), PopupFrame (upval), PopupOKButton (upval), PopupAcceptButton (upval), PopupDeclineButton (upval), Text1 (copy), Text2 (copy)
-		GuiService:AddCenterDialog(PopupFrame, Enum.CenterDialogType.QuitDialog, function() --[[ Line: 1186 ]]
+		GuiService:AddCenterDialog(PopupFrame, Enum.CenterDialogType.QuitDialog, function()
 			-- upvalues: PopupOKButton (upval), PopupAcceptButton (upval), PopupDeclineButton (upval), Text1 (upval), Text2 (upval), PopupFrame (upval)
 			PopupOKButton.Visible = false
 			PopupAcceptButton.Visible = true
@@ -1049,7 +1049,7 @@ MarketplaceService.ClientLuaDialogRequested:connect(function(Text, Text1, Text2)
 			PopupAcceptButton.Text = Text1
 			PopupDeclineButton.Text = Text2
 			PopupFrame.Visible = true
-		end, function() --[[ Line: 1193 ]]
+		end, function()
 			-- upvalues: PopupFrame (upval)
 			PopupFrame.Visible = false
 		end)
@@ -1060,7 +1060,7 @@ MarketplaceService.ClientLuaDialogRequested:connect(function(Text, Text1, Text2)
 	end
 	return true
 end)
-GameSettings:GetPropertyChangedSignal("PreferredTransparency"):connect(function() --[[ Line: 1208 | Named "onPreferredTransparencyChanged" ]]
+GameSettings:GetPropertyChangedSignal("PreferredTransparency"):connect(function()
 	-- upvalues: ScaledPreferredTransparency (ref), GameSettings (copy), Object (copy), List (copy)
 	ScaledPreferredTransparency = 0.6 * GameSettings.PreferredTransparency
 	Object.BackgroundTransparency = ScaledPreferredTransparency
@@ -1071,18 +1071,18 @@ GameSettings:GetPropertyChangedSignal("PreferredTransparency"):connect(function(
 end)
 
 if FFlagCoreScriptShowTeleportPromptModule then
-	local function onMenuTeleportAttemptNotification() --[[ Line: 1219 ]]
+	local function onMenuTeleportAttemptNotification()
 		-- upvalues: RobloxTranslatorModule (copy), Negated (copy), SendNotificationInfo (copy)
 		local FormatByKeyResult = "Teleporting Paused"
 		local v9 = "Feature.SettingsHub.Prompt.TeleportBlock.Title"
-		pcall(function() --[[ Line: 55 ]]
+		pcall(function()
 			-- upvalues: FormatByKeyResult (ref), RobloxTranslatorModule (upval), v9 (copy)
 			FormatByKeyResult = RobloxTranslatorModule:FormatByKey(v9)
 		end)
 		local Title: string = FormatByKeyResult
 		local FormatByKeyResult1 = "Teleporting will resume upon menu close."
 		local v10 = "Feature.SettingsHub.Prompt.TeleportBlock.Subtitle"
-		pcall(function() --[[ Line: 55 ]]
+		pcall(function()
 			-- upvalues: FormatByKeyResult1 (ref), RobloxTranslatorModule (upval), v10 (copy)
 			FormatByKeyResult1 = RobloxTranslatorModule:FormatByKey(v10)
 		end)
@@ -1098,15 +1098,15 @@ if FFlagCoreScriptShowTeleportPromptModule then
 		SendNotificationInfo:Fire(config)
 	end
 	
-	local _ = function() --[[ Line: 1236 | Named "connectMenuTeleportAttemptEvent" ]]
+	local _ = function()
 		-- upvalues: TeleportService (copy), onMenuTeleportAttemptNotification (copy)
-		TeleportService.MenuTeleportAttempt:Connect(function() --[[ Line: 1237 ]]
+		TeleportService.MenuTeleportAttempt:Connect(function()
 			-- upvalues: onMenuTeleportAttemptNotification (upval)
 			onMenuTeleportAttemptNotification()
 		end)
 	end
 	
-	TeleportService.MenuTeleportAttempt:Connect(function() --[[ Line: 1237 ]]
+	TeleportService.MenuTeleportAttempt:Connect(function()
 		-- upvalues: onMenuTeleportAttemptNotification (copy)
 		onMenuTeleportAttemptNotification()
 	end)

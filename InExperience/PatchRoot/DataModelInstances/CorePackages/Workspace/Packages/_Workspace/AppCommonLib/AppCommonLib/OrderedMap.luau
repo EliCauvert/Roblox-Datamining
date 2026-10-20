@@ -1,7 +1,7 @@
 ﻿local OrderedMapModule = {}
 OrderedMapModule.__index = OrderedMapModule
 
-function OrderedMapModule.new(GetId, SortPredicate, ...) --[[ Line: 51 ]]
+function OrderedMapModule.new(GetId, SortPredicate, ...)
 	-- upvalues: OrderedMapModule (copy)
 	local config = {
 		keys = {},
@@ -15,25 +15,25 @@ function OrderedMapModule.new(GetId, SortPredicate, ...) --[[ Line: 51 ]]
 	return config
 end
 
-function OrderedMapModule:Get(Key) --[[ Line: 69 ]]
+function OrderedMapModule:Get(Key)
 	return self.values[Key]
 end
 
-function OrderedMapModule:GetByIndex(p1) --[[ Line: 76 ]]
+function OrderedMapModule:GetByIndex(p1)
 	local Key = self.keys[p1]
 	
 	return if Key == nil then nil else self.values[Key]
 end
 
-function OrderedMapModule:GetIds() --[[ Line: 89 ]]
+function OrderedMapModule:GetIds()
 	return self.keys
 end
 
-function OrderedMapModule:Length(): number --[[ Line: 96 ]]
+function OrderedMapModule:Length(): number
 	return #self.keys
 end
 
-function OrderedMapModule:Delete(...) --[[ Line: 109 ]]
+function OrderedMapModule:Delete(...)
 	-- upvalues: OrderedMapModule (copy)
 	local NewOrderedMap = OrderedMapModule.new(self.getId, self.sortPredicate)
 	local Selected = select("#", ...)
@@ -52,7 +52,7 @@ function OrderedMapModule:Delete(...) --[[ Line: 109 ]]
 	return NewOrderedMap
 end
 
-function OrderedMapModule:Insert(...) --[[ Line: 143 ]]
+function OrderedMapModule:Insert(...)
 	-- upvalues: OrderedMapModule (copy)
 	local CopyResult = self:_Copy()
 	OrderedMapModule._InsertInPlace(CopyResult, ...)
@@ -60,21 +60,21 @@ function OrderedMapModule:Insert(...) --[[ Line: 143 ]]
 	return CopyResult
 end
 
-function OrderedMapModule.First(p1) --[[ Line: 154 ]]
+function OrderedMapModule.First(p1)
 	return if p1.keys[1] then p1:Get(p1.keys[1]) else nil
 end
 
-function OrderedMapModule:Last() --[[ Line: 164 ]]
+function OrderedMapModule:Last()
 	local CountKeys = #self.keys
 	
 	return if self.keys[CountKeys] then self:Get(self.keys[CountKeys]) else nil
 end
 
-function OrderedMapModule:CreateIterator() --[[ Line: 181 ]]
+function OrderedMapModule:CreateIterator()
 	local Count = 0
 	local CountKeys = #self.keys
 	
-	return function() --[[ Line: 186 ]]
+	return function()
 		-- upvalues: Count (ref), CountKeys (copy), self (copy)
 		Count += 1
 		
@@ -88,10 +88,10 @@ function OrderedMapModule:CreateIterator() --[[ Line: 181 ]]
 	end
 end
 
-function OrderedMapModule:CreateReverseIterator() --[[ Line: 206 ]]
+function OrderedMapModule:CreateReverseIterator()
 	local Count = #self.keys + 1
 	
-	return function() --[[ Line: 210 ]]
+	return function()
 		-- upvalues: Count (ref), self (copy)
 		Count -= 1
 		
@@ -105,7 +105,7 @@ function OrderedMapModule:CreateReverseIterator() --[[ Line: 206 ]]
 	end
 end
 
-function OrderedMapModule:Map(Callback) --[[ Line: 233 ]]
+function OrderedMapModule:Map(Callback)
 	-- upvalues: OrderedMapModule (copy)
 	local NewOrderedMap = OrderedMapModule.new(self.getId, self.sortPredicate)
 	
@@ -117,7 +117,7 @@ function OrderedMapModule:Map(Callback) --[[ Line: 233 ]]
 	return NewOrderedMap
 end
 
-function OrderedMapModule:Merge(...) --[[ Line: 260 ]]
+function OrderedMapModule:Merge(...)
 	local CopyResult = nil
 	
 	for i = 1, select("#", ...) do
@@ -141,7 +141,7 @@ function OrderedMapModule:Merge(...) --[[ Line: 260 ]]
 	end
 end
 
-function OrderedMapModule:_Copy() --[[ Line: 289 ]]
+function OrderedMapModule:_Copy()
 	-- upvalues: OrderedMapModule (copy)
 	local NewOrderedMap = OrderedMapModule.new(self.getId, self.sortPredicate)
 	
@@ -154,7 +154,7 @@ function OrderedMapModule:_Copy() --[[ Line: 289 ]]
 	return NewOrderedMap
 end
 
-function OrderedMapModule:_InsertInPlaceUnsorted(...) --[[ Line: 309 ]]
+function OrderedMapModule:_InsertInPlaceUnsorted(...)
 	for i = 1, select("#", ...) do
 		local Selected = select(i, ...)
 		local Id = self.getId(Selected)
@@ -166,14 +166,14 @@ function OrderedMapModule:_InsertInPlaceUnsorted(...) --[[ Line: 309 ]]
 	end
 end
 
-function OrderedMapModule:_Sort() --[[ Line: 328 ]]
-	table.sort(self.keys, function(A, B) --[[ Line: 329 ]]
+function OrderedMapModule:_Sort()
+	table.sort(self.keys, function(A, B)
 		-- upvalues: self (copy)
 		return self.sortPredicate(self.values[A], self.values[B])
 	end)
 end
 
-function OrderedMapModule:_InsertInPlace(...) --[[ Line: 342 ]]
+function OrderedMapModule:_InsertInPlace(...)
 	self:_InsertInPlaceUnsorted(...)
 	self:_Sort()
 end

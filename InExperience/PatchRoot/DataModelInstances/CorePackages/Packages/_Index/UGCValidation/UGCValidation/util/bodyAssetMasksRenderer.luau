@@ -37,7 +37,7 @@ BodyAssetMasksRendererModule.viewDirections = {
 }
 BodyAssetMasksRendererModule.views = nil
 
-function BodyAssetMasksRendererModule.getViewToWorldTransforms() --[[ Line: 73 ]]
+function BodyAssetMasksRendererModule.getViewToWorldTransforms()
 	-- upvalues: BodyAssetMasksRendererModule (copy)
 	if not BodyAssetMasksRendererModule.views then
 		BodyAssetMasksRendererModule.views = {}
@@ -55,14 +55,14 @@ function BodyAssetMasksRendererModule.getViewToWorldTransforms() --[[ Line: 73 ]
 	return BodyAssetMasksRendererModule.views
 end
 
-function BodyAssetMasksRendererModule.getViewSpacePositionFromNormalized(p1, p2): Vector3 --[[ Line: 92 ]]
+function BodyAssetMasksRendererModule.getViewSpacePositionFromNormalized(p1, p2): Vector3
 	local ScaledVector = (p1 - Vector2.new(0.5, 0.5)) * Vector2.new(2, -2)
 	local MaxRatio = (p2.max - p2.min) / 2
 	
 	return p2.min + MaxRatio + MaxRatio * Vector3.new(ScaledVector.X, ScaledVector.Y, 0)
 end
 
-local function populateViewsToRender(List) --[[ Line: 104 ]]
+local function populateViewsToRender(List)
 	-- upvalues: BodyAssetMasksRendererModule (copy)
 	local ViewToWorldTransforms = BodyAssetMasksRendererModule.getViewToWorldTransforms()
 	local t = {}
@@ -78,7 +78,7 @@ local function populateViewsToRender(List) --[[ Line: 104 ]]
 	return t
 end
 
-local function addTransformedTriangle(EditableMesh, FaceId, p1, List) --[[ Line: 120 ]]
+local function addTransformedTriangle(EditableMesh, FaceId, p1, List)
 	local FaceVertices = EditableMesh:GetFaceVertices(FaceId)
 	local List1 = {}
 	
@@ -88,7 +88,7 @@ local function addTransformedTriangle(EditableMesh, FaceId, p1, List) --[[ Line:
 	table.insert(List, List1)
 end
 
-local function pushTransformedMesh(EditableMesh, p2, p3, p4) --[[ Line: 139 ]]
+local function pushTransformedMesh(EditableMesh, p2, p3, p4)
 	-- upvalues: addTransformedTriangle (copy), TryYieldModule (copy)
 	for _, face in EditableMesh:GetFaces() do
 		addTransformedTriangle(EditableMesh, face, p2, p4)
@@ -96,7 +96,7 @@ local function pushTransformedMesh(EditableMesh, p2, p3, p4) --[[ Line: 139 ]]
 	end
 end
 
-local function getViewSpaceMesh(List, View) --[[ Line: 152 ]]
+local function getViewSpaceMesh(List, View)
 	local Inverted = View:Inverse()
 	local config = {
 		min = vector.create(1e999, 1e999, 1e999),
@@ -118,7 +118,7 @@ local function getViewSpaceMesh(List, View) --[[ Line: 152 ]]
 	return List1, config
 end
 
-local function _(List, p5, p6) --[[ Line: 179 | Named "getNormalizedCoordinates" ]]
+local function _(List, p5, p6)
 	local List1 = {}
 	
 	for _, value in List do
@@ -127,15 +127,15 @@ local function _(List, p5, p6) --[[ Line: 179 | Named "getNormalizedCoordinates"
 	return List1
 end
 
-local _ = function(Entry): boolean --[[ Line: 193 | Named "getIsNormalizedTriangleVisible" ]]
+local _ = function(Entry): boolean
 	return (Entry[2] - Entry[1]):Cross(Entry[3] - Entry[1]).Z > 0.001
 end
 
-local function normalizedSpaceToScreenSpace(Vector, FloorResult): Vector2 --[[ Line: 204 ]]
+local function normalizedSpaceToScreenSpace(Vector, FloorResult): Vector2
 	return (Vector2.new(Vector.X, Vector.Y) * Vector2.new(0.5, -0.5) + Vector2.new(0.5, 0.5)) * (FloorResult - Vector2.new(1, 1))
 end
 
-local function rasterMesh(List, ViewSpaceBounds, Y, p7) --[[ Line: 211 ]]
+local function rasterMesh(List, ViewSpaceBounds, Y, p7)
 	-- upvalues: AssetService (copy), normalizedSpaceToScreenSpace (copy), TryYieldModule (copy)
 	local MaxDelta = ViewSpaceBounds.max - ViewSpaceBounds.min
 	local MaxDeltaRatio = MaxDelta / 2
@@ -163,7 +163,7 @@ local function rasterMesh(List, ViewSpaceBounds, Y, p7) --[[ Line: 211 ]]
 	return EditableImage
 end
 
-local function createBodyAssetMasks(Part: Part, List, p8) --[[ Line: 250 ]]
+local function createBodyAssetMasks(Part: Part, List, p8)
 	-- upvalues: GetAssetMeshesValidationSpaceTransformsFunction (copy), GetEditableMeshFromContextModule (copy), pushTransformedMesh (copy), getViewSpaceMesh (copy), GetFIntUGCValidationBodyAssetMaskHeightPixelsModule (copy), rasterMesh (copy)
 	local AssetTypeEnum = p8.assetTypeEnum
 	local List1 = {}
@@ -214,7 +214,7 @@ local function createBodyAssetMasks(Part: Part, List, p8) --[[ Line: 250 ]]
 	return true, t1
 end
 
-function BodyAssetMasksRendererModule.new(Part, p9, p10) --[[ Line: 312 ]]
+function BodyAssetMasksRendererModule.new(Part, p9, p10)
 	-- upvalues: BodyAssetMasksRendererModule (copy), populateViewsToRender (copy), createBodyAssetMasks (copy)
 	local self = setmetatable({}, BodyAssetMasksRendererModule)
 	local BodyAssetMasks, BodyAssetMasks2 = createBodyAssetMasks(Part, populateViewsToRender(p9), p10)
@@ -228,7 +228,7 @@ function BodyAssetMasksRendererModule.new(Part, p9, p10) --[[ Line: 312 ]]
 	end
 end
 
-function BodyAssetMasksRendererModule.destroyBodyAssetMasks(p9) --[[ Line: 327 ]]
+function BodyAssetMasksRendererModule.destroyBodyAssetMasks(p9)
 	for _, bodyAssetMask in p9.bodyAssetMasks do
 		if bodyAssetMask.mask then
 			bodyAssetMask.mask:Destroy()

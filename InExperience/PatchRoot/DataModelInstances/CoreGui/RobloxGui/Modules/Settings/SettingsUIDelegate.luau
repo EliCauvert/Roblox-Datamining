@@ -17,7 +17,7 @@ local FFlagSpatialUIFixMenuPanelChatExclusiveModule = require(RobloxGui.Modules.
 local SpatialUIFixGameInviteChatExclusive = game:DefineFastFlag("SpatialUIFixGameInviteChatExclusive", false)
 local v1 = nil
 
-local function _() --[[ Line: 37 ]]
+local function _()
 	-- upvalues: v1 (ref), GetStyleTokensModule (copy)
 	if v1 == nil then
 		v1 = GetStyleTokensModule()
@@ -25,14 +25,14 @@ local function _() --[[ Line: 37 ]]
 	return v1
 end
 
-local _ = function(p1, p2, Key, p3) --[[ Line: 44 | Named "setFieldWithBackup" ]]
+local _ = function(p1, p2, Key, p3)
 	if p2 ~= nil then
 		p2[Key] = p1[Key]
 		p1[Key] = p3
 	end
 end
 
-local _ = function(p1, p2, Key) --[[ Line: 57 | Named "restoreFieldFromBackup" ]]
+local _ = function(p1, p2, Key)
 	if p2 ~= nil then
 		p1[Key] = p2[Key]
 	end
@@ -41,7 +41,7 @@ end
 local SettingsUIDelegateModule = {}
 SettingsUIDelegateModule.__index = SettingsUIDelegateModule
 
-function SettingsUIDelegateModule.new(_settingsHub) --[[ Line: 66 ]]
+function SettingsUIDelegateModule.new(_settingsHub)
 	-- upvalues: SettingsUIDelegateModule (copy)
 	local config = {
 		_originalShieldConfig = nil,
@@ -61,7 +61,7 @@ function SettingsUIDelegateModule.new(_settingsHub) --[[ Line: 66 ]]
 	return config
 end
 
-function SettingsUIDelegateModule:enableVR() --[[ Line: 84 ]]
+function SettingsUIDelegateModule:enableVR()
 	-- upvalues: PanelType (copy), UIManager (copy), ObservableModule (copy), CreateFunction (copy), ThemeModule (copy), CorePackages (copy), RobloxGui (copy)
 	local UI = UIManager.getInstance():createUI({
 		panelType = PanelType.MoreMenu,
@@ -76,7 +76,7 @@ function SettingsUIDelegateModule:enableVR() --[[ Line: 84 ]]
 	if UI == nil then return end
 	local PanelObject = UI.panelObject
 	local NewResult = ObservableModule.ObservableValue.new(self._settingsHub.Visible)
-	self._surfaceGuiEnabledConnection = NewResult:connect(function() --[[ Line: 100 ]]
+	self._surfaceGuiEnabledConnection = NewResult:connect(function()
 		-- upvalues: PanelObject (copy), NewResult (copy)
 		PanelObject.Enabled = NewResult:get()
 	end)
@@ -117,13 +117,13 @@ function SettingsUIDelegateModule:enableVR() --[[ Line: 84 ]]
 	if self._topBarConnection == nil then
 		local VRHub = require(CorePackages.Workspace.Packages.VrCommon).VRHub
 		local NewResult1 = ObservableModule.ObservableValue.new(VRHub.ShowTopBar)
-		self._topBarConnection = VRHub.ShowTopBarChanged.Event:connect(function() --[[ Line: 121 ]]
+		self._topBarConnection = VRHub.ShowTopBarChanged.Event:connect(function()
 			-- upvalues: NewResult1 (copy), VRHub (copy)
 			NewResult1:set(VRHub.ShowTopBar)
 		end)
 		UIManager.getInstance():connectTopBarVisibility(NewResult1)
 		local ServiceModule = require(RobloxGui.Modules.Chrome.ChromeShared.Service)
-		ServiceModule:onTriggerVRToggleButton():connect(function(p1) --[[ Line: 128 ]]
+		ServiceModule:onTriggerVRToggleButton():connect(function(p1)
 			-- upvalues: VRHub (copy)
 			VRHub:SetShowTopBar(p1)
 		end)
@@ -132,7 +132,7 @@ function SettingsUIDelegateModule:enableVR() --[[ Line: 84 ]]
 	self:setVersionTextSize()
 end
 
-function SettingsUIDelegateModule:isInputEventNeededBySettings(p1, p2, Input): boolean --[[ Line: 136 ]]
+function SettingsUIDelegateModule:isInputEventNeededBySettings(p1, p2, Input): boolean
 	-- upvalues: RobloxGui (copy)
 	if self._vrEnabled then
 		if self._userGui == nil then
@@ -152,7 +152,7 @@ function SettingsUIDelegateModule:isInputEventNeededBySettings(p1, p2, Input): b
 	return false
 end
 
-function SettingsUIDelegateModule:disableVR() --[[ Line: 157 ]]
+function SettingsUIDelegateModule:disableVR()
 	-- upvalues: UIManager (copy), PanelType (copy)
 	if not self._vrEnabled then return end
 	local ClippingShield = self._settingsHub.ClippingShield
@@ -189,7 +189,7 @@ function SettingsUIDelegateModule:disableVR() --[[ Line: 157 ]]
 	self._vrEnabled = false
 end
 
-function SettingsUIDelegateModule:getAspectRatio() --[[ Line: 179 ]]
+function SettingsUIDelegateModule:getAspectRatio()
 	-- upvalues: UIManager (copy), PanelType (copy)
 	if self._vrEnabled then
 		local PanelSizeInPixel = UIManager.getInstance():getPanelSizeInPixel(PanelType.MoreMenu)
@@ -200,7 +200,7 @@ function SettingsUIDelegateModule:getAspectRatio() --[[ Line: 179 ]]
 	end
 end
 
-function SettingsUIDelegateModule:getHubBarSize(): number --[[ Line: 188 ]]
+function SettingsUIDelegateModule:getHubBarSize(): number
 	-- upvalues: ThemeModule (copy), UIManager (copy), PanelType (copy)
 	if not self._vrEnabled then
 		return 800
@@ -217,7 +217,7 @@ function SettingsUIDelegateModule:getHubBarSize(): number --[[ Line: 188 ]]
 	return UIManager.getInstance():getPanelSizeInPixel(PanelType.MoreMenu).X - NewOffset
 end
 
-function SettingsUIDelegateModule.getMenuContainerPositionOverride(p1) --[[ Line: 205 ]]
+function SettingsUIDelegateModule.getMenuContainerPositionOverride(p1)
 	return if p1._vrEnabled then {
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		Position = UDim2.new(0.5, 0, 0.5, 0),
@@ -226,12 +226,12 @@ function SettingsUIDelegateModule.getMenuContainerPositionOverride(p1) --[[ Line
 	} else nil
 end
 
-function SettingsUIDelegateModule.getFullScreenSize(p1) --[[ Line: 218 ]]
+function SettingsUIDelegateModule.getFullScreenSize(p1)
 	-- upvalues: UIManager (copy), PanelType (copy), RobloxGui (copy)
 	return if p1._vrEnabled then UIManager.getInstance():getPanelSizeInPixel(PanelType.MoreMenu).Y else RobloxGui.AbsoluteSize.y
 end
 
-function SettingsUIDelegateModule:getDarkBackgroundTheme() --[[ Line: 227 ]]
+function SettingsUIDelegateModule:getDarkBackgroundTheme()
 	-- upvalues: v1 (ref), GetStyleTokensModule (copy), SpatialUIDarkenBackgroundTransparency (copy), ThemeModule (copy)
 	if not self._vrEnabled then
 		return {
@@ -248,11 +248,11 @@ function SettingsUIDelegateModule:getDarkBackgroundTheme() --[[ Line: 227 ]]
 	}
 end
 
-function SettingsUIDelegateModule.getBottomButtonSize(p1, p2: number): number --[[ Line: 243 ]]
+function SettingsUIDelegateModule.getBottomButtonSize(p1, p2: number): number
 	return if p1._vrEnabled then math.min(p2, 233) else p2
 end
 
-function SettingsUIDelegateModule.updatePanelVisibility(p1, p2) --[[ Line: 251 ]]
+function SettingsUIDelegateModule.updatePanelVisibility(p1, p2)
 	-- upvalues: InExperienceUIVRIXP (copy), FFlagSpatialUIFixMenuPanelChatExclusiveModule (copy), ChatSelectorModule (copy), PanelType (copy)
 	for _, windowsVisibilityValue in p1._windowsVisibilityValues do
 		if windowsVisibilityValue then
@@ -270,9 +270,9 @@ function SettingsUIDelegateModule.updatePanelVisibility(p1, p2) --[[ Line: 251 ]
 	p2:set(false)
 end
 
-local function v20(Callback) --[[ Line: 268 ]]
+local function v20(Callback)
 	-- upvalues: CorePackages (copy), InExperienceUIVRIXP (copy), SpatialUIFixGameInviteChatExclusive (copy), ChatSelectorModule (copy)
-	local EventConnection = require(CorePackages.Workspace.Packages.GameInvite).GameInviteModalManager.ToggleGameInviteModalEvent.Event:Connect(function(p3) --[[ Line: 271 ]]
+	local EventConnection = require(CorePackages.Workspace.Packages.GameInvite).GameInviteModalManager.ToggleGameInviteModalEvent.Event:Connect(function(p3)
 		-- upvalues: Callback (copy), InExperienceUIVRIXP (upval), SpatialUIFixGameInviteChatExclusive (upval), ChatSelectorModule (upval)
 		Callback("GameInvite", p3)
 		
@@ -286,7 +286,7 @@ local function v20(Callback) --[[ Line: 268 ]]
 		end
 	end)
 	
-	return function() --[[ Line: 283 ]]
+	return function()
 		-- upvalues: EventConnection (ref)
 		if EventConnection then
 			EventConnection:Disconnect()
@@ -295,24 +295,24 @@ local function v20(Callback) --[[ Line: 268 ]]
 	end
 end
 
-local function v21(Callback) --[[ Line: 291 ]]
+local function v21(Callback)
 	local GuiService = game:GetService("GuiService")
-	local InspectPlayerFromUserIdWithCtxRequestConnection = GuiService.InspectPlayerFromUserIdWithCtxRequest:Connect(function() --[[ Line: 294 ]]
+	local InspectPlayerFromUserIdWithCtxRequestConnection = GuiService.InspectPlayerFromUserIdWithCtxRequest:Connect(function()
 		-- upvalues: Callback (copy)
 		Callback("InspectAndBuy", true)
 	end)
-	local CloseInspectMenuRequestConnection = GuiService.CloseInspectMenuRequest:Connect(function() --[[ Line: 297 ]]
+	local CloseInspectMenuRequestConnection = GuiService.CloseInspectMenuRequest:Connect(function()
 		-- upvalues: Callback (copy)
 		Callback("InspectAndBuy", false)
 	end)
-	local InspectMenuEnabledChangedSignalConnection = GuiService.InspectMenuEnabledChangedSignal:Connect(function(Enabled) --[[ Line: 300 ]]
+	local InspectMenuEnabledChangedSignalConnection = GuiService.InspectMenuEnabledChangedSignal:Connect(function(Enabled)
 		-- upvalues: Callback (copy)
 		if not Enabled then
 			Callback("InspectAndBuy", false)
 		end
 	end)
 	
-	return function() --[[ Line: 306 ]]
+	return function()
 		-- upvalues: InspectPlayerFromUserIdWithCtxRequestConnection (ref), CloseInspectMenuRequestConnection (ref), InspectMenuEnabledChangedSignalConnection (ref)
 		if InspectPlayerFromUserIdWithCtxRequestConnection then
 			InspectPlayerFromUserIdWithCtxRequestConnection:Disconnect()
@@ -329,23 +329,23 @@ local function v21(Callback) --[[ Line: 291 ]]
 	end
 end
 
-function SettingsUIDelegateModule:connectWindowsVisibility(NewResult) --[[ Line: 322 ]]
+function SettingsUIDelegateModule:connectWindowsVisibility(NewResult)
 	-- upvalues: v20 (copy), v21 (copy)
-	local function v52(p3, p4) --[[ Line: 323 ]]
+	local function v52(p3, p4)
 		-- upvalues: self (copy), NewResult (copy)
 		self._windowsVisibilityValues[p3] = p4
 		self:updatePanelVisibility(NewResult)
 	end
 	
 	for _, value in {
-		function(Callback) --[[ Line: 328 ]]
+		function(Callback)
 			-- upvalues: self (copy)
-			local SettingsShowSignalConnection = self._settingsHub.SettingsShowSignal:connect(function(p3) --[[ Line: 329 ]]
+			local SettingsShowSignalConnection = self._settingsHub.SettingsShowSignal:connect(function(p3)
 				-- upvalues: Callback (copy)
 				Callback("SettingsHub", p3)
 			end)
 			
-			return function() --[[ Line: 333 ]]
+			return function()
 				-- upvalues: SettingsShowSignalConnection (ref)
 				if SettingsShowSignalConnection then
 					SettingsShowSignalConnection:Disconnect()
@@ -360,7 +360,7 @@ function SettingsUIDelegateModule:connectWindowsVisibility(NewResult) --[[ Line:
 	end
 end
 
-function SettingsUIDelegateModule:disconnectWindowsVisibility() --[[ Line: 353 ]]
+function SettingsUIDelegateModule:disconnectWindowsVisibility()
 	for _, windowsDisconnectCallback in self._windowsDisconnectCallbacks do
 		windowsDisconnectCallback()
 	end
@@ -368,11 +368,11 @@ function SettingsUIDelegateModule:disconnectWindowsVisibility() --[[ Line: 353 ]
 	self._windowsVisibilityValues = {}
 end
 
-function SettingsUIDelegateModule:isOpenCloseAnimationAllowed(): boolean --[[ Line: 361 ]]
+function SettingsUIDelegateModule:isOpenCloseAnimationAllowed(): boolean
 	return not self._vrEnabled
 end
 
-function SettingsUIDelegateModule:getMenuContainerExtraSpace() --[[ Line: 369 ]]
+function SettingsUIDelegateModule:getMenuContainerExtraSpace()
 	if self._vrEnabled then
 		local MenuContainerPadding = self._settingsHub.MenuContainerPadding
 		
@@ -382,13 +382,13 @@ function SettingsUIDelegateModule:getMenuContainerExtraSpace() --[[ Line: 369 ]]
 	end
 end
 
-local _ = function(Label) --[[ Line: 378 | Named "refreshVersionTextLabelSize" ]]
+local _ = function(Label)
 	-- upvalues: CoreScriptVersionEnabledEngineFeature (copy)
 	local _UDim2 = UDim2.new(0.2, -6, 1, 0)
 	Label.Size = if CoreScriptVersionEnabledEngineFeature then UDim2.new(0, Label.TextBounds.X + 6, 1, 0) else _UDim2
 end
 
-function SettingsUIDelegateModule:setVersionTextSize() --[[ Line: 384 ]]
+function SettingsUIDelegateModule:setVersionTextSize()
 	-- upvalues: ThemeModule (copy), SpatialUIVersionTextSizeScaled (copy), CoreScriptVersionEnabledEngineFeature (copy)
 	for _, Label in self._settingsHub.VersionContainer:GetChildren() do
 		if Label:IsA("TextLabel") then
@@ -400,7 +400,7 @@ function SettingsUIDelegateModule:setVersionTextSize() --[[ Line: 384 ]]
 	end
 end
 
-function SettingsUIDelegateModule:restoreVersionTextSize() --[[ Line: 395 ]]
+function SettingsUIDelegateModule:restoreVersionTextSize()
 	-- upvalues: CoreScriptVersionEnabledEngineFeature (copy)
 	for _, Label in self._settingsHub.VersionContainer:GetChildren() do
 		if Label:IsA("TextLabel") and self._originalVersionTextSizes[Label] then

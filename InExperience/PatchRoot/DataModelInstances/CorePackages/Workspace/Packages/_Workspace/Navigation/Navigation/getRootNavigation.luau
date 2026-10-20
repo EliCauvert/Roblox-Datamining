@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.types)
 
-local function getRootNavigation(DangerouslyGetParentResult) --[[ Line: 4 ]]
+local function getRootNavigation(DangerouslyGetParentResult)
 	-- upvalues: getRootNavigation (copy)
 	local DangerouslyGetParentResult1 = DangerouslyGetParentResult._dangerouslyGetParent()
 	

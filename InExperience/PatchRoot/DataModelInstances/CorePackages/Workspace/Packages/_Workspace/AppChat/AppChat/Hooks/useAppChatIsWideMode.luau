@@ -5,7 +5,7 @@ local UseIsWideModeFunction = require(Parent.SocialCommon).Hooks.useIsWideMode
 local FIntAppChatWideBreakpointMinHeightModule = require(AppChat.Flags.FIntAppChatWideBreakpointMinHeight)
 local FIntAppChatWideBreakpointMinWidthModule = require(AppChat.Flags.FIntAppChatWideBreakpointMinWidth)
 
-return function(p1) --[[ Line: 10 ]]
+return function(p1)
 	-- upvalues: UseIsWideModeFunction (copy), ResponsiveModule (copy), FIntAppChatWideBreakpointMinWidthModule (copy), FIntAppChatWideBreakpointMinHeightModule (copy)
 	local UseIsWideModeResult = UseIsWideModeFunction()
 	local UseOrientationResult = ResponsiveModule.useOrientation()

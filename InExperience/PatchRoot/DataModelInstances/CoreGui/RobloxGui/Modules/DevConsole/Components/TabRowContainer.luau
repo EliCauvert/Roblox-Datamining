@@ -11,7 +11,7 @@ local TabDropDownWidth = ConstantsModule.TabRowFormatting.TabDropDownWidth
 local TabOverlapThreshold = ConstantsModule.TabRowFormatting.TabOverlapThreshold
 local TabRowContainer = RoactModule.Component:extend("TabRowContainer")
 
-local function initTabList(TabList) --[[ Line: 19 ]]
+local function initTabList(TabList)
 	-- upvalues: TextService (copy), ConstantsModule (copy)
 	local t = {}
 	local NewX = 0
@@ -26,7 +26,7 @@ local function initTabList(TabList) --[[ Line: 19 ]]
 	return t, NewX, Count
 end
 
-function TabRowContainer.init(p1) --[[ Line: 33 ]]
+function TabRowContainer.init(p1)
 	-- upvalues: initTabList (copy)
 	local InitTabListResult, InitTabListResult2, InitTabListResult3 = initTabList(p1.props.tabList)
 	p1.state = {
@@ -36,7 +36,7 @@ function TabRowContainer.init(p1) --[[ Line: 33 ]]
 		totalTabCount = InitTabListResult3
 	}
 	
-	function p1.onTabButtonClicked(LayoutOrder) --[[ Line: 45 ]]
+	function p1.onTabButtonClicked(LayoutOrder)
 		-- upvalues: p1 (copy)
 		for i, value in pairs(p1.props.tabList) do
 			if value.layoutOrder == LayoutOrder then
@@ -47,7 +47,7 @@ function TabRowContainer.init(p1) --[[ Line: 33 ]]
 	end
 end
 
-function TabRowContainer.didUpdate(p2, p3, _) --[[ Line: 55 ]]
+function TabRowContainer.didUpdate(p2, p3, _)
 	-- upvalues: initTabList (copy)
 	if p3.tabList ~= p2.props.tabList then
 		local InitTabListResult, InitTabListResult2, InitTabListResult3 = initTabList(p2.props.tabList)
@@ -59,7 +59,7 @@ function TabRowContainer.didUpdate(p2, p3, _) --[[ Line: 55 ]]
 	end
 end
 
-function TabRowContainer.render(p2) --[[ Line: 66 ]]
+function TabRowContainer.render(p2)
 	-- upvalues: TabOverlapThreshold (copy), ConstantsModule (copy), RoactModule (copy), FullScreenDropDownButtonModule (copy), TabDropDownWidth (copy), DropDownModule (copy), TabRowButtonModule (copy)
 	local TabList = p2.props.tabList
 	local CurrTabIndex = p2.props.currTabIndex
@@ -129,15 +129,15 @@ function TabRowContainer.render(p2) --[[ Line: 66 ]]
 	}, Elements)
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p3, _) --[[ Line: 146 | Named "mapStateToProps" ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p3, _)
 	return {
 		tabList = p3.MainView.tabList,
 		currTabIndex = p3.MainView.currTabIndex
 	}
-end, function(Callback) --[[ Line: 153 | Named "mapDispatchToProps" ]]
+end, function(Callback)
 	-- upvalues: SetActiveTabModule (copy)
 	return {
-		dispatchSetActiveTab = function(p3, p4) --[[ Line: 155 ]]
+		dispatchSetActiveTab = function(p3, p4)
 			-- upvalues: Callback (copy), SetActiveTabModule (upval)
 			Callback(SetActiveTabModule(p3, p4))
 		end

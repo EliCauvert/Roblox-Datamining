@@ -1,7 +1,7 @@
 ﻿local HttpService = game:GetService("HttpService")
 local UrlBuilder = require(script:FindFirstAncestor("AuthCommon").Parent.UrlBuilder).UrlBuilder
 
-return function(Callback, Encrypted_users_data_blob) --[[ Line: 8 ]]
+return function(Callback, Encrypted_users_data_blob)
 	-- upvalues: UrlBuilder (copy), HttpService (copy)
 	return Callback(UrlBuilder.fromString("apis:account-switcher/v1/getLoggedInUsersMetadata")(), "POST", {
 		postBody = HttpService:JSONEncode({

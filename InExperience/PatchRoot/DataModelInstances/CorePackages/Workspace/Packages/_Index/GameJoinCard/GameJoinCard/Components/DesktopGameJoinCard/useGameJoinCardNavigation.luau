@@ -2,10 +2,10 @@
 local ReactModule = require(Parent.React)
 local FFlagBlockEDPClickthrough = require(Parent.SharedFlags).FFlagBlockEDPClickthrough
 
-return function(Object, p1, p2) --[[ Line: 7 | Named "useGameJoinCardNavigation" ]]
+return function(Object, p1, p2)
 	-- upvalues: ReactModule (copy), FFlagBlockEDPClickthrough (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 10 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Object (copy), UseStateResult2 (copy)
 		if not Object then
 			UseStateResult2(false)
@@ -14,7 +14,7 @@ return function(Object, p1, p2) --[[ Line: 7 | Named "useGameJoinCardNavigation"
 		end
 		local GuiService = game:GetService("GuiService")
 		
-		local function checkFocus() --[[ Line: 16 ]]
+		local function checkFocus()
 			-- upvalues: GuiService (copy), UseStateResult2 (upval), Object (upval)
 			local SelectedCoreObject = GuiService.SelectedCoreObject
 			UseStateResult2(SelectedCoreObject ~= nil and (if SelectedCoreObject == Object then SelectedCoreObject:FindFirstAncestorOfClass("CoreGui") ~= nil else SelectedCoreObject:IsDescendantOf(Object) and SelectedCoreObject:FindFirstAncestorOfClass("CoreGui") ~= nil))
@@ -24,12 +24,12 @@ return function(Object, p1, p2) --[[ Line: 7 | Named "useGameJoinCardNavigation"
 		UseStateResult2(SelectedCoreObject ~= nil and (if SelectedCoreObject == Object then SelectedCoreObject:FindFirstAncestorOfClass("CoreGui") ~= nil else SelectedCoreObject:IsDescendantOf(Object) and SelectedCoreObject:FindFirstAncestorOfClass("CoreGui") ~= nil))
 		local Connection = GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(checkFocus)
 		
-		return function() --[[ Line: 26 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end
 	end, { Object })
-	ReactModule.useEffect(function() --[[ Line: 31 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), Object (copy), p2 (copy), FFlagBlockEDPClickthrough (upval)
 		if not p1 then return end
 		if not Object then return end
@@ -39,7 +39,7 @@ return function(Object, p1, p2) --[[ Line: 7 | Named "useGameJoinCardNavigation"
 		local Content = Current:FindFirstChild("Content", true)
 		
 		if not Content then return end
-		local function wireNavigation() --[[ Line: 47 ]]
+		local function wireNavigation()
 			-- upvalues: FFlagBlockEDPClickthrough (upval), Object (upval), Content (copy)
 			if FFlagBlockEDPClickthrough then
 				local PlatformName = Object:FindFirstChild("PlatformName", true)
@@ -74,7 +74,7 @@ return function(Object, p1, p2) --[[ Line: 7 | Named "useGameJoinCardNavigation"
 		wireNavigation()
 		local DescendantAddedConnection = Object.DescendantAdded:Connect(wireNavigation)
 		
-		return function() --[[ Line: 78 ]]
+		return function()
 			-- upvalues: DescendantAddedConnection (copy), Content (copy), FFlagBlockEDPClickthrough (upval), Object (upval)
 			DescendantAddedConnection:Disconnect()
 			

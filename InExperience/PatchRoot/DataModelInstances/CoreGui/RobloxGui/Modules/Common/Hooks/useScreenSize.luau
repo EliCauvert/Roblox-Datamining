@@ -1,12 +1,12 @@
 ﻿local ReactModule = require(game:GetService("CorePackages").Packages.React)
 
-return function() --[[ Line: 4 ]]
+return function()
 	-- upvalues: ReactModule (copy)
 	local Connection = nil
 	local Connection1 = nil
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
 	
-	local function Callback() --[[ Line: 9 ]]
+	local function Callback()
 		-- upvalues: UseStateResult2 (copy)
 		local CurrentCamera = workspace.CurrentCamera
 		
@@ -15,12 +15,12 @@ return function() --[[ Line: 4 ]]
 		end
 	end
 	
-	local function Callback1() --[[ Line: 16 ]]
+	local function Callback1()
 		-- upvalues: Connection1 (ref), Callback (copy)
 		local CurrentCamera = workspace.CurrentCamera
 		
 		if Connection1 then
-			pcall(function() --[[ Line: 20 ]]
+			pcall(function()
 				-- upvalues: Connection1 (upval)
 				Connection1:Disconnect()
 			end)
@@ -31,7 +31,7 @@ return function() --[[ Line: 4 ]]
 		end
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 31 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Connection (ref), Callback1 (copy), UseStateResult2 (copy), Connection1 (ref)
 		Connection = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(Callback1)
 		Callback1()
@@ -40,7 +40,7 @@ return function() --[[ Line: 4 ]]
 		if CurrentCamera then
 			UseStateResult2(Vector2.new(CurrentCamera.ViewportSize.X, CurrentCamera.ViewportSize.Y))
 		end
-		return function() --[[ Line: 36 ]]
+		return function()
 			-- upvalues: Connection (upval), Connection1 (upval)
 			if Connection then
 				Connection:Disconnect()

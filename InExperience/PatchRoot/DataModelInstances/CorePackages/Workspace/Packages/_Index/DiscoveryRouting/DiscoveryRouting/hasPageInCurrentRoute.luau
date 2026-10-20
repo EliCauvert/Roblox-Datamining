@@ -1,4 +1,4 @@
-﻿return function(p1, Name, p2): boolean --[[ Line: 1 ]]
+﻿return function(p1, Name, p2): boolean
 	if not p1 then
 		return false
 	end

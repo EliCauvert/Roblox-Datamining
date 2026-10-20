@@ -41,7 +41,7 @@ HorizontalCarousel.defaultProps = {
 	itemSize = Vector2.new(1, 1)
 }
 
-local function updateScrollState(Index, MaxNumOfItemsVisible: number, NumOfItems, _) --[[ Line: 119 ]]
+local function updateScrollState(Index, MaxNumOfItemsVisible: number, NumOfItems, _)
 	if Index == nil then
 		return {}
 	end
@@ -70,19 +70,19 @@ local function updateScrollState(Index, MaxNumOfItemsVisible: number, NumOfItems
 	}
 end
 
-local function _(p1) --[[ Line: 165 ]]
+local function _(p1)
 	-- upvalues: PromiseModule (copy)
 	return if p1 then PromiseModule.is(p1) and p1 or PromiseModule.promisify(p1) else nil
 end
 
-function HorizontalCarousel.getDerivedStateFromProps(p1, p2) --[[ Line: 172 ]]
+function HorizontalCarousel.getDerivedStateFromProps(p1, p2)
 	-- upvalues: updateScrollState (copy)
 	local CountItemList = #p1.itemList
 	
 	return if p2.numOfItems == CountItemList then nil else updateScrollState(p2.index, p2.maxNumOfItemsVisible, CountItemList)
 end
 
-function HorizontalCarousel.init(p1) --[[ Line: 180 ]]
+function HorizontalCarousel.init(p1)
 	-- upvalues: RoactModule (copy), LuauPolyfillModule (copy), updateScrollState (copy)
 	p1.frameRef = RoactModule.createRef()
 	p1.listRef = RoactModule.createRef()
@@ -96,27 +96,27 @@ function HorizontalCarousel.init(p1) --[[ Line: 180 ]]
 		maxNumOfItemsVisible = p1.props.maxNumOfItemsVisible
 	})
 	
-	function p1:onMouseEnter(Input) --[[ Line: 197 ]]
+	function p1:onMouseEnter(Input)
 		-- upvalues: p1 (copy), config (ref), LuauPolyfillModule (upval), updateScrollState (upval)
 		if Input.UserInputType == Enum.UserInputType.MouseMovement then
-			p1:setState(function(p2) --[[ Line: 199 ]]
+			p1:setState(function(p2)
 				-- upvalues: config (upval), LuauPolyfillModule (upval), updateScrollState (upval)
 				return LuauPolyfillModule.Object.assign(updateScrollState(config.anchorIndex, p2.maxNumOfItemsVisible, p2.numOfItems), { hovering = true })
 			end)
 		end
 	end
 	
-	function p1:onMouseLeave(Input) --[[ Line: 209 ]]
+	function p1:onMouseLeave(Input)
 		-- upvalues: p1 (copy)
 		if Input.UserInputType == Enum.UserInputType.MouseMovement then
 			p1:setState({ hovering = false })
 		end
 	end
 	
-	function p1.onResize(Frame) --[[ Line: 217 ]]
+	function p1.onResize(Frame)
 		-- upvalues: p1 (copy)
 		local X = Frame.AbsoluteSize.X
-		p1:setState(function(_, DefaultProps) --[[ Line: 219 ]]
+		p1:setState(function(_, DefaultProps)
 			-- upvalues: X (copy)
 			return {
 				maxNumOfItemsVisible = math.floor(X / (DefaultProps.itemSize.X + DefaultProps.itemPadding))
@@ -124,7 +124,7 @@ function HorizontalCarousel.init(p1) --[[ Line: 180 ]]
 		end)
 	end
 	
-	function p1.onScrollUpdate(ScrollFrame) --[[ Line: 225 ]]
+	function p1.onScrollUpdate(ScrollFrame)
 		-- upvalues: p1 (copy), config (ref)
 		config = {
 			animationActive = false,
@@ -132,10 +132,10 @@ function HorizontalCarousel.init(p1) --[[ Line: 180 ]]
 		}
 	end
 	
-	function p1.scrollLeft() --[[ Line: 237 ]]
+	function p1.scrollLeft()
 		-- upvalues: config (ref), p1 (copy), updateScrollState (upval)
 		if not config.animationActive then
-			p1:setState(function(p2, DefaultProps) --[[ Line: 241 ]]
+			p1:setState(function(p2, DefaultProps)
 				-- upvalues: config (upval), p1 (upval), updateScrollState (upval)
 				local AnchorIndexDelta = config.anchorIndex - p2.maxNumOfItemsVisible
 				
@@ -153,10 +153,10 @@ function HorizontalCarousel.init(p1) --[[ Line: 180 ]]
 		end
 	end
 	
-	function p1.scrollRight() --[[ Line: 254 ]]
+	function p1.scrollRight()
 		-- upvalues: config (ref), p1 (copy), updateScrollState (upval)
 		if not config.animationActive then
-			p1:setState(function(p2, DefaultProps) --[[ Line: 258 ]]
+			p1:setState(function(p2, DefaultProps)
 				-- upvalues: config (upval), p1 (upval), updateScrollState (upval)
 				local NewAnchorIndex = config.anchorIndex + p2.maxNumOfItemsVisible
 				
@@ -174,19 +174,19 @@ function HorizontalCarousel.init(p1) --[[ Line: 180 ]]
 		end
 	end
 	
-	function p1.proxyKeyExtractor(p2, p3) --[[ Line: 271 ]]
+	function p1.proxyKeyExtractor(p2, p3)
 		-- upvalues: p1 (copy)
 		local Props = p1.props
 		
 		return if Props.identifier then Props.identifier(p2, p3) else nil
 	end
 	
-	function p1.proxyRenderItem(p2) --[[ Line: 276 ]]
+	function p1.proxyRenderItem(p2)
 		-- upvalues: p1 (copy)
 		return p1.props.renderItem(p2.item)
 	end
 	
-	function p1.getItemLayout(p2, Index: number) --[[ Line: 281 ]]
+	function p1.getItemLayout(p2, Index: number)
 		-- upvalues: p1 (copy)
 		local Props = p1.props
 		local NewX = Props.itemSize.X + (Props.itemPadding or 0)
@@ -199,7 +199,7 @@ function HorizontalCarousel.init(p1) --[[ Line: 180 ]]
 	end
 end
 
-function HorizontalCarousel.render(p1) --[[ Line: 295 ]]
+function HorizontalCarousel.render(p1)
 	-- upvalues: RoactModule (copy), ScrollButtonModule (copy), IconsActionsCycleLeft (copy), IconsActionsCycleRight (copy), BidirectionalFlatList (copy), PromiseModule (copy)
 	local Props = p1.props
 	local State = p1.state
@@ -244,14 +244,14 @@ function HorizontalCarousel.render(p1) --[[ Line: 295 ]]
 			overrideAutomaticCanvasSize = true,
 			getItemLayout = p1.getItemLayout,
 			viewabilityConfigCallbackPairs = Props.viewabilityConfigCallbackPairs,
-			ItemSeparatorComponent = if ItemPadding then function() --[[ Line: 368 ]]
+			ItemSeparatorComponent = if ItemPadding then function()
 				-- upvalues: RoactModule (upval), ItemPadding (copy)
 				return RoactModule.createFragment({
 					ItemPadding = RoactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, ItemPadding) })
 				})
 			end else nil,
 			showDefaultLoadingIndicators = false,
-			ListHeaderComponent = if CarouselMargin then function() --[[ Line: 379 ]]
+			ListHeaderComponent = if CarouselMargin then function()
 				-- upvalues: RoactModule (upval), CarouselMargin (copy)
 				return RoactModule.createFragment({
 					LeftCarouselMargin = RoactModule.createElement("Frame", {
@@ -262,7 +262,7 @@ function HorizontalCarousel.render(p1) --[[ Line: 295 ]]
 					})
 				})
 			end else nil,
-			ListFooterComponent = if CarouselMargin then function() --[[ Line: 392 ]]
+			ListFooterComponent = if CarouselMargin then function()
 				-- upvalues: RoactModule (upval), CarouselMargin (copy)
 				return RoactModule.createFragment({
 					RightCarouselMargin = RoactModule.createElement("Frame", {

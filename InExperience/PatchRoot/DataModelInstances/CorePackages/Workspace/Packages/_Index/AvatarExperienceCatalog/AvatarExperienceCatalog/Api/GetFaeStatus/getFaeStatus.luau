@@ -7,7 +7,7 @@ local NormalizeFaeStatusModule = require(script.Parent.normalizeFaeStatus)
 local ConstantsModule = require(script.Parent.constants)
 
 return {
-	getFaeStatus = function(Callback) --[[ Line: 14 ]]
+	getFaeStatus = function(Callback)
 		-- upvalues: Url (copy), MakeAXResponseHandlerModule (copy), NormalizeFaeStatusModule (copy), ConstantsModule (copy)
 		local GET, GET2 = Callback(`{Url.APIS_URL}access-management/v1/feature-access?{Url:makeQueryString({
 			featureNames = "ShowFaeUpsellInMarketplace,AllowFaeItemToBeClaimed",

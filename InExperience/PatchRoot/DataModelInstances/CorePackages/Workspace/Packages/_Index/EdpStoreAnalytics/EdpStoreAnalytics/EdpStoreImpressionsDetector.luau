@@ -6,14 +6,14 @@ local EdpStoreAnalyticsLoggerModule = require(EdpStoreAnalytics.EdpStoreAnalytic
 local Signal = require(Parent.AppCommonLib).Signal
 local ScreenSizeImpressionsDetector = require(Parent.Impressions).ScreenSizeImpressionsDetector
 
-return function(p1) --[[ Line: 21 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), Signal (copy), ConstantsModule (copy), EdpStoreAnalyticsLoggerModule (copy), ScreenSizeImpressionsDetector (copy)
 	local UseRefResult = ReactModule.useRef(Signal.new())
 	local UseRefResult1 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 25 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseRefResult (copy)
 		if p1.scrollViewPositionChangedSignal.current then
-			p1.scrollViewPositionChangedSignal.current:connect(function() --[[ Line: 27 ]]
+			p1.scrollViewPositionChangedSignal.current:connect(function()
 				-- upvalues: UseRefResult (upval)
 				UseRefResult.current:fire()
 			end)
@@ -23,7 +23,7 @@ return function(p1) --[[ Line: 21 ]]
 	return ReactModule.createElement(ScreenSizeImpressionsDetector, {
 		parentRef = p1.parentRef,
 		onRequestImpressionsSignal = UseRefResult.current,
-		onImpressionsDetected = ReactModule.useCallback(function(Entry) --[[ Line: 33 ]]
+		onImpressionsDetected = ReactModule.useCallback(function(Entry)
 			-- upvalues: UseRefResult1 (copy), p1 (copy), ConstantsModule (upval), EdpStoreAnalyticsLoggerModule (upval)
 			if #Entry == 0 or UseRefResult1.current then return end
 			if p1.parameters ~= nil then

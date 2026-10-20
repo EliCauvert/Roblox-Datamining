@@ -14,7 +14,7 @@ local FFlagHidePeoplePageInviteFriends = SharedFlagsModule.FFlagHidePeoplePageIn
 local FFlagSideSheetFocusNav = SharedFlagsModule.FFlagSideSheetFocusNav
 local FFlagSideSheetOpenPeoplePage = require(InExperienceSideSheet.Flags).FFlagSideSheetOpenPeoplePage
 
-return ReactModule.memo(function(p1) --[[ Line: 31 | Named "VerticalList" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: SignalsReactModule (copy), FFlagSideSheetOpenPeoplePage (copy), GetDidSideSheetOpenWithPeoplePageModule (copy), FFlagHidePeoplePageInviteFriends (copy), FFlagAddInviteFriendsIntegration (copy), ShouldShowInviteFriendsInSideSheetModule (copy), ReactModule (copy), VerticalItemModule (copy), FFlagSideSheetFocusNav (copy), View (copy)
 	local UseSignalStateResult = if FFlagSideSheetOpenPeoplePage then SignalsReactModule.useSignalState(GetDidSideSheetOpenWithPeoplePageModule) else false
 	local Inverted = not (FFlagHidePeoplePageInviteFriends and FFlagAddInviteFriendsIntegration)

@@ -16,10 +16,10 @@ local config = {
 	}
 }
 
-return function(Callback) --[[ Line: 40 | Named "createTrustedConnectionEventListener" ]]
+return function(Callback)
 	-- upvalues: GetLocalPlayerUserIdFunction (copy), Players (copy), NewResult (copy), config (copy), TrustedConnectionStatusModule (copy), FFlagAddFriendsPageTrustedFriendRequestSection (copy)
 	local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
-	local Connection = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function() --[[ Line: 48 ]]
+	local Connection = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
 		-- upvalues: GetLocalPlayerUserIdFunction (upval), LocalPlayerUserId (ref)
 		local LocalPlayerUserId1 = GetLocalPlayerUserIdFunction()
 		
@@ -27,7 +27,7 @@ return function(Callback) --[[ Line: 40 | Named "createTrustedConnectionEventLis
 			LocalPlayerUserId = LocalPlayerUserId1
 		end
 	end)
-	local ObserveEventResult = NewResult:observeEvent(config.Namespace, function(Mouse) --[[ Line: 57 ]]
+	local ObserveEventResult = NewResult:observeEvent(config.Namespace, function(Mouse)
 		-- upvalues: LocalPlayerUserId (ref), config (upval), Callback (copy), TrustedConnectionStatusModule (upval), FFlagAddFriendsPageTrustedFriendRequestSection (upval)
 		if not Mouse.Actor or not Mouse.Target or not LocalPlayerUserId then return end
 		local Text = tostring(Mouse.Actor)
@@ -58,7 +58,7 @@ return function(Callback) --[[ Line: 40 | Named "createTrustedConnectionEventLis
 		end
 	end)
 	
-	return function() --[[ Line: 93 ]]
+	return function()
 		-- upvalues: Connection (ref), ObserveEventResult (copy)
 		if Connection then
 			Connection:Disconnect()

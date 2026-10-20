@@ -3,14 +3,14 @@ local Promise = DependenciesModule.Promise
 local Default = DependenciesModule.LinkingProtocol.LinkingProtocol.default
 local SettingsRoute = DependenciesModule.LinkingProtocol.Enums.SettingsRoute
 
-return function() --[[ Line: 9 ]]
+return function()
 	-- upvalues: Promise (copy), Default (copy), SettingsRoute (copy)
-	return Promise.new(function(Callback, Callback1) --[[ Line: 10 ]]
+	return Promise.new(function(Callback, Callback1)
 		-- upvalues: Default (upval), SettingsRoute (upval)
-		Default:switchToSettingsApp(SettingsRoute.Microphone):andThen(function() --[[ Line: 12 ]]
+		Default:switchToSettingsApp(SettingsRoute.Microphone):andThen(function()
 			-- upvalues: Callback (copy)
 			Callback()
-		end):catch(function() --[[ Line: 15 ]]
+		end):catch(function()
 			-- upvalues: Callback1 (copy)
 			Callback1()
 		end)

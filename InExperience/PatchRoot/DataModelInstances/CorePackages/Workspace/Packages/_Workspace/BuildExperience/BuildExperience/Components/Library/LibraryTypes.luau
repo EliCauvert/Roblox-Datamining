@@ -4,10 +4,10 @@ local _ = require(BuildExperience.Chat.chatTypes)
 local ClientDataModelCollectorModule = require(BuildExperience.Chat.clientDataModelCollector)
 
 return {
-	toResourceUri = function(Text): string --[[ Line: 62 ]]
+	toResourceUri = function(Text): string
 		return "rbx-dm:" .. Text
 	end,
-	toResourceAttachment = function(ChatResource) --[[ Line: 66 ]]
+	toResourceAttachment = function(ChatResource)
 		return {
 			type = "resource_link",
 			mimeType = "datamodel.instance/v1",
@@ -15,7 +15,7 @@ return {
 			uri = "rbx-dm:" .. ChatResource.path
 		}
 	end,
-	toChatResource = function(ChatResource) --[[ Line: 30 ]]
+	toChatResource = function(ChatResource)
 		-- upvalues: ClientDataModelCollectorModule (copy)
 		return {
 			path = if ChatResource.instance == nil then ChatResource.path else ClientDataModelCollectorModule.getInstancePath(ChatResource.instance),

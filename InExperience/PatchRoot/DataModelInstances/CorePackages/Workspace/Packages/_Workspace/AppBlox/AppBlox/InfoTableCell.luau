@@ -6,11 +6,11 @@ local Divider = FoundationModule.Divider
 local Icon = FoundationModule.Icon
 local Enums = FoundationModule.Enums
 
-local function v7() --[[ Line: 11 ]] end
+local function v7() end
 
 local config = { affordance = Enums.StateLayerAffordance.None }
 
-return ReactModule.memo(function(p1) --[[ Line: 33 | Named "InfoTableCell" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), View (copy), v7 (copy), config (copy), Divider (copy), Icon (copy), Enums (copy)
 	local v1 = (p1.numColumns or 1) == 1
 	local IsSelectable = p1.selectable ~= false
@@ -18,7 +18,7 @@ return ReactModule.memo(function(p1) --[[ Line: 33 | Named "InfoTableCell" ]]
 	return ReactModule.createElement(View, {
 		tag = "col size-full-0 auto-y",
 		onActivated = p1.onActivated or (if IsSelectable then v7 else nil),
-		selection = ReactModule.useMemo(function() --[[ Line: 39 ]]
+		selection = ReactModule.useMemo(function()
 			-- upvalues: IsSelectable (copy), p1 (copy)
 			return if IsSelectable then { Selectable = true, SelectionOrder = p1.selectionOrder } else nil
 		end, { IsSelectable, p1.selectionOrder }),

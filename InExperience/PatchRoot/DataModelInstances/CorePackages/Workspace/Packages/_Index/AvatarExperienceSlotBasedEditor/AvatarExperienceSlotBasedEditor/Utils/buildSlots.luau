@@ -2,7 +2,7 @@
 local SlotTypeModule = require(script.Parent.Parent.Enums.SlotType)
 local FFlagEnableSlotsHeadShapeThumbnail = require(script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent.AvatarExperienceFlags).FFlagEnableSlotsHeadShapeThumbnail
 
-local function _(SlotSubcategory, ThumbnailUrl, CurrentAssetType) --[[ Line: 21 | Named "buildSlotSubcategory" ]]
+local function _(SlotSubcategory, ThumbnailUrl, CurrentAssetType)
 	return {
 		nameTranslationKey = SlotSubcategory.nameTranslationKey,
 		icon = SlotSubcategory.icon,
@@ -16,7 +16,7 @@ local function _(SlotSubcategory, ThumbnailUrl, CurrentAssetType) --[[ Line: 21 
 	}
 end
 
-local _ = function(LayeredSlotSubcategory, ThumbnailUrl, CurrentAssetType, LayerIndex) --[[ Line: 35 | Named "buildLayeredSlotSubcategory" ]]
+local _ = function(LayeredSlotSubcategory, ThumbnailUrl, CurrentAssetType, LayerIndex)
 	-- upvalues: SlotTypeModule (copy)
 	return {
 		nameTranslationKey = LayeredSlotSubcategory.nameTranslationKey,
@@ -34,7 +34,7 @@ local _ = function(LayeredSlotSubcategory, ThumbnailUrl, CurrentAssetType, Layer
 	}
 end
 
-local _ = function(p1) --[[ Line: 50 | Named "getHeadShapeFromEquippedAssets" ]]
+local _ = function(p1)
 	local v1 = p1[tostring(Enum.AvatarAssetType.DynamicHead.Value)]
 	
 	if v1 then
@@ -45,7 +45,7 @@ local _ = function(p1) --[[ Line: 50 | Named "getHeadShapeFromEquippedAssets" ]]
 	return nil
 end
 
-local function getClassicFaceOrDynamicHeadThumbnail(p2, p3): string? --[[ Line: 63 ]]
+local function getClassicFaceOrDynamicHeadThumbnail(p2, p3): string?
 	local v2 = p2[if p3 then tostring(Enum.AvatarAssetType.DynamicHead.Value) else tostring(Enum.AvatarAssetType.Face.Value)]
 	
 	if v2 then
@@ -56,7 +56,7 @@ local function getClassicFaceOrDynamicHeadThumbnail(p2, p3): string? --[[ Line: 
 	return nil
 end
 
-return function(List, p4) --[[ Line: 80 | Named "buildSlots" ]]
+return function(List, p4)
 	-- upvalues: SlotTypeModule (copy), FFlagEnableSlotsHeadShapeThumbnail (copy), getClassicFaceOrDynamicHeadThumbnail (copy)
 	local List1 = {}
 	local Flag = false

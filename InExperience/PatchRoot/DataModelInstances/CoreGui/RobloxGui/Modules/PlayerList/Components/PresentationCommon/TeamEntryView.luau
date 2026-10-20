@@ -17,7 +17,7 @@ local FoundationFontFaceMigration = SharedFlagsModule.FFlagFontFacePlayerList an
 local FFlagEnableMobilePlayerListOnConsole = PlayerListModule.Flags.FFlagEnableMobilePlayerListOnConsole
 local CellExtenderModule = require(Parent.Presentation.CellExtender)
 
-return ReactModule.memo(function(p1) --[[ Line: 59 | Named "TeamEntryView" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseLayoutValuesFunction (copy), UseStyleFunction (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), FFlagEnableMobilePlayerListOnConsole (copy), NormalizeFontFaceFunction (copy), ReactModule (copy), FFlagPlayerListFixLeaderstatsStacking (copy), SignalsReactModule (copy), StatEntryContainerModule (copy), EntryFrameView (copy), CellExtenderModule (copy)
 	local UseLayoutValuesResult = UseLayoutValuesFunction()
 	local UseStyleResult = UseStyleFunction()
@@ -33,7 +33,7 @@ return ReactModule.memo(function(p1) --[[ Line: 59 | Named "TeamEntryView" ]]
 		TeamNameTextSize = UseLayoutValuesResult.PlayerNameTextSize
 		NormalizeFontFaceResult = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseLayoutValuesResult.TeamEntryFont) else UseLayoutValuesResult.TeamEntryFont
 	end
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 84 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: IsSmallTouchDevice (copy), UseStyleResult (copy), p1 (copy), IsDirectionalPreferred (copy), UseLayoutValuesResult (copy)
 		return if IsSmallTouchDevice then {
 			Color = p1.teamColor,
@@ -96,7 +96,7 @@ return ReactModule.memo(function(p1) --[[ Line: 59 | Named "TeamEntryView" ]]
 				end
 			end
 		elseif p1.gameStatsCount and p1.teamStatsCount and p1.gameStatsCount > 0 and p1.teamStatsCount >= 0 then
-			p1.gameStats.iterateData(function(StatName, p2) --[[ Line: 169 ]]
+			p1.gameStats.iterateData(function(StatName, p2)
 				-- upvalues: MaxLeaderstats (copy), p1 (copy), Elements (copy), ReactModule (upval), StatEntryContainerModule (upval), TextEmphasis (ref)
 				if MaxLeaderstats >= p2.order(false) then
 					Elements["GameStat_" .. StatName] = ReactModule.createElement(StatEntryContainerModule, {
@@ -186,7 +186,7 @@ return ReactModule.memo(function(p1) --[[ Line: 59 | Named "TeamEntryView" ]]
 				end
 			end
 		elseif p1.gameStatsCount and p1.teamStatsCount and p1.gameStatsCount > 0 and p1.teamStatsCount >= 0 then
-			p1.gameStats.iterateData(function(StatName, p2) --[[ Line: 275 ]]
+			p1.gameStats.iterateData(function(StatName, p2)
 				-- upvalues: MaxLeaderstats (copy), p1 (copy), Elements1 (copy), ReactModule (upval), StatEntryContainerModule (upval), UseMemoResult (copy), OverlayStyle (copy), TextEmphasis (ref)
 				if MaxLeaderstats >= p2.order(false) then
 					Elements1["GameStat_" .. StatName] = ReactModule.createElement(StatEntryContainerModule, {

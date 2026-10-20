@@ -7,7 +7,7 @@ local ScrollView = FoundationModule.ScrollView
 local ScrollBarVisibility = FoundationModule.Enums.ScrollBarVisibility
 local UseLayerCollectorFunction = require(Parent.UIBlox).Core.Layout.LayerCollector.useLayerCollector
 
-return (ReactModule.forwardRef(function(p1, Ref) --[[ Line: 21 ]]
+return (ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: ReactModule (copy), UseLayerCollectorFunction (copy), View (copy), ScrollView (copy), ScrollBarVisibility (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.zero)
@@ -15,33 +15,33 @@ return (ReactModule.forwardRef(function(p1, Ref) --[[ Line: 21 ]]
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(true)
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
 	local AbsoluteSize = UseLayerCollectorFunction().absoluteSize
-	ReactModule.useLayoutEffect(function() --[[ Line: 30 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseRefResult (copy), UseStateResult2 (copy), UseStateResult2_1 (copy)
 		if UseRefResult.current then
 			UseStateResult2(UseRefResult.current.AbsoluteCanvasSize)
 			UseStateResult2_1(UseRefResult.current.AbsoluteWindowSize)
-			local Connection = UseRefResult.current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function() --[[ Line: 37 ]]
+			local Connection = UseRefResult.current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function()
 				-- upvalues: UseStateResult2 (upval), UseRefResult (upval)
 				UseStateResult2(UseRefResult.current.AbsoluteCanvasSize)
 			end)
-			local Connection1 = UseRefResult.current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function() --[[ Line: 42 ]]
+			local Connection1 = UseRefResult.current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
 				-- upvalues: UseStateResult2_1 (upval), UseRefResult (upval)
 				UseStateResult2_1(UseRefResult.current.AbsoluteWindowSize)
 			end)
 			
-			return function() --[[ Line: 46 ]]
+			return function()
 				-- upvalues: Connection (copy), Connection1 (copy)
 				Connection:Disconnect()
 				Connection1:Disconnect()
 			end
 		else
-			return function() --[[ Line: 51 ]] end
+			return function() end
 		end
 	end, { UseRefResult.current, AbsoluteSize })
-	ReactModule.useEffect(function() --[[ Line: 54 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseStateResult (copy), UseStateResult1 (copy), UseStateResult2_2 (copy), UseStateResult2_3 (copy)
 		if UseRefResult.current then
-			local Connection = UseRefResult.current:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ Line: 56 ]]
+			local Connection = UseRefResult.current:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
 				-- upvalues: UseRefResult (upval), UseStateResult (upval), UseStateResult1 (upval), UseStateResult2_2 (upval), UseStateResult2_3 (upval)
 				local CanvasPosition = UseRefResult.current.CanvasPosition
 				
@@ -66,12 +66,12 @@ return (ReactModule.forwardRef(function(p1, Ref) --[[ Line: 21 ]]
 				end
 			end)
 			
-			return function() --[[ Line: 71 ]]
+			return function()
 				-- upvalues: Connection (copy)
 				Connection:Disconnect()
 			end
 		else
-			return function() --[[ Line: 75 ]] end
+			return function() end
 		end
 	end, {
 		UseRefResult.current,

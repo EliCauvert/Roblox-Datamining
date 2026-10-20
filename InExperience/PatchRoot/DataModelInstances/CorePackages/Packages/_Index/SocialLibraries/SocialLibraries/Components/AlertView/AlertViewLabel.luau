@@ -11,9 +11,9 @@ AlertViewLabel.defaultProps = {
 	TextXAlignment = Enum.TextXAlignment.Center
 }
 
-function AlertViewLabel.render(p1) --[[ Line: 16 ]]
+function AlertViewLabel.render(p1)
 	-- upvalues: UIBlox (copy), Roact (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
-	return UIBlox.Style.withStyle(function(p2) --[[ Line: 17 ]]
+	return UIBlox.Style.withStyle(function(p2)
 		-- upvalues: p1 (copy), Roact (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 		local _Font = p1.props.Font or p2.Font.Body.Font
 		

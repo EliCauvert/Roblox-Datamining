@@ -3,7 +3,7 @@ local FFlagOffersRespectExpirationModule = require(InExperienceOffers.Flags.FFla
 local IsOfferExpiredModule = require(InExperienceOffers.Utils.isOfferExpired)
 local _ = require(InExperienceOffers.Types)
 
-return function(List, p1) --[[ Line: 36 | Named "selectActiveOffer" ]]
+return function(List, p1)
 	-- upvalues: FFlagOffersRespectExpirationModule (copy), IsOfferExpiredModule (copy)
 	if List == nil then
 		return nil

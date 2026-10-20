@@ -1,7 +1,7 @@
 ﻿local CollectionService = game:GetService("CollectionService")
 local ItemIndex = require(script:FindFirstAncestor("ServerDrivenUi").Parent.Impressions).Constants.ItemIndex
 
-return function(Tag) --[[ Line: 14 | Named "findCollectionItemInstances" ]]
+return function(Tag)
 	-- upvalues: CollectionService (copy), ItemIndex (copy)
 	local Guis = {}
 	

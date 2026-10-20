@@ -1,7 +1,7 @@
 ﻿local GoogleAnalyticsModule = {}
 GoogleAnalyticsModule.__index = GoogleAnalyticsModule
 
-function GoogleAnalyticsModule.new(_reporter) --[[ Line: 24 ]]
+function GoogleAnalyticsModule.new(_reporter)
 	-- upvalues: GoogleAnalyticsModule (copy)
 	local ValueType = type(_reporter)
 	assert(ValueType == "table" or ValueType == "userdata", "Unexpected value for reportingService")
@@ -11,12 +11,12 @@ function GoogleAnalyticsModule.new(_reporter) --[[ Line: 24 ]]
 	return config
 end
 
-function GoogleAnalyticsModule:setEnabled(_isEnabled) --[[ Line: 37 ]]
+function GoogleAnalyticsModule:setEnabled(_isEnabled)
 	assert(type(_isEnabled) == "boolean", "Expected isEnabled to be a boolean")
 	self._isEnabled = _isEnabled
 end
 
-function GoogleAnalyticsModule:trackEvent(Category, Action, Label, p1: number) --[[ Line: 46 ]]
+function GoogleAnalyticsModule:trackEvent(Category, Action, Label, p1: number)
 	assert(type(Category) == "string", "Expected category to be a string")
 	assert(type(Action) == "string", "Expected action to be a string")
 	

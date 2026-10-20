@@ -12,14 +12,14 @@ local FFlagExpChatUseChatConfigStore = SharedFlagsModule.FFlagExpChatUseChatConf
 local FFlagExpChatUseChannelTabsStore = SharedFlagsModule.FFlagExpChatUseChannelTabsStore
 local FFlagExpChatEnableFriendsTab = SharedFlagsModule.FFlagExpChatEnableFriendsTab
 
-local function _(p1, p2) --[[ Line: 18 | Named "getIsChatInputBarVisible" ]]
+local function _(p1, p2)
 	-- upvalues: GetFFlagTextChatEnableUniverseChatTabsFunction (copy)
 	local IsChatInputBarEnabled = p1.ChatVisibility.isChatInputBarEnabled
 	
 	return if GetFFlagTextChatEnableUniverseChatTabsFunction() and p2 and IsChatInputBarEnabled._propertyEnabled ~= nil then IsChatInputBarEnabled._topBarVisibility and (IsChatInputBarEnabled._coreGuiEnabled and not IsChatInputBarEnabled._devTextBoxEnabled) else IsChatInputBarEnabled.value
 end
 
-local _ = function(p1) --[[ Line: 29 | Named "getSelectedTabType" ]]
+local _ = function(p1)
 	local ChannelTabs = p1.ChannelTabs
 	
 	if ChannelTabs == nil or ChannelTabs.allChannelTabs == nil or ChannelTabs.selectedTabName == nil then
@@ -31,7 +31,7 @@ local _ = function(p1) --[[ Line: 29 | Named "getSelectedTabType" ]]
 	end
 end
 
-return function(p1, p2) --[[ Line: 38 ]]
+return function(p1, p2)
 	-- upvalues: FFlagExpChatUseChannelTabsStore (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), SelectSelectedTabNameModule (copy), FFlagExpChatEnableFriendsTab (copy), FriendsChatTabNameModule (copy), FFlagExpChatFixInputBarOrphanBorderModule (copy), FFlagExpChatUseChatConfigStore (copy), FFlagExpChatPresetChatEnabled (copy), FFlagExpChatNewInputBarModule (copy)
 	local ChannelTabs = if FFlagExpChatUseChannelTabsStore then nil else p1.ChannelTabs
 	local SelectSelectedTabNameModuleResult = if FFlagExpChatUseChannelTabsStore or not GetFFlagTextChatEnableUniverseChatTabsFunction() then nil else SelectSelectedTabNameModule(p1)

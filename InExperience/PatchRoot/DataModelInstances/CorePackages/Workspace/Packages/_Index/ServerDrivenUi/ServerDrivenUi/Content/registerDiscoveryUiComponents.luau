@@ -2,7 +2,7 @@
 local GetSduiComponentRegistryFunction = require(ServerDrivenUi.Parent.SduiCoreSystem).getSduiComponentRegistry
 local SduiComponentDefinitionsModule = require(ServerDrivenUi.System.SduiComponentDefinitions)
 
-return function() --[[ Line: 15 | Named "registerDiscoveryUiComponents" ]]
+return function()
 	-- upvalues: SduiComponentDefinitionsModule (copy), GetSduiComponentRegistryFunction (copy)
 	GetSduiComponentRegistryFunction().registerComponentDefinitions(SduiComponentDefinitionsModule.new()._registeredComponents)
 end

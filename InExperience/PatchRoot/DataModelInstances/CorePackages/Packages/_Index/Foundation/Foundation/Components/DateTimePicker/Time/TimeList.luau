@@ -10,7 +10,7 @@ local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local config = { testId = "--foundation-time-list" }
 
-return function(p1) --[[ Line: 34 | Named "TimeList" ]]
+return function(p1)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), DateTimeLayoutUtilitiesModule (copy), ReactModule (copy), DateTimeCalendarViewUtilitiesModule (copy), DateTimeUtilitiesModule (copy), TextModule (copy), StateLayerModeModule (copy), ScrollViewModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
@@ -20,7 +20,7 @@ return function(p1) --[[ Line: 34 | Named "TimeList" ]]
 	local UseRefResult1 = ReactModule.useRef(false)
 	local UseRefResult2 = ReactModule.useRef(true)
 	local UseRefResult3 = ReactModule.useRef(nil)
-	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 45 ]]
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy), DateTimeCalendarViewUtilitiesModule (upval)
 		return DateTimeCalendarViewUtilitiesModule.getTimeSlotsForDay(WithDefaultsModuleResult.dateTime or (WithDefaultsModuleResult.dayAnchor or DateTime.now()))
 	end, {
@@ -29,7 +29,7 @@ return function(p1) --[[ Line: 34 | Named "TimeList" ]]
 	})
 	local UseMemoResult1 = if WithDefaultsModuleResult.dateTime then UseMemoResult2 else nil
 	
-	local function _(p2): string? --[[ Line: 52 | Named "getTimeKey" ]]
+	local function _(p2): string?
 		-- upvalues: DateTimeUtilitiesModule (upval)
 		if p2 == nil then
 			return nil
@@ -40,7 +40,7 @@ return function(p1) --[[ Line: 34 | Named "TimeList" ]]
 		end
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 63 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult1 (copy), DateTimeUtilitiesModule (upval), UseRefResult1 (copy), UseRefResult3 (copy), UseRefResult2 (copy), UseRefResult (copy), DateTimeCalendarViewUtilitiesModule (upval), UseMemoResult (copy), Size900 (copy), WithDefaultsModuleResult (copy)
 		local Current = nil
 		if UseMemoResult1 == nil then
@@ -101,7 +101,7 @@ return function(p1) --[[ Line: 34 | Named "TimeList" ]]
 			stateLayer = {
 				mode = if IsIdMatch then StateLayerModeModule.Inverse else StateLayerModeModule.Default
 			},
-			onActivated = function() --[[ Line: 120 ]]
+			onActivated = function()
 				-- upvalues: UseRefResult1 (copy), WithDefaultsModuleResult (copy), value (copy)
 				UseRefResult1.current = true
 				WithDefaultsModuleResult.onItemChanged(value.id)

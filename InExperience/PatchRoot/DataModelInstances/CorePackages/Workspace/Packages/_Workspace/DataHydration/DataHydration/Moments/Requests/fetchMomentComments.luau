@@ -8,11 +8,11 @@ local ConstructApiUrlModule = require(DataHydration.Moments.Util.constructApiUrl
 local ConvertApiCommentToCommentModule = require(DataHydration.Moments.Util.convertApiCommentToComment)
 local FFlagEnableMomentsCommentReporting = require(Parent.SharedFlags).FFlagEnableMomentsCommentReporting
 
-local function _(p1): string --[[ Line: 24 | Named "commentsPath" ]]
+local function _(p1): string
 	return `moment-comments-api/v1/moments/{p1}/comments`
 end
 
-local function decodeCommentsPage(p1) --[[ Line: 28 ]]
+local function decodeCommentsPage(p1)
 	-- upvalues: ConvertApiCommentToCommentModule (copy), FFlagEnableMomentsCommentReporting (copy)
 	local Comments = {}
 	
@@ -33,7 +33,7 @@ local function decodeCommentsPage(p1) --[[ Line: 28 ]]
 	}
 end
 
-return function(p2, Network) --[[ Line: 52 | Named "fetchMomentComments" ]]
+return function(p2, Network)
 	-- upvalues: ConstructApiUrlModule (copy), HttpModule (copy), HttpClientModule (copy), decodeCommentsPage (copy)
 	local ConstructApiUrlModuleResult, ConstructApiUrlModuleResult2 = ConstructApiUrlModule(`moment-comments-api/v1/moments/{p2.feedItemId}/comments`)
 	local QueryString = HttpModule.Url:makeQueryString({ cursor = p2.cursor, limit = p2.limit, sort = p2.sort })

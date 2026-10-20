@@ -11,14 +11,14 @@ local View = FoundationModule.View
 local UseTextSizeOffsetFunction = FoundationModule.Hooks.useTextSizeOffset
 local Overrides = { numColumns = 3 }
 
-local function _(p1) --[[ Line: 23 | Named "getTextSizeAdjustedSquareExperienceTileHeight" ]]
-	return function(p2: number): number --[[ Line: 24 ]]
+local function _(p1)
+	return function(p2: number): number
 		-- upvalues: p1 (copy)
 		return p2 + 80 + p1 * 3
 	end
 end
 
-return function(p1) --[[ Line: 29 | Named "ExperiencesSkeleton" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), UseTextSizeOffsetFunction (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), SquareCollectionGridViewModule (copy), Overrides (copy)
 	local UseLocalizationResult = UseLocalizationFunction({ experiences = TextKeysModule.Experiences })
 	local UseTextSizeOffsetResult = nil
@@ -26,7 +26,7 @@ return function(p1) --[[ Line: 29 | Named "ExperiencesSkeleton" ]]
 	
 	return ReactModule.createElement(SquareCollectionGridViewModule, {
 		layoutOrder = p1.layoutOrder,
-		items = ReactModule.useMemo(function() --[[ Line: 65 ]]
+		items = ReactModule.useMemo(function()
 			-- upvalues: p1 (copy)
 			local List = {}
 			
@@ -35,7 +35,7 @@ return function(p1) --[[ Line: 29 | Named "ExperiencesSkeleton" ]]
 			end
 			return List
 		end, { p1.numSkeletons }),
-		renderItem = ReactModule.useCallback(function(_, LayoutOrder, Size) --[[ Line: 40 ]]
+		renderItem = ReactModule.useCallback(function(_, LayoutOrder, Size)
 			-- upvalues: ReactModule (upval), View (upval), Skeleton (upval), Radius (upval)
 			return ReactModule.createElement(View, {
 				tag = "col gap-small radius-medium",
@@ -59,11 +59,11 @@ return function(p1) --[[ Line: 29 | Named "ExperiencesSkeleton" ]]
 				})
 			}), "Skeleton_" .. LayoutOrder
 		end, {}),
-		getItemHeight = ReactModule.useMemo(function() --[[ Line: 36 ]]
+		getItemHeight = ReactModule.useMemo(function()
 			-- upvalues: UseTextSizeOffsetResult (ref)
 			local UseTextSizeOffsetResult1 = UseTextSizeOffsetResult
 			
-			return function(p2: number): number --[[ Line: 24 ]]
+			return function(p2: number): number
 				-- upvalues: UseTextSizeOffsetResult1 (copy)
 				return p2 + 80 + UseTextSizeOffsetResult1 * 3
 			end

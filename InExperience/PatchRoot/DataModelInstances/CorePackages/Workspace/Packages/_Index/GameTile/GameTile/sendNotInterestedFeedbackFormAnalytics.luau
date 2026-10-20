@@ -15,7 +15,7 @@ local config = {
 	lastUpdated = { 25, 10, 22 }
 }
 
-return function(CustomFields, EventContext) --[[ Line: 27 ]]
+return function(CustomFields, EventContext)
 	-- upvalues: DiscoveryEventErrorLogger (copy), StrictInterfaceResult (copy), TelemetryService (copy), config (copy)
 	if not EventContext then
 		DiscoveryEventErrorLogger.reportError("NotInterestedFeedbackFormActionInvalidInterface", "event is missing context")

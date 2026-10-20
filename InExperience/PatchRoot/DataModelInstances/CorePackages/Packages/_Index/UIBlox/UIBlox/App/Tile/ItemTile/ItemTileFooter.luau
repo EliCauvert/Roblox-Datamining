@@ -15,13 +15,13 @@ ItemTileFooter.validateProps = TModule.strictInterface({
 	isOwned = TModule.optional(TModule.boolean)
 })
 
-function ItemTileFooter.render(p1) --[[ Line: 32 ]]
+function ItemTileFooter.render(p1)
 	-- upvalues: ImagesModule (copy), WithStyleModule (copy), RoactModule (copy), Skeleton (copy), ImageSetComponentModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local PriceText = p1.props.priceText
 	local IsOwned = p1.props.isOwned
 	local IconsStatusItemOwned = if IsOwned then ImagesModule["icons/status/item/owned"] else ImagesModule["icons/common/robux_small"]
 	
-	return WithStyleModule(function(p2) --[[ Line: 40 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: IconsStatusItemOwned (ref), ImagesModule (upval), PriceText (copy), IsOwned (copy), RoactModule (upval), Skeleton (upval), ImageSetComponentModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 		local SubHeaderFont = p2.Font.SubHeader1.Font
 		local ScaledBaseSize = p2.Font.BaseSize * p2.Font.SubHeader1.RelativeSize

@@ -5,7 +5,7 @@ local _ = require(Parent.SduiCompat)
 local View = FoundationModule.View
 local Image = FoundationModule.Image
 
-return ReactModule.memo(function(p1) --[[ Line: 42 | Named "SduiDetailsPageImageHeader" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), View (copy), Image (copy)
 	return ReactModule.createElement(View, {
 		tag = "col align-x-center align-y-center",

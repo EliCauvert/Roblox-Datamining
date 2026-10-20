@@ -48,7 +48,7 @@ return {
 					}),
 					format = {
 						type = "translated",
-						translationKeyFor = function(_, p1) --[[ Line: 58 ]]
+						translationKeyFor = function(_, p1)
 							-- upvalues: config (copy)
 							return config[p1.value]
 						end
@@ -115,7 +115,7 @@ return {
 					}),
 					format = {
 						type = "custom",
-						formatter = function(_, p1) --[[ Line: 115 ]]
+						formatter = function(_, p1)
 							local DisplayValue = p1.displayValue
 							
 							return if DisplayValue == nil or DisplayValue == "" then p1.value else `{p1.value}. {DisplayValue}`

@@ -14,7 +14,7 @@ local list = {
 	{ id = "2", icon = "thumb-up" }
 }
 
-local function _(p1, Id) --[[ Line: 44 | Named "findChoice" ]]
+local function _(p1, Id)
 	-- upvalues: t (copy)
 	local Choices = p1.choices or t
 	for _, choice in Choices do
@@ -25,7 +25,7 @@ local function _(p1, Id) --[[ Line: 44 | Named "findChoice" ]]
 	return nil
 end
 
-return ReactModule.memo(function(p2) --[[ Line: 53 | Named "ThumbsQuestion" ]]
+return ReactModule.memo(function(p2)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), list (copy), t (copy), View (copy), Icon (copy), IconVariant (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Question = p2.question
@@ -64,7 +64,7 @@ return ReactModule.memo(function(p2) --[[ Line: 53 | Named "ThumbsQuestion" ]]
 					Selectable = not IsIsDisabled,
 					LayoutOrder = 1,
 					[ReactModule.Tag] = "data-testid=thumb-" .. value.id,
-					[ReactModule.Event.Activated] = function() --[[ Line: 91 ]]
+					[ReactModule.Event.Activated] = function()
 						-- upvalues: IsIsDisabled (copy), p2 (copy), IsChoiceIdMatch (copy), value (copy)
 						if not IsIsDisabled then
 							p2.onAnswerChanged({ choiceIds = if IsChoiceIdMatch then {} else { value.id } })
@@ -72,13 +72,13 @@ return ReactModule.memo(function(p2) --[[ Line: 53 | Named "ThumbsQuestion" ]]
 							return
 						end
 					end,
-					[ReactModule.Event.MouseEnter] = function() --[[ Line: 100 ]]
+					[ReactModule.Event.MouseEnter] = function()
 						-- upvalues: UseStateResult2 (copy), value (copy)
 						UseStateResult2(value.id)
 					end,
-					[ReactModule.Event.MouseLeave] = function() --[[ Line: 103 ]]
+					[ReactModule.Event.MouseLeave] = function()
 						-- upvalues: UseStateResult2 (copy), value (copy)
-						UseStateResult2(function(Id) --[[ Line: 104 ]]
+						UseStateResult2(function(Id)
 							-- upvalues: value (upval)
 							return if Id == value.id then nil else Id
 						end)

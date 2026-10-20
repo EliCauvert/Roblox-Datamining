@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("MomentsCoachmarkMaxImpressions", 2)
 
-return function() --[[ Line: 4 ]]
+return function()
 	return game:GetFastInt("MomentsCoachmarkMaxImpressions")
 end

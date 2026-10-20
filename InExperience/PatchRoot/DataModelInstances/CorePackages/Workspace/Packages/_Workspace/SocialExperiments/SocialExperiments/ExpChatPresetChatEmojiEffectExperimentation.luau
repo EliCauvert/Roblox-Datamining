@@ -5,14 +5,14 @@ local ExpChatPresetChatEmojiEffectBorderlessBubbleChatVariable = game:DefineFast
 local ExpChatPresetChatEmojiEffectExperimentEnabled = game:DefineFastFlag("ExpChatPresetChatEmojiEffectExperimentEnabled", false)
 local Flag = false
 
-local function _(p1) --[[ Line: 21 | Named "getAssignment" ]]
+local function _(p1)
 	-- upvalues: ExperimentCacheManager (copy), ExpChatPresetChatEmojiEffectExperimentLayer (copy)
 	local LayerVariables = ExperimentCacheManager.default:getLayerVariables(ExpChatPresetChatEmojiEffectExperimentLayer)
 	
 	return if LayerVariables and LayerVariables[p1] ~= nil then LayerVariables[p1] else nil
 end
 
-local _ = function(p1): boolean --[[ Line: 32 | Named "getIsTreatment" ]]
+local _ = function(p1): boolean
 	-- upvalues: ExpChatPresetChatEmojiEffectExperimentEnabled (copy), ExperimentCacheManager (copy), ExpChatPresetChatEmojiEffectExperimentLayer (copy)
 	if ExpChatPresetChatEmojiEffectExperimentEnabled then
 		local LayerVariables = ExperimentCacheManager.default:getLayerVariables(ExpChatPresetChatEmojiEffectExperimentLayer)
@@ -25,7 +25,7 @@ local _ = function(p1): boolean --[[ Line: 32 | Named "getIsTreatment" ]]
 end
 
 return {
-	getHasChatWindowEnlargeEffect = function(): boolean --[[ Line: 43 ]]
+	getHasChatWindowEnlargeEffect = function(): boolean
 		-- upvalues: ExpChatPresetChatEmojiEffectChatWindowEnlargeVariable (copy), ExpChatPresetChatEmojiEffectExperimentEnabled (copy), ExperimentCacheManager (copy), ExpChatPresetChatEmojiEffectExperimentLayer (copy)
 		if ExpChatPresetChatEmojiEffectExperimentEnabled then
 			local LayerVariables = ExperimentCacheManager.default:getLayerVariables(ExpChatPresetChatEmojiEffectExperimentLayer)
@@ -36,7 +36,7 @@ return {
 			return false
 		end
 	end,
-	getHasBorderlessBubbleChatEffect = function(): boolean --[[ Line: 47 ]]
+	getHasBorderlessBubbleChatEffect = function(): boolean
 		-- upvalues: ExpChatPresetChatEmojiEffectBorderlessBubbleChatVariable (copy), ExpChatPresetChatEmojiEffectExperimentEnabled (copy), ExperimentCacheManager (copy), ExpChatPresetChatEmojiEffectExperimentLayer (copy)
 		if ExpChatPresetChatEmojiEffectExperimentEnabled then
 			local LayerVariables = ExperimentCacheManager.default:getLayerVariables(ExpChatPresetChatEmojiEffectExperimentLayer)
@@ -47,7 +47,7 @@ return {
 			return false
 		end
 	end,
-	logExposure = function() --[[ Line: 55 ]]
+	logExposure = function()
 		-- upvalues: ExpChatPresetChatEmojiEffectExperimentEnabled (copy), Flag (ref), ExpChatPresetChatEmojiEffectChatWindowEnlargeVariable (copy), ExperimentCacheManager (copy), ExpChatPresetChatEmojiEffectExperimentLayer (copy), ExpChatPresetChatEmojiEffectBorderlessBubbleChatVariable (copy)
 		if not ExpChatPresetChatEmojiEffectExperimentEnabled or Flag then return end
 		local LayerVariables = ExperimentCacheManager.default:getLayerVariables(ExpChatPresetChatEmojiEffectExperimentLayer)
@@ -58,7 +58,7 @@ return {
 			if (if LayerVariables1 and LayerVariables1[ExpChatPresetChatEmojiEffectBorderlessBubbleChatVariable] ~= nil then LayerVariables1[ExpChatPresetChatEmojiEffectBorderlessBubbleChatVariable] else nil) == nil then return end
 		end
 		Flag = true
-		pcall(function() --[[ Line: 71 ]]
+		pcall(function()
 			-- upvalues: ExperimentCacheManager (upval), ExpChatPresetChatEmojiEffectExperimentLayer (upval)
 			ExperimentCacheManager.default:logLayerExposure(ExpChatPresetChatEmojiEffectExperimentLayer)
 		end)

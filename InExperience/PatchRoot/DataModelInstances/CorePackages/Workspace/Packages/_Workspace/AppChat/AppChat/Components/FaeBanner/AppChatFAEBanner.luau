@@ -43,22 +43,22 @@ local config3 = {
 	[ConversationBottomModal.NudgeToBottomChatUpsell] = "padding-large align-x-center auto-y size-full-0 stroke-standard stroke-default bg-shift-100"
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 71 | Named "AppChatFAEBanner" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseIsInExperienceModule (copy), UseCallbackFunction (copy), FetchChatMetadataModule (copy), config1 (copy), config (copy), UseSocialUpsellOverlayControllerFunction (copy), ReactModule (copy), StartFacialAgeEstimationFunction (copy), SocialUpsellModule (copy), UpsellComponent (copy), CreateBannerConfigFromModalConfigurationModule (copy), NewResult (copy), config2 (copy), config3 (copy), FoundationModule (copy), UpsellBanner (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseIsInExperienceModuleResult = UseIsInExperienceModule()
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 74 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: UseDispatchResult (copy), FetchChatMetadataModule (upval)
 		UseDispatchResult(FetchChatMetadataModule())
 	end, { UseDispatchResult, FetchChatMetadataModule })
 	local ModalConfiguration = p1.modalConfiguration
 	local Entry = if UseIsInExperienceModuleResult then config1[ModalConfiguration.modal_variant] else config[ModalConfiguration.modal_variant]
 	local UseSocialUpsellOverlayControllerResult = UseSocialUpsellOverlayControllerFunction(UseIsInExperienceModuleResult)
-	local UseResult = ReactModule.useCallback(function(_) --[[ Line: 84 ]]
+	local UseResult = ReactModule.useCallback(function(_)
 		-- upvalues: UseDispatchResult (copy), StartFacialAgeEstimationFunction (upval), SocialUpsellModule (upval), Entry (copy), UseCallbackResult (copy), UseIsInExperienceModuleResult (copy)
 		UseDispatchResult(StartFacialAgeEstimationFunction(SocialUpsellModule.Enums.SocialUpsellType.FacialAgeEstimation .. Entry, UseCallbackResult, nil, Entry, UseIsInExperienceModuleResult))
 	end, { UseDispatchResult, Entry, UseIsInExperienceModuleResult })
-	local UseResult1 = ReactModule.useCallback(function(ImpressionId) --[[ Line: 95 ]]
+	local UseResult1 = ReactModule.useCallback(function(ImpressionId)
 		-- upvalues: UseSocialUpsellOverlayControllerResult (copy), SocialUpsellModule (upval), Entry (copy), UpsellComponent (upval)
 		UseSocialUpsellOverlayControllerResult.openSocialOverlay(SocialUpsellModule.Enums.SocialUpsellType.FacialAgeEstimation, {
 			upsellEntrySurface = Entry,
@@ -70,7 +70,7 @@ return ReactModule.memo(function(p1) --[[ Line: 71 | Named "AppChatFAEBanner" ]]
 		Entry
 	})
 	local BannerConfigFromModalConfigurationModule = CreateBannerConfigFromModalConfigurationModule(ModalConfiguration)
-	local UseResult2 = ReactModule.useCallback(function(_) --[[ Line: 105 ]]
+	local UseResult2 = ReactModule.useCallback(function(_)
 		-- upvalues: BannerConfigFromModalConfigurationModule (copy), NewResult (upval)
 		if not BannerConfigFromModalConfigurationModule.isDismissable then
 			NewResult:warning("attempt to call AppChatFAEBanner onDismiss not provided and banner is not dismissable")

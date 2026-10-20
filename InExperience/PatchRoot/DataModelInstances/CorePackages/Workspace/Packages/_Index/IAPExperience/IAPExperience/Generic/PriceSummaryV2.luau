@@ -14,7 +14,7 @@ local FFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(Parent.Parent.
 local _ = require(Parent.ProductPurchase.PricingTypes)
 local PriceSummaryV2UseLocalizedBreakdown = game:DefineFastFlag("PriceSummaryV2UseLocalizedBreakdown", false)
 
-local function _(p1): boolean --[[ Line: 42 | Named "shouldShowPriceBreakdown" ]]
+local function _(p1): boolean
 	if p1 then
 		local BasePriceInRobux = p1.basePriceInRobux
 		local PriceInRobux = p1.priceInRobux
@@ -25,7 +25,7 @@ local function _(p1): boolean --[[ Line: 42 | Named "shouldShowPriceBreakdown" ]
 	end
 end
 
-return function(p1) --[[ Line: 53 | Named "PriceSummaryV2" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), UsePlaceholderLocalizationModule (copy), PriceSummaryV2UseLocalizedBreakdown (copy), UseRobuxTextModule (copy), ReactModule (copy), PriceLineItemModule (copy), DiscountRowModule (copy), View (copy), Divider (copy), Text (copy)
 	local ItemPrice = p1.itemPrice
 	local PriceInRobux = if ItemPrice then ItemPrice.priceInRobux else p1.amount

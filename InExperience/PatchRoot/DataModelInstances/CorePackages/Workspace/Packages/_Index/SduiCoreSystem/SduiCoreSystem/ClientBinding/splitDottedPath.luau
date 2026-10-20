@@ -1,6 +1,6 @@
 ﻿local t = {}
 
-return function(Text: string) --[[ Line: 21 | Named "splitDottedPath" ]]
+return function(Text: string)
 	-- upvalues: t (copy)
 	local Entry = t[Text]
 	

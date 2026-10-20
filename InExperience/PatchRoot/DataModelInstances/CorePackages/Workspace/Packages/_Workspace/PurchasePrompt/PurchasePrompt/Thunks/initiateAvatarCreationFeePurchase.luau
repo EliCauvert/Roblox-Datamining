@@ -11,9 +11,9 @@ local GetUnifiedPurchaseFlowEligibilityModule = require(Parent.Network.getUnifie
 local ResolvePromptStateModule = require(script.Parent.resolvePromptState)
 local list = { NetworkModule, ExternalSettingsModule }
 
-return function(p1, p2, p3, PriceInRobux) --[[ Line: 24 | Named "initiateAvatarCreationFeePurchase" ]]
+return function(p1, p2, p3, PriceInRobux)
 	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), ExternalSettingsModule (copy), RequestAvatarCreationFeePurchaseModule (copy), PromiseModule (copy), GetAccountInfoModule (copy), GetBalanceInfoModule (copy), GetUnifiedPurchaseFlowEligibilityModule (copy), ResolvePromptStateModule (copy), ErrorOccurredModule (copy)
-	return ThunkModule.new(script.Name, list, function(p4, p5) --[[ Line: 25 ]]
+	return ThunkModule.new(script.Name, list, function(p4, p5)
 		-- upvalues: NetworkModule (upval), ExternalSettingsModule (upval), RequestAvatarCreationFeePurchaseModule (upval), p3 (copy), p2 (copy), PromiseModule (upval), GetAccountInfoModule (upval), GetBalanceInfoModule (upval), GetUnifiedPurchaseFlowEligibilityModule (upval), PriceInRobux (copy), p1 (copy), ResolvePromptStateModule (upval), ErrorOccurredModule (upval)
 		local v1 = p5[NetworkModule]
 		local v2 = p5[ExternalSettingsModule]
@@ -23,14 +23,14 @@ return function(p1, p2, p3, PriceInRobux) --[[ Line: 24 | Named "initiateAvatarC
 			accountInfo = GetAccountInfoModule(v1, v2),
 			balanceInfo = GetBalanceInfoModule(v1, v2, true),
 			isUserEligibleForUnifiedPurchaseFlow = GetUnifiedPurchaseFlowEligibilityModule(v1)
-		}):andThen(function(Result) --[[ Line: 36 ]]
+		}):andThen(function(Result)
 			-- upvalues: PriceInRobux (upval), p1 (upval), p4 (copy), ResolvePromptStateModule (upval)
 			p4:dispatch(ResolvePromptStateModule({
 				PriceInRobux = PriceInRobux,
 				Name = p1.name,
 				Description = p1.description
 			}, Result.accountInfo, Result.balanceInfo, false, true, PriceInRobux, Result.isUserEligibleForUnifiedPurchaseFlow))
-		end):catch(function(Err) --[[ Line: 54 ]]
+		end):catch(function(Err)
 			-- upvalues: p4 (copy), ErrorOccurredModule (upval)
 			p4:dispatch(ErrorOccurredModule(Err))
 		end)

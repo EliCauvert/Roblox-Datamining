@@ -1,4 +1,4 @@
-﻿local function _(Offset, Size) --[[ Line: 3 | Named "createFrameModel" ]]
+﻿local function _(Offset, Size)
 	return { offset = Offset, size = Size }
 end
 
@@ -17,14 +17,14 @@ local config = {
 }
 
 return {
-	GetFrame = function(_, p1) --[[ Line: 26 ]]
+	GetFrame = function(_, p1)
 		-- upvalues: config (copy)
 		return config.frames[p1]
 	end,
-	GetImagePath = function(_): string --[[ Line: 30 ]]
+	GetImagePath = function(_): string
 		return "rbxasset://textures/ui/Settings/ShareGame/icons.png"
 	end,
-	ApplyImage = function(ThreadState, Image, p1) --[[ Line: 34 ]]
+	ApplyImage = function(ThreadState, Image, p1)
 		local Frame = ThreadState:GetFrame(p1)
 		Image.Image = "rbxasset://textures/ui/Settings/ShareGame/icons.png"
 		Image.ImageRectOffset = Frame.offset

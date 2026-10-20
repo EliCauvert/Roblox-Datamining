@@ -2,13 +2,13 @@
 local ReactModule = require(AvatarViewport.Parent.React)
 local _ = require(AvatarViewport.Types)
 
-return function() --[[ Line: 10 | Named "useAvatarViewportScene" ]]
+return function()
 	-- upvalues: ReactModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseRefResult2 = ReactModule.useRef(nil)
 	
-	return ReactModule.useMemo(function() --[[ Line: 15 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseRefResult2 (copy)
 		return {
 			viewportFrame = UseRefResult,

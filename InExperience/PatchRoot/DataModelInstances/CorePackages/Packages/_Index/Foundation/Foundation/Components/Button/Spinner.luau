@@ -13,7 +13,7 @@ local ViewModule = require(Foundation.Components.View)
 local UseRotationModule = require(Foundation.Utility.useRotation)
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 
-local function IconSpinner(p1) --[[ Line: 26 ]]
+local function IconSpinner(p1)
 	-- upvalues: UseRotationModule (copy), ReactModule (copy), ImageModule (copy)
 	return ReactModule.createElement(ImageModule, {
 		Image = "icons/status/loading_large",
@@ -33,11 +33,11 @@ local list = {
 	Path2DControlPoint.new(UDim2.fromScale(0.5, 1), UDim2.fromScale(-0.25, 0), UDim2.fromScale(0.25, 0))
 }
 
-local function Path2DSpinner(p1) --[[ Line: 50 ]]
+local function Path2DSpinner(p1)
 	-- upvalues: ReactModule (copy), UseRotationModule (copy), list (copy), ViewModule (copy), IsPluginSecurityModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRotationModuleResult = UseRotationModule(2)
-	ReactModule.useEffect(function() --[[ Line: 54 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), list (upval)
 		local Current = UseRefResult.current
 		
@@ -54,10 +54,10 @@ local function Path2DSpinner(p1) --[[ Line: 50 ]]
 		Circle = ReactModule.createElement("Path2D", {
 			Closed = false,
 			ref = UseRefResult,
-			Color3 = p1.style:map(function(p2) --[[ Line: 69 ]]
+			Color3 = p1.style:map(function(p2)
 				return p2.Color3
 			end),
-			Transparency = if IsPluginSecurityModule() then p1.style:map(function(p2) --[[ Line: 73 ]]
+			Transparency = if IsPluginSecurityModule() then p1.style:map(function(p2)
 				return p2.Transparency
 			end) else nil,
 			Thickness = p1.Thickness
@@ -68,13 +68,13 @@ end
 
 local config = { style = {} }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 95 | Named "Spinner" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseSpinnerMotionStatesModule (copy), UseMotionFunction (copy), UsePresenceFunction (copy), ReactModule (copy), ViewModule (copy), FlagsModule (copy), Path2DSpinner (copy), IconSpinner (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseSpinnerMotionStatesModuleResult = UseSpinnerMotionStatesModule()
 	local UseMotionResult, UseMotionResult2 = UseMotionFunction(UseSpinnerMotionStatesModuleResult.Default)
 	local UsePresenceResult = UsePresenceFunction()
-	ReactModule.useEffect(function() --[[ Line: 102 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UsePresenceResult (copy), UseMotionResult2 (copy), UseSpinnerMotionStatesModuleResult (copy)
 		if UsePresenceResult.isPresent then
 			UseMotionResult2(UseSpinnerMotionStatesModuleResult.Loading)
@@ -95,7 +95,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 95 |
 			style = ReactModule.joinBindings({
 				style = WithDefaultsModuleResult.style,
 				transparency = UseMotionResult.transparency
-			}):map(function(p2) --[[ Line: 122 ]]
+			}):map(function(p2)
 				return {
 					Color3 = p2.style.Color3,
 					Transparency = p2.style.Transparency + p2.transparency / 2

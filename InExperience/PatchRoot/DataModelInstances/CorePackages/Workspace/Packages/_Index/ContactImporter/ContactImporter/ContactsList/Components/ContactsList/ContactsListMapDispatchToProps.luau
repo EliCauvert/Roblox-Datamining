@@ -12,32 +12,32 @@ local FriendsStoreChallengeNetworkModule = require(Parent.Networking.friendsStor
 local FFlagEnableFriendsStoreChallengeInterceptor = require(Parent1.SharedFlags).FFlagEnableFriendsStoreChallengeInterceptor
 local GetResult = require(Parent1.DataHydration).Friends.FriendsStore.get()
 
-return function(Callback) --[[ Line: 19 ]]
+return function(Callback)
 	-- upvalues: FFlagMigrateFriendshipStatusesRemainingActions (copy), GetResult (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FriendsStoreChallengeNetworkModule (copy), NetworkingFriends (copy), NetworkingContacts (copy), Llama (copy), Promise (copy), RoduxContacts (copy)
 	return {
-		requestFriendship = function(p1) --[[ Line: 21 ]]
+		requestFriendship = function(p1)
 			-- upvalues: FFlagMigrateFriendshipStatusesRemainingActions (upval), GetResult (upval), FFlagEnableFriendsStoreChallengeInterceptor (upval), FriendsStoreChallengeNetworkModule (upval), Callback (copy), NetworkingFriends (upval)
 			return if FFlagMigrateFriendshipStatusesRemainingActions then GetResult.RequestFriendship(p1.contactId, nil, { isContact = true }, if FFlagEnableFriendsStoreChallengeInterceptor then FriendsStoreChallengeNetworkModule else nil) else Callback(NetworkingFriends.RequestFriendshipFromContactId.API(p1))
 		end,
-		findContacts = function() --[[ Line: 33 ]]
+		findContacts = function()
 			-- upvalues: Callback (copy), NetworkingContacts (upval)
-			return Callback(NetworkingContacts.FindContactFriends.API()):andThen(function(Result) --[[ Line: 34 ]]
+			return Callback(NetworkingContacts.FindContactFriends.API()):andThen(function(Result)
 				return Result.responseBody.userContactIds
 			end)
 		end,
-		getContactEntities = function(p1) --[[ Line: 38 ]]
+		getContactEntities = function(p1)
 			-- upvalues: Llama (upval), Promise (upval), Callback (copy), NetworkingContacts (upval)
 			return if Llama.isEmpty(p1) or not p1 then Promise.resolve() else Callback(NetworkingContacts.GetContactEntitiesByContactId.API(p1))
 		end,
-		uploadContacts = function(p1) --[[ Line: 45 ]]
+		uploadContacts = function(p1)
 			-- upvalues: Callback (copy), NetworkingContacts (upval)
 			return Callback(NetworkingContacts.UploadContactsByUser.API(p1))
 		end,
-		deviceContactsReceived = function(p1) --[[ Line: 48 ]]
+		deviceContactsReceived = function(p1)
 			-- upvalues: Callback (copy), RoduxContacts (upval)
 			return Callback(RoduxContacts.Actions.DeviceContactsReceived(p1))
 		end,
-		requestSent = function(Id) --[[ Line: 51 ]]
+		requestSent = function(Id)
 			-- upvalues: Callback (copy), RoduxContacts (upval)
 			return Callback(RoduxContacts.Actions.RequestSent({ id = Id }))
 		end

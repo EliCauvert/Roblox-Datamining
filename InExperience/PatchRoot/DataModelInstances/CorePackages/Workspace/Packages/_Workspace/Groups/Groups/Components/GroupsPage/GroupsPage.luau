@@ -15,14 +15,14 @@ local UseGroupsListDataFunction = require(Groups.Hooks).useGroupsListData
 local UseGroupsAnalyticsModule = require(Groups.Hooks.useGroupsAnalytics)
 local EventNamesModule = require(Groups.Analytics.EventNames)
 
-return function(_) --[[ Line: 31 | Named "GroupsPage" ]]
+return function(_)
 	-- upvalues: UseGroupsWrapperContextModule (copy), UseTokensFunction (copy), UseGroupsListDataFunction (copy), UseGroupsAnalyticsModule (copy), FFlagEnableGroupDetailPane (copy), UseIsCompactTouchModule (copy), UseEffectOnceFunction (copy), EventNamesModule (copy), ReactModule (copy), GroupsListModule (copy), View (copy), GroupDetailPaneModule (copy), FullscreenPageWithSafeArea (copy)
 	local UseGroupsWrapperContextModuleResult = UseGroupsWrapperContextModule()
 	local UseTokensResult = UseTokensFunction()
 	local UseGroupsListDataResult = UseGroupsListDataFunction(UseGroupsWrapperContextModuleResult.userId)
 	local UseGroupsAnalyticsModuleResult = UseGroupsAnalyticsModule()
 	local UseIsCompactTouchModuleResult = if FFlagEnableGroupDetailPane then UseIsCompactTouchModule() else false
-	UseEffectOnceFunction(function() --[[ Line: 42 ]]
+	UseEffectOnceFunction(function()
 		-- upvalues: UseGroupsAnalyticsModuleResult (copy), EventNamesModule (upval)
 		UseGroupsAnalyticsModuleResult.fireAnalyticsEvent(EventNamesModule.GroupsListPageExposure)
 	end, not UseGroupsListDataResult.isLoading and not UseGroupsListDataResult.loadFailure)

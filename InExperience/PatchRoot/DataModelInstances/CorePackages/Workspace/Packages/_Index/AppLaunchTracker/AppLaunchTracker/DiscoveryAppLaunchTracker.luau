@@ -9,19 +9,19 @@ local LuaAppLaunchTrackerMilestones = game:DefineFastString("LuaAppLaunchTracker
 local DiscoveryAppLaunchTrackerModule = {}
 DiscoveryAppLaunchTrackerModule.__index = DiscoveryAppLaunchTrackerModule
 
-function DiscoveryAppLaunchTrackerModule.isEnabled() --[[ Line: 45 ]]
+function DiscoveryAppLaunchTrackerModule.isEnabled()
 	-- upvalues: IsRandomValueBelow (ref)
 	return IsRandomValueBelow
 end
 
-function DiscoveryAppLaunchTrackerModule.disable() --[[ Line: 49 ]]
+function DiscoveryAppLaunchTrackerModule.disable()
 	-- upvalues: IsRandomValueBelow (ref)
 	IsRandomValueBelow = false
 end
 
-function DiscoveryAppLaunchTrackerModule.new(LoggingProtocol) --[[ Line: 53 ]]
+function DiscoveryAppLaunchTrackerModule.new(LoggingProtocol)
 	-- upvalues: LuaAppLaunchTrackerMilestones (copy), DiscoveryAppLaunchEventsModule (copy), RoduxPerfTrackerModule (copy), LuaAppShouldTrackTopThunks (copy), DiscoveryAppLaunchTrackerModule (copy), LuaAppLaunchTrackerTimeoutSec (copy), IsRandomValueBelow (ref)
-	local Success, Result = pcall(function() --[[ Line: 54 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: LuaAppLaunchTrackerMilestones (upval)
 		local t = {}
 		
@@ -48,7 +48,7 @@ function DiscoveryAppLaunchTrackerModule.new(LoggingProtocol) --[[ Line: 53 ]]
 	}, DiscoveryAppLaunchTrackerModule)
 	
 	if LuaAppLaunchTrackerTimeoutSec > 0 then
-		task.delay(LuaAppLaunchTrackerTimeoutSec, function() --[[ Line: 82 ]]
+		task.delay(LuaAppLaunchTrackerTimeoutSec, function()
 			-- upvalues: IsRandomValueBelow (upval), DiscoveryAppLaunchEventsModule (upval), LoggingProtocol (copy), self (copy), DiscoveryAppLaunchTrackerModule (upval)
 			if IsRandomValueBelow then
 				DiscoveryAppLaunchEventsModule.reportError(LoggingProtocol, `Timeout after previousMilestone: {self.previousMilestone}`)
@@ -60,27 +60,27 @@ function DiscoveryAppLaunchTrackerModule.new(LoggingProtocol) --[[ Line: 53 ]]
 	return self
 end
 
-function DiscoveryAppLaunchTrackerModule:trackTileRender() --[[ Line: 97 ]]
+function DiscoveryAppLaunchTrackerModule:trackTileRender()
 	self.numTileRenders += 1
 end
 
-function DiscoveryAppLaunchTrackerModule:trackTileInit() --[[ Line: 100 ]]
+function DiscoveryAppLaunchTrackerModule:trackTileInit()
 	self.numTilesInit += 1
 end
 
-function DiscoveryAppLaunchTrackerModule:trackFeedRender() --[[ Line: 103 ]]
+function DiscoveryAppLaunchTrackerModule:trackFeedRender()
 	self.numFeedRenders += 1
 end
 
-function DiscoveryAppLaunchTrackerModule:trackNumFeedItems(NumFeedItems) --[[ Line: 106 ]]
+function DiscoveryAppLaunchTrackerModule:trackNumFeedItems(NumFeedItems)
 	self.numFeedItems = NumFeedItems
 end
 
-function DiscoveryAppLaunchTrackerModule:trackSduiDuration(p1) --[[ Line: 110 ]]
+function DiscoveryAppLaunchTrackerModule:trackSduiDuration(p1)
 	self.totalSduiDuration += p1
 end
 
-function DiscoveryAppLaunchTrackerModule:onMilestoneChanged(PreviousMilestone) --[[ Line: 114 ]]
+function DiscoveryAppLaunchTrackerModule:onMilestoneChanged(PreviousMilestone)
 	-- upvalues: IsRandomValueBelow (ref), DiscoveryAppLaunchEventsModule (copy)
 	if not IsRandomValueBelow then return end
 	if not self.supportedMilestones[PreviousMilestone] then return end
@@ -98,13 +98,13 @@ function DiscoveryAppLaunchTrackerModule:onMilestoneChanged(PreviousMilestone) -
 	self.previousMilestoneTime = ClockTime
 end
 
-function DiscoveryAppLaunchTrackerModule:stopTracking() --[[ Line: 152 ]]
+function DiscoveryAppLaunchTrackerModule:stopTracking()
 	-- upvalues: DiscoveryAppLaunchTrackerModule (copy)
 	self.roduxTracker:stopTracking()
 	DiscoveryAppLaunchTrackerModule.disable()
 end
 
-function DiscoveryAppLaunchTrackerModule.createDefault(...) --[[ Line: 157 ]]
+function DiscoveryAppLaunchTrackerModule.createDefault(...)
 	-- upvalues: DiscoveryAppLaunchTrackerModule (copy)
 	DiscoveryAppLaunchTrackerModule.default = DiscoveryAppLaunchTrackerModule.new(...)
 end

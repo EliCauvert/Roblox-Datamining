@@ -12,7 +12,7 @@ local GetFFlagUGCValidationEnableR15plusSkinningModule = require(Parent.flags.ge
 local ResetPhysicsDataModule = require(Parent.util.resetPhysicsData)
 local _ = require(Parent.util.Types)
 
-return function(p1, p2, p3) --[[ Line: 24 | Named "validateMeshPartBodyPart" ]]
+return function(p1, p2, p3)
 	-- upvalues: ValidateWithSchemaModule (copy), AnalyticsModule (copy), ValidateDependenciesModule (copy), ResetPhysicsDataModule (copy), GetEngineFeatureEngineUGCValidatePropertiesSensibleModule (copy), ValidatePropertiesSensibleModule (copy), FailureReasonsAccumulatorModule (copy), ValidateDescendantMeshMetricsModule (copy), ValidateTagsModule (copy), GetFFlagUGCValidationEnableR15plusSkinningModule (copy), ValidateMeshPartOnlySkinnedToR15Module (copy)
 	local AssetTypeEnum = p3.assetTypeEnum
 	local ValidateWithSchemaModuleResult = ValidateWithSchemaModule(p2, p1, p3)

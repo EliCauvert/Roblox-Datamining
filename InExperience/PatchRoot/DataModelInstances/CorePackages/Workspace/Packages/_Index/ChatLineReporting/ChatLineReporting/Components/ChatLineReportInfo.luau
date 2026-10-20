@@ -17,27 +17,27 @@ local config = {
 	restingVelocityLimit = 0.1
 }
 
-return function(p1) --[[ Line: 32 | Named "ChatLineReportInfo" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), ConstantsModule (copy), ReactOtterModule (copy), config (copy), View (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseLocalizationResult = UseLocalizationFunction(ConstantsModule.ChatLineLocalizationKeys)
-	ReactModule.useEffect(function() --[[ Line: 38 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), p1 (copy)
 		UseStateResult2(p1.visible)
 	end, { p1.visible })
-	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1, function() --[[ Line: 42 ]] end)
-	local UseMemoResult = ReactModule.useMemo(function(): number --[[ Line: 44 ]]
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1, function() end)
+	local UseMemoResult = ReactModule.useMemo(function(): number
 		-- upvalues: UseStateResult (copy)
 		return if UseStateResult then 0 else 1
 	end, { UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 48 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseMemoResult (copy), config (upval)
 		UseAnimatedBindingResult2(ReactOtterModule.spring(UseMemoResult, config))
 	end, { UseMemoResult })
 	
 	return ReactModule.createElement("TextButton", {
-		Active = UseAnimatedBindingResult:map(function(p2): boolean --[[ Line: 53 ]]
+		Active = UseAnimatedBindingResult:map(function(p2): boolean
 			return p2 == 0
 		end),
 		AutoButtonColor = false,
@@ -46,11 +46,11 @@ return function(p1) --[[ Line: 32 | Named "ChatLineReportInfo" ]]
 		Selectable = false,
 		Size = UDim2.new(1, 0, 1, 0),
 		Text = "",
-		[ReactModule.Event.Activated] = function() --[[ Line: 62 ]]
+		[ReactModule.Event.Activated] = function()
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(false)
 		end,
-		ZIndex = UseAnimatedBindingResult:map(function(p2: number): number --[[ Line: 66 ]]
+		ZIndex = UseAnimatedBindingResult:map(function(p2: number): number
 			return (1 - p2) * 4
 		end)
 	}, {
@@ -59,7 +59,7 @@ return function(p1) --[[ Line: 32 | Named "ChatLineReportInfo" ]]
 			ClipsDescendants = true,
 			ZIndex = 2,
 			AutomaticSize = Enum.AutomaticSize.Y,
-			Size = UseAnimatedBindingResult:map(function(Alpha) --[[ Line: 74 ]]
+			Size = UseAnimatedBindingResult:map(function(Alpha)
 				return UDim2.new(1, 0, 0, 60):Lerp(UDim2.new(1, 0, 0, 0), Alpha)
 			end)
 		}, {

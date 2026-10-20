@@ -26,26 +26,26 @@ local EventMap = {
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-function OverlayContent(_) --[[ Line: 52 ]]
+function OverlayContent(_)
 	-- upvalues: UseOverlayFunction (copy), SignalsReactModule (copy), GetOverlayStoreModule (copy), ReactModule (copy), OVERLAYTYPES (copy), CreateLazyComponentFunction (copy), SocialUpsell (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), ReactRobloxModule (copy), FocusRoot (copy), EventMap (copy), FocusNavigableSurfaceIdentifierEnum (copy)
 	local UseOverlayResult = UseOverlayFunction()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetOverlayStoreModule(false).getCurrentOverlay)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 57 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: OVERLAYTYPES (upval), CreateLazyComponentFunction (upval), SocialUpsell (upval)
 		return {
 			[OVERLAYTYPES.SocialUpsell] = {
-				Component = CreateLazyComponentFunction(function() --[[ Line: 60 ]]
+				Component = CreateLazyComponentFunction(function()
 					-- upvalues: SocialUpsell (upval)
 					return require(SocialUpsell.Components.InAppSocialUpsellOverlayWrapper)
 				end)
 			}
 		}
 	end, {})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 67 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), GetOverlayStoreModule (upval)
 		return {
 			[FocusNavigationEventNameEnum.NavigateBack] = {
-				handler = InputHandlersModule.onRelease(function(p1) --[[ Line: 70 ]]
+				handler = InputHandlersModule.onRelease(function(p1)
 					-- upvalues: GetOverlayStoreModule (upval)
 					GetOverlayStoreModule(false).dismissCurrentOverlay()
 					p1:cancel()
@@ -66,15 +66,15 @@ function OverlayContent(_) --[[ Line: 52 ]]
 	}), UseOverlayResult) else nil
 end
 
-return function(_) --[[ Line: 99 ]]
+return function(_)
 	-- upvalues: ReactModule (copy), ReactFocusNavigationModule (copy), RoactRoduxModule (copy), RoduxModule (copy), LocalizationProvider (copy), NewResult (copy), FoundationProvider (copy), Provider (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 108 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ReactFocusNavigationModule (upval)
 		return ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 112 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy)
-		return function() --[[ Line: 113 ]]
+		return function()
 			-- upvalues: UseMemoResult (upval)
 			if UseMemoResult then
 				UseMemoResult:teardown()

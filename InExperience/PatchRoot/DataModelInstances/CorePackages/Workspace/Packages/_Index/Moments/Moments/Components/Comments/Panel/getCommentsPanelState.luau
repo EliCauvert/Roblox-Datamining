@@ -16,7 +16,7 @@ local config1 = {
 	ViewerNotEligibleToWrite = true
 }
 
-return function(p1, p2) --[[ Line: 38 | Named "getCommentsPanelState" ]]
+return function(p1, p2)
 	-- upvalues: LoadStatus (copy), config1 (copy), config (copy)
 	local ErrorCode = p2.errorCode
 	local IsViewerNotEligibleToWrite: boolean = if p1 == nil then ErrorCode == "ViewerNotEligibleToWrite" else p1.viewerCanWrite == false or ErrorCode == "ViewerNotEligibleToWrite"

@@ -1,5 +1,5 @@
 ﻿local Base64Module = {
-	MakeEncoder = function(p1, p2, p3) --[[ Line: 8 ]]
+	MakeEncoder = function(p1, p2, p3)
 		local ByteValues = {}
 		
 		for i, Text in pairs({
@@ -75,7 +75,7 @@
 	end
 }
 
-function Base64Module.MakeDecoder(p4, p5, p6) --[[ Line: 82 ]]
+function Base64Module.MakeDecoder(p4, p5, p6)
 	-- upvalues: Base64Module (copy)
 	local t = {}
 	
@@ -91,7 +91,7 @@ local CharFunction = string.char
 local ConcatFunction = table.concat
 local ExtractFunction = bit32.extract
 
-function Base64Module.Encode(Text: string, p7, p8) --[[ Line: 97 ]]
+function Base64Module.Encode(Text: string, p7, p8)
 	-- upvalues: Encoder (copy), ExtractFunction (copy), CharFunction (copy), ConcatFunction (copy)
 	local P7 = p7 or Encoder
 	local t = {}
@@ -129,12 +129,12 @@ function Base64Module.Encode(Text: string, p7, p8) --[[ Line: 97 ]]
 	return ConcatFunction(t)
 end
 
-function Base64Module.EncodeUrl(p9, p10) --[[ Line: 152 ]]
+function Base64Module.EncodeUrl(p9, p10)
 	-- upvalues: Base64Module (copy)
 	return Base64Module.ToUrlSafeBase64((Base64Module.Encode(p9, nil, p10)))
 end
 
-function Base64Module.Decode(Text: string, p9, p10) --[[ Line: 158 ]]
+function Base64Module.Decode(Text: string, p9, p10)
 	-- upvalues: Decoder (copy), CharFunction (copy), ExtractFunction (copy), ConcatFunction (copy)
 	local P12 = p9 or Decoder
 	local v1 = nil
@@ -186,16 +186,16 @@ function Base64Module.Decode(Text: string, p9, p10) --[[ Line: 158 ]]
 	return ConcatFunction(t2)
 end
 
-function Base64Module.DecodeUrl(p11, p12) --[[ Line: 213 ]]
+function Base64Module.DecodeUrl(p11, p12)
 	-- upvalues: Base64Module (copy)
 	return Base64Module.Decode(Base64Module.FromUrlSafeBase64(p11), nil, p12)
 end
 
-function Base64Module.ToUrlSafeBase64(Text: string): string --[[ Line: 218 ]]
+function Base64Module.ToUrlSafeBase64(Text: string): string
 	return (string.gsub(string.gsub(string.gsub(Text, "+", "-"), "/", "_"), "=", ""))
 end
 
-function Base64Module.FromUrlSafeBase64(Text: string): string --[[ Line: 225 ]]
+function Base64Module.FromUrlSafeBase64(Text: string): string
 	local W = Text:gsub("[^%w%-_]", "")
 	
 	return (string.gsub(string.gsub(W .. string.rep("=", (4 - #W % 4) % 4), "_", "/"), "-", "+"))

@@ -5,10 +5,10 @@ local _ = require(Parent.AvatarExperienceCommon)
 local ImpressionEnums = require(Parent.AvatarExperienceAnalytics).Enums.ImpressionEnums
 local UseCatalogPageMonolithDependenciesModule = require(AvatarExperienceCatalog.Providers.useCatalogPageMonolithDependencies)
 
-return function(Callback, p1) --[[ Line: 26 | Named "useCatalogSortSeeAllLogging" ]]
+return function(Callback, p1)
 	-- upvalues: UseCatalogPageMonolithDependenciesModule (copy), ReactModule (copy), ImpressionEnums (copy)
 	local CatalogAnalytics = UseCatalogPageMonolithDependenciesModule().catalogAnalytics
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 35 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: CatalogAnalytics (copy), p1 (copy), ImpressionEnums (upval), Callback (copy)
 		CatalogAnalytics.widgetInteractionV2(p1, ImpressionEnums.ActionType.SEE_ALL)
 		

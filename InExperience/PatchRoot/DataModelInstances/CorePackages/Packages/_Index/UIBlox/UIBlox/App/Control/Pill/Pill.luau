@@ -34,14 +34,14 @@ Pill.defaultProps = {
 	isLoading = false
 }
 
-function Pill.init(p1) --[[ Line: 57 ]]
+function Pill.init(p1)
 	-- upvalues: ControlStateModule (copy)
 	p1.state = { controlState = ControlStateModule.Initialize }
 end
 
-function Pill.render(p1) --[[ Line: 63 ]]
+function Pill.render(p1)
 	-- upvalues: WithStyleModule (copy), ControlStateModule (copy), GetContentStyleModule (copy), GetIconSizeModule (copy), IconSizeModule (copy), GetTextSizeModule (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), RoactModule (copy), InteractableModule (copy), ImageSetComponentModule (copy), GenericTextLabelModule (copy), Skeleton (copy), Radius (copy)
-	return WithStyleModule(function(p2) --[[ Line: 64 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: p1 (copy), ControlStateModule (upval), GetContentStyleModule (upval), GetIconSizeModule (upval), IconSizeModule (upval), GetTextSizeModule (upval), FoundationFontFaceMigration (upval), GetFontFromFontStyleModule (upval), RoactModule (upval), InteractableModule (upval), ImageSetComponentModule (upval), GenericTextLabelModule (upval), Skeleton (upval), Radius (upval)
 		local _Font = p2.Font
 		local IsSelected = p1.props.isSelected
@@ -82,7 +82,7 @@ function Pill.render(p1) --[[ Line: 63 ]]
 			LayoutOrder = 1,
 			isDisabled = IsDisabled,
 			[RoactModule.Event.Activated] = if IsLoading then nil else OnActivated or nil,
-			onStateChanged = function(_, ControlState) --[[ Line: 115 ]]
+			onStateChanged = function(_, ControlState)
 				-- upvalues: p1 (upval)
 				p1:setState({ controlState = ControlState })
 			end

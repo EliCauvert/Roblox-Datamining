@@ -1,10 +1,10 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("Moments").Parent.React)
 
-return function(p1, Callback, Current, p2, p3) --[[ Line: 25 | Named "useCommentBodyToggle" ]]
+return function(p1, Callback, Current, p2, p3)
 	-- upvalues: ReactModule (copy)
 	local ContainsPointFunction = p1.containsPoint
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function(p4, p5: number) --[[ Line: 36 ]]
+	local UseResult = ReactModule.useCallback(function(p4, p5: number)
 		-- upvalues: UseRefResult (copy), Callback (copy), ContainsPointFunction (copy), p3 (copy), p2 (copy), Current (copy)
 		UseRefResult.current = nil
 		
@@ -26,7 +26,7 @@ return function(p1, Callback, Current, p2, p3) --[[ Line: 25 | Named "useComment
 		p2,
 		p3
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 50 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), Callback (copy)
 		local Current = UseRefResult.current
 		UseRefResult.current = nil

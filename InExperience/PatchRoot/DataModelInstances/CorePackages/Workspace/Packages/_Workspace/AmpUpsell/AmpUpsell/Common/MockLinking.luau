@@ -2,37 +2,37 @@
 local MockLinkingModule = {}
 MockLinkingModule.__index = MockLinkingModule
 
-function MockLinkingModule.new() --[[ Line: 12 ]]
+function MockLinkingModule.new()
 	-- upvalues: MockLinkingModule (copy)
 	return (setmetatable({}, MockLinkingModule))
 end
 
-function MockLinkingModule:registerURL(_) --[[ Line: 16 ]] end
+function MockLinkingModule:registerURL(_) end
 
-function MockLinkingModule:detectURL(_) --[[ Line: 20 ]] end
+function MockLinkingModule:detectURL(_) end
 
-function MockLinkingModule:isInternalDlicEnabled(): boolean --[[ Line: 24 ]]
+function MockLinkingModule:isInternalDlicEnabled(): boolean
 	return false
 end
 
-function MockLinkingModule:createInternalDlic(_, _): string --[[ Line: 28 ]]
+function MockLinkingModule:createInternalDlic(_, _): string
 	return "mock-deeplink-id"
 end
 
-function MockLinkingModule:detectDeeplinkIntent(_) --[[ Line: 32 ]] end
+function MockLinkingModule:detectDeeplinkIntent(_) end
 
-function MockLinkingModule:listenForLuaURLs(_) --[[ Line: 34 ]] end
+function MockLinkingModule:listenForLuaURLs(_) end
 
-function MockLinkingModule:stopListeningForLuaURLs() --[[ Line: 38 ]] end
+function MockLinkingModule:stopListeningForLuaURLs() end
 
-function MockLinkingModule:openURL(LastOpenedURL) --[[ Line: 42 ]]
+function MockLinkingModule:openURL(LastOpenedURL)
 	-- upvalues: PromiseModule (copy)
 	self.lastOpenedURL = LastOpenedURL
 	
 	return PromiseModule.resolve(true)
 end
 
-function MockLinkingModule:isURLRegistered(_) --[[ Line: 47 ]]
+function MockLinkingModule:isURLRegistered(_)
 	-- upvalues: PromiseModule (copy)
 	return PromiseModule.resolve(true)
 end

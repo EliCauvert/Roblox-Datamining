@@ -21,11 +21,11 @@ local UserPresence = require(Parent.Foundation).Enums.UserPresence
 local PresenceType1 = if FFlagAppChatPresenceStoreMigrationModule then DataHydrationModule.Presence.PresenceEnums.PresenceType else nil
 local GetResult = if FFlagAppChatPresenceStoreMigrationModule then DataHydrationModule.Presence.PresenceStore.get() else nil
 
-local function groupPresenceAggregateEquals(p1, p2): boolean --[[ Line: 45 ]]
+local function groupPresenceAggregateEquals(p1, p2): boolean
 	return p1.hasInExperienceUser == p2.hasInExperienceUser and p1.hasOnlineUser == p2.hasOnlineUser
 end
 
-local function _(p1) --[[ Line: 78 | Named "getParticipantId" ]]
+local function _(p1)
 	if type(p1) == "table" then
 		local Id = p1.id or p1.userId
 		
@@ -35,21 +35,21 @@ local function _(p1) --[[ Line: 78 | Named "getParticipantId" ]]
 	end
 end
 
-local _ = function(p1) --[[ Line: 87 | Named "getNonEmptyLocalUserId" ]]
+local _ = function(p1)
 	return if p1 == nil or p1 == "" then nil else tostring(p1)
 end
 
-local function ConversationFacePileInner(p1) --[[ Line: 95 ]]
+local function ConversationFacePileInner(p1)
 	-- upvalues: UseLocalUserIdFunction (copy), ReactModule (copy), UseSelectorFunction (copy), FFlagAppChatPresenceStoreMigrationModule (copy), SignalsModule (copy), GetResult (copy), PresenceType1 (copy), groupPresenceAggregateEquals (copy), SignalsReactModule (copy), UseFoundationPresenceModule (copy), UserPresence (copy), PresenceType (copy), FFlagEnableBlackbirdCheck (copy), UseIsRobloxSubscriberFunction (copy), UserTile (copy), LayoutMode (copy), FFlagAppChatSanitizeConversationTitleRichText (copy), EscapeRichFormattingFunction (copy), FFlagUserTileUnfilteredChatIndicator (copy)
 	local ConversationId = p1.conversationId
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local LocalUserId = p1.localUserId
 	local Text = (if LocalUserId == nil or LocalUserId == "" then nil else tostring(LocalUserId)) or ((if UseLocalUserIdResult == nil or UseLocalUserIdResult == "" then nil else tostring(UseLocalUserIdResult)) or "")
-	local UseSelectorResult = UseSelectorFunction((ReactModule.useCallback(function(p2) --[[ Line: 100 ]]
+	local UseSelectorResult = UseSelectorFunction((ReactModule.useCallback(function(p2)
 		-- upvalues: ConversationId (copy)
 		return if p2 and p2.ChatAppReducer and p2.ChatAppReducer.Conversations then p2.ChatAppReducer.Conversations[ConversationId] else nil
 	end, { ConversationId })))
-	local UseSelectorResult1 = if FFlagAppChatPresenceStoreMigrationModule then nil else UseSelectorFunction(function(p2) --[[ Line: 109 ]]
+	local UseSelectorResult1 = if FFlagAppChatPresenceStoreMigrationModule then nil else UseSelectorFunction(function(p2)
 		return if p2 and p2.ChatAppReducer and p2.ChatAppReducer.Presence then p2.ChatAppReducer.Presence.byUserId else nil
 	end)
 	local Participants = p1.participants or (if UseSelectorResult and UseSelectorResult.participants then UseSelectorResult.participants else {})
@@ -71,9 +71,9 @@ local function ConversationFacePileInner(p1) --[[ Line: 95 ]]
 			end
 		end
 	end
-	local UseMemoResult = if FFlagAppChatPresenceStoreMigrationModule then ReactModule.useMemo(function() --[[ Line: 133 ]]
+	local UseMemoResult = if FFlagAppChatPresenceStoreMigrationModule then ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), List (copy), GetResult (upval), PresenceType1 (upval), groupPresenceAggregateEquals (upval)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 134 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: List (upval), GetResult (upval), PresenceType1 (upval)
 			local HasInExperienceUser = false
 			local HasOnlineUser = false
@@ -167,7 +167,7 @@ local function ConversationFacePileInner(p1) --[[ Line: 95 ]]
 	})
 end
 
-return function(Tbl) --[[ Line: 237 | Named "ConversationFacePile" ]]
+return function(Tbl)
 	-- upvalues: NewResult (copy), ReactModule (copy), ConversationFacePileInner (copy)
 	local ConversationId = Tbl.conversationId
 	

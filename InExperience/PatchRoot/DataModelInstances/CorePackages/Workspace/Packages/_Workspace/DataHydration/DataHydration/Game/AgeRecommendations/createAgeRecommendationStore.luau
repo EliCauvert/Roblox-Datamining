@@ -10,13 +10,13 @@ local FetchAgeRecommendationModule = require(script.Parent.fetchAgeRecommendatio
 local AgeRecommendationStoreTypesModule = require(script.Parent.AgeRecommendationStoreTypes)
 local FFlagShowGameAgeRating = require(Parent.SharedFlags).FFlagShowGameAgeRating
 
-return function() --[[ Line: 19 | Named "createAgeRecommendationStore" ]]
+return function()
 	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), LogResponseErrorFunction (copy), DiscoveryEventErrorLogger (copy), FetchAgeRecommendationModule (copy), AgeRecommendationStoreTypesModule (copy), FFlagShowGameAgeRating (copy)
 	local DataCacheModule = CreateDataCacheModule()
 	local DataResolverModule = CreateDataResolverModule({
 		requestBatchSize = 1,
 		cache = DataCacheModule,
-		logError = function(p1) --[[ Line: 26 ]]
+		logError = function(p1)
 			-- upvalues: LogResponseErrorFunction (upval), DiscoveryEventErrorLogger (upval)
 			if type(p1) == "table" then
 				if p1.responseCode then
@@ -31,7 +31,7 @@ return function() --[[ Line: 19 | Named "createAgeRecommendationStore" ]]
 				DiscoveryEventErrorLogger.reportError("FetchAgeRecommendationError", (tostring(p1)))
 			end
 		end,
-		fetchFn = function(p1) --[[ Line: 46 ]]
+		fetchFn = function(p1)
 			-- upvalues: FetchAgeRecommendationModule (upval), AgeRecommendationStoreTypesModule (upval), FFlagShowGameAgeRating (upval)
 			local NextEntry = next(p1)
 			
@@ -42,7 +42,7 @@ return function() --[[ Line: 19 | Named "createAgeRecommendationStore" ]]
 					customFields = { universeId = NextEntry }
 				})
 			end
-			return FetchAgeRecommendationModule(NextEntry):andThen(function(Result) --[[ Line: 58 ]]
+			return FetchAgeRecommendationModule(NextEntry):andThen(function(Result)
 				-- upvalues: NextEntry (copy), AgeRecommendationStoreTypesModule (upval), FFlagShowGameAgeRating (upval)
 				if not Result or not Result.responseBody then
 					error({
@@ -80,7 +80,7 @@ return function() --[[ Line: 19 | Named "createAgeRecommendationStore" ]]
 					
 					return t
 				end
-			end):catch(function(Err) --[[ Line: 99 ]]
+			end):catch(function(Err)
 				error(Err)
 			end)
 		end

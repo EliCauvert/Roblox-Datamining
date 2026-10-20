@@ -10,7 +10,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local FFlagPrefillPreciseSelectionChoices = require(Parent.SharedFlags).FFlagPrefillPreciseSelectionChoices
 
-return function(p1) --[[ Line: 29 | Named "SideModalDropdown" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), ControlState (copy), View (copy), FFlagPrefillPreciseSelectionChoices (copy), Text (copy), Icon (copy), IconSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
@@ -19,7 +19,7 @@ return function(p1) --[[ Line: 29 | Named "SideModalDropdown" ]]
 	return ReactModule.createElement(View, {
 		tag = "auto-x radius-medium align-x-left align-y-center padding-xxsmall bg-shift-100",
 		Size = if FFlagPrefillPreciseSelectionChoices then UDim2.new(1, 0, 0, 48) else UDim2.new(0, 0, 0, 48),
-		onStateChanged = ReactModule.useCallback(function(Hover) --[[ Line: 36 ]]
+		onStateChanged = ReactModule.useCallback(function(Hover)
 			-- upvalues: ControlState (upval), UseStateResult2 (copy)
 			if Hover == ControlState.Hover then
 				UseStateResult2(true)

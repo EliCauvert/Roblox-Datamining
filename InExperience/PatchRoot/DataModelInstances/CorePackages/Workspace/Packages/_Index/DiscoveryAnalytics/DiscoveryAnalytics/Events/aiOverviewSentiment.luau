@@ -12,7 +12,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 	universeIds = TModule.optional(TModule.string)
 })
 
-return function(CustomFields, EventContext) --[[ Line: 26 ]]
+return function(CustomFields, EventContext)
 	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), AiOverviewSentimentThrottleHundrethsPercent (copy), TelemetryService (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	

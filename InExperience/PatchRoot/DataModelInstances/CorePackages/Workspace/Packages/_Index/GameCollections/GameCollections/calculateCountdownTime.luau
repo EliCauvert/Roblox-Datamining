@@ -1,4 +1,4 @@
-﻿return function(p1: number) --[[ Line: 11 | Named "calculateCountdownTime" ]]
+﻿return function(p1: number)
 	local Total = p1 + 59
 	local Floored = 0
 	local Floored1 = 0

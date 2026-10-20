@@ -7,7 +7,7 @@ local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant
 local _ = require(Foundation.Providers.Style.Tokens)
 local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p1) --[[ Line: 29 ]]
+local function variantsFactory(p1)
 	-- upvalues: InputSizeModule (copy)
 	return {
 		common = {
@@ -49,7 +49,7 @@ local function variantsFactory(p1) --[[ Line: 29 ]]
 	}
 end
 
-return function(p1, p2) --[[ Line: 67 ]]
+return function(p1, p2)
 	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
 	local Checkbox = VariantsContextModule.useVariants("Checkbox", variantsFactory, p1)
 	

@@ -13,11 +13,11 @@ local FFlagAppChatIngestConversationMessagesModule = require(AppChat.Flags.FFlag
 local SearchIntroducedConversationIdsModule = require(AppChat.Stores.searchIntroducedConversationIds)
 local FFlagAppChatAnyServerSideConversationSearchModule = require(AppChat.Flags.FFlagAppChatAnyServerSideConversationSearch)
 
-local function _(p1): boolean --[[ Line: 25 | Named "isInitialCursor" ]]
+local function _(p1): boolean
 	return p1 == nil or p1 == ""
 end
 
-local function upsertConversationResponse(p1, p2) --[[ Line: 29 ]]
+local function upsertConversationResponse(p1, p2)
 	-- upvalues: ConversationChannelsModule (copy), FFlagAppChatAnyServerSideConversationSearchModule (copy), SignalsExperimentalModule (copy), SearchIntroducedConversationIdsModule (copy), FFlagAppChatIngestConversationMessagesModule (copy), BuildValidMessagesModule (copy), IngestBatchModule (copy), IngestOperationModule (copy)
 	if p2 == nil or p2.status == "failed" then return end
 	if p2.source == ConversationChannelsModule.Source.Channels and p2.type == ConversationChannelsModule.Type.OneToOne and p2.participant_user_ids ~= nil then
@@ -26,7 +26,7 @@ local function upsertConversationResponse(p1, p2) --[[ Line: 29 ]]
 	local FromChannelsApiResult = ConversationChannelsModule.fromChannelsApi(p2)
 	
 	if FFlagAppChatAnyServerSideConversationSearchModule then
-		SignalsExperimentalModule.batch(function() --[[ Line: 53 ]]
+		SignalsExperimentalModule.batch(function()
 			-- upvalues: p1 (copy), FromChannelsApiResult (copy), SearchIntroducedConversationIdsModule (upval)
 			p1.upsertConversation(FromChannelsApiResult)
 			SearchIntroducedConversationIdsModule.remove(FromChannelsApiResult.id)
@@ -44,7 +44,7 @@ local function upsertConversationResponse(p1, p2) --[[ Line: 29 ]]
 end
 
 return {
-	beginFetch = function(p1, p2) --[[ Line: 92 ]]
+	beginFetch = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		p1.setListStatus({
 			isFetchingConversations = true,
@@ -52,7 +52,7 @@ return {
 			error = CryoModule.None
 		})
 	end,
-	ingestSuccess = function(p1, Cursor, p2) --[[ Line: 100 ]]
+	ingestSuccess = function(p1, Cursor, p2)
 		-- upvalues: GetResponseBodyModule (copy), upsertConversationResponse (copy), CryoModule (copy)
 		local ResponseBodyModule = GetResponseBodyModule(p2)
 		local NextCursor = if ResponseBodyModule == nil then nil else ResponseBodyModule.next_cursor
@@ -84,14 +84,14 @@ return {
 			responseBody = ResponseBodyModule
 		}
 	end,
-	ingestFailure = function(p3, p4) --[[ Line: 132 ]]
+	ingestFailure = function(p3, p4)
 		p3.setListStatus({
 			isFetchingConversations = false,
 			isFetchingNextPage = false,
 			error = p4
 		})
 	end,
-	ingestConversationResponses = function(p3, p4) --[[ Line: 79 ]]
+	ingestConversationResponses = function(p3, p4)
 		-- upvalues: upsertConversationResponse (copy)
 		if p4 == nil or p4.conversations == nil then return end
 		for _, conversation in p4.conversations do

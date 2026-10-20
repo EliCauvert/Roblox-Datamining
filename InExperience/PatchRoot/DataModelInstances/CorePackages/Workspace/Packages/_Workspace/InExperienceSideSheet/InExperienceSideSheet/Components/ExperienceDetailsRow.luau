@@ -13,7 +13,7 @@ local UnibarListModule = require(InExperienceSideSheet.Components.UnibarList)
 local UseExperienceDetailsModule = require(InExperienceSideSheet.Hooks.useExperienceDetails)
 local UseExperienceIconModule = require(InExperienceSideSheet.Hooks.useExperienceIcon)
 
-return ReactModule.memo(function(p1) --[[ Line: 24 | Named "ExperienceDetailsRow" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), UseExperienceDetailsModule (copy), UseExperienceIconModule (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), Text (copy), VerifiedBadgeModule (copy), Image (copy), UnibarListModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseExperienceDetailsModuleResult, UseExperienceDetailsModuleResult2, UseExperienceDetailsModuleResult3 = UseExperienceDetailsModule()

@@ -12,7 +12,7 @@ local IsSuspenseInstancePendingFunction = ReactFiberHostConfigModule.isSuspenseI
 local IsSuspenseInstanceFallbackFunction = ReactFiberHostConfigModule.isSuspenseInstanceFallback
 
 return {
-	shouldCaptureSuspense = function(p1, p2): boolean --[[ Line: 84 ]]
+	shouldCaptureSuspense = function(p1, p2): boolean
 		local MemoizedState = p1.memoizedState
 		
 		if MemoizedState then
@@ -23,7 +23,7 @@ return {
 			return MemoizedProps.fallback ~= nil and (MemoizedProps.unstable_avoidThisFallback ~= true or not p2)
 		end
 	end,
-	findFirstSuspended = function(Child) --[[ Line: 116 ]]
+	findFirstSuspended = function(Child)
 		-- upvalues: SuspenseComponent (copy), IsSuspenseInstancePendingFunction (copy), IsSuspenseInstanceFallbackFunction (copy), SuspenseListComponent (copy), DidCapture (copy), NoFlags (copy)
 		local Child1 = Child
 		while Child1 ~= nil do

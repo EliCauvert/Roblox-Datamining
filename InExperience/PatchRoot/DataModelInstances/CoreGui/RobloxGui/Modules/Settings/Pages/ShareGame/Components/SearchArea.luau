@@ -19,7 +19,7 @@ local GRAY3 = require(ShareGame.Constants).Color.GRAY3
 local TextSizeResult = ThemeModule.textSize(20)
 local SearchArea = RoactModule.PureComponent:extend("SearchArea")
 
-function SearchArea.init(p1) --[[ Line: 38 ]]
+function SearchArea.init(p1)
 	-- upvalues: Translator (copy)
 	p1.state = {
 		cancelText = Translator:FormatByKey("Feature.SettingsHub.Action.CancelSearch")
@@ -27,7 +27,7 @@ function SearchArea.init(p1) --[[ Line: 38 ]]
 	p1.searchField = nil
 end
 
-function SearchArea.render(p1) --[[ Line: 45 ]]
+function SearchArea.render(p1)
 	-- upvalues: Text (copy), FontResult (copy), TextSizeResult (copy), RoactModule (copy), IconButtonModule (copy), ImagePath (copy), SearchLargeFrame (copy), SearchBoxModule (copy), GetFFlagShareGameSearchBoxFocusAnalyticsModule (copy), GRAY3 (copy)
 	local AnchorPoint = p1.props.anchorPoint
 	local Position = p1.props.position
@@ -55,7 +55,7 @@ function SearchArea.render(p1) --[[ Line: 45 ]]
 			iconHorizontalAlignment = Enum.HorizontalAlignment.Right,
 			iconSpritePath = ImagePath,
 			iconSpriteFrame = SearchLargeFrame,
-			onClick = function(_) --[[ Line: 82 ]]
+			onClick = function(_)
 				-- upvalues: p1 (copy)
 				p1.props.setSearchAreaActive(true)
 			end
@@ -68,19 +68,19 @@ function SearchArea.render(p1) --[[ Line: 45 ]]
 			visible = SearchAreaActive,
 			modalFocused = SearchAreaActive,
 			onTextChanged = SetSearchText,
-			onTextBoxFocused = function() --[[ Line: 96 ]]
+			onTextBoxFocused = function()
 				-- upvalues: GetFFlagShareGameSearchBoxFocusAnalyticsModule (upval), p1 (copy)
 				if GetFFlagShareGameSearchBoxFocusAnalyticsModule() and p1.props.analytics then
 					p1.props.analytics:onSearchFocused()
 				end
 			end,
-			onTextBoxFocusLost = function(p2) --[[ Line: 101 ]]
+			onTextBoxFocusLost = function(p2)
 				-- upvalues: p1 (copy)
 				if p2 == "" then
 					p1.props.setSearchAreaActive(false)
 				end
 			end,
-			searchFieldRef = function(SearchField) --[[ Line: 106 ]]
+			searchFieldRef = function(SearchField)
 				-- upvalues: p1 (copy)
 				p1.searchField = SearchField
 			end
@@ -95,20 +95,20 @@ function SearchArea.render(p1) --[[ Line: 45 ]]
 			Font = FontResult,
 			ZIndex = ZIndex,
 			Visible = SearchAreaActive,
-			[RoactModule.Ref] = function(Object) --[[ Line: 121 ]]
+			[RoactModule.Ref] = function(Object)
 				-- upvalues: CancelText (copy), p1 (copy)
 				if Object then
 					Object.Text = CancelText
 					
 					if not p1.textConnection then
-						p1.textConnection = Object:GetPropertyChangedSignal("Text"):connect(function() --[[ Line: 131 ]]
+						p1.textConnection = Object:GetPropertyChangedSignal("Text"):connect(function()
 							-- upvalues: p1 (upval), Object (copy)
 							p1:setState({ cancelText = Object.Text })
 						end)
 					end
 				end
 			end,
-			[RoactModule.Event.Activated] = function(_) --[[ Line: 139 ]]
+			[RoactModule.Event.Activated] = function(_)
 				-- upvalues: p1 (copy)
 				p1.props.setSearchAreaActive(false)
 			end
@@ -119,19 +119,19 @@ function SearchArea.render(p1) --[[ Line: 45 ]]
 		size = UDim2.new(0, 177, 0, 28),
 		zIndex = ZIndex,
 		onTextChanged = SetSearchText,
-		searchFieldRef = function(SearchField) --[[ Line: 155 ]]
+		searchFieldRef = function(SearchField)
 			-- upvalues: p1 (copy)
 			p1.searchField = SearchField
 		end
 	})
 end
 
-function SearchArea.didUpdate(p1, p2) --[[ Line: 162 ]]
+function SearchArea.didUpdate(p1, p2)
 	local FullWidthSearchBar = p1.props.fullWidthSearchBar
 	
 	if p1.searchField then
 		if not p1.props.isPageOpen and p2.isPageOpen then
-			spawn(function() --[[ Line: 170 ]]
+			spawn(function()
 				-- upvalues: FullWidthSearchBar (copy), p1 (copy)
 				if FullWidthSearchBar then
 					p1.props.setSearchAreaActive(false)
@@ -158,19 +158,19 @@ function SearchArea.didUpdate(p1, p2) --[[ Line: 162 ]]
 	end
 end
 
-return (RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 194 ]]
+return (RoactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	return {
 		isPageOpen = p1.Page.IsOpen,
 		searchAreaActive = p1.ConversationsSearch.SearchAreaActive
 	}
-end, function(Callback) --[[ Line: 199 ]]
+end, function(Callback)
 	-- upvalues: SetSearchAreaActiveModule (copy), SetSearchTextModule (copy)
 	return {
-		setSearchAreaActive = function(p1) --[[ Line: 201 ]]
+		setSearchAreaActive = function(p1)
 			-- upvalues: Callback (copy), SetSearchAreaActiveModule (upval)
 			Callback(SetSearchAreaActiveModule(p1))
 		end,
-		setSearchText = function(p1) --[[ Line: 204 ]]
+		setSearchText = function(p1)
 			-- upvalues: Callback (copy), SetSearchTextModule (upval)
 			Callback(SetSearchTextModule(p1))
 		end

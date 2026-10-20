@@ -13,7 +13,7 @@ local config = {
 }
 local config1 = { inExpChatSelection = true, inExpSceneSelection = true }
 
-local function SlidePane(p1) --[[ Line: 49 ]]
+local function SlidePane(p1)
 	-- upvalues: ReactModule (copy), View (copy)
 	return ReactModule.createElement(View, {
 		tag = "size-full",
@@ -35,7 +35,7 @@ local function SlidePane(p1) --[[ Line: 49 ]]
 	})
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 88 | Named "SlideTransition" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: config1 (copy), ReactModule (copy), ReactOtterModule (copy), config (copy), SlidePane (copy), SlideTransitionContextModule (copy), View (copy)
 	local Entry = config1[p1.nodeType] or false
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
@@ -50,7 +50,7 @@ return ReactModule.memo(function(p1) --[[ Line: 88 | Named "SlideTransition" ]]
 		transitionId = 0,
 		springId = 0
 	})
-	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1, (ReactModule.useCallback(function() --[[ Line: 110 ]]
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1, (ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UseStateResult2 (copy), UseBindingResult2 (copy)
 		local Current = UseRefResult.current
 		
@@ -94,7 +94,7 @@ return ReactModule.memo(function(p1) --[[ Line: 88 | Named "SlideTransition" ]]
 		Current.prevNodeId = p1.nodeId
 		Current.prevContent = p1.nodeContent
 	end
-	ReactModule.useLayoutEffect(function() --[[ Line: 156 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseRefResult (copy), UseStateResult2 (copy), UseBindingResult2 (copy), config (upval), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
 		local Current = UseRefResult.current
 		
@@ -121,7 +121,7 @@ return ReactModule.memo(function(p1) --[[ Line: 88 | Named "SlideTransition" ]]
 		Elements[Current.outgoing.nodeId] = ReactModule.createElement(SlidePane, {
 			withInputSink = true,
 			content = Current.outgoing.content,
-			position = if NeedsAnimationStart then UDim2.new(0, 0, 0, 0) else UseAnimatedBindingResult:map(function(p2): UDim2 --[[ Line: 187 ]]
+			position = if NeedsAnimationStart then UDim2.new(0, 0, 0, 0) else UseAnimatedBindingResult:map(function(p2): UDim2
 				-- upvalues: UseRefResult (copy)
 				return UDim2.new(p2 * (if UseRefResult.current.direction == "forward" then -1 else 1), 0, 0, 0)
 			end)
@@ -130,7 +130,7 @@ return ReactModule.memo(function(p1) --[[ Line: 88 | Named "SlideTransition" ]]
 	Elements[p1.nodeId] = ReactModule.createElement(SlidePane, {
 		withInputSink = false,
 		content = p1.nodeContent,
-		position = if NeedsAnimationStart then UDim2.new(if Current.direction == "forward" then 1 else -1, 0, 0, 0) elseif HasOutgoing then UseAnimatedBindingResult:map(function(p2: number): UDim2 --[[ Line: 204 ]]
+		position = if NeedsAnimationStart then UDim2.new(if Current.direction == "forward" then 1 else -1, 0, 0, 0) elseif HasOutgoing then UseAnimatedBindingResult:map(function(p2: number): UDim2
 			-- upvalues: UseRefResult (copy)
 			return UDim2.new((1 - p2) * (if UseRefResult.current.direction == "forward" then 1 else -1), 0, 0, 0)
 		end) else nil

@@ -23,7 +23,7 @@ local GetContentFromCaptureModule = require(MomentsCreationFlow.Utils.getContent
 local DragHandleModule1 = require(MomentsCreationFlow.Enums.DragHandle)
 local CreationFlowLocalizationModule = require(MomentsCreationFlow.Enums.CreationFlowLocalization)
 
-return function(p1) --[[ Line: 50 ]]
+return function(p1)
 	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), ReactModule (copy), CreationFlowContextModule (copy), GetContentFromCaptureModule (copy), VideoService (copy), UseCallbackFunction (copy), UseTrimDragControllerModule (copy), View (copy), Button (copy), FoundationModule (copy), CreationFlowLocalizationModule (copy), TrimTooltipModule (copy), DragHandleModule (copy), DragHandleModule1 (copy), IconButton (copy), PauseLarge (copy), PlayLarge (copy), Text (copy), SpeakerSlash (copy), Speaker (copy)
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseTokensResult = UseTokensFunction()
@@ -34,11 +34,11 @@ return function(p1) --[[ Line: 50 ]]
 	local UseRefResult2 = ReactModule.useRef(nil)
 	local ContentFromCaptureModule = GetContentFromCaptureModule(p1.selectedCapture)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState({})
-	ReactModule.useEffect(function() --[[ Line: 63 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult2 (copy), VideoService (upval), ContentFromCaptureModule (copy), p1 (copy), UseStateResult2_1 (copy)
-		task.spawn(function() --[[ Line: 64 ]]
+		task.spawn(function()
 			-- upvalues: UseRefResult2 (upval), VideoService (upval), ContentFromCaptureModule (upval), p1 (upval), UseStateResult2_1 (upval)
-			local Success, Result = pcall(function() --[[ Line: 65 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: UseRefResult2 (upval), VideoService (upval), ContentFromCaptureModule (upval)
 				UseRefResult2.current = VideoService:CreateVideoSamplerAsync(ContentFromCaptureModule)
 			end)
@@ -56,7 +56,7 @@ return function(p1) --[[ Line: 50 ]]
 			UseStateResult2_1(UseRefResult2.current:GetSamplesAtTimesAsync(List))
 		end)
 	end, { p1.selectedCapture })
-	local UseTrimDragControllerModuleResult = UseTrimDragControllerModule(true, UseCallbackFunction(function() --[[ Line: 90 ]]
+	local UseTrimDragControllerModuleResult = UseTrimDragControllerModule(true, UseCallbackFunction(function()
 		-- upvalues: UseRefResult (copy), p1 (copy), UseRefResult1 (copy), UseStateResult2 (copy)
 		if UseRefResult.current then
 			p1.playbackController.playback.play()
@@ -67,7 +67,7 @@ return function(p1) --[[ Line: 50 ]]
 		UseRefResult.current = false
 		UseRefResult1.current = false
 		UseStateResult2(nil)
-	end, {}), UseCallbackFunction(function(p2) --[[ Line: 82 ]]
+	end, {}), UseCallbackFunction(function(p2)
 		-- upvalues: UseRefResult (copy), p1 (copy), UseRefResult1 (copy), UseStateResult2 (copy)
 		UseRefResult.current = p1.playbackController.playback.isPlaying
 		UseRefResult1.current = p1.playbackController.volume.isMuted
@@ -77,7 +77,7 @@ return function(p1) --[[ Line: 50 ]]
 	end, {
 		p1.playbackController.playback.isPlaying,
 		p1.playbackController.volume.isMuted
-	}), UseCallbackFunction(function(p2, p3) --[[ Line: 102 ]]
+	}), UseCallbackFunction(function(p2, p3)
 		-- upvalues: p1 (copy)
 		p1.onTrimUpdate({
 			startTime = math.clamp(if p2 then p2 else p1.trimEdit and p1.trimEdit.startTime or 0, 0, p1.playbackController.timeline.timeLength),
@@ -88,7 +88,7 @@ return function(p1) --[[ Line: 50 ]]
 		p1.onTrimUpdate,
 		p1.trimEdit,
 		p1.playbackController.timeline.timeLength
-	}), UseCallbackFunction(function(p2) --[[ Line: 123 ]]
+	}), UseCallbackFunction(function(p2)
 		-- upvalues: p1 (copy)
 		p1.playbackController.timeline.seek(p2 * p1.playbackController.timeline.duration)
 	end, {
@@ -119,7 +119,7 @@ return function(p1) --[[ Line: 50 ]]
 				fillBehavior = FoundationModule.Enums.FillBehavior.Fit,
 				text = UseContextResult.getLocalization(CreationFlowLocalizationModule.GeneralCtaBack),
 				variant = FoundationModule.Enums.ButtonVariant.Text,
-				onActivated = UseCallbackFunction(function() --[[ Line: 146 ]]
+				onActivated = UseCallbackFunction(function()
 					-- upvalues: p1 (copy)
 					if p1.onTrimDiscard then
 						p1.onTrimDiscard()
@@ -132,7 +132,7 @@ return function(p1) --[[ Line: 50 ]]
 				fillBehavior = FoundationModule.Enums.FillBehavior.Fit,
 				text = UseContextResult.getLocalization(CreationFlowLocalizationModule.GeneralCtaDone),
 				variant = FoundationModule.Enums.ButtonVariant.Text,
-				onActivated = UseCallbackFunction(function() --[[ Line: 152 ]]
+				onActivated = UseCallbackFunction(function()
 					-- upvalues: p1 (copy)
 					if p1.onTrimSave then
 						p1.onTrimSave()
@@ -160,7 +160,7 @@ return function(p1) --[[ Line: 50 ]]
 					}),
 					LeftHandle = ReactModule.createElement(DragHandleModule, {
 						anchorPoint = Vector2.new(1, 0.5),
-						position = LeftHandlePosition:map(function(XScale): UDim2 --[[ Line: 239 ]]
+						position = LeftHandlePosition:map(function(XScale): UDim2
 							return UDim2.fromScale(XScale, 0.5)
 						end),
 						dragDetectorRef = UseTrimDragControllerModuleResult.leftHandleRef
@@ -168,7 +168,7 @@ return function(p1) --[[ Line: 50 ]]
 					RightHandle = ReactModule.createElement(DragHandleModule, {
 						isFlipped = true,
 						anchorPoint = Vector2.new(0, 0.5),
-						position = RightHandlePosition:map(function(XScale): UDim2 --[[ Line: 248 ]]
+						position = RightHandlePosition:map(function(XScale): UDim2
 							return UDim2.fromScale(XScale, 0.5)
 						end),
 						dragDetectorRef = UseTrimDragControllerModuleResult.rightHandleRef
@@ -176,13 +176,13 @@ return function(p1) --[[ Line: 50 ]]
 					Outline = ReactModule.createElement(View, {
 						tag = "anchor-center-left",
 						ZIndex = 2,
-						Position = LeftHandlePosition:map(function(XScale): UDim2 --[[ Line: 255 ]]
+						Position = LeftHandlePosition:map(function(XScale): UDim2
 							return UDim2.fromScale(XScale, 0.5)
 						end),
 						Size = ReactModule.joinBindings({
 							leftHandlePosition = LeftHandlePosition,
 							rightHandlePosition = RightHandlePosition
-						}):map(function(p2): UDim2 --[[ Line: 261 ]]
+						}):map(function(p2): UDim2
 							return UDim2.fromScale(p2.rightHandlePosition - p2.leftHandlePosition, 1)
 						end)
 					}, {
@@ -213,7 +213,7 @@ return function(p1) --[[ Line: 50 ]]
 						tag = "anchor-center-left position-center-left",
 						ZIndex = 0,
 						backgroundStyle = UseTokensResult.Color.Extended.Black.Black_50,
-						Size = LeftHandlePosition:map(function(XScale): UDim2 --[[ Line: 303 ]]
+						Size = LeftHandlePosition:map(function(XScale): UDim2
 							return UDim2.fromScale(XScale, 1)
 						end)
 					}),
@@ -221,7 +221,7 @@ return function(p1) --[[ Line: 50 ]]
 						tag = "anchor-center-right position-center-right",
 						ZIndex = 0,
 						backgroundStyle = UseTokensResult.Color.Extended.Black.Black_50,
-						Size = RightHandlePosition:map(function(p2: number): UDim2 --[[ Line: 312 ]]
+						Size = RightHandlePosition:map(function(p2: number): UDim2
 							return UDim2.fromScale(1 - p2, 1)
 						end)
 					})
@@ -240,7 +240,7 @@ return function(p1) --[[ Line: 50 ]]
 				TimelineBar = ReactModule.createElement(View, {
 					tag = "padding-x-medium size-full-full row",
 					layout = { Padding = UDim.new(0, UseTokensResult.Size.Size_50) }
-				}, (ReactModule.useMemo(function() --[[ Line: 166 ]]
+				}, (ReactModule.useMemo(function()
 					-- upvalues: p1 (copy), ReactModule (upval), View (upval), UseStateResult1 (copy)
 					local Elements = {}
 					
@@ -268,7 +268,7 @@ return function(p1) --[[ Line: 50 ]]
 			PlaybackToggle = ReactModule.createElement(IconButton, {
 				LayoutOrder = 1,
 				icon = p1.playbackController.playback.isPlaying and PauseLarge or PlayLarge,
-				onActivated = UseCallbackFunction(function() --[[ Line: 158 ]]
+				onActivated = UseCallbackFunction(function()
 					-- upvalues: p1 (copy)
 					p1.playbackController.playback.toggle()
 				end, { p1.playbackController }),
@@ -282,7 +282,7 @@ return function(p1) --[[ Line: 50 ]]
 			MuteToggle = ReactModule.createElement(IconButton, {
 				LayoutOrder = 3,
 				icon = p1.playbackController.volume.isMuted and SpeakerSlash or Speaker,
-				onActivated = UseCallbackFunction(function() --[[ Line: 162 ]]
+				onActivated = UseCallbackFunction(function()
 					-- upvalues: p1 (copy)
 					p1.playbackController.volume.toggle()
 				end, { p1.playbackController }),

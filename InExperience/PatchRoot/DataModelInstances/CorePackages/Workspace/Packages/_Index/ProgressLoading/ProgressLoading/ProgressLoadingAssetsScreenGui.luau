@@ -6,25 +6,25 @@ local ProgressLoadingTelemetryModule = require(script.Parent.ProgressLoadingTele
 local GetDeferredAssetStoreModule = require(script.Parent.Stores.GetDeferredAssetStore)
 local ConstantsModule = require(script.Parent.Constants)
 
-local function getIsLoadingAssets(p1): boolean --[[ Line: 14 ]]
+local function getIsLoadingAssets(p1): boolean
 	-- upvalues: GetDeferredAssetStoreModule (copy)
 	local DeferredAssetStoreModule = GetDeferredAssetStoreModule(p1)
 	
 	return if DeferredAssetStoreModule then DeferredAssetStoreModule.getDownloadStatus(p1) == Enum.PrefetchDownloadStatus.InProgress else false
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 28 | Named "ProgressLoadingAssetsScreenGui" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: SignalsReactModule (copy), getIsLoadingAssets (copy), ReactModule (copy), ProgressLoadingTelemetryModule (copy), ConstantsModule (copy), ProgressLoadingAssetsModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(getIsLoadingAssets)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(UseSignalStateResult)
-	ReactModule.useEffect(function() --[[ Line: 32 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult (copy), ProgressLoadingTelemetryModule (upval), UseStateResult2 (copy)
 		if UseSignalStateResult then
 			ProgressLoadingTelemetryModule.logLoadingAssetsActivated()
 			UseStateResult2(true)
 		end
 	end, { UseSignalStateResult })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 39 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: ProgressLoadingTelemetryModule (upval), UseStateResult2 (copy)
 		ProgressLoadingTelemetryModule.logLoadingAssetsDeactivated()
 		UseStateResult2(false)

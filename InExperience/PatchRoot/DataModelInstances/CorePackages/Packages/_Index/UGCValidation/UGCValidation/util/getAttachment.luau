@@ -1,4 +1,4 @@
-﻿return function(Object, ChildNames) --[[ Line: 1 | Named "getAttachment" ]]
+﻿return function(Object, ChildNames)
 	local Child = nil
 	for _, childName in pairs(ChildNames) do
 		Child = Object:FindFirstChild(childName)

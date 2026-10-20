@@ -18,12 +18,12 @@ local config = {
 	}
 }
 
-return ReactModule.memo(function(Frame) --[[ Line: 38 | Named "RobuxTermsDisclosure" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseTokensFunction (copy), UseOpenWebViewFunction (copy), UseLocalizationFunction (copy), config (copy), ReactModule (copy), UrlBuilder (copy), TextElement (copy), LinkElement (copy), View (copy), InlineLayout (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseOpenWebViewResult = UseOpenWebViewFunction()
 	local Disclosure = UseLocalizationFunction(config).disclosure
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 45 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseOpenWebViewResult (copy), UrlBuilder (upval)
 		UseOpenWebViewResult(UrlBuilder.static.about.terms(), "")
 	end, { UseOpenWebViewResult })
@@ -39,7 +39,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 38 | Named "RobuxTermsDisclos
 		LayoutOrder = Frame.LayoutOrder
 	}, {
 		Layout = ReactModule.createElement(InlineLayout, {
-			Elements = ReactModule.useMemo(function() --[[ Line: 55 ]]
+			Elements = ReactModule.useMemo(function()
 				-- upvalues: Disclosure (copy), TextElement (upval), CaptionSmall (copy), Neutral (copy), LinkElement (upval), CaptionSmall1 (copy), Emphasis (copy), UseResult (copy)
 				local Match, Match2, Match3 = string.match(Disclosure, "^(.*)<a>(.*)</a>(.*)$")
 				

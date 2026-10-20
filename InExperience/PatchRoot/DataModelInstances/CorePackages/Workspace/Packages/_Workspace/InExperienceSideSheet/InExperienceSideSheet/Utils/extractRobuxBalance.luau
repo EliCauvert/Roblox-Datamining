@@ -1,4 +1,4 @@
-﻿return function(p1) --[[ Line: 1 | Named "extractRobuxBalance" ]]
+﻿return function(p1)
 	if typeof(p1) == "table" then
 		local Robux = p1.robux or p1.Robux
 		

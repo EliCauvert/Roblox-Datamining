@@ -7,7 +7,7 @@ local UseStyleFunction = require(CorePackages.Packages.UIBlox).Core.Style.useSty
 local AvatarPartViewportModule = require(script.Parent.AvatarPartViewport)
 local GetFFlagSingleUploadMakeupSupportModule = require(script.Parent.Parent.Parent.Parent.Flags.GetFFlagSingleUploadMakeupSupport)
 
-return function(Frame) --[[ Line: 28 | Named "AvatarItemCard" ]]
+return function(Frame)
 	-- upvalues: UseStyleFunction (copy), GetFFlagSingleUploadMakeupSupportModule (copy), ReactModule (copy), AvatarPartViewportModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseStyleResultFont = UseStyleResult.Font

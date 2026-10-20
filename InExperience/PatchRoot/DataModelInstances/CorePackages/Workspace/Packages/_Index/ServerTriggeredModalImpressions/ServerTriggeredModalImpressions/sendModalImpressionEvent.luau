@@ -11,7 +11,7 @@ local config = {
 	lastUpdated = { 25, 9, 9 }
 }
 
-return function(ModalId, ModalType) --[[ Line: 21 ]]
+return function(ModalId, ModalType)
 	-- upvalues: TelemetryService (copy), config (copy), ModalImpressionEventAddSessionInfo (copy)
 	TelemetryService:LogEvent(config, {
 		standardizedFields = if ModalImpressionEventAddSessionInfo then { "addSessionInfo" } else nil,

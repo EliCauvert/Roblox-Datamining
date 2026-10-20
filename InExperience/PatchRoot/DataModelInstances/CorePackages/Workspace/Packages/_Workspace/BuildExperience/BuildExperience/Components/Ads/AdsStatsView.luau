@@ -17,7 +17,7 @@ local IconName = FoundationModule.Enums.IconName
 local Radius = FoundationModule.Enums.Radius
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function renderActiveCampaign(p1, LayoutOrder, TestId) --[[ Line: 88 ]]
+local function renderActiveCampaign(p1, LayoutOrder, TestId)
 	-- upvalues: ReactModule (copy), View (copy), Text (copy), StatsCardContainerModule (copy)
 	local ActiveName: string = `{TestId}-active-{LayoutOrder}`
 	
@@ -40,7 +40,7 @@ local function renderActiveCampaign(p1, LayoutOrder, TestId) --[[ Line: 88 ]]
 	})
 end
 
-local function renderSkeletonTileRow(LayoutOrder, YOffset) --[[ Line: 110 ]]
+local function renderSkeletonTileRow(LayoutOrder, YOffset)
 	-- upvalues: ReactModule (copy), View (copy), Skeleton (copy), Radius (copy)
 	local Elements = {}
 	
@@ -58,7 +58,7 @@ local function renderSkeletonTileRow(LayoutOrder, YOffset) --[[ Line: 110 ]]
 	}, Elements)
 end
 
-local function LoadingSkeleton(p1) --[[ Line: 132 ]]
+local function LoadingSkeleton(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), renderSkeletonTileRow (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Size400 = UseTokensResult.Size.Size_400
@@ -115,7 +115,7 @@ local function LoadingSkeleton(p1) --[[ Line: 132 ]]
 	})
 end
 
-local function EmptyState(p1) --[[ Line: 191 ]]
+local function EmptyState(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Icon (copy), IconName (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	
@@ -149,7 +149,7 @@ local function EmptyState(p1) --[[ Line: 191 ]]
 	})
 end
 
-return function(p1) --[[ Line: 225 | Named "AdsStatsView" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), CreateAdCampaignSheetContainerModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), Text (copy), LoadingSkeleton (copy), EmptyState (copy), renderActiveCampaign (copy), View (copy), PastCampaignsListModule (copy)
 	local TestId = p1.testId or "AdsStatsView"
 	local config = {

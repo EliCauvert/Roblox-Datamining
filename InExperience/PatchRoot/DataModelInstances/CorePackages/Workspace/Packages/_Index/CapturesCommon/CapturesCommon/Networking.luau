@@ -2,11 +2,11 @@
 local LuaSocialLibrariesDepsModule = require(Parent.LuaSocialLibrariesDeps)
 local HttpRequest = LuaSocialLibrariesDepsModule.httpRequest
 local ConfigResult = HttpRequest.config({
-	requestFunction = function(p1, p2, p3) --[[ Line: 11 ]]
+	requestFunction = function(p1, p2, p3)
 		-- upvalues: HttpRequest (copy)
 		return HttpRequest.requestFunctions.HttpRbxApi(p1, p2, p3)
 	end,
-	postRequestFunction = function(_, _) --[[ Line: 15 ]] end,
+	postRequestFunction = function(_, _) end,
 	maxRetryCount = game:DefineFastInt("CapturesCommonMaxHttpRequestRetries", 2),
 	maxWaitTime = game:DefineFastInt("CapturesCommonMaxHttpRequestWaitTime", 8)
 })

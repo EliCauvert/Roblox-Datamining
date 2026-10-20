@@ -17,7 +17,7 @@ local UseStartPartySuggestionModule = require(script.Parent.useStartPartySuggest
 local CreateSmartSuggestionActionHandlerFunction = require(script.Parent.SmartSuggestionActionHandler).createSmartSuggestionActionHandler
 local SuggestionType = require(script.Parent.Types).SuggestionType
 
-local function _(p1, p2) --[[ Line: 48 | Named "getConversationMessages" ]]
+local function _(p1, p2)
 	-- upvalues: GetDeepValueModule (copy)
 	if p2 == nil then
 		return nil
@@ -28,7 +28,7 @@ local function _(p1, p2) --[[ Line: 48 | Named "getConversationMessages" ]]
 	end
 end
 
-local function getLatestUserMessageId(State, ConversationId) --[[ Line: 61 ]]
+local function getLatestUserMessageId(State, ConversationId)
 	-- upvalues: GetDeepValueModule (copy), OrderedMap (copy), MessageModelModule (copy)
 	local Messages = nil
 	if ConversationId == nil then
@@ -51,7 +51,7 @@ local function getLatestUserMessageId(State, ConversationId) --[[ Line: 61 ]]
 	return nil
 end
 
-local _ = function(p1, p2, p3): boolean --[[ Line: 77 | Named "isMessageCommitted" ]]
+local _ = function(p1, p2, p3): boolean
 	-- upvalues: GetDeepValueModule (copy), OrderedMap (copy)
 	local Messages = nil
 	if p2 == nil then
@@ -63,17 +63,17 @@ local _ = function(p1, p2, p3): boolean --[[ Line: 77 | Named "isMessageCommitte
 	return Messages ~= nil and (Messages.values ~= nil and OrderedMap.Get(Messages, p3) ~= nil)
 end
 
-return function(ConversationId, SendMessage, SendGameLinkChatMessage) --[[ Line: 82 | Named "useSmartSuggestions" ]]
+return function(ConversationId, SendMessage, SendGameLinkChatMessage)
 	-- upvalues: UseCanAccessPartyModule (copy), UseStartPartySuggestionModule (copy), UseStoreFunction (copy), ReactModule (copy), getLatestUserMessageId (copy), UseSelectorFunction (copy), CreateSmartSuggestionActionHandlerFunction (copy), CryoModule (copy), SuggestionType (copy), FetchSmartSuggestionsModule (copy), ConstantsModule (copy), GetDeepValueModule (copy), OrderedMap (copy), UseRealtimePlatformChatConversationModule (copy)
 	local UseStartPartySuggestionModuleResult = UseStartPartySuggestionModule(ConversationId, (UseCanAccessPartyModule()))
 	local CanStartParty = UseStartPartySuggestionModuleResult.canStartParty
 	local StartParty = UseStartPartySuggestionModuleResult.startParty
 	local UseStoreResult = UseStoreFunction()
-	local UseSelectorResult = UseSelectorFunction((ReactModule.useCallback(function(p1) --[[ Line: 92 ]]
+	local UseSelectorResult = UseSelectorFunction((ReactModule.useCallback(function(p1)
 		-- upvalues: getLatestUserMessageId (upval), ConversationId (copy)
 		return (getLatestUserMessageId(p1, ConversationId))
 	end, { ConversationId })))
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 96 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CreateSmartSuggestionActionHandlerFunction (upval), SendMessage (copy), SendGameLinkChatMessage (copy), StartParty (copy)
 		return CreateSmartSuggestionActionHandlerFunction({
 			sendMessage = SendMessage,
@@ -83,9 +83,9 @@ return function(ConversationId, SendMessage, SendGameLinkChatMessage) --[[ Line:
 	end, { SendMessage, SendGameLinkChatMessage, StartParty })
 	local UseStateResult, UseStateResult2 = ReactModule.useState({})
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 106 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: CryoModule (upval), UseStateResult (copy), SuggestionType (upval), CanStartParty (copy)
-		return CryoModule.List.filter(UseStateResult, function(p1) --[[ Line: 107 ]]
+		return CryoModule.List.filter(UseStateResult, function(p1)
 			-- upvalues: SuggestionType (upval), CanStartParty (upval)
 			return p1.type ~= SuggestionType.StartParty or CanStartParty
 		end)
@@ -96,13 +96,13 @@ return function(ConversationId, SendMessage, SendGameLinkChatMessage) --[[ Line:
 		previousNewestUserMessageId = UseSelectorResult,
 		newestMessageConversationId = ConversationId
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 122 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: ConversationId (copy), UseRefResult (copy), FetchSmartSuggestionsModule (upval), UseStateResult2 (copy), UseStateResult2_1 (copy)
 		if ConversationId ~= nil then
 			local Current = UseRefResult.current
 			Current.requestId += 1
 			local RequestId = UseRefResult.current.requestId
-			FetchSmartSuggestionsModule(ConversationId):andThen(function(Result) --[[ Line: 129 ]]
+			FetchSmartSuggestionsModule(ConversationId):andThen(function(Result)
 				-- upvalues: UseRefResult (upval), RequestId (copy), UseStateResult2 (upval), UseStateResult2_1 (upval)
 				if UseRefResult.current.requestId == RequestId then
 					UseStateResult2(Result)
@@ -110,25 +110,25 @@ return function(ConversationId, SendMessage, SendGameLinkChatMessage) --[[ Line:
 					
 					return
 				end
-			end):catch(function() --[[ Line: 136 ]] end)
+			end):catch(function() end)
 			
 			return
 		end
 	end, { ConversationId })
-	ReactModule.useEffect(function() --[[ Line: 143 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy), UseResult (copy), UseRefResult (copy)
 		UseStateResult2({})
 		UseStateResult2_1(false)
 		UseResult()
 		
-		return function() --[[ Line: 147 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			local Current = UseRefResult.current
 			Current.requestId += 1
 			UseRefResult.current.pendingRealtimeNotification = nil
 		end
 	end, { ConversationId, UseResult })
-	local UseResult1 = ReactModule.useCallback(function(p1) --[[ Line: 154 ]]
+	local UseResult1 = ReactModule.useCallback(function(p1)
 		-- upvalues: ConstantsModule (upval), ConversationId (copy), UseStoreResult (copy), getLatestUserMessageId (upval), GetDeepValueModule (upval), OrderedMap (upval), UseRefResult (copy), UseResult (copy)
 		if p1.Type ~= ConstantsModule.PlatformChatConversation.Types.ConversationSuggestionsGenerated then return end
 		if ConversationId == nil or p1.ConversationId ~= ConversationId then return end
@@ -165,7 +165,7 @@ return function(ConversationId, SendMessage, SendGameLinkChatMessage) --[[ Line:
 		end
 	end, { ConversationId, UseStoreResult, UseResult })
 	UseRealtimePlatformChatConversationModule(UseResult1, { UseResult1 })
-	ReactModule.useEffect(function() --[[ Line: 196 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseSelectorResult (copy), ConversationId (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), UseResult (copy), UseStoreResult (copy), GetDeepValueModule (upval), OrderedMap (upval)
 		local NewestMessageConversationId = UseRefResult.current.newestMessageConversationId
 		UseRefResult.current.previousNewestUserMessageId = UseSelectorResult
@@ -209,13 +209,13 @@ return function(ConversationId, SendMessage, SendGameLinkChatMessage) --[[ Line:
 	return {
 		suggestions = UseMemoResult1,
 		areSuggestionsDismissed = UseStateResult1,
-		onActivated = ReactModule.useCallback(function(p1) --[[ Line: 227 ]]
+		onActivated = ReactModule.useCallback(function(p1)
 			-- upvalues: UseStateResult2_1 (copy), UseMemoResult (copy), ConversationId (copy)
 			UseStateResult2_1(true)
 			local UseMemoResultResult = UseMemoResult(p1, ConversationId)
 			
 			if typeof(UseMemoResultResult) == "table" and typeof(UseMemoResultResult.catch) == "function" then
-				UseMemoResultResult:catch(function() --[[ Line: 232 ]]
+				UseMemoResultResult:catch(function()
 					-- upvalues: UseStateResult2_1 (upval)
 					UseStateResult2_1(false)
 				end)

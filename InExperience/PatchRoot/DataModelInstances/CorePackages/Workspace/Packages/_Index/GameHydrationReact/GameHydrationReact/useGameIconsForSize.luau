@@ -11,7 +11,7 @@ if FFlagMigrateGameInfoToStore then
 	Callback = SignalsModule.createSignal(false)
 	v1 = {}
 end
-return function(List, p1, p2) --[[ Line: 26 | Named "useGameIconsForSize" ]]
+return function(List, p1, p2)
 	-- upvalues: ReactModule (copy), DataHydrationModule (copy), FFlagMigrateGameInfoToStore (copy), Callback (ref), v1 (ref), SignalsReactModule (copy)
 	local List1 = {}
 	
@@ -20,12 +20,12 @@ return function(List, p1, p2) --[[ Line: 26 | Named "useGameIconsForSize" ]]
 	end
 	table.sort(List1)
 	
-	return SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 39 ]]
+	return SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: DataHydrationModule (upval), p2 (copy), List1 (copy), p1 (copy), FFlagMigrateGameInfoToStore (upval), Callback (upval), v1 (upval)
 		local GameIconStore = DataHydrationModule.Game.getGameIconStore(false)
 		local AndFetchGameIcons = if p2 then GameIconStore.getAndFetchGameIcons(List1, p1) else GameIconStore.getGameIcons(List1, p1)
 		
-		return function(p3) --[[ Line: 44 ]]
+		return function(p3)
 			-- upvalues: FFlagMigrateGameInfoToStore (upval), AndFetchGameIcons (copy), Callback (upval), v1 (upval)
 			if FFlagMigrateGameInfoToStore and next(AndFetchGameIcons) == nil then
 				Callback(p3)

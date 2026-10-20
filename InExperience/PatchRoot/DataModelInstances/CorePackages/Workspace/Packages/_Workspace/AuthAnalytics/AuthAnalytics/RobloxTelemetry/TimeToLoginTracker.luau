@@ -2,24 +2,24 @@
 local MemStorageService = game:GetService("MemStorageService")
 local TelemetryConfigsModule = require(script.Parent.TelemetryConfigs)
 
-local function getWallClockMillis() --[[ Line: 52 ]]
+local function getWallClockMillis()
 	return DateTime.now().UnixTimestampMillis
 end
 
-local function createTimeToLoginTracker(Default, p1, p2, p3) --[[ Line: 56 ]]
+local function createTimeToLoginTracker(Default, p1, p2, p3)
 	-- upvalues: getWallClockMillis (copy), MemStorageService (copy), HttpService (copy), TelemetryConfigsModule (copy)
 	local Callback = p1 or getWallClockMillis
 	local P2 = p2 or MemStorageService
 	local P3 = p3 or HttpService
 	
-	local function readPendingAttempt() --[[ Line: 66 ]]
+	local function readPendingAttempt()
 		-- upvalues: P2 (copy), P3 (copy)
 		local TimeToLoginPendingItem = P2:GetItem("TimeToLoginPending")
 		
 		if TimeToLoginPendingItem == nil or TimeToLoginPendingItem == "" then
 			return nil
 		end
-		local Success, Result = pcall(function() --[[ Line: 72 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: P3 (upval), TimeToLoginPendingItem (copy)
 			return P3:JSONDecode(TimeToLoginPendingItem)
 		end)
@@ -40,7 +40,7 @@ local function createTimeToLoginTracker(Default, p1, p2, p3) --[[ Line: 56 ]]
 		end
 	end
 	
-	local function _(p4) --[[ Line: 94 | Named "writePendingAttempt" ]]
+	local function _(p4)
 		-- upvalues: P2 (copy), P3 (copy)
 		P2:SetItem("TimeToLoginPending", P3:JSONEncode({
 			loginType = p4.loginType,
@@ -50,18 +50,18 @@ local function createTimeToLoginTracker(Default, p1, p2, p3) --[[ Line: 56 ]]
 		}))
 	end
 	
-	local _ = function(p4) --[[ Line: 113 | Named "pendingAgeMillis" ]]
+	local _ = function(p4)
 		-- upvalues: Callback (copy)
 		return Callback() - p4.startTimeMillis
 	end
 	
-	local _ = function(p4, Reason) --[[ Line: 117 | Named "reportInvalidDuration" ]]
+	local _ = function(p4, Reason)
 		-- upvalues: Default (copy), TelemetryConfigsModule (upval)
 		Default:logRobloxTelemetryCounter(TelemetryConfigsModule.TimeToLoginInvalidDurationConfig, 1, { loginType = p4.loginType, reason = Reason })
 	end
 	
 	return {
-		start = function(LoginType, p4) --[[ Line: 152 ]]
+		start = function(LoginType, p4)
 			-- upvalues: Callback (copy), P2 (copy), P3 (copy)
 			if LoginType ~= nil and LoginType ~= "" then
 				local config = {
@@ -80,7 +80,7 @@ local function createTimeToLoginTracker(Default, p1, p2, p3) --[[ Line: 56 ]]
 				return
 			end
 		end,
-		markTwoStepVerification = function() --[[ Line: 167 ]]
+		markTwoStepVerification = function()
 			-- upvalues: readPendingAttempt (copy), P2 (copy), P3 (copy)
 			local PendingAttempt = readPendingAttempt()
 			
@@ -96,11 +96,11 @@ local function createTimeToLoginTracker(Default, p1, p2, p3) --[[ Line: 56 ]]
 				return
 			end
 		end,
-		cancel = function() --[[ Line: 106 ]]
+		cancel = function()
 			-- upvalues: P2 (copy)
 			P2:SetItem("TimeToLoginPending", "")
 		end,
-		finish = function() --[[ Line: 124 ]]
+		finish = function()
 			-- upvalues: readPendingAttempt (copy), P2 (copy), Callback (copy), Default (copy), TelemetryConfigsModule (upval)
 			local PendingAttempt = readPendingAttempt()
 			

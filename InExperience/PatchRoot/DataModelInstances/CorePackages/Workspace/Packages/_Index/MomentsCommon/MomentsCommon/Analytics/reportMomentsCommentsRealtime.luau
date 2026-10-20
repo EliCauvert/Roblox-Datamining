@@ -31,13 +31,13 @@ local config1 = {
 	[RealtimeEventNamesModule.MomentsCommentAuthorBlock] = true
 }
 
-local function _(p1, p2, p3) --[[ Line: 54 | Named "emit" ]]
+local function _(p1, p2, p3)
 	-- upvalues: RealtimeTelemetryEmitterModule (copy), RealtimeTelemetryActionListModule (copy)
 	(p3 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[p1], p2)
 end
 
 return {
-	reportMomentsComments = function(p1, p2, p3) --[[ Line: 61 ]]
+	reportMomentsComments = function(p1, p2, p3)
 		-- upvalues: config (copy), RealtimeTelemetryEmitterModule (copy), RealtimeTelemetryActionListModule (copy)
 		local Entry = config[p1]
 		
@@ -54,7 +54,7 @@ return {
 			failureReason = p2.failureReason
 		})
 	end,
-	reportMomentsCommentAction = function(p1, p2, p3) --[[ Line: 78 ]]
+	reportMomentsCommentAction = function(p1, p2, p3)
 		-- upvalues: config1 (copy), RealtimeTelemetryEmitterModule (copy), RealtimeTelemetryActionListModule (copy)
 		if config1[p1] then
 			(p3 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[p1], {

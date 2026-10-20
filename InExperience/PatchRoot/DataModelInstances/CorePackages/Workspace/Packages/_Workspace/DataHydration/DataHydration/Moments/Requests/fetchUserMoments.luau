@@ -13,7 +13,7 @@ local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
 local FFlagMomentsResolvePublishedPostFeedItem = SharedFlagsModule.FFlagMomentsResolvePublishedPostFeedItem
 local FFlagProfileMomentsOrderingAndReactions = SharedFlagsModule.FFlagProfileMomentsOrderingAndReactions
 
-local function collectExcludedMomentIds(p1) --[[ Line: 26 ]]
+local function collectExcludedMomentIds(p1)
 	local Copy = table.clone(p1.moderatedMomentIds or {})
 	local FailedMomentIds = p1.failedMomentIds or {}
 	for _, failedMomentId in FailedMomentIds do
@@ -22,7 +22,7 @@ local function collectExcludedMomentIds(p1) --[[ Line: 26 ]]
 	return Copy
 end
 
-return function(TargetUserId, PaginationContext, Network) --[[ Line: 35 | Named "fetchUserMoments" ]]
+return function(TargetUserId, PaginationContext, Network)
 	-- upvalues: ConstructApiUrlModule (copy), HttpModule (copy), HttpClientModule (copy), ConvertApiMomentsToMomentItemsModule (copy), FFlagProfileMomentsOrderingAndReactions (copy), ExtractReactionsByMomentIdModule (copy), ExtractShareInfoByMomentIdModule (copy), FFlagMomentsComments (copy), ExtractCommentsByFeedItemIdModule (copy), FFlagMomentsResolvePublishedPostFeedItem (copy), collectExcludedMomentIds (copy)
 	local GetUsersMoments, GetUsersMoments2 = ConstructApiUrlModule("content-captures-api/v2/moments/get-users-moments")
 	
@@ -36,7 +36,7 @@ return function(TargetUserId, PaginationContext, Network) --[[ Line: 35 | Named 
 		})}`,
 		headers = GetUsersMoments2,
 		network = Network,
-		decode = function(p2) --[[ Line: 54 ]]
+		decode = function(p2)
 			-- upvalues: ConvertApiMomentsToMomentItemsModule (upval), PaginationContext (copy), FFlagProfileMomentsOrderingAndReactions (upval), ExtractReactionsByMomentIdModule (upval), ExtractShareInfoByMomentIdModule (upval), FFlagMomentsComments (upval), ExtractCommentsByFeedItemIdModule (upval), FFlagMomentsResolvePublishedPostFeedItem (upval), collectExcludedMomentIds (upval)
 			local Items = p2.items
 			local v1: boolean = Items ~= nil and #Items >= 18

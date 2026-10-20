@@ -18,11 +18,11 @@ local UseOptimisticUpdateStatusModule = require(script.Parent.Hooks.useOptimisti
 local GetFFlagEdpPlayerFeedbackEnabledFunction = SharedFlagsModule.GetFFlagEdpPlayerFeedbackEnabled
 local FFlagLuaAppAddUniverseIdToEngagementEvents = SharedFlagsModule.FFlagLuaAppAddUniverseIdToEngagementEvents
 
-local function _(Enabled): string --[[ Line: 38 | Named "convertBooleanToVoteForAnalytics" ]]
+local function _(Enabled): string
 	return if Enabled == true then "UpVoted" elseif Enabled == false then "DownVoted" else "NotVoted"
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 48 | Named "ExperienceDetailsVoteChip" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseDispatchFunction (copy), SignalsReactModule (copy), Game1 (copy), ReactModule (copy), SetCurrentToastMessageFunction (copy), ToastType (copy), GetFFlagEdpPlayerFeedbackEnabledFunction (copy), UseOptimisticUpdateStatusModule (copy), Players (copy), GameVoteFunction (copy), FFlagLuaAppAddUniverseIdToEngagementEvents (copy), VotesUtils (copy), IconVariant (copy), UseAppPolicyFunction (copy), SduiDualActionChip (copy), FoundationModule (copy)
 	local LayoutOrder = p1.layoutOrder
 	local UniverseId = p1.universeId
@@ -31,10 +31,10 @@ return ReactModule.memo(function(p1) --[[ Line: 48 | Named "ExperienceDetailsVot
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(Game1.getVotesStore(false).getAndFetchUserVote(UniverseId).data)
 	local UseSignalStateResult2 = SignalsReactModule.useSignalState(Game1.getGameInfoStore(false).getAndFetchGameInfo(UniverseId).data)
 	local RootPlaceId = UseSignalStateResult2 and UseSignalStateResult2.rootPlaceId
-	local UseOptimisticUpdateStatusModuleResult = UseOptimisticUpdateStatusModule(ReactModule.useCallback(function(p2) --[[ Line: 60 ]]
+	local UseOptimisticUpdateStatusModuleResult = UseOptimisticUpdateStatusModule(ReactModule.useCallback(function(p2)
 		-- upvalues: Game1 (upval), UniverseId (copy)
 		return Game1.getVotesStore(false).updateUserVote(UniverseId, p2)
-	end, { UniverseId }), (ReactModule.useCallback(function(p2) --[[ Line: 65 ]]
+	end, { UniverseId }), (ReactModule.useCallback(function(p2)
 		-- upvalues: UseDispatchResult (copy), SetCurrentToastMessageFunction (upval), ToastType (upval), GetFFlagEdpPlayerFeedbackEnabledFunction (upval), RootPlaceId (copy), Game1 (upval)
 		if p2 == nil then return end
 		if p2.type == "error" then
@@ -62,7 +62,7 @@ return ReactModule.memo(function(p1) --[[ Line: 48 | Named "ExperienceDetailsVot
 			end
 		end
 	end, { RootPlaceId, UseDispatchResult })))
-	local UseResult = ReactModule.useCallback(function(UserVote) --[[ Line: 99 ]]
+	local UseResult = ReactModule.useCallback(function(UserVote)
 		-- upvalues: UseSignalStateResult1 (copy), RootPlaceId (copy), Players (upval), GameVoteFunction (upval), FFlagLuaAppAddUniverseIdToEngagementEvents (upval), UniverseId (copy), GetFFlagEdpPlayerFeedbackEnabledFunction (upval), Game1 (upval), UseOptimisticUpdateStatusModuleResult (copy)
 		local UserVote1 = UseSignalStateResult1 and UseSignalStateResult1.userVote
 		local UserVote2 = if UserVote1 == UserVote then nil else UserVote
@@ -73,7 +73,7 @@ return ReactModule.memo(function(p1) --[[ Line: 48 | Named "ExperienceDetailsVot
 				placeId = RootPlaceId,
 				vote = if UserVote2 == true then "UpVoted" elseif UserVote2 == false then "DownVoted" else "NotVoted",
 				prevVote = if UserVote1 == true then "UpVoted" elseif UserVote1 == false then "DownVoted" else "NotVoted",
-				universeId = if FFlagLuaAppAddUniverseIdToEngagementEvents then UniverseId else nil
+				targetId = if FFlagLuaAppAddUniverseIdToEngagementEvents then UniverseId else nil
 			}, "ExperienceDetailsVoteChip")
 		end
 		if GetFFlagEdpPlayerFeedbackEnabledFunction() and RootPlaceId then
@@ -87,28 +87,28 @@ return ReactModule.memo(function(p1) --[[ Line: 48 | Named "ExperienceDetailsVot
 		UseOptimisticUpdateStatusModuleResult,
 		UseDispatchResult
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 139 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy)
 		UseResult(true)
 	end, { UseResult })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 143 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy)
 		UseResult(false)
 	end, { UseResult })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 147 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: VotesUtils (upval), UseSignalStateResult (copy)
 		return VotesUtils.getRatingDisplayText(UseSignalStateResult)
 	end, { UseSignalStateResult })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 151 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult1 (copy), IconVariant (upval)
 		return if UseSignalStateResult1 and UseSignalStateResult1.userVote == true then IconVariant.Filled else IconVariant.Regular
 	end, { UseSignalStateResult1 })
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 158 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult1 (copy), IconVariant (upval)
 		return if UseSignalStateResult1 and UseSignalStateResult1.userVote == false then IconVariant.Filled else IconVariant.Regular
 	end, { UseSignalStateResult1 })
 	
-	return if UseAppPolicyFunction(function(p2) --[[ Line: 165 ]]
+	return if UseAppPolicyFunction(function(p2)
 		return p2.getGamePlaysAndRatings()
 	end) then ReactModule.createElement(SduiDualActionChip, {
 		text = UseMemoResult,

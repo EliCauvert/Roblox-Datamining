@@ -17,7 +17,7 @@ local IAnnotationsFunction = ErrorReportModule.IAnnotations
 local IsDevelopmentModeModule = require(script.Parent.isDevelopmentMode)
 local SentryReportBreadcrumbs = game:DefineFastFlag("SentryReportBreadcrumbs", false)
 
-local function _(p1) --[[ Line: 55 | Named "latestBreadcrumbs" ]]
+local function _(p1)
 	local CountP0 = #p1
 	
 	if CountP0 <= 100 then
@@ -31,7 +31,7 @@ local function _(p1) --[[ Line: 55 | Named "latestBreadcrumbs" ]]
 	return List
 end
 
-local _ = function(Text: string) --[[ Line: 75 | Named "truncateLog" ]]
+local _ = function(Text: string)
 	local Length = string.len(Text)
 	
 	if Length <= 20971520 then
@@ -46,12 +46,12 @@ end
 local SentryReporterModule = {}
 SentryReporterModule.__index = SentryReporterModule
 
-local _ = function(Dsn, Environment, Release, p2) --[[ Line: 110 | Named "createSentryClient" ]]
+local _ = function(Dsn, Environment, Release, p2)
 	-- upvalues: Client (copy)
 	return Client:new({ dsn = Dsn, environment = Environment, release = Release }, p2)
 end
 
-local _ = function(p2, p3): string --[[ Line: 157 | Named "buildErrorKey" ]]
+local _ = function(p2, p3): string
 	return string.format("%s | %s", p2 or "", p3 or "")
 end
 
@@ -78,7 +78,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 	disableDevelopmentLogging = TModule.optional(TModule.boolean)
 })
 
-function SentryReporterModule.new(ReportQueuedError) --[[ Line: 195 ]]
+function SentryReporterModule.new(ReportQueuedError)
 	-- upvalues: StrictInterfaceResult (copy), IsDevelopmentModeModule (copy), Client (copy), SentryReporterModule (copy), FFlagSentrySplitQueuesBySeverityModule (copy), CryoModule (copy), FIntSentryDebugLevelQueueTimeLimitSecondsModule (copy), ErrorQueueModule (copy), FIntSentryErrorLevelQueueTimeLimitSecondsModule (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(ReportQueuedError)
 	
@@ -117,7 +117,7 @@ function SentryReporterModule.new(ReportQueuedError) --[[ Line: 195 ]]
 	}
 	setmetatable(config, SentryReporterModule)
 	
-	local function reportQueuedError(_, p2, p3) --[[ Line: 242 ]]
+	local function reportQueuedError(_, p2, p3)
 		-- upvalues: config (copy)
 		if config:sendErrorReport(p2.errorReport, p2.log) and config._errorFlushedCallback ~= nil then
 			config._errorFlushedCallback(p3)
@@ -141,14 +141,14 @@ function SentryReporterModule.new(ReportQueuedError) --[[ Line: 195 ]]
 	return config
 end
 
-function SentryReporterModule:isTooOldToReportErrors(): boolean --[[ Line: 287 ]]
+function SentryReporterModule:isTooOldToReportErrors(): boolean
 	-- upvalues: RunService (copy), FIntOldestUAVersionToReportErrorsModule (copy)
 	local Number: number? = tonumber(string.match(RunService:GetRobloxVersion(), ".(%d+)."))
 	
 	return Number and Number < FIntOldestUAVersionToReportErrorsModule or false
 end
 
-function SentryReporterModule:_sendLogAttachment(p2, Text: string) --[[ Line: 311 ]]
+function SentryReporterModule:_sendLogAttachment(p2, Text: string)
 	local Length = string.len(Text)
 	local Length1 = string.len(Text)
 	local Data = nil
@@ -176,7 +176,7 @@ function SentryReporterModule:_sendLogAttachment(p2, Text: string) --[[ Line: 31
 	if self._shouldLogDevelopmentInfo and not Flag then
 		print("[Sentry] " .. string.format("Sending log attachment for event: %s (%.2f KB)", p2, Length / 1024))
 	end
-	self._sentryClient:send_event_with_attachments(p2, list, function(p3, p4, _) --[[ Line: 342 ]]
+	self._sentryClient:send_event_with_attachments(p2, list, function(p3, p4, _)
 		-- upvalues: self (copy), p2 (copy)
 		if p3 then
 			if self._shouldLogDevelopmentInfo then
@@ -198,7 +198,7 @@ function SentryReporterModule:_sendLogAttachment(p2, Text: string) --[[ Line: 31
 	end)
 end
 
-function SentryReporterModule:_handleSentryExceptionCallback(p2, p3, p4, p5) --[[ Line: 375 ]]
+function SentryReporterModule:_handleSentryExceptionCallback(p2, p3, p4, p5)
 	if p2 then
 		if self._shouldLogDevelopmentInfo then
 			print("[Sentry] Successfully reported error to Sentry:", p4)
@@ -221,7 +221,7 @@ function SentryReporterModule:_handleSentryExceptionCallback(p2, p3, p4, p5) --[
 	end
 end
 
-function SentryReporterModule:sendErrorReport(ErrorReport, Log): boolean --[[ Line: 407 ]]
+function SentryReporterModule:sendErrorReport(ErrorReport, Log): boolean
 	-- upvalues: IsDevelopmentModeModule (copy), ConstantsModule (copy), SentryReporterUtilityModule (copy), SentryReportBreadcrumbs (copy), FFlagLuaAppSentryStampOccurrenceTimeModule (copy)
 	if not self._isEnabled then
 		return false
@@ -274,7 +274,7 @@ function SentryReporterModule:sendErrorReport(ErrorReport, Log): boolean --[[ Li
 		type = "LuaError",
 		message = Message,
 		stacktrace = Stacktrace
-	}, Level, ParseErrorToContextResult, ParseThreadsToSentryResult, function(p2, p3, p4) --[[ Line: 467 ]]
+	}, Level, ParseErrorToContextResult, ParseThreadsToSentryResult, function(p2, p3, p4)
 		-- upvalues: self (copy), Log (copy)
 		self:_handleSentryExceptionCallback(p2, p3, p4, Log)
 	end, v1, if FFlagLuaAppSentryStampOccurrenceTimeModule then ErrorReport.timestamp else nil, ErrorReport.tags)
@@ -282,18 +282,18 @@ function SentryReporterModule:sendErrorReport(ErrorReport, Log): boolean --[[ Li
 	return true
 end
 
-function SentryReporterModule:_sendLogToReport(_, p2) --[[ Line: 484 ]]
+function SentryReporterModule:_sendLogToReport(_, p2)
 	if type(p2) == "string" and #p2 ~= 0 then
-		pcall(function() --[[ Line: 489 ]] end)
+		pcall(function() end)
 		
 		return
 	end
 end
 
-function SentryReporterModule:_generateLog() --[[ Line: 499 ]]
+function SentryReporterModule:_generateLog()
 	if self._generateLogMethod ~= nil and self._logIntervalInSeconds < tick() - self._lastLogTime then
 		self._lastLogTime = tick()
-		local Success, Result = pcall(function() --[[ Line: 503 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: self (copy)
 			return self._generateLogMethod()
 		end)
@@ -305,7 +305,7 @@ function SentryReporterModule:_generateLog() --[[ Line: 499 ]]
 	return nil
 end
 
-function SentryReporterModule:_generateErrorReport(p2, p3, StackDetails, p4, Level) --[[ Line: 525 ]]
+function SentryReporterModule:_generateErrorReport(p2, p3, StackDetails, p4, Level)
 	-- upvalues: CryoModule (copy), ErrorReportModule (copy), FFlagLuaAppSentryStampOccurrenceTimeModule (copy)
 	local FromDetailsResult = nil
 	if type(StackDetails) == "table" then
@@ -334,7 +334,7 @@ function SentryReporterModule:_generateErrorReport(p2, p3, StackDetails, p4, Lev
 	return FromDetailsResult, (self:_generateLog())
 end
 
-function SentryReporterModule:reportErrorImmediately(p2, p3, StackDetails, p4, Level) --[[ Line: 589 ]]
+function SentryReporterModule:reportErrorImmediately(p2, p3, StackDetails, p4, Level)
 	if self._isEnabled then
 		local ErrorReport, ErrorReport2 = self:_generateErrorReport(p2, p3, StackDetails, p4, Level)
 		self:sendErrorReport(ErrorReport, ErrorReport2)
@@ -343,7 +343,7 @@ function SentryReporterModule:reportErrorImmediately(p2, p3, StackDetails, p4, L
 	end
 end
 
-function SentryReporterModule:_getQueueForLevel(p2) --[[ Line: 605 ]]
+function SentryReporterModule:_getQueueForLevel(p2)
 	-- upvalues: ConstantsModule (copy)
 	if self._errorLevelQueue == nil or (p2 or ConstantsModule.DEFAULT_ERROR_LEVEL) ~= "error" then
 		return self._debugLevelQueue
@@ -352,7 +352,7 @@ function SentryReporterModule:_getQueueForLevel(p2) --[[ Line: 605 ]]
 	end
 end
 
-function SentryReporterModule:reportErrorDeferred(p2, p3, StackDetails, p4, Level) --[[ Line: 623 ]]
+function SentryReporterModule:reportErrorDeferred(p2, p3, StackDetails, p4, Level)
 	if not self._isEnabled then return end
 	local Formatted = string.format("%s | %s", p2 or "", p3 or "")
 	local QueueForLevel = self:_getQueueForLevel(Level)
@@ -368,7 +368,7 @@ function SentryReporterModule:reportErrorDeferred(p2, p3, StackDetails, p4, Leve
 	QueueForLevel:addError(Formatted, config)
 end
 
-function SentryReporterModule:reportAllErrors() --[[ Line: 664 ]]
+function SentryReporterModule:reportAllErrors()
 	if self._debugLevelQueue ~= nil then
 		self._debugLevelQueue:reportAllErrors()
 	end
@@ -377,7 +377,7 @@ function SentryReporterModule:reportAllErrors() --[[ Line: 664 ]]
 	end
 end
 
-function SentryReporterModule:stop() --[[ Line: 677 ]]
+function SentryReporterModule:stop()
 	self._isEnabled = false
 	
 	if self._debugLevelQueue ~= nil then
@@ -389,7 +389,7 @@ function SentryReporterModule:stop() --[[ Line: 677 ]]
 	end
 end
 
-function SentryReporterModule:updateSharedAttributes(p2) --[[ Line: 699 ]]
+function SentryReporterModule:updateSharedAttributes(p2)
 	-- upvalues: CryoModule (copy), IAttributesFunction (copy), IsDevelopmentModeModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(self._sharedAttributes, p2)
 	local IAttributesResult, IAttributesResult2 = IAttributesFunction(JoinResult)
@@ -401,15 +401,15 @@ function SentryReporterModule:updateSharedAttributes(p2) --[[ Line: 699 ]]
 	self._sharedAttributes = JoinResult
 end
 
-function SentryReporterModule:setTag(p2, p3) --[[ Line: 723 ]]
+function SentryReporterModule:setTag(p2, p3)
 	self._sentryClient:set_tag(p2, p3)
 end
 
-function SentryReporterModule:setUser(p2) --[[ Line: 732 ]]
+function SentryReporterModule:setUser(p2)
 	self._sentryClient:set_user(p2)
 end
 
-function SentryReporterModule:updateSharedAnnotations(p2) --[[ Line: 741 ]]
+function SentryReporterModule:updateSharedAnnotations(p2)
 	-- upvalues: CryoModule (copy), IAnnotationsFunction (copy), IsDevelopmentModeModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(self._sharedAnnotations, p2)
 	local IAnnotationsResult, IAnnotationsResult2 = IAnnotationsFunction(JoinResult)

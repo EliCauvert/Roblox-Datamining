@@ -7,7 +7,7 @@ local TextInput = FoundationModule.TextInput
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local DialogSize = FoundationModule.Enums.DialogSize
 
-return function(p1) --[[ Line: 32 | Named "InputDialogView" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), Dialog (copy), DialogSize (copy), TextInput (copy), Text (copy), ButtonVariant (copy)
 	return ReactModule.createElement(Dialog.Root, {
 		disablePortal = false,

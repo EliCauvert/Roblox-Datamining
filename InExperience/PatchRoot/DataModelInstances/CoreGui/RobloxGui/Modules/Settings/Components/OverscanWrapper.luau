@@ -5,9 +5,9 @@ local ReactModule = require(CorePackages.Packages.React)
 local FocusNavigableSurfaceIdentifierEnum = require(CorePackages.Workspace.Packages.FocusNavigationUtils).FocusNavigableSurfaceIdentifierEnum
 local DeviceType = require(CorePackages.Workspace.Packages.RobloxAppEnums).DeviceType
 
-function OverscanWrapper(p1) --[[ Line: 15 ]]
+function OverscanWrapper(p1)
 	-- upvalues: DeviceType (copy), ReactModule (copy), CoreScriptsRootProvider (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
-	return function(p2) --[[ Line: 16 ]]
+	return function(p2)
 		-- upvalues: DeviceType (upval), ReactModule (upval), CoreScriptsRootProvider (upval), FocusRoot (upval), FocusNavigableSurfaceIdentifierEnum (upval), p1 (copy)
 		return ReactModule.createElement(CoreScriptsRootProvider, { styleOverride = { deviceType = DeviceType.Console } }, {
 			FocusNavigationCoreScriptsWrapper = ReactModule.createElement(FocusRoot, {

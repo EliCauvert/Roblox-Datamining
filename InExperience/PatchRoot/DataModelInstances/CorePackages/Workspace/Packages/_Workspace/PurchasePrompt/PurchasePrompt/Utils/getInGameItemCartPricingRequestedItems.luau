@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("PurchasePrompt").types)
 
-return function(p1) --[[ Line: 16 | Named "getInGameItemCartPricingRequestedItems" ]]
+return function(p1)
 	if type(p1) == "table" then
 		local Namespace = p1.namespace
 		local TargetIdentifier = p1.targetIdentifier

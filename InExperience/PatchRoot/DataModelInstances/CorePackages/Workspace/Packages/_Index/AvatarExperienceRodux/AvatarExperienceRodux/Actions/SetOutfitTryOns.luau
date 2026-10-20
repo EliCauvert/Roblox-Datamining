@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("AvatarExperienceRodux").Parent.Rodux).makeActionCreator(script.Name, function(OutfitTryOns) --[[ Line: 11 ]]
+﻿return require(script:FindFirstAncestor("AvatarExperienceRodux").Parent.Rodux).makeActionCreator(script.Name, function(OutfitTryOns)
 	return { outfitTryOns = OutfitTryOns }
 end)

@@ -3,16 +3,16 @@ local SignalModule = require(script.Parent.Parent.Parent.Signal)
 local ChartHeaderNames = require(script.Parent.Parent.Parent.Constants).ServerJobsFormatting.ChartHeaderNames
 local Number: number? = tonumber(settings():GetFVariable("NewDevConsoleMaxGraphCount"))
 local config = {
-	[ChartHeaderNames[1]] = function(p1, p2): boolean --[[ Line: 11 ]]
+	[ChartHeaderNames[1]] = function(p1, p2): boolean
 		return p1.name < p2.name
 	end,
-	[ChartHeaderNames[2]] = function(p1, p2): boolean --[[ Line: 14 ]]
+	[ChartHeaderNames[2]] = function(p1, p2): boolean
 		return p1.dataStats.dataSet:back().data[1] < p2.dataStats.dataSet:back().data[1]
 	end,
-	[ChartHeaderNames[3]] = function(p1, p2): boolean --[[ Line: 17 ]]
+	[ChartHeaderNames[3]] = function(p1, p2): boolean
 		return p1.dataStats.dataSet:back().data[2] < p2.dataStats.dataSet:back().data[2]
 	end,
-	[ChartHeaderNames[4]] = function(p1, p2): boolean --[[ Line: 20 ]]
+	[ChartHeaderNames[4]] = function(p1, p2): boolean
 		return p1.dataStats.dataSet:back().data[3] < p2.dataStats.dataSet:back().data[3]
 	end
 }
@@ -22,7 +22,7 @@ local GetClientReplicatorModule = require(script.Parent.Parent.Parent.Util.getCl
 local ServerJobsDataModule = {}
 ServerJobsDataModule.__index = ServerJobsDataModule
 
-function ServerJobsDataModule.new() --[[ Line: 32 ]]
+function ServerJobsDataModule.new()
 	-- upvalues: ServerJobsDataModule (copy), SignalModule (copy), ChartHeaderNames (copy)
 	local t = {}
 	setmetatable(t, ServerJobsDataModule)
@@ -36,7 +36,7 @@ function ServerJobsDataModule.new() --[[ Line: 32 ]]
 	return t
 end
 
-function ServerJobsDataModule:setSortType(_sortType) --[[ Line: 46 ]]
+function ServerJobsDataModule:setSortType(_sortType)
 	-- upvalues: config (copy)
 	if config[_sortType] then
 		self._sortType = _sortType
@@ -48,19 +48,19 @@ function ServerJobsDataModule:setSortType(_sortType) --[[ Line: 46 ]]
 	end
 end
 
-function ServerJobsDataModule:getSortType() --[[ Line: 56 ]]
+function ServerJobsDataModule:getSortType()
 	return self._sortType
 end
 
-function ServerJobsDataModule:Signal() --[[ Line: 60 ]]
+function ServerJobsDataModule:Signal()
 	return self._serverJobsUpdated
 end
 
-function ServerJobsDataModule:getCurrentData() --[[ Line: 64 ]]
+function ServerJobsDataModule:getCurrentData()
 	return self._sortedJobsData
 end
 
-function ServerJobsDataModule:updateServerJobsData(Jobs) --[[ Line: 68 ]]
+function ServerJobsDataModule:updateServerJobsData(Jobs)
 	-- upvalues: CircularBufferModule (copy), Number (copy), MaxOfTableModule (copy), MinOfTableModule (copy)
 	self._lastUpdate = os.time()
 	
@@ -113,16 +113,16 @@ function ServerJobsDataModule:updateServerJobsData(Jobs) --[[ Line: 68 ]]
 	end
 end
 
-function ServerJobsDataModule:isRunning() --[[ Line: 141 ]]
+function ServerJobsDataModule:isRunning()
 	return self._isRunning
 end
 
-function ServerJobsDataModule:start() --[[ Line: 145 ]]
+function ServerJobsDataModule:start()
 	-- upvalues: GetClientReplicatorModule (copy)
 	local ClientReplicatorModule = GetClientReplicatorModule()
 	
 	if ClientReplicatorModule and not self._statsListenerConnection then
-		self._statsListenerConnection = ClientReplicatorModule.StatsReceived:connect(function(Stats) --[[ Line: 148 ]]
+		self._statsListenerConnection = ClientReplicatorModule.StatsReceived:connect(function(Stats)
 			-- upvalues: self (copy)
 			local Jobs = Stats.Jobs
 			
@@ -136,7 +136,7 @@ function ServerJobsDataModule:start() --[[ Line: 145 ]]
 	end
 end
 
-function ServerJobsDataModule:stop() --[[ Line: 161 ]]
+function ServerJobsDataModule:stop()
 	if self._statsListenerConnection then
 		self._statsListenerConnection:Disconnect()
 		self._statsListenerConnection = nil

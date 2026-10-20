@@ -16,7 +16,7 @@ local config = {
 	size = require(Foundation.Enums.InputSize).Medium
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 57 | Named "ButtonGroup" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), DevAssertModule (copy), OrientationModule (copy), FillBehaviorModule (copy), ReactModule (copy), ButtonModule (copy), ViewModule (copy), WithCommonPropsModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	DevAssertModule(#WithDefaultsModuleResult.buttons <= WithDefaultsModuleResult.maxButtonCount, `ButtonGroup: a maximum of {WithDefaultsModuleResult.maxButtonCount} buttons is supported, got {#WithDefaultsModuleResult.buttons}.`)

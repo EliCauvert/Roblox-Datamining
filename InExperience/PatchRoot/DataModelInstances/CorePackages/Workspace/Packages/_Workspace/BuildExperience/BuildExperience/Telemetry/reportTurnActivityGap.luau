@@ -10,12 +10,12 @@ local Config = {
 	lastUpdated = { 2026, 6, 30 }
 }
 
-local function _(p1: number): boolean --[[ Line: 23 | Named "shouldSample" ]]
+local function _(p1: number): boolean
 	return p1 > 0 and (p1 >= 10000 or math.random(1, 10000) <= p1)
 end
 
 return {
-	log = function(Value: number, IsFirstActivity, UniverseId) --[[ Line: 33 ]]
+	log = function(Value: number, IsFirstActivity, UniverseId)
 		-- upvalues: FFlagBuildExperiencePromptFailureTelemetry (copy), SendBuildExperienceStatModule (copy), Config (copy), TelemetryService (copy)
 		if FFlagBuildExperiencePromptFailureTelemetry then
 			SendBuildExperienceStatModule({

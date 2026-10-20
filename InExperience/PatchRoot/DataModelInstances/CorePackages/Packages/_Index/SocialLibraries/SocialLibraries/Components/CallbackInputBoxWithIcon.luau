@@ -28,7 +28,7 @@ CallbackInputBoxWithIcon.defaultProps = {
 	clearIconColor3 = Color3.new(1, 1, 0)
 }
 
-function CallbackInputBoxWithIcon.render(p1) --[[ Line: 40 ]]
+function CallbackInputBoxWithIcon.render(p1)
 	-- upvalues: Roact (copy), CallbackInputBoxModule (copy)
 	local IconCellWidth: number = p1.props.iconCellWidth
 	local IconSize = p1.props.iconSize

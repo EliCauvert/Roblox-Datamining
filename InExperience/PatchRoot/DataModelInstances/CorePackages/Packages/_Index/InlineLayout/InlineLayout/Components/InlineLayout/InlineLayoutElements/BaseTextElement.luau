@@ -11,20 +11,20 @@ local GetFontFaceModule = require(Parent.Utils.getFontFace)
 local JoinFunction = DashModule.join
 local t = {}
 
-local function _(p1, p2): string --[[ Line: 61 | Named "formatTextWithEngineTag" ]]
+local function _(p1, p2): string
 	-- upvalues: DashModule (copy)
-	return `<{p2.name}{DashModule.reduce(p2.attributes, function(p3, Text: string, p4): string --[[ Line: 62 ]]
+	return `<{p2.name}{DashModule.reduce(p2.attributes, function(p3, Text: string, p4): string
 		local v1: string = if string.find(Text, "\"") then "'" else "\""
 		
 		return `{p3} {p4}={v1}{Text}{v1}`
 	end, "")}>{p1}</{p2.name}>`
 end
 
-local _ = function(p1, p2) --[[ Line: 70 | Named "getRichText" ]]
+local _ = function(p1, p2)
 	-- upvalues: Escape (copy), DashModule (copy)
-	return (DashModule.reduce(p2, function(p3, p4): string --[[ Line: 72 ]]
+	return (DashModule.reduce(p2, function(p3, p4): string
 		-- upvalues: DashModule (upval)
-		return `<{p4.name}{DashModule.reduce(p4.attributes, function(p5, Text: string, p6): string --[[ Line: 62 ]]
+		return `<{p4.name}{DashModule.reduce(p4.attributes, function(p5, Text: string, p6): string
 			local v1: string = if string.find(Text, "\"") then "'" else "\""
 			
 			return `{p5} {p6}={v1}{Text}{v1}`
@@ -36,7 +36,7 @@ local BaseTextElementModule = {}
 BaseTextElementModule.__index = BaseTextElementModule
 BaseTextElementModule.__type = require(Parent.Utils.InlineElementType)
 
-function BaseTextElementModule.new(Element, Props, MapProps) --[[ Line: 82 ]]
+function BaseTextElementModule.new(Element, Props, MapProps)
 	-- upvalues: BaseTextElementModule (copy), DashModule (copy), TextSplitByModule (copy), Escape (copy)
 	local self = setmetatable({}, BaseTextElementModule)
 	self.props = Props
@@ -52,7 +52,7 @@ function BaseTextElementModule.new(Element, Props, MapProps) --[[ Line: 82 ]]
 	return self
 end
 
-function BaseTextElementModule:_clone(p1) --[[ Line: 116 ]]
+function BaseTextElementModule:_clone(p1)
 	-- upvalues: BaseTextElementModule (copy)
 	return BaseTextElementModule.new(self.Element, p1 or self.props, self.mapProps)
 end
@@ -64,15 +64,15 @@ if IsCliFunction() then
 	Module.__index = Module
 	TextService = setmetatable({}, Module)
 	
-	function Module:GetTextBoundsAsync() --[[ Line: 127 ]]
+	function Module:GetTextBoundsAsync()
 		return { X = 100 }
 	end
 end
-function BaseTextElementModule:getWidth() --[[ Line: 132 ]]
+function BaseTextElementModule:getWidth()
 	return self:_getWidth(self.props.Text)
 end
 
-function BaseTextElementModule:_getWidth(Text) --[[ Line: 136 ]]
+function BaseTextElementModule:_getWidth(Text)
 	-- upvalues: GetFontFaceModule (copy), Escape (copy), DashModule (copy), TextService (ref), t (copy)
 	local GetTextBoundsParams = Instance.new("GetTextBoundsParams")
 	GetTextBoundsParams.Font = GetFontFaceModule(self.props.fontStyle)
@@ -80,9 +80,9 @@ function BaseTextElementModule:_getWidth(Text) --[[ Line: 136 ]]
 	GetTextBoundsParams.Text = Text
 	
 	if self.hasRichText then
-		GetTextBoundsParams.Text = DashModule.reduce(self.props.EngineTags, function(p1, p2): string --[[ Line: 72 ]]
+		GetTextBoundsParams.Text = DashModule.reduce(self.props.EngineTags, function(p1, p2): string
 			-- upvalues: DashModule (upval)
-			return `<{p2.name}{DashModule.reduce(p2.attributes, function(p3, Text: string, p4): string --[[ Line: 62 ]]
+			return `<{p2.name}{DashModule.reduce(p2.attributes, function(p3, Text: string, p4): string
 				local v1: string = if string.find(Text, "\"") then "'" else "\""
 				
 				return `{p3} {p4}={v1}{Text}{v1}`
@@ -90,7 +90,7 @@ function BaseTextElementModule:_getWidth(Text) --[[ Line: 136 ]]
 		end, (Escape.escapeRichFormatting(Text)))
 		GetTextBoundsParams.RichText = true
 	end
-	local Success, Result = pcall(function() --[[ Line: 148 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: TextService (upval), GetTextBoundsParams (copy)
 		return TextService:GetTextBoundsAsync(GetTextBoundsParams).X
 	end)
@@ -107,9 +107,9 @@ function BaseTextElementModule:_getWidth(Text) --[[ Line: 136 ]]
 	return TextService:GetTextBoundsAsync(GetTextBoundsParams).X
 end
 
-function BaseTextElementModule:split(p1, p2) --[[ Line: 166 ]]
+function BaseTextElementModule:split(p1, p2)
 	-- upvalues: SplitTextModule (copy), TextSplitByModule (copy), JoinFunction (copy)
-	local SplitTextModuleResult, SplitTextModuleResult2 = SplitTextModule(if self.canForceSplit and p2 then TextSplitByModule.Symbol else self.splitBy, function(p3) --[[ Line: 168 ]]
+	local SplitTextModuleResult, SplitTextModuleResult2 = SplitTextModule(if self.canForceSplit and p2 then TextSplitByModule.Symbol else self.splitBy, function(p3)
 		-- upvalues: self (copy)
 		return self:_getWidth(p3)
 	end, self.props.Text, p1)
@@ -122,7 +122,7 @@ function BaseTextElementModule:split(p1, p2) --[[ Line: 166 ]]
 	end
 end
 
-function BaseTextElementModule:trimStart() --[[ Line: 181 ]]
+function BaseTextElementModule:trimStart()
 	-- upvalues: JoinFunction (copy)
 	local Text: string = self.props.Text
 	
@@ -135,13 +135,13 @@ function BaseTextElementModule:trimStart() --[[ Line: 181 ]]
 	end
 end
 
-function BaseTextElementModule:render(Id, LayoutOrder) --[[ Line: 196 ]]
+function BaseTextElementModule:render(Id, LayoutOrder)
 	-- upvalues: Escape (copy), DashModule (copy), ReactModule (copy), JoinFunction (copy)
 	return ReactModule.createElement(self.Element, self.mapProps(JoinFunction(self.props, {
 		id = Id,
-		Text = if self.hasRichText and self.props.Text and self.props.EngineTags then DashModule.reduce(self.props.EngineTags, function(p1, p2): string --[[ Line: 72 ]]
+		Text = if self.hasRichText and self.props.Text and self.props.EngineTags then DashModule.reduce(self.props.EngineTags, function(p1, p2): string
 			-- upvalues: DashModule (upval)
-			return `<{p2.name}{DashModule.reduce(p2.attributes, function(p3, Text: string, p4): string --[[ Line: 62 ]]
+			return `<{p2.name}{DashModule.reduce(p2.attributes, function(p3, Text: string, p4): string
 				local v1: string = if string.find(Text, "\"") then "'" else "\""
 				
 				return `{p3} {p4}={v1}{Text}{v1}`

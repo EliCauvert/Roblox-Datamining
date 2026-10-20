@@ -3,15 +3,15 @@ local ReactModule = require(Parent.React)
 local Localization = require(Parent.InExperienceLocales).Localization
 local UseRobloxLocaleModule = require(script.Parent.useRobloxLocale)
 
-return function() --[[ Line: 20 | Named "useInExperienceLocalization" ]]
+return function()
 	-- upvalues: UseRobloxLocaleModule (copy), ReactModule (copy), Localization (copy)
 	local UseRobloxLocaleModuleResult = UseRobloxLocaleModule()
 	
-	return ReactModule.useMemo(function() --[[ Line: 22 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: Localization (upval), UseRobloxLocaleModuleResult (copy)
 		local NewLocalization = Localization.new(UseRobloxLocaleModuleResult)
 		
-		return function(p1, p2) --[[ Line: 24 ]]
+		return function(p1, p2)
 			-- upvalues: NewLocalization (copy)
 			return NewLocalization:Format(p1, p2)
 		end

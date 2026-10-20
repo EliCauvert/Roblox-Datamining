@@ -15,7 +15,7 @@ local GroupsListHeaderModule = require(script.Parent.GroupsListHeader)
 local GroupListItemSkeletonModule = require(script.Parent.GroupListItemSkeleton)
 local Frozen = table.freeze({})
 
-local function renderSkeletons() --[[ Line: 33 ]]
+local function renderSkeletons()
 	-- upvalues: ReactModule (copy), GroupListItemSkeletonModule (copy)
 	local Elements = {}
 	
@@ -25,7 +25,7 @@ local function renderSkeletons() --[[ Line: 33 ]]
 	return Elements
 end
 
-return function(p1) --[[ Line: 43 | Named "GroupsList" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), Frozen (copy), ReactModule (copy), View (copy), renderSkeletons (copy), ScrollView (copy), ScrollBarVisibility (copy), GroupsListSectionModule (copy), GroupsListHeaderModule (copy), GroupsListToolbarModule (copy), Text (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		primaryHeading = TextKeysModule.HeadingPrimary,
@@ -37,7 +37,7 @@ return function(p1) --[[ Line: 43 | Named "GroupsList" ]]
 	local GroupsList = p1.groupsList or Frozen
 	local UseStateResult, UseStateResult2 = ReactModule.useState("")
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 56 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: GroupsList (copy)
 		for _, value in ipairs(GroupsList) do
 			if value.isPrimary then
@@ -46,7 +46,7 @@ return function(p1) --[[ Line: 43 | Named "GroupsList" ]]
 		end
 		return nil
 	end, { GroupsList })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 65 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), GroupsList (copy)
 		if not UseMemoResult then
 			return GroupsList
@@ -60,18 +60,18 @@ return function(p1) --[[ Line: 43 | Named "GroupsList" ]]
 		end
 		return List
 	end, { GroupsList, UseMemoResult })
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 79 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy)
 		return if UseMemoResult then { UseMemoResult } else {}
 	end, { UseMemoResult })
-	ReactModule.useEffect(function() --[[ Line: 86 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseRefResult (copy)
 		if UseStateResult ~= "" and UseRefResult.current then
 			UseRefResult.current.CanvasPosition = Vector2.new(0, 0)
 		end
 	end, { UseStateResult })
 	local IsNotUseStateResultMatch = UseStateResult ~= ""
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 94 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: IsNotUseStateResultMatch (copy), UseStateResult (copy), GroupsList (copy)
 		if not IsNotUseStateResultMatch then
 			return nil
@@ -87,7 +87,7 @@ return function(p1) --[[ Line: 43 | Named "GroupsList" ]]
 		return t
 	end, { GroupsList, UseStateResult })
 	local NoNextEntry: boolean = IsNotUseStateResultMatch and (UseMemoResult3 ~= nil and next(UseMemoResult3) == nil)
-	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 111 ]]
+	local UseMemoResult4 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), UseLocalizationResult (copy), GroupsList (copy), NoNextEntry (copy)
 		return if p1.isLoading or not p1.groupsList then nil elseif p1.loadFailure then UseLocalizationResult.loadFailure elseif #GroupsList == 0 then UseLocalizationResult.notInGroups elseif NoNextEntry then UseLocalizationResult.noResults else nil
 	end, {

@@ -7,7 +7,7 @@ local AudioPlayerUpdateAssetAPIEngineFeature = game:GetEngineFeature("AudioPlaye
 local PartyAudioPlayerModule = {}
 PartyAudioPlayerModule.__index = PartyAudioPlayerModule
 
-function PartyAudioPlayerModule.new() --[[ Line: 17 ]]
+function PartyAudioPlayerModule.new()
 	-- upvalues: PartyAudioPlayerModule (copy)
 	local config = {
 		isInitialized = false,
@@ -20,7 +20,7 @@ function PartyAudioPlayerModule.new() --[[ Line: 17 ]]
 	return config
 end
 
-function PartyAudioPlayerModule:addSound(p1, Asset) --[[ Line: 28 ]]
+function PartyAudioPlayerModule:addSound(p1, Asset)
 	-- upvalues: AudioPlayerUpdateAssetAPIEngineFeature (copy)
 	local AudioPlayer = Instance.new("AudioPlayer")
 	AudioPlayer.Parent = workspace
@@ -37,7 +37,7 @@ function PartyAudioPlayerModule:addSound(p1, Asset) --[[ Line: 28 ]]
 	self.audioPlayers[p1] = AudioPlayer
 end
 
-function PartyAudioPlayerModule:initialize() --[[ Line: 46 ]]
+function PartyAudioPlayerModule:initialize()
 	-- upvalues: PartyVoiceAudioFaderVolumePerc (copy), ReplicatedStorage (copy), PartyVoiceVolumeEngineFeature (copy), UserGameSettings (copy)
 	if PartyVoiceAudioFaderVolumePerc ~= 100 then
 		ReplicatedStorage:WaitForChild("AudioFader").Volume = PartyVoiceAudioFaderVolumePerc / 100
@@ -60,14 +60,14 @@ function PartyAudioPlayerModule:initialize() --[[ Line: 46 ]]
 	self.isInitialized = true
 	
 	if PartyVoiceVolumeEngineFeature then
-		self.onPartyVoiceVolumeChangedSignal = UserGameSettings:GetPropertyChangedSignal("PartyVoiceVolume"):Connect(function() --[[ Line: 75 ]]
+		self.onPartyVoiceVolumeChangedSignal = UserGameSettings:GetPropertyChangedSignal("PartyVoiceVolume"):Connect(function()
 			-- upvalues: self (copy)
 			self:playSound("join")
 		end)
 	end
 end
 
-function PartyAudioPlayerModule:playSound(p1) --[[ Line: 81 ]]
+function PartyAudioPlayerModule:playSound(p1)
 	if not self.isInitialized then
 		self:initialize()
 	end
@@ -79,7 +79,7 @@ function PartyAudioPlayerModule:playSound(p1) --[[ Line: 81 ]]
 	end
 end
 
-function PartyAudioPlayerModule:disconnect() --[[ Line: 94 ]]
+function PartyAudioPlayerModule:disconnect()
 	if self.onPartyVoiceVolumeChangedSignal then
 		self.onPartyVoiceVolumeChangedSignal:Disconnect()
 	end

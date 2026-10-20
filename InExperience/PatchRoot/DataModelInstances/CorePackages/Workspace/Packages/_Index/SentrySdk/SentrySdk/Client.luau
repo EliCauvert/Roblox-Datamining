@@ -2,19 +2,19 @@
 local VersionModule = require(script.Parent.Version)
 local IsStudio = game:GetService("RunService"):IsStudio()
 
-local function _(): boolean --[[ Line: 8 | Named "isBundled" ]]
+local function _(): boolean
 	return type(_G.LUAUFORGE_BUNDLED_FILE_PATH) == "string"
 end
 
-local _ = function(p1): boolean --[[ Line: 13 | Named "isTableEmpty" ]]
+local _ = function(p1): boolean
 	return next(p1) == nil
 end
 
-local _ = function(p1, p2) --[[ Line: 18 | Named "parseJSON" ]]
+local _ = function(p1, p2)
 	if type(p2) ~= "string" then
 		return nil, "Input is not a string"
 	end
-	local Success, Result = pcall(function() --[[ Line: 23 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: p1 (copy), p2 (copy)
 		return p1:JSONDecode(p2)
 	end)
@@ -26,8 +26,8 @@ local _ = function(p1, p2) --[[ Line: 18 | Named "parseJSON" ]]
 	end
 end
 
-local _ = function(HttpService, p1) --[[ Line: 35 | Named "createCallbackWithEventId" ]]
-	return if p1 then function(p2, p3) --[[ Line: 46 ]]
+local _ = function(HttpService, p1)
+	return if p1 then function(p2, p3)
 		-- upvalues: HttpService (copy), p1 (copy)
 		local Id = nil
 		local v1 = nil
@@ -38,7 +38,7 @@ local _ = function(HttpService, p1) --[[ Line: 35 | Named "createCallbackWithEve
 				local v2 = nil
 				
 				if type(Body) == "string" then
-					local Success, Result = pcall(function() --[[ Line: 23 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: HttpService (copy), Body (copy)
 						return HttpService:JSONDecode(Body)
 					end)
@@ -67,7 +67,7 @@ end
 local ClientModule = {}
 ClientModule.__index = ClientModule
 
-function ClientModule:new(Config, HttpService) --[[ Line: 152 ]]
+function ClientModule:new(Config, HttpService)
 	-- upvalues: RobloxTransportModule (copy), ClientModule (copy)
 	if not Config.dsn then
 		error("DSN is required")
@@ -83,7 +83,7 @@ function ClientModule:new(Config, HttpService) --[[ Line: 152 ]]
 	}, ClientModule))
 end
 
-function ClientModule:_buildDebugMeta() --[[ Line: 183 ]]
+function ClientModule:_buildDebugMeta()
 	local LUAUFORGESENTRYDEBUGIDS = _G.LUAUFORGE_SENTRY_DEBUG_IDS
 	
 	if type(LUAUFORGESENTRYDEBUGIDS) ~= "table" then
@@ -101,7 +101,7 @@ function ClientModule:_buildDebugMeta() --[[ Line: 183 ]]
 	return if #Images == 0 then nil else { images = Images }
 end
 
-function ClientModule:capture_message(Message, p1, p2, p3) --[[ Line: 209 ]]
+function ClientModule:capture_message(Message, p1, p2, p3)
 	-- upvalues: VersionModule (copy)
 	local NoNextEntry = next(self.extra) == nil
 	local config = {
@@ -126,7 +126,7 @@ function ClientModule:capture_message(Message, p1, p2, p3) --[[ Line: 209 ]]
 		}
 	}
 	local HttpService = self.httpService
-	self.transport:send(config, if p2 then function(p4, p5) --[[ Line: 46 ]]
+	self.transport:send(config, if p2 then function(p4, p5)
 		-- upvalues: HttpService (copy), p2 (copy)
 		local Id = nil
 		local v1 = nil
@@ -137,7 +137,7 @@ function ClientModule:capture_message(Message, p1, p2, p3) --[[ Line: 209 ]]
 				local v2 = nil
 				
 				if type(Body) == "string" then
-					local Success, Result = pcall(function() --[[ Line: 23 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: HttpService (copy), Body (copy)
 						return HttpService:JSONDecode(Body)
 					end)
@@ -163,7 +163,7 @@ function ClientModule:capture_message(Message, p1, p2, p3) --[[ Line: 209 ]]
 	end else nil)
 end
 
-function ClientModule:capture_exception(p1, p2, List, Threads, p3, p4, p5, List1) --[[ Line: 253 ]]
+function ClientModule:capture_exception(p1, p2, List, Threads, p3, p4, p5, List1)
 	-- upvalues: VersionModule (copy), IsStudio (copy)
 	local P18 = p2 or "error"
 	local Contexts = {
@@ -227,7 +227,7 @@ function ClientModule:capture_exception(p1, p2, List, Threads, p3, p4, p5, List1
 	end
 	config1.debug_meta = self:_buildDebugMeta()
 	local HttpService = self.httpService
-	self.transport:send(config1, if p3 then function(p6, p7) --[[ Line: 46 ]]
+	self.transport:send(config1, if p3 then function(p6, p7)
 		-- upvalues: HttpService (copy), p3 (copy)
 		local Id = nil
 		local v1 = nil
@@ -238,7 +238,7 @@ function ClientModule:capture_exception(p1, p2, List, Threads, p3, p4, p5, List1
 				local v2 = nil
 				
 				if type(Body) == "string" then
-					local Success, Result = pcall(function() --[[ Line: 23 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: HttpService (copy), Body (copy)
 						return HttpService:JSONDecode(Body)
 					end)
@@ -264,10 +264,10 @@ function ClientModule:capture_exception(p1, p2, List, Threads, p3, p4, p5, List1
 	end else nil)
 end
 
-function ClientModule:send_event_with_attachments(p6, p7, Callback: (any, any, any) -> ()) --[[ Line: 354 ]]
+function ClientModule:send_event_with_attachments(p6, p7, Callback: (any, any, any) -> ())
 	if p6 and #p7 ~= 0 then
 		local HttpService = self.httpService
-		self.transport:send_attachments(p6, p7, if Callback then function(p8, p9) --[[ Line: 46 ]]
+		self.transport:send_attachments(p6, p7, if Callback then function(p8, p9)
 			-- upvalues: HttpService (copy), Callback (copy)
 			local Id = nil
 			local v1 = nil
@@ -278,7 +278,7 @@ function ClientModule:send_event_with_attachments(p6, p7, Callback: (any, any, a
 					local v2 = nil
 					
 					if type(Body) == "string" then
-						local Success, Result = pcall(function() --[[ Line: 23 ]]
+						local Success, Result = pcall(function()
 							-- upvalues: HttpService (copy), Body (copy)
 							return HttpService:JSONDecode(Body)
 						end)
@@ -310,19 +310,19 @@ function ClientModule:send_event_with_attachments(p6, p7, Callback: (any, any, a
 	end
 end
 
-function ClientModule:set_user(User) --[[ Line: 376 ]]
+function ClientModule:set_user(User)
 	self.user = User
 end
 
-function ClientModule:set_tag(p6, p7) --[[ Line: 381 ]]
+function ClientModule:set_tag(p6, p7)
 	self.tags[p6] = tostring(p7)
 end
 
-function ClientModule:set_extra(p6, p7) --[[ Line: 386 ]]
+function ClientModule:set_extra(p6, p7)
 	self.extra[p6] = p7
 end
 
-function ClientModule:add_breadcrumb(p6) --[[ Line: 391 ]]
+function ClientModule:add_breadcrumb(p6)
 	p6.timestamp = os.time()
 	table.insert(self.breadcrumbs, p6)
 	

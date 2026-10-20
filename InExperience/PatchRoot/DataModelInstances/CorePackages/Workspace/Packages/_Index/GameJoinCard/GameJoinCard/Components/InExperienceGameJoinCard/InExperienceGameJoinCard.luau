@@ -4,7 +4,7 @@ local MobileGameJoinCardModule = require(GameJoinCard.Components.MobileGameJoinC
 local UseInExperienceGameJoinCardViewModelModule = require(script.Parent.useInExperienceGameJoinCardViewModel)
 local _ = require(script.Parent.Types)
 
-return function(p1) --[[ Line: 12 | Named "InExperienceGameJoinCard" ]]
+return function(p1)
 	-- upvalues: UseInExperienceGameJoinCardViewModelModule (copy), ReactModule (copy), MobileGameJoinCardModule (copy)
 	return ReactModule.createElement(MobileGameJoinCardModule, (UseInExperienceGameJoinCardViewModelModule(p1)))
 end

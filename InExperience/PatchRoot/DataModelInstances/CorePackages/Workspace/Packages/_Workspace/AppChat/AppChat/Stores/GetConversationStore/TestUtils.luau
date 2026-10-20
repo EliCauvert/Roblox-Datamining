@@ -1,5 +1,5 @@
 ﻿return {
-	seedConversationStore = function(p1, p2, p3) --[[ Line: 2 ]]
+	seedConversationStore = function(p1, p2, p3)
 		p1.clear()
 		local Iterator = pairs
 		local P1 = p2 or {}

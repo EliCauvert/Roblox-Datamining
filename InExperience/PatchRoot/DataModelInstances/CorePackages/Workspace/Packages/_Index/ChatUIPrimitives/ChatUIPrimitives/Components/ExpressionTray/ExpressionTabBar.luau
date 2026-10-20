@@ -3,7 +3,7 @@ local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local CreateNextOrderFunction = require(Parent.ReactUtils).createNextOrder
 
-return ReactModule.memo(function(Frame) --[[ Line: 34 | Named "ExpressionTabBar" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), CreateNextOrderFunction (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local v1 = #Frame.tabs > 1
@@ -19,7 +19,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 34 | Named "ExpressionTabBar"
 			stateLayer = {
 				affordance = FoundationModule.Enums.StateLayerAffordance.None
 			},
-			onActivated = function() --[[ Line: 49 ]]
+			onActivated = function()
 				-- upvalues: Frame (copy), tab (copy)
 				Frame.onTabActivated(tab.id)
 			end,

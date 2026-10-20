@@ -4,7 +4,7 @@ local ReactModule = require(VirtualEvents.Parent.React)
 local UseLocalizationFunction = require(VirtualEvents.Parent.Localization).Hooks.useLocalization
 local _ = require(VirtualEvents.Parent.VirtualEventsState)
 
-return function(p1, p2, p3, p4) --[[ Line: 33 | Named "useCTAProps" ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		notifyMe = "Feature.VirtualEvents.NotifyMe",
@@ -12,7 +12,7 @@ return function(p1, p2, p3, p4) --[[ Line: 33 | Named "useCTAProps" ]]
 		join = "Feature.VirtualEvents.Join",
 		goHome = "Feature.VirtualEvents.GoHome"
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 46 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), p2 (copy), UseLocalizationResult (copy), p4 (copy), p3 (copy)
 		return if p1.eventStatus == "cancelled" or p1.eventStatus == "moderated" then {
 			icon = nil,
@@ -36,7 +36,7 @@ return function(p1, p2, p3, p4) --[[ Line: 33 | Named "useCTAProps" ]]
 			onActivated = p4.onJoinEvent
 		} else nil
 	end, { p1, p2, p4 })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 84 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), p2 (copy), p4 (copy)
 		return if p1.eventStatus == "cancelled" or p1.eventStatus == "moderated" or p2 == "Elapsed" then nil else {
 			text = nil,
@@ -46,7 +46,7 @@ return function(p1, p2, p3, p4) --[[ Line: 33 | Named "useCTAProps" ]]
 		}
 	end, { p1, p2, p4 })
 	
-	return (ReactModule.useMemo(function() --[[ Line: 101 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), UseMemoResult1 (copy)
 		return { button = UseMemoResult, icon = UseMemoResult1 }
 	end, { UseMemoResult, UseMemoResult1 }))

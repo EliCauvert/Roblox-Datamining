@@ -5,7 +5,7 @@ local ItemKeyRegistryModule = require(script.Parent.ItemKeyRegistry)
 local MutationControllerModule = require(script.Parent.MutationController)
 local ReadDenseRangeModule = require(script.Parent.readDenseRange)
 
-return function(Index: number, p1, p2) --[[ Line: 27 | Named "createRingBufferDataSource" ]]
+return function(Index: number, p1, p2)
 	-- upvalues: ItemKeyRegistryModule (copy), MutationControllerModule (copy), ReadDenseRangeModule (copy), DataSourceChangeTypeModule (copy)
 	local Values: boolean = Index > 0 and Index % 1 == 0
 	assert(Values, "DataSource.ringBuffer: capacity must be a positive integer")
@@ -22,10 +22,10 @@ return function(Index: number, p1, p2) --[[ Line: 27 | Named "createRingBufferDa
 		Values[i] = value
 		Keys[i] = RebuildResult[i]
 	end
-	local MutationControllerModuleResult = MutationControllerModule(function() --[[ Line: 42 ]]
+	local MutationControllerModuleResult = MutationControllerModule(function()
 		-- upvalues: CountP1 (ref)
 		return CountP1
-	end, function() --[[ Line: 44 ]]
+	end, function()
 		-- upvalues: Values (ref), Keys (ref), Head (ref), CountP1 (ref), DataSourceRingBuffer (copy)
 		return {
 			values = table.clone(Values),
@@ -34,7 +34,7 @@ return function(Index: number, p1, p2) --[[ Line: 27 | Named "createRingBufferDa
 			count = CountP1,
 			keyRegistry = DataSourceRingBuffer.snapshot()
 		}
-	end, function(p3) --[[ Line: 52 ]]
+	end, function(p3)
 		-- upvalues: Values (ref), Keys (ref), Head (ref), CountP1 (ref), DataSourceRingBuffer (copy)
 		Values = p3.values
 		Keys = p3.keys
@@ -43,32 +43,32 @@ return function(Index: number, p1, p2) --[[ Line: 27 | Named "createRingBufferDa
 		DataSourceRingBuffer.restore(p3.keyRegistry)
 	end)
 	
-	local function _(p3): number --[[ Line: 60 | Named "physical" ]]
+	local function _(p3): number
 		-- upvalues: Head (ref), Index (copy)
 		return (Head + p3 - 2) % Index + 1
 	end
 	
 	local v1 = nil
 	v1 = {
-		getItemCount = function() --[[ Line: 66 ]]
+		getItemCount = function()
 			-- upvalues: CountP1 (ref)
 			return CountP1
 		end,
-		getItem = function(p3) --[[ Line: 69 ]]
+		getItem = function(p3)
 			-- upvalues: Values (ref), Head (ref), Index (copy)
 			return Values[(Head + p3 - 2) % Index + 1]
 		end,
-		getItemKey = function(p3) --[[ Line: 72 ]]
+		getItemKey = function(p3)
 			-- upvalues: Keys (ref), Head (ref), Index (copy)
 			return Keys[(Head + p3 - 2) % Index + 1]
 		end,
-		getItems = function(p3, p4) --[[ Line: 75 ]]
+		getItems = function(p3, p4)
 			-- upvalues: ReadDenseRangeModule (upval), CountP1 (ref), v1 (ref)
 			return ReadDenseRangeModule(CountP1, v1.getItem, p3, p4)
 		end,
 		subscribe = MutationControllerModuleResult.subscribe,
 		transaction = MutationControllerModuleResult.transaction,
-		push = function(p3) --[[ Line: 82 ]]
+		push = function(p3)
 			-- upvalues: CountP1 (ref), Index (copy), Head (ref), Keys (ref), DataSourceRingBuffer (copy), Values (ref), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
 			local Count: number = CountP1
 			
@@ -106,7 +106,7 @@ return function(Index: number, p1, p2) --[[ Line: 27 | Named "createRingBufferDa
 				}, Count)
 			end
 		end,
-		clear = function() --[[ Line: 106 ]]
+		clear = function()
 			-- upvalues: CountP1 (ref), Values (ref), Keys (ref), DataSourceRingBuffer (copy), Head (ref), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
 			local Count: number = CountP1
 			

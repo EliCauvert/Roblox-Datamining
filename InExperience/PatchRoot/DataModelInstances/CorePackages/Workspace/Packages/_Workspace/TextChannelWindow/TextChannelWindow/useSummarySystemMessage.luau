@@ -8,16 +8,16 @@ local FFlagExpChatTextChannelWindowWelcomeAndSummaryModule = require(script.Pare
 local UseInExperienceLocalizationFunction = require(Parent.ChatUIPrimitives).Hooks.useInExperienceLocalization
 local self = setmetatable({}, { __mode = "k" })
 
-return function(p1, Callback) --[[ Line: 30 | Named "useSummarySystemMessage" ]]
+return function(p1, Callback)
 	-- upvalues: MessageWriterContextModule (copy), UseInExperienceLocalizationFunction (copy), ReactModule (copy), FFlagExpChatTextChannelWindowWelcomeAndSummaryModule (copy), SignalsModule (copy), self (copy), MessageModule (copy), FoundationModule (copy)
 	local UseMessageWriterResult = MessageWriterContextModule.useMessageWriter()
 	local UseInExperienceLocalizationResult = UseInExperienceLocalizationFunction()
-	ReactModule.useEffect(function() --[[ Line: 34 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagExpChatTextChannelWindowWelcomeAndSummaryModule (upval), UseMessageWriterResult (copy), p1 (copy), SignalsModule (upval), Callback (copy), self (upval), UseInExperienceLocalizationResult (copy), MessageModule (upval), FoundationModule (upval)
 		if not FFlagExpChatTextChannelWindowWelcomeAndSummaryModule then return end
 		if not UseMessageWriterResult or p1 == nil then return end
 		if p1.Name ~= "RBXGeneral" then return end
-		return (SignalsModule.createEffect(function(p2) --[[ Line: 47 ]]
+		return (SignalsModule.createEffect(function(p2)
 			-- upvalues: Callback (upval), self (upval), p1 (copy), UseInExperienceLocalizationResult (upval), UseMessageWriterResult (upval), MessageModule (upval), FoundationModule (upval)
 			if not Callback(p2) or self[p1] then return end
 			local CoreScriptsTextChatChatWindowSummarySystemMessage = UseInExperienceLocalizationResult("CoreScripts.TextChat.ChatWindow.SummarySystemMessage")

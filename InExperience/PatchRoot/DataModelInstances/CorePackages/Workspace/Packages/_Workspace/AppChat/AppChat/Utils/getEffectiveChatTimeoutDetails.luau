@@ -4,7 +4,7 @@ local _ = require(script.Parent.serializeChatTimeoutRange)
 local FFlagAppChatEnforceTimeoutsOnUnfilteredChatModule = require(AppChat.Flags.FFlagAppChatEnforceTimeoutsOnUnfilteredChat)
 local FFlagAppChatReactiveFeatureRestrictions = require(AppChat.Parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
 
-return function(p1, p2, TrustedComms, p3) --[[ Line: 20 | Named "getEffectiveChatTimeoutDetails" ]]
+return function(p1, p2, TrustedComms, p3)
 	-- upvalues: FFlagAppChatReactiveFeatureRestrictions (copy), FFlagAppChatEnforceTimeoutsOnUnfilteredChatModule (copy), ConversationChannelsModule (copy)
 	local EndTimestamp = if p1 and p1.endTimestamp then p1.endTimestamp else 0
 	local EndTimestamp1 = if p2 and p2.endTimestamp then p2.endTimestamp else 0

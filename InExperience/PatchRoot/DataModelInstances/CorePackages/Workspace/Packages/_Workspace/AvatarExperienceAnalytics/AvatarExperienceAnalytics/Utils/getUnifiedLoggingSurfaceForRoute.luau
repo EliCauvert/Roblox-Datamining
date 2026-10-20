@@ -1,7 +1,7 @@
 ﻿local AvatarScreenProperties = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceNavigation).AvatarRoute.AvatarScreenProperties
 local GetUnifiedLoggingSurfaceModule = require(script.Parent.getUnifiedLoggingSurface)
 
-return function(p1) --[[ Line: 29 | Named "getUnifiedLoggingSurfaceForRoute" ]]
+return function(p1)
 	-- upvalues: AvatarScreenProperties (copy), GetUnifiedLoggingSurfaceModule (copy)
 	if p1 == nil then
 		return nil

@@ -7,7 +7,7 @@ local CommentsListRowContextModule = require(script.Parent.CommentsListRowContex
 local _ = require(script.Parent.Parent.Rows.CommentRowTypes)
 local FFlagViewRecyclerReact06 = require(Parent.SharedFlags).FFlagViewRecyclerReact06
 
-return function(p1) --[[ Line: 38 | Named "CommentsListView" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), CommentsListRowContextModule (copy), ViewRecyclerModule (copy), CommentsListItemsModule (copy), FFlagViewRecyclerReact06 (copy)
 	local _UDim = UDim.new(0, p1.rowBleed * -2)
 	

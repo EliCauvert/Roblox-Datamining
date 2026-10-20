@@ -38,7 +38,7 @@ local FFlagAppChatConsoleFocusFixesModule = require(AppChat.Flags.FFlagAppChatCo
 local ChatLandingStackNavigatorConnector = RoactModule.Component:extend("ChatLandingStackNavigatorConnector")
 ChatLandingStackNavigatorConnector.router = ChatLandingStackNavigatorModule.router
 
-function ChatLandingStackNavigatorConnector.render(p1) --[[ Line: 51 ]]
+function ChatLandingStackNavigatorConnector.render(p1)
 	-- upvalues: RoactModule (copy), FFlagAppChatConsoleFocusFixesModule (copy), ChatLandingStackNavigatorModule (copy)
 	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

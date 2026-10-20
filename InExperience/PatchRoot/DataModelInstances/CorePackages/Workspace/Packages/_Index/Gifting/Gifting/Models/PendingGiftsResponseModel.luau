@@ -4,7 +4,7 @@ local GiftModelUtilsModule = require(Gifting.Models.GiftModelUtils)
 local _ = require(Gifting.Types)
 local InterfaceResult = TModule.interface({ giftId = GiftModelUtilsModule.nonEmptyString })
 
-local function formatPendingGiftItem(p1) --[[ Line: 32 ]]
+local function formatPendingGiftItem(p1)
 	-- upvalues: TModule (copy), GiftModelUtilsModule (copy)
 	local v1, v2 = TModule.table(p1)
 	
@@ -23,7 +23,7 @@ local function formatPendingGiftItem(p1) --[[ Line: 32 ]]
 	end
 end
 
-local function formatPendingGift(p1) --[[ Line: 49 ]]
+local function formatPendingGift(p1)
 	-- upvalues: InterfaceResult (copy), GiftModelUtilsModule (copy), formatPendingGiftItem (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult(p1)
 	
@@ -49,7 +49,7 @@ local function formatPendingGift(p1) --[[ Line: 49 ]]
 end
 
 return {
-	format = function(p1) --[[ Line: 74 ]]
+	format = function(p1)
 		-- upvalues: GiftModelUtilsModule (copy), formatPendingGift (copy)
 		local Gifts, Gifts2 = GiftModelUtilsModule.formatList("gifts", p1.gifts or {}, formatPendingGift)
 		

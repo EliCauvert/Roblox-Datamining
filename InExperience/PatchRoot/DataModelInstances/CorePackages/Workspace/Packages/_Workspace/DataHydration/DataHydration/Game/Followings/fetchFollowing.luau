@@ -5,12 +5,12 @@ local PromiseModule = require(Parent.Promise)
 local GetLocalPlayerUserIdFunction = require(DataHydration.DataHydrationUtils).getLocalPlayerUserId
 local FollowingsUrlBuilderModule = require(script.Parent.FollowingsUrlBuilder)
 
-return function(p1) --[[ Line: 12 | Named "fetchFollowing" ]]
+return function(p1)
 	-- upvalues: GetLocalPlayerUserIdFunction (copy), PromiseModule (copy), FollowingsUrlBuilderModule (copy), HttpRequestModule (copy)
 	local LocalPlayerUserId: number = GetLocalPlayerUserIdFunction()
 	
 	return if LocalPlayerUserId and LocalPlayerUserId > 0 then HttpRequestModule.config({
-		requestFunction = function(p2, p3, p4) --[[ Line: 24 ]]
+		requestFunction = function(p2, p3, p4)
 			-- upvalues: HttpRequestModule (upval)
 			return HttpRequestModule.requestFunctions.HttpRbxApi(p2, p3, p4)
 		end

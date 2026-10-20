@@ -32,7 +32,7 @@ local Map = LuauPolyfillModule.Map
 local String = LuauPolyfillModule.String
 
 return {
-	rewireTypes = function(List, p1) --[[ Line: 92 ]]
+	rewireTypes = function(List, p1)
 		-- upvalues: IsSpecifiedDirectiveFunction (copy), GraphQLDirective (copy), Map (copy), IsObjectTypeFunction (copy), Object (copy), GraphQLObjectType (copy), IsInterfaceTypeFunction (copy), Array (copy), GraphQLInterfaceType (copy), IsUnionTypeFunction (copy), GraphQLUnionType (copy), IsInputObjectTypeFunction (copy), GraphQLInputObjectType (copy), IsEnumTypeFunction (copy), GraphQLEnumType (copy), IsScalarTypeFunction (copy), IsSpecifiedScalarTypeFunction (copy), GraphQLScalarType (copy), Error1 (copy), IsListTypeFunction (copy), GraphQLList (copy), IsNonNullTypeFunction (copy), GraphQLNonNull (copy), IsNamedTypeFunction (copy), IsNamedStubFunction (copy), GetBuiltInForStubFunction (copy), String (copy), Console (copy)
 		local NewResult = nil
 		local NewResult1 = nil
@@ -44,7 +44,7 @@ return {
 		local Callback3 = nil
 		local Callback1 = nil
 		
-		rewireDirective = function(p2) --[[ Line: 114 | Named "rewireDirective" ]]
+		rewireDirective = function(p2)
 			-- upvalues: IsSpecifiedDirectiveFunction (upval), Callback (ref), GraphQLDirective (upval)
 			if IsSpecifiedDirectiveFunction(p2) then
 				return p2
@@ -56,7 +56,7 @@ return {
 			end
 		end
 		
-		Callback = function(Args) --[[ Line: 123 | Named "rewireArgs" ]]
+		Callback = function(Args)
 			-- upvalues: Map (upval), Callback1 (ref)
 			local NewMap = Map.new()
 			
@@ -73,17 +73,17 @@ return {
 			return NewMap
 		end
 		
-		rewireNamedType = function(GetResult) --[[ Line: 138 | Named "rewireNamedType" ]]
+		rewireNamedType = function(GetResult)
 			-- upvalues: IsObjectTypeFunction (upval), Object (upval), Callback2 (ref), Callback3 (ref), GraphQLObjectType (upval), IsInterfaceTypeFunction (upval), Array (upval), GraphQLInterfaceType (upval), IsUnionTypeFunction (upval), GraphQLUnionType (upval), IsInputObjectTypeFunction (upval), Callback4 (ref), GraphQLInputObjectType (upval), IsEnumTypeFunction (upval), GraphQLEnumType (upval), IsScalarTypeFunction (upval), IsSpecifiedScalarTypeFunction (upval), GraphQLScalarType (upval), Error1 (upval)
 			if IsObjectTypeFunction(GetResult) then
 				local Config = GetResult:toConfig()
 				
 				return GraphQLObjectType.new((Object.assign({}, Config, {
-					fields = function() --[[ Line: 143 ]]
+					fields = function()
 						-- upvalues: Callback2 (upval), Config (copy)
 						return Callback2(Config.fields)
 					end,
-					interfaces = function() --[[ Line: 146 ]]
+					interfaces = function()
 						-- upvalues: Callback3 (upval), Config (copy)
 						return Callback3(Config.interfaces)
 					end
@@ -92,14 +92,14 @@ return {
 			if IsInterfaceTypeFunction(GetResult) then
 				local Config1 = GetResult:toConfig()
 				local AssignResult = Object.assign({}, Config1, {
-					fields = function() --[[ Line: 154 ]]
+					fields = function()
 						-- upvalues: Callback2 (upval), Config1 (copy)
 						return Callback2(Config1.fields)
 					end
 				})
 				
 				if Array.indexOf(Object.keys(AssignResult), "interfaces") ~= -1 then
-					function AssignResult:interfaces() --[[ Line: 159 ]]
+					function AssignResult:interfaces()
 						-- upvalues: Callback3 (upval), Config1 (copy)
 						return Callback3(Config1.interfaces)
 					end
@@ -110,7 +110,7 @@ return {
 					local Config2 = GetResult:toConfig()
 					
 					return GraphQLUnionType.new((Object.assign({}, Config2, {
-						types = function() --[[ Line: 169 ]]
+						types = function()
 							-- upvalues: Callback3 (upval), Config2 (copy)
 							return Callback3(Config2.types)
 						end
@@ -120,7 +120,7 @@ return {
 					local Config3 = GetResult:toConfig()
 					
 					return GraphQLInputObjectType.new((Object.assign({}, Config3, {
-						fields = function() --[[ Line: 177 ]]
+						fields = function()
 							-- upvalues: Callback4 (upval), Config3 (copy)
 							return Callback4(Config3.fields)
 						end
@@ -143,19 +143,19 @@ return {
 				local ParseLiteralFunction = Config4.parseLiteral
 				
 				if SerializeFunction then
-					function Config4.serialize(...) --[[ Line: 196 ]]
+					function Config4.serialize(...)
 						-- upvalues: SerializeFunction (copy), Config4 (copy)
 						return SerializeFunction(Config4, ...)
 					end
 				end
 				if ParseValueFunction then
-					function Config4.parseValue(...) --[[ Line: 202 ]]
+					function Config4.parseValue(...)
 						-- upvalues: ParseValueFunction (copy), Config4 (copy)
 						return ParseValueFunction(Config4, ...)
 					end
 				end
 				if ParseLiteralFunction then
-					function Config4.parseLiteral(...) --[[ Line: 208 ]]
+					function Config4.parseLiteral(...)
 						-- upvalues: ParseLiteralFunction (copy), Config4 (copy)
 						return ParseLiteralFunction(Config4, ...)
 					end
@@ -164,7 +164,7 @@ return {
 			end
 		end
 		
-		Callback2 = function(Fields) --[[ Line: 220 | Named "rewireFields" ]]
+		Callback2 = function(Fields)
 			-- upvalues: Map (upval), Callback1 (ref), Callback (ref)
 			local NewMap = Map.new()
 			
@@ -182,7 +182,7 @@ return {
 			return NewMap
 		end
 		
-		Callback4 = function(Fields) --[[ Line: 235 | Named "rewireInputFields" ]]
+		Callback4 = function(Fields)
 			-- upvalues: Map (upval), Callback1 (ref)
 			local NewMap = Map.new()
 			
@@ -199,7 +199,7 @@ return {
 			return NewMap
 		end
 		
-		Callback3 = function(Interfaces) --[[ Line: 249 | Named "rewireNamedTypes" ]]
+		Callback3 = function(Interfaces)
 			-- upvalues: Callback1 (ref), Object (upval)
 			local List = {}
 			
@@ -213,7 +213,7 @@ return {
 			return List
 		end
 		
-		Callback1 = function(Type) --[[ Line: 260 | Named "rewireType" ]]
+		Callback1 = function(Type)
 			-- upvalues: IsListTypeFunction (upval), Callback1 (ref), Object (upval), GraphQLList (upval), IsNonNullTypeFunction (upval), GraphQLNonNull (upval), IsNamedTypeFunction (upval), NewResult (ref), IsNamedStubFunction (upval), GetBuiltInForStubFunction (upval), rewireNamedType (ref), NewResult1 (ref)
 			if IsListTypeFunction(Type) then
 				local CallbackResult = Callback1(Type.ofType)
@@ -270,7 +270,7 @@ return {
 		end
 		return {
 			typeMap = NewResult1,
-			directives = Array.map(p1, function(p2) --[[ Line: 360 ]]
+			directives = Array.map(p1, function(p2)
 				-- upvalues: rewireDirective (ref)
 				return rewireDirective(p2)
 			end)

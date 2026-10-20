@@ -56,7 +56,7 @@ local GetIsARButtonVisibleModule = require(ExpChat.getIsARButtonVisible)
 local GetResult = require(Parent.DataHydration).TrustedConnections.TrustedConnectionsStore.get()
 local ExpChatSlotBatchSize = game:DefineFastInt("ExpChatSlotBatchSize", 10)
 
-local function createSlot(ChatWindowSettings) --[[ Line: 76 ]]
+local function createSlot(ChatWindowSettings)
 	-- upvalues: ReactModule (copy), TextChatMessageChatActionTypeModule (copy), FFlagExpChatPresetChatEnabled (copy), IsChatWindowEnlargeEnabledModule (copy)
 	local Binding, Binding2 = ReactModule.createBinding("")
 	local Binding1, Binding2_1 = ReactModule.createBinding("")
@@ -118,7 +118,7 @@ local function createSlot(ChatWindowSettings) --[[ Line: 76 ]]
 	}
 end
 
-local function resolvePrefixText(Text: string, Current, p1): string --[[ Line: 133 ]]
+local function resolvePrefixText(Text: string, Current, p1): string
 	-- upvalues: GetFFlagTextChatEnableUniverseChatTabsFunction (copy), UserProfileStore (copy)
 	if GetFFlagTextChatEnableUniverseChatTabsFunction() and Current.isUniverseChat then
 		return Text
@@ -143,7 +143,7 @@ local function resolvePrefixText(Text: string, Current, p1): string --[[ Line: 1
 	return Text
 end
 
-return function(p1) --[[ Line: 198 | Named "useV2MessagePool" ]]
+return function(p1)
 	-- upvalues: FFlagExpChatGlobalTabDefaultModule (copy), LocalizationModule (copy), FFlagExpChatKeepV2PoolMountedModule (copy), EngineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (copy), FFlagExpChatUseChannelTabsStore (copy), UseStoreFunction (copy), GetChatStatusStoreModule (copy), SignalsReactModule (copy), FFlagExpChatPresetChatEnabled (copy), FFlagExpChatTopBannerForPresetChatAccessModule (copy), GetPresetChatStoreModule (copy), ReactModule (copy), GetIsARButtonVisibleModule (copy), FIntExpChatVisibleARButtonPaddingModule (copy), FIntExpChatDefaultARButtonPaddingModule (copy), IsChatRegionLockedModule (copy), ShowChatEnabledUIModule (copy), FFlagExpChatDynamicV2PoolModule (copy), ExpChatSlotBatchSize (copy), createSlot (copy), SignalsModule (copy), FFlagEnableInExpChatRewriteModule (copy), GetRewriteDropdownStoreModule (copy), GetMessageSettingsModule (copy), GetMessageTextModule (copy), resolvePrefixText (copy), FFlagExpChatFixRateLimitedMessageRemovalModule (copy), IsChatWindowEnlargeEnabledModule (copy), GetMessageEffectsModule (copy), FFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module (copy), TextChatMessageChatActionTypeModule (copy), FFlagEnableVerifiedBadgeStore (copy), VerifiedBadgeDisplayStore (copy), FFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), GetFFlagExpChatUseUpdatedMessageRenderedModule (copy), ShouldSendHighFrequencyTelemetryModule (copy), v1 (copy), GetFFlagExpChatExcludeFOMORendersModule (copy), GetChannelTabsStoreModule (copy), EngineFeatureTextChatReportEmojiTelemetryEnabledModule (copy), GetChatWindowMessageEffectsModule (copy), TextChatService (copy), FFlagExpChatEnableFOMOUpsellModule (copy), FFlagExpChatEnableCrossAgeChatActivityModule (copy), Players (copy), GetResult (copy), FFlagExpChatAddWindowSettingDependencyModule (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), TranslatedTextMessageV2Module (copy), RewriteDropdownModule (copy)
 	local HereLabel = if FFlagExpChatGlobalTabDefaultModule then LocalizationModule.useLocalization({ hereLabel = "CoreScripts.TextChat.ChannelTabs.Here" }).hereLabel else nil
 	local MessagesStore = p1.messagesStore
@@ -160,12 +160,12 @@ return function(p1) --[[ Line: 198 | Named "useV2MessagePool" ]]
 			UseSignalBindingResult,
 			SignalsReactModule.useSignalBinding(PresetChatStoreModule.getIsEnabled),
 			(SignalsReactModule.useSignalBinding(PresetChatStoreModule.getAccessLevel))
-		}):map(function(Entry): UDim --[[ Line: 226 ]]
+		}):map(function(Entry): UDim
 			-- upvalues: GetIsARButtonVisibleModule (upval), FIntExpChatVisibleARButtonPaddingModule (upval), FIntExpChatDefaultARButtonPaddingModule (upval)
 			return UDim.new(0, if GetIsARButtonVisibleModule(Entry[1], Entry[2], Entry[3]) then FIntExpChatVisibleARButtonPaddingModule else FIntExpChatDefaultARButtonPaddingModule)
 		end)
 	else
-		MapResult = UseSignalBindingResult:map(function(p2): UDim --[[ Line: 234 ]]
+		MapResult = UseSignalBindingResult:map(function(p2): UDim
 			-- upvalues: IsChatRegionLockedModule (upval), ShowChatEnabledUIModule (upval), FIntExpChatVisibleARButtonPaddingModule (upval), FIntExpChatDefaultARButtonPaddingModule (upval)
 			local ShowChatEnabledUIModuleResult = not IsChatRegionLockedModule() and ShowChatEnabledUIModule(p2)
 			
@@ -194,13 +194,13 @@ return function(p1) --[[ Line: 198 | Named "useV2MessagePool" ]]
 	local UseRefResult3 = ReactModule.useRef(UseStateResult1)
 	UseRefResult3.current = UseStateResult1
 	
-	local function createSlotEffects(CurrentEntry, ComponentId, MessagesStore, ChatWindowSettings, ShowTranslationButton) --[[ Line: 284 ]]
+	local function createSlotEffects(CurrentEntry, ComponentId, MessagesStore, ChatWindowSettings, ShowTranslationButton)
 		-- upvalues: SignalsModule (upval), FFlagEnableInExpChatRewriteModule (upval), GetRewriteDropdownStoreModule (upval), GetMessageSettingsModule (upval), FFlagExpChatGlobalTabDefaultModule (upval), HereLabel (copy), GetMessageTextModule (upval), resolvePrefixText (upval), FFlagExpChatFixRateLimitedMessageRemovalModule (upval), FFlagExpChatPresetChatEnabled (upval), IsChatWindowEnlargeEnabledModule (upval), GetMessageEffectsModule (upval), FFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module (upval), TextChatMessageChatActionTypeModule (upval), FFlagEnableVerifiedBadgeStore (upval), VerifiedBadgeDisplayStore (upval), FFlagExpChatEvictFloodcheckedFromWindowOrderModule (upval), GetFFlagExpChatUseUpdatedMessageRenderedModule (upval), ShouldSendHighFrequencyTelemetryModule (upval), v1 (upval), GetFFlagExpChatExcludeFOMORendersModule (upval), EngineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (upval), FFlagExpChatUseChannelTabsStore (upval), GetChannelTabsStoreModule (upval), UseStoreResult (copy), EngineFeatureTextChatReportEmojiTelemetryEnabledModule (upval), GetChatWindowMessageEffectsModule (upval), TextChatService (upval), FFlagExpChatEnableFOMOUpsellModule (upval), FFlagExpChatEnableCrossAgeChatActivityModule (upval), Players (upval), GetResult (upval)
 		local RegisterMessageComponentResult = MessagesStore.registerMessageComponent(ComponentId)
 		local LayoutOrderSignal = MessagesStore.getLayoutOrderSignal(ComponentId)
 		
 		return {
-			cleanupMsg = SignalsModule.createEffect(function(p2) --[[ Line: 294 ]]
+			cleanupMsg = SignalsModule.createEffect(function(p2)
 				-- upvalues: RegisterMessageComponentResult (copy), FFlagEnableInExpChatRewriteModule (upval), GetRewriteDropdownStoreModule (upval), MessagesStore (copy), GetMessageSettingsModule (upval), ChatWindowSettings (copy), FFlagExpChatGlobalTabDefaultModule (upval), HereLabel (upval), ShowTranslationButton (copy), GetMessageTextModule (upval), CurrentEntry (copy), resolvePrefixText (upval), FFlagExpChatFixRateLimitedMessageRemovalModule (upval), FFlagExpChatPresetChatEnabled (upval), IsChatWindowEnlargeEnabledModule (upval), GetMessageEffectsModule (upval), FFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module (upval), TextChatMessageChatActionTypeModule (upval), ComponentId (copy), FFlagEnableVerifiedBadgeStore (upval), VerifiedBadgeDisplayStore (upval), FFlagExpChatEvictFloodcheckedFromWindowOrderModule (upval)
 				local RegisterMessageComponentResultResult = RegisterMessageComponentResult(p2)
 				local OpenMessageId = nil
@@ -276,11 +276,11 @@ return function(p1) --[[ Line: 198 | Named "useV2MessagePool" ]]
 					end
 				end
 			end),
-			cleanupLayout = if LayoutOrderSignal then SignalsModule.createEffect(function(p2) --[[ Line: 373 ]]
+			cleanupLayout = if LayoutOrderSignal then SignalsModule.createEffect(function(p2)
 				-- upvalues: LayoutOrderSignal (copy), CurrentEntry (copy)
 				CurrentEntry.setLayoutOrder((LayoutOrderSignal(p2)))
 			end) else nil,
-			cleanupTelemetry = if GetFFlagExpChatUseUpdatedMessageRenderedModule() then SignalsModule.createEffect(function(p2) --[[ Line: 380 ]]
+			cleanupTelemetry = if GetFFlagExpChatUseUpdatedMessageRenderedModule() then SignalsModule.createEffect(function(p2)
 				-- upvalues: RegisterMessageComponentResult (copy), MessagesStore (copy), ShouldSendHighFrequencyTelemetryModule (upval), v1 (upval), GetFFlagExpChatExcludeFOMORendersModule (upval), EngineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (upval), FFlagExpChatUseChannelTabsStore (upval), GetChannelTabsStoreModule (upval), UseStoreResult (upval), EngineFeatureTextChatReportEmojiTelemetryEnabledModule (upval), IsChatWindowEnlargeEnabledModule (upval), GetMessageSettingsModule (upval), ChatWindowSettings (copy), FFlagExpChatGlobalTabDefaultModule (upval), HereLabel (upval), GetMessageTextModule (upval), GetChatWindowMessageEffectsModule (upval), GetMessageEffectsModule (upval), TextChatService (upval)
 				local RegisterMessageComponentResultResult = RegisterMessageComponentResult(p2)
 				
@@ -327,7 +327,7 @@ return function(p1) --[[ Line: 198 | Named "useV2MessagePool" ]]
 					end
 				end
 			end) else nil,
-			cleanupTc = SignalsModule.createEffect(function(p2) --[[ Line: 449 ]]
+			cleanupTc = SignalsModule.createEffect(function(p2)
 				-- upvalues: RegisterMessageComponentResult (copy), MessagesStore (copy), FFlagExpChatEnableFOMOUpsellModule (upval), FFlagExpChatEnableCrossAgeChatActivityModule (upval), Players (upval), GetResult (upval), CurrentEntry (copy)
 				local RegisterMessageComponentResultResult = RegisterMessageComponentResult(p2)
 				
@@ -355,7 +355,7 @@ return function(p1) --[[ Line: 198 | Named "useV2MessagePool" ]]
 	if FFlagExpChatKeepV2PoolMountedModule then
 		table.insert(List, IsVisible)
 	end
-	ReactModule.useEffect(function() --[[ Line: 497 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsVisible (copy), UseStateResult1 (copy), createSlotEffects (copy), UseRefResult (copy), MessagesStore (copy), ChatWindowSettings (copy), p1 (copy), UseRefResult1 (copy), UseRefResult2 (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (upval), FFlagEnableInExpChatRewriteModule (upval), GetRewriteDropdownStoreModule (upval)
 		if not IsVisible then return end
 		for i = 1, UseStateResult1 do
@@ -365,7 +365,7 @@ return function(p1) --[[ Line: 198 | Named "useV2MessagePool" ]]
 		MessagesStore.setActiveChannelFilter(if GetFFlagTextChatEnableUniverseChatTabsFunction() then if MessagesStore.getChannelTabsConfigurationEnabled(false) and p1.targetTextChannel then p1.targetTextChannel.Name else p1.selectedChannelName elseif p1.isChannelBarVisible and p1.targetTextChannel then p1.targetTextChannel.Name else nil)
 		MessagesStore.repopulateMessageComponents()
 		
-		return function() --[[ Line: 531 ]]
+		return function()
 			-- upvalues: UseRefResult1 (upval), MessagesStore (upval), UseRefResult2 (upval), FFlagEnableInExpChatRewriteModule (upval), GetRewriteDropdownStoreModule (upval)
 			for _, SlotEffects in ipairs(UseRefResult1.current) do
 				if SlotEffects.cleanupMsg then
@@ -392,7 +392,7 @@ return function(p1) --[[ Line: 198 | Named "useV2MessagePool" ]]
 	end, List)
 	
 	if FFlagExpChatDynamicV2PoolModule and Enabled then
-		ReactModule.useEffect(function() --[[ Line: 558 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: FFlagExpChatKeepV2PoolMountedModule (upval), IsVisible (copy), UseRefResult2 (copy), UseStateResult1 (copy), createSlotEffects (copy), UseRefResult (copy), MessagesStore (copy), ChatWindowSettings (copy), p1 (copy), UseRefResult1 (copy)
 			if FFlagExpChatKeepV2PoolMountedModule and not IsVisible then return end
 			local Current: number = UseRefResult2.current
@@ -404,10 +404,10 @@ return function(p1) --[[ Line: 198 | Named "useV2MessagePool" ]]
 			UseRefResult2.current = UseStateResult1
 			MessagesStore.repopulateMessageComponents()
 		end, if FFlagExpChatKeepV2PoolMountedModule then { UseStateResult1, IsVisible } else { UseStateResult1 })
-		ReactModule.useEffect(function() --[[ Line: 587 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: FFlagExpChatKeepV2PoolMountedModule (upval), IsVisible (copy), SignalsModule (upval), MessagesStore (copy), ExpChatSlotBatchSize (upval), UseRefResult3 (copy), UseStateResult2 (copy)
 			if FFlagExpChatKeepV2PoolMountedModule and not IsVisible then return end
-			local Effect = SignalsModule.createEffect(function(p2) --[[ Line: 592 ]]
+			local Effect = SignalsModule.createEffect(function(p2)
 				-- upvalues: MessagesStore (upval), ExpChatSlotBatchSize (upval), UseRefResult3 (upval), UseStateResult2 (upval)
 				local ActiveChannelFilter = MessagesStore.getActiveChannelFilter(p2)
 				local Smallest = math.min(math.ceil((#(if ActiveChannelFilter then MessagesStore.getWindowMessagesInOrderByTabId(p2)[ActiveChannelFilter] or {} else MessagesStore.getWindowMessagesInOrder(p2) or {}) + 2) / ExpChatSlotBatchSize) * ExpChatSlotBatchSize, 50)
@@ -417,7 +417,7 @@ return function(p1) --[[ Line: 198 | Named "useV2MessagePool" ]]
 				end
 			end)
 			
-			return function() --[[ Line: 609 ]]
+			return function()
 				-- upvalues: Effect (copy)
 				if Effect then
 					pcall(Effect)
@@ -426,7 +426,7 @@ return function(p1) --[[ Line: 198 | Named "useV2MessagePool" ]]
 		end, if FFlagExpChatKeepV2PoolMountedModule then { IsVisible } else {})
 	end
 	local UseRefResult4 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 620 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsVisible (copy), UseRefResult4 (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (upval), p1 (copy), MessagesStore (copy)
 		if not IsVisible then
 			UseRefResult4.current = false
@@ -449,7 +449,7 @@ return function(p1) --[[ Line: 198 | Named "useV2MessagePool" ]]
 	})
 	
 	return {
-		children = ReactModule.useMemo(function() --[[ Line: 654 ]]
+		children = ReactModule.useMemo(function()
 			-- upvalues: Enabled (copy), UseStateResult1 (copy), UseRefResult (copy), ReactModule (upval), TranslatedTextMessageV2Module (upval), p1 (copy), ChatWindowSettings (copy), FFlagEnableInExpChatRewriteModule (upval), FFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module (upval), MapResult (ref), FFlagExpChatPresetChatEnabled (upval), IsChatWindowEnlargeEnabledModule (upval), RewriteDropdownModule (upval)
 			if not Enabled then
 				return nil

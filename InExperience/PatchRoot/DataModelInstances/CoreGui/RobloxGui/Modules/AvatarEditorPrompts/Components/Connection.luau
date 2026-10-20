@@ -2,7 +2,7 @@
 local ContextActionsBinderModule = require(script.ContextActionsBinder)
 local Connection = RoactModule.PureComponent:extend("Connection")
 
-function Connection:render() --[[ Line: 9 ]]
+function Connection:render()
 	-- upvalues: RoactModule (copy), ContextActionsBinderModule (copy)
 	return RoactModule.createFragment({
 		ContextActionsBinder = RoactModule.createElement(ContextActionsBinderModule)

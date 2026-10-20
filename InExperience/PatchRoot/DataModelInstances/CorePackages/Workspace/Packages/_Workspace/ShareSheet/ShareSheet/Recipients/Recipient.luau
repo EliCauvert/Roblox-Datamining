@@ -8,17 +8,17 @@ local _ = require(Parent.LuauPolyfill)
 local UseExternalChatConversationEligibilityModule = require(Parent.AppChat.useExternalChatConversationEligibility)
 
 return {
-	canSend = function(p1, p2) --[[ Line: 68 ]]
+	canSend = function(p1, p2)
 		return p1.canSendToConversation(p2.conversation)
 	end,
-	fromConversation = function(Conversation) --[[ Line: 93 ]]
+	fromConversation = function(Conversation)
 		return { id = Conversation.id, conversation = Conversation }
 	end,
-	getName = function(p1) --[[ Line: 77 ]]
+	getName = function(p1)
 		-- upvalues: ConversationUtilsModule (copy)
 		return ConversationUtilsModule.getDisplayName(p1.conversation)
 	end,
-	getParticipantIds = function(p1, p2) --[[ Line: 82 ]]
+	getParticipantIds = function(p1, p2)
 		local List = {}
 		
 		for _, value in p1.conversation.participants or {} do
@@ -28,13 +28,13 @@ return {
 		end
 		return List
 	end,
-	send = function(p3, p4, p5) --[[ Line: 72 ]]
+	send = function(p3, p4, p5)
 		return p3.sendToConversation(p4.conversation, p5)
 	end,
-	useEligibleRecipients = function(p3) --[[ Line: 37 ]]
+	useEligibleRecipients = function(p3)
 		-- upvalues: ReactModule (copy), UseExternalChatConversationEligibilityModule (copy)
 		local UseExternalChatConversationEligibilityModuleResult = UseExternalChatConversationEligibilityModule({
-			conversations = ReactModule.useMemo(function() --[[ Line: 38 ]]
+			conversations = ReactModule.useMemo(function()
 				-- upvalues: p3 (copy)
 				local Buffer = table.create(#p3.recipients)
 				
@@ -48,7 +48,7 @@ return {
 			maxConversationCount = p3.maxCount
 		})
 		
-		return ReactModule.useMemo(function() --[[ Line: 53 ]]
+		return ReactModule.useMemo(function()
 			-- upvalues: UseExternalChatConversationEligibilityModuleResult (copy), p3 (copy)
 			local t = {}
 			

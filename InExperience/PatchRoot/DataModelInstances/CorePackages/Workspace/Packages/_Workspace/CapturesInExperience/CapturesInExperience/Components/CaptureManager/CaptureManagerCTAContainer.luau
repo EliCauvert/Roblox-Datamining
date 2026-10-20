@@ -29,15 +29,15 @@ local CapturesSaveToExternalStorageLimit = game:DefineFastInt("CapturesSaveToExt
 local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 local _UDim2 = UDim2.new(0.33, 0, 0, 36)
 
-return (require(Parent.App.CapturesPolicy).connect(function(p1) --[[ Line: 285 ]]
+return (require(Parent.App.CapturesPolicy).connect(function(p1)
 	return { enableShareCaptureCTA = p1.enableShareCaptureCTA() }
-end)(function(Frame: Frame) --[[ Line: 58 ]]
+end)(function(Frame: Frame)
 	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseStyleFunction (copy), UseRefFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), ReactModule (copy), CapturesSaveToExternalStorageLimit (copy), UseLocalizationFunction (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), GetSaveToStoragePermissionModule (copy), EventNamesModule (copy), SocialStopwatchModule (copy), ShareCaptureModule (copy), ExternalShareSourceTypeModule (copy), GetIsDeleteWarningModalOptedOutModule (copy), DeleteWarningModalOpenedModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), IconButton (copy), Images (copy), IconSize (copy), _UDim2 (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseStyleResult = UseStyleFunction()
 	local UseRefResult = UseRefFunction(0)
-	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 65 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p1)
 		-- upvalues: ConstantsModule (upval)
 		return p1[ConstantsModule.RoduxKey].CaptureManager.SelectedCaptures
 	end)
@@ -58,7 +58,7 @@ end)(function(Frame: Frame) --[[ Line: 58 ]]
 			numberOfCaptures = CountUseSelectorResult
 		}
 	})
-	ReactModule.useEffect(function() --[[ Line: 93 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (upval), UseSelectorResult (copy), CaptureTypeModule (upval), UseStateResult2 (copy)
 		local Flag = false
 		repeat
@@ -82,15 +82,15 @@ end)(function(Frame: Frame) --[[ Line: 58 ]]
 		until true
 		UseStateResult2(Flag)
 	end, { UseSelectorResult })
-	local UseResult = ReactModule.useCallback(function(): boolean --[[ Line: 123 ]]
+	local UseResult = ReactModule.useCallback(function(): boolean
 		-- upvalues: Frame (copy), UseRefResult (copy)
 		return if Frame.isDisabled then true else DateTime.now().UnixTimestampMillis - UseRefResult.current < 500
 	end, { Frame.isDisabled })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 137 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy)
 		UseRefResult.current = DateTime.now().UnixTimestampMillis
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 152 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy), IsDisabled (copy), UseSelectorResult (copy), UseResult1 (copy), UseStateResult (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval), SocialStopwatchModule (upval), UseDispatchResult (copy), ShareCaptureModule (upval), ExternalShareSourceTypeModule (upval)
 		if UseResult() or IsDisabled then return end
 		local UseSelectorResultEntry = UseSelectorResult[1]
@@ -136,7 +136,7 @@ end)(function(Frame: Frame) --[[ Line: 58 ]]
 			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.TitleLarge.Font) else nil,
 			Position = UDim2.new(1, 0, 1, 0),
 			Size = _UDim2_1,
-			Text = ReactModule.useCallback(function() --[[ Line: 113 ]]
+			Text = ReactModule.useCallback(function()
 				-- upvalues: CountUseSelectorResult (copy), UseLocalizationResult (copy)
 				return if CountUseSelectorResult == 0 then UseLocalizationResult.selectCaptureLabel elseif CountUseSelectorResult == 1 then UseLocalizationResult.oneCaptureSelectedLabel else UseLocalizationResult.multipleCapturesSelectedLabel
 			end, { CountUseSelectorResult })(),
@@ -165,7 +165,7 @@ end)(function(Frame: Frame) --[[ Line: 58 ]]
 				icon = Images["icons/actions/download_medium"],
 				iconSize = IconSize.Medium,
 				isDisabled = IsDisabled1,
-				onActivated = ReactModule.useCallback(function() --[[ Line: 141 ]]
+				onActivated = ReactModule.useCallback(function()
 					-- upvalues: UseResult (copy), UseSelectorResult (copy), GetSaveToStoragePermissionModule (upval), Frame (copy), UseDispatchResult (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval), UseResult1 (copy)
 					if not UseResult() and #UseSelectorResult ~= 0 then
 						GetSaveToStoragePermissionModule(UseSelectorResult, Frame.openPermissionModal, UseDispatchResult)
@@ -196,7 +196,7 @@ end)(function(Frame: Frame) --[[ Line: 58 ]]
 				icon = Images["icons/actions/edit/delete"],
 				iconSize = IconSize.Medium,
 				isDisabled = IsDisabled2,
-				onActivated = ReactModule.useCallback(function() --[[ Line: 180 ]]
+				onActivated = ReactModule.useCallback(function()
 					-- upvalues: UseResult (copy), IsDisabled2 (copy), UseResult1 (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval), GetIsDeleteWarningModalOptedOutModule (upval), Frame (copy), UseDispatchResult (copy), DeleteWarningModalOpenedModule (upval)
 					if UseResult() or IsDisabled2 then return end
 					UseResult1()

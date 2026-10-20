@@ -9,14 +9,14 @@ local BadgeVariant = FoundationModule.Enums.BadgeVariant
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local FFlagRobloxPlusUpsellBannerUseTryItForFreeModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusUpsellBannerUseTryItForFree)
 
-return function(p1) --[[ Line: 26 | Named "RobloxPlusUpsellBannerCTA" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), FFlagRobloxPlusUpsellBannerUseTryItForFreeModule (copy), ReactModule (copy), View (copy), Badge (copy), BadgeVariant (copy), Text (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		subscribe = "Feature.RobloxSubscription.Action.Subscribe",
 		newBadge = "Feature.Catalog.Label.New",
 		getFreeTrialText = if FFlagRobloxPlusUpsellBannerUseTryItForFreeModule then "Feature.RobloxSubscription.Action.TryItForFree" else "Feature.RobloxSubscription.Label.FreeTrialText"
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 36 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), UseLocalizationResult (copy)
 		return if p1.productInfo.isFreeTrial then UseLocalizationResult.getFreeTrialText else UseLocalizationResult.subscribe
 	end, {

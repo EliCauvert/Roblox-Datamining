@@ -1,11 +1,11 @@
 ﻿local _ = require(script:FindFirstAncestor("BuildExperience").Parent.Foundation)
 local _Font = Font.new("rbxasset://fonts/families/BuilderMono.json", Enum.FontWeight.Regular)
 
-local function _(p1): string --[[ Line: 44 | Named "colorToHex" ]]
+local function _(p1): string
 	return `#{p1.Color3:ToHex()}`
 end
 
-local function typographyToTextStyles(TitleMedium, Emphasis) --[[ Line: 49 ]]
+local function typographyToTextStyles(TitleMedium, Emphasis)
 	local TitleMediumFont = TitleMedium.Font
 	local config = {
 		textSize = TitleMedium.FontSize,
@@ -29,27 +29,27 @@ local function typographyToTextStyles(TitleMedium, Emphasis) --[[ Line: 49 ]]
 	return config
 end
 
-local _ = function(p1) --[[ Line: 68 | Named "getTextSize" ]]
+local _ = function(p1)
 	return p1.FontSize
 end
 
-local _ = function(p1) --[[ Line: 72 | Named "getLineHeight" ]]
+local _ = function(p1)
 	return p1.LineHeight
 end
 
-local _ = function(p1) --[[ Line: 76 | Named "getColor3" ]]
+local _ = function(p1)
 	return p1.Color3
 end
 
-local _ = function(p1) --[[ Line: 80 | Named "getTransparency" ]]
+local _ = function(p1)
 	return p1.Transparency
 end
 
-local _ = function(p1) --[[ Line: 84 | Named "getSize" ]]
+local _ = function(p1)
 	return p1
 end
 
-return function(p1, p2) --[[ Line: 88 | Named "getMarkdownRendererProps" ]]
+return function(p1, p2)
 	-- upvalues: typographyToTextStyles (copy), _Font (copy)
 	local Typography = p1.Typography
 	local Content = p1.Color.Content

@@ -2,21 +2,21 @@
 local SignalsModule = require(BuildExperience.Parent.Signals)
 local _ = require(BuildExperience.Chat.chatTypes)
 
-local function _(p1, UniverseId, SessionId): boolean --[[ Line: 22 | Named "targetsMatch" ]]
+local function _(p1, UniverseId, SessionId): boolean
 	return p1.universeId == UniverseId and (p1.sessionId == nil or p1.sessionId == SessionId)
 end
 
-return function() --[[ Line: 29 | Named "createBuildPromptDraftStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(nil)
 	
 	return {
 		getPendingDraft = Signal,
-		queueDraft = function(p1) --[[ Line: 33 ]]
+		queueDraft = function(p1)
 			-- upvalues: Signal2 (copy)
 			Signal2(p1)
 		end,
-		consumeDraft = function(UniverseId, SessionId) --[[ Line: 37 ]]
+		consumeDraft = function(UniverseId, SessionId)
 			-- upvalues: Signal (copy), Signal2 (copy)
 			local SignalResult = Signal()
 			
@@ -28,7 +28,7 @@ return function() --[[ Line: 29 | Named "createBuildPromptDraftStore" ]]
 				return SignalResult.text
 			end
 		end,
-		reset = function() --[[ Line: 46 ]]
+		reset = function()
 			-- upvalues: Signal2 (copy)
 			Signal2(nil)
 		end

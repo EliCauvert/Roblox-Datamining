@@ -11,7 +11,7 @@ local list = {
 	{ name = "CLOSE", pattern = "^</([%w-]+)%s?([^>]*)>" }
 }
 local config = {
-	OPEN = function(List, Text, p1) --[[ Line: 41 ]]
+	OPEN = function(List, Text, p1)
 		-- upvalues: ParseXmlAttributesModule (copy), TokenNameModule (copy)
 		table.insert(List, {
 			name = TokenNameModule.Open,
@@ -19,7 +19,7 @@ local config = {
 			attributes = ParseXmlAttributesModule(p1)
 		})
 	end,
-	CLOSE = function(List, Text) --[[ Line: 49 ]]
+	CLOSE = function(List, Text)
 		-- upvalues: TokenNameModule (copy)
 		table.insert(List, {
 			name = TokenNameModule.Close,
@@ -27,7 +27,7 @@ local config = {
 			attributes = {}
 		})
 	end,
-	OPEN_CLOSE = function(List, Text, p1) --[[ Line: 56 ]]
+	OPEN_CLOSE = function(List, Text, p1)
 		-- upvalues: ParseXmlAttributesModule (copy), TokenNameModule (copy)
 		table.insert(List, {
 			name = TokenNameModule.Open,
@@ -42,7 +42,7 @@ local config = {
 	end
 }
 
-return function(Text: string) --[[ Line: 71 | Named "tokenize" ]]
+return function(Text: string)
 	-- upvalues: list (copy), TokenNameModule (copy), FFlagInlineRichTextSkipPlaintextEscape (copy), UnescapeRichFormattingModule (copy), EscapeRichFormattingModule (copy), config (copy)
 	local Init = 0
 	local StartIndex = 0

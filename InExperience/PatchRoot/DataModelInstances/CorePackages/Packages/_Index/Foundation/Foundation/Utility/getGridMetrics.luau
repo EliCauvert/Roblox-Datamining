@@ -4,7 +4,7 @@ local DashModule = require(Foundation.Parent.Dash)
 local _ = require(Foundation.Providers.Responsive.ResponsiveContext)
 local _ = require(Foundation.Components.Types)
 
-local function getColumnMetrics(p1, p2, Value) --[[ Line: 29 ]]
+local function getColumnMetrics(p1, p2, Value)
 	local Column: number = p1.grid.columns[p2]
 	local ClampedValue: number = Column
 	
@@ -20,7 +20,7 @@ local function getColumnMetrics(p1, p2, Value) --[[ Line: 29 ]]
 	}
 end
 
-return function(p1, p2, p3, p4) --[[ Line: 53 | Named "getGridMetrics" ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: getColumnMetrics (copy), DashModule (copy)
 	local ColumnMetrics = getColumnMetrics(p1, p2)
 	local ColumnMetrics1 = if p4 then getColumnMetrics(p1, p2, p4) else ColumnMetrics

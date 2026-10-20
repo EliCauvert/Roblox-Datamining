@@ -9,7 +9,7 @@ local FFlagAbuseReportInExpPlayerListV3 = require(Parent.SharedFlags).FFlagAbuse
 local FFlagAbuseReportSubmissionTargetV4 = require(Parent.SharedFlags).FFlagAbuseReportSubmissionTargetV4
 local Version: string = if game:DefineFastFlag("AbuseReportSubmissionLegacyChatV5", false) and FFlagAbuseReportSubmissionTargetV4 then "&version=5" elseif FFlagAbuseReportSubmissionTargetV4 then "&version=4" elseif FFlagAbuseReportInExpPlayerListV3 then "&version=3" else "&version=2"
 
-return function(Callback, Input, Input1) --[[ Line: 26 ]]
+return function(Callback, Input, Input1)
 	-- upvalues: ArgCheckModule (copy), LocalizationService (copy), HttpService (copy), Url (copy), Version (copy)
 	ArgCheckModule.assert(Input, "abuseVector is required")
 	ArgCheckModule.isType(Input, "string", "fetchConfigWithAttributes expects abuseVector as a string")

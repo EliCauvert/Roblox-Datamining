@@ -15,7 +15,7 @@ local config = {
 	lineWidth = ConstantsModule.TILE_SIZE
 }
 
-function CarouselUserContextualInfo(p1) --[[ Line: 51 ]]
+function CarouselUserContextualInfo(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseTextSizeOffsetFunction (copy), IconSize (copy), ReactModule (copy), Text (copy), ImageSetLabel (copy), Images (copy), StyledTextLabel (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local Icon = JoinResult.icon
@@ -27,7 +27,7 @@ function CarouselUserContextualInfo(p1) --[[ Line: 51 ]]
 	local _Font = Label.font or UseStyleResultFont.CaptionBody
 	local Text1 = Label.text
 	local LineWidthDelta = Icon and JoinResult.lineWidth - (IconSize.Small + 2) or JoinResult.lineWidth
-	local UseMemoResult = ReactModule.useMemo(function(): number --[[ Line: 64 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): number
 		-- upvalues: UseStyleResultFont (copy), _Font (copy), UseTextSizeOffsetResult (copy), JoinResult (copy), Text (upval), Text1 (copy), LineWidthDelta (copy)
 		return (math.min((UseStyleResultFont.BaseSize * _Font.RelativeSize + UseTextSizeOffsetResult) * JoinResult.maxNumberOfLines, Text.GetTextHeight(Text1 or "", _Font.Font, UseStyleResultFont.BaseSize * _Font.RelativeSize, LineWidthDelta)))
 	end, {

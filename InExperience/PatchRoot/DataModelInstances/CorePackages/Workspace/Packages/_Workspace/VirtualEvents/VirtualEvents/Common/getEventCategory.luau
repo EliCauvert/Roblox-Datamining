@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("VirtualEvents").Parent.GraphQLServer)
 
-return function(p1) --[[ Line: 7 | Named "getEventCategory" ]]
+return function(p1)
 	local EventCategories = p1.eventCategories
 	
 	if EventCategories == nil or #EventCategories == 0 then

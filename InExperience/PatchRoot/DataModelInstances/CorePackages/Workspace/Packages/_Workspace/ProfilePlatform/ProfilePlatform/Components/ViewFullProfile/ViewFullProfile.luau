@@ -26,7 +26,7 @@ local FFlagEnableGroupDetailPane = SharedFlagsModule.FFlagEnableGroupDetailPane
 local FFlagSignalsNavP3Dispatch = SharedFlagsModule.FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-function ViewFullProfile(p1) --[[ Line: 39 ]]
+function ViewFullProfile(p1)
 	-- upvalues: UseProfileJsonComponentModule (copy), EnumsModule (copy), UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), FFlagEnableGroupDetailPane (copy), EventNamesModule (copy), NavigateDownToViewUserProfileFunction (copy), AppPage (copy), UrlBuilder (copy), UrlBase (copy), MakeViewGroupPageModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), HorizontalPageMargin (copy), ConstantsModule (copy), Button (copy), ButtonType (copy)
 	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.ViewFullProfile) or {}
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
@@ -57,7 +57,7 @@ function ViewFullProfile(p1) --[[ Line: 39 ]]
 			ViewFullProfile = ReactModule.createElement(Button, {
 				buttonType = ButtonType.Secondary,
 				size = UDim2.new(1, 0, 0, ConstantsModule.CTA_BUTTON_HEIGHT),
-				onActivated = ReactModule.useCallback(function() --[[ Line: 73 ]]
+				onActivated = ReactModule.useCallback(function()
 					-- upvalues: UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), UseProfileWrapperContextModuleResult (copy), EnumsModule (upval), ProfileType (copy), UseDispatchResult (copy), NavigateDownToViewUserProfileFunction (upval), ProfileId (copy), UseProfileJsonComponentModuleResult (copy), AppPage (upval), UrlBuilder (upval), UrlBase (upval), TextKeysModule (upval), MakeViewGroupPageModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval)
 					UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.ViewPlayerProfileButton, {
 						absolutePosition = UseProfileWrapperContextModuleResult.sourceInfo.homepageCarouselAbsolutePosition,
@@ -94,7 +94,7 @@ function ViewFullProfile(p1) --[[ Line: 39 ]]
 					if FFlagEnableGroupDetailPane then ProfileType else nil,
 					if FFlagEnableGroupDetailPane then UseProfileJsonComponentModuleResult.type else nil
 				}),
-				text = ReactModule.useMemo(function() --[[ Line: 51 ]]
+				text = ReactModule.useMemo(function()
 					-- upvalues: ProfileType (copy), EnumsModule (upval), UseLocalizationResult (copy), UseProfileJsonComponentModuleResult (copy)
 					if ProfileType == EnumsModule.ProfileTypes.User then
 						return UseLocalizationResult.viewFullProfileLabel

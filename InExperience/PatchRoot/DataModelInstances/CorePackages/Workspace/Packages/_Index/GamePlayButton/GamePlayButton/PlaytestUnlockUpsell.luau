@@ -9,7 +9,7 @@ local Type = {
 
 return {
 	Type = Type,
-	getType = function(ContextualPlayabilityAgeCheckRequired) --[[ Line: 17 ]]
+	getType = function(ContextualPlayabilityAgeCheckRequired)
 		-- upvalues: PlayabilityStatusEnum (copy), FFlagLuaAppPlayButtonAmpAgeCheckFlow (copy), Type (copy)
 		return if ContextualPlayabilityAgeCheckRequired == PlayabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser or FFlagLuaAppPlayButtonAmpAgeCheckFlow and ContextualPlayabilityAgeCheckRequired == PlayabilityStatusEnum.ContextualPlayabilityAgeCheckRequired then Type.AgeVerification elseif ContextualPlayabilityAgeCheckRequired == PlayabilityStatusEnum.ContextualPlayabilityPlaytestDisabled or ContextualPlayabilityAgeCheckRequired == PlayabilityStatusEnum.ContextualPlayabilityRequireParentApproval then Type.UpdatePlaytestSettings elseif ContextualPlayabilityAgeCheckRequired == PlayabilityStatusEnum.ContextualPlayabilityTrustedFriendRequired then Type.TrustedFriends else nil
 	end

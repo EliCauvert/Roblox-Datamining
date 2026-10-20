@@ -8,7 +8,7 @@ local IconName = FoundationModule.Enums.IconName
 local InputSize = FoundationModule.Enums.InputSize
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return ReactModule.memo(function(p1) --[[ Line: 20 | Named "InstantPlayButton" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), Button (copy), IconName (copy), ButtonVariant (copy), InputSize (copy), FillBehavior (copy)
 	local UseLocalizationResult = UseLocalizationFunction({ play = "Feature.ExperienceDetails.PlayButtonText.Play" })
 	

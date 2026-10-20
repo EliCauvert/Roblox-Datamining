@@ -1,7 +1,7 @@
-﻿return function(Text: string, List): string --[[ Line: 1 | Named "formatTextWithParams" ]]
+﻿return function(Text: string, List): string
 	if List ~= nil then
 		for i, value in pairs(List) do
-			Text = string.gsub(Text, ("{%s}"):format(i), function() --[[ Line: 5 ]]
+			Text = string.gsub(Text, ("{%s}"):format(i), function()
 				-- upvalues: value (copy)
 				return value
 			end)

@@ -4,14 +4,14 @@ local SplitPaneSlot = require(Parent.AppSplitView).Enums.SplitPaneSlot
 local ViewState = require(Parent.Navigation).ViewState
 local TempRnSwitchNavigatorName = require(Parent.NavigationRodux).Constants.TempRnSwitchNavigatorName
 
-local function _(p1) --[[ Line: 15 | Named "getUpdatedNavigation" ]]
+local function _(p1)
 	local DangerouslyGetParentResult = if p1._dangerouslyGetParent then p1._dangerouslyGetParent() else nil
 	local Key = if p1.state == nil then nil else p1.state.key
 	
 	return DangerouslyGetParentResult and Key and DangerouslyGetParentResult.getChildNavigation(Key) or p1
 end
 
-local function resolveOptions(p1) --[[ Line: 24 ]]
+local function resolveOptions(p1)
 	-- upvalues: TempRnSwitchNavigatorName (copy), RoactNavigationModule (copy)
 	local Descriptor = p1.descriptor
 	local State = Descriptor.state
@@ -27,7 +27,7 @@ local function resolveOptions(p1) --[[ Line: 24 ]]
 	end
 end
 
-return function(p1): boolean --[[ Line: 34 | Named "computeSplitEligibility" ]]
+return function(p1): boolean
 	-- upvalues: ViewState (copy), resolveOptions (copy), SplitPaneSlot (copy)
 	for i = #p1, 1, -1 do
 		local v1 = p1[i]

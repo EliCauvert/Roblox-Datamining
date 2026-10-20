@@ -3,22 +3,22 @@ local UserInputService = game:GetService("UserInputService")
 local ReactModule = require(Parent.React)
 local UseEventConnectionFunction = require(Parent.ReactUtils).useEventConnection
 
-local function _(Input): boolean --[[ Line: 72 | Named "isActivationInput" ]]
+local function _(Input): boolean
 	return Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch
 end
 
-local _ = function(p1, p2, p3): boolean --[[ Line: 77 | Named "withinDistance" ]]
+local _ = function(p1, p2, p3): boolean
 	return (p1 - p2).Magnitude <= p3
 end
 
-local _ = function(Frame: Frame, Vector): boolean --[[ Line: 81 | Named "containsPoint" ]]
+local _ = function(Frame: Frame, Vector): boolean
 	local AbsolutePosition = Frame.AbsolutePosition
 	local NewAbsolutePosition = AbsolutePosition + Frame.AbsoluteSize
 	
 	return AbsolutePosition.X <= Vector.X and (Vector.X <= NewAbsolutePosition.X and AbsolutePosition.Y <= Vector.Y) and Vector.Y <= NewAbsolutePosition.Y
 end
 
-return function(p1, Current, p2, p3) --[[ Line: 87 | Named "useMomentGestures" ]]
+return function(p1, Current, p2, p3)
 	-- upvalues: ReactModule (copy), UserInputService (copy), UseEventConnectionFunction (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(Current)
@@ -41,7 +41,7 @@ return function(p1, Current, p2, p3) --[[ Line: 87 | Named "useMomentGestures" ]
 	local CancellationSignal = if p3 == nil then nil else p3.cancellationSignal
 	local IsCancelWhenInactive: boolean = p3 ~= nil and p3.cancelWhenInactive == true
 	local IsCancelOnUserScroll: boolean = p3 ~= nil and p3.cancelOnUserScroll == true
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 126 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult9 (copy), UseRefResult1 (copy)
 		if not UseRefResult9.current then return end
 		UseRefResult9.current = false
@@ -51,7 +51,7 @@ return function(p1, Current, p2, p3) --[[ Line: 87 | Named "useMomentGestures" ]
 			OnLongPressCancelFunction()
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 137 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy), UseRefResult7 (copy), UseRefResult10 (copy), UseRefResult11 (copy), UseRefResult12 (copy), UseRefResult8 (copy), UseRefResult4 (copy), UseRefResult5 (copy), UseRefResult6 (copy)
 		UseResult()
 		UseRefResult7.current = nil
@@ -70,7 +70,7 @@ return function(p1, Current, p2, p3) --[[ Line: 87 | Named "useMomentGestures" ]
 			UseRefResult6.current = nil
 		end
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function(Input) --[[ Line: 155 ]]
+	local UseResult2 = ReactModule.useCallback(function(Input)
 		-- upvalues: p1 (copy), UseRefResult7 (copy), UseRefResult8 (copy), UseRefResult11 (copy), UseRefResult12 (copy), Callback (copy), UseRefResult10 (copy), UseRefResult2 (copy), UseRefResult3 (copy), UseRefResult4 (copy), UseRefResult6 (copy), UseRefResult5 (copy), UseResult (copy), UseRefResult9 (copy), UseRefResult1 (copy), LongPressThreshold (copy)
 		if not p1 or Input.UserInputType ~= Enum.UserInputType.MouseButton1 and Input.UserInputType ~= Enum.UserInputType.Touch then return end
 		UseRefResult7.current = Input
@@ -104,7 +104,7 @@ return function(p1, Current, p2, p3) --[[ Line: 87 | Named "useMomentGestures" ]
 		if OnLongPressStartFunction then
 			OnLongPressStartFunction()
 		end
-		UseRefResult5.current = task.delay(LongPressThreshold, function() --[[ Line: 196 ]]
+		UseRefResult5.current = task.delay(LongPressThreshold, function()
 			-- upvalues: p1 (upval), UseRefResult7 (upval), Input (copy), UseRefResult8 (upval), UseRefResult9 (upval), UseRefResult1 (upval)
 			if not p1 then return end
 			if UseRefResult7.current == Input and not UseRefResult8.current then
@@ -118,7 +118,7 @@ return function(p1, Current, p2, p3) --[[ Line: 87 | Named "useMomentGestures" ]
 			end
 		end)
 	end, { p1, Callback, LongPressThreshold, UseResult })
-	local UseResult3 = ReactModule.useCallback(function(Input) --[[ Line: 214 ]]
+	local UseResult3 = ReactModule.useCallback(function(Input)
 		-- upvalues: UseRefResult7 (copy), UseRefResult10 (copy), ScrollingFrameRef (copy), IsCancelOnUserScroll (copy), UserInputService (upval), UseRefResult5 (copy), UseRefResult1 (copy), UseRefResult12 (copy), UseRefResult4 (copy), UseRefResult6 (copy), UseResult1 (copy), p1 (copy), UseRefResult11 (copy), MovementThreshold (copy), UseResult (copy)
 		local Current = UseRefResult7.current
 		local Current1 = UseRefResult10.current
@@ -170,7 +170,7 @@ return function(p1, Current, p2, p3) --[[ Line: 87 | Named "useMomentGestures" ]
 		UseResult
 	})
 	UseEventConnectionFunction(UserInputService.InputChanged, UseResult3, { UseResult3 })
-	local UseResult4 = ReactModule.useCallback(function(Input) --[[ Line: 282 ]]
+	local UseResult4 = ReactModule.useCallback(function(Input)
 		-- upvalues: UseRefResult7 (copy), UseRefResult5 (copy), UseResult (copy), UseRefResult8 (copy), UseRefResult11 (copy), UseRefResult12 (copy), UseRefResult1 (copy), UseRefResult3 (copy), UseRefResult4 (copy), UseRefResult6 (copy)
 		if UseRefResult7.current ~= Input then return end
 		UseRefResult7.current = nil
@@ -205,7 +205,7 @@ return function(p1, Current, p2, p3) --[[ Line: 87 | Named "useMomentGestures" ]
 				task.cancel(UseRefResult6.current)
 			end
 			local Current = UseRefResult3.current
-			UseRefResult6.current = task.delay(0.25, function() --[[ Line: 329 ]]
+			UseRefResult6.current = task.delay(0.25, function()
 				-- upvalues: UseRefResult6 (upval), UseRefResult4 (upval), UseRefResult1 (upval), Current (copy)
 				UseRefResult6.current = nil
 				
@@ -221,37 +221,37 @@ return function(p1, Current, p2, p3) --[[ Line: 87 | Named "useMomentGestures" ]
 		end
 	end, { UseResult })
 	UseEventConnectionFunction(UserInputService.InputEnded, UseResult4, { UseResult4 })
-	ReactModule.useEffect(function() --[[ Line: 344 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: CancellationSignal (copy), UseResult1 (copy)
 		if CancellationSignal == nil then return end
 		local Connection = CancellationSignal:Connect(UseResult1)
 		
-		return function() --[[ Line: 349 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end
 	end, { CancellationSignal, UseResult1 })
-	ReactModule.useEffect(function() --[[ Line: 354 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsCancelWhenInactive (copy), p1 (copy), UseResult1 (copy)
 		if IsCancelWhenInactive and not p1 then
 			UseResult1()
 		end
 	end, { p1, IsCancelWhenInactive, UseResult1 })
-	ReactModule.useEffect(function() --[[ Line: 360 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseResult2 (copy)
 		local Current = UseRefResult.current
 		
 		if Current == nil then return end
 		local InputBeganConnection = Current.InputBegan:Connect(UseResult2)
 		
-		return function() --[[ Line: 366 ]]
+		return function()
 			-- upvalues: InputBeganConnection (copy)
 			InputBeganConnection:Disconnect()
 		end
 	end, { UseResult2 })
-	ReactModule.useEffect(function() --[[ Line: 371 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult9 (copy), UseResult1 (copy)
-		return function() --[[ Line: 372 ]]
+		return function()
 			-- upvalues: UseRefResult9 (upval), UseResult1 (upval)
 			UseRefResult9.current = false
 			UseResult1()

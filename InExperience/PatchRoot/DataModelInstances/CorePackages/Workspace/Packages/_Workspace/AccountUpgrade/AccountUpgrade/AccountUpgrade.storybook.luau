@@ -11,7 +11,7 @@ local ColorMode = FoundationModule.Enums.ColorMode
 local Device = FoundationModule.Enums.Device
 local StatusCodes = require(Parent.Dev.Http).StatusCodes
 
-local function validationEndpoint(p1) --[[ Line: 23 ]]
+local function validationEndpoint(p1)
 	-- upvalues: PromiseModule (copy), MockHttpResponse (copy), StatusCodes (copy)
 	return PromiseModule.resolve(MockHttpResponse.new(p1, { code = 0 }, 0, StatusCodes.OK))
 end
@@ -38,9 +38,9 @@ return {
 	name = "AccountUpgrade",
 	roact = ReactModule,
 	reactRoblox = require(Parent.ReactRoblox),
-	mapStory = function(p1) --[[ Line: 47 ]]
+	mapStory = function(p1)
 		-- upvalues: config (copy), config2 (copy), config1 (copy), MockServicesFunction (copy), ReactModule (copy), FoundationProvider (copy), Device (copy), RoactNetworking (copy), validationEndpoint (copy)
-		return function(p2) --[[ Line: 48 ]]
+		return function(p2)
 			-- upvalues: config (upval), config2 (upval), config1 (upval), MockServicesFunction (upval), ReactModule (upval), FoundationProvider (upval), Device (upval), p1 (copy), RoactNetworking (upval), validationEndpoint (upval)
 			local Entry = p2 and config[p2.theme] or config.Default
 			

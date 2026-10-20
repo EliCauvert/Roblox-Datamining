@@ -14,7 +14,7 @@ InspectAndBuyControllerBar.validateProps = TModule.strictInterface({
 	isFavorited = TModule.boolean
 })
 
-function InspectAndBuyControllerBar.render(p1) --[[ Line: 31 ]]
+function InspectAndBuyControllerBar.render(p1)
 	-- upvalues: RobloxTranslatorModule (copy), TryOn (copy), Favorite (copy), RoactModule (copy), CoreGui (copy), ControllerBar (copy)
 	local List = {
 		{

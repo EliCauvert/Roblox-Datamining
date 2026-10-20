@@ -1,5 +1,5 @@
 ﻿return {
-	fromProduct = function(p1) --[[ Line: 11 ]]
+	fromProduct = function(p1)
 		return {
 			universeId = p1.universeId,
 			isForSale = p1.isForSale,

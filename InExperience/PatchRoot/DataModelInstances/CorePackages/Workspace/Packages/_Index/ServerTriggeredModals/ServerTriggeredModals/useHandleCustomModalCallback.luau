@@ -10,17 +10,17 @@ local UpsellEntrySurfaceType = SocialUpsellModule.Analytics.Enum.UpsellEntrySurf
 local UpsellComponent = SocialUpsellModule.Analytics.Enum.UpsellComponent
 local UseSocialUpsellOverlayControllerFunction = SocialUpsellModule.Hooks.useSocialUpsellOverlayController
 
-return function(p1, p2) --[[ Line: 16 ]]
+return function(p1, p2)
 	-- upvalues: UseSocialUpsellOverlayControllerFunction (copy), ReactModule (copy), CustomModalTypeModule (copy), SocialUpsellType (copy), UpsellEntrySurfaceType (copy), UpsellComponent (copy), ReportModalImpressionModule (copy), SendModalImpressionEventFunction (copy)
 	local UseSocialUpsellOverlayControllerResult = UseSocialUpsellOverlayControllerFunction(false)
 	
-	return ReactModule.useCallback(function(p3) --[[ Line: 19 ]]
+	return ReactModule.useCallback(function(p3)
 		-- upvalues: CustomModalTypeModule (upval), UseSocialUpsellOverlayControllerResult (copy), SocialUpsellType (upval), UpsellEntrySurfaceType (upval), UpsellComponent (upval), ReportModalImpressionModule (upval), p2 (copy), SendModalImpressionEventFunction (upval)
 		if p3.modalType == CustomModalTypeModule.SocialFaceAgeEstimationUpsell then
 			UseSocialUpsellOverlayControllerResult.openSocialOverlay(SocialUpsellType.FacialAgeEstimation, {
 				upsellEntrySurface = UpsellEntrySurfaceType.Homepage,
 				upsellEntryComponent = UpsellComponent.Modal,
-				onMounted = function() --[[ Line: 24 ]]
+				onMounted = function()
 					-- upvalues: ReportModalImpressionModule (upval), p2 (upval), p3 (copy), SendModalImpressionEventFunction (upval)
 					ReportModalImpressionModule(p2, p3.modalId, p3.modalType)
 					SendModalImpressionEventFunction(p3.modalId, p3.modalType)

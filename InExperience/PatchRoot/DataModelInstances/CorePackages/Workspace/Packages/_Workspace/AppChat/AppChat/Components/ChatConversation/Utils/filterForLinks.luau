@@ -7,7 +7,7 @@ local FormatMessagesModule = require(script.Parent.formatMessages)
 local SeparateRobloxUrlsFromTextModule = require(script.Parent.RobloxUrlUtils.separateRobloxUrlsFromText)
 local FFlagAppChatPlusReferralAssetCardModule = require(AppChat.Flags.FFlagAppChatPlusReferralAssetCard)
 
-return function(p1, p2) --[[ Line: 18 ]]
+return function(p1, p2)
 	-- upvalues: ArgCheckModule (copy), EnumMessageTypesModule (copy), CryoModule (copy), FFlagAppChatPlusReferralAssetCardModule (copy), FormatMessagesModule (copy), SeparateRobloxUrlsFromTextModule (copy)
 	ArgCheckModule.isType(p1, "table", "filterForLinks.text")
 	ArgCheckModule.isType(p2, "table", "filterForLinks.whitelistedDomains")

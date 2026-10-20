@@ -11,20 +11,20 @@ local ReactModule = require(Parent.React)
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local UseEffectFunction = ReactModule.useEffect
 
-return function() --[[ Line: 18 ]]
+return function()
 	-- upvalues: UseDispatchFunction (copy), UseCurrentSquadIdModule (copy), ReactModule (copy), SquadExternalContractContextModule (copy), AppStorageService (copy), ConstantsModule (copy), UseEffectFunction (copy), ValidateSquadIdModule (copy), FetchActiveSquadModule (copy), RoduxSquadsModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseCurrentSquadIdModuleResult = UseCurrentSquadIdModule() or ""
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseIsChatEnabledResult = ReactModule.useContext(SquadExternalContractContextModule).useIsChatEnabled()
-	ReactModule.useEffect(function() --[[ Line: 27 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), AppStorageService (upval), ConstantsModule (upval), UseCurrentSquadIdModuleResult (copy)
 		if UseStateResult then
 			AppStorageService:SetItem(ConstantsModule.ACTIVE_SQUAD_APP_STORAGE_KEY, UseCurrentSquadIdModuleResult)
 			AppStorageService:Flush()
 		end
 	end, { UseCurrentSquadIdModuleResult, UseStateResult })
-	UseEffectFunction(function() --[[ Line: 35 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseIsChatEnabledResult (copy), AppStorageService (upval), ConstantsModule (upval), ValidateSquadIdModule (upval), UseCurrentSquadIdModuleResult (copy), UseDispatchResult (copy), FetchActiveSquadModule (upval), RoduxSquadsModule (upval), UseStateResult2 (copy)
 		if not UseIsChatEnabledResult then return end
 		local Item = AppStorageService:GetItem(ConstantsModule.ACTIVE_SQUAD_APP_STORAGE_KEY)

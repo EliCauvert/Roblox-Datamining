@@ -7,18 +7,18 @@ local SetNetworkingErrorToastFunction = require(Parent.RobloxAppToastsRodux).Thu
 local SetGameVotesModule = require(GameVotesRodux.GameVotes.SetGameVotes)
 local GetGameVotesModule = require(GameVotesRodux.GameVotes.GetGameVotes)
 
-local function _(Text): string --[[ Line: 12 | Named "fetchKeymapper" ]]
+local function _(Text): string
 	return "luaapp.gamesapi.game-votes" .. Text
 end
 
 return {
-	Fetch = function(p1, Text) --[[ Line: 16 ]]
+	Fetch = function(p1, Text)
 		-- upvalues: PerformFetch (copy), GetGameVotesModule (copy), SetGameVotesModule (copy), PromiseModule (copy), Logging (copy), SetNetworkingErrorToastFunction (copy)
 		assert(type(Text) == "string", string.format("FetchGameVotes thunk expects universeId to be a string, was %s", (type(Text))))
 		
-		return PerformFetch.Single("luaapp.gamesapi.game-votes" .. Text, function(p2) --[[ Line: 22 ]]
+		return PerformFetch.Single("luaapp.gamesapi.game-votes" .. Text, function(p2)
 			-- upvalues: GetGameVotesModule (upval), p1 (copy), Text (copy), SetGameVotesModule (upval), PromiseModule (upval), Logging (upval), SetNetworkingErrorToastFunction (upval)
-			return GetGameVotesModule(p1, Text):andThen(function(Result) --[[ Line: 23 ]]
+			return GetGameVotesModule(p1, Text):andThen(function(Result)
 				-- upvalues: p2 (copy), SetGameVotesModule (upval), Text (upval), PromiseModule (upval), Logging (upval)
 				local ResponseBody = Result.responseBody
 				
@@ -31,7 +31,7 @@ return {
 					
 					return PromiseModule.resolve(Result)
 				end
-			end, function(p3) --[[ Line: 39 ]]
+			end, function(p3)
 				-- upvalues: p2 (copy), SetNetworkingErrorToastFunction (upval), PromiseModule (upval)
 				p2:dispatch(SetNetworkingErrorToastFunction(p3))
 				
@@ -39,7 +39,7 @@ return {
 			end)
 		end)
 	end,
-	GetFetchingStatus = function(p1, Text) --[[ Line: 46 ]]
+	GetFetchingStatus = function(p1, Text)
 		-- upvalues: PerformFetch (copy)
 		return PerformFetch.GetStatus(p1, "luaapp.gamesapi.game-votes" .. Text)
 	end

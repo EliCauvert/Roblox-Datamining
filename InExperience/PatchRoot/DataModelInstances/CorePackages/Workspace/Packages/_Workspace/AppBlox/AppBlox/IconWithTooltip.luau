@@ -18,7 +18,7 @@ local LuaAppGateTooltipPositionTracking = game:DefineFastFlag("LuaAppGateTooltip
 local IconsActionsInfo = Images["icons/actions/info"]
 local _Vector2 = Vector2.new(game:GetFastInt("TooltipHitboxMinSize"), game:GetFastInt("TooltipHitboxMinSize"))
 
-return function(p1) --[[ Line: 45 | Named "IconWithTooltip" ]]
+return function(p1)
 	-- upvalues: UseUiModeInfoFunction (copy), UseDesignTokensFunction (copy), LuaAppGateTooltipPositionTracking (copy), ReactModule (copy), GetFFlagTenFootUiSupportSortHeaderTooltipFunction (copy), FFlagLuaAppFixCursorHooks (copy), UseCursorFunction (copy), UiMode (copy), CoreGui (copy), WithHoverTooltipFunction (copy), ControlState (copy), ImageSetLabel (copy), IconsActionsInfo (copy), Interactable (copy), _Vector2 (copy)
 	local UseUiModeInfoResult = UseUiModeInfoFunction()
 	local UseDesignTokensResult = UseDesignTokensFunction()
@@ -50,17 +50,17 @@ return function(p1) --[[ Line: 45 | Named "IconWithTooltip" ]]
 			guiTarget = CoreGui,
 			triggerPointName = p1.triggerPointName,
 			disabled = IsUiModeMatch
-		}, function(Callback1, Callback) --[[ Line: 90 ]]
+		}, function(Callback1, Callback)
 			-- upvalues: LuaAppGateTooltipPositionTracking (upval), UseRefResult (copy), ControlState (upval), UseRefResult1 (copy), ReactModule (upval), Size (copy), p1 (copy), FFlagLuaAppFixCursorHooks (upval), GetFFlagTenFootUiSupportSortHeaderTooltipFunction (upval), UseCursorResult (copy), UseCursorFunction (upval), Offset (ref), Size0 (ref), ImageSetLabel (upval), IconsActionsInfo (upval), EmphasisColor3 (copy), Interactable (upval), _Vector2 (upval)
 			if LuaAppGateTooltipPositionTracking then
-				local function v23(p2) --[[ Line: 98 ]]
+				local function v23(p2)
 					-- upvalues: UseRefResult (upval), Callback1 (copy)
 					if UseRefResult.current then
 						Callback1(p2)
 					end
 				end
 				
-				local function OnStateChanged(p2, Hover) --[[ Line: 103 ]]
+				local function OnStateChanged(p2, Hover)
 					-- upvalues: UseRefResult (upval), ControlState (upval), UseRefResult1 (upval), Callback1 (copy), Callback (copy)
 					UseRefResult.current = Hover == ControlState.Hover or Hover == ControlState.Selected
 					

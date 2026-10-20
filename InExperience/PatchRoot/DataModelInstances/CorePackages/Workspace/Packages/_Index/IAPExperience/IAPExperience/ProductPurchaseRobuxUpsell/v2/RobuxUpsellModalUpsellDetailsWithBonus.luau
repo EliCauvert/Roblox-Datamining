@@ -11,7 +11,7 @@ local _ = require(Parent.Api.PaymentsGateway.GetUpsellSuggestionsTypes)
 local _ = require(Parent.Enums.BadgeType)
 local _ = require(Parent.Enums.VirtualItemBadgeType)
 
-return function(p1) --[[ Line: 33 | Named "RobuxUpsellModalUpsellDetailsWithBonus" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), View (copy), Text (copy), FormatNumberModule (copy), LocalizationService (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		MoreRobux = "IAPExperience.RobuxUpsell.Text.MoreRobux",

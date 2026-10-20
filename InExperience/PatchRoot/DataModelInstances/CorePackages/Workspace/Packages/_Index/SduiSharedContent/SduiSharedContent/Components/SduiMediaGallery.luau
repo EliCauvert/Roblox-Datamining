@@ -15,17 +15,17 @@ local UseMediaGalleryVideoAnalyticsFunction = MediaGalleryModule.useMediaGallery
 local UseMediaGalleryFullscreenModule = require(script.Parent.useMediaGalleryFullscreen)
 local FFlagLuaAppEdpMomentVideo = require(Parent.SharedFlags).FFlagLuaAppEdpMomentVideo
 
-return ReactModule.memo(function(p1) --[[ Line: 79 | Named "SduiMediaGallery" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), VideoPlaybackCoordinator (copy), FFlagLuaAppEdpMomentVideo (copy), GetSduiComponentWrapperFunction (copy), UseFilteredMediaItemsFunction (copy), UseMediaGalleryVideoAnalyticsFunction (copy), OpenYouTubeVideoWithAgeCheckFunction (copy), OpenYouTubeVideoEventFunction (copy), SendMediaGalleryMediaChangedFunction (copy), IsYouTubeVideoFunction (copy), UseMediaGalleryFullscreenModule (copy), IsValidIdentifierFunction (copy), MediaGalleryCarousel (copy)
 	local EventIngest = p1.sduiContext.dependencies.eventIngest
 	local UniverseId = p1.universeId or ""
 	local PlaceId = p1.placeId
 	local MediaGalleryAnalyticsContext = p1.mediaGalleryAnalyticsContext or "ExperienceDetailsPage"
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 86 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: VideoPlaybackCoordinator (upval)
 		return VideoPlaybackCoordinator.new()
 	end, {})
-	local UseMemoResult1 = if FFlagLuaAppEdpMomentVideo then ReactModule.useMemo(function() --[[ Line: 92 ]]
+	local UseMemoResult1 = if FFlagLuaAppEdpMomentVideo then ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), ReactModule (upval), GetSduiComponentWrapperFunction (upval)
 		local Buffer = table.create(#p1.items)
 		
@@ -49,14 +49,14 @@ return ReactModule.memo(function(p1) --[[ Line: 79 | Named "SduiMediaGallery" ]]
 	local UseFilteredMediaItemsResult = UseFilteredMediaItemsFunction(if FFlagLuaAppEdpMomentVideo then UseMemoResult1 else p1.items, UniverseId, p1.sduiContext.appPage)
 	local UseMediaGalleryVideoAnalyticsResult = UseMediaGalleryVideoAnalyticsFunction(UniverseId, PlaceId or "", UseFilteredMediaItemsResult)
 	local Dispatch = p1.sduiContext.dependencies.dispatch
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 121 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: OpenYouTubeVideoWithAgeCheckFunction (upval), Dispatch (copy), OpenYouTubeVideoEventFunction (upval), EventIngest (copy), UniverseId (copy)
-		OpenYouTubeVideoWithAgeCheckFunction(p2.videoHash, p2.videoTitle, Dispatch, function() --[[ Line: 122 ]]
+		OpenYouTubeVideoWithAgeCheckFunction(p2.videoHash, p2.videoTitle, Dispatch, function()
 			-- upvalues: OpenYouTubeVideoEventFunction (upval), EventIngest (upval), p2 (copy), UniverseId (upval)
 			OpenYouTubeVideoEventFunction(EventIngest, "gameDetailsAccordianImage", p2.videoTitle, p2.videoHash, UniverseId, "play")
 		end)
 	end, { EventIngest, UniverseId, Dispatch })
-	local UseResult1 = ReactModule.useCallback(function(p2, p3) --[[ Line: 134 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: UseFilteredMediaItemsResult (copy), SendMediaGalleryMediaChangedFunction (upval), EventIngest (copy), MediaGalleryAnalyticsContext (copy), UniverseId (copy), IsYouTubeVideoFunction (upval), PlaceId (copy)
 		local UseFilteredMediaItemsResultEntry = UseFilteredMediaItemsResult[p2]
 		
@@ -80,7 +80,7 @@ return ReactModule.memo(function(p1) --[[ Line: 79 | Named "SduiMediaGallery" ]]
 		mediaGalleryAnalyticsContext = MediaGalleryAnalyticsContext,
 		eventIngest = EventIngest,
 		onYouTubeVideoPlay = UseResult,
-		onFullscreenMediaChanged = ReactModule.useCallback(function(p2, p3) --[[ Line: 150 ]]
+		onFullscreenMediaChanged = ReactModule.useCallback(function(p2, p3)
 			-- upvalues: UseFilteredMediaItemsResult (copy), SendMediaGalleryMediaChangedFunction (upval), EventIngest (copy), UniverseId (copy), PlaceId (copy)
 			local UseFilteredMediaItemsResultEntry = UseFilteredMediaItemsResult[p2]
 			
@@ -100,7 +100,7 @@ return ReactModule.memo(function(p1) --[[ Line: 79 | Named "SduiMediaGallery" ]]
 		cornerRadius = p1.cornerRadius,
 		overlay = p1.overlay
 	})
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 181 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: UseFilteredMediaItemsResult (copy), p1 (copy), IsValidIdentifierFunction (upval), PlaceId (copy)
 		if #UseFilteredMediaItemsResult > 0 then
 			return UseFilteredMediaItemsResult
@@ -112,7 +112,7 @@ return ReactModule.memo(function(p1) --[[ Line: 79 | Named "SduiMediaGallery" ]]
 		end
 		return if FallbackImageId then { { imageId = FallbackImageId } } else UseFilteredMediaItemsResult
 	end, { UseFilteredMediaItemsResult, p1.fallbackImageId, PlaceId })
-	ReactModule.useEffect(function() --[[ Line: 195 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseFilteredMediaItemsResult (copy), IsYouTubeVideoFunction (upval), OpenYouTubeVideoEventFunction (upval), EventIngest (copy), UniverseId (copy)
 		for _, value in UseFilteredMediaItemsResult do
 			if IsYouTubeVideoFunction(value.assetTypeId) and value.videoHash then
@@ -123,14 +123,14 @@ return ReactModule.memo(function(p1) --[[ Line: 79 | Named "SduiMediaGallery" ]]
 	end, { EventIngest, UseFilteredMediaItemsResult, UniverseId })
 	local v1 = #UseMemoResult2 == 0
 	local UseRefResult = ReactModule.useRef(false)
-	local UseResult2 = ReactModule.useCallback(function(MediaFound) --[[ Line: 214 ]]
+	local UseResult2 = ReactModule.useCallback(function(MediaFound)
 		-- upvalues: UseRefResult (copy), p1 (copy)
 		if not UseRefResult.current and p1.onFirstMediaResolved then
 			UseRefResult.current = true
 			p1.onFirstMediaResolved(nil, nil, { metadata = { mediaFound = MediaFound } })
 		end
 	end, { p1.onFirstMediaResolved })
-	ReactModule.useEffect(function() --[[ Line: 221 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: v1 (copy), UseRefResult (copy), p1 (copy), UseResult2 (copy)
 		if v1 and not UseRefResult.current and p1.onFirstMediaResolved then
 			UseResult2(false)

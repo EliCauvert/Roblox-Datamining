@@ -1,7 +1,7 @@
 ﻿local CreateSignalFunction = require(script.Parent.Parent.Signals).createSignal
 local t = {}
 
-local function _(CreatorId) --[[ Line: 25 | Named "createDefaultPlayerIconInfo" ]]
+local function _(CreatorId)
 	return {
 		avatarIcon = nil,
 		specialGroupIcon = nil,
@@ -9,7 +9,7 @@ local function _(CreatorId) --[[ Line: 25 | Named "createDefaultPlayerIconInfo" 
 	}
 end
 
-local _ = function(CreatorId) --[[ Line: 33 | Named "getOrCreatePlayerSignal" ]]
+local _ = function(CreatorId)
 	-- upvalues: t (ref), CreateSignalFunction (copy)
 	if not t[CreatorId] then
 		local Signal, Signal2 = CreateSignalFunction({
@@ -23,7 +23,7 @@ local _ = function(CreatorId) --[[ Line: 33 | Named "getOrCreatePlayerSignal" ]]
 end
 
 return {
-	getPlayerIconInfoReactive = function(CreatorId) --[[ Line: 41 ]]
+	getPlayerIconInfoReactive = function(CreatorId)
 		-- upvalues: t (ref), CreateSignalFunction (copy)
 		if not t[CreatorId] then
 			local Signal, Signal2 = CreateSignalFunction({
@@ -35,7 +35,7 @@ return {
 		end
 		return t[CreatorId].getter
 	end,
-	setPlayerIconInfo = function(CreatorId, p1) --[[ Line: 46 ]]
+	setPlayerIconInfo = function(CreatorId, p1)
 		-- upvalues: t (ref), CreateSignalFunction (copy)
 		if not t[CreatorId] then
 			local Signal, Signal2 = CreateSignalFunction({
@@ -47,7 +47,7 @@ return {
 		end
 		t[CreatorId].setter(p1)
 	end,
-	addPlayer = function(CreatorId) --[[ Line: 51 ]]
+	addPlayer = function(CreatorId)
 		-- upvalues: t (ref), CreateSignalFunction (copy)
 		if not t[CreatorId] then
 			local Signal, Signal2 = CreateSignalFunction({
@@ -59,11 +59,11 @@ return {
 		end
 		local _ = t[CreatorId]
 	end,
-	removePlayer = function(Key) --[[ Line: 56 ]]
+	removePlayer = function(Key)
 		-- upvalues: t (ref)
 		t[Key] = nil
 	end,
-	cleanUp = function() --[[ Line: 60 ]]
+	cleanUp = function()
 		-- upvalues: t (ref)
 		t = {}
 	end

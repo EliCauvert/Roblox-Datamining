@@ -10,19 +10,19 @@ local ReactElementModule = require(script.Parent.ReactElement)
 local IsValidElementFunction = ReactElementModule.isValidElement
 local CloneAndReplaceKeyFunction = ReactElementModule.cloneAndReplaceKey
 
-local function _(Text: string): string --[[ Line: 45 | Named "escape" ]]
+local function _(Text: string): string
 	return "$" .. string.gsub(string.gsub(Text, "=", "=0"), ":", "=2")
 end
 
-local _ = function(p1) --[[ Line: 60 | Named "escapeUserProvidedKey" ]]
+local _ = function(p1)
 	return p1
 end
 
-local _ = function(p1, p2): string --[[ Line: 73 | Named "getElementKey" ]]
+local _ = function(p1, p2): string
 	return if typeof(p1) == "table" and p1 ~= nil and p1.key ~= nil then "$" .. string.gsub(string.gsub(tostring(p1.key), "=", "=0"), ":", "=2") else tostring(p2)
 end
 
-local function mapIntoArray(p1, List, Text, Text1, Callback): number --[[ Line: 86 ]]
+local function mapIntoArray(p1, List, Text, Text1, Callback): number
 	-- upvalues: REACTELEMENTTYPE (copy), REACTPORTALTYPE (copy), Array (copy), mapIntoArray (copy), IsValidElementFunction (copy), CloneAndReplaceKeyFunction (copy), GetIteratorFnFunction (copy)
 	local ValueType = typeof(p1)
 	
@@ -48,7 +48,7 @@ local function mapIntoArray(p1, List, Text, Text1, Callback): number --[[ Line: 
 		local Text2 = if Text1 == "" then "." .. (if typeof(v1) == "table" and v1 ~= nil and v1.key ~= nil then "$" .. string.gsub(string.gsub(tostring(v1.key), "=", "=0"), ":", "=2") else tostring(1)) else Text1
 		
 		if Array.isArray(CallbackResult) then
-			mapIntoArray(CallbackResult, List, if Text2 == nil then "" else Text2 .. "/", "", function(p2) --[[ Line: 135 ]]
+			mapIntoArray(CallbackResult, List, if Text2 == nil then "" else Text2 .. "/", "", function(p2)
 				return p2
 			end)
 		elseif CallbackResult ~= nil then
@@ -89,14 +89,14 @@ local function mapIntoArray(p1, List, Text, Text1, Callback): number --[[ Line: 
 	end
 end
 
-local function mapChildren(p2, Callback, _) --[[ Line: 253 ]]
+local function mapChildren(p2, Callback, _)
 	-- upvalues: mapIntoArray (copy)
 	if p2 == nil then
 		return nil
 	else
 		local t = {}
 		local Count = 1
-		mapIntoArray(p2, t, "", "", function(p3) --[[ Line: 263 ]]
+		mapIntoArray(p2, t, "", "", function(p3)
 			-- upvalues: Callback (copy), Count (ref)
 			local CallbackResult = Callback(p3, Count)
 			Count += 1
@@ -109,33 +109,33 @@ local function mapChildren(p2, Callback, _) --[[ Line: 253 ]]
 end
 
 return {
-	forEach = function(p2, Callback, p3) --[[ Line: 305 ]]
+	forEach = function(p2, Callback, p3)
 		-- upvalues: mapChildren (copy)
-		mapChildren(p2, function(...) --[[ Line: 310 ]]
+		mapChildren(p2, function(...)
 			-- upvalues: Callback (copy)
 			Callback(...)
 		end, p3)
 	end,
 	map = mapChildren,
-	count = function(p2): number --[[ Line: 281 ]]
+	count = function(p2): number
 		-- upvalues: mapChildren (copy)
 		local Count = 0
-		mapChildren(p2, function() --[[ Line: 283 ]]
+		mapChildren(p2, function()
 			-- upvalues: Count (ref)
 			Count += 1
 		end)
 		
 		return Count
 	end,
-	only = function(p2) --[[ Line: 345 ]]
+	only = function(p2)
 		-- upvalues: InvariantFunction (copy), IsValidElementFunction (copy)
 		InvariantFunction(IsValidElementFunction(p2), "React.Children.only expected to receive a single React element child.")
 		
 		return p2
 	end,
-	toArray = function(p2) --[[ Line: 324 ]]
+	toArray = function(p2)
 		-- upvalues: mapChildren (copy)
-		return mapChildren(p2, function(p3) --[[ Line: 325 ]]
+		return mapChildren(p2, function(p3)
 			return p3
 		end) or {}
 	end

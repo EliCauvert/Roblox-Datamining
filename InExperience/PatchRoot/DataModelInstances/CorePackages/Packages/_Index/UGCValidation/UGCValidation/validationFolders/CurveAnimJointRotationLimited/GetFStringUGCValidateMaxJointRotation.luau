@@ -1,11 +1,11 @@
 ﻿game:DefineFastString("UGCValidateMaxJointRotation", "180")
 local GetFStringUGCValidateMaxJointRotationModule = {
-	asString = function() --[[ Line: 9 ]]
+	asString = function()
 		return game:GetFastString("UGCValidateMaxJointRotation")
 	end
 }
 
-function GetFStringUGCValidateMaxJointRotationModule.asNumber(): number --[[ Line: 13 ]]
+function GetFStringUGCValidateMaxJointRotationModule.asNumber(): number
 	-- upvalues: GetFStringUGCValidateMaxJointRotationModule (copy)
 	return (tonumber(GetFStringUGCValidateMaxJointRotationModule.asString()))
 end

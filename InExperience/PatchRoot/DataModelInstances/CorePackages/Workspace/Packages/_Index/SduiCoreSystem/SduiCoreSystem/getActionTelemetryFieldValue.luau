@@ -3,7 +3,7 @@ local FindAnalyticsFieldInAncestorsModule = require(SduiCoreSystem.findAnalytics
 local _ = require(SduiCoreSystem.SduiBuilderTypes)
 local _ = require(SduiCoreSystem.SduiConfigTypes)
 
-return function(p1, p2, p3, p4) --[[ Line: 12 | Named "getActionTelemetryFieldValue" ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: FindAnalyticsFieldInAncestorsModule (copy)
 	local AnalyticsFieldInAncestorsModule = FindAnalyticsFieldInAncestorsModule(p3, p2)
 	

@@ -8,7 +8,7 @@ local Dictionary = require(Parent.Cryo).Dictionary
 local LoggerModule = require(GenericAbuseReporting.Logger)
 LoggerModule:addSink({
 	maxLevel = LoggerModule.Levels.fromString("trace"),
-	log = function(_, p1, p2) --[[ Line: 17 ]]
+	log = function(_, p1, p2)
 		print(`[{p2.loggerName}] {p1}`)
 	end
 })
@@ -16,9 +16,9 @@ LoggerModule:addSink({
 return {
 	roact = ReactModule,
 	reactRoblox = ReactRobloxModule,
-	mapStory = function(p1) --[[ Line: 25 ]]
+	mapStory = function(p1)
 		-- upvalues: Dictionary (copy), ReactModule (copy), MockProvidersModule (copy), FoundationProvider (copy)
-		return function(p2) --[[ Line: 26 ]]
+		return function(p2)
 			-- upvalues: Dictionary (upval), ReactModule (upval), MockProvidersModule (upval), FoundationProvider (upval), p1 (copy)
 			return ReactModule.createElement(MockProvidersModule, {}, {
 				FoundationProvider = ReactModule.createElement(FoundationProvider, {

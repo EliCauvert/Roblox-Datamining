@@ -10,29 +10,29 @@ local View = FoundationModule.View
 local Radius = FoundationModule.Enums.Radius
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return ReactModule.memo(function(Frame) --[[ Line: 32 | Named "VideoPreview" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseTokensFunction (copy), GetColorStyleWithTransparencyModule (copy), ReactModule (copy), ReactOtterModule (copy), View (copy), Skeleton (copy), Radius (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Preview = Frame.preview
-	local MapResult = Frame.animationRatio:map(function(p1: number): number --[[ Line: 37 ]]
+	local MapResult = Frame.animationRatio:map(function(p1: number): number
 		return 1 - p1
 	end)
-	local MapResult1 = MapResult:map(function(p1) --[[ Line: 42 ]]
+	local MapResult1 = MapResult:map(function(p1)
 		-- upvalues: GetColorStyleWithTransparencyModule (upval), UseTokensResult (copy)
 		return GetColorStyleWithTransparencyModule(UseTokensResult.Color.Shift.Shift_400, p1).Transparency or 0
 	end)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Preview.isLoading)
-	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0, function() --[[ Line: 49 ]]
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0, function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end)
-	ReactModule.useEffect(function() --[[ Line: 53 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Preview (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
 		if not Preview.isLoading then
 			UseAnimatedBindingResult2(ReactOtterModule.ease(1, { duration = 0.1, easingStyle = Enum.EasingStyle.Quad }))
 		end
 	end, { Preview.isLoading })
-	local MapResult2 = UseAnimatedBindingResult:map(function(p1: number): number --[[ Line: 64 ]]
+	local MapResult2 = UseAnimatedBindingResult:map(function(p1: number): number
 		return 1 - p1
 	end)
 	
@@ -57,7 +57,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 32 | Named "VideoPreview" ]]
 			ImageTransparency = MapResult2,
 			ScaleType = Enum.ScaleType.Crop,
 			ImageContent = Preview.contentA,
-			ZIndex = Preview.frontIsA:map(function(p1): number --[[ Line: 91 ]]
+			ZIndex = Preview.frontIsA:map(function(p1): number
 				return if p1 then 2 else 1
 			end),
 			ref = Preview.imageARef
@@ -68,7 +68,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 32 | Named "VideoPreview" ]]
 			ImageTransparency = MapResult2,
 			ScaleType = Enum.ScaleType.Crop,
 			ImageContent = Preview.contentB,
-			ZIndex = Preview.frontIsA:map(function(p1): number --[[ Line: 102 ]]
+			ZIndex = Preview.frontIsA:map(function(p1): number
 				return if p1 then 1 else 2
 			end),
 			ref = Preview.imageBRef

@@ -2,7 +2,7 @@
 local CryoModule = require(SocialLuaAnalytics.Parent.Cryo)
 local EventTypes = require(SocialLuaAnalytics.Analytics.Enums).EventTypes
 
-return function(p1, p2): string --[[ Line: 16 | Named "createDiagMetricString" ]]
+return function(p1, p2): string
 	-- upvalues: EventTypes (copy), CryoModule (copy)
 	local P1 = p2 or {}
 	

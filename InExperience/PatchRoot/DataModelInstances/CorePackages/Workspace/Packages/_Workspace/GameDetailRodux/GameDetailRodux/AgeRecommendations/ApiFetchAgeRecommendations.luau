@@ -9,16 +9,16 @@ local SetAgeRecommendationModule = require(GameDetailRodux.AgeRecommendations.Se
 local SetAgeRecommendationHeadersModule = require(GameDetailRodux.AgeRecommendations.SetAgeRecommendationHeaders)
 local GetAgeRecommendationModule = require(GameDetailRodux.AgeRecommendations.GetAgeRecommendation)
 
-local function _(Text): string --[[ Line: 17 | Named "fetchKeymapper" ]]
+local function _(Text): string
 	return "luaapp.experience_guidelines.get-age-guidelines" .. Text
 end
 
 return {
-	Fetch = function(p1, Text) --[[ Line: 21 ]]
+	Fetch = function(p1, Text)
 		-- upvalues: PerformFetch (copy), GetAgeRecommendationModule (copy), AgeRecommendationDetailsModule (copy), Logging (copy), PromiseModule (copy), SetAgeRecommendationModule (copy), SetAgeRecommendationHeadersModule (copy), SetNetworkingErrorToastFunction (copy)
-		return PerformFetch.Single("luaapp.experience_guidelines.get-age-guidelines" .. Text, function(p2) --[[ Line: 22 ]]
+		return PerformFetch.Single("luaapp.experience_guidelines.get-age-guidelines" .. Text, function(p2)
 			-- upvalues: GetAgeRecommendationModule (upval), p1 (copy), Text (copy), AgeRecommendationDetailsModule (upval), Logging (upval), PromiseModule (upval), SetAgeRecommendationModule (upval), SetAgeRecommendationHeadersModule (upval), SetNetworkingErrorToastFunction (upval)
-			return GetAgeRecommendationModule(p1, Text):andThen(function(Result) --[[ Line: 23 ]]
+			return GetAgeRecommendationModule(p1, Text):andThen(function(Result)
 				-- upvalues: AgeRecommendationDetailsModule (upval), Logging (upval), Text (upval), PromiseModule (upval), p2 (copy), SetAgeRecommendationModule (upval), SetAgeRecommendationHeadersModule (upval)
 				local ResponseBody = Result.responseBody
 				
@@ -39,7 +39,7 @@ return {
 					
 					return PromiseModule.resolve(Result)
 				end
-			end, function(p3) --[[ Line: 46 ]]
+			end, function(p3)
 				-- upvalues: p2 (copy), SetNetworkingErrorToastFunction (upval), PromiseModule (upval)
 				p2:dispatch(SetNetworkingErrorToastFunction(p3))
 				
@@ -47,7 +47,7 @@ return {
 			end)
 		end)
 	end,
-	GetFetchingStatus = function(p1, Text) --[[ Line: 53 ]]
+	GetFetchingStatus = function(p1, Text)
 		-- upvalues: PerformFetch (copy)
 		return PerformFetch.GetStatus(p1, "luaapp.experience_guidelines.get-age-guidelines" .. Text)
 	end

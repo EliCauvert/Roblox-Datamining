@@ -5,7 +5,7 @@ local Image = FoundationModule.Image
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1) --[[ Line: 18 | Named "RadialProgressBar" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Image (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Background = UseTokensResult.Color.ActionSubtle.Background
@@ -38,7 +38,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1) --[[ Line: 18 | Name
 				Gradient = ReactModule.createElement("UIGradient", {
 					Transparency = NumberSequence1,
 					Color = ColorSequence1,
-					Rotation = p1.progress:map(function(p2: number): number --[[ Line: 52 ]]
+					Rotation = p1.progress:map(function(p2: number): number
 						return (math.clamp(p2 * 360, 180, 360))
 					end)
 				})
@@ -56,7 +56,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1) --[[ Line: 18 | Name
 				Gradient = ReactModule.createElement("UIGradient", {
 					Transparency = NumberSequence1,
 					Color = ColorSequence1,
-					Rotation = p1.progress:map(function(p2: number): number --[[ Line: 71 ]]
+					Rotation = p1.progress:map(function(p2: number): number
 						return (math.clamp(p2 * 360, 0, 180))
 					end)
 				})

@@ -16,9 +16,9 @@ return {
 	name = "AvatarExperienceSave",
 	roact = ReactModule,
 	reactRoblox = require(Parent.Dev.ReactRoblox),
-	mapStory = function(p1) --[[ Line: 36 ]]
+	mapStory = function(p1)
 		-- upvalues: config (copy), ReactModule (copy), FoundationProvider (copy), StyleTable (copy), config1 (copy)
-		return function(p2) --[[ Line: 37 ]]
+		return function(p2)
 			-- upvalues: config (upval), ReactModule (upval), FoundationProvider (upval), StyleTable (upval), config1 (upval), p1 (copy)
 			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,

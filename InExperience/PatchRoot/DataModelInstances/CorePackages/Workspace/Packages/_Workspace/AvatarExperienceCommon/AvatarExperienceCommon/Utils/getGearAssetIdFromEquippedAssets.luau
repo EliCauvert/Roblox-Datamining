@@ -1,4 +1,4 @@
-﻿return function(p1): number --[[ Line: 1 | Named "getGearAssetIdFromEquippedAssets" ]]
+﻿return function(p1): number
 	local Number: number? = nil
 	local v1 = p1[tostring(Enum.AssetType.Gear.Value)]
 	

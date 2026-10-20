@@ -121,7 +121,7 @@ return {
 			}
 		}
 	},
-	recommendationIdsList = Dash.map(Dash.values(RecommendationIds), function(Id) --[[ Line: 32 ]]
+	recommendationIdsList = Dash.map(Dash.values(RecommendationIds), function(Id)
 		return { id = Id }
 	end)
 }

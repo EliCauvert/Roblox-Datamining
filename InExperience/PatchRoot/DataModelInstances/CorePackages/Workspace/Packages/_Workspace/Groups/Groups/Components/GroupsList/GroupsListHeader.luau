@@ -14,7 +14,7 @@ local TextKeysModule = require(Groups.Common.TextKeys)
 local UseGroupsWrapperContextModule = require(Groups.Contexts.useGroupsWrapperContext)
 local FFlagEnableGroupDetailPane = require(Parent.SharedFlags).FFlagEnableGroupDetailPane
 
-return function(p1) --[[ Line: 34 | Named "GroupsListHeader" ]]
+return function(p1)
 	-- upvalues: UseGroupsWrapperContextModule (copy), UseNavigationFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), FFlagEnableGroupDetailPane (copy), AppHeaderBarModule (copy), View (copy), Text (copy), Button (copy), ButtonVariant (copy), InputSize (copy)
 	local UseGroupsWrapperContextModuleResult = UseGroupsWrapperContextModule()
 	local UseNavigationResult = UseNavigationFunction()
@@ -22,7 +22,7 @@ return function(p1) --[[ Line: 34 | Named "GroupsListHeader" ]]
 		title = TextKeysModule.HeadingGroups,
 		seeAll = TextKeysModule.ActionSeeAll
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 43 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FFlagEnableGroupDetailPane (upval), UseGroupsWrapperContextModuleResult (copy), UseNavigationResult (copy)
 		if FFlagEnableGroupDetailPane and UseGroupsWrapperContextModuleResult.navigateTo.previousView then
 			UseGroupsWrapperContextModuleResult.navigateTo.previousView()
@@ -35,7 +35,7 @@ return function(p1) --[[ Line: 34 | Named "GroupsListHeader" ]]
 		if FFlagEnableGroupDetailPane then UseGroupsWrapperContextModuleResult.navigateTo.previousView else nil,
 		UseNavigationResult
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 52 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: AppHeaderBarModule (upval), UseResult (copy)
 		return AppHeaderBarModule.makeBackButton(UseResult)
 	end, { UseResult })
@@ -47,7 +47,7 @@ return function(p1) --[[ Line: 34 | Named "GroupsListHeader" ]]
 		AutomaticSize = Enum.AutomaticSize.Y
 	}, {
 		LeftSection = ReactModule.createElement(View, { tag = "row align-y-center gap-small auto-xy" }, {
-			BackButton = ReactModule.useMemo(function() --[[ Line: 56 ]]
+			BackButton = ReactModule.useMemo(function()
 				-- upvalues: UseMemoResult (copy), ReactModule (upval), View (upval)
 				return ReactModule.createElement(View, { tag = "align-x-left size-0 auto-xy", LayoutOrder = 1 }, { button = UseMemoResult() })
 			end, { UseMemoResult }),

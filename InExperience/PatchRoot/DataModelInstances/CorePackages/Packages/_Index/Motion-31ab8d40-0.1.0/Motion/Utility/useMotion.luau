@@ -6,7 +6,7 @@ local _ = require(Parent1.Types)
 local TimingConfigsModule = require(Parent.TimingConfigs)
 local TransitionPresetModule = require(Parent1.Enums.TransitionPreset)
 
-return function(List) --[[ Line: 20 | Named "useMotion" ]]
+return function(List)
 	-- upvalues: ReactModule (copy), UseAnimatedValueModule (copy), TransitionPresetModule (copy), TimingConfigsModule (copy)
 	local t = {}
 	local t1 = {}
@@ -17,7 +17,7 @@ return function(List) --[[ Line: 20 | Named "useMotion" ]]
 			t[i], t1[i] = UseAnimatedValueModule(value)
 		end
 	end
-	return t, function(p1, p2) --[[ Line: 40 | Named "animate" ]]
+	return t, function(p1, p2)
 		-- upvalues: t1 (copy), UseRefResult (copy), TransitionPresetModule (upval), TimingConfigsModule (upval)
 		if not p1 then return end
 		local Count = 0
@@ -30,7 +30,7 @@ return function(List) --[[ Line: 20 | Named "useMotion" ]]
 		end
 		local Count1 = 0
 		
-		local function _(Key) --[[ Line: 57 | Named "propertyOnComplete" ]]
+		local function _(Key)
 			-- upvalues: t (copy), p1 (copy), Count1 (ref), p2 (copy), Count (ref)
 			t[Key] = p1[Key]
 			Count1 += 1
@@ -58,7 +58,7 @@ return function(List) --[[ Line: 20 | Named "useMotion" ]]
 				}
 				local Copy = table.clone(Transition[i1] or (Transition[TransitionPresetModule.Default] or TimingConfigsModule.getDefaultTransition()))
 				
-				function Copy.onComplete() --[[ Line: 94 ]]
+				function Copy.onComplete()
 					-- upvalues: i1 (copy), t (copy), p1 (copy), Count1 (ref), p2 (copy), Count (ref)
 					t[i1] = p1[i1]
 					Count1 += 1
@@ -74,7 +74,7 @@ return function(List) --[[ Line: 20 | Named "useMotion" ]]
 				local Delay = Copy.delay or 0
 				
 				if Delay > 0 then
-					UseRefResult.current[i1] = task.delay(Delay, function() --[[ Line: 103 ]]
+					UseRefResult.current[i1] = task.delay(Delay, function()
 						-- upvalues: UseRefResult (upval), i1 (copy), value (copy), p1 (copy), Copy (copy)
 						UseRefResult.current[i1] = nil
 						value(p1[i1], Copy)

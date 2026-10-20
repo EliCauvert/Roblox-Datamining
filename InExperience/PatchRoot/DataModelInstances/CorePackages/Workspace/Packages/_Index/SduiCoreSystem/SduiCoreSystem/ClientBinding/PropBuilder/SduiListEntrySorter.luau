@@ -7,7 +7,7 @@ local _ = require(SduiCoreSystem.ClientBinding.PropBuilder.SduiListEntryNormaliz
 local PropResultCategory = require(SduiCoreSystem.ClientBinding.SduiClientBindingTypes).PropResultCategory
 local t = {}
 
-local function resolvePropToValue(p1, p2, p3, p4, p5, p6) --[[ Line: 39 ]]
+local function resolvePropToValue(p1, p2, p3, p4, p5, p6)
 	-- upvalues: SduiClientBindingBuilderModule (copy), PropResultCategory (copy)
 	if p1 == nil or p1.kind == nil then
 		return nil
@@ -23,7 +23,7 @@ local function resolvePropToValue(p1, p2, p3, p4, p5, p6) --[[ Line: 39 ]]
 	end
 end
 
-local function _(p1, p2, p3, p4, p5, p6) --[[ Line: 67 | Named "resolveOrderedIdentifiers" ]]
+local function _(p1, p2, p3, p4, p5, p6)
 	-- upvalues: SduiClientBindingBuilderModule (copy), PropResultCategory (copy)
 	if p1 == nil or p1.kind == nil then
 		return nil
@@ -44,7 +44,7 @@ local function _(p1, p2, p3, p4, p5, p6) --[[ Line: 67 | Named "resolveOrderedId
 	return Prop1
 end
 
-local function resolveItemSortRank(SortRankProp, Item, Template, p1, p2, p3) --[[ Line: 99 ]]
+local function resolveItemSortRank(SortRankProp, Item, Template, p1, p2, p3)
 	-- upvalues: t (copy), BuildDataBindingSourcesForTemplateModule (copy), resolvePropToValue (copy)
 	if SortRankProp == nil or SortRankProp.kind == nil then
 		return nil
@@ -53,10 +53,10 @@ local function resolveItemSortRank(SortRankProp, Item, Template, p1, p2, p3) --[
 		local Value = Kind and Kind.value
 		local Item1 = if typeof(Item) == "table" then Item else t
 		local DataBindingSourcesForTemplateModule = BuildDataBindingSourcesForTemplateModule(Item1, Value and (Value.shared and Value.shared.data) or t)
-		local Success, Result = pcall(resolvePropToValue, SortRankProp, function() --[[ Line: 131 | Named "sourcesGetter" ]]
+		local Success, Result = pcall(resolvePropToValue, SortRankProp, function()
 			-- upvalues: DataBindingSourcesForTemplateModule (copy)
 			return DataBindingSourcesForTemplateModule
-		end, function() --[[ Line: 134 | Named "itemInputGetter" ]]
+		end, function()
 			-- upvalues: Item1 (copy)
 			return Item1
 		end, p1, p2, p3)
@@ -65,12 +65,12 @@ local function resolveItemSortRank(SortRankProp, Item, Template, p1, p2, p3) --[
 	end
 end
 
-local function compareEntryRank(A, B): boolean --[[ Line: 152 ]]
+local function compareEntryRank(A, B): boolean
 	return if A.rank == B.rank then A.originalIndex < B.originalIndex else A.rank ~= nil and (B.rank == nil or A.rank < B.rank)
 end
 
 return {
-	applyOrder = function(List, p1, p2, p3, p4, p5, p6) --[[ Line: 182 ]]
+	applyOrder = function(List, p1, p2, p3, p4, p5, p6)
 		-- upvalues: SduiClientBindingBuilderModule (copy), PropResultCategory (copy), resolveItemSortRank (copy), compareEntryRank (copy)
 		local v1 = nil
 		if p1 == nil or p1.kind == nil then

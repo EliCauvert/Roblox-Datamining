@@ -1,7 +1,7 @@
-﻿return function() --[[ Line: 2 | Named "createNextOrder" ]]
+﻿return function()
 	local Count = 0
 	
-	return function(): number --[[ Line: 5 ]]
+	return function(): number
 		-- upvalues: Count (ref)
 		Count += 1
 		

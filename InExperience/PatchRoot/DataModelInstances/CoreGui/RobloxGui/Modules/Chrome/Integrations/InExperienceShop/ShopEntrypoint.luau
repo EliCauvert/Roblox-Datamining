@@ -23,7 +23,7 @@ local FFlagEnableMenuTrailingBadge = SharedFlagsModule.FFlagEnableMenuTrailingBa
 local FFlagExperienceShopNewIconography = InExperienceShopModule.FFlagExperienceShopNewIconography
 local ShopCoreGuiToggleSupportedEngineFeature = game:GetEngineFeature("ShopCoreGuiToggleSupported")
 local EnableOpenShopSignalEngineFeature = game:GetEngineFeature("EnableOpenShopSignal")
-local NewResult = ChromeUtilsModule.MappedSignal.new(ServiceModule:onIntegrationStatusChanged(), function() --[[ Line: 35 ]]
+local NewResult = ChromeUtilsModule.MappedSignal.new(ServiceModule:onIntegrationStatusChanged(), function()
 	-- upvalues: ServiceModule (copy), ConstantsModule (copy)
 	return ServiceModule:isWindowOpen(ConstantsModule.IN_EXPERIENCE_SHOP_ID)
 end)
@@ -47,7 +47,7 @@ local Config = if FFlagEnableMenuTrailingBadge1 or OfferBadgeTextSignal ~= nil t
 local CoreGuiEnabled = if ShopCoreGuiToggleSupportedEngineFeature then StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.All) or StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.ExperienceShop) else false
 local Flag = true
 
-local function _() --[[ Line: 85 | Named "getInitialAvailability" ]]
+local function _()
 	-- upvalues: CoreGuiEnabled (ref), FFlagHideShopMenuOnFailure (copy), Flag (ref), ServiceModule (copy)
 	if CoreGuiEnabled and not FFlagHideShopMenuOnFailure then
 		return ServiceModule.AvailabilitySignal.Available
@@ -58,7 +58,7 @@ local function _() --[[ Line: 85 | Named "getInitialAvailability" ]]
 	end
 end
 
-local _ = function() --[[ Line: 93 | Named "toggleShopWindow" ]]
+local _ = function()
 	-- upvalues: FFlagCenterInExperienceShopWindow (copy), ShopWindowLayoutModule (copy), ServiceModule (copy), ConstantsModule (copy)
 	if FFlagCenterInExperienceShopWindow then
 		ShopWindowLayoutModule.toggleInExperienceShopWindow()
@@ -88,7 +88,7 @@ config.sideSheetPlacement = SideSheetPlacement.AboveFold
 config.windowSize = NewResult1
 config.startingWindowPosition = ShopWindowLayoutModule.getStartingWindowPosition()
 
-function config:activated() --[[ Line: 111 ]]
+function config:activated()
 	-- upvalues: FFlagCenterInExperienceShopWindow (copy), ShopWindowLayoutModule (copy), ServiceModule (copy), ConstantsModule (copy)
 	if FFlagCenterInExperienceShopWindow then
 		ShopWindowLayoutModule.toggleInExperienceShopWindow()
@@ -102,11 +102,11 @@ end
 config.menuTrailingBadgeConfig = Config
 config.isActivated = NewResult
 config.components = {
-	Icon = function() --[[ Line: 117 ]]
+	Icon = function()
 		-- upvalues: CommonIconModule (copy), FFlagExperienceShopNewIconography (copy), NewResult (copy)
 		return CommonIconModule(if FFlagExperienceShopNewIconography then "ShoppingBasket" else "BuildingStore", nil, NewResult)
 	end,
-	Window = function() --[[ Line: 124 ]]
+	Window = function()
 		-- upvalues: ReactModule (copy), ShopChromeWrapperModule (copy), NewResult1 (copy), MAXWINDOWWIDTH (copy), MAXWINDOWHEIGHT (copy)
 		return ReactModule.createElement(ShopChromeWrapperModule, {
 			windowSize = NewResult1,
@@ -124,7 +124,7 @@ if FFlagEnableShopPrefetch then
 	local PrefetchShopDataOnGameJoinModule = require(CorePackages.Workspace.Packages.InExperienceShop.prefetchShopDataOnGameJoin)
 	
 	if FFlagHideShopMenuOnFailure then
-		task.spawn(PrefetchShopDataOnGameJoinModule, function(p1) --[[ Line: 146 ]]
+		task.spawn(PrefetchShopDataOnGameJoinModule, function(p1)
 			-- upvalues: Flag (ref), CoreGuiEnabled (ref), RegisterResult (copy)
 			if not p1 then return end
 			Flag = true
@@ -138,7 +138,7 @@ if FFlagEnableShopPrefetch then
 	end
 end
 if EnableOpenShopSignalEngineFeature then
-	MarketplaceService.OpenShopRequested:Connect(function(Player) --[[ Line: 170 ]]
+	MarketplaceService.OpenShopRequested:Connect(function(Player)
 		-- upvalues: Players (copy), FFlagHideShopMenuOnFailure (copy), Flag (ref), ServiceModule (copy), ConstantsModule (copy), FFlagCenterInExperienceShopWindow (copy), ShopWindowLayoutModule (copy)
 		if Player == Players.LocalPlayer then
 			if FFlagHideShopMenuOnFailure and not Flag then return end
@@ -154,7 +154,7 @@ if EnableOpenShopSignalEngineFeature then
 	end)
 end
 if ShopCoreGuiToggleSupportedEngineFeature then
-	local _ = function() --[[ Line: 188 | Named "updateShopAvailability" ]]
+	local _ = function()
 		-- upvalues: CoreGuiEnabled (ref), FFlagHideShopMenuOnFailure (copy), Flag (ref), RegisterResult (copy), ServiceModule (copy), ConstantsModule (copy)
 		if CoreGuiEnabled and (not FFlagHideShopMenuOnFailure or Flag) then
 			RegisterResult.availability:available()
@@ -167,7 +167,7 @@ if ShopCoreGuiToggleSupportedEngineFeature then
 		RegisterResult.availability:unavailable()
 	end
 	
-	ChromeUtilsModule.setCoreGuiAvailability(RegisterResult, Enum.CoreGuiType.ExperienceShop, function(p1) --[[ Line: 200 ]]
+	ChromeUtilsModule.setCoreGuiAvailability(RegisterResult, Enum.CoreGuiType.ExperienceShop, function(p1)
 		-- upvalues: CoreGuiEnabled (ref), FFlagHideShopMenuOnFailure (copy), Flag (ref), RegisterResult (copy), ServiceModule (copy), ConstantsModule (copy)
 		CoreGuiEnabled = p1
 		

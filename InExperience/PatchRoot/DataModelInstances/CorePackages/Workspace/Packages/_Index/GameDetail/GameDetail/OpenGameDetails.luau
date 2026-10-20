@@ -34,9 +34,9 @@ local EDPTTIManager = GameDetailTelemetryModule.EDPTTIManager
 local FFlagEDPTTITrackingEnabled = GameDetailTelemetryModule.FFlagEDPTTITrackingEnabled
 local EDPTTIConstants = GameDetailTelemetryModule.EDPTTIConstants
 
-return function(p1, p2, ExtraProps, p3) --[[ Line: 49 ]]
+return function(p1, p2, ExtraProps, p3)
 	-- upvalues: FFlagSignalsNavP3fGameDetails (copy), AppNavigationRegistry (copy), FFlagUseNavigationSelectors (copy), Selectors (copy), FFlagEDPTTITrackingEnabled (copy), FFlagFixSduiEdpTtiColdStart (copy), FFlagLuaAppSduiEdpEnabled (copy), FFlagEDPTTIParityDefinitions (copy), EDPTTIManager (copy), EDPTTIConstants (copy), FFlagFixSduiEdpTtiPeekCategory (copy), DisplayModule (copy), ResponsiveModule (copy), DeviceType (copy), CreateExperienceDetailsPageTimerModule (copy), GetExperienceDetailsPageKeyModule (copy), SduiSurfaceLoadTimeTracker (copy), CryoModule (copy), FetchGamePlayButtonData (copy), FetchExperienceDetailsPageModule (copy), FormFactor (copy), UseGameDetailsPeekViewModule (copy), AppPage (copy), PeekViewState (copy), SetGameDetailsPeekViewStateModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), FFlagSignalsNavP2NavigationPrimitives (copy), NavigateDownFunction (copy)
-	return function(p4) --[[ Line: 50 ]]
+	return function(p4)
 		-- upvalues: FFlagSignalsNavP3fGameDetails (upval), AppNavigationRegistry (upval), FFlagUseNavigationSelectors (upval), Selectors (upval), FFlagEDPTTITrackingEnabled (upval), FFlagFixSduiEdpTtiColdStart (upval), FFlagLuaAppSduiEdpEnabled (upval), FFlagEDPTTIParityDefinitions (upval), EDPTTIManager (upval), EDPTTIConstants (upval), FFlagFixSduiEdpTtiPeekCategory (upval), DisplayModule (upval), ResponsiveModule (upval), DeviceType (upval), CreateExperienceDetailsPageTimerModule (upval), GetExperienceDetailsPageKeyModule (upval), p1 (copy), SduiSurfaceLoadTimeTracker (upval), ExtraProps (ref), CryoModule (upval), p3 (copy), FetchGamePlayButtonData (upval), FetchExperienceDetailsPageModule (upval), FormFactor (upval), UseGameDetailsPeekViewModule (upval), AppPage (upval), PeekViewState (upval), SetGameDetailsPeekViewStateModule (upval), p2 (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), FFlagSignalsNavP2NavigationPrimitives (upval), NavigateDownFunction (upval)
 		local State = p4:getState()
 		local FormFactor1 = State.FormFactor

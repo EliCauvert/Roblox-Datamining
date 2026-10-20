@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("LuaDesktopToastNotificationLayer", "Notification.Toast")
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastString("LuaDesktopToastNotificationLayer")
 end

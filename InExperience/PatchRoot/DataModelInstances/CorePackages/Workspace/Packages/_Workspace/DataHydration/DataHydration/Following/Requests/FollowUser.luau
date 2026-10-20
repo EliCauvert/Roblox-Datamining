@@ -5,7 +5,7 @@ local _ = require(script.Parent.Parent.FollowingStoreTypes)
 local FetchFunction = HttpClientModule.fetch
 local AsPromiseFunction = HttpClientModule.asPromise
 
-return function(p1, Network) --[[ Line: 16 ]]
+return function(p1, Network)
 	-- upvalues: FetchFunction (copy), HttpModule (copy), AsPromiseFunction (copy)
 	return AsPromiseFunction((FetchFunction({
 		method = "POST",
@@ -14,7 +14,7 @@ return function(p1, Network) --[[ Line: 16 ]]
 		url = `{HttpModule.Url.FRIEND_URL}/users/{p1}/follow`,
 		body = {},
 		network = Network,
-		decode = function() --[[ Line: 25 ]]
+		decode = function()
 			return nil
 		end
 	})))

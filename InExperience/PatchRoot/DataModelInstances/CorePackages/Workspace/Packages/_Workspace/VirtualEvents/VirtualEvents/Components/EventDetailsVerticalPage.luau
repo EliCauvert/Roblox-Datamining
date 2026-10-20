@@ -26,7 +26,7 @@ local FocusNavigableSurfaceWrapper = FocusNavigationUtilsModule.FocusNavigableSu
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local IconsNavigationCloseSmall = UIBloxModule.App.ImageSet.Images["icons/navigation/close_small"]
 
-local function OnClose() --[[ Line: 45 ]] end
+local function OnClose() end
 
 local config = {
 	onClose = OnClose,
@@ -34,11 +34,11 @@ local config = {
 	onShare = OnClose
 }
 
-return function(p1) --[[ Line: 71 | Named "EventDetailsVerticalPage" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UseSelectorFunction (copy), FormFactor (copy), ReactModule (copy), FindFirstImageInMediaModule (copy), FetchEventThumbnailModule (copy), ConstantsModule (copy), UseMutationFunction (copy), RequestsModule (copy), GetEventTimerStatusModule (copy), UseCTAPropsModule (copy), UseAnimationModule (copy), WithStyleFunction (copy), UtilityActionIcon (copy), ImageSetLabel (copy), IconsNavigationCloseSmall (copy), LoadableImage (copy), EventDetailsContainerModule (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigableSurfaceIdentifierEnum (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
-	local IsUseSelectorResultMatch = UseSelectorFunction(function(p2) --[[ Line: 76 ]]
+	local IsUseSelectorResultMatch = UseSelectorFunction(function(p2)
 		return p2.FormFactor
 	end) == FormFactor.WIDE
 	local Media = p1.virtualEvent.media
@@ -46,22 +46,22 @@ return function(p1) --[[ Line: 71 | Named "EventDetailsVerticalPage" ]]
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
 	local FirstImageInMediaModule = if Media then FindFirstImageInMediaModule(Media) else nil
-	ReactModule.useEffect(function() --[[ Line: 88 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FetchEventThumbnailModule (upval), UseRoactServiceResult (copy), p1 (copy), FirstImageInMediaModule (copy), UseStateResult2_2 (copy)
 		local Flag = true
-		FetchEventThumbnailModule(UseRoactServiceResult, p1.virtualEvent.id, FirstImageInMediaModule):andThen(function(Result) --[[ Line: 90 ]]
+		FetchEventThumbnailModule(UseRoactServiceResult, p1.virtualEvent.id, FirstImageInMediaModule):andThen(function(Result)
 			-- upvalues: Flag (ref), UseStateResult2_2 (upval)
 			if Flag then
 				UseStateResult2_2(Result)
 			end
 		end)
 		
-		return function() --[[ Line: 95 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = false
 		end
 	end, { p1.virtualEvent.id, FirstImageInMediaModule })
-	local UseResult = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 100 ]]
+	local UseResult = ReactModule.useCallback(function(Frame: Frame)
 		-- upvalues: ConstantsModule (upval), UseStateResult (copy), UseStateResult2 (copy), UseStateResult1 (copy), UseStateResult2_1 (copy)
 		local Smallest = math.min(ConstantsModule.HORIZONTAL_ASPECT_RATIO * Frame.AbsoluteSize.X, Frame.AbsoluteSize.Y)
 		
@@ -76,13 +76,13 @@ return function(p1) --[[ Line: 71 | Named "EventDetailsVerticalPage" ]]
 	end, { UseStateResult, UseStateResult1 })
 	local UseMutationResult = UseMutationFunction(RequestsModule.UPDATE_RSVP_STATUS, {
 		variables = { virtualEventId = p1.virtualEvent.id },
-		update = function(_, p2, p3) --[[ Line: 116 ]]
+		update = function(_, p2, p3)
 			-- upvalues: CryoModule (upval)
 			local VirtualEvent = p3.data.virtualEventRsvp.virtualEvent
 			p2:modify({
 				id = p2:identify(VirtualEvent),
 				fields = {
-					rsvpCounters = function(_, p4) --[[ Line: 122 ]]
+					rsvpCounters = function(_, p4)
 						-- upvalues: VirtualEvent (copy), CryoModule (upval)
 						return CryoModule.Dictionary.join(p4, {
 							going = p4.going + (if VirtualEvent.userRsvpStatus == "going" then 1 else -1)
@@ -92,20 +92,20 @@ return function(p1) --[[ Line: 71 | Named "EventDetailsVerticalPage" ]]
 			})
 		end
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 133 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: GetEventTimerStatusModule (upval), JoinResult (copy)
 		return GetEventTimerStatusModule(JoinResult.virtualEvent, JoinResult.currentTime)
 	end, { JoinResult.virtualEvent, JoinResult.currentTime })
 	local UseCTAPropsModuleResult = UseCTAPropsModule(JoinResult.virtualEvent, UseMemoResult, p1.notifyMeUseEmphasisVariant, {
 		onClose = JoinResult.onClose,
 		onJoinEvent = JoinResult.onJoinEvent,
-		onRsvpChanged = ReactModule.useCallback(function() --[[ Line: 137 ]]
+		onRsvpChanged = ReactModule.useCallback(function()
 			-- upvalues: JoinResult (copy), UseMutationResult (copy)
 			UseMutationResult[1]({
 				variables = {
 					rsvpStatus = if JoinResult.virtualEvent.userRsvpStatus == "going" then "notGoing" else "going"
 				}
-			}):andThen(function(Result) --[[ Line: 151 ]]
+			}):andThen(function(Result)
 				-- upvalues: JoinResult (upval)
 				if JoinResult.onRsvpChanged then
 					JoinResult.onRsvpChanged(Result.data.virtualEventRsvp.virtualEvent.userRsvpStatus, Result.data.virtualEventRsvp.shouldSeeNotificationsUpsellModal)
@@ -123,7 +123,7 @@ return function(p1) --[[ Line: 71 | Named "EventDetailsVerticalPage" ]]
 		setAnimationOffset = UseStateResult2_3
 	})
 	
-	return WithStyleFunction(function(p2) --[[ Line: 178 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: ReactModule (upval), IsUseSelectorResultMatch (copy), UtilityActionIcon (upval), p1 (copy), ImageSetLabel (upval), IconsNavigationCloseSmall (upval), UseResult (copy), LoadableImage (upval), UseStateResult (copy), UseStateResult3 (copy), EventDetailsContainerModule (upval), UseMemoResult (copy), UseCTAPropsModuleResult (copy), UseStateResult1 (copy), FocusNavigableSurfaceWrapper (upval), FocusNavigableSurfaceIdentifierEnum (upval), UseStateResult4 (copy), ConstantsModule (upval)
 		return ReactModule.createElement("ImageButton", {
 			ZIndex = 4,

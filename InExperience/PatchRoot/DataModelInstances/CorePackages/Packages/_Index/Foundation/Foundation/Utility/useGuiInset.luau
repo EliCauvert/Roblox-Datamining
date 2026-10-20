@@ -8,24 +8,24 @@ local Signal = WrappersModule.Signal
 local GuiService = WrappersModule.Services.GuiService
 local UserInputService = WrappersModule.Services.UserInputService
 
-local function getGuiInset(): Rect --[[ Line: 14 ]]
+local function getGuiInset(): Rect
 	-- upvalues: GuiService (copy)
 	local GuiInset, GuiInset2 = GuiService:GetGuiInset()
 	
 	return Rect.new(GuiInset, GuiInset2)
 end
 
-return function() --[[ Line: 20 | Named "useGuiInset" ]]
+return function()
 	-- upvalues: ReactModule (copy), getGuiInset (copy), IsPluginSecurityModule (copy), Signal (copy), GuiService (copy), WrappersModuleInstance (copy), UserInputService (copy), Connection (copy)
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 21 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 		-- upvalues: getGuiInset (upval)
 		return getGuiInset()
 	end)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 25 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), getGuiInset (upval)
 		UseStateResult2(getGuiInset())
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 29 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsPluginSecurityModule (upval), Signal (upval), GuiService (upval), UseResult (copy), WrappersModuleInstance (upval), UserInputService (upval), Connection (upval)
 		local List = if IsPluginSecurityModule() then {
 			Signal.Connect(GuiService.SafeZoneOffsetsChanged, UseResult),
@@ -33,7 +33,7 @@ return function() --[[ Line: 20 | Named "useGuiInset" ]]
 			Signal.Connect(WrappersModuleInstance.GetPropertyChangedSignal(UserInputService, "RightBarSize"), UseResult)
 		} else {}
 		
-		return function() --[[ Line: 40 ]]
+		return function()
 			-- upvalues: List (ref), Connection (upval)
 			for _, value in List do
 				Connection.Disconnect(value)

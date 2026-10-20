@@ -3,11 +3,11 @@ local ThunkModule = require(PurchasePrompt.Thunk)
 local DispatchPurchaseForProductPayloadModule = require(PurchasePrompt.Utils.dispatchPurchaseForProductPayload)
 local t = {}
 
-return function() --[[ Line: 11 | Named "retryPurchaseAfterUpsell" ]]
+return function()
 	-- upvalues: ThunkModule (copy), t (copy), DispatchPurchaseForProductPayloadModule (copy)
-	return ThunkModule.new(script.Name, t, function(p1, _) --[[ Line: 12 ]]
+	return ThunkModule.new(script.Name, t, function(p1, _)
 		-- upvalues: DispatchPurchaseForProductPayloadModule (upval)
-		DispatchPurchaseForProductPayloadModule(function(p2) --[[ Line: 16 ]]
+		DispatchPurchaseForProductPayloadModule(function(p2)
 			-- upvalues: p1 (copy)
 			p1:dispatch(p2)
 		end, p1:getState().productPayload, nil, true)

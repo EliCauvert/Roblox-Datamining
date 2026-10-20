@@ -3,24 +3,24 @@ local _ = require(DataHydration.Parent.HttpClient)
 local CreatorApiHttpModule = require(DataHydration.creatorApiHttp)
 local _ = require(script.Parent.DeveloperProductStoreTypes)
 
-local function collectionUrl(BaseUrlResult, p1): string --[[ Line: 20 ]]
+local function collectionUrl(BaseUrlResult, p1): string
 	return ("%s/developer-products/v2/universes/%d/developer-products"):format(BaseUrlResult, p1)
 end
 
-local function _(p1, p2): string --[[ Line: 24 | Named "listUrl" ]]
+local function _(p1, p2): string
 	-- upvalues: collectionUrl (copy)
 	return ("%s/creator"):format(collectionUrl(p1, p2))
 end
 
-local _ = function(p1, p2, p3): string --[[ Line: 28 | Named "getUrl" ]]
+local _ = function(p1, p2, p3): string
 	return ("%s/%d/creator"):format(("%s/developer-products/v2/universes/%d/developer-products"):format(p1, p2), p3)
 end
 
-local _ = function(p1, p2, p3): string --[[ Line: 32 | Named "productUrl" ]]
+local _ = function(p1, p2, p3): string
 	return ("%s/%d"):format(("%s/developer-products/v2/universes/%d/developer-products"):format(p1, p2), p3)
 end
 
-local function requestParts(p1) --[[ Line: 38 ]]
+local function requestParts(p1)
 	local List = {}
 	
 	if p1.name ~= nil then
@@ -52,33 +52,33 @@ local function requestParts(p1) --[[ Line: 38 ]]
 	return List
 end
 
-local JsonDecoderResult = CreatorApiHttpModule.jsonDecoder(function(p1) --[[ Line: 73 ]]
+local JsonDecoderResult = CreatorApiHttpModule.jsonDecoder(function(p1)
 	return p1
 end)
 
-local function synthesizedDecoder(Callback) --[[ Line: 78 ]]
+local function synthesizedDecoder(Callback)
 	-- upvalues: CreatorApiHttpModule (copy)
-	return CreatorApiHttpModule.jsonDecoder(function(_) --[[ Line: 83 ]]
+	return CreatorApiHttpModule.jsonDecoder(function(_)
 		-- upvalues: Callback (copy)
 		return Callback()
 	end)
 end
 
-local function listPage(p1, PageToken, p2) --[[ Line: 90 ]]
+local function listPage(p1, PageToken, p2)
 	-- upvalues: CreatorApiHttpModule (copy), collectionUrl (copy)
-	return CreatorApiHttpModule.get(p2, CreatorApiHttpModule.withQuery(("%s/creator"):format(collectionUrl(CreatorApiHttpModule.baseUrl(p2), p1)), { pageToken = PageToken }), "developer-product.list", function(p3) --[[ Line: 98 ]]
+	return CreatorApiHttpModule.get(p2, CreatorApiHttpModule.withQuery(("%s/creator"):format(collectionUrl(CreatorApiHttpModule.baseUrl(p2), p1)), { pageToken = PageToken }), "developer-product.list", function(p3)
 		return p3
 	end)
 end
 
 local FetchDeveloperProductModule = {
-	list = function(p1, p2) --[[ Line: 103 ]]
+	list = function(p1, p2)
 		-- upvalues: listPage (copy)
 		local DeveloperProducts = {}
 		
-		local function fetchNext(NextPageToken, p3) --[[ Line: 106 ]]
+		local function fetchNext(NextPageToken, p3)
 			-- upvalues: listPage (upval), p1 (copy), p2 (copy), DeveloperProducts (copy), fetchNext (copy)
-			return listPage(p1, NextPageToken, p2):andThen(function(Result) --[[ Line: 107 ]]
+			return listPage(p1, NextPageToken, p2):andThen(function(Result)
 				-- upvalues: DeveloperProducts (upval), p3 (copy), fetchNext (upval)
 				for _, developerProduct in Result.developerProducts do
 					table.insert(DeveloperProducts, developerProduct)
@@ -94,13 +94,13 @@ local FetchDeveloperProductModule = {
 		
 		return fetchNext(nil, 1)
 	end,
-	get = function(p3, CreatorName, p4) --[[ Line: 127 ]]
+	get = function(p3, CreatorName, p4)
 		-- upvalues: CreatorApiHttpModule (copy)
-		return CreatorApiHttpModule.get(p4, ("%s/%d/creator"):format(("%s/developer-products/v2/universes/%d/developer-products"):format(CreatorApiHttpModule.baseUrl(p4), p3), CreatorName), "developer-product.get", function(p5) --[[ Line: 136 ]]
+		return CreatorApiHttpModule.get(p4, ("%s/%d/creator"):format(("%s/developer-products/v2/universes/%d/developer-products"):format(CreatorApiHttpModule.baseUrl(p4), p3), CreatorName), "developer-product.get", function(p5)
 			return p5
 		end)
 	end,
-	create = function(p3, p4, p5) --[[ Line: 142 ]]
+	create = function(p3, p4, p5)
 		-- upvalues: CreatorApiHttpModule (copy), requestParts (copy), JsonDecoderResult (copy)
 		return CreatorApiHttpModule.multipart(CreatorApiHttpModule.mutatingNetwork(p5), "POST", ("%s/developer-products/v2/universes/%d/developer-products"):format(CreatorApiHttpModule.baseUrl(p5), p3), requestParts({
 			name = p4.name,
@@ -111,7 +111,7 @@ local FetchDeveloperProductModule = {
 			imageFile = p4.imageFile
 		}), "developer-product.create", JsonDecoderResult)
 	end,
-	update = function(p3, ProductId, p4, p5) --[[ Line: 168 ]]
+	update = function(p3, ProductId, p4, p5)
 		-- upvalues: CreatorApiHttpModule (copy), requestParts (copy), synthesizedDecoder (copy)
 		return CreatorApiHttpModule.multipart(CreatorApiHttpModule.mutatingNetwork(p5), "PATCH", ("%s/%d"):format(("%s/developer-products/v2/universes/%d/developer-products"):format(CreatorApiHttpModule.baseUrl(p5), p3), ProductId), requestParts({
 			imageFile = nil,
@@ -120,7 +120,7 @@ local FetchDeveloperProductModule = {
 			priceInRobux = p4.priceInRobux,
 			isForSale = p4.isForSale,
 			isManagedPricingEnabled = p4.isManagedPricingEnabled
-		}), "developer-product.update", synthesizedDecoder(function() --[[ Line: 189 ]]
+		}), "developer-product.update", synthesizedDecoder(function()
 			-- upvalues: ProductId (copy), p4 (copy)
 			return {
 				productId = ProductId,
@@ -132,21 +132,21 @@ local FetchDeveloperProductModule = {
 			}
 		end))
 	end,
-	setForSale = function(p3, ProductId, IsForSale, p4) --[[ Line: 204 ]]
+	setForSale = function(p3, ProductId, IsForSale, p4)
 		-- upvalues: CreatorApiHttpModule (copy), synthesizedDecoder (copy)
-		return CreatorApiHttpModule.multipart(CreatorApiHttpModule.mutatingNetwork(p4), "PATCH", ("%s/%d"):format(("%s/developer-products/v2/universes/%d/developer-products"):format(CreatorApiHttpModule.baseUrl(p4), p3), ProductId), { { name = "isForSale", value = tostring(IsForSale) } }, "developer-product.set-for-sale", synthesizedDecoder(function() --[[ Line: 217 ]]
+		return CreatorApiHttpModule.multipart(CreatorApiHttpModule.mutatingNetwork(p4), "PATCH", ("%s/%d"):format(("%s/developer-products/v2/universes/%d/developer-products"):format(CreatorApiHttpModule.baseUrl(p4), p3), ProductId), { { name = "isForSale", value = tostring(IsForSale) } }, "developer-product.set-for-sale", synthesizedDecoder(function()
 			-- upvalues: ProductId (copy), IsForSale (copy)
 			return { productId = ProductId, isForSale = IsForSale }
 		end))
 	end
 }
 
-function FetchDeveloperProductModule.activate(p3, ProductId, p4) --[[ Line: 223 ]]
+function FetchDeveloperProductModule.activate(p3, ProductId, p4)
 	-- upvalues: FetchDeveloperProductModule (copy)
 	return FetchDeveloperProductModule.setForSale(p3, ProductId, true, p4)
 end
 
-function FetchDeveloperProductModule.deactivate(p3, ProductId, p4) --[[ Line: 231 ]]
+function FetchDeveloperProductModule.deactivate(p3, ProductId, p4)
 	-- upvalues: FetchDeveloperProductModule (copy)
 	return FetchDeveloperProductModule.setForSale(p3, ProductId, false, p4)
 end

@@ -3,10 +3,10 @@ local ExperienceGuidelinesModule = require(Parent.DataHydration.ExperienceGuidel
 local ExperienceQuestionnaireModule = require(Parent.DataHydration.ExperienceQuestionnaire)
 local UniverseActivationModule = require(Parent.DataHydration.UniverseActivation)
 
-return function(p1) --[[ Line: 8 | Named "refreshPublishEligibility" ]]
+return function(p1)
 	-- upvalues: ExperienceGuidelinesModule (copy), UniverseActivationModule (copy), ExperienceQuestionnaireModule (copy)
 	local UniverseActivationStore = UniverseActivationModule.getUniverseActivationStore()
-	ExperienceGuidelinesModule.getExperienceGuidelinesStore().refreshDetailedGuidelines(p1):catch(function() --[[ Line: 11 ]] end)
-	UniverseActivationStore.refreshEligibility(p1):catch(function() --[[ Line: 14 ]] end)
+	ExperienceGuidelinesModule.getExperienceGuidelinesStore().refreshDetailedGuidelines(p1):catch(function() end)
+	UniverseActivationStore.refreshEligibility(p1):catch(function() end)
 	ExperienceQuestionnaireModule.getExperienceQuestionnaireStore().fetchEligibility(p1)
 end

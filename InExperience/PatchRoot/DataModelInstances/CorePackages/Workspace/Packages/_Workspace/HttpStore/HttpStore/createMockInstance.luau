@@ -1,19 +1,19 @@
 ﻿local CreateMockHttpStoreFunction = require(script.Parent.Parent.InternalHttpStore).createMockHttpStore
 
-return function() --[[ Line: 67 | Named "createMockInstance" ]]
+return function()
 	-- upvalues: CreateMockHttpStoreFunction (copy)
 	local MockHttpStore = CreateMockHttpStoreFunction()
 	
 	return {
-		get = function() --[[ Line: 72 ]]
+		get = function()
 			-- upvalues: MockHttpStore (copy)
 			return MockHttpStore
 		end,
-		_create = function() --[[ Line: 75 ]]
+		_create = function()
 			-- upvalues: MockHttpStore (copy)
 			return MockHttpStore
 		end,
-		_dispose = function() --[[ Line: 78 ]]
+		_dispose = function()
 			-- upvalues: MockHttpStore (copy)
 			MockHttpStore.reset()
 		end,

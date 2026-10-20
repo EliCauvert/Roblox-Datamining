@@ -4,7 +4,7 @@ local _ = require(script.Parent.Parent.BulkPurchaseRequestUnpurchasableItem)
 local PurchasableStateToItemPurchaseStatusMapModule = require(BulkPurchaseApp.Enums.PurchasableStateToItemPurchaseStatusMap)
 local GetThumbnailUrlModule = require(BulkPurchaseApp.Utils.getThumbnailUrl)
 
-return function(p1) --[[ Line: 11 | Named "createUnpurchasableItem" ]]
+return function(p1)
 	-- upvalues: GetThumbnailUrlModule (copy), PurchasableStateToItemPurchaseStatusMapModule (copy)
 	return {
 		id = p1.id,

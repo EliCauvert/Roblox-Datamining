@@ -5,7 +5,7 @@ local ReactRobloxModule = require(Parent.ReactRoblox)
 local UseStartupMessagePropsModule = require(script.Parent.useStartupMessageProps)
 local StartupMessageModule = require(script.Parent.StartupMessage)
 
-return ReactModule.memo(function() --[[ Line: 9 | Named "StartupMessageContainer" ]]
+return ReactModule.memo(function()
 	-- upvalues: UseStartupMessagePropsModule (copy), ReactRobloxModule (copy), ReactModule (copy), StartupMessageModule (copy), CoreGui (copy)
 	local UseStartupMessagePropsModuleResult = UseStartupMessagePropsModule()
 	

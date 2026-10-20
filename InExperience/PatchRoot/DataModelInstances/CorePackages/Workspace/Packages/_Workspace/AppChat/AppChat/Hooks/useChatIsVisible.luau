@@ -11,20 +11,20 @@ local SignalsModule = require(Parent.Signals)
 local GetLegacyNavigationStore = if FFlagSignalsNavP3hMisc then require(Parent.NavigationRodux).GetLegacyNavigationStore else nil
 local IsNavigationAvailable = if FFlagSignalsNavP3hMisc then require(Parent.RobloxAppNavigation).isNavigationAvailable else nil
 
-return function() --[[ Line: 27 ]]
+return function()
 	-- upvalues: FFlagSignalsNavP3hMisc (copy), GetLegacyNavigationStore (copy), ReactModule (copy), SignalsModule (copy), IsNavigationAvailable (copy), AppPage (copy), UseSignalStateFunction (copy), UseSelectorFunction (copy), FFlagUseNavigationSelectors (copy), Selectors (copy)
 	if FFlagSignalsNavP3hMisc then
 		local LegacyNavigationStore = GetLegacyNavigationStore(false)
 		
-		return UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 30 ]]
+		return UseSignalStateFunction((ReactModule.useMemo(function()
 			-- upvalues: SignalsModule (upval), IsNavigationAvailable (upval), LegacyNavigationStore (copy), AppPage (upval)
-			return SignalsModule.createComputed(function(p1): boolean --[[ Line: 31 ]]
+			return SignalsModule.createComputed(function(p1): boolean
 				-- upvalues: IsNavigationAvailable (upval), LegacyNavigationStore (upval), AppPage (upval)
 				return not IsNavigationAvailable() or LegacyNavigationStore.getCurrentPageName(p1) == AppPage.Chat
 			end)
 		end, {})))
 	else
-		return UseSelectorFunction(function(p1): boolean --[[ Line: 40 ]]
+		return UseSelectorFunction(function(p1): boolean
 			-- upvalues: FFlagUseNavigationSelectors (upval), Selectors (upval), AppPage (upval)
 			if not p1.Navigation then
 				return true

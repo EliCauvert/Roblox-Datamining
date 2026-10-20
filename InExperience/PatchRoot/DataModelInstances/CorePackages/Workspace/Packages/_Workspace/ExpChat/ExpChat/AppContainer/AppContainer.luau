@@ -23,9 +23,9 @@ local GetFFlagExpChatAlwaysRunTCSFunction = SharedFlagsModule.getFFlagExpChatAlw
 local FFlagExpChatUseChannelTabsStore = SharedFlagsModule.FFlagExpChatUseChannelTabsStore
 local GetChannelTabsStoreModule = if FFlagExpChatUseChannelTabsStore then require(ExpChat.Stores.GetChannelTabsStore) else nil
 
-function getChatWindowEnabled() --[[ Line: 34 ]]
+function getChatWindowEnabled()
 	-- upvalues: TextChatService (copy)
-	local Success, Result = pcall(function() --[[ Line: 35 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: TextChatService (upval)
 		local ChatWindowConfiguration = TextChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 		
@@ -35,9 +35,9 @@ function getChatWindowEnabled() --[[ Line: 34 ]]
 	return Success and Result
 end
 
-function getChatTranslationEnabled() --[[ Line: 47 ]]
+function getChatTranslationEnabled()
 	-- upvalues: TextChatService (copy)
-	local Success, Result = pcall(function() --[[ Line: 48 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: TextChatService (upval)
 		return TextChatService.ChatTranslationEnabled
 	end)
@@ -45,9 +45,9 @@ function getChatTranslationEnabled() --[[ Line: 47 ]]
 	return Success and Result
 end
 
-function getChatTranslationToggleEnabled() --[[ Line: 55 ]]
+function getChatTranslationToggleEnabled()
 	-- upvalues: TextChatService (copy)
-	local Success, Result = pcall(function() --[[ Line: 56 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: TextChatService (upval)
 		return TextChatService.ChatTranslationToggleEnabled
 	end)
@@ -55,10 +55,10 @@ function getChatTranslationToggleEnabled() --[[ Line: 55 ]]
 	return Success and Result
 end
 
-function shouldShowChatTranslationFTUX(): boolean --[[ Line: 63 ]]
+function shouldShowChatTranslationFTUX(): boolean
 	-- upvalues: TextChatService (copy)
 	if game:GetEngineFeature("TextChatServiceSettingsSaved") then
-		local Success, Result = pcall(function() --[[ Line: 65 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: TextChatService (upval)
 			return TextChatService.ChatTranslationFTUXShown
 		end)
@@ -86,31 +86,31 @@ AppContainer.defaultProps = {
 }
 local ChangedConnection = nil
 
-function AppContainer.init(p1) --[[ Line: 95 ]]
+function AppContainer.init(p1)
 	p1:setState({
 		showTranslationButton = false,
 		isTextChatServiceEnabled = false
 	})
 end
 
-function AppContainer:willUnmount() --[[ Line: 102 ]]
+function AppContainer:willUnmount()
 	-- upvalues: ChangedConnection (ref)
 	ChangedConnection:Disconnect()
 end
 
-function AppContainer.didMount(p1) --[[ Line: 106 ]]
+function AppContainer.didMount(p1)
 	-- upvalues: TextChatService (copy), ChangedConnection (ref), GetFFlagExpChatAlwaysRunTCSFunction (copy)
-	p1.migrationConnection = p1.props.chat:GetPropertyChangedSignal("IsAutoMigrated"):Connect(function() --[[ Line: 107 ]]
+	p1.migrationConnection = p1.props.chat:GetPropertyChangedSignal("IsAutoMigrated"):Connect(function()
 		-- upvalues: p1 (copy)
 		if p1.props.chat.IsAutoMigrated then
 			p1:setState({ isTextChatServiceEnabled = true })
 		end
 	end)
 	
-	local function onTextChatServicePropertyChanged(p2) --[[ Line: 115 ]]
+	local function onTextChatServicePropertyChanged(p2)
 		-- upvalues: TextChatService (upval), p1 (copy)
 		if p2 == "ChatTranslationEnabled" then
-			local Success, Result = pcall(function() --[[ Line: 117 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: TextChatService (upval)
 				return TextChatService.ChatTranslationEnabled
 			end)
@@ -124,11 +124,11 @@ function AppContainer.didMount(p1) --[[ Line: 106 ]]
 				return
 			end
 		elseif p2 == "ChatTranslationToggleEnabled" then
-			local Success1, _ = pcall(function() --[[ Line: 129 ]]
+			local Success1, _ = pcall(function()
 				-- upvalues: TextChatService (upval)
 				return TextChatService.ChatTranslationToggleEnabled
 			end)
-			local Success2, Result1 = pcall(function() --[[ Line: 133 ]]
+			local Success2, Result1 = pcall(function()
 				-- upvalues: TextChatService (upval)
 				return TextChatService.ChatTranslationEnabled
 			end)
@@ -153,7 +153,7 @@ function AppContainer.didMount(p1) --[[ Line: 106 ]]
 	})
 end
 
-function AppContainer.render(p1) --[[ Line: 161 ]]
+function AppContainer.render(p1)
 	-- upvalues: RoactModule (copy), BubbleChatModule (copy), ClientSettingsModule (copy), AppLayoutModule (copy), IsChatRegionLockedModule (copy), FFlagExpChatPresetChatEnabled (copy), FFlagExpChatNewInputBarModule (copy), GetFFlagChatTranslationShowFTUXModule (copy), ShouldShowChatTranslationFTUX1 (copy), ChatTranslationFTUXModule (copy)
 	local IsTextChatServiceEnabled = p1.state.isTextChatServiceEnabled
 	local Element = RoactModule.createElement(BubbleChatModule, {
@@ -204,11 +204,11 @@ end
 
 local v1 = RoactRoduxModule.connect(MapStateToPropsModule, MapDispatchToPropsModule)(AppContainer)
 
-local function AppContainerWithSignals(p1) --[[ Line: 232 ]]
+local function AppContainerWithSignals(p1)
 	-- upvalues: ReactModule (copy), SignalsModule (copy), GetChannelTabsStoreModule (copy), FriendsChatTabNameModule (copy), TutilsModule (copy), SignalsReactModule (copy), v1 (ref), CryoModule (copy)
-	return ReactModule.createElement(v1, CryoModule.Dictionary.union(p1, (SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 233 ]]
+	return ReactModule.createElement(v1, CryoModule.Dictionary.union(p1, (SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), GetChannelTabsStoreModule (upval), FriendsChatTabNameModule (upval), TutilsModule (upval)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 234 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: GetChannelTabsStoreModule (upval), FriendsChatTabNameModule (upval)
 			local ChannelTabsState = GetChannelTabsStoreModule(false).getChannelTabsState(p2)
 			local AllChannelTab = if ChannelTabsState.selectedTabName then ChannelTabsState.allChannelTabs[ChannelTabsState.selectedTabName] else nil

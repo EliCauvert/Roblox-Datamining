@@ -10,26 +10,26 @@ local SignalsMigrationConfigModule = require(AppChat.Flags.SignalsMigrationConfi
 local config = {
 	LayoutOrder = 1,
 	isIncoming = false,
-	handleEvent = function(_, _, _) --[[ Line: 23 ]] end,
-	emitImpressionTelemetryEvent = function() --[[ Line: 24 ]] end
+	handleEvent = function(_, _, _) end,
+	emitImpressionTelemetryEvent = function() end
 }
 
-function Options(p1) --[[ Line: 36 ]]
+function Options(p1)
 	-- upvalues: CryoModule (copy), config (copy), FoundationModule (copy), ReactModule (copy), OptionsEnumModule (copy), BuilderIconsModule (copy), FFlagAppChatEnableMessageContextMenuModule (copy), SignalsMigrationConfigModule (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
-	ReactModule.useEffect(function() --[[ Line: 40 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UnionResult (copy)
 		UnionResult.emitImpressionTelemetryEvent()
 	end, {})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 48 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UnionResult (copy), ReactModule (upval), OptionsEnumModule (upval)
 		UnionResult.handleEvent(ReactModule.Event.Activated, nil, OptionsEnumModule.MessageContextMenu)
 	end, { UnionResult.handleEvent })
 	local config1 = {
 		Reply = ReactModule.createElement(FoundationModule.IconButton, {
 			isCircular = true,
-			onActivated = ReactModule.useCallback(function() --[[ Line: 44 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: UnionResult (copy), ReactModule (upval), OptionsEnumModule (upval)
 				UnionResult.handleEvent(ReactModule.Event.Activated, nil, OptionsEnumModule.Reply)
 			end, { UnionResult.handleEvent }),

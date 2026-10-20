@@ -2,13 +2,13 @@
 local React = DependenciesModule.React
 local GetTextBoundsAsyncFunction = DependenciesModule.Foundation.Utility.getTextBoundsAsync
 
-return function(p1, p2, p3, p4) --[[ Line: 7 ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: React (copy), GetTextBoundsAsyncFunction (copy)
 	local UseStateResult, UseStateResult2 = React.useState(nil)
-	React.useEffect(function() --[[ Line: 10 ]]
+	React.useEffect(function()
 		-- upvalues: GetTextBoundsAsyncFunction (upval), p1 (copy), p2 (copy), p3 (copy), p4 (copy), UseStateResult2 (copy)
 		local Flag = false
-		task.spawn(function() --[[ Line: 12 ]]
+		task.spawn(function()
 			-- upvalues: GetTextBoundsAsyncFunction (upval), p1 (upval), p2 (upval), p3 (upval), p4 (upval), Flag (ref), UseStateResult2 (upval)
 			local TextBoundsAsync = GetTextBoundsAsyncFunction(p1, p2, p3, p4)
 			
@@ -17,7 +17,7 @@ return function(p1, p2, p3, p4) --[[ Line: 7 ]]
 			end
 		end)
 		
-		return function() --[[ Line: 19 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end

@@ -5,11 +5,11 @@ local Default = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Mod
 local Context = ReactModule.createContext(config)
 
 return {
-	Provider = function(p1) --[[ Line: 49 ]]
+	Provider = function(p1)
 		-- upvalues: ReactModule (copy), config (copy), Default (copy), Ended (copy), Context (copy)
 		local UseStateResult, UseStateResult2 = ReactModule.useState(config)
 		
-		local function updateVoiceState(_, NewState) --[[ Line: 52 ]]
+		local function updateVoiceState(_, NewState)
 			-- upvalues: UseStateResult (copy), UseStateResult2 (copy)
 			if NewState ~= UseStateResult.voiceState then
 				UseStateResult2({
@@ -19,13 +19,13 @@ return {
 			end
 		end
 		
-		ReactModule.useEffect(function() --[[ Line: 62 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: Default (upval), UseStateResult (copy), UseStateResult2 (copy), updateVoiceState (copy), Ended (upval)
 			local Flag = true
 			local StateChangedConnection = nil
 			
 			if game:GetEngineFeature("VoiceChatSupported") then
-				Default:asyncInit():andThen(function() --[[ Line: 67 ]]
+				Default:asyncInit():andThen(function()
 					-- upvalues: Flag (ref), Default (upval), UseStateResult (upval), UseStateResult2 (upval), StateChangedConnection (ref), updateVoiceState (upval)
 					if Flag then
 						Default:SetupParticipantListeners()
@@ -43,7 +43,7 @@ return {
 							StateChangedConnection = Service.StateChanged:Connect(updateVoiceState)
 						end
 					end
-				end):catch(function() --[[ Line: 77 ]]
+				end):catch(function()
 					-- upvalues: Ended (upval), UseStateResult (upval), UseStateResult2 (upval)
 					if Ended ~= UseStateResult.voiceState then
 						UseStateResult2({
@@ -53,7 +53,7 @@ return {
 					end
 				end)
 			end
-			return function() --[[ Line: 82 ]]
+			return function()
 				-- upvalues: Flag (ref), StateChangedConnection (ref)
 				Flag = false
 				
@@ -68,7 +68,7 @@ return {
 	end,
 	Consumer = Context.Consumer,
 	Context = Context,
-	withVoiceState = function(Render) --[[ Line: 100 ]]
+	withVoiceState = function(Render)
 		-- upvalues: ReactModule (copy), Context (copy)
 		return ReactModule.createElement(Context.Consumer, { render = Render })
 	end

@@ -3,7 +3,7 @@ local DragBarModule = require(Parent.DragBar)
 local ConstantsModule = require(Parent.Constants)
 local CoreGui = game:GetService("CoreGui")
 
-return function(p1) --[[ Line: 8 ]]
+return function(p1)
 	-- upvalues: CoreGui (copy), ConstantsModule (copy), DragBarModule (copy)
 	local Part = Instance.new("Part")
 	Part.Size = vector.create(0.6000000238418579, 0.11999999731779099, 9.999999747378752e-06)

@@ -21,25 +21,25 @@ local GetFIntMomentsCoachmarkMaxImpressionsFunction = MomentsCommonModule.Flags.
 local GetFIntMomentsCoachmarkAutoDismissSecondsFunction = MomentsCommonModule.Flags.GetFIntMomentsCoachmarkAutoDismissSeconds
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-local function onImpression() --[[ Line: 72 ]]
+local function onImpression()
 	-- upvalues: FirePostInsightsCoachmarkEventModule (copy), EventNames (copy)
 	FirePostInsightsCoachmarkEventModule(EventNames.FTUXTooltipImpression)
 end
 
-local function onDismissed() --[[ Line: 76 ]]
+local function onDismissed()
 	-- upvalues: FirePostInsightsCoachmarkEventModule (copy), EventNames (copy)
 	FirePostInsightsCoachmarkEventModule(EventNames.FTUXTooltipDismissed)
 end
 
-return function(p1) --[[ Line: 80 | Named "usePostInsightsCoachmarkViewModel" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), PostInsightsStringsModule (copy), UseFeedOptionalFunction (copy), VerticalPagerModule (copy), ReactModule (copy), SignalsModule (copy), SignalsReactModule (copy), GetPostInsightsPageStoreModule (copy), GetCommentsSheetStoreModule (copy), RecommendationSource (copy), Players (copy), GetPostInsightsCoachmarkSessionStoreModule (copy), PostInsightsCoachmarkImpressionCacheModule (copy), GetFIntMomentsCoachmarkMaxImpressionsFunction (copy), GetFIntMomentsCoachmarkAutoDismissSecondsFunction (copy), onImpression (copy), onDismissed (copy)
 	local UseLocalizationResult = UseLocalizationFunction(PostInsightsStringsModule.TOOLTIP_KEYS)
 	local UseFeedOptionalResult = UseFeedOptionalFunction()
 	local UseVerticalPagerResult = VerticalPagerModule.useVerticalPager()
 	local Item = VerticalPagerModule.usePagerItem().item
-	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 86 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), Item (copy), UseVerticalPagerResult (copy)
-		return SignalsModule.createComputed(function(p2): boolean --[[ Line: 87 ]]
+		return SignalsModule.createComputed(function(p2): boolean
 			-- upvalues: Item (upval), UseVerticalPagerResult (upval)
 			return Item ~= nil and UseVerticalPagerResult.store.getCurrentItem(p2) == Item
 		end)
@@ -49,14 +49,14 @@ return function(p1) --[[ Line: 80 | Named "usePostInsightsCoachmarkViewModel" ]]
 	local IsCreatorIdMatch: boolean = UseFeedOptionalResult ~= nil and (UseFeedOptionalResult.recommendationSource == RecommendationSource.Profile and (p1.momentStore ~= nil and (not p1.isDisabled and p1.moment.creatorId == (if Players.LocalPlayer then Players.LocalPlayer.UserId else nil))))
 	local IsActiveFeed = IsCreatorIdMatch and (UseSignalStateResult and (UseFeedOptionalResult ~= nil and UseFeedOptionalResult.isActiveFeed))
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 108 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsActiveFeed (copy), UseStateResult2 (copy)
 		if IsActiveFeed then
 			UseStateResult2(true)
 		end
 	end, { IsActiveFeed })
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 115 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult2_1 (copy)
 		if p1.isMenuOpen then
 			UseStateResult2_1(true)

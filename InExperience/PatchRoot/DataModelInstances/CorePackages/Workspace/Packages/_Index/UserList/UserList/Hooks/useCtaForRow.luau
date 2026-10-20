@@ -22,7 +22,7 @@ local MapServerActionsToRowCtaModule = require(UserList.Cta.mapServerActionsToRo
 local _ = require(UserList.Common.Types)
 local config = { primaryCta = nil, secondaryCta = nil, isLoading = true }
 
-local function _(Tbl, p1, OnActivated) --[[ Line: 50 | Named "buildJoinCta" ]]
+local function _(Tbl, p1, OnActivated)
 	local Copy = table.clone(Tbl)
 	Copy.onActivated = OnActivated
 	Copy.isDisabled = not p1.isInExperience
@@ -31,11 +31,11 @@ local function _(Tbl, p1, OnActivated) --[[ Line: 50 | Named "buildJoinCta" ]]
 	return Copy
 end
 
-return function(p1, NotReady, p2, Detail, p3, p4, p5) --[[ Line: 62 | Named "useCtaForRow" ]]
+return function(p1, NotReady, p2, Detail, p3, p4, p5)
 	-- upvalues: UseDispatchFunction (copy), UseLocalUserIdFunction (copy), ReactModule (copy), AppPage (copy), FFlagGameJoinCardSourceAttribution (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), EnumsModule (copy), FFlagUserListViewCtaAnalyticsModule (copy), ReportViewCtaModule (copy), ButtonTypes (copy), ButtonVariant (copy), DataStatus (copy), config (copy), MapServerActionsToRowCtaModule (copy), FFlagUserListCanonicalCtaAnalyticsModule (copy), FFlagUserListCtaAnalyticsEnabled (copy), ReportCtaActivatedModule (copy), FFlagUserListSurfaceExtensions (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
-	local UseResult = ReactModule.useCallback(function(UserId, p6) --[[ Line: 76 ]]
+	local UseResult = ReactModule.useCallback(function(UserId, p6)
 		-- upvalues: AppPage (upval), FFlagGameJoinCardSourceAttribution (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 		local config = {
 			name = AppPage.GameJoinCard,
@@ -51,7 +51,7 @@ return function(p1, NotReady, p2, Detail, p3, p4, p5) --[[ Line: 62 | Named "use
 			UseDispatchResult(NavigateDownFunction(config))
 		end
 	end, { UseDispatchResult })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 89 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: AppPage (upval), Detail (copy), EnumsModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 		local config = {
 			name = AppPage.ProfilePlatform,
@@ -68,7 +68,7 @@ return function(p1, NotReady, p2, Detail, p3, p4, p5) --[[ Line: 62 | Named "use
 		end
 	end, { UseDispatchResult, Detail })
 	
-	return ReactModule.useMemo(function() --[[ Line: 103 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: p3 (copy), Detail (copy), UseLocalUserIdResult (copy), UseResult1 (copy), FFlagUserListViewCtaAnalyticsModule (upval), ReportViewCtaModule (upval), ButtonTypes (upval), ButtonVariant (upval), NotReady (copy), DataStatus (upval), config (upval), MapServerActionsToRowCtaModule (upval), p1 (copy), p2 (copy), FFlagUserListCanonicalCtaAnalyticsModule (upval), p5 (copy), p4 (copy), FFlagUserListCtaAnalyticsEnabled (upval), ReportCtaActivatedModule (upval), FFlagUserListSurfaceExtensions (upval), UseResult (copy), FFlagGameJoinCardSourceAttribution (upval)
 		if p3 and p3.showSelfProfileCta and Detail == UseLocalUserIdResult then
 			local OnActivated: () -> () = UseResult1
@@ -76,7 +76,7 @@ return function(p1, NotReady, p2, Detail, p3, p4, p5) --[[ Line: 62 | Named "use
 			if FFlagUserListViewCtaAnalyticsModule then
 				local Analytics = p3.analytics
 				
-				OnActivated = function() --[[ Line: 111 ]]
+				OnActivated = function()
 					-- upvalues: ReportViewCtaModule (upval), Analytics (copy), UseResult1 (upval)
 					ReportViewCtaModule(Analytics)
 					UseResult1()
@@ -101,7 +101,7 @@ return function(p1, NotReady, p2, Detail, p3, p4, p5) --[[ Line: 62 | Named "use
 			if PrimaryCta and PrimaryCta.type == ButtonTypes.Join and p4 then
 				local Copy = table.clone(PrimaryCta)
 				
-				function Copy.onActivated() --[[ Line: 143 ]]
+				function Copy.onActivated()
 					-- upvalues: FFlagUserListCtaAnalyticsEnabled (upval), p3 (upval), ButtonTypes (upval), Detail (upval), FFlagUserListCanonicalCtaAnalyticsModule (upval), ReportCtaActivatedModule (upval), p5 (upval), FFlagUserListSurfaceExtensions (upval), UseResult (upval), FFlagGameJoinCardSourceAttribution (upval)
 					if FFlagUserListCtaAnalyticsEnabled then
 						local OnCtaActivated: (any) -> () = if p3 then p3.onCtaActivated else nil

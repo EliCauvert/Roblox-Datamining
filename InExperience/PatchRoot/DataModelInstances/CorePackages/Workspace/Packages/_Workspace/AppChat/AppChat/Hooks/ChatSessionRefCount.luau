@@ -6,7 +6,7 @@ local AppChatSessionName = game:DefineFastString("AppChatSessionName", "ChatPage
 local Count = 0
 local Count1 = 0
 
-local function createL3Session(SessionService) --[[ Line: 23 ]]
+local function createL3Session(SessionService)
 	-- upvalues: SessionType (copy), AppChatSessionName (copy), String (copy)
 	local Level2a = SessionType.StructuralIdentifier.Level2a
 	
@@ -20,7 +20,7 @@ local function createL3Session(SessionService) --[[ Line: 23 ]]
 	end
 end
 
-local function _(SessionService) --[[ Line: 39 | Named "destroyL3Session" ]]
+local function _(SessionService)
 	-- upvalues: AppChatSessionName (copy)
 	if SessionService:SessionExists(AppChatSessionName) then
 		SessionService:RemoveSession(AppChatSessionName)
@@ -28,7 +28,7 @@ local function _(SessionService) --[[ Line: 39 | Named "destroyL3Session" ]]
 end
 
 return {
-	acquire = function(p1) --[[ Line: 45 ]]
+	acquire = function(p1)
 		-- upvalues: SessionService (copy), Count1 (ref), Count (ref), createL3Session (copy)
 		local P2 = p1 or SessionService
 		
@@ -43,7 +43,7 @@ return {
 			createL3Session(P2)
 		end
 	end,
-	release = function(p1) --[[ Line: 57 ]]
+	release = function(p1)
 		-- upvalues: SessionService (copy), Count (ref), AppChatSessionName (copy)
 		local P3 = p1 or SessionService
 		Count -= 1
@@ -52,7 +52,7 @@ return {
 			P3:RemoveSession(AppChatSessionName)
 		end
 	end,
-	reserve = function(p1) --[[ Line: 68 ]]
+	reserve = function(p1)
 		-- upvalues: SessionService (copy), Count1 (ref), Count (ref), createL3Session (copy)
 		local P4 = p1 or SessionService
 		Count1 += 1
@@ -62,15 +62,15 @@ return {
 			createL3Session(P4)
 		end
 	end,
-	getCount = function() --[[ Line: 77 ]]
+	getCount = function()
 		-- upvalues: Count (ref)
 		return Count
 	end,
-	getReservations = function() --[[ Line: 81 ]]
+	getReservations = function()
 		-- upvalues: Count1 (ref)
 		return Count1
 	end,
-	_resetForTesting = function() --[[ Line: 85 ]]
+	_resetForTesting = function()
 		-- upvalues: Count (ref), Count1 (ref)
 		Count = 0
 		Count1 = 0

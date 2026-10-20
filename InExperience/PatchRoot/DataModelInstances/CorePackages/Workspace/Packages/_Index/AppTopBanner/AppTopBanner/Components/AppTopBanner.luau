@@ -14,7 +14,7 @@ local FocusRoot = FocusNavigationUtilsModule.FocusRoot
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local config = { deviceStatusBarHeight = 0, contentMaps = {} }
 
-return ReactModule.memo(function(p1) --[[ Line: 37 | Named "AppTopBanner" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), ReactModule (copy), FFlagUseSignalsForAppTopBanner (copy), GetAppTopBannerStoreModule (copy), UseSignalState (copy), UseSelectorFunction (copy), AppTopBannerTypeModule (copy), FoundationModule (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseTokensResult = UseTokensFunction()
@@ -33,23 +33,23 @@ return ReactModule.memo(function(p1) --[[ Line: 37 | Named "AppTopBanner" ]]
 		UseSignalStateResult2 = UseSignalState(AppTopBannerStoreModule.getAppTopBannerContentHeight)
 		UseSignalStateResult3 = UseSignalState(AppTopBannerStoreModule.getIsDisabled)
 	else
-		UseSignalStateResult = UseSelectorFunction((ReactModule.useCallback(function(p2) --[[ Line: 61 ]]
+		UseSignalStateResult = UseSelectorFunction((ReactModule.useCallback(function(p2)
 			return if p2.AppTopBanner then p2.AppTopBanner.expanded else false
 		end, {})))
-		UseSignalStateResult1 = UseSelectorFunction((ReactModule.useCallback(function(p2) --[[ Line: 65 ]]
+		UseSignalStateResult1 = UseSelectorFunction((ReactModule.useCallback(function(p2)
 			return p2.AppTopBanner and p2.AppTopBanner.appTopBannerContentProps
 		end, {})))
-		Callback = UseSelectorFunction((ReactModule.useCallback(function(p2) --[[ Line: 69 ]]
+		Callback = UseSelectorFunction((ReactModule.useCallback(function(p2)
 			return p2.AppTopBanner and p2.AppTopBanner.onAppTopBannerClick
 		end, {})))
-		UseSignalStateResult2 = UseSelectorFunction((ReactModule.useCallback(function(p2) --[[ Line: 73 ]]
+		UseSignalStateResult2 = UseSelectorFunction((ReactModule.useCallback(function(p2)
 			return p2.AppTopBanner and p2.AppTopBanner.appTopBannerContentHeight
 		end, {})))
-		UseSignalStateResult3 = UseSelectorFunction((ReactModule.useCallback(function(p2) --[[ Line: 77 ]]
+		UseSignalStateResult3 = UseSelectorFunction((ReactModule.useCallback(function(p2)
 			return if p2.AppTopBanner then p2.AppTopBanner.isDisabled else false
 		end, {})))
 	end
-	ReactModule.useEffect(function() --[[ Line: 85 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult (ref), UseSignalStateResult3 (ref), UseStateResult2 (copy), UseSignalStateResult2 (ref), JoinResult (ref)
 		if UseSignalStateResult and not UseSignalStateResult3 then
 			UseStateResult2(UseSignalStateResult2 + JoinResult.deviceStatusBarHeight)
@@ -64,7 +64,7 @@ return ReactModule.memo(function(p1) --[[ Line: 37 | Named "AppTopBanner" ]]
 		JoinResult.deviceStatusBarHeight,
 		UseSignalStateResult3
 	})
-	local ContentMap = JoinResult.contentMaps[if FFlagUseSignalsForAppTopBanner then UseSignalState(AppTopBannerStoreModule.getAppTopBannerType) else UseSelectorFunction((ReactModule.useCallback(function(p2) --[[ Line: 105 ]]
+	local ContentMap = JoinResult.contentMaps[if FFlagUseSignalsForAppTopBanner then UseSignalState(AppTopBannerStoreModule.getAppTopBannerType) else UseSelectorFunction((ReactModule.useCallback(function(p2)
 		-- upvalues: AppTopBannerTypeModule (upval)
 		return if p2.AppTopBanner then p2.AppTopBanner.appTopBannerType else AppTopBannerTypeModule.None
 	end, {})))]

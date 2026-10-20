@@ -8,12 +8,12 @@ local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
 local Input = ResponsiveModule.Input
 local UseDescendantHasFocusModule = require(script.Parent.useDescendantHasFocus)
 
-return function(Callback, p1) --[[ Line: 30 | Named "useFocusOnMount" ]]
+return function(Callback, p1)
 	-- upvalues: UseFocusGuiObjectFunction (copy), ReactModule (copy), UsePreferredInputFunction (copy), Input (copy), UseIsSpatialFunction (copy), CoreGui (copy), UseDescendantHasFocusModule (copy)
 	local v1 = p1 == nil or p1
 	local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-	local UseResult = ReactModule.useCallback(function(Gui) --[[ Line: 38 ]]
+	local UseResult = ReactModule.useCallback(function(Gui)
 		-- upvalues: Callback (copy), UseStateResult2 (copy)
 		if Callback then
 			if type(Callback) == "function" then
@@ -37,7 +37,7 @@ return function(Callback, p1) --[[ Line: 30 | Named "useFocusOnMount" ]]
 	end, { Callback })
 	local IsUsePreferredInputResultMatch = UsePreferredInputFunction() == Input.Directional
 	local UseIsSpatialResult = UseIsSpatialFunction()
-	local UseResult1 = ReactModule.useCallback(function(Object) --[[ Line: 61 ]]
+	local UseResult1 = ReactModule.useCallback(function(Object)
 		-- upvalues: CoreGui (upval), IsUsePreferredInputResultMatch (copy), UseIsSpatialResult (copy), UseFocusGuiObjectResult (copy)
 		if not Object:IsDescendantOf(CoreGui) then return end
 		if IsUsePreferredInputResultMatch and not UseIsSpatialResult then
@@ -52,7 +52,7 @@ return function(Callback, p1) --[[ Line: 30 | Named "useFocusOnMount" ]]
 	local UseRefResult1 = ReactModule.useRef(false)
 	local UseDescendantHasFocusModuleResult = UseDescendantHasFocusModule(UseStateResult)
 	local UseRefResult2 = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 75 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseRefResult (copy), UseRefResult1 (copy), UseResult1 (copy), v1 (copy), UseDescendantHasFocusModuleResult (copy), UseRefResult2 (copy)
 		if not UseStateResult then
 			UseRefResult.current = false
@@ -67,10 +67,10 @@ return function(Callback, p1) --[[ Line: 30 | Named "useFocusOnMount" ]]
 		if v1 and not UseRefResult1.current and UseDescendantHasFocusModuleResult then
 			UseRefResult1.current = true
 		end
-		local DescendantAddedConnection = if v1 and not UseRefResult1.current then UseStateResult.DescendantAdded:Connect(function(Descendant) --[[ Line: 98 ]]
+		local DescendantAddedConnection = if v1 and not UseRefResult1.current then UseStateResult.DescendantAdded:Connect(function(Descendant)
 			-- upvalues: UseRefResult2 (upval), UseResult1 (upval), UseStateResult (upval)
 			if not UseRefResult2.current and Descendant:IsA("GuiObject") and Descendant.Selectable then
-				UseRefResult2.current = task.delay(0.1, function() --[[ Line: 100 ]]
+				UseRefResult2.current = task.delay(0.1, function()
 					-- upvalues: UseResult1 (upval), UseStateResult (upval), UseRefResult2 (upval)
 					UseResult1(UseStateResult)
 					UseRefResult2.current = nil
@@ -78,7 +78,7 @@ return function(Callback, p1) --[[ Line: 30 | Named "useFocusOnMount" ]]
 			end
 		end) else nil
 		
-		return function() --[[ Line: 107 ]]
+		return function()
 			-- upvalues: DescendantAddedConnection (copy), UseRefResult2 (upval)
 			if DescendantAddedConnection then
 				DescendantAddedConnection:Disconnect()

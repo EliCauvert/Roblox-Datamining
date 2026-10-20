@@ -13,7 +13,7 @@ local SettingsPageFactoryModule = require(Settings.SettingsPageFactory)
 local UtilsModule = require(Settings.Integrations.Utils)
 local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 
-return function() --[[ Line: 23 | Named "createTraversalHistoryWrapper" ]]
+return function()
 	-- upvalues: Localization (copy), LocalizationService (copy), SettingsPageFactoryModule (copy), ConstantsModule (copy), IsSideSheetEnabledModule (copy), ReactRobloxModule (copy), ReactModule (copy), FoundationProvider (copy), FoundationModule (copy), UtilsModule (copy), LocalizationProvider (copy), TraversalHistoryPageModule (copy)
 	local NewLocalization = Localization.new(LocalizationService.RobloxLocaleId)
 	local NewPage = SettingsPageFactoryModule:CreateNewPage()

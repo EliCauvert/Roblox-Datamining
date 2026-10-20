@@ -7,13 +7,13 @@ local ProfileWrapperContextModule = require(CorePackages.Workspace.Packages.Prof
 local AvatarHeadshotComponentModule = require(CorePackages.Workspace.Packages.ProfilePlatform.AvatarHeadshotComponent)
 local SocialChipCountsRowModule = require(CorePackages.Workspace.Packages.ProfilePlatform.SocialChipCountsRow)
 
-local function _(p1, p2, p3) --[[ Line: 15 ]]
+local function _(p1, p2, p3)
 	local PrimaryName = p1.names.primaryName or ""
 	
 	return if p2.profileUserNickname and p3 and p2.profileUserNickname ~= "" then p2.profileUserNickname .. " (" .. PrimaryName .. ")" else PrimaryName
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 37 | Named "ProfileHeader" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), ProfileWrapperContextModule (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), View (copy), AvatarHeadshotComponentModule (copy), SocialChipCountsRowModule (copy)
 	local UseContextResult = ReactModule.useContext(ProfileWrapperContextModule)
 	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.UserProfileHeader)

@@ -20,11 +20,11 @@ local config = {
 	robux = "Feature.Home.Robux"
 }
 
-local function _(p1, p2, p3) --[[ Line: 46 | Named "getTitleText" ]]
+local function _(p1, p2, p3)
 	return if p1 then `{p2} + {p3}` else p2
 end
 
-local function renderMediaContent(Frame) --[[ Line: 54 ]]
+local function renderMediaContent(Frame)
 	-- upvalues: FormatPriceModule (copy), ReactModule (copy), View (copy), Icon (copy), IconSize (copy), Text (copy), Image (copy), _UDim2 (copy)
 	local IsHasBonusItem = Frame.hasBonusItem == true
 	
@@ -64,7 +64,7 @@ local function renderMediaContent(Frame) --[[ Line: 54 ]]
 	}
 end
 
-return ReactModule.memo(function(Frame) --[[ Line: 99 | Named "RobuxPackageTile" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), MEDIAHEIGHTSCALEFALLBACK (copy), ReactModule (copy), View (copy), renderMediaContent (copy), Text (copy), Button (copy), ButtonVariant (copy), InputSize (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local Robux = UseLocalizationResult.robux
@@ -114,7 +114,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 99 | Named "RobuxPackageTile"
 				variant = if Frame.isPrimaryRobuxPackage == true then ButtonVariant.SoftEmphasis else ButtonVariant.Standard,
 				size = InputSize.Small,
 				width = UDim.new(1, 0),
-				onActivated = Frame.onBuyActivated or function() --[[ Line: 152 ]] end,
+				onActivated = Frame.onBuyActivated or function() end,
 				isLoading = Frame.isBuyLoading
 			})
 		})

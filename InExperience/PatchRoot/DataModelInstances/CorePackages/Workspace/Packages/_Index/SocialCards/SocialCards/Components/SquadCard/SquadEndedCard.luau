@@ -16,7 +16,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FFlagPartyDevAPIToRespectThirdPartySettingsEnabled = require(Parent.SharedFlags).FFlagPartyDevAPIToRespectThirdPartySettingsEnabled
 local UseCanAccessPartyModule = require(Parent.Squads.useCanAccessParty)
 
-return function(p1) --[[ Line: 33 | Named "SquadEndedCard" ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseLocalizationFunction (copy), UseNavigationFunction (copy), UseTokensFunction (copy), UseCurrentSquadIdFunction (copy), UseCurrentSquadParentChannelIdFunction (copy), ReactModule (copy), SquadExternalContractContext (copy), UseCanAccessPartyModule (copy), FFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), SquadButtonClickIntentionEnum (copy), EventNamesModule (copy), SquadButtonSourceEnum (copy), FoundationModule (copy), LeaveSquadFunction (copy), SquadPromptType (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -32,15 +32,15 @@ return function(p1) --[[ Line: 33 | Named "SquadEndedCard" ]]
 	local UseParentChannelHasSquadAccessResult = UseContextResult.useParentChannelHasSquadAccess(p1.conversationId)
 	local UseParentChannelHasSquadAccessResult1 = UseCanAccessPartyModule() and UseParentChannelHasSquadAccessResult
 	local NoFFlagPartyDevAPIToRespectThirdPartySettingsEnabled = not FFlagPartyDevAPIToRespectThirdPartySettingsEnabled or UseContextResult.useIsChatEnabled()
-	local UseMemoResult = ReactModule.useMemo(function(): boolean --[[ Line: 56 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): boolean
 		-- upvalues: UseCurrentSquadParentChannelIdResult (copy), p1 (copy)
 		return UseCurrentSquadParentChannelIdResult == p1.conversationId
 	end, { UseCurrentSquadParentChannelIdResult, p1.conversationId })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 60 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), SquadButtonClickIntentionEnum (upval), UseParentChannelHasGroupUpResult (copy)
 		return if UseMemoResult then SquadButtonClickIntentionEnum.View elseif UseParentChannelHasGroupUpResult then SquadButtonClickIntentionEnum.Join else SquadButtonClickIntentionEnum.Create
 	end, { UseMemoResult, UseParentChannelHasGroupUpResult })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 72 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseContextResult (copy), EventNamesModule (upval), p1 (copy), SquadButtonSourceEnum (upval), UseCurrentSquadIdResult (copy), UseMemoResult1 (copy)
 		UseContextResult.fireSquadAnalytics(EventNamesModule.EnterSquadButtonPressed, {
 			conversationId = p1.conversationId,
@@ -68,12 +68,12 @@ return function(p1) --[[ Line: 33 | Named "SquadEndedCard" ]]
 			SortOrder = Enum.SortOrder.LayoutOrder
 		},
 		selection = { Selectable = true },
-		onActivated = if UseParentChannelHasSquadAccessResult1 then function() --[[ Line: 104 ]]
+		onActivated = if UseParentChannelHasSquadAccessResult1 then function()
 			-- upvalues: UseResult (copy), UseCurrentSquadIdResult (copy), p1 (copy), UseCurrentSquadParentChannelIdResult (copy), UseDispatchResult (copy), LeaveSquadFunction (upval), SquadPromptType (upval), UseContextResult (copy), UseNavigationResult (copy), FFlagPartyDevAPIToRespectThirdPartySettingsEnabled (upval), NoFFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy)
 			UseResult()
 			
 			if UseCurrentSquadIdResult and p1.conversationId ~= UseCurrentSquadParentChannelIdResult then
-				UseDispatchResult(LeaveSquadFunction(SquadPromptType.JoinAnotherSquad, UseContextResult.setSquadPrompt, function() --[[ Line: 112 ]]
+				UseDispatchResult(LeaveSquadFunction(SquadPromptType.JoinAnotherSquad, UseContextResult.setSquadPrompt, function()
 					-- upvalues: UseNavigationResult (upval), p1 (upval)
 					UseNavigationResult.navigate("SquadLobby", { conversationId = p1.conversationId })
 				end, UseContextResult.squadLocation, not FFlagPartyDevAPIToRespectThirdPartySettingsEnabled or NoFFlagPartyDevAPIToRespectThirdPartySettingsEnabled))

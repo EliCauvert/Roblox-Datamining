@@ -8,7 +8,7 @@ local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local GetFFlagUGCValidateCheckDescendantIdsLoadableModule = require(Parent.flags.getFFlagUGCValidateCheckDescendantIdsLoadable)
 local GetFFlagUGCValidateVersionedContentIdsModule = require(Parent.flags.getFFlagUGCValidateVersionedContentIds)
 
-local function _(p1, p2): boolean --[[ Line: 14 | Named "hasEditableBacking" ]]
+local function _(p1, p2): boolean
 	-- upvalues: ConstantsModule (copy)
 	local CONTENTIDEDITABLEPROPERTYEntry = ConstantsModule.CONTENT_ID_EDITABLE_PROPERTY[p1.ClassName]
 	local CONTENTIDEDITABLEPROPERTYEntry1 = CONTENTIDEDITABLEPROPERTYEntry and CONTENTIDEDITABLEPROPERTYEntry[p2]
@@ -16,9 +16,9 @@ local function _(p1, p2): boolean --[[ Line: 14 | Named "hasEditableBacking" ]]
 	return if CONTENTIDEDITABLEPROPERTYEntry1 then p1[CONTENTIDEDITABLEPROPERTYEntry1].SourceType == Enum.ContentSourceType.Object else false
 end
 
-local _ = function(p1) --[[ Line: 23 | Named "canLoadAsset" ]]
+local _ = function(p1)
 	-- upvalues: UGCValidationService (copy)
-	local Success, Result = pcall(function() --[[ Line: 24 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: UGCValidationService (upval), p1 (copy)
 		return UGCValidationService:CanLoadAsset(p1)
 	end)
@@ -26,7 +26,7 @@ local _ = function(p1) --[[ Line: 23 | Named "canLoadAsset" ]]
 	return Success and Result
 end
 
-local function reportUnloadable(p1, IsValidationEnvMatch, AssetId, p2) --[[ Line: 30 ]]
+local function reportUnloadable(p1, IsValidationEnvMatch, AssetId, p2)
 	-- upvalues: ErrorSourceStringsModule (copy)
 	if IsValidationEnvMatch then
 		p1:fetchError(string.format("Failed to load asset referenced by %s.%s. Make sure the asset exists and try again.", p2.instance:GetFullName(), p2.fieldName))
@@ -48,7 +48,7 @@ return {
 		ValidationEnumsModule.SharedDataMember.contentIds
 	},
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 63 ]]
+	run = function(p1, p2)
 		-- upvalues: ValidationEnumsModule (copy), ConstantsModule (copy), ErrorSourceStringsModule (copy), GetFFlagUGCValidateVersionedContentIdsModule (copy), GetFFlagUGCValidateCheckDescendantIdsLoadableModule (copy), ParseContentIdsModule (copy), UGCValidationService (copy), reportUnloadable (copy)
 		local IsConsumerEnvMatch = p2.consumerConfig.consumerEnv == ValidationEnumsModule.ConsumerEnv.IEC
 		local t = {}
@@ -141,7 +141,7 @@ return {
 			if GetFFlagUGCValidateVersionedContentIdsModule() then
 				for _, value2 in ParseContentIdsModule.getDistinctReferences(p2.contentIds) do
 					local Uri = value2.uri
-					local Success, Result = pcall(function() --[[ Line: 24 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: UGCValidationService (upval), Uri (copy)
 						return UGCValidationService:CanLoadAsset(Uri)
 					end)
@@ -154,7 +154,7 @@ return {
 			else
 				for i, contentId2 in p2.contentIds do
 					local Text = "rbxassetid://" .. i
-					local Success1, Result1 = pcall(function() --[[ Line: 24 ]]
+					local Success1, Result1 = pcall(function()
 						-- upvalues: UGCValidationService (upval), Text (copy)
 						return UGCValidationService:CanLoadAsset(Text)
 					end)

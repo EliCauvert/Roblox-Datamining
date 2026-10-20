@@ -22,7 +22,7 @@ local InterfaceResult = TModule.interface({
 })
 local Promises = {}
 
-local function getModalMetadataUrl(EntryPoint) --[[ Line: 37 ]]
+local function getModalMetadataUrl(EntryPoint)
 	-- upvalues: FFlagEnableDeepLinkHistoryWithModalAPI (copy), DeepLinkModule (copy), UrlBuilder (copy), UrlBase (copy)
 	local v1: boolean? = nil
 	
@@ -40,7 +40,7 @@ local function getModalMetadataUrl(EntryPoint) --[[ Line: 37 ]]
 	})()
 end
 
-local function parseResponseToMetadata(ResponseBody) --[[ Line: 56 ]]
+local function parseResponseToMetadata(ResponseBody)
 	-- upvalues: InterfaceResult (copy), FFlagLuaAppSupportNonSduiTypeForServerTriggeredModals (copy), ValidateSduiComponentConfigFunction (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult(ResponseBody)
 	
@@ -70,7 +70,7 @@ local function parseResponseToMetadata(ResponseBody) --[[ Line: 56 ]]
 	}
 end
 
-return function(Callback, EntryPoint) --[[ Line: 90 ]]
+return function(Callback, EntryPoint)
 	-- upvalues: GetModalSignalStoreModule (copy), PromiseModule (copy), Promises (copy), getModalMetadataUrl (copy), LogResponseLatencyModule (copy), parseResponseToMetadata (copy), LogResponseStatusModule (copy)
 	local ModalSignalStoreModule = GetModalSignalStoreModule(false)
 	local v1 = ModalSignalStoreModule.getMetadataGetter(EntryPoint)(false)
@@ -85,10 +85,10 @@ return function(Callback, EntryPoint) --[[ Line: 90 ]]
 	else
 		local ModalMetadataUrl = getModalMetadataUrl(EntryPoint)
 		local NewPromise = nil
-		NewPromise = PromiseModule.new(function(Callback3, Callback2, Callback1: (any) -> ()) --[[ Line: 105 ]]
+		NewPromise = PromiseModule.new(function(Callback3, Callback2, Callback1: (any) -> ())
 			-- upvalues: Callback (copy), ModalMetadataUrl (copy), LogResponseLatencyModule (upval), parseResponseToMetadata (upval), ModalSignalStoreModule (copy), EntryPoint (copy), LogResponseStatusModule (upval)
 			local GET = Callback(ModalMetadataUrl, "GET")
-			GET:andThen(function(Result) --[[ Line: 108 ]]
+			GET:andThen(function(Result)
 				-- upvalues: LogResponseLatencyModule (upval), Callback2 (copy), parseResponseToMetadata (upval), ModalSignalStoreModule (upval), EntryPoint (upval), Callback3 (copy)
 				local ResponseCode = Result and Result.responseCode or nil
 				LogResponseLatencyModule("modals-api/v1/modal", Result.responseTimeMs, ResponseCode)
@@ -108,18 +108,18 @@ return function(Callback, EntryPoint) --[[ Line: 90 ]]
 				else
 					Callback2(`Failed to parse modal metadata response: {ParseResponseToMetadataResult.errorMessage}`)
 				end
-			end):catch(function(Err) --[[ Line: 125 ]]
+			end):catch(function(Err)
 				-- upvalues: LogResponseStatusModule (upval), Callback2 (copy)
 				LogResponseStatusModule("modals-api/v1/modal", Err.StatusCode)
 				Callback2(`Failed to fetch modal metadata: {Err}`)
 			end)
-			Callback1(function() --[[ Line: 130 ]]
+			Callback1(function()
 				-- upvalues: GET (copy)
 				GET:cancel()
 			end)
 		end)
 		Promises[EntryPoint] = NewPromise
-		NewPromise:finally(function() --[[ Line: 136 ]]
+		NewPromise:finally(function()
 			-- upvalues: Promises (upval), EntryPoint (copy), NewPromise (ref)
 			assert(Promises[EntryPoint] == NewPromise, "In-flight request promise mismatch")
 			Promises[EntryPoint] = nil

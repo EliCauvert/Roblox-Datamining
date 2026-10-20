@@ -13,11 +13,11 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local FFlagHideShortcutsOnReportDropdownModule = require(AbuseReportMenu.Flags.FFlagHideShortcutsOnReportDropdown)
 local FFlagReportFocusNavIEMButtonsModule = require(AbuseReportMenu.Flags.FFlagReportFocusNavIEMButtons)
 
-return function(p1, p2, p3, List1, IsSmallPortraitViewport) --[[ Line: 19 | Named "getMenuItemsFromConfigs" ]]
+return function(p1, p2, p3, List1, IsSmallPortraitViewport)
 	-- upvalues: UseLocalizationFunction (copy), ConstantsModule (copy), FFlagHideShortcutsOnReportDropdownModule (copy), ReactModule (copy), FFlagReportFocusNavIEMButtonsModule (copy), FreeCommentsMenuItemModule (copy), ButtonReportMenuItemModule (copy), FoundationModule (copy), ButtonVariant (copy), DropdownReportMenuItemModule (copy), ModalBasedSelectorMenuItemModule (copy)
 	local Elements = {}
 	local UseLocalizationResult = UseLocalizationFunction(ConstantsModule.localizationKeys)
-	local UseResult = if FFlagHideShortcutsOnReportDropdownModule then ReactModule.useCallback(function(p4) --[[ Line: 31 ]]
+	local UseResult = if FFlagHideShortcutsOnReportDropdownModule then ReactModule.useCallback(function(p4)
 		-- upvalues: p3 (copy)
 		if p3.onDropdownMenuOpenChange then
 			p3.onDropdownMenuOpenChange(p4)
@@ -26,7 +26,7 @@ return function(p1, p2, p3, List1, IsSmallPortraitViewport) --[[ Line: 19 | Name
 	local UseRefResult = if FFlagReportFocusNavIEMButtonsModule then ReactModule.useRef(nil) else nil
 	
 	if FFlagReportFocusNavIEMButtonsModule then
-		ReactModule.useEffect(function() --[[ Line: 42 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p3 (copy), UseRefResult (copy)
 			if p3.setLastSelectableObjects and UseRefResult.current then
 				p3.setLastSelectableObjects({ UseRefResult.current })
@@ -57,7 +57,7 @@ return function(p1, p2, p3, List1, IsSmallPortraitViewport) --[[ Line: 19 | Name
 						placeholderText = UseLocalizationResult.ReportCommentPlaceholder,
 						menuContainerWidth = p3.menuWidth,
 						isSmallPortraitViewport = IsSmallPortraitViewport,
-						onUpdate = function(p4) --[[ Line: 72 ]]
+						onUpdate = function(p4)
 							-- upvalues: value1 (copy), p1 (copy), p2 (copy), p3 (copy)
 							value1.onUpdate(p4, p1, p2, p3)
 						end,
@@ -73,7 +73,7 @@ return function(p1, p2, p3, List1, IsSmallPortraitViewport) --[[ Line: 19 | Name
 							icon = if IconSrc == "" then nil else IconSrc,
 							width = UDim.new(1, 0),
 							isDisabled = value1.getIsDisabled ~= nil and value1.getIsDisabled(p1, p3),
-							onActivated = function() --[[ Line: 93 ]]
+							onActivated = function()
 								-- upvalues: value1 (copy), p1 (copy), p2 (copy), p3 (copy)
 								value1.onClick(p1, p2, p3)
 							end,
@@ -88,7 +88,7 @@ return function(p1, p2, p3, List1, IsSmallPortraitViewport) --[[ Line: 19 | Name
 						label = UseLocalizationResult[value1.fieldLabel],
 						placeholderText = UseLocalizationResult.ChooseOne,
 						layoutOrder = LayoutOrder,
-						onSelect = function(p4) --[[ Line: 109 ]]
+						onSelect = function(p4)
 							-- upvalues: value1 (copy), p1 (copy), p2 (copy), p3 (copy)
 							value1.onUpdateSelectedOption(p4, p1, p2, p3)
 						end,
@@ -104,7 +104,7 @@ return function(p1, p2, p3, List1, IsSmallPortraitViewport) --[[ Line: 19 | Name
 					Elements[ComponentName] = ReactModule.createElement(ModalBasedSelectorMenuItemModule, {
 						label = UseLocalizationResult[value1.fieldLabel],
 						layoutOrder = LayoutOrder,
-						onSelect = function(Label, SubLabel, Identifier) --[[ Line: 126 ]]
+						onSelect = function(Label, SubLabel, Identifier)
 							-- upvalues: value1 (copy), p1 (copy), p2 (copy), p3 (copy)
 							value1.onUpdateSelectedOption({
 								label = Label,

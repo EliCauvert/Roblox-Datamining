@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("VrAppPanelWidthMultiplierPercentageOverride", 70)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastInt("VrAppPanelWidthMultiplierPercentageOverride")
 end

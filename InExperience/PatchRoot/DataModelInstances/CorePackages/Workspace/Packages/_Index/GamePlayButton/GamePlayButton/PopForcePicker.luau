@@ -13,9 +13,9 @@ local EventMap = {
 	[Enum.KeyCode.Escape] = NavigateBack
 }
 
-return ReactModule.memo(function(Frame) --[[ Line: 25 | Named "PopForcePicker" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: ReactModule (copy), PopForcePickerStoreModule (copy), SignalsReactModule (copy), FoundationModule (copy), NavigateBack (copy), InputHandlersModule (copy), FocusNavigationUtilsModule (copy), EventMap (copy), PopForcePickerModelModule (copy), PopForcePickerViewModule (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 26 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Frame (copy), PopForcePickerStoreModule (upval)
 		local Store = Frame.store
 		
@@ -38,14 +38,14 @@ return ReactModule.memo(function(Frame) --[[ Line: 25 | Named "PopForcePicker" ]
 	local UseOverlayResult = FoundationModule.Hooks.useOverlay()
 	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(Vector2.new(1024, 768))
 	local UseStateResult6, UseStateResult2_5 = ReactModule.useState(0)
-	local UseResult = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 40 ]]
+	local UseResult = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: UseStateResult2_5 (copy)
 		UseStateResult2_5(ScrollFrame.AbsoluteCanvasSize.Y)
 	end, {})
-	ReactModule.useLayoutEffect(function() --[[ Line: 43 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseOverlayResult (copy), UseStateResult (copy), UseStateResult2_4 (copy)
 		if UseOverlayResult and UseStateResult then
-			local function updateSize() --[[ Line: 47 ]]
+			local function updateSize()
 				-- upvalues: UseStateResult2_4 (upval), UseOverlayResult (upval)
 				UseStateResult2_4(UseOverlayResult.AbsoluteSize)
 			end
@@ -53,7 +53,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 25 | Named "PopForcePicker" ]
 			UseStateResult2_4(UseOverlayResult.AbsoluteSize)
 			local Connection = UseOverlayResult:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateSize)
 			
-			return function() --[[ Line: 52 ]]
+			return function()
 				-- upvalues: Connection (copy)
 				Connection:Disconnect()
 			end
@@ -61,11 +61,11 @@ return ReactModule.memo(function(Frame) --[[ Line: 25 | Named "PopForcePicker" ]
 			return nil
 		end
 	end, { UseOverlayResult, UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 57 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy)
 		UseMemoResult.refresh()
 	end, { UseMemoResult })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 61 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {})
@@ -74,12 +74,12 @@ return ReactModule.memo(function(Frame) --[[ Line: 25 | Named "PopForcePicker" ]
 		surfaceIdentifier = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum.ContextualMenu,
 		isFocusable = UseStateResult and UseSignalStateResult1,
 		eventMap = EventMap,
-		eventHandlers = ReactModule.useMemo(function() --[[ Line: 64 ]]
+		eventHandlers = ReactModule.useMemo(function()
 			-- upvalues: NavigateBack (upval), InputHandlersModule (upval), UseResult1 (copy)
 			return {
 				[NavigateBack] = {
 					phase = "Bubble",
-					handler = InputHandlersModule.onRelease(function(p1) --[[ Line: 68 ]]
+					handler = InputHandlersModule.onRelease(function(p1)
 						-- upvalues: UseResult1 (upval)
 						UseResult1()
 						p1:cancel()
@@ -88,7 +88,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 25 | Named "PopForcePicker" ]
 			}
 		end, { UseResult1 })
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 83 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult (copy), UseResult1 (copy), UseMemoResult (copy), UseStateResult2_2 (copy), UseStateResult2_1 (copy), UseStateResult2_3 (copy), UseStateResult2 (copy)
 		if UseStateResult then
 			UseResult1()
@@ -102,7 +102,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 25 | Named "PopForcePicker" ]
 			UseStateResult2(true)
 		end
 	end, { UseStateResult, UseResult1, UseMemoResult })
-	local UseResult3 = ReactModule.useCallback(function(p1) --[[ Line: 96 ]]
+	local UseResult3 = ReactModule.useCallback(function(p1)
 		-- upvalues: UseMemoResult (copy), UseResult1 (copy), UseStateResult2_3 (copy)
 		if UseMemoResult.select(p1) then
 			UseResult1()
@@ -112,13 +112,13 @@ return ReactModule.memo(function(Frame) --[[ Line: 25 | Named "PopForcePicker" ]
 			UseStateResult2_3("Could not save this location. Try again.")
 		end
 	end, { UseMemoResult, UseResult1 })
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 103 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy)
-		UseStateResult2_1(function(p1): boolean --[[ Line: 104 ]]
+		UseStateResult2_1(function(p1): boolean
 			return not p1
 		end)
 	end, {})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 109 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: PopForcePickerModelModule (upval), UseStateResult3 (copy), UseSignalStateResult (copy)
 		return PopForcePickerModelModule.buildRoster(UseStateResult3, UseSignalStateResult)
 	end, { UseStateResult3, UseSignalStateResult })

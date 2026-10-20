@@ -4,7 +4,7 @@ local Parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
 local ArgCheckModule = require(Parent.ArgCheck)
 local FFlagLuaAppEdpBottomSheetPeekViewEvents = require(Parent.SharedFlags).FFlagLuaAppEdpBottomSheetPeekViewEvents
 
-return function(p1, p2, UniverseId, Source, Index, p3) --[[ Line: 8 ]]
+return function(p1, p2, UniverseId, Source, Index, p3)
 	-- upvalues: ArgCheckModule (copy), FFlagLuaAppEdpBottomSheetPeekViewEvents (copy), Players (copy), LocalizationService (copy)
 	ArgCheckModule.isType(p2, "string", "eventName")
 	ArgCheckModule.isType(UniverseId, "string", "universeId")

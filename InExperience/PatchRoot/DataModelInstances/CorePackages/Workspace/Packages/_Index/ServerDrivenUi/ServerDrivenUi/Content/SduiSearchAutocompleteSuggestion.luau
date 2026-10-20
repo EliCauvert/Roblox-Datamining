@@ -12,7 +12,7 @@ local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFon
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return ReactModule.memo(function(p1) --[[ Line: 30 | Named "SduiSearchAutocompleteSuggestion" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), UserInputService (copy), WithSelectionCursorProviderFunction (copy), WithStyleFunction (copy), CursorKind (copy), FoundationModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), LoadableImage (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsIsRich = p1.isRich == true
@@ -23,30 +23,30 @@ return ReactModule.memo(function(p1) --[[ Line: 30 | Named "SduiSearchAutocomple
 	local Size600 = UseTokensResult.Size.Size_600
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseLocalizationResult = UseLocalizationFunction({ category = "Feature.GameBadges.Label.Experience" })
-	ReactModule.useEffect(function() --[[ Line: 43 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UserInputService (upval), UseStateResult2 (copy)
 		if not UseStateResult then return end
-		local InputEndedConnection = UserInputService.InputEnded:Connect(function() --[[ Line: 47 ]]
+		local InputEndedConnection = UserInputService.InputEnded:Connect(function()
 			-- upvalues: UseStateResult2 (upval)
 			UseStateResult2(false)
 		end)
 		
-		return function() --[[ Line: 50 ]]
+		return function()
 			-- upvalues: InputEndedConnection (copy)
 			InputEndedConnection:Disconnect()
 		end
 	end, { UseStateResult })
 	
-	local function onInputBegan(_, Input) --[[ Line: 55 ]]
+	local function onInputBegan(_, Input)
 		-- upvalues: UseStateResult2 (copy)
 		if (Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.MouseButton1) and Input.UserInputState == Enum.UserInputState.Begin then
 			UseStateResult2(true)
 		end
 	end
 	
-	return WithSelectionCursorProviderFunction(function(Callback) --[[ Line: 64 ]]
+	return WithSelectionCursorProviderFunction(function(Callback)
 		-- upvalues: WithStyleFunction (upval), ReactModule (upval), UseStateResult (copy), Size1600 (copy), p1 (copy), CursorKind (upval), onInputBegan (copy), UseStateResult2 (copy), v1 (copy), UseTokensResult (copy), FoundationModule (upval), Size600 (copy), Size1100 (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), IsIsRich (copy), UseLocalizationResult (copy), Size900 (copy), LoadableImage (upval)
-		return WithStyleFunction(function(p2) --[[ Line: 65 ]]
+		return WithStyleFunction(function(p2)
 			-- upvalues: ReactModule (upval), UseStateResult (upval), Size1600 (upval), p1 (upval), Callback (copy), CursorKind (upval), onInputBegan (upval), UseStateResult2 (upval), v1 (upval), UseTokensResult (upval), FoundationModule (upval), Size600 (upval), Size1100 (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), IsIsRich (upval), UseLocalizationResult (upval), Size900 (upval), LoadableImage (upval)
 			return ReactModule.createElement("ImageButton", {
 				Image = "",
@@ -61,14 +61,14 @@ return ReactModule.memo(function(p1) --[[ Line: 30 | Named "SduiSearchAutocomple
 				Selectable = true,
 				Active = true,
 				SelectionImageObject = Callback(CursorKind.RoundedRectNoInset),
-				[ReactModule.Event.Activated] = function() --[[ Line: 81 ]]
+				[ReactModule.Event.Activated] = function()
 					-- upvalues: p1 (upval)
 					if p1.onActivated then
 						p1.onActivated()
 					end
 				end,
 				[ReactModule.Event.InputBegan] = onInputBegan,
-				[ReactModule.Event.InputEnded] = function() --[[ Line: 87 ]]
+				[ReactModule.Event.InputEnded] = function()
 					-- upvalues: UseStateResult2 (upval)
 					UseStateResult2(false)
 				end,

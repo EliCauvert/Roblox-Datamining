@@ -15,24 +15,24 @@ local FFlagExpChatPresetChatGamepadEnabledModule = require(ExpChat.Flags.FFlagEx
 local FlyOutWidth = ConfigModule.PresetTray.FlyOutWidth
 local FlyOutHeight = ConfigModule.PresetTray.FlyOutHeight
 
-return ReactModule.memo(function(p1) --[[ Line: 35 | Named "PresetChatFlyOut" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: GetPresetChatStoreModule (copy), SignalsReactModule (copy), ReactModule (copy), SetIsPresetTrayOpenModule (copy), FFlagExpChatPresetChatGamepadEnabledModule (copy), UserInputService (copy), GuiService (copy), FFlagExpChatPresetTrayDismissAnalyticsModule (copy), FoundationModule (copy), PresetChatButtonModule (copy), FlyOutWidth (copy), FlyOutHeight (copy), PresetChatContainerModule (copy)
 	local PresetChatStoreModule = GetPresetChatStoreModule(false)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(PresetChatStoreModule.getIsTrayOpen)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 39 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: SetIsPresetTrayOpenModule (upval), PresetChatStoreModule (copy)
 		SetIsPresetTrayOpenModule(PresetChatStoreModule, false)
 	end, { PresetChatStoreModule })
-	ReactModule.useEffect(function() --[[ Line: 43 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult (copy), FFlagExpChatPresetChatGamepadEnabledModule (upval), UserInputService (upval), SetIsPresetTrayOpenModule (upval), PresetChatStoreModule (copy), GuiService (upval), FFlagExpChatPresetTrayDismissAnalyticsModule (upval)
 		if not UseSignalStateResult then return end
-		local InputBeganConnection = if FFlagExpChatPresetChatGamepadEnabledModule then UserInputService.InputBegan:Connect(function(Input, _) --[[ Line: 50 ]]
+		local InputBeganConnection = if FFlagExpChatPresetChatGamepadEnabledModule then UserInputService.InputBegan:Connect(function(Input, _)
 			-- upvalues: SetIsPresetTrayOpenModule (upval), PresetChatStoreModule (upval)
 			if Input.KeyCode == Enum.KeyCode.Escape or Input.KeyCode == Enum.KeyCode.ButtonB then
 				SetIsPresetTrayOpenModule(PresetChatStoreModule, false)
 			end
 		end) else nil
-		local MenuOpenedConnection = GuiService.MenuOpened:Connect(function() --[[ Line: 57 ]]
+		local MenuOpenedConnection = GuiService.MenuOpened:Connect(function()
 			-- upvalues: FFlagExpChatPresetTrayDismissAnalyticsModule (upval), SetIsPresetTrayOpenModule (upval), PresetChatStoreModule (upval)
 			if FFlagExpChatPresetTrayDismissAnalyticsModule then
 				SetIsPresetTrayOpenModule(PresetChatStoreModule, false)
@@ -43,7 +43,7 @@ return ReactModule.memo(function(p1) --[[ Line: 35 | Named "PresetChatFlyOut" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 65 ]]
+		return function()
 			-- upvalues: InputBeganConnection (ref), MenuOpenedConnection (copy)
 			if InputBeganConnection then
 				InputBeganConnection:Disconnect()

@@ -22,17 +22,17 @@ local FFlagHomePhoneVerificationUpsellNewCopy = require(Parent.SharedFlags).FFla
 local config = {
 	addPhoneTitleKey = "Feature.VerificationUpsell.Action.AddPhoneVoice",
 	addPhoneDescriptionKey = "Feature.VerificationUpsell.Description.AddPhoneBodyVoice",
-	onSuccess = function() --[[ Line: 41 ]] end,
-	closeUpsell = function() --[[ Line: 42 ]] end
+	onSuccess = function() end,
+	closeUpsell = function() end
 }
 
-return function(p1) --[[ Line: 49 | Named "VoicePhoneVerificationUpsellOverlayWrapper" ]]
+return function(p1)
 	-- upvalues: MergePropsModule (copy), config (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), ReactModule (copy), UseAppPolicyFunction (copy), ImageSetLabel (copy), Images (copy), PostUserOptInFunction (copy), FFlagFixUpsellVerificationToNavigateToOverlaysModule (copy), Logging (copy), UseLocalizationFunction (copy), UpsellContainerModule (copy), CryoModule (copy), FFlagHomePhoneVerificationUpsellNewCopy (copy), GetFFlagDisablePVUpsellDataConsentFunction (copy), PhoneVerificationStatusOverlayModule (copy)
 	local MergePropsModuleResult = MergePropsModule(config, p1)
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 56 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2)
 		return p2.RequireExplicitVoiceConsent()
 	end)
 	local Element = ReactModule.createElement(ImageSetLabel, {
@@ -41,13 +41,13 @@ return function(p1) --[[ Line: 49 | Named "VoicePhoneVerificationUpsellOverlayWr
 		Image = Images["icons/status/success_large"]
 	})
 	
-	local function OnSuccess() --[[ Line: 66 ]]
+	local function OnSuccess()
 		-- upvalues: PostUserOptInFunction (upval), UseRoactServiceResult (copy), UseStateResult2 (copy), FFlagFixUpsellVerificationToNavigateToOverlaysModule (upval), MergePropsModuleResult (copy), UseStateResult2_1 (copy), Logging (upval)
-		PostUserOptInFunction(UseRoactServiceResult, true, false):andThen(function(Result) --[[ Line: 68 ]]
+		PostUserOptInFunction(UseRoactServiceResult, true, false):andThen(function(Result)
 			-- upvalues: UseStateResult2 (upval), FFlagFixUpsellVerificationToNavigateToOverlaysModule (upval), MergePropsModuleResult (upval), UseStateResult2_1 (upval), Logging (upval)
 			if Result then
 				UseStateResult2(true)
-				task.delay(3, function() --[[ Line: 71 ]]
+				task.delay(3, function()
 					-- upvalues: FFlagFixUpsellVerificationToNavigateToOverlaysModule (upval), MergePropsModuleResult (upval)
 					if FFlagFixUpsellVerificationToNavigateToOverlaysModule then
 						MergePropsModuleResult.closeUpsell()
@@ -63,7 +63,7 @@ return function(p1) --[[ Line: 49 | Named "VoicePhoneVerificationUpsellOverlayWr
 				return
 			else
 				UseStateResult2_1(true)
-				task.delay(5, function() --[[ Line: 82 ]]
+				task.delay(5, function()
 					-- upvalues: FFlagFixUpsellVerificationToNavigateToOverlaysModule (upval), MergePropsModuleResult (upval)
 					if FFlagFixUpsellVerificationToNavigateToOverlaysModule then
 						MergePropsModuleResult.closeUpsell()
@@ -77,10 +77,10 @@ return function(p1) --[[ Line: 49 | Named "VoicePhoneVerificationUpsellOverlayWr
 				end)
 				Logging.warn("Error getting UserOptIn. " .. tostring(Result))
 			end
-		end):catch(function() --[[ Line: 94 ]]
+		end):catch(function()
 			-- upvalues: UseStateResult2_1 (upval), FFlagFixUpsellVerificationToNavigateToOverlaysModule (upval), MergePropsModuleResult (upval), Logging (upval)
 			UseStateResult2_1(true)
-			task.delay(5, function() --[[ Line: 96 ]]
+			task.delay(5, function()
 				-- upvalues: FFlagFixUpsellVerificationToNavigateToOverlaysModule (upval), MergePropsModuleResult (upval)
 				if FFlagFixUpsellVerificationToNavigateToOverlaysModule then
 					MergePropsModuleResult.closeUpsell()

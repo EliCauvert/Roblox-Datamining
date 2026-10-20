@@ -12,7 +12,7 @@ local FFlagSignalsNavP3Dispatch = SharedFlagsModule.FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 local FFlagSduiDismissPromptPageScope = SharedFlagsModule.FFlagSduiDismissPromptPageScope
 
-local function parseTransferRequestIdFromUrl(Text: string) --[[ Line: 26 ]]
+local function parseTransferRequestIdFromUrl(Text: string)
 	local FoundAt: number? = string.find(string.lower(Text), "transferrequestid=", 1, true)
 	
 	if FoundAt then
@@ -26,7 +26,7 @@ local function parseTransferRequestIdFromUrl(Text: string) --[[ Line: 26 ]]
 	end
 end
 
-local function _(p1) --[[ Line: 43 | Named "resolveTransferId" ]]
+local function _(p1)
 	-- upvalues: parseTransferRequestIdFromUrl (copy)
 	local TransferId = p1.transferId
 	
@@ -39,7 +39,7 @@ local function _(p1) --[[ Line: 43 | Named "resolveTransferId" ]]
 	end
 end
 
-return function(p1, _, p2) --[[ Line: 58 | Named "SduiOpenIncomingTransferUpsellAction" ]]
+return function(p1, _, p2)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), parseTransferRequestIdFromUrl (copy), IncomingTransferHomepagePromptDismissModule (copy), SduiParseHelpers (copy), FFlagSduiDismissPromptPageScope (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	
@@ -96,7 +96,7 @@ return function(p1, _, p2) --[[ Line: 58 | Named "SduiOpenIncomingTransferUpsell
 		networking = p2.dependencies.networking,
 		promptId = PromptId,
 		optimisticHidePromptType = PromptType,
-		onReportPromptDismissFailed = function(p3) --[[ Line: 110 ]]
+		onReportPromptDismissFailed = function(p3)
 			-- upvalues: p2 (copy), SduiErrorType (upval), SduiActionType (upval), SduiParseHelpers (upval)
 			p2.dependencies.logger.reportError(SduiErrorType.ActionNetworkRequestFailed, {
 				name = SduiActionType.OpenIncomingTransferUpsell,

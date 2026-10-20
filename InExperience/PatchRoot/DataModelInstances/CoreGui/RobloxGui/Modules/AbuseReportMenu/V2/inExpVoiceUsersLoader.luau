@@ -6,9 +6,9 @@ local Default = require(game:GetService("CoreGui").RobloxGui.Modules.VoiceChat.V
 
 return {
 	type = "listItem",
-	fetch = function(_) --[[ Line: 15 ]]
+	fetch = function(_)
 		-- upvalues: Default (copy), PromiseModule (copy), Players (copy), AccessoryType (copy)
-		local Success, Result = pcall(function() --[[ Line: 16 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Default (upval)
 			return Default:getRecentUsersInteractionData()
 		end)
@@ -36,7 +36,7 @@ return {
 				})
 			end
 		end
-		table.sort(List, function(A, B): boolean --[[ Line: 43 ]]
+		table.sort(List, function(A, B): boolean
 			return A.label < B.label
 		end)
 		

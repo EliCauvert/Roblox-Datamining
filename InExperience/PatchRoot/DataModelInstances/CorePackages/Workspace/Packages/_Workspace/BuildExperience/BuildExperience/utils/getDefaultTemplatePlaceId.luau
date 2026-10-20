@@ -6,9 +6,9 @@ local config = {
 	production = game:DefineFastFlag("BuildExperienceConfigurableProductionTemplatePlaceId", false) and tonumber(BuildExperienceProductionTemplatePlaceId) or 95206881
 }
 
-return function() --[[ Line: 21 | Named "getDefaultTemplatePlaceId" ]]
+return function()
 	-- upvalues: ContentProvider (copy), config (copy)
-	local Success, Result = pcall(function() --[[ Line: 22 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: ContentProvider (upval)
 		return ContentProvider.BaseUrl
 	end)

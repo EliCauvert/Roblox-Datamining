@@ -35,7 +35,7 @@ local FFlagPeoplePageDismissCardMenuOnScrollOutOfView = FlagsService.FFlagPeople
 local Root = nil
 local Signal, Signal2 = require(CorePackages.Packages.Signals).createSignal(false)
 
-local function PeopleFocusRoot(p1) --[[ Line: 69 ]]
+local function PeopleFocusRoot(p1)
 	-- upvalues: ReactModule (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
 	return ReactModule.createElement(FocusRoot, {
 		isAutoFocusRoot = false,
@@ -43,7 +43,7 @@ local function PeopleFocusRoot(p1) --[[ Line: 69 ]]
 	}, p1.children)
 end
 
-local function createPeoplePage() --[[ Line: 77 ]]
+local function createPeoplePage()
 	-- upvalues: CorePackages (copy), SettingsPageFactoryModule (copy), Constants (ref), Uiblox (copy), BuilderIconsModule (copy), NewResult (copy), FFlagRelocateMobileMenuButtonsModule (copy), FIntRelocateMobileMenuButtonsVariantModule (copy), Root (ref), GetFFlagPeoplePageLazyRenderCardsFunction (copy), FFlagEnablePeopleListLazyRender (copy), FFlagPeopleCardsEnableVirtualizedGrid (copy), FFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (copy), FFlagPeoplePageFlipVolumePopoverToFitViewport (copy), FFlagPeoplePageDismissCardMenuOnScrollOutOfView (copy), SignalsReactModule (copy), Signal (copy), FFlagSideSheetOpenPeoplePage (copy), InExperienceSideSheetModule (copy), ReactModule (copy), CoreScriptsRootProvider (copy), LocalizationProvider (copy), PeopleFocusRoot (copy), BlockingModalScreenModule (copy), EnabledResult (copy), GetFFlagAddPeoplePageCardLayoutFunction (copy), LocalStoreModule (copy), ReactRobloxModule (copy), Signal2 (copy), SettingsShowSignal (copy)
 	local PeopleReactViewModule = require(CorePackages.Workspace.Packages.PeopleReactView)
 	local PeopleReactView = PeopleReactViewModule.PeopleReactView
@@ -59,23 +59,23 @@ local function createPeoplePage() --[[ Line: 77 ]]
 	local SettingsHubService = PeopleServiceModule.getService("SettingsHubService")
 	SettingsHubService.register(NewPage)
 	
-	function NewPage:CreateMenuButtonsContainer() --[[ Line: 96 ]]
+	function NewPage:CreateMenuButtonsContainer()
 		-- upvalues: SettingsHubService (copy)
 		SettingsHubService.setShowMenuButtonsContainer(true)
 	end
 	
 	if FFlagRelocateMobileMenuButtonsModule and FIntRelocateMobileMenuButtonsVariantModule == 2 then
-		function NewPage:UnmountMenuButtonsContainer() --[[ Line: 101 ]]
+		function NewPage:UnmountMenuButtonsContainer()
 			-- upvalues: SettingsHubService (copy)
 			SettingsHubService.setShowMenuButtonsContainer(false)
 		end
 	end
-	local function createReactTree() --[[ Line: 107 ]]
+	local function createReactTree()
 		-- upvalues: Root (upval), GetFFlagPeoplePageLazyRenderCardsFunction (upval), FFlagEnablePeopleListLazyRender (upval), FFlagPeopleCardsEnableVirtualizedGrid (upval), FFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (upval), FFlagPeoplePageFlipVolumePopoverToFitViewport (upval), FFlagPeoplePageDismissCardMenuOnScrollOutOfView (upval), NewPage (copy), SignalsReactModule (upval), Signal (upval), FFlagSideSheetOpenPeoplePage (upval), InExperienceSideSheetModule (upval), ReactModule (upval), CoreScriptsRootProvider (upval), LocalizationProvider (upval), NewResult (upval), PeopleFocusRoot (upval), PeopleReactView (copy), BlockingModalScreenModule (upval), EnabledResult (upval), GetFFlagAddPeoplePageCardLayoutFunction (upval), LocalStoreModule (upval), Constants (upval), SideSheetFocusContext (copy), ReactRobloxModule (upval)
 		if Root then return end
 		local ScrollingFrame = if GetFFlagPeoplePageLazyRenderCardsFunction() or FFlagEnablePeopleListLazyRender or FFlagPeopleCardsEnableVirtualizedGrid or FFlagPeoplePageDismissVolumePopoverOnScrollOutOfView or FFlagPeoplePageFlipVolumePopoverToFitViewport or FFlagPeoplePageDismissCardMenuOnScrollOutOfView then NewPage.Page:FindFirstAncestorWhichIsA("ScrollingFrame") else nil
 		
-		local function PeopleConditionalView() --[[ Line: 125 ]]
+		local function PeopleConditionalView()
 			-- upvalues: SignalsReactModule (upval), Signal (upval), FFlagSideSheetOpenPeoplePage (upval), InExperienceSideSheetModule (upval), ReactModule (upval), CoreScriptsRootProvider (upval), LocalizationProvider (upval), NewResult (upval), PeopleFocusRoot (upval), PeopleReactView (upval), BlockingModalScreenModule (upval), GetFFlagPeoplePageLazyRenderCardsFunction (upval), FFlagEnablePeopleListLazyRender (upval), FFlagPeopleCardsEnableVirtualizedGrid (upval), FFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (upval), FFlagPeoplePageFlipVolumePopoverToFitViewport (upval), FFlagPeoplePageDismissCardMenuOnScrollOutOfView (upval), ScrollingFrame (copy), EnabledResult (upval), GetFFlagAddPeoplePageCardLayoutFunction (upval), LocalStoreModule (upval), Constants (upval), SideSheetFocusContext (upval)
 			local UseSignalStateResult = if FFlagSideSheetOpenPeoplePage then SignalsReactModule.useSignalState(InExperienceSideSheetModule.getSideSheetVisibility) else false
 			local UseSignalStateResult1 = if FFlagSideSheetOpenPeoplePage then SignalsReactModule.useSignalState(InExperienceSideSheetModule.getDidSideSheetOpenWithPeoplePage) else false
@@ -108,7 +108,7 @@ local function createPeoplePage() --[[ Line: 77 ]]
 		end
 	end
 	
-	NewPage.Displayed.Event:Connect(function() --[[ Line: 191 ]]
+	NewPage.Displayed.Event:Connect(function()
 		-- upvalues: Signal (upval), createReactTree (copy), Signal2 (upval), NewPage (copy)
 		if not Signal(false) then
 			createReactTree()
@@ -124,7 +124,7 @@ local function createPeoplePage() --[[ Line: 77 ]]
 			end
 		end
 	end)
-	SettingsShowSignal:connect(function(p1) --[[ Line: 204 ]]
+	SettingsShowSignal:connect(function(p1)
 		-- upvalues: Signal2 (upval)
 		if not p1 then
 			Signal2(false)

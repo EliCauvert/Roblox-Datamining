@@ -5,7 +5,7 @@ local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
 local Text = require(Parent.Foundation).Text
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return function(_) --[[ Line: 13 | Named "CommunityLocked" ]]
+return function(_)
 	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), Text (copy)
 	return ReactModule.createElement(Text, {
 		tag = "padding-top-xlarge",

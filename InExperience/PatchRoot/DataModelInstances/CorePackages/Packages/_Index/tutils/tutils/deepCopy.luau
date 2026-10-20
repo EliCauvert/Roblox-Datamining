@@ -1,4 +1,4 @@
-﻿local function deepCopy(Key, p1) --[[ Line: 9 ]]
+﻿local function deepCopy(Key, p1)
 	-- upvalues: deepCopy (copy)
 	if type(Key) ~= "table" then
 		return Key

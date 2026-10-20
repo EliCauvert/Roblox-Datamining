@@ -4,7 +4,7 @@ local CreateEffectFunction = SignalsModule.createEffect
 local LifecycleModule = {}
 LifecycleModule.__index = LifecycleModule
 
-function LifecycleModule.new(p1) --[[ Line: 36 ]]
+function LifecycleModule.new(p1)
 	-- upvalues: LifecycleModule (copy), CreateSignalFunction (copy), CreateEffectFunction (copy)
 	local self = setmetatable({}, LifecycleModule)
 	local DefaultVisible = false
@@ -22,7 +22,7 @@ function LifecycleModule.new(p1) --[[ Line: 36 ]]
 	self.setEnabled = Signal2_1
 	local List = {}
 	local List1 = {}
-	local Effect = CreateEffectFunction(function(p2) --[[ Line: 58 ]]
+	local Effect = CreateEffectFunction(function(p2)
 		-- upvalues: Signal (copy), self (copy), List (copy), Signal2 (copy)
 		local SignalResult = Signal(p2)
 		
@@ -38,7 +38,7 @@ function LifecycleModule.new(p1) --[[ Line: 36 ]]
 			end
 		end
 	end)
-	local Effect1 = CreateEffectFunction(function(p3) --[[ Line: 71 ]]
+	local Effect1 = CreateEffectFunction(function(p3)
 		-- upvalues: Signal1 (copy), List1 (copy)
 		local SignalResult = Signal1(p3)
 		
@@ -47,17 +47,17 @@ function LifecycleModule.new(p1) --[[ Line: 36 ]]
 		end
 	end)
 	
-	function self:dispose() --[[ Line: 78 ]]
+	function self:dispose()
 		-- upvalues: Effect (copy), Effect1 (copy)
 		Effect()
 		Effect1()
 	end
 	
-	function self:onVisibilityChanged(Value) --[[ Line: 83 ]]
+	function self:onVisibilityChanged(Value)
 		-- upvalues: List (copy)
 		table.insert(List, Value)
 		
-		return function() --[[ Line: 86 ]]
+		return function()
 			-- upvalues: List (upval), Value (copy)
 			local FoundIndex: number? = table.find(List, Value)
 			
@@ -67,12 +67,12 @@ function LifecycleModule.new(p1) --[[ Line: 36 ]]
 		end
 	end
 	
-	function self:onEnabledChanged(Callback: (any) -> ()) --[[ Line: 94 ]]
+	function self:onEnabledChanged(Callback: (any) -> ())
 		-- upvalues: List1 (copy), Signal1 (copy)
 		table.insert(List1, Callback)
 		Callback(Signal1(false))
 		
-		return function() --[[ Line: 97 ]]
+		return function()
 			-- upvalues: List1 (upval), Callback (copy)
 			local FoundIndex: number? = table.find(List1, Callback)
 			

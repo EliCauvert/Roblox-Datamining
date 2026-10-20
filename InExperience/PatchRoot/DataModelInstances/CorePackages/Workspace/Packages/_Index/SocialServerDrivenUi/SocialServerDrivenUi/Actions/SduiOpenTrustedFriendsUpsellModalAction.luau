@@ -8,7 +8,7 @@ local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
 local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p1, _, p2) --[[ Line: 23 | Named "SduiOpenTrustedFriendsUpsellModalAction" ]]
+return function(p1, _, p2)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), Sources (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	

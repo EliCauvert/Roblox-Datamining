@@ -12,11 +12,11 @@ local Images = UIBloxModule.App.ImageSet.Images
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local FFlagFixUpsellVerificationToNavigateToOverlaysModule = require(PhoneUpsell.Flags.FFlagFixUpsellVerificationToNavigateToOverlays)
 local config = {
-	onSuccess = function() --[[ Line: 24 ]] end,
-	closeUpsell = function() --[[ Line: 25 ]] end
+	onSuccess = function() end,
+	closeUpsell = function() end
 }
 
-return function(p1) --[[ Line: 30 | Named "PhoneVerificationUpsellOverlayWrapper" ]]
+return function(p1)
 	-- upvalues: MergePropsModule (copy), config (copy), ReactModule (copy), ImageSetLabel (copy), Images (copy), FFlagFixUpsellVerificationToNavigateToOverlaysModule (copy), UseLocalizationFunction (copy), UpsellContainerModule (copy), CryoModule (copy), PhoneVerificationStatusOverlayModule (copy)
 	local MergePropsModuleResult = MergePropsModule(config, p1)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
@@ -26,10 +26,10 @@ return function(p1) --[[ Line: 30 | Named "PhoneVerificationUpsellOverlayWrapper
 		Image = Images["icons/status/success_large"]
 	})
 	
-	local function OnSuccess() --[[ Line: 41 ]]
+	local function OnSuccess()
 		-- upvalues: UseStateResult2 (copy), FFlagFixUpsellVerificationToNavigateToOverlaysModule (upval), MergePropsModuleResult (copy)
 		UseStateResult2(true)
-		task.delay(3, function() --[[ Line: 43 ]]
+		task.delay(3, function()
 			-- upvalues: FFlagFixUpsellVerificationToNavigateToOverlaysModule (upval), MergePropsModuleResult (upval)
 			if FFlagFixUpsellVerificationToNavigateToOverlaysModule then
 				MergePropsModuleResult.closeUpsell()

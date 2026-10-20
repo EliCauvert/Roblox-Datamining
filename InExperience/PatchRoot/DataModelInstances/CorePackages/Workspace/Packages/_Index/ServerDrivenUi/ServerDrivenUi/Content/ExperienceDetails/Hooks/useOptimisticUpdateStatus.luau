@@ -2,12 +2,12 @@
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 
-return function(Callback, Callback1) --[[ Line: 11 | Named "useOptimisticUpdateStatus" ]]
+return function(Callback, Callback1)
 	-- upvalues: ReactModule (copy), SignalsModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 18 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy)
-		return function() --[[ Line: 19 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			if UseRefResult.current then
 				UseRefResult.current()
@@ -15,7 +15,7 @@ return function(Callback, Callback1) --[[ Line: 11 | Named "useOptimisticUpdateS
 		end
 	end, {})
 	
-	return ReactModule.useCallback(function(...) --[[ Line: 27 ]]
+	return ReactModule.useCallback(function(...)
 		-- upvalues: UseRefResult (copy), Callback (copy), SignalsModule (upval), Callback1 (copy)
 		if UseRefResult.current then
 			UseRefResult.current()
@@ -24,7 +24,7 @@ return function(Callback, Callback1) --[[ Line: 11 | Named "useOptimisticUpdateS
 		local CallbackResult = Callback(...)
 		
 		if CallbackResult then
-			UseRefResult.current = SignalsModule.createEffect(function(p1) --[[ Line: 39 ]]
+			UseRefResult.current = SignalsModule.createEffect(function(p1)
 				-- upvalues: CallbackResult (copy), Callback1 (upval)
 				local CallbackResultResult = CallbackResult(p1)
 				

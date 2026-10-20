@@ -17,28 +17,28 @@ local FFlagLuaAppFixHiddenTileVideoCleanup = require(Parent.SharedFlags).FFlagLu
 local FFlagLuaAppVideoAutoplayFeedElection = require(Parent.SharedFlags).FFlagLuaAppVideoAutoplayFeedElection
 local FFlagLuaAppVideoAutoplayElectOnNewCandidateModule = require(script.Parent.FFlagLuaAppVideoAutoplayElectOnNewCandidate)
 
-local function _(Enabled): boolean --[[ Line: 31 | Named "isVideoAutoplayCandidate" ]]
+local function _(Enabled): boolean
 	-- upvalues: FFlagLuaAppTileVideoCandidateOnly (copy)
 	return not FFlagLuaAppTileVideoCandidateOnly or Enabled == true
 end
 
-local _ = function(Enabled, p1, p2) --[[ Line: 35 | Named "shouldTagUserIntentModeCandidate" ]]
+local _ = function(Enabled, p1, p2)
 	-- upvalues: FFlagLuaAppFixHiddenTileVideoCleanup (copy), FFlagLuaAppTileVideoCandidateOnly (copy)
 	return not (FFlagLuaAppFixHiddenTileVideoCleanup and p1) and (not FFlagLuaAppTileVideoCandidateOnly or Enabled == true or p2)
 end
 
-local _ = function(p1, p2) --[[ Line: 44 | Named "shouldNotifyUserIntentModeCandidateRegistered" ]]
+local _ = function(p1, p2)
 	-- upvalues: FFlagLuaAppVideoAutoplayFeedElection (copy), FFlagLuaAppVideoAutoplayElectOnNewCandidateModule (copy)
 	return p1 or FFlagLuaAppVideoAutoplayFeedElection and (p2 or FFlagLuaAppVideoAutoplayElectOnNewCandidateModule)
 end
 
-return function(p1, p2, Enabled, p3, Value, Value1, LeftPin, p4) --[[ Line: 55 | Named "useTagAsViewportAutoplayCandidate" ]]
+return function(p1, p2, Enabled, p3, Value, Value1, LeftPin, p4)
 	-- upvalues: FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), ReactModule (copy), FFlagLuaAppFixHiddenTileVideoCleanup (copy), FFlagLuaAppTileVideoCandidateOnly (copy), AlignmentType (copy), ViewportAutoplayVideoKeyAttributeModule (copy), ViewportAutoplayRowSpanAttributeModule (copy), ViewportAutoplayCellVerticalPaddingAttributeModule (copy), ViewportAutoplayAlignmentTypeAttributeModule (copy), CollectionService (copy), ViewportAutoplayCandidateTagModule (copy), UserIntentModeAutoplayCandidateTagModule (copy), FFlagLuaAppVideoAutoplayFeedElection (copy), FFlagLuaAppVideoAutoplayElectOnNewCandidateModule (copy), VideoEndReason (copy)
 	local ViewportVideoAutoplayController = if p2 then p2.viewportVideoAutoplayController else nil
 	local VideoKey = if FFlagLuaAppOneByTwoHoverIdleAutoplay and p4 then p4.videoKey else nil
 	local IsUserIntentModeAutoplayCandidate = FFlagLuaAppOneByTwoHoverIdleAutoplay and (p4 ~= nil and p4.isUserIntentModeAutoplayCandidate)
 	local v1: boolean = FFlagLuaAppOneByTwoHoverIdleAutoplay and p4 ~= nil
-	ReactModule.useEffect(function() --[[ Line: 77 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ViewportVideoAutoplayController (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (upval), Enabled (copy), p3 (copy), IsUserIntentModeAutoplayCandidate (copy), FFlagLuaAppFixHiddenTileVideoCleanup (upval), FFlagLuaAppTileVideoCandidateOnly (upval), p1 (copy), Value (copy), LeftPin (copy), AlignmentType (upval), VideoKey (copy), ViewportAutoplayVideoKeyAttributeModule (upval), ViewportAutoplayRowSpanAttributeModule (upval), ViewportAutoplayCellVerticalPaddingAttributeModule (upval), Value1 (copy), ViewportAutoplayAlignmentTypeAttributeModule (upval), CollectionService (upval), ViewportAutoplayCandidateTagModule (upval), UserIntentModeAutoplayCandidateTagModule (upval), v1 (copy), FFlagLuaAppVideoAutoplayFeedElection (upval), FFlagLuaAppVideoAutoplayElectOnNewCandidateModule (upval), VideoEndReason (upval)
 		if not ViewportVideoAutoplayController then return end
 		if FFlagLuaAppOneByTwoHoverIdleAutoplay then
@@ -74,7 +74,7 @@ return function(p1, p2, Enabled, p3, Value, Value1, LeftPin, p4) --[[ Line: 55 |
 		elseif FFlagLuaAppVideoAutoplayFeedElection and (ViewportVideoAutoplayController.electOnNewCandidate or FFlagLuaAppVideoAutoplayElectOnNewCandidateModule) then
 			ViewportVideoAutoplayController:onCandidateRegistered(Current)
 		end
-		return function() --[[ Line: 149 ]]
+		return function()
 			-- upvalues: CollectionService (upval), Current (copy), ViewportAutoplayCandidateTagModule (upval), FFlagLuaAppOneByTwoHoverIdleAutoplay (upval), UserIntentModeAutoplayCandidateTagModule (upval), Value (upval), ViewportAutoplayRowSpanAttributeModule (upval), ViewportAutoplayCellVerticalPaddingAttributeModule (upval), ViewportAutoplayAlignmentTypeAttributeModule (upval), ViewportAutoplayVideoKeyAttributeModule (upval), ViewportVideoAutoplayController (upval), VideoEndReason (upval)
 			CollectionService:RemoveTag(Current, ViewportAutoplayCandidateTagModule)
 			

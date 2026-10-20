@@ -1,7 +1,7 @@
 ﻿local UserInputService = game:GetService("UserInputService")
 local IsSpatialFunction = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AppCommonLib).isSpatial
 
-return function(Text: string): string --[[ Line: 8 | Named "getAvatarEventCounterNameWithPlatform" ]]
+return function(Text: string): string
 	-- upvalues: UserInputService (copy), IsSpatialFunction (copy)
 	local Platform = UserInputService:GetPlatform()
 	

@@ -6,7 +6,7 @@ local EnumScreensModule = require(AppChat.EnumScreens)
 local UseNavigationFunction = require(Parent.Navigation).useNavigation
 local TrustedFriendsUpsellContainerModule = require(script.Parent.TrustedFriendsUpsellContainer)
 
-return function(_) --[[ Line: 17 ]]
+return function(_)
 	-- upvalues: UseNavigationFunction (copy), ReactModule (copy), EnumScreensModule (copy), NewResult (copy), TrustedFriendsUpsellContainerModule (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local UserIdParam = UseNavigationResult and UseNavigationResult.getParam("userId", nil)
@@ -17,7 +17,7 @@ return function(_) --[[ Line: 17 ]]
 	local OnRequestSentParam = UseNavigationResult and UseNavigationResult.getParam("onRequestSent", nil)
 	local OnRequestAcceptedParam = UseNavigationResult and UseNavigationResult.getParam("onRequestAccepted", nil)
 	local OnAcknowledgedParam = UseNavigationResult and UseNavigationResult.getParam("onAcknowledged", nil)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 28 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy), EnumScreensModule (upval)
 		if UseNavigationResult and UseNavigationResult.state.routeName == EnumScreensModule.TrustedConnectionsUpsell then
 			UseNavigationResult.goBack(UseNavigationResult.state.key)

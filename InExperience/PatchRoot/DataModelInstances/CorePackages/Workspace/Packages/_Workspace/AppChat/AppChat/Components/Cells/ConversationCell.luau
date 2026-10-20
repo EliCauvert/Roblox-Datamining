@@ -31,7 +31,7 @@ local config = {
 	style = CryoModule.Dictionary.join(require(AppChat.SocialLibraries).Components.TestStyle, { Tokens = { Color = { None = {} } } })
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 70 | Named "ConversationCell" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseIsUserPendingModule (copy), UseIsInExperienceModule (copy), UseGetOneToOneFriendIdFromConversationIdModule (copy), FFlagEnableBlackbirdCheck (copy), UseIsRobloxSubscriberFunction (copy), FFlagAppChatPresenceStoreMigrationModule (copy), UseConversationAvatarPresenceImageModule (copy), FocusNavigationUtilsModule (copy), UseNavigationFunction (copy), FFlagLuaAppEnablePageLoadTracker (copy), FFlagLuaAppEnableChatMilestones (copy), UsePageTrackerFunction (copy), ReactModule (copy), FFlagAppChatServerSideConversationSearchModule (copy), EnumScreensModule (copy), GetConversationTitleModule (copy), UseLocalizationFunction (copy), PresenceBubbleCellStyledModule (copy), Images (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local Conversation = JoinResult.conversation
@@ -43,14 +43,14 @@ return ReactModule.memo(function(p1) --[[ Line: 70 | Named "ConversationCell" ]]
 	local UseLastInputModeResult = FocusNavigationUtilsModule.useLastInputMode()
 	local UseNavigationResult = UseNavigationFunction()
 	local UsePageTrackerResult = if FFlagLuaAppEnablePageLoadTracker and FFlagLuaAppEnableChatMilestones then UsePageTrackerFunction() else nil
-	ReactModule.useEffect(function() --[[ Line: 92 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagLuaAppEnablePageLoadTracker (upval), FFlagLuaAppEnableChatMilestones (upval), UseIsInExperienceModuleResult (copy), UsePageTrackerResult (ref)
 		if FFlagLuaAppEnablePageLoadTracker and FFlagLuaAppEnableChatMilestones and not UseIsInExperienceModuleResult then
 			UsePageTrackerResult:sendMilestone("main_cta_interactable")
 		end
 	end, {})
 	local HasOnActivated: boolean = FFlagAppChatServerSideConversationSearchModule and (JoinResult.conversation.isSearchResult == true and JoinResult.onActivated ~= nil)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 104 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseLastInputModeResult (copy), UseNavigationResult (copy), HasOnActivated (copy), EnumScreensModule (upval), JoinResult (copy)
 		if UseLastInputModeResult == "Focus" and UseNavigationResult and not HasOnActivated then
 			UseNavigationResult.navigate(EnumScreensModule.ChatConversation, {

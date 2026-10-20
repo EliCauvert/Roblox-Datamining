@@ -11,7 +11,7 @@ local _ = HttpModule.PerformFetch
 local IsEconomicRestrictionResponseFunction = require(Parent.IAPExperience).Utility.isEconomicRestrictionResponse
 local _ = require(PurchasePrompt.types)
 local config = {
-	new = function() --[[ Line: 34 ]]
+	new = function()
 		return {
 			purchased = false,
 			productId = 0,
@@ -24,7 +24,7 @@ local config = {
 	end
 }
 
-function config.fromJsonData(p1) --[[ Line: 46 ]]
+function config.fromJsonData(p1)
 	-- upvalues: config (copy), ArgCheckModule (copy)
 	local NewConfig = config.new()
 	ArgCheckModule.isType(p1, "table", "PurchaseExperienceProduct.fromJsonData's jsonData")
@@ -46,9 +46,9 @@ function config.fromJsonData(p1) --[[ Line: 46 ]]
 	return NewConfig
 end
 
-return function(p1, p2, p3) --[[ Line: 69 | Named "performExperiencePurchase" ]]
+return function(p1, p2, p3)
 	-- upvalues: Logging (copy), PromiseModule (copy), PurchaseErrorModule (copy), IsEconomicRestrictionResponseFunction (copy), config (copy)
-	return p1.performExperiencePurchase(p2, p3):andThen(function(Result) --[[ Line: 70 ]]
+	return p1.performExperiencePurchase(p2, p3):andThen(function(Result)
 		-- upvalues: Logging (upval), PromiseModule (upval), PurchaseErrorModule (upval), IsEconomicRestrictionResponseFunction (upval), config (upval)
 		if type(Result) ~= "table" then
 			Logging.warn("Response from performExperiencePurchase is malformed!")
@@ -61,7 +61,7 @@ return function(p1, p2, p3) --[[ Line: 69 | Named "performExperiencePurchase" ]]
 			
 			return if FromJsonDataResult.purchased then PromiseModule.resolve(FromJsonDataResult) elseif FromJsonDataResult.reason and FromJsonDataResult.reason == "InsufficientFunds" then PromiseModule.reject(PurchaseErrorModule.NotEnoughRobux) else PromiseModule.reject(PurchaseErrorModule.UnknownFailure)
 		end
-	end, function(p4) --[[ Line: 93 ]]
+	end, function(p4)
 		-- upvalues: PromiseModule (upval)
 		return PromiseModule.reject(p4)
 	end)

@@ -1,8 +1,8 @@
-﻿local function convertSecondsToTimeFrames(Largest: number) --[[ Line: 26 ]]
+﻿local function convertSecondsToTimeFrames(Largest: number)
 	return if Largest >= 86400 then { unit = "days", value = math.ceil(Largest / 86400) } elseif Largest >= 3600 then { unit = "hours", value = math.ceil(Largest / 3600) } else { unit = "minutes", value = math.ceil(Largest / 60) }
 end
 
-return function(p1, p2) --[[ Line: 36 | Named "getRemainingTimeFromExpiration" ]]
+return function(p1, p2)
 	-- upvalues: convertSecondsToTimeFrames (copy)
 	if not p1 then
 		return nil

@@ -7,11 +7,11 @@ local _ = require(Parent.DiscoveryTypes)
 local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p1, IsOmni, p2, SortPageId, Detail, PageContext) --[[ Line: 18 | Named "useNavigateToSeeAll" ]]
+return function(p1, IsOmni, p2, SortPageId, Detail, PageContext)
 	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	
-	return (ReactModule.useCallback(function() --[[ Line: 29 ]]
+	return (ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), AppPage (upval), Detail (copy), SortPageId (copy), PageContext (copy), IsOmni (copy), p2 (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 		if p1 == nil then return end
 		local config = {

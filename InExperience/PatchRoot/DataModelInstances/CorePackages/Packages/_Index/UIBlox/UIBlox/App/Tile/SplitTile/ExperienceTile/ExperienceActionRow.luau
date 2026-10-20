@@ -5,9 +5,9 @@ local ButtonTypeModule = require(Parent.Button.Enum.ButtonType)
 local ComboButtonModule = require(Parent.Button.ComboButton)
 local ImagesModule = require(Parent.ImageSet.Images)
 
-local function v6() --[[ Line: 21 ]] end
+local function v6() end
 
-return function(p1) --[[ Line: 52 | Named "ExperienceActionRow" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ComboButtonModule (copy), v6 (copy), ImagesModule (copy), ButtonModule (copy), ButtonTypeModule (copy)
 	local IsActionable = p1.isActionable
 	local HorizontalPadding = p1.horizontalPadding or 6

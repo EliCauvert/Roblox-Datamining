@@ -4,11 +4,11 @@ local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 local GetMomentsShellStackStoreModule = require(Moments.Stores.GetMomentsShellStackStore)
 
-return function(Callback): boolean --[[ Line: 19 | Named "useIsTopMomentsShell" ]]
+return function(Callback): boolean
 	-- upvalues: GetMomentsShellStackStoreModule (copy), ReactModule (copy), SignalsReactModule (copy)
 	local MomentsShellStackStoreModule = GetMomentsShellStackStoreModule(false)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-	ReactModule.useLayoutEffect(function() --[[ Line: 22 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: MomentsShellStackStoreModule (copy), Callback (copy), UseStateResult2 (copy)
 		if MomentsShellStackStoreModule.getTopShellId(false) ~= nil then
 			Callback("pushed")
@@ -16,7 +16,7 @@ return function(Callback): boolean --[[ Line: 19 | Named "useIsTopMomentsShell" 
 		local PushShellResult, PushShellResult2 = MomentsShellStackStoreModule.pushShell()
 		UseStateResult2(PushShellResult)
 		
-		return function() --[[ Line: 28 ]]
+		return function()
 			-- upvalues: MomentsShellStackStoreModule (upval), PushShellResult (copy), Callback (upval), PushShellResult2 (copy)
 			if MomentsShellStackStoreModule.getTopShellId(false) == PushShellResult then
 				Callback("popped")

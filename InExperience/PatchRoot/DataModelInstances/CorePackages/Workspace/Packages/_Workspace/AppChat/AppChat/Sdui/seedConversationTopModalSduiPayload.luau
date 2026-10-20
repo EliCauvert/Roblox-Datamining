@@ -4,11 +4,11 @@ local GetSduiApiStoreFunction = SduiSharedUtilitiesModule.getSduiApiStore
 local SduiLoadTimer = SduiSharedUtilitiesModule.SduiLoadTimer
 local SduiConstantsModule = require(script.Parent.SduiConstants)
 
-local function _(Text: string): boolean --[[ Line: 12 | Named "isBlankPayload" ]]
+local function _(Text: string): boolean
 	return Text == nil or (if typeof(Text) == "string" then string.match(Text, "^%s*$") ~= nil else typeof(Text) == "table" and next(Text) == nil)
 end
 
-return function(Text: string, p1) --[[ Line: 23 | Named "seedConversationTopModalSduiPayload" ]]
+return function(Text: string, p1)
 	-- upvalues: SduiConstantsModule (copy), GetSduiApiStoreFunction (copy), Parent (copy), SduiLoadTimer (copy)
 	local ConversationTopModalConfigKey = SduiConstantsModule.getConversationTopModalConfigKey(p1)
 	local SduiApiStore = GetSduiApiStoreFunction()

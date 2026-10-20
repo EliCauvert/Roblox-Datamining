@@ -5,7 +5,7 @@ local _ = require(script.Parent.Parent.ProfileInsightsStoreTypes)
 local FetchFunction = HttpClientModule.fetch
 local AsPromiseFunction = HttpClientModule.asPromise
 
-return function(p1, Network) --[[ Line: 18 ]]
+return function(p1, Network)
 	-- upvalues: FetchFunction (copy), HttpModule (copy), AsPromiseFunction (copy)
 	return AsPromiseFunction((FetchFunction({
 		method = "POST",
@@ -17,7 +17,7 @@ return function(p1, Network) --[[ Line: 18 ]]
 			rankingStrategy = p1.rankingStrategy
 		},
 		network = Network,
-		decode = function(p2) --[[ Line: 32 ]]
+		decode = function(p2)
 			return p2
 		end
 	})))

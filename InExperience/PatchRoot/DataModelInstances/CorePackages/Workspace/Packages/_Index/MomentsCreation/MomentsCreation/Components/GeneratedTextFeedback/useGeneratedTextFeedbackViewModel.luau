@@ -16,12 +16,12 @@ local config = {
 	disclosure = "Feature.Moments.Description.GenerateTextFeedbackDisclosure"
 }
 
-local function _(p1) --[[ Line: 36 | Named "fireFeedbackEvent" ]]
+local function _(p1)
 	-- upvalues: SessionManager (copy), FunnelEventNames (copy), FireAnalyticsEventModule (copy), MakeCreationEventFieldsModule (copy)
 	FireAnalyticsEventModule(p1, MakeCreationEventFieldsModule.makeCreationBaseFields((SessionManager.getSessionId(FunnelEventNames.FunnelTypes.CreationFlow))))
 end
 
-return function(p1) --[[ Line: 41 | Named "useGeneratedTextFeedbackViewModel" ]]
+return function(p1)
 	-- upvalues: GetCreationFlowStoreModule (copy), UseCreationControllerModule (copy), UseLocalization (copy), config (copy), UseSignalStateFunction (copy), UseStateFunction (copy), EventNames (copy), SessionManager (copy), FunnelEventNames (copy), FireAnalyticsEventModule (copy), MakeCreationEventFieldsModule (copy)
 	local CreationFlowStoreModule = GetCreationFlowStoreModule(false)
 	local UseCreationControllerModuleResult = UseCreationControllerModule()
@@ -37,7 +37,7 @@ return function(p1) --[[ Line: 41 | Named "useGeneratedTextFeedbackViewModel" ]]
 		disclosureText = Result1.disclosure or "",
 		selectedAction = UseStateResult,
 		showReasonDialog = UseStateResult1,
-		onThumbsUp = function() --[[ Line: 55 ]]
+		onThumbsUp = function()
 			-- upvalues: UseStateResult (copy), UseStateResult2 (copy), EventNames (upval), SessionManager (upval), FunnelEventNames (upval), FireAnalyticsEventModule (upval), MakeCreationEventFieldsModule (upval), UseCreationControllerModuleResult (copy)
 			if UseStateResult ~= "thumbs_up" then
 				UseStateResult2("thumbs_up")
@@ -47,25 +47,25 @@ return function(p1) --[[ Line: 41 | Named "useGeneratedTextFeedbackViewModel" ]]
 				return
 			end
 		end,
-		onThumbsDown = function() --[[ Line: 64 ]]
+		onThumbsDown = function()
 			-- upvalues: UseStateResult2_1 (copy)
 			UseStateResult2_1(true)
 		end,
-		onNotHelpful = function() --[[ Line: 68 ]]
+		onNotHelpful = function()
 			-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy), EventNames (upval), SessionManager (upval), FunnelEventNames (upval), FireAnalyticsEventModule (upval), MakeCreationEventFieldsModule (upval), UseCreationControllerModuleResult (copy)
 			UseStateResult2("thumbs_down")
 			UseStateResult2_1(false)
 			FireAnalyticsEventModule(EventNames.EditingFlowGenerateTextFeedbackThumbsDownNotHelpful, MakeCreationEventFieldsModule.makeCreationBaseFields((SessionManager.getSessionId(FunnelEventNames.FunnelTypes.CreationFlow))))
 			UseCreationControllerModuleResult.submitGeneratedTextFeedback("not_helpful")
 		end,
-		onPolicyViolation = function() --[[ Line: 75 ]]
+		onPolicyViolation = function()
 			-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy), EventNames (upval), SessionManager (upval), FunnelEventNames (upval), FireAnalyticsEventModule (upval), MakeCreationEventFieldsModule (upval), UseCreationControllerModuleResult (copy)
 			UseStateResult2("thumbs_down")
 			UseStateResult2_1(false)
 			FireAnalyticsEventModule(EventNames.EditingFlowGenerateTextFeedbackThumbsDownPolicy, MakeCreationEventFieldsModule.makeCreationBaseFields((SessionManager.getSessionId(FunnelEventNames.FunnelTypes.CreationFlow))))
 			UseCreationControllerModuleResult.submitGeneratedTextFeedback("policy_violation")
 		end,
-		onDismissDialog = function() --[[ Line: 82 ]]
+		onDismissDialog = function()
 			-- upvalues: UseStateResult2_1 (copy)
 			UseStateResult2_1(false)
 		end

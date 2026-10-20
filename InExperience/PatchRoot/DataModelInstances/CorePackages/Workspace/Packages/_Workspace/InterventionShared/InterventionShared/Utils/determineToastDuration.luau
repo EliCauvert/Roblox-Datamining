@@ -20,7 +20,7 @@ local list = {
 	}
 }
 
-return function(p1) --[[ Line: 39 ]]
+return function(p1)
 	-- upvalues: list (copy), NewResult (copy)
 	local FormatResult = ""
 	

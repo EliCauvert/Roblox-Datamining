@@ -6,19 +6,19 @@ local ReactOtterModule = require(Parent.ReactOtter)
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return ReactModule.memo(function(p1) --[[ Line: 18 | Named "Scrubber" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactOtterModule (copy), ReactModule (copy), MomentsCommonModule (copy), View (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsHovering = p1.isHovering or p1.isPressed
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
-	ReactModule.useEffect(function() --[[ Line: 24 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), IsHovering (copy)
 		UseAnimatedBindingResult2(ReactOtterModule.ease(if IsHovering then 1 else 0, {
 			duration = if IsHovering then 0.12 else 0.08,
 			easingStyle = Enum.EasingStyle.Quad
 		}))
 	end, { IsHovering })
-	local MapResult = UseAnimatedBindingResult:map(function(Alpha: number) --[[ Line: 31 ]]
+	local MapResult = UseAnimatedBindingResult:map(function(Alpha: number)
 		-- upvalues: MomentsCommonModule (upval), UseTokensResult (copy)
 		return {
 			Color3 = MomentsCommonModule.Utils.Oklab.lerp(UseTokensResult.Color.System.Neutral.Color3, UseTokensResult.Color.System.Emphasis.Color3, Alpha),
@@ -28,14 +28,14 @@ return ReactModule.memo(function(p1) --[[ Line: 18 | Named "Scrubber" ]]
 	
 	return ReactModule.createElement(View, {
 		tag = "position-center-center anchor-center-center radius-circle bg-shift-100",
-		Size = UseAnimatedBindingResult:map(function(Alpha: number): UDim2 --[[ Line: 46 ]]
+		Size = UseAnimatedBindingResult:map(function(Alpha: number): UDim2
 			-- upvalues: UseTokensResult (copy)
 			return UDim2.new(1, 0, 0, (math.lerp(UseTokensResult.Size.Size_100, UseTokensResult.Size.Size_150, Alpha)))
 		end)
 	}, {
 		ProgressSegment = ReactModule.createElement(View, {
 			tag = "radius-circle clip",
-			Size = p1.progressRatio:map(function(XScale): UDim2 --[[ Line: 62 ]]
+			Size = p1.progressRatio:map(function(XScale): UDim2
 				return UDim2.fromScale(XScale, 1)
 			end),
 			backgroundStyle = MapResult
@@ -48,13 +48,13 @@ return ReactModule.memo(function(p1) --[[ Line: 18 | Named "Scrubber" ]]
 		Handle = ReactModule.createElement(View, {
 			tag = "anchor-center-center radius-circle bg-contrast",
 			ZIndex = 2,
-			Size = UseAnimatedBindingResult:map(function(Alpha: number): UDim2 --[[ Line: 51 ]]
+			Size = UseAnimatedBindingResult:map(function(Alpha: number): UDim2
 				-- upvalues: UseTokensResult (copy)
 				local Interpolated = math.lerp(0, UseTokensResult.Size.Size_300, Alpha)
 				
 				return UDim2.fromOffset(Interpolated, Interpolated)
 			end),
-			Position = p1.progressRatio:map(function(XScale): UDim2 --[[ Line: 76 ]]
+			Position = p1.progressRatio:map(function(XScale): UDim2
 				return UDim2.fromScale(XScale, 0.5)
 			end)
 		})

@@ -4,7 +4,7 @@ local RunService = game:GetService("RunService")
 local ContentProvider = game:GetService("ContentProvider")
 local UserInputService = game:GetService("UserInputService")
 local AppLifecycleObserverService = nil
-pcall(function() --[[ Line: 10 ]]
+pcall(function()
 	-- upvalues: AppLifecycleObserverService (ref)
 	AppLifecycleObserverService = game:GetService("AppLifecycleObserverService")
 end)
@@ -22,12 +22,12 @@ local FFlagMomentsAutoplayAmpPolicy = SharedFlagsModule.FFlagMomentsAutoplayAmpP
 local FFlagProfileMomentsVideoPlaybackFix = SharedFlagsModule.FFlagProfileMomentsVideoPlaybackFix
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
-local function _(): boolean --[[ Line: 52 | Named "shouldPauseWhenAppHidden" ]]
+local function _(): boolean
 	-- upvalues: UserInputService (copy)
 	return UserInputService:GetDeviceType() ~= Enum.DeviceType.Desktop
 end
 
-local function defaultCreateCoordinator(p1, MasterVolume) --[[ Line: 56 ]]
+local function defaultCreateCoordinator(p1, MasterVolume)
 	-- upvalues: EnableAudioPlaybackInAppFunction (copy), CoreGui (copy), FFlagProfileMomentsVideoPlaybackFix (copy), FFlagMomentsOptimisticProfilePending (copy), RunService (copy), ContentProvider (copy), Media (copy)
 	EnableAudioPlaybackInAppFunction()
 	local ProfileMomentsAudioOutput = Instance.new("AudioDeviceOutput")
@@ -50,7 +50,7 @@ local function defaultCreateCoordinator(p1, MasterVolume) --[[ Line: 56 ]]
 	
 	return {
 		provider = MediaPreloadCoordinator,
-		dispose = function() --[[ Line: 94 ]]
+		dispose = function()
 			-- upvalues: Flag (ref), MediaPreloadCoordinator (copy), ProfileMomentsAudioOutput (copy), ProfileMomentsMediaHost (copy)
 			if Flag then return end
 			Flag = true
@@ -64,72 +64,72 @@ local function defaultCreateCoordinator(p1, MasterVolume) --[[ Line: 56 ]]
 	}
 end
 
-return function(p1) --[[ Line: 119 | Named "MomentsCarouselMediaProvider" ]]
+return function(p1)
 	-- upvalues: FFlagMomentsAutoplayAmpPolicy (copy), UseSignalStateFunction (copy), GetMomentsCapabilitiesFunction (copy), ReactModule (copy), SignalsModule (copy), UserInputService (copy), AppLifecycleObserverService (ref), ToMediaItemModule (copy), defaultCreateCoordinator (copy), Media (copy)
 	local ActiveIndex = p1.activeIndex
 	local PlaybackActive = p1.playbackActive
 	local UseSignalStateResult = if FFlagMomentsAutoplayAmpPolicy then UseSignalStateFunction(GetMomentsCapabilitiesFunction(false).getIsAutoPlayEnabled) else nil
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 128 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), ActiveIndex (copy)
 		local Signal, Signal2 = SignalsModule.createSignal(ActiveIndex)
 		
 		return { get = Signal, set = Signal2 }
 	end, {})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 133 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), PlaybackActive (copy)
 		local Signal, Signal2 = SignalsModule.createSignal(PlaybackActive)
 		
 		return { get = Signal, set = Signal2 }
 	end, {})
-	local UseMemoResult2 = if FFlagMomentsAutoplayAmpPolicy then ReactModule.useMemo(function() --[[ Line: 139 ]]
+	local UseMemoResult2 = if FFlagMomentsAutoplayAmpPolicy then ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), UseSignalStateResult (copy)
 		local Signal, Signal2 = SignalsModule.createSignal(UseSignalStateResult)
 		
 		return { get = Signal, set = Signal2 }
 	end, {}) else nil
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 146 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval)
 		local Signal, Signal2 = SignalsModule.createSignal(true)
 		
 		return { get = Signal, set = Signal2 }
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 151 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy), ActiveIndex (copy)
 		UseMemoResult.set(ActiveIndex)
 	end, { ActiveIndex, UseMemoResult })
-	ReactModule.useEffect(function() --[[ Line: 155 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult1 (copy), PlaybackActive (copy)
 		UseMemoResult1.set(PlaybackActive)
 	end, { PlaybackActive, UseMemoResult1 })
 	
 	if FFlagMomentsAutoplayAmpPolicy then
-		ReactModule.useEffect(function() --[[ Line: 160 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseMemoResult2 (copy), UseSignalStateResult (copy)
 			UseMemoResult2.set(UseSignalStateResult)
 		end, { UseSignalStateResult, UseMemoResult2 })
 	end
-	ReactModule.useEffect(function() --[[ Line: 165 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UserInputService (upval), AppLifecycleObserverService (upval), UseMemoResult3 (copy)
 		if UserInputService:GetDeviceType() == Enum.DeviceType.Desktop or AppLifecycleObserverService == nil then return end
 		local Connections = {
-			AppLifecycleObserverService.OnHide:Connect(function() --[[ Line: 169 | Named "onHidden" ]]
+			AppLifecycleObserverService.OnHide:Connect(function()
 				-- upvalues: UseMemoResult3 (upval)
 				UseMemoResult3.set(false)
 			end),
-			AppLifecycleObserverService.OnUnhide:Connect(function() --[[ Line: 172 | Named "onShown" ]]
+			AppLifecycleObserverService.OnUnhide:Connect(function()
 				-- upvalues: UseMemoResult3 (upval)
 				UseMemoResult3.set(true)
 			end)
 		}
 		
-		return function() --[[ Line: 179 ]]
+		return function()
 			-- upvalues: Connections (copy)
 			for _, connection in Connections do
 				connection:Disconnect()
 			end
 		end
 	end, { UseMemoResult3 })
-	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 186 ]]
+	local UseMemoResult4 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), ToMediaItemModule (upval)
 		local List = {}
 		
@@ -143,18 +143,18 @@ return function(p1) --[[ Line: 119 | Named "MomentsCarouselMediaProvider" ]]
 		end
 		return List
 	end, { p1.moments, p1.mediaCornerRadius })
-	local UseMemoResult5 = ReactModule.useMemo(function() --[[ Line: 200 ]]
+	local UseMemoResult5 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult1 (copy), UseMemoResult3 (copy)
-		return function(p2) --[[ Line: 201 ]]
+		return function(p2)
 			-- upvalues: UseMemoResult1 (upval), UseMemoResult3 (upval)
 			return UseMemoResult1.get(p2) and UseMemoResult3.get(p2)
 		end
 	end, { UseMemoResult1, UseMemoResult3 })
-	local UseMemoResult6 = ReactModule.useMemo(function() --[[ Line: 206 ]]
+	local UseMemoResult6 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), UseMemoResult4 (copy), UseMemoResult5 (copy), FFlagMomentsAutoplayAmpPolicy (upval), UseMemoResult2 (copy)
 		return {
 			getActiveIndex = UseMemoResult.get,
-			getItems = function(_) --[[ Line: 209 ]]
+			getItems = function(_)
 				-- upvalues: UseMemoResult4 (upval)
 				return UseMemoResult4
 			end,
@@ -168,18 +168,18 @@ return function(p1) --[[ Line: 119 | Named "MomentsCarouselMediaProvider" ]]
 		if FFlagMomentsAutoplayAmpPolicy then UseMemoResult2 else nil
 	})
 	local CreateCoordinator = p1.createCoordinator or defaultCreateCoordinator
-	local UseMemoResult7 = ReactModule.useMemo(function() --[[ Line: 226 ]]
+	local UseMemoResult7 = ReactModule.useMemo(function()
 		-- upvalues: CreateCoordinator (copy), UseMemoResult6 (copy)
 		return CreateCoordinator(UseMemoResult6, 0)
 	end, { UseMemoResult6, CreateCoordinator, 0 })
-	ReactModule.useEffect(function() --[[ Line: 230 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult7 (copy)
-		return function() --[[ Line: 231 ]]
+		return function()
 			-- upvalues: UseMemoResult7 (upval)
 			UseMemoResult7.dispose()
 		end
 	end, { UseMemoResult7 })
-	ReactModule.useImperativeHandle(p1.handoffRef, function() --[[ Line: 235 ]]
+	ReactModule.useImperativeHandle(p1.handoffRef, function()
 		-- upvalues: UseMemoResult7 (copy)
 		return { release = UseMemoResult7.dispose }
 	end, { UseMemoResult7 })

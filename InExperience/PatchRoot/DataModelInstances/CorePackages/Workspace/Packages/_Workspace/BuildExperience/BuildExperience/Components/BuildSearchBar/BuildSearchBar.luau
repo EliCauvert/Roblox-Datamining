@@ -9,7 +9,7 @@ local View = FoundationModule.View
 local GetSearchQueryStoreModule = require(BuildExperience.Stores.GetSearchQueryStore)
 local _ = require(BuildExperience.Stores.GetSearchQueryStore.createSearchQueryStore)
 
-return function(Frame) --[[ Line: 22 | Named "BuildSearchBar" ]]
+return function(Frame)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), GetSearchQueryStoreModule (copy), ReactModule (copy), View (copy), SearchInput (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		placeholder = LocalizationStringsModule.BUILD_SEARCH_PLACEHOLDER
@@ -25,7 +25,7 @@ return function(Frame) --[[ Line: 22 | Named "BuildSearchBar" ]]
 			testId = "build-search-bar-input",
 			text = Store.useDraftQuery(),
 			placeholder = UseLocalizationResult.placeholder,
-			onChanged = ReactModule.useCallback(function(p1) --[[ Line: 33 ]]
+			onChanged = ReactModule.useCallback(function(p1)
 				-- upvalues: Store (copy)
 				if p1 == "" then
 					Store.clear()

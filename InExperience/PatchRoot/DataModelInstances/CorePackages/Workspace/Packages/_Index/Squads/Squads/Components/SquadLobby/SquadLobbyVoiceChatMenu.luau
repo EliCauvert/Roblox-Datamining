@@ -33,10 +33,10 @@ local ComponentAssetsCircle16 = Images["component_assets/circle_16"]
 local config = {
 	forceEnableAudioFocusToggle = false,
 	forceShowVoiceChangerSection = false,
-	openSquadVoiceChangers = function() --[[ Line: 67 ]] end
+	openSquadVoiceChangers = function() end
 }
 
-local function v26(Frame: Frame) --[[ Line: 78 ]]
+local function v26(Frame: Frame)
 	-- upvalues: UseTokensFunction (copy), React (copy), Foundation (copy), FFlagSquadVoiceMenuFoundationRefactorModule (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), ContextualSlider (copy)
 	local UseTokensResult = UseTokensFunction()
 	
@@ -92,7 +92,7 @@ local function v26(Frame: Frame) --[[ Line: 78 ]]
 	})
 end
 
-local function v27(Frame: Frame) --[[ Line: 162 ]]
+local function v27(Frame: Frame)
 	-- upvalues: UseTokensFunction (copy), React (copy), Foundation (copy), FFlagSquadVoiceMenuFoundationRefactorModule (copy), ImageSetLabel (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), ComponentAssetsCircle24Stroke1 (copy), ComponentAssetsCircle16 (copy)
 	local UseTokensResult = UseTokensFunction()
 	local EmphasisColor3 = UseTokensResult.Color.Content.Emphasis.Color3
@@ -180,28 +180,28 @@ local function v27(Frame: Frame) --[[ Line: 162 ]]
 	})
 end
 
-return function(p1) --[[ Line: 269 ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), UseLocalUserIdFunction (copy), UseIsVoiceFocusedFunction (copy), UseEnableAudioFocusToggleFunction (copy), React (copy), SquadExternalContractContext (copy), FFlagSquadsPresenceStoreMigration (copy), UseGetPresenceByUserId (copy), UseSelectorFunction (copy), PresenceType1 (copy), PresenceType (copy), UseCurrentSquadParentChannelIdFunction (copy), CrossExperienceVoiceManager (copy), PartyVoiceVolumeEngineFeature (copy), GameSettings (copy), UseLocalizationFunction (copy), Foundation (copy), FFlagSquadVoiceMenuFoundationRefactorModule (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), v26 (copy), v27 (copy), Images (copy), FFlagEnablePartyVoiceChangersInLua (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseIsVoiceFocusedResult = UseIsVoiceFocusedFunction()
 	local UseEnableAudioFocusToggleResult = UseEnableAudioFocusToggleFunction()
-	local UseResult = React.useCallback(function(p2) --[[ Line: 277 ]]
+	local UseResult = React.useCallback(function(p2)
 		-- upvalues: UseLocalUserIdResult (copy)
 		return p2.Squad.Presence.byUserId[tostring(UseLocalUserIdResult)]
 	end, { UseLocalUserIdResult })
 	local UseGetPresenceByUserIdResult = if FFlagSquadsPresenceStoreMigration then UseGetPresenceByUserId((tostring(UseLocalUserIdResult))) else UseSelectorFunction(UseResult)
-	local UseMemoResult = React.useMemo(function(): boolean --[[ Line: 285 ]]
+	local UseMemoResult = React.useMemo(function(): boolean
 		-- upvalues: UseGetPresenceByUserIdResult (copy), FFlagSquadsPresenceStoreMigration (upval), PresenceType1 (upval), PresenceType (upval)
 		return UseGetPresenceByUserIdResult and UseGetPresenceByUserIdResult.userPresenceType == (if FFlagSquadsPresenceStoreMigration then PresenceType1.InGame else PresenceType.InGame)
 	end, { UseGetPresenceByUserIdResult })
-	local UseMemoResult1 = React.useMemo(function() --[[ Line: 291 ]]
+	local UseMemoResult1 = React.useMemo(function()
 		-- upvalues: UseGetPresenceByUserIdResult (copy), UseMemoResult (copy)
 		return if UseGetPresenceByUserIdResult and UseMemoResult then UseGetPresenceByUserIdResult.lastLocation else nil
 	end, { UseGetPresenceByUserIdResult, UseMemoResult })
 	local UseParentChannelTitleSelectorResult = React.useContext(SquadExternalContractContext).useParentChannelTitleSelector(UseCurrentSquadParentChannelIdFunction() or "")
-	local UseResult1 = React.useCallback(function() --[[ Line: 299 ]]
+	local UseResult1 = React.useCallback(function()
 		-- upvalues: CrossExperienceVoiceManager (upval)
 		CrossExperienceVoiceManager.default:toggleAudioFocus()
 	end, {})
@@ -219,19 +219,19 @@ return function(p1) --[[ Line: 269 ]]
 	})
 	local PartyLabelText = if UseMemoResult2_1 then UseLocalizationResult.partyLabelText else UseLocalizationResult.partyVolumeLabelText
 	local ExperienceLabelText = if PartyVoiceVolumeEngineFeature then UseLocalizationResult.experienceLabelText else UseLocalizationResult.volumeLabelText
-	local UseResult11 = React.useCallback(function() --[[ Line: 327 ]]
+	local UseResult11 = React.useCallback(function()
 		-- upvalues: UseIsVoiceFocusedResult (copy), UseResult1 (copy)
 		if not UseIsVoiceFocusedResult then
 			UseResult1()
 		end
 	end, { UseIsVoiceFocusedResult, UseResult1 })
-	local UseResult2 = React.useCallback(function() --[[ Line: 333 ]]
+	local UseResult2 = React.useCallback(function()
 		-- upvalues: UseIsVoiceFocusedResult (copy), UseResult1 (copy)
 		if UseIsVoiceFocusedResult then
 			UseResult1()
 		end
 	end, { UseIsVoiceFocusedResult, UseResult1 })
-	local UseResult3 = React.useCallback(function() --[[ Line: 340 ]]
+	local UseResult3 = React.useCallback(function()
 		-- upvalues: JoinResult (copy)
 		if JoinResult.openSquadVoiceChangers then
 			JoinResult.openSquadVoiceChangers()
@@ -288,7 +288,7 @@ return function(p1) --[[ Line: 269 ]]
 				labelText = PartyLabelText,
 				sliderValue = UseStateResult,
 				testId = if FFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-chat-menu--party-volume" else nil,
-				onValueChanged = function(PartyVoiceVolume) --[[ Line: 416 ]]
+				onValueChanged = function(PartyVoiceVolume)
 					-- upvalues: GameSettings (upval), UseStateResult2 (copy)
 					GameSettings.PartyVoiceVolume = PartyVoiceVolume
 					UseStateResult2(PartyVoiceVolume)
@@ -299,7 +299,7 @@ return function(p1) --[[ Line: 269 ]]
 				labelText = ExperienceLabelText,
 				sliderValue = UseStateResult1,
 				testId = if FFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-chat-menu--experience-volume" else nil,
-				onValueChanged = function(MasterVolume) --[[ Line: 426 ]]
+				onValueChanged = function(MasterVolume)
 					-- upvalues: GameSettings (upval), UseStateResult2_1 (copy)
 					GameSettings.MasterVolume = MasterVolume
 					UseStateResult2_1(MasterVolume)

@@ -10,16 +10,16 @@ local FFlagLuaAppEnableGamePassFreeTrialsModule = require(InExperienceShop.Flags
 local FetchFunction = HttpClientModule.fetch
 local AsPromiseFunction = HttpClientModule.asPromise
 
-local function emptyAvailabilities() --[[ Line: 22 ]]
+local function emptyAvailabilities()
 	return { available = {}, active = {} }
 end
 
-local function _(p1): string --[[ Line: 26 | Named "trialAvailabilitiesUrl" ]]
+local function _(p1): string
 	-- upvalues: Url (copy)
 	return `{Url.APIS_URL}game-passes/v1/universes/{p1}/trial-availabilities`
 end
 
-local function parseResponse(p1) --[[ Line: 30 ]]
+local function parseResponse(p1)
 	-- upvalues: emptyAvailabilities (copy)
 	local EmptyAvailabilitiesResult = emptyAvailabilities()
 	
@@ -38,10 +38,10 @@ local function parseResponse(p1) --[[ Line: 30 ]]
 end
 
 return {
-	fetchGamePassTrialAvailabilities = function(p2) --[[ Line: 46 ]]
+	fetchGamePassTrialAvailabilities = function(p2)
 		-- upvalues: FFlagLuaAppEnableGamePassFreeTrialsModule (copy), RunService (copy), ShopDebugLoggerModule (copy), PromiseModule (copy), emptyAvailabilities (copy), FetchFunction (copy), Url (copy), parseResponse (copy), AsPromiseFunction (copy)
 		if FFlagLuaAppEnableGamePassFreeTrialsModule and RunService:IsStudio() and game.GameId == 0 then
-			ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 50 ]]
+			ShopDebugLoggerModule.logLazy(function(): string
 				-- upvalues: p2 (copy)
 				return "fetchGamePassTrialAvailabilities: skipped unpublished Studio universeId=" .. tostring(p2)
 			end)
@@ -52,7 +52,7 @@ return {
 				method = "GET",
 				analyticsKey = "game-pass-trial-availabilities.get",
 				url = `{Url.APIS_URL}game-passes/v1/universes/{p2}/trial-availabilities`,
-				decode = function(p3) --[[ Line: 60 ]]
+				decode = function(p3)
 					-- upvalues: parseResponse (upval)
 					if typeof(p3) ~= "table" or typeof(p3.trialAvailabilities) ~= "table" then
 						error("fetchGamePassTrialAvailabilities: malformed response, expected { trialAvailabilities = ... }")

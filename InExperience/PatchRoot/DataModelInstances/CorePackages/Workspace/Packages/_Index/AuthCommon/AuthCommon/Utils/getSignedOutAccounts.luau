@@ -6,7 +6,7 @@ local CryoModule = require(Parent.Cryo)
 local GetFFlagShowInvoluntarilySignedOutAccountsFunction = require(Parent.SharedFlags).GetFFlagShowInvoluntarilySignedOutAccounts
 local FFlagFixPreviousAccountsListEntries = require(Parent.SharedFlags).FFlagFixPreviousAccountsListEntries
 
-local function _(p1, p2, p3) --[[ Line: 13 | Named "subarray" ]]
+local function _(p1, p2, p3)
 	local List = {}
 	
 	for i = p2, p3 do
@@ -15,11 +15,11 @@ local function _(p1, p2, p3) --[[ Line: 13 | Named "subarray" ]]
 	return List
 end
 
-return function(p4: number, p5, Enabled) --[[ Line: 21 | Named "getSignedOutAccounts" ]]
+return function(p4: number, p5, Enabled)
 	-- upvalues: AppStorageUtilitiesModule (copy), GetFFlagShowInvoluntarilySignedOutAccountsFunction (copy), CryoModule (copy), FFlagFixPreviousAccountsListEntries (copy)
 	local PreviousAccountsList = AppStorageUtilitiesModule.getPreviousAccountsList()
 	local FFlagShowInvoluntarilySignedOutAccounts = GetFFlagShowInvoluntarilySignedOutAccountsFunction()
-	local FilterResult = CryoModule.List.filter(CryoModule.Dictionary.values(PreviousAccountsList), function(p6) --[[ Line: 30 ]]
+	local FilterResult = CryoModule.List.filter(CryoModule.Dictionary.values(PreviousAccountsList), function(p6)
 		-- upvalues: FFlagFixPreviousAccountsListEntries (upval), FFlagShowInvoluntarilySignedOutAccounts (copy), p5 (copy), Enabled (copy)
 		if FFlagFixPreviousAccountsListEntries then
 			local UserId = p6.userId
@@ -36,9 +36,9 @@ return function(p4: number, p5, Enabled) --[[ Line: 21 | Named "getSignedOutAcco
 			return p6.signOutTimestamp
 		end
 	end)
-	local SortResult = if FFlagShowInvoluntarilySignedOutAccounts then CryoModule.List.sort(FilterResult, function(p6, p7): boolean --[[ Line: 53 ]]
+	local SortResult = if FFlagShowInvoluntarilySignedOutAccounts then CryoModule.List.sort(FilterResult, function(p6, p7): boolean
 		return (p7.signOutTimestamp or (p7.signInTimestamp or 0)) < (p6.signOutTimestamp or (p6.signInTimestamp or 0))
-	end) else CryoModule.List.sort(FilterResult, function(p6, p7): boolean --[[ Line: 62 ]]
+	end) else CryoModule.List.sort(FilterResult, function(p6, p7): boolean
 		return p7.signOutTimestamp < p6.signOutTimestamp
 	end)
 	

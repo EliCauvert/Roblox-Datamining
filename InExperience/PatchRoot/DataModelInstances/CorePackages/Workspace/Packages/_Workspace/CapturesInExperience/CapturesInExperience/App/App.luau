@@ -57,7 +57,7 @@ local FIntCapturesCoreGuiEventsPerMyriadModule = require(Parent.Flags.FIntCaptur
 local SSUIMetaLuaEngineFeature = game:GetEngineFeature("SSUIMetaLua")
 
 return {
-	createApp = function(p1) --[[ Line: 88 ]]
+	createApp = function(p1)
 		-- upvalues: DashModule (copy), AnalyticsServiceModule (copy), AppStorageService (copy), CaptureService (copy), LocalizationService (copy), NotificationService (copy), Players (copy), RbxAnalyticsService (copy), RobloxReplicatedStorage (copy), StarterGui (copy), SetupFireEventModule (copy), ConstantsModule (copy), GetLocalUserIdModule (copy), InstallReducerModule (copy), NetworkingModule (copy), ScreenSizeModule (copy), ServerTypeModule (copy), MomentsCreationFlowModule (copy), RoduxModule (copy), RetrieveCapturesModule (copy), FFlagCreateMomentsToastModule (copy), CheckMomentsEligibilityModule (copy), MakeCaptureSavedHandlerModule (copy), FFlagCapturesVideoCaptureTriggerHandlerEnabledModule (copy), MakeVideoCaptureInProgressHandlerModule (copy), GetUserIdsFromStringModule (copy), CapturesActivatedModule (copy), CapturesDeactivatedModule (copy), ServerTypeDetectedModule (copy), MenuClosedModule (copy), MenuOpenedModule (copy), TakeCaptureModule (copy), FIntCapturesCoreGuiEventsPerMyriadModule (copy), EventNamesModule (copy), CapturesCoreGuiEnabledModule (copy), CapturesCoreGuiDisabledModule (copy), Signal (copy), SSUIMetaLuaEngineFeature (copy), OnViewportSizeChangedFunction (copy), ScreenSizeChangedModule (copy), OnToggleActivationModule (copy), MakeWrapWithProvidersModule (copy), CapturesPolicyModule (copy), RoactModule (copy), FFlagCapturesInExpUseMomentsCreationModule (copy), Parent1 (copy), MomentsCreationFlowClosedModule (copy), ReactModule (copy), CaptureManagerScreenModule (copy), CaptureOverlayModule (copy), CarouselScreenModule (copy), CaptureServicePromptsModule (copy), CapturesCoreUIModule (copy), CapturesPageModule (copy), MomentsCreationFlowScreenModule (copy)
 		local config = {
 			_momentsCreationFlowDestroyingConnection = nil,
@@ -106,9 +106,9 @@ return {
 		if FFlagCapturesVideoCaptureTriggerHandlerEnabledModule then
 			JoinResult.CaptureService.VideoCaptureInProgress:Connect((MakeVideoCaptureInProgressHandlerModule(config._store, JoinResult, SetupFireEventModuleResult)))
 		end
-		JoinResult.AppStorageService:WhenLoaded(function() --[[ Line: 146 ]]
+		JoinResult.AppStorageService:WhenLoaded(function()
 			-- upvalues: JoinResult (copy), ConstantsModule (upval), GetUserIdsFromStringModule (upval), GetLocalUserIdModule (upval), config (copy), CapturesActivatedModule (upval), CapturesDeactivatedModule (upval)
-			local Success, Result = pcall(function() --[[ Line: 147 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: JoinResult (upval), ConstantsModule (upval)
 				return JoinResult.AppStorageService:GetItem(ConstantsModule.CapturesActiveLocalStorageKey)
 			end)
@@ -122,9 +122,9 @@ return {
 				config._store:dispatch(CapturesDeactivatedModule())
 			end
 		end)
-		task.spawn(function() --[[ Line: 162 ]]
+		task.spawn(function()
 			-- upvalues: JoinResult (copy), config (copy), ServerTypeDetectedModule (upval)
-			local Success, Result = pcall(function() --[[ Line: 163 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: JoinResult (upval)
 				return JoinResult.RobloxReplicatedStorage:WaitForChild("GetServerType", 1e999):InvokeServer()
 			end)
@@ -134,22 +134,22 @@ return {
 			end
 		end)
 		
-		function config.closeMenu() --[[ Line: 172 ]]
+		function config.closeMenu()
 			-- upvalues: config (copy), MenuClosedModule (upval)
 			config._store:dispatch(MenuClosedModule())
 		end
 		
-		function config.openMenu() --[[ Line: 176 ]]
+		function config.openMenu()
 			-- upvalues: config (copy), MenuOpenedModule (upval)
 			config._store:dispatch(MenuOpenedModule())
 		end
 		
-		function config.takeCapture(p2) --[[ Line: 180 ]]
+		function config.takeCapture(p2)
 			-- upvalues: config (copy), TakeCaptureModule (upval)
 			config._store:dispatch(TakeCaptureModule(p2))
 		end
 		
-		local function maybeSendCoreGuiEvent(AllTypeChanged, p2) --[[ Line: 184 ]]
+		local function maybeSendCoreGuiEvent(AllTypeChanged, p2)
 			-- upvalues: FIntCapturesCoreGuiEventsPerMyriadModule (upval), SetupFireEventModuleResult (copy), EventNamesModule (upval)
 			if FIntCapturesCoreGuiEventsPerMyriadModule == 0 then return end
 			if FIntCapturesCoreGuiEventsPerMyriadModule <= Random.new():NextInteger(1, 10000) then return end
@@ -162,7 +162,7 @@ return {
 			end
 		end
 		
-		JoinResult.StarterGui.CoreGuiChangedSignal:Connect(function(CoreGuiType, Enabled) --[[ Line: 201 ]]
+		JoinResult.StarterGui.CoreGuiChangedSignal:Connect(function(CoreGuiType, Enabled)
 			-- upvalues: maybeSendCoreGuiEvent (copy), config (copy), CapturesCoreGuiEnabledModule (upval), CapturesCoreGuiDisabledModule (upval)
 			if CoreGuiType ~= Enum.CoreGuiType.All and CoreGuiType ~= Enum.CoreGuiType.Captures then return end
 			maybeSendCoreGuiEvent(CoreGuiType == Enum.CoreGuiType.All, Enabled)
@@ -183,17 +183,17 @@ return {
 		end
 		config.onIsActiveChanged = Signal.new()
 		
-		function config.getIsActive() --[[ Line: 225 ]]
+		function config.getIsActive()
 			-- upvalues: config (copy), ConstantsModule (upval)
 			return config._store:getState()[ConstantsModule.RoduxKey].IsActive or false
 		end
 		
-		config._store.changed:connect(function(Value, p2) --[[ Line: 229 ]]
+		config._store.changed:connect(function(Value, p2)
 			-- upvalues: ConstantsModule (upval), JoinResult (copy), GetUserIdsFromStringModule (upval), GetLocalUserIdModule (upval), DashModule (upval), config (copy)
 			local IsActive = Value[ConstantsModule.RoduxKey].IsActive
 			
 			if IsActive ~= p2[ConstantsModule.RoduxKey].IsActive then
-				pcall(function() --[[ Line: 234 ]]
+				pcall(function()
 					-- upvalues: JoinResult (upval), ConstantsModule (upval), GetUserIdsFromStringModule (upval), GetLocalUserIdModule (upval), IsActive (copy), DashModule (upval)
 					local UserIdsFromStringModule = GetUserIdsFromStringModule((JoinResult.AppStorageService:GetItem(ConstantsModule.CapturesActiveLocalStorageKey)))
 					local LocalUserIdModule = GetLocalUserIdModule(JoinResult.Players) or ""
@@ -211,10 +211,10 @@ return {
 		end)
 		
 		if SSUIMetaLuaEngineFeature then
-			pcall(function() --[[ Line: 255 ]]
+			pcall(function()
 				-- upvalues: config (copy), ConstantsModule (upval)
 				local SafetyService = game:GetService("SafetyService")
-				config._store.changed:connect(function(Value, p2) --[[ Line: 257 ]]
+				config._store.changed:connect(function(Value, p2)
 					-- upvalues: ConstantsModule (upval), SafetyService (copy)
 					local Entry = Value[ConstantsModule.RoduxKey]
 					local v1 = p2[ConstantsModule.RoduxKey]
@@ -222,7 +222,7 @@ return {
 					local IsMenuOpen1 = Entry.IsMenuOpen or Entry.Carousel and Entry.Carousel.IsOpen
 					
 					if IsMenuOpen1 and not IsMenuOpen then
-						pcall(function() --[[ Line: 267 ]]
+						pcall(function()
 							-- upvalues: SafetyService (upval)
 							SafetyService:ReportCapturesUIOpen()
 						end)
@@ -230,7 +230,7 @@ return {
 						return
 					end
 					if not IsMenuOpen1 and IsMenuOpen then
-						pcall(function() --[[ Line: 271 ]]
+						pcall(function()
 							-- upvalues: SafetyService (upval)
 							SafetyService:ReportCapturesUIClose()
 						end)
@@ -238,14 +238,14 @@ return {
 				end)
 			end)
 		end
-		OnViewportSizeChangedFunction(function(p2) --[[ Line: 279 ]]
+		OnViewportSizeChangedFunction(function(p2)
 			-- upvalues: config (copy), ScreenSizeChangedModule (upval)
 			config._store:dispatch(ScreenSizeChangedModule(p2))
 		end)
 		
-		function config.onToggleActivationFromChrome(...) --[[ Line: 283 ]]
+		function config.onToggleActivationFromChrome(...)
 			-- upvalues: config (copy), OnToggleActivationModule (upval), SetupFireEventModuleResult (copy), EventNamesModule (upval)
-			OnToggleActivationModule(config.getIsActive(), nil, SetupFireEventModuleResult, function(...) --[[ Line: 284 ]]
+			OnToggleActivationModule(config.getIsActive(), nil, SetupFireEventModuleResult, function(...)
 				-- upvalues: config (upval)
 				config._store:dispatch(...)
 			end, EventNamesModule.CapturesActivatedChrome, EventNamesModule.CapturesDeactivatedChrome)
@@ -257,7 +257,7 @@ return {
 		local EnableCapturesBulkManagementResult = if ReadResult then CapturesPolicyModule.Mapper(ReadResult).enableCapturesBulkManagement() else false
 		local config2 = { fireAnalyticsEvent = SetupFireEventModuleResult }
 		
-		local function unmountMomentsCreationFlow() --[[ Line: 312 ]]
+		local function unmountMomentsCreationFlow()
 			-- upvalues: config (copy), RoactModule (upval), FFlagCapturesInExpUseMomentsCreationModule (upval), ConstantsModule (upval), Parent1 (upval), MomentsCreationFlowClosedModule (upval)
 			local MomentsCreationFlowDestroyingConnection = config._momentsCreationFlowDestroyingConnection
 			config._momentsCreationFlowDestroyingConnection = nil
@@ -278,7 +278,7 @@ return {
 			end
 		end
 		
-		function config.mountCaptureManager(p2) --[[ Line: 337 ]]
+		function config.mountCaptureManager(p2)
 			-- upvalues: EnableCapturesBulkManagementResult (copy), EligibleForCapturesFeatureResult (copy), config (copy), WrapWithProvidersModule (copy), config2 (copy), ReactModule (upval), CaptureManagerScreenModule (upval)
 			if not EnableCapturesBulkManagementResult then return end
 			if EligibleForCapturesFeatureResult then
@@ -290,7 +290,7 @@ return {
 			end
 		end
 		
-		function config.mountCaptureOverlay(p2) --[[ Line: 349 ]]
+		function config.mountCaptureOverlay(p2)
 			-- upvalues: EligibleForCapturesFeatureResult (copy), ReactModule (upval), CaptureOverlayModule (upval), config (copy), WrapWithProvidersModule (copy), config2 (copy)
 			if EligibleForCapturesFeatureResult then
 				config._captureOverlayHandle = WrapWithProvidersModule(p2, config2, {
@@ -301,7 +301,7 @@ return {
 			end
 		end
 		
-		function config.mountCarousel(p2) --[[ Line: 361 ]]
+		function config.mountCarousel(p2)
 			-- upvalues: EligibleForCapturesFeatureResult (copy), ReactModule (upval), CarouselScreenModule (upval), config (copy), WrapWithProvidersModule (copy), config2 (copy)
 			if EligibleForCapturesFeatureResult then
 				config._carouselHandle = WrapWithProvidersModule(p2, config2, {
@@ -312,7 +312,7 @@ return {
 			end
 		end
 		
-		function config.mountCoreUI(p2, ChromeEnabled) --[[ Line: 373 ]]
+		function config.mountCoreUI(p2, ChromeEnabled)
 			-- upvalues: EligibleForCapturesFeatureResult (copy), SetupFireEventModuleResult (copy), config (copy), WrapWithProvidersModule (copy), ReactModule (upval), CaptureServicePromptsModule (upval), CapturesCoreUIModule (upval)
 			if EligibleForCapturesFeatureResult then
 				config._coreUiHandle = WrapWithProvidersModule(p2, {
@@ -327,7 +327,7 @@ return {
 			end
 		end
 		
-		function config.mountMenuPage(p2, CloseSettingsMenu, ChromeEnabled) --[[ Line: 389 ]]
+		function config.mountMenuPage(p2, CloseSettingsMenu, ChromeEnabled)
 			-- upvalues: EligibleForCapturesFeatureResult (copy), SetupFireEventModuleResult (copy), config (copy), WrapWithProvidersModule (copy), ReactModule (upval), CapturesPageModule (upval)
 			if EligibleForCapturesFeatureResult then
 				config._menuPageHandle = WrapWithProvidersModule(p2, {
@@ -341,7 +341,7 @@ return {
 			end
 		end
 		
-		function config.mountMomentsCreationFlow(p2) --[[ Line: 404 ]]
+		function config.mountMomentsCreationFlow(p2)
 			-- upvalues: FFlagCreateMomentsToastModule (upval), EligibleForCapturesFeatureResult (copy), FFlagCapturesInExpUseMomentsCreationModule (upval), config (copy), unmountMomentsCreationFlow (copy), WrapWithProvidersModule (copy), config2 (copy), ReactModule (upval), MomentsCreationFlowScreenModule (upval)
 			if not FFlagCreateMomentsToastModule then return end
 			if not EligibleForCapturesFeatureResult then return end

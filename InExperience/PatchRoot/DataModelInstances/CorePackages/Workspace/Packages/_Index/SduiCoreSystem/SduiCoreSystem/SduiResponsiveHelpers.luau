@@ -25,7 +25,7 @@ local config1 = {
 local DeviceLevelValueForTests = nil
 local ResolutionScale = nil
 
-local function _() --[[ Line: 48 | Named "getDevicePerformanceValue" ]]
+local function _()
 	-- upvalues: DeviceLevelValueForTests (ref), SduiForcePerfLevel (copy), config (copy), UserInputService (copy), config1 (copy)
 	if DeviceLevelValueForTests == nil then
 		DeviceLevelValueForTests = (if SduiForcePerfLevel == "" then config1[UserInputService:GetDeviceLevel()] else config[SduiForcePerfLevel]) or 3
@@ -33,7 +33,7 @@ local function _() --[[ Line: 48 | Named "getDevicePerformanceValue" ]]
 	return DeviceLevelValueForTests
 end
 
-local function getImageQualityValue() --[[ Line: 60 ]]
+local function getImageQualityValue()
 	-- upvalues: SduiForceImageQualityLevel (copy), config (copy), DeviceLevelValueForTests (ref), SduiForcePerfLevel (copy), UserInputService (copy), config1 (copy), ResolutionScale (ref), GuiService (copy), ArgCheckModule (copy)
 	if SduiForceImageQualityLevel ~= "" then
 		return config[SduiForceImageQualityLevel] or 3
@@ -63,10 +63,10 @@ end
 return {
 	PERF_KEY = "performanceLevel",
 	IMAGE_QUALITY_KEY = "imageQualityLevel",
-	shouldIncludeKey = function(p1): boolean --[[ Line: 117 ]]
+	shouldIncludeKey = function(p1): boolean
 		return p1 ~= "imageQualityLevel" and p1 ~= "performanceLevel"
 	end,
-	shouldFailConditionEarly = function(Name, Value, p1): boolean --[[ Line: 87 ]]
+	shouldFailConditionEarly = function(Name, Value, p1): boolean
 		-- upvalues: DeviceLevelValueForTests (ref), SduiForcePerfLevel (copy), config (copy), UserInputService (copy), config1 (copy), SduiErrorsModule (copy), getImageQualityValue (copy)
 		if Name == "performanceLevel" then
 			if DeviceLevelValueForTests == nil then
@@ -97,15 +97,15 @@ return {
 			end
 		end
 	end,
-	setDeviceLevelValueForTests = function(Value) --[[ Line: 286 ]]
+	setDeviceLevelValueForTests = function(Value)
 		-- upvalues: DeviceLevelValueForTests (ref)
 		DeviceLevelValueForTests = Value
 	end,
-	setResolutionScaleForTests = function(Value) --[[ Line: 291 ]]
+	setResolutionScaleForTests = function(Value)
 		-- upvalues: ResolutionScale (ref)
 		ResolutionScale = Value
 	end,
-	adaptThumbnailDimensions = function(p1, p2, p3: number, p4: number, p5) --[[ Line: 125 ]]
+	adaptThumbnailDimensions = function(p1, p2, p3: number, p4: number, p5)
 		-- upvalues: getImageQualityValue (copy), ArgCheckModule (copy)
 		local ImageQualityValue = getImageQualityValue()
 		
@@ -138,7 +138,7 @@ return {
 		end
 		return p1, p2
 	end,
-	checkResponsiveConditions = function(List, Vector, p1, p2, p3, p4) --[[ Line: 174 ]]
+	checkResponsiveConditions = function(List, Vector, p1, p2, p3, p4)
 		-- upvalues: SduiConditionKey (copy), getImageQualityValue (copy), config (copy), SduiErrorsModule (copy), DeviceLevelValueForTests (ref), SduiForcePerfLevel (copy), UserInputService (copy), config1 (copy)
 		local t = {}
 		
@@ -224,7 +224,7 @@ return {
 		end
 		return t
 	end,
-	isPortraitOrientation = function(): boolean --[[ Line: 273 ]]
+	isPortraitOrientation = function(): boolean
 		-- upvalues: GetDisplayStoreFunction (copy)
 		local ViewportSize = GetDisplayStoreFunction(false).getViewportSize(false)
 		

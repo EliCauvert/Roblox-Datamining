@@ -15,11 +15,11 @@ return require(Parent.Rodux).createReducer({
 	TextStrokeColor3 = ConfigModule.ChannelTabsSettings.TextStrokeColor3,
 	TextStrokeTransparency = ConfigModule.ChannelTabsSettings.TextStrokeTransparency
 }, {
-	[require(Actions.ConfigurationObjectsLoaded).name] = function(p1, p2) --[[ Line: 25 ]]
+	[require(Actions.ConfigurationObjectsLoaded).name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
 		return Dictionary.join(p1, p2.channelTabsSettings)
 	end,
-	[require(Actions.ChannelTabsSettingsChanged).name] = function(p1, p2) --[[ Line: 29 ]]
+	[require(Actions.ChannelTabsSettingsChanged).name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
 		return if p1[p2.property] then Dictionary.join(p1, { [p2.property] = p2.value }) else p1
 	end

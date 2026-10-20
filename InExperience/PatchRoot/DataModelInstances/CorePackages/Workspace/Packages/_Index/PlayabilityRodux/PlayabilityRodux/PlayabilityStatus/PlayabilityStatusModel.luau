@@ -4,12 +4,12 @@ local FFlagLuaAppPlayableUxTreatment = require(Parent.SharedFlags).FFlagLuaAppPl
 local FFlagLuaAppPlayButtonPrivatePT = require(Parent.SharedFlags).FFlagLuaAppPlayButtonPrivatePT
 local ResultModule = require(Parent.Result)
 local PlayabilityStatusModelModule = {
-	new = function() --[[ Line: 58 ]]
+	new = function()
 		return {}
 	end
 }
 
-function PlayabilityStatusModelModule.mock() --[[ Line: 64 ]]
+function PlayabilityStatusModelModule.mock()
 	-- upvalues: PlayabilityStatusModelModule (copy), PlayabilityStatusEnum (copy)
 	local NewPlayabilityStatusModel = PlayabilityStatusModelModule.new()
 	NewPlayabilityStatusModel.universeId = "149757"
@@ -19,7 +19,7 @@ function PlayabilityStatusModelModule.mock() --[[ Line: 64 ]]
 	return NewPlayabilityStatusModel
 end
 
-function PlayabilityStatusModelModule.fromJsonData(p1) --[[ Line: 73 ]]
+function PlayabilityStatusModelModule.fromJsonData(p1)
 	-- upvalues: ResultModule (copy), PlayabilityStatusModelModule (copy), FFlagLuaAppPlayButtonPrivatePT (copy), FFlagLuaAppPlayableUxTreatment (copy)
 	if type(p1.universeId) ~= "number" and type(p1.universeId) ~= "string" then
 		return ResultModule.error("PlayabilityStatus.fromJsonData expects universeId to be a number or a string")

@@ -2,7 +2,7 @@
 local Default = require(PurchasePrompt.Parent.LoggingProtocol).default
 local UnifiedPurchaseTelemetryModule = require(PurchasePrompt.Events.UnifiedPurchaseTelemetry)
 
-function sendUnifiedPurchaseEventLog(p1) --[[ Line: 7 ]]
+function sendUnifiedPurchaseEventLog(p1)
 	-- upvalues: Default (copy), UnifiedPurchaseTelemetryModule (copy)
 	Default:logRobloxTelemetryEvent(UnifiedPurchaseTelemetryModule.UnifiedProductPurchaseFlowEvent, {
 		Default.StandardizedFields.addOsInfo,

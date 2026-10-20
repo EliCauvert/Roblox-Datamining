@@ -7,7 +7,7 @@ local Dark = require(CorePackages.Packages.Foundation).Enums.ColorMode.Dark
 local PromiseModule = require(CorePackages.Packages.Promise)
 local SelfViewTooltipFTUXModule = require(script.Parent.SelfViewTooltipFTUX)
 
-return function(p1) --[[ Line: 17 ]]
+return function(p1)
 	-- upvalues: CoreGui (copy), ConstantsModule (copy), RoactModule (copy), AppStyleProvider (copy), Dark (copy), SelfViewTooltipFTUXModule (copy), PromiseModule (copy)
 	local SelfViewTooltipOnCloseGui = Instance.new("ScreenGui")
 	SelfViewTooltipOnCloseGui.Name = "SelfViewTooltipOnCloseGui"
@@ -29,9 +29,9 @@ return function(p1) --[[ Line: 17 ]]
 			})
 		})
 	}), SelfViewTooltipOnCloseGui, "SelfViewTooltipOnClose")
-	PromiseModule.delay(p1.tooltipLifetime + 5):andThen(function() --[[ Line: 48 ]]
+	PromiseModule.delay(p1.tooltipLifetime + 5):andThen(function()
 		-- upvalues: RoactModule (upval), SelfViewTooltipOnClose (copy)
-		pcall(function() --[[ Line: 49 ]]
+		pcall(function()
 			-- upvalues: RoactModule (upval), SelfViewTooltipOnClose (upval)
 			RoactModule.unmount(SelfViewTooltipOnClose)
 		end)

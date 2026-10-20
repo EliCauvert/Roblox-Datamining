@@ -1,4 +1,4 @@
-﻿return function(List) --[[ Line: 3 | Named "getCommonItemStatus" ]]
+﻿return function(List)
 	local v1 = nil
 	
 	for _, value in List do

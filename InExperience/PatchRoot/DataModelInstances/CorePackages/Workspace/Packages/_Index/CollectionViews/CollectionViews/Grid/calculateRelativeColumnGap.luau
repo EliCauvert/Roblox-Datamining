@@ -1,6 +1,6 @@
 ﻿local ArgCheckModule = require(script:FindFirstAncestor("CollectionViews").Parent.ArgCheck)
 
-return function(p1: number, p2, p3, p4: number) --[[ Line: 8 | Named "calculateRelativeColumnGap" ]]
+return function(p1: number, p2, p3, p4: number)
 	-- upvalues: ArgCheckModule (copy)
 	if p1 < 2 then
 		return 0

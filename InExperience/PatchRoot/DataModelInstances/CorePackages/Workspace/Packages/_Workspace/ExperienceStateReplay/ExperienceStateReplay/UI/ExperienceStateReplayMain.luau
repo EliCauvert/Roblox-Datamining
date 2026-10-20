@@ -28,7 +28,7 @@ require(Parent.ListenPlaybackStatusUpdated).setupListener(ExperienceStateReplayM
 require(Parent.CreateSpectatorCamera).createSpectatorCamera(ExperienceStateReplayMainModule)
 
 if game:GetEngineFeature("DmctPlaybackClientApp") then
-	require(Parent.ReplaySelector).create(ExperienceStateReplayMainModule, function(p1) --[[ Line: 59 ]]
+	require(Parent.ReplaySelector).create(ExperienceStateReplayMainModule, function(p1)
 		-- upvalues: LoadSlicesModule (copy), ExperienceStateReplayMainModule (copy)
 		LoadSlicesModule.loadGUID(ExperienceStateReplayMainModule, p1)
 	end)

@@ -5,7 +5,7 @@ local VisibilityControlModule = require(Parent.VisibilityControl)
 local GetScrollAwayEnabledModule = require(Parent.getScrollAwayEnabled)
 local UseTokensFunction = require(Parent1.Foundation).Hooks.useTokens
 
-return ReactModule.memo(function(Frame) --[[ Line: 19 | Named "BottomBarInsetBackground" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), GetScrollAwayEnabledModule (copy), VisibilityControlModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local NavigationBarColor3 = UseTokensResult.Color.Common.NavigationBar.Color3
@@ -14,9 +14,9 @@ return ReactModule.memo(function(Frame) --[[ Line: 19 | Named "BottomBarInsetBac
 	local Transparency1 = UseTokensResult.Color.Surface.Surface_0.Transparency
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(NavigationBarColor3)
 	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(Transparency)
-	ReactModule.useEffect(function() --[[ Line: 29 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseBindingResult2 (copy), NavigationBarColor3 (copy), SurfaceColor3 (copy), UseBindingResult2_1 (copy), Transparency (copy), Transparency1 (copy), GetScrollAwayEnabledModule (upval), Frame (copy), VisibilityControlModule (upval), ReactModule (upval)
-		local function update(p1: number) --[[ Line: 30 ]]
+		local function update(p1: number)
 			-- upvalues: UseBindingResult2 (upval), NavigationBarColor3 (upval), SurfaceColor3 (upval), UseBindingResult2_1 (upval), Transparency (upval), Transparency1 (upval)
 			local Alpha = 1 - p1
 			UseBindingResult2(NavigationBarColor3:Lerp(SurfaceColor3, Alpha))

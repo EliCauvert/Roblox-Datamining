@@ -25,7 +25,7 @@ local config = {
 	[require(RobloxSubscriptionPurchaseApp.Enums.ReferralIneligibilityReason).RecipientSelfReferral] = ErrorReasonModule.ReferralSelfReferral
 }
 
-function initiateRobloxSubscriptionPurchaseInternal(p1) --[[ Line: 42 ]]
+function initiateRobloxSubscriptionPurchaseInternal(p1)
 	-- upvalues: LogRobloxSubscriptionUpsellCounterModule (copy), RobloxSubscriptionUpsellTelemetryModule (copy), RobloxSubscriptionStoreModule (copy), GetAppFeaturePoliciesFunction (copy), TransitionToErrorModule (copy), ErrorReasonModule (copy), PromptStateModule (copy), FFlagEnableSubscriptionPurchaseFlowEventIngestModule (copy), LogSubscriptionPurchaseFlowEventModule (copy), CreatePaymentSessionModule (copy), FFlagEnablePlusReferralLandingSheet (copy), FFlagRobloxSubscriptionProductsDirectFetchModule (copy), GetRobloxSubscriptionProductsDirectModule (copy), GetRobloxSubscriptionProductsModule (copy), FFlagRobloxPlusAmpSubscriptionCheckModule (copy), GetAmpFeatureAccessModule (copy), FetchReferralEligibilityModule (copy), PromiseModule (copy), AmpAccessResponseModule (copy), config (copy)
 	LogRobloxSubscriptionUpsellCounterModule(RobloxSubscriptionUpsellTelemetryModule.RobloxSubscriptionUpsellModalInitiatedCounter)
 	local GetResult = RobloxSubscriptionStoreModule.get()
@@ -54,7 +54,7 @@ function initiateRobloxSubscriptionPurchaseInternal(p1) --[[ Line: 42 ]]
 	if FFlagEnablePlusReferralLandingSheet and ReferrerId1 then
 		table.insert(List, FetchReferralEligibilityModule(ReferrerId1))
 	end
-	PromiseModule.all(List):andThen(function(Entry) --[[ Line: 83 ]]
+	PromiseModule.all(List):andThen(function(Entry)
 		-- upvalues: FFlagRobloxPlusAmpSubscriptionCheckModule (upval), AmpAccessResponseModule (upval), TransitionToErrorModule (upval), ErrorReasonModule (upval), FFlagEnablePlusReferralLandingSheet (upval), ReferrerId1 (copy), config (upval), GetResult (copy), PromptStateModule (upval)
 		local Entry1 = Entry[1]
 		local Entry2 = Entry[2]
@@ -82,7 +82,7 @@ function initiateRobloxSubscriptionPurchaseInternal(p1) --[[ Line: 42 ]]
 		end
 		GetResult.setRobloxSubscriptionProduct(Entry2[1])
 		GetResult.setPromptState(PromptStateModule.SubscriptionPurchaseUIReady)
-	end, function(_) --[[ Line: 120 ]]
+	end, function(_)
 		-- upvalues: TransitionToErrorModule (upval), ErrorReasonModule (upval)
 		TransitionToErrorModule(ErrorReasonModule.GenericError, "initiateRobloxSubscriptionPurchaseInternal")
 	end)

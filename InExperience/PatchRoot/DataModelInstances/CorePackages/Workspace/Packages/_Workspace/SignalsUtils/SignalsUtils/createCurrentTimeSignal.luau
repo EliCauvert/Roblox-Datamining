@@ -3,7 +3,7 @@ local SignalsModule = require(script:FindFirstAncestor("SignalsUtils").Parent.Si
 local self = setmetatable({}, { __mode = "v" })
 local HeartbeatConnection = nil
 
-local function _() --[[ Line: 18 | Named "maybeDisconnect" ]]
+local function _()
 	-- upvalues: self (copy), HeartbeatConnection (ref)
 	if next(self) == nil and HeartbeatConnection then
 		HeartbeatConnection:Disconnect()
@@ -11,7 +11,7 @@ local function _() --[[ Line: 18 | Named "maybeDisconnect" ]]
 	end
 end
 
-local function onHeartbeat() --[[ Line: 25 ]]
+local function onHeartbeat()
 	-- upvalues: self (copy), HeartbeatConnection (ref)
 	if next(self) == nil and HeartbeatConnection then
 		HeartbeatConnection:Disconnect()
@@ -28,14 +28,14 @@ local function onHeartbeat() --[[ Line: 25 ]]
 	end
 end
 
-local _ = function() --[[ Line: 40 | Named "ensureConnection" ]]
+local _ = function()
 	-- upvalues: HeartbeatConnection (ref), RunService (copy), onHeartbeat (copy)
 	if not HeartbeatConnection then
 		HeartbeatConnection = RunService.Heartbeat:Connect(onHeartbeat)
 	end
 end
 
-return function(p1) --[[ Line: 46 | Named "createCurrentTimeSignal" ]]
+return function(p1)
 	-- upvalues: self (copy), SignalsModule (copy), HeartbeatConnection (ref), RunService (copy), onHeartbeat (copy)
 	local P0 = p1 or 30
 	
@@ -49,7 +49,7 @@ return function(p1) --[[ Line: 46 | Named "createCurrentTimeSignal" ]]
 	end
 	local SelfEntry = self[P0]
 	
-	return function(p2) --[[ Line: 63 ]]
+	return function(p2)
 		-- upvalues: SelfEntry (copy)
 		return SelfEntry.getter(p2)
 	end

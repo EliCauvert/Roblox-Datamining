@@ -11,7 +11,7 @@ local config = {
 }
 local StrictInterfaceResult = TModule.strictInterface({ kwd = TModule.string, searchType = TModule.string })
 
-return function(EventContext, CustomFields) --[[ Line: 24 ]]
+return function(EventContext, CustomFields)
 	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), TelemetryService (copy), config (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	

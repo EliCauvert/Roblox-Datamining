@@ -7,7 +7,7 @@ local Enums = FoundationModule.Enums
 local ButtonVariant = Enums.ButtonVariant
 local ButtonSize = Enums.ButtonSize
 
-return function(p1) --[[ Line: 19 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), Button (copy), ButtonVariant (copy), ButtonSize (copy)
 	local Text = nil
 	if p1.text and type(p1.text) == "table" then
@@ -18,7 +18,7 @@ return function(p1) --[[ Line: 19 ]]
 		Text = p1.text
 	end
 	return ReactModule.createElement(Button, {
-		onActivated = ReactModule.useCallback(function() --[[ Line: 30 ]]
+		onActivated = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy)
 			if p1.onActivated then
 				p1.onActivated:signal():fire()

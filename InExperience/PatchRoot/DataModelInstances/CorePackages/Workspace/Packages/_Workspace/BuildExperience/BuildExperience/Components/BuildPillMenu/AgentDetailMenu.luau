@@ -6,7 +6,7 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local IconName = FoundationModule.Enums.IconName
 local InputSize = FoundationModule.Enums.InputSize
 
-return function(p1) --[[ Line: 20 | Named "AgentDetailMenu" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy)
 	return ReactModule.createElement(IconButton, {
 		isCircular = true,

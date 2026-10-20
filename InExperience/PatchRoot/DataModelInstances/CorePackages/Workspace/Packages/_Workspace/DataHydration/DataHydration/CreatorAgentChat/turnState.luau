@@ -1,18 +1,18 @@
 ﻿local _ = require(script.Parent.types)
 
-local function _(p1) --[[ Line: 42 | Named "getSequenceIndex" ]]
+local function _(p1)
 	local SequenceNumber = if p1 == nil then nil else p1.sequenceNumber
 	
 	return if typeof(SequenceNumber) == "number" and SequenceNumber >= 0 then SequenceNumber + 1 else nil
 end
 
-local _ = function(p1) --[[ Line: 50 | Named "getMessageId" ]]
+local _ = function(p1)
 	local MessageId = p1.messageId
 	
 	return if typeof(MessageId) == "string" and MessageId ~= "" then MessageId else nil
 end
 
-local _ = function(List) --[[ Line: 55 | Named "cloneArray" ]]
+local _ = function(List)
 	local List1 = {}
 	
 	for _, value in List do
@@ -21,7 +21,7 @@ local _ = function(List) --[[ Line: 55 | Named "cloneArray" ]]
 	return List1
 end
 
-local function contentBlocksToText(PendingAgentMessageContent): string --[[ Line: 63 ]]
+local function contentBlocksToText(PendingAgentMessageContent): string
 	local List = {}
 	
 	for _, value in PendingAgentMessageContent do
@@ -32,7 +32,7 @@ local function contentBlocksToText(PendingAgentMessageContent): string --[[ Line
 	return table.concat(List)
 end
 
-local function messageMapToText(AssistantMessages, AssistantMessageOrder): string --[[ Line: 73 ]]
+local function messageMapToText(AssistantMessages, AssistantMessageOrder): string
 	-- upvalues: contentBlocksToText (copy)
 	local List = {}
 	
@@ -46,7 +46,7 @@ local function messageMapToText(AssistantMessages, AssistantMessageOrder): strin
 	return table.concat(List)
 end
 
-local _ = function(List, p1) --[[ Line: 84 | Named "ensureMessageOrder" ]]
+local _ = function(List, p1)
 	for _, value in List do
 		if value == p1 then
 			return List
@@ -62,7 +62,7 @@ local _ = function(List, p1) --[[ Line: 84 | Named "ensureMessageOrder" ]]
 	return List1
 end
 
-local _ = function(Tbl, List, Key, List1) --[[ Line: 95 | Named "replaceMessageContent" ]]
+local _ = function(Tbl, List, Key, List1)
 	local Copy = table.clone(Tbl)
 	local List2 = {}
 	
@@ -86,7 +86,7 @@ local _ = function(Tbl, List, Key, List1) --[[ Line: 95 | Named "replaceMessageC
 	return Copy, List3
 end
 
-local function appendMessageContent(Tbl, List, Key, p2) --[[ Line: 106 ]]
+local function appendMessageContent(Tbl, List, Key, p2)
 	local Copy = table.clone(Tbl)
 	local Entry = Copy[Key]
 	local List2 = nil
@@ -119,7 +119,7 @@ local function appendMessageContent(Tbl, List, Key, p2) --[[ Line: 106 ]]
 	return Copy, List3
 end
 
-local function buildActivityItems(ActivitySlots, ToolCalls) --[[ Line: 120 ]]
+local function buildActivityItems(ActivitySlots, ToolCalls)
 	local List = {}
 	local List1 = {}
 	
@@ -146,12 +146,12 @@ local function buildActivityItems(ActivitySlots, ToolCalls) --[[ Line: 120 ]]
 	return List
 end
 
-local _ = function(EmptyTurnState) --[[ Line: 153 | Named "refreshActivityItems" ]]
+local _ = function(EmptyTurnState)
 	-- upvalues: buildActivityItems (copy)
 	EmptyTurnState.activityItems = buildActivityItems(EmptyTurnState.activitySlots, EmptyTurnState.toolCalls)
 end
 
-local _ = function(EmptyTurnState, Key: number, p3) --[[ Line: 157 | Named "recordActivitySlotAtIndex" ]]
+local _ = function(EmptyTurnState, Key: number, p3)
 	-- upvalues: buildActivityItems (copy)
 	if Key > 0 then
 		local Copy = table.clone(EmptyTurnState.activitySlots)
@@ -163,7 +163,7 @@ local _ = function(EmptyTurnState, Key: number, p3) --[[ Line: 157 | Named "reco
 	end
 end
 
-local _ = function(EmptyTurnState, p3, p4) --[[ Line: 168 | Named "recordActivitySlot" ]]
+local _ = function(EmptyTurnState, p3, p4)
 	-- upvalues: buildActivityItems (copy)
 	local SequenceNumber = if p3 == nil then nil else p3.sequenceNumber
 	local NewSequenceNumber = if typeof(SequenceNumber) == "number" and SequenceNumber >= 0 then SequenceNumber + 1 else nil
@@ -179,7 +179,7 @@ local _ = function(EmptyTurnState, p3, p4) --[[ Line: 168 | Named "recordActivit
 	end
 end
 
-local _ = function(EmptyTurnState, p3, ToolCallId) --[[ Line: 177 | Named "recordToolCallSequenceSlot" ]]
+local _ = function(EmptyTurnState, p3, ToolCallId)
 	-- upvalues: buildActivityItems (copy)
 	local config = { kind = "tool_call", toolCallId = ToolCallId }
 	local SequenceNumber = if p3 == nil then nil else p3.sequenceNumber
@@ -196,7 +196,7 @@ local _ = function(EmptyTurnState, p3, ToolCallId) --[[ Line: 177 | Named "recor
 	end
 end
 
-local _ = function(p3, ToolCallId): boolean --[[ Line: 181 | Named "hasToolCallActivitySlot" ]]
+local _ = function(p3, ToolCallId): boolean
 	for _, activitySlot in p3.activitySlots do
 		if activitySlot.kind == "tool_call" and activitySlot.toolCallId == ToolCallId then
 			return true
@@ -205,13 +205,13 @@ local _ = function(p3, ToolCallId): boolean --[[ Line: 181 | Named "hasToolCallA
 	return false
 end
 
-local _ = function(EmptyTurnState) --[[ Line: 190 | Named "clearPendingAgentMessage" ]]
+local _ = function(EmptyTurnState)
 	EmptyTurnState.pendingAgentMessageId = nil
 	EmptyTurnState.pendingAgentMessageContent = {}
 	EmptyTurnState.pendingAgentMessageSequenceIndex = nil
 end
 
-local function appendPendingAgentMessage(EmptyTurnState, PendingAgentMessageId, Content, p4) --[[ Line: 196 ]]
+local function appendPendingAgentMessage(EmptyTurnState, PendingAgentMessageId, Content, p4)
 	-- upvalues: contentBlocksToText (copy), buildActivityItems (copy)
 	if EmptyTurnState.pendingAgentMessageId ~= nil and EmptyTurnState.pendingAgentMessageId ~= PendingAgentMessageId then
 		local ContentBlocksToTextResult = contentBlocksToText(EmptyTurnState.pendingAgentMessageContent)
@@ -249,7 +249,7 @@ local function appendPendingAgentMessage(EmptyTurnState, PendingAgentMessageId, 
 	end
 end
 
-local function flushPendingAgentMessageToActivity(EmptyTurnState) --[[ Line: 222 ]]
+local function flushPendingAgentMessageToActivity(EmptyTurnState)
 	-- upvalues: contentBlocksToText (copy), buildActivityItems (copy)
 	local ContentBlocksToTextResult = contentBlocksToText(EmptyTurnState.pendingAgentMessageContent)
 	
@@ -272,7 +272,7 @@ local function flushPendingAgentMessageToActivity(EmptyTurnState) --[[ Line: 222
 	EmptyTurnState.pendingAgentMessageSequenceIndex = nil
 end
 
-local function flushPendingAgentMessageToAssistant(EmptyTurnState) --[[ Line: 233 ]]
+local function flushPendingAgentMessageToAssistant(EmptyTurnState)
 	-- upvalues: appendMessageContent (copy), messageMapToText (copy)
 	local PendingAgentMessageId = EmptyTurnState.pendingAgentMessageId
 	
@@ -297,13 +297,13 @@ local function flushPendingAgentMessageToAssistant(EmptyTurnState) --[[ Line: 23
 	EmptyTurnState.pendingAgentMessageSequenceIndex = nil
 end
 
-local _ = function(p5) --[[ Line: 251 | Named "extractRobloxMeta" ]]
+local _ = function(p5)
 	local Roblox = p5._meta and p5._meta._roblox
 	
 	return if typeof(Roblox) == "table" then Roblox else nil
 end
 
-local function recordEventMeta(p5, SequenceNumber: number, p6) --[[ Line: 256 ]]
+local function recordEventMeta(p5, SequenceNumber: number, p6)
 	if typeof(SequenceNumber) ~= "number" or SequenceNumber < 0 then return end
 	local Roblox = p6._meta and p6._meta._roblox
 	local Roblox1 = if typeof(Roblox) == "table" then Roblox else nil
@@ -333,7 +333,7 @@ local function recordEventMeta(p5, SequenceNumber: number, p6) --[[ Line: 256 ]]
 	p5.eventMetaBySequenceId = T
 end
 
-local _ = function(p5) --[[ Line: 301 | Named "extractReferenceId" ]]
+local _ = function(p5)
 	local Roblox = p5._meta and p5._meta._roblox
 	local Roblox1 = if typeof(Roblox) == "table" then Roblox else nil
 	local ReferenceId = if typeof(Roblox1) == "table" then Roblox1.referenceId else nil
@@ -341,7 +341,7 @@ local _ = function(p5) --[[ Line: 301 | Named "extractReferenceId" ]]
 	return if typeof(ReferenceId) == "string" and ReferenceId ~= "" then ReferenceId else nil
 end
 
-local function applyToolCallUpdate(EmptyTurnState, p5, p6) --[[ Line: 307 ]]
+local function applyToolCallUpdate(EmptyTurnState, p5, p6)
 	-- upvalues: buildActivityItems (copy)
 	local ToolCallId = p5.toolCallId
 	
@@ -421,7 +421,7 @@ local function applyToolCallUpdate(EmptyTurnState, p5, p6) --[[ Line: 307 ]]
 	end
 end
 
-local function applyToolCallContentChunk(EmptyTurnState, p7, p8) --[[ Line: 356 ]]
+local function applyToolCallContentChunk(EmptyTurnState, p7, p8)
 	-- upvalues: buildActivityItems (copy)
 	local ToolCallId = p7.toolCallId
 	local Content = p7.content
@@ -483,7 +483,7 @@ local function applyToolCallContentChunk(EmptyTurnState, p7, p8) --[[ Line: 356 
 end
 
 return {
-	applySessionUpdate = function(Tbl, p9, p10) --[[ Line: 385 ]]
+	applySessionUpdate = function(Tbl, p9, p10)
 		-- upvalues: recordEventMeta (copy), flushPendingAgentMessageToAssistant (copy), flushPendingAgentMessageToActivity (copy), messageMapToText (copy), appendPendingAgentMessage (copy), applyToolCallUpdate (copy), applyToolCallContentChunk (copy)
 		local SessionUpdate = p9.sessionUpdate
 		local Copy = table.clone(Tbl)
@@ -579,7 +579,7 @@ return {
 		end
 		return Copy
 	end,
-	createEmptyTurnState = function(SessionId, RequestId) --[[ Line: 18 ]]
+	createEmptyTurnState = function(SessionId, RequestId)
 		return {
 			status = "queued",
 			assistantText = "",
@@ -602,7 +602,7 @@ return {
 			eventMetaBySequenceId = {}
 		}
 	end,
-	extractTurnId = function(p11) --[[ Line: 295 ]]
+	extractTurnId = function(p11)
 		local Roblox = p11._meta and p11._meta._roblox
 		local Roblox1 = if typeof(Roblox) == "table" then Roblox else nil
 		local TurnId = if typeof(Roblox1) == "table" then Roblox1.turnId else nil

@@ -38,17 +38,17 @@ local AuthFormInteractionFunction = AuthAnalyticsModule.Events.authFormInteracti
 local FIntIDVPollDelay = require(Parent.IdentityVerification).GetFIntIDVPollDelay()
 local FIntIDVMaxRetries = require(Parent.IdentityVerification).GetFIntIDVMaxRetries()
 
-local function _(Expired): boolean --[[ Line: 65 | Named "isFailure" ]]
+local function _(Expired): boolean
 	-- upvalues: IDVSessionStatusEnum (copy)
 	return Expired == IDVSessionStatusEnum.Failure or (Expired == IDVSessionStatusEnum.RequiresManualReview or (Expired == IDVSessionStatusEnum.RequiresRetry or Expired == IDVSessionStatusEnum.Expired))
 end
 
-local _ = function(Expired, p1) --[[ Line: 72 | Named "getErrorDescription" ]]
+local _ = function(Expired, p1)
 	-- upvalues: IDVSessionStatusEnum (copy)
 	return if Expired == IDVSessionStatusEnum.Failure or Expired == IDVSessionStatusEnum.RequiresManualReview then p1.declined elseif Expired == IDVSessionStatusEnum.RequiresRetry then p1.retry elseif Expired == IDVSessionStatusEnum.Expired then p1.timeout else p1.retry
 end
 
-return function(p1) --[[ Line: 84 | Named "IDVUpsellContainer" ]]
+return function(p1)
 	-- upvalues: IDVApiProvider (copy), UseDeviceTypeFunction (copy), UseNavigationFunction (copy), UseLocalizationFunction (copy), IdvErrorScreenStrings (copy), IdvWithQRCodeUpsellStrings (copy), ReactModule (copy), ActionStatusEnum (copy), GetFFlagEnableNativePersonaInquiryForAmpIDVUpsellModule (copy), FacialAgeEstimationServiceWrapperModule (copy), GetFFlagEnableDirectLinkForTabletsModule (copy), DeviceType (copy), UseRoactServiceFunction (copy), AppLinking (copy), RoactNetworking (copy), AppScreensModule (copy), GetFStringBiometricPrivacyPolicyLinkModule (copy), IDVSessionStatusEnum (copy), IDVStep (copy), GetFFlagEnableAmpIDVUpsellAnalyticsModule (copy), AuthModalShownFunction (copy), AuthMsgShownFunction (copy), FIntIDVPollDelay (copy), FIntIDVMaxRetries (copy), PromiseModule (copy), GetFFlagEnableRoactNetworkingForChallengeInteceptionModule (copy), AuthFormInteractionFunction (copy), IDVErrorScreenModule (copy), Loading (copy), IconSize (copy), IDVDirectLinkUpsellModule (copy), IDVWithQRCodeUpsellModule (copy)
 	local FeatureName = p1.featureName
 	local OnSuccessFunction = p1.onSuccess
@@ -71,19 +71,19 @@ return function(p1) --[[ Line: 84 | Named "IDVUpsellContainer" ]]
 	local IsDeviceTypeMatch: boolean = GetFFlagEnableDirectLinkForTabletsModule() and DeviceType1 == DeviceType.Tablet or DeviceType1 == DeviceType.Phone
 	local UseRoactServiceResult = UseRoactServiceFunction(AppLinking)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(RoactNetworking)
-	local SchedulePoll = p1.schedulePoll or function(Callback, p2) --[[ Line: 111 ]]
-		spawn(function() --[[ Line: 112 ]]
+	local SchedulePoll = p1.schedulePoll or function(Callback, p2)
+		spawn(function()
 			-- upvalues: p2 (copy), Callback (copy)
 			wait(p2)
 			Callback()
 		end)
 	end
-	local OpenIdvLink = p1.openIdvLink or function(p2) --[[ Line: 118 ]]
+	local OpenIdvLink = p1.openIdvLink or function(p2)
 		-- upvalues: UseRoactServiceResult (copy)
 		UseRoactServiceResult:openURL(p2)
 	end
 	
-	local function OpenPrivacyPolicyLink() --[[ Line: 122 ]]
+	local function OpenPrivacyPolicyLink()
 		-- upvalues: UseNavigationResult (copy), AppScreensModule (upval), GetFStringBiometricPrivacyPolicyLinkModule (upval), UseLocalizationResult1 (copy)
 		UseNavigationResult.navigate(AppScreensModule.GenericWebPage, {
 			detail = GetFStringBiometricPrivacyPolicyLinkModule(),
@@ -94,7 +94,7 @@ return function(p1) --[[ Line: 84 | Named "IDVUpsellContainer" ]]
 		})
 	end
 	
-	local function updateChecklist(SessionStatus) --[[ Line: 132 ]]
+	local function updateChecklist(SessionStatus)
 		-- upvalues: IDVSessionStatusEnum (upval), UseStateResult2_4 (copy), IDVStep (upval)
 		if SessionStatus == IDVSessionStatusEnum.Stored then
 			UseStateResult2_4(IDVStep.UpdatedRobloxProfile)
@@ -116,14 +116,14 @@ return function(p1) --[[ Line: 84 | Named "IDVUpsellContainer" ]]
 		end
 	end
 	
-	local function _(p2) --[[ Line: 146 | Named "reportErrorShown" ]]
+	local function _(p2)
 		-- upvalues: GetFFlagEnableAmpIDVUpsellAnalyticsModule (upval), AuthModalShownFunction (upval), EntryPointEventCtx (copy)
 		if GetFFlagEnableAmpIDVUpsellAnalyticsModule() then
 			AuthModalShownFunction(EntryPointEventCtx, p2, "idvFailed")
 		end
 	end
 	
-	local function pollIDVStatus(SessionIdentifier, FIntIDVMaxRetries, SessionId) --[[ Line: 152 ]]
+	local function pollIDVStatus(SessionIdentifier, FIntIDVMaxRetries, SessionId)
 		-- upvalues: UseStateResult2_2 (copy), UseStateResult2_3 (copy), UseLocalizationResult (copy), GetFFlagEnableAmpIDVUpsellAnalyticsModule (upval), AuthModalShownFunction (upval), EntryPointEventCtx (copy), IdvApiProvider (copy), updateChecklist (copy), IDVSessionStatusEnum (upval), AuthMsgShownFunction (upval), UseStateResult2_1 (copy), ActionStatusEnum (upval), SchedulePoll (copy), UseRefResult (copy), pollIDVStatus (copy), FIntIDVPollDelay (upval)
 		if FIntIDVMaxRetries == 0 then
 			UseStateResult2_2(true)
@@ -135,7 +135,7 @@ return function(p1) --[[ Line: 84 | Named "IDVUpsellContainer" ]]
 				return
 			end
 		else
-			IdvApiProvider.getVerifiedStatus(SessionIdentifier):andThen(function(Result) --[[ Line: 160 ]]
+			IdvApiProvider.getVerifiedStatus(SessionIdentifier):andThen(function(Result)
 				-- upvalues: updateChecklist (upval), IDVSessionStatusEnum (upval), GetFFlagEnableAmpIDVUpsellAnalyticsModule (upval), AuthMsgShownFunction (upval), EntryPointEventCtx (upval), SessionId (copy), UseStateResult2_1 (upval), ActionStatusEnum (upval), UseStateResult2_2 (upval), UseStateResult2_3 (upval), UseLocalizationResult (upval), AuthModalShownFunction (upval), SchedulePoll (upval), UseRefResult (upval), pollIDVStatus (upval), SessionIdentifier (copy), FIntIDVMaxRetries (copy), FIntIDVPollDelay (upval)
 				local IsVerified = Result.isVerified
 				local SessionStatus = Result.sessionStatus
@@ -159,14 +159,14 @@ return function(p1) --[[ Line: 84 | Named "IDVUpsellContainer" ]]
 						return
 					end
 				else
-					SchedulePoll(function() --[[ Line: 176 ]]
+					SchedulePoll(function()
 						-- upvalues: UseRefResult (upval), pollIDVStatus (upval), SessionIdentifier (upval), FIntIDVMaxRetries (upval), SessionId (upval)
 						if UseRefResult.current then
 							pollIDVStatus(SessionIdentifier, FIntIDVMaxRetries - 1, SessionId)
 						end
 					end, FIntIDVPollDelay)
 				end
-			end):catch(function(_) --[[ Line: 183 ]]
+			end):catch(function(_)
 				-- upvalues: UseStateResult2_2 (upval), UseStateResult2_3 (upval), UseLocalizationResult (upval), SessionId (copy), GetFFlagEnableAmpIDVUpsellAnalyticsModule (upval), AuthModalShownFunction (upval), EntryPointEventCtx (upval)
 				UseStateResult2_2(true)
 				UseStateResult2_3(UseLocalizationResult.retry)
@@ -178,13 +178,13 @@ return function(p1) --[[ Line: 84 | Named "IDVUpsellContainer" ]]
 		end
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 191 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), GetFFlagEnableNativePersonaInquiryForAmpIDVUpsellModule (upval), FacialAgeEstimationServiceWrapperModule (upval), GetFFlagEnableAmpIDVUpsellAnalyticsModule (upval), SessionId (copy), AuthModalShownFunction (upval), EntryPointEventCtx (copy), pollIDVStatus (copy), FIntIDVMaxRetries (upval), IsDeviceTypeMatch (copy), UseStateResult2 (copy), PromiseModule (upval), GetFFlagEnableRoactNetworkingForChallengeInteceptionModule (upval), IdvApiProvider (copy), UseRoactServiceResult1 (copy), AuthFormInteractionFunction (upval), UseStateResult2_1 (copy), ActionStatusEnum (upval), UseStateResult2_2 (copy), UseStateResult2_3 (copy), UseLocalizationResult (copy)
 		UseRefResult.current = true
 		local IsAvailable = GetFFlagEnableNativePersonaInquiryForAmpIDVUpsellModule() and FacialAgeEstimationServiceWrapperModule.isAvailable()
 		local FFlagEnableAmpIDVUpsellAnalyticsModule = GetFFlagEnableAmpIDVUpsellAnalyticsModule()
 		local Text = SessionId;
-		(if GetFFlagEnableRoactNetworkingForChallengeInteceptionModule() then IdvApiProvider.startVerificationWithWrappedNetworking(UseRoactServiceResult1) else IdvApiProvider.startVerification()):andThen(function(Result) --[[ Line: 198 | Named "afterStartVerification" ]]
+		(if GetFFlagEnableRoactNetworkingForChallengeInteceptionModule() then IdvApiProvider.startVerificationWithWrappedNetworking(UseRoactServiceResult1) else IdvApiProvider.startVerification()):andThen(function(Result)
 			-- upvalues: FFlagEnableAmpIDVUpsellAnalyticsModule (copy), Text (ref), SessionId (upval), IsAvailable (copy), AuthModalShownFunction (upval), EntryPointEventCtx (upval), FacialAgeEstimationServiceWrapperModule (upval), pollIDVStatus (upval), FIntIDVMaxRetries (upval), IsDeviceTypeMatch (upval), UseStateResult2 (upval), PromiseModule (upval)
 			local SessionIdentifier = Result.sessionIdentifier
 			
@@ -195,7 +195,7 @@ return function(p1) --[[ Line: 84 | Named "IDVUpsellContainer" ]]
 				if FFlagEnableAmpIDVUpsellAnalyticsModule then
 					AuthModalShownFunction(EntryPointEventCtx, Text, "nativeIDV")
 				end
-				return FacialAgeEstimationServiceWrapperModule.startFlow(SessionIdentifier, Result.sessionToken):andThen(function() --[[ Line: 209 ]]
+				return FacialAgeEstimationServiceWrapperModule.startFlow(SessionIdentifier, Result.sessionToken):andThen(function()
 					-- upvalues: pollIDVStatus (upval), SessionIdentifier (copy), FIntIDVMaxRetries (upval), Text (upval)
 					pollIDVStatus(SessionIdentifier, FIntIDVMaxRetries, Text)
 				end)
@@ -208,7 +208,7 @@ return function(p1) --[[ Line: 84 | Named "IDVUpsellContainer" ]]
 				
 				return PromiseModule.resolve()
 			end
-		end):catch(function(Err) --[[ Line: 227 ]]
+		end):catch(function(Err)
 			-- upvalues: IsAvailable (copy), FFlagEnableAmpIDVUpsellAnalyticsModule (copy), AuthFormInteractionFunction (upval), EntryPointEventCtx (upval), Text (ref), UseStateResult2_1 (upval), ActionStatusEnum (upval), UseStateResult2_2 (upval), UseStateResult2_3 (upval), UseLocalizationResult (upval), AuthModalShownFunction (upval)
 			if IsAvailable and Err and Err.resultType == Enum.FacialAgeEstimationResultType.Cancel then
 				if FFlagEnableAmpIDVUpsellAnalyticsModule then
@@ -227,12 +227,12 @@ return function(p1) --[[ Line: 84 | Named "IDVUpsellContainer" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 242 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			UseRefResult.current = false
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 248 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult1 (copy), ActionStatusEnum (upval), OnSuccessFunction (copy), OnCancelledFunction (copy)
 		if UseStateResult1 == ActionStatusEnum.Success then
 			OnSuccessFunction()
@@ -248,7 +248,7 @@ return function(p1) --[[ Line: 84 | Named "IDVUpsellContainer" ]]
 		errorTitle = UseLocalizationResult.title,
 		errorDescription = UseStateResult4,
 		buttonText = UseLocalizationResult.close,
-		onClose = function() --[[ Line: 261 ]]
+		onClose = function()
 			-- upvalues: OnFailureFunction (copy)
 			OnFailureFunction()
 		end
@@ -260,7 +260,7 @@ return function(p1) --[[ Line: 84 | Named "IDVUpsellContainer" ]]
 		featureName = FeatureName,
 		idvLink = UseStateResult,
 		openIdvLink = OpenIdvLink,
-		onClose = function() --[[ Line: 283 ]]
+		onClose = function()
 			-- upvalues: GetFFlagEnableAmpIDVUpsellAnalyticsModule (upval), AuthFormInteractionFunction (upval), EntryPointEventCtx (copy), SessionId (copy), UseStateResult2_1 (copy), ActionStatusEnum (upval)
 			if GetFFlagEnableAmpIDVUpsellAnalyticsModule() then
 				AuthFormInteractionFunction(EntryPointEventCtx, SessionId, "idvCancelled")
@@ -274,7 +274,7 @@ return function(p1) --[[ Line: 84 | Named "IDVUpsellContainer" ]]
 		featureName = FeatureName,
 		openPrivacyPolicyLink = OpenPrivacyPolicyLink,
 		latestStepCompleted = UseStateResult5,
-		onClose = function() --[[ Line: 298 ]]
+		onClose = function()
 			-- upvalues: GetFFlagEnableAmpIDVUpsellAnalyticsModule (upval), AuthFormInteractionFunction (upval), EntryPointEventCtx (copy), SessionId (copy), UseStateResult2_1 (copy), ActionStatusEnum (upval)
 			if GetFFlagEnableAmpIDVUpsellAnalyticsModule() then
 				AuthFormInteractionFunction(EntryPointEventCtx, SessionId, "idvCancelled")

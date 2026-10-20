@@ -34,9 +34,9 @@ PlayerNameTag.validateProps = TModule.strictInterface({
 	})
 })
 
-function PlayerNameTag.render(p1) --[[ Line: 68 ]]
+function PlayerNameTag.render(p1)
 	-- upvalues: WithLayoutValuesFunction (copy), FFlagEnableVerifiedBadgeStore (copy), UserLibModule (copy), ReactModule (copy), VerifiedBadgesModule (copy), FoundationFontFaceMigration (copy)
-	return WithLayoutValuesFunction(function(p2) --[[ Line: 69 ]]
+	return WithLayoutValuesFunction(function(p2)
 		-- upvalues: p1 (copy), FFlagEnableVerifiedBadgeStore (upval), UserLibModule (upval), ReactModule (upval), VerifiedBadgesModule (upval), FoundationFontFaceMigration (upval)
 		local IconSelectedColor = if p1.props.isHovered then p2.IconSelectedColor else p2.IconUnSelectedColor
 		local TextFontFont = p1.props.textFont.Font
@@ -148,7 +148,7 @@ function PlayerNameTag.render(p1) --[[ Line: 68 ]]
 	end)
 end
 
-local function PlayerNameTagContainer(p1) --[[ Line: 190 ]]
+local function PlayerNameTagContainer(p1)
 	-- upvalues: UsePlayerCombinedNameModule (copy), FFlagEnableVerifiedBadgeStore (copy), UseVerifiedBadgeFunction (copy), ReactModule (copy), PlayerNameTag (copy), CryoModule (copy)
 	local UseVerifiedBadgeResult = if FFlagEnableVerifiedBadgeStore then UseVerifiedBadgeFunction(p1.player) else nil
 	

@@ -24,12 +24,12 @@ local List = {
 	TrustedConnectionStatus.TrustedFriends
 }
 
-return function(p1) --[[ Line: 49 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), NormalizeTFActionsEnumToModalVariantModule (copy), UseTCAnalyticsFunction (copy), FFlagTFUpdateAnalyticsModule (copy), EventNames (copy), UseLocalizationFunction (copy), FFlagTCLearnMoreLinkModule (copy), List (copy), RoactUtilsModule (copy), UseModalTextsModule (copy), UseModalButtonActionsModule (copy), Sources (copy), FFlagEnableTrustedFriendsWizardVPCPrologueModule (copy), TrustedConnectionsLearnMoreLink (copy), TrustedContactsModalModule (copy)
 	local UseMemoResult = nil
 	local TfActionsEnum = nil
 	TfActionsEnum = p1.tfActionsEnum
-	UseMemoResult = ReactModule.useMemo(function() --[[ Line: 52 ]]
+	UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: TfActionsEnum (ref), NormalizeTFActionsEnumToModalVariantModule (upval)
 		return if TfActionsEnum then NormalizeTFActionsEnumToModalVariantModule(TfActionsEnum) else nil
 	end, { TfActionsEnum })
@@ -39,7 +39,7 @@ return function(p1) --[[ Line: 49 ]]
 		source = p1.source,
 		tfActionsEnum = if FFlagTFUpdateAnalyticsModule then TfActionsEnum else nil
 	}).fireAnalyticsEvent
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 63 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FireAnalyticsEventFunction (copy), EventNames (upval), p1 (copy)
 		FireAnalyticsEventFunction(EventNames.TCUpsellCloseClicked)
 		p1.externalNavigation.closeModal()
@@ -49,20 +49,20 @@ return function(p1) --[[ Line: 49 ]]
 		linkCopiedToast = "Feature.Catalog.Toast.LinkCopied",
 		learnMoreText = if FFlagTCLearnMoreLinkModule then "Feature.Friends.LinkText.LearnMore" else nil
 	})
-	ReactModule.useEffect(function() --[[ Line: 74 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (ref), FireAnalyticsEventFunction (copy), EventNames (upval)
 		if UseMemoResult then
 			FireAnalyticsEventFunction(EventNames.TCUpsellModalSeen)
 		end
 	end, { UseMemoResult, FireAnalyticsEventFunction })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 80 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), UseLocalizationResult (copy)
 		p1.externalNavigation.showToast(UseLocalizationResult.somethingIsWrongToast)
 	end, {
 		UseLocalizationResult.somethingIsWrongToast,
 		p1.externalNavigation
 	})
-	RoactUtilsModule.Hooks.useEffectOnce(function() --[[ Line: 85 ]]
+	RoactUtilsModule.Hooks.useEffectOnce(function()
 		-- upvalues: FFlagTFUpdateAnalyticsModule (upval), FireAnalyticsEventFunction (copy), EventNames (upval), UseResult (copy), UseResult1 (copy)
 		if FFlagTFUpdateAnalyticsModule then
 			FireAnalyticsEventFunction(EventNames.TCUpsellInvalidTrustedFriendState)
@@ -86,7 +86,7 @@ return function(p1) --[[ Line: 49 ]]
 		dismissModal = if FFlagEnableTrustedFriendsWizardVPCPrologueModule then p1.externalNavigation.closeModal else nil,
 		fireAnalyticsEvent = FireAnalyticsEventFunction
 	})
-	local UseResult2 = if FFlagTCLearnMoreLinkModule then ReactModule.useCallback(function() --[[ Line: 116 ]]
+	local UseResult2 = if FFlagTCLearnMoreLinkModule then ReactModule.useCallback(function()
 		-- upvalues: FireAnalyticsEventFunction (copy), EventNames (upval), p1 (copy), TrustedConnectionsLearnMoreLink (upval)
 		FireAnalyticsEventFunction(EventNames.TCUpsellLearnMoreClicked)
 		p1.externalNavigation.openWebView(TrustedConnectionsLearnMoreLink, "")

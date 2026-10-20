@@ -23,14 +23,14 @@ local config = {
 	success = AlertSeverity.Success
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 47 | Named "Feedback" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: MotionModule (copy), State (copy), ReactModule (copy), UseAbuseReportAnalyticsFunction (copy), config (copy), TelemetryEventType (copy), FFlagAbuseReportImproveErrorEventsModule (copy), View (copy), FeedbackAlert (copy), AlertSeverity (copy)
 	local UsePresenceResult = MotionModule.usePresence()
 	local UseMotionResult, UseMotionResult2 = MotionModule.useMotion(State)
 	local UseRefResult = ReactModule.useRef(0)
 	local UseRefResult1 = ReactModule.useRef(UsePresenceResult.isPresent)
 	local SendEventFunction = UseAbuseReportAnalyticsFunction().sendEvent
-	ReactModule.useEffect(function() --[[ Line: 54 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: config (upval), p1 (copy), SendEventFunction (copy), TelemetryEventType (upval), FFlagAbuseReportImproveErrorEventsModule (upval)
 		if not config[p1.severity] then
 			SendEventFunction({
@@ -44,11 +44,11 @@ return ReactModule.memo(function(p1) --[[ Line: 47 | Named "Feedback" ]]
 			})
 		end
 	end, { p1.severity, SendEventFunction })
-	ReactModule.useEffect(function() --[[ Line: 73 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), UsePresenceResult (copy)
 		UseRefResult1.current = UsePresenceResult.isPresent
 	end, { UsePresenceResult.isPresent })
-	ReactModule.useEffect(function() --[[ Line: 77 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UsePresenceResult (copy), UseRefResult (copy), UseMotionResult2 (copy), p1 (copy)
 		if not UsePresenceResult.isPresent then
 			UseMotionResult2({
@@ -56,7 +56,7 @@ return ReactModule.memo(function(p1) --[[ Line: 47 | Named "Feedback" ]]
 				sizeY = 0,
 				position = UDim2.new(0, 0, -0.5, 0)
 			}, {
-				onAnimationComplete = function(Enabled) --[[ Line: 92 ]]
+				onAnimationComplete = function(Enabled)
 					-- upvalues: UsePresenceResult (upval)
 					if Enabled == true then
 						UsePresenceResult.onExitComplete()
@@ -82,7 +82,7 @@ return ReactModule.memo(function(p1) --[[ Line: 47 | Named "Feedback" ]]
 	
 	return ReactModule.createElement(View, {
 		ClipsDescendants = true,
-		Size = UseMotionResult.sizeY:map(function(YOffset): UDim2 --[[ Line: 120 ]]
+		Size = UseMotionResult.sizeY:map(function(YOffset): UDim2
 			-- upvalues: MaxWidth (copy)
 			return if MaxWidth == nil then UDim2.new(1, 0, 0, YOffset) else UDim2.new(0, MaxWidth, 0, YOffset)
 		end),
@@ -94,7 +94,7 @@ return ReactModule.memo(function(p1) --[[ Line: 47 | Named "Feedback" ]]
 			BackgroundTransparency = 1,
 			GroupTransparency = UseMotionResult.groupTransparency,
 			Position = UseMotionResult.position,
-			[ReactModule.Change.AbsoluteSize] = ReactModule.useCallback(function(Frame) --[[ Line: 101 ]]
+			[ReactModule.Change.AbsoluteSize] = ReactModule.useCallback(function(Frame)
 				-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseMotionResult2 (copy), p1 (copy)
 				local Y: number = Frame.AbsoluteSize.Y
 				

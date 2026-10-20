@@ -4,9 +4,9 @@ local CryoModule = require(Parent.Cryo)
 local TextElement = require(Parent.InlineLayout).Components.InlineLayoutElements.TextElement
 local _ = require(InlineRichText.Types)
 
-return function(p1, p2) --[[ Line: 10 ]]
+return function(p1, p2)
 	-- upvalues: CryoModule (copy), TextElement (copy)
-	return CryoModule.List.map(p2.processChildren(p1, p2), function(p3, LayoutOrder) --[[ Line: 12 ]]
+	return CryoModule.List.map(p2.processChildren(p1, p2), function(p3, LayoutOrder)
 		-- upvalues: TextElement (upval), p2 (copy)
 		return TextElement.new({
 			LayoutOrder = LayoutOrder,

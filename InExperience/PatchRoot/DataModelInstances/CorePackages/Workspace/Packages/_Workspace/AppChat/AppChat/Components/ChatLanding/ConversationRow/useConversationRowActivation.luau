@@ -17,24 +17,24 @@ local FFlagAppChatSquadJoinButtonU13OSAModule = require(AppChat.Flags.FFlagAppCh
 local FFlagFriendsChatEnableConversationConsent = require(Parent.SharedFlags).FFlagFriendsChatEnableConversationConsent
 local NormalizeConversationForTelemetryModule = require(script.Parent.normalizeConversationForTelemetry)
 
-local function _(p1, p2) --[[ Line: 56 | Named "deriveModalVariant" ]]
+local function _(p1, p2)
 	-- upvalues: ConstantsModule (copy)
 	return if p1 then ConstantsModule.OptInVariant.ChatOptInInfoCard elseif p2 then ConstantsModule.OptInVariant.OsaContextCard else nil
 end
 
-local _ = function(p1, p2, MULTIUSERCONVERSATION) --[[ Line: 65 | Named "deriveSquadModalVariant" ]]
+local _ = function(p1, p2, MULTIUSERCONVERSATION)
 	-- upvalues: ConstantsModule (copy), FFlagAppChatSquadJoinButtonU13OSAModule (copy), ConversationModule (copy)
 	return if p1 then ConstantsModule.OptInVariant.OsaContextCard elseif FFlagAppChatSquadJoinButtonU13OSAModule and p2 and MULTIUSERCONVERSATION == ConversationModule.Type.MULTI_USER_CONVERSATION then ConstantsModule.OptInVariant.ChatOptInInfoCard else nil
 end
 
-local function showOsaOverlay(ConversationId, ImpressionId, ModalVariant, ConversationType, Callback1, Callback, p1) --[[ Line: 83 ]]
+local function showOsaOverlay(ConversationId, ImpressionId, ModalVariant, ConversationType, Callback1, Callback, p1)
 	-- upvalues: GetOverlayStoreModule (copy), OverlayTypesModule (copy), FFlagFriendsChatEnableConversationConsent (copy), GetConversationConsentUpdateModule (copy), GetConversationStoreModule (copy), CryoModule (copy), EnumScreensModule (copy), ConversationModule (copy), RemovedConversationModule (copy)
 	local OverlayStoreModule = GetOverlayStoreModule(false)
 	OverlayStoreModule.showOverlay(OverlayTypesModule.GroupOSADialog, {
 		conversationId = ConversationId,
 		impressionId = ImpressionId,
 		modalVariant = ModalVariant,
-		onJoin = function() --[[ Line: 98 ]]
+		onJoin = function()
 			-- upvalues: FFlagFriendsChatEnableConversationConsent (upval), GetConversationConsentUpdateModule (upval), ModalVariant (copy), GetConversationStoreModule (upval), ConversationId (copy), CryoModule (upval), OverlayStoreModule (copy), Callback1 (copy), p1 (copy), EnumScreensModule (upval)
 			if FFlagFriendsChatEnableConversationConsent then
 				local ConversationConsentUpdateModule = GetConversationConsentUpdateModule(ModalVariant)
@@ -62,7 +62,7 @@ local function showOsaOverlay(ConversationId, ImpressionId, ModalVariant, Conver
 				})
 			end
 		end,
-		onDecline = function() --[[ Line: 123 ]]
+		onDecline = function()
 			-- upvalues: ConversationId (copy), ConversationType (copy), ConversationModule (upval), GetConversationStoreModule (upval), Callback (copy), RemovedConversationModule (upval), OverlayStoreModule (copy)
 			if ConversationId and ConversationType == ConversationModule.Type.MULTI_USER_CONVERSATION then
 				GetConversationStoreModule(false).removeConversation(ConversationId)
@@ -73,7 +73,7 @@ local function showOsaOverlay(ConversationId, ImpressionId, ModalVariant, Conver
 	})
 end
 
-local function activateConversation(p1, p2, p3, p4, Current) --[[ Line: 133 ]]
+local function activateConversation(p1, p2, p3, p4, Current)
 	-- upvalues: ConstantsModule (copy), HttpService (copy), showOsaOverlay (copy), NormalizeConversationForTelemetryModule (copy)
 	if not p1.hasConversation then return end
 	local ConversationId = p1.conversationId
@@ -86,7 +86,7 @@ local function activateConversation(p1, p2, p3, p4, Current) --[[ Line: 133 ]]
 	
 	if ChatOptInInfoCard then
 		Guid = HttpService:GenerateGUID(false)
-		showOsaOverlay(ConversationId, Guid, ChatOptInInfoCard, p1.conversationType, if p1.onActivated then function(p5) --[[ Line: 161 ]]
+		showOsaOverlay(ConversationId, Guid, ChatOptInInfoCard, p1.conversationType, if p1.onActivated then function(p5)
 			-- upvalues: p2 (copy), p1 (copy)
 			local Conversation = p2.getConversation(p5, false)
 			
@@ -102,7 +102,7 @@ local function activateConversation(p1, p2, p3, p4, Current) --[[ Line: 133 ]]
 	end
 end
 
-local function activateSquad(p1, p2, p3, p4, p5) --[[ Line: 180 ]]
+local function activateSquad(p1, p2, p3, p4, p5)
 	-- upvalues: ConstantsModule (copy), FFlagAppChatSquadJoinButtonU13OSAModule (copy), ConversationModule (copy), HttpService (copy), showOsaOverlay (copy)
 	local ConversationId = if p3 then p1.conversationId else p2
 	
@@ -125,7 +125,7 @@ local function activateSquad(p1, p2, p3, p4, p5) --[[ Line: 180 ]]
 	end
 end
 
-return function(p1) --[[ Line: 216 | Named "useConversationRowActivation" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseNavigationFunction (copy), UseDispatchFunction (copy), GetConversationStoreModule (copy), activateConversation (copy), activateSquad (copy)
 	local GetCurrentOptionsFunction = p1.getCurrentOptions
 	local ConversationId = p1.conversationId
@@ -142,7 +142,7 @@ return function(p1) --[[ Line: 216 | Named "useConversationRowActivation" ]]
 	local UseNavigationResult = UseNavigationFunction()
 	local UseDispatchResult = UseDispatchFunction()
 	local ConversationStoreModule = GetConversationStoreModule(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 235 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: activateConversation (upval), ConversationId (copy), HasConversation (copy), ShouldShowOSA (copy), ShouldShowU13ChatOptIn (copy), ConversationType (copy), OnActivated (copy), FireClickEvent (copy), ConversationStoreModule (copy), UseDispatchResult (copy), UseNavigationResult (copy), UseRefResult (copy)
 		activateConversation({
 			conversationId = ConversationId,
@@ -158,7 +158,7 @@ return function(p1) --[[ Line: 216 | Named "useConversationRowActivation" ]]
 		ShouldShowU13ChatOptIn, OnActivated, FireClickEvent, UseDispatchResult,
 		UseNavigationResult, ConversationStoreModule
 	})
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 261 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: activateSquad (upval), ConversationId (copy), HasConversation (copy), ShouldShowOSA (copy), ShouldShowU13ChatOptIn (copy), ConversationType (copy), OnSquadJoinButtonActivated (copy), UseDispatchResult (copy), UseNavigationResult (copy)
 		activateSquad({
 			conversationId = ConversationId,
@@ -173,7 +173,7 @@ return function(p1) --[[ Line: 216 | Named "useConversationRowActivation" ]]
 		ShouldShowU13ChatOptIn, OnSquadJoinButtonActivated, UseDispatchResult,
 		UseNavigationResult, ConversationStoreModule.getConversation
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 285 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: GetCurrentOptionsFunction (copy), activateConversation (upval), ConversationStoreModule (copy), UseDispatchResult (copy), UseNavigationResult (copy), UseRefResult (copy)
 		if GetCurrentOptionsFunction ~= nil then
 			activateConversation(GetCurrentOptionsFunction(), ConversationStoreModule, UseDispatchResult, UseNavigationResult, UseRefResult.current)
@@ -186,7 +186,7 @@ return function(p1) --[[ Line: 216 | Named "useConversationRowActivation" ]]
 		ConversationStoreModule,
 		GetCurrentOptionsFunction
 	})
-	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 300 ]]
+	local UseResult3 = ReactModule.useCallback(function(p2)
 		-- upvalues: GetCurrentOptionsFunction (copy), activateSquad (upval), UseDispatchResult (copy), UseNavigationResult (copy)
 		if GetCurrentOptionsFunction ~= nil then
 			activateSquad(GetCurrentOptionsFunction(), p2, true, UseDispatchResult, UseNavigationResult)

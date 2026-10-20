@@ -9,7 +9,7 @@ local FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions = SharedFlagsModul
 local FFlagLuaAppRespectClipAncestorImpressions = SharedFlagsModule.FFlagLuaAppRespectClipAncestorImpressions
 local FFlagUnifyShortcutBarFixImpressions = SharedFlagsModule.FFlagUnifyShortcutBarFixImpressions
 
-return function(p1) --[[ Line: 30 ]]
+return function(p1)
 	-- upvalues: FFlagUnifyShortcutBarFixImpressions (copy), SignalsReactModule (copy), GetShortcutBarStatusStoreFunction (copy), FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions (copy), UseViewportBoundsFunction (copy), FFlagLuaAppRespectClipAncestorImpressions (copy), ReactModule (copy), ImpressionsTrackerModule (copy)
 	local UseSignalStateResult = if FFlagUnifyShortcutBarFixImpressions then SignalsReactModule.useSignalState(GetShortcutBarStatusStoreFunction(false).getShortcutBarReservedHeight) else nil
 	local v1 = nil

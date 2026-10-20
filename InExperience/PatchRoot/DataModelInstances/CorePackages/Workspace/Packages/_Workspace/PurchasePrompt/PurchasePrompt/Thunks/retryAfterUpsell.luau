@@ -39,11 +39,11 @@ local list = { AnalyticsModule, NetworkModule, ExternalSettingsModule }
 if game:DefineFastFlag("RetryAfterUpsellV2", false) then
 	return RetryAfterUpsellV2Module
 else
-	local function retryAfterUpsell(p1) --[[ Line: 60 ]]
+	local function retryAfterUpsell(p1)
 		-- upvalues: UpsellAccountBalanceRetryAttemps (copy), ThunkModule (copy), list (copy), AnalyticsModule (copy), NetworkModule (copy), ExternalSettingsModule (copy), GetUpsellFlowModule (copy), RequestTypeModule (copy), PromptStateModule (copy), FFlagAXMISWithBlackbird (copy), PurchaseCompleteRecievedModule (copy), CompleteRequestModule (copy), PurchaseFlowModule (copy), SetPromptStateModule (copy), GetBalanceInfoModule (copy), GetPlayerPriceModule (copy), HasPendingRequestModule (copy), BalanceInfoRecievedModule (copy), GetPaymentPlatformModule (copy), GetRobuxUpsellSuggestionsModule (copy), IsEligibleForRobuxUpsellPlusButtonModule (copy), SelectPriceModule (copy), PromptNativeUpsellSuggestionsModule (copy), SendCounterModule (copy), CounterModule (copy), UpsellFlowModule (copy), ErrorOccurredModule (copy), PurchaseErrorModule (copy), AddUnifiedPurchaseRobuxUpsellCompletedTelemetry2 (copy), LogUnifiedPurchaseTelemetryCounterModule (copy), UnifiedPurchaseTelemetryModule (copy), PurchaseItemModule (copy), UpsellAccountBalanceRetryIntervalSec (copy), retryAfterUpsell (copy)
 		local P0 = p1 or UpsellAccountBalanceRetryAttemps
 		
-		return ThunkModule.new(script.Name, list, function(p2, p3) --[[ Line: 63 ]]
+		return ThunkModule.new(script.Name, list, function(p2, p3)
 			-- upvalues: AnalyticsModule (upval), NetworkModule (upval), ExternalSettingsModule (upval), GetUpsellFlowModule (upval), RequestTypeModule (upval), PromptStateModule (upval), FFlagAXMISWithBlackbird (upval), PurchaseCompleteRecievedModule (upval), CompleteRequestModule (upval), PurchaseFlowModule (upval), SetPromptStateModule (upval), GetBalanceInfoModule (upval), GetPlayerPriceModule (upval), HasPendingRequestModule (upval), BalanceInfoRecievedModule (upval), GetPaymentPlatformModule (upval), GetRobuxUpsellSuggestionsModule (upval), IsEligibleForRobuxUpsellPlusButtonModule (upval), SelectPriceModule (upval), PromptNativeUpsellSuggestionsModule (upval), SendCounterModule (upval), CounterModule (upval), UpsellFlowModule (upval), ErrorOccurredModule (upval), PurchaseErrorModule (upval), AddUnifiedPurchaseRobuxUpsellCompletedTelemetry2 (upval), LogUnifiedPurchaseTelemetryCounterModule (upval), UnifiedPurchaseTelemetryModule (upval), PurchaseItemModule (upval), P0 (ref), UpsellAccountBalanceRetryIntervalSec (upval), retryAfterUpsell (upval)
 			local v1 = p3[AnalyticsModule]
 			local v2 = p3[NetworkModule]
@@ -60,7 +60,7 @@ else
 				if PurchaseFlow == PurchaseFlowModule.RobuxUpsellV2 or PurchaseFlow == PurchaseFlowModule.LargeRobuxUpsell then
 					p2:dispatch(SetPromptStateModule(PromptStateModule.PollingBalance))
 				end
-				return GetBalanceInfoModule(v2, v3, false):andThen(function(Result) --[[ Line: 97 ]]
+				return GetBalanceInfoModule(v2, v3, false):andThen(function(Result)
 					-- upvalues: p2 (copy), GetPlayerPriceModule (upval), HasPendingRequestModule (upval), BalanceInfoRecievedModule (upval), PurchaseFlow (copy), PurchaseFlowModule (upval), v3 (copy), GetPaymentPlatformModule (upval), GetRobuxUpsellSuggestionsModule (upval), IsEligibleForRobuxUpsellPlusButtonModule (upval), SelectPriceModule (upval), PromptNativeUpsellSuggestionsModule (upval), SendCounterModule (upval), CounterModule (upval), SetPromptStateModule (upval), PromptStateModule (upval), UpsellFlowModule1 (copy), UpsellFlowModule (upval), ErrorOccurredModule (upval), PurchaseErrorModule (upval), AddUnifiedPurchaseRobuxUpsellCompletedTelemetry2 (upval), LogUnifiedPurchaseTelemetryCounterModule (upval), UnifiedPurchaseTelemetryModule (upval), PurchaseItemModule (upval), P0 (upval), UpsellAccountBalanceRetryIntervalSec (upval), retryAfterUpsell (upval), v1 (copy)
 					local State = p2:getState()
 					local PlayerPriceModule = GetPlayerPriceModule(State.productInfo, State.accountInfo.membershipType == 4)
@@ -73,7 +73,7 @@ else
 					
 					if Balance == Robux then
 						if P0 > 0 then
-							delay(UpsellAccountBalanceRetryIntervalSec, function() --[[ Line: 180 ]]
+							delay(UpsellAccountBalanceRetryIntervalSec, function()
 								-- upvalues: p2 (upval), retryAfterUpsell (upval), P0 (upval)
 								p2:dispatch(retryAfterUpsell(P0 - 1))
 							end)
@@ -102,7 +102,7 @@ else
 						return
 					else
 						if PurchaseFlow == PurchaseFlowModule.LargeRobuxUpsell then
-							return GetRobuxUpsellSuggestionsModule(PlayerPriceModule, Robux, GetPaymentPlatformModule((v3.getPlatform())), IsEligibleForRobuxUpsellPlusButtonModule(State1.isUserEligibleForUnifiedPurchaseFlow, State1.robloxSubscriptionProducts, State1.productPayload, SelectPriceModule(State1), State1.promptRequest.requestType)):andThen(function(Result) --[[ Line: 131 ]]
+							return GetRobuxUpsellSuggestionsModule(PlayerPriceModule, Robux, GetPaymentPlatformModule((v3.getPlatform())), IsEligibleForRobuxUpsellPlusButtonModule(State1.isUserEligibleForUnifiedPurchaseFlow, State1.robloxSubscriptionProducts, State1.productPayload, SelectPriceModule(State1), State1.promptRequest.requestType)):andThen(function(Result)
 								-- upvalues: HasPendingRequestModule (upval), p2 (upval), PromptNativeUpsellSuggestionsModule (upval), SendCounterModule (upval), CounterModule (upval)
 								if HasPendingRequestModule(p2:getState()) then
 									p2:dispatch(PromptNativeUpsellSuggestionsModule(Result.products, 1, Result.virtualItemBadgeType, Result.experimentVariant))
@@ -110,7 +110,7 @@ else
 									
 									return
 								end
-							end, function() --[[ Line: 146 ]]
+							end, function()
 								-- upvalues: HasPendingRequestModule (upval), p2 (upval), SetPromptStateModule (upval), PromptStateModule (upval), SendCounterModule (upval), CounterModule (upval)
 								if HasPendingRequestModule(p2:getState()) then
 									p2:dispatch(SetPromptStateModule(PromptStateModule.LargeRobuxUpsell))
@@ -127,7 +127,7 @@ else
 						end
 						p2:dispatch(SendCounterModule(CounterModule.UpsellFailedNotEnoughRobux))
 					end
-				end):catch(function(Err) --[[ Line: 204 ]]
+				end):catch(function(Err)
 					-- upvalues: p2 (copy), ErrorOccurredModule (upval)
 					p2:dispatch(ErrorOccurredModule(Err))
 				end)

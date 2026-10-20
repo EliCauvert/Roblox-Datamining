@@ -5,7 +5,7 @@ local RoduxUsersModule = require(script.Parent.RoduxUsers)
 local config = { byUserId = {}, byUsername = {} }
 local InstallReducerResult = RoduxUsersModule.installReducer()
 
-return function() --[[ Line: 14 ]]
+return function()
 	-- upvalues: ConvertActionsFunction (copy), InstallReducerResult (copy), UsersActionAdaptorFunction (copy), RoduxUsersModule (copy), config (copy)
 	return ConvertActionsFunction(InstallReducerResult, UsersActionAdaptorFunction(RoduxUsersModule), config)
 end

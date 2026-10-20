@@ -19,7 +19,7 @@ local ProgressChecklistModule = require(script.Parent.ProgressChecklist)
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function(p1) --[[ Line: 38 | Named "IDVDirectLinkUpsell" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), IdvWithQRCodeUpsellStrings (copy), UseStyleFunction (copy), AnalyticsServiceModule (copy), UseSelectorFunction (copy), ReactModule (copy), PartialPageModal (copy), SendButtonClickEventModule (copy), AppScreensModule (copy), ButtonType (copy), DirectionsTileModule (copy), ProgressChecklistModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), RoactModule (copy), LinkButton (copy)
 	local FeatureName = p1.featureName
 	local UseLocalizationResult = UseLocalizationFunction(IdvWithQRCodeUpsellStrings)
@@ -35,10 +35,10 @@ return function(p1) --[[ Line: 38 | Named "IDVDirectLinkUpsell" ]]
 	
 	return ReactModule.createElement(PartialPageModal, {
 		title = UseLocalizationResult.title,
-		screenSize = UseSelectorFunction(function(p2) --[[ Line: 53 ]]
+		screenSize = UseSelectorFunction(function(p2)
 			return p2.ScreenSize
 		end),
-		onCloseClicked = ReactModule.useCallback(function() --[[ Line: 60 ]]
+		onCloseClicked = ReactModule.useCallback(function()
 			-- upvalues: SendButtonClickEventModule (upval), AnalyticsService (copy), AppScreensModule (upval), FeatureName (copy), OnCloseFunction (copy)
 			SendButtonClickEventModule(AnalyticsService, AppScreensModule.IDVDirectLinkUpsell, FeatureName, "CloseModal")
 			OnCloseFunction()
@@ -51,7 +51,7 @@ return function(p1) --[[ Line: 38 | Named "IDVDirectLinkUpsell" ]]
 					buttonType = ButtonType.Secondary,
 					props = {
 						isDisabled = false,
-						onActivated = ReactModule.useCallback(function() --[[ Line: 72 ]]
+						onActivated = ReactModule.useCallback(function()
 							-- upvalues: SendButtonClickEventModule (upval), AnalyticsService (copy), AppScreensModule (upval), FeatureName (copy), OnCloseFunction (copy)
 							SendButtonClickEventModule(AnalyticsService, AppScreensModule.IDVDirectLinkUpsell, FeatureName, "CloseModal")
 							OnCloseFunction()
@@ -63,7 +63,7 @@ return function(p1) --[[ Line: 38 | Named "IDVDirectLinkUpsell" ]]
 					buttonType = ButtonType.PrimarySystem,
 					props = {
 						isDisabled = false,
-						onActivated = ReactModule.useCallback(function() --[[ Line: 83 ]]
+						onActivated = ReactModule.useCallback(function()
 							-- upvalues: IdvLink (copy), SendButtonClickEventModule (upval), AnalyticsService (copy), AppScreensModule (upval), FeatureName (copy), OpenIdvLinkFunction (copy)
 							if IdvLink ~= nil then
 								SendButtonClickEventModule(AnalyticsService, AppScreensModule.IDVDirectLinkUpsell, FeatureName, "OpenIdvLink")
@@ -149,7 +149,7 @@ return function(p1) --[[ Line: 38 | Named "IDVDirectLinkUpsell" ]]
 					fontStyle = "CaptionBody",
 					underlineAlwaysEnabled = true,
 					text = UseLocalizationResult.privacyLinkText,
-					onActivated = function() --[[ Line: 178 ]]
+					onActivated = function()
 						-- upvalues: SendButtonClickEventModule (upval), AnalyticsService (copy), AppScreensModule (upval), FeatureName (copy), OpenPrivacyPolicyLinkFunction (copy)
 						SendButtonClickEventModule(AnalyticsService, AppScreensModule.IDVDirectLinkUpsell, FeatureName, "OpenPrivacyPolicy")
 						OpenPrivacyPolicyLinkFunction()

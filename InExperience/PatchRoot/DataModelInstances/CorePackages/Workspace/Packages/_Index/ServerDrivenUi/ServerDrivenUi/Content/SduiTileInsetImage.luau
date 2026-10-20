@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local _ = require(Parent.Foundation)
 local LoadableImage = require(Parent.UIBlox).App.Loading.LoadableImage
 
-return ReactModule.memo(function(p1) --[[ Line: 50 | Named "SduiTileInsetImage" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), LoadableImage (copy)
 	local CardCornerRadius = if p1.isContained then p1.cardCornerRadius else 0
 	

@@ -12,7 +12,7 @@ local RoactRoduxModule = require(Parent.RoactRodux)
 local AppStyleProvider = require(Parent.Style).AppStyleProvider
 local AppStyleProvider1 = UIBloxModule.App.Style.AppStyleProvider
 
-local function createStore() --[[ Line: 18 ]]
+local function createStore()
 	-- upvalues: RoduxModule (copy)
 	return RoduxModule.Store.new(RoduxModule.createReducer({}, {}))
 end
@@ -29,9 +29,9 @@ return {
 	name = "AvatarExperienceCommon",
 	roact = ReactModule,
 	reactRoblox = require(Parent.ReactRoblox),
-	mapStory = function(p1) --[[ Line: 47 ]]
+	mapStory = function(p1)
 		-- upvalues: config (copy), ReactModule (copy), AppStyleProvider1 (copy), config2 (copy), AppStyleProvider (copy), RoactRoduxModule (copy), createStore (copy), DesignTokenProvider (copy), FoundationProvider (copy), config1 (copy)
-		return function(p2) --[[ Line: 48 ]]
+		return function(p2)
 			-- upvalues: config (upval), ReactModule (upval), AppStyleProvider1 (upval), config2 (upval), AppStyleProvider (upval), RoactRoduxModule (upval), createStore (upval), DesignTokenProvider (upval), FoundationProvider (upval), config1 (upval), p1 (copy)
 			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,

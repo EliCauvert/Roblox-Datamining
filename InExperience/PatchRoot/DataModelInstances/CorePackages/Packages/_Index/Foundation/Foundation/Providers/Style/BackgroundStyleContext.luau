@@ -4,7 +4,7 @@ local _ = require(Foundation.Components.Types)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local Context = ReactModule.createContext(nil)
 
-function useBackgroundStyle() --[[ Line: 11 ]]
+function useBackgroundStyle()
 	-- upvalues: ReactModule (copy), Context (copy), UseTokensModule (copy)
 	local UseContextResult = ReactModule.useContext(Context)
 	local UseTokensModuleResult = UseTokensModule()

@@ -5,7 +5,7 @@ local Dialog = FoundationModule.Dialog
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return function(p1) --[[ Line: 19 ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), Dialog (copy), ButtonVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction({ title = p1.titleKey, saveButtonText = p1.saveKey })
 	

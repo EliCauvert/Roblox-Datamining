@@ -17,9 +17,9 @@ local PlayerListVisibilityStoreModule = require(Parent.Common.PlayerListVisibili
 local FFlagPlatformLeaderboardsExposure3EnabledModule = require(Parent.Flags.FFlagPlatformLeaderboardsExposure3Enabled)
 local FStringPlatformLeaderboardsExposure3LayerModule = require(Parent.Flags.FStringPlatformLeaderboardsExposure3Layer)
 
-local function _(p1, p2) --[[ Line: 26 | Named "translateOrLegacy" ]]
+local function _(p1, p2)
 	-- upvalues: RobloxTranslatorModule (copy)
-	local Success, Result = pcall(function() --[[ Line: 27 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: RobloxTranslatorModule (upval), p1 (copy)
 		return RobloxTranslatorModule:FormatByKey(p1)
 	end)
@@ -28,7 +28,7 @@ local function _(p1, p2) --[[ Line: 26 | Named "translateOrLegacy" ]]
 end
 
 local v1 = "CoreScripts.TextChat.ChannelTabs.Here"
-local Success, Result = pcall(function() --[[ Line: 27 ]]
+local Success, Result = pcall(function()
 	-- upvalues: RobloxTranslatorModule (copy), v1 (copy)
 	return RobloxTranslatorModule:FormatByKey(v1)
 end)
@@ -37,7 +37,7 @@ local config = {
 	text = if Success and Result and Result ~= "" then Result else "Here"
 }
 local v2 = "CommonUI.Features.Label.Friends"
-local Success1, Result1 = pcall(function() --[[ Line: 27 ]]
+local Success1, Result1 = pcall(function()
 	-- upvalues: RobloxTranslatorModule (copy), v2 (copy)
 	return RobloxTranslatorModule:FormatByKey(v2)
 end)
@@ -46,7 +46,7 @@ local config1 = {
 	text = if Success1 and Result1 and Result1 ~= "" then Result1 else "Friends"
 }
 local v3 = "CoreScripts.TextChat.ChannelTabs.Global2"
-local Success2, Result2 = pcall(function() --[[ Line: 27 ]]
+local Success2, Result2 = pcall(function()
 	-- upvalues: RobloxTranslatorModule (copy), v3 (copy)
 	return RobloxTranslatorModule:FormatByKey(v3)
 end)
@@ -59,7 +59,7 @@ local list = {
 	}
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 50 | Named "LeaderboardTabs" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UsePlatformLeaderboardModule (copy), FallbackSignalsModule (copy), SignalsReactModule (copy), FFlagPlatformLeaderboardsExposure3EnabledModule (copy), PlayerListVisibilityStoreModule (copy), ReactModule (copy), IXPServiceWrapper (copy), FStringPlatformLeaderboardsExposure3LayerModule (copy), FFlagPlayerListLocalizeGameTextModule (copy), UseLocalizationFunction (copy), list (copy), View (copy), Tabs (copy), InputSize (copy), FillBehavior (copy)
 	local UsePlatformLeaderboardModuleResult = UsePlatformLeaderboardModule()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(if UsePlatformLeaderboardModuleResult == nil then FallbackSignalsModule.getHasActiveLeaderboard else UsePlatformLeaderboardModuleResult.getHasActiveLeaderboard)
@@ -68,7 +68,7 @@ return ReactModule.memo(function(p1) --[[ Line: 50 | Named "LeaderboardTabs" ]]
 		local UseSignalStateResult1 = SignalsReactModule.useSignalState(PlayerListVisibilityStoreModule.getEffectiveVisible)
 		local UseSignalStateResult2 = if p1.isVisible == nil then UseSignalStateResult1 else p1.isVisible
 		local UseRefResult = ReactModule.useRef(false)
-		ReactModule.useEffect(function() --[[ Line: 64 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseSignalStateResult2 (copy), UseSignalStateResult (copy), UseRefResult (copy), IXPServiceWrapper (upval), FStringPlatformLeaderboardsExposure3LayerModule (upval)
 			if UseSignalStateResult2 and UseSignalStateResult and not UseRefResult.current then
 				UseRefResult.current = true
@@ -91,13 +91,13 @@ return ReactModule.memo(function(p1) --[[ Line: 50 | Named "LeaderboardTabs" ]]
 	else
 		Tabs1 = list
 	end
-	ReactModule.useEffect(function() --[[ Line: 88 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult (copy), p1 (copy)
 		if not UseSignalStateResult and p1.onPlatformTabsUnavailable then
 			p1.onPlatformTabsUnavailable()
 		end
 	end, { UseSignalStateResult, p1.onPlatformTabsUnavailable })
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 94 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy)
 		p1.onActivated((tostring(p2)))
 	end, { p1.onActivated })

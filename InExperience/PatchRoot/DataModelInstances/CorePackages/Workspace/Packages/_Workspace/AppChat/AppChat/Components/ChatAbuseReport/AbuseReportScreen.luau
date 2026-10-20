@@ -10,7 +10,7 @@ local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavi
 local AppFocusRoot = FocusNavigationUtilsModule.AppFocusRoot
 local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
 
-return function(p1) --[[ Line: 15 | Named "AbuseReportScreen" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), FrameModule (copy), ChatAbuseReportModule (copy), AppFocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
 	local Navigation = p1.navigation
 	
@@ -19,11 +19,11 @@ return function(p1) --[[ Line: 15 | Named "AbuseReportScreen" ]]
 		isAutoFocusRoot = true,
 		isFocusable = true,
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
-		customEventHandlers = ReactModule.useMemo(function() --[[ Line: 20 ]]
+		customEventHandlers = ReactModule.useMemo(function()
 			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), Navigation (copy)
 			return {
 				[FocusNavigationEventNameEnum.NavigateBack] = {
-					handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 23 ]]
+					handler = InputHandlersModule.onRelease(function(p2)
 						-- upvalues: Navigation (upval)
 						Navigation.pop()
 						p2:cancel()

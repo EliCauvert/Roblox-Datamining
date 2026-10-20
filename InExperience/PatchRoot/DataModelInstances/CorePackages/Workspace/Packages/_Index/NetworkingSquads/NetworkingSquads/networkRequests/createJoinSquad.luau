@@ -1,10 +1,10 @@
 ﻿local SQUADURLModule = require(script.Parent.Parent.SQUAD_URL)
 local _ = require(script.Parent.Parent.networkingSquadTypes)
 
-return function(p1) --[[ Line: 5 ]]
+return function(p1)
 	-- upvalues: SQUADURLModule (copy)
 	local Config = nil
-	local JoinSquad = p1.roduxNetworking.POST("JoinSquad", function(Callback, p2) --[[ Line: 11 ]]
+	local JoinSquad = p1.roduxNetworking.POST("JoinSquad", function(Callback, p2)
 		-- upvalues: p1 (copy), Config (ref), SQUADURLModule (upval)
 		if p1.useMockedResponse then
 			Config = {
@@ -36,7 +36,7 @@ return function(p1) --[[ Line: 5 ]]
 	
 	if p1.useMockedResponse then
 		JoinSquad.Mock.clear()
-		JoinSquad.Mock.reply(function() --[[ Line: 62 ]]
+		JoinSquad.Mock.reply(function()
 			-- upvalues: Config (ref)
 			return Config
 		end)

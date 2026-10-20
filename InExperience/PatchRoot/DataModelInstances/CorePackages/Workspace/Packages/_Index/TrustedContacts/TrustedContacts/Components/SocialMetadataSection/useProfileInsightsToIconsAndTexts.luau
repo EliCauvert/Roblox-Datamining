@@ -20,12 +20,12 @@ local config = {
 	noMutualFriends = if FFlagTFNonFriendsPermittedModule then Icon.TriangleExclamation else nil
 }
 
-local function _(p1, PhoneContactImporter) --[[ Line: 42 ]]
+local function _(p1, PhoneContactImporter)
 	-- upvalues: FriendRequestOriginSource (copy), config (copy)
 	return if p1 == "friendRequestOriginSource" then config[if PhoneContactImporter == FriendRequestOriginSource.QrCode then "qrCode" elseif PhoneContactImporter == FriendRequestOriginSource.PhoneContactImporter then "contacts" elseif PhoneContactImporter == FriendRequestOriginSource.PlayerSearch then "search" else nil] else config[p1]
 end
 
-local function v10(p2, PhoneContactImporter, p3) --[[ Line: 58 ]]
+local function v10(p2, PhoneContactImporter, p3)
 	-- upvalues: FriendRequestOriginSource (copy), FFlagTFClassmatesProfileInsight (copy)
 	local FromContacts = nil
 	
@@ -75,7 +75,7 @@ local function v10(p2, PhoneContactImporter, p3) --[[ Line: 58 ]]
 	return FromContacts
 end
 
-return function(PhoneContactImporters) --[[ Line: 89 | Named "useProfileInsightsToIconsAndTexts" ]]
+return function(PhoneContactImporters)
 	-- upvalues: ReactModule (copy), LocalizationService (copy), UseLocalizationFunction (copy), FFlagTFClassmatesProfileInsight (copy), FFlagTFNonFriendsPermittedModule (copy), FriendRequestOriginSource (copy), config (copy), v10 (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		singularMutualConnection = "Feature.Friends.Label.MutualFriendTitle",
@@ -90,7 +90,7 @@ return function(PhoneContactImporters) --[[ Line: 89 | Named "useProfileInsights
 			"Feature.Friends.Label.JoinedInYear",
 			year = DateTime.fromUnixTimestamp(PhoneContactImporters.accountCreationDateUnixSeconds or 0):FormatLocalTime("YYYY", LocalizationService.RobloxLocaleId)
 		},
-		connectedDuration = ReactModule.useMemo(function() --[[ Line: 92 ]]
+		connectedDuration = ReactModule.useMemo(function()
 			-- upvalues: PhoneContactImporters (copy)
 			if PhoneContactImporters.friendshipAgeUnixSeconds then
 				local UnixTimestampDelta = DateTime.now().UnixTimestamp - PhoneContactImporters.friendshipAgeUnixSeconds or 0
@@ -112,7 +112,7 @@ return function(PhoneContactImporters) --[[ Line: 89 | Named "useProfileInsights
 	})
 	local List = {}
 	
-	return ReactModule.useMemo(function() --[[ Line: 141 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: PhoneContactImporters (copy), FriendRequestOriginSource (upval), config (upval), v10 (upval), UseLocalizationResult (copy), List (copy), FFlagTFNonFriendsPermittedModule (upval)
 		for i, phoneContactImporter in PhoneContactImporters do
 			local Entry = if i == "friendRequestOriginSource" then config[if phoneContactImporter == FriendRequestOriginSource.QrCode then "qrCode" elseif phoneContactImporter == FriendRequestOriginSource.PhoneContactImporter then "contacts" elseif phoneContactImporter == FriendRequestOriginSource.PlayerSearch then "search" else nil] else config[i]

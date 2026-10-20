@@ -19,7 +19,7 @@ local FFlagMomentsAudioSaveSongbirdAnalyticsModule = require(Moments.Flags.FFlag
 local _ = require(Moments.Hooks.useMusicInfo)
 local config = { title = "Feature.Moments.Label.Music" }
 
-local function SaveButtonWithAnalytics(p1) --[[ Line: 38 ]]
+local function SaveButtonWithAnalytics(p1)
 	-- upvalues: ReactModule (copy), SendAudioPlayerAnalyticsFunction (copy), AnalyticActions (copy), IconButton (copy), BuilderIconsModule (copy), FoundationModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	
@@ -30,7 +30,7 @@ local function SaveButtonWithAnalytics(p1) --[[ Line: 38 ]]
 			name = BuilderIconsModule.Icon.Bookmark,
 			variant = if UseStateResult then BuilderIconsModule.IconVariant.Filled else BuilderIconsModule.IconVariant.Regular
 		},
-		onActivated = ReactModule.useCallback(function() --[[ Line: 41 ]]
+		onActivated = ReactModule.useCallback(function()
 			-- upvalues: SendAudioPlayerAnalyticsFunction (upval), UseStateResult (copy), AnalyticActions (upval), p1 (copy), UseStateResult2 (copy)
 			SendAudioPlayerAnalyticsFunction({
 				thumbnailId = "-1",
@@ -44,7 +44,7 @@ local function SaveButtonWithAnalytics(p1) --[[ Line: 38 ]]
 	})
 end
 
-return function(p1) --[[ Line: 65 | Named "MusicModal" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), Sheet (copy), Text (copy), View (copy), MusicThumbnailIcon (copy), MusicThumbnailIconSize (copy), FFlagMomentsAudioSaveButton (copy), FFlagMomentsAudioSaveSongbirdAnalyticsModule (copy), SaveButtonWithAnalytics (copy), IconButton (copy), BuilderIconsModule (copy), FoundationModule (copy)
 	local MusicInfo = p1.musicInfo
 	
@@ -86,7 +86,7 @@ return function(p1) --[[ Line: 65 | Named "MusicModal" ]]
 					LayoutOrder = 3,
 					testId = "MomentsMusicSaveButton",
 					icon = BuilderIconsModule.Icon.Bookmark,
-					onActivated = function() --[[ Line: 112 ]] end,
+					onActivated = function() end,
 					size = FoundationModule.Enums.InputSize.Medium
 				}) else nil
 			})

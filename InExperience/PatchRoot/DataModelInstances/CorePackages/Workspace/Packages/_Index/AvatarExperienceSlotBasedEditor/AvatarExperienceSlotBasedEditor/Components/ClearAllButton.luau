@@ -8,7 +8,7 @@ local ConstantsModule = require(script.Parent.Parent.Constants)
 local Text = FoundationModule.Text
 local FFlagAXMigrateBuilderIcons = require(Parent.AvatarExperienceFlags).FFlagAXMigrateBuilderIcons
 
-return function(Frame) --[[ Line: 33 | Named "ClearCategoryButton" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Icon (copy), FFlagAXMigrateBuilderIcons (copy), ConstantsModule (copy), IconSize (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	

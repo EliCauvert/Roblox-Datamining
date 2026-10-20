@@ -6,7 +6,7 @@ local _ = require(InExperienceSideSheet.Common.Types)
 local ShortcutButtonModule = require(InExperienceSideSheet.Components.ShortcutButton)
 local ButtonWidth = require(InExperienceSideSheet.Common.Enums).ButtonWidth
 
-local function _(p1, LayoutOrder, Width) --[[ Line: 22 | Named "createShortcutButton" ]]
+local function _(p1, LayoutOrder, Width)
 	-- upvalues: ReactModule (copy), ShortcutButtonModule (copy)
 	return ReactModule.createElement(ShortcutButtonModule, {
 		label = p1.label,
@@ -18,7 +18,7 @@ local function _(p1, LayoutOrder, Width) --[[ Line: 22 | Named "createShortcutBu
 	})
 end
 
-local function buildHalfWidthRowLayoutItem(Entry, LayoutOrder) --[[ Line: 37 ]]
+local function buildHalfWidthRowLayoutItem(Entry, LayoutOrder)
 	-- upvalues: ButtonWidth (copy), ReactModule (copy), ShortcutButtonModule (copy), View (copy)
 	if #Entry == 1 then
 		local Entry1 = Entry[1]
@@ -56,13 +56,13 @@ local function buildHalfWidthRowLayoutItem(Entry, LayoutOrder) --[[ Line: 37 ]]
 	}
 end
 
-return function(List) --[[ Line: 63 | Named "buildSessionActionButtonLayout" ]]
+return function(List)
 	-- upvalues: buildHalfWidthRowLayoutItem (copy), ButtonWidth (copy), ReactModule (copy), ShortcutButtonModule (copy)
 	local Nodes = {}
 	local LayoutOrder = 0
 	local Tbl = {}
 	
-	local function _() --[[ Line: 68 | Named "flushHalfRow" ]]
+	local function _()
 		-- upvalues: Tbl (copy), LayoutOrder (ref), buildHalfWidthRowLayoutItem (upval), Nodes (copy)
 		if #Tbl ~= 0 then
 			LayoutOrder += 1

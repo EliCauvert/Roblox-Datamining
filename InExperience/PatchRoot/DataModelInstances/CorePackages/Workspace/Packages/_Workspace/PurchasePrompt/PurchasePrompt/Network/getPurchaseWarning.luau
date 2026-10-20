@@ -2,12 +2,12 @@
 local PurchaseErrorModule = require(Parent.Enums.PurchaseError)
 local PromiseModule = require(Parent.Promise)
 
-return function(p1, p2, p3, p4) --[[ Line: 5 | Named "getPurchaseWarning" ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: PromiseModule (copy), PurchaseErrorModule (copy)
-	return p1.getPurchaseWarning(p2, p3, p4):andThen(function(Result) --[[ Line: 8 ]]
+	return p1.getPurchaseWarning(p2, p3, p4):andThen(function(Result)
 		-- upvalues: PromiseModule (upval)
 		return PromiseModule.resolve(Result)
-	end):catch(function(_) --[[ Line: 11 ]]
+	end):catch(function(_)
 		-- upvalues: PromiseModule (upval), PurchaseErrorModule (upval)
 		return PromiseModule.reject(PurchaseErrorModule.UnknownFailure)
 	end)

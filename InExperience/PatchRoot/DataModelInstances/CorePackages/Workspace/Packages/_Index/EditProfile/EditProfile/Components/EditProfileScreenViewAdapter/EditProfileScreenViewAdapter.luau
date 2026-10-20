@@ -11,14 +11,14 @@ local EditProfileScreenModule = require(EditProfile.BaseComponents.EditProfileSc
 local FocusNavigatorWrapperModule = require(EditProfile.Utils.FocusNavigatorWrapper)
 local FFlagAXEnableProfileTab = require(Parent.SharedFlags).FFlagAXEnableProfileTab
 
-return function(p1) --[[ Line: 29 ]]
+return function(p1)
 	-- upvalues: UseEditProfileScreenConfigModule (copy), GetDisplayStoreFunction (copy), UseTokensFunction (copy), ReactModule (copy), FFlagAXEnableProfileTab (copy), CryoModule (copy), EditProfileScreenModule (copy), EditProfileModalModule (copy), FocusNavigatorWrapperModule (copy)
 	local UseEditProfileScreenConfigModuleResult = UseEditProfileScreenConfigModule(p1.navigation.state.params.screen)
 	local DisplayStore = GetDisplayStoreFunction(false)
 	local UseTokensResult = UseTokensFunction()
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 38 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
 		if UseRefResult.current and UseRefResult.current.focus and not UseRefResult1.current then
 			UseRefResult1.current = true
@@ -27,7 +27,7 @@ return function(p1) --[[ Line: 29 ]]
 	end, { UseRefResult.current })
 	local IsFullBleed: boolean = FFlagAXEnableProfileTab and p1.navigation.state.params.fullBleed == true
 	local JoinResult = CryoModule.Dictionary.join(UseEditProfileScreenConfigModuleResult, {
-		component = ReactModule.useMemo(function() --[[ Line: 45 ]]
+		component = ReactModule.useMemo(function()
 			-- upvalues: UseEditProfileScreenConfigModuleResult (copy), UseRefResult (copy), ReactModule (upval)
 			local config = {
 				registerSaveHandler = UseEditProfileScreenConfigModuleResult.registerSaveHandler,

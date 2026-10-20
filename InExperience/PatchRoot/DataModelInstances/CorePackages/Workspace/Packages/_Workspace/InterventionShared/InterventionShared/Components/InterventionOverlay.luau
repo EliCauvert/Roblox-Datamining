@@ -2,7 +2,7 @@
 local ReactModule = require(Parent.React)
 local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
 
-return function(p1) --[[ Line: 13 | Named "InterventionOverlay" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy)
 	local UseStyleResult = UseStyleFunction()
 	

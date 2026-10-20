@@ -12,12 +12,12 @@ local config = {
 	[PresenceType.Offline] = 0
 }
 
-local function _(p1) --[[ Line: 23 | Named "getStorePresenceWeight" ]]
+local function _(p1)
 	-- upvalues: config (copy)
 	return config[p1] or 0
 end
 
-local function usersOrderEqual(List, p1): boolean --[[ Line: 29 ]]
+local function usersOrderEqual(List, p1): boolean
 	if List == p1 then
 		return true
 	end
@@ -32,11 +32,11 @@ local function usersOrderEqual(List, p1): boolean --[[ Line: 29 ]]
 	return true
 end
 
-return function(Users) --[[ Line: 55 | Named "useSortedUsersByPresence" ]]
+return function(Users)
 	-- upvalues: ReactModule (copy), SignalsModule (copy), GetResult (copy), PresenceType (copy), config (copy), usersOrderEqual (copy), SignalsReactModule (copy)
-	return SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 56 ]]
+	return SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), Users (copy), GetResult (upval), PresenceType (upval), config (upval), usersOrderEqual (upval)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 57 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: Users (upval), GetResult (upval), PresenceType (upval), config (upval)
 			if #Users == 0 then
 				return Users
@@ -51,7 +51,7 @@ return function(Users) --[[ Line: 55 | Named "useSortedUsersByPresence" ]]
 					originalIndex = OriginalIndex
 				})
 			end
-			table.sort(List, function(A, B): boolean --[[ Line: 74 ]]
+			table.sort(List, function(A, B): boolean
 				return if A.weight == B.weight then A.originalIndex < B.originalIndex else B.weight < A.weight
 			end)
 			local List1 = {}

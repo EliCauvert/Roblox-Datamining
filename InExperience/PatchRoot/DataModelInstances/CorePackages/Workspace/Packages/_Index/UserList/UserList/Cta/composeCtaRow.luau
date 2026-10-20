@@ -6,7 +6,7 @@ local _ = require(UserList.Common.Types)
 local FFlagUserListComposeRenderRowWithCta = require(Parent.SharedFlags).FFlagUserListComposeRenderRowWithCta
 local FFlagUserListSurfacePresenceWins = require(Parent.SharedFlags).FFlagUserListSurfacePresenceWins
 
-return function(p1, p2, p3, p4) --[[ Line: 27 | Named "composeCtaRow" ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: FFlagUserListComposeRenderRowWithCta (copy), FFlagUserListSurfacePresenceWins (copy)
 	local HasPrimaryCtaMinWidth: boolean = p2 ~= nil and (p2.showLoadingPlaceholder ~= false and p2.primaryCtaMinWidth ~= nil)
 	local Config = if p4.isLoading and HasPrimaryCtaMinWidth and p2 then {
@@ -19,7 +19,7 @@ return function(p1, p2, p3, p4) --[[ Line: 27 | Named "composeCtaRow" ]]
 	if FFlagUserListComposeRenderRowWithCta and RenderRowFunction then
 		local CreateRowFunction = p1.createRow
 		
-		return RenderRowFunction(function(Tbl) --[[ Line: 49 ]]
+		return RenderRowFunction(function(Tbl)
 			-- upvalues: UserPresenceType (copy), FFlagUserListSurfacePresenceWins (upval), p4 (copy), Config (copy), CreateRowFunction (copy)
 			local Copy = table.clone(Tbl)
 			Copy.presence = UserPresenceType

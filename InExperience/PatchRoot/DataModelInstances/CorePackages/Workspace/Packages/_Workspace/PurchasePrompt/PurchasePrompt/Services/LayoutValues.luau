@@ -2,7 +2,7 @@
 local CreateSignalModule = require(Parent.Misc.createSignal)
 local StrictModule = require(Parent.strict)
 
-local function _(Text, SliceCenter) --[[ Line: 7 | Named "makeImageData" ]]
+local function _(Text, SliceCenter)
 	return {
 		Path = "rbxasset://textures/" .. Text,
 		SliceCenter = SliceCenter
@@ -10,12 +10,12 @@ local function _(Text, SliceCenter) --[[ Line: 7 | Named "makeImageData" ]]
 end
 
 local LayoutValuesModule = {
-	__tostring = function(): string --[[ Line: 15 ]]
+	__tostring = function(): string
 		return "Service(LayoutValues)"
 	end
 }
 
-function LayoutValuesModule.new(p1) --[[ Line: 19 ]]
+function LayoutValuesModule.new(p1)
 	-- upvalues: LayoutValuesModule (copy), CreateSignalModule (copy)
 	local t = {}
 	setmetatable(t, { __index = LayoutValuesModule })
@@ -25,12 +25,12 @@ function LayoutValuesModule.new(p1) --[[ Line: 19 ]]
 	return t
 end
 
-function LayoutValuesModule.update(p1, p2) --[[ Line: 31 ]]
+function LayoutValuesModule.update(p1, p2)
 	p1.layout = p1:generate(p2)
 	p1.signal:fire(p1.layout)
 end
 
-function LayoutValuesModule:generate(p1) --[[ Line: 36 ]]
+function LayoutValuesModule:generate(p1)
 	-- upvalues: StrictModule (copy)
 	local v1: number = if p1 then 3 else 1
 	local ButtonHeight = 44 * v1

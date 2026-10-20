@@ -4,14 +4,14 @@ local Players = game:GetService("Players")
 local CorePackages = game:GetService("CorePackages")
 local CreateFunction = require(CorePackages.Workspace.Packages.AppCommonLib).Create
 local IsTenFootInterface = require(CorePackages.Workspace.Packages.AppCommonLib).isTenFootInterface()
-local v1 = (function() --[[ Line: 30 | Named "CreateModule" ]]
+local v1 = (function()
 	-- upvalues: CreateFunction (copy), RobloxGui (copy), _Color3 (copy), Players (copy)
 	local config = { Container = nil }
 	local t = {}
 	local BindableEvent = Instance.new("BindableEvent")
 	local BindableEvent1 = Instance.new("BindableEvent")
 	
-	local function createContainer() --[[ Line: 39 ]]
+	local function createContainer()
 		-- upvalues: config (copy), CreateFunction (upval), RobloxGui (upval)
 		if not config.Container then
 			config.Container = CreateFunction("ImageButton")({
@@ -27,7 +27,7 @@ local v1 = (function() --[[ Line: 30 | Named "CreateModule" ]]
 		end
 	end
 	
-	function removeFromDisplayStack(Frame) --[[ Line: 55 ]]
+	function removeFromDisplayStack(Frame)
 		-- upvalues: t (copy), BindableEvent (copy)
 		local v2: number? = nil
 		
@@ -48,7 +48,7 @@ local v1 = (function() --[[ Line: 30 | Named "CreateModule" ]]
 		BindableEvent:Fire()
 	end
 	
-	function addBackToDisplayStack(Frame) --[[ Line: 75 ]]
+	function addBackToDisplayStack(Frame)
 		-- upvalues: t (copy), BindableEvent (copy)
 		local v3 = 0
 		
@@ -69,14 +69,14 @@ local v1 = (function() --[[ Line: 30 | Named "CreateModule" ]]
 		BindableEvent:Fire()
 	end
 	
-	function addToDisplayStack(p1) --[[ Line: 96 ]]
+	function addToDisplayStack(p1)
 		-- upvalues: t (copy), createContainer (copy), config (copy), BindableEvent (copy)
 		local Entry = if #t > 0 then t[#t] else nil
 		t[#t + 1] = p1
 		p1.Position = UDim2.new(p1.Position.X.Scale, p1.Position.X.Offset, p1.Position.Y.Scale, if Entry then Entry.AbsolutePosition.Y + Entry.AbsoluteSize.Y + 4 else 0)
 		createContainer()
 		p1.Parent = config.Container
-		p1.Changed:connect(function(p2) --[[ Line: 114 ]]
+		p1.Changed:connect(function(p2)
 			-- upvalues: p1 (copy)
 			if p2 == "Visible" then
 				if not p1.Visible then
@@ -90,7 +90,7 @@ local v1 = (function() --[[ Line: 30 | Named "CreateModule" ]]
 		BindableEvent:Fire()
 	end
 	
-	function config:CreateHealthBar() --[[ Line: 126 ]]
+	function config:CreateHealthBar()
 		-- upvalues: config (copy), CreateFunction (upval), _Color3 (upval), createContainer (copy), BindableEvent1 (copy)
 		config.HealthContainer = CreateFunction("Frame")({
 			Name = "HealthContainer",
@@ -134,7 +134,7 @@ local v1 = (function() --[[ Line: 30 | Named "CreateModule" ]]
 		local v6 = CreateFunction("TextLabel")({ Visible = false })
 		addToDisplayStack(config.HealthContainer)
 		createContainer()
-		config.HealthContainer.Changed:connect(function() --[[ Line: 181 ]]
+		config.HealthContainer.Changed:connect(function()
 			-- upvalues: BindableEvent1 (upval)
 			BindableEvent1:Fire()
 		end)
@@ -142,7 +142,7 @@ local v1 = (function() --[[ Line: 30 | Named "CreateModule" ]]
 		return config.Container, v5, config.HealthContainer, v4, v6
 	end
 	
-	function config:CreateAccountType(Text) --[[ Line: 188 ]]
+	function config:CreateAccountType(Text)
 		-- upvalues: config (copy), CreateFunction (upval), RobloxGui (upval)
 		config.AccountTypeContainer = CreateFunction("Frame")({
 			Name = "AccountTypeContainer",
@@ -170,7 +170,7 @@ local v1 = (function() --[[ Line: 30 | Named "CreateModule" ]]
 		})
 	end
 	
-	function config:SetupTopStat() --[[ Line: 216 ]]
+	function config:SetupTopStat()
 		-- upvalues: CreateFunction (upval), Players (upval)
 		local TopStatEnabled = true
 		local DisplayedStat = nil
@@ -179,7 +179,7 @@ local v1 = (function() --[[ Line: 30 | Named "CreateModule" ]]
 		local ChildAddedConnection = nil
 		local Parent = nil
 		
-		local function makeTenFootInterfaceStat() --[[ Line: 224 ]]
+		local function makeTenFootInterfaceStat()
 			-- upvalues: Parent (ref), CreateFunction (upval)
 			if not Parent then
 				Parent = CreateFunction("Frame")({
@@ -217,7 +217,7 @@ local v1 = (function() --[[ Line: 30 | Named "CreateModule" ]]
 		
 		local Callback = nil
 		
-		local function setDisplayedStat(Value) --[[ Line: 261 ]]
+		local function setDisplayedStat(Value)
 			-- upvalues: ChangedConnection (ref), AncestryChangedConnection (ref), DisplayedStat (ref), makeTenFootInterfaceStat (copy), Callback (ref)
 			if ChangedConnection then
 				ChangedConnection:disconnect()
@@ -232,18 +232,18 @@ local v1 = (function() --[[ Line: 30 | Named "CreateModule" ]]
 			if DisplayedStat then
 				makeTenFootInterfaceStat()
 				Callback(DisplayedStat)
-				AncestryChangedConnection = DisplayedStat.AncestryChanged:connect(function() --[[ Line: 276 ]]
+				AncestryChangedConnection = DisplayedStat.AncestryChanged:connect(function()
 					-- upvalues: Callback (upval), DisplayedStat (upval)
 					Callback(DisplayedStat, "Parent")
 				end)
-				ChangedConnection = DisplayedStat.Changed:connect(function(p1) --[[ Line: 277 ]]
+				ChangedConnection = DisplayedStat.Changed:connect(function(p1)
 					-- upvalues: Callback (upval), DisplayedStat (upval)
 					Callback(DisplayedStat, p1)
 				end)
 			end
 		end
 		
-		Callback = function(DisplayedStat, p1) --[[ Line: 281 | Named "updateTenFootStat" ]]
+		Callback = function(DisplayedStat, p1)
 			-- upvalues: Parent (ref), setDisplayedStat (copy), TopStatEnabled (ref)
 			if p1 and p1 == "Parent" then
 				Parent.StatName.Text = ""
@@ -264,11 +264,11 @@ local v1 = (function() --[[ Line: 30 | Named "CreateModule" ]]
 			end
 		end
 		
-		local function isValidStat(Object) --[[ Line: 299 ]]
+		local function isValidStat(Object)
 			return Object:IsA("StringValue") or (Object:IsA("IntValue") or (Object:IsA("BoolValue") or (Object:IsA("NumberValue") or (Object:IsA("DoubleConstrainedValue") or Object:IsA("IntConstrainedValue")))))
 		end
 		
-		local function _(p1) --[[ Line: 304 | Named "tenFootInterfaceNewStat" ]]
+		local function _(p1)
 			-- upvalues: DisplayedStat (ref), isValidStat (copy), setDisplayedStat (copy)
 			if not DisplayedStat and isValidStat(p1) then
 				setDisplayedStat(p1)
@@ -280,7 +280,7 @@ local v1 = (function() --[[ Line: 30 | Named "CreateModule" ]]
 			Players.PlayerAdded:wait()
 			LocalPlayer = Players.LocalPlayer
 		end
-		function tenFootInterfaceChanged() --[[ Line: 316 ]]
+		function tenFootInterfaceChanged()
 			-- upvalues: LocalPlayer (ref), DisplayedStat (ref), isValidStat (copy), setDisplayedStat (copy), ChildAddedConnection (ref)
 			local Leaderstats = LocalPlayer:FindFirstChild("leaderstats")
 			
@@ -297,7 +297,7 @@ local v1 = (function() --[[ Line: 30 | Named "CreateModule" ]]
 				if ChildAddedConnection then
 					ChildAddedConnection:disconnect()
 				end
-				ChildAddedConnection = Leaderstats.ChildAdded:connect(function(Child) --[[ Line: 324 ]]
+				ChildAddedConnection = Leaderstats.ChildAdded:connect(function(Child)
 					-- upvalues: DisplayedStat (upval), isValidStat (upval), setDisplayedStat (upval)
 					if not DisplayedStat and isValidStat(Child) then
 						setDisplayedStat(Child)
@@ -312,7 +312,7 @@ local v1 = (function() --[[ Line: 30 | Named "CreateModule" ]]
 			LocalPlayer.ChildAdded:connect(tenFootInterfaceChanged)
 		end
 		return {
-			SetTopStatEnabled = function(_, Value) --[[ Line: 341 ]]
+			SetTopStatEnabled = function(_, Value)
 				-- upvalues: TopStatEnabled (ref), DisplayedStat (ref), Callback (ref)
 				TopStatEnabled = Value
 				
@@ -327,19 +327,19 @@ local v1 = (function() --[[ Line: 30 | Named "CreateModule" ]]
 end)()
 
 return {
-	IsEnabled = function(_) --[[ Line: 361 ]]
+	IsEnabled = function(_)
 		-- upvalues: IsTenFootInterface (copy)
 		return IsTenFootInterface
 	end,
-	CreateHealthBar = function(_) --[[ Line: 365 ]]
+	CreateHealthBar = function(_)
 		-- upvalues: v1 (copy)
 		return v1:CreateHealthBar()
 	end,
-	CreateAccountType = function(_, p1) --[[ Line: 369 ]]
+	CreateAccountType = function(_, p1)
 		-- upvalues: v1 (copy)
 		return v1:CreateAccountType(p1)
 	end,
-	SetupTopStat = function(_) --[[ Line: 373 ]]
+	SetupTopStat = function(_)
 		-- upvalues: v1 (copy)
 		return v1:SetupTopStat()
 	end

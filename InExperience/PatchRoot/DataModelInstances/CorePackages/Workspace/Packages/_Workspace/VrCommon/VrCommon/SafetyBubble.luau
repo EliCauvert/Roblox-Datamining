@@ -8,7 +8,7 @@ local CreateFunction = require(script:FindFirstAncestor("VrCommon").Parent.AppCo
 local FIntSafetyBubbleRadiusModule = require(script.Parent.FIntSafetyBubbleRadius)
 local ScaledFIntSafetyBubbleTransparencyPercentModule = require(script.Parent.FIntSafetyBubbleTransparencyPercent) * 0.01
 
-function SafetyBubbleModule.new() --[[ Line: 26 ]]
+function SafetyBubbleModule.new()
 	-- upvalues: SafetyBubbleModule (copy), UserGameSettings (copy), CreateFunction (copy), RbxAnalyticsService (copy)
 	local self = setmetatable({}, SafetyBubbleModule)
 	self.subjects = {}
@@ -16,7 +16,7 @@ function SafetyBubbleModule.new() --[[ Line: 26 ]]
 	self.enabled = self.mode ~= Enum.VRSafetyBubbleMode.Anyone
 	self.updateCadence = 0.2
 	self.Toggled = CreateFunction("BindableEvent")({ Name = "SafetyBubbleToggled" })
-	UserGameSettings:GetPropertyChangedSignal("VRSafetyBubbleMode"):Connect(function() --[[ Line: 39 ]]
+	UserGameSettings:GetPropertyChangedSignal("VRSafetyBubbleMode"):Connect(function()
 		-- upvalues: self (copy), UserGameSettings (upval), RbxAnalyticsService (upval)
 		self.mode = UserGameSettings.VRSafetyBubbleMode
 		local IsNotModeMatch = self.mode ~= Enum.VRSafetyBubbleMode.Anyone
@@ -31,20 +31,20 @@ function SafetyBubbleModule.new() --[[ Line: 26 ]]
 	return self
 end
 
-function SafetyBubbleModule:ToggleEnabled() --[[ Line: 54 ]]
+function SafetyBubbleModule:ToggleEnabled()
 	-- upvalues: UserGameSettings (copy)
 	UserGameSettings.VRSafetyBubbleMode = self.enabled and Enum.VRSafetyBubbleMode.Anyone or Enum.VRSafetyBubbleMode.NoOne
 end
 
-function SafetyBubbleModule:HasToolAncestor(Parent) --[[ Line: 59 ]]
+function SafetyBubbleModule:HasToolAncestor(Parent)
 	return Parent ~= nil and Parent.Parent ~= nil and (Parent.Parent:IsA("Tool") or self:HasToolAncestor(Parent.Parent))
 end
 
-function SafetyBubbleModule.IsValidPartToModify(p1, Object): boolean --[[ Line: 66 ]]
+function SafetyBubbleModule.IsValidPartToModify(p1, Object): boolean
 	return if Object:IsA("BasePart") or Object:IsA("Decal") then not p1:HasToolAncestor(Object) else false
 end
 
-function SafetyBubbleModule:CachePartsRecursive(Object, SubjectIndex) --[[ Line: 73 ]]
+function SafetyBubbleModule:CachePartsRecursive(Object, SubjectIndex)
 	if Object then
 		if self:IsValidPartToModify(Object) then
 			self.subjects[SubjectIndex].cachedParts[Object] = true
@@ -56,7 +56,7 @@ function SafetyBubbleModule:CachePartsRecursive(Object, SubjectIndex) --[[ Line:
 	end
 end
 
-function SafetyBubbleModule:TeardownTransparency(SubjectIndex) --[[ Line: 85 ]]
+function SafetyBubbleModule:TeardownTransparency(SubjectIndex)
 	for i, _ in pairs(self.subjects[SubjectIndex].cachedParts) do
 		i.LocalTransparencyModifier = 0
 	end
@@ -82,7 +82,7 @@ function SafetyBubbleModule:TeardownTransparency(SubjectIndex) --[[ Line: 85 ]]
 	end
 end
 
-function SafetyBubbleModule:GetSubjectIndex(Character): number --[[ Line: 111 ]]
+function SafetyBubbleModule:GetSubjectIndex(Character): number
 	local CountSubjects = #self.subjects
 	local Count = 1
 	while Count <= CountSubjects do
@@ -94,18 +94,18 @@ function SafetyBubbleModule:GetSubjectIndex(Character): number --[[ Line: 111 ]]
 	return 0
 end
 
-function SafetyBubbleModule:SubjectExists(Character): boolean --[[ Line: 125 ]]
+function SafetyBubbleModule:SubjectExists(Character): boolean
 	return self:GetSubjectIndex(Character) > 0
 end
 
-function SafetyBubbleModule:SetupTransparency(Character) --[[ Line: 131 ]]
+function SafetyBubbleModule:SetupTransparency(Character)
 	local SubjectIndex = self:GetSubjectIndex(Character)
 	
 	if SubjectIndex == 0 then return end
 	if self.subjects[SubjectIndex].descendantAddedConn then
 		self.subjects[SubjectIndex].descendantAddedConn:disconnect()
 	end
-	self.subjects[SubjectIndex].descendantAddedConn = Character.DescendantAdded:Connect(function(Descendant) --[[ Line: 140 ]]
+	self.subjects[SubjectIndex].descendantAddedConn = Character.DescendantAdded:Connect(function(Descendant)
 		-- upvalues: SubjectIndex (ref), self (copy), Character (copy)
 		SubjectIndex = self:GetSubjectIndex(Character)
 		
@@ -119,7 +119,7 @@ function SafetyBubbleModule:SetupTransparency(Character) --[[ Line: 131 ]]
 	if self.descendantRemovingConn then
 		self.descendantRemovingConn:disconnect()
 	end
-	self.descendantRemovingConn = Character.DescendantRemoving:connect(function(Descendant) --[[ Line: 156 ]]
+	self.descendantRemovingConn = Character.DescendantRemoving:connect(function(Descendant)
 		-- upvalues: SubjectIndex (ref), self (copy), Character (copy)
 		SubjectIndex = self:GetSubjectIndex(Character)
 		
@@ -132,7 +132,7 @@ function SafetyBubbleModule:SetupTransparency(Character) --[[ Line: 131 ]]
 	self:CachePartsRecursive(Character, SubjectIndex)
 end
 
-function SafetyBubbleModule:AddSubject(Character) --[[ Line: 172 ]]
+function SafetyBubbleModule:AddSubject(Character)
 	local CountSubjects = #self.subjects
 	local Count = 1
 	while Count <= CountSubjects do
@@ -153,7 +153,7 @@ function SafetyBubbleModule:AddSubject(Character) --[[ Line: 172 ]]
 	self:SetupTransparency(Character)
 end
 
-function SafetyBubbleModule:update(p1) --[[ Line: 202 ]]
+function SafetyBubbleModule:update(p1)
 	-- upvalues: FIntSafetyBubbleRadiusModule (copy), VRService (copy), Players (copy), ScaledFIntSafetyBubbleTransparencyPercentModule (copy)
 	local CurrentCamera = workspace.CurrentCamera
 	

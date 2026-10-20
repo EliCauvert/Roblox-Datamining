@@ -12,35 +12,35 @@ local HelpModal = RoactModule.PureComponent:extend("HelpModal")
 local FFlagTopBarSignalizeScreenSize = require(CorePackages.Workspace.Packages.CoreGuiCommon).Flags.FFlagTopBarSignalizeScreenSize
 local GetFFlagEnableSendImageFeedbackToBackendModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Flags.GetFFlagEnableSendImageFeedbackToBackend)
 
-function HelpModal.init(p1) --[[ Line: 37 ]]
+function HelpModal.init(p1)
 	-- upvalues: FFlagTopBarSignalizeScreenSize (copy), DisplayModule (copy), SignalsModule (copy)
-	function p1.onDismiss() --[[ Line: 38 ]]
+	function p1.onDismiss()
 		-- upvalues: p1 (copy)
 		p1.props.showHelpModal(false)
 	end
 	
 	if FFlagTopBarSignalizeScreenSize then
 		local GetViewportSizeFunction = DisplayModule.GetDisplayStore(false).getViewportSize
-		p1.disposeScreenSize = SignalsModule.createEffect(function(p2) --[[ Line: 45 ]]
+		p1.disposeScreenSize = SignalsModule.createEffect(function(p2)
 			-- upvalues: p1 (copy), GetViewportSizeFunction (copy)
 			p1:setState({ screenSize = GetViewportSizeFunction(p2) })
 		end)
 	end
 end
 
-function HelpModal.willUnmount(p1) --[[ Line: 53 ]]
+function HelpModal.willUnmount(p1)
 	-- upvalues: FFlagTopBarSignalizeScreenSize (copy)
 	if FFlagTopBarSignalizeScreenSize then
 		p1.disposeScreenSize()
 	end
 end
 
-function HelpModal.render(p1) --[[ Line: 59 ]]
+function HelpModal.render(p1)
 	-- upvalues: WithLocalizationFunction (copy), GetFFlagEnableSendImageFeedbackToBackendModule (copy), RoactModule (copy), ModalDialogModule (copy), FFlagTopBarSignalizeScreenSize (copy), ThemedTextLabelModule (copy)
 	return WithLocalizationFunction({
 		mainHeader = "CoreScripts.Feedback.Help.MainHeader",
 		instructionLabel = if GetFFlagEnableSendImageFeedbackToBackendModule() then "CoreScripts.Feedback.Help.InstructionsWithImage" else "CoreScripts.Feedback.Help.Instructions"
-	})(function(p2) --[[ Line: 65 ]]
+	})(function(p2)
 		-- upvalues: RoactModule (upval), ModalDialogModule (upval), p1 (copy), FFlagTopBarSignalizeScreenSize (upval), ThemedTextLabelModule (upval)
 		return RoactModule.createElement(ModalDialogModule, {
 			maxHeight = 130,
@@ -76,16 +76,16 @@ function HelpModal.render(p1) --[[ Line: 59 ]]
 	end)
 end
 
-return RoactRoduxModule.connect(function(p1) --[[ Line: 103 ]]
+return RoactRoduxModule.connect(function(p1)
 	-- upvalues: FFlagTopBarSignalizeScreenSize (copy)
 	return {
 		screenSize = if FFlagTopBarSignalizeScreenSize then nil else p1.displayOptions.screenSize,
 		visible = p1.common.showHelpModal
 	}
-end, function(Callback) --[[ Line: 108 ]]
+end, function(Callback)
 	-- upvalues: ShowHelpModalThunkModule (copy)
 	return {
-		showHelpModal = function(p1) --[[ Line: 110 ]]
+		showHelpModal = function(p1)
 			-- upvalues: Callback (copy), ShowHelpModalThunkModule (upval)
 			Callback(ShowHelpModalThunkModule(p1))
 		end

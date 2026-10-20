@@ -5,12 +5,12 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local GetPresetChatStoreModule = require(ExpChat.Stores.GetPresetChatStore)
 local PresetCooldownContextModule = require(script.Parent.PresetCooldownContext)
 
-return function(p1) --[[ Line: 13 | Named "PresetCooldownProvider" ]]
+return function(p1)
 	-- upvalues: GetPresetChatStoreModule (copy), SignalsReactModule (copy), ReactModule (copy), PresetCooldownContextModule (copy)
 	local PresetChatStoreModule = GetPresetChatStoreModule(false)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(PresetChatStoreModule.getPresetCooldownEndsAt)
 	local IsClockTimeBelow: boolean = UseSignalStateResult ~= nil and os.clock() < UseSignalStateResult
-	ReactModule.useEffect(function() --[[ Line: 18 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult (copy), PresetChatStoreModule (copy)
 		if UseSignalStateResult == nil then return end
 		local UseSignalStateResultDelta = UseSignalStateResult - os.clock()
@@ -21,7 +21,7 @@ return function(p1) --[[ Line: 13 | Named "PresetCooldownProvider" ]]
 			return
 		end
 		local Flag = false
-		task.delay(UseSignalStateResultDelta, function() --[[ Line: 28 ]]
+		task.delay(UseSignalStateResultDelta, function()
 			-- upvalues: Flag (ref), PresetChatStoreModule (upval), UseSignalStateResult (upval)
 			if Flag then return end
 			if PresetChatStoreModule.getPresetCooldownEndsAt(false) == UseSignalStateResult then
@@ -29,7 +29,7 @@ return function(p1) --[[ Line: 13 | Named "PresetCooldownProvider" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 36 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end
@@ -40,7 +40,7 @@ return function(p1) --[[ Line: 13 | Named "PresetCooldownProvider" ]]
 	})
 	
 	return ReactModule.createElement(PresetCooldownContextModule.Provider, {
-		value = ReactModule.useMemo(function() --[[ Line: 41 ]]
+		value = ReactModule.useMemo(function()
 			-- upvalues: UseSignalStateResult (copy), IsClockTimeBelow (copy)
 			return {
 				endsAt = UseSignalStateResult,

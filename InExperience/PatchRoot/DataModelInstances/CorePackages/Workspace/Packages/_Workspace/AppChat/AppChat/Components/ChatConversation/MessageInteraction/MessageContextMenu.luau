@@ -42,7 +42,7 @@ if config.unitTestScreenSize ~= nil then
 	LoggerModule:error("Default unit test screen size must ALWAYS BE NIL!")
 	error("Default unit test screen size was not nil.")
 end
-function MessageContextMenu(p1) --[[ Line: 86 ]]
+function MessageContextMenu(p1)
 	-- upvalues: CryoModule (copy), config (copy), FFlagAppChatSignalsReplyStoreModule (copy), GetReplyingToStoreModule (copy), UseReplyingToMessageDispatchModule (copy), UseStyleFunction (copy), ReactModule (copy), Signal (copy), UseLayerCollectorFunction (copy), UseNavigationFunction (copy), UseDeviceTypeFunction (copy), UseAnalyticsModule (copy), UseLocalizationFunction (copy), PeekViewState (copy), EventNamesModule (copy), DeviceType (copy), Default (copy), GetFFlagAppChatEnableManualTranslationModule (copy), UseDispatchFunction (copy), AppChatNetworkingModule (copy), LoggerModule (copy), Images (copy), ContextualMenu (copy), MenuDirection (copy), PeekView (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local ReplyingToStoreModule = if FFlagAppChatSignalsReplyStoreModule then GetReplyingToStoreModule(false) else nil
@@ -61,7 +61,7 @@ function MessageContextMenu(p1) --[[ Line: 86 ]]
 		reportText = "Feature.Chat.Action.Report",
 		translateText = "Feature.Chat.Action.Translate"
 	})
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 112 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseAnalyticsModuleResult (copy), UnionResult (copy)
 		if UseAnalyticsModuleResult then
 			UseAnalyticsModuleResult.fireAnalyticsEvent(p2, {
@@ -74,27 +74,27 @@ function MessageContextMenu(p1) --[[ Line: 86 ]]
 		end
 	end, { UnionResult.message })
 	local UseRefResult1 = ReactModule.useRef(false)
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 132 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UnionResult (copy)
 		if UnionResult.inputBoxRef and UnionResult.inputBoxRef.current then
 			UnionResult.inputBoxRef.current:CaptureFocus()
 		end
 	end, { UnionResult.inputBoxRef })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 139 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy)
 		UseNavigationResult.goBack()
 	end, { UseNavigationResult and UseNavigationResult.goBack })
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 144 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy)
 		UseRefResult.current:fire()
 	end, { UseRefResult.current })
-	local UseResult4 = ReactModule.useCallback(function(Closed, _) --[[ Line: 150 ]]
+	local UseResult4 = ReactModule.useCallback(function(Closed, _)
 		-- upvalues: PeekViewState (upval), UseResult2 (copy)
 		if Closed == PeekViewState.Closed then
 			UseResult2()
 		end
 	end, { UseResult2 })
-	ReactModule.useEffect(function() --[[ Line: 156 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult (copy), EventNamesModule (upval), UnionResult (copy), UseRefResult1 (copy)
 		UseResult(EventNamesModule.ChatMessageMenuOpened)
 		
@@ -102,7 +102,7 @@ function MessageContextMenu(p1) --[[ Line: 86 ]]
 			UseRefResult1.current = UnionResult.inputBoxRef.current:IsFocused()
 		end
 	end, {})
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 165 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UnitTestDeviceType (copy), DeviceType (upval), UseResult3 (copy), UseResult2 (copy)
 		if UnitTestDeviceType == DeviceType.Phone then
 			UseResult3()
@@ -112,7 +112,7 @@ function MessageContextMenu(p1) --[[ Line: 86 ]]
 			UseResult2()
 		end
 	end, { UnitTestDeviceType, UseResult3, UseResult2 })
-	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 173 ]]
+	local UseResult6 = ReactModule.useCallback(function()
 		-- upvalues: UseResult5 (copy), UseRefResult1 (copy), UseResult1 (copy)
 		UseResult5()
 		
@@ -120,7 +120,7 @@ function MessageContextMenu(p1) --[[ Line: 86 ]]
 			UseResult1()
 		end
 	end, { UseResult5, UseRefResult1.current, UseResult1 })
-	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 181 ]]
+	local UseResult7 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy), EventNamesModule (upval), UseResult5 (copy), FFlagAppChatSignalsReplyStoreModule (upval), ReplyingToStoreModule (copy), UnionResult (copy), UseReplyingToMessageDispatchModuleResult (copy), UseResult1 (copy)
 		UseResult(EventNamesModule.ChatMessageMenuReplyBtnActivated)
 		UseResult5()
@@ -136,7 +136,7 @@ function MessageContextMenu(p1) --[[ Line: 86 ]]
 		if FFlagAppChatSignalsReplyStoreModule then ReplyingToStoreModule else nil,
 		UseReplyingToMessageDispatchModuleResult, UnionResult.message, UseResult1
 	})
-	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 205 ]]
+	local UseResult8 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy), EventNamesModule (upval), UseResult5 (copy), Default (upval), UnionResult (copy)
 		UseResult(EventNamesModule.ChatMessageMenuCopyBtnActivated)
 		UseResult5()
@@ -145,23 +145,23 @@ function MessageContextMenu(p1) --[[ Line: 86 ]]
 			text = UnionResult.message.content
 		})
 	end, { UseResult, UseResult5, UnionResult.message })
-	local UseResult9 = ReactModule.useCallback(function() --[[ Line: 220 ]] end)
-	local UseResult10 = ReactModule.useCallback(function() --[[ Line: 224 ]] end)
+	local UseResult9 = ReactModule.useCallback(function() end)
+	local UseResult10 = ReactModule.useCallback(function() end)
 	local UseResult11 = nil
 	
 	if GetFFlagAppChatEnableManualTranslationModule() then
 		local UseDispatchResult = UseDispatchFunction()
-		UseResult11 = ReactModule.useCallback(function() --[[ Line: 232 ]]
+		UseResult11 = ReactModule.useCallback(function()
 			-- upvalues: UseResult5 (copy), UseDispatchResult (copy), AppChatNetworkingModule (upval), UnionResult (copy), LoggerModule (upval)
 			UseResult5()
-			UseDispatchResult(AppChatNetworkingModule.rodux.TranslateUserMessage.API(UnionResult.message.conversationId, UnionResult.message.id)):catch(function(Err) --[[ Line: 236 ]]
+			UseDispatchResult(AppChatNetworkingModule.rodux.TranslateUserMessage.API(UnionResult.message.conversationId, UnionResult.message.id)):catch(function(Err)
 				-- upvalues: LoggerModule (upval)
 				LoggerModule:error("Error translating message: ", Err)
 			end)
 		end, { UnionResult.message, UseResult5, UseDispatchResult })
 	end
-	local UseResult12 = ReactModule.useCallback(function() --[[ Line: 248 ]] end)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 253 ]]
+	local UseResult12 = ReactModule.useCallback(function() end)
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Images (upval), UseLocalizationResult (copy), UseResult7 (copy), UseResult8 (copy), UnionResult (copy), UseResult9 (copy), Tokens (copy), UseResult10 (copy), GetFFlagAppChatEnableManualTranslationModule (upval), UseResult11 (ref), UseResult12 (copy)
 		local List = {
 			{

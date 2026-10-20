@@ -8,7 +8,7 @@ local ItemCardStatus = ItemCardComponents.ItemCardStatus
 local ItemCardIcon = ItemCardComponents.ItemCardIcon
 local _ = require(AvatarExperienceCommon.Utils.shouldRenderIndicatorStack)
 
-local function renderStatusContent(StatusContent) --[[ Line: 22 ]]
+local function renderStatusContent(StatusContent)
 	-- upvalues: ReactModule (copy), ItemCardStatus (copy), ItemCardBadge (copy), ItemCardIcon (copy)
 	return if StatusContent.type == "text" then ReactModule.createElement(ItemCardStatus, { text = StatusContent.text }) elseif StatusContent.type == "badge" then ReactModule.createElement(ItemCardBadge, {
 		content = StatusContent.content,
@@ -16,7 +16,7 @@ local function renderStatusContent(StatusContent) --[[ Line: 22 ]]
 	}) else ReactModule.createElement(ItemCardIcon, { icon = StatusContent.icon })
 end
 
-return function(p1) --[[ Line: 35 | Named "IndicatorStack" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ItemCardIndicatorStack (copy), renderStatusContent (copy), ItemCardBadge (copy)
 	return ReactModule.createElement(ItemCardIndicatorStack, {
 		statusSlot = if p1.statusContent then renderStatusContent(p1.statusContent) else nil,

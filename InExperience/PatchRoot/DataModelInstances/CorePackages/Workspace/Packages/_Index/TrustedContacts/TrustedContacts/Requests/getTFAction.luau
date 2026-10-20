@@ -5,7 +5,7 @@ local MyHttpRequestModule = require(TrustedContacts.Networking.myHttpRequest)
 local _ = require(TrustedContacts.TrustedFriendActions.TFActionsEnum)
 local FFlagTFPassQRCodeSourceModule = require(TrustedContacts.Flags.FFlagTFPassQRCodeSource)
 
-return function(ProfileId, p1) --[[ Line: 17 ]]
+return function(ProfileId, p1)
 	-- upvalues: HttpModule (copy), FFlagTFPassQRCodeSourceModule (copy), HttpService (copy), MyHttpRequestModule (copy)
 	local Formatted = string.format("%s/profile-platform-api/v1/profiles/get", HttpModule.Url.APIS_URL)
 	local Json = nil
@@ -34,7 +34,7 @@ return function(ProfileId, p1) --[[ Line: 17 ]]
 				}
 			}
 		}
-	}):andThen(function(Result) --[[ Line: 50 ]]
+	}):andThen(function(Result)
 		return Result and Result.responseBody and Result.responseBody.components and Result.responseBody.components.TrustedFriendActions and Result.responseBody.components.TrustedFriendActions.action or nil
 	end)
 end

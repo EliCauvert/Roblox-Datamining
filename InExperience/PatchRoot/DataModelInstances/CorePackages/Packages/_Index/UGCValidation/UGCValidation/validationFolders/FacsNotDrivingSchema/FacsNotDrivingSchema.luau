@@ -10,7 +10,7 @@ return {
 	fflag = require(Parent.flags.getFFlagUGCValidationEnableR15plusSkinning),
 	categories = { ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD },
 	requiredData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
-	run = function(p1, p2) --[[ Line: 14 ]]
+	run = function(p1, p2)
 		-- upvalues: R15plusUtilsModule (copy), UGCValidationService (copy), ConstantsModule (copy), ErrorSourceStringsModule (copy)
 		local JointNameWhitelist = R15plusUtilsModule.getJointNameWhitelist()
 		

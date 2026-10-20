@@ -3,7 +3,7 @@ local _ = require(script.Parent.Types)
 local _ = require(script.Parent.Parent.UniversalMessage.Types)
 
 return {
-	presetMessageToContent = function(p1) --[[ Line: 19 ]]
+	presetMessageToContent = function(p1)
 		-- upvalues: EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy)
 		return if p1.presetId == "" then nil else {
 			kind = "preset",
@@ -11,7 +11,7 @@ return {
 			text = if EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint then p1.text else p1.value
 		}
 	end,
-	presetMessageToExpressionItem = function(p1) --[[ Line: 31 ]]
+	presetMessageToExpressionItem = function(p1)
 		-- upvalues: EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy)
 		local Config = if p1.presetId == "" then nil else {
 			kind = "preset",

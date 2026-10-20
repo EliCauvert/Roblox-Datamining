@@ -58,7 +58,7 @@ local config7 = {
 	lastUpdated = { 26, 10, 4 }
 }
 
-local function logToAllBackends(Config, Config1, Config2, CustomFields, CustomFields1) --[[ Line: 93 ]]
+local function logToAllBackends(Config, Config1, Config2, CustomFields, CustomFields1)
 	-- upvalues: TelemetryService (copy)
 	TelemetryService:LogEvent(Config, { customFields = CustomFields })
 	TelemetryService:LogEvent(Config1, { customFields = CustomFields })
@@ -68,7 +68,7 @@ end
 local StandardizedFields = { "addSessionId", "addOSInfo", "addSessionInfo" }
 
 return {
-	logKeyboardFocusModeEntered = function() --[[ Line: 124 ]]
+	logKeyboardFocusModeEntered = function()
 		-- upvalues: TelemetryService (copy), config1 (copy), StandardizedFields (copy), config (copy)
 		TelemetryService:LogEvent(config1, {
 			customFields = {},
@@ -79,14 +79,14 @@ return {
 			standardizedFields = StandardizedFields
 		})
 	end,
-	logFocusNavToggled = function(CustomFields) --[[ Line: 105 ]]
+	logFocusNavToggled = function(CustomFields)
 		-- upvalues: logToAllBackends (copy), config2 (copy), config6 (copy), config4 (copy)
 		logToAllBackends(config2, config6, config4, CustomFields, {
 			entry = CustomFields.entry,
 			input_type = CustomFields.input_type
 		})
 	end,
-	logFocusNavShortcutToggle = function(CustomFields) --[[ Line: 112 ]]
+	logFocusNavShortcutToggle = function(CustomFields)
 		-- upvalues: logToAllBackends (copy), config3 (copy), config7 (copy), config5 (copy)
 		logToAllBackends(config3, config7, config5, CustomFields, {
 			action = CustomFields.action,

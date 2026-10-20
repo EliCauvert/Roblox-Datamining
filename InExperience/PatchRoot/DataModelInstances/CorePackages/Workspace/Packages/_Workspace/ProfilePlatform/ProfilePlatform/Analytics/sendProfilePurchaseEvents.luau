@@ -7,7 +7,7 @@ local SendUnifiedEventLogFunction = AvatarExperienceAnalyticsModule.sendUnifiedE
 local UnifiedEventLogEnums = AvatarExperienceAnalyticsModule.UnifiedEventLogEnums
 local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
 
-return function(Action, List, Community) --[[ Line: 37 | Named "sendProfilePurchaseEvents" ]]
+return function(Action, List, Community)
 	-- upvalues: EnumsModule (copy), UnifiedLoggingSurface (copy), SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy)
 	local COMMUNITYPROFILE = if Community == EnumsModule.ProfileTypes.Community then UnifiedLoggingSurface.COMMUNITY_PROFILE else UnifiedLoggingSurface.USER_PROFILE
 	for _, value in List do

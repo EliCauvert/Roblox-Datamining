@@ -14,7 +14,7 @@ local config = {
 	[RequestTypeModule.VIPServer] = ProductTypeEnum.VIPServer
 }
 
-function getProductTypeFromRequestType(p1) --[[ Line: 22 ]]
+function getProductTypeFromRequestType(p1)
 	-- upvalues: config (copy), ProductTypeEnum (copy)
 	return config[p1] or ProductTypeEnum.Unknown
 end

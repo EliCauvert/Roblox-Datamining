@@ -5,16 +5,16 @@ local FFlagBuildAgentAdCampaignCardModule = require(BuildExperience.Flags.FFlagB
 local CreateAdCampaignSheetViewModule = require(script.Parent.CreateAdCampaignSheetView)
 local UseCreateAdCampaignSheetViewModelModule = require(script.Parent.useCreateAdCampaignSheetViewModel)
 
-local function _(p1) --[[ Line: 21 | Named "getCampaignTerms" ]]
+local function _(p1)
 	return if p1.runStartTimeMs == nil then nil else { runStartTimeMs = p1.runStartTimeMs }
 end
 
-local function MountedCreateAdCampaignSheet(p1) --[[ Line: 31 ]]
+local function MountedCreateAdCampaignSheet(p1)
 	-- upvalues: UseCreateAdCampaignSheetViewModelModule (copy), ReactModule (copy), CreateAdCampaignSheetViewModule (copy)
 	return ReactModule.createElement(CreateAdCampaignSheetViewModule, (UseCreateAdCampaignSheetViewModelModule(p1)))
 end
 
-return function(Tbl) --[[ Line: 38 | Named "CreateAdCampaignSheetContainer" ]]
+return function(Tbl)
 	-- upvalues: ReactModule (copy), FFlagEnablePaidAdsModule (copy), FFlagBuildAgentAdCampaignCardModule (copy), MountedCreateAdCampaignSheet (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Tbl.isOpen)
 	local IsOpen = FFlagEnablePaidAdsModule and Tbl.isOpen
@@ -38,7 +38,7 @@ return function(Tbl) --[[ Line: 38 | Named "CreateAdCampaignSheetContainer" ]]
 		UseStateResult2_1(config)
 		UseStateResult3 = config
 	end
-	ReactModule.useEffect(function() --[[ Line: 64 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Tbl (copy), UseStateResult2 (copy)
 		if Tbl.isOpen then
 			UseStateResult2(true)

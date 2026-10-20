@@ -10,7 +10,7 @@ local _ = require(script.Parent.MarketplaceCatalogCategoryStoreTypes)
 local FFlagMarketplaceCatalogCategoryTrackLastReceived = SharedFlagsModule.FFlagMarketplaceCatalogCategoryTrackLastReceived
 local FFlagSduiSkipEmptyCatalogCategoryHydration = SharedFlagsModule.FFlagSduiSkipEmptyCatalogCategoryHydration
 
-return function() --[[ Line: 23 | Named "createMarketplaceCatalogCategoryStore" ]]
+return function()
 	-- upvalues: FFlagMarketplaceCatalogCategoryTrackLastReceived (copy), SignalsModule (copy), CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy), FFlagSduiSkipEmptyCatalogCategoryHydration (copy)
 	local GetLastReceivedCategories = nil
 	local Callback = nil
@@ -21,11 +21,11 @@ return function() --[[ Line: 23 | Named "createMarketplaceCatalogCategoryStore" 
 	local DataCacheModule = CreateDataCacheModule()
 	local DataResolverModule = CreateDataResolverModule({
 		cache = DataCacheModule,
-		fetchFn = function(_) --[[ Line: 37 ]]
+		fetchFn = function(_)
 			-- upvalues: PromiseModule (upval)
 			return PromiseModule.resolve({})
 		end,
-		onClear = if FFlagSduiSkipEmptyCatalogCategoryHydration then function() --[[ Line: 46 ]]
+		onClear = if FFlagSduiSkipEmptyCatalogCategoryHydration then function()
 			-- upvalues: Callback (ref)
 			if Callback then
 				Callback({})
@@ -33,7 +33,7 @@ return function() --[[ Line: 23 | Named "createMarketplaceCatalogCategoryStore" 
 		end else nil
 	})
 	
-	local function updateMarketplaceCatalogCategories(p1) --[[ Line: 60 ]]
+	local function updateMarketplaceCatalogCategories(p1)
 		-- upvalues: FFlagSduiSkipEmptyCatalogCategoryHydration (upval), Callback (ref), DataCacheModule (copy)
 		if not FFlagSduiSkipEmptyCatalogCategoryHydration or next(p1) ~= nil then
 			Callback(p1)
@@ -43,7 +43,7 @@ return function() --[[ Line: 23 | Named "createMarketplaceCatalogCategoryStore" 
 		end
 	end
 	
-	local function clear() --[[ Line: 73 ]]
+	local function clear()
 		-- upvalues: Callback (ref), DataResolverModule (copy)
 		if Callback then
 			Callback({})

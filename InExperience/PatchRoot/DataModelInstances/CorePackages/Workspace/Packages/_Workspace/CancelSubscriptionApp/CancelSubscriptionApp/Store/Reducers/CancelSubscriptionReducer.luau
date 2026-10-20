@@ -2,7 +2,7 @@
 local CancelUserSubscriptionAsyncPromptStateEnumModule = require(CancelSubscriptionApp.Enums.CancelUserSubscriptionAsyncPromptStateEnum)
 local _ = require(CancelSubscriptionApp.Store.Types)
 
-local function _() --[[ Line: 22 | Named "createInitialState" ]]
+local function _()
 	-- upvalues: CancelUserSubscriptionAsyncPromptStateEnumModule (copy)
 	return {
 		promptState = CancelUserSubscriptionAsyncPromptStateEnumModule.None
@@ -12,13 +12,13 @@ end
 return (require(CancelSubscriptionApp.Parent.Rodux).createReducer({
 	promptState = CancelUserSubscriptionAsyncPromptStateEnumModule.None
 }, {
-	[require(CancelSubscriptionApp.Store.Actions.CancelSubscriptionEnded).name] = function(_, _) --[[ Line: 29 ]]
+	[require(CancelSubscriptionApp.Store.Actions.CancelSubscriptionEnded).name] = function(_, _)
 		-- upvalues: CancelUserSubscriptionAsyncPromptStateEnumModule (copy)
 		return {
 			promptState = CancelUserSubscriptionAsyncPromptStateEnumModule.None
 		}
 	end,
-	[require(CancelSubscriptionApp.Store.Actions.CancelSubscriptionSucceeded).name] = function(Tbl, p1) --[[ Line: 35 ]]
+	[require(CancelSubscriptionApp.Store.Actions.CancelSubscriptionSucceeded).name] = function(Tbl, p1)
 		-- upvalues: CancelUserSubscriptionAsyncPromptStateEnumModule (copy)
 		local Copy = table.clone(Tbl)
 		Copy.subscriptionId = p1.subscriptionId
@@ -26,7 +26,7 @@ return (require(CancelSubscriptionApp.Parent.Rodux).createReducer({
 		
 		return Copy
 	end,
-	[require(CancelSubscriptionApp.Store.Actions.CancelSubscriptionFailed).name] = function(Tbl, p1) --[[ Line: 44 ]]
+	[require(CancelSubscriptionApp.Store.Actions.CancelSubscriptionFailed).name] = function(Tbl, p1)
 		-- upvalues: CancelUserSubscriptionAsyncPromptStateEnumModule (copy)
 		local Copy = table.clone(Tbl)
 		Copy.errorState = p1.errorState
@@ -35,7 +35,7 @@ return (require(CancelSubscriptionApp.Parent.Rodux).createReducer({
 		
 		return Copy
 	end,
-	[require(CancelSubscriptionApp.Store.Actions.CancelSubscriptionRequested).name] = function(Tbl, p1) --[[ Line: 54 ]]
+	[require(CancelSubscriptionApp.Store.Actions.CancelSubscriptionRequested).name] = function(Tbl, p1)
 		-- upvalues: CancelUserSubscriptionAsyncPromptStateEnumModule (copy)
 		local Copy = table.clone(Tbl)
 		Copy.subscriptionId = p1.subscriptionId
@@ -43,7 +43,7 @@ return (require(CancelSubscriptionApp.Parent.Rodux).createReducer({
 		
 		return Copy
 	end,
-	[require(CancelSubscriptionApp.Store.Actions.CancelSubscriptionStarted).name] = function(Tbl, p1) --[[ Line: 63 ]]
+	[require(CancelSubscriptionApp.Store.Actions.CancelSubscriptionStarted).name] = function(Tbl, p1)
 		-- upvalues: CancelUserSubscriptionAsyncPromptStateEnumModule (copy)
 		local Copy = table.clone(Tbl)
 		Copy.promptState = CancelUserSubscriptionAsyncPromptStateEnumModule.Request

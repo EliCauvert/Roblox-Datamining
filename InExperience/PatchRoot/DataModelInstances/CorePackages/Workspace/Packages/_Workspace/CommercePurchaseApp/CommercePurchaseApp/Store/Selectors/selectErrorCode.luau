@@ -2,6 +2,6 @@
 local _ = require(CommercePurchaseApp.Enums.ErrorCodeEnum)
 local _ = require(CommercePurchaseApp.Store.Types)
 
-return function(p1) --[[ Line: 8 | Named "selectErrorCode" ]]
+return function(p1)
 	return p1.commercePurchaseState.errorCode
 end

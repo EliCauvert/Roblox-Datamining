@@ -1,7 +1,7 @@
 ﻿local ImmutableJoinDictionariesUseTableClone = game:DefineFastFlag("ImmutableJoinDictionariesUseTableClone", false)
 
 return {
-	JoinDictionaries = function(...) --[[ Line: 12 ]]
+	JoinDictionaries = function(...)
 		-- upvalues: ImmutableJoinDictionariesUseTableClone (copy)
 		local Selected: number = select("#", ...)
 		
@@ -25,7 +25,7 @@ return {
 			return t
 		end
 	end,
-	JoinLists = function(...) --[[ Line: 44 ]]
+	JoinLists = function(...)
 		local t = {}
 		
 		for i = 1, select("#", ...) do
@@ -38,13 +38,13 @@ return {
 		end
 		return t
 	end,
-	Set = function(Tbl, Key, p1) --[[ Line: 62 ]]
+	Set = function(Tbl, Key, p1)
 		local Copy = table.clone(Tbl)
 		Copy[Key] = p1
 		
 		return Copy
 	end,
-	Append = function(p1, ...) --[[ Line: 71 ]]
+	Append = function(p1, ...)
 		local t = {}
 		local CountP2 = #p1
 		
@@ -56,7 +56,7 @@ return {
 		end
 		return t
 	end,
-	RemoveFromDictionary = function(List, ...) --[[ Line: 89 ]]
+	RemoveFromDictionary = function(List, ...)
 		local t = {}
 		local Flag = nil
 		
@@ -76,7 +76,7 @@ return {
 		end
 		return t
 	end,
-	RemoveFromList = function(p2, p3) --[[ Line: 111 ]]
+	RemoveFromList = function(p2, p3)
 		local List = {}
 		
 		for i = 1, #p2 do
@@ -86,7 +86,7 @@ return {
 		end
 		return List
 	end,
-	RemoveRangeFromList = function(p4, p5, p6) --[[ Line: 126 ]]
+	RemoveRangeFromList = function(p4, p5, p6)
 		local List = {}
 		
 		for i = 1, #p4 do
@@ -96,7 +96,7 @@ return {
 		end
 		return List
 	end,
-	RemoveValueFromList = function(p7, p8) --[[ Line: 141 ]]
+	RemoveValueFromList = function(p7, p8)
 		local List = {}
 		
 		for i = 1, #p7 do

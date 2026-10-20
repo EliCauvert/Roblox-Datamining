@@ -2,13 +2,13 @@
 local IsReactComponentModule = require(script.Parent.isReactComponent)
 local UsageGraphModule = require(script.Parent.UsageGraph)
 
-return function(p1, p2, p3) --[[ Line: 11 | Named "trackMemberAccess" ]]
+return function(p1, p2, p3)
 	-- upvalues: IsReactComponentModule (copy), CryoModule (copy), UsageGraphModule (copy)
 	local JoinResults = {}
 	local t = {}
 	local Callback = p3 or IsReactComponentModule
 	
-	local function wrap(Text, List) --[[ Line: 17 ]]
+	local function wrap(Text, List)
 		-- upvalues: Callback (copy), JoinResults (copy), t (copy), wrap (copy), CryoModule (upval)
 		local t1 = {}
 		local t2 = {}
@@ -29,7 +29,7 @@ return function(p1, p2, p3) --[[ Line: 11 | Named "trackMemberAccess" ]]
 			end
 		end
 		return (setmetatable(t2, {
-			__index = function(_, Text1) --[[ Line: 41 ]]
+			__index = function(_, Text1)
 				-- upvalues: t1 (copy), t2 (copy), Text (copy), JoinResults (upval), CryoModule (upval)
 				local Entry = t1[Text1]
 				

@@ -5,7 +5,7 @@ local UseStateFunction = ReactModule.useState
 local Context = ReactModule.createContext(nil)
 
 return {
-	Provider = function(p1) --[[ Line: 102 ]]
+	Provider = function(p1)
 		-- upvalues: UseStateFunction (copy), ReactModule (copy), Context (copy)
 		local UseStateResult, UseStateResult2 = UseStateFunction({})
 		local UseStateResult1, UseStateResult2_1 = UseStateFunction({})
@@ -28,7 +28,7 @@ return {
 			}
 		}, p1.children)
 	end,
-	use = function() --[[ Line: 129 ]]
+	use = function()
 		-- upvalues: ReactModule (copy), Context (copy)
 		local UseContextResult = ReactModule.useContext(Context)
 		

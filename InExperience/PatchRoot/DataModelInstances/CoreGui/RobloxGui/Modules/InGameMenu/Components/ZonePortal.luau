@@ -37,11 +37,11 @@ ZonePortal.validateProps = T.strictInterface({
 	setCurrentZone = T.optional(T.callback)
 })
 
-function ZonePortal.render(p1) --[[ Line: 56 ]]
+function ZonePortal.render(p1)
 	-- upvalues: config (copy), WithCursorMigration (copy), Roact (copy), CursorType (copy)
 	local Entry = config[p1.props.direction]
 	
-	return WithCursorMigration(function(Callback) --[[ Line: 60 ]]
+	return WithCursorMigration(function(Callback)
 		-- upvalues: Roact (upval), Entry (copy), CursorType (upval), p1 (copy)
 		return Roact.createElement("Frame", {
 			Size = Entry.size,
@@ -50,7 +50,7 @@ function ZonePortal.render(p1) --[[ Line: 56 ]]
 			Selectable = true,
 			ZIndex = 2147483647,
 			SelectionImageObject = Callback(CursorType.Invisible),
-			[Roact.Event.SelectionGained] = function() --[[ Line: 68 ]]
+			[Roact.Event.SelectionGained] = function()
 				-- upvalues: p1 (upval)
 				p1.props.setCurrentZone(p1.props.targetZone)
 			end
@@ -58,10 +58,10 @@ function ZonePortal.render(p1) --[[ Line: 56 ]]
 	end)
 end
 
-return (RoactRodux.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 75 ]]
+return (RoactRodux.UNSTABLE_connect2(nil, function(Callback)
 	-- upvalues: SetCurrentZoneModule (copy)
 	return {
-		setCurrentZone = function(p1) --[[ Line: 77 ]]
+		setCurrentZone = function(p1)
 			-- upvalues: Callback (copy), SetCurrentZoneModule (upval)
 			return Callback(SetCurrentZoneModule(p1))
 		end

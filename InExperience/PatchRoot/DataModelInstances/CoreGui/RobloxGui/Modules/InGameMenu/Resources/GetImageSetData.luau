@@ -1,6 +1,6 @@
 ﻿local Config = nil
 
-function make_assets_1x() --[[ Line: 11 ]]
+function make_assets_1x()
 	-- upvalues: Config (ref)
 	Config = {
 		["LuaApp/9-slice/gr-badge"] = {
@@ -1408,7 +1408,7 @@ end
 
 local Config1 = nil
 
-function make_assets_3x() --[[ Line: 295 ]]
+function make_assets_3x()
 	-- upvalues: Config1 (ref)
 	Config1 = {
 		["LuaApp/9-slice/gr-badge"] = {
@@ -2761,7 +2761,7 @@ end
 
 local Config2 = nil
 
-function make_assets_2x() --[[ Line: 568 ]]
+function make_assets_2x()
 	-- upvalues: Config2 (ref)
 	Config2 = {
 		["LuaApp/9-slice/gr-badge"] = {
@@ -4122,7 +4122,7 @@ function make_assets_2x() --[[ Line: 568 ]]
 	}
 end
 
-return function(p1: number) --[[ Line: 842 ]]
+return function(p1: number)
 	-- upvalues: Config1 (ref), Config2 (ref), Config (ref)
 	if p1 > 2.5 then
 		if not Config1 then

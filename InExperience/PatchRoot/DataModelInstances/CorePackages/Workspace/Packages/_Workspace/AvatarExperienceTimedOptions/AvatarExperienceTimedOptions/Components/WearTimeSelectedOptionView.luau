@@ -12,10 +12,10 @@ local WearTimeListModule = require(script.Parent.WearTimeList)
 local _ = require(script.Parent.useWearTimeSelectedOptionViewModel)
 local UseWearTimePopoverFocusNavigationBindingsModule = require(script.Parent.useWearTimePopoverFocusNavigationBindings)
 
-return function(p1) --[[ Line: 21 | Named "WearTimeSelectedOptionView" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseWearTimePopoverFocusNavigationBindingsModule (copy), View (copy), FoundationModule (copy), Enums (copy), Text (copy), NumberLocalization (copy), Popover (copy), PopoverAlign (copy), PopoverSide (copy), WearTimeListModule (copy)
 	local Tokens = p1.tokens
-	local UseWearTimePopoverFocusNavigationBindingsModuleResult = UseWearTimePopoverFocusNavigationBindingsModule(ReactModule.useCallback(function() --[[ Line: 24 ]]
+	local UseWearTimePopoverFocusNavigationBindingsModuleResult = UseWearTimePopoverFocusNavigationBindingsModule(ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		p1.setIsOpen(false)
 	end, { p1.setIsOpen }), p1.isOpen, p1.anchorRef)
@@ -26,7 +26,7 @@ return function(p1) --[[ Line: 21 | Named "WearTimeSelectedOptionView" ]]
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
 		ref = p1.anchorRef,
-		[ReactModule.Event.Activated] = function() --[[ Line: 39 ]]
+		[ReactModule.Event.Activated] = function()
 			-- upvalues: p1 (copy)
 			p1.setIsOpen(not p1.isOpen)
 		end
@@ -84,7 +84,7 @@ return function(p1) --[[ Line: 21 | Named "WearTimeSelectedOptionView" ]]
 				hasArrow = false,
 				align = PopoverAlign.Start,
 				side = PopoverSide.Top,
-				onPressedOutside = function() --[[ Line: 107 ]]
+				onPressedOutside = function()
 					-- upvalues: p1 (copy)
 					p1.setIsOpen(false)
 				end

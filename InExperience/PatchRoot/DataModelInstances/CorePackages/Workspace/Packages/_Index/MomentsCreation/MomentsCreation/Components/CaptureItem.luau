@@ -12,10 +12,10 @@ local FFlagMomentsGalleryCaptureOverlayUpdateModule = require(MomentsCreation.Fl
 local UseCallbackFunction = ReactModule.useCallback
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1) --[[ Line: 37 ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseCallbackFunction (copy), ReactModule (copy), View (copy), FoundationModule (copy), GradientBackdrop (copy), FFlagMomentsGalleryCaptureOverlayUpdateModule (copy), Checkbox (copy), Text (copy), GetFormatTimeModule (copy), GetCaptureContentModule (copy)
 	local UseTokensResult = UseTokensFunction()
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 40 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: p1 (copy)
 		p1.onActivated(p1.capture)
 	end, { p1.capture, p1.onActivated })
@@ -48,7 +48,7 @@ return function(p1) --[[ Line: 37 ]]
 				isChecked = true,
 				label = "",
 				AnchorPoint = Vector2.new(1, 0),
-				onActivated = function(_) --[[ Line: 72 ]]
+				onActivated = function(_)
 					-- upvalues: UseCallbackResult (copy)
 					UseCallbackResult()
 				end,

@@ -14,12 +14,12 @@ local _UDim2 = UDim2.new(0, 468, 0, 560)
 local t = {}
 local t1 = {}
 local Analytics = {
-	sendEvent = function(...) --[[ Line: 25 ]]
+	sendEvent = function(...)
 		print("Analytics:", ...)
 	end
 }
 
-return function(p1) --[[ Line: 37 | Named "NodeStoryProviders" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), AbuseReportAnalyticsProvider (copy), Analytics (copy), ArTranslationProvider (copy), t1 (copy), LoaderProvider (copy), t (copy), LayoutSlotsProvider (copy), InlineSlots (copy), OverlaidControlsProvider (copy), View (copy), _UDim2 (copy), FoundationModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	

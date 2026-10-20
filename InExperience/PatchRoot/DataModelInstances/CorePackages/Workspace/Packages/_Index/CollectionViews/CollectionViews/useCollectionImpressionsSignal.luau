@@ -2,7 +2,7 @@
 local ReactModule = require(Parent.React)
 local Signal = require(Parent.AppCommonLib).Signal
 
-return function(p1) --[[ Line: 18 | Named "useCollectionImpressionsSignal" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), Signal (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	
@@ -10,15 +10,15 @@ return function(p1) --[[ Line: 18 | Named "useCollectionImpressionsSignal" ]]
 		UseRefResult.current = Signal.new()
 	end
 	local Current = UseRefResult.current
-	ReactModule.useEffect(function() --[[ Line: 25 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Current (copy), p1 (copy)
 		Current:fire()
-		local Connection = if p1 then p1:connect(function() --[[ Line: 34 ]]
+		local Connection = if p1 then p1:connect(function()
 			-- upvalues: Current (upval)
 			Current:fire()
 		end) else nil
 		
-		return function() --[[ Line: 39 ]]
+		return function()
 			-- upvalues: Connection (ref)
 			if Connection then
 				Connection:disconnect()
@@ -26,7 +26,7 @@ return function(p1) --[[ Line: 18 | Named "useCollectionImpressionsSignal" ]]
 		end
 	end, { p1, Current })
 	
-	return Current, (ReactModule.useCallback(function() --[[ Line: 46 ]]
+	return Current, (ReactModule.useCallback(function()
 		-- upvalues: Current (copy)
 		Current:fire()
 	end, { Current }))

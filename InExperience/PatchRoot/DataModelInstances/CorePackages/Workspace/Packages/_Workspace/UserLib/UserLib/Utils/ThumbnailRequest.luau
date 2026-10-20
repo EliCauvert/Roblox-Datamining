@@ -1,6 +1,6 @@
 ﻿local ConstantsModule = require(script:FindFirstAncestor("UserLib").Utils.Constants)
 local ThumbnailRequestModule = {
-	new = function() --[[ Line: 17 ]]
+	new = function()
 		-- upvalues: ConstantsModule (copy)
 		return {
 			thumbnailType = ConstantsModule.RbxAvatarThumbnailTypesFromEnum.HeadShot,
@@ -9,7 +9,7 @@ local ThumbnailRequestModule = {
 	end
 }
 
-function ThumbnailRequestModule.fromData(ThumbnailType, ThumbnailSize) --[[ Line: 26 ]]
+function ThumbnailRequestModule.fromData(ThumbnailType, ThumbnailSize)
 	-- upvalues: ThumbnailRequestModule (copy)
 	local NewThumbnailRequest = ThumbnailRequestModule.new()
 	NewThumbnailRequest.thumbnailType = ThumbnailType

@@ -11,7 +11,7 @@ local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetF
 local UseExperienceDetailsModule = require(GenericAbuseReporting.BeduiV2.Hooks.Enrichment.useExperienceDetails)
 local TextWithTranslationModule = require(GenericAbuseReporting.BeduiV2.Utils.Translate.TextWithTranslation)
 
-local function UserPreview(p1) --[[ Line: 29 ]]
+local function UserPreview(p1)
 	-- upvalues: ReactModule (copy), View (copy), Avatar (copy), FFlagProfileFrameThumbnailEnabled (copy), Text (copy)
 	local Preview = p1.preview
 	
@@ -54,7 +54,7 @@ local function UserPreview(p1) --[[ Line: 29 ]]
 	}) else nil
 end
 
-local function ChatPreview(p1) --[[ Line: 64 ]]
+local function ChatPreview(p1)
 	-- upvalues: ReactModule (copy), View (copy), TextWithTranslationModule (copy)
 	local Preview = p1.preview
 	
@@ -69,7 +69,7 @@ local function ChatPreview(p1) --[[ Line: 64 ]]
 	}) else nil
 end
 
-local function ExperiencePreview(p1) --[[ Line: 81 ]]
+local function ExperiencePreview(p1)
 	-- upvalues: UseExperienceDetailsModule (copy), ReactModule (copy), View (copy), Image (copy), Text (copy)
 	local Preview = p1.preview
 	local UseExperienceDetailsModuleResult = UseExperienceDetailsModule(Preview.id)
@@ -91,7 +91,7 @@ local function ExperiencePreview(p1) --[[ Line: 81 ]]
 	}) else nil
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 108 | Named "PreviewBox" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), UserPreview (copy), ChatPreview (copy), ExperiencePreview (copy)
 	local Preview = p1.preview
 	

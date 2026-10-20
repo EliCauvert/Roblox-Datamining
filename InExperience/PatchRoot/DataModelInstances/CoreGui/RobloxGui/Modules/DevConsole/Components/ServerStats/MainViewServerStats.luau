@@ -9,14 +9,14 @@ local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
 local MainRowPadding = ConstantsModule.GeneralFormatting.MainRowPadding
 local MainViewServerStats = RoactModule.Component:extend("MainViewServerStats")
 
-function MainViewServerStats.init(p1) --[[ Line: 17 ]]
+function MainViewServerStats.init(p1)
 	-- upvalues: RoactModule (copy)
-	function p1.onUtilTabHeightChanged(UtilTabHeight) --[[ Line: 18 ]]
+	function p1.onUtilTabHeightChanged(UtilTabHeight)
 		-- upvalues: p1 (copy)
 		p1:setState({ utilTabHeight = UtilTabHeight })
 	end
 	
-	function p1.onSearchTermChanged(p2) --[[ Line: 24 ]]
+	function p1.onSearchTermChanged(p2)
 		-- upvalues: p1 (copy)
 		p1.props.dispatchServerStatsUpdateSearchFilter(p2, {})
 	end
@@ -25,11 +25,11 @@ function MainViewServerStats.init(p1) --[[ Line: 17 ]]
 	p1.state = { utilTabHeight = 0 }
 end
 
-function MainViewServerStats.didMount(p1) --[[ Line: 35 ]]
+function MainViewServerStats.didMount(p1)
 	p1:setState({ utilTabHeight = p1.utilRef.current.Size.Y.Offset })
 end
 
-function MainViewServerStats.didUpdate(p1) --[[ Line: 42 ]]
+function MainViewServerStats.didUpdate(p1)
 	local Size = p1.utilRef.current.Size
 	
 	if Size.Y.Offset ~= p1.state.utilTabHeight then
@@ -37,7 +37,7 @@ function MainViewServerStats.didUpdate(p1) --[[ Line: 42 ]]
 	end
 end
 
-function MainViewServerStats.render(p1) --[[ Line: 51 ]]
+function MainViewServerStats.render(p1)
 	-- upvalues: RoactModule (copy), ConstantsModule (copy), MainRowPadding (copy), UtilAndTabModule (copy), ServerStatsChartModule (copy)
 	local Size = p1.props.size
 	local StatsSearchTerm = p1.props.statsSearchTerm
@@ -71,12 +71,12 @@ function MainViewServerStats.render(p1) --[[ Line: 51 ]]
 	})
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 91 | Named "mapStateToProps" ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	return { statsSearchTerm = p1.ServerStatsData.statsSearchTerm }
-end, function(Callback) --[[ Line: 97 | Named "mapDispatchToProps" ]]
+end, function(Callback)
 	-- upvalues: ServerStatsUpdateSearchFilterModule (copy)
 	return {
-		dispatchServerStatsUpdateSearchFilter = function(p1, p2) --[[ Line: 99 ]]
+		dispatchServerStatsUpdateSearchFilter = function(p1, p2)
 			-- upvalues: Callback (copy), ServerStatsUpdateSearchFilterModule (upval)
 			Callback(ServerStatsUpdateSearchFilterModule(p1, p2))
 		end

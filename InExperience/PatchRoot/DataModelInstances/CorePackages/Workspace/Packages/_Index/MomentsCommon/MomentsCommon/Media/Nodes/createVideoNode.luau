@@ -14,13 +14,13 @@ local CreateSignalFunction = SignalsModule.createSignal
 local CreateComputedFunction = SignalsModule.createComputed
 local Signal = CreateSignalFunction(Enum.ScaleType.Crop)
 
-local function VideoSurface(p1) --[[ Line: 77 ]]
+local function VideoSurface(p1)
 	-- upvalues: UseSignalStateFunction (copy), ReactModule (copy), CreateComputedFunction (copy), Signal (copy), GetFitSizeModule (copy)
 	local UseSignalStateResult = UseSignalStateFunction(p1.getItemSize)
 	local GetResolutionFunction = p1.getResolution
-	local UseSignalStateResult1 = UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 83 ]]
+	local UseSignalStateResult1 = UseSignalStateFunction((ReactModule.useMemo(function()
 		-- upvalues: CreateComputedFunction (upval), GetResolutionFunction (copy)
-		return CreateComputedFunction(function(p2) --[[ Line: 84 ]]
+		return CreateComputedFunction(function(p2)
 			-- upvalues: GetResolutionFunction (upval)
 			return GetResolutionFunction(p2)
 		end)
@@ -48,20 +48,20 @@ local function VideoSurface(p1) --[[ Line: 77 ]]
 	})
 end
 
-local function defaultObserveLoaded(Object) --[[ Line: 176 ]]
+local function defaultObserveLoaded(Object)
 	return {
-		getIsLoaded = function() --[[ Line: 178 ]]
+		getIsLoaded = function()
 			-- upvalues: Object (copy)
 			return Object.IsLoaded
 		end,
-		connect = function(Callback) --[[ Line: 181 ]]
+		connect = function(Callback)
 			-- upvalues: Object (copy)
-			local Connection = Object:GetPropertyChangedSignal("IsLoaded"):Connect(function() --[[ Line: 182 ]]
+			local Connection = Object:GetPropertyChangedSignal("IsLoaded"):Connect(function()
 				-- upvalues: Callback (copy), Object (upval)
 				Callback(Object.IsLoaded)
 			end)
 			
-			return function() --[[ Line: 185 ]]
+			return function()
 				-- upvalues: Connection (copy)
 				Connection:Disconnect()
 			end
@@ -71,7 +71,7 @@ end
 
 return {
 	kind = "video",
-	create = function(p1, p2) --[[ Line: 192 ]]
+	create = function(p1, p2)
 		-- upvalues: FFlagMomentsVideoPermissionContextFixModule (copy), CreateSignalFunction (copy), defaultObserveLoaded (copy), CreateComputedFunction (copy), FFlagMomentsPreloadVideoPlayerInstanceModule (copy), FFlagMomentsVideoLoadAsyncLoadingFixModule (copy), FFlagMomentsOptimisticProfilePending (copy), ReactModule (copy), VideoSurface (copy)
 		local Id = p1.id
 		local Content = p1.content
@@ -83,11 +83,11 @@ return {
 		local RunService = p2.runService
 		local ContentProvider = p2.contentProvider
 		local ObserveLoaded = p2.observeLoaded or defaultObserveLoaded
-		local LoadVideo = p2.loadVideo or function(p3) --[[ Line: 217 ]]
+		local LoadVideo = p2.loadVideo or function(p3)
 			return p3:LoadAsync()
 		end
 		
-		local function _() --[[ Line: 221 | Named "getRegionStart" ]]
+		local function _()
 			-- upvalues: Signal (copy)
 			local SignalResult = Signal(false)
 			
@@ -102,11 +102,11 @@ return {
 		local Signal7, Signal2_6 = CreateSignalFunction(nil)
 		local Signal8, Signal2_7 = CreateSignalFunction(0)
 		local Signal9, Signal2_8 = CreateSignalFunction(0)
-		local Computed = CreateComputedFunction(function(p3): string --[[ Line: 243 ]]
+		local Computed = CreateComputedFunction(function(p3): string
 			-- upvalues: Signal4 (copy), Signal3 (copy), Signal1 (copy)
 			return if Signal4(p3) then "Playing" elseif Signal3(p3) then "Decoded" elseif Signal1(p3) then "Downloaded" else "Idle"
 		end)
-		local Computed1 = CreateComputedFunction(function(p3) --[[ Line: 254 ]]
+		local Computed1 = CreateComputedFunction(function(p3)
 			-- upvalues: Signal (copy), Signal8 (copy)
 			local SignalResult = Signal(p3)
 			
@@ -132,14 +132,14 @@ return {
 		local Count = 0
 		local Flag8 = false
 		
-		local _ = function() --[[ Line: 286 | Named "regionEnd" ]]
+		local _ = function()
 			-- upvalues: Signal (copy), Signal8 (copy)
 			local SignalResult = Signal(false)
 			
 			return if SignalResult == nil then Signal8(false) else SignalResult.endTime
 		end
 		
-		local _ = function() --[[ Line: 293 | Named "applyLoopingMode" ]]
+		local _ = function()
 			-- upvalues: Object (ref), Signal (copy), Signal8 (copy), v2 (ref)
 			local Object1 = Object
 			
@@ -154,7 +154,7 @@ return {
 			end
 		end
 		
-		local _ = function() --[[ Line: 306 | Named "ensureWire" ]]
+		local _ = function()
 			-- upvalues: Object (ref), Surface (ref), Flag (ref), Object1 (ref)
 			local Parent = Object
 			local TargetInstance = Surface
@@ -170,7 +170,7 @@ return {
 			end
 		end
 		
-		local _ = function() --[[ Line: 321 | Named "tearWire" ]]
+		local _ = function()
 			-- upvalues: Object1 (ref)
 			if Object1 then
 				Object1:Destroy()
@@ -178,7 +178,7 @@ return {
 			end
 		end
 		
-		local function onStep() --[[ Line: 328 ]]
+		local function onStep()
 			-- upvalues: Object (ref), Signal (copy), v2 (ref), Signal8 (copy), Signal2_8 (copy)
 			local Object1 = Object
 			
@@ -198,7 +198,7 @@ return {
 			Signal2_8(TimePosition - StartTime)
 		end
 		
-		local _ = function() --[[ Line: 342 | Named "startPlaybackLoop" ]]
+		local _ = function()
 			-- upvalues: RenderSteppedConnection (ref), RunService (copy), onStep (copy)
 			if not RenderSteppedConnection then
 				RenderSteppedConnection = RunService.RenderStepped:Connect(onStep)
@@ -207,7 +207,7 @@ return {
 			end
 		end
 		
-		local _ = function() --[[ Line: 349 | Named "stopPlaybackLoop" ]]
+		local _ = function()
 			-- upvalues: RenderSteppedConnection (ref)
 			if RenderSteppedConnection then
 				RenderSteppedConnection:Disconnect()
@@ -215,7 +215,7 @@ return {
 			end
 		end
 		
-		local function startPlayerPlaybackIfReady() --[[ Line: 356 ]]
+		local function startPlayerPlaybackIfReady()
 			-- upvalues: Object (ref), Flag5 (ref), Signal4 (copy), Flag (ref), FFlagMomentsPreloadVideoPlayerInstanceModule (upval), Flag4 (ref), Signal5 (copy), Signal2_3 (copy), RenderSteppedConnection (ref), RunService (copy), onStep (copy)
 			local Object1 = Object
 			
@@ -230,7 +230,7 @@ return {
 			end
 		end
 		
-		local _ = function() --[[ Line: 376 | Named "createPlayer" ]]
+		local _ = function()
 			-- upvalues: Content (copy), FFlagMomentsPreloadVideoPlayerInstanceModule (upval), Signal (copy), Parent (copy), Object (ref)
 			local VideoPlayer = Instance.new("VideoPlayer")
 			VideoPlayer.Name = "VideoPlayer"
@@ -248,7 +248,7 @@ return {
 			return VideoPlayer
 		end
 		
-		local function runLoad(p3, p4, p5) --[[ Line: 394 ]]
+		local function runLoad(p3, p4, p5)
 			-- upvalues: Flag8 (ref), Object (ref), Flag (ref), LoadVideo (copy), Signal2_5 (copy), Flag4 (ref), Signal2_4 (copy), startPlayerPlaybackIfReady (copy), FFlagMomentsVideoLoadAsyncLoadingFixModule (upval), Flag1 (ref), Flag2 (ref), Flag7 (ref), runLoad (copy)
 			if Flag8 or Object ~= p3 or not Flag then return end
 			local Success, Result = pcall(LoadVideo, p3)
@@ -283,7 +283,7 @@ return {
 			end
 		end
 		
-		local function startLoadIfReady() --[[ Line: 427 ]]
+		local function startLoadIfReady()
 			-- upvalues: Object (ref), v1 (ref), Flag8 (ref), Flag (ref), Flag3 (ref), FFlagMomentsPreloadVideoPlayerInstanceModule (upval), Flag1 (ref), Flag2 (ref), Flag6 (ref), v3 (ref), startLoadIfReady (copy), Flag4 (ref), runLoad (copy)
 			local Object1 = Object
 			local v4 = v1
@@ -298,7 +298,7 @@ return {
 				return
 			elseif v3 == nil then
 				v3 = v4
-				task.delay(2, function() --[[ Line: 443 ]]
+				task.delay(2, function()
 					-- upvalues: v3 (upval), v4 (copy), Flag8 (upval), Flag (upval), Object (upval), Object1 (copy), v1 (upval), Flag6 (upval), startLoadIfReady (upval)
 					if v3 ~= v4 then return end
 					v3 = nil
@@ -319,11 +319,11 @@ return {
 			id = Id,
 			zIndex = ZIndex,
 			audioStem = { defaultVolume = 1, stemId = Id },
-			assets = function() --[[ Line: 372 ]]
+			assets = function()
 				-- upvalues: PreloadContent (ref)
 				return { PreloadContent }
 			end,
-			download = function() --[[ Line: 464 ]]
+			download = function()
 				-- upvalues: Count (ref), FFlagMomentsPreloadVideoPlayerInstanceModule (upval), Object (ref), Content (copy), Signal (copy), Parent (copy), Flag1 (ref), ContentProvider (copy), Flag8 (ref), Flag2 (ref), FFlagMomentsVideoLoadAsyncLoadingFixModule (upval), Flag7 (ref), v1 (ref), Flag (ref), runLoad (copy), FFlagMomentsOptimisticProfilePending (upval), PreloadContent (ref), Signal2_1 (copy), startLoadIfReady (copy)
 				local Count1 = Count
 				
@@ -346,7 +346,7 @@ return {
 						VideoPlayer = VideoPlayer1
 					end
 					Flag1 = true
-					pcall(function() --[[ Line: 472 ]]
+					pcall(function()
 						-- upvalues: ContentProvider (upval), VideoPlayer (copy)
 						ContentProvider:PreloadAsync({ VideoPlayer })
 					end)
@@ -372,7 +372,7 @@ return {
 					return
 				end
 			end,
-			decode = function() --[[ Line: 497 ]]
+			decode = function()
 				-- upvalues: Flag8 (ref), Flag (ref), Signal2_5 (copy), Object (ref), Content (copy), FFlagMomentsPreloadVideoPlayerInstanceModule (upval), Signal (copy), Parent (copy), ObserveLoaded (copy), v1 (ref), Signal2_4 (copy), ConnectResult (ref), startPlayerPlaybackIfReady (copy), Signal2_6 (copy), List (copy), Signal2_7 (copy), Signal8 (copy), v2 (ref), Surface (ref), Object1 (ref), startLoadIfReady (copy), Signal2_2 (copy)
 				if Flag8 or Flag then return end
 				Signal2_5(nil)
@@ -396,7 +396,7 @@ return {
 				local ObserveLoadedResult = ObserveLoaded(VideoPlayer)
 				v1 = ObserveLoadedResult
 				Signal2_4(ObserveLoadedResult.getIsLoaded())
-				ConnectResult = ObserveLoadedResult.connect(function(p3) --[[ Line: 508 ]]
+				ConnectResult = ObserveLoadedResult.connect(function(p3)
 					-- upvalues: Signal2_4 (upval), startPlayerPlaybackIfReady (upval)
 					Signal2_4(p3)
 					
@@ -405,7 +405,7 @@ return {
 					end
 				end)
 				
-				local function readResolution() --[[ Line: 515 ]]
+				local function readResolution()
 					-- upvalues: VideoPlayer (copy), Signal2_6 (upval)
 					local Resolution = VideoPlayer.Resolution
 					Signal2_6(if Resolution.X > 0 and Resolution.Y > 0 then Resolution else nil)
@@ -415,7 +415,7 @@ return {
 				Signal2_6(if Resolution.X > 0 and Resolution.Y > 0 then Resolution else nil)
 				table.insert(List, VideoPlayer:GetPropertyChangedSignal("Resolution"):Connect(readResolution))
 				Signal2_7(VideoPlayer.TimeLength)
-				table.insert(List, VideoPlayer:GetPropertyChangedSignal("TimeLength"):Connect(function() --[[ Line: 525 ]]
+				table.insert(List, VideoPlayer:GetPropertyChangedSignal("TimeLength"):Connect(function()
 					-- upvalues: Signal2_7 (upval), VideoPlayer (copy), Object (upval), Signal (upval), Signal8 (upval), v2 (upval)
 					Signal2_7(VideoPlayer.TimeLength)
 					local Object1 = Object
@@ -453,7 +453,7 @@ return {
 				startLoadIfReady()
 				Signal2_2(true)
 			end,
-			releaseDecoder = function() --[[ Line: 538 ]]
+			releaseDecoder = function()
 				-- upvalues: Object (ref), Flag (ref), v3 (ref), Flag7 (ref), Flag5 (ref), RenderSteppedConnection (ref), Signal2_3 (copy), Object1 (ref), ConnectResult (ref), v1 (ref), List (copy), FFlagMomentsPreloadVideoPlayerInstanceModule (upval), Flag1 (ref), Flag2 (ref), Flag3 (ref), Flag4 (ref), Signal2_2 (copy), Signal2_4 (copy), Signal2_5 (copy), Signal2_8 (copy)
 				local Object2 = Object
 				
@@ -496,14 +496,14 @@ return {
 				Signal2_8(0)
 			end,
 			getResourceLevel = Computed,
-			getAudioSource = function() --[[ Line: 648 ]]
+			getAudioSource = function()
 				-- upvalues: Object (ref), Flag (ref)
 				local Object1 = Object
 				assert(Object1 and Flag, "createVideoNode: getAudioSource() requires decode() first")
 				
 				return Object1
 			end,
-			render = function(p3) --[[ Line: 669 ]]
+			render = function(p3)
 				-- upvalues: ReactModule (upval), VideoSurface (upval), ZIndex (copy), CornerRadius (copy)
 				return ReactModule.createElement(VideoSurface, {
 					getItemSize = p3.getItemSize,
@@ -515,7 +515,7 @@ return {
 					surfaceCornerRadius = p3.cornerRadius
 				})
 			end,
-			play = function() --[[ Line: 583 ]]
+			play = function()
 				-- upvalues: Object (ref), Flag (ref), Signal (copy), Signal2_8 (copy), FFlagMomentsPreloadVideoPlayerInstanceModule (upval), Flag5 (ref), startPlayerPlaybackIfReady (copy), Signal2_3 (copy), RenderSteppedConnection (ref), RunService (copy), onStep (copy)
 				local Object1 = Object
 				
@@ -539,7 +539,7 @@ return {
 					return
 				end
 			end,
-			pause = function() --[[ Line: 602 ]]
+			pause = function()
 				-- upvalues: Object (ref), FFlagMomentsPreloadVideoPlayerInstanceModule (upval), Flag5 (ref), Flag (ref), Signal4 (copy), Signal2_3 (copy), RenderSteppedConnection (ref)
 				local Object1 = Object
 				
@@ -561,7 +561,7 @@ return {
 					RenderSteppedConnection = nil
 				end
 			end,
-			seek = function(p3: number) --[[ Line: 621 ]]
+			seek = function(p3: number)
 				-- upvalues: Object (ref), Signal (copy), Signal8 (copy), Signal2_8 (copy)
 				local Object1 = Object
 				
@@ -577,7 +577,7 @@ return {
 					return
 				end
 			end,
-			setRegion = function(p3) --[[ Line: 634 ]]
+			setRegion = function(p3)
 				-- upvalues: Signal2 (copy), Object (ref), Signal (copy), Signal8 (copy), v2 (ref), Signal2_8 (copy)
 				Signal2(p3)
 				local Object1 = Object
@@ -601,7 +601,7 @@ return {
 					Signal2_8(ClampedValue - StartTime)
 				end
 			end,
-			dispose = function() --[[ Line: 681 ]]
+			dispose = function()
 				-- upvalues: Flag8 (ref), Count (ref), Flag (ref), v3 (ref), Flag7 (ref), Flag3 (ref), Flag4 (ref), Flag5 (ref), RenderSteppedConnection (ref), Object1 (ref), ConnectResult (ref), v1 (ref), List (copy), Object (ref), Surface (ref)
 				if Flag8 then return end
 				Flag8 = true
@@ -644,11 +644,11 @@ return {
 			getTimeLength = Signal8,
 			getDuration = Computed1,
 			getPosition = Signal9,
-			isPlaybackReady = function() --[[ Line: 654 ]]
+			isPlaybackReady = function()
 				-- upvalues: FFlagMomentsPreloadVideoPlayerInstanceModule (upval), Signal5 (copy)
 				return not FFlagMomentsPreloadVideoPlayerInstanceModule or Signal5(false)
 			end,
-			setSurface = function(Value) --[[ Line: 660 ]]
+			setSurface = function(Value)
 				-- upvalues: Surface (ref), Object1 (ref), Object (ref), Flag (ref)
 				if Value == Surface then return end
 				if Object1 then

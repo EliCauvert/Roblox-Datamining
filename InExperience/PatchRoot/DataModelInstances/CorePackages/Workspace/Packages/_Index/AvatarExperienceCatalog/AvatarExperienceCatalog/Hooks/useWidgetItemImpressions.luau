@@ -8,7 +8,7 @@ local SeenImpressionsStore = require(Parent.AvatarExperienceAnalytics).Store.See
 local Category = SeenImpressionsStore.Category
 local UseOnRequestImpressionsSignalModule = require(AvatarExperienceCatalog.Components.Hooks.useOnRequestImpressionsSignal)
 
-return function(p1) --[[ Line: 61 | Named "useWidgetItemImpressions" ]]
+return function(p1)
 	-- upvalues: UseOnRequestImpressionsSignalModule (copy), ReactModule (copy), SeenImpressionsStore (copy), Category (copy), CryoModule (copy)
 	local WidgetId = p1.widgetId
 	local Content = p1.content
@@ -21,7 +21,7 @@ return function(p1) --[[ Line: 61 | Named "useWidgetItemImpressions" ]]
 	
 	return {
 		onRequestImpressionsSignal = UseOnRequestImpressionsSignalModule(),
-		onImpressionsDetected = ReactModule.useCallback(function(ItemPositions) --[[ Line: 74 ]]
+		onImpressionsDetected = ReactModule.useCallback(function(ItemPositions)
 			-- upvalues: WidgetId (copy), SeenImpressionsStore (upval), Category (upval), Content (copy), BuildItemImpressionInfoFunction (copy), CryoModule (upval), WidgetAnalyticsInfo (copy), WidgetRow (copy), ItemsPerRow (copy), UiTreatmentType (copy), ReportItemImpressionFunction (copy)
 			for _, itemPosition in ItemPositions do
 				local Text = WidgetId .. "_" .. itemPosition

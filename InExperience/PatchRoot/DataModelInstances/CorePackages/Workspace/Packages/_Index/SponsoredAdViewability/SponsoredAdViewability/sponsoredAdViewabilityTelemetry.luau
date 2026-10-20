@@ -31,7 +31,7 @@ local config3 = {
 	lastUpdated = { 26, 7, 21 }
 }
 
-local function buildGeometryFields(Geometry) --[[ Line: 74 ]]
+local function buildGeometryFields(Geometry)
 	local AdSize = Geometry.adSize
 	local ViewportBounds = Geometry.viewportBounds
 	
@@ -44,7 +44,7 @@ local function buildGeometryFields(Geometry) --[[ Line: 74 ]]
 end
 
 return {
-	logSponsoredAdLoad = function(CustomFields, p1, ViewabilitySessionStartTimestampMs, p2) --[[ Line: 86 ]]
+	logSponsoredAdLoad = function(CustomFields, p1, ViewabilitySessionStartTimestampMs, p2)
 		-- upvalues: buildGeometryFields (copy), TelemetryService (copy), config (copy), StandardizedFields (copy)
 		local GeometryFields = buildGeometryFields(p1)
 		local CustomFields1 = {
@@ -68,7 +68,7 @@ return {
 			customFields = CustomFields1
 		})
 	end,
-	logSponsoredAdViewableImpression = function(CustomFields, p1) --[[ Line: 115 ]]
+	logSponsoredAdViewableImpression = function(CustomFields, p1)
 		-- upvalues: buildGeometryFields (copy), TelemetryService (copy), config1 (copy), StandardizedFields (copy)
 		local GeometryFields = buildGeometryFields(p1.geometry)
 		TelemetryService:LogEvent(config1, {
@@ -96,7 +96,7 @@ return {
 			}
 		})
 	end,
-	logSponsoredAdVideoProgress = function(CustomFields, p1) --[[ Line: 145 ]]
+	logSponsoredAdVideoProgress = function(CustomFields, p1)
 		-- upvalues: buildGeometryFields (copy), TelemetryService (copy), config3 (copy), StandardizedFields (copy)
 		local GeometryFields = buildGeometryFields(p1.geometry)
 		TelemetryService:LogEvent(config3, {
@@ -128,7 +128,7 @@ return {
 			}
 		})
 	end,
-	logSponsoredAdUnload = function(CustomFields, p1, UnloadReason) --[[ Line: 178 ]]
+	logSponsoredAdUnload = function(CustomFields, p1, UnloadReason)
 		-- upvalues: buildGeometryFields (copy), TelemetryService (copy), config2 (copy), StandardizedFields (copy)
 		local GeometryFields = buildGeometryFields(p1.geometry)
 		TelemetryService:LogEvent(config2, {

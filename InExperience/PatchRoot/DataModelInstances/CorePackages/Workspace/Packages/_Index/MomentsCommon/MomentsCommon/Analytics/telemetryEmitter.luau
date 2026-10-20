@@ -4,7 +4,7 @@ return require(Parent.SocialLuaAnalytics).Telemetry.createEmitter({
 	shouldUseTelemetryService = true,
 	telemetryImpl = require(Parent.LoggingProtocol).default,
 	defaultTelemetryConfig = { throttlingThousandths = 10000, links = "" },
-	getSharedInfo = function() --[[ Line: 33 ]]
+	getSharedInfo = function()
 		return {}
 	end
 })

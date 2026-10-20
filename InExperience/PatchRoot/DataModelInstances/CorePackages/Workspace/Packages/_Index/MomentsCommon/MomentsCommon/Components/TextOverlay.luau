@@ -19,14 +19,14 @@ local config = { [Enum.Font.LuckiestGuy] = 0.12 }
 local config1 = { [Enum.Font.Bangers] = 0.08 }
 local _Color3 = Color3.fromHex("FFFFFF")
 
-local function _(p1, p2) --[[ Line: 96 | Named "composeScale" ]]
-	return if p2 == nil then p1 elseif typeof(p2) == "number" then p1 * p2 else p2:map(function(p3) --[[ Line: 106 ]]
+local function _(p1, p2)
+	return if p2 == nil then p1 elseif typeof(p2) == "number" then p1 * p2 else p2:map(function(p3)
 		-- upvalues: p1 (copy)
 		return p1 * p3
 	end)
 end
 
-return function(p1) --[[ Line: 111 | Named "TextOverlay" ]]
+return function(p1)
 	-- upvalues: GetFFlagMomentsStickerButtonModule (copy), FFlagMomentsTextOverlayFixedContrastModule (copy), FoundationModule (copy), FFlagMomentsTextOverlayV2RedesignModule (copy), UseStateFunction (copy), ResponsiveModule (copy), ReactModule (copy), UseCallbackFunction (copy), config (copy), config1 (copy), FFlagMomentsTextOverlayEdgeClipFixModule (copy), TextService (copy), FFlagMomentsTextOverlayChipGrowAboveKeyboardModule (copy), InsertNewlineAtCursorModule (copy), View (copy), _Color3 (copy), TextOverlaySelectionControlsModule (copy)
 	local OverlayEdit = GetFFlagMomentsStickerButtonModule() and p1.overlayEdit or p1.textOverlayEdit
 	local Contrast = if FFlagMomentsTextOverlayFixedContrastModule then FoundationModule.Hooks.useTokens().DarkMode.System.Contrast else nil
@@ -42,7 +42,7 @@ return function(p1) --[[ Line: 111 | Named "TextOverlay" ]]
 	end
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
-	local UseCallbackResult = UseCallbackFunction(function(_, Current) --[[ Line: 148 ]]
+	local UseCallbackResult = UseCallbackFunction(function(_, Current)
 		-- upvalues: p1 (copy), UseRefResult1 (copy), Callback (ref)
 		if p1.containerRef and p1.containerRef.current then
 			UseRefResult1.current = Current
@@ -54,13 +54,13 @@ return function(p1) --[[ Line: 111 | Named "TextOverlay" ]]
 			p1.onDragBegin()
 		end
 	end, { p1.containerRef, p1.onDragBegin, p1.selected })
-	local UseCallbackResult1 = UseCallbackFunction(function(_, p2) --[[ Line: 161 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function(_, p2)
 		-- upvalues: p1 (copy)
 		if p1.onDragContinue then
 			p1.onDragContinue(p2)
 		end
 	end, { p1.onDragContinue })
-	local UseCallbackResult2 = UseCallbackFunction(function(_, Current) --[[ Line: 167 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function(_, Current)
 		-- upvalues: UseRefResult1 (copy), p1 (copy), Callback (ref)
 		if UseRefResult1.current == Current and p1.onActivated then
 			p1.onActivated()
@@ -72,7 +72,7 @@ return function(p1) --[[ Line: 111 | Named "TextOverlay" ]]
 			Callback(false)
 		end
 	end, { p1.onActivated, p1.onDragEnd, p1.selected })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 182 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), ReactModule (upval), UseRefResult (copy), UseCallbackResult (copy), UseCallbackResult1 (copy), UseCallbackResult2 (copy)
 		return if p1.draggable then ReactModule.createElement("UIDragDetector", {
 			BoundingBehavior = Enum.UIDragDetectorBoundingBehavior.EntireObject,
@@ -109,10 +109,10 @@ return function(p1) --[[ Line: 111 | Named "TextOverlay" ]]
 	end
 	local NewCeiled = Ceiled1 + Offset
 	local IsUsePreferredInputResultMatch: boolean = FFlagMomentsTextOverlayV2RedesignModule and (FFlagMomentsTextOverlayChipGrowAboveKeyboardModule and (p1.editable == true and UsePreferredInputResult == ResponsiveModule.Input.Touch))
-	local UseCallbackResult3 = UseCallbackFunction(function(TextBox) --[[ Line: 285 ]]
+	local UseCallbackResult3 = UseCallbackFunction(function(TextBox)
 		-- upvalues: InsertNewlineAtCursorModule (upval)
 		local Text = TextBox.Text
-		task.defer(function() --[[ Line: 287 ]]
+		task.defer(function()
 			-- upvalues: TextBox (copy), Text (copy), InsertNewlineAtCursorModule (upval)
 			if TextBox.Parent ~= nil and TextBox.Text == Text then
 				TextBox.Text, TextBox.CursorPosition = InsertNewlineAtCursorModule(TextBox.Text, TextBox.CursorPosition)
@@ -160,7 +160,7 @@ return function(p1) --[[ Line: 111 | Named "TextOverlay" ]]
 		onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged,
 		Position = OverlayEdit.position,
 		Rotation = OverlayEdit.rotation,
-		scale = if AdditionalScale == nil then Scale elseif typeof(AdditionalScale) == "number" then Scale * AdditionalScale else AdditionalScale:map(function(p2) --[[ Line: 106 ]]
+		scale = if AdditionalScale == nil then Scale elseif typeof(AdditionalScale) == "number" then Scale * AdditionalScale else AdditionalScale:map(function(p2)
 			-- upvalues: Scale (copy)
 			return Scale * p2
 		end),

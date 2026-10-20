@@ -6,13 +6,13 @@ local FFlagAbuseReportAttributedRBXSystemMessages = SharedFlagsModule.FFlagAbuse
 local ExpChatMessageHelpersModule = {
 	CHANNEL_GENERAL = "RBXGeneral",
 	CHANNEL_GLOBAL = "RBXGlobal",
-	areChannelTabsEnabled = function() --[[ Line: 28 ]]
+	areChannelTabsEnabled = function()
 		-- upvalues: TextChatService (copy)
 		local ChannelTabsConfiguration = TextChatService:FindFirstChildOfClass("ChannelTabsConfiguration")
 		
 		return ChannelTabsConfiguration ~= nil and ChannelTabsConfiguration.Enabled
 	end,
-	localizeString = function(p1, p2) --[[ Line: 37 ]]
+	localizeString = function(p1, p2)
 		if p1 then
 			local Success, Result = pcall(p1.TranslateGameText, p1, game, p2)
 			
@@ -21,11 +21,11 @@ local ExpChatMessageHelpersModule = {
 			return p2
 		end
 	end,
-	isSystemMessage = function(p1): boolean --[[ Line: 47 ]]
+	isSystemMessage = function(p1): boolean
 		-- upvalues: FFlagAbuseReportAttributedRBXSystemMessages (copy)
 		return not FFlagAbuseReportAttributedRBXSystemMessages and p1.textChannel and p1.textChannel.Name == "RBXSystem" or (not p1.userId or p1.userId == "0")
 	end,
-	formatChannelLabel = function(Text: string, Object) --[[ Line: 62 ]]
+	formatChannelLabel = function(Text: string, Object)
 		-- upvalues: Players (copy), FFlagEnableGlobalChatAbuseReporting (copy)
 		if string.find(Text, "RBXGeneral") then
 			return "General"
@@ -50,13 +50,13 @@ local ExpChatMessageHelpersModule = {
 		end
 		return "Whisper"
 	end,
-	formatMessageLabel = function(p1) --[[ Line: 86 ]]
+	formatMessageLabel = function(p1)
 		local PrefixText = p1.prefixText or ""
 		local Text = p1.text or ""
 		
 		return if #PrefixText > 0 then PrefixText .. " " .. Text else Text
 	end,
-	getMessageUsername = function(p1) --[[ Line: 92 ]]
+	getMessageUsername = function(p1)
 		-- upvalues: Players (copy)
 		local Number: number? = tonumber(p1.userId)
 		
@@ -80,7 +80,7 @@ local ExpChatMessageHelpersModule = {
 	end
 }
 
-function ExpChatMessageHelpersModule.collectItems(p1, List) --[[ Line: 120 ]]
+function ExpChatMessageHelpersModule.collectItems(p1, List)
 	-- upvalues: ExpChatMessageHelpersModule (copy)
 	local List1 = {}
 	
@@ -104,7 +104,7 @@ function ExpChatMessageHelpersModule.collectItems(p1, List) --[[ Line: 120 ]]
 	return List1
 end
 
-function ExpChatMessageHelpersModule.annotateWhisperItems(List, p2, p3) --[[ Line: 144 ]]
+function ExpChatMessageHelpersModule.annotateWhisperItems(List, p2, p3)
 	for _, value in ipairs(List) do
 		local v2 = p2[value.id]
 		

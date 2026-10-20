@@ -16,7 +16,7 @@ local FFlagEnableRobuxUpsellPlusButtonExperiment = IAPExperienceModule.Flags.FFl
 local FIntBlackbirdUpsellMinPriceForDiscountInclusive = SharedFlagsModule.FIntBlackbirdUpsellMinPriceForDiscountInclusive
 local FIntBlackbirdUpsellMaxPriceForDiscountInclusive = SharedFlagsModule.FIntBlackbirdUpsellMaxPriceForDiscountInclusive
 
-return function(p1, VIPServer, p2, p3, p4): boolean --[[ Line: 29 | Named "shouldShowBlackbirdUpsell" ]]
+return function(p1, VIPServer, p2, p3, p4): boolean
 	-- upvalues: RequestTypeModule (copy), FFlagBlackbirdUpsellGateTimedOptionModule (copy), FFlagBlackbirdUpsellGateResalePurchaseType (copy), FFlagBlackbirdUpsellGateResaleModule (copy), GetAppFeaturePoliciesFunction (copy), IsRequestTypeHiddenFromBlackbirdUpsellFunction (copy), FIntBlackbirdUpsellMaxPriceForDiscountInclusive (copy), FIntBlackbirdUpsellMinPriceForDiscountInclusive (copy), DiscountType (copy), FFlagEnableRobuxUpsellPlusButtonExperiment (copy), FFlagEnableBlackbirdUpsellImpressionGating (copy), BlackbirdUpsellImpressionTrackerModule (copy)
 	if p2 then
 		return false

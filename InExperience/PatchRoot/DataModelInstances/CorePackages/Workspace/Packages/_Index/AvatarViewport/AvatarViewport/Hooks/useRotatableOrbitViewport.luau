@@ -8,16 +8,16 @@ local UseViewportOrbitInteractionsModule = require(AvatarViewport.Hooks.useViewp
 local UseViewportGamepadOrbitModule = require(AvatarViewport.Hooks.useViewportGamepadOrbit)
 local UseOrbitHeadCameraModule = require(AvatarViewport.Hooks.useOrbitHeadCamera)
 
-return function(p1) --[[ Line: 52 | Named "useRotatableOrbitViewport" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseAvatarViewportSceneModule (copy), UseViewportOrbitInteractionsModule (copy), UseViewportGamepadOrbitModule (copy), UseViewportModelLoaderModule (copy), ConstantsModule (copy), UseOrbitHeadCameraModule (copy)
-	local UseRefResult = ReactModule.useRef(function(_) --[[ Line: 54 ]] end)
+	local UseRefResult = ReactModule.useRef(function(_) end)
 	local UseAvatarViewportSceneModuleResult = UseAvatarViewportSceneModule()
 	local UseViewportOrbitInteractionsModuleResult = UseViewportOrbitInteractionsModule({
 		initialYRotDeg = p1.committedYRotDeg or p1.initialYRotDeg,
 		distanceScale = p1.distanceScale,
 		onYRotDegChanged = p1.onYRotDegChanged,
 		onDistanceScaleChanged = p1.onDistanceScaleChanged,
-		onCameraUpdateRequested = function() --[[ Line: 63 ]]
+		onCameraUpdateRequested = function()
 			-- upvalues: UseRefResult (copy)
 			UseRefResult.current()
 		end
@@ -31,7 +31,7 @@ return function(p1) --[[ Line: 52 | Named "useRotatableOrbitViewport" ]]
 	local UseViewportModelLoaderModuleResult = UseViewportModelLoaderModule({
 		modelSource = p1.modelSource,
 		worldModelRef = UseAvatarViewportSceneModuleResult.worldModel,
-		onModelReady = function(p2) --[[ Line: 78 ]]
+		onModelReady = function(p2)
 			-- upvalues: UseViewportOrbitInteractionsModuleResult (copy), p1 (copy)
 			UseViewportOrbitInteractionsModuleResult.resetYaw(p1.committedYRotDeg or p1.initialYRotDeg)
 			
@@ -47,7 +47,7 @@ return function(p1) --[[ Line: 52 | Named "useRotatableOrbitViewport" ]]
 		yRotDegRef = UseViewportOrbitInteractionsModuleResult.yRotDegRef,
 		distanceScale = p1.distanceScale,
 		distanceScaleRef = UseViewportOrbitInteractionsModuleResult.distanceScaleRef,
-		config = ReactModule.useMemo(function() --[[ Line: 87 ]]
+		config = ReactModule.useMemo(function()
 			-- upvalues: p1 (copy), ConstantsModule (upval)
 			return {
 				baseDistance = p1.baseDistance or ConstantsModule.DefaultOrbitBaseDistance,
@@ -64,7 +64,7 @@ return function(p1) --[[ Line: 52 | Named "useRotatableOrbitViewport" ]]
 		frameCloseupPreviewCamera = p1.frameCloseupPreviewCamera
 	})
 	UseRefResult.current = UseOrbitHeadCameraModuleResult.frameCamera
-	ReactModule.useEffect(function() --[[ Line: 120 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseViewportOrbitInteractionsModuleResult (copy)
 		if p1.committedYRotDeg ~= nil then
 			UseViewportOrbitInteractionsModuleResult.resetYaw(p1.committedYRotDeg)

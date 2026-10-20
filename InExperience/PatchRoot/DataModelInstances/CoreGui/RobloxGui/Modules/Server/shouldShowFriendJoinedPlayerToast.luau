@@ -1,4 +1,4 @@
-﻿return function(Player: Player): boolean --[[ Line: 1 ]]
+﻿return function(Player: Player): boolean
 	local JoinData = Player:GetJoinData()
 	local Number = JoinData and tonumber(JoinData.ReferredByPlayerId)
 	

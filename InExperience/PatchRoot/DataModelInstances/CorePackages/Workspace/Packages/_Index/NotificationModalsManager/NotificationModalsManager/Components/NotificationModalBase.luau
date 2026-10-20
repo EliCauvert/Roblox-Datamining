@@ -17,14 +17,14 @@ local GetFFlagEnablePushNotificationsUpsellModalFunction = require(Parent.Shared
 local GetFFlagNotificationModalSetMenuIsOpenFunction = require(Parent.SharedFlags).GetFFlagNotificationModalSetMenuIsOpen
 local config = { stiffness = 400, damping = 40, mass = 1 }
 
-return function(p1) --[[ Line: 46 ]]
+return function(p1)
 	-- upvalues: UseStateFunction (copy), GuiService (copy), UseEffectFunction (copy), GetFFlagNotificationModalSetMenuIsOpenFunction (copy), SettingsShowSignal (copy), ReactOtterModule (copy), UserInputService (copy), UseMemoFunction (copy), config (copy), ReactModule (copy), GetFFlagManagerAddDisplayOrderAndBackgroundDismissModule (copy), ReactRobloxModule (copy), LocalizationProvider (copy), GetFFlagEnablePushNotificationsUpsellModalFunction (copy), Localization (copy), LocalizationService (copy), StyleProviderWithDefaultTheme (copy)
 	local UseStateResult, UseStateResult2 = UseStateFunction({})
 	local UseStateResult1, UseStateResult2_1 = UseStateFunction(GuiService.MenuIsOpen)
-	UseEffectFunction(function() --[[ Line: 54 ]]
+	UseEffectFunction(function()
 		-- upvalues: GetFFlagNotificationModalSetMenuIsOpenFunction (upval), SettingsShowSignal (upval), p1 (copy), UseStateResult2_1 (copy), GuiService (upval)
 		local Connection = nil
-		Connection = if GetFFlagNotificationModalSetMenuIsOpenFunction() then SettingsShowSignal:connect(function(p2) --[[ Line: 57 ]]
+		Connection = if GetFFlagNotificationModalSetMenuIsOpenFunction() then SettingsShowSignal:connect(function(p2)
 			-- upvalues: p1 (upval), UseStateResult2_1 (upval)
 			if not p2 then
 				UseStateResult2_1(false)
@@ -35,19 +35,19 @@ return function(p1) --[[ Line: 46 ]]
 				p1.CloseModal()
 			end
 			UseStateResult2_1(true)
-		end) else GuiService.MenuOpened:Connect(function() --[[ Line: 68 ]]
+		end) else GuiService.MenuOpened:Connect(function()
 			-- upvalues: p1 (upval), UseStateResult2_1 (upval)
 			if p1.CloseModal then
 				p1.CloseModal()
 			end
 			UseStateResult2_1(true)
 		end)
-		local MenuClosedConnection = if GetFFlagNotificationModalSetMenuIsOpenFunction() then nil else GuiService.MenuClosed:Connect(function() --[[ Line: 77 ]]
+		local MenuClosedConnection = if GetFFlagNotificationModalSetMenuIsOpenFunction() then nil else GuiService.MenuClosed:Connect(function()
 			-- upvalues: UseStateResult2_1 (upval)
 			UseStateResult2_1(false)
 		end)
 		
-		return function() --[[ Line: 81 ]]
+		return function()
 			-- upvalues: GetFFlagNotificationModalSetMenuIsOpenFunction (upval), Connection (ref), MenuClosedConnection (copy)
 			if GetFFlagNotificationModalSetMenuIsOpenFunction() then
 				Connection:disconnect()
@@ -61,37 +61,37 @@ return function(p1) --[[ Line: 46 ]]
 			end
 		end
 	end, {})
-	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0, function() --[[ Line: 93 ]]
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0, function()
 		-- upvalues: UseStateResult (copy), p1 (copy), UseStateResult2 (copy)
 		if UseStateResult ~= p1 then
 			UseStateResult2(p1)
 		end
 	end)
-	UseEffectFunction(function() --[[ Line: 102 ]]
+	UseEffectFunction(function()
 		-- upvalues: p1 (copy), UseStateResult2 (copy), UserInputService (upval)
 		local Connection = nil
 		
 		if p1.ModalKey then
 			UseStateResult2(p1)
-			Connection = UserInputService.InputBegan:Connect(function(Input) --[[ Line: 112 ]]
+			Connection = UserInputService.InputBegan:Connect(function(Input)
 				-- upvalues: UserInputService (upval), p1 (upval)
 				if (Input.KeyCode == Enum.KeyCode.Backspace or Input.KeyCode == Enum.KeyCode.ButtonB) and UserInputService:GetFocusedTextBox() == nil and p1.CloseModal then
 					p1.CloseModal()
 				end
 			end)
 		end
-		return function() --[[ Line: 123 ]]
+		return function()
 			-- upvalues: Connection (ref)
 			if Connection then
 				Connection:Disconnect()
 			end
 		end
 	end, { p1 })
-	local UseMemoResult = UseMemoFunction(function(): number --[[ Line: 130 ]]
+	local UseMemoResult = UseMemoFunction(function(): number
 		-- upvalues: p1 (copy), UseStateResult1 (copy)
 		return if p1.ModalKey == nil or UseStateResult1 then 0 else 1
 	end, { p1.ModalKey, UseStateResult1 })
-	UseEffectFunction(function() --[[ Line: 134 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseMemoResult (copy), config (upval), GetFFlagNotificationModalSetMenuIsOpenFunction (upval), p1 (copy), GuiService (upval)
 		UseAnimatedBindingResult2(ReactOtterModule.spring(UseMemoResult, config))
 		
@@ -110,7 +110,7 @@ return function(p1) --[[ Line: 46 ]]
 		ResetOnSpawn = false,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
 		DisplayOrder = GetFFlagManagerAddDisplayOrderAndBackgroundDismissModule() and (UseStateResult.Params and UseStateResult.Params.DisplayOrder) or 0,
-		Enabled = UseAnimatedBindingResult:map(function(p2: number): boolean --[[ Line: 152 ]]
+		Enabled = UseAnimatedBindingResult:map(function(p2: number): boolean
 			return p2 > 0
 		end)
 	}, {
@@ -119,7 +119,7 @@ return function(p1) --[[ Line: 46 ]]
 			ZIndex = 0,
 			BackgroundColor3 = Color3.new(0, 0, 0),
 			Size = UDim2.new(1, 0, 1, 0),
-			BackgroundTransparency = UseAnimatedBindingResult:map(function(p2: number): number --[[ Line: 160 ]]
+			BackgroundTransparency = UseAnimatedBindingResult:map(function(p2: number): number
 				return 1 - p2 * 0.5
 			end)
 		}),
@@ -130,10 +130,10 @@ return function(p1) --[[ Line: 46 ]]
 			Size = UDim2.new(1, 0, 1, 0),
 			Modal = true,
 			Selectable = false,
-			Position = UseAnimatedBindingResult:map(function(p2: number): UDim2 --[[ Line: 173 ]]
+			Position = UseAnimatedBindingResult:map(function(p2: number): UDim2
 				return UDim2.new(0, 0, 1 - p2, 0)
 			end),
-			[ReactRobloxModule.Event.Activated] = function() --[[ Line: 178 ]]
+			[ReactRobloxModule.Event.Activated] = function()
 				-- upvalues: GetFFlagManagerAddDisplayOrderAndBackgroundDismissModule (upval), UseStateResult (copy), p1 (copy)
 				local DisableBackgroundDismiss = if GetFFlagManagerAddDisplayOrderAndBackgroundDismissModule() then UseStateResult.Params and UseStateResult.Params.DisableBackgroundDismiss else nil
 				

@@ -33,7 +33,7 @@ config.ThumbnailRequest = {
 	}
 }
 
-return function(p1) --[[ Line: 57 ]]
+return function(p1)
 	-- upvalues: SortInvitesByScoreIXPModule (copy), NetworkImpl (copy), Players (copy), UseDispatchFunction (copy), ReactModule (copy), GenerateDummyFriendsModule (copy), UseFriendsListOrderedByPresenceFunction (copy), UserProfilesModule (copy), PreloadUsersThumbnailFunction (copy), config (copy), UserModel (copy), PresenceType (copy), FFlagFilterOutDeletedAccountsGameInvitesModule (copy), ConstantsModule (copy), SortFriendsByCorrectedPresenceAndRank (copy), CryoModule (copy), GetFriendsSearchModule (copy), FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (copy), FriendsListContextModule (copy)
 	local UseSortInvitesByScoreExperimentResult = if SortInvitesByScoreIXPModule.FFlagEnableSortInvitesByScoreExperiment then SortInvitesByScoreIXPModule.useSortInvitesByScoreExperiment() else nil
 	local NetworkImplOverride = nil
@@ -54,10 +54,10 @@ return function(p1) --[[ Line: 57 ]]
 		query = UserProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
 	})
 	
-	local function v36(Ids, p2) --[[ Line: 87 ]]
+	local function v36(Ids, p2)
 		-- upvalues: UseDispatchResult (copy), PreloadUsersThumbnailFunction (upval), config (upval), UseUserProfilesFetchResult (copy), p1 (copy), UserModel (upval), UseFriendsListOrderedByPresenceResult (copy), PresenceType (upval), FFlagFilterOutDeletedAccountsGameInvitesModule (upval), ConstantsModule (upval), UseSortInvitesByScoreExperimentResult (copy), SortInvitesByScoreIXPModule (upval), SortFriendsByCorrectedPresenceAndRank (upval), UseStateResult2_2 (copy), UseStateResult2_1 (copy), UseMemoResult (ref), CryoModule (upval)
 		UseDispatchResult(PreloadUsersThumbnailFunction(Ids, config.ThumbnailRequest.InviteToGame, nil))
-		UseUserProfilesFetchResult:fetchMore({ variables = { userIds = Ids } }):andThen(function(Result) --[[ Line: 95 ]]
+		UseUserProfilesFetchResult:fetchMore({ variables = { userIds = Ids } }):andThen(function(Result)
 			-- upvalues: Ids (copy), p1 (upval), UserModel (upval), UseFriendsListOrderedByPresenceResult (upval), PresenceType (upval), FFlagFilterOutDeletedAccountsGameInvitesModule (upval), ConstantsModule (upval), UseSortInvitesByScoreExperimentResult (upval), SortInvitesByScoreIXPModule (upval), p2 (copy), SortFriendsByCorrectedPresenceAndRank (upval), UseStateResult2_2 (upval), UseStateResult2_1 (upval)
 			local List = {}
 			local LastLocation = nil
@@ -104,7 +104,7 @@ return function(p1) --[[ Line: 57 ]]
 			table.sort(List, SortFriendsByCorrectedPresenceAndRank)
 			UseStateResult2_2(List)
 			UseStateResult2_1(false)
-		end):catch(function(Err) --[[ Line: 146 ]]
+		end):catch(function(Err)
 			-- upvalues: UseStateResult2_1 (upval)
 			print("error", Err)
 			UseStateResult2_1(false)
@@ -113,7 +113,7 @@ return function(p1) --[[ Line: 57 ]]
 		return if UseMemoResult then CryoModule.List.join(UseMemoResult, Ids) else Ids
 	end
 	
-	UseMemoResult = ReactModule.useMemo(function() --[[ Line: 154 ]]
+	UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseStateResult (copy), GetFriendsSearchModule (upval), NetworkImplOverride (ref), Text (copy), UseSortInvitesByScoreExperimentResult (copy), SortInvitesByScoreIXPModule (upval), CryoModule (upval), v36 (copy), UseFriendsListOrderedByPresenceResult (copy), UseMemoResult (ref), FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (upval), UseStateResult2_2 (copy), UseStateResult2_1 (copy)
 		if UseStateResult == "" then
 			if UseFriendsListOrderedByPresenceResult.onlineFriends and UseFriendsListOrderedByPresenceResult.offlineFriends then
@@ -140,18 +140,18 @@ return function(p1) --[[ Line: 57 ]]
 				end
 			end
 		else
-			GetFriendsSearchModule(NetworkImplOverride, Text, UseStateResult, 20):andThen(function(Result) --[[ Line: 156 ]]
+			GetFriendsSearchModule(NetworkImplOverride, Text, UseStateResult, 20):andThen(function(Result)
 				-- upvalues: UseSortInvitesByScoreExperimentResult (upval), SortInvitesByScoreIXPModule (upval), CryoModule (upval), v36 (upval)
 				local T = if UseSortInvitesByScoreExperimentResult or SortInvitesByScoreIXPModule.FFlagSortInvitesByScoreEnabledForAll then {} else nil
 				
-				return (v36(CryoModule.List.map(Result.responseBody.PageItems, function(p3, p4): string --[[ Line: 161 ]]
+				return (v36(CryoModule.List.map(Result.responseBody.PageItems, function(p3, p4): string
 					-- upvalues: UseSortInvitesByScoreExperimentResult (upval), SortInvitesByScoreIXPModule (upval), T (copy)
 					if UseSortInvitesByScoreExperimentResult or SortInvitesByScoreIXPModule.FFlagSortInvitesByScoreEnabledForAll then
 						T[p3.id] = p4
 					end
 					return (tostring(p3.id))
 				end), T))
-			end):catch(function(Err) --[[ Line: 168 ]]
+			end):catch(function(Err)
 				print("error", Err)
 			end)
 		end

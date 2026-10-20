@@ -12,16 +12,16 @@ local IsYouTubeVideoModule = require(MediaGallery.isYouTubeVideo)
 local IsValidIdentifierModule = require(MediaGallery.isValidIdentifier)
 local _ = require(MediaGallery.MediaGalleryTypes)
 
-return function(p1, p2, AppPage) --[[ Line: 39 | Named "useFilteredMediaItems" ]]
+return function(p1, p2, AppPage)
 	-- upvalues: UseAppPolicyFunction (copy), UseIsVideoEligibleFunction (copy), IsValidIdentifierModule (copy), UseCanDevicePlayVideoPreviewFunction (copy), EdpVideoBlockingConfig (copy), ReactModule (copy), IsYouTubeVideoModule (copy), ReportWarningFunction (copy), LoggingProtocolModule (copy)
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p3) --[[ Line: 40 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p3)
 		return p3.getShowVideoThumbnails()
 	end)
 	local UseIsVideoEligibleResult = UseIsVideoEligibleFunction(p2)
 	local Inverted = not IsValidIdentifierModule(p2) or UseIsVideoEligibleResult
 	local UseCanDevicePlayVideoPreviewResult = UseCanDevicePlayVideoPreviewFunction(EdpVideoBlockingConfig, p2, AppPage)
 	
-	return ReactModule.useMemo(function() --[[ Line: 50 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: UseCanDevicePlayVideoPreviewResult (copy), Inverted (copy), p1 (copy), IsValidIdentifierModule (upval), IsYouTubeVideoModule (upval), UseAppPolicyResult (copy), ReportWarningFunction (upval), LoggingProtocolModule (upval), AppPage (copy)
 		local Inverted1 = UseCanDevicePlayVideoPreviewResult() and Inverted
 		local Flag = false

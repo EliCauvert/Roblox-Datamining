@@ -5,7 +5,7 @@ local Chip = require(Parent.Foundation).Chip
 local FFlagSduiChipAccessoryProps = require(Parent.SharedFlags).FFlagSduiChipAccessoryProps
 local FFlagSduiChipSizeAndVariant = require(Parent.SharedFlags).FFlagSduiChipSizeAndVariant
 
-return ReactModule.memo(function(p1) --[[ Line: 66 | Named "SduiChip" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FFlagSduiChipAccessoryProps (copy), ReactModule (copy), Chip (copy), FFlagSduiChipSizeAndVariant (copy)
 	return ReactModule.createElement(Chip, {
 		text = p1.text,

@@ -8,7 +8,7 @@ local UseLeaderboardStoreFunction = require(CorePackages.Workspace.Packages.Play
 local TeamEntryViewModule = require(script.Parent.Parent.Parent.Components.PresentationCommon.TeamEntryView)
 local FFlagPlayerListFixLeaderstatsStacking = require(CorePackages.Workspace.Packages.SharedFlags).FFlagPlayerListFixLeaderstatsStacking
 
-return ReactModule.memo(function(p1) --[[ Line: 44 | Named "TeamEntryContainer" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseLeaderboardStoreFunction (copy), SignalsReactModule (copy), GameTranslatorModule (copy), CoreGui (copy), FFlagPlayerListFixLeaderstatsStacking (copy), ReactModule (copy), TeamEntryViewModule (copy)
 	local GameStatsList = UseLeaderboardStoreFunction().getGameStatsList()
 	local Stats = p1.teamData.stats
@@ -16,7 +16,7 @@ return ReactModule.memo(function(p1) --[[ Line: 44 | Named "TeamEntryContainer" 
 	local UseSignalStateResult1 = if FFlagPlayerListFixLeaderstatsStacking then nil else SignalsReactModule.useSignalState(Stats.getCount)
 	
 	return ReactModule.createElement(TeamEntryViewModule, {
-		teamName = SignalsReactModule.useSignalBinding(function(p2) --[[ Line: 50 ]]
+		teamName = SignalsReactModule.useSignalBinding(function(p2)
 			-- upvalues: GameTranslatorModule (upval), CoreGui (upval), p1 (copy)
 			return GameTranslatorModule:TranslateGameText(CoreGui, p1.teamData.name(p2))
 		end),

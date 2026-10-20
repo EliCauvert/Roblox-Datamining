@@ -2,11 +2,11 @@
 local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
 local NumberInput = RoactModule.Component:extend("NumberInput")
 
-function NumberInput.init(p1) --[[ Line: 18 ]]
+function NumberInput.init(p1)
 	p1.state = { Value = p1.props.DefaultValue }
 end
 
-function NumberInput.render(p1) --[[ Line: 26 ]]
+function NumberInput.render(p1)
 	-- upvalues: RoactModule (copy), ConstantsModule (copy)
 	local Props = p1.props
 	
@@ -21,7 +21,7 @@ function NumberInput.render(p1) --[[ Line: 26 ]]
 		LayoutOrder = Props.LayoutOrder,
 		Size = Props.Size,
 		ClearTextOnFocus = true,
-		[RoactModule.Event.FocusLost] = function(p2) --[[ Line: 43 ]]
+		[RoactModule.Event.FocusLost] = function(p2)
 			-- upvalues: p1 (copy), Props (copy)
 			local Number: number? = tonumber(p2.Text)
 			

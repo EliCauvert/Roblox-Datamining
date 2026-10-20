@@ -4,7 +4,7 @@ local ThemeModule = require(script.Theme)
 local DefaultTokenColorsModule = require(script.Theme.defaultTokenColors)
 local HighlighterModule = { defaultLexer = require(script.Lexer) }
 
-function HighlighterModule.highlight(p1, p2): string --[[ Line: 14 ]]
+function HighlighterModule.highlight(p1, p2): string
 	-- upvalues: ThemeModule (copy), DefaultTokenColorsModule (copy), UtilityModule (copy), HighlighterModule (copy)
 	if p2 then
 		ThemeModule.setColors(p2)
@@ -20,7 +20,7 @@ function HighlighterModule.highlight(p1, p2): string --[[ Line: 14 ]]
 	return Text
 end
 
-function HighlighterModule.getTokenColor(p3) --[[ Line: 35 ]]
+function HighlighterModule.getTokenColor(p3)
 	-- upvalues: ThemeModule (copy)
 	return ThemeModule.getColor(p3)
 end

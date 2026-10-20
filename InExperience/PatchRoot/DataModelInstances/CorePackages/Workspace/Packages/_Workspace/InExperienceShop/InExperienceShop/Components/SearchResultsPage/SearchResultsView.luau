@@ -17,7 +17,7 @@ local _ = require(InExperienceShop.Types)
 local Formatted = string.format("Type at least %d characters to search", require(InExperienceShop.Constants).SEARCH_MIN_LENGTH)
 local config = { emptyText = "CommonUI.Messages.Response.NoResults" }
 
-return function(Frame) --[[ Line: 51 | Named "SearchResultsView" ]]
+return function(Frame)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), UseShopImpressionsDetectorModule (copy), ShopPageType (copy), ReactModule (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (copy), ItemRowModule (copy), ShopPageType1 (copy), Formatted (copy), View (copy), ScrollView (copy), FoundationModule (copy), Text (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseShopImpressionsDetectorModuleResult = UseShopImpressionsDetectorModule({
@@ -25,13 +25,13 @@ return function(Frame) --[[ Line: 51 | Named "SearchResultsView" ]]
 		externalScrollSignal = nil,
 		pageType = if ShopPageType then ShopPageType.Search else ""
 	})
-	local UseResult = ReactModule.useCallback(function(_) --[[ Line: 60 ]]
+	local UseResult = ReactModule.useCallback(function(_)
 		-- upvalues: FFlagEnableInExperienceShopUnifiedLoggingModule (upval), UseShopImpressionsDetectorModuleResult (copy)
 		if FFlagEnableInExperienceShopUnifiedLoggingModule then
 			UseShopImpressionsDetectorModuleResult.onLayoutChange()
 		end
 	end, { UseShopImpressionsDetectorModuleResult.onLayoutChange })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 66 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Frame (copy), ReactModule (upval), ItemRowModule (upval), ShopPageType1 (upval)
 		if Frame.state ~= "results" then
 			return {}
@@ -75,7 +75,7 @@ return function(Frame) --[[ Line: 51 | Named "SearchResultsView" ]]
 			Content = ReactModule.createElement(View, {
 				tag = "col gap-medium size-full-0 auto-y padding-x-xlarge padding-bottom-xlarge padding-top-medium",
 				ref = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseShopImpressionsDetectorModuleResult.gridRef else nil,
-				onAbsoluteSizeChanged = if FFlagEnableInExperienceShopUnifiedLoggingModule then function(_) --[[ Line: 122 ]]
+				onAbsoluteSizeChanged = if FFlagEnableInExperienceShopUnifiedLoggingModule then function(_)
 					-- upvalues: UseShopImpressionsDetectorModuleResult (copy)
 					UseShopImpressionsDetectorModuleResult.onLayoutChange()
 				end else nil

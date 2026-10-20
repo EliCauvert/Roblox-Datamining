@@ -6,7 +6,7 @@ local FFlagProfilePlatformEnableLazyLoadingComponentsModule = require(ProfilePla
 local _ = require(Parent.SocialCommon)
 local _ = require(ProfilePlatform.Types.Component)
 
-return require(ProfilePlatform.Networking.myRoduxNetworking).POST("GetProfile", function(Callback, p1) --[[ Line: 27 ]]
+return require(ProfilePlatform.Networking.myRoduxNetworking).POST("GetProfile", function(Callback, p1)
 	-- upvalues: HttpModule (copy), FFlagProfilePlatformEnableLazyLoadingComponentsModule (copy)
 	return Callback(HttpModule.Url.APIS_URL .. "profile-platform-api"):path("v1"):path("profiles"):path("get"):body({
 		profileType = p1.profileType,

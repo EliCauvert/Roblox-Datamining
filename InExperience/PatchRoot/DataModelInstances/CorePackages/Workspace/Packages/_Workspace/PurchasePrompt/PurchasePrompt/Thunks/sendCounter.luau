@@ -10,9 +10,9 @@ local SelectedRobuxPackageModule = require(Parent.Utils.SelectedRobuxPackage)
 local ThunkModule = require(Parent.Thunk)
 local list = { AnalyticsModule, ExternalSettingsModule }
 
-return function(p1) --[[ Line: 23 | Named "sendCounter" ]]
+return function(p1)
 	-- upvalues: ThunkModule (copy), list (copy), AnalyticsModule (copy), ExternalSettingsModule (copy), CounterModule (copy), PurchaseFlowModule (copy), SelectedRobuxPackageModule (copy), GetPaymentPlatformModule (copy), PaymentPlatformModule (copy), GetCounterCombinationsModule (copy)
-	return ThunkModule.new(script.Name, list, function(p2, p3) --[[ Line: 24 ]]
+	return ThunkModule.new(script.Name, list, function(p2, p3)
 		-- upvalues: AnalyticsModule (upval), ExternalSettingsModule (upval), CounterModule (upval), p1 (copy), PurchaseFlowModule (upval), SelectedRobuxPackageModule (upval), GetPaymentPlatformModule (upval), PaymentPlatformModule (upval), GetCounterCombinationsModule (upval)
 		local v1 = p3[AnalyticsModule]
 		local v2 = p3[ExternalSettingsModule]

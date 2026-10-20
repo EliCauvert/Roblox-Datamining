@@ -7,23 +7,23 @@ local CFrameUtility = require(Parent.Thumbnailing).CFrameUtility
 local EmoteUtility = require(Parent.Thumbnailing).EmoteUtility
 local PurchasePromptPreviewMakeupHead2 = game:DefineFastFlag("PurchasePromptPreviewMakeupHead2", false)
 
-return function(Frame) --[[ Line: 27 | Named "ModelViewport" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), EmoteUtility (copy), RunService (copy), CFrameUtility (copy), CharacterUtility (copy), CameraUtility (copy), PurchasePromptPreviewMakeupHead2 (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(nil)
 	local UseRefResult1 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 32 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy)
 		UseRefResult1.current = true
 		
-		return function() --[[ Line: 34 ]]
+		return function()
 			-- upvalues: UseRefResult1 (upval)
 			UseRefResult1.current = false
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 39 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy), UseRefResult (copy), EmoteUtility (upval), RunService (upval), UseRefResult1 (copy), CFrameUtility (upval), CharacterUtility (upval), CameraUtility (upval), UseBindingResult2 (copy), PurchasePromptPreviewMakeupHead2 (upval)
-		task.spawn(function() --[[ Line: 41 ]]
+		task.spawn(function()
 			-- upvalues: Frame (upval), UseRefResult (upval), EmoteUtility (upval), RunService (upval), UseRefResult1 (upval), CFrameUtility (upval), CharacterUtility (upval), CameraUtility (upval), UseBindingResult2 (upval), PurchasePromptPreviewMakeupHead2 (upval)
 			local Model = Frame.model:Clone()
 			local Camera = Instance.new("Camera")

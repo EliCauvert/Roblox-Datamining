@@ -15,12 +15,12 @@ local RoactRoduxModule = require(Parent.RoactRodux)
 local InstallReducerModule = require(UserRelationshipModals.Rodux.installReducer)
 local RODUXKEYModule = require(UserRelationshipModals.Rodux.RODUX_KEY)
 
-local function createRoduxStore() --[[ Line: 23 ]]
+local function createRoduxStore()
 	-- upvalues: RoduxModule (copy), RODUXKEYModule (copy), InstallReducerModule (copy)
 	return RoduxModule.Store.new(RoduxModule.combineReducers({ [RODUXKEYModule] = InstallReducerModule() }), nil, { RoduxModule.thunkMiddleware })
 end
 
-return function(p1, Tbl) --[[ Line: 33 ]]
+return function(p1, Tbl)
 	-- upvalues: CoreGui (copy), ReactFocusNavigationModule (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), FoundationProvider (copy), FoundationModule (copy), Provider (copy), RoactRoduxModule (copy), createRoduxStore (copy), ReactRobloxModule (copy)
 	if not CoreGui:FindFirstChild("UserRelationshipModal") then
 		local UserRelationshipModal = Instance.new("Folder")
@@ -37,7 +37,7 @@ return function(p1, Tbl) --[[ Line: 33 ]]
 		UserRelationshipModalOverlay.ClipToDeviceSafeArea = false
 		local Copy = table.clone(Tbl)
 		
-		function Copy.onClose() --[[ Line: 52 ]]
+		function Copy.onClose()
 			-- upvalues: UserRelationshipModal (copy)
 			UserRelationshipModal:Destroy()
 		end

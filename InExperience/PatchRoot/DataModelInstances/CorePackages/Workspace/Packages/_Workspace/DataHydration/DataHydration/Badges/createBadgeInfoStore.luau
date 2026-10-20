@@ -12,12 +12,12 @@ local DiscoveryUtilsModule = require(Parent.DiscoveryUtils)
 local LogResponseErrorFunction = DiscoveryUtilsModule.logResponseError
 local DiscoveryEventErrorLogger = DiscoveryUtilsModule.DiscoveryEventErrorLogger
 
-return function() --[[ Line: 26 | Named "createBadgeInfoStore" ]]
+return function()
 	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy), SignalsModule (copy), RequestRemoveBadgeModule (copy), LogResponseErrorFunction (copy), BadgesUrlBuilderModule (copy), DiscoveryEventErrorLogger (copy)
 	local DataCacheModule = CreateDataCacheModule()
 	local DataResolverModule = CreateDataResolverModule({
 		cache = DataCacheModule,
-		fetchFn = function(_) --[[ Line: 30 ]]
+		fetchFn = function(_)
 			-- upvalues: PromiseModule (upval)
 			return PromiseModule.resolve({})
 		end
@@ -27,7 +27,7 @@ return function() --[[ Line: 26 | Named "createBadgeInfoStore" ]]
 		getBadgeInfo = DataResolverModule.getCachedItem,
 		getBadgeInfos = DataResolverModule.getCachedItems,
 		updateBadges = DataCacheModule.updateItems,
-		removeBadge = function(BadgeId) --[[ Line: 37 ]]
+		removeBadge = function(BadgeId)
 			-- upvalues: SignalsModule (upval), DataCacheModule (copy), RequestRemoveBadgeModule (upval), LogResponseErrorFunction (upval), BadgesUrlBuilderModule (upval), DiscoveryEventErrorLogger (upval)
 			local Signal, Signal2 = SignalsModule.createSignal(nil)
 			local DataResult = DataCacheModule.getItem(BadgeId).data(false)
@@ -36,10 +36,10 @@ return function() --[[ Line: 26 | Named "createBadgeInfoStore" ]]
 			if IsEarnedByUser == true then
 				DataCacheModule.updateItem(BadgeId, { isEarnedByUser = false })
 			end
-			RequestRemoveBadgeModule(BadgeId):andThen(function() --[[ Line: 56 ]]
+			RequestRemoveBadgeModule(BadgeId):andThen(function()
 				-- upvalues: Signal2 (copy)
 				Signal2({ type = "success" })
-			end):catch(function(Err) --[[ Line: 61 ]]
+			end):catch(function(Err)
 				-- upvalues: DataResult (copy), DataCacheModule (upval), BadgeId (copy), IsEarnedByUser (copy), Signal2 (copy), LogResponseErrorFunction (upval), BadgesUrlBuilderModule (upval), DiscoveryEventErrorLogger (upval)
 				if DataResult then
 					DataCacheModule.updateItem(BadgeId, { isEarnedByUser = IsEarnedByUser })

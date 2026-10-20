@@ -15,7 +15,7 @@ local _ = require(MusicPicker.Types.MusicPickerTypes)
 local MagnifyingGlass = BuilderIconsModule.Icon.MagnifyingGlass
 local X = BuilderIconsModule.Icon.X
 
-local function _(Entry, Id) --[[ Line: 52 | Named "findActiveTab" ]]
+local function _(Entry, Id)
 	for _, value in Entry do
 		if value.id == Id then
 			return value
@@ -24,7 +24,7 @@ local function _(Entry, Id) --[[ Line: 52 | Named "findActiveTab" ]]
 	return if #Entry > 0 then Entry[1] else nil
 end
 
-return function(p1) --[[ Line: 61 | Named "MusicPickerView" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseStyleTagsFunction (copy), ReactModule (copy), MusicPickerListModule (copy), MusicPickerTabStripModule (copy), View (copy), FoundationModule (copy), Text (copy), IconButton (copy), X (copy), Icon (copy), MagnifyingGlass (copy)
 	local UseTokensResult = UseTokensFunction()
 	local FillSize0FullTextBodyLargeTextAlignXLeftTextAlignYCenterTextNoWrapClipGuiObjectDefaults = UseStyleTagsFunction("fill size-0-full text-body-large text-align-x-left text-align-y-center text-no-wrap clip gui-object-defaults")
@@ -74,7 +74,7 @@ return function(p1) --[[ Line: 61 | Named "MusicPickerView" ]]
 	return ReactModule.createElement(View, {
 		tag = "col align-x-center align-y-top gap-small position-bottom-center anchor-bottom-center size-full-0 radius-medium bg-surface-100",
 		ZIndex = 5,
-		onActivated = function() --[[ Line: 111 ]] end,
+		onActivated = function() end,
 		Size = UDim2.fromScale(1, 0.6666666666666666),
 		stateLayer = {
 			affordance = FoundationModule.Enums.StateLayerAffordance.None
@@ -128,11 +128,11 @@ return function(p1) --[[ Line: 61 | Named "MusicPickerView" ]]
 				TextColor3 = Emphasis.Color3,
 				TextTransparency = Emphasis.Transparency,
 				[ReactModule.Tag] = FillSize0FullTextBodyLargeTextAlignXLeftTextAlignYCenterTextNoWrapClipGuiObjectDefaults,
-				[ReactModule.Change.Text] = function(p2) --[[ Line: 101 ]]
+				[ReactModule.Change.Text] = function(p2)
 					-- upvalues: p1 (copy)
 					p1.onSearchChanged(p2.Text)
 				end,
-				[ReactModule.Event.FocusLost] = function(_, p2) --[[ Line: 104 ]]
+				[ReactModule.Event.FocusLost] = function(_, p2)
 					-- upvalues: p1 (copy)
 					if p2 then
 						p1.onSubmitSearch()

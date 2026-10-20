@@ -12,7 +12,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FFlagMomentsCreationMusicChipRemoveButtonModule = require(MomentsCreation.Flags.FFlagMomentsCreationMusicChipRemoveButton)
 local UseMusicInfoModule = require(MomentsCreation.Hooks.useMusicInfo)
 
-return function(p1) --[[ Line: 35 | Named "MusicChip" ]]
+return function(p1)
 	-- upvalues: UseMusicInfoModule (copy), FFlagMomentsCreationMusicChipRemoveButtonModule (copy), UseTokensFunction (copy), ReactModule (copy), View (copy), Icon (copy), MusicNote (copy), FoundationModule (copy), Text (copy), IconName (copy), IconSize (copy)
 	local UseMusicInfoModuleResult = UseMusicInfoModule(p1.musicAssetId)
 	local UseTokensResult = if FFlagMomentsCreationMusicChipRemoveButtonModule then UseTokensFunction() else nil

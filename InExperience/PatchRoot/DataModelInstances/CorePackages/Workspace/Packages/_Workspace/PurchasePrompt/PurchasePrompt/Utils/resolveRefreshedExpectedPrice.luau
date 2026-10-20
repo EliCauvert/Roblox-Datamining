@@ -1,4 +1,4 @@
-﻿return function(p1, p2, CollectibleItemInstanceId, Days) --[[ Line: 1 | Named "resolveRefreshedExpectedPrice" ]]
+﻿return function(p1, p2, CollectibleItemInstanceId, Days)
 	local Price = nil
 	
 	if CollectibleItemInstanceId and CollectibleItemInstanceId ~= "" then

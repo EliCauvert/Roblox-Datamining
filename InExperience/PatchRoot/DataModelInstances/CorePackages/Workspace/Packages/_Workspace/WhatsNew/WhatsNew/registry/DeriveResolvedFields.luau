@@ -2,23 +2,23 @@
 local EnumsModule = require(WhatsNew.Enums)
 local _ = require(WhatsNew.Types)
 
-local function _(Onboarding, p1) --[[ Line: 11 | Named "clientGatesPass" ]]
+local function _(Onboarding, p1)
 	-- upvalues: EnumsModule (copy)
 	return Onboarding ~= EnumsModule.TourType.Onboarding or p1.onboardingEligible
 end
 
-local _ = function(p1): boolean --[[ Line: 18 | Named "isNonEmptyString" ]]
+local _ = function(p1): boolean
 	return p1 ~= nil and p1 ~= ""
 end
 
-local _ = function(p1) --[[ Line: 22 | Named "isoDateToUnix" ]]
+local _ = function(p1)
 	local _DateTime = DateTime.fromIsoDate(p1)
 	
 	return _DateTime and _DateTime.UnixTimestamp or nil
 end
 
 local DeriveResolvedFieldsModule = {
-	isEntryInScopeSubtree = function(p1, ScopeId, p2): boolean --[[ Line: 27 ]]
+	isEntryInScopeSubtree = function(p1, ScopeId, p2): boolean
 		local ScopeId1 = p1.scopeId
 		while ScopeId1 ~= nil do
 			if ScopeId1 == ScopeId then
@@ -33,7 +33,7 @@ local DeriveResolvedFieldsModule = {
 		end
 		return false
 	end,
-	isEntryExpired = function(p3, Onboarding, p4): boolean --[[ Line: 46 ]]
+	isEntryExpired = function(p3, Onboarding, p4): boolean
 		-- upvalues: EnumsModule (copy)
 		local UnixTimestamp = nil
 		if p3.publishedTime == nil then
@@ -60,7 +60,7 @@ local DeriveResolvedFieldsModule = {
 	end
 }
 
-function DeriveResolvedFieldsModule.deriveEntryDisplay(p3, Onboarding, p4) --[[ Line: 74 ]]
+function DeriveResolvedFieldsModule.deriveEntryDisplay(p3, Onboarding, p4)
 	-- upvalues: DeriveResolvedFieldsModule (copy), EnumsModule (copy)
 	local IsEntryExpired = DeriveResolvedFieldsModule.isEntryExpired(p3, Onboarding, p4)
 	local StorageEntry = p4.storage[p3.id]
@@ -84,7 +84,7 @@ function DeriveResolvedFieldsModule.deriveEntryDisplay(p3, Onboarding, p4) --[[ 
 	}
 end
 
-function DeriveResolvedFieldsModule.getLabels(p3, Onboarding) --[[ Line: 102 ]]
+function DeriveResolvedFieldsModule.getLabels(p3, Onboarding)
 	-- upvalues: EnumsModule (copy)
 	return if Onboarding == EnumsModule.TourType.Onboarding then {
 		title = p3.onboardingTitle or "",
@@ -95,7 +95,7 @@ function DeriveResolvedFieldsModule.getLabels(p3, Onboarding) --[[ Line: 102 ]]
 	}
 end
 
-function DeriveResolvedFieldsModule.hasLabels(p3): boolean --[[ Line: 116 ]]
+function DeriveResolvedFieldsModule.hasLabels(p3): boolean
 	local Title = p3.title
 	local IsNotTitleMatch: boolean = Title ~= nil and Title ~= ""
 	
@@ -106,7 +106,7 @@ function DeriveResolvedFieldsModule.hasLabels(p3): boolean --[[ Line: 116 ]]
 	return IsNotTitleMatch
 end
 
-function DeriveResolvedFieldsModule.countScopeSteps(p3): number --[[ Line: 120 ]]
+function DeriveResolvedFieldsModule.countScopeSteps(p3): number
 	local NewStepCount = 0
 	
 	for _, tourTip in p3.tourTips do

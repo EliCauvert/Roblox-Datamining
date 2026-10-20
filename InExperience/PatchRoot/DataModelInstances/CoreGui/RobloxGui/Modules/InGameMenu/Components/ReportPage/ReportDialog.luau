@@ -53,7 +53,7 @@ ReportDialog.validateProps = T.strictInterface({
 	isGamepadLastInput = T.optional(T.boolean)
 })
 
-function ReportDialog.init(p1) --[[ Line: 88 ]]
+function ReportDialog.init(p1)
 	-- upvalues: Roact (copy)
 	p1.state = { abuseDescription = "", typeOfAbuseIndex = 0 }
 	p1.selectionGroupRef = Roact.createRef()
@@ -61,7 +61,7 @@ function ReportDialog.init(p1) --[[ Line: 88 ]]
 	p1.reportDropDownRef = Roact.createRef()
 end
 
-function ReportDialog:renderReportTitle(p1, p2, Text) --[[ Line: 99 ]]
+function ReportDialog:renderReportTitle(p1, p2, Text)
 	-- upvalues: Roact (copy), ThemedTextLabelModule (copy)
 	p2.Title = Roact.createElement(ThemedTextLabelModule, {
 		fontKey = "Header1",
@@ -79,12 +79,12 @@ function ReportDialog:renderReportTitle(p1, p2, Text) --[[ Line: 99 ]]
 	})
 end
 
-function ReportDialog.renderTextEntryField(p1, p2, p3, Size) --[[ Line: 118 ]]
+function ReportDialog.renderTextEntryField(p1, p2, p3, Size)
 	-- upvalues: Roact (copy), TextEntryFieldModule (copy)
 	p3.ReportDescription = Roact.createElement(TextEntryFieldModule, {
 		enabled = p1.props.isOpen,
 		text = p1.state.abuseDescription,
-		textChanged = function(AbuseDescription) --[[ Line: 122 ]]
+		textChanged = function(AbuseDescription)
 			-- upvalues: p1 (copy)
 			p1:setState({ abuseDescription = AbuseDescription })
 		end,
@@ -97,7 +97,7 @@ function ReportDialog.renderTextEntryField(p1, p2, p3, Size) --[[ Line: 118 ]]
 	})
 end
 
-function ReportDialog.renderButtons(p1, _, p2, p3) --[[ Line: 137 ]]
+function ReportDialog.renderButtons(p1, _, p2, p3)
 	-- upvalues: list (copy), Roact (copy), Button (copy), ButtonType (copy), FFlagIGMDialogButtonsUseUIBloxButtonModule (copy)
 	local Length = utf8.len(utf8.nfcnormalize(p1.state.abuseDescription))
 	local IsTypeOfAbuseIndexAbove: boolean = p1.state.typeOfAbuseIndex > 0 or p1.props.userId == nil
@@ -127,7 +127,7 @@ function ReportDialog.renderButtons(p1, _, p2, p3) --[[ Line: 137 ]]
 			size = UDim2.fromOffset(144, 36),
 			isDisabled = not (Length >= 0 and Length <= 160 and IsTypeOfAbuseIndexAbove),
 			text = p2.report,
-			onActivated = function() --[[ Line: 142 ]]
+			onActivated = function()
 				-- upvalues: p1 (copy), list (upval)
 				p1.props.dispatchSendReport(if p1.props.userId == nil then "Inappropriate Content" else list[p1.state.typeOfAbuseIndex], p1.state.abuseDescription, p1.props.userId)
 				p1.props.dispatchCloseReportDialog()
@@ -137,7 +137,7 @@ function ReportDialog.renderButtons(p1, _, p2, p3) --[[ Line: 137 ]]
 	})
 end
 
-function ReportDialog.renderReportPlayer(p1, p2, p3, p4) --[[ Line: 183 ]]
+function ReportDialog.renderReportPlayer(p1, p2, p3, p4)
 	-- upvalues: Roact (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), AssetsModule (copy), ImageSetLabel (copy), Cryo (copy), ThemedTextLabelModule (copy), DropDownSelectionModule (copy), Selections (copy)
 	p1:renderReportTitle(p2, p4, p3.reportPlayerTitle)
 	local Frame = {
@@ -207,7 +207,7 @@ function ReportDialog.renderReportPlayer(p1, p2, p3, p4) --[[ Line: 183 ]]
 			selectedIndex = p1.state.typeOfAbuseIndex,
 			canOpen = p1.props.canCaptureFocus,
 			canCaptureFocus = p1.props.isGamepadLastInput,
-			selectionChanged = function(TypeOfAbuseIndex) --[[ Line: 269 ]]
+			selectionChanged = function(TypeOfAbuseIndex)
 				-- upvalues: p1 (copy)
 				p1:setState({ typeOfAbuseIndex = TypeOfAbuseIndex })
 			end,
@@ -218,7 +218,7 @@ function ReportDialog.renderReportPlayer(p1, p2, p3, p4) --[[ Line: 183 ]]
 	p1:renderButtons(p2, p3, p4)
 end
 
-function ReportDialog.renderReportGame(p1, p2, p3, p4) --[[ Line: 282 ]]
+function ReportDialog.renderReportGame(p1, p2, p3, p4)
 	-- upvalues: AssetsModule (copy), Roact (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), ImageSetLabel (copy), ThemedTextLabelModule (copy)
 	p1:renderReportTitle(p2, p4, "Report " .. p1.props.placeName)
 	local Text = if game.GameId > 0 then "rbxthumb://type=GameIcon&id=" .. game.GameId .. "&w=150&h=150" else AssetsModule.Images.PlaceholderGameIcon
@@ -254,9 +254,9 @@ function ReportDialog.renderReportGame(p1, p2, p3, p4) --[[ Line: 282 ]]
 	p1:renderButtons(p2, p3, p4)
 end
 
-function ReportDialog.render(p1) --[[ Line: 327 ]]
+function ReportDialog.render(p1)
 	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), WithLocalizationModule (copy), Roact (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), AssetsModule (copy), ImageSetLabel (copy), GetFFlagIGMGamepadSelectionHistoryModule (copy), FocusHandlerModule (copy), GuiService (copy)
-	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 328 ]]
+	return WithFoundationOrUIBloxStyleFunction(function(p2)
 		return {
 			Theme = {
 				Overlay = {
@@ -277,7 +277,7 @@ function ReportDialog.render(p1) --[[ Line: 327 ]]
 				}
 			}
 		}
-	end, function(p2) --[[ Line: 337 ]]
+	end, function(p2)
 		-- upvalues: WithLocalizationModule (upval), p1 (copy), Roact (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), AssetsModule (upval), ImageSetLabel (upval), GetFFlagIGMGamepadSelectionHistoryModule (upval), FocusHandlerModule (upval), GuiService (upval)
 		return WithLocalizationModule({
 			reportPlayerTitle = "CoreScripts.InGameMenu.Report.ReportPlayerTitle",
@@ -293,7 +293,7 @@ function ReportDialog.render(p1) --[[ Line: 327 ]]
 				"CoreScripts.InGameMenu.Report.ReportGameTitle",
 				RBX_NAME = p1.props.placeName
 			}
-		})(function(p3) --[[ Line: 349 ]]
+		})(function(p3)
 			-- upvalues: Roact (upval), p1 (upval), p2 (copy), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), AssetsModule (upval), ImageSetLabel (upval), GetFFlagIGMGamepadSelectionHistoryModule (upval), FocusHandlerModule (upval), GuiService (upval)
 			local config = {
 				Padding = Roact.createElement("UIPadding", {
@@ -353,7 +353,7 @@ function ReportDialog.render(p1) --[[ Line: 327 ]]
 				FocusHandler = GetFFlagIGMGamepadSelectionHistoryModule() and Roact.createElement(FocusHandlerModule, {
 					isFocused = p1.props.canCaptureFocus and p1.props.isGamepadLastInput,
 					shouldForgetPreviousSelection = not p1.props.isOpen,
-					didFocus = function(p4) --[[ Line: 411 ]]
+					didFocus = function(p4)
 						-- upvalues: p1 (upval), GuiService (upval)
 						local Value = if p1.props.userId then p1.reportDropDownRef:getValue() else p1.reportTextEntryRef:getValue()
 						GuiService.SelectedCoreObject = p4 or Value
@@ -364,9 +364,9 @@ function ReportDialog.render(p1) --[[ Line: 327 ]]
 	end)
 end
 
-function ReportDialog.bindActions(p1) --[[ Line: 426 ]]
+function ReportDialog.bindActions(p1)
 	-- upvalues: ContextActionService (copy)
-	ContextActionService:BindCoreAction("InGameMenuReportModalClose", function(_, UserInputState, _) --[[ Line: 427 | Named "closeReportFunc" ]]
+	ContextActionService:BindCoreAction("InGameMenuReportModalClose", function(_, UserInputState, _)
 		-- upvalues: p1 (copy)
 		if UserInputState == Enum.UserInputState.Begin then
 			p1.props.dispatchCloseReportDialog()
@@ -374,12 +374,12 @@ function ReportDialog.bindActions(p1) --[[ Line: 426 ]]
 	end, false, Enum.KeyCode.Escape)
 end
 
-function ReportDialog:unbindActions() --[[ Line: 436 ]]
+function ReportDialog:unbindActions()
 	-- upvalues: ContextActionService (copy)
 	ContextActionService:UnbindCoreAction("InGameMenuReportModalClose")
 end
 
-function ReportDialog.didMount(p1) --[[ Line: 440 ]]
+function ReportDialog.didMount(p1)
 	-- upvalues: GuiService (copy)
 	GuiService:RemoveSelectionGroup("ReportDialogGroup")
 	GuiService:AddSelectionParent("ReportDialogGroup", p1.selectionGroupRef:getValue())
@@ -389,7 +389,7 @@ function ReportDialog.didMount(p1) --[[ Line: 440 ]]
 	end
 end
 
-function ReportDialog.didUpdate(p1, p2) --[[ Line: 449 ]]
+function ReportDialog.didUpdate(p1, p2)
 	-- upvalues: GetFFlagIGMGamepadSelectionHistoryModule (copy), GuiService (copy)
 	if p2.isOpen and not p1.props.isOpen then
 		p1:setState({ typeOfAbuseIndex = 0, abuseDescription = "" })
@@ -406,11 +406,11 @@ function ReportDialog.didUpdate(p1, p2) --[[ Line: 449 ]]
 	end
 end
 
-function ReportDialog.willUnmount(p1) --[[ Line: 481 ]]
+function ReportDialog.willUnmount(p1)
 	p1:unbindActions()
 end
 
-return RoactRodux.UNSTABLE_connect2(function(p1, _) --[[ Line: 485 ]]
+return RoactRodux.UNSTABLE_connect2(function(p1, _)
 	-- upvalues: ConstantsModule (copy)
 	return {
 		isOpen = p1.report.dialogOpen,
@@ -420,14 +420,14 @@ return RoactRodux.UNSTABLE_connect2(function(p1, _) --[[ Line: 485 ]]
 		canCaptureFocus = p1.report.dialogOpen and not p1.respawn.dialogOpen,
 		isGamepadLastInput = p1.displayOptions.inputType == ConstantsModule.InputType.Gamepad
 	}
-end, function(Callback) --[[ Line: 494 ]]
+end, function(Callback)
 	-- upvalues: CloseReportDialogModule (copy), SendReportModule (copy), SendAnalyticsModule (copy), ConstantsModule (copy)
 	return {
-		dispatchCloseReportDialog = function() --[[ Line: 496 ]]
+		dispatchCloseReportDialog = function()
 			-- upvalues: Callback (copy), CloseReportDialogModule (upval)
 			Callback(CloseReportDialogModule())
 		end,
-		dispatchSendReport = function(p1, p2, p3) --[[ Line: 499 ]]
+		dispatchSendReport = function(p1, p2, p3)
 			-- upvalues: Callback (copy), SendReportModule (upval), SendAnalyticsModule (upval), ConstantsModule (upval)
 			Callback(SendReportModule(p1, p2, p3))
 			local List = {}

@@ -29,17 +29,17 @@ local LivenessWithCallbackPollMaxRetries = game:DefineFastInt("LivenessWithCallb
 local LivenessBackgroundOnlyPollDelay = game:DefineFastInt("LivenessBackgroundOnlyPollDelay", 6)
 local LivenessBackgroundOnlyPollMaxRetries = game:DefineFastInt("LivenessBackgroundOnlyPollMaxRetries", 30)
 
-return function(p1) --[[ Line: 58 | Named "PersonaLivenessContainer" ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseAppPolicyFunction (copy), UseRoactServiceFunction (copy), AppLogging (copy), ReactModule (copy), GetFFlagEnhancedPersonaLivenessEventsFunction (copy), BiometricChallengeEventModule (copy), ChallengeEventConstantsModule (copy), BiometricTypeEnum (copy), TelemetryReasonsModule (copy), HttpService (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), PersonaLivenessServiceWrapperModule (copy), LivenessWithCallbackPollDelay (copy), LivenessWithCallbackPollMaxRetries (copy), LivenessBackgroundOnlyPollDelay (copy), LivenessBackgroundOnlyPollMaxRetries (copy), UsePollIDVStatusFunction (copy), PromiseModule (copy), IDVApiProvider (copy), PersonaLivenessHostedModule (copy), Loading (copy), IconSize (copy)
 	local UseDispatchResult = UseDispatchFunction()
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 62 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2)
 		return p2.getHasWebViewSupportForFAE()
 	end)
 	local UseRoactServiceResult = UseRoactServiceFunction(AppLogging)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local Persona = ReactModule.useRef("Persona")
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function(p2, Reason) --[[ Line: 76 ]]
+	local UseResult = ReactModule.useCallback(function(p2, Reason)
 		-- upvalues: p1 (copy), GetFFlagEnhancedPersonaLivenessEventsFunction (upval), UseRoactServiceResult (copy), BiometricChallengeEventModule (upval), ChallengeEventConstantsModule (upval), BiometricTypeEnum (upval), UseRefResult (copy)
 		p1.onChallengeFailed(p2)
 		
@@ -65,7 +65,7 @@ return function(p1) --[[ Line: 58 | Named "PersonaLivenessContainer" ]]
 		p1.challengeId,
 		p1.onChallengeFailed
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 95 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), GetFFlagEnhancedPersonaLivenessEventsFunction (upval), Persona (copy), TelemetryReasonsModule (upval), UseRoactServiceResult (copy), BiometricChallengeEventModule (upval), ChallengeEventConstantsModule (upval), BiometricTypeEnum (upval), UseRefResult (copy)
 		p1.onChallengeAbandoned("")
 		
@@ -91,7 +91,7 @@ return function(p1) --[[ Line: 58 | Named "PersonaLivenessContainer" ]]
 		p1.challengeId,
 		p1.onChallengeAbandoned
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 117 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), HttpService (upval), BiometricTypeEnum (upval), GetFFlagEnhancedPersonaLivenessEventsFunction (upval), Persona (copy), TelemetryReasonsModule (upval), UseRoactServiceResult (copy), BiometricChallengeEventModule (upval), ChallengeEventConstantsModule (upval), UseRefResult (copy)
 		p1.onChallengeCompleted(HttpService:JSONEncode({ biometricType = BiometricTypeEnum.PersonaLiveness }))
 		
@@ -117,14 +117,14 @@ return function(p1) --[[ Line: 58 | Named "PersonaLivenessContainer" ]]
 		p1.challengeId,
 		p1.onChallengeCompleted
 	})
-	local UseResult3 = ReactModule.useCallback(function(Detail, Callback) --[[ Line: 141 ]]
+	local UseResult3 = ReactModule.useCallback(function(Detail, Callback)
 		-- upvalues: AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 		local config = {
 			name = AppPage.GenericWebPage,
 			detail = Detail,
 			extraProps = {
 				title = "",
-				onClose = function() --[[ Line: 147 ]]
+				onClose = function()
 					-- upvalues: Callback (copy)
 					Callback()
 				end
@@ -139,7 +139,7 @@ return function(p1) --[[ Line: 58 | Named "PersonaLivenessContainer" ]]
 			UseDispatchResult(NavigateDownFunction(config))
 		end
 	end, { UseDispatchResult })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 159 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: PersonaLivenessServiceWrapperModule (upval), UseAppPolicyResult (copy), LivenessWithCallbackPollDelay (upval), LivenessWithCallbackPollMaxRetries (upval), LivenessBackgroundOnlyPollDelay (upval), LivenessBackgroundOnlyPollMaxRetries (upval)
 		return if PersonaLivenessServiceWrapperModule.isAvailable() or UseAppPolicyResult then {
 			delay = LivenessWithCallbackPollDelay,
@@ -153,7 +153,7 @@ return function(p1) --[[ Line: 58 | Named "PersonaLivenessContainer" ]]
 		delay = UseMemoResult.delay,
 		retries = UseMemoResult.retries
 	})
-	local UseResult4 = ReactModule.useCallback(function(p2) --[[ Line: 176 ]]
+	local UseResult4 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult (copy), PersonaLivenessServiceWrapperModule (upval), Persona (copy), GetFFlagEnhancedPersonaLivenessEventsFunction (upval), UseRoactServiceResult (copy), BiometricChallengeEventModule (upval), ChallengeEventConstantsModule (upval), p1 (copy), BiometricTypeEnum (upval), TelemetryReasonsModule (upval), UseAppPolicyResult (copy), PromiseModule (upval), UseResult3 (copy), UseStateResult2 (copy)
 		local SessionIdentifier = p2.sessionIdentifier
 		local SessionToken = p2.sessionToken
@@ -184,9 +184,9 @@ return function(p1) --[[ Line: 58 | Named "PersonaLivenessContainer" ]]
 					inquiryId = SessionIdentifier
 				})
 			end
-			return PromiseModule.new(function(Callback) --[[ Line: 208 ]]
+			return PromiseModule.new(function(Callback)
 				-- upvalues: SessionIdentifier (copy), UseResult3 (upval), p2 (copy)
-				UseResult3(p2.verificationLink, function() --[[ Line: 209 ]]
+				UseResult3(p2.verificationLink, function()
 					-- upvalues: Callback (copy), SessionIdentifier (upval)
 					Callback(SessionIdentifier)
 				end)
@@ -213,20 +213,20 @@ return function(p1) --[[ Line: 58 | Named "PersonaLivenessContainer" ]]
 		UseRoactServiceResult,
 		p1.challengeId
 	})
-	ReactModule.useEffect(function() --[[ Line: 236 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IDVApiProvider (upval), UseResult4 (copy), UsePollIDVStatusResult (copy), UseResult2 (copy), UseResult1 (copy), GetFFlagEnhancedPersonaLivenessEventsFunction (upval), Persona (copy), TelemetryReasonsModule (upval), UseResult (copy), UsePollIDVStatusResult2 (copy)
-		IDVApiProvider.startLivenessVerification():andThen(function(Result) --[[ Line: 238 ]]
+		IDVApiProvider.startLivenessVerification():andThen(function(Result)
 			return Result
-		end):andThen(function(Result) --[[ Line: 241 ]]
+		end):andThen(function(Result)
 			-- upvalues: UseResult4 (upval)
 			return UseResult4(Result)
-		end):andThen(function(Result) --[[ Line: 244 ]]
+		end):andThen(function(Result)
 			-- upvalues: UsePollIDVStatusResult (upval)
 			return UsePollIDVStatusResult(Result)
-		end):andThen(function() --[[ Line: 247 ]]
+		end):andThen(function()
 			-- upvalues: UseResult2 (upval)
 			return UseResult2()
-		end):catch(function(Err) --[[ Line: 250 ]]
+		end):catch(function(Err)
 			-- upvalues: UseResult1 (upval), GetFFlagEnhancedPersonaLivenessEventsFunction (upval), Persona (upval), TelemetryReasonsModule (upval), UseResult (upval)
 			if Err and Err.resultType == Enum.FacialAgeEstimationResultType.Cancel then
 				UseResult1()
@@ -242,7 +242,7 @@ return function(p1) --[[ Line: 58 | Named "PersonaLivenessContainer" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 268 ]]
+		return function()
 			-- upvalues: UsePollIDVStatusResult2 (upval)
 			UsePollIDVStatusResult2()
 		end
@@ -251,7 +251,7 @@ return function(p1) --[[ Line: 58 | Named "PersonaLivenessContainer" ]]
 	return if UseStateResult then ReactModule.createElement(PersonaLivenessHostedModule, {
 		sessionId = "",
 		webLink = UseStateResult,
-		onCancel = function() --[[ Line: 277 ]]
+		onCancel = function()
 			-- upvalues: UseResult1 (copy)
 			UseResult1()
 		end

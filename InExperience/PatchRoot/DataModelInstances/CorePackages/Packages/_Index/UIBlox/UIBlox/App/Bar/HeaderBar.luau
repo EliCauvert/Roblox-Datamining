@@ -18,7 +18,7 @@ local config = {
 	hasDivider = false
 }
 
-local function useHeaderBarStyle(JoinResult, p1) --[[ Line: 92 ]]
+local function useHeaderBarStyle(JoinResult, p1)
 	-- upvalues: ReactModule (copy)
 	local Tokens = p1.Tokens
 	local Theme = p1.Theme
@@ -32,7 +32,7 @@ local function useHeaderBarStyle(JoinResult, p1) --[[ Line: 92 ]]
 	local Margin = JoinResult.margin
 	
 	return {
-		BackgroundStyle = ReactModule.useMemo(function() --[[ Line: 99 ]]
+		BackgroundStyle = ReactModule.useMemo(function()
 			-- upvalues: IsOnMedia (copy), BackgroundStyle (copy), Theme (copy), BackgroundTransparency (copy)
 			if IsOnMedia then
 				return {}
@@ -52,7 +52,7 @@ local function useHeaderBarStyle(JoinResult, p1) --[[ Line: 92 ]]
 			BackgroundTransparency,
 			Theme
 		}),
-		Padding = ReactModule.useMemo(function() --[[ Line: 123 ]]
+		Padding = ReactModule.useMemo(function()
 			-- upvalues: PaddingTop (copy), Tokens (copy), PaddingRight (copy), PaddingBottom (copy), PaddingLeft (copy), Margin (copy)
 			local config = {
 				Top = PaddingTop or UDim.new(0, Tokens.Size.Size_200),
@@ -72,9 +72,9 @@ local function useHeaderBarStyle(JoinResult, p1) --[[ Line: 92 ]]
 	}
 end
 
-local function useRenderLeft(JoinResult, p1) --[[ Line: 144 ]]
+local function useRenderLeft(JoinResult, p1)
 	-- upvalues: ReactModule (copy), CryoModule (copy), GenericTextLabelModule (copy)
-	return ReactModule.useMemo(function() --[[ Line: 145 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: JoinResult (copy), ReactModule (upval), p1 (copy), CryoModule (upval), GenericTextLabelModule (upval)
 		local Title: string = JoinResult.title
 		local RenderLeftFunction = JoinResult.renderLeft
@@ -85,7 +85,7 @@ local function useRenderLeft(JoinResult, p1) --[[ Line: 144 ]]
 		local RenderLeft = JoinResult.renderLeft
 		
 		if (RenderLeftFunction == nil or RenderLeftFunction == ReactModule.None) and string.len(Title) > 0 then
-			RenderLeft = function(p2) --[[ Line: 156 ]]
+			RenderLeft = function(p2)
 				-- upvalues: CryoModule (upval), ReactModule (upval), Tokens (copy), GenericTextLabelModule (upval), Title (copy)
 				return ReactModule.createElement(ReactModule.Fragment, nil, {
 					Text = ReactModule.createElement(GenericTextLabelModule, {
@@ -111,7 +111,7 @@ local function useRenderLeft(JoinResult, p1) --[[ Line: 144 ]]
 			local Header2 = _Font.Header2
 			local ScaledRelativeSize = Header2.RelativeSize * _Font.BaseSize
 			
-			RenderLeft = function() --[[ Line: 181 ]]
+			RenderLeft = function()
 				-- upvalues: ReactModule (upval), ScaledRelativeSize (copy), RenderLeftFunction (copy), Theme (copy), GenericTextLabelModule (upval), Title (copy), Header2 (copy)
 				return ReactModule.createElement(ReactModule.Fragment, nil, {
 					Text = ReactModule.createElement("Frame", {
@@ -164,7 +164,7 @@ local function useRenderLeft(JoinResult, p1) --[[ Line: 144 ]]
 				local HeadingSmall = Tokens.Typography.HeadingSmall
 				local FontSize = HeadingSmall.FontSize
 				
-				RenderLeft = function() --[[ Line: 230 ]]
+				RenderLeft = function()
 					-- upvalues: ReactModule (upval), FontSize (copy), Tokens (copy), RenderLeftFunction (copy), GenericTextLabelModule (upval), Title (copy), HeadingSmall (copy)
 					return ReactModule.createElement(ReactModule.Fragment, nil, {
 						LeftFrame = ReactModule.createElement("Frame", {
@@ -217,7 +217,7 @@ local function useRenderLeft(JoinResult, p1) --[[ Line: 144 ]]
 	})
 end
 
-return function(p1) --[[ Line: 286 | Named "HeaderBar" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleModule (copy), ReactModule (copy), useRenderLeft (copy), GenericTextLabelModule (copy), GetTextSizeModule (copy), useHeaderBarStyle (copy), ThreeSectionBarModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseStyleModuleResult = UseStyleModule()
@@ -235,7 +235,7 @@ return function(p1) --[[ Line: 286 | Named "HeaderBar" ]]
 	local HasDivider = JoinResult.hasDivider
 	local NoRenderLeft: boolean = JoinResult.renderLeft == nil or JoinResult.renderLeft == ReactModule.None
 	local UseRenderLeftResult = useRenderLeft(JoinResult, UseStyleModuleResult)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 306 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: RenderCenter (copy), NoRenderLeft (copy), IsSecondary (copy), IsTitleCentered (copy), Tokens (copy), ReactModule (upval), GenericTextLabelModule (upval), Title (copy)
 		local RenderCenter1: () -> any = RenderCenter
 		
@@ -243,7 +243,7 @@ return function(p1) --[[ Line: 286 | Named "HeaderBar" ]]
 			local HeadingSmall = Tokens.Typography.HeadingSmall
 			local FontSize = HeadingSmall.FontSize
 			
-			RenderCenter1 = function() --[[ Line: 313 ]]
+			RenderCenter1 = function()
 				-- upvalues: ReactModule (upval), GenericTextLabelModule (upval), FontSize (copy), Title (upval), HeadingSmall (copy), Tokens (upval)
 				return ReactModule.createElement(GenericTextLabelModule, {
 					Selectable = false,
@@ -266,7 +266,7 @@ return function(p1) --[[ Line: 286 | Named "HeaderBar" ]]
 	end, {
 		RenderCenter, NoRenderLeft, IsSecondary, IsTitleCentered, Tokens, Title
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 334 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseRenderLeftResult (copy), RenderCenter (copy), RenderRight (copy), NoRenderLeft (copy), IsSecondary (copy), IsTitleCentered (copy), Tokens (copy), GetTextSizeModule (upval), Title (copy)
 		if UseRenderLeftResult and RenderCenter and RenderRight then
 			return 0
@@ -281,7 +281,7 @@ return function(p1) --[[ Line: 286 | Named "HeaderBar" ]]
 		Title, IsTitleCentered, NoRenderLeft, UseRenderLeftResult, RenderCenter,
 		RenderRight, IsSecondary, Tokens
 	})
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 351 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: ContentPaddingRight (copy), NoRenderLeft (copy), Tokens (copy)
 		return if ContentPaddingRight then ContentPaddingRight elseif NoRenderLeft then UDim.new(0, 0) else UDim.new(0, Tokens.Size.Size_600)
 	end, { ContentPaddingRight, NoRenderLeft, Tokens })

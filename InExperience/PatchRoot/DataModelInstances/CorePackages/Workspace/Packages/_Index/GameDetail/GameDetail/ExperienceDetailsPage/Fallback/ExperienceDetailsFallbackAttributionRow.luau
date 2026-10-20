@@ -21,7 +21,7 @@ local FFlagLuaAppSduiEdpFallbackAttributionFromCache = SharedFlagsModule.FFlagLu
 local FFlagSduiScalePlayButtonAndImageSizes = SharedFlagsModule.FFlagSduiScalePlayButtonAndImageSizes
 local FFlagEnableGameJoinEarlyAccess = SharedFlagsModule.FFlagEnableGameJoinEarlyAccess
 
-local function VerifiedBadgeIcon() --[[ Line: 46 ]]
+local function VerifiedBadgeIcon()
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Icon (copy), FoundationModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	
@@ -42,7 +42,7 @@ local function VerifiedBadgeIcon() --[[ Line: 46 ]]
 	})
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 68 | Named "FallbackAttributionRow" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), ResponsiveModule (copy), EdpFallbackIconSize (copy), FFlagSduiScalePlayButtonAndImageSizes (copy), UseImageLoadFadeModule (copy), ReactModule (copy), View (copy), Image (copy), Skeleton (copy), Text (copy), Radius (copy), VerifiedBadgeIcon (copy), FFlagLuaAppSduiEdpFallbackAttributionFromCache (copy), PlayButton (copy), ButtonSize (copy), EdpFallbackActionBarPlayButtonWidth (copy), FFlagLuaAppLaunchWhenLoadingEdp (copy), FFlagEnableGameJoinEarlyAccess (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsSmallScreen = p1.isSmallScreen

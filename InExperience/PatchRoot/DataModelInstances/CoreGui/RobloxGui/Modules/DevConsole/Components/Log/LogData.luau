@@ -17,7 +17,7 @@ local ConvertTimeStampModule = require(script.Parent.Parent.Parent.Util.convertT
 local LogDataModule = {}
 LogDataModule.__index = LogDataModule
 
-local function messageEntry(Text: string, p1, Type, Context) --[[ Line: 34 ]]
+local function messageEntry(Text: string, p1, Type, Context)
 	-- upvalues: MaxStringSize (copy), TextService (copy), MainWindow (copy), Log (copy)
 	local CountText = #Text
 	local Formatted: string = if CountText < MaxStringSize then string.format("%s -- %s", p1, Text) else string.format("%s -- %s", p1, (string.sub(Text, 1, MaxStringSize)))
@@ -36,7 +36,7 @@ local function messageEntry(Text: string, p1, Type, Context) --[[ Line: 34 ]]
 	}
 end
 
-local function ignoreWarningMessageOnAdd(p1): boolean --[[ Line: 61 ]]
+local function ignoreWarningMessageOnAdd(p1): boolean
 	-- upvalues: Patterns (copy)
 	if p1.Type ~= Enum.MessageType.MessageWarning.Value then
 		return false
@@ -53,12 +53,12 @@ local function ignoreWarningMessageOnAdd(p1): boolean --[[ Line: 61 ]]
 	return Flag
 end
 
-local function isMessageFiltered(Key, Filters, SearchTerm: string): boolean --[[ Line: 78 ]]
+local function isMessageFiltered(Key, Filters, SearchTerm: string): boolean
 	-- upvalues: EnumToMsgTypeName (copy)
 	return (#SearchTerm ~= 0 or next(Filters)) and ((not next(Filters) or Filters[EnumToMsgTypeName[Key.Type]]) and (#SearchTerm <= 0 or string.find(Key.Message:lower(), SearchTerm:lower()) ~= nil))
 end
 
-local function _(List) --[[ Line: 99 | Named "validActiveFilters" ]]
+local function _(List)
 	local v1 = false
 	
 	for _, value in pairs(List) do
@@ -67,7 +67,7 @@ local function _(List) --[[ Line: 99 | Named "validActiveFilters" ]]
 	return v1
 end
 
-local function filterMessages(LogDataSearched, IteratorResult, Filters, SearchTerm) --[[ Line: 107 ]]
+local function filterMessages(LogDataSearched, IteratorResult, Filters, SearchTerm)
 	-- upvalues: isMessageFiltered (copy), messageEntry (copy)
 	LogDataSearched:reset()
 	local v2 = false
@@ -95,7 +95,7 @@ local function filterMessages(LogDataSearched, IteratorResult, Filters, SearchTe
 	end
 end
 
-function LogDataModule:checkErrorWarningCounter(p2) --[[ Line: 137 ]]
+function LogDataModule:checkErrorWarningCounter(p2)
 	if p2 == Enum.MessageType.MessageWarning.Value then
 		self._warningCount += 1
 		self._errorWarningSignal:Fire(self._errorCount, self._warningCount)
@@ -108,7 +108,7 @@ function LogDataModule:checkErrorWarningCounter(p2) --[[ Line: 137 ]]
 	end
 end
 
-function LogDataModule.new(Number1) --[[ Line: 147 ]]
+function LogDataModule.new(Number1)
 	-- upvalues: LogDataModule (copy), CircularBufferModule (copy), Number (copy), EnumToMsgTypeName (copy), SignalModule (copy)
 	local t = {}
 	setmetatable(t, LogDataModule)
@@ -134,19 +134,19 @@ function LogDataModule.new(Number1) --[[ Line: 147 ]]
 	return t
 end
 
-function LogDataModule:Signal() --[[ Line: 176 ]]
+function LogDataModule:Signal()
 	return self._logDataUpdate
 end
 
-function LogDataModule:errorWarningSignal() --[[ Line: 180 ]]
+function LogDataModule:errorWarningSignal()
 	return self._errorWarningSignal
 end
 
-function LogDataModule:filterUpdatedSignal() --[[ Line: 184 ]]
+function LogDataModule:filterUpdatedSignal()
 	return self._filterUpdated
 end
 
-function LogDataModule:setSearchTerm(_searchTerm) --[[ Line: 188 ]]
+function LogDataModule:setSearchTerm(_searchTerm)
 	-- upvalues: filterMessages (copy)
 	if self._searchTerm ~= _searchTerm then
 		self._searchTerm = _searchTerm
@@ -162,27 +162,27 @@ function LogDataModule:setSearchTerm(_searchTerm) --[[ Line: 188 ]]
 	end
 end
 
-function LogDataModule:getSearchTerm() --[[ Line: 207 ]]
+function LogDataModule:getSearchTerm()
 	return self._searchTerm
 end
 
-function LogDataModule:getCommandLineHistory() --[[ Line: 211 ]]
+function LogDataModule:getCommandLineHistory()
 	return self._commandLineHistory
 end
 
-function LogDataModule:getCommandLineIndex() --[[ Line: 215 ]]
+function LogDataModule:getCommandLineIndex()
 	return self._commandLineIndex
 end
 
-function LogDataModule:setCommandLineIndex(_commandLineIndex) --[[ Line: 219 ]]
+function LogDataModule:setCommandLineIndex(_commandLineIndex)
 	self._commandLineIndex = _commandLineIndex
 end
 
-function LogDataModule:getFilters() --[[ Line: 223 ]]
+function LogDataModule:getFilters()
 	return self._filters
 end
 
-function LogDataModule:setFilter(p2, p3) --[[ Line: 227 ]]
+function LogDataModule:setFilter(p2, p3)
 	-- upvalues: filterMessages (copy)
 	local Filter = self._filters[p2]
 	self._filters[p2] = p3
@@ -202,7 +202,7 @@ function LogDataModule:setFilter(p2, p3) --[[ Line: 227 ]]
 	end
 end
 
-function LogDataModule:setFilters(_filters) --[[ Line: 246 ]]
+function LogDataModule:setFilters(_filters)
 	-- upvalues: filterMessages (copy)
 	self._filters = _filters
 	local v4 = false
@@ -222,19 +222,19 @@ function LogDataModule:setFilters(_filters) --[[ Line: 246 ]]
 	end
 end
 
-function LogDataModule.getLogData(p4) --[[ Line: 265 ]]
+function LogDataModule.getLogData(p4)
 	return if #p4._logDataSearched:getData() > 0 then p4._logDataSearched else p4._logData
 end
 
-function LogDataModule:getErrorWarningCount() --[[ Line: 272 ]]
+function LogDataModule:getErrorWarningCount()
 	return self._errorCount, self._warningCount
 end
 
-function LogDataModule:isRunning() --[[ Line: 276 ]]
+function LogDataModule:isRunning()
 	return self._initialized
 end
 
-function LogDataModule:start() --[[ Line: 280 ]]
+function LogDataModule:start()
 	-- upvalues: LogService (copy), messageEntry (copy), ConvertTimeStampModule (copy), ignoreWarningMessageOnAdd (copy), isMessageFiltered (copy)
 	if self._isClient then
 		if not self._initialized then
@@ -251,7 +251,7 @@ function LogDataModule:start() --[[ Line: 280 ]]
 				end
 			end
 		end
-		self._connection = LogService.MessageOut:connect(function(Message, MessageType, Context) --[[ Line: 302 ]]
+		self._connection = LogService.MessageOut:connect(function(Message, MessageType, Context)
 			-- upvalues: messageEntry (upval), ConvertTimeStampModule (upval), ignoreWarningMessageOnAdd (upval), self (copy), isMessageFiltered (upval)
 			local MessageEntryResult = messageEntry(Message or "[DevConsole Error 2]", ConvertTimeStampModule(os.time()), MessageType.Value, Context)
 			
@@ -270,7 +270,7 @@ function LogDataModule:start() --[[ Line: 280 ]]
 			end
 		end)
 	else
-		self._connection = LogService.ServerMessageOut:connect(function(Message, MessageType, Timestamp, Context) --[[ Line: 325 ]]
+		self._connection = LogService.ServerMessageOut:connect(function(Message, MessageType, Timestamp, Context)
 			-- upvalues: messageEntry (upval), ConvertTimeStampModule (upval), ignoreWarningMessageOnAdd (upval), self (copy), isMessageFiltered (upval)
 			local MessageEntryResult = messageEntry(Message or "[DevConsole Error 3]", ConvertTimeStampModule(Timestamp), MessageType.Value, Context)
 			
@@ -287,9 +287,9 @@ function LogDataModule:start() --[[ Line: 280 ]]
 				end
 			end
 		end)
-		pcall(function() --[[ Line: 347 ]]
+		pcall(function()
 			-- upvalues: self (copy), LogService (upval), messageEntry (upval), ConvertTimeStampModule (upval), ignoreWarningMessageOnAdd (upval), isMessageFiltered (upval)
-			self._variantConnection = LogService.ServerContextOut:connect(function(ContextData) --[[ Line: 348 ]]
+			self._variantConnection = LogService.ServerContextOut:connect(function(ContextData)
 				-- upvalues: messageEntry (upval), ConvertTimeStampModule (upval), ignoreWarningMessageOnAdd (upval), self (upval), isMessageFiltered (upval)
 				if type(ContextData) == "table" and ContextData._structuredContext then
 					local MessageEntryResult = messageEntry(ContextData._message or "", ConvertTimeStampModule(ContextData._timestamp or 0), ContextData._messageType or 0, ContextData._structuredContext)
@@ -314,7 +314,7 @@ function LogDataModule:start() --[[ Line: 280 ]]
 	self._isRunning = true
 end
 
-function LogDataModule:stop() --[[ Line: 384 ]]
+function LogDataModule:stop()
 	self._initialized = false
 	self._isRunning = false
 	

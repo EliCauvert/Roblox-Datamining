@@ -1,4 +1,4 @@
-﻿return function(Frame: Frame) --[[ Line: 11 | Named "toRect" ]]
+﻿return function(Frame: Frame)
 	local ValueType = typeof(Frame)
 	
 	if ValueType == "Rect" then

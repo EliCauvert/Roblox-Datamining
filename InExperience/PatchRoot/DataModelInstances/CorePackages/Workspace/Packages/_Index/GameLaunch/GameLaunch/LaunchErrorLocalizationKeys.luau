@@ -28,8 +28,8 @@ local config = {
 	Default = "Feature.ExperienceDetails.UnplayableError.UnplayableOther"
 }
 setmetatable(LaunchErrorLocalizationKeysModule, {
-	__newindex = function(_, _, _) --[[ Line: 42 ]] end,
-	__index = function(_, p1) --[[ Line: 43 ]]
+	__newindex = function(_, _, _) end,
+	__index = function(_, p1)
 		-- upvalues: config (copy)
 		assert(p1 ~= nil, "LaunchErrorLocalizationKeys needs a key")
 		

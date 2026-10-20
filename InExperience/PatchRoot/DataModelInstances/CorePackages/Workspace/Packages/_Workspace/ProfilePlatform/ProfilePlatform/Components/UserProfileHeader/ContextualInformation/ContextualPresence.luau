@@ -44,7 +44,7 @@ local config2 = {
 	[EnumsModule.PresenceTypes.InStudio] = Images["icons/logo/studiologo_small"]
 }
 
-return function(p1) --[[ Line: 73 | Named "contextualPresence" ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), UseStyleFunction (copy), UseProfileAnalyticsContextModule (copy), FFlagProfilePlatformImproveGameDetailsAnalytics (copy), UseRoactServiceFunction (copy), RoactAnalyticsCommonGameEvents (copy), ReactModule (copy), UseProfileWrapperContextModule (copy), FFlagProfilePlatformPresenceStoreMigrationModule (copy), UseEffectOnMountFunction (copy), GetResult (copy), UseGetPresenceByUserId (copy), config1 (copy), config (copy), ConvertPresenceEnumModule (copy), EventNamesModule (copy), NetworkingPresenceModule (copy), UseSelectorFunction (copy), PresenceModule (copy), PresenceType (copy), AppPage (copy), OpenGameDetailsFunction (copy), UseLocalizationFunction (copy), EnumsModule (copy), TextKeysModule (copy), config2 (copy), GetIconSizeFunction (copy), IconSize (copy), PlayerContext (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseNavigationResult = UseNavigationFunction()
@@ -57,13 +57,13 @@ return function(p1) --[[ Line: 73 | Named "contextualPresence" ]]
 	local UseGetPresenceByUserIdResult1 = nil
 	
 	if FFlagProfilePlatformPresenceStoreMigrationModule then
-		UseEffectOnMountFunction(function() --[[ Line: 89 ]]
+		UseEffectOnMountFunction(function()
 			-- upvalues: GetResult (upval), ProfileId (copy)
 			GetResult.RefreshPresenceByUserId((tostring(ProfileId)))
 		end)
 		local UseGetPresenceByUserIdResult, UseGetPresenceByUserIdResult2 = UseGetPresenceByUserId(ProfileId, config1)
 		UseGetPresenceByUserIdResult1 = if UseGetPresenceByUserIdResult then UseGetPresenceByUserIdResult else p1.presenceInfoOverride or config
-		ReactModule.useEffect(function() --[[ Line: 96 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRefResult1 (copy), UseGetPresenceByUserIdResult2 (copy), ConvertPresenceEnumModule (upval), UseGetPresenceByUserIdResult1 (ref), UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval)
 			if UseRefResult1.current then return end
 			if UseGetPresenceByUserIdResult2 == "Ready" or UseGetPresenceByUserIdResult2 == "Failed" then
@@ -81,14 +81,14 @@ return function(p1) --[[ Line: 73 | Named "contextualPresence" ]]
 			UseProfileAnalyticsContextModuleResult
 		})
 	else
-		UseEffectOnMountFunction(function() --[[ Line: 116 ]]
+		UseEffectOnMountFunction(function()
 			-- upvalues: UseDispatchResult (copy), NetworkingPresenceModule (upval), ProfileId (copy), UseRefResult (copy)
-			UseDispatchResult(NetworkingPresenceModule.GetPresencesFromUserIds.API({ ProfileId })):andThen(function() --[[ Line: 118 ]]
+			UseDispatchResult(NetworkingPresenceModule.GetPresencesFromUserIds.API({ ProfileId })):andThen(function()
 				-- upvalues: UseRefResult (upval)
 				UseRefResult.current = true
-			end):catch(function(_) --[[ Line: 121 ]] end)
+			end):catch(function(_) end)
 		end)
-		local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 124 ]]
+		local UseSelectorResult = UseSelectorFunction(function(p2)
 			-- upvalues: PresenceModule (upval), ProfileId (copy), PresenceType (upval)
 			return PresenceModule.Selectors.getUserPresenceByUserId(p2, ProfileId) or {
 				lastLocation = "",
@@ -96,7 +96,7 @@ return function(p1) --[[ Line: 73 | Named "contextualPresence" ]]
 			}
 		end)
 		UseGetPresenceByUserIdResult1 = if UseRefResult.current then UseSelectorResult else p1.presenceInfoOverride or UseSelectorResult
-		ReactModule.useEffect(function() --[[ Line: 135 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRefResult (copy), UseRefResult1 (copy), ConvertPresenceEnumModule (upval), UseGetPresenceByUserIdResult1 (ref), UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval)
 			if UseRefResult.current and not UseRefResult1.current then
 				UseRefResult1.current = true
@@ -112,7 +112,7 @@ return function(p1) --[[ Line: 73 | Named "contextualPresence" ]]
 	local ConvertPresenceEnumModuleResult = ConvertPresenceEnumModule(UseGetPresenceByUserIdResult1.userPresenceType, if FFlagProfilePlatformPresenceStoreMigrationModule then if UseGetPresenceByUserIdResult1.universeId then tonumber(UseGetPresenceByUserIdResult1.universeId) else nil else UseGetPresenceByUserIdResult1.universeId)
 	local LastLocation = UseGetPresenceByUserIdResult1.lastLocation
 	local UniverseId = UseGetPresenceByUserIdResult1.universeId
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 159 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), FFlagProfilePlatformImproveGameDetailsAnalytics (upval), UseRoactServiceResult (copy), UseGetPresenceByUserIdResult1 (ref), AppPage (upval), ProfileId (copy), UseDispatchResult (copy), OpenGameDetailsFunction (upval), UniverseId (copy), UseNavigationResult (copy)
 		UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.GameDetailsButton)
 		

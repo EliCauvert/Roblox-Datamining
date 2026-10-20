@@ -1,6 +1,6 @@
 ﻿local GetFFlagEnableInAppBugReportingFunction = require(script:FindFirstAncestor("TnSScreenshot").Parent.SharedFlags).GetFFlagEnableInAppBugReporting
 
-local function _() --[[ Line: 6 ]]
+local function _()
 	return game:GetEngineFeature("ReportAnythingScreenshot") and game:GetEngineFeature("ReportAnythingScreenshotUploadedSignal")
 end
 
@@ -10,9 +10,9 @@ local List = {}
 local List1 = {}
 local Flag = false
 
-local function v4(SafetyService) --[[ Line: 27 ]]
+local function v4(SafetyService)
 	-- upvalues: List (copy), List1 (copy), Flag (ref)
-	SafetyService.ScreenshotUploaded:Connect(function(Index, ScreenshotId) --[[ Line: 28 ]]
+	SafetyService.ScreenshotUploaded:Connect(function(Index, ScreenshotId)
 		-- upvalues: List (upval)
 		local Entry: (any) -> () = List[Index]
 		
@@ -23,7 +23,7 @@ local function v4(SafetyService) --[[ Line: 27 ]]
 			return
 		end
 	end)
-	SafetyService.ScreenshotContentReady:Connect(function(Index, ContentId) --[[ Line: 37 ]]
+	SafetyService.ScreenshotContentReady:Connect(function(Index, ContentId)
 		-- upvalues: List1 (upval)
 		local Entry: (any) -> () = List1[Index]
 		
@@ -37,7 +37,7 @@ local function v4(SafetyService) --[[ Line: 27 ]]
 	Flag = true
 end
 
-function ScreenshotManager:TakeScreenshotWithCallback(p1, p2, p3): boolean --[[ Line: 59 ]]
+function ScreenshotManager:TakeScreenshotWithCallback(p1, p2, p3): boolean
 	-- upvalues: GetFFlagEnableInAppBugReportingFunction (copy), List (copy), List1 (copy), Flag (ref), v4 (copy)
 	if not game:GetEngineFeature("ReportAnythingScreenshot") or not game:GetEngineFeature("ReportAnythingScreenshotUploadedSignal") then
 		return false

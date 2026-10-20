@@ -26,28 +26,28 @@ local config3 = {
 }
 
 return {
-	logTwoByOneTileActivated = function() --[[ Line: 43 ]]
+	logTwoByOneTileActivated = function()
 		-- upvalues: TelemetryService (copy), config (copy), StandardizedFields (copy)
 		TelemetryService:LogCounter(config, {
 			standardizedFields = StandardizedFields,
 			customFields = {}
 		}, 1)
 	end,
-	logTwoByOneTileCtaActivated = function() --[[ Line: 51 ]]
+	logTwoByOneTileCtaActivated = function()
 		-- upvalues: TelemetryService (copy), config1 (copy), StandardizedFields (copy)
 		TelemetryService:LogCounter(config1, {
 			standardizedFields = StandardizedFields,
 			customFields = {}
 		}, 1)
 	end,
-	logTwoByOneTileGameJoinInitiated = function() --[[ Line: 59 ]]
+	logTwoByOneTileGameJoinInitiated = function()
 		-- upvalues: TelemetryService (copy), config2 (copy), StandardizedFields (copy)
 		TelemetryService:LogCounter(config2, {
 			standardizedFields = StandardizedFields,
 			customFields = {}
 		}, 1)
 	end,
-	logTwoByOneTileViewGameDetailsActivated = function() --[[ Line: 67 ]]
+	logTwoByOneTileViewGameDetailsActivated = function()
 		-- upvalues: TelemetryService (copy), config3 (copy), StandardizedFields (copy)
 		TelemetryService:LogCounter(config3, {
 			standardizedFields = StandardizedFields,

@@ -21,7 +21,7 @@ local Default = require(Parent1.LoggingProtocol).default
 local TooExpensiveUnifiedUpsellShownCounter = require(Parent.Generic.Events.TooExpensiveUpsellCounter).TooExpensiveUnifiedUpsellShownCounter
 local UseFocusNavigationRefsModule = require(Parent.Generic.Hooks.useFocusNavigationRefs)
 
-local function UnifiedRobuxUpsellModalTooExpensiveV2(p1) --[[ Line: 63 ]]
+local function UnifiedRobuxUpsellModalTooExpensiveV2(p1)
 	-- upvalues: UseLocalizationFunction (copy), UseFocusNavigationRefsModule (copy), ReactModule (copy), LoggerModule (copy), GetAppContextModule (copy), Default (copy), TooExpensiveUnifiedUpsellShownCounter (copy), Dialog (copy), DialogSize (copy), View (copy), UnifiedPurchaseModalTypeEnumModule (copy), PriceSummaryModule (copy), UnifiedProductDetailsModule (copy), Orientation (copy), ButtonVariant (copy), FoundationModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		NeedMoreRobux = "IAPExperience.RobuxUpsell.Text.NeedMoreRobux",
@@ -29,7 +29,7 @@ local function UnifiedRobuxUpsellModalTooExpensiveV2(p1) --[[ Line: 63 ]]
 		BuyRobux = "IAPExperience.InsufficientRobux.Action.BuyRobux"
 	})
 	local UseFocusNavigationRefsModuleResult, UseFocusNavigationRefsModuleResult2 = UseFocusNavigationRefsModule(p1.buttons.cancelPurchaseActivated, nil)
-	ReactModule.useEffect(function() --[[ Line: 73 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: LoggerModule (upval), p1 (copy), GetAppContextModule (upval), Default (upval), TooExpensiveUnifiedUpsellShownCounter (upval)
 		LoggerModule.debug({
 			message = "Too Expensive Unified Upsell Modal Shown (Dialog)",
@@ -84,7 +84,7 @@ local function UnifiedRobuxUpsellModalTooExpensiveV2(p1) --[[ Line: 63 ]]
 	})
 end
 
-return function(p1) --[[ Line: 133 | Named "UnifiedRobuxUpsellModalTooExpensiveV2Container" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), UnifiedRobuxUpsellModalTooExpensiveV2 (copy)
 	return ReactModule.createElement(LocalizationProvider, {
 		localization = Localization.new(LocalizationService.RobloxLocaleId)

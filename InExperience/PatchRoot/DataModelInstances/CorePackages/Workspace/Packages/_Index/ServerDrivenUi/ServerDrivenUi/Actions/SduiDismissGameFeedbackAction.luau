@@ -5,7 +5,7 @@ local SduiActionType = SduiCoreSystemModule.SduiActionType
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local GetSduiClientPageScopeFunction = SduiCoreSystemModule.getSduiClientPageScope
 
-return function(p1, _, p2) --[[ Line: 16 | Named "SduiDismissGameFeedbackAction" ]]
+return function(p1, _, p2)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), Game (copy), GetSduiClientPageScopeFunction (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	

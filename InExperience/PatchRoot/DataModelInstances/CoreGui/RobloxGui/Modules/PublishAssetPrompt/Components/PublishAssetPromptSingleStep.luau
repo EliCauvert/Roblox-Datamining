@@ -52,12 +52,12 @@ PublishAssetPromptSingleStep.validateProps = TModule.strictInterface({
 	closePrompt = TModule.callback
 })
 
-function PublishAssetPromptSingleStep.getDefaultText(p1) --[[ Line: 97 ]]
+function PublishAssetPromptSingleStep.getDefaultText(p1)
 	-- upvalues: RobloxTranslatorModule (copy), LocalPlayer (copy)
 	return if p1.props.assetType == Enum.AssetType.Model then RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PackagesDefaultName", { RBX_NAME = LocalPlayer and LocalPlayer.Name or "" }) else ""
 end
 
-function PublishAssetPromptSingleStep.init(p1) --[[ Line: 107 ]]
+function PublishAssetPromptSingleStep.init(p1)
 	-- upvalues: EmoteThumbnailParametersModule (copy), ExperienceAuthService (copy), GetFFlagValidateDescriptionModule (copy), EnableEmotePublishEngineFeature (copy), RoactModule (copy)
 	p1.assetName = p1:getDefaultText()
 	p1.assetDescription = p1:getDefaultText()
@@ -69,43 +69,43 @@ function PublishAssetPromptSingleStep.init(p1) --[[ Line: 107 ]]
 		thumbnailParameters = EmoteThumbnailParametersModule.defaultParameters
 	})
 	
-	function p1.closePrompt() --[[ Line: 119 ]]
+	function p1.closePrompt()
 		-- upvalues: p1 (copy)
 		p1.props.closePrompt()
 	end
 	
-	function p1.openThumbnailEditor() --[[ Line: 123 ]]
+	function p1.openThumbnailEditor()
 		-- upvalues: p1 (copy)
 		p1:setState({ showingThumbnailEditor = true })
 	end
 	
-	function p1.closeThumbnailEditor() --[[ Line: 129 ]]
+	function p1.closeThumbnailEditor()
 		-- upvalues: p1 (copy)
 		p1:setState({ showingThumbnailEditor = false })
 	end
 	
-	function p1.openAssetPreview() --[[ Line: 135 ]]
+	function p1.openAssetPreview()
 		-- upvalues: p1 (copy)
 		p1:setState({ showingAssetPreview = true })
 	end
 	
-	function p1.closeAssetPreview() --[[ Line: 141 ]]
+	function p1.closeAssetPreview()
 		-- upvalues: p1 (copy)
 		p1:setState({ showingAssetPreview = false })
 	end
 	
-	function p1.updateThumbnailParameters(ThumbnailParameters) --[[ Line: 147 ]]
+	function p1.updateThumbnailParameters(ThumbnailParameters)
 		-- upvalues: p1 (copy)
 		p1:setState({ thumbnailParameters = ThumbnailParameters })
 	end
 	
-	function p1.denyAndClose() --[[ Line: 153 ]]
+	function p1.denyAndClose()
 		-- upvalues: ExperienceAuthService (upval), p1 (copy)
 		ExperienceAuthService:ScopeCheckUIComplete(p1.props.guid, p1.props.scopes, Enum.ScopeCheckResult.ConsentDenied, {})
 		p1.closePrompt()
 	end
 	
-	function p1.confirmAndUpload() --[[ Line: 163 ]]
+	function p1.confirmAndUpload()
 		-- upvalues: p1 (copy), GetFFlagValidateDescriptionModule (upval), EnableEmotePublishEngineFeature (upval), EmoteThumbnailParametersModule (upval), ExperienceAuthService (upval)
 		if not p1.isNameValid then return end
 		if GetFFlagValidateDescriptionModule() and not p1.isDescriptionValid then return end
@@ -121,7 +121,7 @@ function PublishAssetPromptSingleStep.init(p1) --[[ Line: 107 ]]
 		p1.closePrompt()
 	end
 	
-	function p1.onAssetNameUpdated(AssetName, p2) --[[ Line: 193 ]]
+	function p1.onAssetNameUpdated(AssetName, p2)
 		-- upvalues: p1 (copy)
 		if p2 then
 			p1.assetName = AssetName
@@ -133,7 +133,7 @@ function PublishAssetPromptSingleStep.init(p1) --[[ Line: 107 ]]
 		end
 	end
 	
-	function p1.onAssetDescriptionUpdated(AssetDescription, IsDescriptionValid) --[[ Line: 202 ]]
+	function p1.onAssetDescriptionUpdated(AssetDescription, IsDescriptionValid)
 		-- upvalues: p1 (copy)
 		p1.assetDescription = AssetDescription
 		p1.isDescriptionValid = IsDescriptionValid
@@ -143,9 +143,9 @@ function PublishAssetPromptSingleStep.init(p1) --[[ Line: 107 ]]
 	p1.descriptionTextBoxRef = RoactModule.createRef()
 end
 
-function PublishAssetPromptSingleStep.renderMiddle(p1, p2) --[[ Line: 211 ]]
+function PublishAssetPromptSingleStep.renderMiddle(p1, p2)
 	-- upvalues: WithStyleFunction (copy), EnableEmotePublishEngineFeature (copy), EnableImagePublishEngineFeature (copy), RoactModule (copy), RoactGamepadModule (copy), ImagePreviewModule (copy), ObjectViewportModule (copy), EmoteThumbnailViewModule (copy), IconButton (copy), IconsActionsPreviewExpand (copy), IconsActionsEditEdit (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), NameTextBoxModule (copy), AssetDescriptionTextBoxModule (copy)
-	return WithStyleFunction(function(p3) --[[ Line: 212 ]]
+	return WithStyleFunction(function(p3)
 		-- upvalues: EnableEmotePublishEngineFeature (upval), p1 (copy), EnableImagePublishEngineFeature (upval), RoactModule (upval), RoactGamepadModule (upval), ImagePreviewModule (upval), ObjectViewportModule (upval), EmoteThumbnailViewModule (upval), IconButton (upval), IconsActionsPreviewExpand (upval), IconsActionsEditEdit (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), p2 (copy), NameTextBoxModule (upval), AssetDescriptionTextBoxModule (upval)
 		local _Font = p3.Font
 		local Theme = p3.Theme
@@ -262,7 +262,7 @@ function PublishAssetPromptSingleStep.renderMiddle(p1, p2) --[[ Line: 211 ]]
 	end)
 end
 
-function PublishAssetPromptSingleStep.renderAlertLocalized(p1, p2) --[[ Line: 361 ]]
+function PublishAssetPromptSingleStep.renderAlertLocalized(p1, p2)
 	-- upvalues: RoactModule (copy), InteractiveAlert (copy), SendConsentDeniedOnCancel (copy), ButtonType (copy), EnableEmotePublishEngineFeature (copy), EmoteThumbnailEditorModule (copy), PreviewViewportModule (copy)
 	local Element = RoactModule.createElement(InteractiveAlert, {
 		isMiddleContentFocusable = true,
@@ -289,7 +289,7 @@ function PublishAssetPromptSingleStep.renderAlertLocalized(p1, p2) --[[ Line: 36
 				}
 			}
 		},
-		middleContent = function() --[[ Line: 386 ]]
+		middleContent = function()
 			-- upvalues: p1 (copy), p2 (copy)
 			return p1:renderMiddle(p2)
 		end,
@@ -321,12 +321,12 @@ function PublishAssetPromptSingleStep.renderAlertLocalized(p1, p2) --[[ Line: 36
 	}) else Element
 end
 
-local function _(p1): boolean --[[ Line: 424 | Named "IsLayeredClothingType" ]]
+local function _(p1): boolean
 	-- upvalues: config (copy)
 	return config[p1] == true
 end
 
-local function GetLocalizedStringsForAssetType(AssetType) --[[ Line: 432 ]]
+local function GetLocalizedStringsForAssetType(AssetType)
 	-- upvalues: RobloxTranslatorModule (copy), config (copy)
 	local config1 = {
 		name = RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.Name"),
@@ -368,22 +368,22 @@ local function GetLocalizedStringsForAssetType(AssetType) --[[ Line: 432 ]]
 	return config1
 end
 
-function PublishAssetPromptSingleStep.render(p1) --[[ Line: 464 ]]
+function PublishAssetPromptSingleStep.render(p1)
 	-- upvalues: GetLocalizedStringsForAssetType (copy)
 	return p1:renderAlertLocalized((GetLocalizedStringsForAssetType(p1.props.assetType)))
 end
 
-return RoactRoduxModule.connect(function(p1) --[[ Line: 469 | Named "mapStateToProps" ]]
+return RoactRoduxModule.connect(function(p1)
 	return {
 		assetInstance = p1.promptRequest.promptInfo.assetInstance,
 		assetType = p1.promptRequest.promptInfo.assetType,
 		guid = p1.promptRequest.promptInfo.guid,
 		scopes = p1.promptRequest.promptInfo.scopes
 	}
-end, function(Callback) --[[ Line: 478 | Named "mapDispatchToProps" ]]
+end, function(Callback)
 	-- upvalues: CloseOpenPromptModule (copy)
 	return {
-		closePrompt = function() --[[ Line: 480 ]]
+		closePrompt = function()
 			-- upvalues: Callback (copy), CloseOpenPromptModule (upval)
 			return Callback(CloseOpenPromptModule())
 		end

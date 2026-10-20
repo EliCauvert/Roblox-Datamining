@@ -2,7 +2,7 @@
 local Logging = require(Parent.Parent.AppCommonLib).Logging
 local CheckAndSendEventModule = require(Parent.Utils.checkAndSendEvent)
 
-return function(p1, State, Is_alt_attempt, Origin, p2, p3) --[[ Line: 6 ]]
+return function(p1, State, Is_alt_attempt, Origin, p2, p3)
 	-- upvalues: Logging (copy), CheckAndSendEventModule (copy)
 	local t = {}
 	

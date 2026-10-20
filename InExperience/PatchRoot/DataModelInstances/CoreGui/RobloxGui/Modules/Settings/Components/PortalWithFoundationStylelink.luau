@@ -6,7 +6,7 @@ local ReactRobloxModule = require(CorePackages.Packages.ReactRoblox)
 local View = FoundationModule.View
 local UseStyleSheetFunction = FoundationModule.Hooks.useStyleSheet
 
-return function(p1) --[[ Line: 16 | Named "PortalWithFoundationStylelink" ]]
+return function(p1)
 	-- upvalues: UseStyleSheetFunction (copy), CryoModule (copy), ReactModule (copy), ReactRobloxModule (copy), View (copy)
 	return ReactRobloxModule.createPortal(ReactModule.createElement(View, { tag = "auto-xy" }, (CryoModule.Dictionary.join({
 		StyleLink = ReactModule.createElement("StyleLink", { StyleSheet = UseStyleSheetFunction() })

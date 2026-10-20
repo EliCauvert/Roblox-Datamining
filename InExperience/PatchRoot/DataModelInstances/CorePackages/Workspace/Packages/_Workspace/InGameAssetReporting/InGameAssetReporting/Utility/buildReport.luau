@@ -6,7 +6,7 @@ local FFlagDropUnroutableMultiReportOptions = require(Parent.SharedFlags).FFlagD
 local HttpService = game:GetService("HttpService")
 local config = { Variant = { IGARv1 = "IGARv1", IGARv3 = "IGARv3" } }
 
-function transformTargetPlayers(List, p1: number) --[[ Line: 38 ]]
+function transformTargetPlayers(List, p1: number)
 	-- upvalues: GetHumanoidDescriptionFunction (copy)
 	local List1 = {}
 	
@@ -28,7 +28,7 @@ function transformTargetPlayers(List, p1: number) --[[ Line: 38 ]]
 	return List1
 end
 
-function serializeTargetPlayersIntoTagValues(Inputs) --[[ Line: 60 ]]
+function serializeTargetPlayersIntoTagValues(Inputs)
 	-- upvalues: HttpService (copy)
 	local List = {}
 	
@@ -38,7 +38,7 @@ function serializeTargetPlayersIntoTagValues(Inputs) --[[ Line: 60 ]]
 	return List
 end
 
-local function v6(List) --[[ Line: 70 ]]
+local function v6(List)
 	local t = {}
 	
 	for _, value in ipairs(List) do
@@ -47,13 +47,13 @@ local function v6(List) --[[ Line: 70 ]]
 	return t
 end
 
-local function _(p2): boolean --[[ Line: 78 ]]
+local function _(p2): boolean
 	local ExtractedAssets = p2.extractedAssets
 	
 	return #ExtractedAssets.Image > 0 or (#ExtractedAssets.Mesh > 0 or (#ExtractedAssets.Model > 0 or (#ExtractedAssets.Package > 0 or #ExtractedAssets.Text > 0)))
 end
 
-function buildReport(p2, Data, p3, Data1, Data2, Data3, p4, p5, Text) --[[ Line: 87 ]]
+function buildReport(p2, Data, p3, Data1, Data2, Data3, p4, p5, Text)
 	-- upvalues: FFlagDropUnroutableMultiReportOptions (copy), config (copy), HttpService (copy), v6 (copy)
 	local config1 = {
 		tags = {

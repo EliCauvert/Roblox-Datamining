@@ -3,7 +3,7 @@ local TileVisibilityModule = require(script.Parent.tileVisibility)
 local PresenceTypes = require(SocialCarousel.Parent.SocialCommon).Enums.PresenceTypes
 local Tile = require(SocialCarousel.Common.Enums).Tile
 
-local function _(Text, Text1, p1) --[[ Line: 42 | Named "loopsLeft" ]]
+local function _(Text, Text1, p1)
 	if p1 == nil then
 		return 2
 	else
@@ -13,7 +13,7 @@ local function _(Text, Text1, p1) --[[ Line: 42 | Named "loopsLeft" ]]
 	end
 end
 
-local function isEligible(p1, p2, p3) --[[ Line: 82 ]]
+local function isEligible(p1, p2, p3)
 	-- upvalues: Tile (copy), PresenceTypes (copy), TileVisibilityModule (copy)
 	local IsSubtitleMatch = nil
 	if p1.tileType == Tile.Friend then
@@ -52,7 +52,7 @@ local function isEligible(p1, p2, p3) --[[ Line: 82 ]]
 	return false
 end
 
-local function scanRow(List, p1, Id) --[[ Line: 99 ]]
+local function scanRow(List, p1, Id)
 	-- upvalues: isEligible (copy)
 	local List1 = {}
 	local v1 = nil
@@ -71,13 +71,13 @@ local function scanRow(List, p1, Id) --[[ Line: 99 ]]
 	return List1, v1
 end
 
-local _ = function(Entry, TextDirection) --[[ Line: 119 | Named "leadingIndex" ]]
+local _ = function(Entry, TextDirection)
 	local CountEntry = #Entry
 	
 	return if CountEntry == 0 then nil elseif TextDirection == Enum.TextDirection.RightToLeft then Entry[CountEntry] else Entry[1]
 end
 
-local function nextIndex(Entry, p2, TextDirection) --[[ Line: 131 ]]
+local function nextIndex(Entry, p2, TextDirection)
 	local CountEntry = #Entry
 	
 	if CountEntry == 0 then
@@ -110,10 +110,10 @@ end
 
 return {
 	DEFAULT_LOOPS = 2,
-	loopKey = function(Text, Text1): string --[[ Line: 38 ]]
+	loopKey = function(Text, Text1): string
 		return Text .. "\0" .. Text1
 	end,
-	recordFinishedLoop = function(p3, Text, Text1) --[[ Line: 54 ]]
+	recordFinishedLoop = function(p3, Text, Text1)
 		local Text2 = Text .. "\0" .. Text1
 		local v2 = p3[Text2]
 		
@@ -122,7 +122,7 @@ return {
 		end
 		p3[Text2] = v2 - 1
 	end,
-	isHoverEligible = function(p3): boolean --[[ Line: 64 ]]
+	isHoverEligible = function(p3): boolean
 		-- upvalues: Tile (copy), PresenceTypes (copy)
 		if p3.tileType ~= Tile.Friend then
 			return false
@@ -137,7 +137,7 @@ return {
 			return LastLocation ~= nil and LastLocation ~= "" and p3.subtitle == LastLocation
 		end
 	end,
-	leadingEligible = function(p3, p4) --[[ Line: 159 ]]
+	leadingEligible = function(p3, p4)
 		-- upvalues: scanRow (copy)
 		local ScanRowResult = scanRow(p3, p4, nil)
 		local Direction = p4.direction
@@ -146,7 +146,7 @@ return {
 		
 		return if ScanRowResultEntry == nil then nil else p3[ScanRowResultEntry].id
 	end,
-	resolveActiveTileId = function(p3, p4, _) --[[ Line: 171 ]]
+	resolveActiveTileId = function(p3, p4, _)
 		-- upvalues: scanRow (copy)
 		local ScanRowResult = scanRow(p3, p4, nil)
 		local Direction = p4.direction
@@ -155,7 +155,7 @@ return {
 		
 		return if ScanRowResultEntry == nil then nil else p3[ScanRowResultEntry].id
 	end,
-	nextEligibleAfter = function(p3, p4, p5) --[[ Line: 175 ]]
+	nextEligibleAfter = function(p3, p4, p5)
 		-- upvalues: scanRow (copy), nextIndex (copy)
 		local ScanRowResult, ScanRowResult2 = scanRow(p3, p5, p4)
 		local NextIndexResult = nextIndex(ScanRowResult, ScanRowResult2, p5.direction)

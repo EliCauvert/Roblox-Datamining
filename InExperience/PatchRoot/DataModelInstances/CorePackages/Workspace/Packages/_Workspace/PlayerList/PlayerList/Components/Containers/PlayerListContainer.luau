@@ -24,7 +24,7 @@ local FStringPlayerListIXPLayerModule = require(Parent.Flags.FStringPlayerListIX
 local IXPService = game:GetService("IXPService")
 local LeaderboardViewChangeTelemetryModule = nil
 
-local function _() --[[ Line: 35 | Named "getLeaderboardViewChangeTelemetry" ]]
+local function _()
 	-- upvalues: LeaderboardViewChangeTelemetryModule (ref), Parent (copy)
 	if LeaderboardViewChangeTelemetryModule == nil then
 		LeaderboardViewChangeTelemetryModule = require(Parent.Common.LeaderboardViewChangeTelemetry)
@@ -32,16 +32,16 @@ local function _() --[[ Line: 35 | Named "getLeaderboardViewChangeTelemetry" ]]
 	return LeaderboardViewChangeTelemetryModule
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 50 ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FFlagPlayerListReskinModule (copy), ReactModule (copy), CreateLayoutValuesModule (copy), FocusNavigationService (copy), ReactFocusNavigationModule (copy), SignalsReactModule (copy), FFlagEnablePlayerListExposureEventsModule (copy), IXPService (copy), FStringPlayerListIXPLayerModule (copy), FFlagPlayerListLocalizeGameTextModule (copy), InExperienceLocalesModule (copy), LocalizationService (copy), SignalsModule (copy), PlayerListVisibilityStoreModule (copy), LeaderboardViewChangeTelemetryModule (ref), Parent (copy), PlatformLeaderboardContainerModule (copy), LeaderboardStoreContextModule (copy), LayoutValuesContextModule (copy), FFlagAddNewPlayerListFocusNavModule (copy), FocusNavigationContext (copy), GameTextTranslatorContextModule (copy), LocalizationProvider (copy)
 	local UseMemoResult = nil
 	local UseMemoResult1 = nil
 	if FFlagPlayerListReskinModule then
-		UseMemoResult = ReactModule.useMemo(function() --[[ Line: 54 ]]
+		UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: CreateLayoutValuesModule (upval), p1 (copy)
 			return CreateLayoutValuesModule(p1.isTenFoot or false, p1.TopBarConstants)
 		end, { p1.isTenFoot, p1.TopBarConstants })
-		UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 57 ]]
+		UseMemoResult1 = ReactModule.useMemo(function()
 			-- upvalues: FocusNavigationService (upval), ReactFocusNavigationModule (upval)
 			return FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
 		end, {})
@@ -52,22 +52,22 @@ return ReactModule.memo(function(p1) --[[ Line: 50 ]]
 	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.leaderboardStore)
 	
 	if FFlagEnablePlayerListExposureEventsModule then
-		ReactModule.useEffect(function() --[[ Line: 67 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: IXPService (upval), FStringPlayerListIXPLayerModule (upval)
 			IXPService:LogFlagLinkedUserLayerExposure(FStringPlayerListIXPLayerModule)
 		end, {})
 	end
-	local UseMemoResult2 = if FFlagPlayerListLocalizeGameTextModule then ReactModule.useMemo(function() --[[ Line: 74 ]]
+	local UseMemoResult2 = if FFlagPlayerListLocalizeGameTextModule then ReactModule.useMemo(function()
 		-- upvalues: InExperienceLocalesModule (upval), LocalizationService (upval)
 		return InExperienceLocalesModule.Localization.new(LocalizationService.RobloxLocaleId)
 	end, {}) else nil
 	
 	if FFlagPlayerListReskinModule then
-		ReactModule.useEffect(function() --[[ Line: 82 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: SignalsModule (upval), PlayerListVisibilityStoreModule (upval), LeaderboardViewChangeTelemetryModule (upval), Parent (upval)
 			local Flag = false
 			
-			return SignalsModule.createEffect(function(p2) --[[ Line: 84 ]]
+			return SignalsModule.createEffect(function(p2)
 				-- upvalues: PlayerListVisibilityStoreModule (upval), Flag (ref), LeaderboardViewChangeTelemetryModule (upval), Parent (upval)
 				local EffectiveVisible = PlayerListVisibilityStoreModule.getEffectiveVisible(p2)
 				

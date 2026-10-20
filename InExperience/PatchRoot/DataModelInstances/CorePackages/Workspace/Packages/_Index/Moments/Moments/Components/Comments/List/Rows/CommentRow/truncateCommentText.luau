@@ -1,6 +1,6 @@
 ﻿local EscapeRichTextModule = require(script:FindFirstAncestor("Moments").Utils.escapeRichText)
 
-return function(Text: string, Text1, p1, Callback): string? --[[ Line: 11 | Named "truncateCommentText" ]]
+return function(Text: string, Text1, p1, Callback): string?
 	-- upvalues: EscapeRichTextModule (copy)
 	if Callback(EscapeRichTextModule(Text)) <= p1 then
 		return nil
@@ -10,7 +10,7 @@ return function(Text: string, Text1, p1, Callback): string? --[[ Line: 11 | Name
 	for _, value in utf8.graphemes(Text) do
 		table.insert(List, value)
 	end
-	local function _(p2: number): string --[[ Line: 26 | Named "candidate" ]]
+	local function _(p2: number): string
 		-- upvalues: Text (copy), List (copy), EscapeRichTextModule (upval), Text1 (copy)
 		return EscapeRichTextModule((string.gsub(if p2 > 0 then string.sub(Text, 1, List[p2]) else "", "%s+$", ""))) .. Text1
 	end

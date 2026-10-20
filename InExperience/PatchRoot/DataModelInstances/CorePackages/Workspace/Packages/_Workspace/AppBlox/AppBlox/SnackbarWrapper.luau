@@ -8,13 +8,13 @@ local Snackbar = FoundationModule.Snackbar
 local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return ReactModule.memo(function(Frame) --[[ Line: 43 | Named "SnackbarWrapper" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: ReactModule (copy), UseSelectorFunction (copy), FFlagFixOverlayTopInsetForDeviceSafeInsets (copy), UseDeviceInsetsFunction (copy), ShouldUseDeviceSafeInsets (copy), UseScaledValueFunction (copy), Snackbar (copy)
-	ReactModule.useEffect(function() --[[ Line: 45 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy)
 		local DelayedThread = if Frame.autoDismissDelaySeconds then task.delay(Frame.autoDismissDelaySeconds, Frame.closeSnackbar) else nil
 		
-		return function() --[[ Line: 52 ]]
+		return function()
 			-- upvalues: DelayedThread (ref)
 			if DelayedThread then
 				task.cancel(DelayedThread)
@@ -22,7 +22,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 43 | Named "SnackbarWrapper" 
 			end
 		end
 	end, { Frame.closeSnackbar, Frame.autoDismissDelaySeconds })
-	local UseResult = ReactModule.useCallback(function(_, SwipeDirection) --[[ Line: 60 ]]
+	local UseResult = ReactModule.useCallback(function(_, SwipeDirection)
 		-- upvalues: Frame (copy)
 		if SwipeDirection == Enum.SwipeDirection.Up then
 			Frame.closeSnackbar()
@@ -32,10 +32,10 @@ return ReactModule.memo(function(Frame) --[[ Line: 43 | Named "SnackbarWrapper" 
 		text = Frame.buttonText,
 		onActivated = Frame.onButtonActivated
 	} else nil
-	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 72 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p1)
 		return p1.GlobalGuiInset or { left = 0, top = 0, right = 0, bottom = 0 }
 	end)
-	local UseSelectorResult1 = UseSelectorFunction(function(p1) --[[ Line: 81 ]]
+	local UseSelectorResult1 = UseSelectorFunction(function(p1)
 		return p1.TopBar.statusBarHeight
 	end)
 	local Top = 0

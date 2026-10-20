@@ -16,37 +16,37 @@ local DateHelper = require(Parent.Time).DateHelper
 local UseAbbreviatedNumberLocalizationFunction = LocalizationModule.Hooks.useAbbreviatedNumberLocalization
 local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
-return function(p1) --[[ Line: 36 | Named "useLiveVersionCardViewModel" ]]
+return function(p1)
 	-- upvalues: PlaceVersionHistoryModule (copy), ReactModule (copy), SignalsReactModule (copy), GameGetGameInfoStoreModule (copy), GameGetVotesStoreModule (copy), VersionHistoryUtilsModule (copy), UseLocalizationFunction (copy), DateHelper (copy), LocalizationStringsModule (copy), UseAbbreviatedNumberLocalizationFunction (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), LaunchExperienceModule (copy)
 	local PlaceVersionHistoryStore = PlaceVersionHistoryModule.getPlaceVersionHistoryStore()
-	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function() --[[ Line: 38 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function()
 		-- upvalues: PlaceVersionHistoryStore (copy), p1 (copy)
 		return PlaceVersionHistoryStore.getLiveVersion(p1.placeId)
 	end, { p1.placeId, PlaceVersionHistoryStore }).data)
-	ReactModule.useEffect(function() --[[ Line: 43 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: PlaceVersionHistoryStore (copy), p1 (copy)
 		PlaceVersionHistoryStore.fetchLiveVersion(p1.placeId)
 	end, { p1.placeId, PlaceVersionHistoryStore })
 	local Text = if p1.universeId == nil or p1.universeId == 0 then nil else tostring(p1.universeId)
-	local UseSignalStateResult1 = SignalsReactModule.useSignalState(function(p2) --[[ Line: 50 | Named "getGameInfo" ]]
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(function(p2)
 		-- upvalues: GameGetGameInfoStoreModule (upval), Text (copy)
 		local GameGetGameInfoStoreModuleResult = GameGetGameInfoStoreModule(p2)
 		
 		return if Text == nil then nil else GameGetGameInfoStoreModuleResult.getAndFetchGameInfo(Text).data(p2)
 	end)
-	local UseSignalStateResult2 = SignalsReactModule.useSignalState(function(p2): boolean --[[ Line: 55 | Named "getIsGameInfoLoading" ]]
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState(function(p2): boolean
 		-- upvalues: GameGetGameInfoStoreModule (upval), Text (copy)
 		local GameGetGameInfoStoreModuleResult = GameGetGameInfoStoreModule(p2)
 		
 		return Text ~= nil and GameGetGameInfoStoreModuleResult.getAndFetchGameInfo(Text).status(p2) == "NotReady"
 	end)
-	local UseSignalStateResult3 = SignalsReactModule.useSignalState(function(p2) --[[ Line: 62 | Named "getVotes" ]]
+	local UseSignalStateResult3 = SignalsReactModule.useSignalState(function(p2)
 		-- upvalues: GameGetVotesStoreModule (upval), Text (copy)
 		local GameGetVotesStoreModuleResult = GameGetVotesStoreModule(p2)
 		
 		return if Text == nil then nil else GameGetVotesStoreModuleResult.getAndFetchVote(Text).data(p2)
 	end)
-	local UseSignalStateResult4 = SignalsReactModule.useSignalState(function(p2): boolean --[[ Line: 67 | Named "getAreVotesLoading" ]]
+	local UseSignalStateResult4 = SignalsReactModule.useSignalState(function(p2): boolean
 		-- upvalues: GameGetVotesStoreModule (upval), Text (copy)
 		local GameGetVotesStoreModuleResult = GameGetVotesStoreModule(p2)
 		
@@ -88,7 +88,7 @@ return function(p1) --[[ Line: 36 | Named "useLiveVersionCardViewModel" ]]
 	})
 	local UseAbbreviatedNumberLocalizationResult = UseAbbreviatedNumberLocalizationFunction(if UseSignalStateResult3 then UseSignalStateResult3.upVotes else nil)
 	local UseAbbreviatedNumberLocalizationResult1 = UseAbbreviatedNumberLocalizationFunction(if UseSignalStateResult1 then UseSignalStateResult1.totalVisits else nil)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 112 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: SendBuildExperienceEventModule (upval), FFlagBuildEventsUpdate1Module (upval), p1 (copy), LaunchExperienceModule (upval)
 		SendBuildExperienceEventModule(if FFlagBuildEventsUpdate1Module then "PLAYTEST_CLICK" else "PLAY_CLICK", { universeId = p1.universeId, placeId = p1.placeId }, if FFlagBuildEventsUpdate1Module then { context = "LiveVersionCard" } else nil)
 		LaunchExperienceModule(p1.placeId, "LiveVersionCard")

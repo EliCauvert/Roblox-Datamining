@@ -31,14 +31,14 @@ local Frozen = table.freeze({
 	position = MessageGroupShapeModule.Position.Only
 })
 
-local function ShareLinkV1Container(p1) --[[ Line: 70 ]]
+local function ShareLinkV1Container(p1)
 	-- upvalues: GetShareLinkStoreModule (copy), UseSignalStateFunction (copy), UseDispatchFunction (copy), UseEffectFunction (copy), NewResult (copy), ReactModule (copy), GameCardContainerModule (copy)
 	local LinkId = p1.shareLink.linkId
 	local LinkType = p1.shareLink.linkType
 	local ShareLinkStoreModule = GetShareLinkStoreModule(false)
 	local UseSignalStateResult = UseSignalStateFunction(ShareLinkStoreModule.getShareLinkMetadataComputed(LinkId))
 	local UseDispatchResult = UseDispatchFunction()
-	UseEffectFunction(function() --[[ Line: 78 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseSignalStateResult (copy), ShareLinkStoreModule (copy), UseDispatchResult (copy), LinkId (copy), LinkType (copy), NewResult (upval)
 		if UseSignalStateResult then
 			NewResult:warning("ShareLinkContainer: Missing linkId or linkType in props.")
@@ -70,11 +70,11 @@ local function ShareLinkV1Container(p1) --[[ Line: 70 ]]
 	})
 end
 
-local function ShareLinkV2Container(Frame: Frame) --[[ Line: 107 ]]
+local function ShareLinkV2Container(Frame: Frame)
 	-- upvalues: GetShareLinkV2StoreModule (copy), ReactModule (copy), UseSignalStateFunction (copy), FFlagAppChatIntrinsicAssetCardHeightModule (copy), FFlagAppChatMomentShareCardModule (copy), UseScaledValueFunction (copy), ConstantsModule (copy), FFlagAppChatShareLinkV2FallbacksModule (copy), IsAssetCardClassificationModule (copy), Frozen (copy), ShareLinkClassificationModule (copy), PlusReferralAssetCardModule (copy), MomentAssetCardModule (copy), MomentShareCardContainerModule (copy), GetShareLinkV2PresentationModule (copy), ShareLinkV2PresentationModule (copy), GameCardGroupableModule (copy), DataHydrationModule (copy), FoundationModule (copy)
 	local LinkId = Frame.shareLink.linkId
 	local ShareLinkV2StoreModule = GetShareLinkV2StoreModule(false)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 110 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ShareLinkV2StoreModule (copy), LinkId (copy)
 		return ShareLinkV2StoreModule.getAndFetchClassification(LinkId)
 	end, { ShareLinkV2StoreModule, LinkId })
@@ -116,7 +116,7 @@ local function ShareLinkV2Container(Frame: Frame) --[[ Line: 107 ]]
 	}) else nil
 end
 
-return function(p1) --[[ Line: 185 | Named "ShareLinkContainer" ]]
+return function(p1)
 	-- upvalues: FFlagAppChatResolveShareLinkV2Module (copy), ReactModule (copy), ShareLinkV2Container (copy), ShareLinkV1Container (copy)
 	return if FFlagAppChatResolveShareLinkV2Module and p1.shareLink.version == 2 then ReactModule.createElement(ShareLinkV2Container, p1) else ReactModule.createElement(ShareLinkV1Container, p1)
 end

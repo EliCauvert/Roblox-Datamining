@@ -324,7 +324,7 @@ local list1 = {
 		creator = { name = "MockCreator", hasVerifiedBadge = false }
 	}
 }
-local v1 = (function() --[[ Line: 443 | Named "buildLookup" ]]
+local v1 = (function()
 	-- upvalues: list (copy), list1 (copy)
 	local t = {}
 	
@@ -337,11 +337,11 @@ local v1 = (function() --[[ Line: 443 | Named "buildLookup" ]]
 	return t
 end)()
 
-local function _(Text: string): number --[[ Line: 457 | Named "parseIconImageAssetId" ]]
+local function _(Text: string): number
 	return Text and tonumber((string.match(Text, "rbxassetid://(%d+)"))) or 0
 end
 
-local function shopItemToProductInfo(p1) --[[ Line: 465 ]]
+local function shopItemToProductInfo(p1)
 	local Number: number = tonumber(p1.id) or 0
 	local Creator = p1.creator or { name = "", hasVerifiedBadge = false }
 	local Thumbnail: string = p1.thumbnail
@@ -364,7 +364,7 @@ local function shopItemToProductInfo(p1) --[[ Line: 465 ]]
 	}
 end
 
-local function resolveRequest(Request) --[[ Line: 487 ]]
+local function resolveRequest(Request)
 	-- upvalues: v1 (copy), shopItemToProductInfo (copy)
 	local v2 = v1[Request.infoType.Name .. ":" .. tostring(Request.id)]
 	
@@ -379,16 +379,16 @@ local function resolveRequest(Request) --[[ Line: 487 ]]
 	}
 end
 
-local _ = function(p1) --[[ Line: 509 | Named "resolveStreamDelaySeconds" ]]
+local _ = function(p1)
 	return if p1 == nil then math.random() * 0.5 elseif p1 == 0 then 0 else math.random() * p1
 end
 
 return {
 	MOCK_PRODUCT_ITEMS_FOR_TESTING = list,
 	MOCK_GAMEPASS_ITEMS_FOR_TESTING = list1,
-	multiGetProductInfo = function(p1, p2) --[[ Line: 531 ]]
+	multiGetProductInfo = function(p1, p2)
 		-- upvalues: PromiseModule (copy), resolveRequest (copy)
-		return PromiseModule.delay(if p2 == nil then 0.5 else p2):andThen(function() --[[ Line: 536 ]]
+		return PromiseModule.delay(if p2 == nil then 0.5 else p2):andThen(function()
 			-- upvalues: p1 (copy), resolveRequest (upval)
 			local Buffer = table.create(#p1)
 			
@@ -398,7 +398,7 @@ return {
 			return Buffer
 		end)
 	end,
-	streamMultiGetProductInfo = function(p3, p4, p5) --[[ Line: 552 ]]
+	streamMultiGetProductInfo = function(p3, p4, p5)
 		-- upvalues: PromiseModule (copy), resolveRequest (copy)
 		local CountP5 = #p3
 		
@@ -408,10 +408,10 @@ return {
 			local Buffer = table.create(CountP5)
 			local Count = 0
 			
-			return PromiseModule.new(function(Callback) --[[ Line: 565 ]]
+			return PromiseModule.new(function(Callback)
 				-- upvalues: p3 (copy), PromiseModule (upval), p5 (copy), resolveRequest (upval), Buffer (copy), p4 (copy), Count (ref), CountP5 (copy)
 				for i, value in ipairs(p3) do
-					PromiseModule.delay(if p5 == nil then math.random() * 0.5 elseif p5 == 0 then 0 else math.random() * p5):andThen(function() --[[ Line: 567 ]]
+					PromiseModule.delay(if p5 == nil then math.random() * 0.5 elseif p5 == 0 then 0 else math.random() * p5):andThen(function()
 						-- upvalues: resolveRequest (upval), value (copy), Buffer (upval), i (copy), p4 (upval), Count (upval), CountP5 (upval), Callback (copy)
 						local ResolveRequestResult = resolveRequest(value)
 						Buffer[i] = ResolveRequestResult

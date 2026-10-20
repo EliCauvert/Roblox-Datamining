@@ -9,17 +9,17 @@ local ConstantsModule = require(RobloxGui.Modules.VoiceChat.Constants)
 local Default = require(RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
 local _UDim2 = UDim2.fromOffset(36, 36)
 
-local function _(p1) --[[ Line: 16 | Named "useJoinBinding" ]]
+local function _(p1)
 	-- upvalues: ReactModule (copy), RoactModule (copy)
-	return ReactModule.useMemo(function() --[[ Line: 17 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: RoactModule (upval), p1 (copy)
 		return RoactModule.joinBindings(p1)
 	end, {})
 end
 
-local _ = function(p1) --[[ Line: 22 | Named "mapLevelToIcon" ]]
+local _ = function(p1)
 	-- upvalues: ConstantsModule (copy), Default (copy)
-	return function(Entry) --[[ Line: 24 ]]
+	return function(Entry)
 		-- upvalues: ConstantsModule (upval), Default (upval), p1 (copy)
 		local Entry1 = Entry[1]
 		local Entry2: number = Entry[2]
@@ -28,33 +28,33 @@ local _ = function(p1) --[[ Line: 22 | Named "mapLevelToIcon" ]]
 	end
 end
 
-local function GenerateGUID() --[[ Line: 42 ]]
+local function GenerateGUID()
 	-- upvalues: HttpService (copy)
 	return HttpService:GenerateGUID()
 end
 
-return function(Image) --[[ Line: 55 | Named "VRBarVoiceIcon" ]]
+return function(Image)
 	-- upvalues: UseVoiceStateModule (copy), ReactModule (copy), RoactModule (copy), GenerateGUID (copy), ConstantsModule (copy), RunService (copy), Default (copy), _UDim2 (copy)
 	local UseVoiceStateModuleResult = UseVoiceStateModule(Image.userId, Image.disable or false)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(UseVoiceStateModuleResult)
 	local list = { UseBindingResult1, UseBindingResult }
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 17 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: RoactModule (upval), list (copy)
 		return RoactModule.joinBindings(list)
 	end, {})
 	local Current = ReactModule.useRef(GenerateGUID()).current or ""
 	UseBindingResult2_1(UseVoiceStateModuleResult)
 	local IsUseVoiceStateModuleResultMatch = UseVoiceStateModuleResult == ConstantsModule.VOICE_STATE.TALKING
-	ReactModule.useEffect(function() --[[ Line: 65 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsUseVoiceStateModuleResultMatch (copy), RunService (upval), Current (copy), UseBindingResult2 (copy)
 		if IsUseVoiceStateModuleResultMatch then
-			RunService:BindToRenderStep(Current, 1, function() --[[ Line: 67 ]]
+			RunService:BindToRenderStep(Current, 1, function()
 				-- upvalues: UseBindingResult2 (upval)
 				UseBindingResult2(math.random())
 			end)
 		end
-		return function() --[[ Line: 71 ]]
+		return function()
 			-- upvalues: IsUseVoiceStateModuleResultMatch (upval), RunService (upval), Current (upval)
 			if IsUseVoiceStateModuleResultMatch then
 				RunService:UnbindFromRenderStep(Current)
@@ -64,11 +64,11 @@ return function(Image) --[[ Line: 55 | Named "VRBarVoiceIcon" ]]
 	
 	return RoactModule.createElement("ImageLabel", {
 		BackgroundTransparency = Image.BackgroundTransparency or 1,
-		Image = ReactModule.useMemo(function() --[[ Line: 78 ]]
+		Image = ReactModule.useMemo(function()
 			-- upvalues: UseMemoResult (copy), Image (copy), ConstantsModule (upval), Default (upval)
 			local IconStyle = Image.iconStyle
 			
-			return UseMemoResult:map(function(Entry) --[[ Line: 24 ]]
+			return UseMemoResult:map(function(Entry)
 				-- upvalues: ConstantsModule (upval), Default (upval), IconStyle (copy)
 				local Entry1 = Entry[1]
 				local Entry2: number = Entry[2]

@@ -1,4 +1,4 @@
-﻿return function(Gui): boolean --[[ Line: 2 ]]
+﻿return function(Gui): boolean
 	if Gui.Parent == nil then
 		return false
 	end

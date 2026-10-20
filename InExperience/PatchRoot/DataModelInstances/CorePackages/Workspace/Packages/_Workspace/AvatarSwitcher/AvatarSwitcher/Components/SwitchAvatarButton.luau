@@ -15,7 +15,7 @@ local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.U
 local GetAvatarSwitcherStoreModule = require(AvatarSwitcher.Stores.getAvatarSwitcherStore)
 local GetTimeoutStatusStoreFunction = require(Parent.AvatarExperienceCommon).Stores.getTimeoutStatusStore
 
-return function(p1) --[[ Line: 29 | Named "SwitchAvatarButton" ]]
+return function(p1)
 	-- upvalues: SignalsReactModule (copy), GetAvatarSwitcherStoreModule (copy), GetTimeoutStatusStoreFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), AddUnifiedEventLoggingFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), SessionService (copy), FoundationModule (copy), ButtonSize (copy), ButtonVariant (copy), FillBehavior (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetAvatarSwitcherStoreModule)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(UseSignalStateResult.getIsSwitching)
@@ -26,9 +26,9 @@ return function(p1) --[[ Line: 29 | Named "SwitchAvatarButton" ]]
 	local UseSignalStateResult1_1 = UseSignalStateResult1 or UseSignalStateResult2 ~= nil and UseSignalStateResult3 == nil
 	local UseSignalStateResult1_1_1 = UseSignalStateResult1_1 or (UseSignalStateResult2 == nil or UseSignalStateResult4)
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 47 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: AddUnifiedEventLoggingFunction (upval), UseRefResult (copy), UnifiedEventLogEnums (upval), UnifiedLoggingSurface (upval), SessionService (upval)
-		task.delay(0, function() --[[ Line: 50 ]]
+		task.delay(0, function()
 			-- upvalues: AddUnifiedEventLoggingFunction (upval), UseRefResult (upval), UnifiedEventLogEnums (upval), UnifiedLoggingSurface (upval), SessionService (upval)
 			AddUnifiedEventLoggingFunction(UseRefResult, {
 				elementName = "SWITCH_AVATAR_BUTTON",

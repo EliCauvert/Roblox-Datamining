@@ -5,10 +5,10 @@ local GetAudioPlaybackStore = require(Songbird.Parent.MediaPlayback).getAudioPla
 local UseEffectFunction = ReactModule.useEffect
 local UseCallbackFunction = ReactModule.useCallback
 
-return function(p1, Callback) --[[ Line: 21 | Named "useStopSongOnPageNavigation" ]]
+return function(p1, Callback)
 	-- upvalues: SignalsReactModule (copy), GetAudioPlaybackStore (copy), UseCallbackFunction (copy), UseEffectFunction (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetAudioPlaybackStore)
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 24 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: UseSignalStateResult (copy), Callback (copy)
 		for _, value in UseSignalStateResult.getPlayingAudioStores(false) do
 			value.stop()
@@ -17,13 +17,13 @@ return function(p1, Callback) --[[ Line: 21 | Named "useStopSongOnPageNavigation
 			Callback()
 		end
 	end, { UseSignalStateResult, Callback })
-	UseEffectFunction(function() --[[ Line: 33 ]]
+	UseEffectFunction(function()
 		-- upvalues: p1 (copy), UseCallbackResult (copy)
 		if not p1 then
 			UseCallbackResult()
 		end
 	end, { p1, UseCallbackResult })
-	UseEffectFunction(function() --[[ Line: 39 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseCallbackResult (copy)
 		return UseCallbackResult
 	end, { UseCallbackResult })

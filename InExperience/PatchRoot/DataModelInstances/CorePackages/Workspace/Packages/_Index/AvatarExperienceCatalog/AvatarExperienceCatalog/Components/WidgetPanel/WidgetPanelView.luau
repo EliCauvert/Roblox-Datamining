@@ -4,7 +4,7 @@ local View = require(Parent.Foundation).View
 local _ = require(Parent.AppCommonLib)
 local AvatarExperienceScreenSizeImpressionsDetector = require(Parent.AvatarExperienceAnalytics).AvatarExperienceScreenSizeImpressionsDetector
 
-return function(Frame) --[[ Line: 36 | Named "WidgetPanelView" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), View (copy), AvatarExperienceScreenSizeImpressionsDetector (copy)
 	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

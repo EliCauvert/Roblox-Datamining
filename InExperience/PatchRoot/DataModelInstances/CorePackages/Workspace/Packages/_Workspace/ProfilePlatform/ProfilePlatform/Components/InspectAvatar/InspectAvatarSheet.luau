@@ -29,7 +29,7 @@ local ItemDisplayHelpersModule = require(script.Parent.ItemDisplayHelpers)
 local CatalogItemRowCardContainerModule = require(script.Parent.CatalogItemRowCardContainer)
 local IsItemPurchasableFunction = require(script.Parent.InspectAvatarUtils).isItemPurchasable
 
-return function(p1) --[[ Line: 78 | Named "InspectAvatarSheet" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ItemDisplayHelpersModule (copy), FFlagProfileInspectAvatarBackgroundModule (copy), UseTokensFunction (copy), ReactModule (copy), DashModule (copy), CatalogItemRowCardContainerModule (copy), IsItemPurchasableFunction (copy), FFlagSocialEnableProfileInspectAndBuyConsoleFocusNav (copy), InputHandlersModule (copy), View (copy), Image (copy), DisplayBackground (copy), IconButton (copy), IconName (copy), IconSize (copy), ButtonVariant (copy), Text (copy), Skeleton (copy), Divider (copy), BuyActionBar (copy), FFlagProfileInspectAvatarBuyAllModule (copy), AppFocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), FocusNavigationEventNameEnum (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		buyItems = "Feature.Catalog.Label.BuyItems",
@@ -49,7 +49,7 @@ return function(p1) --[[ Line: 78 | Named "InspectAvatarSheet" ]]
 	local XLarge = if FFlagProfileInspectAvatarBackgroundModule then UseTokensFunction().Padding.XLarge else nil
 	local UseLocalizationResult2 = UseLocalizationFunction(ItemDisplayHelpersModule.ASSET_TYPE_LOCALIZATION_KEYS)
 	local UseLocalizationResult3 = UseLocalizationFunction(ItemDisplayHelpersModule.BUNDLE_TYPE_LOCALIZATION_KEYS)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 98 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseLocalizationResult (copy), DashModule (upval), UseLocalizationResult2 (copy), UseLocalizationResult3 (copy)
 		return {
 			bundleParts = nil,
@@ -77,9 +77,9 @@ return function(p1) --[[ Line: 78 | Named "InspectAvatarSheet" ]]
 			openItemDetails = p1.openItemDetails
 		})
 	end
-	local UseMemoResult1 = if FFlagSocialEnableProfileInspectAndBuyConsoleFocusNav then ReactModule.useMemo(function() --[[ Line: 125 ]]
+	local UseMemoResult1 = if FFlagSocialEnableProfileInspectAndBuyConsoleFocusNav then ReactModule.useMemo(function()
 		-- upvalues: InputHandlersModule (upval), p1 (copy)
-		return InputHandlersModule.onRelease(function(p2) --[[ Line: 126 ]]
+		return InputHandlersModule.onRelease(function(p2)
 			-- upvalues: p1 (upval)
 			p2:cancel()
 			p1.onClose()

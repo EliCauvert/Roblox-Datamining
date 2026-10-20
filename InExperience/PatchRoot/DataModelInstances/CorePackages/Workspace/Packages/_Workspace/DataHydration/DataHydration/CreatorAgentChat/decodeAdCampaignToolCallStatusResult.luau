@@ -5,7 +5,7 @@ local InterfaceResult = TModule.interface({
 	campaignId = TModule.optional(TModule.string)
 })
 
-return function(p1) --[[ Line: 13 | Named "decodeAdCampaignToolCallStatusResult" ]]
+return function(p1)
 	-- upvalues: InterfaceResult (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult(p1)
 	

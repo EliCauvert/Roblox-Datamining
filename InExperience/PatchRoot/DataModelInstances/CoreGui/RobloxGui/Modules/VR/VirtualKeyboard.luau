@@ -31,7 +31,7 @@ for i, value in pairs({
 }) do
 	t[value] = i - 1
 end
-local function _(Text: string, Text1) --[[ Line: 223 | Named "tokenizeString" ]]
+local function _(Text: string, Text1)
 	local List = {}
 	
 	for i in string.gmatch(Text, "([^" .. Text1 .. "]+)") do
@@ -40,13 +40,13 @@ local function _(Text: string, Text1) --[[ Line: 223 | Named "tokenizeString" ]]
 	return List
 end
 
-local _ = function(p1): string --[[ Line: 231 | Named "ConvertFontSizeEnumToInt" ]]
+local _ = function(p1): string
 	local Match: string? = string.match(p1.Name, "%d+")
 	
 	return Match and tostring(Match) or 12
 end
 
-local _ = function(Direction, p1, p2) --[[ Line: 240 | Named "RayPlaneIntersection" ]]
+local _ = function(Direction, p1, p2)
 	local Unit = p1.unit
 	local Direction1 = Direction.Unit
 	local DotProduct = Unit:Dot(Direction1.Direction)
@@ -60,18 +60,18 @@ local _ = function(Direction, p1, p2) --[[ Line: 240 | Named "RayPlaneIntersecti
 	end
 end
 
-function Clamp(p1: number, p2: number, p3: number): number --[[ Line: 261 ]]
+function Clamp(p1: number, p2: number, p3: number): number
 	return (math.max(p1, (math.min(p2, p3))))
 end
 
-local _ = function(Frame: Frame, p1, p2): boolean --[[ Line: 266 | Named "PointInGuiObject" ]]
+local _ = function(Frame: Frame, p1, p2): boolean
 	local AbsolutePosition = Frame.AbsolutePosition
 	local NewAbsolutePosition = Frame.AbsolutePosition + Frame.AbsoluteSize
 	
 	return AbsolutePosition.X <= p1 and p1 <= NewAbsolutePosition.X and AbsolutePosition.Y <= p2 and p2 <= NewAbsolutePosition.Y
 end
 
-local function FindAncestorOfType(Parent, ClassName) --[[ Line: 275 ]]
+local function FindAncestorOfType(Parent, ClassName)
 	-- upvalues: FindAncestorOfType (copy)
 	if Parent then
 		local Parent1 = Parent.Parent
@@ -82,14 +82,14 @@ local function FindAncestorOfType(Parent, ClassName) --[[ Line: 275 ]]
 	end
 end
 
-local function ExtendedInstance(Frame) --[[ Line: 286 ]]
+local function ExtendedInstance(Frame)
 	local t = {}
 	setmetatable(t, {
-		__index = function(_, p1) --[[ Line: 291 ]]
+		__index = function(_, p1)
 			-- upvalues: Frame (copy)
 			return Frame[p1]
 		end,
-		__newindex = function(_, Key, p1) --[[ Line: 295 ]]
+		__newindex = function(_, Key, p1)
 			-- upvalues: Frame (copy)
 			Frame[Key] = p1
 		end
@@ -98,21 +98,21 @@ local function ExtendedInstance(Frame) --[[ Line: 286 ]]
 	return t
 end
 
-local function CreateVRButton(Frame: Frame) --[[ Line: 304 ]]
+local function CreateVRButton(Frame: Frame)
 	-- upvalues: ExtendedInstance (copy)
 	local ExtendedInstanceResult = ExtendedInstance(Frame)
-	rawset(ExtendedInstanceResult, "OnEnter", function(_) --[[ Line: 307 ]] end)
-	rawset(ExtendedInstanceResult, "OnLeave", function(_) --[[ Line: 309 ]] end)
-	rawset(ExtendedInstanceResult, "OnDown", function(_) --[[ Line: 311 ]] end)
-	rawset(ExtendedInstanceResult, "OnUp", function(_) --[[ Line: 313 ]] end)
-	rawset(ExtendedInstanceResult, "ContainsPoint", function(_, p1, p2): boolean --[[ Line: 315 ]]
+	rawset(ExtendedInstanceResult, "OnEnter", function(_) end)
+	rawset(ExtendedInstanceResult, "OnLeave", function(_) end)
+	rawset(ExtendedInstanceResult, "OnDown", function(_) end)
+	rawset(ExtendedInstanceResult, "OnUp", function(_) end)
+	rawset(ExtendedInstanceResult, "ContainsPoint", function(_, p1, p2): boolean
 		-- upvalues: Frame (copy)
 		local AbsolutePosition = Frame.AbsolutePosition
 		local NewAbsolutePosition = Frame.AbsolutePosition + Frame.AbsoluteSize
 		
 		return AbsolutePosition.X <= p1 and p1 <= NewAbsolutePosition.X and AbsolutePosition.Y <= p2 and p2 <= NewAbsolutePosition.Y
 	end)
-	rawset(ExtendedInstanceResult, "Update", function(_) --[[ Line: 318 ]] end)
+	rawset(ExtendedInstanceResult, "Update", function(_) end)
 	
 	return ExtendedInstanceResult
 end
@@ -133,7 +133,7 @@ local config = {
 	}
 }
 
-local function CreateKeyboardKey(p1, Vector, Entry) --[[ Line: 340 ]]
+local function CreateKeyboardKey(p1, Vector, Entry)
 	-- upvalues: CreateFunction (copy), _Color3_4 (copy), _Color3 (copy), CreateVRButton (copy), config (copy), _Color3_2 (copy), _Color3_1 (copy), _Color3_3 (copy)
 	local Y2 = Vector.width2 and (Vector.height2 and (Vector.x2 and Vector.y2))
 	local Parent = CreateFunction("ImageButton")({
@@ -245,7 +245,7 @@ local function CreateKeyboardKey(p1, Vector, Entry) --[[ Line: 340 ]]
 			Image = config[Entry[1]].Asset,
 			Parent = Frame
 		})
-		Frame1.Changed:connect(function(p2) --[[ Line: 472 | Named "onChanged" ]]
+		Frame1.Changed:connect(function(p2)
 			-- upvalues: Frame1 (ref)
 			if p2 == "AbsoluteSize" then
 				Frame1.Position = UDim2.new(0.5, -Frame1.AbsoluteSize.X / 2, 0.5, -Frame1.AbsoluteSize.Y / 2)
@@ -253,7 +253,7 @@ local function CreateKeyboardKey(p1, Vector, Entry) --[[ Line: 340 ]]
 		end)
 		Frame1.Position = UDim2.new(0.5, -Frame1.AbsoluteSize.X / 2, 0.5, -Frame1.AbsoluteSize.Y / 2)
 	end
-	local function onClicked() --[[ Line: 481 ]]
+	local function onClicked()
 		-- upvalues: VRButton (copy), p1 (copy), IsByteValueBelow (copy)
 		local v5 = nil
 		local CurrentKeyValue = VRButton:GetCurrentKeyValue()
@@ -280,7 +280,7 @@ local function CreateKeyboardKey(p1, Vector, Entry) --[[ Line: 340 ]]
 		end
 	end
 	
-	local function _(BackgroundColor3, p2) --[[ Line: 510 | Named "setKeyColor" ]]
+	local function _(BackgroundColor3, p2)
 		-- upvalues: Frame (copy), Button (ref), Y2 (copy), Object (ref), v3 (ref), v4 (ref), v2 (copy)
 		Frame.BackgroundColor3 = BackgroundColor3
 		
@@ -298,7 +298,7 @@ local function CreateKeyboardKey(p1, Vector, Entry) --[[ Line: 340 ]]
 		end
 	end
 	
-	local function update() --[[ Line: 524 ]]
+	local function update()
 		-- upvalues: VRButton (copy), Flag1 (ref), _Color3_2 (upval), Frame (copy), Button (ref), Y2 (copy), Object (ref), v3 (ref), v4 (ref), v2 (copy), Flag (ref), _Color3_1 (upval), p1 (copy), _Color3_3 (upval), _Color3 (upval), Frame1 (ref), v1 (copy)
 		local CurrentKeyValue = VRButton:GetCurrentKeyValue()
 		
@@ -388,12 +388,12 @@ local function CreateKeyboardKey(p1, Vector, Entry) --[[ Line: 340 ]]
 	end
 	
 	local t = {}
-	rawset(VRButton, "OnEnter", function(_) --[[ Line: 550 ]]
+	rawset(VRButton, "OnEnter", function(_)
 		-- upvalues: Flag (ref), update (copy)
 		Flag = true
 		update()
 	end)
-	rawset(VRButton, "OnLeave", function(_) --[[ Line: 554 ]]
+	rawset(VRButton, "OnLeave", function(_)
 		-- upvalues: t (copy), Flag (ref), Flag1 (ref), update (copy)
 		if not next(t) then
 			Flag = false
@@ -401,25 +401,25 @@ local function CreateKeyboardKey(p1, Vector, Entry) --[[ Line: 340 ]]
 			update()
 		end
 	end)
-	rawset(VRButton, "OnDown", function(_) --[[ Line: 561 ]]
+	rawset(VRButton, "OnDown", function(_)
 		-- upvalues: Flag1 (ref), update (copy), onClicked (copy)
 		Flag1 = true
 		update()
 		onClicked()
 	end)
-	rawset(VRButton, "OnUp", function(_) --[[ Line: 569 ]]
+	rawset(VRButton, "OnUp", function(_)
 		-- upvalues: Flag1 (ref), update (copy)
 		Flag1 = false
 		update()
 	end)
-	rawset(VRButton, "GetCurrentKeyValue", function(_) --[[ Line: 573 ]]
+	rawset(VRButton, "GetCurrentKeyValue", function(_)
 		-- upvalues: p1 (copy), IsByteValueBelow (copy), Entry (copy)
 		local Shift = p1:GetShift()
 		local Caps = p1:GetCaps()
 		
 		return if IsByteValueBelow then if Caps and Shift then string.lower(Entry[#Entry]) elseif Caps or Shift then Entry[1] else string.lower(Entry[#Entry]) elseif Shift then Entry[1] else Entry[#Entry]
 	end)
-	rawset(VRButton, "ContainsPoint", function(_, p2, p3): boolean --[[ Line: 593 ]]
+	rawset(VRButton, "ContainsPoint", function(_, p2, p3): boolean
 		-- upvalues: Frame (copy), Button (ref)
 		local AbsolutePosition = Frame.AbsolutePosition
 		local NewAbsolutePosition = Frame.AbsolutePosition + Frame.AbsoluteSize
@@ -441,48 +441,48 @@ local function CreateKeyboardKey(p1, Vector, Entry) --[[ Line: 340 ]]
 		end
 		return IsYAbove
 	end)
-	rawset(VRButton, "Update", function(_) --[[ Line: 597 ]]
+	rawset(VRButton, "Update", function(_)
 		-- upvalues: update (copy)
 		update()
 	end)
-	rawset(VRButton, "GetInstance", function(_) --[[ Line: 600 ]]
+	rawset(VRButton, "GetInstance", function(_)
 		-- upvalues: Parent (copy)
 		return Parent
 	end)
-	Parent.MouseButton1Down:connect(function() --[[ Line: 604 ]]
+	Parent.MouseButton1Down:connect(function()
 		-- upvalues: VRButton (copy)
 		VRButton:OnDown()
 	end)
-	Parent.MouseButton1Up:connect(function() --[[ Line: 605 ]]
+	Parent.MouseButton1Up:connect(function()
 		-- upvalues: VRButton (copy)
 		VRButton:OnUp()
 	end)
-	Parent.SelectionGained:connect(function() --[[ Line: 606 ]]
+	Parent.SelectionGained:connect(function()
 		-- upvalues: t (copy), Parent (copy), VRButton (copy)
 		t[Parent] = true
 		VRButton:OnEnter()
 	end)
-	Parent.SelectionLost:connect(function() --[[ Line: 607 ]]
+	Parent.SelectionLost:connect(function()
 		-- upvalues: t (copy), Parent (copy), VRButton (copy)
 		t[Parent] = nil
 		VRButton:OnLeave()
 	end)
 	
 	if Button then
-		Button.MouseButton1Down:connect(function() --[[ Line: 613 ]]
+		Button.MouseButton1Down:connect(function()
 			-- upvalues: VRButton (copy)
 			VRButton:OnDown()
 		end)
-		Button.MouseButton1Up:connect(function() --[[ Line: 614 ]]
+		Button.MouseButton1Up:connect(function()
 			-- upvalues: VRButton (copy)
 			VRButton:OnUp()
 		end)
-		Button.SelectionGained:connect(function() --[[ Line: 615 ]]
+		Button.SelectionGained:connect(function()
 			-- upvalues: t (copy), Button (ref), VRButton (copy)
 			t[Button] = true
 			VRButton:OnEnter()
 		end)
-		Button.SelectionLost:connect(function() --[[ Line: 619 ]]
+		Button.SelectionLost:connect(function()
 			-- upvalues: t (copy), Button (ref), VRButton (copy)
 			t[Button] = nil
 			VRButton:OnLeave()
@@ -493,22 +493,22 @@ local function CreateKeyboardKey(p1, Vector, Entry) --[[ Line: 340 ]]
 	return VRButton
 end
 
-local function CreateBaseVoiceState() --[[ Line: 630 ]]
+local function CreateBaseVoiceState()
 	return {
 		Name = "Base",
-		TransitionFrom = function(_) --[[ Line: 634 ]] end,
-		TransitionTo = function(_) --[[ Line: 636 ]] end
+		TransitionFrom = function(_) end,
+		TransitionTo = function(_) end
 	}
 end
 
-local _ = function() --[[ Line: 642 | Named "CreateListeningVoiceState" ]]
+local _ = function()
 	-- upvalues: CreateBaseVoiceState (copy), SoundService (copy)
 	local Listening = CreateBaseVoiceState()
 	Listening.Name = "Listening"
 	
-	function Listening:TransitionTo() --[[ Line: 647 ]]
+	function Listening:TransitionTo()
 		-- upvalues: SoundService (upval)
-		pcall(function() --[[ Line: 648 ]]
+		pcall(function()
 			-- upvalues: SoundService (upval)
 			SoundService:BeginRecording()
 		end)
@@ -517,18 +517,18 @@ local _ = function() --[[ Line: 642 | Named "CreateListeningVoiceState" ]]
 	return Listening
 end
 
-local _ = function() --[[ Line: 654 | Named "CreateProcessingVoiceState" ]]
+local _ = function()
 	-- upvalues: CreateBaseVoiceState (copy), SoundService (copy)
 	local Processing = CreateBaseVoiceState()
 	Processing.Name = "Processing"
 	local v1 = false
 	local v2 = nil
 	
-	function Processing:TransitionTo() --[[ Line: 662 ]]
+	function Processing:TransitionTo()
 		-- upvalues: v2 (ref), SoundService (upval), v1 (ref)
-		coroutine.wrap(function() --[[ Line: 663 ]]
+		coroutine.wrap(function()
 			-- upvalues: v2 (upval), SoundService (upval), v1 (upval)
-			pcall(function() --[[ Line: 664 ]]
+			pcall(function()
 				-- upvalues: v2 (upval), SoundService (upval)
 				v2 = SoundService:EndRecording()
 			end)
@@ -536,7 +536,7 @@ local _ = function() --[[ Line: 654 | Named "CreateProcessingVoiceState" ]]
 		end)()
 	end
 	
-	function Processing:GetResultAsync() --[[ Line: 669 ]]
+	function Processing:GetResultAsync()
 		-- upvalues: v1 (ref), v2 (ref)
 		while not v1 do
 			wait()
@@ -547,7 +547,7 @@ local _ = function() --[[ Line: 654 | Named "CreateProcessingVoiceState" ]]
 	return Processing
 end
 
-local _ = function() --[[ Line: 679 | Named "CreateWaitingVoiceState" ]]
+local _ = function()
 	-- upvalues: CreateBaseVoiceState (copy)
 	local Waiting = CreateBaseVoiceState()
 	Waiting.Name = "Waiting"
@@ -565,7 +565,7 @@ Waiting.Name = "Waiting"
 local BindableEvent = Instance.new("BindableEvent")
 local config2 = {
 	CurrentState = Waiting,
-	TransitionState = function(p1, CurrentState): boolean --[[ Line: 695 ]]
+	TransitionState = function(p1, CurrentState): boolean
 		-- upvalues: config1 (copy), BindableEvent (copy)
 		if config1[p1.CurrentState.Name][CurrentState.Name] then
 			p1.CurrentState:TransitionFrom()
@@ -578,13 +578,13 @@ local config2 = {
 			return false
 		end
 	end,
-	GetCurrentState = function(p1) --[[ Line: 707 ]]
+	GetCurrentState = function(p1)
 		return p1.CurrentState
 	end,
 	StateTransitionedEvent = BindableEvent.Event
 }
 
-local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
+local function ConstructKeyboardUI(List)
 	-- upvalues: CorePackages (copy), CreateFunction (copy), _Color3_3 (copy), CreateVRButton (copy), _Color3 (copy), _Color3_4 (copy), RunService (copy), ExtendedInstance (copy), TextService (copy), config2 (copy), CreateBaseVoiceState (copy), SoundService (copy), ContextActionService (copy), CreateKeyboardKey (copy), t (copy)
 	local Panel3D = require(CorePackages.Workspace.Packages.VrCommon).Panel3D
 	local Keyboard = Panel3D.Get("Keyboard")
@@ -715,7 +715,7 @@ local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
 		TextColor3 = _Color3_4,
 		Parent = Parent2
 	})
-	local v5 = (function() --[[ Line: 873 | Named "CreateVoiceVisualizerWidget" ]]
+	local v5 = (function()
 		-- upvalues: CreateFunction (upval), _Color3_4 (upval), RunService (upval)
 		local List = {}
 		local Container = CreateFunction("Frame")({
@@ -735,10 +735,10 @@ local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
 				Parent = Container
 			})))
 		end
-		function config:StartAnimation() --[[ Line: 903 ]]
+		function config:StartAnimation()
 			-- upvalues: RunService (upval), List (copy)
 			RunService:UnbindFromRenderStep("VoiceVisualizerWidget")
-			RunService:BindToRenderStep("VoiceVisualizerWidget", Enum.RenderPriority.First.Value, function() --[[ Line: 906 ]]
+			RunService:BindToRenderStep("VoiceVisualizerWidget", Enum.RenderPriority.First.Value, function()
 				-- upvalues: List (upval)
 				for i, value in pairs(List) do
 					local ScaledMagnitude = ((math.abs((math.sin(tick() * 2.5 + i * 0.5026548245743669))) + math.abs((math.cos(tick() * 2.5 + i * 0.5026548245743669)))) / 2 - 0.3) * 1.4285714285714286
@@ -748,7 +748,7 @@ local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
 			end)
 		end
 		
-		function config:StopAnimation() --[[ Line: 917 ]]
+		function config:StopAnimation()
 			-- upvalues: RunService (upval)
 			RunService:UnbindFromRenderStep("VoiceVisualizerWidget")
 		end
@@ -768,14 +768,14 @@ local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
 	local BindableEvent1 = Instance.new("BindableEvent")
 	local Flag = false
 	
-	local function SetTextFieldCursorPosition(EndIndex) --[[ Line: 943 ]]
+	local function SetTextFieldCursorPosition(EndIndex)
 		-- upvalues: ClampResult (ref), Frame (copy), TextService (upval), v3 (copy)
 		ClampResult = if Frame.TextFits then Clamp(0, #Frame.Text, EndIndex) else #Frame.Text
 		local Match: string? = string.match(Frame.FontSize.Name, "%d+")
 		v3.Position = UDim2.new(0, TextService:GetTextSize(string.sub(Frame.Text, 1, ClampResult), Match and tostring(Match) or 12, Frame.Font, Frame.AbsoluteSize).x, v3.Position.Y.Scale, v3.Position.Y.Offset)
 	end
 	
-	local function _(p1) --[[ Line: 957 | Named "UpdateTextEntryFieldText" ]]
+	local function _(p1)
 		-- upvalues: Frame (copy), SetTextFieldCursorPosition (copy), ClampResult (ref)
 		Frame:SetTextFromInput(p1)
 		SetTextFieldCursorPosition(ClampResult)
@@ -783,12 +783,12 @@ local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
 	
 	local BufferText = ""
 	
-	local _ = function() --[[ Line: 963 | Named "getBufferText" ]]
+	local _ = function()
 		-- upvalues: v6 (ref), BufferText (ref)
 		return if v6 and v6.TextBox then v6.TextBox.Text else BufferText
 	end
 	
-	local _ = function(Value) --[[ Line: 969 | Named "setBufferText" ]]
+	local _ = function(Value)
 		-- upvalues: v6 (ref), BufferText (ref), Frame (copy), SetTextFieldCursorPosition (copy), ClampResult (ref)
 		if v6 and v6.TextBox then
 			v6.TextBox.Text = Value
@@ -802,7 +802,7 @@ local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
 		end
 	end
 	
-	local function calculateTextCursorPosition(X, Y): number --[[ Line: 978 ]]
+	local function calculateTextCursorPosition(X, Y): number
 		-- upvalues: Frame (copy), TextService (upval)
 		local XDelta = X - Frame.AbsolutePosition.x
 		local _ = Y - Frame.AbsolutePosition.y
@@ -820,11 +820,11 @@ local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
 	local v9 = nil
 	rawset(ExtendedInstanceResult, "OpenedEvent", BindableEvent.Event)
 	rawset(ExtendedInstanceResult, "ClosedEvent", BindableEvent1.Event)
-	rawset(ExtendedInstanceResult, "GetCurrentKeyset", function(_) --[[ Line: 1001 ]]
+	rawset(ExtendedInstanceResult, "GetCurrentKeyset", function(_)
 		-- upvalues: List1 (copy), v9 (ref)
 		return List1[v9]
 	end)
-	rawset(ExtendedInstanceResult, "SetCurrentKeyset", function(_, p1) --[[ Line: 1005 ]]
+	rawset(ExtendedInstanceResult, "SetCurrentKeyset", function(_, p1)
 		-- upvalues: v9 (ref), List1 (copy)
 		if p1 ~= v9 and List1[p1] ~= nil then
 			if List1[v9] and List1[v9].container then
@@ -837,7 +837,7 @@ local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
 			end
 		end
 	end)
-	rawset(ExtendedInstanceResult, "SetVoiceMode", function(p1, _) --[[ Line: 1019 ]]
+	rawset(ExtendedInstanceResult, "SetVoiceMode", function(p1, _)
 		-- upvalues: Parent2 (copy), config2 (upval), CreateBaseVoiceState (upval), SoundService (upval)
 		local Visible = false
 		local CurrentKeyset = p1:GetCurrentKeyset()
@@ -851,9 +851,9 @@ local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
 			local Listening = CreateBaseVoiceState()
 			Listening.Name = "Listening"
 			
-			function Listening:TransitionTo() --[[ Line: 647 ]]
+			function Listening:TransitionTo()
 				-- upvalues: SoundService (upval)
-				pcall(function() --[[ Line: 648 ]]
+				pcall(function()
 					-- upvalues: SoundService (upval)
 					SoundService:BeginRecording()
 				end)
@@ -862,11 +862,11 @@ local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
 			config2:TransitionState(Listening)
 		end
 	end)
-	rawset(ExtendedInstanceResult, "GetCaps", function(_) --[[ Line: 1035 ]]
+	rawset(ExtendedInstanceResult, "GetCaps", function(_)
 		-- upvalues: v7 (ref)
 		return v7
 	end)
-	rawset(ExtendedInstanceResult, "SetCaps", function(p1, p2) --[[ Line: 1039 ]]
+	rawset(ExtendedInstanceResult, "SetCaps", function(p1, p2)
 		-- upvalues: v7 (ref)
 		v7 = p2
 		
@@ -874,11 +874,11 @@ local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
 			key:Update()
 		end
 	end)
-	rawset(ExtendedInstanceResult, "GetShift", function(_) --[[ Line: 1046 ]]
+	rawset(ExtendedInstanceResult, "GetShift", function(_)
 		-- upvalues: v8 (ref)
 		return v8
 	end)
-	rawset(ExtendedInstanceResult, "SetShift", function(p3, p4) --[[ Line: 1050 ]]
+	rawset(ExtendedInstanceResult, "SetShift", function(p3, p4)
 		-- upvalues: v8 (ref)
 		v8 = p4
 		
@@ -891,7 +891,7 @@ local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
 	local FocusLostConnection = nil
 	local EventConnection = nil
 	
-	local _ = function() --[[ Line: 1063 | Named "disconnectKeyboardEvents" ]]
+	local _ = function()
 		-- upvalues: ChangedConnection (ref), FocusLostConnection (ref), EventConnection (ref)
 		if ChangedConnection then
 			ChangedConnection:disconnect()
@@ -909,7 +909,7 @@ local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
 		EventConnection = nil
 	end
 	
-	rawset(ExtendedInstanceResult, "Open", function(p5, p6) --[[ Line: 1072 ]]
+	rawset(ExtendedInstanceResult, "Open", function(p5, p6)
 		-- upvalues: Flag (ref), v6 (ref), Parent (copy), Keyboard (copy), ChangedConnection (ref), FocusLostConnection (ref), EventConnection (ref), Frame (copy), SetTextFieldCursorPosition (copy), ClampResult (ref), Flag1 (ref), BufferText (ref), Panel3D (copy), ContextActionService (upval), v9 (ref), List1 (copy), BindableEvent (copy)
 		if Flag then return end
 		Flag = true
@@ -936,14 +936,14 @@ local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
 		EventConnection = nil
 		
 		if p6.TextBox then
-			ChangedConnection = p6.TextBox.Changed:connect(function(p7) --[[ Line: 1088 ]]
+			ChangedConnection = p6.TextBox.Changed:connect(function(p7)
 				-- upvalues: p6 (copy), Frame (upval), SetTextFieldCursorPosition (upval), ClampResult (upval)
 				if p7 == "Text" then
 					Frame:SetTextFromInput(p6.TextBox.Text)
 					SetTextFieldCursorPosition(ClampResult)
 				end
 			end)
-			FocusLostConnection = p6.TextBox.FocusLost:connect(function(EnterPressed) --[[ Line: 1093 ]]
+			FocusLostConnection = p6.TextBox.FocusLost:connect(function(EnterPressed)
 				-- upvalues: Flag1 (upval), p5 (copy)
 				if not Flag1 then
 					p5:Close(EnterPressed)
@@ -965,7 +965,7 @@ local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
 			local ContainerOf = Panel3D.FindContainerOf(p6.TextBox)
 			
 			if ContainerOf then
-				EventConnection = Panel3D.OnPanelClosed.Event:connect(function(Name) --[[ Line: 1107 ]]
+				EventConnection = Panel3D.OnPanelClosed.Event:connect(function(Name)
 					-- upvalues: ContainerOf (copy), p5 (copy)
 					if Name == ContainerOf.name then
 						p5:Close(false)
@@ -982,7 +982,7 @@ local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
 			Frame:SetTextFromInput(BufferText)
 			SetTextFieldCursorPosition(ClampResult)
 		end
-		ContextActionService:BindCoreAction("VirtualKeyboardControllerInput", function(_, UserInputState, Input) --[[ Line: 1125 ]]
+		ContextActionService:BindCoreAction("VirtualKeyboardControllerInput", function(_, UserInputState, Input)
 			-- upvalues: SetTextFieldCursorPosition (upval), ClampResult (upval), p5 (copy), v9 (upval), List1 (upval)
 			if UserInputState == Enum.UserInputState.End then
 				if Input.KeyCode == Enum.KeyCode.ButtonL1 then
@@ -1028,11 +1028,11 @@ local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
 		Keyboard:SetVisible(true, true)
 		Keyboard:ForceShowUntilLookedAt()
 		
-		function Keyboard:OnUpdate() --[[ Line: 1157 ]] end
+		function Keyboard:OnUpdate() end
 		
 		BindableEvent:Fire()
 	end)
-	rawset(ExtendedInstanceResult, "Close", function(p5, Enabled) --[[ Line: 1163 ]]
+	rawset(ExtendedInstanceResult, "Close", function(p5, Enabled)
 		-- upvalues: Flag (ref), ChangedConnection (ref), FocusLostConnection (ref), EventConnection (ref), ContextActionService (upval), Keyboard (copy), Parent (copy), Panel3D (copy), BindableEvent1 (copy)
 		local IsEnabled = Enabled == true
 		
@@ -1061,7 +1061,7 @@ local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
 		p5:SubmitText(IsEnabled, false)
 		BindableEvent1:Fire()
 	end)
-	rawset(ExtendedInstanceResult, "SubmitText", function(_, Submitted, p5) --[[ Line: 1183 ]]
+	rawset(ExtendedInstanceResult, "SubmitText", function(_, Submitted, p5)
 		-- upvalues: v6 (ref), BufferText (ref), Panel3D (copy), Keyboard (copy), Flag1 (ref)
 		local TextBox = v6 and v6.TextBox
 		
@@ -1083,11 +1083,11 @@ local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
 			end
 		end
 	end)
-	rawset(ExtendedInstanceResult, "GetCurrentOptions", function(_) --[[ Line: 1206 ]]
+	rawset(ExtendedInstanceResult, "GetCurrentOptions", function(_)
 		-- upvalues: v6 (ref)
 		return v6
 	end)
-	rawset(ExtendedInstanceResult, "BackspaceAtCursor", function(_) --[[ Line: 1210 ]]
+	rawset(ExtendedInstanceResult, "BackspaceAtCursor", function(_)
 		-- upvalues: ClampResult (ref), v6 (ref), BufferText (ref), Frame (copy), SetTextFieldCursorPosition (copy)
 		if ClampResult >= 1 then
 			local Text = if v6 and v6.TextBox then v6.TextBox.Text else BufferText
@@ -1104,7 +1104,7 @@ local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
 			SetTextFieldCursorPosition(ClampResultDelta)
 		end
 	end)
-	rawset(ExtendedInstanceResult, "SubmitCharacter", function(p5, Text, p6) --[[ Line: 1220 ]]
+	rawset(ExtendedInstanceResult, "SubmitCharacter", function(p5, Text, p6)
 		-- upvalues: v6 (ref), BufferText (ref), ClampResult (ref), Frame (copy), SetTextFieldCursorPosition (copy)
 		local Text1 = if v6 and v6.TextBox then v6.TextBox.Text else BufferText
 		local Text2 = string.sub(Text1, 1, ClampResult) .. Text .. string.sub(Text1, ClampResult + 1, #Text1)
@@ -1218,15 +1218,15 @@ local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
 		table.insert(List1, { keys = Keys, container = Container })
 	end
 	ExtendedInstanceResult:SetCurrentKeyset(1)
-	Frame.MouseButton1Click:connect(function() --[[ Line: 1301 ]]
+	Frame.MouseButton1Click:connect(function()
 		-- upvalues: SetTextFieldCursorPosition (copy), calculateTextCursorPosition (copy), Keyboard (copy)
 		SetTextFieldCursorPosition((calculateTextCursorPosition(Keyboard.lookAtPixel.X, Keyboard.lookAtPixel.Y)))
 	end)
-	VRButton.MouseButton1Click:connect(function() --[[ Line: 1305 ]]
+	VRButton.MouseButton1Click:connect(function()
 		-- upvalues: ExtendedInstanceResult (copy)
 		ExtendedInstanceResult:Close(false)
 	end)
-	VRButton1.MouseButton1Click:connect(function() --[[ Line: 1309 ]]
+	VRButton1.MouseButton1Click:connect(function()
 		-- upvalues: config2 (upval), CreateBaseVoiceState (upval), SoundService (upval)
 		if config2:GetCurrentState().Name == "Listening" then
 			local Processing = CreateBaseVoiceState()
@@ -1234,11 +1234,11 @@ local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
 			local v10 = false
 			local v11 = nil
 			
-			function Processing:TransitionTo() --[[ Line: 662 ]]
+			function Processing:TransitionTo()
 				-- upvalues: v11 (ref), SoundService (upval), v10 (ref)
-				coroutine.wrap(function() --[[ Line: 663 ]]
+				coroutine.wrap(function()
 					-- upvalues: v11 (upval), SoundService (upval), v10 (upval)
-					pcall(function() --[[ Line: 664 ]]
+					pcall(function()
 						-- upvalues: v11 (upval), SoundService (upval)
 						v11 = SoundService:EndRecording()
 					end)
@@ -1246,7 +1246,7 @@ local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
 				end)()
 			end
 			
-			function Processing:GetResultAsync() --[[ Line: 669 ]]
+			function Processing:GetResultAsync()
 				-- upvalues: v10 (ref), v11 (ref)
 				while not v10 do
 					wait()
@@ -1258,7 +1258,7 @@ local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
 		end
 	end)
 	
-	local function onVoiceProcessingStateChanged(CurrentState) --[[ Line: 1315 ]]
+	local function onVoiceProcessingStateChanged(CurrentState)
 		-- upvalues: v4 (copy), v5 (copy), t (upval), v6 (ref), BufferText (ref), Frame (copy), SetTextFieldCursorPosition (copy), ClampResult (ref), config2 (upval), CreateBaseVoiceState (upval), ExtendedInstanceResult (copy)
 		if CurrentState.Name == "Listening" then
 			v4.Text = "Listening..."
@@ -1268,7 +1268,7 @@ local function ConstructKeyboardUI(List) --[[ Line: 716 ]]
 			v4.Text = "Done"
 		end
 		if CurrentState.Name == "Processing" then
-			coroutine.wrap(function() --[[ Line: 1326 ]]
+			coroutine.wrap(function()
 				-- upvalues: v5 (upval), CurrentState (copy), t (upval), v6 (upval), BufferText (upval), Frame (upval), SetTextFieldCursorPosition (upval), ClampResult (upval), v4 (upval), config2 (upval), CreateBaseVoiceState (upval)
 				v5:StopAnimation()
 				local ResultAsync = CurrentState:GetResultAsync()
@@ -1312,7 +1312,7 @@ end
 
 local v10 = nil
 
-local _ = function() --[[ Line: 1352 | Named "GetKeyboard" ]]
+local _ = function()
 	-- upvalues: v10 (ref), ConstructKeyboardUI (copy), SymW8W24Speaker (copy), W22AbcW8W24Speaker (copy)
 	if v10 == nil then
 		v10 = ConstructKeyboardUI({ SymW8W24Speaker, W22AbcW8W24Speaker })
@@ -1321,11 +1321,11 @@ local _ = function() --[[ Line: 1352 | Named "GetKeyboard" ]]
 end
 
 local VirtualKeyboardModule = {
-	CreateVirtualKeyboardOptions = function(_, TextBox) --[[ Line: 1363 ]]
+	CreateVirtualKeyboardOptions = function(_, TextBox)
 		return { TextBox = TextBox }
 	end,
-	ShowVirtualKeyboard = function(_, _) --[[ Line: 1372 ]] end,
-	CloseVirtualKeyboard = function(_) --[[ Line: 1378 ]] end
+	ShowVirtualKeyboard = function(_, _) end,
+	CloseVirtualKeyboard = function(_) end
 }
 
 if v10 == nil then

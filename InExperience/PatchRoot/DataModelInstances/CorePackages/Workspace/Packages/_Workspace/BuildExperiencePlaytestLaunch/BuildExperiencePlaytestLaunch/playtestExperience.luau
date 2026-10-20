@@ -10,27 +10,27 @@ local TeleportToPlaceModule = require(script.Parent.teleportToPlace)
 local Debug = require(Parent.DataHydration.CreatorAgentChat).debug
 local FFlagBuildExperienceLibrary = require(Parent.SharedFlags).FFlagBuildExperienceLibrary
 
-local function _(p1, p2): boolean --[[ Line: 29 | Named "isAlreadyInPlace" ]]
+local function _(p1, p2): boolean
 	return p2 ~= 0 and p2 == p1
 end
 
-local _ = function(p1) --[[ Line: 33 | Named "listenForTeleportFailure" ]]
+local _ = function(p1)
 	-- upvalues: Players (copy), TeleportService (copy)
 	local LocalPlayer = Players.LocalPlayer
-	local TeleportInitFailedConnection = TeleportService.TeleportInitFailed:Connect(function(Player) --[[ Line: 37 ]]
+	local TeleportInitFailedConnection = TeleportService.TeleportInitFailed:Connect(function(Player)
 		-- upvalues: LocalPlayer (copy), p1 (copy)
 		if Player == LocalPlayer then
 			p1()
 		end
 	end)
 	
-	return function() --[[ Line: 43 ]]
+	return function()
 		-- upvalues: TeleportInitFailedConnection (copy)
 		TeleportInitFailedConnection:Disconnect()
 	end
 end
 
-return function(PlaceId, Source, p1): string --[[ Line: 48 | Named "playtestExperience" ]]
+return function(PlaceId, Source, p1): string
 	-- upvalues: Debug (copy), TeamCreateUtilsModule (copy), Players (copy), TeleportService (copy), BuildModeLaunchModule (copy), TeleportToPlaceModule (copy), FFlagBuildExperienceLibrary (copy), PlaytestRejoinModule (copy), LeaveExperienceModule (copy), LaunchExperienceModule (copy)
 	local CurrentPlaceId = if p1 and p1.currentPlaceId ~= nil then p1.currentPlaceId else game.PlaceId
 	local IsTeamTest = if p1 then p1.isTeamTest else nil
@@ -49,7 +49,7 @@ return function(PlaceId, Source, p1): string --[[ Line: 48 | Named "playtestExpe
 		if p1 and p1.onTeleportFailed then
 			local OnTeleportFailedFunction = p1.onTeleportFailed
 			
-			local function v18() --[[ Line: 64 ]]
+			local function v18()
 				-- upvalues: Callback3 (ref), OnTeleportFailedFunction (copy)
 				if Callback3 then
 					Callback3()
@@ -59,14 +59,14 @@ return function(PlaceId, Source, p1): string --[[ Line: 48 | Named "playtestExpe
 			end
 			
 			local LocalPlayer = Players.LocalPlayer
-			local TeleportInitFailedConnection = TeleportService.TeleportInitFailed:Connect(function(Player) --[[ Line: 37 ]]
+			local TeleportInitFailedConnection = TeleportService.TeleportInitFailed:Connect(function(Player)
 				-- upvalues: LocalPlayer (copy), v18 (copy)
 				if Player == LocalPlayer then
 					v18()
 				end
 			end)
 			
-			Callback3 = function() --[[ Line: 43 ]]
+			Callback3 = function()
 				-- upvalues: TeleportInitFailedConnection (copy)
 				TeleportInitFailedConnection:Disconnect()
 			end
@@ -91,7 +91,7 @@ return function(PlaceId, Source, p1): string --[[ Line: 48 | Named "playtestExpe
 			end
 			if IsViewer then
 				Callback3 = LeaveExperienceModule
-				Callback3(function() --[[ Line: 82 ]]
+				Callback3(function()
 					-- upvalues: LaunchExperienceModule (upval), PlaceId (copy), Source (copy), IsTeamTest (copy)
 					LaunchExperienceModule(PlaceId, Source, IsTeamTest)
 				end)

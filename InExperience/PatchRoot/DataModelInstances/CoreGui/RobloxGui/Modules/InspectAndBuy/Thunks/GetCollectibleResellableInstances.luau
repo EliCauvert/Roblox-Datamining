@@ -8,15 +8,15 @@ local ConstantsModule = require(Parent.Constants)
 local list = { NetworkModule }
 local GetCollectibleResellableInstances = require(Parent.createInspectAndBuyKeyMapper)("getCollectibleResellableInstances")
 
-return function(p1, p2) --[[ Line: 17 | Named "GetCollectibleResellableInstances" ]]
+return function(p1, p2)
 	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), GetCollectibleResellableInstances (copy), PerformFetch (copy), SetCollectibleResellableInstancesModule (copy), SendCounterModule (copy), ConstantsModule (copy)
-	return ThunkModule.new(script.Name, list, function(p3, p4) --[[ Line: 18 ]]
+	return ThunkModule.new(script.Name, list, function(p3, p4)
 		-- upvalues: NetworkModule (upval), GetCollectibleResellableInstances (upval), p1 (copy), p2 (copy), PerformFetch (upval), SetCollectibleResellableInstancesModule (upval), SendCounterModule (upval), ConstantsModule (upval)
 		local v1 = p4[NetworkModule]
 		
-		return PerformFetch.Single(GetCollectibleResellableInstances(p3:getState().storeId, p1, p2), function() --[[ Line: 23 ]]
+		return PerformFetch.Single(GetCollectibleResellableInstances(p3:getState().storeId, p1, p2), function()
 			-- upvalues: v1 (copy), p1 (upval), p2 (upval), p3 (copy), SetCollectibleResellableInstancesModule (upval), SendCounterModule (upval), ConstantsModule (upval)
-			return v1.getCollectibleResellableInstances(p1, p2):andThen(function(Result) --[[ Line: 24 ]]
+			return v1.getCollectibleResellableInstances(p1, p2):andThen(function(Result)
 				-- upvalues: p3 (upval), SetCollectibleResellableInstancesModule (upval), p1 (upval), SendCounterModule (upval), ConstantsModule (upval)
 				local ItemInstances = Result and Result.itemInstances
 				
@@ -30,11 +30,11 @@ return function(p1, p2) --[[ Line: 17 | Named "GetCollectibleResellableInstances
 				else
 					p3:dispatch(SendCounterModule(ConstantsModule.Counters.GetCollectibleResellableInstancesRequestSucceededWithoutResult))
 				end
-			end, function(_) --[[ Line: 42 ]]
+			end, function(_)
 				-- upvalues: p3 (upval), SendCounterModule (upval), ConstantsModule (upval)
 				p3:dispatch(SendCounterModule(ConstantsModule.Counters.GetCollectibleResellableInstances .. ConstantsModule.CounterSuffix.RequestRejected))
 			end)
-		end)(p3):catch(function(_) --[[ Line: 49 ]]
+		end)(p3):catch(function(_)
 			-- upvalues: p3 (copy), SendCounterModule (upval), ConstantsModule (upval)
 			p3:dispatch(SendCounterModule(ConstantsModule.Counters.GetCollectibleResellableInstances .. ConstantsModule.CounterSuffix.RequestFailed))
 		end)

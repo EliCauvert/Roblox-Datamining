@@ -5,7 +5,7 @@ local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
 	query = { universeId = "{universeId}" }
 })
 
-return function(Callback, UniverseId) --[[ Line: 23 ]]
+return function(Callback, UniverseId)
 	-- upvalues: NewResult (copy)
 	assert(type(UniverseId) == "string", "GetExperienceDetailsPage request expects universeId to be a string")
 	

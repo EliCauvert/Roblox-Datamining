@@ -2,7 +2,7 @@
 
 return {
 	aliases = { "/unmute", "/um" },
-	run = function(Text: string, p1) --[[ Line: 8 ]]
+	run = function(Text: string, p1)
 		-- upvalues: ChatMuteModule (copy)
 		local ResolveUnmuteTargetResult = ChatMuteModule.resolveUnmuteTarget(string.split(Text, " ")[2], p1)
 		

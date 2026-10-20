@@ -1,6 +1,6 @@
 ﻿local HttpService = game:GetService("HttpService")
 
-return function(p1, Number) --[[ Line: 10 | Named "serializeParticipantIdsForTelemetry" ]]
+return function(p1, Number)
 	-- upvalues: HttpService (copy)
 	local List = {}
 	local P0 = p1 or {}
@@ -11,7 +11,7 @@ return function(p1, Number) --[[ Line: 10 | Named "serializeParticipantIdsForTel
 			table.insert(List, Number1)
 		end
 	end
-	local Success, Result = pcall(function() --[[ Line: 21 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: HttpService (upval), List (copy)
 		return HttpService:JSONEncode(List)
 	end)

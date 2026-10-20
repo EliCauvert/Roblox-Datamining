@@ -7,17 +7,17 @@ local Url = require(Parent.Http).Url
 local PasskeyConstantsModule = require(AuthCommon.Common.PasskeyConstants)
 local FFlagEmitPasskeyRegistrationSourceOnFinish = require(Parent.SharedFlags).FFlagEmitPasskeyRegistrationSourceOnFinish
 
-local function _(): string --[[ Line: 15 | Named "getFinishRegistrationUrl" ]]
+local function _(): string
 	-- upvalues: Url (copy)
 	return string.format("%sv1/passkey/finish-ar-preauth-registration", Url.AUTH_URL)
 end
 
-local function finishARPreauthPasskeyRegistration(Callback, PostBody) --[[ Line: 19 ]]
+local function finishARPreauthPasskeyRegistration(Callback, PostBody)
 	-- upvalues: Url (copy), PromiseModule (copy), HttpService (copy), PasskeyConstantsModule (copy)
-	return Callback(string.format("%sv1/passkey/finish-ar-preauth-registration", Url.AUTH_URL), "POST", { postBody = PostBody }):andThen(function(Result) --[[ Line: 20 ]]
+	return Callback(string.format("%sv1/passkey/finish-ar-preauth-registration", Url.AUTH_URL), "POST", { postBody = PostBody }):andThen(function(Result)
 		-- upvalues: PromiseModule (upval)
 		return PromiseModule.resolve(Result)
-	end, function(Input) --[[ Line: 22 ]]
+	end, function(Input)
 		-- upvalues: HttpService (upval), PromiseModule (upval), PasskeyConstantsModule (upval)
 		return PromiseModule.reject({
 			body = if type(Input) == "table" then HttpService:JSONEncode(Input) else nil,
@@ -26,7 +26,7 @@ local function finishARPreauthPasskeyRegistration(Callback, PostBody) --[[ Line:
 	end)
 end
 
-return function(p1, RecoverySession, PasskeySessionId, UserId, Input, IsPostRecovery, p2) --[[ Line: 28 | Named "attemptFinishARPreauthPasskeyRegistration" ]]
+return function(p1, RecoverySession, PasskeySessionId, UserId, Input, IsPostRecovery, p2)
 	-- upvalues: HttpService (copy), Base64Module (copy), FFlagEmitPasskeyRegistrationSourceOnFinish (copy), finishARPreauthPasskeyRegistration (copy)
 	local Data = HttpService:JSONDecode(Input)
 	Data.id = Base64Module.ToUrlSafeBase64(Data.id)

@@ -1,6 +1,6 @@
 ﻿local CartPricingResponseLineItemModule = require(script.Parent.cartPricingResponseLineItem)
 
-return function(p1) --[[ Line: 20 | Named "aggregateCartPricingForMultiItem" ]]
+return function(p1)
 	-- upvalues: CartPricingResponseLineItemModule (copy)
 	if type(p1) ~= "table" then
 		return nil

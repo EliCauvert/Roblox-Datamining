@@ -1,4 +1,4 @@
-﻿return function(Object) --[[ Line: 5 | Named "destroyMakeupDescriptions" ]]
+﻿return function(Object)
 	for _, MakeupDescription in Object:GetChildren() do
 		if MakeupDescription:IsA("MakeupDescription") then
 			MakeupDescription:Destroy()

@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableAmpSubscriptionUpsell", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("EnableAmpSubscriptionUpsell")
 end

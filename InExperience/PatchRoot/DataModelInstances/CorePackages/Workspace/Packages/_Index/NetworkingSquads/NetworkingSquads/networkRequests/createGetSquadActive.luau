@@ -1,10 +1,10 @@
 ﻿local SQUADURLModule = require(script.Parent.Parent.SQUAD_URL)
 local _ = require(script.Parent.Parent.networkingSquadTypes)
 
-return function(p1) --[[ Line: 5 ]]
+return function(p1)
 	-- upvalues: SQUADURLModule (copy)
 	local Config = nil
-	local GetSquadActive = p1.roduxNetworking.GET("GetSquadActive", function(Callback, p2) --[[ Line: 11 ]]
+	local GetSquadActive = p1.roduxNetworking.GET("GetSquadActive", function(Callback, p2)
 		-- upvalues: p1 (copy), Config (ref), SQUADURLModule (upval)
 		if p1.useMockedResponse then
 			Config = { responseBody = { groupUp = p2.mockedSquad } }
@@ -14,7 +14,7 @@ return function(p1) --[[ Line: 5 ]]
 	
 	if p1.useMockedResponse then
 		GetSquadActive.Mock.clear()
-		GetSquadActive.Mock.reply(function() --[[ Line: 26 ]]
+		GetSquadActive.Mock.reply(function()
 			-- upvalues: Config (ref)
 			return Config
 		end)

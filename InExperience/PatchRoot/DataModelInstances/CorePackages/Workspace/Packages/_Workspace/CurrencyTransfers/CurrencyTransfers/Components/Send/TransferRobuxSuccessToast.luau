@@ -13,13 +13,13 @@ local HandleTransferCompleteModule = require(CurrencyTransfers.Actions.Send.hand
 local UseTransferStoreModule = require(CurrencyTransfers.Hooks.useTransferStore)
 local FormatNumberModule = require(CurrencyTransfers.Utils.formatNumber)
 
-return function(_) --[[ Line: 31 | Named "TransferRobuxSuccessToast" ]]
+return function(_)
 	-- upvalues: UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), UseTransferStoreModule (copy), SignalsReactModule (copy), FormatNumberModule (copy), LocalizationService (copy), ReactModule (copy), TransferLocaleFormatModule (copy), HandleTransferCompleteModule (copy), Snackbar (copy), Enums (copy)
 	local UseLocalizationResult = UseLocalizationFunction(TransferLocalizationKeysModule.Presets.TransferRobuxSuccessToast)
 	local UseTransferStoreModuleResult = UseTransferStoreModule()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(UseTransferStoreModuleResult.getSelectedAmount)
 	local FormatNumberModuleResult = if UseSignalStateResult then FormatNumberModule(LocalizationService.RobloxLocaleId, UseSignalStateResult) else "0"
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 40 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: TransferLocaleFormatModule (upval), UseLocalizationResult (copy), FormatNumberModuleResult (copy)
 		return TransferLocaleFormatModule.substituteAmount(UseLocalizationResult.SuccessNotification, (tostring(FormatNumberModuleResult)))
 	end, {
@@ -27,17 +27,17 @@ return function(_) --[[ Line: 31 | Named "TransferRobuxSuccessToast" ]]
 		UseLocalizationResult.SuccessNotification
 	})
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 46 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), HandleTransferCompleteModule (upval), UseTransferStoreModuleResult (copy)
 		if UseRefResult.current then
 			task.cancel(UseRefResult.current)
 		end
-		UseRefResult.current = task.delay(5, function() --[[ Line: 53 ]]
+		UseRefResult.current = task.delay(5, function()
 			-- upvalues: HandleTransferCompleteModule (upval), UseTransferStoreModuleResult (upval)
 			HandleTransferCompleteModule(UseTransferStoreModuleResult)
 		end)
 		
-		return function() --[[ Line: 59 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			if UseRefResult.current then
 				task.cancel(UseRefResult.current)
@@ -57,7 +57,7 @@ return function(_) --[[ Line: 31 | Named "TransferRobuxSuccessToast" ]]
 		AnchorPoint = Vector2.new(0.5, 0),
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		onClose = function() --[[ Line: 81 ]]
+		onClose = function()
 			-- upvalues: HandleTransferCompleteModule (upval), UseTransferStoreModuleResult (copy)
 			HandleTransferCompleteModule(UseTransferStoreModuleResult)
 		end

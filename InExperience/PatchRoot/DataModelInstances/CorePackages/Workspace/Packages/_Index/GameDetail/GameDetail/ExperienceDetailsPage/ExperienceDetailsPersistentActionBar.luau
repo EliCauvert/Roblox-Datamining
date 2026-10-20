@@ -23,7 +23,7 @@ local FFlagEnableGameJoinEarlyAccess = SharedFlagsModule.FFlagEnableGameJoinEarl
 local FFlagEnableSplitPaneEDPFix = SharedFlagsModule.FFlagEnableSplitPaneEDPFix
 local ColSizeFull0AutoYGapSmallBgSurface0AlignXCenterPaddingXMediumPaddingTopMedium: string = if FFlagEnableSplitPaneEDPFix then "col size-full-0 auto-y gap-small bg-surface-0 align-x-center padding-x-medium padding-top-medium" else "col size-full-0 auto-y gap-small bg-surface-0 align-x-center padding-x-medium padding-top-medium stroke-default"
 
-local function PersistentActionBarContextualMessage(p1) --[[ Line: 51 ]]
+local function PersistentActionBarContextualMessage(p1)
 	-- upvalues: UseRoactServiceFunction (copy), RoactServiceTagsModule (copy), UseTokensFunction (copy), ReactModule (copy), UsePlayButtonStateFunction (copy), UsePlayButtonContextualMessageFunction (copy), View (copy), Text (copy), PlayButtonContextualMessageImpressionsDetector (copy), AppPage (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactServiceTagsModule.RoactNetworking)
 	local UseTokensResult = UseTokensFunction()
@@ -53,7 +53,7 @@ local function PersistentActionBarContextualMessage(p1) --[[ Line: 51 ]]
 	})
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 89 | Named "ExperienceDetailsPersistentActionBar" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), PlayButton (copy), ButtonSize (copy), FoundationModule (copy), FFlagLuaAppLaunchWhenLoadingEdp (copy), FFlagEnableGameJoinEarlyAccess (copy), View (copy), FFlagEnableSplitPaneEDPFix (copy), ColSizeFull0AutoYGapSmallBgSurface0AlignXCenterPaddingXMediumPaddingTopMedium (copy), SduiFeatureEntryPoint (copy), AppPage (copy), ExperienceDetailsPageConstantsModule (copy), ExperienceDetailsFallbackActionBarModule (copy), PersistentActionBarContextualMessage (copy), PlusEarlyAccessUpsellBanner (copy)
 	return ReactModule.createElement("Frame", {
 		Size = UDim2.new(1, 0, 0, 0),

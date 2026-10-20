@@ -13,7 +13,7 @@ local SHOESBUNDLETYPEID = Constants.SHOES_BUNDLE_TYPE_ID
 local DYNAMICHEADBUNDLETYPEID = Constants.DYNAMIC_HEAD_BUNDLE_TYPE_ID
 local _ = require(AvatarExperienceInspectAndBuy.Types)
 
-local function _(p1, p2) --[[ Line: 25 ]]
+local function _(p1, p2)
 	-- upvalues: LAYEREDCLOTHINGORDER (copy), ASSETTYPETOACCESSORYTYPE (copy), LAYEREDASSETTYPES (copy)
 	return {
 		AssetId = tonumber(p2) or 0,
@@ -23,9 +23,9 @@ local function _(p1, p2) --[[ Line: 25 ]]
 	}
 end
 
-local _ = function(p1, AccessoryTypes) --[[ Line: 44 ]]
+local _ = function(p1, AccessoryTypes)
 	-- upvalues: CryoModule (copy)
-	return CryoModule.List.filter(p1, function(p2): boolean --[[ Line: 48 ]]
+	return CryoModule.List.filter(p1, function(p2): boolean
 		-- upvalues: AccessoryTypes (copy)
 		for _, value in AccessoryTypes do
 			if p2.AccessoryType == value then
@@ -36,7 +36,7 @@ local _ = function(p1, AccessoryTypes) --[[ Line: 44 ]]
 	end)
 end
 
-local function v16(AssetsInBundle, List) --[[ Line: 61 ]]
+local function v16(AssetsInBundle, List)
 	-- upvalues: ASSETTYPETOACCESSORYTYPE (copy), LAYEREDCLOTHINGORDER (copy), LAYEREDASSETTYPES (copy)
 	local List1 = {}
 	local Flag = nil
@@ -72,7 +72,7 @@ local function v16(AssetsInBundle, List) --[[ Line: 61 ]]
 	return List1
 end
 
-local function v17(Humanoid: Humanoid, List) --[[ Line: 98 ]]
+local function v17(Humanoid: Humanoid, List)
 	-- upvalues: CryoModule (copy)
 	local Accessories = Humanoid:GetAccessories(true)
 	local AccessoryTypes = {}
@@ -80,7 +80,7 @@ local function v17(Humanoid: Humanoid, List) --[[ Line: 98 ]]
 	for _, value in List do
 		table.insert(AccessoryTypes, value.AccessoryType)
 	end
-	Humanoid:SetAccessories(CryoModule.List.join(CryoModule.List.filter(Accessories, function(p2): boolean --[[ Line: 48 ]]
+	Humanoid:SetAccessories(CryoModule.List.join(CryoModule.List.filter(Accessories, function(p2): boolean
 		-- upvalues: AccessoryTypes (copy)
 		for _, value in AccessoryTypes do
 			if p2.AccessoryType == value then
@@ -91,7 +91,7 @@ local function v17(Humanoid: Humanoid, List) --[[ Line: 98 ]]
 	end), List), true)
 end
 
-return function(p2, Humanoid: Humanoid) --[[ Line: 117 ]]
+return function(p2, Humanoid: Humanoid)
 	-- upvalues: ItemTypeEnum (copy), ASSETTYPETOACCESSORYTYPE (copy), ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROP (copy), ASSETTYPENAMETOIDSTRING (copy), LAYEREDCLOTHINGORDER (copy), LAYEREDASSETTYPES (copy), v17 (copy), BODYBUNDLETYPEID (copy), v16 (copy), SHOESBUNDLETYPEID (copy), DYNAMICHEADBUNDLETYPEID (copy)
 	if p2.itemType == ItemTypeEnum.Asset and (ASSETTYPETOACCESSORYTYPE[p2.itemSubType] or ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROP[p2.itemSubType]) then
 		local ItemSubType = p2.itemSubType

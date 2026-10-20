@@ -12,7 +12,7 @@ local Frozen = table.freeze({
 	errorMessage = "The local user changed while the Developer Subscription request was running"
 })
 
-return function(p1) --[[ Line: 38 | Named "createDeveloperSubscriptionStore" ]]
+return function(p1)
 	-- upvalues: DataHydrationUtilsModule (copy), FetchDeveloperSubscriptionModule (copy), FFlagDataHydrationPreserveIncompleteCatalogResultsModule (copy), PromiseModule (copy), CreateSingleEntityResolverModule (copy), Frozen (copy), StatusCodes (copy), DeveloperSubscriptionTypesModule (copy)
 	local P0 = p1 or {}
 	local config = { network = P0.network, baseUrl = P0.baseUrl }
@@ -20,11 +20,11 @@ return function(p1) --[[ Line: 38 | Named "createDeveloperSubscriptionStore" ]]
 	local ObserveLocalPlayerUserId = P0.observeLocalPlayerUserId or DataHydrationUtilsModule.observeLocalPlayerUserId
 	local Generation = 0
 	local Flag = false
-	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p2) --[[ Line: 47 | Named "fetchSubscriptions" ]]
+	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p2)
 		-- upvalues: FetchDeveloperSubscriptionModule (upval), config (copy), FFlagDataHydrationPreserveIncompleteCatalogResultsModule (upval), PromiseModule (upval)
 		local ListResult = FetchDeveloperSubscriptionModule.list(p2, config)
 		
-		return if FFlagDataHydrationPreserveIncompleteCatalogResultsModule then ListResult:catch(function(Err) --[[ Line: 52 ]]
+		return if FFlagDataHydrationPreserveIncompleteCatalogResultsModule then ListResult:catch(function(Err)
 			-- upvalues: PromiseModule (upval)
 			return if typeof(Err) == "table" and Err.code == "IncompleteDeveloperSubscriptionList" then {
 				isIncomplete = true,
@@ -34,18 +34,18 @@ return function(p1) --[[ Line: 38 | Named "createDeveloperSubscriptionStore" ]]
 		end) else ListResult
 	end, {
 		cache = if FFlagDataHydrationPreserveIncompleteCatalogResultsModule then {
-			ttlSecondsForItem = function(p2) --[[ Line: 67 ]]
+			ttlSecondsForItem = function(p2)
 				return if p2.isIncomplete then 60 else nil
 			end
 		} else nil,
 		resolver = { replaceItems = true }
 	})
-	local Callback = ObserveLocalPlayerUserId(function() --[[ Line: 77 ]]
+	local Callback = ObserveLocalPlayerUserId(function()
 		-- upvalues: Generation (ref)
 		Generation += 1
 	end)
 	
-	local function _(Id, p2, p3, Cause) --[[ Line: 89 | Named "verificationError" ]]
+	local function _(Id, p2, p3, Cause)
 		return {
 			outcome = "unverified",
 			errorMessage = `The Developer Subscription request could not be confirmed: {p2}. ` .. "Do not automatically retry the write; inspect existing subscriptions first.",
@@ -54,7 +54,7 @@ return function(p1) --[[ Line: 38 | Named "createDeveloperSubscriptionStore" ]]
 		}
 	end
 	
-	local function failedError(Id, ErrorMessage, Cause) --[[ Line: 104 ]]
+	local function failedError(Id, ErrorMessage, Cause)
 		return {
 			outcome = "failed",
 			errorMessage = `The Developer Subscription request was rejected: {ErrorMessage}.`,
@@ -63,7 +63,7 @@ return function(p1) --[[ Line: 38 | Named "createDeveloperSubscriptionStore" ]]
 		}
 	end
 	
-	local _ = function() --[[ Line: 117 | Named "captureMutationToken" ]]
+	local _ = function()
 		-- upvalues: GetLocalPlayerUserId (copy), Generation (ref)
 		local LocalPlayerUserId = GetLocalPlayerUserId()
 		
@@ -79,19 +79,19 @@ return function(p1) --[[ Line: 38 | Named "createDeveloperSubscriptionStore" ]]
 		end
 	end
 	
-	local _ = function(p2): boolean --[[ Line: 128 | Named "isTokenCurrent" ]]
+	local _ = function(p2): boolean
 		-- upvalues: Flag (ref), Generation (ref), GetLocalPlayerUserId (copy)
 		return not Flag and (p2.generation == Generation and p2.userId == GetLocalPlayerUserId())
 	end
 	
-	local _ = function(p2) --[[ Line: 132 | Named "currentTokenError" ]]
+	local _ = function(p2)
 		-- upvalues: Flag (ref), Generation (ref), GetLocalPlayerUserId (copy), Frozen (upval)
 		local IsUserIdMatch: boolean = not Flag and (p2.generation == Generation and p2.userId == GetLocalPlayerUserId())
 		
 		return if IsUserIdMatch then nil else Frozen
 	end
 	
-	local _ = function(p2) --[[ Line: 139 | Named "refreshInventory" ]]
+	local _ = function(p2)
 		-- upvalues: Flag (ref), SingleEntityResolverModule (copy)
 		if not Flag then
 			SingleEntityResolverModule.clear()
@@ -99,12 +99,12 @@ return function(p1) --[[ Line: 38 | Named "createDeveloperSubscriptionStore" ]]
 		end
 	end
 	
-	local _ = function(Promise, Id) --[[ Line: 146 | Named "mutationResult" ]]
+	local _ = function(Promise, Id)
 		-- upvalues: PromiseModule (upval), failedError (copy), StatusCodes (upval)
-		return Promise:andThen(function(Result) --[[ Line: 150 ]]
+		return Promise:andThen(function(Result)
 			-- upvalues: PromiseModule (upval), failedError (upval), Id (copy)
 			return if Result.success then assert(Result.subscription, "A successful Developer Subscription mutation must return its identity") else PromiseModule.reject((failedError(Id, `the service returned failureReason {tostring(Result.failureReason)}`, Result)))
-		end, function(Cause) --[[ Line: 164 ]]
+		end, function(Cause)
 			-- upvalues: StatusCodes (upval), PromiseModule (upval), failedError (upval), Id (copy)
 			return if typeof(Cause) == "table" and Cause.responseCode ~= nil and StatusCodes.BAD_REQUEST <= Cause.responseCode and Cause.responseCode < StatusCodes.INTERNAL_SERVER_ERROR and Cause.responseCode ~= StatusCodes.REQUEST_TIMEOUT then PromiseModule.reject((failedError(Id, Cause.errorMessage or "the service rejected the write", Cause))) else PromiseModule.reject({
 				outcome = "unverified",
@@ -115,12 +115,12 @@ return function(p1) --[[ Line: 38 | Named "createDeveloperSubscriptionStore" ]]
 		end)
 	end
 	
-	local function verifyRead(p2, Callback, Callback1, TheSubscriptionDidNotBeginDeactivation, Id) --[[ Line: 180 ]]
+	local function verifyRead(p2, Callback, Callback1, TheSubscriptionDidNotBeginDeactivation, Id)
 		-- upvalues: Flag (ref), Generation (ref), GetLocalPlayerUserId (copy), Frozen (upval), PromiseModule (upval)
 		local IsUserIdMatch: boolean = not Flag and (p2.generation == Generation and p2.userId == GetLocalPlayerUserId())
 		local Frozen1 = if IsUserIdMatch then nil else Frozen
 		
-		return if Frozen1 == nil then Callback():andThen(function(Result) --[[ Line: 193 ]]
+		return if Frozen1 == nil then Callback():andThen(function(Result)
 			-- upvalues: p2 (copy), Flag (upval), Generation (upval), GetLocalPlayerUserId (upval), Frozen (upval), PromiseModule (upval), Id (copy), Callback1 (copy), TheSubscriptionDidNotBeginDeactivation (copy)
 			local IsUserIdMatch: boolean = not Flag and (p2.generation == Generation and p2.userId == GetLocalPlayerUserId())
 			local Frozen1 = if IsUserIdMatch then nil else Frozen
@@ -136,7 +136,7 @@ return function(p1) --[[ Line: 38 | Named "createDeveloperSubscriptionStore" ]]
 				subscription = if Id == nil then nil else { id = Id },
 				cause = Frozen1
 			})
-		end, function(Cause) --[[ Line: 204 ]]
+		end, function(Cause)
 			-- upvalues: Frozen (upval), p2 (copy), Flag (upval), Generation (upval), GetLocalPlayerUserId (upval), PromiseModule (upval), Id (copy), TheSubscriptionDidNotBeginDeactivation (copy)
 			if Cause ~= Frozen then
 				local IsUserIdMatch: boolean = not Flag and (p2.generation == Generation and p2.userId == GetLocalPlayerUserId())
@@ -164,12 +164,12 @@ return function(p1) --[[ Line: 38 | Named "createDeveloperSubscriptionStore" ]]
 		})
 	end
 	
-	local function tokenBoundGet(p2, p3, Id) --[[ Line: 214 ]]
+	local function tokenBoundGet(p2, p3, Id)
 		-- upvalues: Flag (ref), Generation (ref), GetLocalPlayerUserId (copy), Frozen (upval), PromiseModule (upval), FetchDeveloperSubscriptionModule (upval), config (copy)
 		local IsUserIdMatch: boolean = not Flag and (p2.generation == Generation and p2.userId == GetLocalPlayerUserId())
 		local Frozen1 = if IsUserIdMatch then nil else Frozen
 		
-		return if Frozen1 == nil then FetchDeveloperSubscriptionModule.get(p3, Id, config):andThen(function(Result) --[[ Line: 223 ]]
+		return if Frozen1 == nil then FetchDeveloperSubscriptionModule.get(p3, Id, config):andThen(function(Result)
 			-- upvalues: p2 (copy), Flag (upval), Generation (upval), GetLocalPlayerUserId (upval), Frozen (upval), PromiseModule (upval)
 			local IsUserIdMatch: boolean = not Flag and (p2.generation == Generation and p2.userId == GetLocalPlayerUserId())
 			local Frozen1 = if IsUserIdMatch then nil else Frozen
@@ -178,7 +178,7 @@ return function(p1) --[[ Line: 38 | Named "createDeveloperSubscriptionStore" ]]
 		end) else PromiseModule.reject(Frozen1)
 	end
 	
-	local function withMutationPreflight(p2, Id, Callback) --[[ Line: 229 ]]
+	local function withMutationPreflight(p2, Id, Callback)
 		-- upvalues: GetLocalPlayerUserId (copy), Generation (ref), PromiseModule (upval), tokenBoundGet (copy), Flag (ref), Frozen (upval), failedError (copy)
 		local LocalPlayerUserId = GetLocalPlayerUserId()
 		local v1 = nil
@@ -196,27 +196,27 @@ return function(p1) --[[ Line: 38 | Named "createDeveloperSubscriptionStore" ]]
 			v1 = { generation = Generation, userId = LocalPlayerUserId }
 			config = nil
 		end
-		return if v1 == nil then PromiseModule.reject(config) else tokenBoundGet(v1, p2, Id):andThen(function(Result) --[[ Line: 238 ]]
+		return if v1 == nil then PromiseModule.reject(config) else tokenBoundGet(v1, p2, Id):andThen(function(Result)
 			-- upvalues: v1 (copy), Flag (upval), Generation (upval), GetLocalPlayerUserId (upval), Frozen (upval), PromiseModule (upval), failedError (upval), Id (copy), Callback (copy)
 			local IsUserIdMatch: boolean = not Flag and (v1.generation == Generation and v1.userId == GetLocalPlayerUserId())
 			local Frozen1 = if IsUserIdMatch then nil else Frozen
 			
 			return if Frozen1 == nil then Callback(v1, Result) else PromiseModule.reject((failedError(Id, Frozen1.errorMessage, Frozen1)))
-		end, function(Cause) --[[ Line: 244 ]]
+		end, function(Cause)
 			-- upvalues: PromiseModule (upval), failedError (upval), Id (copy)
 			return PromiseModule.reject((failedError(Id, if typeof(Cause) == "table" and typeof(Cause.errorMessage) == "string" then Cause.errorMessage else "the subscription could not be read before the write", Cause)))
 		end)
 	end
 	
-	local function runMutation(p2, Id, Callback) --[[ Line: 252 ]]
+	local function runMutation(p2, Id, Callback)
 		-- upvalues: Flag (ref), Generation (ref), GetLocalPlayerUserId (copy), Frozen (upval), PromiseModule (upval), failedError (copy), StatusCodes (upval)
 		local IsUserIdMatch: boolean = not Flag and (p2.generation == Generation and p2.userId == GetLocalPlayerUserId())
 		local Frozen1 = if IsUserIdMatch then nil else Frozen
 		
-		return if Frozen1 == nil then Callback():andThen(function(Result) --[[ Line: 150 ]]
+		return if Frozen1 == nil then Callback():andThen(function(Result)
 			-- upvalues: PromiseModule (upval), failedError (upval), Id (copy)
 			return if Result.success then assert(Result.subscription, "A successful Developer Subscription mutation must return its identity") else PromiseModule.reject((failedError(Id, `the service returned failureReason {tostring(Result.failureReason)}`, Result)))
-		end, function(Cause) --[[ Line: 164 ]]
+		end, function(Cause)
 			-- upvalues: StatusCodes (upval), PromiseModule (upval), failedError (upval), Id (copy)
 			return if typeof(Cause) == "table" and Cause.responseCode ~= nil and StatusCodes.BAD_REQUEST <= Cause.responseCode and Cause.responseCode < StatusCodes.INTERNAL_SERVER_ERROR and Cause.responseCode ~= StatusCodes.REQUEST_TIMEOUT then PromiseModule.reject((failedError(Id, Cause.errorMessage or "the service rejected the write", Cause))) else PromiseModule.reject({
 				outcome = "unverified",
@@ -224,7 +224,7 @@ return function(p1) --[[ Line: 38 | Named "createDeveloperSubscriptionStore" ]]
 				subscription = if Id == nil then nil else { id = Id },
 				cause = Cause
 			})
-		end):andThen(function(Result) --[[ Line: 261 ]]
+		end):andThen(function(Result)
 			-- upvalues: p2 (copy), Flag (upval), Generation (upval), GetLocalPlayerUserId (upval), Frozen (upval), PromiseModule (upval), Id (copy)
 			local IsUserIdMatch: boolean = not Flag and (p2.generation == Generation and p2.userId == GetLocalPlayerUserId())
 			local Frozen1 = if IsUserIdMatch then nil else Frozen
@@ -238,16 +238,16 @@ return function(p1) --[[ Line: 38 | Named "createDeveloperSubscriptionStore" ]]
 		end) else PromiseModule.reject((failedError(Id, Frozen1.errorMessage, Frozen1)))
 	end
 	
-	local function reconcileMutation(p2, Promise) --[[ Line: 276 ]]
+	local function reconcileMutation(p2, Promise)
 		-- upvalues: Flag (ref), SingleEntityResolverModule (copy), PromiseModule (upval)
-		return Promise:andThen(function(Result) --[[ Line: 277 ]]
+		return Promise:andThen(function(Result)
 			-- upvalues: p2 (copy), Flag (upval), SingleEntityResolverModule (upval)
 			if not Flag then
 				SingleEntityResolverModule.clear()
 				SingleEntityResolverModule.fetch(p2)
 			end
 			return Result
-		end, function(p3) --[[ Line: 280 ]]
+		end, function(p3)
 			-- upvalues: p2 (copy), Flag (upval), SingleEntityResolverModule (upval), PromiseModule (upval)
 			if typeof(p3) == "table" and p3.outcome == "unverified" and not Flag then
 				SingleEntityResolverModule.clear()
@@ -262,9 +262,9 @@ return function(p1) --[[ Line: 38 | Named "createDeveloperSubscriptionStore" ]]
 		"isRegionalPricingEnabled"
 	}
 	
-	local function readBackMutation(p2, p3, Id, p4, p5) --[[ Line: 297 ]]
+	local function readBackMutation(p2, p3, Id, p4, p5)
 		-- upvalues: tokenBoundGet (copy), PromiseModule (upval), DeveloperSubscriptionTypesModule (upval), list (copy), Frozen (upval), Flag (ref), Generation (ref), GetLocalPlayerUserId (copy)
-		return tokenBoundGet(p2, p3, Id):andThen(function(Result) --[[ Line: 304 ]]
+		return tokenBoundGet(p2, p3, Id):andThen(function(Result)
 			-- upvalues: p5 (copy), p4 (copy), PromiseModule (upval), Id (copy), DeveloperSubscriptionTypesModule (upval), list (upval)
 			if p5 then
 				if Result.name ~= p4.name then
@@ -303,7 +303,7 @@ return function(p1) --[[ Line: 38 | Named "createDeveloperSubscriptionStore" ]]
 				end
 			end
 			return Result
-		end, function(Cause) --[[ Line: 329 ]]
+		end, function(Cause)
 			-- upvalues: Frozen (upval), p2 (copy), Flag (upval), Generation (upval), GetLocalPlayerUserId (upval), PromiseModule (upval), Id (copy)
 			if Cause ~= Frozen then
 				local IsUserIdMatch: boolean = not Flag and (p2.generation == Generation and p2.userId == GetLocalPlayerUserId())
@@ -331,23 +331,23 @@ return function(p1) --[[ Line: 38 | Named "createDeveloperSubscriptionStore" ]]
 		fetchSubscriptions = SingleEntityResolverModule.fetch,
 		getAndFetchSubscriptions = SingleEntityResolverModule.getAndFetch,
 		getAccountResetGeneration = SingleEntityResolverModule.getAccountResetGeneration,
-		getPermission = function(p6) --[[ Line: 539 ]]
+		getPermission = function(p6)
 			-- upvalues: FetchDeveloperSubscriptionModule (upval), config (copy)
 			return FetchDeveloperSubscriptionModule.getPermission(p6, config)
 		end,
-		getPrices = function(p6) --[[ Line: 543 ]]
+		getPrices = function(p6)
 			-- upvalues: FetchDeveloperSubscriptionModule (upval), config (copy)
 			return FetchDeveloperSubscriptionModule.getPrices(p6, config)
 		end,
-		list = function(p6) --[[ Line: 81 ]]
+		list = function(p6)
 			-- upvalues: FetchDeveloperSubscriptionModule (upval), config (copy)
 			return FetchDeveloperSubscriptionModule.list(p6, config)
 		end,
-		get = function(p6, p7) --[[ Line: 85 ]]
+		get = function(p6, p7)
 			-- upvalues: FetchDeveloperSubscriptionModule (upval), config (copy)
 			return FetchDeveloperSubscriptionModule.get(p6, p7, config)
 		end,
-		create = function(p6, p7) --[[ Line: 339 ]]
+		create = function(p6, p7)
 			-- upvalues: GetLocalPlayerUserId (copy), Generation (ref), PromiseModule (upval), runMutation (copy), FetchDeveloperSubscriptionModule (upval), config (copy), readBackMutation (copy), reconcileMutation (copy)
 			local LocalPlayerUserId = GetLocalPlayerUserId()
 			local v1 = nil
@@ -365,20 +365,20 @@ return function(p1) --[[ Line: 38 | Named "createDeveloperSubscriptionStore" ]]
 				v1 = { generation = Generation, userId = LocalPlayerUserId }
 				config1 = nil
 			end
-			return if v1 == nil then PromiseModule.reject(config1) else reconcileMutation(p6, (runMutation(v1, nil, function() --[[ Line: 347 ]]
+			return if v1 == nil then PromiseModule.reject(config1) else reconcileMutation(p6, (runMutation(v1, nil, function()
 				-- upvalues: FetchDeveloperSubscriptionModule (upval), p6 (copy), p7 (copy), config (upval)
 				return FetchDeveloperSubscriptionModule.create(p6, p7, config)
-			end):andThen(function(Result) --[[ Line: 349 ]]
+			end):andThen(function(Result)
 				-- upvalues: p7 (copy), readBackMutation (upval), v1 (copy), p6 (copy), runMutation (upval), FetchDeveloperSubscriptionModule (upval), config (upval), PromiseModule (upval)
 				local ImageAssetId = p7.imageAssetId
 				
-				return if ImageAssetId == nil then readBackMutation(v1, p6, Result.id, p7, true) else runMutation(v1, Result.id, function() --[[ Line: 354 ]]
+				return if ImageAssetId == nil then readBackMutation(v1, p6, Result.id, p7, true) else runMutation(v1, Result.id, function()
 					-- upvalues: FetchDeveloperSubscriptionModule (upval), p6 (upval), Result (copy), ImageAssetId (copy), config (upval)
 					return FetchDeveloperSubscriptionModule.update(p6, Result.id, { imageAssetId = ImageAssetId }, config)
-				end):andThen(function() --[[ Line: 356 ]]
+				end):andThen(function()
 					-- upvalues: readBackMutation (upval), v1 (upval), p6 (upval), Result (copy), p7 (upval)
 					return readBackMutation(v1, p6, Result.id, p7, true)
-				end, function(Cause) --[[ Line: 358 ]]
+				end, function(Cause)
 					-- upvalues: PromiseModule (upval), Result (copy)
 					local Id = Result.id
 					
@@ -391,7 +391,7 @@ return function(p1) --[[ Line: 38 | Named "createDeveloperSubscriptionStore" ]]
 				end)
 			end)))
 		end,
-		update = function(p6, Id, p7) --[[ Line: 367 ]]
+		update = function(p6, Id, p7)
 			-- upvalues: GetLocalPlayerUserId (copy), Generation (ref), PromiseModule (upval), runMutation (copy), FetchDeveloperSubscriptionModule (upval), config (copy), readBackMutation (copy), reconcileMutation (copy)
 			local LocalPlayerUserId = GetLocalPlayerUserId()
 			local v1 = nil
@@ -409,32 +409,32 @@ return function(p1) --[[ Line: 38 | Named "createDeveloperSubscriptionStore" ]]
 				v1 = { generation = Generation, userId = LocalPlayerUserId }
 				config1 = nil
 			end
-			return if v1 == nil then PromiseModule.reject(config1) else reconcileMutation(p6, (runMutation(v1, Id, function() --[[ Line: 376 ]]
+			return if v1 == nil then PromiseModule.reject(config1) else reconcileMutation(p6, (runMutation(v1, Id, function()
 				-- upvalues: FetchDeveloperSubscriptionModule (upval), p6 (copy), Id (copy), p7 (copy), config (upval)
 				return FetchDeveloperSubscriptionModule.update(p6, Id, p7, config)
-			end):andThen(function() --[[ Line: 378 ]]
+			end):andThen(function()
 				-- upvalues: readBackMutation (upval), v1 (copy), p6 (copy), Id (copy), p7 (copy)
 				return readBackMutation(v1, p6, Id, p7, false)
 			end)))
 		end,
-		uploadImage = function(p6, Id, UserId) --[[ Line: 384 ]]
+		uploadImage = function(p6, Id, UserId)
 			-- upvalues: withMutationPreflight (copy), DeveloperSubscriptionTypesModule (upval), PromiseModule (upval), runMutation (copy), FetchDeveloperSubscriptionModule (upval), config (copy), verifyRead (copy), tokenBoundGet (copy), reconcileMutation (copy)
-			return reconcileMutation(p6, (withMutationPreflight(p6, Id, function(p7, Cause) --[[ Line: 389 ]]
+			return reconcileMutation(p6, (withMutationPreflight(p6, Id, function(p7, Cause)
 				-- upvalues: DeveloperSubscriptionTypesModule (upval), PromiseModule (upval), Id (copy), runMutation (upval), FetchDeveloperSubscriptionModule (upval), p6 (copy), UserId (copy), config (upval), verifyRead (upval), tokenBoundGet (upval)
 				local ProductStatusType = Cause.productStatusType
 				
 				if ProductStatusType == DeveloperSubscriptionTypesModule.ProductStatusType.Inactive or ProductStatusType == DeveloperSubscriptionTypesModule.ProductStatusType.Active or ProductStatusType == DeveloperSubscriptionTypesModule.ProductStatusType.OffSale then
 					local ImageAssetId = Cause.imageAssetId
 					
-					return runMutation(p7, Id, function() --[[ Line: 405 ]]
+					return runMutation(p7, Id, function()
 						-- upvalues: FetchDeveloperSubscriptionModule (upval), p6 (upval), Id (upval), p7 (copy), UserId (upval), config (upval)
 						return FetchDeveloperSubscriptionModule.uploadImage(p6, Id, p7.userId, UserId, config)
-					end):andThen(function() --[[ Line: 407 ]]
+					end):andThen(function()
 						-- upvalues: verifyRead (upval), p7 (copy), tokenBoundGet (upval), p6 (upval), Id (upval), ImageAssetId (copy)
-						return verifyRead(p7, function() --[[ Line: 408 ]]
+						return verifyRead(p7, function()
 							-- upvalues: tokenBoundGet (upval), p7 (upval), p6 (upval), Id (upval)
 							return tokenBoundGet(p7, p6, Id)
-						end, function(p8): boolean --[[ Line: 410 ]]
+						end, function(p8): boolean
 							-- upvalues: ImageAssetId (upval)
 							return p8.imageAssetId ~= nil and (p8.imageAssetId > 0 and p8.imageAssetId ~= ImageAssetId)
 						end, "the uploaded image did not appear in authoritative reads", Id)
@@ -449,24 +449,24 @@ return function(p1) --[[ Line: 38 | Named "createDeveloperSubscriptionStore" ]]
 				end
 			end)))
 		end,
-		activate = function(p6, Id) --[[ Line: 420 ]]
+		activate = function(p6, Id)
 			-- upvalues: withMutationPreflight (copy), DeveloperSubscriptionTypesModule (upval), PromiseModule (upval), runMutation (copy), FetchDeveloperSubscriptionModule (upval), config (copy), verifyRead (copy), tokenBoundGet (copy), reconcileMutation (copy)
-			return reconcileMutation(p6, (withMutationPreflight(p6, Id, function(p7, Cause) --[[ Line: 421 ]]
+			return reconcileMutation(p6, (withMutationPreflight(p6, Id, function(p7, Cause)
 				-- upvalues: DeveloperSubscriptionTypesModule (upval), PromiseModule (upval), Id (copy), runMutation (upval), FetchDeveloperSubscriptionModule (upval), p6 (copy), config (upval), verifyRead (upval), tokenBoundGet (upval)
 				return if Cause.productStatusType == DeveloperSubscriptionTypesModule.ProductStatusType.Inactive or Cause.productStatusType == DeveloperSubscriptionTypesModule.ProductStatusType.OffSale then if Cause.imageAssetId == nil or Cause.imageAssetId <= 0 then PromiseModule.reject({
 					outcome = "failed",
 					errorMessage = "The Developer Subscription request was rejected: upload an image before activating the subscription.",
 					subscription = if Id == nil then nil else { id = Id },
 					cause = Cause
-				}) else runMutation(p7, Id, function() --[[ Line: 435 ]]
+				}) else runMutation(p7, Id, function()
 					-- upvalues: FetchDeveloperSubscriptionModule (upval), p6 (upval), Id (upval), config (upval)
 					return FetchDeveloperSubscriptionModule.activate(p6, Id, config)
-				end):andThen(function() --[[ Line: 437 ]]
+				end):andThen(function()
 					-- upvalues: verifyRead (upval), p7 (copy), tokenBoundGet (upval), p6 (upval), Id (upval), DeveloperSubscriptionTypesModule (upval)
-					return verifyRead(p7, function() --[[ Line: 438 ]]
+					return verifyRead(p7, function()
 						-- upvalues: tokenBoundGet (upval), p7 (upval), p6 (upval), Id (upval)
 						return tokenBoundGet(p7, p6, Id)
-					end, function(p8): boolean --[[ Line: 440 ]]
+					end, function(p8): boolean
 						-- upvalues: DeveloperSubscriptionTypesModule (upval)
 						return p8.productStatusType == DeveloperSubscriptionTypesModule.ProductStatusType.Active
 					end, "the subscription did not become active", Id)
@@ -478,19 +478,19 @@ return function(p1) --[[ Line: 38 | Named "createDeveloperSubscriptionStore" ]]
 				})
 			end)))
 		end,
-		deactivate = function(p6, Id, p7) --[[ Line: 448 ]]
+		deactivate = function(p6, Id, p7)
 			-- upvalues: PromiseModule (upval), withMutationPreflight (copy), DeveloperSubscriptionTypesModule (upval), runMutation (copy), FetchDeveloperSubscriptionModule (upval), config (copy), verifyRead (copy), tokenBoundGet (copy), reconcileMutation (copy)
-			return if typeof(p7) == "boolean" then reconcileMutation(p6, (withMutationPreflight(p6, Id, function(p8, Cause) --[[ Line: 456 ]]
+			return if typeof(p7) == "boolean" then reconcileMutation(p6, (withMutationPreflight(p6, Id, function(p8, Cause)
 				-- upvalues: p7 (copy), DeveloperSubscriptionTypesModule (upval), PromiseModule (upval), Id (copy), runMutation (upval), FetchDeveloperSubscriptionModule (upval), p6 (copy), config (upval), verifyRead (upval), tokenBoundGet (upval)
-				return if p7 or Cause.productStatusType ~= DeveloperSubscriptionTypesModule.ProductStatusType.OffSale then if Cause.productStatusType == DeveloperSubscriptionTypesModule.ProductStatusType.Active or p7 and Cause.productStatusType == DeveloperSubscriptionTypesModule.ProductStatusType.OffSale then runMutation(p8, Id, function() --[[ Line: 472 ]]
+				return if p7 or Cause.productStatusType ~= DeveloperSubscriptionTypesModule.ProductStatusType.OffSale then if Cause.productStatusType == DeveloperSubscriptionTypesModule.ProductStatusType.Active or p7 and Cause.productStatusType == DeveloperSubscriptionTypesModule.ProductStatusType.OffSale then runMutation(p8, Id, function()
 					-- upvalues: FetchDeveloperSubscriptionModule (upval), p6 (upval), Id (upval), p7 (upval), config (upval)
 					return FetchDeveloperSubscriptionModule.deactivate(p6, Id, p7, config)
-				end):andThen(function() --[[ Line: 474 ]]
+				end):andThen(function()
 					-- upvalues: verifyRead (upval), p8 (copy), tokenBoundGet (upval), p6 (upval), Id (upval), p7 (upval), DeveloperSubscriptionTypesModule (upval)
-					return verifyRead(p8, function() --[[ Line: 477 ]]
+					return verifyRead(p8, function()
 						-- upvalues: tokenBoundGet (upval), p8 (upval), p6 (upval), Id (upval)
 						return tokenBoundGet(p8, p6, Id)
-					end, function(p9): boolean --[[ Line: 480 ]]
+					end, function(p9): boolean
 						-- upvalues: p7 (upval), DeveloperSubscriptionTypesModule (upval)
 						return if p7 then p9.productStatusType == DeveloperSubscriptionTypesModule.ProductStatusType.ToBeDeactivated or p9.productStatusType == DeveloperSubscriptionTypesModule.ProductStatusType.Inactive else p9.productStatusType == DeveloperSubscriptionTypesModule.ProductStatusType.OffSale
 					end, if p7 then "the subscription did not begin deactivation" else "the subscription did not go off sale", Id)
@@ -507,16 +507,16 @@ return function(p1) --[[ Line: 38 | Named "createDeveloperSubscriptionStore" ]]
 				subscription = if Id == nil then nil else { id = Id }
 			})
 		end,
-		delete = function(p6, Id) --[[ Line: 497 ]]
+		delete = function(p6, Id)
 			-- upvalues: withMutationPreflight (copy), DeveloperSubscriptionTypesModule (upval), PromiseModule (upval), failedError (copy), runMutation (copy), FetchDeveloperSubscriptionModule (upval), config (copy), tokenBoundGet (copy), Frozen (upval), Flag (ref), Generation (ref), GetLocalPlayerUserId (copy), StatusCodes (upval), reconcileMutation (copy)
-			return reconcileMutation(p6, (withMutationPreflight(p6, Id, function(p7, Cause) --[[ Line: 498 ]]
+			return reconcileMutation(p6, (withMutationPreflight(p6, Id, function(p7, Cause)
 				-- upvalues: DeveloperSubscriptionTypesModule (upval), PromiseModule (upval), failedError (upval), Id (copy), runMutation (upval), FetchDeveloperSubscriptionModule (upval), p6 (copy), config (upval), tokenBoundGet (upval), Frozen (upval), Flag (upval), Generation (upval), GetLocalPlayerUserId (upval), StatusCodes (upval)
-				return if Cause.productStatusType == DeveloperSubscriptionTypesModule.ProductStatusType.Inactive then runMutation(p7, Id, function() --[[ Line: 505 ]]
+				return if Cause.productStatusType == DeveloperSubscriptionTypesModule.ProductStatusType.Inactive then runMutation(p7, Id, function()
 					-- upvalues: FetchDeveloperSubscriptionModule (upval), p6 (upval), Id (upval), config (upval)
 					return FetchDeveloperSubscriptionModule.delete(p6, Id, config)
-				end):andThen(function() --[[ Line: 507 ]]
+				end):andThen(function()
 					-- upvalues: tokenBoundGet (upval), p7 (copy), p6 (upval), Id (upval), DeveloperSubscriptionTypesModule (upval), PromiseModule (upval), Frozen (upval), Flag (upval), Generation (upval), GetLocalPlayerUserId (upval), StatusCodes (upval)
-					return tokenBoundGet(p7, p6, Id):andThen(function(Result) --[[ Line: 508 ]]
+					return tokenBoundGet(p7, p6, Id):andThen(function(Result)
 						-- upvalues: DeveloperSubscriptionTypesModule (upval), PromiseModule (upval), Id (upval)
 						return if Result.productStatusType == DeveloperSubscriptionTypesModule.ProductStatusType.ToBeDeleted or Result.productStatusType == DeveloperSubscriptionTypesModule.ProductStatusType.Deleted then Result else PromiseModule.reject({
 							outcome = "unverified",
@@ -524,7 +524,7 @@ return function(p1) --[[ Line: 38 | Named "createDeveloperSubscriptionStore" ]]
 							cause = nil,
 							subscription = Result or (if Id == nil then nil else { id = Id })
 						})
-					end, function(Cause) --[[ Line: 518 ]]
+					end, function(Cause)
 						-- upvalues: Frozen (upval), p7 (upval), Flag (upval), Generation (upval), GetLocalPlayerUserId (upval), PromiseModule (upval), Id (upval), StatusCodes (upval)
 						if Cause ~= Frozen then
 							local IsUserIdMatch: boolean = not Flag and (p7.generation == Generation and p7.userId == GetLocalPlayerUserId())
@@ -548,11 +548,11 @@ return function(p1) --[[ Line: 38 | Named "createDeveloperSubscriptionStore" ]]
 				end) else PromiseModule.reject((failedError(Id, if Cause.productStatusType == DeveloperSubscriptionTypesModule.ProductStatusType.ToBeDeactivated then "Wait for the subscription to become inactive before deleting it" else "Deactivate the subscription and wait for it to become inactive before deleting it", Cause)))
 			end)))
 		end,
-		clear = function() --[[ Line: 547 ]]
+		clear = function()
 			-- upvalues: SingleEntityResolverModule (copy)
 			SingleEntityResolverModule.clear()
 		end,
-		dispose = function() --[[ Line: 551 ]]
+		dispose = function()
 			-- upvalues: Flag (ref), Generation (ref), Callback (copy), SingleEntityResolverModule (copy)
 			Flag = true
 			Generation += 1

@@ -2,7 +2,7 @@
 local SymbolModule = require(Parent.Symbols.Symbol)
 local StrictModule = require(Parent.strict)
 
-return function(p1, List) --[[ Line: 19 | Named "createEnum" ]]
+return function(p1, List)
 	-- upvalues: SymbolModule (copy), StrictModule (copy)
 	assert(typeof(p1) == "string", "Bad argument #1, expected string")
 	assert(typeof(List) == "table", "Bad argument #2, expected list of values")
@@ -14,14 +14,14 @@ return function(p1, List) --[[ Line: 19 | Named "createEnum" ]]
 		local NamedResult = SymbolModule.named(value)
 		local Text: string = ("%s.%s"):format(p1, value)
 		
-		getmetatable(NamedResult).__tostring = function() --[[ Line: 31 ]]
+		getmetatable(NamedResult).__tostring = function()
 			-- upvalues: Text (copy)
 			return Text
 		end
 		
 		NamedResults[value] = NamedResult
 	end
-	function NamedResults.isMember(p2): boolean --[[ Line: 38 ]]
+	function NamedResults.isMember(p2): boolean
 		-- upvalues: NamedResults (copy)
 		if typeof(p2) ~= "userdata" then
 			return false

@@ -15,7 +15,7 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagEnableBlackbirdCheck = SharedFlagsModule.FFlagEnableBlackbirdCheck
 local FFlagAppChatDiscloseUpdateSecondVersion = SharedFlagsModule.FFlagAppChatDiscloseUpdateSecondVersion
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 38 ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: UseTokensFunction (copy), UseFoundationPresenceModule (copy), UseLocalizationFunction (copy), FFlagAppChatDiscloseUpdateSecondVersion (copy), UniversalAppPolicyModule (copy), FFlagAppChatContextCardNameLoadingShimmerModule (copy), ReactModule (copy), FoundationModule (copy), Skeleton (copy), UserTile (copy), LayoutMode (copy), FFlagEnableBlackbirdCheck (copy), FFlagAppChatConsoleFocusFixesModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Size = UseTokensResult.Size

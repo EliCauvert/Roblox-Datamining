@@ -4,7 +4,7 @@ local _ = require(GameInvite.gameInviteModalType)
 local GetCanSendAndCanCustomizeInvitesModule = require(GameInvite.Requests.GetCanSendAndCanCustomizeInvites)
 local FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt = require(GameInvite.Parent.SharedFlags).FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt
 
-return function(p1, p2) --[[ Line: 13 ]]
+return function(p1, p2)
 	-- upvalues: GetCanSendAndCanCustomizeInvitesModule (copy), NetworkImpl (copy), FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (copy)
 	local v1, v2 = GetCanSendAndCanCustomizeInvitesModule(NetworkImpl, p1, p2):await()
 	

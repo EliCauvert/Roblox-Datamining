@@ -13,7 +13,7 @@ local UseArTranslationFunction = require(GenericAbuseReporting.BeduiV2.Utils.Tra
 local UseLayoutSlotsFunction = require(GenericAbuseReporting.BeduiV2.Components.LayoutSlots).useLayoutSlots
 local FFlagSupportSubmissionOnAllReportNodes = require(Parent.SharedFlags).FFlagSupportSubmissionOnAllReportNodes
 
-return ReactModule.memo(function(p1) --[[ Line: 43 | Named "ParagraphNode" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseArTranslationFunction (copy), UseLayoutSlotsFunction (copy), ReactModule (copy), EyebrowModule (copy), TextWithTranslationModule (copy), FooterModule (copy), Button (copy), ButtonVariant (copy), FoundationModule (copy), FFlagSupportSubmissionOnAllReportNodes (copy)
 	local TranslateIntoStringFunction = UseArTranslationFunction().translateIntoString
 	local UseLayoutSlotsResult = UseLayoutSlotsFunction()

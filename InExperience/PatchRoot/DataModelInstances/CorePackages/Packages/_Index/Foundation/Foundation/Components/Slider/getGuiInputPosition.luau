@@ -1,6 +1,6 @@
 ﻿local GuiService = require(script:FindFirstAncestor("Foundation").Utility.Wrappers).Services.GuiService
 
-return function(p1, p2) --[[ Line: 11 | Named "getGuiInputPosition" ]]
+return function(p1, p2)
 	-- upvalues: GuiService (copy)
 	local ScreenGui = p2:FindFirstAncestorWhichIsA("ScreenGui")
 	

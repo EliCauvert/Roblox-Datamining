@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("FriendsCalling").Parent.FloatingWindow)
 
-local function _(p1, p2: number) --[[ Line: 41 | Named "safeAreaInsets" ]]
+local function _(p1, p2: number)
 	return {
 		bottom = math.max(p1.bottom, p2),
 		left = math.max(p1.left, p2),
@@ -9,7 +9,7 @@ local function _(p1, p2: number) --[[ Line: 41 | Named "safeAreaInsets" ]]
 	}
 end
 
-local function resolveExpanded(p1) --[[ Line: 62 ]]
+local function resolveExpanded(p1)
 	local DeviceInsets = p1.deviceInsets
 	
 	if p1.isPortrait then
@@ -41,7 +41,7 @@ local function resolveExpanded(p1) --[[ Line: 62 ]]
 	end
 end
 
-return function(p1) --[[ Line: 93 | Named "resolveGeometry" ]]
+return function(p1)
 	-- upvalues: resolveExpanded (copy)
 	local DeviceInsets = p1.deviceInsets
 	local Margin: number = p1.margin

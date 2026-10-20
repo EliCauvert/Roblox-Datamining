@@ -4,7 +4,7 @@ local UrlBase = require(Parent.UrlBuilder).UrlBase
 local PollAnalyticsOperationModule = require(script.Parent.pollAnalyticsOperation)
 local _ = require(script.Parent.ExperienceAnalyticsStoreTypes)
 
-local function toMap(p1) --[[ Line: 43 ]]
+local function toMap(p1)
 	if p1.metricMetadataResult == nil then
 		error({
 			errorMessage = "analytics metadata response missing metricMetadataResult"
@@ -23,7 +23,7 @@ local function toMap(p1) --[[ Line: 43 ]]
 	return LatestAvailableTimes
 end
 
-return function(Metrics, p2) --[[ Line: 64 | Named "fetchMetricMetadata" ]]
+return function(Metrics, p2)
 	-- upvalues: UrlBase (copy), PollAnalyticsOperationModule (copy), toMap (copy)
 	local P2 = p2 or {}
 	

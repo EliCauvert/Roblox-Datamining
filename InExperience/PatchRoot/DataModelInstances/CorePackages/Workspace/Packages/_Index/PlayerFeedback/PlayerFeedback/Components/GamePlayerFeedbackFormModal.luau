@@ -42,7 +42,7 @@ local AddThumbnailReportToPlayerFeedback = game:DefineFastFlag("AddThumbnailRepo
 local UseStateFunction = ReactModule.useState
 local UseEffectFunction = ReactModule.useEffect
 
-local function CategoryCheckboxes(p1) --[[ Line: 72 ]]
+local function CategoryCheckboxes(p1)
 	-- upvalues: ReactModule (copy), CryoModule (copy), Checkbox (copy)
 	local SelectedCategoryIds = p1.selectedCategoryIds
 	local OnOptionSelectedFunction = p1.onOptionSelected
@@ -50,11 +50,11 @@ local function CategoryCheckboxes(p1) --[[ Line: 72 ]]
 		layout = ReactModule.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),
 		padding = ReactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, -8) })
 	}
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 84 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: CryoModule (upval), SelectedCategoryIds (copy), OnOptionSelectedFunction (copy)
-		return function(p3) --[[ Line: 85 ]]
+		return function(p3)
 			-- upvalues: CryoModule (upval), SelectedCategoryIds (upval), p2 (copy), OnOptionSelectedFunction (upval)
-			OnOptionSelectedFunction(if p3 then CryoModule.List.join(SelectedCategoryIds, { p2 }) else CryoModule.List.filter(SelectedCategoryIds, function(p4): boolean --[[ Line: 90 ]]
+			OnOptionSelectedFunction(if p3 then CryoModule.List.join(SelectedCategoryIds, { p2 }) else CryoModule.List.filter(SelectedCategoryIds, function(p4): boolean
 				-- upvalues: p2 (upval)
 				return p4 ~= p2
 			end))
@@ -77,7 +77,7 @@ local function CategoryCheckboxes(p1) --[[ Line: 72 ]]
 	}, config)
 end
 
-local function _(Text: string): number --[[ Line: 120 | Named "getTextLength" ]]
+local function _(Text: string): number
 	return if utf8.len(Text) then utf8.len(utf8.nfcnormalize(Text)) else string.len(Text)
 end
 
@@ -110,7 +110,7 @@ local WrapResult = require(Parent.ArgCheck).wrap(TModule.interface({
 	onSubmitted = TModule.optional(TModule.callback)
 }))
 
-return function(p2) --[[ Line: 156 | Named "GamePlayerFeedbackFormModal" ]]
+return function(p2)
 	-- upvalues: WrapResult (copy), UseStyleFunction (copy), UseDispatchFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), AppEventIngestService (copy), UseSelectorFunction (copy), UseStateFunction (copy), ReactModule (copy), GetFFlagEdpPlayerFeedbackCommentsOnlyFunction (copy), UseLocalizationFunction (copy), UseEffectFunction (copy), PlayerFeedbackEventsModule (copy), SubmitGamePlayerFeedbackModule (copy), SetCurrentToastMessageFunction (copy), SetNetworkingErrorToastFunction (copy), OpenDynamicAbuseReportModule (copy), AbuseVectorModule (copy), FFlagAddThumbnailSelectorReport (copy), AddThumbnailReportToPlayerFeedback (copy), CloseCentralOverlayFunction (copy), AppPage (copy), UrlBuilder (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), UserInputService (copy), PartialPageModal (copy), VerticalScrollView (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), CategoryCheckboxes (copy), ButtonStack (copy), ButtonType (copy), FFlagEnableAbuseReportRevampFlow (copy), EnableAbuseReportRevampFeedback (copy)
 	assert(WrapResult(p2))
 	local UseStyleResult = UseStyleFunction()
@@ -118,10 +118,10 @@ return function(p2) --[[ Line: 156 | Named "GamePlayerFeedbackFormModal" ]]
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(AppEventIngestService)
 	local Tokens = UseStyleResult.Tokens
-	local UseSelectorResult = UseSelectorFunction(function(p3) --[[ Line: 165 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p3)
 		return p3.ScreenSize
 	end)
-	local UseSelectorResult1 = UseSelectorFunction(function(p3) --[[ Line: 168 ]]
+	local UseSelectorResult1 = UseSelectorFunction(function(p3)
 		local GlobalGuiInset = p3.GlobalGuiInset
 		
 		return GlobalGuiInset and GlobalGuiInset.bottom or 0
@@ -161,9 +161,9 @@ return function(p2) --[[ Line: 156 | Named "GamePlayerFeedbackFormModal" ]]
 	if GetFFlagEdpPlayerFeedbackCommentsOnlyFunction() then
 		NoUseStateResult = #UseStateResult5 > 0 and (if utf8.len(UseStateResult4) then utf8.len(utf8.nfcnormalize(UseStateResult4)) else string.len(UseStateResult4)) > 0 and UseStateResult6 == nil
 		local UseStateResult7, UseStateResult2_6 = UseStateFunction(false)
-		UseEffectFunction(function() --[[ Line: 216 ]]
+		UseEffectFunction(function()
 			-- upvalues: UseStateResult7 (copy), UseRefResult1 (copy), UseStateResult2_6 (copy)
-			task.defer(function() --[[ Line: 218 ]]
+			task.defer(function()
 				-- upvalues: UseStateResult7 (upval), UseRefResult1 (upval), UseStateResult2_6 (upval)
 				if not UseStateResult7 and UseRefResult1.current then
 					UseStateResult2_6(true)
@@ -172,11 +172,11 @@ return function(p2) --[[ Line: 156 | Named "GamePlayerFeedbackFormModal" ]]
 			end)
 		end, { UseRefResult1, UseStateResult7 })
 	end
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 227 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseDispatchResult (copy), p2 (copy)
 		UseDispatchResult(p2.closeCentralOverlayThunk())
 	end, { p2.closeCentralOverlayThunk })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 231 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: PlayerFeedbackEventsModule (upval), UseRoactServiceResult1 (copy), RootPlaceId (copy), CategoryType (copy), UseResult (copy)
 		PlayerFeedbackEventsModule.DismissPlayerFeedbackFormModal(UseRoactServiceResult1, RootPlaceId, { categoryType = CategoryType })
 		UseResult()
@@ -186,12 +186,12 @@ return function(p2) --[[ Line: 156 | Named "GamePlayerFeedbackFormModal" ]]
 		RootPlaceId,
 		UseRoactServiceResult1
 	})
-	local UseResult2 = ReactModule.useCallback(function(p3) --[[ Line: 236 ]]
+	local UseResult2 = ReactModule.useCallback(function(p3)
 		-- upvalues: PlayerFeedbackEventsModule (upval), UseRoactServiceResult1 (copy), RootPlaceId (copy), CategoryType (copy), UseStateResult2_4 (copy)
 		PlayerFeedbackEventsModule.TogglePlayerFeedbackFormModalReason(UseRoactServiceResult1, RootPlaceId, { categoryType = CategoryType })
 		UseStateResult2_4(p3)
 	end, {})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 246 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: PlayerFeedbackEventsModule (upval), UseRoactServiceResult1 (copy), RootPlaceId (copy), CategoryType (copy), UseStateResult5 (copy), GetFFlagEdpPlayerFeedbackCommentsOnlyFunction (upval), UseStateResult4 (copy), UseStateResult2_5 (copy), UseLocalizationResult (copy), Comment (copy), UseDispatchResult (copy), SubmitGamePlayerFeedbackModule (upval), UseRoactServiceResult (copy), SetCurrentToastMessageFunction (upval), p2 (copy), UseResult (copy), SetNetworkingErrorToastFunction (upval)
 		PlayerFeedbackEventsModule.ClickPlayerFeedbackFormModalSubmit(UseRoactServiceResult1, RootPlaceId, { categoryType = CategoryType })
 		
@@ -214,7 +214,7 @@ return function(p2) --[[ Line: 156 | Named "GamePlayerFeedbackFormModal" ]]
 			
 			return
 		else
-			UseDispatchResult(SubmitGamePlayerFeedbackModule.Post(UseRoactServiceResult, RootPlaceId, CategoryType, UseStateResult5, UseStateResult4)):andThen(function(_) --[[ Line: 286 ]]
+			UseDispatchResult(SubmitGamePlayerFeedbackModule.Post(UseRoactServiceResult, RootPlaceId, CategoryType, UseStateResult5, UseStateResult4)):andThen(function(_)
 				-- upvalues: UseDispatchResult (upval), SetCurrentToastMessageFunction (upval), p2 (upval), UseResult (upval)
 				UseDispatchResult(SetCurrentToastMessageFunction({
 					toastMessage = "PlayerFeedbacks.VoteForm.Message.SubmitSuccess"
@@ -224,7 +224,7 @@ return function(p2) --[[ Line: 156 | Named "GamePlayerFeedbackFormModal" ]]
 					p2.onSubmitted()
 				end
 				UseResult()
-			end, function(p3) --[[ Line: 294 ]]
+			end, function(p3)
 				-- upvalues: UseDispatchResult (upval), SetNetworkingErrorToastFunction (upval)
 				UseDispatchResult(SetNetworkingErrorToastFunction(p3))
 			end)
@@ -235,22 +235,22 @@ return function(p2) --[[ Line: 156 | Named "GamePlayerFeedbackFormModal" ]]
 		UseLocalizationResult.commentTooLongMessage, RootPlaceId, CategoryType,
 		UseStateResult5, UseStateResult4, p2.onSubmitted, UseResult
 	})
-	UseEffectFunction(function() --[[ Line: 314 ]]
+	UseEffectFunction(function()
 		-- upvalues: PlayerFeedbackEventsModule (upval), UseRoactServiceResult1 (copy), RootPlaceId (copy), CategoryType (copy)
 		PlayerFeedbackEventsModule.PlayerFeedbackFormModalMounted(UseRoactServiceResult1, RootPlaceId, { categoryType = CategoryType })
 	end, { UseRoactServiceResult1, RootPlaceId, CategoryType })
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 318 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: PlayerFeedbackEventsModule (upval), UseRoactServiceResult1 (copy), RootPlaceId (copy), CategoryType (copy)
 		PlayerFeedbackEventsModule.FocusPlayerFeedbackFormModalComment(UseRoactServiceResult1, RootPlaceId, { categoryType = CategoryType })
 	end, { UseRoactServiceResult1, RootPlaceId, CategoryType })
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 326 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: PlayerFeedbackEventsModule (upval), UseRoactServiceResult1 (copy), RootPlaceId (copy), CategoryType (copy), UseDispatchResult (copy), OpenDynamicAbuseReportModule (upval), AbuseVectorModule (upval), FFlagAddThumbnailSelectorReport (upval), AddThumbnailReportToPlayerFeedback (upval), p2 (copy), CloseCentralOverlayFunction (upval)
 		PlayerFeedbackEventsModule.ClickPlayerFeedbackFormAbuseReportPrompt(UseRoactServiceResult1, RootPlaceId, { categoryType = CategoryType })
 		UseDispatchResult(OpenDynamicAbuseReportModule({
 			abuseVector = AbuseVectorModule.Place,
 			targetId = RootPlaceId,
 			custom = if FFlagAddThumbnailSelectorReport and AddThumbnailReportToPlayerFeedback then { universeId = p2.universeId } else nil,
-			onClose = function() --[[ Line: 340 ]]
+			onClose = function()
 				-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
 				UseDispatchResult(CloseCentralOverlayFunction())
 			end
@@ -261,7 +261,7 @@ return function(p2) --[[ Line: 156 | Named "GamePlayerFeedbackFormModal" ]]
 		CategoryType,
 		RootPlaceId
 	})
-	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 346 ]]
+	local UseResult6 = ReactModule.useCallback(function()
 		-- upvalues: PlayerFeedbackEventsModule (upval), UseRoactServiceResult1 (copy), RootPlaceId (copy), CategoryType (copy), AppPage (upval), UrlBuilder (upval), UseLocalizationResult (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval), UseResult (copy)
 		PlayerFeedbackEventsModule.ClickPlayerFeedbackFormAbuseReportPrompt(UseRoactServiceResult1, RootPlaceId, { categoryType = CategoryType })
 		local config = {
@@ -282,7 +282,7 @@ return function(p2) --[[ Line: 156 | Named "GamePlayerFeedbackFormModal" ]]
 		CategoryType,
 		UseResult
 	})
-	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 368 ]]
+	local UseResult7 = ReactModule.useCallback(function()
 		-- upvalues: PlayerFeedbackEventsModule (upval), UseRoactServiceResult1 (copy), RootPlaceId (copy), CategoryType (copy), AppPage (upval), UrlBuilder (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval), UseResult (copy)
 		PlayerFeedbackEventsModule.ClickPlayerFeedbackFormModalDisclaimer(UseRoactServiceResult1, RootPlaceId, { categoryType = CategoryType })
 		local config = {
@@ -302,7 +302,7 @@ return function(p2) --[[ Line: 156 | Named "GamePlayerFeedbackFormModal" ]]
 		CategoryType,
 		UseResult
 	})
-	local UseResult8 = ReactModule.useCallback(function(p3) --[[ Line: 386 ]]
+	local UseResult8 = ReactModule.useCallback(function(p3)
 		-- upvalues: UseStateResult2_3 (copy), Comment (copy), UseStateResult6 (copy), UseStateResult2_5 (copy)
 		local Text: string = p3.Text
 		UseStateResult2_3(Text)
@@ -317,7 +317,7 @@ return function(p2) --[[ Line: 156 | Named "GamePlayerFeedbackFormModal" ]]
 		Comment.minimum_length,
 		Comment.maximum_length
 	})
-	UseEffectFunction(function() --[[ Line: 398 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseRefResult (copy), UseStateResult1 (copy)
 		if UseRefResult and UseRefResult.current and UseStateResult1 ~= 0 then
 			UseRefResult.current.CanvasPosition = Vector2.new(0, UseRefResult.current.AbsoluteCanvasSize.Y)
@@ -325,15 +325,15 @@ return function(p2) --[[ Line: 156 | Named "GamePlayerFeedbackFormModal" ]]
 			return
 		end
 	end, { UseRefResult, UseStateResult1 })
-	UseEffectFunction(function() --[[ Line: 406 ]]
+	UseEffectFunction(function()
 		-- upvalues: UserInputService (upval), UseStateResult2 (copy), UseStateResult2_1 (copy)
-		local Connection = UserInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(function() --[[ Line: 409 ]]
+		local Connection = UserInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(function()
 			-- upvalues: UseStateResult2 (upval), UserInputService (upval), UseStateResult2_1 (upval)
 			UseStateResult2(UserInputService.OnScreenKeyboardVisible)
 			UseStateResult2_1(UserInputService.OnScreenKeyboardVisible and UserInputService.OnScreenKeyboardSize.Y or 0)
 		end)
 		
-		return function() --[[ Line: 416 ]]
+		return function()
 			-- upvalues: Connection (ref)
 			if Connection then
 				Connection:Disconnect()
@@ -363,7 +363,7 @@ return function(p2) --[[ Line: 156 | Named "GamePlayerFeedbackFormModal" ]]
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				HorizontalAlignment = Enum.HorizontalAlignment.Left,
 				Padding = UDim.new(0, 16),
-				[ReactModule.Change.AbsoluteContentSize] = function(p3) --[[ Line: 450 ]]
+				[ReactModule.Change.AbsoluteContentSize] = function(p3)
 					-- upvalues: UseStateResult2_2 (copy)
 					UseStateResult2_2(p3.AbsoluteContentSize.Y)
 				end

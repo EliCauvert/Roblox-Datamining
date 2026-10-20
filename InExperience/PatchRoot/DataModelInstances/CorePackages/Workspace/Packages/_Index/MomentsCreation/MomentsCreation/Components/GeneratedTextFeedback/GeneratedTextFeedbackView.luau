@@ -12,7 +12,7 @@ local InputSize = FoundationModule.Enums.InputSize
 local TextFeedbackReasonDialogModule = require(MomentsCreation.Components.Dialogs.TextFeedbackReasonDialog)
 local GetFFlagMomentsGeneratedTextDisclosureWrapModule = require(MomentsCreation.Flags.GetFFlagMomentsGeneratedTextDisclosureWrap)
 
-return function(p1) --[[ Line: 40 | Named "GeneratedTextFeedbackView" ]]
+return function(p1)
 	-- upvalues: GetFFlagMomentsGeneratedTextDisclosureWrapModule (copy), ReactModule (copy), View (copy), Text (copy), IconButton (copy), IconName (copy), IconVariant (copy), InputSize (copy), ButtonVariant (copy), TextFeedbackReasonDialogModule (copy)
 	return if p1.visible then ReactModule.createElement(ReactModule.Fragment, nil, {
 		Feedback = ReactModule.createElement(View, {

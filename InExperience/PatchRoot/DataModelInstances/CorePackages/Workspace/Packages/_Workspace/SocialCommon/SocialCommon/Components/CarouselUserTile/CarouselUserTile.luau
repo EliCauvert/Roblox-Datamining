@@ -10,7 +10,7 @@ local FFlagCarouselUserTileUseProfileFrameThumbnailModule = require(SocialCommon
 local PlayerNameModule = require(script.Parent.PlayerName)
 local ConstantsModule = require(script.Parent.Constants)
 
-local function OnStateChanged() --[[ Line: 16 ]] end
+local function OnStateChanged() end
 
 local config = {
 	tileSize = ConstantsModule.TILE_SIZE,
@@ -18,12 +18,12 @@ local config = {
 	contextualTopPadding = ConstantsModule.CONTEXTUAL_TOP_PADDING
 }
 
-return function(p1) --[[ Line: 51 ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), PlayerTile (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), FFlagCarouselUserTileUseProfileFrameThumbnailModule (copy), PlayerNameModule (copy), Interactable (copy), OnStateChanged (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local TileSize = JoinResult.tileSize
 	
-	local function _() --[[ Line: 72 ]]
+	local function _()
 		-- upvalues: JoinResult (copy)
 		return if JoinResult.renderContextualInfo then JoinResult.renderContextualInfo() else nil
 	end
@@ -74,7 +74,7 @@ return function(p1) --[[ Line: 51 ]]
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.XY
 			}, {
-				PlayerName = (function() --[[ Line: 76 ]]
+				PlayerName = (function()
 					-- upvalues: JoinResult (copy), ReactModule (upval), PlayerNameModule (upval)
 					return if JoinResult.renderPlayerName then JoinResult.renderPlayerName() else JoinResult.userName and ReactModule.createElement(PlayerNameModule, { name = JoinResult.userName, width = JoinResult.tileSize }) or nil
 				end)()

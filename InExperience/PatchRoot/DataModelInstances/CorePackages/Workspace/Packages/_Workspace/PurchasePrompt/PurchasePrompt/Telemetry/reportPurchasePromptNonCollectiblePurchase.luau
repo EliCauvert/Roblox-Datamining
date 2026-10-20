@@ -11,7 +11,7 @@ local t = {}
 for _, enumItem in Enum.AvatarAssetType:GetEnumItems() do
 	t[enumItem.Value] = true
 end
-return function(InfoType, p1) --[[ Line: 25 | Named "reportPurchasePromptNonCollectiblePurchase" ]]
+return function(InfoType, p1)
 	-- upvalues: t (copy), LoggingProtocolModule (copy), config (copy)
 	if InfoType == Enum.InfoType.Asset then
 		if t[p1.assetTypeId] then

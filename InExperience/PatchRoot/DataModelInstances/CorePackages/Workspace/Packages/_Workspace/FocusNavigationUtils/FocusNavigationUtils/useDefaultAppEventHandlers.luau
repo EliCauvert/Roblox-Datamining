@@ -13,11 +13,11 @@ local FocusNavigableSurfaceIdentifierEnumModule = require(FocusNavigationUtils.F
 local UseDescendantHasFocusModule = require(FocusNavigationUtils.useDescendantHasFocus)
 local UseRegistryEntryFunction = require(FocusNavigationUtils.FocusNavigableSurfaceRegistry).useRegistryEntry
 
-local function _(ScrollingFrame) --[[ Line: 22 | Named "getScrollableAncestor" ]]
+local function _(ScrollingFrame)
 	return if ScrollingFrame == nil then nil elseif ScrollingFrame:IsA("ScrollingFrame") then ScrollingFrame else ScrollingFrame:FindFirstAncestorWhichIsA("ScrollingFrame")
 end
 
-local _ = function(ScrollFrame, Y: number) --[[ Line: 33 | Named "scrollTo" ]]
+local _ = function(ScrollFrame, Y: number)
 	if ScrollFrame ~= nil then
 		local YDelta = ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y
 		
@@ -35,27 +35,27 @@ local _ = function(ScrollFrame, Y: number) --[[ Line: 33 | Named "scrollTo" ]]
 	end
 end
 
-function useDefaultAppEventHandlers() --[[ Line: 52 ]]
+function useDefaultAppEventHandlers()
 	-- upvalues: UseNavigationFunction (copy), UseRegistryEntryFunction (copy), FocusNavigableSurfaceIdentifierEnumModule (copy), UseFocusRegistryEntryFunction (copy), UseDescendantHasFocusModule (copy), UseSelectorFunction (copy), ReactFocusNavigationModule (copy), ReactModule (copy), FocusNavigationEventNameEnumModule (copy), InputHandlersModule (copy), CanGoBackFunction (copy), FFlagFixDoubleBackNav (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseRegistryEntryResult = UseRegistryEntryFunction(FocusNavigableSurfaceIdentifierEnumModule.SearchBar)
 	local UseFocusRegistryEntryResult = UseFocusRegistryEntryFunction(FocusNavigableSurfaceIdentifierEnumModule.SearchBar)
 	local UseFocusRegistryEntryResult1 = UseFocusRegistryEntryFunction(FocusNavigableSurfaceIdentifierEnumModule.NavBar)
 	local UseDescendantHasFocusModuleResult = UseDescendantHasFocusModule((UseRegistryEntryFunction(FocusNavigableSurfaceIdentifierEnumModule.NavBar)))
-	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 59 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p1)
 		return p1.TabBarVisible
 	end)
 	local UseFocusedGuiObjectResult = ReactFocusNavigationModule.useFocusedGuiObject()
 	local UseFocusedGuiObjectResult1 = if UseFocusedGuiObjectResult == nil then nil elseif UseFocusedGuiObjectResult:IsA("ScrollingFrame") then UseFocusedGuiObjectResult else UseFocusedGuiObjectResult:FindFirstAncestorWhichIsA("ScrollingFrame")
 	local HasUseFocusedGuiObjectResult = UseFocusedGuiObjectResult1 ~= nil
 	
-	return (ReactModule.useMemo(function() --[[ Line: 67 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: UseDescendantHasFocusModuleResult (copy), FocusNavigationEventNameEnumModule (upval), InputHandlersModule (upval), CanGoBackFunction (upval), UseNavigationResult (copy), UseSelectorResult (copy), UseFocusRegistryEntryResult1 (copy), FFlagFixDoubleBackNav (upval), UseFocusRegistryEntryResult (copy), UseRegistryEntryResult (copy), HasUseFocusedGuiObjectResult (copy), UseFocusedGuiObjectResult1 (copy)
 		local t = {}
 		
 		if not UseDescendantHasFocusModuleResult then
 			t[FocusNavigationEventNameEnumModule.NavigateBack] = {
-				handler = InputHandlersModule.onRelease(function(p1) --[[ Line: 72 ]]
+				handler = InputHandlersModule.onRelease(function(p1)
 					-- upvalues: CanGoBackFunction (upval), UseNavigationResult (upval), UseSelectorResult (upval), UseFocusRegistryEntryResult1 (upval), FFlagFixDoubleBackNav (upval)
 					if CanGoBackFunction(UseNavigationResult) then
 						UseNavigationResult.goBack(false)
@@ -71,7 +71,7 @@ function useDefaultAppEventHandlers() --[[ Line: 52 ]]
 		end
 		if UseFocusRegistryEntryResult and UseRegistryEntryResult ~= nil then
 			t[FocusNavigationEventNameEnumModule.Search] = {
-				handler = InputHandlersModule.onRelease(function(_) --[[ Line: 89 ]]
+				handler = InputHandlersModule.onRelease(function(_)
 					-- upvalues: UseFocusRegistryEntryResult (upval), UseRegistryEntryResult (upval)
 					UseFocusRegistryEntryResult()
 					
@@ -87,7 +87,7 @@ function useDefaultAppEventHandlers() --[[ Line: 52 ]]
 		end
 		if HasUseFocusedGuiObjectResult then
 			t[FocusNavigationEventNameEnumModule.ScrollDown] = {
-				handler = InputHandlersModule.onRelease(function(_) --[[ Line: 106 ]]
+				handler = InputHandlersModule.onRelease(function(_)
 					-- upvalues: UseFocusedGuiObjectResult1 (upval)
 					if UseFocusedGuiObjectResult1 ~= nil then
 						local YDelta = UseFocusedGuiObjectResult1.AbsoluteCanvasSize.Y - UseFocusedGuiObjectResult1.AbsoluteWindowSize.Y
@@ -102,7 +102,7 @@ function useDefaultAppEventHandlers() --[[ Line: 52 ]]
 				end)
 			}
 			t[FocusNavigationEventNameEnumModule.ScrollUp] = {
-				handler = InputHandlersModule.onRelease(function(_) --[[ Line: 111 ]]
+				handler = InputHandlersModule.onRelease(function(_)
 					-- upvalues: UseFocusedGuiObjectResult1 (upval)
 					if UseFocusedGuiObjectResult1 ~= nil then
 						local _ = UseFocusedGuiObjectResult1.AbsoluteCanvasSize.Y - UseFocusedGuiObjectResult1.AbsoluteWindowSize.Y

@@ -8,11 +8,11 @@ local HttpService = game:GetService("HttpService")
 local GetFStringReferralRewardsTermsURLFunction = require(Parent.SharedFlags).GetFStringReferralRewardsTermsURL
 local EnableRewardsWebViewOverlay = game:DefineFastFlag("EnableRewardsWebViewOverlay", false)
 
-local function _() --[[ Line: 27 ]]
+local function _()
 	return workspace.CurrentCamera.ViewportSize
 end
 
-local function v9(ExpiryUtc): string --[[ Line: 32 ]]
+local function v9(ExpiryUtc): string
 	-- upvalues: LocalizationService (copy)
 	if not ExpiryUtc or ExpiryUtc == "" then
 		return ""
@@ -28,7 +28,7 @@ local function v9(ExpiryUtc): string --[[ Line: 32 ]]
 	end
 end
 
-return function(p1) --[[ Line: 46 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), PartialPageModal (copy), v9 (copy), EnableRewardsWebViewOverlay (copy), HttpService (copy), GetFStringReferralRewardsTermsURLFunction (copy), BrowserService (copy)
 	return ReactModule.createElement("ScreenGui", {
 		DisplayOrder = 100,
@@ -37,7 +37,7 @@ return function(p1) --[[ Line: 46 ]]
 	}, {
 		RewardsInfoModalContainer = ReactModule.createElement(FoundationModule.View, {
 			tag = "size-full-full bg-over-media-100",
-			onActivated = function() --[[ Line: 55 ]]
+			onActivated = function()
 				-- upvalues: p1 (copy)
 				if p1.setModalOpen then
 					p1.setModalOpen(false)
@@ -48,7 +48,7 @@ return function(p1) --[[ Line: 46 ]]
 				title = p1.title,
 				screenSize = workspace.CurrentCamera.ViewportSize,
 				position = UDim2.new(0.5, 0, 0.5, 0),
-				onCloseClicked = function() --[[ Line: 65 ]]
+				onCloseClicked = function()
 					-- upvalues: p1 (copy)
 					if p1.setModalOpen then
 						p1.setModalOpen(false)
@@ -93,7 +93,7 @@ return function(p1) --[[ Line: 46 ]]
 						tag = "row grow auto-xy align-x-left padding-top-small",
 						BackgroundTransparency = 1,
 						LayoutOrder = 6,
-						onActivated = function() --[[ Line: 109 ]]
+						onActivated = function()
 							-- upvalues: EnableRewardsWebViewOverlay (upval), HttpService (upval), GetFStringReferralRewardsTermsURLFunction (upval), p1 (copy), BrowserService (upval)
 							BrowserService:SendCommand(if EnableRewardsWebViewOverlay then HttpService:JSONEncode({
 								command = "open",

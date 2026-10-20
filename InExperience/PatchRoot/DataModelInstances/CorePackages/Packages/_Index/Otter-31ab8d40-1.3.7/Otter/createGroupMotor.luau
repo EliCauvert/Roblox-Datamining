@@ -6,7 +6,7 @@ local _ = require(script.Parent.types)
 local Module = {}
 Module.__index = Module
 
-local function createGroupMotor(List) --[[ Line: 53 ]]
+local function createGroupMotor(List)
 	-- upvalues: CreateSignalFunction (copy), Module (copy)
 	local t = {}
 	
@@ -30,10 +30,10 @@ local function createGroupMotor(List) --[[ Line: 53 ]]
 	return config
 end
 
-function Module.start(p1, p2) --[[ Line: 82 ]]
+function Module.start(p1, p2)
 	-- upvalues: AnimationStepSignalModule (copy)
 	if p1.__running then return end
-	p1.__connection = AnimationStepSignalModule:Connect(function(p3) --[[ Line: 87 ]]
+	p1.__connection = AnimationStepSignalModule:Connect(function(p3)
 		-- upvalues: p1 (copy)
 		p1:step(p3)
 	end)
@@ -44,14 +44,14 @@ function Module.start(p1, p2) --[[ Line: 82 ]]
 	end
 end
 
-function Module.stop(p1) --[[ Line: 98 ]]
+function Module.stop(p1)
 	if p1.__connection ~= nil then
 		p1.__connection:Disconnect()
 		p1.__running = false
 	end
 end
 
-function Module.step(StepResult, p1) --[[ Line: 105 ]]
+function Module.step(StepResult, p1)
 	if StepResult.__allComplete then return end
 	local Flag = true
 	local t = {}
@@ -86,7 +86,7 @@ function Module.step(StepResult, p1) --[[ Line: 105 ]]
 	end
 end
 
-function Module.setGoal(p2, List) --[[ Line: 150 ]]
+function Module.setGoal(p2, List)
 	-- upvalues: Object (copy)
 	p2.__goals = Object.assign({}, p2.__goals, List)
 	local Flag = false
@@ -114,25 +114,25 @@ function Module.setGoal(p2, List) --[[ Line: 150 ]]
 	p2:start(Flag)
 end
 
-function Module.onStep(p3, p4) --[[ Line: 177 ]]
+function Module.onStep(p3, p4)
 	local SubscribeResult = p3.__onStep:subscribe(p4)
 	
-	return function() --[[ Line: 180 ]]
+	return function()
 		-- upvalues: SubscribeResult (copy)
 		SubscribeResult:unsubscribe()
 	end
 end
 
-function Module.onComplete(p3, p4) --[[ Line: 185 ]]
+function Module.onComplete(p3, p4)
 	local SubscribeResult = p3.__onComplete:subscribe(p4)
 	
-	return function() --[[ Line: 188 ]]
+	return function()
 		-- upvalues: SubscribeResult (copy)
 		SubscribeResult:unsubscribe()
 	end
 end
 
-function Module.destroy(p3) --[[ Line: 193 ]]
+function Module.destroy(p3)
 	p3:stop()
 end
 

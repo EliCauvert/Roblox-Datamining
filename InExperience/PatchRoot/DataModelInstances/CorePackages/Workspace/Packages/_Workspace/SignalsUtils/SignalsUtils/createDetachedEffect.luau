@@ -1,11 +1,11 @@
 ﻿local CreateEffectFunction = require(script.Parent.Parent.Signals).createEffect
 
-return function(Callback) --[[ Line: 8 | Named "createDetachedEffect" ]]
+return function(Callback)
 	-- upvalues: CreateEffectFunction (copy)
 	local Flag = false
 	local BindableEvent = nil
 	
-	local function disposeEffect() --[[ Line: 12 ]]
+	local function disposeEffect()
 		-- upvalues: Flag (ref), BindableEvent (ref)
 		if not Flag then
 			Flag = true
@@ -16,7 +16,7 @@ return function(Callback) --[[ Line: 8 | Named "createDetachedEffect" ]]
 		end
 	end
 	
-	local Effect: () -> () = CreateEffectFunction(function(p1) --[[ Line: 21 ]]
+	local Effect: () -> () = CreateEffectFunction(function(p1)
 		-- upvalues: Callback (copy), disposeEffect (copy)
 		Callback(p1, disposeEffect)
 	end)
@@ -26,7 +26,7 @@ return function(Callback) --[[ Line: 8 | Named "createDetachedEffect" ]]
 	else
 		local BindableEvent1 = Instance.new("BindableEvent")
 		BindableEvent = BindableEvent1
-		BindableEvent1.Event:Once(function() --[[ Line: 30 ]]
+		BindableEvent1.Event:Once(function()
 			-- upvalues: BindableEvent1 (copy), BindableEvent (ref), Effect (copy)
 			BindableEvent1:Destroy()
 			BindableEvent = nil

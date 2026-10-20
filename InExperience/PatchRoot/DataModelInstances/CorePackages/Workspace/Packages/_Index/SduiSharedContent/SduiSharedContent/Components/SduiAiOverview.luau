@@ -14,12 +14,12 @@ local ChipVariant = FoundationModule.Enums.ChipVariant
 local IconName = FoundationModule.Enums.IconName
 local UseAiOverviewExpansionModule = require(script.Parent.useAiOverviewExpansion)
 
-return ReactModule.memo(function(p1) --[[ Line: 48 | Named "SduiAiOverview" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), UsePreferencesFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), CryoModule (copy), UseAiOverviewExpansionModule (copy), View (copy), Divider (copy), Chip (copy), IconName (copy), ChipSize (copy), ChipVariant (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UsePreferencesResult = UsePreferencesFunction()
 	local UseLocalizationResult = UseLocalizationFunction({ expandButtonText = "CommonUI.Controls.Action.ShowMore" })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 56 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		return {
 			index = p1.index,
@@ -33,7 +33,7 @@ return ReactModule.memo(function(p1) --[[ Line: 48 | Named "SduiAiOverview" ]]
 		p1.verticalScrollingFrameRef,
 		p1.startRow
 	})
-	local UseResult = ReactModule.useCallback(function(List) --[[ Line: 67 ]]
+	local UseResult = ReactModule.useCallback(function(List)
 		-- upvalues: ReactModule (upval), CryoModule (upval), UseMemoResult (copy)
 		if not List or typeof(List) ~= "table" then
 			return List
@@ -47,11 +47,11 @@ return ReactModule.memo(function(p1) --[[ Line: 48 | Named "SduiAiOverview" ]]
 		end
 		return CloneElementResults
 	end, { UseMemoResult })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 82 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseResult (copy), p1 (copy)
 		return UseResult(p1.content)
 	end, { p1.content, UseResult })
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 86 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: UseResult (copy), p1 (copy)
 		return UseResult(p1.footer)
 	end, { p1.footer, UseResult })
@@ -111,7 +111,7 @@ return ReactModule.memo(function(p1) --[[ Line: 48 | Named "SduiAiOverview" ]]
 					["auto-none"] = UseAiOverviewExpansionModuleResult.useCompactViewport,
 					["auto-y"] = not UseAiOverviewExpansionModuleResult.useCompactViewport
 				},
-				Size = if UseAiOverviewExpansionModuleResult.useCompactViewport then UseAiOverviewExpansionModuleResult.animatedViewportHeight:map(function(Value: number): UDim2 --[[ Line: 169 ]]
+				Size = if UseAiOverviewExpansionModuleResult.useCompactViewport then UseAiOverviewExpansionModuleResult.animatedViewportHeight:map(function(Value: number): UDim2
 					return UDim2.new(1, 0, 0, (math.ceil(Value)))
 				end) else UDim2.fromScale(1, 0)
 			}, {
@@ -149,7 +149,7 @@ return ReactModule.memo(function(p1) --[[ Line: 48 | Named "SduiAiOverview" ]]
 					tag = "position-bottom-left anchor-bottom-left",
 					ZIndex = 2,
 					backgroundStyle = BackgroundStyle,
-					Size = UseAiOverviewExpansionModuleResult.animatedViewportHeight:map(function(p2: number): UDim2 --[[ Line: 213 ]]
+					Size = UseAiOverviewExpansionModuleResult.animatedViewportHeight:map(function(p2: number): UDim2
 						return UDim2.new(1, 0, 0, (math.ceil(p2 * 0.25)))
 					end)
 				}, {

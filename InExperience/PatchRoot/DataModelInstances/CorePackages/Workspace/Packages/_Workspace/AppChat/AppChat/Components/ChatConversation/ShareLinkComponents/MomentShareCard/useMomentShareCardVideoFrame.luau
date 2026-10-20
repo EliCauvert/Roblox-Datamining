@@ -1,18 +1,18 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
 local SampleMomentShareCardVideoFrameModule = require(script.Parent.sampleMomentShareCardVideoFrame)
 
-return function(p1) --[[ Line: 8 | Named "useMomentShareCardVideoFrame" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), SampleMomentShareCardVideoFrameModule (copy)
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 9 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 		return nil
 	end)
-	ReactModule.useEffect(function() --[[ Line: 13 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), p1 (copy), SampleMomentShareCardVideoFrameModule (upval)
 		UseStateResult2(nil)
 		
 		if p1 == nil then return end
 		local Flag = false
-		task.spawn(function() --[[ Line: 20 ]]
+		task.spawn(function()
 			-- upvalues: SampleMomentShareCardVideoFrameModule (upval), p1 (upval), Flag (ref), UseStateResult2 (upval)
 			local SampleMomentShareCardVideoFrameModuleResult = SampleMomentShareCardVideoFrameModule(p1)
 			
@@ -21,7 +21,7 @@ return function(p1) --[[ Line: 8 | Named "useMomentShareCardVideoFrame" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 27 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end

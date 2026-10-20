@@ -8,7 +8,7 @@ local GetImageDataFunction = require(Parent.RobloxAppAssets).GetImageData
 local ImageSetLabel = require(Parent.UIBlox).Core.ImageSet.ImageSetLabel
 local Graphite = require(Parent.Style).Colors.Graphite
 
-return function(p1) --[[ Line: 28 | Named "CountryCodeDropdownView" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), FunctionalCountryCodeSelectorButtonModule (copy), Graphite (copy), ImageSetLabel (copy), GetImageDataFunction (copy)
 	local DropdownVisible = p1.dropdownVisible
 	local CountryCodeList = p1.countryCodeList
@@ -18,7 +18,7 @@ return function(p1) --[[ Line: 28 | Named "CountryCodeDropdownView" ]]
 	local UseStyleResult = UseStyleFunction()
 	local Color = UseStyleResult.Theme.UIDefault.Color
 	local Transparency = UseStyleResult.Theme.UIDefault.Transparency
-	local v1 = (function(List) --[[ Line: 38 | Named "getListButtons" ]]
+	local v1 = (function(List)
 		-- upvalues: ReactModule (upval), FunctionalCountryCodeSelectorButtonModule (upval), OnCountryCodeSelected (copy), Graphite (upval)
 		local List1 = {
 			ReactModule.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),

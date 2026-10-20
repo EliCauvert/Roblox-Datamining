@@ -28,7 +28,7 @@ PublishMakeupLookPrompt.validateProps = TModule.strictInterface({
 	SetPromptVisibility = TModule.callback
 })
 
-function PublishMakeupLookPrompt.init(p1) --[[ Line: 48 ]]
+function PublishMakeupLookPrompt.init(p1)
 	-- upvalues: Players (copy), PublishAssetAnalytics (copy), PurchasePromptModule (copy), MutedErrorFunction (copy)
 	local LocalPlayer = Players.LocalPlayer
 	assert(LocalPlayer, "LocalPlayer must not be nil")
@@ -43,23 +43,23 @@ function PublishMakeupLookPrompt.init(p1) --[[ Line: 48 ]]
 		description = LocalPlayer.Name .. "'s Makeup"
 	})
 	
-	function p1.openPreviewView() --[[ Line: 63 ]]
+	function p1.openPreviewView()
 		-- upvalues: PublishAssetAnalytics (upval), p1 (copy)
 		PublishAssetAnalytics.sendButtonClicked(PublishAssetAnalytics.Section.BuyCreationPage, PublishAssetAnalytics.Element.Expand)
 		p1:setState({ showingPreviewView = true })
 	end
 	
-	function p1.closePreviewView() --[[ Line: 68 ]]
+	function p1.closePreviewView()
 		-- upvalues: p1 (copy)
 		p1:setState({ showingPreviewView = false })
 	end
 	
-	function p1.canSubmit() --[[ Line: 72 ]]
+	function p1.canSubmit()
 		-- upvalues: p1 (copy)
 		return p1.state.isNameValid and (p1.state.isDescValid and (p1.props.accessoryInstance ~= nil and p1.state.purchasePromptReady))
 	end
 	
-	function p1.onSubmit() --[[ Line: 79 ]]
+	function p1.onSubmit()
 		-- upvalues: PublishAssetAnalytics (upval), p1 (copy), PurchasePromptModule (upval), MutedErrorFunction (upval)
 		PublishAssetAnalytics.sendButtonClicked(PublishAssetAnalytics.Section.BuyCreationPage, PublishAssetAnalytics.Element.Buy)
 		local config = { name = p1.state.name, description = p1.state.description }
@@ -73,7 +73,7 @@ function PublishMakeupLookPrompt.init(p1) --[[ Line: 48 ]]
 		end
 	end
 	
-	function p1.onNameUpdated(Name, IsNameValid) --[[ Line: 99 ]]
+	function p1.onNameUpdated(Name, IsNameValid)
 		-- upvalues: p1 (copy), PublishAssetAnalytics (upval)
 		p1:setState({ name = Name, isNameValid = IsNameValid })
 		
@@ -83,7 +83,7 @@ function PublishMakeupLookPrompt.init(p1) --[[ Line: 48 ]]
 		end
 	end
 	
-	function p1.onDescriptionUpdated(Description, IsDescValid) --[[ Line: 107 ]]
+	function p1.onDescriptionUpdated(Description, IsDescValid)
 		-- upvalues: p1 (copy), PublishAssetAnalytics (upval)
 		p1:setState({ description = Description, isDescValid = IsDescValid })
 		
@@ -93,7 +93,7 @@ function PublishMakeupLookPrompt.init(p1) --[[ Line: 48 ]]
 		end
 	end
 	
-	function p1.onWindowStateChanged(p2) --[[ Line: 115 ]]
+	function p1.onWindowStateChanged(p2)
 		-- upvalues: p1 (copy)
 		local IsShown = p2.isShown
 		
@@ -109,19 +109,19 @@ function PublishMakeupLookPrompt.init(p1) --[[ Line: 48 ]]
 		end
 	end
 	
-	function p1.onPromptStateSetToNone() --[[ Line: 129 ]]
+	function p1.onPromptStateSetToNone()
 		-- upvalues: p1 (copy)
 		p1:setState({ purchasePromptReady = true })
 	end
 end
 
-function PublishMakeupLookPrompt.updatePreviewModel(p1) --[[ Line: 134 ]]
+function PublishMakeupLookPrompt.updatePreviewModel(p1)
 	-- upvalues: MakeupPreviewUtilsModule (copy)
 	local AccessoryInstance = p1.props.accessoryInstance
 	
 	if AccessoryInstance and AccessoryInstance:IsA("Folder") then
 		local MakeupEntries = p1.props.makeupEntries
-		task.spawn(function() --[[ Line: 142 ]]
+		task.spawn(function()
 			-- upvalues: MakeupPreviewUtilsModule (upval), AccessoryInstance (copy), MakeupEntries (copy), p1 (copy)
 			local CompositeMakeupFolderResult = MakeupPreviewUtilsModule.compositeMakeupFolder(AccessoryInstance)
 			local FolderAccessories = MakeupPreviewUtilsModule.getFolderAccessories(AccessoryInstance, MakeupEntries)
@@ -131,7 +131,7 @@ function PublishMakeupLookPrompt.updatePreviewModel(p1) --[[ Line: 134 ]]
 			
 			if MakeupHeadPreview and p1.isMounted then
 				local PreviewModel = p1.state.previewModel
-				p1:setState({ previewModel = MakeupHeadPreview }, function() --[[ Line: 153 ]]
+				p1:setState({ previewModel = MakeupHeadPreview }, function()
 					-- upvalues: PreviewModel (copy)
 					if PreviewModel then
 						PreviewModel:Destroy()
@@ -144,7 +144,7 @@ function PublishMakeupLookPrompt.updatePreviewModel(p1) --[[ Line: 134 ]]
 	end
 end
 
-function PublishMakeupLookPrompt.didMount(p1) --[[ Line: 162 ]]
+function PublishMakeupLookPrompt.didMount(p1)
 	-- upvalues: PurchasePromptModule (copy), MutedErrorFunction (copy), PublishAssetAnalytics (copy)
 	p1.isMounted = true
 	p1:updatePreviewModel()
@@ -162,13 +162,13 @@ function PublishMakeupLookPrompt.didMount(p1) --[[ Line: 162 ]]
 	PublishAssetAnalytics.sendPageLoad(PublishAssetAnalytics.Section.BuyCreationPage)
 end
 
-function PublishMakeupLookPrompt.didUpdate(p1, p2) --[[ Line: 183 ]]
+function PublishMakeupLookPrompt.didUpdate(p1, p2)
 	if p2.accessoryInstance ~= p1.props.accessoryInstance then
 		p1:updatePreviewModel()
 	end
 end
 
-function PublishMakeupLookPrompt.willUnmount(p1) --[[ Line: 189 ]]
+function PublishMakeupLookPrompt.willUnmount(p1)
 	-- upvalues: MutedErrorFunction (copy)
 	p1.isMounted = false
 	
@@ -189,7 +189,7 @@ function PublishMakeupLookPrompt.willUnmount(p1) --[[ Line: 189 ]]
 	end
 end
 
-function PublishMakeupLookPrompt.renderPromptBody(p1) --[[ Line: 209 ]]
+function PublishMakeupLookPrompt.renderPromptBody(p1)
 	-- upvalues: RoactModule (copy), _UDim (copy), ObjectViewportModule (copy), GetFFlagUploadMakeupSupportModule (copy), LabeledTextBoxModule (copy), RobloxTranslatorModule (copy), PublishInfoListModule (copy), MakeupPartGridModule (copy)
 	local PreviewModel = p1.state.previewModel
 	
@@ -234,7 +234,7 @@ function PublishMakeupLookPrompt.renderPromptBody(p1) --[[ Line: 209 ]]
 	})
 end
 
-function PublishMakeupLookPrompt.render(p1) --[[ Line: 256 ]]
+function PublishMakeupLookPrompt.render(p1)
 	-- upvalues: RoactModule (copy), BasePublishPromptModule (copy), GetFFlagUploadMakeupSupportModule (copy), RobloxTranslatorModule (copy)
 	return RoactModule.createElement(BasePublishPromptModule, {
 		delayInputSeconds = 3,
@@ -255,7 +255,7 @@ function PublishMakeupLookPrompt.render(p1) --[[ Line: 256 ]]
 	})
 end
 
-return RoactRoduxModule.connect(function(p1) --[[ Line: 276 | Named "mapStateToProps" ]]
+return RoactRoduxModule.connect(function(p1)
 	return {
 		accessoryInstance = p1.promptRequest.promptInfo.accessoryInstance,
 		guid = p1.promptRequest.promptInfo.guid,
@@ -263,10 +263,10 @@ return RoactRoduxModule.connect(function(p1) --[[ Line: 276 | Named "mapStateToP
 		priceInRobux = p1.promptRequest.promptInfo.priceInRobux,
 		makeupEntries = p1.promptRequest.promptInfo.makeupEntries
 	}
-end, function(Callback) --[[ Line: 286 | Named "mapDispatchToProps" ]]
+end, function(Callback)
 	-- upvalues: SetPromptVisibilityModule (copy)
 	return {
-		SetPromptVisibility = function(p1) --[[ Line: 288 ]]
+		SetPromptVisibility = function(p1)
 			-- upvalues: Callback (copy), SetPromptVisibilityModule (upval)
 			Callback(SetPromptVisibilityModule(p1))
 		end

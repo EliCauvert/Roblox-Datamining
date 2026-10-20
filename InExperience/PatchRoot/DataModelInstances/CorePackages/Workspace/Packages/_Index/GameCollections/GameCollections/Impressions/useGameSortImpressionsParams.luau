@@ -16,26 +16,26 @@ local FFlagLuaAppFixSearchImpressions = require(Parent.SharedFlags).FFlagLuaAppF
 local FFlagLuaAppEnableNxMRoduxApportioning = require(Parent.SharedFlags).FFlagLuaAppEnableNxMRoduxApportioning
 local FFlagLuaAppEnableNxMApportioningExtraLogging = require(Parent.SharedFlags).FFlagLuaAppEnableNxMApportioningExtraLogging
 
-local function _(p1, p2) --[[ Line: 29 | Named "getGameSetTypeId" ]]
+local function _(p1, p2)
 	return if p1 == nil then nil elseif p2 then p1.topicId else p1.gameSetTypeId
 end
 
-local _ = function(p1, p2) --[[ Line: 41 | Named "getGameSetTargetId" ]]
+local _ = function(p1, p2)
 	return if p2 or p1 == nil then nil else p1.gameSetTargetId
 end
 
-local _ = function(p1, p2) --[[ Line: 51 | Named "getAppliedFilters" ]]
+local _ = function(p1, p2)
 	return if p2 or not p1 then nil else p1.appliedFilters
 end
 
-return function(p1, p2, SortIndexOnPage, PageContext, p3, p4, p5, GameSortId, p6, p7, p8, p9, p10) --[[ Line: 67 | Named "useGameSortImpressionsParams" ]]
+return function(p1, p2, SortIndexOnPage, PageContext, p3, p4, p5, GameSortId, p6, p7, p8, p9, p10)
 	-- upvalues: UseRoactServiceFunction (copy), AppEventIngestService (copy), RoactAnalytics (copy), AppPage (copy), GameSortLoadSource (copy), ReactModule (copy), DiscoveryEventErrorLogger (copy), FFlagLuaAppEnableNxMApportioningExtraLogging (copy), GameCollectionItemTypes (copy), ApportioningDiagnosticTelemetry (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), ReportWarningFunction (copy), LoggingProtocolModule (copy), SendGameImpressionsModule (copy), FFlagLuaAppFixSearchImpressions (copy), Signal (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(AppEventIngestService)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(RoactAnalytics)
 	local SortLoadSource = if PageContext == AppPage.Home and p1 and p1.topicId then GameSortLoadSource.getSortLoadSource(p1.topicId) else nil
 	local SortSubId = if p1 then p1.sortSubId else nil
 	local AnalyticsData = if p1 then p1.analyticsData else nil
-	local UseResult = ReactModule.useCallback(function(List) --[[ Line: 95 ]]
+	local UseResult = ReactModule.useCallback(function(List)
 		-- upvalues: p9 (copy), DiscoveryEventErrorLogger (upval), PageContext (copy), GameSortId (copy), FFlagLuaAppEnableNxMApportioningExtraLogging (upval), GameCollectionItemTypes (upval), ApportioningDiagnosticTelemetry (upval), SortIndexOnPage (copy), p1 (copy), FFlagLuaAppEnableNxMRoduxApportioning (upval), AppPage (upval), p10 (copy), ReportWarningFunction (upval), LoggingProtocolModule (upval), SendGameImpressionsModule (upval), UseRoactServiceResult (copy), UseRoactServiceResult1 (copy), p7 (copy), p8 (copy), p3 (copy), p4 (copy), p2 (copy), p5 (copy), SortLoadSource (copy), SortSubId (copy), AnalyticsData (copy)
 		if p9 == nil or #p9 == 0 then
 			DiscoveryEventErrorLogger.reportError("useGameSortImpressionsParams_MissingEntries", "useGameSortImpressionsParams: entries is nil or empty for game sort impressions", { pageContext = PageContext, gameSortId = GameSortId })
@@ -108,15 +108,15 @@ return function(p1, p2, SortIndexOnPage, PageContext, p3, p4, p5, GameSortId, p6
 		UseRefResult.current = Signal.new()
 	end
 	local Current = UseRefResult.current
-	ReactModule.useEffect(function() --[[ Line: 231 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Current (copy), p6 (copy)
 		Current:fire()
-		local Connection = if p6 then p6:connect(function() --[[ Line: 240 ]]
+		local Connection = if p6 then p6:connect(function()
 			-- upvalues: Current (upval)
 			Current:fire()
 		end) else nil
 		
-		return function() --[[ Line: 245 ]]
+		return function()
 			-- upvalues: Connection (ref)
 			if Connection then
 				Connection:disconnect()
@@ -124,7 +124,7 @@ return function(p1, p2, SortIndexOnPage, PageContext, p3, p4, p5, GameSortId, p6
 		end
 	end, { p6, Current })
 	
-	return UseResult, Current, (ReactModule.useCallback(function() --[[ Line: 252 ]]
+	return UseResult, Current, (ReactModule.useCallback(function()
 		-- upvalues: Current (copy)
 		Current:fire()
 	end, { Current }))

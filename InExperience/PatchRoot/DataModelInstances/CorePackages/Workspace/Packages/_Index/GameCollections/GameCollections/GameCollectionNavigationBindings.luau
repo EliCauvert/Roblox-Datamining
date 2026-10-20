@@ -8,9 +8,9 @@ local config = {
 	[Enum.KeyCode.ButtonA] = FocusNavigationEventNameEnum.HoldToPlay
 }
 
-local function useControllerBarFocusNavigationBindings(OnSeeAll, Handler) --[[ Line: 23 ]]
+local function useControllerBarFocusNavigationBindings(OnSeeAll, Handler)
 	-- upvalues: ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), ReactFocusNavigationModule (copy), config (copy)
-	return ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function() --[[ Line: 24 ]]
+	return ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function()
 		-- upvalues: FocusNavigationEventNameEnum (upval), OnSeeAll (copy), InputHandlersModule (upval), Handler (copy)
 		return {
 			[FocusNavigationEventNameEnum.SeeAll] = if OnSeeAll then { handler = InputHandlersModule.onRelease(OnSeeAll) } else nil,
@@ -21,7 +21,7 @@ end
 
 return {
 	useControllerBarFocusNavigationBindings = useControllerBarFocusNavigationBindings,
-	OnSeeAllControllerBarNavigateWrapper = function(p1) --[[ Line: 45 ]]
+	OnSeeAllControllerBarNavigateWrapper = function(p1)
 		-- upvalues: useControllerBarFocusNavigationBindings (copy), ReactModule (copy)
 		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,

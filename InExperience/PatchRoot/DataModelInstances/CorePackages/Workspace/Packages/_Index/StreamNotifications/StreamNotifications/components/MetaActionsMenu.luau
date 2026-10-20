@@ -21,7 +21,7 @@ local IconSize = UIBloxModule.App.ImageSet.Enum.IconSize
 local BaseMenu = UIBloxModule.App.Menu.BaseMenu
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 
-return function(p1) --[[ Line: 35 ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), EnumStreamNotificationsDisplayStateModule (copy), MarshalStreamNotificationDataFunction (copy), ConstantsModule (copy), NotificationCardProvider (copy), NotificationCard (copy), Constants (copy), ImageSetLabel (copy), IconButton (copy), IconSize (copy), BaseMenu (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigableSurfaceIdentifierEnum (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy)
 	local UseStyleResult = UseStyleFunction()
 	local ActiveNotification = p1.activeNotification
@@ -41,7 +41,7 @@ return function(p1) --[[ Line: 35 ]]
 			table.insert(ButtonProps, {
 				icon = ConstantsModule.MetaActions.ActionIcons[value.actionIcon] or ConstantsModule.MetaActions.ActionIcons.default,
 				text = value.label.text,
-				onActivated = function() --[[ Line: 57 ]]
+				onActivated = function()
 					-- upvalues: HandleActionsFunction (copy), value (copy), ActiveNotification (copy)
 					if HandleActionsFunction then
 						HandleActionsFunction(value, ActiveNotification)
@@ -56,7 +56,7 @@ return function(p1) --[[ Line: 35 ]]
 		frameProps = { ref = UseRefResult },
 		customEventHandlers = {
 			[FocusNavigationEventNameEnum.NavigateBack] = {
-				handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 166 ]]
+				handler = InputHandlersModule.onRelease(function(p2)
 					-- upvalues: CloseNotificationDisplayFunction (copy)
 					CloseNotificationDisplayFunction()
 					p2:cancel()

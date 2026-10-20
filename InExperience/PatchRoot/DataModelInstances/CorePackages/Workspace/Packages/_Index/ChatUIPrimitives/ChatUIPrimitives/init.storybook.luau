@@ -8,9 +8,9 @@ return {
 	roact = ReactModule,
 	reactRoblox = require(Parent.ReactRoblox),
 	storyRoots = { ChatUIPrimitives },
-	mapStory = function(p1) --[[ Line: 17 ]]
+	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), FoundationProvider (copy)
-		return function(p2) --[[ Line: 18 ]]
+		return function(p2)
 			-- upvalues: ReactModule (upval), FoundationProvider (upval), p1 (copy)
 			return ReactModule.createElement(FoundationProvider, { colorMode = p2 and p2.theme, device = p2 and p2.platform }, ReactModule.createElement(p1, p2))
 		end

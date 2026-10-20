@@ -6,7 +6,7 @@ local config = {
 	[14] = UnifiedEventLogEnumsModule.MarketplaceTimedOption.DAYS_14
 }
 
-function getTimedOptionForItemData(p1) --[[ Line: 10 ]]
+function getTimedOptionForItemData(p1)
 	-- upvalues: config (copy), UnifiedEventLogEnumsModule (copy)
 	if not p1 or not p1.timedOptions then
 		return UnifiedEventLogEnumsModule.MarketplaceTimedOption.PERMANENT

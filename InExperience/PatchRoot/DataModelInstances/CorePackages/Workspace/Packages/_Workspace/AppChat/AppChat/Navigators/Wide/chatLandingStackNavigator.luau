@@ -8,7 +8,7 @@ local CreateOverlayTopBarStackNavigatorWithFocusModule = require(AppChat.Navigat
 local FFlagEnablePartyQuickStartButton = require(Parent.SharedFlags).FFlagEnablePartyQuickStartButton
 local FFlagAppChatDisableAbsorbInputSelectableModule = require(AppChat.Flags.FFlagAppChatDisableAbsorbInputSelectable)
 
-local function _(p1, p2) --[[ Line: 23 | Named "wrapScreenInOverlayNavigator" ]]
+local function _(p1, p2)
 	-- upvalues: CreateOverlayTopBarStackNavigatorWithFocusModule (copy)
 	return CreateOverlayTopBarStackNavigatorWithFocusModule({ { [p1] = p2 } })
 end
@@ -24,7 +24,7 @@ local List = {
 	{
 		[EnumScreensModule.ChatLanding] = {
 			screen = require(AppChat.Components.ChatLanding.ChatLandingScreenWithSwitchNavigator),
-			navigationOptions = if require(AppChat.Flags.getFFlagAppChatRemoveDynamicRequires)() then function() --[[ Line: 45 ]]
+			navigationOptions = if require(AppChat.Flags.getFFlagAppChatRemoveDynamicRequires)() then function()
 				return { backButtonEnabled = false, tabBarVisible = true }
 			end else { backButtonEnabled = false, tabBarVisible = true }
 		}

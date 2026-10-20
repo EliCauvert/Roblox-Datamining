@@ -97,7 +97,7 @@ local config = {
 }
 local ConversationThumbnail = RoactModule.PureComponent:extend("ConversationThumbnail")
 
-function ConversationThumbnail.render(p1) --[[ Line: 113 ]]
+function ConversationThumbnail.render(p1)
 	-- upvalues: config (copy), Constants (copy), InviteAvatarThumbnailSize (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), ConstantsModule (copy), RoactModule (copy), GRAY3 (copy)
 	local Size = p1.props.size
 	local LayoutOrder = p1.props.layoutOrder

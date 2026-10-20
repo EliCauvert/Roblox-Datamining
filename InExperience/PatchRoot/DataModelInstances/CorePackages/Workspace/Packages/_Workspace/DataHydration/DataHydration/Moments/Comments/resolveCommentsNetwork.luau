@@ -14,7 +14,7 @@ if FFlagMomentsCommentsUseMockNetwork then
 		postAuthorUserId = if MomentsCommentsMockPostedViewer and LocalPlayer ~= nil and LocalPlayer.UserId > 0 then tostring(LocalPlayer.UserId) else nil
 	})
 end
-return function(p1) --[[ Line: 32 | Named "resolveCommentsNetwork" ]]
+return function(p1)
 	-- upvalues: FFlagMomentsCommentsUseMockNetwork (copy), v1 (ref)
 	return if FFlagMomentsCommentsUseMockNetwork then v1 elseif p1 == nil then nil else p1.network
 end

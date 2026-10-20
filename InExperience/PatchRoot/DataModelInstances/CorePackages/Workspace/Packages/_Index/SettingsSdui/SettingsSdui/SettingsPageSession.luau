@@ -2,14 +2,14 @@
 local Guid = ""
 
 return {
-	Get = function(_) --[[ Line: 7 ]]
+	Get = function(_)
 		-- upvalues: Guid (ref), HttpService (copy)
 		if Guid == "" then
 			Guid = HttpService:GenerateGUID(false)
 		end
 		return Guid
 	end,
-	Refresh = function(_) --[[ Line: 14 ]]
+	Refresh = function(_)
 		-- upvalues: Guid (ref), HttpService (copy)
 		Guid = HttpService:GenerateGUID(false)
 		

@@ -3,7 +3,7 @@ local GetHumanoidDescriptionUpdatesV2A = game:DefineFastFlag("GetHumanoidDescrip
 local GetFFlagGetHumanoidDescriptionUpdatesV2EFunction = require(game:GetService("CorePackages").Workspace.Packages.SharedFlags).GetFFlagGetHumanoidDescriptionUpdatesV2E
 local Players = game:GetService("Players")
 
-local function v3(List) --[[ Line: 67 ]]
+local function v3(List)
 	local List1 = {}
 	
 	for _, value in ipairs(List) do
@@ -18,7 +18,7 @@ local function v3(List) --[[ Line: 67 ]]
 	return List1
 end
 
-local function v4(p1, List) --[[ Line: 81 ]]
+local function v4(p1, List)
 	local List1 = {}
 	
 	for _, value in ipairs(List) do
@@ -33,7 +33,7 @@ local function v4(p1, List) --[[ Line: 81 ]]
 	return List1
 end
 
-local function v5(p2) --[[ Line: 95 ]]
+local function v5(p2)
 	local List = {}
 	
 	for _, playingAnimationTrack in p2:GetPlayingAnimationTracks() do
@@ -48,7 +48,7 @@ local function v5(p2) --[[ Line: 95 ]]
 end
 
 return {
-	getHumanoidDescription = function(UserId) --[[ Line: 110 ]]
+	getHumanoidDescription = function(UserId)
 		-- upvalues: Players (copy), GetFFlagGetHumanoidDescriptionUpdatesModule (copy), v3 (copy), GetHumanoidDescriptionUpdatesV2A (copy), v4 (copy), GetFFlagGetHumanoidDescriptionUpdatesV2EFunction (copy), v5 (copy)
 		local Player = Players:GetPlayerByUserId(UserId)
 		local config = {
@@ -109,7 +109,7 @@ return {
 		
 		if GetFFlagGetHumanoidDescriptionUpdatesModule() then
 			local Success
-			Success, Result = pcall(function() --[[ Line: 171 ]]
+			Success, Result = pcall(function()
 				-- upvalues: Humanoid (copy)
 				return (Humanoid:GetAppliedDescription())
 			end)
@@ -126,7 +126,7 @@ return {
 		local Count = 0
 		
 		if GetFFlagGetHumanoidDescriptionUpdatesModule() then
-			local function v19(Key) --[[ Line: 188 ]]
+			local function v19(Key)
 				-- upvalues: Result (ref), config (copy)
 				if typeof(Result[Key]) == "Color3" then
 					config[Key] = { Result[Key].R, Result[Key].G, Result[Key].B }
@@ -188,7 +188,7 @@ return {
 			end
 			config.FieldErrorCount = Count
 		else
-			pcall(function() --[[ Line: 255 ]]
+			pcall(function()
 				-- upvalues: config (copy), Result (ref)
 				for i, _ in pairs(config) do
 					if typeof(Result[i]) == "Color3" then

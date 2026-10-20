@@ -22,11 +22,11 @@ local FFlagLuaAppUsePrevalidatedVideoGamePlayability = require(Parent.SharedFlag
 local FFlagLuaAppGameTileSelectionVideoPlayback = require(Parent.SharedFlags).FFlagLuaAppGameTileSelectionVideoPlayback
 local FFlagLuaAppOneByTwoHoverIdleAutoplay = require(Parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
 
-return function(p1) --[[ Line: 56 | Named "GameVideoPlaybackDetector" ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UseSelectorFunction (copy), FetchGamePlayabilityAndProductInfo (copy), UseIsVideoEligibleModule (copy), FFlagLuaAppUsePrevalidatedVideoGamePlayability (copy), ReactModule (copy), UseCanDevicePlayVideoPreviewFunction (copy), TileVideoBlockingConfigModule (copy), RetrievalStatus (copy), VideoEndReason (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), UsePreferredInputFunction (copy), GetPlaybackDetectionMethodFunction (copy), VideoPlaybackDetector (copy), VideoPlaybackDetectionMethod (copy), FFlagLuaAppEdpMediaGalleryVideoPreview (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 60 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: FetchGamePlayabilityAndProductInfo (upval), p1 (copy)
 		return FetchGamePlayabilityAndProductInfo.GetFetchingStatus(p2, p1.universeId)
 	end)
@@ -51,13 +51,13 @@ return function(p1) --[[ Line: 56 | Named "GameVideoPlaybackDetector" ]]
 		videoDwellTimeInSec = p1.videoDwellTimeInSec,
 		videoVisiblePercent = p1.videoVisiblePercent,
 		isVideoEligible = UseIsVideoEligibleModuleResult and UseStateResult,
-		onVideoIneligible = ReactModule.useCallback(function(p2) --[[ Line: 76 ]]
+		onVideoIneligible = ReactModule.useCallback(function(p2)
 			-- upvalues: p1 (copy), UseSelectorResult (copy), RetrievalStatus (upval), VideoEndReason (upval)
 			if p1.videoAnalytics and UseSelectorResult == RetrievalStatus.Done then
 				p1.videoAnalytics.reportVideoEnd(p1.itemIndex, VideoEndReason.PlayabilityCheckFailed, p2, -1)
 			end
 		end, { p1.videoAnalytics, UseSelectorResult }),
-		onPlaybackCandidate = ReactModule.useCallback(function() --[[ Line: 83 ]]
+		onPlaybackCandidate = ReactModule.useCallback(function()
 			-- upvalues: UseSelectorResult (copy), RetrievalStatus (upval), FFlagLuaAppUsePrevalidatedVideoGamePlayability (upval), p1 (copy), UseDispatchResult (copy), FetchGamePlayabilityAndProductInfo (upval), UseRoactServiceResult (copy), UseStateResult2 (copy), UseCanDevicePlayVideoPreviewResult (copy)
 			if (UseSelectorResult == RetrievalStatus.NotStarted or UseSelectorResult == RetrievalStatus.Failed) and (not FFlagLuaAppUsePrevalidatedVideoGamePlayability or not p1.hasPrevalidatedVideoGamePlayability) then
 				UseDispatchResult(FetchGamePlayabilityAndProductInfo.Fetch(UseRoactServiceResult, p1.universeId))

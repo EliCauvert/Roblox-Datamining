@@ -24,24 +24,24 @@ local config2 = {
 }
 local config3 = { stiffness = 400, damping = 40, mass = 1 }
 
-return ReactModule.memo(function(p1) --[[ Line: 49 | Named "InGameAssetIPInfringementErrorModal" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), ReactOtterModule (copy), config3 (copy), config2 (copy), config1 (copy), WithLocalizationFunction (copy), ButtonType (copy), InteractiveAlert (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
-	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1, function() --[[ Line: 52 ]]
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1, function()
 		-- upvalues: UseStateResult (copy), p1 (copy)
 		if not UseStateResult then
 			p1.onBack()
 		end
 	end)
-	local UseMemoResult = ReactModule.useMemo(function(): number --[[ Line: 59 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): number
 		-- upvalues: UseStateResult (copy)
 		return if UseStateResult then 0 else 1
 	end, { UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 63 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseMemoResult (copy), config3 (upval)
 		UseAnimatedBindingResult2(ReactOtterModule.spring(UseMemoResult, config3))
 	end, { UseMemoResult })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 67 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, { UseStateResult2 })
@@ -52,7 +52,7 @@ return ReactModule.memo(function(p1) --[[ Line: 49 | Named "InGameAssetIPInfring
 		reportExperience = "Feature.ReportAbuse.Action.IpReportExperience",
 		title = Entry.titleKey,
 		description = Entry.descriptionKey
-	})(function(p2) --[[ Line: 80 ]]
+	})(function(p2)
 		-- upvalues: Entry (copy), p1 (copy), ButtonType (upval), UseResult (copy), ReactModule (upval), UseAnimatedBindingResult (copy), InteractiveAlert (upval)
 		local List = {}
 		
@@ -79,7 +79,7 @@ return ReactModule.memo(function(p1) --[[ Line: 49 | Named "InGameAssetIPInfring
 		return ReactModule.createElement("TextButton", {
 			AutoButtonColor = false,
 			BorderSizePixel = 0,
-			BackgroundTransparency = UseAnimatedBindingResult:map(function(p3: number): number --[[ Line: 113 ]]
+			BackgroundTransparency = UseAnimatedBindingResult:map(function(p3: number): number
 				return p3 + 0.3
 			end),
 			BackgroundColor3 = Color3.fromHex("#000000"),
@@ -95,7 +95,7 @@ return ReactModule.memo(function(p1) --[[ Line: 49 | Named "InGameAssetIPInfring
 				title = p2.title,
 				bodyText = p2.description,
 				anchorPoint = Vector2.new(0.5, 0.5),
-				position = UseAnimatedBindingResult:map(function(Alpha) --[[ Line: 129 ]]
+				position = UseAnimatedBindingResult:map(function(Alpha)
 					return UDim2.new(0.5, 0, 0.5, 0):Lerp(UDim2.new(0.5, 0, -0.5, 0), Alpha)
 				end),
 				buttonStackInfo = { buttons = List }

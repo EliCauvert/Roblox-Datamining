@@ -4,13 +4,13 @@ local PromiseModule = require(InExperienceShop.Parent.Promise)
 local _ = require(InExperienceShop.Types)
 
 return {
-	getPassOwnership = function(p1, p2) --[[ Line: 12 ]]
+	getPassOwnership = function(p1, p2)
 		-- upvalues: PromiseModule (copy), MarketplaceService (copy)
-		return PromiseModule.new(function(Callback1, Callback) --[[ Line: 13 ]]
+		return PromiseModule.new(function(Callback1, Callback)
 			-- upvalues: MarketplaceService (upval), p1 (copy), p2 (copy)
-			task.spawn(function() --[[ Line: 14 ]]
+			task.spawn(function()
 				-- upvalues: MarketplaceService (upval), p1 (upval), p2 (upval), Callback (copy), Callback1 (copy)
-				local Success, Result = pcall(function() --[[ Line: 15 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: MarketplaceService (upval), p1 (upval), p2 (upval)
 					return MarketplaceService:GetPassOwnershipAsync(p1, p2)
 				end)

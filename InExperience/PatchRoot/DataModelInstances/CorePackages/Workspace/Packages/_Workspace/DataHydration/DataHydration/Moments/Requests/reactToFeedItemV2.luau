@@ -5,7 +5,7 @@ local _ = require(Parent.MomentsTypes)
 local _ = require(DataHydration.Moments.MomentsStoreTypes)
 local ConstructApiUrlModule = require(DataHydration.Moments.Util.constructApiUrl)
 
-return function(Body, Network) --[[ Line: 20 | Named "reactToFeedItemV2" ]]
+return function(Body, Network)
 	-- upvalues: ConstructApiUrlModule (copy), HttpClientModule (copy)
 	local ReactToFeedItemV2, ReactToFeedItemV22 = ConstructApiUrlModule("content-captures-api/v2/moments/react-to-feed-item-v2")
 	
@@ -16,7 +16,7 @@ return function(Body, Network) --[[ Line: 20 | Named "reactToFeedItemV2" ]]
 		headers = ReactToFeedItemV22,
 		body = Body,
 		network = Network,
-		decode = function(p1) --[[ Line: 33 ]]
+		decode = function(p1)
 			return p1 or {}
 		end
 	})

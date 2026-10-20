@@ -3,21 +3,21 @@ local DataSourceChangeTypeModule = require(ViewRecycler.Core.Enums.DataSourceCha
 local _ = require(ViewRecycler.Core.Virtualizer.ItemSequence)
 local _ = require(ViewRecycler.Core.Types)
 
-return function(ItemSequence, Predicate) --[[ Line: 24 | Named "createStickyIndexResolver" ]]
+return function(ItemSequence, Predicate)
 	-- upvalues: DataSourceChangeTypeModule (copy)
 	local ItemSequence1 = ItemSequence
 	local Callback = Predicate
 	local v1 = nil
 	local Flag = true
 	
-	local function _(Node, p1) --[[ Line: 33 | Named "applyShift" ]]
+	local function _(Node, p1)
 		if Node ~= nil then
 			Node.index += p1
 			Node.lazy += p1
 		end
 	end
 	
-	local _ = function(Node) --[[ Line: 40 | Named "push" ]]
+	local _ = function(Node)
 		local Lazy = Node.lazy
 		
 		if Lazy ~= 0 then
@@ -37,17 +37,17 @@ return function(ItemSequence, Predicate) --[[ Line: 24 | Named "createStickyInde
 		end
 	end
 	
-	local _ = function(p1) --[[ Line: 49 | Named "height" ]]
+	local _ = function(p1)
 		return if p1 == nil then 0 else p1.height
 	end
 	
-	local _ = function(Node) --[[ Line: 53 | Named "updateHeight" ]]
+	local _ = function(Node)
 		local Left = Node.left
 		local Right = Node.right
 		Node.height = math.max(if Left == nil then 0 else Left.height, if Right == nil then 0 else Right.height) + 1
 	end
 	
-	local _ = function(Left) --[[ Line: 57 | Named "rotateLeft" ]]
+	local _ = function(Left)
 		local Right = Left.right
 		local Lazy = Left.lazy
 		
@@ -95,7 +95,7 @@ return function(ItemSequence, Predicate) --[[ Line: 24 | Named "createStickyInde
 		return Right
 	end
 	
-	local _ = function(Node) --[[ Line: 68 | Named "rotateRight" ]]
+	local _ = function(Node)
 		local Left = Node.left
 		local Lazy = Node.lazy
 		
@@ -143,7 +143,7 @@ return function(ItemSequence, Predicate) --[[ Line: 24 | Named "createStickyInde
 		return Left
 	end
 	
-	local function balance(Left) --[[ Line: 79 ]]
+	local function balance(Left)
 		local Left1 = Left.left
 		local Right = Left.right
 		Left.height = math.max(if Left1 == nil then 0 else Left1.height, if Right == nil then 0 else Right.height) + 1
@@ -385,7 +385,7 @@ return function(ItemSequence, Predicate) --[[ Line: 24 | Named "createStickyInde
 	
 	local _ = nil
 	
-	local function v15(Left, Node, Right) --[[ Line: 101 ]]
+	local function v15(Left, Node, Right)
 		-- upvalues: v15 (ref), balance (copy)
 		local Height = if Left == nil then 0 else Left.height
 		local Height1 = if Right == nil then 0 else Right.height
@@ -445,7 +445,7 @@ return function(ItemSequence, Predicate) --[[ Line: 24 | Named "createStickyInde
 		end
 	end
 	
-	local function split(Node, FromIndex) --[[ Line: 122 ]]
+	local function split(Node, FromIndex)
 		-- upvalues: split (copy), v15 (ref)
 		if Node == nil then
 			return nil, nil
@@ -482,7 +482,7 @@ return function(ItemSequence, Predicate) --[[ Line: 24 | Named "createStickyInde
 		end
 	end
 	
-	local function removeFirst(Left) --[[ Line: 141 ]]
+	local function removeFirst(Left)
 		-- upvalues: removeFirst (copy), balance (copy)
 		local Lazy = Left.lazy
 		
@@ -517,7 +517,7 @@ return function(ItemSequence, Predicate) --[[ Line: 24 | Named "createStickyInde
 		end
 	end
 	
-	local _ = function(Left, Node) --[[ Line: 154 | Named "join" ]]
+	local _ = function(Left, Node)
 		-- upvalues: removeFirst (copy), balance (copy), v15 (ref)
 		if Left == nil then
 			return Node
@@ -561,7 +561,7 @@ return function(ItemSequence, Predicate) --[[ Line: 24 | Named "createStickyInde
 		return v15(Left, Node1, Right2)
 	end
 	
-	local _ = function(Index) --[[ Line: 164 | Named "newNode" ]]
+	local _ = function(Index)
 		return {
 			height = 1,
 			lazy = 0,
@@ -571,7 +571,7 @@ return function(ItemSequence, Predicate) --[[ Line: 24 | Named "createStickyInde
 		}
 	end
 	
-	local function buildBalanced(p1, p2, Count) --[[ Line: 174 ]]
+	local function buildBalanced(p1, p2, Count)
 		-- upvalues: buildBalanced (copy)
 		if Count < p2 then
 			return nil
@@ -594,7 +594,7 @@ return function(ItemSequence, Predicate) --[[ Line: 24 | Named "createStickyInde
 		end
 	end
 	
-	local function rebuild() --[[ Line: 186 ]]
+	local function rebuild()
 		-- upvalues: Callback (ref), ItemSequence1 (ref), v1 (ref), buildBalanced (copy), Flag (ref)
 		local List = {}
 		
@@ -610,7 +610,7 @@ return function(ItemSequence, Predicate) --[[ Line: 24 | Named "createStickyInde
 	end
 	
 	return {
-		setPredicate = function(Value): boolean --[[ Line: 221 ]]
+		setPredicate = function(Value): boolean
 			-- upvalues: Callback (ref), Flag (ref)
 			if Callback == Value then
 				return false
@@ -621,14 +621,14 @@ return function(ItemSequence, Predicate) --[[ Line: 24 | Named "createStickyInde
 				return true
 			end
 		end,
-		setItemSequence = function(Value) --[[ Line: 229 ]]
+		setItemSequence = function(Value)
 			-- upvalues: ItemSequence1 (ref), Flag (ref)
 			if ItemSequence1 ~= Value then
 				ItemSequence1 = Value
 				Flag = true
 			end
 		end,
-		applyDataSourceChange = function(p1) --[[ Line: 235 ]]
+		applyDataSourceChange = function(p1)
 			-- upvalues: Flag (ref), Callback (ref), DataSourceChangeTypeModule (upval), split (copy), v1 (ref), buildBalanced (copy), removeFirst (copy), balance (copy), v15 (ref)
 			if Flag or Callback == nil then return end
 			for _, change in p1.changes do
@@ -1074,7 +1074,7 @@ return function(ItemSequence, Predicate) --[[ Line: 24 | Named "createStickyInde
 				end
 			end
 		end,
-		resolveActive = function(Callback) --[[ Line: 200 ]]
+		resolveActive = function(Callback)
 			-- upvalues: Flag (ref), rebuild (copy), v1 (ref)
 			if Flag then
 				rebuild()

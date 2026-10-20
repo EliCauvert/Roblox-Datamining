@@ -6,14 +6,14 @@ local EventNamesModule = require(Parent.Analytics.EventNames)
 local MenuButtonModule = require(Parent.Components.Common.MenuButton)
 local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
 
-return function(Frame) --[[ Line: 19 ]]
+return function(Frame)
 	-- upvalues: UseAnalyticsModule (copy), UseLocalizationFunction (copy), ReactModule (copy), EventNamesModule (copy), MenuButtonModule (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	
 	return ReactModule.createElement(MenuButtonModule, {
 		buttonHeight = Frame.buttonHeight,
 		LayoutOrder = Frame.LayoutOrder,
-		onActivated = ReactModule.useCallback(function() --[[ Line: 25 ]]
+		onActivated = ReactModule.useCallback(function()
 			-- upvalues: UseAnalyticsModuleResult (copy), EventNamesModule (upval), Frame (copy)
 			UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesShowMoreInGameMenu)
 			Frame.onActivated()

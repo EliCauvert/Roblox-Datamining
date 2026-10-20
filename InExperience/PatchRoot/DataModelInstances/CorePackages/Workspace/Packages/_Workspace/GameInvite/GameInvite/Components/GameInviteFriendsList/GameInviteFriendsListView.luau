@@ -7,7 +7,7 @@ local VerticalUserList = require(Parent.UserList).VerticalUserList.VerticalUserL
 local FriendsMenuShareGameInviteLink = require(Parent.FriendsMenu).FriendsMenuShareGameInviteLink
 local Configs = { disableRowActivation = true }
 
-return function(p1) --[[ Line: 32 | Named "GameInviteFriendsListView" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), FriendsMenuShareGameInviteLink (copy), VerticalUserList (copy), Configs (copy), FFlagGameInviteInExpJoinCtaModule (copy)
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "col",

@@ -4,9 +4,9 @@ local ExperienceService = require(Parent.ExperienceService).ExperienceService
 local GameParams = require(Parent.ExperienceService).GameParams
 local PioneerInfoModule = require(script.Parent.PioneerInfo)
 
-local function _(Number): boolean --[[ Line: 11 | Named "pendingJoinTargetsPlace" ]]
+local function _(Number): boolean
 	-- upvalues: ExperienceService (copy)
-	local Success, Result = pcall(function() --[[ Line: 12 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: ExperienceService (upval)
 		return ExperienceService:GetPendingJoinAttempt()
 	end)
@@ -20,7 +20,7 @@ local function _(Number): boolean --[[ Line: 11 | Named "pendingJoinTargetsPlace
 	end
 end
 
-return function() --[[ Line: 22 | Named "launchPioneerExperience" ]]
+return function()
 	-- upvalues: PioneerInfoModule (copy), Logger (copy), ExperienceService (copy), GameParams (copy)
 	local PioneerRootPlaceId = PioneerInfoModule.getPioneerRootPlaceId()
 	
@@ -29,7 +29,7 @@ return function() --[[ Line: 22 | Named "launchPioneerExperience" ]]
 		
 		return
 	end
-	local Success, Result = pcall(function() --[[ Line: 12 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: ExperienceService (upval)
 		return ExperienceService:GetPendingJoinAttempt()
 	end)

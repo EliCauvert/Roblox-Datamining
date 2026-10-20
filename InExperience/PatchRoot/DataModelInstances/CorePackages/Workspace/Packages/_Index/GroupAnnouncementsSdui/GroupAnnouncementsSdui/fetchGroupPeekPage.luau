@@ -10,7 +10,7 @@ local SduiCapabilities = SduiSharedUtilitiesModule.SduiCapabilities
 local GroupAnnouncementSduiConstantsModule = require(GroupAnnouncementsSdui.GroupAnnouncementSduiConstants)
 local GetGroupPeekPageUrlModule = require(GroupAnnouncementsSdui.getGroupPeekPageUrl)
 
-return function(Group_id, p1) --[[ Line: 17 | Named "fetchGroupPeekPage" ]]
+return function(Group_id, p1)
 	-- upvalues: GetGroupPeekPageUrlModule (copy), GroupAnnouncementSduiConstantsModule (copy), SduiLoadTimer (copy), Parent (copy), SduiCapabilities (copy), GetSduiTemplateStoreFunction (copy), GetSduiApiStoreFunction (copy), SduiResponseType (copy), SduiApiStorePostConfigContentType (copy)
 	local AppPage = GroupAnnouncementSduiConstantsModule.AppPage
 	local ServiceContractsProtoModule = require(Parent.ServiceContractsProto)

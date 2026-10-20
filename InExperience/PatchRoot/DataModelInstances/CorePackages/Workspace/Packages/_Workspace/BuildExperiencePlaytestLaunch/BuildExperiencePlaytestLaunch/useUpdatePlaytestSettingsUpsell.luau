@@ -13,11 +13,11 @@ local SetCentralOverlayFunction = CentralOverlayModule.Actions.SetCentralOverlay
 local CloseCentralOverlayFunction = CentralOverlayModule.Thunks.CloseCentralOverlay
 local DialogSize = require(Parent.Foundation).Enums.DialogSize
 
-return function() --[[ Line: 26 | Named "useUpdatePlaytestSettingsUpsell" ]]
+return function()
 	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), UseAppPolicyFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), DialogSize (copy), CloseCentralOverlayFunction (copy), AppPage (copy), UrlBuilder (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseNavigationResult = UseNavigationFunction()
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p1) --[[ Line: 30 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p1)
 		return p1.getWebViewSupport()
 	end)
 	local FeatureBuildActionSettings = UseLocalizationFunction({
@@ -28,7 +28,7 @@ return function() --[[ Line: 26 | Named "useUpdatePlaytestSettingsUpsell" ]]
 		ok = "CommonUI.Controls.Action.OK"
 	})
 	
-	return (ReactModule.useCallback(function() --[[ Line: 43 ]]
+	return (ReactModule.useCallback(function()
 		-- upvalues: UseDispatchResult (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval), FeatureBuildActionSettings (copy), UseAppPolicyResult (copy), DialogSize (upval), CloseCentralOverlayFunction (upval), UseNavigationResult (copy), AppPage (upval), UrlBuilder (upval)
 		UseDispatchResult(SetCentralOverlayFunction(CentralOverlayType.ConfirmationDialog, {
 			orientButtonsVertically = true,
@@ -39,7 +39,7 @@ return function() --[[ Line: 26 | Named "useUpdatePlaytestSettingsUpsell" ]]
 			cancelButtonText = if UseAppPolicyResult then FeatureBuildActionSettings.cancel else FeatureBuildActionSettings.ok,
 			hideConfirmButton = not UseAppPolicyResult,
 			size = DialogSize.Small,
-			onConfirm = function() --[[ Line: 54 ]]
+			onConfirm = function()
 				-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval), UseNavigationResult (upval), AppPage (upval), UrlBuilder (upval), FeatureBuildActionSettings (upval)
 				UseDispatchResult(CloseCentralOverlayFunction())
 				
@@ -50,7 +50,7 @@ return function() --[[ Line: 26 | Named "useUpdatePlaytestSettingsUpsell" ]]
 					})
 				end
 			end,
-			onCancel = function() --[[ Line: 65 ]]
+			onCancel = function()
 				-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
 				UseDispatchResult(CloseCentralOverlayFunction())
 			end

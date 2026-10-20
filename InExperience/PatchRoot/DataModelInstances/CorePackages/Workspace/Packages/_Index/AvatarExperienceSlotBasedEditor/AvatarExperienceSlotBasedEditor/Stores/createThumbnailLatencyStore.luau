@@ -1,6 +1,6 @@
 ﻿local SignalsModule = require(script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent.Signals)
 
-return function() --[[ Line: 40 | Named "createThumbnailLatencyStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(nil)
 	local Signal1, Signal2_1 = SignalsModule.createSignal(nil)
@@ -11,7 +11,7 @@ return function() --[[ Line: 40 | Named "createThumbnailLatencyStore" ]]
 		getStartTime = Signal,
 		getEndTime = Signal1,
 		getThumbnailMap = Signal3,
-		getAnyLoaded = SignalsModule.createComputed(function(p1): boolean --[[ Line: 45 ]]
+		getAnyLoaded = SignalsModule.createComputed(function(p1): boolean
 			-- upvalues: Signal3 (copy)
 			for _, value in Signal3(p1) do
 				if value then
@@ -20,14 +20,14 @@ return function() --[[ Line: 40 | Named "createThumbnailLatencyStore" ]]
 			end
 			return false
 		end),
-		getIsLoaded = function(Key) --[[ Line: 55 ]]
+		getIsLoaded = function(Key)
 			-- upvalues: t (copy), SignalsModule (upval), Signal3 (copy)
 			local Entry = t[Key]
 			
 			if Entry then
 				return Entry
 			else
-				local Computed = SignalsModule.createComputed(function(p2): boolean --[[ Line: 60 ]]
+				local Computed = SignalsModule.createComputed(function(p2): boolean
 					-- upvalues: Signal3 (upval), Key (copy)
 					return Signal3(p2)[Key] == true
 				end)
@@ -36,13 +36,13 @@ return function() --[[ Line: 40 | Named "createThumbnailLatencyStore" ]]
 				return Computed
 			end
 		end,
-		startTracking = function() --[[ Line: 67 ]]
+		startTracking = function()
 			-- upvalues: Signal2 (copy), Signal2_1 (copy), Signal2_2 (copy)
 			Signal2(os.clock())
 			Signal2_1(nil)
 			Signal2_2({})
 		end,
-		appendThumbnail = function(Key) --[[ Line: 76 ]]
+		appendThumbnail = function(Key)
 			-- upvalues: Signal3 (copy), Signal2_2 (copy)
 			local SignalResult = Signal3(false)
 			
@@ -54,7 +54,7 @@ return function() --[[ Line: 40 | Named "createThumbnailLatencyStore" ]]
 				return
 			end
 		end,
-		setThumbnailLoaded = function(Key) --[[ Line: 86 ]]
+		setThumbnailLoaded = function(Key)
 			-- upvalues: Signal3 (copy), Signal2_2 (copy)
 			local SignalResult = Signal3(false)
 			
@@ -66,7 +66,7 @@ return function() --[[ Line: 40 | Named "createThumbnailLatencyStore" ]]
 				return
 			end
 		end,
-		endTracking = function() --[[ Line: 96 ]]
+		endTracking = function()
 			-- upvalues: Signal2_1 (copy)
 			Signal2_1(os.clock())
 		end

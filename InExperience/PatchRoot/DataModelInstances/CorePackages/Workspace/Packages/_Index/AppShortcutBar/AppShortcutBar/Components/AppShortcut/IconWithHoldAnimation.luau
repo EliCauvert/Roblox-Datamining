@@ -6,9 +6,9 @@ local IsBuilderIconFunction = FoundationModule.Utility.isBuilderIcon
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local Icon = FoundationModule.Icon
 
-local function useAnimationValues(Progress) --[[ Line: 35 ]]
+local function useAnimationValues(Progress)
 	-- upvalues: ReactModule (copy), MotionModule (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 36 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: MotionModule (upval)
 		return {
 			initial = MotionModule.createState({ scale = 1, ringScale = 1 }, { default = MotionModule.transition({ duration = 0.2 }) }),
@@ -16,7 +16,7 @@ local function useAnimationValues(Progress) --[[ Line: 35 ]]
 		}
 	end, {})
 	local UseMotionResult, UseMotionResult2 = MotionModule.useMotion(UseMemoResult.initial)
-	ReactModule.useEffect(function() --[[ Line: 55 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMotionResult2 (copy), Progress (copy), UseMemoResult (copy)
 		UseMotionResult2(if Progress then UseMemoResult.target else UseMemoResult.initial)
 	end, { Progress, UseMotionResult2, UseMemoResult })
@@ -24,11 +24,11 @@ local function useAnimationValues(Progress) --[[ Line: 35 ]]
 	return UseMotionResult
 end
 
-local function CircularProgress(p1) --[[ Line: 62 ]]
+local function CircularProgress(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Progress = p1.progress
-	local UseMemoResult = ReactModule.useMemo(function(): NumberSequence --[[ Line: 67 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): NumberSequence
 		-- upvalues: UseTokensResult (copy)
 		return NumberSequence.new({
 			NumberSequenceKeypoint.new(0, UseTokensResult.Color.Content.Emphasis.Transparency),
@@ -37,7 +37,7 @@ local function CircularProgress(p1) --[[ Line: 62 ]]
 			NumberSequenceKeypoint.new(1, 0.5)
 		})
 	end, { UseTokensResult })
-	local UseMemoResult1 = ReactModule.useMemo(function(): ColorSequence --[[ Line: 76 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function(): ColorSequence
 		-- upvalues: UseTokensResult (copy)
 		return ColorSequence.new({
 			ColorSequenceKeypoint.new(0, UseTokensResult.Color.Content.Emphasis.Color3),
@@ -61,9 +61,9 @@ local function CircularProgress(p1) --[[ Line: 62 ]]
 				Gradient = ReactModule.createElement("UIGradient", {
 					Transparency = UseMemoResult,
 					Color = UseMemoResult1,
-					Rotation = ReactModule.useMemo(function() --[[ Line: 85 ]]
+					Rotation = ReactModule.useMemo(function()
 						-- upvalues: Progress (copy)
-						return if Progress then Progress:map(function(p2: number): number --[[ Line: 87 ]]
+						return if Progress then Progress:map(function(p2: number): number
 							return (math.clamp(p2 * 360, 180, 360))
 						end) else 180
 					end, { Progress })
@@ -85,9 +85,9 @@ local function CircularProgress(p1) --[[ Line: 62 ]]
 				Gradient = ReactModule.createElement("UIGradient", {
 					Transparency = UseMemoResult,
 					Color = UseMemoResult1,
-					Rotation = ReactModule.useMemo(function() --[[ Line: 93 ]]
+					Rotation = ReactModule.useMemo(function()
 						-- upvalues: Progress (copy)
-						return if Progress then Progress:map(function(p2: number): number --[[ Line: 95 ]]
+						return if Progress then Progress:map(function(p2: number): number
 							return (math.clamp(p2 * 360, 0, 180))
 						end) else 0
 					end, { Progress })
@@ -97,7 +97,7 @@ local function CircularProgress(p1) --[[ Line: 62 ]]
 	})
 end
 
-function IconWithHoldAnimation(p1) --[[ Line: 144 ]]
+function IconWithHoldAnimation(p1)
 	-- upvalues: useAnimationValues (copy), ReactModule (copy), UseTokensFunction (copy), CircularProgress (copy), IsBuilderIconFunction (copy), Icon (copy)
 	local LayoutOrder = p1.layoutOrder
 	local Size = p1.size
@@ -108,7 +108,7 @@ function IconWithHoldAnimation(p1) --[[ Line: 144 ]]
 	local IconSize = p1.iconSize
 	local UseAnimationValuesResult = useAnimationValues(Progress)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(IconSize)
-	ReactModule.useEffect(function() --[[ Line: 156 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseBindingResult2 (copy), IconSize (copy)
 		UseBindingResult2(IconSize)
 	end, { IconSize })

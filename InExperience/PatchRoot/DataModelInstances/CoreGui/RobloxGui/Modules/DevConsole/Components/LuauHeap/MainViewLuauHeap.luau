@@ -20,7 +20,7 @@ local MainRowPadding = ConstantsModule.GeneralFormatting.MainRowPadding
 local MainViewLuauHeap = RoactModule.PureComponent:extend("MainViewLuauHeap")
 local _ = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 
-local function filterNode(Tbl, Text: string) --[[ Line: 34 ]]
+local function filterNode(Tbl, Text: string)
 	-- upvalues: filterNode (copy)
 	if Text == nil then
 		return false
@@ -70,7 +70,7 @@ local function filterNode(Tbl, Text: string) --[[ Line: 34 ]]
 	return if HasFoundAt then Copy else nil
 end
 
-local function filterHeapReportsStatEntryList(MemcatBreakdown, Text: string) --[[ Line: 93 ]]
+local function filterHeapReportsStatEntryList(MemcatBreakdown, Text: string)
 	if Text == nil then
 		return MemcatBreakdown
 	end
@@ -84,7 +84,7 @@ local function filterHeapReportsStatEntryList(MemcatBreakdown, Text: string) --[
 	return List
 end
 
-local function filterHeapReportGraph(Tbl, Text: string, p1: number) --[[ Line: 112 ]]
+local function filterHeapReportGraph(Tbl, Text: string, p1: number)
 	-- upvalues: filterHeapReportGraph (copy)
 	if Text == nil then
 		return Tbl
@@ -110,7 +110,7 @@ local function filterHeapReportGraph(Tbl, Text: string, p1: number) --[[ Line: 1
 	end
 end
 
-local function filterUniqueRefEntryPath(List, Text: string) --[[ Line: 143 ]]
+local function filterUniqueRefEntryPath(List, Text: string)
 	if Text == nil then
 		return List
 	end
@@ -124,7 +124,7 @@ local function filterUniqueRefEntryPath(List, Text: string) --[[ Line: 143 ]]
 	return if #List1 > 0 then List1 else nil
 end
 
-local function filterUniqueRefEntryPathList(Paths, p2) --[[ Line: 162 ]]
+local function filterUniqueRefEntryPathList(Paths, p2)
 	-- upvalues: filterUniqueRefEntryPath (copy)
 	if p2 == nil then
 		return Paths
@@ -141,7 +141,7 @@ local function filterUniqueRefEntryPathList(Paths, p2) --[[ Line: 162 ]]
 	return List
 end
 
-local function filterUniqueRefEntry(Tbl, Text: string) --[[ Line: 182 ]]
+local function filterUniqueRefEntry(Tbl, Text: string)
 	-- upvalues: filterUniqueRefEntryPathList (copy)
 	if Text == nil then
 		return Tbl
@@ -157,7 +157,7 @@ local function filterUniqueRefEntry(Tbl, Text: string) --[[ Line: 182 ]]
 	return if HasFoundAt then Copy else nil
 end
 
-local function filterUniqueRefReport(Tbl, p3) --[[ Line: 211 ]]
+local function filterUniqueRefReport(Tbl, p3)
 	-- upvalues: filterUniqueRefEntry (copy)
 	if p3 == nil or Tbl == nil then
 		return Tbl
@@ -177,7 +177,7 @@ local function filterUniqueRefReport(Tbl, p3) --[[ Line: 211 ]]
 	return Copy
 end
 
-local function filterSnapshots(List, p4, _) --[[ Line: 230 ]]
+local function filterSnapshots(List, p4, _)
 	-- upvalues: filterHeapReportsStatEntryList (copy), filterHeapReportGraph (copy), filterUniqueRefReport (copy)
 	if p4 == nil then
 		return List
@@ -199,42 +199,42 @@ local function filterSnapshots(List, p4, _) --[[ Line: 230 ]]
 	return List1
 end
 
-function MainViewLuauHeap.getState(p5, p6) --[[ Line: 258 ]]
+function MainViewLuauHeap.getState(p5, p6)
 	return if p6 then p5.props.client else p5.props.server
 end
 
-function MainViewLuauHeap.getActiveState(p5) --[[ Line: 262 ]]
+function MainViewLuauHeap.getActiveState(p5)
 	return p5.props.isClientView, p5:getState(p5.props.isClientView)
 end
 
-function MainViewLuauHeap.init(p5) --[[ Line: 266 ]]
+function MainViewLuauHeap.init(p5)
 	-- upvalues: MemoizeFunction (copy), filterSnapshots (copy), HeapProfilerService (copy), Players (copy), HttpService (copy), RoactModule (copy)
-	function p5.onUtilTabHeightChanged(UtilTabHeight) --[[ Line: 267 ]]
+	function p5.onUtilTabHeightChanged(UtilTabHeight)
 		-- upvalues: p5 (copy)
 		p5:setState({ utilTabHeight = UtilTabHeight })
 	end
 	
 	p5.version = 0
 	
-	function p5.dispatchSetLuauHeapState(p6, p7) --[[ Line: 275 ]]
+	function p5.dispatchSetLuauHeapState(p6, p7)
 		-- upvalues: p5 (copy)
 		p5.version += 1
 		p5.props.dispatchSetLuauHeapState(p6, p7)
 	end
 	
-	function p5.onClientButton() --[[ Line: 279 ]]
+	function p5.onClientButton()
 		-- upvalues: p5 (copy)
 		p5.props.dispatchSetLuauHeapProfileTarget(true)
 	end
 	
-	function p5.onServerButton() --[[ Line: 283 ]]
+	function p5.onServerButton()
 		-- upvalues: p5 (copy)
 		p5.props.dispatchSetLuauHeapProfileTarget(false)
 	end
 	
 	p5.filterSnapshots = MemoizeFunction(filterSnapshots)
 	
-	function p5.onCreateSnapshot() --[[ Line: 289 ]]
+	function p5.onCreateSnapshot()
 		-- upvalues: p5 (copy), HeapProfilerService (upval), Players (upval), HttpService (upval)
 		local ActiveState, ActiveState2 = p5:getActiveState()
 		local Result = nil
@@ -260,7 +260,7 @@ function MainViewLuauHeap.init(p5) --[[ Line: 266 ]]
 		end
 	end
 	
-	function p5.onClearSnapshots() --[[ Line: 317 ]]
+	function p5.onClearSnapshots()
 		-- upvalues: p5 (copy)
 		local ActiveState, ActiveState2 = p5:getActiveState()
 		local Copy = table.clone(ActiveState2)
@@ -272,7 +272,7 @@ function MainViewLuauHeap.init(p5) --[[ Line: 266 ]]
 	p5.utilRef = RoactModule.createRef()
 	p5.state = { searchTerm = nil, utilTabHeight = 0 }
 	
-	function p5.onSearchTermChanged(SearchTerm) --[[ Line: 335 ]]
+	function p5.onSearchTermChanged(SearchTerm)
 		-- upvalues: p5 (copy), RoactModule (upval)
 		if SearchTerm == nil or SearchTerm == "" then
 			p5:setState({ searchTerm = RoactModule.None })
@@ -284,13 +284,13 @@ function MainViewLuauHeap.init(p5) --[[ Line: 266 ]]
 	end
 end
 
-function MainViewLuauHeap.didMount(p5) --[[ Line: 348 ]]
+function MainViewLuauHeap.didMount(p5)
 	p5:setState({ utilTabHeight = p5.utilRef.current.Size.Y.Offset })
 end
 
-function MainViewLuauHeap:willUnmount() --[[ Line: 355 ]] end
+function MainViewLuauHeap:willUnmount() end
 
-function MainViewLuauHeap.didUpdate(p5) --[[ Line: 358 ]]
+function MainViewLuauHeap.didUpdate(p5)
 	local Size = p5.utilRef.current.Size
 	
 	if Size.Y.Offset ~= p5.state.utilTabHeight then
@@ -298,7 +298,7 @@ function MainViewLuauHeap.didUpdate(p5) --[[ Line: 358 ]]
 	end
 end
 
-function MainViewLuauHeap.render(p5) --[[ Line: 367 ]]
+function MainViewLuauHeap.render(p5)
 	-- upvalues: RoactModule (copy), ConstantsModule (copy), MainRowPadding (copy), UtilAndTabModule (copy), BoxButtonModule (copy), LuauHeapViewModule (copy)
 	local Size = p5.props.size
 	local FormFactor = p5.props.formFactor
@@ -347,20 +347,20 @@ function MainViewLuauHeap.render(p5) --[[ Line: 367 ]]
 	})
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p5, _) --[[ Line: 423 | Named "mapStateToProps" ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p5, _)
 	return {
 		isClientView = p5.LuauHeap.isClientView,
 		client = p5.LuauHeap.client,
 		server = p5.LuauHeap.server
 	}
-end, function(Callback) --[[ Line: 432 | Named "mapDispatchToProps" ]]
+end, function(Callback)
 	-- upvalues: SetLuauHeapStateModule (copy), SetLuauHeapProfileTargetModule (copy)
 	return {
-		dispatchSetLuauHeapState = function(p5, p6) --[[ Line: 434 ]]
+		dispatchSetLuauHeapState = function(p5, p6)
 			-- upvalues: Callback (copy), SetLuauHeapStateModule (upval)
 			Callback(SetLuauHeapStateModule(p5, p6))
 		end,
-		dispatchSetLuauHeapProfileTarget = function(p5) --[[ Line: 437 ]]
+		dispatchSetLuauHeapProfileTarget = function(p5)
 			-- upvalues: Callback (copy), SetLuauHeapProfileTargetModule (upval)
 			Callback(SetLuauHeapProfileTargetModule(p5))
 		end

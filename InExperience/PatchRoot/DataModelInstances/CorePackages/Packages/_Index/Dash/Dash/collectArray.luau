@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.Types)
 local InsertFunction = table.insert
 
-return function(List, Callback) --[[ Line: 18 | Named "collectArray" ]]
+return function(List, Callback)
 	-- upvalues: InsertFunction (copy)
 	local t = {}
 	

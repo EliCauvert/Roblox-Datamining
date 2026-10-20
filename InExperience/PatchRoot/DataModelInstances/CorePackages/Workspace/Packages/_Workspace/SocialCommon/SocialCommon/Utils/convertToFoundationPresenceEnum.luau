@@ -12,7 +12,7 @@ local config = {
 	InStudio = FoundationModule.Enums.UserPresence.Active
 }
 
-return function(p1) --[[ Line: 18 ]]
+return function(p1)
 	-- upvalues: config (copy), FoundationModule (copy)
 	return config[p1] or FoundationModule.Enums.UserPresence.None
 end

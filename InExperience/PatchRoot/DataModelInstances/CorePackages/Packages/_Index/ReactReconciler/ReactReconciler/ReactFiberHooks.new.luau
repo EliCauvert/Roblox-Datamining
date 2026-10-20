@@ -1,4 +1,4 @@
-﻿local function _(Text) --[[ Line: 12 | Named "unimplemented" ]]
+﻿local function _(Text)
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. Text)
@@ -57,7 +57,7 @@ local WarnIfNotCurrentlyActingEffectsInDEVFunction = ReactFiberWorkLoopNewModule
 local InvariantFunction = require(Parent.Shared).invariant
 local GetComponentNameFunction = require(Parent.Shared).getComponentName
 
-local _ = function(p1: number, p2: number): boolean --[[ Line: 120 | Named "is" ]]
+local _ = function(p1: number, p2: number): boolean
 	return p1 == p2 and (p1 ~= 0 or 1 / p1 == 1 / p2) or p1 ~= p1 and p2 ~= p2
 end
 
@@ -93,7 +93,7 @@ local Current3 = nil
 local Current4 = nil
 local Current5 = nil
 
-local _ = function(List): number --[[ Line: 281 | Named "getHighestIndex" ]]
+local _ = function(List): number
 	local v5 = 0
 	
 	for i, _ in List do
@@ -104,7 +104,7 @@ local _ = function(List): number --[[ Line: 281 | Named "getHighestIndex" ]]
 	return v5
 end
 
-local _ = function(List): boolean --[[ Line: 291 | Named "isArrayOrSparseArray" ]]
+local _ = function(List): boolean
 	if type(List) ~= "table" then
 		return false
 	end
@@ -116,7 +116,7 @@ local _ = function(List): boolean --[[ Line: 291 | Named "isArrayOrSparseArray" 
 	return true
 end
 
-local _ = function() --[[ Line: 303 | Named "mountHookTypesDev" ]]
+local _ = function()
 	-- upvalues: DEV (copy), v3 (ref), List (ref)
 	if DEV then
 		local v6 = v3
@@ -130,7 +130,7 @@ local _ = function() --[[ Line: 303 | Named "mountHookTypesDev" ]]
 	end
 end
 
-function updateHookTypesDev() --[[ Line: 316 ]]
+function updateHookTypesDev()
 	-- upvalues: DEV (copy), v3 (ref), List (ref), Count (ref)
 	if DEV then
 		local v6 = v3
@@ -145,7 +145,7 @@ function updateHookTypesDev() --[[ Line: 316 ]]
 	end
 end
 
-local _ = function(List) --[[ Line: 330 | Named "checkDepsAreArrayDev" ]]
+local _ = function(List)
 	-- upvalues: DEV (copy), Console (copy), v3 (ref)
 	if DEV and List ~= nil then
 		local Flag = nil
@@ -167,7 +167,7 @@ local _ = function(List) --[[ Line: 330 | Named "checkDepsAreArrayDev" ]]
 	end
 end
 
-function warnOnHookMismatchInDev(p1) --[[ Line: 345 ]]
+function warnOnHookMismatchInDev(p1)
 	-- upvalues: DEV (copy), GetComponentNameFunction (copy), Alternate (ref), T (ref), List (ref), Count (ref), Console (copy)
 	if DEV then
 		local ComponentName = GetComponentNameFunction(Alternate.type) or "Component"
@@ -193,12 +193,12 @@ function warnOnHookMismatchInDev(p1) --[[ Line: 345 ]]
 	end
 end
 
-local function throwInvalidHookError() --[[ Line: 397 ]]
+local function throwInvalidHookError()
 	-- upvalues: Error1 (copy)
 	error(Error1.new("Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem."))
 end
 
-local function areHookInputsEqual(BaseState, BaseState1): boolean --[[ Line: 412 ]]
+local function areHookInputsEqual(BaseState, BaseState1): boolean
 	-- upvalues: DEV (copy), Console (copy), v3 (ref)
 	if BaseState1 == nil then
 		if DEV then
@@ -239,7 +239,7 @@ local function areHookInputsEqual(BaseState, BaseState1): boolean --[[ Line: 412
 end
 
 local ReactFiberHooksModule = {
-	bailoutHooks = function(p2, p3, p4) --[[ Line: 476 ]]
+	bailoutHooks = function(p2, p3, p4)
 		-- upvalues: EnableHookDoubleBuffering (copy), DEV (copy), EnableDoubleInvokingEffects (copy), MountPassiveDev (copy), Passive (copy), MountLayoutDev (copy), Update (copy), RemoveLanesFunction (copy)
 		if EnableHookDoubleBuffering and p2.updateQueue ~= nil then
 			p2.updateQueue.alternate = nil
@@ -256,7 +256,7 @@ local ReactFiberHooksModule = {
 }
 local Flag2 = false
 
-function ReactFiberHooksModule.resetHooksAfterThrow() --[[ Line: 509 ]]
+function ReactFiberHooksModule.resetHooksAfterThrow()
 	-- upvalues: ReactCurrentDispatcher (copy), ReactFiberHooksModule (copy), Flag (ref), Alternate (ref), Value (ref), NoLanes (copy), Alternate1 (ref), v2 (ref), EnableHookDoubleBuffering (copy), Next (ref), LastEffect (ref), DEV (copy), List (ref), Count (ref), v3 (ref), Flag2 (ref), Flag1 (ref)
 	ReactCurrentDispatcher.current = ReactFiberHooksModule.ContextOnlyDispatcher
 	
@@ -290,7 +290,7 @@ function ReactFiberHooksModule.resetHooksAfterThrow() --[[ Line: 509 ]]
 	Flag1 = false
 end
 
-local function mountWorkInProgressHook() --[[ Line: 558 ]]
+local function mountWorkInProgressHook()
 	-- upvalues: EnableAllocationTrims (copy), v2 (ref), Alternate (ref)
 	local Config = if EnableAllocationTrims then {
 		memoizedState = nil,
@@ -315,7 +315,7 @@ local function mountWorkInProgressHook() --[[ Line: 558 ]]
 	return v2
 end
 
-local function updateWorkInProgressHook() --[[ Line: 596 ]]
+local function updateWorkInProgressHook()
 	-- upvalues: Alternate1 (ref), Alternate (ref), v2 (ref), Error1 (copy), EnableHookDoubleBuffering (copy), EnableAllocationTrims (copy)
 	local MemoizedState = nil
 	if Alternate1 == nil then
@@ -409,11 +409,11 @@ local function updateWorkInProgressHook() --[[ Line: 596 ]]
 	return v2
 end
 
-function basicStateReducer(p2, Callback) --[[ Line: 735 ]]
+function basicStateReducer(p2, Callback)
 	return if type(Callback) == "function" then Callback(p2) else Callback
 end
 
-function mountReducer(LastRenderedReducer, p2, Callback) --[[ Line: 744 ]]
+function mountReducer(LastRenderedReducer, p2, Callback)
 	-- upvalues: mountWorkInProgressHook (copy), Alternate (ref)
 	local MountWorkInProgressHookResult = mountWorkInProgressHook()
 	local CallbackResult = if Callback == nil then p2 else Callback(p2)
@@ -428,7 +428,7 @@ function mountReducer(LastRenderedReducer, p2, Callback) --[[ Line: 744 ]]
 	MountWorkInProgressHookResult.queue = Queue
 	local Alternate1 = Alternate
 	
-	local function Dispatch(p3, ...) --[[ Line: 771 ]]
+	local function Dispatch(p3, ...)
 		-- upvalues: Alternate1 (copy), Queue (copy)
 		dispatchAction(Alternate1, Queue, p3, ...)
 	end
@@ -438,7 +438,7 @@ function mountReducer(LastRenderedReducer, p2, Callback) --[[ Line: 744 ]]
 	return MountWorkInProgressHookResult.memoizedState, Dispatch
 end
 
-function updateReducer(Callback, _, _) --[[ Line: 781 ]]
+function updateReducer(Callback, _, _)
 	-- upvalues: updateWorkInProgressHook (copy), Alternate1 (ref), Value (ref), Alternate (ref), MergeLanesFunction (copy), MarkSkippedUpdateLanesFunction (copy), NoLane (copy), MarkWorkInProgressReceivedUpdateFunction (copy)
 	local UpdateWorkInProgressHookResult = updateWorkInProgressHook()
 	local Queue = UpdateWorkInProgressHookResult.queue
@@ -523,7 +523,7 @@ function updateReducer(Callback, _, _) --[[ Line: 781 ]]
 	return UpdateWorkInProgressHookResult.memoizedState, Queue.dispatch
 end
 
-function rerenderReducer(Callback, _, _) --[[ Line: 922 ]]
+function rerenderReducer(Callback, _, _)
 	-- upvalues: updateWorkInProgressHook (copy), MarkWorkInProgressReceivedUpdateFunction (copy)
 	local UpdateWorkInProgressHookResult = updateWorkInProgressHook()
 	local Queue = UpdateWorkInProgressHookResult.queue
@@ -556,7 +556,7 @@ function rerenderReducer(Callback, _, _) --[[ Line: 922 ]]
 	return MemoizedState, Dispatch
 end
 
-function readFromUnsubcribedMutableSource(p2, p3, Callback) --[[ Line: 987 ]]
+function readFromUnsubcribedMutableSource(p2, p3, Callback)
 	-- upvalues: DEV (copy), WarnAboutMultipleRenderersDEVFunction (copy), GetWorkInProgressVersionFunction (copy), IsSubsetOfLanesFunction (copy), Value (ref), SetWorkInProgressVersionFunction (copy), Console (copy), MarkSourceAsDirtyFunction (copy), Error1 (copy)
 	if DEV then
 		WarnAboutMultipleRenderersDEVFunction(p3)
@@ -588,7 +588,7 @@ function readFromUnsubcribedMutableSource(p2, p3, Callback) --[[ Line: 987 ]]
 	return CallbackResult
 end
 
-function useMutableSource(p2, Source: number, Callback: number, Callback1: number) --[[ Line: 1070 ]]
+function useMutableSource(p2, Source: number, Callback: number, Callback1: number)
 	-- upvalues: GetWorkInProgressRootFunction (copy), InvariantFunction (copy), ReactCurrentDispatcher (copy), v2 (ref), Alternate (ref), DEV (copy), Console (copy), RequestUpdateLaneFunction (copy), MarkRootMutableReadFunction (copy), MarkRootEntangledFunction (copy)
 	local WorkInProgressRoot = GetWorkInProgressRootFunction()
 	InvariantFunction(WorkInProgressRoot ~= nil, "Expected a work-in-progress root. This is a bug in React. Please file an issue.")
@@ -596,7 +596,7 @@ function useMutableSource(p2, Source: number, Callback: number, Callback1: numbe
 	local Version = GetVersionFunction(Source._source)
 	local Current = ReactCurrentDispatcher.current
 	assert(Current ~= nil, "dispatcher was nil, this is a bug in React")
-	local UseStateResult, UseStateResult2 = Current.useState(function() --[[ Line: 1095 ]]
+	local UseStateResult, UseStateResult2 = Current.useState(function()
 		-- upvalues: WorkInProgressRoot (copy), Source (copy), Callback (copy)
 		return readFromUnsubcribedMutableSource(WorkInProgressRoot, Source, Callback)
 	end)
@@ -612,7 +612,7 @@ function useMutableSource(p2, Source: number, Callback: number, Callback1: numbe
 	local Subscribe: number = MemoizedState.subscribe
 	local Alternate1 = Alternate
 	p2.memoizedState = { refs = Refs, source = Source, subscribe = Callback1 }
-	Current.useEffect(function() --[[ Line: 1124 ]]
+	Current.useEffect(function()
 		-- upvalues: Refs (copy), Callback (copy), UseStateResult2 (ref), GetVersionFunction (copy), Source (copy), Version (copy), DEV (upval), Console (upval), UseStateResult (ref), RequestUpdateLaneFunction (upval), Alternate1 (copy), MarkRootMutableReadFunction (upval), WorkInProgressRoot (copy), MarkRootEntangledFunction (upval)
 		Refs.getSnapshot = Callback
 		Refs.setSnapshot = UseStateResult2
@@ -633,20 +633,20 @@ function useMutableSource(p2, Source: number, Callback: number, Callback1: numbe
 			MarkRootEntangledFunction(WorkInProgressRoot, WorkInProgressRoot.mutableReadLanes)
 		end
 	end, { Callback, Source, Callback1 })
-	Current.useEffect(function() --[[ Line: 1162 ]]
+	Current.useEffect(function()
 		-- upvalues: Refs (copy), Source (copy), RequestUpdateLaneFunction (upval), Alternate1 (copy), MarkRootMutableReadFunction (upval), WorkInProgressRoot (copy), Callback1 (copy), DEV (upval), Console (upval)
-		local CallbackResult = Callback1(Source._source, function() --[[ Line: 1163 ]]
+		local CallbackResult = Callback1(Source._source, function()
 			-- upvalues: Refs (upval), Source (upval), RequestUpdateLaneFunction (upval), Alternate1 (upval), MarkRootMutableReadFunction (upval), WorkInProgressRoot (upval)
 			local GetSnapshotFunction = Refs.getSnapshot
 			local SetSnapshotFunction: (any) -> () = Refs.setSnapshot
-			local Success, Result = pcall(function() --[[ Line: 1168 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: SetSnapshotFunction (copy), GetSnapshotFunction (copy), Source (upval), RequestUpdateLaneFunction (upval), Alternate1 (upval), MarkRootMutableReadFunction (upval), WorkInProgressRoot (upval)
 				SetSnapshotFunction(GetSnapshotFunction(Source._source))
 				MarkRootMutableReadFunction(WorkInProgressRoot, (RequestUpdateLaneFunction(Alternate1)))
 			end)
 			
 			if not Success then
-				SetSnapshotFunction(function() --[[ Line: 1182 ]]
+				SetSnapshotFunction(function()
 					-- upvalues: Result (copy)
 					error(Result)
 				end)
@@ -668,7 +668,7 @@ function useMutableSource(p2, Source: number, Callback: number, Callback1: numbe
 		}
 		local Alternate2 = Alternate
 		
-		UseStateResult2 = function(...) --[[ Line: 1231 ]]
+		UseStateResult2 = function(...)
 			-- upvalues: Alternate2 (copy), Queue (copy)
 			dispatchAction(Alternate2, Queue, ...)
 		end
@@ -683,7 +683,7 @@ function useMutableSource(p2, Source: number, Callback: number, Callback1: numbe
 	return UseStateResult
 end
 
-function mountMutableSource(Source, GetSnapshot, Subscribe) --[[ Line: 1245 ]]
+function mountMutableSource(Source, GetSnapshot, Subscribe)
 	-- upvalues: mountWorkInProgressHook (copy)
 	local MountWorkInProgressHookResult = mountWorkInProgressHook()
 	MountWorkInProgressHookResult.memoizedState = {
@@ -695,12 +695,12 @@ function mountMutableSource(Source, GetSnapshot, Subscribe) --[[ Line: 1245 ]]
 	return useMutableSource(MountWorkInProgressHookResult, Source, GetSnapshot, Subscribe)
 end
 
-function updateMutableSource(p2, p3, p4) --[[ Line: 1268 ]]
+function updateMutableSource(p2, p3, p4)
 	-- upvalues: updateWorkInProgressHook (copy)
 	return useMutableSource(updateWorkInProgressHook(), p2, p3, p4)
 end
 
-function mountState(Callback) --[[ Line: 1283 ]]
+function mountState(Callback)
 	-- upvalues: mountWorkInProgressHook (copy), Alternate (ref)
 	local MountWorkInProgressHookResult = mountWorkInProgressHook()
 	
@@ -719,7 +719,7 @@ function mountState(Callback) --[[ Line: 1283 ]]
 	MountWorkInProgressHookResult.queue = Queue
 	local Alternate1 = Alternate
 	
-	local function Dispatch(p2, ...) --[[ Line: 1305 ]]
+	local function Dispatch(p2, ...)
 		-- upvalues: Alternate1 (copy), Queue (copy)
 		dispatchAction(Alternate1, Queue, p2, ...)
 	end
@@ -729,15 +729,15 @@ function mountState(Callback) --[[ Line: 1283 ]]
 	return MountWorkInProgressHookResult.memoizedState, Dispatch
 end
 
-function updateState(p2) --[[ Line: 1314 ]]
+function updateState(p2)
 	return updateReducer(basicStateReducer, p2)
 end
 
-function rerenderState(p2) --[[ Line: 1318 ]]
+function rerenderState(p2)
 	return rerenderReducer(basicStateReducer, p2)
 end
 
-local function reuseFunctionComponentUpdateQueue() --[[ Line: 1322 ]]
+local function reuseFunctionComponentUpdateQueue()
 	-- upvalues: Alternate (ref), LastEffect (ref), Next (ref)
 	local Alternate1 = Alternate.alternate
 	local UpdateQueue = if Alternate1 == nil then nil else Alternate1.updateQueue
@@ -764,7 +764,7 @@ local function reuseFunctionComponentUpdateQueue() --[[ Line: 1322 ]]
 	end
 end
 
-local function pushEffect(Bits, Create, Destroy, Deps) --[[ Line: 1354 ]]
+local function pushEffect(Bits, Create, Destroy, Deps)
 	-- upvalues: EnableHookDoubleBuffering (copy), Alternate (ref), reuseFunctionComponentUpdateQueue (copy), Next (ref), LastEffect (ref)
 	if EnableHookDoubleBuffering then
 		local UpdateQueue = Alternate.updateQueue
@@ -839,7 +839,7 @@ local function pushEffect(Bits, Create, Destroy, Deps) --[[ Line: 1354 ]]
 	end
 end
 
-function mountBinding(p2) --[[ Line: 1428 ]]
+function mountBinding(p2)
 	-- upvalues: mountWorkInProgressHook (copy), CreateBindingFunction (copy), EnableAllocationTrims (copy)
 	local MountWorkInProgressHookResult = mountWorkInProgressHook()
 	local Binding, Binding2 = CreateBindingFunction(p2)
@@ -856,7 +856,7 @@ function mountBinding(p2) --[[ Line: 1428 ]]
 	end
 end
 
-function updateBinding(_) --[[ Line: 1444 ]]
+function updateBinding(_)
 	-- upvalues: updateWorkInProgressHook (copy), EnableAllocationTrims (copy)
 	local UpdateWorkInProgressHookResult = updateWorkInProgressHook()
 	
@@ -867,7 +867,7 @@ function updateBinding(_) --[[ Line: 1444 ]]
 	end
 end
 
-function mountRef(Current) --[[ Line: 1452 ]]
+function mountRef(Current)
 	-- upvalues: mountWorkInProgressHook (copy), CreateRefFunction (copy)
 	local MountWorkInProgressHookResult = mountWorkInProgressHook()
 	local Ref = CreateRefFunction()
@@ -877,19 +877,19 @@ function mountRef(Current) --[[ Line: 1452 ]]
 	return Ref
 end
 
-function updateRef(_) --[[ Line: 1464 ]]
+function updateRef(_)
 	-- upvalues: updateWorkInProgressHook (copy)
 	return updateWorkInProgressHook().memoizedState
 end
 
-local function mountEffectImpl(Mask: number, Mask1: number, Create, ConcatResult) --[[ Line: 1469 ]]
+local function mountEffectImpl(Mask: number, Mask1: number, Create, ConcatResult)
 	-- upvalues: mountWorkInProgressHook (copy), Alternate (ref), pushEffect (copy), HasEffect (copy)
 	local MountWorkInProgressHookResult = mountWorkInProgressHook()
 	Alternate.flags = bit32.bor(Alternate.flags, Mask)
 	MountWorkInProgressHookResult.memoizedState = pushEffect(bit32.bor(HasEffect, Mask1), Create, nil, ConcatResult)
 end
 
-function updateEffectImpl(Mask: number, Mask1: number, Create, Deps) --[[ Line: 1481 ]]
+function updateEffectImpl(Mask: number, Mask1: number, Create, Deps)
 	-- upvalues: updateWorkInProgressHook (copy), Alternate1 (ref), areHookInputsEqual (copy), pushEffect (copy), Alternate (ref), HasEffect (copy)
 	local UpdateWorkInProgressHookResult = updateWorkInProgressHook()
 	local Destroy = nil
@@ -908,7 +908,7 @@ function updateEffectImpl(Mask: number, Mask1: number, Create, Deps) --[[ Line: 
 	UpdateWorkInProgressHookResult.memoizedState = pushEffect(bit32.bor(HasEffect, Mask1), Create, Destroy, Deps)
 end
 
-local function mountEffect(Create, Deps) --[[ Line: 1507 ]]
+local function mountEffect(Create, Deps)
 	-- upvalues: DEV (copy), ReactGlobalsModule (copy), WarnIfNotCurrentlyActingEffectsInDEVFunction (copy), Alternate (ref), EnableDoubleInvokingEffects (copy), MountPassiveDev (copy), Passive (copy), PassiveStatic (copy), Passive1 (copy), mountWorkInProgressHook (copy), pushEffect (copy), HasEffect (copy)
 	if DEV and (type(_G.jest) ~= "nil" or ReactGlobalsModule.__TESTEZ_RUNNING_TEST__) then
 		WarnIfNotCurrentlyActingEffectsInDEVFunction(Alternate)
@@ -928,7 +928,7 @@ local function mountEffect(Create, Deps) --[[ Line: 1507 ]]
 	end
 end
 
-local function updateEffect(p2, p3) --[[ Line: 1537 ]]
+local function updateEffect(p2, p3)
 	-- upvalues: DEV (copy), ReactGlobalsModule (copy), WarnIfNotCurrentlyActingEffectsInDEVFunction (copy), Alternate (ref), Passive (copy), Passive1 (copy)
 	if DEV and (type(_G.jest) ~= "nil" or ReactGlobalsModule.__TESTEZ_RUNNING_TEST__) then
 		WarnIfNotCurrentlyActingEffectsInDEVFunction(Alternate)
@@ -936,7 +936,7 @@ local function updateEffect(p2, p3) --[[ Line: 1537 ]]
 	updateEffectImpl(Passive, Passive1, p2, p3)
 end
 
-local function mountLayoutEffect(Create, Deps) --[[ Line: 1552 ]]
+local function mountLayoutEffect(Create, Deps)
 	-- upvalues: DEV (copy), EnableDoubleInvokingEffects (copy), MountLayoutDev (copy), Update (copy), Layout (copy), mountWorkInProgressHook (copy), Alternate (ref), pushEffect (copy), HasEffect (copy)
 	if DEV and EnableDoubleInvokingEffects then
 		local Bits = bit32.bor(MountLayoutDev, Update)
@@ -952,17 +952,17 @@ local function mountLayoutEffect(Create, Deps) --[[ Line: 1552 ]]
 	end
 end
 
-local function updateLayoutEffect(p2, p3) --[[ Line: 1569 ]]
+local function updateLayoutEffect(p2, p3)
 	-- upvalues: Update (copy), Layout (copy)
 	updateEffectImpl(Update, Layout, p2, p3)
 end
 
-function imperativeHandleEffect(Callback1, Callback: (any) -> ()) --[[ Line: 1577 ]]
+function imperativeHandleEffect(Callback1, Callback: (any) -> ())
 	-- upvalues: DEV (copy), Object (copy), Console (copy), Array (copy)
 	if Callback ~= nil and type(Callback) == "function" then
 		Callback((Callback1()))
 		
-		return function() --[[ Line: 1586 ]]
+		return function()
 			-- upvalues: Callback (copy)
 			return Callback(nil)
 		end
@@ -975,29 +975,29 @@ function imperativeHandleEffect(Callback1, Callback: (any) -> ()) --[[ Line: 157
 	end
 	Callback.current = Callback1()
 	
-	return function() --[[ Line: 1611 ]]
+	return function()
 		-- upvalues: Callback (copy)
 		Callback.current = nil
 	end
 end
 
-function mountImperativeHandle(p2, Callback, p3) --[[ Line: 1620 ]]
+function mountImperativeHandle(p2, Callback, p3)
 	-- upvalues: DEV (copy), Console (copy), Array (copy), EnableDoubleInvokingEffects (copy), mountEffectImpl (copy), MountLayoutDev (copy), Update (copy), Layout (copy)
 	if DEV and type(Callback) ~= "function" then
 		Console.error("Expected useImperativeHandle() second argument to be a function that creates a handle. Instead received: %s.", if Callback == nil then "nil" else type(Callback))
 	end
 	local ConcatResult = if p3 == nil then nil else Array.concat(p3, { p2 })
 	
-	return if DEV and EnableDoubleInvokingEffects then mountEffectImpl(bit32.bor(MountLayoutDev, Update), Layout, function() --[[ Line: 1643 ]]
+	return if DEV and EnableDoubleInvokingEffects then mountEffectImpl(bit32.bor(MountLayoutDev, Update), Layout, function()
 		-- upvalues: Callback (copy), p2 (copy)
 		return imperativeHandleEffect(Callback, p2)
-	end, ConcatResult) else mountEffectImpl(Update, Layout, function() --[[ Line: 1649 ]]
+	end, ConcatResult) else mountEffectImpl(Update, Layout, function()
 		-- upvalues: Callback (copy), p2 (copy)
 		return imperativeHandleEffect(Callback, p2)
 	end, ConcatResult)
 end
 
-function updateImperativeHandle(p2, Callback, Tbl) --[[ Line: 1655 ]]
+function updateImperativeHandle(p2, Callback, Tbl)
 	-- upvalues: DEV (copy), Console (copy), Update (copy), Layout (copy)
 	if DEV and type(Callback) ~= "function" then
 		Console.error("Expected useImperativeHandle() second argument to be a function that creates a handle. Instead received: %s.", if Callback then type(Callback) else "nil")
@@ -1008,17 +1008,17 @@ function updateImperativeHandle(p2, Callback, Tbl) --[[ Line: 1655 ]]
 		List = table.clone(Tbl)
 		table.insert(List, p2)
 	end
-	return updateEffectImpl(Update, Layout, function() --[[ Line: 1682 ]]
+	return updateEffectImpl(Update, Layout, function()
 		-- upvalues: Callback (copy), p2 (copy)
 		return imperativeHandleEffect(Callback, p2)
 	end, List)
 end
 
-function mountDebugValue(_, _) --[[ Line: 1687 ]] end
+function mountDebugValue(_, _) end
 
 local Callback = mountDebugValue
 
-function mountCallback(MemoizedState, BaseState) --[[ Line: 1698 ]]
+function mountCallback(MemoizedState, BaseState)
 	-- upvalues: mountWorkInProgressHook (copy), EnableAllocationTrims (copy)
 	local MountWorkInProgressHookResult = mountWorkInProgressHook()
 	
@@ -1034,7 +1034,7 @@ function mountCallback(MemoizedState, BaseState) --[[ Line: 1698 ]]
 	end
 end
 
-function updateCallback(MemoizedState, BaseState) --[[ Line: 1711 ]]
+function updateCallback(MemoizedState, BaseState)
 	-- upvalues: updateWorkInProgressHook (copy), EnableAllocationTrims (copy), areHookInputsEqual (copy)
 	local UpdateWorkInProgressHookResult = updateWorkInProgressHook()
 	
@@ -1058,7 +1058,7 @@ function updateCallback(MemoizedState, BaseState) --[[ Line: 1711 ]]
 	end
 end
 
-function mountMemo(Callback, BaseState) --[[ Line: 1742 ]]
+function mountMemo(Callback, BaseState)
 	-- upvalues: mountWorkInProgressHook (copy), EnableAllocationTrims (copy), MemoValues (copy)
 	local MountWorkInProgressHookResult = mountWorkInProgressHook()
 	
@@ -1076,7 +1076,7 @@ function mountMemo(Callback, BaseState) --[[ Line: 1742 ]]
 	end
 end
 
-function updateMemo(Callback, BaseState) --[[ Line: 1761 ]]
+function updateMemo(Callback, BaseState)
 	-- upvalues: updateWorkInProgressHook (copy), EnableAllocationTrims (copy), areHookInputsEqual (copy), MemoValues (copy)
 	local UpdateWorkInProgressHookResult = updateWorkInProgressHook()
 	
@@ -1102,12 +1102,12 @@ function updateMemo(Callback, BaseState) --[[ Line: 1761 ]]
 	end
 end
 
-function ReactFiberHooksModule.getIsUpdatingOpaqueValueInRenderPhaseInDEV() --[[ Line: 1925 ]]
+function ReactFiberHooksModule.getIsUpdatingOpaqueValueInRenderPhaseInDEV()
 	-- upvalues: DEV (copy)
 	return not DEV and nil
 end
 
-function mountOpaqueIdentifier() --[[ Line: 1947 ]]
+function mountOpaqueIdentifier()
 	-- upvalues: DEV (copy), Console (copy), MakeClientId (copy), GetIsHydratingFunction (copy)
 	local Callback = nil
 	
@@ -1131,19 +1131,19 @@ function mountOpaqueIdentifier() --[[ Line: 1947 ]]
 	end
 end
 
-function updateOpaqueIdentifier() --[[ Line: 2014 ]]
+function updateOpaqueIdentifier()
 	local UpdateStateResult, _ = updateState(nil)
 	
 	return UpdateStateResult
 end
 
-function rerenderOpaqueIdentifier() --[[ Line: 2019 ]]
+function rerenderOpaqueIdentifier()
 	local RerenderStateResult, _ = rerenderState(nil)
 	
 	return RerenderStateResult
 end
 
-function dispatchAction(p2, Queue, Action, ...) --[[ Line: 2024 ]]
+function dispatchAction(p2, Queue, Action, ...)
 	-- upvalues: DEV (copy), Console (copy), RequestEventTimeFunction (copy), RequestUpdateLaneFunction (copy), Alternate (ref), Flag (ref), Flag1 (ref), NoLanes (copy), ReactCurrentDispatcher (copy), Current4 (ref), ReactFeatureFlags (copy), v1 (copy), ReactGlobalsModule (copy), WarnIfNotScopedWithMatchingActFunction (copy), WarnIfNotCurrentlyActingUpdatesInDEVFunction (copy), ScheduleUpdateOnFiberFunction (copy), EnableDebugTracing (copy), DebugTracingMode (copy), GetComponentNameFunction (copy), LogStateUpdateScheduledFunction (copy), EnableSchedulingProfiler (copy), MarkStateUpdateScheduledFunction (copy)
 	if DEV and type(if select("#", ...) == 1 then select(1, ...) else nil) == "function" then
 		Console.error("State updates from the useState() and useReducer() Hooks don't support the second callback argument. To execute a side effect after rendering, declare it in the component body with useEffect().")
@@ -1304,12 +1304,12 @@ local config2 = {
 }
 
 if DEV then
-	local _ = function() --[[ Line: 2273 ]]
+	local _ = function()
 		-- upvalues: Console (copy)
 		Console.error("Context can only be read while React is rendering. In classes, you can read it in the render method or getDerivedStateFromProps. In function components, you can read it directly in the function body, but not inside Hooks like useReducer() or useMemo().")
 	end
 	
-	local function restoreDispatcherAndReturn(Current, Success, ...) --[[ Line: 2283 ]]
+	local function restoreDispatcherAndReturn(Current, Success, ...)
 		-- upvalues: ReactCurrentDispatcher (copy)
 		ReactCurrentDispatcher.current = Current
 		
@@ -1319,17 +1319,17 @@ if DEV then
 		return ...
 	end
 	
-	local _ = function() --[[ Line: 2291 ]]
+	local _ = function()
 		-- upvalues: Console (copy)
 		Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 	end
 	
 	Current = {
-		readContext = function(p2, p3) --[[ Line: 2301 ]]
+		readContext = function(p2, p3)
 			-- upvalues: ReadContextFunction (copy)
 			return ReadContextFunction(p2, p3)
 		end,
-		useCallback = function(p2, List1) --[[ Line: 2307 ]]
+		useCallback = function(p2, List1)
 			-- upvalues: v3 (ref), DEV (copy), List (ref), Console (copy)
 			v3 = "useCallback"
 			
@@ -1362,7 +1362,7 @@ if DEV then
 			end
 			return mountCallback(p2, List1)
 		end,
-		useContext = function(p3, p4) --[[ Line: 2313 ]]
+		useContext = function(p3, p4)
 			-- upvalues: v3 (ref), DEV (copy), List (ref), ReadContextFunction (copy)
 			v3 = "useContext"
 			
@@ -1377,7 +1377,7 @@ if DEV then
 			end
 			return ReadContextFunction(p3, p4)
 		end,
-		useEffect = function(Create, Deps) --[[ Line: 2321 ]]
+		useEffect = function(Create, Deps)
 			-- upvalues: v3 (ref), DEV (copy), List (ref), Console (copy), mountEffect (copy)
 			v3 = "useEffect"
 			
@@ -1410,7 +1410,7 @@ if DEV then
 			end
 			return mountEffect(Create, Deps)
 		end,
-		useImperativeHandle = function(p3, p4, List1) --[[ Line: 2331 ]]
+		useImperativeHandle = function(p3, p4, List1)
 			-- upvalues: v3 (ref), DEV (copy), List (ref), Console (copy)
 			v3 = "useImperativeHandle"
 			
@@ -1443,7 +1443,7 @@ if DEV then
 			end
 			return mountImperativeHandle(p3, p4, List1)
 		end,
-		useLayoutEffect = function(Create, Deps) --[[ Line: 2341 ]]
+		useLayoutEffect = function(Create, Deps)
 			-- upvalues: v3 (ref), DEV (copy), List (ref), Console (copy), mountLayoutEffect (copy)
 			v3 = "useLayoutEffect"
 			
@@ -1476,7 +1476,7 @@ if DEV then
 			end
 			return mountLayoutEffect(Create, Deps)
 		end,
-		useMemo = function(p5, List1) --[[ Line: 2352 ]]
+		useMemo = function(p5, List1)
 			-- upvalues: v3 (ref), DEV (copy), List (ref), Console (copy), ReactCurrentDispatcher (copy), Current3 (ref), EnableAllocationTrims (copy), restoreDispatcherAndReturn (copy)
 			v3 = "useMemo"
 			
@@ -1521,7 +1521,7 @@ if DEV then
 			end
 			return unpack(list, 2)
 		end,
-		useReducer = function(p6, p7, p8) --[[ Line: 2377 ]]
+		useReducer = function(p6, p7, p8)
 			-- upvalues: v3 (ref), DEV (copy), List (ref), ReactCurrentDispatcher (copy), Current3 (ref)
 			v3 = "useReducer"
 			
@@ -1544,7 +1544,7 @@ if DEV then
 			end
 			return Result, Result3
 		end,
-		useRef = function(p6) --[[ Line: 2395 ]]
+		useRef = function(p6)
 			-- upvalues: v3 (ref), DEV (copy), List (ref)
 			v3 = "useRef"
 			
@@ -1559,7 +1559,7 @@ if DEV then
 			end
 			return mountRef(p6)
 		end,
-		useBinding = function(p6) --[[ Line: 2401 ]]
+		useBinding = function(p6)
 			-- upvalues: v3 (ref), DEV (copy), List (ref)
 			v3 = "useBinding"
 			
@@ -1574,7 +1574,7 @@ if DEV then
 			end
 			return mountBinding(p6)
 		end,
-		useState = function(p6) --[[ Line: 2406 ]]
+		useState = function(p6)
 			-- upvalues: v3 (ref), DEV (copy), List (ref), ReactCurrentDispatcher (copy), Current3 (ref)
 			v3 = "useState"
 			
@@ -1597,7 +1597,7 @@ if DEV then
 			end
 			return Result, Result3
 		end,
-		useDebugValue = function(p6, p7) --[[ Line: 2422 ]]
+		useDebugValue = function(p6, p7)
 			-- upvalues: v3 (ref), DEV (copy), List (ref)
 			v3 = "useDebugValue"
 			
@@ -1612,7 +1612,7 @@ if DEV then
 			end
 			return mountDebugValue(p6, p7)
 		end,
-		useMutableSource = function(p6, p7, p8) --[[ Line: 2437 ]]
+		useMutableSource = function(p6, p7, p8)
 			-- upvalues: v3 (ref), DEV (copy), List (ref)
 			v3 = "useMutableSource"
 			
@@ -1627,7 +1627,7 @@ if DEV then
 			end
 			return mountMutableSource(p6, p7, p8)
 		end,
-		useOpaqueIdentifier = function() --[[ Line: 2452 ]]
+		useOpaqueIdentifier = function()
 			-- upvalues: v3 (ref), DEV (copy), List (ref)
 			v3 = "useOpaqueIdentifier"
 			
@@ -1645,11 +1645,11 @@ if DEV then
 		unstable_isNewReconciler = EnableNewReconciler
 	}
 	Current1 = {
-		readContext = function(p6, p7) --[[ Line: 2462 ]]
+		readContext = function(p6, p7)
 			-- upvalues: ReadContextFunction (copy)
 			return ReadContextFunction(p6, p7)
 		end,
-		useCallback = function(p6, List) --[[ Line: 2468 ]]
+		useCallback = function(p6, List)
 			-- upvalues: v3 (ref), DEV (copy), Console (copy)
 			v3 = "useCallback"
 			updateHookTypesDev()
@@ -1674,35 +1674,35 @@ if DEV then
 			end
 			return mountCallback(p6, List)
 		end,
-		useContext = function(p7, p8) --[[ Line: 2474 ]]
+		useContext = function(p7, p8)
 			-- upvalues: v3 (ref), ReadContextFunction (copy)
 			v3 = "useContext"
 			updateHookTypesDev()
 			
 			return ReadContextFunction(p7, p8)
 		end,
-		useEffect = function(Create, Deps) --[[ Line: 2482 ]]
+		useEffect = function(Create, Deps)
 			-- upvalues: v3 (ref), mountEffect (copy)
 			v3 = "useEffect"
 			updateHookTypesDev()
 			
 			return mountEffect(Create, Deps)
 		end,
-		useImperativeHandle = function(p7, p8, p9) --[[ Line: 2491 ]]
+		useImperativeHandle = function(p7, p8, p9)
 			-- upvalues: v3 (ref)
 			v3 = "useImperativeHandle"
 			updateHookTypesDev()
 			
 			return mountImperativeHandle(p7, p8, p9)
 		end,
-		useLayoutEffect = function(Create, Deps) --[[ Line: 2500 ]]
+		useLayoutEffect = function(Create, Deps)
 			-- upvalues: v3 (ref), mountLayoutEffect (copy)
 			v3 = "useLayoutEffect"
 			updateHookTypesDev()
 			
 			return mountLayoutEffect(Create, Deps)
 		end,
-		useMemo = function(p7, p8) --[[ Line: 2510 ]]
+		useMemo = function(p7, p8)
 			-- upvalues: v3 (ref), ReactCurrentDispatcher (copy), Current3 (ref), EnableAllocationTrims (copy), restoreDispatcherAndReturn (copy)
 			v3 = "useMemo"
 			updateHookTypesDev()
@@ -1720,7 +1720,7 @@ if DEV then
 			end
 			return unpack(list, 2)
 		end,
-		useReducer = function(p7, p8, p9) --[[ Line: 2533 ]]
+		useReducer = function(p7, p8, p9)
 			-- upvalues: v3 (ref), ReactCurrentDispatcher (copy), Current3 (ref)
 			v3 = "useReducer"
 			updateHookTypesDev()
@@ -1734,21 +1734,21 @@ if DEV then
 			end
 			return Result, Result3
 		end,
-		useRef = function(p7) --[[ Line: 2551 ]]
+		useRef = function(p7)
 			-- upvalues: v3 (ref)
 			v3 = "useRef"
 			updateHookTypesDev()
 			
 			return mountRef(p7)
 		end,
-		useBinding = function(p7) --[[ Line: 2557 ]]
+		useBinding = function(p7)
 			-- upvalues: v3 (ref)
 			v3 = "useBinding"
 			updateHookTypesDev()
 			
 			return mountBinding(p7)
 		end,
-		useState = function(p7) --[[ Line: 2562 ]]
+		useState = function(p7)
 			-- upvalues: v3 (ref), ReactCurrentDispatcher (copy), Current3 (ref)
 			v3 = "useState"
 			updateHookTypesDev()
@@ -1762,21 +1762,21 @@ if DEV then
 			end
 			return Result, Result3
 		end,
-		useDebugValue = function(p7, p8) --[[ Line: 2578 ]]
+		useDebugValue = function(p7, p8)
 			-- upvalues: v3 (ref)
 			v3 = "useDebugValue"
 			updateHookTypesDev()
 			
 			return mountDebugValue(p7, p8)
 		end,
-		useMutableSource = function(p7, p8, p9) --[[ Line: 2593 ]]
+		useMutableSource = function(p7, p8, p9)
 			-- upvalues: v3 (ref)
 			v3 = "useMutableSource"
 			updateHookTypesDev()
 			
 			return mountMutableSource(p7, p8, p9)
 		end,
-		useOpaqueIdentifier = function() --[[ Line: 2608 ]]
+		useOpaqueIdentifier = function()
 			-- upvalues: v3 (ref)
 			v3 = "useOpaqueIdentifier"
 			updateHookTypesDev()
@@ -1786,46 +1786,46 @@ if DEV then
 		unstable_isNewReconciler = EnableNewReconciler
 	}
 	Current2 = {
-		readContext = function(p7, p8) --[[ Line: 2618 ]]
+		readContext = function(p7, p8)
 			-- upvalues: ReadContextFunction (copy)
 			return ReadContextFunction(p7, p8)
 		end,
-		useCallback = function(p7, p8) --[[ Line: 2624 ]]
+		useCallback = function(p7, p8)
 			-- upvalues: v3 (ref)
 			v3 = "useCallback"
 			updateHookTypesDev()
 			
 			return updateCallback(p7, p8)
 		end,
-		useContext = function(p7, p8) --[[ Line: 2629 ]]
+		useContext = function(p7, p8)
 			-- upvalues: v3 (ref), ReadContextFunction (copy)
 			v3 = "useContext"
 			updateHookTypesDev()
 			
 			return ReadContextFunction(p7, p8)
 		end,
-		useEffect = function(p7, p8) --[[ Line: 2637 ]]
+		useEffect = function(p7, p8)
 			-- upvalues: v3 (ref), updateEffect (copy)
 			v3 = "useEffect"
 			updateHookTypesDev()
 			
 			return updateEffect(p7, p8)
 		end,
-		useImperativeHandle = function(p7, p8, p9) --[[ Line: 2646 ]]
+		useImperativeHandle = function(p7, p8, p9)
 			-- upvalues: v3 (ref)
 			v3 = "useImperativeHandle"
 			updateHookTypesDev()
 			
 			return updateImperativeHandle(p7, p8, p9)
 		end,
-		useLayoutEffect = function(p7, p8) --[[ Line: 2655 ]]
+		useLayoutEffect = function(p7, p8)
 			-- upvalues: v3 (ref), updateLayoutEffect (copy)
 			v3 = "useLayoutEffect"
 			updateHookTypesDev()
 			
 			return updateLayoutEffect(p7, p8)
 		end,
-		useMemo = function(p7, p8) --[[ Line: 2665 ]]
+		useMemo = function(p7, p8)
 			-- upvalues: v3 (ref), ReactCurrentDispatcher (copy), Current4 (ref), EnableAllocationTrims (copy), restoreDispatcherAndReturn (copy)
 			v3 = "useMemo"
 			updateHookTypesDev()
@@ -1843,7 +1843,7 @@ if DEV then
 			end
 			return unpack(list, 2)
 		end,
-		useReducer = function(p7, p8, p9) --[[ Line: 2688 ]]
+		useReducer = function(p7, p8, p9)
 			-- upvalues: v3 (ref), ReactCurrentDispatcher (copy), Current4 (ref)
 			v3 = "useReducer"
 			updateHookTypesDev()
@@ -1857,21 +1857,21 @@ if DEV then
 			end
 			return Result, Result3
 		end,
-		useRef = function(p7) --[[ Line: 2706 ]]
+		useRef = function(p7)
 			-- upvalues: v3 (ref)
 			v3 = "useRef"
 			updateHookTypesDev()
 			
 			return updateRef(p7)
 		end,
-		useBinding = function(p7) --[[ Line: 2712 ]]
+		useBinding = function(p7)
 			-- upvalues: v3 (ref)
 			v3 = "useBinding"
 			updateHookTypesDev()
 			
 			return updateBinding(p7)
 		end,
-		useState = function(p7) --[[ Line: 2717 ]]
+		useState = function(p7)
 			-- upvalues: v3 (ref), ReactCurrentDispatcher (copy), Current4 (ref)
 			v3 = "useState"
 			updateHookTypesDev()
@@ -1885,21 +1885,21 @@ if DEV then
 			end
 			return Result, Result3
 		end,
-		useDebugValue = function(p7, p8) --[[ Line: 2733 ]]
+		useDebugValue = function(p7, p8)
 			-- upvalues: v3 (ref), Callback (copy)
 			v3 = "useDebugValue"
 			updateHookTypesDev()
 			
 			return Callback(p7, p8)
 		end,
-		useMutableSource = function(p7, p8, p9) --[[ Line: 2748 ]]
+		useMutableSource = function(p7, p8, p9)
 			-- upvalues: v3 (ref)
 			v3 = "useMutableSource"
 			updateHookTypesDev()
 			
 			return updateMutableSource(p7, p8, p9)
 		end,
-		useOpaqueIdentifier = function() --[[ Line: 2763 ]]
+		useOpaqueIdentifier = function()
 			-- upvalues: v3 (ref)
 			v3 = "useOpaqueIdentifier"
 			updateHookTypesDev()
@@ -1909,46 +1909,46 @@ if DEV then
 		unstable_isNewReconciler = EnableNewReconciler
 	}
 	v4 = {
-		readContext = function(p7, p8) --[[ Line: 2773 ]]
+		readContext = function(p7, p8)
 			-- upvalues: ReadContextFunction (copy)
 			return ReadContextFunction(p7, p8)
 		end,
-		useCallback = function(p7, p8) --[[ Line: 2779 ]]
+		useCallback = function(p7, p8)
 			-- upvalues: v3 (ref)
 			v3 = "useCallback"
 			updateHookTypesDev()
 			
 			return updateCallback(p7, p8)
 		end,
-		useContext = function(p7, p8) --[[ Line: 2784 ]]
+		useContext = function(p7, p8)
 			-- upvalues: v3 (ref), ReadContextFunction (copy)
 			v3 = "useContext"
 			updateHookTypesDev()
 			
 			return ReadContextFunction(p7, p8)
 		end,
-		useEffect = function(p7, p8) --[[ Line: 2792 ]]
+		useEffect = function(p7, p8)
 			-- upvalues: v3 (ref), updateEffect (copy)
 			v3 = "useEffect"
 			updateHookTypesDev()
 			
 			return updateEffect(p7, p8)
 		end,
-		useImperativeHandle = function(p7, p8, p9) --[[ Line: 2801 ]]
+		useImperativeHandle = function(p7, p8, p9)
 			-- upvalues: v3 (ref)
 			v3 = "useImperativeHandle"
 			updateHookTypesDev()
 			
 			return updateImperativeHandle(p7, p8, p9)
 		end,
-		useLayoutEffect = function(p7, p8) --[[ Line: 2810 ]]
+		useLayoutEffect = function(p7, p8)
 			-- upvalues: v3 (ref), updateLayoutEffect (copy)
 			v3 = "useLayoutEffect"
 			updateHookTypesDev()
 			
 			return updateLayoutEffect(p7, p8)
 		end,
-		useMemo = function(p7, p8) --[[ Line: 2820 ]]
+		useMemo = function(p7, p8)
 			-- upvalues: v3 (ref), ReactCurrentDispatcher (copy), Current5 (ref), EnableAllocationTrims (copy), restoreDispatcherAndReturn (copy)
 			v3 = "useMemo"
 			updateHookTypesDev()
@@ -1966,7 +1966,7 @@ if DEV then
 			end
 			return unpack(list, 2)
 		end,
-		useReducer = function(p7, p8, p9) --[[ Line: 2843 ]]
+		useReducer = function(p7, p8, p9)
 			-- upvalues: v3 (ref), ReactCurrentDispatcher (copy), Current5 (ref)
 			v3 = "useReducer"
 			updateHookTypesDev()
@@ -1980,21 +1980,21 @@ if DEV then
 			end
 			return Result, Result3
 		end,
-		useRef = function(p7) --[[ Line: 2862 ]]
+		useRef = function(p7)
 			-- upvalues: v3 (ref)
 			v3 = "useRef"
 			updateHookTypesDev()
 			
 			return updateRef(p7)
 		end,
-		useBinding = function(p7) --[[ Line: 2868 ]]
+		useBinding = function(p7)
 			-- upvalues: v3 (ref)
 			v3 = "useBinding"
 			updateHookTypesDev()
 			
 			return updateBinding(p7)
 		end,
-		useState = function(p7) --[[ Line: 2873 ]]
+		useState = function(p7)
 			-- upvalues: v3 (ref), ReactCurrentDispatcher (copy), Current5 (ref)
 			v3 = "useState"
 			updateHookTypesDev()
@@ -2008,21 +2008,21 @@ if DEV then
 			end
 			return Result, Result3
 		end,
-		useDebugValue = function(p7, p8) --[[ Line: 2889 ]]
+		useDebugValue = function(p7, p8)
 			-- upvalues: v3 (ref), Callback (copy)
 			v3 = "useDebugValue"
 			updateHookTypesDev()
 			
 			return Callback(p7, p8)
 		end,
-		useMutableSource = function(p7, p8, p9) --[[ Line: 2904 ]]
+		useMutableSource = function(p7, p8, p9)
 			-- upvalues: v3 (ref)
 			v3 = "useMutableSource"
 			updateHookTypesDev()
 			
 			return updateMutableSource(p7, p8, p9)
 		end,
-		useOpaqueIdentifier = function() --[[ Line: 2919 ]]
+		useOpaqueIdentifier = function()
 			-- upvalues: v3 (ref)
 			v3 = "useOpaqueIdentifier"
 			updateHookTypesDev()
@@ -2032,13 +2032,13 @@ if DEV then
 		unstable_isNewReconciler = EnableNewReconciler
 	}
 	Current3 = {
-		readContext = function(p7, p8) --[[ Line: 2929 ]]
+		readContext = function(p7, p8)
 			-- upvalues: Console (copy), ReadContextFunction (copy)
 			Console.error("Context can only be read while React is rendering. In classes, you can read it in the render method or getDerivedStateFromProps. In function components, you can read it directly in the function body, but not inside Hooks like useReducer() or useMemo().")
 			
 			return ReadContextFunction(p7, p8)
 		end,
-		useCallback = function(p7, p8) --[[ Line: 2936 ]]
+		useCallback = function(p7, p8)
 			-- upvalues: v3 (ref), Console (copy), DEV (copy), List (ref)
 			v3 = "useCallback"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2054,7 +2054,7 @@ if DEV then
 			end
 			return mountCallback(p7, p8)
 		end,
-		useContext = function(p7, p8) --[[ Line: 2942 ]]
+		useContext = function(p7, p8)
 			-- upvalues: v3 (ref), Console (copy), DEV (copy), List (ref), ReadContextFunction (copy)
 			v3 = "useContext"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2070,7 +2070,7 @@ if DEV then
 			end
 			return ReadContextFunction(p7, p8)
 		end,
-		useEffect = function(Create, Deps) --[[ Line: 2951 ]]
+		useEffect = function(Create, Deps)
 			-- upvalues: v3 (ref), Console (copy), DEV (copy), List (ref), mountEffect (copy)
 			v3 = "useEffect"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2086,7 +2086,7 @@ if DEV then
 			end
 			return mountEffect(Create, Deps)
 		end,
-		useImperativeHandle = function(p7, p8, p9) --[[ Line: 2961 ]]
+		useImperativeHandle = function(p7, p8, p9)
 			-- upvalues: v3 (ref), Console (copy), DEV (copy), List (ref)
 			v3 = "useImperativeHandle"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2102,7 +2102,7 @@ if DEV then
 			end
 			return mountImperativeHandle(p7, p8, p9)
 		end,
-		useLayoutEffect = function(Create, Deps) --[[ Line: 2971 ]]
+		useLayoutEffect = function(Create, Deps)
 			-- upvalues: v3 (ref), Console (copy), DEV (copy), List (ref), mountLayoutEffect (copy)
 			v3 = "useLayoutEffect"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2118,7 +2118,7 @@ if DEV then
 			end
 			return mountLayoutEffect(Create, Deps)
 		end,
-		useMemo = function(p7, p8) --[[ Line: 2982 ]]
+		useMemo = function(p7, p8)
 			-- upvalues: v3 (ref), Console (copy), DEV (copy), List (ref), ReactCurrentDispatcher (copy), Current3 (ref), EnableAllocationTrims (copy), restoreDispatcherAndReturn (copy)
 			v3 = "useMemo"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2146,7 +2146,7 @@ if DEV then
 			end
 			return unpack(list, 2)
 		end,
-		useReducer = function(p7, p8, p9) --[[ Line: 3006 ]]
+		useReducer = function(p7, p8, p9)
 			-- upvalues: v3 (ref), Console (copy), DEV (copy), List (ref), ReactCurrentDispatcher (copy), Current3 (ref)
 			v3 = "useReducer"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2170,7 +2170,7 @@ if DEV then
 			end
 			return Result, Result3
 		end,
-		useRef = function(p7) --[[ Line: 3025 ]]
+		useRef = function(p7)
 			-- upvalues: v3 (ref), Console (copy), DEV (copy), List (ref)
 			v3 = "useRef"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2186,7 +2186,7 @@ if DEV then
 			end
 			return mountRef(p7)
 		end,
-		useBinding = function(p7) --[[ Line: 3032 ]]
+		useBinding = function(p7)
 			-- upvalues: v3 (ref), Console (copy), DEV (copy), List (ref)
 			v3 = "useBinding"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2202,7 +2202,7 @@ if DEV then
 			end
 			return mountBinding(p7)
 		end,
-		useState = function(p7) --[[ Line: 3038 ]]
+		useState = function(p7)
 			-- upvalues: v3 (ref), Console (copy), DEV (copy), List (ref), ReactCurrentDispatcher (copy), Current3 (ref)
 			v3 = "useState"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2226,7 +2226,7 @@ if DEV then
 			end
 			return Result, Result3
 		end,
-		useDebugValue = function(p7, p8) --[[ Line: 3055 ]]
+		useDebugValue = function(p7, p8)
 			-- upvalues: v3 (ref), Console (copy), DEV (copy), List (ref)
 			v3 = "useDebugValue"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2242,7 +2242,7 @@ if DEV then
 			end
 			return mountDebugValue(p7, p8)
 		end,
-		useMutableSource = function(p7, p8, p9) --[[ Line: 3073 ]]
+		useMutableSource = function(p7, p8, p9)
 			-- upvalues: v3 (ref), Console (copy), DEV (copy), List (ref)
 			v3 = "useMutableSource"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2258,7 +2258,7 @@ if DEV then
 			end
 			return mountMutableSource(p7, p8, p9)
 		end,
-		useOpaqueIdentifier = function() --[[ Line: 3089 ]]
+		useOpaqueIdentifier = function()
 			-- upvalues: v3 (ref), Console (copy), DEV (copy), List (ref)
 			v3 = "useOpaqueIdentifier"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2277,13 +2277,13 @@ if DEV then
 		unstable_isNewReconciler = EnableNewReconciler
 	}
 	Current4 = {
-		readContext = function(p7, p8) --[[ Line: 3100 ]]
+		readContext = function(p7, p8)
 			-- upvalues: Console (copy), ReadContextFunction (copy)
 			Console.error("Context can only be read while React is rendering. In classes, you can read it in the render method or getDerivedStateFromProps. In function components, you can read it directly in the function body, but not inside Hooks like useReducer() or useMemo().")
 			
 			return ReadContextFunction(p7, p8)
 		end,
-		useCallback = function(p7, p8) --[[ Line: 3107 ]]
+		useCallback = function(p7, p8)
 			-- upvalues: v3 (ref), Console (copy)
 			v3 = "useCallback"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2291,7 +2291,7 @@ if DEV then
 			
 			return mountCallback(p7, p8)
 		end,
-		useContext = function(p7, p8) --[[ Line: 3113 ]]
+		useContext = function(p7, p8)
 			-- upvalues: v3 (ref), Console (copy), ReadContextFunction (copy)
 			v3 = "useContext"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2299,7 +2299,7 @@ if DEV then
 			
 			return ReadContextFunction(p7, p8)
 		end,
-		useEffect = function(p7, p8) --[[ Line: 3122 ]]
+		useEffect = function(p7, p8)
 			-- upvalues: v3 (ref), Console (copy), updateEffect (copy)
 			v3 = "useEffect"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2307,7 +2307,7 @@ if DEV then
 			
 			return updateEffect(p7, p8)
 		end,
-		useImperativeHandle = function(p7, p8, p9) --[[ Line: 3132 ]]
+		useImperativeHandle = function(p7, p8, p9)
 			-- upvalues: v3 (ref), Console (copy)
 			v3 = "useImperativeHandle"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2315,7 +2315,7 @@ if DEV then
 			
 			return updateImperativeHandle(p7, p8, p9)
 		end,
-		useLayoutEffect = function(p7, p8) --[[ Line: 3142 ]]
+		useLayoutEffect = function(p7, p8)
 			-- upvalues: v3 (ref), Console (copy), updateLayoutEffect (copy)
 			v3 = "useLayoutEffect"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2323,7 +2323,7 @@ if DEV then
 			
 			return updateLayoutEffect(p7, p8)
 		end,
-		useMemo = function(p7, p8) --[[ Line: 3153 ]]
+		useMemo = function(p7, p8)
 			-- upvalues: v3 (ref), Console (copy), ReactCurrentDispatcher (copy), Current4 (ref), EnableAllocationTrims (copy), restoreDispatcherAndReturn (copy)
 			v3 = "useMemo"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2342,7 +2342,7 @@ if DEV then
 			end
 			return unpack(list, 2)
 		end,
-		useReducer = function(p7, p8, p9) --[[ Line: 3177 ]]
+		useReducer = function(p7, p8, p9)
 			-- upvalues: v3 (ref), Console (copy), ReactCurrentDispatcher (copy), Current4 (ref)
 			v3 = "useReducer"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2357,7 +2357,7 @@ if DEV then
 			end
 			return Result, Result3
 		end,
-		useRef = function(p7) --[[ Line: 3197 ]]
+		useRef = function(p7)
 			-- upvalues: v3 (ref), Console (copy)
 			v3 = "useRef"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2365,7 +2365,7 @@ if DEV then
 			
 			return updateRef(p7)
 		end,
-		useBinding = function(p7) --[[ Line: 3204 ]]
+		useBinding = function(p7)
 			-- upvalues: v3 (ref), Console (copy)
 			v3 = "useBinding"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2373,7 +2373,7 @@ if DEV then
 			
 			return updateBinding(p7)
 		end,
-		useState = function(p7) --[[ Line: 3210 ]]
+		useState = function(p7)
 			-- upvalues: v3 (ref), Console (copy), ReactCurrentDispatcher (copy), Current4 (ref)
 			v3 = "useState"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2388,7 +2388,7 @@ if DEV then
 			end
 			return Result, Result3
 		end,
-		useDebugValue = function(p7, p8) --[[ Line: 3227 ]]
+		useDebugValue = function(p7, p8)
 			-- upvalues: v3 (ref), Console (copy), Callback (copy)
 			v3 = "useDebugValue"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2396,7 +2396,7 @@ if DEV then
 			
 			return Callback(p7, p8)
 		end,
-		useMutableSource = function(p7, p8, p9) --[[ Line: 3245 ]]
+		useMutableSource = function(p7, p8, p9)
 			-- upvalues: v3 (ref), Console (copy)
 			v3 = "useMutableSource"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2404,7 +2404,7 @@ if DEV then
 			
 			return updateMutableSource(p7, p8, p9)
 		end,
-		useOpaqueIdentifier = function() --[[ Line: 3261 ]]
+		useOpaqueIdentifier = function()
 			-- upvalues: v3 (ref), Console (copy)
 			v3 = "useOpaqueIdentifier"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2415,13 +2415,13 @@ if DEV then
 		unstable_isNewReconciler = EnableNewReconciler
 	}
 	Current5 = {
-		readContext = function(p7, p8) --[[ Line: 3272 ]]
+		readContext = function(p7, p8)
 			-- upvalues: Console (copy), ReadContextFunction (copy)
 			Console.error("Context can only be read while React is rendering. In classes, you can read it in the render method or getDerivedStateFromProps. In function components, you can read it directly in the function body, but not inside Hooks like useReducer() or useMemo().")
 			
 			return ReadContextFunction(p7, p8)
 		end,
-		useCallback = function(p7, p8) --[[ Line: 3279 ]]
+		useCallback = function(p7, p8)
 			-- upvalues: v3 (ref), Console (copy)
 			v3 = "useCallback"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2429,7 +2429,7 @@ if DEV then
 			
 			return updateCallback(p7, p8)
 		end,
-		useContext = function(p7, p8) --[[ Line: 3285 ]]
+		useContext = function(p7, p8)
 			-- upvalues: v3 (ref), Console (copy), ReadContextFunction (copy)
 			v3 = "useContext"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2437,7 +2437,7 @@ if DEV then
 			
 			return ReadContextFunction(p7, p8)
 		end,
-		useEffect = function(p7, p8) --[[ Line: 3294 ]]
+		useEffect = function(p7, p8)
 			-- upvalues: v3 (ref), Console (copy), updateEffect (copy)
 			v3 = "useEffect"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2445,7 +2445,7 @@ if DEV then
 			
 			return updateEffect(p7, p8)
 		end,
-		useImperativeHandle = function(p7, p8, p9) --[[ Line: 3304 ]]
+		useImperativeHandle = function(p7, p8, p9)
 			-- upvalues: v3 (ref), Console (copy)
 			v3 = "useImperativeHandle"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2453,7 +2453,7 @@ if DEV then
 			
 			return updateImperativeHandle(p7, p8, p9)
 		end,
-		useLayoutEffect = function(p7, p8) --[[ Line: 3314 ]]
+		useLayoutEffect = function(p7, p8)
 			-- upvalues: v3 (ref), Console (copy), updateLayoutEffect (copy)
 			v3 = "useLayoutEffect"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2461,7 +2461,7 @@ if DEV then
 			
 			return updateLayoutEffect(p7, p8)
 		end,
-		useMemo = function(p7, p8) --[[ Line: 3325 ]]
+		useMemo = function(p7, p8)
 			-- upvalues: v3 (ref), Console (copy), ReactCurrentDispatcher (copy), Current4 (ref), EnableAllocationTrims (copy), restoreDispatcherAndReturn (copy)
 			v3 = "useMemo"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2480,7 +2480,7 @@ if DEV then
 			end
 			return unpack(list, 2)
 		end,
-		useReducer = function(p7, p8, p9) --[[ Line: 3349 ]]
+		useReducer = function(p7, p8, p9)
 			-- upvalues: v3 (ref), Console (copy), ReactCurrentDispatcher (copy), Current4 (ref)
 			v3 = "useReducer"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2495,7 +2495,7 @@ if DEV then
 			end
 			return Result, Result3
 		end,
-		useRef = function(p7) --[[ Line: 3369 ]]
+		useRef = function(p7)
 			-- upvalues: v3 (ref), Console (copy)
 			v3 = "useRef"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2503,7 +2503,7 @@ if DEV then
 			
 			return updateRef(p7)
 		end,
-		useBinding = function(p7) --[[ Line: 3376 ]]
+		useBinding = function(p7)
 			-- upvalues: v3 (ref), Console (copy)
 			v3 = "useBinding"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2511,7 +2511,7 @@ if DEV then
 			
 			return updateBinding(p7)
 		end,
-		useState = function(p7) --[[ Line: 3382 ]]
+		useState = function(p7)
 			-- upvalues: v3 (ref), Console (copy), ReactCurrentDispatcher (copy), Current4 (ref)
 			v3 = "useState"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2526,7 +2526,7 @@ if DEV then
 			end
 			return Result, Result3
 		end,
-		useDebugValue = function(p7, p8) --[[ Line: 3399 ]]
+		useDebugValue = function(p7, p8)
 			-- upvalues: v3 (ref), Console (copy), Callback (copy)
 			v3 = "useDebugValue"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2534,7 +2534,7 @@ if DEV then
 			
 			return Callback(p7, p8)
 		end,
-		useMutableSource = function(p7, p8, p9) --[[ Line: 3417 ]]
+		useMutableSource = function(p7, p8, p9)
 			-- upvalues: v3 (ref), Console (copy)
 			v3 = "useMutableSource"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2542,7 +2542,7 @@ if DEV then
 			
 			return updateMutableSource(p7, p8, p9)
 		end,
-		useOpaqueIdentifier = function() --[[ Line: 3433 ]]
+		useOpaqueIdentifier = function()
 			-- upvalues: v3 (ref), Console (copy)
 			v3 = "useOpaqueIdentifier"
 			Console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
@@ -2553,7 +2553,7 @@ if DEV then
 		unstable_isNewReconciler = EnableNewReconciler
 	}
 end
-function ReactFiberHooksModule.renderWithHooks(p6, p7, Callback, p8, p9, p10) --[[ Line: 3444 ]]
+function ReactFiberHooksModule.renderWithHooks(p6, p7, Callback, p8, p9, p10)
 	-- upvalues: Value (ref), Alternate (ref), DEV (copy), List (ref), Count (ref), ReactFeatureFlags (copy), NoLanes (copy), ReactCurrentDispatcher (copy), Current2 (ref), Current1 (ref), Current (ref), config (copy), config1 (copy), Flag1 (ref), Error1 (copy), Alternate1 (ref), v2 (ref), v4 (ref), config2 (copy), ContextOnlyDispatcher (copy), EnableHookDoubleBuffering (copy), Next (ref), LastEffect (ref), v3 (ref), Flag (ref), GetComponentNameFunction (copy)
 	Value = p10
 	Alternate = p7

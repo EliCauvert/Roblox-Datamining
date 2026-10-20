@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("UGCValidationLeaderVertsNearCageIslandsDistance", 175)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastInt("UGCValidationLeaderVertsNearCageIslandsDistance")
 end

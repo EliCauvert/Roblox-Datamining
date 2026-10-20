@@ -16,14 +16,14 @@ if require(AdPlayer.Flags).GetEnableLuaRewardTimerUI() then
 		rewardEarned = "Features.OnDemandAds.Reward_Earned"
 	}
 	
-	local function _(Duration) --[[ Line: 37 | Named "linearEaseOptions" ]]
+	local function _(Duration)
 		return {
 			duration = Duration,
 			easingStyle = Enum.EasingStyle.Linear
 		}
 	end
 	
-	return function(p1) --[[ Line: 44 ]]
+	return function(p1)
 		-- upvalues: ReactModule (copy), ReactOtterModule (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), config (copy), View (copy), Image (copy), Text (copy), RadialProgressComponentModule (copy)
 		local UseRefResult = ReactModule.useRef(nil)
 		local UseStateResult, UseStateResult2 = ReactModule.useState(0)
@@ -41,7 +41,7 @@ if require(AdPlayer.Flags).GetEnableLuaRewardTimerUI() then
 		local UseAnimatedBindingResult8, UseAnimatedBindingResult2_7 = ReactOtterModule.useAnimatedBinding(0)
 		local UseStateResult3, UseStateResult2_2 = ReactModule.useState(true)
 		local UseBindingResult, _ = ReactModule.useBinding(1)
-		ReactModule.useEffect(function() --[[ Line: 64 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseStateResult3 (copy), UseAnimatedBindingResult2_7 (copy), ReactOtterModule (upval)
 			if UseStateResult3 then
 				UseAnimatedBindingResult2_7(ReactOtterModule.instant(0))
@@ -49,19 +49,19 @@ if require(AdPlayer.Flags).GetEnableLuaRewardTimerUI() then
 				return
 			end
 			local Flag = false
-			task.delay(3, function() --[[ Line: 71 ]]
+			task.delay(3, function()
 				-- upvalues: Flag (ref), UseAnimatedBindingResult2_7 (upval), ReactOtterModule (upval)
 				if not Flag then
 					UseAnimatedBindingResult2_7(ReactOtterModule.ease(1))
 				end
 			end)
 			
-			return function() --[[ Line: 77 ]]
+			return function()
 				-- upvalues: Flag (ref)
 				Flag = true
 			end
 		end, { UseStateResult3 })
-		ReactModule.useEffect(function() --[[ Line: 82 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRefResult (copy), UseStateResult2 (copy), UseRefResult1 (copy), UseStateResult2_1 (copy)
 			local Current = UseRefResult.current
 			
@@ -74,7 +74,7 @@ if require(AdPlayer.Flags).GetEnableLuaRewardTimerUI() then
 				UseStateResult2_1(Current1.TextBounds.X)
 			end
 		end, {})
-		ReactModule.useEffect(function() --[[ Line: 94 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseStateResult3 (copy), UseAnimatedBindingResult2_4 (copy), ReactOtterModule (upval), UseStateResult (copy), UseStateResult1 (copy)
 			if UseStateResult3 then
 				UseAnimatedBindingResult2_4(ReactOtterModule.instant(24 + UseStateResult + 8 + 20))
@@ -84,7 +84,7 @@ if require(AdPlayer.Flags).GetEnableLuaRewardTimerUI() then
 				UseAnimatedBindingResult2_4(ReactOtterModule.ease(24 + UseStateResult1 + 8 + 20 - 4, { duration = 0.4, easingStyle = Enum.EasingStyle.Linear }))
 			end
 		end, { UseStateResult3, UseStateResult, UseStateResult1 })
-		ReactModule.useEffect(function() --[[ Line: 114 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseStateResult3 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseAnimatedBindingResult2_1 (copy), UseAnimatedBindingResult2_2 (copy), UseAnimatedBindingResult2_3 (copy), UseAnimatedBindingResult2_6 (copy), UseAnimatedBindingResult2_5 (copy)
 			local Flag = false
 			
@@ -99,21 +99,21 @@ if require(AdPlayer.Flags).GetEnableLuaRewardTimerUI() then
 				UseAnimatedBindingResult2_1(ReactOtterModule.ease(24, { duration = 0.4, easingStyle = Enum.EasingStyle.Linear }))
 				UseAnimatedBindingResult2_3(ReactOtterModule.ease(0, { duration = 0.4, easingStyle = Enum.EasingStyle.Linear }))
 				UseAnimatedBindingResult2_6(ReactOtterModule.ease(1, { duration = 0.1, easingStyle = Enum.EasingStyle.Linear }))
-				task.delay(0.1, function() --[[ Line: 130 ]]
+				task.delay(0.1, function()
 					-- upvalues: Flag (ref), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), UseAnimatedBindingResult2_2 (upval)
 					if not Flag then
 						UseAnimatedBindingResult2(ReactOtterModule.ease(1, { duration = 0.1, easingStyle = Enum.EasingStyle.Linear }))
 						UseAnimatedBindingResult2_2(ReactOtterModule.ease(0, { duration = 0.1, easingStyle = Enum.EasingStyle.Linear }))
 					end
 				end)
-				task.delay(0.4, function() --[[ Line: 137 ]]
+				task.delay(0.4, function()
 					-- upvalues: Flag (ref), UseAnimatedBindingResult2_5 (upval), ReactOtterModule (upval)
 					if not Flag then
 						UseAnimatedBindingResult2_5(ReactOtterModule.ease(0, { duration = 0.1, easingStyle = Enum.EasingStyle.Linear }))
 					end
 				end)
 			end
-			return function() --[[ Line: 144 ]]
+			return function()
 				-- upvalues: Flag (ref)
 				Flag = true
 			end
@@ -121,7 +121,7 @@ if require(AdPlayer.Flags).GetEnableLuaRewardTimerUI() then
 		
 		return ReactModule.createElement(View, {
 			tag = "padding-y-xsmall padding-x-medium bg-over-media-300 radius-small clip",
-			Size = UseAnimatedBindingResult5:map(function(XOffset): UDim2 --[[ Line: 151 ]]
+			Size = UseAnimatedBindingResult5:map(function(XOffset): UDim2
 				return UDim2.fromOffset(XOffset, 32)
 			end),
 			GroupTransparency = UseAnimatedBindingResult8,
@@ -133,7 +133,7 @@ if require(AdPlayer.Flags).GetEnableLuaRewardTimerUI() then
 				LayoutOrder = 1,
 				imageStyle = { Transparency = UseAnimatedBindingResult6 },
 				Position = UDim2.new(0, -4, 0.5, 0),
-				Visible = p1.rewardWaitAlpha:map(function(p2: number): boolean --[[ Line: 165 ]]
+				Visible = p1.rewardWaitAlpha:map(function(p2: number): boolean
 					-- upvalues: UseStateResult2_2 (copy)
 					UseStateResult2_2(p2 < 1)
 					
@@ -144,7 +144,7 @@ if require(AdPlayer.Flags).GetEnableLuaRewardTimerUI() then
 				tag = "text-label-medium text-align-x-left text-align-y-center",
 				Text = UseLocalizationResult.getRewardIn,
 				Size = UDim2.new(0, UseStateResult, 1, 0),
-				Position = UseAnimatedBindingResult1:map(function(XOffset): UDim2 --[[ Line: 174 ]]
+				Position = UseAnimatedBindingResult1:map(function(XOffset): UDim2
 					return UDim2.new(0, XOffset, 0, 0)
 				end),
 				textStyle = {
@@ -157,7 +157,7 @@ if require(AdPlayer.Flags).GetEnableLuaRewardTimerUI() then
 				tag = "text-label-medium text-align-x-right text-align-y-center anchor-top-right",
 				Text = UseLocalizationResult.rewardEarned,
 				Size = UDim2.new(0, UseStateResult1, 1, 0),
-				Position = UseAnimatedBindingResult4:map(function(p2): UDim2 --[[ Line: 187 ]]
+				Position = UseAnimatedBindingResult4:map(function(p2): UDim2
 					return UDim2.new(1, -p2, 0, 0)
 				end),
 				textStyle = {
@@ -178,7 +178,7 @@ if require(AdPlayer.Flags).GetEnableLuaRewardTimerUI() then
 					Size = UDim2.fromScale(1, 1),
 					SizeConstraint = Enum.SizeConstraint.RelativeYY,
 					ImageColor3 = UseTokensResult.Color.Content.Muted.Color3,
-					Visible = p1.rewardWaitAlpha:map(function(p2: number): boolean --[[ Line: 208 ]]
+					Visible = p1.rewardWaitAlpha:map(function(p2: number): boolean
 						return p2 < 1
 					end)
 				}, {
@@ -192,7 +192,7 @@ if require(AdPlayer.Flags).GetEnableLuaRewardTimerUI() then
 						timerLabel = ReactModule.createElement(Text, {
 							tag = "size-full-300 anchor-center-center position-center-center content-emphasis text-caption-small text-align-x-center text-align-y-center",
 							TextScaled = true,
-							Text = p1.rewardWaitAlpha:map(function(p2): string --[[ Line: 221 ]]
+							Text = p1.rewardWaitAlpha:map(function(p2): string
 								-- upvalues: p1 (copy)
 								return (tostring((math.ceil(p1.rewardWaitTime - p1.rewardWaitTime * p2))))
 							end)

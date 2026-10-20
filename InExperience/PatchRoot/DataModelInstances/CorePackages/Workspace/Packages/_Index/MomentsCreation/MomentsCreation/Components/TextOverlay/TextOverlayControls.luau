@@ -20,15 +20,15 @@ local _ = require(MomentsCreation.Types.CreationFlowTypes)
 local _ = require(Parent.MomentsTypes)
 local FFlagMomentsTextOverlayV2Redesign = MomentsCommonModule.Flags.FFlagMomentsTextOverlayV2Redesign
 
-return function(p1) --[[ Line: 46 | Named "TextOverlayControls" ]]
+return function(p1)
 	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseCreationFlowStringsModule (copy), FFlagMomentsTextOverlayV2Redesign (copy), UseMemoFunction (copy), SignalsModule (copy), ConstantsModule (copy), UseSignalStateFunction (copy), UseCallbackFunction (copy), DashModule (copy), ReactModule (copy), View (copy), Slider (copy), Knob (copy), FoundationModule (copy), Button (copy)
 	local Controller = p1.controller
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseTokensResult = UseTokensFunction()
 	local UseCreationFlowStringsModuleResult = UseCreationFlowStringsModule()
-	local UseSignalStateResult: number = UseSignalStateFunction((UseMemoFunction(function() --[[ Line: 57 ]]
+	local UseSignalStateResult: number = UseSignalStateFunction((UseMemoFunction(function()
 		-- upvalues: SignalsModule (upval), FFlagMomentsTextOverlayV2Redesign (copy), ConstantsModule (upval), Controller (copy)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 58 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: FFlagMomentsTextOverlayV2Redesign (upval), ConstantsModule (upval), Controller (upval)
 			if FFlagMomentsTextOverlayV2Redesign then
 				return ConstantsModule.TextOverlay.DefaultFontSize
@@ -41,7 +41,7 @@ return function(p1) --[[ Line: 46 | Named "TextOverlayControls" ]]
 			end
 		end)
 	end, { Controller, FFlagMomentsTextOverlayV2Redesign })))
-	local UseCallbackResult = UseCallbackFunction(function(FontSize) --[[ Line: 70 ]]
+	local UseCallbackResult = UseCallbackFunction(function(FontSize)
 		-- upvalues: Controller (copy), DashModule (upval)
 		local ActiveSession = Controller.getActiveSession(false)
 		
@@ -87,7 +87,7 @@ return function(p1) --[[ Line: 46 | Named "TextOverlayControls" ]]
 				fillBehavior = FoundationModule.Enums.FillBehavior.Fit,
 				text = UseCreationFlowStringsModuleResult.GeneralCtaBack,
 				variant = FoundationModule.Enums.ButtonVariant.Text,
-				onActivated = UseCallbackFunction(function() --[[ Line: 83 ]]
+				onActivated = UseCallbackFunction(function()
 					-- upvalues: Controller (copy)
 					Controller.discardActiveTool()
 				end, { Controller }),
@@ -98,7 +98,7 @@ return function(p1) --[[ Line: 46 | Named "TextOverlayControls" ]]
 				fillBehavior = FoundationModule.Enums.FillBehavior.Fit,
 				text = UseCreationFlowStringsModuleResult.GeneralCtaDone,
 				variant = FoundationModule.Enums.ButtonVariant.Text,
-				onActivated = UseCallbackFunction(function() --[[ Line: 87 ]]
+				onActivated = UseCallbackFunction(function()
 					-- upvalues: Controller (copy)
 					Controller.commitActiveTool()
 				end, { Controller }),

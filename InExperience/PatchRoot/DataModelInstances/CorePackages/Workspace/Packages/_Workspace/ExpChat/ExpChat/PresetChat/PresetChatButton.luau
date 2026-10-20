@@ -17,7 +17,7 @@ local FFlagExpChatCenterMobilePresetButtonModule = require(ExpChat.Flags.FFlagEx
 local FFlagExpChatPresetChatCircleFaceEmojiEntryPointRolloutEnabledModule = require(ExpChat.Flags.FFlagExpChatPresetChatCircleFaceEmojiEntryPointRolloutEnabled)
 local ExpChatPresetChatEmojiTabExperimentation = require(Parent.SocialExperiments).ExpChatPresetChatEmojiTabExperimentation
 
-return ReactModule.memo(function(p1) --[[ Line: 31 | Named "PresetChatButton" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), LocalizationModule (copy), GetPresetChatStoreModule (copy), SignalsReactModule (copy), FFlagExpChatPresetChatCircleFaceEmojiEntryPointRolloutEnabledModule (copy), HasPresetEmojiModule (copy), ExpChatPresetChatEmojiTabExperimentation (copy), FFlagExpChatUseUnifiedTooltipStore (copy), GetChatTooltipStoreModule (copy), SetIsPresetTrayOpenModule (copy), ExpChatSharedModule (copy), ConstantsModule (copy), FoundationModule (copy), ConfigModule (copy), PresetChatTooltipModule (copy), FFlagExpChatCenterMobilePresetButtonModule (copy)
 	local UseRefResult = ReactModule.useRef(false)
 	local UseLocalizationResult = LocalizationModule.useLocalization({
@@ -29,14 +29,14 @@ return ReactModule.memo(function(p1) --[[ Line: 31 | Named "PresetChatButton" ]]
 	
 	if FFlagExpChatPresetChatCircleFaceEmojiEntryPointRolloutEnabledModule then
 		local UseSignalStateResult1 = SignalsReactModule.useSignalState(PresetChatStoreModule.getCategoryGroups)
-		IsEmojiIconEnabled = ReactModule.useMemo(function() --[[ Line: 44 ]]
+		IsEmojiIconEnabled = ReactModule.useMemo(function()
 			-- upvalues: HasPresetEmojiModule (upval), UseSignalStateResult1 (copy)
 			return HasPresetEmojiModule(UseSignalStateResult1)
 		end, { UseSignalStateResult1 })
 	elseif ExpChatPresetChatEmojiTabExperimentation.isExperimentEnabled then
 		IsEmojiIconEnabled = ExpChatPresetChatEmojiTabExperimentation.getIsEmojiIconEnabled()
 	end
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 51 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FFlagExpChatUseUnifiedTooltipStore (upval), GetChatTooltipStoreModule (upval), UseRefResult (copy), SetIsPresetTrayOpenModule (upval), PresetChatStoreModule (copy), ExpChatSharedModule (upval), ConstantsModule (upval)
 		if FFlagExpChatUseUnifiedTooltipStore then
 			local ChatTooltipStoreModule = GetChatTooltipStoreModule(false)

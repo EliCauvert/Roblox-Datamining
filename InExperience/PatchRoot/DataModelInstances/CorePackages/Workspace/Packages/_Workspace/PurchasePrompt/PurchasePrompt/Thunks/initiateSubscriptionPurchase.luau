@@ -19,9 +19,9 @@ local FFlagEnablePurchaseFlowUUIDMigrationModule = require(PurchasePrompt.Flags.
 local PurchaseFlowUUIDTelemetryModule = require(PurchasePrompt.Events.PurchaseFlowUUIDTelemetry)
 local list = { NetworkModule, ExternalSettingsModule }
 
-return function(p1) --[[ Line: 31 | Named "initiateSubscriptionPurchase" ]]
+return function(p1)
 	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), ExternalSettingsModule (copy), FFlagEnablePurchaseFlowUUIDMigrationModule (copy), HttpService (copy), SetPurchaseFlowUUIDModule (copy), LoggingProtocolModule (copy), PurchaseFlowUUIDTelemetryModule (copy), HasPendingRequestModule (copy), RequestSubscriptionPurchaseModule (copy), ErrorOccurredModule (copy), PurchaseErrorModule (copy), GetSubscriptionPurchaseInfoModule (copy), ResolveSubscriptionPromptStateModule (copy)
-	return ThunkModule.new(script.Name, list, function(p2, p3) --[[ Line: 32 ]]
+	return ThunkModule.new(script.Name, list, function(p2, p3)
 		-- upvalues: NetworkModule (upval), ExternalSettingsModule (upval), FFlagEnablePurchaseFlowUUIDMigrationModule (upval), HttpService (upval), SetPurchaseFlowUUIDModule (upval), LoggingProtocolModule (upval), PurchaseFlowUUIDTelemetryModule (upval), HasPendingRequestModule (upval), RequestSubscriptionPurchaseModule (upval), p1 (copy), ErrorOccurredModule (upval), PurchaseErrorModule (upval), GetSubscriptionPurchaseInfoModule (upval), ResolveSubscriptionPromptStateModule (upval)
 		local v1 = p3[NetworkModule]
 		local v2 = p3[ExternalSettingsModule]
@@ -40,10 +40,10 @@ return function(p1) --[[ Line: 31 | Named "initiateSubscriptionPurchase" ]]
 			
 			return nil
 		else
-			return GetSubscriptionPurchaseInfoModule(v1, p1):andThen(function(Result) --[[ Line: 58 ]]
+			return GetSubscriptionPurchaseInfoModule(v1, p1):andThen(function(Result)
 				-- upvalues: p2 (copy), ResolveSubscriptionPromptStateModule (upval)
 				p2:dispatch(ResolveSubscriptionPromptStateModule(Result))
-			end):catch(function(Err) --[[ Line: 61 ]]
+			end):catch(function(Err)
 				-- upvalues: p2 (copy), ErrorOccurredModule (upval)
 				p2:dispatch(ErrorOccurredModule(Err))
 			end)

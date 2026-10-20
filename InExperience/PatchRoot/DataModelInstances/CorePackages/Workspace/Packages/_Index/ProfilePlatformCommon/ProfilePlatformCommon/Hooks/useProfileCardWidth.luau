@@ -7,9 +7,9 @@ local GetDisplayStoreFunction = require(Parent.Display).GetDisplayStore
 local FFlagProfilePlatformNewProfileHeader = require(Parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
 local FixIsWideModeCheck = game:DefineFastFlag("FixIsWideModeCheck", false)
 
-return function(): number --[[ Line: 19 ]]
+return function(): number
 	-- upvalues: UseScreenSizeFunction (copy), UseSelectorFunction (copy), GetSafeAreaSizeFunction (copy), FixIsWideModeCheck (copy), GetDisplayStoreFunction (copy), UseNavBarSizeFunction (copy), FFlagProfilePlatformNewProfileHeader (copy)
-	local SafeAreaSize = GetSafeAreaSizeFunction(UseScreenSizeFunction(), (UseSelectorFunction(function(p1) --[[ Line: 21 ]]
+	local SafeAreaSize = GetSafeAreaSizeFunction(UseScreenSizeFunction(), (UseSelectorFunction(function(p1)
 		return p1.GlobalGuiInset
 	end)))
 	local IsOffsetBelow: boolean = if FixIsWideModeCheck then SafeAreaSize.Y.Offset < SafeAreaSize.X.Offset else GetDisplayStoreFunction(false).getDisplaySize(false) ~= Enum.DisplaySize.Small

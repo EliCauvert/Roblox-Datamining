@@ -5,7 +5,7 @@
 	component = nil
 }
 
-return function(Text: string) --[[ Line: 10 | Named "parseIceCandidate" ]]
+return function(Text: string)
 	-- upvalues: config (copy)
 	if Text == nil or Text == "" then
 		return config

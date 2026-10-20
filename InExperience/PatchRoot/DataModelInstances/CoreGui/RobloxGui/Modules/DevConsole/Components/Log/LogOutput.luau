@@ -10,13 +10,13 @@ local TextFrameHeight = ConstantsModule.LogFormatting.TextFrameHeight
 local TextFramePadding = ConstantsModule.LogFormatting.TextFramePadding
 local MaxStringSize = ConstantsModule.LogFormatting.MaxStringSize
 
-local function _(p1, p2): number --[[ Line: 25 | Named "countTextLinesInKeyValuePair" ]]
+local function _(p1, p2): number
 	local _, Replaced2 = string.gsub(`{p1}: {p2}`, "\n", "")
 	
 	return Replaced2 + 1
 end
 
-local function countContextLines(Context, p1: number): number --[[ Line: 30 ]]
+local function countContextLines(Context, p1: number): number
 	-- upvalues: DevConsoleFixMultilineContext (copy), countContextLines (copy)
 	local Total = 0
 	
@@ -40,11 +40,11 @@ end
 
 local LogOutput = RoactModule.Component:extend("LogOutput")
 
-function LogOutput.init(p2, p3) --[[ Line: 52 ]]
+function LogOutput.init(p2, p3)
 	-- upvalues: RoactModule (copy)
 	local InitLogOutputResult = p3.initLogOutput and p3.initLogOutput()
 	
-	function p2.onCanvasChange() --[[ Line: 55 ]]
+	function p2.onCanvasChange()
 		-- upvalues: p2 (copy)
 		local Current = p2.ref.current
 		
@@ -72,12 +72,12 @@ function LogOutput.init(p2, p3) --[[ Line: 52 ]]
 	}
 end
 
-function LogOutput.willUpdate(p2, _, _) --[[ Line: 85 ]]
+function LogOutput.willUpdate(p2, _, _)
 	p2._canvasSignal:Disconnect()
 	p2._absSizeSignal:Disconnect()
 end
 
-function LogOutput.didUpdate(p2) --[[ Line: 90 ]]
+function LogOutput.didUpdate(p2)
 	p2._canvasSignal = p2.ref.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p2.onCanvasChange)
 	p2._absSizeSignal = p2.ref.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(p2.onCanvasChange)
 	
@@ -90,9 +90,9 @@ function LogOutput.didUpdate(p2) --[[ Line: 90 ]]
 	end
 end
 
-function LogOutput.didMount(p2) --[[ Line: 106 ]]
+function LogOutput.didMount(p2)
 	-- upvalues: TextFrameHeight (copy), TextFramePadding (copy)
-	p2.logConnector = p2.props.targetSignal:Connect(function(LogData) --[[ Line: 107 ]]
+	p2.logConnector = p2.props.targetSignal:Connect(function(LogData)
 		-- upvalues: p2 (copy), TextFrameHeight (upval), TextFramePadding (upval)
 		if p2.state.autoScroll or LogData:getSize() ~= LogData:getMaxSize() then
 			p2:setState({ logData = LogData })
@@ -125,12 +125,12 @@ function LogOutput.didMount(p2) --[[ Line: 106 ]]
 	end
 end
 
-function LogOutput.willUnmount(p2) --[[ Line: 151 ]]
+function LogOutput.willUnmount(p2)
 	p2.logConnector:Disconnect()
 	p2.logConnector = nil
 end
 
-function LogOutput.render(p2) --[[ Line: 156 ]]
+function LogOutput.render(p2)
 	-- upvalues: TextFrameHeight (copy), RoactModule (copy), BannerButtonModule (copy), MainWindow (copy), Log (copy), DevConsoleFixMultilineContext (copy), TextFramePadding (copy), countContextLines (copy), ConstantsModule (copy), IconHeight (copy), MaxStringSize (copy), TextService (copy)
 	local LayoutOrder = p2.props.layoutOrder
 	local Size = p2.props.size
@@ -147,16 +147,16 @@ function LogOutput.render(p2) --[[ Line: 156 ]]
 		local YOffset = -1
 		local v2 = 0
 		
-		local function _(p3) --[[ Line: 175 | Named "createOnButtonPress" ]]
+		local function _(p3)
 			-- upvalues: p2 (copy)
-			return function() --[[ Line: 176 ]]
+			return function()
 				-- upvalues: p3 (copy), p2 (upval)
 				p3.Expanded = not p3.Expanded
 				p2:setState({})
 			end
 		end
 		
-		local function addContextEntries(TextLabels, Context, TextColor3, p3: number, p4) --[[ Line: 182 ]]
+		local function addContextEntries(TextLabels, Context, TextColor3, p3: number, p4)
 			-- upvalues: RoactModule (upval), BannerButtonModule (upval), MainWindow (upval), p2 (copy), Log (upval), addContextEntries (copy), DevConsoleFixMultilineContext (upval), TextFramePadding (upval)
 			if p3 >= 3 then return end
 			local List = {}
@@ -166,7 +166,7 @@ function LogOutput.render(p2) --[[ Line: 156 ]]
 					table.insert(List, i)
 				end
 			end
-			table.sort(List, function(A, B): boolean --[[ Line: 198 ]]
+			table.sort(List, function(A, B): boolean
 				return tostring(A) < tostring(B)
 			end)
 			local v3 = p3 * 20 + 20
@@ -184,7 +184,7 @@ function LogOutput.render(p2) --[[ Line: 156 ]]
 						size = UDim2.new(1, 0, 0, MainWindow),
 						isExpanded = ContextEntry._expanded,
 						layoutOrder = I,
-						onButtonPress = function() --[[ Line: 218 ]]
+						onButtonPress = function()
 							-- upvalues: ContextEntry (copy), p2 (upval)
 							ContextEntry._expanded = not ContextEntry._expanded
 							p2:setState({})
@@ -286,7 +286,7 @@ function LogOutput.render(p2) --[[ Line: 156 ]]
 							hideLines = true,
 							size = UDim2.new(1, 0, 0, MainWindow),
 							isExpanded = Key1.Expanded,
-							onButtonPress = function() --[[ Line: 176 ]]
+							onButtonPress = function()
 								-- upvalues: Key1 (copy), p2 (copy)
 								Key1.Expanded = not Key1.Expanded
 								p2:setState({})

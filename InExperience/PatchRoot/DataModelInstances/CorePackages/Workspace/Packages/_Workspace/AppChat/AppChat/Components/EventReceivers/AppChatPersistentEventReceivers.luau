@@ -9,7 +9,7 @@ local AppChatRemoveThirdPartyRestrictionModule = require(script.Parent.AppChatRe
 local FFlagAppChatFriendsTabIxpEnabledModule = require(AppChat.Flags.FFlagAppChatFriendsTabIxpEnabled)
 local FriendsChatExperimentExposureEventReceiverModule = nil
 
-local function _() --[[ Line: 15 | Named "getFriendsChatExperimentExposureEventReceiver" ]]
+local function _()
 	-- upvalues: FriendsChatExperimentExposureEventReceiverModule (ref)
 	if FriendsChatExperimentExposureEventReceiverModule == nil then
 		FriendsChatExperimentExposureEventReceiverModule = require(script.Parent.FriendsChatExperimentExposureEventReceiver)
@@ -21,7 +21,7 @@ local FFlagEnableShareSheet = require(Parent.SharedFlags).FFlagEnableShareSheet
 local ExternalChatMessageSenderRegistrationModule = if FFlagEnableShareSheet then require(script.Parent.ExternalChatMessageSenderRegistration) else nil
 local ThirdPartyUserService = game:GetService("ThirdPartyUserService")
 
-return function(p1) --[[ Line: 33 | Named "AppChatPersistentEventReceivers" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), AppChatAccountSettingsEventReceiverModule (copy), AppChatInterventionEventReceiverModule (copy), ThirdPartyUserService (copy), AppChatThirdPartySettingsEventReceiverModule (copy), AppChatRemoveThirdPartyRestrictionModule (copy), AppChatNotificationEventReceiverModule (copy), FFlagAppChatFriendsTabIxpEnabledModule (copy), FriendsChatExperimentExposureEventReceiverModule (ref), FFlagEnableShareSheet (copy), ExternalChatMessageSenderRegistrationModule (copy)
 	local CreateElementFunction1 = ReactModule.createElement
 	local Fragment = ReactModule.Fragment

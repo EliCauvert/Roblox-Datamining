@@ -4,16 +4,16 @@ local ReactModule = require(Parent1.React)
 local ToastNotificationWrapperModule = require(Parent.ToastNotificationWrapper)
 local ExperienceService = require(Parent1.ExperienceService).ExperienceService
 
-return function(p1) --[[ Line: 14 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ExperienceService (copy), ToastNotificationWrapperModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 16 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ExperienceService (upval), UseStateResult2 (copy)
-		ExperienceService:RegisterForExperienceJoin(function() --[[ Line: 17 ]]
+		ExperienceService:RegisterForExperienceJoin(function()
 			-- upvalues: UseStateResult2 (upval)
 			UseStateResult2(true)
 		end)
-		ExperienceService:RegisterForExperienceLeave(function() --[[ Line: 20 ]]
+		ExperienceService:RegisterForExperienceLeave(function()
 			-- upvalues: UseStateResult2 (upval)
 			UseStateResult2(false)
 		end)

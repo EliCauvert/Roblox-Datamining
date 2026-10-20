@@ -8,7 +8,7 @@ local Text = FoundationModule.Text
 local Enums = FoundationModule.Enums
 local FFlagAXDurables2Option = require(Parent.AvatarExperienceFlags).FFlagAXDurables2Option
 
-return (ReactModule.forwardRef(function(p1, _) --[[ Line: 28 ]]
+return (ReactModule.forwardRef(function(p1, _)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), FFlagAXDurables2Option (copy), ReactModule (copy), FoundationModule (copy), Enums (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({

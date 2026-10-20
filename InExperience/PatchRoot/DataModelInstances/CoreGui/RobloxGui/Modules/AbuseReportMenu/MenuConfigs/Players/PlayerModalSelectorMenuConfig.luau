@@ -11,12 +11,12 @@ return {
 	componentType = "modalSelector",
 	fieldLabel = "WhichPerson",
 	componentName = "PlayerSelector",
-	getIsVisible = function(_): boolean --[[ Line: 13 ]]
+	getIsVisible = function(_): boolean
 		return true
 	end,
-	getMenuItems = function(p1) --[[ Line: 16 ]]
+	getMenuItems = function(p1)
 		-- upvalues: CryoModule (copy), UserLibModule (copy), VerifiedBadgesModule (copy), InExperienceCapabilities (copy)
-		return (CryoModule.List.map(p1.playerObjects, function(Player) --[[ Line: 17 ]]
+		return (CryoModule.List.map(p1.playerObjects, function(Player)
 			-- upvalues: UserLibModule (upval), VerifiedBadgesModule (upval), InExperienceCapabilities (upval)
 			return {
 				label = Player.DisplayName .. (if UserLibModule.Utils.isPlayerVerified(Player) then VerifiedBadgesModule.emoji.verified else ""),
@@ -25,7 +25,7 @@ return {
 			}
 		end))
 	end,
-	getSelectedValue = function(p1): string? --[[ Line: 31 ]]
+	getSelectedValue = function(p1): string?
 		-- upvalues: InExperienceCapabilities (copy)
 		local AllegedAbuser = p1.allegedAbuser
 		
@@ -37,7 +37,7 @@ return {
 			return nil
 		end
 	end,
-	onUpdateSelectedOption = function(p1, p2, Callback: (any) -> (), p3) --[[ Line: 42 ]]
+	onUpdateSelectedOption = function(p1, p2, Callback: (any) -> (), p3)
 		-- upvalues: ConstantsModule (copy)
 		if p1.identifier then
 			local Identifier = p1.identifier

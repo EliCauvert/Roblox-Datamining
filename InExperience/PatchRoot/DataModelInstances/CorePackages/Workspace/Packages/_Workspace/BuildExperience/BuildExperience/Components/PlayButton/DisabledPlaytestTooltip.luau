@@ -8,7 +8,7 @@ local EducationalTooltip = FoundationModule.EducationalTooltip
 local PopoverAlign = FoundationModule.Enums.PopoverAlign
 local PopoverSide = FoundationModule.Enums.PopoverSide
 
-return function(Frame) --[[ Line: 21 | Named "DisabledPlaytestTooltip" ]]
+return function(Frame)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), EducationalTooltip (copy), PopoverAlign (copy), PopoverSide (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		text = LocalizationStringsModule.PLAYTEST_DISABLED_TOOLTIP,

@@ -34,7 +34,7 @@ local FFlagLuaAppsEnablePromptVIPServerPurchase = require(Parent.Parent.SharedFl
 local _ = require(Parent.ProductPurchase.PricingTypes)
 local BlackbirdUpsellBanner = require(Parent1.RobloxSubscriptionPurchaseApp).Components.BlackbirdUpsellBanner
 
-local function UnifiedProductPurchaseModal(p1) --[[ Line: 100 ]]
+local function UnifiedProductPurchaseModal(p1)
 	-- upvalues: UseLocalizationFunction (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), UrlBuilder (copy), UnifiedPurchaseModalTypeEnumModule (copy), ReactModule (copy), UseInitialButtonDisableDelayModule (copy), UseCartPricingModule (copy), FFlagOffersOnlyAffordableLock (copy), UseFocusNavigationRefsModule (copy), Checkbox (copy), BuildCartPricingOfferCheckboxesModule (copy), View (copy), Text (copy), CartPricingProductDetailsModule (copy), Sheet (copy), UnifiedPurchaseModalHeaderModule (copy), PriceSummaryModule (copy), UnifiedProductDetailsModule (copy), Button (copy), FillBehavior (copy), ButtonVariant (copy), BlackbirdUpsellBanner (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		Buy = "IAPExperience.PurchasePrompt.Action.Buy",
@@ -73,7 +73,7 @@ local function UnifiedProductPurchaseModal(p1) --[[ Line: 100 ]]
 	local IsPriceAfterOffersDiscountsBelow: boolean = PriceAfterOffersDiscounts ~= nil and PriceAfterOffersDiscounts <= p1.robuxBalanceAmount
 	local IsDisabled1 = IsDisabled or IsRobuxBalanceAmountBelow and (not FFlagOffersOnlyAffordableLock or IsPriceAfterOffersDiscountsBelow)
 	local CountCartPricingOffers: number = if UseCartPricingModuleResult.showCartOfferUi then #UseCartPricingModuleResult.cartPricingOffers else 0
-	ReactModule.useEffect(function() --[[ Line: 177 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (upval), UnifiedPurchaseModalTypeEnumModule (upval), UseStateResult2_1 (copy), UseLocalizationResult (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (upval), FFlagLuaAppsEnablePromptVIPServerPurchase (upval)
 		local PurchaseModalType = p1.purchaseModalType
 		
@@ -112,19 +112,19 @@ local function UnifiedProductPurchaseModal(p1) --[[ Line: 100 ]]
 		end
 	end, { p1.purchaseModalType })
 	local UseFocusNavigationRefsModuleResult, UseFocusNavigationRefsModuleResult2 = UseFocusNavigationRefsModule(p1.buttons.cancelActivated, p1.onBuyItemButtonMounted)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 205 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult (copy), p1 (copy)
 		if UseStateResult and p1.setPostPurchaseActions then
 			p1.setPostPurchaseActions(UseStateResult)
 		end
 		p1.buttons.buyItemActivated()
 	end, { p1.buttons.buyItemActivated, UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 213 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), p1 (copy)
 		UseStateResult2(p1.postPurchaseActions or {})
 	end, { p1.postPurchaseActions })
 	local Subscribe = if FFlagEnableUnifiedPurchaseFlowForDevSubs and p1.purchaseModalType == UnifiedPurchaseModalTypeEnumModule.DeveloperSubscription then UseLocalizationResult.Subscribe else UseLocalizationResult.Buy
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 223 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseStateResult (copy), ReactModule (upval), Checkbox (upval), CountCartPricingOffers (copy), IsDisabled (copy), UseStateResult2 (copy)
 		local Elements = {}
 		
@@ -135,9 +135,9 @@ local function UnifiedProductPurchaseModal(p1) --[[ Line: 100 ]]
 				label = value.label,
 				isChecked = value.isActionSelected,
 				isDisabled = IsDisabled,
-				onActivated = function() --[[ Line: 232 ]]
+				onActivated = function()
 					-- upvalues: UseStateResult2 (upval), i (copy), value (copy)
-					UseStateResult2(function(Tbl) --[[ Line: 233 ]]
+					UseStateResult2(function(Tbl)
 						-- upvalues: i (upval), value (upval)
 						local Copy = table.clone(Tbl)
 						Copy[i] = {
@@ -248,7 +248,7 @@ local function UnifiedProductPurchaseModal(p1) --[[ Line: 100 ]]
 	})
 end
 
-return function(p2) --[[ Line: 396 | Named "UnifiedProductPurchaseModalContainer" ]]
+return function(p2)
 	-- upvalues: ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), UnifiedProductPurchaseModal (copy)
 	return ReactModule.createElement(LocalizationProvider, {
 		localization = Localization.new(LocalizationService.RobloxLocaleId)

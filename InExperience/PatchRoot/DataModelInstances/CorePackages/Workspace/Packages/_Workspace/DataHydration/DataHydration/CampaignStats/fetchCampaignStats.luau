@@ -7,7 +7,7 @@ local PollAnalyticsOperationModule = require(DataHydration.pollAnalyticsOperatio
 local _ = require(script.Parent.CampaignStatsTypes)
 local WINDOWDAYS = require(script.Parent.CampaignStatsConstants).WINDOW_DAYS
 
-local function sumByCampaign(QueryResult) --[[ Line: 59 ]]
+local function sumByCampaign(QueryResult)
 	local t = {}
 	
 	if QueryResult == nil or QueryResult.values == nil then
@@ -39,7 +39,7 @@ local function sumByCampaign(QueryResult) --[[ Line: 59 ]]
 	return t
 end
 
-local function queryMetricByCampaign(Metric, p1, p2, p3) --[[ Line: 88 ]]
+local function queryMetricByCampaign(Metric, p1, p2, p3)
 	-- upvalues: UrlBase (copy), PollAnalyticsOperationModule (copy), sumByCampaign (copy)
 	return PollAnalyticsOperationModule({
 		analyticsKey = "ads-campaign-stats.query",
@@ -69,23 +69,23 @@ local function queryMetricByCampaign(Metric, p1, p2, p3) --[[ Line: 88 ]]
 				}
 			}
 		},
-		mapResult = function(p4) --[[ Line: 132 ]]
+		mapResult = function(p4)
 			-- upvalues: sumByCampaign (upval)
 			return (sumByCampaign(p4.queryResult))
 		end
 	})
 end
 
-local function captureMetricOutcome(Promise) --[[ Line: 139 ]]
-	return Promise:andThen(function(Result) --[[ Line: 140 ]]
+local function captureMetricOutcome(Promise)
+	return Promise:andThen(function(Result)
 		return { succeeded = true, value = Result }
-	end, function(_) --[[ Line: 145 ]]
+	end, function(_)
 		return { succeeded = false, value = {} }
 	end)
 end
 
 return {
-	fetchCampaignStats = function(p1, p2) --[[ Line: 156 ]]
+	fetchCampaignStats = function(p1, p2)
 		-- upvalues: WINDOWDAYS (copy), PromiseModule (copy), queryMetricByCampaign (copy), captureMetricOutcome (copy)
 		local P10 = p2 or {}
 		local UnixTimestampMillis = if P10.nowMs == nil then DateTime.now().UnixTimestampMillis else P10.nowMs
@@ -99,30 +99,30 @@ return {
 		}
 		
 		return PromiseModule.all({
-			queryMetricByCampaign("AdsUANumPlaysDefaultViewByUniverse", p1, config, P10):andThen(function(Result) --[[ Line: 140 ]]
+			queryMetricByCampaign("AdsUANumPlaysDefaultViewByUniverse", p1, config, P10):andThen(function(Result)
 				return { succeeded = true, value = Result }
-			end, function(_) --[[ Line: 145 ]]
+			end, function(_)
 				return { succeeded = false, value = {} }
 			end),
-			queryMetricByCampaign("AdsUANumClicksDefaultViewByUniverse", p1, config, P10):andThen(function(Result) --[[ Line: 140 ]]
+			queryMetricByCampaign("AdsUANumClicksDefaultViewByUniverse", p1, config, P10):andThen(function(Result)
 				return { succeeded = true, value = Result }
-			end, function(_) --[[ Line: 145 ]]
+			end, function(_)
 				return { succeeded = false, value = {} }
 			end),
-			queryMetricByCampaign("AdsUANumImpressionsDefaultViewByUniverse", p1, config, P10):andThen(function(Result) --[[ Line: 140 ]]
+			queryMetricByCampaign("AdsUANumImpressionsDefaultViewByUniverse", p1, config, P10):andThen(function(Result)
 				return { succeeded = true, value = Result }
-			end, function(_) --[[ Line: 145 ]]
+			end, function(_)
 				return { succeeded = false, value = {} }
 			end),
 			captureMetricOutcome(queryMetricByCampaign("AdsUAPlaytimeDefaultViewByUniverse", p1, config, P10))
-		}):andThen(function(Entry) --[[ Line: 179 ]]
+		}):andThen(function(Entry)
 			local Entry1 = Entry[1]
 			local Entry2 = Entry[2]
 			local Entry3 = Entry[3]
 			local Entry4 = Entry[4]
 			local ByCampaign = {}
 			
-			local function _(Key) --[[ Line: 186 | Named "entryFor" ]]
+			local function _(Key)
 				-- upvalues: ByCampaign (copy)
 				local ByCampaignEntry = ByCampaign[Key]
 				

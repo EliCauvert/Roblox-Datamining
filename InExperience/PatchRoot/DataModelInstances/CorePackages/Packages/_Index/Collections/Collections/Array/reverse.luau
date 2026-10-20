@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.Parent.Parent.ES7Types)
 
-return function(p1) --[[ Line: 22 ]]
+return function(p1)
 	local CountP0 = #p1
 	local Count = 1
 	while Count < CountP0 do

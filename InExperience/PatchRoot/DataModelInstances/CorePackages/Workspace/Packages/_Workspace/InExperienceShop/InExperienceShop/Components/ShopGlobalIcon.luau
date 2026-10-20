@@ -25,13 +25,13 @@ if game:IsLoaded() then
 	CurrentTime = tick()
 else
 	local Connection = nil
-	Connection = game.Loaded:Connect(function() --[[ Line: 44 ]]
+	Connection = game.Loaded:Connect(function()
 		-- upvalues: CurrentTime (ref), Connection (ref)
 		CurrentTime = tick()
 		Connection:Disconnect()
 	end)
 end
-return function(p1) --[[ Line: 65 | Named "ShopGlobalIcon" ]]
+return function(p1)
 	-- upvalues: FFlagEnableExperienceShopGlobalIconModule (copy), UseTokensFunction (copy), FFlagOfferNotifyOnGlobalIcon (copy), GetShopGlobalIconStoreModule (copy), ReactModule (copy), ShopGlobalIconAnimGracePeriodMs (copy), CurrentTime (ref), TweenService (copy), _TweenInfo (copy), _TweenInfo2 (copy), _TweenInfo3 (copy), _TweenInfo1 (copy), FFlagEnableShopIconTelemetryModule (copy), RunService (copy), Parent (copy), InExperienceShop (copy), FoundationModule (copy), FFlagExperienceShopNewIconographyModule (copy), IconName (copy), IconVariant (copy), v2 (copy), v1 (copy)
 	if FFlagEnableExperienceShopGlobalIconModule then
 		local UseTokensResult = UseTokensFunction()
@@ -54,7 +54,7 @@ return function(p1) --[[ Line: 65 | Named "ShopGlobalIcon" ]]
 		local UseRefResult10 = ReactModule.useRef(nil)
 		local UseRefResult11 = ReactModule.useRef(p1.hidden)
 		UseRefResult11.current = p1.hidden
-		ReactModule.useEffect(function() --[[ Line: 99 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRefResult6 (copy), UseRefResult7 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), UseRefResult2 (copy), UseRefResult3 (copy), UseRefResult (copy), UseRefResult1 (copy), UseRefResult4 (copy), UseRefResult5 (copy), ButtonSize (copy), UseStateResult2_2 (copy), ShopGlobalIconAnimGracePeriodMs (upval), CurrentTime (upval), TweenService (upval), _TweenInfo (upval), _TweenInfo2 (upval), _TweenInfo3 (upval), _TweenInfo1 (upval), UseRefResult8 (copy), UseRefResult9 (copy), UseRefResult10 (copy), UseRefResult11 (copy)
 			local NumValue = Instance.new("NumberValue")
 			NumValue.Value = 0
@@ -62,16 +62,16 @@ return function(p1) --[[ Line: 65 | Named "ShopGlobalIcon" ]]
 			local NumValue1 = Instance.new("NumberValue")
 			NumValue1.Value = 0
 			UseRefResult7.current = NumValue1
-			local Connection = NumValue:GetPropertyChangedSignal("Value"):Connect(function() --[[ Line: 108 ]]
+			local Connection = NumValue:GetPropertyChangedSignal("Value"):Connect(function()
 				-- upvalues: UseStateResult2 (upval), NumValue (copy)
 				UseStateResult2(NumValue.Value)
 			end)
-			local Connection1 = NumValue1:GetPropertyChangedSignal("Value"):Connect(function() --[[ Line: 111 ]]
+			local Connection1 = NumValue1:GetPropertyChangedSignal("Value"):Connect(function()
 				-- upvalues: UseStateResult2_1 (upval), NumValue1 (copy)
 				UseStateResult2_1(NumValue1.Value)
 			end)
 			
-			local function stopAllAnimations() --[[ Line: 115 ]]
+			local function stopAllAnimations()
 				-- upvalues: UseRefResult2 (upval), UseRefResult3 (upval), UseRefResult (upval), UseRefResult1 (upval), UseRefResult4 (upval), UseRefResult5 (upval)
 				if UseRefResult2.current then
 					UseRefResult2.current:Disconnect()
@@ -99,7 +99,7 @@ return function(p1) --[[ Line: 65 | Named "ShopGlobalIcon" ]]
 				end
 			end
 			
-			local function _() --[[ Line: 142 | Named "showImmediate" ]]
+			local function _()
 				-- upvalues: NumValue (copy), ButtonSize (upval), NumValue1 (copy), UseStateResult2 (upval), UseStateResult2_1 (upval), UseStateResult2_2 (upval)
 				NumValue.Value = ButtonSize
 				NumValue1.Value = 1
@@ -108,7 +108,7 @@ return function(p1) --[[ Line: 65 | Named "ShopGlobalIcon" ]]
 				UseStateResult2_2(true)
 			end
 			
-			local function showAnimated() --[[ Line: 150 ]]
+			local function showAnimated()
 				-- upvalues: stopAllAnimations (copy), ShopGlobalIconAnimGracePeriodMs (upval), CurrentTime (upval), NumValue (copy), ButtonSize (upval), NumValue1 (copy), UseStateResult2 (upval), UseStateResult2_1 (upval), UseStateResult2_2 (upval), TweenService (upval), _TweenInfo (upval), UseRefResult (upval), UseRefResult4 (upval), _TweenInfo2 (upval), UseRefResult1 (upval)
 				stopAllAnimations()
 				
@@ -131,7 +131,7 @@ return function(p1) --[[ Line: 65 | Named "ShopGlobalIcon" ]]
 				local Tween = TweenService:Create(NumValue, _TweenInfo, { Value = ButtonSize })
 				UseRefResult.current = Tween
 				Tween:Play()
-				UseRefResult4.current = task.delay(0.2, function() --[[ Line: 170 ]]
+				UseRefResult4.current = task.delay(0.2, function()
 					-- upvalues: UseRefResult4 (upval), UseStateResult2_2 (upval), TweenService (upval), NumValue1 (upval), _TweenInfo2 (upval), UseRefResult1 (upval)
 					UseRefResult4.current = nil
 					UseStateResult2_2(true)
@@ -143,12 +143,12 @@ return function(p1) --[[ Line: 65 | Named "ShopGlobalIcon" ]]
 			
 			UseRefResult8.current = showAnimated
 			
-			function UseRefResult9.current() --[[ Line: 179 ]]
+			function UseRefResult9.current()
 				-- upvalues: stopAllAnimations (copy), TweenService (upval), NumValue1 (copy), _TweenInfo3 (upval), UseRefResult1 (upval), UseRefResult2 (upval), UseStateResult2_2 (upval), UseRefResult4 (upval), NumValue (copy), _TweenInfo1 (upval), UseRefResult (upval), UseRefResult3 (upval), UseRefResult5 (upval), UseRefResult8 (upval)
 				stopAllAnimations()
 				local Tween = TweenService:Create(NumValue1, _TweenInfo3, { Value = 0 })
 				UseRefResult1.current = Tween
-				UseRefResult2.current = Tween.Completed:Connect(function(PlaybackState) --[[ Line: 184 ]]
+				UseRefResult2.current = Tween.Completed:Connect(function(PlaybackState)
 					-- upvalues: UseRefResult2 (upval), UseStateResult2_2 (upval)
 					if PlaybackState == Enum.PlaybackState.Completed then
 						UseRefResult2.current = nil
@@ -158,16 +158,16 @@ return function(p1) --[[ Line: 65 | Named "ShopGlobalIcon" ]]
 					end
 				end)
 				Tween:Play()
-				UseRefResult4.current = task.delay(0.2, function() --[[ Line: 193 ]]
+				UseRefResult4.current = task.delay(0.2, function()
 					-- upvalues: UseRefResult4 (upval), TweenService (upval), NumValue (upval), _TweenInfo1 (upval), UseRefResult (upval), UseRefResult3 (upval), UseRefResult5 (upval), UseRefResult8 (upval)
 					UseRefResult4.current = nil
 					local Tween = TweenService:Create(NumValue, _TweenInfo1, { Value = 0 })
 					UseRefResult.current = Tween
-					UseRefResult3.current = Tween.Completed:Connect(function(PlaybackState) --[[ Line: 197 ]]
+					UseRefResult3.current = Tween.Completed:Connect(function(PlaybackState)
 						-- upvalues: UseRefResult3 (upval), UseRefResult5 (upval), UseRefResult8 (upval)
 						if PlaybackState == Enum.PlaybackState.Completed then
 							UseRefResult3.current = nil
-							UseRefResult5.current = task.delay(1.5, function() --[[ Line: 202 ]]
+							UseRefResult5.current = task.delay(1.5, function()
 								-- upvalues: UseRefResult5 (upval), UseRefResult8 (upval)
 								UseRefResult5.current = nil
 								
@@ -188,7 +188,7 @@ return function(p1) --[[ Line: 65 | Named "ShopGlobalIcon" ]]
 			if not UseRefResult11.current then
 				showAnimated()
 			end
-			return function() --[[ Line: 224 ]]
+			return function()
 				-- upvalues: stopAllAnimations (copy), Connection (copy), Connection1 (copy), NumValue (copy), NumValue1 (copy), UseRefResult6 (upval), UseRefResult7 (upval)
 				stopAllAnimations()
 				Connection:Disconnect()
@@ -200,7 +200,7 @@ return function(p1) --[[ Line: 65 | Named "ShopGlobalIcon" ]]
 			end
 		end, { ButtonSize })
 		local UseRefResult12 = ReactModule.useRef(false)
-		ReactModule.useEffect(function() --[[ Line: 236 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p1 (copy), UseRefResult12 (copy), UseRefResult6 (copy), UseRefResult7 (copy), UseRefResult10 (copy), UseStateResult2_2 (copy), ButtonSize (copy)
 			if p1.hidden == nil then return end
 			if not UseRefResult12.current then
@@ -227,9 +227,9 @@ return function(p1) --[[ Line: 65 | Named "ShopGlobalIcon" ]]
 				UseStateResult2_2(true)
 			end
 		end, { p1.hidden, ButtonSize })
-		ReactModule.useEffect(function() --[[ Line: 278 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p1 (copy)
-			return function() --[[ Line: 279 ]]
+			return function()
 				-- upvalues: p1 (upval)
 				if p1.onAreaChanged then
 					p1.onAreaChanged("experience-shop-icon", Vector2.zero, Vector2.zero)
@@ -237,7 +237,7 @@ return function(p1) --[[ Line: 65 | Named "ShopGlobalIcon" ]]
 			end
 		end, { p1.onAreaChanged })
 		
-		local function reportArea(Frame: Frame) --[[ Line: 286 ]]
+		local function reportArea(Frame: Frame)
 			-- upvalues: p1 (copy)
 			if not p1.onAreaChanged then return end
 			if p1.hidden then
@@ -249,7 +249,7 @@ return function(p1) --[[ Line: 65 | Named "ShopGlobalIcon" ]]
 			end
 		end
 		
-		local function onActivated() --[[ Line: 300 ]]
+		local function onActivated()
 			-- upvalues: FFlagEnableShopIconTelemetryModule (upval), RunService (upval), Parent (upval), InExperienceShop (upval), p1 (copy)
 			if FFlagEnableShopIconTelemetryModule and not RunService:IsStudio() then
 				local LoggingProtocolModule = require(Parent.LoggingProtocol)

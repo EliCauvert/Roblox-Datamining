@@ -26,16 +26,16 @@ local config = {
 	}
 }
 
-local function _(p1) --[[ Line: 69 | Named "buildKnob" ]]
+local function _(p1)
 	-- upvalues: RoactModule (copy), config (copy), CryoModule (copy), BaseKnobModule (copy)
-	return RoactModule.forwardRef(function(p2, ForwardedRef) --[[ Line: 70 ]]
+	return RoactModule.forwardRef(function(p2, ForwardedRef)
 		-- upvalues: config (upval), p1 (copy), CryoModule (upval), RoactModule (upval), BaseKnobModule (upval)
 		return RoactModule.createElement(BaseKnobModule, (CryoModule.Dictionary.join({}, p2, { colorMap = config[p1], forwardedRef = ForwardedRef })))
 	end)
 end
 
 local v1 = "contextual"
-local ForwardRefResult = RoactModule.forwardRef(function(p1, ForwardedRef) --[[ Line: 70 ]]
+local ForwardRefResult = RoactModule.forwardRef(function(p1, ForwardedRef)
 	-- upvalues: config (copy), v1 (copy), CryoModule (copy), RoactModule (copy), BaseKnobModule (copy)
 	return RoactModule.createElement(BaseKnobModule, (CryoModule.Dictionary.join({}, p1, { colorMap = config[v1], forwardedRef = ForwardedRef })))
 end)
@@ -43,7 +43,7 @@ local v2 = "system"
 
 return {
 	ContextualKnob = ForwardRefResult,
-	SystemKnob = RoactModule.forwardRef(function(p1, ForwardedRef) --[[ Line: 70 ]]
+	SystemKnob = RoactModule.forwardRef(function(p1, ForwardedRef)
 		-- upvalues: config (copy), v2 (copy), CryoModule (copy), RoactModule (copy), BaseKnobModule (copy)
 		return RoactModule.createElement(BaseKnobModule, (CryoModule.Dictionary.join({}, p1, { colorMap = config[v2], forwardedRef = ForwardedRef })))
 	end)

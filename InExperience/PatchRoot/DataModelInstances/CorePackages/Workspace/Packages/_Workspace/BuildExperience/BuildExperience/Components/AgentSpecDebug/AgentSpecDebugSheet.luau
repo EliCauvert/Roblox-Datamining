@@ -17,14 +17,14 @@ local View = FoundationModule.View
 local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 local InputSize = FoundationModule.Enums.InputSize
-local Computed = SignalsModule.createComputed(function(): string --[[ Line: 47 ]]
+local Computed = SignalsModule.createComputed(function(): string
 	return "NotReady"
 end)
-local Computed1 = SignalsModule.createComputed(function() --[[ Line: 50 ]]
+local Computed1 = SignalsModule.createComputed(function()
 	return nil
 end)
 
-local function getRows(UseSignalStateResult) --[[ Line: 54 ]]
+local function getRows(UseSignalStateResult)
 	-- upvalues: CreatorAgentChatModule (copy)
 	local List = {
 		{
@@ -67,7 +67,7 @@ local function getRows(UseSignalStateResult) --[[ Line: 54 ]]
 	return List
 end
 
-local function getSelectedValue(UseMemoResult, Override, p1) --[[ Line: 95 ]]
+local function getSelectedValue(UseMemoResult, Override, p1)
 	-- upvalues: CreatorAgentChatModule (copy)
 	if CreatorAgentChatModule.experimentOverride.normalize(Override) == "" then
 		return "default"
@@ -82,23 +82,23 @@ local function getSelectedValue(UseMemoResult, Override, p1) --[[ Line: 95 ]]
 	return v1
 end
 
-return function(p2) --[[ Line: 112 | Named "AgentSpecDebugSheet" ]]
+return function(p2)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), CreatorAgentChatModule (copy), SignalsReactModule (copy), Computed (copy), Computed1 (copy), getRows (copy), View (copy), Text (copy), Icon (copy), IconName (copy), IconSize (copy), RadioGroup (copy), InputSize (copy), Divider (copy), getSelectedValue (copy), Loading (copy), Sheet (copy), TextInput (copy), Button (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(p2.specVersion or "")
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
-	ReactModule.useEffect(function() --[[ Line: 119 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2_1 (copy), CreatorAgentChatModule (upval)
 		UseStateResult2_1(CreatorAgentChatModule.PreviewSpecs.getPreviewSpecsStore(false).refreshPreviewSpecs())
 	end, {})
 	local UseSignalStateResult = SignalsReactModule.useSignalState(if UseStateResult1 == nil then Computed else UseStateResult1.status)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(if UseStateResult1 == nil then Computed1 else UseStateResult1.data)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 125 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: getRows (upval), UseSignalStateResult1 (copy)
 		return (getRows(UseSignalStateResult1))
 	end, { UseSignalStateResult1 })
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
-	local UseResult = ReactModule.useCallback(function(p3) --[[ Line: 130 ]]
+	local UseResult = ReactModule.useCallback(function(p3)
 		-- upvalues: UseMemoResult (copy), UseStateResult2 (copy), UseStateResult2_2 (copy)
 		for _, value in UseMemoResult do
 			if value.value == p3 then
@@ -122,7 +122,7 @@ return function(p2) --[[ Line: 112 | Named "AgentSpecDebugSheet" ]]
 				Row = ReactModule.createElement(View, {
 					LayoutOrder = 1,
 					tag = "row align-y-center gap-medium size-full-0 auto-y padding-y-small",
-					onActivated = function() --[[ Line: 155 ]]
+					onActivated = function()
 						-- upvalues: UseResult (copy), value (copy)
 						UseResult(value.value)
 					end
@@ -210,7 +210,7 @@ return function(p2) --[[ Line: 112 | Named "AgentSpecDebugSheet" ]]
 					size = InputSize.Large,
 					variant = FoundationModule.Enums.ButtonVariant.Emphasis,
 					width = UDim.new(1, 0),
-					onActivated = function() --[[ Line: 269 ]]
+					onActivated = function()
 						-- upvalues: p2 (copy), UseStateResult (copy)
 						p2.onSave(UseStateResult)
 						p2.onClose()

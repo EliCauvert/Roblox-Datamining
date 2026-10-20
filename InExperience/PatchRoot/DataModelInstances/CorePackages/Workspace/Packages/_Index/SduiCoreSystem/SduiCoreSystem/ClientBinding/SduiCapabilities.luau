@@ -3,7 +3,7 @@ local Parent = SduiCoreSystem.Parent
 local SduiCapabilityFlagsModule = require(SduiCoreSystem.ClientBinding.SduiCapabilityFlags)
 local ResolveRuntimeFlagValuesModule = require(SduiCoreSystem.ClientBinding.resolveRuntimeFlagValues)
 
-local function resolveNamesToNumbers(List) --[[ Line: 32 ]]
+local function resolveNamesToNumbers(List)
 	-- upvalues: Parent (copy)
 	if #List == 0 then
 		return {}
@@ -24,11 +24,11 @@ local function resolveNamesToNumbers(List) --[[ Line: 32 ]]
 end
 
 local SduiCapabilitiesModule = {
-	isEnabled = function(p1): boolean --[[ Line: 18 ]]
+	isEnabled = function(p1): boolean
 		-- upvalues: SduiCapabilityFlagsModule (copy)
 		return SduiCapabilityFlagsModule[p1] == true
 	end,
-	getEnabledCapabilities = function() --[[ Line: 22 ]]
+	getEnabledCapabilities = function()
 		-- upvalues: SduiCapabilityFlagsModule (copy)
 		local List = {}
 		
@@ -39,7 +39,7 @@ local SduiCapabilitiesModule = {
 		end
 		return List
 	end,
-	createQueryValue = function(EnabledCapabilities): string? --[[ Line: 52 ]]
+	createQueryValue = function(EnabledCapabilities): string?
 		-- upvalues: resolveNamesToNumbers (copy)
 		local ResolveNamesToNumbersResult = resolveNamesToNumbers(EnabledCapabilities)
 		
@@ -56,7 +56,7 @@ local SduiCapabilitiesModule = {
 	end
 }
 
-function SduiCapabilitiesModule.addToQueryParams(p1, List) --[[ Line: 72 ]]
+function SduiCapabilitiesModule.addToQueryParams(p1, List)
 	-- upvalues: SduiCapabilitiesModule (copy)
 	local List1 = {}
 	
@@ -72,7 +72,7 @@ function SduiCapabilitiesModule.addToQueryParams(p1, List) --[[ Line: 72 ]]
 	end
 end
 
-function SduiCapabilitiesModule.getEnabledCapabilityNumbers(EnabledCapabilities) --[[ Line: 88 ]]
+function SduiCapabilitiesModule.getEnabledCapabilityNumbers(EnabledCapabilities)
 	-- upvalues: SduiCapabilitiesModule (copy), resolveNamesToNumbers (copy)
 	local List = {}
 	
@@ -87,7 +87,7 @@ function SduiCapabilitiesModule.getEnabledCapabilityNumbers(EnabledCapabilities)
 	return ResolveNamesToNumbersResult
 end
 
-function SduiCapabilitiesModule.getEnabledCapabilityNumbersWithoutExtendedMarker() --[[ Line: 102 ]]
+function SduiCapabilitiesModule.getEnabledCapabilityNumbersWithoutExtendedMarker()
 	-- upvalues: SduiCapabilitiesModule (copy)
 	local List = {}
 	
@@ -99,7 +99,7 @@ function SduiCapabilitiesModule.getEnabledCapabilityNumbersWithoutExtendedMarker
 	return SduiCapabilitiesModule.getEnabledCapabilityNumbers(List)
 end
 
-function SduiCapabilitiesModule.addAllToQueryParams(p2) --[[ Line: 112 ]]
+function SduiCapabilitiesModule.addAllToQueryParams(p2)
 	-- upvalues: SduiCapabilitiesModule (copy)
 	local QueryValue = SduiCapabilitiesModule.createQueryValue(SduiCapabilitiesModule.getEnabledCapabilities())
 	
@@ -108,7 +108,7 @@ function SduiCapabilitiesModule.addAllToQueryParams(p2) --[[ Line: 112 ]]
 	end
 end
 
-local function resolveRuntimeSupportNumbers(RegisteredActionTypes, ActionType, p2) --[[ Line: 125 ]]
+local function resolveRuntimeSupportNumbers(RegisteredActionTypes, ActionType, p2)
 	-- upvalues: SduiCoreSystem (copy)
 	local ProtoVariableMapperModule = require(SduiCoreSystem.ClientBinding.ProtoVariableMapper)
 	local List = {}
@@ -133,9 +133,9 @@ end
 
 local Flag = false
 
-local function _() --[[ Line: 143 | Named "getRuntimeFlagValues" ]]
+local function _()
 	-- upvalues: ResolveRuntimeFlagValuesModule (copy), Flag (ref)
-	local ResolveRuntimeFlagValuesModuleResult, ResolveRuntimeFlagValuesModuleResult2, ResolveRuntimeFlagValuesModuleResult3 = ResolveRuntimeFlagValuesModule(function(p3) --[[ Line: 144 ]]
+	local ResolveRuntimeFlagValuesModuleResult, ResolveRuntimeFlagValuesModuleResult2, ResolveRuntimeFlagValuesModuleResult3 = ResolveRuntimeFlagValuesModule(function(p3)
 		return pcall(game.GetFastFlag, game, p3)
 	end)
 	
@@ -146,14 +146,14 @@ local function _() --[[ Line: 143 | Named "getRuntimeFlagValues" ]]
 	return ResolveRuntimeFlagValuesModuleResult
 end
 
-local function getRuntimeSupportFields() --[[ Line: 157 ]]
+local function getRuntimeSupportFields()
 	-- upvalues: Parent (copy), resolveRuntimeSupportNumbers (copy), SduiCoreSystem (copy), ResolveRuntimeFlagValuesModule (copy), Flag (ref)
 	local Shared = require(Parent.ServiceContractsProto).apppageplatform.shared
 	local config = {
 		registered_ui_component_types = resolveRuntimeSupportNumbers(require(SduiCoreSystem.getSduiComponentRegistry)().getRegisteredComponentTypes(), Shared.ui_component_type.UiComponentType, "UI_COMPONENT_TYPE_"),
 		registered_action_types = resolveRuntimeSupportNumbers(require(SduiCoreSystem.getSduiActionHandlerRegistry)().getRegisteredActionTypes(), Shared.actions.ActionType, "ACTION_TYPE_")
 	}
-	local ResolveRuntimeFlagValuesModuleResult, ResolveRuntimeFlagValuesModuleResult2, ResolveRuntimeFlagValuesModuleResult3 = ResolveRuntimeFlagValuesModule(function(p3) --[[ Line: 144 ]]
+	local ResolveRuntimeFlagValuesModuleResult, ResolveRuntimeFlagValuesModuleResult2, ResolveRuntimeFlagValuesModuleResult3 = ResolveRuntimeFlagValuesModule(function(p3)
 		return pcall(game.GetFastFlag, game, p3)
 	end)
 	
@@ -166,7 +166,7 @@ local function getRuntimeSupportFields() --[[ Line: 157 ]]
 	return config
 end
 
-function SduiCapabilitiesModule.buildClientCapabilities() --[[ Line: 174 ]]
+function SduiCapabilitiesModule.buildClientCapabilities()
 	-- upvalues: Parent (copy), SduiCapabilitiesModule (copy), getRuntimeSupportFields (copy)
 	local ServiceContractsProtoModule = require(Parent.ServiceContractsProto)
 	local ClientCapabilities = ServiceContractsProtoModule.apppageplatform.shared.client_capabilities.ClientCapabilities

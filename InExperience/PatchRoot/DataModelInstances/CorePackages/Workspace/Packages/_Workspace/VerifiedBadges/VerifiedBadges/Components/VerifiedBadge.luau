@@ -8,7 +8,7 @@ local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 local IconVariant = FoundationModule.Enums.IconVariant
 
-return function(Frame) --[[ Line: 51 | Named "VerifiedBadge" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), IconSize (copy), ReactModule (copy), View (copy), Icon (copy), IconName (copy), IconVariant (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Size = Frame.size or IconSize.Small

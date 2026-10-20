@@ -8,7 +8,7 @@ local FFlagEnableUnifiedPurchaseFlowForDevSubs = require(PurchasePrompt.Parent.S
 local FFlagAXMISWithBlackbird = SharedFlagsModule.FFlagAXMISWithBlackbird
 local FFlagLuaAppsEnablePromptVIPServerPurchase = SharedFlagsModule.FFlagLuaAppsEnablePromptVIPServerPurchase
 
-return function(DeveloperSubscription) --[[ Line: 15 | Named "getUnifiedPurchaseModalType" ]]
+return function(DeveloperSubscription)
 	-- upvalues: RequestTypeModule (copy), UnifiedPurchaseModalTypeEnum (copy), FFlagAXMISWithBlackbird (copy), IsMultiItemPurchaseModule (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy)
 	return if DeveloperSubscription == RequestTypeModule.Experience then UnifiedPurchaseModalTypeEnum.Experience elseif FFlagAXMISWithBlackbird and DeveloperSubscription == RequestTypeModule.RobuxUpsell then UnifiedPurchaseModalTypeEnum.MultiItem elseif IsMultiItemPurchaseModule(DeveloperSubscription) then UnifiedPurchaseModalTypeEnum.MultiItem elseif FFlagEnableUnifiedPurchaseFlowForDevSubs and DeveloperSubscription == RequestTypeModule.DeveloperSubscription then UnifiedPurchaseModalTypeEnum.DeveloperSubscription elseif FFlagLuaAppsEnablePromptVIPServerPurchase and DeveloperSubscription == RequestTypeModule.VIPServer then UnifiedPurchaseModalTypeEnum.VIPServer else UnifiedPurchaseModalTypeEnum.SingleItem
 end

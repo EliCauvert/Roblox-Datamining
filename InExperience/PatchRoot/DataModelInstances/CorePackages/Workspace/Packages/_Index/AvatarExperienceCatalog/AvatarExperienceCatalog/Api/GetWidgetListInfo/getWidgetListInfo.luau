@@ -10,7 +10,7 @@ local _ = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListBreak
 local WidgetListBreakPointSizeMapModule = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListBreakPointSizeMap)
 local FFlagAXPassScreenSizeToWidgetApi = require(Parent.AvatarExperienceFlags).FFlagAXPassScreenSizeToWidgetApi
 
-return function(Callback, RequestId, Context, p1) --[[ Line: 22 | Named "getWidgetListInfo" ]]
+return function(Callback, RequestId, Context, p1)
 	-- upvalues: Url (copy), FFlagAXPassScreenSizeToWidgetApi (copy), WidgetListBreakPointSizeMapModule (copy), MakeAXResponseHandlerModule (copy), NormalizeWidgetListInfoResponseToWidgetListInfoModule (copy), ConstantsModule (copy)
 	local GET, GET2 = Callback(`{Url.APIS_URL}marketplace-widgets/v1/widgets?{Url:makeQueryString({
 		requestId = RequestId,

@@ -8,7 +8,7 @@ local Dialog = FoundationModule.Dialog
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local DialogSize = FoundationModule.Enums.DialogSize
 
-return function(p1) --[[ Line: 22 | Named "PrivateInviteAddErrorDialog" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), ButtonVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		action = LocalizationStringsModule.PRIVATE_INVITES_ADD_ERROR_ACTION,

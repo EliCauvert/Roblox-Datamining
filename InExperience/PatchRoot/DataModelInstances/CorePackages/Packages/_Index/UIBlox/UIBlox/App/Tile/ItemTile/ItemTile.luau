@@ -14,7 +14,7 @@ local ItemIconModule = require(Parent.ItemIcon)
 local TileModule = require(Parent1.BaseTile.Tile)
 local ItemTile = ReactModule.PureComponent:extend("ItemTile")
 
-local function tileBannerUseValidator(Props) --[[ Line: 22 ]]
+local function tileBannerUseValidator(Props)
 	if Props.bannerText and Props.footer then
 		return false, "A custom footer and bannerText can't be used together"
 	else
@@ -76,12 +76,12 @@ ItemTile.defaultProps = {
 	isRoactGamepadEnabled = true
 }
 
-local function _(AlertIcon): boolean --[[ Line: 155 | Named "isIconStatusStyle" ]]
+local function _(AlertIcon): boolean
 	-- upvalues: ItemTileEnumsModule (copy)
 	return AlertIcon == ItemTileEnumsModule.StatusStyle.PendingIcon or AlertIcon == ItemTileEnumsModule.StatusStyle.AlertIcon
 end
 
-function ItemTile.render(p1) --[[ Line: 159 ]]
+function ItemTile.render(p1)
 	-- upvalues: tileBannerUseValidator (copy), ReactModule (copy), ItemIconModule (copy), ItemRestrictionStatusModule (copy), ItemTileStatusModule (copy), ItemTileEnumsModule (copy), ItemTileStatusIconModule (copy), TileModule (copy), ImagesModule (copy)
 	assert(tileBannerUseValidator(p1.props))
 	local Footer = p1.props.footer
@@ -177,7 +177,7 @@ function ItemTile.render(p1) --[[ Line: 159 ]]
 	})
 end
 
-return ReactModule.forwardRef(function(p1, ThumbnailRef) --[[ Line: 270 ]]
+return ReactModule.forwardRef(function(p1, ThumbnailRef)
 	-- upvalues: ReactModule (copy), ItemTile (copy), CryoModule (copy)
 	return ReactModule.createElement(ItemTile, CryoModule.Dictionary.join(p1, { thumbnailRef = ThumbnailRef }))
 end)

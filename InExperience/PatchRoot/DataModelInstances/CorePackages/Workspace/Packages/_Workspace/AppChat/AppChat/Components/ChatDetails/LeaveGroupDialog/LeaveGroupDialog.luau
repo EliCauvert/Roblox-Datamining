@@ -20,7 +20,7 @@ local config = {
 	width = UDim.new(0.8, 0)
 }
 
-function LeaveGroupDialog(p1) --[[ Line: 54 ]]
+function LeaveGroupDialog(p1)
 	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), Warning (copy)
 	return ReactModule.createElement(Warning, (CryoModule.Dictionary.join(config, p1)))
 end

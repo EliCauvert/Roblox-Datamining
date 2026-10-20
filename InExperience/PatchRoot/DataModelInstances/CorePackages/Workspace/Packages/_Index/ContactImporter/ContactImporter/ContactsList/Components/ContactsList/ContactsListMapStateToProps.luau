@@ -10,7 +10,7 @@ local GetDeepValueFunction = DependenciesModule.SocialLibraries.Dictionary.getDe
 local GetDeviceContactsModule = require(script.Parent.getDeviceContacts)
 local DecorateMatchedContactModule = require(script.Parent.decorateMatchedContact)
 
-return function(p1) --[[ Line: 16 ]]
+return function(p1)
 	-- upvalues: GetDeepValueFunction (copy), RODUXKEY (copy), MemoizeFunction (copy), GetDeviceContactsModule (copy), DecorateMatchedContactModule (copy), Selectors (copy), NetworkingFriends (copy), NetworkStatus (copy), NetworkingContacts (copy)
 	local LocalUserId = p1.LocalUserId
 	local DeepValue = GetDeepValueFunction(p1, RODUXKEY .. ".Contacts")

@@ -1,14 +1,14 @@
 ﻿local SignalsModule = require(script:FindFirstAncestor("Moments").Parent.Signals)
 
-return function() --[[ Line: 15 | Named "createExpandedCommentsStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal({})
 	
 	return {
 		getExpandedCommentIds = Signal,
-		toggle = function(p1) --[[ Line: 18 ]]
+		toggle = function(p1)
 			-- upvalues: Signal2 (copy)
-			Signal2(function(Tbl) --[[ Line: 19 ]]
+			Signal2(function(Tbl)
 				-- upvalues: p1 (copy)
 				local Copy = table.clone(Tbl)
 				

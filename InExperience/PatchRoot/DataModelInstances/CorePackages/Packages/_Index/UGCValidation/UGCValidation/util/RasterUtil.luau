@@ -3,15 +3,15 @@ local Parent = script.Parent.Parent
 local _ = require(Parent.util.Types)
 local TryYieldModule = require(Parent.util.tryYield)
 
-local function _(Vector, Vector1, p1): Vector2 --[[ Line: 29 | Named "orthoProjectCoordinate" ]]
+local function _(Vector, Vector1, p1): Vector2
 	return Vector2.new(Vector:Dot(p1), (Vector1:Dot(p1)))
 end
 
-local _ = function(Vector, p1): boolean --[[ Line: 36 | Named "shouldRenderTriangle" ]]
+local _ = function(Vector, p1): boolean
 	return Vector:Dot(p1) < 0
 end
 
-local function getScreenCoordinatesForTriangle(Entry, Size, p1, X, p2: number) --[[ Line: 44 ]]
+local function getScreenCoordinatesForTriangle(Entry, Size, p1, X, p2: number)
 	local v1 = p2 / 2
 	local InvertedRatio = (CFrame.new(X):Inverse() * Entry[1] + v1) / p2
 	local InvertedRatio1 = (CFrame.new(X):Inverse() * Entry[2] + v1) / p2
@@ -21,10 +21,10 @@ local function getScreenCoordinatesForTriangle(Entry, Size, p1, X, p2: number) -
 end
 
 return {
-	shouldRenderTriangle_UNIT_TEST = function(Vector, p1): boolean --[[ Line: 40 ]]
+	shouldRenderTriangle_UNIT_TEST = function(Vector, p1): boolean
 		return Vector:Dot(p1) < 0
 	end,
-	rasterMesh = function(List, Size, p1, X, p2, p3) --[[ Line: 71 ]]
+	rasterMesh = function(List, Size, p1, X, p2, p3)
 		-- upvalues: AssetService (copy), getScreenCoordinatesForTriangle (copy), TryYieldModule (copy)
 		local EditableImage = AssetService:CreateEditableImage({ Size = Size })
 		

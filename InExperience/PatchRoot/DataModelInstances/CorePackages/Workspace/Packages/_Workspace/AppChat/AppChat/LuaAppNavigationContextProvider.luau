@@ -11,9 +11,9 @@ local ChatPlacementContextModule = require(AppChat.Contexts.ChatPlacementContext
 local UseChatPlacementContextFunction = ChatPlacementContextModule.useChatPlacementContext
 local IsPlacementInExperienceFunction = ChatPlacementContextModule.isPlacementInExperience
 
-function generateNavigateToGroups(p1, Callback) --[[ Line: 23 ]]
+function generateNavigateToGroups(p1, Callback)
 	-- upvalues: EnumScreensModule (copy), NewResult (copy)
-	return function() --[[ Line: 24 ]]
+	return function()
 		-- upvalues: Callback (copy), p1 (copy), EnumScreensModule (upval), NewResult (upval)
 		if Callback then
 			Callback()
@@ -32,9 +32,9 @@ function generateNavigateToGroups(p1, Callback) --[[ Line: 23 ]]
 	end
 end
 
-local function _(p1, p2) --[[ Line: 43 | Named "generateNavigateToUnfilteredThreadsLearnMore" ]]
+local function _(p1, p2)
 	-- upvalues: EnumScreensModule (copy), OpenUnfilteredThreadsLearnMoreLinkModule (copy)
-	return function(Callback: (any, any, any) -> ()) --[[ Line: 44 ]]
+	return function(Callback: (any, any, any) -> ())
 		-- upvalues: p1 (copy), p2 (copy), EnumScreensModule (upval), OpenUnfilteredThreadsLearnMoreLinkModule (upval)
 		if not p1 then return end
 		if not p2 then
@@ -48,14 +48,14 @@ local function _(p1, p2) --[[ Line: 43 | Named "generateNavigateToUnfilteredThre
 	end
 end
 
-function LuaAppNavigationContextProvider(p1) --[[ Line: 58 ]]
+function LuaAppNavigationContextProvider(p1)
 	-- upvalues: ReactModule (copy), UseChatPlacementContextFunction (copy), IsPlacementInExperienceFunction (copy), UseAnalyticsModule (copy), EventNamesModule (copy), LuaAppNavigationContextModule (copy), EnumScreensModule (copy), OpenUnfilteredThreadsLearnMoreLinkModule (copy)
-	local UseRefResult = ReactModule.useRef(function() --[[ Line: 59 ]] end)
+	local UseRefResult = ReactModule.useRef(function() end)
 	local IsPlacementInExperience = IsPlacementInExperienceFunction(UseChatPlacementContextFunction().chatPlacement)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	
 	if UseAnalyticsModuleResult then
-		function UseRefResult.current() --[[ Line: 66 ]]
+		function UseRefResult.current()
 			-- upvalues: UseAnalyticsModuleResult (copy), EventNamesModule (upval)
 			UseAnalyticsModuleResult.fireAnalyticsEvent(EventNamesModule.ChatLandingGroupsBtnClicked)
 		end
@@ -65,7 +65,7 @@ function LuaAppNavigationContextProvider(p1) --[[ Line: 58 ]]
 	return ReactModule.createElement(LuaAppNavigationContextModule.Provider, {
 		value = {
 			navigateToGroups = generateNavigateToGroups(p1.navigateToLuaAppPages, UseRefResult.current),
-			navigateToUnfilteredThreadsLearnMore = function(Callback: (any, any, any) -> ()) --[[ Line: 44 ]]
+			navigateToUnfilteredThreadsLearnMore = function(Callback: (any, any, any) -> ())
 				-- upvalues: DispatchFunction (copy), IsPlacementInExperience (copy), EnumScreensModule (upval), OpenUnfilteredThreadsLearnMoreLinkModule (upval)
 				if not DispatchFunction then return end
 				if not IsPlacementInExperience then

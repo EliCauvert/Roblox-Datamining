@@ -5,7 +5,7 @@ local GetFFlagDebugUGCValidationPrintNewStructureResultsModule = require(Parent.
 local GetFFlagUGCValidationLogFailureInfoModule = require(Parent.flags.getFFlagUGCValidationLogFailureInfo)
 local UGCValidationLogFailureLength = game:DefineFastInt("UGCValidationLogFailureLength", 100)
 
-local function getRelativePath(RootInstance, Object): string --[[ Line: 14 ]]
+local function getRelativePath(RootInstance, Object): string
 	if Object == nil or Object == RootInstance then
 		return ""
 	else
@@ -20,7 +20,7 @@ end
 local ValidationReporterModule = {}
 ValidationReporterModule.__index = ValidationReporterModule
 
-function ValidationReporterModule.new(_testEnum, p1) --[[ Line: 30 ]]
+function ValidationReporterModule.new(_testEnum, p1)
 	-- upvalues: ValidationReporterModule (copy), ValidationEnumsModule (copy)
 	local self = setmetatable({}, ValidationReporterModule)
 	self._testEnum = _testEnum
@@ -35,25 +35,25 @@ function ValidationReporterModule.new(_testEnum, p1) --[[ Line: 30 ]]
 	return self
 end
 
-function ValidationReporterModule:begin() --[[ Line: 45 ]]
+function ValidationReporterModule:begin()
 	-- upvalues: ValidationEnumsModule (copy)
 	self._startTime = os.clock()
 	self._status = ValidationEnumsModule.Status.IN_PROGRESS
 end
 
-function ValidationReporterModule:setReportingInstance(_currentInstance) --[[ Line: 52 ]]
+function ValidationReporterModule:setReportingInstance(_currentInstance)
 	self._currentInstance = _currentInstance
 end
 
-function ValidationReporterModule:setReportingRoot(_rootInstance) --[[ Line: 58 ]]
+function ValidationReporterModule:setReportingRoot(_rootInstance)
 	self._rootInstance = _rootInstance
 end
 
-function ValidationReporterModule:setTelemetryContext(_telemetryContext) --[[ Line: 63 ]]
+function ValidationReporterModule:setTelemetryContext(_telemetryContext)
 	self._telemetryContext = _telemetryContext
 end
 
-function ValidationReporterModule:fail(FailureStringKey, p1, p2) --[[ Line: 67 ]]
+function ValidationReporterModule:fail(FailureStringKey, p1, p2)
 	-- upvalues: ValidationEnumsModule (copy), getRelativePath (copy)
 	self._status = ValidationEnumsModule.Status.FAIL
 	table.insert(self._failures, {
@@ -63,7 +63,7 @@ function ValidationReporterModule:fail(FailureStringKey, p1, p2) --[[ Line: 67 ]
 	})
 end
 
-function ValidationReporterModule:warn(FailureStringKey, p1, p2) --[[ Line: 76 ]]
+function ValidationReporterModule:warn(FailureStringKey, p1, p2)
 	-- upvalues: getRelativePath (copy)
 	table.insert(self._warnings, {
 		failureStringKey = FailureStringKey,
@@ -72,15 +72,15 @@ function ValidationReporterModule:warn(FailureStringKey, p1, p2) --[[ Line: 76 ]
 	})
 end
 
-function ValidationReporterModule:forceError(Message) --[[ Line: 85 ]]
+function ValidationReporterModule:forceError(Message)
 	error({ __forceError = true, message = Message })
 end
 
-function ValidationReporterModule:fetchError(Message) --[[ Line: 92 ]]
+function ValidationReporterModule:fetchError(Message)
 	error({ __fetchError = true, message = Message })
 end
 
-function ValidationReporterModule:err(_telemetryContext) --[[ Line: 96 ]]
+function ValidationReporterModule:err(_telemetryContext)
 	-- upvalues: GetFFlagDebugUGCValidationPrintNewStructureResultsModule (copy), ValidationEnumsModule (copy)
 	if GetFFlagDebugUGCValidationPrintNewStructureResultsModule() then
 		print("Reporting:", self._testEnum, "has error:", _telemetryContext)
@@ -91,7 +91,7 @@ function ValidationReporterModule:err(_telemetryContext) --[[ Line: 96 ]]
 	self._warnings = {}
 end
 
-function ValidationReporterModule:complete() --[[ Line: 107 ]]
+function ValidationReporterModule:complete()
 	-- upvalues: ValidationEnumsModule (copy), GetFFlagDebugUGCValidationPrintNewStructureResultsModule (copy), GetFFlagUGCValidationLogFailureInfoModule (copy), UGCValidationLogFailureLength (copy)
 	local ScaledClockTime: number = if self._startTime then 1000 * (os.clock() - self._startTime) else 0
 	

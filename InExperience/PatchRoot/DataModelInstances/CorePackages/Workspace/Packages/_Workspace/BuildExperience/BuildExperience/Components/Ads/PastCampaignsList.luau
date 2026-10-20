@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local View = require(Parent.Foundation).View
 local PastCampaignRowModule = require(script.Parent.PastCampaignRow)
 
-return function(p1) --[[ Line: 18 | Named "PastCampaignsList" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), PastCampaignRowModule (copy), View (copy)
 	local TestId = p1.testId or "PastCampaignsList"
 	local Elements = {}

@@ -17,7 +17,7 @@ local config = {
 	size = require(Foundation.Enums.InputSize).Medium
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 39 | Named "TextArea" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseTextInputVariantsModule (copy), ReactModule (copy), InputFieldModule (copy), WithCommonPropsModule (copy), GetInputTextSizeModule (copy), InternalTextInputModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
@@ -31,7 +31,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 39 |
 		hasError = WithDefaultsModuleResult.hasError,
 		isDisabled = WithDefaultsModuleResult.isDisabled,
 		isRequired = WithDefaultsModuleResult.isRequired,
-		input = function(Ref) --[[ Line: 54 ]]
+		input = function(Ref)
 			-- upvalues: ReactModule (upval), InternalTextInputModule (upval), WithDefaultsModuleResult (copy), UseTextInputVariantsModuleResult (copy), UseTokensModuleResult (copy)
 			return ReactModule.createElement(InternalTextInputModule, {
 				LayoutOrder = 2,

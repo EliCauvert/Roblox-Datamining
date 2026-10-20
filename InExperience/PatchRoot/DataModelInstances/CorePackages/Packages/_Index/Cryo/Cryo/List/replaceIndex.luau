@@ -1,4 +1,4 @@
-﻿return function(p1, p2, p3) --[[ Line: 5 | Named "replaceIndex" ]]
+﻿return function(p1, p2, p3)
 	local t = {}
 	local CountP0 = #p1
 	assert(p2 <= CountP0, "index must be less or equal than the list length")

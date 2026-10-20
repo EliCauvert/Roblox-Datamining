@@ -19,7 +19,7 @@ local InExperienceProviderContainer = require(Parent.InExperienceContainer).InEx
 local InGameUpsellContainerModule = require(PhoneUpsell.Components.InGame.InGameUpsellContainer)
 local Root = nil
 
-local function v15(p1) --[[ Line: 29 ]]
+local function v15(p1)
 	-- upvalues: UseLocalizationFunction (copy), UseStyleFunction (copy), ReactModule (copy), Toast (copy), Images (copy)
 	return ReactModule.createElement(ReactModule.Fragment, {}, {
 		PhoneToast = ReactModule.createElement(Toast, {
@@ -40,7 +40,7 @@ local function v15(p1) --[[ Line: 29 ]]
 end
 
 return {
-	openPhoneUpsell = function(p1) --[[ Line: 54 ]]
+	openPhoneUpsell = function(p1)
 		-- upvalues: Root (ref), ReactRobloxModule (copy), OpenModalFunction (copy), InExperienceProviderContainer (copy), ReactModule (copy), InGameUpsellContainerModule (copy), CryoModule (copy), CloseModalFunction (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), StyleProviderWithDefaultTheme (copy), v15 (copy), GetFFlagNotificationModalSetMenuIsOpenFunction (copy)
 		if Root == nil then
 			local PhoneUpsellToasts = Instance.new("Folder")
@@ -52,7 +52,7 @@ return {
 			DisableBackgroundDismiss = true,
 			Props = {
 				children = ReactModule.createElement(InGameUpsellContainerModule, CryoModule.Dictionary.join(p1, {
-					closeUpsell = function() --[[ Line: 66 ]]
+					closeUpsell = function()
 						-- upvalues: CloseModalFunction (upval), p1 (copy)
 						CloseModalFunction("PHONE_UPSELL_KEY")
 						
@@ -60,7 +60,7 @@ return {
 							p1.closeUpsell()
 						end
 					end,
-					onSuccess = function() --[[ Line: 72 ]]
+					onSuccess = function()
 						-- upvalues: CloseModalFunction (upval), p1 (copy), Root (upval), ReactModule (upval), LocalizationProvider (upval), Localization (upval), LocalizationService (upval), StyleProviderWithDefaultTheme (upval), v15 (upval)
 						CloseModalFunction("PHONE_UPSELL_KEY")
 						
@@ -81,7 +81,7 @@ return {
 									StyleProvider = ReactModule.createElement(StyleProviderWithDefaultTheme, {}, {
 										Frame = ReactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
 											Toast = ReactModule.createElement(v15, {
-												onDismissed = function() --[[ Line: 97 ]]
+												onDismissed = function()
 													-- upvalues: p1 (upval), Root (upval)
 													if p1.onSuccess then
 														p1.onSuccess()

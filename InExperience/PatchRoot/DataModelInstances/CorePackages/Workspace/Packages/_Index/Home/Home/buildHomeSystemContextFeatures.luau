@@ -12,7 +12,7 @@ local config = {
 	availRAM = "avail_ram"
 }
 
-return function() --[[ Line: 31 | Named "buildHomeSystemContextFeatures" ]]
+return function()
 	-- upvalues: AddSystemInfoToArgsFunction (copy), config (copy)
 	local t = {}
 	AddSystemInfoToArgsFunction(t)

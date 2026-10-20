@@ -3,11 +3,11 @@ local VRHub = require(game:GetService("CorePackages").Workspace.Packages.VrCommo
 
 return {
 	Name = "LeaveGameIconHighlightEvent",
-	StartEvent = function() --[[ Line: 16 ]]
+	StartEvent = function()
 		-- upvalues: VRHub (copy)
 		VRHub:SetShowHighlightedLeaveGameIconToggled(true)
 	end,
-	StopEvent = function() --[[ Line: 20 ]]
+	StopEvent = function()
 		-- upvalues: VRHub (copy)
 		VRHub:SetShowHighlightedLeaveGameIconToggled(false)
 	end

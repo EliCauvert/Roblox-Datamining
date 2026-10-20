@@ -3,13 +3,13 @@ local Array = require(Parent.Parent.LuauPolyfill).Array
 local GraphQLError = require(Parent.error.GraphQLError).GraphQLError
 
 return {
-	NoFragmentCyclesRule = function(p1) --[[ Line: 18 ]]
+	NoFragmentCyclesRule = function(p1)
 		-- upvalues: Array (copy), GraphQLError (copy)
 		local t = {}
 		local List = {}
 		local t1 = {}
 		
-		local function detectCycleRecursive(Fragment) --[[ Line: 31 ]]
+		local function detectCycleRecursive(Fragment)
 			-- upvalues: t (copy), p1 (copy), t1 (copy), List (copy), detectCycleRecursive (copy), Array (upval), GraphQLError (upval)
 			if t[Fragment.name.value] then return end
 			local Value = Fragment.name.value
@@ -32,7 +32,7 @@ return {
 					end
 				else
 					local SliceResult = Array.slice(List, Entry + 1)
-					local Joined = table.concat(Array.map(Array.slice(SliceResult, 1, #SliceResult), function(p2): string --[[ Line: 61 ]]
+					local Joined = table.concat(Array.map(Array.slice(SliceResult, 1, #SliceResult), function(p2): string
 						return "\"" .. p2.name.value .. "\""
 					end), ", ")
 					p1:reportError(GraphQLError.new(("Cannot spread fragment \"%s\" within itself"):format(Value1) .. (if Joined == "" then "." else (" via %s."):format(Joined) or "."), SliceResult))
@@ -43,10 +43,10 @@ return {
 		end
 		
 		return {
-			OperationDefinition = function(): boolean --[[ Line: 82 ]]
+			OperationDefinition = function(): boolean
 				return false
 			end,
-			FragmentDefinition = function(_, p2): boolean --[[ Line: 85 ]]
+			FragmentDefinition = function(_, p2): boolean
 				-- upvalues: detectCycleRecursive (copy)
 				detectCycleRecursive(p2)
 				

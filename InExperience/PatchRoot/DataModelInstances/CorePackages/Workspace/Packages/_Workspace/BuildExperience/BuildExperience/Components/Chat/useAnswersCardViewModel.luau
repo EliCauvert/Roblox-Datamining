@@ -6,11 +6,11 @@ local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local _ = require(script.Parent.AnswersCardView)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return function(Frame) --[[ Line: 17 | Named "useAnswersCardViewModel" ]]
+return function(Frame)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({ answers = LocalizationStringsModule.ANSWER_FORM_ANSWERS })
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 20 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseBindingResult2 (copy)
 		UseBindingResult2(Frame.AbsoluteSize.Y)
 	end, {})
@@ -37,7 +37,7 @@ return function(Frame) --[[ Line: 17 | Named "useAnswersCardViewModel" ]]
 	end
 	return {
 		LayoutOrder = Frame.LayoutOrder,
-		Size = UseBindingResult:map(function(YOffset): UDim2 --[[ Line: 51 ]]
+		Size = UseBindingResult:map(function(YOffset): UDim2
 			return UDim2.new(1, 0, 0, YOffset)
 		end),
 		headerText = UseLocalizationResult.answers,

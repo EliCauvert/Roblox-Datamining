@@ -8,7 +8,7 @@ local UserSignalTypes = UserSignalsModule.UserSignalTypes
 local MutedErrorFunction = require(Parent.Loggers).mutedError
 local NotInterestedUserSignalTelemetryEventConfigsModule = require(GameTile.NotInterestedUserSignalTelemetryEventConfigs)
 
-return function(p1): boolean --[[ Line: 28 | Named "undoGameNotInterested" ]]
+return function(p1): boolean
 	-- upvalues: Default (copy), NotInterestedUserSignalTelemetryEventConfigsModule (copy), SetNetworkingErrorToastFunction (copy), PostSendUserSignalFunction (copy), UserSignalTypes (copy), MutedErrorFunction (copy)
 	if not p1.appPage then
 		Default:logRobloxTelemetryCounter(NotInterestedUserSignalTelemetryEventConfigsModule.NotInterestedMissingAppPage, 1)
@@ -21,7 +21,7 @@ return function(p1): boolean --[[ Line: 28 | Named "undoGameNotInterested" ]]
 	if p1.onOptimisticUnhide then
 		p1.onOptimisticUnhide()
 	end
-	local Success, Result = pcall(function() --[[ Line: 43 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: PostSendUserSignalFunction (upval), p1 (copy), UserSignalTypes (upval), SetNetworkingErrorToastFunction (upval), Default (upval), NotInterestedUserSignalTelemetryEventConfigsModule (upval)
 		PostSendUserSignalFunction(p1.networking, { boolValue = false }, {
 			id = p1.universeId,
@@ -31,7 +31,7 @@ return function(p1): boolean --[[ Line: 28 | Named "undoGameNotInterested" ]]
 				topicId = p1.collectionId or "",
 				subIds = { p1.collectionId or "" }
 			}
-		}, UserSignalTypes.SignalValueType.Bool, UserSignalTypes.SignalType.NotInterested):catch(function(Err) --[[ Line: 57 ]]
+		}, UserSignalTypes.SignalValueType.Bool, UserSignalTypes.SignalType.NotInterested):catch(function(Err)
 			-- upvalues: p1 (upval), SetNetworkingErrorToastFunction (upval), Default (upval), NotInterestedUserSignalTelemetryEventConfigsModule (upval)
 			p1.setGameHidden(p1.universeId, true)
 			p1.dispatch(SetNetworkingErrorToastFunction(Err))

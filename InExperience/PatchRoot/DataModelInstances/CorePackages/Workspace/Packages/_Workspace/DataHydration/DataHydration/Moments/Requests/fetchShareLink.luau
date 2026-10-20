@@ -7,11 +7,11 @@ local Text = require(Parent.Http).Url.APIS_URL .. "deeplinks/v2/get-or-create-st
 local FFlagMomentsPassFeedItemIdToBackendApis = require(Parent.SharedFlags).FFlagMomentsPassFeedItemIdToBackendApis
 local ShareLinkTargetIdType = require(Parent.MomentsTypes).Enums.ShareLinkTargetIdType
 
-local function decodeShareLink(p1) --[[ Line: 33 ]]
+local function decodeShareLink(p1)
 	return if p1.link and type(p1.link) == "string" then p1.link else nil
 end
 
-return function(p1, Network) --[[ Line: 41 | Named "fetchShareLink" ]]
+return function(p1, Network)
 	-- upvalues: FFlagMomentsPassFeedItemIdToBackendApis (copy), ShareLinkTargetIdType (copy), HttpClientModule (copy), Text (copy), HttpService (copy), decodeShareLink (copy)
 	local MomentId = p1.momentId
 	local config = { momentId = p1.momentId }

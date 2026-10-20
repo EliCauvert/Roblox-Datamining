@@ -1,3 +1,3 @@
-﻿return function(_): boolean --[[ Line: 15 | Named "isTextFiltered" ]]
+﻿return function(_): boolean
 	return false
 end

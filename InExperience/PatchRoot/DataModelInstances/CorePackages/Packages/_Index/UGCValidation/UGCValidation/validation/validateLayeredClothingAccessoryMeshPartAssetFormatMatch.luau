@@ -2,7 +2,7 @@
 local AnalyticsModule = require(Parent.Analytics)
 local _ = require(Parent.util.Types)
 
-return function(Object, Object1, p1) --[[ Line: 7 | Named "validateLayeredClothingAccessoryMeshPartAssetFormatMatch" ]]
+return function(Object, Object1, p1)
 	-- upvalues: AnalyticsModule (copy)
 	local Handle = Object:FindFirstChild("Handle")
 	assert(Handle and Handle:IsA("MeshPart"))

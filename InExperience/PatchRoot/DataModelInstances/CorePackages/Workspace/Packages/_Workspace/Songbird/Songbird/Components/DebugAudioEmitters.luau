@@ -43,7 +43,7 @@ local list = {
 	}
 }
 
-local function spawnAudioEmitter(p1) --[[ Line: 68 ]]
+local function spawnAudioEmitter(p1)
 	local Part = Instance.new("Part")
 	Part.Position = p1.position
 	Part.Anchored = true
@@ -75,10 +75,10 @@ local function spawnAudioEmitter(p1) --[[ Line: 68 ]]
 	return Part
 end
 
-return function() --[[ Line: 106 | Named "DebugAudioEmitters" ]]
+return function()
 	-- upvalues: GetFFlagDebugMusicSampleSoundsModule (copy), UseEffectFunction (copy), list (copy), spawnAudioEmitter (copy), ReplicatedStorage (copy)
 	if GetFFlagDebugMusicSampleSoundsModule() then
-		UseEffectFunction(function() --[[ Line: 108 ]]
+		UseEffectFunction(function()
 			local AudioListener = Instance.new("AudioListener")
 			local AudioDeviceOutput = Instance.new("AudioDeviceOutput")
 			AudioDeviceOutput.Parent = AudioListener
@@ -88,7 +88,7 @@ return function() --[[ Line: 106 | Named "DebugAudioEmitters" ]]
 			Wire.Parent = AudioListener
 			AudioListener.Parent = workspace.CurrentCamera
 		end, {})
-		UseEffectFunction(function() --[[ Line: 122 ]]
+		UseEffectFunction(function()
 			-- upvalues: list (upval), spawnAudioEmitter (upval), ReplicatedStorage (upval)
 			local Adornees = {}
 			
@@ -120,7 +120,7 @@ return function() --[[ Line: 106 | Named "DebugAudioEmitters" ]]
 			Sound.Parent = ReplicatedStorage
 			Sound:Play()
 			
-			return function() --[[ Line: 161 ]]
+			return function()
 				-- upvalues: Sound (copy), Adornees (copy)
 				Sound:Destroy()
 				

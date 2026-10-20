@@ -13,10 +13,10 @@ local CameraUtilityModule = {
 	XRotForFullBody = 15,
 	XRotForCloseup = 0,
 	DistanceScaleForFullBody = 1,
-	GetCameraCFrame = function(AdjustTargetCFrameWithExtentsResult, Vector3FromXYRotPlusDistanceResult): CFrame --[[ Line: 59 ]]
+	GetCameraCFrame = function(AdjustTargetCFrameWithExtentsResult, Vector3FromXYRotPlusDistanceResult): CFrame
 		return CFrame.lookAt(AdjustTargetCFrameWithExtentsResult * Vector3FromXYRotPlusDistanceResult, AdjustTargetCFrameWithExtentsResult.Position)
 	end,
-	CreateThumbnailCamera = function() --[[ Line: 71 ]]
+	CreateThumbnailCamera = function()
 		local ThumbnailCamera = Instance.new("Camera")
 		ThumbnailCamera.Name = "ThumbnailCamera"
 		ThumbnailCamera.CameraType = Enum.CameraType.Scriptable
@@ -24,12 +24,12 @@ local CameraUtilityModule = {
 		
 		return ThumbnailCamera
 	end,
-	CalculateBaseDistanceToCamera = function(Radians: number, MinExtent, MaxExtent, ExtentScale) --[[ Line: 87 ]]
+	CalculateBaseDistanceToCamera = function(Radians: number, MinExtent, MaxExtent, ExtentScale)
 		return math.max((MaxExtent.X - MinExtent.X) / 2, (MaxExtent.Y - MinExtent.Y) / 2) * ExtentScale / math.tan(Radians / 2)
 	end
 }
 
-function CameraUtilityModule.SetupCamera(Camera: Camera, p1) --[[ Line: 118 ]]
+function CameraUtilityModule.SetupCamera(Camera: Camera, p1)
 	-- upvalues: CameraUtilityModule (copy), CFrameUtilityModule (copy), VectorUtilityModule (copy)
 	if p1.optFieldOfView then
 		Camera.FieldOfView = p1.optFieldOfView
@@ -42,7 +42,7 @@ function CameraUtilityModule.SetupCamera(Camera: Camera, p1) --[[ Line: 118 ]]
 	Camera.CFrame = CameraUtilityModule.GetCameraCFrame(CFrameUtilityModule.AdjustTargetCFrameWithExtents(p1.targetCFrame, p1.minExtent, p1.maxExtent), (VectorUtilityModule.Vector3FromXYRotPlusDistance(p1.optCameraXRot or 0, p1.optCameraYRot or 0, BaseDistanceToCamera)))
 end
 
-function CameraUtilityModule.SetupBodyPartCamera(Object, p1, ChildNames, Camera) --[[ Line: 157 ]]
+function CameraUtilityModule.SetupBodyPartCamera(Object, p1, ChildNames, Camera)
 	-- upvalues: _CFrame1 (copy), _CFrame (copy), CharacterUtilityModule (copy), CameraUtilityModule (copy)
 	local List = {}
 	
@@ -66,7 +66,7 @@ function CameraUtilityModule.SetupBodyPartCamera(Object, p1, ChildNames, Camera)
 	})
 end
 
-function CameraUtilityModule.SetupHeadCamera(Object, Camera) --[[ Line: 195 ]]
+function CameraUtilityModule.SetupHeadCamera(Object, Camera)
 	-- upvalues: CFrameUtilityModule (copy), CharacterUtilityModule (copy), CameraUtilityModule (copy)
 	local ScaledTargetCFrame = CFrame.fromEulerAnglesYXZ(0.2617993877991494, 0.5235987755982988, 0) * CFrameUtilityModule.CalculateTargetCFrame(Object:FindFirstChild("Head").CFrame)
 	local HeadExtents, HeadExtents2 = CharacterUtilityModule.CalculateHeadExtents(Object, ScaledTargetCFrame)
@@ -79,7 +79,7 @@ function CameraUtilityModule.SetupHeadCamera(Object, Camera) --[[ Line: 195 ]]
 	})
 end
 
-local function _(Object): boolean --[[ Line: 224 | Named "isLeftShoe" ]]
+local function _(Object): boolean
 	local MeshPart = Object:FindFirstChildWhichIsA("MeshPart")
 	
 	if MeshPart then
@@ -91,7 +91,7 @@ local function _(Object): boolean --[[ Line: 224 | Named "isLeftShoe" ]]
 	end
 end
 
-local _ = function(Object): boolean --[[ Line: 233 | Named "isRightShoe" ]]
+local _ = function(Object): boolean
 	local MeshPart = Object:FindFirstChildWhichIsA("MeshPart")
 	
 	if MeshPart then
@@ -103,7 +103,7 @@ local _ = function(Object): boolean --[[ Line: 233 | Named "isRightShoe" ]]
 	end
 end
 
-local _ = function(Object) --[[ Line: 242 | Named "getAccessoryAngle" ]]
+local _ = function(Object)
 	-- upvalues: _CFrame3 (copy), _CFrame4 (copy), _CFrame2 (copy)
 	local MeshPart = Object:FindFirstChildWhichIsA("MeshPart")
 	local HasLeftFootAttachment = nil
@@ -129,7 +129,7 @@ local _ = function(Object) --[[ Line: 242 | Named "getAccessoryAngle" ]]
 	return if HasRightFootAttachment then _CFrame4 else _CFrame2
 end
 
-function CameraUtilityModule.SetupAccessoryCamera(Object, Camera) --[[ Line: 251 ]]
+function CameraUtilityModule.SetupAccessoryCamera(Object, Camera)
 	-- upvalues: _CFrame3 (copy), _CFrame4 (copy), _CFrame2 (copy), CharacterUtilityModule (copy), CameraUtilityModule (copy)
 	local Children = Object:GetChildren()
 	assert(#Children == 1, "Assert SetupMeshPartAccessoryCamera accessoryModel only has accessory as a child.")

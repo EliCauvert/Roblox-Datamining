@@ -2,11 +2,11 @@
 local SignalsModule = require(Parent.Parent.Signals)
 local _ = require(Parent.HttpStoreTypes)
 
-return function() --[[ Line: 20 | Named "createMockHttpStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy)
 	local t = {}
 	
-	local function getOrCreateResponse(Key, Config) --[[ Line: 29 ]]
+	local function getOrCreateResponse(Key, Config)
 		-- upvalues: t (ref), SignalsModule (upval)
 		if not t[Key] then
 			local Signal, Signal2 = SignalsModule.createSignal({ status = "NotStarted", config = Config })
@@ -16,12 +16,12 @@ return function() --[[ Line: 20 | Named "createMockHttpStore" ]]
 	end
 	
 	return {
-		fetch = function(p1, p2) --[[ Line: 40 ]]
+		fetch = function(p1, p2)
 			-- upvalues: getOrCreateResponse (copy)
-			return getOrCreateResponse(p1 or p2.Url, p2).get, function() --[[ Line: 43 ]] end
+			return getOrCreateResponse(p1 or p2.Url, p2).get, function() end
 		end,
-		cancelAll = function() --[[ Line: 46 ]] end,
-		setResponse = function(Key, p1) --[[ Line: 53 ]]
+		cancelAll = function() end,
+		setResponse = function(Key, p1)
 			-- upvalues: t (ref), SignalsModule (upval)
 			if t[Key] then
 				t[Key].set(p1)
@@ -32,7 +32,7 @@ return function() --[[ Line: 20 | Named "createMockHttpStore" ]]
 				t[Key] = { get = Signal, set = Signal2 }
 			end
 		end,
-		reset = function() --[[ Line: 63 ]]
+		reset = function()
 			-- upvalues: t (ref)
 			t = {}
 		end

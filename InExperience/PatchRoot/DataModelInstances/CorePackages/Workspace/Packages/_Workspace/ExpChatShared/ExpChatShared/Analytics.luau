@@ -6,7 +6,7 @@ local Dictionary = require(ExpChatShared.Parent.llama).Dictionary
 local NewResult = require(ExpChatShared.Logger):new("ExpChat/" .. script.Name)
 local RbxAnalyticsService1 = RbxAnalyticsService
 
-local function withDefaultArgs(p1) --[[ Line: 17 ]]
+local function withDefaultArgs(p1)
 	-- upvalues: Dictionary (copy)
 	return Dictionary.join(p1, {
 		gameId = tostring(game.GameId),
@@ -14,7 +14,7 @@ local function withDefaultArgs(p1) --[[ Line: 17 ]]
 	})
 end
 
-local function setRbxEventStream(Target, EventContext, EventName, p1) --[[ Line: 24 ]]
+local function setRbxEventStream(Target, EventContext, EventName, p1)
 	-- upvalues: RbxAnalyticsService1 (ref), NewResult (copy), withDefaultArgs (copy)
 	if RbxAnalyticsService1 then
 		NewResult:debug("Event: {}", EventName)
@@ -22,7 +22,7 @@ local function setRbxEventStream(Target, EventContext, EventName, p1) --[[ Line:
 	end
 end
 
-local function sendEventDeferred(Target, EventContext, EventName, p1) --[[ Line: 31 ]]
+local function sendEventDeferred(Target, EventContext, EventName, p1)
 	-- upvalues: RbxAnalyticsService1 (ref), NewResult (copy), withDefaultArgs (copy)
 	if RbxAnalyticsService1 then
 		NewResult:debug("SendEventDeferred: {}", EventName)
@@ -31,19 +31,19 @@ local function sendEventDeferred(Target, EventContext, EventName, p1) --[[ Line:
 end
 
 local AnalyticsModule = {
-	with = function(p1) --[[ Line: 38 ]]
+	with = function(p1)
 		-- upvalues: RbxAnalyticsService1 (ref), RbxAnalyticsService (copy)
 		RbxAnalyticsService1 = p1 or RbxAnalyticsService
 	end,
-	FireRccAnalyticsWithEventName = function(p1, p2) --[[ Line: 42 ]]
+	FireRccAnalyticsWithEventName = function(p1, p2)
 		-- upvalues: setRbxEventStream (copy)
 		setRbxEventStream("rcc", "experienceChat", p1, p2)
 	end,
-	FireClientAnalyticsWithEventName = function(p1, p2) --[[ Line: 46 ]]
+	FireClientAnalyticsWithEventName = function(p1, p2)
 		-- upvalues: setRbxEventStream (copy)
 		setRbxEventStream("client", "experienceChat", p1, p2)
 	end,
-	reportCounter = function(CounterName, p1) --[[ Line: 50 ]]
+	reportCounter = function(CounterName, p1)
 		-- upvalues: RbxAnalyticsService1 (ref), NewResult (copy)
 		if RbxAnalyticsService1 then
 			NewResult:debug("Counter: {}", CounterName)
@@ -59,19 +59,19 @@ local AnalyticsModule = {
 	}
 }
 
-function AnalyticsModule.reportChatEnabledUserCountFetchResult(p1) --[[ Line: 65 ]]
+function AnalyticsModule.reportChatEnabledUserCountFetchResult(p1)
 	-- upvalues: TelemetryService (copy), AnalyticsModule (copy)
 	TelemetryService:LogCounter(AnalyticsModule.ExpChatChatEnabledUserCountFetchConfig, {
 		customFields = { result = if p1 then "success" else "failure" }
 	}, 1)
 end
 
-function AnalyticsModule.FireRccAnalyticsDeferred(p1, p2) --[[ Line: 73 ]]
+function AnalyticsModule.FireRccAnalyticsDeferred(p1, p2)
 	-- upvalues: sendEventDeferred (copy)
 	sendEventDeferred("RCC", "experienceChat", p1, p2)
 end
 
-function AnalyticsModule:TelemetryLogEvent(Config, CustomFields, StandardizedFields) --[[ Line: 77 ]]
+function AnalyticsModule:TelemetryLogEvent(Config, CustomFields, StandardizedFields)
 	-- upvalues: TelemetryService (copy)
 	TelemetryService:LogEvent(Config, {
 		customFields = CustomFields,
@@ -86,7 +86,7 @@ AnalyticsModule.DefaultStandardizedFields = {
 	"addPlaceId"
 }
 
-function AnalyticsModule.reportTextChatCommandClientSent(p1, CommandName) --[[ Line: 83 ]]
+function AnalyticsModule.reportTextChatCommandClientSent(p1, CommandName)
 	-- upvalues: TextChatService (copy)
 	TextChatService:SendTextChatCommandClientSent(CommandName)
 	p1.FireClientAnalyticsWithEventName("CommandSent", { commandName = CommandName })

@@ -88,7 +88,7 @@ local config = {
 	[110] = "MissingCicRoleset"
 }
 
-return function(p1) --[[ Line: 193 | Named "canUploadBundlesAsync" ]]
+return function(p1)
 	-- upvalues: APIUtilModule (copy), HttpService (copy), config (copy)
 	local RequestAndRetryGetResult, RequestAndRetryGetResult2 = APIUtilModule.requestAndRetryGet(`https://itemconfiguration.{APIUtilModule.getBaseDomain()}/v1/collectibles/check-item-upload-access?targetType=1&groupId={p1 or ""}`)
 	

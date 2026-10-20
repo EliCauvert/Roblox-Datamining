@@ -11,7 +11,7 @@ local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXSduiFeedPublishesBreakpoint = AvatarExperienceFlagsModule.FFlagAXSduiFeedPublishesBreakpoint
 local FFlagAXMarketplaceBreakpointMismatchCounter = AvatarExperienceFlagsModule.FFlagAXMarketplaceBreakpointMismatchCounter
 
-return function(p1, p2) --[[ Line: 36 | Named "useCatalogFeedBreakpoint" ]]
+return function(p1, p2)
 	-- upvalues: UseTokensFunction (copy), GetUIScaleFromTokensModule (copy), GetAXMarketplaceWidgetStoreModule (copy), UseSignalStateFunction (copy), ReactModule (copy), FFlagAXMarketplaceBreakpointMismatchCounter (copy), FFlagAXSduiFeedPublishesBreakpoint (copy), GetBreakpointFromRowWidthModule (copy)
 	local UIScaleFromTokensModule = GetUIScaleFromTokensModule((UseTokensFunction()))
 	local Delay = if p1 == nil then 0.2 else p1
@@ -23,9 +23,9 @@ return function(p1, p2) --[[ Line: 36 | Named "useCatalogFeedBreakpoint" ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = if FFlagAXMarketplaceBreakpointMismatchCounter then ReactModule.useRef(false) else nil
-	ReactModule.useEffect(function() --[[ Line: 64 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy)
-		return function() --[[ Line: 65 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			if UseRefResult.current then
 				task.cancel(UseRefResult.current)
@@ -34,7 +34,7 @@ return function(p1, p2) --[[ Line: 36 | Named "useCatalogFeedBreakpoint" ]]
 		end
 	end, {})
 	
-	return if UseStateResult == nil then UseSignalStateResult else UseStateResult, (ReactModule.useCallback(function(Frame) --[[ Line: 74 ]]
+	return if UseStateResult == nil then UseSignalStateResult else UseStateResult, (ReactModule.useCallback(function(Frame)
 		-- upvalues: FFlagAXSduiFeedPublishesBreakpoint (upval), HorizontalInset (copy), GetBreakpointFromRowWidthModule (upval), UIScaleFromTokensModule (copy), UseRefResult (copy), Delay (copy), FFlagAXMarketplaceBreakpointMismatchCounter (upval), UseRefResult1 (copy), MeasurementSource (copy), AXMarketplaceWidgetStoreModule (copy), IsPublishToStore (copy), UseStateResult2 (copy)
 		local X = Frame.AbsoluteSize.X
 		
@@ -46,7 +46,7 @@ return function(p1, p2) --[[ Line: 36 | Named "useCatalogFeedBreakpoint" ]]
 		if UseRefResult.current then
 			task.cancel(UseRefResult.current)
 		end
-		UseRefResult.current = task.delay(Delay, function() --[[ Line: 83 ]]
+		UseRefResult.current = task.delay(Delay, function()
 			-- upvalues: UseRefResult (upval), FFlagAXMarketplaceBreakpointMismatchCounter (upval), UseRefResult1 (upval), MeasurementSource (upval), AXMarketplaceWidgetStoreModule (upval), BreakpointFromRowWidthModule (copy), FFlagAXSduiFeedPublishesBreakpoint (upval), IsPublishToStore (upval), UseStateResult2 (upval)
 			UseRefResult.current = nil
 			

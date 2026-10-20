@@ -9,7 +9,7 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local Dialog = FoundationModule.Dialog
 local DialogSize = FoundationModule.Enums.DialogSize
 
-return function(p1) --[[ Line: 21 | Named "BuildEligibilityDialog" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseBuildPageEligibilityModule (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), ButtonVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		dialogAction = LocalizationStringsModule.BUILD_ELIGIBILITY_DIALOG_ACTION,

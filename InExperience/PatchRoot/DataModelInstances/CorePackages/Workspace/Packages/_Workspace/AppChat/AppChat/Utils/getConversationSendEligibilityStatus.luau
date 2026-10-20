@@ -13,24 +13,24 @@ local FFlagAppChatEnforceTimeoutsOnUnfilteredChatModule = require(AppChat.Flags.
 local FFlagAppChatReactiveFeatureRestrictions = require(Parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
 local FFlagShareSheetFriendsSort = require(Parent.SharedFlags).FFlagShareSheetFriendsSort
 
-local function isActiveTimeout(p1, TrustedComms, p2): boolean --[[ Line: 38 ]]
+local function isActiveTimeout(p1, TrustedComms, p2): boolean
 	-- upvalues: FFlagAppChatReactiveFeatureRestrictions (copy), FFlagAppChatEnforceTimeoutsOnUnfilteredChatModule (copy), ConversationChannelsModule (copy)
 	local IsEndTimestampAbove: boolean = p1 ~= nil and (p1.status == "active" and (p2 < p1.endTimestamp or FFlagAppChatReactiveFeatureRestrictions and p1.requiresAcknowledgement == true))
 	
 	return if FFlagAppChatEnforceTimeoutsOnUnfilteredChatModule then IsEndTimestampAbove else IsEndTimestampAbove and TrustedComms ~= ConversationChannelsModule.ModerationType.TrustedComms
 end
 
-local Callback = if FFlagShareSheetFriendsSort then function(p1, _, p2) --[[ Line: 57 ]]
+local Callback = if FFlagShareSheetFriendsSort then function(p1, _, p2)
 	-- upvalues: GetEffectiveChatTimeoutDetailsModule (copy), ToTimeoutEntryModule (copy)
 	return GetEffectiveChatTimeoutDetailsModule(nil, ToTimeoutEntryModule(p1), nil, p2).isTimedOut
 end else isActiveTimeout
 
-local function _(p1) --[[ Line: 62 | Named "isConversationPending" ]]
+local function _(p1)
 	-- upvalues: ConversationChannelsModule (copy), UseIsUserPendingModule (copy)
 	return p1.participantPendingStatus == ConversationChannelsModule.UserPendingStatus.Pending or UseIsUserPendingModule(p1)
 end
 
-return function(p1) --[[ Line: 67 | Named "getConversationSendEligibilityStatus" ]]
+return function(p1)
 	-- upvalues: ConversationChannelsModule (copy), UseIsUserPendingModule (copy), FFlagShareSheetFriendsSort (copy), GetUserSendEligibilityStatusModule (copy), DataHydrationModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy), FFlagAppChatEnforceTimeoutsOnUnfilteredChatModule (copy), Callback (copy)
 	local Conversation = p1.conversation
 	

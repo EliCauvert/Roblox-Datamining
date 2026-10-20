@@ -28,20 +28,20 @@ local _ = require(Parent1.UserList)
 local config = { skipFetch = true }
 local config1 = { isContact = true }
 
-local function _(p1, p2, p3): boolean --[[ Line: 67 ]]
+local function _(p1, p2, p3): boolean
 	-- upvalues: NetworkStatus (copy)
 	return p2.getStatus(p1, p3) == NetworkStatus.Fetching
 end
 
-return function(p1) --[[ Line: 71 | Named "usePYMKCarouselUserButtons" ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseSelectorFunction (copy), FFlagMigrateFriendshipStatusesPYMKModule (copy), UseGetFriendshipStatusFunction (copy), config (copy), RoduxFriends (copy), FFlagLuaAppEnableSduiHomePage (copy), GetDeepValueFunction (copy), GetFFlagPYMKDisableButtonsOnFetchModule (copy), NetworkingFriends (copy), NetworkStatus (copy), React (copy), Images (copy), EventNames (copy), GetResult (copy), TextKeysModule (copy), FocusNavigationEventNameEnum (copy), HttpService (copy), ContextualInfoTypes (copy), FriendshipOriginSourceType (copy), config1 (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FriendsStoreChallengeNetworkModule (copy)
 	local Text = tostring(p1.userId)
 	local UseDispatchResult = UseDispatchFunction()
-	local UseSelectorResult = UseSelectorFunction(function(p2): string --[[ Line: 75 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2): string
 		return (tostring(p2.LocalUserId))
 	end)
 	local UseGetFriendshipStatusResult = nil
-	UseGetFriendshipStatusResult = if FFlagMigrateFriendshipStatusesPYMKModule then UseGetFriendshipStatusFunction(Text, config) else UseSelectorFunction(function(p2) --[[ Line: 82 ]]
+	UseGetFriendshipStatusResult = if FFlagMigrateFriendshipStatusesPYMKModule then UseGetFriendshipStatusFunction(Text, config) else UseSelectorFunction(function(p2)
 		-- upvalues: RoduxFriends (upval), Text (copy)
 		return RoduxFriends.Selectors.selectFriendshipStatusesByUserIds(p2)({ Text })[Text] or nil
 	end)
@@ -52,23 +52,23 @@ return function(p1) --[[ Line: 71 | Named "usePYMKCarouselUserButtons" ]]
 		Recommendation = p1.recommendation or {}
 		IsHasIncomingFriendRequest = p1.recommendation and p1.recommendation.hasIncomingFriendRequest == true
 	else
-		Recommendation = UseSelectorFunction(function(p2) --[[ Line: 94 ]]
+		Recommendation = UseSelectorFunction(function(p2)
 			-- upvalues: RoduxFriends (upval), UseSelectorResult (copy), Text (copy)
 			return RoduxFriends.Selectors.selectRecommendationsForUserId(p2)(UseSelectorResult)[Text] or {}
 		end)
-		IsHasIncomingFriendRequest = UseSelectorFunction(function(p2) --[[ Line: 99 ]]
+		IsHasIncomingFriendRequest = UseSelectorFunction(function(p2)
 			-- upvalues: GetDeepValueFunction (upval), Text (copy)
 			return GetDeepValueFunction(p2, string.format("PYMKCarousel.Friends.recommendations.hasIncomingFriendRequest.%s", Text)) or false
 		end)
 	end
-	local UseSelectorResult1 = if GetFFlagPYMKDisableButtonsOnFetchModule() then UseSelectorFunction(function(p2) --[[ Line: 108 ]]
+	local UseSelectorResult1 = if GetFFlagPYMKDisableButtonsOnFetchModule() then UseSelectorFunction(function(p2)
 		-- upvalues: NetworkingFriends (upval), Text (copy), NetworkStatus (upval)
 		return {
 			RequestFriendshipFromUserId = NetworkingFriends.RequestFriendshipFromUserId.getStatus(p2, Text) == NetworkStatus.Fetching,
 			AcceptFriendRequestFromUserId = NetworkingFriends.AcceptFriendRequestFromUserId.getStatus(p2, Text) == NetworkStatus.Fetching
 		}
 	end) else nil
-	local UseMemoResult = React.useMemo(function() --[[ Line: 125 ]]
+	local UseMemoResult = React.useMemo(function()
 		-- upvalues: UseGetFriendshipStatusResult (ref), Images (upval), IsHasIncomingFriendRequest (ref), FFlagMigrateFriendshipStatusesPYMKModule (upval), GetFFlagPYMKDisableButtonsOnFetchModule (upval), UseSelectorResult1 (copy), p1 (copy), EventNames (upval), Recommendation (ref), Text (copy), GetResult (upval), UseDispatchResult (copy), NetworkingFriends (upval), UseSelectorResult (copy), TextKeysModule (upval), FocusNavigationEventNameEnum (upval), HttpService (upval), ContextualInfoTypes (upval), FriendshipOriginSourceType (upval), config1 (upval), FFlagEnableFriendsStoreChallengeInterceptor (upval), FriendsStoreChallengeNetworkModule (upval)
 		return if UseGetFriendshipStatusResult == Enum.FriendStatus.FriendRequestSent then {
 			{
@@ -78,7 +78,7 @@ return function(p1) --[[ Line: 71 | Named "usePYMKCarouselUserButtons" ]]
 				buttonType = "Pending",
 				focusEvent = nil,
 				icon = Images["icons/actions/friends/friendpending"],
-				onActivated = function() --[[ Line: 132 ]] end
+				onActivated = function() end
 			}
 		} elseif IsHasIncomingFriendRequest or FFlagMigrateFriendshipStatusesPYMKModule and UseGetFriendshipStatusResult == Enum.FriendStatus.FriendRequestReceived then {
 			{
@@ -86,7 +86,7 @@ return function(p1) --[[ Line: 71 | Named "usePYMKCarouselUserButtons" ]]
 				buttonType = "Accept",
 				icon = Images["icons/actions/friends/friendAdd"],
 				isDisabled = if GetFFlagPYMKDisableButtonsOnFetchModule() and UseSelectorResult1 then UseSelectorResult1.AcceptFriendRequestFromUserId else false,
-				onActivated = function() --[[ Line: 149 ]]
+				onActivated = function()
 					-- upvalues: p1 (upval), EventNames (upval), Recommendation (upval), Text (upval), FFlagMigrateFriendshipStatusesPYMKModule (upval), GetResult (upval), UseDispatchResult (upval), NetworkingFriends (upval), UseSelectorResult (upval), TextKeysModule (upval)
 					p1.fireAnalyticsEvent(EventNames.AcceptFriendship, {
 						recommendationContextType = Recommendation.contextType,
@@ -95,10 +95,10 @@ return function(p1) --[[ Line: 71 | Named "usePYMKCarouselUserButtons" ]]
 						absolutePosition = p1.absolutePosition,
 						presence = p1.userPresenceType
 					});
-					(if FFlagMigrateFriendshipStatusesPYMKModule then GetResult.AcceptFriendRequest(Text) else UseDispatchResult(NetworkingFriends.AcceptFriendRequestFromUserId.API({ currentUserId = UseSelectorResult, targetUserId = Text }))):andThen(function() --[[ Line: 164 ]]
+					(if FFlagMigrateFriendshipStatusesPYMKModule then GetResult.AcceptFriendRequest(Text) else UseDispatchResult(NetworkingFriends.AcceptFriendRequestFromUserId.API({ currentUserId = UseSelectorResult, targetUserId = Text }))):andThen(function()
 						-- upvalues: p1 (upval), TextKeysModule (upval)
 						p1.showToast(TextKeysModule.ConnectionAddedToast)
-					end):catch(function() --[[ Line: 167 ]]
+					end):catch(function()
 						-- upvalues: p1 (upval), TextKeysModule (upval)
 						p1.showToast(TextKeysModule.SomethingIsWrongToast)
 					end)
@@ -112,7 +112,7 @@ return function(p1) --[[ Line: 71 | Named "usePYMKCarouselUserButtons" ]]
 				buttonType = "Add",
 				icon = Images["icons/actions/friends/friendAdd"],
 				isDisabled = if GetFFlagPYMKDisableButtonsOnFetchModule() and UseSelectorResult1 then UseSelectorResult1.RequestFriendshipFromUserId else false,
-				onActivated = function() --[[ Line: 184 ]]
+				onActivated = function()
 					-- upvalues: p1 (upval), EventNames (upval), Recommendation (upval), Text (upval), HttpService (upval), FFlagMigrateFriendshipStatusesPYMKModule (upval), NetworkingFriends (upval), UseSelectorResult (upval), ContextualInfoTypes (upval), FriendshipOriginSourceType (upval), UseDispatchResult (upval), GetResult (upval), config1 (upval), FFlagEnableFriendsStoreChallengeInterceptor (upval), FriendsStoreChallengeNetworkModule (upval), TextKeysModule (upval)
 					p1.fireAnalyticsEvent(EventNames.RequestFriendship, {
 						recommendationContextType = Recommendation.contextType,
@@ -135,10 +135,10 @@ return function(p1) --[[ Line: 71 | Named "usePYMKCarouselUserButtons" ]]
 						targetUserId = Text,
 						friendshipOriginSourceType = FriendshipOriginSourceType.FriendRecommendations.rawValue()
 					});
-					(if FFlagMigrateFriendshipStatusesPYMKModule then if p1.contactId then GetResult.RequestFriendship(p1.contactId, FriendshipOriginSourceType.FriendRecommendations.rawValue(), config1, if FFlagEnableFriendsStoreChallengeInterceptor then FriendsStoreChallengeNetworkModule else nil) else GetResult.RequestFriendship(Text, FriendshipOriginSourceType.FriendRecommendations.rawValue(), nil, if FFlagEnableFriendsStoreChallengeInterceptor then FriendsStoreChallengeNetworkModule else nil) else UseDispatchResult(APIResult)):andThen(function() --[[ Line: 229 ]]
+					(if FFlagMigrateFriendshipStatusesPYMKModule then if p1.contactId then GetResult.RequestFriendship(p1.contactId, FriendshipOriginSourceType.FriendRecommendations.rawValue(), config1, if FFlagEnableFriendsStoreChallengeInterceptor then FriendsStoreChallengeNetworkModule else nil) else GetResult.RequestFriendship(Text, FriendshipOriginSourceType.FriendRecommendations.rawValue(), nil, if FFlagEnableFriendsStoreChallengeInterceptor then FriendsStoreChallengeNetworkModule else nil) else UseDispatchResult(APIResult)):andThen(function()
 						-- upvalues: p1 (upval), TextKeysModule (upval)
 						p1.showToast(TextKeysModule.ConnectionRequestSentToast)
-					end):catch(function() --[[ Line: 232 ]]
+					end):catch(function()
 						-- upvalues: p1 (upval), TextKeysModule (upval)
 						p1.showToast(TextKeysModule.SomethingIsWrongToast)
 					end)
@@ -152,7 +152,7 @@ return function(p1) --[[ Line: 71 | Named "usePYMKCarouselUserButtons" ]]
 		UseSelectorResult, UseDispatchResult, p1.userPresenceType
 	})
 	
-	return React.useCallback(function() --[[ Line: 256 ]]
+	return React.useCallback(function()
 		-- upvalues: UseMemoResult (copy)
 		return UseMemoResult
 	end, { UseMemoResult })

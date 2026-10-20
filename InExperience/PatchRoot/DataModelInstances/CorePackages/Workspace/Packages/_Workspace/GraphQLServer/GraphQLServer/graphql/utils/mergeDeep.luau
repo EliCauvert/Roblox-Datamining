@@ -2,12 +2,12 @@
 local Object = LuauPolyfillModule.Object
 local Array = LuauPolyfillModule.Array
 
-local function _(p1): boolean --[[ Line: 9 | Named "isObject" ]]
+local function _(p1): boolean
 	-- upvalues: Array (copy)
 	return typeof(p1) == "table" and not (Array.isArray(p1) and #p1 > 0)
 end
 
-local function mergeDeep(Entry, p1) --[[ Line: 13 ]]
+local function mergeDeep(Entry, p1)
 	-- upvalues: Array (copy), Object (copy), mergeDeep (copy)
 	local Entry1 = Entry[1] or {}
 	local t = {}

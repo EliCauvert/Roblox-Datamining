@@ -35,12 +35,12 @@ local FFlagStreamNotificationDropdownSingleOwner = SharedFlagsModule.FFlagStream
 local FFlagStreamNotificationDropdownFocusedOwner = SharedFlagsModule.FFlagStreamNotificationDropdownFocusedOwner
 local IconsCommonNotificationOff = UIBloxModule.App.ImageSet.Images["icons/common/notificationOff"]
 
-local function _(): boolean --[[ Line: 46 | Named "GetIsFriendCommunicationRestricted" ]]
+local function _(): boolean
 	-- upvalues: ThirdPartyUserService (copy)
 	return ThirdPartyUserService and (ThirdPartyUserService:IsChatRestrictionSupported() and ThirdPartyUserService.FriendCommunicationRestrictionStatus ~= Enum.ChatRestrictionStatus.NotRestricted)
 end
 
-local function v32(p1) --[[ Line: 66 ]]
+local function v32(p1)
 	-- upvalues: ReactModule (copy), FFlagStreamNotificationDropdownSingleOwner (copy), FFlagStreamNotificationDropdownFocusedOwner (copy), HttpService (copy), StreamNotificationStoreModule (copy), FFlagEnableNotificationsDeeplink (copy), UseSignalStateFunction (copy), StreamNotificationDropdownExperimentationModule (copy), UseTokensFunction (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy), ConstantsModule (copy), FFlagStreamNotificationBellEntryPoint (copy), StreamNotificationsModule (copy), GetFFlagNotificationsComplianceShouldRestrictStreamFunction (copy), ThirdPartyUserService (copy), IxpHelper (copy), GetFStringNotificationsStreamNotificationUXLayerFunction (copy), FFlagEnableHeaderBarButtonsUpdate (copy), FoundationModule (copy), IsAppNavEnabledFunction (copy), Popover (copy), PopoverSide (copy), PopoverAlign (copy), IconsCommonNotificationOff (copy), UtilityActionIcon (copy), IconButton (copy), IconSize (copy), Badge (copy), BadgeVariant (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local Current = nil
@@ -78,7 +78,7 @@ local function v32(p1) --[[ Line: 66 ]]
 	local XOffset: number = if p1.compactWidth then 34 else 44
 	
 	if FFlagStreamNotificationDropdownFocusedOwner then
-		ReactModule.useEffect(function() --[[ Line: 121 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: IsIsFocused (copy), FFlagEnableNotificationsDeeplink (upval), Current1 (ref), Current (ref), UseStateResult1 (ref), StreamNotificationStoreModule (upval), UseStateResult (copy), UseStateResult2 (copy)
 			if IsIsFocused then return end
 			if FFlagEnableNotificationsDeeplink and Current1 == Current then
@@ -103,7 +103,7 @@ local function v32(p1) --[[ Line: 66 ]]
 			UseStateResult
 		})
 	end
-	ReactModule.useEffect(function() --[[ Line: 143 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Number (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), ConstantsModule (upval), FFlagStreamNotificationBellEntryPoint (upval), p1 (copy)
 		if Number > 0 then
 			NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.seen, AnalyticsConstantsModule.EventNames.openCTAShown, {
@@ -113,7 +113,7 @@ local function v32(p1) --[[ Line: 66 ]]
 			})
 		end
 	end, { Number })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 158 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: IsOpen (ref), ReactModule (upval), StreamNotificationsModule (upval), FFlagEnableNotificationsDeeplink (upval), StreamNotificationStoreModule (upval), UseStateResult2 (copy)
 		return if IsOpen then ReactModule.createElement(StreamNotificationsModule, {
 			displayStream = if FFlagEnableNotificationsDeeplink then StreamNotificationStoreModule.setStreamPresented else UseStateResult2
@@ -126,7 +126,7 @@ local function v32(p1) --[[ Line: 66 ]]
 	local IsNotFriendCommunicationRestrictionStatusMatch: boolean = ThirdPartyUserService and (ThirdPartyUserService:IsChatRestrictionSupported() and ThirdPartyUserService.FriendCommunicationRestrictionStatus ~= Enum.ChatRestrictionStatus.NotRestricted)
 	local Number1 = if IsNotFriendCommunicationRestrictionStatusMatch then nil elseif Number > 0 then Number else nil
 	
-	local function onBellActivated() --[[ Line: 186 ]]
+	local function onBellActivated()
 		-- upvalues: StreamNotificationDropdownExperimentationModule (upval), IxpHelper (upval), GetFStringNotificationsStreamNotificationUXLayerFunction (upval), DropdownEnabled (copy), FFlagEnableNotificationsDeeplink (upval), FFlagStreamNotificationDropdownSingleOwner (upval), StreamNotificationStoreModule (upval), IsOpen (ref), Current (ref), UseStateResult2 (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), Number (copy), ConstantsModule (upval), FFlagStreamNotificationBellEntryPoint (upval), p1 (copy)
 		StreamNotificationDropdownExperimentationModule.logExposure()
 		IxpHelper.logUserLayerExposure(GetFStringNotificationsStreamNotificationUXLayerFunction())
@@ -172,7 +172,7 @@ local function v32(p1) --[[ Line: 66 ]]
 		end
 	end
 	
-	local function onPopoverDismiss() --[[ Line: 250 ]]
+	local function onPopoverDismiss()
 		-- upvalues: FFlagEnableNotificationsDeeplink (upval), FFlagStreamNotificationDropdownSingleOwner (upval), StreamNotificationStoreModule (upval), UseStateResult2 (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval)
 		if FFlagEnableNotificationsDeeplink then
 			if FFlagStreamNotificationDropdownSingleOwner then
@@ -271,7 +271,7 @@ local function v32(p1) --[[ Line: 66 ]]
 end
 
 if GetFFlagNotificationsComplianceShouldRestrictStreamFunction() then
-	v32 = RoactAppPolicy.connect(function(p1, _) --[[ Line: 383 ]]
+	v32 = RoactAppPolicy.connect(function(p1, _)
 		return {
 			shouldRestrictStream = p1.getNotificationsCanReceiveStream() or false
 		}

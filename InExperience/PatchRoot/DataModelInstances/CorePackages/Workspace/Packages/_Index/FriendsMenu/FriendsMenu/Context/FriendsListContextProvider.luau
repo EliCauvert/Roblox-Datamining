@@ -33,7 +33,7 @@ config.ThumbnailRequest = {
 	}
 }
 
-return function(p1) --[[ Line: 62 ]]
+return function(p1)
 	-- upvalues: NetworkImpl (copy), ReactModule (copy), GenerateDummyFriendsModule (copy), UseDispatchFunction (copy), UserProfilesModule (copy), GetFFlagEnableFriendsListSearchNormalizationErrorFixFunction (copy), Players (copy), DEPRECATEDUsersGetFriendsFunction (copy), UserSorts (copy), UserModel (copy), UpdateUsersFunction (copy), PreloadUsersThumbnailFunction (copy), config (copy), ApiFetchUsersPresencesFunction (copy), UseSelectorFunction (copy), SortFriendsByCorrectedPresenceAndRank (copy), FriendsListContextModule (copy)
 	local NetworkImplOverride = nil
 	NetworkImplOverride = if p1.networkImplOverride then p1.networkImplOverride else NetworkImpl
@@ -49,7 +49,7 @@ return function(p1) --[[ Line: 62 ]]
 		query = UserProfilesModule.Queries.userProfilesAllNamesByUserIds
 	})
 	
-	local function v33(p2): boolean --[[ Line: 89 ]]
+	local function v33(p2): boolean
 		-- upvalues: p1 (copy), UseStateResult4 (copy), UseUserProfilesFetchResult (ref), UserProfilesModule (upval), GetFFlagEnableFriendsListSearchNormalizationErrorFixFunction (upval)
 		if not p2 or not p2.isFriend then
 			return false
@@ -84,7 +84,7 @@ return function(p1) --[[ Line: 62 ]]
 		local NfdnormalizeResult4 = nil
 		
 		if GetFFlagEnableFriendsListSearchNormalizationErrorFixFunction() then
-			pcall(function() --[[ Line: 126 ]]
+			pcall(function()
 				-- upvalues: NfdnormalizeResult4 (ref), UseStateResult4 (upval)
 				NfdnormalizeResult4 = utf8.nfdnormalize(UseStateResult4)
 			end)
@@ -94,28 +94,28 @@ return function(p1) --[[ Line: 62 ]]
 		return (if GetFFlagEnableFriendsListSearchNormalizationErrorFixFunction() then NfdnormalizeResult4 and (string.find(NfdnormalizeResult1:lower(), NfdnormalizeResult4:lower(), 1, true) ~= nil or (string.find(NfdnormalizeResult2:lower(), NfdnormalizeResult4:lower(), 1, true) ~= nil or (string.find(NfdnormalizeResult3:lower(), NfdnormalizeResult4:lower(), 1, true) ~= nil or string.find(NfdnormalizeResult:lower(), NfdnormalizeResult4:lower(), 1, true) ~= nil))) else string.find(NfdnormalizeResult1:lower(), NfdnormalizeResult4:lower(), 1, true) ~= nil or (string.find(NfdnormalizeResult2:lower(), NfdnormalizeResult4:lower(), 1, true) ~= nil or (string.find(NfdnormalizeResult3:lower(), NfdnormalizeResult4:lower(), 1, true) ~= nil or string.find(NfdnormalizeResult:lower(), NfdnormalizeResult4:lower(), 1, true) ~= nil))) or string.find(Name:lower(), UseStateResult4:lower(), 1, true) ~= nil
 	end
 	
-	local function _(p2) --[[ Line: 156 ]]
+	local function _(p2)
 		-- upvalues: UseUserProfilesFetchResult (ref), UserProfilesModule (upval)
 		local CombinedNameFromId = if UseUserProfilesFetchResult and UseUserProfilesFetchResult.data then UserProfilesModule.Selectors.getCombinedNameFromId(UseUserProfilesFetchResult.data, p2.id) else nil
 		
 		return if CombinedNameFromId == nil then p2.displayName else CombinedNameFromId
 	end
 	
-	local _ = function(p2) --[[ Line: 168 ]]
+	local _ = function(p2)
 		-- upvalues: UseUserProfilesFetchResult (ref), UserProfilesModule (upval)
 		local UsernameFromId = if UseUserProfilesFetchResult and UseUserProfilesFetchResult.data then UserProfilesModule.Selectors.getUsernameFromId(UseUserProfilesFetchResult.data, p2.id) else nil
 		
 		return if UsernameFromId == nil then p2.name else UsernameFromId
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 180 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Players (upval), UseStateResult (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), DEPRECATEDUsersGetFriendsFunction (upval), NetworkImplOverride (ref), UserSorts (upval), UserModel (upval), UseDispatchResult (copy), UpdateUsersFunction (upval), UseStateResult2_2 (copy), PreloadUsersThumbnailFunction (upval), config (upval), ApiFetchUsersPresencesFunction (upval)
 		local Text = if Players and Players.LocalPlayer then tostring(Players.LocalPlayer.UserId) else nil
 		
 		if not UseStateResult and Text then
 			UseStateResult2(true)
 			UseStateResult2_1(false)
-			DEPRECATEDUsersGetFriendsFunction(NetworkImplOverride, Text, UserSorts.StatusFrequents):andThen(function(Result) --[[ Line: 190 ]]
+			DEPRECATEDUsersGetFriendsFunction(NetworkImplOverride, Text, UserSorts.StatusFrequents):andThen(function(Result)
 				-- upvalues: UserModel (upval), UseDispatchResult (upval), UpdateUsersFunction (upval), UseStateResult2_2 (upval)
 				local List = {}
 				local FromDataTableResults = {}
@@ -133,31 +133,31 @@ return function(p1) --[[ Line: 62 ]]
 				UseStateResult2_2(List)
 				
 				return List
-			end, function(_) --[[ Line: 209 ]]
+			end, function(_)
 				-- upvalues: UseStateResult2 (upval), UseStateResult2_1 (upval)
 				UseStateResult2(false)
 				UseStateResult2_1(true)
 				
 				return {}
-			end):andThen(function(Result) --[[ Line: 215 ]]
+			end):andThen(function(Result)
 				-- upvalues: UseDispatchResult (upval), PreloadUsersThumbnailFunction (upval), config (upval), ApiFetchUsersPresencesFunction (upval), NetworkImplOverride (upval)
 				UseDispatchResult(PreloadUsersThumbnailFunction(Result, config.ThumbnailRequest.InviteToGame, nil))
 				
 				return UseDispatchResult(ApiFetchUsersPresencesFunction(NetworkImplOverride, Result))
-			end):andThen(function(_) --[[ Line: 223 ]]
+			end):andThen(function(_)
 				-- upvalues: UseStateResult2 (upval)
 				UseStateResult2(false)
-			end, function(_) --[[ Line: 225 ]]
+			end, function(_)
 				-- upvalues: UseStateResult2 (upval), UseStateResult2_1 (upval)
 				UseStateResult2(false)
 				UseStateResult2_1(true)
 			end)
 		end
 	end, {})
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 232 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		return p2.Users
 	end)
-	ReactModule.useEffect(function() --[[ Line: 236 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseStateResult2_4 (copy), GenerateDummyFriendsModule (upval), UseSelectorResult (copy), v33 (copy), UseUserProfilesFetchResult (ref), UserProfilesModule (upval), SortFriendsByCorrectedPresenceAndRank (upval)
 		if UseStateResult then
 			UseStateResult2_4(GenerateDummyFriendsModule(7))

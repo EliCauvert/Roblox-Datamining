@@ -4,7 +4,7 @@ local FoundationModule = require(Parent.Foundation)
 local Text = FoundationModule.Text
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return ReactModule.memo(function(p1) --[[ Line: 16 | Named "ComponentSubtext" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	

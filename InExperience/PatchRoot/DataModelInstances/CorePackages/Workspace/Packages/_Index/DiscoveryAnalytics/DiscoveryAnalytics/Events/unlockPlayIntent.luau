@@ -8,7 +8,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 	pageName = TModule.optional(TModule.string)
 })
 
-return function(p1, p2) --[[ Line: 14 ]]
+return function(p1, p2)
 	-- upvalues: StrictInterfaceResult (copy), FlaggedMutedErrorFunction (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(p2)
 	

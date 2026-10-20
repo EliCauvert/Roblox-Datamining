@@ -2,22 +2,22 @@
 local CryoModule = require(SduiSharedUtilities.Parent.Cryo)
 local _ = require(SduiSharedUtilities.SduiIntegrationTypes)
 
-local function createSduiTemplateStore() --[[ Line: 26 ]]
+local function createSduiTemplateStore()
 	-- upvalues: CryoModule (copy)
 	local JoinResult = {}
 	local t = {}
 	local t1 = {}
 	
 	return {
-		getTemplate = function(p1) --[[ Line: 37 ]]
+		getTemplate = function(p1)
 			-- upvalues: JoinResult (ref)
 			return JoinResult[p1]
 		end,
-		addTemplates = function(p1) --[[ Line: 43 ]]
+		addTemplates = function(p1)
 			-- upvalues: JoinResult (ref), CryoModule (upval)
 			JoinResult = CryoModule.Dictionary.join(JoinResult, p1)
 		end,
-		recordSurfaceTemplates = function(Key, List) --[[ Line: 50 ]]
+		recordSurfaceTemplates = function(Key, List)
 			-- upvalues: t (ref)
 			if List == nil then return end
 			local Entry = t[Key]
@@ -30,13 +30,13 @@ local function createSduiTemplateStore() --[[ Line: 26 ]]
 				Entry[i] = value
 			end
 		end,
-		getCachedRobloxComponentToTemplateId = function(p1) --[[ Line: 68 ]]
+		getCachedRobloxComponentToTemplateId = function(p1)
 			-- upvalues: t (ref)
 			local Entry = t[p1]
 			
 			return if Entry == nil then {} else Entry
 		end,
-		getTemplateForRobloxComponent = function(p1, p2) --[[ Line: 78 ]]
+		getTemplateForRobloxComponent = function(p1, p2)
 			-- upvalues: t (ref), JoinResult (ref)
 			local Entry = t[p1]
 			
@@ -48,7 +48,7 @@ local function createSduiTemplateStore() --[[ Line: 26 ]]
 				return if Entry1 == nil then nil else JoinResult[Entry1]
 			end
 		end,
-		getSurfaceTemplateMaps = function(p1) --[[ Line: 90 ]]
+		getSurfaceTemplateMaps = function(p1)
 			-- upvalues: t (ref), JoinResult (ref)
 			local t2 = {}
 			local t3 = {}
@@ -67,7 +67,7 @@ local function createSduiTemplateStore() --[[ Line: 26 ]]
 			end
 			return t2, t3
 		end,
-		addLocalizedLiterals = function(List) --[[ Line: 109 ]]
+		addLocalizedLiterals = function(List)
 			-- upvalues: t2 (ref)
 			t2 = t2 or {}
 			assert(t2, "localizedLiterals is nil")
@@ -76,11 +76,11 @@ local function createSduiTemplateStore() --[[ Line: 26 ]]
 				t2[i] = value
 			end
 		end,
-		getLocalizedLiterals = function() --[[ Line: 117 ]]
+		getLocalizedLiterals = function()
 			-- upvalues: t2 (ref)
 			return t2 or {}
 		end,
-		clear = function() --[[ Line: 121 ]]
+		clear = function()
 			-- upvalues: JoinResult (ref), t (ref), t2 (ref)
 			JoinResult = {}
 			t = {}
@@ -91,7 +91,7 @@ end
 
 local v1 = nil
 
-return function() --[[ Line: 145 | Named "getSduiTemplateStore" ]]
+return function()
 	-- upvalues: v1 (ref), createSduiTemplateStore (copy)
 	if v1 == nil then
 		v1 = createSduiTemplateStore()

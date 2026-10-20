@@ -11,7 +11,7 @@ local View = FoundationModule.View
 local Radius = FoundationModule.Enums.Radius
 local ScrollBarVisibility = FoundationModule.Enums.ScrollBarVisibility
 
-return function(Frame) --[[ Line: 31 | Named "LibraryGridView" ]]
+return function(Frame)
 	-- upvalues: FoundationModule (copy), UseHardwareInsetsModule (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), LibraryTileModule (copy), ScrollView (copy), ScrollBarVisibility (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local Bottom = UseHardwareInsetsModule().bottom
@@ -24,19 +24,19 @@ return function(Frame) --[[ Line: 31 | Named "LibraryGridView" ]]
 	local YOffset = Floored + Size1200
 	local Ceiled = math.ceil((if Frame.isLoading then Largest else #Frame.items) / Largest)
 	local Largest1 = math.max(0, Ceiled * YOffset + math.max(0, Ceiled - 1) * Medium)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 47 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: Frame (copy)
 		if Frame.hasMore then
 			Frame.onLoadMore()
 		end
 	end, { Frame.hasMore, Frame.onLoadMore })
-	ReactModule.useEffect(function() --[[ Line: 53 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy), UseStateResult (copy), Largest1 (copy), UseResult (copy)
 		if Frame.hasMore and UseStateResult.Y > 0 and Largest1 <= UseStateResult.Y then
 			UseResult()
 		end
 	end, { UseStateResult.Y, Largest1, Frame.hasMore, UseResult })
-	local UseResult1 = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 59 ]]
+	local UseResult1 = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: Frame (copy), YOffset (copy), UseResult (copy)
 		if not Frame.hasMore or YOffset <= 0 then return end
 		if ScrollFrame.AbsoluteCanvasSize.Y - YOffset <= ScrollFrame.CanvasPosition.Y + ScrollFrame.AbsoluteWindowSize.Y then
@@ -92,7 +92,7 @@ return function(Frame) --[[ Line: 31 | Named "LibraryGridView" ]]
 		tag = "size-full",
 		testId = "Library.Category.Grid",
 		LayoutOrder = Frame.LayoutOrder,
-		onAbsoluteSizeChanged = function(Frame) --[[ Line: 118 ]]
+		onAbsoluteSizeChanged = function(Frame)
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(Frame.AbsoluteSize)
 		end

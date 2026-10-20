@@ -18,13 +18,13 @@ return {
 	name = "PlayerContextualMenu",
 	storyRoot = PlayerContextualMenu,
 	roact = RoactModule,
-	mapDefinition = function(p1) --[[ Line: 47 ]]
+	mapDefinition = function(p1)
 		-- upvalues: DashModule (copy), config1 (copy)
 		return DashModule.join(p1, { controls = DashModule.join(config1, p1.controls) })
 	end,
-	mapStory = function(p1) --[[ Line: 51 ]]
+	mapStory = function(p1)
 		-- upvalues: RoactModule (copy), AppStyleProvider (copy), config (copy), MockLocaleFunction (copy)
-		return function(p2) --[[ Line: 52 ]]
+		return function(p2)
 			-- upvalues: RoactModule (upval), AppStyleProvider (upval), config (upval), MockLocaleFunction (upval), p1 (copy)
 			return RoactModule.createElement(AppStyleProvider, { style = p2 and config[p2.theme] or config.Default }, { Child = MockLocaleFunction(p1, p2) })
 		end

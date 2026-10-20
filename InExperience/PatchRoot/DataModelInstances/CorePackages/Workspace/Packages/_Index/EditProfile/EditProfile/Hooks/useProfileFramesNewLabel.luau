@@ -2,12 +2,12 @@
 local ReactModule = require(EditProfile.Parent.React)
 local GetAppStorageServiceModule = require(EditProfile.Common.getAppStorageService)
 
-return function() --[[ Line: 11 | Named "useProfileFramesNewLabel" ]]
+return function()
 	-- upvalues: GetAppStorageServiceModule (copy), ReactModule (copy)
 	local AppStorageServiceModule = GetAppStorageServiceModule()
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean --[[ Line: 13 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean
 		-- upvalues: AppStorageServiceModule (copy)
-		local Success, Result = pcall(function() --[[ Line: 14 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: AppStorageServiceModule (upval)
 			return AppStorageServiceModule:GetItem("ProfileFramesNewLabelSeen")
 		end)
@@ -15,10 +15,10 @@ return function() --[[ Line: 11 | Named "useProfileFramesNewLabel" ]]
 		return Success and Result ~= "true"
 	end)
 	
-	return UseStateResult, (ReactModule.useCallback(function() --[[ Line: 21 ]]
+	return UseStateResult, (ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), AppStorageServiceModule (copy)
 		UseStateResult2(false)
-		pcall(function() --[[ Line: 23 ]]
+		pcall(function()
 			-- upvalues: AppStorageServiceModule (upval)
 			AppStorageServiceModule:SetItem("ProfileFramesNewLabelSeen", "true")
 			AppStorageServiceModule:Flush()

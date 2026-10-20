@@ -19,14 +19,14 @@ local GetFFlagChatWindowUseCallbackOptimizationsModule = require(ExpChat.Flags.g
 local ExpChatTopBannerZIndexFix = game:DefineFastFlag("ExpChatTopBannerZIndexFix", false)
 local v1 = require(ExpChat.Stores.GetFocusNavigationStore)(false)
 
-local function v19(p1) --[[ Line: 29 ]]
+local function v19(p1)
 	-- upvalues: ReactModule (copy), Localization (copy), LocalizationService (copy), ReactFocusNavigationModule (copy), SignalsReactModule (copy), v1 (copy), GuiService (copy), Constants (copy), ExpChatTopBannerZIndexFix (copy), View (copy), GetFFlagChatWindowUseCallbackOptimizationsModule (copy), Icon (copy), IconName (copy), IconSize (copy), LocalizationProvider (copy), ChatBoxContextMenu (copy), GetFFlagMemoizeChatReportingMenuFunction (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local NewLocalization = Localization.new(LocalizationService.RobloxLocaleId)
 	local UseFocusGuiObjectResult = ReactFocusNavigationModule.useFocusGuiObject()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(v1.getChatInputBarFocused)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 37 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), UseSignalStateResult (copy), UseRefResult (copy), UseFocusGuiObjectResult (copy), GuiService (upval)
 		p1.onUnfocus()
 		
@@ -40,22 +40,22 @@ local function v19(p1) --[[ Line: 29 ]]
 		p1.onUnfocus
 	})
 	local UseRefResult1 = ReactModule.useRef(UseResult)
-	ReactModule.useEffect(function() --[[ Line: 55 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), UseResult (copy)
 		UseRefResult1.current = UseResult
 	end, { UseResult })
-	ReactModule.useEffect(function() --[[ Line: 59 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseRefResult1 (copy)
-		return function() --[[ Line: 60 ]]
+		return function()
 			-- upvalues: UseStateResult (upval), UseRefResult1 (upval)
 			if UseStateResult and UseRefResult1.current then
 				UseRefResult1.current()
 			end
 		end
 	end, { UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 68 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult (copy), UseStateResult (copy), UseStateResult2 (copy)
-		return if UseSignalStateResult and UseStateResult then function() --[[ Line: 71 ]]
+		return if UseSignalStateResult and UseStateResult then function()
 			-- upvalues: UseStateResult2 (upval)
 			UseStateResult2(false)
 		end else nil
@@ -70,11 +70,11 @@ local function v19(p1) --[[ Line: 29 ]]
 			tag = "auto-xy padding-small radius-medium align-x-center align-y-center",
 			Size = UDim2.new(0, Constants.IconButtonSize, 0, Constants.IconButtonSize),
 			Position = UDim2.new(1, Constants.IconButtonPositionXOffset, 0, Constants.IconButtonPositionYOffset),
-			onActivated = if GetFFlagChatWindowUseCallbackOptimizationsModule() then ReactModule.useCallback(function() --[[ Line: 98 ]]
+			onActivated = if GetFFlagChatWindowUseCallbackOptimizationsModule() then ReactModule.useCallback(function()
 				-- upvalues: UseStateResult2 (copy), p1 (copy)
 				UseStateResult2(true)
 				p1.onFocus()
-			end, { UseStateResult2, p1.onFocus }) else function() --[[ Line: 102 ]]
+			end, { UseStateResult2, p1.onFocus }) else function()
 				-- upvalues: UseStateResult2 (copy), p1 (copy)
 				UseStateResult2(true)
 				p1.onFocus()

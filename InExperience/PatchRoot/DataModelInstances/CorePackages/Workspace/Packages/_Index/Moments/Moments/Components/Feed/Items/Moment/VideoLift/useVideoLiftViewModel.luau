@@ -17,7 +17,7 @@ local FFlagMomentsSmartVideoFill = MomentsCommonModule.Flags.FFlagMomentsSmartVi
 local _UDim2 = UDim2.fromScale(1, 1)
 local _UDim2_1 = UDim2.fromScale(0.5, 0.5)
 
-local function _(p1, p2) --[[ Line: 36 | Named "scaleLayout" ]]
+local function _(p1, p2)
 	return {
 		scale = 1 + (p1.scale - 1) * p2,
 		offsetY = p1.offsetY * p2,
@@ -25,14 +25,14 @@ local function _(p1, p2) --[[ Line: 36 | Named "scaleLayout" ]]
 	}
 end
 
-local function useSettlingLayout(Callback, Time) --[[ Line: 46 ]]
+local function useSettlingLayout(Callback, Time)
 	-- upvalues: ReactModule (copy), RunService (copy), TweenService (copy), SignalsModule (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Callback(false))
-	ReactModule.useLayoutEffect(function() --[[ Line: 52 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseBindingResult (copy), Time (copy), UseBindingResult2 (copy), RunService (upval), TweenService (upval), SignalsModule (upval), Callback (copy)
 		local HeartbeatConnection = nil
 		
-		local function _() --[[ Line: 54 | Named "stopSettling" ]]
+		local function _()
 			-- upvalues: HeartbeatConnection (ref)
 			if HeartbeatConnection ~= nil then
 				HeartbeatConnection:Disconnect()
@@ -40,7 +40,7 @@ local function useSettlingLayout(Callback, Time) --[[ Line: 46 ]]
 			end
 		end
 		
-		local function settle() --[[ Line: 61 ]]
+		local function settle()
 			-- upvalues: UseBindingResult (upval), HeartbeatConnection (ref), Time (upval), UseBindingResult2 (upval), RunService (upval), TweenService (upval)
 			local Value = UseBindingResult:getValue()
 			
@@ -51,7 +51,7 @@ local function useSettlingLayout(Callback, Time) --[[ Line: 46 ]]
 				return
 			else
 				local Total = 0
-				HeartbeatConnection = RunService.Heartbeat:Connect(function(DeltaTime) --[[ Line: 72 ]]
+				HeartbeatConnection = RunService.Heartbeat:Connect(function(DeltaTime)
 					-- upvalues: Total (ref), Time (upval), HeartbeatConnection (upval), UseBindingResult2 (upval), TweenService (upval), Value (copy)
 					Total += DeltaTime
 					local TotalRatio = Total / Time
@@ -75,7 +75,7 @@ local function useSettlingLayout(Callback, Time) --[[ Line: 46 ]]
 			end
 		end
 		
-		local Effect = SignalsModule.createEffect(function(p1) --[[ Line: 85 ]]
+		local Effect = SignalsModule.createEffect(function(p1)
 			-- upvalues: Callback (upval), settle (copy), HeartbeatConnection (ref), UseBindingResult2 (upval)
 			local CallbackResult = Callback(p1)
 			
@@ -91,7 +91,7 @@ local function useSettlingLayout(Callback, Time) --[[ Line: 46 ]]
 			UseBindingResult2(CallbackResult)
 		end)
 		
-		return function() --[[ Line: 94 ]]
+		return function()
 			-- upvalues: HeartbeatConnection (ref), Effect (copy)
 			if HeartbeatConnection ~= nil then
 				HeartbeatConnection:Disconnect()
@@ -104,13 +104,13 @@ local function useSettlingLayout(Callback, Time) --[[ Line: 46 ]]
 	return UseBindingResult
 end
 
-return function(FeedItemId) --[[ Line: 103 | Named "useVideoLiftViewModel" ]]
+return function(FeedItemId)
 	-- upvalues: UseTokensFunction (copy), UsePreferencesFunction (copy), MomentContextModule (copy), ReactModule (copy), SignalsModule (copy), GetCommentsSheetStoreModule (copy), ComputeVideoLiftLayoutModule (copy), FFlagMomentsSmartVideoFill (copy), GetSmartFillScaleTypeFunction (copy), GetMomentsPreferencesStoreModule (copy), useSettlingLayout (copy), _UDim2 (copy), _UDim2_1 (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Small = UseTokensResult.Padding.Small
 	local Medium = UseTokensResult.Radius.Medium
 	local Controller = MomentContextModule.useMoment().controller
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 110 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval)
 		local Signal, Signal2 = SignalsModule.createSignal(0)
 		local Signal1, Signal2_1 = SignalsModule.createSignal(Vector2.zero)
@@ -118,16 +118,16 @@ return function(FeedItemId) --[[ Line: 103 | Named "useVideoLiftViewModel" ]]
 		return {
 			getTop = Signal,
 			getSize = Signal1,
-			onChanged = function(Frame: Frame) --[[ Line: 116 ]]
+			onChanged = function(Frame: Frame)
 				-- upvalues: Signal2 (copy), Signal2_1 (copy)
 				Signal2(Frame.AbsolutePosition.Y)
 				Signal2_1(Frame.AbsoluteSize)
 			end
 		}
 	end, {})
-	local UseSettlingLayoutResult = useSettlingLayout(ReactModule.useMemo(function() --[[ Line: 123 ]]
+	local UseSettlingLayoutResult = useSettlingLayout(ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), GetCommentsSheetStoreModule (upval), FeedItemId (copy), ComputeVideoLiftLayoutModule (upval), UseMemoResult (copy), Controller (copy), FFlagMomentsSmartVideoFill (upval), GetSmartFillScaleTypeFunction (upval), GetMomentsPreferencesStoreModule (upval), Small (copy), Medium (copy)
-		return SignalsModule.createComputed(function(p1) --[[ Line: 124 ]]
+		return SignalsModule.createComputed(function(p1)
 			-- upvalues: GetCommentsSheetStoreModule (upval), FeedItemId (upval), ComputeVideoLiftLayoutModule (upval), UseMemoResult (upval), Controller (upval), FFlagMomentsSmartVideoFill (upval), GetSmartFillScaleTypeFunction (upval), GetMomentsPreferencesStoreModule (upval), Small (upval), Medium (upval)
 			local CommentsSheetStoreModule = GetCommentsSheetStoreModule(false)
 			
@@ -155,19 +155,19 @@ return function(FeedItemId) --[[ Line: 103 | Named "useVideoLiftViewModel" ]]
 		Medium
 	}), if UsePreferencesFunction().reducedMotion then 0 else UseTokensResult.Time.Time_200)
 	
-	return ReactModule.useMemo(function() --[[ Line: 155 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: UseSettlingLayoutResult (copy), _UDim2 (upval), _UDim2_1 (upval), UseMemoResult (copy)
 		return {
-			size = UseSettlingLayoutResult:map(function(p1) --[[ Line: 157 ]]
+			size = UseSettlingLayoutResult:map(function(p1)
 				-- upvalues: _UDim2 (upval)
 				return if p1 == nil then _UDim2 else UDim2.fromScale(p1.scale, p1.scale)
 			end),
-			position = UseSettlingLayoutResult:map(function(p1) --[[ Line: 160 ]]
+			position = UseSettlingLayoutResult:map(function(p1)
 				-- upvalues: _UDim2_1 (upval)
 				return if p1 == nil then _UDim2_1 else UDim2.new(0.5, 0, 0.5, p1.offsetY)
 			end),
 			mediaSurface = {
-				cornerRadius = UseSettlingLayoutResult:map(function(p1): UDim --[[ Line: 164 ]]
+				cornerRadius = UseSettlingLayoutResult:map(function(p1): UDim
 					return UDim.new(0, if p1 == nil then 0 else p1.cornerRadius)
 				end)
 			},

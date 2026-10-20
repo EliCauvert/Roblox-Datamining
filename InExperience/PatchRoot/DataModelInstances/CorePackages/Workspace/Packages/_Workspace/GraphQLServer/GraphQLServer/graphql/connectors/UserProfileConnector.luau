@@ -17,11 +17,11 @@ local v1 = require(Parent.UrlBuilder).UrlBuilder.new({
 	base = require(Parent.Http).Url.APIS_URL
 })()
 
-local function fetchProfilesByIds(Entry, Fields, p1) --[[ Line: 36 ]]
+local function fetchProfilesByIds(Entry, Fields, p1)
 	-- upvalues: Fetch (copy), PromiseModule (copy), FFlagUserProfilePlatformProfile (copy), FIntUserProfileStoreBatchSize (copy), fetchProfilesByIds (copy), PlatformProfileRequestModule (copy), v1 (copy), HttpService (copy), FFlagUserProfileBetterErrorsModule (copy), Response (copy), GraphQLError (copy)
 	local Fetch1 = if p1 then p1 else Fetch
 	
-	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ()) --[[ Line: 42 ]]
+	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ())
 		-- upvalues: FFlagUserProfilePlatformProfile (upval), Entry (copy), FIntUserProfileStoreBatchSize (upval), fetchProfilesByIds (upval), Fields (copy), Fetch1 (copy), PlatformProfileRequestModule (upval), v1 (upval), HttpService (upval), FFlagUserProfileBetterErrorsModule (upval), Response (upval), GraphQLError (upval)
 		if FFlagUserProfilePlatformProfile and FIntUserProfileStoreBatchSize < #Entry then
 			local List = {}
@@ -51,7 +51,7 @@ local function fetchProfilesByIds(Entry, Fields, p1) --[[ Line: 36 ]]
 					["Content-Type"] = "application/json",
 					Accept = "application/json"
 				}
-			}):catch(function(Err) --[[ Line: 74 ]]
+			}):catch(function(Err)
 				-- upvalues: FFlagUserProfileBetterErrorsModule (upval), Response (upval)
 				if FFlagUserProfileBetterErrorsModule then
 					local v3 = Response.error()
@@ -64,7 +64,7 @@ local function fetchProfilesByIds(Entry, Fields, p1) --[[ Line: 36 ]]
 			end):expect()
 			
 			if v2.ok then
-				local v3 = v2:json():catch(function() --[[ Line: 105 ]]
+				local v3 = v2:json():catch(function()
 					return nil
 				end):expect()
 				

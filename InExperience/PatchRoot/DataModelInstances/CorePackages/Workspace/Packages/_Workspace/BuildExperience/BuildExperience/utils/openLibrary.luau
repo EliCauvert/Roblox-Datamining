@@ -6,12 +6,12 @@ local LaunchExperienceModule = require(Parent.BuildExperiencePlaytestLaunch.laun
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local PregameOverride = require(Parent.ProgressLoading).PregameOverride
 
-local function renderPregameSkeleton(p1) --[[ Line: 19 ]]
+local function renderPregameSkeleton(p1)
 	-- upvalues: BuildExperience (copy), ReactModule (copy)
 	return ReactModule.createElement(require(BuildExperience.Components.Library.LibraryPregameSkeleton), p1)
 end
 
-return function(PlaceId, ConversationId) --[[ Line: 24 | Named "openLibrary" ]]
+return function(PlaceId, ConversationId)
 	-- upvalues: SendBuildExperienceEventModule (copy), FFlagBuildExperienceLibrary (copy), PregameOverride (copy), renderPregameSkeleton (copy), LaunchExperienceModule (copy)
 	SendBuildExperienceEventModule("LIBRARY_IMPRESSION", { placeId = PlaceId, conversationId = ConversationId }, { phase = "requested", surface = "App" })
 	

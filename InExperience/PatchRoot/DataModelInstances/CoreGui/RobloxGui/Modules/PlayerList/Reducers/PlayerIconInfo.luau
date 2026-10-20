@@ -3,7 +3,7 @@ local CryoModule = require(CorePackages.Packages.Cryo)
 local Actions = script.Parent.Parent.Actions
 
 return (require(CorePackages.Packages.Rodux).createReducer({}, {
-	[require(Actions.AddPlayer).name] = function(p1, p2) --[[ Line: 15 ]]
+	[require(Actions.AddPlayer).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, {
 			[p2.userId] = {
@@ -13,11 +13,11 @@ return (require(CorePackages.Packages.Rodux).createReducer({}, {
 			}
 		})
 	end,
-	[require(Actions.RemovePlayer).name] = function(p1, p2) --[[ Line: 25 ]]
+	[require(Actions.RemovePlayer).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, { [p2.userId] = CryoModule.None })
 	end,
-	[require(Actions.SetPlayerAvatarIcon).name] = function(p1, p2) --[[ Line: 31 ]]
+	[require(Actions.SetPlayerAvatarIcon).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, {
 			[p2.userId] = {
@@ -27,7 +27,7 @@ return (require(CorePackages.Packages.Rodux).createReducer({}, {
 			}
 		})
 	end,
-	[require(Actions.SetPlayerIsCreator).name] = function(p1, p2) --[[ Line: 41 ]]
+	[require(Actions.SetPlayerIsCreator).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, {
 			[p2.userId] = {
@@ -37,7 +37,7 @@ return (require(CorePackages.Packages.Rodux).createReducer({}, {
 			}
 		})
 	end,
-	[require(Actions.SetPlayerSpecialGroupIcon).name] = function(p1, p2) --[[ Line: 51 ]]
+	[require(Actions.SetPlayerSpecialGroupIcon).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, {
 			[p2.userId] = {

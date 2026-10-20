@@ -3,7 +3,7 @@ local Http = script:FindFirstAncestor("Http")
 local UrlModule = require(Http.Url)
 local _ = require(Http.RequestTypes)
 
-return function(Callback, ConversationId, UniverseId, Decorators, IsExperienceInvite, UserId, PlaceId) --[[ Line: 8 ]]
+return function(Callback, ConversationId, UniverseId, Decorators, IsExperienceInvite, UserId, PlaceId)
 	-- upvalues: HttpService (copy), UrlModule (copy)
 	assert(Callback, "requestImpl is required")
 	assert(ConversationId, "conversationId is required")

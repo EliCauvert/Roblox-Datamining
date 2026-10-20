@@ -12,7 +12,7 @@ local UseRefFunction = ReactModule.useRef
 local UseStateFunction = ReactModule.useState
 local config = { dampingRatio = 1, frequency = 4 }
 
-return function(p1) --[[ Line: 28 | Named "useZoomController" ]]
+return function(p1)
 	-- upvalues: UseStateFunction (copy), UseRefFunction (copy), UseCallbackFunction (copy), UseMotorFunction (copy), UseEffectFunction (copy), ReactOtterModule (copy), config (copy), IsPointWithinBoundsModule (copy), UseEventConnectionFunction (copy), UserInputService (copy)
 	local UseStateResult, UseStateResult2 = UseStateFunction(false)
 	local UseRefResult = UseRefFunction(nil)
@@ -24,7 +24,7 @@ return function(p1) --[[ Line: 28 | Named "useZoomController" ]]
 		yAnchor = 0.5,
 		xPos = 0.5,
 		yPos = 0.5
-	}, (UseCallbackFunction(function(p2) --[[ Line: 35 ]]
+	}, (UseCallbackFunction(function(p2)
 		-- upvalues: UseRefResult (copy)
 		if UseRefResult.current then
 			UseRefResult.current.AnchorPoint = Vector2.new(p2.xAnchor, p2.yAnchor)
@@ -34,7 +34,7 @@ return function(p1) --[[ Line: 28 | Named "useZoomController" ]]
 			return
 		end
 	end, {})))
-	UseEffectFunction(function() --[[ Line: 53 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseRefResult (copy), p1 (copy), UseRefResult1 (copy), UseRefResult2 (copy)
 		if not UseRefResult.current then return end
 		if p1 then
@@ -50,7 +50,7 @@ return function(p1) --[[ Line: 28 | Named "useZoomController" ]]
 			UseRefResult.current.Size = UDim2.fromScale(1, 1)
 		end
 	end, { p1 })
-	UseEventConnectionFunction(UserInputService.TouchPinch, (UseCallbackFunction(function(Entry, Value: number, _, UserInputState, _) --[[ Line: 71 ]]
+	UseEventConnectionFunction(UserInputService.TouchPinch, (UseCallbackFunction(function(Entry, Value: number, _, UserInputState, _)
 		-- upvalues: p1 (copy), UseRefResult (copy), UseStateResult (copy), UseMotorResult (copy), ReactOtterModule (upval), config (upval), UseRefResult1 (copy), UseRefResult2 (copy), UseStateResult2 (copy), IsPointWithinBoundsModule (upval)
 		if not p1 or not UseRefResult.current then return end
 		if UserInputState == Enum.UserInputState.End and UseStateResult or #Entry < 2 then

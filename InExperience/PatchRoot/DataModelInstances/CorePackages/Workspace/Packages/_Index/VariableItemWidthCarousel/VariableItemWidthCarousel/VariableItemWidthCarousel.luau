@@ -12,12 +12,12 @@ local UseIsSpatialFunction = ResponsiveModule.useIsSpatial
 local UseVariableItemWidthScrollHandlersModule = require(VariableItemWidthCarousel1.useVariableItemWidthScrollHandlers)
 local FFlagSduiOptionSelectorHeaderComponent = require(Parent.SharedFlags).FFlagSduiOptionSelectorHeaderComponent
 
-local function _(Pointer, Directional, p1, p2) --[[ Line: 49 | Named "areScrollButtonsEnabled" ]]
+local function _(Pointer, Directional, p1, p2)
 	-- upvalues: ResponsiveModule (copy)
 	return if p1 then Pointer == ResponsiveModule.Input.Pointer and Directional ~= ResponsiveModule.Input.Directional or p2 else false
 end
 
-function VariableItemWidthCarousel(Frame, Ref) --[[ Line: 66 ]]
+function VariableItemWidthCarousel(Frame, Ref)
 	-- upvalues: UseDesignTokensFunction (copy), UseLastInputFunction (copy), UsePreferredInputFunction (copy), UseIsSpatialFunction (copy), ResponsiveModule (copy), ReactModule (copy), UseVariableItemWidthScrollHandlersModule (copy), FFlagSduiOptionSelectorHeaderComponent (copy), CollectionHeader (copy), CarouselScrollButtons (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local UseLastInputResult = UseLastInputFunction()
@@ -32,7 +32,7 @@ function VariableItemWidthCarousel(Frame, Ref) --[[ Line: 66 ]]
 	local IsNotTitleMatch: boolean = Frame.title and Frame.title ~= ""
 	local IsNotTitleMatch1: boolean = IsNotTitleMatch or (Frame.subtitle ~= nil or Frame.tooltipInfoText ~= nil)
 	local IsNotUsePreferredInputResultMatch = Frame.scrollButtonsEnabled and (UseLastInputResult == ResponsiveModule.Input.Pointer and UsePreferredInputResult ~= ResponsiveModule.Input.Directional or UseIsSpatialResult)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 84 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Items (copy), RenderItemFunction (copy)
 		local t = {}
 		
@@ -92,7 +92,7 @@ function VariableItemWidthCarousel(Frame, Ref) --[[ Line: 66 ]]
 				ZIndex = 1,
 				ref = ScrollingFrameRef,
 				[ReactModule.Change.AbsoluteSize] = UseVariableItemWidthScrollHandlersModuleResult5,
-				[ReactModule.Change.CanvasPosition] = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 96 ]]
+				[ReactModule.Change.CanvasPosition] = ReactModule.useCallback(function(ScrollFrame)
 					-- upvalues: UseVariableItemWidthScrollHandlersModuleResult5 (copy), Frame (copy)
 					UseVariableItemWidthScrollHandlersModuleResult5()
 					

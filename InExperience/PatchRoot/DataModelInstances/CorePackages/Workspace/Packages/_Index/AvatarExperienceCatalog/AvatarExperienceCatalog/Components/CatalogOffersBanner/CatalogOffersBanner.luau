@@ -4,7 +4,7 @@ local _ = require(Parent.Foundation)
 local CatalogOffersBannerViewModule = require(script.Parent.CatalogOffersBannerView)
 local UseCatalogOffersBannerViewModelModule = require(script.Parent.useCatalogOffersBannerViewModel)
 
-return function(p1) --[[ Line: 17 | Named "CatalogOffersBanner" ]]
+return function(p1)
 	-- upvalues: UseCatalogOffersBannerViewModelModule (copy), ReactModule (copy), CatalogOffersBannerViewModule (copy)
 	local UseCatalogOffersBannerViewModelModuleResult = UseCatalogOffersBannerViewModelModule({
 		Size = p1.Size,

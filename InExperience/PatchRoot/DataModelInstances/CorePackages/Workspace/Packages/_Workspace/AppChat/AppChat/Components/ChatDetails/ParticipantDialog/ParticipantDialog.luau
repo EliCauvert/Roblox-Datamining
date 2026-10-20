@@ -37,33 +37,33 @@ local config = {
 	removeFromGroupText = "localizedText.RemoveFromGroup",
 	trustedFriendText = "localizedText.AddTrustedFriend",
 	isTrustedFriendButtonDisabled = false,
-	openViewProfile = function(_) --[[ Line: 81 ]]
+	openViewProfile = function(_)
 		-- upvalues: LoggerModule (copy)
 		LoggerModule:warning("openViewProfile was not passed to ParticipantDialog")
 	end,
-	openChat = function(...) --[[ Line: 84 ]]
+	openChat = function(...)
 		-- upvalues: LoggerModule (copy)
 		LoggerModule:warning("openChat was not passed to ParticipantDialog")
 	end,
-	openReportUser = function(...) --[[ Line: 87 ]]
+	openReportUser = function(...)
 		-- upvalues: LoggerModule (copy)
 		LoggerModule:warning("openReportUser was not passed to ParticipantDialog")
 	end,
-	openRemoveUserDialog = function(...) --[[ Line: 90 ]]
+	openRemoveUserDialog = function(...)
 		-- upvalues: LoggerModule (copy)
 		LoggerModule:warning("openRemoveUserDialog was not passed to ParticipantDialog")
 	end,
-	openTrustedFriend = function(...) --[[ Line: 93 ]]
+	openTrustedFriend = function(...)
 		-- upvalues: LoggerModule (copy)
 		LoggerModule:warning("openTrustedFriend was not passed to ParticipantDialog")
 	end,
-	onDismiss = function(_) --[[ Line: 96 ]]
+	onDismiss = function(_)
 		-- upvalues: LoggerModule (copy)
 		LoggerModule:warning("onDismiss was not passed to ParticipantDialog")
 	end
 }
 
-function ParticipantDialog(p1) --[[ Line: 103 ]]
+function ParticipantDialog(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseTelemetryModule (copy), ChatDialogTelemetryLayerModule (copy), ReactModule (copy), UseLayerCollectorFunction (copy), FFlagAppChatParticipantDialogGamepadFocusModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseAppFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), LoggerModule (copy), ChatDetailsTelemetryEventsModule (copy), PopoverSide (copy), Menu (copy), PopoverAlign (copy), InputSize (copy), _UDim (copy), FoundationModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseTelemetryModuleResult = UseTelemetryModule(ChatDialogTelemetryLayerModule.Context)
@@ -75,9 +75,9 @@ function ParticipantDialog(p1) --[[ Line: 103 ]]
 	local ShowRemoveUserButton = JoinResult.showRemoveUserButton
 	local UnitTestScreenSize = JoinResult.unitTestScreenSize or UseLayerCollectorResult.absoluteSize
 	local AnchorRef = if JoinResult.anchorRef and JoinResult.anchorRef.current then JoinResult.anchorRef else nil
-	local OnDismiss = JoinResult.onDismiss or function() --[[ Line: 114 ]] end
+	local OnDismiss = JoinResult.onDismiss or function() end
 	
-	local function OnPressedOutside() --[[ Line: 116 ]]
+	local function OnPressedOutside()
 		-- upvalues: UseStateResult2 (copy), OnDismiss (copy)
 		UseStateResult2(false)
 		OnDismiss()
@@ -88,7 +88,7 @@ function ParticipantDialog(p1) --[[ Line: 103 ]]
 		isFocusable = UseStateResult,
 		customEventHandlers = {
 			[FocusNavigationEventNameEnum.NavigateBack] = {
-				handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 125 ]]
+				handler = InputHandlersModule.onRelease(function(p2)
 					-- upvalues: UseStateResult2 (copy), OnDismiss (copy)
 					p2.cancelled = true
 					UseStateResult2(false)
@@ -100,14 +100,14 @@ function ParticipantDialog(p1) --[[ Line: 103 ]]
 	local UseRefResult1 = ReactModule.useRef(false)
 	local List = {}
 	
-	local function onDisabledActivated() --[[ Line: 145 ]] end
+	local function onDisabledActivated() end
 	
-	local function _(Text, Callback, IsDisabled) --[[ Line: 147 | Named "insertAction" ]]
+	local function _(Text, Callback, IsDisabled)
 		-- upvalues: List (copy), onDisabledActivated (copy), UseRefResult1 (copy), UseStateResult2 (copy)
 		table.insert(List, {
 			text = Text,
 			isDisabled = IsDisabled,
-			onActivated = if IsDisabled then onDisabledActivated else function() --[[ Line: 155 ]]
+			onActivated = if IsDisabled then onDisabledActivated else function()
 				-- upvalues: UseRefResult1 (upval), UseStateResult2 (upval), Callback (copy)
 				if UseRefResult1.current then return end
 				UseRefResult1.current = true
@@ -121,7 +121,7 @@ function ParticipantDialog(p1) --[[ Line: 103 ]]
 	end
 	
 	if JoinResult.showViewProfileButton then
-		local function v39() --[[ Line: 170 ]]
+		local function v39()
 			-- upvalues: LoggerModule (upval), ParticipantId (copy), JoinResult (copy)
 			LoggerModule:info("User activated viewProfile | userId: {}", ParticipantId)
 			JoinResult.openViewProfile(ParticipantId)
@@ -130,7 +130,7 @@ function ParticipantDialog(p1) --[[ Line: 103 ]]
 		table.insert(List, {
 			isDisabled = nil,
 			text = JoinResult.viewProfileText,
-			onActivated = function() --[[ Line: 155 ]]
+			onActivated = function()
 				-- upvalues: UseRefResult1 (copy), UseStateResult2 (copy), v39 (copy)
 				if UseRefResult1.current then return end
 				UseRefResult1.current = true
@@ -143,7 +143,7 @@ function ParticipantDialog(p1) --[[ Line: 103 ]]
 		})
 	end
 	if JoinResult.showTrustedFriendButton then
-		local function v40() --[[ Line: 177 ]]
+		local function v40()
 			-- upvalues: LoggerModule (upval), ParticipantId (copy), JoinResult (copy)
 			LoggerModule:info("User activated openTrustedFriend | userId: {}", ParticipantId)
 			JoinResult.openTrustedFriend(ParticipantId)
@@ -153,7 +153,7 @@ function ParticipantDialog(p1) --[[ Line: 103 ]]
 		table.insert(List, {
 			text = JoinResult.trustedFriendText,
 			isDisabled = IsTrustedFriendButtonDisabled,
-			onActivated = if IsTrustedFriendButtonDisabled then onDisabledActivated else function() --[[ Line: 155 ]]
+			onActivated = if IsTrustedFriendButtonDisabled then onDisabledActivated else function()
 				-- upvalues: UseRefResult1 (copy), UseStateResult2 (copy), v40 (copy)
 				if UseRefResult1.current then return end
 				UseRefResult1.current = true
@@ -166,7 +166,7 @@ function ParticipantDialog(p1) --[[ Line: 103 ]]
 		})
 	end
 	if JoinResult.showChatButton then
-		local function v42() --[[ Line: 184 ]]
+		local function v42()
 			-- upvalues: LoggerModule (upval), ParticipantId (copy), UseTelemetryModuleResult (copy), ChatDetailsTelemetryEventsModule (upval), JoinResult (copy)
 			LoggerModule:info("User activated openChat | userId: {}", ParticipantId)
 			UseTelemetryModuleResult.emit(ChatDetailsTelemetryEventsModule.ParticipantDialogChatClicked, {})
@@ -176,7 +176,7 @@ function ParticipantDialog(p1) --[[ Line: 103 ]]
 		table.insert(List, {
 			isDisabled = nil,
 			text = JoinResult.chatText,
-			onActivated = function() --[[ Line: 155 ]]
+			onActivated = function()
 				-- upvalues: UseRefResult1 (copy), UseStateResult2 (copy), v42 (copy)
 				if UseRefResult1.current then return end
 				UseRefResult1.current = true
@@ -188,7 +188,7 @@ function ParticipantDialog(p1) --[[ Line: 103 ]]
 			end
 		})
 	end
-	local function v43() --[[ Line: 191 ]]
+	local function v43()
 		-- upvalues: LoggerModule (upval), ParticipantId (copy), ConversationId (copy), UseTelemetryModuleResult (copy), ChatDetailsTelemetryEventsModule (upval), JoinResult (copy)
 		LoggerModule:info("User activated reportUser | userId: {}, conversationId: {}", ParticipantId, ConversationId)
 		UseTelemetryModuleResult.emit(ChatDetailsTelemetryEventsModule.ParticipantDialogReportUserClicked, {})
@@ -198,7 +198,7 @@ function ParticipantDialog(p1) --[[ Line: 103 ]]
 	table.insert(List, {
 		isDisabled = nil,
 		text = JoinResult.reportUserText,
-		onActivated = function() --[[ Line: 155 ]]
+		onActivated = function()
 			-- upvalues: UseRefResult1 (copy), UseStateResult2 (copy), v43 (copy)
 			if UseRefResult1.current then return end
 			UseRefResult1.current = true
@@ -211,7 +211,7 @@ function ParticipantDialog(p1) --[[ Line: 103 ]]
 	})
 	
 	if ShowRemoveUserButton then
-		local function v44() --[[ Line: 198 ]]
+		local function v44()
 			-- upvalues: JoinResult (copy), ParticipantId (copy), ConversationId (copy)
 			JoinResult.openRemoveUserDialog(ParticipantId, ConversationId)
 		end
@@ -219,7 +219,7 @@ function ParticipantDialog(p1) --[[ Line: 103 ]]
 		table.insert(List, {
 			isDisabled = nil,
 			text = JoinResult.removeFromGroupText,
-			onActivated = function() --[[ Line: 155 ]]
+			onActivated = function()
 				-- upvalues: UseRefResult1 (copy), UseStateResult2 (copy), v44 (copy)
 				if UseRefResult1.current then return end
 				UseRefResult1.current = true

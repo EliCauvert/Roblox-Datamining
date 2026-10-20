@@ -4,7 +4,7 @@ local ChatLandingTelemetryLayerModule = require(Parent.AppChat.ChatLandingTeleme
 local ChatLandingTelemetryStateModule = require(Parent.AppChat.ChatLandingTelemetryState)
 local UseGetAndSetRefModule = require(Parent.AppChat.useGetAndSetRef)
 
-return function(p1) --[[ Line: 20 | Named "FriendsChatLandingTelemetryProviders" ]]
+return function(p1)
 	-- upvalues: UseGetAndSetRefModule (copy), ReactModule (copy), ChatLandingTelemetryStateModule (copy), ChatLandingTelemetryLayerModule (copy)
 	local UseGetAndSetRefModuleResult, UseGetAndSetRefModuleResult2 = UseGetAndSetRefModule({})
 	
@@ -15,7 +15,7 @@ return function(p1) --[[ Line: 20 | Named "FriendsChatLandingTelemetryProviders"
 		}
 	}, {
 		Layer = ReactModule.createElement(ChatLandingTelemetryLayerModule.Provider, {
-			value = ReactModule.useCallback(function() --[[ Line: 22 ]]
+			value = ReactModule.useCallback(function()
 				-- upvalues: UseGetAndSetRefModuleResult (copy)
 				local UseGetAndSetRefModuleResultResult = UseGetAndSetRefModuleResult()
 				

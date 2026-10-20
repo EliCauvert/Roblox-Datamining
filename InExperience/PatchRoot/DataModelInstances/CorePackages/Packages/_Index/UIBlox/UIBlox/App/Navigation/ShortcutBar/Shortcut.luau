@@ -26,7 +26,7 @@ local config1 = {
 	animationCoolDownTime = 0.75
 }
 
-local function renderIcon(p1, p2) --[[ Line: 43 ]]
+local function renderIcon(p1, p2)
 	-- upvalues: FoundationModule (copy), UIBloxConfigModule (copy), GetIconSizeModule (copy), IconSizeModule (copy), ReactModule (copy), KeyLabelModule (copy), ImageSetComponentModule (copy), ProgressIconAnimatedModule (copy)
 	local LayoutOrder = p1.layoutOrder
 	local ItemProps = p1.itemProps
@@ -87,7 +87,7 @@ local function renderIcon(p1, p2) --[[ Line: 43 ]]
 	})
 end
 
-return function(p3) --[[ Line: 119 | Named "Shortcut" ]]
+return function(p3)
 	-- upvalues: Object (copy), config (copy), config1 (copy), UseStyleModule (copy), FoundationModule (copy), ReactModule (copy), UIBloxConfigModule (copy), GenericTextLabelModule (copy), renderIcon (copy)
 	local AssignResult = Object.assign({}, config, p3)
 	local AssignResult1 = Object.assign({}, config1, AssignResult.publicProps)

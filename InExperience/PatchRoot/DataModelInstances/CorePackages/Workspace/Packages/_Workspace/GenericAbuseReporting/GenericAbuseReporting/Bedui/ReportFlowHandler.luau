@@ -39,7 +39,7 @@ local ValueToAbuseCategoryModule = require(GenericAbuseReporting.Enums.ValueToAb
 local FFlagAddThumbnailSelectorReport = require(Parent.SharedFlags).FFlagAddThumbnailSelectorReport
 local FFlagGenericAbuseReportingUnifyReportTagsModule = require(GenericAbuseReporting.Flags.FFlagGenericAbuseReportingUnifyReportTags)
 
-return ReactModule.memo(function(p1) --[[ Line: 62 | Named "ReportFlowHandler" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), UseBeduiDataModule (copy), UseFormDataModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UseAnalyticsContextModule (copy), UseLayerCollectorFunction (copy), AbuseReportBeduiContextStatus (copy), ValidateBeduiDataModule (copy), SendAnalyticsEventFunction (copy), TelemetryEventType (copy), InnerContentConfigType (copy), CryoModule (copy), Players (copy), AbuseVectorModule (copy), GetReportBodyModule (copy), SubmitReportV1Module (copy), DashModule (copy), FFlagGenericAbuseReportingUnifyReportTagsModule (copy), FFlagAddThumbnailSelectorReport (copy), GetReportTagsModule (copy), SubmitReportModule (copy), CreateReportModule (copy), ValueToAbuseCategoryModule (copy), AbuseCategoryModule (copy), SingleStepContainerModule (copy), SingleStepInnerContentRendererModule (copy), ArgCheckModule (copy), ButtonVariant (copy), FillBehavior (copy), Skeleton (copy), Radius (copy), Empty (copy), StepperModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState({})
@@ -51,11 +51,11 @@ return ReactModule.memo(function(p1) --[[ Line: 62 | Named "ReportFlowHandler" ]
 	local IsReportSubmitted = UseAnalyticsContextModuleResult.isReportSubmitted
 	local SetIsReportSubmittedFunction = UseAnalyticsContextModuleResult.setIsReportSubmitted
 	local IsXBelow = UseLayerCollectorFunction().absoluteSize.X < 540
-	local UseMemoResult = ReactModule.useMemo(function(): boolean --[[ Line: 78 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): boolean
 		-- upvalues: UseBeduiDataModuleResult (copy), AbuseReportBeduiContextStatus (upval)
 		return UseBeduiDataModuleResult == nil or UseBeduiDataModuleResult.status == AbuseReportBeduiContextStatus.Loading
 	end, { UseBeduiDataModuleResult })
-	local UseMemoResult1 = ReactModule.useMemo(function(): boolean --[[ Line: 82 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function(): boolean
 		-- upvalues: UseMemoResult (copy), UseBeduiDataModuleResult (copy), ValidateBeduiDataModule (upval), SendAnalyticsEventFunction (upval), TelemetryEventType (upval), UseAnalyticsContextModuleResult (copy), AbuseReportBeduiContextStatus (upval)
 		if UseMemoResult or UseBeduiDataModuleResult == nil then
 			return true
@@ -82,7 +82,7 @@ return ReactModule.memo(function(p1) --[[ Line: 62 | Named "ReportFlowHandler" ]
 		SendAnalyticsEventFunction,
 		UseAnalyticsContextModuleResult
 	})
-	local UseResult = ReactModule.useCallback(function(p2): boolean --[[ Line: 101 ]]
+	local UseResult = ReactModule.useCallback(function(p2): boolean
 		-- upvalues: InnerContentConfigType (upval), FormData (copy), UseStateResult2 (copy), CryoModule (upval), UseStateResult (copy)
 		if p2 == nil then
 			return true
@@ -99,7 +99,7 @@ return ReactModule.memo(function(p1) --[[ Line: 62 | Named "ReportFlowHandler" ]
 		end
 		return not Flag
 	end, { FormData, UseStateResult })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 120 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: Players (upval), SendAnalyticsEventFunction (upval), TelemetryEventType (upval), UseAnalyticsContextModuleResult (copy), p1 (copy), AbuseVectorModule (upval), GetReportBodyModule (upval), FormData (copy), AdditionalReportTags (copy), SubmitReportV1Module (upval), UseRoactServiceResult (copy), DashModule (upval), FFlagGenericAbuseReportingUnifyReportTagsModule (upval), FFlagAddThumbnailSelectorReport (upval), GetReportTagsModule (upval), SubmitReportModule (upval), CreateReportModule (upval), ValueToAbuseCategoryModule (upval), AbuseCategoryModule (upval)
 		local LocalPlayer = Players.LocalPlayer
 		
@@ -119,7 +119,7 @@ return ReactModule.memo(function(p1) --[[ Line: 62 | Named "ReportFlowHandler" ]
 				localPlayerUserId = LocalPlayer.UserId,
 				targetIdStr = p1.targetId,
 				additionalReportTags = AdditionalReportTags
-			}))):andThen(function(_) --[[ Line: 142 ]]
+			}))):andThen(function(_)
 				-- upvalues: SendAnalyticsEventFunction (upval), TelemetryEventType (upval), UseAnalyticsContextModuleResult (upval), p1 (upval)
 				SendAnalyticsEventFunction({
 					eventType = TelemetryEventType.Submitted,
@@ -129,7 +129,7 @@ return ReactModule.memo(function(p1) --[[ Line: 62 | Named "ReportFlowHandler" ]
 				if p1.onSubmit then
 					p1.onSubmit()
 				end
-			end):catch(function(Err) --[[ Line: 151 ]]
+			end):catch(function(Err)
 				-- upvalues: DashModule (upval), SendAnalyticsEventFunction (upval), TelemetryEventType (upval), UseAnalyticsContextModuleResult (upval)
 				SendAnalyticsEventFunction({
 					eventType = TelemetryEventType.Error,
@@ -150,7 +150,7 @@ return ReactModule.memo(function(p1) --[[ Line: 62 | Named "ReportFlowHandler" ]
 				targetId = p1.targetId,
 				custom = p1.custom,
 				additionalReportTags = AdditionalReportTags
-			}))):andThen(function(_) --[[ Line: 172 ]]
+			}))):andThen(function(_)
 				-- upvalues: SendAnalyticsEventFunction (upval), TelemetryEventType (upval), UseAnalyticsContextModuleResult (upval), p1 (upval)
 				SendAnalyticsEventFunction({
 					eventType = TelemetryEventType.Submitted,
@@ -160,7 +160,7 @@ return ReactModule.memo(function(p1) --[[ Line: 62 | Named "ReportFlowHandler" ]
 				if p1.onSubmit then
 					p1.onSubmit()
 				end
-			end):catch(function(Err) --[[ Line: 181 ]]
+			end):catch(function(Err)
 				-- upvalues: DashModule (upval), SendAnalyticsEventFunction (upval), TelemetryEventType (upval), UseAnalyticsContextModuleResult (upval)
 				SendAnalyticsEventFunction({
 					eventType = TelemetryEventType.Error,
@@ -180,13 +180,13 @@ return ReactModule.memo(function(p1) --[[ Line: 62 | Named "ReportFlowHandler" ]
 				submitterId = tostring(LocalPlayer.UserId),
 				targetId = p1.targetId,
 				custom = p1.custom
-			}))):andThen(function(_) --[[ Line: 203 ]]
+			}))):andThen(function(_)
 				-- upvalues: SendAnalyticsEventFunction (upval), TelemetryEventType (upval), UseAnalyticsContextModuleResult (upval)
 				SendAnalyticsEventFunction({
 					eventType = TelemetryEventType.Submitted,
 					context = UseAnalyticsContextModuleResult
 				})
-			end):catch(function(Err) --[[ Line: 209 ]]
+			end):catch(function(Err)
 				-- upvalues: DashModule (upval), SendAnalyticsEventFunction (upval), TelemetryEventType (upval), UseAnalyticsContextModuleResult (upval)
 				SendAnalyticsEventFunction({
 					eventType = TelemetryEventType.Error,
@@ -201,7 +201,7 @@ return ReactModule.memo(function(p1) --[[ Line: 62 | Named "ReportFlowHandler" ]
 		FormData, Players.LocalPlayer, p1.abuseVector, p1.targetId,
 		SendAnalyticsEventFunction, UseAnalyticsContextModuleResult
 	})
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 232 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), UseMemoResult1 (copy), UseBeduiDataModuleResult (copy), SendAnalyticsEventFunction (upval), TelemetryEventType (upval), UseAnalyticsContextModuleResult (copy), DashModule (upval), IsXBelow (copy), CryoModule (upval), ReactModule (upval), SingleStepContainerModule (upval), UseStateResult (copy), SingleStepInnerContentRendererModule (upval), ArgCheckModule (upval), IsReportSubmitted (copy), UseResult1 (copy), SetIsReportSubmittedFunction (copy), UseResult (copy), ButtonVariant (upval), FillBehavior (upval)
 		if UseMemoResult then
 			return {}
@@ -258,7 +258,7 @@ return ReactModule.memo(function(p1) --[[ Line: 62 | Named "ReportFlowHandler" ]
 					formDataKeysWithError = UseStateResult
 				}) else nil,
 				labels = { continueButton = JoinDeepResult.actionInfo.actionLabel },
-				onStepContinue = function() --[[ Line: 295 ]]
+				onStepContinue = function()
 					-- upvalues: ArgCheckModule (upval), IsReportSubmitted (upval), SendAnalyticsEventFunction (upval), TelemetryEventType (upval), UseAnalyticsContextModuleResult (upval), JoinDeepResult (copy), UseResult1 (upval), SetIsReportSubmittedFunction (upval)
 					ArgCheckModule.assert(IsReportSubmitted == false, "Report should only be able to be submitted once")
 					
@@ -276,7 +276,7 @@ return ReactModule.memo(function(p1) --[[ Line: 62 | Named "ReportFlowHandler" ]
 						SetIsReportSubmittedFunction(true)
 					end
 				end,
-				validateState = function() --[[ Line: 313 ]]
+				validateState = function()
 					-- upvalues: UseResult (upval), InnerContentConfig (ref)
 					return UseResult(InnerContentConfig)
 				end,

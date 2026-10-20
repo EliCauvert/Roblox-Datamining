@@ -1,7 +1,7 @@
 ﻿local MockAvatarChatService = {}
 MockAvatarChatService.__index = MockAvatarChatService
 
-function MockAvatarChatService.new(IsEnabled, EnableVoice, GetPropertyChangedSignal, GetClientFeaturesAsync) --[[ Line: 4 ]]
+function MockAvatarChatService.new(IsEnabled, EnableVoice, GetPropertyChangedSignal, GetClientFeaturesAsync)
 	-- upvalues: MockAvatarChatService (copy)
 	return (setmetatable({
 		IsEnabled = IsEnabled,

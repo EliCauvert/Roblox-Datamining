@@ -2,7 +2,7 @@
 local BackgroundHighlightModule = require(script.Parent.BackgroundHighlight)
 local UseBackgroundHighlightPropsModule = require(script.Parent.useBackgroundHighlightProps)
 
-return function(p1) --[[ Line: 11 | Named "BackgroundHighlightContainer" ]]
+return function(p1)
 	-- upvalues: UseBackgroundHighlightPropsModule (copy), ReactModule (copy), BackgroundHighlightModule (copy)
 	return ReactModule.createElement(BackgroundHighlightModule, (UseBackgroundHighlightPropsModule(p1)))
 end

@@ -22,15 +22,15 @@ return {
 		cancelAnalyticsEvent = EventNames.EditingFlowMusicBackButtonPressed
 	},
 	supportedCaptureTypes = { Enum.CaptureType.Video, Enum.CaptureType.Screenshot },
-	createSession = function() --[[ Line: 41 ]]
+	createSession = function()
 		-- upvalues: CreateEditSessionModule (copy)
 		return CreateEditSessionModule()
 	end,
-	renderEditor = function(Controller) --[[ Line: 44 ]]
+	renderEditor = function(Controller)
 		-- upvalues: FFlagMomentsCreationMusicPickerV2Module (copy), ReactModule (copy), MusicPickerV2ContainerModule (copy), MusicOverlayModule (copy)
 		return if FFlagMomentsCreationMusicPickerV2Module then ReactModule.createElement(MusicPickerV2ContainerModule, { controller = Controller }) else ReactModule.createElement(MusicOverlayModule, { controller = Controller })
 	end,
-	toEdits = function(Music) --[[ Line: 50 ]]
+	toEdits = function(Music)
 		return { music = Music }
 	end
 }

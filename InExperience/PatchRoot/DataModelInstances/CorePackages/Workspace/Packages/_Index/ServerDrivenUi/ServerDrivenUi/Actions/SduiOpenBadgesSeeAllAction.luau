@@ -7,7 +7,7 @@ local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local FFlagLuaAppBadgesSeeAllLogExposure = require(Parent.SharedFlags).FFlagLuaAppBadgesSeeAllLogExposure
 local FStringLuaAppBadgesSeeAllIxpLayer = require(Parent.SharedFlags).FStringLuaAppBadgesSeeAllIxpLayer
 
-return function(p1, _, p2, _) --[[ Line: 18 ]]
+return function(p1, _, p2, _)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), FFlagLuaAppBadgesSeeAllLogExposure (copy), IXPService (copy), FStringLuaAppBadgesSeeAllIxpLayer (copy), NavigateToBadgesSeeAllFunction (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	

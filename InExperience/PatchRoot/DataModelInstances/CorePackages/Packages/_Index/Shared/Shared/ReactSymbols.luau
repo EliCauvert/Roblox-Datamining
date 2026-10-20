@@ -22,15 +22,15 @@
 	REACT_BINDING_TYPE = 60132
 }
 
-function ReactSymbolsModule.getIteratorFn(p1) --[[ Line: 84 ]]
+function ReactSymbolsModule.getIteratorFn(p1)
 	-- upvalues: ReactSymbolsModule (copy)
-	return if typeof(p1) == "table" then if p1["$$typeof"] == ReactSymbolsModule.REACT_PORTAL_TYPE then nil else function() --[[ Line: 91 ]]
+	return if typeof(p1) == "table" then if p1["$$typeof"] == ReactSymbolsModule.REACT_PORTAL_TYPE then nil else function()
 		-- upvalues: p1 (copy)
 		local Key = nil
 		local Value = nil
 		
 		return {
-			next = function() --[[ Line: 94 ]]
+			next = function()
 				-- upvalues: Key (ref), Value (ref), p1 (upval)
 				Key, Value = next(p1, Key)
 				

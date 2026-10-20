@@ -1,6 +1,6 @@
 ﻿local FFlagFixRobuxTileClickInShopModule = require(script.Parent.FFlagFixRobuxTileClickInShop)
 
-return function() --[[ Line: 3 ]]
+return function()
 	-- upvalues: FFlagFixRobuxTileClickInShopModule (copy)
 	return FFlagFixRobuxTileClickInShopModule
 end

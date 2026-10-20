@@ -11,7 +11,7 @@ local View = FoundationModule.View
 local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 
-return ReactModule.memo(function(Frame) --[[ Line: 27 | Named "LibraryTile" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: FoundationModule (copy), IconName (copy), ReactModule (copy), Image (copy), ModelViewportModule (copy), Icon (copy), IconSize (copy), View (copy), Text (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseScaledValueResult = FoundationModule.Hooks.useScaledValue(136)

@@ -13,7 +13,7 @@ local config = {
 }
 local config1 = { Model = 1, Image = 2, Sound = 3 }
 
-local function parseList(Text: string) --[[ Line: 46 ]]
+local function parseList(Text: string)
 	local List = {}
 	
 	for i in string.gmatch(Text, "[^,]+") do
@@ -26,7 +26,7 @@ local function parseList(Text: string) --[[ Line: 46 ]]
 	return List
 end
 
-return function(p1) --[[ Line: 57 | Named "createBuildLibraryStore" ]]
+return function(p1)
 	-- upvalues: parseList (copy), BuildExperienceLibraryImageClasses (copy), BuildExperienceLibraryRoots (copy), SignalsModule (copy), config (copy), BuildExperienceLibraryDescriptionAttribute (copy), config1 (copy)
 	local P0 = p1 or game
 	local ParseListResult = parseList(BuildExperienceLibraryImageClasses)
@@ -36,7 +36,7 @@ return function(p1) --[[ Line: 57 | Named "createBuildLibraryStore" ]]
 	local Count = 0
 	local Ancestor = nil
 	
-	local function _(Key) --[[ Line: 65 | Named "getId" ]]
+	local function _(Key)
 		-- upvalues: self (copy), Count (ref)
 		if self[Key] == nil then
 			Count += 1
@@ -47,7 +47,7 @@ return function(p1) --[[ Line: 57 | Named "createBuildLibraryStore" ]]
 	
 	local t = {}
 	
-	local function sameItems(p2, List): boolean --[[ Line: 76 ]]
+	local function sameItems(p2, List): boolean
 		if #p2 ~= #List then
 			return false
 		end
@@ -69,13 +69,13 @@ return function(p1) --[[ Line: 57 | Named "createBuildLibraryStore" ]]
 	end
 	
 	return {
-		refresh = function() --[[ Line: 96 ]]
+		refresh = function()
 			-- upvalues: Ancestor (ref), self (copy), Count (ref), ParseListResult1 (copy), P0 (copy), ParseListResult (copy), config (upval), BuildExperienceLibraryDescriptionAttribute (upval), config1 (upval), sameItems (copy), Signal (copy), t (ref), Signal2 (copy)
 			local List = {}
 			local t1 = {}
 			Ancestor = nil
 			
-			local function parentFolderId(Parent, Parent1, RootName, Kind): string? --[[ Line: 100 ]]
+			local function parentFolderId(Parent, Parent1, RootName, Kind): string?
 				-- upvalues: self (upval), Count (upval), t1 (copy), List (copy), parentFolderId (copy)
 				local Parent2 = Parent.Parent
 				while Parent2 ~= nil and Parent2 ~= Parent1 do
@@ -111,7 +111,7 @@ return function(p1) --[[ Line: 57 | Named "createBuildLibraryStore" ]]
 			end
 			
 			for _, RootName in ParseListResult1 do
-				local Success, Result = pcall(function() --[[ Line: 130 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: P0 (upval), RootName (copy)
 					return P0:GetService(RootName)
 				end)
@@ -175,7 +175,7 @@ return function(p1) --[[ Line: 57 | Named "createBuildLibraryStore" ]]
 			for _, value in List do
 				t3[value] = string.lower(value.displayName)
 			end
-			table.sort(List, function(A, B): boolean --[[ Line: 187 ]]
+			table.sort(List, function(A, B): boolean
 				-- upvalues: config1 (upval), t3 (copy)
 				if A.kind == B.kind then
 					local Entry = t3[A]
@@ -196,13 +196,13 @@ return function(p1) --[[ Line: 57 | Named "createBuildLibraryStore" ]]
 			Signal2(List)
 		end,
 		getItems = Signal,
-		getItem = function(p3, p4) --[[ Line: 210 ]]
+		getItem = function(p3, p4)
 			-- upvalues: Signal (copy), t (ref)
 			Signal(p3)
 			
 			return t[p4]
 		end,
-		resolveWorldItem = function(Parent) --[[ Line: 215 ]]
+		resolveWorldItem = function(Parent)
 			-- upvalues: self (copy), t (ref), Ancestor (ref)
 			local Parent1 = Parent
 			local Entry = nil

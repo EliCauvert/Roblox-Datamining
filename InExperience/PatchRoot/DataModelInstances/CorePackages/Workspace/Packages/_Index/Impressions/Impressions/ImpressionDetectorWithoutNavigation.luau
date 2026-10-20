@@ -21,13 +21,13 @@ ImpressionsDetectorWithoutNavigation.validateProps = TModule.strictInterface({
 })
 ImpressionsDetectorWithoutNavigation.defaultProps = { scanDebounceSeconds = 1, viewFillPercent = 0.25 }
 
-function ImpressionsDetectorWithoutNavigation.init(p1) --[[ Line: 53 ]]
+function ImpressionsDetectorWithoutNavigation.init(p1)
 	p1.isMounted = false
 	p1.lastImpressionTick = nil
 	p1.nextImpressionTick = nil
 end
 
-function ImpressionsDetectorWithoutNavigation._boundingBoxIntersectsView(p1, Frame: Frame): boolean --[[ Line: 59 ]]
+function ImpressionsDetectorWithoutNavigation._boundingBoxIntersectsView(p1, Frame: Frame): boolean
 	-- upvalues: ArgCheckModule (copy)
 	if not Frame then
 		return false
@@ -47,7 +47,7 @@ function ImpressionsDetectorWithoutNavigation._boundingBoxIntersectsView(p1, Fra
 	end
 end
 
-function ImpressionsDetectorWithoutNavigation._isInstanceVisible(p1, Frame: Frame): boolean --[[ Line: 84 ]]
+function ImpressionsDetectorWithoutNavigation._isInstanceVisible(p1, Frame: Frame): boolean
 	-- upvalues: ArgCheckModule (copy), FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions (copy)
 	if not p1:_boundingBoxIntersectsView(Frame) then
 		return false
@@ -92,7 +92,7 @@ function ImpressionsDetectorWithoutNavigation._isInstanceVisible(p1, Frame: Fram
 	end
 end
 
-function ImpressionsDetectorWithoutNavigation._calculateImpressions(p1) --[[ Line: 157 ]]
+function ImpressionsDetectorWithoutNavigation._calculateImpressions(p1)
 	-- upvalues: CollectionService (copy), ConstantsModule (copy), ArgCheckModule (copy)
 	if not p1.isMounted then return end
 	if p1.props.isFocused == false then return end
@@ -118,7 +118,7 @@ function ImpressionsDetectorWithoutNavigation._calculateImpressions(p1) --[[ Lin
 	end
 end
 
-function ImpressionsDetectorWithoutNavigation._requestImpressions(p2) --[[ Line: 195 ]]
+function ImpressionsDetectorWithoutNavigation._requestImpressions(p2)
 	-- upvalues: ArgCheckModule (copy)
 	if not p2.isMounted then return end
 	if p2.props.isFocused == false then return end
@@ -131,7 +131,7 @@ function ImpressionsDetectorWithoutNavigation._requestImpressions(p2) --[[ Line:
 		Delay = p2.nextImpressionTick - tick()
 	end
 	if Delay > 0 then
-		task.delay(Delay, function() --[[ Line: 217 ]]
+		task.delay(Delay, function()
 			-- upvalues: ArgCheckModule (upval), p2 (copy)
 			ArgCheckModule.assert(p2.nextImpressionTick ~= nil and p2.nextImpressionTick < tick())
 			p2.nextImpressionTick = nil
@@ -145,23 +145,23 @@ function ImpressionsDetectorWithoutNavigation._requestImpressions(p2) --[[ Line:
 	end
 end
 
-function ImpressionsDetectorWithoutNavigation:render() --[[ Line: 229 ]]
+function ImpressionsDetectorWithoutNavigation:render()
 	return nil
 end
 
-function ImpressionsDetectorWithoutNavigation.didMount(p2) --[[ Line: 233 ]]
+function ImpressionsDetectorWithoutNavigation.didMount(p2)
 	p2.isMounted = true
 	p2:_requestImpressions()
 	
 	if p2.props.onRequestImpressionsSignal then
-		p2.onRequestImpressionsConnection = p2.props.onRequestImpressionsSignal:connect(function() --[[ Line: 237 ]]
+		p2.onRequestImpressionsConnection = p2.props.onRequestImpressionsSignal:connect(function()
 			-- upvalues: p2 (copy)
 			p2:_requestImpressions()
 		end)
 	end
 end
 
-function ImpressionsDetectorWithoutNavigation.willUnmount(p2) --[[ Line: 243 ]]
+function ImpressionsDetectorWithoutNavigation.willUnmount(p2)
 	p2.isMounted = false
 	
 	if p2.onRequestImpressionsConnection ~= nil then
@@ -170,7 +170,7 @@ function ImpressionsDetectorWithoutNavigation.willUnmount(p2) --[[ Line: 243 ]]
 	end
 end
 
-function ImpressionsDetectorWithoutNavigation.didUpdate(p2, _, _) --[[ Line: 251 ]]
+function ImpressionsDetectorWithoutNavigation.didUpdate(p2, _, _)
 	p2:_requestImpressions()
 end
 

@@ -1,9 +1,9 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
 
-local function _(Delay, p1) --[[ Line: 17 | Named "scheduleCancellableDelay" ]]
+local function _(Delay, p1)
 	local v1 = false
 	local v2 = false
-	local DelayedThread = task.delay(Delay, function() --[[ Line: 20 ]]
+	local DelayedThread = task.delay(Delay, function()
 		-- upvalues: v1 (ref), v2 (ref), p1 (copy)
 		if not v1 then
 			v2 = true
@@ -11,7 +11,7 @@ local function _(Delay, p1) --[[ Line: 17 | Named "scheduleCancellableDelay" ]]
 		end
 	end)
 	
-	return function() --[[ Line: 27 ]]
+	return function()
 		-- upvalues: v1 (ref), v2 (ref), DelayedThread (copy)
 		v1 = true
 		
@@ -24,14 +24,14 @@ end
 return {
 	CONFIG_LOADING_DELAY_SECONDS = 0.35,
 	CONFIG_LOADING_MINIMUM_DISPLAY_SECONDS = 0.5,
-	useInExpConfigLoadingSkeleton = function(Current, Current1): boolean --[[ Line: 35 ]]
+	useInExpConfigLoadingSkeleton = function(Current, Current1): boolean
 		-- upvalues: ReactModule (copy)
 		local Idle, Idle2 = ReactModule.useState("idle")
 		local UseRefResult = ReactModule.useRef(Current)
 		local UseRefResult1 = ReactModule.useRef(Current1)
 		UseRefResult.current = Current
 		UseRefResult1.current = Current1
-		ReactModule.useEffect(function() --[[ Line: 42 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: Current (copy), Idle2 (copy), Current1 (copy), Idle (copy)
 			if not Current then
 				Idle2("idle")
@@ -48,10 +48,10 @@ return {
 				Idle2("idle")
 			end
 		end, { Current, Current1, Idle })
-		ReactModule.useEffect(function() --[[ Line: 54 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: Idle (copy), UseRefResult (copy), UseRefResult1 (copy), Idle2 (copy)
 			if Idle == "waiting" then
-				local function v9() --[[ Line: 56 ]]
+				local function v9()
 					-- upvalues: UseRefResult (upval), UseRefResult1 (upval), Idle2 (upval)
 					if UseRefResult.current and UseRefResult1.current then
 						Idle2("minimum")
@@ -64,7 +64,7 @@ return {
 				
 				local Flag = false
 				local Flag1 = false
-				local DelayedThread = task.delay(0.35, function() --[[ Line: 20 ]]
+				local DelayedThread = task.delay(0.35, function()
 					-- upvalues: Flag (ref), Flag1 (ref), v9 (copy)
 					if not Flag then
 						Flag1 = true
@@ -72,7 +72,7 @@ return {
 					end
 				end)
 				
-				return function() --[[ Line: 27 ]]
+				return function()
 					-- upvalues: Flag (ref), Flag1 (ref), DelayedThread (copy)
 					Flag = true
 					
@@ -81,7 +81,7 @@ return {
 					end
 				end
 			elseif Idle == "minimum" then
-				local function v13() --[[ Line: 66 ]]
+				local function v13()
 					-- upvalues: UseRefResult (upval), UseRefResult1 (upval), Idle2 (upval)
 					if UseRefResult.current and UseRefResult1.current then
 						Idle2("visible")
@@ -94,7 +94,7 @@ return {
 				
 				local Flag = false
 				local Flag1 = false
-				local DelayedThread1 = task.delay(0.5, function() --[[ Line: 20 ]]
+				local DelayedThread1 = task.delay(0.5, function()
 					-- upvalues: Flag (ref), Flag1 (ref), v13 (copy)
 					if not Flag then
 						Flag1 = true
@@ -102,7 +102,7 @@ return {
 					end
 				end)
 				
-				return function() --[[ Line: 27 ]]
+				return function()
 					-- upvalues: Flag (ref), Flag1 (ref), DelayedThread1 (copy)
 					Flag = true
 					

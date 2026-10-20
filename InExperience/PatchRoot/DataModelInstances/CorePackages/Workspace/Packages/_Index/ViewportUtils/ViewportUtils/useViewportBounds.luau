@@ -15,18 +15,18 @@ local FFlagLuaAppRespectClipAncestorImpressions = SharedFlagsModule.FFlagLuaAppR
 local LuaAppUseViewportBoundsInsetFix = game:DefineFastFlag("LuaAppUseViewportBoundsInsetFix", false)
 local FFlagUnifyShortcutBarFixImpressions = SharedFlagsModule.FFlagUnifyShortcutBarFixImpressions
 
-local function _(p1, p2): boolean --[[ Line: 35 | Named "boundsEqual" ]]
+local function _(p1, p2): boolean
 	return p1.min == p2.min and p1.max == p2.max
 end
 
-local function screenSizeBoundsEqual(p1, p2): boolean --[[ Line: 39 ]]
+local function screenSizeBoundsEqual(p1, p2): boolean
 	-- upvalues: FIntLuaAppViewportBoundsScreenSizeThreshold (copy)
 	return math.abs(p1.max.X - p2.max.X) < FIntLuaAppViewportBoundsScreenSizeThreshold and (math.abs(p1.max.Y - p2.max.Y) < FIntLuaAppViewportBoundsScreenSizeThreshold and p1.min.X == p2.min.X) and p1.min.Y == p2.min.Y
 end
 
 local config = { min = Vector2.zero, max = Vector2.zero }
 
-local function calculateClampedViewportBounds(AbsolutePosition, AbsoluteSize, UseMemoResult) --[[ Line: 49 ]]
+local function calculateClampedViewportBounds(AbsolutePosition, AbsoluteSize, UseMemoResult)
 	-- upvalues: LuaAppFixFrameBoundsImpressions (copy), config (copy)
 	local AbsolutePosition1 = AbsolutePosition or Vector2.zero
 	local NewAbsolutePosition = AbsolutePosition1 + (AbsoluteSize or Vector2.zero)
@@ -41,15 +41,15 @@ local function calculateClampedViewportBounds(AbsolutePosition, AbsoluteSize, Us
 	}
 end
 
-return function(p1, p2, p3, p4) --[[ Line: 70 ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: FFlagUnifyShortcutBarFixImpressions (copy), LuaAppThrottleViewportBoundsScreenSize (copy), ReactModule (copy), SignalsModule (copy), DisplayModule (copy), LuaAppUseViewportBoundsInsetFix (copy), screenSizeBoundsEqual (copy), SignalsReactModule (copy), FFlagLuaAppRespectClipAncestorImpressions (copy), UseClipAncestorBoundsModule (copy), config (copy), LuaAppFixFrameBoundsImpressions (copy), IntersectBoundsModule (copy), calculateClampedViewportBounds (copy), FIntLuaAppUpdateImpressionsViewportBoundsPositionThreshold (copy), FIntLuaAppViewportBoundsScreenSizeThreshold (copy), FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions (copy)
 	local UseSignalStateResult = nil
 	local Y = if FFlagUnifyShortcutBarFixImpressions then p4 or 0 else nil
 	
 	if LuaAppThrottleViewportBoundsScreenSize then
-		UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 80 ]]
+		UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 			-- upvalues: SignalsModule (upval), DisplayModule (upval), LuaAppUseViewportBoundsInsetFix (upval), p2 (copy), FFlagUnifyShortcutBarFixImpressions (upval), Y (copy), screenSizeBoundsEqual (upval)
-			return SignalsModule.createComputed(function(p5) --[[ Line: 81 ]]
+			return SignalsModule.createComputed(function(p5)
 				-- upvalues: DisplayModule (upval), LuaAppUseViewportBoundsInsetFix (upval), p2 (upval), FFlagUnifyShortcutBarFixImpressions (upval), Y (upval)
 				local DisplayStore = DisplayModule.GetDisplayStore(p5)
 				local ViewportSize = DisplayStore.getViewportSize(p5)
@@ -65,19 +65,19 @@ return function(p1, p2, p3, p4) --[[ Line: 70 ]]
 			if FFlagUnifyShortcutBarFixImpressions then Y else nil
 		})))
 	else
-		local UseSignalStateResult1 = SignalsReactModule.useSignalState(function(p5) --[[ Line: 103 ]]
+		local UseSignalStateResult1 = SignalsReactModule.useSignalState(function(p5)
 			-- upvalues: DisplayModule (upval)
 			return DisplayModule.GetDisplayStore(p5).getViewportSize(p5)
 		end)
-		local UseSignalStateResult2 = SignalsReactModule.useSignalState(function(p5) --[[ Line: 106 ]]
+		local UseSignalStateResult2 = SignalsReactModule.useSignalState(function(p5)
 			-- upvalues: DisplayModule (upval)
 			return DisplayModule.GetDisplayStore(p5).getTopBarHeight(p5)
 		end)
-		local UseSignalStateResult3 = if LuaAppUseViewportBoundsInsetFix then nil else SignalsReactModule.useSignalState(function(p5) --[[ Line: 111 ]]
+		local UseSignalStateResult3 = if LuaAppUseViewportBoundsInsetFix then nil else SignalsReactModule.useSignalState(function(p5)
 			-- upvalues: DisplayModule (upval)
 			return DisplayModule.GetDisplayStore(p5).getGuiInset(p5)
 		end)
-		UseSignalStateResult = ReactModule.useMemo(function() --[[ Line: 116 ]]
+		UseSignalStateResult = ReactModule.useMemo(function()
 			-- upvalues: UseSignalStateResult2 (copy), UseSignalStateResult1 (copy), LuaAppUseViewportBoundsInsetFix (upval), p2 (copy), UseSignalStateResult3 (copy), FFlagUnifyShortcutBarFixImpressions (upval), Y (copy)
 			return {
 				min = Vector2.new(0, UseSignalStateResult2),
@@ -93,16 +93,16 @@ return function(p1, p2, p3, p4) --[[ Line: 70 ]]
 	end
 	local UseClipAncestorBoundsModuleResult = if FFlagLuaAppRespectClipAncestorImpressions then UseClipAncestorBoundsModule(if p3 then p1 else nil) else nil
 	local UseStateResult, UseStateResult2 = ReactModule.useState(config)
-	local UseResult = if LuaAppFixFrameBoundsImpressions then ReactModule.useCallback(function(p5) --[[ Line: 145 ]]
+	local UseResult = if LuaAppFixFrameBoundsImpressions then ReactModule.useCallback(function(p5)
 		-- upvalues: UseStateResult2 (copy)
-		UseStateResult2(function(p6) --[[ Line: 146 ]]
+		UseStateResult2(function(p6)
 			-- upvalues: p5 (copy)
 			local IsMaxMatch: boolean = p6.min == p5.min and p6.max == p5.max
 			
 			return if IsMaxMatch then p6 else p5
 		end)
 	end, {}) else UseStateResult2
-	ReactModule.useEffect(function() --[[ Line: 156 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), LuaAppFixFrameBoundsImpressions (upval), LuaAppThrottleViewportBoundsScreenSize (upval), UseResult (copy), FFlagLuaAppRespectClipAncestorImpressions (upval), IntersectBoundsModule (upval), UseSignalStateResult (ref), calculateClampedViewportBounds (upval), FIntLuaAppUpdateImpressionsViewportBoundsPositionThreshold (upval), FIntLuaAppViewportBoundsScreenSizeThreshold (upval)
 		local List = {}
 		local Current = if p1 then p1.current else nil
@@ -116,7 +116,7 @@ return function(p1, p2, p3, p4) --[[ Line: 70 ]]
 				min = AbsolutePosition,
 				max = AbsolutePosition + AbsoluteSize
 			}, UseSignalStateResult) else calculateClampedViewportBounds(AbsolutePosition, AbsoluteSize, UseSignalStateResult))
-			table.insert(List, Current:GetPropertyChangedSignal("AbsolutePosition"):Connect(function() --[[ Line: 188 ]]
+			table.insert(List, Current:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
 				-- upvalues: AbsolutePosition (ref), Current (ref), LuaAppFixFrameBoundsImpressions (upval), FIntLuaAppUpdateImpressionsViewportBoundsPositionThreshold (upval), AbsolutePosition1 (ref), UseResult (upval), FFlagLuaAppRespectClipAncestorImpressions (upval), IntersectBoundsModule (upval), AbsoluteSize (ref), UseSignalStateResult (upval), calculateClampedViewportBounds (upval)
 				AbsolutePosition = Current.AbsolutePosition
 				
@@ -131,7 +131,7 @@ return function(p1, p2, p3, p4) --[[ Line: 70 ]]
 					max = AbsolutePosition + AbsoluteSize
 				}, UseSignalStateResult) else calculateClampedViewportBounds(AbsolutePosition, AbsoluteSize, UseSignalStateResult))
 			end))
-			table.insert(List, Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 216 ]]
+			table.insert(List, Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: AbsoluteSize (ref), Current (ref), LuaAppThrottleViewportBoundsScreenSize (upval), FIntLuaAppViewportBoundsScreenSizeThreshold (upval), AbsoluteSize1 (ref), UseResult (upval), FFlagLuaAppRespectClipAncestorImpressions (upval), IntersectBoundsModule (upval), AbsolutePosition (ref), UseSignalStateResult (upval), calculateClampedViewportBounds (upval)
 				AbsoluteSize = Current.AbsoluteSize
 				
@@ -149,7 +149,7 @@ return function(p1, p2, p3, p4) --[[ Line: 70 ]]
 		else
 			UseResult(UseSignalStateResult)
 		end
-		return function() --[[ Line: 240 ]]
+		return function()
 			-- upvalues: List (copy)
 			for _, Connection in List do
 				Connection:Disconnect()
@@ -160,7 +160,7 @@ return function(p1, p2, p3, p4) --[[ Line: 70 ]]
 		UseSignalStateResult,
 		if FFlagLuaAppRespectClipAncestorImpressions then UseResult else nil
 	})
-	local UseMemoResult = if FFlagLuaAppRespectClipAncestorImpressions then ReactModule.useMemo(function() --[[ Line: 254 ]]
+	local UseMemoResult = if FFlagLuaAppRespectClipAncestorImpressions then ReactModule.useMemo(function()
 		-- upvalues: UseClipAncestorBoundsModuleResult (copy), IntersectBoundsModule (upval), UseStateResult (copy)
 		return if UseClipAncestorBoundsModuleResult then IntersectBoundsModule(UseStateResult, UseClipAncestorBoundsModuleResult) else UseStateResult
 	end, { UseStateResult, UseClipAncestorBoundsModuleResult }) else UseStateResult

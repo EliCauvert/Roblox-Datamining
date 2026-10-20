@@ -2,7 +2,7 @@
 local _ = require(CorePackages.Workspace.Packages.ModerationCommon.Types)
 local _ = require(CorePackages.Workspace.Packages.VoiceChat.createVoiceRestrictionController)
 
-return function(p1) --[[ Line: 30 | Named "buildProactiveVoiceRestrictionDetail" ]]
+return function(p1)
 	local Settings = p1.settings
 	local FormatFunction = p1.format
 	local IsoDate = ""

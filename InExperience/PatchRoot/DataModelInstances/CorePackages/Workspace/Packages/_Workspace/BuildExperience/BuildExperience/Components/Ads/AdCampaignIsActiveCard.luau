@@ -10,7 +10,7 @@ local View = FoundationModule.View
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local InputSize = FoundationModule.Enums.InputSize
 
-return function(Frame) --[[ Line: 26 | Named "AdCampaignIsActiveCard" ]]
+return function(Frame)
 	-- upvalues: LocalizationStringsModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), Text (copy), Button (copy), InputSize (copy), ButtonVariant (copy)
 	local Variant = Frame.variant or "active"
 	local IsNotCampaignEndDateMatch: boolean = Frame.campaignStartDate ~= nil and (Frame.campaignStartDate ~= "" and (Frame.campaignEndDate ~= nil and Frame.campaignEndDate ~= ""))

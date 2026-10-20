@@ -8,7 +8,7 @@ local GetPriceStatusModule = require(AvatarExperienceInspectAndBuy.Utils.getPric
 local _ = require(AvatarExperienceInspectAndBuy.Enums.PriceStatus)
 local GetPriceInRobuxFunction = require(AvatarExperienceInspectAndBuy.Utils.itemDetailsUtils).getPriceInRobux
 
-return function(p1) --[[ Line: 47 | Named "buildBulkPurchaseAnalyticsPayload" ]]
+return function(p1)
 	-- upvalues: ItemTypeEnum (copy), ConvertAssetInfoToItemDataModule (copy), GetPriceStatusModule (copy), GetPriceInRobuxFunction (copy), ConvertBundleInfoToItemDataModule (copy)
 	local ItemId = p1.itemId
 	local CollectibleResellableInstances = p1.collectibleResellableInstances

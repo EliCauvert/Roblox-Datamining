@@ -3,14 +3,14 @@ local TextChannelWindow = script:FindFirstAncestor("TextChannelWindow")
 local FFlagExpChatUniverseChatPresetEnabledModule = require(TextChannelWindow.Flags.FFlagExpChatUniverseChatPresetEnabled)
 local LoggerModule = require(TextChannelWindow.Logger)
 
-local function _() --[[ Line: 20 | Named "getRBXGeneralChannel" ]]
+local function _()
 	-- upvalues: TextChatService (copy)
 	local RBXGeneral = TextChatService:FindFirstChild("RBXGeneral", true)
 	
 	return if RBXGeneral and RBXGeneral:IsA("TextChannel") then RBXGeneral else nil
 end
 
-return function(PresetId, TextChannel): string --[[ Line: 28 | Named "sendPreset" ]]
+return function(PresetId, TextChannel): string
 	-- upvalues: TextChatService (copy), FFlagExpChatUniverseChatPresetEnabledModule (copy), LoggerModule (copy)
 	local TextChannel1 = TextChannel
 	
@@ -19,7 +19,7 @@ return function(PresetId, TextChannel): string --[[ Line: 28 | Named "sendPreset
 		TextChannel1 = if RBXGeneral and RBXGeneral:IsA("TextChannel") then RBXGeneral else nil
 	end
 	if TextChannel1 then
-		local Success, Result = pcall(function() --[[ Line: 49 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: TextChannel1 (ref), PresetId (copy)
 			TextChannel1:SendPresetAsync(PresetId)
 		end)
@@ -34,7 +34,7 @@ return function(PresetId, TextChannel): string --[[ Line: 28 | Named "sendPreset
 	elseif not FFlagExpChatUniverseChatPresetEnabledModule then
 		return "NoChannel"
 	else
-		local Success1, Result1 = pcall(function() --[[ Line: 39 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: TextChatService (upval), PresetId (copy)
 			TextChatService:SendUniverseChatPresetAsync(PresetId)
 		end)

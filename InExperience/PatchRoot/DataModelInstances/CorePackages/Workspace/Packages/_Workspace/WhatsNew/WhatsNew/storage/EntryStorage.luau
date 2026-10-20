@@ -4,7 +4,7 @@ local AppStorageService = game:GetService("AppStorageService")
 local HttpService = game:GetService("HttpService")
 local NewResult = require(WhatsNew.Parent.AppCommonLib).Utils.AppStorageJsonCacheUtils.new(AppStorageService)
 
-local function _(p1, Key) --[[ Line: 34 | Named "getOrCreateStoredEntry" ]]
+local function _(p1, Key)
 	local v1 = p1[Key]
 	
 	if type(v1) ~= "table" then
@@ -14,18 +14,18 @@ local function _(p1, Key) --[[ Line: 34 | Named "getOrCreateStoredEntry" ]]
 	return v1
 end
 
-local _ = function() --[[ Line: 43 | Named "emptyDeviceData" ]]
+local _ = function()
 	return { entries = {} }
 end
 
-local _ = function(p1) --[[ Line: 49 | Named "normalizeDeviceData" ]]
+local _ = function(p1)
 	if type(p1.entries) ~= "table" then
 		p1.entries = {}
 	end
 	return p1
 end
 
-local function deepClone(Entries) --[[ Line: 56 ]]
+local function deepClone(Entries)
 	-- upvalues: deepClone (copy)
 	local t = {}
 	
@@ -41,14 +41,14 @@ local function deepClone(Entries) --[[ Line: 56 ]]
 	return t
 end
 
-local _ = function() --[[ Line: 70 | Named "readDeviceData" ]]
+local _ = function()
 	-- upvalues: NewResult (copy)
 	local WhatsNewEntriesCachedJsonForKey = NewResult:getCachedJsonForKey("WhatsNewEntries")
 	
 	return if type(WhatsNewEntriesCachedJsonForKey) == "table" then WhatsNewEntriesCachedJsonForKey else nil
 end
 
-local _ = function(p1) --[[ Line: 78 | Named "cloneStoredDeviceData" ]]
+local _ = function(p1)
 	-- upvalues: deepClone (copy)
 	local config = { entries = deepClone(p1.entries) }
 	
@@ -58,9 +58,9 @@ local _ = function(p1) --[[ Line: 78 | Named "cloneStoredDeviceData" ]]
 	return config
 end
 
-local function writeDeviceData(Input): boolean --[[ Line: 84 ]]
+local function writeDeviceData(Input): boolean
 	-- upvalues: HttpService (copy), AppStorageService (copy), NewResult (copy)
-	local Success, Result = pcall(function() --[[ Line: 85 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: HttpService (upval), Input (copy)
 		return HttpService:JSONEncode(Input)
 	end)
@@ -70,7 +70,7 @@ local function writeDeviceData(Input): boolean --[[ Line: 84 ]]
 		
 		return false
 	end
-	local Success1, Result1 = pcall(function() --[[ Line: 93 ]]
+	local Success1, Result1 = pcall(function()
 		-- upvalues: AppStorageService (upval), Result (copy)
 		AppStorageService:SetItem("WhatsNewEntries", Result)
 		AppStorageService:Flush()
@@ -87,7 +87,7 @@ local function writeDeviceData(Input): boolean --[[ Line: 84 ]]
 	end
 end
 
-local _ = function() --[[ Line: 106 | Named "getDeviceData" ]]
+local _ = function()
 	-- upvalues: NewResult (copy), deepClone (copy)
 	local WhatsNewEntriesCachedJsonForKey = NewResult:getCachedJsonForKey("WhatsNewEntries")
 	local WhatsNewEntriesCachedJsonForKey1 = if type(WhatsNewEntriesCachedJsonForKey) == "table" then WhatsNewEntriesCachedJsonForKey else nil
@@ -105,7 +105,7 @@ local _ = function() --[[ Line: 106 | Named "getDeviceData" ]]
 	return config
 end
 
-local function updateDeviceData(Callback) --[[ Line: 115 ]]
+local function updateDeviceData(Callback)
 	-- upvalues: NewResult (copy), deepClone (copy), writeDeviceData (copy)
 	local WhatsNewEntriesCachedJsonForKey = NewResult:getCachedJsonForKey("WhatsNewEntries")
 	local WhatsNewEntriesCachedJsonForKey1 = if type(WhatsNewEntriesCachedJsonForKey) == "table" then WhatsNewEntriesCachedJsonForKey else nil
@@ -135,7 +135,7 @@ local function updateDeviceData(Callback) --[[ Line: 115 ]]
 	writeDeviceData(CallbackResult)
 end
 
-local function toSnapshot(Entries) --[[ Line: 129 ]]
+local function toSnapshot(Entries)
 	local t = {}
 	
 	if type(Entries) ~= "table" then
@@ -151,16 +151,16 @@ end
 
 return {
 	STORAGE_KEY = "WhatsNewEntries",
-	clearJsonCacheForTests = function() --[[ Line: 150 ]]
+	clearJsonCacheForTests = function()
 		-- upvalues: NewResult (copy)
 		NewResult._jsonDecodeCache = {}
 	end,
-	clearForTests = function() --[[ Line: 153 ]]
+	clearForTests = function()
 		-- upvalues: writeDeviceData (copy), NewResult (copy)
 		writeDeviceData({ entries = {} })
 		NewResult._jsonDecodeCache = {}
 	end,
-	getEntries = function() --[[ Line: 157 ]]
+	getEntries = function()
 		-- upvalues: NewResult (copy), deepClone (copy), toSnapshot (copy)
 		local WhatsNewEntriesCachedJsonForKey = NewResult:getCachedJsonForKey("WhatsNewEntries")
 		local WhatsNewEntriesCachedJsonForKey1 = if type(WhatsNewEntriesCachedJsonForKey) == "table" then WhatsNewEntriesCachedJsonForKey else nil
@@ -180,9 +180,9 @@ return {
 		end
 		return (toSnapshot(config.entries))
 	end,
-	markSeen = function(p1, Seen) --[[ Line: 162 ]]
+	markSeen = function(p1, Seen)
 		-- upvalues: updateDeviceData (copy)
-		updateDeviceData(function(p2) --[[ Line: 163 ]]
+		updateDeviceData(function(p2)
 			-- upvalues: p1 (copy), Seen (copy)
 			local Entries = p2.entries
 			local Entry = Entries[p1]

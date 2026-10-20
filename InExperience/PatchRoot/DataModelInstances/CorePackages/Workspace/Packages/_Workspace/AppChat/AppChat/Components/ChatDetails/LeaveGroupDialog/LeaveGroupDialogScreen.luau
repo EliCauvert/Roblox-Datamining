@@ -7,14 +7,14 @@ local LoggerModule = require(script.Parent.Logger)
 local LeaveGroupDialogScreen = RoactModule.PureComponent:extend("LeaveGroupDialogScreen")
 LeaveGroupDialogScreen.defaultProps = { navigation = nil }
 
-function LeaveGroupDialogScreen.init(p1) --[[ Line: 17 ]]
+function LeaveGroupDialogScreen.init(p1)
 	-- upvalues: GetFFlagAppChatEnableRootedNavigationModule (copy), LoggerModule (copy), EnumScreensModule (copy)
-	function p1.onLeaveGroupDialogClose() --[[ Line: 18 ]]
+	function p1.onLeaveGroupDialogClose()
 		-- upvalues: p1 (copy)
 		p1.props.navigation.goBack()
 	end
 	
-	function p1.onLeaveGroupSuccess() --[[ Line: 22 ]]
+	function p1.onLeaveGroupSuccess()
 		-- upvalues: p1 (copy), GetFFlagAppChatEnableRootedNavigationModule (upval), LoggerModule (upval), EnumScreensModule (upval)
 		local Navigation = p1.props.navigation
 		
@@ -43,7 +43,7 @@ function LeaveGroupDialogScreen.init(p1) --[[ Line: 17 ]]
 	end
 end
 
-function LeaveGroupDialogScreen.render(p1) --[[ Line: 46 ]]
+function LeaveGroupDialogScreen.render(p1)
 	-- upvalues: LoggerModule (copy), GetFFlagAppChatEnableRootedNavigationModule (copy), RoactModule (copy), LeaveGroupDialogContainerModule (copy)
 	local Navigation = p1.props.navigation
 	assert(type(Navigation) ~= "nil", "LeaveGroupDialogScreen should be wrapped with Roact Navigation")
@@ -63,7 +63,7 @@ function LeaveGroupDialogScreen.render(p1) --[[ Line: 46 ]]
 	end
 end
 
-function LeaveGroupDialogScreen:didMount() --[[ Line: 66 ]]
+function LeaveGroupDialogScreen:didMount()
 	-- upvalues: LoggerModule (copy)
 	LoggerModule:info("{screen} mounted")
 end

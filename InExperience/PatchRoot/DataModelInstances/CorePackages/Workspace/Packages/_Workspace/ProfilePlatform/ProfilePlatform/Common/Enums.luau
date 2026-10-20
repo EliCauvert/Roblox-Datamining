@@ -14,7 +14,7 @@ local FFlagJoinabilityCTARefactor = require(Parent.SharedFlags).FFlagJoinability
 local UserCtaCommonModule = require(Parent.UserCtaCommon)
 local UserCtaAction = if FFlagUseUserCtaCommonEnums then UserCtaCommonModule.Enums.UserCtaAction else nil
 
-local function buildSharedProfileActions() --[[ Line: 174 ]]
+local function buildSharedProfileActions()
 	-- upvalues: UserCtaAction (copy), FFlagFriendsCallingClientGateDEV (copy), FFlagProfilePlatformEnableEditAppearanceMenuModule (copy), FFlagProfilePlatformEditBackgroundMenuItemModule (copy), FFlagProfilePlatformEnableCurrencyTransfer (copy), FFlagProfilePlatformEnableTradeItemsModule (copy), FFlagJoinabilityCTARefactor (copy)
 	local Copy = table.clone(UserCtaAction)
 	Copy.Call = if FFlagFriendsCallingClientGateDEV then UserCtaAction.Call else ""

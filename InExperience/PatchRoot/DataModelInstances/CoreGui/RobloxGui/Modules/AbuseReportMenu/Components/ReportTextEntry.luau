@@ -5,7 +5,7 @@ local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local UseStyleFunction = require(CorePackages.Packages.UIBlox).Core.Style.useStyle
 
-return function(p1) --[[ Line: 14 | Named "ReportTextEntry" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseStyleResult = UseStyleFunction()
 	local BodyFont = UseStyleResult.Font.Body.Font
@@ -47,10 +47,10 @@ return function(p1) --[[ Line: 14 | Named "ReportTextEntry" ]]
 			TextWrapped = true,
 			ClearTextOnFocus = false,
 			OverlayNativeInput = true,
-			[ReactModule.Event.FocusLost] = function() --[[ Line: 60 ]] end,
-			[ReactModule.Event.Focused] = function() --[[ Line: 61 ]] end,
-			[ReactModule.Change.AbsoluteSize] = function() --[[ Line: 62 ]] end,
-			[ReactModule.Change.Text] = function(p2) --[[ Line: 63 ]]
+			[ReactModule.Event.FocusLost] = function() end,
+			[ReactModule.Event.Focused] = function() end,
+			[ReactModule.Change.AbsoluteSize] = function() end,
+			[ReactModule.Change.Text] = function(p2)
 				-- upvalues: p1 (copy)
 				if p1.text ~= p2.Text then
 					p1.onUpdate(p2.Text)

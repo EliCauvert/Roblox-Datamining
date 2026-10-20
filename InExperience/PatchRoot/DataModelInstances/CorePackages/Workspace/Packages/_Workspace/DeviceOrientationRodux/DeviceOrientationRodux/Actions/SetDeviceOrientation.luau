@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("DeviceOrientationRodux").Parent.Rodux).makeActionCreator(script.Name, function(DeviceOrientation) --[[ Line: 5 ]]
+﻿return require(script:FindFirstAncestor("DeviceOrientationRodux").Parent.Rodux).makeActionCreator(script.Name, function(DeviceOrientation)
 	return { deviceOrientation = DeviceOrientation }
 end)

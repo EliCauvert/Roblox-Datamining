@@ -14,7 +14,7 @@ local config = {
 	size = require(Foundation.Enums.InputSize).Large
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 38 | Named "ChatTextArea" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseTextInputVariantsModule (copy), ReactModule (copy), InputFieldModule (copy), WithCommonPropsModule (copy), ChatInternalTextInputModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
@@ -27,7 +27,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 38 |
 		hasError = WithDefaultsModuleResult.hasError,
 		isDisabled = WithDefaultsModuleResult.leadingElement == nil and WithDefaultsModuleResult.trailingElement == nil and WithDefaultsModuleResult.isDisabled,
 		isRequired = WithDefaultsModuleResult.isRequired,
-		input = function(Ref) --[[ Line: 55 ]]
+		input = function(Ref)
 			-- upvalues: ReactModule (upval), ChatInternalTextInputModule (upval), WithDefaultsModuleResult (copy), UseTokensModuleResult (copy), UseTextInputVariantsModuleResult (copy)
 			return ReactModule.createElement(ChatInternalTextInputModule, {
 				alwaysMultiLine = true,

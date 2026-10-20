@@ -9,7 +9,7 @@ local View = FoundationModule.View
 local ChipSize = FoundationModule.Enums.ChipSize
 local ChipVariant = FoundationModule.Enums.ChipVariant
 
-return ReactModule.memo(function(Frame) --[[ Line: 27 | Named "ChatResourceAttachmentList" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: FFlagBuildExperienceLibrary (copy), ReactModule (copy), Chip (copy), ChipSize (copy), FoundationModule (copy), ChipVariant (copy), View (copy)
 	local Elements = {}
 	local TestId = Frame.testId or "ChatResourceAttachmentList"
@@ -19,7 +19,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 27 | Named "ChatResourceAttac
 		local OnActivateAttachmentFunction = Frame.onActivateAttachment
 		Elements[`Attachment-{LayoutOrder}`] = ReactModule.createElement(Chip, {
 			LayoutOrder = LayoutOrder,
-			onActivated = if NoOnRemove then nil else function() --[[ Line: 41 ]]
+			onActivated = if NoOnRemove then nil else function()
 				-- upvalues: OnActivateAttachmentFunction (copy), LayoutOrder (copy), OnRemoveFunction (copy)
 				if OnActivateAttachmentFunction ~= nil then
 					OnActivateAttachmentFunction(LayoutOrder)
@@ -35,7 +35,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 27 | Named "ChatResourceAttac
 			text = if attachment.type == "resource_link" then attachment.name else attachment.resource.uri,
 			trailing = if OnRemoveFunction == nil then nil elseif OnActivateAttachmentFunction == nil then FoundationModule.Enums.IconName.X else {
 				iconName = FoundationModule.Enums.IconName.X,
-				onActivated = function() --[[ Line: 55 ]]
+				onActivated = function()
 					-- upvalues: OnRemoveFunction (copy), LayoutOrder (copy)
 					OnRemoveFunction(LayoutOrder)
 				end

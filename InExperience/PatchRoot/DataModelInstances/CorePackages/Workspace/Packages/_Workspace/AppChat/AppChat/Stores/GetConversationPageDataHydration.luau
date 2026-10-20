@@ -8,19 +8,19 @@ local GetConversationStoreModule = require(AppChat.Stores.GetConversationStore)
 local CreateDataCacheFunction = DataHydrationModule.createDataCache
 local CreateDataResolverFunction = DataHydrationModule.createDataResolver
 
-local function _(p1) --[[ Line: 28 | Named "getPageId" ]]
+local function _(p1)
 	return if p1 == nil or p1 == "" then "__initial__" else p1
 end
 
-local _ = function(p1) --[[ Line: 32 | Named "getCursorFromPageId" ]]
+local _ = function(p1)
 	return if p1 == "__initial__" then nil else p1
 end
 
-local _ = function(p1): boolean --[[ Line: 36 | Named "isInitialCursor" ]]
+local _ = function(p1): boolean
 	return p1 == nil or p1 == ""
 end
 
-return ((function() --[[ Line: 40 | Named "createConversationPageDataHydrationStore" ]]
+return ((function()
 	-- upvalues: CreateDataCacheFunction (copy), GetConversationStoreModule (copy), CreateDataResolverFunction (copy), NewResult (copy), IngestConversationListPageModule (copy), AppChatNetworkingModule (copy)
 	local DataCache = CreateDataCacheFunction(60)
 	local ConversationStoreModule = GetConversationStoreModule(false)
@@ -29,16 +29,16 @@ return ((function() --[[ Line: 40 | Named "createConversationPageDataHydrationSt
 		queueProcessDelaySec = 0,
 		replaceItems = true,
 		cache = DataCache,
-		logError = function(p1) --[[ Line: 48 ]]
+		logError = function(p1)
 			-- upvalues: NewResult (upval), IngestConversationListPageModule (upval), ConversationStoreModule (copy)
 			NewResult:warning(`Failed to fetch AppChat conversation list page: {tostring(p1)}`)
 			IngestConversationListPageModule.ingestFailure(ConversationStoreModule, p1)
 		end,
-		fetchFn = function(p1) --[[ Line: 52 ]]
+		fetchFn = function(p1)
 			-- upvalues: AppChatNetworkingModule (upval), IngestConversationListPageModule (upval), ConversationStoreModule (copy)
 			local Cursor = if p1 == "__initial__" then nil else p1
 			
-			return AppChatNetworkingModule.http.GetUserConversations(nil, Cursor):andThen(function(Result) --[[ Line: 55 ]]
+			return AppChatNetworkingModule.http.GetUserConversations(nil, Cursor):andThen(function(Result)
 				-- upvalues: IngestConversationListPageModule (upval), ConversationStoreModule (upval), Cursor (copy)
 				local IngestSuccessResult = IngestConversationListPageModule.ingestSuccess(ConversationStoreModule, Cursor, Result)
 				
@@ -51,7 +51,7 @@ return ((function() --[[ Line: 40 | Named "createConversationPageDataHydrationSt
 		end
 	})
 	
-	local function fetchPage(p1) --[[ Line: 67 ]]
+	local function fetchPage(p1)
 		-- upvalues: ConversationStoreModule (copy), DataResolver (copy), IngestConversationListPageModule (upval)
 		local Initial = if p1 == nil or p1 == "" then "__initial__" else p1
 		local ListStatus = ConversationStoreModule.getListStatus(false)
@@ -67,14 +67,14 @@ return ((function() --[[ Line: 40 | Named "createConversationPageDataHydrationSt
 		end
 	end
 	
-	ConversationStoreModule.addClearListener(function() --[[ Line: 83 ]]
+	ConversationStoreModule.addClearListener(function()
 		-- upvalues: DataResolver (copy)
 		DataResolver.clear()
 	end)
 	
 	return {
 		fetchPage = fetchPage,
-		clear = function() --[[ Line: 89 ]]
+		clear = function()
 			-- upvalues: DataResolver (copy)
 			DataResolver.clear()
 		end

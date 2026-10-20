@@ -1,13 +1,13 @@
 ﻿local ThunkTag = require(script.Parent.Symbol).named("ThunkTag")
 
 return {
-	middleware = function(p1) --[[ Line: 15 ]]
+	middleware = function(p1)
 		-- upvalues: ThunkTag (copy)
 		local P0 = p1 or {}
 		
-		return function(Callback, p2) --[[ Line: 18 ]]
+		return function(Callback, p2)
 			-- upvalues: ThunkTag (upval), P0 (ref)
-			return function(Callback1) --[[ Line: 23 ]]
+			return function(Callback1)
 				-- upvalues: ThunkTag (upval), P0 (upval), p2 (copy), Callback (copy)
 				if Callback1[ThunkTag] ~= true then
 					return Callback(Callback1)
@@ -26,7 +26,7 @@ return {
 			end
 		end
 	end,
-	new = function(p2, p3, Callback) --[[ Line: 51 ]]
+	new = function(p2, p3, Callback)
 		-- upvalues: ThunkTag (copy)
 		assert(typeof(p2) == "string", "Bad arg #1: name must be a string")
 		assert(p3 == nil or typeof(p3) == "table", "Bad arg #2: requiredServices must be a table or nil")
@@ -37,13 +37,13 @@ return {
 			type = p2,
 			requiredServices = p3 or {}
 		}, {
-			__call = function(_, ...) --[[ Line: 66 ]]
+			__call = function(_, ...)
 				-- upvalues: Callback (copy)
 				Callback(...)
 			end
 		}))
 	end,
-	test = function(Callback, p2, p3) --[[ Line: 72 ]]
+	test = function(Callback, p2, p3)
 		-- upvalues: ThunkTag (copy)
 		assert(typeof(Callback) == "table" and Callback[ThunkTag] == true, "Test Error - Bad arg #1: Must provide a valid thunk")
 		

@@ -1,6 +1,6 @@
 ﻿local Analytics = require(script:FindFirstAncestor("ExpChat").Parent.ExpChatShared).Analytics
 
-local function getCounterName(p1) --[[ Line: 5 ]]
+local function getCounterName(p1)
 	if p1.Status == Enum.TextChatMessageStatus.Success then
 		local TextChannel = p1.TextChannel
 		
@@ -13,7 +13,7 @@ local function getCounterName(p1) --[[ Line: 5 ]]
 	return if p1.Status == Enum.TextChatMessageStatus.Unknown then "expChatMessageReceivedUnknown" elseif p1.Status == Enum.TextChatMessageStatus.InvalidTextChannelPermissions then "expChatMessageReceivedInvalidTextChannelPermissions" elseif p1.Status == Enum.TextChatMessageStatus.InvalidPrivacySettings then "expChatMessageReceivedInvalidPrivacySettings" elseif p1.Status == Enum.TextChatMessageStatus.TextFilterFailed then "expChatMessageReceivedTextFilterFailed" elseif p1.Status == Enum.TextChatMessageStatus.Floodchecked then "expChatMessageReceivedFloodchecked" elseif p1.Status == Enum.TextChatMessageStatus.MessageTooLong then "expChatMessageReceivedMessageTooLong" elseif p1.Status == Enum.TextChatMessageStatus.ModerationTimeout then "expChatMessageReceivedModerationTimeout" else nil
 end
 
-return function(UserId, p1) --[[ Line: 47 ]]
+return function(UserId, p1)
 	-- upvalues: getCounterName (copy), Analytics (copy)
 	local TextSource = p1.TextSource
 	

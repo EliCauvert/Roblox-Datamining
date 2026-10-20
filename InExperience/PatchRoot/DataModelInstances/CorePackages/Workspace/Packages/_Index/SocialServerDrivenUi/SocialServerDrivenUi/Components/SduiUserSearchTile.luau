@@ -13,7 +13,7 @@ local FFlagSignalsNavP3Dispatch = SharedFlagsModule.FFlagSignalsNavP3Dispatch
 local FFlagLuaAppSearchPeopleUnifiedSchemaFields = SharedFlagsModule.FFlagLuaAppSearchPeopleUnifiedSchemaFields
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return ReactModule.memo(function(p1) --[[ Line: 43 | Named "SduiUserSearchTile" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseDispatchFunction (copy), FindAnalyticsFieldInAncestorsFunction (copy), ReactModule (copy), AnalyticsFunction (copy), CalculateRowPositionFieldsFunction (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), UserSearchTile (copy), FFlagLuaAppSearchPeopleUnifiedSchemaFields (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UserId = p1.userId
@@ -22,7 +22,7 @@ return ReactModule.memo(function(p1) --[[ Line: 43 | Named "SduiUserSearchTile" 
 	local CollectionId = FindAnalyticsFieldInAncestorsFunction("collectionId", p1.analyticsContext)
 	local CollectionPosition = FindAnalyticsFieldInAncestorsFunction("collectionPosition", p1.analyticsContext)
 	local AppPage1 = if p1.sduiContext then p1.sduiContext.appPage else nil
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 54 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: AnalyticsFunction (upval), UserSearchSessionId (copy), CollectionPosition (copy), CollectionId (copy), AppPage1 (copy)
 		return AnalyticsFunction({
 			infoForAllEvents = {
@@ -40,7 +40,7 @@ return ReactModule.memo(function(p1) --[[ Line: 43 | Named "SduiUserSearchTile" 
 	})
 	local CollectionData = if p1.analyticsContext and p1.analyticsContext.getCollectionData then p1.analyticsContext.getCollectionData() else nil
 	local RowPositionFields = CalculateRowPositionFieldsFunction(p1.index, if CollectionData then CollectionData.itemsPerRow else nil, if CollectionData then CollectionData.startRowNumber else nil)
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 74 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: AppPage (upval), UserSearchSessionId (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 		local config = {
 			name = AppPage.ProfilePlatform,

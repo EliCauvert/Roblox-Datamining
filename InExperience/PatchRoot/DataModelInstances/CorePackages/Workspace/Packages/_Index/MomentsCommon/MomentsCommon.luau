@@ -2,7 +2,7 @@
 
 return {
 	Analytics = require(script.Analytics),
-	canRenderNativeMoments = function(p1) --[[ Line: 119 ]]
+	canRenderNativeMoments = function(p1)
 		return p1.isTabEnabled or p1.isFlyoutEntryEnabled and p1.platformIntegrationEnabled
 	end,
 	Flags = {
@@ -54,7 +54,7 @@ return {
 		useFormFactor = require(script.Hooks.useFormFactor),
 		useImageLoadingState = require(script.Hooks.useImageLoadingState),
 		useIsMultiTouchActive = require(script.Hooks.useIsMultiTouchActive),
-		useMomentsGating = function(...) --[[ Line: 123 ]]
+		useMomentsGating = function(...)
 			return require(script.Hooks.useMomentsGating)(...)
 		end,
 		useScreenSize = require(script.Hooks.useScreenSize),

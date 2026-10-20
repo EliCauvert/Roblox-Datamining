@@ -4,7 +4,7 @@ local TimeUnitModule = require(script.Parent.TimeUnit)
 local DateTimeModule = require(script.Parent.DateTime)
 local GetFFlagSignUpBirthdayPickerRequireManualSelectionFunction = require(Parent.SharedFlags).GetFFlagSignUpBirthdayPickerRequireManualSelection
 
-local function getCurrentDate() --[[ Line: 217 ]]
+local function getCurrentDate()
 	-- upvalues: DateTimeModule (copy), TimeUnitModule (copy), ArgCheckModule (copy)
 	local Values = DateTimeModule.now():GetValues()
 	
@@ -15,7 +15,7 @@ local function getCurrentDate() --[[ Line: 217 ]]
 	}
 end
 
-local function getCurrentDateWithOffset(p1) --[[ Line: 231 ]]
+local function getCurrentDateWithOffset(p1)
 	-- upvalues: DateTimeModule (copy), TimeUnitModule (copy), ArgCheckModule (copy)
 	local Values = DateTimeModule.fromUnixTimestamp(DateTimeModule.now():GetUnixTimestamp() + p1):GetValues()
 	
@@ -28,7 +28,7 @@ end
 
 local t = {}
 
-local function generateCellDatas(p1, p2, p3) --[[ Line: 326 ]]
+local function generateCellDatas(p1, p2, p3)
 	local List = {}
 	
 	for i = p1, p2, p3 or 1 do
@@ -133,7 +133,7 @@ return {
 			[TimeUnitModule.Years] = 3
 		}
 	}, {
-		__index = function(_, _) --[[ Line: 118 ]]
+		__index = function(_, _)
 			-- upvalues: TimeUnitModule (copy)
 			return {
 				[TimeUnitModule.Years] = 1,
@@ -149,7 +149,7 @@ return {
 		["ko-kr"] = "Suffix",
 		["ja-jp"] = "Suffix"
 	}, {
-		__index = function(_, _): string --[[ Line: 140 ]]
+		__index = function(_, _): string
 			return "None"
 		end
 	}),
@@ -160,19 +160,19 @@ return {
 		["ko-kr"] = "Suffix",
 		["ja-jp"] = "Suffix"
 	}, {
-		__index = function(_, _): string --[[ Line: 152 ]]
+		__index = function(_, _): string
 			return "None"
 		end
 	}),
-	GetFormattedDayString = function(p4, p5, p6, String) --[[ Line: 157 ]]
+	GetFormattedDayString = function(p4, p5, p6, String)
 		-- upvalues: TimeUnitModule (copy)
 		return p4:GetFormattedString(TimeUnitModule.Days, p5, p6, String)
 	end,
-	GetFormattedYearString = function(p4, p5, p6, String) --[[ Line: 161 ]]
+	GetFormattedYearString = function(p4, p5, p6, String)
 		-- upvalues: TimeUnitModule (copy)
 		return p4:GetFormattedString(TimeUnitModule.Years, p5, p6, String)
 	end,
-	GetFormattedString = function(p4, Days, p5, Text, p6) --[[ Line: 165 ]]
+	GetFormattedString = function(p4, Days, p5, Text, p6)
 		-- upvalues: ArgCheckModule (copy), TimeUnitModule (copy)
 		ArgCheckModule.isNotNil(Days, "timeUnit passed into DateHelper:GetFormattedString")
 		ArgCheckModule.isNotNil(Text, "affix passed into DateHelper:GetFormattedString")
@@ -181,7 +181,7 @@ return {
 		
 		return if DayAffixTypeEntry == "Prefix" then Text .. String elseif DayAffixTypeEntry == "Suffix" then String .. Text else String
 	end,
-	GetFormattedFullString = function(p4, p5, p6, p7, p8, p9, p10, p11): string --[[ Line: 186 ]]
+	GetFormattedFullString = function(p4, p5, p6, p7, p8, p9, p10, p11): string
 		-- upvalues: ArgCheckModule (copy), TimeUnitModule (copy)
 		local String = ArgCheckModule.isType(p10, "string", "divider passed into DateHelper:GetFormattedFullString")
 		local String1 = ArgCheckModule.isType(p11, "string", "localeKey passed into DateHelper:GetFormattedFullString")
@@ -202,26 +202,26 @@ return {
 		end
 		return Text
 	end,
-	getCurrentDate = function(_) --[[ Line: 227 ]]
+	getCurrentDate = function(_)
 		-- upvalues: getCurrentDate (copy)
 		return (getCurrentDate())
 	end,
-	isLeapYear = function(_, p12: number): boolean --[[ Line: 242 ]]
+	isLeapYear = function(_, p12: number): boolean
 		return p12 % 4 == 0 and (p12 % 100 ~= 0 or p12 % 400 == 0)
 	end,
-	_isFutureDate = function(_, p12, p13, p14, p15): boolean --[[ Line: 248 ]]
+	_isFutureDate = function(_, p12, p13, p14, p15): boolean
 		-- upvalues: TimeUnitModule (copy)
 		return p12[TimeUnitModule.Years] < p15 or (p15 == p12[TimeUnitModule.Years] and p12[TimeUnitModule.Months] < p13 or p15 == p12[TimeUnitModule.Years] and p13 == p12[TimeUnitModule.Months] and p12[TimeUnitModule.Days] < p14)
 	end,
-	isFutureDate = function(p12, p13, p14, p15) --[[ Line: 264 ]]
+	isFutureDate = function(p12, p13, p14, p15)
 		-- upvalues: getCurrentDate (copy)
 		return p12:_isFutureDate(getCurrentDate(), p13, p14, p15)
 	end,
-	isRecentOrFutureDate = function(p12, p13, p14, p15) --[[ Line: 270 ]]
+	isRecentOrFutureDate = function(p12, p13, p14, p15)
 		-- upvalues: getCurrentDateWithOffset (copy)
 		return p12:_isFutureDate(getCurrentDateWithOffset(-172800), p13, p14, p15)
 	end,
-	getLastDayOfTheMonthInYear = function(p12, Key: number, p13) --[[ Line: 275 ]]
+	getLastDayOfTheMonthInYear = function(p12, Key: number, p13)
 		-- upvalues: t (copy)
 		if t[Key] and t[Key][p13] then
 			return t[Key][p13]
@@ -241,10 +241,10 @@ return {
 		
 		return v1
 	end,
-	isInvalidDayOfTheMonth = function(p12, p13, p14, p15): boolean --[[ Line: 297 ]]
+	isInvalidDayOfTheMonth = function(p12, p13, p14, p15): boolean
 		return p12:getLastDayOfTheMonthInYear(p13, p15) < p14
 	end,
-	isValidDate = function(p12, p13, p14, p15) --[[ Line: 309 ]]
+	isValidDate = function(p12, p13, p14, p15)
 		-- upvalues: GetFFlagSignUpBirthdayPickerRequireManualSelectionFunction (copy)
 		if GetFFlagSignUpBirthdayPickerRequireManualSelectionFunction() and (p13 == nil or p14 == nil or p15 == nil) then
 			return false, p12.ReasonDateInvalid.IsIncompleteDate
@@ -256,15 +256,15 @@ return {
 			return true, nil
 		end
 	end,
-	generateMonthCellDatas = function(_) --[[ Line: 338 ]]
+	generateMonthCellDatas = function(_)
 		-- upvalues: generateCellDatas (copy)
 		return (generateCellDatas(1, 12))
 	end,
-	generateDayCellDatas = function(_) --[[ Line: 342 ]]
+	generateDayCellDatas = function(_)
 		-- upvalues: generateCellDatas (copy)
 		return (generateCellDatas(1, 31))
 	end,
-	generateYearCellDatas = function(_, p12, p13: number) --[[ Line: 346 ]]
+	generateYearCellDatas = function(_, p12, p13: number)
 		-- upvalues: getCurrentDate (copy), TimeUnitModule (copy), generateCellDatas (copy)
 		local CurrentDate = getCurrentDate()
 		

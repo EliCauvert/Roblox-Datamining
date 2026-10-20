@@ -1,4 +1,4 @@
-﻿return function(Text: string) --[[ Line: 1 | Named "parseErrorReasonToEconomicRestriction" ]]
+﻿return function(Text: string)
 	local Parts = string.split(Text, "/")
 	local CountParts = #Parts
 	

@@ -5,7 +5,7 @@ local GetHasAmazonUserAgentModule = require(Parent.Utils.getHasAmazonUserAgent)
 local GetHasQuestUserAgentModule = require(Parent.Utils.getHasQuestUserAgent)
 local GetFFlagEnableLuobuInGameUpsellModule = require(Parent.Flags.GetFFlagEnableLuobuInGameUpsell)
 
-return function(p1) --[[ Line: 9 ]]
+return function(p1)
 	-- upvalues: GetHasAmazonUserAgentModule (copy), GetFFlagEnableLuobuInGameUpsellModule (copy), GetHasQuestUserAgentModule (copy), GetPaymentFromPlatformModule (copy)
 	return GetPaymentFromPlatformModule(p1, GetFFlagEnableLuobuInGameUpsellModule(), GetHasAmazonUserAgentModule(), (GetHasQuestUserAgentModule()))
 end

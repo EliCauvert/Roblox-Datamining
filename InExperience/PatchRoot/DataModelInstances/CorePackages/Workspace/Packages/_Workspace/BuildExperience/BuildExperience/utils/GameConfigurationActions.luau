@@ -17,14 +17,14 @@ local Debug = CreatorAgentChatModule.debug
 local Configure = UrlBuilder.fromString("create:dashboard/creations/experiences/{universeId}/configure")
 local ExperienceQuestionnaire = UrlBuilder.fromString("create:dashboard/creations/experiences/{universeId}/experience-questionnaire")
 
-local function saveAndPublishPlace(p1) --[[ Line: 51 ]]
+local function saveAndPublishPlace(p1)
 	-- upvalues: Debug (copy), CreatorAgentChatModule (copy), HttpClientModule (copy)
 	Debug.log("info", "GameConfigurationActions save_and_publish started", { placeId = p1.placeId })
 	
 	return HttpClientModule.asPromise((CreatorAgentChatModule.getCreatorAgentChatStore().sessionSaveAndPublish(p1)))
 end
 
-local function buildPublicAudiences(List) --[[ Line: 111 ]]
+local function buildPublicAudiences(List)
 	-- upvalues: UniverseActivationModule (copy)
 	local List1 = {}
 	
@@ -38,7 +38,7 @@ local function buildPublicAudiences(List) --[[ Line: 111 ]]
 	return List1
 end
 
-local function updateCachedAudience(UniverseId, Audiences, IsActive) --[[ Line: 125 ]]
+local function updateCachedAudience(UniverseId, Audiences, IsActive)
 	-- upvalues: UniverseConfigurationModule (copy)
 	local PrivacyTypeForAudiences = UniverseConfigurationModule.getPrivacyTypeForAudiences(Audiences)
 	local UniverseConfigurationStore = UniverseConfigurationModule.getUniverseConfigurationStore()
@@ -53,12 +53,12 @@ local function updateCachedAudience(UniverseId, Audiences, IsActive) --[[ Line: 
 	})
 end
 
-local function _(List): boolean --[[ Line: 139 | Named "hasPublicAudience" ]]
+local function _(List): boolean
 	-- upvalues: UniverseActivationModule (copy)
 	return List ~= nil and table.find(List, UniverseActivationModule.Audience.Public) ~= nil
 end
 
-local _ = function(p1, PublishResult) --[[ Line: 145 | Named "audienceFailure" ]]
+local _ = function(p1, PublishResult)
 	return {
 		stage = "set_audience",
 		errorMessage = if typeof(p1) == "table" and p1.errorMessage ~= nil then tostring(p1.errorMessage) else tostring(p1),
@@ -66,14 +66,14 @@ local _ = function(p1, PublishResult) --[[ Line: 145 | Named "audienceFailure" ]
 	}
 end
 
-local function setAudiencesForPublish(UniverseActivationStore, UniverseId, Audiences) --[[ Line: 155 ]]
+local function setAudiencesForPublish(UniverseActivationStore, UniverseId, Audiences)
 	-- upvalues: buildPublicAudiences (copy), PromiseModule (copy), BuildExperienceSetAudiencesMaxRetries (copy), BuildExperienceSetAudiencesRetryDelayMs (copy), updateCachedAudience (copy), UniverseActivationModule (copy), Debug (copy)
 	local PublicAudiences = buildPublicAudiences(Audiences)
 	
-	return PromiseModule.retryWithDelay(function() --[[ Line: 161 ]]
+	return PromiseModule.retryWithDelay(function()
 		-- upvalues: UniverseActivationStore (copy), UniverseId (copy), PublicAudiences (copy)
 		return UniverseActivationStore.setAudiences(UniverseId, PublicAudiences)
-	end, BuildExperienceSetAudiencesMaxRetries, BuildExperienceSetAudiencesRetryDelayMs / 1000):andThen(function(Result) --[[ Line: 164 ]]
+	end, BuildExperienceSetAudiencesMaxRetries, BuildExperienceSetAudiencesRetryDelayMs / 1000):andThen(function(Result)
 		-- upvalues: updateCachedAudience (upval), UniverseId (copy), UniverseActivationModule (upval), Debug (upval), PromiseModule (upval)
 		updateCachedAudience(UniverseId, Result.audiences, true)
 		local Audiences = Result.audiences
@@ -92,11 +92,11 @@ end
 
 return {
 	PublishFailureStage = { SetAudience = "set_audience" },
-	getCreatorHubConfigureUrl = function(UniverseId) --[[ Line: 28 ]]
+	getCreatorHubConfigureUrl = function(UniverseId)
 		-- upvalues: Configure (copy)
 		return Configure({ universeId = UniverseId })
 	end,
-	getCreatorHubAnalyticsUrl = function(UniverseId, p1, RangeType) --[[ Line: 37 ]]
+	getCreatorHubAnalyticsUrl = function(UniverseId, p1, RangeType)
 		-- upvalues: UrlBuilder (copy)
 		local AddQueryStringResult = UrlBuilder.fromString(`create:dashboard/creations/experiences/\{universeId}/{p1}`)({ universeId = UniverseId })
 		
@@ -105,11 +105,11 @@ return {
 		end
 		return AddQueryStringResult
 	end,
-	publishExperience = function(p1) --[[ Line: 179 ]]
+	publishExperience = function(p1)
 		-- upvalues: saveAndPublishPlace (copy), UniverseActivationModule (copy), setAudiencesForPublish (copy), PromiseModule (copy), Debug (copy), BuildExperienceSecondActivateAfterSetAudiences (copy), RehydrateGameMetadataModule (copy)
 		local Promise = nil
 		
-		local function publishPlace() --[[ Line: 189 ]]
+		local function publishPlace()
 			-- upvalues: saveAndPublishPlace (upval), p1 (copy)
 			return saveAndPublishPlace({
 				placeId = p1.placeId,
@@ -124,12 +124,12 @@ return {
 				placeId = p1.placeId,
 				title = p1.title,
 				description = p1.description
-			}):andThen(function(Result) --[[ Line: 201 ]]
+			}):andThen(function(Result)
 				-- upvalues: setAudiencesForPublish (upval), UniverseActivationStore (copy), p1 (copy), PromiseModule (upval)
-				return setAudiencesForPublish(UniverseActivationStore, p1.universeId, p1.audiences):andThen(function() --[[ Line: 202 ]]
+				return setAudiencesForPublish(UniverseActivationStore, p1.universeId, p1.audiences):andThen(function()
 					-- upvalues: Result (copy)
 					return Result
-				end, function(p2) --[[ Line: 204 ]]
+				end, function(p2)
 					-- upvalues: PromiseModule (upval), Result (copy)
 					return PromiseModule.reject({
 						stage = "set_audience",
@@ -142,32 +142,32 @@ return {
 			local UniverseActivationStore1 = UniverseActivationModule.getUniverseActivationStore()
 			Debug.log("info", "GameConfigurationActions publish activate-and-set-audience started", { universeId = p1.universeId, placeId = p1.placeId })
 			
-			local function _() --[[ Line: 214 | Named "setPublicAudience" ]]
+			local function _()
 				-- upvalues: setAudiencesForPublish (upval), UniverseActivationStore1 (copy), p1 (copy), BuildExperienceSecondActivateAfterSetAudiences (upval), Debug (upval)
-				return setAudiencesForPublish(UniverseActivationStore1, p1.universeId, p1.audiences):andThen(function() --[[ Line: 215 ]]
+				return setAudiencesForPublish(UniverseActivationStore1, p1.universeId, p1.audiences):andThen(function()
 					-- upvalues: BuildExperienceSecondActivateAfterSetAudiences (upval), UniverseActivationStore1 (upval), p1 (upval), Debug (upval)
-					return if BuildExperienceSecondActivateAfterSetAudiences then UniverseActivationStore1.activate(p1.universeId):catch(function(Err) --[[ Line: 217 ]]
+					return if BuildExperienceSecondActivateAfterSetAudiences then UniverseActivationStore1.activate(p1.universeId):catch(function(Err)
 						-- upvalues: Debug (upval), p1 (upval)
 						Debug.log("warn", "GameConfigurationActions second activate failed", { error = tostring(Err), universeId = p1.universeId })
 					end) else nil
 				end)
 			end
 			
-			Promise = UniverseActivationStore1.activate(p1.universeId):andThen(function() --[[ Line: 229 ]]
+			Promise = UniverseActivationStore1.activate(p1.universeId):andThen(function()
 				-- upvalues: publishPlace (copy)
 				return publishPlace()
-			end):andThen(function(Result) --[[ Line: 232 ]]
+			end):andThen(function(Result)
 				-- upvalues: setAudiencesForPublish (upval), UniverseActivationStore1 (copy), p1 (copy), BuildExperienceSecondActivateAfterSetAudiences (upval), Debug (upval), PromiseModule (upval)
-				return setAudiencesForPublish(UniverseActivationStore1, p1.universeId, p1.audiences):andThen(function() --[[ Line: 215 ]]
+				return setAudiencesForPublish(UniverseActivationStore1, p1.universeId, p1.audiences):andThen(function()
 					-- upvalues: BuildExperienceSecondActivateAfterSetAudiences (upval), UniverseActivationStore1 (upval), p1 (upval), Debug (upval)
-					return if BuildExperienceSecondActivateAfterSetAudiences then UniverseActivationStore1.activate(p1.universeId):catch(function(Err) --[[ Line: 217 ]]
+					return if BuildExperienceSecondActivateAfterSetAudiences then UniverseActivationStore1.activate(p1.universeId):catch(function(Err)
 						-- upvalues: Debug (upval), p1 (upval)
 						Debug.log("warn", "GameConfigurationActions second activate failed", { error = tostring(Err), universeId = p1.universeId })
 					end) else nil
-				end):andThen(function() --[[ Line: 233 ]]
+				end):andThen(function()
 					-- upvalues: Result (copy)
 					return Result
-				end, function(p2) --[[ Line: 235 ]]
+				end, function(p2)
 					-- upvalues: PromiseModule (upval), Result (copy)
 					return PromiseModule.reject({
 						stage = "set_audience",
@@ -177,38 +177,38 @@ return {
 				end)
 			end)
 		end
-		return Promise:finally(function() --[[ Line: 241 ]]
+		return Promise:finally(function()
 			-- upvalues: RehydrateGameMetadataModule (upval), p1 (copy), Promise (ref)
 			RehydrateGameMetadataModule(p1.universeId)
 			
 			return Promise
 		end)
 	end,
-	getExperienceQuestionnaireUrl = function(UniverseId) --[[ Line: 47 ]]
+	getExperienceQuestionnaireUrl = function(UniverseId)
 		-- upvalues: ExperienceQuestionnaire (copy)
 		return ExperienceQuestionnaire({ universeId = UniverseId })
 	end,
 	saveAndPublishPlace = saveAndPublishPlace,
-	archiveGame = function(UniverseId) --[[ Line: 59 ]]
+	archiveGame = function(UniverseId)
 		-- upvalues: Debug (copy), UniverseConfigurationModule (copy), UniverseSearchModule (copy), GetBuildExperienceRefreshStoreModule (copy)
 		Debug.log("info", "GameConfigurationActions archive started", { universeId = UniverseId })
 		
-		return UniverseConfigurationModule.getUniverseConfigurationStore().patchConfiguration(UniverseId, { isArchived = true }):andThen(function() --[[ Line: 65 ]]
+		return UniverseConfigurationModule.getUniverseConfigurationStore().patchConfiguration(UniverseId, { isArchived = true }):andThen(function()
 			-- upvalues: Debug (upval), UniverseId (copy), UniverseSearchModule (upval), GetBuildExperienceRefreshStoreModule (upval)
 			Debug.log("info", "GameConfigurationActions archive succeeded", { universeId = UniverseId })
 			UniverseSearchModule.getUniverseSearchStore().invalidateAll()
 			GetBuildExperienceRefreshStoreModule().bumpRefreshTick()
-		end):catch(function(Err) --[[ Line: 72 ]]
+		end):catch(function(Err)
 			-- upvalues: Debug (upval), UniverseId (copy)
 			Debug.log("warn", "GameConfigurationActions archive failed", { error = tostring(Err), universeId = UniverseId })
 		end)
 	end,
 	updateCachedAudience = updateCachedAudience,
-	updateTitleDescription = function(UniverseId, Name, Description) --[[ Line: 80 ]]
+	updateTitleDescription = function(UniverseId, Name, Description)
 		-- upvalues: Debug (copy), UniverseConfigurationModule (copy), UniverseSearchModule (copy), DataHydrationModule (copy)
 		Debug.log("info", "GameConfigurationActions title and description update started", { universeId = UniverseId })
 		
-		return UniverseConfigurationModule.getUniverseConfigurationStore().patchConfiguration(UniverseId, { name = Name, description = Description }):andThen(function(Result) --[[ Line: 90 ]]
+		return UniverseConfigurationModule.getUniverseConfigurationStore().patchConfiguration(UniverseId, { name = Name, description = Description }):andThen(function(Result)
 			-- upvalues: UniverseSearchModule (upval), UniverseId (copy), Name (copy), Description (copy), DataHydrationModule (upval), Debug (upval)
 			UniverseSearchModule.getUniverseSearchStore().updateSearchItem(UniverseId, { name = Name, description = Description })
 			local GameInfoStore = DataHydrationModule.Game.getGameInfoStore(false)

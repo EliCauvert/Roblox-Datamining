@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("AppChatInExperienceIXPLayer", "Social.ConnectTab")
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastString("AppChatInExperienceIXPLayer")
 end

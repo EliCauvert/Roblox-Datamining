@@ -2,7 +2,7 @@
 local StandardBreakpointsModule = require(Parent.CommonConfigs.StandardBreakpoints)
 local InputModeModule = require(Parent.InputMode)
 
-return function(Vector, Touch): boolean --[[ Line: 5 ]]
+return function(Vector, Touch): boolean
 	-- upvalues: StandardBreakpointsModule (copy), InputModeModule (copy)
 	local IsXBelow = Vector.X < Vector.Y
 	

@@ -9,7 +9,7 @@ local Url = require(Parent.Http).Url
 local ExperienceBannerImageAllowCustomDimensions = game:DefineFastFlag("ExperienceBannerImageAllowCustomDimensions", false)
 local ExperienceBannerImageDefaultFallback = game:DefineFastFlag("ExperienceBannerImageDefaultFallback", false)
 
-return function(p1, p2, p3, p4) --[[ Line: 37 | Named "useExperienceBannerImage" ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: GetGameMediaStoreFunction (copy), SignalsReactModule (copy), ExperienceBannerImageAllowCustomDimensions (copy), ReactModule (copy), DataStatus (copy), ExperienceBannerImageDefaultFallback (copy), GameMediaImageType (copy), Url (copy)
 	local AndFetchGameMedia = GetGameMediaStoreFunction(false).getAndFetchGameMedia(p1)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(AndFetchGameMedia.data)
@@ -17,7 +17,7 @@ return function(p1, p2, p3, p4) --[[ Line: 37 | Named "useExperienceBannerImage"
 	local P2 = ExperienceBannerImageAllowCustomDimensions and p3 or 768
 	local P3 = ExperienceBannerImageAllowCustomDimensions and p4 or 432
 	
-	return ReactModule.useMemo(function() --[[ Line: 54 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult1 (copy), DataStatus (upval), ExperienceBannerImageDefaultFallback (upval), UseSignalStateResult (copy), GameMediaImageType (upval), P2 (copy), P3 (copy), p2 (copy), Url (upval)
 		if UseSignalStateResult1 == DataStatus.NotReady then
 			return { status = "Loading", url = nil }

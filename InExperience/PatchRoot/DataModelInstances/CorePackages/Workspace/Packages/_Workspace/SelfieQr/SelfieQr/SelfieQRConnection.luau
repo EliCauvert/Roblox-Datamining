@@ -8,9 +8,9 @@ local FocusRoot = FocusNavigationUtilsModule.FocusRoot
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local UseEventConnectionFunction = require(Parent.ReactUtils).useEventConnection
 
-local function v8(p1) --[[ Line: 21 ]]
+local function v8(p1)
 	-- upvalues: ReactModule (copy), UseEventConnectionFunction (copy), AvatarCreationService (copy)
-	UseEventConnectionFunction(AvatarCreationService.OpenSelfieQRCode, (ReactModule.useCallback(function(Url, JobId) --[[ Line: 22 ]]
+	UseEventConnectionFunction(AvatarCreationService.OpenSelfieQRCode, (ReactModule.useCallback(function(Url, JobId)
 		-- upvalues: p1 (copy)
 		p1.displaySelfieQRCode(true)
 		p1.jobData.url = Url
@@ -20,7 +20,7 @@ local function v8(p1) --[[ Line: 21 ]]
 	return ReactModule.createElement(ReactModule.Fragment, {}, {})
 end
 
-return function(_) --[[ Line: 31 ]]
+return function(_)
 	-- upvalues: ReactModule (copy), SelfieQRCodeModule (copy), v8 (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local Current = ReactModule.useRef({ url = "", jobId = "" }).current

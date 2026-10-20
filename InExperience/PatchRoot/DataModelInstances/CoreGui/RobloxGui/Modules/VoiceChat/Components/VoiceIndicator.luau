@@ -24,20 +24,20 @@ VoiceIndicator.validateProps = TModule.strictInterface({
 })
 VoiceIndicator.defaultProps = {}
 
-function VoiceIndicator:getIcon(Text): string --[[ Line: 47 ]]
+function VoiceIndicator:getIcon(Text): string
 	return "rbxasset://textures/ui/VoiceChat/" .. Text .. ".png"
 end
 
-function VoiceIndicator.init(p1) --[[ Line: 51 ]]
+function VoiceIndicator.init(p1)
 	-- upvalues: RoactModule (copy), HttpService (copy), RunService (copy), ConstantsModule (copy), Default (copy)
 	p1.level, p1.updateLevel = RoactModule.createBinding(0)
 	p1.voiceState, p1.updateVoiceState = RoactModule.createBinding(p1.props.voiceState)
 	p1.renderStepName = HttpService:GenerateGUID()
-	RunService:BindToRenderStep(p1.renderStepName, 1, function() --[[ Line: 58 ]]
+	RunService:BindToRenderStep(p1.renderStepName, 1, function()
 		-- upvalues: p1 (copy)
 		p1.updateLevel(math.random())
 	end)
-	p1.levelIcon = RoactModule.joinBindings({ p1.voiceState, p1.level }):map(function(Entry) --[[ Line: 62 ]]
+	p1.levelIcon = RoactModule.joinBindings({ p1.voiceState, p1.level }):map(function(Entry)
 		-- upvalues: ConstantsModule (upval), Default (upval), p1 (copy)
 		local Entry1 = Entry[1]
 		local Entry2: number = Entry[2]
@@ -46,7 +46,7 @@ function VoiceIndicator.init(p1) --[[ Line: 51 ]]
 	end)
 end
 
-function VoiceIndicator.renderWithSelectionCursor(p1, Callback) --[[ Line: 82 ]]
+function VoiceIndicator.renderWithSelectionCursor(p1, Callback)
 	-- upvalues: ConstantsModule (copy), ReactIsModule (copy), RoactModule (copy), CursorKind (copy)
 	local IsVoiceStateMatch: boolean = p1.props.voiceState == ConstantsModule.VOICE_STATE.ERROR or p1.props.voiceState == ConstantsModule.VOICE_STATE.HIDDEN
 	
@@ -56,7 +56,7 @@ function VoiceIndicator.renderWithSelectionCursor(p1, Callback) --[[ Line: 82 ]]
 	local MapResult = if p1.props.voiceState == ConstantsModule.VOICE_STATE.LOCAL_MUTED then 0.5 else 0
 	
 	if p1.props.iconTransparency then
-		MapResult = if ReactIsModule.isBinding(p1.props.iconTransparency) then p1.props.iconTransparency:map(function(p2: number): number --[[ Line: 94 ]]
+		MapResult = if ReactIsModule.isBinding(p1.props.iconTransparency) then p1.props.iconTransparency:map(function(p2: number): number
 			-- upvalues: MapResult (copy)
 			return 1 - (1 - p2) * (1 - MapResult)
 		end) else 1 - (1 - p1.props.iconTransparency) * (1 - MapResult)
@@ -72,15 +72,15 @@ function VoiceIndicator.renderWithSelectionCursor(p1, Callback) --[[ Line: 82 ]]
 	})
 end
 
-function VoiceIndicator.render(p1) --[[ Line: 113 ]]
+function VoiceIndicator.render(p1)
 	-- upvalues: WithSelectionCursorProviderFunction (copy)
-	return WithSelectionCursorProviderFunction(function(p2) --[[ Line: 114 ]]
+	return WithSelectionCursorProviderFunction(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithSelectionCursor(p2)
 	end)
 end
 
-function VoiceIndicator.didUpdate(p1, p2, _) --[[ Line: 119 ]]
+function VoiceIndicator.didUpdate(p1, p2, _)
 	-- upvalues: v1 (copy)
 	v1:trace("Voice state updated to {} for ...{}", p1.props.voiceState, (string.sub(tostring(p1.props.userId), -4)))
 	
@@ -89,14 +89,14 @@ function VoiceIndicator.didUpdate(p1, p2, _) --[[ Line: 119 ]]
 	end
 end
 
-function VoiceIndicator.willUnmount(p1) --[[ Line: 126 ]]
+function VoiceIndicator.willUnmount(p1)
 	-- upvalues: RunService (copy)
-	pcall(function() --[[ Line: 127 ]]
+	pcall(function()
 		-- upvalues: RunService (upval), p1 (copy)
 		RunService:UnbindFromRenderStep(p1.renderStepName)
 	end)
 end
 
-return RoactRoduxModule.connect(function(p1, p2) --[[ Line: 132 | Named "mapStateToProps" ]]
+return RoactRoduxModule.connect(function(p1, p2)
 	return { voiceState = p1.voiceState[p2.userId] }
 end)(VoiceIndicator)

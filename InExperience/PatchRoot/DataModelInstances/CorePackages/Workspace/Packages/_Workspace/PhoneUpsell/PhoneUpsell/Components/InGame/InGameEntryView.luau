@@ -14,7 +14,7 @@ local MergePropsModule = require(PhoneUpsell.Utils.mergeProps)
 local LinkButton = UIBloxModule.App.Button.LinkButton
 local GetFFlagDisablePVUpsellDataConsentFunction = require(Parent.SharedFlags).GetFFlagDisablePVUpsellDataConsent
 
-local function noOp() --[[ Line: 53 ]] end
+local function noOp() end
 
 local config = {
 	isButtonDisabled = false,
@@ -27,7 +27,7 @@ local config = {
 	onExtraButtonClick = noOp
 }
 
-local function getButtonStackProps(Text, ButtonHeight, OnActivated, IsDisabled, Text1, OnActivated1, IsDisabled1) --[[ Line: 66 ]]
+local function getButtonStackProps(Text, ButtonHeight, OnActivated, IsDisabled, Text1, OnActivated1, IsDisabled1)
 	-- upvalues: ButtonType (copy)
 	local Buttons = {
 		{
@@ -53,7 +53,7 @@ local function getButtonStackProps(Text, ButtonHeight, OnActivated, IsDisabled, 
 	return { buttonHeight = ButtonHeight, buttons = Buttons }
 end
 
-return function(p1) --[[ Line: 102 | Named "InGameEntryView" ]]
+return function(p1)
 	-- upvalues: MergePropsModule (copy), config (copy), ReactModule (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), InteractiveAlert (copy), getButtonStackProps (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), GetFFlagDisablePVUpsellDataConsentFunction (copy), Checkbox (copy), LinkButton (copy)
 	local MergePropsModuleResult = MergePropsModule(config, p1)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
@@ -83,7 +83,7 @@ return function(p1) --[[ Line: 102 | Named "InGameEntryView" ]]
 		screenSize = MergePropsModuleResult.screenSize,
 		buttonStackInfo = getButtonStackProps(UseLocalizationResult.buttonKey, UseStyleResult.Tokens.Size.Size_1200, MergePropsModuleResult.onButtonClick, MergePropsModuleResult.isButtonDisabled, UseLocalizationResult.extraButtonKey, MergePropsModuleResult.onExtraButtonClick, MergePropsModuleResult.isExtraButtonDisabled),
 		onCloseClicked = MergePropsModuleResult.onClose,
-		middleContent = function() --[[ Line: 141 ]]
+		middleContent = function()
 			-- upvalues: ReactModule (upval), UseLocalizationResult (copy), BaseSize (copy), UseStyleResult (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -107,9 +107,9 @@ return function(p1) --[[ Line: 102 | Named "InGameEntryView" ]]
 				})
 			})
 		end,
-		footerContent = if GetFFlagDisablePVUpsellDataConsentFunction() then function() --[[ Line: 281 ]]
+		footerContent = if GetFFlagDisablePVUpsellDataConsentFunction() then function()
 			return nil
-		end else function() --[[ Line: 167 ]]
+		end else function()
 			-- upvalues: ReactModule (upval), UseStyleResult (copy), MergePropsModuleResult (copy), Size150 (copy), Checkbox (upval), UseStateResult2 (copy), UseStateResult (copy), UseLocalizationResult (copy), BaseSize (copy), RelativeSize (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), LinkButton (upval)
 			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,

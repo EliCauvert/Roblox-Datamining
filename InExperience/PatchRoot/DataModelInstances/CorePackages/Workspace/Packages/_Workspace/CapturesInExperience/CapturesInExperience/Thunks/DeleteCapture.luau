@@ -7,9 +7,9 @@ local FFlagUseRbxstorageInGalleryModule = require(Parent.Flags.FFlagUseRbxstorag
 local FFlagCapturesVideoDeleteAsyncModule = require(Parent.Flags.FFlagCapturesVideoDeleteAsync)
 local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 
-return function(p1) --[[ Line: 15 ]]
+return function(p1)
 	-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureService (copy), FFlagUseRbxstorageInGalleryModule (copy), CaptureTypeModule (copy), FFlagCapturesVideoDeleteAsyncModule (copy), RetrieveCapturesModule (copy)
-	return function(p2) --[[ Line: 16 ]]
+	return function(p2)
 		-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (upval), p1 (copy), CaptureService (upval), FFlagUseRbxstorageInGalleryModule (upval), CaptureTypeModule (upval), FFlagCapturesVideoDeleteAsyncModule (upval), RetrieveCapturesModule (upval)
 		if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then
 			CaptureService:DeleteCapturesAsync({ p1 })

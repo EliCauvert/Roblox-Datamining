@@ -90,7 +90,7 @@ local config = {
 	}
 }
 
-return function(_) --[[ Line: 140 | Named "getAllUserOffersMock" ]]
+return function(_)
 	-- upvalues: PromiseModule (copy), config (copy)
 	return PromiseModule.resolve(config)
 end

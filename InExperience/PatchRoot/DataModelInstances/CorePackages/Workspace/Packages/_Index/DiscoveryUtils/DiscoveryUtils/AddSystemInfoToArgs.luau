@@ -8,10 +8,10 @@ local config = {
 	[SystemInfoProtocol.InfoNames.CPU_CORE_COUNT] = "cpuCores"
 }
 
-return function(p1, p2) --[[ Line: 16 ]]
+return function(p1, p2)
 	-- upvalues: SystemInfoProtocol (copy), config (copy), ArgCheckModule (copy)
 	local ALLINFONAMES = if p2 then p2 else SystemInfoProtocol.ALL_INFO_NAMES
-	local Success, Result = pcall(function() --[[ Line: 19 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: SystemInfoProtocol (upval), ALLINFONAMES (copy)
 		return SystemInfoProtocol.default:getSystemInfo(ALLINFONAMES)
 	end)

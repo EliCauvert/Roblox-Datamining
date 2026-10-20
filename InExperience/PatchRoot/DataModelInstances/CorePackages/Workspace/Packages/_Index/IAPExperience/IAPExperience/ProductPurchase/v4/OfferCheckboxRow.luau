@@ -15,7 +15,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local FFlagEnableInExperienceOfferExpiryBadge = require(Parent.SharedFlags).FFlagEnableInExperienceOfferExpiryBadge
 local UpdateOfferExpiryBadgeBoxShape = game:DefineFastFlag("UpdateOfferExpiryBadgeBoxShape", false)
 
-return function(Frame: Frame) --[[ Line: 35 | Named "OfferCheckboxRow" ]]
+return function(Frame: Frame)
 	-- upvalues: UseTokensFunction (copy), UseRemainingTimeTextFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), Checkbox (copy), FoundationModule (copy), FFlagEnableInExperienceOfferExpiryBadge (copy), Badge (copy), BuilderIconsModule (copy), IconVariant (copy), IconPosition (copy), BadgeVariant (copy), UpdateOfferExpiryBadgeBoxShape (copy), BadgeShape (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseRemainingTimeTextResult = UseRemainingTimeTextFunction(Frame.expirationTimeUtc)

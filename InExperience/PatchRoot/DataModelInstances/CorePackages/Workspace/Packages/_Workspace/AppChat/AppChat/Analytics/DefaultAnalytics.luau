@@ -1,11 +1,11 @@
 ﻿return {
-	fireAnalyticsEvent = function(p1, p2) --[[ Line: 3 ]]
+	fireAnalyticsEvent = function(p1, p2)
 		return p1, p2
 	end,
-	updateInfoForAllEvents = function(p1) --[[ Line: 6 ]]
+	updateInfoForAllEvents = function(p1)
 		return p1
 	end,
-	getInfoForAllEvents = function() --[[ Line: 9 ]]
+	getInfoForAllEvents = function()
 		return { analyticsTag = "DefaultAnalytics" }
 	end
 }

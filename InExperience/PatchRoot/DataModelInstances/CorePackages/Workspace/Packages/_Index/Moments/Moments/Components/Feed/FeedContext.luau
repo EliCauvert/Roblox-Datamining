@@ -6,7 +6,7 @@ local Context = ReactModule.createContext(nil)
 
 return {
 	FeedContext = Context,
-	useFeed = function() --[[ Line: 64 ]]
+	useFeed = function()
 		-- upvalues: ReactModule (copy), Context (copy)
 		local UseContextResult = ReactModule.useContext(Context)
 		
@@ -15,7 +15,7 @@ return {
 		end
 		return UseContextResult
 	end,
-	useFeedOptional = function() --[[ Line: 76 ]]
+	useFeedOptional = function()
 		-- upvalues: ReactModule (copy), Context (copy)
 		return ReactModule.useContext(Context)
 	end

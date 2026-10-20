@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("UserLib").Parent.Rodux).makeActionCreator(script.Name, function() --[[ Line: 6 ]]
+﻿return require(script:FindFirstAncestor("UserLib").Parent.Rodux).makeActionCreator(script.Name, function()
 	return {}
 end)

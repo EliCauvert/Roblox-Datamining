@@ -9,11 +9,11 @@ local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
 local ReceivedPageConversationsModule = require(AppChat.Conversations.Actions.ReceivedPageConversations)
 local RequestPageConversationsModule = require(AppChat.Conversations.Actions.RequestPageConversations)
 
-return function(p1) --[[ Line: 21 ]]
+return function(p1)
 	-- upvalues: NewResult (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), FFlagAppChatConversationStoreModule (copy), RequestPageConversationsModule (copy), AppChatNetworkingModule (copy), ProcessConversationsModule (copy), ReceivedPageConversationsModule (copy)
 	NewResult:info("Fetching conversations by page with cursor {}", p1 or "nil")
 	
-	return function(p2) --[[ Line: 23 ]]
+	return function(p2)
 		-- upvalues: FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), p1 (copy), AppChatPerfTrackerModule (upval), FFlagAppChatConversationStoreModule (upval), RequestPageConversationsModule (upval), AppChatNetworkingModule (upval), ProcessConversationsModule (upval), ReceivedPageConversationsModule (upval), NewResult (upval)
 		if FFlagAppChatPerfTrackingModule and FFlagAppChatMessageTTIMilestonesModule and p1 == nil then
 			AppChatPerfTrackerModule.trackMilestone(AppChatPerfTrackerModule.Events.ChatLandingTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name)
@@ -23,7 +23,7 @@ return function(p1) --[[ Line: 21 ]]
 		if FFlagAppChatConversationStoreModule then
 			p2:dispatch(RequestPageConversationsModule())
 		end
-		return p2:dispatch(AppChatNetworkingModule.rodux.GetUserConversations.API(p1)):tap(function(p3) --[[ Line: 47 ]]
+		return p2:dispatch(AppChatNetworkingModule.rodux.GetUserConversations.API(p1)):tap(function(p3)
 			-- upvalues: p2 (copy), ProcessConversationsModule (upval), FFlagAppChatConversationStoreModule (upval), ReceivedPageConversationsModule (upval), FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), p1 (upval), AppChatPerfTrackerModule (upval)
 			p2:dispatch(ProcessConversationsModule(p3.responseBody.conversations))
 			
@@ -34,7 +34,7 @@ return function(p1) --[[ Line: 21 ]]
 				AppChatPerfTrackerModule.trackMilestone(AppChatPerfTrackerModule.Events.ChatLandingTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataReady.Name)
 				AppChatPerfTrackerModule.trackSubphase(AppChatPerfTrackerModule.Events.ChatLandingTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataReady.Name, AppChatPerfTrackerModule.Milestone.PrimaryDataReady.Subphase.ResponseReceived)
 			end
-		end):andThen(function(Result) --[[ Line: 65 ]]
+		end):andThen(function(Result)
 			-- upvalues: NewResult (upval), p1 (upval)
 			local ResponseBody = Result.responseBody
 			
@@ -47,7 +47,7 @@ return function(p1) --[[ Line: 21 ]]
 				
 				return p1, ""
 			end
-		end):catch(function(Err) --[[ Line: 75 ]]
+		end):catch(function(Err)
 			-- upvalues: FFlagAppChatConversationStoreModule (upval), p2 (copy), ReceivedPageConversationsModule (upval), NewResult (upval)
 			if FFlagAppChatConversationStoreModule then
 				p2:dispatch(ReceivedPageConversationsModule())

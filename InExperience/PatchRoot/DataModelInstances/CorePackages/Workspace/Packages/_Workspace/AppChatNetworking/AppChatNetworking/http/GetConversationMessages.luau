@@ -4,7 +4,7 @@ local CHATPLATFORMBASEURLModule = require(AppChatNetworking.url.CHAT_PLATFORM_BA
 local Default = require(AppChatNetworking.url.HttpRequest).default
 local GetFFlagEnableSocialCardsFunction = require(AppChatNetworking.Parent.SharedFlags).GetFFlagEnableSocialCards
 
-return function(p1, Input, Input1) --[[ Line: 12 ]]
+return function(p1, Input, Input1)
 	-- upvalues: Default (copy), HttpService (copy), GetFFlagEnableSocialCardsFunction (copy), CHATPLATFORMBASEURLModule (copy)
 	local Callback = p1 or Default
 	local ConversationName: string = `conversation_id={HttpService:UrlEncode(Input)}`

@@ -8,29 +8,29 @@ local _ = require(Parent.LuauPolyfill)
 local DashModule = require(Parent.Dash)
 
 return {
-	init = function(p1, FireVoteCountChanged, Store, RequestImpl, PlatformCloudStorageService) --[[ Line: 36 ]]
+	init = function(p1, FireVoteCountChanged, Store, RequestImpl, PlatformCloudStorageService)
 		p1.fireVoteCountChanged = FireVoteCountChanged
 		p1.store = Store
 		p1.requestImpl = RequestImpl
 		p1.platformCloudStorageService = PlatformCloudStorageService
 	end,
-	start = function(p1) --[[ Line: 48 ]]
+	start = function(p1)
 		-- upvalues: LoggerModule (copy)
-		p1.storeChangedConnection = p1.store.changed:connect(function(Value, p2) --[[ Line: 49 ]]
+		p1.storeChangedConnection = p1.store.changed:connect(function(Value, p2)
 			-- upvalues: p1 (copy), LoggerModule (upval)
 			local LocalUserGameVoteCounter = Value.LocalUserGameVoteCounter
 			
 			if p2.LocalUserGameVoteCounter ~= LocalUserGameVoteCounter and LocalUserGameVoteCounter.voteCountSinceAppStart > 0 then
-				p1:_checkPollster(LocalUserGameVoteCounter.lastUniverseId):catch(function(Err) --[[ Line: 57 ]]
+				p1:_checkPollster(LocalUserGameVoteCounter.lastUniverseId):catch(function(Err)
 					-- upvalues: LoggerModule (upval)
 					LoggerModule:warning(Err)
 				end)
 			end
 		end)
 	end,
-	_checkPollster = function(p1, LastUniverseId) --[[ Line: 64 ]]
+	_checkPollster = function(p1, LastUniverseId)
 		-- upvalues: PromiseModule (copy), DashModule (copy), GetUserVoteCountModule (copy), LoggerModule (copy)
-		return if p1.platformCloudStorageService and p1.platformCloudStorageService:IsUserDataAvailable() then PromiseModule.new(function() --[[ Line: 66 ]]
+		return if p1.platformCloudStorageService and p1.platformCloudStorageService:IsUserDataAvailable() then PromiseModule.new(function()
 			-- upvalues: p1 (copy), DashModule (upval), LastUniverseId (copy)
 			local Data = p1.platformCloudStorageService:GetUserDataAsync("UniversesVoted").data or {}
 			
@@ -39,7 +39,7 @@ return {
 				p1.platformCloudStorageService:SetUserDataAsync("UniversesVoted", { data = Data })
 			end
 			p1.fireVoteCountChanged(#Data)
-		end) else GetUserVoteCountModule(p1.requestImpl):andThen(function(Result) --[[ Line: 75 ]]
+		end) else GetUserVoteCountModule(p1.requestImpl):andThen(function(Result)
 			-- upvalues: LoggerModule (upval), p1 (copy)
 			if Result.responseBody == nil then
 				LoggerModule:warning("Response has no body.")
@@ -57,7 +57,7 @@ return {
 			end
 		end)
 	end,
-	stop = function(p1) --[[ Line: 93 ]]
+	stop = function(p1)
 		if p1.storeChangedConnection then
 			p1.storeChangedConnection:disconnect()
 			p1.storeChangedConnection = nil

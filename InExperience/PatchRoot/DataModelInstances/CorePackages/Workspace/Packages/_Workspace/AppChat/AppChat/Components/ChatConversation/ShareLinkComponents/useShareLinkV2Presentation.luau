@@ -9,10 +9,10 @@ local GetShareLinkV2PresentationModule = require(script.Parent.getShareLinkV2Pre
 local Signal = SignalsModule.createSignal(nil)
 local Signal1 = SignalsModule.createSignal(require(Parent.DataHydration).DataStatus.NotReady)
 
-return function(p1) --[[ Line: 18 | Named "useShareLinkV2Presentation" ]]
+return function(p1)
 	-- upvalues: GetShareLinkV2StoreModule (copy), ReactModule (copy), UseSignalStateFunction (copy), Signal (copy), Signal1 (copy), GetShareLinkV2PresentationModule (copy)
 	local ShareLinkV2StoreModule = GetShareLinkV2StoreModule(false)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 20 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), ShareLinkV2StoreModule (copy)
 		return if p1 then ShareLinkV2StoreModule.getAndFetchClassification(p1) else nil
 	end, { ShareLinkV2StoreModule, p1 or "" })

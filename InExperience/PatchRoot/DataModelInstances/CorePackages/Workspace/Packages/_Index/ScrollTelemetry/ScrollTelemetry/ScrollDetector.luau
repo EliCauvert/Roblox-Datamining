@@ -5,15 +5,15 @@ local FFlagLuaAppScrollDetectorLifecycleHardening = require(Parent.SharedFlags).
 game:DefineFastInt("ScrollDetectorTimeThresholdMillis", 300000)
 game:DefineFastInt("ScrollDetectorDelayMillis", 250)
 
-local function _() --[[ Line: 12 | Named "getDelaySeconds" ]]
+local function _()
 	return game:GetFastInt("ScrollDetectorDelayMillis") / 1000
 end
 
-local _ = function() --[[ Line: 16 | Named "getThresholdSeconds" ]]
+local _ = function()
 	return game:GetFastInt("ScrollDetectorTimeThresholdMillis") / 1000
 end
 
-return function(p1) --[[ Line: 27 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FFlagLuaAppScrollDetectorLifecycleHardening (copy), RunService (copy)
 	local UseRefResult = ReactModule.useRef(0)
 	local UseRefResult1 = ReactModule.useRef(0)
@@ -30,9 +30,9 @@ return function(p1) --[[ Line: 27 ]]
 	if FFlagLuaAppScrollDetectorLifecycleHardening then
 		local UseRefResult9 = ReactModule.useRef(p1.sendScrollEvent)
 		UseRefResult9.current = p1.sendScrollEvent
-		ReactModule.useEffect(function() --[[ Line: 51 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseRefResult9 (copy), UseRefResult4 (copy), p1 (copy), UseRefResult5 (copy), UseRefResult2 (copy), UseRefResult6 (copy), UseRefResult8 (copy), UseRefResult7 (copy), RunService (upval), UseRefResult3 (copy)
-			local function _(p2) --[[ Line: 52 ]]
+			local function _(p2)
 				-- upvalues: UseRefResult (upval), UseRefResult1 (upval), UseRefResult9 (upval), UseRefResult4 (upval)
 				local CurrentDelta = UseRefResult.current - UseRefResult1.current
 				
@@ -42,7 +42,7 @@ return function(p1) --[[ Line: 27 ]]
 				end
 			end
 			
-			local function v20() --[[ Line: 67 ]]
+			local function v20()
 				-- upvalues: p1 (upval), UseRefResult5 (upval), UseRefResult (upval), UseRefResult1 (upval), UseRefResult9 (upval), UseRefResult4 (upval), UseRefResult2 (upval), UseRefResult6 (upval), UseRefResult8 (upval)
 				if p1.scrollingFrameRef and p1.scrollingFrameRef.current then
 					local Current1 = nil
@@ -123,7 +123,7 @@ return function(p1) --[[ Line: 27 ]]
 				end
 			end
 			
-			local function v21() --[[ Line: 139 ]]
+			local function v21()
 				-- upvalues: UseRefResult2 (upval), UseRefResult4 (upval), UseRefResult5 (upval), UseRefResult1 (upval), UseRefResult (upval), UseRefResult6 (upval), UseRefResult7 (upval), RunService (upval), v20 (copy)
 				if not UseRefResult2.current then
 					UseRefResult4.current = time()
@@ -134,7 +134,7 @@ return function(p1) --[[ Line: 27 ]]
 					if UseRefResult7.current then
 						UseRefResult7.current()
 					end
-					UseRefResult2.current = RunService.Stepped:Connect(function() --[[ Line: 152 ]]
+					UseRefResult2.current = RunService.Stepped:Connect(function()
 						-- upvalues: v20 (upval)
 						v20()
 					end)
@@ -145,13 +145,13 @@ return function(p1) --[[ Line: 27 ]]
 			
 			if p1.scrollingFrameRef and p1.scrollingFrameRef.current and UseRefResult3.current ~= p1.scrollingFrameRef.current then
 				UseRefResult.current = if p1.scrollingFrameRef.current.ScrollingDirection == Enum.ScrollingDirection.Y then p1.scrollingFrameRef.current.CanvasPosition.Y else p1.scrollingFrameRef.current.CanvasPosition.X
-				Connection = p1.scrollingFrameRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ Line: 170 ]]
+				Connection = p1.scrollingFrameRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
 					-- upvalues: v21 (copy)
 					v21()
 				end)
 				UseRefResult3.current = p1.scrollingFrameRef.current
 			end
-			return function() --[[ Line: 177 ]]
+			return function()
 				-- upvalues: UseRefResult2 (upval), UseRefResult5 (upval), UseRefResult (upval), UseRefResult1 (upval), UseRefResult9 (upval), UseRefResult4 (upval), UseRefResult8 (upval), Connection (ref), p1 (upval), UseRefResult3 (upval)
 				if UseRefResult2.current then
 					local Current = UseRefResult5.current
@@ -179,7 +179,7 @@ return function(p1) --[[ Line: 27 ]]
 			end
 		end, { p1.scrollingFrameRef })
 	else
-		local function _(p2) --[[ Line: 201 ]]
+		local function _(p2)
 			-- upvalues: UseRefResult (copy), UseRefResult1 (copy), p1 (copy), UseRefResult4 (copy)
 			local CurrentDelta = UseRefResult.current - UseRefResult1.current
 			
@@ -189,7 +189,7 @@ return function(p1) --[[ Line: 27 ]]
 			end
 		end
 		
-		local function v17() --[[ Line: 212 ]]
+		local function v17()
 			-- upvalues: p1 (copy), UseRefResult5 (copy), UseRefResult (copy), UseRefResult1 (copy), UseRefResult4 (copy), UseRefResult2 (copy), UseRefResult6 (copy), UseRefResult8 (copy)
 			if p1.scrollingFrameRef and p1.scrollingFrameRef.current then
 				local Current1 = nil
@@ -270,7 +270,7 @@ return function(p1) --[[ Line: 27 ]]
 			end
 		end
 		
-		local function v18() --[[ Line: 284 ]]
+		local function v18()
 			-- upvalues: UseRefResult2 (copy), UseRefResult4 (copy), UseRefResult5 (copy), UseRefResult1 (copy), UseRefResult (copy), UseRefResult6 (copy), UseRefResult7 (copy), RunService (upval), v17 (copy)
 			if not UseRefResult2.current then
 				UseRefResult4.current = time()
@@ -281,26 +281,26 @@ return function(p1) --[[ Line: 27 ]]
 				if UseRefResult7.current then
 					UseRefResult7.current()
 				end
-				UseRefResult2.current = RunService.Stepped:Connect(function() --[[ Line: 297 ]]
+				UseRefResult2.current = RunService.Stepped:Connect(function()
 					-- upvalues: v17 (upval)
 					v17()
 				end)
 			end
 		end
 		
-		ReactModule.useEffect(function() --[[ Line: 303 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p1 (copy), UseRefResult3 (copy), UseRefResult (copy), v18 (copy), UseRefResult2 (copy), UseRefResult5 (copy), UseRefResult1 (copy), UseRefResult4 (copy), UseRefResult8 (copy)
 			local Connection = nil
 			
 			if p1.scrollingFrameRef and p1.scrollingFrameRef.current and UseRefResult3.current ~= p1.scrollingFrameRef.current then
 				UseRefResult.current = if p1.scrollingFrameRef.current.ScrollingDirection == Enum.ScrollingDirection.Y then p1.scrollingFrameRef.current.CanvasPosition.Y else p1.scrollingFrameRef.current.CanvasPosition.X
-				Connection = p1.scrollingFrameRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ Line: 316 ]]
+				Connection = p1.scrollingFrameRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
 					-- upvalues: v18 (upval)
 					v18()
 				end)
 				UseRefResult3.current = p1.scrollingFrameRef.current
 			end
-			return function() --[[ Line: 323 ]]
+			return function()
 				-- upvalues: UseRefResult2 (upval), UseRefResult5 (upval), UseRefResult (upval), UseRefResult1 (upval), p1 (upval), UseRefResult4 (upval), UseRefResult8 (upval), Connection (ref), UseRefResult3 (upval)
 				if UseRefResult2.current then
 					local Current = UseRefResult5.current

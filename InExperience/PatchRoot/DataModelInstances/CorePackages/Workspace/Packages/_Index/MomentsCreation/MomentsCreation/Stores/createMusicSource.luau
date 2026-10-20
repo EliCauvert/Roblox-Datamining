@@ -8,7 +8,7 @@ local FFlagMomentsCreationMusicSkipMetadataFetchModule = require(MomentsCreation
 local FFlagMomentsCreationAudioSearchV2SortTypeModule = require(MomentsCreation.Flags.FFlagMomentsCreationAudioSearchV2SortType)
 local ReportMusicSearchCountsFunction = require(Parent.MomentsCommon).Analytics.reportMusicSearchCounts
 
-local function formatMusic(AudioMetadataAsync) --[[ Line: 81 ]]
+local function formatMusic(AudioMetadataAsync)
 	-- upvalues: FFlagMomentsCreationSkipRecordingCodeFilterModule (copy)
 	local List = {}
 	
@@ -29,7 +29,7 @@ local function formatMusic(AudioMetadataAsync) --[[ Line: 81 ]]
 	return List
 end
 
-local function formatSearchResults(List) --[[ Line: 116 ]]
+local function formatSearchResults(List)
 	-- upvalues: DashModule (copy), ConstantsModule (copy)
 	local List1 = {}
 	local Count = 0
@@ -55,14 +55,14 @@ local function formatSearchResults(List) --[[ Line: 116 ]]
 	return List1, Count
 end
 
-return function(p1) --[[ Line: 147 | Named "createMusicSource" ]]
+return function(p1)
 	-- upvalues: FFlagMomentsCreationMusicSkipMetadataFetchModule (copy), FFlagMomentsCreationSkipRecordingCodeFilterModule (copy), formatSearchResults (copy), DashModule (copy), ConstantsModule (copy), formatMusic (copy), FFlagMomentsCreationAudioSearchV2SortTypeModule (copy), ReportMusicSearchCountsFunction (copy)
-	local function _() --[[ Line: 150 | Named "getAssetService" ]]
+	local function _()
 		-- upvalues: p1 (copy)
 		return p1 or game:GetService("AssetService")
 	end
 	
-	local function formatPage(AssetService, CurrentPage) --[[ Line: 155 ]]
+	local function formatPage(AssetService, CurrentPage)
 		-- upvalues: FFlagMomentsCreationMusicSkipMetadataFetchModule (upval), FFlagMomentsCreationSkipRecordingCodeFilterModule (upval), formatSearchResults (upval), DashModule (upval), ConstantsModule (upval), formatMusic (upval)
 		if FFlagMomentsCreationMusicSkipMetadataFetchModule and FFlagMomentsCreationSkipRecordingCodeFilterModule then
 			return formatSearchResults(CurrentPage)
@@ -80,7 +80,7 @@ return function(p1) --[[ Line: 147 | Named "createMusicSource" ]]
 	end
 	
 	return {
-		searchMusic = function(SearchKeyword, MinDuration) --[[ Line: 179 ]]
+		searchMusic = function(SearchKeyword, MinDuration)
 			-- upvalues: p1 (copy), FFlagMomentsCreationAudioSearchV2SortTypeModule (upval), formatPage (copy), ReportMusicSearchCountsFunction (upval)
 			local P2 = p1 or game:GetService("AssetService")
 			local AudioSearchParams = Instance.new("AudioSearchParams")
@@ -89,7 +89,7 @@ return function(p1) --[[ Line: 147 | Named "createMusicSource" ]]
 			AudioSearchParams.MinDuration = MinDuration
 			
 			if FFlagMomentsCreationAudioSearchV2SortTypeModule then
-				pcall(function() --[[ Line: 198 ]]
+				pcall(function()
 					-- upvalues: AudioSearchParams (copy), SearchKeyword (copy)
 					local AudioSortType = Enum.AudioSortType
 					AudioSearchParams.SortType = if SearchKeyword == "" then AudioSortType.MostUsed else AudioSortType.Relevance
@@ -100,11 +100,11 @@ return function(p1) --[[ Line: 147 | Named "createMusicSource" ]]
 			ReportMusicSearchCountsFunction(FormatPageResult2, #FormatPageResult, { queryPresent = SearchKeyword ~= "" })
 			
 			return FormatPageResult, {
-				isFinished = function(): boolean --[[ Line: 213 ]]
+				isFinished = function(): boolean
 					-- upvalues: SearchAudioResult (copy)
 					return SearchAudioResult.IsFinished == true
 				end,
-				nextPage = function() --[[ Line: 216 ]]
+				nextPage = function()
 					-- upvalues: SearchAudioResult (copy), formatPage (upval), P2 (copy)
 					SearchAudioResult:AdvanceToNextPageAsync()
 					
@@ -112,7 +112,7 @@ return function(p1) --[[ Line: 147 | Named "createMusicSource" ]]
 				end
 			}
 		end,
-		getMetadata = function(IdList) --[[ Line: 224 ]]
+		getMetadata = function(IdList)
 			-- upvalues: formatMusic (upval), p1 (copy)
 			return (formatMusic((p1 or game:GetService("AssetService")):GetAudioMetadataAsync(IdList)))
 		end

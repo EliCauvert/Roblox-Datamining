@@ -8,7 +8,7 @@ local Context = ExpChatSharedModule.context
 local GlobalCommands = ExpChatSharedModule.GlobalCommands
 local NewResult = ExpChatSharedModule.Logger:new("ExpChat/" .. script.Name)
 
-return function(Text: string, p1): boolean --[[ Line: 16 ]]
+return function(Text: string, p1): boolean
 	-- upvalues: Context (copy), NewResult (copy), GlobalCommands (copy), GetMessagesStoreModule (copy), FFlagExpChatUseChannelTabsStore (copy), GetChannelTabsStoreModule (copy)
 	if not Context.translator then
 		NewResult:warning("context.translator is nil, cannot execute command")

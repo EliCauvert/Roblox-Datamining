@@ -10,17 +10,17 @@ local ChatConstantsModule = require(Parent:WaitForChild("ChatConstants"))
 local UtilModule = require(script.Parent:WaitForChild("Util"))
 local Character = utf8.char(57344)
 local ChatLocalizationModule = nil
-pcall(function() --[[ Line: 22 ]]
+pcall(function()
 	-- upvalues: ChatLocalizationModule (ref)
 	ChatLocalizationModule = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
 
-function IsPlayerVerified(UserId) --[[ Line: 24 ]]
+function IsPlayerVerified(UserId)
 	-- upvalues: Players (copy)
 	local Player = Players:GetPlayerByUserId(UserId)
 	
 	if Player then
-		local Success, Result = pcall(function() --[[ Line: 31 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Player (copy)
 			return Player.HasVerifiedBadge
 		end)
@@ -31,12 +31,12 @@ function IsPlayerVerified(UserId) --[[ Line: 24 ]]
 	end
 end
 
-function AppendVerifiedBadge(Text): string --[[ Line: 38 ]]
+function AppendVerifiedBadge(Text): string
 	-- upvalues: Character (copy)
 	return Text .. Character
 end
 
-function CreateMessageLabel(p1, OriginalChannel) --[[ Line: 42 ]]
+function CreateMessageLabel(p1, OriginalChannel)
 	-- upvalues: ChatSettingsModule (copy), UtilModule (copy), LocalPlayer (ref), ChatLocalizationModule (ref)
 	local FromSpeaker = p1.FromSpeaker
 	local SpeakerDisplayName = if ChatSettingsModule.PlayerDisplayNamesEnabled and p1.SpeakerDisplayName then p1.SpeakerDisplayName else FromSpeaker
@@ -69,7 +69,7 @@ function CreateMessageLabel(p1, OriginalChannel) --[[ Line: 42 ]]
 		AddNameButtonToBaseMessageResult.Position = UDim2.new(0, AddChannelButtonToBaseMessageResult.Size.X.Offset + UtilModule:GetStringTextBounds(" ", _Font, TextSize).X, 0, 0)
 		NewNumberOfSpaces = NewNumberOfSpaces + UtilModule:GetNumberOfSpaces(Formatted11, _Font, TextSize) + 1
 	end
-	local function UpdateTextFunction(p2) --[[ Line: 92 ]]
+	local function UpdateTextFunction(p2)
 		-- upvalues: p1 (copy), BaseMessage2 (copy), UtilModule (upval), NewNumberOfSpaces (ref)
 		if p1.IsFiltered then
 			BaseMessage2.Text = UtilModule:CreateLeadingSpaces(NewNumberOfSpaces) .. UtilModule:SanitizeForRichText(p2.Message)
@@ -82,7 +82,7 @@ function CreateMessageLabel(p1, OriginalChannel) --[[ Line: 42 ]]
 	
 	UpdateTextFunction(p1)
 	
-	local function GetHeightFunction(p2) --[[ Line: 103 ]]
+	local function GetHeightFunction(p2)
 		-- upvalues: UtilModule (upval), BaseMessage2 (copy), BaseMessage (copy)
 		return UtilModule:GetMessageHeight(BaseMessage2, BaseMessage, p2)
 	end

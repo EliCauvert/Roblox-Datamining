@@ -1,4 +1,4 @@
-﻿return function(Name, p1) --[[ Line: 18 | Named "withFlag" ]]
+﻿return function(Name, p1)
 	local SetFastFlagForTestingResult = game:SetFastFlagForTesting(Name, true)
 	local Success, Result = pcall(p1)
 	game:SetFastFlagForTesting(Name, SetFastFlagForTestingResult)

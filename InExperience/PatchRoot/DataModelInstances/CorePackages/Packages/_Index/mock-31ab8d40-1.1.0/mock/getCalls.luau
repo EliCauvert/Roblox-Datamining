@@ -1,7 +1,7 @@
 ﻿local SymbolsModule = require(script.Parent.symbols)
 local SpyModule = require(script.Parent.Spy)
 
-return function(Callback) --[[ Line: 4 ]]
+return function(Callback)
 	-- upvalues: SpyModule (copy), SymbolsModule (copy)
 	if type(Callback) == "function" then
 		local LookupResult = SpyModule.lookup(Callback)

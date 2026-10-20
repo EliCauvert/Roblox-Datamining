@@ -1,4 +1,4 @@
-﻿return function() --[[ Line: 6 | Named "waitForEvents" ]]
+﻿return function()
 	task.defer(coroutine.running())
 	coroutine.yield()
 end

@@ -5,13 +5,13 @@ local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SduiActionType = SduiCoreSystemModule.SduiActionType
 local GetSduiActionHandlerRegistryFunction = SduiCoreSystemModule.getSduiActionHandlerRegistry
 
-return function() --[[ Line: 14 | Named "registerCurrencyTransferSduiActions" ]]
+return function()
 	-- upvalues: FFlagSduiOpenIncomingTransferUpsellAction (copy), SduiActionType (copy), CurrencyTransfers (copy), GetSduiActionHandlerRegistryFunction (copy)
 	if FFlagSduiOpenIncomingTransferUpsellAction then
 		GetSduiActionHandlerRegistryFunction().registerActionHandlerConfigs({
 			[SduiActionType.OpenIncomingTransferUpsell] = {
 				skipUnifiedLogging = false,
-				lazyHandler = function() --[[ Line: 21 ]]
+				lazyHandler = function()
 					-- upvalues: CurrencyTransfers (upval)
 					return require(CurrencyTransfers.Actions.SduiOpenIncomingTransferUpsellAction)
 				end

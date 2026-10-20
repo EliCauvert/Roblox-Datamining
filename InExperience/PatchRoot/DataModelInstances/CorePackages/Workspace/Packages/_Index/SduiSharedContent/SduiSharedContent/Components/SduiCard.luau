@@ -19,14 +19,14 @@ local FFlagFixSduiCardFocusNavScroll = SharedFlagsModule.FFlagFixSduiCardFocusNa
 local FFlagLuaAppConfigureSduiCardImageScaleType = SharedFlagsModule.FFlagLuaAppConfigureSduiCardImageScaleType
 local FFlagSduiCardBackgroundClickable = SharedFlagsModule.FFlagSduiCardBackgroundClickable
 
-local function v18() --[[ Line: 35 ]] end
+local function v18() end
 
-return ReactModule.memo(function(p1) --[[ Line: 64 | Named "SduiCard" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), FFlagFixSduiCardFocusNavScroll (copy), UseCursorFunction (copy), CursorType (copy), SignalsReactModule (copy), TextSizeModule (copy), ReactModule (copy), View (copy), v18 (copy), FFlagSduiCardBackgroundClickable (copy), StateLayerAffordance (copy), Text (copy), Button (copy), ButtonVariant (copy), InputSize (copy), LoadableImage (copy), FFlagLuaAppConfigureSduiCardImageScaleType (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseCursorResult = if FFlagFixSduiCardFocusNavScroll then UseCursorFunction(CursorType.RoundedRect) else nil
 	local Size2500 = UseTokensResult.Size.Size_2500
-	local UseSignalStateResult = SignalsReactModule.useSignalState(function(p2) --[[ Line: 69 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState(function(p2)
 		-- upvalues: TextSizeModule (upval)
 		return TextSizeModule.getTextSizeStore(p2).getTextSizeOffset(p2)
 	end)
@@ -42,7 +42,7 @@ return ReactModule.memo(function(p1) --[[ Line: 64 | Named "SduiCard" ]]
 		tag = "size-full-0 row auto-y stroke-default",
 		backgroundStyle = p1.backgroundStyle or UseTokensResult.Color.Surface.Surface_100,
 		cornerRadius = p1.cornerRadius or UDim.new(0, UseTokensResult.Radius.Medium),
-		selection = if FFlagFixSduiCardFocusNavScroll then ReactModule.useMemo(function() --[[ Line: 86 ]]
+		selection = if FFlagFixSduiCardFocusNavScroll then ReactModule.useMemo(function()
 			-- upvalues: UseCursorResult (copy), p1 (copy)
 			return {
 				Selectable = true,
@@ -64,7 +64,7 @@ return ReactModule.memo(function(p1) --[[ Line: 64 | Named "SduiCard" ]]
 			tag = "flex-between size-full-0 auto-y col gap-xsmall padding-top-large padding-bottom-large padding-left-large padding-right-small",
 			LayoutOrder = 1,
 			Size = UDim2.new(UDim.new(1, -Size2500), p1.size and p1.size.Height or UDim.new(0, 0)),
-			onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 81 ]]
+			onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
 				-- upvalues: UseStateResult2 (copy)
 				UseStateResult2(Frame.AbsoluteSize.Y)
 			end, {})

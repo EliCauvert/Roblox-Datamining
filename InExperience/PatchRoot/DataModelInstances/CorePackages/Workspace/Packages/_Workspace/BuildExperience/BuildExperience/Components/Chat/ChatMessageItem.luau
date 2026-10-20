@@ -7,7 +7,7 @@ local FFlagBuildExperienceSinglePlaytestCardModule = require(BuildExperience.Fla
 local ChatTurnBlockModule = require(script.Parent.ChatTurnBlock)
 local ChatUserMessageModule = require(script.Parent.ChatUserMessage)
 
-local function areUserImagesEqual(Images, Images1): boolean --[[ Line: 58 ]]
+local function areUserImagesEqual(Images, Images1): boolean
 	local Images2 = Images or {}
 	local Images1_1 = Images1 or {}
 	
@@ -24,7 +24,7 @@ local function areUserImagesEqual(Images, Images1): boolean --[[ Line: 58 ]]
 	return true
 end
 
-local function areResourceAttachmentsEqual(ResourceAttachments, ResourceAttachments1): boolean --[[ Line: 73 ]]
+local function areResourceAttachmentsEqual(ResourceAttachments, ResourceAttachments1): boolean
 	-- upvalues: ChatTypesModule (copy)
 	local ResourceAttachments2 = ResourceAttachments or {}
 	local ResourceAttachments1_1 = ResourceAttachments1 or {}
@@ -44,7 +44,7 @@ local function areResourceAttachmentsEqual(ResourceAttachments, ResourceAttachme
 	return true
 end
 
-local function hasCampaignCard(Message): boolean --[[ Line: 104 ]]
+local function hasCampaignCard(Message): boolean
 	-- upvalues: AdCampaignEligibilityToolModule (copy)
 	if Message.turnState ~= nil and Message.turnState.toolCalls ~= nil then
 		for _, toolCall in Message.turnState.toolCalls do
@@ -56,7 +56,7 @@ local function hasCampaignCard(Message): boolean --[[ Line: 104 ]]
 	return false
 end
 
-return ReactModule.memo(function(Frame: Frame) --[[ Line: 30 | Named "ChatMessageItem" ]]
+return ReactModule.memo(function(Frame: Frame)
 	-- upvalues: ReactModule (copy), ChatUserMessageModule (copy), ChatTurnBlockModule (copy), FFlagBuildAgentAdCampaignCardModule (copy)
 	local Message = Frame.message
 	
@@ -75,7 +75,7 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 30 | Named "ChatMessag
 		getAgentAdCampaignCardState = if FFlagBuildAgentAdCampaignCardModule then Frame.getAgentAdCampaignCardState else nil,
 		onAgentAdCampaignActive = if FFlagBuildAgentAdCampaignCardModule then Frame.onAgentAdCampaignActive else nil
 	})
-end, function(Frame, Frame1) --[[ Line: 115 | Named "arePropsEqual" ]]
+end, function(Frame, Frame1)
 	-- upvalues: areUserImagesEqual (copy), areResourceAttachmentsEqual (copy), FFlagBuildAgentAdCampaignCardModule (copy), hasCampaignCard (copy), FFlagBuildExperienceSinglePlaytestCardModule (copy)
 	local Message = Frame.message
 	local Message1 = Frame1.message

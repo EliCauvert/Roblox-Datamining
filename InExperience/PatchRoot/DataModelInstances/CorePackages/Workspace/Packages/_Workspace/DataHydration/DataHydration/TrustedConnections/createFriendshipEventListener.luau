@@ -13,10 +13,10 @@ local config = {
 	}
 }
 
-return function(Callback) --[[ Line: 27 | Named "createFriendshipEventListener" ]]
+return function(Callback)
 	-- upvalues: GetLocalPlayerUserIdFunction (copy), Players (copy), NewResult (copy), config (copy), TrustedConnectionStatusModule (copy)
 	local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
-	local Connection = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function() --[[ Line: 32 ]]
+	local Connection = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
 		-- upvalues: GetLocalPlayerUserIdFunction (upval), LocalPlayerUserId (ref)
 		local LocalPlayerUserId1 = GetLocalPlayerUserIdFunction()
 		
@@ -24,7 +24,7 @@ return function(Callback) --[[ Line: 27 | Named "createFriendshipEventListener" 
 			LocalPlayerUserId = LocalPlayerUserId1
 		end
 	end)
-	local ObserveEventResult = NewResult:observeEvent(config.Namespace, function(p1) --[[ Line: 41 ]]
+	local ObserveEventResult = NewResult:observeEvent(config.Namespace, function(p1)
 		-- upvalues: LocalPlayerUserId (ref), config (upval), Callback (copy), TrustedConnectionStatusModule (upval)
 		if not p1.EventArgs or not p1.EventArgs.UserId1 or not p1.EventArgs.UserId2 or not LocalPlayerUserId then return end
 		local Text: string = tostring(LocalPlayerUserId) == tostring(p1.EventArgs.UserId1) and tostring(p1.EventArgs.UserId2) or tostring(p1.EventArgs.UserId1)
@@ -34,7 +34,7 @@ return function(Callback) --[[ Line: 27 | Named "createFriendshipEventListener" 
 		end
 	end)
 	
-	return function() --[[ Line: 66 ]]
+	return function()
 		-- upvalues: Connection (ref), ObserveEventResult (ref)
 		if Connection then
 			Connection:Disconnect()

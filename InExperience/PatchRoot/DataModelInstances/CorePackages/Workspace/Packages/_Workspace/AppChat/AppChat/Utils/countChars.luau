@@ -1,6 +1,6 @@
 ﻿local Character = utf8.char(8205)
 
-return function(Text: string): number --[[ Line: 5 | Named "countChars" ]]
+return function(Text: string): number
 	-- upvalues: Character (copy)
 	if utf8.len(Text) == nil then
 		return #Text

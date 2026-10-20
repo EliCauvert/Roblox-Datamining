@@ -15,19 +15,19 @@ local CollectibleProductIdStore = CatalogNetworkingModule.CollectibleProductIdSt
 local BundleOwnershipStore = CatalogNetworkingModule.BundleOwnershipStore
 local ItemDetailsStore = CatalogNetworkingModule.ItemDetailsStore
 
-local function useLookApiData(p1) --[[ Line: 42 ]]
+local function useLookApiData(p1)
 	-- upvalues: UseSignalStateFunction (copy), PurchaseDetailsStore (copy), ReactModule (copy), DashModule (copy), EnumsModule (copy), MyRoduxNetworkingImplModule (copy)
 	local UseSignalStateResult = UseSignalStateFunction(PurchaseDetailsStore.getCache)
 	local UseStateResult, UseStateResult2 = ReactModule.useState({})
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(true)
-	ReactModule.useEffect(function() --[[ Line: 47 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult2_1 (copy), DashModule (upval), EnumsModule (upval), UseStateResult2 (copy), PurchaseDetailsStore (upval), MyRoduxNetworkingImplModule (upval)
 		if #p1 == 0 then
 			UseStateResult2_1(false)
 			
 			return
 		end
-		local CollectArrayResult = DashModule.collectArray(p1, function(_, p2) --[[ Line: 52 ]]
+		local CollectArrayResult = DashModule.collectArray(p1, function(_, p2)
 			-- upvalues: EnumsModule (upval)
 			return if p2.itemType == EnumsModule.ItemTypes.Bundle then nil else { id = tonumber(p2.assetId) or p2.assetId }
 		end)
@@ -39,16 +39,16 @@ local function useLookApiData(p1) --[[ Line: 42 ]]
 		else
 			UseStateResult2_1(true)
 			UseStateResult2({})
-			PurchaseDetailsStore.fetchAll(MyRoduxNetworkingImplModule, CollectArrayResult):andThen(function(Result) --[[ Line: 66 ]]
+			PurchaseDetailsStore.fetchAll(MyRoduxNetworkingImplModule, CollectArrayResult):andThen(function(Result)
 				-- upvalues: DashModule (upval), UseStateResult2 (upval)
 				if Result and Result.look and Result.look.items then
-					UseStateResult2((DashModule.map(Result.look.items, function(p2): string --[[ Line: 68 ]]
+					UseStateResult2((DashModule.map(Result.look.items, function(p2): string
 						return (tostring(p2.id))
 					end)))
 				end
-			end, function(p2) --[[ Line: 73 ]]
+			end, function(p2)
 				warn("[useInspectAvatarData] Failed to fetch purchase details:", (tostring(p2)))
-			end):finally(function() --[[ Line: 76 ]]
+			end):finally(function()
 				-- upvalues: UseStateResult2_1 (upval)
 				UseStateResult2_1(false)
 			end)
@@ -62,13 +62,13 @@ local function useLookApiData(p1) --[[ Line: 42 ]]
 	}
 end
 
-local function useCatalogEnrichment(p1, p2) --[[ Line: 92 ]]
+local function useCatalogEnrichment(p1, p2)
 	-- upvalues: UseSignalStateFunction (copy), ItemDetailsStore (copy), ReactModule (copy), CollectibleProductIdStore (copy), BundleOwnershipStore (copy), EnumsModule (copy), MyRoduxNetworkingImplModule (copy), PromiseModule (copy)
 	local UseSignalStateResult = UseSignalStateFunction(ItemDetailsStore.getCache)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
 	local UseSignalStateResult1 = UseSignalStateFunction(CollectibleProductIdStore.getCache)
 	local UseSignalStateResult2 = UseSignalStateFunction(BundleOwnershipStore.getCache)
-	ReactModule.useEffect(function() --[[ Line: 100 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), p2 (copy), UseStateResult2 (copy), EnumsModule (upval), ItemDetailsStore (upval), MyRoduxNetworkingImplModule (upval), PromiseModule (upval), BundleOwnershipStore (upval)
 		if p1.isLoading then return end
 		if #p2 == 0 then
@@ -121,20 +121,20 @@ local function useCatalogEnrichment(p1, p2) --[[ Line: 92 ]]
 			UseStateResult2(true)
 			PromiseModule.all({
 				if #List1 > 0 then ItemDetailsStore.fetchAndCache(MyRoduxNetworkingImplModule, List1) else PromiseModule.resolve(),
-				if #List > 0 then BundleOwnershipStore.fetchAndCache(MyRoduxNetworkingImplModule, List):catch(function(Err) --[[ Line: 159 ]]
+				if #List > 0 then BundleOwnershipStore.fetchAndCache(MyRoduxNetworkingImplModule, List):catch(function(Err)
 					warn("[useInspectAvatarData] Failed to fetch bundle ownership:", (tostring(Err)))
 				end) else PromiseModule.resolve()
-			}):andThen(function() --[[ Line: 165 ]]
+			}):andThen(function()
 				-- upvalues: UseStateResult2 (upval)
 				UseStateResult2(false)
-			end):catch(function(Err) --[[ Line: 168 ]]
+			end):catch(function(Err)
 				-- upvalues: UseStateResult2 (upval)
 				warn("[useInspectAvatarData] Failed to fetch catalog details:", (tostring(Err)))
 				UseStateResult2(false)
 			end)
 		end
 	end, { p1.responseIds, p1.isLoading, p2 })
-	ReactModule.useEffect(function() --[[ Line: 175 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p2 (copy), UseSignalStateResult (copy), EnumsModule (upval), p1 (copy), CollectibleProductIdStore (upval), MyRoduxNetworkingImplModule (upval)
 		local CollectibleItemIds = {}
 		local t = {}
@@ -168,7 +168,7 @@ local function useCatalogEnrichment(p1, p2) --[[ Line: 92 ]]
 			end
 		end
 		if #CollectibleItemIds ~= 0 then
-			CollectibleProductIdStore.fetchAndCache(MyRoduxNetworkingImplModule, CollectibleItemIds):catch(function(Err) --[[ Line: 213 ]]
+			CollectibleProductIdStore.fetchAndCache(MyRoduxNetworkingImplModule, CollectibleItemIds):catch(function(Err)
 				warn("[useInspectAvatarData] Failed to fetch collectible product IDs:", (tostring(Err)))
 			end)
 			
@@ -184,12 +184,12 @@ local function useCatalogEnrichment(p1, p2) --[[ Line: 92 ]]
 	}
 end
 
-return function(p3) --[[ Line: 229 | Named "useInspectAvatarData" ]]
+return function(p3)
 	-- upvalues: UseLocalUserIdFunction (copy), useLookApiData (copy), useCatalogEnrichment (copy), ReactModule (copy), InspectAvatarUtilsModule (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseLookApiDataResult = useLookApiData(p3)
 	local UseCatalogEnrichmentResult = useCatalogEnrichment(UseLookApiDataResult, p3)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 235 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p3 (copy), InspectAvatarUtilsModule (upval), UseLookApiDataResult (copy), UseCatalogEnrichmentResult (copy)
 		if #p3 == 0 then
 			return {}
@@ -256,7 +256,7 @@ return function(p3) --[[ Line: 229 | Named "useInspectAvatarData" ]]
 	
 	return {
 		displayItems = UseMemoResult,
-		ownedAssetIds = ReactModule.useMemo(function() --[[ Line: 316 ]]
+		ownedAssetIds = ReactModule.useMemo(function()
 			-- upvalues: UseMemoResult (copy), InspectAvatarUtilsModule (upval)
 			local List = {}
 			local t = {}

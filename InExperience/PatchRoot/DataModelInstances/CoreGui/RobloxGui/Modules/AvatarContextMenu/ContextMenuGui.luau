@@ -9,7 +9,7 @@ local _ = require(Modules:WaitForChild("Settings"):WaitForChild("Utility"))
 local Module = {}
 Module.__index = Module
 
-function Module:CreateContextMenuHolder(_) --[[ Line: 33 ]]
+function Module:CreateContextMenuHolder(_)
 	-- upvalues: RobloxGui (copy)
 	local AvatarContextMenu = Instance.new("Frame")
 	AvatarContextMenu.Name = "AvatarContextMenu"
@@ -22,8 +22,8 @@ function Module:CreateContextMenuHolder(_) --[[ Line: 33 ]]
 	return AvatarContextMenu
 end
 
-function Module.CreateLeaveMenuButton(p1, Parent, Frame) --[[ Line: 44 ]]
-	local function closeMenu() --[[ Line: 45 ]]
+function Module.CreateLeaveMenuButton(p1, Parent, Frame)
+	local function closeMenu()
 		-- upvalues: p1 (copy)
 		p1.CloseMenuFunc()
 	end
@@ -47,10 +47,10 @@ function Module.CreateLeaveMenuButton(p1, Parent, Frame) --[[ Line: 44 ]]
 	return CloseMenuButton
 end
 
-local function _(Callback: () -> ()) --[[ Line: 71 | Named "listenToViewportChange" ]]
+local function _(Callback: () -> ())
 	if Callback == nil then return end
 	local Connection = nil
-	workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function() --[[ Line: 76 | Named "updateCamera" ]]
+	workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
 		-- upvalues: Connection (ref), Callback (copy)
 		local CurrentCamera = workspace.CurrentCamera
 		
@@ -69,7 +69,7 @@ local function _(Callback: () -> ()) --[[ Line: 71 | Named "listenToViewportChan
 	Callback()
 end
 
-function Module:CreateMenuFrame(Frame: Frame) --[[ Line: 89 ]]
+function Module:CreateMenuFrame(Frame: Frame)
 	-- upvalues: GuiService (copy)
 	local ContextMenuHolder = self:CreateContextMenuHolder()
 	local Menu = Instance.new("ImageButton")
@@ -97,7 +97,7 @@ function Module:CreateMenuFrame(Frame: Frame) --[[ Line: 89 ]]
 	MenuAspectRatio.AspectRatio = Frame.AspectRatio
 	MenuAspectRatio.Parent = Menu
 	
-	local function updateAspectRatioForViewport() --[[ Line: 120 ]]
+	local function updateAspectRatioForViewport()
 		-- upvalues: MenuAspectRatio (copy)
 		local ViewportSize = workspace.CurrentCamera.ViewportSize
 		
@@ -112,7 +112,7 @@ function Module:CreateMenuFrame(Frame: Frame) --[[ Line: 89 ]]
 	
 	if updateAspectRatioForViewport ~= nil then
 		local Connection = nil
-		workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function() --[[ Line: 76 | Named "updateCamera" ]]
+		workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
 			-- upvalues: Connection (ref), updateAspectRatioForViewport (copy)
 			local CurrentCamera = workspace.CurrentCamera
 			
@@ -167,7 +167,7 @@ function Module:CreateMenuFrame(Frame: Frame) --[[ Line: 89 ]]
 	ListLayout1.HorizontalAlignment = Enum.HorizontalAlignment.Center
 	ListLayout1.SortOrder = Enum.SortOrder.LayoutOrder
 	ListLayout1.VerticalAlignment = Enum.VerticalAlignment.Top
-	ListLayout1:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function() --[[ Line: 166 ]]
+	ListLayout1:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
 		-- upvalues: ContextActionList (copy), ListLayout1 (copy)
 		ContextActionList.CanvasSize = UDim2.new(0, 0, 0, ListLayout1.AbsoluteContentSize.Y)
 	end)
@@ -203,7 +203,7 @@ function Module:CreateMenuFrame(Frame: Frame) --[[ Line: 89 ]]
 	return Menu
 end
 
-function Module:UpdateGuiTheme(Frame: Frame) --[[ Line: 206 ]]
+function Module:UpdateGuiTheme(Frame: Frame)
 	-- upvalues: NewResult (ref)
 	self.ContextMenuFrame.Size = Frame.Size
 	self.ContextMenuFrame.AnchorPoint = Frame.AnchorPoint
@@ -230,7 +230,7 @@ function Module:UpdateGuiTheme(Frame: Frame) --[[ Line: 206 ]]
 	end
 end
 
-function Module:BuildPlayerCarousel(p1, p2) --[[ Line: 239 ]]
+function Module:BuildPlayerCarousel(p1, p2)
 	-- upvalues: NewResult (ref), AvatarContextMenu (copy), BindableEvent (copy)
 	if not NewResult then
 		NewResult = require(AvatarContextMenu.PlayerCarousel).new(p2)
@@ -241,7 +241,7 @@ function Module:BuildPlayerCarousel(p1, p2) --[[ Line: 239 ]]
 	if self.PlayerChangedConnection then
 		self.PlayerChangedConnection:Disconnect()
 	end
-	self.PlayerChangedConnection = NewResult.PlayerChanged:Connect(function(p3) --[[ Line: 251 ]]
+	self.PlayerChangedConnection = NewResult.PlayerChanged:Connect(function(p3)
 		-- upvalues: self (copy), BindableEvent (upval)
 		if p3 then
 			self.ContextMenuFrame.Content.NameTag.Text = p3.Name
@@ -258,7 +258,7 @@ function Module:BuildPlayerCarousel(p1, p2) --[[ Line: 239 ]]
 	NewResult:AddCarouselDivider()
 end
 
-function Module:RemovePlayerEntry(p3) --[[ Line: 267 ]]
+function Module:RemovePlayerEntry(p3)
 	-- upvalues: NewResult (ref)
 	if NewResult then
 		NewResult:RemovePlayerEntry(p3)
@@ -267,15 +267,15 @@ function Module:RemovePlayerEntry(p3) --[[ Line: 267 ]]
 	end
 end
 
-function Module:GetBottomScreenPaddingConstant(): number --[[ Line: 273 ]]
+function Module:GetBottomScreenPaddingConstant(): number
 	return 0.02
 end
 
-function Module:SetCloseMenuFunc(CloseMenuFunc) --[[ Line: 277 ]]
+function Module:SetCloseMenuFunc(CloseMenuFunc)
 	self.CloseMenuFunc = CloseMenuFunc
 end
 
-function Module:SwitchToPlayerEntry(p3, p4) --[[ Line: 281 ]]
+function Module:SwitchToPlayerEntry(p3, p4)
 	-- upvalues: NewResult (ref)
 	if NewResult then
 		NewResult:SwitchToPlayerEntry(p3, p4)
@@ -284,7 +284,7 @@ function Module:SwitchToPlayerEntry(p3, p4) --[[ Line: 281 ]]
 	end
 end
 
-function Module:OffsetPlayerEntry(p3) --[[ Line: 286 ]]
+function Module:OffsetPlayerEntry(p3)
 	-- upvalues: NewResult (ref)
 	if NewResult then
 		NewResult:OffsetPlayerEntry(p3)
@@ -293,12 +293,12 @@ function Module:OffsetPlayerEntry(p3) --[[ Line: 286 ]]
 	end
 end
 
-function Module:GetSelectedPlayer() --[[ Line: 291 ]]
+function Module:GetSelectedPlayer()
 	-- upvalues: NewResult (ref)
 	return if NewResult then NewResult:GetSelectedPlayer() else nil
 end
 
-function Module.new() --[[ Line: 296 ]]
+function Module.new()
 	-- upvalues: Module (copy), BindableEvent (copy)
 	local self = setmetatable({}, Module)
 	self.CloseMenuFunc = nil

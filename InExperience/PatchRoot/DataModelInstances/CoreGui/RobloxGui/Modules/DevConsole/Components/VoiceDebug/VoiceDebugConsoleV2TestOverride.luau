@@ -1,11 +1,11 @@
 ﻿local ForTesting = nil
 
 return {
-	get = function() --[[ Line: 10 ]]
+	get = function()
 		-- upvalues: ForTesting (ref)
 		return ForTesting
 	end,
-	setForTesting = function(Value) --[[ Line: 14 ]]
+	setForTesting = function(Value)
 		-- upvalues: ForTesting (ref)
 		local ForTesting1 = ForTesting
 		ForTesting = Value

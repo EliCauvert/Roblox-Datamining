@@ -7,7 +7,7 @@ local ConfigModule = require(ExpChat.Config)
 local FStringExpChatSummaryPrefixTextModule = require(ExpChat.Flags.FStringExpChatSummaryPrefixText)
 local FFlagExpChatPolishSummaryMessageUIModule = require(ExpChat.Flags.FFlagExpChatPolishSummaryMessageUI)
 
-local function _(Value: number): number --[[ Line: 15 | Named "ceilToEven" ]]
+local function _(Value: number): number
 	local Ceiled = math.ceil(Value)
 	
 	if Ceiled % 2 == 1 then
@@ -16,11 +16,11 @@ local function _(Value: number): number --[[ Line: 15 | Named "ceilToEven" ]]
 	return (math.max(0, Ceiled))
 end
 
-local _ = function(p1: number): number --[[ Line: 23 | Named "calculateSummaryTextSize" ]]
+local _ = function(p1: number): number
 	return (math.max(0, p1 - 2))
 end
 
-local _ = function(): number --[[ Line: 27 | Named "getSummaryTextSizeFromConfiguration" ]]
+local _ = function(): number
 	-- upvalues: TextChatService (copy), ConfigModule (copy)
 	local ChatWindowConfiguration = TextChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 	
@@ -28,7 +28,7 @@ local _ = function(): number --[[ Line: 27 | Named "getSummaryTextSizeFromConfig
 end
 
 return {
-	getSummaryIconPrefix = function(p1: number): string --[[ Line: 35 ]]
+	getSummaryIconPrefix = function(p1: number): string
 		-- upvalues: FFlagExpChatPolishSummaryMessageUIModule (copy), TextChatService (copy), ConfigModule (copy), FoundationModule (copy), FStringExpChatSummaryPrefixTextModule (copy)
 		if not FFlagExpChatPolishSummaryMessageUIModule then
 			return `<font weight='600' family='rbxasset://LuaPackages/Packages/_Index/BuilderIcons/BuilderIcons/BuilderIcons.json'>{FoundationModule.Enums.IconName.Nebula}</font>{FStringExpChatSummaryPrefixTextModule}`
@@ -47,7 +47,7 @@ return {
 		end
 		return `<font weight='600' size="{math.max(0, Ceiled)}" family='rbxasset://LuaPackages/Packages/_Index/BuilderIcons/BuilderIcons/BuilderIcons.json'>{FoundationModule.Enums.IconName.Nebula}</font>{FStringExpChatSummaryPrefixTextModule}`
 	end,
-	wrapInSummaryMutedStyle = function(p1, p2, p3: number): string --[[ Line: 46 ]]
+	wrapInSummaryMutedStyle = function(p1, p2, p3: number): string
 		-- upvalues: FFlagExpChatPolishSummaryMessageUIModule (copy), UIBloxModule (copy), TextChatService (copy), ConfigModule (copy)
 		if not FFlagExpChatPolishSummaryMessageUIModule then
 			return `<font color='#{p3 or "BCBEC8"}' size="{ConfigModule.ChatWindowTextSize - 2}">{p1}</font>`

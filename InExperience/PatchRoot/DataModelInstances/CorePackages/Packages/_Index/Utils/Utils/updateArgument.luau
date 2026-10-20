@@ -6,7 +6,7 @@ local Kind = require(Parent.GraphQL).Kind
 local AstFromTypeFunction = require(script.Parent.astFromType).astFromType
 
 return {
-	updateArgument = function(p1, p2, p3, Value, Value1, p4, p5) --[[ Line: 22 ]]
+	updateArgument = function(p1, p2, p3, Value, Value1, p4, p5)
 		-- upvalues: Kind (copy), AstFromTypeFunction (copy), Array (copy), Object (copy)
 		p1[tostring(Value)] = {
 			kind = Kind.ARGUMENT,
@@ -34,11 +34,11 @@ return {
 			p3[tostring(Value1)] = nil
 		end
 	end,
-	createVariableNameGenerator = function(p1) --[[ Line: 55 ]]
+	createVariableNameGenerator = function(p1)
 		-- upvalues: Array (copy), Object (copy)
 		local Count = 0
 		
-		return function(p2): string --[[ Line: 59 ]]
+		return function(p2): string
 			-- upvalues: Count (ref), Array (upval), Object (upval), p1 (copy)
 			local Text = nil
 			repeat

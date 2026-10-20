@@ -3,13 +3,13 @@ local DataStoreService = game:GetService("DataStoreService")
 local JsonModule = require(script.Parent.json)
 local IsStudio = game:GetService("RunService"):IsStudio()
 
-local function dlog(...) --[[ Line: 10 ]]
+local function dlog(...)
 	print("[http]", ...)
 end
 
 local config = { settings = {}, max_size = 1e999, data = {} }
 
-function config.update_settings(p1, p2) --[[ Line: 22 ]]
+function config.update_settings(p1, p2)
 	-- upvalues: config (copy)
 	local List = type(p1) == "table" and p1 or { p1 }
 	local Count = 0
@@ -40,21 +40,21 @@ function config.update_settings(p1, p2) --[[ Line: 22 ]]
 	end
 end
 
-function config.cache_locally(p3, p4) --[[ Line: 59 ]]
+function config.cache_locally(p3, p4)
 	-- upvalues: config (copy)
 	local P3 = p4 or {}
 	P3.cache_globally = false
 	config.update_settings(p3, P3)
 end
 
-function config.cache_globally(p3, p4) --[[ Line: 66 ]]
+function config.cache_globally(p3, p4)
 	-- upvalues: config (copy)
 	local P5 = p4 or {}
 	P5.cache_globally = true
 	config.update_settings(p3, P5)
 end
 
-function config.should_cache(Text: string) --[[ Line: 77 ]]
+function config.should_cache(Text: string)
 	-- upvalues: config (copy)
 	local v1 = Text:split("?")[1]
 	
@@ -66,7 +66,7 @@ function config.should_cache(Text: string) --[[ Line: 77 ]]
 	return false
 end
 
-function config.is_cached(p3, p4): boolean --[[ Line: 91 ]]
+function config.is_cached(p3, p4): boolean
 	-- upvalues: config (copy)
 	local Should_cacheResult = config.should_cache(p3)
 	local Setting = config.settings[Should_cacheResult]
@@ -76,13 +76,13 @@ end
 
 config.global_cache_index = {}
 local t = {}
-local Success, Result = pcall(function() --[[ Line: 127 ]]
+local Success, Result = pcall(function()
 	-- upvalues: DataStoreService (copy)
 	return DataStoreService:GetDataStore("HttpRequestsCache")
 end)
 
 if Success then
-	local Success1, Result1 = pcall(function() --[[ Line: 132 ]]
+	local Success1, Result1 = pcall(function()
 		-- upvalues: Result (copy)
 		return Result:GetAsync("index") or {}
 	end)
@@ -90,10 +90,10 @@ if Success then
 	if Success1 then
 		config.global_cache_index = Result1
 		config.global_cache_update_interval = 20
-		coroutine.wrap(function() --[[ Line: 140 ]]
+		coroutine.wrap(function()
 			-- upvalues: config (copy), t (ref), Result (copy), dlog (copy), IsStudio (copy), MessagingService (copy), JsonModule (copy)
 			while wait(config.global_cache_update_interval) do
-				pcall(function() --[[ Line: 142 ]]
+				pcall(function()
 					-- upvalues: t (upval), Result (upval), dlog (upval), config (upval), IsStudio (upval), MessagingService (upval), JsonModule (upval)
 					local Count = 0
 					
@@ -105,7 +105,7 @@ if Success then
 						dlog(("pushing %s requests to global cache index"):format(Count))
 					end
 					local List = {}
-					Result:UpdateAsync("index", function(OldData) --[[ Line: 155 ]]
+					Result:UpdateAsync("index", function(OldData)
 						-- upvalues: t (upval), List (copy), config (upval)
 						local OldData1 = OldData or {}
 						
@@ -126,7 +126,7 @@ if Success then
 		end)()
 		
 		if not IsStudio then
-			MessagingService:SubscribeAsync("RequestsCacheIndex", function(p3) --[[ Line: 177 ]]
+			MessagingService:SubscribeAsync("RequestsCacheIndex", function(p3)
 				-- upvalues: JsonModule (copy), config (copy)
 				for _, value in ipairs((JsonModule.dec(p3.Data))) do
 					config.global_cache_index[value] = true
@@ -135,12 +135,12 @@ if Success then
 		end
 	end
 end
-function config.get_expire(p3) --[[ Line: 192 ]]
+function config.get_expire(p3)
 	-- upvalues: config (copy)
 	return config.settings[config.should_cache(p3)].expires or 1e999
 end
 
-function config.get_cached(p3, p4) --[[ Line: 198 ]]
+function config.get_cached(p3, p4)
 	-- upvalues: config (copy), Success (copy), dlog (copy), Result (copy)
 	local Should_cacheResult = config.should_cache(p3)
 	local Entry = config.data[p4]
@@ -153,7 +153,7 @@ function config.get_cached(p3, p4) --[[ Line: 198 ]]
 	return Result:GetAsync(p4), "global"
 end
 
-function config.update_cache(p3, Key, p4) --[[ Line: 214 ]]
+function config.update_cache(p3, Key, p4)
 	-- upvalues: config (copy), Success (copy), dlog (copy), t (ref)
 	print(("[http] %s added to cache"):format(p3))
 	p4.timestamp = tick()

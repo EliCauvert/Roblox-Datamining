@@ -1,7 +1,7 @@
 ﻿local GetFStringPlaybackGuidModule = require(script.Parent.Parent.Flags.GetFStringPlaybackGuid)
 
 return {
-	create = function(p1, Callback) --[[ Line: 7 ]]
+	create = function(p1, Callback)
 		-- upvalues: GetFStringPlaybackGuidModule (copy)
 		local ReplaySelector = Instance.new("Frame")
 		ReplaySelector.Name = "ReplaySelector"
@@ -64,12 +64,12 @@ return {
 		local Corner2 = Instance.new("UICorner")
 		Corner2.CornerRadius = UDim.new(0, 4)
 		Corner2.Parent = OpenReplaySelectorButton
-		OpenReplaySelectorButton.MouseButton1Click:Connect(function() --[[ Line: 77 ]]
+		OpenReplaySelectorButton.MouseButton1Click:Connect(function()
 			-- upvalues: ReplaySelector (copy), OpenReplaySelectorButton (copy)
 			ReplaySelector.Visible = true
 			OpenReplaySelectorButton.Visible = false
 		end)
-		CloseButton.MouseButton1Click:Connect(function() --[[ Line: 82 ]]
+		CloseButton.MouseButton1Click:Connect(function()
 			-- upvalues: ReplaySelector (copy), OpenReplaySelectorButton (copy)
 			ReplaySelector.Visible = false
 			OpenReplaySelectorButton.Visible = true
@@ -88,7 +88,7 @@ return {
 		local Corner3 = Instance.new("UICorner")
 		Corner3.CornerRadius = UDim.new(0, 4)
 		Corner3.Parent = SubmitButton
-		SubmitButton.MouseButton1Click:Connect(function() --[[ Line: 103 ]]
+		SubmitButton.MouseButton1Click:Connect(function()
 			-- upvalues: Callback (copy), GuidInput (copy)
 			if Callback then
 				Callback(GuidInput.Text)
@@ -97,7 +97,7 @@ return {
 		
 		return {
 			Container = ReplaySelector,
-			SetVisible = function(_, Visible) --[[ Line: 113 ]]
+			SetVisible = function(_, Visible)
 				-- upvalues: ReplaySelector (copy), OpenReplaySelectorButton (copy)
 				ReplaySelector.Visible = Visible
 				OpenReplaySelectorButton.Visible = not Visible

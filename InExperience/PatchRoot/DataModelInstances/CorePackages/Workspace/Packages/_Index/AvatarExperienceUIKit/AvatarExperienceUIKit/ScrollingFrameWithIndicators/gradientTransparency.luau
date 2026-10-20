@@ -1,4 +1,4 @@
-﻿local function fitKeypoints(List) --[[ Line: 6 ]]
+﻿local function fitKeypoints(List)
 	local List1 = {}
 	
 	for _, value in List do
@@ -27,7 +27,7 @@
 end
 
 return {
-	fittedGradientTransparency = function(Entry, p1, p2: number): NumberSequence? --[[ Line: 34 ]]
+	fittedGradientTransparency = function(Entry, p1, p2: number): NumberSequence?
 		-- upvalues: fitKeypoints (copy)
 		local v1 = 1 - p2
 		local ClampedValue = math.clamp(v1 * Entry[1], 0, 1)

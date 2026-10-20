@@ -14,7 +14,7 @@ local ConversationDetails4 = ThemeModule.textSize(16, "ConversationDetails")
 local Translator = require(ShareGame.getTranslator)()
 local ConversationDetails5 = RoactModule.PureComponent:extend("ConversationDetails")
 
-function ConversationDetails5.render(p1) --[[ Line: 30 ]]
+function ConversationDetails5.render(p1)
 	-- upvalues: RoactModule (copy), ConversationDetails2 (copy), ConversationDetails1 (copy), GRAY3 (copy), ConversationDetails4 (copy), Translator (copy), ConstantsModule (copy), ConversationDetails3 (copy), TextSizeResult (copy), ConversationDetails (copy), WHITE (copy)
 	local Subtitle = p1.props.subtitle
 	local Presence = p1.props.presence

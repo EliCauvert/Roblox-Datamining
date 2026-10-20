@@ -11,7 +11,7 @@ local AvatarBackground = Constants.ASSET_TYPE_NAME_TO_ID_STRING.AvatarBackground
 local ItemTypeEnum = require(Parent.AvatarExperienceModel).Enums.ItemTypeEnum
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 
-return function(Character, p1) --[[ Line: 25 | Named "isItemAvailableForTryOn" ]]
+return function(Character, p1)
 	-- upvalues: ItemTypeEnum (copy), AVATARANIMATIONSBUNDLETYPEID (copy), SHOESBUNDLETYPEID (copy), AvatarBackground (copy), AvatarExperienceFlagsModule (copy), ASSETTYPETOACCESSORYTYPE (copy), ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROP (copy), LAYEREDASSETTYPES (copy)
 	local ItemSubType = p1.itemSubType
 	local IsRigTypeMatch: boolean = Character and (Character.Humanoid and Character.Humanoid.RigType == Enum.HumanoidRigType.R6)

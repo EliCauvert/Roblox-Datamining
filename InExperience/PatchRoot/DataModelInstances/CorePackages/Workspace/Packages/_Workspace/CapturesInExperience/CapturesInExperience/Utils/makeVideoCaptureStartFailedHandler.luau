@@ -2,9 +2,9 @@
 local CapturesToastTypeModule = require(Parent.Enums.CapturesToastType)
 local ToastTriggeredModule = require(Parent.Actions.ToastTriggered)
 
-return function(Callback) --[[ Line: 6 | Named "makeVideoCaptureStartFailedHandler" ]]
+return function(Callback)
 	-- upvalues: ToastTriggeredModule (copy), CapturesToastTypeModule (copy)
-	return function(VideoCaptureStartedResult) --[[ Line: 7 | Named "videoCaptureStartFailedHandler" ]]
+	return function(VideoCaptureStartedResult)
 		-- upvalues: Callback (copy), ToastTriggeredModule (upval), CapturesToastTypeModule (upval)
 		if VideoCaptureStartedResult == Enum.VideoCaptureStartedResult.CapturingAlready then
 			Callback(ToastTriggeredModule(CapturesToastTypeModule.VideoCaptureInitializationCapturingAlreadyError))

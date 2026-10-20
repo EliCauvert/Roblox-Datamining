@@ -10,14 +10,14 @@ local PeekViewStateModule = require(script.Parent.PeekViewState)
 local PeekViewDismissedEventModule = require(script.Parent.analytics.peekViewDismissedEvent)
 local FFlagProfilePlatformNewProfileHeader = require(Parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
 
-return function(p1) --[[ Line: 48 | Named "PeekViewWithTopBar" ]]
+return function(p1)
 	-- upvalues: UseRoactServiceFunction (copy), AppEventIngestService (copy), UseRouteNameFunction (copy), UseStyleFunction (copy), ReactModule (copy), PeekViewStateModule (copy), PeekViewDismissedEventModule (copy), CryoModule (copy), PeekViewModule (copy), FFlagProfilePlatformNewProfileHeader (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(AppEventIngestService)
 	local UseRouteNameResult = UseRouteNameFunction()
 	local UseStyleResult = UseStyleFunction()
 	local OnClosedFunction = p1.onClosed
 	local OnViewStateChangedFunction = p1.onViewStateChanged
-	local UseResult = ReactModule.useCallback(function(Closed, p2, p3) --[[ Line: 55 ]]
+	local UseResult = ReactModule.useCallback(function(Closed, p2, p3)
 		-- upvalues: PeekViewStateModule (upval), OnClosedFunction (copy), UseRoactServiceResult (copy), p1 (copy), PeekViewDismissedEventModule (upval), CryoModule (upval), UseRouteNameResult (copy), OnViewStateChangedFunction (copy)
 		if Closed == PeekViewStateModule.Closed then
 			if OnClosedFunction then
@@ -54,7 +54,7 @@ return function(p1) --[[ Line: 48 | Named "PeekViewWithTopBar" ]]
 			Size = UDim2.new(1, 0, 0, p1.topBarHeight),
 			BackgroundColor3 = UseStyleResult.Theme.BackgroundDefault.Color,
 			BorderColor3 = UseStyleResult.Tokens.Color.Common.Shimmer.Color3,
-			GroupTransparency = UseBindingResult:map(function(p2: number): number --[[ Line: 101 ]]
+			GroupTransparency = UseBindingResult:map(function(p2: number): number
 				return 1 - p2
 			end)
 		}, { PeekViewTopBarInner = p1.topBarSlot }),
@@ -73,7 +73,7 @@ return function(p1) --[[ Line: 48 | Named "PeekViewWithTopBar" ]]
 				mountAsFullView = p1.mountAsFullView,
 				mountAnimation = p1.mountAnimation,
 				viewStateChanged = UseResult,
-				briefToFullTransitionPercent = function(p2) --[[ Line: 80 ]]
+				briefToFullTransitionPercent = function(p2)
 					-- upvalues: UseBindingResult2 (copy), p1 (copy)
 					UseBindingResult2(p2)
 					

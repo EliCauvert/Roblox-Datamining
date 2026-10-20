@@ -8,11 +8,11 @@ local SerializeFetchParameterFunction = require(script.Parent.serializeFetchPara
 local _ = require(script.Parent.selectHttpOptionsAndBody)
 
 return {
-	rewriteURIForGET = function(Text: string, p1) --[[ Line: 29 ]]
+	rewriteURIForGET = function(Text: string, p1)
 		-- upvalues: EncodeURIComponentModule (copy), Array (copy), Object (copy), Boolean (copy), SerializeFetchParameterFunction (copy)
 		local List = {}
 		
-		local function _(p2, p3) --[[ Line: 39 | Named "addQueryParam" ]]
+		local function _(p2, p3)
 			-- upvalues: List (copy), EncodeURIComponentModule (upval)
 			table.insert(List, ("%s=%s"):format(p2, EncodeURIComponentModule(p3)))
 		end
@@ -25,7 +25,7 @@ return {
 		end
 		if Boolean.toJSBoolean(p1.variables) then
 			local VariablesMap = nil
-			local Success, Result = pcall(function() --[[ Line: 51 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: VariablesMap (ref), SerializeFetchParameterFunction (upval), p1 (copy)
 				VariablesMap = SerializeFetchParameterFunction(p1.variables, "Variables map", true)
 			end)
@@ -37,7 +37,7 @@ return {
 		end
 		if Boolean.toJSBoolean(p1.extensions) then
 			local ExtensionsMap = nil
-			local Success1, Result1 = pcall(function() --[[ Line: 62 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: ExtensionsMap (ref), SerializeFetchParameterFunction (upval), p1 (copy)
 				ExtensionsMap = SerializeFetchParameterFunction(p1.extensions, "Extensions map")
 			end)

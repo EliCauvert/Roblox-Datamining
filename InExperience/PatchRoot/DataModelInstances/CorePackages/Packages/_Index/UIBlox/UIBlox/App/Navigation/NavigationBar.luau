@@ -15,7 +15,7 @@ local config = {
 	animationConfig = { dampingRatio = 1, frequency = 3 }
 }
 
-return function(p1) --[[ Line: 68 | Named "NavigationBar" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleModule (copy), ReactModule (copy), NavigationBarAlignmentModule (copy), ReactOtterModule (copy)
 	assert(#p1.items > 0, "At least one item should be present!")
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
@@ -36,14 +36,14 @@ return function(p1) --[[ Line: 68 | Named "NavigationBar" ]]
 	else
 		error("NavigationBar Alignment type is incorrect!")
 	end
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 94 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: JoinResult (copy), UseStateResult2 (copy)
 		if JoinResult.visibility or JoinResult.animated then
 			UseStateResult2(Frame.AbsoluteSize.Y)
 		end
 	end, { JoinResult.visibility, JoinResult.animated })
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
-	ReactModule.useEffect(function() --[[ Line: 100 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: JoinResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseStateResult (copy)
 		if not JoinResult.visibility and JoinResult.animated then
 			if JoinResult.isVisible then
@@ -94,10 +94,10 @@ return function(p1) --[[ Line: 68 | Named "NavigationBar" ]]
 			BorderSizePixel = 0,
 			Selectable = false,
 			Active = JoinResult.active,
-			Position = if JoinResult.visibility then JoinResult.visibility:map(function(p2: number): UDim2 --[[ Line: 138 ]]
+			Position = if JoinResult.visibility then JoinResult.visibility:map(function(p2: number): UDim2
 				-- upvalues: UseStateResult (copy)
 				return UDim2.new(0, 0, 0, (math.floor((1 - p2) * UseStateResult + 0.5)))
-			end) else UseAnimatedBindingResult:map(function(p2: number): UDim2 --[[ Line: 142 ]]
+			end) else UseAnimatedBindingResult:map(function(p2: number): UDim2
 				return UDim2.new(0, 0, 0, (math.floor(p2 + 0.5)))
 			end),
 			Size = UDim2.fromScale(1, 1),

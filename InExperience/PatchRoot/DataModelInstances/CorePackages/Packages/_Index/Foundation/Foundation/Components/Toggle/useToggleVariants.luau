@@ -7,7 +7,7 @@ local _ = require(Foundation.Providers.Style.Tokens)
 local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 local GetKnobSizeModule = require(Foundation.Components.Knob.getKnobSize)
 
-local function computeProps(p1) --[[ Line: 29 ]]
+local function computeProps(p1)
 	local Offset = p1.knobSize.X.Offset
 	local HeightRatio = (p1.size.height - Offset) / 2
 	
@@ -24,7 +24,7 @@ local function computeProps(p1) --[[ Line: 29 ]]
 	}
 end
 
-local function variantsFactory(p1) --[[ Line: 53 ]]
+local function variantsFactory(p1)
 	-- upvalues: InputSizeModule (copy), computeProps (copy), GetKnobSizeModule (copy)
 	return {
 		common = {
@@ -68,7 +68,7 @@ local function variantsFactory(p1) --[[ Line: 53 ]]
 	}
 end
 
-return function(p1, p2) --[[ Line: 96 ]]
+return function(p1, p2)
 	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
 	local Toggle = VariantsContextModule.useVariants("Toggle", variantsFactory, p1)
 	

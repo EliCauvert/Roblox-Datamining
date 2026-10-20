@@ -2,7 +2,7 @@
 local AvatarSizeModule = require(Foundation.Enums.AvatarSize)
 local _ = require(Foundation.Providers.Style.Tokens)
 
-return function(p1, p2, p3) --[[ Line: 9 | Named "getAvatarSize" ]]
+return function(p1, p2, p3)
 	-- upvalues: AvatarSizeModule (copy)
 	return if p3 then ({
 		[AvatarSizeModule.XSmall] = p1.Size.Size_300,

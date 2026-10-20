@@ -10,7 +10,7 @@ local GameParams = ExperienceServiceModule.GameParams
 local BuildModeLaunchModule = require(script.Parent.BuildModeLaunch)
 local Debug = require(Parent.DataHydration.CreatorAgentChat).debug
 
-return function(JoiningPlaceId, Source, p1, p2) --[[ Line: 22 | Named "launchExperience" ]]
+return function(JoiningPlaceId, Source, p1, p2)
 	-- upvalues: BuildModeLaunchModule (copy), FFlagConnectionRelaunchBuildPlaytest (copy), GameParams (copy), FFlagBuildExperienceLibrary (copy), Parent (copy), FFlagDeferInExperienceRbxmDownload (copy), FFlagEnableDeferredAssetManagerService (copy), Debug (copy), ExperienceService (copy)
 	BuildModeLaunchModule:set(if p2 == nil then nil else p2.sessionId, JoiningPlaceId, if FFlagConnectionRelaunchBuildPlaytest then p1 else nil)
 	local FromPlaceIdResult = GameParams.fromPlaceId(JoiningPlaceId, p1)

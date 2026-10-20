@@ -4,7 +4,7 @@ local FeatureKeyModule = require(InExperienceOffers.Enums.FeatureKey)
 local OfferStatusModule = require(InExperienceOffers.Enums.OfferStatus)
 local _ = require(InExperienceOffers.Types)
 
-return function(p1): number? --[[ Line: 16 | Named "getSecondsUntilNextExpiration" ]]
+return function(p1): number?
 	-- upvalues: FeatureKeyModule (copy), OfferStatusModule (copy), OffersDebugLoggerModule (copy)
 	local UnixTimestampMillis = DateTime.now().UnixTimestampMillis
 	local v1: number? = nil
@@ -17,7 +17,7 @@ return function(p1): number? --[[ Line: 16 | Named "getSecondsUntilNextExpiratio
 		if value.offerStatus == OfferStatusModule.Available then
 			local ExpirationTimeInUTC = value.expirationTimeInUTC
 			local _DateTime = if ExpirationTimeInUTC == nil then nil else DateTime.fromIsoDate(ExpirationTimeInUTC)
-			OffersDebugLoggerModule.logLazy(function(): string --[[ Line: 32 ]]
+			OffersDebugLoggerModule.logLazy(function(): string
 				-- upvalues: value (copy), ExpirationTimeInUTC (copy), _DateTime (copy)
 				return string.format("getSecondsUntilNextExpiration parse offerId=%s expirationTimeInUTC=%s parsedUnixMillis=%s", tostring(value.offerId), tostring(ExpirationTimeInUTC), if _DateTime == nil then "nil" else tostring(_DateTime.UnixTimestampMillis))
 			end)
@@ -31,7 +31,7 @@ return function(p1): number? --[[ Line: 16 | Named "getSecondsUntilNextExpiratio
 			end
 		end
 	end
-	OffersDebugLoggerModule.logLazy(function(): string --[[ Line: 50 ]]
+	OffersDebugLoggerModule.logLazy(function(): string
 		-- upvalues: v1 (ref)
 		return string.format("getSecondsUntilNextExpiration return %s", (tostring(v1)))
 	end)

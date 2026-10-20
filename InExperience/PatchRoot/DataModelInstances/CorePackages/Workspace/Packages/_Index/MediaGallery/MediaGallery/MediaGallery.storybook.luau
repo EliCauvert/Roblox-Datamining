@@ -13,7 +13,7 @@ local FoundationProvider = FoundationModule.FoundationProvider
 local ColorMode = FoundationModule.Enums.ColorMode
 local Device = FoundationModule.Enums.Device
 local config = { Light = ColorMode.Light, Dark = ColorMode.Dark }
-local NewResult = RoduxModule.Store.new(function(p1) --[[ Line: 23 ]]
+local NewResult = RoduxModule.Store.new(function(p1)
 	return p1
 end, {
 	ScreenSize = Vector2.new(1920, 1080),
@@ -21,11 +21,11 @@ end, {
 	GlobalGuiInset = { bottom = 0, left = 0, right = 0, top = 0 }
 }, {})
 local config1 = {
-	isFocused = function(): boolean --[[ Line: 32 ]]
+	isFocused = function(): boolean
 		return true
 	end,
-	addListener = function(_, _, _) --[[ Line: 35 ]]
-		return { remove = function() --[[ Line: 36 ]] end }
+	addListener = function(_, _, _)
+		return { remove = function() end }
 	end
 }
 
@@ -33,9 +33,9 @@ return {
 	name = MediaGallery.Name,
 	roact = ReactModule,
 	reactRoblox = ReactRobloxModule,
-	mapStory = function(p1) --[[ Line: 40 ]]
+	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), RoactRoduxModule (copy), NewResult (copy), RoactNavigationModule (copy), config1 (copy), FoundationProvider (copy), config (copy), Device (copy), AppStyleProvider (copy)
-		return function(p2) --[[ Line: 41 ]]
+		return function(p2)
 			-- upvalues: ReactModule (upval), RoactRoduxModule (upval), NewResult (upval), RoactNavigationModule (upval), config1 (upval), FoundationProvider (upval), config (upval), Device (upval), AppStyleProvider (upval), p1 (copy)
 			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,

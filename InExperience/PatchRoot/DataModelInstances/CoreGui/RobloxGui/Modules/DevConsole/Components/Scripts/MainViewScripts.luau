@@ -10,19 +10,19 @@ local MainRowPadding = ConstantsModule.GeneralFormatting.MainRowPadding
 local Names = { "Active", "Inactive" }
 local MainViewScripts = RoactModule.PureComponent:extend("MainViewScripts")
 
-function MainViewScripts.init(p1) --[[ Line: 22 ]]
+function MainViewScripts.init(p1)
 	-- upvalues: RoactModule (copy)
-	function p1.onUtilTabHeightChanged(UtilTabHeight) --[[ Line: 23 ]]
+	function p1.onUtilTabHeightChanged(UtilTabHeight)
 		-- upvalues: p1 (copy)
 		p1:setState({ utilTabHeight = UtilTabHeight })
 	end
 	
-	function p1.onCheckboxChanged(p2, p3) --[[ Line: 29 ]]
+	function p1.onCheckboxChanged(p2, p3)
 		-- upvalues: p1 (copy)
 		p1.props.dispatchServerScriptsUpdateSearchFilter(nil, { [p2] = p3 })
 	end
 	
-	function p1.onSearchTermChanged(p2) --[[ Line: 36 ]]
+	function p1.onSearchTermChanged(p2)
 		-- upvalues: p1 (copy)
 		p1.props.dispatchServerScriptsUpdateSearchFilter(p2, {})
 	end
@@ -31,11 +31,11 @@ function MainViewScripts.init(p1) --[[ Line: 22 ]]
 	p1.state = { utilTabHeight = 0, isClientView = true }
 end
 
-function MainViewScripts.didMount(p1) --[[ Line: 48 ]]
+function MainViewScripts.didMount(p1)
 	p1:setState({ utilTabHeight = p1.utilRef.current.Size.Y.Offset })
 end
 
-function MainViewScripts.didUpdate(p1) --[[ Line: 55 ]]
+function MainViewScripts.didUpdate(p1)
 	local Size = p1.utilRef.current.Size
 	
 	if Size.Y.Offset ~= p1.state.utilTabHeight then
@@ -43,7 +43,7 @@ function MainViewScripts.didUpdate(p1) --[[ Line: 55 ]]
 	end
 end
 
-function MainViewScripts.render(p1) --[[ Line: 64 ]]
+function MainViewScripts.render(p1)
 	-- upvalues: Names (copy), RoactModule (copy), ConstantsModule (copy), MainRowPadding (copy), UtilAndTabModule (copy), ServerScriptsModule (copy)
 	local Size = p1.props.size
 	local FormFactor = p1.props.formFactor
@@ -92,15 +92,15 @@ function MainViewScripts.render(p1) --[[ Line: 64 ]]
 	})
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p2, _) --[[ Line: 121 | Named "mapStateToProps" ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p2, _)
 	return {
 		serverSearchTerm = p2.ScriptsData.serverSearchTerm,
 		serverTypeFilters = p2.ScriptsData.serverTypeFilters
 	}
-end, function(Callback) --[[ Line: 128 | Named "mapDispatchToProps" ]]
+end, function(Callback)
 	-- upvalues: ServerScriptsUpdateSearchFilterModule (copy)
 	return {
-		dispatchServerScriptsUpdateSearchFilter = function(p2, p3) --[[ Line: 130 ]]
+		dispatchServerScriptsUpdateSearchFilter = function(p2, p3)
 			-- upvalues: Callback (copy), ServerScriptsUpdateSearchFilterModule (upval)
 			Callback(ServerScriptsUpdateSearchFilterModule(p2, p3))
 		end

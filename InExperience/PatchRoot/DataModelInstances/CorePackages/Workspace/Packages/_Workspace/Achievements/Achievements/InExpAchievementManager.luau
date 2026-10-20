@@ -9,35 +9,35 @@ local DashModule = require(Parent.Dash)
 local TimeRefresherModule = require(Achievements.AchievementDataRefresher.TimeRefresher)
 local FriendCountRefresherModule = require(Achievements.AchievementDataRefresher.FriendCountRefresher)
 local ConfigResult = HttpRequestModule.config({
-	requestFunction = function(p1, p2, p3) --[[ Line: 19 ]]
+	requestFunction = function(p1, p2, p3)
 		-- upvalues: HttpRequestModule (copy)
 		return HttpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
 	end,
 	maxRetryCount = if require(Parent.SharedFlags).FFlagLuaAppDefaultHttpRetry then game:DefineFastInt("InExpAchievementManagerHttpRetryCount", 4) else nil
 })
 local PlatformFriendsService = nil
-pcall(function() --[[ Line: 29 ]]
+pcall(function()
 	-- upvalues: PlatformFriendsService (ref)
 	PlatformFriendsService = game:GetService("PlatformFriendsService")
 end)
 local PlatformCloudStorageService = nil
-pcall(function() --[[ Line: 34 ]]
+pcall(function()
 	-- upvalues: PlatformCloudStorageService (ref)
 	PlatformCloudStorageService = game:GetService("PlatformCloudStorageService")
 end)
 local AchievementService = nil
-pcall(function() --[[ Line: 39 ]]
+pcall(function()
 	-- upvalues: AchievementService (ref)
 	AchievementService = game:GetService("AchievementService")
 end)
 local Players = game:GetService("Players")
 local PlatformService = nil
-pcall(function() --[[ Line: 47 ]]
+pcall(function()
 	-- upvalues: PlatformService (ref)
 	PlatformService = game:GetService("PlatformService")
 end)
 local InExpAchievementManager = {
-	startUp = function(p1) --[[ Line: 56 ]]
+	startUp = function(p1)
 		-- upvalues: SignalModule (copy), TimeRefresherModule (copy), FriendCountRefresherModule (copy), AchievementModule (copy)
 		local ReadableSignal, ReadableSignal2 = SignalModule.createReadableSignal(0)
 		local ReadableSignal1, ReadableSignal2_1 = SignalModule.createReadableSignal(0)
@@ -54,7 +54,7 @@ local InExpAchievementManager = {
 		p1:_checkStrengthInNumbers(ReadableSignal2_2)
 		p1:_checkJoinExperienceAchievements(ReadableSignal2_1)
 	end,
-	_checkJoinExperienceAchievements = function(p1, Callback: (any) -> ()) --[[ Line: 98 ]]
+	_checkJoinExperienceAchievements = function(p1, Callback: (any) -> ())
 		-- upvalues: DashModule (copy), GetUserRecentExperiencesModule (copy), LoggerModule (copy)
 		if p1.achievementScout.hasAchieved == false or p1.achievementExplorer.hasAchieved == false or p1.achievementTrailblazer.hasAchieved == false then
 			if p1.platformCloudStorageService and p1.platformCloudStorageService:IsUserDataAvailable() then
@@ -68,17 +68,17 @@ local InExpAchievementManager = {
 				
 				return
 			else
-				GetUserRecentExperiencesModule(p1.requestImpl):andThen(function(Result) --[[ Line: 116 ]]
+				GetUserRecentExperiencesModule(p1.requestImpl):andThen(function(Result)
 					-- upvalues: Callback (copy)
 					Callback(Result)
-				end):catch(function(Err) --[[ Line: 118 ]]
+				end):catch(function(Err)
 					-- upvalues: LoggerModule (upval)
 					LoggerModule:warning(Err)
 				end)
 			end
 		end
 	end,
-	_checkStrengthInNumbers = function(p1, Callback: (any) -> ()) --[[ Line: 125 ]]
+	_checkStrengthInNumbers = function(p1, Callback: (any) -> ())
 		if p1.achievementStrengthInNumbers.hasAchieved == false then
 			local LocalPlayer = p1.playersService.LocalPlayer
 			
@@ -89,7 +89,7 @@ local InExpAchievementManager = {
 	end
 }
 
-function InExpAchievementManager.new(ACHIEVEMENTEXPLORER, p1, AchievementService1, p2, p3, p4) --[[ Line: 140 ]]
+function InExpAchievementManager.new(ACHIEVEMENTEXPLORER, p1, AchievementService1, p2, p3, p4)
 	-- upvalues: ConfigResult (copy), PlatformFriendsService (ref), PlatformCloudStorageService (ref), AchievementService (ref), Players (copy), PlatformService (ref), InExpAchievementManager (copy)
 	return (setmetatable({
 		requestImpl = if ACHIEVEMENTEXPLORER then ACHIEVEMENTEXPLORER else ConfigResult,

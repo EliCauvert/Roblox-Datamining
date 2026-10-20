@@ -7,7 +7,7 @@
 }
 local Segments = { "State", "Operation", "Event" }
 
-local function stripTrailingSuffix(Text: string): string --[[ Line: 12 ]]
+local function stripTrailingSuffix(Text: string): string
 	-- upvalues: Segments (copy)
 	local v1 = nil
 	for _, segment in Segments do
@@ -20,7 +20,7 @@ local function stripTrailingSuffix(Text: string): string --[[ Line: 12 ]]
 	return Text
 end
 
-local function splitPascalCase(Text: string) --[[ Line: 22 ]]
+local function splitPascalCase(Text: string)
 	local t = {}
 	local Text1 = ""
 	
@@ -46,12 +46,12 @@ local function splitPascalCase(Text: string) --[[ Line: 22 ]]
 	return t
 end
 
-local function _(Text: string) --[[ Line: 48 | Named "canonicalizeWord" ]]
+local function _(Text: string)
 	-- upvalues: config (copy)
 	return config[Text:lower()] or Text
 end
 
-local function humanizeName(p1): string --[[ Line: 52 ]]
+local function humanizeName(p1): string
 	-- upvalues: splitPascalCase (copy), stripTrailingSuffix (copy), config (copy)
 	local SplitPascalCaseResult = splitPascalCase(stripTrailingSuffix(p1))
 	
@@ -130,11 +130,11 @@ return {
 	operationTypeLabels = OperationTypeLabels,
 	eventNameLabels = EventNameLabels,
 	humanizeName = humanizeName,
-	labelForOperationType = function(p2) --[[ Line: 126 ]]
+	labelForOperationType = function(p2)
 		-- upvalues: OperationTypeLabels (copy), humanizeName (copy)
 		return OperationTypeLabels[p2] or humanizeName(p2)
 	end,
-	labelForEventName = function(p2) --[[ Line: 130 ]]
+	labelForEventName = function(p2)
 		-- upvalues: EventNameLabels (copy), humanizeName (copy)
 		return EventNameLabels[p2] or humanizeName(p2)
 	end

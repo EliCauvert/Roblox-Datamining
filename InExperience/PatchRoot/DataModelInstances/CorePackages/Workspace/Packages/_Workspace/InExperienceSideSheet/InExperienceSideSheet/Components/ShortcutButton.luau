@@ -13,17 +13,17 @@ local View = FoundationModule.View
 local ButtonWidth = require(InExperienceSideSheet.Common.Enums).ButtonWidth
 local Signal = require(Parent.Signals).createSignal(nil)
 
-local function _(p1: number): number --[[ Line: 28 ]]
+local function _(p1: number): number
 	return p1 + (1 - p1) * 0.5
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 41 | Named "ShortcutButton" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), SignalsReactModule (copy), Signal (copy), ReactModule (copy), IconSize (copy), IsBuilderIconFunction (copy), ButtonWidth (copy), View (copy), Icon (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({ label = p1.label })
 	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.getIsEnabled)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(p1.getShortcutIcon or Signal)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 52 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		p1.getOnActivated()()
 	end, { p1.getOnActivated })

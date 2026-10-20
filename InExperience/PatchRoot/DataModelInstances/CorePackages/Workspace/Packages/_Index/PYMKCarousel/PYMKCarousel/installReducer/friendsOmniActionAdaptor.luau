@@ -11,14 +11,14 @@ local SocialCommon = DependenciesModule.SocialCommon
 local RecommendationSourceEnum = SocialCommon.Enums.RecommendationSourceEnum
 local ContextualInfoTypes = SocialCommon.Enums.ContextualInfoTypes
 
-local function _(p1): boolean --[[ Line: 16 ]]
+local function _(p1): boolean
 	-- upvalues: RecommendationContextType (copy)
 	local FromRawValueResult = RecommendationContextType.fromRawValue(p1)
 	
 	return FromRawValueResult and FromRawValueResult ~= RecommendationContextType.None
 end
 
-local function v13(p1, p2, p3) --[[ Line: 21 ]]
+local function v13(p1, p2, p3)
 	-- upvalues: RecommendationContextType (copy), ContextualInfoTypes (copy), ConstantsModule (copy)
 	local FromRawValueResult = RecommendationContextType.fromRawValue(p1.contextType)
 	local IsNotFromRawValueResultMatch: boolean = FromRawValueResult and FromRawValueResult ~= RecommendationContextType.None
@@ -44,7 +44,7 @@ local function v13(p1, p2, p3) --[[ Line: 21 ]]
 	}
 end
 
-local function v14(p1, p2, p3) --[[ Line: 57 ]]
+local function v14(p1, p2, p3)
 	-- upvalues: Players (copy), RoduxFriends (copy), v13 (copy)
 	local LocalPlayer = Players.LocalPlayer
 	assert(LocalPlayer, "LocalPlayer must be non-nil")
@@ -55,7 +55,7 @@ local function v14(p1, p2, p3) --[[ Line: 57 ]]
 	})
 end
 
-local function v15(_, p1) --[[ Line: 72 ]]
+local function v15(_, p1)
 	-- upvalues: Llama (copy), RoduxFriends (copy), RecommendationSourceEnum (copy)
 	return RoduxFriends.Actions.RecommendationSourceCreated({
 		source = RecommendationSourceEnum.HomepagePYMKCarousel,
@@ -63,13 +63,13 @@ local function v15(_, p1) --[[ Line: 72 ]]
 	})
 end
 
-return function(p1) --[[ Line: 84 ]]
+return function(p1)
 	-- upvalues: TransformOmniRecommendationsToActionsModule (copy), v14 (copy), v15 (copy)
 	return {
-		AddContentMetadata = function(p2) --[[ Line: 86 ]]
+		AddContentMetadata = function(p2)
 			return { p2 }
 		end,
-		AddOmniRecommendations = function(p2) --[[ Line: 91 ]]
+		AddOmniRecommendations = function(p2)
 			-- upvalues: TransformOmniRecommendationsToActionsModule (upval), p1 (copy), v14 (upval), v15 (upval)
 			return TransformOmniRecommendationsToActionsModule(p2.recommendations or {}, p1, v14, v15)
 		end

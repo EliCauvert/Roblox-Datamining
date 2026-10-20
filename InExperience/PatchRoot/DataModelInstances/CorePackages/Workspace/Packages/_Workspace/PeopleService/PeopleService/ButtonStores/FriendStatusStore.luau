@@ -6,16 +6,16 @@ local PeopleUtilityModule = require(Parent.PeopleUtility)
 local ButtonVariant = require(Parent1.Foundation).Enums.ButtonVariant
 local PeopleBlockStatusStoreModule = require(script.Parent.PeopleBlockStatusStore)
 
-return ((function() --[[ Line: 31 | Named "createFriendStatusStore" ]]
+return ((function()
 	-- upvalues: Players (copy), SignalsModule (copy), PeopleUtilityModule (copy), PeopleBlockStatusStoreModule (copy), ButtonVariant (copy)
 	local LocalPlayer = Players.LocalPlayer
 	local t = {}
 	local FriendStatusChangedConnection = nil
 	
-	local function _(UserId) --[[ Line: 42 | Named "getCurrentFriendStatus" ]]
+	local function _(UserId)
 		-- upvalues: LocalPlayer (copy), Players (upval)
 		if UserId and LocalPlayer then
-			local Success, Result = pcall(function() --[[ Line: 47 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: Players (upval), UserId (copy), LocalPlayer (upval)
 				local Player = Players:GetPlayerByUserId(UserId)
 				
@@ -28,7 +28,7 @@ return ((function() --[[ Line: 31 | Named "createFriendStatusStore" ]]
 		end
 	end
 	
-	local function getFriendStatusSignal(UserId) --[[ Line: 60 ]]
+	local function getFriendStatusSignal(UserId)
 		-- upvalues: SignalsModule (upval), t (ref), LocalPlayer (copy), Players (upval)
 		if not UserId then
 			return SignalsModule.createSignal(Enum.FriendStatus.Unknown)
@@ -38,7 +38,7 @@ return ((function() --[[ Line: 31 | Named "createFriendStatusStore" ]]
 		end
 		local Unknown = nil
 		if UserId and LocalPlayer then
-			local Success, Result = pcall(function() --[[ Line: 47 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: Players (upval), UserId (copy), LocalPlayer (upval)
 				local Player = Players:GetPlayerByUserId(UserId)
 				
@@ -54,24 +54,24 @@ return ((function() --[[ Line: 31 | Named "createFriendStatusStore" ]]
 		return Signal
 	end
 	
-	local function onFriendStatusChanged(Player: Player, FriendStatus) --[[ Line: 86 ]]
+	local function onFriendStatusChanged(Player: Player, FriendStatus)
 		-- upvalues: t (ref)
 		if t[Player.UserId] then
 			t[Player.UserId].setter(FriendStatus)
 		end
 	end
 	
-	local function getShouldShowFriendButton(p1, p2) --[[ Line: 94 ]]
+	local function getShouldShowFriendButton(p1, p2)
 		-- upvalues: SignalsModule (upval), PeopleUtilityModule (upval), PeopleBlockStatusStoreModule (upval)
-		return SignalsModule.createComputed(function(p3): boolean --[[ Line: 95 ]]
+		return SignalsModule.createComputed(function(p3): boolean
 			-- upvalues: PeopleUtilityModule (upval), p2 (copy), p1 (copy), PeopleBlockStatusStoreModule (upval)
 			return if PeopleUtilityModule.showPersonButtons(p2, p1) and p1 then not PeopleBlockStatusStoreModule.getPlayerBlockStatus(p1)(p3) else false
 		end)
 	end
 	
-	local function getFriendButtonText(UserId, p1) --[[ Line: 110 ]]
+	local function getFriendButtonText(UserId, p1)
 		-- upvalues: SignalsModule (upval), getFriendStatusSignal (copy)
-		return if UserId then SignalsModule.createComputed(function(p2) --[[ Line: 115 ]]
+		return if UserId then SignalsModule.createComputed(function(p2)
 			-- upvalues: getFriendStatusSignal (upval), UserId (copy), p1 (copy)
 			local FriendStatus = getFriendStatusSignal(UserId)(p2)
 			
@@ -79,9 +79,9 @@ return ((function() --[[ Line: 31 | Named "createFriendStatusStore" ]]
 		end) else SignalsModule.createSignal(p1.addPerson)
 	end
 	
-	local function getFriendButtonVariant(UserId) --[[ Line: 130 ]]
+	local function getFriendButtonVariant(UserId)
 		-- upvalues: SignalsModule (upval), ButtonVariant (upval), getFriendStatusSignal (copy)
-		return if UserId then SignalsModule.createComputed(function(p1) --[[ Line: 135 ]]
+		return if UserId then SignalsModule.createComputed(function(p1)
 			-- upvalues: getFriendStatusSignal (upval), UserId (copy), ButtonVariant (upval)
 			local FriendStatus = getFriendStatusSignal(UserId)(p1)
 			
@@ -89,17 +89,17 @@ return ((function() --[[ Line: 31 | Named "createFriendStatusStore" ]]
 		end) else SignalsModule.createSignal(ButtonVariant.Subtle)
 	end
 	
-	local function getFriendStatus(UserId) --[[ Line: 147 ]]
+	local function getFriendStatus(UserId)
 		-- upvalues: SignalsModule (upval), getFriendStatusSignal (copy)
-		return if UserId then SignalsModule.createComputed(function(p1): boolean --[[ Line: 152 ]]
+		return if UserId then SignalsModule.createComputed(function(p1): boolean
 			-- upvalues: getFriendStatusSignal (upval), UserId (copy)
 			return getFriendStatusSignal(UserId)(p1) == Enum.FriendStatus.Friend
 		end) else SignalsModule.createSignal(false)
 	end
 	
-	local function getIsFriendButtonDisabled(UserId) --[[ Line: 159 ]]
+	local function getIsFriendButtonDisabled(UserId)
 		-- upvalues: SignalsModule (upval), getFriendStatusSignal (copy)
-		return if UserId then SignalsModule.createComputed(function(p1): boolean --[[ Line: 164 ]]
+		return if UserId then SignalsModule.createComputed(function(p1): boolean
 			-- upvalues: getFriendStatusSignal (upval), UserId (copy)
 			local FriendStatus = getFriendStatusSignal(UserId)(p1)
 			
@@ -107,15 +107,15 @@ return ((function() --[[ Line: 31 | Named "createFriendStatusStore" ]]
 		end) else SignalsModule.createSignal(false)
 	end
 	
-	local function getIsFriendButtonGrayedOut(UserId) --[[ Line: 171 ]]
+	local function getIsFriendButtonGrayedOut(UserId)
 		-- upvalues: SignalsModule (upval), getFriendStatusSignal (copy)
-		return if UserId then SignalsModule.createComputed(function(p1): boolean --[[ Line: 176 ]]
+		return if UserId then SignalsModule.createComputed(function(p1): boolean
 			-- upvalues: getFriendStatusSignal (upval), UserId (copy)
 			return getFriendStatusSignal(UserId)(p1) == Enum.FriendStatus.FriendRequestSent
 		end) else SignalsModule.createSignal(false)
 	end
 	
-	local function sendFriendRequest(Player) --[[ Line: 183 ]]
+	local function sendFriendRequest(Player)
 		-- upvalues: LocalPlayer (copy)
 		if Player and LocalPlayer then
 			LocalPlayer:RequestFriendship(Player)
@@ -124,14 +124,14 @@ return ((function() --[[ Line: 31 | Named "createFriendStatusStore" ]]
 		end
 	end
 	
-	local _ = function() --[[ Line: 192 | Named "initializeFriendStatusListener" ]]
+	local _ = function()
 		-- upvalues: LocalPlayer (copy), FriendStatusChangedConnection (ref), onFriendStatusChanged (copy)
 		if LocalPlayer then
 			FriendStatusChangedConnection = LocalPlayer.FriendStatusChanged:Connect(onFriendStatusChanged)
 		end
 	end
 	
-	local function cleanup() --[[ Line: 199 ]]
+	local function cleanup()
 		-- upvalues: FriendStatusChangedConnection (ref), t (ref)
 		if FriendStatusChangedConnection then
 			FriendStatusChangedConnection:Disconnect()

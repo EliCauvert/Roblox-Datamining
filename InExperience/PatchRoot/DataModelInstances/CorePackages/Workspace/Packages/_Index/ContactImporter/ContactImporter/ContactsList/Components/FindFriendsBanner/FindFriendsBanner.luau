@@ -13,7 +13,7 @@ local StyledTextLabel = UIBlox.App.Text.StyledTextLabel
 local TextKeysModule = require(ContactImporter.Common.TextKeys)
 local IconsGraphicContactsLarge = UIBlox.App.ImageSet.Images["icons/graphic/contacts_large"]
 
-return function(p1) --[[ Line: 29 | Named "FindFriendsBanner" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), UseStyleFunction (copy), React (copy), ImageSetLabel (copy), IconSize (copy), IconsGraphicContactsLarge (copy), StyledTextLabel (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy)
 	local OpenAmpUpsell = p1.openAmpUpsell
 	local NoShowMatchedContacts = not p1.showMatchedContacts

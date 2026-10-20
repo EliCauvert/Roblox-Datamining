@@ -1,6 +1,6 @@
 ﻿local HttpService = game:GetService("HttpService")
 
-return function(Input) --[[ Line: 3 | Named "stripMeshFromGltf" ]]
+return function(Input)
 	-- upvalues: HttpService (copy)
 	local Data = HttpService:JSONDecode(Input)
 	Data.meshes = nil

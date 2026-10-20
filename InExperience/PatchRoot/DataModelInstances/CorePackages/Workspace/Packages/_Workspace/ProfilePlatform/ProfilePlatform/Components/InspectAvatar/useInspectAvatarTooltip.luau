@@ -4,14 +4,14 @@ local ReactModule = require(Parent.React)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local v1 = require(ProfilePlatform.Stores.GetInspectAvatarTooltipStore)(false)
 
-return function() --[[ Line: 11 | Named "useInspectAvatarTooltip" ]]
+return function()
 	-- upvalues: UseSignalStateFunction (copy), v1 (copy), ReactModule (copy)
 	local UseSignalStateResult = UseSignalStateFunction(v1.getIsOpen)
-	ReactModule.useEffect(function() --[[ Line: 14 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: v1 (upval)
 		v1.tryShow()
 		
-		return function() --[[ Line: 17 ]]
+		return function()
 			-- upvalues: v1 (upval)
 			v1.hide()
 		end

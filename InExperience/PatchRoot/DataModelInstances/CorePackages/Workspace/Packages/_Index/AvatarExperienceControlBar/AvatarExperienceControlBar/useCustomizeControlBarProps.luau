@@ -43,11 +43,11 @@ local config = {
 	[AvatarScreen.SearchLandingFocusedWidgetPage] = true
 }
 
-local function selectUserId(p1) --[[ Line: 64 ]]
+local function selectUserId(p1)
 	return p1.LocalUserId
 end
 
-return function(p1) --[[ Line: 81 | Named "useCustomizeControlBarProps" ]]
+return function(p1)
 	-- upvalues: UseSemanticTokensModule (copy), UseNavigationFunction (copy), FFlagAXUseProfileIconEntryPoint (copy), FFlagAXPPEReturnToEntrySurface (copy), UseAvatarRouteFunction (copy), AvatarScreen (copy), UseSelectorFunction (copy), SelectColorAdjustmentButtonColor (copy), selectUserId (copy), FFlagMeProfileEntryTooltipEnabled (copy), UseMeProfileEntryTooltipModule (copy), config (copy), UseLocalizationFunction (copy), FFlagAXAvatarSharingEntryPoint (copy), ReactModule (copy), SlotBasedEditorAnalytics (copy), MenuItemEnumModule (copy), FFlagEditProfileImageV2Enabled (copy), FFlagAXFavoritesManagerNavEntry (copy), FFlagAXHideHeadAdjustmentForDefaultHead (copy), SelectHasDynamicHead (copy), FFlagAXResetAvatarButton (copy), UseUndoRedoBarViewModelModule (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), AvatarHeadShot (copy), FFlagControlBarUseProfileFrameThumbnail (copy), FFlagMeProfileEntryTooltipVerticalCenter (copy), PopoverAlign (copy), FFlagAXMigrateBuilderIcons (copy), IconName (copy)
 	local UseSemanticTokensModuleResult = UseSemanticTokensModule()
 	local UseNavigationResult = UseNavigationFunction()
@@ -68,32 +68,32 @@ return function(p1) --[[ Line: 81 | Named "useCustomizeControlBarProps" ]]
 		shareAvatar = if FFlagAXAvatarSharingEntryPoint then "Feature.Avatar.Action.ShareAvatar" else nil,
 		myPublishedAvatars = if FFlagAXAvatarSharingEntryPoint then "Feature.Avatar.Action.MyPublishedAvatars" else nil
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 118 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
 		UseNavigationResult.navigate(AvatarScreen.AccessoryAdjustment)
 		SlotBasedEditorAnalytics.trackControlBarClick(MenuItemEnumModule.AvatarRefinement.AdjustAccessory)
 	end, { UseNavigationResult })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 123 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
 		UseNavigationResult.navigate(AvatarScreen.BodyShape)
 		SlotBasedEditorAnalytics.trackControlBarClick(MenuItemEnumModule.AvatarRefinement.BodyScale)
 	end, { UseNavigationResult })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 128 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
 		UseNavigationResult.navigate(AvatarScreen.HeadRefinement)
 		SlotBasedEditorAnalytics.trackControlBarClick(MenuItemEnumModule.AvatarRefinement.CustomizeHead)
 	end, { UseNavigationResult })
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 133 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
 		UseNavigationResult.navigate(AvatarScreen.LayeredClothingSort)
 		SlotBasedEditorAnalytics.trackControlBarClick(MenuItemEnumModule.AvatarRefinement.ClothingLayers)
 	end, { UseNavigationResult })
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 138 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
 		UseNavigationResult.navigate(AvatarScreen.LayeredMakeupSort)
 		SlotBasedEditorAnalytics.trackControlBarClick(MenuItemEnumModule.AvatarRefinement.MakeupLayers)
 	end, { UseNavigationResult })
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 143 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
 		UseNavigationResult.navigate(AvatarScreen.ColorAdjustment)
 		SlotBasedEditorAnalytics.trackControlBarClick(MenuItemEnumModule.AvatarRefinement.ColorAdjustment)
@@ -102,20 +102,20 @@ return function(p1) --[[ Line: 81 | Named "useCustomizeControlBarProps" ]]
 	local UseResult7 = nil
 	
 	if FFlagAXAvatarSharingEntryPoint then
-		UseResult6 = ReactModule.useCallback(function() --[[ Line: 150 ]]
+		UseResult6 = ReactModule.useCallback(function()
 			-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
 			UseNavigationResult.navigate(AvatarScreen.LookComposerPage, {
 				prevNavPage = if UseNavigationResult.state and UseNavigationResult.state.key then UseNavigationResult.state.key else nil
 			})
 			SlotBasedEditorAnalytics.trackControlBarClick(MenuItemEnumModule.SharedCommunityAvatars.ShareAvatar)
 		end, { UseNavigationResult })
-		UseResult7 = ReactModule.useCallback(function() --[[ Line: 158 ]]
+		UseResult7 = ReactModule.useCallback(function()
 			-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
 			UseNavigationResult.navigate(AvatarScreen.MySharedAvatars)
 			SlotBasedEditorAnalytics.trackControlBarClick(MenuItemEnumModule.SharedCommunityAvatars.MyPublishedAvatars)
 		end, { UseNavigationResult })
 	end
-	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 164 ]]
+	local UseResult8 = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy), FFlagEditProfileImageV2Enabled (upval), UseAvatarRouteResult (ref), FFlagAXUseProfileIconEntryPoint (upval), config (upval), AvatarScreen (upval), FFlagMeProfileEntryTooltipEnabled (upval), UseMeProfileEntryTooltipModuleResult (ref), FFlagAXPPEReturnToEntrySurface (upval), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
 		local Key = if UseNavigationResult.state and UseNavigationResult.state.key then UseNavigationResult.state.key else nil
 		
@@ -168,7 +168,7 @@ return function(p1) --[[ Line: 81 | Named "useCustomizeControlBarProps" ]]
 		if FFlagAXUseProfileIconEntryPoint or FFlagAXPPEReturnToEntrySurface then UseAvatarRouteResult else nil,
 		if FFlagMeProfileEntryTooltipEnabled and UseMeProfileEntryTooltipModuleResult then UseMeProfileEntryTooltipModuleResult.dismiss else nil
 	})
-	local UseResult9 = if FFlagAXFavoritesManagerNavEntry then ReactModule.useCallback(function() --[[ Line: 233 ]]
+	local UseResult9 = if FFlagAXFavoritesManagerNavEntry then ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
 		UseNavigationResult.navigate(AvatarScreen.FavoritesSaved)
 		SlotBasedEditorAnalytics.trackControlBarClick(MenuItemEnumModule.Main.Favorites)
@@ -177,7 +177,7 @@ return function(p1) --[[ Line: 81 | Named "useCustomizeControlBarProps" ]]
 	local UseUndoRedoBarViewModelModuleResult = if FFlagAXResetAvatarButton then UseUndoRedoBarViewModelModule() else nil
 	
 	return {
-		config = ReactModule.useMemo(function() --[[ Line: 249 ]]
+		config = ReactModule.useMemo(function()
 			-- upvalues: MenuItemEnumModule (upval), p1 (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (upval), UseSelectorResult1 (copy), AvatarHeadShot (upval), FFlagControlBarUseProfileFrameThumbnail (upval), UseResult8 (copy), FFlagAXUseProfileIconEntryPoint (upval), IsNameMatch (copy), FFlagMeProfileEntryTooltipEnabled (upval), UseMeProfileEntryTooltipModuleResult (ref), FFlagMeProfileEntryTooltipVerticalCenter (upval), PopoverAlign (upval), UseLocalizationResult (copy), FFlagAXMigrateBuilderIcons (upval), IconName (upval), SlotBasedEditorAnalytics (upval), UseSemanticTokensModuleResult (copy), UseResult (copy), UseResult1 (copy), UseResult2 (copy), FFlagAXHideHeadAdjustmentForDefaultHead (upval), UseSelectorResult2 (copy), UseResult3 (copy), UseResult4 (copy), UseSelectorResult (copy), UseResult5 (copy), FFlagAXAvatarSharingEntryPoint (upval), UseResult6 (ref), UseResult7 (ref), FFlagAXFavoritesManagerNavEntry (upval), UseResult9 (ref), FFlagAXResetAvatarButton (upval), UseUndoRedoBarViewModelModuleResult (copy)
 			local List = {
 				{
@@ -201,7 +201,7 @@ return function(p1) --[[ Line: 81 | Named "useCustomizeControlBarProps" ]]
 					type = "icon",
 					id = MenuItemEnumModule.Main.AvatarRefinement,
 					icon = if FFlagAXMigrateBuilderIcons then IconName.PersonStandingGear else "icons/menu/customize",
-					onActivated = function() --[[ Line: 286 ]]
+					onActivated = function()
 						-- upvalues: SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
 						SlotBasedEditorAnalytics.trackControlBarClick(MenuItemEnumModule.Main.AvatarRefinement)
 					end,
@@ -261,7 +261,7 @@ return function(p1) --[[ Line: 81 | Named "useCustomizeControlBarProps" ]]
 					type = "icon",
 					id = MenuItemEnumModule.Main.SharedCommunityAvatars,
 					icon = if FFlagAXMigrateBuilderIcons then IconName.CirclePlus else "icons/actions/edit/add",
-					onActivated = function() --[[ Line: 358 ]]
+					onActivated = function()
 						-- upvalues: SlotBasedEditorAnalytics (upval), MenuItemEnumModule (upval)
 						SlotBasedEditorAnalytics.trackControlBarClick(MenuItemEnumModule.Main.SharedCommunityAvatars)
 					end,

@@ -29,7 +29,7 @@ local SubscriptionTitleModule = require(Parent.Subscription.SubscriptionTitle)
 local FFlagHideDevSubsPriceIfSubscribed = require(Parent.Parent.SharedFlags).FFlagHideDevSubsPriceIfSubscribed
 local FFlagEnableDevSubsFastFollowFixes = require(Parent.Parent.SharedFlags).FFlagEnableDevSubsFastFollowFixes
 
-local function generateTestmodeDisclaimer(FooterText, p1, Theme, X, p2) --[[ Line: 89 ]]
+local function generateTestmodeDisclaimer(FooterText, p1, Theme, X, p2)
 	-- upvalues: FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), ReactModule (copy), NormalizeFontFaceFunction (copy)
 	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -55,7 +55,7 @@ local function generateTestmodeDisclaimer(FooterText, p1, Theme, X, p2) --[[ Lin
 	})
 end
 
-local function generatePromptText(p1, p2, Theme, XOffset, Callback, p3, p4) --[[ Line: 138 ]]
+local function generatePromptText(p1, p2, Theme, XOffset, Callback, p3, p4)
 	-- upvalues: ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), GetTextSizeFunction (copy), TextService (copy)
 	return ReactModule.createElement("TextLabel", {
 		LayoutOrder = p3 or 2,
@@ -71,14 +71,14 @@ local function generatePromptText(p1, p2, Theme, XOffset, Callback, p3, p4) --[[
 		TextColor3 = Theme.TextDefault.Color,
 		TextTransparency = Theme.TextDefault.Transparency,
 		RichText = true,
-		[ReactModule.Change.AbsoluteSize] = function(Frame: Frame) --[[ Line: 163 ]]
+		[ReactModule.Change.AbsoluteSize] = function(Frame: Frame)
 			-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), p4 (copy), TextService (upval), Callback (copy)
 			Callback(if FoundationFontFaceMigration then GetTextSizeFunction(Frame.Text, Frame.TextSize, p4.Typography.BodyLarge.Font, Vector2.new(Frame.AbsoluteSize.X, 1e999), { addTemporaryPadding = false }).Y else TextService:GetTextSize(Frame.Text, Frame.TextSize, Frame.Font, Vector2.new(Frame.AbsoluteSize.X, 1e999)).Y)
 		end
 	})
 end
 
-local function createSubscribeButtonStacks(p1, p2) --[[ Line: 185 ]]
+local function createSubscribeButtonStacks(p1, p2)
 	-- upvalues: ButtonType (copy)
 	return if p1.disablePurchase then {
 		{
@@ -86,7 +86,7 @@ local function createSubscribeButtonStacks(p1, p2) --[[ Line: 185 ]]
 			props = {
 				isDisabled = true,
 				layoutOrder = 0,
-				onActivated = function() --[[ Line: 191 ]] end,
+				onActivated = function() end,
 				text = p1.disablePurchaseText
 			}
 		}
@@ -95,7 +95,7 @@ local function createSubscribeButtonStacks(p1, p2) --[[ Line: 185 ]]
 			buttonType = ButtonType.PrimarySystem,
 			props = {
 				layoutOrder = 0,
-				onActivated = function() --[[ Line: 205 ]]
+				onActivated = function()
 					-- upvalues: p1 (copy)
 					p1.purchaseSubscriptionActivated(p1.primaryPaymentMethod)
 				end,
@@ -107,7 +107,7 @@ local function createSubscribeButtonStacks(p1, p2) --[[ Line: 185 ]]
 			buttonType = ButtonType.PrimarySystem,
 			props = {
 				layoutOrder = 0,
-				onActivated = function() --[[ Line: 226 ]]
+				onActivated = function()
 					-- upvalues: p1 (copy)
 					p1.purchaseSubscriptionActivated(p1.primaryPaymentMethod)
 				end,
@@ -118,7 +118,7 @@ local function createSubscribeButtonStacks(p1, p2) --[[ Line: 185 ]]
 			buttonType = ButtonType.Secondary,
 			props = {
 				layoutOrder = 1,
-				onActivated = function() --[[ Line: 236 ]]
+				onActivated = function()
 					-- upvalues: p1 (copy)
 					p1.purchaseSubscriptionActivated(p1.secondaryPaymentMethod)
 				end,
@@ -128,7 +128,7 @@ local function createSubscribeButtonStacks(p1, p2) --[[ Line: 185 ]]
 	}
 end
 
-local function generateDisclosure(p1, OnActivated) --[[ Line: 246 ]]
+local function generateDisclosure(p1, OnActivated)
 	-- upvalues: ReactModule (copy), View (copy), Text (copy)
 	local Parts = string.split(p1.DisclosureTermsURL, " {termsofuse} ")
 	
@@ -160,7 +160,7 @@ local function generateDisclosure(p1, OnActivated) --[[ Line: 246 ]]
 	})
 end
 
-local function renderNewModalDesign(p1, p2, Theme, p3, X, YOffset: number, OnActivated, CalculatePromptHeight, p4) --[[ Line: 279 ]]
+local function renderNewModalDesign(p1, p2, Theme, p3, X, YOffset: number, OnActivated, CalculatePromptHeight, p4)
 	-- upvalues: VerifiedBadgesModule (copy), GetIconRichTextFunction (copy), Enums (copy), ReactModule (copy), PartialPageModal (copy), createSubscribeButtonStacks (copy), generateTestmodeDisclaimer (copy), FFlagEnableDevSubsFastFollowFixes (copy), generateDisclosure (copy), ImageSetLabel (copy), View (copy), Text (copy), FFlagHideDevSubsPriceIfSubscribed (copy), FoundationModule (copy), generatePromptText (copy)
 	local Text1 = (if p1.isRobuxSubscription then GetIconRichTextFunction(Enums.IconName.Robux) .. " " else "") .. p1.displayPrice .. p1.period
 	
@@ -173,7 +173,7 @@ local function renderNewModalDesign(p1, p2, Theme, p3, X, YOffset: number, OnAct
 			forcedFillDirection = Enum.FillDirection.Vertical
 		},
 		onCloseClicked = p1.cancelPurchaseActivated,
-		footerContent = function() --[[ Line: 305 ]]
+		footerContent = function()
 			-- upvalues: p1 (copy), generateTestmodeDisclaimer (upval), p2 (copy), p3 (copy), Theme (copy), X (copy), p4 (copy), FFlagEnableDevSubsFastFollowFixes (upval), generateDisclosure (upval), OnActivated (copy)
 			return if p1.isTestingMode then generateTestmodeDisclaimer(p2.footerText, p3, Theme, X, p4) elseif FFlagEnableDevSubsFastFollowFixes then nil else generateDisclosure(p2, OnActivated)
 		end
@@ -268,13 +268,13 @@ local function renderNewModalDesign(p1, p2, Theme, p3, X, YOffset: number, OnAct
 	})
 end
 
-return function(p1) --[[ Line: 417 | Named "SubscriptionPurchasePrompt" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseDispatchFunction (copy), UseTokensFunction (copy), UrlBuilder (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), SubscriptionTitleModule (copy), MultiTextLocalizerModule (copy), WithStyleFunction (copy), GetPartialPageModalMiddleContentWidthFunction (copy), renderNewModalDesign (copy), PartialPageModal (copy), createSubscribeButtonStacks (copy), generateTestmodeDisclaimer (copy), FFlagEnableDevSubsFastFollowFixes (copy), generateDisclosure (copy), generatePromptText (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseTokensResult = UseTokensFunction()
 	
-	local function openTermsOfUse() --[[ Line: 422 ]]
+	local function openTermsOfUse()
 		-- upvalues: UrlBuilder (upval), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 		local config = {
 			name = AppPage.GenericWebPage,
@@ -290,7 +290,7 @@ return function(p1) --[[ Line: 417 | Named "SubscriptionPurchasePrompt" ]]
 		end
 	end
 	
-	local function calculatePromptHeight(p2: number) --[[ Line: 435 ]]
+	local function calculatePromptHeight(p2: number)
 		-- upvalues: p1 (copy), UseStateResult2 (copy), SubscriptionTitleModule (upval)
 		if p1.shouldUseNewModalDesign then
 			UseStateResult2(338 + p2 + 24)
@@ -327,9 +327,9 @@ return function(p1) --[[ Line: 417 | Named "SubscriptionPurchasePrompt" ]]
 			shareText = { key = "Feature.SocialShare.Action.Share" },
 			reportText = { key = "Feature.GameDetails.Action.Report" }
 		},
-		render = function(p2) --[[ Line: 472 ]]
+		render = function(p2)
 			-- upvalues: WithStyleFunction (upval), GetPartialPageModalMiddleContentWidthFunction (upval), p1 (copy), renderNewModalDesign (upval), UseStateResult (copy), openTermsOfUse (copy), calculatePromptHeight (copy), UseTokensResult (copy), ReactModule (upval), PartialPageModal (upval), createSubscribeButtonStacks (upval), generateTestmodeDisclaimer (upval), FFlagEnableDevSubsFastFollowFixes (upval), generateDisclosure (upval), SubscriptionTitleModule (upval), generatePromptText (upval)
-			return WithStyleFunction(function(p3) --[[ Line: 473 ]]
+			return WithStyleFunction(function(p3)
 				-- upvalues: GetPartialPageModalMiddleContentWidthFunction (upval), p1 (upval), renderNewModalDesign (upval), p2 (copy), UseStateResult (upval), openTermsOfUse (upval), calculatePromptHeight (upval), UseTokensResult (upval), ReactModule (upval), PartialPageModal (upval), createSubscribeButtonStacks (upval), generateTestmodeDisclaimer (upval), FFlagEnableDevSubsFastFollowFixes (upval), generateDisclosure (upval), SubscriptionTitleModule (upval), generatePromptText (upval)
 				local Theme = p3.Theme
 				local _Font = p3.Font
@@ -345,7 +345,7 @@ return function(p1) --[[ Line: 417 | Named "SubscriptionPurchasePrompt" ]]
 						forcedFillDirection = Enum.FillDirection.Vertical
 					},
 					onCloseClicked = p1.cancelPurchaseActivated,
-					footerContent = function() --[[ Line: 502 ]]
+					footerContent = function()
 						-- upvalues: p1 (upval), generateTestmodeDisclaimer (upval), p2 (upval), _Font (copy), Theme (copy), PartialPageModalMiddleContentWidth (copy), UseTokensResult (upval), FFlagEnableDevSubsFastFollowFixes (upval), generateDisclosure (upval), openTermsOfUse (upval)
 						return if p1.isTestingMode then generateTestmodeDisclaimer(p2.footerText, _Font, Theme, PartialPageModalMiddleContentWidth, UseTokensResult) elseif FFlagEnableDevSubsFastFollowFixes then nil else generateDisclosure(p2, openTermsOfUse)
 					end

@@ -33,7 +33,7 @@ local config1 = {
 	[UsernameIssue.ContainsPII] = "Authentication.SignUp.Label.UsernameError7"
 }
 
-local function resetNonHiddenIssuesToProblematic(Hiddens) --[[ Line: 64 ]]
+local function resetNonHiddenIssuesToProblematic(Hiddens)
 	-- upvalues: CryoModule (copy), IssueCondition (copy)
 	local JoinResult = CryoModule.Dictionary.join(Hiddens)
 	
@@ -45,9 +45,9 @@ local function resetNonHiddenIssuesToProblematic(Hiddens) --[[ Line: 64 ]]
 	return JoinResult
 end
 
-local function _(p1, Input, p2, p3, p4) --[[ Line: 76 | Named "validateFunction" ]]
+local function _(p1, Input, p2, p3, p4)
 	-- upvalues: ArgCheckModule (copy), PromiseModule (copy), resetNonHiddenIssuesToProblematic (copy), CryoModule (copy), LocalSignUpUsernameValidatorModule (copy), IssueCondition (copy), GetFFlagFixUsernameValidationBackendCriteriaFunction (copy), GetFFlagFixUsernameValidationAlreadyInUseFunction (copy), PostUsernameValidFunction (copy), config (copy), UsernameIssue (copy)
-	return function(_) --[[ Line: 77 ]]
+	return function(_)
 		-- upvalues: ArgCheckModule (upval), Input (copy), p2 (copy), p3 (copy), PromiseModule (upval), resetNonHiddenIssuesToProblematic (upval), CryoModule (upval), LocalSignUpUsernameValidatorModule (upval), IssueCondition (upval), GetFFlagFixUsernameValidationBackendCriteriaFunction (upval), GetFFlagFixUsernameValidationAlreadyInUseFunction (upval), PostUsernameValidFunction (upval), p1 (copy), p4 (copy), config (upval), UsernameIssue (upval)
 		ArgCheckModule.isType(Input, "string", "username passed into UsernameValidator.validateFunction")
 		ArgCheckModule.isType(p2, "string", "birthday passed into UsernameValidator.validateFunction")
@@ -93,7 +93,7 @@ local function _(p1, Input, p2, p3, p4) --[[ Line: 76 | Named "validateFunction"
 			for i1, value1 in pairs(JoinResult) do
 				JoinResult[i1] = value1 == IssueCondition.Hidden and IssueCondition.Hidden or IssueCondition.Resolved
 			end
-			return PostUsernameValidFunction(p1, Input, p2, p4):andThen(function(Result) --[[ Line: 136 ]]
+			return PostUsernameValidFunction(p1, Input, p2, p4):andThen(function(Result)
 				-- upvalues: config (upval), UsernameIssue (upval), JoinResult (copy), IssueCondition (upval), PromiseModule (upval), Input (upval)
 				local Code = Result and (Result.responseBody and Result.responseBody.code)
 				local None = config[Code]
@@ -112,7 +112,7 @@ local function _(p1, Input, p2, p3, p4) --[[ Line: 76 | Named "validateFunction"
 					InputValid = None == UsernameIssue.None,
 					IssueCondition = JoinResult
 				})
-			end, function(_) --[[ Line: 158 ]]
+			end, function(_)
 				-- upvalues: PromiseModule (upval), Input (upval), JoinResult (copy)
 				return PromiseModule.resolve({
 					InputValid = true,
@@ -124,11 +124,11 @@ local function _(p1, Input, p2, p3, p4) --[[ Line: 76 | Named "validateFunction"
 	end
 end
 
-local _ = function(Text: string, Text1: string): boolean --[[ Line: 169 | Named "isKeptCurrentUsername" ]]
+local _ = function(Text: string, Text1: string): boolean
 	return Text1 ~= nil and (Text1 ~= "" and string.lower(Text) == string.lower(Text1))
 end
 
-local function resolveAlreadyInUseIfKeptCurrentUsername(Result) --[[ Line: 175 ]]
+local function resolveAlreadyInUseIfKeptCurrentUsername(Result)
 	-- upvalues: UsernameIssue (copy), IssueCondition (copy), CryoModule (copy)
 	if Result.IssueCondition[UsernameIssue.AlreadyInUse] ~= IssueCondition.Problematic then
 		return Result
@@ -147,13 +147,13 @@ local function resolveAlreadyInUseIfKeptCurrentUsername(Result) --[[ Line: 175 ]
 end
 
 return {
-	validateFunction = function(p5, Text: string, Hiddens, p6) --[[ Line: 197 ]]
+	validateFunction = function(p5, Text: string, Hiddens, p6)
 		-- upvalues: ArgCheckModule (copy), PromiseModule (copy), resetNonHiddenIssuesToProblematic (copy), CryoModule (copy), LocalSignUpUsernameValidatorModule (copy), IssueCondition (copy), GetFFlagFixUsernameValidationBackendCriteriaFunction (copy), GetFFlagFixUsernameValidationAlreadyInUseFunction (copy), PostUsernameValidFunction (copy), config (copy), UsernameIssue (copy), FFlagAllowCurrentUsernameOnSignup (copy), resolveAlreadyInUseIfKeptCurrentUsername (copy)
 		local P12 = p6 or {}
 		local Birthday = P12.birthday
 		local Context = P12.context
 		
-		local function v30(_) --[[ Line: 77 ]]
+		local function v30(_)
 			-- upvalues: ArgCheckModule (upval), Text (copy), Birthday (copy), Hiddens (copy), PromiseModule (upval), resetNonHiddenIssuesToProblematic (upval), CryoModule (upval), LocalSignUpUsernameValidatorModule (upval), IssueCondition (upval), GetFFlagFixUsernameValidationBackendCriteriaFunction (upval), GetFFlagFixUsernameValidationAlreadyInUseFunction (upval), PostUsernameValidFunction (upval), p5 (copy), Context (copy), config (upval), UsernameIssue (upval)
 			ArgCheckModule.isType(Text, "string", "username passed into UsernameValidator.validateFunction")
 			ArgCheckModule.isType(Birthday, "string", "birthday passed into UsernameValidator.validateFunction")
@@ -199,7 +199,7 @@ return {
 				for i1, value1 in pairs(JoinResult) do
 					JoinResult[i1] = value1 == IssueCondition.Hidden and IssueCondition.Hidden or IssueCondition.Resolved
 				end
-				return PostUsernameValidFunction(p5, Text, Birthday, Context):andThen(function(Result) --[[ Line: 136 ]]
+				return PostUsernameValidFunction(p5, Text, Birthday, Context):andThen(function(Result)
 					-- upvalues: config (upval), UsernameIssue (upval), JoinResult (copy), IssueCondition (upval), PromiseModule (upval), Text (upval)
 					local Code = Result and (Result.responseBody and Result.responseBody.code)
 					local None = config[Code]
@@ -218,7 +218,7 @@ return {
 						InputValid = None == UsernameIssue.None,
 						IssueCondition = JoinResult
 					})
-				end, function(_) --[[ Line: 158 ]]
+				end, function(_)
 					-- upvalues: PromiseModule (upval), Text (upval), JoinResult (copy)
 					return PromiseModule.resolve({
 						InputValid = true,
@@ -233,7 +233,7 @@ return {
 			local CurrentUsername: string = P12.currentUsername
 			
 			if CurrentUsername ~= nil and (CurrentUsername ~= "" and string.lower(Text) == string.lower(CurrentUsername)) then
-				return function(p7) --[[ Line: 206 ]]
+				return function(p7)
 					-- upvalues: v30 (copy), resolveAlreadyInUseIfKeptCurrentUsername (upval)
 					return v30(p7):andThen(resolveAlreadyInUseIfKeptCurrentUsername)
 				end
@@ -241,11 +241,11 @@ return {
 		end
 		return v30
 	end,
-	getIssueMessageList = function() --[[ Line: 42 ]]
+	getIssueMessageList = function()
 		-- upvalues: config1 (copy)
 		return config1
 	end,
-	getDefaultIssues = function() --[[ Line: 46 ]]
+	getDefaultIssues = function()
 		-- upvalues: config1 (copy), UsernameIssue (copy), IssueCondition (copy)
 		local Hiddens = {}
 		

@@ -15,11 +15,11 @@ local ButtonSize = FoundationModule.Enums.ButtonSize
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NewResult = require(Parent.ExpChatShared).Logger:new(script.Name)
 
-return function(p1) --[[ Line: 78 | Named "FriendsChatConversationHeaderBar" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseChatWindowSettingsModule (copy), ReactModule (copy), UseInterpolatedClientSettingsModule (copy), NewResult (copy), ResolveFadeModule (copy), View (copy), IconButton (copy), IconName (copy), ButtonVariant (copy), ButtonSize (copy), FriendsChatFacePileModule (copy), FFlagFriendsChatAddTopBarDividerModule (copy), Divider (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseChatWindowSettingsModuleResult = UseChatWindowSettingsModule()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 81 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseChatWindowSettingsModuleResult (copy)
 		return {
 			BackgroundColor3 = UseChatWindowSettingsModuleResult.ChatWindowBackgroundColor3,
@@ -29,7 +29,7 @@ return function(p1) --[[ Line: 78 | Named "FriendsChatConversationHeaderBar" ]]
 	local ChatWindowSettings = p1.chatWindowSettings
 	local UseInterpolatedClientSettingsModuleResult = UseInterpolatedClientSettingsModule(ChatWindowSettings or UseMemoResult)
 	local FontFace = if ChatWindowSettings then ChatWindowSettings.FontFace else nil
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 99 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: FontFace (copy), UseTokensResult (copy)
 		if FontFace == nil then
 			return nil
@@ -41,7 +41,7 @@ return function(p1) --[[ Line: 78 | Named "FriendsChatConversationHeaderBar" ]]
 		end
 	end, { UseTokensResult, FontFace })
 	local OnBackFunction = p1.onBack
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 117 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: NewResult (upval), OnBackFunction (copy)
 		NewResult:info("Back button activated")
 		
@@ -50,7 +50,7 @@ return function(p1) --[[ Line: 78 | Named "FriendsChatConversationHeaderBar" ]]
 		end
 	end, { OnBackFunction })
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 125 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), p1 (copy)
 		local Current = UseRefResult.current
 		

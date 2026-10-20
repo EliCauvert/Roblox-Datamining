@@ -19,7 +19,7 @@ local UseGameInfosSelectorFunction = require(Parent.GameInfosRodux).useGameInfos
 local FFlagLuaAppSduiEdpFallbackAttributionFromCache = require(Parent.SharedFlags).FFlagLuaAppSduiEdpFallbackAttributionFromCache
 local FFlagMigrateGameInfoToStore = require(Parent.SharedFlags).FFlagMigrateGameInfoToStore
 
-local function ExperienceDetailsFeedSkeleton(p1) --[[ Line: 46 ]]
+local function ExperienceDetailsFeedSkeleton(p1)
 	-- upvalues: UseTokensFunction (copy), FFlagLuaAppSduiEdpFallbackAttributionFromCache (copy), FFlagMigrateGameInfoToStore (copy), UseGameInfoModule (copy), UseGameInfosSelectorFunction (copy), ReactModule (copy), View (copy), CompositionTags (copy), ExperienceDetailsFallbackAttributionRowModule (copy), Skeleton (copy), Radius (copy)
 	local UniverseId = p1.universeId
 	local UseTokensResult = UseTokensFunction()
@@ -116,7 +116,7 @@ end
 
 return {
 	Skeleton = ReactModule.memo(ExperienceDetailsFeedSkeleton),
-	Error = ReactModule.memo(function(p1) --[[ Line: 168 | Named "ExperienceDetailsFeedError" ]]
+	Error = ReactModule.memo(function(p1)
 		-- upvalues: UseTokensFunction (copy), UseGameInfoModule (copy), SignalsReactModule (copy), DataHydrationModule (copy), UseLocalizationFunction (copy), ReactModule (copy), ExperienceDetailsFeedSkeleton (copy), View (copy), Icon (copy), FoundationModule (copy), Text (copy), CompositionTags (copy), ExperienceDetailsFallbackAttributionRowModule (copy), Button (copy), ButtonVariant (copy)
 		local UniverseId = p1.universeId
 		local IsSmallScreen = p1.isSmallScreen

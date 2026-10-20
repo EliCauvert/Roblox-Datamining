@@ -6,7 +6,7 @@ local _ = require(Parent.React)
 local MotionModule = require(Parent.Motion)
 local TransitionPreset = MotionModule.TransitionPreset
 
-return function(p1, p2) --[[ Line: 38 | Named "useInputMotionStates" ]]
+return function(p1, p2)
 	-- upvalues: MotionModule (copy), TransitionPreset (copy)
 	local BackgroundStyle = if p2 and p2.backgroundStyle then p2.backgroundStyle else p1.Color.Content.Default
 	local CheckedStyle = if p2 and p2.checkedStyle then p2.checkedStyle else p1.Color.ActionSubEmphasis.Background

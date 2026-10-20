@@ -1,4 +1,4 @@
-﻿return function(List, Callback) --[[ Line: 12 | Named "mapFirst" ]]
+﻿return function(List, Callback)
 	local CallbackResult = nil
 	for i, value in ipairs(List) do
 		CallbackResult = Callback(value, i)

@@ -2,7 +2,7 @@
 local _ = require(script.Parent.Parent.core.types)
 
 return {
-	selectURI = function(p1, Callback) --[[ Line: 19 ]]
+	selectURI = function(p1, Callback)
 		-- upvalues: Boolean (copy)
 		local Uri = p1:getContext().uri
 		

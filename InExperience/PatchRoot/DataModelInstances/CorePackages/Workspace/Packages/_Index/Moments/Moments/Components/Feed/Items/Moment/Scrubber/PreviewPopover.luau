@@ -16,7 +16,7 @@ local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local SCRUBFADESECONDS = MomentContextModule.SCRUB_FADE_SECONDS
 
-return ReactModule.memo(function(p1) --[[ Line: 37 | Named "PreviewPopover" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), MomentContextModule (copy), UseScreenSizeFunction (copy), UseDeviceInsetsFunction (copy), ReactUtilsModule (copy), UseSignalStateFunction (copy), ReactModule (copy), UseVideoScrubPreviewModule (copy), SCRUBFADESECONDS (copy), PreviewPopoverMathModule (copy), View (copy), VideoPreviewModule (copy), TimeLabelModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseMomentResult = MomentContextModule.useMoment()
@@ -25,12 +25,12 @@ return ReactModule.memo(function(p1) --[[ Line: 37 | Named "PreviewPopover" ]]
 	local NextOrder = ReactUtilsModule.createNextOrder()
 	local Controller = UseMomentResult.controller
 	local UseSignalStateResult = UseSignalStateFunction(UseMomentResult.store.getIsScrubbing)
-	local UseVideoScrubPreviewModuleResult = UseVideoScrubPreviewModule(ReactModule.useMemo(function() --[[ Line: 47 ]]
+	local UseVideoScrubPreviewModuleResult = UseVideoScrubPreviewModule(ReactModule.useMemo(function()
 		-- upvalues: Controller (copy)
 		return if Controller == nil then nil else Controller.getVideoPreviewSource()
 	end, { Controller }), UseSignalStateResult, UseMomentResult.store.getScrubPosition)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 55 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult (copy), UseStateResult2 (copy), SCRUBFADESECONDS (upval)
 		if UseSignalStateResult then
 			UseStateResult2(true)
@@ -38,14 +38,14 @@ return ReactModule.memo(function(p1) --[[ Line: 37 | Named "PreviewPopover" ]]
 			return
 		end
 		local Flag = false
-		task.delay(SCRUBFADESECONDS, function() --[[ Line: 61 ]]
+		task.delay(SCRUBFADESECONDS, function()
 			-- upvalues: Flag (ref), UseStateResult2 (upval)
 			if not Flag then
 				UseStateResult2(false)
 			end
 		end)
 		
-		return function() --[[ Line: 66 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end
@@ -54,12 +54,12 @@ return ReactModule.memo(function(p1) --[[ Line: 37 | Named "PreviewPopover" ]]
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding({ position = 0, width = 0 })
 	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(0)
-	ReactModule.useEffect(function() --[[ Line: 80 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseBindingResult2 (copy)
 		local Current = UseRefResult.current
 		
 		if Current == nil then return end
-		local function update() --[[ Line: 86 ]]
+		local function update()
 			-- upvalues: UseBindingResult2 (upval), Current (copy)
 			UseBindingResult2({
 				position = Current.AbsolutePosition.X,
@@ -74,18 +74,18 @@ return ReactModule.memo(function(p1) --[[ Line: 37 | Named "PreviewPopover" ]]
 		local Connection = Current:GetPropertyChangedSignal("AbsolutePosition"):Connect(update)
 		local Connection1 = Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(update)
 		
-		return function() --[[ Line: 96 ]]
+		return function()
 			-- upvalues: Connection (copy), Connection1 (copy)
 			Connection:Disconnect()
 			Connection1:Disconnect()
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 104 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), UseBindingResult2_1 (copy)
 		local Current = UseRefResult1.current
 		
 		if Current == nil then return end
-		local function update() --[[ Line: 110 ]]
+		local function update()
 			-- upvalues: UseBindingResult2_1 (upval), Current (copy)
 			UseBindingResult2_1(Current.AbsoluteSize.X)
 		end
@@ -93,13 +93,13 @@ return ReactModule.memo(function(p1) --[[ Line: 37 | Named "PreviewPopover" ]]
 		UseBindingResult2_1(Current.AbsoluteSize.X)
 		local Connection = Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(update)
 		
-		return function() --[[ Line: 116 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end
 	end, { UseStateResult })
 	local Size100 = UseTokensResult.Size.Size_100
-	local MapResult = ReactModule.joinBindings({ p1.progressRatio, UseBindingResult, UseBindingResult1 }):map(function(Entry): UDim2 --[[ Line: 124 ]]
+	local MapResult = ReactModule.joinBindings({ p1.progressRatio, UseBindingResult, UseBindingResult1 }):map(function(Entry): UDim2
 		-- upvalues: PreviewPopoverMathModule (upval), UseScreenSizeResult (copy), UseDeviceInsetsResult (copy), Size100 (copy), UseTokensResult (copy)
 		local Entry1 = Entry[2]
 		

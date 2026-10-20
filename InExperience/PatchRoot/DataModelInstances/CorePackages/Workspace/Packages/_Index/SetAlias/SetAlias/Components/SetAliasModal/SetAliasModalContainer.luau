@@ -19,7 +19,7 @@ local UserProfilesBasicNamesByUserIds = if require(Parent1.SharedFlags).FFlagUse
 local WriteNamesQueryFunction = DependenciesModule.UserProfiles.Mutations.writeNamesQuery
 local UseEffectOnceFunction = require(Parent1.RoactUtils).Hooks.useEffectOnce
 
-return function(p1) --[[ Line: 50 ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), ConstantsModule (copy), React (copy), UseUserProfilesFetchFunction (copy), UserProfilesBasicNamesByUserIds (copy), UseAnalyticsFunction (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), UseEffectOnMountFunction (copy), EventNames (copy), SocialStopwatchModule (copy), LoadingStages (copy), UseEffectOnceFunction (copy), NetworkingAliases (copy), WriteNamesQueryFunction (copy), SetAliasModalModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local Param = p1.navigation.getParam(ConstantsModule.PROFILE_USER_ID)
@@ -29,19 +29,19 @@ return function(p1) --[[ Line: 50 ]]
 		query = UserProfilesBasicNamesByUserIds
 	})
 	local UseAnalyticsResult = UseAnalyticsFunction()
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 60 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		return p2.ScreenSize
 	end)
 	local DataUserProfile = (GetDeepValueFunction(UseUserProfilesFetchResult, "data.userProfiles") or {})[1] or {}
 	local NamesAlias = GetDeepValueFunction(DataUserProfile, "names.alias")
 	local NamesDisplayName = GetDeepValueFunction(DataUserProfile, "names.displayName")
-	UseEffectOnMountFunction(function() --[[ Line: 70 ]]
+	UseEffectOnMountFunction(function()
 		-- upvalues: UseAnalyticsResult (copy), EventNames (upval)
 		if UseAnalyticsResult then
 			UseAnalyticsResult.fireAnalyticsEvent(EventNames.CustomizeNameModalOpened)
 		end
 	end)
-	React.useEffect(function() --[[ Line: 76 ]]
+	React.useEffect(function()
 		-- upvalues: SocialStopwatchModule (upval), UseAnalyticsResult (copy), EventNames (upval), LoadingStages (upval)
 		local GetResult = SocialStopwatchModule.Stopwatch.get(SocialStopwatchModule.Events.CustomizeNameOpened)
 		UseAnalyticsResult.fireAnalyticsEvent(EventNames.CustomizeNameLoadingStage, {
@@ -49,12 +49,12 @@ return function(p1) --[[ Line: 50 ]]
 			statValue = GetResult and GetResult.timeElapsed
 		})
 		
-		return function() --[[ Line: 83 ]]
+		return function()
 			-- upvalues: SocialStopwatchModule (upval)
 			SocialStopwatchModule.Stopwatch.stop(SocialStopwatchModule.Events.CustomizeNameOpened)
 		end
 	end, {})
-	UseEffectOnceFunction(function() --[[ Line: 88 ]]
+	UseEffectOnceFunction(function()
 		-- upvalues: SocialStopwatchModule (upval), UseAnalyticsResult (copy), EventNames (upval), UseUserProfilesFetchResult (copy), LoadingStages (upval)
 		local GetResult = SocialStopwatchModule.Stopwatch.get(SocialStopwatchModule.Events.CustomizeNameOpened)
 		UseAnalyticsResult.fireAnalyticsEvent(EventNames.CustomizeNameLoadingStage, {
@@ -67,13 +67,13 @@ return function(p1) --[[ Line: 50 ]]
 		screenSize = UseSelectorResult,
 		alias = NamesAlias,
 		displayName = NamesDisplayName,
-		cancelOnActivated = function() --[[ Line: 96 ]]
+		cancelOnActivated = function()
 			-- upvalues: p1 (copy)
 			p1.navigation.pop()
 		end,
-		saveOnActivated = function(Alias) --[[ Line: 100 ]]
+		saveOnActivated = function(Alias)
 			-- upvalues: UseDispatchResult (copy), NetworkingAliases (upval), Param (copy), GetDeepValueFunction (upval), UseStateResult2 (copy), UseAnalyticsResult (copy), EventNames (upval), WriteNamesQueryFunction (upval), UseUserProfilesFetchResult (copy), UserProfilesBasicNamesByUserIds (upval), DataUserProfile (copy), p1 (copy)
-			return UseDispatchResult(NetworkingAliases.SetUserTag.API(Param, Alias)):andThen(function(Result) --[[ Line: 101 ]]
+			return UseDispatchResult(NetworkingAliases.SetUserTag.API(Param, Alias)):andThen(function(Result)
 				-- upvalues: GetDeepValueFunction (upval), UseStateResult2 (upval), UseAnalyticsResult (upval), EventNames (upval), Alias (copy), WriteNamesQueryFunction (upval), UseUserProfilesFetchResult (upval), UserProfilesBasicNamesByUserIds (upval), Param (upval), DataUserProfile (upval), p1 (upval)
 				if GetDeepValueFunction(Result, "responseBody.status") == "Moderated" then
 					UseStateResult2(true)
@@ -102,7 +102,7 @@ return function(p1) --[[ Line: 50 ]]
 			end)
 		end,
 		hasSaveAliasError = UseStateResult,
-		onTextChanged = function() --[[ Line: 133 ]]
+		onTextChanged = function()
 			-- upvalues: UseStateResult (copy), UseStateResult2 (copy)
 			if UseStateResult then
 				UseStateResult2(false)

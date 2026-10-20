@@ -13,10 +13,10 @@ local config = {
 	FillDirection = Enum.FillDirection.Vertical
 }
 
-return ReactModule.forwardRef(function(p1, Ref) --[[ Line: 36 | Named "Tile" ]]
+return ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), StateLayerAffordanceModule (copy), TileContextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 39 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy)
 		return {
 			isContained = WithDefaultsModuleResult.isContained,

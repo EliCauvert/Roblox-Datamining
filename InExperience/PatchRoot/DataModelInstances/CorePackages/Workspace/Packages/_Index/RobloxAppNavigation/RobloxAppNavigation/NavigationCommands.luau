@@ -3,13 +3,13 @@ local RoactNavigationModule = require(Parent.RoactNavigation)
 local AppNavigationRegistryModule = require(script.Parent.AppNavigationRegistry)
 local TrackStartFunction = require(Parent.TimeToInteractiveTracker).TimeToInteractiveTracker.trackStart
 
-local function _(p1) --[[ Line: 33 | Named "isNavigationLocked" ]]
+local function _(p1)
 	-- upvalues: AppNavigationRegistryModule (copy)
 	return not p1 and AppNavigationRegistryModule.get().getIsNavigating(false)
 end
 
 return {
-	back = function(p1) --[[ Line: 65 ]]
+	back = function(p1)
 		-- upvalues: AppNavigationRegistryModule (copy), RoactNavigationModule (copy)
 		if p1 or not AppNavigationRegistryModule.get().getIsNavigating(false) then
 			AppNavigationRegistryModule.get().dispatch(RoactNavigationModule.Actions.back())
@@ -17,7 +17,7 @@ return {
 			return
 		end
 	end,
-	down = function(p1, p2) --[[ Line: 72 ]]
+	down = function(p1, p2)
 		-- upvalues: AppNavigationRegistryModule (copy), TrackStartFunction (copy), RoactNavigationModule (copy)
 		if not p2 and AppNavigationRegistryModule.get().getIsNavigating(false) then return end
 		if TrackStartFunction then
@@ -25,7 +25,7 @@ return {
 		end
 		AppNavigationRegistryModule.get().dispatch(RoactNavigationModule.StackActions.push(p1))
 	end,
-	to = function(p1, p2) --[[ Line: 82 ]]
+	to = function(p1, p2)
 		-- upvalues: AppNavigationRegistryModule (copy), TrackStartFunction (copy), RoactNavigationModule (copy)
 		if not p2 and AppNavigationRegistryModule.get().getIsNavigating(false) then return end
 		if TrackStartFunction then
@@ -33,7 +33,7 @@ return {
 		end
 		AppNavigationRegistryModule.get().dispatch(RoactNavigationModule.Actions.navigate(p1))
 	end,
-	sideways = function(p1, p2) --[[ Line: 92 ]]
+	sideways = function(p1, p2)
 		-- upvalues: AppNavigationRegistryModule (copy), TrackStartFunction (copy), RoactNavigationModule (copy)
 		if not p2 and AppNavigationRegistryModule.get().getIsNavigating(false) then return end
 		if TrackStartFunction then
@@ -41,7 +41,7 @@ return {
 		end
 		AppNavigationRegistryModule.get().dispatch(RoactNavigationModule.Actions.navigate(p1))
 	end,
-	fromWebView = function(p1, p2) --[[ Line: 102 ]]
+	fromWebView = function(p1, p2)
 		-- upvalues: AppNavigationRegistryModule (copy), TrackStartFunction (copy), RoactNavigationModule (copy)
 		if not p2 and AppNavigationRegistryModule.get().getIsNavigating(false) then return end
 		if TrackStartFunction then
@@ -49,7 +49,7 @@ return {
 		end
 		AppNavigationRegistryModule.get().dispatch(RoactNavigationModule.StackActions.replace(p1))
 	end,
-	resetStack = function(List, p1, p2) --[[ Line: 116 ]]
+	resetStack = function(List, p1, p2)
 		-- upvalues: AppNavigationRegistryModule (copy), RoactNavigationModule (copy), TrackStartFunction (copy)
 		if not p2 and AppNavigationRegistryModule.get().getIsNavigating(false) then return end
 		local Actions = {}
@@ -71,7 +71,7 @@ return {
 		end
 		AppNavigationRegistryModule.get().dispatch(RoactNavigationModule.StackActions.reset({ index = #Actions, actions = Actions }))
 	end,
-	fromLegacyPage = function(List) --[[ Line: 48 ]]
+	fromLegacyPage = function(List)
 		local Params = nil
 		
 		for i, value in List do

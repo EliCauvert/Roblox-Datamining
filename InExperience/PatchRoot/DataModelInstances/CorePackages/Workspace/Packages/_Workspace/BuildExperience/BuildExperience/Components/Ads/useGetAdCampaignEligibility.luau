@@ -2,14 +2,14 @@
 local AdCampaignEligibilityModule = require(Parent.DataHydration.AdCampaignEligibility)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local CreateComputedFunction = require(Parent.Signals).createComputed
-local Computed = CreateComputedFunction(function() --[[ Line: 24 ]]
+local Computed = CreateComputedFunction(function()
 	return nil
 end)
-local Computed1 = CreateComputedFunction(function(): string --[[ Line: 27 ]]
+local Computed1 = CreateComputedFunction(function(): string
 	return "NotReady"
 end)
 
-return function(p1, p2) --[[ Line: 31 | Named "useGetAdCampaignEligibility" ]]
+return function(p1, p2)
 	-- upvalues: AdCampaignEligibilityModule (copy), UseSignalStateFunction (copy), Computed (copy), Computed1 (copy)
 	local v1: boolean = p1 ~= nil and p1 ~= 0
 	local P1 = if v1 then p2 or AdCampaignEligibilityModule.getAdCampaignEligibilityStore(false) else nil

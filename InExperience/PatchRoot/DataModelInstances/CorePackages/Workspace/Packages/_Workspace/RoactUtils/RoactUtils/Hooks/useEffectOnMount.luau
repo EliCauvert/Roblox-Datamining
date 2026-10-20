@@ -1,8 +1,8 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("RoactUtils").Parent.React)
 
-return function(Callback) --[[ Line: 10 ]]
+return function(Callback)
 	-- upvalues: ReactModule (copy)
-	ReactModule.useEffect(function() --[[ Line: 11 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Callback (copy)
 		Callback()
 	end, {})

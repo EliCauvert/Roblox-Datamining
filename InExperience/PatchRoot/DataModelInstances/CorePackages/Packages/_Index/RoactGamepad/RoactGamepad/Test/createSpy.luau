@@ -1,7 +1,7 @@
-﻿return function(Callback) --[[ Line: 8 | Named "createSpy" ]]
+﻿return function(Callback)
 	local config = { callCount = 0, valuesLength = 0, values = {} }
 	
-	function config.value(...) --[[ Line: 15 ]]
+	function config.value(...)
 		-- upvalues: config (copy), Callback (copy)
 		config.callCount += 1
 		config.values = { ... }
@@ -11,7 +11,7 @@
 		return Callback(...)
 	end
 	
-	function config:assertCalledWith(...) --[[ Line: 27 ]]
+	function config:assertCalledWith(...)
 		-- upvalues: config (copy)
 		local Selected = select("#", ...)
 		
@@ -24,7 +24,7 @@
 		end
 	end
 	
-	function config:captureValues(...) --[[ Line: 44 ]]
+	function config:captureValues(...)
 		-- upvalues: config (copy)
 		local Selected = select("#", ...)
 		local t = {}
@@ -37,7 +37,7 @@
 	end
 	
 	setmetatable(config, {
-		__index = function(_, p1) --[[ Line: 59 ]]
+		__index = function(_, p1)
 			error(("%q is not a valid member of spy"):format(p1))
 		end
 	})

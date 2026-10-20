@@ -18,7 +18,7 @@ local ShareLinksNetworking = NetworkingModule.ShareLinksNetworking
 local LinkType = NetworkingModule.ShareLinksRodux.Enums.LinkType
 local NewResult = require(Parent1.RobloxAppLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
 
-local function shareImage(Image, Url) --[[ Line: 33 ]]
+local function shareImage(Image, Url)
 	-- upvalues: Default (copy), ConstantsModule (copy), NewResult (copy)
 	if Default then
 		assert(Default ~= nil, "ExternalContentSharingProtocol is required")
@@ -33,7 +33,7 @@ local function shareImage(Image, Url) --[[ Line: 33 ]]
 	end
 end
 
-local function shareVideo(Video, Url) --[[ Line: 48 ]]
+local function shareVideo(Video, Url)
 	-- upvalues: Default (copy), ConstantsModule (copy), NewResult (copy)
 	if Default then
 		assert(Default ~= nil, "ExternalContentSharingProtocol is required")
@@ -48,7 +48,7 @@ local function shareVideo(Video, Url) --[[ Line: 48 ]]
 	end
 end
 
-local function shareCapture(Capture, Url) --[[ Line: 63 ]]
+local function shareCapture(Capture, Url)
 	-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureService (copy), shareVideo (copy), shareImage (copy), FFlagUseRbxstorageInGalleryModule (copy), CaptureTypeModule (copy)
 	if FFlagEnableCapturesGalleryRetrievalCoreScriptModule and Capture.CaptureTime ~= nil then
 		local PreCaptureSharedResult = CaptureService:PreCaptureShared(Capture)
@@ -72,7 +72,7 @@ local function shareCapture(Capture, Url) --[[ Line: 63 ]]
 	end
 end
 
-local function _(ExternalShareSource) --[[ Line: 82 | Named "sendShareLatencyEvent" ]]
+local function _(ExternalShareSource)
 	-- upvalues: SocialStopwatchModule (copy), FireEventModule (copy), EventNamesModule (copy)
 	local StopResult = SocialStopwatchModule.Stopwatch.stop(SocialStopwatchModule.Events.CaptureShared)
 	FireEventModule(EventNamesModule.CapturesShareLatency, {
@@ -81,9 +81,9 @@ local function _(ExternalShareSource) --[[ Line: 82 | Named "sendShareLatencyEve
 	})
 end
 
-return function(Capture, ExternalShareSource, LaunchData) --[[ Line: 90 ]]
+return function(Capture, ExternalShareSource, LaunchData)
 	-- upvalues: ServerTypeModule (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), shareCapture (copy), FireEventModule (copy), EventNamesModule (copy), SocialStopwatchModule (copy), GetPlaceIdFromCaptureModule (copy), LinkType (copy), ShareLinksNetworking (copy)
-	return function(p1) --[[ Line: 95 ]]
+	return function(p1)
 		-- upvalues: ServerTypeModule (upval), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (upval), Capture (copy), CaptureTypeModule (upval), shareCapture (upval), FireEventModule (upval), EventNamesModule (upval), ExternalShareSource (copy), SocialStopwatchModule (upval), GetPlaceIdFromCaptureModule (upval), LaunchData (copy), LinkType (upval), ShareLinksNetworking (upval)
 		local IsCaptureTypeMatch: boolean = if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then Capture.CaptureType == Enum.CaptureType.Video else Capture.type == CaptureTypeModule.Video
 		
@@ -109,7 +109,7 @@ return function(Capture, ExternalShareSource, LaunchData) --[[ Line: 90 ]]
 			launchData = LaunchData,
 			linkType = LinkType.ScreenshotInvite.rawValue(),
 			placeId = SourcePlaceId
-		})):andThen(function(Result) --[[ Line: 129 ]]
+		})):andThen(function(Result)
 			-- upvalues: shareCapture (upval), Capture (upval), ExternalShareSource (upval), SocialStopwatchModule (upval), FireEventModule (upval), EventNamesModule (upval)
 			shareCapture(Capture, Result.responseBody.shortUrl)
 			local StopResult = SocialStopwatchModule.Stopwatch.stop(SocialStopwatchModule.Events.CaptureShared)
@@ -117,7 +117,7 @@ return function(Capture, ExternalShareSource, LaunchData) --[[ Line: 90 ]]
 				statValue = if StopResult then StopResult.timeElapsed else nil,
 				externalShareSource = ExternalShareSource
 			})
-		end):catch(function(Err) --[[ Line: 134 ]]
+		end):catch(function(Err)
 			-- upvalues: FireEventModule (upval), EventNamesModule (upval), shareCapture (upval), Capture (upval), ExternalShareSource (upval), SocialStopwatchModule (upval)
 			warn("GenerateLink failed with error:", Err)
 			FireEventModule(EventNamesModule.ShareCaptureGenerateLinkFailed, { httpError = Err.HttpError })

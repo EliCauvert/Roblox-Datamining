@@ -3,7 +3,7 @@ local ConstantsModule = require(Parent.Constants)
 local _ = require(Parent.util.Types)
 local AnalyticsModule = require(Parent.Analytics)
 
-return function(p1, p2) --[[ Line: 12 | Named "validateScaleType" ]]
+return function(p1, p2)
 	-- upvalues: ConstantsModule (copy), AnalyticsModule (copy)
 	if not p1 then
 		return true

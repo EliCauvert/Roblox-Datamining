@@ -4,12 +4,12 @@ local GetFIntContactImporterModalDisplayMinDaysModule = require(script.Parent.Pa
 local EngineFeature = game:GetEngineFeature(ConstantsModule.UNIVERSAL_APP_CONTACT_IMPORTER_STORAGE_KEYS)
 
 return {
-	isUserOptedInLocalStorage = function(_, p1, p2): boolean --[[ Line: 18 ]]
+	isUserOptedInLocalStorage = function(_, p1, p2): boolean
 		-- upvalues: EngineFeature (copy), ConstantsModule (copy)
 		if not EngineFeature then
 			return false
 		end
-		local Success, Result = pcall(function() --[[ Line: 29 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p1 (copy), ConstantsModule (upval)
 			return p1:GetItem(ConstantsModule.LOCAL_STORAGE_KEY_OPTED_IN_USERS)
 		end)
@@ -23,12 +23,12 @@ return {
 		end
 		return false
 	end,
-	shouldUserSeeModalPotentiallyAgain = function(_, p3, p4): boolean --[[ Line: 43 ]]
+	shouldUserSeeModalPotentiallyAgain = function(_, p3, p4): boolean
 		-- upvalues: EngineFeature (copy), ConstantsModule (copy), GetFIntContactImporterModalDisplayMaxCountModule (copy), GetFIntContactImporterModalDisplayMinDaysModule (copy)
 		if not EngineFeature then
 			return true
 		end
-		local Success, Result = pcall(function() --[[ Line: 49 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p3 (copy), ConstantsModule (upval)
 			return p3:GetItem(ConstantsModule.LOCAL_STORAGE_KEY_MODAL_DISPLAY_COUNT)
 		end)
@@ -50,7 +50,7 @@ return {
 		if Number <= GetFIntContactImporterModalDisplayMaxCountModule() then
 			return true
 		end
-		local Success1, Result1 = pcall(function() --[[ Line: 69 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: p3 (copy), ConstantsModule (upval)
 			return p3:GetItem(ConstantsModule.LOCAL_STORAGE_KEY_MODAL_TIMESTAMP)
 		end)

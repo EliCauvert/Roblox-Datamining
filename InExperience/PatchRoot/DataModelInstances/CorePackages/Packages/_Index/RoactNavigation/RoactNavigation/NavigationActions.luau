@@ -10,24 +10,24 @@ local NavigationActionsModule = {
 	SetParams = SETPARAMS
 }
 setmetatable(NavigationActionsModule, {
-	__index = function(_, p1) --[[ Line: 24 ]]
+	__index = function(_, p1)
 		error(("%q is not a valid member of NavigationActions"):format((tostring(p1))), 2)
 	end
 })
 
-function NavigationActionsModule.back(p1) --[[ Line: 30 ]]
+function NavigationActionsModule.back(p1)
 	-- upvalues: BACK (copy)
 	local P2 = p1 or {}
 	
 	return { type = BACK, key = P2.key, immediate = P2.immediate }
 end
 
-function NavigationActionsModule.init(p1) --[[ Line: 40 ]]
+function NavigationActionsModule.init(p1)
 	-- upvalues: INIT (copy)
 	return { type = INIT, params = (p1 or {}).params }
 end
 
-function NavigationActionsModule.navigate(p1) --[[ Line: 49 ]]
+function NavigationActionsModule.navigate(p1)
 	-- upvalues: NAVIGATE (copy)
 	local P4 = p1 or {}
 	
@@ -40,7 +40,7 @@ function NavigationActionsModule.navigate(p1) --[[ Line: 49 ]]
 	}
 end
 
-function NavigationActionsModule.setParams(p1) --[[ Line: 61 ]]
+function NavigationActionsModule.setParams(p1)
 	-- upvalues: SETPARAMS (copy)
 	local P5 = p1 or {}
 	

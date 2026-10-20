@@ -3,7 +3,7 @@ local Players = game:GetService("Players")
 local ConstantsModule = require(script.Parent.Constants)
 local _BrickColor = BrickColor.new(194)
 
-local function _(Position, p1): CFrame --[[ Line: 17 | Named "makeCameraCFrame" ]]
+local function _(Position, p1): CFrame
 	return CFrame.lookAt(Position, Position + p1)
 end
 
@@ -32,7 +32,7 @@ local config3 = {
 	[Enum.AccessoryType.Eyelash] = true
 }
 
-local function removeMatchingChildren(Parent, Callback) --[[ Line: 103 ]]
+local function removeMatchingChildren(Parent, Callback)
 	for _, child in ipairs(Parent:GetChildren()) do
 		if Callback(child) then
 			child:Destroy()
@@ -40,13 +40,13 @@ local function removeMatchingChildren(Parent, Callback) --[[ Line: 103 ]]
 	end
 end
 
-local function addAssetToDescription(Parent, Asset, AssetType) --[[ Line: 112 ]]
+local function addAssetToDescription(Parent, Asset, AssetType)
 	-- upvalues: config1 (copy), config2 (copy), removeMatchingChildren (copy)
 	local Entry = AssetType and config1[AssetType]
 	local Entry1 = AssetType and config2[AssetType]
 	
 	if Entry then
-		removeMatchingChildren(Parent, function(MakeupDescription) --[[ Line: 117 ]]
+		removeMatchingChildren(Parent, function(MakeupDescription)
 			return MakeupDescription:IsA("MakeupDescription")
 		end)
 		local MakeupDescription = Instance.new("MakeupDescription")
@@ -57,7 +57,7 @@ local function addAssetToDescription(Parent, Asset, AssetType) --[[ Line: 112 ]]
 		return
 	end
 	if Entry1 then
-		removeMatchingChildren(Parent, function(AccessoryDescription): boolean --[[ Line: 125 ]]
+		removeMatchingChildren(Parent, function(AccessoryDescription): boolean
 			-- upvalues: Entry1 (copy)
 			return AccessoryDescription:IsA("AccessoryDescription") and AccessoryDescription.AccessoryType == Entry1
 		end)
@@ -70,7 +70,7 @@ local function addAssetToDescription(Parent, Asset, AssetType) --[[ Line: 112 ]]
 end
 
 local MakeupPreviewUtils = {
-	getHeadPreviewCameraData = function(Object) --[[ Line: 48 ]]
+	getHeadPreviewCameraData = function(Object)
 		local Head = Object:FindFirstChild("Head")
 		
 		if Head and Head:IsA("MeshPart") and not Object:FindFirstChild("HumanoidRootPart") then
@@ -79,7 +79,7 @@ local MakeupPreviewUtils = {
 			return nil, nil
 		end
 	end,
-	setupMakeupThumbnailCamera = function(Object, Camera, p1): boolean --[[ Line: 58 ]]
+	setupMakeupThumbnailCamera = function(Object, Camera, p1): boolean
 		-- upvalues: _CFrame (copy), config (copy)
 		local Head = Object:FindFirstChild("Head")
 		
@@ -97,11 +97,11 @@ local MakeupPreviewUtils = {
 		
 		return true
 	end,
-	isMakeupAssetType = function(p1): boolean --[[ Line: 78 ]]
+	isMakeupAssetType = function(p1): boolean
 		-- upvalues: ConstantsModule (copy)
 		return ConstantsModule.MakeupAssetTypes[p1] == true
 	end,
-	stripToHead = function(Model) --[[ Line: 142 ]]
+	stripToHead = function(Model)
 		-- upvalues: config3 (copy)
 		local Head = Model:FindFirstChild("Head")
 		
@@ -116,7 +116,7 @@ local MakeupPreviewUtils = {
 			end
 		end
 	end,
-	anchorRigidPreviewParts = function(Model) --[[ Line: 163 ]]
+	anchorRigidPreviewParts = function(Model)
 		for _, Part in ipairs(Model:GetDescendants()) do
 			if Part:IsA("BasePart") then
 				local Accessory = Part:FindFirstAncestorWhichIsA("Accessory")
@@ -127,7 +127,7 @@ local MakeupPreviewUtils = {
 			end
 		end
 	end,
-	getFolderAccessories = function(Object, p1) --[[ Line: 181 ]]
+	getFolderAccessories = function(Object, p1)
 		local List = {}
 		
 		for i, Accessory in ipairs(Object:GetChildren()) do
@@ -142,7 +142,7 @@ local MakeupPreviewUtils = {
 	end
 }
 
-local function createHeadWithAsset(Parent, p2, p3, List) --[[ Line: 195 ]]
+local function createHeadWithAsset(Parent, p2, p3, List)
 	-- upvalues: addAssetToDescription (copy), Players (copy), MakeupPreviewUtils (copy)
 	if p2 then
 		addAssetToDescription(Parent, p2, p3)
@@ -154,7 +154,7 @@ local function createHeadWithAsset(Parent, p2, p3, List) --[[ Line: 195 ]]
 	end
 	local HumanoidModelFromDescriptionAsync = nil
 	
-	if pcall(function() --[[ Line: 212 ]]
+	if pcall(function()
 		-- upvalues: HumanoidModelFromDescriptionAsync (ref), Players (upval), Parent (copy)
 		HumanoidModelFromDescriptionAsync = Players:CreateHumanoidModelFromDescriptionAsync(Parent, Enum.HumanoidRigType.R15)
 	end) and HumanoidModelFromDescriptionAsync then
@@ -170,13 +170,13 @@ local function createHeadWithAsset(Parent, p2, p3, List) --[[ Line: 195 ]]
 	end
 end
 
-function MakeupPreviewUtils.createMakeupHeadPreview(p4, p5, p6) --[[ Line: 242 ]]
+function MakeupPreviewUtils.createMakeupHeadPreview(p4, p5, p6)
 	-- upvalues: Players (copy), createHeadWithAsset (copy)
 	local HumanoidDescription = nil
 	local LocalPlayer = Players.LocalPlayer
 	
 	if LocalPlayer then
-		local Success, Result = pcall(function() --[[ Line: 250 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Players (upval), LocalPlayer (copy)
 			return Players:GetHumanoidDescriptionFromUserIdAsync(LocalPlayer.UserId)
 		end)
@@ -191,7 +191,7 @@ function MakeupPreviewUtils.createMakeupHeadPreview(p4, p5, p6) --[[ Line: 242 ]
 	return (createHeadWithAsset(HumanoidDescription, p4, p5, p6))
 end
 
-function MakeupPreviewUtils.createMakeupThumbnailPreview(p4, p5) --[[ Line: 268 ]]
+function MakeupPreviewUtils.createMakeupThumbnailPreview(p4, p5)
 	-- upvalues: addAssetToDescription (copy), Players (copy), MakeupPreviewUtils (copy), _BrickColor (copy)
 	local HumanoidDescription = Instance.new("HumanoidDescription")
 	HumanoidDescription.Head = 103273511207307
@@ -202,7 +202,7 @@ function MakeupPreviewUtils.createMakeupThumbnailPreview(p4, p5) --[[ Line: 268 
 	local HumanoidModelFromDescriptionAsync = nil
 	local Object = nil
 	
-	if pcall(function() --[[ Line: 212 ]]
+	if pcall(function()
 		-- upvalues: HumanoidModelFromDescriptionAsync (ref), Players (upval), HumanoidDescription (copy)
 		HumanoidModelFromDescriptionAsync = Players:CreateHumanoidModelFromDescriptionAsync(HumanoidDescription, Enum.HumanoidRigType.R15)
 	end) and HumanoidModelFromDescriptionAsync then
@@ -231,7 +231,7 @@ function MakeupPreviewUtils.createMakeupThumbnailPreview(p4, p5) --[[ Line: 268 
 	return Object
 end
 
-function MakeupPreviewUtils.compositeMakeupFolder(Object, p4) --[[ Line: 296 ]]
+function MakeupPreviewUtils.compositeMakeupFolder(Object, p4)
 	-- upvalues: AssetService (copy)
 	local List = {}
 	
@@ -249,7 +249,7 @@ function MakeupPreviewUtils.compositeMakeupFolder(Object, p4) --[[ Line: 296 ]]
 		return nil
 	end
 	if p4 then
-		table.sort(List, function(A, B): boolean --[[ Line: 314 ]]
+		table.sort(List, function(A, B): boolean
 			-- upvalues: p4 (copy)
 			return (p4[A.Name] or 0) < (p4[B.Name] or 0)
 		end)
@@ -286,7 +286,7 @@ function MakeupPreviewUtils.compositeMakeupFolder(Object, p4) --[[ Line: 296 ]]
 					local Object2 = Content1.Object
 					
 					if not Object2 and Content1.Uri and Content1.Uri ~= "" then
-						local Success, Result = pcall(function() --[[ Line: 353 ]]
+						local Success, Result = pcall(function()
 							-- upvalues: AssetService (upval), Content1 (copy)
 							return AssetService:CreateEditableImageAsync(Content1)
 						end)

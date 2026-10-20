@@ -3,7 +3,7 @@ local _ = require(DataHydration.Parent.MomentsTypes)
 local _ = require(DataHydration.Moments.MomentsStoreTypes)
 local ConvertApiMomentCommentsModule = require(DataHydration.Moments.Util.convertApiMomentComments)
 
-return function(List) --[[ Line: 14 | Named "extractCommentsByFeedItemId" ]]
+return function(List)
 	-- upvalues: ConvertApiMomentCommentsModule (copy)
 	local t = {}
 	

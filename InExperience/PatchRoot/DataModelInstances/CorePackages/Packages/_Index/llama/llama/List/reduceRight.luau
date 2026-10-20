@@ -1,4 +1,4 @@
-﻿return function(p1, Callback, p2) --[[ Line: 2 | Named "reduceRight" ]]
+﻿return function(p1, Callback, p2)
 	local ValueType = type(p1)
 	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)
 	local ValueType1 = type(Callback)

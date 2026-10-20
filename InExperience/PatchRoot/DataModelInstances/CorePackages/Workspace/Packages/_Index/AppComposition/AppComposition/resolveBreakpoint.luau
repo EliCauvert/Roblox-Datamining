@@ -12,7 +12,7 @@ local list = {
 	Breakpoint.XLarge, Breakpoint.XXLarge
 }
 
-return function(p1) --[[ Line: 26 | Named "resolveBreakpoint" ]]
+return function(p1)
 	-- upvalues: list (copy), config (copy), Breakpoint (copy)
 	for _, value in list do
 		if p1 <= (config[value] or 0) then

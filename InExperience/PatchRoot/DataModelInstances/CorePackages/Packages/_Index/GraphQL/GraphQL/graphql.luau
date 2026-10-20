@@ -13,14 +13,14 @@ local ValidateSchemaFunction = require(Parent.type.validate).validateSchema
 local ExecuteFunction = require(Parent.execution.execute).execute
 local Callback = nil
 local GraphqlModule = {
-	graphql = function(p1) --[[ Line: 93 ]]
+	graphql = function(p1)
 		-- upvalues: PromiseModule (copy), Callback (ref)
-		return PromiseModule.new(function(Callback1) --[[ Line: 95 ]]
+		return PromiseModule.new(function(Callback1)
 			-- upvalues: Callback (upval), p1 (copy)
 			return Callback1(Callback(p1))
 		end)
 	end,
-	graphqlSync = function(p1) --[[ Line: 106 ]]
+	graphqlSync = function(p1)
 		-- upvalues: Callback (ref), IsPromiseFunction (copy), Error1 (copy)
 		local CallbackResult = Callback(p1)
 		
@@ -31,7 +31,7 @@ local GraphqlModule = {
 	end
 }
 
-Callback = function(p1) --[[ Line: 119 | Named "graphqlImpl" ]]
+Callback = function(p1)
 	-- upvalues: ValidateSchemaFunction (copy), ParseFunction (copy), ValidateFunction (copy), ExecuteFunction (copy)
 	local Schema = p1.schema
 	local Source = p1.source
@@ -47,7 +47,7 @@ Callback = function(p1) --[[ Line: 119 | Named "graphqlImpl" ]]
 		return { errors = ValidateSchemaResult }
 	end
 	local Document = nil
-	local Success, Result = pcall(function() --[[ Line: 138 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: Document (ref), ParseFunction (upval), Source (copy)
 		Document = ParseFunction(Source)
 	end)

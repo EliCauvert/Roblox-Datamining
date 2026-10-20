@@ -1,10 +1,10 @@
 ﻿local ContentProvider = game:GetService("ContentProvider")
 local ReactModule = require(script:FindFirstAncestor("InExperienceDetailsPrompt").Parent.React)
 
-return function(ContentId) --[[ Line: 6 | Named "useImageLoadingState" ]]
+return function(ContentId)
 	-- upvalues: ReactModule (copy), ContentProvider (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 9 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ContentId (copy), UseStateResult2 (copy), ContentProvider (upval)
 		if not ContentId or ContentId == "" then
 			UseStateResult2(false)
@@ -18,9 +18,9 @@ return function(ContentId) --[[ Line: 6 | Named "useImageLoadingState" ]]
 		end
 		UseStateResult2(false)
 		local Flag = true
-		task.spawn(function() --[[ Line: 24 ]]
+		task.spawn(function()
 			-- upvalues: ContentProvider (upval), ContentId (upval), Flag (ref), UseStateResult2 (upval)
-			ContentProvider:PreloadAsync({ ContentId }, function(ContentId1, AssetFetchStatus) --[[ Line: 25 ]]
+			ContentProvider:PreloadAsync({ ContentId }, function(ContentId1, AssetFetchStatus)
 				-- upvalues: Flag (upval), ContentId (upval), UseStateResult2 (upval)
 				if Flag and ContentId1 == ContentId and AssetFetchStatus == Enum.AssetFetchStatus.Success then
 					UseStateResult2(true)
@@ -28,7 +28,7 @@ return function(ContentId) --[[ Line: 6 | Named "useImageLoadingState" ]]
 			end)
 		end)
 		
-		return function() --[[ Line: 34 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = false
 		end

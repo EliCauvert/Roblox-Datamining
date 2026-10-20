@@ -1,3 +1,3 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(EquippedAssets) --[[ Line: 4 ]]
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(EquippedAssets)
 	return { equippedAssets = EquippedAssets }
 end)

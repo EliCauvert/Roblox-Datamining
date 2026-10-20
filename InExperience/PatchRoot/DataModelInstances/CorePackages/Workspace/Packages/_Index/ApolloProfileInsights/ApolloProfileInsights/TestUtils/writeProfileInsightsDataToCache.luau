@@ -3,7 +3,7 @@ local CryoModule = require(Parent.Cryo)
 local _ = require(Parent.ApolloClient)
 local Queries = require(Parent.ApolloLocalState).queries
 
-return function(p1, List, p2) --[[ Line: 27 ]]
+return function(p1, List, p2)
 	-- upvalues: Queries (copy), CryoModule (copy)
 	local Query = if p2 and p2.query then p2.query else Queries.profilesInsightsByUserIds
 	for UserIds, value in List do

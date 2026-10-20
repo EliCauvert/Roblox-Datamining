@@ -29,7 +29,7 @@ local ScheduledSquadSheetModule = require(Squads.Components.ScheduledSquads.Sche
 local ScheduledSquadActionEnumModule = require(Squads.Enums.ScheduledSquadActionEnum)
 local ScheduledSquadActionSourceEnumModule = require(Squads.Enums.ScheduledSquadActionSourceEnum)
 
-return function(p1) --[[ Line: 50 | Named "ScheduledSquadsMoreInfoSheet" ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseLocalUserIdFunction (copy), ReactModule (copy), SquadExternalContractContext (copy), UseCurrentSquadIdFunction (copy), UseStoreFunction (copy), CryoModule (copy), SquadPromptType (copy), UserProfileStore (copy), UseLocalizationFunction (copy), View (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), Avatar (copy), FFlagSquadsUseProfileFrameThumbnailModule (copy), Text (copy), DeleteScheduledSquadFunction (copy), EventNamesModule (copy), ScheduledSquadActionEnumModule (copy), ScheduledSquadActionSourceEnumModule (copy), UnsubscribeFromScheduledSquadFunction (copy), SubscribeToScheduledSquadFunction (copy), ScheduledSquadSheetModule (copy), Sheet (copy), LocalizationService (copy), FoundationModule (copy), Button (copy), ButtonVariant (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
@@ -41,27 +41,27 @@ return function(p1) --[[ Line: 50 | Named "ScheduledSquadsMoreInfoSheet" ]]
 	local IsUnixTimestampBelow: boolean = _DateTime and _DateTime.UnixTimestamp < DateTime.now().UnixTimestamp
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(p1.scheduledSquad.subscribers)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 64 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CryoModule (upval), UseStateResult1 (copy)
-		return CryoModule.List.map(UseStateResult1, function(p2): string --[[ Line: 65 ]]
+		return CryoModule.List.map(UseStateResult1, function(p2): string
 			return (tostring(p2.userId))
 		end)
 	end, { UseStateResult1 })
-	ReactModule.useEffect(function() --[[ Line: 70 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2_1 (copy), p1 (copy)
 		UseStateResult2_1(p1.scheduledSquad.subscribers)
 	end, { p1.scheduledSquad.subscribers })
 	local IsTextMatch = tostring(p1.scheduledSquad.initiatorId) == tostring(UseLocalUserIdResult)
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 75 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: IsTextMatch (copy), CryoModule (upval), UseMemoResult (copy), UseLocalUserIdResult (copy)
-		return IsTextMatch or CryoModule.List.findWhere(UseMemoResult, function(p2): boolean --[[ Line: 77 ]]
+		return IsTextMatch or CryoModule.List.findWhere(UseMemoResult, function(p2): boolean
 			-- upvalues: UseLocalUserIdResult (upval)
 			return p2 == tostring(UseLocalUserIdResult)
 		end) ~= nil
 	end, { IsTextMatch, UseLocalUserIdResult, UseMemoResult })
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState({})
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(true)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 86 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), p1 (copy)
 		UseStateResult2(false)
 		
@@ -69,7 +69,7 @@ return function(p1) --[[ Line: 50 | Named "ScheduledSquadsMoreInfoSheet" ]]
 			p1.onClose()
 		end
 	end, { p1.onClose })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 93 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy), UseContextResult (copy), UseStoreResult (copy), SquadPromptType (upval)
 		UseResult()
 		UseContextResult.setSquadPrompt(UseStoreResult, {
@@ -81,10 +81,10 @@ return function(p1) --[[ Line: 50 | Named "ScheduledSquadsMoreInfoSheet" ]]
 		UseContextResult.setSquadPrompt,
 		UseStoreResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 102 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2_3 (copy), UserProfileStore (upval), CryoModule (upval), UseMemoResult (copy), UseGetConversationFromIdResult (copy), UseStateResult2_2 (copy), UseResult (copy), UseResult1 (copy)
 		UseStateResult2_3(true)
-		UserProfileStore.get().fetchNamesByUserIds(CryoModule.List.join(UseMemoResult, UseGetConversationFromIdResult and UseGetConversationFromIdResult.participants or {}), function(p2) --[[ Line: 105 ]]
+		UserProfileStore.get().fetchNamesByUserIds(CryoModule.List.join(UseMemoResult, UseGetConversationFromIdResult and UseGetConversationFromIdResult.participants or {}), function(p2)
 			-- upvalues: UseStateResult2_2 (upval), UseStateResult2_3 (upval), UseResult (upval), UseResult1 (upval)
 			if p2.status == "success" then
 				local CombinedNames = {}
@@ -124,7 +124,7 @@ return function(p1) --[[ Line: 50 | Named "ScheduledSquadsMoreInfoSheet" ]]
 			displayName = UseStateResult3[tostring(p1.scheduledSquad.initiatorId)]
 		}
 	})
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 149 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: UseStateResult1 (copy), ReactModule (upval), View (upval), FFlagSquadsEnableFoundationTestIdsModule (upval), Avatar (upval), FFlagSquadsUseProfileFrameThumbnailModule (upval), Text (upval), UseStateResult3 (copy)
 		local Elements = {}
 		
@@ -150,7 +150,7 @@ return function(p1) --[[ Line: 50 | Named "ScheduledSquadsMoreInfoSheet" ]]
 		end
 		return Elements
 	end, { UseStateResult3, UseStateResult1 })
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 179 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: UseGetConversationFromIdResult (copy), CryoModule (upval), UseMemoResult (copy), ReactModule (upval), View (upval), FFlagSquadsEnableFoundationTestIdsModule (upval), Avatar (upval), FFlagSquadsUseProfileFrameThumbnailModule (upval), Text (upval), UseStateResult3 (copy)
 		local Elements = {}
 		
@@ -186,7 +186,7 @@ return function(p1) --[[ Line: 50 | Named "ScheduledSquadsMoreInfoSheet" ]]
 		UseMemoResult,
 		UseGetConversationFromIdResult and UseGetConversationFromIdResult.participants
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 216 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy), UseDispatchResult (copy), DeleteScheduledSquadFunction (upval), p1 (copy), UseContextResult (copy), EventNamesModule (upval), ScheduledSquadActionEnumModule (upval), ScheduledSquadActionSourceEnumModule (upval), UseCurrentSquadIdResult (copy)
 		UseResult()
 		UseDispatchResult(DeleteScheduledSquadFunction(p1.scheduledSquad.scheduledGroupUpId, UseContextResult.setSquadPrompt))
@@ -204,20 +204,20 @@ return function(p1) --[[ Line: 50 | Named "ScheduledSquadsMoreInfoSheet" ]]
 		UseContextResult.setSquadPrompt, UseContextResult.squadLocation, UseStoreResult
 	})
 	
-	local function v47() --[[ Line: 241 ]]
+	local function v47()
 		-- upvalues: UseStateResult2_1 (copy), CryoModule (upval), UseStateResult1 (copy), UseLocalUserIdResult (copy)
-		UseStateResult2_1(CryoModule.List.filter(UseStateResult1, function(p2): boolean --[[ Line: 242 ]]
+		UseStateResult2_1(CryoModule.List.filter(UseStateResult1, function(p2): boolean
 			-- upvalues: UseLocalUserIdResult (upval)
 			return tostring(p2.userId) ~= tostring(UseLocalUserIdResult)
 		end))
 	end
 	
-	local function v48() --[[ Line: 247 ]]
+	local function v48()
 		-- upvalues: UseStateResult2_1 (copy), CryoModule (upval), UseStateResult1 (copy), UseLocalUserIdResult (copy)
 		UseStateResult2_1(CryoModule.List.join(UseStateResult1, { { userId = tostring(UseLocalUserIdResult) } }))
 	end
 	
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 252 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseMemoResult1 (copy), UnsubscribeFromScheduledSquadFunction (upval), p1 (copy), v47 (copy), UseResult1 (copy), SubscribeToScheduledSquadFunction (upval), v48 (copy), UseResult (copy), UseContextResult (copy), EventNamesModule (upval), ScheduledSquadActionEnumModule (upval), ScheduledSquadActionSourceEnumModule (upval), UseCurrentSquadIdResult (copy)
 		if UseMemoResult1 then
 			UnsubscribeFromScheduledSquadFunction({
@@ -242,7 +242,7 @@ return function(p1) --[[ Line: 50 | Named "ScheduledSquadsMoreInfoSheet" ]]
 		p1.scheduledSquad, UseContextResult.fireSquadAnalytics, UseResult, UseResult1,
 		v47, v48, UseCurrentSquadIdResult
 	})
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 294 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), UseContextResult (copy), EventNamesModule (upval), ScheduledSquadActionEnumModule (upval), p1 (copy), ScheduledSquadActionSourceEnumModule (upval), UseCurrentSquadIdResult (copy)
 		UseStateResult2(true)
 		UseContextResult.fireSquadAnalytics(EventNamesModule.ScheduledSquadAction, {

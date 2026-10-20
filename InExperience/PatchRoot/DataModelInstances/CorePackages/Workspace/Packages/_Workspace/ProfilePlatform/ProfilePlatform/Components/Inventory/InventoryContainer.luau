@@ -23,7 +23,7 @@ local FFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule = require(ProfileP
 local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p1) --[[ Line: 38 | Named "InventoryContainer" ]]
+return function(p1)
 	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseMarketplaceAnalyticsContextModule (copy), ReactModule (copy), EventNamesModule (copy), FFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule (copy), EnumsModule (copy), UseProfileJsonComponentModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), AppPage (copy), Url (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), NetworkingCatalogModule (copy), AssetsCarouselModule (copy)
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	local UseProfileAnalyticsContextModuleResult = UseProfileAnalyticsContextModule()
@@ -31,7 +31,7 @@ return function(p1) --[[ Line: 38 | Named "InventoryContainer" ]]
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalizationResult = UseLocalizationFunction({ inventory = TextKeysModule.Inventory })
 	local UseMarketplaceAnalyticsContextModuleResult = UseMarketplaceAnalyticsContextModule()
-	local UseResult = ReactModule.useCallback(function(p2, p3, _, _, p4) --[[ Line: 50 ]]
+	local UseResult = ReactModule.useCallback(function(p2, p3, _, _, p4)
 		-- upvalues: UseProfileWrapperContextModuleResult (copy), UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), FFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule (upval), EnumsModule (upval), UseMarketplaceAnalyticsContextModuleResult (copy)
 		UseProfileWrapperContextModuleResult.navigateTo.itemDetails(p2)
 		UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.CatalogItemOpened, if FFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule then {
@@ -50,11 +50,11 @@ return function(p1) --[[ Line: 38 | Named "InventoryContainer" ]]
 		UseProfileWrapperContextModuleResult.externalAnalytics.catalogAnalytics
 	})
 	local Assets = UseProfileJsonComponentModule(EnumsModule.Components.Inventory).assets or {}
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 83 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
 		return p2[ConstantsModule.RODUX_KEY].AssetDetails or {}
 	end)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 87 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Assets (copy), UseSelectorResult (copy)
 		local List = {}
 		
@@ -68,7 +68,7 @@ return function(p1) --[[ Line: 38 | Named "InventoryContainer" ]]
 		end
 		return List
 	end, { Assets, UseSelectorResult })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 100 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: AppPage (upval), Url (upval), ProfileId (copy), TextKeysModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 		local config = {
 			name = AppPage.GenericWebPage,
@@ -84,7 +84,7 @@ return function(p1) --[[ Line: 38 | Named "InventoryContainer" ]]
 			UseDispatchResult(NavigateDownFunction(config))
 		end
 	end)
-	ReactModule.useEffect(function() --[[ Line: 115 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseDispatchResult (copy), NetworkingCatalogModule (upval), Assets (copy)
 		UseDispatchResult(NetworkingCatalogModule.GetItemAndBundleDetails.API(Assets))
 	end, { Assets, UseDispatchResult })

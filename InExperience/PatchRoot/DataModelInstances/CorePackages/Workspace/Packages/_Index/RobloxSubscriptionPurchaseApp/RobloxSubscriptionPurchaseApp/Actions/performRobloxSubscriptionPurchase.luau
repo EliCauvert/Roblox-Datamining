@@ -20,11 +20,11 @@ local FFlagEnablePlusReferralLandingSheet = require(RobloxSubscriptionPurchaseAp
 local FStringBlackbirdWebviewHeaderName = game:DefineFastString("FStringBlackbirdWebviewHeaderName", "Black bird")
 local EnableSubscriptionPurchaseReferrerIdEngineFeature = game:GetEngineFeature("EnableSubscriptionPurchaseReferrerId")
 
-local function _(Platform): string --[[ Line: 36 | Named "getPaymentProviderForPlatform" ]]
+local function _(Platform): string
 	return if Platform == Enum.Platform.IOS then "AppleAppStore" elseif Platform == Enum.Platform.Android then "GooglePlayStore" else "Unknown"
 end
 
-function performRobloxSubscriptionPurchase() --[[ Line: 46 ]]
+function performRobloxSubscriptionPurchase()
 	-- upvalues: RobloxSubscriptionStoreModule (copy), FFlagEnableStudioMockPurchaseRobloxSubscriptionModule (copy), RunService (copy), MarketplaceService (copy), CompleteRobloxSubscriptionUpsellFlowModule (copy), FFlagEnableSubscriptionPurchaseFlowEventIngestModule (copy), LogSubscriptionPurchaseFlowEventModule (copy), UserInputService (copy), FFlagEnablePlusReferralLandingSheet (copy), PromptStateModule (copy), WebViewServiceWrapperModule (copy), GetSubscriptionPurchaseUrlModule (copy), FStringBlackbirdWebviewHeaderName (copy), EnableSubscriptionPurchaseReferrerIdEngineFeature (copy), ConstantsModule (copy), TransitionToErrorModule (copy), ErrorReasonModule (copy), LogRobloxSubscriptionUpsellCounterModule (copy), RobloxSubscriptionUpsellTelemetryModule (copy)
 	local GetResult = RobloxSubscriptionStoreModule.get()
 	local RobloxSubscriptionProductId = GetResult.getRobloxSubscriptionProductId()
@@ -50,12 +50,12 @@ function performRobloxSubscriptionPurchase() --[[ Line: 46 ]]
 		WebViewServiceWrapperModule.new({
 			url = GetSubscriptionPurchaseUrlModule(RobloxSubscriptionProductId, PaymentSessionId, ReferrerId),
 			title = FStringBlackbirdWebviewHeaderName,
-			closeCallback = function() --[[ Line: 81 ]]
+			closeCallback = function()
 				-- upvalues: GetResult (copy), CompleteRobloxSubscriptionUpsellFlowModule (upval)
 				GetResult.setDidTryPurchasing(true)
 				CompleteRobloxSubscriptionUpsellFlowModule()
 			end,
-			onOpenCallback = function() --[[ Line: 87 ]]
+			onOpenCallback = function()
 				-- upvalues: GetResult (copy), PromptStateModule (upval)
 				GetResult.setPromptState(PromptStateModule.SubscriptionPurchaseInProgress)
 			end
@@ -66,7 +66,7 @@ function performRobloxSubscriptionPurchase() --[[ Line: 46 ]]
 	GetResult.setPromptState(PromptStateModule.SubscriptionPurchaseInProgress)
 	local AppleAppStore: string = if Platform == Enum.Platform.IOS then "AppleAppStore" elseif Platform == Enum.Platform.Android then "GooglePlayStore" else "Unknown"
 	GetResult.setIsNativePurchase(true)
-	local Success, _ = pcall(function() --[[ Line: 101 ]]
+	local Success, _ = pcall(function()
 		-- upvalues: FFlagEnablePlusReferralLandingSheet (upval), EnableSubscriptionPurchaseReferrerIdEngineFeature (upval), ReferrerId (copy), MarketplaceService (upval), ConstantsModule (upval), RobloxSubscriptionProductId (copy), AppleAppStore (copy), PaymentSessionId (copy)
 		if FFlagEnablePlusReferralLandingSheet and EnableSubscriptionPurchaseReferrerIdEngineFeature and ReferrerId then
 			MarketplaceService:PerformSubscriptionPurchaseV3Async(ConstantsModule.ROBLOX_SUBSCRIPTION_PRODUCT_TYPE, RobloxSubscriptionProductId, AppleAppStore, PaymentSessionId, ReferrerId)

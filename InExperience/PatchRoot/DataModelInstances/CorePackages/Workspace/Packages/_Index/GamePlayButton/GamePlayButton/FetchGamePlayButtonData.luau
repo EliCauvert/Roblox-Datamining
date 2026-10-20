@@ -19,7 +19,7 @@ local PromiseModule = require(Parent.Promise)
 local GetFIntLuaAppThrottleRefreshPlayabilityIntervalSecondsFunction = require(Parent.SharedFlags).GetFIntLuaAppThrottleRefreshPlayabilityIntervalSeconds
 local RunService = game:GetService("RunService")
 
-local function hasContentMaturity(State, p1): boolean --[[ Line: 31 ]]
+local function hasContentMaturity(State, p1): boolean
 	-- upvalues: FFlagMigrateGameInfoToStore (copy), DataHydrationModule (copy), GameInfosReducer (copy)
 	local AgeRecommendation = State.AgeRecommendations and State.AgeRecommendations[p1]
 	
@@ -36,12 +36,12 @@ local function hasContentMaturity(State, p1): boolean --[[ Line: 31 ]]
 	end
 end
 
-local function _(p1, p2, ContextualPlayabilityAgeRecommendationParentalControls): boolean --[[ Line: 53 | Named "shouldFetchAgeRecommendations" ]]
+local function _(p1, p2, ContextualPlayabilityAgeRecommendationParentalControls): boolean
 	-- upvalues: PlayabilityStatusEnum (copy), hasContentMaturity (copy)
 	return ContextualPlayabilityAgeRecommendationParentalControls == PlayabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls and not hasContentMaturity(p1, p2)
 end
 
-local function playButtonDataFetchPromises(p1, p2, p3, p4, p5) --[[ Line: 58 ]]
+local function playButtonDataFetchPromises(p1, p2, p3, p4, p5)
 	-- upvalues: ApiFetchGameDetails (copy), RetrievalStatus (copy), FetchGamePlayabilityAndProductInfo (copy), PlayabilityStatusEnum (copy), hasContentMaturity (copy), ApiFetchAgeRecommendations (copy), PromiseModule (copy), ApiFetchShowAgeVerificationOverlay (copy), FetchUserGameVotes (copy)
 	local List = {}
 	
@@ -51,7 +51,7 @@ local function playButtonDataFetchPromises(p1, p2, p3, p4, p5) --[[ Line: 58 ]]
 	local FetchingStatus = FetchGamePlayabilityAndProductInfo.GetFetchingStatus(p2:getState(), p3)
 	
 	if p4 or p5 or FetchingStatus == RetrievalStatus.NotStarted or FetchingStatus == RetrievalStatus.Failed then
-		table.insert(List, (p2:dispatch(FetchGamePlayabilityAndProductInfo.Fetch(p1, p3)):andThen(function(Result) --[[ Line: 85 ]]
+		table.insert(List, (p2:dispatch(FetchGamePlayabilityAndProductInfo.Fetch(p1, p3)):andThen(function(Result)
 			-- upvalues: p2 (copy), p3 (copy), PlayabilityStatusEnum (upval), hasContentMaturity (upval), ApiFetchAgeRecommendations (upval), p1 (copy), PromiseModule (upval)
 			local State = p2:getState()
 			local Inverted: boolean = Result == PlayabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls and not hasContentMaturity(State, p3)
@@ -69,7 +69,7 @@ local function playButtonDataFetchPromises(p1, p2, p3, p4, p5) --[[ Line: 58 ]]
 end
 
 return {
-	IsLoading = function(p1, p2): boolean --[[ Line: 119 ]]
+	IsLoading = function(p1, p2): boolean
 		-- upvalues: ApiFetchGameDetails (copy), RetrievalStatus (copy), FetchGamePlayabilityAndProductInfo (copy), PlayabilityStatusEnum (copy), hasContentMaturity (copy), ApiFetchAgeRecommendations (copy), ApiFetchShowAgeVerificationOverlay (copy)
 		local FetchingStatus = ApiFetchGameDetails.GetFetchingStatus(p1, p2)
 		
@@ -99,9 +99,9 @@ return {
 		end
 		return false
 	end,
-	Fetch = function(p1, p2, p3) --[[ Line: 164 ]]
+	Fetch = function(p1, p2, p3)
 		-- upvalues: NextDataExpirationTimeReducer (copy), ExpirationTimeNamespace (copy), playButtonDataFetchPromises (copy), RunService (copy), PromiseUtilities (copy), GetFIntLuaAppThrottleRefreshPlayabilityIntervalSecondsFunction (copy), SetNextDataExpirationTimeFunction (copy)
-		return function(p4) --[[ Line: 165 ]]
+		return function(p4)
 			-- upvalues: NextDataExpirationTimeReducer (upval), ExpirationTimeNamespace (upval), p2 (copy), playButtonDataFetchPromises (upval), p1 (copy), p3 (copy), RunService (upval), PromiseUtilities (upval), GetFIntLuaAppThrottleRefreshPlayabilityIntervalSecondsFunction (upval), SetNextDataExpirationTimeFunction (upval)
 			local CurrentTime = tick()
 			local Floored = nil
@@ -113,7 +113,7 @@ return {
 			local PlayButtonDataFetchPromisesResult = playButtonDataFetchPromises(p1, p4, p2, Floored == nil or Floored < CurrentTime, p3)
 			
 			if #PlayButtonDataFetchPromisesResult <= 0 then return end
-			return PromiseUtilities.Batch(PlayButtonDataFetchPromisesResult, if _G.__TESTEZ_RUNNING_TEST__ or RunService:IsStudio() then warn else nil):andThen(function(Result) --[[ Line: 188 ]]
+			return PromiseUtilities.Batch(PlayButtonDataFetchPromisesResult, if _G.__TESTEZ_RUNNING_TEST__ or RunService:IsStudio() then warn else nil):andThen(function(Result)
 				-- upvalues: PromiseUtilities (upval), CurrentTime (ref), Floored (ref), GetFIntLuaAppThrottleRefreshPlayabilityIntervalSecondsFunction (upval), p4 (copy), SetNextDataExpirationTimeFunction (upval), p2 (upval), ExpirationTimeNamespace (upval)
 				if PromiseUtilities.CountResults(Result).failureCount == 0 then
 					CurrentTime = tick()

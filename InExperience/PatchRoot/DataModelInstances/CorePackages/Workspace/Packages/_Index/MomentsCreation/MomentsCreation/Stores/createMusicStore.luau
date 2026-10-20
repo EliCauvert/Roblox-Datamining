@@ -6,7 +6,7 @@ local _ = require(MomentsCreation.Types.Music)
 local CreateSignalFunction = SignalsModule.createSignal
 local CreateComputedFunction = SignalsModule.createComputed
 
-return function(p1) --[[ Line: 54 | Named "createMusicStore" ]]
+return function(p1)
 	-- upvalues: CreateMusicSourceModule (copy), CreateSignalFunction (copy), CreateComputedFunction (copy), GetFFlagMomentsCreationMusicSearchStateFixModule (copy)
 	local P0 = p1 or CreateMusicSourceModule()
 	local Signal, Signal2 = CreateSignalFunction({})
@@ -20,7 +20,7 @@ return function(p1) --[[ Line: 54 | Named "createMusicStore" ]]
 	local v2 = nil
 	local Cursor = nil
 	
-	local function _(List) --[[ Line: 87 | Named "mergeInfo" ]]
+	local function _(List)
 		-- upvalues: Signal (copy), Signal2 (copy)
 		if #List == 0 then return end
 		local Copy = table.clone(Signal(false))
@@ -31,7 +31,7 @@ return function(p1) --[[ Line: 54 | Named "createMusicStore" ]]
 		Signal2(Copy)
 	end
 	
-	local _ = function(List) --[[ Line: 98 | Named "extractIds" ]]
+	local _ = function(List)
 		local AssetIds = {}
 		
 		for _, value in List do
@@ -40,14 +40,14 @@ return function(p1) --[[ Line: 54 | Named "createMusicStore" ]]
 		return AssetIds
 	end
 	
-	local _ = function(Value) --[[ Line: 106 | Named "setCursor" ]]
+	local _ = function(Value)
 		-- upvalues: Cursor (ref), Signal2_2 (copy), Signal2_3 (copy)
 		Cursor = Value
 		Signal2_2(Value ~= nil and not Value.isFinished())
 		Signal2_3(false)
 	end
 	
-	local function search(p2, p3) --[[ Line: 112 ]]
+	local function search(p2, p3)
 		-- upvalues: v1 (ref), v2 (ref), Cursor (ref), Signal2_2 (copy), Signal2_3 (copy), GetFFlagMomentsCreationMusicSearchStateFixModule (upval), P0 (copy), Signal (copy), Signal2 (copy), Signal2_1 (copy), Count (ref), Idle2 (copy)
 		v1 = p2
 		v2 = p3
@@ -60,7 +60,7 @@ return function(p1) --[[ Line: 54 | Named "createMusicStore" ]]
 			local Count1: number = Count
 			Idle2("loading")
 			Signal2_1({})
-			task.spawn(function() --[[ Line: 137 ]]
+			task.spawn(function()
 				-- upvalues: P0 (upval), p2 (copy), p3 (copy), Count1 (copy), Count (upval), Idle2 (upval), Signal (upval), Signal2 (upval), Signal2_1 (upval), Cursor (upval), Signal2_2 (upval), Signal2_3 (upval)
 				local Success, Result, Result3 = pcall(P0.searchMusic, p2, p3 or 30)
 				
@@ -92,7 +92,7 @@ return function(p1) --[[ Line: 54 | Named "createMusicStore" ]]
 			
 			return
 		else
-			task.spawn(function() --[[ Line: 117 ]]
+			task.spawn(function()
 				-- upvalues: P0 (upval), p2 (copy), p3 (copy), Signal (upval), Signal2 (upval), Signal2_1 (upval), Cursor (upval), Signal2_2 (upval), Signal2_3 (upval)
 				local Success, Result, Result3 = pcall(P0.searchMusic, p2, p3 or 30)
 				
@@ -120,7 +120,7 @@ return function(p1) --[[ Line: 54 | Named "createMusicStore" ]]
 	
 	return {
 		getInfoMap = Signal,
-		getResults = CreateComputedFunction(function(p4) --[[ Line: 75 ]]
+		getResults = CreateComputedFunction(function(p4)
 			-- upvalues: Signal (copy), Signal1 (copy)
 			local SignalResult = Signal(p4)
 			local List = {}
@@ -136,19 +136,19 @@ return function(p1) --[[ Line: 54 | Named "createMusicStore" ]]
 		end),
 		getSearchStatus = Idle,
 		search = search,
-		retry = function() --[[ Line: 181 ]]
+		retry = function()
 			-- upvalues: search (copy), v1 (ref), v2 (ref)
 			search(v1, v2)
 		end,
 		getHasMore = Signal3,
 		getIsLoadingMore = Signal4,
-		loadMore = function() --[[ Line: 185 ]]
+		loadMore = function()
 			-- upvalues: Cursor (ref), Signal3 (copy), Signal4 (copy), Signal2_3 (copy), Signal2_2 (copy), Signal (copy), Signal2 (copy), Signal1 (copy), Signal2_1 (copy)
 			local Cursor1 = Cursor
 			
 			if Cursor1 ~= nil and Signal3(false) and not Signal4(false) then
 				Signal2_3(true)
-				task.spawn(function() --[[ Line: 191 ]]
+				task.spawn(function()
 					-- upvalues: Cursor1 (copy), Cursor (upval), Signal2_2 (upval), Signal2_3 (upval), Signal (upval), Signal2 (upval), Signal1 (upval), Signal2_1 (upval)
 					local Success, Result = pcall(Cursor1.nextPage)
 					
@@ -189,11 +189,11 @@ return function(p1) --[[ Line: 54 | Named "createMusicStore" ]]
 				return
 			end
 		end,
-		fetchInfo = function(Key) --[[ Line: 154 ]]
+		fetchInfo = function(Key)
 			-- upvalues: Signal (copy), GetFFlagMomentsCreationMusicSearchStateFixModule (upval), t (copy), P0 (copy), Signal2 (copy)
 			if Signal(false)[Key] ~= nil then return end
 			if not GetFFlagMomentsCreationMusicSearchStateFixModule() then
-				task.spawn(function() --[[ Line: 173 ]]
+				task.spawn(function()
 					-- upvalues: P0 (upval), Key (copy), Signal (upval), Signal2 (upval)
 					local Success, Result = pcall(P0.getMetadata, { Key })
 					
@@ -212,7 +212,7 @@ return function(p1) --[[ Line: 54 | Named "createMusicStore" ]]
 			end
 			if not t[Key] then
 				t[Key] = true
-				task.spawn(function() --[[ Line: 164 ]]
+				task.spawn(function()
 					-- upvalues: P0 (upval), Key (copy), t (upval), Signal (upval), Signal2 (upval)
 					local Success, Result = pcall(P0.getMetadata, { Key })
 					t[Key] = nil

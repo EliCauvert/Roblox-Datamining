@@ -34,13 +34,13 @@ local AXCarouselPeakFraction = game:DefineFastInt("AXCarouselPeakFraction", 33)
 local AXCarouselItemsBasedOnFrameSize = game:DefineFastInt("AXCarouselItemsBasedOnFrameSize", 3)
 local CarouselArrowStyleProps = { leftPosition = 28, rightPosition = 15 }
 
-local function _(p1, p2: number, p3): number --[[ Line: 121 | Named "computeItemWidth" ]]
+local function _(p1, p2: number, p3): number
 	local v1 = if p2 > 0 then p2 else 1
 	
 	return (math.floor(math.max(0, p1 - (v1 - 1) * p3) / v1))
 end
 
-return function(p1, Ref) --[[ Line: 128 | Named "useCatalogItemCarouselSortViewModel" ]]
+return function(p1, Ref)
 	-- upvalues: UseCatalogPageMonolithDependenciesModule (copy), UseTokensFunction (copy), ReactModule (copy), UseOnRequestImpressionsSignalModule (copy), FFlagAXSduiSeeAllClickLogging (copy), UseCatalogSortSeeAllLoggingModule (copy), UseFirstSeenImpressionFilterModule (copy), FFlagAXSduiSortSessionImpressionDedup (copy), UseSessionSeenImpressionFilterModule (copy), UseDeferLooksWithoutHydrationFilterModule (copy), UseComposedImpressionFilterModule (copy), FFlagAXDeferLookImpressionsForHydration (copy), UseStoreFunction (copy), AXCarouselItemsBasedOnFrameSize (copy), AXCarouselPeakFraction (copy), UseHydrateCatalogSortOnDemandEffectModule (copy), UseLocalizationFunction (copy), FFlagAXCatalogItemInformationPopover (copy), UseOpenInformationPopoverModule (copy), GetFooterVisibilityFromItemFootersModule (copy), UnifiedEventLogEnums (copy), UseAddUnifiedLoggingToCatalogSortEffectModule (copy), ItemTypeEnum (copy), SelectHydratedLookTypeModule (copy), CryoModule (copy), WidgetConstantsModule (copy), AXCarouselLoadingBuffer (copy), UseOnCatalogSortImpressionsDetectedCallbackModule (copy), CarouselArrowStyleProps (copy)
 	local WidgetTileWithImpressionsTagging = UseCatalogPageMonolithDependenciesModule().WidgetTileWithImpressionsTagging
 	local UseTokensResult = UseTokensFunction()
@@ -63,10 +63,10 @@ return function(p1, Ref) --[[ Line: 128 | Named "useCatalogItemCarouselSortViewM
 		UseSessionSeenImpressionFilterModuleResult
 	})
 	local UseComposedImpressionFilterModuleResult1 = if FFlagAXDeferLookImpressionsForHydration then UseComposedImpressionFilterModuleResult else UseSessionSeenImpressionFilterModuleResult
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 185 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval)
 		return (setmetatable({}, {
-			__index = function(p2, p3) --[[ Line: 187 ]]
+			__index = function(p2, p3)
 				-- upvalues: ReactModule (upval)
 				local Ref = ReactModule.createRef()
 				rawset(p2, p3, Ref)
@@ -84,7 +84,7 @@ return function(p1, Ref) --[[ Line: 128 | Named "useCatalogItemCarouselSortViewM
 	local NewSmallest = Smallest * Floored + math.max(0, Smallest - 1) * Medium
 	local UseStateResult, UseStateResult2 = ReactModule.useState({ cardWindowStart = 1, cardWindowIndex = 1 })
 	UseHydrateCatalogSortOnDemandEffectModule(WidgetInfo, WidgetConfiguration, ItemsPerRow)
-	local UseResult = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 225 ]]
+	local UseResult = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: Floored (copy), Medium (copy), UseStateResult (copy), UseStateResult2 (copy), UseOnRequestImpressionsSignalModuleResult (copy)
 		if not ScrollFrame then return end
 		local X = ScrollFrame.CanvasPosition.X
@@ -131,7 +131,7 @@ return function(p1, Ref) --[[ Line: 128 | Named "useCatalogItemCarouselSortViewM
 		seeAllCallback = if FFlagAXSduiSeeAllClickLogging then p1.onSeeAll else nil
 	})
 	
-	local function buildPerTileAnalyticsInfo(p2, GridPositionColumn) --[[ Line: 278 ]]
+	local function buildPerTileAnalyticsInfo(p2, GridPositionColumn)
 		-- upvalues: FFlagAXDeferLookImpressionsForHydration (upval), ItemTypeEnum (upval), SelectHydratedLookTypeModule (upval), UseStoreResult (copy), CryoModule (upval), p1 (copy), WidgetInfo (copy), CAROUSEL (copy)
 		return CryoModule.Dictionary.join(p1.widgetAnalyticsInfo, {
 			itemPosition = GridPositionColumn,
@@ -161,7 +161,7 @@ return function(p1, Ref) --[[ Line: 128 | Named "useCatalogItemCarouselSortViewM
 		canvasWidth = NewSmallest,
 		carouselItemCount = math.max(1, Smallest),
 		carouselIndex = UseStateResult.cardWindowIndex,
-		visibleItems = ReactModule.useMemo(function() --[[ Line: 343 ]]
+		visibleItems = ReactModule.useMemo(function()
 			-- upvalues: Content (copy), Smallest1 (copy)
 			local Content1 = Content or {}
 			local List = {}
@@ -178,7 +178,7 @@ return function(p1, Ref) --[[ Line: 128 | Named "useCatalogItemCarouselSortViewM
 			end
 			return List
 		end, { Content, Smallest1 }),
-		renderTile = function(p2, Index) --[[ Line: 309 ]]
+		renderTile = function(p2, Index)
 			-- upvalues: buildPerTileAnalyticsInfo (copy), ReactModule (upval), WidgetTileWithImpressionsTagging (copy), Floored (copy), WidgetInfo (copy), WidgetConstantsModule (upval), UseMemoResult (copy), p1 (copy), ItemsPerRow (copy), FooterVisibilityFromItemFootersModule (copy), Text (copy)
 			return ReactModule.createElement(WidgetTileWithImpressionsTagging, {
 				size = UDim2.new(0, Floored, 0, 0),

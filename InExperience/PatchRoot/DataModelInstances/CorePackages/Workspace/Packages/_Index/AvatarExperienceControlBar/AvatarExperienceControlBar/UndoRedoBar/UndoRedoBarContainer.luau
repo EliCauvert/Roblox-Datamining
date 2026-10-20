@@ -7,13 +7,13 @@ local IconOnlyMenuModule = require(AvatarExperienceControlBar.Components.IconOnl
 local BaseControlBarContainerModule = require(AvatarExperienceControlBar.BaseControlBarContainer)
 local FFlagAXResetAvatarButton = require(Parent.AvatarExperienceFlags).FFlagAXResetAvatarButton
 
-return ReactModule.memo(function(Frame: Frame) --[[ Line: 19 | Named "UndoRedoBarContainer" ]]
+return ReactModule.memo(function(Frame: Frame)
 	-- upvalues: UseUndoRedoBarViewModelModule (copy), FFlagAXResetAvatarButton (copy), ReactModule (copy), BaseControlBarContainerModule (copy), IconOnlyMenuModule (copy)
 	local UseUndoRedoBarViewModelModuleResult = UseUndoRedoBarViewModelModule()
 	
 	return if FFlagAXResetAvatarButton then ReactModule.createElement(BaseControlBarContainerModule, {
 		config = UseUndoRedoBarViewModelModuleResult.items,
-		onActiveMenuItemChanged = function() --[[ Line: 24 ]] end,
+		onActiveMenuItemChanged = function() end,
 		LayoutOrder = Frame.LayoutOrder
 	}) else ReactModule.createElement(IconOnlyMenuModule, {
 		items = UseUndoRedoBarViewModelModuleResult.items,

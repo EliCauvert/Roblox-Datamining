@@ -4,7 +4,7 @@ local DataHydrationModule = require(Parent.DataHydration)
 local GetSduiApiStoreFunction = require(Parent.SduiSharedUtilities).getSduiApiStore
 local _ = require(AvatarExperienceCatalog.Models.WidgetListInfo)
 
-local function asLegacyContent(Content) --[[ Line: 28 ]]
+local function asLegacyContent(Content)
 	if typeof(Content) ~= "table" then
 		return {}
 	end
@@ -18,7 +18,7 @@ local function asLegacyContent(Content) --[[ Line: 28 ]]
 	return List
 end
 
-return function(p1, p2) --[[ Line: 42 | Named "buildOrderedWidgetsFromCatalogPage" ]]
+return function(p1, p2)
 	-- upvalues: GetSduiApiStoreFunction (copy), DataHydrationModule (copy), asLegacyContent (copy)
 	local List = {}
 	local InputData = GetSduiApiStoreFunction().getInputData(p1, p2)

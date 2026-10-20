@@ -14,48 +14,48 @@ local _ = require(GraphQLServer.graphql.generatedTypes)
 
 return {
 	VirtualEventMutations = {
-		neverShowNotificationModalAgain = function(_, _, p1) --[[ Line: 19 ]]
+		neverShowNotificationModalAgain = function(_, _, p1)
 			-- upvalues: NeverShowNotificationModalAgainFunction (copy)
 			return NeverShowNotificationModalAgainFunction(p1.fetchImpl)
 		end,
-		enablePushNotifications = function(_, _, p1) --[[ Line: 22 ]]
+		enablePushNotifications = function(_, _, p1)
 			-- upvalues: EnablePushNotificationsFunction (copy)
 			return EnablePushNotificationsFunction(p1.fetchImpl)
 		end
 	},
 	VirtualEvent = {
-		experienceDetails = function(p1, _, p2) --[[ Line: 27 ]]
+		experienceDetails = function(p1, _, p2)
 			-- upvalues: FindExperienceDetailsByUniverseIdFunction (copy)
 			return FindExperienceDetailsByUniverseIdFunction(tostring(p1.universeId), p2.fetchImpl)
 		end,
-		media = function(p1, _, p2) --[[ Line: 30 ]]
+		media = function(p1, _, p2)
 			-- upvalues: FindExperienceMediaByUniverseIdFunction (copy)
 			return FindExperienceMediaByUniverseIdFunction(tostring(p1.universeId), p2.fetchImpl)
 		end,
-		rsvpCounters = function(p1, _, p2) --[[ Line: 33 ]]
+		rsvpCounters = function(p1, _, p2)
 			-- upvalues: FindRsvpCountersByVirtualEventIdFunction (copy)
 			return FindRsvpCountersByVirtualEventIdFunction(p1.id, p2.fetchImpl)
 		end,
-		rsvps = function(p1, _, p2) --[[ Line: 36 ]]
+		rsvps = function(p1, _, p2)
 			-- upvalues: FindRsvpsByVirtualEventIdFunction (copy)
 			return FindRsvpsByVirtualEventIdFunction(p1.id, p2.fetchImpl)
 		end
 	},
 	Mutation = {
-		virtualEvents = function() --[[ Line: 41 ]]
+		virtualEvents = function()
 			return {}
 		end,
-		virtualEventRsvp = function(_, p1, p2) --[[ Line: 44 ]]
+		virtualEventRsvp = function(_, p1, p2)
 			-- upvalues: UpdateRsvpStatusFunction (copy)
 			return UpdateRsvpStatusFunction(p1.id, p1.rsvpStatus, p2.fetchImpl)
 		end
 	},
 	Query = {
-		virtualEvent = function(_, p1, p2) --[[ Line: 49 ]]
+		virtualEvent = function(_, p1, p2)
 			-- upvalues: FindVirtualEventByIdFunction (copy)
 			return FindVirtualEventByIdFunction(p1.id, p2.fetchImpl)
 		end,
-		virtualEventsByUniverseId = function(_, p1, p2) --[[ Line: 52 ]]
+		virtualEventsByUniverseId = function(_, p1, p2)
 			-- upvalues: FindVirtualEventsByUniverseIdFunction (copy)
 			return FindVirtualEventsByUniverseIdFunction(p1.universeId, p1.options, p2.fetchImpl)
 		end

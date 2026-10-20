@@ -4,7 +4,7 @@ local CreateSignalFunction = require(Parent.Signals).createSignal
 local FFlagPlayerSearchEnableOnlineFrequents = require(Parent.SharedFlags).FFlagPlayerSearchEnableOnlineFrequents
 local FFlagProfileInsightsParseClassmates = require(Parent.SharedFlags).FFlagProfileInsightsParseClassmates
 
-local function createProfileInsight(UserId, p1) --[[ Line: 41 ]]
+local function createProfileInsight(UserId, p1)
 	-- upvalues: CryoModule (copy), FFlagPlayerSearchEnableOnlineFrequents (copy), FFlagProfileInsightsParseClassmates (copy)
 	local config = {
 		targetUserId = "",
@@ -22,7 +22,7 @@ local function createProfileInsight(UserId, p1) --[[ Line: 41 ]]
 	for _, profileInsight in p1.profileInsights do
 		if profileInsight.mutualFriendInsight and profileInsight.mutualFriendInsight.mutualFriends then
 			local MutualFriends = profileInsight.mutualFriendInsight.mutualFriends
-			config.mutualFriends = CryoModule.List.foldLeft(CryoModule.Dictionary.keys(MutualFriends), function(List, Id) --[[ Line: 60 ]]
+			config.mutualFriends = CryoModule.List.foldLeft(CryoModule.Dictionary.keys(MutualFriends), function(List, Id)
 				-- upvalues: MutualFriends (copy)
 				local MutualFriend = MutualFriends[Id]
 				table.insert(List, {
@@ -71,7 +71,7 @@ local function createProfileInsight(UserId, p1) --[[ Line: 41 ]]
 end
 
 return {
-	createProfileInsightsSignalList = function() --[[ Line: 140 ]]
+	createProfileInsightsSignalList = function()
 		-- upvalues: CreateSignalFunction (copy)
 		local Signal, Signal2 = CreateSignalFunction({})
 		
@@ -80,7 +80,7 @@ return {
 			setProfileInsights = Signal2
 		}
 	end,
-	createProfileInsightsList = function(List) --[[ Line: 125 ]]
+	createProfileInsightsList = function(List)
 		-- upvalues: createProfileInsight (copy)
 		local List1 = {}
 		

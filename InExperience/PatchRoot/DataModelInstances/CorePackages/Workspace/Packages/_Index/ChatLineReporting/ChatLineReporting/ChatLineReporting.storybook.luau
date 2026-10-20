@@ -7,9 +7,9 @@ local Dictionary = require(Parent.Cryo).Dictionary
 return {
 	roact = ReactModule,
 	reactRoblox = require(Parent.Dev.ReactRoblox),
-	mapStory = function(p1) --[[ Line: 14 ]]
+	mapStory = function(p1)
 		-- upvalues: Dictionary (copy), ReactModule (copy), MockProvidersModule (copy)
-		return function(p2) --[[ Line: 15 ]]
+		return function(p2)
 			-- upvalues: Dictionary (upval), ReactModule (upval), MockProvidersModule (upval), p1 (copy)
 			return ReactModule.createElement(MockProvidersModule, {}, {
 				story = ReactModule.createElement(p1, (Dictionary.union(p2, p2.definition and p2.definition.props or {})))

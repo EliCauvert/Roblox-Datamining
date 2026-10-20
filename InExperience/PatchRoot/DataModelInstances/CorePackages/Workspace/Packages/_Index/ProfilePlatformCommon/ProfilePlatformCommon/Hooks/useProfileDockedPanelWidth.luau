@@ -6,9 +6,9 @@ local UseProfileCardWidthModule = require(script.Parent.useProfileCardWidth)
 local FFlagEnableSplitPane = require(Parent.SharedFlags).FFlagEnableSplitPane
 local SplitPaneModule = if FFlagEnableSplitPane then require(Parent.SplitPane) else nil
 
-return function(p1) --[[ Line: 15 ]]
+return function(p1)
 	-- upvalues: UseSelectorFunction (copy), FFlagEnableSplitPane (copy), SplitPaneModule (copy), UseSignalStateFunction (copy), UseProfileCardWidthModule (copy), FormFactor (copy)
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 16 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		return p2.FormFactor
 	end)
 	local HasProfileSplitPaneEligibility = false

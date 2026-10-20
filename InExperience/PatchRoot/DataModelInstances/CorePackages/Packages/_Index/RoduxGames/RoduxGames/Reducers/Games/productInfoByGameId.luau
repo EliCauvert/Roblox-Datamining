@@ -5,12 +5,12 @@ local DashModule = require(Parent.Dash)
 local ProductModelModule = require(RoduxGames.Models.ProductModel)
 local t = {}
 
-return function(p1) --[[ Line: 13 ]]
+return function(p1)
 	-- upvalues: RoduxModule (copy), t (copy), DashModule (copy), ProductModelModule (copy)
 	return RoduxModule.createReducer(t, {
-		[p1.networkingGames.GetExperiencesProductInfo.Succeeded.name] = function(p2, p3) --[[ Line: 17 ]]
+		[p1.networkingGames.GetExperiencesProductInfo.Succeeded.name] = function(p2, p3)
 			-- upvalues: DashModule (upval), ProductModelModule (upval)
-			return DashModule.reduce(p3.responseBody.data, function(p4, p5) --[[ Line: 18 ]]
+			return DashModule.reduce(p3.responseBody.data, function(p4, p5)
 				-- upvalues: DashModule (upval), ProductModelModule (upval)
 				return DashModule.join(p4, {
 					[tostring(p5.universeId)] = ProductModelModule.format(p5)

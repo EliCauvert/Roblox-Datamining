@@ -5,20 +5,20 @@ local AnyCallMatchesModule = require(Parent.AnyCallMatches)
 local FmtArgsModule = require(Parent.fmtArgs)
 local SymbolsModule = require(Parent.symbols)
 
-local function _(p1) --[[ Line: 8 | Named "getLiteralPredicate" ]]
-	return function(p2): boolean --[[ Line: 9 ]]
+local function _(p1)
+	return function(p2): boolean
 		-- upvalues: p1 (copy)
 		return p2 == p1
 	end
 end
 
-local _ = function(p1): boolean? --[[ Line: 14 | Named "isPredicate" ]]
+local _ = function(p1): boolean?
 	-- upvalues: SymbolsModule (copy), MagicMockModule (copy)
 	if type(p1) ~= "table" or not p1[SymbolsModule.isPredicate] then return end
 	return not MagicMockModule.is(p1)
 end
 
-return function(p1, ...) --[[ Line: 20 ]]
+return function(p1, ...)
 	-- upvalues: MagicMockModule (copy), SpyModule (copy), SymbolsModule (copy), AnyCallMatchesModule (copy), FmtArgsModule (copy)
 	if not MagicMockModule.is(p1) and not SpyModule.is(p1) then
 		return {
@@ -33,7 +33,7 @@ return function(p1, ...) --[[ Line: 20 ]]
 		if if type(value) == "table" and value[SymbolsModule.isPredicate] then not MagicMockModule.is(value) else nil then
 			table.insert(List, value.predicate)
 		else
-			table.insert(List, function(p2): boolean --[[ Line: 9 ]]
+			table.insert(List, function(p2): boolean
 				-- upvalues: value (copy)
 				return p2 == value
 			end)

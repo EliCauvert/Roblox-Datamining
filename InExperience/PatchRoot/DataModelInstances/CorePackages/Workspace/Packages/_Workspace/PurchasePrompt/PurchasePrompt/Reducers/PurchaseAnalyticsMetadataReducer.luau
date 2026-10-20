@@ -6,7 +6,7 @@ local FFlagPassShopPurchaseSurfaceToBuyModal = SharedFlagsModule.FFlagPassShopPu
 local t = {}
 
 return (require(Parent.PurchasePromptDeps).Rodux.createReducer(t, {
-	[require(PurchasePrompt.Actions.SetPurchaseAnalyticsMetadata).name] = function(_, p1) --[[ Line: 18 ]]
+	[require(PurchasePrompt.Actions.SetPurchaseAnalyticsMetadata).name] = function(_, p1)
 		-- upvalues: FFlagUnifiedPurchaseGamepassAddProductUniverseId (copy)
 		return {
 			purchaseFlowUUID = p1.purchaseAnalyticsMetadata.purchaseFlowUUID,
@@ -21,7 +21,7 @@ return (require(Parent.PurchasePromptDeps).Rodux.createReducer(t, {
 			eventMetadata = p1.purchaseAnalyticsMetadata.eventMetadata
 		}
 	end,
-	[require(PurchasePrompt.Actions.CompleteRequest).name] = function(p1, _) --[[ Line: 34 ]]
+	[require(PurchasePrompt.Actions.CompleteRequest).name] = function(p1, _)
 		-- upvalues: FFlagPassShopPurchaseSurfaceToBuyModal (copy), t (copy)
 		return if FFlagPassShopPurchaseSurfaceToBuyModal then t else p1
 	end

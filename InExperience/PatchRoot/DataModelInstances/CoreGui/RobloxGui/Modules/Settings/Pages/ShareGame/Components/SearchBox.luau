@@ -11,12 +11,12 @@ local ClearFrame = ShareGameIconsModule:GetFrame("clear")
 local ThemeModule = require(RobloxGui.Modules.Settings.Theme)
 local Translator = require(RobloxGui.Modules.Settings.Pages.ShareGame.getTranslator)()
 
-function SearchBox.init(p1) --[[ Line: 37 ]]
+function SearchBox.init(p1)
 	p1.state = { isTextWritten = false }
 	p1.searchField = nil
 end
 
-function SearchBox.render(p1) --[[ Line: 44 ]]
+function SearchBox.render(p1)
 	-- upvalues: RoactModule (copy), ImagePath (copy), SearchBorderFrame (copy), _Rect (copy), ImagePath (copy), SearchSmallFrame (copy), ConstantsModule (copy), Translator (copy), ThemeModule (copy), ImagePath (copy), ClearFrame (copy)
 	local OnTextBoxFocusLostFunction = p1.props.onTextBoxFocusLost
 	local OnTextBoxFocusedFunction = p1.props.onTextBoxFocused
@@ -65,7 +65,7 @@ function SearchBox.render(p1) --[[ Line: 44 ]]
 			TextSize = ThemeModule.textSize(16),
 			Font = ThemeModule.font(Enum.Font.SourceSans),
 			ZIndex = ZIndex,
-			[RoactModule.Ref] = function(SearchField) --[[ Line: 99 ]]
+			[RoactModule.Ref] = function(SearchField)
 				-- upvalues: p1 (copy), SearchFieldRefFunction (copy)
 				p1.searchField = SearchField
 				
@@ -73,13 +73,13 @@ function SearchBox.render(p1) --[[ Line: 44 ]]
 					SearchFieldRefFunction(SearchField)
 				end
 			end,
-			[RoactModule.Event.Focused] = function() --[[ Line: 108 ]]
+			[RoactModule.Event.Focused] = function()
 				-- upvalues: OnTextBoxFocusedFunction (copy)
 				if OnTextBoxFocusedFunction then
 					OnTextBoxFocusedFunction()
 				end
 			end,
-			[RoactModule.Event.FocusLost] = function(p2) --[[ Line: 113 ]]
+			[RoactModule.Event.FocusLost] = function(p2)
 				-- upvalues: OnTextBoxFocusLostFunction (copy)
 				if OnTextBoxFocusLostFunction then
 					OnTextBoxFocusLostFunction(p2.Text)
@@ -96,7 +96,7 @@ function SearchBox.render(p1) --[[ Line: 44 ]]
 			ImageRectSize = ClearFrame.size,
 			ZIndex = ZIndex,
 			Visible = p1.state.isTextWritten,
-			[RoactModule.Event.Activated] = function() --[[ Line: 129 ]]
+			[RoactModule.Event.Activated] = function()
 				-- upvalues: p1 (copy)
 				if p1.searchField then
 					p1.searchField.Text = ""
@@ -107,12 +107,12 @@ function SearchBox.render(p1) --[[ Line: 44 ]]
 	})
 end
 
-function SearchBox.didMount(p1) --[[ Line: 142 ]]
+function SearchBox.didMount(p1)
 	local SearchField = p1.searchField
 	local OnTextChangedFunction = p1.props.onTextChanged
 	
 	if SearchField then
-		p1.textBoxChangedConnection = SearchField:GetPropertyChangedSignal("Text"):Connect(function() --[[ Line: 147 ]]
+		p1.textBoxChangedConnection = SearchField:GetPropertyChangedSignal("Text"):Connect(function()
 			-- upvalues: SearchField (copy), p1 (copy), OnTextChangedFunction (copy)
 			local Text = SearchField.Text
 			p1:setState({ isTextWritten = Text:len() > 0 })
@@ -121,7 +121,7 @@ function SearchBox.didMount(p1) --[[ Line: 142 ]]
 	end
 end
 
-function SearchBox.willUnmount(p1) --[[ Line: 157 ]]
+function SearchBox.willUnmount(p1)
 	if p1.textBoxChangedConnection then
 		p1.textBoxChangedConnection:Disconnect()
 	end

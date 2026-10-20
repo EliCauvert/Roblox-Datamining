@@ -15,7 +15,7 @@ local FFlagPrefillPreciseSelectionChoices = require(Parent.SharedFlags).FFlagPre
 local FFlagGenericAbuseReportingGranularExports = require(Parent.SharedFlags).FFlagGenericAbuseReportingGranularExports
 local FFlagDropUnroutableMultiReportOptions = require(Parent.SharedFlags).FFlagDropUnroutableMultiReportOptions
 
-return function(p1) --[[ Line: 37 | Named "InGameAssetReportSubmitDialog" ]]
+return function(p1)
 	-- upvalues: FFlagPrefillPreciseSelectionChoices (copy), UseLocalizationFunction (copy), GetPreselectedSurfaceValueModule (copy), ReactModule (copy), ConstantsModule (copy), FFlagDropUnroutableMultiReportOptions (copy), DefaultDualDropdownDialogV2Module (copy), DefaultDualDropdownDialogModule (copy), FFlagGenericAbuseReportingGranularExports (copy), IsShowUKOSAIllegalContentReportingLinkFunction (copy), View (copy), OSAReportLink (copy)
 	local UseLocalizationResult = if FFlagPrefillPreciseSelectionChoices then UseLocalizationFunction({
 		title = "Feature.ReportAbuse.Title.SelectInSceneFinishYourReport",
@@ -52,7 +52,7 @@ return function(p1) --[[ Line: 37 | Named "InGameAssetReportSubmitDialog" ]]
 	if FFlagPrefillPreciseSelectionChoices then
 		local PreselectedSurfaceValueModule = GetPreselectedSurfaceValueModule(p1.extractionResult)
 		local SurfaceAvatar = if PreselectedSurfaceValueModule == "avatar" then UseLocalizationResult.surfaceAvatar elseif PreselectedSurfaceValueModule == "item" then UseLocalizationResult.surfaceItem elseif PreselectedSurfaceValueModule == "text" then UseLocalizationResult.surfaceTextChat else nil
-		ReactModule.useEffect(function() --[[ Line: 81 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: SurfaceAvatar (copy), p1 (copy), ConstantsModule (upval)
 			if SurfaceAvatar then
 				p1.analyticsDispatch({
@@ -61,7 +61,7 @@ return function(p1) --[[ Line: 37 | Named "InGameAssetReportSubmitDialog" ]]
 				})
 			end
 		end, { SurfaceAvatar })
-		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 195 ]]
+		local UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: FFlagDropUnroutableMultiReportOptions (upval), UseLocalizationResult (ref)
 			return if FFlagDropUnroutableMultiReportOptions then {
 				{
@@ -127,7 +127,7 @@ return function(p1) --[[ Line: 37 | Named "InGameAssetReportSubmitDialog" ]]
 		
 		return ReactModule.createElement(DefaultDualDropdownDialogV2Module, {
 			title = UseLocalizationResult.title,
-			problems = ReactModule.useMemo(function() --[[ Line: 90 ]]
+			problems = ReactModule.useMemo(function()
 				-- upvalues: FFlagDropUnroutableMultiReportOptions (upval), UseLocalizationResult (ref)
 				return if FFlagDropUnroutableMultiReportOptions then {
 					{
@@ -241,7 +241,7 @@ return function(p1) --[[ Line: 37 | Named "InGameAssetReportSubmitDialog" ]]
 				UseLocalizationResult.problemIPInfringementDesc
 			}),
 			surfaces = UseMemoResult,
-			preselected = ReactModule.useMemo(function() --[[ Line: 227 ]]
+			preselected = ReactModule.useMemo(function()
 				-- upvalues: PreselectedSurfaceValueModule (copy), UseMemoResult (copy)
 				local Surface = nil
 				
@@ -278,7 +278,7 @@ return function(p1) --[[ Line: 37 | Named "InGameAssetReportSubmitDialog" ]]
 				},
 				onSubmitProps = {
 					hasNextSteps = true,
-					onProceedToNextStep = if FFlagGenericAbuseReportingGranularExports then function(p2, p3, p4): boolean --[[ Line: 371 ]]
+					onProceedToNextStep = if FFlagGenericAbuseReportingGranularExports then function(p2, p3, p4): boolean
 						-- upvalues: p1 (copy)
 						p1.onSubmit(p2, p3, p4)
 						
@@ -286,7 +286,7 @@ return function(p1) --[[ Line: 37 | Named "InGameAssetReportSubmitDialog" ]]
 					end else p1.onSubmit
 				},
 				onCloseProps = { hasPreviousSteps = false, onAbandon = p1.onBack },
-				footerContent = function() --[[ Line: 381 ]]
+				footerContent = function()
 					-- upvalues: IsShowUKOSAIllegalContentReportingLinkFunction (upval), ReactModule (upval), View (upval), OSAReportLink (upval)
 					return if IsShowUKOSAIllegalContentReportingLinkFunction() then ReactModule.createElement(View, { tag = "size-full-0 auto-y" }, { OSALink = ReactModule.createElement(OSAReportLink) }) else nil
 				end,

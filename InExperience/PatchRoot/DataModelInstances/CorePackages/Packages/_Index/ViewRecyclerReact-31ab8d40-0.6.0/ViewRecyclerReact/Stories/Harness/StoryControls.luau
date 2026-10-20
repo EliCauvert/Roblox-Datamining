@@ -9,7 +9,7 @@
 		4,
 		8
 	}),
-	options = function(p1, List) --[[ Line: 8 ]]
+	options = function(p1, List)
 		local List1 = { p1 }
 		
 		for _, value in List do
@@ -19,7 +19,7 @@
 		end
 		return List1
 	end,
-	merge = function(Tbl, List) --[[ Line: 18 ]]
+	merge = function(Tbl, List)
 		local Copy = table.clone(Tbl)
 		
 		if List ~= nil then
@@ -29,19 +29,19 @@
 		end
 		return Copy
 	end,
-	positiveInteger = function(Value: number, p2) --[[ Line: 28 ]]
+	positiveInteger = function(Value: number, p2)
 		return if type(Value) == "number" and Value == Value then math.max(1, (math.round(Value))) else p2
 	end,
-	nonNegativeNumber = function(p2: number, p3) --[[ Line: 35 ]]
+	nonNegativeNumber = function(p2: number, p3)
 		return if type(p2) == "number" and p2 == p2 then math.max(0, p2) else p3
 	end,
-	resolveAxis = function(p2, p3) --[[ Line: 42 ]]
+	resolveAxis = function(p2, p3)
 		return if p2 == "horizontal" then p3.Axis.X else p3.Axis.Y
 	end,
-	resolveAlignment = function(p2, p3) --[[ Line: 46 ]]
+	resolveAlignment = function(p2, p3)
 		return if p2 == "start" then p3.ScrollAlignment.Start elseif p2 == "end" then p3.ScrollAlignment.End else p3.ScrollAlignment.Center
 	end,
-	resolvePresentationMode = function(p2, p3) --[[ Line: 55 ]]
+	resolvePresentationMode = function(p2, p3)
 		return if p2 == "untilCommit" then p3.RecyclableViewReadiness.ReadyOnCommit else p3.RecyclableViewReadiness.ReadyOnAssignment
 	end
 }

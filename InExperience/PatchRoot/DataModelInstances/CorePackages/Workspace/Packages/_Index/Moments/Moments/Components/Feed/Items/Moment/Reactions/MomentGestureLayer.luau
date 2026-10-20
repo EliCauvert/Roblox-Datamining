@@ -6,7 +6,7 @@ local MomentContextModule = require(script.Parent.Parent.MomentContext)
 local UseMomentGesturesModule = require(script.Parent.useMomentGestures)
 local UseReactionCommitModule = require(script.Parent.useReactionCommit)
 
-return ReactModule.memo(function(p1) --[[ Line: 33 | Named "MomentGestureLayer" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: MomentContextModule (copy), UseReactionCommitModule (copy), UseSignalStateFunction (copy), ReactModule (copy), UseMomentGesturesModule (copy), View (copy)
 	local UseMomentResult = MomentContextModule.useMoment()
 	local Controller = UseMomentResult.controller
@@ -20,13 +20,13 @@ return ReactModule.memo(function(p1) --[[ Line: 33 | Named "MomentGestureLayer" 
 		Active = true,
 		BackgroundTransparency = 1,
 		ref = UseMomentGesturesModule(not UseSignalStateResult and not UseSignalStateResult1, {
-			onSingleTapConfirmed = ReactModule.useCallback(function() --[[ Line: 49 ]]
+			onSingleTapConfirmed = ReactModule.useCallback(function()
 				-- upvalues: Controller (copy)
 				if Controller ~= nil then
 					Controller.toggle()
 				end
 			end, { Controller }),
-			onDoubleTap = ReactModule.useCallback(function(p2) --[[ Line: 55 ]]
+			onDoubleTap = ReactModule.useCallback(function(p2)
 				-- upvalues: UseReactionCommitModuleResult (copy)
 				UseReactionCommitModuleResult("doubleTap", p2, nil)
 			end, { UseReactionCommitModuleResult })

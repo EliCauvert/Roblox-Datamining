@@ -1,6 +1,6 @@
 ﻿local TeleportService = game:GetService("TeleportService")
 
-return function(GameIdsToExclude) --[[ Line: 3 | Named "callTeleportSwitchServer" ]]
+return function(GameIdsToExclude)
 	-- upvalues: TeleportService (copy)
 	if GameIdsToExclude == nil then
 		TeleportService:TeleportSwitchServer()

@@ -9,7 +9,7 @@ local _ = require(Parent.Types)
 local _UDim2 = UDim2.fromScale(0.5, 0.5)
 local config = { bottom = 0, left = 0, right = 0, top = 0 }
 
-return function(p1) --[[ Line: 20 | Named "Window" ]]
+return function(p1)
 	-- upvalues: BehaviorsModule (copy), BehaviorKindModule (copy), config (copy), ReactModule (copy), GeometryModule (copy), _UDim2 (copy), ReactRobloxModule (copy)
 	assert((p1.behavior or BehaviorsModule.Contained).kind == BehaviorKindModule.Contained, "FloatingWindow only supports Contained behavior")
 	local BoundsInsets = p1.boundsInsets or config
@@ -24,7 +24,7 @@ return function(p1) --[[ Line: 20 | Named "Window" ]]
 	local UseRefResult8 = ReactModule.useRef(false)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.zero)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 41 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult1 (copy), UseRefResult2 (copy), GeometryModule (upval), UseRefResult3 (copy), p1 (copy), _UDim2 (upval), UseRefResult7 (copy), UseBindingResult2 (copy), UseStateResult2 (copy), UseRefResult4 (copy)
 		local Current = UseRefResult1.current
 		local Current1 = UseRefResult2.current
@@ -42,7 +42,7 @@ return function(p1) --[[ Line: 20 | Named "Window" ]]
 			UseBindingResult2((GeometryModule.clampCenter(UseRefResult7.current, Current, Current1)))
 		end
 	end, { p1.initialCenter, UseBindingResult2 })
-	local UseResult1 = ReactModule.useCallback(function(Frame) --[[ Line: 61 ]]
+	local UseResult1 = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseRefResult1 (copy), UseResult (copy)
 		local AbsoluteSize = Frame.AbsoluteSize
 		
@@ -53,7 +53,7 @@ return function(p1) --[[ Line: 20 | Named "Window" ]]
 			return
 		end
 	end, { UseResult })
-	local UseResult2 = ReactModule.useCallback(function(Frame) --[[ Line: 70 ]]
+	local UseResult2 = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseRefResult2 (copy), UseResult (copy)
 		local AbsoluteSize = Frame.AbsoluteSize
 		
@@ -64,7 +64,7 @@ return function(p1) --[[ Line: 20 | Named "Window" ]]
 			return
 		end
 	end, { UseResult })
-	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 79 ]]
+	local UseResult3 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult4 (copy), UseRefResult5 (copy), p1 (copy), UseRefResult8 (copy), UseRefResult6 (copy), UseRefResult7 (copy), GeometryModule (upval), UseRefResult1 (copy), UseRefResult2 (copy), UseBindingResult2 (copy)
 		if not UseRefResult4.current then return end
 		local Offset = p2 - UseRefResult5.current
@@ -76,7 +76,7 @@ return function(p1) --[[ Line: 20 | Named "Window" ]]
 		UseRefResult7.current = NewCurrent
 		UseBindingResult2((GeometryModule.clampCenter(NewCurrent, UseRefResult1.current, UseRefResult2.current)))
 	end, { p1.dragThreshold, UseBindingResult2 })
-	local UseResult4 = ReactModule.useCallback(function(_, Current) --[[ Line: 95 ]]
+	local UseResult4 = ReactModule.useCallback(function(_, Current)
 		-- upvalues: UseRefResult3 (copy), UseRefResult4 (copy), UseRefResult8 (copy), UseRefResult5 (copy), UseRefResult6 (copy), UseBindingResult (copy)
 		if UseRefResult3.current then
 			UseRefResult4.current = true
@@ -87,11 +87,11 @@ return function(p1) --[[ Line: 20 | Named "Window" ]]
 			return
 		end
 	end, { UseBindingResult })
-	local UseResult5 = ReactModule.useCallback(function(_, p2) --[[ Line: 106 ]]
+	local UseResult5 = ReactModule.useCallback(function(_, p2)
 		-- upvalues: UseResult3 (copy)
 		UseResult3(p2)
 	end, { UseResult3 })
-	local UseResult6 = ReactModule.useCallback(function(_, p2) --[[ Line: 110 ]]
+	local UseResult6 = ReactModule.useCallback(function(_, p2)
 		-- upvalues: UseResult3 (copy), UseRefResult4 (copy), UseRefResult8 (copy), p1 (copy)
 		UseResult3(p2)
 		UseRefResult4.current = false
@@ -100,7 +100,7 @@ return function(p1) --[[ Line: 20 | Named "Window" ]]
 			p1.onActivated()
 		end
 	end, { UseBindingResult, p1.onActivated, UseResult3 })
-	ReactModule.useLayoutEffect(function() --[[ Line: 123 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: p1 (copy), UseRefResult4 (copy), UseRefResult8 (copy), UseResult (copy)
 		if p1.draggable == false then
 			UseRefResult4.current = false
@@ -145,7 +145,7 @@ return function(p1) --[[ Line: 20 | Named "Window" ]]
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				Position = UseBindingResult:map(function(Vector): UDim2 --[[ Line: 132 ]]
+				Position = UseBindingResult:map(function(Vector): UDim2
 					return UDim2.fromOffset(Vector.X, Vector.Y)
 				end),
 				Size = p1.size,

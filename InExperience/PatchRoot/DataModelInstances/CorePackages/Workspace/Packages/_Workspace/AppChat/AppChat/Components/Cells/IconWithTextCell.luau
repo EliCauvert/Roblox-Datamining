@@ -19,13 +19,13 @@ local config = {
 	LayoutOrder = 0,
 	showDivider = true,
 	Size = UDim2.new(1, 0, 1, 0),
-	onActivated = function() --[[ Line: 47 ]]
+	onActivated = function()
 		print("IconWithTextCell onActivated")
 	end,
 	style = CryoModule.Dictionary.join(require(AppChat.SocialLibraries).Components.TestStyle, { Tokens = { Color = { None = {} } } })
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 68 | Named "IconWithTextCell" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), ReactModule (copy), BaseCellModule (copy), ImageSetLabel (copy), NormalizeFontFaceFunction (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local Style = JoinResult.style

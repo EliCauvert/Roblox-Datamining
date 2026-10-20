@@ -11,7 +11,7 @@ local config1 = {
 	isResolved = false
 }
 
-return function(p1, p2) --[[ Line: 47 | Named "getAdUpsellEligibility" ]]
+return function(p1, p2)
 	-- upvalues: config (copy), AdCampaignEligibilityModule (copy), config1 (copy), AdCampaignEligibilityUtilsModule (copy)
 	if p1 == nil or p1 == 0 then
 		return config

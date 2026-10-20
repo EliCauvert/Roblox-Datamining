@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.Action)(script.Name, function(IsClientView) --[[ Line: 4 ]]
+﻿return require(script.Parent.Parent.Action)(script.Name, function(IsClientView)
 	return { isClientView = IsClientView }
 end)

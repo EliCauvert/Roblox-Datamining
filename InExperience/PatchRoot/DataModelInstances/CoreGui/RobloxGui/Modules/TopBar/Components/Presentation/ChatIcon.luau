@@ -28,7 +28,7 @@ local _ = game:DefineFastInt("InExperienceChatTooltipShowDelayMs", 1000)
 local _ = game:DefineFastInt("InExperienceChatTooltipDismissDelayMs", 7000)
 local GameSettings = UserSettings().GameSettings
 
-local function _(): boolean --[[ Line: 40 | Named "shouldShowEmptyBadge" ]]
+local function _(): boolean
 	return game:GetService("TextChatService").ChatVersion == Enum.ChatVersion.TextChatService
 end
 
@@ -43,11 +43,11 @@ ChatIcon.validateProps = TModule.strictInterface({
 	removeKeepOutArea = if FFlagTopBarSignalizeKeepOutAreas then nil else TModule.callback
 })
 
-function ChatIcon.init(p1) --[[ Line: 65 ]]
+function ChatIcon.init(p1)
 	-- upvalues: RoactModule (copy), ChatSelectorModule (copy), GameSettings (copy), v1 (copy), AnalyticsModule (copy), FFlagTopBarSignalizeKeepOutAreas (copy), CoreGuiCommonModule (copy)
 	p1.buttonRef = RoactModule.createRef()
 	
-	function p1.chatIconActivated() --[[ Line: 68 ]]
+	function p1.chatIconActivated()
 		-- upvalues: ChatSelectorModule (upval), GameSettings (upval), v1 (upval), AnalyticsModule (upval)
 		ChatSelectorModule:ToggleVisibility()
 		GameSettings.ChatVisible = ChatSelectorModule:GetVisibility()
@@ -62,16 +62,16 @@ function ChatIcon.init(p1) --[[ Line: 65 ]]
 	end
 end
 
-function ChatIcon.render(p1) --[[ Line: 81 ]]
+function ChatIcon.render(p1)
 	-- upvalues: WithStyleFunction (copy), TenFootInterfaceModule (copy), VRService (copy), GetExperienceChatVisualConfigFunction (copy), Images (copy), FFlagTopBarSignalizeKeepOutAreas (copy), ConstantsModule (copy), RoactModule (copy), IconButtonModule (copy), Badge (copy), BadgeStates (copy)
-	return WithStyleFunction(function(_) --[[ Line: 82 ]]
+	return WithStyleFunction(function(_)
 		-- upvalues: p1 (copy), TenFootInterfaceModule (upval), VRService (upval), GetExperienceChatVisualConfigFunction (upval), Images (upval), FFlagTopBarSignalizeKeepOutAreas (upval), ConstantsModule (upval), RoactModule (upval), IconButtonModule (upval), Badge (upval), BadgeStates (upval)
 		local NoVREnabled: boolean = p1.props.topBarEnabled and (p1.props.chatEnabled and (not TenFootInterfaceModule:IsEnabled() and not VRService.VREnabled))
 		local ExperienceChatVisualConfig = GetExperienceChatVisualConfigFunction()
 		local IconSize = ExperienceChatVisualConfig.iconSize
 		local Image = if p1.props.chatVisible then Images[ExperienceChatVisualConfig.icon.on] else Images[ExperienceChatVisualConfig.icon.off]
 		
-		local function v34(Frame: Frame) --[[ Line: 98 ]]
+		local function v34(Frame: Frame)
 			-- upvalues: NoVREnabled (copy), FFlagTopBarSignalizeKeepOutAreas (upval), p1 (upval), ConstantsModule (upval)
 			if NoVREnabled and Frame then
 				if FFlagTopBarSignalizeKeepOutAreas then
@@ -92,7 +92,7 @@ function ChatIcon.render(p1) --[[ Line: 81 ]]
 			end
 		end
 		
-		local function v35(Current) --[[ Line: 114 ]]
+		local function v35(Current)
 			-- upvalues: p1 (upval), v34 (copy)
 			if Current then
 				p1.buttonRef.current = Current
@@ -149,21 +149,21 @@ function ChatIcon.render(p1) --[[ Line: 81 ]]
 	end)
 end
 
-local function mapDispatchToProps(Callback) --[[ Line: 173 ]]
+local function mapDispatchToProps(Callback)
 	-- upvalues: FFlagTopBarSignalizeKeepOutAreas (copy), SetKeepOutAreaModule (copy), RemoveKeepOutAreaModule (copy)
 	return if FFlagTopBarSignalizeKeepOutAreas then {} else {
-		setKeepOutArea = function(p1, p2, p3) --[[ Line: 178 ]]
+		setKeepOutArea = function(p1, p2, p3)
 			-- upvalues: Callback (copy), SetKeepOutAreaModule (upval)
 			return Callback(SetKeepOutAreaModule(p1, p2, p3))
 		end,
-		removeKeepOutArea = function(p1) --[[ Line: 181 ]]
+		removeKeepOutArea = function(p1)
 			-- upvalues: Callback (copy), RemoveKeepOutAreaModule (upval)
 			return Callback(RemoveKeepOutAreaModule(p1))
 		end
 	}
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p1) --[[ Line: 163 | Named "mapStateToProps" ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p1)
 	return {
 		chatVisible = p1.chat.visible,
 		unreadMessages = p1.chat.unreadMessages,

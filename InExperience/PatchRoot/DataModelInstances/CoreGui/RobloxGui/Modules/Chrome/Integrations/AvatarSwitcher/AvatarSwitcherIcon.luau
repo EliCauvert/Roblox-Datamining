@@ -10,7 +10,7 @@ local _ = require(Chrome.ChromeShared.Service.ChromeUtils)
 local UseMappedSignalFunction = require(CorePackages.Workspace.Packages.Chrome).Hooks.useMappedSignal
 local SubMenuContextModule = require(Chrome.ChromeShared.Unibar.SubMenuContext)
 
-return function(p1) --[[ Line: 20 | Named "AvatarSwitcherIcon" ]]
+return function(p1)
 	-- upvalues: UseMappedSignalFunction (copy), ReactModule (copy), SubMenuContextModule (copy), UseTokensFunction (copy), FoundationModule (copy), IconName (copy), IconSize (copy), IconVariant (copy)
 	local UseMappedSignalResult = UseMappedSignalFunction(p1.isActive)
 	local UseContextResult = ReactModule.useContext(SubMenuContextModule)
@@ -20,7 +20,7 @@ return function(p1) --[[ Line: 20 | Named "AvatarSwitcherIcon" ]]
 		name = IconName.CirclePerson,
 		size = IconSize.Large,
 		variant = if UseMappedSignalResult then IconVariant.Filled else IconVariant.Regular,
-		style = if UseContextResult then UseContextResult:map(function(Alpha: number) --[[ Line: 26 ]]
+		style = if UseContextResult then UseContextResult:map(function(Alpha: number)
 			-- upvalues: UseTokensResult (copy)
 			return {
 				Color3 = UseTokensResult.Color.Content.Default.Color3,

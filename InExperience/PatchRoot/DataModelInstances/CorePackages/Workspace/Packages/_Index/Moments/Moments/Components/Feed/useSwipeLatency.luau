@@ -11,7 +11,7 @@ local config = {
 }
 local MomentsSwipeLatencyCapMs = game:DefineFastInt("MomentsSwipeLatencyCapMs", 15000)
 
-local function fireSwipeLatency(p1, p2, p3) --[[ Line: 58 ]]
+local function fireSwipeLatency(p1, p2, p3)
 	-- upvalues: Analytics (copy), config (copy)
 	Analytics.fireAnalyticsEvent(Analytics.EventNames.MomentsSwipeLatency, {
 		mediaWaitMs = tostring(p1),
@@ -20,7 +20,7 @@ local function fireSwipeLatency(p1, p2, p3) --[[ Line: 58 ]]
 	})
 end
 
-return function(p1) --[[ Line: 66 | Named "useSwipeLatency" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), fireSwipeLatency (copy), SwipeLatencyMachineModule (copy), MomentsSwipeLatencyCapMs (copy), SignalsModule (copy)
 	local GetIsSettledFunction = p1.getIsSettled
 	local GetHasPresentedFrameFunction = p1.getHasPresentedFrame
@@ -28,20 +28,20 @@ return function(p1) --[[ Line: 66 | Named "useSwipeLatency" ]]
 	local GetCaptureTypeFunction = p1.getCaptureType
 	local UseRefResult = ReactModule.useRef(p1.onMeasurement or fireSwipeLatency)
 	UseRefResult.current = p1.onMeasurement or fireSwipeLatency
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 80 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), SwipeLatencyMachineModule (upval), MomentsSwipeLatencyCapMs (upval), UseRefResult (copy)
 		return SwipeLatencyMachineModule({
-			now = p1.now or function(): number --[[ Line: 81 ]]
+			now = p1.now or function(): number
 				return os.clock() * 1000
 			end,
 			capMs = p1.capMs or MomentsSwipeLatencyCapMs,
-			onMeasurement = function(p2, p3, p4) --[[ Line: 87 ]]
+			onMeasurement = function(p2, p3, p4)
 				-- upvalues: UseRefResult (upval)
 				UseRefResult.current(p2, p3, p4)
 			end
 		})
 	end, {})
-	local UseResult = ReactModule.useCallback(function(_, _, p2) --[[ Line: 93 ]]
+	local UseResult = ReactModule.useCallback(function(_, _, p2)
 		-- upvalues: UseMemoResult (copy), GetIsSettledFunction (copy), GetTargetHasPresentedFrameFunction (copy), GetCaptureTypeFunction (copy)
 		UseMemoResult.start(GetIsSettledFunction(false), GetTargetHasPresentedFrameFunction(p2), { captureType = GetCaptureTypeFunction(p2) })
 	end, {
@@ -50,9 +50,9 @@ return function(p1) --[[ Line: 66 | Named "useSwipeLatency" ]]
 		GetTargetHasPresentedFrameFunction,
 		GetCaptureTypeFunction
 	})
-	ReactModule.useEffect(function() --[[ Line: 100 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SignalsModule (upval), UseMemoResult (copy), GetIsSettledFunction (copy), GetHasPresentedFrameFunction (copy)
-		return (SignalsModule.createEffect(function(p2) --[[ Line: 101 ]]
+		return (SignalsModule.createEffect(function(p2)
 			-- upvalues: UseMemoResult (upval), GetIsSettledFunction (upval), GetHasPresentedFrameFunction (upval)
 			UseMemoResult.update(GetIsSettledFunction(p2), GetHasPresentedFrameFunction(p2))
 		end))

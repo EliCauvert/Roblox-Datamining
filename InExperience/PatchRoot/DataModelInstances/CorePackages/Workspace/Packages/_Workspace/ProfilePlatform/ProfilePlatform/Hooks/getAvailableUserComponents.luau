@@ -23,7 +23,7 @@ local config = {
 	[SocialCommonModule.Enums.ContextualInfoTypes.Frequents] = EnumsModule.ContextualTypes.PlayedTogether
 }
 
-return function(MutualFriends, p1) --[[ Line: 33 ]]
+return function(MutualFriends, p1)
 	-- upvalues: FFlagProfilePlatformEnableVRModule (copy), FFlagProfilePlatformRefreshActionsRespectPoliciesModule (copy), BuildUserActionsComponentModule (copy), GetSupportedActionsForProfileTypeModule (copy), EnumsModule (copy), CryoModule (copy), FFlagProfilePlatformEnableCurrencyTransfer (copy), FFlagProfilePlatformEnableTradeItemsModule (copy), SocialCommonModule (copy), FFlagProfilePlatformEnableSendPlayedTogetherContextToProfilePlatformServiceModule (copy), config (copy), FFlagProfilePlatformEnableFavoriteExperiencesModule (copy), FFlagProfilePlatformEnableInventory (copy), FFlagProfilePlatformEnableStore (copy), FFlagExperiencesOnProfile (copy), FFlagEnableProfileCompletion (copy), FFlagProfilePlatformAddCurrentlyPlayingModule (copy), FFlagProfilePlatformEnableMomentsModule (copy)
 	local List = nil
 	if FFlagProfilePlatformEnableVRModule then
@@ -39,7 +39,7 @@ return function(MutualFriends, p1) --[[ Line: 33 ]]
 				isActionsV2Supported = true,
 				component = EnumsModule.Components.Actions,
 				context = if MutualFriends == SocialCommonModule.Enums.ContextualInfoTypes.OffNetworkFriendRequest then EnumsModule.ContextualTypes.OffNetworkFriendRequest else nil,
-				supportedActions = CryoModule.List.filter(GetSupportedActionsForProfileTypeModule(EnumsModule.ProfileTypes.User), function(Chat): boolean --[[ Line: 52 ]]
+				supportedActions = CryoModule.List.filter(GetSupportedActionsForProfileTypeModule(EnumsModule.ProfileTypes.User), function(Chat): boolean
 					-- upvalues: EnumsModule (upval), p1 (copy), FFlagProfilePlatformEnableCurrencyTransfer (upval), FFlagProfilePlatformEnableTradeItemsModule (upval)
 					return if Chat == EnumsModule.ProfileActions.QrCode then if p1 and p1.isProfileQrCodeEnabled then true else false elseif Chat == EnumsModule.ProfileActions.EditProfile then if p1 and p1.areWebViewsSupported then true else false elseif FFlagProfilePlatformEnableCurrencyTransfer and Chat == EnumsModule.ProfileActions.CurrencyTransfer then if p1 and p1.canRenderTransferInProfile then true else false elseif FFlagProfilePlatformEnableTradeItemsModule and Chat == EnumsModule.ProfileActions.TradeItems then if p1 and p1.areWebViewsSupported then true else false else Chat ~= EnumsModule.ProfileActions.Chat or (p1 and p1.canSeeChatTab ~= false or false)
 				end),

@@ -6,7 +6,7 @@ local _ = require(script.Parent.MarketplaceOffersBannerTypes)
 local DecodeLuauUnicodeEscapesModule = require(script.Parent.decodeLuauUnicodeEscapes)
 local FFlagAXUpdateOffersEndsUIWithBadge = require(Parent.AvatarExperienceFlags).FFlagAXUpdateOffersEndsUIWithBadge
 
-local function normalizeDisplayString(p1) --[[ Line: 21 ]]
+local function normalizeDisplayString(p1)
 	-- upvalues: NormalizeNotEmptyStringFunction (copy), DecodeLuauUnicodeEscapesModule (copy)
 	local NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2 = NormalizeNotEmptyStringFunction(p1)
 	
@@ -25,7 +25,7 @@ local NormalizeTableFn = Normalize.makeNormalizeTableFn({
 	termsModalTitle = normalizeDisplayString
 })
 
-local function _(p1) --[[ Line: 81 | Named "normalizeModalForOfferRow" ]]
+local function _(p1)
 	-- upvalues: NormalizeNotEmptyStringFunction (copy), NormalizeTableFn (copy)
 	local Modal = nil
 	
@@ -43,7 +43,7 @@ local function _(p1) --[[ Line: 81 | Named "normalizeModalForOfferRow" ]]
 	end
 end
 
-local function normalizeOfferRow(p1) --[[ Line: 100 ]]
+local function normalizeOfferRow(p1)
 	-- upvalues: NormalizeNotEmptyStringFunction (copy), DecodeLuauUnicodeEscapesModule (copy), FFlagAXUpdateOffersEndsUIWithBadge (copy), NormalizeTableFn (copy)
 	if type(p1) ~= "table" then
 		return nil, `expected offer row to be a table, got {type(p1)}`
@@ -90,7 +90,7 @@ local function normalizeOfferRow(p1) --[[ Line: 100 ]]
 	return t, nil
 end
 
-return function(p1) --[[ Line: 133 | Named "normalizeMarketplaceOffersBannerResponse" ]]
+return function(p1)
 	-- upvalues: normalizeOfferRow (copy)
 	if p1 == nil then
 		return nil, nil

@@ -14,10 +14,10 @@ return {
 			{
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					status = function(p1) --[[ Line: 21 ]]
+					status = function(p1)
 						return p1
 					end,
-					followUser = if require(Parent.SharedFlags).FFlagJoinabilityCTARefactor then function(p1) --[[ Line: 25 ]]
+					followUser = if require(Parent.SharedFlags).FFlagJoinabilityCTARefactor then function(p1)
 						return p1
 					end else nil
 				}
@@ -31,7 +31,7 @@ return {
 			{
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					status = function(p1) --[[ Line: 40 ]]
+					status = function(p1)
 						return p1
 					end
 				}

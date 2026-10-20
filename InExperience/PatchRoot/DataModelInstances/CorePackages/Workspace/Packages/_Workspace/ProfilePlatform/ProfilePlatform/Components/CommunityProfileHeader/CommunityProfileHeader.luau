@@ -18,7 +18,7 @@ local FFlagEnablePressingCommunityOwnerInPeekViewModule = require(ProfilePlatfor
 local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p1) --[[ Line: 40 | Named "CommunityProfileHeader" ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), FFlagEnablePressingCommunityOwnerInPeekViewModule (copy), AppPage (copy), EnumsModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), HorizontalPageMargin (copy), View (copy), Image (copy), Text (copy), SocialCountsItemModule (copy), AbbreviateCountFunction (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -27,7 +27,7 @@ return function(p1) --[[ Line: 40 | Named "CommunityProfileHeader" ]]
 		followers = TextKeysModule.Followers,
 		follower = TextKeysModule.Follower
 	})
-	local v1 = if FFlagEnablePressingCommunityOwnerInPeekViewModule then function() --[[ Line: 62 ]]
+	local v1 = if FFlagEnablePressingCommunityOwnerInPeekViewModule then function()
 		-- upvalues: p1 (copy), AppPage (upval), EnumsModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 		if p1.ownerUserId then
 			local config = {
@@ -86,7 +86,7 @@ return function(p1) --[[ Line: 40 | Named "CommunityProfileHeader" ]]
 			Counts = ReactModule.createElement(View, { LayoutOrder = 2, tag = "size-full-0 auto-xy" }, {
 				MembersCount = ReactModule.createElement(SocialCountsItemModule, {
 					layoutOrder = 1,
-					text = ReactModule.useMemo(function() --[[ Line: 50 ]]
+					text = ReactModule.useMemo(function()
 						-- upvalues: p1 (copy), UseLocalizationResult (copy)
 						return if p1.hasSocialModules then UseLocalizationResult.members elseif p1.membersCount == 1 then UseLocalizationResult.follower else UseLocalizationResult.followers
 					end, {
@@ -95,7 +95,7 @@ return function(p1) --[[ Line: 40 | Named "CommunityProfileHeader" ]]
 						p1.hasSocialModules
 					}),
 					count = AbbreviateCountFunction(p1.membersCount),
-					onActivated = function() --[[ Line: 132 ]] end
+					onActivated = function() end
 				})
 			})
 		})

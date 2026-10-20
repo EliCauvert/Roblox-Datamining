@@ -8,7 +8,7 @@ local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FFlagUFRImprovementsModule = require(InterventionShared.Flags.FFlagUFRImprovements)
 
-return ReactModule.memo(function() --[[ Line: 17 | Named "InterventionDialogLoadingSkeleton" ]]
+return ReactModule.memo(function()
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), FFlagUFRImprovementsModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	

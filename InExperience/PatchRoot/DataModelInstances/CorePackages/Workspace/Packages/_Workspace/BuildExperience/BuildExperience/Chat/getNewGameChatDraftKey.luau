@@ -1,6 +1,6 @@
 ﻿local Players = game:GetService("Players")
 
-return function(p1) --[[ Line: 6 | Named "getNewGameChatDraftKey" ]]
+return function(p1)
 	-- upvalues: Players (copy)
 	local P0 = p1 or Players.LocalPlayer
 	

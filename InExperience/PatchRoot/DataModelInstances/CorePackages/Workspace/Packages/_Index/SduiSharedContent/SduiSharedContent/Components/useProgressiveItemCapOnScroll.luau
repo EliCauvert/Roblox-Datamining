@@ -2,7 +2,7 @@
 local ReactModule = require(SduiSharedContent.Parent.React)
 local FFlagSduiProgressiveScrollMathFixModule = require(SduiSharedContent.Flags.FFlagSduiProgressiveScrollMathFix)
 
-local function _(List, p1: number) --[[ Line: 10 | Named "itemCountForRowCap" ]]
+local function _(List, p1: number)
 	if p1 <= 0 then
 		return 0
 	end
@@ -18,7 +18,7 @@ local function _(List, p1: number) --[[ Line: 10 | Named "itemCountForRowCap" ]]
 	return #List
 end
 
-local _ = function(p2, p3): boolean --[[ Line: 25 | Named "rowCountsEqual" ]]
+local _ = function(p2, p3): boolean
 	if p2 == p3 then
 		return true
 	end
@@ -33,7 +33,7 @@ local _ = function(p2, p3): boolean --[[ Line: 25 | Named "rowCountsEqual" ]]
 	return true
 end
 
-return function(Current, p4: number, p5: number, p6, p7, p8, p9) --[[ Line: 53 | Named "useProgressiveItemCapOnScroll" ]]
+return function(Current, p4: number, p5: number, p6, p7, p8, p9)
 	-- upvalues: ReactModule (copy), FFlagSduiProgressiveScrollMathFixModule (copy)
 	local Largest = math.max(0, p4)
 	local Largest1 = math.max(1, p5)
@@ -79,7 +79,7 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9) --[[ Line: 53 |
 	local IsCurrentBelow = Current1 < CountCurrent
 	local UseRefResult3 = ReactModule.useRef(nil)
 	local UseRefResult4 = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 103 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagSduiProgressiveScrollMathFixModule (upval), UseRefResult2 (copy), Current (copy), UseRefResult3 (copy), UseRefResult4 (copy), p6 (copy), IsCurrentBelow (copy), p7 (copy), UseRefResult (copy), UseStateResult2 (copy), Total (ref), Largest1 (copy), UseRefResult1 (copy), p8 (copy), p9 (copy)
 		local Flag: boolean? = nil
 		
@@ -119,7 +119,7 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9) --[[ Line: 53 |
 		end
 		local Flag2 = false
 		
-		local function _() --[[ Line: 128 | Named "readContentHeight" ]]
+		local function _()
 			-- upvalues: p7 (upval)
 			local Current = if p7 then p7.current else nil
 			
@@ -136,7 +136,7 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9) --[[ Line: 53 |
 			local Current3 = if p7 then p7.current else nil
 			Y2 = if Current3 == nil then nil else Current3.AbsoluteContentSize.Y
 		end
-		local _ = function() --[[ Line: 150 | Named "showNextBatch" ]]
+		local _ = function()
 			-- upvalues: UseRefResult4 (upval), FFlagSduiProgressiveScrollMathFixModule (upval), Y2 (ref), Y (ref), p7 (upval), Current2 (copy), UseRefResult (upval), UseStateResult2 (upval), Current (upval), Total (upval), Largest1 (upval)
 			local Y2_1 = nil
 			if FFlagSduiProgressiveScrollMathFixModule then
@@ -147,7 +147,7 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9) --[[ Line: 53 |
 			end
 			UseRefResult4.current = Y2_1
 			local Current3 = if FFlagSduiProgressiveScrollMathFixModule then UseRefResult.current else nil
-			UseStateResult2(function(p10: number): number --[[ Line: 160 ]]
+			UseStateResult2(function(p10: number): number
 				-- upvalues: FFlagSduiProgressiveScrollMathFixModule (upval), Current (upval), Total (upval), Current3 (copy), Largest1 (upval)
 				if FFlagSduiProgressiveScrollMathFixModule then
 					local Smallest = math.min(p10, Total)
@@ -208,7 +208,7 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9) --[[ Line: 53 |
 			end)
 		end
 		
-		local function showNextBatchIfNearEnd() --[[ Line: 187 ]]
+		local function showNextBatchIfNearEnd()
 			-- upvalues: Flag2 (ref), FFlagSduiProgressiveScrollMathFixModule (upval), UseRefResult1 (upval), Current2 (copy), Y (ref), Y1 (ref), Y2 (ref), p7 (upval), UseRefResult4 (upval), p8 (upval), UseRefResult3 (upval), UseRefResult (upval), UseStateResult2 (upval), Current (upval), Total (upval), Largest1 (upval)
 			if Flag2 then return end
 			if FFlagSduiProgressiveScrollMathFixModule then
@@ -252,7 +252,7 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9) --[[ Line: 53 |
 			end
 			UseRefResult4.current = Y2_2
 			local Current6 = if FFlagSduiProgressiveScrollMathFixModule then UseRefResult.current else nil
-			UseStateResult2(function(p11: number): number --[[ Line: 160 ]]
+			UseStateResult2(function(p11: number): number
 				-- upvalues: FFlagSduiProgressiveScrollMathFixModule (upval), Current (upval), Total (upval), Current6 (copy), Largest1 (upval)
 				if FFlagSduiProgressiveScrollMathFixModule then
 					local Smallest = math.min(p11, Total)
@@ -313,7 +313,7 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9) --[[ Line: 53 |
 			end)
 		end
 		
-		local _ = function() --[[ Line: 236 | Named "decideUnderfill" ]]
+		local _ = function()
 			-- upvalues: Flag2 (ref), FFlagSduiProgressiveScrollMathFixModule (upval), Y2 (ref), p7 (upval), Y1 (ref), Current2 (copy), UseRefResult4 (upval), Y (ref), UseRefResult (upval), UseStateResult2 (upval), Current (upval), Total (upval), Largest1 (upval)
 			if Flag2 then return end
 			local Y3 = nil
@@ -339,7 +339,7 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9) --[[ Line: 53 |
 			end
 			UseRefResult4.current = Y2_1
 			local Current5 = if FFlagSduiProgressiveScrollMathFixModule then UseRefResult.current else nil
-			UseStateResult2(function(p12: number): number --[[ Line: 160 ]]
+			UseStateResult2(function(p12: number): number
 				-- upvalues: FFlagSduiProgressiveScrollMathFixModule (upval), Current (upval), Total (upval), Current5 (copy), Largest1 (upval)
 				if FFlagSduiProgressiveScrollMathFixModule then
 					local Smallest = math.min(p12, Total)
@@ -402,12 +402,12 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9) --[[ Line: 53 |
 		
 		local DelayedThread = nil
 		
-		local function scheduleUnderfillDecision() --[[ Line: 265 ]]
+		local function scheduleUnderfillDecision()
 			-- upvalues: DelayedThread (ref), p9 (upval), Flag2 (ref), FFlagSduiProgressiveScrollMathFixModule (upval), Y2 (ref), p7 (upval), Y1 (ref), Current2 (copy), UseRefResult4 (upval), Y (ref), UseRefResult (upval), UseStateResult2 (upval), Current (upval), Total (upval), Largest1 (upval)
 			if DelayedThread then
 				task.cancel(DelayedThread)
 			end
-			DelayedThread = task.delay(p9 / 1000, function() --[[ Line: 269 ]]
+			DelayedThread = task.delay(p9 / 1000, function()
 				-- upvalues: DelayedThread (upval), Flag2 (upval), FFlagSduiProgressiveScrollMathFixModule (upval), Y2 (upval), p7 (upval), Y1 (upval), Current2 (upval), UseRefResult4 (upval), Y (upval), UseRefResult (upval), UseStateResult2 (upval), Current (upval), Total (upval), Largest1 (upval)
 				DelayedThread = nil
 				
@@ -437,7 +437,7 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9) --[[ Line: 53 |
 						end
 						UseRefResult4.current = Y1
 						local Current2 = if FFlagSduiProgressiveScrollMathFixModule then UseRefResult.current else nil
-						UseStateResult2(function(p13: number): number --[[ Line: 160 ]]
+						UseStateResult2(function(p13: number): number
 							-- upvalues: FFlagSduiProgressiveScrollMathFixModule (upval), Current (upval), Total (upval), Current2 (copy), Largest1 (upval)
 							if FFlagSduiProgressiveScrollMathFixModule then
 								local Smallest = math.min(p13, Total)
@@ -506,7 +506,7 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9) --[[ Line: 53 |
 		if FFlagSduiProgressiveScrollMathFixModule then
 			List = {
 				Current2:GetPropertyChangedSignal("CanvasPosition"):Connect(showNextBatchIfNearEnd),
-				Current2:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function() --[[ Line: 281 ]]
+				Current2:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function()
 					-- upvalues: Y (ref), Current2 (copy), UseRefResult1 (upval), showNextBatchIfNearEnd (copy), DelayedThread (ref), p9 (upval), Flag2 (ref), FFlagSduiProgressiveScrollMathFixModule (upval), Y2 (ref), p7 (upval), Y1 (ref), UseRefResult4 (upval), UseRefResult (upval), UseStateResult2 (upval), Current (upval), Total (upval), Largest1 (upval)
 					Y = Current2.AbsoluteCanvasSize.Y
 					
@@ -516,7 +516,7 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9) --[[ Line: 53 |
 					if DelayedThread then
 						task.cancel(DelayedThread)
 					end
-					DelayedThread = task.delay(p9 / 1000, function() --[[ Line: 269 ]]
+					DelayedThread = task.delay(p9 / 1000, function()
 						-- upvalues: DelayedThread (upval), Flag2 (upval), FFlagSduiProgressiveScrollMathFixModule (upval), Y2 (upval), p7 (upval), Y1 (upval), Current2 (upval), UseRefResult4 (upval), Y (upval), UseRefResult (upval), UseStateResult2 (upval), Current (upval), Total (upval), Largest1 (upval)
 						DelayedThread = nil
 						
@@ -546,7 +546,7 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9) --[[ Line: 53 |
 								end
 								UseRefResult4.current = Y1
 								local Current2 = if FFlagSduiProgressiveScrollMathFixModule then UseRefResult.current else nil
-								UseStateResult2(function(p13: number): number --[[ Line: 160 ]]
+								UseStateResult2(function(p13: number): number
 									-- upvalues: FFlagSduiProgressiveScrollMathFixModule (upval), Current (upval), Total (upval), Current2 (copy), Largest1 (upval)
 									if FFlagSduiProgressiveScrollMathFixModule then
 										local Smallest = math.min(p13, Total)
@@ -609,7 +609,7 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9) --[[ Line: 53 |
 						end
 					end)
 				end),
-				Current2:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function() --[[ Line: 289 ]]
+				Current2:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
 					-- upvalues: Y1 (ref), Current2 (copy), UseRefResult3 (upval), Y (ref), UseRefResult4 (upval), showNextBatchIfNearEnd (copy), DelayedThread (ref), p9 (upval), Flag2 (ref), FFlagSduiProgressiveScrollMathFixModule (upval), Y2 (ref), p7 (upval), UseRefResult (upval), UseStateResult2 (upval), Current (upval), Total (upval), Largest1 (upval)
 					Y1 = Current2.AbsoluteWindowSize.Y
 					local Current1 = UseRefResult3.current
@@ -622,7 +622,7 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9) --[[ Line: 53 |
 					if DelayedThread then
 						task.cancel(DelayedThread)
 					end
-					DelayedThread = task.delay(p9 / 1000, function() --[[ Line: 269 ]]
+					DelayedThread = task.delay(p9 / 1000, function()
 						-- upvalues: DelayedThread (upval), Flag2 (upval), FFlagSduiProgressiveScrollMathFixModule (upval), Y2 (upval), p7 (upval), Y1 (upval), Current2 (upval), UseRefResult4 (upval), Y (upval), UseRefResult (upval), UseStateResult2 (upval), Current (upval), Total (upval), Largest1 (upval)
 						DelayedThread = nil
 						
@@ -652,7 +652,7 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9) --[[ Line: 53 |
 								end
 								UseRefResult4.current = Y1
 								local Current2 = if FFlagSduiProgressiveScrollMathFixModule then UseRefResult.current else nil
-								UseStateResult2(function(p13: number): number --[[ Line: 160 ]]
+								UseStateResult2(function(p13: number): number
 									-- upvalues: FFlagSduiProgressiveScrollMathFixModule (upval), Current (upval), Total (upval), Current2 (copy), Largest1 (upval)
 									if FFlagSduiProgressiveScrollMathFixModule then
 										local Smallest = math.min(p13, Total)
@@ -719,7 +719,7 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9) --[[ Line: 53 |
 			local Current4 = p7 and p7.current
 			
 			if Current4 ~= nil then
-				table.insert(List, Current4:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function() --[[ Line: 305 ]]
+				table.insert(List, Current4:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
 					-- upvalues: Y2 (ref), Current4 (copy), UseRefResult1 (upval), showNextBatchIfNearEnd (copy), DelayedThread (ref), p9 (upval), Flag2 (ref), FFlagSduiProgressiveScrollMathFixModule (upval), p7 (upval), Y1 (ref), Current2 (copy), UseRefResult4 (upval), Y (ref), UseRefResult (upval), UseStateResult2 (upval), Current (upval), Total (upval), Largest1 (upval)
 					Y2 = Current4.AbsoluteContentSize.Y
 					
@@ -729,7 +729,7 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9) --[[ Line: 53 |
 					if DelayedThread then
 						task.cancel(DelayedThread)
 					end
-					DelayedThread = task.delay(p9 / 1000, function() --[[ Line: 269 ]]
+					DelayedThread = task.delay(p9 / 1000, function()
 						-- upvalues: DelayedThread (upval), Flag2 (upval), FFlagSduiProgressiveScrollMathFixModule (upval), Y2 (upval), p7 (upval), Y1 (upval), Current2 (upval), UseRefResult4 (upval), Y (upval), UseRefResult (upval), UseStateResult2 (upval), Current (upval), Total (upval), Largest1 (upval)
 						DelayedThread = nil
 						
@@ -759,7 +759,7 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9) --[[ Line: 53 |
 								end
 								UseRefResult4.current = Y1
 								local Current2 = if FFlagSduiProgressiveScrollMathFixModule then UseRefResult.current else nil
-								UseStateResult2(function(p13: number): number --[[ Line: 160 ]]
+								UseStateResult2(function(p13: number): number
 									-- upvalues: FFlagSduiProgressiveScrollMathFixModule (upval), Current (upval), Total (upval), Current2 (copy), Largest1 (upval)
 									if FFlagSduiProgressiveScrollMathFixModule then
 										local Smallest = math.min(p13, Total)
@@ -836,7 +836,7 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9) --[[ Line: 53 |
 		if DelayedThread then
 			task.cancel(DelayedThread)
 		end
-		DelayedThread = task.delay(p9 / 1000, function() --[[ Line: 269 ]]
+		DelayedThread = task.delay(p9 / 1000, function()
 			-- upvalues: DelayedThread (ref), Flag2 (ref), FFlagSduiProgressiveScrollMathFixModule (upval), Y2 (ref), p7 (upval), Y1 (ref), Current2 (copy), UseRefResult4 (upval), Y (ref), UseRefResult (upval), UseStateResult2 (upval), Current (upval), Total (upval), Largest1 (upval)
 			DelayedThread = nil
 			
@@ -866,7 +866,7 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9) --[[ Line: 53 |
 					end
 					UseRefResult4.current = Y1
 					local Current2 = if FFlagSduiProgressiveScrollMathFixModule then UseRefResult.current else nil
-					UseStateResult2(function(p13: number): number --[[ Line: 160 ]]
+					UseStateResult2(function(p13: number): number
 						-- upvalues: FFlagSduiProgressiveScrollMathFixModule (upval), Current (upval), Total (upval), Current2 (copy), Largest1 (upval)
 						if FFlagSduiProgressiveScrollMathFixModule then
 							local Smallest = math.min(p13, Total)
@@ -932,7 +932,7 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9) --[[ Line: 53 |
 		if FFlagSduiProgressiveScrollMathFixModule and (Flag or UseRefResult1.current) then
 			showNextBatchIfNearEnd()
 		end
-		return function() --[[ Line: 335 ]]
+		return function()
 			-- upvalues: Flag2 (ref), DelayedThread (ref), List (ref)
 			Flag2 = true
 			

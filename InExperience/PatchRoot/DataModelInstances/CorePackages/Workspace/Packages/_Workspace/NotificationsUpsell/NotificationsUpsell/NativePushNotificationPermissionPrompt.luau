@@ -9,7 +9,7 @@ local SetupPushNotificationsUpsellModule = require(script.Parent.setupPushNotifi
 local FFlagPushNotificationsUpsellHomePromptsExperiment = SharedFlagsModule.FFlagPushNotificationsUpsellHomePromptsExperiment
 local Flag = false
 
-local function requestPermission() --[[ Line: 19 ]]
+local function requestPermission()
 	-- upvalues: Flag (ref), NotificationsCommonModule (copy), SharedFlagsModule (copy), Default (copy), PushUpsellEventNameModule (copy), ModalEventConstantsModule (copy), SetupPushNotificationsUpsellModule (copy), NotificationsUpsellConstantsModule (copy)
 	if not Flag then
 		Flag = true
@@ -25,11 +25,11 @@ local function requestPermission() --[[ Line: 19 ]]
 end
 
 return {
-	isEnabled = function() --[[ Line: 14 ]]
+	isEnabled = function()
 		-- upvalues: FFlagPushNotificationsUpsellHomePromptsExperiment (copy), SharedFlagsModule (copy)
 		return FFlagPushNotificationsUpsellHomePromptsExperiment and SharedFlagsModule.FFlagNotificationsUpsellUseRequestPushPermissionHelper
 	end,
-	handlePromptsResponse = function(p1) --[[ Line: 35 ]]
+	handlePromptsResponse = function(p1)
 		-- upvalues: FFlagPushNotificationsUpsellHomePromptsExperiment (copy), SharedFlagsModule (copy), requestPermission (copy)
 		if not FFlagPushNotificationsUpsellHomePromptsExperiment or not SharedFlagsModule.FFlagNotificationsUpsellUseRequestPushPermissionHelper or type(p1) ~= "table" then return end
 		local CustomPrompts = p1.custom_prompts

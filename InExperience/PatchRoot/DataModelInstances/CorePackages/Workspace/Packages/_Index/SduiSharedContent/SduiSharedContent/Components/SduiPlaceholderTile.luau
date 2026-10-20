@@ -4,7 +4,7 @@ local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local _ = require(Parent.SduiCompat)
 local SduiPlaceholderModule = require(script.Parent.SduiPlaceholder)
 
-return ReactModule.memo(function(p1) --[[ Line: 45 | Named "SduiPlaceholderTile" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), SduiPlaceholderModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ImageAspectRatio = if p1.imageAspectRatio and p1.imageAspectRatio > 0 then p1.imageAspectRatio else 1

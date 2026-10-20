@@ -5,12 +5,12 @@ local Boolean = LuauPolyfillModule.Boolean
 local ClearTimeoutFunction = LuauPolyfillModule.clearTimeout
 local SetTimeoutFunction = LuauPolyfillModule.setTimeout
 local config = {
-	new = function(...) --[[ Line: 29 ]]
+	new = function(...)
 		return nil
 	end
 }
 local config1 = {
-	new = function(...) --[[ Line: 35 ]]
+	new = function(...)
 		return nil
 	end
 }
@@ -19,7 +19,7 @@ local StyleSheetModule = require(Parent.StyleSheet.StyleSheet)
 local CreateResult = nil
 local ScrollViewStickyHeader = ReactModule.Component:extend("ScrollViewStickyHeader")
 
-function ScrollViewStickyHeader.init(p1, Props) --[[ Line: 106 ]]
+function ScrollViewStickyHeader.init(p1, Props)
 	-- upvalues: ReactModule (copy)
 	warn("ScrollViewStickyHeader not fully implemented")
 	p1.props = Props
@@ -35,13 +35,13 @@ function ScrollViewStickyHeader.init(p1, Props) --[[ Line: 106 ]]
 	p1._haveReceivedInitialZeroTranslateY = true
 	p1._debounceTimeout = 64
 	
-	function p1:setNextHeaderY(NextHeaderLayoutY) --[[ Line: 128 ]]
+	function p1:setNextHeaderY(NextHeaderLayoutY)
 		-- upvalues: p1 (copy)
 		p1._shouldRecreateTranslateY = true
 		p1.setState({ nextHeaderLayoutY = NextHeaderLayoutY })
 	end
 	
-	function p1:_onLayout(p2) --[[ Line: 133 ]]
+	function p1:_onLayout(p2)
 		-- upvalues: p1 (copy), ReactModule (upval)
 		local Y = p2.nativeEvent.layout.y
 		local Height = p2.nativeEvent.layout.height
@@ -58,13 +58,13 @@ function ScrollViewStickyHeader.init(p1, Props) --[[ Line: 106 ]]
 		end
 	end
 	
-	function p1:_setComponentRef(_ref) --[[ Line: 152 ]]
+	function p1:_setComponentRef(_ref)
 		-- upvalues: p1 (copy)
 		p1._ref = _ref
 	end
 end
 
-function ScrollViewStickyHeader.componentWillUnmount(p1) --[[ Line: 157 ]]
+function ScrollViewStickyHeader.componentWillUnmount(p1)
 	-- upvalues: Boolean (copy), ClearTimeoutFunction (copy)
 	if p1._translateY ~= nil and p1._animatedValueListenerId ~= nil then
 		p1._translateY:removeListener(p1._animatedValueListenerId)
@@ -74,13 +74,13 @@ function ScrollViewStickyHeader.componentWillUnmount(p1) --[[ Line: 157 ]]
 	end
 end
 
-function ScrollViewStickyHeader.UNSAFE_componentWillReceiveProps(p1, p2) --[[ Line: 166 ]]
+function ScrollViewStickyHeader.UNSAFE_componentWillReceiveProps(p1, p2)
 	if p2.scrollViewHeight ~= p1.props.scrollViewHeight or p2.scrollAnimatedValue ~= p1.props.scrollAnimatedValue or p2.inverted ~= p1.props.inverted then
 		p1._shouldRecreateTranslateY = true
 	end
 end
 
-function ScrollViewStickyHeader.updateTranslateListener(p1, InterpolateResult, JSBoolean, NewResult) --[[ Line: 176 ]]
+function ScrollViewStickyHeader.updateTranslateListener(p1, InterpolateResult, JSBoolean, NewResult)
 	-- upvalues: Boolean (copy), config (copy), ClearTimeoutFunction (copy), SetTimeoutFunction (copy)
 	if p1._translateY ~= nil and p1._animatedValueListenerId ~= nil then
 		p1._translateY:removeListener(p1._animatedValueListenerId)
@@ -90,7 +90,7 @@ function ScrollViewStickyHeader.updateTranslateListener(p1, InterpolateResult, J
 	
 	if not JSBoolean then return end
 	if not p1._animatedValueListener then
-		function p1._animatedValueListener(p2) --[[ Line: 207 ]]
+		function p1._animatedValueListener(p2)
 			-- upvalues: p1 (copy), Boolean (upval), ClearTimeoutFunction (upval), SetTimeoutFunction (upval)
 			local Value = p2.value
 			
@@ -102,7 +102,7 @@ function ScrollViewStickyHeader.updateTranslateListener(p1, InterpolateResult, J
 			if Boolean.toJSBoolean(p1._timer) then
 				ClearTimeoutFunction(p1._timer)
 			end
-			p1._timer = SetTimeoutFunction(function() --[[ Line: 218 ]]
+			p1._timer = SetTimeoutFunction(function()
 				-- upvalues: Value (copy), p1 (upval)
 				if Value ~= p1.state.translateY then
 					p1:setState({ translateY = Value })
@@ -116,7 +116,7 @@ function ScrollViewStickyHeader.updateTranslateListener(p1, InterpolateResult, J
 	p1._animatedValueListenerId = InterpolateResult:addListener(p1._animatedValueListener)
 end
 
-function ScrollViewStickyHeader.render(p1) --[[ Line: 231 ]]
+function ScrollViewStickyHeader.render(p1)
 	-- upvalues: Boolean (copy), config1 (copy), ReactModule (copy), CreateResult (ref)
 	local JSBoolean = p1._ref and (p1._ref._internalInstanceHandle and (p1._ref._internalInstanceHandle.stateNode and Boolean.toJSBoolean(p1._ref._internalInstanceHandle.stateNode.canonical)))
 	

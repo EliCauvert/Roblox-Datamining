@@ -10,28 +10,28 @@ local SelectSelectedTabNameModule = require(ExpChat.selectSelectedTabName)
 local UseChannelTabUnreadWriterModule = require(ExpChat.useChannelTabUnreadWriter)
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-local function selectIsChatWindowVisible(p1) --[[ Line: 39 ]]
+local function selectIsChatWindowVisible(p1)
 	return p1.ChatVisibility.isChatWindowEnabled.value
 end
 
-local function onActiveConversationMessageReceived() --[[ Line: 45 ]]
+local function onActiveConversationMessageReceived()
 	-- upvalues: GetTransparencyStoreModule (copy)
 	GetTransparencyStoreModule(false).resetAllTransparency()
 end
 
-local function useSelectedTabNameFromSignals() --[[ Line: 49 ]]
+local function useSelectedTabNameFromSignals()
 	-- upvalues: SignalsReactModule (copy), GetChannelTabsStoreModule (copy)
 	return SignalsReactModule.useSignalState(GetChannelTabsStoreModule(false).getSelectedTabName)
 end
 
-local function useSelectedTabNameFromRodux() --[[ Line: 53 ]]
+local function useSelectedTabNameFromRodux()
 	-- upvalues: UseSelectorFunction (copy), SelectSelectedTabNameModule (copy)
 	return UseSelectorFunction(SelectSelectedTabNameModule)
 end
 
 local Callback = if require(Parent.SharedFlags).FFlagExpChatUseChannelTabsStore then useSelectedTabNameFromSignals else useSelectedTabNameFromRodux
 
-return function() --[[ Line: 61 | Named "FriendsChatEventReceiverConnector" ]]
+return function()
 	-- upvalues: Callback (copy), UseSelectorFunction (copy), selectIsChatWindowVisible (copy), UseChannelTabUnreadWriterModule (copy), FriendsChatTabNameModule (copy), ReactModule (copy), FriendsChatEventReceiverModule (copy), onActiveConversationMessageReceived (copy)
 	return ReactModule.createElement(FriendsChatEventReceiverModule, {
 		setTabUnread = UseChannelTabUnreadWriterModule(FriendsChatTabNameModule),

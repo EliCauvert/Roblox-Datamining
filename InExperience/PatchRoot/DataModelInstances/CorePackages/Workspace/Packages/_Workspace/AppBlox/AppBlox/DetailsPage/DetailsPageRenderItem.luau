@@ -6,17 +6,17 @@ local CursorKind = UIBloxModule.App.SelectionImage.CursorKind
 local _ = require(script.Parent.Types)
 local ReactModule = require(Parent.React)
 
-local function onSelectionGained(SelectionParent) --[[ Line: 21 ]]
+local function onSelectionGained(SelectionParent)
 	-- upvalues: GuiService (copy)
 	GuiService:Select(SelectionParent)
 end
 
-return function(p1) --[[ Line: 25 | Named "DetailsPageRenderItem" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseSelectionCursorFunction (copy), CursorKind (copy), onSelectionGained (copy)
 	local Item = p1.item
 	local SafeArea = p1.safeArea
 	local ItemPadding = p1.itemPadding
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 30 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Item (copy)
 		return Item.renderComponent()
 	end, { Item.renderComponent })
@@ -27,7 +27,7 @@ return function(p1) --[[ Line: 25 | Named "DetailsPageRenderItem" ]]
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		ref = ReactModule.useRef(nil),
-		[ReactModule.Change.AbsolutePosition] = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 37 ]]
+		[ReactModule.Change.AbsolutePosition] = ReactModule.useCallback(function(Frame: Frame)
 			-- upvalues: SafeArea (copy), ItemPadding (copy), UseBindingResult2 (copy)
 			local ScrollingFrame = Frame:FindFirstAncestorOfClass("ScrollingFrame")
 			

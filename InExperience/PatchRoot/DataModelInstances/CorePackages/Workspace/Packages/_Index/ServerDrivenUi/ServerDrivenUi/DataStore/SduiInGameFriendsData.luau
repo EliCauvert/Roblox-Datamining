@@ -2,14 +2,14 @@
 local Signal = nil
 
 return {
-	getInGameFriendsByGame = function(p1) --[[ Line: 7 ]]
+	getInGameFriendsByGame = function(p1)
 		-- upvalues: Signal (ref), SignalsModule (copy)
 		if Signal == nil then
 			Signal = SignalsModule.createSignal({})
 		end
 		return Signal(p1)
 	end,
-	setInGameFriendsByGameSignal = function(Value) --[[ Line: 14 ]]
+	setInGameFriendsByGameSignal = function(Value)
 		-- upvalues: Signal (ref)
 		Signal = Value
 	end

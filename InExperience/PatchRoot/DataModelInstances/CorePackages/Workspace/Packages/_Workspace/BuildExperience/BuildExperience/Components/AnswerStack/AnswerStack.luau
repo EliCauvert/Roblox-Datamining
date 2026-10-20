@@ -10,7 +10,7 @@ local View = FoundationModule.View
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local InputSize = FoundationModule.Enums.InputSize
 
-local function _(List, p1): boolean --[[ Line: 37 | Named "isOptionSelected" ]]
+local function _(List, p1): boolean
 	if typeof(List) == "string" then
 		return List == p1
 	end
@@ -25,11 +25,11 @@ local function _(List, p1): boolean --[[ Line: 37 | Named "isOptionSelected" ]]
 	return false
 end
 
-local _ = function(Entry) --[[ Line: 52 | Named "getFirstSelectedOptionId" ]]
+local _ = function(Entry)
 	return if typeof(Entry) == "string" then Entry elseif typeof(Entry) == "table" then Entry[1] else nil
 end
 
-return function(Frame) --[[ Line: 62 | Named "AnswerStack" ]]
+return function(Frame)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), OptionSelectorModule (copy), View (copy), Button (copy), InputSize (copy), ButtonVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		selectAnOption = LocalizationStringsModule.ANSWER_STACK_SELECT_AN_OPTION,
@@ -72,7 +72,7 @@ return function(Frame) --[[ Line: 62 | Named "AnswerStack" ]]
 			config.selectionStyle = if HasOnConfirm then "intermediate" else "committed"
 			config.testId = `AnswerStack.Option.{option.id}`
 			
-			function config.onActivated() --[[ Line: 92 ]]
+			function config.onActivated()
 				-- upvalues: OnOptionSelectedFunction (copy), option (copy)
 				OnOptionSelectedFunction(option)
 			end

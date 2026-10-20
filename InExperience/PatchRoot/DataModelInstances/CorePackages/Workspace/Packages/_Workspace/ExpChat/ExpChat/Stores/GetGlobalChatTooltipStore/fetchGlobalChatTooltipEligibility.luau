@@ -19,17 +19,17 @@ local Url1 = UrlBuilder.new({
 local Flag = nil
 
 return {
-	fetchEligibility = function(Callback: (any) -> (), Callback1) --[[ Line: 66 ]]
+	fetchEligibility = function(Callback: (any) -> (), Callback1)
 		-- upvalues: Flag (ref), HttpService (copy), Url (copy), NewResult (copy)
 		if Flag == nil then
 			HttpService:RequestInternal({
 				Method = "GET",
 				Url = Url,
 				Headers = { Accept = "application/json" }
-			}):Start(function(_, p1) --[[ Line: 82 ]]
+			}):Start(function(_, p1)
 				-- upvalues: HttpService (upval), Flag (upval), Callback (copy), NewResult (upval), Callback1 (copy)
 				if p1.StatusCode == 200 then
-					local Success, Result = pcall(function() --[[ Line: 84 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: HttpService (upval), p1 (copy)
 						return HttpService:JSONDecode(p1.Body)
 					end)
@@ -70,7 +70,7 @@ return {
 			Callback({ shouldShowTooltip = Flag })
 		end
 	end,
-	reportImpression = function() --[[ Line: 34 ]]
+	reportImpression = function()
 		-- upvalues: HttpService (copy), Url1 (copy), NewResult (copy)
 		HttpService:RequestInternal({
 			Method = "POST",
@@ -80,7 +80,7 @@ return {
 				promptType = "GlobalChatTooltip",
 				promptId = "GlobalChatTooltip"
 			})
-		}):Start(function(_, p1) --[[ Line: 49 ]]
+		}):Start(function(_, p1)
 			-- upvalues: NewResult (upval)
 			if p1.StatusCode == 200 then
 				NewResult:debug("GlobalChatTooltip impression reported")

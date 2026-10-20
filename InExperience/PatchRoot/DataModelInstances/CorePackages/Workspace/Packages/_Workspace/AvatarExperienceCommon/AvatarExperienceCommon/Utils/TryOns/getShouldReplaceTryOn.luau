@@ -5,7 +5,7 @@ local ConstantsModule = require(AvatarExperienceCommon.Constants)
 local ItemTypeEnum = require(Parent.AvatarExperienceModel).Enums.ItemTypeEnum
 local FFlagAXCatalogMakeupSupport = require(Parent.AvatarExperienceFlags).FFlagAXCatalogMakeupSupport
 
-function shouldReplaceTryOn(p1, p2): boolean --[[ Line: 23 ]]
+function shouldReplaceTryOn(p1, p2): boolean
 	-- upvalues: ItemTypeEnum (copy), FFlagAXCatalogMakeupSupport (copy), ConstantsModule (copy)
 	if p1.isDynamicHead and p2.isClassicHeadOrFace then
 		return true

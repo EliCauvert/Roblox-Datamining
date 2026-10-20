@@ -8,25 +8,25 @@ local VideoPlaybackCoordinator = VideoUtilsModule.VideoPlaybackCoordinator
 local VideoPlaybackDetectionMethod = VideoUtilsModule.VideoPlaybackDetectionMethod
 local VideoPlaybackDetector = VideoUtilsModule.VideoPlaybackDetector
 
-return function(p1) --[[ Line: 33 | Named "SplitPaneEducationalTourVideo" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseRoactServiceFunction (copy), AppAppLifecycleObserverService (copy), VideoPlayer (copy), VideoPlaybackDetector (copy), VideoPlaybackDetectionMethod (copy), VideoPlaybackCoordinator (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseRoactServiceResult = UseRoactServiceFunction(AppAppLifecycleObserverService)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(true)
-	ReactModule.useEffect(function() --[[ Line: 39 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRoactServiceResult (copy), UseStateResult2_1 (copy)
 		if UseRoactServiceResult == nil then return end
-		local OnHideConnection = UseRoactServiceResult.OnHide:Connect(function() --[[ Line: 43 ]]
+		local OnHideConnection = UseRoactServiceResult.OnHide:Connect(function()
 			-- upvalues: UseStateResult2_1 (upval)
 			UseStateResult2_1(false)
 		end)
-		local OnUnhideConnection = UseRoactServiceResult.OnUnhide:Connect(function() --[[ Line: 46 ]]
+		local OnUnhideConnection = UseRoactServiceResult.OnUnhide:Connect(function()
 			-- upvalues: UseStateResult2_1 (upval)
 			UseStateResult2_1(true)
 		end)
 		
-		return function() --[[ Line: 49 ]]
+		return function()
 			-- upvalues: OnHideConnection (copy), OnUnhideConnection (copy)
 			OnHideConnection:Disconnect()
 			OnUnhideConnection:Disconnect()
@@ -41,7 +41,7 @@ return function(p1) --[[ Line: 33 | Named "SplitPaneEducationalTourVideo" ]]
 		BorderSizePixel = 0,
 		ClipsDescendants = true,
 		Size = UDim2.fromOffset(p1.mediaWidth, Ceiled - 1 - p1.topRadius),
-		ref = ReactModule.useCallback(function(Current) --[[ Line: 55 ]]
+		ref = ReactModule.useCallback(function(Current)
 			-- upvalues: UseRefResult (copy)
 			UseRefResult.current = Current
 		end, {})

@@ -1,8 +1,8 @@
 ﻿local HttpModule = require(script:FindFirstAncestor("NetworkingVirtualEvents").Parent.Http)
 
-return function(p1) --[[ Line: 12 ]]
+return function(p1)
 	-- upvalues: HttpModule (copy)
-	return (p1.GET(script.Name, function(Callback, p2) --[[ Line: 13 ]]
+	return (p1.GET(script.Name, function(Callback, p2)
 		-- upvalues: HttpModule (upval)
 		local Active = Callback(HttpModule.Url.APIS_URL):path("virtual-events"):path("v1"):path("virtual-events"):path("active")
 		

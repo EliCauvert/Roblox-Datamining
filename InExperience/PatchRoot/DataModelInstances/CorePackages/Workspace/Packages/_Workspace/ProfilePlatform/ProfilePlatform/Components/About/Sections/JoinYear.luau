@@ -11,7 +11,7 @@ local IconVariant = FoundationModule.Enums.IconVariant
 local CircleI = require(Parent.BuilderIcons).Icon.CircleI
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return function(p1) --[[ Line: 24 | Named "JoinYear" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), View (copy), Text (copy), Icon (copy), CircleI (copy), InputSize (copy), IconVariant (copy)
 	if not p1.joinDateTime or p1.joinDateTime == "" then
 		return nil

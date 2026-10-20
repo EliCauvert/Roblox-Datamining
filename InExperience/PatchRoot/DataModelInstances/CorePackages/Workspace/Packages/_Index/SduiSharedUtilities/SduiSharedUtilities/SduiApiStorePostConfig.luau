@@ -7,7 +7,7 @@ local config = {
 
 return {
 	SduiApiStorePostConfigContentType = SduiApiStorePostConfigContentType,
-	getBodyFromPostConfig = function(p1) --[[ Line: 30 ]]
+	getBodyFromPostConfig = function(p1)
 		-- upvalues: SduiApiStorePostConfigContentType (copy), HttpService (copy)
 		if p1.body then
 			if p1.contentType == SduiApiStorePostConfigContentType.Json then
@@ -18,7 +18,7 @@ return {
 		end
 		return nil
 	end,
-	getContentTypeHeaderFromPostConfig = function(p1) --[[ Line: 45 ]]
+	getContentTypeHeaderFromPostConfig = function(p1)
 		-- upvalues: config (copy)
 		return if p1.contentType then config[p1.contentType] else nil
 	end

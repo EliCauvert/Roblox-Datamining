@@ -42,12 +42,12 @@ local config = {
 	[SnapDirectionModule.Top] = PopoverSide.Bottom
 }
 
-return (require(Parent.App.CapturesPolicy).connect(function(p1) --[[ Line: 240 ]]
+return (require(Parent.App.CapturesPolicy).connect(function(p1)
 	-- upvalues: CaptureService (copy), DebugOverrideCaptureControlsVideoGuacPolicy (copy)
 	return {
 		hasVideoCaptureCapability = p1.hasVideoCaptureCapability() and CaptureService:CanCaptureVideo() or DebugOverrideCaptureControlsVideoGuacPolicy
 	}
-end)(function(p1) --[[ Line: 71 ]]
+end)(function(p1)
 	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), UseTokensFunction (copy), UseTopbarInsetModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseEffectFunction (copy), IXPServiceWrapper (copy), FStringSocialCaptureIXPLayer (copy), UsePlayShutterSoundModule (copy), ReactModule (copy), UseCaptureControlsControllerModule (copy), EventNamesModule (copy), UseCallbackFunction (copy), SocialStopwatchModule (copy), TakeCaptureModule (copy), View (copy), FoundationModule (copy), VideoCaptureControlModule (copy), config (copy), Tooltip (copy), PopoverAlign (copy), Icon (copy), FrameCameraCenter (copy), Large (copy), VoiceChatIndicatorModule (copy), FFlagCapturesControlsUseBuilderIconsModule (copy), IconName (copy), Image (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
@@ -56,22 +56,22 @@ end)(function(p1) --[[ Line: 71 ]]
 	})
 	local UseTokensResult = UseTokensFunction()
 	local UseTopbarInsetModuleResult = UseTopbarInsetModule()
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 81 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
 		return p2[ConstantsModule.RoduxKey].IsActive
 	end)
-	local UseSelectorResult1 = UseSelectorFunction(function(p2) --[[ Line: 85 ]]
+	local UseSelectorResult1 = UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
 		return p2[ConstantsModule.RoduxKey].IsVideoCaptureActive.status
 	end)
-	UseEffectFunction(function() --[[ Line: 89 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseSelectorResult (copy), IXPServiceWrapper (upval), FStringSocialCaptureIXPLayer (upval)
 		if UseSelectorResult then
 			IXPServiceWrapper:LogFlagLinkedUserLayerExposure(FStringSocialCaptureIXPLayer)
 		end
 	end, { UseSelectorResult })
 	local UsePlayShutterSoundModuleResult = UsePlayShutterSoundModule()
-	local UseCaptureControlsControllerModuleResult = UseCaptureControlsControllerModule(UseSelectorResult, (ReactModule.useMemo(function(): Vector2 --[[ Line: 97 ]]
+	local UseCaptureControlsControllerModuleResult = UseCaptureControlsControllerModule(UseSelectorResult, (ReactModule.useMemo(function(): Vector2
 		-- upvalues: UseTopbarInsetModuleResult (copy), UseTokensResult (copy)
 		return Vector2.new(UseTopbarInsetModuleResult.Min.X - UseTokensResult.Padding.Small, UseTopbarInsetModuleResult.Height - UseTokensResult.Padding.XSmall - UseTokensResult.Padding.XXSmall)
 	end, { UseTopbarInsetModuleResult, UseTokensResult })))
@@ -83,13 +83,13 @@ end)(function(p1) --[[ Line: 71 ]]
 	local IsItemHorizontal = UseCaptureControlsControllerModuleResult.isItemHorizontal
 	local ScreenshotButtonRef = UseCaptureControlsControllerModuleResult.screenshotButtonRef
 	local SnapDirection = UseCaptureControlsControllerModuleResult.snapDirection
-	UseEffectFunction(function() --[[ Line: 115 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseSelectorResult (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval)
 		if UseSelectorResult then
 			UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesEntrypointViewed)
 		end
 	end, { UseSelectorResult })
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 121 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: SocialStopwatchModule (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval), UsePlayShutterSoundModuleResult (copy), UseDispatchResult (copy), TakeCaptureModule (upval)
 		if not SocialStopwatchModule.Stopwatch.get(SocialStopwatchModule.Events.CaptureTaken) then
 			SocialStopwatchModule.Stopwatch.start(SocialStopwatchModule.Events.CaptureTaken)
@@ -110,11 +110,11 @@ end)(function(p1) --[[ Line: 71 ]]
 			ref = DragContainerRef
 		}, {
 			CaptureControls = if UseSelectorResult then ReactModule.createElement(View, {
-				AnchorPoint = DragItemAnchorPointBinding:map(function(Vector): Vector2 --[[ Line: 144 ]]
+				AnchorPoint = DragItemAnchorPointBinding:map(function(Vector): Vector2
 					return Vector2.new(Vector.x, Vector.y)
 				end),
-				onActivated = function() --[[ Line: 147 ]] end,
-				Position = DragItemPositionBinding:map(function(p2): UDim2 --[[ Line: 148 ]]
+				onActivated = function() end,
+				Position = DragItemPositionBinding:map(function(p2): UDim2
 					return UDim2.fromOffset(p2.xOffset, p2.yOffset)
 				end),
 				ref = DragItemRef,

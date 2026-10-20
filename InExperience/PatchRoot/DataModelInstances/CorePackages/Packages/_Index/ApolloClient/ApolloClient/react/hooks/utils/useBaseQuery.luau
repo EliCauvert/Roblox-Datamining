@@ -20,13 +20,13 @@ local UseAfterFastRefreshFunction = require(script.Parent.useAfterFastRefresh).u
 local config = { __value = "nil placeholder" }
 
 return {
-	useBaseQuery = function(Query, p1, Lazy: boolean) --[[ Line: 48 ]]
+	useBaseQuery = function(Query, p1, Lazy: boolean)
 		-- upvalues: UseContextFunction (copy), GetApolloContextFunction (copy), UseReducerFunction (copy), Boolean (copy), Object (copy), UseRefFunction (copy), QueryData (copy), PromiseModule (copy), UseDeepMemoFunction (copy), UseAfterFastRefreshFunction (copy), UseEffectFunction (copy), config (copy)
 		if Lazy == nil then
 			Lazy = false
 		end
 		local UseContextResult = UseContextFunction(GetApolloContextFunction())
-		local UseReducerResult, UseReducerResult2 = UseReducerFunction(function(p2: number): number --[[ Line: 58 ]]
+		local UseReducerResult, UseReducerResult2 = UseReducerFunction(function(p2: number): number
 			return p2 + 1
 		end, 0)
 		local AssignResult = Boolean.toJSBoolean(p1) and Object.assign({}, p1, { query = Query }) or { query = Query }
@@ -38,14 +38,14 @@ return {
 			UseRefResult.current = QueryData.new({
 				options = AssignResult,
 				context = UseContextResult,
-				onNewData = function(_) --[[ Line: 70 ]]
+				onNewData = function(_)
 					-- upvalues: Boolean (upval), v1 (ref), PromiseModule (upval), UseRefResult (copy), UseReducerResult2 (copy)
 					if Boolean.toJSBoolean(v1:ssrInitiated()) then
 						UseReducerResult2(nil)
 						
 						return
 					else
-						PromiseModule.delay(0):andThen(function() --[[ Line: 78 ]]
+						PromiseModule.delay(0):andThen(function()
 							-- upvalues: UseRefResult (upval), UseReducerResult2 (upval)
 							if UseRefResult.current == nil or not UseRefResult.current.isMounted then return end
 							return UseReducerResult2(nil)
@@ -58,7 +58,7 @@ return {
 		v1 = Current
 		v1:setOptions(AssignResult)
 		v1.context = UseContextResult
-		local UseDeepMemoResult = UseDeepMemoFunction(function() --[[ Line: 114 ]]
+		local UseDeepMemoResult = UseDeepMemoFunction(function()
 			-- upvalues: Lazy (ref), v1 (ref)
 			return if Lazy then v1:executeLazy() else v1:execute()
 		end, {
@@ -71,15 +71,15 @@ return {
 		if _G.__DEV__ then
 			UseAfterFastRefreshFunction(UseReducerResult2)
 		end
-		UseEffectFunction(function() --[[ Line: 131 ]]
+		UseEffectFunction(function()
 			-- upvalues: v1 (ref), UseRefResult (copy)
-			return function() --[[ Line: 132 ]]
+			return function()
 				-- upvalues: v1 (upval), UseRefResult (upval)
 				v1:cleanup()
 				UseRefResult.current = nil
 			end
 		end, {})
-		UseEffectFunction(function() --[[ Line: 140 ]]
+		UseEffectFunction(function()
 			-- upvalues: v1 (ref), Lazy (ref)
 			return v1:afterExecute({ lazy = Lazy })
 		end, {

@@ -4,7 +4,7 @@ local FFlagShowGameAgeRating = require(CorePackages.Workspace.Packages.SharedFla
 
 return {
 	keepOutAreaId = "experience-age-rating",
-	isEligible = function(Enabled, p1, p2, p3): boolean --[[ Line: 6 ]]
+	isEligible = function(Enabled, p1, p2, p3): boolean
 		-- upvalues: FFlagExperienceAgeRatingBadge (copy), FFlagShowGameAgeRating (copy)
 		return FFlagExperienceAgeRatingBadge and (FFlagShowGameAgeRating and (Enabled == true and (p1 and (p2 and not p3))))
 	end

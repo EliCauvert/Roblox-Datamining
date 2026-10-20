@@ -6,7 +6,7 @@ local Button = FoundationModule.Button
 local View = FoundationModule.View
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
-local function validateSteps(Steps) --[[ Line: 58 ]]
+local function validateSteps(Steps)
 	if not Steps or type(Steps) ~= "table" then
 		return "Steps must not be nil and be a table", false
 	end
@@ -18,11 +18,11 @@ local function validateSteps(Steps) --[[ Line: 58 ]]
 	return "", true
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 70 | Named "Stepper" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), validateSteps (copy), CryoModule (copy), View (copy), Button (copy), ButtonVariant (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(p1.currentStep)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState({ p1.currentStep })
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 74 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy)
 		if p1.onErrorCallback then
 			p1.onErrorCallback(p2)
@@ -32,7 +32,7 @@ return ReactModule.memo(function(p1) --[[ Line: 70 | Named "Stepper" ]]
 			warn(p2)
 		end
 	end, { p1.onErrorCallback })
-	ReactModule.useEffect(function() --[[ Line: 82 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: validateSteps (upval), p1 (copy), UseResult (copy)
 		local ValidateStepsResult, ValidateStepsResult2 = validateSteps(p1.steps)
 		
@@ -40,11 +40,11 @@ return ReactModule.memo(function(p1) --[[ Line: 70 | Named "Stepper" ]]
 			UseResult(ValidateStepsResult)
 		end
 	end, { p1.steps, p1.onErrorCallback, UseResult })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 89 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), UseStateResult (copy)
 		return p1.steps and p1.steps[UseStateResult]
 	end, { UseStateResult, p1.steps })
-	local UseResult1 = ReactModule.useCallback(function(Value): boolean --[[ Line: 95 ]]
+	local UseResult1 = ReactModule.useCallback(function(Value): boolean
 		-- upvalues: p1 (copy), UseStateResult2 (copy), UseStateResult1 (copy), UseStateResult2_1 (copy), CryoModule (upval)
 		if not p1.steps[Value] then
 			return false
@@ -53,12 +53,12 @@ return ReactModule.memo(function(p1) --[[ Line: 70 | Named "Stepper" ]]
 		local FoundIndex: number? = table.find(UseStateResult1, Value)
 		
 		if FoundIndex then
-			UseStateResult2_1(function(p2) --[[ Line: 105 ]]
+			UseStateResult2_1(function(p2)
 				-- upvalues: CryoModule (upval), FoundIndex (copy)
 				return if #p2 == 0 then p2 else CryoModule.List.removeRange(p2, FoundIndex + 1, #p2)
 			end)
 		else
-			UseStateResult2_1(function(Tbl) --[[ Line: 112 ]]
+			UseStateResult2_1(function(Tbl)
 				-- upvalues: Value (copy)
 				local Copy = table.clone(Tbl)
 				table.insert(Copy, Value)
@@ -68,14 +68,14 @@ return ReactModule.memo(function(p1) --[[ Line: 70 | Named "Stepper" ]]
 		end
 		return true
 	end, { p1.steps, UseStateResult1 })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 122 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseMemoResult (copy), UseResult1 (copy)
 		if not UseMemoResult or UseMemoResult.validateState and not UseMemoResult.validateState() then return end
 		if UseResult1(UseMemoResult.predefinedNextStepId) and UseMemoResult.onStepContinue then
 			UseMemoResult.onStepContinue()
 		end
 	end, { UseMemoResult, UseResult1 })
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 136 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult1 (copy), UseResult1 (copy), UseMemoResult (copy)
 		local UseStateResultEntry = UseStateResult1[#UseStateResult1 - 1]
 		

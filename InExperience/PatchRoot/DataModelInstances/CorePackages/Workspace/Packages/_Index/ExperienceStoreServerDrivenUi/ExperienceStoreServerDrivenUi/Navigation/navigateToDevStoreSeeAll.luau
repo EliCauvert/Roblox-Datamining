@@ -5,7 +5,7 @@ local FFlagLuaAppDevStoreSeeAllForceRefreshOnNavigate = require(Parent.SharedFla
 local SduiLoadTimer = require(Parent.SduiSharedUtilities).SduiLoadTimer
 local FetchDevStoreSeeAllPageIfNeededModule = require(ExperienceStoreServerDrivenUi.Api.fetchDevStoreSeeAllPageIfNeeded)
 
-return function(p1, UniverseId) --[[ Line: 11 | Named "navigateToDevStoreSeeAll" ]]
+return function(p1, UniverseId)
 	-- upvalues: SduiLoadTimer (copy), AppPage (copy), FFlagLuaAppDevStoreSeeAllForceRefreshOnNavigate (copy), FetchDevStoreSeeAllPageIfNeededModule (copy)
 	local LoadTimer = SduiLoadTimer.createLoadTimer(AppPage.DevStoreSeeAll)
 	LoadTimer.start("navigate")

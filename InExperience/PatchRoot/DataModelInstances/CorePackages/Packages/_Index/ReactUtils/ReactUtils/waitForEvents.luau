@@ -1,14 +1,14 @@
 ﻿local ReactRobloxModule = require(script:FindFirstAncestor("ReactUtils").Parent.ReactRoblox)
 
 return (setmetatable({
-	act = function() --[[ Line: 13 ]]
+	act = function()
 		-- upvalues: ReactRobloxModule (copy)
-		ReactRobloxModule.act(function() --[[ Line: 14 ]]
+		ReactRobloxModule.act(function()
 			task.wait(0)
 		end)
 	end
 }, {
-	__call = function() --[[ Line: 6 ]]
+	__call = function()
 		task.wait(0)
 	end
 }))

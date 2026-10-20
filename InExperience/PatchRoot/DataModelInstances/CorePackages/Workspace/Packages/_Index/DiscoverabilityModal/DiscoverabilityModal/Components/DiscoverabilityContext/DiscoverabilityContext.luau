@@ -7,16 +7,16 @@ local SetupFireAnalyticsEventsModule = require(Parent.Analytics.setupFireAnalyti
 local AnalyticsServiceModule = require(Parent.Analytics.AnalyticsService)
 local UseSelectorFunction = DependenciesModule.Hooks.useSelector
 
-return function(p1) --[[ Line: 11 | Named "Container" ]]
+return function(p1)
 	-- upvalues: UseSelectorFunction (copy), React (copy), DiscoverabilityModalAnalyticsContextModule (copy), SetupFireAnalyticsEventsModule (copy), AnalyticsServiceModule (copy), ConstantsModule (copy)
-	return function(p2) --[[ Line: 12 ]]
+	return function(p2)
 		-- upvalues: UseSelectorFunction (upval), React (upval), DiscoverabilityModalAnalyticsContextModule (upval), SetupFireAnalyticsEventsModule (upval), AnalyticsServiceModule (upval), ConstantsModule (upval), p1 (copy)
 		return React.createElement(DiscoverabilityModalAnalyticsContextModule.Provider, {
 			value = {
 				fireAnalyticsEvent = SetupFireAnalyticsEventsModule({
 					analytics = AnalyticsServiceModule,
 					defaultAnalyticsInfo = {
-						uid = UseSelectorFunction(function(p3) --[[ Line: 13 ]]
+						uid = UseSelectorFunction(function(p3)
 							return p3.LocalUserId
 						end),
 						entry = if p2.navigation then p2.navigation.getParam(ConstantsModule.ENTRY_POINT) else p2.entryPoint

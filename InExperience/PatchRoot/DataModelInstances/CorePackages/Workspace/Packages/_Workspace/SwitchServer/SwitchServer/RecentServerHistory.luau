@@ -5,11 +5,11 @@ local FFlagUseMultipleServerIdsForSwitchServerModule = require(script:FindFirstA
 local RecentServerHistoryModule = {}
 RecentServerHistoryModule.__index = RecentServerHistoryModule
 
-local function _(p1, p2): boolean --[[ Line: 50 | Named "isFresh" ]]
+local function _(p1, p2): boolean
 	return p2 - p1.joinedAt <= 300
 end
 
-function RecentServerHistoryModule.new(Local) --[[ Line: 54 ]]
+function RecentServerHistoryModule.new(Local)
 	-- upvalues: RecentServerHistoryModule (copy), MemStorageService (copy), HttpService (copy)
 	local config = { _connections = {}, _historyKey = "", _history = {} }
 	
@@ -18,7 +18,7 @@ function RecentServerHistoryModule.new(Local) --[[ Line: 54 ]]
 	end
 	local self = setmetatable(config, RecentServerHistoryModule)
 	
-	local function initHistory() --[[ Line: 66 ]]
+	local function initHistory()
 		-- upvalues: config (copy), Local (copy), MemStorageService (upval), HttpService (upval), self (copy)
 		config._historyKey = "RecentServerHistory" .. Local
 		local Item = MemStorageService:GetItem(config._historyKey)
@@ -39,7 +39,7 @@ function RecentServerHistoryModule.new(Local) --[[ Line: 54 ]]
 		
 		return self
 	else
-		table.insert(config._connections, game.Loaded:Connect(function() --[[ Line: 86 ]]
+		table.insert(config._connections, game.Loaded:Connect(function()
 			-- upvalues: initHistory (copy)
 			initHistory()
 		end))
@@ -48,7 +48,7 @@ function RecentServerHistoryModule.new(Local) --[[ Line: 54 ]]
 	end
 end
 
-function RecentServerHistoryModule:recordServer(PlaceId, ServerId) --[[ Line: 95 ]]
+function RecentServerHistoryModule:recordServer(PlaceId, ServerId)
 	local Timestamp = os.time()
 	local List = {}
 	local config = { serverId = ServerId, joinedAt = Timestamp }
@@ -67,7 +67,7 @@ function RecentServerHistoryModule:recordServer(PlaceId, ServerId) --[[ Line: 95
 	self._history.serverEntries = List
 end
 
-function RecentServerHistoryModule:getRecentServerIds() --[[ Line: 117 ]]
+function RecentServerHistoryModule:getRecentServerIds()
 	local Timestamp = os.time()
 	local List = {}
 	
@@ -86,7 +86,7 @@ function RecentServerHistoryModule:getRecentServerIds() --[[ Line: 117 ]]
 	return List
 end
 
-function RecentServerHistoryModule:writeHistory() --[[ Line: 137 ]]
+function RecentServerHistoryModule:writeHistory()
 	-- upvalues: MemStorageService (copy), HttpService (copy)
 	if self._historyKey ~= "" then
 		MemStorageService:SetItem(self._historyKey, HttpService:JSONEncode(self._history))
@@ -95,14 +95,14 @@ function RecentServerHistoryModule:writeHistory() --[[ Line: 137 ]]
 	end
 end
 
-function RecentServerHistoryModule:disconnect() --[[ Line: 144 ]]
+function RecentServerHistoryModule:disconnect()
 	for _, connection in self._connections do
 		connection:Disconnect()
 	end
 	self._connections = {}
 end
 
-local _ = function(): string --[[ Line: 151 | Named "getDefaultId" ]]
+local _ = function(): string
 	-- upvalues: Players (copy)
 	local UserId = Players.LocalPlayer and Players.LocalPlayer.UserId or nil
 	

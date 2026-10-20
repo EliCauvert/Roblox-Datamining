@@ -1,4 +1,4 @@
-﻿return function(EditableImage, X, p1, p2, p3: number) --[[ Line: 1 ]]
+﻿return function(EditableImage, X, p1, p2, p3: number)
 	local R: number = p2.R
 	local G: number = p2.G
 	local B: number = p2.B

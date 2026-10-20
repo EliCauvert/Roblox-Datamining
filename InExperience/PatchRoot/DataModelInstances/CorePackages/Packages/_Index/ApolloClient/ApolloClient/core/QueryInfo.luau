@@ -24,12 +24,12 @@ local _ = require(script.Parent.Parent.errors)
 local CacheWriteBehavior = { FORBID = 0, OVERWRITE = 1, MERGE = 2 }
 local NewWeakMap = if UtilitiesModule.canUseWeakMap then WeakMap.new() else Map.new(nil)
 
-local function _(Cache, Key) --[[ Line: 98 | Named "wrapDestructiveCacheMethod" ]]
+local function _(Cache, Key)
 	-- upvalues: NewWeakMap (copy)
 	local CacheEntry = Cache[Key]
 	
 	if typeof(CacheEntry) == "function" then
-		Cache[Key] = function(...) --[[ Line: 105 ]]
+		Cache[Key] = function(...)
 			-- upvalues: NewWeakMap (upval), Cache (copy), CacheEntry (copy)
 			NewWeakMap:set(Cache, (NewWeakMap:get(Cache) + 1) % 1000000000000000)
 			
@@ -38,7 +38,7 @@ local function _(Cache, Key) --[[ Line: 98 | Named "wrapDestructiveCacheMethod" 
 	end
 end
 
-local _ = function(p1) --[[ Line: 119 | Named "cancelNotifyTimeout" ]]
+local _ = function(p1)
 	-- upvalues: Boolean (copy), ClearTimeoutFunction (copy)
 	if Boolean.toJSBoolean(p1.notifyTimeout) then
 		ClearTimeoutFunction(p1.notifyTimeout)
@@ -49,7 +49,7 @@ end
 local Module = {}
 Module.__index = Module
 
-function Module.new(Cache) --[[ Line: 204 ]]
+function Module.new(Cache)
 	-- upvalues: Set (copy), NewWeakMap (copy), Module (copy)
 	local config = {
 		listeners = Set.new(),
@@ -67,7 +67,7 @@ function Module.new(Cache) --[[ Line: 204 ]]
 		local Evict = Cache.evict
 		
 		if typeof(Evict) == "function" then
-			function Cache.evict(...) --[[ Line: 105 ]]
+			function Cache.evict(...)
 				-- upvalues: NewWeakMap (upval), Cache (copy), Evict (copy)
 				NewWeakMap:set(Cache, (NewWeakMap:get(Cache) + 1) % 1000000000000000)
 				
@@ -77,7 +77,7 @@ function Module.new(Cache) --[[ Line: 204 ]]
 		local Modify = Cache.modify
 		
 		if typeof(Modify) == "function" then
-			function Cache.modify(...) --[[ Line: 105 ]]
+			function Cache.modify(...)
 				-- upvalues: NewWeakMap (upval), Cache (copy), Modify (copy)
 				NewWeakMap:set(Cache, (NewWeakMap:get(Cache) + 1) % 1000000000000000)
 				
@@ -87,7 +87,7 @@ function Module.new(Cache) --[[ Line: 204 ]]
 		local ResetFunction = Cache.reset
 		
 		if typeof(ResetFunction) == "function" then
-			function Cache.reset(...) --[[ Line: 105 ]]
+			function Cache.reset(...)
 				-- upvalues: NewWeakMap (upval), Cache (copy), ResetFunction (copy)
 				NewWeakMap:set(Cache, (NewWeakMap:get(Cache) + 1) % 1000000000000000)
 				
@@ -98,7 +98,7 @@ function Module.new(Cache) --[[ Line: 204 ]]
 	return (setmetatable(config, Module))
 end
 
-function Module:init(p1) --[[ Line: 230 ]]
+function Module:init(p1)
 	-- upvalues: Boolean (copy), NetworkStatus (copy), EqualModule (copy), Object (copy)
 	local SetVariables = if Boolean.toJSBoolean(self.variables) and self.networkStatus ~= NetworkStatus.loading and not EqualModule(self.variables, p1.variables) then NetworkStatus.setVariables else Boolean.toJSBoolean(p1.networkStatus) and p1.networkStatus or NetworkStatus.loading
 	
@@ -122,7 +122,7 @@ function Module:init(p1) --[[ Line: 230 ]]
 	return self
 end
 
-function Module:reset() --[[ Line: 271 ]]
+function Module:reset()
 	-- upvalues: Boolean (copy), ClearTimeoutFunction (copy)
 	if Boolean.toJSBoolean(self.notifyTimeout) then
 		ClearTimeoutFunction(self.notifyTimeout)
@@ -132,7 +132,7 @@ function Module:reset() --[[ Line: 271 ]]
 	self.dirty = false
 end
 
-function Module:getDiff(Variables) --[[ Line: 277 ]]
+function Module:getDiff(Variables)
 	-- upvalues: Boolean (copy), EqualModule (copy)
 	if Variables == nil then
 		Variables = self.variables
@@ -156,7 +156,7 @@ function Module:getDiff(Variables) --[[ Line: 277 ]]
 	end
 end
 
-function Module:updateLastDiff(Diff, DiffOptions) --[[ Line: 302 ]]
+function Module:updateLastDiff(Diff, DiffOptions)
 	-- upvalues: Boolean (copy)
 	self.lastDiff = Boolean.toJSBoolean(Diff) and {
 		diff = Diff,
@@ -164,7 +164,7 @@ function Module:updateLastDiff(Diff, DiffOptions) --[[ Line: 302 ]]
 	} or nil
 end
 
-function Module:getDiffOptions(Variables) --[[ Line: 311 ]]
+function Module:getDiffOptions(Variables)
 	-- upvalues: Boolean (copy)
 	if Variables == nil then
 		Variables = self.variables
@@ -180,7 +180,7 @@ function Module:getDiffOptions(Variables) --[[ Line: 311 ]]
 	}
 end
 
-function Module:setDiff(Diff) --[[ Line: 327 ]]
+function Module:setDiff(Diff)
 	-- upvalues: Boolean (copy), EqualModule (copy), SetTimeoutFunction (copy)
 	local Diff1 = if Boolean.toJSBoolean(self.lastDiff) then self.lastDiff.diff else self.lastDiff
 	self:updateLastDiff(Diff)
@@ -191,7 +191,7 @@ function Module:setDiff(Diff) --[[ Line: 327 ]]
 		self.dirty = true
 		
 		if not Boolean.toJSBoolean(self.notifyTimeout) then
-			self.notifyTimeout = SetTimeoutFunction(function() --[[ Line: 352 ]]
+			self.notifyTimeout = SetTimeoutFunction(function()
 				-- upvalues: self (copy)
 				return self:notify()
 			end, 0)
@@ -199,7 +199,7 @@ function Module:setDiff(Diff) --[[ Line: 327 ]]
 	end
 end
 
-function Module:setObservableQuery(ObservableQuery) --[[ Line: 359 ]]
+function Module:setObservableQuery(ObservableQuery)
 	-- upvalues: Boolean (copy)
 	if ObservableQuery == self.observableQuery then return end
 	if Boolean.toJSBoolean(self.oqListener) then
@@ -210,7 +210,7 @@ function Module:setObservableQuery(ObservableQuery) --[[ Line: 359 ]]
 	if Boolean.toJSBoolean(ObservableQuery) and ObservableQuery ~= nil then
 		ObservableQuery.queryInfo = self
 		
-		function self.oqListener() --[[ Line: 373 ]]
+		function self.oqListener()
 			-- upvalues: Boolean (upval), self (copy), ObservableQuery (copy)
 			if Boolean.toJSBoolean(self:getDiff().fromOptimisticTransaction) then
 				ObservableQuery.observe(ObservableQuery)
@@ -229,14 +229,14 @@ function Module:setObservableQuery(ObservableQuery) --[[ Line: 359 ]]
 	end
 end
 
-function Module:notify() --[[ Line: 391 ]]
+function Module:notify()
 	-- upvalues: Boolean (copy), ClearTimeoutFunction (copy)
 	if Boolean.toJSBoolean(self.notifyTimeout) then
 		ClearTimeoutFunction(self.notifyTimeout)
 		self.notifyTimeout = nil
 	end
 	if self:shouldNotify() then
-		self.listeners:forEach(function(Callback) --[[ Line: 395 ]]
+		self.listeners:forEach(function(Callback)
 			-- upvalues: self (copy)
 			return Callback(self)
 		end)
@@ -244,7 +244,7 @@ function Module:notify() --[[ Line: 391 ]]
 	self.dirty = false
 end
 
-function Module:shouldNotify(): boolean --[[ Line: 402 ]]
+function Module:shouldNotify(): boolean
 	-- upvalues: Boolean (copy), IsNetworkRequestInFlightFunction (copy)
 	if not self.dirty or not Boolean.toJSBoolean(self.listeners.size) then
 		return false
@@ -259,14 +259,14 @@ function Module:shouldNotify(): boolean --[[ Line: 402 ]]
 	return true
 end
 
-function Module:stop() --[[ Line: 416 ]]
+function Module:stop()
 	-- upvalues: Module (copy), Boolean (copy)
 	if not self.stopped then
 		self.stopped = true
 		self:reset()
 		self:cancel()
 		self.cancel = Module.cancel
-		self.subscriptions:forEach(function(p1) --[[ Line: 426 ]]
+		self.subscriptions:forEach(function(p1)
 			return p1:unsubscribe()
 		end)
 		local ObservableQuery = self.observableQuery
@@ -277,9 +277,9 @@ function Module:stop() --[[ Line: 416 ]]
 	end
 end
 
-function Module:cancel() --[[ Line: 440 ]] end
+function Module:cancel() end
 
-function Module:updateWatch(Variables) --[[ Line: 442 ]]
+function Module:updateWatch(Variables)
 	-- upvalues: Boolean (copy), Object (copy), EqualModule (copy)
 	if Variables == nil then
 		Variables = self.variables
@@ -289,7 +289,7 @@ function Module:updateWatch(Variables) --[[ Line: 442 ]]
 	if Boolean.toJSBoolean(ObservableQuery) and ObservableQuery.options.fetchPolicy == "no-cache" then return end
 	local AssignResult = Object.assign({}, self:getDiffOptions(Variables), {
 		watcher = self,
-		callback = function(_, p1) --[[ Line: 461 ]]
+		callback = function(_, p1)
 			-- upvalues: self (copy)
 			return self:setDiff(p1)
 		end
@@ -304,11 +304,11 @@ function Module:updateWatch(Variables) --[[ Line: 442 ]]
 	end
 end
 
-function Module:resetLastWrite() --[[ Line: 477 ]]
+function Module:resetLastWrite()
 	self.lastWrite = nil
 end
 
-function Module:shouldWrite(p1, Variables): boolean --[[ Line: 481 ]]
+function Module:shouldWrite(p1, Variables): boolean
 	-- upvalues: Boolean (copy), NewWeakMap (copy), EqualModule (copy)
 	local LastWrite = self.lastWrite
 	
@@ -317,7 +317,7 @@ end
 
 local Callback = nil
 
-function Module:markResult(Result, p1, FORBID) --[[ Line: 507 ]]
+function Module:markResult(Result, p1, FORBID)
 	-- upvalues: IsNonEmptyArrayFunction (copy), CacheWriteBehavior (copy), Callback (ref), NewWeakMap (copy), Boolean (copy)
 	if IsNonEmptyArrayFunction(Result.errors) then
 		self.graphQLErrors = Result.errors
@@ -333,7 +333,7 @@ function Module:markResult(Result, p1, FORBID) --[[ Line: 507 ]]
 	end
 	if FORBID ~= CacheWriteBehavior.FORBID then
 		if Callback(Result, p1.errorPolicy) then
-			self.cache:performTransaction(function(p2) --[[ Line: 529 ]]
+			self.cache:performTransaction(function(p2)
 				-- upvalues: self (copy), Result (copy), p1 (copy), FORBID (copy), CacheWriteBehavior (upval), NewWeakMap (upval), Boolean (upval)
 				if self:shouldWrite(Result, p1.variables) then
 					p2:writeQuery({
@@ -371,7 +371,7 @@ function Module:markResult(Result, p1, FORBID) --[[ Line: 507 ]]
 	end
 end
 
-function Module:markReady() --[[ Line: 613 ]]
+function Module:markReady()
 	-- upvalues: NetworkStatus (copy)
 	self.networkError = nil
 	self.networkStatus = NetworkStatus.ready
@@ -379,7 +379,7 @@ function Module:markReady() --[[ Line: 613 ]]
 	return self.networkStatus
 end
 
-function Module:markError(p1) --[[ Line: 619 ]]
+function Module:markError(p1)
 	-- upvalues: NetworkStatus (copy), Boolean (copy)
 	self.networkStatus = NetworkStatus.error
 	self.lastWrite = nil
@@ -394,7 +394,7 @@ function Module:markError(p1) --[[ Line: 619 ]]
 	return p1
 end
 
-Callback = function(p1, ErrorPolicy: string): boolean --[[ Line: 637 | Named "shouldWriteResult" ]]
+Callback = function(p1, ErrorPolicy: string): boolean
 	-- upvalues: GraphQLResultHasErrorFunction (copy), Boolean (copy)
 	if ErrorPolicy == nil then
 		ErrorPolicy = "none"

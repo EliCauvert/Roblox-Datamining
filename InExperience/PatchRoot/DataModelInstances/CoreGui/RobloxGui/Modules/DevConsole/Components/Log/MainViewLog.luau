@@ -12,24 +12,24 @@ local MainRowPadding = ConstantsModule.GeneralFormatting.MainRowPadding
 local MsgTypeNamesOrdered = ConstantsModule.MsgTypeNamesOrdered
 local MainViewLog = RoactModule.PureComponent:extend("MainViewLog")
 
-function MainViewLog.init(p1) --[[ Line: 21 ]]
+function MainViewLog.init(p1)
 	-- upvalues: RoactModule (copy)
-	function p1.onUtilTabHeightChanged(UtilTabHeight) --[[ Line: 22 ]]
+	function p1.onUtilTabHeightChanged(UtilTabHeight)
 		-- upvalues: p1 (copy)
 		p1:setState({ utilTabHeight = UtilTabHeight })
 	end
 	
-	function p1.onClientButton() --[[ Line: 28 ]]
+	function p1.onClientButton()
 		-- upvalues: p1 (copy)
 		p1.props.dispatchSetActiveTab("Log", true)
 	end
 	
-	function p1.onServerButton() --[[ Line: 32 ]]
+	function p1.onServerButton()
 		-- upvalues: p1 (copy)
 		p1.props.dispatchSetActiveTab("Log", false)
 	end
 	
-	function p1.onCheckboxChanged(p2, p3) --[[ Line: 36 ]]
+	function p1.onCheckboxChanged(p2, p3)
 		-- upvalues: p1 (copy)
 		if p1.props.isClientView then
 			p1.props.ClientLogData:setFilter(p2, p3)
@@ -40,7 +40,7 @@ function MainViewLog.init(p1) --[[ Line: 21 ]]
 		end
 	end
 	
-	function p1.filterUpdated() --[[ Line: 44 ]]
+	function p1.filterUpdated()
 		-- upvalues: p1 (copy)
 		if p1.forceUpdate then
 			p1:forceUpdate()
@@ -51,7 +51,7 @@ function MainViewLog.init(p1) --[[ Line: 21 ]]
 		end
 	end
 	
-	function p1.onSearchTermChanged(p2) --[[ Line: 52 ]]
+	function p1.onSearchTermChanged(p2)
 		-- upvalues: p1 (copy)
 		if p1.props.isClientView then
 			p1.props.ClientLogData:setSearchTerm(p2)
@@ -68,11 +68,11 @@ function MainViewLog.init(p1) --[[ Line: 21 ]]
 	p1.state = { utilTabHeight = 0 }
 end
 
-function MainViewLog.didMount(p1) --[[ Line: 73 ]]
+function MainViewLog.didMount(p1)
 	p1:setState({ utilTabHeight = p1.utilRef.current.Size.Y.Offset })
 end
 
-function MainViewLog.didUpdate(p1) --[[ Line: 80 ]]
+function MainViewLog.didUpdate(p1)
 	local Size = p1.utilRef.current.Size
 	
 	if Size.Y.Offset ~= p1.state.utilTabHeight then
@@ -80,7 +80,7 @@ function MainViewLog.didUpdate(p1) --[[ Line: 80 ]]
 	end
 end
 
-function MainViewLog.willUnmount(p1) --[[ Line: 89 ]]
+function MainViewLog.willUnmount(p1)
 	if p1.clientFilterConnection then
 		p1.clientFilterConnection:Disconnect()
 		p1.clientFilterConnection = nil
@@ -91,7 +91,7 @@ function MainViewLog.willUnmount(p1) --[[ Line: 89 ]]
 	end
 end
 
-function MainViewLog.render(p1) --[[ Line: 100 ]]
+function MainViewLog.render(p1)
 	-- upvalues: RoactModule (copy), MainRowPadding (copy), MsgTypeNamesOrdered (copy), UtilAndTabModule (copy), ClientLogModule (copy), ServerLogModule (copy), ConstantsModule (copy)
 	local Size = p1.props.size
 	local FormFactor = p1.props.formFactor
@@ -148,12 +148,12 @@ function MainViewLog.render(p1) --[[ Line: 100 ]]
 	}, config)
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p2, _) --[[ Line: 177 | Named "mapStateToProps" ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p2, _)
 	return { isClientView = p2.MainView.isClientView }
-end, function(Callback) --[[ Line: 183 | Named "mapDispatchToProps" ]]
+end, function(Callback)
 	-- upvalues: SetActiveTabModule (copy)
 	return {
-		dispatchSetActiveTab = function(p2, p3) --[[ Line: 185 ]]
+		dispatchSetActiveTab = function(p2, p3)
 			-- upvalues: Callback (copy), SetActiveTabModule (upval)
 			Callback(SetActiveTabModule(p2, p3))
 		end

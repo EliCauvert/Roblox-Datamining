@@ -27,17 +27,17 @@ local SMSProtocolModule = {
 }
 SMSProtocolModule.__index = SMSProtocolModule
 
-function SMSProtocolModule.new() --[[ Line: 59 ]]
+function SMSProtocolModule.new()
 	-- upvalues: MessageBus (copy), SMSProtocolModule (copy)
 	return (setmetatable({ subscriber = MessageBus.Subscriber.new() }, SMSProtocolModule))
 end
 
-function SMSProtocolModule:sendSMS(p1) --[[ Line: 72 ]]
+function SMSProtocolModule:sendSMS(p1)
 	-- upvalues: PromiseModule (copy), MessageBus (copy)
-	local NewPromise = PromiseModule.new(function(Callback, _) --[[ Line: 73 ]]
+	local NewPromise = PromiseModule.new(function(Callback, _)
 		-- upvalues: self (copy)
 		local SENDSMSPROTOCOLMETHODRESPONSEDESCRIPTOR = self.SEND_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
-		self.subscriber:subscribeProtocolMethodResponse(SENDSMSPROTOCOLMETHODRESPONSEDESCRIPTOR, function(p2) --[[ Line: 75 ]]
+		self.subscriber:subscribeProtocolMethodResponse(SENDSMSPROTOCOLMETHODRESPONSEDESCRIPTOR, function(p2)
 			-- upvalues: self (upval), SENDSMSPROTOCOLMETHODRESPONSEDESCRIPTOR (copy), Callback (copy)
 			self.subscriber:unsubscribeToProtocolMethodResponse(SENDSMSPROTOCOLMETHODRESPONSEDESCRIPTOR)
 			Callback(p2)
@@ -48,12 +48,12 @@ function SMSProtocolModule:sendSMS(p1) --[[ Line: 72 ]]
 	return NewPromise
 end
 
-function SMSProtocolModule:supportsSMS() --[[ Line: 93 ]]
+function SMSProtocolModule:supportsSMS()
 	-- upvalues: PromiseModule (copy), MessageBus (copy)
-	local NewPromise = PromiseModule.new(function(Callback, _) --[[ Line: 94 ]]
+	local NewPromise = PromiseModule.new(function(Callback, _)
 		-- upvalues: self (copy)
 		local SUPPORTSSMSPROTOCOLMETHODRESPONSEDESCRIPTOR = self.SUPPORTS_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
-		self.subscriber:subscribeProtocolMethodResponse(SUPPORTSSMSPROTOCOLMETHODRESPONSEDESCRIPTOR, function(p1) --[[ Line: 96 ]]
+		self.subscriber:subscribeProtocolMethodResponse(SUPPORTSSMSPROTOCOLMETHODRESPONSEDESCRIPTOR, function(p1)
 			-- upvalues: self (upval), SUPPORTSSMSPROTOCOLMETHODRESPONSEDESCRIPTOR (copy), Callback (copy)
 			self.subscriber:unsubscribeToProtocolMethodResponse(SUPPORTSSMSPROTOCOLMETHODRESPONSEDESCRIPTOR)
 			Callback(p1.support)

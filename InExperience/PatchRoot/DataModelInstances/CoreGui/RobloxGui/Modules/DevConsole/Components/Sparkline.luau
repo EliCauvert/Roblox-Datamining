@@ -5,17 +5,17 @@ local HighlightBlue = ConstantsModule.Color.HighlightBlue
 local _UDim2 = UDim2.fromOffset(52, 13)
 local Sparkline = RoactModule.Component:extend("Sparkline")
 
-function Sparkline.init(p1) --[[ Line: 23 ]]
+function Sparkline.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.graphRef = RoactModule.createRef()
 	p1.state = { absSize = nil }
 end
 
-function Sparkline.didMount(p1) --[[ Line: 30 ]]
+function Sparkline.didMount(p1)
 	p1:setState({ absSize = p1.graphRef.current.AbsoluteSize })
 end
 
-function Sparkline.didUpdate(p1) --[[ Line: 34 ]]
+function Sparkline.didUpdate(p1)
 	local AbsoluteSize = p1.graphRef.current.AbsoluteSize
 	
 	if p1.state.absSize ~= AbsoluteSize then
@@ -23,7 +23,7 @@ function Sparkline.didUpdate(p1) --[[ Line: 34 ]]
 	end
 end
 
-function Sparkline.render(p1) --[[ Line: 41 ]]
+function Sparkline.render(p1)
 	-- upvalues: HighlightBlue (copy), RoactModule (copy), LineWidth (copy), _UDim2 (copy)
 	local DataSet = p1.props.dataSet
 	local GetYFunction = p1.props.getY

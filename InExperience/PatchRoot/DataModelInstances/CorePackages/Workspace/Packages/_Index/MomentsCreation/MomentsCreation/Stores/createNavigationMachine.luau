@@ -28,13 +28,13 @@ local config = {
 	[StickerOverlay] = { [Preview] = true }
 }
 
-return function(p1) --[[ Line: 60 | Named "createNavigationMachine" ]]
+return function(p1)
 	-- upvalues: CreateSignalFunction (copy), Gallery (copy), config (copy)
 	local Signal, Signal2 = CreateSignalFunction(p1 or Gallery)
 	
 	return {
 		getStep = Signal,
-		canNavigate = function(p2): boolean --[[ Line: 63 ]]
+		canNavigate = function(p2): boolean
 			-- upvalues: Signal (copy), config (upval)
 			local SignalResult = Signal(false)
 			
@@ -46,7 +46,7 @@ return function(p1) --[[ Line: 60 | Named "createNavigationMachine" ]]
 				return Entry ~= nil and Entry[p2] == true
 			end
 		end,
-		navigate = function(p2): boolean --[[ Line: 72 ]]
+		navigate = function(p2): boolean
 			-- upvalues: Signal (copy), config (upval), Signal2 (copy)
 			local SignalResult = Signal(false)
 			local v1 = nil
@@ -65,7 +65,7 @@ return function(p1) --[[ Line: 60 | Named "createNavigationMachine" ]]
 				return false
 			end
 		end,
-		reset = function(p2) --[[ Line: 82 ]]
+		reset = function(p2)
 			-- upvalues: Signal2 (copy)
 			Signal2(p2)
 		end

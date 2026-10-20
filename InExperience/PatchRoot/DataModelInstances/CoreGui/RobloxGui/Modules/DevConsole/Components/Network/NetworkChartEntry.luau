@@ -12,7 +12,7 @@ local CellLabelModule = require(Components.CellLabel)
 local HeaderButtonModule = require(Components.HeaderButton)
 local BannerButtonModule = require(Components.BannerButton)
 
-return function(p1) --[[ Line: 21 ]]
+return function(p1)
 	-- upvalues: RoactModule (copy), CellLabelModule (copy), LineColor (copy), LineWidth (copy), EntryFrameHeight (copy), BannerButtonModule (copy), XScale (copy), HeaderButtonModule (copy), ResponseStrHeight (copy), ResponseWidthRatioRatio (copy)
 	local Size = p1.size
 	local Entry = p1.entry

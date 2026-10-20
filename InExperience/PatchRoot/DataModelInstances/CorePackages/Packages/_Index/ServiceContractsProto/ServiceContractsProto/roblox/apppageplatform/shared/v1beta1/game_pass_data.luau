@@ -3,7 +3,7 @@ local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.pro
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 83 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		type = if p1 == nil or p1.type == nil then "" else p1.type,
@@ -12,7 +12,7 @@ function Module.new(p1) --[[ Line: 83 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 91 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -35,7 +35,7 @@ function Module:encode() --[[ Line: 91 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 115 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -74,7 +74,7 @@ function Module.decode(Buf) --[[ Line: 115 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 168 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.type ~= nil and self.type ~= "" then
@@ -89,7 +89,7 @@ function Module:jsonEncode() --[[ Line: 168 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 186 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy)
 	local NewModule = Module.new()
 	
@@ -117,7 +117,7 @@ TypeRegistryModule.default:register(config.PriceDiscountDetail)
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(p1) --[[ Line: 222 ]]
+function Module1.new(p1)
 	-- upvalues: Module1 (copy)
 	return (setmetatable({
 		id = if p1 == nil or p1.id == nil then "" else p1.id,
@@ -133,7 +133,7 @@ function Module1.new(p1) --[[ Line: 222 ]]
 	}, Module1))
 end
 
-function Module1:encode() --[[ Line: 245 ]]
+function Module1:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -187,7 +187,7 @@ function Module1:encode() --[[ Line: 245 ]]
 	return Buf1
 end
 
-function Module1.decode(Buf) --[[ Line: 307 ]]
+function Module1.decode(Buf)
 	-- upvalues: Module1 (copy), ProtoModule (copy), config (copy)
 	local NewModule = Module1.new()
 	local v2 = 0
@@ -250,7 +250,7 @@ function Module1.decode(Buf) --[[ Line: 307 ]]
 	return NewModule
 end
 
-function Module1:jsonEncode() --[[ Line: 395 ]]
+function Module1:jsonEncode()
 	local t = {}
 	
 	if self.id ~= nil and self.id ~= "" then
@@ -291,7 +291,7 @@ function Module1:jsonEncode() --[[ Line: 395 ]]
 	return t
 end
 
-function Module1:jsonDecode() --[[ Line: 445 ]]
+function Module1:jsonDecode()
 	-- upvalues: Module1 (copy), config (copy)
 	local NewModule = Module1.new()
 	

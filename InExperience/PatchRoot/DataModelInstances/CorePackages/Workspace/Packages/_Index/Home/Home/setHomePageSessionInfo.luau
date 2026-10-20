@@ -1,6 +1,6 @@
 ﻿local SessionType = require(script:FindFirstAncestor("Home").Parent.RobloxAppSessionization).SessionType
 
-return function(SessionService, p1, p2) --[[ Line: 6 | Named "setHomePageSessionInfo" ]]
+return function(SessionService, p1, p2)
 	-- upvalues: SessionType (copy)
 	if SessionService == nil then return end
 	SessionService:SetSession(SessionType.StructuralIdentifier.Level1, SessionType.StructuralIdentifier.HomePageSessionInfo, SessionType.StructuralIdentifier.HomePageSessionInfo)

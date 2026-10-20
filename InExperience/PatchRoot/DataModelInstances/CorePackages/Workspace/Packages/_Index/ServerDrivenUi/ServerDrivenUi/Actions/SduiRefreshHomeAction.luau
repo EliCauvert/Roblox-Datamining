@@ -4,7 +4,7 @@ local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SduiActionType = SduiCoreSystemModule.SduiActionType
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 
-local function _(p1, Message, PropName) --[[ Line: 13 | Named "reportInvalidActionParams" ]]
+local function _(p1, Message, PropName)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy)
 	p1.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 		name = SduiActionType.RefreshHome,
@@ -13,7 +13,7 @@ local function _(p1, Message, PropName) --[[ Line: 13 | Named "reportInvalidActi
 	}, p1.appPage)
 end
 
-return function(p1, _, p2) --[[ Line: 21 | Named "SduiRefreshHomeAction" ]]
+return function(p1, _, p2)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), RefreshHomePageFunction (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	local RequestIntent = if ActionParams then ActionParams.requestIntent else nil

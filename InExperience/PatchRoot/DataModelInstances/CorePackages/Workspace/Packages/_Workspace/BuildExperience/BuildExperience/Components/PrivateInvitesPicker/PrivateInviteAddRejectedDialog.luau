@@ -10,7 +10,7 @@ local View = FoundationModule.View
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local DialogSize = FoundationModule.Enums.DialogSize
 
-return function(p1) --[[ Line: 25 | Named "PrivateInviteAddRejectedDialog" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), PrivateInviteUserRowModule (copy), Dialog (copy), DialogSize (copy), View (copy), ButtonVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		action = LocalizationStringsModule.PRIVATE_INVITES_ADD_ERROR_ACTION,

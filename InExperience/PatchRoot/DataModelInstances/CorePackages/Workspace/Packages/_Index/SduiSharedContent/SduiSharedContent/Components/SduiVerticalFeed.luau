@@ -55,16 +55,16 @@ local FFlagSduiSamePoolFeedItemSpacing = SharedFlagsModule.FFlagSduiSamePoolFeed
 local Signal = if FFlagSduiVerticalFeedProgressiveFillOnScroll then SignalsModule.createSignal(nil) else nil
 local Frozen = if FFlagSduiVerticalFeedProgressiveFillOnScroll then table.freeze({}) else nil
 
-local function PoolStoreLayoutStoreWiring(p1) --[[ Line: 169 ]]
+local function PoolStoreLayoutStoreWiring(p1)
 	-- upvalues: ReactModule (copy), CollectionLayoutStoreContext (copy), SduiPoolStore (copy)
 	local UseContextResult = ReactModule.useContext(CollectionLayoutStoreContext)
-	ReactModule.useEffect(function() --[[ Line: 171 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseContextResult (copy), SduiPoolStore (upval), p1 (copy)
 		if UseContextResult == nil then return end
 		local SduiPoolStore1 = SduiPoolStore.getSduiPoolStore(p1.configKey)
 		SduiPoolStore1.setLayoutStore(UseContextResult)
 		
-		return function() --[[ Line: 177 ]]
+		return function()
 			-- upvalues: SduiPoolStore1 (copy)
 			SduiPoolStore1.setLayoutStore(nil)
 		end
@@ -73,7 +73,7 @@ local function PoolStoreLayoutStoreWiring(p1) --[[ Line: 169 ]]
 	return nil
 end
 
-local function _(p1, p2): number --[[ Line: 187 | Named "getFeedItemRowCount" ]]
+local function _(p1, p2): number
 	local NumberOfRowsGetterFunction = p1.numberOfRowsGetter
 	
 	if NumberOfRowsGetterFunction ~= nil then
@@ -86,12 +86,12 @@ local function _(p1, p2): number --[[ Line: 187 | Named "getFeedItemRowCount" ]]
 	return 1
 end
 
-local function useProgressiveRowCapWithScroll(FeedItems, InitialNumToRender, ProgressiveFillRate, ProgressiveFillIntervalMs, ProgressiveFillOnScroll, ScrollingFrameRef, UseRefResult, SduiVerticalFeedScrollUnderfillDebounceMs) --[[ Line: 198 ]]
+local function useProgressiveRowCapWithScroll(FeedItems, InitialNumToRender, ProgressiveFillRate, ProgressiveFillIntervalMs, ProgressiveFillOnScroll, ScrollingFrameRef, UseRefResult, SduiVerticalFeedScrollUnderfillDebounceMs)
 	-- upvalues: UseProgressiveRowCapModule (copy), ReactModule (copy), SignalsModule (copy), Signal (copy), Frozen (copy), TutilsModule (copy), SignalsReactModule (copy), UseProgressiveItemCapOnScrollModule (copy), SduiVerticalFeedScrollInitialNumRows (copy), SduiVerticalFeedScrollLoadNumRows (copy), SduiVerticalFeedScrollPreloadDistancePx (copy)
 	local UseProgressiveRowCapModuleResult, UseProgressiveRowCapModuleResult2 = UseProgressiveRowCapModule(if FeedItems then #FeedItems else 0, InitialNumToRender, ProgressiveFillRate, ProgressiveFillIntervalMs)
-	local UseProgressiveItemCapOnScrollModuleResult, UseProgressiveItemCapOnScrollModuleResult2 = UseProgressiveItemCapOnScrollModule(SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 217 ]]
+	local UseProgressiveItemCapOnScrollModuleResult, UseProgressiveItemCapOnScrollModuleResult2 = UseProgressiveItemCapOnScrollModule(SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), Signal (upval), ProgressiveFillOnScroll (copy), Frozen (upval), FeedItems (copy), TutilsModule (upval)
-		return SignalsModule.createComputed(function(p1) --[[ Line: 218 ]]
+		return SignalsModule.createComputed(function(p1)
 			-- upvalues: Signal (upval), ProgressiveFillOnScroll (upval), Frozen (upval), FeedItems (upval)
 			Signal(p1)
 			
@@ -128,7 +128,7 @@ local function useProgressiveRowCapWithScroll(FeedItems, InitialNumToRender, Pro
 	end
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 251 | Named "SduiVerticalFeed" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FFlagLuaAppSduiVideoThumbnail (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), UseTokensFunction (copy), UseNavBarPlacementFunction (copy), AppNavBarModule (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), ReactModule (copy), FFlagSduiVerticalFeedPageShellSupport (copy), FFlagSduiVerticalFeedProgressiveFillOnScroll (copy), AppCommonLibModule (copy), FFlagLuaAppSduiHomeFriendCarousel (copy), FFlagSduiSrpScrollAway (copy), ScrollMovementDirection (copy), FFlagSduiSamePoolFeedItemSpacing (copy), SduiEnableBackToTop (copy), FFlagSduiVerticalFeedScrollTelemetry (copy), CreateScrollIntervalPerformanceTrackerFunction (copy), UseAnimateScrollViewToSelectionFunction (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), UseLastInputModeFunction (copy), useProgressiveRowCapWithScroll (copy), SduiVerticalFeedScrollUnderfillDebounceMs (copy), UseProgressiveRowCapModule (copy), UseVerticalScrolledToEndThresholdModule (copy), BackToTopButtonModule (copy), FFlagSduiIndividualFeedItemSpacing (copy), PoolStoreLayoutStoreWiring (copy), SduiFeedImpressionsDetectorModule (copy), BuildSduiFeedChildrenModule (copy), FFlagAppPageShellScrollToTopFocus (copy), DiscoveryTypesModule (copy), FFlagLuaAppsDefaultSelection (copy), SduiFeedContextModule (copy), FFlagSduiPageCanvasCollectionLayout (copy), CollectionLayoutStoreProvider (copy), View (copy), ViewportVideoAutoplaySync (copy), ScrollDetector (copy), SduiStickyHeaderModule (copy), PullToRefreshSpinner (copy)
 	local AnalyticsContext = p1.analyticsContext
 	local SduiContext = p1.sduiContext
@@ -161,7 +161,7 @@ return ReactModule.memo(function(p1) --[[ Line: 251 | Named "SduiVerticalFeed" ]
 	if UseRefResult2.current == nil then
 		UseRefResult2.current = AppCommonLibModule.Signal.new()
 	end
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 305 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult2 (copy)
 		UseRefResult2.current:fire()
 	end, {})
@@ -174,7 +174,7 @@ return ReactModule.memo(function(p1) --[[ Line: 251 | Named "SduiVerticalFeed" ]
 		if UseRefResult3.current == nil then
 			UseRefResult3.current = if FFlagSduiVerticalFeedPageShellSupport and p1.refreshSignal then p1.refreshSignal else AppCommonLibModule.Signal.new()
 		end
-		UseResult1 = ReactModule.useCallback(function() --[[ Line: 319 ]]
+		UseResult1 = ReactModule.useCallback(function()
 			-- upvalues: UseRefResult3 (ref), p1 (copy)
 			if UseRefResult3.current then
 				UseRefResult3.current:fire()
@@ -184,7 +184,7 @@ return ReactModule.memo(function(p1) --[[ Line: 251 | Named "SduiVerticalFeed" ]
 	end
 	local UseRefResult4 = if FFlagSduiSrpScrollAway then ReactModule.useRef(0) else nil
 	local UseRefResult5 = if FFlagSduiSrpScrollAway then ReactModule.useRef(ScrollMovementDirection.Backward) else nil
-	local UseResult2 = if FFlagSduiSrpScrollAway then ReactModule.useCallback(function(ScrollFrame) --[[ Line: 338 ]]
+	local UseResult2 = if FFlagSduiSrpScrollAway then ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: UseResult (copy), p1 (copy), UseRefResult4 (copy), ScrollMovementDirection (upval), UseRefResult5 (copy)
 		UseResult()
 		local OnScrollDirectionChangedFunction: (any) -> () = p1.onScrollDirectionChanged
@@ -202,7 +202,7 @@ return ReactModule.memo(function(p1) --[[ Line: 251 | Named "SduiVerticalFeed" ]
 		end
 		UseRefResult4.current = Y
 	end, { UseResult, p1.onScrollDirectionChanged }) else nil
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 367 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseRefResult2 (copy), FFlagSduiVerticalFeedPageShellSupport (upval), ScrollingFrameRef (ref), UseRefResult (copy)
 		return {
 			scrollViewPositionChangedSignal = UseRefResult2.current,
@@ -215,7 +215,7 @@ return ReactModule.memo(function(p1) --[[ Line: 251 | Named "SduiVerticalFeed" ]
 	})
 	local GapBetweenFeedItems = p1.gapBetweenFeedItems or UseTokensResult.Gap.Large
 	local SamePoolFeedItemGap = if FFlagSduiSamePoolFeedItemSpacing then p1.samePoolFeedItemGap or UseTokensResult.Gap.Large else nil
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 388 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseRefResult2 (copy), FFlagSduiVerticalFeedPageShellSupport (upval), ScrollingFrameRef (ref), UseRefResult (copy), FFlagLuaAppSduiHomeFriendCarousel (upval), UseRefResult3 (ref)
 		return {
 			scrollViewPositionChangedSignal = UseRefResult2.current,
@@ -235,13 +235,13 @@ return ReactModule.memo(function(p1) --[[ Line: 251 | Named "SduiVerticalFeed" ]
 	
 	if SduiEnableBackToTop then
 		v2, UseStateResult2_1 = ReactModule.useState(false)
-		ReactModule.useEffect(function() --[[ Line: 416 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p1 (copy), ScrollingFrameRef (ref), UseStateResult2_1 (ref)
 			if not p1.enableBackToTop then return end
 			local Current = ScrollingFrameRef.current
 			
 			if not Current then return end
-			local function updateIsScrollable() --[[ Line: 425 ]]
+			local function updateIsScrollable()
 				-- upvalues: Current (copy), UseStateResult2_1 (upval)
 				local Y: number = Current.AbsoluteWindowSize.Y
 				local Y1: number = Current.AbsoluteCanvasSize.Y
@@ -264,7 +264,7 @@ return ReactModule.memo(function(p1) --[[ Line: 251 | Named "SduiVerticalFeed" ]
 			if Y >= 0 and Y1 >= 0 then
 				UseStateResult2_1(Y < Y1)
 			end
-			return function() --[[ Line: 443 ]]
+			return function()
 				-- upvalues: Connections (copy)
 				for _, connection in Connections do
 					connection:Disconnect()
@@ -273,7 +273,7 @@ return ReactModule.memo(function(p1) --[[ Line: 251 | Named "SduiVerticalFeed" ]
 		end, { ScrollingFrameRef, p1.enableBackToTop })
 	end
 	if FFlagSduiVerticalFeedScrollTelemetry then
-		ReactModule.useEffect(function() --[[ Line: 451 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p1 (copy), ScrollingFrameRef (ref), CreateScrollIntervalPerformanceTrackerFunction (upval)
 			local ScrollPerformanceIntervalName = p1.scrollPerformanceIntervalName
 			local Current = ScrollingFrameRef.current
@@ -282,14 +282,14 @@ return ReactModule.memo(function(p1) --[[ Line: 251 | Named "SduiVerticalFeed" ]
 			local ScrollIntervalPerformanceTracker = CreateScrollIntervalPerformanceTrackerFunction(ScrollPerformanceIntervalName, Current)
 			local Connection = Current:GetPropertyChangedSignal("CanvasPosition"):Connect(ScrollIntervalPerformanceTracker.onScrollTick)
 			
-			return function() --[[ Line: 459 ]]
+			return function()
 				-- upvalues: Connection (copy), ScrollIntervalPerformanceTracker (copy)
 				Connection:Disconnect()
 				ScrollIntervalPerformanceTracker.cleanup()
 			end
 		end, { ScrollingFrameRef, p1.scrollPerformanceIntervalName })
 	end
-	ReactModule.useEffect(function() --[[ Line: 466 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), FFlagSduiSrpScrollAway (upval), UseRefResult4 (copy), UseResult2 (copy), UseResult (copy)
 		if not p1.scrollingFrameRef or not p1.scrollingFrameRef.current then
 			return nil
@@ -300,7 +300,7 @@ return ReactModule.memo(function(p1) --[[ Line: 251 | Named "SduiVerticalFeed" ]
 			UseRefResult4.current = Current.CanvasPosition.Y
 		end
 		local List = if FFlagSduiSrpScrollAway then {
-			Current:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ Line: 479 ]]
+			Current:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
 				-- upvalues: UseResult2 (upval), Current (copy)
 				UseResult2(Current)
 			end),
@@ -310,7 +310,7 @@ return ReactModule.memo(function(p1) --[[ Line: 251 | Named "SduiVerticalFeed" ]
 			Current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(UseResult)
 		}
 		
-		return function() --[[ Line: 489 ]]
+		return function()
 			-- upvalues: List (copy)
 			for _, Connection in List do
 				Connection:Disconnect()
@@ -330,13 +330,13 @@ return ReactModule.memo(function(p1) --[[ Line: 251 | Named "SduiVerticalFeed" ]
 	
 	if FFlagLuaAppSduiVideoThumbnail or FFlagLuaAppOneByTwoHoverIdleAutoplay then
 		ViewportVideoAutoplayController = if VideoPlaybackContext then VideoPlaybackContext.viewportVideoAutoplayController else nil
-		UseResult3 = ReactModule.useCallback(function() --[[ Line: 522 ]]
+		UseResult3 = ReactModule.useCallback(function()
 			-- upvalues: ViewportVideoAutoplayController (ref)
 			if ViewportVideoAutoplayController then
 				ViewportVideoAutoplayController:onScrollStart()
 			end
 		end, { ViewportVideoAutoplayController })
-		UseResult4 = ReactModule.useCallback(function(p2) --[[ Line: 527 ]]
+		UseResult4 = ReactModule.useCallback(function(p2)
 			-- upvalues: ViewportVideoAutoplayController (ref)
 			if ViewportVideoAutoplayController then
 				ViewportVideoAutoplayController:onScrollSettled("Y", p2)
@@ -352,7 +352,7 @@ return ReactModule.memo(function(p1) --[[ Line: 251 | Named "SduiVerticalFeed" ]
 		UseProgressiveRowCapWithScrollResult, UseProgressiveRowCapWithScrollResult2 = UseProgressiveRowCapModule(if FeedItems then #FeedItems else 0, p1.initialNumToRender, p1.progressiveFillRate, p1.progressiveFillIntervalMs)
 	end
 	UseVerticalScrolledToEndThresholdModule(ScrollingFrameRef, ThresholdFromEnd, if UseProgressiveRowCapWithScrollResult2 then nil else p1.onScrollToEnd)
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 564 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: FeedItems (copy), p1 (copy), SduiEnableBackToTop (upval), v2 (ref), ReactModule (upval), BackToTopButtonModule (upval), ScrollingFrameRef (ref), SduiContext (copy), FFlagSduiIndividualFeedItemSpacing (upval), GapBetweenFeedItems (copy), FFlagSduiVerticalFeedProgressiveFillOnScroll (upval), UseRefResult1 (copy), v1 (copy), GapAfterStickyItems (copy), PoolStoreLayoutStoreWiring (upval), ImpressionsTag (copy), SduiFeedImpressionsDetectorModule (upval), UseRefResult2 (copy), BuildSduiFeedChildrenModule (upval), DebugName (copy), SelectionBehaviorLeft (copy), SelectionBehaviorRight (copy), UseMemoResult1 (copy), FFlagAppPageShellScrollToTopFocus (upval), DiscoveryTypesModule (upval), FFlagLuaAppsDefaultSelection (upval), UseProgressiveRowCapWithScrollResult (ref), FFlagSduiSamePoolFeedItemSpacing (upval), SamePoolFeedItemGap (copy)
 		if FeedItems == nil then
 			return nil

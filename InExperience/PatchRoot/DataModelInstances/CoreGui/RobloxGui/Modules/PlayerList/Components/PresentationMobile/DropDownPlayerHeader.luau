@@ -22,7 +22,7 @@ local Emoji = UIBloxModule.App.Emoji.Enum.Emoji
 local FFlagEnableMobilePlayerListOnConsole = PlayerListModule.Flags.FFlagEnableMobilePlayerListOnConsole
 local FFlagEnableVerifiedBadgeStore = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableVerifiedBadgeStore
 local FFlagPlayerListDropDownShowPlatformName = PlayerListModule.Flags.FFlagPlayerListDropDownShowPlatformName
-local _, Result = pcall(function() --[[ Line: 37 ]]
+local _, Result = pcall(function()
 	return game:GetService("PlatformFriendsService")
 end)
 local DropDownPlayerHeader = RoactModule.PureComponent:extend("DropDownPlayerHeader")
@@ -38,11 +38,11 @@ DropDownPlayerHeader.validateProps = TModule.strictInterface({
 	canShowPlatformProfile = TModule.optional(TModule.boolean)
 })
 
-function DropDownPlayerHeader.render(p1) --[[ Line: 56 ]]
+function DropDownPlayerHeader.render(p1)
 	-- upvalues: WithLayoutValuesFunction (copy), WithStyleFunction (copy), FFlagEnableVerifiedBadgeStore (copy), UserLibModule (copy), FFlagPlayerListDropDownShowPlatformName (copy), RoactModule (copy), EmojiTextLabel (copy), FoundationFontFaceMigration (copy), CryoModule (copy), Emoji (copy), FFlagEnableMobilePlayerListOnConsole (copy), NormalizeFontFaceFunction (copy), View (copy), Result (copy), Image (copy), Text (copy)
-	return WithLayoutValuesFunction(function(p2) --[[ Line: 57 ]]
+	return WithLayoutValuesFunction(function(p2)
 		-- upvalues: WithStyleFunction (upval), p1 (copy), FFlagEnableVerifiedBadgeStore (upval), UserLibModule (upval), FFlagPlayerListDropDownShowPlatformName (upval), RoactModule (upval), EmojiTextLabel (upval), FoundationFontFaceMigration (upval), CryoModule (upval), Emoji (upval), FFlagEnableMobilePlayerListOnConsole (upval), NormalizeFontFaceFunction (upval), View (upval), Result (upval), Image (upval), Text (upval)
-		return WithStyleFunction(function(p3) --[[ Line: 58 ]]
+		return WithStyleFunction(function(p3)
 			-- upvalues: p2 (ref), p1 (upval), FFlagEnableVerifiedBadgeStore (upval), UserLibModule (upval), FFlagPlayerListDropDownShowPlatformName (upval), RoactModule (upval), EmojiTextLabel (upval), FoundationFontFaceMigration (upval), CryoModule (upval), Emoji (upval), FFlagEnableMobilePlayerListOnConsole (upval), NormalizeFontFaceFunction (upval), View (upval), Result (upval), Image (upval), Text (upval)
 			p2 = p1.props.layoutValues
 			local Tokens = p1.props.tokens
@@ -135,7 +135,7 @@ function DropDownPlayerHeader.render(p1) --[[ Line: 56 ]]
 							LayoutOrder = 3,
 							tag = "row align-y-center gap-xsmall radius-small",
 							Size = UDim2.new(1, 0, 0, Size500),
-							onActivated = if CanShowPlatformProfile then function() --[[ Line: 175 ]]
+							onActivated = if CanShowPlatformProfile then function()
 								-- upvalues: p1 (upval), Result (upval)
 								local PlatformProfileId = p1.props.platformProfileId
 								
@@ -193,7 +193,7 @@ function DropDownPlayerHeader.render(p1) --[[ Line: 56 ]]
 	end)
 end
 
-return function(p1) --[[ Line: 238 ]]
+return function(p1)
 	-- upvalues: UseLayoutValuesFunction (copy), UseTokensFunction (copy), FFlagEnableVerifiedBadgeStore (copy), UseVerifiedBadgeFunction (copy), FFlagPlayerListDropDownShowPlatformName (copy), UserProfilesModule (copy), Result (copy), RoactModule (copy), DropDownPlayerHeader (copy), CryoModule (copy)
 	local UseLayoutValuesResult = UseLayoutValuesFunction()
 	local UseTokensResult = UseTokensFunction()

@@ -23,13 +23,13 @@ local config = {
 	LayoutOrder = 0,
 	BackgroundTransparency = nil,
 	showDivider = true,
-	onActivated = function() --[[ Line: 57 ]]
+	onActivated = function()
 		print("FlexIconWithTextCell onActivated")
 	end,
 	style = require(AppChat.SocialLibraries).Components.TestStyle
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 73 | Named "FlexIconWithTextCell" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), ReactModule (copy), BaseCellModule (copy), ImageSetLabel (copy), NormalizeFontFaceFunction (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local Style = UnionResult.style

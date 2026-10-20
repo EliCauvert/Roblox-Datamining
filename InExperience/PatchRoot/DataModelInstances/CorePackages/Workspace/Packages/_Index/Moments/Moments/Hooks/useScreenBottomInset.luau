@@ -7,7 +7,7 @@ local UseNavBarSizeFunction = AppNavBarModule.useNavBarSize
 local UseNavBarPlacementFunction = AppNavBarModule.useNavBarPlacement
 local Placement = AppNavBarModule.Placement
 
-return function() --[[ Line: 37 | Named "useScreenBottomInset" ]]
+return function()
 	-- upvalues: UseNavBarPlacementFunction (copy), UseNavBarSizeFunction (copy), FFlagMomentsFeedAboveNavBarModule (copy), AppSystemBarModule (copy), Placement (copy)
 	local UseNavBarPlacementResult = UseNavBarPlacementFunction()
 	local UseNavBarSizeResult = UseNavBarSizeFunction()

@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.ActionCreator)("SetInspectMenuEnabled", function(Enabled) --[[ Line: 4 ]]
+﻿return require(script.Parent.Parent.ActionCreator)("SetInspectMenuEnabled", function(Enabled)
 	return { enabled = Enabled }
 end)

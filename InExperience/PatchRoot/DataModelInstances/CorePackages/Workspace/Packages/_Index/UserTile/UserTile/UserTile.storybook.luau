@@ -13,9 +13,9 @@ local RoactRoduxModule = require(Parent.RoactRodux)
 local ColorMode = FoundationModule.Enums.ColorMode
 local config = { Light = ColorMode.Light, Dark = ColorMode.Dark }
 
-local function createStore(_) --[[ Line: 21 ]]
+local function createStore(_)
 	-- upvalues: RoduxModule (copy)
-	return RoduxModule.Store.new(function() --[[ Line: 22 ]]
+	return RoduxModule.Store.new(function()
 		return {
 			ScreenSize = Vector2.new(600, 600),
 			TopBar = { topBarHeight = 100 },
@@ -25,34 +25,34 @@ local function createStore(_) --[[ Line: 21 ]]
 end
 
 local Localization = {
-	Format = function(_, p1) --[[ Line: 39 ]]
+	Format = function(_, p1)
 		return p1
 	end,
-	GetLocale = function(): string --[[ Line: 42 ]]
+	GetLocale = function(): string
 		return "en-us"
 	end,
 	changed = {
-		connect = function(_, _) --[[ Line: 46 ]]
-			return { disconnect = function() --[[ Line: 48 ]] end }
+		connect = function(_, _)
+			return { disconnect = function() end }
 		end
 	}
 }
 
-local function mockNavigation(Child) --[[ Line: 54 ]]
+local function mockNavigation(Child)
 	-- upvalues: ReactModule (copy), RoactNavigationModule (copy)
 	return ReactModule.createElement(RoactNavigationModule.Provider, {
 		value = {
 			state = { routeName = "appPage" },
-			isFocused = function(): boolean --[[ Line: 60 ]]
+			isFocused = function(): boolean
 				return true
 			end,
-			addListener = function() --[[ Line: 63 ]]
-				return { remove = function() --[[ Line: 65 ]] end }
+			addListener = function()
+				return { remove = function() end }
 			end,
-			getParam = function(_, p1) --[[ Line: 68 ]]
+			getParam = function(_, p1)
 				return p1
 			end,
-			navigate = function() --[[ Line: 71 ]] end
+			navigate = function() end
 		}
 	}, { Child = Child })
 end
@@ -62,9 +62,9 @@ return {
 	storyRoot = UserTile.Stories,
 	roact = ReactModule,
 	reactRoblox = require(Parent.ReactRoblox),
-	mapStory = function(Callback) --[[ Line: 83 ]]
+	mapStory = function(Callback)
 		-- upvalues: config (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), StyleProviderWithDefaultTheme (copy), RoactRoduxModule (copy), createStore (copy), mockNavigation (copy), FoundationProvider (copy), DesignTokenProvider (copy)
-		return function(p1) --[[ Line: 84 ]]
+		return function(p1)
 			-- upvalues: config (upval), ReactModule (upval), LocalizationProvider (upval), Localization (upval), StyleProviderWithDefaultTheme (upval), RoactRoduxModule (upval), createStore (upval), mockNavigation (upval), FoundationProvider (upval), DesignTokenProvider (upval), Callback (copy)
 			return ReactModule.createElement(LocalizationProvider, { localization = Localization }, {
 				StyleProvider = ReactModule.createElement(StyleProviderWithDefaultTheme, { withDarkTheme = true, withUiModeSupport = false }, {

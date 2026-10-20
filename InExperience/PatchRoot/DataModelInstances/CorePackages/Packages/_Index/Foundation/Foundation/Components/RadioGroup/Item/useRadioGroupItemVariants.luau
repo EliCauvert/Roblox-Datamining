@@ -7,7 +7,7 @@ local _ = require(Foundation.Providers.Style.Tokens)
 local _ = require(Foundation.Components.Types)
 local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p1) --[[ Line: 28 ]]
+local function variantsFactory(p1)
 	-- upvalues: InputSizeModule (copy)
 	return {
 		common = {
@@ -49,7 +49,7 @@ local function variantsFactory(p1) --[[ Line: 28 ]]
 	}
 end
 
-return function(p1, p2) --[[ Line: 61 ]]
+return function(p1, p2)
 	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
 	local RadioItem = VariantsContextModule.useVariants("RadioItem", variantsFactory, p1)
 	

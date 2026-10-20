@@ -9,7 +9,7 @@ local config = {
 	Timeout = "timeout"
 }
 
-return function(p1) --[[ Line: 34 | Named "classifyTTSError" ]]
+return function(p1)
 	-- upvalues: FFlagMomentsTTSTooManyDigitsErrorModule (copy), config (copy)
 	return if p1 == nil then "failure" elseif FFlagMomentsTTSTooManyDigitsErrorModule and p1 == "TooManyDigits" then "tooManyDigits" else config[p1] or "failure"
 end

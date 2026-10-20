@@ -18,9 +18,9 @@ local config = {
 }
 local config1 = { InExpServer = true, InExpClient = true }
 
-local function validateTextureSize(p1, EditableImage, FullName, FieldName, TextureLimit, IsValidationEnvMatch) --[[ Line: 49 ]]
+local function validateTextureSize(p1, EditableImage, FullName, FieldName, TextureLimit, IsValidationEnvMatch)
 	-- upvalues: UGCValidationService (copy), ErrorSourceStringsModule (copy)
-	local Success, Result = pcall(function() --[[ Line: 57 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: UGCValidationService (upval), EditableImage (copy)
 		return UGCValidationService:GetEditableImageSize(EditableImage)
 	end)
@@ -43,7 +43,7 @@ local function validateTextureSize(p1, EditableImage, FullName, FieldName, Textu
 	end
 end
 
-local function validateCoverageOutsideIncludeBounds(p1, p2, EditableImage, Vector, Vector1, p3, AssetTypeName) --[[ Line: 88 ]]
+local function validateCoverageOutsideIncludeBounds(p1, p2, EditableImage, Vector, Vector1, p3, AssetTypeName)
 	-- upvalues: ValidateMakeupZoneIncludeToleranceHundredthsPercent (copy), ErrorSourceStringsModule (copy)
 	local ScaledX = (Vector1.X - Vector.X) * (Vector1.Y - Vector.Y) * ValidateMakeupZoneIncludeToleranceHundredthsPercent / 10000 * 255
 	local Total = 0
@@ -73,7 +73,7 @@ local function validateCoverageOutsideIncludeBounds(p1, p2, EditableImage, Vecto
 	end
 end
 
-local function validateCoverageInsideExcludeBounds(p4, p5, EditableImage, Vector, Vector1, p6, AssetTypeName) --[[ Line: 134 ]]
+local function validateCoverageInsideExcludeBounds(p4, p5, EditableImage, Vector, Vector1, p6, AssetTypeName)
 	-- upvalues: ValidateMakeupZoneExcludeHundredthsPercent (copy), ErrorSourceStringsModule (copy)
 	local ScaledX = (Vector1.X - Vector.X) * (Vector1.Y - Vector.Y) * ValidateMakeupZoneExcludeHundredthsPercent / 10000 * 255
 	local Total = 0
@@ -103,7 +103,7 @@ local function validateCoverageInsideExcludeBounds(p4, p5, EditableImage, Vector
 	end
 end
 
-local function validateUVZones(p7, RootInstance, p8, WrapTextureTransfer, AssetUVBound, AssetTypeName) --[[ Line: 180 ]]
+local function validateUVZones(p7, RootInstance, p8, WrapTextureTransfer, AssetUVBound, AssetTypeName)
 	-- upvalues: validateCoverageOutsideIncludeBounds (copy), validateCoverageInsideExcludeBounds (copy)
 	local UVMaxBoundDelta = WrapTextureTransfer.UVMaxBound - WrapTextureTransfer.UVMinBound
 	
@@ -127,7 +127,7 @@ return {
 		ValidationEnumsModule.SharedDataMember.uploadEnum
 	},
 	expectedFailures = {},
-	run = function(p9, p10) --[[ Line: 221 ]]
+	run = function(p9, p10)
 		-- upvalues: GetFFlagUGCValidationAllowFullVaasModule (copy), ValidationEnumsModule (copy), config (copy), config1 (copy), ConstantsModule (copy), CreateEditableInstancesForContextModule (copy), ErrorSourceStringsModule (copy), GetFFlagUGCValidateDecalTextureLimitsModule (copy), ConstantsInterfaceModule (copy), validateTextureSize (copy), validateUVZones (copy)
 		local RootInstance = p10.rootInstance
 		local AssetType = p10.uploadEnum.assetType

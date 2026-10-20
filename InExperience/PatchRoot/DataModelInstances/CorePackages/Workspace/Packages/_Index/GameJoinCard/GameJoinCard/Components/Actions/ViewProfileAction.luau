@@ -18,7 +18,7 @@ local UseGameJoinCardAnalyticsModule = require(GameJoinCard.Analytics.useGameJoi
 local _ = require(script.Parent.Types)
 local GetTelemetryFieldsModule = require(script.Parent.getTelemetryFields)
 
-local function ViewProfileLink(Frame) --[[ Line: 32 ]]
+local function ViewProfileLink(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ControlState (copy), View (copy), StateLayerAffordance (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
@@ -28,7 +28,7 @@ local function ViewProfileLink(Frame) --[[ Line: 32 ]]
 		tag = "row align-x-center align-y-center",
 		Size = UDim2.new(1, 0, 0, UseTokensResult.Size.Size_600),
 		onActivated = Frame.onActivated,
-		onStateChanged = ReactModule.useCallback(function(Hover) --[[ Line: 35 ]]
+		onStateChanged = ReactModule.useCallback(function(Hover)
 			-- upvalues: UseStateResult2 (copy), ControlState (upval)
 			UseStateResult2(Hover == ControlState.Hover)
 		end, {}),
@@ -44,25 +44,25 @@ local function ViewProfileLink(Frame) --[[ Line: 32 ]]
 end
 
 return {
-	[UserCtaAction.ViewProfile] = function(p1) --[[ Line: 57 ]]
+	[UserCtaAction.ViewProfile] = function(p1)
 		-- upvalues: UserCtaAction (copy), InputSize (copy), ReactModule (copy), ViewProfileLink (copy), ViewProfileSourceValues (copy), GetTelemetryFieldsModule (copy), UseGameJoinCardAnalyticsModule (copy), GameJoinCardButtonAction (copy), FFlagEnableSplitPane (copy), AppPage (copy)
 		return {
 			id = UserCtaAction.ViewProfile,
 			inputSize = InputSize.Medium,
 			width = UDim.new(1, 0),
 			text = p1.localized[UserCtaAction.ViewProfile],
-			render = function(p2, LayoutOrder) --[[ Line: 63 ]]
+			render = function(p2, LayoutOrder)
 				-- upvalues: ReactModule (upval), ViewProfileLink (upval), ViewProfileSourceValues (upval)
 				return ReactModule.createElement(ViewProfileLink, {
 					text = p2.text,
-					onActivated = function() --[[ Line: 66 ]]
+					onActivated = function()
 						-- upvalues: p2 (copy), ViewProfileSourceValues (upval)
 						p2.onActivated(ViewProfileSourceValues.ViewProfileButton)
 					end,
 					LayoutOrder = LayoutOrder
 				})
 			end,
-			onActivated = function(p2) --[[ Line: 72 ]]
+			onActivated = function(p2)
 				-- upvalues: ViewProfileSourceValues (upval), p1 (copy), GetTelemetryFieldsModule (upval), UseGameJoinCardAnalyticsModule (upval), GameJoinCardButtonAction (upval), FFlagEnableSplitPane (upval), AppPage (upval)
 				local P5 = p2 or ViewProfileSourceValues.ViewProfileButton
 				

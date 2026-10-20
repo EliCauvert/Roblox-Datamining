@@ -12,18 +12,18 @@ ChatBubbleContainer.defaultProps = {
 	padding = 12,
 	LayoutOrder = 0,
 	isPending = false,
-	[Roact.Change.AbsoluteSize] = function() --[[ Line: 24 ]] end,
+	[Roact.Change.AbsoluteSize] = function() end,
 	overrideImageColor = false
 }
 
-function ChatBubbleContainer.init(p1) --[[ Line: 29 ]]
+function ChatBubbleContainer.init(p1)
 	-- upvalues: Roact (copy)
 	p1.bubbleSize, p1.updateBubbleSize = Roact.createBinding(Vector2.new(0, 0))
 end
 
-function ChatBubbleContainer.render(p1) --[[ Line: 33 ]]
+function ChatBubbleContainer.render(p1)
 	-- upvalues: UIBlox (copy), Roact (copy), FitFrameOnAxis (copy), _Rect (copy), RoactFitComponents (copy)
-	return UIBlox.Style.withStyle(function(p2) --[[ Line: 34 ]]
+	return UIBlox.Style.withStyle(function(p2)
 		-- upvalues: p1 (copy), Roact (upval), FitFrameOnAxis (upval), _Rect (upval), RoactFitComponents (upval)
 		local Prop = p1.props[Roact.Children] or {}
 		local HasTail = p1.props.hasTail
@@ -42,7 +42,7 @@ function ChatBubbleContainer.render(p1) --[[ Line: 33 ]]
 		end
 		return Roact.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = p1.bubbleSize:map(function(Vector): UDim2 --[[ Line: 69 ]]
+			Size = p1.bubbleSize:map(function(Vector): UDim2
 				-- upvalues: p1 (upval)
 				return UDim2.new(0, Vector.X + p1.TAIL_WIDTH, 0, Vector.Y)
 			end),
@@ -61,7 +61,7 @@ function ChatBubbleContainer.render(p1) --[[ Line: 33 ]]
 				ImageTransparency = Transparency,
 				margin = RoactFitComponents.Rect.square(p1.props.padding),
 				Position = IsIncoming and UDim2.new(0, p1.TAIL_WIDTH, 0, 0) or UDim2.new(1, -p1.TAIL_WIDTH, 0, 0),
-				[Roact.Change.AbsoluteSize] = function(Frame) --[[ Line: 88 ]]
+				[Roact.Change.AbsoluteSize] = function(Frame)
 					-- upvalues: p1 (upval), Roact (upval)
 					p1.updateBubbleSize(Frame.AbsoluteSize)
 					p1.props[Roact.Change.AbsoluteSize](Frame)

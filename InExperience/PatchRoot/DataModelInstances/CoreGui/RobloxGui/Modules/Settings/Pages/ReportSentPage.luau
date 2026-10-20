@@ -19,7 +19,7 @@ local NewBlockingAnalytics = BlockingAnalyticsModule.new(LocalPlayer.UserId, { E
 local TextSizeResult = ThemeModule.textSize(36)
 local TextSizeResult1 = ThemeModule.textSize(24)
 local TextSizeResult2 = ThemeModule.textSize(16)
-local v1 = (function() --[[ Line: 36 | Named "Initialize" ]]
+local v1 = (function()
 	-- upvalues: SettingsPageFactoryModule (copy), CreateFunction (copy), ThemeModule (copy), UtilityModule (copy), RobloxTranslatorModule (copy), TextSizeResult (copy), TextSizeResult1 (copy), TextSizeResult2 (copy)
 	local NewPage = SettingsPageFactoryModule:CreateNewPage()
 	NewPage.TabHeader = nil
@@ -45,7 +45,7 @@ local v1 = (function() --[[ Line: 36 | Named "Initialize" ]]
 		Parent = NewPage.Root
 	})
 	
-	local function createTextLabel(Name, Text, TextSizeResult, LayoutOrder) --[[ Line: 64 ]]
+	local function createTextLabel(Name, Text, TextSizeResult, LayoutOrder)
 		-- upvalues: CreateFunction (upval), ThemeModule (upval), NewPage (copy)
 		return CreateFunction("TextLabel")({
 			BackgroundTransparency = 1,
@@ -63,7 +63,7 @@ local v1 = (function() --[[ Line: 36 | Named "Initialize" ]]
 		})
 	end
 	
-	local function _(p1, p2, LayoutOrder, p3) --[[ Line: 81 | Named "createButton" ]]
+	local function _(p1, p2, LayoutOrder, p3)
 		-- upvalues: UtilityModule (upval), NewPage (copy)
 		local StyledButton, StyledButton2 = UtilityModule:MakeStyledButton(p1, p2, UDim2.new(1, 0, 0, 50), p3)
 		StyledButton.LayoutOrder = LayoutOrder
@@ -72,7 +72,7 @@ local v1 = (function() --[[ Line: 36 | Named "Initialize" ]]
 		return StyledButton, StyledButton2
 	end
 	
-	local function createSpacer(YOffset, LayoutOrder) --[[ Line: 89 ]]
+	local function createSpacer(YOffset, LayoutOrder)
 		-- upvalues: CreateFunction (upval), NewPage (copy)
 		return CreateFunction("Frame")({
 			LayoutOrder = LayoutOrder,
@@ -87,7 +87,7 @@ local v1 = (function() --[[ Line: 36 | Named "Initialize" ]]
 	NewPage.TopSpacer = createSpacer(10, 2)
 	NewPage.ActionHeader = createTextLabel("ActionHeader", RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.Label.Report.OtherActionsHeader"), TextSizeResult2, 3)
 	NewPage.ActionHeader.TextXAlignment = Enum.TextXAlignment.Left
-	local BlockButton, BlockButton2 = UtilityModule:MakeStyledButton("BlockButton", RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.Action.Block"), UDim2.new(1, 0, 0, 50), function() --[[ Line: 111 ]]
+	local BlockButton, BlockButton2 = UtilityModule:MakeStyledButton("BlockButton", RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.Action.Block"), UDim2.new(1, 0, 0, 50), function()
 		-- upvalues: NewPage (copy)
 		NewPage:HandleBlock()
 	end)
@@ -96,7 +96,7 @@ local v1 = (function() --[[ Line: 36 | Named "Initialize" ]]
 	NewPage.BlockButton = BlockButton
 	NewPage.BlockLabel = BlockButton2
 	NewPage.MiddleSpacer = createSpacer(20, 6)
-	local DoneButton, _ = UtilityModule:MakeStyledButton("DoneButton", RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.Action.Report.Done"), UDim2.new(1, 0, 0, 50), function() --[[ Line: 118 ]]
+	local DoneButton, _ = UtilityModule:MakeStyledButton("DoneButton", RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.Action.Report.Done"), UDim2.new(1, 0, 0, 50), function()
 		-- upvalues: NewPage (copy)
 		NewPage:HandleDone()
 	end)
@@ -107,7 +107,7 @@ local v1 = (function() --[[ Line: 36 | Named "Initialize" ]]
 	return NewPage
 end)()
 
-function v1.UpdateActions(p1) --[[ Line: 127 ]]
+function v1.UpdateActions(p1)
 	-- upvalues: BlockingUtilityModule (copy), RobloxTranslatorModule (copy)
 	if p1.ReportedPlayer then
 		p1.TopSpacer.Visible = true
@@ -126,14 +126,14 @@ function v1.UpdateActions(p1) --[[ Line: 127 ]]
 	end
 end
 
-function v1.ShowReportedPlayer(p1, ReportedPlayer) --[[ Line: 149 ]]
+function v1.ShowReportedPlayer(p1, ReportedPlayer)
 	-- upvalues: v1 (copy)
 	p1.ReportedPlayer = ReportedPlayer
 	p1:UpdateActions()
 	p1.HubRef:SwitchToPage(v1, true)
 end
 
-function v1.HandleBlock(p1) --[[ Line: 156 ]]
+function v1.HandleBlock(p1)
 	-- upvalues: OnBlockButtonActivatedModule (copy), NewBlockingAnalytics (copy)
 	if p1.ReportedPlayer then
 		OnBlockButtonActivatedModule(p1.ReportedPlayer, NewBlockingAnalytics)
@@ -141,7 +141,7 @@ function v1.HandleBlock(p1) --[[ Line: 156 ]]
 	p1:HandleDone()
 end
 
-function v1.HandleDone(p1) --[[ Line: 163 ]]
+function v1.HandleDone(p1)
 	p1.HubRef:SetVisibility(false, true)
 end
 

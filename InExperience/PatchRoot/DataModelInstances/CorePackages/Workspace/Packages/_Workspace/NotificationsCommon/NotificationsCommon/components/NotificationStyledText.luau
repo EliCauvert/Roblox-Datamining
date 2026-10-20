@@ -7,22 +7,22 @@ local Text = require(Parent.AppCommonLib).Text
 local React = DependenciesModule.React
 local FoundationFontFaceMigration = require(Parent.Foundation).Utility.Flags.FoundationFontFaceMigration
 local config = {
-	highlight = function(Text): string --[[ Line: 52 ]]
+	highlight = function(Text): string
 		return "<b>" .. Text .. "</b>"
 	end,
-	warning = function(Text): string --[[ Line: 55 ]]
+	warning = function(Text): string
 		return "<b>" .. Text .. "</b>"
 	end
 }
 
-function utf8Sub(Text: string, StartIndex: number, EndIndex: number): string --[[ Line: 60 ]]
+function utf8Sub(Text: string, StartIndex: number, EndIndex: number): string
 	local OffsetResult = utf8.offset(Text, StartIndex)
 	local OffsetResult1 = utf8.offset(Text, EndIndex + 1)
 	
 	return if OffsetResult == nil or OffsetResult1 == nil then string.sub(Text, StartIndex, EndIndex) else string.sub(Text, OffsetResult, OffsetResult1 - 1)
 end
 
-local function formatString(p1) --[[ Line: 69 ]]
+local function formatString(p1)
 	-- upvalues: config (copy), Text (copy)
 	local Text1 = p1.text .. " "
 	local StyledElements = p1.styledElements
@@ -49,7 +49,7 @@ local function formatString(p1) --[[ Line: 69 ]]
 			})
 		end
 	end
-	table.sort(List, function(A, B): boolean --[[ Line: 104 ]]
+	table.sort(List, function(A, B): boolean
 		return A.Position < B.Position
 	end)
 	local NewReferenceCounts = {}
@@ -81,7 +81,7 @@ local function formatString(p1) --[[ Line: 69 ]]
 	return Text.Trim(Text2)
 end
 
-return function(Label) --[[ Line: 135 ]]
+return function(Label)
 	-- upvalues: UseStyleFunction (copy), formatString (copy), React (copy), FoundationFontFaceMigration (copy)
 	local UseStyleResult = UseStyleFunction()
 	

@@ -9,7 +9,7 @@ local MessageDraftFromExpressionContentModule = require(script.Parent.messageDra
 local _ = require(ChatUIPrimitives.Components.ChatInputBar.ChatInputBarView)
 local ModerationTimeoutModule = require(script.Parent.ModerationTimeout)
 
-return function(p1) --[[ Line: 90 | Named "useMessageComposerViewModel" ]]
+return function(p1)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), MessageDraftModelModule (copy), MessageDraftFromExpressionContentModule (copy), ModerationTimeoutModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local ModerationTimeout = p1.moderationTimeout
@@ -21,7 +21,7 @@ return function(p1) --[[ Line: 90 | Named "useMessageComposerViewModel" ]]
 	local OnFocusChangedFunction = p1.onFocusChanged
 	local ExpressionTray = p1.expressionTray
 	local DestinationSubtitle = p1.destinationSubtitle
-	local UseResult = ReactModule.useCallback(function(p2): boolean --[[ Line: 107 ]]
+	local UseResult = ReactModule.useCallback(function(p2): boolean
 		-- upvalues: MessageDraftFromExpressionContentModule (upval), SendMessageDraftFunction (copy)
 		local MessageDraftFromExpressionContentModuleResult = MessageDraftFromExpressionContentModule(p2)
 		
@@ -33,13 +33,13 @@ return function(p1) --[[ Line: 90 | Named "useMessageComposerViewModel" ]]
 			return true
 		end
 	end, { SendMessageDraftFunction })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 116 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: OnFocusChangedFunction (copy)
 		if OnFocusChangedFunction then
 			OnFocusChangedFunction(true)
 		end
 	end, { OnFocusChangedFunction })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 122 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: OnFocusChangedFunction (copy)
 		if OnFocusChangedFunction then
 			OnFocusChangedFunction(false)
@@ -49,7 +49,7 @@ return function(p1) --[[ Line: 90 | Named "useMessageComposerViewModel" ]]
 	local OnKeyboardActivated = if ExpressionTray then ExpressionTray.onKeyboardActivated else nil
 	local CooldownDurationSeconds = if ExpressionTray then ExpressionTray.cooldownDurationSeconds else nil
 	local HasExpressionTray = ExpressionTray ~= nil
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 156 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: IsNotNone (copy), ReactModule (upval), ModerationTimeoutModule (upval), ModerationTimeout (copy), Transparency (copy)
 		return if IsNotNone then ReactModule.createElement(ModerationTimeoutModule, { state = ModerationTimeout, transparency = Transparency }) else nil
 	end, { IsNotNone, ModerationTimeout, Transparency })
@@ -57,14 +57,14 @@ return function(p1) --[[ Line: 90 | Named "useMessageComposerViewModel" ]]
 	return {
 		composerLayout = true,
 		themedColors = true,
-		onSend = ReactModule.useCallback(function(p2) --[[ Line: 103 ]]
+		onSend = ReactModule.useCallback(function(p2)
 			-- upvalues: SendMessageDraftFunction (copy), MessageDraftModelModule (upval)
 			SendMessageDraftFunction(MessageDraftModelModule.fromPlainText(p2))
 		end, { SendMessageDraftFunction }),
 		canLocalUserChat = NoIsNotNone,
 		disabledOverlay = if UseMemoResult then UseMemoResult elseif NoIsNotNone then nil else p1.chatAvailability.upsell,
 		pillStrokeStyle = if IsActive then UseTokensResult.Color.System.Alert else nil,
-		expressionTray = ReactModule.useMemo(function() --[[ Line: 133 ]]
+		expressionTray = ReactModule.useMemo(function()
 			-- upvalues: HasExpressionTray (copy), UseResult (copy), NoIsNotNone (copy), FetchExpressionItems (copy), OnKeyboardActivated (copy), CooldownDurationSeconds (copy)
 			return if HasExpressionTray then {
 				sendExpression = UseResult,

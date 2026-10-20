@@ -9,7 +9,7 @@ local ToMomentAssetCardPropsModule = require(script.Parent.toMomentAssetCardProp
 local UseMomentShareCardViewModelModule = require(script.Parent.useMomentShareCardViewModel)
 local FFlagAppChatMomentShareCardHideMomentsGlyphModule = require(AppChat.Flags.FFlagAppChatMomentShareCardHideMomentsGlyph)
 
-return ReactModule.memo(function(p1) --[[ Line: 24 | Named "MomentAssetCard" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseMomentShareCardViewModelModule (copy), UseLocalizationFunction (copy), ReactModule (copy), AssetCardViewModule (copy), ToMomentAssetCardPropsModule (copy), FFlagAppChatMomentShareCardHideMomentsGlyphModule (copy)
 	local UseMomentShareCardViewModelModuleResult = UseMomentShareCardViewModelModule({
 		momentId = p1.momentId,

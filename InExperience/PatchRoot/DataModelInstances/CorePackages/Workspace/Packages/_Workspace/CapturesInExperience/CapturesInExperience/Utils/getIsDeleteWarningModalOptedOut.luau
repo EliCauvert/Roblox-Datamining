@@ -5,9 +5,9 @@ local ConstantsModule = require(Parent.Constants)
 local GetLocalUserIdModule = require(Parent.Utils.getLocalUserId)
 local GetUserIdsFromStringModule = require(Parent.Utils.getUserIdsFromString)
 
-return function(): boolean --[[ Line: 10 ]]
+return function(): boolean
 	-- upvalues: AppStorageService (copy), ConstantsModule (copy), GetUserIdsFromStringModule (copy), GetLocalUserIdModule (copy), Players (copy)
-	local Success, Result = pcall(function() --[[ Line: 11 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: AppStorageService (upval), ConstantsModule (upval)
 		return AppStorageService:GetItem(ConstantsModule.DeleteWarningModalOptOutStorageKey)
 	end)

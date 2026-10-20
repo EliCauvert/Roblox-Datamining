@@ -2,18 +2,18 @@
 local GetRemainingTimeModule = require(script.Parent.getRemainingTime)
 local config = { days = 86400, hours = 3600, minutes = 60, seconds = 1 }
 
-local function _(p1): number --[[ Line: 56 | Named "getNextTickInterval" ]]
+local function _(p1): number
 	-- upvalues: config (copy)
 	return (math.max(p1.secondsRemaining - p1.value * config[p1.unit] + 1, 0.05))
 end
 
-return function(p1) --[[ Line: 62 | Named "useRemainingTime" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), GetRemainingTimeModule (copy), config (copy)
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 63 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 		-- upvalues: GetRemainingTimeModule (upval), p1 (copy)
 		return GetRemainingTimeModule(p1)
 	end)
-	ReactModule.useEffect(function() --[[ Line: 67 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult2 (copy), GetRemainingTimeModule (upval), config (upval)
 		if not p1 then
 			UseStateResult2(nil)
@@ -23,7 +23,7 @@ return function(p1) --[[ Line: 62 | Named "useRemainingTime" ]]
 		local Flag = false
 		local DelayedThread = nil
 		
-		local function tick() --[[ Line: 76 ]]
+		local function tick()
 			-- upvalues: Flag (ref), GetRemainingTimeModule (upval), p1 (upval), UseStateResult2 (upval), DelayedThread (ref), config (upval), tick (copy)
 			if Flag then return end
 			local RemainingTimeModule = GetRemainingTimeModule(p1)
@@ -44,7 +44,7 @@ return function(p1) --[[ Line: 62 | Named "useRemainingTime" ]]
 				DelayedThread = task.delay(math.max(RemainingTimeModule.secondsRemaining - RemainingTimeModule.value * config[RemainingTimeModule.unit] + 1, 0.05), tick)
 			end
 		end
-		return function() --[[ Line: 91 ]]
+		return function()
 			-- upvalues: Flag (ref), DelayedThread (ref)
 			Flag = true
 			

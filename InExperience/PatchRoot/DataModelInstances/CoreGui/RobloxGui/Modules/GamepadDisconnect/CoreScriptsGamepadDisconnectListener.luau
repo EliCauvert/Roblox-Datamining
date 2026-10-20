@@ -6,13 +6,13 @@ local UseGamepadDisconnectOverlayEffectFunction = InputUiModule.Gamepad.useGamep
 local InGameMenuConstantsModule = require(game:GetService("CoreGui").RobloxGui.Modules.InGameMenuConstants)
 local NewResult = require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.EventIngest.new((game:GetService("EventIngestService")))
 
-return function() --[[ Line: 14 | Named "CoreScriptsGamepadDisconnectListener" ]]
+return function()
 	-- upvalues: ReactModule (copy), UseGamepadDisconnectOverlayEffectFunction (copy), NewResult (copy), InGameMenuConstantsModule (copy), GamepadDisconnectedModal (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	UseGamepadDisconnectOverlayEffectFunction(ReactModule.useCallback(function() --[[ Line: 19 ]]
+	UseGamepadDisconnectOverlayEffectFunction(ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(true)
-	end, { UseStateResult2 }), ReactModule.useCallback(function() --[[ Line: 16 ]]
+	end, { UseStateResult2 }), ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, { UseStateResult2 }), NewResult, "InExperience")

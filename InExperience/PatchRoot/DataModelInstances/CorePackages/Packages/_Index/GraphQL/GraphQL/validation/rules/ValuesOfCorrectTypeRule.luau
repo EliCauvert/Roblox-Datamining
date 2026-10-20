@@ -17,17 +17,17 @@ local GetNullableTypeFunction = DefinitionModule.getNullableType
 local GetNamedTypeFunction = DefinitionModule.getNamedType
 local Callback = nil
 local ValuesOfCorrectTypeRuleModule = {
-	ValuesOfCorrectTypeRule = function(p1) --[[ Line: 41 ]]
+	ValuesOfCorrectTypeRule = function(p1)
 		-- upvalues: GetNullableTypeFunction (copy), IsListTypeFunction (copy), Callback (ref), GetNamedTypeFunction (copy), IsInputObjectTypeFunction (copy), KeyMapFunction (copy), IsRequiredInputFieldFunction (copy), InspectFunction (copy), GraphQLError (copy), SuggestionListFunction (copy), DidYouMeanFunction (copy), IsNonNullTypeFunction (copy), PrintFunction (copy)
 		return {
-			ListValue = function(_, p2): boolean? --[[ Line: 43 ]]
+			ListValue = function(_, p2): boolean?
 				-- upvalues: GetNullableTypeFunction (upval), p1 (copy), IsListTypeFunction (upval), Callback (upval)
 				if IsListTypeFunction((GetNullableTypeFunction(p1:getParentInputType()))) then return end
 				Callback(p1, p2)
 				
 				return false
 			end,
-			ObjectValue = function(_, p2): boolean? --[[ Line: 53 ]]
+			ObjectValue = function(_, p2): boolean?
 				-- upvalues: GetNamedTypeFunction (upval), p1 (copy), IsInputObjectTypeFunction (upval), Callback (upval), KeyMapFunction (upval), IsRequiredInputFieldFunction (upval), InspectFunction (upval), GraphQLError (upval)
 				local NamedType = GetNamedTypeFunction(p1:getInputType())
 				
@@ -36,7 +36,7 @@ local ValuesOfCorrectTypeRuleModule = {
 					
 					return false
 				end
-				local KeyMapResult = KeyMapFunction(p2.fields, function(p3) --[[ Line: 60 ]]
+				local KeyMapResult = KeyMapFunction(p2.fields, function(p3)
 					return p3.name.value
 				end)
 				
@@ -46,7 +46,7 @@ local ValuesOfCorrectTypeRuleModule = {
 					end
 				end
 			end,
-			ObjectField = function(_, p3) --[[ Line: 82 ]]
+			ObjectField = function(_, p3)
 				-- upvalues: GetNamedTypeFunction (upval), p1 (copy), IsInputObjectTypeFunction (upval), SuggestionListFunction (upval), GraphQLError (upval), DidYouMeanFunction (upval)
 				local NamedType = GetNamedTypeFunction(p1:getParentInputType())
 				
@@ -54,7 +54,7 @@ local ValuesOfCorrectTypeRuleModule = {
 					p1:reportError(GraphQLError.new(("Field \"%s\" is not defined by type \"%s\"."):format(p3.name.value, NamedType.name) .. DidYouMeanFunction((SuggestionListFunction(p3.name.value, NamedType:getFields():keys()))), p3))
 				end
 			end,
-			NullValue = function(_, p3) --[[ Line: 102 ]]
+			NullValue = function(_, p3)
 				-- upvalues: p1 (copy), IsNonNullTypeFunction (upval), GraphQLError (upval), InspectFunction (upval), PrintFunction (upval)
 				local InputType = p1:getInputType()
 				
@@ -62,23 +62,23 @@ local ValuesOfCorrectTypeRuleModule = {
 					p1:reportError(GraphQLError.new(("Expected value of type \"%s\", found %s."):format(InspectFunction(InputType), PrintFunction(p3)), p3))
 				end
 			end,
-			EnumValue = function(_, p3) --[[ Line: 116 ]]
+			EnumValue = function(_, p3)
 				-- upvalues: Callback (upval), p1 (copy)
 				return Callback(p1, p3)
 			end,
-			IntValue = function(_, p3) --[[ Line: 119 ]]
+			IntValue = function(_, p3)
 				-- upvalues: Callback (upval), p1 (copy)
 				return Callback(p1, p3)
 			end,
-			FloatValue = function(_, p3) --[[ Line: 122 ]]
+			FloatValue = function(_, p3)
 				-- upvalues: Callback (upval), p1 (copy)
 				return Callback(p1, p3)
 			end,
-			StringValue = function(_, p3) --[[ Line: 125 ]]
+			StringValue = function(_, p3)
 				-- upvalues: Callback (upval), p1 (copy)
 				return Callback(p1, p3)
 			end,
-			BooleanValue = function(_, p3) --[[ Line: 128 ]]
+			BooleanValue = function(_, p3)
 				-- upvalues: Callback (upval), p1 (copy)
 				return Callback(p1, p3)
 			end
@@ -86,7 +86,7 @@ local ValuesOfCorrectTypeRuleModule = {
 	end
 }
 
-Callback = function(p2, p3) --[[ Line: 138 | Named "isValidValueNode" ]]
+Callback = function(p2, p3)
 	-- upvalues: GetNamedTypeFunction (copy), IsLeafTypeFunction (copy), InspectFunction (copy), GraphQLError (copy), PrintFunction (copy), InstanceOfModule (copy)
 	local InputType = p2:getInputType()
 	
@@ -94,12 +94,12 @@ Callback = function(p2, p3) --[[ Line: 138 | Named "isValidValueNode" ]]
 	local NamedType = GetNamedTypeFunction(InputType)
 	
 	if IsLeafTypeFunction(NamedType) then
-		xpcall(function() --[[ Line: 160 ]]
+		xpcall(function()
 			-- upvalues: NamedType (copy), p3 (copy), InspectFunction (upval), InputType (copy), p2 (copy), GraphQLError (upval), PrintFunction (upval)
 			if NamedType:parseLiteral(p3, nil) == nil then
 				p2:reportError(GraphQLError.new(("Expected value of type \"%s\", found %s."):format(InspectFunction(InputType), PrintFunction(p3)), p3))
 			end
-		end, function(Err) --[[ Line: 173 ]]
+		end, function(Err)
 			-- upvalues: InspectFunction (upval), InputType (copy), InstanceOfModule (upval), GraphQLError (upval), p2 (copy), PrintFunction (upval), p3 (copy)
 			local InspectResult = InspectFunction(InputType)
 			

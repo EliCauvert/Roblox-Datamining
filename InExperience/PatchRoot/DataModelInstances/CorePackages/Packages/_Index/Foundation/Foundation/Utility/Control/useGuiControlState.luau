@@ -12,11 +12,11 @@ local config = {
 	[Enum.GuiState.NonInteractable] = ControlStateModule.Disabled
 }
 
-return function(p1, Callback) --[[ Line: 22 | Named "useGuiControlState" ]]
+return function(p1, Callback)
 	-- upvalues: ReactModule (copy), ControlStateModule (copy), config (copy), UseForwardRefFunction (copy)
 	local UseRefResult = ReactModule.useRef(false)
 	local UseRefResult1 = ReactModule.useRef(ControlStateModule.Initialize)
-	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 26 ]]
+	local UseResult = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult1 (copy), UseRefResult (copy), ControlStateModule (upval), Callback (copy)
 		local Current1 = UseRefResult1.current
 		
@@ -35,28 +35,28 @@ return function(p1, Callback) --[[ Line: 22 | Named "useGuiControlState" ]]
 		end
 	end, { Callback })
 	
-	return UseForwardRefFunction(p1, (ReactModule.useCallback(function(Object) --[[ Line: 48 ]]
+	return UseForwardRefFunction(p1, (ReactModule.useCallback(function(Object)
 		-- upvalues: UseResult (copy), config (upval), UseRefResult (copy), UseRefResult1 (copy)
 		local List = {}
 		
 		if Object then
 			UseResult(config[Object.GuiState])
-			table.insert(List, Object:GetPropertyChangedSignal("GuiState"):Connect(function() --[[ Line: 55 ]]
+			table.insert(List, Object:GetPropertyChangedSignal("GuiState"):Connect(function()
 				-- upvalues: config (upval), Object (copy), UseResult (upval)
 				UseResult(config[Object.GuiState])
 			end))
-			table.insert(List, Object.SelectionGained:Connect(function() --[[ Line: 64 ]]
+			table.insert(List, Object.SelectionGained:Connect(function()
 				-- upvalues: UseRefResult (upval), UseResult (upval), UseRefResult1 (upval)
 				UseRefResult.current = true
 				UseResult(UseRefResult1.current)
 			end))
-			table.insert(List, Object.SelectionLost:Connect(function() --[[ Line: 71 ]]
+			table.insert(List, Object.SelectionLost:Connect(function()
 				-- upvalues: UseRefResult (upval), UseResult (upval), UseRefResult1 (upval)
 				UseRefResult.current = false
 				UseResult(UseRefResult1.current)
 			end))
 		end
-		return function() --[[ Line: 78 ]]
+		return function()
 			-- upvalues: List (copy)
 			for _, Connection in List do
 				Connection:Disconnect()

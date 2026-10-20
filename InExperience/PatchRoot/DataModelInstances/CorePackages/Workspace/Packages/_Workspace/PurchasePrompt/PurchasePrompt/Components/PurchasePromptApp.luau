@@ -45,7 +45,7 @@ local PurchasePromptAppTrackRenderPerformance = game:DefineFastFlag("PurchasePro
 local PurchasePromptAppFixStyleLink = game:DefineFastFlag("PurchasePromptAppFixStyleLink", false)
 local PurchasePromptApp = Roact.Component:extend("PurchasePromptApp")
 
-function PurchasePromptApp.init(p1) --[[ Line: 63 ]]
+function PurchasePromptApp.init(p1)
 	-- upvalues: ExternalSettingsModule (copy)
 	p1.state = {
 		isTenFootInterface = ExternalSettingsModule.new().isTenFootInterface()
@@ -54,7 +54,7 @@ function PurchasePromptApp.init(p1) --[[ Line: 63 ]]
 	p1.lastRenderTime = 0
 end
 
-function PurchasePromptApp.hasAnyActivePrompt(p1): boolean --[[ Line: 75 ]]
+function PurchasePromptApp.hasAnyActivePrompt(p1): boolean
 	-- upvalues: PurchasePromptAppConditionalFocusNavigation (copy), PromptStateModule (copy), RequestTypeModule (copy)
 	if not PurchasePromptAppConditionalFocusNavigation then
 		return true
@@ -68,7 +68,7 @@ function PurchasePromptApp.hasAnyActivePrompt(p1): boolean --[[ Line: 75 ]]
 	end
 end
 
-function PurchasePromptApp.trackRenderPerformance(p1) --[[ Line: 94 ]]
+function PurchasePromptApp.trackRenderPerformance(p1)
 	-- upvalues: PurchasePromptAppTrackRenderPerformance (copy), LoggingProtocolModule (copy), FocusNavigationOptimizationTelemetryModule (copy), PurchasePromptAppConditionalFocusNavigation (copy)
 	if not PurchasePromptAppTrackRenderPerformance then return end
 	p1.renderCount += 1
@@ -83,14 +83,14 @@ function PurchasePromptApp.trackRenderPerformance(p1) --[[ Line: 94 ]]
 	p1.lastRenderTime = CurrentTime
 end
 
-function PurchasePromptApp:renderWithStyle(p1) --[[ Line: 118 ]]
+function PurchasePromptApp:renderWithStyle(p1)
 	-- upvalues: RenderWithCoreScriptsStyleProviderModule (copy)
 	return RenderWithCoreScriptsStyleProviderModule(p1)
 end
 
-function PurchasePromptApp.render(p1) --[[ Line: 122 ]]
+function PurchasePromptApp.render(p1)
 	-- upvalues: ProvideRobloxLocaleModule (copy), Roact (copy), LocaleProvider (copy), LocalizationService (copy), ProductPurchaseContainerModule (copy), FFlagPurchasePromptSubtitleForTimedOptions (copy), RobuxUpsellContainerModule (copy), PremiumUpsellContainerModule (copy), SubscriptionPurchaseContainerModule (copy), EventConnectionsModule (copy), GetFFlagEnableToastLiteRenderModule (copy), Toast (copy), FFlagAddCursorProviderToPurchasePromptApp (copy), PurchasePromptAppFixStyleLink (copy), SelectionCursorProvider (copy), ReactFocusNavigationModule (copy), NewResult (copy), Provider (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), RoactRodux (copy), LayoutValuesProviderModule (copy), PurchasePromptPolicyModule (copy)
-	return ProvideRobloxLocaleModule(function() --[[ Line: 123 ]]
+	return ProvideRobloxLocaleModule(function()
 		-- upvalues: Roact (upval), LocaleProvider (upval), LocalizationService (upval), ProductPurchaseContainerModule (upval), FFlagPurchasePromptSubtitleForTimedOptions (upval), p1 (copy), RobuxUpsellContainerModule (upval), PremiumUpsellContainerModule (upval), SubscriptionPurchaseContainerModule (upval), EventConnectionsModule (upval), GetFFlagEnableToastLiteRenderModule (upval), Toast (upval), FFlagAddCursorProviderToPurchasePromptApp (upval), PurchasePromptAppFixStyleLink (upval), SelectionCursorProvider (upval), ReactFocusNavigationModule (upval), NewResult (upval), Provider (upval), FocusRoot (upval), FocusNavigableSurfaceIdentifierEnum (upval), RoactRodux (upval), LayoutValuesProviderModule (upval), PurchasePromptPolicyModule (upval)
 		local Folder = {
 			LocaleProvider = Roact.createElement(LocaleProvider, { locale = LocalizationService.RobloxLocaleId }, {

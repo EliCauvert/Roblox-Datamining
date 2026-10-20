@@ -15,14 +15,14 @@ local DiscountRowModule = require(IAPExperience.Generic.DiscountRow)
 local PriceLineItemModule = require(IAPExperience.Generic.PriceLineItem)
 local Character = utf8.char(57346)
 
-return function(p1) --[[ Line: 32 | Named "DiscountSummary" ]]
+return function(p1)
 	-- upvalues: LocalizationService (copy), UseRobuxTextModule (copy), ReactModule (copy), DiscountRowModule (copy), UseLocalizationFunction (copy), Character (copy), FormatNumberModule (copy), DiscountType (copy), UseDiscountAccordionConfigModule (copy), PriceLineItemModule (copy), View (copy), Accordion (copy), Divider (copy)
 	local ItemPrice = p1.itemPrice
 	local RobloxLocaleId = LocalizationService.RobloxLocaleId
 	local Discounts = ItemPrice.discounts
 	local UseRobuxTextModuleResult = UseRobuxTextModule(ItemPrice.basePriceInRobux)
 	local UseRobuxTextModuleResult1 = UseRobuxTextModule(ItemPrice.priceInRobux)
-	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 40 ]]
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: Discounts (copy), ReactModule (upval), DiscountRowModule (upval)
 		local NewAmountInRobux = 0
 		local Elements = {}
@@ -50,7 +50,7 @@ return function(p1) --[[ Line: 32 | Named "DiscountSummary" ]]
 	})
 	local UseDiscountAccordionConfigModuleResult = UseDiscountAccordionConfigModule({
 		itemPrice = ItemPrice,
-		hasSubscriptionDiscount = ReactModule.useMemo(function(): boolean --[[ Line: 67 ]]
+		hasSubscriptionDiscount = ReactModule.useMemo(function(): boolean
 			-- upvalues: Discounts (copy), DiscountType (upval)
 			for _, discount in ipairs(Discounts) do
 				if discount.type == DiscountType.BlackbirdSubscription or discount.type == DiscountType.RobloxPlusSubscription then
@@ -64,7 +64,7 @@ return function(p1) --[[ Line: 32 | Named "DiscountSummary" ]]
 	})
 	local AccordionHeaderText = UseDiscountAccordionConfigModuleResult.accordionHeaderText
 	local AccordionLeadingIcon = UseDiscountAccordionConfigModuleResult.accordionLeadingIcon
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 89 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), PriceLineItemModule (upval), UseLocalizationResult (copy), UseRobuxTextModuleResult (copy), UseMemoResult2 (copy)
 		local config = {
 			SubtotalRow = ReactModule.createElement(PriceLineItemModule, {

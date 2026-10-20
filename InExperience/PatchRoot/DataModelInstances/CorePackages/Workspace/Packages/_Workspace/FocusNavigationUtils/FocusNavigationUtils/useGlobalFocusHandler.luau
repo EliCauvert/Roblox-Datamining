@@ -38,16 +38,16 @@ local config = {
 }
 local NewResult = MessageBus.Subscriber.new()
 
-local function gameLeaveMessageValidator(p1): boolean --[[ Line: 50 ]]
+local function gameLeaveMessageValidator(p1): boolean
 	return typeof(p1) == "table"
 end
 
-local function _(p1) --[[ Line: 58 | Named "createGlobalFocusFailureDetection" ]]
+local function _(p1)
 	-- upvalues: RunService (copy), AutoFocusFailsafeThreshold (copy)
 	local v1 = false
 	local v2 = 0
 	
-	return (RunService.Heartbeat:Connect(function(DeltaTime: number) --[[ Line: 61 ]]
+	return (RunService.Heartbeat:Connect(function(DeltaTime: number)
 		-- upvalues: v2 (ref), AutoFocusFailsafeThreshold (upval), v1 (ref), p1 (copy)
 		v2 += DeltaTime
 		
@@ -59,23 +59,23 @@ local function _(p1) --[[ Line: 58 | Named "createGlobalFocusFailureDetection" ]
 	end))
 end
 
-local function createGameLeaveSubscription(Callback) --[[ Line: 76 ]]
+local function createGameLeaveSubscription(Callback)
 	-- upvalues: MessageBus (copy), NewResult (copy), gameLeaveMessageValidator (copy), AutoFocusFailsafeThreshold (copy)
 	local GameMessageId = MessageBus.getMessageId("Game", "onGameLeave")
 	local DelayedThread = nil
 	NewResult:subscribe({
 		mid = GameMessageId,
 		validateParams = gameLeaveMessageValidator
-	}, function(_) --[[ Line: 83 ]]
+	}, function(_)
 		-- upvalues: DelayedThread (ref), AutoFocusFailsafeThreshold (upval), Callback (copy)
-		DelayedThread = task.delay(AutoFocusFailsafeThreshold, function() --[[ Line: 84 ]]
+		DelayedThread = task.delay(AutoFocusFailsafeThreshold, function()
 			-- upvalues: Callback (upval)
 			Callback()
 		end)
 	end)
 	
 	return {
-		unsubscribe = function() --[[ Line: 89 ]]
+		unsubscribe = function()
 			-- upvalues: NewResult (upval), GameMessageId (copy), DelayedThread (ref)
 			NewResult:unsubscribeWithMsgId(GameMessageId)
 			
@@ -86,7 +86,7 @@ local function createGameLeaveSubscription(Callback) --[[ Line: 76 ]]
 	}
 end
 
-return function(p1) --[[ Line: 102 | Named "useGlobalFocusHandler" ]]
+return function(p1)
 	-- upvalues: UseLastInputMethodModule (copy), UseFocusGuiObjectFunction (copy), UseFocusedGuiObjectFunction (copy), ReactModule (copy), UseLastInputModeModule (copy), FFlagLuaAppResponsiveEnginePreferredInput (copy), ResponsiveModule (copy), SessionService (copy), SessionType (copy), GlobalFocusTelemetryModule (copy), UserInputService (copy), config (copy), NavigationModule (copy), UseRegistryEntryFunction (copy), FocusNavigableSurfaceIdentifierEnumModule (copy), FFlagEnablePeekViewFocusNav (copy), FFlagAppIaHomeSubTab (copy), FFlagEnableDrawerFocusNav (copy), UseAutoFocusModule (copy), UseDescendantHasFocusModule (copy), FFlagSearchAllRegistryEntriesForAutoFocus (copy), UseRegistryEntriesFunction (copy), UseAnyDescendantHasFocusModule (copy), FFlagLuaAppsDefaultSelection (copy), FFlagFixGlobalFocusPriorityModule (copy), UseSelectorFunction (copy), RunService (copy), AutoFocusFailsafeThreshold (copy), createGameLeaveSubscription (copy)
 	local UseLastInputMethodModuleResult = UseLastInputMethodModule()
 	local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
@@ -95,7 +95,7 @@ return function(p1) --[[ Line: 102 | Named "useGlobalFocusHandler" ]]
 	local UseRefResult1 = ReactModule.useRef(false)
 	local IsFocus = UseLastInputModeModule() == "Focus"
 	local UsePreferredInputResult = if FFlagLuaAppResponsiveEnginePreferredInput then ResponsiveModule.usePreferredInput() else nil
-	ReactModule.useEffect(function() --[[ Line: 112 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseFocusedGuiObjectResult (copy), UseRefResult (copy), SessionService (upval), SessionType (upval), UseLastInputMethodModuleResult (copy), UseRefResult1 (copy), GlobalFocusTelemetryModule (upval)
 		if UseFocusedGuiObjectResult ~= nil and UseRefResult.current == nil then
 			SessionService:SetSession(SessionType.StructuralIdentifier.Level1, SessionType.StructuralIdentifier.FocusNavigation, UseLastInputMethodModuleResult)
@@ -106,9 +106,9 @@ return function(p1) --[[ Line: 102 | Named "useGlobalFocusHandler" ]]
 			UseRefResult1.current = false
 		end
 	end, { UseFocusedGuiObjectResult })
-	ReactModule.useEffect(function() --[[ Line: 128 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UserInputService (upval), FFlagLuaAppResponsiveEnginePreferredInput (upval), UsePreferredInputResult (copy), ResponsiveModule (upval), config (upval), UseRefResult (copy), SessionService (upval), SessionType (upval), UseFocusGuiObjectResult (copy)
-		local LastInputTypeChangedConnection = UserInputService.LastInputTypeChanged:Connect(function(LastInputType) --[[ Line: 129 ]]
+		local LastInputTypeChangedConnection = UserInputService.LastInputTypeChanged:Connect(function(LastInputType)
 			-- upvalues: FFlagLuaAppResponsiveEnginePreferredInput (upval), UsePreferredInputResult (upval), ResponsiveModule (upval), config (upval), UseRefResult (upval), SessionService (upval), SessionType (upval), UseFocusGuiObjectResult (upval)
 			if if FFlagLuaAppResponsiveEnginePreferredInput then UsePreferredInputResult ~= ResponsiveModule.Input.Directional and config[LastInputType] else config[LastInputType] then
 				if UseRefResult.current == nil then
@@ -123,7 +123,7 @@ return function(p1) --[[ Line: 102 | Named "useGlobalFocusHandler" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 144 ]]
+		return function()
 			-- upvalues: LastInputTypeChangedConnection (copy)
 			LastInputTypeChangedConnection:Disconnect()
 		end
@@ -132,7 +132,7 @@ return function(p1) --[[ Line: 102 | Named "useGlobalFocusHandler" ]]
 	local State = if UseNavigationResult then UseNavigationResult.state else nil
 	local Index = if State then State.index else nil
 	local UseRefResult2 = ReactModule.useRef(Index)
-	ReactModule.useEffect(function() --[[ Line: 157 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsFocus (copy), UseRefResult2 (copy), Index (copy), UseFocusGuiObjectResult (copy)
 		if IsFocus and UseRefResult2.current ~= nil and Index ~= nil and UseRefResult2.current < Index then
 			UseRefResult2.current = Index
@@ -143,7 +143,7 @@ return function(p1) --[[ Line: 102 | Named "useGlobalFocusHandler" ]]
 	local UseRefResult4 = ReactModule.useRef(nil)
 	local CurrentRouteState = NavigationModule.getCurrentRouteState(UseNavigationResult)
 	local RouteName = if CurrentRouteState then CurrentRouteState.routeName else nil
-	ReactModule.useEffect(function() --[[ Line: 176 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: RouteName (copy), UseRefResult3 (copy), UseRefResult4 (copy)
 		if RouteName ~= UseRefResult3.current then
 			UseRefResult4.current = UseRefResult3.current
@@ -162,7 +162,7 @@ return function(p1) --[[ Line: 102 | Named "useGlobalFocusHandler" ]]
 	local UseRegistryEntryResult9 = UseRegistryEntryFunction(FocusNavigableSurfaceIdentifierEnumModule.Auxiliary)
 	local UseRegistryEntryResult10 = if FFlagAppIaHomeSubTab then UseRegistryEntryFunction(FocusNavigableSurfaceIdentifierEnumModule.HeaderView) else nil
 	local UseRegistryEntryResult11 = if FFlagEnableDrawerFocusNav then UseRegistryEntryFunction(FocusNavigableSurfaceIdentifierEnumModule.Drawer) else nil
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 226 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseRegistryEntryResult3 (copy), UseRegistryEntryResult2 (copy), UseRegistryEntryResult5 (copy), UseRegistryEntryResult4 (copy), UseRegistryEntryResult7 (copy), FFlagEnableDrawerFocusNav (upval), UseRegistryEntryResult11 (copy), UseRegistryEntryResult1 (copy), UseRegistryEntryResult8 (copy), UseRegistryEntryResult (copy), UseRegistryEntryResult6 (copy), UseRegistryEntryResult9 (copy), FFlagAppIaHomeSubTab (upval), UseRegistryEntryResult10 (copy)
 		local List = {}
 		
@@ -243,7 +243,7 @@ return function(p1) --[[ Line: 102 | Named "useGlobalFocusHandler" ]]
 	if FFlagLuaAppsDefaultSelection then
 		UseRefResult5 = ReactModule.useRef(UseMemoResult)
 		local NoFFlagFixGlobalFocusPriorityModule: boolean = if UseRegistryEntryResult3 and not UseDescendantHasFocusModuleResult3 then not FFlagFixGlobalFocusPriorityModule or (if UseRegistryEntryResult3 then not UseDescendantHasFocusModuleResult3 elseif UseRegistryEntryResult2 then not UseDescendantHasFocusModuleResult2 elseif UseRegistryEntryResult5 then not UseDescendantHasFocusModuleResult4 elseif UseRegistryEntryResult4 then not UseDescendantHasFocusModuleResult5 elseif UseRegistryEntryResult7 then not UseDescendantHasFocusModuleResult9 elseif FFlagEnableDrawerFocusNav and UseRegistryEntryResult11 then not UseDescendantHasFocusModuleResult11 elseif UseRegistryEntryResult1 then not UseDescendantHasFocusModuleResult1 elseif UseRegistryEntryResult8 then not UseDescendantHasFocusModuleResult7 elseif UseRegistryEntryResult then not UseDescendantHasFocusModuleResult elseif UseRegistryEntryResult6 then not UseDescendantHasFocusModuleResult6 elseif UseRegistryEntryResult9 then not UseDescendantHasFocusModuleResult8 elseif FFlagAppIaHomeSubTab and UseRegistryEntryResult10 then not UseDescendantHasFocusModuleResult10 else false) elseif FFlagFixGlobalFocusPriorityModule then if UseRegistryEntryResult3 then not UseDescendantHasFocusModuleResult3 elseif UseRegistryEntryResult2 then not UseDescendantHasFocusModuleResult2 elseif UseRegistryEntryResult5 then not UseDescendantHasFocusModuleResult4 elseif UseRegistryEntryResult4 then not UseDescendantHasFocusModuleResult5 elseif UseRegistryEntryResult7 then not UseDescendantHasFocusModuleResult9 elseif FFlagEnableDrawerFocusNav and UseRegistryEntryResult11 then not UseDescendantHasFocusModuleResult11 elseif UseRegistryEntryResult1 then not UseDescendantHasFocusModuleResult1 elseif UseRegistryEntryResult8 then not UseDescendantHasFocusModuleResult7 elseif UseRegistryEntryResult then not UseDescendantHasFocusModuleResult elseif UseRegistryEntryResult6 then not UseDescendantHasFocusModuleResult6 elseif UseRegistryEntryResult9 then not UseDescendantHasFocusModuleResult8 elseif FFlagAppIaHomeSubTab and UseRegistryEntryResult10 then not UseDescendantHasFocusModuleResult10 else false else UseRegistryEntryResult2 and not UseDescendantHasFocusModuleResult2 or (UseRegistryEntryResult5 and not UseDescendantHasFocusModuleResult4 or (UseRegistryEntryResult4 and not UseDescendantHasFocusModuleResult5 or (UseRegistryEntryResult7 and not UseDescendantHasFocusModuleResult9 or (FFlagEnableDrawerFocusNav and UseRegistryEntryResult11 and not UseDescendantHasFocusModuleResult11 or (UseRegistryEntryResult1 and not UseDescendantHasFocusModuleResult1 or (UseRegistryEntryResult8 and not UseDescendantHasFocusModuleResult7 or (UseRegistryEntryResult and not UseDescendantHasFocusModuleResult or (UseRegistryEntryResult6 and not UseDescendantHasFocusModuleResult6 or (UseRegistryEntryResult9 and not UseDescendantHasFocusModuleResult8 or (FFlagAppIaHomeSubTab and UseRegistryEntryResult10 and not UseDescendantHasFocusModuleResult10 or false))))))))))
-		ReactModule.useEffect(function() --[[ Line: 372 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UsePreferredInputResult (copy), ResponsiveModule (upval), UseRefResult5 (ref), UseMemoResult (copy), p1 (copy), NoFFlagFixGlobalFocusPriorityModule (ref), UseFocusGuiObjectResult (copy)
 			if UsePreferredInputResult == ResponsiveModule.Input.Directional and UseRefResult5.current ~= UseMemoResult and not p1 and NoFFlagFixGlobalFocusPriorityModule then
 				UseFocusGuiObjectResult(nil)
@@ -257,16 +257,16 @@ return function(p1) --[[ Line: 102 | Named "useGlobalFocusHandler" ]]
 			UseFocusGuiObjectResult
 		})
 	end
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 393 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		return p2.CentralOverlay.OverlayType
 	end)
 	local NoP4: boolean = if FFlagLuaAppResponsiveEnginePreferredInput then (UsePreferredInputResult == ResponsiveModule.Input.Directional or IsFocus) and (not UseDescendantHasFocusModuleResult12 and not p1) else IsFocus and (not UseDescendantHasFocusModuleResult12 and not p1)
-	ReactModule.useEffect(function() --[[ Line: 404 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseAutoFocusModuleResult (copy), NoP4 (copy), GlobalFocusTelemetryModule (upval), UseMemoResult (copy), UseFocusedGuiObjectResult (copy), UseRefResult5 (ref), UseRegistryEntryResult3 (copy), UseRegistryEntryResult2 (copy), UseRegistryEntryResult5 (copy), UseRegistryEntryResult4 (copy), UseRegistryEntryResult7 (copy), UseRegistryEntryResult1 (copy), UseRegistryEntryResult8 (copy), UseRegistryEntryResult (copy), UseRegistryEntryResult6 (copy), UseRegistryEntryResult9 (copy), UseRegistryEntryResult10 (copy), UseRefResult4 (copy), UseRefResult3 (copy), UseSelectorResult (copy), UseRefResult1 (copy), RunService (upval), AutoFocusFailsafeThreshold (upval), createGameLeaveSubscription (upval)
 		local v1 = nil
 		local Connection = nil
 		
-		local function setAutoFocusing() --[[ Line: 408 ]]
+		local function setAutoFocusing()
 			-- upvalues: v1 (ref), UseAutoFocusModuleResult (upval)
 			if v1 then
 				v1.cancel()
@@ -280,7 +280,7 @@ return function(p1) --[[ Line: 102 | Named "useGlobalFocusHandler" ]]
 			end
 			v1 = UseAutoFocusModuleResult()
 			
-			local function v89() --[[ Line: 417 ]]
+			local function v89()
 				-- upvalues: GlobalFocusTelemetryModule (upval), UseMemoResult (upval), UseFocusedGuiObjectResult (upval), UseRefResult5 (upval), UseRegistryEntryResult3 (upval), UseRegistryEntryResult2 (upval), UseRegistryEntryResult5 (upval), UseRegistryEntryResult4 (upval), UseRegistryEntryResult7 (upval), UseRegistryEntryResult1 (upval), UseRegistryEntryResult8 (upval), UseRegistryEntryResult (upval), UseRegistryEntryResult6 (upval), UseRegistryEntryResult9 (upval), UseRegistryEntryResult10 (upval), UseRefResult4 (upval), UseRefResult3 (upval), UseSelectorResult (upval), UseRefResult1 (upval), v1 (ref), UseAutoFocusModuleResult (upval)
 				GlobalFocusTelemetryModule.sendAutoFocusFailureCounter(UseMemoResult)
 				GlobalFocusTelemetryModule.sendAutoFocusFailureEvent(UseFocusedGuiObjectResult, if UseRefResult5 then UseRefResult5.current else {}, UseMemoResult, {
@@ -306,7 +306,7 @@ return function(p1) --[[ Line: 102 | Named "useGlobalFocusHandler" ]]
 			
 			local v2 = false
 			local v3 = 0
-			Connection = RunService.Heartbeat:Connect(function(DeltaTime: number) --[[ Line: 61 ]]
+			Connection = RunService.Heartbeat:Connect(function(DeltaTime: number)
 				-- upvalues: v3 (ref), AutoFocusFailsafeThreshold (upval), v2 (ref), v89 (copy)
 				v3 += DeltaTime
 				
@@ -319,7 +319,7 @@ return function(p1) --[[ Line: 102 | Named "useGlobalFocusHandler" ]]
 		end
 		local GameLeaveSubscription = if NoP4 then createGameLeaveSubscription(setAutoFocusing) else nil
 		
-		return function() --[[ Line: 452 ]]
+		return function()
 			-- upvalues: v1 (ref), GameLeaveSubscription (ref), Connection (ref)
 			if v1 then
 				v1.cancel()

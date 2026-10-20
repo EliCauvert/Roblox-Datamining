@@ -18,11 +18,11 @@ return require(Parent.Rodux).createReducer({
 	KeyboardKeyCode = ConfigModule.ChatInputBarDefaultFocusKeyCode,
 	AutocompleteEnabled = ConfigModule.ChatInputBarDefaultAutocompleteEnabled
 }, {
-	[require(Actions.ConfigurationObjectsLoaded).name] = function(p1, p2) --[[ Line: 28 ]]
+	[require(Actions.ConfigurationObjectsLoaded).name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
 		return Dictionary.join(p1, p2.chatInputBarSettings)
 	end,
-	[require(Actions.ChatInputBarSettingsChanged).name] = function(p1, p2) --[[ Line: 32 ]]
+	[require(Actions.ChatInputBarSettingsChanged).name] = function(p1, p2)
 		-- upvalues: None (copy), Dictionary (copy)
 		local _ = p2.value
 		

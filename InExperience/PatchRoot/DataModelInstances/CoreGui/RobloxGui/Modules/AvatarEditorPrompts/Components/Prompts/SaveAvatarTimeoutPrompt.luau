@@ -15,11 +15,11 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local InputSize = FoundationModule.Enums.InputSize
 local CloseOpenPromptModule = require(script.Parent.Parent.Parent.Thunks.CloseOpenPrompt)
 
-return function() --[[ Line: 26 | Named "SaveAvatarTimeoutPrompt" ]]
+return function()
 	-- upvalues: UseDispatchFunction (copy), GetTimeoutStatusStoreFunction (copy), UseSignalStateFunction (copy), ReactModule (copy), CloseOpenPromptModule (copy), LabelAbuseTypeMapping (copy), UseLocalizationFunction (copy), FormatTimeoutEndTimeFunction (copy), AXPartialPageModal (copy), ButtonVariant (copy), InputSize (copy), View (copy), Text (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseSignalStateResult = UseSignalStateFunction(GetTimeoutStatusStoreFunction().getTimeoutDetails)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 31 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseDispatchResult (copy), CloseOpenPromptModule (upval)
 		UseDispatchResult(CloseOpenPromptModule)
 	end, { UseDispatchResult })

@@ -5,7 +5,7 @@ local CryoModule = require(Parent.Cryo)
 local EnumsModule = require(RoduxCall.Enums)
 local SuggestedCalleeModelModule = {}
 
-function SuggestedCalleeModelModule.new(p1) --[[ Line: 9 ]]
+function SuggestedCalleeModelModule.new(p1)
 	-- upvalues: SuggestedCalleeModelModule (copy)
 	assert(SuggestedCalleeModelModule.isValid(p1))
 	SuggestedCalleeModelModule.__index = SuggestedCalleeModelModule
@@ -14,7 +14,7 @@ function SuggestedCalleeModelModule.new(p1) --[[ Line: 9 ]]
 	return p1
 end
 
-function SuggestedCalleeModelModule.mock(p1) --[[ Line: 21 ]]
+function SuggestedCalleeModelModule.mock(p1)
 	-- upvalues: SuggestedCalleeModelModule (copy)
 	local P1 = p1 or {}
 	
@@ -25,7 +25,7 @@ function SuggestedCalleeModelModule.mock(p1) --[[ Line: 21 ]]
 	}))
 end
 
-function SuggestedCalleeModelModule.format(p1) --[[ Line: 33 ]]
+function SuggestedCalleeModelModule.format(p1)
 	-- upvalues: CryoModule (copy), EnumsModule (copy)
 	return CryoModule.Dictionary.join(p1, {
 		userPresenceType = EnumsModule.PresenceType[p1.userPresenceType]
@@ -34,7 +34,7 @@ end
 
 SuggestedCalleeModelModule.isValid = TModule.strictInterface({
 	userId = TModule.number,
-	userPresenceType = function(p1): boolean --[[ Line: 41 ]]
+	userPresenceType = function(p1): boolean
 		-- upvalues: EnumsModule (copy)
 		return EnumsModule.PresenceType[p1] ~= nil
 	end,

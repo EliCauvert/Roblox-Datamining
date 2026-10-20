@@ -11,14 +11,14 @@ local LayoutMode = require(Parent.UserTile).LayoutMode
 local UserPresence = require(Parent.Foundation).Enums.UserPresence
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1) --[[ Line: 28 | Named "CardContainer" ]]
+return function(p1)
 	-- upvalues: UseLocalUserIdFunction (copy), UseTokensFunction (copy), UseChatPagePaddingModule (copy), UseChatPlacementContextFunction (copy), ReactModule (copy), FoundationModule (copy), UserTile (copy), LayoutMode (copy), UserPresence (copy), Cards (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local IsTextMatch = tostring(UseLocalUserIdResult) == p1.senderTargetId
 	local UseTokensResult = UseTokensFunction()
 	local UseChatPagePaddingModuleResult = UseChatPagePaddingModule()
 	local UseChatPlacementContextResult = UseChatPlacementContextFunction()
-	local UseMemoResult = ReactModule.useMemo(function(): Vector2 --[[ Line: 35 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): Vector2
 		-- upvalues: UseTokensResult (copy)
 		return Vector2.new(UseTokensResult.Size.Size_700, UseTokensResult.Size.Size_700)
 	end, { UseTokensResult })

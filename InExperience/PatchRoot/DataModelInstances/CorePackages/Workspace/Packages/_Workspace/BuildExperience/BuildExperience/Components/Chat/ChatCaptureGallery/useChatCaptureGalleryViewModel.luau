@@ -7,11 +7,11 @@ local FFlagBuildExperienceChatCaptureGalleryNewestFirstModule = require(BuildExp
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-local function cloneCaptures(Tbl) --[[ Line: 25 ]]
+local function cloneCaptures(Tbl)
 	return table.clone(Tbl)
 end
 
-local function sortCapturesOldestFirst(Captures) --[[ Line: 29 ]]
+local function sortCapturesOldestFirst(Captures)
 	local List = {}
 	
 	for Index, capture in Captures do
@@ -22,7 +22,7 @@ local function sortCapturesOldestFirst(Captures) --[[ Line: 29 ]]
 			timestamp = if typeof(CaptureTime) == "DateTime" then CaptureTime.UnixTimestampMillis else 0
 		})
 	end
-	table.sort(List, function(A, B): boolean --[[ Line: 39 ]]
+	table.sort(List, function(A, B): boolean
 		return if A.timestamp == B.timestamp then A.index < B.index else A.timestamp < B.timestamp
 	end)
 	local Captures1 = {}
@@ -33,11 +33,11 @@ local function sortCapturesOldestFirst(Captures) --[[ Line: 29 ]]
 	return Captures1
 end
 
-return function(p1) --[[ Line: 53 | Named "useChatCaptureGalleryViewModel" ]]
+return function(p1)
 	-- upvalues: SignalsReactModule (copy), ReactModule (copy), FFlagBuildExperienceChatCaptureGalleryNewestFirstModule (copy), sortCapturesOldestFirst (copy), cloneCaptures (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.captureSource.getCaptures)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(p1.captureSource.getIsFinished)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 56 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult (copy), FFlagBuildExperienceChatCaptureGalleryNewestFirstModule (upval), sortCapturesOldestFirst (upval)
 		local List = {}
 		
@@ -48,7 +48,7 @@ return function(p1) --[[ Line: 53 | Named "useChatCaptureGalleryViewModel" ]]
 		end
 		return if FFlagBuildExperienceChatCaptureGalleryNewestFirstModule then List else sortCapturesOldestFirst(List)
 	end, { UseSignalStateResult })
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 67 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 		-- upvalues: cloneCaptures (upval), p1 (copy)
 		return cloneCaptures(p1.initialCaptures)
 	end)
@@ -64,7 +64,7 @@ return function(p1) --[[ Line: 53 | Named "useChatCaptureGalleryViewModel" ]]
 		showMore = LocalizationStringsModule.CHAT_CAPTURE_GALLERY_SHOW_MORE,
 		title = LocalizationStringsModule.CHAT_CAPTURE_GALLERY_TITLE
 	})
-	ReactModule.useEffect(function() --[[ Line: 83 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseRefResult (copy), UseStateResult2 (copy), cloneCaptures (upval)
 		if p1.isOpen and not UseRefResult.current then
 			UseStateResult2(cloneCaptures(p1.initialCaptures))
@@ -84,13 +84,13 @@ return function(p1) --[[ Line: 53 | Named "useChatCaptureGalleryViewModel" ]]
 		selectionCountText = UseLocalizationResult.selectionCount,
 		showMoreText = UseLocalizationResult.showMore,
 		titleText = UseLocalizationResult.title,
-		isSelected = ReactModule.useCallback(function(Value): boolean --[[ Line: 90 ]]
+		isSelected = ReactModule.useCallback(function(Value): boolean
 			-- upvalues: UseStateResult (copy)
 			return table.find(UseStateResult, Value) ~= nil
 		end, { UseStateResult }),
-		onCaptureToggled = ReactModule.useCallback(function(Value) --[[ Line: 94 ]]
+		onCaptureToggled = ReactModule.useCallback(function(Value)
 			-- upvalues: UseStateResult2 (copy), p1 (copy)
-			UseStateResult2(function(List) --[[ Line: 95 ]]
+			UseStateResult2(function(List)
 				-- upvalues: Value (copy), p1 (upval)
 				local FoundIndex: number? = table.find(List, Value)
 				
@@ -110,7 +110,7 @@ return function(p1) --[[ Line: 53 | Named "useChatCaptureGalleryViewModel" ]]
 			end)
 		end, { p1.maxSelections }),
 		onClose = p1.onClose,
-		onConfirm = ReactModule.useCallback(function() --[[ Line: 111 ]]
+		onConfirm = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy), UseStateResult (copy)
 			p1.onConfirm(UseStateResult)
 		end, { p1.onConfirm, UseStateResult }),

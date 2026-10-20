@@ -20,13 +20,13 @@ local config1 = {
 	dismiss = Constants.UPSELL_BUTTON_ACTION.Dismiss
 }
 
-local function getCountdownLabelItem(p1) --[[ Line: 44 ]]
+local function getCountdownLabelItem(p1)
 	-- upvalues: GetDeepValueFunction (copy), CryoModule (copy), AppChatNetworkingModule (copy), Constants (copy)
 	local v1 = nil
 	local ModalLayoutHeaderAdditionalContent = GetDeepValueFunction(p1, "modal_layout.header.additional_content")
 	
 	if ModalLayoutHeaderAdditionalContent then
-		local Where = CryoModule.List.findWhere(ModalLayoutHeaderAdditionalContent, function(p2): boolean --[[ Line: 48 ]]
+		local Where = CryoModule.List.findWhere(ModalLayoutHeaderAdditionalContent, function(p2): boolean
 			-- upvalues: AppChatNetworkingModule (upval)
 			return p2.type == AppChatNetworkingModule.Constants.ModalContentType.Countdown
 		end)
@@ -41,12 +41,12 @@ local function getCountdownLabelItem(p1) --[[ Line: 44 ]]
 	return v1
 end
 
-local function _(p1) --[[ Line: 62 | Named "getButtonAction" ]]
+local function _(p1)
 	-- upvalues: config1 (copy)
 	return if p1.action and p1.action.type then config1[p1.action.type] else nil
 end
 
-return function(p1) --[[ Line: 69 ]]
+return function(p1)
 	-- upvalues: config (copy), SocialUpsellType (copy), GetDeepValueFunction (copy), getCountdownLabelItem (copy), CryoModule (copy), config1 (copy), CreateCommonSocialUpsellBannerConfigFunction (copy)
 	local Entry = config[p1.modal_variant] or SocialUpsellType.Unknown
 	local LabelItems = {}
@@ -62,7 +62,7 @@ return function(p1) --[[ Line: 69 ]]
 		body = GetDeepValueFunction(p1, "modal_layout.body.text"),
 		isDismissable = GetDeepValueFunction(p1, "modal_layout.dismissible"),
 		labelItems = LabelItems,
-		buttons = CryoModule.List.filterMap(ModalLayoutButtons, function(p2) --[[ Line: 79 ]]
+		buttons = CryoModule.List.filterMap(ModalLayoutButtons, function(p2)
 			-- upvalues: config1 (upval)
 			local Entry = if p2.action and p2.action.type then config1[p2.action.type] else nil
 			

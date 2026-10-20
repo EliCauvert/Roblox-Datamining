@@ -14,7 +14,7 @@ local LocalizationModule = require(ExpChat.Localization)
 local GetChatTooltipStoreModule = require(ExpChat.Stores.GetChatTooltipStore)
 local UseChatTooltipLifecycleModule = require(ExpChat.ChatWindow.UI.useChatTooltipLifecycle)
 
-return ReactModule.memo(function(p1) --[[ Line: 37 | Named "PresetChatTooltip" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FFlagExpChatPresetChatEnabled (copy), FFlagExpChatUseUnifiedTooltipStore (copy), ReactModule (copy), GetChatTooltipStoreModule (copy), SignalsReactModule (copy), UseChatTooltipLifecycleModule (copy), LocalizationModule (copy), ExpChatSharedModule (copy), ConstantsModule (copy), Coachmark (copy), PopoverSide (copy), PopoverAlign (copy)
 	if FFlagExpChatPresetChatEnabled and FFlagExpChatUseUnifiedTooltipStore then
 		local UseSignalStateResult = SignalsReactModule.useSignalState(GetChatTooltipStoreModule(false).getShouldShow("PresetChatTooltip"))
@@ -26,7 +26,7 @@ return ReactModule.memo(function(p1) --[[ Line: 37 | Named "PresetChatTooltip" ]
 			headerText = "CoreScripts.TextChat.Tooltip.QuickWords.Header",
 			bodyText = "CoreScripts.TextChat.Tooltip.QuickWords.Body"
 		})
-		local UseResult = ReactModule.useCallback(function() --[[ Line: 55 ]]
+		local UseResult = ReactModule.useCallback(function()
 			-- upvalues: UseChatTooltipLifecycleModuleResult (copy), ExpChatSharedModule (upval), ConstantsModule (upval)
 			UseChatTooltipLifecycleModuleResult.onDismiss()
 			ExpChatSharedModule.Analytics:TelemetryLogEvent(ExpChatSharedModule.Analytics.ExpChatPresetActionConfig, {
@@ -34,7 +34,7 @@ return ReactModule.memo(function(p1) --[[ Line: 37 | Named "PresetChatTooltip" ]
 				component = ConstantsModule.Analytics.Components.PresetTooltip
 			}, ExpChatSharedModule.Analytics.DefaultStandardizedFields)
 		end, { UseChatTooltipLifecycleModuleResult.onDismiss })
-		ReactModule.useEffect(function() --[[ Line: 64 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseSignalStateResult (copy), ExpChatSharedModule (upval), ConstantsModule (upval)
 			if UseSignalStateResult then
 				ExpChatSharedModule.Analytics:TelemetryLogEvent(ExpChatSharedModule.Analytics.ExpChatPresetActionConfig, {

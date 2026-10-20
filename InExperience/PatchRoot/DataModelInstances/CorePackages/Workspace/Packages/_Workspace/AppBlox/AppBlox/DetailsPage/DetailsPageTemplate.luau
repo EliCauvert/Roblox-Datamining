@@ -30,7 +30,7 @@ local FFlagLuaAppAddTestIdsForArrow = require(Parent.SharedFlags).FFlagLuaAppAdd
 local FFlagLuaAppEdpConsoleMediaGalleryVideo = require(Parent.SharedFlags).FFlagLuaAppEdpConsoleMediaGalleryVideo
 local DetailsPageTemplate = RoactModule.PureComponent:extend("DetailsPageTemplate")
 
-local function _(p1, p2) --[[ Line: 59 | Named "applyTokenScaling" ]]
+local function _(p1, p2)
 	return p1 * p2.Stroke.Standard
 end
 
@@ -80,14 +80,14 @@ DetailsPageTemplate.validateProps = TModule.strictInterface({
 })
 DetailsPageTemplate.defaultProps = { isFullscreen = false, deviceType = DeviceType.Desktop }
 
-local _ = function(p1, p2) --[[ Line: 173 | Named "getHeaderPaddingHeight" ]]
+local _ = function(p1, p2)
 	-- upvalues: GetPlatformConfigModule (copy)
 	local PlatformConfigModule = GetPlatformConfigModule(p1.deviceType)
 	
 	return p2 - (if p1.headerBarBackgroundHeight then p1.headerBarBackgroundHeight else PlatformConfigModule.headerBarBackgroundHeight * p1.foundationTokens.Stroke.Standard)
 end
 
-function DetailsPageTemplate.init(p1) --[[ Line: 182 ]]
+function DetailsPageTemplate.init(p1)
 	-- upvalues: RoactModule (copy), Signal (copy), GetPlatformConfigModule (copy), DeviceType (copy)
 	p1.containerRef = RoactModule.createRef()
 	p1.scrollingFrameRef = p1.props.scrollingFrameRef
@@ -100,14 +100,14 @@ function DetailsPageTemplate.init(p1) --[[ Line: 182 ]]
 		containerSize = Vector2.new(500, 500)
 	}
 	
-	function p1.onContainerSizeChange(Frame) --[[ Line: 194 ]]
+	function p1.onContainerSizeChange(Frame)
 		-- upvalues: p1 (copy)
 		p1:setState({ containerSize = Frame.AbsoluteSize })
 	end
 	
-	function p1.onBackgroundComponentFrameSizeChange(Frame) --[[ Line: 200 ]]
+	function p1.onBackgroundComponentFrameSizeChange(Frame)
 		-- upvalues: p1 (copy), GetPlatformConfigModule (upval)
-		p1:setState(function(_, p2) --[[ Line: 202 ]]
+		p1:setState(function(_, p2)
 			-- upvalues: Frame (copy), GetPlatformConfigModule (upval)
 			local Y = Frame.AbsoluteSize.Y
 			local PlatformConfigModule = GetPlatformConfigModule(p2.deviceType)
@@ -119,11 +119,11 @@ function DetailsPageTemplate.init(p1) --[[ Line: 182 ]]
 		end)
 	end
 	
-	function p1.canvasPositionChange(ScrollFrame) --[[ Line: 213 ]]
+	function p1.canvasPositionChange(ScrollFrame)
 		-- upvalues: p1 (copy), GetPlatformConfigModule (upval), DeviceType (upval)
 		p1.scrollViewPositionChangedSignal:fire()
 		p1.scrolled = true
-		p1:setState(function(State, p2) --[[ Line: 217 ]]
+		p1:setState(function(State, p2)
 			-- upvalues: GetPlatformConfigModule (upval), ScrollFrame (copy), p1 (upval), DeviceType (upval)
 			local BackgroundHeight = State.backgroundHeight
 			local PlatformConfigModule = GetPlatformConfigModule(p2.deviceType)
@@ -138,7 +138,7 @@ function DetailsPageTemplate.init(p1) --[[ Line: 182 ]]
 	end
 end
 
-function DetailsPageTemplate.render(p1) --[[ Line: 254 ]]
+function DetailsPageTemplate.render(p1)
 	-- upvalues: DeviceType (copy), GetPlatformConfigModule (copy), FFlagLuaAppFixSDPLayout (copy), WithStyleFunction (copy), GetIconSizeFunction (copy), IconSize (copy), RoactModule (copy), GetIconSizeUDim2Function (copy), ReactModule (copy), FFlagLuaAppAddTestIdsForArrow (copy), GetTestIdFunction (copy), IconButton (copy), Images (copy), LoadableImage (copy), StickyActionBarModule (copy), VerticalScrollView (copy), DetailsPageHeaderModule (copy), FFlagLuaAppFixDetailsPageThumbnailRenderInPhone (copy), DetailsPageBodyModule (copy), ActionBar (copy)
 	local IsDeviceTypeMatch = p1.props.deviceType == DeviceType.Phone
 	local PlatformConfigModule = GetPlatformConfigModule(p1.props.deviceType)
@@ -164,7 +164,7 @@ function DetailsPageTemplate.render(p1) --[[ Line: 254 ]]
 	local RenderFullscreenContentFunction = p1.props.renderFullscreenContent
 	local RenderFullscreenContentFunction1 = not IsDeviceTypeMatch and IsFullscreen and RenderFullscreenContentFunction
 	
-	return WithStyleFunction(function(p2) --[[ Line: 278 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: p1 (copy), IsDeviceTypeMatch (copy), GetIconSizeFunction (upval), IconSize (upval), HeaderBarBackgroundHeight (copy), RoactModule (upval), GetIconSizeUDim2Function (upval), ReactModule (upval), FFlagLuaAppAddTestIdsForArrow (upval), GetTestIdFunction (upval), IconButton (upval), RenderFullscreenContentFunction1 (copy), Images (upval), LoadableImage (upval), BackgroundComponentPosition (copy), FFlagLuaAppFixSDPLayout (upval), ContainerSize (copy), StickyActionBarModule (upval), VerticalScrollView (upval), HeaderPadding (copy), DetailsPageHeaderModule (upval), ThumbnailHeight (copy), FFlagLuaAppFixDetailsPageThumbnailRenderInPhone (upval), SideMargin (copy), DetailsPageBodyModule (upval), DualPanelBreakpoint (copy), RenderFullscreenContentFunction (copy), ActionBar (upval)
 		local Theme = p2.Theme
 		local NoBannerImageUrl = p1.props.bannerImageUrl == nil
@@ -381,13 +381,13 @@ function DetailsPageTemplate.render(p1) --[[ Line: 254 ]]
 	end)
 end
 
-function DetailsPageTemplate.didMount(p1) --[[ Line: 528 ]]
+function DetailsPageTemplate.didMount(p1)
 	if p1.containerRef.current then
 		p1.onContainerSizeChange(p1.containerRef.current)
 	end
 end
 
-function DetailsPageTemplate.didUpdate(p1) --[[ Line: 534 ]]
+function DetailsPageTemplate.didUpdate(p1)
 	-- upvalues: GetPlatformConfigModule (copy)
 	local PlatformConfigModule = GetPlatformConfigModule(p1.props.deviceType)
 	
@@ -399,7 +399,7 @@ function DetailsPageTemplate.didUpdate(p1) --[[ Line: 534 ]]
 	end
 end
 
-return function(p1) --[[ Line: 548 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseAnimateScrollViewToSelectionModule (copy), UseTokensFunction (copy), UseLastInputModeFunction (copy), DetailsPageTemplate (copy), CryoModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	UseAnimateScrollViewToSelectionModule(UseRefResult, 0.4)

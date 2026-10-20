@@ -12,19 +12,19 @@ local GetSquadExperienceInviteStoreFunction = require(Parent.SquadsCore.Stores).
 local FFlagUseSignalsForSquadExperienceInviteStatus = DependenciesModule.SharedFlags.FFlagUseSignalsForSquadExperienceInviteStatus
 local FFlagUseSignalsForSquadExperienceInvite = DependenciesModule.SharedFlags.FFlagUseSignalsForSquadExperienceInvite
 
-local function _(p1) --[[ Line: 20 | Named "getCurrentSquadId" ]]
+local function _(p1)
 	local Squad = p1.Squad and p1.Squad.Squad
 	
 	return Squad and (Squad.currentSquad and Squad.currentSquad.squadId)
 end
 
-local function selectHasCurrentSquadId(p1): boolean --[[ Line: 25 ]]
+local function selectHasCurrentSquadId(p1): boolean
 	local Squad = p1.Squad and p1.Squad.Squad
 	
 	return (Squad and (Squad.currentSquad and Squad.currentSquad.squadId)) ~= nil
 end
 
-local function selectIsCreateExperienceInviteFetching(p1): boolean --[[ Line: 29 ]]
+local function selectIsCreateExperienceInviteFetching(p1): boolean
 	-- upvalues: NetworkingSquads (copy), NetworkStatus (copy)
 	local Squad = p1.Squad and p1.Squad.Squad
 	local SquadId = Squad and (Squad.currentSquad and Squad.currentSquad.squadId)
@@ -32,7 +32,7 @@ local function selectIsCreateExperienceInviteFetching(p1): boolean --[[ Line: 29
 	return SquadId ~= nil and NetworkingSquads.CreateExperienceInvite.getStatus(p1, SquadId) == NetworkStatus.Fetching
 end
 
-local function selectHasInFlightOrExistingInvite(p1): boolean --[[ Line: 35 ]]
+local function selectHasInFlightOrExistingInvite(p1): boolean
 	-- upvalues: NetworkingSquads (copy), NetworkStatus (copy)
 	local Squad = p1.Squad and p1.Squad.Squad
 	local SquadId = Squad and (Squad.currentSquad and Squad.currentSquad.squadId)
@@ -40,12 +40,12 @@ local function selectHasInFlightOrExistingInvite(p1): boolean --[[ Line: 35 ]]
 	return if SquadId then NetworkingSquads.CreateExperienceInvite.getStatus(p1, SquadId) == NetworkStatus.Fetching or p1.Squad.Squad.currentExperienceInvite ~= nil else false
 end
 
-return function() --[[ Line: 47 | Named "useIsExperienceInvitePending" ]]
+return function()
 	-- upvalues: UseCurrentSquadIdFunction (copy), UseIsExperienceInviteRetryBlockedFunction (copy), FFlagUseSignalsForSquadExperienceInviteStatus (copy), UseSelectorFunction (copy), selectHasCurrentSquadId (copy), FFlagUseSignalsForSquadExperienceInvite (copy), selectIsCreateExperienceInviteFetching (copy), UseSignalStateFunction (copy), GetSquadExperienceInviteStoreFunction (copy), selectHasInFlightOrExistingInvite (copy), NetworkingSquads (copy), NetworkStatus (copy)
 	local UseIsExperienceInviteRetryBlockedResult = UseIsExperienceInviteRetryBlockedFunction((UseCurrentSquadIdFunction()))
 	
 	if not FFlagUseSignalsForSquadExperienceInviteStatus then
-		return UseSelectorFunction(function(p1): boolean --[[ Line: 68 ]]
+		return UseSelectorFunction(function(p1): boolean
 			-- upvalues: NetworkingSquads (upval), NetworkStatus (upval)
 			local Squad = p1.Squad and p1.Squad.Squad
 			local SquadId = Squad and (Squad.currentSquad and Squad.currentSquad.squadId)

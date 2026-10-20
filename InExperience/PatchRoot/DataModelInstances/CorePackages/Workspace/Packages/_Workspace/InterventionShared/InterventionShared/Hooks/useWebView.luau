@@ -8,21 +8,21 @@ local BrowserService = game:GetService("BrowserService")
 local HttpService = game:GetService("HttpService")
 local WebViewService = game:GetService("WebViewService")
 
-return function(Url, Title) --[[ Line: 20 | Named "useWebView" ]]
+return function(Url, Title)
 	-- upvalues: UseRefFunction (copy), UseCallbackFunction (copy), GetFFlagEnableUnifiedWebViewsFunction (copy), WebViewService (copy), BrowserService (copy), HttpService (copy), UseEffectFunction (copy)
 	local UseRefResult = UseRefFunction(nil)
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 23 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: UseRefResult (copy)
 		if UseRefResult.current then
 			UseRefResult.current:Disconnect()
 			UseRefResult.current = nil
 		end
 	end, { UseRefResult })
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 30 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: GetFFlagEnableUnifiedWebViewsFunction (upval), UseCallbackResult (copy), UseRefResult (copy), WebViewService (upval), Url (copy), Title (copy), BrowserService (upval), HttpService (upval)
 		if GetFFlagEnableUnifiedWebViewsFunction() then
 			UseCallbackResult()
-			UseRefResult.current = WebViewService.OnWindowClosed:Connect(function() --[[ Line: 36 ]]
+			UseRefResult.current = WebViewService.OnWindowClosed:Connect(function()
 				-- upvalues: WebViewService (upval), UseCallbackResult (upval)
 				WebViewService:CloseWindow()
 				UseCallbackResult()
@@ -41,9 +41,9 @@ return function(Url, Title) --[[ Line: 20 | Named "useWebView" ]]
 			}))
 		end
 	end, { Url, Title, UseCallbackResult })
-	UseEffectFunction(function() --[[ Line: 55 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseCallbackResult (copy)
-		return function() --[[ Line: 56 ]]
+		return function()
 			-- upvalues: UseCallbackResult (upval)
 			UseCallbackResult()
 		end

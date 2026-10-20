@@ -11,9 +11,9 @@ local AppContextModule = require(Parent.Utils.AppContext)
 local GetAppFeaturePoliciesFunction = require(Parent1.UniversalAppPolicy).getAppFeaturePolicies
 local list = { ExternalSettingsModule, PlatformInterfaceModule }
 
-return function(p1) --[[ Line: 22 | Named "openTermsOfUse" ]]
+return function(p1)
 	-- upvalues: ThunkModule (copy), list (copy), ExternalSettingsModule (copy), PlatformInterfaceModule (copy), GetUpsellFlowModule (copy), GetAppFeaturePoliciesFunction (copy), AppContextModule (copy), AppPage (copy), TermsOfUse (copy), UpsellFlowModule (copy)
-	return ThunkModule.new(script.Name, list, function(_, p2) --[[ Line: 23 ]]
+	return ThunkModule.new(script.Name, list, function(_, p2)
 		-- upvalues: ExternalSettingsModule (upval), PlatformInterfaceModule (upval), GetUpsellFlowModule (upval), GetAppFeaturePoliciesFunction (upval), AppContextModule (upval), p1 (copy), AppPage (upval), TermsOfUse (upval), UpsellFlowModule (upval)
 		local v1 = p2[PlatformInterfaceModule]
 		local UpsellFlowModule1 = GetUpsellFlowModule(p2[ExternalSettingsModule].getPlatform())

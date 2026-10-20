@@ -8,7 +8,7 @@ local PageEntryContentModule = require(script.Parent.Parent.Parent.shared.v1beta
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 169 ]]
+function Module.new(p1)
 	-- upvalues: t (copy), Module (copy)
 	return (setmetatable({
 		search_query = if p1 == nil or p1.search_query == nil then "" else p1.search_query,
@@ -19,7 +19,7 @@ function Module.new(p1) --[[ Line: 169 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 185 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy), t (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -51,7 +51,7 @@ function Module:encode() --[[ Line: 185 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 230 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy), t (copy), ClientCapabilitiesModule (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -102,7 +102,7 @@ function Module.decode(Buf) --[[ Line: 230 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 294 ]]
+function Module:jsonEncode()
 	-- upvalues: t (copy)
 	local t1 = {}
 	
@@ -124,7 +124,7 @@ function Module:jsonEncode() --[[ Line: 294 ]]
 	return t1
 end
 
-function Module:jsonDecode() --[[ Line: 328 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy), t (copy), ClientCapabilitiesModule (copy)
 	local NewModule = Module.new()
 	
@@ -170,7 +170,7 @@ TypeRegistryModule.default:register(t.GetSearchResultsPageRequest)
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(p1) --[[ Line: 398 ]]
+function Module1.new(p1)
 	-- upvalues: Module1 (copy)
 	return (setmetatable({
 		page_entries = if p1 == nil or p1.page_entries == nil then {} else p1.page_entries,
@@ -180,7 +180,7 @@ function Module1.new(p1) --[[ Line: 398 ]]
 	}, Module1))
 end
 
-function Module1:encode() --[[ Line: 409 ]]
+function Module1:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -224,7 +224,7 @@ function Module1:encode() --[[ Line: 409 ]]
 	return Buf1
 end
 
-function Module1.decode(Buf) --[[ Line: 459 ]]
+function Module1.decode(Buf)
 	-- upvalues: Module1 (copy), ProtoModule (copy), PageEntryContentModule (copy), HydrationContentModule (copy), t (copy), TemplateEntryModule (copy)
 	local NewModule = Module1.new()
 	local v2 = 0
@@ -272,7 +272,7 @@ function Module1.decode(Buf) --[[ Line: 459 ]]
 	return NewModule
 end
 
-function Module1:jsonEncode() --[[ Line: 535 ]]
+function Module1:jsonEncode()
 	local t = {}
 	
 	if self.page_entries ~= nil and #self.page_entries > 0 then
@@ -305,7 +305,7 @@ function Module1:jsonEncode() --[[ Line: 535 ]]
 	return t
 end
 
-function Module1:jsonDecode() --[[ Line: 569 ]]
+function Module1:jsonDecode()
 	-- upvalues: Module1 (copy), PageEntryContentModule (copy), HydrationContentModule (copy), TemplateEntryModule (copy)
 	local NewModule = Module1.new()
 	
@@ -367,7 +367,7 @@ TypeRegistryModule.default:register(t.GetSearchResultsPageResponse)
 local Module2 = {}
 Module2.__index = Module2
 
-function Module2.new(p1) --[[ Line: 652 ]]
+function Module2.new(p1)
 	-- upvalues: Module2 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -375,7 +375,7 @@ function Module2.new(p1) --[[ Line: 652 ]]
 	}, Module2))
 end
 
-function Module2:encode() --[[ Line: 661 ]]
+function Module2:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -395,7 +395,7 @@ function Module2:encode() --[[ Line: 661 ]]
 	return Buf1
 end
 
-function Module2.decode(Buf) --[[ Line: 683 ]]
+function Module2.decode(Buf)
 	-- upvalues: Module2 (copy), ProtoModule (copy), TemplateEntryModule (copy)
 	local NewModule = Module2.new()
 	local v3 = 0
@@ -432,7 +432,7 @@ function Module2.decode(Buf) --[[ Line: 683 ]]
 	return NewModule
 end
 
-function Module2:jsonEncode() --[[ Line: 733 ]]
+function Module2:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -444,7 +444,7 @@ function Module2:jsonEncode() --[[ Line: 733 ]]
 	return t
 end
 
-function Module2:jsonDecode() --[[ Line: 749 ]]
+function Module2:jsonDecode()
 	-- upvalues: Module2 (copy), TemplateEntryModule (copy)
 	local NewModule = Module2.new()
 	
@@ -466,7 +466,7 @@ TypeRegistryModule.default:register(t.GetSearchResultsPageResponse_TemplatesEntr
 local Module3 = {}
 Module3.__index = Module3
 
-function Module3.new(p1) --[[ Line: 780 ]]
+function Module3.new(p1)
 	-- upvalues: Module3 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -474,7 +474,7 @@ function Module3.new(p1) --[[ Line: 780 ]]
 	}, Module3))
 end
 
-function Module3:encode() --[[ Line: 792 ]]
+function Module3:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -493,7 +493,7 @@ function Module3:encode() --[[ Line: 792 ]]
 	return Buf1
 end
 
-function Module3.decode(Buf) --[[ Line: 813 ]]
+function Module3.decode(Buf)
 	-- upvalues: Module3 (copy), ProtoModule (copy)
 	local NewModule = Module3.new()
 	local v4 = 0
@@ -530,7 +530,7 @@ function Module3.decode(Buf) --[[ Line: 813 ]]
 	return NewModule
 end
 
-function Module3:jsonEncode() --[[ Line: 863 ]]
+function Module3:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -542,7 +542,7 @@ function Module3:jsonEncode() --[[ Line: 863 ]]
 	return t
 end
 
-function Module3:jsonDecode() --[[ Line: 879 ]]
+function Module3:jsonDecode()
 	-- upvalues: Module3 (copy)
 	local NewModule = Module3.new()
 	
@@ -562,13 +562,13 @@ Module3.descriptor = {
 t.GetSearchResultsPageResponse_LocalizedLiteralsEntry = Module3
 TypeRegistryModule.default:register(t.GetSearchResultsPageResponse_LocalizedLiteralsEntry)
 t.SearchResultsPageVerticalType = {
-	fromNumber = function(p1) --[[ Line: 907 ]]
+	fromNumber = function(p1)
 		return if p1 == 0 then "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_INVALID" elseif p1 == 1 then "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_BLENDED" elseif p1 == 2 then "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_GAME" elseif p1 == 3 then "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_USER" else nil
 	end,
-	toNumber = function(p1) --[[ Line: 921 ]]
+	toNumber = function(p1)
 		return if p1 == "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_INVALID" then 0 elseif p1 == "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_BLENDED" then 1 elseif p1 == "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_GAME" then 2 elseif p1 == "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_USER" then 3 else p1
 	end,
-	fromName = function(p1) --[[ Line: 935 ]]
+	fromName = function(p1)
 		return if p1 == "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_INVALID" then "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_INVALID" elseif p1 == "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_BLENDED" then "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_BLENDED" elseif p1 == "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_GAME" then "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_GAME" elseif p1 == "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_USER" then "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_USER" else nil
 	end
 }

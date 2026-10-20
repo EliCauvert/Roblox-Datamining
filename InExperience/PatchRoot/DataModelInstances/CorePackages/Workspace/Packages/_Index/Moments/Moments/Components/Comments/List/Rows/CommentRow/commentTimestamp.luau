@@ -1,13 +1,13 @@
-﻿local function _(p1, p2): number --[[ Line: 22 | Named "getAgeMilliseconds" ]]
+﻿local function _(p1, p2): number
 	return (math.max(p2 - p1, 0))
 end
 
-local _ = function(p1, p2, p3, p4: number): number --[[ Line: 55 | Named "getNextBucketBoundary" ]]
+local _ = function(p1, p2, p3, p4: number): number
 	return p1 + math.min((math.floor(p2 / p3) + 1) * p3, p4)
 end
 
 return {
-	parseTimestamp = function(p1) --[[ Line: 9 ]]
+	parseTimestamp = function(p1)
 		if p1 == "" then
 			return nil
 		else
@@ -16,7 +16,7 @@ return {
 			return if Success and Result ~= nil then Result.UnixTimestampMillis else nil
 		end
 	end,
-	getRelativeAge = function(p1, p2) --[[ Line: 33 ]]
+	getRelativeAge = function(p1, p2)
 		if p1 == nil then
 			return nil
 		else
@@ -31,7 +31,7 @@ return {
 			}
 		end
 	end,
-	getNextChangeTimestamp = function(p1: number, p2: number): number? --[[ Line: 65 ]]
+	getNextChangeTimestamp = function(p1: number, p2: number): number?
 		if p1 == nil then
 			return nil
 		else

@@ -38,7 +38,7 @@ local config1 = {
 	[TrackerPromptTypeModule.CameraUnavailable] = RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.Subtitle.CameraUnavailable")
 }
 
-local function openWebview(Url) --[[ Line: 77 ]]
+local function openWebview(Url)
 	-- upvalues: HttpService (copy), RobloxTranslatorModule (copy), GuiService (copy)
 	GuiService:BroadcastNotification(HttpService:JSONEncode({
 		presentationStyle = 2,
@@ -48,11 +48,11 @@ local function openWebview(Url) --[[ Line: 77 ]]
 	}), 20)
 end
 
-function TrackerPrompt.init(p1) --[[ Line: 90 ]]
+function TrackerPrompt.init(p1)
 	p1.promptType = p1.props.promptType
 end
 
-function TrackerPrompt.render(p1) --[[ Line: 94 ]]
+function TrackerPrompt.render(p1)
 	-- upvalues: RoactModule (copy), TrackerPromptTypeModule (copy), Toast (copy), Images (copy), config (copy), config1 (copy), openWebview (copy), CameraUnavailableUrl (copy), RenderWithCoreScriptsStyleProviderModule (copy)
 	p1.promptType = p1.props.promptType
 	
@@ -71,8 +71,8 @@ function TrackerPrompt.render(p1) --[[ Line: 94 ]]
 						iconImage = Images["icons/status/alert"],
 						toastTitle = config[p1.promptType],
 						toastSubtitle = config1[p1.promptType],
-						onDismissed = function() --[[ Line: 106 ]] end,
-						onActivated = function() --[[ Line: 107 ]]
+						onDismissed = function() end,
+						onActivated = function()
 							-- upvalues: p1 (copy), TrackerPromptTypeModule (upval), openWebview (upval), CameraUnavailableUrl (upval)
 							if p1.promptType == TrackerPromptTypeModule.CameraUnavailable then
 								openWebview(CameraUnavailableUrl)

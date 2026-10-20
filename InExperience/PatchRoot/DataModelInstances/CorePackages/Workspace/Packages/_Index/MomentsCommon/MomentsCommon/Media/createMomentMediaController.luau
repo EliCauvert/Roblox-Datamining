@@ -19,7 +19,7 @@ local CreateComputedFunction = SignalsModule.createComputed
 local GetFFlagMomentsStickerButtonModule = require(MomentsCommon.Flags.GetFFlagMomentsStickerButton)
 local LoopEpsilonSeconds = require(MomentsCommon.Media.Preload.preloadConstants).loopEpsilonSeconds
 
-return function(p1, p2) --[[ Line: 107 | Named "createMomentMediaController" ]]
+return function(p1, p2)
 	-- upvalues: DefaultMediaNodeRegistryModule (copy), MediaRootModule (copy), CreateAudioGraphModule (copy), FFlagMomentsVideoPermissionContextFixModule (copy), FFlagMomentsOptimisticProfilePending (copy), GetFFlagMomentsStickerButtonModule (copy), CreateSignalFunction (copy), CreateComputedFunction (copy), CryoModule (copy), LoopEpsilonSeconds (copy)
 	local Services = p2.services
 	local Registry = p2.registry or DefaultMediaNodeRegistryModule()
@@ -50,7 +50,7 @@ return function(p1, p2) --[[ Line: 107 | Named "createMomentMediaController" ]]
 	local List = {}
 	local Musics = {}
 	
-	local function _(p3) --[[ Line: 146 | Named "addNode" ]]
+	local function _(p3)
 		-- upvalues: List (copy), Musics (copy)
 		table.insert(List, p3)
 		Musics[p3.id] = p3
@@ -176,13 +176,13 @@ return function(p1, p2) --[[ Line: 107 | Named "createMomentMediaController" ]]
 			})
 		end
 	end
-	table.sort(List3, function(A, B): boolean --[[ Line: 283 ]]
+	table.sort(List3, function(A, B): boolean
 		return A.zIndex < B.zIndex
 	end)
 	local Signal = CreateSignalFunction(List3)
 	local AddStemResults = {}
 	
-	local _ = function(p3) --[[ Line: 295 | Named "addStem" ]]
+	local _ = function(p3)
 		-- upvalues: AddStemResults (copy), AudioGraphModule (copy)
 		local AudioStem = p3.audioStem
 		local GetAudioSourceFunction = p3.getAudioSource
@@ -194,7 +194,7 @@ return function(p1, p2) --[[ Line: 107 | Named "createMomentMediaController" ]]
 		end
 	end
 	
-	local _ = function(p3) --[[ Line: 303 | Named "removeStem" ]]
+	local _ = function(p3)
 		-- upvalues: AddStemResults (copy)
 		local AudioStem = p3.audioStem
 		
@@ -229,11 +229,11 @@ return function(p1, p2) --[[ Line: 107 | Named "createMomentMediaController" ]]
 	local Flag = false
 	local Largest = nil
 	local GetPosition = if v1 == nil then v2.getPosition else v1.getPosition
-	local Computed = CreateComputedFunction(function(p3): string --[[ Line: 348 ]]
+	local Computed = CreateComputedFunction(function(p3): string
 		-- upvalues: Signal4 (copy), Signal3 (copy), Signal1 (copy)
 		return if Signal4(p3) then "Playing" elseif Signal3(p3) then "Decoded" elseif Signal1(p3) then "Downloaded" else "Idle"
 	end)
-	local Computed1 = CreateComputedFunction(function(p3) --[[ Line: 362 ]]
+	local Computed1 = CreateComputedFunction(function(p3)
 		-- upvalues: v1 (ref), Signal3 (copy), Signal1 (copy), v2 (ref), Signal4 (copy), Signal6 (copy)
 		local Resolution = nil
 		local FailureReason1 = nil
@@ -269,11 +269,11 @@ return function(p1, p2) --[[ Line: 107 | Named "createMomentMediaController" ]]
 	local RenderSteppedConnection = nil
 	local v5 = 0
 	
-	local _ = function() --[[ Line: 415 | Named "startRealignLoop" ]]
+	local _ = function()
 		-- upvalues: RenderSteppedConnection (ref), v3 (ref), List1 (copy), v5 (ref), GetPosition (copy), Services (copy), Flag (ref), LoopEpsilonSeconds (upval)
 		if RenderSteppedConnection == nil and (v3 ~= nil or #List1 ~= 0) then
 			v5 = GetPosition(false)
-			RenderSteppedConnection = Services.runService.RenderStepped:Connect(function() --[[ Line: 420 ]]
+			RenderSteppedConnection = Services.runService.RenderStepped:Connect(function()
 				-- upvalues: Flag (upval), GetPosition (upval), v5 (upval), LoopEpsilonSeconds (upval), v3 (upval), List1 (upval)
 				if Flag then return end
 				local v6 = GetPosition(false)
@@ -296,7 +296,7 @@ return function(p1, p2) --[[ Line: 107 | Named "createMomentMediaController" ]]
 		end
 	end
 	
-	local _ = function() --[[ Line: 439 | Named "stopRealignLoop" ]]
+	local _ = function()
 		-- upvalues: RenderSteppedConnection (ref)
 		if RenderSteppedConnection ~= nil then
 			RenderSteppedConnection:Disconnect()
@@ -304,12 +304,12 @@ return function(p1, p2) --[[ Line: 107 | Named "createMomentMediaController" ]]
 		end
 	end
 	
-	local _ = function() --[[ Line: 502 | Named "isVideoReadyForPlayback" ]]
+	local _ = function()
 		-- upvalues: v1 (ref)
 		return v1 == nil or v1.isPlaybackReady()
 	end
 	
-	local function play() --[[ Line: 506 ]]
+	local function play()
 		-- upvalues: Flag (ref), v1 (ref), Largest (ref), v3 (ref), List1 (copy), v2 (ref), List (copy), GetPosition (copy), Signal2_2 (copy), RenderSteppedConnection (ref), v5 (ref), Services (copy), LoopEpsilonSeconds (upval)
 		if Flag or v1 ~= nil and not v1.isPlaybackReady() then return end
 		local Largest1: number = Largest
@@ -348,7 +348,7 @@ return function(p1, p2) --[[ Line: 107 | Named "createMomentMediaController" ]]
 		if RenderSteppedConnection == nil then
 			if v3 == nil and #List1 == 0 then return end
 			v5 = GetPosition(false)
-			RenderSteppedConnection = Services.runService.RenderStepped:Connect(function() --[[ Line: 420 ]]
+			RenderSteppedConnection = Services.runService.RenderStepped:Connect(function()
 				-- upvalues: Flag (upval), GetPosition (upval), v5 (upval), LoopEpsilonSeconds (upval), v3 (upval), List1 (upval)
 				if Flag then return end
 				local v6 = GetPosition(false)
@@ -369,7 +369,7 @@ return function(p1, p2) --[[ Line: 107 | Named "createMomentMediaController" ]]
 		end
 	end
 	
-	local function pauseAndRemember(p3) --[[ Line: 558 ]]
+	local function pauseAndRemember(p3)
 		-- upvalues: Flag (ref), v1 (ref), Largest (ref), GetPosition (copy), List (copy), Signal2_2 (copy), RenderSteppedConnection (ref)
 		if Flag then return end
 		if v1 ~= nil then
@@ -397,19 +397,19 @@ return function(p1, p2) --[[ Line: 107 | Named "createMomentMediaController" ]]
 		getVisualLayers = Signal,
 		getResourceLevel = Computed,
 		audio = {
-			setVolume = function(p4, p5) --[[ Line: 666 ]]
+			setVolume = function(p4, p5)
 				-- upvalues: Flag (ref), AudioGraphModule (copy)
 				if not Flag then
 					AudioGraphModule.setVolume(p4, p5)
 				end
 			end,
-			setMuted = function(p4, p5) --[[ Line: 671 ]]
+			setMuted = function(p4, p5)
 				-- upvalues: Flag (ref), AudioGraphModule (copy)
 				if not Flag then
 					AudioGraphModule.setMuted(p4, p5)
 				end
 			end,
-			setMasterMuted = function(p4) --[[ Line: 633 ]]
+			setMasterMuted = function(p4)
 				-- upvalues: Flag (ref), AudioGraphModule (copy), Signal2_4 (copy)
 				if not Flag then
 					AudioGraphModule.setMasterMuted(p4)
@@ -419,7 +419,7 @@ return function(p1, p2) --[[ Line: 107 | Named "createMomentMediaController" ]]
 				end
 			end
 		},
-		download = function() --[[ Line: 446 ]]
+		download = function()
 			-- upvalues: Flag (ref), List (copy), Signal2 (copy)
 			if Flag then return end
 			for _, value in List do
@@ -431,7 +431,7 @@ return function(p1, p2) --[[ Line: 107 | Named "createMomentMediaController" ]]
 				return
 			end
 		end,
-		decode = function() --[[ Line: 464 ]]
+		decode = function()
 			-- upvalues: Flag (ref), List2 (copy), AddStemResults (copy), AudioGraphModule (copy), v4 (copy), Signal2_1 (copy)
 			if Flag then return end
 			for _, value in List2 do
@@ -452,7 +452,7 @@ return function(p1, p2) --[[ Line: 107 | Named "createMomentMediaController" ]]
 			end
 			Signal2_1(true)
 		end,
-		releaseDecoder = function() --[[ Line: 485 ]]
+		releaseDecoder = function()
 			-- upvalues: Flag (ref), List2 (copy), AddStemResults (copy), Signal2_1 (copy), Signal2_2 (copy)
 			if Flag then return end
 			for _, value in List2 do
@@ -478,11 +478,11 @@ return function(p1, p2) --[[ Line: 107 | Named "createMomentMediaController" ]]
 			Signal2_2(false)
 		end,
 		play = play,
-		pause = function(p4) --[[ Line: 578 ]]
+		pause = function(p4)
 			-- upvalues: pauseAndRemember (copy)
 			pauseAndRemember(p4 or 2)
 		end,
-		toggle = function() --[[ Line: 582 ]]
+		toggle = function()
 			-- upvalues: Flag (ref), Signal4 (copy), v1 (ref), pauseAndRemember (copy), play (copy), Signal2_3 (copy), Signal5 (copy)
 			if Flag then return end
 			if not Signal4(false) and (v1 ~= nil and not v1.isPlaybackReady()) then return end
@@ -493,7 +493,7 @@ return function(p1, p2) --[[ Line: 107 | Named "createMomentMediaController" ]]
 			end
 			Signal2_3(Signal5(false) + 1)
 		end,
-		seek = function(p4: number) --[[ Line: 604 ]]
+		seek = function(p4: number)
 			-- upvalues: Flag (ref), Signal4 (copy), Computed1 (copy), List (copy)
 			if Flag then return end
 			if Signal4(false) then
@@ -511,14 +511,14 @@ return function(p1, p2) --[[ Line: 107 | Named "createMomentMediaController" ]]
 				end
 			end
 		end,
-		setRegion = function(p5) --[[ Line: 624 ]]
+		setRegion = function(p5)
 			-- upvalues: Flag (ref), v1 (ref)
 			if Flag then return end
 			if v1 ~= nil then
 				v1.setRegion(p5)
 			end
 		end,
-		setActive = function(p5) --[[ Line: 643 ]]
+		setActive = function(p5)
 			-- upvalues: Largest (ref), Flag (ref), AudioGraphModule (copy), Signal2_4 (copy)
 			if p5 then
 				Largest = nil
@@ -532,7 +532,7 @@ return function(p1, p2) --[[ Line: 107 | Named "createMomentMediaController" ]]
 				return
 			end
 		end,
-		setSurface = function(p5, p6) --[[ Line: 655 ]]
+		setSurface = function(p5, p6)
 			-- upvalues: Flag (ref), Musics (copy)
 			if Flag then return end
 			local Music = Musics[p5]
@@ -541,18 +541,18 @@ return function(p1, p2) --[[ Line: 107 | Named "createMomentMediaController" ]]
 				Music.setSurface(p6)
 			end
 		end,
-		getVideoPreviewSource = function() --[[ Line: 697 ]]
+		getVideoPreviewSource = function()
 			-- upvalues: IsCaptureTypeMatch (copy), p1 (copy), Edits (copy)
 			return if IsCaptureTypeMatch then {
 				content = p1.content,
 				region = if Edits == nil then nil else Edits.trim
 			} else nil
 		end,
-		getHasVideoPreview = function() --[[ Line: 707 ]]
+		getHasVideoPreview = function()
 			-- upvalues: IsCaptureTypeMatch (copy)
 			return IsCaptureTypeMatch
 		end,
-		dispose = function() --[[ Line: 679 ]]
+		dispose = function()
 			-- upvalues: Flag (ref), RenderSteppedConnection (ref), List (copy), AudioGraphModule (copy), MediaRootModuleResult (copy)
 			if Flag then return end
 			Flag = true

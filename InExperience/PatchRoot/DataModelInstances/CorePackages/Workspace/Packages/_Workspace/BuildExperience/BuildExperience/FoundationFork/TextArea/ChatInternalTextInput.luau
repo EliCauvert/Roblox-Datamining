@@ -43,7 +43,7 @@ local config = {
 	size = require(Foundation.Enums.InputSize).Large,
 	variant = InputVariantModule.Standard
 }
-local MemoResult = ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 147 ]]
+local MemoResult = ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceModule (copy), IsPluginSecurityModule (copy), PaddingModule (copy)
 	local IsBoundsChecker = p1.isBoundsChecker
 	local IsMultiLine = p1.isMultiLine or IsBoundsChecker
@@ -84,7 +84,7 @@ local MemoResult = ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[
 	} else nil, p1.children)
 end))
 
-return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 | Named "InternalTextInput" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), GetBindableValueModule (copy), UseTextInputVariantsModule (copy), FFlagComposerControlAlignment (copy), InputVariantModule (copy), UseStyleTagsModule (copy), UsePreferredInputModule (copy), UseComposerFocusLockModule (copy), GetDisabledStyleModule (copy), GetMultiLineTextHeightModule (copy), ChatTextAreaDebugModule (copy), MeasureTextLineCountModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceModule (copy), InputFocusBehaviorModule (copy), UseComposerKeyboardConnectionsModule (copy), ControlStateModule (copy), RadiusModule (copy), TruncateTextToCursorModule (copy), UseBindableModule (copy), ReactUtilsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), BlendTransparenciesModule (copy), ConstantsModule (copy), StateLayerAffordanceModule (copy), ScrollViewModule (copy), MemoResult (copy), MapBindableModule (copy), IconModule (copy)
 	local Tbl1 = Tbl
 	
@@ -129,17 +129,17 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(1)
 	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(MultiLineTextHeightModule)
 	local HasMaxLines = WithDefaultsModuleResult.maxLines ~= nil
-	local UseStateResult6, UseStateResult2_5 = ReactModule.useState(function() --[[ Line: 264 ]]
+	local UseStateResult6, UseStateResult2_5 = ReactModule.useState(function()
 		-- upvalues: GetBindableValueModule (upval), WithDefaultsModuleResult (copy)
 		return GetBindableValueModule(WithDefaultsModuleResult.text)
 	end)
-	ReactModule.useEffect(function() --[[ Line: 268 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ChatTextAreaDebugModule (upval), WithDefaultsModuleResult (copy)
 		ChatTextAreaDebugModule.setEnabled(WithDefaultsModuleResult.composerDebug == true)
 		
-		return function() --[[ Line: 270 ]] end
+		return function() end
 	end, { WithDefaultsModuleResult.composerDebug })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 273 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseRefResult3 (copy)
 		local Current = UseRefResult.current or UseRefResult1.current
 		
@@ -151,7 +151,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 			return if Current1 and Current1.AbsoluteWindowSize.X > 0 then Current1.AbsoluteWindowSize.X else 0
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(Text) --[[ Line: 286 ]]
+	local UseResult1 = ReactModule.useCallback(function(Text)
 		-- upvalues: MeasureTextLineCountModule (upval), WithDefaultsModuleResult (copy), MultiLineTextHeightModule (copy), UseResult (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceModule (upval), FontStyle (copy), FontSize (copy), UseStateResult2_4 (copy)
 		local MeasureTextLineCountModuleResult = MeasureTextLineCountModule({
 			text = Text,
@@ -171,37 +171,37 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 	local Text = if HasMaxLines then WithDefaultsModuleResult.text else GetBindableValueModule(WithDefaultsModuleResult.text)
 	local UseStateResult7 = if WithDefaultsModuleResult.maxLines then UseStateResult4 else math.max(1, WithDefaultsModuleResult.numLines)
 	local IsUseStateResultAbove: boolean = if WithDefaultsModuleResult.alwaysMultiLine then true else UseStateResult7 > 1
-	ReactModule.useEffect(function() --[[ Line: 319 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: HasMaxLines (copy), GetBindableValueModule (upval), WithDefaultsModuleResult (copy), UseStateResult2_5 (copy), UseStateResult2_3 (copy), UseResult1 (copy), ReactModule (upval), UseRefResult5 (copy), ChatTextAreaDebugModule (upval)
 		if HasMaxLines then
 			local BindableValueModule = GetBindableValueModule(WithDefaultsModuleResult.text)
 			UseStateResult2_5(BindableValueModule)
 			UseStateResult2_3(UseResult1(BindableValueModule))
-			task.defer(function() --[[ Line: 326 ]]
+			task.defer(function()
 				-- upvalues: UseStateResult2_3 (upval), UseResult1 (upval), BindableValueModule (copy)
 				UseStateResult2_3(UseResult1(BindableValueModule))
 			end)
 			
-			return if typeof(WithDefaultsModuleResult.text) == "table" and WithDefaultsModuleResult.text.getValue ~= nil then ReactModule.__subscribeToBinding(WithDefaultsModuleResult.text, function(Text) --[[ Line: 331 ]]
+			return if typeof(WithDefaultsModuleResult.text) == "table" and WithDefaultsModuleResult.text.getValue ~= nil then ReactModule.__subscribeToBinding(WithDefaultsModuleResult.text, function(Text)
 				-- upvalues: UseRefResult5 (upval), ChatTextAreaDebugModule (upval), UseStateResult2_5 (upval), UseStateResult2_3 (upval), UseResult1 (upval)
 				if Text ~= UseRefResult5.current then
 					ChatTextAreaDebugModule.log("syncFromParent", `len={utf8.len(Text) or #Text}`)
 					UseRefResult5.current = Text
 					UseStateResult2_5(Text)
 					UseStateResult2_3(UseResult1(Text))
-					task.defer(function() --[[ Line: 340 ]]
+					task.defer(function()
 						-- upvalues: UseStateResult2_3 (upval), UseResult1 (upval), Text (copy)
 						UseStateResult2_3(UseResult1(Text))
 					end)
 					
 					return
 				end
-			end) else function() --[[ Line: 345 ]] end
+			end) else function() end
 		else
-			return function() --[[ Line: 321 ]] end
+			return function() end
 		end
 	end, { WithDefaultsModuleResult.text, UseResult1, HasMaxLines })
-	local UseResult2 = ReactModule.useCallback(function(SelectionStart) --[[ Line: 348 ]]
+	local UseResult2 = ReactModule.useCallback(function(SelectionStart)
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
 		if UseRefResult.current then
 			UseRefResult.current.SelectionStart = SelectionStart
@@ -210,7 +210,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 			UseRefResult1.current.SelectionStart = SelectionStart
 		end
 	end, {})
-	local UseResult3 = ReactModule.useCallback(function(CursorPosition) --[[ Line: 357 ]]
+	local UseResult3 = ReactModule.useCallback(function(CursorPosition)
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
 		if UseRefResult.current then
 			UseRefResult.current.CursorPosition = CursorPosition
@@ -219,7 +219,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 			UseRefResult1.current.CursorPosition = CursorPosition
 		end
 	end, {})
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 366 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseResult2 (copy), UseResult3 (copy)
 		local Current = UseRefResult.current or UseRefResult1.current
 		
@@ -231,7 +231,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 			UseResult3(Length + 1)
 		end
 	end, { UseResult2, UseResult3 })
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 380 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), WithDefaultsModuleResult (copy), InputFocusBehaviorModule (upval), UseResult4 (copy)
 		if UseRefResult.current == nil then return end
 		UseRefResult.current:CaptureFocus()
@@ -240,7 +240,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 			task.spawn(UseResult4)
 		end
 	end, { UseResult4, WithDefaultsModuleResult.focusBehavior })
-	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 397 ]]
+	local UseResult6 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseStateResult2_2 (copy), UseStateResult2_1 (copy)
 		if UseRefResult.current then
 			UseRefResult.current:ReleaseFocus()
@@ -251,25 +251,25 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 		UseStateResult2_2(false)
 		UseStateResult2_1(false)
 	end, {})
-	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 408 ]]
+	local UseResult7 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy)
 		return if UseRefResult.current then UseRefResult.current:IsFocused() else nil
 	end, {})
-	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 415 ]]
+	local UseResult8 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy)
 		return if UseRefResult.current then UseRefResult.current.SelectionStart else nil
 	end, {})
-	local UseResult9 = ReactModule.useCallback(function() --[[ Line: 422 ]]
+	local UseResult9 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy)
 		return if UseRefResult.current then UseRefResult.current.CursorPosition else nil
 	end, {})
-	local UseResult10 = ReactModule.useCallback(function() --[[ Line: 429 ]]
+	local UseResult10 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy)
 		if UseRefResult.current then
 			UseRefResult.current.Text = ""
 		end
 	end, {})
-	ReactModule.useImperativeHandle(p1, function() --[[ Line: 437 ]]
+	ReactModule.useImperativeHandle(p1, function()
 		-- upvalues: UseResult7 (copy), UseResult5 (copy), UseResult6 (copy), UseStateResult2 (copy), UseResult8 (copy), UseResult9 (copy), UseResult3 (copy), UseResult2 (copy)
 		return {
 			getIsFocused = UseResult7,
@@ -285,7 +285,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 		UseResult9, UseResult7, UseResult8, UseResult5, UseResult6, UseResult3,
 		UseResult2
 	})
-	local UseResult11 = ReactModule.useCallback(function(p2) --[[ Line: 461 ]]
+	local UseResult11 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult4 (copy), UseRefResult8 (copy), UseRefResult5 (copy), IsUseStateResultAbove (copy), UseRefResult2 (copy), HasMaxLines (copy), UseStateResult2_5 (copy), WithDefaultsModuleResult (copy), UseStateResult2_3 (copy), UseResult1 (copy)
 		if p2 == nil or p2.Parent == nil or UseRefResult4.current ~= "" then return end
 		local Text = p2.Text
@@ -302,7 +302,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 		end
 		if WithDefaultsModuleResult.maxLines then
 			UseStateResult2_3(UseResult1(Text))
-			task.defer(function() --[[ Line: 487 ]]
+			task.defer(function()
 				-- upvalues: UseStateResult2_3 (upval), UseResult1 (upval), Text (copy)
 				UseStateResult2_3(UseResult1(Text))
 			end)
@@ -313,13 +313,13 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 		WithDefaultsModuleResult.maxLines, UseResult1, HasMaxLines
 	})
 	local UseRefResult10 = ReactModule.useRef(false)
-	local UseResult12 = ReactModule.useCallback(function(_, Input) --[[ Line: 499 ]]
+	local UseResult12 = ReactModule.useCallback(function(_, Input)
 		-- upvalues: UseRefResult10 (copy)
 		if Input.UserInputType == Enum.UserInputType.MouseMovement then
 			UseRefResult10.current = false
 		end
 	end, {})
-	local UseResult13 = ReactModule.useCallback(function(_, Input) --[[ Line: 506 ]]
+	local UseResult13 = ReactModule.useCallback(function(_, Input)
 		-- upvalues: UseRefResult10 (copy), UseResult4 (copy)
 		if not UseRefResult10.current then return end
 		UseRefResult10.current = false
@@ -330,7 +330,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 			return
 		end
 	end, { UseResult2, UseResult3, UseResult4 })
-	local UseResult14 = ReactModule.useCallback(function(Current) --[[ Line: 525 ]]
+	local UseResult14 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult5 (copy), HasMaxLines (copy), UseStateResult2_5 (copy), WithDefaultsModuleResult (copy), UseStateResult2_3 (copy), UseResult1 (copy)
 		UseRefResult5.current = Current
 		
@@ -348,7 +348,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 		HasMaxLines
 	})
 	local NoIsUsePreferredInputModuleResultMatch: boolean = WithDefaultsModuleResult.onReturnPressed ~= nil and not IsUsePreferredInputModuleResultMatch
-	local UseResult15 = ReactModule.useCallback(function(_, p2) --[[ Line: 538 ]]
+	local UseResult15 = ReactModule.useCallback(function(_, p2)
 		-- upvalues: WithDefaultsModuleResult (copy), UseRefResult9 (copy), ChatTextAreaDebugModule (upval), UseRefResult8 (copy)
 		if WithDefaultsModuleResult.onReturnPressed == nil then return end
 		local ClockTime = os.clock()
@@ -362,7 +362,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 			UseRefResult9.current = ClockTime
 			UseRefResult8.current = true
 			WithDefaultsModuleResult.onReturnPressed()
-			task.delay(0.15, function() --[[ Line: 554 ]]
+			task.delay(0.15, function()
 				-- upvalues: UseRefResult8 (upval)
 				UseRefResult8.current = false
 			end)
@@ -370,14 +370,14 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 	end, { WithDefaultsModuleResult.onReturnPressed })
 	local UseComposerKeyboardConnectionsModuleResult = UseComposerKeyboardConnectionsModule({
 		enabled = NoIsUsePreferredInputModuleResultMatch == true,
-		onReturnPressed = ReactModule.useCallback(function(_, p2) --[[ Line: 559 ]]
+		onReturnPressed = ReactModule.useCallback(function(_, p2)
 			-- upvalues: UseRefResult (copy), ChatTextAreaDebugModule (upval), UseResult14 (copy), UseResult15 (copy)
 			local Current = UseRefResult.current
 			
 			if Current == nil or Current:IsFocused() ~= true then return end
 			if p2 then
 				local Text = Current.Text
-				task.defer(function() --[[ Line: 567 ]]
+				task.defer(function()
 					-- upvalues: Current (copy), Text (copy), ChatTextAreaDebugModule (upval), UseResult14 (upval)
 					if Current.Parent == nil then return end
 					local Text1 = Current.Text
@@ -396,7 +396,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 	})
 	local ConnectFunction = UseComposerKeyboardConnectionsModuleResult.connect
 	local DisconnectFunction = UseComposerKeyboardConnectionsModuleResult.disconnect
-	local UseResult16 = ReactModule.useCallback(function() --[[ Line: 596 ]]
+	local UseResult16 = ReactModule.useCallback(function()
 		-- upvalues: IsDisabled (copy), IsUseStateResultAbove (copy), IsUsePreferredInputModuleResultMatch (copy), UseRefResult (copy), UseRefResult4 (copy), UseStateResult2_2 (copy), UseStateResult2_1 (copy), WithDefaultsModuleResult (copy), NoIsUsePreferredInputModuleResultMatch (copy), ConnectFunction (copy), InputFocusBehaviorModule (upval), UseRefResult1 (copy), UseRefResult10 (copy)
 		if IsDisabled then return end
 		if IsUseStateResultAbove and IsUsePreferredInputModuleResultMatch then
@@ -435,11 +435,11 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 		WithDefaultsModuleResult.focusBehavior, NoIsUsePreferredInputModuleResultMatch,
 		ConnectFunction
 	})
-	local UseResult17 = ReactModule.useCallback(function(p2, p3) --[[ Line: 644 ]]
+	local UseResult17 = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: UseResult13 (copy)
 		UseResult13(p2, p3)
 	end, { UseResult13 })
-	local UseResult18 = ReactModule.useCallback(function(p2, p3, p4) --[[ Line: 649 ]]
+	local UseResult18 = ReactModule.useCallback(function(p2, p3, p4)
 		-- upvalues: ChatTextAreaDebugModule (upval), NoIsUsePreferredInputModuleResultMatch (copy), DisconnectFunction (copy), UseStateResult2_1 (copy), UseRefResult10 (copy), IsUseStateResultAbove (copy), UseStateResult2_2 (copy), WithDefaultsModuleResult (copy), UseResult15 (copy)
 		ChatTextAreaDebugModule.log("textBox.FocusLost", `enterPressed={p3}`)
 		
@@ -465,11 +465,11 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 		UseResult15,
 		DisconnectFunction
 	})
-	local UseResult19 = ReactModule.useCallback(function(Hover) --[[ Line: 680 ]]
+	local UseResult19 = ReactModule.useCallback(function(Hover)
 		-- upvalues: UseStateResult2 (copy), ControlStateModule (upval)
 		UseStateResult2(Hover == ControlStateModule.Hover)
 	end, {})
-	local UseResult20 = ReactModule.useCallback(function(p2, Current) --[[ Line: 684 ]]
+	local UseResult20 = ReactModule.useCallback(function(p2, Current)
 		-- upvalues: UseRefResult6 (copy), WithDefaultsModuleResult (copy)
 		UseRefResult6.current = Current
 		
@@ -477,13 +477,13 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 			WithDefaultsModuleResult.onDragStarted(p2, Current)
 		end
 	end, { WithDefaultsModuleResult.onDragStarted })
-	local UseResult21 = ReactModule.useCallback(function(p2, p3) --[[ Line: 691 ]]
+	local UseResult21 = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: WithDefaultsModuleResult (copy)
 		if WithDefaultsModuleResult.onDrag then
 			WithDefaultsModuleResult.onDrag(p2, p3)
 		end
 	end, { WithDefaultsModuleResult.onDrag })
-	local UseResult22 = ReactModule.useCallback(function(p2, Current) --[[ Line: 697 ]]
+	local UseResult22 = ReactModule.useCallback(function(p2, Current)
 		-- upvalues: UseRefResult6 (copy), UseResult5 (copy), UseResult6 (copy), UseStateResult2_1 (copy), WithDefaultsModuleResult (copy)
 		if UseRefResult6.current == Current then
 			UseResult5()
@@ -502,20 +502,20 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 		UseResult6
 	})
 	local MultiLineTextHeightModule1 = if WithDefaultsModuleResult.maxLines then GetMultiLineTextHeightModule(FontSize, WithDefaultsModuleResult.maxLines, LineHeight) else nil
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 714 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy), MultiLineTextHeightModule (copy), UseStateResult5 (copy), MultiLineTextHeightModule1 (copy), GetMultiLineTextHeightModule (upval), FontSize (copy), UseStateResult7 (copy), LineHeight (copy)
 		return if WithDefaultsModuleResult.maxLines then math.clamp(math.max(MultiLineTextHeightModule, UseStateResult5), MultiLineTextHeightModule, MultiLineTextHeightModule1) else GetMultiLineTextHeightModule(FontSize, UseStateResult7, LineHeight)
 	end, {
 		WithDefaultsModuleResult.maxLines, MultiLineTextHeightModule, UseStateResult5,
 		MultiLineTextHeightModule1, FontSize, UseStateResult7, LineHeight
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function(): UDim --[[ Line: 736 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function(): UDim
 		-- upvalues: GetMultiLineTextHeightModule (upval), FontSize (copy), LineHeight (copy), Container (copy), ScaledCeiled (copy)
 		local MultiLineTextHeightModule = GetMultiLineTextHeightModule(FontSize, 1, LineHeight)
 		
 		return UDim.new(0, (math.ceil((MultiLineTextHeightModule + math.round(math.round((Container.minHeight - ScaledCeiled - MultiLineTextHeightModule) * 2) / 2) + ScaledCeiled) / 2)))
 	end, { Container.minHeight, ScaledCeiled, FontSize, LineHeight })
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 745 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy), UseMemoResult1 (copy), RadiusModule (upval), Container (copy)
 		return if WithDefaultsModuleResult.maxLines then UseMemoResult1 elseif WithDefaultsModuleResult.radius == RadiusModule.Circle then UDim.new(0, (math.ceil(Container.minHeight / 2))) else nil
 	end, {
@@ -524,7 +524,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 		Container.minHeight,
 		WithDefaultsModuleResult.radius
 	})
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 755 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult2 (copy), Container (copy), UseTokensModuleResult (copy)
 		return {
 			radius = if UseMemoResult2 then UseMemoResult2 else UDim.new(0, Container.radius),
@@ -532,7 +532,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 			borderWidth = UseTokensModuleResult.Stroke.Thick
 		}
 	end, { UseTokensModuleResult, Container.radius, UseMemoResult2 })
-	local UseMemoResult4, UseMemoResult2_1 = ReactModule.useMemo(function() --[[ Line: 764 ]]
+	local UseMemoResult4, UseMemoResult2_1 = ReactModule.useMemo(function()
 		-- upvalues: Container (copy), ScaledCeiled (copy), GetMultiLineTextHeightModule (upval), FontSize (copy), LineHeight (copy), UseMemoResult (copy)
 		local RoundedRatio = math.round((Container.minHeight - ScaledCeiled - GetMultiLineTextHeightModule(FontSize, 1, LineHeight)) * 2) / 2
 		
@@ -556,25 +556,25 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 	local YOffset1 = if IsTextPaddingOnParent then Largest + NewOffset else Largest
 	local _UDim2 = UDim2.new(1, 0, 0, Largest)
 	local _UDim2_1 = UDim2.new(1, 0, 0, YOffset)
-	ReactModule.useEffect(function() --[[ Line: 812 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: WithDefaultsModuleResult (copy), ChatTextAreaDebugModule (upval), UseStateResult7 (copy), UseMemoResult2_1 (copy)
 		if WithDefaultsModuleResult.maxLines then
 			ChatTextAreaDebugModule.log("layout", `lineCount={UseStateResult7} borderFrameHeight={UseMemoResult2_1}`)
 		end
-		return function() --[[ Line: 816 ]] end
+		return function() end
 	end, {
 		UseStateResult7,
 		UseMemoResult2_1,
 		WithDefaultsModuleResult.maxLines
 	})
-	local UseMemoResult6 = ReactModule.useMemo(function() --[[ Line: 819 ]]
+	local UseMemoResult6 = ReactModule.useMemo(function()
 		-- upvalues: IsUseStateResultAbove (copy), WithDefaultsModuleResult (copy)
 		return if IsUseStateResultAbove then {
 			FillDirection = Enum.FillDirection.Vertical,
 			ItemLineAlignment = if WithDefaultsModuleResult.maxLines == nil then Enum.ItemLineAlignment.Center else Enum.ItemLineAlignment.Start
 		} else nil
 	end, { IsUseStateResultAbove, WithDefaultsModuleResult.maxLines })
-	local UseMemoResult7 = ReactModule.useMemo(function() --[[ Line: 830 ]]
+	local UseMemoResult7 = ReactModule.useMemo(function()
 		-- upvalues: IsUseStateResultAbove (copy)
 		return if IsUseStateResultAbove then {
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
@@ -583,7 +583,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 			VerticalScrollBarInset = Enum.ScrollBarInset.Always
 		} else nil
 	end, { IsUseStateResultAbove })
-	local UseResult23 = ReactModule.useCallback(function(Label) --[[ Line: 841 ]]
+	local UseResult23 = ReactModule.useCallback(function(Label)
 		-- upvalues: UseRefResult3 (copy), UseRefResult2 (copy), TruncateTextToCursorModule (upval), UseMemoResult4 (copy)
 		local Current = UseRefResult3.current
 		local Current1 = UseRefResult2.current
@@ -603,7 +603,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 			Current.CanvasPosition += Vector2.new(0, Y1 - YDelta)
 		end
 	end, { UseMemoResult4 })
-	local UseResult24 = ReactModule.useCallback(function(Current) --[[ Line: 874 ]]
+	local UseResult24 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult3 (copy), UseRefResult7 (copy)
 		if Current ~= nil then
 			UseRefResult3.current = Current
@@ -613,12 +613,12 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 			return
 		end
 	end, {})
-	local UseResult25 = ReactModule.useCallback(function(TextBox) --[[ Line: 884 ]]
+	local UseResult25 = ReactModule.useCallback(function(TextBox)
 		-- upvalues: UseRefResult4 (copy)
 		if TextBox then
 			TextBox.Text = UseRefResult4.current
 			UseRefResult4.current = ""
-			task.delay(0, function() --[[ Line: 888 ]]
+			task.delay(0, function()
 				-- upvalues: TextBox (copy)
 				if TextBox.Parent ~= nil then
 					TextBox:CaptureFocus()
@@ -626,11 +626,11 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 			end)
 		end
 	end, {})
-	local UseResult26 = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 896 ]]
+	local UseResult26 = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: UseRefResult7 (copy)
 		UseRefResult7.current = ScrollFrame.CanvasPosition
 	end, {})
-	local UseMemoResult8 = ReactModule.useMemo(function() --[[ Line: 901 ]]
+	local UseMemoResult8 = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy), ReactModule (upval), UseResult20 (copy), UseResult21 (copy), UseResult22 (copy), UseStateResult1 (copy), IsDisabled (copy)
 		return if WithDefaultsModuleResult.onDragStarted or WithDefaultsModuleResult.onDrag or WithDefaultsModuleResult.onDragEnded then ReactModule.createElement("UIDragDetector", {
 			DragStyle = Enum.UIDragDetectorDragStyle.Scriptable,
@@ -646,7 +646,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 	})
 	local UseBindableModuleResult = UseBindableModule(WithDefaultsModuleResult.horizontalPadding and WithDefaultsModuleResult.horizontalPadding.left or UDim.new(0, 0))
 	local UseBindableModuleResult1 = UseBindableModule(WithDefaultsModuleResult.horizontalPadding and WithDefaultsModuleResult.horizontalPadding.right or UDim.new(0, 0))
-	local UseMemoResult9 = ReactModule.useMemo(function() --[[ Line: 932 ]]
+	local UseMemoResult9 = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy), Container (copy), UseTokensModuleResult (copy)
 		return if WithDefaultsModuleResult.hasClearButton then UDim2.fromOffset(0, (Container.minHeight - UseTokensModuleResult.Stroke.Standard) / 2) else nil
 	end, {
@@ -674,11 +674,11 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 		} else nil,
 		cornerRadius = UseMemoResult2,
 		padding = {
-			left = UseBindableModuleResult:map(function(p2): UDim --[[ Line: 969 ]]
+			left = UseBindableModuleResult:map(function(p2): UDim
 				-- upvalues: Standard (copy)
 				return UDim.new(0, Standard) + p2
 			end),
-			right = if WithDefaultsModuleResult.trailingElement == nil and WithDefaultsModuleResult.hasClearButton then UDim.new(0, Standard) else UseBindableModuleResult1:map(function(p2): UDim --[[ Line: 975 ]]
+			right = if WithDefaultsModuleResult.trailingElement == nil and WithDefaultsModuleResult.hasClearButton then UDim.new(0, Standard) else UseBindableModuleResult1:map(function(p2): UDim
 				-- upvalues: Standard (copy)
 				return UDim.new(0, Standard) + p2
 			end),
@@ -738,7 +738,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 					ref = UseRefResult,
 					tag = `{UseStyleTagsModuleResult or ""} data-testid={WithDefaultsModuleResult.testId}--textbox`,
 					Size = if IsUseStateResultAbove then _UDim2 else nil,
-					automaticSize = if WithDefaultsModuleResult.maxLines then nil elseif HasMaxLines then if IsUseStateResultAbove and not UseStateResult3 and UseStateResult6 ~= "" then Enum.AutomaticSize.Y else nil else MapBindableModule(WithDefaultsModuleResult.text, function(p2) --[[ Line: 1052 ]]
+					automaticSize = if WithDefaultsModuleResult.maxLines then nil elseif HasMaxLines then if IsUseStateResultAbove and not UseStateResult3 and UseStateResult6 ~= "" then Enum.AutomaticSize.Y else nil else MapBindableModule(WithDefaultsModuleResult.text, function(p2)
 						-- upvalues: IsUseStateResultAbove (copy), UseStateResult3 (copy)
 						return if IsUseStateResultAbove and not UseStateResult3 and p2 ~= "" then Enum.AutomaticSize.Y else nil
 					end),
@@ -787,7 +787,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 197 
 			LayoutOrder = 3,
 			isDisabled = IsDisabled,
 			GroupTransparency = if IsDisabled then ConstantsModule.DISABLED_TRANSPARENCY else nil,
-			Visible = MapBindableModule(WithDefaultsModuleResult.text, function(p2): boolean --[[ Line: 1125 ]]
+			Visible = MapBindableModule(WithDefaultsModuleResult.text, function(p2): boolean
 				return p2 ~= ""
 			end),
 			tag = UseTextInputVariantsModuleResult.clearButton.tag

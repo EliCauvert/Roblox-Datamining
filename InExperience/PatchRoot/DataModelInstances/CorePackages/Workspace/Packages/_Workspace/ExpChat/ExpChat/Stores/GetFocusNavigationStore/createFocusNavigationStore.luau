@@ -6,7 +6,7 @@ local IsSelectionWithinVisibleModule = require(script.Parent.isSelectionWithinVi
 local ChatFocusRequestSignalModule = require(ExpChat.ShortcutNav.chatFocusRequestSignal)
 local FFlagExpChatGenericChatFocusModule = require(ExpChat.Flags.FFlagExpChatGenericChatFocus)
 
-return function() --[[ Line: 57 ]]
+return function()
 	-- upvalues: CreateSignalFunction (copy), IsSelectionWithinVisibleModule (copy), GuiService (copy), FFlagExpChatGenericChatFocusModule (copy), ChatFocusRequestSignalModule (copy), UserInputService (copy)
 	local Signal, Signal2 = CreateSignalFunction(false)
 	local Signal1, Signal2_1 = CreateSignalFunction(false)
@@ -18,11 +18,11 @@ return function() --[[ Line: 57 ]]
 	
 	return {
 		getChatInputBarFocused = Signal,
-		getIsChatFocused = function() --[[ Line: 71 ]]
+		getIsChatFocused = function()
 			-- upvalues: IsSelectionWithinVisibleModule (upval), GuiService (upval), ChatRoot (ref)
 			return IsSelectionWithinVisibleModule(GuiService.SelectedCoreObject, ChatRoot)
 		end,
-		getIsTabBarFocused = function() --[[ Line: 74 ]]
+		getIsTabBarFocused = function()
 			-- upvalues: IsSelectionWithinVisibleModule (upval), GuiService (upval), TabBarRoot (ref)
 			return IsSelectionWithinVisibleModule(GuiService.SelectedCoreObject, TabBarRoot)
 		end,
@@ -30,7 +30,7 @@ return function() --[[ Line: 57 ]]
 		getTabNavFocusRequestTime = Signal3,
 		getTabNavFocusTabName = Signal4,
 		getChatInputBarFocusRequestTime = Signal5,
-		focusChatInputBar = function() --[[ Line: 78 ]]
+		focusChatInputBar = function()
 			-- upvalues: Signal2 (copy), FFlagExpChatGenericChatFocusModule (upval), ChatFocusRequestSignalModule (upval)
 			Signal2(true)
 			
@@ -38,7 +38,7 @@ return function() --[[ Line: 57 ]]
 				ChatFocusRequestSignalModule:fire()
 			end
 		end,
-		unfocusChatInputBar = function() --[[ Line: 86 ]]
+		unfocusChatInputBar = function()
 			-- upvalues: Signal2 (copy), FFlagExpChatGenericChatFocusModule (upval), UserInputService (upval), ChatRoot (ref), GuiService (upval)
 			Signal2(false)
 			
@@ -53,30 +53,30 @@ return function() --[[ Line: 57 ]]
 				end
 			end
 		end,
-		setChatRoot = function(Value) --[[ Line: 116 ]]
+		setChatRoot = function(Value)
 			-- upvalues: ChatRoot (ref)
 			ChatRoot = Value
 		end,
-		setTabBarRoot = function(Value) --[[ Line: 119 ]]
+		setTabBarRoot = function(Value)
 			-- upvalues: TabBarRoot (ref)
 			TabBarRoot = Value
 		end,
 		setTabBarVisible = Signal2_1,
-		requestTabNavFocus = function(p1, p2) --[[ Line: 123 ]]
+		requestTabNavFocus = function(p1, p2)
 			-- upvalues: Signal2_3 (copy), Signal2_2 (copy)
 			Signal2_3(p1)
 			Signal2_2(p2 or os.clock())
 		end,
-		clearTabNavFocusRequest = function() --[[ Line: 127 ]]
+		clearTabNavFocusRequest = function()
 			-- upvalues: Signal2_3 (copy), Signal2_2 (copy)
 			Signal2_3(nil)
 			Signal2_2(nil)
 		end,
-		requestChatInputBarFocus = function(p1) --[[ Line: 131 ]]
+		requestChatInputBarFocus = function(p1)
 			-- upvalues: Signal2_4 (copy)
 			Signal2_4(p1 or os.clock())
 		end,
-		clearChatInputBarFocusRequest = function() --[[ Line: 134 ]]
+		clearChatInputBarFocusRequest = function()
 			-- upvalues: Signal2_4 (copy)
 			Signal2_4(nil)
 		end

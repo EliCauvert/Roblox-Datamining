@@ -53,7 +53,7 @@ local FIntBlackbirdUpsellMinPriceForDiscountInclusive = SharedFlagsModule.FIntBl
 local FIntBlackbirdUpsellMaxPriceForDiscountInclusive = SharedFlagsModule.FIntBlackbirdUpsellMaxPriceForDiscountInclusive
 local _ = require(script.Parent.BulkPurchaseRequest)
 
-return function() --[[ Line: 66 | Named "useBulkPurchaseRequestProps" ]]
+return function()
 	-- upvalues: UseDispatchFunction (copy), UseSelectorFunction (copy), SelectBulkPurchaseRequestStateModule (copy), SelectPurchaseResultsModule (copy), SelectOrderRequestModule (copy), SelectOptionsModule (copy), SelectItemDataModule (copy), FFlagAXAddPlusUpsellToBulkPurchaseModule (copy), ReactModule (copy), RobloxSubscriptionSignals (copy), SignalsReactModule (copy), MarketplaceService (copy), BulkPurchaseEndedModule (copy), BulkPurchaseDisablePurchaseModule (copy), IsErrorReasonContainsEconomicRestrictionsFunction (copy), HandleEconomicRestrictionErrorModule (copy), GetItemResultsFromResponseModule (copy), GetCommonItemStatusModule (copy), BulkPurchaseSucceededModule (copy), BulkPurchasePromptStateEnumModule (copy), FFlagBulkPurchaseReportCountersModule (copy), ReportBulkPurchaseRequestCountersModule (copy), BulkPurchaseCountersEnumModule (copy), BulkPurchaseFailedModule (copy), ItemStatusToErrorCodeMapModule (copy), ErrorCodeEnumModule (copy), GetPaymentPlatformModule (copy), PaymentPlatformEnumModule (copy), FixBulkPurchaseInExperienceBuyRobux (copy), WebViewUtilsModule (copy), GetRobuxStoreUrlModule (copy), FixBuyRobuxForAndroid (copy), HttpService (copy), BrowserService (copy), UseAppPolicyFunction (copy), GetRobloxSubscriptionProductsFunction (copy), MutedErrorFunction (copy), FIntBlackbirdUpsellMinPriceForDiscountInclusive (copy), FIntBlackbirdUpsellMaxPriceForDiscountInclusive (copy), RobloxSubscriptionPurchaseAppModule (copy), RobloxSubscriptionFlowCompleteReason (copy), SurfaceName (copy), SurfaceContext (copy), PurchasePromptModule (copy), FFlagAXAddOffersToBulkPurchaseModule (copy), FFlagFixVP8143Module (copy), RunService (copy), GetGuiObjectIsObscuredModule (copy), FixBulkPurchaseStarterGuiRename (copy), StarterGui (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseSelectorResult = UseSelectorFunction(SelectBulkPurchaseRequestStateModule)
@@ -72,18 +72,18 @@ return function() --[[ Line: 66 | Named "useBulkPurchaseRequestProps" ]]
 	end
 	local UseSignalStateResult = if FFlagAXAddPlusUpsellToBulkPurchaseModule then SignalsReactModule.useSignalState(RobloxSubscriptionSignals.get().getHasRobloxSubscription) else nil
 	
-	local function OnClose() --[[ Line: 90 ]]
+	local function OnClose()
 		-- upvalues: MarketplaceService (upval), UseSelectorResult1 (copy), UseDispatchResult (copy), BulkPurchaseEndedModule (upval)
 		MarketplaceService:signalPromptBulkPurchaseFinished(2, UseSelectorResult1)
 		UseDispatchResult(BulkPurchaseEndedModule())
 	end
 	
-	local function v60() --[[ Line: 97 ]]
+	local function v60()
 		-- upvalues: FFlagAXAddPlusUpsellToBulkPurchaseModule (upval), UseDispatchResult (copy), BulkPurchaseDisablePurchaseModule (upval), MarketplaceService (upval), UseSelectorResult2 (copy), UseSelectorResult3 (copy), IsErrorReasonContainsEconomicRestrictionsFunction (upval), HandleEconomicRestrictionErrorModule (upval), GetItemResultsFromResponseModule (upval), UseSelectorResult4 (copy), GetCommonItemStatusModule (upval), BulkPurchaseSucceededModule (upval), BulkPurchasePromptStateEnumModule (upval), FFlagBulkPurchaseReportCountersModule (upval), ReportBulkPurchaseRequestCountersModule (upval), BulkPurchaseCountersEnumModule (upval), BulkPurchaseFailedModule (upval), ItemStatusToErrorCodeMapModule (upval), ErrorCodeEnumModule (upval)
 		if FFlagAXAddPlusUpsellToBulkPurchaseModule then
 			UseDispatchResult(BulkPurchaseDisablePurchaseModule())
 		end
-		local Success, Result = pcall(function() --[[ Line: 101 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: MarketplaceService (upval), UseSelectorResult2 (upval), UseSelectorResult3 (upval)
 			return MarketplaceService:PerformBulkPurchase(UseSelectorResult2, UseSelectorResult3)
 		end)
@@ -126,7 +126,7 @@ return function() --[[ Line: 66 | Named "useBulkPurchaseRequestProps" ]]
 		end
 	end
 	
-	local function v61() --[[ Line: 144 ]]
+	local function v61()
 		-- upvalues: GetPaymentPlatformModule (upval), PaymentPlatformEnumModule (upval), FixBulkPurchaseInExperienceBuyRobux (upval), WebViewUtilsModule (upval), GetRobuxStoreUrlModule (upval), FixBuyRobuxForAndroid (upval), HttpService (upval), BrowserService (upval), UseDispatchResult (copy), BulkPurchaseEndedModule (upval), BulkPurchaseFailedModule (upval), ErrorCodeEnumModule (upval)
 		local PaymentPlatformModule = GetPaymentPlatformModule()
 		
@@ -150,20 +150,20 @@ return function() --[[ Line: 66 | Named "useBulkPurchaseRequestProps" ]]
 	local UseResult = nil
 	
 	if FFlagAXAddPlusUpsellToBulkPurchaseModule then
-		local UseAppPolicyResult = UseAppPolicyFunction(function(p1) --[[ Line: 172 ]]
+		local UseAppPolicyResult = UseAppPolicyFunction(function(p1)
 			return p1.getDisableBlackbirdEntrypoints()
 		end)
-		ReactModule.useEffect(function() --[[ Line: 176 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: GetRobloxSubscriptionProductsFunction (upval), Callback (ref), MutedErrorFunction (upval)
-			GetRobloxSubscriptionProductsFunction():andThen(function(Result) --[[ Line: 178 ]]
+			GetRobloxSubscriptionProductsFunction():andThen(function(Result)
 				-- upvalues: Callback (upval)
 				Callback(Result)
-			end):catch(function(Err) --[[ Line: 181 ]]
+			end):catch(function(Err)
 				-- upvalues: MutedErrorFunction (upval)
 				MutedErrorFunction("BulkPurchasePrompt", "Failed to fetch Roblox subscription products: " .. tostring(Err))
 			end)
 		end, {})
-		UseMemoResult = ReactModule.useMemo(function(): boolean --[[ Line: 187 ]]
+		UseMemoResult = ReactModule.useMemo(function(): boolean
 			-- upvalues: UseSignalStateResult (ref), UseAppPolicyResult (copy), UseSelectorResult (copy), FIntBlackbirdUpsellMinPriceForDiscountInclusive (upval), FIntBlackbirdUpsellMaxPriceForDiscountInclusive (upval)
 			if UseSignalStateResult then
 				return false
@@ -182,13 +182,13 @@ return function() --[[ Line: 66 | Named "useBulkPurchaseRequestProps" ]]
 			UseSignalStateResult,
 			UseSelectorResult.items
 		})
-		UseResult = ReactModule.useCallback(function() --[[ Line: 214 ]]
+		UseResult = ReactModule.useCallback(function()
 			-- upvalues: FFlagBulkPurchaseReportCountersModule (upval), ReportBulkPurchaseRequestCountersModule (upval), BulkPurchaseCountersEnumModule (upval), RobloxSubscriptionPurchaseAppModule (upval), RobloxSubscriptionFlowCompleteReason (upval), BatchPurchaseAuthToken (ref), UseDispatchResult (copy), BulkPurchaseDisablePurchaseModule (upval), MarketplaceService (upval), BulkPurchaseFailedModule (upval), ErrorCodeEnumModule (upval), SurfaceName (upval), SurfaceContext (upval)
 			if FFlagBulkPurchaseReportCountersModule then
 				ReportBulkPurchaseRequestCountersModule(BulkPurchaseCountersEnumModule.BulkPurchasePlusUpsellInitatedCounter)
 			end
 			RobloxSubscriptionPurchaseAppModule.initiateRobloxSubscriptionPurchase({ showBackButton = false }, {
-				onFlowComplete = function(UpsellPurchaseFailed) --[[ Line: 221 ]]
+				onFlowComplete = function(UpsellPurchaseFailed)
 					-- upvalues: RobloxSubscriptionFlowCompleteReason (upval), BatchPurchaseAuthToken (upval), UseDispatchResult (upval), BulkPurchaseDisablePurchaseModule (upval), FFlagBulkPurchaseReportCountersModule (upval), ReportBulkPurchaseRequestCountersModule (upval), BulkPurchaseCountersEnumModule (upval), MarketplaceService (upval), BulkPurchaseFailedModule (upval), ErrorCodeEnumModule (upval)
 					if UpsellPurchaseFailed == RobloxSubscriptionFlowCompleteReason.UpsellPurchaseSucceeded and BatchPurchaseAuthToken then
 						UseDispatchResult(BulkPurchaseDisablePurchaseModule())
@@ -196,7 +196,7 @@ return function() --[[ Line: 66 | Named "useBulkPurchaseRequestProps" ]]
 						if FFlagBulkPurchaseReportCountersModule then
 							ReportBulkPurchaseRequestCountersModule(BulkPurchaseCountersEnumModule.BulkPurchasePlusUpsellSucceededCounter)
 						end
-						if not pcall(function() --[[ Line: 233 ]]
+						if not pcall(function()
 							-- upvalues: MarketplaceService (upval), BatchPurchaseAuthToken (upval)
 							MarketplaceService:RefreshBulkPurchase(BatchPurchaseAuthToken)
 						end) then
@@ -211,7 +211,7 @@ return function() --[[ Line: 66 | Named "useBulkPurchaseRequestProps" ]]
 		end, { UseDispatchResult, BatchPurchaseAuthToken })
 		BlackbirdUpsellBannerProductInfo = PurchasePromptModule.Utils.getBlackbirdUpsellBannerProductInfo(v1)
 	end
-	local UseResult1 = if FFlagAXAddOffersToBulkPurchaseModule then ReactModule.useCallback(function(p1) --[[ Line: 264 ]]
+	local UseResult1 = if FFlagAXAddOffersToBulkPurchaseModule then ReactModule.useCallback(function(p1)
 		-- upvalues: UseSelectorResult (copy), MarketplaceService (upval), BatchPurchaseAuthToken (ref)
 		local List = {}
 		
@@ -227,7 +227,7 @@ return function() --[[ Line: 66 | Named "useBulkPurchaseRequestProps" ]]
 				end
 			end
 		end
-		pcall(function() --[[ Line: 280 ]]
+		pcall(function()
 			-- upvalues: MarketplaceService (upval), BatchPurchaseAuthToken (upval), List (copy)
 			MarketplaceService:RefreshBulkPurchase(BatchPurchaseAuthToken, { unselectedOffers = List })
 		end)
@@ -239,9 +239,9 @@ return function() --[[ Line: 66 | Named "useBulkPurchaseRequestProps" ]]
 	if FFlagFixVP8143Module then
 		UseRefResult = ReactModule.useRef(nil)
 		v2, UseStateResult2 = ReactModule.useState(true)
-		ReactModule.useEffect(function() --[[ Line: 293 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: RunService (upval), UseRefResult (ref), GetGuiObjectIsObscuredModule (upval), FixBulkPurchaseStarterGuiRename (upval), StarterGui (upval), UseStateResult2 (ref)
-			local HeartbeatConnection = RunService.Heartbeat:Connect(function() --[[ Line: 294 ]]
+			local HeartbeatConnection = RunService.Heartbeat:Connect(function()
 				-- upvalues: UseRefResult (upval), GetGuiObjectIsObscuredModule (upval), FixBulkPurchaseStarterGuiRename (upval), StarterGui (upval), UseStateResult2 (upval)
 				if UseRefResult.current and typeof(UseRefResult.current) == "Instance" and UseRefResult.current:IsA("GuiObject") then
 					local DevConsoleVisibleCore = if FixBulkPurchaseStarterGuiRename then StarterGui:GetCore("DevConsoleVisible") else game.StarterGui:GetCore("DevConsoleVisible")
@@ -249,7 +249,7 @@ return function() --[[ Line: 66 | Named "useBulkPurchaseRequestProps" ]]
 				end
 			end)
 			
-			return function() --[[ Line: 307 ]]
+			return function()
 				-- upvalues: HeartbeatConnection (copy)
 				HeartbeatConnection:Disconnect()
 			end

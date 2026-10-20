@@ -21,7 +21,7 @@ local UnibarStyle = require(CorePackages.Workspace.Packages.Chrome).UnibarStyle
 local UseIsPlaytestModeModule = require(Chrome.ChromeShared.Hooks.useIsPlaytestMode)
 local FFlagEnablePlaytestModeUnibar = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnablePlaytestModeUnibar
 local MappedSignal = ChromeUtilsModule.MappedSignal
-local NewResult = if FFlagProactiveVoiceRestrictionsUFRModule then ChromeUtilsModule.ObservableValue.new(false) else MappedSignal.new(Default.muteChanged.Event, function(): boolean --[[ Line: 43 ]]
+local NewResult = if FFlagProactiveVoiceRestrictionsUFRModule then ChromeUtilsModule.ObservableValue.new(false) else MappedSignal.new(Default.muteChanged.Event, function(): boolean
 	-- upvalues: Default (copy)
 	return Default.localMuted == false
 end)
@@ -30,7 +30,7 @@ local NewResult1 = require(RobloxGui.Modules.SelfView.Analytics).new()
 local ChromeIntegrationsToggleMic = if require(RobloxGui.Modules.Flags.GetFFlagEnableVoiceMuteAnalytics)() then VoiceAnalyticsModule.new(RbxAnalyticsService, "Chrome.Integrations.ToggleMic") else nil
 local RegisterResult = nil
 
-local function handleRestrictedActivation(): boolean --[[ Line: 58 ]]
+local function handleRestrictedActivation(): boolean
 	-- upvalues: Default (copy)
 	local VoiceRestrictionState = Default:GetVoiceRestrictionState(false)
 	
@@ -40,7 +40,7 @@ local function handleRestrictedActivation(): boolean --[[ Line: 58 ]]
 	return VoiceRestrictionState ~= "normal"
 end
 
-local function Activated(_) --[[ Line: 66 ]]
+local function Activated(_)
 	-- upvalues: FFlagProactiveVoiceRestrictionsUFRModule (copy), Default (copy), MicConsumerRegistry (copy), NewResult1 (copy), ChromeIntegrationsToggleMic (ref)
 	if FFlagProactiveVoiceRestrictionsUFRModule then
 		local VoiceRestrictionState = Default:GetVoiceRestrictionState(false)
@@ -68,7 +68,7 @@ local function Activated(_) --[[ Line: 66 ]]
 	end
 end
 
-local function Activated1(_) --[[ Line: 88 ]]
+local function Activated1(_)
 	-- upvalues: FFlagProactiveVoiceRestrictionsUFRModule (copy), Default (copy)
 	if FFlagProactiveVoiceRestrictionsUFRModule then
 		local VoiceRestrictionState = Default:GetVoiceRestrictionState(false)
@@ -81,7 +81,7 @@ local function Activated1(_) --[[ Line: 88 ]]
 	Default:RejoinPreviousChannel()
 end
 
-local function Activated2(_) --[[ Line: 95 ]]
+local function Activated2(_)
 	-- upvalues: FFlagProactiveVoiceRestrictionsUFRModule (copy), Default (copy)
 	if FFlagProactiveVoiceRestrictionsUFRModule then
 		local VoiceRestrictionState = Default:GetVoiceRestrictionState(false)
@@ -101,7 +101,7 @@ RegisterResult = require(Chrome.Service):register({
 	activated = Activated,
 	isActivated = NewResult,
 	components = {
-		Icon = function(_) --[[ Line: 112 ]]
+		Icon = function(_)
 			-- upvalues: FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), FFlagEnablePlaytestModeUnibar (copy), UseIsPlaytestModeModule (copy), MicConsumerRegistry (copy), Default (copy), ReactModule (copy), FFlagProactiveVoiceRestrictionsUFRModule (copy), SignalsReactModule (copy), FoundationModule (copy), VoiceIndicatorFuncModule (copy), Players (copy), RedVoiceDotModule (copy)
 			local ICONSIZE = if FFlagTokenizeUnibarConstantsWithStyleProvider then UnibarStyle.use().ICON_SIZE else ConstantsModule.ICON_SIZE
 			local UseIsPlaytestModeModuleResult = if FFlagEnablePlaytestModeUnibar then UseIsPlaytestModeModule() else nil
@@ -114,25 +114,25 @@ RegisterResult = require(Chrome.Service):register({
 				local UseStateResult, UseStateResult2 = ReactModule.useState((if MicManager then MicManager.localMuted else nil) ~= false)
 				local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 				local _, UseStateResult2_1 = ReactModule.useState(0)
-				ReactModule.useEffect(function() --[[ Line: 133 ]]
+				ReactModule.useEffect(function()
 					-- upvalues: MicManager (copy), UseStateResult2 (copy), UseBindingResult2 (copy), UseStateResult2_1 (copy)
 					if not MicManager then return end
-					local EventConnection = MicManager.muteChanged.Event:Connect(function(Enabled) --[[ Line: 137 ]]
+					local EventConnection = MicManager.muteChanged.Event:Connect(function(Enabled)
 						-- upvalues: UseStateResult2 (upval)
 						UseStateResult2(Enabled ~= false)
 					end)
-					local EventConnection1 = MicManager.levelChanged.Event:Connect(function(p1) --[[ Line: 140 ]]
+					local EventConnection1 = MicManager.levelChanged.Event:Connect(function(p1)
 						-- upvalues: UseBindingResult2 (upval)
 						UseBindingResult2(p1)
 					end)
-					local EventConnection2 = MicManager.hasConsumersChanged.Event:Connect(function() --[[ Line: 143 ]]
+					local EventConnection2 = MicManager.hasConsumersChanged.Event:Connect(function()
 						-- upvalues: UseStateResult2_1 (upval)
-						UseStateResult2_1(function(p1: number): number --[[ Line: 144 ]]
+						UseStateResult2_1(function(p1: number): number
 							return p1 + 1
 						end)
 					end)
 					
-					return function() --[[ Line: 148 ]]
+					return function()
 						-- upvalues: EventConnection (copy), EventConnection1 (copy), EventConnection2 (copy)
 						EventConnection:Disconnect()
 						EventConnection1:Disconnect()
@@ -140,7 +140,7 @@ RegisterResult = require(Chrome.Service):register({
 					end
 				end, { MicManager })
 				local Muted: string = if UseStateResult then "Muted" else "Unmuted"
-				local MapResult = UseBindingResult:map(function(p1) --[[ Line: 156 ]]
+				local MapResult = UseBindingResult:map(function(p1)
 					-- upvalues: Default (upval), Muted (copy), MicDark (copy)
 					return Default:GetIcon(Muted .. tostring(p1), MicDark)
 				end)
@@ -154,7 +154,7 @@ RegisterResult = require(Chrome.Service):register({
 					})
 				end
 			end
-			local UseSignalStateResult = if FFlagProactiveVoiceRestrictionsUFRModule then SignalsReactModule.useSignalState(function(p1) --[[ Line: 174 ]]
+			local UseSignalStateResult = if FFlagProactiveVoiceRestrictionsUFRModule then SignalsReactModule.useSignalState(function(p1)
 				-- upvalues: Default (upval)
 				return Default:GetVoiceRestrictionState(p1)
 			end) else "normal"
@@ -181,12 +181,12 @@ RegisterResult = require(Chrome.Service):register({
 	}
 })
 
-local function _(p1) --[[ Line: 211 | Named "updateMicActivated" ]]
+local function _(p1)
 	-- upvalues: NewResult (copy), Default (copy)
 	NewResult:set(p1 == "normal" and Default.localMuted == false)
 end
 
-local _ = function(): boolean --[[ Line: 215 | Named "applyRestrictionState" ]]
+local _ = function(): boolean
 	-- upvalues: Default (copy), RegisterResult (ref), handleRestrictedActivation (copy)
 	if Default:GetVoiceRestrictionState(false) == "normal" then
 		return false
@@ -198,9 +198,9 @@ local _ = function(): boolean --[[ Line: 215 | Named "applyRestrictionState" ]]
 	end
 end
 
-local function observeMicPresentation() --[[ Line: 228 ]]
+local function observeMicPresentation()
 	-- upvalues: SignalsModule (copy), Default (copy), NewResult (copy), RegisterResult (ref), handleRestrictedActivation (copy)
-	local Effect = SignalsModule.createEffect(function(p1) --[[ Line: 229 ]]
+	local Effect = SignalsModule.createEffect(function(p1)
 		-- upvalues: Default (upval), NewResult (upval), RegisterResult (upval), handleRestrictedActivation (upval)
 		NewResult:set(Default:GetVoiceRestrictionState(p1) == "normal" and Default.localMuted == false)
 		
@@ -211,19 +211,19 @@ local function observeMicPresentation() --[[ Line: 228 ]]
 			return
 		end
 	end)
-	local EventConnection = Default.muteChanged.Event:Connect(function() --[[ Line: 234 ]]
+	local EventConnection = Default.muteChanged.Event:Connect(function()
 		-- upvalues: Default (upval), NewResult (upval)
 		NewResult:set(Default:GetVoiceRestrictionState(false) == "normal" and Default.localMuted == false)
 	end)
 	
-	return function() --[[ Line: 238 ]]
+	return function()
 		-- upvalues: Effect (copy), EventConnection (copy)
 		Effect()
 		EventConnection:Disconnect()
 	end
 end
 
-local function applyVoiceUIVisibility() --[[ Line: 244 ]]
+local function applyVoiceUIVisibility()
 	-- upvalues: FFlagProactiveVoiceRestrictionsUFRModule (copy), Default (copy), RegisterResult (ref), handleRestrictedActivation (copy)
 	if FFlagProactiveVoiceRestrictionsUFRModule then
 		local Flag = nil
@@ -245,7 +245,7 @@ local function applyVoiceUIVisibility() --[[ Line: 244 ]]
 	end
 end
 
-local function updateMicAvailabilityFromConsumers() --[[ Line: 256 ]]
+local function updateMicAvailabilityFromConsumers()
 	-- upvalues: FFlagProactiveVoiceRestrictionsUFRModule (copy), Default (copy), RegisterResult (ref), handleRestrictedActivation (copy)
 	if FFlagProactiveVoiceRestrictionsUFRModule then
 		local Flag = nil
@@ -270,7 +270,7 @@ local function updateMicAvailabilityFromConsumers() --[[ Line: 256 ]]
 	end
 end
 
-local function updateVoiceState(_, NewState) --[[ Line: 269 ]]
+local function updateVoiceState(_, NewState)
 	-- upvalues: FFlagProactiveVoiceRestrictionsUFRModule (copy), Default (copy), RegisterResult (ref), handleRestrictedActivation (copy), EnableChromeAudioFocusManagement1 (copy), MicConsumerRegistry (copy), updateMicAvailabilityFromConsumers (copy), Activated1 (copy), Activated2 (copy), Activated (copy)
 	if FFlagProactiveVoiceRestrictionsUFRModule then
 		local Flag = nil
@@ -335,7 +335,7 @@ if require(Chrome.Integrations.isVoiceChatSupported)() then
 	if FFlagProactiveVoiceRestrictionsUFRModule then
 		script.Destroying:Once((observeMicPresentation()))
 	end
-	Default:asyncInit():andThen(function() --[[ Line: 308 ]]
+	Default:asyncInit():andThen(function()
 		-- upvalues: Default (copy), updateVoiceState (copy), EnableChromeAudioFocusManagement1 (copy), applyVoiceUIVisibility (copy), FFlagProactiveVoiceRestrictionsUFRModule (copy), RegisterResult (ref), handleRestrictedActivation (copy)
 		local Service = Default:getService()
 		
@@ -383,13 +383,13 @@ if require(Chrome.Integrations.isVoiceChatSupported)() then
 				end
 			end
 		end
-	end):catch(function() --[[ Line: 324 ]] end)
+	end):catch(function() end)
 end
 if MicConsumerRegistry then
 	local MicManager = Default:GetMicManager()
 	
 	if MicManager and MicManager.hasConsumersChanged then
-		MicManager.hasConsumersChanged.Event:Connect(function() --[[ Line: 330 ]]
+		MicManager.hasConsumersChanged.Event:Connect(function()
 			-- upvalues: updateMicAvailabilityFromConsumers (copy), MicManager (copy)
 			updateMicAvailabilityFromConsumers()
 			MicManager:SetMicIndicatorReady(MicManager:GetConsumerCount() > 0)

@@ -2,22 +2,22 @@
 local ReactModule = require(Foundation.Parent.React)
 local UseScreenModule = require(Foundation.Providers.Overlay.useScreen)
 
-return function() --[[ Line: 7 | Named "useScreenHeight" ]]
+return function()
 	-- upvalues: UseScreenModule (copy), ReactModule (copy)
 	local UseScreenModuleResult = UseScreenModule()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(UseScreenModuleResult and UseScreenModuleResult.AbsoluteSize.Y or 0)
-	ReactModule.useLayoutEffect(function() --[[ Line: 11 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseScreenModuleResult (copy), UseStateResult2 (copy)
 		local Connection = nil
 		
 		if UseScreenModuleResult then
 			UseStateResult2(UseScreenModuleResult.AbsoluteSize.Y)
-			Connection = UseScreenModuleResult:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 16 ]]
+			Connection = UseScreenModuleResult:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: UseStateResult2 (upval), UseScreenModuleResult (upval)
 				UseStateResult2(UseScreenModuleResult.AbsoluteSize.Y)
 			end)
 		end
-		return function() --[[ Line: 21 ]]
+		return function()
 			-- upvalues: Connection (ref)
 			if Connection then
 				Connection:Disconnect()

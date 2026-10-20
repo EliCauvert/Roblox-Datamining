@@ -8,11 +8,11 @@ local UseAppShortcutBarPropsModule = require(script.Parent.useAppShortcutBarProp
 local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 local FFlagEnableStickyShortcutBarOnAllPlatforms = require(Parent.SharedFlags).FFlagEnableStickyShortcutBarOnAllPlatforms
 
-function AppShortcutBarContainer(p1) --[[ Line: 18 ]]
+function AppShortcutBarContainer(p1)
 	-- upvalues: UseAppShortcutBarPropsModule (copy), UseAppPolicyFunction (copy), FFlagEnableStickyShortcutBarOnAllPlatforms (copy), ReactModule (copy), AppStickyShortcutBarModule (copy), CryoModule (copy), AppShortcutBarModule (copy)
 	local UseAppShortcutBarPropsModuleResult = UseAppShortcutBarPropsModule()
 	
-	return if UseAppPolicyFunction(function(p2) --[[ Line: 21 ]]
+	return if UseAppPolicyFunction(function(p2)
 		return p2.getStickyShortcutBarEnabled()
 	end) or FFlagEnableStickyShortcutBarOnAllPlatforms then ReactModule.createElement(AppStickyShortcutBarModule, if FFlagEnableStickyShortcutBarOnAllPlatforms then CryoModule.Dictionary.join(UseAppShortcutBarPropsModuleResult, {
 		isLeftNavVisible = p1.isLeftNavVisible,

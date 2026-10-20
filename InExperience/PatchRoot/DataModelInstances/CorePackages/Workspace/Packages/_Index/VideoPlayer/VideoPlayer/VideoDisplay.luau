@@ -7,7 +7,7 @@ local VideoPlayerWrapperModule = require(script.Parent.VideoPlayerWrapper)
 local VideoLoadingStateModule = require(script.Parent.VideoLoadingState)
 local LuaAppFixStartPlaybackProgress = game:DefineFastFlag("LuaAppFixStartPlaybackProgress", false)
 
-return function(Image) --[[ Line: 57 | Named "VideoDisplay" ]]
+return function(Image)
 	-- upvalues: ReactModule (copy), VideoLoadingStateModule (copy), LuaAppFixStartPlaybackProgress (copy), UserGameSettings (copy), ArgCheckModule (copy), RunService (copy), VideoPlayerWrapperModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
@@ -34,7 +34,7 @@ return function(Image) --[[ Line: 57 | Named "VideoDisplay" ]]
 		UseRefResult9.current = Image.startPlaybackProgress
 		UseRefResult10 = ReactModule.useRef(false)
 	end
-	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 85 ]]
+	local UseResult = ReactModule.useCallback(function(p1)
 		-- upvalues: UseStateResult2_1 (copy), UseRefResult5 (copy)
 		UseStateResult2_1(p1)
 		
@@ -42,7 +42,7 @@ return function(Image) --[[ Line: 57 | Named "VideoDisplay" ]]
 			UseRefResult5.current(p1)
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 92 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult2 (copy), Image (copy)
 		UseRefResult2.current += 1
 		
@@ -50,18 +50,18 @@ return function(Image) --[[ Line: 57 | Named "VideoDisplay" ]]
 			Image.onVideoLooped()
 		end
 	end, { Image.onVideoLooped })
-	ReactModule.useEffect(function() --[[ Line: 99 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult2 (copy), UseRefResult3 (copy), UseRefResult4 (copy)
 		UseRefResult2.current = 0
 		UseRefResult3.current = 0
 		UseRefResult4.current = false
 	end, { Image.video })
-	ReactModule.useEffect(function() --[[ Line: 105 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Image (copy), VideoPlayerRef (copy), UseRefResult2 (copy), UseRefResult3 (copy), UserGameSettings (upval)
 		local VideoPlaybackStateRef = Image.videoPlaybackStateRef
 		
 		if VideoPlaybackStateRef == nil then return end
-		local function Current() --[[ Line: 111 ]]
+		local function Current()
 			-- upvalues: VideoPlayerRef (upval), UseRefResult2 (upval), UseRefResult3 (upval), UserGameSettings (upval)
 			local Current = VideoPlayerRef.current
 			
@@ -77,14 +77,14 @@ return function(Image) --[[ Line: 57 | Named "VideoDisplay" ]]
 		
 		VideoPlaybackStateRef.current = Current
 		
-		return function() --[[ Line: 128 ]]
+		return function()
 			-- upvalues: VideoPlaybackStateRef (copy), Current (copy)
 			if VideoPlaybackStateRef.current == Current then
 				VideoPlaybackStateRef.current = nil
 			end
 		end
 	end, { Image.videoPlaybackStateRef })
-	ReactModule.useEffect(function() --[[ Line: 137 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), ShouldStartPlayback (copy), UseResult (copy), VideoLoadingStateModule (upval), VideoPlayerRef (copy), ArgCheckModule (upval), LuaAppFixStartPlaybackProgress (upval), UseRefResult9 (ref), UseRefResult10 (ref), Image (copy), UseRefResult6 (copy), UseRefResult7 (copy)
 		UseStateResult2(false)
 		
@@ -97,10 +97,10 @@ return function(Image) --[[ Line: 57 | Named "VideoDisplay" ]]
 		ArgCheckModule.assert(Current ~= nil, "VideoDisplay expects videoPlayer ref to be set before loading")
 		UseResult(VideoLoadingStateModule.Loading)
 		local Flag = false
-		task.spawn(function() --[[ Line: 147 ]]
+		task.spawn(function()
 			-- upvalues: Current (copy), Flag (ref), UseResult (upval), VideoLoadingStateModule (upval), LuaAppFixStartPlaybackProgress (upval), UseRefResult9 (upval), UseRefResult10 (upval), Image (upval), UseRefResult6 (upval), UseRefResult7 (upval), UseStateResult2 (upval)
 			local CurrentTime = tick()
-			local Success, Result = pcall(function() --[[ Line: 149 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: Current (upval)
 				return Current:LoadAsync()
 			end)
@@ -133,12 +133,12 @@ return function(Image) --[[ Line: 57 | Named "VideoDisplay" ]]
 			UseResult(VideoLoadingStateModule.Loaded)
 		end)
 		
-		return function() --[[ Line: 178 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end
 	end, { Image.video, ShouldStartPlayback })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 183 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult4 (copy), UseRefResult3 (copy), Image (copy)
 		UseRefResult4.current = true
 		UseRefResult3.current += 1
@@ -147,7 +147,7 @@ return function(Image) --[[ Line: 57 | Named "VideoDisplay" ]]
 			Image.onVideoEnded()
 		end
 	end, { Image.onVideoEnded })
-	ReactModule.useEffect(function() --[[ Line: 192 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), VideoPlayerRef (copy), ArgCheckModule (upval), LuaAppFixStartPlaybackProgress (upval), UseRefResult10 (ref), UseRefResult4 (copy), Image (copy)
 		if not UseStateResult then return end
 		local Current = VideoPlayerRef.current
@@ -173,12 +173,12 @@ return function(Image) --[[ Line: 57 | Named "VideoDisplay" ]]
 		Image.preservePlaybackPosition,
 		Image.shouldStartPlayback
 	})
-	ReactModule.useEffect(function() --[[ Line: 221 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), VideoPlayerRef (copy), ArgCheckModule (upval), RunService (upval), UseRefResult8 (copy)
 		if not UseStateResult then return end
 		local Current = VideoPlayerRef.current
 		ArgCheckModule.assert(Current ~= nil, "VideoDisplay expects videoPlayer ref to be set before reporting progress")
-		local RenderSteppedConnection = RunService.RenderStepped:Connect(function() --[[ Line: 227 ]]
+		local RenderSteppedConnection = RunService.RenderStepped:Connect(function()
 			-- upvalues: UseRefResult8 (upval), Current (copy)
 			local CurrentFunction: (any) -> () = UseRefResult8.current
 			
@@ -187,7 +187,7 @@ return function(Image) --[[ Line: 57 | Named "VideoDisplay" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 235 ]]
+		return function()
 			-- upvalues: RenderSteppedConnection (copy)
 			RenderSteppedConnection:Disconnect()
 		end

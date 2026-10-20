@@ -1,4 +1,4 @@
-﻿return require(script.Parent.Parent.ActionCreator)("SetPlayerLeaderstat", function(Player: Player, Leaderstat, Value) --[[ Line: 4 ]]
+﻿return require(script.Parent.Parent.ActionCreator)("SetPlayerLeaderstat", function(Player: Player, Leaderstat, Value)
 	return {
 		player = Player,
 		userId = Player.UserId,

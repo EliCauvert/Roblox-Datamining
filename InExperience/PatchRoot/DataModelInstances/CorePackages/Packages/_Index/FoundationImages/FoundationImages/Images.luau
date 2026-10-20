@@ -7,7 +7,7 @@ local v1, v2 = require(Parent.Generated.GetImageSetData)((require(Parent.getReso
 local Uiblox = require(Parent.Parent.BuilderIcons).Migration.uiblox
 local WhitelistedIconAssetsModule = require(Parent.whitelistedIconAssets)
 
-local function getPackagePathDEPRECATED(): string? --[[ Line: 23 ]]
+local function getPackagePathDEPRECATED(): string?
 	-- upvalues: Parent (copy), CorePackages (copy)
 	if CorePackages == nil then
 		return nil
@@ -21,12 +21,12 @@ local function getPackagePathDEPRECATED(): string? --[[ Line: 23 ]]
 	return "LuaPackages/" .. table.concat(List, "/")
 end
 
-local function _() --[[ Line: 41 | Named "getStaticLuaAppsPackageDir" ]]
+local function _()
 	-- upvalues: CorePackages (copy)
 	return if CorePackages == nil then nil else "LuaPackages/Packages/_Index/FoundationImages/FoundationImages"
 end
 
-local _ = function(p1, p2) --[[ Line: 51 | Named "getImagePath" ]]
+local _ = function(p1, p2)
 	-- upvalues: FallbackImagesModule (copy)
 	return if p1 == nil then FallbackImagesModule[p2] else string.format("rbxasset://%s/SpriteSheets/%s.png", p1, p2)
 end
@@ -50,7 +50,7 @@ for i, value in v1 do
 	end
 end
 setmetatable(ImagesModule, {
-	__index = function(p1, Image) --[[ Line: 85 ]]
+	__index = function(p1, Image)
 		-- upvalues: Uiblox (copy)
 		if not Uiblox[Image] then
 			error(("%q is not a valid member of Images"):format((tostring(Image))), 2)

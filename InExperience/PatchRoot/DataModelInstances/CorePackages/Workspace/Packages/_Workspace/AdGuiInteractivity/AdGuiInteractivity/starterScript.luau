@@ -14,13 +14,13 @@ local LocalizationProvider = require(Parent1.Localization).LocalizationProvider
 local FoundationProvider = FoundationModule.FoundationProvider
 local AdsInteractivityControlsFixStyleLink = game:DefineFastFlag("AdsInteractivityControlsFixStyleLink", false)
 
-local function initializeImmersiveAds() --[[ Line: 22 ]]
+local function initializeImmersiveAds()
 	-- upvalues: CoreGui (copy), AdService (copy), RoactModule (copy), AdsInteractivityControlsModule (copy), AdsInteractivityControlsFixStyleLink (copy)
 	local AdGuiInteractivityControls = Instance.new("Folder")
 	AdGuiInteractivityControls.Name = "AdGuiInteractivityControls"
 	AdGuiInteractivityControls.Parent = CoreGui
 	local t = {}
-	AdService.adGuiRegisterUI:Connect(function(AdGui) --[[ Line: 30 ]]
+	AdService.adGuiRegisterUI:Connect(function(AdGui)
 		-- upvalues: t (copy), RoactModule (upval), AdsInteractivityControlsModule (upval), AdsInteractivityControlsFixStyleLink (upval), AdGuiInteractivityControls (copy)
 		if not AdGui:IsA("AdGui") then return end
 		if t[AdGui] then return end
@@ -30,7 +30,7 @@ local function initializeImmersiveAds() --[[ Line: 22 ]]
 			Element = RoactModule.createElement("Folder", nil, Element)
 		end
 		t[AdGui] = RoactModule.mount(Element, AdGuiInteractivityControls, "AdsInteractivityControls")
-		AdGui.Destroying:Connect(function() --[[ Line: 46 ]]
+		AdGui.Destroying:Connect(function()
 			-- upvalues: RoactModule (upval), t (upval), AdGui (copy)
 			RoactModule.unmount(t[AdGui])
 			t[AdGui] = nil
@@ -39,7 +39,7 @@ local function initializeImmersiveAds() --[[ Line: 22 ]]
 	AdService:SetAdGuiInteractivityHandlerInitialized()
 end
 
-local function initializeImmersiveBrandedAds() --[[ Line: 55 ]]
+local function initializeImmersiveBrandedAds()
 	-- upvalues: CoreGui (copy), ReactRobloxModule (copy), ReactModule (copy), LocalizationProvider (copy), InExperienceLocalesModule (copy), LocalizationService (copy), FoundationProvider (copy), FoundationModule (copy), DisclosureButtonListenerComponentModule (copy)
 	local ImmersiveBrandedAds = Instance.new("ScreenGui")
 	ImmersiveBrandedAds.Name = "ImmersiveBrandedAds"
@@ -57,7 +57,7 @@ local function initializeImmersiveBrandedAds() --[[ Line: 55 ]]
 	})
 end
 
-return function() --[[ Line: 75 ]]
+return function()
 	-- upvalues: initializeImmersiveAds (copy), initializeImmersiveBrandedAds (copy)
 	initializeImmersiveAds()
 	initializeImmersiveBrandedAds()

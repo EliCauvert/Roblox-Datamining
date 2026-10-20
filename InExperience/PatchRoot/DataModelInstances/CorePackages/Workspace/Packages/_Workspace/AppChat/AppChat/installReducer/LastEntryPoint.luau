@@ -7,9 +7,9 @@ local FFlagSharedChatEntryPointAction = require(Parent.SharedFlags).FFlagSharedC
 local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
 local Flag = false
 
-local function _(EntryPoint) --[[ Line: 23 | Named "trackChatLanding" ]]
+local function _(EntryPoint)
 	-- upvalues: AppChatPerfTrackerModule (copy), FFlagAppChatTTIStaleGuardModule (copy), Flag (ref)
-	pcall(function() --[[ Line: 24 ]]
+	pcall(function()
 		-- upvalues: EntryPoint (copy), AppChatPerfTrackerModule (upval), FFlagAppChatTTIStaleGuardModule (upval), Flag (upval)
 		if EntryPoint == nil then
 			AppChatPerfTrackerModule.cancel(AppChatPerfTrackerModule.Events.ChatLandingTTI, {})
@@ -27,11 +27,11 @@ local function _(EntryPoint) --[[ Line: 23 | Named "trackChatLanding" ]]
 end
 
 return require(Parent.Rodux).createReducer("NotSet", {
-	[require(AppChat.Actions.EnteredChatFromEntryPoint).name] = function(_, p1) --[[ Line: 43 ]]
+	[require(AppChat.Actions.EnteredChatFromEntryPoint).name] = function(_, p1)
 		-- upvalues: FFlagSharedChatEntryPointAction (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), FFlagAppChatTTIStaleGuardModule (copy), Flag (ref)
 		if FFlagSharedChatEntryPointAction and FFlagAppChatPerfTrackingModule then
 			local EntryPoint = p1.entryPoint
-			pcall(function() --[[ Line: 24 ]]
+			pcall(function()
 				-- upvalues: EntryPoint (copy), AppChatPerfTrackerModule (upval), FFlagAppChatTTIStaleGuardModule (upval), Flag (upval)
 				if EntryPoint == nil then
 					AppChatPerfTrackerModule.cancel(AppChatPerfTrackerModule.Events.ChatLandingTTI, {})

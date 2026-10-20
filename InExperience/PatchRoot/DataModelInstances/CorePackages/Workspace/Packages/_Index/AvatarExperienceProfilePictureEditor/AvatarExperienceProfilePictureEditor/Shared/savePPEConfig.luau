@@ -1,6 +1,6 @@
 ﻿local ConstantsModule = require(script.Parent.Parent.Constants)
 
-local function buildApplyConfig(p1) --[[ Line: 32 ]]
+local function buildApplyConfig(p1)
 	-- upvalues: ConstantsModule (copy)
 	local Number: number = p1.emoteAssetId and tonumber(p1.emoteAssetId) or 0
 	local config = {
@@ -32,7 +32,7 @@ local function buildApplyConfig(p1) --[[ Line: 32 ]]
 	return config
 end
 
-local function applyProfileConfiguration(AvatarEditorService, ProfileConfiguration): boolean --[[ Line: 65 ]]
+local function applyProfileConfiguration(AvatarEditorService, ProfileConfiguration): boolean
 	local NoPromptApplyProfileConfigurationResult = AvatarEditorService:NoPromptApplyProfileConfiguration(ProfileConfiguration)
 	while not NoPromptApplyProfileConfigurationResult do
 		AvatarEditorService.PromptApplyProfileConfigurationCompleted:Wait()
@@ -42,7 +42,7 @@ local function applyProfileConfiguration(AvatarEditorService, ProfileConfigurati
 end
 
 return {
-	saveCloseupAndFullBody = function(p1) --[[ Line: 83 ]]
+	saveCloseupAndFullBody = function(p1)
 		-- upvalues: buildApplyConfig (copy), applyProfileConfiguration (copy)
 		local AvatarEditorService = p1.avatarEditorService or game:GetService("AvatarEditorService")
 		

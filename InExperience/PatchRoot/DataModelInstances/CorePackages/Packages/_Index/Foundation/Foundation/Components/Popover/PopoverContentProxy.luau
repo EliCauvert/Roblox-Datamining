@@ -5,7 +5,7 @@ local ContentPluginModule = require(script.Parent.ContentPlugin)
 local IsPluginSecurityModule = require(Foundation.Utility.isPluginSecurity)
 local UsePluginModule = require(Foundation.Providers.Plugin.usePlugin)
 
-return ReactModule.forwardRef(function(Tbl, Ref) --[[ Line: 13 | Named "PopoverContentProxy" ]]
+return ReactModule.forwardRef(function(Tbl, Ref)
 	-- upvalues: UsePluginModule (copy), IsPluginSecurityModule (copy), ReactModule (copy), ContentPluginModule (copy), ContentModule (copy)
 	local _, UsePluginModuleResult2 = UsePluginModule()
 	local Tbl1 = Tbl

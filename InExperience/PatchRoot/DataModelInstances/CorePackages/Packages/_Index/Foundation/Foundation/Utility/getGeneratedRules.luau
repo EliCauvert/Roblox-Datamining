@@ -6,196 +6,196 @@ local FontNameModule = require(Foundation.Enums.FontName)
 local ThemeNameModule = require(Foundation.Enums.ThemeName)
 local TypographyVariantsModule = require(Foundation.Generated.StyleRules.TypographyVariants)
 local config = {
-	Common = function() --[[ Line: 16 ]]
+	Common = function()
 		-- upvalues: Foundation (copy)
 		return require(Foundation.Generated.StyleRules.CommonAttribute)
 	end,
-	Console = function() --[[ Line: 19 ]]
+	Console = function()
 		-- upvalues: Foundation (copy)
 		return require(Foundation.Generated.StyleRules.ConsoleAttribute)
 	end,
-	Desktop = function() --[[ Line: 22 ]]
+	Desktop = function()
 		-- upvalues: Foundation (copy)
 		return require(Foundation.Generated.StyleRules.DesktopAttribute)
 	end
 }
 local config1 = {
 	[ThemeNameModule.CircuitRush] = {
-		Dark = function() --[[ Line: 29 ]]
+		Dark = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.CircuitRush.DarkAttribute)
 		end,
-		Light = function() --[[ Line: 32 ]]
+		Light = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.CircuitRush.LightAttribute)
 		end
 	},
 	[ThemeNameModule.Classic] = {
-		Dark = function() --[[ Line: 37 ]]
+		Dark = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.Classic.DarkAttribute)
 		end,
-		Light = function() --[[ Line: 40 ]]
+		Light = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.Classic.LightAttribute)
 		end
 	},
 	[ThemeNameModule.CosmicDust] = {
-		Dark = function() --[[ Line: 45 ]]
+		Dark = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.CosmicDust.DarkAttribute)
 		end,
-		Light = function() --[[ Line: 48 ]]
+		Light = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.CosmicDust.LightAttribute)
 		end
 	},
 	[ThemeNameModule.Default] = {
-		Dark = function() --[[ Line: 53 ]]
+		Dark = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.Default.DarkAttribute)
 		end,
-		Light = function() --[[ Line: 56 ]]
+		Light = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.Default.LightAttribute)
 		end
 	},
 	[ThemeNameModule.ElectricLime] = {
-		Dark = function() --[[ Line: 61 ]]
+		Dark = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.ElectricLime.DarkAttribute)
 		end,
-		Light = function() --[[ Line: 64 ]]
+		Light = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.ElectricLime.LightAttribute)
 		end
 	},
 	[ThemeNameModule.Halloween2026] = {
-		Dark = function() --[[ Line: 69 ]]
+		Dark = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.Halloween2026.DarkAttribute)
 		end,
-		Light = function() --[[ Line: 72 ]]
+		Light = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.Halloween2026.LightAttribute)
 		end
 	},
 	[ThemeNameModule.HyperPlum] = {
-		Dark = function() --[[ Line: 77 ]]
+		Dark = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.HyperPlum.DarkAttribute)
 		end,
-		Light = function() --[[ Line: 80 ]]
+		Light = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.HyperPlum.LightAttribute)
 		end
 	},
 	[ThemeNameModule.InfernoBlast] = {
-		Dark = function() --[[ Line: 85 ]]
+		Dark = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.InfernoBlast.DarkAttribute)
 		end,
-		Light = function() --[[ Line: 88 ]]
+		Light = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.InfernoBlast.LightAttribute)
 		end
 	},
 	[ThemeNameModule.Kids] = {
-		Dark = function() --[[ Line: 93 ]]
+		Dark = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.Kids.DarkAttribute)
 		end,
-		Light = function() --[[ Line: 96 ]]
+		Light = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.Kids.LightAttribute)
 		end
 	},
 	[ThemeNameModule.KineticEnergy] = {
-		Dark = function() --[[ Line: 101 ]]
+		Dark = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.KineticEnergy.DarkAttribute)
 		end,
-		Light = function() --[[ Line: 104 ]]
+		Light = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.KineticEnergy.LightAttribute)
 		end
 	},
 	[ThemeNameModule.LavaGlow] = {
-		Dark = function() --[[ Line: 109 ]]
+		Dark = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.LavaGlow.DarkAttribute)
 		end,
-		Light = function() --[[ Line: 112 ]]
+		Light = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.LavaGlow.LightAttribute)
 		end
 	},
 	[ThemeNameModule.NebulaDrift] = {
-		Dark = function() --[[ Line: 117 ]]
+		Dark = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.NebulaDrift.DarkAttribute)
 		end,
-		Light = function() --[[ Line: 120 ]]
+		Light = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.NebulaDrift.LightAttribute)
 		end
 	},
 	[ThemeNameModule.NitroFrost] = {
-		Dark = function() --[[ Line: 125 ]]
+		Dark = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.NitroFrost.DarkAttribute)
 		end,
-		Light = function() --[[ Line: 128 ]]
+		Light = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.NitroFrost.LightAttribute)
 		end
 	},
 	[ThemeNameModule.PixelPop] = {
-		Dark = function() --[[ Line: 133 ]]
+		Dark = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.PixelPop.DarkAttribute)
 		end,
-		Light = function() --[[ Line: 136 ]]
+		Light = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.PixelPop.LightAttribute)
 		end
 	},
 	[ThemeNameModule.PolarFreeze] = {
-		Dark = function() --[[ Line: 141 ]]
+		Dark = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.PolarFreeze.DarkAttribute)
 		end,
-		Light = function() --[[ Line: 144 ]]
+		Light = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.PolarFreeze.LightAttribute)
 		end
 	},
 	[ThemeNameModule.QuantumPulse] = {
-		Dark = function() --[[ Line: 149 ]]
+		Dark = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.QuantumPulse.DarkAttribute)
 		end,
-		Light = function() --[[ Line: 152 ]]
+		Light = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.QuantumPulse.LightAttribute)
 		end
 	},
 	[ThemeNameModule.StarBurst] = {
-		Dark = function() --[[ Line: 157 ]]
+		Dark = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.StarBurst.DarkAttribute)
 		end,
-		Light = function() --[[ Line: 160 ]]
+		Light = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.StarBurst.LightAttribute)
 		end
 	},
 	[ThemeNameModule.SuperCharge] = {
-		Dark = function() --[[ Line: 165 ]]
+		Dark = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.SuperCharge.DarkAttribute)
 		end,
-		Light = function() --[[ Line: 168 ]]
+		Light = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.SuperCharge.LightAttribute)
 		end
@@ -204,21 +204,21 @@ local config1 = {
 local BuilderSans = FontNameModule.BuilderSans
 local config2 = {
 	[FontNameModule.BuilderSans] = {
-		Desktop = function() --[[ Line: 178 ]]
+		Desktop = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.Typography.BuilderSans.DesktopAttribute)
 		end,
-		Console = function() --[[ Line: 181 ]]
+		Console = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.Typography.BuilderSans.ConsoleAttribute)
 		end
 	},
 	[FontNameModule.Cartoon] = {
-		Desktop = function() --[[ Line: 186 ]]
+		Desktop = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.Typography.Cartoon.DesktopAttribute)
 		end,
-		Console = function() --[[ Line: 189 ]]
+		Console = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.Typography.Cartoon.ConsoleAttribute)
 		end
@@ -226,28 +226,28 @@ local config2 = {
 }
 local config3 = {
 	[FontNameModule.BuilderSans] = {
-		Desktop = function() --[[ Line: 197 ]]
+		Desktop = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.Legacy.Typography.BuilderSans.DesktopAttribute)
 		end,
-		Console = function() --[[ Line: 200 ]]
+		Console = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.Legacy.Typography.BuilderSans.ConsoleAttribute)
 		end
 	},
 	[FontNameModule.Cartoon] = {
-		Desktop = function() --[[ Line: 205 ]]
+		Desktop = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.Legacy.Typography.Cartoon.DesktopAttribute)
 		end,
-		Console = function() --[[ Line: 208 ]]
+		Console = function()
 			-- upvalues: Foundation (copy)
 			return require(Foundation.Generated.StyleRules.Legacy.Typography.Cartoon.ConsoleAttribute)
 		end
 	}
 }
 
-return function(p1, p2, Console) --[[ Line: 214 | Named "getGeneratedRules" ]]
+return function(p1, p2, Console)
 	-- upvalues: ThemeNameModule (copy), config (copy), config1 (copy), DeviceModule (copy), FlagsModule (copy), TypographyVariantsModule (copy), BuilderSans (copy), config2 (copy), config3 (copy)
 	local P0 = p1 or ThemeNameModule.Default
 	local CommonResult = config.Common()

@@ -31,7 +31,7 @@ local IconName = FoundationModule.Enums.IconName
 local CaptureServiceStartUploadCoreScriptBypassEngineFeature = require(Parent.SharedFlags).FFlagMyStatsMediaSelector and (CaptureService.PromptCaptureGalleryPermissionAsync and game:GetEngineFeature("CaptureServiceStartUploadCoreScriptBypass"))
 local PrivacyType = UniverseConfigurationModule.PrivacyType
 
-return function(p1) --[[ Line: 67 | Named "GameConfigurationContent" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationModule (copy), UseOpenWebViewFunction (copy), UseArchiveGameFlowModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), UseExperienceShareFlowModule (copy), UniverseConfigurationModule (copy), ExperienceGuidelinesModule (copy), SignalsReactModule (copy), GameConfigurationLabelsModule (copy), PrivacyType (copy), UniverseActivationModule (copy), ContentMaturityUtilsModule (copy), GameConfigurationActionsModule (copy), RefreshPublishEligibilityModule (copy), CaptureServiceStartUploadCoreScriptBypassEngineFeature (copy), IconName (copy), GetPrivatePlaytestersStoreFunction (copy), SignalsModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), View (copy), GameConfigurationListModule (copy), BuildMaturityBannerModule (copy), Text (copy), ArchiveGameDialogModule (copy), ExperienceShareOverlaysModule (copy)
 	local TestId = p1.testId or "game-configuration-content"
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -90,11 +90,11 @@ return function(p1) --[[ Line: 67 | Named "GameConfigurationContent" ]]
 	local UseArchiveGameFlowModuleResult = UseArchiveGameFlowModule()
 	local UseExperienceShareFlowModuleResult = if FFlagBuildExperiencePrivateInvitesModule then UseExperienceShareFlowModule(p1.universeId, p1.placeId) else nil
 	local OnShare = if UseExperienceShareFlowModuleResult == nil then nil else UseExperienceShareFlowModuleResult.onShare
-	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function() --[[ Line: 131 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function()
 		-- upvalues: UniverseConfigurationModule (upval), p1 (copy)
 		return UniverseConfigurationModule.getUniverseConfigurationStore().getAndFetchConfiguration(p1.universeId)
 	end, { p1.universeId }).data)
-	local UseSignalStateResult1 = SignalsReactModule.useSignalState(ReactModule.useMemo(function() --[[ Line: 134 ]]
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(ReactModule.useMemo(function()
 		-- upvalues: ExperienceGuidelinesModule (upval), p1 (copy)
 		return ExperienceGuidelinesModule.getExperienceGuidelinesStore().getAndFetchDetailedGuidelines(p1.universeId)
 	end, { p1.universeId }).data)
@@ -102,15 +102,15 @@ return function(p1) --[[ Line: 67 | Named "GameConfigurationContent" ]]
 	local Loading1 = nil
 	Loading1 = if UseSignalStateResult == nil then Loading elseif Audience1 == PrivacyType.Private then PrivateAudience elseif Audience1 == PrivacyType.Public then PublicAudience elseif Audience1 == PrivacyType.FriendsOnly then FriendsOnlyAudience else GameConfigurationLabelsModule.getAudienceText(UseSignalStateResult) or UnknownAudience
 	local Text1 = nil
-	local UseSignalStateResult2 = SignalsReactModule.useSignalState(ReactModule.useMemo(function() --[[ Line: 156 ]]
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState(ReactModule.useMemo(function()
 		-- upvalues: UniverseActivationModule (upval), p1 (copy)
 		return UniverseActivationModule.getUniverseActivationStore().getAndFetchEligibility(p1.universeId)
 	end, { p1.universeId }).data)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 160 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ContentMaturityUtilsModule (upval), p1 (copy)
 		return ContentMaturityUtilsModule.isSealBroken(p1.universeId)
 	end, { UseSignalStateResult2, p1.universeId })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 163 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: ContentMaturityUtilsModule (upval), p1 (copy)
 		return ContentMaturityUtilsModule.isContentUnrated(p1.universeId)
 	end, { UseSignalStateResult2, p1.universeId })
@@ -121,18 +121,18 @@ return function(p1) --[[ Line: 67 | Named "GameConfigurationContent" ]]
 		Text1 = QuestionnaireRequiredBanner
 	end
 	local ContentMaturityText = GameConfigurationLabelsModule.getContentMaturityText(UseSignalStateResult1, ProvisionalRating, NoUseMemoResult) or Loading
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 180 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseOpenWebViewResult (copy), GameConfigurationActionsModule (upval), p1 (copy), CreatorHub (copy)
 		UseOpenWebViewResult(GameConfigurationActionsModule.getCreatorHubConfigureUrl(p1.universeId), CreatorHub)
 	end, { CreatorHub, UseOpenWebViewResult, p1.universeId })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 184 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseOpenWebViewResult (copy), GameConfigurationActionsModule (upval), p1 (copy), CreatorHub (copy), RefreshPublishEligibilityModule (upval)
-		UseOpenWebViewResult(GameConfigurationActionsModule.getExperienceQuestionnaireUrl(p1.universeId), CreatorHub, function() --[[ Line: 185 ]]
+		UseOpenWebViewResult(GameConfigurationActionsModule.getExperienceQuestionnaireUrl(p1.universeId), CreatorHub, function()
 			-- upvalues: RefreshPublishEligibilityModule (upval), p1 (upval)
 			RefreshPublishEligibilityModule(p1.universeId)
 		end)
 	end, { CreatorHub, UseOpenWebViewResult, p1.universeId })
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 191 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: IconAndThumbnails (copy), CaptureServiceStartUploadCoreScriptBypassEngineFeature (upval), IconName (upval), p1 (copy), UseResult (copy), TitleAndDescription (copy)
 		return {
 			{
@@ -156,20 +156,20 @@ return function(p1) --[[ Line: 67 | Named "GameConfigurationContent" ]]
 	local OnOpenPlaytestPicker = p1.onOpenPlaytestPicker
 	local OnOpenPlaytestManagement = p1.onOpenPlaytestManagement
 	local HasOnOpenPlaytestManagement: boolean = FFlagBuildExperiencePrivateInvitesModule and (OnOpenPlaytestPicker ~= nil and OnOpenPlaytestManagement ~= nil)
-	local UseMemoResult21 = ReactModule.useMemo(function() --[[ Line: 226 ]]
+	local UseMemoResult21 = ReactModule.useMemo(function()
 		-- upvalues: HasOnOpenPlaytestManagement (copy), GetPrivatePlaytestersStoreFunction (upval), p1 (copy)
 		return if HasOnOpenPlaytestManagement then GetPrivatePlaytestersStoreFunction(false).getAndFetchInvitedPlayers(p1.universeId) else nil
 	end, { HasOnOpenPlaytestManagement, p1.universeId })
-	local UseSignalStateResult3: number = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 233 ]]
+	local UseSignalStateResult3: number = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), UseMemoResult21 (copy)
-		return SignalsModule.createComputed(function(p2): number --[[ Line: 234 ]]
+		return SignalsModule.createComputed(function(p2): number
 			-- upvalues: UseMemoResult21 (upval)
 			return if UseMemoResult21 == nil then 0 else #UseMemoResult21.players(p2)
 		end)
 	end, { UseMemoResult21 })))
-	local UseSignalStateResult21 = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 240 ]]
+	local UseSignalStateResult21 = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), UseMemoResult21 (copy)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 241 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: UseMemoResult21 (upval)
 			return if UseMemoResult21 == nil then "NotReady" else UseMemoResult21.status(p2)
 		end)
@@ -206,7 +206,7 @@ return function(p1) --[[ Line: 67 | Named "GameConfigurationContent" ]]
 			}
 		end
 	end
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 291 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: Audience (copy), Loading1 (ref), p1 (copy), Config (ref), PrivateInvitesShareLink (copy), OnShare (copy), ContentRating (copy), ContentMaturityText (copy), IconName (upval), UseResult1 (copy)
 		local List = {
 			{
@@ -240,7 +240,7 @@ return function(p1) --[[ Line: 67 | Named "GameConfigurationContent" ]]
 		Loading1, ContentMaturityText, UseResult1, Config, OnShare,
 		p1.onOpenAudiencePage, Audience, ContentRating, PrivateInvitesShareLink
 	})
-	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 335 ]]
+	local UseMemoResult4 = ReactModule.useMemo(function()
 		-- upvalues: CreatorHub (copy), CreatorHubDescription (copy), IconName (upval), UseResult (copy)
 		return {
 			{
@@ -302,7 +302,7 @@ return function(p1) --[[ Line: 67 | Named "GameConfigurationContent" ]]
 		ArchiveGame = ReactModule.createElement(View, {
 			tag = "row align-y-center size-full-0 auto-y padding-large stroke-standard stroke-default radius-large bg-surface-0",
 			LayoutOrder = if FFlagBuildExperienceMonetizationNativeUIModule then 5 else 4,
-			onActivated = ReactModule.useCallback(function() --[[ Line: 357 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: UseArchiveGameFlowModuleResult (copy), p1 (copy)
 				UseArchiveGameFlowModuleResult.requestArchive(p1.universeId)
 			end, {

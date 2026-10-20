@@ -2,7 +2,7 @@
 local UseLocalizationFunction = require(MomentsCreation.Parent.Localization).Hooks.useLocalization
 local CreationFlowStringsModule = require(MomentsCreation.creationFlowStrings)
 
-return function() --[[ Line: 10 | Named "useCreationFlowStrings" ]]
+return function()
 	-- upvalues: UseLocalizationFunction (copy), CreationFlowStringsModule (copy)
 	return UseLocalizationFunction(CreationFlowStringsModule)
 end

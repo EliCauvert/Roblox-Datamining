@@ -3,7 +3,7 @@ local Parent = script:FindFirstAncestor("AppSplitView").Parent
 local ReactModule = require(Parent.React)
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 
-local function VisualPaneResizer(p1) --[[ Line: 22 ]]
+local function VisualPaneResizer(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local LineTopInset = p1.lineTopInset or 0
@@ -30,7 +30,7 @@ local function VisualPaneResizer(p1) --[[ Line: 22 ]]
 	})
 end
 
-local function InteractivePaneResizer(p1) --[[ Line: 49 ]]
+local function InteractivePaneResizer(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), UserInputService (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Name = p1.Name or "PaneResizer"
@@ -44,7 +44,7 @@ local function InteractivePaneResizer(p1) --[[ Line: 49 ]]
 	UseRefResult2.current = p1.onDragEnd
 	local UseRefResult3 = ReactModule.useRef(false)
 	local UseRefResult4 = ReactModule.useRef(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 65 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseBindingResult2 (copy), UseRefResult3 (copy), UseRefResult4 (copy)
 		UseBindingResult2(UseRefResult3.current or UseRefResult4.current)
 	end, {})
@@ -59,7 +59,7 @@ local function InteractivePaneResizer(p1) --[[ Line: 49 ]]
 		Position = p1.position,
 		Size = UDim2.new(0, p1.hitWidth, 1, 0),
 		ZIndex = p1.ZIndex,
-		[ReactModule.Event.InputBegan] = ReactModule.useCallback(function(_, Input) --[[ Line: 69 ]]
+		[ReactModule.Event.InputBegan] = ReactModule.useCallback(function(_, Input)
 			-- upvalues: UseRefResult3 (copy), UseResult (copy), UseRefResult1 (copy), UserInputService (upval), UseRefResult (copy), UseRefResult2 (copy)
 			if Input.UserInputType ~= Enum.UserInputType.MouseButton1 and Input.UserInputType ~= Enum.UserInputType.Touch then return end
 			local Position = Input.Position
@@ -71,7 +71,7 @@ local function InteractivePaneResizer(p1) --[[ Line: 49 ]]
 			end
 			local InputChangedConnection = nil
 			local Connection = nil
-			InputChangedConnection = UserInputService.InputChanged:Connect(function(Input) --[[ Line: 87 ]]
+			InputChangedConnection = UserInputService.InputChanged:Connect(function(Input)
 				-- upvalues: UseRefResult (upval), Position (ref)
 				if Input.UserInputType ~= Enum.UserInputType.MouseMovement and Input.UserInputType ~= Enum.UserInputType.Touch then return end
 				if UseRefResult.current then
@@ -80,7 +80,7 @@ local function InteractivePaneResizer(p1) --[[ Line: 49 ]]
 					UseRefResult.current(Vector2.new(PositionDelta.X, PositionDelta.Y))
 				end
 			end)
-			Connection = Input.Changed:Connect(function(p2) --[[ Line: 101 ]]
+			Connection = Input.Changed:Connect(function(p2)
 				-- upvalues: Input (copy), InputChangedConnection (ref), Connection (ref), UseRefResult3 (upval), UseResult (upval), UseRefResult2 (upval)
 				if p2 == "UserInputState" and Input.UserInputState == Enum.UserInputState.End then
 					if InputChangedConnection then
@@ -98,12 +98,12 @@ local function InteractivePaneResizer(p1) --[[ Line: 49 ]]
 				end
 			end)
 		end, { UseResult }),
-		[ReactModule.Event.MouseEnter] = ReactModule.useCallback(function(_, _) --[[ Line: 118 ]]
+		[ReactModule.Event.MouseEnter] = ReactModule.useCallback(function(_, _)
 			-- upvalues: UseRefResult4 (copy), UseResult (copy)
 			UseRefResult4.current = true
 			UseResult()
 		end, { UseResult }),
-		[ReactModule.Event.MouseLeave] = ReactModule.useCallback(function(_, _) --[[ Line: 122 ]]
+		[ReactModule.Event.MouseLeave] = ReactModule.useCallback(function(_, _)
 			-- upvalues: UseRefResult4 (copy), UseResult (copy)
 			UseRefResult4.current = false
 			UseResult()
@@ -116,11 +116,11 @@ local function InteractivePaneResizer(p1) --[[ Line: 49 ]]
 			AnchorPoint = Vector2.new(0.5, 0),
 			Position = UDim2.new(0.5, 0, 0, LineTopInset),
 			Size = UDim2.new(0, 1, 1, -LineTopInset),
-			BackgroundColor3 = UseBindingResult:map(function(p2) --[[ Line: 127 ]]
+			BackgroundColor3 = UseBindingResult:map(function(p2)
 				-- upvalues: UseTokensResult (copy)
 				return if p2 then UseTokensResult.Color.System.Emphasis.Color3 else UseTokensResult.Color.Stroke.Emphasis.Color3
 			end),
-			BackgroundTransparency = UseBindingResult:map(function(p2) --[[ Line: 130 ]]
+			BackgroundTransparency = UseBindingResult:map(function(p2)
 				-- upvalues: UseTokensResult (copy)
 				return if p2 then UseTokensResult.Color.System.Emphasis.Transparency else UseTokensResult.Color.Stroke.Emphasis.Transparency
 			end)
@@ -128,7 +128,7 @@ local function InteractivePaneResizer(p1) --[[ Line: 49 ]]
 	})
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 161 | Named "PaneResizer" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), VisualPaneResizer (copy), InteractivePaneResizer (copy)
 	return if p1.interactive == false then ReactModule.createElement(VisualPaneResizer, p1) else ReactModule.createElement(InteractivePaneResizer, p1)
 end)

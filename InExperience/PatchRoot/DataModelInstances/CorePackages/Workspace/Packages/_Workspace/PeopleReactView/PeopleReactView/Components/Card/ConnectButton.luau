@@ -13,12 +13,12 @@ local View = FoundationModule.View
 local PersonButtonConfigsModule = require(PeopleReactView.Configs.PersonButtonConfigs)
 local UseGetPeopleServiceModule = require(PeopleReactView.Hooks.useGetPeopleService)
 
-return ReactModule.memo(function(p1) --[[ Line: 28 | Named "ConnectButton" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseGetPeopleServiceModule (copy), PersonButtonConfigsModule (copy), ReactModule (copy), SignalsReactModule (copy), IconName (copy), IconVariant (copy), View (copy), StateLayerAffordance (copy), IconButton (copy), ButtonVariant (copy), InputSize (copy)
 	local FriendStatusStore = UseGetPeopleServiceModule("FriendStatusStore")
 	local Constants = UseGetPeopleServiceModule("Constants")
 	local PersonButtonConfigsModuleResult = PersonButtonConfigsModule(p1.person.UserId)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 34 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: PersonButtonConfigsModuleResult (copy), Constants (copy)
 		return PersonButtonConfigsModuleResult[Constants.PERSON_BUTTONS.ADD_FRIEND]
 	end, {
@@ -36,7 +36,7 @@ return ReactModule.memo(function(p1) --[[ Line: 28 | Named "ConnectButton" ]]
 		onStateChanged = p1.onStateChanged
 	}, {
 		ConnectButton = ReactModule.createElement(IconButton, {
-			icon = ReactModule.useMemo(function() --[[ Line: 42 ]]
+			icon = ReactModule.useMemo(function()
 				-- upvalues: UseSignalStateResult (copy), IconName (upval), IconVariant (upval), UseSignalStateResult1 (copy)
 				return if UseSignalStateResult then {
 					name = IconName.PersonCheck,
@@ -50,7 +50,7 @@ return ReactModule.memo(function(p1) --[[ Line: 28 | Named "ConnectButton" ]]
 			size = p1.size or InputSize.Medium,
 			isDisabled = UseSignalStateResult2,
 			Visible = UseMemoResult.shouldShow(),
-			onActivated = ReactModule.useCallback(function() --[[ Line: 63 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: UseMemoResult (copy), Constants (copy)
 				UseMemoResult.onActivated(Constants.ANALYTICS.ENTRY_POINT.PEOPLE_CARD)
 			end, {

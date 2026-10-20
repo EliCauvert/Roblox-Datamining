@@ -1,10 +1,10 @@
 ﻿local UserInputService = game:GetService("UserInputService")
 local GetPlatformTargetModule = nil
-GetPlatformTargetModule = if require(script:FindFirstAncestor("Analytics").Parent.SharedFlags).GetFFlagShareGetPlatformTargetImpl() then require(script.Parent.Parent.getPlatformTarget) else function(): string --[[ Line: 36 | Named "getPlatformTarget" ]]
+GetPlatformTargetModule = if require(script:FindFirstAncestor("Analytics").Parent.SharedFlags).GetFFlagShareGetPlatformTargetImpl() then require(script.Parent.Parent.getPlatformTarget) else function(): string
 	-- upvalues: UserInputService (copy)
 	local v1 = "unknownLua"
 	local None = Enum.Platform.None
-	pcall(function() --[[ Line: 42 ]]
+	pcall(function()
 		-- upvalues: None (ref), UserInputService (upval)
 		None = UserInputService:GetPlatform()
 	end)
@@ -17,7 +17,7 @@ end
 local EventStreamModule = {}
 EventStreamModule.__index = EventStreamModule
 
-function EventStreamModule.new(_reporter) --[[ Line: 79 ]]
+function EventStreamModule.new(_reporter)
 	-- upvalues: EventStreamModule (copy)
 	local ValueType = type(_reporter)
 	assert(ValueType == "table" or ValueType == "userdata", "Unexpected value for reportingService")
@@ -27,12 +27,12 @@ function EventStreamModule.new(_reporter) --[[ Line: 79 ]]
 	return config
 end
 
-function EventStreamModule:setEnabled(_isEnabled) --[[ Line: 92 ]]
+function EventStreamModule:setEnabled(_isEnabled)
 	assert(type(_isEnabled) == "boolean", "Expected isEnabled to be a boolean")
 	self._isEnabled = _isEnabled
 end
 
-function EventStreamModule:setRBXEvent(EventContext, EventName, p1) --[[ Line: 100 ]]
+function EventStreamModule:setRBXEvent(EventContext, EventName, p1)
 	-- upvalues: GetPlatformTargetModule (ref)
 	local PlatformTargetModule = GetPlatformTargetModule()
 	local P6 = p1 or {}
@@ -43,7 +43,7 @@ function EventStreamModule:setRBXEvent(EventContext, EventName, p1) --[[ Line: 1
 	self._reporter:SetRBXEvent(PlatformTargetModule, EventContext, EventName, P6)
 end
 
-function EventStreamModule:setRBXEventStream(EventContext, EventName, p1) --[[ Line: 116 ]]
+function EventStreamModule:setRBXEventStream(EventContext, EventName, p1)
 	-- upvalues: GetPlatformTargetModule (ref)
 	local PlatformTargetModule = GetPlatformTargetModule()
 	local P10 = p1 or {}
@@ -54,13 +54,13 @@ function EventStreamModule:setRBXEventStream(EventContext, EventName, p1) --[[ L
 	self._reporter:SetRBXEventStream(PlatformTargetModule, EventContext, EventName, P10)
 end
 
-function EventStreamModule:releaseRBXEventStream() --[[ Line: 129 ]]
+function EventStreamModule:releaseRBXEventStream()
 	-- upvalues: GetPlatformTargetModule (ref)
 	assert(self._isEnabled, "This reporting service is disabled")
 	self._reporter:ReleaseRBXEventStream(GetPlatformTargetModule())
 end
 
-function EventStreamModule:sendEventDeferred(EventContext, EventName, p1) --[[ Line: 138 ]]
+function EventStreamModule:sendEventDeferred(EventContext, EventName, p1)
 	-- upvalues: GetPlatformTargetModule (ref)
 	local PlatformTargetModule = GetPlatformTargetModule()
 	local P15 = p1 or {}
@@ -71,7 +71,7 @@ function EventStreamModule:sendEventDeferred(EventContext, EventName, p1) --[[ L
 	self._reporter:SendEventDeferred(PlatformTargetModule, EventContext, EventName, P15)
 end
 
-function EventStreamModule:sendEventImmediately(EventContext, EventName, p1) --[[ Line: 154 ]]
+function EventStreamModule:sendEventImmediately(EventContext, EventName, p1)
 	-- upvalues: GetPlatformTargetModule (ref)
 	local PlatformTargetModule = GetPlatformTargetModule()
 	local P19 = p1 or {}
@@ -82,7 +82,7 @@ function EventStreamModule:sendEventImmediately(EventContext, EventName, p1) --[
 	self._reporter:SendEventImmediately(PlatformTargetModule, EventContext, EventName, P19)
 end
 
-function EventStreamModule:updateHeartbeatObject(p1) --[[ Line: 168 ]]
+function EventStreamModule:updateHeartbeatObject(p1)
 	local P21 = p1 or {}
 	assert(type(P21) == "table", "Expected additionalArgs to be a table")
 	assert(self._isEnabled, "This reporting service is disabled")

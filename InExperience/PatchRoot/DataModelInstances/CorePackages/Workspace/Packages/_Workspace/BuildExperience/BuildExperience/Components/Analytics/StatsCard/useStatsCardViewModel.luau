@@ -11,7 +11,7 @@ local MetricValueRoundsToZeroModule = require(BuildExperience.Analytics.metricVa
 local NoDataPlaceholderModule = require(BuildExperience.Components.Analytics.noDataPlaceholder)
 local TemplateForFunction = require(BuildExperience.Analytics.metricUnitTemplate).templateFor
 
-return function(p1) --[[ Line: 46 | Named "useStatsCardViewModel" ]]
+return function(p1)
 	-- upvalues: LocalizationService (copy), FormatStatNumberModule (copy), TemplateForFunction (copy), MetricValueRoundsToZeroModule (copy), UseLocalizationFunction (copy), NoDataPlaceholderModule (copy)
 	local RobloxLocaleId = LocalizationService.RobloxLocaleId
 	local NoHasData = p1.hasData == nil or p1.hasData

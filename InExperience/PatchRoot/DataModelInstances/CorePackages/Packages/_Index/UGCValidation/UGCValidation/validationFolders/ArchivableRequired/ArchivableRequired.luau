@@ -3,7 +3,7 @@ local ConstantsModule = require(Parent.Constants)
 local _ = require(Parent.util.Types)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
-local function collectAllInstances(EntrypointInput) --[[ Line: 23 ]]
+local function collectAllInstances(EntrypointInput)
 	local List = {}
 	
 	for _, value in EntrypointInput do
@@ -31,7 +31,7 @@ return {
 		require(Parent.validationSystem.ValidationEnums).SharedDataMember.entrypointInput
 	},
 	fflag = require(Parent.flags.getEngineFeatureEngineUGCValidateInstanceTreesEquivalent),
-	run = function(p1, p2) --[[ Line: 44 ]]
+	run = function(p1, p2)
 		-- upvalues: collectAllInstances (copy), ErrorSourceStringsModule (copy), ConstantsModule (copy)
 		for _, value in collectAllInstances(p2.entrypointInput) do
 			if value.Archivable == false then

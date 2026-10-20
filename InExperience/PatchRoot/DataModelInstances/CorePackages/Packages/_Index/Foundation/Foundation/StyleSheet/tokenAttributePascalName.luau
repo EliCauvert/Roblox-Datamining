@@ -1,14 +1,14 @@
 ﻿local ColorScopeKeepPrefixModule = require(script.Parent.colorScopeKeepPrefix)
 
-local function kebabToPascal(Text: string) --[[ Line: 3 ]]
-	return (Text:gsub("^%-?(.)", function(Text: string): string --[[ Line: 4 ]]
+local function kebabToPascal(Text: string)
+	return (Text:gsub("^%-?(.)", function(Text: string): string
 		return Text:upper()
-	end):gsub("%-(.)", function(Text: string): string --[[ Line: 7 ]]
+	end):gsub("%-(.)", function(Text: string): string
 		return Text:upper()
 	end))
 end
 
-return function(Segment, p1): string --[[ Line: 15 | Named "tokenAttributePascalName" ]]
+return function(Segment, p1): string
 	-- upvalues: kebabToPascal (copy), ColorScopeKeepPrefixModule (copy)
 	local KebabToPascalResult: string = kebabToPascal(p1)
 	

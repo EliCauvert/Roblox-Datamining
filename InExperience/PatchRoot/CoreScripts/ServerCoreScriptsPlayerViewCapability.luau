@@ -8,7 +8,7 @@ local RequestDeviceCameraOrientationCapability = Instance.new("RemoteEvent")
 RequestDeviceCameraOrientationCapability.Name = "RequestDeviceCameraOrientationCapability"
 RequestDeviceCameraOrientationCapability.Parent = RobloxReplicatedStorage
 local ClockTimes = {}
-RequestDeviceCameraOrientationCapability.OnServerEvent:Connect(function(Player: Player, Player1: Player) --[[ Line: 17 ]]
+RequestDeviceCameraOrientationCapability.OnServerEvent:Connect(function(Player: Player, Player1: Player)
 	-- upvalues: ClockTimes (copy), RequestDeviceCameraOrientationCapability (copy)
 	local ClockTime = os.clock()
 	local ClockTime1: number = ClockTimes[Player.UserId]
@@ -22,7 +22,7 @@ RequestDeviceCameraOrientationCapability.OnServerEvent:Connect(function(Player: 
 		return
 	end
 end)
-Players.PlayerRemoving:Connect(function(Player) --[[ Line: 37 ]]
+Players.PlayerRemoving:Connect(function(Player)
 	-- upvalues: ClockTimes (copy)
 	ClockTimes[Player.UserId] = nil
 end)
@@ -35,11 +35,11 @@ if GetFFlagPlayerViewRemoteEnabledModule() then
 	ReplicateDeviceCameraCFrame.Name = "ReplicateDeviceCameraCFrame"
 	ReplicateDeviceCameraCFrame.Parent = RobloxReplicatedStorage
 	local t = {}
-	Players.PlayerRemoving:Connect(function(Player) --[[ Line: 52 ]]
+	Players.PlayerRemoving:Connect(function(Player)
 		-- upvalues: t (copy)
 		t[tostring(Player.UserId)] = nil
 	end)
-	RequestDeviceCameraCFrame.OnServerEvent:Connect(function(Player: Player, Value: number) --[[ Line: 57 ]]
+	RequestDeviceCameraCFrame.OnServerEvent:Connect(function(Player: Player, Value: number)
 		-- upvalues: EnablePlayerViewRemoteEventUserIdValidation2 (copy), Players (copy), t (copy), RequestDeviceCameraCFrame (copy)
 		if EnablePlayerViewRemoteEventUserIdValidation2 then
 			if typeof(Value) ~= "number" or Value <= 0 or Player.UserId == Value or math.floor(Value) ~= Value then return end
@@ -55,7 +55,7 @@ if GetFFlagPlayerViewRemoteEnabledModule() then
 		t[Text][tostring(Player.UserId)] = os.clock()
 		RequestDeviceCameraCFrame:FireClient(Player1)
 	end)
-	ReplicateDeviceCameraCFrame.OnServerEvent:Connect(function(Player, Player1, Player2: number) --[[ Line: 83 ]]
+	ReplicateDeviceCameraCFrame.OnServerEvent:Connect(function(Player, Player1, Player2: number)
 		-- upvalues: t (copy), Players (copy), ReplicateDeviceCameraCFrame (copy)
 		if typeof(Player1) ~= "CFrame" or typeof(Player2) ~= "number" or Player2 <= 0 then return end
 		local Text = tostring(Player.UserId)

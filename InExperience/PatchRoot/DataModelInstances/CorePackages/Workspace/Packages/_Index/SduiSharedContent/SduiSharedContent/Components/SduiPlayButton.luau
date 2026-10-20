@@ -14,10 +14,10 @@ local AppPage = require(Parent.RobloxAppEnums).AppPage
 local FFlagLuaAppLaunchWhenLoadingEdp = require(Parent.SharedFlags).FFlagLuaAppLaunchWhenLoadingEdp
 local FFlagEnableGameJoinEarlyAccess = require(Parent.SharedFlags).FFlagEnableGameJoinEarlyAccess
 
-return ReactModule.memo(function(p1) --[[ Line: 87 | Named "SduiPlayButton" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), GetSduiActionHandlerRegistryFunction (copy), SduiActionType (copy), FindAnalyticsFieldFunction (copy), UseSduiReportExperienceLaunchedModule (copy), ExecuteActionFunction (copy), GetSduiFocusActivationStoreFunction (copy), FFlagEnableGameJoinEarlyAccess (copy), AppPage (copy), PlayButton (copy), CryoModule (copy), FFlagLuaAppLaunchWhenLoadingEdp (copy)
 	local AnalyticsContext = p1.analyticsContext
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 90 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: GetSduiActionHandlerRegistryFunction (upval), SduiActionType (upval), p1 (copy)
 		local ActionHandlerConfig = GetSduiActionHandlerRegistryFunction().getActionHandlerConfig(SduiActionType.OpenGameDetails)
 		
@@ -35,11 +35,11 @@ return ReactModule.memo(function(p1) --[[ Line: 87 | Named "SduiPlayButton" ]]
 		tag = p1.tag,
 		expandWidthForSecondaryPlayButton = p1.expandWidthForSecondaryPlayButton,
 		preferSecondaryPlayButton = p1.preferSecondaryPlayButton,
-		onRegisterActivation = ReactModule.useCallback(function(p2) --[[ Line: 138 ]]
+		onRegisterActivation = ReactModule.useCallback(function(p2)
 			-- upvalues: p1 (copy), GetSduiFocusActivationStoreFunction (upval)
 			local Tag = p1.tag
 			
-			return if Tag == nil then function() --[[ Line: 141 ]] end else GetSduiFocusActivationStoreFunction().register(Tag, p2)
+			return if Tag == nil then function() end else GetSduiFocusActivationStoreFunction().register(Tag, p2)
 		end, { p1.tag }),
 		fetchDelayInSeconds = p1.fetchDelayInSeconds or 0.1,
 		universeId = p1.universeId,
@@ -47,7 +47,7 @@ return ReactModule.memo(function(p1) --[[ Line: 87 | Named "SduiPlayButton" ]]
 		useUIBloxButton = p1.enableUiBloxButton,
 		reportExperienceLaunched = UseSduiReportExperienceLaunchedModule(p1.sduiContext, p1.analyticsContext, p1.universeId, PlaceId, p1.rootPlaceId or PlaceId, p1.appliedFilters, if p1.experienceJoinData then p1.experienceJoinData.launchData else nil),
 		onPurchaseRequiredCallback = if p1.openGameDetailsOnPurchaseRequired then UseResult else nil,
-		onActivated = ReactModule.useCallback(function() --[[ Line: 117 ]]
+		onActivated = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy), SduiActionType (upval), ExecuteActionFunction (upval), AnalyticsContext (copy)
 			if p1.onActivatedEffect then
 				p1.onActivatedEffect()

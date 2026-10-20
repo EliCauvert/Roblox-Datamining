@@ -1,4 +1,4 @@
-﻿return function(p1): boolean --[[ Line: 5 | Named "isPresetMessage" ]]
+﻿return function(p1): boolean
 	if p1 == nil then
 		return false
 	else

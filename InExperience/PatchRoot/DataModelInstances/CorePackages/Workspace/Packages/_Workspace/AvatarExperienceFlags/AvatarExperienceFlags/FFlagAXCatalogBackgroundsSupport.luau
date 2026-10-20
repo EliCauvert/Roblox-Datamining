@@ -1,5 +1,5 @@
 ﻿local FFlagAXBackgroundsRootModule = require(script.Parent.FFlagAXBackgroundsRoot)
-local Success = pcall(function() --[[ Line: 3 ]]
+local Success = pcall(function()
 	return Enum.AvatarAssetType.AvatarBackground
 end)
 

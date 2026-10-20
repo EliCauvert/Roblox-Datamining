@@ -18,12 +18,12 @@ local config = {
 	onActivated = Dash.noop
 }
 
-return function(p1) --[[ Line: 34 ]]
+return function(p1)
 	-- upvalues: Dash (copy), config (copy), UseStateFunction (copy), GetDeepValueFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), React (copy), IconButton (copy), Images (copy), Badge (copy), Tooltip (copy)
 	local JoinResult = Dash.join(config, p1)
 	local UseStateResult, UseStateResult2 = UseStateFunction(240)
 	
-	local function v14(Object) --[[ Line: 38 ]]
+	local function v14(Object)
 		-- upvalues: UseStateResult2 (copy), GetDeepValueFunction (upval)
 		if Object and Object:FindFirstChild("CallToActionTooltip", true) then
 			UseStateResult2(GetDeepValueFunction(Object, "CallToActionTooltip.TooltipContainer.AbsoluteSize.X") or 240)

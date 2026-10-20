@@ -12,11 +12,11 @@ local View = FoundationModule.View
 local LoadableVideoModule = require(Parent.Components.LoadableVideo)
 local ProgressBarModule = require(Parent.Components.ProgressBar)
 
-local function _(p1) --[[ Line: 49 | Named "getCurrent" ]]
+local function _(p1)
 	return if typeof(p1) == "table" and p1.current ~= nil then p1.current else nil
 end
 
-return function(Frame: Frame) --[[ Line: 56 | Named "MediaPlayer" ]]
+return function(Frame: Frame)
 	-- upvalues: ReactModule (copy), RunService (copy), View (copy), StateLayerAffordance (copy), IconButton (copy), ButtonSize (copy), LoadableVideoModule (copy), Text (copy), ProgressBarModule (copy), FoundationModule (copy), Image (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
@@ -24,33 +24,33 @@ return function(Frame: Frame) --[[ Line: 56 | Named "MediaPlayer" ]]
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
 	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(false)
 	local UseStateResult6, UseStateResult2_5 = ReactModule.useState(true)
-	ReactModule.useEffect(function() --[[ Line: 64 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy), UseStateResult2_2 (copy), RunService (upval), UseStateResult2 (copy)
 		local VideoRef = Frame.videoRef
 		local Current = if typeof(VideoRef) == "table" and VideoRef.current ~= nil then VideoRef.current else nil
 		
 		if not Current then return end
-		local PlayedConnection = Current.Played:Connect(function() --[[ Line: 70 ]]
+		local PlayedConnection = Current.Played:Connect(function()
 			-- upvalues: UseStateResult2_2 (upval)
 			UseStateResult2_2(false)
 		end)
-		local EndedConnection = Current.Ended:Connect(function() --[[ Line: 74 ]]
+		local EndedConnection = Current.Ended:Connect(function()
 			-- upvalues: UseStateResult2_2 (upval)
 			UseStateResult2_2(true)
 		end)
-		local RenderSteppedConnection = RunService.RenderStepped:Connect(function() --[[ Line: 78 ]]
+		local RenderSteppedConnection = RunService.RenderStepped:Connect(function()
 			-- upvalues: UseStateResult2 (upval), Current (copy)
 			UseStateResult2(Current.TimePosition)
 		end)
 		
-		return function() --[[ Line: 82 ]]
+		return function()
 			-- upvalues: RenderSteppedConnection (copy), PlayedConnection (copy), EndedConnection (copy)
 			RenderSteppedConnection:Disconnect()
 			PlayedConnection:Disconnect()
 			EndedConnection:Disconnect()
 		end
 	end, { Frame.videoRef, UseStateResult6, UseStateResult3 })
-	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 89 ]]
+	local UseResult = ReactModule.useCallback(function(p1)
 		-- upvalues: Frame (copy), UseStateResult2_1 (copy)
 		local VideoRef = Frame.videoRef
 		local Current = if typeof(VideoRef) == "table" and VideoRef.current ~= nil then VideoRef.current else nil
@@ -62,7 +62,7 @@ return function(Frame: Frame) --[[ Line: 56 | Named "MediaPlayer" ]]
 			return
 		end
 	end, { Frame.onLoaded, Frame.videoRef })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 103 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: Frame (copy), UseStateResult3 (copy), UseStateResult2_2 (copy), UseStateResult (copy), UseStateResult1 (copy)
 		local VideoRef = Frame.videoRef
 		local Current = if typeof(VideoRef) == "table" and VideoRef.current ~= nil then VideoRef.current else nil
@@ -85,14 +85,14 @@ return function(Frame: Frame) --[[ Line: 56 | Named "MediaPlayer" ]]
 		UseStateResult,
 		UseStateResult1
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 121 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: Frame (copy), UseStateResult2_4 (copy), UseStateResult5 (copy)
 		if Frame.onExpandCallback then
 			Frame.onExpandCallback()
 		end
 		UseStateResult2_4(not UseStateResult5)
 	end, { UseStateResult5, Frame.onExpandCallback })
-	local UseResult3 = ReactModule.useCallback(function(p1) --[[ Line: 129 ]]
+	local UseResult3 = ReactModule.useCallback(function(p1)
 		-- upvalues: Frame (copy)
 		local VideoRef = Frame.videoRef
 		local Current = if typeof(VideoRef) == "table" and VideoRef.current ~= nil then VideoRef.current else nil
@@ -103,7 +103,7 @@ return function(Frame: Frame) --[[ Line: 56 | Named "MediaPlayer" ]]
 			return
 		end
 	end, { Frame.videoRef })
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 138 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: Frame (copy), UseStateResult4 (copy), UseStateResult2_3 (copy)
 		if Frame.onMuteCallback then
 			Frame.onMuteCallback()
@@ -139,7 +139,7 @@ return function(Frame: Frame) --[[ Line: 56 | Named "MediaPlayer" ]]
 	
 	return ReactModule.createElement(View, {
 		tag = "shrink size-full",
-		onActivated = ReactModule.useCallback(function() --[[ Line: 99 ]]
+		onActivated = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2_5 (copy), UseStateResult6 (copy)
 			UseStateResult2_5(not UseStateResult6)
 		end, { UseStateResult6 }),

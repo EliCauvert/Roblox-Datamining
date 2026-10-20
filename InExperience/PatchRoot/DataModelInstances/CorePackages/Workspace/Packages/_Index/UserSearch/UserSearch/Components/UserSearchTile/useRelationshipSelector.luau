@@ -12,12 +12,12 @@ local FollowingStore = require(Parent.DataHydration.Following).FollowingStore
 local LocalUserIdStore = require(Parent.LocalUserIdStore).LocalUserIdStore
 local config = { skipFetch = true }
 
-return function(LocalUserId) --[[ Line: 25 ]]
+return function(LocalUserId)
 	-- upvalues: FFlagSduiUserSearchTile (copy), UseGetFriendshipStatusFunction (copy), ReactModule (copy), FollowingStore (copy), SignalsReactModule (copy), LocalUserIdStore (copy), FFlagMigrateFriendshipStatusesUserSearchModule (copy), config (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), RODUXKEY (copy)
 	if FFlagSduiUserSearchTile then
 		return {
 			status = UseGetFriendshipStatusFunction(LocalUserId),
-			following = SignalsReactModule.useSignalState(ReactModule.useMemo(function() --[[ Line: 30 ]]
+			following = SignalsReactModule.useSignalState(ReactModule.useMemo(function()
 				-- upvalues: FollowingStore (upval), LocalUserId (copy)
 				return FollowingStore.get().GetIsFollowing(LocalUserId)
 			end, { LocalUserId }).data) == true,
@@ -26,7 +26,7 @@ return function(LocalUserId) --[[ Line: 25 ]]
 	else
 		local UseGetFriendshipStatusResult = if FFlagMigrateFriendshipStatusesUserSearchModule then UseGetFriendshipStatusFunction(LocalUserId, config) else nil
 		
-		return UseSelectorFunction(function(p1) --[[ Line: 48 ]]
+		return UseSelectorFunction(function(p1)
 			-- upvalues: GetDeepValueFunction (upval), RODUXKEY (upval), LocalUserId (copy), FFlagMigrateFriendshipStatusesUserSearchModule (upval), UseGetFriendshipStatusResult (ref)
 			return {
 				status = if FFlagMigrateFriendshipStatusesUserSearchModule then UseGetFriendshipStatusResult else GetDeepValueFunction(p1, string.format("%s.Friends.friendshipStatus.%s", RODUXKEY, LocalUserId)),

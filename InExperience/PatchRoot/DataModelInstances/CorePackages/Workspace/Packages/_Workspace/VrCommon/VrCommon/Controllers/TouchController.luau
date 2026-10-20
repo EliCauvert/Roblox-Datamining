@@ -107,7 +107,7 @@ local Granite = Enum.Material.Granite
 local TouchController = {}
 TouchController.__index = TouchController
 
-function TouchController.new(UserCFrame) --[[ Line: 119 ]]
+function TouchController.new(UserCFrame)
 	-- upvalues: TouchController (copy), CreateFunction (copy), config (copy), Granite (copy), FIntVRTouchControllerTransparencyModule (copy)
 	local self = setmetatable({}, TouchController)
 	self.userCFrame = UserCFrame
@@ -164,7 +164,7 @@ function TouchController.new(UserCFrame) --[[ Line: 119 ]]
 	return self
 end
 
-function TouchController:setCFrame(p1) --[[ Line: 183 ]]
+function TouchController:setCFrame(p1)
 	if self.userCFrame == Enum.UserCFrame.RightHand then
 		self.model:SetPrimaryPartCFrame(p1 * CFrame.Angles(0.3490658503988659, 0, 0) * CFrame.new(-0.03, 0.08, -0.06))
 		
@@ -174,7 +174,7 @@ function TouchController:setCFrame(p1) --[[ Line: 183 ]]
 	end
 end
 
-function TouchController:setCFrameAndScale(p1, Scale: number) --[[ Line: 191 ]]
+function TouchController:setCFrameAndScale(p1, Scale: number)
 	-- upvalues: config (copy)
 	self.model:SetPrimaryPartCFrame(p1 * CFrame.Angles(0.3490658503988659, 0, 0) * CFrame.new(-0.03 * Scale * (if self.userCFrame == Enum.UserCFrame.RightHand then 1 else -1), 0.08 * Scale, -0.06 * Scale))
 	
@@ -207,7 +207,7 @@ function TouchController:setCFrameAndScale(p1, Scale: number) --[[ Line: 191 ]]
 	end
 end
 
-function TouchController:setButtonState(p2, p3) --[[ Line: 224 ]]
+function TouchController:setButtonState(p2, p3)
 	-- upvalues: config (copy)
 	local Entry = config[self.userCFrame][p2]
 	
@@ -245,7 +245,7 @@ function TouchController:setButtonState(p2, p3) --[[ Line: 224 ]]
 	end
 end
 
-function TouchController:setTriggerState(Z: number) --[[ Line: 261 ]]
+function TouchController:setTriggerState(Z: number)
 	-- upvalues: config (copy)
 	local Offset = config[self.userCFrame].Trigger.offset
 	local ScaledOffset = CFrame.new(Offset.p * self.scale) * (Offset - Offset.p)
@@ -260,7 +260,7 @@ function TouchController:setTriggerState(Z: number) --[[ Line: 261 ]]
 	end
 end
 
-function TouchController:setStickState(Position) --[[ Line: 278 ]]
+function TouchController:setStickState(Position)
 	-- upvalues: config (copy)
 	local Offset = config[self.userCFrame].Stick.offset
 	local ScaledOffset = CFrame.new(Offset.p * self.scale) * (Offset - Offset.p)
@@ -275,7 +275,7 @@ function TouchController:setStickState(Position) --[[ Line: 278 ]]
 	end
 end
 
-function TouchController:onInputPositionChanged(Input) --[[ Line: 296 ]]
+function TouchController:onInputPositionChanged(Input)
 	if self.userCFrame == Enum.UserCFrame.RightHand and Input.KeyCode == Enum.KeyCode.ButtonR2 or self.userCFrame == Enum.UserCFrame.LeftHand and Input.KeyCode == Enum.KeyCode.ButtonL2 then
 		self:setTriggerState(Input.Position.Z)
 		
@@ -288,33 +288,33 @@ function TouchController:onInputPositionChanged(Input) --[[ Line: 296 ]]
 	end
 end
 
-function TouchController:onButtonInputChanged(Input, p2) --[[ Line: 314 ]]
+function TouchController:onButtonInputChanged(Input, p2)
 	-- upvalues: config1 (copy)
 	if self.userCFrame == Enum.UserCFrame.LeftHand and Input.KeyCode == Enum.KeyCode.ButtonL1 or self.userCFrame == Enum.UserCFrame.RightHand and Input.KeyCode == Enum.KeyCode.ButtonR1 or self.userCFrame == Enum.UserCFrame.LeftHand and Input.KeyCode == Enum.KeyCode.ButtonL3 or self.userCFrame == Enum.UserCFrame.RightHand and Input.KeyCode == Enum.KeyCode.ButtonR3 or self.userCFrame == Enum.UserCFrame.LeftHand and Input.KeyCode == Enum.KeyCode.ButtonSelect or self.userCFrame == Enum.UserCFrame.RightHand and Input.KeyCode == Enum.KeyCode.ButtonStart or Input.KeyCode == Enum.KeyCode.ButtonA or Input.KeyCode == Enum.KeyCode.ButtonB or Input.KeyCode == Enum.KeyCode.ButtonX or Input.KeyCode == Enum.KeyCode.ButtonY then
 		self:setButtonState(config1[Input.KeyCode], p2)
 	end
 end
 
-function TouchController:onInputBegan(Input) --[[ Line: 335 ]]
+function TouchController:onInputBegan(Input)
 	self:onButtonInputChanged(Input, true)
 end
 
-function TouchController:onInputChanged(Input) --[[ Line: 339 ]]
+function TouchController:onInputChanged(Input)
 	self:onInputPositionChanged(Input)
 end
 
-function TouchController:onInputEnded(Input) --[[ Line: 343 ]]
+function TouchController:onInputEnded(Input)
 	self:onInputPositionChanged(Input)
 	self:onButtonInputChanged(Input, false)
 end
 
-function TouchController:onTouchpadModeChanged(_, _) --[[ Line: 348 ]] end
+function TouchController:onTouchpadModeChanged(_, _) end
 
-function TouchController:destroy() --[[ Line: 350 ]]
+function TouchController:destroy()
 	self.model:Destroy()
 end
 
-function TouchController.getButtonPart(p2, p3) --[[ Line: 354 ]]
+function TouchController.getButtonPart(p2, p3)
 	-- upvalues: config1 (copy)
 	local Entry = config1[p3]
 	

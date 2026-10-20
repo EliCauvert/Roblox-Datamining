@@ -9,7 +9,7 @@ local UserEntryUtilsModule = require(UnifiedLogging.userEntryUtils)
 local _ = require(UnifiedLogging.SduiAnalyticsTypes)
 local CalculateRowPositionFieldsModule = require(UnifiedLogging.calculateRowPositionFields)
 
-local function v10(p1, EntryIndex, RowNumber, ContentType, CollectionPosition, CollectionId, TotalNumberOfItems, ActionType, CollectionComponentType, ItemComponentType, PositionInRow, FeedRowNumber) --[[ Line: 19 ]]
+local function v10(p1, EntryIndex, RowNumber, ContentType, CollectionPosition, CollectionId, TotalNumberOfItems, ActionType, CollectionComponentType, ItemComponentType, PositionInRow, FeedRowNumber)
 	-- upvalues: DiscoveryEventErrorLogger (copy)
 	if p1 then
 		return {
@@ -34,7 +34,7 @@ local function v10(p1, EntryIndex, RowNumber, ContentType, CollectionPosition, C
 	end
 end
 
-local function _(p2, SourceCarousel) --[[ Line: 62 ]]
+local function _(p2, SourceCarousel)
 	-- upvalues: UserEntryUtilsModule (copy)
 	local ExtractFieldsFromUserEntryResult = UserEntryUtilsModule.extractFieldsFromUserEntry(p2)
 	
@@ -46,7 +46,7 @@ local function _(p2, SourceCarousel) --[[ Line: 62 ]]
 	}
 end
 
-local function v12(EventIngest, AppAnalytics, p2, RowNumber, EntryIndex, p3, CollectionPosition, CollectionId, TotalNumberOfItems, ContentType, ActionType) --[[ Line: 186 ]]
+local function v12(EventIngest, AppAnalytics, p2, RowNumber, EntryIndex, p3, CollectionPosition, CollectionId, TotalNumberOfItems, ContentType, ActionType)
 	-- upvalues: DiscoveryEventErrorLogger (copy), v10 (copy), ItemActionEventModule (copy)
 	if EventIngest and AppAnalytics then
 		ItemActionEventModule(EventIngest, p3, ContentType, (v10(p2, EntryIndex, RowNumber, ContentType, CollectionPosition, CollectionId, TotalNumberOfItems, ActionType)))
@@ -59,7 +59,7 @@ end
 
 return {
 	sendFromItemCollection = if require(Parent.SharedFlags).FFlagEnableTopSongsSort then v12 else nil,
-	sendFromFriendsCarousel = function(EventIngest, AppAnalytics, p2, EntryIndex, p3, CollectionPosition, SortId, TotalNumberOfItems, SourceCarousel, ActionType) --[[ Line: 73 ]]
+	sendFromFriendsCarousel = function(EventIngest, AppAnalytics, p2, EntryIndex, p3, CollectionPosition, SortId, TotalNumberOfItems, SourceCarousel, ActionType)
 		-- upvalues: DiscoveryEventErrorLogger (copy), ContentTypeModule (copy), v10 (copy), UserEntryUtilsModule (copy), CryoModule (copy), ItemActionEventModule (copy)
 		if EventIngest and AppAnalytics then
 			local User = ContentTypeModule.User
@@ -80,7 +80,7 @@ return {
 			})
 		end
 	end,
-	sendFromServerDrivenUi = function(EventIngest, p4, EntryIndex, p5, p6, CollectionId, ContentType, p7, CollectionPosition, TotalNumberOfItems, _, ActionType, p8, p9) --[[ Line: 119 ]]
+	sendFromServerDrivenUi = function(EventIngest, p4, EntryIndex, p5, p6, CollectionId, ContentType, p7, CollectionPosition, TotalNumberOfItems, _, ActionType, p8, p9)
 		-- upvalues: DiscoveryEventErrorLogger (copy), CalculateRowPositionFieldsModule (copy), v10 (copy), CryoModule (copy), AppStorageService (copy), ItemActionEventModule (copy)
 		if not EventIngest then
 			DiscoveryEventErrorLogger.reportError("SendItemActionEventFromSduiNilService", `Event Ingest was nil when trying to send an itemActionEvent for collection {CollectionId}`, { eventIngest = EventIngest, collectionId = CollectionId })

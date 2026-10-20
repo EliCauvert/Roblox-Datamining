@@ -2,10 +2,10 @@
 local ProfilerDataParserModule = {}
 ProfilerDataParserModule.__index = ProfilerDataParserModule
 
-function ProfilerDataParserModule.new(JsonString) --[[ Line: 52 ]]
+function ProfilerDataParserModule.new(JsonString)
 	-- upvalues: ProfilerDataParserModule (copy), ScriptProfilerService (copy)
 	local self = setmetatable({ _data = nil }, ProfilerDataParserModule)
-	local Success, Result = pcall(function() --[[ Line: 58 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: ScriptProfilerService (upval), JsonString (copy)
 		return ScriptProfilerService:DeserializeJSON(JsonString)
 	end)
@@ -21,17 +21,17 @@ function ProfilerDataParserModule.new(JsonString) --[[ Line: 52 ]]
 	end
 end
 
-function ProfilerDataParserModule.getFunctionById(p1, p2) --[[ Line: 72 ]]
+function ProfilerDataParserModule.getFunctionById(p1, p2)
 	return if p1._data then p1._data.Functions[p2] else nil
 end
 
-function ProfilerDataParserModule:getNodeById(p1) --[[ Line: 80 ]]
+function ProfilerDataParserModule:getNodeById(p1)
 	local Data = self._data
 	
 	return if Data then Data.Nodes[p1] else nil
 end
 
-function ProfilerDataParserModule:getSessionDuration() --[[ Line: 89 ]]
+function ProfilerDataParserModule:getSessionDuration()
 	local Data = self._data
 	
 	if Data then
@@ -44,17 +44,17 @@ function ProfilerDataParserModule:getSessionDuration() --[[ Line: 89 ]]
 	end
 end
 
-function ProfilerDataParserModule.getTotalFunctions(p1): number --[[ Line: 103 ]]
+function ProfilerDataParserModule.getTotalFunctions(p1): number
 	return if p1._data then #p1._data.Functions else 0
 end
 
-function ProfilerDataParserModule:getTotalNodes(): number --[[ Line: 111 ]]
+function ProfilerDataParserModule:getTotalNodes(): number
 	local Data = self._data
 	
 	return if Data then #Data.Nodes else 0
 end
 
-function ProfilerDataParserModule.parsePackageName(Text: string): string --[[ Line: 127 ]]
+function ProfilerDataParserModule.parsePackageName(Text: string): string
 	if not Text or Text == "" then
 		return "Unknown"
 	end
@@ -69,7 +69,7 @@ function ProfilerDataParserModule.parsePackageName(Text: string): string --[[ Li
 	end
 end
 
-function ProfilerDataParserModule:getPackageStatistics() --[[ Line: 167 ]]
+function ProfilerDataParserModule:getPackageStatistics()
 	-- upvalues: ProfilerDataParserModule (copy)
 	if not self._data then
 		return {}

@@ -4,7 +4,7 @@ local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
 	base = require(Parent.Http).Url.APIS_URL
 })
 
-return function(UniverseId) --[[ Line: 12 | Named "getDevStoreSeeAllUrl" ]]
+return function(UniverseId)
 	-- upvalues: NewResult (copy)
 	return NewResult({ universeId = UniverseId })
 end

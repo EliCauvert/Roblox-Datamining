@@ -2,12 +2,12 @@
 local GetRbxthumbWithTypeSizeAndOptionsFunction = UserLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
 local Constants = UserLibModule.Utils.Constants
 
-local function _(p1) --[[ Line: 9 | Named "getRbxThumbType" ]]
+local function _(p1)
 	-- upvalues: Constants (copy)
 	return if p1 == "AvatarBundle" then Constants.RbxthumbTypes.BundleThumbnail else Constants.RbxthumbTypes.Asset
 end
 
-return function(p1, p2) --[[ Line: 16 | Named "getThumbnailUrl" ]]
+return function(p1, p2)
 	-- upvalues: GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy)
 	return GetRbxthumbWithTypeSizeAndOptionsFunction(p1, if p2 == "AvatarBundle" then Constants.RbxthumbTypes.BundleThumbnail else Constants.RbxthumbTypes.Asset, 150)
 end

@@ -26,7 +26,7 @@ local config = {
 	report = "Feature.Catalog.Action.Report"
 }
 
-return function(p1) --[[ Line: 59 | Named "TopBar" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), REPORTMENUITEMID (copy), REPORTICON (copy), ReactModule (copy), Menu (copy), InputSize (copy), PopoverSide (copy), PopoverAlign (copy), FFlagEnableUserOffers (copy), IconButton (copy), OVERFLOWICON (copy), ButtonVariant (copy), View (copy), IconName (copy), Text (copy), Chip (copy), IconName (copy), IconVariant (copy), ChipSize (copy), ChipVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local Items = {}

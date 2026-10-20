@@ -16,7 +16,7 @@ local FFlagProfilePlatformEnableImpressions = require(Parent.SharedFlags).FFlagP
 local FFlagItemImpressionsAddGameMetadata = require(Parent.SharedFlags).FFlagItemImpressionsAddGameMetadata
 local FFlagEnableTopSongsSort = require(Parent.SharedFlags).FFlagEnableTopSongsSort
 
-local function v17(EntryIndexes, p1, ContentType, Count: number, CollectionPosition, CollectionId, TotalNumberOfItems, CollectionComponentType, CollectionIdStr, p2: number) --[[ Line: 25 ]]
+local function v17(EntryIndexes, p1, ContentType, Count: number, CollectionPosition, CollectionId, TotalNumberOfItems, CollectionComponentType, CollectionIdStr, p2: number)
 	-- upvalues: ArgCheckModule (copy), DiscoveryEventErrorLogger (copy), FFlagProfilePlatformEnableImpressions (copy)
 	local List = {}
 	local List1 = {}
@@ -92,7 +92,7 @@ local function v17(EntryIndexes, p1, ContentType, Count: number, CollectionPosit
 	return config
 end
 
-local function v18(List, p3, SourceCarousel) --[[ Line: 125 ]]
+local function v18(List, p3, SourceCarousel)
 	-- upvalues: FFlagLuaAppDesktopFriendCarouselClicks (copy), UserEntryUtilsModule (copy)
 	local List1 = {}
 	local List2 = {}
@@ -122,7 +122,7 @@ local function v18(List, p3, SourceCarousel) --[[ Line: 125 ]]
 	}
 end
 
-local v3 = if FFlagProfilePlatformEnableImpressions then function(EventIngest, AppAnalytics, p4, p5, p6, p7, ContentType, CollectionPosition, CollectionIdStr) --[[ Line: 214 ]]
+local v3 = if FFlagProfilePlatformEnableImpressions then function(EventIngest, AppAnalytics, p4, p5, p6, p7, ContentType, CollectionPosition, CollectionIdStr)
 	-- upvalues: DiscoveryEventErrorLogger (copy), v17 (copy), FFlagItemImpressionsAddGameMetadata (copy), ContentTypeModule (copy), BuildGameMetadataFieldsModule (copy), CryoModule (copy), ItemImpressionsEventModule (copy)
 	if not EventIngest or not AppAnalytics then
 		DiscoveryEventErrorLogger.reportError("SendItemImpressionsFromProfile", `Event Ingest or App Analytics was nil when trying to send itemImpressions for collection {CollectionIdStr} on Profile Platform`, {
@@ -150,7 +150,7 @@ local v3 = if FFlagProfilePlatformEnableImpressions then function(EventIngest, A
 	ItemImpressionsEventModule(EventIngest, p7, ContentType, UnionResult)
 end else nil
 
-local function v20(EventIngest, AppAnalytics, p8, p9, p10, p11, CollectionPosition, ContentType, p12, SortId, p13) --[[ Line: 346 ]]
+local function v20(EventIngest, AppAnalytics, p8, p9, p10, p11, CollectionPosition, ContentType, p12, SortId, p13)
 	-- upvalues: DiscoveryEventErrorLogger (copy), v17 (copy), FFlagItemImpressionsAddGameMetadata (copy), ContentTypeModule (copy), BuildGameMetadataFieldsModule (copy), CryoModule (copy), ItemImpressionsEventModule (copy)
 	if not EventIngest or not AppAnalytics then
 		DiscoveryEventErrorLogger.reportError("SendItemImpressionsService", `Event Ingest or App Analytics was nil when trying to send itemImpressions for collection {SortId}`, {
@@ -177,7 +177,7 @@ local function v20(EventIngest, AppAnalytics, p8, p9, p10, p11, CollectionPositi
 end
 
 return {
-	sendFromFriendsCarousel = function(EventIngest, AppAnalytics, p14, p15, p16, CollectionPosition, SortId, SourceCarousel) --[[ Line: 166 ]]
+	sendFromFriendsCarousel = function(EventIngest, AppAnalytics, p14, p15, p16, CollectionPosition, SortId, SourceCarousel)
 		-- upvalues: FFlagLuaAppDesktopFriendCarouselClicks (copy), DiscoveryEventErrorLogger (copy), ContentTypeModule (copy), v17 (copy), v18 (copy), CryoModule (copy), ItemImpressionsEventModule (copy)
 		if EventIngest and AppAnalytics then
 			if not p14 or #p14 == 0 then return end
@@ -198,7 +198,7 @@ return {
 	end,
 	sendFromItemCollection = if FFlagEnableTopSongsSort then v20 else nil,
 	sendFromProfile = if FFlagProfilePlatformEnableImpressions then v3 else nil,
-	sendFromServerDrivenUi = function(p17, p18, p19, p20, p21, CollectionId, ContentType, p22, CollectionPosition, p23, p24) --[[ Line: 273 ]]
+	sendFromServerDrivenUi = function(p17, p18, p19, p20, p21, CollectionId, ContentType, p22, CollectionPosition, p23, p24)
 		-- upvalues: DiscoveryEventErrorLogger (copy), v17 (copy), BuildItemMetadataFieldsModule (copy), CryoModule (copy), AppStorageService (copy), SduiCustomImpressionsEventModule (copy), ItemImpressionsEventModule (copy)
 		if not p17 then
 			DiscoveryEventErrorLogger.reportError("SendItemImpressionsFromSduiNilService", `Event Ingest was nil when trying to send itemImpressions for collection {CollectionId}`, { collectionId = CollectionId })

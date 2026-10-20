@@ -1,4 +1,4 @@
-﻿return function(Text: string, Pattern, p1: number) --[[ Line: 16 | Named "lastIndexOf" ]]
+﻿return function(Text: string, Pattern, p1: number)
 	local Length = string.len(Text)
 	local Length1 = if p1 and Length < p1 then Length elseif p1 and p1 < 1 then 1 elseif p1 then p1 else Length
 	

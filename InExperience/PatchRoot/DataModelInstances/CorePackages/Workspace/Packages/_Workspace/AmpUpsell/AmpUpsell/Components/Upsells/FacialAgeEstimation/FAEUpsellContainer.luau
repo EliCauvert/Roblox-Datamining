@@ -43,12 +43,12 @@ local FAEBackgroundOnlyPollMaxRetries = game:DefineFastInt("FAEBackgroundOnlyPol
 local FAEWithWebViewCallbackPollDelay = game:DefineFastInt("FAEWithWebViewCallbackPollDelay", 2)
 local FAEWithWebViewCallbackPollMaxRetries = game:DefineFastInt("FAEWithWebViewCallbackPollMaxRetries", 15)
 
-return function() --[[ Line: 76 | Named "FAEUpsellContainer" ]]
+return function()
 	-- upvalues: UseNavigationFunction (copy), UseDispatchFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UseAppPolicyFunction (copy), AppLinking (copy), GetFFlagEnableFAEQRCodeHandoffModule (copy), ReactModule (copy), AuthModalShownFunction (copy), AuthFormInteractionFunction (copy), AuthMsgShownFunction (copy), GetFFlagMoveAmpUpsellOffNavigateDownFunction (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), FacialAgeEstimationServiceWrapperModule (copy), FAEWithCallbackPollDelay (copy), FAEWithCallbackPollMaxRetries (copy), FAEBackgroundOnlyPollDelay (copy), FAEBackgroundOnlyPollMaxRetries (copy), GetFFlagEnableWebAmpWizardForFAEHandoffModule (copy), FAEWithWebViewCallbackPollDelay (copy), FAEWithWebViewCallbackPollMaxRetries (copy), UsePollIDVStatusFunction (copy), Players (copy), PromiseModule (copy), UrlUtilsModule (copy), EnableValidateFAEVerificationLink (copy), GetFFlagEnableRoactNetworkingForChallengeInteceptionModule (copy), LogEventOnceIfEnabledFunction (copy), IDVApiProvider (copy), EnableFAECancellationAnalytics (copy), FAEFailedModalModule (copy), FAEWithQRCodeUpsellModule (copy), FAEDirectLinkUpsellModule (copy), GetFFlagShowFAELoadingModalModule (copy), FAELoadingModalModule (copy), Loading (copy), IconSize (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p1) --[[ Line: 81 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p1)
 		return p1.getHasWebViewSupportForFAE()
 	end)
 	local ExtraPropsParam = UseNavigationResult.getParam("extraProps")
@@ -68,29 +68,29 @@ return function() --[[ Line: 76 | Named "FAEUpsellContainer" ]]
 	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(false)
 	local SessionId = Metadata and Metadata.sessionId or ""
 	local UseStateResult6, UseStateResult2_5 = ReactModule.useState(SessionId)
-	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 108 ]]
+	local UseResult = ReactModule.useCallback(function(p1)
 		-- upvalues: AuthModalShownFunction (upval), EntryPointEventCtx (copy), UseStateResult2 (copy)
 		AuthModalShownFunction(EntryPointEventCtx, p1, "faeFailed")
 		UseStateResult2(true)
 	end, { EntryPointEventCtx })
-	local UseResult1 = ReactModule.useCallback(function(p1) --[[ Line: 113 ]]
+	local UseResult1 = ReactModule.useCallback(function(p1)
 		-- upvalues: AuthFormInteractionFunction (upval), EntryPointEventCtx (copy), OnCancelFunction (copy)
 		AuthFormInteractionFunction(EntryPointEventCtx, p1, "faeCancelled")
 		OnCancelFunction()
 	end, { OnCancelFunction, EntryPointEventCtx })
-	local UseResult2 = ReactModule.useCallback(function(p1) --[[ Line: 118 ]]
+	local UseResult2 = ReactModule.useCallback(function(p1)
 		-- upvalues: AuthMsgShownFunction (upval), EntryPointEventCtx (copy), OnSuccessFunction (copy)
 		AuthMsgShownFunction(EntryPointEventCtx, p1, "faeSuccess")
 		OnSuccessFunction()
 	end, { OnSuccessFunction, EntryPointEventCtx })
-	local UseResult3 = ReactModule.useCallback(function(Detail, Callback) --[[ Line: 123 ]]
+	local UseResult3 = ReactModule.useCallback(function(Detail, Callback)
 		-- upvalues: GetFFlagMoveAmpUpsellOffNavigateDownFunction (upval), UseNavigationResult (copy), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 		if GetFFlagMoveAmpUpsellOffNavigateDownFunction() then
 			UseNavigationResult.push(AppPage.GenericWebPage, {
 				detail = Detail,
 				extraProps = {
 					title = "",
-					onClose = function() --[[ Line: 129 ]]
+					onClose = function()
 						-- upvalues: Callback (copy)
 						Callback()
 					end
@@ -104,7 +104,7 @@ return function() --[[ Line: 76 | Named "FAEUpsellContainer" ]]
 			detail = Detail,
 			extraProps = {
 				title = "",
-				onClose = function() --[[ Line: 140 ]]
+				onClose = function()
 					-- upvalues: Callback (copy)
 					Callback()
 				end
@@ -121,7 +121,7 @@ return function() --[[ Line: 76 | Named "FAEUpsellContainer" ]]
 	end, {
 		GetFFlagMoveAmpUpsellOffNavigateDownFunction() and UseNavigationResult or UseDispatchResult
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 153 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FacialAgeEstimationServiceWrapperModule (upval), FAEWithCallbackPollDelay (upval), FAEWithCallbackPollMaxRetries (upval), FFlagEnableFAEQRCodeHandoffModule (copy), FAEBackgroundOnlyPollDelay (upval), FAEBackgroundOnlyPollMaxRetries (upval), UseAppPolicyResult (copy), GetFFlagEnableWebAmpWizardForFAEHandoffModule (upval), FAEWithWebViewCallbackPollDelay (upval), FAEWithWebViewCallbackPollMaxRetries (upval)
 		return if FacialAgeEstimationServiceWrapperModule.isAvailable() then {
 			delay = FAEWithCallbackPollDelay,
@@ -141,7 +141,7 @@ return function() --[[ Line: 76 | Named "FAEUpsellContainer" ]]
 		delay = UseMemoResult.delay,
 		retries = UseMemoResult.retries
 	})
-	local UseResult4 = ReactModule.useCallback(function(p1, p2) --[[ Line: 179 ]]
+	local UseResult4 = ReactModule.useCallback(function(p1, p2)
 		-- upvalues: FacialAgeEstimationServiceWrapperModule (upval), AuthModalShownFunction (upval), EntryPointEventCtx (copy), UseStateResult2_3 (copy), FFlagEnableFAEQRCodeHandoffModule (copy), Players (upval), UseStateResult2_2 (copy), PromiseModule (upval), GetFFlagEnableWebAmpWizardForFAEHandoffModule (upval), UseStateResult2_1 (copy), UrlUtilsModule (upval), EnableValidateFAEVerificationLink (upval), UseAppPolicyResult (copy), UseResult3 (copy), SkipFacialAgeEstimationWebLinkModal (copy), UseRoactServiceResult1 (copy)
 		local SessionIdentifier = p1.sessionIdentifier
 		local VerificationLink = p1.verificationLink
@@ -175,9 +175,9 @@ return function() --[[ Line: 76 | Named "FAEUpsellContainer" ]]
 		UseStateResult2_3(false)
 		
 		if UseAppPolicyResult then
-			return PromiseModule.new(function(Callback) --[[ Line: 232 ]]
+			return PromiseModule.new(function(Callback)
 				-- upvalues: SessionIdentifier (copy), UseResult3 (upval), VerificationLink (copy)
-				UseResult3(VerificationLink, function() --[[ Line: 233 ]]
+				UseResult3(VerificationLink, function()
 					-- upvalues: Callback (copy), SessionIdentifier (upval)
 					Callback(SessionIdentifier)
 				end)
@@ -194,37 +194,37 @@ return function() --[[ Line: 76 | Named "FAEUpsellContainer" ]]
 		SkipFacialAgeEstimationWebLinkModal, UseRoactServiceResult1,
 		FFlagEnableFAEQRCodeHandoffModule
 	})
-	ReactModule.useEffect(function() --[[ Line: 260 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SessionId (copy), GetFFlagEnableRoactNetworkingForChallengeInteceptionModule (upval), LogEventOnceIfEnabledFunction (upval), IDVApiProvider (upval), UseRoactServiceResult (copy), UseStateResult2_5 (copy), UseResult4 (copy), UseStateResult2_4 (copy), UsePollIDVStatusResult (copy), UseResult2 (copy), EnableFAECancellationAnalytics (upval), UseResult1 (copy), UseResult (copy), UsePollIDVStatusResult2 (copy)
 		local Text = SessionId
 		
 		if GetFFlagEnableRoactNetworkingForChallengeInteceptionModule() then
 			LogEventOnceIfEnabledFunction("start_verification_init")
-			IDVApiProvider.startVerificationWithWrappedNetworking(UseRoactServiceResult, { ageEstimation = true }):andThen(function(Result) --[[ Line: 265 ]]
+			IDVApiProvider.startVerificationWithWrappedNetworking(UseRoactServiceResult, { ageEstimation = true }):andThen(function(Result)
 				-- upvalues: Text (ref), UseStateResult2_5 (upval), LogEventOnceIfEnabledFunction (upval)
 				Text = `{Text}_{Result.sessionIdentifier}`
 				UseStateResult2_5(Text)
 				LogEventOnceIfEnabledFunction("start_verification_end")
 				
 				return Result
-			end):andThen(function(Result) --[[ Line: 271 ]]
+			end):andThen(function(Result)
 				-- upvalues: LogEventOnceIfEnabledFunction (upval), UseResult4 (upval), Text (ref)
 				LogEventOnceIfEnabledFunction("persona_flow_init")
 				
 				return UseResult4(Result, Text)
-			end):andThen(function(Result) --[[ Line: 275 ]]
+			end):andThen(function(Result)
 				-- upvalues: LogEventOnceIfEnabledFunction (upval), UseStateResult2_4 (upval), UsePollIDVStatusResult (upval)
 				LogEventOnceIfEnabledFunction("persona_flow_end")
 				UseStateResult2_4(true)
 				LogEventOnceIfEnabledFunction("status_polling_init")
 				
 				return UsePollIDVStatusResult(Result)
-			end):andThen(function() --[[ Line: 281 ]]
+			end):andThen(function()
 				-- upvalues: LogEventOnceIfEnabledFunction (upval), UseResult2 (upval), Text (ref)
 				LogEventOnceIfEnabledFunction("status_polling_end")
 				
 				return UseResult2(Text)
-			end):catch(function(Err) --[[ Line: 285 ]]
+			end):catch(function(Err)
 				-- upvalues: LogEventOnceIfEnabledFunction (upval), EnableFAECancellationAnalytics (upval), UseResult1 (upval), Text (ref), UseResult (upval)
 				LogEventOnceIfEnabledFunction("status_polling_end")
 				
@@ -237,29 +237,29 @@ return function() --[[ Line: 76 | Named "FAEUpsellContainer" ]]
 				end
 			end)
 			
-			return function() --[[ Line: 298 ]]
+			return function()
 				-- upvalues: UsePollIDVStatusResult2 (upval)
 				UsePollIDVStatusResult2()
 			end
 		else
-			IDVApiProvider.startVerification({ ageEstimation = true }):andThen(function(Result) --[[ Line: 303 ]]
+			IDVApiProvider.startVerification({ ageEstimation = true }):andThen(function(Result)
 				-- upvalues: Text (ref), UseStateResult2_5 (upval)
 				Text = `{Text}_{Result.sessionIdentifier}`
 				UseStateResult2_5(Text)
 				
 				return Result
-			end):andThen(function(Result) --[[ Line: 308 ]]
+			end):andThen(function(Result)
 				-- upvalues: UseResult4 (upval), Text (ref)
 				return UseResult4(Result, Text)
-			end):andThen(function(Result) --[[ Line: 311 ]]
+			end):andThen(function(Result)
 				-- upvalues: UseStateResult2_4 (upval), UsePollIDVStatusResult (upval)
 				UseStateResult2_4(true)
 				
 				return UsePollIDVStatusResult(Result)
-			end):andThen(function() --[[ Line: 315 ]]
+			end):andThen(function()
 				-- upvalues: UseResult2 (upval), Text (ref)
 				return UseResult2(Text)
-			end):catch(function(Err) --[[ Line: 318 ]]
+			end):catch(function(Err)
 				-- upvalues: EnableFAECancellationAnalytics (upval), UseResult1 (upval), Text (ref), UseResult (upval)
 				if EnableFAECancellationAnalytics and Err and Err.resultType == Enum.FacialAgeEstimationResultType.Cancel then
 					UseResult1(Text)
@@ -270,7 +270,7 @@ return function() --[[ Line: 76 | Named "FAEUpsellContainer" ]]
 				end
 			end)
 			
-			return function() --[[ Line: 330 ]]
+			return function()
 				-- upvalues: UsePollIDVStatusResult2 (upval)
 				UsePollIDVStatusResult2()
 			end

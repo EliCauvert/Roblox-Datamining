@@ -15,17 +15,17 @@ local config1 = {
 	[UserModel.PresenceType.OFFLINE] = 0
 }
 
-local function _(p1) --[[ Line: 43 ]]
+local function _(p1)
 	-- upvalues: T (copy), config (copy), PresenceType (copy)
 	return T.number(p1) and config[p1] or config[PresenceType.Offline]
 end
 
-local _ = function(p1) --[[ Line: 48 ]]
+local _ = function(p1)
 	-- upvalues: T (copy), config1 (copy), UserModel (copy)
 	return T.string(p1) and config1[p1] or config1[UserModel.PresenceType.OFFLINE]
 end
 
-local function v8(p1, p2) --[[ Line: 53 ]]
+local function v8(p1, p2)
 	-- upvalues: T (copy), config (copy), PresenceType (copy), config1 (copy), UserModel (copy)
 	local v1 = 0
 	local v2 = 0
@@ -53,11 +53,11 @@ local function v8(p1, p2) --[[ Line: 53 ]]
 	return v1, v2
 end
 
-local _ = function(p1, p2) --[[ Line: 68 ]]
+local _ = function(p1, p2)
 	return p1.username or (p1.name or ""), p2.username or (p2.name or "")
 end
 
-return function(p1, p2): boolean --[[ Line: 72 ]]
+return function(p1, p2): boolean
 	-- upvalues: v8 (copy), T (copy)
 	local v1, v2 = v8(p1, p2)
 	

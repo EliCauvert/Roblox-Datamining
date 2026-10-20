@@ -1,11 +1,11 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("RobloxAppNavigation").Parent.React)
 local UseIsRouteOnScreenModule = require(script.Parent.useIsRouteOnScreen)
 
-return function(Callback, Callback1) --[[ Line: 8 | Named "useOnScreenNavigationListener" ]]
+return function(Callback, Callback1)
 	-- upvalues: UseIsRouteOnScreenModule (copy), ReactModule (copy)
 	local UseIsRouteOnScreenModuleResult = UseIsRouteOnScreenModule()
 	local UseRefResult = ReactModule.useRef(UseIsRouteOnScreenModuleResult)
-	ReactModule.useEffect(function() --[[ Line: 11 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseIsRouteOnScreenModuleResult (copy), UseRefResult (copy), Callback (copy), Callback1 (copy)
 		if UseIsRouteOnScreenModuleResult == UseRefResult.current then return end
 		UseRefResult.current = UseIsRouteOnScreenModuleResult

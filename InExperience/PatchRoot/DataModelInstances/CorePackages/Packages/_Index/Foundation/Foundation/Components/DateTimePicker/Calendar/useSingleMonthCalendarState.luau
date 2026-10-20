@@ -5,10 +5,10 @@ local DateTimeParsingUtilitiesModule = require(script.Parent.Parent.Utilities.Da
 local DateTimeRangeSelectionUtilitiesModule = require(script.Parent.Parent.Utilities.DateTimeRangeSelectionUtilities)
 local DateTimeUtilitiesModule = require(script.Parent.Parent.DateTimeUtilities)
 
-return function(p1) --[[ Line: 50 | Named "useSingleMonthCalendarState" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), DateTimeRangeSelectionUtilitiesModule (copy), DateTimeUtilitiesModule (copy), DateTimeCalendarViewUtilitiesModule (copy), DateTimeCalendarDayAppearanceUtilitiesModule (copy), DateTimeParsingUtilitiesModule (copy)
 	local IsIsDateRange = p1.isDateRange == true
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 57 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), DateTimeRangeSelectionUtilitiesModule (upval), IsIsDateRange (copy)
 		return if p1.selectedDates then DateTimeRangeSelectionUtilitiesModule.normalizeDates({
 			acceptsDateRange = IsIsDateRange,
@@ -16,11 +16,11 @@ return function(p1) --[[ Line: 50 | Named "useSingleMonthCalendarState" ]]
 		}) else {}
 	end, { p1.selectedDates, IsIsDateRange })
 	local UseStateResult, UseStateResult2 = ReactModule.useState(UseMemoResult)
-	ReactModule.useEffect(function() --[[ Line: 75 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), UseMemoResult (copy)
 		UseStateResult2(UseMemoResult)
 	end, { UseMemoResult })
-	ReactModule.useEffect(function() --[[ Line: 79 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseMemoResult (copy)
 		if not p1.selectedDates then
 			p1.onSelectedDateChanged(UseMemoResult)
@@ -32,7 +32,7 @@ return function(p1) --[[ Line: 50 | Named "useSingleMonthCalendarState" ]]
 		UseMemoResult,
 		p1.onSelectedDateChanged
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 86 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseStateResult (copy), DateTimeUtilitiesModule (upval)
 		local List = {}
 		
@@ -42,7 +42,7 @@ return function(p1) --[[ Line: 50 | Named "useSingleMonthCalendarState" ]]
 		return List
 	end, { UseStateResult })
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(DateTimeCalendarViewUtilitiesModule.toViewDate(DateTimeCalendarViewUtilitiesModule.resolveAnchorDate(p1.selectedDates, p1.referenceDate)))
-	ReactModule.useEffect(function() --[[ Line: 101 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult2_1 (copy), DateTimeCalendarViewUtilitiesModule (upval)
 		if p1.viewAnchorDate then
 			UseStateResult2_1(DateTimeCalendarViewUtilitiesModule.toViewDate(p1.viewAnchorDate))
@@ -50,28 +50,28 @@ return function(p1) --[[ Line: 50 | Named "useSingleMonthCalendarState" ]]
 			return
 		end
 	end, { p1.viewAnchorDate })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 108 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: DateTimeUtilitiesModule (upval), UseStateResult1 (copy), UseStateResult2_1 (copy)
 		local NextMonthInfo, NextMonthInfo2 = DateTimeUtilitiesModule.getNextMonthInfo(UseStateResult1.month, UseStateResult1.year)
 		UseStateResult2_1({ month = NextMonthInfo, year = NextMonthInfo2 })
 	end, { UseStateResult1 })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 113 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: DateTimeUtilitiesModule (upval), UseStateResult1 (copy), UseStateResult2_1 (copy)
 		local PrevMonthInfo, PrevMonthInfo2 = DateTimeUtilitiesModule.getPrevMonthInfo(UseStateResult1.month, UseStateResult1.year)
 		UseStateResult2_1({ month = PrevMonthInfo, year = PrevMonthInfo2 })
 	end, { UseStateResult1 })
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 118 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(p2)
 	end, {})
-	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(function() --[[ Line: 123 ]]
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(function()
 		return nil
 	end)
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 127 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: IsIsDateRange (copy), UseStateResult (copy), DateTimeCalendarDayAppearanceUtilitiesModule (upval), UseStateResult3 (copy)
 		return if IsIsDateRange then DateTimeCalendarDayAppearanceUtilitiesModule.resolveHighlightDates(UseStateResult, UseStateResult3) else UseStateResult
 	end, { IsIsDateRange, UseStateResult, UseStateResult3 })
-	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 134 ]]
+	local UseResult3 = ReactModule.useCallback(function(p2)
 		-- upvalues: IsIsDateRange (copy), UseStateResult2_2 (copy)
 		if IsIsDateRange then
 			UseStateResult2_2(p2)
@@ -79,11 +79,11 @@ return function(p1) --[[ Line: 50 | Named "useSingleMonthCalendarState" ]]
 			return
 		end
 	end, { IsIsDateRange })
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 141 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_2 (copy)
 		UseStateResult2_2(nil)
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 145 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsIsDateRange (copy), UseStateResult (copy), UseStateResult2_2 (copy)
 		if not IsIsDateRange then return end
 		if not UseStateResult[1] or UseStateResult[2] then
@@ -93,7 +93,7 @@ return function(p1) --[[ Line: 50 | Named "useSingleMonthCalendarState" ]]
 	
 	return {
 		currViewDate = UseStateResult1,
-		handleDateActivated = ReactModule.useCallback(function(p2, Month, Year) --[[ Line: 156 ]]
+		handleDateActivated = ReactModule.useCallback(function(p2, Month, Year)
 			-- upvalues: UseStateResult (copy), DateTimeUtilitiesModule (upval), p1 (copy), DateTimeCalendarViewUtilitiesModule (upval), UseStateResult2_1 (copy), UseStateResult2_2 (copy), IsIsDateRange (copy), DateTimeRangeSelectionUtilitiesModule (upval), UseStateResult2 (copy)
 			local Hour = 0
 			local Minute = 0
@@ -127,7 +127,7 @@ return function(p1) --[[ Line: 50 | Named "useSingleMonthCalendarState" ]]
 		navigateToPreviousMonth = UseResult1,
 		onHoverEnter = UseResult3,
 		onHoverLeave = UseResult4,
-		onTimeListItemChanged = ReactModule.useCallback(function(p2) --[[ Line: 186 ]]
+		onTimeListItemChanged = ReactModule.useCallback(function(p2)
 			-- upvalues: DateTimeParsingUtilitiesModule (upval), UseStateResult2 (copy), p1 (copy)
 			local AdjustForDaylightSavingResult = DateTimeParsingUtilitiesModule.adjustForDaylightSaving(DateTime.fromUnixTimestamp(p2))
 			UseStateResult2({ AdjustForDaylightSavingResult })

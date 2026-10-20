@@ -16,7 +16,7 @@ local FFlagTFUpdateAnalyticsModule = require(TrustedContacts.Flags.FFlagTFUpdate
 local FFlagTFPassQRCodeSourceModule = require(TrustedContacts.Flags.FFlagTFPassQRCodeSource)
 local _ = require(TrustedContacts.Common.Types)
 
-return function(p1) --[[ Line: 33 | Named "TrustedFriendsCardWithActionsCheck" ]]
+return function(p1)
 	-- upvalues: UseNavigationFunction (copy), UseTrustedFriendActionModule (copy), FFlagTFPassQRCodeSourceModule (copy), FFlagTFUpdateAnalyticsModule (copy), UseTCAnalyticsFunction (copy), ReactModule (copy), EventNames (copy), AppPage (copy), TFActionsEnumModule (copy), RoactUtilsModule (copy), FoundationModule (copy), IconSize (copy), TrustedContactsModalContainerModule (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local UserId = p1.userId
@@ -32,20 +32,20 @@ return function(p1) --[[ Line: 33 | Named "TrustedFriendsCardWithActionsCheck" ]
 		source = p1.source,
 		tfActionsEnum = UseTrustedFriendActionModuleResultEnum
 	}).fireAnalyticsEvent else nil
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 54 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FFlagTFUpdateAnalyticsModule (upval), FireAnalyticsEvent (copy), EventNames (upval), p1 (copy), UseNavigationResult (copy), AppPage (upval)
 		if FFlagTFUpdateAnalyticsModule then
 			FireAnalyticsEvent(EventNames.TCUpsellAgePrecheckTriggered)
 		end
 		p1.externalNavigation.openFacialAgeEstimationUpsell({
-			onSuccess = function() --[[ Line: 60 ]]
+			onSuccess = function()
 				-- upvalues: FFlagTFUpdateAnalyticsModule (upval), FireAnalyticsEvent (upval), EventNames (upval), UseNavigationResult (upval), AppPage (upval)
 				if FFlagTFUpdateAnalyticsModule then
 					FireAnalyticsEvent(EventNames.TCUpsellAgePrecheckSucceeded)
 				end
 				UseNavigationResult.replace(AppPage.TrustedFriendsUserModal, {})
 			end,
-			onFailure = function() --[[ Line: 66 ]]
+			onFailure = function()
 				-- upvalues: FFlagTFUpdateAnalyticsModule (upval), FireAnalyticsEvent (upval), EventNames (upval), p1 (upval)
 				if FFlagTFUpdateAnalyticsModule then
 					FireAnalyticsEvent(EventNames.TCUpsellAgePrecheckFailed)
@@ -59,7 +59,7 @@ return function(p1) --[[ Line: 33 | Named "TrustedFriendsCardWithActionsCheck" ]
 		FireAnalyticsEvent
 	})
 	local IsUseTrustedFriendActionModuleResultEnumMatch = UseTrustedFriendActionModuleResultEnum == TFActionsEnumModule.UnlockTrustedFriendByFAE
-	RoactUtilsModule.Hooks.useEffectOnce(function() --[[ Line: 77 ]]
+	RoactUtilsModule.Hooks.useEffectOnce(function()
 		-- upvalues: UseResult (copy)
 		UseResult()
 	end, IsUseTrustedFriendActionModuleResultEnumMatch)

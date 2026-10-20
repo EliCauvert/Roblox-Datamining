@@ -6,16 +6,16 @@ local PlatformLeaderboardStoreContextModule = require(Parent.Common.PlatformLead
 local FFlagPlatformLeaderboardPersistStoreOnRemount = require(Parent1.SharedFlags).FFlagPlatformLeaderboardPersistStoreOnRemount
 local PlatformLeaderboardClientStore = PlatformLeaderboardsClientModule.PlatformLeaderboardClientStore
 
-return ReactModule.memo(function(p1) --[[ Line: 19 ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FFlagPlatformLeaderboardPersistStoreOnRemount (copy), PlatformLeaderboardsClientModule (copy), ReactModule (copy), PlatformLeaderboardClientStore (copy), PlatformLeaderboardStoreContextModule (copy)
 	local PlatformLeaderboardClientStore1 = if FFlagPlatformLeaderboardPersistStoreOnRemount and p1.store == nil then PlatformLeaderboardsClientModule.getPlatformLeaderboardClientStore() else nil
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 26 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FFlagPlatformLeaderboardPersistStoreOnRemount (upval), p1 (copy), PlatformLeaderboardClientStore (upval)
 		return if FFlagPlatformLeaderboardPersistStoreOnRemount or p1.store ~= nil or not PlatformLeaderboardClientStore then nil else PlatformLeaderboardClientStore.new()
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 34 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagPlatformLeaderboardPersistStoreOnRemount (upval), UseMemoResult (copy)
-		return function() --[[ Line: 35 ]]
+		return function()
 			-- upvalues: FFlagPlatformLeaderboardPersistStoreOnRemount (upval), UseMemoResult (upval)
 			if not FFlagPlatformLeaderboardPersistStoreOnRemount and UseMemoResult then
 				UseMemoResult:destroy()

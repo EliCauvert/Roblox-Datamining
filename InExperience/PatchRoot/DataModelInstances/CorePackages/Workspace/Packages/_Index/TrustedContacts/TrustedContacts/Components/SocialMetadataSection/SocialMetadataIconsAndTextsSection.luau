@@ -10,10 +10,10 @@ local IconVariant = require(Parent.BuilderIcons).IconVariant
 local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 local UseProfileInsightsToIconsAndTextsModule = require(script.Parent.useProfileInsightsToIconsAndTexts)
 
-return function(p1) --[[ Line: 28 | Named "SocialMetadataIconsAndTextsSection" ]]
+return function(p1)
 	-- upvalues: UseProfileInsightsToIconsAndTextsModule (copy), UseDesignTokensFunction (copy), UseTokensFunction (copy), ReactModule (copy), View (copy), Icon (copy), IconSize (copy), IconVariant (copy), Text (copy)
 	local UseProfileInsightsToIconsAndTextsModuleResult = UseProfileInsightsToIconsAndTextsModule(p1.profileInsightIconItems)
-	local UseResult = ReactModule.useCallback(function(p2, LayoutOrder) --[[ Line: 34 ]]
+	local UseResult = ReactModule.useCallback(function(p2, LayoutOrder)
 		-- upvalues: ReactModule (upval), View (upval), Icon (upval), IconSize (upval), IconVariant (upval), Text (upval)
 		return ReactModule.createElement(View, {
 			tag = "auto-xy size-0 row align-y-center gap-xsmall padding-x-xsmall",
@@ -37,7 +37,7 @@ return function(p1) --[[ Line: 28 | Named "SocialMetadataIconsAndTextsSection" ]
 	for i, value in pairs(UseProfileInsightsToIconsAndTextsModuleResult) do
 		table.insert(List, (UseResult(value, i)))
 	end
-	return ReactModule.useMemo(function() --[[ Line: 59 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), View (upval), p1 (copy), List (copy)
 		return ReactModule.createElement(View, {
 			tag = {

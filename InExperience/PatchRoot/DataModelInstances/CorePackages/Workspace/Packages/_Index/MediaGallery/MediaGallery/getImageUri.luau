@@ -1,4 +1,4 @@
-﻿return function(Text: string): string --[[ Line: 4 | Named "getImageUri" ]]
+﻿return function(Text: string): string
 	if Text == nil or Text == "" then
 		return ""
 	else

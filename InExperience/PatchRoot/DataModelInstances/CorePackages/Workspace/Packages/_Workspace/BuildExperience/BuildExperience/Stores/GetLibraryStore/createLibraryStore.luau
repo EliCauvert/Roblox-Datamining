@@ -6,7 +6,7 @@ local _ = require(Parent.React)
 local _ = require(BuildExperience.Chat.chatTypes)
 local GetPlayButtonStoreModule = require(BuildExperience.Stores.GetPlayButtonStore)
 
-return function() --[[ Line: 88 | Named "createLibraryStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy), SignalsReactModule (copy), GetPlayButtonStoreModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(false)
 	local Signal1, Signal2_1 = SignalsModule.createSignal(nil)
@@ -22,13 +22,13 @@ return function() --[[ Line: 88 | Named "createLibraryStore" ]]
 	return {
 		getIsOpen = Signal,
 		getIsChatOpen = GetPlayButtonStoreModule(false).getIsActive,
-		useIsOpen = function() --[[ Line: 105 ]]
+		useIsOpen = function()
 			-- upvalues: SignalsReactModule (upval), Signal (copy)
 			return SignalsReactModule.useSignalState(Signal)
 		end,
 		setIsOpen = Signal2,
 		getFocusRequest = Signal5,
-		requestFocus = function(Position, Radius, Model) --[[ Line: 109 ]]
+		requestFocus = function(Position, Radius, Model)
 			-- upvalues: Token (ref), Signal2_4 (copy)
 			Token += 1
 			Signal2_4({
@@ -38,7 +38,7 @@ return function() --[[ Line: 88 | Named "createLibraryStore" ]]
 				model = Model
 			})
 		end,
-		clearFocus = function() --[[ Line: 143 ]]
+		clearFocus = function()
 			-- upvalues: Signal2_4 (copy)
 			Signal2_4(nil)
 		end,
@@ -49,7 +49,7 @@ return function() --[[ Line: 88 | Named "createLibraryStore" ]]
 		getWorldChatLeft = Signal4,
 		setWorldChatLeft = Signal2_3,
 		getChatResourceRequest = Signal6,
-		consumeChatResourceRequest = function(Token) --[[ Line: 153 ]]
+		consumeChatResourceRequest = function(Token)
 			-- upvalues: Signal6 (copy), Signal2_5 (copy)
 			local SignalResult = Signal6(false)
 			
@@ -57,7 +57,7 @@ return function() --[[ Line: 88 | Named "createLibraryStore" ]]
 				Signal2_5(nil)
 			end
 		end,
-		requestAddToChat = function(Resource, ReplacePath, FocusComposer) --[[ Line: 114 ]]
+		requestAddToChat = function(Resource, ReplacePath, FocusComposer)
 			-- upvalues: Token (ref), Signal2_5 (copy)
 			Token += 1
 			Signal2_5({
@@ -68,7 +68,7 @@ return function() --[[ Line: 88 | Named "createLibraryStore" ]]
 				focusComposer = FocusComposer
 			})
 		end,
-		requestRemoveFromChat = function(Resource) --[[ Line: 126 ]]
+		requestRemoveFromChat = function(Resource)
 			-- upvalues: Token (ref), Signal2_5 (copy)
 			Token += 1
 			Signal2_5({ action = "Remove", token = Token, resource = Resource })
@@ -76,13 +76,13 @@ return function() --[[ Line: 88 | Named "createLibraryStore" ]]
 		getChatComposerState = Signal7,
 		setChatComposerState = Signal2_6,
 		getPromptFailure = Signal8,
-		reportPromptFailure = function(ErrorCode) --[[ Line: 164 ]]
+		reportPromptFailure = function(ErrorCode)
 			-- upvalues: Token (ref), Signal2_7 (copy)
 			Token += 1
 			Signal2_7({ token = Token, errorCode = ErrorCode })
 		end,
 		getChipEvent = Signal9,
-		reportChipEvent = function(Kind, Uris) --[[ Line: 169 ]]
+		reportChipEvent = function(Kind, Uris)
 			-- upvalues: Token (ref), Signal2_8 (copy)
 			Token += 1
 			Signal2_8({ token = Token, kind = Kind, uris = Uris })

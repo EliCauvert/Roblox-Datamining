@@ -39,7 +39,7 @@ GenericCell.defaultProps = {
 	isDisabled = false
 }
 
-function GenericCell.render(p1) --[[ Line: 84 ]]
+function GenericCell.render(p1)
 	-- upvalues: RoactModule (copy), InteractableModule (copy), GenericTextLabelModule (copy)
 	assert(p1.validateProps(p1.props))
 	
@@ -121,7 +121,7 @@ function GenericCell.render(p1) --[[ Line: 84 ]]
 	})
 end
 
-return RoactModule.forwardRef(function(p1, ControlRef) --[[ Line: 165 ]]
+return RoactModule.forwardRef(function(p1, ControlRef)
 	-- upvalues: RoactModule (copy), GenericCell (copy), CryoModule (copy)
 	return RoactModule.createElement(GenericCell, CryoModule.Dictionary.join(p1, { controlRef = ControlRef }))
 end)

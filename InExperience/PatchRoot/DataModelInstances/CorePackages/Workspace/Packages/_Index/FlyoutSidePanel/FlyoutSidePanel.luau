@@ -9,10 +9,10 @@ local FFlagCTAChangeMorePageFlyoutButtonTextIxpEnabled = SharedFlagsModule.FFlag
 
 return {
 	Components = {
-		FlyoutSidePanelComponent = CreateLazyComponentFunction(function() --[[ Line: 12 ]]
+		FlyoutSidePanelComponent = CreateLazyComponentFunction(function()
 			return require(script.Components.FlyoutSidePanelComponent)
 		end),
-		FlyoutProfileCard = CreateLazyComponentFunction(function() --[[ Line: 15 ]]
+		FlyoutProfileCard = CreateLazyComponentFunction(function()
 			return require(script.Components.FlyoutProfileCard)
 		end),
 		FlyoutLeftHeader = require(script.Components.FlyoutLeftHeader),

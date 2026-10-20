@@ -41,7 +41,7 @@ local IconsActionsPreviewShrink = Images["icons/actions/previewShrink"]
 local IconsActionsPreviewExpand = Images["icons/actions/previewExpand"]
 local FaceCloneModule = require(script.Parent.FaceClone)
 
-return function(p1) --[[ Line: 78 | Named "Window" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), UseAppPolicyFunction (copy), UseLocalizationFunction (copy), UseCameraOnModule (copy), UseTrackerMessageModule (copy), UseWindowSizeIsLargeModule (copy), UseScreenSizeModule (copy), FFlagTopBarSignalizeScreenSize (copy), SizingUtilsModule (copy), UseSelectorFunction (copy), ReactModule (copy), UseLocalPlayerModule (copy), FaceChatUtilsModule (copy), UseTooltipDismissalModule (copy), ClearTimeoutFunction (copy), SetTimeoutFunction (copy), ModelUtilsModule (copy), NewResult (copy), FaceCloneModule (copy), ControlState (copy), Interactable (copy), CameraStatusIconModule (copy), ServiceModule (copy), ImageSetLabel (copy), IconsActionsPreviewShrink (copy), IconsActionsPreviewExpand (copy), StyledTextLabel (copy), ReactDevtoolsFixTopbar (copy), WithTooltipFunction (copy), CoreGui (copy), TooltipOrientation (copy), CameraStatusDotModule (copy)
 	local Id = p1.id
 	local UseStyleResult = UseStyleFunction()
@@ -52,7 +52,7 @@ return function(p1) --[[ Line: 78 | Named "Window" ]]
 		robloxPermissionErrorHeader = "CoreScripts.TopBar.RobloxPermissionErrorHeader",
 		dynamicAvatarMissingErrorHeader = "CoreScripts.TopBar.DynamicAvatarMissingErrorHeader",
 		dynamicAvatarMissingErrorBody = "CoreScripts.TopBar.DynamicAvatarMissingErrorBody",
-		robloxPermissionErrorBody = if UseAppPolicyFunction(function(p2) --[[ Line: 93 ]]
+		robloxPermissionErrorBody = if UseAppPolicyFunction(function(p2)
 			return p2.getShowUpdatedCameraPath()
 		end) then "CoreScripts.TopBar.RobloxPermissionErrorBodyTwo" else "CoreScripts.TopBar.RobloxPermissionErrorBody"
 	})
@@ -60,16 +60,16 @@ return function(p1) --[[ Line: 78 | Named "Window" ]]
 	local UseTrackerMessageModuleResult = UseTrackerMessageModule()
 	local UseWindowSizeIsLargeModuleResult = UseWindowSizeIsLargeModule(p1.windowSize)
 	local UseScreenSizeModuleResult = UseScreenSizeModule()
-	local Size = if FFlagTopBarSignalizeScreenSize then SizingUtilsModule.getSize(UseScreenSizeModuleResult, UseWindowSizeIsLargeModuleResult) else UseSelectorFunction(function(p2) --[[ Line: 114 ]]
+	local Size = if FFlagTopBarSignalizeScreenSize then SizingUtilsModule.getSize(UseScreenSizeModuleResult, UseWindowSizeIsLargeModuleResult) else UseSelectorFunction(function(p2)
 		-- upvalues: SizingUtilsModule (upval), UseWindowSizeIsLargeModuleResult (copy)
 		return SizingUtilsModule.getSize(p2.displayOptions.screenSize, UseWindowSizeIsLargeModuleResult)
 	end)
-	ReactModule.useEffect(function() --[[ Line: 117 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), Size (copy)
 		p1.windowSize:requestSize(Size.X, Size.Y)
 	end, { Size })
 	local UseLocalPlayerModuleResult = UseLocalPlayerModule()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 123 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FaceChatUtilsModule (upval)
 		return FaceChatUtilsModule.getPermissions().userCamEligible and FaceChatUtilsModule.getPermissions().placeCamEnabled
 	end)
@@ -80,30 +80,30 @@ return function(p1) --[[ Line: 78 | Named "Window" ]]
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(nil)
 	
-	local function v61() --[[ Line: 136 ]]
+	local function v61()
 		-- upvalues: UseRefResult (copy), ClearTimeoutFunction (upval), UseStateResult2 (copy), SetTimeoutFunction (upval)
 		if UseRefResult.current then
 			ClearTimeoutFunction(UseRefResult.current)
 		end
 		UseStateResult2(true)
-		UseRefResult.current = SetTimeoutFunction(function() --[[ Line: 141 ]]
+		UseRefResult.current = SetTimeoutFunction(function()
 			-- upvalues: UseStateResult2 (upval)
 			UseStateResult2(false)
 		end, 2000)
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 145 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), ClearTimeoutFunction (upval), UseStateResult2 (copy), SetTimeoutFunction (upval)
 		if UseRefResult.current then
 			ClearTimeoutFunction(UseRefResult.current)
 		end
 		UseStateResult2(true)
-		UseRefResult.current = SetTimeoutFunction(function() --[[ Line: 141 ]]
+		UseRefResult.current = SetTimeoutFunction(function()
 			-- upvalues: UseStateResult2 (upval)
 			UseStateResult2(false)
 		end, 2000)
 		
-		return function() --[[ Line: 148 ]]
+		return function()
 			-- upvalues: UseRefResult (upval), ClearTimeoutFunction (upval)
 			if UseRefResult.current then
 				ClearTimeoutFunction(UseRefResult.current)
@@ -111,13 +111,13 @@ return function(p1) --[[ Line: 78 | Named "Window" ]]
 		end
 	end, { UseRefResult })
 	
-	local function v62(p2) --[[ Line: 155 ]]
+	local function v62(p2)
 		-- upvalues: UseRefResult (copy), ClearTimeoutFunction (upval), UseStateResult2 (copy), SetTimeoutFunction (upval), FaceChatUtilsModule (upval), UseTooltipDismissalModuleResult4 (copy), UseLocalizationResult (copy), UseLocalPlayerModuleResult (copy), ModelUtilsModule (upval), NewResult (upval)
 		if UseRefResult.current then
 			ClearTimeoutFunction(UseRefResult.current)
 		end
 		UseStateResult2(true)
-		UseRefResult.current = SetTimeoutFunction(function() --[[ Line: 141 ]]
+		UseRefResult.current = SetTimeoutFunction(function()
 			-- upvalues: UseStateResult2 (upval)
 			UseStateResult2(false)
 		end, 2000)
@@ -134,7 +134,7 @@ return function(p1) --[[ Line: 78 | Named "Window" ]]
 		FaceChatUtilsModule.toggleVideoAnimation()
 	end
 	
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 173 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: v62 (copy)
 		v62(false)
 	end, {
@@ -143,43 +143,43 @@ return function(p1) --[[ Line: 78 | Named "Window" ]]
 		UseLocalizationResult,
 		UseLocalPlayerModuleResult
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 177 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), ClearTimeoutFunction (upval), UseStateResult2 (copy), SetTimeoutFunction (upval)
 		if UseRefResult.current then
 			ClearTimeoutFunction(UseRefResult.current)
 		end
 		UseStateResult2(true)
-		UseRefResult.current = SetTimeoutFunction(function() --[[ Line: 141 ]]
+		UseRefResult.current = SetTimeoutFunction(function()
 			-- upvalues: UseStateResult2 (upval)
 			UseStateResult2(false)
 		end, 2000)
 	end, { v61, UseStateResult, p1.windowSize })
 	local UseRefResult1 = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 182 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FaceCloneModule (upval), UseLocalPlayerModuleResult (copy), UseRefResult1 (copy)
 		if _G.__TESTEZ_RUNNING_TEST__ then return end
 		local FaceCloneModuleResult = FaceCloneModule(UseLocalPlayerModuleResult, UseRefResult1.current)
 		
-		return function() --[[ Line: 193 ]]
+		return function()
 			-- upvalues: FaceCloneModuleResult (copy)
 			if FaceCloneModuleResult then
 				FaceCloneModuleResult()
 			end
 		end
 	end, { UseLocalPlayerModuleResult, UseRefResult1 })
-	local UseResult2 = ReactModule.useCallback(function(_, Hover) --[[ Line: 200 ]]
+	local UseResult2 = ReactModule.useCallback(function(_, Hover)
 		-- upvalues: UseStateResult2_2 (copy), ControlState (upval)
 		UseStateResult2_2(Hover == ControlState.Hover)
 	end, { UseStateResult2_2 })
-	local UseResult3 = ReactModule.useCallback(function(_, Hover) --[[ Line: 204 ]]
+	local UseResult3 = ReactModule.useCallback(function(_, Hover)
 		-- upvalues: UseStateResult2_1 (copy), ControlState (upval)
 		UseStateResult2_1(Hover == ControlState.Hover)
 	end, { UseStateResult2_1 })
-	local UseResult4 = ReactModule.useCallback(function(_, Hover) --[[ Line: 208 ]]
+	local UseResult4 = ReactModule.useCallback(function(_, Hover)
 		-- upvalues: UseStateResult2_3 (copy), ControlState (upval)
 		UseStateResult2_3(Hover == ControlState.Hover)
 	end, { UseStateResult2_3 })
-	local UseResult5 = ReactModule.useCallback(function(p2) --[[ Line: 212 ]]
+	local UseResult5 = ReactModule.useCallback(function(p2)
 		-- upvalues: ReactModule (upval), Interactable (upval), UseStateResult3 (copy), FaceChatUtilsModule (upval), UseStyleResult (copy), UseResult2 (copy), UseResult (copy), CameraStatusIconModule (upval)
 		return ReactModule.createElement(Interactable, {
 			Size = UDim2.fromOffset(36, 36),
@@ -226,7 +226,7 @@ return function(p1) --[[ Line: 78 | Named "Window" ]]
 				BackgroundColor3 = if UseStateResult1 then UseStyleResult.Theme.BackgroundOnHover.Color else UseStyleResult.Theme.BackgroundUIContrast.Color,
 				BackgroundTransparency = 0.8,
 				onStateChanged = UseResult3,
-				[ReactModule.Event.Activated] = if ServiceModule then function() --[[ Line: 267 ]]
+				[ReactModule.Event.Activated] = if ServiceModule then function()
 					-- upvalues: ServiceModule (upval), Id (copy)
 					ServiceModule:toggleWindow(Id)
 				end else nil
@@ -284,7 +284,7 @@ return function(p1) --[[ Line: 78 | Named "Window" ]]
 				BackgroundColor3 = if UseStateResult4 then UseStyleResult.Theme.BackgroundOnHover.Color else UseStyleResult.Theme.BackgroundUIContrast.Color,
 				BackgroundTransparency = 0.8,
 				onStateChanged = UseResult4,
-				[ReactModule.Event.Activated] = if ServiceModule then function() --[[ Line: 337 ]]
+				[ReactModule.Event.Activated] = if ServiceModule then function()
 					-- upvalues: p1 (copy)
 					p1.windowSize:toggleIsLarge()
 				end else nil

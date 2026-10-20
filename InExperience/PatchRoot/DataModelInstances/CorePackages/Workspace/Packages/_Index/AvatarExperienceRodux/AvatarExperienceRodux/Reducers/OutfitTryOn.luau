@@ -33,7 +33,7 @@ local FFlagAXPhotoboothMomentsPage = AvatarExperienceFlagsModule.FFlagAXPhotoboo
 local FFlagAXTryOnWithoutEquippedBody = AvatarExperienceFlagsModule.FFlagAXTryOnWithoutEquippedBody
 local Count = 0
 
-local function formatItem(JoinResult, IsUnequipped) --[[ Line: 156 ]]
+local function formatItem(JoinResult, IsUnequipped)
 	-- upvalues: FFlagAXMISEnableMultiShopping (copy), ItemTypeEnum (copy), BundleTypeIdStrings (copy), ASSETTYPENAMETOIDSTRING (copy), FFlagParseHeadShapeFromAPIResponse (copy), FFlagHeadRefinementFacialAnimationToggle (copy), FFlagAXDurablesForMIS (copy), ASSETTYPETOACCESSORYTYPE (copy), LAYEREDCLOTHINGORDER (copy), LAYEREDASSETTYPES (copy), CryoModule (copy), ASSETTYPEIDSTRINGTOMAKEUPTYPE (copy), LAYEREDMAKEUPORDER (copy), Count (ref)
 	local ReceivedBundleInfo: boolean = if JoinResult.receivedBundleInfo then true else false
 	local BundleInfo = JoinResult.bundleInfo
@@ -96,7 +96,7 @@ local function formatItem(JoinResult, IsUnequipped) --[[ Line: 156 ]]
 	return JoinResult1
 end
 
-local function formatItemFromLookOutfit(JoinResult, LookType, LookId, OutfitId) --[[ Line: 243 ]]
+local function formatItemFromLookOutfit(JoinResult, LookType, LookId, OutfitId)
 	-- upvalues: FFlagAXPhotoboothMomentsPage (copy), FFlagAXTryOnWithoutEquippedBody (copy), ASSETTYPETOACCESSORYTYPE (copy), LAYEREDCLOTHINGORDER (copy), LAYEREDASSETTYPES (copy), CryoModule (copy), ASSETTYPEIDSTRINGTOMAKEUPTYPE (copy), LAYEREDMAKEUPORDER (copy), LOOKTYPE (copy), FFlagAXCatalogMakeupSupport (copy), Count (ref)
 	local JoinResult1 = {
 		version = "1",
@@ -129,7 +129,7 @@ local function formatItemFromLookOutfit(JoinResult, LookType, LookId, OutfitId) 
 	return JoinResult1
 end
 
-local function formatBundleFromLookOutfit(JoinResult, LookId) --[[ Line: 286 ]]
+local function formatBundleFromLookOutfit(JoinResult, LookId)
 	-- upvalues: FFlagAXMISEnableMultiShopping (copy), LAYEREDCLOTHINGORDER (copy), LAYEREDMAKEUPORDER (copy), FFlagParseHeadShapeFromAPIResponse (copy), Count (ref)
 	local config = {
 		version = "1",
@@ -157,7 +157,7 @@ local function formatBundleFromLookOutfit(JoinResult, LookId) --[[ Line: 286 ]]
 	return config
 end
 
-local function removeItem(p1, TryOnItems, JoinResult) --[[ Line: 317 ]]
+local function removeItem(p1, TryOnItems, JoinResult)
 	-- upvalues: GetTryOnItemReducerKeyFunction (copy), ASSETTYPENAMETOIDSTRING (copy), ItemTypeEnum (copy), BUNDLETYPEIDSTRINGTONAMEFORBACKEND (copy), CryoModule (copy)
 	local TryOnItemReducerKey = GetTryOnItemReducerKeyFunction(JoinResult.itemId, JoinResult.itemType)
 	local TryOnItem = TryOnItems[TryOnItemReducerKey]
@@ -174,12 +174,12 @@ local function removeItem(p1, TryOnItems, JoinResult) --[[ Line: 317 ]]
 	})
 end
 
-local function _(JoinResult): boolean --[[ Line: 341 | Named "isAnimationOrEmoteItem" ]]
+local function _(JoinResult): boolean
 	-- upvalues: ItemTypeEnum (copy), ASSETTYPENAMETOIDSTRING (copy), BundleTypeIdStrings (copy)
 	return JoinResult.itemType == ItemTypeEnum.Asset and JoinResult.itemSubType == ASSETTYPENAMETOIDSTRING.EmoteAnimation or JoinResult.itemType == ItemTypeEnum.Bundle and JoinResult.itemSubType == tostring(BundleTypeIdStrings.Animations)
 end
 
-local function getTryOnItemsContainsRecolorableBody(JoinResult): boolean --[[ Line: 355 ]]
+local function getTryOnItemsContainsRecolorableBody(JoinResult): boolean
 	-- upvalues: BUNDLETYPEIDSTRINGTONAMEFORBACKEND (copy)
 	for _, JoinResult1 in JoinResult do
 		if JoinResult1.itemType == "Bundle" and BUNDLETYPEIDSTRINGTONAMEFORBACKEND[JoinResult1.itemSubType] == "Body" and JoinResult1.isRecolorable then
@@ -189,7 +189,7 @@ local function getTryOnItemsContainsRecolorableBody(JoinResult): boolean --[[ Li
 	return false
 end
 
-local function getTryOnItemsMakeupAndAvatarLookIds(TryOnItems) --[[ Line: 368 ]]
+local function getTryOnItemsMakeupAndAvatarLookIds(TryOnItems)
 	-- upvalues: CryoModule (copy), MAKEUPLOOKASSETTYPES (copy)
 	local None = CryoModule.None
 	local None1 = CryoModule.None
@@ -205,7 +205,7 @@ local function getTryOnItemsMakeupAndAvatarLookIds(TryOnItems) --[[ Line: 368 ]]
 	return None, None1
 end
 
-local function reconcileAllTryOnState(JoinResult) --[[ Line: 385 ]]
+local function reconcileAllTryOnState(JoinResult)
 	-- upvalues: FFlagAXMISEnableMultiShopping (copy), getTryOnItemsMakeupAndAvatarLookIds (copy), getTryOnItemsContainsRecolorableBody (copy), FFlagAXPhotoboothMomentsPage (copy), CryoModule (copy), TutilsModule (copy), LOOKTYPE (copy), FFlagAXTryOnWithoutEquippedBody (copy)
 	local TryOnItems = JoinResult.TryOnItems
 	local v1 = nil
@@ -257,7 +257,7 @@ local Tbl = {
 }
 
 return require(Parent.Rodux).createReducer(Tbl, {
-	[require(AvatarExperienceRodux.Actions.TryOnColorUpdated).name] = function(p1, p2) --[[ Line: 451 ]]
+	[require(AvatarExperienceRodux.Actions.TryOnColorUpdated).name] = function(p1, p2)
 		-- upvalues: Tbl (copy)
 		local Copy = table.clone(p1 or Tbl)
 		Copy.BodyColor3s = p2.colors
@@ -265,7 +265,7 @@ return require(Parent.Rodux).createReducer(Tbl, {
 		
 		return Copy
 	end,
-	[require(AvatarExperienceRodux.Actions.ToggleTryOn).name] = function(p1, JoinResult) --[[ Line: 458 ]]
+	[require(AvatarExperienceRodux.Actions.ToggleTryOn).name] = function(p1, JoinResult)
 		-- upvalues: Tbl (copy), GetTryOnItemReducerKeyFunction (copy), FFlagAXMISEnableMultiShopping (copy), reconcileAllTryOnState (copy), removeItem (copy), ReducerUtilsModule (copy), formatItem (copy), GetFilteredTryOnItemsFunction (copy), ItemTypeEnum (copy), ASSETTYPENAMETOIDSTRING (copy), BundleTypeIdStrings (copy), CryoModule (copy), getTryOnItemsContainsRecolorableBody (copy), FFlagAXPhotoboothMomentsPage (copy), FFlagAXCatalogMakeupSupport (copy), RemoveMakeupAssetsFromTryOnsIfOverLimitFunction (copy)
 		local Tbl1 = if p1 then p1 else Tbl
 		local TryOnItems = Tbl1.TryOnItems or {}
@@ -326,13 +326,13 @@ return require(Parent.Rodux).createReducer(Tbl, {
 		
 		return reconcileAllTryOnState(JoinResult2)
 	end,
-	[require(AvatarExperienceRodux.Actions.TryOnClassicHeadShape).name] = function(p1, p2) --[[ Line: 561 ]]
+	[require(AvatarExperienceRodux.Actions.TryOnClassicHeadShape).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, {
 			LastTryOnClassicHeadShape = if p2.headShape then p2.headShape else CryoModule.None
 		})
 	end,
-	[require(AvatarExperienceRodux.Actions.TryOnLooksOutfit).name] = function(p1, p2) --[[ Line: 567 ]]
+	[require(AvatarExperienceRodux.Actions.TryOnLooksOutfit).name] = function(p1, p2)
 		-- upvalues: Tbl (copy), FFlagAXMISEnableMultiShopping (copy), FFlagAXCatalogMakeupSupport (copy), LOOKTYPE (copy), MAKEUPLOOKASSETTYPES (copy), GetTryOnItemReducerKeyFunction (copy), formatItemFromLookOutfit (copy), FFlagAXPhotoboothMomentsPage (copy), formatBundleFromLookOutfit (copy), CryoModule (copy), FFlagAXTryOnWithoutEquippedBody (copy)
 		local Tbl1 = if p1 then p1 else Tbl
 		local TryOnItems = {}
@@ -379,7 +379,7 @@ return require(Parent.Rodux).createReducer(Tbl, {
 			OutfitId = if FFlagAXPhotoboothMomentsPage then if p2.outfitId == nil then CryoModule.None else p2.outfitId else nil
 		})
 	end,
-	[require(AvatarExperienceRodux.Actions.SetEquippedInTryOnManager).name] = function(p3, JoinResult) --[[ Line: 646 ]]
+	[require(AvatarExperienceRodux.Actions.SetEquippedInTryOnManager).name] = function(p3, JoinResult)
 		-- upvalues: Tbl (copy), GetTryOnItemReducerKeyFunction (copy), CryoModule (copy)
 		local Tbl1 = if p3 then p3 else Tbl
 		local TryOnItems = Tbl1.TryOnItems or {}
@@ -393,7 +393,7 @@ return require(Parent.Rodux).createReducer(Tbl, {
 			})
 		})
 	end,
-	[require(AvatarExperienceRodux.Actions.SetSelectedTimedOption).name] = function(p3, JoinResult) --[[ Line: 664 ]]
+	[require(AvatarExperienceRodux.Actions.SetSelectedTimedOption).name] = function(p3, JoinResult)
 		-- upvalues: Tbl (copy), GetTryOnItemReducerKeyFunction (copy), CryoModule (copy)
 		local Tbl1 = if p3 then p3 else Tbl
 		local TryOnItems = Tbl1.TryOnItems or {}
@@ -407,7 +407,7 @@ return require(Parent.Rodux).createReducer(Tbl, {
 			})
 		})
 	end,
-	[require(AvatarExperienceRodux.Actions.RemoveUnselectedItemsFromTryOn).name] = function(p3, _) --[[ Line: 682 ]]
+	[require(AvatarExperienceRodux.Actions.RemoveUnselectedItemsFromTryOn).name] = function(p3, _)
 		-- upvalues: Tbl (copy), CryoModule (copy)
 		local Tbl1 = if p3 then p3 else Tbl
 		local TryOnItems = {}
@@ -419,7 +419,7 @@ return require(Parent.Rodux).createReducer(Tbl, {
 		end
 		return CryoModule.Dictionary.join(Tbl1, { TryOnItems = TryOnItems })
 	end,
-	[require(AvatarExperienceRodux.Actions.RemoveLookFromTryOn).name] = if FFlagAXMISEnableMultiShopping then function(p4, p5) --[[ Line: 699 ]]
+	[require(AvatarExperienceRodux.Actions.RemoveLookFromTryOn).name] = if FFlagAXMISEnableMultiShopping then function(p4, p5)
 		-- upvalues: Tbl (copy), FFlagAXCatalogMakeupSupport (copy), CryoModule (copy), FFlagAXTryOnWithoutEquippedBody (copy)
 		local Tbl1 = if p4 then p4 else Tbl
 		local TryOnItems = {}
@@ -448,7 +448,7 @@ return require(Parent.Rodux).createReducer(Tbl, {
 			ShouldTryOnWithoutEquippedBody = not FFlagAXTryOnWithoutEquippedBody and nil
 		})
 	end else nil,
-	[require(AvatarExperienceRodux.Actions.RemoveFromTryOn).name] = function(p6, JoinResult) --[[ Line: 734 ]]
+	[require(AvatarExperienceRodux.Actions.RemoveFromTryOn).name] = function(p6, JoinResult)
 		-- upvalues: Tbl (copy), FindItemInTryOnItemsFunction (copy), reconcileAllTryOnState (copy), removeItem (copy)
 		local Tbl1 = if p6 then p6 else Tbl
 		local TryOnItems = Tbl1.TryOnItems or {}
@@ -456,7 +456,7 @@ return require(Parent.Rodux).createReducer(Tbl, {
 		
 		return if ItemInTryOnItems == nil then Tbl1 else reconcileAllTryOnState(removeItem(Tbl1, TryOnItems, ItemInTryOnItems))
 	end,
-	[require(AvatarExperienceRodux.Actions.RemoveLookItemsFromTryOn).name] = function(p6, p7) --[[ Line: 747 ]]
+	[require(AvatarExperienceRodux.Actions.RemoveLookItemsFromTryOn).name] = function(p6, p7)
 		-- upvalues: Tbl (copy), GetTryOnItemReducerKeyFunction (copy), ItemTypeEnum (copy), CryoModule (copy), FFlagAXMISEnableMultiShopping (copy), FFlagAXTryOnWithoutEquippedBody (copy), FFlagAXCatalogMakeupSupport (copy)
 		local Tbl1 = if p6 then p6 else Tbl
 		
@@ -515,7 +515,7 @@ return require(Parent.Rodux).createReducer(Tbl, {
 		end
 		return Tbl1
 	end,
-	[require(AvatarExperienceRodux.Actions.ReceivedBundleInfoForTryOn).name] = function(p8, JoinResult) --[[ Line: 821 ]]
+	[require(AvatarExperienceRodux.Actions.ReceivedBundleInfoForTryOn).name] = function(p8, JoinResult)
 		-- upvalues: Tbl (copy), GetTryOnItemReducerKeyFunction (copy), ItemTypeEnum (copy), CryoModule (copy)
 		local Tbl1 = if p8 then p8 else Tbl
 		local TryOnItems = Tbl1.TryOnItems or {}
@@ -535,7 +535,7 @@ return require(Parent.Rodux).createReducer(Tbl, {
 			return Tbl1
 		end
 	end,
-	[require(AvatarExperienceRodux.Actions.ClearTryOns).name] = function(p8, p9) --[[ Line: 850 ]]
+	[require(AvatarExperienceRodux.Actions.ClearTryOns).name] = function(p8, p9)
 		-- upvalues: FFlagAXPhotoboothMomentsPage (copy), CryoModule (copy), Tbl (copy), FFlagAXMISEnableMultiShopping (copy), FFlagAXTryOnWithoutEquippedBody (copy), FFlagAXCatalogMakeupSupport (copy)
 		if p8 then
 			local RetainTryOnColor = not (if FFlagAXPhotoboothMomentsPage then p8.LookId ~= nil or p8.OutfitId ~= nil else p8.LookId ~= nil) and p9.retainTryOnColor
@@ -554,7 +554,7 @@ return require(Parent.Rodux).createReducer(Tbl, {
 			return Tbl
 		end
 	end,
-	[require(AvatarExperienceRodux.Actions.NavigatedToNonTryOnPage).name] = function(p8, _) --[[ Line: 877 ]]
+	[require(AvatarExperienceRodux.Actions.NavigatedToNonTryOnPage).name] = function(p8, _)
 		-- upvalues: Tbl (copy)
 		local Copy = table.clone(Tbl)
 		
@@ -563,7 +563,7 @@ return require(Parent.Rodux).createReducer(Tbl, {
 		end
 		return Copy
 	end,
-	[require(AvatarExperienceRodux.Actions.NavigatedToTryOnPage).name] = function(p8, _) --[[ Line: 885 ]]
+	[require(AvatarExperienceRodux.Actions.NavigatedToTryOnPage).name] = function(p8, _)
 		-- upvalues: Tbl (copy)
 		local Copy = table.clone(Tbl)
 		
@@ -572,21 +572,21 @@ return require(Parent.Rodux).createReducer(Tbl, {
 		end
 		return Copy
 	end,
-	[require(AvatarExperienceRodux.Actions.SetBackgroundPreview).name] = function(p8, p9) --[[ Line: 893 ]]
+	[require(AvatarExperienceRodux.Actions.SetBackgroundPreview).name] = function(p8, p9)
 		-- upvalues: Tbl (copy)
 		local Copy = table.clone(p8 or Tbl)
 		Copy.BackgroundPreview = p9.previewKey
 		
 		return Copy
 	end,
-	[require(AvatarExperienceRodux.Actions.DefaultTryOnBodyColorsToggled).name] = function(p8, p9) --[[ Line: 899 ]]
+	[require(AvatarExperienceRodux.Actions.DefaultTryOnBodyColorsToggled).name] = function(p8, p9)
 		-- upvalues: Tbl (copy)
 		local Copy = table.clone(p8 or Tbl)
 		Copy.DefaultTryOnBodyColorsToggled = p9.state
 		
 		return Copy
 	end,
-	[require(AvatarExperienceRodux.Actions.SetOrderForTryOns).name] = function(p8, p9) --[[ Line: 906 ]]
+	[require(AvatarExperienceRodux.Actions.SetOrderForTryOns).name] = function(p8, p9)
 		-- upvalues: Tbl (copy), GetTryOnItemReducerKeyFunction (copy), ItemTypeEnum (copy), CryoModule (copy), Constants (copy)
 		local ItemIdToOrderMap = p9.itemIdToOrderMap
 		local Tbl1 = if p8 then p8 else Tbl
@@ -621,7 +621,7 @@ return require(Parent.Rodux).createReducer(Tbl, {
 		end
 		return Tbl1
 	end,
-	[require(AvatarExperienceRodux.Actions.SetAccessoryAdjustments).name] = function(p10, p11) --[[ Line: 962 ]]
+	[require(AvatarExperienceRodux.Actions.SetAccessoryAdjustments).name] = function(p10, p11)
 		-- upvalues: Tbl (copy), CryoModule (copy)
 		local Tbl1 = if p10 then p10 else Tbl
 		local TryOnItems = Tbl1.TryOnItems or {}
@@ -662,7 +662,7 @@ return require(Parent.Rodux).createReducer(Tbl, {
 		end
 		return Tbl1
 	end,
-	[require(AvatarExperienceRodux.Actions.AddSelectedBundleInfo).name] = function(p12, p13) --[[ Line: 1007 ]]
+	[require(AvatarExperienceRodux.Actions.AddSelectedBundleInfo).name] = function(p12, p13)
 		-- upvalues: Tbl (copy), GetTryOnItemReducerKeyFunction (copy), ItemTypeEnum (copy), CryoModule (copy)
 		local Tbl1 = if p12 then p12 else Tbl
 		local TryOnItems = Tbl1.TryOnItems or {}
@@ -674,10 +674,10 @@ return require(Parent.Rodux).createReducer(Tbl, {
 			})
 		}) else Tbl1
 	end,
-	[require(AvatarExperienceRodux.Actions.SetOutfitTryOns).name] = function(_, p12) --[[ Line: 1026 ]]
+	[require(AvatarExperienceRodux.Actions.SetOutfitTryOns).name] = function(_, p12)
 		return p12.outfitTryOns
 	end,
-	[require(AvatarExperienceRodux.Actions.RemoveLook).name] = function(p12, p13) --[[ Line: 1030 ]]
+	[require(AvatarExperienceRodux.Actions.RemoveLook).name] = function(p12, p13)
 		-- upvalues: Tbl (copy), FFlagAXMISEnableMultiShopping (copy), FFlagAXCatalogMakeupSupport (copy), CryoModule (copy), FFlagAXTryOnWithoutEquippedBody (copy)
 		local Tbl1 = if p12 then p12 else Tbl
 		
@@ -731,10 +731,10 @@ return require(Parent.Rodux).createReducer(Tbl, {
 		end
 		return Tbl1
 	end,
-	[AvatarExperienceCommonModule.State.Actions.CharacterHistoryStateChangeButtonActivated.name] = function(p14, p15) --[[ Line: 1092 ]]
+	[AvatarExperienceCommonModule.State.Actions.CharacterHistoryStateChangeButtonActivated.name] = function(p14, p15)
 		return if p15.tryOn and p15.tryOn.OutfitTryOn then table.clone(p15.tryOn.OutfitTryOn) else p14
 	end,
-	[require(AvatarExperienceRodux.Actions.SetLastToggledLookType).name] = if FFlagAXMISEnableMultiShopping then function(p14, p15) --[[ Line: 1103 ]]
+	[require(AvatarExperienceRodux.Actions.SetLastToggledLookType).name] = if FFlagAXMISEnableMultiShopping then function(p14, p15)
 		-- upvalues: Tbl (copy), CryoModule (copy)
 		return CryoModule.Dictionary.join(if p14 then p14 else Tbl, { LastToggledLookType = p15.lastToggledLookType })
 	end else nil

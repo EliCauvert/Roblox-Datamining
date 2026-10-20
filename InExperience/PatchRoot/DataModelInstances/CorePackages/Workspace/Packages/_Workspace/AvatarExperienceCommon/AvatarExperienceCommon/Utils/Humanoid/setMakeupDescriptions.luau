@@ -2,7 +2,7 @@
 local ASSETTYPEIDSTRINGTOMAKEUPTYPE = require(AvatarExperienceCommon.Constants).ASSET_TYPE_ID_STRING_TO_MAKEUP_TYPE
 local DestroyMakeupDescriptionsModule = require(AvatarExperienceCommon.Utils.Humanoid.destroyMakeupDescriptions)
 
-return function(Parent, List) --[[ Line: 17 | Named "setMakeupDescriptions" ]]
+return function(Parent, List)
 	-- upvalues: DestroyMakeupDescriptionsModule (copy), ASSETTYPEIDSTRINGTOMAKEUPTYPE (copy)
 	DestroyMakeupDescriptionsModule(Parent)
 	

@@ -6,21 +6,21 @@ local SetDictationUsageTypeModule = require(script.Parent.setDictationUsageType)
 local EngineAudioSTTIsDictationEnabled = game:DefineFastFlag("EngineAudioSTTIsDictationEnabled", false)
 local ExpChatDictationSendUsageType = game:DefineFastFlag("ExpChatDictationSendUsageType", false)
 
-local function _(p1) --[[ Line: 47 | Named "destroyIfExists" ]]
+local function _(p1)
 	if p1.current then
 		p1.current:Destroy()
 		p1.current = nil
 	end
 end
 
-local _ = function(p1) --[[ Line: 54 | Named "disconnectIfExists" ]]
+local _ = function(p1)
 	if p1.current then
 		p1.current:Disconnect()
 		p1.current = nil
 	end
 end
 
-local _ = function(p1) --[[ Line: 61 | Named "teardownInstances" ]]
+local _ = function(p1)
 	local TextConnection = p1.textConnection
 	
 	if TextConnection.current then
@@ -59,7 +59,7 @@ local _ = function(p1) --[[ Line: 61 | Named "teardownInstances" ]]
 	end
 end
 
-return function() --[[ Line: 70 | Named "useDictationAudioPipeline" ]]
+return function()
 	-- upvalues: ReactModule (copy), Players (copy), CoreGui (copy), EngineAudioSTTIsDictationEnabled (copy), ExpChatDictationSendUsageType (copy), SetDictationUsageTypeModule (copy), FinishDictationInputModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseRefResult = ReactModule.useRef(nil)
@@ -68,7 +68,7 @@ return function() --[[ Line: 70 | Named "useDictationAudioPipeline" ]]
 	local UseRefResult3 = ReactModule.useRef(nil)
 	local UseRefResult4 = ReactModule.useRef(nil)
 	local UseRefResult5 = ReactModule.useRef(nil)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 80 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseRefResult2 (copy), UseRefResult3 (copy), UseRefResult4 (copy), UseRefResult5 (copy)
 		return {
 			audioDeviceInput = UseRefResult,
@@ -79,7 +79,7 @@ return function() --[[ Line: 70 | Named "useDictationAudioPipeline" ]]
 			vadConnection = UseRefResult5
 		}
 	end, {})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 91 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseMemoResult (copy), UseStateResult2 (copy)
 		local TextConnection = UseMemoResult.textConnection
 		
@@ -119,7 +119,7 @@ return function() --[[ Line: 70 | Named "useDictationAudioPipeline" ]]
 		end
 		UseStateResult2(nil)
 	end, { UseMemoResult })
-	local UseResult1 = ReactModule.useCallback(function(p1, p2) --[[ Line: 97 ]]
+	local UseResult1 = ReactModule.useCallback(function(p1, p2)
 		-- upvalues: Players (upval), UseMemoResult (copy), CoreGui (upval), EngineAudioSTTIsDictationEnabled (upval), ExpChatDictationSendUsageType (upval), SetDictationUsageTypeModule (upval), UseStateResult2 (copy)
 		local LocalPlayer = Players.LocalPlayer
 		
@@ -189,7 +189,7 @@ return function() --[[ Line: 70 | Named "useDictationAudioPipeline" ]]
 		Wire1.TargetInstance = AudioSpeechToText
 		Wire1.Parent = ExpChatDictation
 		UseMemoResult.wire.current = Wire1
-		UseMemoResult.textConnection.current = AudioSpeechToText:GetPropertyChangedSignal("Text"):Connect(function() --[[ Line: 146 ]]
+		UseMemoResult.textConnection.current = AudioSpeechToText:GetPropertyChangedSignal("Text"):Connect(function()
 			-- upvalues: AudioSpeechToText (copy), IsContinuous (copy), p1 (copy)
 			local Text = AudioSpeechToText.Text
 			
@@ -203,7 +203,7 @@ return function() --[[ Line: 70 | Named "useDictationAudioPipeline" ]]
 		
 		if p1.onSpeechStarted then
 			local OnSpeechStartedFunction = p1.onSpeechStarted
-			UseMemoResult.vadConnection.current = AudioSpeechToText:GetPropertyChangedSignal("VoiceDetected"):Connect(function() --[[ Line: 160 ]]
+			UseMemoResult.vadConnection.current = AudioSpeechToText:GetPropertyChangedSignal("VoiceDetected"):Connect(function()
 				-- upvalues: AudioSpeechToText (copy), OnSpeechStartedFunction (copy)
 				if AudioSpeechToText.VoiceDetected then
 					OnSpeechStartedFunction()
@@ -214,9 +214,9 @@ return function() --[[ Line: 70 | Named "useDictationAudioPipeline" ]]
 		
 		return AudioDeviceInput1
 	end, { UseMemoResult })
-	ReactModule.useEffect(function() --[[ Line: 173 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy)
-		return function() --[[ Line: 174 ]]
+		return function()
 			-- upvalues: UseMemoResult (upval)
 			local TextConnection = UseMemoResult.textConnection
 			
@@ -257,11 +257,11 @@ return function() --[[ Line: 70 | Named "useDictationAudioPipeline" ]]
 		end
 	end, { UseMemoResult })
 	
-	return ReactModule.useMemo(function() --[[ Line: 179 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: UseResult1 (copy), FinishDictationInputModule (upval), UseMemoResult (copy), UseResult (copy), UseStateResult (copy), UseRefResult (copy)
 		return {
 			start = UseResult1,
-			finishInput = function() --[[ Line: 182 ]]
+			finishInput = function()
 				-- upvalues: FinishDictationInputModule (upval), UseMemoResult (upval)
 				return FinishDictationInputModule(UseMemoResult.audioSTT.current)
 			end,

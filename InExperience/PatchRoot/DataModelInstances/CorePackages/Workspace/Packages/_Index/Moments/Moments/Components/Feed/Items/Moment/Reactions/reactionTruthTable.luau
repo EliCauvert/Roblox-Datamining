@@ -2,7 +2,7 @@
 
 return {
 	DEFAULT_REACTION = ThumbsUp,
-	decide = function(EffectReaction, p1, p2) --[[ Line: 40 ]]
+	decide = function(EffectReaction, p1, p2)
 		-- upvalues: ThumbsUp (copy)
 		local HasEffectReaction = EffectReaction ~= nil
 		

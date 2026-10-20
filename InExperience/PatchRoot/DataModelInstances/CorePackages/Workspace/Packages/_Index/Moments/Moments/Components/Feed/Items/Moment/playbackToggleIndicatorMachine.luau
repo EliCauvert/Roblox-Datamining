@@ -1,8 +1,8 @@
-﻿return function(p1, p2) --[[ Line: 63 | Named "createPlaybackToggleIndicatorMachine" ]]
+﻿return function(p1, p2)
 	local v1 = "hidden"
 	local ScheduleResult: (() -> ())? = nil
 	
-	local function _() --[[ Line: 71 | Named "clearTimer" ]]
+	local function _()
 		-- upvalues: ScheduleResult (ref)
 		if ScheduleResult ~= nil then
 			ScheduleResult()
@@ -10,14 +10,14 @@
 		end
 	end
 	
-	local function onExitElapsed() --[[ Line: 78 ]]
+	local function onExitElapsed()
 		-- upvalues: ScheduleResult (ref), v1 (ref), p2 (copy)
 		ScheduleResult = nil
 		v1 = "hidden"
 		p2.setMounted(false)
 	end
 	
-	local function beginExit() --[[ Line: 85 ]]
+	local function beginExit()
 		-- upvalues: ScheduleResult (ref), v1 (ref), p2 (copy), p1 (copy), onExitElapsed (copy)
 		ScheduleResult = nil
 		v1 = "exiting"
@@ -25,7 +25,7 @@
 		ScheduleResult = p2.schedule(p1.exitDurationMs, onExitElapsed)
 	end
 	
-	local _ = function() --[[ Line: 93 | Named "armDwell" ]]
+	local _ = function()
 		-- upvalues: ScheduleResult (ref), p2 (copy), p1 (copy), beginExit (copy)
 		if ScheduleResult ~= nil then
 			ScheduleResult()
@@ -35,7 +35,7 @@
 	end
 	
 	return {
-		notifyUserToggle = function() --[[ Line: 99 ]]
+		notifyUserToggle = function()
 			-- upvalues: v1 (ref), p2 (copy), ScheduleResult (ref), p1 (copy), beginExit (copy)
 			if v1 == "hidden" then
 				v1 = "shown"
@@ -51,11 +51,11 @@
 			end
 			ScheduleResult = p2.schedule(p1.dwellMs, beginExit)
 		end,
-		getPhase = function() --[[ Line: 121 ]]
+		getPhase = function()
 			-- upvalues: v1 (ref)
 			return v1
 		end,
-		dispose = function() --[[ Line: 115 ]]
+		dispose = function()
 			-- upvalues: ScheduleResult (ref)
 			if ScheduleResult ~= nil then
 				ScheduleResult()

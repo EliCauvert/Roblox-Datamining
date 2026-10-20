@@ -9,7 +9,7 @@ local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
 local FFlagLuaAppSduiEdpEnabled = require(Parent.SharedFlags).FFlagLuaAppSduiEdpEnabled
 local FFlagLuaAppStableNavigateToGameDetailsModule = require(GameTile.Flags.FFlagLuaAppStableNavigateToGameDetails)
 
-return function() --[[ Line: 12 | Named "useNavigateToGameDetails" ]]
+return function()
 	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), FFlagLuaAppSduiEdpEnabled (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), FFlagLuaAppStableNavigateToGameDetailsModule (copy), ReactModule (copy), OpenGameDetailsFunction (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseNavigationResult = UseNavigationFunction()
@@ -19,7 +19,7 @@ return function() --[[ Line: 12 | Named "useNavigateToGameDetails" ]]
 		local UseRefResult = ReactModule.useRef(UseNavigationResult)
 		UseRefResult.current = UseNavigationResult
 		
-		return ReactModule.useCallback(function(p1, p2) --[[ Line: 27 ]]
+		return ReactModule.useCallback(function(p1, p2)
 			-- upvalues: UseDispatchResult (copy), OpenGameDetailsFunction (upval), UseRefResult (copy), FFlagLuaAppSduiEdpEnabled (upval), UseRoactServiceResult (ref)
 			UseDispatchResult(OpenGameDetailsFunction(p1, UseRefResult.current, p2, if FFlagLuaAppSduiEdpEnabled then UseRoactServiceResult else nil))
 		end, {
@@ -27,7 +27,7 @@ return function() --[[ Line: 12 | Named "useNavigateToGameDetails" ]]
 			if FFlagLuaAppSduiEdpEnabled then UseRoactServiceResult else nil
 		})
 	else
-		return (ReactModule.useCallback(function(p1, p2) --[[ Line: 45 ]]
+		return (ReactModule.useCallback(function(p1, p2)
 			-- upvalues: UseDispatchResult (copy), OpenGameDetailsFunction (upval), UseNavigationResult (copy), FFlagLuaAppSduiEdpEnabled (upval), UseRoactServiceResult (ref)
 			UseDispatchResult(OpenGameDetailsFunction(p1, UseNavigationResult, p2, if FFlagLuaAppSduiEdpEnabled then UseRoactServiceResult else nil))
 		end, {

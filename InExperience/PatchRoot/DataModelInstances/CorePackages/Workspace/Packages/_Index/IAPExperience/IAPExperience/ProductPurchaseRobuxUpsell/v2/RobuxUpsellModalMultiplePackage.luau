@@ -31,7 +31,7 @@ local _ = require(Parent.Enums.VirtualItemBadgeType)
 local UseDefaultFocusBehaviorFunction = require(Parent1.ReactFocusNavigation).useDefaultFocusBehavior
 local FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule = require(Parent.Flags.FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePrompt)
 
-local function UpsellProductDetails(p1) --[[ Line: 64 ]]
+local function UpsellProductDetails(p1)
 	-- upvalues: UseLocalizationFunction (copy), BadgeTypeModule (copy), ReactModule (copy), View (copy), Text (copy), FormatNumberModule (copy), LocalizationService (copy), YellowBadgeModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		Popular = "IAPExperience.RobuxUpsell.Text.PopularItem",
@@ -78,7 +78,7 @@ local function UpsellProductDetails(p1) --[[ Line: 64 ]]
 	})
 end
 
-local function MiddleContent(p1) --[[ Line: 149 ]]
+local function MiddleContent(p1)
 	-- upvalues: ReactModule (copy), View (copy), ProductDetailsModule (copy), UpsellProductDetails (copy)
 	return ReactModule.createElement(View, {
 		tag = "col gap-xxlarge auto-y size-full-0 align-x-center align-y-center"
@@ -100,7 +100,7 @@ local function MiddleContent(p1) --[[ Line: 149 ]]
 				layoutOrder = 1,
 				product = p1.upsellSuggestions[1],
 				selected = p1.selectedUpsellIndex == 1,
-				onSelected = function() --[[ Line: 170 ]]
+				onSelected = function()
 					-- upvalues: p1 (copy)
 					p1.onUpsellSuggestionsSelected(1)
 				end
@@ -109,7 +109,7 @@ local function MiddleContent(p1) --[[ Line: 149 ]]
 				layoutOrder = 2,
 				product = p1.upsellSuggestions[2],
 				selected = p1.selectedUpsellIndex == 2,
-				onSelected = function() --[[ Line: 179 ]]
+				onSelected = function()
 					-- upvalues: p1 (copy)
 					p1.onUpsellSuggestionsSelected(2)
 				end,
@@ -119,7 +119,7 @@ local function MiddleContent(p1) --[[ Line: 149 ]]
 	})
 end
 
-local function ButtonStackInfo(p1) --[[ Line: 204 ]]
+local function ButtonStackInfo(p1)
 	-- upvalues: UseLocalizationFunction (copy), FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (copy), ButtonType (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		BuyRobuxButton = "IAPExperience.RobuxUpsell.Action.BuyRobuxAndItem",
@@ -154,7 +154,7 @@ local function ButtonStackInfo(p1) --[[ Line: 204 ]]
 	}
 end
 
-local function RobuxUpsellModal(p1) --[[ Line: 253 ]]
+local function RobuxUpsellModal(p1)
 	-- upvalues: FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (copy), UseDefaultFocusBehaviorFunction (copy), ReactModule (copy), LoggerModule (copy), Default (copy), MultiplePackageUpsellShownCounter (copy), MultiplePackageUpsellSelectedCounter (copy), MultiplePackageUpsellModalClosedCounter (copy), GetAppContextModule (copy), MultiplePackageUpsellModalBuyClickedCounter (copy), InteractiveAlert (copy), RobuxUpsellModalTitleModule (copy), MiddleContent (copy), ButtonStackInfo (copy), RobuxUpsellModalFooterModule (copy)
 	local ButtonRef = nil
 	local v1 = nil
@@ -162,7 +162,7 @@ local function RobuxUpsellModal(p1) --[[ Line: 253 ]]
 	if FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then
 		ButtonRef, v40 = UseDefaultFocusBehaviorFunction()
 	end
-	ReactModule.useEffect(function() --[[ Line: 260 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: LoggerModule (upval), p1 (copy), Default (upval), MultiplePackageUpsellShownCounter (upval)
 		LoggerModule.debug({
 			message = "Multiple Package Upsell Modal Shown",
@@ -179,7 +179,7 @@ local function RobuxUpsellModal(p1) --[[ Line: 253 ]]
 		})
 	end, { p1.upsellSuggestions })
 	
-	local function OnUpsellSuggestionsSelected(SelectedIndex) --[[ Line: 277 ]]
+	local function OnUpsellSuggestionsSelected(SelectedIndex)
 		-- upvalues: LoggerModule (upval), p1 (copy), Default (upval), MultiplePackageUpsellSelectedCounter (upval)
 		LoggerModule.debug({
 			message = "Multiple Package Upsell Option Selected",
@@ -195,7 +195,7 @@ local function RobuxUpsellModal(p1) --[[ Line: 253 ]]
 		p1.onUpsellSuggestionsSelected(SelectedIndex)
 	end
 	
-	local function CancelPurchaseActivated() --[[ Line: 293 ]]
+	local function CancelPurchaseActivated()
 		-- upvalues: LoggerModule (upval), p1 (copy), Default (upval), MultiplePackageUpsellModalClosedCounter (upval)
 		LoggerModule.debug({
 			message = "Multiple Package Upsell Modal Closed",
@@ -207,7 +207,7 @@ local function RobuxUpsellModal(p1) --[[ Line: 253 ]]
 	
 	local BuyItemActivatedFunction = p1.buttons.buyItemActivated
 	
-	function p1.buttons.buyItemActivated() --[[ Line: 306 ]]
+	function p1.buttons.buyItemActivated()
 		-- upvalues: LoggerModule (upval), GetAppContextModule (upval), p1 (copy), Default (upval), MultiplePackageUpsellModalBuyClickedCounter (upval), BuyItemActivatedFunction (copy)
 		LoggerModule.debug({
 			message = "Multiple Package Upsell Modal Buy Clicked",
@@ -232,14 +232,14 @@ local function RobuxUpsellModal(p1) --[[ Line: 253 ]]
 		screenSize = p1.screenSize,
 		anchorPoint = Vector2.new(0.5, 0.5),
 		position = UDim2.new(0.5, 0, 0.5, 0),
-		titleContent = function() --[[ Line: 331 ]]
+		titleContent = function()
 			-- upvalues: ReactModule (upval), RobuxUpsellModalTitleModule (upval), p1 (copy), CancelPurchaseActivated (copy)
 			return ReactModule.createElement(RobuxUpsellModalTitleModule, {
 				balanceAmount = p1.userBalance,
 				cancelPurchaseActivated = CancelPurchaseActivated
 			})
 		end,
-		middleContent = function() --[[ Line: 337 ]]
+		middleContent = function()
 			-- upvalues: ReactModule (upval), MiddleContent (upval), p1 (copy), OnUpsellSuggestionsSelected (copy)
 			return ReactModule.createElement(MiddleContent, {
 				product = p1.product,
@@ -250,14 +250,14 @@ local function RobuxUpsellModal(p1) --[[ Line: 253 ]]
 			})
 		end,
 		buttonStackInfo = ButtonStackInfo({ buttons = p1.buttons, isQuest = p1.isQuest }),
-		footerContent = function() --[[ Line: 350 ]]
+		footerContent = function()
 			-- upvalues: ReactModule (upval), RobuxUpsellModalFooterModule (upval)
 			return ReactModule.createElement(RobuxUpsellModalFooterModule)
 		end
 	})
 end
 
-return function(p1) --[[ Line: 356 | Named "RobuxUpsellModalContainer" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), RobuxUpsellModal (copy)
 	return ReactModule.createElement(LocalizationProvider, {
 		localization = Localization.new(LocalizationService.RobloxLocaleId)

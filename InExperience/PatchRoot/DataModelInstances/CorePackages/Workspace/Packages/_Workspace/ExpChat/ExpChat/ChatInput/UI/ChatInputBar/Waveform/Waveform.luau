@@ -7,7 +7,7 @@ local ITEMWIDTH = WaveformAudioModule.ITEM_WIDTH
 local RENDERINTERVAL = WaveformAudioModule.RENDER_INTERVAL
 local config = { itemIdx = 0, height = 0.2, age = nil }
 
-return ReactModule.memo(function(p1) --[[ Line: 68 | Named "Waveform" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), ITEMWIDTH (copy), WaveformAudioModule (copy), UseTickClockFunction (copy), RENDERINTERVAL (copy), config (copy), BARWIDTH (copy), ExpChatWaveformStaleWidthFix (copy)
 	local NoNormalize = p1.normalize == nil or p1.normalize
 	local BindBarStyleFunction = p1.bindBarStyle
@@ -19,7 +19,7 @@ return ReactModule.memo(function(p1) --[[ Line: 68 | Named "Waveform" ]]
 	local UseAudioAnalyzerResult = WaveformAudioModule.useAudioAnalyzer(p1.audioDeviceInput)
 	local UseRefResult = ReactModule.useRef(0)
 	local UseRefResult1 = ReactModule.useRef({})
-	ReactModule.useEffect(function() --[[ Line: 84 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), UseRefResult (copy), UseBindingResult2 (copy), UseBindingResult2_1 (copy)
 		table.clear(UseRefResult1.current)
 		UseRefResult.current = 0
@@ -34,7 +34,7 @@ return ReactModule.memo(function(p1) --[[ Line: 68 | Named "Waveform" ]]
 	UseTickClockFunction({
 		intervalSec = RENDERINTERVAL,
 		enabled = p1.isActive and NewCeiled > 0,
-		onTick = function() --[[ Line: 94 ]]
+		onTick = function()
 			-- upvalues: UseBindingResult (copy), WaveformAudioModule (upval), UseAudioAnalyzerResult (copy), UseRefResult (copy), NoNormalize (copy), UseRefResult1 (copy), NewCeiled (copy), UseBindingResult2 (copy), OnSampleFunction (copy)
 			local NewValue = UseBindingResult:getValue() + 1
 			local NewSampleVolumeResult = 0.2 + WaveformAudioModule.sampleVolume(UseAudioAnalyzerResult.current, UseRefResult, NoNormalize) * 0.8
@@ -47,7 +47,7 @@ return ReactModule.memo(function(p1) --[[ Line: 68 | Named "Waveform" ]]
 				OnSampleFunction(NewValue, NewSampleVolumeResult)
 			end
 		end,
-		onFrame = function(p2) --[[ Line: 110 ]]
+		onFrame = function(p2)
 			-- upvalues: UseBindingResult2_1 (copy)
 			UseBindingResult2_1(p2)
 		end
@@ -58,7 +58,7 @@ return ReactModule.memo(function(p1) --[[ Line: 68 | Named "Waveform" ]]
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		ClipsDescendants = true,
-		[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 167 ]]
+		[ReactModule.Change.AbsoluteSize] = function(Frame)
 			-- upvalues: ExpChatWaveformStaleWidthFix (upval), UseStateResult2 (copy), UseStateResult (copy)
 			local X = Frame.AbsoluteSize.X
 			
@@ -71,7 +71,7 @@ return ReactModule.memo(function(p1) --[[ Line: 68 | Named "Waveform" ]]
 				UseStateResult2(X)
 			end
 		end
-	}, (ReactModule.useMemo(function() --[[ Line: 115 ]]
+	}, (ReactModule.useMemo(function()
 		-- upvalues: UseRefResult1 (copy), NewCeiled (copy), ITEMWIDTH (upval), UseBindingResult (copy), config (upval), BindBarStyleFunction (copy), ReactModule (upval), UseBindingResult1 (copy), BARWIDTH (upval)
 		local Frames = {}
 		local Current = UseRefResult1.current
@@ -79,7 +79,7 @@ return ReactModule.memo(function(p1) --[[ Line: 68 | Named "Waveform" ]]
 		for i = 1, NewCeiled do
 			local NewCeiledDelta = NewCeiled - i
 			local ScaledI = (i - 1) * ITEMWIDTH
-			local MapResult = UseBindingResult:map(function(p2) --[[ Line: 122 ]]
+			local MapResult = UseBindingResult:map(function(p2)
 				-- upvalues: NewCeiledDelta (copy), config (upval), Current (copy)
 				local ItemIdx = p2 - NewCeiledDelta
 				
@@ -98,19 +98,19 @@ return ReactModule.memo(function(p1) --[[ Line: 68 | Named "Waveform" ]]
 			local BindBarStyleResult = BindBarStyleFunction(MapResult)
 			Frames["Bar" .. i] = ReactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Position = UseBindingResult1:map(function(p2): UDim2 --[[ Line: 141 ]]
+				Position = UseBindingResult1:map(function(p2): UDim2
 					-- upvalues: ScaledI (copy), ITEMWIDTH (upval)
 					return UDim2.new(0, ScaledI - p2 * ITEMWIDTH, 0.5, 0)
 				end),
 				AnchorPoint = Vector2.new(0, 0.5),
-				Size = MapResult:map(function(p2): UDim2 --[[ Line: 145 ]]
+				Size = MapResult:map(function(p2): UDim2
 					-- upvalues: BARWIDTH (upval)
 					return UDim2.new(0, BARWIDTH, p2.height, 0)
 				end),
-				BackgroundColor3 = BindBarStyleResult:map(function(p2) --[[ Line: 148 ]]
+				BackgroundColor3 = BindBarStyleResult:map(function(p2)
 					return p2.color
 				end),
-				BackgroundTransparency = BindBarStyleResult:map(function(p2) --[[ Line: 151 ]]
+				BackgroundTransparency = BindBarStyleResult:map(function(p2)
 					return p2.transparency
 				end)
 			}, {

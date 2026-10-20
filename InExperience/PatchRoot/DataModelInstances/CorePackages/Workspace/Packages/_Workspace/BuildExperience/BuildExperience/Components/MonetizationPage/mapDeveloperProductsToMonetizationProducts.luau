@@ -3,7 +3,7 @@ local _ = require(BuildExperience.Parent.DataHydration.DeveloperProduct)
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local _ = require(script.Parent.MonetizationPageView)
 local config = {
-	formatDefaultProductName = function(ProductId): string --[[ Line: 22 ]]
+	formatDefaultProductName = function(ProductId): string
 		-- upvalues: LocalizationStringsModule (copy)
 		return (string.gsub(LocalizationStringsModule.MONETIZATION_DEFAULT_PRODUCT_NAME, "{PRODUCT_ID}", (tostring(ProductId))))
 	end,
@@ -13,7 +13,7 @@ local config = {
 	offSale = LocalizationStringsModule.MONETIZATION_OFF_SALE
 }
 
-local function _(p1, p2): boolean --[[ Line: 31 | Named "hasEnabledFeature" ]]
+local function _(p1, p2): boolean
 	local PriceInformation = p1.priceInformation
 	
 	if PriceInformation == nil then
@@ -32,7 +32,7 @@ local function _(p1, p2): boolean --[[ Line: 31 | Named "hasEnabledFeature" ]]
 	return false
 end
 
-local function mapProduct(p3, p4) --[[ Line: 48 ]]
+local function mapProduct(p3, p4)
 	local DefaultPriceInRobux = if p3.priceInformation == nil then nil else p3.priceInformation.defaultPriceInRobux
 	local config = {
 		id = tostring(p3.productId),
@@ -74,7 +74,7 @@ local function mapProduct(p3, p4) --[[ Line: 48 ]]
 	return config
 end
 
-return function(p5, p6) --[[ Line: 68 | Named "mapDeveloperProductsToMonetizationProducts" ]]
+return function(p5, p6)
 	-- upvalues: mapProduct (copy), config (copy)
 	local List = {}
 	

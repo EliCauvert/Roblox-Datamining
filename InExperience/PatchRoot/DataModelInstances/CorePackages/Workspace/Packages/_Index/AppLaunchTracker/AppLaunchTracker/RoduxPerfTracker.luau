@@ -2,11 +2,11 @@
 local RoduxPerfTrackerModule = { __className = "Devtools" }
 RoduxPerfTrackerModule.__index = RoduxPerfTrackerModule
 
-local function _() --[[ Line: 43 | Named "createTable" ]]
+local function _()
 	return (table.create(100))
 end
 
-function RoduxPerfTrackerModule.new(ReportTopAction, ReportTopThunk, StartImmediately) --[[ Line: 48 ]]
+function RoduxPerfTrackerModule.new(ReportTopAction, ReportTopThunk, StartImmediately)
 	-- upvalues: RoduxPerfTrackerModule (copy)
 	return (setmetatable({
 		shouldTrack = false,
@@ -27,7 +27,7 @@ function RoduxPerfTrackerModule.new(ReportTopAction, ReportTopThunk, StartImmedi
 	}, RoduxPerfTrackerModule))
 end
 
-function RoduxPerfTrackerModule:_hookIntoStore(Store) --[[ Line: 80 ]]
+function RoduxPerfTrackerModule:_hookIntoStore(Store)
 	self.store = Store
 	self.originalReducer = Store._reducer
 	self.originalFlushHandler = Store._flushHandler
@@ -37,7 +37,7 @@ function RoduxPerfTrackerModule:_hookIntoStore(Store) --[[ Line: 80 ]]
 	end
 end
 
-function RoduxPerfTrackerModule:trackingReducer(p1, p2) --[[ Line: 90 ]]
+function RoduxPerfTrackerModule:trackingReducer(p1, p2)
 	assert(self.originalReducer, "self.originalReducer must exist")
 	local OriginalReducerResult = self.originalReducer(p1, p2)
 	local ScaledClockTime = (os.clock() - os.clock()) * 1000
@@ -55,7 +55,7 @@ function RoduxPerfTrackerModule:trackingReducer(p1, p2) --[[ Line: 90 ]]
 	return OriginalReducerResult
 end
 
-function RoduxPerfTrackerModule:trackingFlush(...) --[[ Line: 115 ]]
+function RoduxPerfTrackerModule:trackingFlush(...)
 	local ClockTime = os.clock()
 	self.originalFlushHandler(...)
 	self.totalFlushTimeMs += (os.clock() - ClockTime) * 1000
@@ -67,13 +67,13 @@ function RoduxPerfTrackerModule:trackingFlush(...) --[[ Line: 115 ]]
 	end
 end
 
-function RoduxPerfTrackerModule:startTracking() --[[ Line: 130 ]]
-	function self.store._flushHandler(...) --[[ Line: 131 ]]
+function RoduxPerfTrackerModule:startTracking()
+	function self.store._flushHandler(...)
 		-- upvalues: self (copy)
 		return self:trackingFlush(...)
 	end
 	
-	function self.store._reducer(...) --[[ Line: 134 ]]
+	function self.store._reducer(...)
 		-- upvalues: self (copy)
 		return self:trackingReducer(...)
 	end
@@ -81,7 +81,7 @@ function RoduxPerfTrackerModule:startTracking() --[[ Line: 130 ]]
 	self.shouldTrack = true
 end
 
-function RoduxPerfTrackerModule:stopTracking() --[[ Line: 140 ]]
+function RoduxPerfTrackerModule:stopTracking()
 	if self.shouldTrack then
 		self.shouldTrack = false
 		self.store._flushHandler = self.originalFlushHandler
@@ -89,7 +89,7 @@ function RoduxPerfTrackerModule:stopTracking() --[[ Line: 140 ]]
 	end
 end
 
-function RoduxPerfTrackerModule:clear() --[[ Line: 148 ]]
+function RoduxPerfTrackerModule:clear()
 	self.flushCount = 0
 	self.totalFlushTimeMs = 0
 	self.reduceCount = 0
@@ -108,7 +108,7 @@ function RoduxPerfTrackerModule:clear() --[[ Line: 148 ]]
 	end
 end
 
-local function getRelevantLineFromTrace(Text: string): string? --[[ Line: 167 ]]
+local function getRelevantLineFromTrace(Text: string): string?
 	local Parts = string.split(Text, "\n")
 	local Text1 = nil
 	
@@ -122,27 +122,27 @@ local function getRelevantLineFromTrace(Text: string): string? --[[ Line: 167 ]]
 	return nil
 end
 
-local _ = function(p1) --[[ Line: 184 | Named "getThunkName" ]]
+local _ = function(p1)
 	-- upvalues: getRelevantLineFromTrace (copy)
 	local RelevantLineFromTrace = getRelevantLineFromTrace(debug.traceback())
 	
 	return if RelevantLineFromTrace then RelevantLineFromTrace else debug.info(p1, "slf")
 end
 
-function RoduxPerfTrackerModule.makeThunkMiddleware(p1, p2) --[[ Line: 192 ]]
+function RoduxPerfTrackerModule.makeThunkMiddleware(p1, p2)
 	-- upvalues: getRelevantLineFromTrace (copy)
-	local function tracebackReporter(Err) --[[ Line: 193 ]]
+	local function tracebackReporter(Err)
 		return debug.traceback(Err)
 	end
 	
-	return function(Callback, p3) --[[ Line: 196 | Named "thunkMiddleware" ]]
+	return function(Callback, p3)
 		-- upvalues: p1 (copy), p2 (copy), getRelevantLineFromTrace (upval), tracebackReporter (copy)
-		return function(Callback1) --[[ Line: 197 ]]
+		return function(Callback1)
 			-- upvalues: p1 (upval), p3 (copy), p2 (upval), getRelevantLineFromTrace (upval), tracebackReporter (upval), Callback (copy)
 			if typeof(Callback1) ~= "function" then
 				return Callback(Callback1)
 			end
-			local Success, Result = xpcall(function() --[[ Line: 199 ]]
+			local Success, Result = xpcall(function()
 				-- upvalues: p1 (upval), Callback1 (copy), p3 (upval), p2 (upval), getRelevantLineFromTrace (upval)
 				if not p1.shouldTrack then
 					return Callback1(p3, p2)
@@ -172,7 +172,7 @@ function RoduxPerfTrackerModule.makeThunkMiddleware(p1, p2) --[[ Line: 192 ]]
 	end
 end
 
-local _ = function(List) --[[ Line: 243 | Named "getTopValue" ]]
+local _ = function(List)
 	local v1 = nil
 	local v2 = nil
 	
@@ -185,11 +185,11 @@ local _ = function(List) --[[ Line: 243 | Named "getTopValue" ]]
 	return v2, v1
 end
 
-local _ = function(Text: string) --[[ Line: 255 | Named "fixThunkName" ]]
+local _ = function(Text: string)
 	return Text:gsub("CoreGui.RobloxGui.Modules.", ""):gsub("CorePackages.Workspace.Packages._Workspace.", "")
 end
 
-function RoduxPerfTrackerModule:getStats() --[[ Line: 259 ]]
+function RoduxPerfTrackerModule:getStats()
 	local TopActionName = nil
 	local TopActionDurationMs = nil
 	local ActionCount = nil

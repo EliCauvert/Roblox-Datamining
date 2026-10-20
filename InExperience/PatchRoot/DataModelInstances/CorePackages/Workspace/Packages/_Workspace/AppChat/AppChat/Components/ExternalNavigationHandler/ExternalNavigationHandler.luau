@@ -5,16 +5,16 @@ local UseEffectFunction = ReactModule.useEffect
 local UseRefFunction = ReactModule.useRef
 local UsePreviousFunction = require(Parent.RoactUtils).Hooks.usePrevious
 
-function ExternalNavigationHandler(p1) --[[ Line: 24 ]]
+function ExternalNavigationHandler(p1)
 	-- upvalues: UseRefFunction (copy), UseEffectFunction (copy), UsePreviousFunction (copy)
-	local function _() --[[ Line: 25 ]]
+	local function _()
 		-- upvalues: p1 (copy)
 		return p1.requestId ~= p1.completedRequestId and p1.screen
 	end
 	
 	local UseRefResult = UseRefFunction({})
 	
-	local function v4() --[[ Line: 31 ]]
+	local function v4()
 		-- upvalues: p1 (copy), UseRefResult (copy)
 		local Screen = p1.screen
 		local NavigationByScreenEntry: (any) -> () = p1.navigationByScreen[Screen]
@@ -30,14 +30,14 @@ function ExternalNavigationHandler(p1) --[[ Line: 24 ]]
 		p1.completeExternalNavigation(p1.requestId)
 	end
 	
-	UseEffectFunction(function() --[[ Line: 49 ]]
+	UseEffectFunction(function()
 		-- upvalues: p1 (copy), v4 (copy)
 		if p1.requestId ~= p1.completedRequestId and p1.screen then
 			v4()
 		end
 	end, { p1.requestId, p1.completedRequestId, p1.screen })
 	local UsePreviousResult = UsePreviousFunction(p1.navigationByScreen)
-	UseEffectFunction(function() --[[ Line: 57 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseRefResult (copy), UsePreviousResult (copy), p1 (copy)
 		assert(UseRefResult.current, "Queue for ExternalNavigationHandler can't be nil")
 		

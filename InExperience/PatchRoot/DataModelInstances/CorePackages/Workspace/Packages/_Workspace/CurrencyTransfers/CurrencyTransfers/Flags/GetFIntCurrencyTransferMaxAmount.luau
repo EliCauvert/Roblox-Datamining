@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("CurrencyTransferMaxAmount", 500)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastInt("CurrencyTransferMaxAmount")
 end

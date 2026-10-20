@@ -4,10 +4,10 @@ local UseImpressionsTaggerFunction = require(Parent.Impressions).useImpressionsT
 local FFlagAppPageShellScrollToTopFocus = require(Parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
 local FFlagLuaAppsDefaultSelection = require(Parent.SharedFlags).FFlagLuaAppsDefaultSelection
 
-return ReactModule.memo(function(p1) --[[ Line: 20 | Named "SduiFeedItem" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), FFlagAppPageShellScrollToTopFocus (copy), FFlagLuaAppsDefaultSelection (copy), UseImpressionsTaggerFunction (copy)
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = if FFlagAppPageShellScrollToTopFocus then ReactModule.useCallback(function(Current) --[[ Line: 25 ]]
+	local UseResult = if FFlagAppPageShellScrollToTopFocus then ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), FFlagLuaAppsDefaultSelection (upval), p1 (copy)
 		UseRefResult.current = Current
 		

@@ -9,7 +9,7 @@ local IconVariant = FoundationModule.Enums.IconVariant
 local _ = require(script.Parent.SectionTitle)
 local SectionTitleLabelModule = require(script.Parent.SectionTitleLabel)
 
-return function(p1) --[[ Line: 25 | Named "SectionTitleWithAction" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), SectionTitleLabelModule (copy), Icon (copy), IconName (copy), IconSize (copy), IconVariant (copy)
 	local IsBack = p1.variant == "back"
 	

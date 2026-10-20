@@ -5,7 +5,7 @@ local _ = require(Parent.LuauPolyfill)
 local Module = {}
 Module.__index = Module
 
-function Module.new(Body) --[[ Line: 37 ]]
+function Module.new(Body)
 	-- upvalues: Module (copy)
 	local t = {}
 	
@@ -22,37 +22,37 @@ function Module.new(Body) --[[ Line: 37 ]]
 	return t
 end
 
-function Module:arrayBuffer() --[[ Line: 53 ]]
+function Module:arrayBuffer()
 	-- upvalues: PromiseModule (copy)
-	return PromiseModule.new(function(_, Callback: (any) -> ()) --[[ Line: 54 ]]
+	return PromiseModule.new(function(_, Callback: (any) -> ())
 		Callback("arrayBuffer not implemented")
 	end)
 end
 
-function Module:blob() --[[ Line: 60 ]]
+function Module:blob()
 	-- upvalues: PromiseModule (copy)
-	return PromiseModule.new(function(_, Callback: (any) -> ()) --[[ Line: 61 ]]
+	return PromiseModule.new(function(_, Callback: (any) -> ())
 		Callback("blob not implemented")
 	end)
 end
 
-function Module:formData() --[[ Line: 67 ]]
+function Module:formData()
 	-- upvalues: PromiseModule (copy)
-	return PromiseModule.new(function(_, Callback: (any) -> ()) --[[ Line: 68 ]]
+	return PromiseModule.new(function(_, Callback: (any) -> ())
 		Callback("formData not implemented")
 	end)
 end
 
-function Module.json(p1) --[[ Line: 74 ]]
+function Module.json(p1)
 	-- upvalues: PromiseModule (copy), HttpService (copy)
-	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ()) --[[ Line: 75 ]]
+	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ())
 		-- upvalues: p1 (copy), HttpService (upval)
 		if p1._json then
 			Callback(p1._json)
 			
 			return
 		end
-		local Success, Result = pcall(function() --[[ Line: 81 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: HttpService (upval), p1 (upval)
 			return HttpService:JSONDecode(p1.body)
 		end)
@@ -68,9 +68,9 @@ function Module.json(p1) --[[ Line: 74 ]]
 	end)
 end
 
-function Module.text(p1) --[[ Line: 97 ]]
+function Module.text(p1)
 	-- upvalues: PromiseModule (copy)
-	return PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 98 ]]
+	return PromiseModule.new(function(Callback: (any) -> (), _)
 		-- upvalues: p1 (copy)
 		Callback(p1.body or "")
 	end)

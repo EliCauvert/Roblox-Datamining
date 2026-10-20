@@ -1,7 +1,7 @@
 ﻿local EnumScreensModule = require(script:FindFirstAncestor("AppChat").EnumScreens)
 local GetCurrentRouteModule = require(script.Parent.getCurrentRoute)
 
-return function(p1): boolean --[[ Line: 11 | Named "getIsInConversationForTelemetry" ]]
+return function(p1): boolean
 	-- upvalues: GetCurrentRouteModule (copy), EnumScreensModule (copy)
 	local v1 = p1
 	while v1 and v1._dangerouslyGetParent do

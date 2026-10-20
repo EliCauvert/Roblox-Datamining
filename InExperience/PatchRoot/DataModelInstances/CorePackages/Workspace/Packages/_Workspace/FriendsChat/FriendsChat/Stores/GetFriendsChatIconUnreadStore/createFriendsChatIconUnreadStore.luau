@@ -5,24 +5,24 @@ local GetFriendsTabVisibilityStoreModule = require(script.Parent.Parent.GetFrien
 local CreateSignalFunction = SignalsModule.createSignal
 local CreateComputedFunction = SignalsModule.createComputed
 
-return function() --[[ Line: 41 ]]
+return function()
 	-- upvalues: CreateSignalFunction (copy), CreateComputedFunction (copy), GetFriendsTabVisibilityStoreModule (copy), InExperienceAppChatModalModule (copy)
 	local Signal, Signal2 = CreateSignalFunction(0)
 	local UnreadCount = 0
 	local Flag = false
-	local Computed = CreateComputedFunction(function(p1) --[[ Line: 50 ]]
+	local Computed = CreateComputedFunction(function(p1)
 		-- upvalues: GetFriendsTabVisibilityStoreModule (upval), Signal (copy)
 		return if GetFriendsTabVisibilityStoreModule(p1).getIsFriendsTabVisible(p1) then Signal(p1) else 0
 	end)
 	
-	local function establishBaseline(p1) --[[ Line: 57 ]]
+	local function establishBaseline(p1)
 		-- upvalues: Flag (ref), UnreadCount (ref), Signal2 (copy)
 		Flag = true
 		UnreadCount = p1
 		Signal2(0)
 	end
 	
-	local function recordCanonicalCount(p1) --[[ Line: 63 ]]
+	local function recordCanonicalCount(p1)
 		-- upvalues: Flag (ref), GetFriendsTabVisibilityStoreModule (upval), UnreadCount (ref), Signal2 (copy), Signal (copy)
 		if Flag and GetFriendsTabVisibilityStoreModule(false).getIsFriendsTabVisible(false) then
 			local v1 = p1 - UnreadCount
@@ -34,7 +34,7 @@ return function() --[[ Line: 41 ]]
 		UnreadCount = p1
 	end
 	
-	local function clearDisplayCount() --[[ Line: 75 ]]
+	local function clearDisplayCount()
 		-- upvalues: Signal2 (copy)
 		Signal2(0)
 	end

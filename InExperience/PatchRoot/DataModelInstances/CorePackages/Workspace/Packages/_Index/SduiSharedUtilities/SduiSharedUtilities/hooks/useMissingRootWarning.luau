@@ -4,16 +4,16 @@ local GetSduiApiStoreModule = require(SduiSharedUtilities.getSduiApiStore)
 local SduiPageAnalyticsModule = require(SduiSharedUtilities.SduiPageAnalytics)
 local SduiRetryPolicyModule = require(SduiSharedUtilities.SduiRetryPolicy)
 
-return function(p1, Current) --[[ Line: 9 | Named "useMissingRootWarning" ]]
+return function(p1, Current)
 	-- upvalues: ReactModule (copy), SduiRetryPolicyModule (copy), GetSduiApiStoreModule (copy), SduiPageAnalyticsModule (copy)
 	local UseRefResult = ReactModule.useRef(Current)
 	UseRefResult.current = Current
 	local HasCurrent = Current ~= nil
-	ReactModule.useEffect(function() --[[ Line: 13 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: HasCurrent (copy), SduiRetryPolicyModule (upval), UseRefResult (copy), GetSduiApiStoreModule (upval), SduiPageAnalyticsModule (upval), p1 (copy)
 		if HasCurrent then return end
 		local DelayedThread = nil
-		DelayedThread = task.delay(SduiRetryPolicyModule.getFetchTimeoutSec() + 2, function() --[[ Line: 18 ]]
+		DelayedThread = task.delay(SduiRetryPolicyModule.getFetchTimeoutSec() + 2, function()
 			-- upvalues: DelayedThread (ref), UseRefResult (upval), GetSduiApiStoreModule (upval), SduiPageAnalyticsModule (upval), p1 (upval)
 			DelayedThread = nil
 			
@@ -23,7 +23,7 @@ return function(p1, Current) --[[ Line: 9 | Named "useMissingRootWarning" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 29 ]]
+		return function()
 			-- upvalues: DelayedThread (ref)
 			if DelayedThread then
 				task.cancel(DelayedThread)

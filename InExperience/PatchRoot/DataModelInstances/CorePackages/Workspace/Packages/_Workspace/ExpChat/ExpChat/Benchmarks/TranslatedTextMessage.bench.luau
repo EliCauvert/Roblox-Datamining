@@ -23,7 +23,7 @@ local ChatWindowSettings = {
 	BackgroundTransparency = ConfigModule.ChatWindowBackgroundTransparency
 }
 
-local function createMessageElement(List) --[[ Line: 34 ]]
+local function createMessageElement(List)
 	-- upvalues: GetMessageSettingsModule (copy), ChatWindowSettings (copy), ReactModule (copy), TranslatedTextMessageV2Module (copy), GetMessageTextModule (copy)
 	local config = {
 		text = "Sample text chat message text!",
@@ -59,7 +59,7 @@ local function createMessageElement(List) --[[ Line: 34 ]]
 	return ReactModule.createElement(TranslatedTextMessageV2Module, {
 		chatWindowSettings = ChatWindowSettings,
 		textTransparency = ReactModule.createBinding(0),
-		onTextMessageLabelButtonActivated = function() --[[ Line: 71 ]] end,
+		onTextMessageLabelButtonActivated = function() end,
 		isSpatialUIEnabled = config.isSpatialUIEnabled,
 		originalBodyText = ReactModule.createBinding(GetMessageTextModule(Message.current.useTranslation, MessageSettingsModule.translation, MessageSettingsModule.text)),
 		originalPrefixText = ReactModule.createBinding(MessageSettingsModule.prefixText or ""),
@@ -78,7 +78,7 @@ local function createMessageElement(List) --[[ Line: 34 ]]
 	})
 end
 
-local function _(p1) --[[ Line: 92 | Named "wrapWithProviders" ]]
+local function _(p1)
 	-- upvalues: ReactModule (copy), FoundationModule (copy)
 	return ReactModule.createElement(FoundationModule.FoundationProvider, { device = "Desktop", colorMode = "Dark" }, p1)
 end
@@ -86,17 +86,17 @@ end
 local Element = ReactModule.createElement(FoundationModule.FoundationProvider, { device = "Desktop", colorMode = "Dark" }, (createMessageElement()))
 local Element1 = ReactModule.createElement(FoundationModule.FoundationProvider, { device = "Desktop", colorMode = "Dark" }, (createMessageElement({ useTranslation = true })))
 local Element2 = ReactModule.createElement(FoundationModule.FoundationProvider, { device = "Desktop", colorMode = "Dark" }, (createMessageElement({ isUserVerified = true })))
-BenchFileFunction(script, function() --[[ Line: 103 ]]
+BenchFileFunction(script, function()
 	-- upvalues: BenchmarkFunction (copy), RenderFunction (copy), Element (copy), Element1 (copy), Element2 (copy), MountComponentTimesFunction (copy), ScrollComponentTimesFunction (copy)
-	BenchmarkFunction("Render TranslatedTextMessage", function() --[[ Line: 104 ]]
+	BenchmarkFunction("Render TranslatedTextMessage", function()
 		-- upvalues: RenderFunction (upval), Element (upval)
 		RenderFunction(Element):unmount()
 	end)
-	BenchmarkFunction("Render TranslatedTextMessage with translation", function() --[[ Line: 109 ]]
+	BenchmarkFunction("Render TranslatedTextMessage with translation", function()
 		-- upvalues: RenderFunction (upval), Element1 (upval)
 		RenderFunction(Element1):unmount()
 	end)
-	BenchmarkFunction("Render TranslatedTextMessage (verified user)", function() --[[ Line: 114 ]]
+	BenchmarkFunction("Render TranslatedTextMessage (verified user)", function()
 		-- upvalues: RenderFunction (upval), Element2 (upval)
 		RenderFunction(Element2):unmount()
 	end)

@@ -9,7 +9,7 @@ local TextKeysModule = require(EditProfile.Common.TextKeys)
 local ConstantsModule = require(EditProfile.Common.Constants)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return function(p1) --[[ Line: 23 ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), ConstantsModule (copy), View (copy), Text (copy), TextArea (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		AboutModalCaption = TextKeysModule.AboutModalCaption,
@@ -20,7 +20,7 @@ return function(p1) --[[ Line: 23 ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(p1.bioText)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(string.len(p1.bioText) >= 1000)
 	
-	local function _(Text: string) --[[ Line: 34 | Named "textChanged" ]]
+	local function _(Text: string)
 		-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy), p1 (copy)
 		local Length = string.len(Text)
 		UseStateResult2(Text)
@@ -43,7 +43,7 @@ return function(p1) --[[ Line: 23 ]]
 			numLines = 4,
 			text = UseStateResult,
 			width = UDim.new(1, 0),
-			onChanged = function(Text: string) --[[ Line: 60 ]]
+			onChanged = function(Text: string)
 				-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy), p1 (copy)
 				local Length = string.len(Text)
 				UseStateResult2(Text)

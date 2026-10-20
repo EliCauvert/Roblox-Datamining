@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 local ItemModule = require(script.Parent.Item)
 
-return function(Frame) --[[ Line: 21 | Named "ItemList_DEPRECATED" ]]
+return function(Frame)
 	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy), ItemModule (copy)
 	local config = {
 		Layout = ReactModule.createElement("UIListLayout", {

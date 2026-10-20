@@ -2,7 +2,7 @@
 
 return {
 	purchaseCompletedEvent = BindableEvent.Event,
-	firePurchaseCompleted = function() --[[ Line: 15 ]]
+	firePurchaseCompleted = function()
 		-- upvalues: BindableEvent (copy)
 		BindableEvent:Fire()
 	end

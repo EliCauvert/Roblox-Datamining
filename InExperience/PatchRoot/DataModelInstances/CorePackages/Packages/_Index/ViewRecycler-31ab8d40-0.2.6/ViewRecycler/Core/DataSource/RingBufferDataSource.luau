@@ -4,7 +4,7 @@ local _ = require(ViewRecycler.Core.Types)
 local ItemKeyRegistryModule = require(script.Parent.ItemKeyRegistry)
 local MutationControllerModule = require(script.Parent.MutationController)
 
-local function getItems(Count: number, Callback, p1: number, p2: number) --[[ Line: 26 ]]
+local function getItems(Count: number, Callback, p1: number, p2: number)
 	local Buffer = table.create((math.max(0, p2 - p1 + 1)))
 	
 	for i = p1, math.min(p2, Count) do
@@ -13,7 +13,7 @@ local function getItems(Count: number, Callback, p1: number, p2: number) --[[ Li
 	return Buffer
 end
 
-return function(Index: number, p3, p4) --[[ Line: 34 | Named "createRingBufferDataSource" ]]
+return function(Index: number, p3, p4)
 	-- upvalues: ItemKeyRegistryModule (copy), MutationControllerModule (copy), getItems (copy), DataSourceChangeTypeModule (copy)
 	local Values: boolean = Index > 0 and Index % 1 == 0
 	assert(Values, "DataSource.ringBuffer: capacity must be a positive integer")
@@ -30,10 +30,10 @@ return function(Index: number, p3, p4) --[[ Line: 34 | Named "createRingBufferDa
 		Values[i] = value
 		Keys[i] = RebuildResult[i]
 	end
-	local MutationControllerModuleResult = MutationControllerModule(function() --[[ Line: 49 ]]
+	local MutationControllerModuleResult = MutationControllerModule(function()
 		-- upvalues: CountP4 (ref)
 		return CountP4
-	end, function() --[[ Line: 51 ]]
+	end, function()
 		-- upvalues: Values (ref), Keys (ref), Head (ref), CountP4 (ref), DataSourceRingBuffer (copy)
 		return {
 			values = table.clone(Values),
@@ -42,7 +42,7 @@ return function(Index: number, p3, p4) --[[ Line: 34 | Named "createRingBufferDa
 			count = CountP4,
 			keyRegistry = DataSourceRingBuffer.snapshot()
 		}
-	end, function(p5) --[[ Line: 59 ]]
+	end, function(p5)
 		-- upvalues: Values (ref), Keys (ref), Head (ref), CountP4 (ref), DataSourceRingBuffer (copy)
 		Values = p5.values
 		Keys = p5.keys
@@ -51,32 +51,32 @@ return function(Index: number, p3, p4) --[[ Line: 34 | Named "createRingBufferDa
 		DataSourceRingBuffer.restore(p5.keyRegistry)
 	end)
 	
-	local function _(p5): number --[[ Line: 67 | Named "physical" ]]
+	local function _(p5): number
 		-- upvalues: Head (ref), Index (copy)
 		return (Head + p5 - 2) % Index + 1
 	end
 	
 	local v1 = nil
 	v1 = {
-		getItemCount = function() --[[ Line: 73 ]]
+		getItemCount = function()
 			-- upvalues: CountP4 (ref)
 			return CountP4
 		end,
-		getItem = function(p5) --[[ Line: 76 ]]
+		getItem = function(p5)
 			-- upvalues: Values (ref), Head (ref), Index (copy)
 			return Values[(Head + p5 - 2) % Index + 1]
 		end,
-		getItemKey = function(p5) --[[ Line: 79 ]]
+		getItemKey = function(p5)
 			-- upvalues: Keys (ref), Head (ref), Index (copy)
 			return Keys[(Head + p5 - 2) % Index + 1]
 		end,
-		getItems = function(p5, p6) --[[ Line: 82 ]]
+		getItems = function(p5, p6)
 			-- upvalues: getItems (upval), CountP4 (ref), v1 (ref)
 			return (getItems(CountP4, v1.getItem, p5, p6))
 		end,
 		subscribe = MutationControllerModuleResult.subscribe,
 		transaction = MutationControllerModuleResult.transaction,
-		push = function(p5) --[[ Line: 89 ]]
+		push = function(p5)
 			-- upvalues: CountP4 (ref), Index (copy), Head (ref), Keys (ref), DataSourceRingBuffer (copy), Values (ref), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
 			local Count: number = CountP4
 			
@@ -114,7 +114,7 @@ return function(Index: number, p3, p4) --[[ Line: 34 | Named "createRingBufferDa
 				}, Count)
 			end
 		end,
-		clear = function() --[[ Line: 113 ]]
+		clear = function()
 			-- upvalues: CountP4 (ref), Values (ref), Keys (ref), DataSourceRingBuffer (copy), Head (ref), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
 			local Count: number = CountP4
 			

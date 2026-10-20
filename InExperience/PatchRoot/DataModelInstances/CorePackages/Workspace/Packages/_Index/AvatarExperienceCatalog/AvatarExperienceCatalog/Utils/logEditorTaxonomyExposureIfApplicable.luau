@@ -14,7 +14,7 @@ local CatalogCategories = require(Parent.AvatarExperienceModel).Enums.CatalogCat
 local CatalogSDUICategoryIds = AvatarExperienceCommonModule.Enums.CatalogSDUICategoryIds
 local CatalogCategoryKeys = AvatarExperienceCommonModule.Enums.CatalogCategoryKeys
 
-return function(Body) --[[ Line: 24 | Named "logEditorTaxonomyExposureIfApplicable" ]]
+return function(Body)
 	-- upvalues: FFlagAXEnableTaxonomyM20ExposureLoggingClothing (copy), FFlagAXEnableTaxonomyM21ExposureLoggingClothing (copy), FFlagAXMigrateAllTabToSduiDev (copy), CatalogCategoryKeys (copy), FFlagAXCatalogCategoriesSDUI (copy), CatalogSDUICategoryIds (copy), CatalogCategories (copy), IXPServiceWrapper (copy), FStringAXTaxonomyM20ExperimentLayerName (copy), FStringAXTaxonomyM21ExperimentLayerName (copy), FFlagAXSortsBodyTabRecExposureLogging (copy), FStringAXSortsBodyTabRecLayerName (copy)
 	if (FFlagAXEnableTaxonomyM20ExposureLoggingClothing or FFlagAXEnableTaxonomyM21ExposureLoggingClothing) and Body == (if FFlagAXMigrateAllTabToSduiDev then CatalogCategoryKeys.Clothing elseif FFlagAXCatalogCategoriesSDUI then CatalogSDUICategoryIds.Clothing:rawValue() else CatalogCategories.Clothing:rawValue()) then
 		if FFlagAXEnableTaxonomyM20ExposureLoggingClothing then

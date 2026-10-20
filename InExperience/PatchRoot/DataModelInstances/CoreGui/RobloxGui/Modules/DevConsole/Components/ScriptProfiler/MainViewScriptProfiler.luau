@@ -42,7 +42,7 @@ local ScriptProfilerShowPlugins2 = game:DefineFastFlag("ScriptProfilerShowPlugin
 local ScriptProfilerLiveUpdateIntervalMS = game:DefineFastInt("ScriptProfilerLiveUpdateIntervalMS", 1000)
 local DropDownList = { "Callgraph", "Functions" }
 
-local function annotateSearchFilterNodes(p1, p2, p3, p4: number, Key, p5) --[[ Line: 64 ]]
+local function annotateSearchFilterNodes(p1, p2, p3, p4: number, Key, p5)
 	-- upvalues: annotateSearchFilterNodes (copy)
 	local Node = p1.Nodes[Key]
 	
@@ -75,7 +75,7 @@ local function annotateSearchFilterNodes(p1, p2, p3, p4: number, Key, p5) --[[ L
 	end
 end
 
-local function generateSearchFilters(p6, Pattern) --[[ Line: 109 ]]
+local function generateSearchFilters(p6, Pattern)
 	-- upvalues: ProfilerUtilModule (copy), annotateSearchFilterNodes (copy)
 	if Pattern == "" then
 		return nil, nil
@@ -126,7 +126,7 @@ local function generateSearchFilters(p6, Pattern) --[[ Line: 109 ]]
 	return Buffer, Buffer1
 end
 
-local function generatePluginDurationOffsets(GcNodeOffsets, p7) --[[ Line: 153 ]]
+local function generatePluginDurationOffsets(GcNodeOffsets, p7)
 	-- upvalues: GetPluginFlagFunction (copy), GetDurationsFunction (copy)
 	if not p7 then
 		return {}, {}
@@ -166,7 +166,7 @@ local function generatePluginDurationOffsets(GcNodeOffsets, p7) --[[ Line: 153 ]
 	return Buffer, Buffer1
 end
 
-local function getGCOverhead(p8, TotalDurations, p9, NodeId, GCFuncId): number --[[ Line: 203 ]]
+local function getGCOverhead(p8, TotalDurations, p9, NodeId, GCFuncId): number
 	-- upvalues: getGCOverhead (copy)
 	local Node = p9.Nodes[NodeId]
 	local Total = 0
@@ -182,7 +182,7 @@ local function getGCOverhead(p8, TotalDurations, p9, NodeId, GCFuncId): number -
 	return Total
 end
 
-local function generateGCOverheadOffsets(p10) --[[ Line: 231 ]]
+local function generateGCOverheadOffsets(p10)
 	-- upvalues: getGCOverhead (copy)
 	if not p10 or not p10.GCFuncId then
 		return {}, {}
@@ -203,7 +203,7 @@ local function generateGCOverheadOffsets(p10) --[[ Line: 231 ]]
 	return Buffer, Buffer1
 end
 
-function MainViewScriptProfiler.getActiveState(p11) --[[ Line: 259 ]]
+function MainViewScriptProfiler.getActiveState(p11)
 	local IsClientView = p11.props.isClientView
 	
 	if p11.props.isClientView then
@@ -213,11 +213,11 @@ function MainViewScriptProfiler.getActiveState(p11) --[[ Line: 259 ]]
 	end
 end
 
-function MainViewScriptProfiler.getState(p11, p12) --[[ Line: 263 ]]
+function MainViewScriptProfiler.getState(p11, p12)
 	return if p12 then p11.props.client else p11.props.server
 end
 
-function MainViewScriptProfiler.UpdateState(p11, p12, p13) --[[ Line: 267 ]]
+function MainViewScriptProfiler.UpdateState(p11, p12, p13)
 	if p12 then
 		p11.props.dispatchSetScriptProfilerState(nil, nil, p13, nil)
 		
@@ -227,7 +227,7 @@ function MainViewScriptProfiler.UpdateState(p11, p12, p13) --[[ Line: 267 ]]
 	end
 end
 
-local function OnNewProfilingData(p11, State, SerializedData) --[[ Line: 275 ]]
+local function OnNewProfilingData(p11, State, SerializedData)
 	-- upvalues: ScriptProfilerService (copy), generateGCOverheadOffsets (copy), ScriptProfilerShowPlugins2 (copy), generatePluginDurationOffsets (copy)
 	p11.serializedData = SerializedData
 	p11.data = ScriptProfilerService:DeserializeJSON(SerializedData)
@@ -241,9 +241,9 @@ local function OnNewProfilingData(p11, State, SerializedData) --[[ Line: 275 ]]
 	p11.expandedNodes = Buffer
 end
 
-function MainViewScriptProfiler.init(p11) --[[ Line: 293 ]]
+function MainViewScriptProfiler.init(p11)
 	-- upvalues: ScriptProfilerService (copy), Players (copy), ScriptProfilerLiveUpdateIntervalMS (copy), generateSearchFilters (copy), RoactModule (copy)
-	local function _(p12, p13) --[[ Line: 294 | Named "StartScriptProfiling" ]]
+	local function _(p12, p13)
 		-- upvalues: ScriptProfilerService (upval), Players (upval)
 		if p12 then
 			ScriptProfilerService:ClientStart(Players.LocalPlayer, p13.frequency)
@@ -254,7 +254,7 @@ function MainViewScriptProfiler.init(p11) --[[ Line: 293 ]]
 		end
 	end
 	
-	local _ = function(p12) --[[ Line: 302 | Named "StopScriptProfiling" ]]
+	local _ = function(p12)
 		-- upvalues: ScriptProfilerService (upval), Players (upval)
 		if p12 then
 			ScriptProfilerService:ClientStop(Players.LocalPlayer)
@@ -264,7 +264,7 @@ function MainViewScriptProfiler.init(p11) --[[ Line: 293 ]]
 		return nil
 	end
 	
-	local _ = function(p12) --[[ Line: 311 | Named "RequestNewData" ]]
+	local _ = function(p12)
 		-- upvalues: ScriptProfilerService (upval), Players (upval)
 		if p12 then
 			ScriptProfilerService:ClientRequestData(Players.LocalPlayer)
@@ -275,7 +275,7 @@ function MainViewScriptProfiler.init(p11) --[[ Line: 293 ]]
 		end
 	end
 	
-	local _ = function(p12) --[[ Line: 319 | Named "StopTimedProfiling" ]]
+	local _ = function(p12)
 		-- upvalues: p11 (copy), ScriptProfilerService (upval), Players (upval)
 		if p11:getState(p12).isProfiling then
 			if p12 then
@@ -294,12 +294,12 @@ function MainViewScriptProfiler.init(p11) --[[ Line: 293 ]]
 		end
 	end
 	
-	function p11.onUtilTabHeightChanged(UtilTabHeight) --[[ Line: 331 ]]
+	function p11.onUtilTabHeightChanged(UtilTabHeight)
 		-- upvalues: p11 (copy)
 		p11:setState({ utilTabHeight = UtilTabHeight })
 	end
 	
-	local function UpdateTimedProfilingTimer(p12) --[[ Line: 337 ]]
+	local function UpdateTimedProfilingTimer(p12)
 		-- upvalues: p11 (copy)
 		while task.wait(0.5) do
 			local TimedProfilingCountdown: number = p11:getState(p12).timedProfilingCountdown
@@ -309,7 +309,7 @@ function MainViewScriptProfiler.init(p11) --[[ Line: 293 ]]
 		end
 	end
 	
-	local function LiveUpdate(p13) --[[ Line: 352 ]]
+	local function LiveUpdate(p13)
 		-- upvalues: ScriptProfilerLiveUpdateIntervalMS (upval), p11 (copy), ScriptProfilerService (upval), Players (upval)
 		while task.wait(ScriptProfilerLiveUpdateIntervalMS / 1000) do
 			if not p11:getState(p13).liveUpdate then continue end
@@ -321,7 +321,7 @@ function MainViewScriptProfiler.init(p11) --[[ Line: 293 ]]
 		end
 	end
 	
-	function p11.onBeginProfile() --[[ Line: 362 ]]
+	function p11.onBeginProfile()
 		-- upvalues: p11 (copy), ScriptProfilerService (upval), Players (upval), UpdateTimedProfilingTimer (copy), LiveUpdate (copy)
 		local ActiveState, ActiveState2 = p11:getActiveState()
 		
@@ -338,7 +338,7 @@ function MainViewScriptProfiler.init(p11) --[[ Line: 293 ]]
 			p11.props.dispatchSetTimer(ActiveState, {
 				timedProfilingCountdown = ActiveState2.timedProfilingDuration
 			})
-			t.timedProfilingThread = task.delay(ActiveState2.timedProfilingDuration, function() --[[ Line: 375 ]]
+			t.timedProfilingThread = task.delay(ActiveState2.timedProfilingDuration, function()
 				-- upvalues: ActiveState (copy), p11 (upval), ScriptProfilerService (upval), Players (upval)
 				if p11:getState(ActiveState).isProfiling then
 					if ActiveState then
@@ -356,7 +356,7 @@ function MainViewScriptProfiler.init(p11) --[[ Line: 293 ]]
 					ScriptProfilerService:ServerRequestData()
 				end
 			end)
-			t.timedProfilingTimerThread = task.spawn(function() --[[ Line: 379 ]]
+			t.timedProfilingTimerThread = task.spawn(function()
 				-- upvalues: UpdateTimedProfilingTimer (upval), ActiveState (copy)
 				UpdateTimedProfilingTimer(ActiveState)
 			end)
@@ -365,7 +365,7 @@ function MainViewScriptProfiler.init(p11) --[[ Line: 293 ]]
 		p11.props.dispatchSetThreads(ActiveState, t)
 	end
 	
-	function p11.onEndProfile() --[[ Line: 389 ]]
+	function p11.onEndProfile()
 		-- upvalues: p11 (copy), ScriptProfilerService (upval), Players (upval)
 		local ActiveState, ActiveState2 = p11:getActiveState()
 		
@@ -400,7 +400,7 @@ function MainViewScriptProfiler.init(p11) --[[ Line: 293 ]]
 		end
 	end
 	
-	function p11.toggleTimedProfiling() --[[ Line: 417 ]]
+	function p11.toggleTimedProfiling()
 		-- upvalues: p11 (copy)
 		local ActiveState, ActiveState2 = p11:getActiveState()
 		local TimedProfilingDuration = ActiveState2.timedProfilingDuration
@@ -409,41 +409,41 @@ function MainViewScriptProfiler.init(p11) --[[ Line: 293 ]]
 		})
 	end
 	
-	function p11.toggleAverage() --[[ Line: 435 ]]
+	function p11.toggleAverage()
 		-- upvalues: p11 (copy)
 		local ActiveState, ActiveState2 = p11:getActiveState()
 		local Average = ActiveState2.average
 		p11.props.dispatchSetAverage(ActiveState, if Average == 0 then 1 elseif Average == 1 then 60 elseif Average == 60 then 300 elseif Average == 300 then 600 else 0)
 	end
 	
-	function p11.toggleUnits() --[[ Line: 455 ]]
+	function p11.toggleUnits()
 		-- upvalues: p11 (copy)
 		p11.props.dispatchSetScriptProfilerState(nil, not p11.props.usePercentages, nil, nil)
 	end
 	
-	function p11.toggleFrequency() --[[ Line: 459 ]]
+	function p11.toggleFrequency()
 		-- upvalues: p11 (copy)
 		local ActiveState, ActiveState2 = p11:getActiveState()
 		p11.props.dispatchSetFrequency(ActiveState, if ActiveState2.frequency == 1000 then 10000 else 1000)
 	end
 	
-	function p11.onClientButton() --[[ Line: 473 ]]
+	function p11.onClientButton()
 		-- upvalues: p11 (copy)
 		p11.props.dispatchSetScriptProfilerState(true)
 	end
 	
-	function p11.onServerButton() --[[ Line: 477 ]]
+	function p11.onServerButton()
 		-- upvalues: p11 (copy)
 		p11.props.dispatchSetScriptProfilerState(false)
 	end
 	
-	function p11.dataViewDropDownCallback(p14) --[[ Line: 481 ]]
+	function p11.dataViewDropDownCallback(p14)
 		-- upvalues: p11 (copy)
 		local ActiveState, ActiveState2 = p11:getActiveState()
 		p11.props.dispatchSetDataView(ActiveState, p14 ~= 1 and (p14 == 2 or ActiveState2.isFunctionsView))
 	end
 	
-	function p11.onCheckboxChanged(p14, p15) --[[ Line: 495 ]]
+	function p11.onCheckboxChanged(p14, p15)
 		-- upvalues: p11 (copy)
 		local IsClientView = p11.props.isClientView
 		
@@ -462,7 +462,7 @@ function MainViewScriptProfiler.init(p11) --[[ Line: 293 ]]
 		end
 	end
 	
-	function p11.onSearchTermChanged(SearchTerm) --[[ Line: 507 ]]
+	function p11.onSearchTermChanged(SearchTerm)
 		-- upvalues: p11 (copy), generateSearchFilters (upval)
 		local ActiveState, ActiveState2 = p11:getActiveState()
 		local SearchFilters, SearchFilters2 = generateSearchFilters(ActiveState2, SearchTerm)
@@ -477,10 +477,10 @@ function MainViewScriptProfiler.init(p11) --[[ Line: 293 ]]
 	p11.state = { utilTabHeight = 0 }
 end
 
-function MainViewScriptProfiler.didMount(p13) --[[ Line: 525 ]]
+function MainViewScriptProfiler.didMount(p13)
 	-- upvalues: ScriptProfilerService (copy), OnNewProfilingData (copy)
 	p13:setState({ utilTabHeight = p13.utilRef.current.Size.Y.Offset })
-	p13.scriptProfilerConnection = ScriptProfilerService.OnNewData:Connect(function(Player, JsonString) --[[ Line: 531 ]]
+	p13.scriptProfilerConnection = ScriptProfilerService.OnNewData:Connect(function(Player, JsonString)
 		-- upvalues: p13 (copy), OnNewProfilingData (upval)
 		local HasPlayer = Player ~= nil
 		local t = {}
@@ -489,12 +489,12 @@ function MainViewScriptProfiler.didMount(p13) --[[ Line: 525 ]]
 	end)
 end
 
-function MainViewScriptProfiler.willUnmount(p13) --[[ Line: 543 ]]
+function MainViewScriptProfiler.willUnmount(p13)
 	p13.scriptProfilerConnection:Disconnect()
 	p13.scriptProfilerConnection = nil
 end
 
-function MainViewScriptProfiler.didUpdate(p13) --[[ Line: 548 ]]
+function MainViewScriptProfiler.didUpdate(p13)
 	local Size = p13.utilRef.current.Size
 	
 	if Size.Y.Offset ~= p13.state.utilTabHeight then
@@ -502,14 +502,14 @@ function MainViewScriptProfiler.didUpdate(p13) --[[ Line: 548 ]]
 	end
 end
 
-local function _(p13) --[[ Line: 557 | Named "formatTimer" ]]
+local function _(p13)
 	-- upvalues: ProfilerUtilModule (copy)
 	local FormatTimerResult = ProfilerUtilModule.formatTimer(p13)
 	
 	return if FormatTimerResult == "" then FormatTimerResult else ": " .. FormatTimerResult
 end
 
-function MainViewScriptProfiler.renderUtilButtons(p13, p14, IsSmallMatch, IsSmallMatch1) --[[ Line: 567 ]]
+function MainViewScriptProfiler.renderUtilButtons(p13, p14, IsSmallMatch, IsSmallMatch1)
 	-- upvalues: RoactModule (copy), BoxButtonModule (copy), FormatFrequencyFunction (copy), MainWindowHeader1 (copy), Text (copy), MainWindowHeader (copy), ConstantsModule (copy), UnselectedGray (copy), ProfilerUtilModule (copy), DropDownModule (copy), SmallFrameHeight (copy), DropDownList (copy)
 	local IsProfiling = p14.isProfiling
 	local List = {}
@@ -533,7 +533,7 @@ function MainViewScriptProfiler.renderUtilButtons(p13, p14, IsSmallMatch, IsSmal
 			AutoButtonColor = true,
 			BackgroundColor3 = if IsProfiling then ConstantsModule.Color.InactiveBox else UnselectedGray,
 			BackgroundTransparency = 0,
-			[RoactModule.Event.Activated] = function() --[[ Line: 608 ]]
+			[RoactModule.Event.Activated] = function()
 				-- upvalues: IsProfiling (copy), p13 (copy)
 				if not IsProfiling then
 					p13.toggleFrequency()
@@ -551,7 +551,7 @@ function MainViewScriptProfiler.renderUtilButtons(p13, p14, IsSmallMatch, IsSmal
 			AutoButtonColor = true,
 			BackgroundColor3 = if IsProfiling then ConstantsModule.Color.InactiveBox else UnselectedGray,
 			BackgroundTransparency = 0,
-			[RoactModule.Event.Activated] = function() --[[ Line: 631 ]]
+			[RoactModule.Event.Activated] = function()
 				-- upvalues: IsProfiling (copy), p13 (copy)
 				if not IsProfiling then
 					p13.toggleTimedProfiling()
@@ -569,7 +569,7 @@ function MainViewScriptProfiler.renderUtilButtons(p13, p14, IsSmallMatch, IsSmal
 			AutoButtonColor = true,
 			BackgroundColor3 = if IsProfiling then ConstantsModule.Color.InactiveBox else UnselectedGray,
 			BackgroundTransparency = 0,
-			[RoactModule.Event.Activated] = function() --[[ Line: 653 ]]
+			[RoactModule.Event.Activated] = function()
 				-- upvalues: IsProfiling (copy), p13 (copy)
 				if not IsProfiling then
 					p13.toggleAverage()
@@ -594,7 +594,7 @@ function MainViewScriptProfiler.renderUtilButtons(p13, p14, IsSmallMatch, IsSmal
 	if IsSmallMatch then
 		table.insert(List, RoactModule.createElement(BoxButtonModule, {
 			text = "More...",
-			onClicked = function() --[[ Line: 689 ]]
+			onClicked = function()
 				-- upvalues: p13 (copy)
 				p13.props.dispatchShowMobileSettings()
 			end
@@ -603,7 +603,7 @@ function MainViewScriptProfiler.renderUtilButtons(p13, p14, IsSmallMatch, IsSmal
 	return List
 end
 
-function MainViewScriptProfiler.renderUtilAndTab(p13, p14, p15) --[[ Line: 699 ]]
+function MainViewScriptProfiler.renderUtilAndTab(p13, p14, p15)
 	-- upvalues: RoactModule (copy), UtilAndTabModule (copy), ImmutableModule (copy)
 	return RoactModule.createElement(UtilAndTabModule, ImmutableModule.JoinDictionaries({
 		layoutOrder = 1,
@@ -615,7 +615,7 @@ function MainViewScriptProfiler.renderUtilAndTab(p13, p14, p15) --[[ Line: 699 ]
 	}, p14), p15)
 end
 
-function MainViewScriptProfiler.renderExportView(p13) --[[ Line: 719 ]]
+function MainViewScriptProfiler.renderExportView(p13)
 	-- upvalues: RoactModule (copy), ConstantsModule (copy), MainRowPadding (copy), BoxButtonModule (copy), ProfilerExportViewModule (copy)
 	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -637,7 +637,7 @@ function MainViewScriptProfiler.renderExportView(p13) --[[ Line: 719 ]]
 	})
 end
 
-function MainViewScriptProfiler.renderMobileSettingsUI(p13) --[[ Line: 748 ]]
+function MainViewScriptProfiler.renderMobileSettingsUI(p13)
 	-- upvalues: RoactModule (copy), ConstantsModule (copy), MainRowPadding (copy), BoxButtonModule (copy), MobileSettingsViewModule (copy)
 	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -663,7 +663,7 @@ function MainViewScriptProfiler.renderMobileSettingsUI(p13) --[[ Line: 748 ]]
 	})
 end
 
-function MainViewScriptProfiler.renderProfilerView(p13, IsClientView, p14, RenderUtilButtonsResult, OrderedCheckboxState) --[[ Line: 783 ]]
+function MainViewScriptProfiler.renderProfilerView(p13, IsClientView, p14, RenderUtilButtonsResult, OrderedCheckboxState)
 	-- upvalues: RoactModule (copy), ConstantsModule (copy), MainRowPadding (copy), ProfilerFunctionsViewModule (copy), ProfilerViewModule (copy), ScriptProfilerShowPlugins2 (copy)
 	local Data = p14.data
 	local IsFunctionsView = p14.isFunctionsView
@@ -710,7 +710,7 @@ function MainViewScriptProfiler.renderProfilerView(p13, IsClientView, p14, Rende
 	})
 end
 
-function MainViewScriptProfiler.render(p13) --[[ Line: 847 ]]
+function MainViewScriptProfiler.render(p13)
 	-- upvalues: ConstantsModule (copy), ScriptProfilerShowPlugins2 (copy)
 	if p13.props.isExporting then
 		return p13:renderExportView()
@@ -736,7 +736,7 @@ function MainViewScriptProfiler.render(p13) --[[ Line: 847 ]]
 	return p13:renderProfilerView(ActiveState, ActiveState2, p13:renderUtilButtons(ActiveState2, IsFormFactorMatch, IsFormFactorMatch), OrderedCheckboxState)
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p13, _) --[[ Line: 882 | Named "mapStateToProps" ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p13, _)
 	return {
 		isClientView = p13.ScriptProfiler.isClientView,
 		usePercentages = p13.ScriptProfiler.usePercentages,
@@ -745,74 +745,74 @@ return RoactRoduxModule.UNSTABLE_connect2(function(p13, _) --[[ Line: 882 | Name
 		client = p13.ScriptProfiler.client,
 		server = p13.ScriptProfiler.server
 	}
-end, function(Callback) --[[ Line: 894 | Named "mapDispatchToProps" ]]
+end, function(Callback)
 	-- upvalues: SetScriptProfilerStateModule (copy), SetIsProfilingModule (copy), SetDataModule (copy), SetThreadsModule (copy), SetTimerStateModule (copy), ClearStateForNewProfilingSessionModule (copy), SetAverageModule (copy), SetFrequencyModule (copy), SetDataViewModule (copy), SetLiveUpdateModule (copy), SetShowPluginsModule (copy), SetShowGCModule (copy), SetSearchDataModule (copy)
 	return {
-		dispatchSetScriptProfilerState = function(p13, p14, p15, p16) --[[ Line: 896 ]]
+		dispatchSetScriptProfilerState = function(p13, p14, p15, p16)
 			-- upvalues: Callback (copy), SetScriptProfilerStateModule (upval)
 			Callback(SetScriptProfilerStateModule(p13, p14, p15, p16))
 		end,
-		dispatchSetIsProfiling = function(p13, p14) --[[ Line: 900 ]]
+		dispatchSetIsProfiling = function(p13, p14)
 			-- upvalues: Callback (copy), SetIsProfilingModule (upval)
 			Callback(SetIsProfilingModule(p13, p14))
 		end,
-		dispatchSetData = function(p13, p14) --[[ Line: 904 ]]
+		dispatchSetData = function(p13, p14)
 			-- upvalues: Callback (copy), SetDataModule (upval)
 			Callback(SetDataModule(p13, p14))
 		end,
-		dispatchSetThreads = function(p13, p14) --[[ Line: 908 ]]
+		dispatchSetThreads = function(p13, p14)
 			-- upvalues: Callback (copy), SetThreadsModule (upval)
 			Callback(SetThreadsModule(p13, p14))
 		end,
-		dispatchSetTimer = function(p13, p14) --[[ Line: 912 ]]
+		dispatchSetTimer = function(p13, p14)
 			-- upvalues: Callback (copy), SetTimerStateModule (upval)
 			Callback(SetTimerStateModule(p13, p14))
 		end,
-		dispatchClearStateForNewSession = function(p13) --[[ Line: 916 ]]
+		dispatchClearStateForNewSession = function(p13)
 			-- upvalues: Callback (copy), ClearStateForNewProfilingSessionModule (upval)
 			Callback(ClearStateForNewProfilingSessionModule(p13))
 		end,
-		dispatchSetAverage = function(p13, p14) --[[ Line: 920 ]]
+		dispatchSetAverage = function(p13, p14)
 			-- upvalues: Callback (copy), SetAverageModule (upval)
 			Callback(SetAverageModule(p13, p14))
 		end,
-		dispatchSetFrequency = function(p13, p14) --[[ Line: 924 ]]
+		dispatchSetFrequency = function(p13, p14)
 			-- upvalues: Callback (copy), SetFrequencyModule (upval)
 			Callback(SetFrequencyModule(p13, p14))
 		end,
-		dispatchSetDataView = function(p13, p14) --[[ Line: 928 ]]
+		dispatchSetDataView = function(p13, p14)
 			-- upvalues: Callback (copy), SetDataViewModule (upval)
 			Callback(SetDataViewModule(p13, p14))
 		end,
-		dispatchSetLiveUpdate = function(p13, p14) --[[ Line: 932 ]]
+		dispatchSetLiveUpdate = function(p13, p14)
 			-- upvalues: Callback (copy), SetLiveUpdateModule (upval)
 			Callback(SetLiveUpdateModule(p13, p14))
 		end,
-		dispatchSetShowPlugins = function(p13, p14) --[[ Line: 936 ]]
+		dispatchSetShowPlugins = function(p13, p14)
 			-- upvalues: Callback (copy), SetShowPluginsModule (upval)
 			Callback(SetShowPluginsModule(p13, p14))
 		end,
-		dispatchSetShowGC = function(p13, p14) --[[ Line: 940 ]]
+		dispatchSetShowGC = function(p13, p14)
 			-- upvalues: Callback (copy), SetShowGCModule (upval)
 			Callback(SetShowGCModule(p13, p14))
 		end,
-		dispatchSetSearchData = function(p13, p14) --[[ Line: 944 ]]
+		dispatchSetSearchData = function(p13, p14)
 			-- upvalues: Callback (copy), SetSearchDataModule (upval)
 			Callback(SetSearchDataModule(p13, p14))
 		end,
-		dispatchStartExport = function() --[[ Line: 948 ]]
+		dispatchStartExport = function()
 			-- upvalues: Callback (copy), SetScriptProfilerStateModule (upval)
 			Callback(SetScriptProfilerStateModule(nil, nil, nil, nil, true))
 		end,
-		dispatchFinishedExporting = function() --[[ Line: 952 ]]
+		dispatchFinishedExporting = function()
 			-- upvalues: Callback (copy), SetScriptProfilerStateModule (upval)
 			Callback(SetScriptProfilerStateModule(nil, nil, nil, nil, false))
 		end,
-		dispatchShowMobileSettings = function() --[[ Line: 956 ]]
+		dispatchShowMobileSettings = function()
 			-- upvalues: Callback (copy), SetScriptProfilerStateModule (upval)
 			Callback(SetScriptProfilerStateModule(nil, nil, nil, nil, nil, true))
 		end,
-		dispatchHideMobileSettings = function() --[[ Line: 960 ]]
+		dispatchHideMobileSettings = function()
 			-- upvalues: Callback (copy), SetScriptProfilerStateModule (upval)
 			Callback(SetScriptProfilerStateModule(nil, nil, nil, nil, nil, false))
 		end

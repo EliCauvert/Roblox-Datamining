@@ -10,7 +10,7 @@ local IntersectionResult = TModule.intersection(TModule.strictInterface({
 	onComplete = TModule.optional(TModule.callback),
 	regularProps = TModule.table,
 	[RoactModule.Children] = TModule.optional(TModule.table)
-}), function(p1) --[[ Line: 53 ]]
+}), function(p1)
 	-- upvalues: RoactModule (copy)
 	if p1[RoactModule.Children] == nil or p1.regularProps[RoactModule.Children] == nil then
 		return true
@@ -19,16 +19,16 @@ local IntersectionResult = TModule.intersection(TModule.strictInterface({
 	end
 end)
 local SpringAnimatedItemModule = {
-	wrap = function(p1) --[[ Line: 66 ]]
+	wrap = function(p1)
 		-- upvalues: RoactModule (copy), OtterModule (copy), IntersectionResult (copy), CryoModule (copy)
 		local ExtendResult = RoactModule.PureComponent:extend(string.format("SpringAnimatedItem(%s)", (tostring(p1))))
 		ExtendResult.defaultProps = { regularProps = {} }
 		
-		function ExtendResult.init(p2) --[[ Line: 73 ]]
+		function ExtendResult.init(p2)
 			-- upvalues: RoactModule (upval)
 			p2.ref = p2.props.regularProps[RoactModule.Ref] or RoactModule.createRef()
 			
-			function p2.applyAnimatedValues(AnimatedValues) --[[ Line: 76 ]]
+			function p2.applyAnimatedValues(AnimatedValues)
 				-- upvalues: p2 (copy)
 				local Current = p2.ref.current
 				
@@ -38,7 +38,7 @@ local SpringAnimatedItemModule = {
 				end
 			end
 			
-			function p2.onComplete() --[[ Line: 90 ]]
+			function p2.onComplete()
 				-- upvalues: p2 (copy)
 				if p2.props.onComplete then
 					p2.props.onComplete()
@@ -48,12 +48,12 @@ local SpringAnimatedItemModule = {
 			p2.motor = nil
 		end
 		
-		function ExtendResult.didMount(p3) --[[ Line: 99 ]]
+		function ExtendResult.didMount(p3)
 			-- upvalues: OtterModule (upval)
 			local AnimatedValues = p3.props.animatedValues
 			p3.applyAnimatedValues(AnimatedValues)
 			p3.motor = OtterModule.createGroupMotor(AnimatedValues)
-			p3.motor:onStep(function(p4) --[[ Line: 107 ]]
+			p3.motor:onStep(function(p4)
 				-- upvalues: p3 (copy)
 				p3.applyAnimatedValues(p4)
 			end)
@@ -61,14 +61,14 @@ local SpringAnimatedItemModule = {
 			p3.motor:start()
 		end
 		
-		function ExtendResult.willUpdate(p3, p4) --[[ Line: 114 ]]
+		function ExtendResult.willUpdate(p3, p4)
 			-- upvalues: RoactModule (upval)
 			if p3.props.regularProps[RoactModule.Ref] ~= p4.regularProps[RoactModule.Ref] and p4.regularProps[RoactModule.Ref] ~= nil then
 				p3.ref = p4.regularProps[RoactModule.Ref]
 			end
 		end
 		
-		function ExtendResult.render(p3) --[[ Line: 123 ]]
+		function ExtendResult.render(p3)
 			-- upvalues: IntersectionResult (upval), CryoModule (upval), RoactModule (upval), p1 (copy)
 			assert(IntersectionResult(p3.props))
 			
@@ -78,7 +78,7 @@ local SpringAnimatedItemModule = {
 			})))
 		end
 		
-		function ExtendResult.didUpdate(p3, p4) --[[ Line: 135 ]]
+		function ExtendResult.didUpdate(p3, p4)
 			-- upvalues: OtterModule (upval)
 			if p3.props.animatedValues ~= p4.animatedValues then
 				local SpringResults = {}
@@ -97,7 +97,7 @@ local SpringAnimatedItemModule = {
 			end
 		end
 		
-		function ExtendResult.willUnmount(p5) --[[ Line: 153 ]]
+		function ExtendResult.willUnmount(p5)
 			if p5.motor then
 				p5.motor:destroy()
 				p5.motor = nil

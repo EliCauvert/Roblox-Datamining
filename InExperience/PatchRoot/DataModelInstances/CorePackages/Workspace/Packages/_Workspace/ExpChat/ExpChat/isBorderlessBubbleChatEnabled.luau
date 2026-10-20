@@ -5,7 +5,7 @@ local ExpChatPresetChatEmojiEffectExperimentation = require(Parent.SocialExperim
 local FFlagExpChatMessageEffectBorderlessBubbleChatRolloutEnabledModule = require(ExpChat.Flags.FFlagExpChatMessageEffectBorderlessBubbleChatRolloutEnabled)
 local v1 = nil
 
-return function() --[[ Line: 26 | Named "isBorderlessBubbleChatEnabled" ]]
+return function()
 	-- upvalues: v1 (ref), FFlagExpChatMessageEffectBorderlessBubbleChatRolloutEnabledModule (copy), ExpChatPresetChatEmojiTabExperimentation (copy), ExpChatPresetChatEmojiEffectExperimentation (copy)
 	if v1 == nil then
 		v1 = FFlagExpChatMessageEffectBorderlessBubbleChatRolloutEnabledModule or (ExpChatPresetChatEmojiTabExperimentation.getIsEmphasizedRenderingEnabled() or ExpChatPresetChatEmojiEffectExperimentation.getHasBorderlessBubbleChatEffect())

@@ -2,9 +2,9 @@
 local UseSelectorFunction = DependenciesModule.RoactUtils.Hooks.RoactRodux.useSelector
 local GetFFlagEnableCrossExpVoiceFunction = DependenciesModule.SharedFlags.GetFFlagEnableCrossExpVoice
 
-return function() --[[ Line: 8 ]]
+return function()
 	-- upvalues: GetFFlagEnableCrossExpVoiceFunction (copy), UseSelectorFunction (copy)
-	return if GetFFlagEnableCrossExpVoiceFunction() then UseSelectorFunction(function(p1) --[[ Line: 12 ]]
+	return if GetFFlagEnableCrossExpVoiceFunction() then UseSelectorFunction(function(p1)
 		return if p1 and p1.Squad and p1.Squad.CrossExperienceVoice then p1.Squad.CrossExperienceVoice.Experience.voiceStatus else nil
 	end) else nil
 end

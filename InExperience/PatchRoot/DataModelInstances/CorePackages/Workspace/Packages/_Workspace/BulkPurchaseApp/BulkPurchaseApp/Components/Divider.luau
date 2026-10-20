@@ -2,7 +2,7 @@
 local ReactModule = require(Parent.React)
 local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 
-return function(Frame) --[[ Line: 10 | Named "Divider" ]]
+return function(Frame)
 	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	

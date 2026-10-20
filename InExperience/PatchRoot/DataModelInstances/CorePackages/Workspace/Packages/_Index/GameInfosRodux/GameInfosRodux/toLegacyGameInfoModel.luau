@@ -2,7 +2,7 @@
 local _ = require(Parent.DataHydration)
 local _ = require(Parent.DiscoveryTypes)
 
-return function(p1) --[[ Line: 16 | Named "toLegacyGameInfoModel" ]]
+return function(p1)
 	local Creator = p1.creator
 	
 	return {

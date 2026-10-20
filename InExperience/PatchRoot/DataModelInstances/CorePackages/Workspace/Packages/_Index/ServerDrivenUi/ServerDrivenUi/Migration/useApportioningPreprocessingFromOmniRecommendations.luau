@@ -17,26 +17,26 @@ local FFlagLuaAppAddRequestIdToRfySignalApportioning = require(Parent.SharedFlag
 local FFlagLuaAppCompositionAlways = require(Parent.SharedFlags).FFlagLuaAppCompositionAlways
 local GetMainCollectionLayoutStoreFunction = require(Parent.CollectionViews).getMainCollectionLayoutStore
 
-return function(p1, p2, p3) --[[ Line: 39 | Named "useApportioningPreprocessingFromOmniRecommendations" ]]
+return function(p1, p2, p3)
 	-- upvalues: FFlagLuaAppCompositionAlways (copy), UseSelectorFunction (copy), TutilsModule (copy), FFlagLuaAppAddRequestIdToRfySignalApportioning (copy), TopicContentsReducer (copy), FFlagLuaAppUseEffectInSignalPreprocessing (copy), ReactModule (copy), GetSduiFeedStoreModule (copy), GetMainCollectionLayoutStoreFunction (copy), OmniFeedTypes (copy), GameTileLayoutType (copy), OmniFeedConstants (copy), GetGameTileCollectionItemSizeFunction (copy), ApportioningPreprocessingHelpersModule (copy)
 	local FFlagLuaAppCompositionAlways1 = FFlagLuaAppCompositionAlways or p3
-	local UseSelectorResult = UseSelectorFunction(function(p4) --[[ Line: 46 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p4)
 		-- upvalues: p1 (copy)
 		local OmniRecommendation = p4.OmniRecommendations[p1]
 		
 		return if OmniRecommendation then OmniRecommendation.sorts else {}
 	end, TutilsModule.shallowEqual)
-	local UseSelectorResult1 = if FFlagLuaAppAddRequestIdToRfySignalApportioning then UseSelectorFunction(function(p4) --[[ Line: 56 ]]
+	local UseSelectorResult1 = if FFlagLuaAppAddRequestIdToRfySignalApportioning then UseSelectorFunction(function(p4)
 		-- upvalues: p1 (copy)
 		local OmniRecommendation = p4.OmniRecommendations[p1]
 		
 		return if OmniRecommendation then OmniRecommendation.recommendationsId else nil
 	end) else nil
-	local UseSelectorResult2 = UseSelectorFunction(function(p4) --[[ Line: 65 ]]
+	local UseSelectorResult2 = UseSelectorFunction(function(p4)
 		-- upvalues: TopicContentsReducer (upval)
 		return p4.Personalization[TopicContentsReducer.key]
 	end)
-	;(if FFlagLuaAppUseEffectInSignalPreprocessing then ReactModule.useEffect else ReactModule.useLayoutEffect)(function() --[[ Line: 73 ]]
+	;(if FFlagLuaAppUseEffectInSignalPreprocessing then ReactModule.useEffect else ReactModule.useLayoutEffect)(function()
 		-- upvalues: GetSduiFeedStoreModule (upval), p1 (copy), FFlagLuaAppCompositionAlways1 (copy), GetMainCollectionLayoutStoreFunction (upval), UseSelectorResult (copy), OmniFeedTypes (upval), GameTileLayoutType (upval), OmniFeedConstants (upval), GetGameTileCollectionItemSizeFunction (upval), p2 (copy), ApportioningPreprocessingHelpersModule (upval), UseSelectorResult2 (copy), FFlagLuaAppAddRequestIdToRfySignalApportioning (upval), UseSelectorResult1 (ref)
 		local SduiFeedStoreModule = GetSduiFeedStoreModule(p1)
 		local ApportioningData = {}
@@ -76,7 +76,7 @@ return function(p1, p2, p3) --[[ Line: 39 | Named "useApportioningPreprocessingF
 		end
 		SduiFeedStoreModule.updateData({ apportioningData = ApportioningData }, if FFlagLuaAppAddRequestIdToRfySignalApportioning then UseSelectorResult1 else nil)
 		
-		return function() --[[ Line: 140 ]] end
+		return function() end
 	end, {
 		UseSelectorResult, UseSelectorResult2,
 		if FFlagLuaAppCompositionAlways then nil else p2, p1,

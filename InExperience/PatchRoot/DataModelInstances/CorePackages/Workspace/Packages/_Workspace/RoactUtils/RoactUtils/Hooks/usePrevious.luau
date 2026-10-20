@@ -6,10 +6,10 @@ if require(Parent.SharedFlags).GetFFlagMigrateRoactUtilsToReactUtils() then
 else
 	local ReactModule = require(Parent.React)
 	
-	return function(Current) --[[ Line: 16 | Named "usePrevious" ]]
+	return function(Current)
 		-- upvalues: ReactModule (copy)
 		local UseRefResult = ReactModule.useRef(nil)
-		ReactModule.useEffect(function() --[[ Line: 18 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRefResult (copy), Current (copy)
 			UseRefResult.current = Current
 		end)

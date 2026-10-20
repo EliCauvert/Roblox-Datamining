@@ -5,7 +5,7 @@ local ComputeOrbitHeadCFrameModule = require(AvatarViewport.Camera.computeOrbitH
 local ConstantsModule = require(AvatarViewport.Constants)
 local _ = require(AvatarViewport.Types)
 
-return function(p1) --[[ Line: 36 | Named "useOrbitHeadCamera" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ComputeOrbitHeadCFrameModule (copy), TweenService (copy), ConstantsModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(p1.config)
@@ -23,7 +23,7 @@ return function(p1) --[[ Line: 36 | Named "useOrbitHeadCamera" ]]
 	if not p1.distanceScaleRef then
 		UseRefResult4.current = p1.distanceScale
 	end
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 56 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy)
 		local Current = UseRefResult.current
 		
@@ -32,7 +32,7 @@ return function(p1) --[[ Line: 36 | Named "useOrbitHeadCamera" ]]
 			UseRefResult.current = nil
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 64 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy), UseRefResult1 (copy), UseRefResult2 (copy), YRotDegRef (copy), DistanceScaleRef (copy), ComputeOrbitHeadCFrameModule (upval), UseResult (copy), TweenService (upval), ConstantsModule (upval), UseRefResult (copy)
 		local Current = p1.cameraRef.current
 		local Model = p1.model
@@ -63,7 +63,7 @@ return function(p1) --[[ Line: 36 | Named "useOrbitHeadCamera" ]]
 			UseResult()
 			local Tween = TweenService:Create(Current, ConstantsModule.EmoteCameraTweenInfo, { CFrame = CurrentResult })
 			UseRefResult.current = Tween
-			Tween.Completed:Connect(function() --[[ Line: 107 ]]
+			Tween.Completed:Connect(function()
 				-- upvalues: UseRefResult (upval), Tween (copy)
 				if UseRefResult.current == Tween then
 					UseRefResult.current = nil
@@ -77,7 +77,7 @@ return function(p1) --[[ Line: 36 | Named "useOrbitHeadCamera" ]]
 			Current.CFrame = CurrentResult
 		end
 	end, { p1.model, UseResult, p1.cameraRef })
-	ReactModule.useEffect(function() --[[ Line: 122 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult1 (copy)
 		UseResult1()
 	end, {
@@ -85,9 +85,9 @@ return function(p1) --[[ Line: 36 | Named "useOrbitHeadCamera" ]]
 		p1.config.fieldOfViewForDistanceScaleDeg, p1.config.layout.viewportHeight,
 		p1.config.layout.cutoutTopOffset, p1.config.layout.cutoutDiameter, UseResult1
 	})
-	ReactModule.useEffect(function() --[[ Line: 138 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult (copy)
-		return function() --[[ Line: 139 ]]
+		return function()
 			-- upvalues: UseResult (upval)
 			UseResult()
 		end

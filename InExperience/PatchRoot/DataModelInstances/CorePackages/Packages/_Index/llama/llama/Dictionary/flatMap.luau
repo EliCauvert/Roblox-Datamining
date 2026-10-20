@@ -1,6 +1,6 @@
 ﻿local JoinModule = require(script.Parent.join)
 
-local function flatMap(List, Callback) --[[ Line: 4 ]]
+local function flatMap(List, Callback)
 	-- upvalues: JoinModule (copy), flatMap (copy)
 	local ValueType = type(List)
 	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)

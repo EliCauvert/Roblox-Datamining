@@ -8,7 +8,7 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local CreateChatTopBarModule = require(AppChat.createChatTopBar)
 local GetTopBarStoreModule = require(AppChat.Stores.GetTopBarStore)
 
-local function TopBarFromStore(p1) --[[ Line: 61 ]]
+local function TopBarFromStore(p1)
 	-- upvalues: RoactNavigationModule (copy), GetTopBarStoreModule (copy), SignalsReactModule (copy), ArgCheckModule (copy), CryoModule (copy), CreateChatTopBarModule (copy)
 	local Navigation = p1.navigation
 	local ActiveChildNavigationOptions = RoactNavigationModule.getActiveChildNavigationOptions(Navigation)
@@ -26,7 +26,7 @@ local function TopBarFromStore(p1) --[[ Line: 61 ]]
 	return CreateChatTopBarModule(CryoModule.Dictionary.join(UnionResult, ActiveChildNavigationOptions, { navigation = Navigation }))
 end
 
-return function(Navigation) --[[ Line: 92 ]]
+return function(Navigation)
 	-- upvalues: RoactModule (copy), TopBarFromStore (copy)
 	return RoactModule.createElement(TopBarFromStore, { navigation = Navigation })
 end

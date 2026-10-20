@@ -2,7 +2,7 @@
 local UseLocalizationFunction = require(SocialCommon.Parent.Localization).Hooks.useLocalization
 local GetRecommendationContextualInfoDisplayModule = require(SocialCommon.Utils.getRecommendationContextualInfoDisplay)
 
-return function(Recommendation) --[[ Line: 29 ]]
+return function(Recommendation)
 	-- upvalues: UseLocalizationFunction (copy), GetRecommendationContextualInfoDisplayModule (copy)
 	return GetRecommendationContextualInfoDisplayModule({
 		recommendation = Recommendation,

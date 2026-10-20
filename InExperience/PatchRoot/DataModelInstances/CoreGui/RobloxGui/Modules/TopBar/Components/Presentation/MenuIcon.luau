@@ -71,7 +71,7 @@ if IsInExperienceUIVREnabled then
 	PanelType = VrSpatialUiModule.Constants.PanelType
 	SPATIALTOOLTIPSPACING = VrSpatialUiModule.Constants.SPATIAL_TOOLTIP_SPACING
 	
-	Callback = function(): boolean --[[ Line: 88 ]]
+	Callback = function(): boolean
 		-- upvalues: IsInExperienceUIVREnabled (copy), IsSpatialFunction (ref), ServiceModule (copy), UIManager (ref)
 		if IsInExperienceUIVREnabled and IsSpatialFunction() then
 			local IsBottomBarInteractionOnAnimationSupported = UIManager.getInstance():isBottomBarInteractionOnAnimationSupported()
@@ -99,7 +99,7 @@ MenuIcon.validateProps = TModule.strictInterface({
 	referralRewardTooltipText = TModule.optional(TModule.string)
 })
 
-function MenuIcon.init(p1) --[[ Line: 125 ]]
+function MenuIcon.init(p1)
 	-- upvalues: EnabledResult (copy), SignalsModule (copy), DisplayModule (copy), FFlagTopBarSignalizeMenuOpen (copy), SettingsShowSignal (copy), EnabledFunction (copy), IsInExperienceUIVREnabled (copy), Callback (ref), RobloxGui (copy), FFlagAddUILessMode (copy), InGameMenuConstantsModule (copy), VRService (copy), VRHub (copy), GamepadService (copy), InGameMenuInitModule (ref), IsNewInGameMenuEnabledModule (copy), MenuIconHoveredSignalModule (copy), v1 (copy), IsSubjectToDesktopPoliciesFunction (copy), FFlagEnableConsoleExpControls (copy), FFlagShowUnibarOnVirtualCursor (copy), ConstantsModule (copy), ServiceModule (copy), FocusUtils (copy), GuiService (copy), ContextActionService (copy), GamepadConnectorModule (copy), RoactModule (copy), FFlagReduceTopBarInsetsWhileHidden (copy), ConstantsModule1 (copy), FIntAddUILessModeVariant (copy), Stores (copy), CreateEffectFunction (copy)
 	p1:setState({
 		vrShowMenuIcon = false,
@@ -108,7 +108,7 @@ function MenuIcon.init(p1) --[[ Line: 125 ]]
 		enableFlashingDot = false,
 		clickLatched = not EnabledResult and nil
 	})
-	p1.disposeUiScaleEffect = SignalsModule.createEffect(function(p2) --[[ Line: 133 ]]
+	p1.disposeUiScaleEffect = SignalsModule.createEffect(function(p2)
 		-- upvalues: DisplayModule (upval), p1 (copy)
 		p1:setState({
 			UiScale = DisplayModule.GetDisplayStore(p2).getUIScale(p2)
@@ -116,18 +116,18 @@ function MenuIcon.init(p1) --[[ Line: 125 ]]
 	end)
 	
 	if FFlagTopBarSignalizeMenuOpen then
-		SettingsShowSignal:connect(function(TiltMenuOpen) --[[ Line: 142 ]]
+		SettingsShowSignal:connect(function(TiltMenuOpen)
 			-- upvalues: p1 (copy)
 			p1:setState({ tiltMenuOpen = TiltMenuOpen })
 		end)
 	end
 	if not EnabledFunction() then
-		task.spawn(function() --[[ Line: 151 ]]
+		task.spawn(function()
 			-- upvalues: p1 (copy)
 			p1:setState({ enableFlashingDot = true })
 		end)
 	end
-	function p1.menuIconActivated() --[[ Line: 158 ]]
+	function p1.menuIconActivated()
 		-- upvalues: p1 (copy), EnabledResult (upval), IsInExperienceUIVREnabled (upval), Callback (upval), RobloxGui (upval), FFlagAddUILessMode (upval), InGameMenuConstantsModule (upval), VRService (upval), VRHub (upval), GamepadService (upval), InGameMenuInitModule (upval), IsNewInGameMenuEnabledModule (upval)
 		p1:setState({
 			showTooltip = false,
@@ -170,18 +170,18 @@ function MenuIcon.init(p1) --[[ Line: 125 ]]
 		end
 	end
 	
-	function p1.fireMenuIconHoveredSignal(p2) --[[ Line: 193 ]]
+	function p1.fireMenuIconHoveredSignal(p2)
 		-- upvalues: MenuIconHoveredSignalModule (upval)
 		MenuIconHoveredSignalModule:fire(p2)
 	end
 	
-	function p1.menuIconOnHover() --[[ Line: 196 ]]
+	function p1.menuIconOnHover()
 		-- upvalues: IsInExperienceUIVREnabled (upval), Callback (upval), EnabledResult (upval), p1 (copy), v1 (upval), IsNewInGameMenuEnabledModule (upval), IsSubjectToDesktopPoliciesFunction (upval), InGameMenuInitModule (upval), InGameMenuConstantsModule (upval)
 		if IsInExperienceUIVREnabled and Callback() then return end
 		if EnabledResult then
 			p1:setState({ isHovering = true })
 			p1.fireMenuIconHoveredSignal(true)
-			delay(v1, function() --[[ Line: 206 ]]
+			delay(v1, function()
 				-- upvalues: p1 (upval), IsInExperienceUIVREnabled (upval), Callback (upval)
 				if p1.state.isHovering and not p1.state.clickLatched then
 					if IsInExperienceUIVREnabled and Callback() then return end
@@ -198,7 +198,7 @@ function MenuIcon.init(p1) --[[ Line: 125 ]]
 		end
 	end
 	
-	function p1.menuIconOnHoverEnd() --[[ Line: 230 ]]
+	function p1.menuIconOnHoverEnd()
 		-- upvalues: p1 (copy), EnabledResult (upval)
 		p1:setState({
 			showTooltip = false,
@@ -207,7 +207,7 @@ function MenuIcon.init(p1) --[[ Line: 125 ]]
 		})
 	end
 	
-	function p1.showTopBarCallback() --[[ Line: 238 ]]
+	function p1.showTopBarCallback()
 		-- upvalues: p1 (copy)
 		if p1.state.vrShowMenuIcon ~= false then
 			p1:setState({ vrShowMenuIcon = false })
@@ -215,7 +215,7 @@ function MenuIcon.init(p1) --[[ Line: 125 ]]
 	end
 	
 	if EnabledFunction() and FFlagEnableConsoleExpControls then
-		function p1:onMenuIconSelectionChanged(p2, _, p3) --[[ Line: 248 ]]
+		function p1:onMenuIconSelectionChanged(p2, _, p3)
 			-- upvalues: FFlagEnableConsoleExpControls (upval), GamepadService (upval), FFlagShowUnibarOnVirtualCursor (upval), ConstantsModule (upval), ServiceModule (upval), FocusUtils (upval), GuiService (upval), ContextActionService (upval)
 			if FFlagEnableConsoleExpControls then
 				if GamepadService.GamepadCursorEnabled then return end
@@ -226,7 +226,7 @@ function MenuIcon.init(p1) --[[ Line: 125 ]]
 				
 				return
 			else
-				local function unfocusTilt(_, UserInputState, _) --[[ Line: 259 ]]
+				local function unfocusTilt(_, UserInputState, _)
 					-- upvalues: FFlagEnableConsoleExpControls (upval), GuiService (upval)
 					if (FFlagEnableConsoleExpControls or UserInputState ~= Enum.UserInputState.End) and (not FFlagEnableConsoleExpControls or UserInputState ~= Enum.UserInputState.Begin) then
 						return Enum.ContextActionResult.Pass
@@ -258,7 +258,7 @@ function MenuIcon.init(p1) --[[ Line: 125 ]]
 			p1.priorAbsolutePosition = Vector2.zero
 			p1.priorAbsoluteSize = Vector2.zero
 		end
-		ShowTopBar:connect(function() --[[ Line: 292 ]]
+		ShowTopBar:connect(function()
 			-- upvalues: ShowTopBar (copy), p1 (copy), FFlagReduceTopBarInsetsWhileHidden (upval), ConstantsModule1 (upval)
 			local GetResult = ShowTopBar:get()
 			p1.setShowIcon(GetResult)
@@ -274,7 +274,7 @@ function MenuIcon.init(p1) --[[ Line: 125 ]]
 		end)
 	end
 	if EnabledFunction() and FFlagEnableConsoleExpControls then
-		ServiceModule:onTriggerMenuIcon():connect(function() --[[ Line: 307 ]]
+		ServiceModule:onTriggerMenuIcon():connect(function()
 			-- upvalues: GuiService (upval), p1 (copy), FocusUtils (upval)
 			GuiService.SelectedCoreObject = p1.props.menuIconRef:getValue()
 			FocusUtils.MenuIconSelectedSignal:set(true)
@@ -287,7 +287,7 @@ function MenuIcon.init(p1) --[[ Line: 125 ]]
 			p1.showIcon, p1.setShowIcon = RoactModule.createBinding(true)
 			p1.priorAbsolutePosition = Vector2.zero
 			p1.priorAbsoluteSize = Vector2.zero
-			p1.disposeEffect = CreateEffectFunction(function(p2) --[[ Line: 322 ]]
+			p1.disposeEffect = CreateEffectFunction(function(p2)
 				-- upvalues: p1 (copy), ConstantsModule1 (upval)
 				local UIVisible = p1.uiLessStore.getUIVisible(p2)
 				p1.setShowIcon(UIVisible)
@@ -304,12 +304,12 @@ function MenuIcon.init(p1) --[[ Line: 125 ]]
 	end
 end
 
-function MenuIcon.renderWithTooltipCompat(p1, p2, p3, Callback) --[[ Line: 336 ]]
+function MenuIcon.renderWithTooltipCompat(p1, p2, p3, Callback)
 	-- upvalues: IsInExperienceUIVREnabled (copy), IsSpatialFunction (ref), ReactModule (copy), Panel3DInSpatialUI (ref), PanelType (ref), TooltipCallout (ref), TooltipOrientation (copy), SPATIALTOOLTIPSPACING (ref), WithTooltipFunction (copy)
 	return if IsInExperienceUIVREnabled and IsSpatialFunction() then ReactModule.createElement(ReactModule.Fragment, nil, {
 		VRSpatialTooltip = if p3.active and p1.state.triggerPointSize and Panel3DInSpatialUI then ReactModule.createElement(Panel3DInSpatialUI, {
 			panelType = PanelType.ToolTipsContainer,
-			renderFunction = function(p4) --[[ Line: 354 ]]
+			renderFunction = function(p4)
 				-- upvalues: ReactModule (upval), TooltipCallout (upval), p2 (copy), TooltipOrientation (upval), p1 (copy), SPATIALTOOLTIPSPACING (upval)
 				return ReactModule.createElement(TooltipCallout, {
 					distanceOffset = 0,
@@ -322,7 +322,7 @@ function MenuIcon.renderWithTooltipCompat(p1, p2, p3, Callback) --[[ Line: 336 ]
 				})
 			end
 		}) else nil,
-		MenuIconTriggerPoint = Callback(function(Frame: Frame) --[[ Line: 339 ]]
+		MenuIconTriggerPoint = Callback(function(Frame: Frame)
 			-- upvalues: p1 (copy)
 			p1:setState({
 				triggerPointSize = Frame.AbsoluteSize,
@@ -332,7 +332,7 @@ function MenuIcon.renderWithTooltipCompat(p1, p2, p3, Callback) --[[ Line: 336 ]
 	}) else WithTooltipFunction(p2, p3, Callback)
 end
 
-function MenuIcon.willUnmount(p1) --[[ Line: 378 ]]
+function MenuIcon.willUnmount(p1)
 	-- upvalues: FFlagAddUILessMode (copy), FIntAddUILessModeVariant (copy), FFlagTopBarSignalizeMenuOpen (copy)
 	if FFlagAddUILessMode and FIntAddUILessModeVariant ~= 0 and p1.uiLessStore.getUILessModeEnabled(false) and p1.disposeEffect then
 		p1.disposeEffect()
@@ -345,7 +345,7 @@ function MenuIcon.willUnmount(p1) --[[ Line: 378 ]]
 	end
 end
 
-function MenuIcon.render(p1) --[[ Line: 395 ]]
+function MenuIcon.render(p1)
 	-- upvalues: IsInExperienceUIVREnabled (copy), VRService (copy), ConstantsModule1 (copy), FFlagReduceTopBarInsetsWhileHidden (copy), FFlagEnableConsoleExpControls (copy), EnabledFunction (copy), GamepadConnectorModule (copy), FFlagAddUILessMode (copy), FIntAddUILessModeVariant (copy), RoactModule (copy), IconButtonModule (copy), IsNewTiltIconEnabledModule (copy), Images (copy), FFlagTopBarSignalizeMenuOpen (copy), EnabledResult (copy), GamepadService (copy), ExternalEventConnection (copy), VRHub (copy), BadgeOver12Module (copy), RobloxTranslatorModule (copy), HotkeyCodes (copy), EnableReferralRewardTooltip (copy), CoreGui (copy), TooltipOrientation (copy), ServiceModule (copy), ConstantsModule (copy)
 	local NoVREnabled = nil
 	NoVREnabled = if IsInExperienceUIVREnabled then true else not VRService.VREnabled or p1.state.vrShowMenuIcon
@@ -353,7 +353,7 @@ function MenuIcon.render(p1) --[[ Line: 395 ]]
 	local ScaledTopBarButtonPadding = ConstantsModule1.TopBarButtonPadding * p1.state.UiScale
 	local ScaledMENUICONSIZE = ConstantsModule1.MENU_ICON_SIZE * p1.state.UiScale
 	
-	local function v78(Frame: Frame) --[[ Line: 407 ]]
+	local function v78(Frame: Frame)
 		-- upvalues: FFlagReduceTopBarInsetsWhileHidden (upval), p1 (copy), FFlagEnableConsoleExpControls (upval), EnabledFunction (upval), GamepadConnectorModule (upval), ConstantsModule1 (upval), FFlagAddUILessMode (upval), FIntAddUILessModeVariant (upval)
 		if Frame then
 			if FFlagReduceTopBarInsetsWhileHidden then
@@ -403,10 +403,10 @@ function MenuIcon.render(p1) --[[ Line: 395 ]]
 		CoreScriptsTopBarRobloxMenu = CoreScriptsTopBarRobloxMenu.createElement
 		
 		return CoreScriptsTopBarRobloxMenu("Frame", {
-			Visible = if EnabledFunction() and FFlagEnableConsoleExpControls then p1.showIcon:map(function(p2) --[[ Line: 537 ]]
+			Visible = if EnabledFunction() and FFlagEnableConsoleExpControls then p1.showIcon:map(function(p2)
 				-- upvalues: NoVREnabled (ref)
 				return NoVREnabled and p2
-			end) elseif FFlagAddUILessMode and FIntAddUILessModeVariant ~= 0 and p1.uiLessStore.getUILessModeEnabled(false) then p1.showIcon:map(function(p2) --[[ Line: 537 ]]
+			end) elseif FFlagAddUILessMode and FIntAddUILessModeVariant ~= 0 and p1.uiLessStore.getUILessModeEnabled(false) then p1.showIcon:map(function(p2)
 				-- upvalues: NoVREnabled (ref)
 				return NoVREnabled and p2
 			end) else NoVREnabled,
@@ -422,7 +422,7 @@ function MenuIcon.render(p1) --[[ Line: 395 ]]
 		})
 	end
 	local CoreScriptsTopBarRobloxMenu = "Roblox Menu"
-	pcall(function() --[[ Line: 459 ]]
+	pcall(function()
 		-- upvalues: CoreScriptsTopBarRobloxMenu (ref), RobloxTranslatorModule (upval)
 		CoreScriptsTopBarRobloxMenu = RobloxTranslatorModule:FormatByKey("CoreScripts.TopBar.RobloxMenu")
 	end)
@@ -446,9 +446,9 @@ function MenuIcon.render(p1) --[[ Line: 395 ]]
 	if EnableReferralRewardTooltip and p1.props.referralRewardTooltipText and p1.props.referralRewardTooltipText ~= "" then
 		config1.active = true
 	end
-	return p1:renderWithTooltipCompat(config, config1, function(Callback) --[[ Line: 484 ]]
+	return p1:renderWithTooltipCompat(config, config1, function(Callback)
 		-- upvalues: v78 (copy), EnabledFunction (upval), FFlagEnableConsoleExpControls (upval), p1 (copy), ServiceModule (upval), ConstantsModule (upval), RoactModule (upval), IconButtonModule (upval), IsNewTiltIconEnabledModule (upval), Images (upval), FFlagTopBarSignalizeMenuOpen (upval), ScaledMENUICONSIZE (copy), ConstantsModule1 (upval), EnabledResult (upval), FFlagAddUILessMode (upval), FIntAddUILessModeVariant (upval), NoVREnabled (ref), ScaledTopBarButtonHeight (copy), Element2 (copy), Element (copy), Element1 (copy)
-		local function v85(Frame) --[[ Line: 485 ]]
+		local function v85(Frame)
 			-- upvalues: v78 (upval), Callback (copy)
 			v78(Frame)
 			Callback(Frame)
@@ -473,10 +473,10 @@ function MenuIcon.render(p1) --[[ Line: 395 ]]
 			})
 		end
 		return RoactModule.createElement("Frame", {
-			Visible = if EnabledFunction() and FFlagEnableConsoleExpControls then p1.showIcon:map(function(p2) --[[ Line: 516 ]]
+			Visible = if EnabledFunction() and FFlagEnableConsoleExpControls then p1.showIcon:map(function(p2)
 				-- upvalues: NoVREnabled (upval)
 				return NoVREnabled and p2
-			end) elseif FFlagAddUILessMode and FIntAddUILessModeVariant ~= 0 and p1.uiLessStore.getUILessModeEnabled(false) then p1.showIcon:map(function(p2) --[[ Line: 516 ]]
+			end) elseif FFlagAddUILessMode and FIntAddUILessModeVariant ~= 0 and p1.uiLessStore.getUILessModeEnabled(false) then p1.showIcon:map(function(p2)
 				-- upvalues: NoVREnabled (upval)
 				return NoVREnabled and p2
 			end) else NoVREnabled,
@@ -498,14 +498,14 @@ function MenuIcon.render(p1) --[[ Line: 395 ]]
 	end)
 end
 
-local v2 = RoactRoduxModule.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 553 | Named "mapDispatchToProps" ]]
+local v2 = RoactRoduxModule.UNSTABLE_connect2(nil, function(Callback)
 	-- upvalues: FFlagTopBarDeprecateDisplayOptionsRoduxModule (copy), SetGamepadMenuOpenModule (copy), FFlagTopBarSignalizeKeepOutAreas (copy), SetKeepOutAreaModule (copy)
 	return {
-		setGamepadMenuOpen = if FFlagTopBarDeprecateDisplayOptionsRoduxModule then nil else function(p1) --[[ Line: 557 ]]
+		setGamepadMenuOpen = if FFlagTopBarDeprecateDisplayOptionsRoduxModule then nil else function(p1)
 			-- upvalues: Callback (copy), SetGamepadMenuOpenModule (upval)
 			return Callback(SetGamepadMenuOpenModule(p1))
 		end,
-		onAreaChanged = if FFlagTopBarSignalizeKeepOutAreas then nil else function(p1, p2, p3) --[[ Line: 562 ]]
+		onAreaChanged = if FFlagTopBarSignalizeKeepOutAreas then nil else function(p1, p2, p3)
 			-- upvalues: Callback (copy), SetKeepOutAreaModule (upval)
 			return Callback(SetKeepOutAreaModule(p1, p2, p3))
 		end

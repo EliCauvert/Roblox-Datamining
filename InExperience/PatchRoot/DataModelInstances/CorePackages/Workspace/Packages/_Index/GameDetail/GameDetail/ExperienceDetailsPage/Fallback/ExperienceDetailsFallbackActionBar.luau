@@ -14,7 +14,7 @@ local FFlagLuaAppLaunchWhenLoadingEdp = SharedFlagsModule.FFlagLuaAppLaunchWhenL
 local FFlagEnableGameJoinEarlyAccess = SharedFlagsModule.FFlagEnableGameJoinEarlyAccess
 
 return {
-	Skeleton = ReactModule.memo(function(p1) --[[ Line: 31 | Named "ExperienceDetailsActionBarSkeleton" ]]
+	Skeleton = ReactModule.memo(function(p1)
 		-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), FFlagSduiEdpPersistentActionBarPlayButton (copy), Skeleton (copy), Radius (copy), PlayButton (copy), ButtonSize (copy), FoundationModule (copy), FFlagLuaAppLaunchWhenLoadingEdp (copy), FFlagEnableGameJoinEarlyAccess (copy)
 		local Size1200 = UseTokensFunction().Size.Size_1200
 		
@@ -51,7 +51,7 @@ return {
 			})
 		})
 	end),
-	Error = ReactModule.memo(function(p1) --[[ Line: 74 | Named "ExperienceDetailsActionBarError" ]]
+	Error = ReactModule.memo(function(p1)
 		-- upvalues: UseGameInfoModule (copy), FFlagSduiEdpPersistentActionBarPlayButton (copy), ReactModule (copy), View (copy), PlayButton (copy), ButtonSize (copy), FoundationModule (copy), FFlagLuaAppLaunchWhenLoadingEdp (copy), FFlagEnableGameJoinEarlyAccess (copy)
 		local UseGameInfoModuleResult = UseGameInfoModule(p1.universeId)
 		local IsIsUnavailable: boolean = UseGameInfoModuleResult ~= nil and UseGameInfoModuleResult.isUnavailable == true

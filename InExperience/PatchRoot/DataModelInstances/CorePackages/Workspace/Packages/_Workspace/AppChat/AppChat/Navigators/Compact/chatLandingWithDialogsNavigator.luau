@@ -56,10 +56,10 @@ local FFlagAppChatDisableAbsorbInputSelectableModule = require(AppChat.Flags.FFl
 local FFlagAppChatConsoleFocusFixesModule = require(AppChat.Flags.FFlagAppChatConsoleFocusFixes)
 local UserGameSettings = UserSettings():GetService("UserGameSettings")
 
-local function AppChatNavigatorTelemetryProviders(p1) --[[ Line: 73 ]]
+local function AppChatNavigatorTelemetryProviders(p1)
 	-- upvalues: UseGetAndSetRefModule (copy), ReactModule (copy), ChatDetailsTelemetryStateModule (copy), ChatDetailsTelemetryLayerModule (copy), ChatLandingTelemetryStateModule (copy), ChatLandingTelemetryLayerModule (copy), ChatConversationTelemetryStateModule (copy), ChatConversationTelemetryLayerModule (copy)
 	local UseGetAndSetRefModuleResult, UseGetAndSetRefModuleResult2 = UseGetAndSetRefModule({})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 76 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseGetAndSetRefModuleResult (copy)
 		local UseGetAndSetRefModuleResultResult = UseGetAndSetRefModuleResult()
 		
@@ -72,7 +72,7 @@ local function AppChatNavigatorTelemetryProviders(p1) --[[ Line: 73 ]]
 		}
 	end, { UseGetAndSetRefModuleResult })
 	local UseGetAndSetRefModuleResult1, UseGetAndSetRefModuleResult2_1 = UseGetAndSetRefModule({})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 88 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseGetAndSetRefModuleResult1 (copy)
 		local UseGetAndSetRefModuleResultResult = UseGetAndSetRefModuleResult1()
 		
@@ -86,7 +86,7 @@ local function AppChatNavigatorTelemetryProviders(p1) --[[ Line: 73 ]]
 	local UseGetAndSetRefModuleResult3, UseGetAndSetRefModuleResult2_2 = UseGetAndSetRefModule({})
 	
 	return ReactModule.createElement(ChatLandingTelemetryStateModule.Provider, {
-		value = ReactModule.useMemo(function() --[[ Line: 113 ]]
+		value = ReactModule.useMemo(function()
 			-- upvalues: UseGetAndSetRefModuleResult (copy), UseGetAndSetRefModuleResult2 (copy)
 			return {
 				get = UseGetAndSetRefModuleResult,
@@ -99,7 +99,7 @@ local function AppChatNavigatorTelemetryProviders(p1) --[[ Line: 73 ]]
 	}, {
 		ReactModule.createElement(ChatLandingTelemetryLayerModule.Provider, { value = UseResult }, {
 			ReactModule.createElement(ChatConversationTelemetryStateModule.Provider, {
-				value = ReactModule.useMemo(function() --[[ Line: 119 ]]
+				value = ReactModule.useMemo(function()
 					-- upvalues: UseGetAndSetRefModuleResult1 (copy), UseGetAndSetRefModuleResult2_1 (copy)
 					return {
 						get = UseGetAndSetRefModuleResult1,
@@ -111,7 +111,7 @@ local function AppChatNavigatorTelemetryProviders(p1) --[[ Line: 73 ]]
 				})
 			}, {
 				ReactModule.createElement(ChatConversationTelemetryLayerModule.Provider, { value = UseResult1 }, (ReactModule.createElement(ChatDetailsTelemetryStateModule.Provider, {
-					value = ReactModule.useMemo(function() --[[ Line: 107 ]]
+					value = ReactModule.useMemo(function()
 						-- upvalues: UseGetAndSetRefModuleResult3 (copy), UseGetAndSetRefModuleResult2_2 (copy)
 						return {
 							get = UseGetAndSetRefModuleResult3,
@@ -122,7 +122,7 @@ local function AppChatNavigatorTelemetryProviders(p1) --[[ Line: 73 ]]
 						UseGetAndSetRefModuleResult2_2
 					})
 				}, ReactModule.createElement(ChatDetailsTelemetryLayerModule.Provider, {
-					value = ReactModule.useCallback(function() --[[ Line: 100 ]]
+					value = ReactModule.useCallback(function()
 						-- upvalues: UseGetAndSetRefModuleResult3 (copy)
 						local UseGetAndSetRefModuleResultResult = UseGetAndSetRefModuleResult3()
 						
@@ -143,10 +143,10 @@ end
 local ChatLandingStackNavigatorConnector = RoactModule.Component:extend("ChatLandingStackNavigatorConnector")
 ChatLandingStackNavigatorConnector.router = GetChatLandingStackNavigatorModule(UserGameSettings.ReducedMotion).router
 
-function ChatLandingStackNavigatorConnector.init(p1) --[[ Line: 156 ]]
+function ChatLandingStackNavigatorConnector.init(p1)
 	-- upvalues: UserGameSettings (copy), MemoizeFunction (copy), GetChatLandingStackNavigatorModule (copy), ChatLandingStackNavigatorConnector (copy)
 	p1.state = { shouldReduceMotion = UserGameSettings.ReducedMotion }
-	p1.getNavigator = MemoizeFunction(function(p2) --[[ Line: 161 ]]
+	p1.getNavigator = MemoizeFunction(function(p2)
 		-- upvalues: GetChatLandingStackNavigatorModule (upval), ChatLandingStackNavigatorConnector (upval)
 		local ChatLandingStackNavigatorModule = GetChatLandingStackNavigatorModule(p2)
 		ChatLandingStackNavigatorConnector.router = ChatLandingStackNavigatorModule.router
@@ -154,7 +154,7 @@ function ChatLandingStackNavigatorConnector.init(p1) --[[ Line: 156 ]]
 		return ChatLandingStackNavigatorModule
 	end)
 	
-	function p1.updateSettings() --[[ Line: 168 ]]
+	function p1.updateSettings()
 		-- upvalues: p1 (copy), UserGameSettings (upval)
 		p1:setState({ shouldReduceMotion = UserGameSettings.ReducedMotion })
 	end
@@ -162,13 +162,13 @@ function ChatLandingStackNavigatorConnector.init(p1) --[[ Line: 156 ]]
 	p1.reducedMotionConnection = UserGameSettings:GetPropertyChangedSignal("ReducedMotion"):Connect(p1.updateSettings)
 end
 
-function ChatLandingStackNavigatorConnector.willUnmount(p1) --[[ Line: 177 ]]
+function ChatLandingStackNavigatorConnector.willUnmount(p1)
 	if p1.reducedMotionConnection then
 		p1.reducedMotionConnection:Disconnect()
 	end
 end
 
-local function _(p1) --[[ Line: 183 | Named "getActiveRouteName" ]]
+local function _(p1)
 	local State = p1 and p1.state
 	
 	if not State or not State.routes or not State.index then
@@ -187,7 +187,7 @@ local function _(p1) --[[ Line: 183 | Named "getActiveRouteName" ]]
 	end
 end
 
-function ChatLandingStackNavigatorConnector.render(p1) --[[ Line: 200 ]]
+function ChatLandingStackNavigatorConnector.render(p1)
 	-- upvalues: FFlagAppIaScrollAway (copy), AppNavBarModule (copy), FFlagAppIaScrollAwayFixSocial (copy), RoactNavigationModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), EnumScreensModule (copy), RoactModule (copy), SystemMenuTopBarModule (copy), ChatConversationTopBarModule (copy), ChatLandingTopBarModule (copy), ChatTopBarBaseModule (copy), ReactModule (copy), SquadAddFriendsIconButtonModule (copy), ConfigureTopBarWithNavigationOptionsModule (copy), AppChatNavigatorTelemetryProviders (copy), ProviderModule (copy), FFlagAppChatConsoleFocusFixesModule (copy)
 	local IsInExperienceScreenProps = if FFlagAppIaScrollAway then p1.props.navigation.getScreenProps("isInExperience", false) else nil
 	local ScrollAwayEnabled = FFlagAppIaScrollAway and (not IsInExperienceScreenProps and AppNavBarModule.getScrollAwayEnabled())
@@ -242,7 +242,7 @@ function ChatLandingStackNavigatorConnector.render(p1) --[[ Line: 200 ]]
 		Element = RoactModule.createElement(ChatTopBarBaseModule, {
 			screenName = EnumScreensModule.SquadLobby,
 			navigation = p1.props.navigation,
-			renderRight = function() --[[ Line: 239 ]]
+			renderRight = function()
 				-- upvalues: ReactModule (upval), SquadAddFriendsIconButtonModule (upval), p1 (copy)
 				return ReactModule.createElement(SquadAddFriendsIconButtonModule, { navigation = p1.props.navigation })
 			end

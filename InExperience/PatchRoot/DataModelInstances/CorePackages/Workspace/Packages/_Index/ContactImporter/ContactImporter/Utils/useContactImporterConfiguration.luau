@@ -8,9 +8,9 @@ local UiMode = require(Parent1.RobloxAppEnums).UiMode
 local FFlagUseSignalsForIsLocalUserSoothsayer = require(Parent1.SharedFlags).FFlagUseSignalsForIsLocalUserSoothsayer
 local GetIsLocalUserSoothsayerStore = if FFlagUseSignalsForIsLocalUserSoothsayer then require(Parent1.IsLocalUserSoothsayerStore).GetIsLocalUserSoothsayerStore else nil
 
-return function(p1) --[[ Line: 15 ]]
+return function(p1)
 	-- upvalues: FFlagUseSignalsForIsLocalUserSoothsayer (copy), UseSignalStateFunction (copy), GetIsLocalUserSoothsayerStore (copy), UseSelectorFunction (copy), GetContactImporterParamsModule (copy), UseUiModeInfoFunction (copy), UiMode (copy)
-	local UseSignalStateResult = if FFlagUseSignalsForIsLocalUserSoothsayer then UseSignalStateFunction(GetIsLocalUserSoothsayerStore(false).getIsLocalUserSoothsayer) else UseSelectorFunction(function(p2) --[[ Line: 18 ]]
+	local UseSignalStateResult = if FFlagUseSignalsForIsLocalUserSoothsayer then UseSignalStateFunction(GetIsLocalUserSoothsayerStore(false).getIsLocalUserSoothsayer) else UseSelectorFunction(function(p2)
 		return p2.IsLocalUserSoothsayer
 	end)
 	local UseSelectorResult = UseSelectorFunction(GetContactImporterParamsModule)

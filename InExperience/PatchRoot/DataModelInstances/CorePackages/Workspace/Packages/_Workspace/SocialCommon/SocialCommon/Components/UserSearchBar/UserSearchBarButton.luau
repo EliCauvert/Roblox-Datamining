@@ -10,10 +10,10 @@ local UseIsWideModeModule = require(SocialCommon.Hooks.useIsWideMode)
 local UserSearchBarModule = require(SocialCommon.Components.UserSearchBar.UserSearchBar)
 local FFlagCreateConnectionsHub = require(Parent.SharedFlags).FFlagCreateConnectionsHub
 
-return function(p1) --[[ Line: 31 ]]
+return function(p1)
 	-- upvalues: UseIsWideModeModule (copy), UseSelectorFunction (copy), GetPageMarginFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), ImageSetButton (copy), FFlagCreateConnectionsHub (copy), UserSearchBarModule (copy)
 	local UseIsWideModeModuleResult = UseIsWideModeModule()
-	local PageMargin: number = GetPageMarginFunction(UseSelectorFunction(function(p2) --[[ Line: 35 ]]
+	local PageMargin: number = GetPageMarginFunction(UseSelectorFunction(function(p2)
 		return p2.ScreenSize
 	end).X)
 	

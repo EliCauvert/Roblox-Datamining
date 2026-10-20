@@ -6,7 +6,7 @@ local ConstantsModule = require(ProfileQRCode.Common.Constants)
 local UserProfilesModule = require(Parent.UserProfiles)
 local FFlagProfileQrCodeDeprecateUserReduxModule = require(ProfileQRCode.Flags.FFlagProfileQrCodeDeprecateUserRedux)
 
-return function(p1) --[[ Line: 12 ]]
+return function(p1)
 	-- upvalues: FFlagProfileQrCodeDeprecateUserReduxModule (copy), UserProfilesModule (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), ConstantsModule (copy)
 	if FFlagProfileQrCodeDeprecateUserReduxModule then
 		local UseUserProfilesFetchResult = UserProfilesModule.Hooks.useUserProfilesFetch({
@@ -19,7 +19,7 @@ return function(p1) --[[ Line: 12 ]]
 			username = UserProfilesModule.Selectors.getUsernameFromId(UseUserProfilesFetchResult.data, p1) or ""
 		} else { displayName = "", username = "" }
 	else
-		return UseSelectorFunction(function(p2) --[[ Line: 31 ]]
+		return UseSelectorFunction(function(p2)
 			-- upvalues: GetDeepValueFunction (upval), ConstantsModule (upval), p1 (copy)
 			return GetDeepValueFunction(p2, ConstantsModule.RODUX_KEY .. ".Users.byUserId." .. p1)
 		end)

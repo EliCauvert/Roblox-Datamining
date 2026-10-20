@@ -3,7 +3,7 @@ local RoactModule = require(CorePackages.Packages.Roact)
 local LoadingBar = require(CorePackages.Workspace.Packages.AppBlox).LoadingBar
 local _Color3 = Color3.fromRGB(41, 41, 41)
 
-return function() --[[ Line: 9 ]]
+return function()
 	-- upvalues: RoactModule (copy), _Color3 (copy), LoadingBar (copy)
 	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 0.1,

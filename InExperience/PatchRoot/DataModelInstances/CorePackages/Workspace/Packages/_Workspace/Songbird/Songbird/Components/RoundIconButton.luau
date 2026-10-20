@@ -3,7 +3,7 @@ local ReactModule = require(Songbird.Parent.React)
 local FoundationModule = require(Songbird.Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(Frame) --[[ Line: 17 | Named "RoundIconButton" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FoundationModule (copy)
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "auto-xy bg-action-emphasis radius-circle padding-small",

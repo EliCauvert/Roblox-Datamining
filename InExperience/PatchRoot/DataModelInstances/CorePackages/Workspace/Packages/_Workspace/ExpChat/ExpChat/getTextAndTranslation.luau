@@ -2,7 +2,7 @@
 local IsWhiteSpaceOnlyModule = require(ExpChat.isWhiteSpaceOnly)
 local GetFFlagExpChatProtectedChatInternalAPIsFunction = require(ExpChat.Parent.SharedFlags).getFFlagExpChatProtectedChatInternalAPIs
 
-return function(TextChatMessage) --[[ Line: 7 ]]
+return function(TextChatMessage)
 	-- upvalues: GetFFlagExpChatProtectedChatInternalAPIsFunction (copy), IsWhiteSpaceOnlyModule (copy)
 	local RewrittenText = ""
 	local RewrittenTranslation = ""

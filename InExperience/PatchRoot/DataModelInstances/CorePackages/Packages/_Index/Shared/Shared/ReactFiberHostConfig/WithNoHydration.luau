@@ -1,6 +1,6 @@
 ﻿local InvariantModule = require(script.Parent.Parent.invariant)
 
-function shim(...) --[[ Line: 16 ]]
+function shim(...)
 	-- upvalues: InvariantModule (copy)
 	InvariantModule(false, "The current renderer does not support hydration. This error is likely caused by a bug in React. Please file an issue.")
 end

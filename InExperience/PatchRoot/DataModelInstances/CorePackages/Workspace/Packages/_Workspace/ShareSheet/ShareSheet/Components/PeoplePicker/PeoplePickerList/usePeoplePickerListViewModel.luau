@@ -16,12 +16,12 @@ local RecipientModule = require(ShareSheet.Recipients.Recipient)
 local _ = require(ShareSheet.Types)
 local Players = game:GetService("Players")
 
-local function _(p1) --[[ Line: 64 | Named "getUserInfoResult" ]]
+local function _(p1)
 	-- upvalues: UserProfileModule (copy)
 	return if p1 == nil or p1 == "" then nil else UserProfileModule.getAndFetchUserInfo(p1)
 end
 
-local _ = function(p1, p2) --[[ Line: 68 | Named "readUserInfo" ]]
+local _ = function(p1, p2)
 	if p1 == nil then
 		return nil, false
 	else
@@ -29,12 +29,12 @@ local _ = function(p1, p2) --[[ Line: 68 | Named "readUserInfo" ]]
 	end
 end
 
-local _ = function(p1, p2): number --[[ Line: 75 | Named "getRowCount" ]]
+local _ = function(p1, p2): number
 	-- upvalues: FFlagShareSheetFriendsSort (copy)
 	return if FFlagShareSheetFriendsSort then #p2 else #p1
 end
 
-local _ = function(p1, p2, p3) --[[ Line: 80 | Named "getRow" ]]
+local _ = function(p1, p2, p3)
 	-- upvalues: FFlagShareSheetFriendsSort (copy)
 	local v1 = if FFlagShareSheetFriendsSort then nil else p1[p3]
 	local v2 = if FFlagShareSheetFriendsSort then p2[p3] else nil
@@ -46,7 +46,7 @@ local _ = function(p1, p2, p3) --[[ Line: 80 | Named "getRow" ]]
 	end
 end
 
-local _ = function(p1, p2, p3) --[[ Line: 91 | Named "getRowUserIds" ]]
+local _ = function(p1, p2, p3)
 	-- upvalues: FFlagShareSheetFriendsSort (copy), RecipientModule (copy), ConversationUtilsModule (copy)
 	if FFlagShareSheetFriendsSort then
 		local ParticipantIds = RecipientModule.getParticipantIds(p2, p3)
@@ -57,21 +57,21 @@ local _ = function(p1, p2, p3) --[[ Line: 91 | Named "getRowUserIds" ]]
 	end
 end
 
-local _ = function(p1, Text: string, p2, p3) --[[ Line: 100 | Named "filterRecipientsByQuery" ]]
+local _ = function(p1, Text: string, p2, p3)
 	-- upvalues: Array (copy), MatchesQueryModule (copy)
 	if Text == "" then
 		return p1
 	else
 		local Lowered = string.lower(Text)
 		
-		return Array.filter(p1, function(p4) --[[ Line: 110 ]]
+		return Array.filter(p1, function(p4)
 			-- upvalues: MatchesQueryModule (upval), Lowered (copy), p2 (copy), p3 (copy)
 			return MatchesQueryModule(Lowered, p2[p4.id] or "", p3[p4.id] or "")
 		end)
 	end
 end
 
-local function getDisplayNames(p1, p2, p3, UseMemoResult, DisplayName) --[[ Line: 115 ]]
+local function getDisplayNames(p1, p2, p3, UseMemoResult, DisplayName)
 	-- upvalues: FFlagShareSheetFriendsSort (copy), RecipientModule (copy), ConversationUtilsModule (copy), FormatPeoplePickerUserInfoModule (copy)
 	local DescriptionsByConversationId = {}
 	local DisplayNamesByConversationId = {}
@@ -150,9 +150,9 @@ local function getDisplayNames(p1, p2, p3, UseMemoResult, DisplayName) --[[ Line
 	}
 end
 
-local function useConversationDisplayNames(Conversations, Recipients, p4, DisplayName) --[[ Line: 174 ]]
+local function useConversationDisplayNames(Conversations, Recipients, p4, DisplayName)
 	-- upvalues: ReactModule (copy), FFlagShareSheetFriendsSort (copy), RecipientModule (copy), ConversationUtilsModule (copy), UserProfileModule (copy), SignalsModule (copy), getDisplayNames (copy), SignalsReactModule (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 180 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Conversations (copy), Recipients (copy), FFlagShareSheetFriendsSort (upval), p4 (copy), RecipientModule (upval), ConversationUtilsModule (upval), UserProfileModule (upval)
 		local t = {}
 		local v4 = 1
@@ -179,21 +179,21 @@ local function useConversationDisplayNames(Conversations, Recipients, p4, Displa
 		return t
 	end, { Conversations, p4, Recipients })
 	
-	return SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 193 ]]
+	return SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), getDisplayNames (upval), Conversations (copy), Recipients (copy), UseMemoResult (copy), DisplayName (copy)
-		return SignalsModule.createComputed(function(p5) --[[ Line: 194 ]]
+		return SignalsModule.createComputed(function(p5)
 			-- upvalues: getDisplayNames (upval), Conversations (upval), Recipients (upval), UseMemoResult (upval), DisplayName (upval)
 			return (getDisplayNames(p5, Conversations, Recipients, UseMemoResult, DisplayName))
 		end)
 	end, { Conversations, Recipients, DisplayName, UseMemoResult })))
 end
 
-return function(p5) --[[ Line: 202 | Named "usePeoplePickerListViewModel" ]]
+return function(p5)
 	-- upvalues: Players (copy), UseLocalizationFunction (copy), useConversationDisplayNames (copy), ReactModule (copy), FFlagShareSheetFriendsSort (copy), FilterConversationsByQueryModule (copy), Array (copy), MatchesQueryModule (copy), RecipientModule (copy), ConversationUtilsModule (copy), ShareSheetConstantsModule (copy)
 	local Text = tostring(Players.LocalPlayer and Players.LocalPlayer.UserId or 0)
 	local UseConversationDisplayNamesResult = useConversationDisplayNames(p5.conversations, p5.recipients, Text, UseLocalizationFunction({ unknownUser = "Feature.Chat.Label.UnknownUser" }).unknownUser)
 	local DisplayNamesByConversationId = UseConversationDisplayNamesResult.displayNamesByConversationId
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 211 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FFlagShareSheetFriendsSort (upval), FilterConversationsByQueryModule (upval), p5 (copy), DisplayNamesByConversationId (copy), UseConversationDisplayNamesResult (copy)
 		return if FFlagShareSheetFriendsSort then nil else FilterConversationsByQueryModule(p5.conversations, p5.debouncedQuery, DisplayNamesByConversationId, UseConversationDisplayNamesResult.descriptionsByConversationId)
 	end, {
@@ -202,7 +202,7 @@ return function(p5) --[[ Line: 202 | Named "usePeoplePickerListViewModel" ]]
 		p5.conversations,
 		p5.debouncedQuery
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 229 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: FFlagShareSheetFriendsSort (upval), p5 (copy), DisplayNamesByConversationId (copy), UseConversationDisplayNamesResult (copy), Array (upval), MatchesQueryModule (upval)
 		if not FFlagShareSheetFriendsSort then
 			return nil
@@ -216,7 +216,7 @@ return function(p5) --[[ Line: 202 | Named "usePeoplePickerListViewModel" ]]
 		else
 			local Lowered = string.lower(DebouncedQuery)
 			
-			return (Array.filter(Recipients, function(p6) --[[ Line: 110 ]]
+			return (Array.filter(Recipients, function(p6)
 				-- upvalues: MatchesQueryModule (upval), Lowered (copy), DisplayNamesByConversationId (copy), DescriptionsByConversationId (copy)
 				return MatchesQueryModule(Lowered, DisplayNamesByConversationId[p6.id] or "", DescriptionsByConversationId[p6.id] or "")
 			end))
@@ -227,7 +227,7 @@ return function(p5) --[[ Line: 202 | Named "usePeoplePickerListViewModel" ]]
 		p5.debouncedQuery,
 		p5.recipients
 	})
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 248 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), UseMemoResult1 (copy), FFlagShareSheetFriendsSort (upval), Text (copy), RecipientModule (upval), ConversationUtilsModule (upval), UseConversationDisplayNamesResult (copy), DisplayNamesByConversationId (copy), p5 (copy)
 		local CountUseMemoResult1: number = if FFlagShareSheetFriendsSort then #UseMemoResult1 else #UseMemoResult
 		local Buffer = table.create(CountUseMemoResult1)

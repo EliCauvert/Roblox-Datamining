@@ -2,7 +2,7 @@
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
 local CreateSignalFunction = require(MomentsCreation.Parent.Signals).createSignal
 
-return function(p1, Callback, Callback1) --[[ Line: 63 | Named "createCapturePreviewController" ]]
+return function(p1, Callback, Callback1)
 	-- upvalues: CreateSignalFunction (copy)
 	local Signal, Signal2 = CreateSignalFunction(0)
 	local Signal1, Signal2_1 = CreateSignalFunction(0)
@@ -13,7 +13,7 @@ return function(p1, Callback, Callback1) --[[ Line: 63 | Named "createCapturePre
 	local Signal6, Signal2_5 = CreateSignalFunction(nil)
 	local v1 = nil
 	
-	local function play() --[[ Line: 168 ]]
+	local function play()
 		-- upvalues: Signal6 (copy), Signal4 (copy), Signal2_3 (copy), v1 (ref)
 		local SignalResult = Signal6(false)
 		
@@ -32,14 +32,14 @@ return function(p1, Callback, Callback1) --[[ Line: 63 | Named "createCapturePre
 	
 	return {
 		getCapture = p1.getSelectedCapture,
-		getReadiness = function(p2) --[[ Line: 160 ]]
+		getReadiness = function(p2)
 			-- upvalues: Signal6 (copy), Loading (copy)
 			local SignalResult = Signal6(p2)
 			
 			return if SignalResult == nil then Loading(p2) else SignalResult.getState(p2).readiness
 		end,
 		playback = {
-			getPosition = function(p2) --[[ Line: 131 ]]
+			getPosition = function(p2)
 				-- upvalues: Signal6 (copy), Callback (copy), Signal (copy)
 				local SignalResult = Signal6(p2)
 				
@@ -51,7 +51,7 @@ return function(p1, Callback, Callback1) --[[ Line: 63 | Named "createCapturePre
 					return SignalResult.getPosition(p2)
 				end
 			end,
-			getDuration = function(p2) --[[ Line: 108 ]]
+			getDuration = function(p2)
 				-- upvalues: Signal6 (copy), Callback (copy), Signal1 (copy)
 				local SignalResult = Signal6(p2)
 				
@@ -63,34 +63,34 @@ return function(p1, Callback, Callback1) --[[ Line: 63 | Named "createCapturePre
 					return SignalResult.getState(p2).duration
 				end
 			end,
-			getTimeLength = function(p2) --[[ Line: 121 ]]
+			getTimeLength = function(p2)
 				-- upvalues: Signal6 (copy), Signal3 (copy)
 				local SignalResult = Signal6(p2)
 				
 				return if SignalResult == nil then Signal3(p2) else SignalResult.getState(p2).timeLength
 			end,
-			getRegion = function(p2) --[[ Line: 97 ]]
+			getRegion = function(p2)
 				-- upvalues: Callback (copy)
 				return if Callback == nil then nil else Callback(p2)
 			end,
-			getMusic = function(p2) --[[ Line: 102 ]]
+			getMusic = function(p2)
 				-- upvalues: Callback1 (copy)
 				return if Callback1 == nil then nil else Callback1(p2)
 			end,
-			getIsPlaying = function(p2) --[[ Line: 144 ]]
+			getIsPlaying = function(p2)
 				-- upvalues: Signal6 (copy), Signal4 (copy)
 				local SignalResult = Signal6(p2)
 				
 				return if SignalResult == nil then Signal4(p2) else SignalResult.getState(p2).isPlaying
 			end,
-			getIsMuted = function(p2) --[[ Line: 152 ]]
+			getIsMuted = function(p2)
 				-- upvalues: Signal6 (copy), Signal5 (copy)
 				local SignalResult = Signal6(p2)
 				
 				return if SignalResult == nil then Signal5(p2) else SignalResult.getState(p2).isMuted
 			end,
 			play = play,
-			pause = function() --[[ Line: 187 ]]
+			pause = function()
 				-- upvalues: Signal6 (copy), Signal4 (copy), Signal2_3 (copy), v1 (ref)
 				local SignalResult = Signal6(false)
 				
@@ -106,7 +106,7 @@ return function(p1, Callback, Callback1) --[[ Line: 63 | Named "createCapturePre
 					v1.pause()
 				end
 			end,
-			toggle = function() --[[ Line: 202 ]]
+			toggle = function()
 				-- upvalues: Signal6 (copy), Signal4 (copy), Signal2_3 (copy), v1 (ref), play (copy)
 				local SignalResult = Signal6(false)
 				
@@ -135,7 +135,7 @@ return function(p1, Callback, Callback1) --[[ Line: 63 | Named "createCapturePre
 					play()
 				end
 			end,
-			seek = function(p2) --[[ Line: 231 ]]
+			seek = function(p2)
 				-- upvalues: Signal6 (copy), Callback (copy), Signal2 (copy), v1 (ref)
 				local SignalResult = Signal6(false)
 				
@@ -152,7 +152,7 @@ return function(p1, Callback, Callback1) --[[ Line: 63 | Named "createCapturePre
 					v1.seek(v2)
 				end
 			end,
-			setMuted = function(p2) --[[ Line: 215 ]]
+			setMuted = function(p2)
 				-- upvalues: Signal6 (copy), Signal2_4 (copy), v1 (ref)
 				local SignalResult = Signal6(false)
 				
@@ -167,7 +167,7 @@ return function(p1, Callback, Callback1) --[[ Line: 63 | Named "createCapturePre
 					v1.setMuted(p2)
 				end
 			end,
-			toggleMute = function() --[[ Line: 227 ]]
+			toggleMute = function()
 				-- upvalues: Signal6 (copy), Signal5 (copy), Signal2_4 (copy), v1 (ref)
 				local SignalResult = Signal6(false)
 				local Inverted = not (if SignalResult == nil then Signal5(false) else SignalResult.getState(false).isMuted)
@@ -186,7 +186,7 @@ return function(p1, Callback, Callback1) --[[ Line: 63 | Named "createCapturePre
 			end
 		},
 		setMediaController = Signal2_5,
-		setRegion = function(p2) --[[ Line: 252 ]]
+		setRegion = function(p2)
 			-- upvalues: Signal6 (copy)
 			local SignalResult = Signal6(false)
 			
@@ -194,7 +194,7 @@ return function(p1, Callback, Callback1) --[[ Line: 63 | Named "createCapturePre
 				SignalResult.setRegion(p2)
 			end
 		end,
-		bindEngine = function(p2) --[[ Line: 85 ]]
+		bindEngine = function(p2)
 			-- upvalues: v1 (ref), Signal4 (copy)
 			v1 = p2
 			

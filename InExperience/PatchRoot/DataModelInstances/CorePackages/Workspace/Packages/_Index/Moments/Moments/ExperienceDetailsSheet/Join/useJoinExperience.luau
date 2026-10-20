@@ -18,14 +18,14 @@ local ListenForTeleportFailureModule = require(script.Parent.listenForTeleportFa
 local FFlagMomentsPlayEventModule = require(Moments.Flags.FFlagMomentsPlayEvent)
 local config = { joining = ConstantsModule1.LocalizationKeys.joining }
 
-return function() --[[ Line: 49 | Named "useJoinExperience" ]]
+return function()
 	-- upvalues: UseLocalizationFunction (copy), config (copy), UseMomentsSessionFunction (copy), ReactModule (copy), GetMomentsPreferencesStoreModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Analytics (copy), EmitRecommendationActionModule (copy), ConstantsModule (copy), GetToastStoreModule (copy), SessionUtilModule (copy), FFlagMomentsPlayEventModule (copy), Moments (copy), ListenForTeleportFailureModule (copy), LaunchGameFunction (copy), ConstantsModule1 (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseMomentsSessionResult = UseMomentsSessionFunction()
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 61 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy)
-		return function() --[[ Line: 62 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			if UseRefResult.current ~= nil then
 				UseRefResult.current()
@@ -34,7 +34,7 @@ return function() --[[ Line: 49 | Named "useJoinExperience" ]]
 		end
 	end, {})
 	
-	return ReactModule.useCallback(function(p1, p2, ViewId) --[[ Line: 70 ]]
+	return ReactModule.useCallback(function(p1, p2, ViewId)
 		-- upvalues: GetMomentsPreferencesStoreModule (upval), UseRefResult (copy), UseMomentsSessionResult (copy), FireAnalyticsEventFunction (upval), EventNames (upval), Analytics (upval), EmitRecommendationActionModule (upval), ConstantsModule (upval), GetToastStoreModule (upval), UseLocalizationResult (copy), SessionUtilModule (upval), FFlagMomentsPlayEventModule (upval), Moments (upval), ListenForTeleportFailureModule (upval), LaunchGameFunction (upval), ConstantsModule1 (upval)
 		local MomentsPreferencesStoreModule = GetMomentsPreferencesStoreModule(false)
 		
@@ -79,7 +79,7 @@ return function() --[[ Line: 49 | Named "useJoinExperience" ]]
 				clientEventTimestampMs = DateTime.now().UnixTimestampMillis
 			}))
 		end
-		UseRefResult.current = ListenForTeleportFailureModule(function() --[[ Line: 142 ]]
+		UseRefResult.current = ListenForTeleportFailureModule(function()
 			-- upvalues: UseRefResult (upval), MomentsPreferencesStoreModule (copy)
 			UseRefResult.current = nil
 			MomentsPreferencesStoreModule.setTeleporting(false)

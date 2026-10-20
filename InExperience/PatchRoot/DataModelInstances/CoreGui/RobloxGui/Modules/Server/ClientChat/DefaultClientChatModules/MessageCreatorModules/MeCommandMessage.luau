@@ -3,7 +3,7 @@ local ChatSettingsModule = require(Parent:WaitForChild("ChatSettings"))
 local ChatConstantsModule = require(Parent:WaitForChild("ChatConstants"))
 local UtilModule = require(script.Parent:WaitForChild("Util"))
 
-function CreateMeCommandMessageLabel(p1, OriginalChannel) --[[ Line: 11 ]]
+function CreateMeCommandMessageLabel(p1, OriginalChannel)
 	-- upvalues: ChatSettingsModule (copy), UtilModule (copy)
 	local _ = p1.Message
 	local ExtraData = p1.ExtraData or {}
@@ -20,7 +20,7 @@ function CreateMeCommandMessageLabel(p1, OriginalChannel) --[[ Line: 11 ]]
 		AddChannelButtonToBaseMessageResult = UtilModule:AddChannelButtonToBaseMessage(BaseMessage2, ChannelColor, Formatted, p1.OriginalChannel)
 		NewNumberOfSpaces = UtilModule:GetNumberOfSpaces(Formatted, _Font, TextSize) + 1
 	end
-	local function UpdateTextFunction(p2) --[[ Line: 29 ]]
+	local function UpdateTextFunction(p2)
 		-- upvalues: p1 (copy), BaseMessage2 (copy), UtilModule (upval), NewNumberOfSpaces (ref)
 		if p1.IsFiltered then
 			BaseMessage2.Text = UtilModule:CreateLeadingSpaces(NewNumberOfSpaces) .. UtilModule:SanitizeForRichText(p2.FromSpeaker .. " " .. string.sub(p2.Message, 5))
@@ -33,7 +33,7 @@ function CreateMeCommandMessageLabel(p1, OriginalChannel) --[[ Line: 11 ]]
 	
 	UpdateTextFunction(p1)
 	
-	local function GetHeightFunction(p2) --[[ Line: 41 ]]
+	local function GetHeightFunction(p2)
 		-- upvalues: UtilModule (upval), BaseMessage2 (copy), BaseMessage (copy)
 		return UtilModule:GetMessageHeight(BaseMessage2, BaseMessage, p2)
 	end

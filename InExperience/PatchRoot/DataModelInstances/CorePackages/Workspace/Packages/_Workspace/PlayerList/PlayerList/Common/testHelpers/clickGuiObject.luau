@@ -1,6 +1,6 @@
 ﻿local VirtualInputManager = game:GetService("VirtualInputManager")
 
-return function(Frame: Frame) --[[ Line: 7 | Named "clickGuiObject" ]]
+return function(Frame: Frame)
 	-- upvalues: VirtualInputManager (copy)
 	local ScreenGui = Frame:FindFirstAncestorOfClass("ScreenGui")
 	local ScreenGui1 = if ScreenGui then ScreenGui else Instance.new("ScreenGui")
@@ -22,7 +22,7 @@ return function(Frame: Frame) --[[ Line: 7 | Named "clickGuiObject" ]]
 	local NewX = AbsolutePosition.X + AbsoluteSize.X / 2
 	local NewY = AbsolutePosition.Y + AbsoluteSize.Y / 2
 	local Flag = false
-	local ActivatedConnection = Frame.Activated:Connect(function() --[[ Line: 30 ]]
+	local ActivatedConnection = Frame.Activated:Connect(function()
 		-- upvalues: Flag (ref)
 		Flag = true
 	end)

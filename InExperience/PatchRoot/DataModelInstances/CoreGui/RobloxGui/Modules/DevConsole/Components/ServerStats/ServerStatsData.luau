@@ -5,7 +5,7 @@ local GetClientReplicatorModule = require(script.Parent.Parent.Parent.Util.getCl
 local ServerStatsDataModule = {}
 ServerStatsDataModule.__index = ServerStatsDataModule
 
-function ServerStatsDataModule.new() --[[ Line: 14 ]]
+function ServerStatsDataModule.new()
 	-- upvalues: ServerStatsDataModule (copy), SignalModule (copy)
 	local t = {}
 	setmetatable(t, ServerStatsDataModule)
@@ -19,19 +19,19 @@ function ServerStatsDataModule.new() --[[ Line: 14 ]]
 	return t
 end
 
-function ServerStatsDataModule:avgPing() --[[ Line: 27 ]]
+function ServerStatsDataModule:avgPing()
 	return self._serverStatsPing
 end
 
-function ServerStatsDataModule:Signal() --[[ Line: 31 ]]
+function ServerStatsDataModule:Signal()
 	return self._serverStatsUpdated
 end
 
-function ServerStatsDataModule:getCurrentData() --[[ Line: 35 ]]
+function ServerStatsDataModule:getCurrentData()
 	return self._serverStatsData
 end
 
-function ServerStatsDataModule:updateValue(p1, Value) --[[ Line: 39 ]]
+function ServerStatsDataModule:updateValue(p1, Value)
 	-- upvalues: CircularBufferModule (copy), Number (copy)
 	if not self._serverStatsData[p1] then
 		local NewCircularBuffer = CircularBufferModule.new(Number)
@@ -68,16 +68,16 @@ function ServerStatsDataModule:updateValue(p1, Value) --[[ Line: 39 ]]
 	self._serverStatsData[p1].min = Min < Value and Min or Value
 end
 
-function ServerStatsDataModule:isRunning() --[[ Line: 87 ]]
+function ServerStatsDataModule:isRunning()
 	return self._isRunning
 end
 
-function ServerStatsDataModule:start() --[[ Line: 91 ]]
+function ServerStatsDataModule:start()
 	-- upvalues: GetClientReplicatorModule (copy)
 	local ClientReplicatorModule = GetClientReplicatorModule()
 	
 	if ClientReplicatorModule and not self._statsListenerConnection then
-		self._statsListenerConnection = ClientReplicatorModule.StatsReceived:connect(function(Stats) --[[ Line: 94 ]]
+		self._statsListenerConnection = ClientReplicatorModule.StatsReceived:connect(function(Stats)
 			-- upvalues: self (copy)
 			if Stats then
 				self._lastUpdateTime = os.time()
@@ -102,7 +102,7 @@ function ServerStatsDataModule:start() --[[ Line: 91 ]]
 	end
 end
 
-function ServerStatsDataModule:stop() --[[ Line: 117 ]]
+function ServerStatsDataModule:stop()
 	if self._statsListenerConnection then
 		self._statsListenerConnection:Disconnect()
 		self._statsListenerConnection = nil

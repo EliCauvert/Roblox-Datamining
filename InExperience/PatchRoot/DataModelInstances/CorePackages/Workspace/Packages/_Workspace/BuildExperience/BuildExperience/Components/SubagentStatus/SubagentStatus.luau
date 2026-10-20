@@ -5,7 +5,7 @@ local Text = FoundationModule.Text
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function _(List): boolean --[[ Line: 24 | Named "hasChildren" ]]
+local function _(List): boolean
 	if List == nil then
 		return false
 	end
@@ -20,7 +20,7 @@ local function _(List): boolean --[[ Line: 24 | Named "hasChildren" ]]
 	return false
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 39 | Named "SubagentStatus" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local TestId = p1.testId or "subagent-status"

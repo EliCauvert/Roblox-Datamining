@@ -5,7 +5,7 @@ local FailureReasonModule = require(Gifting.Enums.FailureReason)
 local GiftModelUtilsModule = require(Gifting.Models.GiftModelUtils)
 local _ = require(Gifting.Types)
 
-local function formatInvalidItems(InvalidItems) --[[ Line: 34 ]]
+local function formatInvalidItems(InvalidItems)
 	-- upvalues: TModule (copy), GiftModelUtilsModule (copy)
 	if not TModule.table(InvalidItems) then
 		return nil
@@ -23,7 +23,7 @@ local function formatInvalidItems(InvalidItems) --[[ Line: 34 ]]
 end
 
 return {
-	format = function(p1, Status, ErrorMessage) --[[ Line: 54 ]]
+	format = function(p1, Status, ErrorMessage)
 		-- upvalues: FailureReasonModule (copy), AmpRecourseActionModule (copy), formatInvalidItems (copy)
 		return {
 			failureReason = FailureReasonModule.fromValue(p1.failureReason),
@@ -36,7 +36,7 @@ return {
 			errorMessage = ErrorMessage
 		}
 	end,
-	invalidRequest = function(ErrorMessage) --[[ Line: 67 ]]
+	invalidRequest = function(ErrorMessage)
 		-- upvalues: FailureReasonModule (copy)
 		return {
 			failureReason = FailureReasonModule.InvalidInput,

@@ -3,7 +3,7 @@ local CryoModule = require(game:GetService("CorePackages").Packages.Cryo)
 local _ = require(script.Parent.VoiceChatServiceManager)
 local GetSortedPlayersFunction = require(script.Parent.VoiceUsersByProximity).getSortedPlayers
 
-return function(Players, p1, p2) --[[ Line: 21 ]]
+return function(Players, p1, p2)
 	-- upvalues: CryoModule (copy), GetSortedPlayersFunction (copy), HttpService (copy)
 	local Player = Players:GetPlayerByUserId(p2.abuserUserId)
 	local Position = if Player and Player.Character and Player.Character.PrimaryPart then Player.Character.PrimaryPart.Position else nil
@@ -17,7 +17,7 @@ return function(Players, p1, p2) --[[ Line: 21 ]]
 			REPORTER_COMMENT = { valueList = { { data = p2.abuseComment } } },
 			IS_PLACE_VOICE_ENABLED = { valueList = { { data = "true" } } },
 			VOICE_USER_IDS_FROM_CLIENT = {
-				valueList = CryoModule.List.map(p2.sortedPlayerListUserIds, function(p3) --[[ Line: 47 ]]
+				valueList = CryoModule.List.map(p2.sortedPlayerListUserIds, function(p3)
 					return { data = tostring(p3) }
 				end)
 			},

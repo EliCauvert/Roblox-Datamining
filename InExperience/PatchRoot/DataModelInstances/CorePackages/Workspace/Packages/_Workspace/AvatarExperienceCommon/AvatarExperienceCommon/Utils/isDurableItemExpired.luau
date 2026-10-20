@@ -1,6 +1,6 @@
 ﻿local FFlagAXRemoveExpiredItemsFromInventory = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.AvatarExperienceFlags).FFlagAXRemoveExpiredItemsFromInventory
 
-return function(p1): boolean --[[ Line: 11 | Named "isDurableItemExpired" ]]
+return function(p1): boolean
 	-- upvalues: FFlagAXRemoveExpiredItemsFromInventory (copy)
 	if FFlagAXRemoveExpiredItemsFromInventory then
 		local _DateTime = DateTime.fromIsoDate(p1)

@@ -8,7 +8,7 @@ local NewResult = require(Parent.CoreScriptsInitializer).CoreLogger:new(script.N
 local TrustAndSafetyIXPManager = {}
 TrustAndSafetyIXPManager.__index = TrustAndSafetyIXPManager
 
-function TrustAndSafetyIXPManager.new(p1) --[[ Line: 19 ]]
+function TrustAndSafetyIXPManager.new(p1)
 	-- upvalues: IXPServiceWrapper (copy), TrustAndSafetyIXPManager (copy)
 	local config = {
 		_initialized = false,
@@ -24,17 +24,17 @@ function TrustAndSafetyIXPManager.new(p1) --[[ Line: 19 ]]
 	return config
 end
 
-function TrustAndSafetyIXPManager.getReportAnythingExperienceEnabled(p1) --[[ Line: 33 ]]
+function TrustAndSafetyIXPManager.getReportAnythingExperienceEnabled(p1)
 	-- upvalues: GetFFlagForceReportAnythingAnnotationEnabledModule (copy)
 	return if GetFFlagForceReportAnythingAnnotationEnabledModule() then true else p1._reportAnythingExperienceEnabled or p1._optionalScreenshotEnabled
 end
 
-function TrustAndSafetyIXPManager.getReportAnythingAvatarEnabled(p1) --[[ Line: 40 ]]
+function TrustAndSafetyIXPManager.getReportAnythingAvatarEnabled(p1)
 	-- upvalues: GetFFlagForceReportAnythingAnnotationEnabledModule (copy)
 	return if GetFFlagForceReportAnythingAnnotationEnabledModule() then true else p1._reportAnythingAvatarEnabled or p1._optionalScreenshotEnabled
 end
 
-function TrustAndSafetyIXPManager:waitForInitialization(Callback: () -> ()) --[[ Line: 47 ]]
+function TrustAndSafetyIXPManager:waitForInitialization(Callback: () -> ())
 	if self._ixpInitialized then
 		Callback()
 		
@@ -44,12 +44,12 @@ function TrustAndSafetyIXPManager:waitForInitialization(Callback: () -> ()) --[[
 	end
 end
 
-function TrustAndSafetyIXPManager:initialize() --[[ Line: 55 ]]
+function TrustAndSafetyIXPManager:initialize()
 	-- upvalues: GetFFlagReportAnythingAnnotationIXPFunction (copy), GetFStringReportAnythingAnnotationIXPLayerNameFunction (copy), NewResult (copy)
 	if self._initialized then return end
 	self._initialized = true
 	
-	local function invokeCallbacks() --[[ Line: 61 ]]
+	local function invokeCallbacks()
 		-- upvalues: self (copy)
 		for _, callback in ipairs(self._callbacks) do
 			callback()
@@ -58,7 +58,7 @@ function TrustAndSafetyIXPManager:initialize() --[[ Line: 55 ]]
 	end
 	
 	if GetFFlagReportAnythingAnnotationIXPFunction() then
-		task.spawn(function() --[[ Line: 74 ]]
+		task.spawn(function()
 			-- upvalues: self (copy), GetFStringReportAnythingAnnotationIXPLayerNameFunction (upval), NewResult (upval), invokeCallbacks (copy)
 			self._ixpServiceWrapper:WaitForInitialization()
 			local LayerData = self._ixpServiceWrapper:GetLayerData(GetFStringReportAnythingAnnotationIXPLayerNameFunction())

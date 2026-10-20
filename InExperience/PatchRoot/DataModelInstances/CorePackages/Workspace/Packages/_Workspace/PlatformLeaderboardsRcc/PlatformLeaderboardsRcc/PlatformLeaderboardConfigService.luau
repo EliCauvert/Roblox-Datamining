@@ -9,7 +9,7 @@ local FFlagPlatformLeaderboardDebugLogging = require(Parent1.SharedFlags).FFlagP
 local PlatformLeaderboardConfigService = {}
 PlatformLeaderboardConfigService.__index = PlatformLeaderboardConfigService
 
-function PlatformLeaderboardConfigService.new(_fetcher) --[[ Line: 50 ]]
+function PlatformLeaderboardConfigService.new(_fetcher)
 	-- upvalues: Signal (copy), PlatformLeaderboardConfigService (copy), PlatformLeaderboardConfigPollMaxJitterSeconds (copy), PlatformLeaderboardConfigPollIntervalSeconds (copy), FFlagPlatformLeaderboardDebugLogging (copy)
 	local self = setmetatable({
 		_config = nil,
@@ -24,7 +24,7 @@ function PlatformLeaderboardConfigService.new(_fetcher) --[[ Line: 50 ]]
 	end
 	local DeferredThread = nil
 	
-	local function pollLoop() --[[ Line: 64 ]]
+	local function pollLoop()
 		-- upvalues: self (copy), DeferredThread (ref), PlatformLeaderboardConfigPollMaxJitterSeconds (upval), PlatformLeaderboardConfigPollIntervalSeconds (upval)
 		while self._pollTimer == DeferredThread do
 			task.wait(PlatformLeaderboardConfigPollIntervalSeconds + math.random() * PlatformLeaderboardConfigPollMaxJitterSeconds)
@@ -36,7 +36,7 @@ function PlatformLeaderboardConfigService.new(_fetcher) --[[ Line: 50 ]]
 		end
 	end
 	
-	DeferredThread = task.defer(function() --[[ Line: 75 ]]
+	DeferredThread = task.defer(function()
 		-- upvalues: pollLoop (copy), self (copy), DeferredThread (ref), FFlagPlatformLeaderboardDebugLogging (upval)
 		if not pcall(pollLoop) and self._pollTimer == DeferredThread then
 			if FFlagPlatformLeaderboardDebugLogging then
@@ -50,11 +50,11 @@ function PlatformLeaderboardConfigService.new(_fetcher) --[[ Line: 50 ]]
 	return self
 end
 
-local function _(p1, p2): boolean --[[ Line: 89 | Named "configsEqual" ]]
+local function _(p1, p2): boolean
 	return p1 == p2 or p1 ~= nil and p2 ~= nil and (p1.leaderboardId == p2.leaderboardId and p1.unit == p2.unit)
 end
 
-function PlatformLeaderboardConfigService:updateConfig(_config) --[[ Line: 99 ]]
+function PlatformLeaderboardConfigService:updateConfig(_config)
 	local Config = self._config
 	
 	if Config ~= _config and (Config == nil or _config == nil or (Config.leaderboardId ~= _config.leaderboardId or Config.unit ~= _config.unit)) then
@@ -65,19 +65,19 @@ function PlatformLeaderboardConfigService:updateConfig(_config) --[[ Line: 99 ]]
 	end
 end
 
-function PlatformLeaderboardConfigService:getConfig() --[[ Line: 108 ]]
+function PlatformLeaderboardConfigService:getConfig()
 	return self._config
 end
 
-function PlatformLeaderboardConfigService:hasActiveConfig(): boolean --[[ Line: 112 ]]
+function PlatformLeaderboardConfigService:hasActiveConfig(): boolean
 	return self._config ~= nil
 end
 
-function PlatformLeaderboardConfigService:onConfigChanged(p1) --[[ Line: 116 ]]
+function PlatformLeaderboardConfigService:onConfigChanged(p1)
 	return self._configChanged:connect(p1)
 end
 
-function PlatformLeaderboardConfigService:teardown() --[[ Line: 122 ]]
+function PlatformLeaderboardConfigService:teardown()
 	-- upvalues: FFlagPlatformLeaderboardDebugLogging (copy)
 	local PollTimer = self._pollTimer
 	self._pollTimer = nil

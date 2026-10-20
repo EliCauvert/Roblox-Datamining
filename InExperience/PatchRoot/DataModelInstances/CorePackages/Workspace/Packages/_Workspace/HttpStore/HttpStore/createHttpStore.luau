@@ -6,13 +6,13 @@ local GetHttpStoreFunction = require(Parent1.InternalHttpStore).GetHttpStore
 local _ = require(Parent.Types)
 local HttpSessionTrackerModule = require(Parent.HttpSessionTracker)
 
-return function(p1, p2) --[[ Line: 25 | Named "createHttpStore" ]]
+return function(p1, p2)
 	-- upvalues: GetHttpStoreFunction (copy), HttpSessionTrackerModule (copy), CreateErrorStatusHandlerModule (copy)
 	local HttpStore = GetHttpStoreFunction(p2)
 	local t = {}
 	
 	return {
-		fetch = function(p3, p4) --[[ Line: 30 ]]
+		fetch = function(p3, p4)
 			-- upvalues: HttpSessionTrackerModule (upval), t (copy), HttpStore (copy), CreateErrorStatusHandlerModule (upval), p1 (copy)
 			local CurrentSessionResult = HttpSessionTrackerModule.currentSession()
 			
@@ -28,7 +28,7 @@ return function(p1, p2) --[[ Line: 25 | Named "createHttpStore" ]]
 			
 			return GetFetchSignal, FetchResult2
 		end,
-		cancelAll = function() --[[ Line: 46 ]]
+		cancelAll = function()
 			-- upvalues: HttpSessionTrackerModule (upval), t (copy)
 			local CurrentSessionResult = HttpSessionTrackerModule.currentSession()
 			

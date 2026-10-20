@@ -22,7 +22,7 @@ local LifecycleEvents = require(Parent.ToastNotification).LifecycleEvents
 local Default1 = ToastNotificationsProtocolModule.ToastNotificationProtocol.default
 local ToastNotificationProtocolConstants = ToastNotificationsProtocolModule.ToastNotificationProtocolConstants
 
-local function _(Connection) --[[ Line: 49 | Named "disconnect" ]]
+local function _(Connection)
 	if Connection == nil then return end
 	if typeof(Connection.Disconnect) == "function" then
 		Connection:Disconnect()
@@ -34,7 +34,7 @@ local function _(Connection) --[[ Line: 49 | Named "disconnect" ]]
 	end
 end
 
-local function decodeActionParams(p1) --[[ Line: 60 ]]
+local function decodeActionParams(p1)
 	-- upvalues: HttpService (copy)
 	local VisualItem = if typeof(p1) == "table" then p1.visualItem else nil
 	local ActionEventParams = if typeof(VisualItem) == "table" then VisualItem.actionEventParams else nil
@@ -67,18 +67,18 @@ local function decodeActionParams(p1) --[[ Line: 60 ]]
 	end
 end
 
-local _ = function(p1) --[[ Line: 90 | Named "publishToast" ]]
+local _ = function(p1)
 	-- upvalues: MessageBusService (copy), ToastNotificationProtocolConstants (copy), ResumeNotification (copy)
 	MessageBusService:Publish(ToastNotificationProtocolConstants.MESSAGE_DISPLAY_TOAST_NOTIF, ResumeNotification.buildToastNotification(p1))
 end
 
-local function openDeepLink(ResumeDeepLink, IsIsInExperience) --[[ Line: 97 ]]
+local function openDeepLink(ResumeDeepLink, IsIsInExperience)
 	-- upvalues: Default (copy), DeepLinkSource (copy), LeaveExperienceModule (copy)
 	if Default:isInternalDlicEnabled() then
 		local InternalDlic = Default:createInternalDlic(ResumeDeepLink, DeepLinkSource.LuaInternal)
 		
 		if IsIsInExperience then
-			LeaveExperienceModule(function() --[[ Line: 101 ]]
+			LeaveExperienceModule(function()
 				-- upvalues: Default (upval), InternalDlic (copy)
 				Default:detectDeeplinkIntent(InternalDlic)
 			end)
@@ -90,7 +90,7 @@ local function openDeepLink(ResumeDeepLink, IsIsInExperience) --[[ Line: 97 ]]
 			return
 		end
 	elseif IsIsInExperience then
-		LeaveExperienceModule(function() --[[ Line: 108 ]]
+		LeaveExperienceModule(function()
 			-- upvalues: Default (upval), ResumeDeepLink (copy)
 			Default:detectURL(ResumeDeepLink)
 		end)
@@ -101,7 +101,7 @@ local function openDeepLink(ResumeDeepLink, IsIsInExperience) --[[ Line: 97 ]]
 	end
 end
 
-local function routeToBuildChat(p1, IsIsInExperience, IsIsBuildModeActive) --[[ Line: 116 ]]
+local function routeToBuildChat(p1, IsIsInExperience, IsIsBuildModeActive)
 	-- upvalues: GetCurrentExperienceProjectModule (copy), GetPlayButtonStoreModule (copy), openDeepLink (copy), ResumeNotification (copy)
 	if IsIsInExperience and IsIsBuildModeActive then
 		local CurrentExperienceProjectModule = GetCurrentExperienceProjectModule()
@@ -121,35 +121,35 @@ local function routeToBuildChat(p1, IsIsInExperience, IsIsBuildModeActive) --[[ 
 	openDeepLink(ResumeNotification.getResumeDeepLink(p1), IsIsInExperience)
 end
 
-return function(p1) --[[ Line: 134 | Named "BuildEventReceiver" ]]
+return function(p1)
 	-- upvalues: GetCreatorAgentResumeStoreModule (copy), ReactModule (copy), RealtimeDeliveryModule (copy), NotificationService (copy), PlaytestRejoinModule (copy), FFlagBuildAdUpsell (copy), AdsCampaignNotificationModule (copy), LifecycleEvents (copy), openDeepLink (copy), Default1 (copy), ResumeNotification (copy), MessageBusService (copy), ToastNotificationProtocolConstants (copy), decodeActionParams (copy), routeToBuildChat (copy)
 	local CreatorAgentResumeStoreModule = GetCreatorAgentResumeStoreModule()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 136 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), RealtimeDeliveryModule (upval), NotificationService (upval)
 		return p1.RobloxEventReceiver or RealtimeDeliveryModule.RobloxEventReceiver.new(NotificationService)
 	end, { p1.RobloxEventReceiver })
 	local IsIsInExperience = p1.isInExperience == true
 	local IsIsBuildModeActive = p1.isBuildModeActive == true
-	ReactModule.useEffect(function() --[[ Line: 143 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: PlaytestRejoinModule (upval), IsIsInExperience (copy)
 		return if PlaytestRejoinModule == nil or IsIsInExperience then nil else PlaytestRejoinModule.listen()
 	end, { IsIsInExperience })
 	
 	if FFlagBuildAdUpsell then
-		ReactModule.useEffect(function() --[[ Line: 148 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: AdsCampaignNotificationModule (upval), LifecycleEvents (upval), openDeepLink (upval), IsIsInExperience (copy), Default1 (upval)
-			return AdsCampaignNotificationModule.connect(LifecycleEvents, function(p2) --[[ Line: 149 ]]
+			return AdsCampaignNotificationModule.connect(LifecycleEvents, function(p2)
 				-- upvalues: openDeepLink (upval), IsIsInExperience (upval)
 				openDeepLink(p2, IsIsInExperience)
-			end, function(p2) --[[ Line: 151 ]]
+			end, function(p2)
 				-- upvalues: Default1 (upval)
 				Default1:dismissNotification(p2)
 			end)
 		end, { IsIsInExperience })
 	end
-	ReactModule.useEffect(function() --[[ Line: 157 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy), ResumeNotification (upval), CreatorAgentResumeStoreModule (copy), MessageBusService (upval), ToastNotificationProtocolConstants (upval)
-		local ObserveEventResult = UseMemoResult:observeEvent(ResumeNotification.CapRtnNamespace, function(p2) --[[ Line: 158 ]]
+		local ObserveEventResult = UseMemoResult:observeEvent(ResumeNotification.CapRtnNamespace, function(p2)
 			-- upvalues: ResumeNotification (upval), CreatorAgentResumeStoreModule (upval), MessageBusService (upval), ToastNotificationProtocolConstants (upval)
 			local ClassifyRtnDetailResult = ResumeNotification.classifyRtnDetail(p2)
 			
@@ -161,7 +161,7 @@ return function(p1) --[[ Line: 134 | Named "BuildEventReceiver" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 172 ]]
+		return function()
 			-- upvalues: ObserveEventResult (copy)
 			if ObserveEventResult == nil then return end
 			if typeof(ObserveEventResult.Disconnect) == "function" then
@@ -174,9 +174,9 @@ return function(p1) --[[ Line: 134 | Named "BuildEventReceiver" ]]
 			end
 		end
 	end, { UseMemoResult, CreatorAgentResumeStoreModule })
-	ReactModule.useEffect(function() --[[ Line: 177 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: LifecycleEvents (upval), ResumeNotification (upval), decodeActionParams (upval), Default1 (upval), routeToBuildChat (upval), IsIsInExperience (copy), IsIsBuildModeActive (copy)
-		local RegisterResult = LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.UserAction, ResumeNotification.NotificationType, function(p2) --[[ Line: 181 ]]
+		local RegisterResult = LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.UserAction, ResumeNotification.NotificationType, function(p2)
 			-- upvalues: ResumeNotification (upval), decodeActionParams (upval), Default1 (upval), routeToBuildChat (upval), IsIsInExperience (upval), IsIsBuildModeActive (upval)
 			if typeof(p2) ~= "table" or p2.userActionType ~= "click" or typeof(p2.visualItem) ~= "table" or p2.visualItem.eventName ~= ResumeNotification.ResumeEventName or typeof(p2.notificationData) ~= "table" then return end
 			local DecodeActionParamsResult = decodeActionParams(p2)
@@ -189,7 +189,7 @@ return function(p1) --[[ Line: 134 | Named "BuildEventReceiver" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 202 ]]
+		return function()
 			-- upvalues: RegisterResult (copy)
 			RegisterResult()
 		end

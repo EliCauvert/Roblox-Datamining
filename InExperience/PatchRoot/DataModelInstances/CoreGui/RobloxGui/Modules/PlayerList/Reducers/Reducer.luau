@@ -15,7 +15,7 @@ local CombineReducersResult = require(game:GetService("CorePackages").Packages.R
 	playerDropDown = require(script.Parent.PlayerDropDown)
 })
 
-return function(p1, p2) --[[ Line: 42 ]]
+return function(p1, p2)
 	-- upvalues: CombineReducersResult (copy), PlayerKeysModule (copy)
 	local CombineReducersResultResult = CombineReducersResult(p1, p2)
 	CombineReducersResultResult.playerKeys = PlayerKeysModule(p1 and p1.playerKeys or nil, p2, CombineReducersResultResult)

@@ -12,7 +12,7 @@ local CompletionDataToRawHeadersModule = require(GenericChallenges.Utils.complet
 local EnableRejectPromiseOnWebviewClosed = game:DefineFastFlag("EnableRejectPromiseOnWebviewClosed", false)
 local _ = require(GenericChallenges.Parent.LuauPolyfill)
 
-return function(p1) --[[ Line: 41 ]]
+return function(p1)
 	-- upvalues: ChallengeWebViewModule (copy), GetLocalizedTitleModule (copy), EnableRejectPromiseOnWebviewClosed (copy), ConstantsModule (copy), BuildHybridCallbackModule (copy), BuildCredentialsProtocolHookModule (copy), ChallengeErrorModule (copy), ErrorKindModule (copy), CompletionDataToRawHeadersModule (copy), InitializeHybridCallbackModule (copy)
 	if p1.rawResponseHeaders == nil then
 		assert(p1.callbacks ~= nil, "Callbacks must be specified in manual challenge mode")
@@ -27,24 +27,24 @@ return function(p1) --[[ Line: 41 ]]
 		local Flag = false
 		NewChallengeWebView1:setHybridCallback(BuildHybridCallbackModule({
 			Hooks = { BuildCredentialsProtocolHookModule() },
-			OnChallengeLoadFailed = function(p2) --[[ Line: 131 ]]
+			OnChallengeLoadFailed = function(p2)
 				-- upvalues: p1 (copy), NewChallengeWebView1 (copy)
 				p1.callbacks.OnChallengeLoadFailed(p2)
 				NewChallengeWebView1:close()
 			end,
-			OnChallengeInvalidated = function(p2) --[[ Line: 135 ]]
+			OnChallengeInvalidated = function(p2)
 				-- upvalues: p1 (copy), NewChallengeWebView1 (copy)
 				p1.callbacks.OnChallengeInvalidated(p2)
 				NewChallengeWebView1:close()
 			end,
-			OnChallengeCompleted = function(p2) --[[ Line: 139 ]]
+			OnChallengeCompleted = function(p2)
 				-- upvalues: Flag (ref), p1 (copy), NewChallengeWebView1 (copy)
 				Flag = true
 				p1.callbacks.OnChallengeCompleted(p2)
 				NewChallengeWebView1:close()
 			end
 		}))
-		NewChallengeWebView1:setCloseCallback(function() --[[ Line: 145 ]]
+		NewChallengeWebView1:setCloseCallback(function()
 			-- upvalues: Flag (ref), p1 (copy)
 			if not Flag and p1.callbacks.OnChallengeAbandoned ~= nil then
 				p1.callbacks.OnChallengeAbandoned()
@@ -73,7 +73,7 @@ return function(p1) --[[ Line: 41 ]]
 			local Flag1 = false
 			NewChallengeWebView:setHybridCallback(BuildHybridCallbackModule({
 				Hooks = { BuildCredentialsProtocolHookModule() },
-				OnChallengeLoadFailed = function(_) --[[ Line: 61 ]]
+				OnChallengeLoadFailed = function(_)
 					-- upvalues: p1 (copy), ChallengeErrorModule (upval), ErrorKindModule (upval), RawResponseHeader (copy), NewChallengeWebView (copy)
 					if p1.challengeErrorCallback ~= nil then
 						p1.challengeErrorCallback()
@@ -81,7 +81,7 @@ return function(p1) --[[ Line: 41 ]]
 					p1.reject(ChallengeErrorModule.new(ErrorKindModule.LoadFailed, { challengeType = RawResponseHeader }))
 					NewChallengeWebView:close()
 				end,
-				OnChallengeInvalidated = function(p2) --[[ Line: 70 ]]
+				OnChallengeInvalidated = function(p2)
 					-- upvalues: p1 (copy), ChallengeErrorModule (upval), ErrorKindModule (upval), NewChallengeWebView (copy)
 					if p1.challengeErrorCallback ~= nil and p2.data ~= nil then
 						p1.challengeErrorCallback(p2.data)
@@ -89,11 +89,11 @@ return function(p1) --[[ Line: 41 ]]
 					p1.reject(ChallengeErrorModule.new(ErrorKindModule.Invalidated, p2.data))
 					NewChallengeWebView:close()
 				end,
-				OnChallengeDisplayed = function(_) --[[ Line: 77 ]]
+				OnChallengeDisplayed = function(_)
 					-- upvalues: NewChallengeWebView (copy)
 					NewChallengeWebView:setVisible(true)
 				end,
-				OnChallengeCompleted = function(p2) --[[ Line: 80 ]]
+				OnChallengeCompleted = function(p2)
 					-- upvalues: p1 (copy), CompletionDataToRawHeadersModule (upval), RawResponseHeader1 (copy), Flag1 (ref), NewChallengeWebView (copy)
 					if p2.data ~= nil and p2.data.challengeType ~= nil and p2.data.metadata ~= nil then
 						p1.resolve(p1.retryRequestCallback(CompletionDataToRawHeadersModule({
@@ -106,7 +106,7 @@ return function(p1) --[[ Line: 41 ]]
 					NewChallengeWebView:close()
 				end
 			}))
-			NewChallengeWebView:setCloseCallback(function() --[[ Line: 94 ]]
+			NewChallengeWebView:setCloseCallback(function()
 				-- upvalues: Flag1 (ref), p1 (copy), ChallengeErrorModule (upval), ErrorKindModule (upval), RawResponseHeader (copy)
 				if not Flag1 then
 					p1.reject(ChallengeErrorModule.new(ErrorKindModule.Invalidated, { challengeType = RawResponseHeader }))

@@ -6,7 +6,7 @@ local UIBloxModule = require(Parent.UIBlox)
 local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 
-return function(p1) --[[ Line: 21 ]]
+return function(p1)
 	-- upvalues: UseScreenSizeFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), InteractiveAlert (copy), ButtonType (copy)
 	local UseScreenSizeResult = UseScreenSizeFunction()
 	local UseLocalizationResult = UseLocalizationFunction({ closeButtonText = "Feature.ProfileBadges.action.close" })

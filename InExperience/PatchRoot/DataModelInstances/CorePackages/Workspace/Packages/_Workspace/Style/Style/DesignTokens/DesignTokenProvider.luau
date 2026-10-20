@@ -7,7 +7,7 @@ local UseUiModeInfoFunction = require(Parent.RobloxAppHooks).useUiModeInfo
 local Context = require(Parent.UIBlox).Style.Context
 local DesignTokenContextModule = require(script.Parent.DesignTokenContext)
 
-return function(p1) --[[ Line: 27 | Named "DesignTokenProvider" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), Context (copy), UseUiModeInfoFunction (copy), CryoModule (copy), ArgCheckModule (copy), DesignTokenContextModule (copy)
 	local UseContextResult = ReactModule.useContext(Context)
 	local UseUiModeInfoResult = UseUiModeInfoFunction()
@@ -20,7 +20,7 @@ return function(p1) --[[ Line: 27 | Named "DesignTokenProvider" ]]
 	if not Tokens.LuaApps then
 		Tokens = CryoModule.Dictionary.join(Tokens, { LuaApps = {} })
 	end
-	Tokens = CryoModule.List.foldLeft(KeysResult, function(p2, Key) --[[ Line: 42 ]]
+	Tokens = CryoModule.List.foldLeft(KeysResult, function(p2, Key)
 		-- upvalues: TokenMappers (copy), UiModeInfo (ref), Tokens (ref), CryoModule (upval)
 		local Copy = table.clone(p2.LuaApps)
 		Copy[Key] = TokenMappers[Key](UiModeInfo, Tokens)

@@ -23,7 +23,7 @@ local _ = require(Parent.MomentsTypes)
 local MinFontSize = ConstantsModule.TextOverlay.MinFontSize
 local TreatmentMaxFontSize = ConstantsModule.TextOverlay.TreatmentMaxFontSize
 
-return function(p1) --[[ Line: 68 | Named "VerticalFontSizeSlider" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseMemoFunction (copy), SignalsModule (copy), ConstantsModule (copy), UseSignalStateFunction (copy), UseCallbackFunction (copy), DashModule (copy), FFlagMomentsTextOverlayV2Redesign (copy), FireAnalyticsEventModule (copy), EventNames (copy), MakeCreationEventFieldsModule (copy), ReactModule (copy), View (copy), Slider (copy), Knob (copy), FoundationModule (copy), MinFontSize (copy), TreatmentMaxFontSize (copy)
 	local Controller = p1.controller
 	local UseTokensResult = UseTokensFunction()
@@ -37,13 +37,13 @@ return function(p1) --[[ Line: 68 | Named "VerticalFontSizeSlider" ]]
 		Slider = ReactModule.createElement(Slider, {
 			knob = ReactModule.createElement(Knob, { size = FoundationModule.Enums.InputSize.Large }),
 			knobVisibility = FoundationModule.Enums.Visibility.Always,
-			onDragStarted = UseCallbackFunction(function() --[[ Line: 99 ]]
+			onDragStarted = UseCallbackFunction(function()
 				-- upvalues: FFlagMomentsTextOverlayV2Redesign (upval), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval)
 				if FFlagMomentsTextOverlayV2Redesign then
 					FireAnalyticsEventModule(EventNames.EditingFlowTextOverlayFontSizeSliderUsed, MakeCreationEventFieldsModule.makeTextOverlayEventFields())
 				end
 			end, {}),
-			onValueChanged = UseCallbackFunction(function(FontSize) --[[ Line: 84 ]]
+			onValueChanged = UseCallbackFunction(function(FontSize)
 				-- upvalues: Controller (copy), DashModule (upval)
 				local ActiveSession = Controller.getActiveSession(false)
 				
@@ -61,9 +61,9 @@ return function(p1) --[[ Line: 68 | Named "VerticalFontSizeSlider" ]]
 			end, { Controller }),
 			size = FoundationModule.Enums.InputSize.XSmall,
 			range = NumberRange.new(MinFontSize, TreatmentMaxFontSize),
-			value = math.clamp(UseSignalStateFunction((UseMemoFunction(function() --[[ Line: 74 ]]
+			value = math.clamp(UseSignalStateFunction((UseMemoFunction(function()
 				-- upvalues: SignalsModule (upval), Controller (copy), ConstantsModule (upval)
-				return SignalsModule.createComputed(function(p2) --[[ Line: 75 ]]
+				return SignalsModule.createComputed(function(p2)
 					-- upvalues: Controller (upval), ConstantsModule (upval)
 					local ActiveSession = Controller.getActiveSession(p2)
 					local Draft = if ActiveSession == nil then nil else ActiveSession.getDraft(p2)

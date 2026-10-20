@@ -44,14 +44,14 @@ local InterfaceResult9 = TModule.interface({
 	permissions = TModule.optional(TModule.map(TModule.string, TModule.boolean))
 })
 
-local function _(p1, Callback, p2) --[[ Line: 87 | Named "validateResponse" ]]
+local function _(p1, Callback, p2)
 	local CallbackResult, CallbackResult2 = Callback(p2)
 	assert(CallbackResult, `Invalid {p1} response: {tostring(CallbackResult2)}`)
 	
 	return p2
 end
 
-local function decodeManagedPricingResponse(p1) --[[ Line: 93 ]]
+local function decodeManagedPricingResponse(p1)
 	-- upvalues: InterfaceResult (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult(p1)
 	assert(InterfaceResultResult, `Invalid Managed Pricing response: {tostring(InterfaceResultResult2)}`)
@@ -59,7 +59,7 @@ local function decodeManagedPricingResponse(p1) --[[ Line: 93 ]]
 	return p1
 end
 
-local function decodeBulkDeveloperProductUpdateResponse(p1) --[[ Line: 97 ]]
+local function decodeBulkDeveloperProductUpdateResponse(p1)
 	-- upvalues: InterfaceResult2 (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult2(p1)
 	assert(InterfaceResultResult, `Invalid bulk developer product update response: {tostring(InterfaceResultResult2)}`)
@@ -67,7 +67,7 @@ local function decodeBulkDeveloperProductUpdateResponse(p1) --[[ Line: 97 ]]
 	return p1
 end
 
-local function decodeBulkGamePassUpdateResponse(p1, p2) --[[ Line: 105 ]]
+local function decodeBulkGamePassUpdateResponse(p1, p2)
 	-- upvalues: InterfaceResult3 (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult3(p2)
 	assert(InterfaceResultResult, `Invalid bulk Game Pass update response: {tostring(InterfaceResultResult2)}`)
@@ -81,7 +81,7 @@ local function decodeBulkGamePassUpdateResponse(p1, p2) --[[ Line: 105 ]]
 	return p2
 end
 
-local function decodeCreatedShop(p3) --[[ Line: 120 ]]
+local function decodeCreatedShop(p3)
 	-- upvalues: InterfaceResult4 (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult4(p3)
 	assert(InterfaceResultResult, `Invalid created Shop response: {tostring(InterfaceResultResult2)}`)
@@ -89,7 +89,7 @@ local function decodeCreatedShop(p3) --[[ Line: 120 ]]
 	return p3
 end
 
-local function decodeShopListResponse(p3) --[[ Line: 124 ]]
+local function decodeShopListResponse(p3)
 	-- upvalues: InterfaceResult5 (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult5(p3)
 	assert(InterfaceResultResult, `Invalid Shop list response: {tostring(InterfaceResultResult2)}`)
@@ -97,7 +97,7 @@ local function decodeShopListResponse(p3) --[[ Line: 124 ]]
 	return p3
 end
 
-local function decodeUniversePermissionResponse(p3) --[[ Line: 128 ]]
+local function decodeUniversePermissionResponse(p3)
 	-- upvalues: InterfaceResult7 (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult7(p3)
 	assert(InterfaceResultResult, `Invalid universe permission response: {tostring(InterfaceResultResult2)}`)
@@ -105,7 +105,7 @@ local function decodeUniversePermissionResponse(p3) --[[ Line: 128 ]]
 	return { canMonetize = p3.monetizeExperience }
 end
 
-local function decodeGroupMigrationResponse(p3) --[[ Line: 133 ]]
+local function decodeGroupMigrationResponse(p3)
 	-- upvalues: InterfaceResult8 (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult8(p3)
 	assert(InterfaceResultResult, `Invalid group migration response: {tostring(InterfaceResultResult2)}`)
@@ -113,7 +113,7 @@ local function decodeGroupMigrationResponse(p3) --[[ Line: 133 ]]
 	return p3
 end
 
-local function decodeGroupPermissionResponse(p3) --[[ Line: 137 ]]
+local function decodeGroupPermissionResponse(p3)
 	-- upvalues: InterfaceResult9 (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult9(p3)
 	assert(InterfaceResultResult, `Invalid group permission response: {tostring(InterfaceResultResult2)}`)
@@ -123,7 +123,7 @@ local function decodeGroupPermissionResponse(p3) --[[ Line: 137 ]]
 	}
 end
 
-local function decodeBatchUpdateShopItemsResponse(p3) --[[ Line: 142 ]]
+local function decodeBatchUpdateShopItemsResponse(p3)
 	-- upvalues: InterfaceResult6 (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult6(p3)
 	assert(InterfaceResultResult, `Invalid Shop item update response: {tostring(InterfaceResultResult2)}`)
@@ -131,11 +131,11 @@ local function decodeBatchUpdateShopItemsResponse(p3) --[[ Line: 142 ]]
 	return p3
 end
 
-local function decodeEmptyResponse(_) --[[ Line: 146 ]]
+local function decodeEmptyResponse(_)
 	return nil
 end
 
-local function transportOptions(p3) --[[ Line: 150 ]]
+local function transportOptions(p3)
 	local P13 = p3 or {}
 	
 	return {
@@ -147,22 +147,22 @@ local function transportOptions(p3) --[[ Line: 150 ]]
 	}
 end
 
-local _ = function(p3) --[[ Line: 161 | Named "resolveBase" ]]
+local _ = function(p3)
 	-- upvalues: CreatorApiHttpModule (copy), transportOptions (copy)
 	return CreatorApiHttpModule.baseUrl((transportOptions(p3)))
 end
 
-local function get(PermissionsName, p3, p4, DecodeUniversePermissionResponse) --[[ Line: 165 ]]
+local function get(PermissionsName, p3, p4, DecodeUniversePermissionResponse)
 	-- upvalues: CreatorApiHttpModule (copy), transportOptions (copy)
 	return CreatorApiHttpModule.get(transportOptions(p4), PermissionsName, p3, DecodeUniversePermissionResponse)
 end
 
-local function mutate(p3, ShopsName, p4, p5, p6, DecodeBatchUpdateShopItemsResponse) --[[ Line: 169 ]]
+local function mutate(p3, ShopsName, p4, p5, p6, DecodeBatchUpdateShopItemsResponse)
 	-- upvalues: transportOptions (copy), CreatorApiHttpModule (copy)
 	return CreatorApiHttpModule.json(CreatorApiHttpModule.mutatingNetwork((transportOptions(p6))), p3, ShopsName, p4, p5, CreatorApiHttpModule.jsonDecoder(DecodeBatchUpdateShopItemsResponse))
 end
 
-local function bulkUpdateGamePasses(p3, Tbl, p4, ChangedProperties, Callback, p5, p6) --[[ Line: 255 ]]
+local function bulkUpdateGamePasses(p3, Tbl, p4, ChangedProperties, Callback, p5, p6)
 	-- upvalues: CreatorApiHttpModule (copy), transportOptions (copy), PromiseModule (copy), FetchGamePassConfigModule (copy), decodeBulkGamePassUpdateResponse (copy), StatusCodes (copy)
 	local BaseUrlResult = CreatorApiHttpModule.baseUrl((transportOptions(p6)))
 	local Copy = table.clone(Tbl)
@@ -177,12 +177,12 @@ local function bulkUpdateGamePasses(p3, Tbl, p4, ChangedProperties, Callback, p5
 		errorMessage = "The local user changed while the bulk Game Pass request was running"
 	})
 	
-	local function _() --[[ Line: 273 | Named "isRequestCurrent" ]]
+	local function _()
 		-- upvalues: p6 (copy)
 		return p6 == nil or (p6.isRequestCurrent == nil or p6.isRequestCurrent())
 	end
 	
-	local function appendSessionChanged(GamePassIds, p7) --[[ Line: 276 ]]
+	local function appendSessionChanged(GamePassIds, p7)
 		-- upvalues: List (copy), Frozen (copy)
 		for _, gamePassId in GamePassIds do
 			local v1 = if p7 == nil then nil else p7[gamePassId]
@@ -200,7 +200,7 @@ local function bulkUpdateGamePasses(p3, Tbl, p4, ChangedProperties, Callback, p5
 		end
 	end
 	
-	local function updateNextBatch() --[[ Line: 300 ]]
+	local function updateNextBatch()
 		-- upvalues: p6 (copy), Total (ref), Copy (copy), appendSessionChanged (copy), PromiseModule (upval), Errors (copy), List (copy), p4 (copy), ChangedProperties (copy), updateNextBatch (copy), FetchGamePassConfigModule (upval), p3 (copy), config (copy), Callback (copy), BaseUrlResult (copy), p5 (copy), decodeBulkGamePassUpdateResponse (upval), transportOptions (upval), CreatorApiHttpModule (upval), StatusCodes (upval)
 		if p6 == nil or (p6.isRequestCurrent == nil or p6.isRequestCurrent()) then
 			local GamePassUpdates = {}
@@ -223,7 +223,7 @@ local function bulkUpdateGamePasses(p3, Tbl, p4, ChangedProperties, Callback, p5
 			for _, gamePassUpdate in GamePassUpdates do
 				t[gamePassUpdate.gamePassId] = true
 			end
-			local function readBack(p8, MutationError) --[[ Line: 328 ]]
+			local function readBack(p8, MutationError)
 				-- upvalues: Errors (upval), GamePassUpdates (copy), p6 (upval), appendSessionChanged (upval), List2 (copy), updateNextBatch (upval), FetchGamePassConfigModule (upval), p3 (upval), config (upval), List (upval), Callback (upval)
 				local t = {}
 				local GamePassIds = {}
@@ -240,7 +240,7 @@ local function bulkUpdateGamePasses(p3, Tbl, p4, ChangedProperties, Callback, p5
 					end
 				end
 				if p6 == nil or (p6.isRequestCurrent == nil or p6.isRequestCurrent()) then
-					return FetchGamePassConfigModule.batchGet(p3, GamePassIds, config):andThen(function(Result) --[[ Line: 346 ]]
+					return FetchGamePassConfigModule.batchGet(p3, GamePassIds, config):andThen(function(Result)
 						-- upvalues: p6 (upval), appendSessionChanged (upval), List2 (upval), t (copy), updateNextBatch (upval), GamePassUpdates (upval), List (upval), MutationError (copy), Callback (upval)
 						if p6 ~= nil and (p6.isRequestCurrent ~= nil and not p6.isRequestCurrent()) then
 							appendSessionChanged(List2, t)
@@ -285,7 +285,7 @@ local function bulkUpdateGamePasses(p3, Tbl, p4, ChangedProperties, Callback, p5
 							end
 						end
 						return updateNextBatch()
-					end, function(p9) --[[ Line: 385 ]]
+					end, function(p9)
 						-- upvalues: p6 (upval), appendSessionChanged (upval), List2 (upval), t (copy), updateNextBatch (upval), GamePassUpdates (upval), List (upval), MutationError (copy)
 						if p6 ~= nil and (p6.isRequestCurrent ~= nil and not p6.isRequestCurrent()) then
 							appendSessionChanged(List2, t)
@@ -316,13 +316,13 @@ local function bulkUpdateGamePasses(p3, Tbl, p4, ChangedProperties, Callback, p5
 				end
 			end
 			
-			return CreatorApiHttpModule.json(CreatorApiHttpModule.mutatingNetwork((transportOptions(p6))), "POST", ("%s/game-passes/v1/game-passes/universes/%d/bulk-update"):format(BaseUrlResult, p3), { gamePassUpdates = GamePassUpdates }, p5, CreatorApiHttpModule.jsonDecoder(function(p9) --[[ Line: 419 ]]
+			return CreatorApiHttpModule.json(CreatorApiHttpModule.mutatingNetwork((transportOptions(p6))), "POST", ("%s/game-passes/v1/game-passes/universes/%d/bulk-update"):format(BaseUrlResult, p3), { gamePassUpdates = GamePassUpdates }, p5, CreatorApiHttpModule.jsonDecoder(function(p9)
 				-- upvalues: decodeBulkGamePassUpdateResponse (upval), t (copy)
 				return (decodeBulkGamePassUpdateResponse(t, p9))
-			end)):andThen(function(Result) --[[ Line: 422 ]]
+			end)):andThen(function(Result)
 				-- upvalues: readBack (copy)
 				return readBack(Result, nil)
-			end, function(MutationError) --[[ Line: 424 ]]
+			end, function(MutationError)
 				-- upvalues: StatusCodes (upval), Copy (upval), Total (upval), GamePassUpdates (copy), List (upval), Errors (upval), updateNextBatch (upval), readBack (copy)
 				local ResponseCode = if typeof(MutationError) == "table" then MutationError.responseCode else nil
 				
@@ -358,21 +358,21 @@ local function bulkUpdateGamePasses(p3, Tbl, p4, ChangedProperties, Callback, p5
 end
 
 return {
-	getManagedPricing = function(p9, p10) --[[ Line: 190 ]]
+	getManagedPricing = function(p9, p10)
 		-- upvalues: CreatorApiHttpModule (copy), transportOptions (copy), get (copy), decodeManagedPricingResponse (copy)
 		return get(("%s/price-configuration-api/v1/universes/%d/managed-pricing"):format(CreatorApiHttpModule.baseUrl((transportOptions(p10))), p9), "monetization-options.managed-pricing.get", p10, decodeManagedPricingResponse)
 	end,
-	acceptManagedPricing = function(p9, p10) --[[ Line: 203 ]]
+	acceptManagedPricing = function(p9, p10)
 		-- upvalues: CreatorApiHttpModule (copy), transportOptions (copy), mutate (copy), decodeEmptyResponse (copy)
 		return mutate("POST", ("%s/price-configuration-api/v1/universes/%d/managed-pricing:accept"):format(CreatorApiHttpModule.baseUrl((transportOptions(p10))), p9), nil, "monetization-options.managed-pricing.accept", p10, decodeEmptyResponse)
 	end,
-	updateDeveloperProductsManagedPricing = function(p9, p10, IsManagedPricingEnabled, p11) --[[ Line: 215 ]]
+	updateDeveloperProductsManagedPricing = function(p9, p10, IsManagedPricingEnabled, p11)
 		-- upvalues: CreatorApiHttpModule (copy), transportOptions (copy), PromiseModule (copy), decodeBulkDeveloperProductUpdateResponse (copy)
 		local BaseUrlResult = CreatorApiHttpModule.baseUrl((transportOptions(p11)))
 		local Errors = {}
 		local Total = 1
 		
-		local function updateNextBatch() --[[ Line: 226 ]]
+		local function updateNextBatch()
 			-- upvalues: Total (ref), p10 (copy), IsManagedPricingEnabled (copy), PromiseModule (upval), Errors (copy), BaseUrlResult (copy), p9 (copy), p11 (copy), decodeBulkDeveloperProductUpdateResponse (upval), transportOptions (upval), CreatorApiHttpModule (upval), updateNextBatch (copy)
 			local DeveloperProductUpdates = {}
 			
@@ -387,7 +387,7 @@ return {
 			else
 				Total += #DeveloperProductUpdates
 				
-				return CreatorApiHttpModule.json(CreatorApiHttpModule.mutatingNetwork((transportOptions(p11))), "PATCH", ("%s/developer-products/v1/universes/%d/developer-products"):format(BaseUrlResult, p9), { developerProductUpdates = DeveloperProductUpdates }, "monetization-options.managed-pricing.update-products", CreatorApiHttpModule.jsonDecoder(decodeBulkDeveloperProductUpdateResponse)):andThen(function(Result) --[[ Line: 245 ]]
+				return CreatorApiHttpModule.json(CreatorApiHttpModule.mutatingNetwork((transportOptions(p11))), "PATCH", ("%s/developer-products/v1/universes/%d/developer-products"):format(BaseUrlResult, p9), { developerProductUpdates = DeveloperProductUpdates }, "monetization-options.managed-pricing.update-products", CreatorApiHttpModule.jsonDecoder(decodeBulkDeveloperProductUpdateResponse)):andThen(function(Result)
 					-- upvalues: Errors (upval), updateNextBatch (upval)
 					local Errors1 = Result.errors or {}
 					for _, value in Errors1 do
@@ -400,28 +400,28 @@ return {
 		
 		return updateNextBatch()
 	end,
-	updateGamePassesManagedPricing = function(p12, p13, ManagedPricing, p14) --[[ Line: 453 ]]
+	updateGamePassesManagedPricing = function(p12, p13, ManagedPricing, p14)
 		-- upvalues: bulkUpdateGamePasses (copy)
-		return bulkUpdateGamePasses(p12, p13, "ManagedPricing", { ManagedPricing = ManagedPricing }, function(p15): boolean --[[ Line: 464 ]]
+		return bulkUpdateGamePasses(p12, p13, "ManagedPricing", { ManagedPricing = ManagedPricing }, function(p15): boolean
 			-- upvalues: ManagedPricing (copy)
 			return p15.isManagedPricingEnabled == ManagedPricing
 		end, "monetization-options.managed-pricing.update-game-passes", p14)
 	end,
-	updateGamePassesArchived = function(p12, p13, Archived, p14) --[[ Line: 472 ]]
+	updateGamePassesArchived = function(p12, p13, Archived, p14)
 		-- upvalues: bulkUpdateGamePasses (copy)
-		return bulkUpdateGamePasses(p12, p13, "Archived", { Archived = Archived }, function(p15): boolean --[[ Line: 478 ]]
+		return bulkUpdateGamePasses(p12, p13, "Archived", { Archived = Archived }, function(p15): boolean
 			-- upvalues: Archived (copy)
 			return p15.isArchived == Archived and (not Archived or p15.isForSale == false)
 		end, "monetization-options.archive.update-game-passes", p14)
 	end,
-	listShops = function(p12, p13) --[[ Line: 483 ]]
+	listShops = function(p12, p13)
 		-- upvalues: CreatorApiHttpModule (copy), transportOptions (copy), UrlBuilderModule (copy), get (copy), decodeShopListResponse (copy)
 		return get(UrlBuilderModule.UrlBuilder.addQueryString(("%s/shops-api/v1/shops"):format((CreatorApiHttpModule.baseUrl((transportOptions(p13))))), {
 			["scope.type"] = "Universe",
 			["scope.scopeId"] = tostring(p12)
 		}), "monetization-options.shops.list", p13, decodeShopListResponse)
 	end,
-	createShop = function(p12, IsEnabled, p13) --[[ Line: 492 ]]
+	createShop = function(p12, IsEnabled, p13)
 		-- upvalues: CreatorApiHttpModule (copy), transportOptions (copy), mutate (copy), decodeCreatedShop (copy)
 		return mutate("POST", ("%s/shops-api/v1/shops"):format((CreatorApiHttpModule.baseUrl((transportOptions(p13))))), {
 			scope = { type = "Universe", scopeId = tostring(p12) },
@@ -433,7 +433,7 @@ return {
 			}
 		}, "monetization-options.shops.create", p13, decodeCreatedShop)
 	end,
-	setShopGlobalIcon = function(p12, IsEnabled, p13) --[[ Line: 504 ]]
+	setShopGlobalIcon = function(p12, IsEnabled, p13)
 		-- upvalues: CreatorApiHttpModule (copy), transportOptions (copy), mutate (copy), decodeBatchUpdateShopItemsResponse (copy)
 		return mutate("PATCH", ("%s/shops-api/v1/shops/%d/items"):format(CreatorApiHttpModule.baseUrl((transportOptions(p13))), p12), {
 			changedEntryPoints = {
@@ -444,22 +444,22 @@ return {
 			}
 		}, "monetization-options.shops.update-global-icon", p13, decodeBatchUpdateShopItemsResponse)
 	end,
-	getMonetizationPermission = function(p12, p13, p14, p15) --[[ Line: 511 ]]
+	getMonetizationPermission = function(p12, p13, p14, p15)
 		-- upvalues: CreatorApiHttpModule (copy), transportOptions (copy), get (copy), decodeUniversePermissionResponse (copy), HttpModule (copy), decodeGroupMigrationResponse (copy), PromiseModule (copy), decodeGroupPermissionResponse (copy)
 		local BaseUrlResult = CreatorApiHttpModule.baseUrl((transportOptions(p15)))
 		
 		if p13 == "Group" and p14 ~= nil then
 			local GroupsBaseUrl = p15 and p15.groupsBaseUrl or HttpModule.Url.GROUPS_URL
 			
-			local function getLegacyPermission() --[[ Line: 529 ]]
+			local function getLegacyPermission()
 				-- upvalues: get (upval), BaseUrlResult (copy), p12 (copy), p15 (copy), decodeUniversePermissionResponse (upval)
 				return get(("%s/orgs/v2/universes/%d/permissions/resolved"):format(BaseUrlResult, p12), "monetization-options.permission.universe", p15, decodeUniversePermissionResponse)
 			end
 			
-			return CreatorApiHttpModule.get(transportOptions(p15), ("%sv1/groups/%d/migration"):format(GroupsBaseUrl, p14), "monetization-options.permission.group-migration", decodeGroupMigrationResponse):catch(function(Err) --[[ Line: 543 ]]
+			return CreatorApiHttpModule.get(transportOptions(p15), ("%sv1/groups/%d/migration"):format(GroupsBaseUrl, p14), "monetization-options.permission.group-migration", decodeGroupMigrationResponse):catch(function(Err)
 				-- upvalues: PromiseModule (upval)
 				return if type(Err) == "table" and Err.responseCode == 409 then { status = "NotMigrated" } else PromiseModule.reject(Err)
-			end):andThen(function(Result) --[[ Line: 550 ]]
+			end):andThen(function(Result)
 				-- upvalues: getLegacyPermission (copy), get (upval), GroupsBaseUrl (copy), p14 (copy), p12 (copy), p15 (copy), decodeGroupPermissionResponse (upval)
 				return if Result.status == "Migrated" then get(("%sv2/groups/%d/universes/%d/permissions/resolved"):format(GroupsBaseUrl, p14, p12), "monetization-options.permission.group", p15, decodeGroupPermissionResponse) else getLegacyPermission()
 			end)

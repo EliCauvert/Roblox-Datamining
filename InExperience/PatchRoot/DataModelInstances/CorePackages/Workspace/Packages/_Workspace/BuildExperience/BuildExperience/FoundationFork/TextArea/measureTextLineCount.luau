@@ -5,7 +5,7 @@ local FoundationFontFaceMigration = require(Parent.Foundation).Utility.Flags.Fou
 local GetVisibleLineCountModule = require(script.Parent.getVisibleLineCount)
 local ChatTextAreaDebugModule = require(script.Parent.chatTextAreaDebug)
 
-return function(p1) --[[ Line: 29 | Named "measureTextLineCount" ]]
+return function(p1)
 	-- upvalues: GetVisibleLineCountModule (copy), ChatTextAreaDebugModule (copy), FoundationFontFaceMigration (copy), StyleModule (copy), TextService (copy)
 	local VisibleLineCountModule = GetVisibleLineCountModule(p1.text, p1.maxLines)
 	local Count = 1

@@ -4,7 +4,7 @@ local ValueChangedSignalModule = require(Parent.ValueChangedSignal)
 local VisibilitySignalModule = {}
 VisibilitySignalModule.__index = VisibilitySignalModule
 
-function VisibilitySignalModule.new(p1) --[[ Line: 18 ]]
+function VisibilitySignalModule.new(p1)
 	-- upvalues: ValueChangedSignalModule (copy)
 	return ValueChangedSignalModule.new(p1)
 end

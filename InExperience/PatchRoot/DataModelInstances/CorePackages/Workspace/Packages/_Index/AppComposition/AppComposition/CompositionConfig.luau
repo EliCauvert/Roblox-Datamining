@@ -5,12 +5,12 @@ local _ = require(AppComposition.AppCompositionTypes)
 local FFlagEnableSplitPane = require(Parent.SharedFlags).FFlagEnableSplitPane
 local RegionName = require(AppComposition.AppCompositionEnums).RegionName
 
-local function getRegionOverrides(SupportRegion) --[[ Line: 24 ]]
+local function getRegionOverrides(SupportRegion)
 	-- upvalues: RegionName (copy)
 	return if SupportRegion == RegionName.SupportRegion then { widthScale = 0.33, minWidth = 355 } else nil
 end
 
-local function getBaseConfig(Large, p1) --[[ Line: 34 ]]
+local function getBaseConfig(Large, p1)
 	-- upvalues: Breakpoint (copy)
 	if Large == Breakpoint.XSmall then
 		local Size300: number = p1.Size.Size_300
@@ -55,12 +55,12 @@ local function getBaseConfig(Large, p1) --[[ Line: 34 ]]
 	end
 end
 
-local function resolveLayout(p1, p2) --[[ Line: 89 ]]
+local function resolveLayout(p1, p2)
 	-- upvalues: getBaseConfig (copy)
 	return (getBaseConfig(p1, p2))
 end
 
-local function getRegionLayout(SupportRegion, p1, p2) --[[ Line: 93 ]]
+local function getRegionLayout(SupportRegion, p1, p2)
 	-- upvalues: getBaseConfig (copy), RegionName (copy)
 	local BaseConfig = getBaseConfig(p1, p2)
 	local Config = if SupportRegion == RegionName.SupportRegion then { widthScale = 0.33, minWidth = 355 } else nil

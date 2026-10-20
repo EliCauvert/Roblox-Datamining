@@ -15,7 +15,7 @@ local FFlagLuaAppEdpMomentVideo = require(Parent.SharedFlags).FFlagLuaAppEdpMome
 local GetImageUriModule = require(MediaGallery.getImageUri)
 local MediaGalleryConstantsModule = require(MediaGallery.MediaGalleryConstants)
 
-return ReactModule.memo(function(p1) --[[ Line: 70 | Named "MediaGalleryVideoItem" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), GetImageUriModule (copy), VideoPlaybackCoordinator (copy), MediaGalleryConstantsModule (copy), FFlagMediaGalleryVideoVisiblePercent (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), ReactModule (copy), VideoPlayer (copy), FFlagLuaAppEdpMomentVideo (copy), VideoPlaybackDetector (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), VideoPlaybackDetectionMethod (copy)
 	local UseTokensResult = UseTokensFunction()
 	local AssetId: string = `rbxassetid://{p1.videoId}`
@@ -38,12 +38,12 @@ return ReactModule.memo(function(p1) --[[ Line: 70 | Named "MediaGalleryVideoIte
 	local OnVideoReadyChanged = if FFlagLuaAppMediaGalleryGamepadSupport and NoCurrentIndex then p1.onVideoReadyChanged else nil
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 110 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: NoCurrentIndex (copy), SetIsVideoActiveFunction (copy)
 		if NoCurrentIndex and SetIsVideoActiveFunction then
 			SetIsVideoActiveFunction(true)
 			
-			return function() --[[ Line: 113 ]]
+			return function()
 				-- upvalues: SetIsVideoActiveFunction (upval)
 				SetIsVideoActiveFunction(false)
 			end
@@ -69,7 +69,7 @@ return ReactModule.memo(function(p1) --[[ Line: 70 | Named "MediaGalleryVideoIte
 			looped = p1.looped ~= nil and p1.looped,
 			Size = UDim2.fromScale(1, 1),
 			cornerRadius = CornerRadius,
-			onMuteButtonActivated = ReactModule.useCallback(function(p2) --[[ Line: 143 ]]
+			onMuteButtonActivated = ReactModule.useCallback(function(p2)
 				-- upvalues: VideoAnalytics (copy), p1 (copy), VideoPlaybackCoordinator1 (copy)
 				if VideoAnalytics and VideoAnalytics.reportVideoMute then
 					VideoAnalytics.reportVideoMute(p1.itemIndex, VideoPlaybackCoordinator1.currentPlaybackSessionId, p2)
@@ -82,7 +82,7 @@ return ReactModule.memo(function(p1) --[[ Line: 70 | Named "MediaGalleryVideoIte
 			showPlayButton = if p1.showPlayButton == nil then IsFullscreen else p1.showPlayButton,
 			showProgressBar = if p1.showProgressBar == nil then IsFullscreen else p1.showProgressBar,
 			videoAnalyticsContext = p1.videoAnalyticsContext,
-			onVideoLoaded = ReactModule.useCallback(function(p2, p3) --[[ Line: 121 ]]
+			onVideoLoaded = ReactModule.useCallback(function(p2, p3)
 				-- upvalues: VideoAnalytics (copy), p1 (copy), VideoPlaybackCoordinator1 (copy)
 				if VideoAnalytics then
 					VideoAnalytics.reportVideoLoad(p1.itemIndex, VideoPlaybackCoordinator1.currentPlaybackSessionId, p2, p3)

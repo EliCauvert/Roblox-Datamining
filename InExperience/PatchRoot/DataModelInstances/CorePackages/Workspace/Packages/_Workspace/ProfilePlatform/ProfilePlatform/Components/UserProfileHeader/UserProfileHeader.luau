@@ -44,7 +44,7 @@ local UseProfileAnalyticsContextModule = require(ProfilePlatform.Contexts.usePro
 local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
 local config = { skipFetch = true }
 
-return function(p1) --[[ Line: 81 | Named "UserProfileHeader" ]]
+return function(p1)
 	-- upvalues: FFlagSocialEnableProfileInspectAndBuy (copy), UseLocalUserIdFunction (copy), UseNavigationFunction (copy), ReactModule (copy), FFlagSocialEnableProfileInspectAndBuyAnalytics (copy), UseProfileAnalyticsContextModule (copy), UseProfileWrapperContextModule (copy), EventNamesModule (copy), EnumsModule (copy), FFlagProfilePlatformNewProfileHeader (copy), UseProfileFormFactorModule (copy), FFlagSwitchProfileWidthHookToSocialCommon (copy), UseProfileCardWidthFunction (copy), UseProfileCardWidthModule (copy), FFlagProfilePlatformPresenceStoreMigrationModule (copy), UseEffectOnMountFunction (copy), GetResult (copy), UseGetPresenceByUserId (copy), config (copy), ConvertPresenceEnumModule (copy), PresenceModule (copy), UseDispatchFunction (copy), NetworkingPresenceModule (copy), UseSelectorFunction (copy), UseShouldShowContextualInformationModule (copy), FFlagProfilePlatformMeTabMobileProfileHero (copy), UseShouldResizeAvatarModule (copy), ConstantsModule (copy), View (copy), UserProfileAvatarModule (copy), FFlagProfileInspectAvatarCWEntryModule (copy), InspectAvatarTooltipModule (copy), AvatarHeadshotComponentModule (copy), FFlagAddPlatformNameToProfileHeader (copy), ContextualInformationModule (copy), SocialChipCountsRowContainer (copy), FFlagEnableSocialTabsPage (copy), SocialIdentityContainerModule (copy), FFlagMoveInExperienceModeToEditProfile (copy), DisableStreamerModeToggle (copy), UserProfileSettingsToggleModule (copy)
 	local UserThumbnail = p1.userThumbnail
 	local IsPeekView: boolean? = nil
@@ -59,7 +59,7 @@ return function(p1) --[[ Line: 81 | Named "UserProfileHeader" ]]
 	local UseRefResult1 = if FFlagSocialEnableProfileInspectAndBuy then ReactModule.useRef(nil) else nil
 	local UseProfileAnalyticsContextModuleResult = if FFlagSocialEnableProfileInspectAndBuyAnalytics then UseProfileAnalyticsContextModule() else nil
 	local ProfileSessionId = if FFlagSocialEnableProfileInspectAndBuyAnalytics then UseProfileWrapperContextModule().profileSessionId else nil
-	local UseResult = if FFlagSocialEnableProfileInspectAndBuy then ReactModule.useCallback(function() --[[ Line: 112 ]]
+	local UseResult = if FFlagSocialEnableProfileInspectAndBuy then ReactModule.useCallback(function()
 		-- upvalues: FFlagSocialEnableProfileInspectAndBuyAnalytics (upval), UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), ProfileSessionId (copy), UseRefResult1 (copy), UseNavigationResult (copy), EnumsModule (upval)
 		if FFlagSocialEnableProfileInspectAndBuyAnalytics then
 			UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.InspectAvatarOpened, { profileSessionId = ProfileSessionId })
@@ -83,7 +83,7 @@ return function(p1) --[[ Line: 81 | Named "UserProfileHeader" ]]
 		local ProfileId = UseProfileWrapperContextModule().profileId
 		
 		if FFlagProfilePlatformPresenceStoreMigrationModule then
-			UseEffectOnMountFunction(function() --[[ Line: 139 ]]
+			UseEffectOnMountFunction(function()
 				-- upvalues: GetResult (upval), ProfileId (copy)
 				GetResult.RefreshPresenceByUserId((tostring(ProfileId)))
 			end)
@@ -91,11 +91,11 @@ return function(p1) --[[ Line: 81 | Named "UserProfileHeader" ]]
 			UserPresenceType = ConvertPresenceEnumModule(if UseGetPresenceByUserIdResult then UseGetPresenceByUserIdResult.userPresenceType else PresenceModule.Enums.PresenceType.Offline, if UseGetPresenceByUserIdResult and UseGetPresenceByUserIdResult.universeId ~= "" then tonumber(UseGetPresenceByUserIdResult.universeId) else nil)
 		else
 			local UseDispatchResult = UseDispatchFunction()
-			UseEffectOnMountFunction(function() --[[ Line: 150 ]]
+			UseEffectOnMountFunction(function()
 				-- upvalues: UseDispatchResult (copy), NetworkingPresenceModule (upval), ProfileId (copy)
-				UseDispatchResult(NetworkingPresenceModule.GetPresencesFromUserIds.API({ ProfileId })):catch(function(_) --[[ Line: 151 ]] end)
+				UseDispatchResult(NetworkingPresenceModule.GetPresencesFromUserIds.API({ ProfileId })):catch(function(_) end)
 			end)
-			local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 154 ]]
+			local UseSelectorResult = UseSelectorFunction(function(p2)
 				-- upvalues: PresenceModule (upval), ProfileId (copy)
 				return PresenceModule.Selectors.getUserPresenceByUserId(p2, ProfileId) or {
 					lastLocation = "",

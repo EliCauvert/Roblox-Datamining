@@ -8,7 +8,7 @@ local SduiActionType = SduiCoreSystemModule.SduiActionType
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local SendSocialLinkClickEventFunction = require(Parent.DiscoveryAnalytics).Events.sendSocialLinkClickEvent
 
-return function(p1, _, p2, _) --[[ Line: 19 ]]
+return function(p1, _, p2, _)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), SendSocialLinkClickEventFunction (copy), CloseCentralOverlayFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	
@@ -33,7 +33,7 @@ return function(p1, _, p2, _) --[[ Line: 19 ]]
 			social_link_display_type = ActionParams.socialLinkDisplayType or ""
 		}
 		DispatchFunction(SetCentralOverlayFunction(CentralOverlayType.LeaveRobloxAlert, {
-			continueFunc = function() --[[ Line: 55 ]]
+			continueFunc = function()
 				-- upvalues: SendSocialLinkClickEventFunction (upval), config (copy), SocialLinkUrl (copy), LinkingProtocol (copy), p2 (copy), SduiErrorType (upval), SduiActionType (upval), DispatchFunction (copy), CloseCentralOverlayFunction (upval)
 				SendSocialLinkClickEventFunction({
 					assignment_id = config.assignment_id,
@@ -42,7 +42,7 @@ return function(p1, _, p2, _) --[[ Line: 19 ]]
 					social_link_url = SocialLinkUrl,
 					social_link_display_type = config.social_link_display_type
 				})
-				LinkingProtocol:openURL(SocialLinkUrl):catch(function(Err) --[[ Line: 64 ]]
+				LinkingProtocol:openURL(SocialLinkUrl):catch(function(Err)
 					-- upvalues: p2 (upval), SduiErrorType (upval), SduiActionType (upval)
 					p2.dependencies.logger.reportError(SduiErrorType.FailedToOpenLink, {
 						name = SduiActionType.OpenSocialLink,

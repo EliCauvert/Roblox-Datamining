@@ -7,18 +7,18 @@ local CaptureService = if FFlagEnableVoiceChatMuteForVideoCaptures then game:Get
 local React = DependenciesModule.React
 local Cryo = DependenciesModule.Cryo
 
-local function useIsCapturingVideo() --[[ Line: 18 ]]
+local function useIsCapturingVideo()
 	-- upvalues: React (copy), CaptureService (copy)
 	local UseStateResult, UseStateResult2 = React.useState(CaptureService and CaptureService:IsCapturingVideo())
-	React.useEffect(function() --[[ Line: 21 ]]
+	React.useEffect(function()
 		-- upvalues: CaptureService (upval), UseStateResult2 (copy)
 		if not CaptureService then return end
-		local VideoCaptureInProgressConnection = CaptureService.VideoCaptureInProgress:Connect(function(IsInProgress) --[[ Line: 26 ]]
+		local VideoCaptureInProgressConnection = CaptureService.VideoCaptureInProgress:Connect(function(IsInProgress)
 			-- upvalues: UseStateResult2 (upval)
 			UseStateResult2(IsInProgress)
 		end)
 		
-		return function() --[[ Line: 30 ]]
+		return function()
 			-- upvalues: CaptureService (upval), VideoCaptureInProgressConnection (copy)
 			if CaptureService then
 				VideoCaptureInProgressConnection:Disconnect()
@@ -29,26 +29,26 @@ local function useIsCapturingVideo() --[[ Line: 18 ]]
 	return UseStateResult
 end
 
-return function(): boolean --[[ Line: 40 | Named "useEnableAudioFocusToggle" ]]
+return function(): boolean
 	-- upvalues: React (copy), FFlagEnableCrossExperienceVoiceCaptureMute (copy), FFlagEnableVoiceChatMuteForVideoCaptures (copy), useIsCapturingVideo (copy), Cryo (copy), AudioFocusManagementEngineFeature (copy)
 	local UseStateResult, UseStateResult2 = React.useState({})
 	local UseIsCapturingVideoResult = if FFlagEnableCrossExperienceVoiceCaptureMute and FFlagEnableVoiceChatMuteForVideoCaptures then useIsCapturingVideo() else false
-	local UseResult = React.useCallback(function(p1) --[[ Line: 48 ]]
+	local UseResult = React.useCallback(function(p1)
 		-- upvalues: UseStateResult (copy), Cryo (upval), UseStateResult2 (copy)
 		if not UseStateResult[p1] then
 			UseStateResult2((Cryo.Dictionary.join(UseStateResult, { [p1] = true })))
 		end
 	end, { UseStateResult })
-	local UseResult1 = React.useCallback(function(p1) --[[ Line: 57 ]]
+	local UseResult1 = React.useCallback(function(p1)
 		-- upvalues: UseStateResult (copy), Cryo (upval), UseStateResult2 (copy)
 		if UseStateResult[p1] then
 			UseStateResult2((Cryo.Dictionary.join(UseStateResult, { [p1] = nil })))
 		end
 	end, { UseStateResult })
-	React.useEffect(function() --[[ Line: 66 ]]
+	React.useEffect(function()
 		-- upvalues: AudioFocusManagementEngineFeature (upval), UseStateResult2 (copy), UseResult (copy), UseResult1 (copy)
 		if not AudioFocusManagementEngineFeature then return end
-		local Success, Result = pcall(function() --[[ Line: 71 ]]
+		local Success, Result = pcall(function()
 			return game:GetService("AudioFocusService")
 		end)
 		
@@ -62,7 +62,7 @@ return function(): boolean --[[ Line: 40 | Named "useEnableAudioFocusToggle" ]]
 		local OnContextRegisteredConnection = Result.OnContextRegistered:Connect(UseResult)
 		local OnContextUnregisteredConnection = Result.OnContextUnregistered:Connect(UseResult1)
 		
-		return function() --[[ Line: 88 ]]
+		return function()
 			-- upvalues: OnContextRegisteredConnection (copy), OnContextUnregisteredConnection (copy)
 			if OnContextRegisteredConnection then
 				OnContextRegisteredConnection:Disconnect()

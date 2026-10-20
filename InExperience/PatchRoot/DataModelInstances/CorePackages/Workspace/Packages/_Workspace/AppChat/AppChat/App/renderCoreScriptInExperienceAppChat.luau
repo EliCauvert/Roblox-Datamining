@@ -22,7 +22,7 @@ local FFlagAppChatPerfTrackingModule = require(AppChat.Flags.FFlagAppChatPerfTra
 local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
 local ChatPlacementContextModule = require(AppChat.Contexts.ChatPlacementContext)
 
-return function(ApolloClient, ParentContainerContext, UpdateAppChatUnreadMessagesCount) --[[ Line: 33 ]]
+return function(ApolloClient, ParentContainerContext, UpdateAppChatUnreadMessagesCount)
 	-- upvalues: CoreGui (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), ChatPlacementContextModule (copy), ReactRobloxModule (copy), RoduxModule (copy), FFlagAppChatSignalsMessageStoreModule (copy), SignalsMessageIngestionMiddlewareModule (copy), FFlagAppChatConversationStoreModule (copy), SignalsConversationMiddlewareModule (copy), FFlagAppChatFriendsTabIxpEnabledModule (copy), FFlagExpChatEnableFriendsTab (copy), AppChat (copy), ChatModerationStatusHydrationMiddlewareModule (copy), FFlagAppChatUnreadMessageCountStoreModule (copy), FFlagUseSignalsForSquadExperienceInvite (copy), Parent (copy), AppChatReducerModule (copy), ReactFocusNavigationModule (copy), ReactModule (copy), Provider (copy), InExperienceAppChatProvidersModule (copy), InExperienceAppChatModule (copy)
 	local AppChat1 = Instance.new("Folder")
 	AppChat1.Name = "AppChat"
@@ -56,7 +56,7 @@ return function(ApolloClient, ParentContainerContext, UpdateAppChatUnreadMessage
 	end
 	local NewResult = RoduxModule.Store.new(AppChatReducerModule, nil, List)
 	local NewResult1 = ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
-	Root:render(((function() --[[ Line: 83 | Named "AppChatMainWithFocusRoot" ]]
+	Root:render(((function()
 		-- upvalues: ReactModule (upval), ReactFocusNavigationModule (upval), NewResult1 (copy), Provider (upval), InExperienceAppChatProvidersModule (upval), NewResult (copy), UpdateAppChatUnreadMessagesCount (copy), ParentContainerContext (copy), ApolloClient (copy), InExperienceAppChatModule (upval)
 		return ReactModule.createElement(ReactFocusNavigationModule.FocusNavigationContext.Provider, { value = NewResult1 }, {
 			FocusNavigationRegistryProvider = ReactModule.createElement(Provider, nil, {

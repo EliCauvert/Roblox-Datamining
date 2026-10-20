@@ -4,11 +4,11 @@ local FFlagEnableInExpChatRewriteModule = require(ExpChat.Flags.FFlagEnableInExp
 local FFlagExpChatGlobalTabDefaultModule = require(ExpChat.Flags.FFlagExpChatGlobalTabDefault)
 local FormatGlobalChatPrefixModule = require(ExpChat.formatGlobalChatPrefix)
 
-local function _(p1): boolean --[[ Line: 9 ]]
+local function _(p1): boolean
 	return p1 == nil or p1 == ""
 end
 
-return (require(ExpChat.memoize)(function(p1, p2, p3) --[[ Line: 16 ]]
+return (require(ExpChat.memoize)(function(p1, p2, p3)
 	-- upvalues: FFlagExpChatGlobalTabDefaultModule (copy), FormatGlobalChatPrefixModule (copy), FFlagEnableInExpChatRewriteModule (copy), ConfigModule (copy)
 	local config = {
 		text = p1.text or "",

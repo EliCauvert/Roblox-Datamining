@@ -6,14 +6,14 @@ local FocusNavigableSurfaceWrapper = FocusNavigationUtilsModule.FocusNavigableSu
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
 
-return function(p1, p2) --[[ Line: 14 | Named "FocusNavigatorWrapper" ]]
+return function(p1, p2)
 	-- upvalues: ReactModule (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigableSurfaceIdentifierEnum (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy)
 	return ReactModule.createElement(FocusNavigableSurfaceWrapper, {
 		isIsolated = true,
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
 		customEventHandlers = {
 			[FocusNavigationEventNameEnum.NavigateBack] = {
-				handler = InputHandlersModule.onRelease(function(p3) --[[ Line: 20 ]]
+				handler = InputHandlersModule.onRelease(function(p3)
 					-- upvalues: p1 (copy)
 					p1.onClose()
 					p3:cancel()

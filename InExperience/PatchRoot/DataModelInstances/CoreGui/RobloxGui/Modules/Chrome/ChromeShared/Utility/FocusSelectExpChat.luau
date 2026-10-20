@@ -6,15 +6,15 @@ local GetInputGroupFunction = InputTypeModule.getInputGroup
 local FocusNavigationStore = require(CorePackages.Workspace.Packages.ExpChat).Stores.GetFocusNavigationStore(false)
 local ChatSelectorModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.ChatSelector)
 
-local function _(): boolean --[[ Line: 18 | Named "isUsingGamepad" ]]
+local function _(): boolean
 	-- upvalues: GetInputGroupFunction (copy), UserInputService (copy), InputTypeModule (copy)
 	return GetInputGroupFunction(UserInputService:GetLastInputType()) == InputTypeModule.InputTypeConstants.Gamepad
 end
 
-return function(_) --[[ Line: 23 ]]
+return function(_)
 	-- upvalues: ChatSelectorModule (copy), GetInputGroupFunction (copy), UserInputService (copy), InputTypeModule (copy), FocusUtils (copy), FocusNavigationStore (copy)
 	if ChatSelectorModule:GetVisibility() and GetInputGroupFunction(UserInputService:GetLastInputType()) == InputTypeModule.InputTypeConstants.Gamepad then
-		FocusUtils.FocusOffChrome(function() --[[ Line: 25 ]]
+		FocusUtils.FocusOffChrome(function()
 			-- upvalues: FocusNavigationStore (upval)
 			FocusNavigationStore.focusChatInputBar()
 		end)

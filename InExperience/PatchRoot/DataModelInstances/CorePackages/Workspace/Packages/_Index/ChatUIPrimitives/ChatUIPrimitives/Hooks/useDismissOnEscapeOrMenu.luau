@@ -2,15 +2,15 @@
 local GuiService = game:GetService("GuiService")
 local ReactModule = require(script:FindFirstAncestor("ChatUIPrimitives").Parent.React)
 
-return function(p1, Callback, p2, p3) --[[ Line: 20 | Named "useDismissOnEscapeOrMenu" ]]
+return function(p1, Callback, p2, p3)
 	-- upvalues: UserInputService (copy), GuiService (copy), ReactModule (copy)
 	local P1 = p2 or UserInputService
 	local P2 = p3 or GuiService
-	ReactModule.useEffect(function() --[[ Line: 28 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), Callback (copy), P1 (copy), P2 (copy)
 		if not p1 then return end
 		local Flag = false
-		local InputBeganConnection = P1.InputBegan:Connect(function(Input) --[[ Line: 40 ]]
+		local InputBeganConnection = P1.InputBegan:Connect(function(Input)
 			-- upvalues: Flag (ref), Callback (upval)
 			if Input.KeyCode == Enum.KeyCode.Escape or Input.KeyCode == Enum.KeyCode.ButtonB then
 				if Flag then return end
@@ -18,7 +18,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 20 | Named "useDismissOnEscapeO
 				Callback()
 			end
 		end)
-		local MenuOpenedConnection = P2.MenuOpened:Connect(function() --[[ Line: 33 | Named "dismissOnce" ]]
+		local MenuOpenedConnection = P2.MenuOpened:Connect(function()
 			-- upvalues: Flag (ref), Callback (upval)
 			if not Flag then
 				Flag = true
@@ -28,7 +28,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 20 | Named "useDismissOnEscapeO
 			end
 		end)
 		
-		return function() --[[ Line: 46 ]]
+		return function()
 			-- upvalues: InputBeganConnection (copy), MenuOpenedConnection (copy)
 			InputBeganConnection:Disconnect()
 			MenuOpenedConnection:Disconnect()

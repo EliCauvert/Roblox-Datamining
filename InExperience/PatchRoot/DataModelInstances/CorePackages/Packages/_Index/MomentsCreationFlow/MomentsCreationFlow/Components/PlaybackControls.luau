@@ -19,7 +19,7 @@ local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local GetFormatTimeFunction = MomentsCommonModule.Utils.getFormatTime
 
-return function(p1) --[[ Line: 40 | Named "PlaybackControls" ]]
+return function(p1)
 	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), ReactModule (copy), UseCallbackFunction (copy), View (copy), GradientBackdrop (copy), Slider (copy), FoundationModule (copy), IconButton (copy), PauseLarge (copy), PlayLarge (copy), SpeakerSlash (copy), Speaker (copy), Text (copy), GetFormatTimeFunction (copy), TwoArrowsFromCenter (copy), TwoArrowsToCenter (copy)
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseTokensResult = UseTokensFunction()
@@ -35,7 +35,7 @@ return function(p1) --[[ Line: 40 | Named "PlaybackControls" ]]
 		Controls = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "auto-y col gap-xxsmall size-full-0",
-			onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 65 ]]
+			onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
 				-- upvalues: UseBindingResult2 (copy)
 				UseBindingResult2(UDim2.new(0, Frame.AbsoluteSize.X, 1, 0))
 			end, {})
@@ -51,21 +51,21 @@ return function(p1) --[[ Line: 40 | Named "PlaybackControls" ]]
 				size = FoundationModule.Enums.InputSize.XSmall,
 				knobVisibility = FoundationModule.Enums.Visibility.None,
 				variant = FoundationModule.Enums.SliderVariant.Standard,
-				onValueChanged = ReactModule.useCallback(function(p2) --[[ Line: 61 ]]
+				onValueChanged = ReactModule.useCallback(function(p2)
 					-- upvalues: p1 (copy)
 					p1.playbackController.timeline.seek(p2 * p1.playbackController.timeline.duration)
 				end, {
 					p1.playbackController.timeline.duration,
 					p1.playbackController.timeline.seek
 				}),
-				onDragStarted = ReactModule.useCallback(function() --[[ Line: 47 ]]
+				onDragStarted = ReactModule.useCallback(function()
 					-- upvalues: p1 (copy), UseRefResult (copy)
 					if p1.playbackController.playback.isPlaying then
 						UseRefResult.current = true
 					end
 					p1.playbackController.playback.pause()
 				end, { p1.playbackController.playback.isPlaying }),
-				onDragEnded = ReactModule.useCallback(function() --[[ Line: 54 ]]
+				onDragEnded = ReactModule.useCallback(function()
 					-- upvalues: UseRefResult (copy), p1 (copy)
 					if UseRefResult.current then
 						p1.playbackController.playback.play()
@@ -81,7 +81,7 @@ return function(p1) --[[ Line: 40 | Named "PlaybackControls" ]]
 					PlaybackToggle = ReactModule.createElement(IconButton, {
 						LayoutOrder = 1,
 						icon = p1.playbackController.playback.isPlaying and PauseLarge or PlayLarge,
-						onActivated = UseCallbackFunction(function() --[[ Line: 69 ]]
+						onActivated = UseCallbackFunction(function()
 							-- upvalues: p1 (copy)
 							p1.playbackController.playback.toggle()
 						end, { p1.playbackController }),
@@ -90,7 +90,7 @@ return function(p1) --[[ Line: 40 | Named "PlaybackControls" ]]
 					MuteToggle = ReactModule.createElement(IconButton, {
 						LayoutOrder = 2,
 						icon = p1.playbackController.volume.isMuted and SpeakerSlash or Speaker,
-						onActivated = UseCallbackFunction(function() --[[ Line: 73 ]]
+						onActivated = UseCallbackFunction(function()
 							-- upvalues: p1 (copy)
 							p1.playbackController.volume.toggle()
 						end, { p1.playbackController }),

@@ -21,14 +21,14 @@ local StartReachedThreshold = {
 	viewportFraction = math.max(0, (require(AppChat.Flags.FIntAppChatMessageListV2StartReachedViewports)))
 }
 
-local function noop() --[[ Line: 32 ]] end
+local function noop() end
 
-local function _(p1): boolean --[[ Line: 34 | Named "isIncomingChatMessage" ]]
+local function _(p1): boolean
 	-- upvalues: EnumMessageTypesModule (copy)
 	return p1.isIncoming == true and (p1.messageType == EnumMessageTypesModule.PlainText or p1.messageType == EnumMessageTypesModule.Link)
 end
 
-local _ = function(p1) --[[ Line: 39 | Named "findNewestIncomingChatMessageId" ]]
+local _ = function(p1)
 	-- upvalues: EnumMessageTypesModule (copy)
 	for i = #p1, 1, -1 do
 		local v1 = p1[i]
@@ -40,13 +40,13 @@ local _ = function(p1) --[[ Line: 39 | Named "findNewestIncomingChatMessageId" ]
 	return nil
 end
 
-return function(Current) --[[ Line: 84 | Named "useMessageListV2ViewModel" ]]
+return function(Current)
 	-- upvalues: ReactModule (copy), ListItemsModule (copy), EnumMessageTypesModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), SignalsModule (copy), GetConversationMessageViewModelStoreModule (copy), SignalsReactModule (copy), FIntAppChatMessageInitialFetchMinMessagesModule (copy), FIntAppChatInitialMessageFetchLimitModule (copy), CreateScrollIntervalTrackerModule (copy), ViewRecyclerModule (copy), UseMessageListLayoutModule (copy), StartReachedThreshold (copy), MessageRowTypesModule (copy), FIntAppChatMessageListV2OverscanRowsModule (copy), noop (copy), FFlagAppChatConversationLoadingSkeletonModule (copy)
 	local UseRefResult = ReactModule.useRef(Current)
 	UseRefResult.current = Current
 	local ConversationId = Current.conversationId
 	local UseRefResult1 = ReactModule.useRef(nil)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 90 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ListItemsModule (upval), Current (copy), UseRefResult1 (copy)
 		return ListItemsModule.build(Current.itemList, UseRefResult1.current)
 	end, { Current.itemList })
@@ -71,7 +71,7 @@ return function(Current) --[[ Line: 84 | Named "useMessageListV2ViewModel" ]]
 	end
 	local Current1 = UseRefResult2.current
 	local UseRefResult3 = ReactModule.useRef(CountItems)
-	ReactModule.useEffect(function() --[[ Line: 105 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagAppChatPerfTrackingModule (upval), CountItems (copy), UseRefResult3 (copy), AppChatPerfTrackerModule (upval), ConversationId (copy)
 		if FFlagAppChatPerfTrackingModule and UseRefResult3.current < CountItems then
 			AppChatPerfTrackerModule.finish(AppChatPerfTrackerModule.Events.PaginationMessageList, { conversationId = ConversationId })
@@ -82,7 +82,7 @@ return function(Current) --[[ Line: 84 | Named "useMessageListV2ViewModel" ]]
 	local Item = Items[CountItems]
 	local Key = if Item == nil then nil else ListItemsModule.getKey(Item)
 	local UseRefResult5 = ReactModule.useRef(Key)
-	ReactModule.useEffect(function() --[[ Line: 120 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult5 (copy), Key (copy), UseRefResult4 (copy), UseRefResult (copy)
 		local Current = UseRefResult5.current
 		UseRefResult5.current = Key
@@ -92,22 +92,22 @@ return function(Current) --[[ Line: 84 | Named "useMessageListV2ViewModel" ]]
 		end
 	end, { Key })
 	local UseRefResult6 = ReactModule.useRef(nil)
-	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 135 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), GetConversationMessageViewModelStoreModule (upval), ConversationId (copy)
-		return SignalsModule.createComputed(function(p2): boolean --[[ Line: 136 ]]
+		return SignalsModule.createComputed(function(p2): boolean
 			-- upvalues: GetConversationMessageViewModelStoreModule (upval), ConversationId (upval)
 			local Metadata = GetConversationMessageViewModelStoreModule(false).conversationMessageListStore.getMetadata(ConversationId, p2)
 			
 			return Metadata ~= nil and Metadata.isLoading == true
 		end)
 	end, { ConversationId })))
-	ReactModule.useEffect(function() --[[ Line: 143 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult (copy), UseRefResult6 (copy)
 		if not UseSignalStateResult then
 			UseRefResult6.current = nil
 		end
 	end, { UseSignalStateResult })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 148 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), ListItemsModule (upval), UseRefResult6 (copy), FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), ConversationId (copy)
 		local LoadNextFunction: () -> () = UseRefResult.current.loadNext
 		
@@ -125,9 +125,9 @@ return function(Current) --[[ Line: 84 | Named "useMessageListV2ViewModel" ]]
 		LoadNextFunction()
 	end, { ConversationId })
 	local IsOpenAtStart = Current.openAtStart == true
-	local UseSignalStateResult1 = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 171 ]]
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), GetConversationMessageViewModelStoreModule (upval), ConversationId (copy), IsOpenAtStart (copy), FIntAppChatMessageInitialFetchMinMessagesModule (upval)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 172 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: GetConversationMessageViewModelStoreModule (upval), ConversationId (upval), IsOpenAtStart (upval), FIntAppChatMessageInitialFetchMinMessagesModule (upval)
 			local ConversationMessageListStore = GetConversationMessageViewModelStoreModule(false).conversationMessageListStore
 			local Metadata = ConversationMessageListStore.getMetadata(ConversationId, p2)
@@ -147,7 +147,7 @@ return function(Current) --[[ Line: 84 | Named "useMessageListV2ViewModel" ]]
 	local UseRefResult8 = ReactModule.useRef(nil)
 	local UseRefResult9 = ReactModule.useRef(false)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 195 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: HasUseSignalStateResult (copy), IsOpenAtStart (copy), UseRefResult7 (copy), FIntAppChatInitialMessageFetchLimitModule (upval), UseRefResult8 (copy), UseSignalStateResult1 (copy), UseRefResult9 (copy), UseResult (copy), GetConversationMessageViewModelStoreModule (upval), ConversationId (copy), UseStateResult2 (copy)
 		if HasUseSignalStateResult and not IsOpenAtStart and UseRefResult7.current < FIntAppChatInitialMessageFetchLimitModule then
 			UseRefResult7.current += 1
@@ -167,7 +167,7 @@ return function(Current) --[[ Line: 84 | Named "useMessageListV2ViewModel" ]]
 		IsOpenAtStart,
 		UseResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 214 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult (copy), UseRefResult9 (copy), UseSignalStateResult1 (copy), UseRefResult8 (copy), UseRefResult7 (copy), FIntAppChatInitialMessageFetchLimitModule (upval), UseStateResult2 (copy)
 		if UseSignalStateResult then
 			UseRefResult9.current = true
@@ -181,13 +181,13 @@ return function(Current) --[[ Line: 84 | Named "useMessageListV2ViewModel" ]]
 	local UseRefResult10 = ReactModule.useRef(nil)
 	local UseRefResult11 = ReactModule.useRef(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
-	ReactModule.useEffect(function() --[[ Line: 232 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagAppChatPerfTrackingModule (upval), UseStateResult1 (copy), CreateScrollIntervalTrackerModule (upval), AppChatPerfTrackerModule (upval), ConversationId (copy), UseRefResult11 (copy)
 		if FFlagAppChatPerfTrackingModule and UseStateResult1 ~= nil then
 			local ScrollIntervalTrackerModule = CreateScrollIntervalTrackerModule(AppChatPerfTrackerModule.Events.ScrollMessageList, UseStateResult1, { conversationId = ConversationId })
 			UseRefResult11.current = ScrollIntervalTrackerModule
 			
-			return function() --[[ Line: 242 ]]
+			return function()
 				-- upvalues: ScrollIntervalTrackerModule (copy), UseRefResult11 (upval)
 				ScrollIntervalTrackerModule.cleanup()
 				UseRefResult11.current = nil
@@ -196,7 +196,7 @@ return function(Current) --[[ Line: 84 | Named "useMessageListV2ViewModel" ]]
 			return nil
 		end
 	end, { UseStateResult1, ConversationId })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 248 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult11 (copy), UseRefResult10 (copy), UseRefResult4 (copy), UseRefResult1 (copy), UseRefResult (copy)
 		if UseRefResult11.current ~= nil then
 			UseRefResult11.current.onScrollTick()
@@ -213,7 +213,7 @@ return function(Current) --[[ Line: 84 | Named "useMessageListV2ViewModel" ]]
 	end, {})
 	local ReadingMessagesIsEnabled = Current.readingMessagesIsEnabled
 	local UseRefResult12 = ReactModule.useRef(ReadingMessagesIsEnabled)
-	ReactModule.useEffect(function() --[[ Line: 266 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult12 (copy), ReadingMessagesIsEnabled (copy), UseRefResult4 (copy), UseRefResult (copy)
 		local Current = UseRefResult12.current
 		UseRefResult12.current = ReadingMessagesIsEnabled
@@ -223,11 +223,11 @@ return function(Current) --[[ Line: 84 | Named "useMessageListV2ViewModel" ]]
 		end
 	end, { ReadingMessagesIsEnabled })
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(0)
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 275 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_2 (copy)
 		UseStateResult2_2(p2.X)
 	end, {})
-	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 279 ]]
+	local UseResult3 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_1 (copy)
 		if p2 ~= nil then
 			p2.Selectable = false
@@ -243,7 +243,7 @@ return function(Current) --[[ Line: 84 | Named "useMessageListV2ViewModel" ]]
 	local Current2 = UseRefResult13.current
 	local UseRefResult14 = ReactModule.useRef(UseMemoResult.byKey)
 	local UseRefResult15 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 306 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult14 (copy), UseMemoResult (copy), UseRefResult15 (copy), IsIsInitialMessageLoading (copy), UseRefResult10 (copy), ListItemsModule (upval)
 		local Current = UseRefResult14.current
 		UseRefResult14.current = UseMemoResult.byKey
@@ -257,7 +257,7 @@ return function(Current) --[[ Line: 84 | Named "useMessageListV2ViewModel" ]]
 		end
 	end, { UseMemoResult, IsIsInitialMessageLoading })
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
-	local UseMessageListLayoutModuleResult = UseMessageListLayoutModule((ReactModule.useCallback(function() --[[ Line: 327 ]]
+	local UseMessageListLayoutModuleResult = UseMessageListLayoutModule((ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_3 (copy)
 		UseStateResult2_3(true)
 	end, {})))
@@ -268,7 +268,7 @@ return function(Current) --[[ Line: 84 | Named "useMessageListV2ViewModel" ]]
 		UseRefResult16.current = Current3
 	end
 	return {
-		contextValue = ReactModule.useMemo(function() --[[ Line: 380 ]]
+		contextValue = ReactModule.useMemo(function()
 			-- upvalues: ConversationId (copy), UseStateResult3 (copy), Current (copy), Current1 (copy), noop (upval)
 			return {
 				conversationId = ConversationId,
@@ -298,7 +298,7 @@ return function(Current) --[[ Line: 84 | Named "useMessageListV2ViewModel" ]]
 			Current.messageDefaultNoticeText, Current.messageModeratedNoticeText,
 			Current.messageHiddenNoticeText, Current.unknownUserText
 		}),
-		listProps = ReactModule.useMemo(function() --[[ Line: 338 ]]
+		listProps = ReactModule.useMemo(function()
 			-- upvalues: ViewRecyclerModule (upval), StartReachedThreshold (upval), Current2 (copy), Items (copy), ListItemsModule (upval), UseMessageListLayoutModuleResult (copy), MessageRowTypesModule (upval), UseRefResult10 (copy), FIntAppChatMessageListV2OverscanRowsModule (upval), HasLoadNext (copy), UseResult (copy), UseResult1 (copy), UseResult2 (copy), UseResult3 (copy), Current3 (copy)
 			local Copy = table.clone(ViewRecyclerModule.ChatPreset.create({ startReachedThreshold = StartReachedThreshold }))
 			Copy.initialScrollAlignment = Current2 or Copy.initialScrollAlignment

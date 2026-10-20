@@ -12,7 +12,7 @@ local FlyoutAnalyticsModule = require(script.Parent.Parent.Analytics.FlyoutAnaly
 local FIntPlusReferralRewardRobux = require(Parent.SharedFlags).FIntPlusReferralRewardRobux
 local UsePlusReferralFlyoutNewBadgeModule = require(FlyoutSidePanel.Hooks.usePlusReferralFlyoutNewBadge)
 
-return function(p1) --[[ Line: 25 | Named "PlusReferralRecipientBanner" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), FIntPlusReferralRewardRobux (copy), ReactModule (copy), FlyoutAnalyticsModule (copy), UsePlusReferralFlyoutNewBadgeModule (copy), FoundationModule (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -22,7 +22,7 @@ return function(p1) --[[ Line: 25 | Named "PlusReferralRecipientBanner" ]]
 			amount = tostring(FIntPlusReferralRewardRobux)
 		}
 	})
-	local RobloxPlusUpsellImpressionCount3 = UsePlusReferralFlyoutNewBadgeModule(ReactModule.useCallback(function() --[[ Line: 35 ]]
+	local RobloxPlusUpsellImpressionCount3 = UsePlusReferralFlyoutNewBadgeModule(ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), FlyoutAnalyticsModule (upval)
 		p1.closeDrawer()
 		

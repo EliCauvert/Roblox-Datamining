@@ -2,11 +2,11 @@
 local Roact = DependenciesModule.Roact
 local Llama = DependenciesModule.llama
 
-return function(p1, p2) --[[ Line: 20 ]]
+return function(p1, p2)
 	-- upvalues: Roact (copy), Llama (copy)
 	local LoadingTimer = Roact.PureComponent:extend("LoadingTimer")
 	
-	function LoadingTimer.init(p3) --[[ Line: 24 ]]
+	function LoadingTimer.init(p3)
 		-- upvalues: p2 (copy)
 		p3.loadingTime = {
 			startTime = nil,
@@ -14,10 +14,10 @@ return function(p1, p2) --[[ Line: 20 ]]
 			thresholdCanceled = false
 		}
 		
-		function p3.startThresholdTimer() --[[ Line: 31 ]]
+		function p3.startThresholdTimer()
 			-- upvalues: p2 (upval), p3 (copy)
 			if p2.loadingThreshold then
-				delay(p2.loadingThreshold, function() --[[ Line: 36 ]]
+				delay(p2.loadingThreshold, function()
 					-- upvalues: p2 (upval), p3 (upval)
 					if p2.onReachingThreshold and not p3.thresholdCanceled and not p3.loadingTime.endTime and p3.loadingTime.startTime then
 						p3.stopTimer(true)
@@ -29,18 +29,18 @@ return function(p1, p2) --[[ Line: 20 ]]
 			end
 		end
 		
-		function p3.resetTimer() --[[ Line: 49 ]]
+		function p3.resetTimer()
 			-- upvalues: p3 (copy)
 			p3.loadingTime = { startTime = nil, endTime = nil }
 		end
 		
-		function p3.startTimer() --[[ Line: 56 ]]
+		function p3.startTimer()
 			-- upvalues: p3 (copy)
 			p3.loadingTime.startTime = os.clock()
 			p3.startThresholdTimer()
 		end
 		
-		function p3.stopTimer(p4) --[[ Line: 62 ]]
+		function p3.stopTimer(p4)
 			-- upvalues: p3 (copy), p2 (upval)
 			if p3.loadingTime.endTime then return end
 			p3.loadingTime.endTime = os.clock()
@@ -50,18 +50,18 @@ return function(p1, p2) --[[ Line: 20 ]]
 			end
 		end
 		
-		function p3.getLoadingTime() --[[ Line: 74 ]]
+		function p3.getLoadingTime()
 			-- upvalues: p3 (copy)
 			return if p3.loadingTime.endTime and p3.loadingTime.startTime then p3.loadingTime.endTime - p3.loadingTime.startTime else -1
 		end
 		
-		function p3.cancelThreshold() --[[ Line: 82 ]]
+		function p3.cancelThreshold()
 			-- upvalues: p3 (copy)
 			p3.thresholdCanceled = true
 		end
 	end
 	
-	function LoadingTimer.render(p3) --[[ Line: 87 ]]
+	function LoadingTimer.render(p3)
 		-- upvalues: Roact (upval), p1 (copy), Llama (upval)
 		return Roact.createElement(p1, Llama.Dictionary.join(p3.props, {
 			loadingTimerProps = {

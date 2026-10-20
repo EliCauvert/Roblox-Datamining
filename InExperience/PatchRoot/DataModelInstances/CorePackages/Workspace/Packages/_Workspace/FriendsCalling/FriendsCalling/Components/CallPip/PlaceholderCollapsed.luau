@@ -8,9 +8,9 @@ local IconButton = FoundationModule.IconButton
 local InputSize = FoundationModule.Enums.InputSize
 local View = FoundationModule.View
 
-local function noop() --[[ Line: 17 ]] end
+local function noop() end
 
-return function(p1) --[[ Line: 26 | Named "PlaceholderCollapsed" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), AvatarPlaceholderModule (copy), IconButton (copy), IconName (copy), noop (copy), InputSize (copy), ButtonVariant (copy)
 	return ReactModule.createElement(View, {
 		tag = "col align-x-center align-y-center gap-small size-full padding-medium stroke-standard stroke-default radius-large clip bg-surface-200"

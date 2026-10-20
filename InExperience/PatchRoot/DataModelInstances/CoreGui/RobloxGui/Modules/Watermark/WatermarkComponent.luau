@@ -7,20 +7,20 @@ local _ = require(CorePackages.Packages.UIBlox).App.ImageSet.Images
 local WatermarkComponent = RoactModule.PureComponent:extend("WatermarkComponent")
 local PolicyService = game:GetService("PolicyService")
 
-function WatermarkComponent.init(p1) --[[ Line: 17 ]]
+function WatermarkComponent.init(p1)
 	-- upvalues: RunService (copy), PolicyService (copy)
-	local function UpdateWatermarkVisibility() --[[ Line: 18 ]]
+	local function UpdateWatermarkVisibility()
 		-- upvalues: p1 (copy), RunService (upval), PolicyService (upval)
 		p1:setState({
 			watermarkVisible = not RunService:IsStudio() and (PolicyService.IsLuobuServer == Enum.TriStateBoolean.True and PolicyService.LuobuWhitelisted == Enum.TriStateBoolean.False)
 		})
 	end
 	
-	PolicyService:GetPropertyChangedSignal("IsLuobuServer"):connect(function() --[[ Line: 26 ]]
+	PolicyService:GetPropertyChangedSignal("IsLuobuServer"):connect(function()
 		-- upvalues: UpdateWatermarkVisibility (copy)
 		UpdateWatermarkVisibility()
 	end)
-	PolicyService:GetPropertyChangedSignal("LuobuWhitelisted"):connect(function() --[[ Line: 30 ]]
+	PolicyService:GetPropertyChangedSignal("LuobuWhitelisted"):connect(function()
 		-- upvalues: UpdateWatermarkVisibility (copy)
 		UpdateWatermarkVisibility()
 	end)
@@ -29,7 +29,7 @@ function WatermarkComponent.init(p1) --[[ Line: 17 ]]
 		absoluteSize = Vector2.new(0, 0)
 	})
 	
-	function p1.onAbsoluteSizeChange(Frame) --[[ Line: 39 ]]
+	function p1.onAbsoluteSizeChange(Frame)
 		-- upvalues: p1 (copy)
 		p1:setState({ absoluteSize = Frame.AbsoluteSize })
 	end
@@ -37,19 +37,19 @@ function WatermarkComponent.init(p1) --[[ Line: 17 ]]
 	UpdateWatermarkVisibility()
 end
 
-function WatermarkComponent.render(p1) --[[ Line: 48 ]]
+function WatermarkComponent.render(p1)
 	-- upvalues: RoactModule (copy)
-	local function _() --[[ Line: 49 | Named "CalculateRotatedFrameWidth" ]]
+	local function _()
 		-- upvalues: p1 (copy)
 		return p1.state.absoluteSize.X * 0.9681476403781077 + p1.state.absoluteSize.Y * 0.25038000405444144
 	end
 	
-	local _ = function() --[[ Line: 54 | Named "CalculateRotatedFrameHeight" ]]
+	local _ = function()
 		-- upvalues: p1 (copy)
 		return p1.state.absoluteSize.Y * 0.9681476403781077 + p1.state.absoluteSize.X * 0.25038000405444144
 	end
 	
-	local function CreateGridItems() --[[ Line: 59 ]]
+	local function CreateGridItems()
 		-- upvalues: p1 (copy), RoactModule (upval)
 		local Ceiled = math.ceil((p1.state.absoluteSize.X * 0.9681476403781077 + p1.state.absoluteSize.Y * 0.25038000405444144) / 450)
 		local List = {}

@@ -4,7 +4,7 @@ local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
 
-local function getStaticAttributes() --[[ Line: 8 ]]
+local function getStaticAttributes()
 	-- upvalues: RunService (copy), ContentProvider (copy), UserInputService (copy), HttpService (copy)
 	return {
 		LocalVersion = RunService:GetRobloxVersion(),
@@ -16,11 +16,11 @@ local function getStaticAttributes() --[[ Line: 8 ]]
 	}
 end
 
-return function(p1) --[[ Line: 22 | Named "createCoreScriptReportProcessor" ]]
+return function(p1)
 	-- upvalues: getStaticAttributes (copy), Players (copy), RunService (copy)
 	local P0 = p1 or getStaticAttributes()
 	
-	return function(p2) --[[ Line: 25 | Named "processReport" ]]
+	return function(p2)
 		-- upvalues: P0 (copy), Players (upval), RunService (upval)
 		p2:addAttributes(P0)
 		p2:addAttributes({ PlayerCount = #Players:GetPlayers() })

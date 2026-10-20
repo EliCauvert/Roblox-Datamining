@@ -18,7 +18,7 @@ local config = {
 	device = require(Foundation.Enums.Device).Desktop
 }
 
-return function(p1) --[[ Line: 57 | Named "StyleProvider" ]]
+return function(p1)
 	-- upvalues: WithDefaultsModule (copy), config (copy), VariantsContextModule (copy), ReactModule (copy), GetTokensFunction (copy), UsePreferencesModule (copy), GetTextSizeOffsetModule (copy), UseRegistryStyleSheetModule (copy), TokensContextModule (copy), TextSizeOffsetContextModule (copy), TagsContextModule (copy), StyleSheetContextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule({
 		themeName = p1.themeName,
@@ -27,7 +27,7 @@ return function(p1) --[[ Line: 57 | Named "StyleProvider" ]]
 		scale = p1.scale
 	}, config)
 	local UseVariantsStateResult = VariantsContextModule.useVariantsState()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 68 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: GetTokensFunction (upval), WithDefaultsModuleResult (copy), p1 (copy)
 		return GetTokensFunction(WithDefaultsModuleResult.colorMode, WithDefaultsModuleResult.device, WithDefaultsModuleResult.scale, p1.tokenOverrides, WithDefaultsModuleResult.themeName)
 	end, {
@@ -37,7 +37,7 @@ return function(p1) --[[ Line: 57 | Named "StyleProvider" ]]
 		p1.tokenOverrides,
 		WithDefaultsModuleResult.themeName
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 89 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: GetTextSizeOffsetModule (upval)
 		return GetTextSizeOffsetModule() or 0
 	end, { UsePreferencesModule().preferredTextSize })

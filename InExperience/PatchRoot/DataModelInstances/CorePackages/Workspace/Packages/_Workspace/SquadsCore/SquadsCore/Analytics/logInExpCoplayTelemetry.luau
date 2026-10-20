@@ -9,9 +9,9 @@ local FFlagEncodeSquadMembersUpdatedModule = require(SquadsCore.Flags.FFlagEncod
 local EncodeSquadMembersModule = require(SquadsCore.Common.encodeSquadMembers)
 local CryoModule = require(Parent.Cryo)
 local _ = require(Parent.RoduxSquads)
-local EncodeUserIdsModule = if FFlagEncodeSquadMembersUpdatedModule then require(SquadsCore.Common.encodeUserIds) else function(Input) --[[ Line: 21 ]]
+local EncodeUserIdsModule = if FFlagEncodeSquadMembersUpdatedModule then require(SquadsCore.Common.encodeUserIds) else function(Input)
 	-- upvalues: HttpService (copy)
-	local Success, Result = pcall(function() --[[ Line: 22 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: HttpService (upval), Input (copy)
 		return HttpService:JSONEncode(Input)
 	end)
@@ -19,7 +19,7 @@ local EncodeUserIdsModule = if FFlagEncodeSquadMembersUpdatedModule then require
 	return if Success then Result else "[]"
 end
 
-return function(PartyId, List, InExperience, PartyCoplayEvent, Callback: (any, any) -> ()) --[[ Line: 33 ]]
+return function(PartyId, List, InExperience, PartyCoplayEvent, Callback: (any, any) -> ())
 	-- upvalues: SquadLocationEnumModule (copy), Players (copy), FFlagEncodeSquadMembersUpdatedModule (copy), EncodeUserIdsModule (copy), EncodeSquadMembersModule (copy), CryoModule (copy), EventNamesModule (copy)
 	if InExperience == SquadLocationEnumModule.InExperience then
 		local t = {}
@@ -41,7 +41,7 @@ return function(PartyId, List, InExperience, PartyCoplayEvent, Callback: (any, a
 			EncodeUserIdsModuleResult = EncodeUserIdsModule(List1)
 			EncodeSquadMembersModuleResult = EncodeSquadMembersModule(List)
 		else
-			MapResult = CryoModule.List.map(List, function(p1) --[[ Line: 63 ]]
+			MapResult = CryoModule.List.map(List, function(p1)
 				return p1.userId
 			end)
 			EncodeUserIdsModuleResult = EncodeUserIdsModule(List1)

@@ -16,7 +16,7 @@ else
 	local CoreGuiCEnabledNotifieronnector = RoactModule.PureComponent:extend("CoreGuiCEnabledNotifieronnector")
 	CoreGuiCEnabledNotifieronnector.validateProps = TModule.strictInterface({ topBarEnabled = TModule.boolean })
 	
-	function CoreGuiCEnabledNotifieronnector.notifyEnabled(p1) --[[ Line: 29 ]]
+	function CoreGuiCEnabledNotifieronnector.notifyEnabled(p1)
 		-- upvalues: PlayerListManagerModule (copy), ChatSelectorModule (copy), FFlagEnableNewBackpack (copy), BackpackScriptModule (copy), EmotesMenuMasterModule (copy)
 		PlayerListManagerModule:SetTopBarEnabled(p1.props.topBarEnabled)
 		ChatSelectorModule:TopbarEnabledChanged(p1.props.topBarEnabled)
@@ -27,21 +27,21 @@ else
 		EmotesMenuMasterModule:setTopBarEnabled(p1.props.topBarEnabled)
 	end
 	
-	function CoreGuiCEnabledNotifieronnector.didMount(p1) --[[ Line: 38 ]]
+	function CoreGuiCEnabledNotifieronnector.didMount(p1)
 		p1:notifyEnabled()
 	end
 	
-	function CoreGuiCEnabledNotifieronnector:render() --[[ Line: 42 ]]
+	function CoreGuiCEnabledNotifieronnector:render()
 		return nil
 	end
 	
-	function CoreGuiCEnabledNotifieronnector.didUpdate(p1, p2, _) --[[ Line: 46 ]]
+	function CoreGuiCEnabledNotifieronnector.didUpdate(p1, p2, _)
 		if p1.props.topBarEnabled ~= p2.topBarEnabled then
 			p1:notifyEnabled()
 		end
 	end
 	
-	return RoactRoduxModule.UNSTABLE_connect2(function(p1) --[[ Line: 52 | Named "mapStateToProps" ]]
+	return RoactRoduxModule.UNSTABLE_connect2(function(p1)
 		return { topBarEnabled = p1.displayOptions.topbarEnabled }
 	end, nil)(CoreGuiCEnabledNotifieronnector)
 end

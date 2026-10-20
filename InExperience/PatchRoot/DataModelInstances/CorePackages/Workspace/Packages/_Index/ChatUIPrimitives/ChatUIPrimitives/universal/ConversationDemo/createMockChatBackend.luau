@@ -10,11 +10,11 @@ local Frozen = table.freeze({
 	{ userId = "156", displayName = "Builderman" }
 })
 
-local function _(Text) --[[ Line: 67 | Named "incomingPlainText" ]]
+local function _(Text)
 	return { kind = "plainText", text = Text }
 end
 
-local _ = function(PresetId, DisplayText) --[[ Line: 74 | Named "incomingPreset" ]]
+local _ = function(PresetId, DisplayText)
 	return {
 		kind = "preset",
 		presetId = PresetId,
@@ -53,7 +53,7 @@ local Frozen2 = table.freeze({
 	{ kind = "preset", presetId = "gg", displayText = "gg" }
 })
 
-local function acceptedSendOf(p1) --[[ Line: 121 ]]
+local function acceptedSendOf(p1)
 	-- upvalues: PlainTextContentModelModule (copy), PresetContentModelModule (copy)
 	local Content = p1.contents[1]
 	
@@ -78,19 +78,19 @@ end
 return {
 	incomingIntervalSeconds = 2,
 	welcomeText = "Welcome to Crossroads! Type /regen if someone wrecks the map.",
-	create = function(UserId, p1) --[[ Line: 150 ]]
+	create = function(UserId, p1)
 		-- upvalues: SignalsModule (copy), MessageModelModule (copy), MessageEnvelopeModelModule (copy), Frozen (copy), acceptedSendOf (copy), HttpService (copy), Frozen2 (copy)
 		local config = { displayName = "You", userId = UserId }
 		local _Random = Random.new()
 		
-		local function _(p2, p3) --[[ Line: 158 | Named "nextInteger" ]]
+		local function _(p2, p3)
 			-- upvalues: p1 (copy), _Random (copy)
 			local _Random1 = if p1 then p1.random else nil
 			
 			return if _Random1 then _Random1:NextInteger(p2, p3) else _Random:NextInteger(p2, p3)
 		end
 		
-		local _ = function(p2) --[[ Line: 165 | Named "pick" ]]
+		local _ = function(p2)
 			-- upvalues: p1 (copy), _Random (copy)
 			local CountP8 = #p2
 			local _Random1 = if p1 then p1.random else nil
@@ -102,21 +102,21 @@ return {
 		local Tbl = {}
 		local Largest = 0
 		
-		local _ = function() --[[ Line: 175 | Named "nowMs" ]]
+		local _ = function()
 			-- upvalues: p1 (copy)
 			local GetNowMs = if p1 then p1.getNowMs else nil
 			
 			return if GetNowMs then GetNowMs() else DateTime.now().UnixTimestampMillis
 		end
 		
-		local _ = function(p3) --[[ Line: 183 | Named "appendEnvelope" ]]
+		local _ = function(p3)
 			-- upvalues: Signal (copy), Signal2 (copy)
 			local Copy = table.clone(Signal(false))
 			table.insert(Copy, p3)
 			Signal2(Copy)
 		end
 		
-		local _ = function(): number --[[ Line: 189 | Named "nextTimestamp" ]]
+		local _ = function(): number
 			-- upvalues: Largest (ref), p1 (copy)
 			local GetNowMs = if p1 then p1.getNowMs else nil
 			Largest = math.max(if GetNowMs then GetNowMs() else DateTime.now().UnixTimestampMillis, Largest + 1)
@@ -124,7 +124,7 @@ return {
 			return Largest
 		end
 		
-		local _ = function(p3, Author, SentAtUnixMilliseconds) --[[ Line: 194 | Named "messageFromText" ]]
+		local _ = function(p3, Author, SentAtUnixMilliseconds)
 			-- upvalues: MessageModelModule (upval), Largest (ref), p1 (copy)
 			local FromPlainTextFunction = MessageModelModule.fromPlainText
 			local t = {}
@@ -141,7 +141,7 @@ return {
 			return FromPlainTextFunction(p3, t)
 		end
 		
-		local function messageFromAcceptedSend(p3, Author, Largest1) --[[ Line: 201 ]]
+		local function messageFromAcceptedSend(p3, Author, Largest1)
 			-- upvalues: Largest (ref), p1 (copy), MessageModelModule (upval)
 			local t = {}
 			local SentAtUnixMilliseconds: number = Largest1
@@ -157,7 +157,7 @@ return {
 			return if p3.kind == "preset" then MessageModelModule.fromPreset(p3.presetId, p3.displayText, t) else MessageModelModule.fromPlainText(p3.text, t)
 		end
 		
-		local _ = function(p3) --[[ Line: 212 | Named "appendMessage" ]]
+		local _ = function(p3)
 			-- upvalues: MessageEnvelopeModelModule (upval), Signal (copy), Signal2 (copy)
 			local IncomingResult = MessageEnvelopeModelModule.incoming(p3)
 			local Copy = table.clone(Signal(false))
@@ -177,7 +177,7 @@ return {
 		table.insert(Copy, IncomingResult)
 		Signal2(Copy)
 		
-		local function replaceEnvelope(Guid, Callback) --[[ Line: 218 ]]
+		local function replaceEnvelope(Guid, Callback)
 			-- upvalues: Signal (copy), Signal2 (copy)
 			local SignalResult = Signal(false)
 			local Copy = table.clone(SignalResult)
@@ -191,7 +191,7 @@ return {
 			end
 		end
 		
-		local _ = function() --[[ Line: 277 | Named "pushIncoming" ]]
+		local _ = function()
 			-- upvalues: Frozen2 (upval), p1 (copy), _Random (copy), Frozen (upval), messageFromAcceptedSend (copy), MessageEnvelopeModelModule (upval), Signal (copy), Signal2 (copy)
 			local CountFrozen2 = #Frozen2
 			local _Random1 = if p1 then p1.random else nil
@@ -206,7 +206,7 @@ return {
 		
 		return {
 			getMessageEnvelopes = Signal,
-			sendMessageDraft = function(p3) --[[ Line: 230 ]]
+			sendMessageDraft = function(p3)
 				-- upvalues: acceptedSendOf (upval), HttpService (upval), Largest (ref), p1 (copy), MessageEnvelopeModelModule (upval), config (copy), Signal (copy), Signal2 (copy), Tbl (copy), replaceEnvelope (copy), messageFromAcceptedSend (copy)
 				local AcceptedSendOfResult = acceptedSendOf(p3)
 				
@@ -223,10 +223,10 @@ return {
 					Signal2(Copy)
 					local DeferredThread = nil
 					
-					local function resolveDelivery() --[[ Line: 245 ]]
+					local function resolveDelivery()
 						-- upvalues: Tbl (upval), DeferredThread (ref), replaceEnvelope (upval), Guid (copy), p1 (upval), DeliveryOutcome (copy), MessageEnvelopeModelModule (upval), messageFromAcceptedSend (upval), AcceptedSendOfResult (copy), config (upval), Largest1 (copy)
 						Tbl[DeferredThread] = nil
-						replaceEnvelope(Guid, function(p4) --[[ Line: 247 ]]
+						replaceEnvelope(Guid, function(p4)
 							-- upvalues: p1 (upval), DeliveryOutcome (upval), MessageEnvelopeModelModule (upval), messageFromAcceptedSend (upval), AcceptedSendOfResult (upval), config (upval), Largest1 (upval)
 							if p4.direction == "outgoing" and p4.payload.kind == "draft" and p4.delivery.state == "sending" then
 								local GetNowMs = if p1 then p1.getNowMs else nil
@@ -245,14 +245,14 @@ return {
 					return
 				end
 			end,
-			startIncomingTraffic = function() --[[ Line: 283 ]]
+			startIncomingTraffic = function()
 				-- upvalues: Frozen2 (upval), p1 (copy), _Random (copy), Frozen (upval), messageFromAcceptedSend (copy), MessageEnvelopeModelModule (upval), Signal (copy), Signal2 (copy)
 				local Flag = false
 				local DelayedThread = nil
 				
-				local function scheduleNext() --[[ Line: 287 ]]
+				local function scheduleNext()
 					-- upvalues: DelayedThread (ref), Flag (ref), Frozen2 (upval), p1 (upval), _Random (upval), Frozen (upval), messageFromAcceptedSend (upval), MessageEnvelopeModelModule (upval), Signal (upval), Signal2 (upval), scheduleNext (copy)
-					DelayedThread = task.delay(2, function() --[[ Line: 288 ]]
+					DelayedThread = task.delay(2, function()
 						-- upvalues: DelayedThread (upval), Flag (upval), Frozen2 (upval), p1 (upval), _Random (upval), Frozen (upval), messageFromAcceptedSend (upval), MessageEnvelopeModelModule (upval), Signal (upval), Signal2 (upval), scheduleNext (upval)
 						DelayedThread = nil
 						
@@ -273,7 +273,7 @@ return {
 					end)
 				end
 				
-				DelayedThread = task.delay(2, function() --[[ Line: 288 ]]
+				DelayedThread = task.delay(2, function()
 					-- upvalues: DelayedThread (ref), Flag (ref), Frozen2 (upval), p1 (upval), _Random (upval), Frozen (upval), messageFromAcceptedSend (upval), MessageEnvelopeModelModule (upval), Signal (upval), Signal2 (upval), scheduleNext (copy)
 					DelayedThread = nil
 					
@@ -293,7 +293,7 @@ return {
 					end
 				end)
 				
-				return function() --[[ Line: 300 ]]
+				return function()
 					-- upvalues: Flag (ref), DelayedThread (ref)
 					Flag = true
 					
@@ -303,7 +303,7 @@ return {
 					end
 				end
 			end,
-			destroy = function() --[[ Line: 309 ]]
+			destroy = function()
 				-- upvalues: Tbl (copy)
 				for i in Tbl do
 					task.cancel(i)

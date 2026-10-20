@@ -10,7 +10,7 @@ local ReportPromptDismissFunction = require(Parent.SduiSharedContent).reportProm
 local FFlagSduiDismissPromptPageScope = require(Parent.SharedFlags).FFlagSduiDismissPromptPageScope
 local SetPromptDismissedInPageScopeModule = require(PromptsServerDrivenUi.Actions.setPromptDismissedInPageScope)
 
-return function(p1, _, p2) --[[ Line: 21 | Named "SduiDismissPromptAction" ]]
+return function(p1, _, p2)
 	-- upvalues: SduiErrorType (copy), GetSduiApiStoreFunction (copy), FFlagSduiDismissPromptPageScope (copy), SetPromptDismissedInPageScopeModule (copy), ReportPromptDismissFunction (copy), SduiLoadTimer (copy), SduiParseHelpers (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	
@@ -57,7 +57,7 @@ return function(p1, _, p2) --[[ Line: 21 | Named "SduiDismissPromptAction" ]]
 			}, p2.appPage)
 		end
 	end
-	ReportPromptDismissFunction(p2.dependencies.networking, PromptType, PromptId):andThen(function() --[[ Line: 88 ]]
+	ReportPromptDismissFunction(p2.dependencies.networking, PromptType, PromptId):andThen(function()
 		-- upvalues: DismissEntryResult (copy), SduiApiStore (copy), SduiLoadTimer (upval)
 		for _, ConfigKey in DismissEntryResult do
 			SduiApiStore.refreshFromApi({
@@ -65,7 +65,7 @@ return function(p1, _, p2) --[[ Line: 21 | Named "SduiDismissPromptAction" ]]
 				loadTimer = SduiLoadTimer.createLoadTimer(ConfigKey)
 			})
 		end
-	end):catch(function(Err) --[[ Line: 96 ]]
+	end):catch(function(Err)
 		-- upvalues: p2 (copy), SduiErrorType (upval), SduiParseHelpers (upval)
 		p2.dependencies.logger.reportError(SduiErrorType.ActionNetworkRequestFailed, {
 			name = "DismissPrompt",

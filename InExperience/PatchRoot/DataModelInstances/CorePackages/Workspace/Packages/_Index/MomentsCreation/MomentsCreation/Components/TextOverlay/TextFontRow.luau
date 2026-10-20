@@ -29,7 +29,7 @@ local list = {
 }
 local config = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
 
-return function(Frame) --[[ Line: 58 | Named "TextFontRow" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), UseTextFontRowStateModule (copy), list (copy), ReactModule (copy), View (copy), FFlagMomentsTextOverlayColorPickerIconModule (copy), Text (copy), config (copy), ConstantsModule (copy), FoundationModule (copy), IconButton (copy), BuilderIconsModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseTextFontRowStateModuleResult = UseTextFontRowStateModule(Frame.controller)
@@ -46,7 +46,7 @@ return function(Frame) --[[ Line: 58 | Named "TextFontRow" ]]
 				top = if FFlagMomentsTextOverlayColorPickerIconModule and value.font == Enum.Font.LuckiestGuy then UDim.new(0, UseTokensResult.Size.Size_100) else nil
 			},
 			backgroundStyle = if v1 then UseTokensResult.Inverse.Surface.Surface_0 else UseTokensResult.Color.ActionStandard.Background,
-			onActivated = function() --[[ Line: 82 ]]
+			onActivated = function()
 				-- upvalues: UseTextFontRowStateModuleResult (copy), value (copy), LayoutOrder (copy)
 				UseTextFontRowStateModuleResult.onChipActivated(value.font, LayoutOrder)
 			end

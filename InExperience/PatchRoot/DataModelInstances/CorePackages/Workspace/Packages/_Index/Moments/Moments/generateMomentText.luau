@@ -8,7 +8,7 @@ local GetFFlagMomentTextGenerationDisableCacheModule = require(Moments.Flags.Get
 local FFlagMomentTextGenerationFilteredSignal = MomentsCommonModule.Flags.FFlagMomentTextGenerationFilteredSignal
 local NewResults = {}
 
-local function log(Template: string, ...) --[[ Line: 60 ]]
+local function log(Template: string, ...)
 	if not _G.__MOMENTS_DISABLE_GEN_TEXT_LOG__ then
 		print(`[moments-gen] {string.format(Template, ...)}`)
 		
@@ -16,7 +16,7 @@ local function log(Template: string, ...) --[[ Line: 60 ]]
 	end
 end
 
-local function _() --[[ Line: 67 | Named "mockResult" ]]
+local function _()
 	return {
 		summary = "insane save",
 		description = "no way i pulled this off — clutch save on the last second, everyone was screaming lol",
@@ -24,9 +24,9 @@ local function _() --[[ Line: 67 | Named "mockResult" ]]
 	}
 end
 
-local function captureKey(Capture): string --[[ Line: 75 ]]
+local function captureKey(Capture): string
 	local LocalId = nil
-	pcall(function() --[[ Line: 77 ]]
+	pcall(function()
 		-- upvalues: LocalId (ref), Capture (copy)
 		LocalId = Capture.LocalId
 	end)
@@ -34,11 +34,11 @@ local function captureKey(Capture): string --[[ Line: 75 ]]
 	return if LocalId == nil then if typeof(Capture) == "table" and Capture.assetId ~= nil then `asset:{Capture.assetId}` else `capture:{tostring(Capture)}` else `local:{LocalId}`
 end
 
-local _ = function(p1) --[[ Line: 92 | Named "resultName" ]]
+local _ = function(p1)
 	if p1 == nil then
 		return nil
 	else
-		local Success, Result = pcall(function() --[[ Line: 96 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p1 (copy)
 			return p1.Name
 		end)
@@ -47,17 +47,17 @@ local _ = function(p1) --[[ Line: 92 | Named "resultName" ]]
 	end
 end
 
-local function runGeneration(Capture, ToneName, Tone, p1) --[[ Line: 105 ]]
+local function runGeneration(Capture, ToneName, Tone, p1)
 	-- upvalues: PromiseModule (copy), log (copy), IsStudioModule (copy), FFlagMomentTextGenerationFilteredSignal (copy), GetFFlagEnableMomentTextGenerationFunction (copy)
 	local CaptureService = p1.captureService or game:GetService("CaptureService")
 	local PollIntervalSeconds = p1.pollIntervalSeconds or 1
 	local MaxPollAttempts = p1.maxPollAttempts or 30
 	
-	return PromiseModule.new(function(Callback1, _, Callback: (any) -> ()) --[[ Line: 110 ]]
+	return PromiseModule.new(function(Callback1, _, Callback: (any) -> ())
 		-- upvalues: Tone (copy), CaptureService (copy), Capture (copy), log (upval), ToneName (copy), IsStudioModule (upval), MaxPollAttempts (copy), PollIntervalSeconds (copy), FFlagMomentTextGenerationFilteredSignal (upval), GetFFlagEnableMomentTextGenerationFunction (upval)
-		local SpawnedThread = task.spawn(function() --[[ Line: 111 ]]
+		local SpawnedThread = task.spawn(function()
 			-- upvalues: Tone (upval), CaptureService (upval), Capture (upval), log (upval), ToneName (upval), IsStudioModule (upval), Callback1 (copy), MaxPollAttempts (upval), PollIntervalSeconds (upval), FFlagMomentTextGenerationFilteredSignal (upval)
-			local Success, Result, Result3 = pcall(function() --[[ Line: 112 ]]
+			local Success, Result, Result3 = pcall(function()
 				-- upvalues: Tone (upval), CaptureService (upval), Capture (upval)
 				return if Tone == nil then CaptureService:GenerateMomentTextAsync(Capture) else CaptureService:GenerateMomentTextAsync(Capture, Tone)
 			end)
@@ -67,7 +67,7 @@ local function runGeneration(Capture, ToneName, Tone, p1) --[[ Line: 105 ]]
 				if Result == nil then
 					v1 = nil
 				else
-					local Success1, Result1 = pcall(function() --[[ Line: 96 ]]
+					local Success1, Result1 = pcall(function()
 						-- upvalues: Result (copy)
 						return Result.Name
 					end)
@@ -81,7 +81,7 @@ local function runGeneration(Capture, ToneName, Tone, p1) --[[ Line: 105 ]]
 					for _ = 1, MaxPollAttempts do
 						task.wait(PollIntervalSeconds)
 						local Success2, Result2
-						Success2, Result2, Result3_1, Result4 = pcall(function() --[[ Line: 141 ]]
+						Success2, Result2, Result3_1, Result4 = pcall(function()
 							-- upvalues: CaptureService (upval), Result3 (copy)
 							return CaptureService:CheckMomentTextStatusAsync(Result3)
 						end)
@@ -91,7 +91,7 @@ local function runGeneration(Capture, ToneName, Tone, p1) --[[ Line: 105 ]]
 							if Result2 == nil then
 								v2 = nil
 							else
-								local Success3, Result5 = pcall(function() --[[ Line: 96 ]]
+								local Success3, Result5 = pcall(function()
 									-- upvalues: Result2 (copy)
 									return Result2.Name
 								end)
@@ -141,7 +141,7 @@ local function runGeneration(Capture, ToneName, Tone, p1) --[[ Line: 105 ]]
 		end)
 		
 		if GetFFlagEnableMomentTextGenerationFunction() then
-			Callback(function() --[[ Line: 171 ]]
+			Callback(function()
 				-- upvalues: log (upval), ToneName (upval), SpawnedThread (copy)
 				log("generation cancelled for %s", ToneName)
 				task.cancel(SpawnedThread)
@@ -150,11 +150,11 @@ local function runGeneration(Capture, ToneName, Tone, p1) --[[ Line: 105 ]]
 	end)
 end
 
-return function(Capture, Tone, p2) --[[ Line: 179 | Named "generateMomentText" ]]
+return function(Capture, Tone, p2)
 	-- upvalues: IsStudioModule (copy), PromiseModule (copy), captureKey (copy), GetFFlagMomentTextGenerationDisableCacheModule (copy), runGeneration (copy), NewResults (copy), log (copy), FFlagMomentTextGenerationFilteredSignal (copy), GetFFlagEnableMomentTextGenerationFunction (copy)
 	local P9 = p2 or {}
 	
-	if not (P9.isEngineEnabled or function() --[[ Line: 182 ]]
+	if not (P9.isEngineEnabled or function()
 		return game:GetEngineFeature("CaptureServiceGenerateMomentText")
 	end)() then
 		return if IsStudioModule() then PromiseModule.resolve({
@@ -178,11 +178,11 @@ return function(Capture, Tone, p2) --[[ Line: 179 | Named "generateMomentText" ]
 	local CaptureService = P9.captureService or game:GetService("CaptureService")
 	local PollIntervalSeconds = P9.pollIntervalSeconds or 1
 	local MaxPollAttempts = P9.maxPollAttempts or 30
-	local NewPromise = PromiseModule.new(function(Callback1, _, Callback: (any) -> ()) --[[ Line: 110 ]]
+	local NewPromise = PromiseModule.new(function(Callback1, _, Callback: (any) -> ())
 		-- upvalues: Tone (copy), CaptureService (copy), Capture (copy), log (upval), ToneName (copy), IsStudioModule (upval), MaxPollAttempts (copy), PollIntervalSeconds (copy), FFlagMomentTextGenerationFilteredSignal (upval), GetFFlagEnableMomentTextGenerationFunction (upval)
-		local SpawnedThread = task.spawn(function() --[[ Line: 111 ]]
+		local SpawnedThread = task.spawn(function()
 			-- upvalues: Tone (upval), CaptureService (upval), Capture (upval), log (upval), ToneName (upval), IsStudioModule (upval), Callback1 (copy), MaxPollAttempts (upval), PollIntervalSeconds (upval), FFlagMomentTextGenerationFilteredSignal (upval)
-			local Success, Result, Result3 = pcall(function() --[[ Line: 112 ]]
+			local Success, Result, Result3 = pcall(function()
 				-- upvalues: Tone (upval), CaptureService (upval), Capture (upval)
 				return if Tone == nil then CaptureService:GenerateMomentTextAsync(Capture) else CaptureService:GenerateMomentTextAsync(Capture, Tone)
 			end)
@@ -192,7 +192,7 @@ return function(Capture, Tone, p2) --[[ Line: 179 | Named "generateMomentText" ]
 				if Result == nil then
 					v1 = nil
 				else
-					local Success1, Result1 = pcall(function() --[[ Line: 96 ]]
+					local Success1, Result1 = pcall(function()
 						-- upvalues: Result (copy)
 						return Result.Name
 					end)
@@ -206,7 +206,7 @@ return function(Capture, Tone, p2) --[[ Line: 179 | Named "generateMomentText" ]
 					for _ = 1, MaxPollAttempts do
 						task.wait(PollIntervalSeconds)
 						local Success2, Result2
-						Success2, Result2, Result3_1, Result4 = pcall(function() --[[ Line: 141 ]]
+						Success2, Result2, Result3_1, Result4 = pcall(function()
 							-- upvalues: CaptureService (upval), Result3 (copy)
 							return CaptureService:CheckMomentTextStatusAsync(Result3)
 						end)
@@ -216,7 +216,7 @@ return function(Capture, Tone, p2) --[[ Line: 179 | Named "generateMomentText" ]
 							if Result2 == nil then
 								v2 = nil
 							else
-								local Success3, Result5 = pcall(function() --[[ Line: 96 ]]
+								local Success3, Result5 = pcall(function()
 									-- upvalues: Result2 (copy)
 									return Result2.Name
 								end)
@@ -266,7 +266,7 @@ return function(Capture, Tone, p2) --[[ Line: 179 | Named "generateMomentText" ]
 		end)
 		
 		if GetFFlagEnableMomentTextGenerationFunction() then
-			Callback(function() --[[ Line: 171 ]]
+			Callback(function()
 				-- upvalues: log (upval), ToneName (upval), SpawnedThread (copy)
 				log("generation cancelled for %s", ToneName)
 				task.cancel(SpawnedThread)
@@ -274,18 +274,18 @@ return function(Capture, Tone, p2) --[[ Line: 179 | Named "generateMomentText" ]
 		end
 	end)
 	NewResults[CaptureKeyResult] = NewPromise
-	NewPromise:andThen(function(Result) --[[ Line: 216 ]]
+	NewPromise:andThen(function(Result)
 		-- upvalues: NewResults (upval), CaptureKeyResult (ref)
 		if Result == nil or Result.error ~= nil then
 			NewResults[CaptureKeyResult] = nil
 		end
-	end, function() --[[ Line: 220 ]]
+	end, function()
 		-- upvalues: NewResults (upval), CaptureKeyResult (ref)
 		NewResults[CaptureKeyResult] = nil
 	end)
 	
 	if GetFFlagEnableMomentTextGenerationFunction() then
-		NewPromise:finally(function(Cancelled) --[[ Line: 228 ]]
+		NewPromise:finally(function(Cancelled)
 			-- upvalues: PromiseModule (upval), NewResults (upval), CaptureKeyResult (ref)
 			if Cancelled == PromiseModule.Status.Cancelled then
 				NewResults[CaptureKeyResult] = nil

@@ -3,9 +3,9 @@ local ReactModule = require(RoactUtils.Parent.React)
 local _ = require(RoactUtils.types)
 local LuaAppLazyComponentAsyncChunkLoad = game:DefineFastFlag("LuaAppLazyComponentAsyncChunkLoad", false)
 
-return function(p1) --[[ Line: 17 | Named "createLazyComponent" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), LuaAppLazyComponentAsyncChunkLoad (copy)
-	local MemoResult = ReactModule.memo(function(p2) --[[ Line: 18 ]]
+	local MemoResult = ReactModule.memo(function(p2)
 		-- upvalues: LuaAppLazyComponentAsyncChunkLoad (upval), ReactModule (upval), p1 (copy)
 		if not LuaAppLazyComponentAsyncChunkLoad then
 			return ReactModule.createElement(ReactModule.useMemo(p1, {}), p2)
@@ -13,7 +13,7 @@ return function(p1) --[[ Line: 17 | Named "createLazyComponent" ]]
 		local UseStateResult, UseStateResult2 = ReactModule.useState({ state = "idle" })
 		
 		if UseStateResult.state == "idle" then
-			task.spawn(function() --[[ Line: 23 ]]
+			task.spawn(function()
 				-- upvalues: UseStateResult2 (copy), p1 (upval)
 				UseStateResult2({ state = "pending" })
 				local Success, Result = pcall(p1)
@@ -37,7 +37,7 @@ return function(p1) --[[ Line: 17 | Named "createLazyComponent" ]]
 		return ReactModule.createElement(UseStateResult.component, p2)
 	end)
 	
-	return function(p2) --[[ Line: 45 ]]
+	return function(p2)
 		-- upvalues: ReactModule (upval), MemoResult (copy)
 		return ReactModule.createElement(MemoResult, p2)
 	end

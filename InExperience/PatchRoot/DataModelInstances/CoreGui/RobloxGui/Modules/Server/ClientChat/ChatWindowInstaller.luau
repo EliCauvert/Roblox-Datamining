@@ -6,12 +6,12 @@ local ServerUtilModule = require(RobloxGui.Modules.Server.ServerUtil)
 local SendChatAnalyticsModule = require(RobloxGui.Modules.Server.SendChatAnalytics)
 local ChatWindowInstallerCheckClassName = game:DefineFastFlag("ChatWindowInstallerCheckClassName", false)
 local Result1 = false
-local Success, Result = pcall(function() --[[ Line: 18 ]]
+local Success, Result = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserIsChatTranslationEnabled2")
 end)
 Result1 = Success and Result
 
-local function LoadLocalScript(Parent, ChildName, PlayerGui) --[[ Line: 24 ]]
+local function LoadLocalScript(Parent, ChildName, PlayerGui)
 	-- upvalues: ChatWindowInstallerCheckClassName (copy), ServerUtilModule (copy)
 	local ChildName1 = Parent:WaitForChild(ChildName)
 	
@@ -31,7 +31,7 @@ local function LoadLocalScript(Parent, ChildName, PlayerGui) --[[ Line: 24 ]]
 	return LocalScript
 end
 
-local function LoadModule(Parent, Name, ChatMain) --[[ Line: 42 ]]
+local function LoadModule(Parent, Name, ChatMain)
 	-- upvalues: ChatWindowInstallerCheckClassName (copy), ServerUtilModule (copy)
 	local Name1 = Parent:WaitForChild(Name)
 	
@@ -51,13 +51,13 @@ local function LoadModule(Parent, Name, ChatMain) --[[ Line: 42 ]]
 	return Module
 end
 
-local function _(Object, ChildName, p1) --[[ Line: 60 | Named "GetBoolValue" ]]
+local function _(Object, ChildName, p1)
 	local ChildName1 = Object:FindFirstChild(ChildName)
 	
 	return if ChildName1 and ChildName1:IsA("BoolValue") then ChildName1.Value else p1
 end
 
-return function() --[[ Line: 70 | Named "Install" ]]
+return function()
 	-- upvalues: Chat (copy), LoadLocalScript (copy), LoadModule (copy), Result1 (ref), StarterPlayerScripts (copy), Players (copy), SendChatAnalyticsModule (copy)
 	local t = {}
 	local Archivable = true

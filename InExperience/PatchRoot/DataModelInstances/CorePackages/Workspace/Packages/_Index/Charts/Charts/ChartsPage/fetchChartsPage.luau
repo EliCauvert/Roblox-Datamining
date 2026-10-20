@@ -23,17 +23,17 @@ local FFlagSduiChartsPlaceholderMergeStrategySupport = SharedFlagsModule.FFlagSd
 local FFlagChartsHydrationStreaming = SharedFlagsModule.FFlagChartsHydrationStreaming
 local FFlagSduiAdvertiseRuntimeSupportSets = SharedFlagsModule.FFlagSduiAdvertiseRuntimeSupportSets
 
-local function _() --[[ Line: 31 | Named "getCurrentFilterSelections" ]]
+local function _()
 	-- upvalues: GetSduiClientPageScopeFunction (copy), ChartsConstantsModule (copy), ChartsPageScopeFieldsModule (copy)
 	return GetSduiClientPageScopeFunction(ChartsConstantsModule.ConfigKey).get(ChartsPageScopeFieldsModule.FilterSelections)
 end
 
-local _ = function() --[[ Line: 35 | Named "getCurrentPageType" ]]
+local _ = function()
 	-- upvalues: FFlagEnableTopSongsSort (copy), GetFStringTopSongsSortExploreApiPageTypeFunction (copy)
 	return if FFlagEnableTopSongsSort then GetFStringTopSongsSortExploreApiPageTypeFunction() else nil
 end
 
-local function extractNextFeedPageToken(p1) --[[ Line: 39 ]]
+local function extractNextFeedPageToken(p1)
 	local PageEntries = p1 and p1.page_entries
 	
 	if not PageEntries then
@@ -57,7 +57,7 @@ local function extractNextFeedPageToken(p1) --[[ Line: 39 ]]
 	return nil
 end
 
-return function(LoadTimer, p2) --[[ Line: 59 | Named "fetchChartsPage" ]]
+return function(LoadTimer, p2)
 	-- upvalues: ChartsConstantsModule (copy), GetSduiApiStoreFunction (copy), ChartsPageSessionModule (copy), FFlagChartsHydrationStreaming (copy), GetChartsPageStreamUrlModule (copy), GetChartsPagePostUrlModule (copy), Parent (copy), FFlagSduiAdvertiseRuntimeSupportSets (copy), SduiCapabilities (copy), BuildChartsPageRequestModule (copy), GetSduiClientPageScopeFunction (copy), ChartsPageScopeFieldsModule (copy), FFlagEnableTopSongsSort (copy), GetFStringTopSongsSortExploreApiPageTypeFunction (copy), FFlagSduiChartsRequestPlaceholders (copy), GetSduiTemplateStoreFunction (copy), AppPage (copy), SduiResponseType (copy), FFlagSduiChartsPlaceholderMergeStrategySupport (copy), ChartsMergeStrategyModule (copy), SduiApiStorePostConfigContentType (copy), extractNextFeedPageToken (copy)
 	local ConfigKey = ChartsConstantsModule.ConfigKey
 	local SduiApiStore = GetSduiApiStoreFunction()
@@ -75,7 +75,7 @@ return function(LoadTimer, p2) --[[ Line: 59 | Named "fetchChartsPage" ]]
 		enabled_capabilities = SduiCapabilities.getEnabledCapabilityNumbers({ "CAPABILITY_SUPPORTS_HYDRATION_CLIENT_HINTS" })
 	})
 	
-	local function buildBody(FeedPageToken) --[[ Line: 97 ]]
+	local function buildBody(FeedPageToken)
 		-- upvalues: BuildChartsPageRequestModule (upval), ChartsPage (copy), ChartsPageSessionModule (upval), GetSduiClientPageScopeFunction (upval), ChartsConstantsModule (upval), ChartsPageScopeFieldsModule (upval), FFlagEnableTopSongsSort (upval), GetFStringTopSongsSortExploreApiPageTypeFunction (upval), FFlagSduiChartsRequestPlaceholders (upval), FFlagChartsHydrationStreaming (upval), GetSduiTemplateStoreFunction (upval), AppPage (upval), ClientCapabilities1 (ref)
 		return BuildChartsPageRequestModule(ChartsPage, {
 			feedPageToken = FeedPageToken,
@@ -105,24 +105,24 @@ return function(LoadTimer, p2) --[[ Line: 59 | Named "fetchChartsPage" ]]
 		},
 		enableStreaming = if FFlagChartsHydrationStreaming then true else nil,
 		allowNoConfigsBuilt = if FFlagChartsHydrationStreaming then true else nil,
-		buildNextPageUrl = function(p3) --[[ Line: 131 ]]
+		buildNextPageUrl = function(p3)
 			-- upvalues: extractNextFeedPageToken (upval), ChartsPageStreamUrlModule (copy)
 			return if extractNextFeedPageToken(p3) then ChartsPageStreamUrlModule else nil
 		end,
-		buildNextPagePostBody = function(p3) --[[ Line: 134 ]]
+		buildNextPagePostBody = function(p3)
 			-- upvalues: extractNextFeedPageToken (upval), buildBody (copy)
 			local ExtractNextFeedPageTokenResult = extractNextFeedPageToken(p3)
 			
 			return if ExtractNextFeedPageTokenResult then buildBody(ExtractNextFeedPageTokenResult) else nil
 		end,
-		buildRefreshUrl = function() --[[ Line: 144 ]]
+		buildRefreshUrl = function()
 			-- upvalues: SduiApiStore (copy), ConfigKey (copy), ChartsPageSessionModule (upval), ChartsPageStreamUrlModule (copy)
 			if not SduiApiStore.isInFlight(ConfigKey) then
 				ChartsPageSessionModule:Refresh()
 			end
 			return ChartsPageStreamUrlModule
 		end,
-		buildRefreshPostBody = function() --[[ Line: 151 ]]
+		buildRefreshPostBody = function()
 			-- upvalues: buildBody (copy)
 			return buildBody(nil)
 		end

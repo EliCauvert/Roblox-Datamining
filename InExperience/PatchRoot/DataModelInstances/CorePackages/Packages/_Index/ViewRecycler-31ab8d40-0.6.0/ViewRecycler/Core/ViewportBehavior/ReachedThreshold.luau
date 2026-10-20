@@ -1,9 +1,9 @@
-﻿local function _(p1: number, p2) --[[ Line: 9 | Named "validateNumber" ]]
+﻿local function _(p1: number, p2)
 	assert(p1 >= 0 and p1 < 1e999, `{p2} must be a finite non-negative number`)
 end
 
 return table.freeze({
-	validate = function(p1: number, p2) --[[ Line: 13 ]]
+	validate = function(p1: number, p2)
 		local P3 = p2 or "ReachedThreshold"
 		
 		if type(p1) == "number" then
@@ -17,7 +17,7 @@ return table.freeze({
 			assert(ViewportFraction >= 0 and ViewportFraction < 1e999, `{`{P3}.viewportFraction`} must be a finite non-negative number`)
 		end
 	end,
-	resolve = function(p1, p2, p3) --[[ Line: 25 ]]
+	resolve = function(p1, p2, p3)
 		local P4 = p1 or p3
 		
 		return if type(P4) == "number" then P4 else P4.viewportFraction * p2

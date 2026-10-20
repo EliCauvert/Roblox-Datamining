@@ -14,11 +14,11 @@ local UseCallbackFunction = ReactModule.useCallback
 local UseMemoFunction = ReactModule.useMemo
 local config = { isLoading = false, maxSize = Vector2.new(300, 1e999) }
 
-return function(p1) --[[ Line: 52 | Named "ChromeWindow" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), CreateNextOrderFunction (copy), UseMemoFunction (copy), UseLocalizationFunction (copy), UseCallbackFunction (copy), ReactModule (copy), FoundationModule (copy), LikeButtonModule (copy), ChromeWindowFrameModule (copy), ConstantsModule (copy), TrackingAudioIconModule (copy), MusicIconModule (copy), MarqueeScrollerModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local NextOrder = CreateNextOrderFunction()
-	local UseMemoResult = UseMemoFunction(function(): string --[[ Line: 56 ]]
+	local UseMemoResult = UseMemoFunction(function(): string
 		-- upvalues: JoinResult (copy)
 		return if JoinResult.isLoading then "Loading" elseif JoinResult.song then if JoinResult.song.meetsCriteria then "MeetsCriteria" else "Unverified" else "Loading"
 	end, { JoinResult.isLoading, JoinResult.song })
@@ -28,13 +28,13 @@ return function(p1) --[[ Line: 52 | Named "ChromeWindow" ]]
 		musicLoading = "CoreScripts.TopBar.MusicLoading",
 		musicUnverified = "CoreScripts.TopBar.MusicNotVerified"
 	})
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 80 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: JoinResult (copy)
 		if JoinResult.onToggleLike then
 			JoinResult.onToggleLike()
 		end
 	end, { JoinResult.onToggleLike })
-	local UseMemoResult1 = UseMemoFunction(function() --[[ Line: 86 ]]
+	local UseMemoResult1 = UseMemoFunction(function()
 		-- upvalues: JoinResult (copy)
 		return if JoinResult.song then table.concat(JoinResult.song.artists, ", ") else nil
 	end, { JoinResult.song })

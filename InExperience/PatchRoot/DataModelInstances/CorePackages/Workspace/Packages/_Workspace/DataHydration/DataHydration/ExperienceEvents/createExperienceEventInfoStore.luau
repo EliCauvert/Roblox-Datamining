@@ -12,13 +12,13 @@ local DiscoveryEventErrorLogger = DiscoveryUtilsModule.DiscoveryEventErrorLogger
 local LogResponseErrorFunction = DiscoveryUtilsModule.logResponseError
 local UpdateEventRsvpModule = require(script.Parent.updateEventRsvp)
 
-return function() --[[ Line: 26 | Named "createExperienceEventInfoStore" ]]
+return function()
 	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy), ExperienceEventDerivedFieldsModule (copy), ExperienceEventTypesModule (copy), UpdateEventRsvpModule (copy), LogResponseErrorFunction (copy), ExperienceEventsUrlBuilderModule (copy), DiscoveryEventErrorLogger (copy)
 	local DataCacheModule = CreateDataCacheModule()
 	local DataResolverModule = CreateDataResolverModule({
 		supportsMultiGet = false,
 		cache = DataCacheModule,
-		fetchFn = function(_) --[[ Line: 31 ]]
+		fetchFn = function(_)
 			-- upvalues: PromiseModule (upval)
 			return PromiseModule.resolve({})
 		end
@@ -28,7 +28,7 @@ return function() --[[ Line: 26 | Named "createExperienceEventInfoStore" ]]
 		getExperienceEventInfo = DataResolverModule.getCachedItem,
 		getExperienceEventInfos = DataResolverModule.getCachedItems,
 		updateExperienceEventInfo = DataCacheModule.updateItem,
-		updateExperienceEventInfos = function(EnrichWithTimestampsResults) --[[ Line: 40 ]]
+		updateExperienceEventInfos = function(EnrichWithTimestampsResults)
 			-- upvalues: ExperienceEventDerivedFieldsModule (upval), DataCacheModule (copy)
 			for i, enrichWithTimestampsResult in EnrichWithTimestampsResults do
 				EnrichWithTimestampsResults[i] = ExperienceEventDerivedFieldsModule.enrichWithTimestamps(enrichWithTimestampsResult)
@@ -36,11 +36,11 @@ return function() --[[ Line: 26 | Named "createExperienceEventInfoStore" ]]
 			DataCacheModule.updateItems(EnrichWithTimestampsResults)
 		end,
 		calculateDerivedField = ExperienceEventDerivedFieldsModule.calculateDerivedField,
-		patchRsvpStatus = function(EventId, IsRsvpGoing) --[[ Line: 47 ]]
+		patchRsvpStatus = function(EventId, IsRsvpGoing)
 			-- upvalues: DataResolverModule (copy), ExperienceEventTypesModule (upval), UpdateEventRsvpModule (upval), DataCacheModule (copy), LogResponseErrorFunction (upval), ExperienceEventsUrlBuilderModule (upval), DiscoveryEventErrorLogger (upval)
 			local DataResult = DataResolverModule.getCachedItem(EventId).data()
 			
-			return (UpdateEventRsvpModule(EventId, if IsRsvpGoing then ExperienceEventTypesModule.EventRsvpTypes.Going else ExperienceEventTypesModule.EventRsvpTypes.NotGoing):andThen(function(Result) --[[ Line: 56 ]]
+			return (UpdateEventRsvpModule(EventId, if IsRsvpGoing then ExperienceEventTypesModule.EventRsvpTypes.Going else ExperienceEventTypesModule.EventRsvpTypes.NotGoing):andThen(function(Result)
 				-- upvalues: DataResult (copy), IsRsvpGoing (copy), DataCacheModule (upval), EventId (copy)
 				if DataResult then
 					DataCacheModule.updateItem(EventId, {
@@ -56,7 +56,7 @@ return function() --[[ Line: 26 | Named "createExperienceEventInfoStore" ]]
 					})
 				end
 				return Result and Result.responseBody
-			end):catch(function(Err) --[[ Line: 74 ]]
+			end):catch(function(Err)
 				-- upvalues: DataResult (copy), DataCacheModule (upval), EventId (copy), LogResponseErrorFunction (upval), ExperienceEventsUrlBuilderModule (upval), DiscoveryEventErrorLogger (upval), IsRsvpGoing (copy)
 				if DataResult then
 					DataCacheModule.updateItem(EventId, DataResult)

@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.Parent.Parent.ES7Types)
 
-return function(List, Callback, p1): boolean --[[ Line: 28 ]]
+return function(List, Callback, p1): boolean
 	if typeof(List) ~= "table" then
 		error(string.format("Array.some called on %s", (typeof(List))))
 	end

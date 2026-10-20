@@ -6,11 +6,11 @@ local Logger = require(Parent.Loggers).Logger
 local PromiseModule = require(Parent.Promise)
 local SquadsCore1 = Logger.new(Logger, "SquadsCore")
 
-return function(SquadId, Callback) --[[ Line: 12 ]]
+return function(SquadId, Callback)
 	-- upvalues: NetworkingSquadsModule (copy), SquadsCore1 (copy), SquadPromptTypeModule (copy), PromiseModule (copy)
-	return function(p1) --[[ Line: 13 ]]
+	return function(p1)
 		-- upvalues: NetworkingSquadsModule (upval), SquadId (copy), SquadsCore1 (upval), Callback (copy), SquadPromptTypeModule (upval), PromiseModule (upval)
-		return p1:dispatch(NetworkingSquadsModule.ReinviteToSquad.API({ squadId = SquadId })):catch(function(Err) --[[ Line: 14 ]]
+		return p1:dispatch(NetworkingSquadsModule.ReinviteToSquad.API({ squadId = SquadId })):catch(function(Err)
 			-- upvalues: SquadsCore1 (upval), Callback (upval), p1 (copy), SquadPromptTypeModule (upval), PromiseModule (upval)
 			SquadsCore1:warning("Error reinviting parent channel participants to squad: {}", if Err.StatusCode then Err.StatusCode else -1)
 			Callback(p1, {

@@ -8,19 +8,19 @@ local _ = require(script.Parent.AssetUserAuthStoreTypes)
 local FetchFunction = HttpClientModule.fetch
 local AsPromiseFunction = HttpClientModule.asPromise
 
-local function _(p1) --[[ Line: 27 | Named "resolveBase" ]]
+local function _(p1)
 	-- upvalues: UrlBase (copy)
 	local P0 = p1 or {}
 	
 	return P0.network, P0.baseUrl or UrlBase.APIS
 end
 
-local _ = function(p1) --[[ Line: 32 | Named "resolveMutatingNetwork" ]]
+local _ = function(p1)
 	-- upvalues: WithCsrfRetryModule (copy), HttpClientModule (copy)
 	return (p1 or {}).network or WithCsrfRetryModule(HttpClientModule.createRequestInternalNetwork())
 end
 
-local _ = function(Text, Text1, p1): string --[[ Line: 37 | Named "buildMultipartBody" ]]
+local _ = function(Text, Text1, p1): string
 	local Text2 = (((("" .. "--" .. "-------PublishServiceCreateAsset" .. "\r\n") .. "Content-Disposition: form-data; name=\"request\"" .. "\r\n") .. "Content-Type: application/json" .. "\r\n") .. "\r\n") .. Text .. "\r\n"
 	
 	if Text1 then
@@ -33,7 +33,7 @@ local CreateRequestFunction = HttpClientModule.createRequest
 local EncodeRawFunction = HttpClientModule.encodeRaw
 local DecodeJsonFunction = HttpClientModule.decodeJson
 
-local function multipartRequest(Network, Method, UpdateMaskName, Body, AnalyticsKey) --[[ Line: 59 ]]
+local function multipartRequest(Network, Method, UpdateMaskName, Body, AnalyticsKey)
 	-- upvalues: CreateRequestFunction (copy), EncodeRawFunction (copy), DecodeJsonFunction (copy), AsPromiseFunction (copy)
 	return AsPromiseFunction((CreateRequestFunction({
 		networkImpl = Network,
@@ -42,7 +42,7 @@ local function multipartRequest(Network, Method, UpdateMaskName, Body, Analytics
 		body = Body,
 		headers = {},
 		encode = EncodeRawFunction("multipart/form-data; boundary=-------PublishServiceCreateAsset"),
-		decode = DecodeJsonFunction(function(p1) --[[ Line: 73 ]]
+		decode = DecodeJsonFunction(function(p1)
 			return p1
 		end),
 		analyticsKey = AnalyticsKey
@@ -50,7 +50,7 @@ local function multipartRequest(Network, Method, UpdateMaskName, Body, Analytics
 end
 
 return {
-	patchAssetIcon = function(p1, Body, p2) --[[ Line: 83 ]]
+	patchAssetIcon = function(p1, Body, p2)
 		-- upvalues: UrlBase (copy), FetchFunction (copy), WithCsrfRetryModule (copy), HttpClientModule (copy), AsPromiseFunction (copy)
 		local P13 = p2 or {}
 		local _ = P13.network
@@ -61,19 +61,19 @@ return {
 			network = (p2 or {}).network or WithCsrfRetryModule(HttpClientModule.createRequestInternalNetwork()),
 			url = ("%s/assets/user-auth/v1/assets/%s?updateMask=icon"):format(P13.baseUrl or UrlBase.APIS, p1),
 			body = Body,
-			decode = function(p3) --[[ Line: 96 ]]
+			decode = function(p3)
 				return p3
 			end
 		})))
 	end,
-	updateIcon = function(p1, p2, p3) --[[ Line: 103 ]]
+	updateIcon = function(p1, p2, p3)
 		-- upvalues: UrlBase (copy), HttpService (copy), multipartRequest (copy), WithCsrfRetryModule (copy), HttpClientModule (copy)
 		local P17 = p3 or {}
 		local _ = P17.network
 		
 		return multipartRequest((p3 or {}).network or WithCsrfRetryModule(HttpClientModule.createRequestInternalNetwork()), "PATCH", ("%s/assets/user-auth/v1/assets/%s?updateMask=icon"):format(P17.baseUrl or UrlBase.APIS, p1), ((((("" .. "--" .. "-------PublishServiceCreateAsset" .. "\r\n") .. "Content-Disposition: form-data; name=\"request\"" .. "\r\n") .. "Content-Type: application/json" .. "\r\n") .. "\r\n") .. HttpService:JSONEncode({ assetId = tonumber(p1), icon = `assets/{p2}` }) .. "\r\n") .. "--" .. "-------PublishServiceCreateAsset" .. "--" .. "\r\n", "asset-user-auth.update-icon")
 	end,
-	getPreviews = function(p1, p2) --[[ Line: 118 ]]
+	getPreviews = function(p1, p2)
 		-- upvalues: UrlBase (copy), FetchFunction (copy), AsPromiseFunction (copy)
 		local P19 = p2 or {}
 		
@@ -82,19 +82,19 @@ return {
 			analyticsKey = "asset-user-auth.get-previews",
 			network = P19.network,
 			url = ("%s/assets/user-auth/v1/assets/%s?readMask=previews"):format(P19.baseUrl or UrlBase.APIS, p1),
-			decode = function(p3) --[[ Line: 126 ]]
+			decode = function(p3)
 				return p3.previews or {}
 			end
 		})))
 	end,
-	updatePreviews = function(p1, Previews, p2) --[[ Line: 133 ]]
+	updatePreviews = function(p1, Previews, p2)
 		-- upvalues: UrlBase (copy), HttpService (copy), multipartRequest (copy), WithCsrfRetryModule (copy), HttpClientModule (copy)
 		local P23 = p2 or {}
 		local _ = P23.network
 		
 		return multipartRequest((p2 or {}).network or WithCsrfRetryModule(HttpClientModule.createRequestInternalNetwork()), "PATCH", ("%s/assets/user-auth/v1/assets/%s?updateMask=previews"):format(P23.baseUrl or UrlBase.APIS, p1), ((((("" .. "--" .. "-------PublishServiceCreateAsset" .. "\r\n") .. "Content-Disposition: form-data; name=\"request\"" .. "\r\n") .. "Content-Type: application/json" .. "\r\n") .. "\r\n") .. HttpService:JSONEncode({ assetId = tonumber(p1), previews = Previews }) .. "\r\n") .. "--" .. "-------PublishServiceCreateAsset" .. "--" .. "\r\n", "asset-user-auth.update-previews")
 	end,
-	createImageAsset = function(Text, p1, p2, p3) --[[ Line: 148 ]]
+	createImageAsset = function(Text, p1, p2, p3)
 		-- upvalues: UrlBase (copy), HttpService (copy), multipartRequest (copy), WithCsrfRetryModule (copy), HttpClientModule (copy)
 		local P27 = p3 or {}
 		local _ = P27.network
@@ -113,7 +113,7 @@ return {
 		end
 		return multipartRequest((p3 or {}).network or WithCsrfRetryModule(HttpClientModule.createRequestInternalNetwork()), "POST", AssetsName, Text1 .. "--" .. "-------PublishServiceCreateAsset" .. "--" .. "\r\n", "asset-user-auth.create-image-asset")
 	end,
-	fetchOperation = function(p1, p2) --[[ Line: 169 ]]
+	fetchOperation = function(p1, p2)
 		-- upvalues: UrlBase (copy), FetchFunction (copy), AsPromiseFunction (copy)
 		local P29 = p2 or {}
 		
@@ -122,7 +122,7 @@ return {
 			analyticsKey = "asset-user-auth.get-operation",
 			network = P29.network,
 			url = ("%s/assets/user-auth/v1/operations/%s"):format(P29.baseUrl or UrlBase.APIS, p1),
-			decode = function(p3) --[[ Line: 177 ]]
+			decode = function(p3)
 				return p3
 			end
 		})))

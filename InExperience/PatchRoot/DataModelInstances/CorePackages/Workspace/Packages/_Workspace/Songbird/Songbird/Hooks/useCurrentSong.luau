@@ -10,19 +10,19 @@ local UseMemoFunction = require(Songbird.Parent.React).useMemo
 local UseAudibleSoundsFunction = require(Songbird.Parent.ReactSceneUnderstanding).useAudibleSounds
 local UseAssetFavoritingFunction = require(Songbird.Parent.AssetFavorites).useAssetFavoriting
 
-return function() --[[ Line: 21 | Named "useCurrentSong" ]]
+return function()
 	-- upvalues: UseAudibleSoundsFunction (copy), UseMemoFunction (copy), CryoModule (copy), GetAssetIdForAudioSourceModule (copy), UseAudioMetadataModule (copy), UseAssetFavoritingFunction (copy), LoggerModule (copy), SendChromeWindowAnalyticsModule (copy), AnalyticActionsModule (copy)
 	local UseAudibleSoundsResult = UseAudibleSoundsFunction()
-	local UseMemoResult = UseMemoFunction(function() --[[ Line: 30 ]]
+	local UseMemoResult = UseMemoFunction(function()
 		-- upvalues: CryoModule (upval), UseAudibleSoundsResult (copy), GetAssetIdForAudioSourceModule (upval)
-		return CryoModule.List.filter(UseAudibleSoundsResult, function(p1): boolean --[[ Line: 31 ]]
+		return CryoModule.List.filter(UseAudibleSoundsResult, function(p1): boolean
 			-- upvalues: GetAssetIdForAudioSourceModule (upval)
 			return GetAssetIdForAudioSourceModule(p1) ~= nil
 		end)
 	end, { UseAudibleSoundsResult })
-	local UseMemoResult1 = UseMemoFunction(function() --[[ Line: 36 ]]
+	local UseMemoResult1 = UseMemoFunction(function()
 		-- upvalues: CryoModule (upval), UseMemoResult (copy), GetAssetIdForAudioSourceModule (upval)
-		return CryoModule.List.map(UseMemoResult, function(p1) --[[ Line: 37 ]]
+		return CryoModule.List.map(UseMemoResult, function(p1)
 			-- upvalues: GetAssetIdForAudioSourceModule (upval)
 			return GetAssetIdForAudioSourceModule(p1)
 		end)
@@ -30,7 +30,7 @@ return function() --[[ Line: 21 | Named "useCurrentSong" ]]
 	local UseAudioMetadataModuleResult = UseAudioMetadataModule(UseMemoResult1)
 	local UseAssetFavoritingResult = UseAssetFavoritingFunction(UseMemoResult1)
 	
-	return (UseMemoFunction(function() --[[ Line: 47 ]]
+	return (UseMemoFunction(function()
 		-- upvalues: LoggerModule (upval), UseMemoResult (copy), GetAssetIdForAudioSourceModule (upval), UseAudioMetadataModuleResult (copy), UseAssetFavoritingResult (copy), SendChromeWindowAnalyticsModule (upval), AnalyticActionsModule (upval)
 		LoggerModule:info(`determining currently playing song from {#UseMemoResult} audio sources...`)
 		local AssetIdForAudioSourceModule = nil
@@ -64,9 +64,9 @@ return function() --[[ Line: 21 | Named "useCurrentSong" ]]
 						metadata = ByAssetId,
 						meetsCriteria = MeetsCriteria,
 						isFavorited = UseAssetFavoritingResult.getByAssetId(AssetIdForAudioSourceModule),
-						toggleFavorite = function() --[[ Line: 93 ]]
+						toggleFavorite = function()
 							-- upvalues: UseAssetFavoritingResult (upval), AssetIdForAudioSourceModule (copy), SendChromeWindowAnalyticsModule (upval), AnalyticActionsModule (upval), LoggerModule (upval)
-							return UseAssetFavoritingResult.toggleFavorite(AssetIdForAudioSourceModule):andThen(function(Result) --[[ Line: 96 ]]
+							return UseAssetFavoritingResult.toggleFavorite(AssetIdForAudioSourceModule):andThen(function(Result)
 								-- upvalues: SendChromeWindowAnalyticsModule (upval), AssetIdForAudioSourceModule (upval), AnalyticActionsModule (upval)
 								if Result then
 									SendChromeWindowAnalyticsModule({
@@ -81,7 +81,7 @@ return function() --[[ Line: 21 | Named "useCurrentSong" ]]
 										action = AnalyticActionsModule.Unlike
 									})
 								end
-							end):catch(function(Err) --[[ Line: 103 ]]
+							end):catch(function(Err)
 								-- upvalues: LoggerModule (upval)
 								LoggerModule:warning(Err)
 							end)

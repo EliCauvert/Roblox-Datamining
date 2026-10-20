@@ -18,7 +18,7 @@ local config = {
 	style = nil
 }
 
-function LeaveGroupCell(p1) --[[ Line: 37 ]]
+function LeaveGroupCell(p1)
 	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), RoactFitComponents (copy), IconWithTextCellModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	

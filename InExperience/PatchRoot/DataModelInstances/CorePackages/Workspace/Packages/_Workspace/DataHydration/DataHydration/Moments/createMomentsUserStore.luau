@@ -11,7 +11,7 @@ local _ = require(script.Parent.MomentsStoreTypes)
 local FetchUserMomentsModule = require(script.Parent.Requests.fetchUserMoments)
 local FFlagProfileMomentsOrderingAndReactions = require(Parent.SharedFlags).FFlagProfileMomentsOrderingAndReactions
 
-local function _(TargetUserId, p1) --[[ Line: 29 | Named "paramsKey" ]]
+local function _(TargetUserId, p1)
 	-- upvalues: HttpService (copy)
 	return HttpService:JSONEncode({
 		targetUserId = TargetUserId,
@@ -20,7 +20,7 @@ local function _(TargetUserId, p1) --[[ Line: 29 | Named "paramsKey" ]]
 	})
 end
 
-return function(p1) --[[ Line: 37 | Named "createMomentsUserStore" ]]
+return function(p1)
 	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy), HttpClientModule (copy), FetchUserMomentsModule (copy), HttpService (copy), FFlagProfileMomentsOrderingAndReactions (copy), SignalsModule (copy)
 	local P2 = p1 or {}
 	local T = {}
@@ -30,7 +30,7 @@ return function(p1) --[[ Line: 37 | Named "createMomentsUserStore" ]]
 		supportsMultiGet = false,
 		replaceItems = true,
 		cache = CreateDataCacheModule(),
-		fetchFn = function(p2, _) --[[ Line: 50 ]]
+		fetchFn = function(p2, _)
 			-- upvalues: T (ref), PromiseModule (upval), HttpClientModule (upval), FetchUserMomentsModule (upval), P2 (copy)
 			local Entry = T[p2]
 			
@@ -38,7 +38,7 @@ return function(p1) --[[ Line: 37 | Named "createMomentsUserStore" ]]
 		end
 	})
 	
-	local function _(TargetUserId, Cursor) --[[ Line: 59 | Named "setParams" ]]
+	local function _(TargetUserId, Cursor)
 		-- upvalues: HttpService (upval), T (ref)
 		local Json = HttpService:JSONEncode({
 			targetUserId = TargetUserId,
@@ -50,7 +50,7 @@ return function(p1) --[[ Line: 37 | Named "createMomentsUserStore" ]]
 		return Json
 	end
 	
-	local function getCachedUserMoments(TargetUserId, Cursor) --[[ Line: 68 ]]
+	local function getCachedUserMoments(TargetUserId, Cursor)
 		-- upvalues: DataResolverModule (copy), HttpService (upval), T (ref)
 		local GetCachedItemFunction = DataResolverModule.getCachedItem
 		local Json = HttpService:JSONEncode({
@@ -63,7 +63,7 @@ return function(p1) --[[ Line: 37 | Named "createMomentsUserStore" ]]
 		return GetCachedItemFunction(Json)
 	end
 	
-	local function fetchUserMomentsItem(TargetUserId, Cursor) --[[ Line: 75 ]]
+	local function fetchUserMomentsItem(TargetUserId, Cursor)
 		-- upvalues: DataResolverModule (copy), HttpService (upval), T (ref)
 		local FetchItemFunction = DataResolverModule.fetchItem
 		local Json = HttpService:JSONEncode({
@@ -76,7 +76,7 @@ return function(p1) --[[ Line: 37 | Named "createMomentsUserStore" ]]
 		return FetchItemFunction(Json)
 	end
 	
-	local function getAndFetchUserMoments(TargetUserId, Cursor) --[[ Line: 82 ]]
+	local function getAndFetchUserMoments(TargetUserId, Cursor)
 		-- upvalues: DataResolverModule (copy), HttpService (upval), T (ref)
 		local GetAndFetchItemFunction = DataResolverModule.getAndFetchItem
 		local Json = HttpService:JSONEncode({
@@ -89,7 +89,7 @@ return function(p1) --[[ Line: 37 | Named "createMomentsUserStore" ]]
 		return GetAndFetchItemFunction(Json)
 	end
 	
-	local function getUserMoments(TargetUserId, p3) --[[ Line: 89 ]]
+	local function getUserMoments(TargetUserId, p3)
 		-- upvalues: FFlagProfileMomentsOrderingAndReactions (upval), HttpClientModule (upval), FetchUserMomentsModule (upval), P2 (copy), HttpService (upval), AsPromiseResults (ref), TargetUserIds (ref)
 		if not FFlagProfileMomentsOrderingAndReactions then
 			return HttpClientModule.asPromise(FetchUserMomentsModule(TargetUserId, p3, P2.network))
@@ -105,7 +105,7 @@ return function(p1) --[[ Line: 37 | Named "createMomentsUserStore" ]]
 			local AsPromiseResult1 = HttpClientModule.asPromise(FetchUserMomentsModule(TargetUserId, p3, P2.network))
 			AsPromiseResults[Json] = AsPromiseResult1
 			TargetUserIds[Json] = TargetUserId
-			AsPromiseResult1:catch(function() --[[ Line: 101 ]]
+			AsPromiseResult1:catch(function()
 				-- upvalues: AsPromiseResults (upval), Json (copy), TargetUserIds (upval)
 				AsPromiseResults[Json] = nil
 				TargetUserIds[Json] = nil
@@ -117,7 +117,7 @@ return function(p1) --[[ Line: 37 | Named "createMomentsUserStore" ]]
 		end
 	end
 	
-	local function getFreshUserMoments(p3, p4) --[[ Line: 110 ]]
+	local function getFreshUserMoments(p3, p4)
 		-- upvalues: HttpClientModule (upval), FetchUserMomentsModule (upval), P2 (copy)
 		return HttpClientModule.asPromise(FetchUserMomentsModule(p3, p4, P2.network))
 	end
@@ -131,7 +131,7 @@ return function(p1) --[[ Line: 37 | Named "createMomentsUserStore" ]]
 		getCachedUserMoments = getCachedUserMoments,
 		fetchUserMoments = fetchUserMomentsItem,
 		getAndFetchUserMoments = getAndFetchUserMoments,
-		evictUserMoments = function(p3) --[[ Line: 183 ]]
+		evictUserMoments = function(p3)
 			-- upvalues: TargetUserIds (ref), AsPromiseResults (ref)
 			for i, targetUserId in TargetUserIds do
 				if targetUserId == p3 then
@@ -140,7 +140,7 @@ return function(p1) --[[ Line: 37 | Named "createMomentsUserStore" ]]
 				end
 			end
 		end,
-		invalidateUser = function(p4) --[[ Line: 192 ]]
+		invalidateUser = function(p4)
 			-- upvalues: TargetUserIds (ref), AsPromiseResults (ref), Signal2 (copy), Signal (copy)
 			for i, targetUserId in TargetUserIds do
 				if targetUserId == p4 then
@@ -152,7 +152,7 @@ return function(p1) --[[ Line: 37 | Named "createMomentsUserStore" ]]
 		end,
 		getUserMomentsVersion = Signal,
 		getPendingUserMoments = Signal1,
-		prependPendingUserMoment = function(Key, Moment) --[[ Line: 121 ]]
+		prependPendingUserMoment = function(Key, Moment)
 			-- upvalues: Signal1 (copy), Signal2_1 (copy)
 			local Copy = table.clone(Signal1(false))
 			local Copy1 = table.clone(Copy[Key] or {})
@@ -160,7 +160,7 @@ return function(p1) --[[ Line: 37 | Named "createMomentsUserStore" ]]
 			Copy[Key] = Copy1
 			Signal2_1(Copy)
 		end,
-		removePendingUserMoment = function(Key, MomentId) --[[ Line: 129 ]]
+		removePendingUserMoment = function(Key, MomentId)
 			-- upvalues: Signal1 (copy), Signal2_1 (copy)
 			local Copy = table.clone(Signal1(false))
 			local Entry = Copy[Key]
@@ -176,7 +176,7 @@ return function(p1) --[[ Line: 37 | Named "createMomentsUserStore" ]]
 			Copy[Key] = if #List > 0 then List else nil
 			Signal2_1(Copy)
 		end,
-		resolvePendingUserMoment = function(Key, MomentId, PublishedMoment): boolean --[[ Line: 145 ]]
+		resolvePendingUserMoment = function(Key, MomentId, PublishedMoment): boolean
 			-- upvalues: Signal1 (copy), Signal2_1 (copy)
 			local Copy = table.clone(Signal1(false))
 			local Tbl = Copy[Key] or {}
@@ -208,7 +208,7 @@ return function(p1) --[[ Line: 37 | Named "createMomentsUserStore" ]]
 				return true
 			end
 		end,
-		clear = function() --[[ Line: 197 ]]
+		clear = function()
 			-- upvalues: Signal2_1 (copy), T (ref), FFlagProfileMomentsOrderingAndReactions (upval), AsPromiseResults (ref), TargetUserIds (ref), DataResolverModule (copy)
 			Signal2_1({})
 			T = {}
@@ -219,7 +219,7 @@ return function(p1) --[[ Line: 37 | Named "createMomentsUserStore" ]]
 			end
 			DataResolverModule.clear()
 		end,
-		dispose = function() --[[ Line: 207 ]]
+		dispose = function()
 			-- upvalues: Signal2_1 (copy), T (ref), FFlagProfileMomentsOrderingAndReactions (upval), AsPromiseResults (ref), TargetUserIds (ref), DataResolverModule (copy)
 			Signal2_1({})
 			T = {}

@@ -8,7 +8,7 @@ local ErrorToStringFunction = SharedModule.errorToString
 local DescribeError = SharedModule.describeError
 local SafeFlagsModule = require(Parent.SafeFlags)
 
-local function GetCurrentTime(): number --[[ Line: 22 ]]
+local function GetCurrentTime(): number
 	return os.clock() * 1000
 end
 
@@ -35,7 +35,7 @@ local HeartbeatConnection = nil
 local Buffer = if LookbackUseRingBuffer then table.create(NumberOfLookbackFrames) else nil
 local v1 = 1
 
-local function _() --[[ Line: 71 | Named "resetFrameBudgets" ]]
+local function _()
 	-- upvalues: MinValue (ref), DesiredFrameRate (ref), MaxValue (ref), MinimumFrameRate (ref), ClampedValue (ref), Value (ref)
 	MinValue = 1000 / DesiredFrameRate
 	MaxValue = 1000 / MinimumFrameRate
@@ -43,12 +43,12 @@ local function _() --[[ Line: 71 | Named "resetFrameBudgets" ]]
 	Value = ClampedValue
 end
 
-local _ = function() --[[ Line: 78 | Named "createHeartbeatConnection" ]]
+local _ = function()
 	-- upvalues: HeartbeatConnection (ref), NumberOfLookbackFrames (ref), LookbackUseRingBuffer (ref), Buffer (copy), v1 (ref), Value (ref), ClampedValue (ref), MinValue (ref), MaxValue (ref)
 	if HeartbeatConnection then
 		HeartbeatConnection:Disconnect()
 	end
-	HeartbeatConnection = game:GetService("RunService").Heartbeat:Connect(function(DeltaTime: number) --[[ Line: 83 ]]
+	HeartbeatConnection = game:GetService("RunService").Heartbeat:Connect(function(DeltaTime: number)
 		-- upvalues: NumberOfLookbackFrames (upval), LookbackUseRingBuffer (upval), Buffer (upval), v1 (upval), Value (upval), ClampedValue (upval), MinValue (upval), MaxValue (upval)
 		if NumberOfLookbackFrames <= 1 then
 			ClampedValue = math.clamp(DeltaTime * 1000, MinValue, MaxValue)
@@ -82,7 +82,7 @@ if TargetMsByHeartbeatDelta then
 	if HeartbeatConnection then
 		HeartbeatConnection:Disconnect()
 	end
-	HeartbeatConnection = game:GetService("RunService").Heartbeat:Connect(function(DeltaTime: number) --[[ Line: 83 ]]
+	HeartbeatConnection = game:GetService("RunService").Heartbeat:Connect(function(DeltaTime: number)
 		-- upvalues: NumberOfLookbackFrames (ref), LookbackUseRingBuffer (ref), Buffer (copy), v1 (ref), Value (ref), ClampedValue (ref), MinValue (ref), MaxValue (ref)
 		if NumberOfLookbackFrames <= 1 then
 			ClampedValue = math.clamp(DeltaTime * 1000, MinValue, MaxValue)
@@ -111,7 +111,7 @@ if TargetMsByHeartbeatDelta then
 		ClampedValue = math.clamp(Value, MinValue, MaxValue)
 	end)
 end
-local function setFrameMarker() --[[ Line: 125 ]]
+local function setFrameMarker()
 	-- upvalues: ScaledClockTime (ref)
 	ScaledClockTime = os.clock() * 1000
 end
@@ -119,12 +119,12 @@ end
 local ReactSchedulerYieldIntervalResult = ReactSchedulerYieldInterval2()
 local v2 = 0
 
-local _ = function(): boolean --[[ Line: 198 | Named "doesBudgetRemain" ]]
+local _ = function(): boolean
 	-- upvalues: ScaledClockTime (ref), ClampedValue (ref), ReactSchedulerYieldIntervalResult (ref)
 	return ReactSchedulerYieldIntervalResult < ClampedValue - (os.clock() * 1000 - ScaledClockTime)
 end
 
-local function performWorkUntilDeadline() --[[ Line: 229 ]]
+local function performWorkUntilDeadline()
 	-- upvalues: Callback (ref), v2 (ref), ReactSchedulerYieldIntervalResult (ref), DeferredWork (ref), HeartbeatFrameMarker (ref), Flag1 (ref), ScaledClockTime (ref), ClampedValue (ref), Flag (ref), performWorkUntilDeadline (ref), setFrameMarker (copy), ReactGlobalsModule (copy), DescribeError (copy), ErrorToStringFunction (copy)
 	if Callback == nil then
 		Flag = false
@@ -141,7 +141,7 @@ local function performWorkUntilDeadline() --[[ Line: 229 ]]
 	if HeartbeatFrameMarker and Flag1 and ClampedValue - (os.clock() * 1000 - ScaledClockTime) <= ReactSchedulerYieldIntervalResult then
 		Flag2 = false
 	end
-	local function doWork() --[[ Line: 259 ]]
+	local function doWork()
 		-- upvalues: Callback (upval), Flag2 (ref), ScaledClockTime1 (copy), Flag (upval), DeferredWork (upval), ScaledClockTime (upval), ClampedValue (upval), ReactSchedulerYieldIntervalResult (upval), Flag1 (upval), performWorkUntilDeadline (upval), HeartbeatFrameMarker (upval), setFrameMarker (upval)
 		if Callback(Flag2, ScaledClockTime1) then
 			if DeferredWork then
@@ -184,8 +184,8 @@ local function performWorkUntilDeadline() --[[ Line: 229 ]]
 	end
 end
 
-local _ = function(Callback) --[[ Line: 320 | Named "wrapPerformWorkWithCoroutine" ]]
-	local Thread = coroutine.create(function() --[[ Line: 321 ]]
+local _ = function(Callback)
+	local Thread = coroutine.create(function()
 		-- upvalues: Callback (copy)
 		while true do
 			local Success, Result = pcall((coroutine.wrap(Callback)))
@@ -193,7 +193,7 @@ local _ = function(Callback) --[[ Line: 320 | Named "wrapPerformWorkWithCoroutin
 		end
 	end)
 	
-	return function() --[[ Line: 331 ]]
+	return function()
 		-- upvalues: Thread (copy)
 		local _, Result, Resumed3 = coroutine.resume(Thread)
 		
@@ -204,13 +204,13 @@ local _ = function(Callback) --[[ Line: 320 | Named "wrapPerformWorkWithCoroutin
 end
 
 local PerformWorkUntilDeadline = performWorkUntilDeadline
-local Thread = coroutine.create(function() --[[ Line: 321 ]]
+local Thread = coroutine.create(function()
 	-- upvalues: PerformWorkUntilDeadline (copy)
 	local Success, Result = pcall((coroutine.wrap(PerformWorkUntilDeadline)))
 	coroutine.yield(Success, Result)
 end)
 
-performWorkUntilDeadline = function() --[[ Line: 331 ]]
+performWorkUntilDeadline = function()
 	-- upvalues: Thread (copy)
 	local _, Result, Resumed3 = coroutine.resume(Thread)
 	
@@ -220,7 +220,7 @@ performWorkUntilDeadline = function() --[[ Line: 331 ]]
 end
 
 return {
-	requestHostCallback = function(p1) --[[ Line: 341 ]]
+	requestHostCallback = function(p1)
 		-- upvalues: Callback (ref), Flag (ref), performWorkUntilDeadline (ref), HeartbeatFrameMarker (ref), setFrameMarker (copy)
 		Callback = p1
 		
@@ -233,29 +233,29 @@ return {
 			end
 		end
 	end,
-	cancelHostCallback = function() --[[ Line: 353 ]]
+	cancelHostCallback = function()
 		-- upvalues: Callback (ref)
 		Callback = nil
 	end,
-	requestHostTimeout = function(Callback, p1) --[[ Line: 357 ]]
+	requestHostTimeout = function(Callback, p1)
 		-- upvalues: None (ref), SetTimeoutFunction (copy)
-		None = SetTimeoutFunction(function() --[[ Line: 358 ]]
+		None = SetTimeoutFunction(function()
 			-- upvalues: Callback (copy)
 			Callback(os.clock() * 1000)
 		end, p1)
 	end,
-	cancelHostTimeout = function() --[[ Line: 363 ]]
+	cancelHostTimeout = function()
 		-- upvalues: ClearTimeoutFunction (copy), None (ref), Object (copy)
 		ClearTimeoutFunction(None)
 		None = Object.None
 	end,
-	shouldYieldToHost = function(): boolean --[[ Line: 206 ]]
+	shouldYieldToHost = function(): boolean
 		-- upvalues: v2 (ref)
 		return v2 <= os.clock() * 1000
 	end,
-	requestPaint = function() --[[ Line: 211 ]] end,
+	requestPaint = function() end,
 	getCurrentTime = GetCurrentTime,
-	forceFrameRate = function(p1: number) --[[ Line: 213 ]]
+	forceFrameRate = function(p1: number)
 		-- upvalues: Console (copy), ReactSchedulerYieldIntervalResult (ref)
 		if p1 < 0 or p1 > 125 then
 			Console.warn("forceFrameRate takes a positive int between 0 and 125, forcing frame rates higher than 125 fps is not supported")
@@ -270,7 +270,7 @@ return {
 			ReactSchedulerYieldIntervalResult = 5
 		end
 	end,
-	setSchedulerFlags = function(SchedulerFlags) --[[ Line: 147 ]]
+	setSchedulerFlags = function(SchedulerFlags)
 		-- upvalues: ReactSchedulerYieldIntervalResult (ref), DesiredFrameRate (ref), MinValue (ref), MaxValue (ref), MinimumFrameRate (ref), ClampedValue (ref), Value (ref), DeferredWork (ref), HeartbeatFrameMarker (ref), TargetMsByHeartbeatDelta (ref), HeartbeatConnection (ref), NumberOfLookbackFrames (ref), LookbackUseRingBuffer (ref), Buffer (copy), v1 (ref)
 		if SchedulerFlags.yieldInterval ~= nil then
 			ReactSchedulerYieldIntervalResult = SchedulerFlags.yieldInterval
@@ -302,7 +302,7 @@ return {
 				if HeartbeatConnection then
 					HeartbeatConnection:Disconnect()
 				end
-				HeartbeatConnection = game:GetService("RunService").Heartbeat:Connect(function(DeltaTime: number) --[[ Line: 83 ]]
+				HeartbeatConnection = game:GetService("RunService").Heartbeat:Connect(function(DeltaTime: number)
 					-- upvalues: NumberOfLookbackFrames (upval), LookbackUseRingBuffer (upval), Buffer (upval), v1 (upval), Value (upval), ClampedValue (upval), MinValue (upval), MaxValue (upval)
 					if NumberOfLookbackFrames <= 1 then
 						ClampedValue = math.clamp(DeltaTime * 1000, MinValue, MaxValue)
@@ -343,7 +343,7 @@ return {
 			LookbackUseRingBuffer = SchedulerFlags.lookbackUseRingBuffer
 		end
 	end,
-	getSchedulerFlags = function() --[[ Line: 185 ]]
+	getSchedulerFlags = function()
 		-- upvalues: ReactSchedulerYieldIntervalResult (ref), DesiredFrameRate (ref), MinimumFrameRate (ref), DeferredWork (ref), HeartbeatFrameMarker (ref), TargetMsByHeartbeatDelta (ref), NumberOfLookbackFrames (ref), LookbackUseRingBuffer (ref)
 		return {
 			yieldInterval = ReactSchedulerYieldIntervalResult,

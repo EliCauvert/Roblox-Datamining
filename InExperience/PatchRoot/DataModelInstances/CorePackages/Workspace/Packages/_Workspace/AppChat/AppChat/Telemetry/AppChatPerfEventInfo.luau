@@ -61,38 +61,38 @@ local config1 = {
 return {
 	TTI_CATEGORY = "AppChat",
 	Events = AppChatPerfEventModule,
-	isTTIEvent = function(p1): boolean --[[ Line: 104 ]]
+	isTTIEvent = function(p1): boolean
 		-- upvalues: config (copy)
 		return config[p1] ~= nil
 	end,
-	isIntervalEvent = function(p1): boolean --[[ Line: 108 ]]
+	isIntervalEvent = function(p1): boolean
 		-- upvalues: config1 (copy)
 		return config1[p1] ~= nil
 	end,
-	getTTIBaseName = function(p1) --[[ Line: 116 ]]
+	getTTIBaseName = function(p1)
 		-- upvalues: config (copy)
 		return config[p1].baseName
 	end,
-	getTTIPage = function(p1) --[[ Line: 120 ]]
+	getTTIPage = function(p1)
 		-- upvalues: config (copy)
 		return config[p1].page
 	end,
-	getTTICategory = function(): string --[[ Line: 124 ]]
+	getTTICategory = function(): string
 		return "AppChat"
 	end,
-	buildTTIEventName = function(p1, p2, p3): string --[[ Line: 129 ]]
+	buildTTIEventName = function(p1, p2, p3): string
 		-- upvalues: config (copy), ChatPlacementContextModule (copy)
 		return config[p1].baseName .. (if ChatPlacementContextModule.isPlacementInExperience(p2) then "_InExp" else "_UA") .. (if p3 then "_Cold" else "_Warm")
 	end,
-	getIntervalName = function(p1) --[[ Line: 145 ]]
+	getIntervalName = function(p1)
 		-- upvalues: config1 (copy)
 		return config1[p1].name
 	end,
-	getParentTTI = function(p1) --[[ Line: 149 ]]
+	getParentTTI = function(p1)
 		-- upvalues: config1 (copy)
 		return config1[p1].parentTTI
 	end,
-	getIntervalsForTTI = function(ParentTTI) --[[ Line: 154 ]]
+	getIntervalsForTTI = function(ParentTTI)
 		-- upvalues: config1 (copy)
 		local List = {}
 		

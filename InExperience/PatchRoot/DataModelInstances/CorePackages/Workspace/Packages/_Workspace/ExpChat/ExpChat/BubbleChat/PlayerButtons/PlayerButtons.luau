@@ -19,13 +19,13 @@ local PreventMicToggleIfGameConsumedEvent = game:DefineFastFlag("PreventMicToggl
 local PlayerButtons = RoactModule.PureComponent:extend("PlayerButtons")
 PlayerButtons.defaultProps = { LayoutOrder = 1 }
 
-function PlayerButtons.init(p1) --[[ Line: 41 ]]
+function PlayerButtons.init(p1)
 	-- upvalues: FaceAnimatorService (copy), PreventMicToggleIfGameConsumedEvent (copy), GetFFlagExpChatUseVoiceParticipantsStoreFunction (copy), Permissions (copy)
 	p1:setState({
 		cameraEnabled = if FaceAnimatorService then FaceAnimatorService:IsStarted() and FaceAnimatorService.VideoAnimationEnabled else false
 	})
 	
-	function p1.toggleMic(p2, p3) --[[ Line: 49 ]]
+	function p1.toggleMic(p2, p3)
 		-- upvalues: PreventMicToggleIfGameConsumedEvent (upval), p1 (copy), GetFFlagExpChatUseVoiceParticipantsStoreFunction (upval)
 		if not PreventMicToggleIfGameConsumedEvent or not p2 then
 			p1.props.onClickedVoiceIndicator(p1.props.userId, if GetFFlagExpChatUseVoiceParticipantsStoreFunction() then p3 else p1.props.voiceState)
@@ -34,12 +34,12 @@ function PlayerButtons.init(p1) --[[ Line: 41 ]]
 		end
 	end
 	
-	function p1.onVideoButtonPressed() --[[ Line: 61 ]]
+	function p1.onVideoButtonPressed()
 		-- upvalues: p1 (copy), Permissions (upval)
 		if p1.props.hasCameraPermissions then
 			p1:toggleVideo()
 		else
-			local function v19(p2, _) --[[ Line: 64 ]]
+			local function v19(p2, _)
 				-- upvalues: p1 (upval)
 				if p2 then
 					p1:toggleVideo()
@@ -62,12 +62,12 @@ function PlayerButtons.init(p1) --[[ Line: 41 ]]
 		end
 	end
 	
-	function p1.toggleVideo() --[[ Line: 86 ]]
+	function p1.toggleVideo()
 		-- upvalues: p1 (copy)
 		p1.props.onClickedCameraIndicator()
 	end
 	
-	function p1.updateVideo() --[[ Line: 90 ]]
+	function p1.updateVideo()
 		-- upvalues: p1 (copy), FaceAnimatorService (upval)
 		p1:setState({
 			cameraEnabled = FaceAnimatorService.VideoAnimationEnabled
@@ -75,11 +75,11 @@ function PlayerButtons.init(p1) --[[ Line: 41 ]]
 	end
 end
 
-function PlayerButtons.shouldShowCameraIndicator(p1) --[[ Line: 97 ]]
+function PlayerButtons.shouldShowCameraIndicator(p1)
 	return p1.props.isLocalPlayer and p1:getCameraButtonVisibleAtMount()
 end
 
-function PlayerButtons.shouldShowMicOffIndicator(p1): boolean --[[ Line: 101 ]]
+function PlayerButtons.shouldShowMicOffIndicator(p1): boolean
 	-- upvalues: GlobalFlagsModule (copy)
 	if p1.props.isLocalPlayer then
 		local IsMuted: boolean = p1.props.voiceState == "Muted" or p1.props.voiceState == "LOCAL_MUTED"
@@ -90,11 +90,11 @@ function PlayerButtons.shouldShowMicOffIndicator(p1): boolean --[[ Line: 101 ]]
 	end
 end
 
-function PlayerButtons.getCameraButtonVisibleAtMount(p1) --[[ Line: 114 ]]
+function PlayerButtons.getCameraButtonVisibleAtMount(p1)
 	return (not p1.props.isCameraOnlyUser or not p1.props.isCameraOnlyUser()) and (if p1.props.isCamEnabledForUserAndPlace then p1.props.isCamEnabledForUserAndPlace() else false)
 end
 
-function PlayerButtons.render(p1) --[[ Line: 130 ]]
+function PlayerButtons.render(p1)
 	-- upvalues: GlobalFlagsModule (copy), GetFFlagExpChatUseVoiceParticipantsStoreFunction (copy), AvatarChatUISettings (copy), RoactModule (copy), FFlagExpChatUseProximityStore (copy), ReactIsModule (copy), Dictionary (copy), ControlBubbleModule (copy), FaceAnimatorService (copy), EventConnection (copy)
 	local VoiceEnabled = if p1.props.hasMicPermissions then if GlobalFlagsModule.JoinWithoutMicPermissions then p1.props.voiceEnabled else p1.props.hasMicPermissions elseif GlobalFlagsModule.JoinWithoutMicPermissions then p1.props.voiceEnabled else p1.props.voiceEnabled
 	local ShouldShowCameraIndicator = p1:shouldShowCameraIndicator()
@@ -114,7 +114,7 @@ function PlayerButtons.render(p1) --[[ Line: 130 ]]
 		LayoutOrder = p1.props.LayoutOrder,
 		BackgroundTransparency = ChatSettings.BackgroundTransparency,
 		BackgroundColor3 = ChatSettings.BackgroundColor3,
-		Visible = if FFlagExpChatUseProximityStore and ReactIsModule.isBinding(p1.props.Visible) then p1.props.Visible:map(function(p2) --[[ Line: 163 ]]
+		Visible = if FFlagExpChatUseProximityStore and ReactIsModule.isBinding(p1.props.Visible) then p1.props.Visible:map(function(p2)
 			-- upvalues: VoiceEnabled (ref), ShouldShowCameraIndicator (copy)
 			return p2 and VoiceEnabled or ShouldShowCameraIndicator
 		end) else VoiceEnabled or ShouldShowCameraIndicator
@@ -186,7 +186,7 @@ function PlayerButtons.render(p1) --[[ Line: 130 ]]
 	})
 end
 
-local function mapStateToProps(p1, p2) --[[ Line: 246 ]]
+local function mapStateToProps(p1, p2)
 	-- upvalues: GetFFlagExpChatEnableVoiceReverseNudgeModule (copy)
 	local ReverseNudgeToxicUser = false
 	

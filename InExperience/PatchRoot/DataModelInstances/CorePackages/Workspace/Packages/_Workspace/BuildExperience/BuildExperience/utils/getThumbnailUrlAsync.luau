@@ -6,16 +6,16 @@ local FetchFunction = HttpClientModule.fetch
 local AsPromiseFunction = HttpClientModule.asPromise
 local Text = require(Parent.Http).Url.THUMBNAILS_URL .. "v1/batch"
 
-return function(AssetId, p1) --[[ Line: 27 | Named "getThumbnailUrlAsync" ]]
+return function(AssetId, p1)
 	-- upvalues: Debug (copy), PromiseModule (copy), FetchFunction (copy), Text (copy), AsPromiseFunction (copy)
 	local P1 = p1 or "420x420"
 	Debug.log("info", "thumbnail_url polling", { assetId = AssetId })
 	
-	return PromiseModule.new(function(Callback1, Callback) --[[ Line: 32 ]]
+	return PromiseModule.new(function(Callback1, Callback)
 		-- upvalues: FetchFunction (upval), Text (upval), AssetId (copy), P1 (copy), AsPromiseFunction (upval), Debug (upval)
 		local Count = 0
 		
-		local function poll(p2) --[[ Line: 35 ]]
+		local function poll(p2)
 			-- upvalues: FetchFunction (upval), Text (upval), AssetId (upval), P1 (upval), AsPromiseFunction (upval), Callback (copy), Debug (upval), Callback1 (copy), Count (ref), poll (copy)
 			AsPromiseFunction((FetchFunction({
 				method = "POST",
@@ -29,10 +29,10 @@ return function(AssetId, p1) --[[ Line: 27 | Named "getThumbnailUrlAsync" ]]
 						size = P1
 					}
 				},
-				decode = function(p3) --[[ Line: 48 ]]
+				decode = function(p3)
 					return p3
 				end
-			}))):andThen(function(Result) --[[ Line: 54 ]]
+			}))):andThen(function(Result)
 				-- upvalues: Callback (upval), Debug (upval), AssetId (upval), Callback1 (upval), Count (upval), poll (upval), p2 (copy)
 				local Data = Result and Result.data
 				
@@ -58,7 +58,7 @@ return function(AssetId, p1) --[[ Line: 27 | Named "getThumbnailUrlAsync" ]]
 						
 						return
 					else
-						task.delay(2, function() --[[ Line: 71 ]]
+						task.delay(2, function()
 							-- upvalues: poll (upval), p2 (upval)
 							poll(p2 + 1)
 						end)
@@ -76,13 +76,13 @@ return function(AssetId, p1) --[[ Line: 27 | Named "getThumbnailUrlAsync" ]]
 						
 						return
 					else
-						task.delay(2, function() --[[ Line: 80 ]]
+						task.delay(2, function()
 							-- upvalues: poll (upval), p2 (upval)
 							poll(p2 + 1)
 						end)
 					end
 				end
-			end):catch(function(Err) --[[ Line: 88 ]]
+			end):catch(function(Err)
 				-- upvalues: Callback (upval)
 				Callback(Err)
 			end)

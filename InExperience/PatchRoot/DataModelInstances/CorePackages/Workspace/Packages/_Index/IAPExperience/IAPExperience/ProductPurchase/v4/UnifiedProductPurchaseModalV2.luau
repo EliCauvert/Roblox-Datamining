@@ -28,7 +28,7 @@ local FFlagEnableUnifiedPurchaseFlowForDevSubs = require(Parent.Parent.SharedFla
 local FFlagOffersOnlyAffordableLock = require(Parent.Parent.SharedFlags).FFlagOffersOnlyAffordableLock
 local _ = require(script.Parent.cartPricingResponseLineItem)
 
-local function UnifiedProductPurchaseModalV2(p1) --[[ Line: 99 ]]
+local function UnifiedProductPurchaseModalV2(p1)
 	-- upvalues: UseLocalizationFunction (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), UrlBuilder (copy), UnifiedPurchaseModalTypeEnumModule (copy), UseCartPricingModule (copy), ReactModule (copy), UseFocusNavigationRefsModule (copy), FFlagUnifiedPurchaseAddSkeleton (copy), FFlagOffersOnlyAffordableLock (copy), Checkbox (copy), SubtitleComponentMapModule (copy), CartPricingProductDetailsModule (copy), BuildCartPricingOfferCheckboxesModule (copy), View (copy), ButtonVariant (copy), FoundationModule (copy), Dialog (copy), DialogSize (copy), BlackbirdUpsellBanner (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		Buy = "IAPExperience.PurchasePrompt.Action.Buy",
@@ -58,14 +58,14 @@ local function UnifiedProductPurchaseModalV2(p1) --[[ Line: 99 ]]
 	local PurchaseModalType = p1.purchaseModalType
 	local GetSubscription = if FFlagEnableUnifiedPurchaseFlowForDevSubs and PurchaseModalType == UnifiedPurchaseModalTypeEnumModule.DeveloperSubscription then UseLocalizationResult.GetSubscription elseif PurchaseModalType == UnifiedPurchaseModalTypeEnumModule.MultiItem then UseLocalizationResult.BuyAvatar elseif PurchaseModalType == UnifiedPurchaseModalTypeEnumModule.Experience then UseLocalizationResult.BuyExperience else UseLocalizationResult.BuyItemV2
 	local UseFocusNavigationRefsModuleResult, UseFocusNavigationRefsModuleResult2 = UseFocusNavigationRefsModule(p1.buttons.cancelActivated, p1.onBuyItemButtonMounted)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 154 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult (copy), p1 (copy)
 		if UseStateResult and p1.setPostPurchaseActions then
 			p1.setPostPurchaseActions(UseStateResult)
 		end
 		p1.buttons.buyItemActivated()
 	end, { p1.buttons.buyItemActivated, UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 162 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), p1 (copy)
 		UseStateResult2(p1.postPurchaseActions or {})
 	end, { p1.postPurchaseActions })
@@ -76,7 +76,7 @@ local function UnifiedProductPurchaseModalV2(p1) --[[ Line: 99 ]]
 	local IsPriceAfterOffersDiscountsBelow: boolean = PriceAfterOffersDiscounts ~= nil and PriceAfterOffersDiscounts <= p1.robuxBalanceAmount
 	local IsDisabled1 = IsDisabled or IsRobuxBalanceAmountBelow and (not FFlagOffersOnlyAffordableLock or IsPriceAfterOffersDiscountsBelow)
 	local CountCartPricingOffers: number = if UseCartPricingModuleResult.showCartOfferUi then #UseCartPricingModuleResult.cartPricingOffers else 0
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 190 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseStateResult (copy), ReactModule (upval), Checkbox (upval), CountCartPricingOffers (copy), IsDisabled (copy), UseStateResult2 (copy)
 		local Elements = {}
 		
@@ -87,9 +87,9 @@ local function UnifiedProductPurchaseModalV2(p1) --[[ Line: 99 ]]
 				label = value.label,
 				isChecked = value.isActionSelected,
 				isDisabled = IsDisabled,
-				onActivated = function() --[[ Line: 199 ]]
+				onActivated = function()
 					-- upvalues: UseStateResult2 (upval), i (copy), value (copy)
-					UseStateResult2(function(Tbl) --[[ Line: 200 ]]
+					UseStateResult2(function(Tbl)
 						-- upvalues: i (upval), value (upval)
 						local Copy = table.clone(Tbl)
 						Copy[i] = {
@@ -188,7 +188,7 @@ local function UnifiedProductPurchaseModalV2(p1) --[[ Line: 99 ]]
 	})
 end
 
-return function(p2) --[[ Line: 337 | Named "UnifiedProductPurchaseModalV2Container" ]]
+return function(p2)
 	-- upvalues: ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), UnifiedProductPurchaseModalV2 (copy)
 	return ReactModule.createElement(LocalizationProvider, {
 		localization = Localization.new(LocalizationService.RobloxLocaleId)

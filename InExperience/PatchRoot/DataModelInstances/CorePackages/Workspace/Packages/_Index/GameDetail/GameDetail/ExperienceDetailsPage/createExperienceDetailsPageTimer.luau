@@ -5,7 +5,7 @@ local EDPTTIConstants = require(Parent.GameDetailTelemetry).EDPTTIConstants
 local EDPTTIEVENTNAME = EDPTTIConstants.EDP_TTI_EVENT_NAME
 local FIRSTMEDIARESOLVED = EDPTTIConstants.EDP_MILESTONE.FIRST_MEDIA_RESOLVED
 
-return function(p1, Metadata) --[[ Line: 20 | Named "createExperienceDetailsPageTimer" ]]
+return function(p1, Metadata)
 	-- upvalues: SduiSurfaceLoadTimeTracker (copy), EDPTTIEVENTNAME (copy), TimeToInteractiveTracker (copy), FIRSTMEDIARESOLVED (copy)
 	local LoadTimerWithSurfaceLoadTime = SduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(p1, {
 		manualSurfaceReady = true,
@@ -20,12 +20,12 @@ return function(p1, Metadata) --[[ Line: 20 | Named "createExperienceDetailsPage
 	local v1 = nil
 	local TrackSurfaceReadyFunction = LoadTimerWithSurfaceLoadTime.trackSurfaceReady
 	
-	local function _() --[[ Line: 38 | Named "finishSurfaceReady" ]]
+	local function _()
 		-- upvalues: TrackSurfaceReadyFunction (copy), v1 (ref)
 		TrackSurfaceReadyFunction(v1)
 	end
 	
-	local function markPlayButtonReady() --[[ Line: 61 ]]
+	local function markPlayButtonReady()
 		-- upvalues: Flag2 (ref), Flag1 (ref), TrackSurfaceReadyFunction (copy), v1 (ref)
 		if Flag2 then return end
 		Flag2 = true
@@ -35,7 +35,7 @@ return function(p1, Metadata) --[[ Line: 20 | Named "createExperienceDetailsPage
 		end
 	end
 	
-	function LoadTimerWithSurfaceLoadTime.trackSurfaceReady(p2) --[[ Line: 42 ]]
+	function LoadTimerWithSurfaceLoadTime.trackSurfaceReady(p2)
 		-- upvalues: Flag (ref), TimeToInteractiveTracker (upval), EDPTTIEVENTNAME (upval), FIRSTMEDIARESOLVED (upval), Flag1 (ref), v1 (ref), Flag2 (ref), TrackSurfaceReadyFunction (copy)
 		if not Flag then
 			Flag = true

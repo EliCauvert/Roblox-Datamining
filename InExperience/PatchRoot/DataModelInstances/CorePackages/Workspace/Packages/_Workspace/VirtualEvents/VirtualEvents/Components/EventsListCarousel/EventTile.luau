@@ -32,9 +32,9 @@ local GetFFlagIsSquadEnabledFunction = require(Parent.SharedFlags).GetFFlagIsSqu
 local FFlagLuaAppSduiEventDetailsEnabled = require(Parent.SharedFlags).FFlagLuaAppSduiEventDetailsEnabled
 local FFlagLuaAppGameViewTileBackgroundColorOverride = require(Parent.SharedFlags).FFlagLuaAppGameViewTileBackgroundColorOverride
 
-local function v23() --[[ Line: 65 ]] end
+local function v23() end
 
-return function(p1) --[[ Line: 69 ]]
+return function(p1)
 	-- upvalues: UseDesignTokensFunction (copy), UseTextSizeOffsetFunction (copy), GetVirtualEventDatesModule (copy), UseMemoFunction (copy), FooterCornerButtonStyle (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UsePlayButtonStateFunction (copy), PlayButtonStates (copy), GetFFlagIsSquadEnabledFunction (copy), UseLocalizationFunction (copy), UseCallbackFunction (copy), ReactModule (copy), UseEffectFunction (copy), FFlagLuaAppSduiEventDetailsEnabled (copy), FormatDateLocalizedModule (copy), NotificationModalsManagerModule (copy), UseStateFunction (copy), FetchEventThumbnailModule (copy), ImpressionsTagUtility (copy), GetEventCtaButtonStateModule (copy), FocusNavigationEventNameEnum (copy), v23 (copy), GameTileView (copy), FFlagLuaAppGameViewTileBackgroundColorOverride (copy), GridTileTextFooter (copy), GameTileThumbnailBadges (copy), EventWideFooterButtonModule (copy), HoldDetector (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local UseTextSizeOffsetResult = UseTextSizeOffsetFunction()
@@ -42,7 +42,7 @@ return function(p1) --[[ Line: 69 ]]
 	local VirtualEventDatesModule = GetVirtualEventDatesModule(Event)
 	local IsUnixTimestampBelow = VirtualEventDatesModule.startDate.UnixTimestamp <= DateTime.now().UnixTimestamp
 	local IsGoing = Event.userRsvpStatus == "going"
-	local UseMemoResult = UseMemoFunction(function() --[[ Line: 77 ]]
+	local UseMemoResult = UseMemoFunction(function()
 		-- upvalues: IsUnixTimestampBelow (copy), FooterCornerButtonStyle (upval), IsGoing (copy)
 		return if IsUnixTimestampBelow then FooterCornerButtonStyle.Play elseif IsGoing then FooterCornerButtonStyle.Following else FooterCornerButtonStyle.Follow
 	end, { IsUnixTimestampBelow, IsGoing })
@@ -54,7 +54,7 @@ return function(p1) --[[ Line: 69 ]]
 		DateAtTime = "Feature.VirtualEvents.Label.DateAtTime",
 		ToastText = "Feature.VirtualEvents.Label.ReminderSetForEventTime"
 	})
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 98 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: IsPlayButtonStateMatch (copy), IsUnixTimestampBelow (copy), p1 (copy), Event (copy)
 		if not IsPlayButtonStateMatch then return end
 		if IsUnixTimestampBelow then
@@ -72,7 +72,7 @@ return function(p1) --[[ Line: 69 ]]
 		Event, IsPlayButtonStateMatch
 	})
 	local UseRefResult = ReactModule.useRef(Event.userRsvpStatus)
-	UseEffectFunction(function() --[[ Line: 120 ]]
+	UseEffectFunction(function()
 		-- upvalues: FFlagLuaAppSduiEventDetailsEnabled (upval), p1 (copy), UseRefResult (copy), Event (copy), FormatDateLocalizedModule (upval), UseLocalizationResult (copy), VirtualEventDatesModule (copy), NotificationModalsManagerModule (upval)
 		if (not FFlagLuaAppSduiEventDetailsEnabled or not p1.suppressRsvpReminderToastBecauseEventDetailsFocused) and UseRefResult.current and UseRefResult.current ~= "going" and Event.userRsvpStatus == "going" then
 			NotificationModalsManagerModule.SetUIBloxToast({
@@ -90,34 +90,34 @@ return function(p1) --[[ Line: 69 ]]
 		if FFlagLuaAppSduiEventDetailsEnabled then p1.suppressRsvpReminderToastBecauseEventDetailsFocused else nil
 	})
 	local UseStateResult, UseStateResult2 = UseStateFunction(nil)
-	UseEffectFunction(function() --[[ Line: 154 ]]
+	UseEffectFunction(function()
 		-- upvalues: FetchEventThumbnailModule (upval), UseRoactServiceResult (copy), Event (copy), p1 (copy), UseStateResult2 (copy)
 		local Flag = true
-		FetchEventThumbnailModule(UseRoactServiceResult, Event.id, p1.DefaultThumbnail):andThen(function(Result) --[[ Line: 156 ]]
+		FetchEventThumbnailModule(UseRoactServiceResult, Event.id, p1.DefaultThumbnail):andThen(function(Result)
 			-- upvalues: Flag (ref), UseStateResult2 (upval)
 			if Flag then
 				UseStateResult2(Result)
 			end
 		end)
 		
-		return function() --[[ Line: 161 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = false
 		end
 	end, { Event.id, p1.DefaultThumbnail })
 	local UseRefResult1 = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 167 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ImpressionsTagUtility (upval), UseRefResult1 (copy), p1 (copy)
 		ImpressionsTagUtility.AddTag(UseRefResult1, p1.impressionsTag, p1.layoutOrder)
 		
-		return function() --[[ Line: 169 ]]
+		return function()
 			-- upvalues: ImpressionsTagUtility (upval), UseRefResult1 (upval), p1 (upval)
 			ImpressionsTagUtility.RemoveTag(UseRefResult1, p1.impressionsTag, p1.layoutOrder)
 		end
 	end, { UseRefResult1, p1.impressionsTag, p1.layoutOrder })
 	local UseRefResult2 = ReactModule.useRef(nil)
 	local UseRefResult3 = ReactModule.useRef(false)
-	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 178 ]]
+	local UseResult = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult3 (copy)
 		UseRefResult3.current = Current
 	end, {})
@@ -155,7 +155,7 @@ return function(p1) --[[ Line: 69 ]]
 			backgroundStyle = if FFlagLuaAppGameViewTileBackgroundColorOverride then p1.backgroundStyle else nil,
 			Size = UDim2.fromScale(1, 1),
 			title = Event.displayTitle or "",
-			onActivated = UseCallbackFunction(function() --[[ Line: 200 ]]
+			onActivated = UseCallbackFunction(function()
 				-- upvalues: UseRefResult3 (copy), p1 (copy)
 				if not UseRefResult3.current then
 					p1.onTileActivated(p1.Event)

@@ -4,7 +4,7 @@ local Dictionary = require(Parent.llama).Dictionary
 local Actions = ExpChatShared.Actions
 
 return require(Parent.Rodux).createReducer({}, {
-	[require(Actions.PlayerAdded).name] = function(p1, p2) --[[ Line: 19 ]]
+	[require(Actions.PlayerAdded).name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
 		return Dictionary.join(p1, {
 			[p2.userId] = {
@@ -14,7 +14,7 @@ return require(Parent.Rodux).createReducer({}, {
 			}
 		})
 	end,
-	[require(Actions.PlayerRemoved).name] = function(p1, p2) --[[ Line: 29 ]]
+	[require(Actions.PlayerRemoved).name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
 		return Dictionary.removeKey(p1, p2.userId)
 	end

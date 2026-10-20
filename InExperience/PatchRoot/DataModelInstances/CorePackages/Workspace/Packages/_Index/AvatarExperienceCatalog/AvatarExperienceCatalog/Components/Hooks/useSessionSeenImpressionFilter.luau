@@ -3,9 +3,9 @@ local ReactModule = require(Parent.React)
 local SeenImpressionsStore = require(Parent.AvatarExperienceAnalytics).Store.SeenImpressionsStore
 local Category = SeenImpressionsStore.Category
 
-return function(p1) --[[ Line: 33 | Named "useSessionSeenImpressionFilter" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), SeenImpressionsStore (copy), Category (copy)
-	return ReactModule.useCallback(function(Text): boolean --[[ Line: 34 ]]
+	return ReactModule.useCallback(function(Text): boolean
 		-- upvalues: p1 (copy), SeenImpressionsStore (upval), Category (upval)
 		local Text1 = "CatalogSort_" .. p1 .. "_" .. Text
 		

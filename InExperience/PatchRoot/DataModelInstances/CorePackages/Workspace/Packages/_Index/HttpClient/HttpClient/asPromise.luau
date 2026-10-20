@@ -5,16 +5,16 @@ local _ = require(script.Parent.types)
 local FFlagHttpClientRetryExtensionsModule = require(script.Parent.Flags.FFlagHttpClientRetryExtensions)
 local Effects = {}
 
-return function(p1) --[[ Line: 17 | Named "asPromise" ]]
+return function(p1)
 	-- upvalues: PromiseModule (copy), Effects (copy), FFlagHttpClientRetryExtensionsModule (copy), SignalsModule (copy)
 	local t = {}
 	
-	return PromiseModule.new(function(Callback1, Callback2, Callback: (any) -> ()) --[[ Line: 19 ]]
+	return PromiseModule.new(function(Callback1, Callback2, Callback: (any) -> ())
 		-- upvalues: Effects (upval), t (copy), FFlagHttpClientRetryExtensionsModule (upval), p1 (copy), SignalsModule (upval)
 		local Flag = false
 		local Flag1 = false
 		
-		local function _() --[[ Line: 23 | Named "cleanupEffect" ]]
+		local function _()
 			-- upvalues: Flag1 (ref), Effects (upval), t (upval), FFlagHttpClientRetryExtensionsModule (upval), p1 (upval)
 			if Flag1 then return end
 			Flag1 = true
@@ -29,7 +29,7 @@ return function(p1) --[[ Line: 17 | Named "asPromise" ]]
 			end
 		end
 		
-		local function settle(StateResult) --[[ Line: 39 ]]
+		local function settle(StateResult)
 			-- upvalues: Flag (ref), Flag1 (ref), Effects (upval), t (upval), FFlagHttpClientRetryExtensionsModule (upval), p1 (upval), Callback1 (copy), Callback2 (copy)
 			if Flag then return end
 			Flag = true
@@ -74,7 +74,7 @@ return function(p1) --[[ Line: 17 | Named "asPromise" ]]
 			
 			return
 		end
-		local Effect: () -> () = SignalsModule.createEffect(function(p2) --[[ Line: 62 ]]
+		local Effect: () -> () = SignalsModule.createEffect(function(p2)
 			-- upvalues: p1 (upval), settle (copy)
 			local StateResult = p1.state(p2)
 			
@@ -90,7 +90,7 @@ return function(p1) --[[ Line: 17 | Named "asPromise" ]]
 		else
 			Effects[t] = Effect
 		end
-		Callback(function() --[[ Line: 75 ]]
+		Callback(function()
 			-- upvalues: Flag (ref), Flag1 (ref), Effects (upval), t (upval), FFlagHttpClientRetryExtensionsModule (upval), p1 (upval)
 			if Flag then return end
 			Flag = true

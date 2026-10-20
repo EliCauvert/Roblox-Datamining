@@ -7,22 +7,22 @@ return require(Parent.IXPUtils).defineIXPTest({
 	name = "AvatarExperience.UA.MarketplaceView.AvatarsTab",
 	recordExposure = false,
 	layer = require(Parent.ExperimentLayers).AppUserLayers.AvatarExperienceUAMarketplaceView,
-	getIsUserInExperiment = function(p1): boolean --[[ Line: 27 ]]
+	getIsUserInExperiment = function(p1): boolean
 		return p1.IsAvatarsTabEnabled ~= nil
 	end,
-	getDependentFlagsEnabled = function(): boolean --[[ Line: 31 ]]
+	getDependentFlagsEnabled = function(): boolean
 		return true
 	end,
-	getEnabledFlag = function() --[[ Line: 35 ]]
+	getEnabledFlag = function()
 		-- upvalues: FFlagAXAvatarsTabIXP (copy)
 		return FFlagAXAvatarsTabIXP
 	end,
-	getEnabledForAllFlag = function() --[[ Line: 39 ]]
+	getEnabledForAllFlag = function()
 		-- upvalues: FFlagAXAvatarsTabIXPEnabledForAll (copy)
 		return FFlagAXAvatarsTabIXPEnabledForAll
 	end,
 	variables = {
-		EnabledForUser = function(p1, p2) --[[ Line: 44 ]]
+		EnabledForUser = function(p1, p2)
 			return p2 or (p1.IsAvatarsTabEnabled or false)
 		end
 	}

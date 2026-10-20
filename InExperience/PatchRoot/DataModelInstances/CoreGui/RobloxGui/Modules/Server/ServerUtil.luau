@@ -1,6 +1,6 @@
 ﻿local ServerCoreScriptSourceCode = game:DefineFastFlag("ServerCoreScriptSourceCode", false)
 local ServerUtil = {
-	getFFlagServerCoreScriptSourceCode = function() --[[ Line: 6 ]]
+	getFFlagServerCoreScriptSourceCode = function()
 		-- upvalues: ServerCoreScriptSourceCode (copy)
 		return ServerCoreScriptSourceCode
 	end
@@ -10,7 +10,7 @@ if ServerCoreScriptSourceCode then
 	local InsertService = game:GetService("InsertService")
 	local Modules = game:GetService("CoreGui"):WaitForChild("RobloxGui", 1e999).Modules
 	
-	local function getRelativePathArray(Modules, p1) --[[ Line: 15 ]]
+	local function getRelativePathArray(Modules, p1)
 		local List = {}
 		while p1 ~= Modules do
 			if p1 == nil then
@@ -22,7 +22,7 @@ if ServerCoreScriptSourceCode then
 		return List
 	end
 	
-	function ServerUtil.getSourceForServerScript(p2) --[[ Line: 27 ]]
+	function ServerUtil.getSourceForServerScript(p2)
 		-- upvalues: Modules (copy), getRelativePathArray (copy)
 		if p2.Source ~= "" then
 			return p2.Source
@@ -44,11 +44,11 @@ if ServerCoreScriptSourceCode then
 		return Child.Source
 	end
 	
-	local function _(): boolean --[[ Line: 52 | Named "isByteCodeMode" ]]
+	local function _(): boolean
 		return script.Source == ""
 	end
 	
-	function ServerUtil.initSourceCodeFolder() --[[ Line: 56 ]]
+	function ServerUtil.initSourceCodeFolder()
 		-- upvalues: InsertService (copy), Modules (copy)
 		if script.Source == "" then
 			local ServerCoreScriptsRbxm = InsertService:LoadLocalAsset("rbxasset://models/ServerCoreScripts.rbxm")

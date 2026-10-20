@@ -1,6 +1,6 @@
 ﻿local ConstantsModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Constants)
 
-return function(p1) --[[ Line: 5 | Named "getEquippedLayeredMakeupAssets" ]]
+return function(p1)
 	-- upvalues: ConstantsModule (copy)
 	if p1 == nil then
 		return {}

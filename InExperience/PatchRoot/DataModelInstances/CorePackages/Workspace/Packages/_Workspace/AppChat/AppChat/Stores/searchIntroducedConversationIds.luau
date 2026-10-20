@@ -1,19 +1,19 @@
 ﻿local t = {}
 
 return {
-	add = function(Key) --[[ Line: 19 ]]
+	add = function(Key)
 		-- upvalues: t (ref)
 		t[Key] = true
 	end,
-	remove = function(Key) --[[ Line: 23 ]]
+	remove = function(Key)
 		-- upvalues: t (ref)
 		t[Key] = nil
 	end,
-	has = function(p1): boolean --[[ Line: 27 ]]
+	has = function(p1): boolean
 		-- upvalues: t (ref)
 		return t[p1] == true
 	end,
-	clear = function() --[[ Line: 31 ]]
+	clear = function()
 		-- upvalues: t (ref)
 		t = {}
 	end

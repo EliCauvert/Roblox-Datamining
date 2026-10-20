@@ -22,7 +22,7 @@ local FFlagFriendsEmptyStateIllustrationThemingModule = require(FriendsLanding.F
 local EmptyResultsView = Roact.PureComponent:extend("EmptyResultsView")
 EmptyResultsView.defaultProps = { layoutOrder = 0, pageLoadingTimeReport = nil }
 
-local function _(p1) --[[ Line: 46 | Named "loadFoundationCloudAsset" ]]
+local function _(p1)
 	-- upvalues: PreloadAssetFunction (copy), Assets (copy)
 	PreloadAssetFunction(p1)
 	local Asset = Assets[p1]
@@ -30,14 +30,14 @@ local function _(p1) --[[ Line: 46 | Named "loadFoundationCloudAsset" ]]
 	return Asset.assetId, Asset.size
 end
 
-function EmptyResultsView.render(p1) --[[ Line: 52 ]]
+function EmptyResultsView.render(p1)
 	-- upvalues: WithStyleFunction (copy), WithLocalizationFunction (copy), TextKeysModule (copy), Roact (copy), ConstantsModule (copy), MigrateEmptyResultsViewToFoundation (copy), Image (copy), FFlagFriendsEmptyStateIllustrationThemingModule (copy), ImageSetLabel (copy), Images (copy), AppFonts (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 53 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: WithLocalizationFunction (upval), TextKeysModule (upval), Roact (upval), ConstantsModule (upval), p1 (copy), MigrateEmptyResultsViewToFoundation (upval), Image (upval), FFlagFriendsEmptyStateIllustrationThemingModule (upval), ImageSetLabel (upval), Images (upval), AppFonts (upval)
 		return WithLocalizationFunction({
 			noResultsText = "CommonUI.Messages.Response.NoResults",
 			addFriendsBtn = TextKeysModule.ADD_FRIENDS_BTN
-		})(function(p3) --[[ Line: 57 ]]
+		})(function(p3)
 			-- upvalues: Roact (upval), ConstantsModule (upval), p1 (upval), MigrateEmptyResultsViewToFoundation (upval), Image (upval), FFlagFriendsEmptyStateIllustrationThemingModule (upval), ImageSetLabel (upval), Images (upval), p2 (copy), AppFonts (upval)
 			return Roact.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -88,7 +88,7 @@ function EmptyResultsView.render(p1) --[[ Line: 52 ]]
 	end)
 end
 
-local function EmptyResultsViewContainer(p1) --[[ Line: 111 ]]
+local function EmptyResultsViewContainer(p1)
 	-- upvalues: PreloadAssetFunction (copy), Assets (copy), UseTokensFunction (copy), Roact (copy), EmptyResultsView (copy), CryoModule (copy)
 	PreloadAssetFunction("pictograms/collaborators")
 	local PictogramsCollaborators = Assets["pictograms/collaborators"]

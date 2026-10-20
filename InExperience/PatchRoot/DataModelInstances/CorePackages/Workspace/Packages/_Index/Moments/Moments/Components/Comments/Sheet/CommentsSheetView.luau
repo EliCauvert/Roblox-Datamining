@@ -16,30 +16,30 @@ local SheetShimModule = require(Moments.Components.SheetShim)
 local CommentsSheetSnapPointsModule = require(script.Parent.CommentsSheetSnapPoints)
 local FFlagMomentsCommentsSheetFocusNavigationModule = require(Moments.Flags.FFlagMomentsCommentsSheetFocusNavigation)
 
-local function sizeContentForList(p1) --[[ Line: 38 ]]
+local function sizeContentForList(p1)
 	if p1 ~= nil then
 		p1.AutomaticSize = Enum.AutomaticSize.None
 	end
 end
 
-local function sizeContentToFit(p1) --[[ Line: 44 ]]
+local function sizeContentToFit(p1)
 	if p1 ~= nil then
 		p1.AutomaticSize = Enum.AutomaticSize.Y
 	end
 end
 
-local function useTopSnapPointReporter(Callback) --[[ Line: 52 ]]
+local function useTopSnapPointReporter(Callback)
 	-- upvalues: ReactModule (copy), CommentsSheetSnapPointsModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	
-	return ReactModule.useCallback(function(Object) --[[ Line: 54 ]]
+	return ReactModule.useCallback(function(Object)
 		-- upvalues: UseRefResult (copy), CommentsSheetSnapPointsModule (upval), Callback (copy)
 		if UseRefResult.current ~= nil then
 			UseRefResult.current:Disconnect()
 			UseRefResult.current = nil
 		end
 		if Object ~= nil then
-			UseRefResult.current = Object:GetPropertyChangedSignal("ScrollingEnabled"):Connect(function() --[[ Line: 60 ]]
+			UseRefResult.current = Object:GetPropertyChangedSignal("ScrollingEnabled"):Connect(function()
 				-- upvalues: Object (copy), CommentsSheetSnapPointsModule (upval), Callback (upval)
 				if Object.ScrollingEnabled then
 					local CountCommentsSheetSnapPointsModule = #CommentsSheetSnapPointsModule
@@ -50,7 +50,7 @@ local function useTopSnapPointReporter(Callback) --[[ Line: 52 ]]
 	end, { Callback })
 end
 
-return function(p1) --[[ Line: 70 | Named "CommentsSheetView" ]]
+return function(p1)
 	-- upvalues: useTopSnapPointReporter (copy), UseComposedRefFunction (copy), sizeContentForList (copy), sizeContentToFit (copy), FFlagMomentsCommentsSheetFocusNavigationModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), ReactModule (copy), SheetShimModule (copy), DialogSize (copy), CommentsSheetSnapPointsModule (copy), Sheet (copy), Text (copy), View (copy), CommentsPanelBodyContainerModule (copy), CommentsComposerContainerModule (copy)
 	return ReactModule.createElement(SheetShimModule.Root, {
 		hideBackdrop = true,

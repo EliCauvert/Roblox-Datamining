@@ -1,4 +1,4 @@
-﻿return function(List) --[[ Line: 4 | Named "getAQEmotePartData" ]]
+﻿return function(List)
 	if not List then
 		return nil
 	end

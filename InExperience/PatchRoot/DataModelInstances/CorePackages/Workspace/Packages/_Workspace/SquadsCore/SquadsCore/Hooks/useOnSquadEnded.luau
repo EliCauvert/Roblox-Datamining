@@ -4,11 +4,11 @@ local UseCurrentSquadIdModule = require(SquadsCore.Hooks.useCurrentSquadId)
 local ReactModule = require(Parent.React)
 local UsePreviousFunction = require(Parent.RoactUtils).Hooks.usePrevious
 
-return function(Callback) --[[ Line: 9 ]]
+return function(Callback)
 	-- upvalues: UseCurrentSquadIdModule (copy), UsePreviousFunction (copy), ReactModule (copy)
 	local UseCurrentSquadIdModuleResult = UseCurrentSquadIdModule() or ""
 	local UsePreviousResult = UsePreviousFunction(UseCurrentSquadIdModuleResult) or ""
-	ReactModule.useEffect(function() --[[ Line: 12 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseCurrentSquadIdModuleResult (copy), UsePreviousResult (copy), Callback (copy)
 		if UseCurrentSquadIdModuleResult ~= UsePreviousResult and UsePreviousResult ~= "" and Callback then
 			Callback()

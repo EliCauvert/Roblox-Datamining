@@ -10,15 +10,15 @@ local config = {
 	failed = true
 }
 
-local function _(p1): boolean --[[ Line: 95 | Named "isNonemptyString" ]]
+local function _(p1): boolean
 	return type(p1) == "string" and p1 ~= ""
 end
 
-local _ = function(p1: number): boolean --[[ Line: 99 | Named "isCount" ]]
+local _ = function(p1: number): boolean
 	return type(p1) == "number" and (p1 >= 0 and p1 < 1e999) and p1 % 1 == 0
 end
 
-local function isRecord(p1, SessionId, ToolCallId): boolean --[[ Line: 103 ]]
+local function isRecord(p1, SessionId, ToolCallId): boolean
 	-- upvalues: config (copy)
 	if type(p1) ~= "table" then
 		return false
@@ -120,7 +120,7 @@ local function isRecord(p1, SessionId, ToolCallId): boolean --[[ Line: 103 ]]
 	return Flag
 end
 
-local _ = function(Tbl) --[[ Line: 134 | Named "readRecord" ]]
+local _ = function(Tbl)
 	local Copy = table.clone(Tbl)
 	
 	if Copy.phase == "active" then
@@ -129,7 +129,7 @@ local _ = function(Tbl) --[[ Line: 134 | Named "readRecord" ]]
 	return Copy
 end
 
-local function isDurableAttempt(p1): boolean --[[ Line: 143 ]]
+local function isDurableAttempt(p1): boolean
 	local UserId: number = p1.userId
 	local IsUserIdMatch: boolean = type(UserId) == "number" and (UserId >= 0 and (UserId < 1e999 and UserId % 1 == 0))
 	
@@ -144,11 +144,11 @@ local function isDurableAttempt(p1): boolean --[[ Line: 143 ]]
 	return IsUserIdMatch
 end
 
-local function sameAttempt(Record, p1): boolean --[[ Line: 153 ]]
+local function sameAttempt(Record, p1): boolean
 	return Record.userId == p1.userId and (Record.universeId == p1.universeId and (Record.idempotencyKey == p1.idempotencyKey and (Record.campaignOption == p1.campaignOption and (Record.fundingType == p1.fundingType and (Record.durationDays == p1.durationDays and (Record.displayAmountRobux == p1.displayAmountRobux and Record.createdAtMs == p1.createdAtMs)))))) and Record.attemptStartedAtMs == p1.attemptStartedAtMs
 end
 
-local function readNamespace(p1) --[[ Line: 165 ]]
+local function readNamespace(p1)
 	local AdCampaignCards = p1.adCampaignCards
 	
 	if AdCampaignCards == nil then
@@ -160,9 +160,9 @@ local function readNamespace(p1) --[[ Line: 165 ]]
 	end
 end
 
-return function(p1) --[[ Line: 176 | Named "createAdCampaignCardStorage" ]]
+return function(p1)
 	-- upvalues: sameAttempt (copy), readNamespace (copy), isRecord (copy), FFlagBuildAgentAdCampaignCardModule (copy), isDurableAttempt (copy)
-	local function _() --[[ Line: 177 | Named "readData" ]]
+	local function _()
 		-- upvalues: p1 (copy)
 		local Success, Result, Result3 = pcall(p1.readData)
 		
@@ -172,7 +172,7 @@ return function(p1) --[[ Line: 176 | Named "createAdCampaignCardStorage" ]]
 		return Success, Result3
 	end
 	
-	local _ = function(p2): boolean --[[ Line: 181 | Named "writeData" ]]
+	local _ = function(p2): boolean
 		-- upvalues: p1 (copy)
 		local Success, Result = pcall(p1.writeData, p2)
 		
@@ -184,7 +184,7 @@ return function(p1) --[[ Line: 176 | Named "createAdCampaignCardStorage" ]]
 	local Tbl1 = {}
 	local Tbl2 = {}
 	
-	local function beforeUnsentPreflight(SessionId, ToolCallId, p2) --[[ Line: 194 ]]
+	local function beforeUnsentPreflight(SessionId, ToolCallId, p2)
 		-- upvalues: Tbl2 (copy), sameAttempt (upval)
 		local Entry = if Tbl2[SessionId] == nil then nil else Tbl2[SessionId][ToolCallId]
 		
@@ -198,7 +198,7 @@ return function(p1) --[[ Line: 176 | Named "createAdCampaignCardStorage" ]]
 		return p2, false
 	end
 	
-	local _ = function() --[[ Line: 211 | Named "load" ]]
+	local _ = function()
 		-- upvalues: v1 (ref), p1 (copy), readNamespace (upval)
 		if v1 ~= nil then
 			return v1, nil
@@ -218,7 +218,7 @@ return function(p1) --[[ Line: 176 | Named "createAdCampaignCardStorage" ]]
 		end
 	end
 	
-	local function get(SessionId, ToolCallId) --[[ Line: 224 ]]
+	local function get(SessionId, ToolCallId)
 		-- upvalues: Tbl (copy), Tbl1 (copy), v1 (ref), p1 (copy), readNamespace (upval), isRecord (upval), FFlagBuildAgentAdCampaignCardModule (upval), isDurableAttempt (upval), beforeUnsentPreflight (copy)
 		local Entry = if Tbl[SessionId] == nil then nil else Tbl[SessionId][ToolCallId]
 		
@@ -317,7 +317,7 @@ return function(p1) --[[ Line: 176 | Named "createAdCampaignCardStorage" ]]
 		end
 	end
 	
-	local function retryWrites(): boolean --[[ Line: 303 ]]
+	local function retryWrites(): boolean
 		-- upvalues: Tbl (copy), p1 (copy), readNamespace (upval), isRecord (upval), FFlagBuildAgentAdCampaignCardModule (upval), sameAttempt (upval), Tbl1 (copy), v1 (ref)
 		if next(Tbl) == nil then
 			return true
@@ -401,7 +401,7 @@ return function(p1) --[[ Line: 176 | Named "createAdCampaignCardStorage" ]]
 		end
 	end
 	
-	local function retain(Tbl1) --[[ Line: 382 ]]
+	local function retain(Tbl1)
 		-- upvalues: isRecord (upval), Tbl (copy), retryWrites (copy)
 		if isRecord(Tbl1, Tbl1.sessionId, Tbl1.toolCallId) then
 			local Entry = Tbl[Tbl1.sessionId] or {}
@@ -416,7 +416,7 @@ return function(p1) --[[ Line: 176 | Named "createAdCampaignCardStorage" ]]
 	
 	return {
 		get = get,
-		list = function(p2) --[[ Line: 262 ]]
+		list = function(p2)
 			-- upvalues: v1 (ref), p1 (copy), readNamespace (upval), Tbl1 (copy), Tbl (copy), isRecord (upval), FFlagBuildAgentAdCampaignCardModule (upval), isDurableAttempt (upval), beforeUnsentPreflight (copy)
 			if type(p2) ~= "string" or p2 == "" then
 				return {
@@ -477,7 +477,7 @@ return function(p1) --[[ Line: 176 | Named "createAdCampaignCardStorage" ]]
 					end
 				end
 			end
-			table.sort(List, function(A, B): boolean --[[ Line: 294 ]]
+			table.sort(List, function(A, B): boolean
 				return if A.createdAtMs == B.createdAtMs then A.toolCallId < B.toolCallId else A.createdAtMs < B.createdAtMs
 			end)
 			
@@ -487,7 +487,7 @@ return function(p1) --[[ Line: 176 | Named "createAdCampaignCardStorage" ]]
 				errorCode = ErrorCode
 			}
 		end,
-		confirm = function(p3) --[[ Line: 393 ]]
+		confirm = function(p3)
 			-- upvalues: isRecord (upval), get (copy), FFlagBuildAgentAdCampaignCardModule (upval), isDurableAttempt (upval), retain (copy), sameAttempt (upval), retryWrites (copy)
 			if not isRecord(p3, p3.sessionId, p3.toolCallId) or p3.phase ~= "created" then
 				return false, false
@@ -512,7 +512,7 @@ return function(p1) --[[ Line: 176 | Named "createAdCampaignCardStorage" ]]
 				return false, false
 			end
 		end,
-		saveAttempt = function(Tbl, IdempotencyKey): boolean --[[ Line: 424 ]]
+		saveAttempt = function(Tbl, IdempotencyKey): boolean
 			-- upvalues: isRecord (upval), isDurableAttempt (upval), get (copy), p1 (copy), readNamespace (upval), beforeUnsentPreflight (copy), sameAttempt (upval), v1 (ref), Tbl2 (copy)
 			if not isRecord(Tbl, Tbl.sessionId, Tbl.toolCallId) or not isDurableAttempt(Tbl) or Tbl.campaignId ~= nil then
 				return false
@@ -589,12 +589,12 @@ return function(p1) --[[ Line: 176 | Named "createAdCampaignCardStorage" ]]
 				return false
 			end
 		end,
-		hasPendingWrites = function(): boolean --[[ Line: 585 ]]
+		hasPendingWrites = function(): boolean
 			-- upvalues: Tbl (copy)
 			return next(Tbl) ~= nil
 		end,
 		retryWrites = retryWrites,
-		prune = function(p3) --[[ Line: 511 ]]
+		prune = function(p3)
 			-- upvalues: Tbl (copy), p1 (copy), readNamespace (upval), isRecord (upval), v1 (ref)
 			if next(Tbl) == nil then
 				local NowMs: number = p3.nowMs
@@ -641,7 +641,7 @@ return function(p1) --[[ Line: 176 | Named "createAdCampaignCardStorage" ]]
 							if Count <= p3.maxRecords or #List == 0 then
 								return true, false
 							end
-							table.sort(List, function(A, B): boolean --[[ Line: 554 ]]
+							table.sort(List, function(A, B): boolean
 								return if A.updatedAtMs == B.updatedAtMs then if A.sessionId == B.sessionId then A.toolCallId < B.toolCallId else A.sessionId < B.sessionId else A.updatedAtMs < B.updatedAtMs
 							end)
 							local Copy = table.clone(Namespace)
@@ -673,7 +673,7 @@ return function(p1) --[[ Line: 176 | Named "createAdCampaignCardStorage" ]]
 			end
 			return false, false
 		end,
-		reset = function() --[[ Line: 590 ]]
+		reset = function()
 			-- upvalues: v1 (ref), Tbl (copy), Tbl1 (copy), Tbl2 (copy)
 			v1 = nil
 			table.clear(Tbl)

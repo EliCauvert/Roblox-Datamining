@@ -22,7 +22,7 @@ local config = {
 	size = require(Foundation.Enums.InputSize).Medium
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 48 | Named "OverflowScrollContainer" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), UsePreferredInputModule (copy), UseClippingRectModule (copy), ReactOtterModule (copy), OtterModule (copy), ControlStateModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ScrollViewModule (copy), FlagsModule (copy), StateLayerAffordanceModule (copy), VisibilityModule (copy), ScrimModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
@@ -37,7 +37,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 48 |
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseClippingRectModuleResult, UseClippingRectModuleResult2 = UseClippingRectModule(UseRefResult)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
-	local UseMotorResult = ReactOtterModule.useMotor(0, function(X) --[[ Line: 67 ]]
+	local UseMotorResult = ReactOtterModule.useMotor(0, function(X)
 		-- upvalues: UseRefResult (copy)
 		local Current = UseRefResult.current
 		
@@ -47,7 +47,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 48 |
 			return
 		end
 	end)
-	local UseResult = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 75 ]]
+	local UseResult = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: UseBindingResult2 (copy), UseStateResult2_1 (copy), UseStateResult2 (copy)
 		UseBindingResult2(ScrollFrame.AbsoluteWindowSize.Y)
 		
@@ -58,7 +58,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 48 |
 			return
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(p2: number) --[[ Line: 89 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2: number)
 		-- upvalues: UseRefResult (copy), UseMotorResult (copy), OtterModule (upval), UseTokensModuleResult (copy)
 		local Current = UseRefResult.current
 		
@@ -78,27 +78,27 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 48 |
 			startingValue = Current.CanvasPosition.X
 		}))
 	end, { UseTokensModuleResult })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 114 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseResult1 (copy)
 		UseResult1(-1)
 	end, { UseResult1 })
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 118 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseResult1 (copy)
 		UseResult1(1)
 	end, { UseResult1 })
-	local UseResult4 = ReactModule.useCallback(function(Hover) --[[ Line: 122 ]]
+	local UseResult4 = ReactModule.useCallback(function(Hover)
 		-- upvalues: UseStateResult2_2 (copy), ControlStateModule (upval)
 		UseStateResult2_2(Hover == ControlStateModule.Hover or Hover == ControlStateModule.Pressed)
 	end, {})
-	local UseResult5 = ReactModule.useCallback(function(Hover) --[[ Line: 126 ]]
+	local UseResult5 = ReactModule.useCallback(function(Hover)
 		-- upvalues: UseStateResult2_3 (copy), ControlStateModule (upval)
 		UseStateResult2_3(Hover == ControlStateModule.Hover or Hover == ControlStateModule.Pressed)
 	end, {})
-	local UseResult6 = ReactModule.useCallback(function(Hover) --[[ Line: 130 ]]
+	local UseResult6 = ReactModule.useCallback(function(Hover)
 		-- upvalues: UseStateResult2_4 (copy), ControlStateModule (upval)
 		UseStateResult2_4(Hover == ControlStateModule.Hover or Hover == ControlStateModule.Pressed)
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 134 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseResult (copy)
 		if UseRefResult.current then
 			UseResult(UseRefResult.current)
@@ -129,10 +129,10 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 48 |
 		ScrimLayer = ReactModule.createElement(ViewModule, {
 			tag = "row flex-between",
 			ZIndex = 2,
-			Position = UseClippingRectModuleResult:map(function(p2): UDim2 --[[ Line: 176 ]]
+			Position = UseClippingRectModuleResult:map(function(p2): UDim2
 				return UDim2.fromOffset(p2.Min.X, 0)
 			end),
-			Size = UseClippingRectModuleResult:map(function(p2): UDim2 --[[ Line: 181 ]]
+			Size = UseClippingRectModuleResult:map(function(p2): UDim2
 				-- upvalues: WithDefaultsModuleResult (copy)
 				return UDim2.new(0, p2.Max.X - p2.Min.X, 1, -WithDefaultsModuleResult.scrimBottomInset)
 			end),

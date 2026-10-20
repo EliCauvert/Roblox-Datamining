@@ -15,7 +15,7 @@ local FFlagLuaAppSponsoredGamePreviewVideo = require(Parent.SharedFlags).FFlagLu
 local FFlagLuaAppSduiPassSortSubId = require(Parent.SharedFlags).FFlagLuaAppSduiPassSortSubId
 local t = {}
 
-return function(Entry, p1, p2, p3, p4, p5, p6, Callback: (any, any, any, any, any) -> (), p7, Name) --[[ Line: 29 | Named "sendLegacyGameImpressionsForSdui" ]]
+return function(Entry, p1, p2, p3, p4, p5, p6, Callback: (any, any, any, any, any) -> (), p7, Name)
 	-- upvalues: FFlagSduiFixSearchTelemetry (copy), t (copy), CryoModule (copy), SduiParsers (copy), FFlagLuaAppSponsoredGamePreviewVideo (copy), SduiBuilder (copy), FFlagLuaAppSduiPassSortSubId (copy), FindAnalyticsFieldInAncestorsFunction (copy), AppPage (copy), SendGameImpressions (copy), SduiParseHelpers (copy), SduiErrors (copy)
 	local JoinResults = {}
 	local Count = if FFlagSduiFixSearchTelemetry then 0 else nil
@@ -67,7 +67,7 @@ return function(Entry, p1, p2, p3, p4, p5, p6, Callback: (any, any, any, any, an
 			
 			return
 		end
-		SendGameImpressions.sendFromTopicContents(p6.dependencies.eventIngest, p6.dependencies.appAnalytics, Entry, JoinResults, p6.appPage, tostring(p4.collectionId), p4.collectionPosition, p5, nil, nil, p7, v1 or false, ItemComponentType, nil, nil, function(p8) --[[ Line: 154 ]]
+		SendGameImpressions.sendFromTopicContents(p6.dependencies.eventIngest, p6.dependencies.appAnalytics, Entry, JoinResults, p6.appPage, tostring(p4.collectionId), p4.collectionPosition, p5, nil, nil, p7, v1 or false, ItemComponentType, nil, nil, function(p8)
 			-- upvalues: p3 (copy), SduiParseHelpers (upval), p6 (copy), SduiErrors (upval), ItemComponentType (copy), Name (copy)
 			p6.dependencies.logger.reportError(SduiErrors.SduiErrorType.FailedToLogGameImpressions, {
 				componentType = ItemComponentType,

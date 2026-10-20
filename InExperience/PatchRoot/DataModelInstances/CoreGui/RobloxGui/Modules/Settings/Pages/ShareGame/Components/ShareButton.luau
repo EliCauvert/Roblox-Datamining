@@ -6,11 +6,11 @@ local _Color3 = Color3.fromRGB(222, 225, 227)
 local _Color3_1 = Color3.fromRGB(255, 255, 255)
 local ShareButton = RoactModule.PureComponent:extend("ShareButton")
 
-function ShareButton.init(p1) --[[ Line: 14 ]]
+function ShareButton.init(p1)
 	p1.state = { isHovering = false }
 end
 
-function ShareButton.render(p1) --[[ Line: 20 ]]
+function ShareButton.render(p1)
 	-- upvalues: RoactModule (copy), _Color3 (copy), _Color3_1 (copy), ThemeModule (copy), TextSizeResult (copy), Semibold (copy)
 	local OnShareFunction = p1.props.onShare
 	local IsEnabled = p1.props.isEnabled
@@ -24,17 +24,17 @@ function ShareButton.render(p1) --[[ Line: 20 ]]
 		AutoButtonColor = false,
 		BackgroundColor3 = if p1.state.isHovering and IsEnabled then _Color3 else _Color3_1,
 		Transparency = if IsEnabled then 0 else 0.5,
-		[RoactModule.Event.Activated] = function() --[[ Line: 48 ]]
+		[RoactModule.Event.Activated] = function()
 			-- upvalues: IsEnabled (copy), OnShareFunction (copy)
 			if IsEnabled then
 				OnShareFunction()
 			end
 		end,
-		[RoactModule.Event.InputBegan] = function() --[[ Line: 53 ]]
+		[RoactModule.Event.InputBegan] = function()
 			-- upvalues: p1 (copy)
 			p1:setState({ isHovering = true })
 		end,
-		[RoactModule.Event.InputEnded] = function() --[[ Line: 56 ]]
+		[RoactModule.Event.InputEnded] = function()
 			-- upvalues: p1 (copy)
 			p1:setState({ isHovering = false })
 		end

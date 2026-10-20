@@ -11,7 +11,7 @@ local InspectAndBuyContextModule = require(Parent.Components.InspectAndBuyContex
 local PlayerNameLabel = RoactModule.PureComponent:extend("PlayerNameLabel")
 local Verified = require(CorePackages.Workspace.Packages.VerifiedBadges).emoji.verified
 
-function PlayerNameLabel.render(p1) --[[ Line: 21 ]]
+function PlayerNameLabel.render(p1)
 	-- upvalues: Players (copy), UserLibModule (copy), RobloxTranslatorModule (copy), Verified (copy), RoactModule (copy), InspectAndBuyContextModule (copy), ColorsModule (copy), AppFonts (copy)
 	local Locale = p1.props.locale
 	local View = p1.props.view
@@ -23,7 +23,7 @@ function PlayerNameLabel.render(p1) --[[ Line: 21 ]]
 	InGameInspectMenuLabelVerifiedAvatar = if PlayerName == "" then "" elseif IsPlayerVerified then RobloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Label.VerifiedAvatar", Locale, { PLAYER_NAME = PlayerName, VERIFIED_BADGE = Verified }) else RobloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Label.Avatar", Locale, { PLAYER_NAME = PlayerName })
 	
 	return RoactModule.createElement(InspectAndBuyContextModule.Consumer, {
-		render = function(p2) --[[ Line: 43 ]]
+		render = function(p2)
 			-- upvalues: View (copy), RoactModule (upval), ColorsModule (upval), InGameInspectMenuLabelVerifiedAvatar (ref), AppFonts (upval)
 			local v1 = p2[View]
 			
@@ -44,7 +44,7 @@ function PlayerNameLabel.render(p1) --[[ Line: 21 ]]
 	})
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 66 ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	return {
 		view = p1.view,
 		playerName = p1.playerName,

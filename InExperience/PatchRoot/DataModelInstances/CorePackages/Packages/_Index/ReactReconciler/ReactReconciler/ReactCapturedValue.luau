@@ -2,7 +2,7 @@
 local GetStackByFiberInDevAndProdFunction = require(script.Parent.ReactFiberComponentStack).getStackByFiberInDevAndProd
 
 return {
-	createCapturedValue = function(Value, Source) --[[ Line: 26 ]]
+	createCapturedValue = function(Value, Source)
 		-- upvalues: GetStackByFiberInDevAndProdFunction (copy)
 		return {
 			value = Value,

@@ -1,7 +1,7 @@
 ﻿local SignalsModule = require(script:FindFirstAncestor("BuildExperience").Parent.Signals)
 local _ = require(script.Parent.ChatCardEmphasisPositionContext)
 
-local function outranks(p1, p2): boolean --[[ Line: 21 ]]
+local function outranks(p1, p2): boolean
 	if p1.priority == p2.priority then
 		local Position = p1.position
 		local Position1 = p2.position
@@ -12,12 +12,12 @@ local function outranks(p1, p2): boolean --[[ Line: 21 ]]
 	end
 end
 
-return function() --[[ Line: 38 | Named "createChatCardEmphasisStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy), outranks (copy)
 	local Signal, Signal2 = SignalsModule.createSignal({})
 	
 	return {
-		register = function(p1, Priority, MessageOrder, p2) --[[ Line: 53 ]]
+		register = function(p1, Priority, MessageOrder, p2)
 			-- upvalues: Signal2 (copy)
 			local config = {
 				priority = Priority,
@@ -28,7 +28,7 @@ return function() --[[ Line: 38 | Named "createChatCardEmphasisStore" ]]
 					messageOrder = MessageOrder
 				}
 			}
-			Signal2(function(Tbl) --[[ Line: 59 ]]
+			Signal2(function(Tbl)
 				-- upvalues: p1 (copy), config (copy)
 				local Copy = table.clone(Tbl)
 				Copy[p1] = config
@@ -36,9 +36,9 @@ return function() --[[ Line: 38 | Named "createChatCardEmphasisStore" ]]
 				return Copy
 			end)
 		end,
-		unregister = function(p1) --[[ Line: 66 ]]
+		unregister = function(p1)
 			-- upvalues: Signal2 (copy)
-			Signal2(function(Tbl) --[[ Line: 67 ]]
+			Signal2(function(Tbl)
 				-- upvalues: p1 (copy)
 				if Tbl[p1] == nil then
 					return Tbl
@@ -50,7 +50,7 @@ return function() --[[ Line: 38 | Named "createChatCardEmphasisStore" ]]
 				end
 			end)
 		end,
-		getEmphasizedKey = SignalsModule.createComputed(function(p1) --[[ Line: 41 ]]
+		getEmphasizedKey = SignalsModule.createComputed(function(p1)
 			-- upvalues: Signal (copy), outranks (upval)
 			local v1 = nil
 			local v2 = nil

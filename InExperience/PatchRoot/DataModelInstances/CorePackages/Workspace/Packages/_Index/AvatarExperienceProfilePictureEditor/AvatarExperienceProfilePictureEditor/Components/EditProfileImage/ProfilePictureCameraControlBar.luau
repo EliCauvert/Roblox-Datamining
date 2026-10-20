@@ -7,7 +7,7 @@ local View = FoundationModule.View
 local IconName = FoundationModule.Enums.IconName
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1) --[[ Line: 31 | Named "ProfilePictureCameraControlBar" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), IconName (copy), View (copy), IconOnlyMenuModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UDim2.fromOffset(0, 0))
@@ -35,7 +35,7 @@ return function(p1) --[[ Line: 31 | Named "ProfilePictureCameraControlBar" ]]
 		}, {
 			Menu = ReactModule.createElement(IconOnlyMenuModule, {
 				activeItemId = "",
-				items = ReactModule.useMemo(function() --[[ Line: 38 ]]
+				items = ReactModule.useMemo(function()
 					-- upvalues: IconName (upval), OnZoomIn (copy), OnZoomOut (copy), OnRotateLeft (copy), OnRotateRight (copy)
 					return {
 						{
@@ -69,7 +69,7 @@ return function(p1) --[[ Line: 31 | Named "ProfilePictureCameraControlBar" ]]
 						}
 					}
 				end, { OnZoomIn, OnZoomOut, OnRotateLeft, OnRotateRight }),
-				onAbsoluteSizeChanged = function(Frame: Frame) --[[ Line: 103 ]]
+				onAbsoluteSizeChanged = function(Frame: Frame)
 					-- upvalues: UseBindingResult2 (copy)
 					UseBindingResult2(UDim2.fromOffset(Frame.AbsoluteSize.X, Frame.AbsoluteSize.Y))
 				end

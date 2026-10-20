@@ -4,7 +4,7 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local ConstantsModule = require(AvatarExperienceSlotBasedEditor.Constants)
 
-return function(Frame) --[[ Line: 17 | Named "OutfitDetailsActionBar" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), ConstantsModule (copy)
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "col bg-surface-0",

@@ -3,11 +3,11 @@ local ReactModule = require(Parent.React)
 local Image = require(Parent.Foundation).Image
 local UseCallbackFunction = ReactModule.useCallback
 
-return function(p1) --[[ Line: 25 | Named "StickerPickerItem" ]]
+return function(p1)
 	-- upvalues: UseCallbackFunction (copy), ReactModule (copy), Image (copy)
 	local StickerURI = p1.stickerURI
 	local OnStickerSelectedFunction = p1.onStickerSelected
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 29 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: OnStickerSelectedFunction (copy), StickerURI (copy)
 		if OnStickerSelectedFunction then
 			OnStickerSelectedFunction(StickerURI)

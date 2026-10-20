@@ -5,20 +5,20 @@ local RODUXKEY = require(UserSearch.Common.Constants).RODUX_KEY
 local GetDeepValueFunction = require(Parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Dictionary.getDeepValue
 local HydrateEmptyIdsHelperFunction = require(Parent.SocialCommon).Utils.hydrateEmptyIdsHelper
 
-return function(Ids) --[[ Line: 14 ]]
+return function(Ids)
 	-- upvalues: GetDeepValueFunction (copy), RODUXKEY (copy), HydrateEmptyIdsHelperFunction (copy), FriendsNetworkingModule (copy)
-	return function(p1) --[[ Line: 15 ]]
+	return function(p1)
 		-- upvalues: GetDeepValueFunction (upval), RODUXKEY (upval), HydrateEmptyIdsHelperFunction (upval), Ids (copy), FriendsNetworkingModule (upval)
 		local State = p1:getState() or {}
 		local DeepValue = GetDeepValueFunction(State, string.format("%s.Friends.friendshipStatus", RODUXKEY)) or {}
 		
 		return HydrateEmptyIdsHelperFunction({
 			ids = Ids,
-			selector = function(p2) --[[ Line: 21 ]]
+			selector = function(p2)
 				-- upvalues: DeepValue (copy)
 				return DeepValue[p2]
 			end,
-			hydrate = function(TargetUserIds) --[[ Line: 24 ]]
+			hydrate = function(TargetUserIds)
 				-- upvalues: p1 (copy), FriendsNetworkingModule (upval), State (copy)
 				return p1:dispatch(FriendsNetworkingModule.GetFriendshipStatuses.API({
 					currentUserId = State.LocalUserId,

@@ -6,7 +6,7 @@ local ChatSearchResultTypeModule = require(AppChat.Analytics.Enums.ChatSearchRes
 local _ = require(AppChat.Hooks.useConversationSearch)
 local UseTelemetryModule = require(AppChat.Telemetry.useTelemetry)
 
-return function(p1, p2) --[[ Line: 22 | Named "useChatSearchResultsTelemetry" ]]
+return function(p1, p2)
 	-- upvalues: UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), ReactModule (copy), ChatLandingTelemetryEventsModule (copy), ChatSearchResultTypeModule (copy)
 	local UseTelemetryModuleResult = UseTelemetryModule(ChatLandingTelemetryLayerModule.Context)
 	local UseRefResult = ReactModule.useRef(UseTelemetryModuleResult.emit)
@@ -22,14 +22,14 @@ return function(p1, p2) --[[ Line: 22 | Named "useChatSearchResultsTelemetry" ]]
 			startedAt = if DebouncedQuery == "" then 0 else os.clock()
 		}
 	end
-	ReactModule.useLayoutEffect(function() --[[ Line: 40 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseRefResult3 (copy), UseRefResult2 (copy)
 		UseRefResult3.current = UseRefResult2.current
 	end, { DebouncedQuery })
 	local CountItems = if p2 == nil then #p1.items else p2
 	local HasError = p1.hasError
 	local NoIsAwaitingResults: boolean = DebouncedQuery ~= "" and (p1.isActive and not p1.isAwaitingResults)
-	ReactModule.useEffect(function() --[[ Line: 50 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: NoIsAwaitingResults (copy), DebouncedQuery (copy), UseRefResult1 (copy), UseRefResult (copy), ChatLandingTelemetryEventsModule (upval), CountItems (copy), HasError (copy), ChatSearchResultTypeModule (upval), UseRefResult3 (copy)
 		if NoIsAwaitingResults then
 			if UseRefResult1.current ~= DebouncedQuery then

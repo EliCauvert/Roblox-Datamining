@@ -5,10 +5,10 @@ local UseChatPlacementContextFunction = require(AppChat.Contexts.ChatPlacementCo
 local FFlagAppChatOnConsoles = require(Parent.SharedFlags).FFlagAppChatOnConsoles
 local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 
-return function(List) --[[ Line: 21 ]]
+return function(List)
 	-- upvalues: UseChatPlacementContextFunction (copy), FFlagAppChatOnConsoles (copy), UseAppPolicyFunction (copy), IsPageAvailableModule (copy)
 	local ChatPlacement = UseChatPlacementContextFunction().chatPlacement
-	local UseAppPolicyResult = if FFlagAppChatOnConsoles then UseAppPolicyFunction(function(p1) --[[ Line: 24 ]]
+	local UseAppPolicyResult = if FFlagAppChatOnConsoles then UseAppPolicyFunction(function(p1)
 		return p1.getWebViewSupport()
 	end) else nil
 	local t = {}

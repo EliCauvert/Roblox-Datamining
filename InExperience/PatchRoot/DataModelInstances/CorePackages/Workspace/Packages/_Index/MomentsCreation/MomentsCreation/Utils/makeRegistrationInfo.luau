@@ -2,7 +2,7 @@
 local _ = require(Parent.MomentsTypes)
 local GetFFlagMomentsStickerButtonFunction = require(Parent.MomentsCommon).Flags.GetFFlagMomentsStickerButton
 
-return function(p1, p2, p3) --[[ Line: 38 | Named "makeRegistrationInfo" ]]
+return function(p1, p2, p3)
 	-- upvalues: GetFFlagMomentsStickerButtonFunction (copy)
 	local Edits = p2.edits
 	local List = {}

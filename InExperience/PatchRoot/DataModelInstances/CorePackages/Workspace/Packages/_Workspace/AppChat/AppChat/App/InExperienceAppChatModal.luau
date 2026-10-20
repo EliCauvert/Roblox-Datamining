@@ -13,17 +13,17 @@ local ChatSessionRefCountModule = require(AppChat.Hooks.ChatSessionRefCount)
 local InExperienceAppChatModalModule = {}
 InExperienceAppChatModalModule.__index = InExperienceAppChatModalModule
 
-local function _() --[[ Line: 25 | Named "getFFlagAppChatEnableRootedNavigation" ]]
+local function _()
 	-- upvalues: AppChat (copy)
 	return require(AppChat.Flags.getFFlagAppChatEnableRootedNavigation)()
 end
 
-local _ = function() --[[ Line: 29 | Named "getRootedNavigationStore" ]]
+local _ = function()
 	-- upvalues: AppChat (copy)
 	return require(AppChat.Stores.GetRootedNavigationStore)(false)
 end
 
-local _ = function(p1): boolean --[[ Line: 43 | Named "isSupportedRootedRoute" ]]
+local _ = function(p1): boolean
 	-- upvalues: EnumScreensModule (copy)
 	local Params = p1.params
 	local ConversationId = if Params then Params.conversationId else nil
@@ -31,7 +31,7 @@ local _ = function(p1): boolean --[[ Line: 43 | Named "isSupportedRootedRoute" ]
 	return p1.screen == EnumScreensModule.ChatDetails and (Params ~= nil and (Params.rooted == true and type(ConversationId) == "string" and ConversationId ~= ""))
 end
 
-function InExperienceAppChatModalModule._new() --[[ Line: 94 ]]
+function InExperienceAppChatModalModule._new()
 	-- upvalues: InExperienceAppChatModalModule (copy)
 	local config = {
 		_visible = false,
@@ -53,7 +53,7 @@ function InExperienceAppChatModalModule._new() --[[ Line: 94 ]]
 	return config
 end
 
-function InExperienceAppChatModalModule.initialize(p1, TopMargin, SettingsHub, ViewportUtil, ChatSelector, PlayerListManager) --[[ Line: 115 ]]
+function InExperienceAppChatModalModule.initialize(p1, TopMargin, SettingsHub, ViewportUtil, ChatSelector, PlayerListManager)
 	-- upvalues: Tokens (copy), ColorMode (copy), GetFFlagAppChatInExperienceTabBarAdjustmentModule (copy)
 	if TopMargin then
 		p1.topMargin = TopMargin
@@ -68,7 +68,7 @@ function InExperienceAppChatModalModule.initialize(p1, TopMargin, SettingsHub, V
 	p1.playerListManager = PlayerListManager
 end
 
-function InExperienceAppChatModalModule.setVisible(p1, _visible, EntryPoint) --[[ Line: 139 ]]
+function InExperienceAppChatModalModule.setVisible(p1, _visible, EntryPoint)
 	-- upvalues: AppChat (copy), FFlagExpChatEnableFriendsTab (copy), ChatSessionRefCountModule (copy), CoreGui (copy), GetFFlagAppChatInExperienceTabBarAdjustmentModule (copy), GuiService (copy), FFlagSettingsHubIndependentBackgroundVisibility (copy)
 	if not _visible and require(AppChat.Flags.getFFlagAppChatEnableRootedNavigation)() then
 		require(AppChat.Stores.GetRootedNavigationStore)(false).cancelNavigation()
@@ -116,7 +116,7 @@ function InExperienceAppChatModalModule.setVisible(p1, _visible, EntryPoint) --[
 		ImageButton.Parent = InExperienceAppChatModal
 		
 		if GetFFlagAppChatInExperienceTabBarAdjustmentModule() and p1.viewportUtil then
-			local function v24() --[[ Line: 200 ]]
+			local function v24()
 				-- upvalues: p1 (copy), Padding (copy), GuiService (upval)
 				local GetResult = p1.viewportUtil.screenSize:get()
 				
@@ -157,22 +157,22 @@ function InExperienceAppChatModalModule.setVisible(p1, _visible, EntryPoint) --[
 	end
 end
 
-function InExperienceAppChatModalModule.toggleVisibility(p1) --[[ Line: 251 ]]
+function InExperienceAppChatModalModule.toggleVisibility(p1)
 	if p1.default then
 		p1.default:setVisible(not p1.default._visible)
 	end
 end
 
-function InExperienceAppChatModalModule.getVisible(p1) --[[ Line: 259 ]]
+function InExperienceAppChatModalModule.getVisible(p1)
 	return p1.default._visible
 end
 
-function InExperienceAppChatModalModule.setUnreadCount(p1, UnreadCount) --[[ Line: 264 ]]
+function InExperienceAppChatModalModule.setUnreadCount(p1, UnreadCount)
 	p1.default.unreadCount = UnreadCount
 	p1.default.unreadCountSignal:Fire(UnreadCount)
 end
 
-function InExperienceAppChatModalModule.markInitialUnreadCountReceived(p1, p2) --[[ Line: 272 ]]
+function InExperienceAppChatModalModule.markInitialUnreadCountReceived(p1, p2)
 	if not p1.default.hasReceivedInitialUnreadCount then
 		p1.default.hasReceivedInitialUnreadCount = true
 		p1.default.initialUnreadCountSignal:Fire(p2)
@@ -181,16 +181,16 @@ function InExperienceAppChatModalModule.markInitialUnreadCountReceived(p1, p2) -
 	end
 end
 
-function InExperienceAppChatModalModule.setCurrentSquadId(p1, CurrentSquadId) --[[ Line: 280 ]]
+function InExperienceAppChatModalModule.setCurrentSquadId(p1, CurrentSquadId)
 	p1.default.currentSquadId = CurrentSquadId
 	p1.default.currentSquadIdSignal:Fire(CurrentSquadId)
 end
 
-function InExperienceAppChatModalModule.reserveChatSessionOnClose(p1) --[[ Line: 288 ]]
+function InExperienceAppChatModalModule.reserveChatSessionOnClose(p1)
 	p1._reserveChatSessionOnClose = true
 end
 
-function InExperienceAppChatModalModule.openToScreen(p1, RequestedRoute) --[[ Line: 292 ]]
+function InExperienceAppChatModalModule.openToScreen(p1, RequestedRoute)
 	-- upvalues: AppChat (copy), EnumScreensModule (copy), FFlagExpChatEnableFriendsTab (copy)
 	local RequestedRoute1 = RequestedRoute
 	
@@ -216,7 +216,7 @@ function InExperienceAppChatModalModule.openToScreen(p1, RequestedRoute) --[[ Li
 	p1:setVisible(true, if FFlagExpChatEnableFriendsTab and RequestedRoute1.params then RequestedRoute1.params.entryPoint else nil)
 end
 
-function InExperienceAppChatModalModule.clearRequestedRoute(p1) --[[ Line: 322 ]]
+function InExperienceAppChatModalModule.clearRequestedRoute(p1)
 	p1.requestedRoute = nil
 	p1.requestedRouteSignal:Fire(nil)
 end

@@ -57,7 +57,7 @@ local config = {
 	vi = "vi_vn"
 }
 
-return function(p1, p2, Callback) --[[ Line: 76 ]]
+return function(p1, p2, Callback)
 	-- upvalues: Players (copy), Url (copy), HttpService (copy), UtilityModule (copy), RobloxTranslatorModule (copy), NewResult (copy), UgcLocaleFromGameJoinEnabledEngineFeature (copy), LocalPlayer (copy), RunService (copy), config (copy)
 	local v1 = 1
 	local v2 = 1
@@ -79,7 +79,7 @@ return function(p1, p2, Callback) --[[ Line: 76 ]]
 	local Text3 = Url.GAME_INTERNATIONALIZATION_URL .. string.format("v1/user-localization-settings/universe/%d", game.GameId)
 	local RequestInternalResult2 = HttpService:RequestInternal({ Method = "GET", Url = Text3 })
 	
-	local function _(p3, p4) --[[ Line: 135 | Named "tryGetErrorMessage" ]]
+	local function _(p3, p4)
 		local StatusCode = nil
 		
 		if not p3 or not p4 or not p4.StatusCode then
@@ -98,7 +98,7 @@ return function(p1, p2, Callback) --[[ Line: 76 ]]
 		return StatusCode
 	end
 	
-	local function createSessionDormantLanguageSwitcherRow() --[[ Line: 148 ]]
+	local function createSessionDormantLanguageSwitcherRow()
 		-- upvalues: p1 (copy), UtilityModule (upval), RobloxTranslatorModule (upval), p2 (copy)
 		p1.LanguageSelectorFrame, p1.LanguageSelectorLabel, p1.LanguageSelectorMode = UtilityModule:AddNewRow(p1, RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.SettingLabel"), "DropDown", {
 			RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.Unavailable")
@@ -107,7 +107,7 @@ return function(p1, p2, Callback) --[[ Line: 76 ]]
 		p1.LanguageSelectorFrame.LayoutOrder = p2.LanguageSelectorFrame
 	end
 	
-	local function userExperienceLanguageSettingsCallback(p3, Text: string) --[[ Line: 164 ]]
+	local function userExperienceLanguageSettingsCallback(p3, Text: string)
 		-- upvalues: NewResult (upval), createSessionDormantLanguageSwitcherRow (copy), List (copy), v4 (ref), Locale (ref), List1 (copy), t (copy), Locales (copy), v1 (ref), v2 (ref), p1 (copy), UtilityModule (upval), RobloxTranslatorModule (upval), p2 (copy), UgcLocaleFromGameJoinEnabledEngineFeature (upval), LocalPlayer (upval), Callback (copy), Url (upval), HttpService (upval), Flag (ref), RunService (upval)
 		if p3 then
 			local Enabled = false
@@ -148,7 +148,7 @@ return function(p1, p2, Callback) --[[ Line: 76 ]]
 				end
 			end
 			p1.LanguageSelectorMode.CurrentLocale = p1.LanguageSelectorMode.DropDownFrame.DropDownFrameTextLabel.Text
-			p1.LanguageSelectorMode.IndexChanged:connect(function(p4) --[[ Line: 252 | Named "toggleTranslation" ]]
+			p1.LanguageSelectorMode.IndexChanged:connect(function(p4)
 				-- upvalues: p1 (upval), t (upval), Locale (upval), Locales (upval), List1 (upval), Callback (upval), Url (upval), HttpService (upval), v2 (upval), LocalPlayer (upval), NewResult (upval), Flag (upval), RunService (upval)
 				p1.LanguageSelectorMode:SetInteractable(false)
 				local LocaleId = if p4 == 1 and t[Locale] ~= nil then t[Locale].localeId else t[Locales[List1[p4]]].localeId
@@ -172,7 +172,7 @@ return function(p1, p2, Callback) --[[ Line: 76 ]]
 					})
 				})
 				
-				local function userExperienceLanguageSettingsUpdateCallback(p5, Unauthorized) --[[ Line: 301 ]]
+				local function userExperienceLanguageSettingsUpdateCallback(p5, Unauthorized)
 					-- upvalues: v2 (upval), p4 (copy), LocalPlayer (upval), Locale (upval), Locales (upval), List1 (upval), NewResult (upval), Flag (upval), p1 (upval)
 					if p5 then
 						v2 = p4
@@ -221,7 +221,7 @@ return function(p1, p2, Callback) --[[ Line: 76 ]]
 					
 					return
 				else
-					RequestInternalResult:Start(function(p5, p6) --[[ Line: 345 ]]
+					RequestInternalResult:Start(function(p5, p6)
 						-- upvalues: NewResult (upval), Text (copy), userExperienceLanguageSettingsUpdateCallback (copy)
 						local Flag = false
 						local Unauthorized = if p5 and p6 and p6.StatusCode then if p6.StatusCode == 401 then "Unauthorized" elseif p6.StatusCode < 200 or p6.StatusCode >= 400 then p6.StatusCode else nil else "Connection error"
@@ -248,17 +248,17 @@ return function(p1, p2, Callback) --[[ Line: 76 ]]
 		end
 	end
 	
-	local _ = function(p4, p5) --[[ Line: 374 | Named "experienceSourceLanguageCallback" ]]
+	local _ = function(p4, p5)
 		-- upvalues: RequestInternalResult2 (copy), HttpService (upval), v4 (ref), v3 (copy), Locale (ref), Ids (copy), Locales1 (copy), NewResult (upval), Text3 (copy), userExperienceLanguageSettingsCallback (copy), createSessionDormantLanguageSwitcherRow (copy)
 		if p4 then
-			RequestInternalResult2:Start(function(p6, p7) --[[ Line: 376 ]]
+			RequestInternalResult2:Start(function(p6, p7)
 				-- upvalues: HttpService (upval), v4 (upval), v3 (upval), Locale (upval), Ids (upval), Locales1 (upval), NewResult (upval), Text3 (upval), userExperienceLanguageSettingsCallback (upval)
 				local v5 = false
 				local Unauthorized = if p6 and p7 and p7.StatusCode then if p7.StatusCode == 401 then "Unauthorized" elseif p7.StatusCode < 200 or p7.StatusCode >= 400 then p7.StatusCode else nil else "Connection error"
 				local Text = nil
 				
 				if Unauthorized == nil then
-					v5, Text = pcall(function() --[[ Line: 385 ]]
+					v5, Text = pcall(function()
 						-- upvalues: HttpService (upval), p7 (copy), v4 (upval), v3 (upval), Locale (upval), Ids (upval), Locales1 (upval)
 						local UserUniverseLocalizationSettingValue = HttpService:JSONDecode(p7.Body).userUniverseLocalizationSettingValue
 						
@@ -322,17 +322,17 @@ return function(p1, p2, Callback) --[[ Line: 76 ]]
 		createSessionDormantLanguageSwitcherRow()
 	end
 	
-	local _ = function(p4, p5) --[[ Line: 451 | Named "experienceSupportedLanguagesCallback" ]]
+	local _ = function(p4, p5)
 		-- upvalues: RequestInternalResult (copy), HttpService (upval), Locale (ref), config (upval), NewResult (upval), Text1 (copy), RequestInternalResult2 (copy), v4 (ref), v3 (copy), Ids (copy), Locales1 (copy), Text3 (copy), userExperienceLanguageSettingsCallback (copy), createSessionDormantLanguageSwitcherRow (copy)
 		if p4 then
-			RequestInternalResult:Start(function(p6, p7) --[[ Line: 453 ]]
+			RequestInternalResult:Start(function(p6, p7)
 				-- upvalues: HttpService (upval), Locale (upval), config (upval), NewResult (upval), Text1 (upval), p5 (ref), p4 (copy), RequestInternalResult2 (upval), v4 (upval), v3 (upval), Ids (upval), Locales1 (upval), Text3 (upval), userExperienceLanguageSettingsCallback (upval), createSessionDormantLanguageSwitcherRow (upval)
 				local v5 = false
 				local Unauthorized = if p6 and p7 and p7.StatusCode then if p7.StatusCode == 401 then "Unauthorized" elseif p7.StatusCode < 200 or p7.StatusCode >= 400 then p7.StatusCode else nil else "Connection error"
 				local Text = nil
 				
 				if Unauthorized == nil then
-					v5, Text = pcall(function() --[[ Line: 462 ]]
+					v5, Text = pcall(function()
 						-- upvalues: HttpService (upval), p7 (copy), Locale (upval), config (upval)
 						Locale = config[HttpService:JSONDecode(p7.Body).languageCode]
 					end)
@@ -348,14 +348,14 @@ return function(p1, p2, Callback) --[[ Line: 76 ]]
 				local v6: string = p5
 				
 				if v5 and p4 then
-					RequestInternalResult2:Start(function(p8, p9) --[[ Line: 376 ]]
+					RequestInternalResult2:Start(function(p8, p9)
 						-- upvalues: HttpService (upval), v4 (upval), v3 (upval), Locale (upval), Ids (upval), Locales1 (upval), NewResult (upval), Text3 (upval), userExperienceLanguageSettingsCallback (upval)
 						local v7 = false
 						local Unauthorized = if p8 and p9 and p9.StatusCode then if p9.StatusCode == 401 then "Unauthorized" elseif p9.StatusCode < 200 or p9.StatusCode >= 400 then p9.StatusCode else nil else "Connection error"
 						local Text = nil
 						
 						if Unauthorized == nil then
-							v7, Text = pcall(function() --[[ Line: 385 ]]
+							v7, Text = pcall(function()
 								-- upvalues: HttpService (upval), p9 (copy), v4 (upval), v3 (upval), Locale (upval), Ids (upval), Locales1 (upval)
 								local UserUniverseLocalizationSettingValue = HttpService:JSONDecode(p9.Body).userUniverseLocalizationSettingValue
 								
@@ -429,17 +429,17 @@ return function(p1, p2, Callback) --[[ Line: 76 ]]
 		end
 	end
 	
-	local _ = function(p4, p5) --[[ Line: 493 | Named "localeInformationCallback" ]]
+	local _ = function(p4, p5)
 		-- upvalues: RequestInternalResult1 (copy), HttpService (upval), t (copy), List (copy), NewResult (upval), Text2 (copy), RequestInternalResult (copy), Locale (ref), config (upval), Text1 (copy), RequestInternalResult2 (copy), v4 (ref), v3 (copy), Ids (copy), Locales1 (copy), Text3 (copy), userExperienceLanguageSettingsCallback (copy), createSessionDormantLanguageSwitcherRow (copy)
 		if p4 then
-			RequestInternalResult1:Start(function(p6, p7) --[[ Line: 495 ]]
+			RequestInternalResult1:Start(function(p6, p7)
 				-- upvalues: HttpService (upval), t (upval), List (upval), NewResult (upval), Text2 (upval), p5 (ref), p4 (copy), RequestInternalResult (upval), Locale (upval), config (upval), Text1 (upval), RequestInternalResult2 (upval), v4 (upval), v3 (upval), Ids (upval), Locales1 (upval), Text3 (upval), userExperienceLanguageSettingsCallback (upval), createSessionDormantLanguageSwitcherRow (upval)
 				local v5 = false
 				local Unauthorized = if p6 and p7 and p7.StatusCode then if p7.StatusCode == 401 then "Unauthorized" elseif p7.StatusCode < 200 or p7.StatusCode >= 400 then p7.StatusCode else nil else "Connection error"
 				local Text = nil
 				
 				if Unauthorized == nil then
-					v5, Text = pcall(function() --[[ Line: 503 ]]
+					v5, Text = pcall(function()
 						-- upvalues: HttpService (upval), p7 (copy), t (upval), List (upval)
 						local LanguageCodes = {}
 						
@@ -467,14 +467,14 @@ return function(p1, p2, Callback) --[[ Line: 76 ]]
 				local v7: string = p5
 				
 				if v6 then
-					RequestInternalResult:Start(function(p8, p9) --[[ Line: 453 ]]
+					RequestInternalResult:Start(function(p8, p9)
 						-- upvalues: HttpService (upval), Locale (upval), config (upval), NewResult (upval), Text1 (upval), v7 (ref), v6 (copy), RequestInternalResult2 (upval), v4 (upval), v3 (upval), Ids (upval), Locales1 (upval), Text3 (upval), userExperienceLanguageSettingsCallback (upval), createSessionDormantLanguageSwitcherRow (upval)
 						local v8 = false
 						local Unauthorized = if p8 and p9 and p9.StatusCode then if p9.StatusCode == 401 then "Unauthorized" elseif p9.StatusCode < 200 or p9.StatusCode >= 400 then p9.StatusCode else nil else "Connection error"
 						local Text = nil
 						
 						if Unauthorized == nil then
-							v8, Text = pcall(function() --[[ Line: 462 ]]
+							v8, Text = pcall(function()
 								-- upvalues: HttpService (upval), p9 (copy), Locale (upval), config (upval)
 								Locale = config[HttpService:JSONDecode(p9.Body).languageCode]
 							end)
@@ -490,14 +490,14 @@ return function(p1, p2, Callback) --[[ Line: 76 ]]
 						local v9: string = v7
 						
 						if v8 and v6 then
-							RequestInternalResult2:Start(function(p10, p11) --[[ Line: 376 ]]
+							RequestInternalResult2:Start(function(p10, p11)
 								-- upvalues: HttpService (upval), v4 (upval), v3 (upval), Locale (upval), Ids (upval), Locales1 (upval), NewResult (upval), Text3 (upval), userExperienceLanguageSettingsCallback (upval)
 								local v10 = false
 								local Unauthorized = if p10 and p11 and p11.StatusCode then if p11.StatusCode == 401 then "Unauthorized" elseif p11.StatusCode < 200 or p11.StatusCode >= 400 then p11.StatusCode else nil else "Connection error"
 								local Text = nil
 								
 								if Unauthorized == nil then
-									v10, Text = pcall(function() --[[ Line: 385 ]]
+									v10, Text = pcall(function()
 										-- upvalues: HttpService (upval), p11 (copy), v4 (upval), v3 (upval), Locale (upval), Ids (upval), Locales1 (upval)
 										local UserUniverseLocalizationSettingValue = HttpService:JSONDecode(p11.Body).userUniverseLocalizationSettingValue
 										
@@ -581,14 +581,14 @@ return function(p1, p2, Callback) --[[ Line: 76 ]]
 		end
 	end
 	
-	HttpService:RequestInternal({ Method = "GET", Url = Text }):Start(function(p8, p9) --[[ Line: 542 ]]
+	HttpService:RequestInternal({ Method = "GET", Url = Text }):Start(function(p8, p9)
 		-- upvalues: HttpService (upval), config (upval), Ids (copy), t (copy), Locales1 (copy), Locales (copy), NewResult (upval), Text (copy), RequestInternalResult1 (copy), List (copy), Text2 (copy), RequestInternalResult (copy), Locale (ref), Text1 (copy), RequestInternalResult2 (copy), v4 (ref), v3 (copy), Text3 (copy), userExperienceLanguageSettingsCallback (copy), createSessionDormantLanguageSwitcherRow (copy)
 		local v6 = false
 		local Unauthorized = if p8 and p9 and p9.StatusCode then if p9.StatusCode == 401 then "Unauthorized" elseif p9.StatusCode < 200 or p9.StatusCode >= 400 then p9.StatusCode else nil else "Connection error"
 		local Text4 = nil
 		
 		if Unauthorized == nil then
-			v6, Text4 = pcall(function() --[[ Line: 551 ]]
+			v6, Text4 = pcall(function()
 				-- upvalues: HttpService (upval), p9 (copy), config (upval), Ids (upval), t (upval), Locales1 (upval), Locales (upval)
 				for _, entry in pairs(HttpService:JSONDecode(p9.Body).data) do
 					local LanguageCode = entry.locale.language.languageCode
@@ -622,14 +622,14 @@ return function(p1, p2, Callback) --[[ Line: 76 ]]
 		local Text5: string = Text4
 		
 		if v7 then
-			RequestInternalResult1:Start(function(p10, p11) --[[ Line: 495 ]]
+			RequestInternalResult1:Start(function(p10, p11)
 				-- upvalues: HttpService (upval), t (upval), List (upval), NewResult (upval), Text2 (upval), Text5 (ref), v7 (copy), RequestInternalResult (upval), Locale (upval), config (upval), Text1 (upval), RequestInternalResult2 (upval), v4 (upval), v3 (upval), Ids (upval), Locales1 (upval), Text3 (upval), userExperienceLanguageSettingsCallback (upval), createSessionDormantLanguageSwitcherRow (upval)
 				local v8 = false
 				local Unauthorized = if p10 and p11 and p11.StatusCode then if p11.StatusCode == 401 then "Unauthorized" elseif p11.StatusCode < 200 or p11.StatusCode >= 400 then p11.StatusCode else nil else "Connection error"
 				local Text = nil
 				
 				if Unauthorized == nil then
-					v8, Text = pcall(function() --[[ Line: 503 ]]
+					v8, Text = pcall(function()
 						-- upvalues: HttpService (upval), p11 (copy), t (upval), List (upval)
 						local LanguageCodes = {}
 						
@@ -657,14 +657,14 @@ return function(p1, p2, Callback) --[[ Line: 76 ]]
 				local v10: string = Text5
 				
 				if v9 then
-					RequestInternalResult:Start(function(p12, p13) --[[ Line: 453 ]]
+					RequestInternalResult:Start(function(p12, p13)
 						-- upvalues: HttpService (upval), Locale (upval), config (upval), NewResult (upval), Text1 (upval), v10 (ref), v9 (copy), RequestInternalResult2 (upval), v4 (upval), v3 (upval), Ids (upval), Locales1 (upval), Text3 (upval), userExperienceLanguageSettingsCallback (upval), createSessionDormantLanguageSwitcherRow (upval)
 						local v11 = false
 						local Unauthorized = if p12 and p13 and p13.StatusCode then if p13.StatusCode == 401 then "Unauthorized" elseif p13.StatusCode < 200 or p13.StatusCode >= 400 then p13.StatusCode else nil else "Connection error"
 						local Text = nil
 						
 						if Unauthorized == nil then
-							v11, Text = pcall(function() --[[ Line: 462 ]]
+							v11, Text = pcall(function()
 								-- upvalues: HttpService (upval), p13 (copy), Locale (upval), config (upval)
 								Locale = config[HttpService:JSONDecode(p13.Body).languageCode]
 							end)
@@ -680,14 +680,14 @@ return function(p1, p2, Callback) --[[ Line: 76 ]]
 						local v12: string = v10
 						
 						if v11 and v9 then
-							RequestInternalResult2:Start(function(p14, p15) --[[ Line: 376 ]]
+							RequestInternalResult2:Start(function(p14, p15)
 								-- upvalues: HttpService (upval), v4 (upval), v3 (upval), Locale (upval), Ids (upval), Locales1 (upval), NewResult (upval), Text3 (upval), userExperienceLanguageSettingsCallback (upval)
 								local v13 = false
 								local Unauthorized = if p14 and p15 and p15.StatusCode then if p15.StatusCode == 401 then "Unauthorized" elseif p15.StatusCode < 200 or p15.StatusCode >= 400 then p15.StatusCode else nil else "Connection error"
 								local Text = nil
 								
 								if Unauthorized == nil then
-									v13, Text = pcall(function() --[[ Line: 385 ]]
+									v13, Text = pcall(function()
 										-- upvalues: HttpService (upval), p15 (copy), v4 (upval), v3 (upval), Locale (upval), Ids (upval), Locales1 (upval)
 										local UserUniverseLocalizationSettingValue = HttpService:JSONDecode(p15.Body).userUniverseLocalizationSettingValue
 										

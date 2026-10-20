@@ -1,7 +1,7 @@
 ﻿local _ = require(script:FindFirstAncestor("Markdown").Types)
 local UtilsModule = require(script.Parent.Utils)
 local EmphasisParserModule = {
-	collectDelimiterRun = function(p1, DelimiterInfo, StartIdx: number) --[[ Line: 19 ]]
+	collectDelimiterRun = function(p1, DelimiterInfo, StartIdx: number)
 		-- upvalues: UtilsModule (copy)
 		local Length = DelimiterInfo.length
 		local NewStartIdx = StartIdx + 1
@@ -35,7 +35,7 @@ local EmphasisParserModule = {
 	end
 }
 
-function EmphasisParserModule.processEmphasisRun(p2, NewEndIdx, p3: number) --[[ Line: 61 ]]
+function EmphasisParserModule.processEmphasisRun(p2, NewEndIdx, p3: number)
 	-- upvalues: UtilsModule (copy), EmphasisParserModule (copy)
 	local t = {}
 	local NewEndIdx1: number = NewEndIdx

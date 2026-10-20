@@ -5,22 +5,22 @@ local TypesModule = require(ViewRecycler.Core.Types)
 local Frozen = table.freeze({})
 local Frozen1 = table.freeze({ startItems = 0, endItems = 0 })
 
-local function _(p1, p2): boolean --[[ Line: 28 | Named "sameRange" ]]
+local function _(p1, p2): boolean
 	return p1.firstIndex == p2.firstIndex and p1.lastIndex == p2.lastIndex
 end
 
-local _ = function(p1, p2): boolean --[[ Line: 32 | Named "sameOptions" ]]
+local _ = function(p1, p2): boolean
 	return p1.startItems == p2.startItems and p1.endItems == p2.endItems
 end
 
-return function(p1) --[[ Line: 36 | Named "createDataPrefetchController" ]]
+return function(p1)
 	-- upvalues: DataPrefetchModule (copy), TypesModule (copy), Frozen1 (copy), Frozen (copy)
 	local Flag = false
 	local ItemSequence = nil
 	local ResolveResult = DataPrefetchModule.resolve(p1)
 	local Tbl = {}
 	
-	local function createRequest(Edge, Tbl1) --[[ Line: 42 ]]
+	local function createRequest(Edge, Tbl1)
 		-- upvalues: Tbl (copy), Flag (ref)
 		local config = { range = table.freeze(Tbl1) }
 		Tbl[Edge] = config
@@ -28,14 +28,14 @@ return function(p1) --[[ Line: 36 | Named "createDataPrefetchController" ]]
 		return table.freeze({
 			edge = Edge,
 			range = config.range,
-			isCurrent = function(): boolean --[[ Line: 50 ]]
+			isCurrent = function(): boolean
 				-- upvalues: Flag (upval), Tbl (upval), Edge (copy), config (copy)
 				return not Flag and Tbl[Edge] == config
 			end
 		})
 	end
 	
-	local function desiredRange(Start, ItemCount: number, MountedRange, ResolveResult) --[[ Line: 56 ]]
+	local function desiredRange(Start, ItemCount: number, MountedRange, ResolveResult)
 		-- upvalues: DataPrefetchModule (upval), TypesModule (upval)
 		local StartItems = if Start == DataPrefetchModule.Edge.Start then ResolveResult.startItems else ResolveResult.endItems
 		
@@ -54,7 +54,7 @@ return function(p1) --[[ Line: 36 | Named "createDataPrefetchController" ]]
 		end
 	end
 	
-	local function reconcileEdge(Edge, p2, List) --[[ Line: 78 ]]
+	local function reconcileEdge(Edge, p2, List)
 		-- upvalues: Tbl (copy), createRequest (copy)
 		local Entry = Tbl[Edge]
 		
@@ -76,7 +76,7 @@ return function(p1) --[[ Line: 36 | Named "createDataPrefetchController" ]]
 	end
 	
 	return {
-		reconcile = function(p2) --[[ Line: 93 ]]
+		reconcile = function(p2)
 			-- upvalues: Flag (ref), ItemSequence (ref), ResolveResult (ref), Frozen1 (upval), Tbl (copy), Frozen (upval), DataPrefetchModule (upval), TypesModule (upval), desiredRange (copy), reconcileEdge (copy)
 			assert(not Flag, "DataPrefetchController: cannot reconcile after destroy")
 			local Options = p2.options
@@ -120,7 +120,7 @@ return function(p1) --[[ Line: 36 | Named "createDataPrefetchController" ]]
 				return reconcileEdge(DataPrefetchModule.Edge.End, v2, (reconcileEdge(DataPrefetchModule.Edge.Start, v1, nil))) or Frozen
 			end
 		end,
-		destroy = function() --[[ Line: 130 ]]
+		destroy = function()
 			-- upvalues: Flag (ref), Tbl (copy)
 			if not Flag then
 				Flag = true

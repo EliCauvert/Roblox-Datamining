@@ -23,12 +23,12 @@ local config = {
 }
 local IconsLogoStudiologoSmall = UIBloxModule.App.ImageSet.Images["icons/logo/studiologo_small"]
 
-local function _(p1, p2) --[[ Line: 38 ]]
+local function _(p1, p2)
 	-- upvalues: UserModel (copy)
 	return if p1.presence == UserModel.PresenceType.IN_GAME then p1.lastLocation elseif p1.presence == UserModel.PresenceType.ONLINE then p2.online elseif p1.presence == UserModel.PresenceType.IN_STUDIO then p2.inStudio else "@" .. p1.name
 end
 
-return function(p1) --[[ Line: 59 ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), GetLocalizedStringsFunction (copy), config (copy), UserModel (copy), UseIsRobloxSubscriberFunction (copy), FFlagEnableBlackbirdCheck (copy), ReactModule (copy), Skeleton (copy), Radius (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), FoundationModule (copy), ImageSetLabel (copy), IconsLogoStudiologoSmall (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), OpenTypeSupport (copy)
 	local UseStyleResult = UseStyleFunction()
 	local Theme = UseStyleResult.Theme

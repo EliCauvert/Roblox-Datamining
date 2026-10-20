@@ -7,7 +7,7 @@ local GetAvatarPreviewModule = require(Parent.Thunks.GetAvatarPreview)
 local FFlagAXInspectAndBuyMakeupSupport = require(game:GetService("CorePackages").Workspace.Packages.AvatarExperienceFlags).FFlagAXInspectAndBuyMakeupSupport
 local t = {}
 
-local function getAssetIds(Humanoid: Humanoid) --[[ Line: 19 ]]
+local function getAssetIds(Humanoid: Humanoid)
 	-- upvalues: ConstantsModule (copy), AssetInfoModule (copy), FFlagAXInspectAndBuyMakeupSupport (copy)
 	local FromHumanoidDescriptionResults = {}
 	local Flag = false
@@ -47,9 +47,9 @@ local function getAssetIds(Humanoid: Humanoid) --[[ Line: 19 ]]
 	return FromHumanoidDescriptionResults
 end
 
-return function(Humanoid, p1) --[[ Line: 83 | Named "GetAssetsFromHumanoidDescriptionV2" ]]
+return function(Humanoid, p1)
 	-- upvalues: ThunkModule (copy), t (copy), getAssetIds (copy), GetAvatarPreviewModule (copy), SetEquippedAssetsModule (copy)
-	return ThunkModule.new(script.Name, t, function(p2, _) --[[ Line: 84 ]]
+	return ThunkModule.new(script.Name, t, function(p2, _)
 		-- upvalues: getAssetIds (upval), Humanoid (copy), p1 (copy), GetAvatarPreviewModule (upval), SetEquippedAssetsModule (upval)
 		local AssetIds = getAssetIds(Humanoid)
 		

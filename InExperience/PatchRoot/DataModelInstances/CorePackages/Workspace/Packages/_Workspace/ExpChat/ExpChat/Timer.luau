@@ -2,12 +2,12 @@
 local TimerModule = {}
 TimerModule.__index = TimerModule
 
-function TimerModule.new(GoalTime) --[[ Line: 7 ]]
+function TimerModule.new(GoalTime)
 	-- upvalues: TimerModule (copy)
 	return (setmetatable({ goalTime = GoalTime }, TimerModule))
 end
 
-function TimerModule:start() --[[ Line: 15 ]]
+function TimerModule:start()
 	-- upvalues: PromiseModule (copy)
 	self:stop()
 	self.promise = PromiseModule.delay(self.goalTime)
@@ -15,7 +15,7 @@ function TimerModule:start() --[[ Line: 15 ]]
 	return self.promise
 end
 
-function TimerModule:stop() --[[ Line: 24 ]]
+function TimerModule:stop()
 	if self.promise then
 		self.promise:cancel()
 	end

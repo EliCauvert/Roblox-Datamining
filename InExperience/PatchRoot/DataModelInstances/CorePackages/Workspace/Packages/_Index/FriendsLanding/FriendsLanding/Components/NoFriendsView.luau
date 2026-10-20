@@ -35,7 +35,7 @@ local config = {
 	noFriendsTextLabelKey = TextKeysModule.NO_FRIENDS_TEXT
 }
 
-local function _(p1) --[[ Line: 65 | Named "loadFoundationCloudAsset" ]]
+local function _(p1)
 	-- upvalues: PreloadAssetFunction (copy), Assets (copy)
 	PreloadAssetFunction(p1)
 	local Asset = Assets[p1]
@@ -43,7 +43,7 @@ local function _(p1) --[[ Line: 65 | Named "loadFoundationCloudAsset" ]]
 	return Asset.assetId, Asset.size
 end
 
-return function(p1) --[[ Line: 71 | Named "NoFriendsView" ]]
+return function(p1)
 	-- upvalues: Dash (copy), config (copy), MigrateNoFriendsViewToFoundation (copy), PreloadAssetFunction (copy), Assets (copy), React (copy), UseLocalizationFunction (copy), UseStyleFunction (copy), FFlagFriendsEmptyStateIllustrationThemingModule (copy), UseTokensFunction (copy), Image (copy), ImageSetLabel (copy), Images (copy), Colors (copy), StyledTextLabel (copy), FoundationFontFaceMigration (copy), AppFonts (copy), NormalizeFontFaceFunction (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy)
 	local JoinResult = Dash.join(config, p1 or {})
 	local Collaborators = if MigrateNoFriendsViewToFoundation then "pictograms/collaborators" else nil
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 71 | Named "NoFriendsView" ]]
 		Size = Asset.size
 	end
 	local SizeRatio = if MigrateNoFriendsViewToFoundation then Size / 3 else nil
-	React.useEffect(function() --[[ Line: 84 ]]
+	React.useEffect(function()
 		-- upvalues: JoinResult (copy)
 		if JoinResult.pageLoadingTimeReport then
 			JoinResult.pageLoadingTimeReport()

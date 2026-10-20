@@ -6,7 +6,7 @@ local LuckyRecommendationEnableVariant = game:DefineFastString("LuckyRecommendat
 local FFlagForceEnableLuckyRecommendation = SharedFlagsModule.FFlagForceEnableLuckyRecommendation
 local FFlagEnableLuckyRecommendationExperimentation = SharedFlagsModule.FFlagEnableLuckyRecommendationExperimentation
 
-local function _(p1) --[[ Line: 15 | Named "getIsUserInTreatment" ]]
+local function _(p1)
 	-- upvalues: ExperimentCacheManager (copy), FStringLuckyRecommendationExpLayer (copy)
 	local LayerVariables = ExperimentCacheManager.default:getLayerVariables(FStringLuckyRecommendationExpLayer)
 	
@@ -14,7 +14,7 @@ local function _(p1) --[[ Line: 15 | Named "getIsUserInTreatment" ]]
 end
 
 return {
-	getLuckyRecommendationEnabled = function() --[[ Line: 25 ]]
+	getLuckyRecommendationEnabled = function()
 		-- upvalues: FFlagForceEnableLuckyRecommendation (copy), FFlagEnableLuckyRecommendationExperimentation (copy), LuckyRecommendationEnableVariant (copy), ExperimentCacheManager (copy), FStringLuckyRecommendationExpLayer (copy)
 		local FFlagForceEnableLuckyRecommendation1: boolean = FFlagForceEnableLuckyRecommendation
 		
@@ -32,7 +32,7 @@ return {
 		end
 		return FFlagForceEnableLuckyRecommendation1
 	end,
-	logExposure = function() --[[ Line: 30 ]]
+	logExposure = function()
 		-- upvalues: FFlagForceEnableLuckyRecommendation (copy), FFlagEnableLuckyRecommendationExperimentation (copy), ExperimentCacheManager (copy), FStringLuckyRecommendationExpLayer (copy)
 		if not FFlagForceEnableLuckyRecommendation and FFlagEnableLuckyRecommendationExperimentation and ExperimentCacheManager.default:getLayerVariables(FStringLuckyRecommendationExpLayer) ~= nil then
 			ExperimentCacheManager.default:logLayerExposure(FStringLuckyRecommendationExpLayer)

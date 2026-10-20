@@ -8,11 +8,11 @@ local AppShortcutBarContext = require(Parent.AppShortcutBar).AppShortcutBarConte
 local HoldToPlayLoaderModule = require(HoldToPlay.HoldToPlayLoader)
 local FFlagLuaAppDemoModePlayButtonTelemetry = require(Parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
 
-return function(p1) --[[ Line: 38 | Named "HoldToPlayLauncher" ]]
+return function(p1)
 	-- upvalues: AppShortcutBarContext (copy), ReactModule (copy), ButtonHoldStateEnum (copy), FocusNavigationEventNameEnum (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy), HoldToPlayLoaderModule (copy)
 	local UseDispatchButtonHoldStartedResult = AppShortcutBarContext.useDispatchButtonHoldStarted()
 	local UseDispatchButtonHoldEndedResult = AppShortcutBarContext.useDispatchButtonHoldEnded()
-	ReactModule.useEffect(function() --[[ Line: 42 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), ButtonHoldStateEnum (upval), UseDispatchButtonHoldStartedResult (copy), FocusNavigationEventNameEnum (upval), UseDispatchButtonHoldEndedResult (copy)
 		if p1.holdState == ButtonHoldStateEnum.JUST_PRESSED then
 			UseDispatchButtonHoldStartedResult(FocusNavigationEventNameEnum.HoldToPlay, p1.holdProgress)
@@ -28,7 +28,7 @@ return function(p1) --[[ Line: 38 | Named "HoldToPlayLauncher" ]]
 		UseDispatchButtonHoldStartedResult,
 		UseDispatchButtonHoldEndedResult
 	})
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 51 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy), FFlagLuaAppDemoModePlayButtonTelemetry (upval)
 		p1.reportExperienceLaunched(p1.selectedEntry, p1.referralSource, nil, p1.launchContext, p1.selectedIndex, if FFlagLuaAppDemoModePlayButtonTelemetry then p2 else nil)
 	end, {

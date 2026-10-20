@@ -12,7 +12,7 @@ local config = {
 	[SuggestionType.StartParty] = FoundationModule.Enums.IconName.ThreePeople
 }
 
-return ReactModule.memo(function(Frame) --[[ Line: 44 | Named "SmartSuggestionsChipRow" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: config (copy), ReactModule (copy), View (copy), Divider (copy), ChipGroup (copy), ChipSize (copy), ChipGroupVariant (copy)
 	local Chips = {}
 	
@@ -20,7 +20,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 44 | Named "SmartSuggestionsC
 		Chips[i] = {
 			text = suggestion.display_text,
 			leading = config[suggestion.type],
-			onActivated = function() --[[ Line: 50 ]]
+			onActivated = function()
 				-- upvalues: Frame (copy), suggestion (copy)
 				Frame.onActivated(suggestion)
 			end

@@ -14,7 +14,7 @@ local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 local AccessoryType = FoundationModule.Enums.AccessoryType
 
-return function(Frame) --[[ Line: 35 | Named "PickedUserRow" ]]
+return function(Frame)
 	-- upvalues: UseUserProfileInfoModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseTokensFunction (copy), ReactModule (copy), View (copy), Loading (copy), IconSize (copy), IconButton (copy), IconName (copy), List (copy), AccessoryType (copy)
 	local UseUserProfileInfoModuleResult = UseUserProfileInfoModule(Frame.userId)
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -41,7 +41,7 @@ return function(Frame) --[[ Line: 35 | Named "PickedUserRow" ]]
 			Spinner = ReactModule.createElement(Loading, { size = IconSize.Small })
 		}) else ReactModule.createElement(IconButton, {
 			icon = IconName.TrashCan,
-			onActivated = function() --[[ Line: 65 ]]
+			onActivated = function()
 				-- upvalues: Frame (copy)
 				Frame.onRemove(Frame.userId)
 			end,

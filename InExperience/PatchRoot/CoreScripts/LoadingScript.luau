@@ -7,7 +7,7 @@ if PlaceId <= 0 and Selected > 0 then
 	PlaceId = select(1, ...)
 end
 if game:DefineFastFlag("EnableExperienceGenericChallengeRenderingOnLoadingScript", false) then
-	coroutine.wrap(function() --[[ Line: 23 ]]
+	coroutine.wrap(function()
 		-- upvalues: CorePackages (copy)
 		require(CorePackages.Workspace.Packages.GenericChallenges).Middleware.InitExperienceChallengeInterceptor()
 	end)()

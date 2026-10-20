@@ -4,14 +4,14 @@ local ReactModule = require(Parent1.React)
 local ReactOtterModule = require(Parent1.ReactOtter)
 local _ = require(Parent.Types)
 
-local function _(p1, p2) --[[ Line: 40 | Named "validateNumber" ]]
+local function _(p1, p2)
 	return if type(p1) == "number" then p1 else p2 or 0
 end
 
-return function(Vector) --[[ Line: 49 | Named "useAnimatedValue" ]]
+return function(Vector)
 	-- upvalues: ReactModule (copy), ReactOtterModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function(...) --[[ Line: 52 ]]
+	local UseResult = ReactModule.useCallback(function(...)
 		-- upvalues: UseRefResult (copy)
 		if UseRefResult.current ~= nil then
 			if type(UseRefResult.current) == "function" then
@@ -34,9 +34,9 @@ return function(Vector) --[[ Line: 49 | Named "useAnimatedValue" ]]
 			offset = if type(Offset) == "number" then Offset else 0
 		}, UseResult)
 		
-		return UseAnimatedBindingResult:map(function(p1): UDim --[[ Line: 69 ]]
+		return UseAnimatedBindingResult:map(function(p1): UDim
 			return UDim.new(p1.scale, p1.offset)
-		end), function(p1, p2) --[[ Line: 73 ]]
+		end), function(p1, p2)
 			-- upvalues: UseRefResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
 			if not p1 then return end
 			if typeof(p1) == "UDim" then
@@ -73,9 +73,9 @@ return function(Vector) --[[ Line: 49 | Named "useAnimatedValue" ]]
 			yOffset = if type(Offset2) == "number" then Offset2 else 0
 		}, UseResult)
 		
-		return UseAnimatedBindingResult1:map(function(p1): UDim2 --[[ Line: 110 ]]
+		return UseAnimatedBindingResult1:map(function(p1): UDim2
 			return UDim2.new(p1.xScale, p1.xOffset, p1.yScale, p1.yOffset)
-		end), function(Vector, p1) --[[ Line: 114 ]]
+		end), function(Vector, p1)
 			-- upvalues: UseRefResult (copy), UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval)
 			if not Vector then return end
 			if typeof(Vector) == "UDim2" then
@@ -109,9 +109,9 @@ return function(Vector) --[[ Line: 49 | Named "useAnimatedValue" ]]
 		local Y = Vector.Y
 		local UseAnimatedBindingResult3, UseAnimatedBindingResult2_2 = ReactOtterModule.useAnimatedBinding({ x = X1, y = if type(Y) == "number" then Y else 0 }, UseResult)
 		
-		return UseAnimatedBindingResult3:map(function(Vector): Vector2 --[[ Line: 149 ]]
+		return UseAnimatedBindingResult3:map(function(Vector): Vector2
 			return Vector2.new(Vector.x, Vector.y)
-		end), function(Vector, p1) --[[ Line: 153 ]]
+		end), function(Vector, p1)
 			-- upvalues: UseRefResult (copy), UseAnimatedBindingResult2_2 (copy), ReactOtterModule (upval)
 			if not Vector then return end
 			if typeof(Vector) == "Vector2" then
@@ -141,9 +141,9 @@ return function(Vector) --[[ Line: 49 | Named "useAnimatedValue" ]]
 		local B = Vector.B
 		local UseAnimatedBindingResult4, UseAnimatedBindingResult2_3 = ReactOtterModule.useAnimatedBinding({ r = R1, g = G1, b = if type(B) == "number" then B else 0 }, UseResult)
 		
-		return UseAnimatedBindingResult4:map(function(p1): Color3 --[[ Line: 188 ]]
+		return UseAnimatedBindingResult4:map(function(p1): Color3
 			return Color3.new(p1.r, p1.g, p1.b)
-		end), function(p1, p2) --[[ Line: 192 ]]
+		end), function(p1, p2)
 			-- upvalues: UseRefResult (copy), UseAnimatedBindingResult2_3 (copy), ReactOtterModule (upval)
 			if not p1 then return end
 			if typeof(p1) == "Color3" then
@@ -171,9 +171,9 @@ return function(Vector) --[[ Line: 49 | Named "useAnimatedValue" ]]
 	elseif typeof(Vector) == "number" then
 		local UseAnimatedBindingResult5, UseAnimatedBindingResult2_4 = ReactOtterModule.useAnimatedBinding(if type(Vector) == "number" then Vector else 0, UseResult)
 		
-		return UseAnimatedBindingResult5:map(function(p1) --[[ Line: 224 ]]
+		return UseAnimatedBindingResult5:map(function(p1)
 			return p1
-		end), function(p1, p2) --[[ Line: 228 ]]
+		end), function(p1, p2)
 			-- upvalues: UseRefResult (copy), UseAnimatedBindingResult2_4 (copy), ReactOtterModule (upval)
 			if typeof(p1) == "number" then
 				UseRefResult.current = p2 and p2.onComplete or nil
@@ -188,6 +188,6 @@ return function(Vector) --[[ Line: 49 | Named "useAnimatedValue" ]]
 	else
 		warn("Unsupported type for animated value:", (typeof(Vector)))
 		
-		return ReactModule.createBinding(Vector), function() --[[ Line: 248 ]] end
+		return ReactModule.createBinding(Vector), function() end
 	end
 end

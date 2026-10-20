@@ -4,7 +4,7 @@ MaskedIcon.defaultProps = {
 	icon = "rbxasset://textures/ui/LuaChat/icons/share-game-thumbnail.png"
 }
 
-function MaskedIcon.render(p1) --[[ Line: 13 ]]
+function MaskedIcon.render(p1)
 	-- upvalues: Roact (copy)
 	return Roact.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
 		layout = Roact.createElement("UIListLayout", {

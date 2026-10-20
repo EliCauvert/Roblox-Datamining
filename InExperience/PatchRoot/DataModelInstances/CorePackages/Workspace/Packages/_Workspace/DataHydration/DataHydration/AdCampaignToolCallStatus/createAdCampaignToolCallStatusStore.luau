@@ -5,11 +5,11 @@ local _ = require(DataHydration.DataHydrationTypes)
 local FetchAdCampaignToolCallStatusModule = require(script.Parent.fetchAdCampaignToolCallStatus)
 local _ = require(script.Parent.AdCampaignToolCallStatusStoreTypes)
 
-local function _(p1, Text): string --[[ Line: 21 | Named "cacheKey" ]]
+local function _(p1, Text): string
 	return tostring(p1) .. ":" .. Text
 end
 
-local _ = function(Text: string) --[[ Line: 25 | Named "parseCacheKey" ]]
+local _ = function(Text: string)
 	local FoundAt: number? = string.find(Text, ":", 1, true)
 	assert(FoundAt ~= nil, "Invalid ad campaign tool-call status cache key")
 	local Number: number? = tonumber((string.sub(Text, 1, FoundAt - 1)))
@@ -19,7 +19,7 @@ local _ = function(Text: string) --[[ Line: 25 | Named "parseCacheKey" ]]
 	return Number, Segment
 end
 
-return function(p1) --[[ Line: 34 | Named "createAdCampaignToolCallStatusStore" ]]
+return function(p1)
 	-- upvalues: FetchAdCampaignToolCallStatusModule (copy), CreateDataCacheModule (copy), CreateDataResolverModule (copy)
 	local P2 = p1 or {}
 	local FetchToolCallStatus = P2.fetchToolCallStatus or FetchAdCampaignToolCallStatusModule
@@ -27,7 +27,7 @@ return function(p1) --[[ Line: 34 | Named "createAdCampaignToolCallStatusStore" 
 		supportsMultiGet = false,
 		replaceItems = true,
 		cache = CreateDataCacheModule(P2.ttlSeconds or 300),
-		fetchFn = function(Text: string, _) --[[ Line: 43 ]]
+		fetchFn = function(Text: string, _)
 			-- upvalues: FetchToolCallStatus (copy)
 			local FoundAt: number? = string.find(Text, ":", 1, true)
 			assert(FoundAt ~= nil, "Invalid ad campaign tool-call status cache key")
@@ -40,15 +40,15 @@ return function(p1) --[[ Line: 34 | Named "createAdCampaignToolCallStatusStore" 
 	})
 	
 	return {
-		getToolCallStatus = function(p2, Text) --[[ Line: 53 ]]
+		getToolCallStatus = function(p2, Text)
 			-- upvalues: DataResolverModule (copy)
 			return DataResolverModule.getCachedItem(tostring(p2) .. ":" .. Text)
 		end,
-		fetchToolCallStatus = function(p2, Text) --[[ Line: 56 ]]
+		fetchToolCallStatus = function(p2, Text)
 			-- upvalues: DataResolverModule (copy)
 			return DataResolverModule.fetchItem(tostring(p2) .. ":" .. Text)
 		end,
-		getAndFetchToolCallStatus = function(p2, Text) --[[ Line: 59 ]]
+		getAndFetchToolCallStatus = function(p2, Text)
 			-- upvalues: DataResolverModule (copy)
 			return DataResolverModule.getAndFetchItem(tostring(p2) .. ":" .. Text)
 		end,

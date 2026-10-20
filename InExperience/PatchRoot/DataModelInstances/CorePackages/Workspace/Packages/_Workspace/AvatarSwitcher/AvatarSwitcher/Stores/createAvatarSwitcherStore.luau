@@ -24,7 +24,7 @@ local _ = require(AvatarSwitcher.types)
 local Text = Url.AVATAR_URL .. "v1/avatar-inventory?"
 local Text1 = Url.AVATAR_URL .. "v2/avatar/experience/get-experience-avatar-support"
 
-return function() --[[ Line: 42 | Named "createAvatarSwitcherStore" ]]
+return function()
 	-- upvalues: CreateSignalFunction (copy), CreateComputedFunction (copy), AvatarEditorService (copy), FFlagAvatarSwitcherAccurateAvatarWarning (copy), CryoModule (copy), FFlagAvatarSwitcherUseAvatarInventoryEndpoint (copy), FFlagAXInventoryIncludeUnavailableItems (copy), Text (copy), Url (copy), HttpRbxApiService (copy), HttpService (copy), FFlagAvatarSwitcherCounters (copy), SendAXCounterV2Function (copy), ConstantsModule (copy), InventoryItemAvailability (copy), FFlagAvatarSwitcherExpiredItemsWarning (copy), AvatarSwitcherPcallApplyOutfit (copy), ApplyOutfitModule (copy), Text1 (copy), ExperienceAvatarSupportTypeModule (copy), Players (copy)
 	local Signal, Signal2 = CreateSignalFunction({})
 	local Signal1, Signal2_1 = CreateSignalFunction({})
@@ -35,25 +35,25 @@ return function() --[[ Line: 42 | Named "createAvatarSwitcherStore" ]]
 	local Signal7, Signal2_6 = CreateSignalFunction(nil)
 	local Signal8, Signal2_7 = CreateSignalFunction(nil)
 	local Signal9, Signal2_8 = CreateSignalFunction(nil)
-	local Computed = CreateComputedFunction(function(p1): boolean --[[ Line: 54 ]]
+	local Computed = CreateComputedFunction(function(p1): boolean
 		-- upvalues: Signal3 (copy), Signal (copy)
 		return Signal3(p1) and #Signal(p1) == 0
 	end)
-	local Computed1 = CreateComputedFunction(function(p1) --[[ Line: 58 ]]
+	local Computed1 = CreateComputedFunction(function(p1)
 		-- upvalues: Signal4 (copy), Signal1 (copy)
 		local SignalResult = Signal4(p1)
 		
 		return if SignalResult == nil then nil else Signal1(p1)[SignalResult]
 	end)
 	
-	local function toggleRespawnPrompt(p1) --[[ Line: 67 ]]
+	local function toggleRespawnPrompt(p1)
 		-- upvalues: Signal2_4 (copy)
 		Signal2_4(p1)
 	end
 	
-	local function fetchOutfitDetails(OutfitId) --[[ Line: 71 ]]
+	local function fetchOutfitDetails(OutfitId)
 		-- upvalues: AvatarEditorService (upval), FFlagAvatarSwitcherAccurateAvatarWarning (upval), Signal2_1 (copy), CryoModule (upval)
-		local Success, Result = pcall(function() --[[ Line: 72 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: AvatarEditorService (upval), OutfitId (copy)
 			return AvatarEditorService:GetOutfitDetailsAsync(OutfitId)
 		end)
@@ -80,13 +80,13 @@ return function() --[[ Line: 42 | Named "createAvatarSwitcherStore" ]]
 			rigType = if Result.PlayerAvatarType == "R6" then Enum.HumanoidRigType.R6 else Enum.HumanoidRigType.R15,
 			assetIds = if FFlagAvatarSwitcherAccurateAvatarWarning then List else nil
 		}
-		Signal2_1(function(p1) --[[ Line: 92 ]]
+		Signal2_1(function(p1)
 			-- upvalues: CryoModule (upval), OutfitId (copy), config (copy)
 			return CryoModule.Dictionary.join(p1, { [OutfitId] = config })
 		end)
 	end
 	
-	local function selectOutfit(p1) --[[ Line: 101 ]]
+	local function selectOutfit(p1)
 		-- upvalues: Signal2_3 (copy), FFlagAvatarSwitcherUseAvatarInventoryEndpoint (upval), Computed1 (copy), fetchOutfitDetails (copy)
 		Signal2_3(p1)
 		
@@ -98,14 +98,14 @@ return function() --[[ Line: 42 | Named "createAvatarSwitcherStore" ]]
 	local Pages = nil
 	local Flag = false
 	
-	local function fetchNextOutfitsPage_DEPRECATED() --[[ Line: 118 ]]
+	local function fetchNextOutfitsPage_DEPRECATED()
 		-- upvalues: Flag (ref), Signal3 (copy), Pages (ref), Signal2_2 (copy), AvatarEditorService (upval), Signal2 (copy)
 		if Flag or Signal3(false) then return end
 		Flag = true
 		
 		if Pages then
 			if Pages.IsFinished then return end
-			local Success1, Result1 = pcall(function() --[[ Line: 128 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: Pages (upval)
 				Pages:AdvanceToNextPageAsync()
 			end)
@@ -115,7 +115,7 @@ return function() --[[ Line: 42 | Named "createAvatarSwitcherStore" ]]
 				Signal2_2(true)
 			end
 		else
-			local Success, Result = pcall(function() --[[ Line: 136 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: AvatarEditorService (upval)
 				return AvatarEditorService:GetOutfitsAsync(Enum.OutfitSource.Created, Enum.OutfitType.Avatar)
 			end)
@@ -129,7 +129,7 @@ return function() --[[ Line: 42 | Named "createAvatarSwitcherStore" ]]
 		end
 		if Pages then
 			local CurrentPage = Pages:GetCurrentPage()
-			Signal2(function(Tbl) --[[ Line: 149 ]]
+			Signal2(function(Tbl)
 				-- upvalues: CurrentPage (copy)
 				local Copy = table.clone(Tbl)
 				
@@ -148,7 +148,7 @@ return function() --[[ Line: 42 | Named "createAvatarSwitcherStore" ]]
 	
 	local NextPageToken = nil
 	
-	local function fetchNextOutfitsPage() --[[ Line: 168 ]]
+	local function fetchNextOutfitsPage()
 		-- upvalues: Flag (ref), Signal3 (copy), NextPageToken (ref), FFlagAXInventoryIncludeUnavailableItems (upval), Text (upval), Url (upval), HttpRbxApiService (upval), HttpService (upval), FFlagAvatarSwitcherCounters (upval), SendAXCounterV2Function (upval), ConstantsModule (upval), Signal2_2 (copy), Signal8 (copy), InventoryItemAvailability (upval), FFlagAvatarSwitcherExpiredItemsWarning (upval), FFlagAvatarSwitcherAccurateAvatarWarning (upval), Signal2 (copy), CryoModule (upval), Signal2_1 (copy)
 		if Flag or Signal3(false) then return end
 		Flag = true
@@ -160,7 +160,7 @@ return function() --[[ Line: 42 | Named "createAvatarSwitcherStore" ]]
 			["itemCategories[0].itemSubType"] = 3,
 			includeUnavailableItems = if FFlagAXInventoryIncludeUnavailableItems then true else nil
 		})
-		local Success, Result = pcall(function() --[[ Line: 184 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: HttpRbxApiService (upval), Text1 (copy), HttpService (upval)
 			return HttpService:JSONDecode((HttpRbxApiService:GetAsyncFullUrl(Text1)))
 		end)
@@ -206,11 +206,11 @@ return function() --[[ Line: 42 | Named "createAvatarSwitcherStore" ]]
 					}
 				end
 			end
-			Signal2(function(p1) --[[ Line: 254 ]]
+			Signal2(function(p1)
 				-- upvalues: CryoModule (upval), List1 (copy)
 				return CryoModule.List.join(p1, List1)
 			end)
-			Signal2_1(function(p1) --[[ Line: 257 ]]
+			Signal2_1(function(p1)
 				-- upvalues: CryoModule (upval), t (copy)
 				return CryoModule.Dictionary.join(p1, t)
 			end)
@@ -228,7 +228,7 @@ return function() --[[ Line: 42 | Named "createAvatarSwitcherStore" ]]
 		end
 	end
 	
-	local function switchAvatar() --[[ Line: 265 ]]
+	local function switchAvatar()
 		-- upvalues: Computed1 (copy), Signal2_5 (copy), FFlagAvatarSwitcherCounters (upval), SendAXCounterV2Function (upval), ConstantsModule (upval), AvatarSwitcherPcallApplyOutfit (upval), ApplyOutfitModule (upval), Signal2_8 (copy)
 		local ComputedResult = Computed1(false)
 		
@@ -239,7 +239,7 @@ return function() --[[ Line: 42 | Named "createAvatarSwitcherStore" ]]
 			SendAXCounterV2Function(ConstantsModule.Counters.SwitchAvatar)
 		end
 		if AvatarSwitcherPcallApplyOutfit then
-			local Success, Result = pcall(function() --[[ Line: 277 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: ApplyOutfitModule (upval), ComputedResult (copy)
 				ApplyOutfitModule(ComputedResult.id, ComputedResult.rigType)
 			end)
@@ -254,9 +254,9 @@ return function() --[[ Line: 42 | Named "createAvatarSwitcherStore" ]]
 		Signal2_5(false)
 	end
 	
-	local function fetchExperienceAvatarSupportType() --[[ Line: 291 ]]
+	local function fetchExperienceAvatarSupportType()
 		-- upvalues: HttpRbxApiService (upval), Text1 (upval), HttpService (upval), ExperienceAvatarSupportTypeModule (upval), Signal2_6 (copy), Signal2_7 (copy), FFlagAvatarSwitcherCounters (upval), SendAXCounterV2Function (upval), ConstantsModule (upval)
-		local Success, Result = pcall(function() --[[ Line: 292 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: HttpRbxApiService (upval), Text1 (upval), HttpService (upval)
 			return HttpService:JSONDecode((HttpRbxApiService:GetAsyncFullUrl(Text1)))
 		end)
@@ -285,13 +285,13 @@ return function() --[[ Line: 42 | Named "createAvatarSwitcherStore" ]]
 		end
 	end
 	
-	local function clearPendingAvatarName() --[[ Line: 327 ]]
+	local function clearPendingAvatarName()
 		-- upvalues: Signal2_8 (copy)
 		Signal2_8(nil)
 	end
 	
 	if Players.LocalPlayer then
-		Players.LocalPlayer.CharacterAdded:Connect(function() --[[ Line: 332 ]]
+		Players.LocalPlayer.CharacterAdded:Connect(function()
 			-- upvalues: Signal2_8 (copy)
 			Signal2_8(nil)
 		end)

@@ -10,7 +10,7 @@ local config = {
 	[ProductKind.Product] = StoreEnums.ProductType.DeveloperProducts
 }
 
-return function(p1, p2, _) --[[ Line: 25 ]]
+return function(p1, p2, _)
 	-- upvalues: GetActionTelemetryFieldValueFunction (copy), config (copy), EdpStoreAnalyticsLogger (copy), StoreEnums (copy)
 	local Kind = GetActionTelemetryFieldValueFunction(p1, p2, "kind")
 	local Entry = Kind and config[Kind]

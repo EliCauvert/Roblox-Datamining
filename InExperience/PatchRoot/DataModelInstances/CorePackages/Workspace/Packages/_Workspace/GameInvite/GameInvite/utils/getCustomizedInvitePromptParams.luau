@@ -3,7 +3,7 @@ local GetCustomizedInvitePromptUserIdModule = require(script.Parent.getCustomize
 local _ = require(GameInvite.gameInviteModalType)
 local FFlagFixPromptGameInviteUIMissingDisplayName = require(GameInvite.Parent.SharedFlags).FFlagFixPromptGameInviteUIMissingDisplayName
 
-return function(ExperienceInviteOptions, Trigger, Callback) --[[ Line: 12 ]]
+return function(ExperienceInviteOptions, Trigger, Callback)
 	-- upvalues: GetCustomizedInvitePromptUserIdModule (copy), FFlagFixPromptGameInviteUIMissingDisplayName (copy)
 	local CustomizedInvitePromptUserIdModule = GetCustomizedInvitePromptUserIdModule(ExperienceInviteOptions)
 	local CallbackResult, CallbackResult2 = Callback(Trigger, CustomizedInvitePromptUserIdModule)

@@ -1,7 +1,7 @@
 ﻿local ConstantsModule = require(script.Parent.Parent.Constants)
 
 return {
-	fixUploadInstance = function(Object) --[[ Line: 17 ]]
+	fixUploadInstance = function(Object)
 		-- upvalues: ConstantsModule (copy)
 		local HumanoidRigDescription = Object:FindFirstChildWhichIsA("HumanoidRigDescription")
 		

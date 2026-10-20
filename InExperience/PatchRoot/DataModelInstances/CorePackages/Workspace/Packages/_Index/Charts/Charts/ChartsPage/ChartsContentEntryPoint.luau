@@ -13,16 +13,16 @@ local UsePageScopeRefFunction = SduiSharedUtilitiesModule.usePageScopeRef
 local FetchChartsPageModule = require(Charts.ChartsPage.fetchChartsPage)
 local ChartsConstantsModule = require(Charts.ChartsPage.ChartsConstants)
 
-local function _(p1, p2) --[[ Line: 32 | Named "getFromPropsOrNavigationParams" ]]
+local function _(p1, p2)
 	return p1[p2] or p1.navigation and p1.navigation.getParam(p2)
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 36 | Named "ChartsContentEntryPoint" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ChartsConstantsModule (copy), UsePageScopeRefFunction (copy), ReactModule (copy), GetSduiClientPageScopeFunction (copy), SduiSurfaceLoadTimeTracker (copy), FetchChartsPageModule (copy), SduiPageEntryPoint (copy), AppPage (copy), CompositionTags (copy), FFlagAppThemeHalloween2026HomeBackground (copy)
 	local ConfigKey = ChartsConstantsModule.ConfigKey
 	local PageTimer = p1.pageTimer or p1.navigation and p1.navigation.getParam("pageTimer")
 	UsePageScopeRefFunction(ConfigKey)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 41 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: PageTimer (copy), GetSduiClientPageScopeFunction (upval), ConfigKey (copy), SduiSurfaceLoadTimeTracker (upval), ChartsConstantsModule (upval)
 		if PageTimer then
 			GetSduiClientPageScopeFunction(ConfigKey).set(SduiSurfaceLoadTimeTracker.SURFACE_LOAD_TIME_PAGE_SCOPE_KEY, PageTimer)
@@ -39,7 +39,7 @@ return ReactModule.memo(function(p1) --[[ Line: 36 | Named "ChartsContentEntryPo
 			return LoadTimerWithSurfaceLoadTime
 		end
 	end, { ConfigKey, PageTimer })
-	ReactModule.useEffect(function() --[[ Line: 60 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FetchChartsPageModule (upval), UseMemoResult (copy)
 		FetchChartsPageModule(UseMemoResult)
 	end, { ConfigKey, UseMemoResult })
@@ -49,7 +49,7 @@ return ReactModule.memo(function(p1) --[[ Line: 36 | Named "ChartsContentEntryPo
 		appPage = AppPage.Games,
 		configKey = ConfigKey,
 		pageTimer = UseMemoResult,
-		refresh = ReactModule.useCallback(function() --[[ Line: 64 ]]
+		refresh = ReactModule.useCallback(function()
 			-- upvalues: SduiSurfaceLoadTimeTracker (upval), ConfigKey (copy), ChartsConstantsModule (upval), FetchChartsPageModule (upval)
 			local LoadTimerWithSurfaceLoadTime = SduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(ConfigKey, {
 				eventName = ChartsConstantsModule.SurfaceLoadTimeEventName,

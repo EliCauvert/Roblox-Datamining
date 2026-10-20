@@ -22,7 +22,7 @@ local config = {
 	customTextColor = Color3.fromRGB(255, 255, 255)
 }
 
-return ReactModule.memo(function(List) --[[ Line: 59 | Named "TitleBarView" ]]
+return ReactModule.memo(function(List)
 	-- upvalues: config (copy), UseLayoutValuesFunction (copy), UseStyleFunction (copy), ReactModule (copy), RobloxTranslatorModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), FFlagEnableMobilePlayerListOnConsole (copy), FFlagPlayerListFixLeaderstatsStacking (copy), SignalsReactModule (copy), GameTranslatorModule (copy), CoreGui (copy), CorePackages (copy)
 	local t = {}
 	
@@ -80,7 +80,7 @@ return ReactModule.memo(function(List) --[[ Line: 59 | Named "TitleBarView" ]]
 			end
 		end
 	elseif t.gameStatsCount and t.gameStatsCount > 0 then
-		t.gameStats.iterateData(function(Text, p1) --[[ Line: 147 ]]
+		t.gameStats.iterateData(function(Text, p1)
 			-- upvalues: MaxLeaderstats (copy), GameTranslatorModule (upval), CoreGui (upval), TextLabels (copy), ReactModule (upval), UseLayoutValuesResult (copy), FoundationFontFaceMigration (upval), UseStyleResult (copy), NormalizeFontFaceFunction (upval), FFlagEnableMobilePlayerListOnConsole (upval), Transparency (copy), CustomTextColor (copy)
 			if MaxLeaderstats >= p1.order(false) then
 				TextLabels["stat_" .. Text] = ReactModule.createElement("TextLabel", {

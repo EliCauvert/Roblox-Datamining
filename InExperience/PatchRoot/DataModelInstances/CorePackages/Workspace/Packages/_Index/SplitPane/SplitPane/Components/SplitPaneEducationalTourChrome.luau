@@ -24,9 +24,9 @@ local GetStandardSizeAvatarHeadShotRbxthumbFunction = require(Parent.UserLib).Ut
 local UseAssetFetchStatusFunction = require(Parent.RoactUtils).Hooks.useAssetFetchStatus
 local VerifiedBadgeModule = require(Parent.VerifiedBadges.VerifiedBadge)
 
-local function noOp() --[[ Line: 42 ]] end
+local function noOp() end
 
-local function TourProfileChip(p1) --[[ Line: 46 ]]
+local function TourProfileChip(p1)
 	-- upvalues: UseTokensFunction (copy), UseAssetFetchStatusFunction (copy), ReactModule (copy), View (copy), Skeleton (copy), FoundationModule (copy), Image (copy), Text (copy), VerifiedBadgeModule (copy), Icon (copy), IconName (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsUseAssetFetchStatusResultMatch = UseAssetFetchStatusFunction(p1.thumbnail) == Enum.AssetFetchStatus.Success
@@ -81,7 +81,7 @@ local function TourProfileChip(p1) --[[ Line: 46 ]]
 	})
 end
 
-local ForwardRefResult = ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 117 ]]
+local ForwardRefResult = ReactModule.forwardRef(function(Frame, Ref)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Icon (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ActionOverMedia = if Frame.usesOverMediaStyle then UseTokensResult.Color.ActionOverMedia else UseTokensResult.Color.ActionUtility
@@ -107,7 +107,7 @@ local ForwardRefResult = ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 
 		})
 	})
 end)
-local ForwardRefResult1 = ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 150 ]]
+local ForwardRefResult1 = ReactModule.forwardRef(function(Frame, Ref)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ActionOverMedia = UseTokensResult.Color.ActionOverMedia
@@ -135,11 +135,11 @@ local ForwardRefResult1 = ReactModule.forwardRef(function(Frame, Ref) --[[ Line:
 	})
 end)
 
-local function _(Player: Player) --[[ Line: 187 | Named "getHasRobloxSubscription" ]]
+local function _(Player: Player)
 	if Player == nil then
 		return false
 	else
-		local Success, Result = pcall(function(): boolean --[[ Line: 192 ]]
+		local Success, Result = pcall(function(): boolean
 			-- upvalues: Player (copy)
 			return Player.HasRobloxSubscription == true
 		end)
@@ -148,7 +148,7 @@ local function _(Player: Player) --[[ Line: 187 | Named "getHasRobloxSubscriptio
 	end
 end
 
-return function(p1) --[[ Line: 205 | Named "TourOwnedSupportPaneChrome" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseDeviceTypeFunction (copy), UsePreferencesFunction (copy), UseDeviceInsetsFunction (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), UseLocalizationFunction (copy), UseSignalStateFunction (copy), LocalUserIdStore (copy), Players (copy), UseAppPolicyFunction (copy), ReactModule (copy), noOp (copy), View (copy), FoundationProvider (copy), ColorMode (copy), TourProfileChip (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), ForwardRefResult (copy), IconName (copy), ForwardRefResult1 (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDeviceTypeResult = UseDeviceTypeFunction()
@@ -166,17 +166,17 @@ return function(p1) --[[ Line: 205 | Named "TourOwnedSupportPaneChrome" ]]
 	if LocalPlayer == nil then
 		ShowSubscriberBadge = false
 	else
-		local Success, Result = pcall(function(): boolean --[[ Line: 192 ]]
+		local Success, Result = pcall(function(): boolean
 			-- upvalues: LocalPlayer (copy)
 			return LocalPlayer.HasRobloxSubscription == true
 		end)
 		ShowSubscriberBadge = Success and Result
 	end
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 219 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2)
 		return p2.getShowDisplayName()
 	end)
 	
-	local function _(ColorMode) --[[ Line: 223 | Named "scopedStyle" ]]
+	local function _(ColorMode)
 		-- upvalues: UseDeviceTypeResult (copy), UsePreferencesResult (copy)
 		return {
 			colorMode = ColorMode,

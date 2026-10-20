@@ -24,7 +24,7 @@ local config = {
 game:DefineFastInt("TimeToInteractiveTrackerSampleRate", 0)
 game:DefineFastInt("TTIPointsEventSampleRate", 0)
 
-local function getDefaultMetadata(MetaData) --[[ Line: 74 ]]
+local function getDefaultMetadata(MetaData)
 	-- upvalues: UserInputService (copy), IsSpatialFunction (copy), RunService (copy), HttpService (copy), DashModule (copy)
 	return DashModule.assign({
 		AppVersion = RunService:GetRobloxVersion(),
@@ -34,7 +34,7 @@ local function getDefaultMetadata(MetaData) --[[ Line: 74 ]]
 	}, MetaData)
 end
 
-return function(p1) --[[ Line: 97 | Named "sendTTIStat" ]]
+return function(p1)
 	-- upvalues: RunService (copy), getDefaultMetadata (copy), Default (copy), UtilModule (copy), FFlagTTITrackerMemoryTrackingModule (copy), AXTTIAddNumElementsRendered (copy), HttpService (copy), NewResult (copy), TTIMetricsTableName (copy), TTIEmitPointsEvent (copy), config (copy), TtiDebugLogModule (copy)
 	if math.clamp(if p1.samplingRateOverride == nil then game:GetFastInt("TimeToInteractiveTrackerSampleRate") else p1.samplingRateOverride, 0, 1000) < math.random(1, 1000) and not RunService:IsStudio() then return end
 	local Tbl = {
@@ -46,7 +46,7 @@ return function(p1) --[[ Line: 97 | Named "sendTTIStat" ]]
 	}
 	local DefaultMetadata = getDefaultMetadata(p1.metaData)
 	
-	local function logMemoryStats(Text, TotalMemoryMB, LuaHeapMB) --[[ Line: 134 ]]
+	local function logMemoryStats(Text, TotalMemoryMB, LuaHeapMB)
 		-- upvalues: Tbl (copy), Default (upval), DefaultMetadata (copy)
 		if TotalMemoryMB then
 			local Copy = table.clone(Tbl)
@@ -99,7 +99,7 @@ return function(p1) --[[ Line: 97 | Named "sendTTIStat" ]]
 	
 	if p1.milestones then
 		local MilestonesToProtoResult = UtilModule.milestonesToProto(p1.milestones)
-		local Success, Result = pcall(function() --[[ Line: 203 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: HttpService (upval), MilestonesToProtoResult (copy)
 			return HttpService:JSONEncode(MilestonesToProtoResult)
 		end)

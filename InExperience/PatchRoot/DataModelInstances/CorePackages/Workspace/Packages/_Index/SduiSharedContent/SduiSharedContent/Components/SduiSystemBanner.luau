@@ -4,7 +4,7 @@ local ViewportVisibilityImpressionsDetector = require(Parent.Impressions).Viewpo
 local SystemBanner = require(Parent.Foundation).SystemBanner
 local FFlagAppChatConversationTrustedFriendUpsellBanner = require(Parent.SharedFlags).FFlagAppChatConversationTrustedFriendUpsellBanner
 
-return ReactModule.memo(function(p1) --[[ Line: 40 | Named "SduiSystemBanner" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FFlagAppChatConversationTrustedFriendUpsellBanner (copy), ReactModule (copy), SystemBanner (copy), ViewportVisibilityImpressionsDetector (copy)
 	local UseRefResult = nil
 	local HasOnView: boolean? = nil

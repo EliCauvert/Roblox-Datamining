@@ -9,7 +9,7 @@ local config = {
 	[IconSizeModule.XXLarge] = 192
 }
 
-return function(Large, p1) --[[ Line: 17 ]]
+return function(Large, p1)
 	-- upvalues: IconSizeModule (copy), config (copy)
 	assert(IconSizeModule.isEnumValue(Large))
 	

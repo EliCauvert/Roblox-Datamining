@@ -70,17 +70,17 @@ local config1 = {
 	disablePortal = false,
 	hasBackdrop = true,
 	dialogSize = FoundationModule.Enums.DialogSize.Medium,
-	onClose = function() --[[ Line: 122 ]] end,
-	onJoin = function() --[[ Line: 123 ]] end,
-	onDecline = function() --[[ Line: 124 ]] end
+	onClose = function() end,
+	onJoin = function() end,
+	onDecline = function() end
 }
 
-local function _(p1, p2) --[[ Line: 127 | Named "resolveModalVariant" ]]
+local function _(p1, p2)
 	-- upvalues: ShouldShowU13ChatOptInForConversationModule (copy), ConstantsModule (copy), OsaContextCard (copy)
 	return if p1 then p1 elseif ShouldShowU13ChatOptInForConversationModule(p2) then ConstantsModule.OptInVariant.ChatOptInInfoCard else OsaContextCard
 end
 
-return function(p1) --[[ Line: 141 | Named "GroupOSADialog" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config1 (copy), FFlagAppChatEnableU13ChatOptIn (copy), OsaContextCard (copy), UseDispatchFunction (copy), UseStoreFunction (copy), UseLocalUserIdFunction (copy), UseTokensFunction (copy), UseAppPolicyModule (copy), ReactModule (copy), IsPlaceIdAbove (copy), LinkBehavior (copy), UseEffectFunction (copy), UseTelemetryModule (copy), AppTelemetryLayerModule (copy), ConversationListOverlayTelemetryModule (copy), SquadExternalContractContext (copy), UseGetConversationFromIdModule (copy), config (copy), ShouldShowU13ChatOptInForConversationModule (copy), ConstantsModule (copy), FFlagFriendsChatEnableConversationConsent (copy), APIFunction (copy), NewResult (copy), GetConversationStoreModule (copy), ReceivedConversationModule (copy), ConversationRoduxSeedModule (copy), UseSelectorFunction (copy), GetDeepValue2Module (copy), AppChatNetworkingModule (copy), UseUserProfilesFetchFunction (copy), UserProfilesModule (copy), _DateTime (copy), GetCombinedNameFromIdFunction (copy), ConversationModule (copy), UseLocalizationFunction (copy), AppChatGroupOsaViewDetailsUrl (copy), UserRow (copy), FoundationModule (copy), BadgeVariant (copy), FFlagSupportViewingUserProfileOnOSAModule (copy), ModalTelemetryModule (copy), AddFocusNavigationToGroupOSADialog (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseDefaultFocusBehaviorFunction (copy), UseLastInputFunction (copy), ResponsiveModule (copy), SquadPromptType (copy), UseRecordModalSequenceResponseForConversationModule (copy), Accept (copy), ConversationListOverlay (copy), APIFunction1 (copy), Skeleton (copy), Radius (copy), Dialog (copy), Renderer (copy), Orientation (copy), ButtonVariant (copy)
 	local UnionResult = CryoModule.Dictionary.union(config1, p1)
 	local ModalVariant = if FFlagAppChatEnableU13ChatOptIn then UnionResult.modalVariant else OsaContextCard
@@ -88,28 +88,28 @@ return function(p1) --[[ Line: 141 | Named "GroupOSADialog" ]]
 	local UseStoreResult = UseStoreFunction()
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseTokensResult = UseTokensFunction()
-	local UseAppPolicyModuleResult = UseAppPolicyModule(function(p2) --[[ Line: 152 ]]
+	local UseAppPolicyModuleResult = UseAppPolicyModule(function(p2)
 		return p2.getWebViewSupport()
 	end)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 155 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseAppPolicyModuleResult (copy), IsPlaceIdAbove (upval), LinkBehavior (upval)
 		return {
-			evaluateLinkBehavior = function(_, _) --[[ Line: 157 ]]
+			evaluateLinkBehavior = function(_, _)
 				-- upvalues: UseAppPolicyModuleResult (upval), IsPlaceIdAbove (upval), LinkBehavior (upval)
 				return if UseAppPolicyModuleResult and not IsPlaceIdAbove then LinkBehavior.Webview else LinkBehavior.Hide
 			end
 		}
 	end, { UseAppPolicyModuleResult })
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	UseEffectFunction(function() --[[ Line: 168 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseStateResult2 (copy)
-		return function() --[[ Line: 169 ]]
+		return function()
 			-- upvalues: UseStateResult2 (upval)
 			UseStateResult2(false)
 		end
 	end, {})
 	local UseTelemetryModuleResult = UseTelemetryModule(AppTelemetryLayerModule.Context)
-	UseEffectFunction(function() --[[ Line: 175 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseTelemetryModuleResult (copy), ConversationListOverlayTelemetryModule (upval), ModalVariant (ref), UnionResult (copy)
 		UseTelemetryModuleResult.emit(ConversationListOverlayTelemetryModule.Events.ModalRendered, {
 			modalVariant = ModalVariant,
@@ -139,11 +139,11 @@ return function(p1) --[[ Line: 141 | Named "GroupOSADialog" ]]
 			ModalVariant = OsaContextCard
 		end
 	end
-	UseEffectFunction(function() --[[ Line: 190 ]]
+	UseEffectFunction(function()
 		-- upvalues: UnionResult (copy), UseGetConversationFromIdModuleResult (copy), FFlagFriendsChatEnableConversationConsent (upval), UseDispatchResult (copy), APIFunction (upval), NewResult (upval), GetConversationStoreModule (upval), ReceivedConversationModule (upval), ConversationRoduxSeedModule (upval)
 		if not UnionResult.conversationId or UseGetConversationFromIdModuleResult then return end
 		if not FFlagFriendsChatEnableConversationConsent then
-			UseDispatchResult(APIFunction(UnionResult.conversationId)):catch(function(Err) --[[ Line: 195 ]]
+			UseDispatchResult(APIFunction(UnionResult.conversationId)):catch(function(Err)
 				-- upvalues: NewResult (upval), UnionResult (upval)
 				NewResult:warning("Error fetching conversation in GroupOSADialog: " .. tostring(Err))
 				UnionResult.onClose()
@@ -157,7 +157,7 @@ return function(p1) --[[ Line: 141 | Named "GroupOSADialog" ]]
 			UseDispatchResult(ReceivedConversationModule(ConversationRoduxSeedModule.normalizeStoreConversationForRodux(Conversation)))
 		end
 		if not ConversationRoduxSeedModule.isFriendsPlaceholderConversationId(UnionResult.conversationId) then
-			UseDispatchResult(APIFunction(UnionResult.conversationId)):catch(function(Err) --[[ Line: 216 ]]
+			UseDispatchResult(APIFunction(UnionResult.conversationId)):catch(function(Err)
 				-- upvalues: NewResult (upval), Conversation (copy), UnionResult (upval)
 				NewResult:warning("Error fetching conversation in GroupOSADialog: " .. tostring(Err))
 				
@@ -174,14 +174,14 @@ return function(p1) --[[ Line: 141 | Named "GroupOSADialog" ]]
 	})
 	local UseSelectorResult = nil
 	local Source = UseGetConversationFromIdModuleResult1.source
-	UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 228 ]]
+	UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: GetDeepValue2Module (upval), UnionResult (copy)
 		return GetDeepValue2Module(p2, `ChatAppReducer.ParticipantMetadata.{UnionResult.conversationId or ""}`)
 	end)
-	UseEffectFunction(function() --[[ Line: 232 ]]
+	UseEffectFunction(function()
 		-- upvalues: Source (copy), UnionResult (copy), UseDispatchResult (copy), AppChatNetworkingModule (upval), NewResult (upval)
 		if Source == "channels" and UnionResult.conversationId ~= nil then
-			UseDispatchResult(AppChatNetworkingModule.rodux.GetConversationsParticipantsMetadata.API({ UnionResult.conversationId })):catch(function() --[[ Line: 238 ]]
+			UseDispatchResult(AppChatNetworkingModule.rodux.GetConversationsParticipantsMetadata.API({ UnionResult.conversationId })):catch(function()
 				-- upvalues: NewResult (upval)
 				NewResult:warning("Error in GroupOSADialog -> GetConversationsParticipantsMetadata")
 			end)
@@ -189,7 +189,7 @@ return function(p1) --[[ Line: 141 | Named "GroupOSADialog" ]]
 			return
 		end
 	end, { UseDispatchResult, UnionResult.conversationId, Source })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 243 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseSelectorResult (ref)
 		if not UseSelectorResult then
 			return nil
@@ -205,9 +205,9 @@ return function(p1) --[[ Line: 141 | Named "GroupOSADialog" ]]
 		userIds = if UseMemoResult1 then { UseMemoResult1 } else {},
 		query = UserProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
 	})
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 262 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: UseGetConversationFromIdModuleResult1 (copy), CryoModule (upval), UseLocalUserIdResult (copy)
-		return if UseGetConversationFromIdModuleResult1 and UseGetConversationFromIdModuleResult1.participants then CryoModule.List.filter(UseGetConversationFromIdModuleResult1.participants, function(p2): boolean --[[ Line: 266 ]]
+		return if UseGetConversationFromIdModuleResult1 and UseGetConversationFromIdModuleResult1.participants then CryoModule.List.filter(UseGetConversationFromIdModuleResult1.participants, function(p2): boolean
 			-- upvalues: UseLocalUserIdResult (upval)
 			return tostring(p2) ~= UseLocalUserIdResult
 		end) else {}
@@ -217,7 +217,7 @@ return function(p1) --[[ Line: 141 | Named "GroupOSADialog" ]]
 	})
 	local Data = if UseUserProfilesFetchResult then UseUserProfilesFetchResult.data else nil
 	local Loading = if UseUserProfilesFetchResult then UseUserProfilesFetchResult.loading else false
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 282 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult1 (copy), Data (copy), GetCombinedNameFromIdFunction (upval)
 		return if UseMemoResult1 and Data then GetCombinedNameFromIdFunction(Data, UseMemoResult1) else nil
 	end, { UseMemoResult1, Data })
@@ -237,7 +237,7 @@ return function(p1) --[[ Line: 141 | Named "GroupOSADialog" ]]
 		},
 		subtitleText = {
 			"Feature.Chat.Description.ConversationInviteGroupCreatedOn",
-			creation_date = ReactModule.useMemo(function() --[[ Line: 272 ]]
+			creation_date = ReactModule.useMemo(function()
 				-- upvalues: UseGetConversationFromIdModuleResult1 (copy), _DateTime (upval), NewResult (upval), UnionResult (copy)
 				if UseGetConversationFromIdModuleResult1.createdAt then
 					return _DateTime.fromIsoDate(UseGetConversationFromIdModuleResult1.createdAt):Format("MMM DD, YYYY")
@@ -256,7 +256,7 @@ return function(p1) --[[ Line: 141 | Named "GroupOSADialog" ]]
 			osaViewDetailsUrl = AppChatGroupOsaViewDetailsUrl
 		}
 	})
-	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 315 ]]
+	local UseMemoResult4 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult2 (copy), UseSelectorResult (ref), NewResult (upval), ReactModule (upval), UserRow (upval), UnionResult (copy), FoundationModule (upval), UseLocalizationResult (copy), BadgeVariant (upval)
 		local Elements = {}
 		
@@ -271,7 +271,7 @@ return function(p1) --[[ Line: 141 | Named "GroupOSADialog" ]]
 				Row = ReactModule.createElement(UserRow, {
 					layoutMode = "wide",
 					entityId = Text,
-					onActivated = if UnionResult.onViewUserProfile == nil then nil else function() --[[ Line: 333 ]]
+					onActivated = if UnionResult.onViewUserProfile == nil then nil else function()
 						-- upvalues: UnionResult (upval), Text (copy)
 						UnionResult.onClose()
 						UnionResult.onViewUserProfile(Text, {})
@@ -296,7 +296,7 @@ return function(p1) --[[ Line: 141 | Named "GroupOSADialog" ]]
 		if FFlagSupportViewingUserProfileOnOSAModule then UnionResult.onViewUserProfile else nil,
 		if FFlagSupportViewingUserProfileOnOSAModule then UnionResult.onClose else nil
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 367 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseTelemetryModuleResult (copy), ConversationListOverlayTelemetryModule (upval), ModalVariant (ref), ModalTelemetryModule (upval), UnionResult (copy)
 		UseTelemetryModuleResult.emit(ConversationListOverlayTelemetryModule.Events.ModalAction, {
 			modalVariant = ModalVariant,
@@ -312,11 +312,11 @@ return function(p1) --[[ Line: 141 | Named "GroupOSADialog" ]]
 		UnionResult.conversationId,
 		ModalVariant
 	})
-	local UseMemoResult5 = if AddFocusNavigationToGroupOSADialog then ReactModule.useMemo(function() --[[ Line: 378 ]]
+	local UseMemoResult5 = if AddFocusNavigationToGroupOSADialog then ReactModule.useMemo(function()
 		-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), UseResult (copy)
 		return {
 			[FocusNavigationEventNameEnum.NavigateBack] = {
-				handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 381 ]]
+				handler = InputHandlersModule.onRelease(function(p2)
 					-- upvalues: UseResult (upval)
 					UseResult()
 					p2:cancel()
@@ -339,7 +339,7 @@ return function(p1) --[[ Line: 141 | Named "GroupOSADialog" ]]
 	end
 	local UseLastInputResult = if AddFocusNavigationToGroupOSADialog then UseLastInputFunction() else nil
 	local IsUseLastInputResultMatch: boolean = AddFocusNavigationToGroupOSADialog and UseLastInputResult == ResponsiveModule.Input.Directional
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 409 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseContextResult (copy), UseStoreResult (copy), SquadPromptType (upval)
 		UseContextResult.setSquadPrompt(UseStoreResult, {
 			hideCancelButton = true,
@@ -347,7 +347,7 @@ return function(p1) --[[ Line: 141 | Named "GroupOSADialog" ]]
 		})
 	end, { UseContextResult.setSquadPrompt, UseStoreResult })
 	local UseRecordModalSequenceResponseForConversationModuleResult = UseRecordModalSequenceResponseForConversationModule(UnionResult.conversationId)
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 418 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult (copy), UseStateResult2 (copy), ModalVariant (ref), ModalTelemetryModule (upval), UnionResult (copy), UseTelemetryModuleResult (copy), ConversationListOverlayTelemetryModule (upval), UseRecordModalSequenceResponseForConversationModuleResult (copy), Accept (upval), ConversationListOverlay (upval), CryoModule (upval), NewResult (upval), UseResult1 (copy)
 		if not UseStateResult then
 			UseStateResult2(true)
@@ -358,13 +358,13 @@ return function(p1) --[[ Line: 141 | Named "GroupOSADialog" ]]
 				impressionId = UnionResult.impressionId
 			}
 			UseTelemetryModuleResult.emit(ConversationListOverlayTelemetryModule.Events.ModalAction, config)
-			UseRecordModalSequenceResponseForConversationModuleResult(Accept, ConversationListOverlay, nil, ModalVariant):andThen(function() --[[ Line: 432 ]]
+			UseRecordModalSequenceResponseForConversationModuleResult(Accept, ConversationListOverlay, nil, ModalVariant):andThen(function()
 				-- upvalues: UseTelemetryModuleResult (upval), ConversationListOverlayTelemetryModule (upval), CryoModule (upval), config (copy), ModalTelemetryModule (upval), UnionResult (upval)
 				UseTelemetryModuleResult.emit(ConversationListOverlayTelemetryModule.Events.ModalActionResult, CryoModule.Dictionary.union(config, {
 					actionResult = ModalTelemetryModule.Enums.ModalActionResults.Success
 				}))
 				UnionResult.onJoin()
-			end):catch(function(Err) --[[ Line: 441 ]]
+			end):catch(function(Err)
 				-- upvalues: UseTelemetryModuleResult (upval), ConversationListOverlayTelemetryModule (upval), CryoModule (upval), config (copy), ModalTelemetryModule (upval), NewResult (upval), UseResult1 (upval), UnionResult (upval)
 				UseTelemetryModuleResult.emit(ConversationListOverlayTelemetryModule.Events.ModalActionResult, CryoModule.Dictionary.union(config, {
 					actionResult = ModalTelemetryModule.Enums.ModalActionResults.Failure
@@ -382,7 +382,7 @@ return function(p1) --[[ Line: 141 | Named "GroupOSADialog" ]]
 		UnionResult.conversationId, ModalVariant, UseTelemetryModuleResult,
 		UnionResult.impressionId, UseStateResult
 	})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 467 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult (copy), UseStateResult2 (copy), ModalVariant (ref), ModalTelemetryModule (upval), UnionResult (copy), UseTelemetryModuleResult (copy), ConversationListOverlayTelemetryModule (upval), UseGetConversationFromIdModuleResult1 (copy), ConversationModule (upval), UseDispatchResult (copy), APIFunction1 (upval), UseLocalUserIdResult (copy), CryoModule (upval), NewResult (upval), UseResult1 (copy)
 		if UseStateResult then return end
 		UseStateResult2(true)
@@ -396,13 +396,13 @@ return function(p1) --[[ Line: 141 | Named "GroupOSADialog" ]]
 		
 		if UnionResult.conversationId then
 			if UseGetConversationFromIdModuleResult1.conversationType == ConversationModule.Type.MULTI_USER_CONVERSATION then
-				UseDispatchResult(APIFunction1(UnionResult.conversationId, UseLocalUserIdResult)):andThen(function() --[[ Line: 484 ]]
+				UseDispatchResult(APIFunction1(UnionResult.conversationId, UseLocalUserIdResult)):andThen(function()
 					-- upvalues: UseTelemetryModuleResult (upval), ConversationListOverlayTelemetryModule (upval), CryoModule (upval), config (copy), ModalTelemetryModule (upval), UnionResult (upval)
 					UseTelemetryModuleResult.emit(ConversationListOverlayTelemetryModule.Events.ModalActionResult, CryoModule.Dictionary.union(config, {
 						actionResult = ModalTelemetryModule.Enums.ModalActionResults.Success
 					}))
 					UnionResult.onDecline()
-				end):catch(function(Err) --[[ Line: 493 ]]
+				end):catch(function(Err)
 					-- upvalues: UseTelemetryModuleResult (upval), ConversationListOverlayTelemetryModule (upval), CryoModule (upval), config (copy), ModalTelemetryModule (upval), NewResult (upval), UseResult1 (upval), UnionResult (upval)
 					UseTelemetryModuleResult.emit(ConversationListOverlayTelemetryModule.Events.ModalActionResult, CryoModule.Dictionary.union(config, {
 						actionResult = ModalTelemetryModule.Enums.ModalActionResults.Failure
@@ -429,7 +429,7 @@ return function(p1) --[[ Line: 141 | Named "GroupOSADialog" ]]
 	local NoUseSelectorResult: boolean = UseGetConversationFromIdModuleResult1.source == "channels" and UseSelectorResult == nil
 	local NoUseGetConversationFromIdModuleResult = not UseGetConversationFromIdModuleResult or (NoUseSelectorResult or UseMemoResult1 ~= nil and Loading)
 	local InviterTitleText = if UseMemoResult3 then if IsConversationTypeMatch then UseLocalizationResult.inviterTitleText else UseLocalizationResult.inviterTitleTextOneToOne else UseLocalizationResult.titleText
-	local UseMemoResult6 = ReactModule.useMemo(function() --[[ Line: 547 ]]
+	local UseMemoResult6 = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), FoundationModule (upval), Skeleton (upval), UseTokensResult (copy), Radius (upval)
 		return ReactModule.createElement(FoundationModule.View, {
 			tag = "col gap-medium size-full-0 auto-y margin-top-small"
@@ -461,7 +461,7 @@ return function(p1) --[[ Line: 141 | Named "GroupOSADialog" ]]
 			})
 		})
 	end, { UseTokensResult })
-	local UseMemoResult7 = ReactModule.useMemo(function() --[[ Line: 580 ]]
+	local UseMemoResult7 = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), FoundationModule (upval), Dialog (upval), UseLocalizationResult (copy), UseMemoResult4 (copy), Renderer (upval), UseTokensResult (copy), UseMemoResult (copy)
 		return ReactModule.createElement(FoundationModule.View, { tag = "col gap-medium size-full-0 auto-y" }, {
 			DialogContentHeader = ReactModule.createElement(Dialog.Text, {

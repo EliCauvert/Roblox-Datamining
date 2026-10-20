@@ -11,8 +11,8 @@ local FFlagGamepadIconSupportCheck = require(CorePackages.Workspace.Packages.Sha
 local ShortcutService = {}
 ShortcutService.__index = ShortcutService
 
-local function _(p1) --[[ Line: 79 | Named "_handleShortcutEvent" ]]
-	return function(ActionName, UserInputState, _) --[[ Line: 80 ]]
+local function _(p1)
+	return function(ActionName, UserInputState, _)
 		-- upvalues: p1 (copy)
 		if UserInputState ~= Enum.UserInputState.Begin then
 			return Enum.ContextActionResult.Pass
@@ -26,7 +26,7 @@ local function _(p1) --[[ Line: 79 | Named "_handleShortcutEvent" ]]
 	end
 end
 
-function ShortcutService.new() --[[ Line: 94 ]]
+function ShortcutService.new()
 	-- upvalues: Signal (copy), ShortcutService (copy)
 	return (setmetatable({
 		_shortcuts = {},
@@ -37,7 +37,7 @@ function ShortcutService.new() --[[ Line: 94 ]]
 	}, ShortcutService))
 end
 
-function ShortcutService:registerShortcut(p2) --[[ Line: 108 ]]
+function ShortcutService:registerShortcut(p2)
 	-- upvalues: NewResult (copy), AvailabilitySignal (copy), AvailabilitySignalState (copy), UserInputService (copy)
 	if self._shortcuts[p2.id] then
 		warn(string.format("shortcut " .. p2.id .. " already registered", debug.traceback()))
@@ -50,7 +50,7 @@ function ShortcutService:registerShortcut(p2) --[[ Line: 108 ]]
 	if p2.availability == nil then
 		p2.availability = AvailabilitySignal.new(AvailabilitySignalState.Available)
 	end
-	p2.availability:connect(function() --[[ Line: 122 ]]
+	p2.availability:connect(function()
 		-- upvalues: self (copy), p2 (copy)
 		self:shortcutChanged(p2)
 	end)
@@ -58,7 +58,7 @@ function ShortcutService:registerShortcut(p2) --[[ Line: 108 ]]
 	self._shortcuts[p2.id] = p2
 end
 
-function ShortcutService:activateShortcut(p2) --[[ Line: 131 ]]
+function ShortcutService:activateShortcut(p2)
 	if self._shortcuts[p2] then
 		local Shortcut = self._shortcuts[p2]
 		
@@ -69,11 +69,11 @@ function ShortcutService:activateShortcut(p2) --[[ Line: 131 ]]
 	return nil
 end
 
-function ShortcutService:shortcutChanged(_) --[[ Line: 142 ]]
+function ShortcutService:shortcutChanged(_)
 	self:updateShortcutBar(self:getCurrentShortcutBar())
 end
 
-function ShortcutService:updateShortcutBar(CurrentShortcutBar) --[[ Line: 146 ]]
+function ShortcutService:updateShortcutBar(CurrentShortcutBar)
 	self:_unbindAllShortcuts()
 	self._currentShortcutBar = CurrentShortcutBar
 	
@@ -89,17 +89,17 @@ function ShortcutService:updateShortcutBar(CurrentShortcutBar) --[[ Line: 146 ]]
 	end
 end
 
-function ShortcutService:configureShortcutBar(p2, p3) --[[ Line: 161 ]]
+function ShortcutService:configureShortcutBar(p2, p3)
 	self._shortcutBarList[p2] = p3
 end
 
-function ShortcutService:setShortcutBar(CurrentShortcutBar) --[[ Line: 165 ]]
+function ShortcutService:setShortcutBar(CurrentShortcutBar)
 	if self._currentShortcutBar ~= CurrentShortcutBar then
 		self:updateShortcutBar(CurrentShortcutBar)
 	end
 end
 
-function ShortcutService:setHideShortcutBar(p2, ShortcutBarHiddenOverride) --[[ Line: 171 ]]
+function ShortcutService:setHideShortcutBar(p2, ShortcutBarHiddenOverride)
 	if self._shortcutBarHiddenOverrides[p2] ~= ShortcutBarHiddenOverride then
 		if ShortcutBarHiddenOverride then
 			self._shortcutBarHiddenOverrides[p2] = ShortcutBarHiddenOverride
@@ -119,15 +119,15 @@ function ShortcutService:setHideShortcutBar(p2, ShortcutBarHiddenOverride) --[[ 
 	end
 end
 
-function ShortcutService:getHideShortcutBar() --[[ Line: 192 ]]
+function ShortcutService:getHideShortcutBar()
 	return self._shortcutBarHidden
 end
 
-function ShortcutService:getShortcut(p3) --[[ Line: 196 ]]
+function ShortcutService:getShortcut(p3)
 	return self._shortcuts[p3]
 end
 
-function ShortcutService:getShortcutsFromBar(p3, _) --[[ Line: 200 ]]
+function ShortcutService:getShortcutsFromBar(p3, _)
 	-- upvalues: AvailabilitySignalState (copy), FFlagGamepadIconSupportCheck (copy), UserInputService (copy)
 	if not p3 then
 		return {}
@@ -148,11 +148,11 @@ function ShortcutService:getShortcutsFromBar(p3, _) --[[ Line: 200 ]]
 	return List
 end
 
-function ShortcutService:getCurrentShortcutBar() --[[ Line: 229 ]]
+function ShortcutService:getCurrentShortcutBar()
 	return self._currentShortcutBar
 end
 
-function ShortcutService:_bindShortcutBar(_currentShortcutBar) --[[ Line: 233 ]]
+function ShortcutService:_bindShortcutBar(_currentShortcutBar)
 	-- upvalues: AvailabilitySignalState (copy)
 	for _, value in self._shortcutBarList[_currentShortcutBar] do
 		local Shortcut = self._shortcuts[value]
@@ -167,7 +167,7 @@ function ShortcutService:_bindShortcutBar(_currentShortcutBar) --[[ Line: 233 ]]
 	end
 end
 
-function ShortcutService:_unbindShortcutBar(p4) --[[ Line: 247 ]]
+function ShortcutService:_unbindShortcutBar(p4)
 	if p4 then
 		for _, value in self._shortcutBarList[p4] do
 			local Shortcut = self._shortcuts[value]
@@ -179,12 +179,12 @@ function ShortcutService:_unbindShortcutBar(p4) --[[ Line: 247 ]]
 	end
 end
 
-function ShortcutService:_bindShortcut(p5) --[[ Line: 258 ]]
+function ShortcutService:_bindShortcut(p5)
 	-- upvalues: ContextActionService (copy)
 	local Shortcut = self._shortcuts[p5]
 	
 	if Shortcut and Shortcut.actionName then
-		ContextActionService:BindCoreAction(Shortcut.actionName, function(ActionName, UserInputState, _) --[[ Line: 80 ]]
+		ContextActionService:BindCoreAction(Shortcut.actionName, function(ActionName, UserInputState, _)
 			-- upvalues: self (copy)
 			if UserInputState ~= Enum.UserInputState.Begin then
 				return Enum.ContextActionResult.Pass
@@ -200,7 +200,7 @@ function ShortcutService:_bindShortcut(p5) --[[ Line: 258 ]]
 	end
 end
 
-function ShortcutService:_unbindShortcut(p6) --[[ Line: 266 ]]
+function ShortcutService:_unbindShortcut(p6)
 	-- upvalues: ContextActionService (copy)
 	local Shortcut = self._shortcuts[p6]
 	
@@ -210,7 +210,7 @@ function ShortcutService:_unbindShortcut(p6) --[[ Line: 266 ]]
 	end
 end
 
-function ShortcutService:_unbindAllShortcuts() --[[ Line: 274 ]]
+function ShortcutService:_unbindAllShortcuts()
 	-- upvalues: ContextActionService (copy)
 	for i, boundShortcut in self._boundShortcuts do
 		if boundShortcut then

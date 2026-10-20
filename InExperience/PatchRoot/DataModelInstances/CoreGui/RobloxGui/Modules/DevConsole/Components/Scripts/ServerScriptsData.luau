@@ -3,13 +3,13 @@ local SignalModule = require(script.Parent.Parent.Parent.Signal)
 local Number: number? = tonumber(settings():GetFVariable("NewDevConsoleMaxGraphCount"))
 local ChartHeaderNames = require(script.Parent.Parent.Parent.Constants).ServerScriptsFormatting.ChartHeaderNames
 local config = {
-	[ChartHeaderNames[1]] = function(p1, p2): boolean --[[ Line: 11 ]]
+	[ChartHeaderNames[1]] = function(p1, p2): boolean
 		return p1.dataStats.dataSet:back().name < p2.dataStats.dataSet:back().name
 	end,
-	[ChartHeaderNames[2]] = function(p1, p2): boolean --[[ Line: 14 ]]
+	[ChartHeaderNames[2]] = function(p1, p2): boolean
 		return p1.dataStats.dataSet:back().data[1] < p2.dataStats.dataSet:back().data[1]
 	end,
-	[ChartHeaderNames[3]] = function(p1, p2): boolean --[[ Line: 17 ]]
+	[ChartHeaderNames[3]] = function(p1, p2): boolean
 		return p1.dataStats.dataSet:back().data[2] < p2.dataStats.dataSet:back().data[2]
 	end
 }
@@ -19,7 +19,7 @@ local GetClientReplicatorModule = require(script.Parent.Parent.Parent.Util.getCl
 local ServerScriptsDataModule = {}
 ServerScriptsDataModule.__index = ServerScriptsDataModule
 
-function ServerScriptsDataModule.new() --[[ Line: 29 ]]
+function ServerScriptsDataModule.new()
 	-- upvalues: ServerScriptsDataModule (copy), SignalModule (copy), ChartHeaderNames (copy)
 	local t = {}
 	setmetatable(t, ServerScriptsDataModule)
@@ -33,7 +33,7 @@ function ServerScriptsDataModule.new() --[[ Line: 29 ]]
 	return t
 end
 
-function ServerScriptsDataModule:setSortType(_sortType) --[[ Line: 43 ]]
+function ServerScriptsDataModule:setSortType(_sortType)
 	-- upvalues: config (copy)
 	if config[_sortType] then
 		self._sortType = _sortType
@@ -45,19 +45,19 @@ function ServerScriptsDataModule:setSortType(_sortType) --[[ Line: 43 ]]
 	end
 end
 
-function ServerScriptsDataModule:getSortType() --[[ Line: 53 ]]
+function ServerScriptsDataModule:getSortType()
 	return self._sortType
 end
 
-function ServerScriptsDataModule:Signal() --[[ Line: 57 ]]
+function ServerScriptsDataModule:Signal()
 	return self._serverScriptsUpdated
 end
 
-function ServerScriptsDataModule:getCurrentData() --[[ Line: 61 ]]
+function ServerScriptsDataModule:getCurrentData()
 	return self._sortedScriptsData
 end
 
-function ServerScriptsDataModule:updateScriptsData(Scripts) --[[ Line: 66 ]]
+function ServerScriptsDataModule:updateScriptsData(Scripts)
 	-- upvalues: CircularBufferModule (copy), Number (copy), MaxOfTableModule (copy), MinOfTableModule (copy)
 	self._lastUpdate = os.time()
 	
@@ -114,16 +114,16 @@ function ServerScriptsDataModule:updateScriptsData(Scripts) --[[ Line: 66 ]]
 	end
 end
 
-function ServerScriptsDataModule:isRunning() --[[ Line: 139 ]]
+function ServerScriptsDataModule:isRunning()
 	return self._isRunning
 end
 
-function ServerScriptsDataModule:start() --[[ Line: 143 ]]
+function ServerScriptsDataModule:start()
 	-- upvalues: GetClientReplicatorModule (copy)
 	local ClientReplicatorModule = GetClientReplicatorModule()
 	
 	if ClientReplicatorModule and not self._statsListenerConnection then
-		self._statsListenerConnection = ClientReplicatorModule.StatsReceived:connect(function(Stats) --[[ Line: 146 ]]
+		self._statsListenerConnection = ClientReplicatorModule.StatsReceived:connect(function(Stats)
 			-- upvalues: self (copy)
 			if Stats then
 				self._lastUpdate = os.time()
@@ -140,7 +140,7 @@ function ServerScriptsDataModule:start() --[[ Line: 143 ]]
 	end
 end
 
-function ServerScriptsDataModule:stop() --[[ Line: 163 ]]
+function ServerScriptsDataModule:stop()
 	if self._statsListenerConnection then
 		self._statsListenerConnection:Disconnect()
 		self._statsListenerConnection = nil

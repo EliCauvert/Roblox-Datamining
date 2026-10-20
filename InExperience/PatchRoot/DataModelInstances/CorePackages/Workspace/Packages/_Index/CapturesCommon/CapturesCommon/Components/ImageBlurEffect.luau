@@ -2,7 +2,7 @@
 local ReactModule = require(Parent.Parent.React)
 local BlurDirectionModule = require(Parent.Enums.BlurDirection)
 
-local function getImageRect(Direction, ImageSize) --[[ Line: 24 ]]
+local function getImageRect(Direction, ImageSize)
 	-- upvalues: BlurDirectionModule (copy)
 	local X: number = ImageSize.X
 	local Y: number = ImageSize.Y
@@ -20,24 +20,24 @@ local function getImageRect(Direction, ImageSize) --[[ Line: 24 ]]
 	end
 end
 
-local function _(Down) --[[ Line: 40 | Named "getGradientRotation" ]]
+local function _(Down)
 	-- upvalues: BlurDirectionModule (copy)
 	return if Down == BlurDirectionModule.Up then 270 elseif Down == BlurDirectionModule.Down then 90 elseif Down == BlurDirectionModule.Left then 180 elseif Down == BlurDirectionModule.Right then 0 else nil
 end
 
-local function getRadialGradientPosition(Direction) --[[ Line: 54 ]]
+local function getRadialGradientPosition(Direction)
 	-- upvalues: BlurDirectionModule (copy)
 	return if Direction == BlurDirectionModule.Up then UDim2.fromScale(0.5, 1) elseif Direction == BlurDirectionModule.Down then UDim2.fromScale(0.5, 0) elseif Direction == BlurDirectionModule.Left then UDim2.fromScale(1, 0.5) elseif Direction == BlurDirectionModule.Right then UDim2.fromScale(0, 0.5) else nil
 end
 
-local function getTransparency(p1, TransparencyBinding) --[[ Line: 68 ]]
-	return if TransparencyBinding then TransparencyBinding:map(function(p2): number --[[ Line: 76 ]]
+local function getTransparency(p1, TransparencyBinding)
+	return if TransparencyBinding then TransparencyBinding:map(function(p2): number
 		-- upvalues: p1 (copy)
 		return p1 + (1 - p1) * p2
 	end) else p1
 end
 
-return function(Frame) --[[ Line: 81 | Named "ImageBlurEffect" ]]
+return function(Frame)
 	-- upvalues: getImageRect (copy), getRadialGradientPosition (copy), ReactModule (copy), getTransparency (copy), BlurDirectionModule (copy)
 	local GradientColor = if Frame.gradientColor then Frame.gradientColor else Color3.new(0, 0, 0)
 	local ImageRect, ImageRect2 = getImageRect(Frame.direction, Frame.imageSize)
@@ -51,7 +51,7 @@ return function(Frame) --[[ Line: 81 | Named "ImageBlurEffect" ]]
 		Image = Frame.image,
 		ImageRectOffset = ImageRect,
 		ImageRectSize = ImageRect2,
-		ImageTransparency = ReactModule.useMemo(function() --[[ Line: 86 ]]
+		ImageTransparency = ReactModule.useMemo(function()
 			-- upvalues: getTransparency (upval), Frame (copy)
 			return getTransparency(0, Frame.transparencyBinding)
 		end, { Frame.transparencyBinding }),
@@ -77,7 +77,7 @@ return function(Frame) --[[ Line: 81 | Named "ImageBlurEffect" ]]
 			Image = "rbxasset://textures/shadowblurmask.png",
 			ZIndex = 1,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			ImageTransparency = ReactModule.useMemo(function() --[[ Line: 90 ]]
+			ImageTransparency = ReactModule.useMemo(function()
 				-- upvalues: getTransparency (upval), Frame (copy)
 				return getTransparency(0.9, Frame.transparencyBinding)
 			end, { Frame.transparencyBinding }),
@@ -90,7 +90,7 @@ return function(Frame) --[[ Line: 81 | Named "ImageBlurEffect" ]]
 			Image = "rbxasset://textures/ui/VR/edgeBlur.png",
 			ZIndex = 2,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			ImageTransparency = ReactModule.useMemo(function() --[[ Line: 94 ]]
+			ImageTransparency = ReactModule.useMemo(function()
 				-- upvalues: getTransparency (upval), Frame (copy)
 				return getTransparency(0.8, Frame.transparencyBinding)
 			end, { Frame.transparencyBinding }),

@@ -40,10 +40,10 @@ local FStringCanAccessTrustedContactsAmpNameSpace = require(Parent.SharedFlags).
 local AmpApiProvider = require(Parent.AmpUpsell).AmpApiProvider
 local AmpEnums = require(Parent.AmpUpsell).AmpEnums
 
-return function(p1) --[[ Line: 85 ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseAppPolicyFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), FFlagProfileQRCodeFixFocusNavigationModule (copy), UseIsWideModeFunction (copy), UseStyleFunction (copy), UseLastInputModeFunction (copy), UseFocusGuiObjectFunction (copy), UseProfileShareLinkFunction (copy), Contexts (copy), ProfileSharePolicyEnum (copy), Images (copy), FFlagQRCodeCopyUpdates (copy), FFlagTCPolicyCheckRedirect (copy), FStringIsUserInTcEligibleCountryAmpFeature (copy), FStringCanAccessTrustedContactsAmpFeature (copy), AmpApiProvider (copy), FStringCanAccessTrustedContactsAmpNameSpace (copy), AmpEnums (copy), FFlagQRCodePageVisualRefresh (copy), FoundationModule (copy), ProfileQRCodeTopElementsModule (copy), VerticalScrollView (copy), _Color3 (copy), QRCodeViewModule (copy), StyledTextLabel (copy), InputLabel (copy), InputLabelSize (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy)
 	local UseDispatchResult = UseDispatchFunction()
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 88 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2)
 		return p2.getWebViewSupport()
 	end)
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -53,7 +53,7 @@ return function(p1) --[[ Line: 85 ]]
 		shareProfileLink = TextKeysModule.ShareProfileLink,
 		copyProfileLink = TextKeysModule.CopyProfileLink
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 100 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 		local config = {
 			detail = "https://en.help.roblox.com/hc/en-us/articles/37725513985812",
@@ -88,7 +88,7 @@ return function(p1) --[[ Line: 85 ]]
 		IconsActionsShare = Images["icons/menu/link"]
 	end
 	if FFlagProfileQRCodeFixFocusNavigationModule then
-		ReactModule.useEffect(function() --[[ Line: 136 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseFocusGuiObjectResult (copy), UseRefResult (copy), UseLastInputModeResult (copy)
 			if UseFocusGuiObjectResult and UseRefResult and UseRefResult.current and UseLastInputModeResult == "Focus" then
 				UseFocusGuiObjectResult(UseRefResult.current)
@@ -99,7 +99,7 @@ return function(p1) --[[ Line: 85 ]]
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
 	
 	if FFlagQRCodeCopyUpdates then
-		ReactModule.useEffect(function() --[[ Line: 147 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: FFlagTCPolicyCheckRedirect (upval), FStringIsUserInTcEligibleCountryAmpFeature (upval), FStringCanAccessTrustedContactsAmpFeature (upval), AmpApiProvider (upval), FStringCanAccessTrustedContactsAmpNameSpace (upval), AmpEnums (upval), UseStateResult2_1 (copy), UseStateResult2_2 (copy)
 			if AmpApiProvider.upsellFeatureAccess(if FFlagTCPolicyCheckRedirect then FStringIsUserInTcEligibleCountryAmpFeature else FStringCanAccessTrustedContactsAmpFeature, {}, FStringCanAccessTrustedContactsAmpNameSpace).access == AmpEnums.AccessResponseEnum.Granted then
 				UseStateResult2_1(true)
@@ -136,7 +136,7 @@ return function(p1) --[[ Line: 85 ]]
 				Position = UDim2.fromScale(0, 0),
 				Size = if UseIsWideModeResult then UDim2.fromScale(0.6, 1) else UDim2.fromScale(1, 1),
 				BorderSizePixel = 0,
-				[ReactModule.Change.AbsoluteSize] = ReactModule.useCallback(function(Frame) --[[ Line: 193 ]]
+				[ReactModule.Change.AbsoluteSize] = ReactModule.useCallback(function(Frame)
 					-- upvalues: UseStateResult2 (copy)
 					if Frame.AbsoluteSize.Y >= 450 then
 						UseStateResult2(true)

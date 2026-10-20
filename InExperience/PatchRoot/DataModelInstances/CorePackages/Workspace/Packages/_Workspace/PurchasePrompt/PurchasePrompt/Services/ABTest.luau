@@ -1,21 +1,21 @@
 ﻿local IXPServiceWrapper = require(script:FindFirstAncestor("PurchasePrompt").Parent.IxpServiceWrapper).IXPServiceWrapper
 
 return {
-	new = function() --[[ Line: 15 ]]
+	new = function()
 		-- upvalues: IXPServiceWrapper (copy)
 		local t = {}
 		setmetatable(t, {
-			__tostring = function(): string --[[ Line: 19 ]]
+			__tostring = function(): string
 				return "Service(ABTest)"
 			end
 		})
 		
-		function t.getLayerData(p1) --[[ Line: 24 ]]
+		function t.getLayerData(p1)
 			-- upvalues: IXPServiceWrapper (upval)
 			return IXPServiceWrapper:GetLayerData(p1)
 		end
 		
-		function t.logUserLayerExposure(LayerName) --[[ Line: 28 ]]
+		function t.logUserLayerExposure(LayerName)
 			-- upvalues: IXPServiceWrapper (upval)
 			IXPServiceWrapper:LogUserLayerExposure(LayerName)
 		end

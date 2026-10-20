@@ -2,7 +2,7 @@
 local OtterModule = require(Parent.Otter)
 local _ = require(Parent.Observable)
 
-local function _pendingHideAnimation() --[[ Line: 8 ]] end
+local function _pendingHideAnimation() end
 
 local config = {
 	Default = { dampingRatio = 1, frequency = 4.5 },
@@ -11,16 +11,16 @@ local config = {
 local PanelManagedAnimatableModule = {}
 PanelManagedAnimatableModule.__index = PanelManagedAnimatableModule
 
-function PanelManagedAnimatableModule.checkIfAnimateNeeded(p1, CurrentGoal): boolean --[[ Line: 36 ]]
+function PanelManagedAnimatableModule.checkIfAnimateNeeded(p1, CurrentGoal): boolean
 	return CurrentGoal ~= p1._currentGoal
 end
 
-function PanelManagedAnimatableModule.hideAndBlockAnimationUntilLookBackAgain(p1) --[[ Line: 43 ]]
+function PanelManagedAnimatableModule.hideAndBlockAnimationUntilLookBackAgain(p1)
 	p1._ignoreAnimateShow = true
 	p1:animateHideIfNeeded(true)
 end
 
-function PanelManagedAnimatableModule.animateHideIfNeeded(p1, p2) --[[ Line: 48 ]]
+function PanelManagedAnimatableModule.animateHideIfNeeded(p1, p2)
 	-- upvalues: _pendingHideAnimation (copy), config (copy)
 	if not p2 then
 		p1._ignoreAnimateShow = false
@@ -33,7 +33,7 @@ function PanelManagedAnimatableModule.animateHideIfNeeded(p1, p2) --[[ Line: 48 
 	end
 end
 
-function PanelManagedAnimatableModule.animateShowIfNeeded(p1) --[[ Line: 59 ]]
+function PanelManagedAnimatableModule.animateShowIfNeeded(p1)
 	-- upvalues: config (copy), _pendingHideAnimation (copy)
 	if p1:checkIfAnimateNeeded(0) and not p1._ignoreAnimateShow then
 		p1:cancelPendingTaskIfNeeded()
@@ -41,7 +41,7 @@ function PanelManagedAnimatableModule.animateShowIfNeeded(p1) --[[ Line: 59 ]]
 		p1:animateToGoal(p1._currentGoal, config.Default)
 		local PendingHideAnimation = nil
 		
-		function p1._pendingHideAnimation() --[[ Line: 68 ]]
+		function p1._pendingHideAnimation()
 			-- upvalues: p1 (copy), PendingHideAnimation (ref), _pendingHideAnimation (upval), config (upval)
 			if p1._pendingHideAnimation == PendingHideAnimation then
 				p1._pendingHideAnimation = _pendingHideAnimation
@@ -56,17 +56,17 @@ function PanelManagedAnimatableModule.animateShowIfNeeded(p1) --[[ Line: 59 ]]
 	end
 end
 
-function PanelManagedAnimatableModule.animateToGoal(p1, CurrentGoal, Slower) --[[ Line: 78 ]]
+function PanelManagedAnimatableModule.animateToGoal(p1, CurrentGoal, Slower)
 	-- upvalues: OtterModule (copy)
 	p1._fadeTransparencyMotor:stop()
 	p1._fadeTransparencyMotor:setGoal(OtterModule.spring(CurrentGoal, Slower))
 end
 
-function PanelManagedAnimatableModule.isTargetVisible(p1): boolean --[[ Line: 83 ]]
+function PanelManagedAnimatableModule.isTargetVisible(p1): boolean
 	return p1._targetInstance.GroupTransparency == 0
 end
 
-function PanelManagedAnimatableModule.reset(p1) --[[ Line: 87 ]]
+function PanelManagedAnimatableModule.reset(p1)
 	p1._fadeTransparencyMotor:stop()
 	p1:cancelPendingTaskIfNeeded()
 	p1._ignoreAnimateShow = false
@@ -75,12 +75,12 @@ function PanelManagedAnimatableModule.reset(p1) --[[ Line: 87 ]]
 	p1._visibilityObservable:set(true)
 end
 
-function PanelManagedAnimatableModule.cancelPendingTaskIfNeeded(p1) --[[ Line: 96 ]]
+function PanelManagedAnimatableModule.cancelPendingTaskIfNeeded(p1)
 	-- upvalues: _pendingHideAnimation (copy)
 	p1._pendingHideAnimation = _pendingHideAnimation
 end
 
-function PanelManagedAnimatableModule.create(Object, _visibilityObservable, p1) --[[ Line: 100 ]]
+function PanelManagedAnimatableModule.create(Object, _visibilityObservable, p1)
 	-- upvalues: OtterModule (copy), _pendingHideAnimation (copy), PanelManagedAnimatableModule (copy)
 	local _targetInstance = nil
 	
@@ -98,7 +98,7 @@ function PanelManagedAnimatableModule.create(Object, _visibilityObservable, p1) 
 	end
 	_visibilityObservable:set(_targetInstance.GroupTransparency == 0)
 	local SingleMotor = OtterModule.createSingleMotor(if p1 then 1 else 0)
-	SingleMotor:onStep(function(GroupTransparency) --[[ Line: 120 ]]
+	SingleMotor:onStep(function(GroupTransparency)
 		-- upvalues: _targetInstance (ref), _visibilityObservable (copy)
 		_targetInstance.GroupTransparency = GroupTransparency
 		_visibilityObservable:set(_targetInstance.GroupTransparency == 0)

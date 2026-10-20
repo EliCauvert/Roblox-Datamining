@@ -1,18 +1,18 @@
-﻿return function() --[[ Line: 8 | Named "createEvent" ]]
+﻿return function()
 	local Tbl = {}
 	
 	return {
-		fire = function(...) --[[ Line: 14 ]]
+		fire = function(...)
 			-- upvalues: Tbl (ref)
 			for _, value in Tbl do
 				value(...)
 			end
 		end,
-		connect = function(Callback) --[[ Line: 20 ]]
+		connect = function(Callback)
 			-- upvalues: Tbl (ref)
 			local Flag = true
 			
-			local function Value(...) --[[ Line: 22 ]]
+			local function Value(...)
 				-- upvalues: Flag (ref), Callback (copy)
 				if Flag then
 					Callback(...)
@@ -23,7 +23,7 @@
 			table.insert(Copy, Value)
 			Tbl = Copy
 			
-			return function() --[[ Line: 30 ]]
+			return function()
 				-- upvalues: Flag (ref), Tbl (upval), Value (copy)
 				Flag = false
 				local FoundIndex: number? = table.find(Tbl, Value)

@@ -3,7 +3,7 @@ local ConstantsModule = require(WhatsNew.Constants)
 local _ = require(WhatsNew.Types)
 local DeriveResolvedFieldsModule = require(script.Parent.DeriveResolvedFields)
 
-local function _(List, p1, p2) --[[ Line: 33 | Named "appendWarning" ]]
+local function _(List, p1, p2)
 	if List ~= nil then
 		table.insert(List, `{p1}:{p2}`)
 		
@@ -11,7 +11,7 @@ local function _(List, p1, p2) --[[ Line: 33 | Named "appendWarning" ]]
 	end
 end
 
-local _ = function(BuildContext, Deps, ScreenScopeId, TourType, Warnings) --[[ Line: 40 | Named "createBuildContext" ]]
+local _ = function(BuildContext, Deps, ScreenScopeId, TourType, Warnings)
 	return {
 		document = BuildContext,
 		deps = Deps,
@@ -23,7 +23,7 @@ local _ = function(BuildContext, Deps, ScreenScopeId, TourType, Warnings) --[[ L
 	}
 end
 
-local function filterEntriesInSubtree(List, BuildContext) --[[ Line: 59 ]]
+local function filterEntriesInSubtree(List, BuildContext)
 	-- upvalues: DeriveResolvedFieldsModule (copy)
 	local List1 = {}
 	
@@ -35,7 +35,7 @@ local function filterEntriesInSubtree(List, BuildContext) --[[ Line: 59 ]]
 	return List1
 end
 
-local function groupEntriesByScopeId(List1) --[[ Line: 69 ]]
+local function groupEntriesByScopeId(List1)
 	local t = {}
 	
 	for _, value in List1 do
@@ -50,10 +50,10 @@ local function groupEntriesByScopeId(List1) --[[ Line: 69 ]]
 	return t
 end
 
-local function collectRelevantScopeIds(ScreenScopeId, List, ScopeTours) --[[ Line: 82 ]]
+local function collectRelevantScopeIds(ScreenScopeId, List, ScopeTours)
 	local config = { [ScreenScopeId] = true }
 	
-	local function addAncestorChain(ParentScopeId) --[[ Line: 91 ]]
+	local function addAncestorChain(ParentScopeId)
 		-- upvalues: config (copy), ScreenScopeId (copy), ScopeTours (copy)
 		local ParentScopeId1 = ParentScopeId
 		while ParentScopeId1 ~= nil and not config[ParentScopeId1] do
@@ -76,7 +76,7 @@ local function collectRelevantScopeIds(ScreenScopeId, List, ScopeTours) --[[ Lin
 	return List1
 end
 
-local function buildEmptyScopeTree(Ids, ScopeTours) --[[ Line: 118 ]]
+local function buildEmptyScopeTree(Ids, ScopeTours)
 	local t = {}
 	
 	for _, id in Ids do
@@ -90,7 +90,7 @@ local function buildEmptyScopeTree(Ids, ScopeTours) --[[ Line: 118 ]]
 	return t
 end
 
-local _ = function(p1, p2): boolean --[[ Line: 134 | Named "tryConsumeSteps" ]]
+local _ = function(p1, p2): boolean
 	if p1.globalRemaining < p2 then
 		return false
 	else
@@ -100,7 +100,7 @@ local _ = function(p1, p2): boolean --[[ Line: 134 | Named "tryConsumeSteps" ]]
 	end
 end
 
-local _ = function(p1, List, p2) --[[ Line: 142 | Named "markTruncated" ]]
+local _ = function(p1, List, p2)
 	-- upvalues: ConstantsModule (copy)
 	if p1.truncated then return end
 	p1.truncated = true
@@ -113,7 +113,7 @@ local _ = function(p1, List, p2) --[[ Line: 142 | Named "markTruncated" ]]
 	end
 end
 
-local function getScopePathFromScreen(ParentScopeId, ScreenScopeId, ScopeTours) --[[ Line: 150 ]]
+local function getScopePathFromScreen(ParentScopeId, ScreenScopeId, ScopeTours)
 	local List = {}
 	local ParentScopeId1 = ParentScopeId
 	while ParentScopeId1 ~= nil do
@@ -126,7 +126,7 @@ local function getScopePathFromScreen(ParentScopeId, ScreenScopeId, ScopeTours) 
 	return List
 end
 
-local function entryToTourTip(NestedGatewayTip, NestedGatewayTip1) --[[ Line: 169 ]]
+local function entryToTourTip(NestedGatewayTip, NestedGatewayTip1)
 	return {
 		stepCount = 1,
 		id = NestedGatewayTip.id,
@@ -148,7 +148,7 @@ local function entryToTourTip(NestedGatewayTip, NestedGatewayTip1) --[[ Line: 16
 	}
 end
 
-local function buildNestedGatewayTip(NestedGatewayTip, Scope, NestedGatewayTip1) --[[ Line: 191 ]]
+local function buildNestedGatewayTip(NestedGatewayTip, Scope, NestedGatewayTip1)
 	return {
 		icon = nil,
 		enabled = true,
@@ -175,7 +175,7 @@ local function buildNestedGatewayTip(NestedGatewayTip, Scope, NestedGatewayTip1)
 	}
 end
 
-local _ = function(p1, p2, p3, _, p4, BuildContext): boolean --[[ Line: 226 | Named "addPlainTipToScope" ]]
+local _ = function(p1, p2, p3, _, p4, BuildContext): boolean
 	-- upvalues: ConstantsModule (copy)
 	local Flag = nil
 	if p4.globalRemaining < 1 then
@@ -203,7 +203,7 @@ local _ = function(p1, p2, p3, _, p4, BuildContext): boolean --[[ Line: 226 | Na
 	return false
 end
 
-local function ensureNestedGateway(ParentScopeId, Key, p1, p2, p3, BuildContext): boolean --[[ Line: 243 ]]
+local function ensureNestedGateway(ParentScopeId, Key, p1, p2, p3, BuildContext): boolean
 	-- upvalues: ConstantsModule (copy), DeriveResolvedFieldsModule (copy), buildNestedGatewayTip (copy)
 	if p2[Key] ~= nil then
 		return true
@@ -252,7 +252,7 @@ local function ensureNestedGateway(ParentScopeId, Key, p1, p2, p3, BuildContext)
 	end
 end
 
-local function ensureScopeChainForEntry(ScopeId, p1, p2, p3, BuildContext): boolean --[[ Line: 280 ]]
+local function ensureScopeChainForEntry(ScopeId, p1, p2, p3, BuildContext): boolean
 	-- upvalues: getScopePathFromScreen (copy), ensureNestedGateway (copy)
 	local ScopePathFromScreen = getScopePathFromScreen(ScopeId, BuildContext.screenScopeId, BuildContext.scopeTours)
 	
@@ -264,7 +264,7 @@ local function ensureScopeChainForEntry(ScopeId, p1, p2, p3, BuildContext): bool
 	return true
 end
 
-local function buildScopeTourForScreen(BuildContext, p4) --[[ Line: 298 ]]
+local function buildScopeTourForScreen(BuildContext, p4)
 	-- upvalues: filterEntriesInSubtree (copy), groupEntriesByScopeId (copy), collectRelevantScopeIds (copy), buildEmptyScopeTree (copy), DeriveResolvedFieldsModule (copy), ensureScopeChainForEntry (copy), entryToTourTip (copy), ConstantsModule (copy)
 	local ScopeTour = BuildContext.scopeTours[BuildContext.screenScopeId]
 	local ParentScopeId = if ScopeTour then ScopeTour.parentScopeId else nil
@@ -324,7 +324,7 @@ local function buildScopeTourForScreen(BuildContext, p4) --[[ Line: 298 ]]
 	}
 end
 
-return function(BuildContext, Deps, ScreenScopeId, TourType, p5, Warnings) --[[ Line: 350 | Named "buildTourTips" ]]
+return function(BuildContext, Deps, ScreenScopeId, TourType, p5, Warnings)
 	-- upvalues: buildScopeTourForScreen (copy)
 	return (buildScopeTourForScreen({
 		document = BuildContext,

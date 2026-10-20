@@ -9,7 +9,7 @@ local FoundationModule = require(Parent.Foundation)
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
-return function(p1) --[[ Line: 26 | Named "CountryCodeButton" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), ImageSetLabel (copy), GetImageDataFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), RoactModule (copy)
 	local UseStyleResult = UseStyleFunction()
 	local Tokens = UseStyleResult.Tokens

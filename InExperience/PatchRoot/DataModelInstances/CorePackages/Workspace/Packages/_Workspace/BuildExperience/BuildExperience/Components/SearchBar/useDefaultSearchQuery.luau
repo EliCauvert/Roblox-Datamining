@@ -2,17 +2,17 @@
 local ReactModule = require(BuildExperience.Parent.React)
 local CreateSearchQueryStoreModule = require(BuildExperience.Stores.GetSearchQueryStore.createSearchQueryStore)
 
-return function(p1) --[[ Line: 17 | Named "useDefaultSearchQuery" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), CreateSearchQueryStoreModule (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 18 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), CreateSearchQueryStoreModule (upval)
 		return p1 or CreateSearchQueryStoreModule()
 	end, { p1 })
 	local UseDraftQueryResult = UseMemoResult.useDraftQuery()
 	local UseDebouncedQueryResult = UseMemoResult.useDebouncedQuery()
-	ReactModule.useEffect(function() --[[ Line: 24 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseMemoResult (copy)
-		return function() --[[ Line: 25 ]]
+		return function()
 			-- upvalues: p1 (upval), UseMemoResult (upval)
 			if p1 == nil then
 				UseMemoResult.destroy()

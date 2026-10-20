@@ -4,11 +4,11 @@ local TutilsModule = require(Parent.tutils)
 local Players = game:GetService("Players")
 local UserLibModule = require(Parent.UserLib)
 
-local function selectPlayer(p1) --[[ Line: 13 ]]
+local function selectPlayer(p1)
 	return { playerName = p1.playerName, playerId = p1.playerId }
 end
 
-return function() --[[ Line: 26 ]]
+return function()
 	-- upvalues: UseSelectorFunction (copy), selectPlayer (copy), TutilsModule (copy), Players (copy), UserLibModule (copy)
 	local UseSelectorResult = UseSelectorFunction(selectPlayer, TutilsModule.deepEqual)
 	local Number = if UseSelectorResult then tonumber(UseSelectorResult.playerId) else nil

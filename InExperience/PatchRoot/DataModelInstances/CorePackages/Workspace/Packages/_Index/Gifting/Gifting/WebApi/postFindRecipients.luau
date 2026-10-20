@@ -4,7 +4,7 @@ local FetchGiftingModule = require(Gifting.WebApi.fetchGifting)
 local UrlsModule = require(Gifting.WebApi.Urls)
 local _ = require(Gifting.Types)
 
-return function(Body, Network) --[[ Line: 24 | Named "postFindRecipients" ]]
+return function(Body, Network)
 	-- upvalues: FetchGiftingModule (copy), UrlsModule (copy), FindRecipientsResponseModelModule (copy)
 	return FetchGiftingModule({
 		method = "POST",

@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.types)
 
-local function _(Key, Params, Routes, IsTransitioning) --[[ Line: 8 | Named "createMockRouteState" ]]
+local function _(Key, Params, Routes, IsTransitioning)
 	local config = {
 		key = Key,
 		routeName = Key,
@@ -16,7 +16,7 @@ local function _(Key, Params, Routes, IsTransitioning) --[[ Line: 8 | Named "cre
 end
 
 return {
-	createMockStackState = function(Key, Routes) --[[ Line: 27 ]]
+	createMockStackState = function(Key, Routes)
 		local config = {
 			params = nil,
 			isTransitioning = false,
@@ -30,7 +30,7 @@ return {
 		end
 		return config
 	end,
-	createMockSwitchState = function(Key, Routes) --[[ Line: 31 ]]
+	createMockSwitchState = function(Key, Routes)
 		local config = {
 			params = nil,
 			isTransitioning = nil,
@@ -44,7 +44,7 @@ return {
 		end
 		return config
 	end,
-	createMockScreenState = function(Key, Params) --[[ Line: 35 ]]
+	createMockScreenState = function(Key, Params)
 		return {
 			isTransitioning = nil,
 			key = Key,
@@ -52,38 +52,38 @@ return {
 			params = Params
 		}
 	end,
-	createMockNavigationObject = function(State) --[[ Line: 39 ]]
+	createMockNavigationObject = function(State)
 		return {
 			state = State,
-			dispatch = function(): boolean --[[ Line: 42 ]]
+			dispatch = function(): boolean
 				return true
 			end,
-			getParam = function(...) --[[ Line: 45 ]] end,
-			addListener = function(_, _) --[[ Line: 48 ]]
-				return { remove = function() --[[ Line: 49 ]] end }
+			getParam = function(...) end,
+			addListener = function(_, _)
+				return { remove = function() end }
 			end,
-			isFocused = function() --[[ Line: 51 ]] end,
-			getChildNavigation = function(_) --[[ Line: 52 ]]
+			isFocused = function() end,
+			getChildNavigation = function(_)
 				return nil
 			end,
 			router = {
-				getScreenOptions = function(_, _) --[[ Line: 56 ]]
+				getScreenOptions = function(_, _)
 					return {}
 				end,
-				getStateForAction = function(_, p1) --[[ Line: 59 ]]
+				getStateForAction = function(_, p1)
 					return p1
 				end,
-				getComponentForRouteName = function(_) --[[ Line: 62 ]]
-					return function() --[[ Line: 63 ]]
+				getComponentForRouteName = function(_)
+					return function()
 						return nil
 					end
 				end,
-				getActionCreators = function() --[[ Line: 67 ]]
+				getActionCreators = function()
 					return {}
 				end,
 				childRouters = {}
 			},
-			_dangerouslyGetParent = function() --[[ Line: 72 ]]
+			_dangerouslyGetParent = function()
 				return nil
 			end
 		}

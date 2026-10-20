@@ -4,7 +4,7 @@ local AbuseReportAnalyticsContextModule = require(GenericAbuseReporting.Bedui.Pr
 local _ = require(GenericAbuseReporting.Enums.AbuseVector)
 local _ = require(GenericAbuseReporting.Bedui.Utils.BeduiAnalytics)
 
-return function(p1) --[[ Line: 18 | Named "AbuseReportAnalyticsProvider" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), AbuseReportAnalyticsContextModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	

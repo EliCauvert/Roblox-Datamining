@@ -21,12 +21,12 @@ local config = {
 }
 local InstallReducerResult = RoduxFriends.installReducer()
 
-local function _(p1) --[[ Line: 30 ]]
+local function _(p1)
 	-- upvalues: Llama (copy), FriendsActionAdaptorFunction (copy), RoduxFriends (copy), FriendsOmniActionAdaptorModule (copy)
 	return Llama.Dictionary.join(FriendsActionAdaptorFunction(RoduxFriends), FriendsOmniActionAdaptorModule(p1))
 end
 
-return function(p1) --[[ Line: 34 ]]
+return function(p1)
 	-- upvalues: ConvertActionsFunction (copy), InstallReducerResult (copy), Llama (copy), FriendsActionAdaptorFunction (copy), RoduxFriends (copy), FriendsOmniActionAdaptorModule (copy), config (copy)
 	return ConvertActionsFunction(InstallReducerResult, Llama.Dictionary.join(FriendsActionAdaptorFunction(RoduxFriends), FriendsOmniActionAdaptorModule(p1)), config)
 end

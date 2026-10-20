@@ -5,7 +5,7 @@ local FriendsModule = require(UserSearch.Rodux.Friends)
 local MyRoduxNetworkingModule = require(UserSearch.Networking.myRoduxNetworking)
 local FFlagUserSearchPresenceStoreMigrationModule = require(UserSearch.Flags.FFlagUserSearchPresenceStoreMigration)
 
-return function() --[[ Line: 11 ]]
+return function()
 	-- upvalues: RoduxModule (copy), FFlagUserSearchPresenceStoreMigrationModule (copy), PresenceModule (copy), MyRoduxNetworkingModule (copy), FriendsModule (copy)
 	return RoduxModule.combineReducers({
 		Presence = if FFlagUserSearchPresenceStoreMigrationModule then nil else PresenceModule,

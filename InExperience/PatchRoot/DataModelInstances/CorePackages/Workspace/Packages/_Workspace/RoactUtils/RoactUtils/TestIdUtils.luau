@@ -1,7 +1,7 @@
 ﻿local FFlagLuaAppAddTestIdsForArrow = require(script:FindFirstAncestor("RoactUtils").Parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
 
 return {
-	getTestId = function(p1, p2): string? --[[ Line: 19 ]]
+	getTestId = function(p1, p2): string?
 		-- upvalues: FFlagLuaAppAddTestIdsForArrow (copy)
 		if not FFlagLuaAppAddTestIdsForArrow then
 			return nil

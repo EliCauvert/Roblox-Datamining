@@ -6,7 +6,7 @@ local ReactModule = require(Parent.React)
 local UseGetConversationFromIdModule = require(AppChat.Hooks.useGetConversationFromId)
 local UseGetOneToOneFriendIdFromConversationIdModule = require(AppChat.Hooks.useGetOneToOneFriendIdFromConversationId)
 
-return function(Callback, p1) --[[ Line: 25 | Named "useCallbackWithDynamicConversationId" ]]
+return function(Callback, p1)
 	-- upvalues: UseGetConversationFromIdModule (copy), UseGetOneToOneFriendIdFromConversationIdModule (copy), ReactModule (copy), CryoModule (copy)
 	local UseGetConversationFromIdModuleResult = UseGetConversationFromIdModule(p1)
 	local HasUseGetConversationFromIdModuleResult = UseGetConversationFromIdModuleResult ~= nil
@@ -14,7 +14,7 @@ return function(Callback, p1) --[[ Line: 25 | Named "useCallbackWithDynamicConve
 	local UseGetOneToOneFriendIdFromConversationIdModuleResult1 = UseGetConversationFromIdModuleResult and (UseGetConversationFromIdModuleResult.source == "friends" and UseGetOneToOneFriendIdFromConversationIdModuleResult)
 	local P0 = UseGetConversationFromIdModuleResult and (UseGetConversationFromIdModuleResult.source ~= "friends" and p1)
 	
-	return ReactModule.useCallback(function(p2) --[[ Line: 35 ]]
+	return ReactModule.useCallback(function(p2)
 		-- upvalues: Callback (copy), CryoModule (upval), P0 (copy), p1 (copy), UseGetOneToOneFriendIdFromConversationIdModuleResult1 (copy), UseGetOneToOneFriendIdFromConversationIdModuleResult (copy)
 		return Callback((CryoModule.Dictionary.union(p2 or {}, {
 			conversationId = if P0 then p1 else nil,

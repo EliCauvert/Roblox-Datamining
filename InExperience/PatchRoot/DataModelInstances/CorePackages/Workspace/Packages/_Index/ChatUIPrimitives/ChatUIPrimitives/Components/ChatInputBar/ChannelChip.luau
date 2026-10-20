@@ -2,7 +2,7 @@
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 
-return function(p1) --[[ Line: 14 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FoundationModule (copy)
 	return ReactModule.createElement(FoundationModule.Text, {
 		tag = "text-caption-medium text-wrap content-emphasis",

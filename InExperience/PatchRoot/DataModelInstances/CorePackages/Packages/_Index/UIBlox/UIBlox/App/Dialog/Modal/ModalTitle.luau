@@ -32,16 +32,16 @@ ModalTitle.defaultProps = {
 	closeButtonIcon = CloseButtonIconModule.Close
 }
 
-function ModalTitle:GetHeight(): number --[[ Line: 53 ]]
+function ModalTitle:GetHeight(): number
 	return 48
 end
 
-local function _(Back) --[[ Line: 57 | Named "getCloseButtonIcon" ]]
+local function _(Back)
 	-- upvalues: CloseButtonIconModule (copy)
 	return if Back == CloseButtonIconModule.Close then "icons/navigation/close" elseif Back == CloseButtonIconModule.Back then "icons/actions/cycleLeft" else nil
 end
 
-local function renderBackgroundImage(TitleBackgroundImageProps, p1, JoinResult) --[[ Line: 67 ]]
+local function renderBackgroundImage(TitleBackgroundImageProps, p1, JoinResult)
 	-- upvalues: CryoModule (copy), RoactModule (copy), GenericTextLabelModule (copy), ImageSetComponentModule (copy)
 	local Text = TitleBackgroundImageProps.text
 	local v1: boolean = Text and #Text > 0
@@ -112,11 +112,11 @@ local function renderBackgroundImage(TitleBackgroundImageProps, p1, JoinResult) 
 	return Element
 end
 
-function ModalTitle.render(p1) --[[ Line: 147 ]]
+function ModalTitle.render(p1)
 	-- upvalues: WithStyleModule (copy), RoactModule (copy), ControllableModule (copy), ImageSetComponentModule (copy), ImagesModule (copy), CloseButtonIconModule (copy), GenericTextLabelModule (copy), renderBackgroundImage (copy)
 	local TitleBackgroundImageProps = p1.props.titleBackgroundImageProps
 	
-	return WithStyleModule(function(p2) --[[ Line: 150 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: RoactModule (upval), p1 (copy), ControllableModule (upval), ImageSetComponentModule (upval), ImagesModule (upval), CloseButtonIconModule (upval), GenericTextLabelModule (upval), TitleBackgroundImageProps (copy), renderBackgroundImage (upval)
 		local _Font = p2.Font
 		local Theme = p2.Theme
@@ -156,7 +156,7 @@ function ModalTitle.render(p1) --[[ Line: 147 ]]
 						})
 					}
 				},
-				onStateChanged = function(...) --[[ Line: 184 ]] end
+				onStateChanged = function(...) end
 			}) or nil
 		else
 			Element = nil

@@ -12,10 +12,10 @@ local ReceiveUsersPresenceFunction = UserLibModule.Utils.receiveUsersPresence
 local NetworkingPresenceModule = require(AppChat.Http.NetworkingPresence)
 local FFlagAppChatPresenceStoreMigrationModule = require(AppChat.Flags.FFlagAppChatPresenceStoreMigration)
 
-local function AddNewFriend(p1, Id, p2) --[[ Line: 24 ]]
+local function AddNewFriend(p1, Id, p2)
 	-- upvalues: UserService (copy), UserModel (copy), UpdateUsersFunction (copy), PreloadUsersThumbnailFunction (copy), USERCAROUSELHEADSHOT (copy), FFlagAppChatPresenceStoreMigrationModule (copy), NetworkingPresenceModule (copy), ReceiveUsersPresenceFunction (copy), GetConversationMetadata (copy), PromiseModule (copy)
 	local UserService1 = p2 and p2.UserService or UserService
-	local Success, Result = pcall(function() --[[ Line: 28 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: UserService1 (copy), Id (copy)
 		return UserService1:GetUserInfosByUserIdsAsync({ (tonumber(Id)) })[1]
 	end)
@@ -38,12 +38,12 @@ local function AddNewFriend(p1, Id, p2) --[[ Line: 24 ]]
 	}
 	
 	if not FFlagAppChatPresenceStoreMigrationModule then
-		table.insert(List, p1:dispatch(NetworkingPresenceModule.GetPresencesFromUserIds.API(list)):andThen(function(Result) --[[ Line: 66 ]]
+		table.insert(List, p1:dispatch(NetworkingPresenceModule.GetPresencesFromUserIds.API(list)):andThen(function(Result)
 			-- upvalues: ReceiveUsersPresenceFunction (upval), p1 (copy)
 			ReceiveUsersPresenceFunction(Result.responseBody.userPresences, p1)
 			
 			return Result
-		end):catch(function(Err) --[[ Line: 71 ]]
+		end):catch(function(Err)
 			warn("NetworkingPresence failure in ChatFriendshipCreated, Status: " .. tostring(Err))
 		end))
 	end
@@ -51,9 +51,9 @@ local function AddNewFriend(p1, Id, p2) --[[ Line: 24 ]]
 	PromiseModule.all(List)
 end
 
-return function(Id) --[[ Line: 83 ]]
+return function(Id)
 	-- upvalues: AddNewFriend (copy)
-	return function(p1, p2) --[[ Line: 84 ]]
+	return function(p1, p2)
 		-- upvalues: AddNewFriend (upval), Id (copy)
 		AddNewFriend(p1, Id, p2)
 	end

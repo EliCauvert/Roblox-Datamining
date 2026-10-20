@@ -5,14 +5,14 @@ local ResolveAcpUrlModule = require(script.Parent.Parent.Env.resolveAcpUrl)
 local DecodePreviewSpecsModule = require(script.Parent.decodePreviewSpecs)
 local _ = require(script.Parent.PreviewSpecsTypes)
 
-local function _() --[[ Line: 21 | Named "getDefaultBaseUrl" ]]
+local function _()
 	-- upvalues: ResolveAcpUrlModule (copy), UrlBase (copy)
 	local SitetestNumber = ResolveAcpUrlModule.resolveCreatorAgentAcp().sitetestNumber
 	
 	return if SitetestNumber == nil then UrlBase.APIS else `https://apis.sitetest{SitetestNumber}.robloxlabs.com`
 end
 
-return function(p1) --[[ Line: 29 | Named "fetchPreviewSpecs" ]]
+return function(p1)
 	-- upvalues: HttpClientModule (copy), ResolveAcpUrlModule (copy), UrlBase (copy), DecodePreviewSpecsModule (copy)
 	local P0 = p1 or {}
 	local FetchFunction = HttpClientModule.fetch

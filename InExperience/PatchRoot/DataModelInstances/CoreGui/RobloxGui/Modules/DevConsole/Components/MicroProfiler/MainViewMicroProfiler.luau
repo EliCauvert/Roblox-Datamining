@@ -18,16 +18,16 @@ local FFlagDevConsoleMicroProfilerImproveWordingModule = require(script.Parent.F
 local DevConsoleMicroProfilerNewLayout = game:DefineFastFlag("DevConsoleMicroProfilerNewLayout", false)
 local MainViewProfiler = RoactModule.Component:extend("MainViewProfiler")
 
-function MainViewProfiler.init(p1) --[[ Line: 35 ]]
+function MainViewProfiler.init(p1)
 	-- upvalues: GameSettings (copy), RbxAnalyticsService (copy), RoactModule (copy)
-	function p1.onUtilTabHeightChanged(UtilTabHeight) --[[ Line: 36 ]]
+	function p1.onUtilTabHeightChanged(UtilTabHeight)
 		-- upvalues: p1 (copy)
 		p1:setState({ utilTabHeight = UtilTabHeight })
 	end
 	
-	function p1.changeProfilerState(ClientProfilerEnabled) --[[ Line: 42 ]]
+	function p1.changeProfilerState(ClientProfilerEnabled)
 		-- upvalues: GameSettings (upval), p1 (copy), RbxAnalyticsService (upval)
-		return function() --[[ Line: 43 ]]
+		return function()
 			-- upvalues: GameSettings (upval), ClientProfilerEnabled (copy), p1 (upval), RbxAnalyticsService (upval)
 			GameSettings.OnScreenProfilerEnabled = ClientProfilerEnabled
 			p1:setState({ clientProfilerEnabled = ClientProfilerEnabled })
@@ -35,7 +35,7 @@ function MainViewProfiler.init(p1) --[[ Line: 35 ]]
 		end
 	end
 	
-	p1.microProfilerChangedConnection = GameSettings:GetPropertyChangedSignal("OnScreenProfilerEnabled"):Connect(function() --[[ Line: 54 ]]
+	p1.microProfilerChangedConnection = GameSettings:GetPropertyChangedSignal("OnScreenProfilerEnabled"):Connect(function()
 		-- upvalues: p1 (copy), GameSettings (upval)
 		p1:setState({
 			clientProfilerEnabled = GameSettings.OnScreenProfilerEnabled
@@ -45,18 +45,18 @@ function MainViewProfiler.init(p1) --[[ Line: 35 ]]
 	p1.state = { utilTabHeight = 0 }
 end
 
-function MainViewProfiler.didMount(p1) --[[ Line: 67 ]]
+function MainViewProfiler.didMount(p1)
 	p1:setState({ utilTabHeight = p1.utilRef.current.Size.Y.Offset })
 end
 
-function MainViewProfiler.willUnmount(p1) --[[ Line: 75 ]]
+function MainViewProfiler.willUnmount(p1)
 	if p1.microProfilerChangedConnection then
 		p1.microProfilerChangedConnection:Disconnect()
 		p1.microProfilerChangedConnection = nil
 	end
 end
 
-function MainViewProfiler.didUpdate(p1) --[[ Line: 82 ]]
+function MainViewProfiler.didUpdate(p1)
 	local Size = p1.utilRef.current.Size
 	
 	if Size.Y.Offset ~= p1.state.utilTabHeight then
@@ -64,7 +64,7 @@ function MainViewProfiler.didUpdate(p1) --[[ Line: 82 ]]
 	end
 end
 
-function MainViewProfiler.renderNewLayout(p1) --[[ Line: 91 ]]
+function MainViewProfiler.renderNewLayout(p1)
 	-- upvalues: RoactModule (copy), ConstantsModule (copy), MainRowPadding (copy), UtilAndTabModule (copy), MicroProfilerViewModule (copy)
 	local Size = p1.props.size
 	
@@ -94,7 +94,7 @@ function MainViewProfiler.renderNewLayout(p1) --[[ Line: 91 ]]
 	})
 end
 
-function MainViewProfiler.render(p1) --[[ Line: 123 ]]
+function MainViewProfiler.render(p1)
 	-- upvalues: DevConsoleMicroProfilerNewLayout (copy), ButtonWidth (copy), RoactModule (copy), ConstantsModule (copy), MainRowPadding (copy), UtilAndTabModule (copy), FFlagDevConsoleMicroProfilerImproveWordingModule (copy), MainWindowHeader (copy), ButtonTextSize (copy), UnselectedGray1 (copy), UnselectedGray (copy), SelectedBlue (copy), ServerProfilerInterfaceModule (copy)
 	if DevConsoleMicroProfilerNewLayout then
 		return p1:renderNewLayout()

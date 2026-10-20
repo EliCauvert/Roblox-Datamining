@@ -1,6 +1,6 @@
 ﻿local ArgCheckModule = require(script:FindFirstAncestor("AppChat").Parent.ArgCheck)
 
-return function(Inputs, ...): boolean --[[ Line: 6 ]]
+return function(Inputs, ...): boolean
 	-- upvalues: ArgCheckModule (copy)
 	ArgCheckModule.isType(Inputs, "table", "isKeyCodePressed.pressedKeys")
 	local KeyCodes = { ... }

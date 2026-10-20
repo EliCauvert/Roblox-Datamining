@@ -10,7 +10,7 @@ local LocalizationModule = require(ExpChat.Localization)
 local FStringInExpChatRewriteReasonKeyModule = require(ExpChat.Flags.FStringInExpChatRewriteReasonKey)
 local MergeBindableScalarModule = require(ExpChat.ChatWindow.Helpers.mergeBindableScalar)
 
-return ReactModule.memo(function(p1) --[[ Line: 25 | Named "RewriteDropdown" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FoundationModule (copy), LocalizationModule (copy), FStringInExpChatRewriteReasonKeyModule (copy), GetMessagesStoreModule (copy), GetRewriteDropdownStoreModule (copy), ReactModule (copy), SignalsModule (copy), UseSignalBindingFunction (copy), MergeBindableScalarModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseLocalizationResult = LocalizationModule.useLocalization({
@@ -19,9 +19,9 @@ return ReactModule.memo(function(p1) --[[ Line: 25 | Named "RewriteDropdown" ]]
 	})
 	local MessagesStoreModule = GetMessagesStoreModule(false)
 	local RewriteDropdownStoreModule = GetRewriteDropdownStoreModule(false)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 40 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), RewriteDropdownStoreModule (copy), MessagesStoreModule (copy)
-		local Computed = SignalsModule.createComputed(function(p2) --[[ Line: 41 ]]
+		local Computed = SignalsModule.createComputed(function(p2)
 			-- upvalues: RewriteDropdownStoreModule (upval), MessagesStoreModule (upval)
 			local ComponentId = RewriteDropdownStoreModule.getComponentId(p2)
 			
@@ -50,13 +50,13 @@ return ReactModule.memo(function(p1) --[[ Line: 25 | Named "RewriteDropdown" ]]
 		end)
 		
 		return {
-			getVisible = SignalsModule.createComputed(function(p2) --[[ Line: 69 ]]
+			getVisible = SignalsModule.createComputed(function(p2)
 				-- upvalues: Computed (copy)
 				local ComputedResult = Computed(p2)
 				
 				return if ComputedResult then ComputedResult.wasRewritten else false
 			end),
-			getLayoutOrder = SignalsModule.createComputed(function(p2): number --[[ Line: 77 ]]
+			getLayoutOrder = SignalsModule.createComputed(function(p2): number
 				-- upvalues: RewriteDropdownStoreModule (upval), MessagesStoreModule (upval)
 				local ComponentId = RewriteDropdownStoreModule.getComponentId(p2)
 				
@@ -68,7 +68,7 @@ return ReactModule.memo(function(p1) --[[ Line: 25 | Named "RewriteDropdown" ]]
 					return 0
 				end
 			end),
-			getOriginalText = SignalsModule.createComputed(function(p2) --[[ Line: 89 ]]
+			getOriginalText = SignalsModule.createComputed(function(p2)
 				-- upvalues: Computed (copy)
 				local ComputedResult = Computed(p2)
 				
@@ -79,7 +79,7 @@ return ReactModule.memo(function(p1) --[[ Line: 25 | Named "RewriteDropdown" ]]
 	local UseSignalBindingResult = UseSignalBindingFunction(UseMemoResult.getVisible)
 	local UseSignalBindingResult1 = UseSignalBindingFunction(UseMemoResult.getLayoutOrder)
 	local UseSignalBindingResult2 = UseSignalBindingFunction(UseMemoResult.getOriginalText)
-	local MapResult = UseSignalBindingResult2:map(function(p2): boolean --[[ Line: 107 ]]
+	local MapResult = UseSignalBindingResult2:map(function(p2): boolean
 		return p2 ~= nil and p2 ~= ""
 	end)
 	
@@ -121,7 +121,7 @@ return ReactModule.memo(function(p1) --[[ Line: 25 | Named "RewriteDropdown" ]]
 			Divider = ReactModule.createElement(FoundationModule.Divider, {
 				LayoutOrder = 2,
 				orientation = FoundationModule.Enums.Orientation.Horizontal,
-				Visible = ReactModule.joinBindings({ p1.textTransparency, MapResult }):map(function(Entry) --[[ Line: 150 ]]
+				Visible = ReactModule.joinBindings({ p1.textTransparency, MapResult }):map(function(Entry)
 					return Entry[1] < 1 and Entry[2]
 				end),
 				DividerVariant = FoundationModule.Enums.DividerVariant.Default

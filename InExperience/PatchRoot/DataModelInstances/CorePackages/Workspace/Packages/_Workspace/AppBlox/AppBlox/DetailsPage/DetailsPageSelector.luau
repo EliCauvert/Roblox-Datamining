@@ -11,7 +11,7 @@ local config = {
 	[DeviceType.VR] = DetailsPageTemplateModule
 }
 
-return function(p1) --[[ Line: 32 | Named "DetailsPageTemplateSelector" ]]
+return function(p1)
 	-- upvalues: config (copy), DetailsPageTemplateModule (copy), ReactModule (copy)
 	return ReactModule.createElement(config[p1.deviceType] or DetailsPageTemplateModule, p1.detailsPageProps)
 end

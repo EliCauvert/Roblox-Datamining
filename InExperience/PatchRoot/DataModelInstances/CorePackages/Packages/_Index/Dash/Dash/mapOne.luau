@@ -1,4 +1,4 @@
-﻿return function(List, Callback) --[[ Line: 14 | Named "mapOne" ]]
+﻿return function(List, Callback)
 	local CallbackResult = nil
 	for i, value in List do
 		CallbackResult = if Callback then Callback(value, i) else value

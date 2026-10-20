@@ -17,7 +17,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 	pageName = if FFlagLuaAppPlayButtonLoadingDurationTelemetry then TModule.optional(TModule.string) else nil
 })
 
-return function(EventContext, p1) --[[ Line: 30 ]]
+return function(EventContext, p1)
 	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), TelemetryService (copy), config (copy), FFlagLuaAppPlayButtonLoadingDurationTelemetry (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(p1)
 	

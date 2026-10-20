@@ -19,31 +19,31 @@ local CreateNetworkingModule = require(script.Parent.createNetworking)
 local Url = require(Parent.Http).Url
 local FFlagBuildExperienceLibrary = require(Parent.SharedFlags).FFlagBuildExperienceLibrary
 local DeferredAssetManagerService = if require(ProgressLoading.Flags.EngineFeatureEnableDeferredAssetManagerService) then game:GetService("DeferredAssetManagerService") else nil
-local NewResult = require(Parent.Rodux).Store.new(function(p1) --[[ Line: 44 ]]
+local NewResult = require(Parent.Rodux).Store.new(function(p1)
 	return p1 or {}
 end, {})
 
-local function getIsLoadingAssets(p1) --[[ Line: 51 ]]
+local function getIsLoadingAssets(p1)
 	-- upvalues: GetDeferredAssetStoreModule (copy)
 	local DeferredAssetStoreModule = GetDeferredAssetStoreModule(p1)
 	
 	return if DeferredAssetStoreModule then DeferredAssetStoreModule.getDownloadStatus(p1) == Enum.PrefetchDownloadStatus.InProgress or DeferredAssetStoreModule.getPregameLoadingScreenOnly(p1) else false
 end
 
-local function onCancel() --[[ Line: 64 ]]
+local function onCancel()
 	-- upvalues: DeferredAssetManagerService (copy)
 	if DeferredAssetManagerService then
 		DeferredAssetManagerService:CancelPrefetch()
 	end
 end
 
-local function PregameOverrideScreen(p1) --[[ Line: 72 ]]
+local function PregameOverrideScreen(p1)
 	-- upvalues: ReactModule (copy), RunService (copy), onCancel (copy)
-	ReactModule.useEffect(function() --[[ Line: 75 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: RunService (upval)
 		RunService:SetRobloxGuiFocused(true)
 		
-		return function() --[[ Line: 77 ]]
+		return function()
 			-- upvalues: RunService (upval)
 			RunService:SetRobloxGuiFocused(false)
 		end
@@ -52,7 +52,7 @@ local function PregameOverrideScreen(p1) --[[ Line: 72 ]]
 	return p1.override.render({ displayOrder = 9999, onCancel = onCancel })
 end
 
-return ReactModule.memo(function(_) --[[ Line: 84 | Named "PreGameLoadingScreen" ]]
+return ReactModule.memo(function(_)
 	-- upvalues: SignalsReactModule (copy), getIsLoadingAssets (copy), GetJoiningPlaceModule (copy), ReactModule (copy), FFlagBuildExperienceLibrary (copy), PregameOverrideModule (copy), ResponsiveModule (copy), FFlagEnableTiltLoadingScreen (copy), MarketplaceService (copy), Url (copy), CreateNetworkingModule (copy), CachedPolicyServiceModule (copy), PregameOverrideScreen (copy), DeferredAssetManagerService (copy), onCancel (copy), RoactRoduxModule (copy), NewResult (copy), UiModeStyleProvider (copy), ColorMode (copy), Constants (copy), LoadingScreenViewModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(getIsLoadingAssets)
 	local JoiningPlaceId = if UseSignalStateResult then GetJoiningPlaceModule.getJoiningPlaceId() else 0
@@ -71,7 +71,7 @@ return ReactModule.memo(function(_) --[[ Line: 84 | Named "PreGameLoadingScreen"
 			UseRefResult.current = nil
 		end
 		local UseRefResult2 = ReactModule.useRef(UseSignalStateResult)
-		ReactModule.useEffect(function() --[[ Line: 98 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRefResult2 (copy), UseSignalStateResult (copy), PregameOverrideModule (upval)
 			if UseRefResult2.current and not UseSignalStateResult then
 				PregameOverrideModule.setPregameOverride(nil)
@@ -82,7 +82,7 @@ return ReactModule.memo(function(_) --[[ Line: 84 | Named "PreGameLoadingScreen"
 	local UseRefResult1 = ReactModule.useRef(nil)
 	UseRefResult1.current = ResponsiveModule.usePreferredInput()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-	ReactModule.useEffect(function() --[[ Line: 110 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagEnableTiltLoadingScreen (upval), JoiningPlaceId (copy), UseStateResult2 (copy), MarketplaceService (upval)
 		if FFlagEnableTiltLoadingScreen then return end
 		if JoiningPlaceId <= 0 then
@@ -91,9 +91,9 @@ return ReactModule.memo(function(_) --[[ Line: 84 | Named "PreGameLoadingScreen"
 			return
 		end
 		local Flag = false
-		task.spawn(function() --[[ Line: 119 ]]
+		task.spawn(function()
 			-- upvalues: MarketplaceService (upval), JoiningPlaceId (upval), Flag (ref), UseStateResult2 (upval)
-			local Success, Result = pcall(function() --[[ Line: 120 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: MarketplaceService (upval), JoiningPlaceId (upval)
 				return MarketplaceService:GetProductInfo(JoiningPlaceId)
 			end)
@@ -103,13 +103,13 @@ return ReactModule.memo(function(_) --[[ Line: 84 | Named "PreGameLoadingScreen"
 			end
 		end)
 		
-		return function() --[[ Line: 127 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end
 	end, { JoiningPlaceId })
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
-	ReactModule.useEffect(function() --[[ Line: 134 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagEnableTiltLoadingScreen (upval), JoiningPlaceId (copy), JoiningUniverseId (copy), UseStateResult2_1 (copy), Url (upval), CreateNetworkingModule (upval)
 		if FFlagEnableTiltLoadingScreen then return end
 		if JoiningPlaceId <= 0 or JoiningUniverseId > 0 then
@@ -118,24 +118,24 @@ return ReactModule.memo(function(_) --[[ Line: 84 | Named "PreGameLoadingScreen"
 			return
 		end
 		local Flag = false
-		CreateNetworkingModule(string.format("%suniverses/v1/places/%d/universe", Url.APIS_URL, JoiningPlaceId), "GET"):andThen(function(Result) --[[ Line: 144 ]]
+		CreateNetworkingModule(string.format("%suniverses/v1/places/%d/universe", Url.APIS_URL, JoiningPlaceId), "GET"):andThen(function(Result)
 			-- upvalues: Flag (ref), UseStateResult2_1 (upval)
 			if not Flag and Result and Result.responseBody and Result.responseBody.universeId then
 				UseStateResult2_1(Result.responseBody.universeId)
 			end
-		end, function() --[[ Line: 148 ]] end)
+		end, function() end)
 		
-		return function() --[[ Line: 149 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end
 	end, { JoiningPlaceId, JoiningUniverseId })
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 156 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagEnableTiltLoadingScreen (upval), CachedPolicyServiceModule (upval), UseStateResult2_2 (copy)
 		if FFlagEnableTiltLoadingScreen then return end
 		local Flag = false
-		task.spawn(function() --[[ Line: 161 ]]
+		task.spawn(function()
 			-- upvalues: CachedPolicyServiceModule (upval), Flag (ref), UseStateResult2_2 (upval)
 			local IsSubjectToChinaPolicies = CachedPolicyServiceModule:IsSubjectToChinaPolicies()
 			
@@ -144,7 +144,7 @@ return ReactModule.memo(function(_) --[[ Line: 84 | Named "PreGameLoadingScreen"
 			end
 		end)
 		
-		return function() --[[ Line: 167 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end

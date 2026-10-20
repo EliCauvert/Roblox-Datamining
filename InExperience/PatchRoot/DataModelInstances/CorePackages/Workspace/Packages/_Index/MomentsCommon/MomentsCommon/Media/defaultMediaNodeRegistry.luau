@@ -8,7 +8,7 @@ local CreateTextOverlayNodeModule = require(MomentsCommon.Media.Nodes.createText
 local CreateStickerOverlayNodeModule = require(MomentsCommon.Media.Nodes.createStickerOverlayNode)
 local GetFFlagMomentsStickerButtonModule = require(MomentsCommon.Flags.GetFFlagMomentsStickerButton)
 
-return function() --[[ Line: 29 | Named "createDefaultMediaNodeRegistry" ]]
+return function()
 	-- upvalues: MediaNodeRegistryModule (copy), CreateVideoNodeModule (copy), CreateMusicNodeModule (copy), CreateTtsNodeModule (copy), CreateScreenshotNodeModule (copy), CreateTextOverlayNodeModule (copy), GetFFlagMomentsStickerButtonModule (copy), CreateStickerOverlayNodeModule (copy)
 	local MediaNodeRegistryModuleResult = MediaNodeRegistryModule()
 	MediaNodeRegistryModuleResult.register(CreateVideoNodeModule)

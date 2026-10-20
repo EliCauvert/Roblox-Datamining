@@ -12,7 +12,7 @@ local View = require(Parent.Foundation).View
 local ResponsiveModule = require(Parent.Responsive)
 local UseBreakpointXOrLargerFunction = ResponsiveModule.useBreakpointXOrLarger
 
-function GridTileSponsoredFooter(p1) --[[ Line: 31 ]]
+function GridTileSponsoredFooter(p1)
 	-- upvalues: UseLocalizationFunction (copy), UseBreakpointXOrLargerFunction (copy), ResponsiveModule (copy), ReactModule (copy), GridTileTextFooterModule (copy), View (copy), GridTileIconTextFooterModule (copy), SponsoredTooltipHover (copy), TooltipOrientation (copy), GetUserInputIsSelectionOnlyModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		sponsoredText = "Feature.GamePage.Label.Sponsored",

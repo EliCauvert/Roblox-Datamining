@@ -7,7 +7,7 @@ local FriendsChatOsaAcknowledgementModule = require(script.Parent.FriendsChatOsa
 local FFlagFriendsChatDiscloseUpdateSecondVersion = require(Parent.SharedFlags).FFlagFriendsChatDiscloseUpdateSecondVersion
 local UserProfileStore = require(Parent.UserProfiles).Stores.UserProfileStore
 
-local function getProfileDisplayName(p1, p2) --[[ Line: 26 ]]
+local function getProfileDisplayName(p1, p2)
 	if p1 == nil then
 		return nil, false
 	elseif p1.status == "failed" then
@@ -34,7 +34,7 @@ local function getProfileDisplayName(p1, p2) --[[ Line: 26 ]]
 	end
 end
 
-local function buildDisplay(DisplayName, p1, Callback, SystemTextSize) --[[ Line: 52 ]]
+local function buildDisplay(DisplayName, p1, Callback, SystemTextSize)
 	-- upvalues: UniversalAppPolicyModule (copy), FFlagFriendsChatDiscloseUpdateSecondVersion (copy), BuildRowDisplayModule (copy)
 	local CanSeeChatTerminology = UniversalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology()
 	local P3 = p1 or DisplayName == nil
@@ -55,7 +55,7 @@ local function buildDisplay(DisplayName, p1, Callback, SystemTextSize) --[[ Line
 	}, {}, { systemTextSize = SystemTextSize })
 end
 
-return function(p1) --[[ Line: 83 | Named "FriendsChatOsaSystemMessage" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FriendsChatOsaAcknowledgementModule (copy), UserProfileStore (copy), getProfileDisplayName (copy), buildDisplay (copy), FriendsChatTextMessageModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	FriendsChatOsaAcknowledgementModule.useAcknowledgement({
@@ -63,23 +63,23 @@ return function(p1) --[[ Line: 83 | Named "FriendsChatOsaSystemMessage" ]]
 		userId = p1.userId,
 		guiObjectRef = UseRefResult
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 91 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UserProfileStore (upval), p1 (copy)
 		return UserProfileStore.get().fetchNamesByUserIds({ p1.userId })
 	end, { p1.userId })
 	
 	return ReactModule.createElement(FriendsChatTextMessageModule, {
-		getDisplayId = ReactModule.useCallback(function(): string --[[ Line: 94 ]]
+		getDisplayId = ReactModule.useCallback(function(): string
 			-- upvalues: p1 (copy)
 			return `osa-system-message-{p1.conversationId}`
 		end, { p1.conversationId }),
-		getDisplayFromId = ReactModule.useCallback(function(_, p2, p3) --[[ Line: 100 ]]
+		getDisplayFromId = ReactModule.useCallback(function(_, p2, p3)
 			-- upvalues: getProfileDisplayName (upval), UseMemoResult (copy), buildDisplay (upval), p1 (copy)
 			local ProfileDisplayName, ProfileDisplayName2 = getProfileDisplayName(UseMemoResult(p2), p2)
 			
 			return buildDisplay(ProfileDisplayName, ProfileDisplayName2, if p3 and p3.localize then p3.localize else p1.localize, if p3 then p3.systemTextSize else nil)
 		end, { UseMemoResult, p1.localize }),
-		getLayoutOrder = ReactModule.useCallback(function(): number --[[ Line: 97 ]]
+		getLayoutOrder = ReactModule.useCallback(function(): number
 			return 0
 		end, {}),
 		chatWindowSettings = p1.chatWindowSettings,

@@ -1,7 +1,7 @@
 ﻿local HttpService = game:GetService("HttpService")
 local _ = require(script.Parent.types)
 
-local function toLowerKeyedHeaders(Headers) --[[ Line: 8 ]]
+local function toLowerKeyedHeaders(Headers)
 	if typeof(Headers) ~= "table" then
 		return nil
 	end
@@ -13,16 +13,16 @@ local function toLowerKeyedHeaders(Headers) --[[ Line: 8 ]]
 	return t
 end
 
-return function() --[[ Line: 19 | Named "createRequestAsyncNetwork" ]]
+return function()
 	-- upvalues: HttpService (copy), toLowerKeyedHeaders (copy)
 	return {
-		request = function(p1, Callback) --[[ Line: 20 ]]
+		request = function(p1, Callback)
 			-- upvalues: HttpService (upval), toLowerKeyedHeaders (upval)
 			assert(p1.onMessage == nil, "createRequestAsyncNetwork does not support onMessage; use createRequestInternalNetwork")
 			local Flag = false
-			task.spawn(function() --[[ Line: 31 ]]
+			task.spawn(function()
 				-- upvalues: HttpService (upval), p1 (copy), Flag (ref), Callback (copy), toLowerKeyedHeaders (upval)
-				local Success, Result = pcall(function() --[[ Line: 32 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: HttpService (upval), p1 (upval)
 					return HttpService:RequestAsync({
 						Url = p1.url,
@@ -48,7 +48,7 @@ return function() --[[ Line: 19 | Named "createRequestAsyncNetwork" ]]
 				end
 			end)
 			
-			return function() --[[ Line: 58 ]]
+			return function()
 				-- upvalues: Flag (ref)
 				Flag = true
 			end

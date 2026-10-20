@@ -6,13 +6,13 @@ local _ = require(script.Parent.Parent.FriendsRecommendationsStoreTypes)
 local FetchFunction = HttpClientModule.fetch
 local AsPromiseFunction = HttpClientModule.asPromise
 
-return function(p1, Source) --[[ Line: 16 ]]
+return function(p1, Source)
 	-- upvalues: UrlBuilderModule (copy), HttpModule (copy), FetchFunction (copy), AsPromiseFunction (copy)
 	return AsPromiseFunction((FetchFunction({
 		method = "GET",
 		analyticsKey = "friends.get-friend-recommendations",
 		url = UrlBuilderModule.UrlBuilder.addQueryString(`{HttpModule.Url.FRIEND_URL}/users/{p1}/friends/recommendations`, { source = Source }),
-		decode = function(p2) --[[ Line: 29 ]]
+		decode = function(p2)
 			return p2
 		end
 	})))

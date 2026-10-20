@@ -35,7 +35,7 @@ local FFlagProfilePlatformAddCurrentlyPlayingModule = require(ProfilePlatform.Fl
 local FFlagAboutBeforeActionClientModule = require(ProfilePlatform.Flags.FFlagAboutBeforeActionClient)
 local FFlagProfilePlatformEnableMomentsModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableMoments)
 
-local function orderWithAboutBeforeActions(Abouts) --[[ Line: 52 ]]
+local function orderWithAboutBeforeActions(Abouts)
 	-- upvalues: FFlagAboutBeforeActionClientModule (copy), EnumsModule (copy), FFlagProfilePlatformAddCurrentlyPlayingModule (copy), CryoModule (copy)
 	if not FFlagAboutBeforeActionClientModule then
 		return Abouts
@@ -75,7 +75,7 @@ local function orderWithAboutBeforeActions(Abouts) --[[ Line: 52 ]]
 	end
 end
 
-local function moveMomentsToTop(List) --[[ Line: 80 ]]
+local function moveMomentsToTop(List)
 	-- upvalues: EnumsModule (copy), CryoModule (copy)
 	local Index = nil
 	
@@ -140,7 +140,7 @@ local JoinResult = if FFlagAXEnableProfileTab then CryoModule.Dictionary.join(co
 	[EnumsModule.Components.Actions] = CryoModule.None
 }) else nil
 
-return function(p1, p2, User, MomentsFeed, p3) --[[ Line: 156 ]]
+return function(p1, p2, User, MomentsFeed, p3)
 	-- upvalues: ReactModule (copy), ConstantsModule (copy), CryoModule (copy), GetPeekViewOpenHeightByProfileTypeModule (copy), EnumsModule (copy), FFlagAXEnableProfileTab (copy), JoinResult (copy), config (copy), config1 (copy), config2 (copy), FFlagAboutBeforeActionClientModule (copy), orderWithAboutBeforeActions (copy), FFlagProfilePlatformEnableMomentsModule (copy), moveMomentsToTop (copy), FFlagProfilePlatformEnableLazyLoadingComponentsModule (copy)
 	local P3 = p2 or {}
 	local Elements = {

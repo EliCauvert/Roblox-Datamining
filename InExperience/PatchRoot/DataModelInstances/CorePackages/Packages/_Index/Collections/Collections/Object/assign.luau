@@ -2,7 +2,7 @@
 local NoneModule = require(Parent.None)
 local _ = require(Parent.Parent.Parent.ES7Types)
 
-return function(NoneModules, List, List1, List2, ...) --[[ Line: 30 ]]
+return function(NoneModules, List, List1, List2, ...)
 	-- upvalues: NoneModule (copy)
 	if List ~= nil and typeof(List) == "table" then
 		for i, value in pairs(List) do

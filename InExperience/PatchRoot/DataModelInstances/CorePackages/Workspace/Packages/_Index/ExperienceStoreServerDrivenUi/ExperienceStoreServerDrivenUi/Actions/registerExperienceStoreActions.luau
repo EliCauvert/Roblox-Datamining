@@ -5,11 +5,11 @@ local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SduiActionType = SduiCoreSystemModule.SduiActionType
 local GetSduiActionHandlerRegistryFunction = SduiCoreSystemModule.getSduiActionHandlerRegistry
 
-return function() --[[ Line: 13 | Named "registerExperienceStoreActions" ]]
+return function()
 	-- upvalues: SduiActionType (copy), FFlagSduiDevStoreSeeAllSupport (copy), ExperienceStoreServerDrivenUi (copy), GetSduiActionHandlerRegistryFunction (copy)
 	GetSduiActionHandlerRegistryFunction().registerActionHandlerConfigs({
 		[SduiActionType.RefreshDeveloperProducts] = if FFlagSduiDevStoreSeeAllSupport then {
-			lazyHandler = function() --[[ Line: 17 ]]
+			lazyHandler = function()
 				-- upvalues: ExperienceStoreServerDrivenUi (upval)
 				return require(ExperienceStoreServerDrivenUi.Actions.SduiRefreshDeveloperProductsAction)
 			end

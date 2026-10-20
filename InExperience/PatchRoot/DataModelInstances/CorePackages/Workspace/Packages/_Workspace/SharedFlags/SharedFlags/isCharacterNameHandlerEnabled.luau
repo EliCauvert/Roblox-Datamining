@@ -2,15 +2,15 @@
 game:DefineFastInt("CharacterNameHandlerUserProfileApiRollout", 0)
 game:DefineFastFlag("CharacterNameHandlerUserProfileApiEnabledForAll", false)
 
-local function _() --[[ Line: 12 ]]
+local function _()
 	return game:GetFastFlag("CharacterNameHandlerUserProfileApiEnabledForAll")
 end
 
-local RolloutByApplicationIdResult = RolloutByApplicationIdFunction(function() --[[ Line: 8 ]]
+local RolloutByApplicationIdResult = RolloutByApplicationIdFunction(function()
 	return game:GetFastInt("CharacterNameHandlerUserProfileApiRollout")
 end)
 
-return function() --[[ Line: 18 ]]
+return function()
 	-- upvalues: RolloutByApplicationIdResult (copy)
 	return game:GetFastFlag("CharacterNameHandlerUserProfileApiEnabledForAll") or RolloutByApplicationIdResult()
 end

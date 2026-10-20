@@ -74,740 +74,740 @@ game:DefineFastFlag("BehaviorCollectionControlEnabled", false)
 game:DefineFastFlag("LuaAppPromotionalEmailsCheckboxEnabledInAppPolicy", false)
 local GetFFlagNotificationsComplianceShouldRestrictStreamFunction = SharedFlagsModule.GetFFlagNotificationsComplianceShouldRestrictStream
 
-return function(p1) --[[ Line: 92 | Named "AppFeaturePolicies" ]]
+return function(p1)
 	-- upvalues: IsVRAppBuildFunction (copy), LuaAppEnableRecommendedCarouselForDesktop (copy), IsSubjectToDesktopPoliciesFunction (copy), UseOriginalPlatformChatPolicy (copy), FFlagAppChatOnConsoles (copy), FFlagAppIaScrollAwayGuac (copy), IsTenFootInterfaceFunction (copy), IsRunningInStudioFunction (copy), DisableWebViewSupportInStudio (copy), GetFFlagLuafiedReportEntryPointsFunction (copy), GetFFlagEnableAbuseReport10ftFunction (copy), GetFFlagSeamlessVoiceConsentToastPolicyFunction (copy), GetFFlagExpChatGuacChatDisabledReasonFunction (copy), FFlagAEGIS2UseGuacToShowEnabledMessage (copy), FFlagAEGIS2UseGuacToShowFAEUpsell (copy), FFlagExpChatUseGuacForFOMOUpsell (copy), FFlagExpChatUseGuacForCrossAgeChat (copy), GetFFlagDisableCDLQrCodeForMaquettesFunction (copy), CryoModule (copy), ValuesResult (copy), DebugUseLegacyCrossPlayApi (copy), DebugCrossPlaySystemUi (copy), DebugOverrideCrossPlayUri (copy), CrossPlayCapabilitiesModule (copy), DebugOverrideCrossPlaySettingsKey (copy), DebugOverrideCrossPlayQueryParam (copy), GetFFlagUseEnablePremiumUserFeaturesAppPolicyFunction (copy), GetFFlagUseExternalBrowserForAgeGuidelines10ftFunction (copy), FFlagGuacCanRenderTransferOnProfile (copy), GetFFlagEnableGateNotificationPreferencesTabFunction (copy), UserInputService (copy), FFlagLuaAppHomeVngAppUpsell (copy), FFlagVngAppUpsellPcLayout (copy), FFlagLuaAppParentUpsellPolicy (copy), FFlagLuaAppSupportDisablePlayableWhenLoading (copy), GetFFlagNotificationsComplianceShouldRestrictStreamFunction (copy), DebugForceShowIllegalContentReportingUI (copy), FFlagRenameParentEmailForVerificationUpsellFunction (copy), FFlagFriendsChatOsaSystemMessage (copy), FFlagFriendsChatDiscloseUpdateSecondVersion (copy), FFlagFriendsChatEnableConversationConsent (copy), FFlagFriendsChatHasFriendsGate (copy), FFlagEnableAndroidTvAppPolicies (copy), GetFFlagEnableMultiPageSignupFunction (copy), GetFIntExclusiveFallbackExclusiveUnderageCutoffForMultiPageSignupFunction (copy), FFlagEnableMicrosoftStorePaymentsPlatform (copy), FFlagEnableFriendsRenamingForAll (copy), FFlagEnableMilkyWayPaymentsPlatformV2 (copy), FFlagEnableScreentimeMoreTimeOption (copy), FlyoutDisablePremiumEntrypoint1 (copy), GuacDisableBlackbirdEntrypoints (copy), FlyoutEnableGiftcardsWithRedeem (copy), GuacAppPolicyDisableSignupCheckbox (copy), FFlagEnableFaceIDTextOnAddAuthMethodPage (copy), FFlagEnableMorePageExitButtonSupport (copy), FFlagEnableMorePageDirectionalLayoutRolloutFix (copy), DebugMomentsFeatureList (copy), GetFFlagEnableSupportCenterFunction (copy), FFlagEnableCoreContentAccountType (copy), FFlagEnableCoreContentBadge (copy), FFlagEnableFlyoutUncheckedBadge (copy), FFlagEnableNonFlyoutUncheckedBadge (copy), GetFFlagEnableAccountSwitcherUncheckedBadgeFunction (copy), FFlagShowGameAgeRating (copy), FFlagDefaultKidsToDarkTheme (copy), FFlagMacMenuBarContentUpdates (copy), FFlagUsesCancelSearchAppPolicy (copy), FFlagAppNavMyStatsTab (copy), FFlagAddPinExperienceTargetDestinationGUACPolicy (copy), FFlagFlyoutSidePanelUseAppPolicy (copy), FFlagFlyoutGateLearnPlace (copy)
-	local function _(p2, p3) --[[ Line: 93 | Named "getVRDefaultPolicy" ]]
+	local function _(p2, p3)
 		-- upvalues: p1 (copy), IsVRAppBuildFunction (upval)
 		return if p1[p2] == nil then if IsVRAppBuildFunction() then p3 else not p3 else p1[p2]
 	end
 	
 	return {
-		getFriendFinder = function() --[[ Line: 104 ]]
+		getFriendFinder = function()
 			-- upvalues: p1 (copy)
 			return p1.FriendFinder or false
 		end,
-		getGameDetailsMorePage = function() --[[ Line: 107 ]]
+		getGameDetailsMorePage = function()
 			-- upvalues: p1 (copy)
 			return p1.GameDetailsMorePage or false
 		end,
-		getGameDetailsSubtitle = function() --[[ Line: 110 ]]
+		getGameDetailsSubtitle = function()
 			-- upvalues: p1 (copy)
 			return p1.GameDetailsSubtitle or false
 		end,
-		getShowGlobalCounters = function() --[[ Line: 113 ]]
+		getShowGlobalCounters = function()
 			-- upvalues: p1 (copy)
 			return p1.GameDetailsShowGlobalCounters or false
 		end,
-		getGameDetailsPlayWithFriends = function() --[[ Line: 116 ]]
+		getGameDetailsPlayWithFriends = function()
 			-- upvalues: p1 (copy)
 			return p1.GameDetailsPlayWithFriends or false
 		end,
-		getGameInfoList = function() --[[ Line: 119 ]]
+		getGameInfoList = function()
 			-- upvalues: p1 (copy)
 			return p1.GameInfoList or false
 		end,
-		getGamePlaysAndRatings = function() --[[ Line: 122 ]]
+		getGamePlaysAndRatings = function()
 			-- upvalues: p1 (copy)
 			return p1.GamePlaysAndRatings or false
 		end,
-		getNotifications = function() --[[ Line: 125 ]]
+		getNotifications = function()
 			-- upvalues: p1 (copy)
 			return p1.Notifications or false
 		end,
-		getRecommendedGames = function() --[[ Line: 128 ]]
+		getRecommendedGames = function()
 			-- upvalues: LuaAppEnableRecommendedCarouselForDesktop (upval), p1 (copy), IsSubjectToDesktopPoliciesFunction (upval)
 			return if LuaAppEnableRecommendedCarouselForDesktop then p1.RecommendedGames or false else not IsSubjectToDesktopPoliciesFunction() and (p1.RecommendedGames or false)
 		end,
-		getSearchBar = function() --[[ Line: 138 ]]
+		getSearchBar = function()
 			-- upvalues: p1 (copy)
 			return p1.SearchBar or false
 		end,
-		getMorePageContent = function() --[[ Line: 141 ]]
+		getMorePageContent = function()
 			-- upvalues: UseOriginalPlatformChatPolicy (upval), p1 (copy), FFlagAppChatOnConsoles (upval)
 			return if UseOriginalPlatformChatPolicy then p1.MorePageContent elseif FFlagAppChatOnConsoles then p1.MorePageContent2 else p1.MorePageContent
 		end,
-		getAboutPageType = function() --[[ Line: 150 ]]
+		getAboutPageType = function()
 			-- upvalues: p1 (copy)
 			return p1.AboutPageType or "CJVAbout"
 		end,
-		getSettingsPageType = function() --[[ Line: 153 ]]
+		getSettingsPageType = function()
 			-- upvalues: p1 (copy)
 			return p1.SettingsPageType or "Settings"
 		end,
-		getSocialLinks = function() --[[ Line: 156 ]]
+		getSocialLinks = function()
 			-- upvalues: p1 (copy)
 			return p1.SocialLinks or false
 		end,
-		getSocialGroupLinks = function() --[[ Line: 159 ]]
+		getSocialGroupLinks = function()
 			-- upvalues: p1 (copy)
 			return p1.SocialGroupLinks or false
 		end,
-		getCommunityLinksEnabled = function() --[[ Line: 162 ]]
+		getCommunityLinksEnabled = function()
 			-- upvalues: p1 (copy)
 			return p1.CommunityLinksEnabled or false
 		end,
-		getGameInfoShowBadges = function() --[[ Line: 165 ]]
+		getGameInfoShowBadges = function()
 			-- upvalues: p1 (copy)
 			return p1.GameInfoShowBadges or false
 		end,
-		getGameInfoShowCreated = function() --[[ Line: 168 ]]
+		getGameInfoShowCreated = function()
 			-- upvalues: p1 (copy)
 			return p1.GameInfoShowCreated or false
 		end,
-		getGameInfoShowGamepasses = function() --[[ Line: 171 ]]
+		getGameInfoShowGamepasses = function()
 			-- upvalues: p1 (copy)
 			return p1.GameInfoShowGamepasses or false
 		end,
-		getGameInfoShowGenre = function() --[[ Line: 174 ]]
+		getGameInfoShowGenre = function()
 			-- upvalues: p1 (copy)
 			return p1.GameInfoShowGenre or false
 		end,
-		getGameInfoShowSubgenre = function() --[[ Line: 177 ]]
+		getGameInfoShowSubgenre = function()
 			-- upvalues: p1 (copy)
 			return p1.GameInfoShowSubgenre or false
 		end,
-		getGameInfoShowMaxPlayers = function() --[[ Line: 180 ]]
+		getGameInfoShowMaxPlayers = function()
 			-- upvalues: p1 (copy)
 			return p1.GameInfoShowMaxPlayers or false
 		end,
-		getGameInfoShowServers = function() --[[ Line: 183 ]]
+		getGameInfoShowServers = function()
 			-- upvalues: p1 (copy)
 			return p1.GameInfoShowServers or false
 		end,
-		getGameInfoShowUpdated = function() --[[ Line: 186 ]]
+		getGameInfoShowUpdated = function()
 			-- upvalues: p1 (copy)
 			return p1.GameInfoShowUpdated or false
 		end,
-		getGameInfoShowAgeRecommendation = function() --[[ Line: 189 ]]
+		getGameInfoShowAgeRecommendation = function()
 			-- upvalues: p1 (copy)
 			return p1.GameInfoShowAgeRecommendation == nil or p1.GameInfoShowAgeRecommendation
 		end,
-		getGameInfoShowVoiceAndChatFeatures = function() --[[ Line: 195 ]]
+		getGameInfoShowVoiceAndChatFeatures = function()
 			-- upvalues: p1 (copy)
 			return p1.GameInfoShowVoiceAndChatFeatures == nil or p1.GameInfoShowVoiceAndChatFeatures
 		end,
-		getSiteMessageBanner = function() --[[ Line: 201 ]]
+		getSiteMessageBanner = function()
 			-- upvalues: p1 (copy)
 			return p1.SiteMessageBanner or false
 		end,
-		getAlertRateLimit = function() --[[ Line: 204 ]]
+		getAlertRateLimit = function()
 			-- upvalues: p1 (copy)
 			return p1.AlertRateLimit or 300
 		end,
-		getSearchAutoComplete = function() --[[ Line: 208 ]]
+		getSearchAutoComplete = function()
 			-- upvalues: p1 (copy)
 			return p1.SearchAutoComplete or false
 		end,
-		getShowStudioCTA = function() --[[ Line: 211 ]]
+		getShowStudioCTA = function()
 			-- upvalues: p1 (copy)
 			return p1.ShowStudioCTA or false
 		end,
-		getAppIaScrollAwayEnabled = if FFlagAppIaScrollAwayGuac then function() --[[ Line: 215 ]]
+		getAppIaScrollAwayEnabled = if FFlagAppIaScrollAwayGuac then function()
 			-- upvalues: p1 (copy)
 			return p1.AppIaScrollAwayEnabled or false
 		end else nil,
-		getUseOmniRecommendation = function() --[[ Line: 219 ]]
+		getUseOmniRecommendation = function()
 			-- upvalues: p1 (copy)
 			return p1.UseOmniRecommendation == nil or p1.UseOmniRecommendation
 		end,
-		getUseWidthBasedFormFactorRule = function() --[[ Line: 227 ]]
+		getUseWidthBasedFormFactorRule = function()
 			-- upvalues: p1 (copy)
 			return p1.UseWidthBasedFormFactorRule or false
 		end,
-		getShowYouTubeAgeAlert = function() --[[ Line: 230 ]]
+		getShowYouTubeAgeAlert = function()
 			-- upvalues: p1 (copy)
 			return p1.ShowYouTubeAgeAlert == nil or p1.ShowYouTubeAgeAlert
 		end,
-		getShowVideoThumbnails = function() --[[ Line: 236 ]]
+		getShowVideoThumbnails = function()
 			-- upvalues: p1 (copy)
 			return p1.ShowVideoThumbnails or false
 		end,
-		getHomeIcon = function() --[[ Line: 239 ]]
+		getHomeIcon = function()
 			-- upvalues: p1 (copy)
 			return p1.HomeIcon or "LuaApp/icons/ic-roblox-close"
 		end,
-		getGameInfoListShowRNVDeveloper = function() --[[ Line: 242 ]]
+		getGameInfoListShowRNVDeveloper = function()
 			-- upvalues: p1 (copy)
 			return p1.GameInfoListShowRNVDeveloper or false
 		end,
-		getGameInfoListDeveloper = function() --[[ Line: 245 ]]
+		getGameInfoListDeveloper = function()
 			-- upvalues: p1 (copy)
 			return p1.GameInfoListDeveloper or false
 		end,
-		getShowDisplayName = function() --[[ Line: 248 ]]
+		getShowDisplayName = function()
 			-- upvalues: p1 (copy)
 			return p1.ShowDisplayName == nil or p1.ShowDisplayName
 		end,
-		getShowAlias = function() --[[ Line: 254 ]]
+		getShowAlias = function()
 			-- upvalues: p1 (copy)
 			return p1.ShowUserAlias == nil or p1.ShowUserAlias
 		end,
-		getCatalogReportingDisabled = function() --[[ Line: 260 ]]
+		getCatalogReportingDisabled = function()
 			-- upvalues: p1 (copy)
 			return p1.CatalogReportingDisabled or false
 		end,
-		getGameReportingDisabled = function() --[[ Line: 263 ]]
+		getGameReportingDisabled = function()
 			-- upvalues: p1 (copy)
 			return p1.GameReportingDisabled or false
 		end,
-		getGamesPageCreationCenterTitle = function() --[[ Line: 266 ]]
+		getGamesPageCreationCenterTitle = function()
 			-- upvalues: p1 (copy)
 			return p1.GamesPageCreationCenterTitle or false
 		end,
-		shouldUseExternalBrowserForDisclaimerLinks = function() --[[ Line: 269 ]]
+		shouldUseExternalBrowserForDisclaimerLinks = function()
 			-- upvalues: p1 (copy)
 			return p1.UseExternalBrowserForDisclaimerLinks or false
 		end,
-		shouldUseExternalBrowserForMorePageItem = function() --[[ Line: 272 ]]
+		shouldUseExternalBrowserForMorePageItem = function()
 			-- upvalues: p1 (copy)
 			return p1.UseExternalBrowserForMoreLinks or false
 		end,
-		getCatalogShow3dView = function() --[[ Line: 275 ]]
+		getCatalogShow3dView = function()
 			-- upvalues: p1 (copy)
 			return p1.CatalogShow3dView or false
 		end,
-		getItemDetailsFullView = function() --[[ Line: 278 ]]
+		getItemDetailsFullView = function()
 			-- upvalues: p1 (copy)
 			return p1.ItemDetailsFullView or false
 		end,
-		getCatalogCommunityCreations = function() --[[ Line: 281 ]]
+		getCatalogCommunityCreations = function()
 			-- upvalues: p1 (copy)
 			return p1.CatalogCommunityCreations or false
 		end,
-		getCatalogPremiumCategory = function() --[[ Line: 284 ]]
+		getCatalogPremiumCategory = function()
 			-- upvalues: p1 (copy)
 			return p1.CatalogPremiumCategory or false
 		end,
-		getShowCatalogPremiumContent = function() --[[ Line: 287 ]]
+		getShowCatalogPremiumContent = function()
 			-- upvalues: p1 (copy)
 			return p1.CatalogPremiumContent or false
 		end,
-		getRobloxCreatedItemsCreatedByLuobu = function() --[[ Line: 290 ]]
+		getRobloxCreatedItemsCreatedByLuobu = function()
 			-- upvalues: p1 (copy)
 			return p1.RobloxCreatedItemsCreatedByLuobu == nil or p1.RobloxCreatedItemsCreatedByLuobu
 		end,
-		getHomePageFriendSection = function() --[[ Line: 296 ]]
+		getHomePageFriendSection = function()
 			-- upvalues: p1 (copy)
 			return p1.HomePageFriendSection or false
 		end,
-		getHomePageProfileLink = function() --[[ Line: 299 ]]
+		getHomePageProfileLink = function()
 			-- upvalues: p1 (copy)
 			return p1.HomePageProfileLink or false
 		end,
-		getPurchasePromptIncludingWarning = function() --[[ Line: 302 ]]
+		getPurchasePromptIncludingWarning = function()
 			-- upvalues: p1 (copy)
 			return p1.PurchasePromptIncludingWarning == nil or p1.PurchasePromptIncludingWarning
 		end,
-		getCheckUserAgreementsUpdatedOnLogin = function() --[[ Line: 308 ]]
+		getCheckUserAgreementsUpdatedOnLogin = function()
 			-- upvalues: p1 (copy)
 			return p1.CheckUserAgreementsUpdatedOnLogin == nil or p1.CheckUserAgreementsUpdatedOnLogin
 		end,
-		getAddUserAgreementIdsToSignupRequest = function() --[[ Line: 314 ]]
+		getAddUserAgreementIdsToSignupRequest = function()
 			-- upvalues: p1 (copy)
 			return p1.AddUserAgreementIdsToSignupRequest or false
 		end,
-		RequireExplicitVoiceConsent = function() --[[ Line: 317 ]]
+		RequireExplicitVoiceConsent = function()
 			-- upvalues: p1 (copy)
 			return p1.RequireExplicitVoiceConsent or false
 		end,
-		getRequireExplicitAvatarVideoConsent = function() --[[ Line: 320 ]]
+		getRequireExplicitAvatarVideoConsent = function()
 			-- upvalues: p1 (copy)
 			return p1.RequireExplicitAvatarVideoConsent or false
 		end,
-		getShowVoiceUpsellV2 = function() --[[ Line: 323 ]]
+		getShowVoiceUpsellV2 = function()
 			-- upvalues: p1 (copy)
 			return p1.ShowVoiceUpsellV2 or false
 		end,
-		getShouldShowGroupsTile = function() --[[ Line: 326 ]]
+		getShouldShowGroupsTile = function()
 			-- upvalues: p1 (copy)
 			return p1.ShouldShowGroupsTile or false
 		end,
-		useLuobuAuthentication = function() --[[ Line: 329 ]]
+		useLuobuAuthentication = function()
 			-- upvalues: p1 (copy)
 			return p1.UseLuobuAuthentication or false
 		end,
-		useWechatQQAuthentication = function() --[[ Line: 332 ]]
+		useWechatQQAuthentication = function()
 			-- upvalues: p1 (copy)
 			return p1.UseWechatQQAuthentication or false
 		end,
-		useMSDKWebAuthentication = function() --[[ Line: 335 ]]
+		useMSDKWebAuthentication = function()
 			-- upvalues: p1 (copy)
 			return p1.UseMSDKWebAuthentication or false
 		end,
-		getQrFriendingEnabled = function() --[[ Line: 338 ]]
+		getQrFriendingEnabled = function()
 			-- upvalues: p1 (copy)
 			return p1.QrFriendingEnabled or false
 		end,
-		getShouldShowCameraPermissionInAgreementsPrompt = function() --[[ Line: 341 ]]
+		getShouldShowCameraPermissionInAgreementsPrompt = function()
 			-- upvalues: p1 (copy)
 			return p1.ShouldShowCameraPermissionInAgreementsPrompt or false
 		end,
-		getExperienceInviteShareLinkEnabled = function() --[[ Line: 344 ]]
+		getExperienceInviteShareLinkEnabled = function()
 			-- upvalues: p1 (copy)
 			return p1.ExperienceInviteShareLinkEnabled or false
 		end,
-		getCsatSurveyRestrictTextInput = function() --[[ Line: 347 ]]
+		getCsatSurveyRestrictTextInput = function()
 			-- upvalues: p1 (copy)
 			return p1.CsatSurveyRestrictTextInput or false
 		end,
-		useGridPageLayout = function() --[[ Line: 350 ]]
+		useGridPageLayout = function()
 			-- upvalues: IsVRAppBuildFunction (upval), p1 (copy), IsSubjectToDesktopPoliciesFunction (upval)
 			return if IsVRAppBuildFunction() then if p1.UseGridPageLayout == nil then if IsVRAppBuildFunction() then true else false else p1.UseGridPageLayout elseif p1.UseGridPageLayout == nil then IsSubjectToDesktopPoliciesFunction() else p1.UseGridPageLayout
 		end,
-		usePhoneSearchDiscoverEntry = function() --[[ Line: 361 ]]
+		usePhoneSearchDiscoverEntry = function()
 			-- upvalues: p1 (copy), IsSubjectToDesktopPoliciesFunction (upval)
 			return if p1.UsePhoneSearchDiscoverEntry == nil then not IsSubjectToDesktopPoliciesFunction() else p1.UsePhoneSearchDiscoverEntry
 		end,
-		getShouldSystemBarUsuallyBePresent = function() --[[ Line: 368 ]]
+		getShouldSystemBarUsuallyBePresent = function()
 			-- upvalues: IsVRAppBuildFunction (upval), p1 (copy), IsTenFootInterfaceFunction (upval)
 			return if IsVRAppBuildFunction() then if p1.ShouldSystemBarUsuallyBePresentForVR == nil then if IsVRAppBuildFunction() then true else false else p1.ShouldSystemBarUsuallyBePresentForVR elseif IsTenFootInterfaceFunction() then true else p1.ShouldSystemBarUsuallyBePresent or false
 		end,
-		getContactImporterEnabled = function() --[[ Line: 381 ]]
+		getContactImporterEnabled = function()
 			-- upvalues: IsSubjectToDesktopPoliciesFunction (upval), p1 (copy)
 			return not IsSubjectToDesktopPoliciesFunction() and (p1.ContactImporterEnabled or false)
 		end,
-		getShouldShowSettingsPermissionsAdditionalInstructions = function() --[[ Line: 389 ]]
+		getShouldShowSettingsPermissionsAdditionalInstructions = function()
 			-- upvalues: p1 (copy)
 			return p1.shouldShowSettingsPermissionsAdditionalInstructions or false
 		end,
-		getUseVRFTUXPanel = function() --[[ Line: 393 ]]
+		getUseVRFTUXPanel = function()
 			-- upvalues: p1 (copy), IsVRAppBuildFunction (upval)
 			return if p1.UseVRFTUXPanel == nil then if IsVRAppBuildFunction() then true else false else p1.UseVRFTUXPanel
 		end,
-		getWebViewSupport = function() --[[ Line: 396 ]]
+		getWebViewSupport = function()
 			-- upvalues: IsRunningInStudioFunction (upval), DisableWebViewSupportInStudio (upval), p1 (copy), IsVRAppBuildFunction (upval)
 			return if IsRunningInStudioFunction() then not DisableWebViewSupportInStudio elseif p1.EnableWebViewSupport == nil then not IsVRAppBuildFunction() else p1.EnableWebViewSupport
 		end,
-		getUseLuafiedReportFlow = function() --[[ Line: 407 ]]
+		getUseLuafiedReportFlow = function()
 			-- upvalues: IsVRAppBuildFunction (upval), GetFFlagLuafiedReportEntryPointsFunction (upval), p1 (copy), GetFFlagEnableAbuseReport10ftFunction (upval)
 			return if IsVRAppBuildFunction() and GetFFlagLuafiedReportEntryPointsFunction() then if p1.UseLuafiedReportFlow == nil then if IsVRAppBuildFunction() then true else false else p1.UseLuafiedReportFlow elseif GetFFlagEnableAbuseReport10ftFunction() then p1.UseLuafiedReportFlow or false else nil
 		end,
-		getThrottleFramerate = function() --[[ Line: 416 ]]
+		getThrottleFramerate = function()
 			-- upvalues: p1 (copy), IsVRAppBuildFunction (upval)
 			return if p1.ThrottleFramerate == nil then not IsVRAppBuildFunction() else p1.ThrottleFramerate
 		end,
-		getUseRoundedCorners = function() --[[ Line: 419 ]]
+		getUseRoundedCorners = function()
 			-- upvalues: IsVRAppBuildFunction (upval), p1 (copy)
 			return if IsVRAppBuildFunction() then if p1.UseRoundedCorners == nil then if IsVRAppBuildFunction() then true else false else p1.UseRoundedCorners else false
 		end,
-		getGameInfoShowChatFeatures = function(): boolean --[[ Line: 426 ]]
+		getGameInfoShowChatFeatures = function(): boolean
 			return false
 		end,
-		getDisplayCheckboxInVoiceConsent = function() --[[ Line: 429 ]]
+		getDisplayCheckboxInVoiceConsent = function()
 			-- upvalues: GetFFlagSeamlessVoiceConsentToastPolicyFunction (upval), p1 (copy)
 			return GetFFlagSeamlessVoiceConsentToastPolicyFunction() and p1.DisplayCheckboxInVoiceConsent or false
 		end,
-		getExperienceChatAvailability = function() --[[ Line: 435 ]]
+		getExperienceChatAvailability = function()
 			-- upvalues: GetFFlagExpChatGuacChatDisabledReasonFunction (upval), p1 (copy)
 			return GetFFlagExpChatGuacChatDisabledReasonFunction() and p1.ExperienceChatAvailability or "unknown"
 		end,
-		getInCommsRegionBubble = function() --[[ Line: 441 ]]
+		getInCommsRegionBubble = function()
 			-- upvalues: FFlagAEGIS2UseGuacToShowEnabledMessage (upval), p1 (copy)
 			return FFlagAEGIS2UseGuacToShowEnabledMessage and p1.InCommsRegionBubble or false
 		end,
-		getShowInExpFAEUpsell = function() --[[ Line: 447 ]]
+		getShowInExpFAEUpsell = function()
 			-- upvalues: FFlagAEGIS2UseGuacToShowFAEUpsell (upval), p1 (copy)
 			return FFlagAEGIS2UseGuacToShowFAEUpsell and p1.ShowInExpFAEUpsell or false
 		end,
-		getUseAmpV2WizardForVpc = function() --[[ Line: 455 ]]
+		getUseAmpV2WizardForVpc = function()
 			-- upvalues: p1 (copy)
 			return p1.UseAmpV2WizardForVpc or false
 		end,
-		getAmpV2VpcExcludedRequestTypes = function() --[[ Line: 460 ]]
+		getAmpV2VpcExcludedRequestTypes = function()
 			-- upvalues: p1 (copy)
 			return p1.AmpV2VpcExcludedRequestTypes or {}
 		end,
-		getShowFOMOUpsell = function() --[[ Line: 463 ]]
+		getShowFOMOUpsell = function()
 			-- upvalues: FFlagExpChatUseGuacForFOMOUpsell (upval), p1 (copy)
 			return FFlagExpChatUseGuacForFOMOUpsell and p1.ShowFOMOUpsell or false
 		end,
-		getShowCrossAgeChat = function() --[[ Line: 470 ]]
+		getShowCrossAgeChat = function()
 			-- upvalues: FFlagExpChatUseGuacForCrossAgeChat (upval), p1 (copy)
 			return FFlagExpChatUseGuacForCrossAgeChat and p1.ShowCrossAgeExpChat or false
 		end,
-		getCanSeeChatTerminology = function() --[[ Line: 477 ]]
+		getCanSeeChatTerminology = function()
 			-- upvalues: p1 (copy)
 			return p1.canSeeChatTerminology or false
 		end,
-		getAllowCameraMovements = function() --[[ Line: 480 ]]
+		getAllowCameraMovements = function()
 			-- upvalues: p1 (copy), IsVRAppBuildFunction (upval)
 			return if p1.AllowCameraMovements == nil then not IsVRAppBuildFunction() else p1.AllowCameraMovements
 		end,
-		getShouldSkipAvatarLandingPage = function() --[[ Line: 483 ]]
+		getShouldSkipAvatarLandingPage = function()
 			-- upvalues: p1 (copy), IsVRAppBuildFunction (upval)
 			return if p1.ShouldSkipAvatarLandingPage == nil then if IsVRAppBuildFunction() then true else false else p1.ShouldSkipAvatarLandingPage
 		end,
-		getShowPassesOnExperienceDetails = function() --[[ Line: 486 ]]
+		getShowPassesOnExperienceDetails = function()
 			-- upvalues: p1 (copy)
 			return p1.ShowPassesOnExperienceDetails or false
 		end,
-		getDisableCDLQrCodeForMaquettes = function() --[[ Line: 489 ]]
+		getDisableCDLQrCodeForMaquettes = function()
 			-- upvalues: GetFFlagDisableCDLQrCodeForMaquettesFunction (upval), p1 (copy)
 			return if GetFFlagDisableCDLQrCodeForMaquettesFunction() then p1.DisableCDLQrCodeForMaquettes else false
 		end,
-		getDisableIAPEntryPoint = function() --[[ Line: 496 ]]
+		getDisableIAPEntryPoint = function()
 			-- upvalues: p1 (copy)
 			return p1.DisableIAPEntryPoint or false
 		end,
-		getEnforceAgeRestrictedLogin = function() --[[ Line: 499 ]]
+		getEnforceAgeRestrictedLogin = function()
 			-- upvalues: p1 (copy)
 			return p1.EnforceAgeRestrictedLogin or false
 		end,
-		getUrlAuthRoutes = function() --[[ Line: 502 ]]
+		getUrlAuthRoutes = function()
 			-- upvalues: p1 (copy)
 			local Routes = p1.Routes or {}
 			
 			return if Routes then Routes.auth or {} else {}
 		end,
-		getShowDisconnectButton = function() --[[ Line: 511 ]]
+		getShowDisconnectButton = function()
 			-- upvalues: p1 (copy)
 			return p1.ShowDisconnectButton or false
 		end,
-		getUseSingleSignOn = function() --[[ Line: 514 ]]
+		getUseSingleSignOn = function()
 			-- upvalues: IsRunningInStudioFunction (upval), p1 (copy)
 			return not IsRunningInStudioFunction() and (p1.UseSingleSignOn or false)
 		end,
-		getGridCarouselSeeAllTilesEnabled = function() --[[ Line: 521 ]]
+		getGridCarouselSeeAllTilesEnabled = function()
 			-- upvalues: p1 (copy)
 			return p1.UseGridCarouselSeeAllTiles or false
 		end,
-		getSearchWithoutNavigatingEnabled = function() --[[ Line: 524 ]]
+		getSearchWithoutNavigatingEnabled = function()
 			-- upvalues: IsTenFootInterfaceFunction (upval), p1 (copy)
 			return not IsTenFootInterfaceFunction() and (p1.SingleSearchPageNoNavigation or false)
 		end,
-		getGameListCategoryScrollListEnabled = function() --[[ Line: 530 ]]
+		getGameListCategoryScrollListEnabled = function()
 			-- upvalues: p1 (copy)
 			return p1.GetGamesListCategoryTabs or false
 		end,
-		getForceTheme = function() --[[ Line: 533 ]]
+		getForceTheme = function()
 			-- upvalues: CryoModule (upval), ValuesResult (upval), p1 (copy)
-			local MapResult = CryoModule.List.map(ValuesResult, function(Text: string): string --[[ Line: 534 ]]
+			local MapResult = CryoModule.List.map(ValuesResult, function(Text: string): string
 				return Text:lower()
 			end)
 			
 			return if p1.ForceTheme and CryoModule.List.find(MapResult, p1.ForceTheme:lower()) then p1.ForceTheme else nil
 		end,
-		enableExperienceDetailsPanel = function() --[[ Line: 543 ]]
+		enableExperienceDetailsPanel = function()
 			-- upvalues: p1 (copy)
 			return p1.EnableExperienceDetailsPanel or false
 		end,
-		getDisableRegularLogin = function(): boolean --[[ Line: 546 ]]
+		getDisableRegularLogin = function(): boolean
 			-- upvalues: p1 (copy)
 			return not p1.EnableWebViewSupport and (not p1.EnableRegularLoginWithoutWebViewSupport or false)
 		end,
-		getAllowPlatformAccountSwitching = function() --[[ Line: 549 ]]
+		getAllowPlatformAccountSwitching = function()
 			-- upvalues: p1 (copy)
 			return p1.AllowPlatformAccountSwitching or false
 		end,
-		useLegacyCrossPlayApi = function() --[[ Line: 552 ]]
+		useLegacyCrossPlayApi = function()
 			-- upvalues: DebugUseLegacyCrossPlayApi (upval), p1 (copy)
 			return DebugUseLegacyCrossPlayApi or (p1.useLegacyCrossPlayApi or false)
 		end,
-		useCrossPlaySystemUi = function() --[[ Line: 555 ]]
+		useCrossPlaySystemUi = function()
 			-- upvalues: DebugCrossPlaySystemUi (upval), p1 (copy)
 			return DebugCrossPlaySystemUi or (p1.useCrossPlaySystemUi or false)
 		end,
-		getCrossPlayUri = function() --[[ Line: 558 ]]
+		getCrossPlayUri = function()
 			-- upvalues: DebugOverrideCrossPlayUri (upval), p1 (copy)
 			return if DebugOverrideCrossPlayUri == "" then p1.crossPlayUri or "" else DebugOverrideCrossPlayUri
 		end,
-		getCrossPlayCapabilities = function() --[[ Line: 565 ]]
+		getCrossPlayCapabilities = function()
 			-- upvalues: CryoModule (upval), p1 (copy), CrossPlayCapabilitiesModule (upval)
-			return CryoModule.List.foldLeft(p1.crossPlayCapabilities or {}, function(p2, p3) --[[ Line: 566 ]]
+			return CryoModule.List.foldLeft(p1.crossPlayCapabilities or {}, function(p2, p3)
 				-- upvalues: CryoModule (upval), CrossPlayCapabilitiesModule (upval)
 				return if CryoModule.List.find(p2, p3) then p2 else CryoModule.List.join(p2, { CrossPlayCapabilitiesModule[p3] })
 			end, {})
 		end,
-		getCrossPlaySettingsKey = function() --[[ Line: 576 ]]
+		getCrossPlaySettingsKey = function()
 			-- upvalues: DebugOverrideCrossPlaySettingsKey (upval), p1 (copy)
 			return if DebugOverrideCrossPlaySettingsKey == "" then p1.crossPlaySettingsKey or "" else DebugOverrideCrossPlaySettingsKey
 		end,
-		getCrossPlayQueryParam = function() --[[ Line: 583 ]]
+		getCrossPlayQueryParam = function()
 			-- upvalues: DebugOverrideCrossPlayQueryParam (upval), p1 (copy)
 			return if DebugOverrideCrossPlayQueryParam == "" then p1.crossPlayQueryParam or "" else DebugOverrideCrossPlayQueryParam
 		end,
-		getPromotionalEmailsCheckboxEnabled = function() --[[ Line: 590 ]]
+		getPromotionalEmailsCheckboxEnabled = function()
 			-- upvalues: p1 (copy)
 			return game:GetFastFlag("LuaAppPromotionalEmailsCheckboxEnabledInAppPolicy") and p1.PromotionalEmailsCheckboxEnabled or false
 		end,
-		getPromotionalEmailsOptInByDefault = function() --[[ Line: 597 ]]
+		getPromotionalEmailsOptInByDefault = function()
 			-- upvalues: p1 (copy)
 			return game:GetFastFlag("LuaAppPromotionalEmailsCheckboxEnabledInAppPolicy") and p1.PromotionalEmailsOptInByDefault or false
 		end,
-		getSupportsOverscan = function() --[[ Line: 604 ]]
+		getSupportsOverscan = function()
 			-- upvalues: p1 (copy)
 			return p1.SupportsOverscan or false
 		end,
-		getUseConsoleGameJoinCard = function() --[[ Line: 607 ]]
+		getUseConsoleGameJoinCard = function()
 			-- upvalues: p1 (copy)
 			return p1.UseConsoleGameJoinCard or false
 		end,
-		getPlatformDisplayName = function() --[[ Line: 610 ]]
+		getPlatformDisplayName = function()
 			-- upvalues: p1 (copy)
 			return p1.platformDisplayName or ""
 		end,
-		getPlatformAccountName = function() --[[ Line: 613 ]]
+		getPlatformAccountName = function()
 			-- upvalues: p1 (copy)
 			return p1.platformAccountName or nil
 		end,
-		getSupportsProfileSwitching = function() --[[ Line: 616 ]]
+		getSupportsProfileSwitching = function()
 			-- upvalues: p1 (copy)
 			return p1.supportsProfileSwitching or false
 		end,
-		getMountAllOmniFeedItems = function() --[[ Line: 619 ]]
+		getMountAllOmniFeedItems = function()
 			-- upvalues: p1 (copy)
 			return p1.mountAllOmniFeedItems or false
 		end,
-		getFriendCodeQrCodeScannerEnabled = function() --[[ Line: 622 ]]
+		getFriendCodeQrCodeScannerEnabled = function()
 			-- upvalues: p1 (copy)
 			return p1.FriendCodeQrCodeScannerEnabled or false
 		end,
-		getInviteFriendsDisabled = function() --[[ Line: 625 ]]
+		getInviteFriendsDisabled = function()
 			-- upvalues: p1 (copy)
 			return p1.InviteFriendsDisabled or false
 		end,
-		getRealNamesInDisplayNamesEnabled = function() --[[ Line: 628 ]]
+		getRealNamesInDisplayNamesEnabled = function()
 			-- upvalues: p1 (copy)
 			return p1.RealNamesInDisplayNamesEnabled or false
 		end,
-		getProfileShareLinkEnabled = function() --[[ Line: 631 ]]
+		getProfileShareLinkEnabled = function()
 			-- upvalues: p1 (copy)
 			return p1.ProfileShareLinkEnabled
 		end,
-		getProfileCopyLinkEnabled = function() --[[ Line: 634 ]]
+		getProfileCopyLinkEnabled = function()
 			-- upvalues: p1 (copy)
 			return p1.ProfileCopyLinkEnabled
 		end,
-		getEnablePremiumUserFeatures = function() --[[ Line: 637 ]]
+		getEnablePremiumUserFeatures = function()
 			-- upvalues: GetFFlagUseEnablePremiumUserFeaturesAppPolicyFunction (upval), p1 (copy)
 			return if GetFFlagUseEnablePremiumUserFeaturesAppPolicyFunction() then p1.EnablePremiumUserFeatures or false else nil
 		end,
-		getEnableDualLogin = function() --[[ Line: 643 ]]
+		getEnableDualLogin = function()
 			-- upvalues: p1 (copy)
 			return p1.enableDualLogin or false
 		end,
-		getUseExternalBrowserForAgeGuidelines = function() --[[ Line: 647 ]]
+		getUseExternalBrowserForAgeGuidelines = function()
 			-- upvalues: GetFFlagUseExternalBrowserForAgeGuidelines10ftFunction (upval), p1 (copy)
 			return if GetFFlagUseExternalBrowserForAgeGuidelines10ftFunction() then p1.UseExternalBrowserForAgeGuidelines or false else nil
 		end,
-		getEnableHomePageAgeBlock = function() --[[ Line: 654 ]]
+		getEnableHomePageAgeBlock = function()
 			-- upvalues: p1 (copy)
 			return p1.EnableHomePageAgeBlock or false
 		end,
-		getEnableUAppAccessBlock = function() --[[ Line: 657 ]]
+		getEnableUAppAccessBlock = function()
 			-- upvalues: p1 (copy)
 			return p1.EnableUAppAccessBlock or false
 		end,
-		getUAppBlockPageTextMapKey = function() --[[ Line: 660 ]]
+		getUAppBlockPageTextMapKey = function()
 			-- upvalues: p1 (copy)
 			return p1.UAppBlockPageTextMapKey or nil
 		end,
-		getUAppBlockPageShouldDisableLogOut = function() --[[ Line: 663 ]]
+		getUAppBlockPageShouldDisableLogOut = function()
 			-- upvalues: p1 (copy)
 			return p1.UAppBlockPageShouldDisableLogOut or nil
 		end,
-		getContactsToastEnabled = function() --[[ Line: 666 ]]
+		getContactsToastEnabled = function()
 			-- upvalues: p1 (copy)
 			return p1.ContactsToastEnabled or false
 		end,
-		getEnableProfileQrCode = function() --[[ Line: 669 ]]
+		getEnableProfileQrCode = function()
 			-- upvalues: p1 (copy)
 			return p1.EnableProfileQrCode or false
 		end,
-		getCanRenderTransferOnProfile = function() --[[ Line: 672 ]]
+		getCanRenderTransferOnProfile = function()
 			-- upvalues: FFlagGuacCanRenderTransferOnProfile (upval), p1 (copy)
 			return FFlagGuacCanRenderTransferOnProfile and p1.CanRenderTransferOnProfile or false
 		end,
-		getShowVNGLoginWithExistingAccountQuickLoginButton = function() --[[ Line: 678 ]]
+		getShowVNGLoginWithExistingAccountQuickLoginButton = function()
 			-- upvalues: p1 (copy)
 			return p1.ShowVNGLoginWithExistingAccountQuickLoginButton or false
 		end,
-		getUseCrossDeviceLoginByDefault = function() --[[ Line: 681 ]]
+		getUseCrossDeviceLoginByDefault = function()
 			-- upvalues: p1 (copy)
 			return p1.UseCrossDeviceLoginByDefault or false
 		end,
-		getShowVNGAge12Badge = function() --[[ Line: 684 ]]
+		getShowVNGAge12Badge = function()
 			-- upvalues: p1 (copy)
 			return p1.ShowVNGAge12Badge or false
 		end,
-		getShowBrazilContentRatingLogo = function() --[[ Line: 687 ]]
+		getShowBrazilContentRatingLogo = function()
 			-- upvalues: p1 (copy)
 			return p1.ShowBrazilContentRatingLogo or false
 		end,
-		getUseVNGUserAgreementPopup = function() --[[ Line: 690 ]]
+		getUseVNGUserAgreementPopup = function()
 			-- upvalues: p1 (copy)
 			return p1.UseVNGUserAgreementPopup or false
 		end,
-		getRedirectBuyRobuxToVNG = function() --[[ Line: 693 ]]
+		getRedirectBuyRobuxToVNG = function()
 			-- upvalues: p1 (copy)
 			return p1.RedirectBuyRobuxToVNG or false
 		end,
-		getShowVNGTosForRobuxUpsell = function() --[[ Line: 696 ]]
+		getShowVNGTosForRobuxUpsell = function()
 			-- upvalues: p1 (copy)
 			return p1.ShowVNGTosForRobuxUpsell or false
 		end,
-		getBlockVNGU12SignUpOnClientSide = function() --[[ Line: 699 ]]
+		getBlockVNGU12SignUpOnClientSide = function()
 			-- upvalues: p1 (copy)
 			return p1.BlockVNGU12SignUpOnClientSide or false
 		end,
-		getUseAgeInput = function() --[[ Line: 702 ]]
+		getUseAgeInput = function()
 			-- upvalues: p1 (copy)
 			return p1.UseAgeInput or false
 		end,
-		getLoginUsernameOnly = function() --[[ Line: 705 ]]
+		getLoginUsernameOnly = function()
 			-- upvalues: p1 (copy)
 			return p1.LoginUsernameOnly or false
 		end,
-		getDisableEmailOTPLogin = function() --[[ Line: 708 ]]
+		getDisableEmailOTPLogin = function()
 			-- upvalues: p1 (copy)
 			return p1.DisableEmailOTPLogin or false
 		end,
-		getDisableLoginForgotButton = function() --[[ Line: 711 ]]
+		getDisableLoginForgotButton = function()
 			-- upvalues: p1 (copy)
 			return p1.DisableLoginForgotButton or false
 		end,
-		getDisableLogOutEmailUpsell = function() --[[ Line: 714 ]]
+		getDisableLogOutEmailUpsell = function()
 			-- upvalues: p1 (copy)
 			return p1.DisableLogOutEmailUpsell or false
 		end,
-		getVerifiedSignupCountry = function() --[[ Line: 717 ]]
+		getVerifiedSignupCountry = function()
 			-- upvalues: p1 (copy)
 			return p1.verifiedSignupCountry or false
 		end,
-		getParentalConsentAgreementId = function() --[[ Line: 721 ]]
+		getParentalConsentAgreementId = function()
 			-- upvalues: p1 (copy)
 			return p1.parentalConsentAgreementId or ""
 		end,
-		getIsStrictComplianceEnabled = function() --[[ Line: 725 ]]
+		getIsStrictComplianceEnabled = function()
 			-- upvalues: p1 (copy)
 			return p1.isStrictComplianceEnabled or false
 		end,
-		getUseKoreaKISAUserAgreementPopup = function() --[[ Line: 729 ]]
+		getUseKoreaKISAUserAgreementPopup = function()
 			-- upvalues: p1 (copy)
 			return p1.useKoreaKISAUserAgreementPopup or false
 		end,
-		getEnableNotificationPreferencesPage = function() --[[ Line: 733 ]]
+		getEnableNotificationPreferencesPage = function()
 			-- upvalues: GetFFlagEnableGateNotificationPreferencesTabFunction (upval), p1 (copy)
 			return if GetFFlagEnableGateNotificationPreferencesTabFunction() then p1.EnableNotificationPreferencesPage or false else nil
 		end,
-		getVNGFormRequired = function() --[[ Line: 740 ]]
+		getVNGFormRequired = function()
 			-- upvalues: p1 (copy)
 			return p1.VNGFormRequired or false
 		end,
-		getUpsellVoiceForPhoneVerification = function() --[[ Line: 743 ]]
+		getUpsellVoiceForPhoneVerification = function()
 			-- upvalues: p1 (copy)
 			return p1.UpsellVoiceForPhoneVerification or false
 		end,
-		getIsLinkedVRModeAvailable = function(): boolean --[[ Line: 746 ]]
+		getIsLinkedVRModeAvailable = function(): boolean
 			-- upvalues: UserInputService (upval)
 			local Platform = UserInputService:GetPlatform()
 			
 			return Platform == Enum.Platform.Windows or Platform == Enum.Platform.UWP
 		end,
-		getShouldShowPhoneUpsell = function() --[[ Line: 750 ]]
+		getShouldShowPhoneUpsell = function()
 			-- upvalues: p1 (copy)
 			return p1.ShouldShowPhoneUpsell or false
 		end,
-		getTermsOfUseLink = function() --[[ Line: 753 ]]
+		getTermsOfUseLink = function()
 			-- upvalues: p1 (copy)
 			return p1.TermsOfUseLink or ""
 		end,
-		getPrivacyPolicyLink = function() --[[ Line: 756 ]]
+		getPrivacyPolicyLink = function()
 			-- upvalues: p1 (copy)
 			return p1.PrivacyPolicyLink or ""
 		end,
-		getVngAppUpsell = function() --[[ Line: 759 ]]
+		getVngAppUpsell = function()
 			-- upvalues: FFlagLuaAppHomeVngAppUpsell (upval), p1 (copy)
 			return FFlagLuaAppHomeVngAppUpsell and p1.VngAppUpsell or false
 		end,
-		getVngAppUpsellPcLayout = if FFlagVngAppUpsellPcLayout then function() --[[ Line: 767 ]]
+		getVngAppUpsellPcLayout = if FFlagVngAppUpsellPcLayout then function()
 			-- upvalues: p1 (copy)
 			return p1.VngAppUpsellPcLayout or false
 		end else nil,
-		getShouldHideContactImporterUpsell = function() --[[ Line: 771 ]]
+		getShouldHideContactImporterUpsell = function()
 			-- upvalues: p1 (copy)
 			return p1.ShouldHideContactImporterUpsell or false
 		end,
-		getContactImporterEncouraged = function() --[[ Line: 774 ]]
+		getContactImporterEncouraged = function()
 			-- upvalues: p1 (copy)
 			return p1.contactImporterEncouraged or false
 		end,
-		getFriendRequestNicknamesEnabled = function(): boolean --[[ Line: 777 ]]
+		getFriendRequestNicknamesEnabled = function(): boolean
 			return false
 		end,
-		getShouldShowVpcPlayButtonUpsells = if FFlagLuaAppParentUpsellPolicy then function() --[[ Line: 781 ]]
+		getShouldShowVpcPlayButtonUpsells = if FFlagLuaAppParentUpsellPolicy then function()
 			-- upvalues: p1 (copy)
 			return p1.shouldShowVpcPlayButtonUpsells or false
 		end else nil,
-		getDisablePlayableWhenLoading = if FFlagLuaAppSupportDisablePlayableWhenLoading then function() --[[ Line: 786 ]]
+		getDisablePlayableWhenLoading = if FFlagLuaAppSupportDisablePlayableWhenLoading then function()
 			-- upvalues: p1 (copy)
 			return p1.DisablePlayableWhenLoading or false
 		end else nil,
-		getRenamePaymentsToSpendingTab = function() --[[ Line: 790 ]]
+		getRenamePaymentsToSpendingTab = function()
 			-- upvalues: p1 (copy)
 			return p1.renamePaymentsToSpendingTab or false
 		end,
-		getNotificationsCanReceiveStream = function() --[[ Line: 795 ]]
+		getNotificationsCanReceiveStream = function()
 			-- upvalues: GetFFlagNotificationsComplianceShouldRestrictStreamFunction (upval), p1 (copy)
 			return if GetFFlagNotificationsComplianceShouldRestrictStreamFunction() then p1.notificationsCanAccessStream or false else nil
 		end,
-		getNotificationsCanReceivePush = function() --[[ Line: 802 ]]
+		getNotificationsCanReceivePush = function()
 			-- upvalues: p1 (copy)
 			return p1.notificationsCanAccessPush or false
 		end,
-		getPushNotificationsUpsell = function() --[[ Line: 805 ]]
+		getPushNotificationsUpsell = function()
 			-- upvalues: p1 (copy)
 			return p1.ShouldShowPushNotificationsUpsell or false
 		end,
-		getNotificationsCanReceiveExperience = function() --[[ Line: 808 ]]
+		getNotificationsCanReceiveExperience = function()
 			-- upvalues: p1 (copy)
 			return p1.notificationsCanAccessExperience == nil or p1.notificationsCanAccessExperience
 		end,
-		getDisableResellingCollectiblesForCompliance = function() --[[ Line: 814 ]]
+		getDisableResellingCollectiblesForCompliance = function()
 			-- upvalues: p1 (copy)
 			return p1.DisableResellingCollectiblesForCompliance or false
 		end,
-		getShowIllegalContentReportingUI = function() --[[ Line: 817 ]]
+		getShowIllegalContentReportingUI = function()
 			-- upvalues: DebugForceShowIllegalContentReportingUI (upval), p1 (copy)
 			return DebugForceShowIllegalContentReportingUI or (p1.ShowIllegalContentReportingUI or false)
 		end,
-		getEligibleForContentPostFeed = function() --[[ Line: 820 ]]
+		getEligibleForContentPostFeed = function()
 			-- upvalues: p1 (copy)
 			return p1.EligibleForContentPostFeed or false
 		end,
-		getEligibleForExternalContentSharing = function() --[[ Line: 823 ]]
+		getEligibleForExternalContentSharing = function()
 			-- upvalues: p1 (copy)
 			return p1.EligibleForExternalContentSharing or false
 		end,
-		getEnableContinuousLoad = function() --[[ Line: 826 ]]
+		getEnableContinuousLoad = function()
 			-- upvalues: p1 (copy)
 			return p1.EnableContinuousLoad or false
 		end,
-		getEnableAggregateLikesFavoritesCount = function() --[[ Line: 829 ]]
+		getEnableAggregateLikesFavoritesCount = function()
 			-- upvalues: p1 (copy)
 			return p1.EnableAggregateLikesFavoritesCount or false
 		end,
-		getShowUpdatedCameraPath = function() --[[ Line: 832 ]]
+		getShowUpdatedCameraPath = function()
 			-- upvalues: p1 (copy)
 			return p1.showUpdatedCameraPath or false
 		end,
-		getRenameParentEmailForVerificationUpsell = function() --[[ Line: 835 ]]
+		getRenameParentEmailForVerificationUpsell = function()
 			-- upvalues: FFlagRenameParentEmailForVerificationUpsellFunction (upval), p1 (copy)
 			return FFlagRenameParentEmailForVerificationUpsellFunction() and p1.renameParentEmailForVerificationUpsell or false
 		end,
-		getKeystrokeCollectionEnabled = function() --[[ Line: 842 ]]
+		getKeystrokeCollectionEnabled = function()
 			-- upvalues: p1 (copy)
 			return game:GetFastFlag("BehaviorCollectionControlEnabled") and p1.EnableKeystrokeCollection or false
 		end,
-		getCanUsePlatformChat = function() --[[ Line: 850 ]]
+		getCanUsePlatformChat = function()
 			-- upvalues: UseOriginalPlatformChatPolicy (upval), p1 (copy), FFlagAppChatOnConsoles (upval)
 			return (if UseOriginalPlatformChatPolicy then p1.CanUsePlatformChat elseif FFlagAppChatOnConsoles then p1.CanUsePlatformChat2 else p1.CanUsePlatformChat) or false
 		end,
-		getCanSeeChatTab = function() --[[ Line: 860 ]]
+		getCanSeeChatTab = function()
 			-- upvalues: UseOriginalPlatformChatPolicy (upval), p1 (copy), FFlagAppChatOnConsoles (upval)
 			return (if UseOriginalPlatformChatPolicy then p1.CanSeeChatTab elseif FFlagAppChatOnConsoles then p1.CanSeeChatTab2 else p1.CanSeeChatTab) or false
 		end,
-		getCanSeeFriendsTab = function(): boolean --[[ Line: 874 ]]
+		getCanSeeFriendsTab = function(): boolean
 			-- upvalues: FFlagFriendsChatOsaSystemMessage (upval), FFlagFriendsChatDiscloseUpdateSecondVersion (upval), FFlagFriendsChatEnableConversationConsent (upval), FFlagFriendsChatHasFriendsGate (upval), p1 (copy)
 			local config = {
 				VR = false,
@@ -826,257 +826,257 @@ return function(p1) --[[ Line: 92 | Named "AppFeaturePolicies" ]]
 			end
 			return true
 		end,
-		getHidesGamesTab = function() --[[ Line: 896 ]]
+		getHidesGamesTab = function()
 			-- upvalues: FFlagEnableAndroidTvAppPolicies (upval), p1 (copy)
 			return FFlagEnableAndroidTvAppPolicies and p1.HidesGamesTab or false
 		end,
-		getShowDisclaimerLinkForUnderageSignupsOnAllSignupPages = function() --[[ Line: 904 ]]
+		getShowDisclaimerLinkForUnderageSignupsOnAllSignupPages = function()
 			-- upvalues: GetFFlagEnableMultiPageSignupFunction (upval), p1 (copy)
 			return not GetFFlagEnableMultiPageSignupFunction() or (p1.ShowTermsAndPrivacyPolicyLinksForAllPagesU13Signup == nil or p1.ShowTermsAndPrivacyPolicyLinksForAllPagesU13Signup)
 		end,
-		getAgeCutoffForShowDisclaimerLinkForUnderageSignupsOnAllSignupPages = function() --[[ Line: 913 ]]
+		getAgeCutoffForShowDisclaimerLinkForUnderageSignupsOnAllSignupPages = function()
 			-- upvalues: GetFIntExclusiveFallbackExclusiveUnderageCutoffForMultiPageSignupFunction (upval), GetFFlagEnableMultiPageSignupFunction (upval), p1 (copy)
 			local FIntExclusiveFallbackExclusiveUnderageCutoffForMultiPageSignup = GetFIntExclusiveFallbackExclusiveUnderageCutoffForMultiPageSignupFunction()
 			
 			return if GetFFlagEnableMultiPageSignupFunction() then if p1.AgeCutoffForShowDisclaimerLinkForUnderageSignupsOnAllSignupPages == nil then FIntExclusiveFallbackExclusiveUnderageCutoffForMultiPageSignup else p1.AgeCutoffForShowDisclaimerLinkForUnderageSignupsOnAllSignupPages else FIntExclusiveFallbackExclusiveUnderageCutoffForMultiPageSignup
 		end,
-		getRobuxUpsellFlowMobile = function() --[[ Line: 923 ]]
+		getRobuxUpsellFlowMobile = function()
 			-- upvalues: p1 (copy)
 			return p1.useMobileRobuxUpsellFlow or false
 		end,
-		getUsePaymentPlatformMicrosoftStore = function() --[[ Line: 926 ]]
+		getUsePaymentPlatformMicrosoftStore = function()
 			-- upvalues: FFlagEnableMicrosoftStorePaymentsPlatform (upval), p1 (copy)
 			return FFlagEnableMicrosoftStorePaymentsPlatform and p1.usePaymentPlatformMicrosoftStore or false
 		end,
-		getMicSettingsDirectionsLocaleKey = function() --[[ Line: 933 ]]
+		getMicSettingsDirectionsLocaleKey = function()
 			-- upvalues: p1 (copy)
 			return p1.micSettingsDirectionsLocaleKey or nil
 		end,
-		getMicSettingsDeeplinkDirectionsLocaleKey = function() --[[ Line: 936 ]]
+		getMicSettingsDeeplinkDirectionsLocaleKey = function()
 			-- upvalues: p1 (copy)
 			return p1.micSettingsDeeplinkDirectionsLocaleKey or nil
 		end,
-		getRequiresAppRestartOnMicAccessChange = function() --[[ Line: 939 ]]
+		getRequiresAppRestartOnMicAccessChange = function()
 			-- upvalues: p1 (copy)
 			return p1.requiresAppRestartOnMicAccessChange or false
 		end,
-		getRenameFriendsToConnections = function() --[[ Line: 942 ]]
+		getRenameFriendsToConnections = function()
 			-- upvalues: FFlagEnableFriendsRenamingForAll (upval), p1 (copy)
 			return if FFlagEnableFriendsRenamingForAll then true else p1.renameFriendsToConnections or false
 		end,
-		getShareSheetEnabled = function() --[[ Line: 948 ]]
+		getShareSheetEnabled = function()
 			-- upvalues: p1 (copy)
 			return p1.shareSheetEnabled or false
 		end,
-		getCanAccessTrustedContacts = function() --[[ Line: 951 ]]
+		getCanAccessTrustedContacts = function()
 			-- upvalues: p1 (copy)
 			return p1.canAccessTrustedContacts or false
 		end,
-		getExperienceDetailsNoticeType = function() --[[ Line: 954 ]]
+		getExperienceDetailsNoticeType = function()
 			-- upvalues: p1 (copy)
 			return p1.experienceDetailsNoticeType or nil
 		end,
-		getRequiresOSAFriendingEducation = function() --[[ Line: 957 ]]
+		getRequiresOSAFriendingEducation = function()
 			-- upvalues: p1 (copy)
 			return p1.requiresOSAFriendingEducation or false
 		end,
-		getSocialGraphSyncEnabled = function() --[[ Line: 960 ]]
+		getSocialGraphSyncEnabled = function()
 			-- upvalues: p1 (copy)
 			return p1.SocialGraphSyncEnabled or false
 		end,
-		getAccountDisambiguationDisabled = function() --[[ Line: 963 ]]
+		getAccountDisambiguationDisabled = function()
 			-- upvalues: p1 (copy)
 			return p1.AccountDisambiguationDisabled or false
 		end,
-		getHasWebViewSupportForFAE = function() --[[ Line: 966 ]]
+		getHasWebViewSupportForFAE = function()
 			-- upvalues: p1 (copy)
 			return p1.hasWebViewSupportForFAE or false
 		end,
-		getLinkedAuthEndpointsEnabled = function() --[[ Line: 969 ]]
+		getLinkedAuthEndpointsEnabled = function()
 			-- upvalues: p1 (copy)
 			return p1.LinkedAuthEndpointsEnabled or false
 		end,
-		getLinkingPlatform = function() --[[ Line: 972 ]]
+		getLinkingPlatform = function()
 			-- upvalues: p1 (copy)
 			return p1.LinkingPlatform or nil
 		end,
-		getUsePaymentPlatformMilkyWayStore = function() --[[ Line: 975 ]]
+		getUsePaymentPlatformMilkyWayStore = function()
 			-- upvalues: FFlagEnableMilkyWayPaymentsPlatformV2 (upval), p1 (copy)
 			return FFlagEnableMilkyWayPaymentsPlatformV2 and p1.usePaymentPlatformMilkyWayStore or false
 		end,
-		getScreentimeMoreTimeOptionEnabled = function() --[[ Line: 981 ]]
+		getScreentimeMoreTimeOptionEnabled = function()
 			-- upvalues: FFlagEnableScreentimeMoreTimeOption (upval), p1 (copy)
 			return FFlagEnableScreentimeMoreTimeOption and p1.ScreentimeMoreTimeOptionEnabled or false
 		end,
-		getDisablePremiumEntrypoint = function() --[[ Line: 987 ]]
+		getDisablePremiumEntrypoint = function()
 			-- upvalues: FlyoutDisablePremiumEntrypoint1 (upval), p1 (copy)
 			return FlyoutDisablePremiumEntrypoint1 and (p1.DisablePremiumEntrypoint or p1.DisablePremiumEntryPoint) or false
 		end,
-		getDisableBlackbirdEntrypoints = function() --[[ Line: 993 ]]
+		getDisableBlackbirdEntrypoints = function()
 			-- upvalues: GuacDisableBlackbirdEntrypoints (upval), p1 (copy)
 			return GuacDisableBlackbirdEntrypoints and p1.DisableBlackbirdEntrypoints or false
 		end,
-		getEnableGiftcardsWithRedeem = function() --[[ Line: 999 ]]
+		getEnableGiftcardsWithRedeem = function()
 			-- upvalues: FlyoutEnableGiftcardsWithRedeem (upval), p1 (copy)
 			return FlyoutEnableGiftcardsWithRedeem and p1.EnableGiftcardsWithRedeem or false
 		end,
-		getGiftCardSourceRefOverride = function() --[[ Line: 1005 ]]
+		getGiftCardSourceRefOverride = function()
 			-- upvalues: p1 (copy)
 			return p1.GiftCardSourceRefOverride or ""
 		end,
-		getSignupCheckboxDisabled = function() --[[ Line: 1008 ]]
+		getSignupCheckboxDisabled = function()
 			-- upvalues: GuacAppPolicyDisableSignupCheckbox (upval), p1 (copy)
 			return GuacAppPolicyDisableSignupCheckbox and p1.DisableSignupCheckbox or false
 		end,
-		getShouldShowFaceIDText = function() --[[ Line: 1014 ]]
+		getShouldShowFaceIDText = function()
 			-- upvalues: FFlagEnableFaceIDTextOnAddAuthMethodPage (upval), p1 (copy)
 			return FFlagEnableFaceIDTextOnAddAuthMethodPage and p1.ShouldShowFaceIDText or false
 		end,
-		getExcludeCrossDeviceSignIn = function() --[[ Line: 1021 ]]
+		getExcludeCrossDeviceSignIn = function()
 			-- upvalues: p1 (copy)
 			return p1.ExcludeCrossDeviceSignIn or false
 		end,
-		getExcludePasskeyLogin = function() --[[ Line: 1024 ]]
+		getExcludePasskeyLogin = function()
 			-- upvalues: p1 (copy)
 			return p1.ExcludePasskeyLogin or false
 		end,
-		getExcludeExternalIdentityLogin = function(): boolean --[[ Line: 1027 ]]
+		getExcludeExternalIdentityLogin = function(): boolean
 			-- upvalues: p1 (copy)
 			return p1.ExcludeExternalIdentityLogin ~= false
 		end,
-		getExternalIdentityAppleUsesBrowserSignIn = function() --[[ Line: 1030 ]]
+		getExternalIdentityAppleUsesBrowserSignIn = function()
 			-- upvalues: p1 (copy)
 			return p1.ExternalIdentityAppleUsesBrowserSignIn or false
 		end,
-		getExcludeExternalIdentityOtherSignInOptions = function(): boolean --[[ Line: 1033 ]]
+		getExcludeExternalIdentityOtherSignInOptions = function(): boolean
 			-- upvalues: p1 (copy)
 			return p1.ExcludeExternalIdentityOtherSignInOptions ~= false
 		end,
-		getExcludeUsernamePasswordSignIn = function() --[[ Line: 1037 ]]
+		getExcludeUsernamePasswordSignIn = function()
 			-- upvalues: p1 (copy)
 			return p1.ExcludeUsernamePasswordSignIn or false
 		end,
-		getExcludeEmailPasswordSignIn = function() --[[ Line: 1040 ]]
+		getExcludeEmailPasswordSignIn = function()
 			-- upvalues: p1 (copy)
 			return p1.ExcludeEmailPasswordSignIn or false
 		end,
-		getExcludePhoneNumberPasswordSignIn = function() --[[ Line: 1043 ]]
+		getExcludePhoneNumberPasswordSignIn = function()
 			-- upvalues: p1 (copy)
 			return p1.ExcludePhoneNumberPasswordSignIn or false
 		end,
-		getExcludeAccountSwitcher = function() --[[ Line: 1046 ]]
+		getExcludeAccountSwitcher = function()
 			-- upvalues: p1 (copy)
 			return p1.ExcludeAccountSwitcher or false
 		end,
-		getAccountSwitcherEnabled = function() --[[ Line: 1049 ]]
+		getAccountSwitcherEnabled = function()
 			-- upvalues: p1 (copy)
 			return p1.AccountSwitcherEnabled or false
 		end,
-		getAccountPickerEnabled = function() --[[ Line: 1052 ]]
+		getAccountPickerEnabled = function()
 			-- upvalues: p1 (copy)
 			return p1.AccountPickerEnabled or false
 		end,
-		getExcludeUsernameUpdateModeration = function() --[[ Line: 1055 ]]
+		getExcludeUsernameUpdateModeration = function()
 			-- upvalues: p1 (copy)
 			return p1.ExcludeUsernameUpdateModeration or false
 		end,
-		getMorePageExitButtonEnabled = if FFlagEnableMorePageExitButtonSupport then function() --[[ Line: 1059 ]]
+		getMorePageExitButtonEnabled = if FFlagEnableMorePageExitButtonSupport then function()
 			-- upvalues: p1 (copy)
 			return p1.MorePageExitButtonEnabled or false
 		end else nil,
-		getMoreGridDirectionalLayoutPreferred = if FFlagEnableMorePageDirectionalLayoutRolloutFix then function() --[[ Line: 1064 ]]
+		getMoreGridDirectionalLayoutPreferred = if FFlagEnableMorePageDirectionalLayoutRolloutFix then function()
 			-- upvalues: p1 (copy)
 			return p1.MoreGridDirectionalLayoutPreferred or false
 		end else nil,
-		getShouldUseDMCCALegalDisclosureInApp = function() --[[ Line: 1068 ]]
+		getShouldUseDMCCALegalDisclosureInApp = function()
 			-- upvalues: p1 (copy)
 			return p1.ShouldUseDMCCALegalDisclosureInApp or false
 		end,
-		getCanAccessParty = function() --[[ Line: 1071 ]]
+		getCanAccessParty = function()
 			-- upvalues: p1 (copy)
 			return p1.CanAccessParty == nil or p1.CanAccessParty
 		end,
-		getRedeemTileEnabled = function() --[[ Line: 1077 ]]
+		getRedeemTileEnabled = function()
 			-- upvalues: p1 (copy)
 			return p1.RedeemTileEnabled or false
 		end,
-		getMomentsFeatureList = function() --[[ Line: 1081 ]]
+		getMomentsFeatureList = function()
 			-- upvalues: DebugMomentsFeatureList (upval), p1 (copy)
 			return if DebugMomentsFeatureList and DebugMomentsFeatureList ~= "" then string.split(DebugMomentsFeatureList, ",") elseif p1.MomentsFeatureList == nil then {} else p1.MomentsFeatureList
 		end,
-		getSupportCenterEnabled = if GetFFlagEnableSupportCenterFunction() then function() --[[ Line: 1088 ]]
+		getSupportCenterEnabled = if GetFFlagEnableSupportCenterFunction() then function()
 			-- upvalues: p1 (copy)
 			return p1.SupportCenterEnabled or false
 		end else nil,
-		getShouldUseVibrationInsteadOfHaptics = function() --[[ Line: 1092 ]]
+		getShouldUseVibrationInsteadOfHaptics = function()
 			-- upvalues: p1 (copy)
 			return p1.ShouldUseVibrationInsteadOfHaptics or false
 		end,
-		getRawPolicy = function() --[[ Line: 1095 ]]
+		getRawPolicy = function()
 			-- upvalues: p1 (copy)
 			return p1
 		end,
-		getStickyShortcutBarEnabled = function() --[[ Line: 1098 ]]
+		getStickyShortcutBarEnabled = function()
 			-- upvalues: p1 (copy)
 			return p1.StickyShortcutBarEnabled or false
 		end,
-		getAccountType = if FFlagEnableCoreContentAccountType then function() --[[ Line: 1102 ]]
+		getAccountType = if FFlagEnableCoreContentAccountType then function()
 			-- upvalues: p1 (copy)
 			return p1.AccountType
 		end else nil,
-		getCoreContentBadgeText = if FFlagEnableCoreContentBadge then function() --[[ Line: 1107 ]]
+		getCoreContentBadgeText = if FFlagEnableCoreContentBadge then function()
 			-- upvalues: p1 (copy)
 			return p1.CoreContentBadgeText
 		end else nil,
-		getShowUncheckedBadge = if FFlagEnableFlyoutUncheckedBadge or FFlagEnableNonFlyoutUncheckedBadge then function() --[[ Line: 1112 ]]
+		getShowUncheckedBadge = if FFlagEnableFlyoutUncheckedBadge or FFlagEnableNonFlyoutUncheckedBadge then function()
 			-- upvalues: p1 (copy)
 			return p1.ShowUncheckedBadge
 		end else nil,
-		getShowUncheckedBadgeForAccountSwitcher = function() --[[ Line: 1116 ]]
+		getShowUncheckedBadgeForAccountSwitcher = function()
 			-- upvalues: GetFFlagEnableAccountSwitcherUncheckedBadgeFunction (upval), p1 (copy)
 			return if GetFFlagEnableAccountSwitcherUncheckedBadgeFunction() then p1.ShowUncheckedBadge else false
 		end,
-		getShowGameAgeRating = if FFlagShowGameAgeRating then function() --[[ Line: 1123 ]]
+		getShowGameAgeRating = if FFlagShowGameAgeRating then function()
 			-- upvalues: p1 (copy)
 			return p1.ShowGameAgeRating or false
 		end else nil,
-		getShowBadgeOver12 = if FFlagShowGameAgeRating then nil else function() --[[ Line: 1128 ]]
+		getShowBadgeOver12 = if FFlagShowGameAgeRating then nil else function()
 			-- upvalues: p1 (copy)
 			return p1.ShowBadgeOver12 or false
 		end,
-		getDefaultTheme = if FFlagDefaultKidsToDarkTheme then function() --[[ Line: 1133 ]]
+		getDefaultTheme = if FFlagDefaultKidsToDarkTheme then function()
 			-- upvalues: p1 (copy)
 			return p1.DefaultTheme
 		end else nil,
-		getDevicePreferencesPersistentPresenceVariant = if FFlagMacMenuBarContentUpdates then function() --[[ Line: 1138 ]]
+		getDevicePreferencesPersistentPresenceVariant = if FFlagMacMenuBarContentUpdates then function()
 			-- upvalues: p1 (copy)
 			return p1.DevicePreferencesPersistentPresenceVariant
 		end else nil,
-		getCancelSearchOnLostFocus = if FFlagUsesCancelSearchAppPolicy then function() --[[ Line: 1143 ]]
+		getCancelSearchOnLostFocus = if FFlagUsesCancelSearchAppPolicy then function()
 			-- upvalues: p1 (copy)
 			return p1.CancelSearchOnLostFocus == nil or p1.CancelSearchOnLostFocus
 		end else nil,
-		getCanViewBuild = if FFlagAppNavMyStatsTab then function() --[[ Line: 1151 ]]
+		getCanViewBuild = if FFlagAppNavMyStatsTab then function()
 			-- upvalues: p1 (copy)
 			return p1.CanViewBuild or false
 		end else nil,
-		getCanUseBuild = if FFlagAppNavMyStatsTab then function() --[[ Line: 1156 ]]
+		getCanUseBuild = if FFlagAppNavMyStatsTab then function()
 			-- upvalues: p1 (copy)
 			return p1.CanUseBuild or false
 		end else nil,
-		getShouldFullscreenElementsIgnoreSafeArea = function() --[[ Line: 1160 ]]
+		getShouldFullscreenElementsIgnoreSafeArea = function()
 			-- upvalues: p1 (copy)
 			return p1.ShouldFullscreenElementsIgnoreSafeArea or false
 		end,
-		getPinExperienceTargetDestination = if FFlagAddPinExperienceTargetDestinationGUACPolicy then function() --[[ Line: 1164 ]]
+		getPinExperienceTargetDestination = if FFlagAddPinExperienceTargetDestinationGUACPolicy then function()
 			-- upvalues: p1 (copy)
 			return p1.PinExperienceTargetDestination or "HomeScreen"
 		end else nil,
-		getFlyoutSidePanelEnabled = function() --[[ Line: 1168 ]]
+		getFlyoutSidePanelEnabled = function()
 			-- upvalues: FFlagFlyoutSidePanelUseAppPolicy (upval), p1 (copy)
 			return FFlagFlyoutSidePanelUseAppPolicy and p1.FlyoutSidePanelEnabled or false
 		end,
-		getLearnPlaceEnabled = function() --[[ Line: 1174 ]]
+		getLearnPlaceEnabled = function()
 			-- upvalues: FFlagFlyoutGateLearnPlace (upval), p1 (copy)
 			return not FFlagFlyoutGateLearnPlace or (p1.LearnPlaceEnabled or false)
 		end

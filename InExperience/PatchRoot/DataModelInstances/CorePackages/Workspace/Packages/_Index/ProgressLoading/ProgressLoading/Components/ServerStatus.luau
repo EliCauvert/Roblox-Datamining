@@ -18,21 +18,21 @@ local QueuePositionEnabledEngineFeature = game:GetEngineFeature("QueuePositionEn
 local FFlagEnableLuaAppsFollowUserId = require(Parent.SharedFlags).FFlagEnableLuaAppsFollowUserId
 local FFlagEnableLuaAppsFollowUserId1 = game:GetEngineFeature("ExperienceServiceFollowUserIdEnabled") and FFlagEnableLuaAppsFollowUserId
 
-local function getStoreJoinState(p1) --[[ Line: 31 ]]
+local function getStoreJoinState(p1)
 	-- upvalues: GetLoadingScreenStoreModule (copy)
 	local LoadingScreenStoreModule = GetLoadingScreenStoreModule(p1)
 	
 	return if p1 and LoadingScreenStoreModule and LoadingScreenStoreModule.getJoinState then LoadingScreenStoreModule.getJoinState(p1) else ""
 end
 
-local function getStoreServerStatusText(p1) --[[ Line: 39 ]]
+local function getStoreServerStatusText(p1)
 	-- upvalues: GetLoadingScreenStoreModule (copy)
 	local LoadingScreenStoreModule = GetLoadingScreenStoreModule(p1)
 	
 	return if p1 and LoadingScreenStoreModule and LoadingScreenStoreModule.getServerStatusText then LoadingScreenStoreModule.getServerStatusText(p1) else ""
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 56 ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), GuiService (copy), SignalsReactModule (copy), getStoreJoinState (copy), getStoreServerStatusText (copy), PlaceLauncherStateModule (copy), LoadingScreenTelemetryModule (copy), FFlagEnableLuaAppsFollowUserId1 (copy), ExperienceService (copy), QueuePositionEnabledEngineFeature (copy), FoundationModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), CoreGui (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -42,7 +42,7 @@ return ReactModule.memo(function(p1) --[[ Line: 56 ]]
 	})
 	local UseRefResult = ReactModule.useRef(0)
 	local UseRefResult1 = ReactModule.useRef(1e999)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 66 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), GuiService (upval)
 		if UseRefResult.current == 0 then
 			UseRefResult.current = 1
@@ -56,7 +56,7 @@ return ReactModule.memo(function(p1) --[[ Line: 56 ]]
 		UseRefResult.current = 0
 		UseRefResult1.current = 1e999
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 81 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), UseResult (copy)
 		if not p1.isSubjectToChinaPolicies then
 			UseResult()
@@ -65,13 +65,13 @@ return ReactModule.memo(function(p1) --[[ Line: 56 ]]
 	local UseSignalStateResult = SignalsReactModule.useSignalState(getStoreJoinState)
 	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(getStoreServerStatusText)
 	local UseRefResult2 = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 91 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult (copy), PlaceLauncherStateModule (upval), UseRefResult2 (copy)
 		if UseSignalStateResult == PlaceLauncherStateModule.Queued then
 			UseRefResult2.current = os.clock()
 		end
 	end, { UseSignalStateResult })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 97 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult2 (copy), LoadingScreenTelemetryModule (upval), FFlagEnableLuaAppsFollowUserId1 (upval), ExperienceService (upval), p1 (copy), QueuePositionEnabledEngineFeature (upval)
 		LoadingScreenTelemetryModule.logQueuedStateButtonClick({
 			buttonName = "JoinNewServer",

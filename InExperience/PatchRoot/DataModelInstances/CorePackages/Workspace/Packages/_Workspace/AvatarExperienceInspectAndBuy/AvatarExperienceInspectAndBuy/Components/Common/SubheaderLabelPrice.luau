@@ -8,9 +8,9 @@ local Text = FoundationModule.Text
 local ShouldShowPriceLabelFunction = require(AvatarExperienceInspectAndBuy.Utils.itemDetailsUtils).shouldShowPriceLabel
 local _ = require(AvatarExperienceInspectAndBuy.Enums.PriceStatus)
 
-return function(Frame) --[[ Line: 35 | Named "SubheaderLabelPrice" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), ShouldShowPriceLabelFunction (copy), FoundationModule (copy), Text (copy), Icon (copy), IconSize (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 36 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ShouldShowPriceLabelFunction (upval), Frame (copy)
 		return ShouldShowPriceLabelFunction(Frame.priceStatus)
 	end, { Frame.priceStatus })

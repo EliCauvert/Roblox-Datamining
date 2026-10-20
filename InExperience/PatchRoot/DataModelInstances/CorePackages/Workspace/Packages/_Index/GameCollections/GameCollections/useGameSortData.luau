@@ -14,7 +14,7 @@ local TopicContentsReducer = require(Parent.TopicContentsRodux).TopicContentsRed
 local LoggingProtocolModule = require(Parent.LoggingProtocol)
 local ReportWarningFunction = require(Parent.DiscoveryAnalytics).Points.reportWarning
 local GetTopSearchResultsFetchNameFunction = require(Parent.DiscoveryUtils).getTopSearchResultsFetchName
-local MemoizeResult = require(Parent.AppCommonLib).memoize(function(p1) --[[ Line: 37 ]]
+local MemoizeResult = require(Parent.AppCommonLib).memoize(function(p1)
 	local t = {}
 	
 	if p1 and p1.sorts then
@@ -27,9 +27,9 @@ local MemoizeResult = require(Parent.AppCommonLib).memoize(function(p1) --[[ Lin
 	return t
 end)
 
-return function(p2, Home, p3) --[[ Line: 52 | Named "useGameSortData" ]]
+return function(p2, Home, p3)
 	-- upvalues: UseSelectorFunction (copy), TopicInfosReducer (copy), AppPage (copy), MemoizeResult (copy), GameSortGroups (copy), TopicContentsReducer (copy), TopicInfoModel (copy), RetrievalStatus (copy), GetTopSearchResultsFetchNameFunction (copy), ReportWarningFunction (copy), LoggingProtocolModule (copy), FetchStatusNamespace (copy), FetchStatusReducer (copy), TutilsModule (copy)
-	return UseSelectorFunction(function(p4) --[[ Line: 53 ]]
+	return UseSelectorFunction(function(p4)
 		-- upvalues: TopicInfosReducer (upval), p2 (copy), Home (copy), AppPage (upval), MemoizeResult (upval), GameSortGroups (upval), p3 (copy), TopicContentsReducer (upval), TopicInfoModel (upval), RetrievalStatus (upval), GetTopSearchResultsFetchNameFunction (upval), ReportWarningFunction (upval), LoggingProtocolModule (upval), FetchStatusNamespace (upval), FetchStatusReducer (upval)
 		local Flag = false
 		local IsOmni = false

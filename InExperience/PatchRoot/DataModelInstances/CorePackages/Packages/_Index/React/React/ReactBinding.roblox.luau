@@ -8,24 +8,24 @@ local BindingImpl = require(Parent.LuauPolyfill).Symbol("BindingImpl")
 local ReactBindingModule = {}
 local config = {
 	__index = {
-		getValue = function(p1) --[[ Line: 50 ]]
+		getValue = function(p1)
 			-- upvalues: ReactBindingModule (copy)
 			return ReactBindingModule.getValue(p1)
 		end,
-		map = function(p1, p2) --[[ Line: 54 ]]
+		map = function(p1, p2)
 			-- upvalues: ReactBindingModule (copy)
 			return ReactBindingModule.map(p1, p2)
 		end
 	},
-	__tostring = function(p1): string --[[ Line: 63 ]]
+	__tostring = function(p1): string
 		return string.format("RoactBinding(%s)", (tostring(p1:getValue())))
 	end
 }
 local config1 = {
-	getValue = function(p1) --[[ Line: 73 ]]
+	getValue = function(p1)
 		return p1.value
 	end,
-	update = function(p1, Value) --[[ Line: 77 ]]
+	update = function(p1, Value)
 		p1.value = Value
 		local FireFunction: (any) -> () = p1.fire
 		
@@ -33,7 +33,7 @@ local config1 = {
 			FireFunction(Value)
 		end
 	end,
-	subscribe = function(p1, p2) --[[ Line: 85 ]]
+	subscribe = function(p1, p2)
 		-- upvalues: CreateSignalRobloxModule (copy)
 		local SubscribeToSignalFunction = p1.subscribeToSignal
 		
@@ -48,7 +48,7 @@ local config1 = {
 }
 local config2 = { __index = config1 }
 
-function ReactBindingModule.update(p1, p2) --[[ Line: 96 ]]
+function ReactBindingModule.update(p1, p2)
 	-- upvalues: EnableAllocationTrims (copy), BindingImpl (copy), config2 (copy), config1 (copy)
 	if EnableAllocationTrims then
 		local v1 = p1[BindingImpl]
@@ -59,7 +59,7 @@ function ReactBindingModule.update(p1, p2) --[[ Line: 96 ]]
 	end
 end
 
-function ReactBindingModule.subscribe(p1, p2) --[[ Line: 108 ]]
+function ReactBindingModule.subscribe(p1, p2)
 	-- upvalues: EnableAllocationTrims (copy), BindingImpl (copy), config2 (copy), config1 (copy)
 	if EnableAllocationTrims then
 		local v1 = p1[BindingImpl]
@@ -70,12 +70,12 @@ function ReactBindingModule.subscribe(p1, p2) --[[ Line: 108 ]]
 	end
 end
 
-function ReactBindingModule.getValue(p1) --[[ Line: 120 ]]
+function ReactBindingModule.getValue(p1)
 	-- upvalues: BindingImpl (copy)
 	return p1[BindingImpl]:getValue()
 end
 
-function ReactBindingModule.createWithoutUpdater(Value, _source) --[[ Line: 126 ]]
+function ReactBindingModule.createWithoutUpdater(Value, _source)
 	-- upvalues: config2 (copy), ReactSymbols (copy), BindingImpl (copy), config (copy)
 	return (setmetatable({
 		["$$typeof"] = ReactSymbols.REACT_BINDING_TYPE,
@@ -84,13 +84,13 @@ function ReactBindingModule.createWithoutUpdater(Value, _source) --[[ Line: 126 
 	}, config))
 end
 
-function ReactBindingModule.create(Value) --[[ Line: 141 ]]
+function ReactBindingModule.create(Value)
 	-- upvalues: EnableAllocationTrims (copy), ReactGlobalsModule (copy), ReactBindingModule (copy), BindingImpl (copy), config1 (copy), CreateSignalRobloxModule (copy), ReactSymbols (copy), config (copy)
 	if EnableAllocationTrims then
 		local WithoutUpdater = ReactBindingModule.createWithoutUpdater(Value, if ReactGlobalsModule.__DEV__ then debug.traceback("Binding created at:", 3) else nil)
 		local WithoutUpdaterEntry = WithoutUpdater[BindingImpl]
 		
-		return WithoutUpdater, function(p1) --[[ Line: 151 ]]
+		return WithoutUpdater, function(p1)
 			-- upvalues: config1 (upval), WithoutUpdaterEntry (copy)
 			config1.update(WithoutUpdaterEntry, p1)
 		end
@@ -98,13 +98,13 @@ function ReactBindingModule.create(Value) --[[ Line: 141 ]]
 		local SignalRobloxModule, SignalRobloxModule2 = CreateSignalRobloxModule()
 		local config2 = { value = Value, subscribe = SignalRobloxModule }
 		
-		function config2.update(Value) --[[ Line: 162 ]]
+		function config2.update(Value)
 			-- upvalues: config2 (copy), SignalRobloxModule2 (copy)
 			config2.value = Value
 			SignalRobloxModule2(Value)
 		end
 		
-		function config2.getValue() --[[ Line: 167 ]]
+		function config2.getValue()
 			-- upvalues: config2 (copy)
 			return config2.value
 		end
@@ -117,7 +117,7 @@ function ReactBindingModule.create(Value) --[[ Line: 141 ]]
 	end
 end
 
-function ReactBindingModule.map(p1, Callback) --[[ Line: 185 ]]
+function ReactBindingModule.map(p1, Callback)
 	-- upvalues: ReactGlobalsModule (copy), ReactSymbols (copy), ReactBindingModule (copy), BindingImpl (copy), config (copy)
 	if ReactGlobalsModule.__DEV__ then
 		assert(typeof(p1) == "table" and p1["$$typeof"] == ReactSymbols.REACT_BINDING_TYPE, "Expected `self` to be a binding")
@@ -126,17 +126,17 @@ function ReactBindingModule.map(p1, Callback) --[[ Line: 185 ]]
 	return (setmetatable({
 		["$$typeof"] = ReactSymbols.REACT_BINDING_TYPE,
 		[BindingImpl] = {
-			subscribe = function(Callback1) --[[ Line: 201 ]]
+			subscribe = function(Callback1)
 				-- upvalues: ReactBindingModule (upval), p1 (copy), Callback (copy)
-				return ReactBindingModule.subscribe(p1, function(p2) --[[ Line: 202 ]]
+				return ReactBindingModule.subscribe(p1, function(p2)
 					-- upvalues: Callback1 (copy), Callback (upval)
 					Callback1(Callback(p2))
 				end)
 			end,
-			update = function(_) --[[ Line: 207 ]]
+			update = function(_)
 				error("Bindings created by Binding:map(fn) cannot be updated directly", 2)
 			end,
-			getValue = function() --[[ Line: 211 ]]
+			getValue = function()
 				-- upvalues: Callback (copy), p1 (copy)
 				return Callback(p1:getValue())
 			end
@@ -145,7 +145,7 @@ function ReactBindingModule.map(p1, Callback) --[[ Line: 185 ]]
 	}, config))
 end
 
-function ReactBindingModule.join(List) --[[ Line: 232 ]]
+function ReactBindingModule.join(List)
 	-- upvalues: ReactGlobalsModule (copy), ReactSymbols (copy), ReactBindingModule (copy), BindingImpl (copy), config (copy)
 	if ReactGlobalsModule.__DEV__ then
 		assert(typeof(List) == "table", "Expected arg #1 to be of type table")
@@ -156,7 +156,7 @@ function ReactBindingModule.join(List) --[[ Line: 232 ]]
 			end
 		end
 	end
-	local function getValue() --[[ Line: 253 ]]
+	local function getValue()
 		-- upvalues: List (copy)
 		local t = {}
 		
@@ -169,17 +169,17 @@ function ReactBindingModule.join(List) --[[ Line: 232 ]]
 	return (setmetatable({
 		["$$typeof"] = ReactSymbols.REACT_BINDING_TYPE,
 		[BindingImpl] = {
-			subscribe = function(Callback) --[[ Line: 264 ]]
+			subscribe = function(Callback)
 				-- upvalues: List (copy), ReactBindingModule (upval), getValue (copy)
 				local SubscribeResults = {}
 				
 				for i, value in List do
-					SubscribeResults[i] = ReactBindingModule.subscribe(value, function(_) --[[ Line: 269 ]]
+					SubscribeResults[i] = ReactBindingModule.subscribe(value, function(_)
 						-- upvalues: Callback (copy), getValue (upval)
 						Callback((getValue()))
 					end)
 				end
-				return function() --[[ Line: 274 ]]
+				return function()
 					-- upvalues: SubscribeResults (ref)
 					if SubscribeResults == nil then return end
 					for _, subscribeResult in SubscribeResults do
@@ -188,10 +188,10 @@ function ReactBindingModule.join(List) --[[ Line: 232 ]]
 					SubscribeResults = nil
 				end
 			end,
-			update = function(_) --[[ Line: 287 ]]
+			update = function(_)
 				error("Bindings created by joinBindings(...) cannot be updated directly", 2)
 			end,
-			getValue = function() --[[ Line: 291 ]]
+			getValue = function()
 				-- upvalues: getValue (copy)
 				return (getValue())
 			end

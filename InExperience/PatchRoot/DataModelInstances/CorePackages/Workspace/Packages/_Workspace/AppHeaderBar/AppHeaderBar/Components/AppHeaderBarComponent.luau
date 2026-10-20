@@ -27,7 +27,7 @@ local config = {
 	utilitiesGap = UDim.new(0, 0)
 }
 
-local function BarTitle(p1) --[[ Line: 51 ]]
+local function BarTitle(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), NormalizeFontFaceFunction (copy), CryoModule (copy)
 	local Tokens = UseStyleFunction().Tokens
 	local Title = p1.title
@@ -38,7 +38,7 @@ local function BarTitle(p1) --[[ Line: 51 ]]
 		BackgroundTransparency = 1,
 		TextWrapped = true,
 		LayoutOrder = p1.layoutOrder,
-		Size = ReactModule.useMemo(function(): UDim2 --[[ Line: 61 ]]
+		Size = ReactModule.useMemo(function(): UDim2
 			-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Title (copy), TitleFont (copy), TextService (upval), Tokens (copy)
 			local _Vector2 = Vector2.new(1e999, 1e999)
 			local TextSize = if FoundationFontFaceMigration then GetTextSizeFunction(Title, TitleFont.FontSize, TitleFont.Font, _Vector2, { addTemporaryPadding = false }) else TextService:GetTextSize(Title, TitleFont.FontSize, TitleFont.Font, _Vector2)
@@ -61,7 +61,7 @@ local function BarTitle(p1) --[[ Line: 51 ]]
 	}))
 end
 
-local function useRenderLeft(JoinResult) --[[ Line: 96 ]]
+local function useRenderLeft(JoinResult)
 	-- upvalues: ReactModule (copy), BarTitle (copy)
 	local RenderNavigationFunction = JoinResult.renderNavigation
 	local Title = JoinResult.title
@@ -70,7 +70,7 @@ local function useRenderLeft(JoinResult) --[[ Line: 96 ]]
 	local IsTitleCentered = JoinResult.isTitleCentered
 	local GroupTransparencyLeft = JoinResult.groupTransparencyLeft
 	
-	return ReactModule.useCallback(function(p1) --[[ Line: 104 ]]
+	return ReactModule.useCallback(function(p1)
 		-- upvalues: ReactModule (upval), GroupTransparencyLeft (copy), RenderNavigationFunction (copy), Title (copy), IsTitleCentered (copy), BarTitle (upval), TitleFontStyle (copy), OnMedia (copy)
 		return ReactModule.createElement(if GroupTransparencyLeft then "CanvasGroup" else "Frame", {
 			BackgroundTransparency = 1,
@@ -99,7 +99,7 @@ local function useRenderLeft(JoinResult) --[[ Line: 96 ]]
 	})
 end
 
-local function useRenderCenter(JoinResult) --[[ Line: 135 ]]
+local function useRenderCenter(JoinResult)
 	-- upvalues: FFlagEnableConsoleRobloxLogo (copy), ReactModule (copy), AppHeaderBarUseSizeFull (copy), BarTitle (copy)
 	local RenderCenterFunction = JoinResult.renderCenter
 	local Title = JoinResult.title
@@ -108,7 +108,7 @@ local function useRenderCenter(JoinResult) --[[ Line: 135 ]]
 	local IsTitleCentered = JoinResult.isTitleCentered
 	local GroupTransparencyCenter = if FFlagEnableConsoleRobloxLogo then JoinResult.groupTransparencyCenter else nil
 	
-	return ReactModule.useCallback(function() --[[ Line: 143 ]]
+	return ReactModule.useCallback(function()
 		-- upvalues: RenderCenterFunction (copy), FFlagEnableConsoleRobloxLogo (upval), ReactModule (upval), GroupTransparencyCenter (copy), AppHeaderBarUseSizeFull (upval), Title (copy), IsTitleCentered (copy), BarTitle (upval), TitleFontStyle (copy), OnMedia (copy)
 		return if RenderCenterFunction then if FFlagEnableConsoleRobloxLogo then ReactModule.createElement(if GroupTransparencyCenter then "CanvasGroup" else "Frame", {
 			BackgroundTransparency = 1,
@@ -128,7 +128,7 @@ local function useRenderCenter(JoinResult) --[[ Line: 135 ]]
 	})
 end
 
-local function useRenderRight(JoinResult) --[[ Line: 171 ]]
+local function useRenderRight(JoinResult)
 	-- upvalues: ReactModule (copy), UtilityActionIcon (copy)
 	local RenderUserInfoFunction = JoinResult.renderUserInfo
 	local AvatarActionIcon = JoinResult.avatarActionIcon
@@ -137,7 +137,7 @@ local function useRenderRight(JoinResult) --[[ Line: 171 ]]
 	local UtilitiesGap = JoinResult.utilitiesGap
 	local GroupTransparencyRight = JoinResult.groupTransparencyRight
 	
-	return ReactModule.useCallback(function() --[[ Line: 180 ]]
+	return ReactModule.useCallback(function()
 		-- upvalues: ReactModule (upval), GroupTransparencyRight (copy), UtilitiesGap (copy), RenderUserInfoFunction (copy), AvatarActionIcon (copy), UtilityActionIcon (upval), SearchActionIcon (copy), RenderUtilitiesFunction (copy)
 		return ReactModule.createElement(if GroupTransparencyRight then "CanvasGroup" else "Frame", {
 			BackgroundTransparency = 1,
@@ -173,7 +173,7 @@ local function useRenderRight(JoinResult) --[[ Line: 171 ]]
 	})
 end
 
-local function _(p1): boolean --[[ Line: 228 | Named "shouldRenderRight" ]]
+local function _(p1): boolean
 	local AvatarActionIcon = p1.avatarActionIcon
 	local SearchActionIcon = p1.searchActionIcon
 	local RenderUtilities = p1.renderUtilities
@@ -181,7 +181,7 @@ local function _(p1): boolean --[[ Line: 228 | Named "shouldRenderRight" ]]
 	return if p1.renderUserInfo or AvatarActionIcon or SearchActionIcon or RenderUtilities then true else false
 end
 
-return function(p1) --[[ Line: 240 | Named "AppHeaderBarComponent" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), useRenderLeft (copy), useRenderCenter (copy), useRenderRight (copy), FFlagEnableClassicThemeHeaderBackground (copy), UseClassicThemeHeaderBackgroundConfigModule (copy), ReactModule (copy), AppHeaderBarClassicThemeBackgroundModule (copy), HeaderBar (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local BarHeight = JoinResult.barHeight
@@ -212,7 +212,7 @@ return function(p1) --[[ Line: 240 | Named "AppHeaderBarComponent" ]]
 	if FFlagEnableClassicThemeHeaderBackground then
 		UseRefResult = ReactModule.useRef(nil)
 		local GuiObjectRef = if GroupTransparency then GroupTransparency.guiObjectRef else nil
-		UseResult = ReactModule.useCallback(function(Current) --[[ Line: 276 ]]
+		UseResult = ReactModule.useCallback(function(Current)
 			-- upvalues: UseRefResult (ref), GuiObjectRef (copy)
 			UseRefResult.current = Current
 			

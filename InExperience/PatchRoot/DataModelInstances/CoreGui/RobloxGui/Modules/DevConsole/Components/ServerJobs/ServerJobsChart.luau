@@ -16,13 +16,13 @@ local MinFrameWidth = ConstantsModule.ServerJobsFormatting.MinFrameWidth
 local LineGraphHeight = ConstantsModule.GeneralFormatting.LineGraphHeight
 local ConvertTimeStampModule = require(script.Parent.Parent.Parent.Util.convertTimeStamp)
 local list = {
-	function(p1): string --[[ Line: 27 ]]
+	function(p1): string
 		return p1 and string.format("%.4f%%", p1) or ""
 	end,
-	function(p1): string --[[ Line: 30 ]]
+	function(p1): string
 		return p1 and string.format("%.4f/s", p1) or ""
 	end,
-	function(p1): string --[[ Line: 33 ]]
+	function(p1): string
 		return p1 and string.format("%.4fms", p1) or ""
 	end
 }
@@ -46,35 +46,35 @@ for i, Vector in ipairs(List) do
 end
 local ServerJobsChart = RoactModule.Component:extend("ServerJobsChart")
 
-local function getX(p1) --[[ Line: 63 ]]
+local function getX(p1)
 	return p1.time
 end
 
-local function getDutyCycle(p1) --[[ Line: 67 ]]
+local function getDutyCycle(p1)
 	return p1.data[1]
 end
 
-local function getStepsPerSec(p1) --[[ Line: 71 ]]
+local function getStepsPerSec(p1)
 	return p1.data[2]
 end
 
-local function getStepTime(p1) --[[ Line: 75 ]]
+local function getStepTime(p1)
 	return p1.data[3]
 end
 
-function ServerJobsChart.init(p1, p2) --[[ Line: 79 ]]
+function ServerJobsChart.init(p1, p2)
 	-- upvalues: RoactModule (copy)
 	local CurrentData = p2.ServerJobsData:getCurrentData()
 	
-	function p1.getOnButtonPress(Name) --[[ Line: 82 ]]
+	function p1.getOnButtonPress(Name)
 		-- upvalues: p1 (copy)
-		return function(_, _) --[[ Line: 83 ]]
+		return function(_, _)
 			-- upvalues: p1 (upval), Name (copy)
 			p1:setState({ expandIndex = p1.state.expandIndex ~= Name and Name })
 		end
 	end
 	
-	function p1.onSortChanged(SortType) --[[ Line: 90 ]]
+	function p1.onSortChanged(SortType)
 		-- upvalues: p2 (copy), p1 (copy)
 		if SortType == p2.ServerJobsData:getSortType() then
 			p1:setState({ reverseSort = not p1.state.reverseSort })
@@ -86,7 +86,7 @@ function ServerJobsChart.init(p1, p2) --[[ Line: 79 ]]
 		end
 	end
 	
-	function p1.onCanvasPosChanged() --[[ Line: 104 ]]
+	function p1.onCanvasPosChanged()
 		-- upvalues: p1 (copy)
 		local CanvasPosition = p1.scrollingRef.current.CanvasPosition
 		
@@ -103,13 +103,13 @@ function ServerJobsChart.init(p1, p2) --[[ Line: 79 ]]
 	}
 end
 
-function ServerJobsChart.willUpdate(p1) --[[ Line: 122 ]]
+function ServerJobsChart.willUpdate(p1)
 	if p1.canvasPosConnector then
 		p1.canvasPosConnector:Disconnect()
 	end
 end
 
-function ServerJobsChart.didUpdate(p1) --[[ Line: 128 ]]
+function ServerJobsChart.didUpdate(p1)
 	if p1.scrollingRef.current then
 		p1.canvasPosConnector = p1.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p1.onCanvasPosChanged)
 		local AbsoluteSize = p1.scrollingRef.current.AbsoluteSize
@@ -121,8 +121,8 @@ function ServerJobsChart.didUpdate(p1) --[[ Line: 128 ]]
 	end
 end
 
-function ServerJobsChart.didMount(p1) --[[ Line: 143 ]]
-	p1.statsConnector = p1.props.ServerJobsData:Signal():Connect(function(ServerJobsList) --[[ Line: 144 ]]
+function ServerJobsChart.didMount(p1)
+	p1.statsConnector = p1.props.ServerJobsData:Signal():Connect(function(ServerJobsList)
 		-- upvalues: p1 (copy)
 		p1:setState({ serverJobsList = ServerJobsList })
 	end)
@@ -136,7 +136,7 @@ function ServerJobsChart.didMount(p1) --[[ Line: 143 ]]
 	end
 end
 
-function ServerJobsChart.willUnmount(p1) --[[ Line: 161 ]]
+function ServerJobsChart.willUnmount(p1)
 	p1.statsConnector:Disconnect()
 	p1.statsConnector = nil
 	
@@ -146,7 +146,7 @@ function ServerJobsChart.willUnmount(p1) --[[ Line: 161 ]]
 	end
 end
 
-function ServerJobsChart.render(p1) --[[ Line: 170 ]]
+function ServerJobsChart.render(p1)
 	-- upvalues: MinFrameWidth (copy), RoactModule (copy), ConstantsModule (copy), EntryFrameHeight (copy), LineGraphHeight (copy), CellPadding (copy), CellLabelModule (copy), List1 (copy), List (copy), ChartHeaderNames (copy), list (copy), t (copy), LineWidth (copy), LineColor (copy), BannerButtonModule (copy), LineGraphModule (copy), getX (copy), getDutyCycle (copy), ConvertTimeStampModule (copy), getStepsPerSec (copy), getStepTime (copy), NoResultSearchStr (copy), HeaderButtonModule (copy), HeaderFrameHeight (copy)
 	local Frames = {}
 	local SearchTerm: string = p1.props.searchTerm

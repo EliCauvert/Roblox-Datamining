@@ -4,9 +4,9 @@ local _ = require(Parent.networkingShareLinkTypes)
 local TutilsModule = require(Parent.Parent.tutils)
 local HttpService = game:GetService("HttpService")
 
-return function(p1) --[[ Line: 10 ]]
+return function(p1)
 	-- upvalues: TutilsModule (copy), APIURLModule (copy), HttpService (copy)
-	local GetOrCreateLink = p1.roduxNetworking.POST("get-or-create-link", function(Callback, p2) --[[ Line: 15 ]]
+	local GetOrCreateLink = p1.roduxNetworking.POST("get-or-create-link", function(Callback, p2)
 		-- upvalues: TutilsModule (upval), APIURLModule (upval), HttpService (upval)
 		local DeepCopyResult = TutilsModule.deepCopy(p2)
 		DeepCopyResult.linkType = nil
@@ -19,7 +19,7 @@ return function(p1) --[[ Line: 10 ]]
 	
 	if p1.useMockedResponse then
 		GetOrCreateLink.Mock.clear()
-		GetOrCreateLink.Mock.reply(function() --[[ Line: 28 ]]
+		GetOrCreateLink.Mock.reply(function()
 			return { responseBody = { linkId = "42685" } }
 		end)
 	end

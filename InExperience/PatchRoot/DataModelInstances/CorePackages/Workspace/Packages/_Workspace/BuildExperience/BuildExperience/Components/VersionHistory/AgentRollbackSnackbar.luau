@@ -4,15 +4,15 @@ local ReactModule = require(Parent.React)
 local ReactRobloxModule = require(Parent.ReactRoblox)
 local BuildAgentRollbackSnackbarAutoDismissSeconds = game:DefineFastInt("BuildAgentRollbackSnackbarAutoDismissSeconds", 4)
 
-return function(p1) --[[ Line: 17 | Named "AgentRollbackSnackbar" ]]
+return function(p1)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), BuildAgentRollbackSnackbarAutoDismissSeconds (copy), ReactRobloxModule (copy)
 	local UseOverlayResult = FoundationModule.Hooks.useOverlay()
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
-	ReactModule.useEffect(function() --[[ Line: 21 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: BuildAgentRollbackSnackbarAutoDismissSeconds (upval), p1 (copy)
 		local DelayedThread = task.delay(BuildAgentRollbackSnackbarAutoDismissSeconds, p1.onClose)
 		
-		return function() --[[ Line: 23 ]]
+		return function()
 			-- upvalues: DelayedThread (copy)
 			task.cancel(DelayedThread)
 		end

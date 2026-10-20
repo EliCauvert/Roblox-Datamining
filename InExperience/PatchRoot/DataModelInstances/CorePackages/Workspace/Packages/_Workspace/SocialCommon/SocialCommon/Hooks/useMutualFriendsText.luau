@@ -2,7 +2,7 @@
 local UseLocalizationFunction = require(SocialCommon.Parent.Localization).Hooks.useLocalization
 local GetMutualFriendsTextModule = require(SocialCommon.Utils.getMutualFriendsText)
 
-return function(MutualFriendsCount) --[[ Line: 12 ]]
+return function(MutualFriendsCount)
 	-- upvalues: UseLocalizationFunction (copy), GetMutualFriendsTextModule (copy)
 	return GetMutualFriendsTextModule({
 		mutualFriendsCount = MutualFriendsCount,

@@ -15,7 +15,7 @@ local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebu
 local FFlagAppChatRemoveConversationListDividerModule = require(AppChat.Flags.FFlagAppChatRemoveConversationListDivider)
 local IconsNavigationPushRight = UIBloxModule.App.ImageSet.Images["icons/navigation/pushRight"]
 
-function CustomConversationListEntry(p1) --[[ Line: 34 ]]
+function CustomConversationListEntry(p1)
 	-- upvalues: UseStyleFunction (copy), GetBoldTextThemeModule (copy), UseTextSizeOffsetFunction (copy), UseChatPagePaddingModule (copy), IconSize (copy), FoundationModule (copy), ReactModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), ImageSetLabel (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), IconsNavigationPushRight (copy), FFlagAppChatRemoveConversationListDividerModule (copy)
 	local UseStyleResult = UseStyleFunction()
 	local BoldTextThemeModule = GetBoldTextThemeModule(UseStyleResult)

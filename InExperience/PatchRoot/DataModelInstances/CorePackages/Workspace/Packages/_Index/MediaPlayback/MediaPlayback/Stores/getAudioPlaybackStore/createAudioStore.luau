@@ -8,15 +8,15 @@ local CreateSignalFunction = SignalsModule.createSignal
 local CreateEffectFunction = SignalsModule.createEffect
 local OnDisposedFunction = require(MediaPlayback.Parent.SignalsExperimental).onDisposed
 local config = {
-	spawn = function(Callback) --[[ Line: 23 ]]
+	spawn = function(Callback)
 		return task.spawn(Callback)
 	end,
-	wait = function(Duration): number --[[ Line: 26 ]]
+	wait = function(Duration): number
 		return task.wait(Duration)
 	end
 }
 
-return function(AssetId, UsePreview, p1) --[[ Line: 31 | Named "createAudioStore" ]]
+return function(AssetId, UsePreview, p1)
 	-- upvalues: config (copy), CreateSignalFunction (copy), CreateVolumeStoreModule (copy), EnableAudioPlaybackInAppModule (copy), CreateAudioSystemModule (copy), CreateEffectFunction (copy), OnDisposedFunction (copy)
 	local P2 = p1 or config
 	local Signal, Signal2 = CreateSignalFunction(0)
@@ -31,20 +31,20 @@ return function(AssetId, UsePreview, p1) --[[ Line: 31 | Named "createAudioStore
 	local AudioSystemModule = CreateAudioSystemModule(AssetId, UsePreview)
 	local AudioPlayer = AudioSystemModule.audioPlayer
 	
-	local function play() --[[ Line: 53 ]]
+	local function play()
 		-- upvalues: Signal2_2 (copy), Signal2_3 (copy), AudioPlayer (copy)
 		Signal2_2(true)
 		Signal2_3(false)
 		AudioPlayer.PlaybackSpeed = 1
 	end
 	
-	local function pause() --[[ Line: 59 ]]
+	local function pause()
 		-- upvalues: Signal2_2 (copy), AudioPlayer (copy)
 		Signal2_2(false)
 		AudioPlayer.PlaybackSpeed = 0
 	end
 	
-	local function stop() --[[ Line: 64 ]]
+	local function stop()
 		-- upvalues: Signal2_2 (copy), AudioPlayer (copy), Signal2_1 (copy)
 		Signal2_2(false)
 		AudioPlayer.PlaybackSpeed = 0
@@ -52,31 +52,31 @@ return function(AssetId, UsePreview, p1) --[[ Line: 31 | Named "createAudioStore
 		Signal2_1(0)
 	end
 	
-	local function seek(Value: number) --[[ Line: 70 ]]
+	local function seek(Value: number)
 		-- upvalues: AudioPlayer (copy), Signal2_1 (copy)
 		local ClampedValue = math.clamp(Value, 0, AudioPlayer.TimeLength)
 		AudioPlayer.TimePosition = ClampedValue
 		Signal2_1(ClampedValue)
 	end
 	
-	AudioPlayer:GetPropertyChangedSignal("TimeLength"):Connect(function() --[[ Line: 76 ]]
+	AudioPlayer:GetPropertyChangedSignal("TimeLength"):Connect(function()
 		-- upvalues: Signal2 (copy), AudioPlayer (copy)
 		Signal2(AudioPlayer.TimeLength)
 	end)
 	Signal2(AudioPlayer.TimeLength)
-	AudioPlayer:GetPropertyChangedSignal("IsReady"):Connect(function() --[[ Line: 81 ]]
+	AudioPlayer:GetPropertyChangedSignal("IsReady"):Connect(function()
 		-- upvalues: Signal2_5 (copy), AudioPlayer (copy)
 		Signal2_5(AudioPlayer.IsReady)
 	end)
 	Signal2_5(AudioPlayer.IsReady)
-	table.insert(List, CreateEffectFunction(function(p2) --[[ Line: 88 ]]
+	table.insert(List, CreateEffectFunction(function(p2)
 		-- upvalues: Signal3 (copy), AudioPlayer (copy), P2 (copy), Signal2_3 (copy), Signal2_2 (copy), Signal2_1 (copy), OnDisposedFunction (upval)
 		if Signal3(p2) then
 			if not AudioPlayer.IsPlaying then
 				AudioPlayer:Play()
 			end
 			local Flag = true
-			P2.spawn(function() --[[ Line: 98 ]]
+			P2.spawn(function()
 				-- upvalues: Flag (ref), AudioPlayer (upval), Signal2_3 (upval), Signal2_2 (upval), Signal2_1 (upval), P2 (upval)
 				while Flag do
 					if AudioPlayer.IsPlaying then
@@ -92,13 +92,13 @@ return function(AssetId, UsePreview, p1) --[[ Line: 31 | Named "createAudioStore
 					break
 				end
 			end)
-			OnDisposedFunction(p2, function() --[[ Line: 111 ]]
+			OnDisposedFunction(p2, function()
 				-- upvalues: Flag (ref)
 				Flag = false
 			end)
 		end
 	end))
-	table.insert(List, CreateEffectFunction(function(p3) --[[ Line: 120 ]]
+	table.insert(List, CreateEffectFunction(function(p3)
 		-- upvalues: AudioPlayer (copy), VolumeStoreModule (copy)
 		AudioPlayer.Volume = VolumeStoreModule.getVolume(p3)
 	end))
@@ -112,7 +112,7 @@ return function(AssetId, UsePreview, p1) --[[ Line: 31 | Named "createAudioStore
 		getIsElapsed = Signal4,
 		getIsDestroyed = Signal5,
 		getIsLoaded = Signal6,
-		destroy = function() --[[ Line: 125 ]]
+		destroy = function()
 			-- upvalues: AudioSystemModule (copy), List (copy), Signal2_4 (copy)
 			AudioSystemModule.destroy()
 			

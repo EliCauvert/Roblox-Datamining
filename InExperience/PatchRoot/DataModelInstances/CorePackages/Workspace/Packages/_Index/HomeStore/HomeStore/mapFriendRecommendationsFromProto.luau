@@ -2,12 +2,12 @@
 local _ = require(HomeStore.FriendRecommendationTypes)
 local RecommendationTypeModule = require(HomeStore.RecommendationType)
 
-local function _(Contact) --[[ Line: 8 | Named "mapRecommendationTypeFromProto" ]]
+local function _(Contact)
 	-- upvalues: RecommendationTypeModule (copy)
 	return if Contact == "RECOMMENDATION_TYPE_USER" or Contact == RecommendationTypeModule.User then RecommendationTypeModule.User elseif Contact == "RECOMMENDATION_TYPE_CONTACT" or Contact == RecommendationTypeModule.Contact then RecommendationTypeModule.Contact else RecommendationTypeModule.Invalid
 end
 
-return function(List) --[[ Line: 18 | Named "mapFriendRecommendationsFromProto" ]]
+return function(List)
 	-- upvalues: RecommendationTypeModule (copy)
 	local t = {}
 	

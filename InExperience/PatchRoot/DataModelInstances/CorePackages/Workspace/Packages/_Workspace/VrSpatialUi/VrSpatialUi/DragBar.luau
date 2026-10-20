@@ -2,15 +2,15 @@
 local DragBarModule = {}
 DragBarModule.__index = DragBarModule
 
-function DragBarModule:getCFrame() --[[ Line: 34 ]]
+function DragBarModule:getCFrame()
 	return self.part.CFrame
 end
 
-function DragBarModule:setCFrame(p1) --[[ Line: 38 ]]
+function DragBarModule:setCFrame(p1)
 	self.part.CFrame = p1
 end
 
-function DragBarModule:updateTransparency() --[[ Line: 42 ]]
+function DragBarModule:updateTransparency()
 	if self.dragBarState == "Hovering" then
 		self.dragBarImage.ImageTransparency = 0.2
 		
@@ -25,7 +25,7 @@ function DragBarModule:updateTransparency() --[[ Line: 42 ]]
 	end
 end
 
-function DragBarModule:updateState() --[[ Line: 52 ]]
+function DragBarModule:updateState()
 	if self.dragging then
 		self.dragBarState = "Dragging"
 	elseif self.hovering and not self.dragging then
@@ -36,41 +36,41 @@ function DragBarModule:updateState() --[[ Line: 52 ]]
 	self:updateTransparency()
 end
 
-function DragBarModule:startDrag(UiGroupOffSet) --[[ Line: 63 ]]
+function DragBarModule:startDrag(UiGroupOffSet)
 	self.everDragged = true
 	self.dragging = true
 	self.uiGroupOffSet = UiGroupOffSet
 	self:updateState()
 end
 
-function DragBarModule:isEverDragged() --[[ Line: 70 ]]
+function DragBarModule:isEverDragged()
 	return self.everDragged
 end
 
-function DragBarModule:dragEnd() --[[ Line: 74 ]]
+function DragBarModule:dragEnd()
 	self.dragging = false
 	self:updateState()
 end
 
-function DragBarModule:startHover() --[[ Line: 79 ]]
+function DragBarModule:startHover()
 	self.hovering = true
 	self:updateState()
 end
 
-function DragBarModule:hoverEnd() --[[ Line: 84 ]]
+function DragBarModule:hoverEnd()
 	self.hovering = false
 	self:updateState()
 end
 
-function DragBarModule:show() --[[ Line: 89 ]]
+function DragBarModule:show()
 	self.part.Parent = self.partsParent
 end
 
-function DragBarModule:hide() --[[ Line: 93 ]]
+function DragBarModule:hide()
 	self.part.Parent = nil
 end
 
-function DragBarModule:rescale(p1) --[[ Line: 97 ]]
+function DragBarModule:rescale(p1)
 	-- upvalues: UtilsModule (copy)
 	self.part.Size *= p1
 	
@@ -79,7 +79,7 @@ function DragBarModule:rescale(p1) --[[ Line: 97 ]]
 	end
 end
 
-function DragBarModule.new(Part, DragBarImage) --[[ Line: 104 ]]
+function DragBarModule.new(Part, DragBarImage)
 	-- upvalues: DragBarModule (copy)
 	local config = {
 		hovering = false,

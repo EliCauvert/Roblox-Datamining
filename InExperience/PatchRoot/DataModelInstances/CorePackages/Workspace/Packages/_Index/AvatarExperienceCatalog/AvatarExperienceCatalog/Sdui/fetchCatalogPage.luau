@@ -11,7 +11,7 @@ local GetCatalogPageUrlModule = require(script.Parent.Utils.getCatalogPageUrl)
 local GetCatalogConfigKeyModule = require(script.Parent.Utils.getCatalogConfigKey)
 local NormalizeScreenSizeForWireFunction = require(Parent.AvatarExperienceCommon).Utils.normalizeScreenSizeForWire
 
-return function(Tbl, LoadTimer, p1) --[[ Line: 36 | Named "fetchCatalogPage" ]]
+return function(Tbl, LoadTimer, p1)
 	-- upvalues: Parent (copy), NormalizeScreenSizeForWireFunction (copy), GetSduiApiStoreFunction (copy), SduiResponseType (copy), GetCatalogPageUrlModule (copy), AvatarScreen (copy), GetCatalogConfigKeyModule (copy), SduiApiStorePostConfigContentType (copy), FFlagAXFetchCatalogPageReturnsPromise (copy), PromiseModule (copy)
 	local MarketplaceCatalogPage = require(Parent.ServiceContractsProto).apppageplatform.marketplacecatalog.marketplace_catalog_page
 	local Copy = table.clone(Tbl)

@@ -8,9 +8,9 @@ local CurrentSquadUpdatedFunction = require(SquadsCore.RoduxSquads).Actions.Curr
 local NetworkingSquadsModule = require(SquadsCore.Http.NetworkingSquads)
 local GetExperienceInviteRetryAfterStoreModule = require(SquadsCore.Stores.GetExperienceInviteRetryAfterStore)
 
-return function(PromptType, Callback, Callback1, InExperience, p1) --[[ Line: 16 ]]
+return function(PromptType, Callback, Callback1, InExperience, p1)
 	-- upvalues: PromiseModule (copy), SquadLocationEnumModule (copy), SquadRccEventManagerModule (copy), GetExperienceInviteRetryAfterStoreModule (copy), CurrentSquadUpdatedFunction (copy), NetworkingSquadsModule (copy), LoggerModule (copy)
-	return function(p2) --[[ Line: 23 ]]
+	return function(p2)
 		-- upvalues: PromiseModule (upval), Callback1 (copy), InExperience (copy), SquadLocationEnumModule (upval), SquadRccEventManagerModule (upval), p1 (copy), GetExperienceInviteRetryAfterStoreModule (upval), CurrentSquadUpdatedFunction (upval), NetworkingSquadsModule (upval), LoggerModule (upval), PromptType (copy), Callback (copy)
 		local State = p2:getState()
 		local SquadId = State.Squad and (State.Squad.Squad and (State.Squad.Squad.currentSquad and State.Squad.Squad.currentSquad.squadId))
@@ -18,7 +18,7 @@ return function(PromptType, Callback, Callback1, InExperience, p1) --[[ Line: 16
 		if not SquadId then
 			return PromiseModule.resolve()
 		end
-		local function OnConfirm() --[[ Line: 35 ]]
+		local function OnConfirm()
 			-- upvalues: Callback1 (upval), InExperience (upval), SquadLocationEnumModule (upval), SquadRccEventManagerModule (upval), p1 (upval), GetExperienceInviteRetryAfterStoreModule (upval), SquadId (copy), p2 (copy), CurrentSquadUpdatedFunction (upval), NetworkingSquadsModule (upval), LoggerModule (upval)
 			if Callback1 then
 				Callback1()
@@ -28,12 +28,12 @@ return function(PromptType, Callback, Callback1, InExperience, p1) --[[ Line: 16
 			end
 			GetExperienceInviteRetryAfterStoreModule(false).unblock(SquadId)
 			p2:dispatch(CurrentSquadUpdatedFunction(nil))
-			p2:dispatch(NetworkingSquadsModule.LeaveSquad.API({ squadId = SquadId })):andThen(function() --[[ Line: 51 ]]
+			p2:dispatch(NetworkingSquadsModule.LeaveSquad.API({ squadId = SquadId })):andThen(function()
 				-- upvalues: InExperience (upval), SquadLocationEnumModule (upval), SquadRccEventManagerModule (upval), p1 (upval)
 				if InExperience == SquadLocationEnumModule.InExperience then
 					SquadRccEventManagerModule:setLeaveSquadPendingAndFireEvent(false, p1)
 				end
-			end):catch(function(Err) --[[ Line: 56 ]]
+			end):catch(function(Err)
 				-- upvalues: LoggerModule (upval)
 				LoggerModule:error("Error occured with NetworkingSquads.LeaveSquad: {}", (tostring(Err)))
 			end)

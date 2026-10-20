@@ -15,11 +15,11 @@ local FFlagSignalsNavP3Dispatch = SharedFlagsModule.FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 local GetLegacyNavigationStore = if FFlagSignalsNavP3Dispatch then require(Parent.NavigationRodux).GetLegacyNavigationStore else nil
 
-return function(FeatureName, Callback1, RecourseData, EntryPointEventCtx, ExtraParameters, NameSpace, SkipFacialAgeEstimationWebLinkModal, Metadata, Callback, UsePrologue, PrologueOptions) --[[ Line: 24 ]]
+return function(FeatureName, Callback1, RecourseData, EntryPointEventCtx, ExtraParameters, NameSpace, SkipFacialAgeEstimationWebLinkModal, Metadata, Callback, UsePrologue, PrologueOptions)
 	-- upvalues: FFlagEnableAmpWizardDeepLink (copy), AppPage (copy), FFlagLuaAppPlayButtonWizardCloseDelay (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), FFlagLuaAppWizardContainerBypassNavigationLock (copy), NavigateBackFunction (copy), FFlagAmpWizardDeepLinkReplaceOnlyWebViewModule (copy), GetLegacyNavigationStore (copy), Selectors (copy), NavigateFromWebViewFunction (copy), NavigateDownFunction (copy)
 	local HasReturnPage: boolean = FFlagEnableAmpWizardDeepLink and (Metadata ~= nil and Metadata.returnPage ~= nil)
 	
-	return function(p1) --[[ Line: 39 ]]
+	return function(p1)
 		-- upvalues: AppPage (upval), FeatureName (copy), RecourseData (copy), EntryPointEventCtx (copy), NameSpace (copy), ExtraParameters (copy), Metadata (copy), FFlagLuaAppPlayButtonWizardCloseDelay (upval), Callback (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), FFlagLuaAppWizardContainerBypassNavigationLock (upval), NavigateBackFunction (upval), Callback1 (copy), SkipFacialAgeEstimationWebLinkModal (copy), UsePrologue (copy), PrologueOptions (copy), FFlagAmpWizardDeepLinkReplaceOnlyWebViewModule (upval), HasReturnPage (ref), GetLegacyNavigationStore (upval), Selectors (upval), NavigateFromWebViewFunction (upval), NavigateDownFunction (upval)
 		local config = {
 			name = AppPage.AmpWizardContainer,
@@ -30,7 +30,7 @@ return function(FeatureName, Callback1, RecourseData, EntryPointEventCtx, ExtraP
 				nameSpace = NameSpace,
 				extraParameters = ExtraParameters,
 				metadata = Metadata,
-				completionCallback = function(p2, p3) --[[ Line: 49 ]]
+				completionCallback = function(p2, p3)
 					-- upvalues: FFlagLuaAppPlayButtonWizardCloseDelay (upval), Callback (upval), p1 (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), FFlagLuaAppWizardContainerBypassNavigationLock (upval), NavigateBackFunction (upval), Callback1 (upval)
 					if FFlagLuaAppPlayButtonWizardCloseDelay and Callback then
 						Callback(p1, p2, p3)

@@ -6,7 +6,7 @@ local GetFIntIGARSubtreeDivergenceThresholdPerMilleModule = require(InGameAssetR
 local ExtractAssetIdsFromInstanceModule = require(InGameAssetReporting.Analysis.extractAssetIdsFromInstance)
 local _Random = Random.new()
 
-function getRandomSampleUniformDisk(Vector, p1, Vector1) --[[ Line: 70 ]]
+function getRandomSampleUniformDisk(Vector, p1, Vector1)
 	-- upvalues: _Random (ref)
 	local Count = 0
 	local NewX = nil
@@ -24,7 +24,7 @@ function getRandomSampleUniformDisk(Vector, p1, Vector1) --[[ Line: 70 ]]
 	until NewX >= 0 and NewX <= Vector1.X and NewY >= 0 and NewY <= Vector1.Y
 end
 
-function interpretAnnotation(Vector, p1: number, Callback) --[[ Line: 89 ]]
+function interpretAnnotation(Vector, p1: number, Callback)
 	-- upvalues: GetFIntIGARRaycastTargetCountModule (copy), Players (copy)
 	local Flag = false
 	local config = {
@@ -40,12 +40,12 @@ function interpretAnnotation(Vector, p1: number, Callback) --[[ Line: 89 ]]
 		},
 		highlights = {},
 		topLevelObjects = {},
-		cancel = function() --[[ Line: 110 ]]
+		cancel = function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end
 	}
-	config.raycastComputation = coroutine.create(function() --[[ Line: 116 ]]
+	config.raycastComputation = coroutine.create(function()
 		-- upvalues: Callback (copy), config (copy)
 		Callback(config)
 	end)
@@ -75,7 +75,7 @@ function interpretAnnotation(Vector, p1: number, Callback) --[[ Line: 89 ]]
 			return config
 		else
 			local FilterDescendantsInstances = { LocalPlayer.Character }
-			config.raycastComputation = coroutine.create(function() --[[ Line: 147 ]]
+			config.raycastComputation = coroutine.create(function()
 				-- upvalues: FilterDescendantsInstances (copy), config (copy), Flag (ref), Vector (copy), p1 (copy), ViewportSize (copy), CurrentCamera (copy), Callback (copy)
 				local RaycastParams1 = RaycastParams.new()
 				RaycastParams1.FilterType = Enum.RaycastFilterType.Exclude
@@ -153,7 +153,7 @@ function interpretAnnotation(Vector, p1: number, Callback) --[[ Line: 89 ]]
 	end
 end
 
-function createPlayerCharacterReferenceToPlayerMap(List) --[[ Line: 238 ]]
+function createPlayerCharacterReferenceToPlayerMap(List)
 	local Players = {}
 	
 	for _, Player in ipairs(List) do
@@ -166,11 +166,11 @@ function createPlayerCharacterReferenceToPlayerMap(List) --[[ Line: 238 ]]
 	return Players
 end
 
-function descendingOrderBySecondElement(Entry1, Entry): boolean --[[ Line: 249 ]]
+function descendingOrderBySecondElement(Entry1, Entry): boolean
 	return Entry[2] < Entry1[2]
 end
 
-function createTraversalTaskList(p2, List) --[[ Line: 256 ]]
+function createTraversalTaskList(p2, List)
 	-- upvalues: Players (copy), GetFIntIGARSubtreeDivergenceThresholdPerMilleModule (copy)
 	local List1 = {}
 	local List2 = {}
@@ -237,7 +237,7 @@ function createTraversalTaskList(p2, List) --[[ Line: 256 ]]
 	return List1, List2
 end
 
-function mutateMergeExtractedAssets(p3, p4, p5) --[[ Line: 344 ]]
+function mutateMergeExtractedAssets(p3, p4, p5)
 	for _, value in ipairs(p5.Image) do
 		if not p3[value] then
 			p3[value] = true
@@ -278,7 +278,7 @@ function mutateMergeExtractedAssets(p3, p4, p5) --[[ Line: 344 ]]
 	end
 end
 
-function interpretInstanceListForGUIObjects(List) --[[ Line: 396 ]]
+function interpretInstanceListForGUIObjects(List)
 	local config = {
 		errorReason = nil,
 		hitCountMap = {},
@@ -292,7 +292,7 @@ function interpretInstanceListForGUIObjects(List) --[[ Line: 396 ]]
 		},
 		highlights = {},
 		topLevelObjects = {},
-		cancel = function() --[[ Line: 410 ]] end
+		cancel = function() end
 	}
 	
 	for _, value in ipairs(List) do
@@ -317,7 +317,7 @@ function interpretInstanceListForGUIObjects(List) --[[ Line: 396 ]]
 	return config
 end
 
-function interpretAndExtractItemsFromInstanceForPreciseSelection(Object) --[[ Line: 439 ]]
+function interpretAndExtractItemsFromInstanceForPreciseSelection(Object)
 	-- upvalues: ExtractAssetIdsFromInstanceModule (copy), Players (copy)
 	local config = {
 		extractedAssets = {
@@ -329,7 +329,7 @@ function interpretAndExtractItemsFromInstanceForPreciseSelection(Object) --[[ Li
 			Video = {}
 		},
 		extractedPlayers = {},
-		cancel = function() --[[ Line: 450 ]] end,
+		cancel = function() end,
 		stats = {
 			hitCountMapSize = 0,
 			topLevelObjectsSize = 0,
@@ -345,7 +345,7 @@ function interpretAndExtractItemsFromInstanceForPreciseSelection(Object) --[[ Li
 			raycastResumptionCount = 0,
 			raycastComputeTime = 0
 		},
-		computation = coroutine.create(function() --[[ Line: 469 ]] end)
+		computation = coroutine.create(function() end)
 	}
 	
 	if not Object then
@@ -353,7 +353,7 @@ function interpretAndExtractItemsFromInstanceForPreciseSelection(Object) --[[ Li
 	end
 	local t = {}
 	
-	local function _(p6) --[[ Line: 476 ]]
+	local function _(p6)
 		-- upvalues: ExtractAssetIdsFromInstanceModule (upval), t (copy), config (copy)
 		local ExtractAssetIdsFromInstanceModuleResult = ExtractAssetIdsFromInstanceModule(p6)
 		
@@ -396,7 +396,7 @@ function interpretAndExtractItemsFromInstanceForPreciseSelection(Object) --[[ Li
 	return config
 end
 
-function extractItemsFromInterpretations(List, Callback) --[[ Line: 516 ]]
+function extractItemsFromInterpretations(List, Callback)
 	-- upvalues: ExtractAssetIdsFromInstanceModule (copy)
 	local Flag = false
 	local config = {
@@ -409,7 +409,7 @@ function extractItemsFromInterpretations(List, Callback) --[[ Line: 516 ]]
 			Video = {}
 		},
 		extractedPlayers = {},
-		cancel = function() --[[ Line: 532 ]]
+		cancel = function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end,
@@ -429,7 +429,7 @@ function extractItemsFromInterpretations(List, Callback) --[[ Line: 516 ]]
 			raycastComputeTime = 0
 		}
 	}
-	config.computation = coroutine.create(function() --[[ Line: 551 ]]
+	config.computation = coroutine.create(function()
 		-- upvalues: Callback (copy), config (copy)
 		Callback(config)
 	end)
@@ -478,17 +478,17 @@ function extractItemsFromInterpretations(List, Callback) --[[ Line: 516 ]]
 	config.stats.playersCount = #TraversalTaskList2
 	config.stats.wallTime = os.clock() - ClockTime
 	config.stats.traversalTaskListSize = #TraversalTaskList
-	config.computation = coroutine.create(function() --[[ Line: 599 ]]
+	config.computation = coroutine.create(function()
 		-- upvalues: config (copy), TraversalTaskList (copy), Flag (ref), Callback (copy), t (copy), ExtractAssetIdsFromInstanceModule (upval)
 		local ClockTime = os.clock()
 		local ClockTime1 = os.clock()
 		
-		local function _(): boolean --[[ Line: 602 ]]
+		local function _(): boolean
 			-- upvalues: ClockTime1 (ref)
 			return ClockTime1 + 0.011111111111111112 < os.clock()
 		end
 		
-		local _ = function() --[[ Line: 605 ]]
+		local _ = function()
 			-- upvalues: config (upval), ClockTime1 (ref)
 			local Stats = config.stats
 			Stats.computeTime += os.clock() - ClockTime1
@@ -581,7 +581,7 @@ return {
 	extractItemsFromInterpretations = extractItemsFromInterpretations,
 	interpretInstanceListForGUIObjects = interpretInstanceListForGUIObjects,
 	interpretAndExtractItemsFromInstanceForPreciseSelection = interpretAndExtractItemsFromInstanceForPreciseSelection,
-	__setRandomGenerator = function(p6) --[[ Line: 698 ]]
+	__setRandomGenerator = function(p6)
 		-- upvalues: _Random (ref)
 		_Random = p6
 	end

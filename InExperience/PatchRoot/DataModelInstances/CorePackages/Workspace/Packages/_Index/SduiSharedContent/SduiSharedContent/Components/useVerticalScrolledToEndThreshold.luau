@@ -1,7 +1,7 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("SduiSharedContent").Parent.React)
 local SduiFeedCacheScrollExtents = game:DefineFastFlag("SduiFeedCacheScrollExtents", false)
 
-return function(p1, p2, Current) --[[ Line: 8 | Named "useVerticalScrolledToEndThreshold" ]]
+return function(p1, p2, Current)
 	-- upvalues: ReactModule (copy), SduiFeedCacheScrollExtents (copy)
 	local UseRefResult = ReactModule.useRef(false)
 	local UseRefResult1 = ReactModule.useRef(Current)
@@ -10,7 +10,7 @@ return function(p1, p2, Current) --[[ Line: 8 | Named "useVerticalScrolledToEndT
 	if Current == nil then
 		p2 = nil
 	end
-	ReactModule.useEffect(function() --[[ Line: 26 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p2 (ref), p1 (copy), SduiFeedCacheScrollExtents (upval), UseRefResult (copy), UseRefResult1 (copy)
 		if p2 == nil or p1.current == nil then
 			return nil
@@ -23,13 +23,13 @@ return function(p1, p2, Current) --[[ Line: 8 | Named "useVerticalScrolledToEndT
 			local Y = Current.AbsoluteCanvasSize.Y
 			local Y1 = Current.AbsoluteWindowSize.Y
 			
-			local function _() --[[ Line: 45 | Named "refreshSizes" ]]
+			local function _()
 				-- upvalues: Y (ref), Current (copy), Y1 (ref)
 				Y = Current.AbsoluteCanvasSize.Y
 				Y1 = Current.AbsoluteWindowSize.Y
 			end
 			
-			local function evaluateThreshold() --[[ Line: 51 ]]
+			local function evaluateThreshold()
 				-- upvalues: Y (ref), Y1 (ref), p2 (upval), Current (copy), UseRefResult (upval), UseRefResult1 (upval)
 				local YDelta = Y - Y1 - p2
 				local Y2 = Current.CanvasPosition.Y
@@ -48,7 +48,7 @@ return function(p1, p2, Current) --[[ Line: 8 | Named "useVerticalScrolledToEndT
 				end
 			end
 			
-			local function refreshSizesAndEvaluate() --[[ Line: 65 ]]
+			local function refreshSizesAndEvaluate()
 				-- upvalues: Y (ref), Current (copy), Y1 (ref), p2 (upval), UseRefResult (upval), UseRefResult1 (upval)
 				Y = Current.AbsoluteCanvasSize.Y
 				Y1 = Current.AbsoluteWindowSize.Y
@@ -74,7 +74,7 @@ return function(p1, p2, Current) --[[ Line: 8 | Named "useVerticalScrolledToEndT
 			table.insert(List, Current:GetPropertyChangedSignal("CanvasPosition"):Connect(evaluateThreshold))
 			Callback = refreshSizesAndEvaluate
 		else
-			local function checkThreshold() --[[ Line: 85 ]]
+			local function checkThreshold()
 				-- upvalues: Current (copy), p2 (upval), UseRefResult (upval), UseRefResult1 (upval)
 				local YDelta = Current.AbsoluteCanvasSize.Y - Current.AbsoluteWindowSize.Y - p2
 				local Y = Current.CanvasPosition.Y
@@ -99,14 +99,14 @@ return function(p1, p2, Current) --[[ Line: 8 | Named "useVerticalScrolledToEndT
 			Callback = checkThreshold
 		end
 		local Flag = false
-		task.defer(function() --[[ Line: 117 ]]
+		task.defer(function()
 			-- upvalues: Flag (ref), Callback (ref)
 			if not Flag then
 				Callback()
 			end
 		end)
 		
-		return function() --[[ Line: 123 ]]
+		return function()
 			-- upvalues: Flag (ref), List (copy)
 			Flag = true
 			

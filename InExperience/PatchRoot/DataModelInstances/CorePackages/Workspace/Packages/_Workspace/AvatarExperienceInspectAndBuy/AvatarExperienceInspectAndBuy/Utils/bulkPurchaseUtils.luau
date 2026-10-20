@@ -8,7 +8,7 @@ local PriceStatusModule = require(AvatarExperienceInspectAndBuy.Enums.PriceStatu
 local GetPriceInRobuxFunction = require(AvatarExperienceInspectAndBuy.Utils.itemDetailsUtils).getPriceInRobux
 local _ = require(AvatarExperienceInspectAndBuy.Stores.createItemSelectionStore)
 
-local function createBulkPurchaseRequestItem(BulkPurchaseRequestItem) --[[ Line: 62 ]]
+local function createBulkPurchaseRequestItem(BulkPurchaseRequestItem)
 	-- upvalues: ItemTypeEnum (copy)
 	return {
 		id = BulkPurchaseRequestItem.id and tonumber(BulkPurchaseRequestItem.id) or 0,
@@ -17,7 +17,7 @@ local function createBulkPurchaseRequestItem(BulkPurchaseRequestItem) --[[ Line:
 end
 
 return {
-	convertAvatarItemToItemData = function(BulkPurchaseRequestItem, p1) --[[ Line: 31 ]]
+	convertAvatarItemToItemData = function(BulkPurchaseRequestItem, p1)
 		-- upvalues: ItemTypeEnum (copy), ConvertAssetInfoToItemDataModule (copy), ConvertBundleInfoToItemDataModule (copy)
 		if BulkPurchaseRequestItem.itemType == ItemTypeEnum.Asset then
 			local Asset = p1.assets[BulkPurchaseRequestItem.id]
@@ -31,12 +31,12 @@ return {
 			return nil
 		end
 	end,
-	isPurchasableItem = function(Free): boolean --[[ Line: 52 ]]
+	isPurchasableItem = function(Free): boolean
 		-- upvalues: PriceStatusModule (copy)
 		return Free == PriceStatusModule.Free or (Free == PriceStatusModule.PurchaseFromRoblox or Free == PriceStatusModule.PurchaseFromResale)
 	end,
 	createBulkPurchaseRequestItem = createBulkPurchaseRequestItem,
-	getBulkPurchaseEligibleItems = function(List, p1, p2) --[[ Line: 76 ]]
+	getBulkPurchaseEligibleItems = function(List, p1, p2)
 		-- upvalues: ItemTypeEnum (copy), ConvertAssetInfoToItemDataModule (copy), ConvertBundleInfoToItemDataModule (copy), GetPriceStatusModule (copy), PriceStatusModule (copy), GetPriceInRobuxFunction (copy), createBulkPurchaseRequestItem (copy)
 		if not List then
 			return { totalPrice = 0, requestedItems = {} }

@@ -11,7 +11,7 @@ local BaseComponentModule = require(v1.components.BaseComponent)
 
 return {
 	["jest.config"] = v1["jest.config"],
-	init = function() --[[ Line: 26 ]]
+	init = function()
 		-- upvalues: AdsDisplayOrder (copy), CoreGui (copy), ReactRobloxModule (copy), AdService (copy), FlagsModule (copy), ReactModule (copy), BaseComponentModule (copy), AdPlayerComponentModule (copy)
 		local RewardedVideoAdPlayer = Instance.new("ScreenGui")
 		RewardedVideoAdPlayer.Name = "RewardedVideoAdPlayer"
@@ -22,9 +22,9 @@ return {
 		RewardedVideoAdPlayer.Parent = CoreGui
 		local Root = ReactRobloxModule.createRoot(RewardedVideoAdPlayer)
 		
-		function AdService.onDemandVideoPlayInUI(p1) --[[ Line: 37 ]]
+		function AdService.onDemandVideoPlayInUI(p1)
 			-- upvalues: Root (copy), AdService (upval), FlagsModule (upval), ReactModule (upval), BaseComponentModule (upval), AdPlayerComponentModule (upval)
-			local function _(p2) --[[ Line: 38 | Named "onVideoCompleted" ]]
+			local function _(p2)
 				-- upvalues: Root (upval), AdService (upval), p1 (copy)
 				Root:render(nil)
 				AdService:onDemandVideoCompleteFromUI(p2, p1.encryptedAdTrackingData, p1.encryptionMetadata, p1.rewardDetails)
@@ -38,7 +38,7 @@ return {
 					isEligible = p1.isEligible,
 					creativeAssetUrl = p1.creativeAssetUrl,
 					durationNeededForReward = if FlagsModule.GetEnableLuaRewardTimerUI() then DurationNeededForRewardMsRatio else nil,
-					onVideoFrameLoaded = function(p2) --[[ Line: 66 ]]
+					onVideoFrameLoaded = function(p2)
 						-- upvalues: v2 (ref), BindableEvent (copy)
 						v2 = p2
 						
@@ -46,23 +46,23 @@ return {
 							BindableEvent:Fire()
 						end
 					end,
-					onCancel = function() --[[ Line: 72 ]]
+					onCancel = function()
 						-- upvalues: Root (upval), AdService (upval), p1 (copy)
 						local ShowInterrupted = Enum.ShowAdResult.ShowInterrupted
 						Root:render(nil)
 						AdService:onDemandVideoCompleteFromUI(ShowInterrupted, p1.encryptedAdTrackingData, p1.encryptionMetadata, p1.rewardDetails)
 					end,
-					onComplete = function() --[[ Line: 75 ]]
+					onComplete = function()
 						-- upvalues: Root (upval), AdService (upval), p1 (copy)
 						local ShowCompleted = Enum.ShowAdResult.ShowCompleted
 						Root:render(nil)
 						AdService:onDemandVideoCompleteFromUI(ShowCompleted, p1.encryptedAdTrackingData, p1.encryptionMetadata, p1.rewardDetails)
 					end,
-					showWhyThisAd = function() --[[ Line: 78 ]]
+					showWhyThisAd = function()
 						-- upvalues: AdService (upval)
 						AdService:HandleWhyThisAdClicked("advertiserName", "payerName")
 					end,
-					getReportAdInfo = function() --[[ Line: 81 ]]
+					getReportAdInfo = function()
 						-- upvalues: p1 (copy)
 						return {
 							adUnitName = "Rewarded Video Ad",

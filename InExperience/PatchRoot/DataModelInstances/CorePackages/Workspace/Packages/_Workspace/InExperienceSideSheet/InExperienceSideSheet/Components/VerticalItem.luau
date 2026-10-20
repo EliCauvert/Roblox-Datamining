@@ -11,10 +11,10 @@ local ToggleSideSheetModule = require(InExperienceSideSheet.Utils.toggleSideShee
 local FFlagSideSheetOpenPeoplePage = require(InExperienceSideSheet.Flags).FFlagSideSheetOpenPeoplePage
 local FFlagSideSheetFocusNav = require(Parent.SharedFlags).FFlagSideSheetFocusNav
 
-return ReactModule.memo(function(p1) --[[ Line: 33 | Named "VerticalItem" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), FFlagSideSheetOpenPeoplePage (copy), ClosePeoplePageOpenedWithSideSheetModule (copy), ToggleSideSheetModule (copy), SidesheetAnalyticsModule (copy), AnalyticsConstantsModule (copy), FFlagSideSheetFocusNav (copy), View (copy), Text (copy)
 	local UseRefResult = if FFlagSideSheetFocusNav then ReactModule.useRef(nil) else nil
-	local UseResult = if FFlagSideSheetFocusNav then ReactModule.useCallback(function(Current) --[[ Line: 45 ]]
+	local UseResult = if FFlagSideSheetFocusNav then ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), p1 (copy)
 		if UseRefResult then
 			UseRefResult.current = Current
@@ -27,7 +27,7 @@ return ReactModule.memo(function(p1) --[[ Line: 33 | Named "VerticalItem" ]]
 	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-none size-full-1000 padding-left-xsmall radius-medium",
 		LayoutOrder = p1.layoutOrder,
-		onActivated = ReactModule.useCallback(function() --[[ Line: 34 ]]
+		onActivated = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy), FFlagSideSheetOpenPeoplePage (upval), ClosePeoplePageOpenedWithSideSheetModule (upval), ToggleSideSheetModule (upval), SidesheetAnalyticsModule (upval), AnalyticsConstantsModule (upval)
 			p1.onActivated()
 			

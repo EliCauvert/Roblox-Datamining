@@ -11,14 +11,14 @@ local UseIsSpatialFunction = ResponsiveModule.useIsSpatial
 local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
 local FFlagProfilePlatformFixBioTruncationModule = require(ProfilePlatform.Flags.FFlagProfilePlatformFixBioTruncation)
 
-return function(String1, X, p1) --[[ Line: 15 ]]
+return function(String1, X, p1)
 	-- upvalues: UseTokensFunction (copy), UseIsSpatialFunction (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), ReactModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), FFlagProfilePlatformFixBioTruncationModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local BodyMedium = UseTokensResult.Typography.BodyMedium
 	local UseIsSpatialResult = UseIsSpatialFunction()
 	local IsUsePreferredInputResultMatch = UsePreferredInputFunction() == ResponsiveModule.Input.Directional
 	local UseIsSpatialResult1 = UseIsSpatialResult or IsUsePreferredInputResultMatch
-	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 23 ]]
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: String1 (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), BodyMedium (copy), TextService (upval), UseIsSpatialResult1 (copy), FFlagProfilePlatformFixBioTruncationModule (upval), X (copy), UseTokensResult (copy)
 		local Replaced = string.gsub(String1 or "", "[\r\n]+", " ")
 		local Y = if FoundationFontFaceMigration then GetTextSizeFunction(Replaced, BodyMedium.FontSize, BodyMedium.Font, Vector2.new(1e999, 1e999), { addTemporaryPadding = false }).Y else TextService:GetTextSize(Replaced, BodyMedium.FontSize, BodyMedium.Font, Vector2.new(1e999, 1e999)).Y

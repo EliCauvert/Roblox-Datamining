@@ -13,9 +13,9 @@ local ExtendResult = Roact.PureComponent:extend(script.Name)
 local GetFFlagEnableVpcForInExperiencePremiumUpsellModule = require(PurchasePrompt.Flags.GetFFlagEnableVpcForInExperiencePremiumUpsell)
 local _ = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 
-function ExtendResult.init(p1) --[[ Line: 51 ]]
+function ExtendResult.init(p1)
 	-- upvalues: PromptStateModule (copy), GetFFlagEnableVpcForInExperiencePremiumUpsellModule (copy)
-	function p1.confirmButtonPressed() --[[ Line: 52 ]]
+	function p1.confirmButtonPressed()
 		-- upvalues: p1 (copy), PromptStateModule (upval), GetFFlagEnableVpcForInExperiencePremiumUpsellModule (upval)
 		local Props = p1.props
 		local PromptState = Props.promptState
@@ -43,21 +43,21 @@ function ExtendResult.init(p1) --[[ Line: 51 ]]
 		end
 	end
 	
-	function p1.cancelButtonPressed() --[[ Line: 72 ]]
+	function p1.cancelButtonPressed()
 		-- upvalues: p1 (copy)
 		p1.props.endPurchase()
 	end
 end
 
-function ExtendResult.didMount(p1) --[[ Line: 79 ]]
+function ExtendResult.didMount(p1)
 	-- upvalues: ContextActionService (copy)
-	ContextActionService:BindCoreAction("PremiumPurchaseConfirmButtonBind", function(_, UserInputState, _) --[[ Line: 80 ]]
+	ContextActionService:BindCoreAction("PremiumPurchaseConfirmButtonBind", function(_, UserInputState, _)
 		-- upvalues: p1 (copy)
 		if UserInputState == Enum.UserInputState.Begin then
 			p1.confirmButtonPressed()
 		end
 	end, false, Enum.KeyCode.ButtonA)
-	ContextActionService:BindCoreAction("PremiumPurchaseCancelButtonBind", function(_, UserInputState, _) --[[ Line: 85 ]]
+	ContextActionService:BindCoreAction("PremiumPurchaseCancelButtonBind", function(_, UserInputState, _)
 		-- upvalues: p1 (copy)
 		if UserInputState == Enum.UserInputState.Begin then
 			p1.cancelButtonPressed()
@@ -65,32 +65,32 @@ function ExtendResult.didMount(p1) --[[ Line: 79 ]]
 	end, false, Enum.KeyCode.ButtonB)
 end
 
-function ExtendResult:willUnmount() --[[ Line: 92 ]]
+function ExtendResult:willUnmount()
 	-- upvalues: ContextActionService (copy)
 	ContextActionService:UnbindCoreAction("PremiumPurchaseConfirmButtonBind")
 	ContextActionService:UnbindCoreAction("PremiumPurchaseCancelButtonBind")
 end
 
-function ExtendResult.getFlowState(p1) --[[ Line: 97 ]]
+function ExtendResult.getFlowState(p1)
 	-- upvalues: PromptStateModule (copy), PremiumUpsellFlowState (copy)
 	local PromptState = p1.props.promptState
 	
 	return if PromptState == PromptStateModule.PremiumUpsell then PremiumUpsellFlowState.PurchaseModal elseif PromptState == PromptStateModule.Error then PremiumUpsellFlowState.Error elseif PromptState == PromptStateModule.EnablePurchaseVPCModal then PremiumUpsellFlowState.PurchaseVPCModal else PremiumUpsellFlowState.None
 end
 
-function ExtendResult.getErrorType(p1) --[[ Line: 113 ]]
+function ExtendResult.getErrorType(p1)
 	-- upvalues: PurchaseErrorModule (copy), PurchaseErrorType (copy)
 	local Props = p1.props
 	
 	return if Props.purchaseError == PurchaseErrorModule.AlreadyPremium then PurchaseErrorType.AlreadyPremium elseif Props.purchaseError == PurchaseErrorModule.PremiumUnavailablePlatform then PurchaseErrorType.PremiumPlatformUnavailable elseif Props.purchaseError == PurchaseErrorModule.EconomicRestriction then PurchaseErrorType.EconomicRestriction else PurchaseErrorType.Unknown
 end
 
-function ExtendResult.getVPCModalType(p1) --[[ Line: 127 ]]
+function ExtendResult.getVPCModalType(p1)
 	-- upvalues: PromptStateModule (copy), VPCModalTypeModule (copy)
 	return if p1.props.promptState == PromptStateModule.EnablePurchaseVPCModal then VPCModalTypeModule.toRawValue(VPCModalTypeModule.EnablePurchase) else VPCModalTypeModule.toRawValue(VPCModalTypeModule.None)
 end
 
-function ExtendResult.render(p1) --[[ Line: 137 ]]
+function ExtendResult.render(p1)
 	-- upvalues: Roact (copy), PremiumUpsellFlow (copy), GetFFlagEnableVpcForInExperiencePremiumUpsellModule (copy)
 	local Props = p1.props
 	

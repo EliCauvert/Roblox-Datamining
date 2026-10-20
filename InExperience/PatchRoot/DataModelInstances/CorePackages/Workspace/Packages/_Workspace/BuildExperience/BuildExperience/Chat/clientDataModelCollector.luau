@@ -1,4 +1,4 @@
-﻿local function defaultDependencies() --[[ Line: 27 ]]
+﻿local function defaultDependencies()
 	local Players = game:GetService("Players")
 	
 	return {
@@ -6,32 +6,32 @@
 		root = game,
 		players = Players,
 		localPlayer = Players.LocalPlayer,
-		getService = function(ChildName) --[[ Line: 34 ]]
+		getService = function(ChildName)
 			local Success, Result = pcall(game.GetService, game, ChildName)
 			
 			return if Success then Result else game:FindFirstChild(ChildName)
 		end,
-		getReflectionProperties = function(ClassName) --[[ Line: 41 ]]
+		getReflectionProperties = function(ClassName)
 			return game:GetService("ReflectionService"):GetPropertiesOfClass(ClassName, {})
 		end
 	}
 end
 
-local function _(p1) --[[ Line: 48 | Named "safeGetChildren" ]]
+local function _(p1)
 	local Success, Result = pcall(p1.GetChildren, p1)
 	
 	return if Success and typeof(Result) == "table" then Result else {}
 end
 
-local function escapePathSegment(Text: string) --[[ Line: 53 ]]
+local function escapePathSegment(Text: string)
 	return if Text == "" then "%00" else Text:gsub("%%", "%%25"):gsub("%.", "%%2E"):gsub("%[", "%%5B"):gsub("%]", "%%5D")
 end
 
-local _ = function(Text: string) --[[ Line: 60 | Named "unescapePathSegment" ]]
+local _ = function(Text: string)
 	return if Text == "%00" then "" else Text:gsub("%%2E", "."):gsub("%%5B", "["):gsub("%%5D", "]"):gsub("%%25", "%%")
 end
 
-local function getChildPathEntries(Parent) --[[ Line: 72 ]]
+local function getChildPathEntries(Parent)
 	local Success, Result = pcall(Parent.GetChildren, Parent)
 	local Result1 = if Success and typeof(Result) == "table" then Result else {}
 	local t = {}
@@ -54,7 +54,7 @@ local function getChildPathEntries(Parent) --[[ Line: 72 ]]
 	return List
 end
 
-local function formatChildSegment(Parent) --[[ Line: 93 ]]
+local function formatChildSegment(Parent)
 	-- upvalues: getChildPathEntries (copy), escapePathSegment (copy)
 	if Parent.Parent ~= nil then
 		for _, value in getChildPathEntries(Parent.Parent) do
@@ -66,11 +66,11 @@ local function formatChildSegment(Parent) --[[ Line: 93 ]]
 	return escapePathSegment(Parent.Name)
 end
 
-local _ = function(p1, p2) --[[ Line: 104 | Named "appendPathSegment" ]]
+local _ = function(p1, p2)
 	return if p1 == "" then p2 else `{p1}.{p2}`
 end
 
-local function splitPath(Text: string) --[[ Line: 108 ]]
+local function splitPath(Text: string)
 	local List = {}
 	
 	for i in string.gmatch(Text:gsub("^game%.", ""):gsub("^game$", ""), "[^%.]+") do
@@ -81,14 +81,14 @@ local function splitPath(Text: string) --[[ Line: 108 ]]
 	return List
 end
 
-local _ = function(Text: string) --[[ Line: 119 | Named "parsePathSegment" ]]
+local _ = function(Text: string)
 	local Match, Match2 = string.match(Text, "^(.*)%[(%d+)%]$")
 	local Match1 = Match or Text
 	
 	return if Match1 == "%00" then "" else Match1:gsub("%%2E", "."):gsub("%%5B", "["):gsub("%%5D", "]"):gsub("%%25", "%%"), tonumber(Match2) or 1
 end
 
-local _ = function(p1, Name, Count) --[[ Line: 124 | Named "findChild" ]]
+local _ = function(p1, Name, Count)
 	local Count1 = 0
 	local Success, Result = pcall(p1.GetChildren, p1)
 	local Result1 = if Success and typeof(Result) == "table" then Result else {}
@@ -104,7 +104,7 @@ local _ = function(p1, Name, Count) --[[ Line: 124 | Named "findChild" ]]
 	return nil
 end
 
-local function resolvePath(Text: string, p2) --[[ Line: 137 ]]
+local function resolvePath(Text: string, p2)
 	-- upvalues: splitPath (copy), getChildPathEntries (copy)
 	if Text == nil or Text == "" or string.lower(Text) == "game" then
 		return p2.root, ""
@@ -193,7 +193,7 @@ local function resolvePath(Text: string, p2) --[[ Line: 137 ]]
 	return Service, LocalPlayerName
 end
 
-local function getDisplayPath(Parent, p3): string --[[ Line: 174 ]]
+local function getDisplayPath(Parent, p3): string
 	-- upvalues: formatChildSegment (copy)
 	local List = {}
 	local Parent1 = Parent
@@ -210,7 +210,7 @@ local function getDisplayPath(Parent, p3): string --[[ Line: 174 ]]
 	return if Parent1 == p3.root then table.concat(List, ".") else tostring(Parent)
 end
 
-local function truncateString(Text: string): string --[[ Line: 201 ]]
+local function truncateString(Text: string): string
 	if #Text <= 4096 then
 		return Text
 	end
@@ -230,7 +230,7 @@ local function truncateString(Text: string): string --[[ Line: 201 ]]
 	return string.sub(Text, 1, (math.max(v2, 0))) .. "...<truncated>"
 end
 
-local function serializeValue(List, p4, p5) --[[ Line: 233 ]]
+local function serializeValue(List, p4, p5)
 	-- upvalues: truncateString (copy), getDisplayPath (copy), serializeValue (copy)
 	local ValueType = typeof(List)
 	
@@ -272,7 +272,7 @@ local function serializeValue(List, p4, p5) --[[ Line: 233 ]]
 	return t
 end
 
-local function countDescendants(p6) --[[ Line: 269 ]]
+local function countDescendants(p6)
 	local Count = 10000
 	local Success, Result = pcall(p6.GetChildren, p6)
 	local Result1 = if Success and typeof(Result) == "table" then Result else {}
@@ -308,7 +308,7 @@ local function countDescendants(p6) --[[ Line: 269 ]]
 	return Count1, Flag or #List > 0
 end
 
-local function countDescendantsByInstance(p7) --[[ Line: 299 ]]
+local function countDescendantsByInstance(p7)
 	local Totals = {}
 	local t = {}
 	local List = { { expanded = false, instance = p7 } }
@@ -346,7 +346,7 @@ local function countDescendantsByInstance(p7) --[[ Line: 299 ]]
 	return Totals, Flag
 end
 
-local function summarizeChildren(p8, Path) --[[ Line: 347 ]]
+local function summarizeChildren(p8, Path)
 	-- upvalues: getChildPathEntries (copy), countDescendants (copy)
 	local ChildPathEntries = getChildPathEntries(p8)
 	local ImmediateChildren = {}
@@ -370,11 +370,11 @@ local function summarizeChildren(p8, Path) --[[ Line: 347 ]]
 	}, Truncated
 end
 
-local function getPropertyNames(p9, p10) --[[ Line: 371 ]]
+local function getPropertyNames(p9, p10)
 	local List = {}
 	local t = {}
 	
-	local function _(Key) --[[ Line: 375 | Named "addName" ]]
+	local function _(Key)
 		-- upvalues: t (copy), List (copy)
 		if typeof(Key) == "string" and Key ~= "" and not t[Key] and #List < 256 then
 			t[Key] = true
@@ -397,12 +397,12 @@ local function getPropertyNames(p9, p10) --[[ Line: 371 ]]
 	return List
 end
 
-local function collectProperties(p11, p12) --[[ Line: 392 ]]
+local function collectProperties(p11, p12)
 	-- upvalues: getPropertyNames (copy), serializeValue (copy)
 	local t = {}
 	
 	for _, value in getPropertyNames(p11, p12) do
-		local Success, Result = pcall(function() --[[ Line: 395 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p11 (copy), value (copy)
 			return p11[value]
 		end)
@@ -414,7 +414,7 @@ local function collectProperties(p11, p12) --[[ Line: 392 ]]
 	return t
 end
 
-local function collectAttributes(p13, p14) --[[ Line: 405 ]]
+local function collectAttributes(p13, p14)
 	-- upvalues: serializeValue (copy)
 	local Success, Result = pcall(p13.GetAttributes, p13)
 	
@@ -436,18 +436,18 @@ local function collectAttributes(p13, p14) --[[ Line: 405 ]]
 	return t
 end
 
-local _ = function(Message) --[[ Line: 427 | Named "invalidInput" ]]
+local _ = function(Message)
 	return { status = "invalid_input", message = Message }
 end
 
-local _ = function() --[[ Line: 434 | Named "notInGame" ]]
+local _ = function()
 	return {
 		status = "not_in_game",
 		message = "The user is not in the game."
 	}
 end
 
-local _ = function(Path) --[[ Line: 441 | Named "notFound" ]]
+local _ = function(Path)
 	return {
 		status = "not_found",
 		message = "No instance exists at the requested path.",
@@ -455,7 +455,7 @@ local _ = function(Path) --[[ Line: 441 | Named "notFound" ]]
 	}
 end
 
-local _ = function(p15, p16) --[[ Line: 449 | Named "getOptionalString" ]]
+local _ = function(p15, p16)
 	if typeof(p15) == "table" then
 		local v3 = p15[p16]
 		
@@ -465,11 +465,11 @@ local _ = function(p15, p16) --[[ Line: 449 | Named "getOptionalString" ]]
 	end
 end
 
-local _ = function(p15, p16, p17, MinValue: number, MaxValue: number) --[[ Line: 457 | Named "getBoundedInteger" ]]
+local _ = function(p15, p16, p17, MinValue: number, MaxValue: number)
 	return if typeof(p15) == "table" and typeof(p15[p16]) == "number" then math.clamp(math.floor(p15[p16]), MinValue, MaxValue) else p17
 end
 
-local function getKeywords(p15) --[[ Line: 470 ]]
+local function getKeywords(p15)
 	local Text = nil
 	if typeof(p15) == "table" then
 		local Keywords = p15.keywords
@@ -488,7 +488,7 @@ local function getKeywords(p15) --[[ Line: 470 ]]
 	return List
 end
 
-local function matchesFilters(p16, p17, List): boolean --[[ Line: 483 ]]
+local function matchesFilters(p16, p17, List): boolean
 	if p17 ~= nil then
 		local Success, Result = pcall(p16.IsA, p16, p17)
 		
@@ -506,7 +506,7 @@ local function matchesFilters(p16, p17, List): boolean --[[ Line: 483 ]]
 	return true
 end
 
-local function makeSearchMatch(_instance, Path) --[[ Line: 500 ]]
+local function makeSearchMatch(_instance, Path)
 	local Parent = _instance.Parent
 	local Success, Result = pcall(_instance.GetChildren, _instance)
 	
@@ -523,17 +523,17 @@ end
 return {
 	NOT_IN_GAME_MESSAGE = "The user is not in the game.",
 	NOT_FOUND_MESSAGE = "No instance exists at the requested path.",
-	getInstancePath = function(p18, p19) --[[ Line: 189 ]]
+	getInstancePath = function(p18, p19)
 		-- upvalues: getDisplayPath (copy), defaultDependencies (copy)
 		return getDisplayPath(p18, p19 or defaultDependencies())
 	end,
-	resolveInstancePath = function(p18, ClassName, p19) --[[ Line: 193 ]]
+	resolveInstancePath = function(p18, ClassName, p19)
 		-- upvalues: resolvePath (copy), defaultDependencies (copy)
 		local ResolvePathResult, ResolvePathResult2 = resolvePath(p18, p19 or defaultDependencies())
 		
 		return if ResolvePathResult == nil or ResolvePathResult.ClassName ~= ClassName then nil else ResolvePathResult2
 	end,
-	searchClientDataModel = function(p18, p19) --[[ Line: 512 ]]
+	searchClientDataModel = function(p18, p19)
 		-- upvalues: defaultDependencies (copy), resolvePath (copy), getKeywords (copy), getChildPathEntries (copy), matchesFilters (copy), makeSearchMatch (copy), countDescendantsByInstance (copy)
 		local P49 = p19 or defaultDependencies()
 		
@@ -644,7 +644,7 @@ return {
 			truncated = Flag
 		}
 	end,
-	inspectClientInstance = function(p20, p21) --[[ Line: 605 ]]
+	inspectClientInstance = function(p20, p21)
 		-- upvalues: defaultDependencies (copy), resolvePath (copy), summarizeChildren (copy), collectProperties (copy), collectAttributes (copy)
 		local P51 = p21 or defaultDependencies()
 		

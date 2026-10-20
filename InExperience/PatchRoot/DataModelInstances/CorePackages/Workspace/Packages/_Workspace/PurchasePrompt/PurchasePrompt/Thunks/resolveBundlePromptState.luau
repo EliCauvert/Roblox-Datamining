@@ -35,15 +35,15 @@ local SelectCartPricingOverrideModule = require(PurchasePrompt.Selectors.selectC
 local _ = require(PurchasePrompt.Parent.RobloxSubscriptionPurchaseApp)
 local SetRobloxSubscriptionProductsModule = require(PurchasePrompt.Actions.SetRobloxSubscriptionProducts)
 
-local function _(p1, p2) --[[ Line: 52 | Named "getBundlePriceFromProductInfo" ]]
+local function _(p1, p2)
 	return p1 and p1.product ~= nil and (if p2 and p1.product.premiumPricing ~= nil then p1.product.premiumPricing.premiumPriceInRobux else p1.product.priceInRobux) or 0
 end
 
 local list = { AnalyticsModule, NetworkModule }
 
-return function(_, p1, p2, p3, p4, p5, p6, p7) --[[ Line: 70 | Named "resolveBundlePromptState" ]]
+return function(_, p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: ThunkModule (copy), list (copy), AnalyticsModule (copy), NetworkModule (copy), BundleProductInfoReceivedModule (copy), AccountInfoReceivedModule (copy), BalanceInfoRecievedModule (copy), SetIsUserEligibleForUnifiedPurchaseFlowModule (copy), SetPurchaseAnalyticsMetadataModule (copy), GetPurchaseSurfaceModule (copy), GetProductTypeFromRequestTypeModule (copy), FFlagUpdatePriceTelemetry (copy), SelectPriceModule (copy), FFlagUnifiedPurchaseGamepassAddProductUniverseId (copy), SetRobloxSubscriptionProductsModule (copy), SelectCartPricingOverrideModule (copy), MeetsBundlePrerequisitesModule (copy), UserInputService (copy), PurchaseErrorModule (copy), RunService (copy), GetFFlagRespectBalanceInfoForBundleUpsellInStudioModule (copy), SetPurchaseFlowModule (copy), PurchaseFlowModule (copy), SetPostPurchaseActionsModule (copy), GetPaymentPlatformModule (copy), GetRobuxUpsellSuggestionsModule (copy), IsEligibleForRobuxUpsellPlusButtonModule (copy), PromptNativeUpsellSuggestionsModule (copy), ErrorOccurredModule (copy), SetPromptStateModule (copy), PromptStateModule (copy)
-	return ThunkModule.new(script.Name, list, function(p8, p9) --[[ Line: 80 ]]
+	return ThunkModule.new(script.Name, list, function(p8, p9)
 		-- upvalues: AnalyticsModule (upval), NetworkModule (upval), BundleProductInfoReceivedModule (upval), p1 (copy), AccountInfoReceivedModule (upval), p2 (copy), BalanceInfoRecievedModule (upval), p3 (copy), p6 (copy), SetIsUserEligibleForUnifiedPurchaseFlowModule (upval), SetPurchaseAnalyticsMetadataModule (upval), GetPurchaseSurfaceModule (upval), GetProductTypeFromRequestTypeModule (upval), FFlagUpdatePriceTelemetry (upval), SelectPriceModule (upval), p4 (ref), FFlagUnifiedPurchaseGamepassAddProductUniverseId (upval), p7 (copy), SetRobloxSubscriptionProductsModule (upval), SelectCartPricingOverrideModule (upval), MeetsBundlePrerequisitesModule (upval), p5 (copy), UserInputService (upval), PurchaseErrorModule (upval), RunService (upval), GetFFlagRespectBalanceInfoForBundleUpsellInStudioModule (upval), SetPurchaseFlowModule (upval), PurchaseFlowModule (upval), SetPostPurchaseActionsModule (upval), GetPaymentPlatformModule (upval), GetRobuxUpsellSuggestionsModule (upval), IsEligibleForRobuxUpsellPlusButtonModule (upval), PromptNativeUpsellSuggestionsModule (upval), ErrorOccurredModule (upval), SetPromptStateModule (upval), PromptStateModule (upval)
 		local _ = p8:getState()
 		local _ = p9[AnalyticsModule]
@@ -106,10 +106,10 @@ return function(_, p1, p2, p3, p4, p5, p6, p7) --[[ Line: 70 | Named "resolveBun
 		local _ = p2.isPremium
 		local State = p8:getState()
 		
-		return GetRobuxUpsellSuggestionsModule(v1, p3.robux, GetPaymentPlatformModule(Platform), IsEligibleForRobuxUpsellPlusButtonModule(State.isUserEligibleForUnifiedPurchaseFlow, State.robloxSubscriptionProducts, State.productPayload, SelectPriceModule(State), State.promptRequest.requestType)):andThen(function(Result) --[[ Line: 180 ]]
+		return GetRobuxUpsellSuggestionsModule(v1, p3.robux, GetPaymentPlatformModule(Platform), IsEligibleForRobuxUpsellPlusButtonModule(State.isUserEligibleForUnifiedPurchaseFlow, State.robloxSubscriptionProducts, State.productPayload, SelectPriceModule(State), State.promptRequest.requestType)):andThen(function(Result)
 			-- upvalues: p8 (copy), PromptNativeUpsellSuggestionsModule (upval)
 			p8:dispatch(PromptNativeUpsellSuggestionsModule(Result.products, 1, Result.virtualItemBadgeType, Result.experimentVariant))
-		end, function() --[[ Line: 191 ]]
+		end, function()
 			-- upvalues: p8 (copy), ErrorOccurredModule (upval), PurchaseErrorModule (upval)
 			p8:dispatch(ErrorOccurredModule(PurchaseErrorModule.NotEnoughRobuxXbox))
 		end)

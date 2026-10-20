@@ -13,10 +13,10 @@ local ConstantsModule = require(SocialUpsell.Constants)
 local CryoModule = require(Parent.Cryo)
 local OverlayStoreModule = if FFlagEnableAEGIS2CommsFAEUpsell then GetOverlayStoreModule(false) else nil
 
-return function(IsInExperience) --[[ Line: 32 ]]
+return function(IsInExperience)
 	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), FFlagEnableAEGIS2CommsFAEUpsell (copy), OverlayStoreModule (ref), ConstantsModule (copy), CryoModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), CloseCentralOverlayFunction (copy)
 	local UseDispatchResult = UseDispatchFunction()
-	local UseResult = ReactModule.useCallback(function(UpsellType, Data) --[[ Line: 35 ]]
+	local UseResult = ReactModule.useCallback(function(UpsellType, Data)
 		-- upvalues: IsInExperience (copy), FFlagEnableAEGIS2CommsFAEUpsell (upval), OverlayStoreModule (upval), ConstantsModule (upval), CryoModule (upval), UseDispatchResult (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval)
 		if not IsInExperience then
 			UseDispatchResult(SetCentralOverlayFunction(CentralOverlayType.SocialUpsellOverlay, { upsellType = UpsellType, data = Data }))
@@ -29,7 +29,7 @@ return function(IsInExperience) --[[ Line: 32 ]]
 			return
 		end
 	end, { IsInExperience })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 53 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: IsInExperience (copy), FFlagEnableAEGIS2CommsFAEUpsell (upval), OverlayStoreModule (upval), UseDispatchResult (copy), CloseCentralOverlayFunction (upval)
 		if not IsInExperience then
 			UseDispatchResult(CloseCentralOverlayFunction())
@@ -40,7 +40,7 @@ return function(IsInExperience) --[[ Line: 32 ]]
 		end
 	end, { IsInExperience })
 	
-	return ReactModule.useMemo(function() --[[ Line: 63 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: UseResult (copy), UseResult1 (copy)
 		return {
 			openSocialOverlay = UseResult,

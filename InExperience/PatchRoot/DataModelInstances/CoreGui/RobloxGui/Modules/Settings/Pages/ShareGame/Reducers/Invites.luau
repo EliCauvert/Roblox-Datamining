@@ -1,7 +1,7 @@
 ﻿local Immutable = require(game:GetService("CorePackages").Workspace.Packages.AppCommonLib).Immutable
 local ReceivedUserInviteStatusModule = require(game:GetService("CoreGui").RobloxGui.Modules.Settings.Pages.ShareGame.Actions.ReceivedUserInviteStatus)
 
-return function(p1, p2) --[[ Line: 9 ]]
+return function(p1, p2)
 	-- upvalues: ReceivedUserInviteStatusModule (copy), Immutable (copy)
 	local P0 = p1 or {}
 	

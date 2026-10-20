@@ -6,12 +6,12 @@ local AppEventIngestService = require(Parent.RoactServiceTags).AppEventIngestSer
 local FlyoutAnalyticsModule = require(script.Parent.Parent.Analytics.FlyoutAnalytics)
 local FlyoutTooltipManagerModule = require(script.Parent.Parent.FlyoutTooltipManager)
 
-return function(p1) --[[ Line: 13 | Named "useOpenFlyoutSidePanel" ]]
+return function(p1)
 	-- upvalues: UseSetDrawerVisibleFunction (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), ReactModule (copy), FlyoutAnalyticsModule (copy), FlyoutTooltipManagerModule (copy)
 	local UseSetDrawerVisibleResult = UseSetDrawerVisibleFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(AppEventIngestService)
 	
-	return ReactModule.useCallback(function() --[[ Line: 17 ]]
+	return ReactModule.useCallback(function()
 		-- upvalues: FlyoutAnalyticsModule (upval), UseRoactServiceResult (copy), p1 (copy), UseSetDrawerVisibleResult (copy), FlyoutTooltipManagerModule (upval)
 		FlyoutAnalyticsModule.sendPageLoadEvent(UseRoactServiceResult, p1)
 		UseSetDrawerVisibleResult(true)

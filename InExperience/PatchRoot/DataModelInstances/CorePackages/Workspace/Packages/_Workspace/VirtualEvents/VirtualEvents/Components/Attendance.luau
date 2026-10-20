@@ -6,11 +6,11 @@ local AttendanceCountModule = require(VirtualEvents.Components.AttendanceCount)
 local FacePileModule = require(VirtualEvents.Components.FacePile)
 local _ = require(VirtualEvents.Parent.VirtualEventsState)
 
-return function(p1) --[[ Line: 16 | Named "Attendance" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), AttendanceCountModule (copy), FacePileModule (copy), Players (copy)
 	local ExperienceDetails = p1.virtualEvent.experienceDetails
 	local RsvpCounters = p1.virtualEvent.rsvpCounters
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 20 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		local List = {}
 		

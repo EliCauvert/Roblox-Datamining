@@ -1,6 +1,6 @@
 ﻿local t = {}
 
-return function(Key, Callback: () -> ()) --[[ Line: 3 ]]
+return function(Key, Callback: () -> ())
 	-- upvalues: t (copy)
 	if not t[Key] then
 		t[Key] = true

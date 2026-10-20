@@ -7,7 +7,7 @@ local Signal, Signal2 = require(Parent.Signals).createSignal({})
 
 return {
 	getCache = Signal,
-	fetchAndCache = function(p1, List) --[[ Line: 14 ]]
+	fetchAndCache = function(p1, List)
 		-- upvalues: Signal (copy), PromiseModule (copy), FetchItemDetailsModule (copy), Signal2 (copy)
 		local SignalResult = Signal(false)
 		local List1 = {}
@@ -17,7 +17,7 @@ return {
 				table.insert(List1, value)
 			end
 		end
-		return if #List1 == 0 then PromiseModule.resolve() else FetchItemDetailsModule(p1, List1):andThen(function(Result) --[[ Line: 26 ]]
+		return if #List1 == 0 then PromiseModule.resolve() else FetchItemDetailsModule(p1, List1):andThen(function(Result)
 			-- upvalues: Signal (upval), Signal2 (upval)
 			if Result and Result.data then
 				local Copy = table.clone(Signal(false))
@@ -29,11 +29,11 @@ return {
 			end
 		end)
 	end,
-	getItem = function(p2) --[[ Line: 37 ]]
+	getItem = function(p2)
 		-- upvalues: Signal (copy)
 		return Signal(false)[p2]
 	end,
-	clear = function() --[[ Line: 41 ]]
+	clear = function()
 		-- upvalues: Signal2 (copy)
 		Signal2({})
 	end

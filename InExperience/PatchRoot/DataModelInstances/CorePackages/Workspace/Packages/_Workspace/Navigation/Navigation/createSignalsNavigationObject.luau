@@ -11,7 +11,7 @@ local FFlagSignalsNavP2NavigationPrimitives = require(Parent.SharedFlags).FFlagS
 local DEV = _G.__DEV__ or _G.__TESTEZ_RUNNING_TEST__
 local _ = require(script.Parent.types)
 
-local function _(Action, State, LastState) --[[ Line: 28 | Named "makeEvent" ]]
+local function _(Action, State, LastState)
 	-- upvalues: Events (copy)
 	return table.freeze({
 		type = Events.Action,
@@ -21,20 +21,20 @@ local function _(Action, State, LastState) --[[ Line: 28 | Named "makeEvent" ]]
 	})
 end
 
-return function(p1) --[[ Line: 37 | Named "createSignalsNavigationObject" ]]
+return function(p1)
 	-- upvalues: CreateSignalFunction (copy), FFlagSignalsNavP2NavigationPrimitives (copy), Actions (copy), Events (copy), DEV (copy), SignalsExperimentalModule (copy), CreateComputedFunction (copy), GetNavigationFunction (copy)
 	local Callbacks = {}
 	local List = {}
 	local Signal, Signal2 = CreateSignalFunction(false)
 	
-	local function _(p2) --[[ Line: 42 | Named "notifySubscribers" ]]
+	local function _(p2)
 		-- upvalues: Callbacks (copy)
 		for callback in Callbacks do
 			task.spawn(callback, p2)
 		end
 	end
 	
-	local function notifyEvents() --[[ Line: 48 ]]
+	local function notifyEvents()
 		-- upvalues: FFlagSignalsNavP2NavigationPrimitives (upval), Signal2 (copy), List (ref), Callbacks (copy)
 		if FFlagSignalsNavP2NavigationPrimitives then
 			Signal2(false)
@@ -49,7 +49,7 @@ return function(p1) --[[ Line: 37 | Named "createSignalsNavigationObject" ]]
 		end
 	end
 	
-	local Signal1, Signal2_1 = CreateSignalFunction(function() --[[ Line: 59 ]]
+	local Signal1, Signal2_1 = CreateSignalFunction(function()
 		-- upvalues: Actions (upval), p1 (copy), Events (upval), List (ref)
 		local InitResult = Actions.init()
 		local StateForAction = p1.getStateForAction(InitResult)
@@ -63,7 +63,7 @@ return function(p1) --[[ Line: 37 | Named "createSignalsNavigationObject" ]]
 		return StateForAction
 	end)
 	
-	local function dispatch(Action): boolean --[[ Line: 67 ]]
+	local function dispatch(Action): boolean
 		-- upvalues: DEV (upval), FFlagSignalsNavP2NavigationPrimitives (upval), Signal2 (copy), Signal2_1 (copy), p1 (copy), Actions (upval), Signal1 (copy), Events (upval), Callbacks (copy), List (ref), SignalsExperimentalModule (upval)
 		if DEV and Action.type == "RESET_NAVIGATION_FOR_TESTING_ONLY__DO_NOT_USE_IN_PRODUCTION" then
 			if FFlagSignalsNavP2NavigationPrimitives then
@@ -92,7 +92,7 @@ return function(p1) --[[ Line: 37 | Named "createSignalsNavigationObject" ]]
 				table.insert(List, Frozen)
 				
 				if FFlagSignalsNavP2NavigationPrimitives then
-					SignalsExperimentalModule.batch(function() --[[ Line: 88 ]]
+					SignalsExperimentalModule.batch(function()
 						-- upvalues: Signal2 (upval), Signal2_1 (upval), StateForAction1 (copy)
 						Signal2(true)
 						Signal2_1(StateForAction1)
@@ -105,15 +105,15 @@ return function(p1) --[[ Line: 37 | Named "createSignalsNavigationObject" ]]
 		end
 	end
 	
-	local function v19() --[[ Line: 98 ]]
+	local function v19()
 		return nil
 	end
 	
-	local Computed = CreateComputedFunction(function(p3) --[[ Line: 102 ]]
+	local Computed = CreateComputedFunction(function(p3)
 		-- upvalues: Signal1 (copy), GetNavigationFunction (upval), p1 (copy), dispatch (copy), Callbacks (copy), v19 (ref)
-		return GetNavigationFunction(p1, Signal1(p3), dispatch, Callbacks, function(_, p4) --[[ Line: 104 ]]
+		return GetNavigationFunction(p1, Signal1(p3), dispatch, Callbacks, function(_, p4)
 			return p4
-		end, function() --[[ Line: 106 ]]
+		end, function()
 			-- upvalues: v19 (upval)
 			return v19()
 		end)

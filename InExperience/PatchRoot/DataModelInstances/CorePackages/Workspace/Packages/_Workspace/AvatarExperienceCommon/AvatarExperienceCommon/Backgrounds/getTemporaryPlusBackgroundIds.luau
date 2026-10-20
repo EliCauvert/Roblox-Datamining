@@ -3,11 +3,11 @@ local v1 = nil
 local Frozen = table.freeze({})
 local Flag = false
 
-local function _(Text: string): boolean --[[ Line: 9 | Named "isNumericId" ]]
+local function _(Text: string): boolean
 	return string.match(Text, "^%d+$") ~= nil
 end
 
-return function() --[[ Line: 13 | Named "getTemporaryPlusBackgroundIds" ]]
+return function()
 	-- upvalues: FStringAXPlusExclusiveBackgroundIdsFunction (copy), v1 (ref), Frozen (ref), Flag (ref)
 	local FStringAXPlusExclusiveBackgroundIdsResult: string = FStringAXPlusExclusiveBackgroundIdsFunction()
 	

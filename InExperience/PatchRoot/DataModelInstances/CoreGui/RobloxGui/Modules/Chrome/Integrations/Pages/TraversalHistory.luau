@@ -9,13 +9,13 @@ return ServiceModule:register({
 	label = "CoreScripts.TopBar.Traversal.History",
 	initialAvailability = ServiceModule.AvailabilitySignal.Available,
 	sideSheetPlacement = require(game:GetService("CorePackages").Workspace.Packages.Chrome).Enums.SideSheetPlacement.BelowFold,
-	activated = function(_) --[[ Line: 18 ]]
+	activated = function(_)
 		-- upvalues: InGameMenuIntegrationUtilsModule (copy), TraversalHistoryPage (copy)
 		InGameMenuIntegrationUtilsModule.toggleIGMPage("TraversalHistoryPage", TraversalHistoryPage:get())
 	end,
 	isActivated = TraversalHistoryPage,
 	components = {
-		Icon = function(_) --[[ Line: 23 ]]
+		Icon = function(_)
 			-- upvalues: CommonIconModule (copy), TraversalHistoryPage (copy)
 			return CommonIconModule("Clock", nil, TraversalHistoryPage)
 		end

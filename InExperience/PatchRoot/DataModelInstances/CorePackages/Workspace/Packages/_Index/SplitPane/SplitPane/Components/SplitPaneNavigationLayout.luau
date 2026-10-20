@@ -14,7 +14,7 @@ local config = { [Constants.TempRnSwitchNavigatorName] = true }
 if Constants.HomeContainerName ~= nil then
 	config[Constants.HomeContainerName] = true
 end
-local function getActiveRouteName(State) --[[ Line: 31 ]]
+local function getActiveRouteName(State)
 	-- upvalues: config (copy)
 	local Route = State
 	while Route ~= nil and (config[Route.routeName] and Route.routes ~= nil and Route.index ~= nil) do
@@ -23,7 +23,7 @@ local function getActiveRouteName(State) --[[ Line: 31 ]]
 	return if Route == nil then nil else Route.routeName
 end
 
-local function isHomeActive(Entry): boolean --[[ Line: 44 ]]
+local function isHomeActive(Entry): boolean
 	-- upvalues: getActiveRouteName (copy), RobloxAppEnumsModule (copy), Enums (copy)
 	local Entry1 = Entry[1]
 	
@@ -40,17 +40,17 @@ local function isHomeActive(Entry): boolean --[[ Line: 44 ]]
 	return true
 end
 
-local function useSupportPaneAnchorRef() --[[ Line: 61 ]]
+local function useSupportPaneAnchorRef()
 	-- upvalues: ReactModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	
-	return UseRefResult, (ReactModule.useCallback(function(Current) --[[ Line: 64 ]]
+	return UseRefResult, (ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy)
 		UseRefResult.current = Current
 	end, {}))
 end
 
-return function(p1) --[[ Line: 78 | Named "SplitPaneNavigationLayout" ]]
+return function(p1)
 	-- upvalues: UseSplitPaneRenderModule (copy), ReactModule (copy), UseSplitPaneFocusNavBridgeModule (copy), FFlagSplitPaneEducationalTour (copy), useSupportPaneAnchorRef (copy), isHomeActive (copy), Enums (copy), SplitView (copy), SplitPaneEducationalTourModule (copy)
 	local UseSplitPaneRenderModuleResult = UseSplitPaneRenderModule(p1.screens, p1.cards, p1.paneIndices, p1.isRouteActiveOnPane)
 	local UseRefResult = ReactModule.useRef(nil)

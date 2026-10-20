@@ -12,10 +12,10 @@ local Module = {}
 Module.__index = Module
 local Text = string.gsub(string.gsub(game:GetService("ContentProvider").BaseUrl:lower(), "http:", "https:"), "www", "friends") .. "v1/users/{userId}/friends/count"
 
-function Module:GetFriendCountAsync(p1) --[[ Line: 25 ]]
+function Module:GetFriendCountAsync(p1)
 	-- upvalues: Text (copy), HttpRbxApiService (copy), HttpService (copy)
 	local Count = nil
-	local Success, Result = pcall(function() --[[ Line: 28 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: Text (upval), p1 (copy), HttpRbxApiService (upval)
 		return HttpRbxApiService:GetAsyncFullUrl((string.gsub(Text, "{userId}", (tostring(p1)))))
 	end)
@@ -33,7 +33,7 @@ function Module:GetFriendCountAsync(p1) --[[ Line: 25 ]]
 	return Count
 end
 
-function Module:MaxFriendCount(): number --[[ Line: 46 ]]
+function Module:MaxFriendCount(): number
 	-- upvalues: FFlagRemoveHardCodedFriendLimitPromptModule (copy)
 	assert(not FFlagRemoveHardCodedFriendLimitPromptModule, "Should not call MaxFriendCount when FFlagRemoveHardCodedFriendLimitPrompt is enabled")
 	
@@ -42,7 +42,7 @@ end
 
 local BindableEvent = Instance.new("BindableEvent")
 local BindableEvent1 = Instance.new("BindableEvent")
-LocalPlayer.FriendStatusChanged:connect(function(Player, FriendStatus) --[[ Line: 54 ]]
+LocalPlayer.FriendStatusChanged:connect(function(Player, FriendStatus)
 	-- upvalues: BindableEvent (copy), BindableEvent1 (copy)
 	if FriendStatus == Enum.FriendStatus.Friend then
 		BindableEvent:Fire(Player)
@@ -53,11 +53,11 @@ LocalPlayer.FriendStatusChanged:connect(function(Player, FriendStatus) --[[ Line
 		BindableEvent1:Fire(Player)
 	end
 end)
-StarterGui:RegisterGetCore("PlayerFriendedEvent", function() --[[ Line: 62 ]]
+StarterGui:RegisterGetCore("PlayerFriendedEvent", function()
 	-- upvalues: BindableEvent (copy)
 	return BindableEvent
 end)
-StarterGui:RegisterGetCore("PlayerUnfriendedEvent", function() --[[ Line: 63 ]]
+StarterGui:RegisterGetCore("PlayerUnfriendedEvent", function()
 	-- upvalues: BindableEvent1 (copy)
 	return BindableEvent1
 end)

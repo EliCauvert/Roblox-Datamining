@@ -6,25 +6,25 @@ return require(Parent.IXPUtils).defineIXPTest({
 	name = "AvatarMarketplace.UA.PrefetchMarketplace",
 	recordExposure = false,
 	layer = require(Parent.ExperimentLayers).AppUserLayers.AvatarExperienceUAMarketplaceView,
-	getIsUserInExperiment = function(p1): boolean --[[ Line: 24 ]]
+	getIsUserInExperiment = function(p1): boolean
 		return p1.enableMarketplacePrefetch ~= nil
 	end,
-	getDependentFlagsEnabled = function(): boolean --[[ Line: 28 ]]
+	getDependentFlagsEnabled = function(): boolean
 		return true
 	end,
-	getEnabledFlag = function() --[[ Line: 32 ]]
+	getEnabledFlag = function()
 		-- upvalues: AXPrefetchMarketplaceIXP5 (copy)
 		return AXPrefetchMarketplaceIXP5
 	end,
-	getEnabledForAllFlag = function() --[[ Line: 36 ]]
+	getEnabledForAllFlag = function()
 		-- upvalues: AXPrefetchMarketplaceIXPEnabledForAll5 (copy)
 		return AXPrefetchMarketplaceIXPEnabledForAll5
 	end,
 	variables = {
-		UserIsInExperiment = function(p1, p2) --[[ Line: 41 ]]
+		UserIsInExperiment = function(p1, p2)
 			return p2 or p1.enableMarketplacePrefetch ~= nil
 		end,
-		EnabledForUser = function(p1, p2) --[[ Line: 44 ]]
+		EnabledForUser = function(p1, p2)
 			return p2 or (p1.enableMarketplacePrefetch or false)
 		end
 	}

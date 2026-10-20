@@ -18,7 +18,7 @@ local UseFocusNavigationRefsModule = require(Parent.Generic.Hooks.useFocusNaviga
 local UseInitialButtonDisableDelayModule = require(Parent.Generic.Hooks.useInitialButtonDisableDelay)
 local UNIFIEDPURCHASECOMPLETIONMODALMINHEIGHTPIXELS = require(Parent.Generic.Constants).UNIFIED_PURCHASE_COMPLETION_MODAL_MIN_HEIGHT_PIXELS
 
-return function(p1) --[[ Line: 59 | Named "UnifiedPurchaseCompletionModal" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), UseFocusNavigationRefsModule (copy), UseInitialButtonDisableDelayModule (copy), UseTokensFunction (copy), ReactModule (copy), FoundationModule (copy), LoggingProtocolModule (copy), UnifiedProductPurchaseCompletionModalShownCounter (copy), FormatTextWithParamsModule (copy), Sheet (copy), UseScaledValueFunction (copy), UNIFIEDPURCHASECOMPLETIONMODALMINHEIGHTPIXELS (copy), Text (copy), View (copy), Icon (copy), FillBehavior (copy), ButtonVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		PurchaseCompleteTitle = "IAPExperience.PurchasePrompt.Title.PurchaseCompleted",
@@ -32,20 +32,20 @@ return function(p1) --[[ Line: 59 | Named "UnifiedPurchaseCompletionModal" ]]
 	local UseInitialButtonDisableDelayModuleResult = UseInitialButtonDisableDelayModule()
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(FoundationModule.Enums.IconName.CircleCheck)
-	ReactModule.useEffect(function() --[[ Line: 76 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: LoggingProtocolModule (upval), UnifiedProductPurchaseCompletionModalShownCounter (upval)
 		LoggingProtocolModule.default:logRobloxTelemetryCounter(UnifiedProductPurchaseCompletionModalShownCounter, 1, {})
 	end, {})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 80 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), UseLocalizationResult (copy)
 		return if p1.title then p1.title elseif p1.isError then UseLocalizationResult.ErrorTitle else UseLocalizationResult.PurchaseCompleteTitle
 	end, { p1.title, p1.isError })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 90 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), UseLocalizationResult (copy), FormatTextWithParamsModule (upval)
 		return if p1.bodyText then p1.bodyText elseif p1.isError then UseLocalizationResult.GenericErrorBody elseif p1.isMultiItem then UseLocalizationResult.MultiItemPurchaseCompleteBody else FormatTextWithParamsModule(UseLocalizationResult.PurchaseCompleteBody, { ITEM_NAME = p1.itemName })
 	end, { p1.bodyText, p1.isError, p1.isMultiItem, p1.itemName })
 	local Text1 = if p1.buttons and p1.buttons.text then p1.buttons.text else UseLocalizationResult.OkButtonText
-	ReactModule.useEffect(function() --[[ Line: 111 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult2 (copy), FoundationModule (upval)
 		if p1.isError then
 			UseStateResult2(FoundationModule.Enums.IconName.TriangleExclamation)

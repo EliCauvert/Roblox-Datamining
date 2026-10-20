@@ -4,7 +4,7 @@ local SduiPropUtilsModule = require(SduiCoreSystem.ClientBinding.PropBuilder.Sdu
 local SplitDottedPathModule = require(SduiCoreSystem.ClientBinding.splitDottedPath)
 local _ = require(SduiCoreSystem.Parent.Signals)
 
-return function(p1, List, p2, p3, ResolveLocalizedLiteralResults, p4) --[[ Line: 25 | Named "buildInputsForNestedComponent" ]]
+return function(p1, List, p2, p3, ResolveLocalizedLiteralResults, p4)
 	-- upvalues: SplitDottedPathModule (copy), SduiPropUtilsModule (copy)
 	if List then
 		for i, value in List do

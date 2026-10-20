@@ -8,11 +8,11 @@ local LoggerModule = require(script.Parent.Logger)
 local ToastScreen = RoactModule.PureComponent:extend("ToastScreen")
 ToastScreen.defaultProps = { navigation = nil }
 
-function ToastScreen.init(p1) --[[ Line: 17 ]]
+function ToastScreen.init(p1)
 	-- upvalues: Images (copy), IconSize (copy)
 	p1.hasToastChanged = false
 	
-	function p1.getToastProps(ToastProps) --[[ Line: 20 ]]
+	function p1.getToastProps(ToastProps)
 		-- upvalues: Images (upval), IconSize (upval), p1 (copy)
 		local ToastContent = ToastProps.toastContent
 		
@@ -24,7 +24,7 @@ function ToastScreen.init(p1) --[[ Line: 17 ]]
 				iconImage = if ToastProps.shouldHideIcon then nil else ToastContent.iconImage or Images["icons/status/alert"],
 				iconSize = ToastContent.iconSize or Vector2.new(IconSize.Regular, IconSize.Regular),
 				swipeUpDismiss = ToastContent.swipeUpDismiss,
-				onAppeared = function() --[[ Line: 33 ]]
+				onAppeared = function()
 					-- upvalues: ToastContent (copy), p1 (upval)
 					if ToastContent.onAppeared then
 						ToastContent.onAppeared()
@@ -32,7 +32,7 @@ function ToastScreen.init(p1) --[[ Line: 17 ]]
 					p1.hasToastChanged = false
 				end,
 				onActivated = ToastContent.onActivated,
-				onDismissed = function() --[[ Line: 40 ]]
+				onDismissed = function()
 					-- upvalues: ToastContent (copy), p1 (upval)
 					if ToastContent.onDismissed then
 						ToastContent.onDismissed()
@@ -52,18 +52,18 @@ function ToastScreen.init(p1) --[[ Line: 17 ]]
 	end
 end
 
-function ToastScreen.render(p1) --[[ Line: 61 ]]
+function ToastScreen.render(p1)
 	-- upvalues: RoactModule (copy), Toast (copy)
 	assert(type(p1.props.navigation) ~= "nil", "ToastScreen should be wrapped with Roact Navigation")
 	
 	return RoactModule.createElement(Toast, (p1.getToastProps(p1.props.navigation.getParam("toastProps", {}))))
 end
 
-function ToastScreen.didUpdate(p1, _, _) --[[ Line: 69 ]]
+function ToastScreen.didUpdate(p1, _, _)
 	p1.hasToastChanged = true
 end
 
-function ToastScreen:didMount() --[[ Line: 73 ]]
+function ToastScreen:didMount()
 	-- upvalues: LoggerModule (copy)
 	LoggerModule:info("{screen} mounted")
 end

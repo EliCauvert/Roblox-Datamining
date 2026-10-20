@@ -25,27 +25,27 @@ local _UDim = UDim.new(0.12, 0)
 local _UDim2 = UDim2.fromOffset(36, 36)
 local _UDim1 = UDim.new(0, 8)
 
-return (require(Parent.App.CapturesPolicy).connect(function(p1) --[[ Line: 214 ]]
+return (require(Parent.App.CapturesPolicy).connect(function(p1)
 	return { enableShareCaptureCTA = p1.enableShareCaptureCTA() }
-end)(function(Frame) --[[ Line: 48 ]]
+end)(function(Frame)
 	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseStyleFunction (copy), UseRefFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), ReactModule (copy), GetSaveToStoragePermissionModule (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), EventNamesModule (copy), SocialStopwatchModule (copy), ShareCaptureModule (copy), ExternalShareSourceTypeModule (copy), GetIsDeleteWarningModalOptedOutModule (copy), DeleteWarningModalOpenedModule (copy), _UDim1 (copy), _UDim (copy), IconButton (copy), Images (copy), _UDim2 (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseStyleResult = UseStyleFunction()
 	local UseRefResult = UseRefFunction(0)
-	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 55 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p1)
 		-- upvalues: ConstantsModule (upval)
 		return p1[ConstantsModule.RoduxKey].Captures[p1[ConstantsModule.RoduxKey].Carousel.SelectedCaptureIndex]
 	end)
-	local UseResult = ReactModule.useCallback(function(): boolean --[[ Line: 60 ]]
+	local UseResult = ReactModule.useCallback(function(): boolean
 		-- upvalues: Frame (copy), UseRefResult (copy)
 		return if Frame.isDisabled then true else DateTime.now().UnixTimestampMillis - UseRefResult.current < 500
 	end, { Frame.isDisabled })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 74 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy)
 		UseRefResult.current = DateTime.now().UnixTimestampMillis
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 79 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy), GetSaveToStoragePermissionModule (upval), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (upval), UseSelectorResult (copy), Frame (copy), UseDispatchResult (copy), UseResult1 (copy), CaptureTypeModule (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval)
 		if UseResult() then return end
 		GetSaveToStoragePermissionModule(if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then { UseSelectorResult } else UseSelectorResult, Frame.openPermissionModal, UseDispatchResult)
@@ -64,7 +64,7 @@ end)(function(Frame) --[[ Line: 48 ]]
 		UseResult1,
 		Frame.openPermissionModal
 	})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 101 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy), UseResult1 (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (upval), UseSelectorResult (copy), CaptureTypeModule (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval), SocialStopwatchModule (upval), UseDispatchResult (copy), ShareCaptureModule (upval), ExternalShareSourceTypeModule (upval)
 		if UseResult() then return end
 		UseResult1()
@@ -133,7 +133,7 @@ end)(function(Frame) --[[ Line: 48 ]]
 			layoutOrder = 4,
 			showBackground = false,
 			icon = Images["icons/actions/edit/delete"],
-			onActivated = ReactModule.useCallback(function() --[[ Line: 125 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: UseResult (copy), UseResult1 (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (upval), UseSelectorResult (copy), CaptureTypeModule (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval), GetIsDeleteWarningModalOptedOutModule (upval), Frame (copy), UseDispatchResult (copy), DeleteWarningModalOpenedModule (upval)
 				if UseResult() then return end
 				UseResult1()

@@ -18,18 +18,18 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagSduiChartsSortDetailGenreFilter = SharedFlagsModule.FFlagSduiChartsSortDetailGenreFilter
 local FFlagSduiAdvertiseRuntimeSupportSets = SharedFlagsModule.FFlagSduiAdvertiseRuntimeSupportSets
 
-local function _() --[[ Line: 31 | Named "getInheritedFilterSelections" ]]
+local function _()
 	-- upvalues: GetSduiClientPageScopeFunction (copy), ChartsConstantsModule (copy), ChartsPageScopeFieldsModule (copy)
 	return GetSduiClientPageScopeFunction(ChartsConstantsModule.ConfigKey).get(ChartsPageScopeFieldsModule.FilterSelections)
 end
 
-local _ = function(p1) --[[ Line: 35 | Named "extractNextContentPageToken" ]]
+local _ = function(p1)
 	local NextContentPageToken = p1 and p1.next_content_page_token
 	
 	return if NextContentPageToken and NextContentPageToken ~= "" then NextContentPageToken else nil
 end
 
-local function getGenreForRequest(p1) --[[ Line: 48 ]]
+local function getGenreForRequest(p1)
 	-- upvalues: GetSduiClientPageScopeFunction (copy), ChartsSortDetailScopeFieldsModule (copy)
 	local SduiClientPageScope = GetSduiClientPageScopeFunction(p1)
 	local GetResult = SduiClientPageScope.get(ChartsSortDetailScopeFieldsModule.DesiredGenre)
@@ -40,7 +40,7 @@ local function getGenreForRequest(p1) --[[ Line: 48 ]]
 	return if IsNotGetResultMatch and GetResult ~= GetResult1 then GetResult elseif IsNotGetResultMatch1 then GetResult1 else nil
 end
 
-local function getFilterSelectionsWithGenre(ConfigKey) --[[ Line: 68 ]]
+local function getFilterSelectionsWithGenre(ConfigKey)
 	-- upvalues: GetSduiClientPageScopeFunction (copy), ChartsConstantsModule (copy), ChartsPageScopeFieldsModule (copy), getGenreForRequest (copy)
 	local GetResult = GetSduiClientPageScopeFunction(ChartsConstantsModule.ConfigKey).get(ChartsPageScopeFieldsModule.FilterSelections)
 	local GenreForRequest = getGenreForRequest(ConfigKey)
@@ -55,7 +55,7 @@ local function getFilterSelectionsWithGenre(ConfigKey) --[[ Line: 68 ]]
 	end
 end
 
-local _ = function(p1) --[[ Line: 82 | Named "resetStickyGenreIfStale" ]]
+local _ = function(p1)
 	-- upvalues: GetSduiApiStoreFunction (copy), GetSduiClientPageScopeFunction (copy), ChartsSortDetailScopeFieldsModule (copy)
 	local _, Data2 = GetSduiApiStoreFunction().getData(p1)
 	
@@ -66,7 +66,7 @@ local _ = function(p1) --[[ Line: 82 | Named "resetStickyGenreIfStale" ]]
 	end
 end
 
-return function(SortId, LoadTimer) --[[ Line: 91 | Named "fetchChartsSortDetail" ]]
+return function(SortId, LoadTimer)
 	-- upvalues: GetSduiClientPageScopeFunction (copy), ChartsConstantsModule (copy), ChartsPageScopeFieldsModule (copy), GetChartsSortDetailPageKeyModule (copy), FFlagSduiChartsSortDetailGenreFilter (copy), GetSduiApiStoreFunction (copy), ChartsSortDetailScopeFieldsModule (copy), GetChartsSortDetailPostUrlModule (copy), Parent (copy), FFlagSduiAdvertiseRuntimeSupportSets (copy), SduiCapabilities (copy), BuildChartsSortDetailRequestModule (copy), ChartsPageSessionModule (copy), getFilterSelectionsWithGenre (copy), GetSduiTemplateStoreFunction (copy), SduiResponseType (copy), SduiApiStorePostConfigContentType (copy)
 	local ChartsSortDetailPageKeyModule = GetChartsSortDetailPageKeyModule(SortId, nil, (GetSduiClientPageScopeFunction(ChartsConstantsModule.ConfigKey).get(ChartsPageScopeFieldsModule.FilterSelections)))
 	
@@ -88,7 +88,7 @@ return function(SortId, LoadTimer) --[[ Line: 91 | Named "fetchChartsSortDetail"
 		enabled_capabilities = SduiCapabilities.getEnabledCapabilityNumbers({ "CAPABILITY_SUPPORTS_HYDRATION_CLIENT_HINTS" })
 	})
 	
-	local function buildBody(ContentPageToken) --[[ Line: 121 ]]
+	local function buildBody(ContentPageToken)
 		-- upvalues: BuildChartsSortDetailRequestModule (upval), ChartsPage (copy), SortId (copy), ChartsPageSessionModule (upval), FFlagSduiChartsSortDetailGenreFilter (upval), getFilterSelectionsWithGenre (upval), ChartsSortDetailPageKeyModule (copy), GetSduiClientPageScopeFunction (upval), ChartsConstantsModule (upval), ChartsPageScopeFieldsModule (upval), GetSduiTemplateStoreFunction (upval), ClientCapabilities1 (ref)
 		return BuildChartsSortDetailRequestModule(ChartsPage, {
 			sortId = SortId,
@@ -113,25 +113,25 @@ return function(SortId, LoadTimer) --[[ Line: 91 | Named "fetchChartsSortDetail"
 			protoMessage = ChartsPage.GetChartsSortDetailRequest,
 			body = buildBody(nil)
 		},
-		buildNextPageUrl = function(p1) --[[ Line: 150 ]]
+		buildNextPageUrl = function(p1)
 			-- upvalues: ChartsSortDetailPostUrlModule (copy)
 			local NextContentPageToken = p1 and p1.next_content_page_token
 			local NextContentPageToken1 = if NextContentPageToken and NextContentPageToken ~= "" then NextContentPageToken else nil
 			
 			return if NextContentPageToken1 then ChartsSortDetailPostUrlModule else nil
 		end,
-		buildNextPagePostBody = function(p1) --[[ Line: 153 ]]
+		buildNextPagePostBody = function(p1)
 			-- upvalues: buildBody (copy)
 			local NextContentPageToken = p1 and p1.next_content_page_token
 			local NextContentPageToken1 = if NextContentPageToken and NextContentPageToken ~= "" then NextContentPageToken else nil
 			
 			return if NextContentPageToken1 then buildBody(NextContentPageToken1) else nil
 		end,
-		buildRefreshUrl = function() --[[ Line: 160 ]]
+		buildRefreshUrl = function()
 			-- upvalues: ChartsSortDetailPostUrlModule (copy)
 			return ChartsSortDetailPostUrlModule
 		end,
-		buildRefreshPostBody = function() --[[ Line: 164 ]]
+		buildRefreshPostBody = function()
 			-- upvalues: buildBody (copy)
 			return buildBody(nil)
 		end

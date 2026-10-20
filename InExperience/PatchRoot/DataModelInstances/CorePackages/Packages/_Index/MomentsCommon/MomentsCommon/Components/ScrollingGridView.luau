@@ -8,7 +8,7 @@ local ScrollView = FoundationModule.ScrollView
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function GridItems(Frame) --[[ Line: 24 ]]
+local function GridItems(Frame)
 	-- upvalues: ReactModule (copy), View (copy)
 	local Elements = {}
 	
@@ -34,20 +34,20 @@ local function GridItems(Frame) --[[ Line: 24 ]]
 	})
 end
 
-return function(p1) --[[ Line: 79 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseTokensFunction (copy), DashModule (copy), View (copy), ScrollView (copy), ScrollBarVisibility (copy), GridItems (copy), Button (copy), FoundationModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
 	local UseTokensResult = UseTokensFunction()
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 85 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(Frame.AbsoluteSize)
 	end, {})
-	local UseMemoResult = ReactModule.useMemo(function(): number --[[ Line: 89 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): number
 		-- upvalues: UseStateResult (copy), p1 (copy)
 		return (math.clamp(math.floor(UseStateResult.X / p1.itemConfig.minItemWidth), 1, p1.itemConfig.maxItemsPerRow))
 	end, { UseStateResult, p1.itemConfig })
-	local UseMemoResult1 = ReactModule.useMemo(function(): Vector2 --[[ Line: 97 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function(): Vector2
 		-- upvalues: UseStateResult (copy), p1 (copy), UseMemoResult (copy)
 		local XDelta = UseStateResult.X - p1.itemConfig.padding * (UseMemoResult - 1)
 		local Smallest = math.min(XDelta / UseMemoResult, XDelta)
@@ -59,7 +59,7 @@ return function(p1) --[[ Line: 79 ]]
 		p1.aspectRatio,
 		p1.itemConfig
 	})
-	local UseMemoResult2 = ReactModule.useMemo(function(): number --[[ Line: 107 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function(): number
 		-- upvalues: UseStateResult (copy), UseMemoResult1 (copy), UseMemoResult (copy), p1 (copy)
 		return if UseStateResult.Y <= 0 then 0 else math.max(math.floor(UseStateResult.Y / UseMemoResult1.Y) * UseMemoResult, p1.itemConfig.minItemsPerPage)
 	end, {
@@ -70,13 +70,13 @@ return function(p1) --[[ Line: 79 ]]
 	})
 	local IsYAbove: boolean = UseStateResult.X > 0 and UseStateResult.Y > 0
 	local ShouldShowShowMoreButton = p1.shouldShowShowMoreButton or UseStateResult1 < #p1.items
-	ReactModule.useEffect(function() --[[ Line: 121 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult1 (copy), UseMemoResult2 (copy), UseStateResult2_1 (copy)
 		if UseStateResult1 < UseMemoResult2 then
 			UseStateResult2_1(UseMemoResult2)
 		end
 	end, { UseStateResult, UseMemoResult2, UseStateResult1 })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 127 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult1 (copy), UseMemoResult2 (copy), p1 (copy), UseStateResult2_1 (copy)
 		if #p1.items < UseStateResult1 + UseMemoResult2 and p1.shouldShowShowMoreButton then
 			p1.onShowMoreCallback()
@@ -88,7 +88,7 @@ return function(p1) --[[ Line: 79 ]]
 		p1.items,
 		p1.onShowMoreCallback
 	})
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 136 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: ShouldShowShowMoreButton (copy), p1 (copy), UseStateResult1 (copy), DashModule (upval)
 		return if ShouldShowShowMoreButton then DashModule.slice(p1.items, 1, (math.min(#p1.items, UseStateResult1))) else p1.items
 	end, { p1.items, ShouldShowShowMoreButton, UseStateResult1 })

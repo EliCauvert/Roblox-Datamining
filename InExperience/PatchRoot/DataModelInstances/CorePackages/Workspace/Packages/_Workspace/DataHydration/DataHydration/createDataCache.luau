@@ -16,7 +16,7 @@ local FFlagDataHydrationPreserveIncompleteCatalogResultsModule = require(DataHyd
 local LuaAppDefaultDataTtlSec = game:DefineFastInt("LuaAppDefaultDataTtlSec", 3600)
 local LuaAppDefaultFailedDataTtlSec = game:DefineFastInt("LuaAppDefaultFailedDataTtlSec", 60)
 
-return function(p1, p2, p3) --[[ Line: 33 | Named "createDataCache" ]]
+return function(p1, p2, p3)
 	-- upvalues: LuaAppDefaultDataTtlSec (copy), LuaAppDefaultFailedDataTtlSec (copy), FFlagDataHydrationPreserveIncompleteCatalogResultsModule (copy), SignalsModule (copy), DataStatus (copy), FFlagDataHydrationStaleTime (copy), SignalsExperimentalModule (copy), CryoModule (copy), FFlagMigrateGameInfoToStore (copy), FFlagDataHydrationAccountReset (copy), GetLocalPlayerUserIdFunction (copy), ObserveLocalPlayerUserIdFunction (copy), Players (copy)
 	local P0 = p1 or LuaAppDefaultDataTtlSec
 	local P1 = p2 or LuaAppDefaultFailedDataTtlSec
@@ -28,12 +28,12 @@ return function(p1, p2, p3) --[[ Line: 33 | Named "createDataCache" ]]
 	local NewClockTimes = {}
 	local ClockTimes = {}
 	
-	local function _(p4, p5) --[[ Line: 50 | Named "expiryFor" ]]
+	local function _(p4, p5)
 		-- upvalues: TtlSecondsForItem (copy), P0 (copy)
 		return if TtlSecondsForItem then os.clock() + (TtlSecondsForItem(p4) or P0) else p5
 	end
 	
-	local function getOrCreateSignals(Key) --[[ Line: 54 ]]
+	local function getOrCreateSignals(Key)
 		-- upvalues: t (ref), t1 (ref), SignalsModule (upval), t2 (ref), DataStatus (upval)
 		if t[Key] == nil or t1[Key] == nil then
 			t[Key] = {}
@@ -43,7 +43,7 @@ return function(p1, p2, p3) --[[ Line: 33 | Named "createDataCache" ]]
 		return t[Key], t1[Key]
 	end
 	
-	local function getItem(p4, Callback, p5) --[[ Line: 66 ]]
+	local function getItem(p4, Callback, p5)
 		-- upvalues: getOrCreateSignals (copy), FFlagDataHydrationStaleTime (upval), DataStatus (upval), ClockTimes (ref), NewClockTimes (ref)
 		local OrCreateSignals = getOrCreateSignals(p4)
 		
@@ -77,7 +77,7 @@ return function(p1, p2, p3) --[[ Line: 33 | Named "createDataCache" ]]
 		return OrCreateSignals, Flag
 	end
 	
-	local function getItems(List, p4, p5) --[[ Line: 106 ]]
+	local function getItems(List, p4, p5)
 		-- upvalues: getItem (copy)
 		local t = {}
 		local t3 = {}
@@ -91,11 +91,11 @@ return function(p1, p2, p3) --[[ Line: 33 | Named "createDataCache" ]]
 		return t, t3
 	end
 	
-	local function replaceItems(p6) --[[ Line: 126 ]]
+	local function replaceItems(p6)
 		-- upvalues: P0 (copy), getOrCreateSignals (copy), SanitizeItem (copy), t2 (ref), DataStatus (upval), NewClockTimes (ref), TtlSecondsForItem (copy), FFlagDataHydrationStaleTime (upval), ClockTimes (ref), SignalsExperimentalModule (upval)
 		local ClockTime = os.clock()
 		local NewClockTime = ClockTime + P0
-		SignalsExperimentalModule.batch(function() --[[ Line: 129 | Named "batchUpdate" ]]
+		SignalsExperimentalModule.batch(function()
 			-- upvalues: p6 (copy), getOrCreateSignals (upval), SanitizeItem (upval), t2 (upval), DataStatus (upval), NewClockTimes (upval), NewClockTime (copy), TtlSecondsForItem (upval), P0 (upval), FFlagDataHydrationStaleTime (upval), ClockTimes (upval), ClockTime (copy)
 			for i, value in p6 do
 				local _, OrCreateSignals2 = getOrCreateSignals(i)
@@ -110,11 +110,11 @@ return function(p1, p2, p3) --[[ Line: 33 | Named "createDataCache" ]]
 		end)
 	end
 	
-	local function updateItems(p7, Enabled) --[[ Line: 143 ]]
+	local function updateItems(p7, Enabled)
 		-- upvalues: P0 (copy), getOrCreateSignals (copy), CryoModule (upval), SanitizeItem (copy), t2 (ref), DataStatus (upval), FFlagMigrateGameInfoToStore (upval), NewClockTimes (ref), TtlSecondsForItem (copy), FFlagDataHydrationStaleTime (upval), ClockTimes (ref), SignalsExperimentalModule (upval)
 		local ClockTime = os.clock()
 		local NewClockTime = ClockTime + P0
-		SignalsExperimentalModule.batch(function() --[[ Line: 146 | Named "batchUpdate" ]]
+		SignalsExperimentalModule.batch(function()
 			-- upvalues: p7 (copy), getOrCreateSignals (upval), CryoModule (upval), SanitizeItem (upval), t2 (upval), DataStatus (upval), FFlagMigrateGameInfoToStore (upval), Enabled (copy), NewClockTimes (upval), NewClockTime (copy), TtlSecondsForItem (upval), P0 (upval), FFlagDataHydrationStaleTime (upval), ClockTimes (upval), ClockTime (copy)
 			for i, value in p7 do
 				local OrCreateSignals, OrCreateSignals2 = getOrCreateSignals(i)
@@ -140,7 +140,7 @@ return function(p1, p2, p3) --[[ Line: 33 | Named "createDataCache" ]]
 		end)
 	end
 	
-	local function updateItem(Key, p8, Enabled) --[[ Line: 177 ]]
+	local function updateItem(Key, p8, Enabled)
 		-- upvalues: getOrCreateSignals (copy), CryoModule (upval), SanitizeItem (copy), t2 (ref), DataStatus (upval), FFlagMigrateGameInfoToStore (upval), NewClockTimes (ref), P0 (copy), TtlSecondsForItem (copy), FFlagDataHydrationStaleTime (upval), ClockTimes (ref)
 		local OrCreateSignals, OrCreateSignals2 = getOrCreateSignals(Key)
 		local DataResult = OrCreateSignals.data(false)
@@ -167,7 +167,7 @@ return function(p1, p2, p3) --[[ Line: 33 | Named "createDataCache" ]]
 		end
 	end
 	
-	local function replaceItem(Key, p8) --[[ Line: 203 ]]
+	local function replaceItem(Key, p8)
 		-- upvalues: getOrCreateSignals (copy), SanitizeItem (copy), t2 (ref), DataStatus (upval), NewClockTimes (ref), P0 (copy), TtlSecondsForItem (copy), FFlagDataHydrationStaleTime (upval), ClockTimes (ref)
 		local _, OrCreateSignals2 = getOrCreateSignals(Key)
 		OrCreateSignals2(if SanitizeItem then SanitizeItem(p8) else p8)
@@ -180,7 +180,7 @@ return function(p1, p2, p3) --[[ Line: 33 | Named "createDataCache" ]]
 		end
 	end
 	
-	local function resetFailedItem(p8) --[[ Line: 217 ]]
+	local function resetFailedItem(p8)
 		-- upvalues: t (ref), DataStatus (upval), t2 (ref)
 		local Entry = t[p8]
 		
@@ -189,7 +189,7 @@ return function(p1, p2, p3) --[[ Line: 33 | Named "createDataCache" ]]
 		end
 	end
 	
-	local function resetFailedItems(List) --[[ Line: 224 ]]
+	local function resetFailedItems(List)
 		-- upvalues: t (ref), DataStatus (upval), t2 (ref)
 		for _, value in List do
 			local Entry = t[value]
@@ -200,10 +200,10 @@ return function(p1, p2, p3) --[[ Line: 33 | Named "createDataCache" ]]
 		end
 	end
 	
-	local function markItemsAsFailed(p8) --[[ Line: 230 ]]
+	local function markItemsAsFailed(p8)
 		-- upvalues: P1 (copy), t2 (ref), DataStatus (upval), NewClockTimes (ref), SignalsExperimentalModule (upval)
 		local NewClockTime = os.clock() + P1
-		SignalsExperimentalModule.batch(function() --[[ Line: 232 | Named "batchUpdate" ]]
+		SignalsExperimentalModule.batch(function()
 			-- upvalues: p8 (copy), t2 (upval), DataStatus (upval), NewClockTimes (upval), NewClockTime (copy)
 			for _, value in p8 do
 				if t2[value] then
@@ -214,7 +214,7 @@ return function(p1, p2, p3) --[[ Line: 33 | Named "createDataCache" ]]
 		end)
 	end
 	
-	local function releaseEntries() --[[ Line: 243 ]]
+	local function releaseEntries()
 		-- upvalues: NewClockTimes (ref), FFlagDataHydrationStaleTime (upval), ClockTimes (ref), t (ref), t3 (ref), t2 (ref)
 		NewClockTimes = {}
 		
@@ -226,9 +226,9 @@ return function(p1, p2, p3) --[[ Line: 33 | Named "createDataCache" ]]
 		t2 = {}
 	end
 	
-	local _ = function() --[[ Line: 254 | Named "invalidateEntries" ]]
+	local _ = function()
 		-- upvalues: SignalsExperimentalModule (upval), NewClockTimes (ref), FFlagDataHydrationStaleTime (upval), ClockTimes (ref), t (ref), t3 (ref), t2 (ref), DataStatus (upval)
-		SignalsExperimentalModule.batch(function() --[[ Line: 255 ]]
+		SignalsExperimentalModule.batch(function()
 			-- upvalues: NewClockTimes (upval), FFlagDataHydrationStaleTime (upval), ClockTimes (upval), t (upval), t3 (upval), t2 (upval), DataStatus (upval)
 			table.clear(NewClockTimes)
 			
@@ -242,10 +242,10 @@ return function(p1, p2, p3) --[[ Line: 33 | Named "createDataCache" ]]
 		end)
 	end
 	
-	local function clear() --[[ Line: 267 ]]
+	local function clear()
 		-- upvalues: FFlagDataHydrationAccountReset (upval), SignalsExperimentalModule (upval), NewClockTimes (ref), FFlagDataHydrationStaleTime (upval), ClockTimes (ref), t (ref), t3 (ref), t2 (ref), DataStatus (upval), releaseEntries (copy)
 		if FFlagDataHydrationAccountReset then
-			SignalsExperimentalModule.batch(function() --[[ Line: 255 ]]
+			SignalsExperimentalModule.batch(function()
 				-- upvalues: NewClockTimes (upval), FFlagDataHydrationStaleTime (upval), ClockTimes (upval), t (upval), t3 (upval), t2 (upval), DataStatus (upval)
 				table.clear(NewClockTimes)
 				
@@ -270,12 +270,12 @@ return function(p1, p2, p3) --[[ Line: 33 | Named "createDataCache" ]]
 	
 	if FFlagDataHydrationAccountReset then
 		if not p3 or p3.observeLocalUser == nil or p3.observeLocalUser then
-			Callback = ObserveLocalPlayerUserIdFunction(function(p9) --[[ Line: 281 ]]
+			Callback = ObserveLocalPlayerUserIdFunction(function(p9)
 				-- upvalues: LocalPlayerUserId (ref), FFlagDataHydrationAccountReset (upval), SignalsExperimentalModule (upval), NewClockTimes (ref), FFlagDataHydrationStaleTime (upval), ClockTimes (ref), t (ref), t3 (ref), t2 (ref), DataStatus (upval), releaseEntries (copy)
 				LocalPlayerUserId = p9
 				
 				if FFlagDataHydrationAccountReset then
-					SignalsExperimentalModule.batch(function() --[[ Line: 255 ]]
+					SignalsExperimentalModule.batch(function()
 						-- upvalues: NewClockTimes (upval), FFlagDataHydrationStaleTime (upval), ClockTimes (upval), t (upval), t3 (upval), t2 (upval), DataStatus (upval)
 						table.clear(NewClockTimes)
 						
@@ -295,7 +295,7 @@ return function(p1, p2, p3) --[[ Line: 33 | Named "createDataCache" ]]
 			end)
 		end
 	else
-		Connection = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function() --[[ Line: 287 ]]
+		Connection = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
 			-- upvalues: GetLocalPlayerUserIdFunction (upval), LocalPlayerUserId (ref), FFlagDataHydrationAccountReset (upval), SignalsExperimentalModule (upval), NewClockTimes (ref), FFlagDataHydrationStaleTime (upval), ClockTimes (ref), t (ref), t3 (ref), t2 (ref), DataStatus (upval), releaseEntries (copy)
 			local LocalPlayerUserId1 = GetLocalPlayerUserIdFunction()
 			
@@ -303,7 +303,7 @@ return function(p1, p2, p3) --[[ Line: 33 | Named "createDataCache" ]]
 				LocalPlayerUserId = LocalPlayerUserId1
 				
 				if FFlagDataHydrationAccountReset then
-					SignalsExperimentalModule.batch(function() --[[ Line: 255 ]]
+					SignalsExperimentalModule.batch(function()
 						-- upvalues: NewClockTimes (upval), FFlagDataHydrationStaleTime (upval), ClockTimes (upval), t (upval), t3 (upval), t2 (upval), DataStatus (upval)
 						table.clear(NewClockTimes)
 						
@@ -333,7 +333,7 @@ return function(p1, p2, p3) --[[ Line: 33 | Named "createDataCache" ]]
 		resetFailedItem = resetFailedItem,
 		resetFailedItems = resetFailedItems,
 		clear = clear,
-		dispose = function() --[[ Line: 296 ]]
+		dispose = function()
 			-- upvalues: FFlagDataHydrationAccountReset (upval), Callback (ref), releaseEntries (copy), Connection (ref), SignalsExperimentalModule (upval), NewClockTimes (ref), FFlagDataHydrationStaleTime (upval), ClockTimes (ref), t (ref), t3 (ref), t2 (ref), DataStatus (upval)
 			if FFlagDataHydrationAccountReset then
 				if Callback then
@@ -349,7 +349,7 @@ return function(p1, p2, p3) --[[ Line: 33 | Named "createDataCache" ]]
 					Connection = nil
 				end
 				if FFlagDataHydrationAccountReset then
-					SignalsExperimentalModule.batch(function() --[[ Line: 255 ]]
+					SignalsExperimentalModule.batch(function()
 						-- upvalues: NewClockTimes (upval), FFlagDataHydrationStaleTime (upval), ClockTimes (upval), t (upval), t3 (upval), t2 (upval), DataStatus (upval)
 						table.clear(NewClockTimes)
 						

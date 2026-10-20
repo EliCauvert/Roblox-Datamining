@@ -5,7 +5,7 @@ local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.MarketplaceAssetStoreTypes)
 local CreateDataResolverModule = require(DataHydration.createDataResolver)
 
-local function normalizeTaxonomy(Taxonomy) --[[ Line: 26 ]]
+local function normalizeTaxonomy(Taxonomy)
 	if not Taxonomy then
 		return nil
 	end
@@ -20,7 +20,7 @@ local function normalizeTaxonomy(Taxonomy) --[[ Line: 26 ]]
 	return Buffer
 end
 
-local function _(Tbl) --[[ Line: 42 | Named "normalizeAsset" ]]
+local function _(Tbl)
 	-- upvalues: normalizeTaxonomy (copy)
 	if Tbl.taxonomy then
 		local Copy = table.clone(Tbl)
@@ -32,12 +32,12 @@ local function _(Tbl) --[[ Line: 42 | Named "normalizeAsset" ]]
 	end
 end
 
-return function() --[[ Line: 51 | Named "createMarketplaceAssetStore" ]]
+return function()
 	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy), normalizeTaxonomy (copy)
 	local DataCacheModule = CreateDataCacheModule()
 	local DataResolverModule = CreateDataResolverModule({
 		cache = DataCacheModule,
-		fetchFn = function(_) --[[ Line: 55 ]]
+		fetchFn = function(_)
 			-- upvalues: PromiseModule (upval)
 			return PromiseModule.resolve({})
 		end
@@ -46,12 +46,12 @@ return function() --[[ Line: 51 | Named "createMarketplaceAssetStore" ]]
 	return {
 		getMarketplaceAssetInfo = DataResolverModule.getCachedItem,
 		getMarketplaceAssetInfos = DataResolverModule.getCachedItems,
-		getNormalizedMarketplaceAssetInfo = function(p1) --[[ Line: 63 ]]
+		getNormalizedMarketplaceAssetInfo = function(p1)
 			-- upvalues: DataResolverModule (copy), normalizeTaxonomy (upval)
 			local CachedItem = DataResolverModule.getCachedItem(p1)
 			
 			return {
-				data = function(p2) --[[ Line: 66 ]]
+				data = function(p2)
 					-- upvalues: CachedItem (copy), normalizeTaxonomy (upval)
 					local DataResult = CachedItem.data(p2)
 					

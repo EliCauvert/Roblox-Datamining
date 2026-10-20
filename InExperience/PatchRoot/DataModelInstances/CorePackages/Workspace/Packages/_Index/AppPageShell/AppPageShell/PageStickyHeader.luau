@@ -9,7 +9,7 @@ local UseDeviceInsetsFunction = require(Parent.Responsive).useDeviceInsets
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FFlagSduiFeedScrollBarFixes = require(Parent.SharedFlags).FFlagSduiFeedScrollBarFixes
 
-return ReactModule.memo(function(p1) --[[ Line: 34 | Named "PageStickyHeader" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FFlagSduiFeedScrollBarFixes (copy), UseDeviceInsetsFunction (copy), ComputeStickyOffsetModule (copy), View (copy)
 	local TopPadding: number = p1.topPadding
 	local BackgroundStyle = p1.backgroundStyle
@@ -22,22 +22,22 @@ return ReactModule.memo(function(p1) --[[ Line: 34 | Named "PageStickyHeader" ]]
 	
 	if not FFlagSduiFeedScrollBarFixes then
 		local Top = UseDeviceInsetsFunction().top
-		UseMemoResult = ReactModule.useMemo(function() --[[ Line: 49 ]]
+		UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: LiveChromeHeightBinding (copy), ChromeHeight (copy), ComputeStickyOffsetModule (upval), Top (copy)
-			return if LiveChromeHeightBinding == nil or ChromeHeight <= 0 then UDim2.fromOffset(0, 0) else LiveChromeHeightBinding:map(function(p2): UDim2 --[[ Line: 53 ]]
+			return if LiveChromeHeightBinding == nil or ChromeHeight <= 0 then UDim2.fromOffset(0, 0) else LiveChromeHeightBinding:map(function(p2): UDim2
 				-- upvalues: ComputeStickyOffsetModule (upval), ChromeHeight (upval), Top (upval)
 				return UDim2.fromOffset(0, ComputeStickyOffsetModule(p2, ChromeHeight, Top))
 			end)
 		end, { LiveChromeHeightBinding, ChromeHeight, Top })
 	end
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 62 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseBindingResult (copy), ChromeHeight (copy)
-		return UseBindingResult:map(function(p2): UDim2 --[[ Line: 63 ]]
+		return UseBindingResult:map(function(p2): UDim2
 			-- upvalues: ChromeHeight (upval)
 			return UDim2.new(1, 0, 0, p2 + ChromeHeight)
 		end)
 	end, { UseBindingResult, ChromeHeight })
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 68 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: Slots (copy)
 		if Slots == nil or next(Slots) == nil then
 			return nil
@@ -49,13 +49,13 @@ return ReactModule.memo(function(p1) --[[ Line: 34 | Named "PageStickyHeader" ]]
 		end
 		return t
 	end, { Slots })
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 79 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: UseBindingResult (copy)
-		return UseBindingResult:map(function(YOffset): UDim2 --[[ Line: 80 ]]
+		return UseBindingResult:map(function(YOffset): UDim2
 			return UDim2.new(1, 0, 0, YOffset)
 		end)
 	end, { UseBindingResult })
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 85 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseBindingResult2 (copy)
 		UseBindingResult2(Frame.AbsoluteSize.Y)
 	end, {})

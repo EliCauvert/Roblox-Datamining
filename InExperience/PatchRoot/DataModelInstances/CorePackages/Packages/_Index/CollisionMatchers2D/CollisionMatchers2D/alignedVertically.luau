@@ -1,7 +1,7 @@
 ﻿local ToRectModule = require(script.Parent.toRect)
 local ReturnValueModule = require(script.Parent.returnValue)
 
-return function(p1, p2, VerticalAlignment) --[[ Line: 29 | Named "alignedVertically" ]]
+return function(p1, p2, VerticalAlignment)
 	-- upvalues: ToRectModule (copy), ReturnValueModule (copy)
 	local RectModule = ToRectModule(p1)
 	local RectModule1 = ToRectModule(p2)

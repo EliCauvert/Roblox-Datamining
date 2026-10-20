@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local ViewportVisibilityImpressionsDetector = require(Parent.Impressions).ViewportVisibilityImpressionsDetector
 local View = require(Parent.Foundation).View
 
-return ReactModule.memo(function(p1) --[[ Line: 23 | Named "SduiViewportVisibility" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), View (copy), ViewportVisibilityImpressionsDetector (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local HasOnView = p1.onView ~= nil

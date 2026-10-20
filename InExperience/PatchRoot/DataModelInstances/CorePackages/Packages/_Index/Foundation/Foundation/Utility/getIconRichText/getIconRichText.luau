@@ -2,7 +2,7 @@
 local BuilderIconsModuleFont = BuilderIconsModule.Font
 local IconVariant = BuilderIconsModule.IconVariant
 
-return function(p1, p2): string --[[ Line: 8 | Named "getIconRichText" ]]
+return function(p1, p2): string
 	-- upvalues: IconVariant (copy), BuilderIconsModuleFont (copy)
 	local BuilderIconsModuleFontEntry = BuilderIconsModuleFont[p2 or IconVariant.Regular]
 	

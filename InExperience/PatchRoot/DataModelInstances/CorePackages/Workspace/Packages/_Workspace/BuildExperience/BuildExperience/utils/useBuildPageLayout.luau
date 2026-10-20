@@ -4,11 +4,11 @@ local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 local UseNavBarPlacementFunction = AppNavBarModule.useNavBarPlacement
 
-return function() --[[ Line: 19 | Named "useBuildPageLayout" ]]
+return function()
 	-- upvalues: UseTokensFunction (copy), UseNavBarPlacementFunction (copy), UseSelectorFunction (copy), AppNavBarModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseNavBarPlacementResult = UseNavBarPlacementFunction()
-	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 22 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p1)
 		return p1.TabBarVisible
 	end)
 	

@@ -1,5 +1,5 @@
 ﻿return {
-	getCenterOffsetX = function(p1): number --[[ Line: 42 ]]
+	getCenterOffsetX = function(p1): number
 		local NewContainerPosition = p1.containerPosition + p1.ratio * p1.containerWidth
 		local NewInsetLeft = p1.insetLeft + p1.margin
 		local ScreenWidthDelta = p1.screenWidth - p1.insetRight - p1.margin

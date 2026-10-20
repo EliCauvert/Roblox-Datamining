@@ -14,7 +14,7 @@ local config1 = {
 	[EnumScreensModule.PrivacySettings] = require(AppChat.Flags.FFlagAppChatHidePrivacySettingsWithoutWebView)
 }
 
-return function(p1, p2, Enabled): boolean --[[ Line: 24 ]]
+return function(p1, p2, Enabled): boolean
 	-- upvalues: IsPlacementInExperienceFunction (copy), config (copy), FFlagAppChatOnConsoles (copy), config1 (copy)
 	return (not IsPlacementInExperienceFunction(p2) or not config[p1]) and (not FFlagAppChatOnConsoles or Enabled ~= false or not config1[p1])
 end

@@ -15,7 +15,7 @@ local config = {
 	verticalAlignment = Enum.VerticalAlignment.Center
 }
 
-return function(p1) --[[ Line: 91 | Named "EmojiWrapper" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), ReactRobloxModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	
@@ -47,7 +47,7 @@ return function(p1) --[[ Line: 91 | Named "EmojiWrapper" ]]
 				AutomaticSize = Enum.AutomaticSize.XY,
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
-				[ReactRobloxModule.Change.AbsoluteSize] = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 105 ]]
+				[ReactRobloxModule.Change.AbsoluteSize] = ReactModule.useCallback(function(Frame: Frame)
 					-- upvalues: JoinResult (copy), UseStateResult1 (copy), UseStateResult2_1 (copy), UseStateResult (copy), UseStateResult2 (copy)
 					local Smallest = if JoinResult.maximumEmojiSize then math.min(Frame.AbsoluteSize.Y, JoinResult.maximumEmojiSize) else Frame.AbsoluteSize.Y
 					

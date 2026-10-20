@@ -33,7 +33,7 @@ local FFlagSquadAppChatRTNFix = SharedFlagsModule.FFlagSquadAppChatRTNFix
 local FFlagAppChatInExpSelectChatMembersMobileHeightModule = require(AppChat.Flags.FFlagAppChatInExpSelectChatMembersMobileHeight)
 local t = {}
 
-function AppChatEntryPointUA(p1) --[[ Line: 62 ]]
+function AppChatEntryPointUA(p1)
 	-- upvalues: CryoModule (copy), t (copy), UseStyleFunction (copy), UseDispatchFunction (copy), UseEarlyIsFocusedFunction (copy), FFlagAppChatInExpSelectChatMembersMobileHeightModule (copy), UseAppChatIsWideModeModule (copy), UseIsWideModeFunction (copy), UseNavigationFunction (copy), UseAppPolicyFunction (copy), UseStateFunction (copy), UseExternalNavigationByScreenModule (copy), UseRoactServiceFunction (copy), AppNotificationService (copy), UseMemoFunction (copy), Signal (copy), UseCallbackFunction (copy), SetTabBarVisibleFromChatFunction (copy), UseSelectorFunction (copy), FFlagAppChatRemoveToggleChatPaused (copy), UseEffectFunction (copy), ToggleChatPausedModule (copy), ReactModule (copy), FullscreenPageWithSafeArea (copy), AppChatEntryPointModule (copy), ContainerModule (copy), ChatEventReceiverModule (copy), FFlagSquadAppChatRTNFix (copy), SquadAppChatEventReceiver (copy)
 	local JoinResult = CryoModule.Dictionary.join(t, p1)
 	local UseStyleResult = UseStyleFunction()
@@ -41,7 +41,7 @@ function AppChatEntryPointUA(p1) --[[ Line: 62 ]]
 	local UseEarlyIsFocusedResult = UseEarlyIsFocusedFunction()
 	local UseAppChatIsWideModeModuleResult = if FFlagAppChatInExpSelectChatMembersMobileHeightModule then UseAppChatIsWideModeModule(false) else UseIsWideModeFunction()
 	local UseNavigationResult = UseNavigationFunction()
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 72 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2)
 		return {
 			shouldSystemBarUsuallyBePresent = p2.getShouldSystemBarUsuallyBePresent()
 		}
@@ -49,30 +49,30 @@ function AppChatEntryPointUA(p1) --[[ Line: 62 ]]
 	local UseStateResult, UseStateResult2 = UseStateFunction(0)
 	local UseExternalNavigationByScreenModuleResult, UseExternalNavigationByScreenModuleResult2 = UseExternalNavigationByScreenModule()
 	local UseRoactServiceResult = UseRoactServiceFunction(AppNotificationService)
-	local UseMemoResult = UseMemoFunction(function() --[[ Line: 82 ]]
+	local UseMemoResult = UseMemoFunction(function()
 		-- upvalues: Signal (upval)
 		return Signal.new()
 	end)
-	local UseMemoResult1 = UseMemoFunction(function() --[[ Line: 86 ]]
+	local UseMemoResult1 = UseMemoFunction(function()
 		-- upvalues: JoinResult (copy), UseRoactServiceResult (copy)
 		return JoinResult.RobloxEventReceiver.new(UseRoactServiceResult)
 	end)
-	local UseCallbackResult = UseCallbackFunction(function(p2) --[[ Line: 90 ]]
+	local UseCallbackResult = UseCallbackFunction(function(p2)
 		-- upvalues: UseDispatchResult (copy), SetTabBarVisibleFromChatFunction (upval), UseAppPolicyResult (copy)
 		UseDispatchResult(SetTabBarVisibleFromChatFunction(p2 or UseAppPolicyResult.shouldSystemBarUsuallyBePresent))
 	end, {
 		UseDispatchResult,
 		UseAppPolicyResult.shouldSystemBarUsuallyBePresent
 	})
-	local UseMemoResult2 = UseMemoFunction(function() --[[ Line: 94 ]]
+	local UseMemoResult2 = UseMemoFunction(function()
 		return {}
 	end)
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 98 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		return p2.NotificationBadgeCounts.TopBarNotificationIcon
 	end)
 	
 	if not FFlagAppChatRemoveToggleChatPaused then
-		UseEffectFunction(function() --[[ Line: 103 ]]
+		UseEffectFunction(function()
 			-- upvalues: UseDispatchResult (copy), ToggleChatPausedModule (upval), UseEarlyIsFocusedResult (copy)
 			UseDispatchResult(ToggleChatPausedModule(not UseEarlyIsFocusedResult))
 		end, { UseEarlyIsFocusedResult, UseDispatchResult })

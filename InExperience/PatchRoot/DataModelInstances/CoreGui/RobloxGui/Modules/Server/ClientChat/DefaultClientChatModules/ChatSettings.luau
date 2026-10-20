@@ -70,11 +70,11 @@ local config = {
 }
 local BindableEvent = Instance.new("BindableEvent")
 local self = setmetatable({}, {
-	__index = function(_, p1) --[[ Line: 107 ]]
+	__index = function(_, p1)
 		-- upvalues: config (copy)
 		return config[p1]
 	end,
-	__newindex = function(_, Key, p1) --[[ Line: 110 ]]
+	__newindex = function(_, Key, p1)
 		-- upvalues: config (copy), BindableEvent (copy)
 		config[Key] = p1
 		BindableEvent:Fire(Key, p1)

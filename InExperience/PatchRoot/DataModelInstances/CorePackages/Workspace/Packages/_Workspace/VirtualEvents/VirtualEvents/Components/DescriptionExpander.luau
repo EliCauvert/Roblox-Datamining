@@ -8,22 +8,22 @@ local Text1 = FoundationModule.Text
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
-return function(p1) --[[ Line: 24 | Named "DescriptionExpander" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), UseAnimationModule (copy), Text1 (copy)
 	local UseTokensResult = UseTokensFunction()
 	local BodyLarge = UseTokensResult.Typography.BodyLarge
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
 	
-	local function updateDescriptionHeight(X, Description) --[[ Line: 29 ]]
+	local function updateDescriptionHeight(X, Description)
 		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), BodyLarge (copy), Text (upval), UseStateResult2 (copy)
 		UseStateResult2(if FoundationFontFaceMigration then GetTextSizeFunction(Description, BodyLarge.FontSize, BodyLarge.Font, Vector2.new(X, 1e999)).Y else Text.GetTextHeight(Description, BodyLarge.Font, BodyLarge.FontSize, X))
 	end
 	
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 36 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: updateDescriptionHeight (copy), p1 (copy)
 		updateDescriptionHeight(Frame.AbsoluteSize.X, p1.description)
 	end, { p1.description })
-	ReactModule.useEffect(function() --[[ Line: 40 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: updateDescriptionHeight (copy), p1 (copy)
 		updateDescriptionHeight(p1.width, p1.description)
 	end, { p1.description, p1.width })
@@ -72,7 +72,7 @@ return function(p1) --[[ Line: 24 | Named "DescriptionExpander" ]]
 		Active = UseStateResult > 50,
 		AutoButtonColor = false,
 		AutomaticSize = Enum.AutomaticSize.None,
-		[ReactModule.Event.Activated] = function() --[[ Line: 93 ]]
+		[ReactModule.Event.Activated] = function()
 			-- upvalues: p1 (copy)
 			p1.setIsExpanded(true)
 		end
@@ -99,7 +99,7 @@ return function(p1) --[[ Line: 24 | Named "DescriptionExpander" ]]
 		LayoutOrder = p1.layoutOrder,
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, UseStateResult1),
-		[ReactModule.Change.AbsoluteSize] = function(p2) --[[ Line: 119 ]]
+		[ReactModule.Change.AbsoluteSize] = function(p2)
 			-- upvalues: UseResult (copy)
 			UseResult(p2)
 		end

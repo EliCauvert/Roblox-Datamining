@@ -22,19 +22,19 @@ return {
 		cancelAnalyticsEvent = EventNames.EditingFlowVoiceDeleteChangePressed
 	},
 	supportedCaptureTypes = { Enum.CaptureType.Video },
-	createSession = function() --[[ Line: 40 ]]
+	createSession = function()
 		-- upvalues: CreateEditSessionModule (copy)
 		return CreateEditSessionModule()
 	end,
-	renderEditor = function(Controller) --[[ Line: 43 ]]
+	renderEditor = function(Controller)
 		-- upvalues: ReactModule (copy), VoiceEditorModule (copy)
 		return ReactModule.createElement(VoiceEditorModule, { layoutOrder = 2, controller = Controller })
 	end,
-	renderPreviewLayer = function(Controller, Ctx) --[[ Line: 46 ]]
+	renderPreviewLayer = function(Controller, Ctx)
 		-- upvalues: ReactModule (copy), VoicePreviewLayerModule (copy)
 		return ReactModule.createElement(VoicePreviewLayerModule, { zIndex = 4, controller = Controller, ctx = Ctx })
 	end,
-	toEdits = function(Tts) --[[ Line: 49 ]]
+	toEdits = function(Tts)
 		return if Tts == nil or Tts.text == "" then {} else { tts = Tts }
 	end
 }

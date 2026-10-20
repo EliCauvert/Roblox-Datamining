@@ -8,17 +8,17 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseDeviceInsetsFunction = ResponsiveModule.useDeviceInsets
 local DetailsPageLayoutContextModule = require(script.Parent.DetailsPageLayoutContext)
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 45 | Named "DetailsPageLayoutHeader" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: UseTokensFunction (copy), UseDeviceInsetsFunction (copy), ReactModule (copy), DetailsPageLayoutContextModule (copy), FoundationModule (copy), ResponsiveModule (copy), IconButton (copy), View (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseContextResult = ReactModule.useContext(DetailsPageLayoutContextModule)
 	local SetHasHeaderFunction = UseContextResult.setHasHeader
-	ReactModule.useEffect(function() --[[ Line: 51 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SetHasHeaderFunction (copy)
 		SetHasHeaderFunction(true)
 		
-		return function() --[[ Line: 53 ]]
+		return function()
 			-- upvalues: SetHasHeaderFunction (upval)
 			SetHasHeaderFunction(false)
 		end
@@ -39,7 +39,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 45 |
 	local OnExitFullscreenOverlay1 = if IsFullscreenOverlay and OnExitFullscreenOverlay then OnExitFullscreenOverlay else OnClose
 	local ChevronLargeLeft = if IsFullscreenOverlay then FoundationModule.Enums.IconName.ChevronLargeLeft else CloseIconName
 	local HeaderOpacity1 = if IsFullscreenOverlay then nil else HeaderOpacity
-	local MapResult = if HasFullBleed and HeaderOpacity1 then HeaderOpacity1:map(function(p2: number): boolean --[[ Line: 85 ]]
+	local MapResult = if HasFullBleed and HeaderOpacity1 then HeaderOpacity1:map(function(p2: number): boolean
 		return p2 >= 0.5
 	end) else nil
 	local HeaderOpacity1_1 = p1.children and (HasFullBleed and HeaderOpacity1 or (not HasFullBleed or StickyHeaderActive))
@@ -55,7 +55,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 45 |
 		ZIndex = 2,
 		tag = "col",
 		Size = UDim2.new(1, 0, 0, HeaderBarHeight),
-		backgroundStyle = if HasFullBleed and HeaderOpacity1 then HeaderOpacity1:map(function(Alpha: number) --[[ Line: 179 ]]
+		backgroundStyle = if HasFullBleed and HeaderOpacity1 then HeaderOpacity1:map(function(Alpha: number)
 			-- upvalues: BackgroundColor (copy)
 			return {
 				Color3 = BackgroundColor.Color3,
@@ -116,7 +116,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 45 |
 		}),
 		BottomBorder = ReactModule.createElement(View, {
 			LayoutOrder = 2,
-			backgroundStyle = if HeaderOpacity1 then HeaderOpacity1:map(function(Alpha: number) --[[ Line: 191 ]]
+			backgroundStyle = if HeaderOpacity1 then HeaderOpacity1:map(function(Alpha: number)
 				-- upvalues: UseTokensResult (copy)
 				return {
 					Color3 = UseTokensResult.Color.Stroke.Muted.Color3,

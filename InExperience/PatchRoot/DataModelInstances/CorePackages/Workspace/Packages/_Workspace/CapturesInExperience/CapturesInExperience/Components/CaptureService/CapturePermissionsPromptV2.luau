@@ -17,7 +17,7 @@ local EventNamesModule = require(Parent.Analytics.EventNames)
 local PermissionPromptFinishedModule = require(Parent.Thunks.PermissionPromptFinished)
 local FFlagCapturePermissionsPromptFreeMouseModule = require(Parent.Flags.FFlagCapturePermissionsPromptFreeMouse)
 
-return function(p1) --[[ Line: 34 ]]
+return function(p1)
 	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), UsePinInputStateWhileOpenModule (copy), FFlagCapturePermissionsPromptFreeMouseModule (copy), ReactModule (copy), EventNamesModule (copy), PermissionPromptFinishedModule (copy), Dialog (copy), DialogSize (copy), View (copy), Text (copy), Button (copy), ButtonVariant (copy), InputSize (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
@@ -28,7 +28,7 @@ return function(p1) --[[ Line: 34 ]]
 		dontAllow = "Feature.Captures.Action.DontAllow"
 	})
 	UsePinInputStateWhileOpenModule(FFlagCapturePermissionsPromptFreeMouseModule)
-	ReactModule.useEffect(function() --[[ Line: 50 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseAnalyticsModuleResult (copy), EventNamesModule (upval)
 		UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturePermissionsPromptViewed)
 	end, {})
@@ -64,7 +64,7 @@ return function(p1) --[[ Line: 34 ]]
 				AcceptButton = ReactModule.createElement(Button, {
 					text = UseLocalizationResult.allow,
 					variant = ButtonVariant.Emphasis,
-					onActivated = ReactModule.useCallback(function() --[[ Line: 54 ]]
+					onActivated = ReactModule.useCallback(function()
 						-- upvalues: UseAnalyticsModuleResult (copy), EventNamesModule (upval), UseDispatchResult (copy), PermissionPromptFinishedModule (upval), p1 (copy)
 						UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturePermissionsPromptAccepted)
 						UseDispatchResult(PermissionPromptFinishedModule(p1.promptId, true))
@@ -75,7 +75,7 @@ return function(p1) --[[ Line: 34 ]]
 				RejectButton = ReactModule.createElement(Button, {
 					text = UseLocalizationResult.dontAllow,
 					variant = ButtonVariant.Standard,
-					onActivated = ReactModule.useCallback(function() --[[ Line: 60 ]]
+					onActivated = ReactModule.useCallback(function()
 						-- upvalues: UseAnalyticsModuleResult (copy), EventNamesModule (upval), UseDispatchResult (copy), PermissionPromptFinishedModule (upval), p1 (copy)
 						UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturePermissionsPromptRejected)
 						UseDispatchResult(PermissionPromptFinishedModule(p1.promptId, false))

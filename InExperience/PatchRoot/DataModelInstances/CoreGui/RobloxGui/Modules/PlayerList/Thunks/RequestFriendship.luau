@@ -7,11 +7,11 @@ local FriendingUtilityModule = require(RobloxGui.Modules.FriendingUtility)
 local SendNotificationInfo = RobloxGui:WaitForChild("SendNotificationInfo")
 local FFlagRemoveHardCodedFriendLimitPromptModule = require(RobloxGui.Modules.Flags.FFlagRemoveHardCodedFriendLimitPrompt)
 
-return function(Player, p1) --[[ Line: 18 | Named "RequestFriendship" ]]
+return function(Player, p1)
 	-- upvalues: FFlagRemoveHardCodedFriendLimitPromptModule (copy), RbxAnalyticsService (copy), Players (copy), LocalPlayer (copy), FriendingUtilityModule (copy), SendNotificationInfo (copy), RobloxTranslatorModule (copy)
-	return function() --[[ Line: 19 ]]
+	return function()
 		-- upvalues: FFlagRemoveHardCodedFriendLimitPromptModule (upval), RbxAnalyticsService (upval), Player (copy), Players (upval), LocalPlayer (upval), FriendingUtilityModule (upval), p1 (copy), SendNotificationInfo (upval), RobloxTranslatorModule (upval)
-		coroutine.wrap(function() --[[ Line: 20 ]]
+		coroutine.wrap(function()
 			-- upvalues: FFlagRemoveHardCodedFriendLimitPromptModule (upval), RbxAnalyticsService (upval), Player (upval), Players (upval), LocalPlayer (upval), FriendingUtilityModule (upval), p1 (upval), SendNotificationInfo (upval), RobloxTranslatorModule (upval)
 			if FFlagRemoveHardCodedFriendLimitPromptModule then
 				RbxAnalyticsService:ReportCounter("PlayerDropDown-RequestFriendship")

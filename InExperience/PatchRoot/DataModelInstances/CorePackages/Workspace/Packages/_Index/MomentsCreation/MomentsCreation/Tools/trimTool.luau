@@ -20,15 +20,15 @@ return {
 		cancelAnalyticsEvent = EventNames.EditingFlowTrimBackButtonPressed
 	},
 	supportedCaptureTypes = { Enum.CaptureType.Video },
-	createSession = function() --[[ Line: 39 ]]
+	createSession = function()
 		-- upvalues: CreateEditSessionModule (copy)
 		return CreateEditSessionModule()
 	end,
-	renderEditor = function(Controller) --[[ Line: 42 ]]
+	renderEditor = function(Controller)
 		-- upvalues: ReactModule (copy), TrimmingViewModule (copy)
 		return ReactModule.createElement(TrimmingViewModule, { layoutOrder = 2, controller = Controller })
 	end,
-	toEdits = function(Trim) --[[ Line: 49 ]]
+	toEdits = function(Trim)
 		return { trim = Trim }
 	end
 }

@@ -13,7 +13,7 @@ local LayoutSlotsProvider = LayoutSlotsModule.LayoutSlotsProvider
 local LoaderProvider = require(GenericAbuseReporting.BeduiV2.Loaders.LoaderContext).LoaderProvider
 local SheetSlots = LayoutSlotsModule.sheetSlots
 
-return (ReactModule.forwardRef(function(p1, p2) --[[ Line: 50 ]]
+return (ReactModule.forwardRef(function(p1, p2)
 	-- upvalues: UseAbuseSheetFlowModule (copy), FFlagEnableInlineSurveyOnUserReport (copy), ReactModule (copy), AbuseReportDialogModule (copy), ArTranslationProvider (copy), AbuseReportAnalyticsProvider (copy), LoaderProvider (copy), LayoutSlotsProvider (copy), SheetSlots (copy)
 	local UseAbuseSheetFlowModuleResult = UseAbuseSheetFlowModule(p1.rawConfig, {
 		abuseVector = p1.abuseVector,
@@ -24,10 +24,10 @@ return (ReactModule.forwardRef(function(p1, p2) --[[ Line: 50 ]]
 		clientActionHandlers = p1.clientActionHandlers,
 		onFinish = if FFlagEnableInlineSurveyOnUserReport then p1.onFinish else nil
 	})
-	ReactModule.useImperativeHandle(p2, function() --[[ Line: 61 ]]
+	ReactModule.useImperativeHandle(p2, function()
 		-- upvalues: UseAbuseSheetFlowModuleResult (copy)
 		return {
-			requestClose = function() --[[ Line: 63 ]]
+			requestClose = function()
 				-- upvalues: UseAbuseSheetFlowModuleResult (upval)
 				if UseAbuseSheetFlowModuleResult then
 					UseAbuseSheetFlowModuleResult.onClose()
@@ -35,7 +35,7 @@ return (ReactModule.forwardRef(function(p1, p2) --[[ Line: 50 ]]
 			end
 		}
 	end, { UseAbuseSheetFlowModuleResult })
-	ReactModule.useEffect(function() --[[ Line: 71 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseAbuseSheetFlowModuleResult (copy), p1 (copy)
 		if not UseAbuseSheetFlowModuleResult then
 			p1.onResolveError()

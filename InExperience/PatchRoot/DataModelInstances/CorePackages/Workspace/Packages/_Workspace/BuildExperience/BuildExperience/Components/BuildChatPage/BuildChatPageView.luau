@@ -53,7 +53,7 @@ local InputSize = FoundationModule.Enums.InputSize
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local SubagentTaskStatus = CreatorAgentChatModule.SubagentTaskStatus
 
-local function _(p1, Name) --[[ Line: 197 | Named "findGroup" ]]
+local function _(p1, Name)
 	if p1 == nil or Name == nil then
 		return nil
 	end
@@ -65,12 +65,12 @@ local function _(p1, Name) --[[ Line: 197 | Named "findGroup" ]]
 	return nil
 end
 
-local _ = function(p2) --[[ Line: 209 | Named "getGroupStatus" ]]
+local _ = function(p2)
 	-- upvalues: SubagentTaskStatus (copy)
 	return if p2.isLoading then SubagentTaskStatus.InProgress elseif p2.isComplete then SubagentTaskStatus.Done else SubagentTaskStatus.Pending
 end
 
-local function toTodoItems(p2) --[[ Line: 219 ]]
+local function toTodoItems(p2)
 	local t = {}
 	
 	if p2 == nil then
@@ -87,7 +87,7 @@ local function toTodoItems(p2) --[[ Line: 219 ]]
 	return t
 end
 
-local function groupAdUpsellCardsByAnchorIndex(AdUpsellCards) --[[ Line: 235 ]]
+local function groupAdUpsellCardsByAnchorIndex(AdUpsellCards)
 	local t = {}
 	
 	for _, adUpsellCard in AdUpsellCards do
@@ -100,7 +100,7 @@ local function groupAdUpsellCardsByAnchorIndex(AdUpsellCards) --[[ Line: 235 ]]
 	return t
 end
 
-local function renderAdUpsells(p3, Tbl, ScrollingFrameRef, CongratsText) --[[ Line: 247 ]]
+local function renderAdUpsells(p3, Tbl, ScrollingFrameRef, CongratsText)
 	-- upvalues: FFlagBuildAdUpsellModule (copy), FFlagBuildAdUpsellPinnedModule (copy), ReactModule (copy), Text (copy), ChatConstantsModule (copy), groupAdUpsellCardsByAnchorIndex (copy), AdUpsellMilestoneContainerModule (copy), FFlagBuildAgentAdCampaignCardModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ChatCardEmphasisPositionProviderModule (copy), View (copy)
 	local Copy = table.clone(Tbl)
 	
@@ -167,7 +167,7 @@ local function renderAdUpsells(p3, Tbl, ScrollingFrameRef, CongratsText) --[[ Li
 	return Copy, Elements
 end
 
-return function(p4) --[[ Line: 321 | Named "BuildChatPageView" ]]
+return function(p4)
 	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), IsEnabled (copy), ReactModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildAdUpsellModule (copy), UseTokensFunction (copy), UseScrollPerformanceTrackerModule (copy), FFlagBuildExperienceRemoveAgentTaskUiModule (copy), ChatMessageListModule (copy), BuildEmptyStateModule (copy), FFlagBuildAgentAdCampaignCardModule (copy), ChatConstantsModule (copy), PushNotificationsUpsellCardModule (copy), renderAdUpsells (copy), AnswerFormContainerModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), SubagentTaskStatus (copy), SubagentStatusModule (copy), View (copy), FFlagBuildAdUpsellPinnedModule (copy), BuyMoreRobuxCardModule (copy), ChatActionsModule (copy), FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), FFlagBuildExperienceLibrary (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), Text (copy), PlayButtonModule (copy), AgentDetailMenuModule (copy), IconVariant (copy), BuildOverflowMenuButtonModule (copy), FFlagEnableBuildOverflowMenuForNewGamesModule (copy), FFlagEnableBuildAdPromotionModule (copy), ScrollView (copy), FoundationModule (copy), Divider (copy), AgentSpecDebugSheetModule (copy), toTodoItems (copy), CreateAdCampaignSheetContainerModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), AdCampaignCreatedToastModule (copy)
 	local HasAnswerForm: boolean = FFlagBuildExperienceAnswerFormModule and p4.answerForm ~= nil
 	local v1 = false
@@ -188,7 +188,7 @@ return function(p4) --[[ Line: 321 | Named "BuildChatPageView" ]]
 	local UseTokensResult = UseTokensFunction()
 	local UseRefResult = ReactModule.useRef(nil)
 	UseScrollPerformanceTrackerModule("LuaApp_Build_Chat_Scroll", UseRefResult)
-	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 346 ]]
+	local UseResult = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), p4 (copy)
 		UseRefResult.current = Current
 		p4.scrollingFrameRef(Current)
@@ -272,7 +272,7 @@ return function(p4) --[[ Line: 321 | Named "BuildChatPageView" ]]
 				layoutOrder = LayoutOrder,
 				text = group1.name,
 				isChecked = group1.isComplete,
-				onActivated = function() --[[ Line: 431 ]]
+				onActivated = function()
 					-- upvalues: p4 (copy), group1 (copy)
 					p4.onChipActivated(group1.name)
 				end,
@@ -341,7 +341,7 @@ return function(p4) --[[ Line: 321 | Named "BuildChatPageView" ]]
 						name = IconName.LabBeaker,
 						variant = if p4.agentSpecVersion == nil then IconVariant.Regular else IconVariant.Filled
 					},
-					onActivated = function() --[[ Line: 573 ]]
+					onActivated = function()
 						-- upvalues: Callback (ref)
 						Callback(true)
 					end,
@@ -420,7 +420,7 @@ return function(p4) --[[ Line: 321 | Named "BuildChatPageView" ]]
 		AgentSpecSheet = if IsEnabled and v1 then ReactModule.createElement(AgentSpecDebugSheetModule, {
 			specVersion = p4.agentSpecVersion,
 			onSave = p4.setAgentSpecVersion,
-			onClose = function() --[[ Line: 656 ]]
+			onClose = function()
 				-- upvalues: Callback (ref)
 				Callback(false)
 			end

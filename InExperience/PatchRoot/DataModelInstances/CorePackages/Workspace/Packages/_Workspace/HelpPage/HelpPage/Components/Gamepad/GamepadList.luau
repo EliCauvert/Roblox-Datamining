@@ -14,21 +14,21 @@ local Enums = FoundationModule.Enums
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local ExtraKeysEnumModule = require(Parent.Enums.ExtraKeysEnum)
 local FFlagHelpPageCCLModule = require(Parent.Flags.FFlagHelpPageCCL)
-local MemoResult = ReactModule.memo(function(p1) --[[ Line: 69 ]]
+local MemoResult = ReactModule.memo(function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), Text (copy)
 	return ReactModule.createElement(Text, {
 		tag = "auto-xy text-title-large text-align-x-center text-align-y-center",
 		Text = UseLocalizationFunction({ action = p1.action }).action
 	})
 end)
-local MemoResult1 = ReactModule.memo(function(Frame) --[[ Line: 80 ]]
+local MemoResult1 = ReactModule.memo(function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ExtraKeysEnumModule (copy), ConstantsModule (copy), View (copy), Icon (copy), Enums (copy), FFlagHelpPageCCLModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Config = if Frame.isDisabled then {
 		Transparency = 0.5,
 		Color3 = UseTokensResult.Color.Content.Default.Color3
 	} else nil
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 90 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Frame (copy), ExtraKeysEnumModule (upval), ConstantsModule (upval)
 		local GAMEPADICONMAPPLAYSTATIONEntries = {}
 		
@@ -57,7 +57,7 @@ local MemoResult1 = ReactModule.memo(function(Frame) --[[ Line: 80 ]]
 		Size = if FFlagHelpPageCCLModule then UDim2.fromOffset(NewSize, 0) else nil,
 		LayoutOrder = Frame.LayoutOrder,
 		testId = Frame.testId .. "Container"
-	}, (ReactModule.useMemo(function() --[[ Line: 132 ]]
+	}, (ReactModule.useMemo(function()
 		-- upvalues: Frame (copy), ReactModule (upval), View (upval), UseTokensResult (copy), UseMemoResult (copy), ConstantsModule (upval), Icon (upval), Enums (upval), Config (copy)
 		local Elements = {}
 		
@@ -89,7 +89,7 @@ local MemoResult1 = ReactModule.memo(function(Frame) --[[ Line: 80 ]]
 		Frame.testId, UseTokensResult.Size.Size_600
 	})))
 end)
-local MemoResult2 = ReactModule.memo(function(p1) --[[ Line: 189 ]]
+local MemoResult2 = ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ControlActionRowModule (copy), MemoResult1 (copy)
 	local UseTokensResult = UseTokensFunction()
 	local LayoutOrder: number = if p1.layoutOrderReversed then 1 else 2
@@ -122,9 +122,9 @@ local MemoResult2 = ReactModule.memo(function(p1) --[[ Line: 189 ]]
 	})
 end)
 
-return ReactModule.memo((ReactModule.memo(function(p2) --[[ Line: 221 ]]
+return ReactModule.memo((ReactModule.memo(function(p2)
 	-- upvalues: ReactModule (copy), ConstantsModule (copy), FFlagHelpPageCCLModule (copy), MemoResult2 (copy), View (copy), MemoResult (copy), MemoResult1 (copy)
-	local UseMemoResult, UseMemoResult2, UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 223 ]]
+	local UseMemoResult, UseMemoResult2, UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: p2 (copy), ConstantsModule (upval), FFlagHelpPageCCLModule (upval), ReactModule (upval), MemoResult2 (upval), View (upval), MemoResult (upval), MemoResult1 (upval)
 		local Elements = {}
 		local Elements1 = {}

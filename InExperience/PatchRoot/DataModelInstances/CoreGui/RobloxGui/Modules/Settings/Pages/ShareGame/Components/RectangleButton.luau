@@ -3,11 +3,11 @@ local ThemeModule = require(game:GetService("CoreGui").RobloxGui.Modules.Setting
 local RectangleButton = RoactModule.PureComponent:extend("RectangleButton")
 RectangleButton.defaultProps = { visible = true }
 
-function RectangleButton.init(p1) --[[ Line: 12 ]]
+function RectangleButton.init(p1)
 	p1.state = { isHovering = false }
 end
 
-function RectangleButton.render(p1) --[[ Line: 18 ]]
+function RectangleButton.render(p1)
 	-- upvalues: RoactModule (copy), ThemeModule (copy)
 	local Size = p1.props.size
 	local Position = p1.props.position
@@ -34,15 +34,15 @@ function RectangleButton.render(p1) --[[ Line: 18 ]]
 		LayoutOrder = LayoutOrder,
 		ZIndex = ZIndex,
 		Visible = Visible,
-		[RoactModule.Event.InputBegan] = function() --[[ Line: 51 ]]
+		[RoactModule.Event.InputBegan] = function()
 			-- upvalues: p1 (copy)
 			p1:setState({ isHovering = true })
 		end,
-		[RoactModule.Event.InputEnded] = function() --[[ Line: 54 ]]
+		[RoactModule.Event.InputEnded] = function()
 			-- upvalues: p1 (copy)
 			p1:setState({ isHovering = false })
 		end,
-		[RoactModule.Event.Activated] = function() --[[ Line: 58 ]]
+		[RoactModule.Event.Activated] = function()
 			-- upvalues: OnClickFunction (copy), p1 (copy)
 			if OnClickFunction then
 				p1:setState({ isHovering = false })

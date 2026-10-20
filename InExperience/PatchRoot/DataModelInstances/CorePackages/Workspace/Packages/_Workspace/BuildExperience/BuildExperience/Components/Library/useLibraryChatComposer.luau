@@ -9,7 +9,7 @@ local LibraryTypesModule = require(script.Parent.LibraryTypes)
 local _ = require(BuildExperience.Chat.chatTypes)
 local FFlagBuildExperienceAnswerFormModule = require(BuildExperience.Flags.FFlagBuildExperienceAnswerForm)
 
-return function(Current, p1) --[[ Line: 14 | Named "useLibraryChatComposer" ]]
+return function(Current, p1)
 	-- upvalues: GetLibraryStoreModule (copy), SignalsReactModule (copy), ReactModule (copy), LibraryTypesModule (copy), FFlagBuildExperienceAnswerFormModule (copy)
 	local LibraryStoreModule = GetLibraryStoreModule()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(LibraryStoreModule.getChatResourceRequest)
@@ -17,7 +17,7 @@ return function(Current, p1) --[[ Line: 14 | Named "useLibraryChatComposer" ]]
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseRefResult2 = ReactModule.useRef(Current)
 	UseRefResult2.current = Current
-	local UseResult = ReactModule.useCallback(function(p2): boolean --[[ Line: 21 ]]
+	local UseResult = ReactModule.useCallback(function(p2): boolean
 		-- upvalues: UseRefResult2 (copy), LibraryTypesModule (upval)
 		local Current = UseRefResult2.current
 		local ResourceAttachment = LibraryTypesModule.toResourceAttachment(p2)
@@ -30,7 +30,7 @@ return function(Current, p1) --[[ Line: 14 | Named "useLibraryChatComposer" ]]
 			return false
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(p2): boolean --[[ Line: 30 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2): boolean
 		-- upvalues: UseRefResult2 (copy), LibraryTypesModule (upval)
 		local Current = UseRefResult2.current
 		local ComposerResourceAttachmentIndexByUri = Current.findComposerResourceAttachmentIndexByUri(LibraryTypesModule.toResourceUri(p2))
@@ -47,7 +47,7 @@ return function(Current, p1) --[[ Line: 14 | Named "useLibraryChatComposer" ]]
 	local AnswerForm = if FFlagBuildExperienceAnswerFormModule then Current.answerForm else nil
 	local LocalToolActions = if FFlagBuildExperienceAnswerFormModule then Current.localToolActions else nil
 	local SubmitAnswerText = if FFlagBuildExperienceAnswerFormModule then Current.submitAnswerText else nil
-	ReactModule.useEffect(function() --[[ Line: 45 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult (copy), UseRefResult (copy), UseResult1 (copy), UseResult (copy), LibraryStoreModule (copy), p1 (copy), AnswerForm (copy), Current (copy)
 		if UseSignalStateResult == nil or UseSignalStateResult.token <= UseRefResult.current then return end
 		UseRefResult.current = UseSignalStateResult.token
@@ -71,7 +71,7 @@ return function(Current, p1) --[[ Line: 14 | Named "useLibraryChatComposer" ]]
 		LibraryStoreModule, UseSignalStateResult, p1, AnswerForm, UseResult,
 		UseResult1, Current.textBoxRef
 	})
-	ReactModule.useLayoutEffect(function() --[[ Line: 81 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: AnswerForm (copy), LocalToolActions (copy), SubmitAnswerText (copy), Current (copy), UseResult (copy), UseResult1 (copy), IsComposerSendBlocked (copy), UseRefResult1 (copy), LibraryStoreModule (copy)
 		local Current1 = {
 			tracksExternalText = true,
@@ -108,9 +108,9 @@ return function(Current, p1) --[[ Line: 14 | Named "useLibraryChatComposer" ]]
 		Current.canStopAssistantResponse, Current.canSendWhileResponding,
 		Current.sendMessage, Current.stopAssistantResponse
 	})
-	ReactModule.useEffect(function() --[[ Line: 132 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: LibraryStoreModule (copy), UseRefResult1 (copy)
-		return function() --[[ Line: 133 ]]
+		return function()
 			-- upvalues: LibraryStoreModule (upval), UseRefResult1 (upval)
 			if LibraryStoreModule.getChatComposerState(false) == UseRefResult1.current then
 				LibraryStoreModule.setChatComposerState(nil)

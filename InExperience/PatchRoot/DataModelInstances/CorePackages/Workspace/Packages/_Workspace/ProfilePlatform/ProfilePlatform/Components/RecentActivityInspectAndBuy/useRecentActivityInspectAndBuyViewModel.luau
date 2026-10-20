@@ -5,10 +5,10 @@ local _ = require(ProfilePlatform.Common.Types)
 local UseInspectAvatarDataModule = require(ProfilePlatform.Components.InspectAvatar.useInspectAvatarData)
 local UseRecentActivityPurchaseModule = require(script.Parent.useRecentActivityPurchase)
 
-return function(p1) --[[ Line: 37 | Named "useRecentActivityInspectAndBuyViewModel" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), EnumsModule (copy), UseInspectAvatarDataModule (copy), UseRecentActivityPurchaseModule (copy)
 	local AssetIds = p1.assetIds
-	local UseInspectAvatarDataModuleResult = UseInspectAvatarDataModule((ReactModule.useMemo(function() --[[ Line: 39 ]]
+	local UseInspectAvatarDataModuleResult = UseInspectAvatarDataModule((ReactModule.useMemo(function()
 		-- upvalues: AssetIds (copy), EnumsModule (upval)
 		local List = {}
 		
@@ -42,6 +42,6 @@ return function(p1) --[[ Line: 37 | Named "useRecentActivityInspectAndBuyViewMod
 		onCancelPurchase = UseRecentActivityPurchaseModuleResult.onCancelPurchase,
 		onDismissInsufficientRobux = UseRecentActivityPurchaseModuleResult.onDismissInsufficientRobux,
 		onClose = p1.onClose,
-		openItemDetails = ReactModule.useCallback(function(_, _, _) --[[ Line: 56 ]] end, {})
+		openItemDetails = ReactModule.useCallback(function(_, _, _) end, {})
 	}
 end

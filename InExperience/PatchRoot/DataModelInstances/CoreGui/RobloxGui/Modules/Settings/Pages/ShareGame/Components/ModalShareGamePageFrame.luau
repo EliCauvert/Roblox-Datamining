@@ -21,11 +21,11 @@ local _Color3 = Color3.fromRGB(41, 41, 41)
 local ModalShareGamePageFrame = RoactModule.PureComponent:extend("ModalShareGamePageFrame")
 ModalShareGamePageFrame.defaultProps = { isVisible = true }
 
-function ModalShareGamePageFrame.init(p1) --[[ Line: 53 ]]
+function ModalShareGamePageFrame.init(p1)
 	-- upvalues: ConstantsModule (copy), ThemeModule (copy), Text (copy), RoactModule (copy)
 	p1.state = { promptMessageFitsFrame = true }
 	
-	function p1.onCustomTextAreaSizeChange(Frame) --[[ Line: 58 ]]
+	function p1.onCustomTextAreaSizeChange(Frame)
 		-- upvalues: p1 (copy), ConstantsModule (upval), ThemeModule (upval), Text (upval)
 		local PromptMessage = p1.props.promptMessage
 		local TextSizeResult = ThemeModule.textSize(ConstantsModule.LayoutSpecific[p1.props.deviceLayout].PAGE_TITLE_TEXT_SIZE)
@@ -36,7 +36,7 @@ function ModalShareGamePageFrame.init(p1) --[[ Line: 53 ]]
 	
 	p1.customTextAreaRef = RoactModule.createRef()
 	
-	function p1.onClosePage() --[[ Line: 71 ]]
+	function p1.onClosePage()
 		-- upvalues: p1 (copy)
 		p1.props.closePage()
 		
@@ -46,7 +46,7 @@ function ModalShareGamePageFrame.init(p1) --[[ Line: 53 ]]
 	end
 end
 
-function ModalShareGamePageFrame.didMount(p1) --[[ Line: 79 ]]
+function ModalShareGamePageFrame.didMount(p1)
 	-- upvalues: GetFFlagEnableNewInviteMenuModule (copy), GetFFlagEnableNewInviteSendEndpointModule (copy), ConstantsModule (copy), GameInviteEvents (copy)
 	if GetFFlagEnableNewInviteMenuModule() and p1.customTextAreaRef.current then
 		p1.onCustomTextAreaSizeChange(p1.customTextAreaRef.current)
@@ -56,7 +56,7 @@ function ModalShareGamePageFrame.didMount(p1) --[[ Line: 79 ]]
 	end
 end
 
-function ModalShareGamePageFrame.render(p1) --[[ Line: 92 ]]
+function ModalShareGamePageFrame.render(p1)
 	-- upvalues: GetFFlagEnableNewInviteMenuModule (copy), _UDim2 (copy), _UDim (copy), ConstantsModule (copy), _UDim1 (copy), ThemeModule (copy), RoactModule (copy), _Color3 (copy), CoreGui (copy), ErrorToasterModule (copy), HeaderModule (copy), BackButtonModule (copy), ConversationListModule (copy)
 	local Analytics = p1.props.analytics
 	local DeviceLayout = p1.props.deviceLayout
@@ -148,6 +148,6 @@ function ModalShareGamePageFrame.render(p1) --[[ Line: 92 ]]
 	})
 end
 
-return (RoactRoduxModule.connect(function(p1) --[[ Line: 211 ]]
+return (RoactRoduxModule.connect(function(p1)
 	return { deviceInfo = p1.DeviceInfo }
 end)(ModalShareGamePageFrame))

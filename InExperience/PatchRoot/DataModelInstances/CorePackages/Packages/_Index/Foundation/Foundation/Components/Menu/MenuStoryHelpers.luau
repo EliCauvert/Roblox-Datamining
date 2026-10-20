@@ -26,7 +26,7 @@ return {
 		PopoverAlignModule.Center,
 		PopoverAlignModule.End
 	},
-	MenuStage = function(Frame) --[[ Line: 126 ]]
+	MenuStage = function(Frame)
 		-- upvalues: ReactModule (copy), MenuModule (copy), list (copy), OverlayStoryAnchorModule (copy), ViewModule (copy), YOffset (copy), OverlayModule (copy), TextModule (copy), _UDim2 (copy)
 		local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 		local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
@@ -38,17 +38,17 @@ return {
 			maxHeight = Frame.maxHeight,
 			side = Frame.side,
 			align = Frame.align,
-			onPressedOutside = function() --[[ Line: 138 ]]
+			onPressedOutside = function()
 				-- upvalues: UseStateResult2 (copy)
 				UseStateResult2(false)
 			end,
-			onActivated = function() --[[ Line: 141 ]]
+			onActivated = function()
 				-- upvalues: UseStateResult2 (copy)
 				UseStateResult2(false)
 			end
 		}, {
 			Anchor = ReactModule.createElement(OverlayStoryAnchorModule.Anchor, {
-				onActivated = function() --[[ Line: 146 ]]
+				onActivated = function()
 					-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
 					UseStateResult2(not UseStateResult)
 				end
@@ -78,7 +78,7 @@ return {
 			}) else nil
 		})
 	end,
-	MenuTarget = function(Frame) --[[ Line: 84 ]]
+	MenuTarget = function(Frame)
 		-- upvalues: ReactModule (copy), MenuModule (copy), list (copy), OverlayStoryAnchorModule (copy)
 		local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 		
@@ -91,11 +91,11 @@ return {
 			maxHeight = Frame.maxHeight,
 			side = Frame.side,
 			align = Frame.align,
-			onPressedOutside = function() --[[ Line: 96 ]]
+			onPressedOutside = function()
 				-- upvalues: UseStateResult2 (copy)
 				UseStateResult2(false)
 			end,
-			onActivated = function(p1) --[[ Line: 99 ]]
+			onActivated = function(p1)
 				-- upvalues: Frame (copy), UseStateResult2 (copy)
 				if Frame.onActivated then
 					Frame.onActivated(p1)
@@ -105,7 +105,7 @@ return {
 		}, {
 			Anchor = ReactModule.createElement(OverlayStoryAnchorModule.Anchor, {
 				Size = Frame.anchorSize,
-				onActivated = function() --[[ Line: 108 ]]
+				onActivated = function()
 					-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
 					UseStateResult2(not UseStateResult)
 				end
@@ -128,9 +128,9 @@ return {
 		InputSizeModule.Large
 	},
 	TALL_ANCHOR_SIZE = OverlayStoryAnchorModule.TALL_SIZE,
-	headerLabels = function(p1) --[[ Line: 184 ]]
+	headerLabels = function(p1)
 		-- upvalues: DashModule (copy)
-		return DashModule.map(p1, function(p2): string --[[ Line: 185 ]]
+		return DashModule.map(p1, function(p2): string
 			return (tostring(p2))
 		end)
 	end

@@ -8,13 +8,13 @@ local View = FoundationModule.View
 local ModalBasedSelectorDialogControllerModule = require(AbuseReportMenu.Components.ModalBasedSelectorDialogController)
 local FFlagHideShortcutsOnReportDropdownModule = require(AbuseReportMenu.Flags.FFlagHideShortcutsOnReportDropdown)
 
-return function(p1) --[[ Line: 23 | Named "ModalBasedSelector" ]]
+return function(p1)
 	-- upvalues: FFlagHideShortcutsOnReportDropdownModule (copy), ReactModule (copy), ModalBasedSelectorDialogControllerModule (copy), View (copy), Text (copy), Icon (copy)
-	local UseResult = if FFlagHideShortcutsOnReportDropdownModule then ReactModule.useCallback(function() --[[ Line: 26 ]]
+	local UseResult = if FFlagHideShortcutsOnReportDropdownModule then ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		p1.onMenuOpenChange(true)
 	end, { p1.onMenuOpenChange }) else nil
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 31 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: ModalBasedSelectorDialogControllerModule (upval), FFlagHideShortcutsOnReportDropdownModule (upval), p1 (copy)
 		ModalBasedSelectorDialogControllerModule.unmountModalSelector()
 		
@@ -29,7 +29,7 @@ return function(p1) --[[ Line: 23 | Named "ModalBasedSelector" ]]
 	}, {
 		ControlButton = ReactModule.createElement(View, {
 			tag = "size-full stroke-thicker stroke-emphasis radius-medium",
-			onActivated = function() --[[ Line: 44 ]]
+			onActivated = function()
 				-- upvalues: ModalBasedSelectorDialogControllerModule (upval), p1 (copy), UseResult1 (copy), UseResult (ref)
 				ModalBasedSelectorDialogControllerModule.mountModalSelector(p1.viewportHeight, p1.viewportWidth, p1.selections, p1.onSelect, UseResult1, UseResult)
 			end

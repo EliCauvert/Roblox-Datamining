@@ -25,10 +25,10 @@ local config = {
 }
 
 return {
-	fromJsonData = function(Input) --[[ Line: 44 ]]
+	fromJsonData = function(Input)
 		-- upvalues: config (copy), HttpService (copy), InterfaceResult (copy), MutedErrorFunction (copy), FFlagLuaAppEnableContainedRewardUiModule (copy)
 		local Copy = table.clone(config)
-		local Success, Result = pcall(function() --[[ Line: 47 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: HttpService (upval), Input (copy)
 			return HttpService:JSONDecode(Input)
 		end)

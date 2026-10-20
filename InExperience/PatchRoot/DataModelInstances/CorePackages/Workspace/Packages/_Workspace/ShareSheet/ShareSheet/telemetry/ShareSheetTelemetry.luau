@@ -79,21 +79,21 @@ local ShareSheetTelemetryModule = {
 		Conversation = "conversation",
 		ChatLanding = "chatLanding"
 	},
-	logShareSheetOpened = function(CustomFields) --[[ Line: 208 ]]
+	logShareSheetOpened = function(CustomFields)
 		-- upvalues: TelemetryService (copy), config (copy), StandardizedFields (copy)
 		TelemetryService:LogEvent(config.shareSheetOpened, {
 			standardizedFields = StandardizedFields,
 			customFields = CustomFields
 		})
 	end,
-	logShareSheetLinkCopied = function(CustomFields) --[[ Line: 215 ]]
+	logShareSheetLinkCopied = function(CustomFields)
 		-- upvalues: TelemetryService (copy), config (copy), StandardizedFields (copy)
 		TelemetryService:LogEvent(config.shareSheetLinkCopied, {
 			standardizedFields = StandardizedFields,
 			customFields = CustomFields
 		})
 	end,
-	logShareSheetMessageSent = function(CustomFields) --[[ Line: 222 ]]
+	logShareSheetMessageSent = function(CustomFields)
 		-- upvalues: TelemetryService (copy), config (copy), StandardizedFields (copy)
 		TelemetryService:LogEvent(config.shareSheetMessageSent, {
 			standardizedFields = StandardizedFields,
@@ -137,7 +137,7 @@ local config5 = {
 	lastUpdated = { 2026, 9, 8 }
 }
 
-function ShareSheetTelemetryModule.logLifecycle(CustomFields) --[[ Line: 229 ]]
+function ShareSheetTelemetryModule.logLifecycle(CustomFields)
 	-- upvalues: TelemetryService (copy), config (copy), StandardizedFields (copy), ShareSheetTelemetryModule (copy), config1 (copy), config2 (copy)
 	TelemetryService:LogEvent(config.Lifecycle, {
 		standardizedFields = StandardizedFields,
@@ -151,7 +151,7 @@ function ShareSheetTelemetryModule.logLifecycle(CustomFields) --[[ Line: 229 ]]
 	}, 1)
 end
 
-function ShareSheetTelemetryModule.logInteraction(CustomFields) --[[ Line: 246 ]]
+function ShareSheetTelemetryModule.logInteraction(CustomFields)
 	-- upvalues: TelemetryService (copy), config (copy), StandardizedFields (copy), config3 (copy)
 	TelemetryService:LogEvent(config.Interaction, {
 		standardizedFields = StandardizedFields,
@@ -165,7 +165,7 @@ function ShareSheetTelemetryModule.logInteraction(CustomFields) --[[ Line: 246 ]
 	}, 1)
 end
 
-function ShareSheetTelemetryModule.logMessageSendResult(CustomFields) --[[ Line: 259 ]]
+function ShareSheetTelemetryModule.logMessageSendResult(CustomFields)
 	-- upvalues: TelemetryService (copy), config (copy), StandardizedFields (copy), config5 (copy), config4 (copy)
 	TelemetryService:LogEvent(config.MessageSendResult, {
 		standardizedFields = StandardizedFields,
@@ -187,11 +187,11 @@ function ShareSheetTelemetryModule.logMessageSendResult(CustomFields) --[[ Line:
 	}, 1)
 end
 
-function ShareSheetTelemetryModule.startMessageSendResult(p1) --[[ Line: 280 ]]
+function ShareSheetTelemetryModule.startMessageSendResult(p1)
 	-- upvalues: ShareSheetTelemetryModule (copy), FFlagShareSheetFriendsSort (copy), GetElapsedTimeMsModule (copy)
 	local ClockTime = os.clock()
 	
-	return function(p2) --[[ Line: 284 ]]
+	return function(p2)
 		-- upvalues: ShareSheetTelemetryModule (upval), p1 (copy), FFlagShareSheetFriendsSort (upval), GetElapsedTimeMsModule (upval), ClockTime (copy)
 		ShareSheetTelemetryModule.logMessageSendResult({
 			context = p1.context,

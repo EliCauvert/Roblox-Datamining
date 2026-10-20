@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("FallbackExclusiveUnderageCutoffForMultiPageSignup", 13)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastInt("FallbackExclusiveUnderageCutoffForMultiPageSignup")
 end

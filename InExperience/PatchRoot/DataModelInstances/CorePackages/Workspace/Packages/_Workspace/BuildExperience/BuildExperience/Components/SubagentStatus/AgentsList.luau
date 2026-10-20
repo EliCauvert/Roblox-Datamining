@@ -29,7 +29,7 @@ local config = {
 	Marketing = IconName.Wallet
 }
 
-local function getDisplayGroups(List) --[[ Line: 50 ]]
+local function getDisplayGroups(List)
 	-- upvalues: Names (copy)
 	local t = {}
 	
@@ -56,17 +56,17 @@ local function getDisplayGroups(List) --[[ Line: 50 ]]
 	return List1
 end
 
-local function AgentTaskList(Frame) --[[ Line: 86 ]]
+local function AgentTaskList(Frame)
 	-- upvalues: ReactModule (copy), ScrollView (copy), ScrollBarVisibility (copy), View (copy), StateLayerAffordance (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	
 	return ReactModule.createElement(ScrollView, {
 		tag = "shrink",
 		LayoutOrder = Frame.LayoutOrder,
-		Size = UseBindingResult:map(function(YOffset): UDim2 --[[ Line: 88 ]]
+		Size = UseBindingResult:map(function(YOffset): UDim2
 			return UDim2.new(1, 0, 0, YOffset)
 		end),
-		onAbsoluteCanvasSizeChanged = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 91 ]]
+		onAbsoluteCanvasSizeChanged = ReactModule.useCallback(function(ScrollFrame)
 			-- upvalues: UseBindingResult2 (copy)
 			UseBindingResult2(ScrollFrame.AbsoluteCanvasSize.Y)
 		end, { UseBindingResult2 }),
@@ -91,7 +91,7 @@ local function AgentTaskList(Frame) --[[ Line: 86 ]]
 	})
 end
 
-local function AgentCard(p1) --[[ Line: 132 ]]
+local function AgentCard(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), config (copy), ReactModule (copy), View (copy), Text (copy), LoadingIndicatorModule (copy), Icon (copy), IconSize (copy), AgentTaskList (copy)
 	local Group = p1.group
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -104,7 +104,7 @@ local function AgentCard(p1) --[[ Line: 132 ]]
 	})
 	local NotStarted = if #Group.tasks == 0 then UseLocalizationResult.notStarted elseif Group.isComplete then UseLocalizationResult.completedTasks else UseLocalizationResult.building
 	local Entry = config[Group.name]
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 151 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), Group (copy)
 		p1.onAgentActivated(Group)
 	end, { p1.onAgentActivated, Group })
@@ -167,7 +167,7 @@ local function AgentCard(p1) --[[ Line: 132 ]]
 	})
 end
 
-return ReactModule.memo(function(Frame) --[[ Line: 220 | Named "AgentsList" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseTokensFunction (copy), UseScaledValueFunction (copy), getDisplayGroups (copy), ReactModule (copy), AgentCard (copy), View (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseScaledValueResult = UseScaledValueFunction(156)

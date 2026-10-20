@@ -4,7 +4,7 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local TwoPanelLabelWithDividerModule = require(AvatarExperienceInspectAndBuy.Components.Common.TwoPanelLabelWithDivider)
 
-return function(Frame) --[[ Line: 39 | Named "ItemInfoLabels" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), TwoPanelLabelWithDividerModule (copy), FoundationModule (copy)
 	local Elements = {}
 	

@@ -4,27 +4,27 @@ local SignalModule = require(script.Parent.Parent.Parent.Signal)
 local ChartHeaderNames = require(script.Parent.Parent.Parent.Constants).NetworkFormatting.ChartHeaderNames
 local Number: number? = tonumber(settings():GetFVariable("NewDevConsoleMaxHttpCount"))
 local config = {
-	[ChartHeaderNames[1]] = function(p1, p2): boolean --[[ Line: 12 ]]
+	[ChartHeaderNames[1]] = function(p1, p2): boolean
 		return p1.Num < p2.Num
 	end,
-	[ChartHeaderNames[2]] = function(p1, p2): boolean --[[ Line: 15 ]]
+	[ChartHeaderNames[2]] = function(p1, p2): boolean
 		return p1.Method < p2.Method
 	end,
-	[ChartHeaderNames[3]] = function(p1, p2): boolean --[[ Line: 18 ]]
+	[ChartHeaderNames[3]] = function(p1, p2): boolean
 		return p1.Status < p2.Status
 	end,
-	[ChartHeaderNames[4]] = function(p1, p2): boolean --[[ Line: 21 ]]
+	[ChartHeaderNames[4]] = function(p1, p2): boolean
 		return p1.Time < p2.Time
 	end,
-	[ChartHeaderNames[5]] = function(p1, p2): boolean --[[ Line: 24 ]]
+	[ChartHeaderNames[5]] = function(p1, p2): boolean
 		return p1.RequestType < p2.RequestType
 	end,
-	[ChartHeaderNames[6]] = function(p1, p2): boolean --[[ Line: 27 ]]
+	[ChartHeaderNames[6]] = function(p1, p2): boolean
 		return p1.Url < p2.Url
 	end
 }
 
-local function _(Num, Method, Status, Time, RequestType, Url, Response) --[[ Line: 32 | Named "newHttpEntry" ]]
+local function _(Num, Method, Status, Time, RequestType, Url, Response)
 	return {
 		Num = Num,
 		Method = Method,
@@ -39,7 +39,7 @@ end
 local NetworkDataModule = {}
 NetworkDataModule.__index = NetworkDataModule
 
-function NetworkDataModule.new(_isClient) --[[ Line: 47 ]]
+function NetworkDataModule.new(_isClient)
 	-- upvalues: NetworkDataModule (copy), LogService (copy), SignalModule (copy), CircularBufferModule (copy), Number (copy), ChartHeaderNames (copy)
 	local t = {}
 	setmetatable(t, NetworkDataModule)
@@ -56,7 +56,7 @@ function NetworkDataModule.new(_isClient) --[[ Line: 47 ]]
 	return t
 end
 
-function NetworkDataModule:addHttpEntry(HttpEntry) --[[ Line: 65 ]]
+function NetworkDataModule:addHttpEntry(HttpEntry)
 	self._httpLifeTimeEntryCount += 1
 	self._httpEntryBuffer:push_back({
 		Num = self._httpLifeTimeEntryCount,
@@ -103,7 +103,7 @@ function NetworkDataModule:addHttpEntry(HttpEntry) --[[ Line: 65 ]]
 	end
 end
 
-function NetworkDataModule:setSortType(_sortType) --[[ Line: 117 ]]
+function NetworkDataModule:setSortType(_sortType)
 	-- upvalues: config (copy)
 	if config[_sortType] then
 		self._sortType = _sortType
@@ -115,11 +115,11 @@ function NetworkDataModule:setSortType(_sortType) --[[ Line: 117 ]]
 	end
 end
 
-function NetworkDataModule:getSortType() --[[ Line: 130 ]]
+function NetworkDataModule:getSortType()
 	return self._sortType
 end
 
-function NetworkDataModule:resetHttpEntryList() --[[ Line: 134 ]]
+function NetworkDataModule:resetHttpEntryList()
 	-- upvalues: LogService (copy)
 	self._httpSummaryTable = {}
 	self._httpEntryBuffer:reset()
@@ -136,11 +136,11 @@ function NetworkDataModule:resetHttpEntryList() --[[ Line: 134 ]]
 	end
 end
 
-function NetworkDataModule:Signal() --[[ Line: 149 ]]
+function NetworkDataModule:Signal()
 	return self._httpEntryAdded
 end
 
-function NetworkDataModule:getSortedEntries() --[[ Line: 153 ]]
+function NetworkDataModule:getSortedEntries()
 	-- upvalues: config (copy)
 	local IteratorResult = self._httpEntryBuffer:iterator()
 	local Key = IteratorResult:next()
@@ -156,7 +156,7 @@ function NetworkDataModule:getSortedEntries() --[[ Line: 153 ]]
 	return Keys
 end
 
-function NetworkDataModule:getCurrentData() --[[ Line: 170 ]]
+function NetworkDataModule:getCurrentData()
 	return {
 		summaryTable = self._httpSummaryTable,
 		summaryCount = self._httpSummaryCount,
@@ -164,17 +164,17 @@ function NetworkDataModule:getCurrentData() --[[ Line: 170 ]]
 	}
 end
 
-function NetworkDataModule:isRunning() --[[ Line: 178 ]]
+function NetworkDataModule:isRunning()
 	return self._isRunning
 end
 
-function NetworkDataModule:start() --[[ Line: 182 ]]
+function NetworkDataModule:start()
 	-- upvalues: LogService (copy)
 	if not self._httpResultConnection then
 		if self._additionHttpSetup then
 			self._additionHttpSetup()
 		end
-		self._httpResultConnection = self._httpResultSignal:connect(function(p1) --[[ Line: 188 ]]
+		self._httpResultConnection = self._httpResultSignal:connect(function(p1)
 			-- upvalues: self (copy)
 			self:addHttpEntry(p1)
 			self._httpEntryAdded:Fire(self._httpSummaryTable, self._httpSummaryCount, self:getSortedEntries())
@@ -182,7 +182,7 @@ function NetworkDataModule:start() --[[ Line: 182 ]]
 		self:resetHttpEntryList()
 		
 		if not self._isClient then
-			self._onHttpResultApprovedConnection = LogService.OnHttpResultApproved:connect(function(IsApproved) --[[ Line: 200 ]]
+			self._onHttpResultApprovedConnection = LogService.OnHttpResultApproved:connect(function(IsApproved)
 				-- upvalues: LogService (upval), self (copy)
 				LogService:RequestHttpResultApproved()
 				
@@ -197,7 +197,7 @@ function NetworkDataModule:start() --[[ Line: 182 ]]
 	end
 end
 
-function NetworkDataModule:stop() --[[ Line: 213 ]]
+function NetworkDataModule:stop()
 	if self._httpResultConnection then
 		self._httpResultConnection:Disconnect()
 		self._httpResultConnection = nil

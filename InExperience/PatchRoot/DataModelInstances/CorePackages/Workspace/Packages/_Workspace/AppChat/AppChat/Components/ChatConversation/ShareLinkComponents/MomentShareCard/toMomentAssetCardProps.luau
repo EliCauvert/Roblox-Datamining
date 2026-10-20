@@ -14,7 +14,7 @@ local config = {
 	[MomentDetailsStatusModule.Error] = Status.Error
 }
 
-return function(p1, p2) --[[ Line: 34 | Named "toMomentAssetCardProps" ]]
+return function(p1, p2)
 	-- upvalues: config (copy), Status (copy), MomentDetailsStatusModule (copy), IconName (copy)
 	local Entry = config[p1.status] or Status.Loading
 	

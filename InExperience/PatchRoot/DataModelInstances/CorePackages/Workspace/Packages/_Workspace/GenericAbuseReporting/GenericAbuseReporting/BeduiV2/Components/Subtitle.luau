@@ -8,10 +8,10 @@ local Text = FoundationModule.Text
 local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
 local UseArTranslationFunction = require(GenericAbuseReporting.BeduiV2.Utils.Translate.arTranslation).useArTranslation
 
-return ReactModule.memo(function(p1) --[[ Line: 25 | Named "Subtitle" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseArTranslationFunction (copy), ReactModule (copy), IconName (copy), GetIconRichTextFunction (copy), Text (copy)
 	local TranslateIntoStringFunction = UseArTranslationFunction().translateIntoString
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 28 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), IconName (upval), GetIconRichTextFunction (upval)
 		if p1.subtitle and p1.subtitle.leading then
 			local IconNameEntry = IconName[p1.subtitle.leading]

@@ -1,6 +1,6 @@
 ﻿local MemoryTrackerFunction = require(script:FindFirstAncestor("TimeToInteractiveTracker").Parent.Memory).MemoryTracker
 
-return function() --[[ Line: 14 | Named "getMemoryMb" ]]
+return function()
 	-- upvalues: MemoryTrackerFunction (copy)
 	local MemoryTrackerResult = MemoryTrackerFunction()
 	

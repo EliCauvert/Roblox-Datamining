@@ -6,7 +6,7 @@ local SduiLoggerModule = require(SduiCoreSystem.SduiLogger)
 local GetSduiTelemetryHandlerNameRegistryModule = require(SduiCoreSystem.getSduiTelemetryHandlerNameRegistry)
 local ReportUnifiedLoggingActionModule = require(SduiCoreSystem.Analytics.reportUnifiedLoggingAction)
 
-return function(p1, p2, p3, p4, p5) --[[ Line: 17 | Named "logActionTelemetry" ]]
+return function(p1, p2, p3, p4, p5)
 	-- upvalues: GetSduiTelemetryHandlerNameRegistryModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), ReportUnifiedLoggingActionModule (copy)
 	if p1 and p1 ~= "" then
 		local TelemetryHandler: (any, any, any) -> () = GetSduiTelemetryHandlerNameRegistryModule().getTelemetryHandler(p1)

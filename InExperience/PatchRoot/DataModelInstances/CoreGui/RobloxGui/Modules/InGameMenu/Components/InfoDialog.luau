@@ -25,11 +25,11 @@ InfoDialog.validateProps = T.strictInterface({
 	buttonRef = T.optional(T.table)
 })
 
-function InfoDialog.render(p1) --[[ Line: 44 ]]
+function InfoDialog.render(p1)
 	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), Roact (copy), ImageSetLabel (copy), AssetsModule (copy), ThemedTextLabelModule (copy), DividerModule (copy), Button (copy), ButtonType (copy)
 	local Props = p1.props
 	
-	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 47 ]]
+	return WithFoundationOrUIBloxStyleFunction(function(p2)
 		-- upvalues: FoundationFontFaceMigration (upval)
 		return {
 			Tokens = if FoundationFontFaceMigration then p2 else nil,
@@ -51,7 +51,7 @@ function InfoDialog.render(p1) --[[ Line: 44 ]]
 				}
 			}
 		}
-	end, function(p2) --[[ Line: 68 ]]
+	end, function(p2)
 		-- upvalues: Props (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), TextService (upval), Roact (upval), ImageSetLabel (upval), AssetsModule (upval), p1 (copy), ThemedTextLabelModule (upval), DividerModule (upval), Button (upval), ButtonType (upval)
 		local BodyFont = p2.Font.Body.Font
 		local ScaledRelativeSize = p2.Font.Body.RelativeSize * p2.Font.BaseSize
@@ -132,9 +132,9 @@ function InfoDialog.render(p1) --[[ Line: 44 ]]
 	end)
 end
 
-function InfoDialog.bindActions(p1) --[[ Line: 171 ]]
+function InfoDialog.bindActions(p1)
 	-- upvalues: ContextActionService (copy)
-	ContextActionService:BindCoreAction("InGameMenuModalDismiss", function(_, UserInputState, _) --[[ Line: 172 | Named "dismissFunc" ]]
+	ContextActionService:BindCoreAction("InGameMenuModalDismiss", function(_, UserInputState, _)
 		-- upvalues: p1 (copy)
 		if UserInputState == Enum.UserInputState.Begin then
 			p1.props.onDismiss()
@@ -142,18 +142,18 @@ function InfoDialog.bindActions(p1) --[[ Line: 171 ]]
 	end, false, Enum.KeyCode.Escape)
 end
 
-function InfoDialog:unbindActions() --[[ Line: 181 ]]
+function InfoDialog:unbindActions()
 	-- upvalues: ContextActionService (copy)
 	ContextActionService:UnbindCoreAction("InGameMenuModalDismiss")
 end
 
-function InfoDialog.didMount(p1) --[[ Line: 185 ]]
+function InfoDialog.didMount(p1)
 	if p1.props.visible then
 		p1:bindActions()
 	end
 end
 
-function InfoDialog.didUpdate(p1) --[[ Line: 191 ]]
+function InfoDialog.didUpdate(p1)
 	if p1.props.visible then
 		p1:bindActions()
 		
@@ -163,7 +163,7 @@ function InfoDialog.didUpdate(p1) --[[ Line: 191 ]]
 	end
 end
 
-function InfoDialog.willUnmount(p1) --[[ Line: 199 ]]
+function InfoDialog.willUnmount(p1)
 	p1:unbindActions()
 end
 

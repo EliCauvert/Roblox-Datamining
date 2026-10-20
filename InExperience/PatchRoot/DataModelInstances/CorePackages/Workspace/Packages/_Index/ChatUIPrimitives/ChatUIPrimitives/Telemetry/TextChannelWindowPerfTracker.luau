@@ -7,30 +7,30 @@ local v1 = nil
 local t = {}
 local t1 = {}
 
-local function _() --[[ Line: 31 | Named "isEnabled" ]]
+local function _()
 	-- upvalues: v1 (ref), TextChannelWindowPerfTrackingEnabled (copy)
 	return if v1 == nil then TextChannelWindowPerfTrackingEnabled else v1
 end
 
-local _ = function(Text): string --[[ Line: 64 | Named "sendIntervalName" ]]
+local _ = function(Text): string
 	return "TextChannelWindow_MessageSendToRenderInterval_" .. Text
 end
 
-local _ = function(Text): string --[[ Line: 68 | Named "receiveIntervalName" ]]
+local _ = function(Text): string
 	return "TextChannelWindow_MessageReceiveToRenderInterval_" .. Text
 end
 
 return {
-	withTrackers = function(p1, p2) --[[ Line: 39 ]]
+	withTrackers = function(p1, p2)
 		-- upvalues: TimeToInteractiveTracker (ref), IntervalPerformanceTracker (ref)
 		TimeToInteractiveTracker = p1
 		IntervalPerformanceTracker = p2
 	end,
-	_setEnabledForTesting = function(p1) --[[ Line: 44 ]]
+	_setEnabledForTesting = function(p1)
 		-- upvalues: v1 (ref)
 		v1 = p1
 	end,
-	startMountTTI = function(Text) --[[ Line: 50 ]]
+	startMountTTI = function(Text)
 		-- upvalues: v1 (ref), TextChannelWindowPerfTrackingEnabled (copy), TimeToInteractiveTracker (ref)
 		if if v1 == nil then TextChannelWindowPerfTrackingEnabled else v1 then
 			TimeToInteractiveTracker.trackStart("TextChannelWindow_MountTTI_" .. Text)
@@ -38,7 +38,7 @@ return {
 			return
 		end
 	end,
-	finishMountTTI = function(Text) --[[ Line: 57 ]]
+	finishMountTTI = function(Text)
 		-- upvalues: v1 (ref), TextChannelWindowPerfTrackingEnabled (copy), TimeToInteractiveTracker (ref)
 		if if v1 == nil then TextChannelWindowPerfTrackingEnabled else v1 then
 			TimeToInteractiveTracker.trackEnd("TextChannelWindow_MountTTI_" .. Text)
@@ -46,7 +46,7 @@ return {
 			return
 		end
 	end,
-	startSendInterval = function(Id, Key) --[[ Line: 72 ]]
+	startSendInterval = function(Id, Key)
 		-- upvalues: v1 (ref), TextChannelWindowPerfTrackingEnabled (copy), t (ref), IntervalPerformanceTracker (ref), list (copy)
 		if not (if v1 == nil then TextChannelWindowPerfTrackingEnabled else v1) then return end
 		local Entry = t[Key]
@@ -61,7 +61,7 @@ return {
 			return
 		end
 	end,
-	startReceiveInterval = function(Id, Key) --[[ Line: 87 ]]
+	startReceiveInterval = function(Id, Key)
 		-- upvalues: v1 (ref), TextChannelWindowPerfTrackingEnabled (copy), t1 (ref), IntervalPerformanceTracker (ref), list (copy)
 		if not (if v1 == nil then TextChannelWindowPerfTrackingEnabled else v1) then return end
 		local Entry = t1[Key]
@@ -76,7 +76,7 @@ return {
 			return
 		end
 	end,
-	finishMessageIntervals = function(Id) --[[ Line: 104 ]]
+	finishMessageIntervals = function(Id)
 		-- upvalues: v1 (ref), TextChannelWindowPerfTrackingEnabled (copy), t (ref), IntervalPerformanceTracker (ref), t1 (ref)
 		if not (if v1 == nil then TextChannelWindowPerfTrackingEnabled else v1) then return end
 		for i, value in t do
@@ -92,7 +92,7 @@ return {
 			end
 		end
 	end,
-	cancelForChannel = function(Key) --[[ Line: 123 ]]
+	cancelForChannel = function(Key)
 		-- upvalues: v1 (ref), TextChannelWindowPerfTrackingEnabled (copy), t (ref), IntervalPerformanceTracker (ref), t1 (ref)
 		if not (if v1 == nil then TextChannelWindowPerfTrackingEnabled else v1) then return end
 		if t[Key] then
@@ -104,7 +104,7 @@ return {
 			IntervalPerformanceTracker:cancelTracking("TextChannelWindow_MessageReceiveToRenderInterval_" .. Key)
 		end
 	end,
-	cancelAll = function() --[[ Line: 138 ]]
+	cancelAll = function()
 		-- upvalues: t (ref), IntervalPerformanceTracker (ref), t1 (ref)
 		for i in t do
 			IntervalPerformanceTracker:cancelTracking("TextChannelWindow_MessageSendToRenderInterval_" .. i)

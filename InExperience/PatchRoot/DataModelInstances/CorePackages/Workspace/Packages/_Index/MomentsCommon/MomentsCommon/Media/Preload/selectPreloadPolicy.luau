@@ -2,7 +2,7 @@
 local PreloadConstantsModule = require(MomentsCommon.Media.Preload.preloadConstants)
 local PreloadFastIntsModule = require(MomentsCommon.Media.Preload.preloadFastInts)
 
-return function(_) --[[ Line: 33 | Named "selectPreloadPolicy" ]]
+return function(_)
 	-- upvalues: PreloadFastIntsModule (copy), PreloadConstantsModule (copy)
 	return {
 		downloadWindow = PreloadFastIntsModule.getDownloadWindow(),

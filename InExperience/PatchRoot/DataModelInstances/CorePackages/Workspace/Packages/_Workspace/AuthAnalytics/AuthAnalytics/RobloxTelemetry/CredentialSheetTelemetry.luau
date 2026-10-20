@@ -13,7 +13,7 @@ local config = {
 }
 
 return {
-	report = function(p1, p2) --[[ Line: 27 ]]
+	report = function(p1, p2)
 		-- upvalues: Default (copy), LuaAppCredentialSheetEventStream (copy), config (copy)
 		Default:logRobloxTelemetryCounter(p1, 1, p2)
 		

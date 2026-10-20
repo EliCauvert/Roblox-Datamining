@@ -1,7 +1,7 @@
 ﻿local RunService = game:GetService("RunService")
 local ReactModule = require(script:FindFirstAncestor("GamePlayButton").Parent.React)
 
-local function formatRemaining(Value: number): string --[[ Line: 13 ]]
+local function formatRemaining(Value: number): string
 	local Largest = math.max(math.floor(Value), 0)
 	local Floored = math.floor(Largest / 86400)
 	local Floored1 = math.floor(Largest % 86400 / 3600)
@@ -23,7 +23,7 @@ local function formatRemaining(Value: number): string --[[ Line: 13 ]]
 	return table.concat(List, " ")
 end
 
-local function computeText(p1) --[[ Line: 34 ]]
+local function computeText(p1)
 	-- upvalues: formatRemaining (copy)
 	if p1 == nil then
 		return ""
@@ -34,20 +34,20 @@ local function computeText(p1) --[[ Line: 34 ]]
 	end
 end
 
-return function(p1) --[[ Line: 46 | Named "useCountdownText" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), computeText (copy), RunService (copy)
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 47 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 		-- upvalues: computeText (upval), p1 (copy)
 		return computeText(p1)
 	end)
-	ReactModule.useEffect(function() --[[ Line: 51 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), computeText (upval), p1 (copy), RunService (upval)
 		UseStateResult2(computeText(p1))
 		
 		if p1 == nil or p1 - DateTime.now().UnixTimestamp <= 0 then return end
 		local Connection = nil
 		local v1 = 0
-		Connection = RunService.Heartbeat:Connect(function() --[[ Line: 60 ]]
+		Connection = RunService.Heartbeat:Connect(function()
 			-- upvalues: v1 (ref), UseStateResult2 (upval), computeText (upval), p1 (upval), Connection (ref)
 			local ClockTime = os.clock()
 			
@@ -61,7 +61,7 @@ return function(p1) --[[ Line: 46 | Named "useCountdownText" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 73 ]]
+		return function()
 			-- upvalues: Connection (ref)
 			if Connection then
 				Connection:Disconnect()

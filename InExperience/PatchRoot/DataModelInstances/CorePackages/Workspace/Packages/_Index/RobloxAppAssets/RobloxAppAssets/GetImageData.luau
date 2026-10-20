@@ -3,7 +3,7 @@ local GetImageSetPathPatternModule = require(script.Parent.GetImageSetPathPatter
 local Images = require(script.Parent.Parent.FoundationImages).Images
 local _ = require(script.Parent.types)
 
-return function(p1, p2) --[[ Line: 9 | Named "GetImageData" ]]
+return function(p1, p2)
 	-- upvalues: GetImageSetDataModule (copy), Images (copy), GetImageSetPathPatternModule (copy)
 	local ImageSetDataModuleEntry = GetImageSetDataModule(p2 or Images.ImagesResolutionScale)[p1]
 	

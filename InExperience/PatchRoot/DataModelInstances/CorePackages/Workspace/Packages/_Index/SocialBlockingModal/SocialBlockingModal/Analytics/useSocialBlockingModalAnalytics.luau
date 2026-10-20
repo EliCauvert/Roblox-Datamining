@@ -1,9 +1,9 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("SocialBlockingModal").Parent.React)
 local AnalyticsSetupModule = require(script.Parent.AnalyticsSetup)
 
-return function(InfoForAllEvents) --[[ Line: 12 | Named "useSocialBlockingModalAnalytics" ]]
+return function(InfoForAllEvents)
 	-- upvalues: ReactModule (copy), AnalyticsSetupModule (copy)
-	return (ReactModule.useMemo(function() --[[ Line: 13 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: AnalyticsSetupModule (upval), InfoForAllEvents (copy)
 		return AnalyticsSetupModule({ infoForAllEvents = InfoForAllEvents })
 	end, { InfoForAllEvents }))

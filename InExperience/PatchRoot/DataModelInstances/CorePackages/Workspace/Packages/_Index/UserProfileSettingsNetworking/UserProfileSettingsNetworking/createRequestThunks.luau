@@ -2,7 +2,7 @@
 local CreateGetUserProfileSettingsModule = require(NetworkRequests.createGetUserProfileSettings)
 local CreateSetUserProfileSettingsModule = require(NetworkRequests.createSetUserProfileSettings)
 
-return function(p1) --[[ Line: 6 ]]
+return function(p1)
 	-- upvalues: CreateGetUserProfileSettingsModule (copy), CreateSetUserProfileSettingsModule (copy)
 	return {
 		GetUserProfileSettings = CreateGetUserProfileSettingsModule(p1),

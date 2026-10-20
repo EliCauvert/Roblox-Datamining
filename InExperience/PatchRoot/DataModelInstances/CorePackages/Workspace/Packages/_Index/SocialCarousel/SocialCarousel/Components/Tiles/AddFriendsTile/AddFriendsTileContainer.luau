@@ -16,14 +16,14 @@ local FFlagCreateConnectionsHub = require(Parent.SharedFlags).FFlagCreateConnect
 local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p1) --[[ Line: 31 | Named "AddFriendsTileContainer" ]]
+return function(p1)
 	-- upvalues: UseNavigationFunction (copy), UseDispatchFunction (copy), UseSocialCarouselAnalyticsModule (copy), UseSocialCarouselContextModule (copy), UseNewFriendRequestsCountModule (copy), ReactModule (copy), SocialStopwatchModule (copy), FFlagCreateConnectionsHub (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), ConstantsModule (copy), AddFriendsTileModule (copy), CryoModule (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseSocialCarouselAnalyticsModuleResult = UseSocialCarouselAnalyticsModule()
 	local UseSocialCarouselContextModuleResult = UseSocialCarouselContextModule()
 	local UseNewFriendRequestsCountModuleResult = UseNewFriendRequestsCountModule()
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 37 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseSocialCarouselAnalyticsModuleResult (copy), p1 (copy), SocialStopwatchModule (upval), FFlagCreateConnectionsHub (upval), UseNavigationResult (copy), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 		UseSocialCarouselAnalyticsModuleResult.addFriendsPressed(p1.index)
 		SocialStopwatchModule.Stopwatch.start(SocialStopwatchModule.Events.AFPUserTileLoadFromHomeCarousel)
@@ -41,7 +41,7 @@ return function(p1) --[[ Line: 31 | Named "AddFriendsTileContainer" ]]
 			UseDispatchResult(NavigateDownFunction({ name = AppPage.AddFriendsPage }))
 		end
 	end, { UseDispatchResult, UseNavigationResult })
-	ReactModule.useEffect(function() --[[ Line: 49 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSocialCarouselContextModuleResult (copy), ConstantsModule (upval)
 		UseSocialCarouselContextModuleResult.onSuccessfulRender(ConstantsModule.ANALYTICS.UI_LOADING_EVENTS.ADD_FRIENDS)
 	end, {})

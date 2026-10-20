@@ -23,7 +23,7 @@ local config1 = {
 	SortOrder = Enum.SortOrder.LayoutOrder
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 44 | Named "Grid" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config1 (copy), UseResponsiveModule (copy), ReactModule (copy), UseBreakpointModule (copy), GetGridMetricsModule (copy), BreakpointModule (copy), config (copy), ViewModule (copy), WithCommonPropsModule (copy), GridStyleSheetModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config1)
 	local UseResponsiveModuleResult = UseResponsiveModule()

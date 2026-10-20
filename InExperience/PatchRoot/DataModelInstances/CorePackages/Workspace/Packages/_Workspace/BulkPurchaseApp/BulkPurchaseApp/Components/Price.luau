@@ -8,7 +8,7 @@ local Text = FoundationModule.Text
 local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
 local IconName = FoundationModule.Enums.IconName
 
-return function(Frame: Frame) --[[ Line: 22 | Named "Price" ]]
+return function(Frame: Frame)
 	-- upvalues: NumberLocalization (copy), LocalizationService (copy), GetIconRichTextFunction (copy), IconName (copy), ReactModule (copy), Text (copy), View (copy)
 	local Element = ReactModule.createElement(Text, {
 		RichText = true,

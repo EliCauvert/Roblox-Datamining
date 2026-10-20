@@ -1,10 +1,10 @@
 ﻿local Parent = script.Parent.Parent
 
 return require(Parent.Parent.Rodux).createReducer(false, {
-	[require(Parent.Actions.MenuClosed).name] = function(_, _): boolean --[[ Line: 14 ]]
+	[require(Parent.Actions.MenuClosed).name] = function(_, _): boolean
 		return false
 	end,
-	[require(Parent.Actions.MenuOpened).name] = function(_, _): boolean --[[ Line: 18 ]]
+	[require(Parent.Actions.MenuOpened).name] = function(_, _): boolean
 		return true
 	end
 })

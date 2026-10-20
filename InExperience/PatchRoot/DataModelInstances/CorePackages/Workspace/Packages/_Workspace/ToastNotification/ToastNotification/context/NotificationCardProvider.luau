@@ -7,7 +7,7 @@ local ConstantsModule = require(Parent1.constants)
 local AnalyticsServiceModule = require(Parent1.analytics.analyticsService)
 local ToastNotificationHelperModule = require(Parent1.utils.toastNotificationHelper)
 
-return function(p1) --[[ Line: 23 | Named "NotificationCardProvider" ]]
+return function(p1)
 	-- upvalues: AnalyticsServiceModule (copy), ConstantsModule (copy), ToastNotificationHelperModule (copy), ReactModule (copy), NotificationCardContextModule (copy)
 	local EventStream = AnalyticsServiceModule.EventStream
 	local CardSize = {
@@ -24,7 +24,7 @@ return function(p1) --[[ Line: 23 | Named "NotificationCardProvider" ]]
 			state = p1.state,
 			cardSize = CardSize,
 			handleActions = p1.handleActions,
-			sendEvent = function(p2) --[[ Line: 36 ]]
+			sendEvent = function(p2)
 				-- upvalues: ToastNotificationHelperModule (upval), EventStream (copy)
 				ToastNotificationHelperModule.fireEvent(EventStream, p2)
 			end,

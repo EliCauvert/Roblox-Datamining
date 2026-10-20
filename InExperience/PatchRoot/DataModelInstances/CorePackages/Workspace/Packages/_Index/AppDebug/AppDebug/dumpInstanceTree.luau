@@ -1,5 +1,5 @@
-﻿local function _(p1, p2) --[[ Line: 7 | Named "dumpProperty" ]]
-	local Success, Result = pcall(function() --[[ Line: 8 ]]
+﻿local function _(p1, p2)
+	local Success, Result = pcall(function()
 		-- upvalues: p1 (copy), p2 (copy)
 		return p1[p2]
 	end)
@@ -7,12 +7,12 @@
 	return if Success then tostring(Result) else nil
 end
 
-local function dumpInstance(p1, p2): string --[[ Line: 14 ]]
+local function dumpInstance(p1, p2): string
 	local Name = p1.Name
 	local Flag = false
 	local P3 = p2 or {}
 	for _, value in P3 do
-		local Success, Result = pcall(function() --[[ Line: 8 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p1 (copy), value (copy)
 			return p1[value]
 		end)
@@ -35,7 +35,7 @@ local function dumpInstance(p1, p2): string --[[ Line: 14 ]]
 	return Name .. "\n"
 end
 
-local function dumpInstanceTree(Object, p3, Text): string --[[ Line: 38 ]]
+local function dumpInstanceTree(Object, p3, Text): string
 	-- upvalues: dumpInstance (copy), dumpInstanceTree (copy)
 	if Object == nil then
 		return Text .. "[nil Instance]\n"
@@ -51,7 +51,7 @@ local function dumpInstanceTree(Object, p3, Text): string --[[ Line: 38 ]]
 	return Text1
 end
 
-return function(p4, p5) --[[ Line: 61 ]]
+return function(p4, p5)
 	-- upvalues: dumpInstanceTree (copy)
 	return (dumpInstanceTree(p4, p5, ""))
 end

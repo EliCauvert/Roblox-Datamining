@@ -1,10 +1,10 @@
-﻿return function(List) --[[ Line: 2 | Named "createShallowEqualAndTables" ]]
+﻿return function(List)
 	local t = {}
 	
 	for _, value in List do
 		t[value] = true
 	end
-	return function(List, List1): boolean --[[ Line: 8 ]]
+	return function(List, List1): boolean
 		-- upvalues: t (copy)
 		for i, value in List do
 			local Entry = List1[i]

@@ -17,12 +17,12 @@ local UtilsModule = require(script.Parent.Utils)
 local GetLegacyPageFromRoactNavigationRouteFunction = UtilsModule.getLegacyPageFromRoactNavigationRoute
 local GetLegacyRouteFromRoactNavigationStateFunction = UtilsModule.getLegacyRouteFromRoactNavigationState
 
-local function legacyPageEqual(p1, p2) --[[ Line: 36 ]]
+local function legacyPageEqual(p1, p2)
 	-- upvalues: TutilsModule (copy)
 	return TutilsModule.shallowEqual(p1, p2)
 end
 
-local function legacyRouteEqual(p1, p2): boolean --[[ Line: 40 ]]
+local function legacyRouteEqual(p1, p2): boolean
 	-- upvalues: TutilsModule (copy)
 	if p1 == p2 then
 		return true
@@ -38,7 +38,7 @@ local function legacyRouteEqual(p1, p2): boolean --[[ Line: 40 ]]
 	return true
 end
 
-local function legacyHistoryEqual(p3, p4): boolean --[[ Line: 55 ]]
+local function legacyHistoryEqual(p3, p4): boolean
 	-- upvalues: legacyRouteEqual (copy)
 	if p3 == p4 then
 		return true
@@ -54,14 +54,14 @@ local function legacyHistoryEqual(p3, p4): boolean --[[ Line: 55 ]]
 	return true
 end
 
-local function routeStateEqual(p5, p6) --[[ Line: 70 ]]
+local function routeStateEqual(p5, p6)
 	-- upvalues: TutilsModule (copy)
 	return p5 == p6 or type(p5) == "table" and type(p6) == "table" and (p5.routeName == p6.routeName and p5.key == p6.key and TutilsModule.shallowEqual(p5.params or {}, p6.params or {}))
 end
 
-return function(p5) --[[ Line: 100 | Named "createLegacyNavigationStore" ]]
+return function(p5)
 	-- upvalues: SignalsModule (copy), ConstantsModule (copy), FFlagAppIaHomeSubTab (copy), GetLegacyPageFromRoactNavigationRouteFunction (copy), CryoModule (copy), FFlagSignalsNavP3Final (copy), legacyHistoryEqual (copy), GetLegacyRouteFromRoactNavigationStateFunction (copy), legacyRouteEqual (copy), FFlagSignalsNavProjected (copy), GetCurrentNavigationStateFunction (copy), GetCurrentRouteStateFunction (copy), routeStateEqual (copy), legacyPageEqual (copy), FFlagSignalsNavP2NavigationPrimitives (copy)
-	local Computed = SignalsModule.createComputed(function(p6) --[[ Line: 106 ]]
+	local Computed = SignalsModule.createComputed(function(p6)
 		-- upvalues: p5 (copy), ConstantsModule (upval), FFlagAppIaHomeSubTab (upval), GetLegacyPageFromRoactNavigationRouteFunction (upval), CryoModule (upval)
 		local JoinResults = {}
 		local State = p5.getState(p6)
@@ -79,15 +79,15 @@ return function(p5) --[[ Line: 100 | Named "createLegacyNavigationStore" ]]
 		end
 		return JoinResults
 	end, if FFlagSignalsNavP3Final then legacyHistoryEqual else nil)
-	local Computed1 = SignalsModule.createComputed(function(p7) --[[ Line: 132 ]]
+	local Computed1 = SignalsModule.createComputed(function(p7)
 		-- upvalues: p5 (copy), GetLegacyRouteFromRoactNavigationStateFunction (upval)
 		return GetLegacyRouteFromRoactNavigationStateFunction((p5.getState(p7)))
 	end, if FFlagSignalsNavP3Final then legacyRouteEqual else nil)
-	local Computed2 = SignalsModule.createComputed(function(p7) --[[ Line: 137 ]]
+	local Computed2 = SignalsModule.createComputed(function(p7)
 		-- upvalues: FFlagSignalsNavProjected (upval), p5 (copy), GetCurrentNavigationStateFunction (upval), GetCurrentRouteStateFunction (upval)
 		return if FFlagSignalsNavProjected then GetCurrentNavigationStateFunction((p5.getState(p7))) else GetCurrentRouteStateFunction((p5.getNavigation(p7)))
 	end, if FFlagSignalsNavP3Final then routeStateEqual else nil)
-	local Computed3 = if FFlagSignalsNavP2NavigationPrimitives then SignalsModule.createComputed(function(p7) --[[ Line: 163 ]]
+	local Computed3 = if FFlagSignalsNavP2NavigationPrimitives then SignalsModule.createComputed(function(p7)
 		-- upvalues: Computed (copy)
 		local ComputedResult = Computed(p7)
 		local ComputedResultEntry = ComputedResult[#ComputedResult]
@@ -100,13 +100,13 @@ return function(p5) --[[ Line: 100 | Named "createLegacyNavigationStore" ]]
 	return {
 		getHistory = Computed,
 		getCurrentRoute = Computed2,
-		getCurrentLegacyRoute = SignalsModule.createComputed(function(p7) --[[ Line: 151 ]]
+		getCurrentLegacyRoute = SignalsModule.createComputed(function(p7)
 			-- upvalues: Computed (copy)
 			local ComputedResult = Computed(p7)
 			
 			return ComputedResult[#ComputedResult]
 		end, if FFlagSignalsNavP3Final then legacyRouteEqual else nil),
-		getCurrentPage = SignalsModule.createComputed(function(p7) --[[ Line: 156 ]]
+		getCurrentPage = SignalsModule.createComputed(function(p7)
 			-- upvalues: Computed (copy)
 			local ComputedResult = Computed(p7)
 			local ComputedResultEntry = ComputedResult[#ComputedResult]
@@ -114,14 +114,14 @@ return function(p5) --[[ Line: 100 | Named "createLegacyNavigationStore" ]]
 			return ComputedResultEntry[#ComputedResultEntry]
 		end, if FFlagSignalsNavP3Final then legacyPageEqual else nil),
 		getCurrentPageName = Computed3,
-		getIsCurrentPageSignal = function(Key) --[[ Line: 174 ]]
+		getIsCurrentPageSignal = function(Key)
 			-- upvalues: t (copy), SignalsModule (upval), Computed3 (copy)
 			local Entry = t[Key]
 			
 			if Entry then
 				return Entry
 			else
-				local Computed = SignalsModule.createComputed(function(p7): boolean --[[ Line: 179 ]]
+				local Computed = SignalsModule.createComputed(function(p7): boolean
 					-- upvalues: Computed3 (upval), Key (copy)
 					return Computed3(p7) == Key
 				end)
@@ -130,14 +130,14 @@ return function(p5) --[[ Line: 100 | Named "createLegacyNavigationStore" ]]
 				return Computed
 			end
 		end,
-		getRouteContainsPageSignal = function(Key) --[[ Line: 192 ]]
+		getRouteContainsPageSignal = function(Key)
 			-- upvalues: t1 (copy), SignalsModule (upval), Computed1 (copy)
 			local Entry = t1[Key]
 			
 			if Entry then
 				return Entry
 			else
-				local Computed = SignalsModule.createComputed(function(p7): boolean --[[ Line: 197 ]]
+				local Computed = SignalsModule.createComputed(function(p7): boolean
 					-- upvalues: Computed1 (upval), Key (copy)
 					local ComputedResult = Computed1(p7)
 					
@@ -155,25 +155,25 @@ return function(p5) --[[ Line: 100 | Named "createLegacyNavigationStore" ]]
 				return Computed
 			end
 		end,
-		getCurrentTabName = if FFlagSignalsNavP2NavigationPrimitives then SignalsModule.createComputed(function(p7) --[[ Line: 213 ]]
+		getCurrentTabName = if FFlagSignalsNavP2NavigationPrimitives then SignalsModule.createComputed(function(p7)
 			-- upvalues: Computed (copy)
 			local ComputedResult = Computed(p7)
 			
 			return ComputedResult[#ComputedResult][1].name
 		end) else nil,
-		getCanGoBack = if FFlagSignalsNavP2NavigationPrimitives then SignalsModule.createComputed(function(p7): boolean --[[ Line: 221 ]]
+		getCanGoBack = if FFlagSignalsNavP2NavigationPrimitives then SignalsModule.createComputed(function(p7): boolean
 			-- upvalues: Computed (copy)
 			local ComputedResult = Computed(p7)
 			
 			return #ComputedResult[#ComputedResult] > 1
 		end) else nil,
-		getRouteDepth = if FFlagSignalsNavP2NavigationPrimitives then SignalsModule.createComputed(function(p7): number --[[ Line: 229 ]]
+		getRouteDepth = if FFlagSignalsNavP2NavigationPrimitives then SignalsModule.createComputed(function(p7): number
 			-- upvalues: Computed (copy)
 			local ComputedResult = Computed(p7)
 			
 			return #ComputedResult[#ComputedResult]
 		end) else nil,
-		getCurrentRouteKey = if FFlagSignalsNavP2NavigationPrimitives then SignalsModule.createComputed(function(p7) --[[ Line: 237 ]]
+		getCurrentRouteKey = if FFlagSignalsNavP2NavigationPrimitives then SignalsModule.createComputed(function(p7)
 			-- upvalues: Computed2 (copy)
 			return Computed2(p7).key or ""
 		end) else nil

@@ -2,7 +2,7 @@
 local CachedPolicyServiceModule = require(game:GetService("CorePackages").Workspace.Packages.CachedPolicyService)
 local GetFFlagScreenshotHudApiModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Flags.GetFFlagScreenshotHudApi)
 
-return function(): boolean --[[ Line: 9 ]]
+return function(): boolean
 	-- upvalues: UserInputService (copy), GetFFlagScreenshotHudApiModule (copy), CachedPolicyServiceModule (copy)
 	local Platform = UserInputService:GetPlatform()
 	local IsPlatformMatch: boolean = Platform == Enum.Platform.IOS or Platform == Enum.Platform.Android

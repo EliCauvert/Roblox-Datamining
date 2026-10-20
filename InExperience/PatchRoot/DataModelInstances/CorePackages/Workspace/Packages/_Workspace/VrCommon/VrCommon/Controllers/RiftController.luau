@@ -3,7 +3,7 @@ local Granite = Enum.Material.Granite
 local RiftController = {}
 RiftController.__index = RiftController
 
-function RiftController.new(UserCFrame) --[[ Line: 13 ]]
+function RiftController.new(UserCFrame)
 	-- upvalues: RiftController (copy), CreateFunction (copy), Granite (copy)
 	local self = setmetatable({}, RiftController)
 	self.userCFrame = UserCFrame
@@ -50,27 +50,27 @@ function RiftController.new(UserCFrame) --[[ Line: 13 ]]
 	return self
 end
 
-function RiftController:setCFrame(p1) --[[ Line: 68 ]]
+function RiftController:setCFrame(p1)
 	self.model:SetPrimaryPartCFrame(p1 * CFrame.Angles(0.3490658503988659, 0, 0) * CFrame.new(0, -0.03, 0.06))
 end
 
-function RiftController:setCFrameAndScale(p1, p2: number) --[[ Line: 72 ]]
+function RiftController:setCFrameAndScale(p1, p2: number)
 	self.model:SetPrimaryPartCFrame(p1 * CFrame.Angles(0.3490658503988659, 0, 0) * CFrame.new(0, -0.03 * p2, 0.06 * p2))
 	self.mesh.Scale = vector.create(0.03200000151991844, 0.03200000151991844, 0.03200000151991844) * p2
 end
 
-function RiftController:onButtonInputChanged(_, _) --[[ Line: 79 ]] end
+function RiftController:onButtonInputChanged(_, _) end
 
-function RiftController:onInputBegan(p1) --[[ Line: 81 ]]
+function RiftController:onInputBegan(p1)
 	self:onButtonInputChanged(p1, true)
 end
 
-function RiftController:onInputChanged(_) --[[ Line: 85 ]] end
+function RiftController:onInputChanged(_) end
 
-function RiftController:onInputEnded(p1) --[[ Line: 87 ]]
+function RiftController:onInputEnded(p1)
 	self:onButtonInputChanged(p1, false)
 end
 
-function RiftController:onTouchpadModeChanged(_, _) --[[ Line: 91 ]] end
+function RiftController:onTouchpadModeChanged(_, _) end
 
 return RiftController

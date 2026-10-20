@@ -22,7 +22,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 	logIntervalInSeconds = TModule.optional(TModule.numberPositive)
 })
 
-function BacktraceReporterModule.new(p1) --[[ Line: 42 ]]
+function BacktraceReporterModule.new(p1)
 	-- upvalues: StrictInterfaceResult (copy), IsStudio (copy), BacktraceReporterModule (copy), ErrorQueueModule (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(p1)
 	local Config = nil
@@ -48,7 +48,7 @@ function BacktraceReporterModule.new(p1) --[[ Line: 42 ]]
 	setmetatable(Config, BacktraceReporterModule)
 	
 	if Config._isEnabled then
-		Config._errorQueue = ErrorQueueModule.new(function(...) --[[ Line: 72 ]]
+		Config._errorQueue = ErrorQueueModule.new(function(...)
 			-- upvalues: Config (ref)
 			Config:_reportErrorFromErrorQueue(...)
 		end, p1.queueOptions)
@@ -57,37 +57,37 @@ function BacktraceReporterModule.new(p1) --[[ Line: 42 ]]
 	return Config
 end
 
-function BacktraceReporterModule:isTooOldToReportErrors(): boolean --[[ Line: 85 ]]
+function BacktraceReporterModule:isTooOldToReportErrors(): boolean
 	-- upvalues: RunService (copy), FIntOldestUAVersionToReportErrorsModule (copy)
 	local Number: number? = tonumber(string.match(RunService:GetRobloxVersion(), ".(%d+)."))
 	
 	return Number and Number < FIntOldestUAVersionToReportErrorsModule or false
 end
 
-function BacktraceReporterModule:sendErrorReport(BacktraceReport, Log) --[[ Line: 97 ]]
+function BacktraceReporterModule:sendErrorReport(BacktraceReport, Log)
 	-- upvalues: IsStudio (copy)
 	if not self._isEnabled then return end
 	if self:isTooOldToReportErrors() then return end
 	if IsStudio or _G.__DEV__ then
 		assert(BacktraceReport:validate())
 	end
-	local Success, Result = pcall(function() --[[ Line: 113 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: self (copy), BacktraceReport (copy)
 		return self._httpService:JSONEncode(BacktraceReport)
 	end)
 	
 	if Success then
-		pcall(function() --[[ Line: 122 ]]
+		pcall(function()
 			-- upvalues: self (copy), Result (copy), Log (copy)
 			self._httpService:RequestInternal({
 				Method = "POST",
 				Url = self._reportUrl .. "&format=json",
 				Headers = { ["Content-Type"] = "application/json" },
 				Body = Result
-			}):Start(function(_, p1) --[[ Line: 132 ]]
+			}):Start(function(_, p1)
 				-- upvalues: Log (upval), self (upval)
 				if p1.StatusCode == 200 and Log ~= nil then
-					local Success, Result = pcall(function() --[[ Line: 136 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: self (upval), p1 (copy)
 						return self._httpService:JSONDecode(p1.Body)
 					end)
@@ -105,26 +105,26 @@ function BacktraceReporterModule:sendErrorReport(BacktraceReport, Log) --[[ Line
 	end
 end
 
-function BacktraceReporterModule._sendLogToReport(p1, Rxid, Body) --[[ Line: 148 ]]
+function BacktraceReporterModule._sendLogToReport(p1, Rxid, Body)
 	if type(Body) == "string" and #Body ~= 0 then
-		pcall(function() --[[ Line: 153 ]]
+		pcall(function()
 			-- upvalues: p1 (copy), Rxid (copy), Body (copy)
 			p1._httpService:RequestInternal({
 				Method = "POST",
 				Url = p1._reportUrl .. "&object=" .. Rxid .. "&attachment_name=log.txt",
 				Headers = { ["Content-Type"] = "text/plain" },
 				Body = Body
-			}):Start(function(_, _) --[[ Line: 163 ]] end)
+			}):Start(function(_, _) end)
 		end)
 		
 		return
 	end
 end
 
-function BacktraceReporterModule:_generateLog() --[[ Line: 169 ]]
+function BacktraceReporterModule:_generateLog()
 	if self._generateLogMethod ~= nil and self._logIntervalInSeconds < tick() - self._lastLogTime then
 		self._lastLogTime = tick()
-		local Success, Result = pcall(function() --[[ Line: 173 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: self (copy)
 			return self._generateLogMethod()
 		end)
@@ -136,7 +136,7 @@ function BacktraceReporterModule:_generateLog() --[[ Line: 169 ]]
 	return nil
 end
 
-function BacktraceReporterModule:_generateErrorReport(p1, p2, StackDetails, p3) --[[ Line: 185 ]]
+function BacktraceReporterModule:_generateErrorReport(p1, p2, StackDetails, p3)
 	-- upvalues: BacktraceReportModule (copy), FFlagLuaAppEnableBacktraceSessionInfoModule (copy)
 	local FromDetailsResult = if type(StackDetails) == "table" then BacktraceReportModule.fromDetails(StackDetails) else BacktraceReportModule.fromMessageAndStack(p1, p2)
 	
@@ -152,7 +152,7 @@ function BacktraceReporterModule:_generateErrorReport(p1, p2, StackDetails, p3) 
 	return FromDetailsResult
 end
 
-function BacktraceReporterModule:reportErrorImmediately(p1, p2, StackDetails, p3) --[[ Line: 211 ]]
+function BacktraceReporterModule:reportErrorImmediately(p1, p2, StackDetails, p3)
 	if not self._isEnabled then return end
 	local ErrorReport = self:_generateErrorReport(p1, p2, StackDetails, p3)
 	
@@ -162,7 +162,7 @@ function BacktraceReporterModule:reportErrorImmediately(p1, p2, StackDetails, p3
 	self:sendErrorReport(ErrorReport, (self:_generateLog()))
 end
 
-function BacktraceReporterModule:reportErrorDeferred(p1, p2, StackDetails, p3) --[[ Line: 228 ]]
+function BacktraceReporterModule:reportErrorDeferred(p1, p2, StackDetails, p3)
 	if not self._isEnabled then return end
 	local Formatted = string.format("%s | %s", p1, p2)
 	local t = {}
@@ -178,7 +178,7 @@ function BacktraceReporterModule:reportErrorDeferred(p1, p2, StackDetails, p3) -
 	self._errorQueue:addError(Formatted, t)
 end
 
-function BacktraceReporterModule:_reportErrorFromErrorQueue(_, p1, ErrorCount) --[[ Line: 255 ]]
+function BacktraceReporterModule:_reportErrorFromErrorQueue(_, p1, ErrorCount)
 	local BacktraceReport = p1.backtraceReport
 	local Log = p1.log
 	BacktraceReport:addAttributes({ ErrorCount = ErrorCount })
@@ -187,7 +187,7 @@ end
 
 local IAttributesFunction = BacktraceReportModule.IAttributes
 
-function BacktraceReporterModule:updateSharedAttributes(p1) --[[ Line: 269 ]]
+function BacktraceReporterModule:updateSharedAttributes(p1)
 	-- upvalues: CryoModule (copy), IAttributesFunction (copy), IsStudio (copy)
 	local JoinResult = CryoModule.Dictionary.join(self._sharedAttributes, p1)
 	local IAttributesResult, IAttributesResult2 = IAttributesFunction(JoinResult)
@@ -201,7 +201,7 @@ end
 
 local IAnnotationsFunction = BacktraceReportModule.IAnnotations
 
-function BacktraceReporterModule:updateSharedAnnotations(p1) --[[ Line: 288 ]]
+function BacktraceReporterModule:updateSharedAnnotations(p1)
 	-- upvalues: CryoModule (copy), IAnnotationsFunction (copy), IsStudio (copy)
 	local JoinResult = CryoModule.Dictionary.join(self._sharedAnnotations, p1)
 	local IAnnotationsResult, IAnnotationsResult2 = IAnnotationsFunction(JoinResult)
@@ -213,13 +213,13 @@ function BacktraceReporterModule:updateSharedAnnotations(p1) --[[ Line: 288 ]]
 	self._sharedAnnotations = JoinResult
 end
 
-function BacktraceReporterModule:reportAllErrors() --[[ Line: 305 ]]
+function BacktraceReporterModule:reportAllErrors()
 	if self._errorQueue ~= nil then
 		self._errorQueue:reportAllErrors()
 	end
 end
 
-function BacktraceReporterModule:stop() --[[ Line: 311 ]]
+function BacktraceReporterModule:stop()
 	self._isEnabled = false
 	
 	if self._errorQueue ~= nil then

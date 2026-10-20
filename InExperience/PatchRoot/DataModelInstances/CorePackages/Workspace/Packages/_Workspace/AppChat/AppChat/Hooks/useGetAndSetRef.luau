@@ -1,13 +1,13 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
 
-return function(p1) --[[ Line: 5 | Named "useGetAndSetRef" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy)
 	local UseRefResult = ReactModule.useRef(p1)
 	
-	return ReactModule.useCallback(function() --[[ Line: 7 ]]
+	return ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy)
 		return UseRefResult.current
-	end, {}), (ReactModule.useCallback(function(Callback) --[[ Line: 10 ]]
+	end, {}), (ReactModule.useCallback(function(Callback)
 		-- upvalues: UseRefResult (copy)
 		if typeof(Callback) == "function" then
 			UseRefResult.current = Callback(UseRefResult.current)

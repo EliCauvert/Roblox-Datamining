@@ -13,15 +13,15 @@ local ConstantsModule = require(Parent.Constants)
 local list = { NetworkModule }
 local GetItemDetails = require(Parent.createInspectAndBuyKeyMapper)("getItemDetails")
 
-return function(p1, AvatarItemType) --[[ Line: 25 | Named "GetItemDetails" ]]
+return function(p1, AvatarItemType)
 	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), GetItemDetails (copy), PerformFetch (copy), AssetInfoModule (copy), SetAssetsModule (copy), BundleInfoModule (copy), SetBundlesModule (copy), SendCounterModule (copy), ConstantsModule (copy), GetExperiencePlayabilityModule (copy), GetExperienceInfoModule (copy)
-	return ThunkModule.new(script.Name, list, function(p2, p3) --[[ Line: 26 ]]
+	return ThunkModule.new(script.Name, list, function(p2, p3)
 		-- upvalues: NetworkModule (upval), GetItemDetails (upval), p1 (copy), AvatarItemType (copy), PerformFetch (upval), AssetInfoModule (upval), SetAssetsModule (upval), BundleInfoModule (upval), SetBundlesModule (upval), SendCounterModule (upval), ConstantsModule (upval), GetExperiencePlayabilityModule (upval), GetExperienceInfoModule (upval)
 		local v1 = p3[NetworkModule]
 		
-		return PerformFetch.Single(GetItemDetails(p2:getState().storeId, p1, AvatarItemType), function() --[[ Line: 31 ]]
+		return PerformFetch.Single(GetItemDetails(p2:getState().storeId, p1, AvatarItemType), function()
 			-- upvalues: v1 (copy), p1 (upval), AvatarItemType (upval), AssetInfoModule (upval), p2 (copy), SetAssetsModule (upval), BundleInfoModule (upval), SetBundlesModule (upval), SendCounterModule (upval), ConstantsModule (upval), GetExperiencePlayabilityModule (upval), GetExperienceInfoModule (upval)
-			return v1.getItemDetails(p1, AvatarItemType):andThen(function(Result) --[[ Line: 32 ]]
+			return v1.getItemDetails(p1, AvatarItemType):andThen(function(Result)
 				-- upvalues: AvatarItemType (upval), AssetInfoModule (upval), p2 (upval), SetAssetsModule (upval), BundleInfoModule (upval), SetBundlesModule (upval), SendCounterModule (upval), ConstantsModule (upval), GetExperiencePlayabilityModule (upval), GetExperienceInfoModule (upval)
 				if AvatarItemType == Enum.AvatarItemType.Asset then
 					p2:dispatch(SetAssetsModule({ (AssetInfoModule.fromGetItemDetails(Result)) }))
@@ -35,11 +35,11 @@ return function(p1, AvatarItemType) --[[ Line: 25 | Named "GetItemDetails" ]]
 					p2:dispatch(GetExperienceInfoModule(Result.CreatingUniverseId))
 				end
 				p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetItemDetails .. ConstantsModule.CounterSuffix.RequestSucceeded))
-			end, function(_) --[[ Line: 51 ]]
+			end, function(_)
 				-- upvalues: p2 (upval), SendCounterModule (upval), ConstantsModule (upval)
 				p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetItemDetails .. ConstantsModule.CounterSuffix.RequestRejected))
 			end)
-		end)(p2):catch(function(_) --[[ Line: 56 ]]
+		end)(p2):catch(function(_)
 			-- upvalues: p2 (copy), SendCounterModule (upval), ConstantsModule (upval)
 			p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetItemDetails .. ConstantsModule.CounterSuffix.RequestFailed))
 		end)

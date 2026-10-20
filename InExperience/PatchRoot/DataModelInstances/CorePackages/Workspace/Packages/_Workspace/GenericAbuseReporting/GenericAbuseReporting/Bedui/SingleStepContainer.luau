@@ -8,7 +8,7 @@ local View = FoundationModule.View
 local _ = require(GenericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes)
 local SingleStepInnerContentRendererModule = require(GenericAbuseReporting.Bedui.SingleStepInnerContentRenderer)
 
-return ReactModule.memo(function(p1) --[[ Line: 23 | Named "SingleStepContainer" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Text (copy), SingleStepInnerContentRendererModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	

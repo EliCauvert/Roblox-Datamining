@@ -2,12 +2,12 @@
 local CryoModule = require(CorePackages.Packages.Cryo)
 local ReactModule = require(CorePackages.Packages.React)
 
-return function(p1) --[[ Line: 5 | Named "AudioDeviceInputDebugger" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), CryoModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
 	local Instances = p1.instances
 	local MutedPlayers = p1.mutedPlayers
-	local MapResult = CryoModule.List.map(CryoModule.Dictionary.keys(Instances), function(p2, LayoutOrder) --[[ Line: 15 ]]
+	local MapResult = CryoModule.List.map(CryoModule.Dictionary.keys(Instances), function(p2, LayoutOrder)
 		-- upvalues: MutedPlayers (copy), ReactModule (upval)
 		local Active = p2.Active
 		
@@ -26,7 +26,7 @@ return function(p1) --[[ Line: 5 | Named "AudioDeviceInputDebugger" ]]
 	end)
 	MapResult.Title = ReactModule.createElement("TextButton", {
 		Text = "<b>AudioDeviceInputs</b>",
-		[ReactModule.Event.Activated] = function() --[[ Line: 37 ]]
+		[ReactModule.Event.Activated] = function()
 			-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
 			UseStateResult2(not UseStateResult)
 		end,

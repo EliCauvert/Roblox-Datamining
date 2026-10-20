@@ -34,21 +34,21 @@ local config1 = {
 	SubmissionOutcomeUnknown = "outcomeUnknown"
 }
 
-local function _(p1) --[[ Line: 54 | Named "getSubmissionErrorMessageName" ]]
+local function _(p1)
 	-- upvalues: config1 (copy)
 	return config1[p1] or "submissionFailed"
 end
 
-local _ = function(p1): boolean --[[ Line: 58 | Named "isBlank" ]]
+local _ = function(p1): boolean
 	-- upvalues: NormalizeCommentTextModule (copy)
 	return NormalizeCommentTextModule(p1) == ""
 end
 
-return function(p1) --[[ Line: 62 | Named "useCommentsComposerViewModel" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), config (copy), GetCommentCollectionStoreModule (copy), SignalsReactModule (copy), GetCommentsListCoordinatorModule (copy), config1 (copy), NormalizeCommentTextModule (copy), FIntMomentsCommentMaxLengthModule (copy), TruncateToMaxLengthModule (copy), UseEventCallbackFunction (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState("")
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding("")
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 67 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2 (copy), UseBindingResult2 (copy)
 		UseStateResult2(p2)
 		UseBindingResult2(p2)
@@ -56,14 +56,14 @@ return function(p1) --[[ Line: 62 | Named "useCommentsComposerViewModel" ]]
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
 	local CommentCollectionStoreModule = GetCommentCollectionStoreModule(false)
-	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 74 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: CommentCollectionStoreModule (copy), p1 (copy)
 		return CommentCollectionStoreModule.getState(p1.feedItemId)
 	end, { CommentCollectionStoreModule, p1.feedItemId })))
 	local CommentsListCoordinatorModule = GetCommentsListCoordinatorModule(false)
 	local SubmissionError = UseSignalStateResult.submissionError
 	local IsUnixTimestampMillisBelow = DateTime.now().UnixTimestampMillis < SignalsReactModule.useSignalState(CommentsListCoordinatorModule.getPostCooldownUntilMs)
-	ReactModule.useEffect(function() --[[ Line: 84 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SubmissionError (copy), UseResult (copy), UseStateResult2_1 (copy), config1 (upval), CommentCollectionStoreModule (copy), p1 (copy)
 		if SubmissionError ~= nil then
 			UseResult(SubmissionError.text)
@@ -88,12 +88,12 @@ return function(p1) --[[ Line: 62 | Named "useCommentsComposerViewModel" ]]
 		isInputDisabled = HasPendingSubmission,
 		isSubmitEnabled = Inverted,
 		errorMessage = if RateLimited == nil then nil else UseLocalizationResult[RateLimited],
-		onTextChanged = ReactModule.useCallback(function(p2) --[[ Line: 106 ]]
+		onTextChanged = ReactModule.useCallback(function(p2)
 			-- upvalues: UseResult (copy), FIntMomentsCommentMaxLengthModule (upval), TruncateToMaxLengthModule (upval), UseStateResult2_1 (copy)
 			UseResult(if FIntMomentsCommentMaxLengthModule > 0 then TruncateToMaxLengthModule(p2, FIntMomentsCommentMaxLengthModule) else p2)
 			UseStateResult2_1(nil)
 		end, { UseResult }),
-		onSubmit = UseEventCallbackFunction(function() --[[ Line: 113 ]]
+		onSubmit = UseEventCallbackFunction(function()
 			-- upvalues: Inverted (ref), CommentsListCoordinatorModule (copy), p1 (copy), NormalizeCommentTextModule (upval), UseStateResult (copy), UseResult (copy), UseStateResult2_1 (copy)
 			if not Inverted then return end
 			if CommentsListCoordinatorModule.submitComment(p1.feedItemId, p1.sessionId, NormalizeCommentTextModule(UseStateResult)) then

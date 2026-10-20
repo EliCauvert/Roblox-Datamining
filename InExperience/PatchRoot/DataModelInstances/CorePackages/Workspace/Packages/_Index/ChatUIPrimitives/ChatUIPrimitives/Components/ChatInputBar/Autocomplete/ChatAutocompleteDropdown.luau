@@ -4,30 +4,30 @@ local FoundationModule = require(Parent.Foundation)
 local UseMenuItemCursorModule = require(script.Parent.useMenuItemCursor)
 local ChatAutocompleteMaxVisibleEntries = game:DefineFastInt("ChatAutocompleteMaxVisibleEntries", 3)
 
-return ReactModule.memo(function(p1) --[[ Line: 38 | Named "ChatAutocompleteDropdown" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FoundationModule (copy), UseMenuItemCursorModule (copy), ReactModule (copy), ChatAutocompleteMaxVisibleEntries (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseMenuItemCursorModuleResult = UseMenuItemCursorModule()
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
-	ReactModule.useEffect(function() --[[ Line: 45 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult2 (copy)
 		local Current = p1.anchorRef.current
 		
 		if not Current or not Current:IsA("GuiObject") then return end
 		UseStateResult2(Current.AbsoluteSize.X)
-		local Connection = Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 51 ]]
+		local Connection = Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 			-- upvalues: UseStateResult2 (upval), Current (copy)
 			UseStateResult2(Current.AbsoluteSize.X)
 		end)
 		
-		return function() --[[ Line: 54 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end
 	end, { p1.anchorRef })
 	local XXSmall = UseTokensResult.Padding.XXSmall
-	ReactModule.useEffect(function() --[[ Line: 65 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), p1 (copy), XXSmall (copy)
 		local Current = UseRefResult.current
 		
@@ -79,7 +79,7 @@ return ReactModule.memo(function(p1) --[[ Line: 38 | Named "ChatAutocompleteDrop
 				list = ReactModule.createElement(FoundationModule.View, {
 					tag = "col gap-xxsmall auto-y",
 					Size = UDim2.fromScale(1, 0)
-				}, (ReactModule.useMemo(function() --[[ Line: 83 ]]
+				}, (ReactModule.useMemo(function()
 					-- upvalues: p1 (copy), ReactModule (upval), FoundationModule (upval), UseTokensResult (copy), UseMenuItemCursorModuleResult (copy)
 					local Elements = {}
 					
@@ -106,11 +106,11 @@ return ReactModule.memo(function(p1) --[[ Line: 38 | Named "ChatAutocompleteDrop
 								top = UDim.new(0, 10),
 								bottom = UDim.new(0, 10)
 							},
-							onActivated = function() --[[ Line: 111 ]]
+							onActivated = function()
 								-- upvalues: p1 (upval), LayoutOrder (copy)
 								p1.onSelect(LayoutOrder)
 							end,
-							onStateChanged = function(p2) --[[ Line: 114 ]]
+							onStateChanged = function(p2)
 								-- upvalues: p1 (upval), LayoutOrder (copy)
 								if p2 == "Hover" then
 									p1.onHover(LayoutOrder)

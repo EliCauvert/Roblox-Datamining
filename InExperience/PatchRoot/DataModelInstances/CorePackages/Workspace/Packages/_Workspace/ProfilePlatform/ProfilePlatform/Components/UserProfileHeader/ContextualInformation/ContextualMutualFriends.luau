@@ -9,24 +9,24 @@ local Images = UIBloxModule.App.ImageSet.Images
 local PlayerContext = UIBloxModule.App.Indicator.PlayerContext
 local UserProfilesModule = require(Parent.UserProfiles)
 
-local function truncateSomeNames(Text: string, p1): string --[[ Line: 29 ]]
+local function truncateSomeNames(Text: string, p1): string
 	return if p1.shouldTruncateLongNames and #Text >= 13 then string.format("%s%s", string.sub(Text, 1, 12), "…") else Text
 end
 
-local function getNamesListText(CombinedNameFromIds, p1): string --[[ Line: 36 ]]
+local function getNamesListText(CombinedNameFromIds, p1): string
 	-- upvalues: CryoModule (copy), truncateSomeNames (copy)
 	local List = {}
 	
 	for i = 1, math.min(#CombinedNameFromIds, 3) do
 		table.insert(List, CombinedNameFromIds[i])
 	end
-	return table.concat(CryoModule.List.map(List, function(p2) --[[ Line: 44 ]]
+	return table.concat(CryoModule.List.map(List, function(p2)
 		-- upvalues: truncateSomeNames (upval), p1 (copy)
 		return truncateSomeNames(p2, p1)
 	end), ", ")
 end
 
-local function _(p2: number, p3: number, p4) --[[ Line: 51 | Named "getOthersText" ]]
+local function _(p2: number, p3: number, p4)
 	local OneMutualFriendText = p4.oneMutualFriendText
 	local PluralMutualFriendsText = p4.pluralMutualFriendsText
 	local OneOtherMutualFriendText = p4.oneOtherMutualFriendText
@@ -43,7 +43,7 @@ local function _(p2: number, p3: number, p4) --[[ Line: 51 | Named "getOthersTex
 	end
 end
 
-local _ = function(p5: number, p6, p7, p8): string --[[ Line: 74 | Named "getText" ]]
+local _ = function(p5: number, p6, p7, p8): string
 	-- upvalues: getNamesListText (copy)
 	local NamesListText = getNamesListText(p6, p7)
 	local Smallest = math.min(#p6, 3)
@@ -64,7 +64,7 @@ local _ = function(p5: number, p6, p7, p8): string --[[ Line: 74 | Named "getTex
 	return `{NamesListText} {OneMutualFriendText1}`
 end
 
-return function(p9) --[[ Line: 83 | Named "contextualPresence" ]]
+return function(p9)
 	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), CryoModule (copy), UserProfilesModule (copy), getNamesListText (copy), ReactModule (copy), PlayerContext (copy), Images (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		oneMutualFriendText = TextKeysModule.OneMutualFriend,
@@ -73,7 +73,7 @@ return function(p9) --[[ Line: 83 | Named "contextualPresence" ]]
 		pluralOtherMutualFriendsText = TextKeysModule.PluralOtherMutualFriends
 	})
 	local MutualFriendsCount: number = p9.mutualFriendsCount
-	local MapResult = CryoModule.List.map(p9.mutualFriends, function(p10): string --[[ Line: 93 ]]
+	local MapResult = CryoModule.List.map(p9.mutualFriends, function(p10): string
 		return (tostring(p10))
 	end)
 	local UseUserProfilesFetchResult = UserProfilesModule.Hooks.useUserProfilesFetch({

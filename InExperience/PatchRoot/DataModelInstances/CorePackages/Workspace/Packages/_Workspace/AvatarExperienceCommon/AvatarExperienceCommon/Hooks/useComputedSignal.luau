@@ -2,9 +2,9 @@
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 
-return function(p1, p2) --[[ Line: 13 | Named "useComputedSignal" ]]
+return function(p1, p2)
 	-- upvalues: ReactModule (copy), SignalsModule (copy)
-	return (ReactModule.useMemo(function() --[[ Line: 14 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), p1 (copy), p2 (copy)
 		return SignalsModule.createComputed(p1, p2)
 	end, {}))

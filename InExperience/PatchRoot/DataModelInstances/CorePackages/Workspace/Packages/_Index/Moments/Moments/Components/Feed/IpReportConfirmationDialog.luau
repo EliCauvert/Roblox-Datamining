@@ -12,7 +12,7 @@ local config = {
 	ipReportSubmittedTitle = "Feature.ReportAbuse.Title.SelectInSceneIpReport"
 }
 
-return function(p1) --[[ Line: 33 | Named "IpReportConfirmationDialog" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), Dialog (copy), FoundationModule (copy), View (copy), Text (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	

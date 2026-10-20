@@ -4,7 +4,7 @@ local NewResult = require(Modules.SelfView.Analytics).new()
 local PublicApiModule = require(Modules.SelfView.publicApi)
 local ToggleSelfViewSignalModule = require(Modules.SelfView.toggleSelfViewSignal)
 
-return function() --[[ Line: 9 ]]
+return function()
 	-- upvalues: FaceAnimatorService (copy), NewResult (copy), PublicApiModule (copy), ToggleSelfViewSignalModule (copy)
 	if FaceAnimatorService and FaceAnimatorService:IsStarted() then
 		FaceAnimatorService.VideoAnimationEnabled = not FaceAnimatorService.VideoAnimationEnabled

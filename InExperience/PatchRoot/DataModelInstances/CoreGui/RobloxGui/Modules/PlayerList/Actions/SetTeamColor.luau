@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.ActionCreator)("SetTeamColor", function(Team, TeamColor) --[[ Line: 4 ]]
+﻿return require(script.Parent.Parent.ActionCreator)("SetTeamColor", function(Team, TeamColor)
 	return { isTeamAction = true, team = Team, teamColor = TeamColor }
 end)

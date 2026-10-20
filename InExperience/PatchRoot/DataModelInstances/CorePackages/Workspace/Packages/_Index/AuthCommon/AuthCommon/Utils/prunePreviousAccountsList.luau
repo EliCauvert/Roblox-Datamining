@@ -4,13 +4,13 @@ local CryoModule = require(AuthCommon.Parent.Cryo)
 local DefaultMaxPruneAccounts = game:DefineFastInt("DefaultMaxPruneAccounts", 50)
 local _ = require(AuthCommon.Utils.PreviousAccountEntry)
 
-return function(): boolean --[[ Line: 10 | Named "prunePreviousAccountsList" ]]
+return function(): boolean
 	-- upvalues: AppStorageUtilitiesModule (copy), CryoModule (copy), DefaultMaxPruneAccounts (copy)
 	local ValuesResult = CryoModule.Dictionary.values((AppStorageUtilitiesModule.getPreviousAccountsList()))
-	local FilterResult = CryoModule.List.filter(ValuesResult, function(p1): boolean --[[ Line: 13 ]]
+	local FilterResult = CryoModule.List.filter(ValuesResult, function(p1): boolean
 		return p1.signOutTimestamp == nil
 	end)
-	local FilterResult1 = CryoModule.List.filter(ValuesResult, function(p1): boolean --[[ Line: 16 ]]
+	local FilterResult1 = CryoModule.List.filter(ValuesResult, function(p1): boolean
 		return p1.signOutTimestamp ~= nil
 	end)
 	
@@ -20,7 +20,7 @@ return function(): boolean --[[ Line: 10 | Named "prunePreviousAccountsList" ]]
 	local t = {}
 	local Count = 0
 	
-	for _, value in ipairs((CryoModule.List.sort(FilterResult1, function(p1, p2): boolean --[[ Line: 28 ]]
+	for _, value in ipairs((CryoModule.List.sort(FilterResult1, function(p1, p2): boolean
 		return p2.signOutTimestamp < p1.signOutTimestamp
 	end))) do
 		if DefaultMaxPruneAccounts <= Count then break end

@@ -9,7 +9,7 @@ local LayoutValuesContextModule = require(Parent.Common.LayoutValuesContext)
 local PlayerListIconModule = require(Parent.Common.PlayerListIcon)
 local PlayerRelationshipStoreModule = require(Parent.Common.PlayerRelationshipStore)
 
-return ReactModule.memo(function(p1) --[[ Line: 17 | Named "PlayerBadge" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), LayoutValuesContextModule (copy), UseTokensFunction (copy), SignalsReactModule (copy), PlayerIconInfoStore (copy), PlayerRelationshipStoreModule (copy), GetPlayerBadgeIconModule (copy), PlayerListIconModule (copy)
 	return ReactModule.createElement(PlayerListIconModule, {
 		icon = GetPlayerBadgeIconModule(ReactModule.useContext(LayoutValuesContextModule), p1.player, SignalsReactModule.useSignalState(PlayerIconInfoStore.getPlayerIconInfoReactive(p1.player.UserId)), (SignalsReactModule.useSignalState(PlayerRelationshipStoreModule.getPlayerRelationshipReactive(p1.player.UserId)))),

@@ -6,7 +6,7 @@ local PriceDEPRECATEDModule = require(BulkPurchaseApp.Components.Price_DEPRECATE
 local ItemStatusModule = require(BulkPurchaseApp.Components.ItemStatus)
 
 return {
-	mapItemsToPresentation_DEPRECATED = function(List, FontStyle, ColorStyle) --[[ Line: 10 ]]
+	mapItemsToPresentation_DEPRECATED = function(List, FontStyle, ColorStyle)
 		-- upvalues: ReactModule (copy), PriceDEPRECATEDModule (copy)
 		local List1 = {}
 		
@@ -24,7 +24,7 @@ return {
 		end
 		return List1
 	end,
-	mapOwnedItemsToPresentation_DEPRECATED = function(List, FontStyle, ColorStyle, p1) --[[ Line: 26 ]]
+	mapOwnedItemsToPresentation_DEPRECATED = function(List, FontStyle, ColorStyle, p1)
 		-- upvalues: ReactModule (copy), StyledTextLabel (copy)
 		local List1 = {}
 		
@@ -46,7 +46,7 @@ return {
 		end
 		return List1
 	end,
-	mapUnpurchasableItemsToPresentation_DEPRECATED = function(List) --[[ Line: 47 ]]
+	mapUnpurchasableItemsToPresentation_DEPRECATED = function(List)
 		-- upvalues: ReactModule (copy), ItemStatusModule (copy)
 		local List1 = {}
 		

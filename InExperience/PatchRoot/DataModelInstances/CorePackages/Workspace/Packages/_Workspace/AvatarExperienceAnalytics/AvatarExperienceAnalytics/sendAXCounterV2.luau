@@ -7,7 +7,7 @@ local DashModule = require(Parent.Dash)
 local IsSpatialFunction = require(Parent.AppCommonLib).isSpatial
 local FFlagAXUnifiedEventCounters = require(Parent.AvatarExperienceFlags).FFlagAXUnifiedEventCounters
 
-local function getAXCounterV2Metadata(p1) --[[ Line: 18 ]]
+local function getAXCounterV2Metadata(p1)
 	-- upvalues: UserInputService (copy), IsSpatialFunction (copy), RunService (copy), HttpService (copy), DashModule (copy)
 	local AssignResult = {
 		AppVersion = RunService:GetRobloxVersion(),
@@ -22,7 +22,7 @@ local function getAXCounterV2Metadata(p1) --[[ Line: 18 ]]
 	return AssignResult
 end
 
-return function(Text, p1, p2) --[[ Line: 38 | Named "sendAXCounterV2" ]]
+return function(Text, p1, p2)
 	-- upvalues: Default (copy), getAXCounterV2Metadata (copy), FFlagAXUnifiedEventCounters (copy)
 	Default:logRobloxTelemetryCounter({
 		description = "Counter to track various Avatar Experience events.",

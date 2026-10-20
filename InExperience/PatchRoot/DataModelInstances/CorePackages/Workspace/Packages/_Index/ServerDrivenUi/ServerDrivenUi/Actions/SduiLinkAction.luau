@@ -11,12 +11,12 @@ local SduiCounterName = SduiCoreSystemModule.SduiErrors.SduiCounterName
 local OpenSduiWebLinkModule = require(ServerDrivenUi.Actions.openSduiWebLink)
 local FFlagSduiLinkActionSharedWebLink = require(Parent.SharedFlags).FFlagSduiLinkActionSharedWebLink
 
-local function _() --[[ Line: 25 | Named "isWebViewSupported" ]]
+local function _()
 	-- upvalues: GetAppFeaturePoliciesFunction (copy)
 	return GetAppFeaturePoliciesFunction().getWebViewSupport()
 end
 
-return function(p1, _, p2) --[[ Line: 29 ]]
+return function(p1, _, p2)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), FFlagSduiLinkActionSharedWebLink (copy), OpenSduiWebLinkModule (copy), UrlBuilder (copy), DeepLinkSource (copy), GetAppFeaturePoliciesFunction (copy), AppPage (copy), SduiCounterName (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	
@@ -46,7 +46,7 @@ return function(p1, _, p2) --[[ Line: 29 ]]
 		
 		return
 	end
-	local Success, Result = pcall(function() --[[ Line: 62 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: UrlBuilder (upval), Url (copy)
 		return UrlBuilder.fromString(if string.find(Url, "/") == 1 then Url:gsub("/", "www:", 1) else Url)()
 	end)
@@ -62,9 +62,9 @@ return function(p1, _, p2) --[[ Line: 29 ]]
 		}, p2.appPage)
 	end
 	local LinkingProtocol = p2.dependencies.linkingProtocol
-	local Success1, Result1 = pcall(function() --[[ Line: 77 ]]
+	local Success1, Result1 = pcall(function()
 		-- upvalues: LinkingProtocol (copy), Detail (ref), DeepLinkSource (upval), GetAppFeaturePoliciesFunction (upval), p2 (copy), TitleKey (copy), ActionParams (copy), AppPage (upval), SduiCounterName (upval)
-		LinkingProtocol:isURLRegistered(Detail):andThen(function(Result) --[[ Line: 78 ]]
+		LinkingProtocol:isURLRegistered(Detail):andThen(function(Result)
 			-- upvalues: LinkingProtocol (upval), Detail (upval), DeepLinkSource (upval), GetAppFeaturePoliciesFunction (upval), p2 (upval), TitleKey (upval), ActionParams (upval), AppPage (upval), SduiCounterName (upval)
 			if not Result then
 				if not GetAppFeaturePoliciesFunction().getWebViewSupport() then
@@ -77,7 +77,7 @@ return function(p1, _, p2) --[[ Line: 29 ]]
 				local OnWebviewCloseFunction = ActionParams.onWebviewClose
 				
 				if OnWebviewCloseFunction then
-					function ExtraProps.onClose() --[[ Line: 91 ]]
+					function ExtraProps.onClose()
 						-- upvalues: OnWebviewCloseFunction (copy)
 						OnWebviewCloseFunction()
 					end

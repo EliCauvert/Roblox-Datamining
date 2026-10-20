@@ -9,7 +9,7 @@ local _ = require(Parent.Enums.UnifiedPurchaseModalTypeEnum)
 local FFlagUnifiedPurchaseAddSkeleton = require(Parent.Parent.SharedFlags).FFlagUnifiedPurchaseAddSkeleton
 local FFlagLuaAppsEnablePromptVIPServerPurchase = require(Parent.Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 
-return function(p1) --[[ Line: 32 | Named "CartPricingProductDetails" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), CartPricingLoadingModule (copy), View (copy), ProductDetailsContainerModule (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), FFlagUnifiedPurchaseAddSkeleton (copy)
 	local CartPricing = p1.cartPricing
 	

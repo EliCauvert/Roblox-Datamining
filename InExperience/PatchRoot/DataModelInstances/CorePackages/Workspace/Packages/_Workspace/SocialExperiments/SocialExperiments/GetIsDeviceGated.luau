@@ -4,14 +4,14 @@ local _ = require(SocialExperiments.DeviceGateFeature)
 local t = {}
 local t1 = {}
 
-return function(p1) --[[ Line: 18 ]]
+return function(p1)
 	-- upvalues: t (copy), t1 (copy), SystemInfoProtocol (copy)
 	if t[p1.featureName] == nil then
 		t[p1.featureName] = p1.enabled
 	end
 	if t[p1.featureName] then
 		if t1[p1.featureName] == nil then
-			local _, _ = pcall(function() --[[ Line: 25 ]]
+			local _, _ = pcall(function()
 				-- upvalues: SystemInfoProtocol (upval), p1 (copy), t1 (upval)
 				local SystemInfo = SystemInfoProtocol.default:getSystemInfo({
 					SystemInfoProtocol.InfoNames.DEVICE_NAME,

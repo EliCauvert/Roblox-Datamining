@@ -4,10 +4,10 @@ local NewResult = require(Parent.RealtimeDelivery).RobloxEventReceiver.new((game
 local GetLocalPlayerUserIdFunction = require(Parent.DataHydration).DataHydrationUtils.getLocalPlayerUserId
 local ConstantsModule = require(script.Parent.Constants)
 
-return function(Callback) --[[ Line: 24 | Named "createProfileCTAEventListener" ]]
+return function(Callback)
 	-- upvalues: GetLocalPlayerUserIdFunction (copy), Players (copy), NewResult (copy), ConstantsModule (copy)
 	local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
-	local Connection = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function() --[[ Line: 27 ]]
+	local Connection = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
 		-- upvalues: GetLocalPlayerUserIdFunction (upval), LocalPlayerUserId (ref)
 		local LocalPlayerUserId1 = GetLocalPlayerUserIdFunction()
 		
@@ -15,7 +15,7 @@ return function(Callback) --[[ Line: 24 | Named "createProfileCTAEventListener" 
 			LocalPlayerUserId = LocalPlayerUserId1
 		end
 	end)
-	local ObserveEventResult = NewResult:observeEvent(ConstantsModule.FRIENDSHIP_NOTIFICATIONS, function(p1) --[[ Line: 36 ]]
+	local ObserveEventResult = NewResult:observeEvent(ConstantsModule.FRIENDSHIP_NOTIFICATIONS, function(p1)
 		-- upvalues: LocalPlayerUserId (ref), Callback (copy)
 		if p1.EventArgs and p1.EventArgs.UserId1 and p1.EventArgs.UserId2 then
 			Callback(if tostring(LocalPlayerUserId) == tostring(p1.EventArgs.UserId1) then tostring(p1.EventArgs.UserId2) else tostring(p1.EventArgs.UserId1))
@@ -23,7 +23,7 @@ return function(Callback) --[[ Line: 24 | Named "createProfileCTAEventListener" 
 			return
 		end
 	end)
-	local ObserveEventResult1 = NewResult:observeEvent(ConstantsModule.PRESENCE_BULK_NOTIFICATIONS, function(List) --[[ Line: 50 ]]
+	local ObserveEventResult1 = NewResult:observeEvent(ConstantsModule.PRESENCE_BULK_NOTIFICATIONS, function(List)
 		-- upvalues: Callback (copy)
 		if not List or type(List) ~= "table" then return end
 		for _, Player in ipairs(List) do
@@ -33,7 +33,7 @@ return function(Callback) --[[ Line: 24 | Named "createProfileCTAEventListener" 
 		end
 	end)
 	
-	return function() --[[ Line: 63 ]]
+	return function()
 		-- upvalues: Connection (ref), ObserveEventResult (ref), ObserveEventResult1 (ref)
 		if Connection then
 			Connection:Disconnect()

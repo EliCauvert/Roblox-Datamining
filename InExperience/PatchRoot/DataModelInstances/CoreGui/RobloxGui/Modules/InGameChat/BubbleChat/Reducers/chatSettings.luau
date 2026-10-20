@@ -2,7 +2,7 @@
 local _ = require(CorePackages.Packages.Cryo)
 local ChatSettingsModule = require(script.Parent.Parent.ChatSettings)
 
-local function deepCopy(ChatSettingsModule) --[[ Line: 9 ]]
+local function deepCopy(ChatSettingsModule)
 	-- upvalues: deepCopy (copy)
 	if type(ChatSettingsModule) ~= "table" then
 		return ChatSettingsModule
@@ -15,7 +15,7 @@ local function deepCopy(ChatSettingsModule) --[[ Line: 9 ]]
 	return t
 end
 
-local function mergeInto(p1, Settings) --[[ Line: 22 ]]
+local function mergeInto(p1, Settings)
 	-- upvalues: mergeInto (copy)
 	for i, setting in pairs(Settings) do
 		if type(setting) ~= "table" then
@@ -27,7 +27,7 @@ local function mergeInto(p1, Settings) --[[ Line: 22 ]]
 end
 
 return (require(CorePackages.Packages.Rodux).createReducer(ChatSettingsModule, {
-	[require(script.Parent.Parent.Actions.UpdateChatSettings).name] = function(_, p2) --[[ Line: 33 ]]
+	[require(script.Parent.Parent.Actions.UpdateChatSettings).name] = function(_, p2)
 		-- upvalues: deepCopy (copy), ChatSettingsModule (copy), mergeInto (copy)
 		local DeepCopyResult = deepCopy(ChatSettingsModule)
 		mergeInto(DeepCopyResult, p2.settings)

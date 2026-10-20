@@ -6,9 +6,9 @@ local _ = require(Foundation.Components.Types)
 local BaseMenuGroupModule = require(script.Parent.BaseMenuGroup)
 local BaseMenuItemModule = require(script.Parent.BaseMenuItem)
 
-local function DeclarativeBaseMenuContent(p1) --[[ Line: 42 ]]
+local function DeclarativeBaseMenuContent(p1)
 	-- upvalues: ReactModule (copy), DashModule (copy), BaseMenuGroupModule (copy), BaseMenuItemModule (copy), DeclarativeBaseMenuContent (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 43 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: DashModule (upval), p1 (copy)
 		local GetResult = DashModule.get(p1.items, { 1, "id" })
 		
@@ -30,7 +30,7 @@ local function DeclarativeBaseMenuContent(p1) --[[ Line: 42 ]]
 		end
 		t[i] = Flag
 	end
-	return ReactModule.createElement(ReactModule.Fragment, nil, DashModule.map(UseMemoResult, function(p2, Key) --[[ Line: 73 ]]
+	return ReactModule.createElement(ReactModule.Fragment, nil, DashModule.map(UseMemoResult, function(p2, Key)
 		-- upvalues: t (copy), ReactModule (upval), BaseMenuGroupModule (upval), MenuHasCheck (ref), DashModule (upval), BaseMenuItemModule (upval), DeclarativeBaseMenuContent (upval)
 		local Entry = t[Key]
 		
@@ -40,7 +40,7 @@ local function DeclarativeBaseMenuContent(p1) --[[ Line: 42 ]]
 			title = p2.title,
 			menuHasLeading = Entry,
 			menuHasCheck = MenuHasCheck
-		}, DashModule.map(p2.items, function(p3, LayoutOrder) --[[ Line: 84 ]]
+		}, DashModule.map(p2.items, function(p3, LayoutOrder)
 			-- upvalues: ReactModule (upval), BaseMenuItemModule (upval), Entry (copy), MenuHasCheck (upval), DeclarativeBaseMenuContent (upval)
 			return ReactModule.createElement(BaseMenuItemModule, {
 				LayoutOrder = LayoutOrder,

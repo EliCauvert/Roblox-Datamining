@@ -1,10 +1,10 @@
 ﻿local GameModule = {
-	new = function() --[[ Line: 16 ]]
+	new = function()
 		return {}
 	end
 }
 
-function GameModule.fromGameCache(p1) --[[ Line: 21 ]]
+function GameModule.fromGameCache(p1)
 	-- upvalues: GameModule (copy)
 	local NewGame = GameModule.new()
 	NewGame.universeId = p1.UniverseId
@@ -18,7 +18,7 @@ function GameModule.fromGameCache(p1) --[[ Line: 21 ]]
 	return NewGame
 end
 
-function GameModule.fromJsonData(p1) --[[ Line: 33 ]]
+function GameModule.fromJsonData(p1)
 	-- upvalues: GameModule (copy)
 	local NewGame = GameModule.new()
 	NewGame.universeId = p1.universeId

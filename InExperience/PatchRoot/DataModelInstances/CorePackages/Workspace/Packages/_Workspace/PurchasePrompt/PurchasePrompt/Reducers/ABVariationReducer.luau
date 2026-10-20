@@ -3,7 +3,7 @@ local PurchasePromptDepsModule = require(PurchasePrompt.Parent.PurchasePromptDep
 local Cryo = PurchasePromptDepsModule.Cryo
 
 return (PurchasePromptDepsModule.Rodux.createReducer({}, {
-	[require(PurchasePrompt.Actions.SetABVariation).name] = function(p1, p2) --[[ Line: 10 ]]
+	[require(PurchasePrompt.Actions.SetABVariation).name] = function(p1, p2)
 		-- upvalues: Cryo (copy)
 		assert(type(p2.key) == "string", "Expected 'key' to be a string")
 		assert(type(p2.variation) == "string", "Expected 'variation' to be a string")

@@ -5,7 +5,7 @@ local ReactModule = require(Parent.React)
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 
-function SquadOverlay() --[[ Line: 17 ]]
+function SquadOverlay()
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), UseSelectorFunction (copy), SquadPromptModule (copy), CryoModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
@@ -15,7 +15,7 @@ function SquadOverlay() --[[ Line: 17 ]]
 		IgnoreGuiInset = true,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
 		DisplayOrder = 12,
-		[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 30 ]]
+		[ReactModule.Change.AbsoluteSize] = function(Frame)
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(Frame.AbsoluteSize)
 		end
@@ -28,7 +28,7 @@ function SquadOverlay() --[[ Line: 17 ]]
 			BackgroundTransparency = UseTokensResult.Color.Extended.Black.Black_70.Transparency,
 			Size = UDim2.new(1, 0, 1, 0)
 		}),
-		SquadPrompt = ReactModule.createElement(SquadPromptModule, CryoModule.Dictionary.join(UseSelectorFunction(function(p1) --[[ Line: 21 ]]
+		SquadPrompt = ReactModule.createElement(SquadPromptModule, CryoModule.Dictionary.join(UseSelectorFunction(function(p1)
 			return p1.Squad.SquadPrompt.arguments
 		end), { screenSize = UseStateResult }))
 	})

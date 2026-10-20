@@ -7,14 +7,14 @@ local SelectorsModule = require(script.Selectors)
 
 return {
 	["jest.config"] = script["jest.config"],
-	config = function(p1) --[[ Line: 11 ]]
+	config = function(p1)
 		-- upvalues: DashModule (copy), NetworkingContacts (copy), RoduxNetworking (copy), ContactsReducerModule (copy), SelectorsModule (copy)
 		local JoinResult = DashModule.join(p1, {
 			networkingContacts = NetworkingContacts.config({ roduxNetworking = RoduxNetworking.mock() })
 		})
 		
 		return {
-			installReducer = function() --[[ Line: 19 ]]
+			installReducer = function()
 				-- upvalues: ContactsReducerModule (upval), JoinResult (ref)
 				return ContactsReducerModule(JoinResult)
 			end,

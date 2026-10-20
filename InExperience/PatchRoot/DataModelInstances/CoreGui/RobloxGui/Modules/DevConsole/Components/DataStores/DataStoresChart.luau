@@ -18,24 +18,24 @@ local NoResultSearchStr = ConstantsModule.GeneralFormatting.NoResultSearchStr
 local ConvertTimeStampModule = require(script.Parent.Parent.Parent.Util.convertTimeStamp)
 local DataStoresChart = RoactModule.Component:extend("DataStoresChart")
 
-local function getX(p1) --[[ Line: 30 ]]
+local function getX(p1)
 	return p1.time
 end
 
-local function getY(p1) --[[ Line: 34 ]]
+local function getY(p1)
 	return p1.value
 end
 
-local function stringFormatY(Value: number): number --[[ Line: 38 ]]
+local function stringFormatY(Value: number): number
 	return (math.ceil(Value))
 end
 
-function DataStoresChart.init(p1, p2) --[[ Line: 42 ]]
+function DataStoresChart.init(p1, p2)
 	local CurrentData, CurrentData2 = p2.DataStoresData:getCurrentData()
 	
-	function p1.getOnButtonPress(ExpandedEntry) --[[ Line: 45 ]]
+	function p1.getOnButtonPress(ExpandedEntry)
 		-- upvalues: p1 (copy)
-		return function(_, _) --[[ Line: 46 ]]
+		return function(_, _)
 			-- upvalues: p1 (upval), ExpandedEntry (copy)
 			p1:setState({
 				expandedEntry = p1.state.expandedEntry ~= ExpandedEntry and ExpandedEntry
@@ -50,8 +50,8 @@ function DataStoresChart.init(p1, p2) --[[ Line: 42 ]]
 	}
 end
 
-function DataStoresChart.didMount(p1) --[[ Line: 60 ]]
-	p1.statsConnector = p1.props.DataStoresData:Signal():Connect(function(DataStoresData, DataStoresDataCount) --[[ Line: 61 ]]
+function DataStoresChart.didMount(p1)
+	p1.statsConnector = p1.props.DataStoresData:Signal():Connect(function(DataStoresData, DataStoresDataCount)
 		-- upvalues: p1 (copy)
 		p1:setState({
 			dataStoresData = DataStoresData,
@@ -60,12 +60,12 @@ function DataStoresChart.didMount(p1) --[[ Line: 60 ]]
 	end)
 end
 
-function DataStoresChart.willUnmount(p1) --[[ Line: 69 ]]
+function DataStoresChart.willUnmount(p1)
 	p1.statsConnector:Disconnect()
 	p1.statsConnector = nil
 end
 
-function DataStoresChart.render(p1) --[[ Line: 74 ]]
+function DataStoresChart.render(p1)
 	-- upvalues: RoactModule (copy), HeaderFrameHeight (copy), EntryFrameHeight (copy), LineGraphHeight (copy), BannerButtonModule (copy), CellLabelModule (copy), ValueCellWidth (copy), CellPadding (copy), ExpandArrowPadding (copy), LineWidth (copy), LineColor (copy), LineGraphModule (copy), getX (copy), getY (copy), ConvertTimeStampModule (copy), stringFormatY (copy), ConstantsModule (copy), NoResultSearchStr (copy), ChartHeaderNames (copy)
 	local SearchTerm: string = p1.props.searchTerm
 	local Size = p1.props.size

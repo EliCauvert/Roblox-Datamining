@@ -1,7 +1,7 @@
 ﻿local GuiService = game:GetService("GuiService")
 local ReactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
 
-local function getHardwareSafeAreaInsets() --[[ Line: 9 ]]
+local function getHardwareSafeAreaInsets()
 	-- upvalues: GuiService (copy)
 	local InsetArea = GuiService:GetInsetArea(Enum.ScreenInsets.DeviceSafeInsets)
 	local InsetArea1 = GuiService:GetInsetArea(Enum.ScreenInsets.None)
@@ -14,14 +14,14 @@ local function getHardwareSafeAreaInsets() --[[ Line: 9 ]]
 	}
 end
 
-return function(Object) --[[ Line: 21 | Named "useHardwareInsets" ]]
+return function(Object)
 	-- upvalues: ReactModule (copy), getHardwareSafeAreaInsets (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(getHardwareSafeAreaInsets)
-	ReactModule.useEffect(function() --[[ Line: 24 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Object (copy), UseStateResult2 (copy), getHardwareSafeAreaInsets (upval)
-		local Connection = if Object then Object:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 28 ]]
+		local Connection = if Object then Object:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 			-- upvalues: UseStateResult2 (upval), getHardwareSafeAreaInsets (upval)
-			UseStateResult2(function(HardwareSafeAreaInsets) --[[ Line: 29 ]]
+			UseStateResult2(function(HardwareSafeAreaInsets)
 				-- upvalues: getHardwareSafeAreaInsets (upval)
 				local HardwareSafeAreaInsets1 = getHardwareSafeAreaInsets()
 				
@@ -29,7 +29,7 @@ return function(Object) --[[ Line: 21 | Named "useHardwareInsets" ]]
 			end)
 		end) else nil
 		
-		return function() --[[ Line: 45 ]]
+		return function()
 			-- upvalues: Connection (ref)
 			if Connection then
 				Connection:Disconnect()

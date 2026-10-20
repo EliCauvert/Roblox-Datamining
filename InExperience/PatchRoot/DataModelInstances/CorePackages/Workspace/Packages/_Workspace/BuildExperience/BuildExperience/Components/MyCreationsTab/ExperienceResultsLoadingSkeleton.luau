@@ -6,7 +6,7 @@ local View = FoundationModule.View
 local Radius = FoundationModule.Enums.Radius
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(Frame) --[[ Line: 19 | Named "ExperienceResultsLoadingSkeleton" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy)
 	local UseTokensResult = UseTokensFunction()
 	

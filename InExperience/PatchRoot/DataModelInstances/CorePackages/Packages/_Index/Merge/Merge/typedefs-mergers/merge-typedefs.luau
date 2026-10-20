@@ -26,7 +26,7 @@ local ResetCommentsFunction = UtilsModule1.resetComments
 local PrintWithCommentsFunction = UtilsModule1.printWithComments
 local DEFAULTOPERATIONTYPENAMEMAP = require(script.Parent["schema-def"]).DEFAULT_OPERATION_TYPE_NAME_MAP
 
-local function visitTypeSources(Callback, p1, p2, NewResult) --[[ Line: 188 ]]
+local function visitTypeSources(Callback, p1, p2, NewResult)
 	-- upvalues: Set (copy), Boolean (copy), visitTypeSources (copy), Array (copy), IsSchemaFunction (copy), GetDocumentNodeFromSchemaFunction (copy), IsStringTypesFunction (copy), IsSourceTypesFunction (copy), ParseFunction (copy), IsDefinitionNodeFunction (copy), IsDocumentNodeFunction (copy), Error1 (copy)
 	local T = if p2 == nil then {} else p2
 	local NewSet = if NewResult == nil then Set.new() else NewResult
@@ -74,7 +74,7 @@ local function visitTypeSources(Callback, p1, p2, NewResult) --[[ Line: 188 ]]
 	return T
 end
 
-Callback = function(p3, AssignResult) --[[ Line: 262 | Named "mergeGraphQLTypes" ]]
+Callback = function(p3, AssignResult)
 	-- upvalues: ResetCommentsFunction (copy), visitTypeSources (copy), MergeGraphQLNodesFunction (copy), Boolean (copy), SchemaDefSymbol (copy), Kind (copy), DEFAULTOPERATIONTYPENAMEMAP (copy), Array (copy), DefaultStringComparator (copy)
 	ResetCommentsFunction()
 	local MergeGraphQLNodesResult = MergeGraphQLNodesFunction(visitTypeSources(p3, AssignResult), AssignResult)
@@ -84,7 +84,7 @@ Callback = function(p3, AssignResult) --[[ Line: 262 | Named "mergeGraphQLTypes"
 		local OperationTypes = GetResult.operationTypes
 		
 		for Operation in DEFAULTOPERATIONTYPENAMEMAP do
-			local JSBoolean = Boolean.toJSBoolean((Array.find(OperationTypes, function(p4): boolean --[[ Line: 288 ]]
+			local JSBoolean = Boolean.toJSBoolean((Array.find(OperationTypes, function(p4): boolean
 				-- upvalues: Operation (copy)
 				return p4.operation == Operation
 			end)))
@@ -125,7 +125,7 @@ Callback = function(p3, AssignResult) --[[ Line: 262 | Named "mergeGraphQLTypes"
 	
 	if AssignResult and Boolean.toJSBoolean(AssignResult.sort) then
 		local Sort = if typeof(AssignResult.sort) == "function" then AssignResult.sort else DefaultStringComparator
-		Array.sort(ValuesResult, function(p4, p5) --[[ Line: 392 ]]
+		Array.sort(ValuesResult, function(p4, p5)
 			-- upvalues: Sort (copy)
 			return Sort(if typeof(p4.name) == "table" then p4.name.value else nil, if typeof(p5.name) == "table" then p5.name.value else nil)
 		end)
@@ -134,7 +134,7 @@ Callback = function(p3, AssignResult) --[[ Line: 262 | Named "mergeGraphQLTypes"
 end
 
 return {
-	mergeTypeDefs = function(p4, p5) --[[ Line: 159 ]]
+	mergeTypeDefs = function(p4, p5)
 		-- upvalues: ResetCommentsFunction (copy), Kind (copy), Callback (ref), Object (copy), PrintWithCommentsFunction (copy)
 		ResetCommentsFunction()
 		local config = {

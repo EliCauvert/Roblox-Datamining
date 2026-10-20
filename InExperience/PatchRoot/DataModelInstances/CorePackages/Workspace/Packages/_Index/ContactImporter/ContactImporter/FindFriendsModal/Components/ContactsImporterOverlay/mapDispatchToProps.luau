@@ -9,21 +9,21 @@ local FFlagSignalsNavP3Dispatch = require(Parent1.SharedFlags).FFlagSignalsNavP3
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent1.RobloxAppNavigation).NavigationCommands else nil
 local ToastRoduxModule = require(Parent1.ToastRodux)
 
-return function(Callback) --[[ Line: 19 ]]
+return function(Callback)
 	-- upvalues: UpdateContactImporterModalLogicFunction (copy), NetworkingUserSettings (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), ToastRoduxModule (copy)
 	return {
-		hideContactImporterModal = function() --[[ Line: 21 ]]
+		hideContactImporterModal = function()
 			-- upvalues: Callback (copy), UpdateContactImporterModalLogicFunction (upval)
 			return Callback(UpdateContactImporterModalLogicFunction({
 				hasOSPermissions = true,
 				shouldShowContactImporterUpsellModal = false
 			}))
 		end,
-		getUserSettingsMetadata = function() --[[ Line: 27 ]]
+		getUserSettingsMetadata = function()
 			-- upvalues: Callback (copy), NetworkingUserSettings (upval)
 			return Callback(NetworkingUserSettings.GetUserSettingsMetadata.API())
 		end,
-		openLearnMoreLink = function() --[[ Line: 30 ]]
+		openLearnMoreLink = function()
 			-- upvalues: AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), Callback (copy), NavigateDownFunction (upval)
 			local config = {
 				detail = "https://en.help.roblox.com/hc/articles/7416652004884",
@@ -39,7 +39,7 @@ return function(Callback) --[[ Line: 19 ]]
 				Callback(NavigateDownFunction(config, nil))
 			end
 		end,
-		showToast = function(ToastMessage) --[[ Line: 44 ]]
+		showToast = function(ToastMessage)
 			-- upvalues: Callback (copy), ToastRoduxModule (upval)
 			Callback(ToastRoduxModule.Actions.SetCurrentToastMessage({ toastMessage = ToastMessage }))
 		end

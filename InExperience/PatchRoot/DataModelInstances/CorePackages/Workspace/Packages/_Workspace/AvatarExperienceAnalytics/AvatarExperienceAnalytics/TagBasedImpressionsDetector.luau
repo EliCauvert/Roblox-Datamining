@@ -18,11 +18,11 @@ local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXItemDetailsIxpExposure = AvatarExperienceFlagsModule.FFlagAXItemDetailsIxpExposure
 local FFlagAXUnifiedImpressionsOnThumbnail = AvatarExperienceFlagsModule.FFlagAXUnifiedImpressionsOnThumbnail
 
-local function AnalyticsMetadataSelector(p1) --[[ Line: 36 ]]
+local function AnalyticsMetadataSelector(p1)
 	return p1.AvatarExperience.AnalyticsMetadata
 end
 
-local function getImpressionDedupKey(Object) --[[ Line: 40 ]]
+local function getImpressionDedupKey(Object)
 	-- upvalues: UnifiedEventLogConstantsModule (copy)
 	local ATTRIBUTEPREFIX = UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX
 	local Attribute = Object:GetAttribute(ATTRIBUTEPREFIX .. "widgetId")
@@ -31,7 +31,7 @@ local function getImpressionDedupKey(Object) --[[ Line: 40 ]]
 	return if Attribute1 == nil then if Attribute == nil then Object:GetFullName() else "widget|" .. tostring(Attribute) else string.format("item|%s|%s|%s|%s|%s", tostring(Attribute), tostring(Attribute1), tostring(Object:GetAttribute(ATTRIBUTEPREFIX .. "gridPositionRow")), tostring(Object:GetAttribute(ATTRIBUTEPREFIX .. "gridPositionColumn")), (tostring(Object:GetAttribute(ATTRIBUTEPREFIX .. "itemPosition"))))
 end
 
-return function(p1) --[[ Line: 59 ]]
+return function(p1)
 	-- upvalues: FFlagAXItemDetailsIxpExposure (copy), UseAvatarRouteFunction (copy), UseSelectorSignalFunction (copy), SelectSearchKeyword (copy), AnalyticsMetadataSelector (copy), ReactModule (copy), FFlagAXUnifiedImpressionsOnThumbnail (copy), UnifiedEventLogConstantsModule (copy), SeenImpressionsStoreModule (copy), UnifiedImpressions (copy), getImpressionDedupKey (copy), AvatarScreenProperties (copy), SendUnifiedEventLogForInstanceModule (copy), CryoModule (copy), UnifiedEventLogEnumsModule (copy), CollectionService (copy), AvatarExperienceScreenSizeImpressionsDetectorModule (copy)
 	local v1 = nil
 	local Callback1 = nil
@@ -44,11 +44,11 @@ return function(p1) --[[ Line: 59 ]]
 	end
 	local UseRefResult = ReactModule.useRef({})
 	local UseRefResult1 = if FFlagAXItemDetailsIxpExposure then ReactModule.useRef({}) else nil
-	local UseResult = ReactModule.useCallback(function(Object): boolean --[[ Line: 75 ]]
+	local UseResult = ReactModule.useCallback(function(Object): boolean
 		-- upvalues: FFlagAXUnifiedImpressionsOnThumbnail (upval), UnifiedEventLogConstantsModule (upval), SeenImpressionsStoreModule (upval), UnifiedImpressions (upval), getImpressionDedupKey (upval), UseRefResult (copy)
 		return if FFlagAXUnifiedImpressionsOnThumbnail then not Object:GetAttribute(UnifiedEventLogConstantsModule.SKIP_IMPRESSION_DETECTION) and not SeenImpressionsStoreModule.hasSeen(UnifiedImpressions, getImpressionDedupKey(Object)) else not UseRefResult.current[Object:GetFullName()]
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(List) --[[ Line: 86 ]]
+	local UseResult1 = ReactModule.useCallback(function(List)
 		-- upvalues: FFlagAXUnifiedImpressionsOnThumbnail (upval), SeenImpressionsStoreModule (upval), UnifiedImpressions (upval), getImpressionDedupKey (upval), UseRefResult (copy), FFlagAXItemDetailsIxpExposure (upval), UseRefResult1 (ref), AvatarScreenProperties (upval), v1 (ref), SendUnifiedEventLogForInstanceModule (upval), CryoModule (upval), Callback (ref), UnifiedEventLogEnumsModule (upval), Callback1 (ref), p1 (copy)
 		local VisibleInstances = {}
 		
@@ -60,7 +60,7 @@ return function(p1) --[[ Line: 59 ]]
 					VisibleInstances[FullName] = value
 					
 					if not FFlagAXUnifiedImpressionsOnThumbnail and not UseRefResult1.current[FullName] then
-						UseRefResult1.current[FullName] = value.AncestryChanged:Connect(function() --[[ Line: 106 ]]
+						UseRefResult1.current[FullName] = value.AncestryChanged:Connect(function()
 							-- upvalues: value (copy), UseRefResult (upval), FullName (copy), UseRefResult1 (upval)
 							if not value.Parent then
 								UseRefResult.current[FullName] = nil
@@ -100,9 +100,9 @@ return function(p1) --[[ Line: 59 ]]
 	end, if FFlagAXItemDetailsIxpExposure then { p1.extensions } else { v1, Callback1, Callback })
 	
 	if FFlagAXItemDetailsIxpExposure then
-		ReactModule.useEffect(function() --[[ Line: 162 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRefResult1 (ref)
-			return function() --[[ Line: 163 ]]
+			return function()
 				-- upvalues: UseRefResult1 (upval)
 				for _, Connection in UseRefResult1.current do
 					if Connection then
@@ -119,7 +119,7 @@ return function(p1) --[[ Line: 59 ]]
 		onRequestImpressionsSignal = p1.requestImpressionsSignal,
 		filterImpressionFunc = UseResult,
 		onImpressionsDetected = UseResult1,
-		collectObjectsFunc = ReactModule.useCallback(function(Ancestor) --[[ Line: 174 ]]
+		collectObjectsFunc = ReactModule.useCallback(function(Ancestor)
 			-- upvalues: FFlagAXUnifiedImpressionsOnThumbnail (upval), CollectionService (upval), UnifiedEventLogConstantsModule (upval)
 			if not FFlagAXUnifiedImpressionsOnThumbnail then
 				return CollectionService:GetTagged(UnifiedEventLogConstantsModule.TAG_NAME)

@@ -16,7 +16,7 @@ local ClosePeoplePageOpenedWithSideSheetModule = require(InExperienceSideSheet.U
 local ToggleSideSheetModule = require(InExperienceSideSheet.Utils.toggleSideSheet)
 local FFlagSideSheetOpenPeoplePage = require(InExperienceSideSheet.Flags).FFlagSideSheetOpenPeoplePage
 
-return ReactModule.memo(function(p1) --[[ Line: 31 | Named "AccountUpsell" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), FFlagSideSheetOpenPeoplePage (copy), ClosePeoplePageOpenedWithSideSheetModule (copy), ToggleSideSheetModule (copy), SidesheetAnalyticsModule (copy), AnalyticsConstantsModule (copy), View (copy), Icon (copy), IconName (copy), IconVariant (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -32,7 +32,7 @@ return ReactModule.memo(function(p1) --[[ Line: 31 | Named "AccountUpsell" ]]
 		Card = ReactModule.createElement(View, {
 			tag = "row align-y-center size-full-0 auto-y padding-medium radius-medium bg-shift-200",
 			testId = "account-upsell-card",
-			onActivated = ReactModule.useCallback(function() --[[ Line: 37 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: p1 (copy), FFlagSideSheetOpenPeoplePage (upval), ClosePeoplePageOpenedWithSideSheetModule (upval), ToggleSideSheetModule (upval), SidesheetAnalyticsModule (upval), AnalyticsConstantsModule (upval)
 				p1.onActivated()
 				

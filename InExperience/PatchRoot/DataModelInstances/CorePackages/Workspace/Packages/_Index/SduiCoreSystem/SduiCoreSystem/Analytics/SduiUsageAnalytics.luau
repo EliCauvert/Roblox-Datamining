@@ -14,7 +14,7 @@ local config1 = {
 	backends = { "Points", "EventIngest" }
 }
 
-local function joinSet(ActionParams): string --[[ Line: 40 ]]
+local function joinSet(ActionParams): string
 	local List = {}
 	
 	for i, _ in ActionParams do
@@ -26,7 +26,7 @@ local function joinSet(ActionParams): string --[[ Line: 40 ]]
 end
 
 return {
-	sendTypeUsageEvent = function(p1) --[[ Line: 63 ]]
+	sendTypeUsageEvent = function(p1)
 		-- upvalues: TelemetryService (copy), config (copy), joinSet (copy)
 		TelemetryService:LogEvent(config, {
 			customFields = {
@@ -38,7 +38,7 @@ return {
 			standardizedFields = { "addOSInfo" }
 		})
 	end,
-	sendParamUsageEvent = function(p1) --[[ Line: 75 ]]
+	sendParamUsageEvent = function(p1)
 		-- upvalues: TelemetryService (copy), config1 (copy), joinSet (copy)
 		TelemetryService:LogEvent(config1, {
 			customFields = {

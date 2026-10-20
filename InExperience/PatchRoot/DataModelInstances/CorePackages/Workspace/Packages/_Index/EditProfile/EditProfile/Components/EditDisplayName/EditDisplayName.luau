@@ -18,7 +18,7 @@ local MaxDisplayNameCharacters = game:DefineFastInt("MaxDisplayNameCharacters", 
 local MinDisplayNameCharacters = game:DefineFastInt("MinDisplayNameCharacters", 3)
 local DisplayNameValidationNetworkDelay = game:DefineFastInt("DisplayNameValidationNetworkDelay", 500)
 
-return function(p1) --[[ Line: 33 ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), UseDisplayNameTextModule (copy), ReactModule (copy), SetTimeoutFunction (copy), DisplayNameValidationNetworkDelay (copy), ConstantsModule (copy), ClearTimeoutFunction (copy), MinDisplayNameCharacters (copy), AnalyticsServiceV2Module (copy), MaxDisplayNameCharacters (copy), View (copy), Text (copy), TextInput (copy), IconName (copy)
 	local UseLocalizationResult = UseLocalizationFunction({ DisplayNameCaption = TextKeysModule.DisplayNameCaption })
 	local UseDisplayNameTextModuleResult = UseDisplayNameTextModule()
@@ -26,19 +26,19 @@ return function(p1) --[[ Line: 33 ]]
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(UseDisplayNameTextModuleResult.displayNameChangeError)
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
-	local UseRefResult = ReactModule.useRef(SetTimeoutFunction(function() --[[ Line: 42 ]] end, DisplayNameValidationNetworkDelay))
-	ReactModule.useEffect(function() --[[ Line: 44 ]]
+	local UseRefResult = ReactModule.useRef(SetTimeoutFunction(function() end, DisplayNameValidationNetworkDelay))
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult1 (copy), UseStateResult4 (copy)
 		if p1.updateErrorState then
 			p1.updateErrorState(UseStateResult1 or UseStateResult4)
 		end
 	end, { UseStateResult1, UseStateResult4 })
-	ReactModule.useEffect(function() --[[ Line: 50 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), p1 (copy)
 		UseStateResult2(p1.initialDisplayName)
 	end, { p1.initialDisplayName })
 	
-	local function getErrorMessage(Code) --[[ Line: 54 ]]
+	local function getErrorMessage(Code)
 		-- upvalues: ConstantsModule (upval), UseDisplayNameTextModuleResult (copy)
 		return ({
 			[ConstantsModule.DisplayNameValidationErrorCodes.TooShort] = UseDisplayNameTextModuleResult.nameTooShortError,
@@ -51,7 +51,7 @@ return function(p1) --[[ Line: 33 ]]
 		})[Code] or UseDisplayNameTextModuleResult.displayNameChangeError
 	end
 	
-	local function textChanged(p2) --[[ Line: 67 ]]
+	local function textChanged(p2)
 		-- upvalues: ClearTimeoutFunction (upval), UseRefResult (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_3 (copy), MinDisplayNameCharacters (upval), AnalyticsServiceV2Module (upval), UseStateResult2_2 (copy), UseDisplayNameTextModuleResult (copy), MaxDisplayNameCharacters (upval), SetTimeoutFunction (upval), p1 (copy), getErrorMessage (copy), DisplayNameValidationNetworkDelay (upval)
 		ClearTimeoutFunction(UseRefResult.current)
 		local Text = p2 or ""
@@ -74,14 +74,14 @@ return function(p1) --[[ Line: 33 ]]
 			return
 		else
 			UseStateResult2_3(true)
-			UseRefResult.current = SetTimeoutFunction(function() --[[ Line: 88 ]]
+			UseRefResult.current = SetTimeoutFunction(function()
 				-- upvalues: p1 (upval), Text (ref), UseStateResult2_1 (upval), UseStateResult2_3 (upval), AnalyticsServiceV2Module (upval), UseStateResult2_2 (upval), getErrorMessage (upval)
-				p1.validateDisplayName(Text):andThen(function(_) --[[ Line: 91 ]]
+				p1.validateDisplayName(Text):andThen(function(_)
 					-- upvalues: UseStateResult2_1 (upval), UseStateResult2_3 (upval), p1 (upval), Text (upval)
 					UseStateResult2_1(false)
 					UseStateResult2_3(false)
 					p1.onDataChange(Text)
-				end):catch(function(Err) --[[ Line: 96 ]]
+				end):catch(function(Err)
 					-- upvalues: AnalyticsServiceV2Module (upval), Text (upval), UseStateResult2_2 (upval), getErrorMessage (upval), UseStateResult2_1 (upval), UseStateResult2_3 (upval)
 					local Code = Err and Err.errors and Err.errors[1] and Err.errors[1].code or -1
 					AnalyticsServiceV2Module.sendFilteredDisplayName(Text)
@@ -111,14 +111,14 @@ return function(p1) --[[ Line: 33 ]]
 			width = UDim.new(1, 0),
 			placeholder = p1.initialDisplayName,
 			hint = if UseStateResult1 then UseStateResult3 else string.format("%d/%d", utf8.len(UseStateResult or "") or 0, MaxDisplayNameCharacters),
-			onChanged = function(p2) --[[ Line: 131 ]]
+			onChanged = function(p2)
 				-- upvalues: textChanged (copy)
 				textChanged(p2)
 			end,
 			hasError = UseStateResult1,
 			iconTrailing = if UseStateResult and #UseStateResult > 0 then {
 				name = IconName.CircleX,
-				onActivated = function() --[[ Line: 138 ]]
+				onActivated = function()
 					-- upvalues: textChanged (copy)
 					textChanged("")
 				end

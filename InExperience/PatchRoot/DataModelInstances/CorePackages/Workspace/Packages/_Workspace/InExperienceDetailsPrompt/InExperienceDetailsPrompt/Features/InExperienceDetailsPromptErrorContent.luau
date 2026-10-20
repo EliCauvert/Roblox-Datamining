@@ -9,12 +9,12 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local EnumGameDetailErrorTypes = require(Parent.DiscoveryTypes).EnumGameDetailErrorTypes
 
-local function _(ExperienceUnavailable, p1) --[[ Line: 18 | Named "getErrorDisplayMessage" ]]
+local function _(ExperienceUnavailable, p1)
 	-- upvalues: EnumGameDetailErrorTypes (copy)
 	return if ExperienceUnavailable == EnumGameDetailErrorTypes.ExperienceUnavailable then p1.experienceUnavailable else p1.noInternet
 end
 
-return function(p1) --[[ Line: 25 | Named "InExperienceDetailsPromptErrorContent" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), EnumGameDetailErrorTypes (copy), ReactModule (copy), View (copy), Icon (copy), Enums (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({

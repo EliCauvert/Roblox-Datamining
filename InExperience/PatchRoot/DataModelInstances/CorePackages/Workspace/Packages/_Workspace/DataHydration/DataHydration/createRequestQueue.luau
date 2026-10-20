@@ -1,23 +1,23 @@
-﻿return function() --[[ Line: 1 | Named "createRequestQueue" ]]
+﻿return function()
 	local Tbl = {}
 	local Count = 1
 	
 	return {
-		push = function(Key) --[[ Line: 8 ]]
+		push = function(Key)
 			-- upvalues: Tbl (copy), Count (ref)
 			if Tbl[Key] == nil then
 				Tbl[Key] = Count
 				Count += 1
 			end
 		end,
-		pop = function(p1) --[[ Line: 15 ]]
+		pop = function(p1)
 			-- upvalues: Tbl (copy)
 			local List = {}
 			
 			for i, _ in Tbl do
 				table.insert(List, i)
 			end
-			table.sort(List, function(A, B): boolean --[[ Line: 20 ]]
+			table.sort(List, function(A, B): boolean
 				-- upvalues: Tbl (upval)
 				return Tbl[A] < Tbl[B]
 			end)
@@ -36,18 +36,18 @@
 			end
 			return List1
 		end,
-		isEmpty = function(): boolean --[[ Line: 38 ]]
+		isEmpty = function(): boolean
 			-- upvalues: Tbl (copy)
 			for _, _ in Tbl do
 				return false
 			end
 			return true
 		end,
-		hasItem = function(p2): boolean --[[ Line: 45 ]]
+		hasItem = function(p2): boolean
 			-- upvalues: Tbl (copy)
 			return Tbl[p2] ~= nil
 		end,
-		clear = function() --[[ Line: 49 ]]
+		clear = function()
 			-- upvalues: Tbl (copy), Count (ref)
 			table.clear(Tbl)
 			Count = 1

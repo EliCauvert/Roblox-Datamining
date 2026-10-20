@@ -2,7 +2,7 @@
 local CreateFunction = require(game:GetService("CorePackages").Workspace.Packages.AppCommonLib).Create
 local StyleWidgetsModule = { TabSelectionHeight = 6 }
 
-function StyleWidgetsModule.MakeTabSelectionWidget(Parent) --[[ Line: 24 ]]
+function StyleWidgetsModule.MakeTabSelectionWidget(Parent)
 	-- upvalues: CreateFunction (copy), StyleWidgetsModule (copy)
 	return (CreateFunction("ImageLabel")({
 		Name = "TabSelection",

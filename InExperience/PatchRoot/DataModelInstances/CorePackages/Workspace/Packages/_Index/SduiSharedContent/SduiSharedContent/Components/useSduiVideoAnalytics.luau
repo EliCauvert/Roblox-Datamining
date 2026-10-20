@@ -15,16 +15,16 @@ local VideoLogger = VideoUtilsModule.VideoLogger
 local FFlagLuaAppBroadenVideoAnalytics = require(Parent.SharedFlags).FFlagLuaAppBroadenVideoAnalytics
 local FFlagLuaAppDiscoveryMomentVideoTelemetry = require(Parent.SharedFlags).FFlagLuaAppDiscoveryMomentVideoTelemetry
 
-local function _(p1) --[[ Line: 51 | Named "asOptionalString" ]]
+local function _(p1)
 	return if p1 == nil then nil else tostring(p1)
 end
 
-local _ = function(p1) --[[ Line: 55 | Named "asOptionalBoolean" ]]
+local _ = function(p1)
 	-- upvalues: ParseBooleanStringFunction (copy)
 	return if type(p1) == "boolean" then p1 elseif type(p1) == "string" then ParseBooleanStringFunction(p1) else nil
 end
 
-local _ = function(ActionType, PageContext, UniverseId, PlaceId) --[[ Line: 62 | Named "reportMissingVideoAssetId" ]]
+local _ = function(ActionType, PageContext, UniverseId, PlaceId)
 	-- upvalues: DiscoveryEventErrorLogger (copy)
 	DiscoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingVideoAssetId", `SDUI video analytics "{ActionType}" is missing videoAssetId on page "{PageContext}"`, {
 		actionType = ActionType,
@@ -34,9 +34,9 @@ local _ = function(ActionType, PageContext, UniverseId, PlaceId) --[[ Line: 62 |
 	})
 end
 
-return function(p1, PageContext, p2) --[[ Line: 75 | Named "useSduiVideoAnalytics" ]]
+return function(p1, PageContext, p2)
 	-- upvalues: ReactModule (copy), FindAnalyticsFieldInAncestorsFunction (copy), FFlagLuaAppBroadenVideoAnalytics (copy), FFlagLuaAppDiscoveryMomentVideoTelemetry (copy), ParseBooleanStringFunction (copy), DiscoveryEventErrorLogger (copy), DiscoveryVideoPlayEventFunction (copy), DiscoveryVideoLoadEventFunction (copy), VideoLogger (copy), VideoActions (copy), DiscoveryVideoLoopEventFunction (copy), DiscoveryVideoEndEventFunction (copy)
-	local UseResult = ReactModule.useCallback(function(p3) --[[ Line: 80 ]]
+	local UseResult = ReactModule.useCallback(function(p3)
 		-- upvalues: p1 (copy), FindAnalyticsFieldInAncestorsFunction (upval), p2 (copy), FFlagLuaAppBroadenVideoAnalytics (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), ParseBooleanStringFunction (upval)
 		local CollectionData = if p1.getCollectionData then p1.getCollectionData() else nil
 		local VideoAssetId = FindAnalyticsFieldInAncestorsFunction("videoAssetId", p1)
@@ -89,7 +89,7 @@ return function(p1, PageContext, p2) --[[ Line: 75 | Named "useSduiVideoAnalytic
 		
 		return config
 	end, { p1, p2.universeId, p2.placeId })
-	local UseResult1 = ReactModule.useCallback(function(_, p3) --[[ Line: 106 ]]
+	local UseResult1 = ReactModule.useCallback(function(_, p3)
 		-- upvalues: UseResult (copy), PageContext (copy), p2 (copy), DiscoveryEventErrorLogger (upval), DiscoveryVideoPlayEventFunction (upval)
 		local UseResultResult = UseResult(p3)
 		
@@ -103,7 +103,7 @@ return function(p1, PageContext, p2) --[[ Line: 75 | Named "useSduiVideoAnalytic
 		end
 		DiscoveryVideoPlayEventFunction(PageContext, UseResultResult)
 	end, { UseResult, PageContext, p2.universeId, p2.placeId })
-	local UseResult2 = ReactModule.useCallback(function(_, p3, TotalDuration, LoadTime) --[[ Line: 115 ]]
+	local UseResult2 = ReactModule.useCallback(function(_, p3, TotalDuration, LoadTime)
 		-- upvalues: UseResult (copy), PageContext (copy), p2 (copy), DiscoveryEventErrorLogger (upval), DiscoveryVideoLoadEventFunction (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), VideoLogger (upval), VideoActions (upval)
 		local UseResultResult = UseResult(p3)
 		
@@ -141,7 +141,7 @@ return function(p1, PageContext, p2) --[[ Line: 75 | Named "useSduiVideoAnalytic
 	end, {
 		UseResult, PageContext, p2.source, p2.sourceId, p2.universeId, p2.placeId
 	})
-	local UseResult3 = ReactModule.useCallback(function(_, p3) --[[ Line: 154 ]]
+	local UseResult3 = ReactModule.useCallback(function(_, p3)
 		-- upvalues: UseResult (copy), PageContext (copy), p2 (copy), DiscoveryEventErrorLogger (upval), DiscoveryVideoLoopEventFunction (upval)
 		local UseResultResult = UseResult(p3)
 		
@@ -155,7 +155,7 @@ return function(p1, PageContext, p2) --[[ Line: 75 | Named "useSduiVideoAnalytic
 		end
 		DiscoveryVideoLoopEventFunction(PageContext, UseResultResult)
 	end, { UseResult, PageContext, p2.universeId, p2.placeId })
-	local UseResult4 = ReactModule.useCallback(function(_, EndReason, p3, PlaybackTime, TargetUniverseId) --[[ Line: 163 ]]
+	local UseResult4 = ReactModule.useCallback(function(_, EndReason, p3, PlaybackTime, TargetUniverseId)
 		-- upvalues: UseResult (copy), PageContext (copy), p2 (copy), DiscoveryEventErrorLogger (upval), DiscoveryVideoEndEventFunction (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval)
 		local UseResultResult = UseResult(p3)
 		
@@ -184,7 +184,7 @@ return function(p1, PageContext, p2) --[[ Line: 75 | Named "useSduiVideoAnalytic
 		})
 	end, { UseResult, PageContext, p2.universeId, p2.placeId })
 	
-	return ReactModule.useMemo(function() --[[ Line: 194 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: UseResult1 (copy), UseResult2 (copy), UseResult3 (copy), UseResult4 (copy)
 		return {
 			reportVideoMute = nil,

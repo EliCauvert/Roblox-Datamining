@@ -5,20 +5,20 @@ local ReactModule = require(Foundation.Parent.React)
 local PositioningModule = require(script.Parent.positioning)
 local _ = require(Foundation.Components.Types)
 
-local function useConnectSignals(Frame, PropertyNames, UseRefResult) --[[ Line: 26 ]]
+local function useConnectSignals(Frame, PropertyNames, UseRefResult)
 	-- upvalues: ReactModule (copy)
 	local UseRefResult1 = ReactModule.useRef({})
-	ReactModule.useLayoutEffect(function() --[[ Line: 33 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: Frame (copy), PropertyNames (copy), UseRefResult1 (copy), UseRefResult (copy)
 		if Frame ~= nil then
 			for _, propertyName in PropertyNames do
-				UseRefResult1.current[propertyName] = (if typeof(Frame) == "Instance" then Frame:GetPropertyChangedSignal(propertyName) else Frame:GetPropertyChangedSignal(propertyName)):Connect(if type(UseRefResult) == "table" then function() --[[ Line: 42 ]]
+				UseRefResult1.current[propertyName] = (if typeof(Frame) == "Instance" then Frame:GetPropertyChangedSignal(propertyName) else Frame:GetPropertyChangedSignal(propertyName)):Connect(if type(UseRefResult) == "table" then function()
 					-- upvalues: UseRefResult (upval)
 					UseRefResult.current()
 				end else UseRefResult)
 			end
 		end
-		return function() --[[ Line: 50 ]]
+		return function()
 			-- upvalues: UseRefResult1 (upval)
 			for _, Connection in UseRefResult1.current do
 				Connection:Disconnect()
@@ -27,7 +27,7 @@ local function useConnectSignals(Frame, PropertyNames, UseRefResult) --[[ Line: 
 	end, { Frame, UseRefResult })
 end
 
-return function(p1, Frame: Frame, Frame1: Frame, Frame2: Frame, p2, Position, p3) --[[ Line: 58 | Named "useFloating" ]]
+return function(p1, Frame: Frame, Frame1: Frame, Frame2: Frame, p2, Position, p3)
 	-- upvalues: ReactModule (copy), PositioningModule (copy), useConnectSignals (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.new())
 	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(true)
@@ -35,10 +35,10 @@ return function(p1, Frame: Frame, Frame1: Frame, Frame2: Frame, p2, Position, p3
 	local UseBindingResult4, UseBindingResult2_3 = ReactModule.useBinding(Vector2.new())
 	local UseBindingResult5, UseBindingResult2_4 = ReactModule.useBinding(Vector2.new())
 	local UseBindingResult6, UseBindingResult2_5 = ReactModule.useBinding(Vector2.new(0, 0))
-	local UseRefResult = ReactModule.useRef(function() --[[ Line: 73 ]] end)
+	local UseRefResult = ReactModule.useRef(function() end)
 	local UseRefResult1 = ReactModule.useRef({})
 	local UseRefResult2 = ReactModule.useRef(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 77 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), Frame (copy), Frame1 (copy), Frame2 (copy), UseBindingResult2_1 (copy), PositioningModule (upval), UseRefResult1 (copy), p2 (copy), Position (copy), p3 (copy), UseBindingResult2_2 (copy), UseBindingResult2_3 (copy), UseBindingResult2_4 (copy), UseBindingResult2 (copy), UseBindingResult2_5 (copy)
 		if not p1 or not Frame or not Frame1 or not Frame2 then
 			UseBindingResult2_1(false)
@@ -95,11 +95,11 @@ return function(p1, Frame: Frame, Frame1: Frame, Frame2: Frame, p2, Position, p3
 		p1, Frame, Frame1, Frame2, p2, Position, p3
 	})
 	
-	function UseRefResult.current() --[[ Line: 165 ]]
+	function UseRefResult.current()
 		-- upvalues: UseRefResult2 (copy), UseResult (copy)
 		if not UseRefResult2.current then
 			UseRefResult2.current = true
-			task.defer(function() --[[ Line: 170 ]]
+			task.defer(function()
 				-- upvalues: UseRefResult2 (upval), UseResult (upval)
 				UseRefResult2.current = false
 				UseResult()
@@ -112,13 +112,13 @@ return function(p1, Frame: Frame, Frame1: Frame, Frame2: Frame, p2, Position, p3
 	useConnectSignals(Frame, { "AbsolutePosition", "AbsoluteSize" }, UseRefResult)
 	useConnectSignals(Frame1, { "AbsoluteSize" }, UseRefResult)
 	useConnectSignals(Frame2, { "AbsoluteSize" }, UseRefResult)
-	ReactModule.useLayoutEffect(function() --[[ Line: 178 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: p1 (copy), Frame (copy), UseRefResult1 (copy), UseRefResult (copy)
 		if not p1 then return end
 		if typeof(Frame) ~= "Instance" or not Frame:IsA("GuiObject") then return end
 		local List = {}
 		
-		local function rebuild() --[[ Line: 189 ]]
+		local function rebuild()
 			-- upvalues: List (copy), Frame (copy), UseRefResult (upval), UseRefResult1 (copy)
 			for _, Connection in List do
 				Connection:Disconnect()
@@ -129,11 +129,11 @@ return function(p1, Frame: Frame, Frame1: Frame, Frame2: Frame, p2, Position, p3
 			while Parent and Parent:IsA("GuiObject") do
 				if Parent.ClipsDescendants then
 					table.insert(Current, Parent)
-					table.insert(List, Parent:GetPropertyChangedSignal("AbsolutePosition"):Connect(function() --[[ Line: 203 ]]
+					table.insert(List, Parent:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
 						-- upvalues: UseRefResult (upval)
 						UseRefResult.current()
 					end))
-					table.insert(List, Parent:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 209 ]]
+					table.insert(List, Parent:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 						-- upvalues: UseRefResult (upval)
 						UseRefResult.current()
 					end))
@@ -150,7 +150,7 @@ return function(p1, Frame: Frame, Frame1: Frame, Frame2: Frame, p2, Position, p3
 		rebuild()
 		local AncestryChangedConnection = Frame.AncestryChanged:Connect(rebuild)
 		
-		return function() --[[ Line: 227 ]]
+		return function()
 			-- upvalues: AncestryChangedConnection (copy), List (copy), UseRefResult1 (copy)
 			AncestryChangedConnection:Disconnect()
 			
@@ -160,7 +160,7 @@ return function(p1, Frame: Frame, Frame1: Frame, Frame2: Frame, p2, Position, p3
 			UseRefResult1.current = {}
 		end
 	end, { Frame, p1 })
-	ReactModule.useLayoutEffect(function() --[[ Line: 236 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseResult (copy)
 		UseResult()
 	end, { UseResult })

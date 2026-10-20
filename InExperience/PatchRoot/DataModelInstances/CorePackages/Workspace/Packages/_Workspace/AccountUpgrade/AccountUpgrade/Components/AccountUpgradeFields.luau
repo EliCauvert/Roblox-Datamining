@@ -26,7 +26,7 @@ local UIConstants = AuthCommonModule.Common.UIConstants
 local UserGender = AuthCommonModule.Enums.UserGender
 local FormatBoldRichTextFunction = AuthCommonModule.Utils.formatBoldRichText
 
-return function(Frame) --[[ Line: 132 | Named "AccountUpgradeFields" ]]
+return function(Frame)
 	-- upvalues: InputSize (copy), InputLabelSize (copy), ChipSize (copy), FoundationModule (copy), UserGender (copy), GetFFlagAuthCollapsingValidatorFoundationInputFunction (copy), FormatBoldRichTextFunction (copy), ReactModule (copy), View (copy), AccountUpgradeFieldModule (copy), InputLabel (copy), Text (copy), Icon (copy), IconName (copy), IconSize (copy), UsernameFieldWithSuggestionsModule (copy), CollapsingTextInputValidator (copy), PasswordValidator (copy), UIConstants (copy), TextInput (copy), AccountUpgradeFieldErrorModule (copy), Chip (copy)
 	local Form = Frame.form
 	local IsSizeMatch = Frame.size == InputSize.Large
@@ -41,7 +41,7 @@ return function(Frame) --[[ Line: 132 | Named "AccountUpgradeFields" ]]
 	local FieldStates = Form.fieldStates
 	local IsBoldLabels: boolean = Frame.boldLabels == true or Form.boldFieldLabels == true
 	
-	local function _(p1) --[[ Line: 148 | Named "labelText" ]]
+	local function _(p1)
 		-- upvalues: IsBoldLabels (copy), FormatBoldRichTextFunction (upval)
 		return if IsBoldLabels then FormatBoldRichTextFunction(p1) else p1
 	end
@@ -224,7 +224,7 @@ return function(Frame) --[[ Line: 132 | Named "AccountUpgradeFields" ]]
 					leading = IconName.HeadFemale,
 					size = Large2,
 					isChecked = IsGenderMatch,
-					onActivated = function() --[[ Line: 327 ]]
+					onActivated = function()
 						-- upvalues: Form (copy), IsGenderMatch (copy), UserGender (upval)
 						Form.onGenderChanged(if IsGenderMatch then UserGender.Unknown else UserGender.Female)
 					end
@@ -236,7 +236,7 @@ return function(Frame) --[[ Line: 132 | Named "AccountUpgradeFields" ]]
 					leading = IconName.HeadMale,
 					size = Large2,
 					isChecked = IsGenderMatch1,
-					onActivated = function() --[[ Line: 338 ]]
+					onActivated = function()
 						-- upvalues: Form (copy), IsGenderMatch1 (copy), UserGender (upval)
 						Form.onGenderChanged(if IsGenderMatch1 then UserGender.Unknown else UserGender.Male)
 					end

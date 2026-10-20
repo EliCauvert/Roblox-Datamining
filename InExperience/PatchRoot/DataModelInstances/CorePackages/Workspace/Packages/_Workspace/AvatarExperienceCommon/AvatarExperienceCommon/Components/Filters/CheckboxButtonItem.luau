@@ -10,10 +10,10 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local Focusable = require(Parent.RoactGamepad).Focusable
 local ExpandingFrameModule = require(script.Parent.ExpandingFrame)
 
-local function CheckboxButtonItem(Gui) --[[ Line: 62 ]]
+local function CheckboxButtonItem(Gui)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Text (copy), Focusable (copy), Checkbox (copy), InputSize (copy), ExpandingFrameModule (copy)
 	local UseTokensResult = UseTokensFunction()
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 64 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: Gui (copy)
 		if Gui.onActivated then
 			Gui.onActivated(Gui.id)
@@ -22,7 +22,7 @@ local function CheckboxButtonItem(Gui) --[[ Line: 62 ]]
 	local ItemHeight = Gui.itemHeight or UseTokensResult.Size.Size_900
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(ItemHeight)
-	local UseResult1 = ReactModule.useCallback(function(Frame) --[[ Line: 76 ]]
+	local UseResult1 = ReactModule.useCallback(function(Frame)
 		-- upvalues: ItemHeight (copy), Gui (copy), UseTokensResult (copy), UseBindingResult2 (copy)
 		local NewSize = ItemHeight
 		
@@ -43,7 +43,7 @@ local function CheckboxButtonItem(Gui) --[[ Line: 62 ]]
 		UseBindingResult2,
 		Gui.onHeightChanged
 	})
-	ReactModule.useEffect(function() --[[ Line: 90 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult1 (copy), UseRefResult (copy)
 		UseResult1(UseRefResult.current)
 	end, {})
@@ -52,7 +52,7 @@ local function CheckboxButtonItem(Gui) --[[ Line: 62 ]]
 	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
-		Size = UseBindingResult:map(function(YOffset): UDim2 --[[ Line: 97 ]]
+		Size = UseBindingResult:map(function(YOffset): UDim2
 			return UDim2.new(1, 0, 0, YOffset)
 		end),
 		LayoutOrder = Gui.layoutOrder,
@@ -114,7 +114,7 @@ local function CheckboxButtonItem(Gui) --[[ Line: 62 ]]
 	})
 end
 
-return ReactModule.forwardRef(function(p1, FrameRef) --[[ Line: 165 ]]
+return ReactModule.forwardRef(function(p1, FrameRef)
 	-- upvalues: ReactModule (copy), CheckboxButtonItem (copy), CryoModule (copy)
 	return ReactModule.createElement(CheckboxButtonItem, CryoModule.Dictionary.join(p1, { frameRef = FrameRef }))
 end)

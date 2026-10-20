@@ -287,7 +287,7 @@ local list1 = {
 local List = if require(CollectionViews.Parent.SharedFlags).FFlagLuaAppCompositionLegacyLayout then list1 else list
 
 return {
-	resolveBreakpoint = function(p1) --[[ Line: 53 ]]
+	resolveBreakpoint = function(p1)
 		-- upvalues: List (copy)
 		for i, value in List do
 			if p1 <= value.maxWidth then
@@ -296,7 +296,7 @@ return {
 		end
 		return #List
 	end,
-	getItemsPerRow = function(p2, p3) --[[ Line: 62 ]]
+	getItemsPerRow = function(p2, p3)
 		-- upvalues: List (copy)
 		local Entry = List[p2]
 		

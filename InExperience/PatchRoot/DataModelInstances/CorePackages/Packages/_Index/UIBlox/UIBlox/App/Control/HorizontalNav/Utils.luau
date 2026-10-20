@@ -1,5 +1,5 @@
 ﻿return {
-	shouldShowGradientsForScrollingFrame = function(ScrollFrame) --[[ Line: 11 ]]
+	shouldShowGradientsForScrollingFrame = function(ScrollFrame)
 		local X: number = ScrollFrame.AbsoluteSize.X
 		local Offset: number = ScrollFrame.CanvasSize.X.Offset
 		local X1: number = ScrollFrame.CanvasPosition.X

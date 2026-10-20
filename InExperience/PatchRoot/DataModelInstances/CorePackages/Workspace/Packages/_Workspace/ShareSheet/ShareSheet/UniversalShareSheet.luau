@@ -3,11 +3,11 @@ local GetUniversalShareSheetStoreModule = require(script.Parent.Stores.GetUniver
 
 return {
 	RecipientSource = require(script.Parent.Recipients.RecipientSource).RecipientSource,
-	show = function(p1) --[[ Line: 12 ]]
+	show = function(p1)
 		-- upvalues: GetUniversalShareSheetStoreModule (copy)
 		GetUniversalShareSheetStoreModule().show(p1)
 	end,
-	hide = function() --[[ Line: 16 ]]
+	hide = function()
 		-- upvalues: GetUniversalShareSheetStoreModule (copy)
 		GetUniversalShareSheetStoreModule().hide()
 	end

@@ -1,7 +1,7 @@
 ﻿local HttpService = game:GetService("HttpService")
 local UrlBuilder = require(script:FindFirstAncestor("AuthCommon").Parent.UrlBuilder).UrlBuilder
 
-return function(Callback, Code) --[[ Line: 7 ]]
+return function(Callback, Code)
 	-- upvalues: UrlBuilder (copy), HttpService (copy)
 	assert(type(Code) == "string", "invalid login code")
 	

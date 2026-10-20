@@ -35,7 +35,7 @@ TextEntryField.validateProps = T.strictInterface({
 	textBoxRef = T.optional(T.table)
 })
 
-function TextEntryField.init(p1) --[[ Line: 66 ]]
+function TextEntryField.init(p1)
 	-- upvalues: Roact (copy)
 	p1.textBoxRef = p1.props.textBoxRef or Roact.createRef()
 	p1.state = {
@@ -46,9 +46,9 @@ function TextEntryField.init(p1) --[[ Line: 66 ]]
 	}
 end
 
-function TextEntryField.calculateNeedsRescroll(p1, p2, Body) --[[ Line: 77 ]]
+function TextEntryField.calculateNeedsRescroll(p1, p2, Body)
 	-- upvalues: FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy)
-	p1:setState(function(State, p3) --[[ Line: 78 ]]
+	p1:setState(function(State, p3)
 		-- upvalues: Body (copy), p2 (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), TextService (upval)
 		if State.cursorPosition == -1 then
 			return nil
@@ -63,9 +63,9 @@ function TextEntryField.calculateNeedsRescroll(p1, p2, Body) --[[ Line: 77 ]]
 	end)
 end
 
-function TextEntryField.renderWithSelectionCursor(p1, Callback) --[[ Line: 104 ]]
+function TextEntryField.renderWithSelectionCursor(p1, Callback)
 	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), ComponentAssetsCircle17 (copy), Roact (copy), NormalizeFontFaceFunction (copy), CursorType (copy), ThemedTextLabelModule (copy), Images (copy), FillCircleModule (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), AssetsModule (copy), ImageSetLabel (copy)
-	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 105 ]]
+	return WithFoundationOrUIBloxStyleFunction(function(p2)
 		-- upvalues: FoundationFontFaceMigration (upval)
 		return {
 			Tokens = if FoundationFontFaceMigration then p2 else nil,
@@ -87,7 +87,7 @@ function TextEntryField.renderWithSelectionCursor(p1, Callback) --[[ Line: 104 ]
 				}
 			}
 		}
-	end, function(p2) --[[ Line: 126 ]]
+	end, function(p2)
 		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), p1 (copy), TextService (upval), ComponentAssetsCircle17 (upval), Roact (upval), NormalizeFontFaceFunction (upval), Callback (copy), CursorType (upval), ThemedTextLabelModule (upval), Images (upval), FillCircleModule (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), AssetsModule (upval), ImageSetLabel (upval)
 		local TextDefault = p2.Theme.TextDefault
 		local Body = p2.Font.Body
@@ -105,13 +105,13 @@ function TextEntryField.renderWithSelectionCursor(p1, Callback) --[[ Line: 104 ]
 				VerticalScrollBarInset = Enum.ScrollBarInset.Always,
 				CanvasPosition = Vector2.new(0, p1.state.canvasPosition),
 				Selectable = false,
-				[Roact.Change.CanvasPosition] = function(ScrollFrame) --[[ Line: 163 ]]
+				[Roact.Change.CanvasPosition] = function(ScrollFrame)
 					-- upvalues: p1 (upval)
 					p1:setState({ canvasPosition = ScrollFrame.CanvasPosition.Y })
 				end,
-				[Roact.Change.AbsoluteSize] = function(Frame) --[[ Line: 169 ]]
+				[Roact.Change.AbsoluteSize] = function(Frame)
 					-- upvalues: p1 (upval), p2 (copy), Body (copy)
-					p1:setState({ scrollingFrameHeight = Frame.AbsoluteSize.Y }, function() --[[ Line: 170 ]]
+					p1:setState({ scrollingFrameHeight = Frame.AbsoluteSize.Y }, function()
 						-- upvalues: p1 (upval), p2 (upval), Body (upval)
 						p1:calculateNeedsRescroll(p2, Body)
 					end)
@@ -135,7 +135,7 @@ function TextEntryField.renderWithSelectionCursor(p1, Callback) --[[ Line: 104 ]
 					TextWrapped = true,
 					SelectionImageObject = Callback(CursorType.InputFields),
 					[Roact.Ref] = p1.textBoxRef,
-					[Roact.Change.Text] = function(TextBox) --[[ Line: 196 ]]
+					[Roact.Change.Text] = function(TextBox)
 						-- upvalues: p1 (upval), p2 (copy), Body (copy)
 						if p1.props.maxTextLength < utf8.len(utf8.nfcnormalize(TextBox.Text)) then
 							TextBox.Text = string.sub(TextBox.Text, 1, utf8.offset(TextBox.Text, p1.props.maxTextLength + 1) - 1)
@@ -143,22 +143,22 @@ function TextEntryField.renderWithSelectionCursor(p1, Callback) --[[ Line: 104 ]
 							return
 						else
 							p1.props.textChanged(TextBox.Text)
-							p1:setState({ cursorPosition = TextBox.CursorPosition }, function() --[[ Line: 203 ]]
+							p1:setState({ cursorPosition = TextBox.CursorPosition }, function()
 								-- upvalues: p1 (upval), p2 (upval), Body (upval)
 								p1:calculateNeedsRescroll(p2, Body)
 							end)
 						end
 					end,
-					[Roact.Change.AbsoluteSize] = function(Frame) --[[ Line: 208 ]]
+					[Roact.Change.AbsoluteSize] = function(Frame)
 						-- upvalues: p1 (upval), p2 (copy), Body (copy)
-						p1:setState({ textBoxWidth = Frame.AbsoluteSize.X }, function() --[[ Line: 209 ]]
+						p1:setState({ textBoxWidth = Frame.AbsoluteSize.X }, function()
 							-- upvalues: p1 (upval), p2 (upval), Body (upval)
 							p1:calculateNeedsRescroll(p2, Body)
 						end)
 					end,
-					[Roact.Change.CursorPosition] = function(TextBox) --[[ Line: 214 ]]
+					[Roact.Change.CursorPosition] = function(TextBox)
 						-- upvalues: p1 (upval), p2 (copy), Body (copy)
-						p1:setState({ cursorPosition = TextBox.CursorPosition }, function() --[[ Line: 215 ]]
+						p1:setState({ cursorPosition = TextBox.CursorPosition }, function()
 							-- upvalues: p1 (upval), p2 (upval), Body (upval)
 							p1:calculateNeedsRescroll(p2, Body)
 						end)
@@ -234,15 +234,15 @@ function TextEntryField.renderWithSelectionCursor(p1, Callback) --[[ Line: 104 ]
 	end)
 end
 
-function TextEntryField.render(p1) --[[ Line: 299 ]]
+function TextEntryField.render(p1)
 	-- upvalues: WithCursorMigration (copy)
-	return WithCursorMigration(function(p2) --[[ Line: 300 ]]
+	return WithCursorMigration(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithSelectionCursor(p2)
 	end)
 end
 
-function TextEntryField.didUpdate(p1, p2, _) --[[ Line: 305 ]]
+function TextEntryField.didUpdate(p1, p2, _)
 	if p1.props.enabled or not p2.enabled then
 		if p1.props.enabled and not p2.enabled and p1.props.autoFocusOnEnabled and p1.textBoxRef.current then
 			p1.textBoxRef.current:CaptureFocus()
@@ -254,7 +254,7 @@ function TextEntryField.didUpdate(p1, p2, _) --[[ Line: 305 ]]
 	end
 end
 
-return Roact.forwardRef(function(p1, TextBoxRef) --[[ Line: 318 ]]
+return Roact.forwardRef(function(p1, TextBoxRef)
 	-- upvalues: Roact (copy), TextEntryField (copy), Cryo (copy)
 	return Roact.createElement(TextEntryField, Cryo.Dictionary.join(p1, { textBoxRef = TextBoxRef }))
 end)

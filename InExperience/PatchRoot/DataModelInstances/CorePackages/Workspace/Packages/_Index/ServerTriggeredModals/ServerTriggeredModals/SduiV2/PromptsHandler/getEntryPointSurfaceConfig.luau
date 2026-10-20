@@ -37,7 +37,7 @@ local config = {
 	} else nil
 }
 
-return function(p1, p2) --[[ Line: 88 | Named "getEntryPointSurfaceConfig" ]]
+return function(p1, p2)
 	-- upvalues: config (copy), FFlagEdpGameLeavePromptsHandlerEnabled (copy), FFlagEdpOpenPromptsHandlerEnabled (copy)
 	local Entry = config[p1]
 	assert(Entry ~= nil, `PromptsHandler: missing surface config for entry point "{p0}"`)

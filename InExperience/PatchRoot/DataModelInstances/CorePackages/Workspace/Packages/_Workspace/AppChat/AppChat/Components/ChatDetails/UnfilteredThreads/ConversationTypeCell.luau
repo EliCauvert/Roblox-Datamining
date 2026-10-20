@@ -17,10 +17,10 @@ local config = {
 	shouldShowIcon = true,
 	cellHeight = 28,
 	iconSize = UIBloxModule.App.ImageSet.Enum.IconSize.Small,
-	onIconActivated = function() --[[ Line: 39 ]] end
+	onIconActivated = function() end
 }
 
-return function(p1) --[[ Line: 44 | Named "ConversationTypeCell" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseTokensFunction (copy), UseIsInExperienceModule (copy), ReactModule (copy), BaseCellModule (copy), FoundationModule (copy), IconButton (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseStyleResult = UseStyleFunction()
@@ -48,7 +48,7 @@ return function(p1) --[[ Line: 44 | Named "ConversationTypeCell" ]]
 		}),
 		Content = ReactModule.createElement(FoundationModule.View, {
 			tag = "row size-full align-y-center",
-			onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 53 ]]
+			onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
 				-- upvalues: UseBindingResult2 (copy)
 				UseBindingResult2(Frame.AbsoluteSize.X)
 			end, {})
@@ -58,7 +58,7 @@ return function(p1) --[[ Line: 44 | Named "ConversationTypeCell" ]]
 				tag = "size-0-full auto-x content-emphasis text-align-x-left text-title-large text-truncate-end",
 				Text = JoinResult.bodyText,
 				sizeConstraint = {
-					MaxSize = UseBindingResult:map(function(p2): Vector2 --[[ Line: 82 ]]
+					MaxSize = UseBindingResult:map(function(p2): Vector2
 						-- upvalues: JoinResult (copy)
 						local v1 = p2 - (if JoinResult.shouldShowIcon then JoinResult.iconCellWidth else 0)
 						

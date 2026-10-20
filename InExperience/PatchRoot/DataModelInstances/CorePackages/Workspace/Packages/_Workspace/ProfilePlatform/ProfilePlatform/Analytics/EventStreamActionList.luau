@@ -16,7 +16,7 @@ local FFlagProfilePlatformEnableEditAppearanceMenuModule = require(ProfilePlatfo
 local FFlagProfilePlatformEditBackgroundMenuItemModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem)
 local FFlagSocialEnableProfileInspectAndBuyAnalytics = require(Parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuyAnalytics
 
-local function ButtonSurface(p1) --[[ Line: 30 ]]
+local function ButtonSurface(p1)
 	return p1
 end
 

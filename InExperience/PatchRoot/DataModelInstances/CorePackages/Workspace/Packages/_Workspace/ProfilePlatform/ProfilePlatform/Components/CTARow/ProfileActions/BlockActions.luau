@@ -13,18 +13,18 @@ local ProfileTypes = EnumsModule.ProfileTypes
 local USERBLOCKINGERRORS = require(ProfilePlatform.Common.Constants).USER_BLOCKING_ERRORS
 
 return {
-	[EnumsModule.ProfileActions.Block] = function(p1) --[[ Line: 24 ]]
+	[EnumsModule.ProfileActions.Block] = function(p1)
 		-- upvalues: EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), AppPage (copy), SetCurrentToastMessageFunction (copy), Images (copy), RefreshProfilePlatformActionInfoModule (copy)
 		return {
 			text = p1.localized[EnumsModule.ProfileActions.Block],
 			onActivated = {
-				[ProfileTypes.User] = function() --[[ Line: 28 ]]
+				[ProfileTypes.User] = function()
 					-- upvalues: p1 (copy), EventNamesModule (upval), AppPage (upval), SetCurrentToastMessageFunction (upval), Images (upval), RefreshProfilePlatformActionInfoModule (upval)
 					p1.analytics.fireAnalyticsEvent(EventNamesModule.ContextualMenuButtonBlock, { buttonSurface = p1.buttonSurface })
 					p1.navigation.push(AppPage.BlockingModal, {
 						navProps = {
 							userId = p1.profileId,
-							onBlockSuccess = function() --[[ Line: 35 ]]
+							onBlockSuccess = function()
 								-- upvalues: p1 (upval), SetCurrentToastMessageFunction (upval), Images (upval), RefreshProfilePlatformActionInfoModule (upval)
 								p1.dispatch(SetCurrentToastMessageFunction({
 									isLocalized = true,
@@ -39,20 +39,20 @@ return {
 			}
 		}
 	end,
-	[EnumsModule.ProfileActions.Unblock] = function(p1) --[[ Line: 53 ]]
+	[EnumsModule.ProfileActions.Unblock] = function(p1)
 		-- upvalues: ButtonVariant (copy), EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), MyUserBlockingNetworkingModule (copy), RefreshProfilePlatformActionInfoModule (copy), USERBLOCKINGERRORS (copy), SetCurrentToastMessageFunction (copy)
 		return {
 			variant = ButtonVariant.Standard,
 			text = p1.localized[EnumsModule.ProfileActions.Unblock],
 			onActivated = {
-				[ProfileTypes.User] = function() --[[ Line: 58 ]]
+				[ProfileTypes.User] = function()
 					-- upvalues: p1 (copy), EventNamesModule (upval), MyUserBlockingNetworkingModule (upval), RefreshProfilePlatformActionInfoModule (upval), USERBLOCKINGERRORS (upval), SetCurrentToastMessageFunction (upval)
 					p1.analytics.fireAnalyticsEvent(EventNamesModule.CTAButtonUnblock, { buttonSurface = p1.buttonSurface })
 					
-					return p1.dispatch(MyUserBlockingNetworkingModule.UnblockUserById.API({ userId = p1.profileId, currentUserId = p1.localUserId })):andThen(function() --[[ Line: 67 ]]
+					return p1.dispatch(MyUserBlockingNetworkingModule.UnblockUserById.API({ userId = p1.profileId, currentUserId = p1.localUserId })):andThen(function()
 						-- upvalues: p1 (upval), RefreshProfilePlatformActionInfoModule (upval)
 						return p1.dispatch(RefreshProfilePlatformActionInfoModule(p1.profileId, p1.actionsComponentRequest))
-					end):catch(function(Err) --[[ Line: 72 ]]
+					end):catch(function(Err)
 						-- upvalues: USERBLOCKINGERRORS (upval), p1 (upval), SetCurrentToastMessageFunction (upval)
 						if Err ~= nil and tonumber(Err.Body) == USERBLOCKINGERRORS.PARENT_BLOCKED_TARGET_USER_ERROR then
 							p1.dispatch(SetCurrentToastMessageFunction({

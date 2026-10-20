@@ -1,4 +1,4 @@
-﻿return function(Ancestor, Ancestor1): boolean --[[ Line: 8 | Named "isSelectionWithinVisible" ]]
+﻿return function(Ancestor, Ancestor1): boolean
 	if Ancestor == nil or Ancestor1 == nil then
 		return false
 	end

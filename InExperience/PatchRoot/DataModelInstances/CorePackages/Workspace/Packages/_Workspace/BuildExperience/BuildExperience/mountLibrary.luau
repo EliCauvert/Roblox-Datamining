@@ -40,12 +40,12 @@ local FFlagBuildExperienceLibrary = require(Parent.SharedFlags).FFlagBuildExperi
 local Object = nil
 local v1 = nil
 
-local function _(Model: Model, p1) --[[ Line: 61 | Named "requestModelFocus" ]]
+local function _(Model: Model, p1)
 	local BoundingCFrame, BoundingSize = Model:GetBoundingBox()
 	p1.requestFocus(BoundingCFrame.Position, BoundingSize.Magnitude / 2, Model)
 end
 
-local function focusModel(Model: Model, p1) --[[ Line: 66 ]]
+local function focusModel(Model: Model, p1)
 	-- upvalues: Object (ref), CoreGui (copy)
 	if Object ~= nil then
 		Object:Destroy()
@@ -63,7 +63,7 @@ local function focusModel(Model: Model, p1) --[[ Line: 66 ]]
 	p1.requestFocus(BoundingCFrame.Position, BoundingSize.Magnitude / 2, Model)
 end
 
-local function requestWorldFocus(UseMemoResult, p1) --[[ Line: 84 ]]
+local function requestWorldFocus(UseMemoResult, p1)
 	local MinResult = nil
 	local MaxResult = nil
 	
@@ -96,8 +96,8 @@ local function requestWorldFocus(UseMemoResult, p1) --[[ Line: 84 ]]
 	end
 end
 
-local _ = function(p2) --[[ Line: 108 | Named "getWorkspace" ]]
-	local Success, Result = pcall(function() --[[ Line: 109 ]]
+local _ = function(p2)
+	local Success, Result = pcall(function()
 		-- upvalues: p2 (copy)
 		return p2:GetService("Workspace")
 	end)
@@ -105,12 +105,12 @@ local _ = function(p2) --[[ Line: 108 | Named "getWorkspace" ]]
 	return if Success and typeof(Result) == "Instance" and Result:IsA("Workspace") then Result else nil
 end
 
-local function ConnectedLibrary(p2) --[[ Line: 115 ]]
+local function ConnectedLibrary(p2)
 	-- upvalues: GetLibraryStoreModule (copy), ReactModule (copy), UseLibraryStringsModule (copy), SignalsReactModule (copy), UseLibraryWorldCutoutViewModelModule (copy), SendBuildExperienceEventModule (copy), RoactNavigationModule (copy), SignalsModule (copy), GetPlayButtonStoreModule (copy), FFlagBuildExperienceLibrary (copy), requestWorldFocus (copy), Object (ref), RunService (copy), LibraryTypesModule (copy), focusModel (copy), CreateViewerWorldPickerModule (copy), HttpService (copy), Default (copy), DeepLinkSource (copy), LeaveExperienceModule (copy), GetAndroidBackSignalModule (copy), BindLibraryBackInputModule (copy), LibraryNavigatorModule (copy), FocusNavigationUtilsModule (copy), LibraryExperienceViewModule (copy), LibraryLeavingOverlayModule (copy), FoundationModule (copy)
 	local LibraryStoreModule = GetLibraryStoreModule()
 	local UseRefResult = ReactModule.useRef(os.clock())
 	local UseRefResult1 = ReactModule.useRef(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 124 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p2 (copy)
 		return {
 			universeId = p2.dataModel.GameId,
@@ -124,10 +124,10 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 	local UseSignalStateResult = SignalsReactModule.useSignalState(LibraryStoreModule.getChatComposerState)
 	local OnAddResource = if UseSignalStateResult == nil then nil else UseSignalStateResult.onAddResource
 	local OnRemoveResourceByPath = if UseSignalStateResult == nil then nil else UseSignalStateResult.onRemoveResourceByPath
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 135 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: OnAddResource (copy), OnRemoveResourceByPath (copy), UseRefResult2 (copy), UseRefResult3 (copy), LibraryStoreModule (copy)
 		return if OnAddResource == nil or OnRemoveResourceByPath == nil then {
-			onAddResource = function(p3): boolean --[[ Line: 152 ]]
+			onAddResource = function(p3): boolean
 				-- upvalues: LibraryStoreModule (upval)
 				LibraryStoreModule.requestAddToChat(p3)
 				
@@ -135,7 +135,7 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 			end,
 			onRemoveResource = LibraryStoreModule.requestRemoveFromChat
 		} else {
-			onAddResource = function(p3) --[[ Line: 138 ]]
+			onAddResource = function(p3)
 				-- upvalues: UseRefResult2 (upval), UseRefResult3 (upval), OnRemoveResourceByPath (upval), OnAddResource (upval)
 				local Current = UseRefResult2.current
 				
@@ -146,7 +146,7 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 				end
 				return OnAddResource(p3)
 			end,
-			onRemoveResource = function(ChatResource) --[[ Line: 147 ]]
+			onRemoveResource = function(ChatResource)
 				-- upvalues: OnRemoveResourceByPath (upval)
 				OnRemoveResourceByPath(ChatResource.path)
 			end
@@ -160,10 +160,10 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 	local ItemId = if UseStateResult.routeName == "Detail" then UseStateResult.params.itemId else nil
 	local Model = if ItemId == nil then "Model" else UseStateResult.params.itemKind
 	local Params = if UseStateResult.routeName == "Category" or UseStateResult.routeName == "Search" and UseStateResult.params.itemKind ~= nil then UseStateResult.params else nil
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 168 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: p2 (copy)
 		local DataModel = p2.dataModel
-		local Success, Result = pcall(function() --[[ Line: 109 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: DataModel (copy)
 			return DataModel:GetService("Workspace")
 		end)
@@ -171,7 +171,7 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 		return if Success and typeof(Result) == "Instance" and Result:IsA("Workspace") then Result else nil
 	end, { p2.dataModel })
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(p2.library.getItems)
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 173 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult1 (copy), p2 (copy), UseSignalStateResult1 (copy)
 		local List = {}
 		
@@ -196,7 +196,7 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 		isOpen = UseIsOpenResult,
 		onViewportRectChanged = LibraryStoreModule.setWorldViewportRect
 	})
-	ReactModule.useEffect(function() --[[ Line: 199 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ItemId (copy), p2 (copy), SendBuildExperienceEventModule (upval), UseResult (copy), UseIsOpenResult (copy), UseStateResult (copy), Model (copy), Params (copy)
 		local Item = if ItemId == nil then nil else p2.library.getItem(false, ItemId)
 		SendBuildExperienceEventModule("LIBRARY_IMPRESSION", UseResult(), {
@@ -212,22 +212,22 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 		ItemId or false, Model, Params ~= nil and (Params.folderId or Params.itemKind)
 	})
 	local UseRefResult4 = ReactModule.useRef(nil)
-	local UseResult1 = ReactModule.useCallback(function(Current) --[[ Line: 224 ]]
+	local UseResult1 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult4 (copy)
 		UseRefResult4.current = Current
 		
-		return function() --[[ Line: 226 ]]
+		return function()
 			-- upvalues: UseRefResult4 (upval)
 			UseRefResult4.current = nil
 		end
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function(_, p3) --[[ Line: 230 ]]
+	local UseResult2 = ReactModule.useCallback(function(_, p3)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(p3.routes[p3.index])
 	end, {})
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState("")
 	local UseRefResult5 = ReactModule.useRef(nil)
-	local UseResult3 = ReactModule.useCallback(function(p3) --[[ Line: 235 ]]
+	local UseResult3 = ReactModule.useCallback(function(p3)
 		-- upvalues: UseStateResult2_1 (copy), UseRefResult4 (copy), UseStateResult (copy), RoactNavigationModule (upval), Params (copy), UseRefResult5 (copy), SendBuildExperienceEventModule (upval), UseResult (copy)
 		UseStateResult2_1(p3)
 		local CurrentFunction: (any) -> () = UseRefResult4.current
@@ -251,7 +251,7 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 		if UseRefResult5.current ~= nil then
 			task.cancel(UseRefResult5.current)
 		end
-		UseRefResult5.current = task.delay(0.3, function() --[[ Line: 254 ]]
+		UseRefResult5.current = task.delay(0.3, function()
 			-- upvalues: UseRefResult5 (upval), SendBuildExperienceEventModule (upval), UseResult (upval), Params (upval), p3 (copy)
 			UseRefResult5.current = nil
 			SendBuildExperienceEventModule("LIBRARY_SEARCH", UseResult(), {
@@ -262,9 +262,9 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 			})
 		end)
 	end, { UseResult, UseStateResult, Params or false })
-	ReactModule.useEffect(function() --[[ Line: 265 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult5 (copy)
-		return function() --[[ Line: 266 ]]
+		return function()
 			-- upvalues: UseRefResult5 (upval)
 			if UseRefResult5.current ~= nil then
 				task.cancel(UseRefResult5.current)
@@ -276,15 +276,15 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 		Params ~= nil and Params.itemKind,
 		Params ~= nil and (Params.folderId or false)
 	})
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 279 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseResult3 (copy)
 		UseResult3("")
 	end, { UseResult3 })
 	local Library = p2.library
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 284 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: Library (copy), SendBuildExperienceEventModule (upval), UseResult (copy), UseRefResult1 (copy)
-		local Success, Result = pcall(function() --[[ Line: 285 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Library (upval)
 			Library.refresh()
 			
@@ -300,12 +300,12 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 			error(Result, 0)
 		end
 	end, { Library, UseResult })
-	ReactModule.useEffect(function() --[[ Line: 298 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SendBuildExperienceEventModule (upval), UseResult (copy), p2 (copy), UseResult5 (copy), UseStateResult2_2 (copy), UseRefResult1 (copy), Library (copy), UseRefResult (copy)
 		SendBuildExperienceEventModule("LIBRARY_IMPRESSION", UseResult(), { phase = "opened", surface = "Library" })
 		local DataModel = p2.dataModel
 		
-		local function ready() --[[ Line: 301 ]]
+		local function ready()
 			-- upvalues: UseResult5 (upval), UseStateResult2_2 (upval), UseRefResult1 (upval), Library (upval), SendBuildExperienceEventModule (upval), UseResult (upval), UseRefResult (upval)
 			UseResult5()
 			UseStateResult2_2(true)
@@ -336,20 +336,20 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 		if DataModel:IsLoaded() then
 			ready()
 		end
-		return function() --[[ Line: 327 ]]
+		return function()
 			-- upvalues: LoadedConnection (copy), PersistentLoadedConnection (copy)
 			LoadedConnection:Disconnect()
 			PersistentLoadedConnection:Disconnect()
 		end
 	end, { Library, p2.dataModel, UseResult5, UseResult })
-	local UseSignalStateResult2 = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 332 ]]
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), ItemId (copy), Library (copy)
-		return SignalsModule.createComputed(function(p3) --[[ Line: 333 ]]
+		return SignalsModule.createComputed(function(p3)
 			-- upvalues: ItemId (upval), Library (upval)
 			return if ItemId == nil then nil else Library.getItem(p3, ItemId)
 		end)
 	end, { Library, ItemId or false })))
-	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 342 ]]
+	local UseResult6 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult4 (copy), UseStateResult (copy), UseStateResult2_1 (copy), UseResult5 (copy), LibraryStoreModule (copy), GetPlayButtonStoreModule (upval), RoactNavigationModule (upval)
 		local CurrentFunction: (any) -> () = UseRefResult4.current
 		
@@ -369,7 +369,7 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 			immediate = UseStateResult.routeName == "Search" and UserSettings():GetService("UserGameSettings").ReducedMotion
 		}))
 	end, { UseStateResult.routeName, LibraryStoreModule, UseResult5 })
-	local UseResult7 = ReactModule.useCallback(function(ItemKind, CategoryKey, Title, FolderId) --[[ Line: 362 ]]
+	local UseResult7 = ReactModule.useCallback(function(ItemKind, CategoryKey, Title, FolderId)
 		-- upvalues: UseResult5 (copy), UseStateResult2_1 (copy), UseRefResult4 (copy), SendBuildExperienceEventModule (upval), UseResult (copy), UseStateResult (copy), RoactNavigationModule (upval)
 		UseResult5()
 		
@@ -396,7 +396,7 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 			}))
 		end
 	end, { UseResult5, UseResult, UseStateResult.routeName })
-	local UseResult8 = ReactModule.useCallback(function(ItemId, ItemKind) --[[ Line: 384 ]]
+	local UseResult8 = ReactModule.useCallback(function(ItemId, ItemKind)
 		-- upvalues: UseRefResult4 (copy), Library (copy), SendBuildExperienceEventModule (upval), UseResult (copy), LibraryStoreModule (copy), UseStateResult (copy), RoactNavigationModule (upval)
 		local CurrentFunction: (any) -> () = UseRefResult4.current
 		
@@ -422,7 +422,7 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 	})
 	local UseRefResult6 = ReactModule.useRef(false)
 	local UseRefResult7 = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 405 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult6 (copy), UseMemoResult1 (copy), UseIsOpenResult (copy), UseLibraryWorldCutoutViewModelModuleResult (copy), UseStateResult3 (copy), FFlagBuildExperienceLibrary (upval), IsAvailable (copy), requestWorldFocus (upval), UseMemoResult2 (copy), LibraryStoreModule (copy), UseSignalStateResult1 (copy), UseRefResult7 (copy)
 		if UseRefResult6.current or UseMemoResult1 == nil then return end
 		if not UseIsOpenResult or UseLibraryWorldCutoutViewModelModuleResult.phase ~= "Home" then
@@ -457,7 +457,7 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 	})
 	local IsBrowser: boolean = UseIsOpenResult and UseStateResult.routeName == "Browser"
 	local UseRefResult8 = ReactModule.useRef(IsBrowser)
-	ReactModule.useEffect(function() --[[ Line: 454 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagBuildExperienceLibrary (upval), IsBrowser (copy), UseRefResult8 (copy), UseRefResult6 (copy), IsAvailable (copy), requestWorldFocus (upval), UseMemoResult2 (copy), LibraryStoreModule (copy), UseRefResult7 (copy), UseMemoResult1 (copy)
 		if FFlagBuildExperienceLibrary then
 			if IsBrowser and not UseRefResult8.current and UseRefResult6.current and IsAvailable then
@@ -486,7 +486,7 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 	local Browser = ReactModule.useRef("Browser")
 	Browser.current = if UseIsOpenResult then UseStateResult.routeName else "World"
 	local UseRefResult9 = ReactModule.useRef(false)
-	local UseResult9 = ReactModule.useCallback(function(Reason) --[[ Line: 481 ]]
+	local UseResult9 = ReactModule.useCallback(function(Reason)
 		-- upvalues: UseRefResult9 (copy), SendBuildExperienceEventModule (upval), UseResult (copy), Browser (copy)
 		if not UseRefResult9.current then
 			UseRefResult9.current = true
@@ -501,18 +501,18 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 	end, { UseResult })
 	local UseRefResult10 = ReactModule.useRef(UseResult9)
 	UseRefResult10.current = UseResult9
-	ReactModule.useEffect(function() --[[ Line: 494 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult10 (copy)
-		return function() --[[ Line: 495 ]]
+		return function()
 			-- upvalues: UseRefResult10 (upval)
 			UseRefResult10.current("other")
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 500 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p2 (copy), Object (upval)
 		game:GetService("ReplicatedFirst"):RemoveDefaultLoadingScreen()
 		
-		return function() --[[ Line: 502 ]]
+		return function()
 			-- upvalues: p2 (upval), Object (upval)
 			p2.onUnmount()
 			
@@ -525,19 +525,19 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
 	local UseRefResult11 = ReactModule.useRef(false)
 	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 518 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: RunService (upval), UseStateResult2_4 (copy)
-		local RenderSteppedConnection = RunService.RenderStepped:Once(function() --[[ Line: 519 ]]
+		local RenderSteppedConnection = RunService.RenderStepped:Once(function()
 			-- upvalues: UseStateResult2_4 (upval)
 			UseStateResult2_4(true)
 		end)
 		
-		return function() --[[ Line: 522 ]]
+		return function()
 			-- upvalues: RenderSteppedConnection (copy)
 			RenderSteppedConnection:Disconnect()
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 526 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsBrowser (copy), Object (upval)
 		if IsBrowser and Object ~= nil then
 			Object:Destroy()
@@ -545,11 +545,11 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 		end
 	end, { IsBrowser })
 	local UseRefResult12 = ReactModule.useRef(0)
-	ReactModule.useEffect(function() --[[ Line: 535 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult2 (copy), UseRefResult12 (copy), LibraryStoreModule (copy), UseRefResult2 (copy), UseRefResult3 (copy), UseMemoResult (copy), LibraryTypesModule (upval), Object (upval), UseResult5 (copy)
 		if UseSignalStateResult2 == nil or UseSignalStateResult2.model == nil then return end
 		local Flag = true
-		local DestroyingConnection = UseSignalStateResult2.model.Destroying:Connect(function() --[[ Line: 540 ]]
+		local DestroyingConnection = UseSignalStateResult2.model.Destroying:Connect(function()
 			-- upvalues: UseRefResult12 (upval), LibraryStoreModule (upval), UseRefResult2 (upval), UseRefResult3 (upval), UseMemoResult (upval), LibraryTypesModule (upval), UseSignalStateResult2 (upval), Object (upval), Flag (ref), UseResult5 (upval)
 			UseRefResult12.current += 1
 			LibraryStoreModule.clearFocus()
@@ -561,7 +561,7 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 				Object:Destroy()
 				Object = nil
 			end
-			task.defer(function() --[[ Line: 550 ]]
+			task.defer(function()
 				-- upvalues: Flag (upval), UseResult5 (upval)
 				if Flag then
 					UseResult5()
@@ -569,7 +569,7 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 			end)
 		end)
 		
-		return function() --[[ Line: 556 ]]
+		return function()
 			-- upvalues: Flag (ref), DestroyingConnection (copy)
 			Flag = false
 			DestroyingConnection:Disconnect()
@@ -586,7 +586,7 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 	local UseRefResult14 = ReactModule.useRef(nil)
 	local UseSignalStateResult4 = SignalsReactModule.useSignalState(LibraryStoreModule.getPromptFailure)
 	local UseRefResult15 = ReactModule.useRef(if UseSignalStateResult4 == nil then 0 else UseSignalStateResult4.token)
-	ReactModule.useEffect(function() --[[ Line: 567 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult4 (copy), UseRefResult15 (copy), UseRefResult14 (copy), SendBuildExperienceEventModule (upval), UseResult (copy)
 		if UseSignalStateResult4 == nil or UseSignalStateResult4.token <= UseRefResult15.current then return end
 		UseRefResult15.current = UseSignalStateResult4.token
@@ -602,7 +602,7 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 		end
 		SendBuildExperienceEventModule("LIBRARY_ASSET_CLICK", UseResult(), Copy)
 	end, { UseSignalStateResult4, UseResult })
-	ReactModule.useEffect(function() --[[ Line: 584 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult13 (copy), IsIsAssistantResponding (copy), UseRefResult14 (copy), UseStateResult3 (copy), UseIsOpenResult (copy), UseResult5 (copy)
 		if UseRefResult13.current and not IsIsAssistantResponding then
 			UseRefResult14.current = nil
@@ -617,7 +617,7 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 		UseIsOpenResult,
 		UseResult5
 	})
-	local UseResult10 = ReactModule.useCallback(function(p3, p4) --[[ Line: 593 ]]
+	local UseResult10 = ReactModule.useCallback(function(p3, p4)
 		-- upvalues: focusModel (upval), LibraryStoreModule (copy), UseRefResult12 (copy), LibraryTypesModule (upval), UseRefResult2 (copy), UseRefResult3 (copy), GetPlayButtonStoreModule (upval)
 		if p3.model ~= nil and not p3.model:IsDescendantOf(workspace) then return end
 		if p3.model ~= nil then
@@ -626,7 +626,7 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 		LibraryStoreModule.setIsOpen(false)
 		UseRefResult12.current += 1
 		local Current = UseRefResult12.current
-		task.defer(function() --[[ Line: 603 ]]
+		task.defer(function()
 			-- upvalues: UseRefResult12 (upval), Current (copy), LibraryStoreModule (upval), LibraryTypesModule (upval), p3 (copy), UseRefResult2 (upval), p4 (copy), UseRefResult3 (upval), GetPlayButtonStoreModule (upval)
 			if UseRefResult12.current == Current and not LibraryStoreModule.getIsOpen(false) then
 				local ChatResource = LibraryTypesModule.toChatResource(p3)
@@ -639,15 +639,15 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 			end
 		end)
 	end, { LibraryStoreModule })
-	ReactModule.useEffect(function() --[[ Line: 614 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult12 (copy)
-		return function() --[[ Line: 615 ]]
+		return function()
 			-- upvalues: UseRefResult12 (upval)
 			UseRefResult12.current += 1
 		end
 	end, {})
 	local UseSignalStateResult5 = SignalsReactModule.useSignalState(LibraryStoreModule.getChipEvent)
-	ReactModule.useEffect(function() --[[ Line: 623 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult3 (copy), UseSignalStateResult5 (copy), LibraryTypesModule (upval), UseRefResult2 (copy), Object (upval), Library (copy), focusModel (upval), LibraryStoreModule (copy)
 		local Current = UseRefResult3.current
 		
@@ -678,7 +678,7 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 		LibraryStoreModule,
 		Library.getItems
 	})
-	ReactModule.useEffect(function() --[[ Line: 649 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseIsOpenResult (copy), UseStateResult3 (copy), IsAvailable (copy), p2 (copy), CreateViewerWorldPickerModule (upval), LibraryStoreModule (copy), Library (copy), UseResult5 (copy), UseResult8 (copy), UseResult10 (copy), GetPlayButtonStoreModule (upval), UseRefResult3 (copy), UseRefResult2 (copy), UseMemoResult (copy), Object (upval)
 		if UseIsOpenResult or not UseStateResult3 or not IsAvailable then
 			return nil
@@ -694,11 +694,11 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 				camera = CurrentCamera,
 				userInputService = p2.dataModel:GetService("UserInputService"),
 				world = Workspace,
-				isBlocked = function() --[[ Line: 663 ]]
+				isBlocked = function()
 					-- upvalues: Flag (ref), LibraryStoreModule (upval)
 					return not Flag or LibraryStoreModule.getIsOpen(false)
 				end,
-				onPick = function(p3) --[[ Line: 666 ]]
+				onPick = function(p3)
 					-- upvalues: Library (upval), UseResult5 (upval), UseResult8 (upval), UseResult10 (upval), GetPlayButtonStoreModule (upval)
 					local ResolveWorldItemResult = Library.resolveWorldItem(p3)
 					
@@ -711,7 +711,7 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 						UseResult10(ResolveWorldItemResult, not GetPlayButtonStoreModule().getIsActive(false))
 					end
 				end,
-				onMiss = function() --[[ Line: 677 ]]
+				onMiss = function()
 					-- upvalues: UseRefResult3 (upval), UseRefResult2 (upval), UseMemoResult (upval), Object (upval)
 					local Current = UseRefResult3.current
 					
@@ -727,7 +727,7 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 				end
 			})
 			
-			return function() --[[ Line: 691 ]]
+			return function()
 				-- upvalues: Flag (ref), ViewerWorldPickerModule (copy)
 				Flag = false
 				ViewerWorldPickerModule()
@@ -738,7 +738,7 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 		UseResult5, UseResult10, UseResult8, UseMemoResult, p2.dataModel
 	})
 	
-	local function OnShowLibrary() --[[ Line: 709 ]]
+	local function OnShowLibrary()
 		-- upvalues: UseStateResult3 (copy), UseResult5 (copy), LibraryStoreModule (copy), SendBuildExperienceEventModule (upval), UseResult (copy), UseLibraryWorldCutoutViewModelModuleResult (copy), Model (copy), UseRefResult12 (copy), GetPlayButtonStoreModule (upval)
 		if UseStateResult3 then
 			UseResult5()
@@ -756,12 +756,12 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 		LibraryStoreModule.setIsOpen(true)
 	end
 	
-	local UseResult11 = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 726 ]]
+	local UseResult11 = ReactModule.useCallback(function(Frame: Frame)
 		-- upvalues: LibraryStoreModule (copy)
 		LibraryStoreModule.setWorldViewportRect(if Frame == nil then nil else Rect.new(Frame.AbsolutePosition, Frame.AbsolutePosition + Frame.AbsoluteSize))
 	end, { LibraryStoreModule })
 	
-	local function OnShowWorld(p3) --[[ Line: 736 ]]
+	local function OnShowWorld(p3)
 		-- upvalues: ItemId (copy), Library (copy), LibraryStoreModule (copy), UseResult10 (copy), SendBuildExperienceEventModule (upval), UseResult (copy)
 		if ItemId ~= nil then
 			local Item = Library.getItem(false, ItemId)
@@ -787,7 +787,7 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 		LibraryStoreModule.setIsOpen(false)
 	end
 	
-	local function OnActivated() --[[ Line: 758 ]]
+	local function OnActivated()
 		-- upvalues: UseStateResult (copy), LibraryStoreModule (copy), UseLibraryWorldCutoutViewModelModuleResult (copy), SendBuildExperienceEventModule (upval), UseResult (copy), FFlagBuildExperienceLibrary (upval), requestWorldFocus (upval), UseMemoResult2 (copy), OnShowWorld (copy)
 		if UseStateResult.routeName ~= "Browser" or not LibraryStoreModule.getIsOpen(false) or not UseLibraryWorldCutoutViewModelModuleResult.enter() then return end
 		SendBuildExperienceEventModule("LIBRARY_ASSET_CLICK", UseResult(), {
@@ -803,7 +803,7 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 		OnShowWorld()
 	end
 	
-	local function returnToAppChat(p3, p4) --[[ Line: 773 ]]
+	local function returnToAppChat(p3, p4)
 		-- upvalues: UseRefResult11 (copy), UseStateResult2_3 (copy), UseResult9 (copy), p2 (copy), HttpService (upval), Default (upval), DeepLinkSource (upval), LeaveExperienceModule (upval)
 		if UseRefResult11.current then return end
 		UseRefResult11.current = true
@@ -817,19 +817,19 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 		end
 		if Default:isInternalDlicEnabled() then
 			local InternalDlic = Default:createInternalDlic(NavigationName, DeepLinkSource.LuaInternal)
-			task.spawn(LeaveExperienceModule, function() --[[ Line: 788 ]]
+			task.spawn(LeaveExperienceModule, function()
 				-- upvalues: Default (upval), InternalDlic (copy)
 				Default:detectDeeplinkIntent(InternalDlic)
 			end)
 		else
-			task.spawn(LeaveExperienceModule, function() --[[ Line: 792 ]]
+			task.spawn(LeaveExperienceModule, function()
 				-- upvalues: Default (upval), NavigationName (ref)
 				Default:detectURL(NavigationName)
 			end)
 		end
 	end
 	
-	local function onNavigateBack() --[[ Line: 797 ]]
+	local function onNavigateBack()
 		-- upvalues: UseRefResult11 (copy), UseIsOpenResult (copy), OnShowLibrary (copy), UseStateResult (copy), returnToAppChat (copy), UseResult6 (copy)
 		if UseRefResult11.current then return end
 		if not UseIsOpenResult then
@@ -849,9 +849,9 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 	local UseRefResult16 = ReactModule.useRef(onNavigateBack)
 	UseRefResult16.current = onNavigateBack
 	local UseRefResult17 = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 812 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult16 (copy), GetAndroidBackSignalModule (upval), BindLibraryBackInputModule (upval), UseRefResult17 (copy)
-		local function navigateBack() --[[ Line: 813 ]]
+		local function navigateBack()
 			-- upvalues: UseRefResult16 (upval)
 			UseRefResult16.current()
 		end
@@ -860,14 +860,14 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 		local BindLibraryBackInputModuleResult = BindLibraryBackInputModule(navigateBack)
 		UseRefResult17.current = BindLibraryBackInputModuleResult
 		
-		return function() --[[ Line: 819 ]]
+		return function()
 			-- upvalues: Connection (copy), BindLibraryBackInputModuleResult (copy), UseRefResult17 (upval)
 			Connection:Disconnect()
 			BindLibraryBackInputModuleResult.unbind()
 			UseRefResult17.current = nil
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 825 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult17 (copy), UseSignalStateResult3 (copy)
 		if UseRefResult17.current ~= nil then
 			UseRefResult17.current.setChatOpen(UseSignalStateResult3)
@@ -878,7 +878,7 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 	if Copy ~= nil and UseSignalStateResult ~= nil then
 		local OnSendFunction = UseSignalStateResult.onSend
 		
-		function Copy.onSend() --[[ Line: 833 ]]
+		function Copy.onSend()
 			-- upvalues: Model (copy), UseSignalStateResult2 (copy), SendBuildExperienceEventModule (upval), UseResult (copy), OnSendFunction (copy), returnToAppChat (copy), UseRefResult14 (copy), OnShowWorld (copy)
 			local Tbl = {
 				action = "prompt",
@@ -887,14 +887,14 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 				location = if UseSignalStateResult2 == nil then nil else UseSignalStateResult2.rootName
 			}
 			
-			local function onPromptReceived() --[[ Line: 840 ]]
+			local function onPromptReceived()
 				-- upvalues: Tbl (copy), SendBuildExperienceEventModule (upval), UseResult (upval)
 				local Copy = table.clone(Tbl)
 				Copy.phase = "received"
 				SendBuildExperienceEventModule("LIBRARY_ASSET_CLICK", UseResult(), Copy)
 			end
 			
-			local OnSendResult = if Model == "Image" or Model == "Sound" then OnSendFunction(function(p3) --[[ Line: 847 ]]
+			local OnSendResult = if Model == "Image" or Model == "Sound" then OnSendFunction(function(p3)
 				-- upvalues: Tbl (copy), SendBuildExperienceEventModule (upval), UseResult (upval), returnToAppChat (upval)
 				local Copy = table.clone(Tbl)
 				Copy.phase = "received"
@@ -940,7 +940,7 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 			onShowWorld = OnShowWorld,
 			onWorldViewportChanged = UseResult11,
 			worldCutout = UseLibraryWorldCutoutViewModelModuleResult.view,
-			onLeave = function() --[[ Line: 933 ]]
+			onLeave = function()
 				-- upvalues: returnToAppChat (copy)
 				returnToAppChat(nil, "close_button")
 			end
@@ -975,7 +975,7 @@ local function ConnectedLibrary(p2) --[[ Line: 115 ]]
 	})
 end
 
-return function(p3, SessionId) --[[ Line: 948 | Named "mountLibrary" ]]
+return function(p3, SessionId)
 	-- upvalues: v1 (ref), GetLibraryStoreModule (copy), CoreGui (copy), CreateBuildLibraryStoreModule (copy), ReactRobloxModule (copy), Localization (copy), LocalizationService (copy), ReactFocusNavigationModule (copy), ReactModule (copy), LocalizationProvider (copy), LibraryThemeProviderModule (copy), BuildExperienceCompositionStyleSheetModule (copy), FocusNavigationUtilsModule (copy), ConnectedLibrary (copy)
 	if v1 == nil then
 		GetLibraryStoreModule().setIsOpen(true)
@@ -992,7 +992,7 @@ return function(p3, SessionId) --[[ Line: 948 | Named "mountLibrary" ]]
 		v1 = Root
 		local NewLocalization = Localization.new(LocalizationService.RobloxLocaleId)
 		local NewResult = ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
-		ReactRobloxModule.flushSync(function() --[[ Line: 970 ]]
+		ReactRobloxModule.flushSync(function()
 			-- upvalues: Root (copy), ReactModule (upval), LocalizationProvider (upval), NewLocalization (copy), LibraryThemeProviderModule (upval), BuildExperienceCompositionStyleSheetModule (upval), ReactFocusNavigationModule (upval), NewResult (copy), FocusNavigationUtilsModule (upval), ConnectedLibrary (upval), p3 (copy), BuildLibraryStoreModule (copy), SessionId (copy), v1 (upval), BuildExperienceLibrary (copy)
 			Root:render(ReactModule.createElement(LocalizationProvider, { localization = NewLocalization }, {
 				FoundationProvider = ReactModule.createElement(LibraryThemeProviderModule, { displayOrder = 10 }, {
@@ -1003,7 +1003,7 @@ return function(p3, SessionId) --[[ Line: 948 | Named "mountLibrary" ]]
 								dataModel = p3 or game,
 								library = BuildLibraryStoreModule,
 								sessionId = SessionId,
-								onUnmount = function() --[[ Line: 984 ]]
+								onUnmount = function()
 									-- upvalues: NewResult (upval), v1 (upval), BuildExperienceLibrary (upval)
 									NewResult:teardown()
 									v1 = nil

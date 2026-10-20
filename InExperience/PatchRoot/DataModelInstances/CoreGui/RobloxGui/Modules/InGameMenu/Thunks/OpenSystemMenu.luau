@@ -6,9 +6,9 @@ local ConstantsModule = require(Parent.Resources.Constants)
 local SetCurrentPageModule = require(Parent.Actions.SetCurrentPage)
 local SetMenuIconTooltipOpenModule = require(Parent.Actions.SetMenuIconTooltipOpen)
 
-return function(Source) --[[ Line: 10 ]]
+return function(Source)
 	-- upvalues: GuiService (copy), SetMenuOpenModule (copy), SetCurrentPageModule (copy), ConstantsModule (copy), SetMenuIconTooltipOpenModule (copy), SendAnalyticsModule (copy)
-	return function(p1) --[[ Line: 11 ]]
+	return function(p1)
 		-- upvalues: GuiService (upval), SetMenuOpenModule (upval), SetCurrentPageModule (upval), ConstantsModule (upval), SetMenuIconTooltipOpenModule (upval), SendAnalyticsModule (upval), Source (copy)
 		GuiService:SetMenuIsOpen(true, "InGameMenu")
 		p1:dispatch(SetMenuOpenModule(true))

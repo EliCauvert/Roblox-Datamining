@@ -2,7 +2,7 @@
 local ColorUtilityModule = require(script.Parent.ColorUtility)
 local VectorUtilityModule = require(script.Parent.VectorUtility)
 local LightUtilityModule = {
-	AddLight = function(p1, p2) --[[ Line: 80 ]]
+	AddLight = function(p1, p2)
 		local Part = Instance.new("Part")
 		Part.Anchored = true
 		Part.Transparency = 1
@@ -21,7 +21,7 @@ local LightUtilityModule = {
 	end
 }
 
-function LightUtilityModule.AddLightsFromExtraParams(p1, p2): boolean --[[ Line: 100 ]]
+function LightUtilityModule.AddLightsFromExtraParams(p1, p2): boolean
 	-- upvalues: ColorUtilityModule (copy), VectorUtilityModule (copy), LightUtilityModule (copy), Lighting (copy)
 	local Flag = false
 	local PointLights = p1 and p1.pointLights
@@ -50,7 +50,7 @@ function LightUtilityModule.AddLightsFromExtraParams(p1, p2): boolean --[[ Line:
 	return Flag
 end
 
-function LightUtilityModule.AddDefaultPointLightRelativeTo(p3) --[[ Line: 134 ]]
+function LightUtilityModule.AddDefaultPointLightRelativeTo(p3)
 	-- upvalues: LightUtilityModule (copy)
 	LightUtilityModule.AddLight({
 		color = Color3.new(1, 1, 1),
@@ -58,7 +58,7 @@ function LightUtilityModule.AddDefaultPointLightRelativeTo(p3) --[[ Line: 134 ]]
 	}, 0)
 end
 
-function LightUtilityModule.SetupSunlightWithJsonConfig(p3) --[[ Line: 143 ]]
+function LightUtilityModule.SetupSunlightWithJsonConfig(p3)
 	-- upvalues: Lighting (copy)
 	local P5 = p3 or {
 		brightness = "1",
@@ -94,7 +94,7 @@ function LightUtilityModule.SetupSunlightWithJsonConfig(p3) --[[ Line: 143 ]]
 	Lighting.TimeOfDay = P5.timeOfDay or "09:30:00"
 end
 
-function LightUtilityModule.SetupSceneLight(p3, p4) --[[ Line: 190 ]]
+function LightUtilityModule.SetupSceneLight(p3, p4)
 	local P6 = p3 or {}
 	local LightType = P6.lightType or "SpotLight"
 	local P7 = p4 or LightType
@@ -117,14 +117,14 @@ function LightUtilityModule.SetupSceneLight(p3, p4) --[[ Line: 190 ]]
 	Part.CFrame = P6.partCFrame
 end
 
-function LightUtilityModule.SetupSpotLight(FillLight, p3) --[[ Line: 215 ]]
+function LightUtilityModule.SetupSpotLight(FillLight, p3)
 	-- upvalues: LightUtilityModule (copy)
 	local FillLight1 = FillLight or {}
 	FillLight1.lightType = "SpotLight"
 	LightUtilityModule.SetupSceneLight(FillLight1, p3)
 end
 
-function LightUtilityModule.SetupSpotLightsIn3PointLighting(p3) --[[ Line: 225 ]]
+function LightUtilityModule.SetupSpotLightsIn3PointLighting(p3)
 	-- upvalues: LightUtilityModule (copy)
 	local P10 = p3 or {
 		keyLight = {
@@ -151,7 +151,7 @@ function LightUtilityModule.SetupSpotLightsIn3PointLighting(p3) --[[ Line: 225 ]
 	end
 end
 
-function LightUtilityModule.SetupSpotLightsIn3PointLightingWithJsonConfig(p3) --[[ Line: 251 ]]
+function LightUtilityModule.SetupSpotLightsIn3PointLightingWithJsonConfig(p3)
 	-- upvalues: LightUtilityModule (copy)
 	local P11 = p3 or {
 		rotation = "105",

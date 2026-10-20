@@ -7,15 +7,15 @@ local SignalsModule = require(Parent.Signals)
 local SwitchServerTelemetryModule = require(SwitchServer.Telemetry.SwitchServerTelemetry)
 local STANDARDSERVER = require(Parent.CoreScriptsCommon).Constants.STANDARD_SERVER
 
-local function _(p1) --[[ Line: 21 | Named "fetchAndUpdateShouldSwitchServer" ]]
+local function _(p1)
 	-- upvalues: RunService (copy), Players (copy), RobloxReplicatedStorage (copy), STANDARDSERVER (copy)
-	task.spawn(function() --[[ Line: 22 ]]
+	task.spawn(function()
 		-- upvalues: RunService (upval), Players (upval), RobloxReplicatedStorage (upval), STANDARDSERVER (upval), p1 (copy)
 		if RunService:IsStudio() or not game:GetEngineFeature("GameIdToExcludeAvailable") or Players.MaxPlayers == 1 then return end
 		local GetServerType = RobloxReplicatedStorage:WaitForChild("GetServerType", 2)
 		
 		if not GetServerType then return end
-		local Success, Result = pcall(function() --[[ Line: 36 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: GetServerType (copy)
 			return GetServerType:InvokeServer()
 		end)
@@ -26,16 +26,16 @@ local function _(p1) --[[ Line: 21 | Named "fetchAndUpdateShouldSwitchServer" ]]
 	end)
 end
 
-return function() --[[ Line: 46 | Named "createSwitchServerStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy), RunService (copy), Players (copy), RobloxReplicatedStorage (copy), STANDARDSERVER (copy), SwitchServerTelemetryModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(false)
-	task.spawn(function() --[[ Line: 22 ]]
+	task.spawn(function()
 		-- upvalues: RunService (upval), Players (upval), RobloxReplicatedStorage (upval), STANDARDSERVER (upval), Signal2 (copy)
 		if RunService:IsStudio() or not game:GetEngineFeature("GameIdToExcludeAvailable") or Players.MaxPlayers == 1 then return end
 		local GetServerType = RobloxReplicatedStorage:WaitForChild("GetServerType", 2)
 		
 		if not GetServerType then return end
-		local Success, Result = pcall(function() --[[ Line: 36 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: GetServerType (copy)
 			return GetServerType:InvokeServer()
 		end)
@@ -49,7 +49,7 @@ return function() --[[ Line: 46 | Named "createSwitchServerStore" ]]
 	return {
 		shouldEnableSwitchServer = Signal,
 		isConfirmationOpen = Signal1,
-		setConfirmationOpen = function(p1) --[[ Line: 50 ]]
+		setConfirmationOpen = function(p1)
 			-- upvalues: SwitchServerTelemetryModule (upval), Signal2_1 (copy)
 			if p1 then
 				SwitchServerTelemetryModule.sendSwitchServerButtonActions({ event_type = "click" })

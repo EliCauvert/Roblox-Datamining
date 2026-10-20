@@ -2,13 +2,13 @@
 local _ = require(MomentsCommon.Media.MediaTypes)
 local _ = require(MomentsCommon.Media.mediaNodeRegistry)
 
-local function _(Text: string): string --[[ Line: 76 | Named "toAssetUri" ]]
+local function _(Text: string): string
 	return if typeof(Text) == "string" and string.find(Text, "://") ~= nil then Text else `rbxassetid://{Text}`
 end
 
 return {
 	kind = "music",
-	create = function(p1, p2) --[[ Line: 83 ]]
+	create = function(p1, p2)
 		local Parent = p1.parent
 		assert(Parent ~= nil, "createMusicNode: spec.parent (the item media folder) is required")
 		local AssetId: string = p1.assetId
@@ -32,11 +32,11 @@ return {
 			kind = "music",
 			usesDecoder = false,
 			id = p1.id,
-			assets = function() --[[ Line: 109 ]]
+			assets = function()
 				-- upvalues: Content1 (copy)
 				return { Content1 }
 			end,
-			download = function() --[[ Line: 113 ]]
+			download = function()
 				-- upvalues: Flag (ref), p2 (copy), Content1 (copy)
 				if not Flag then
 					p2.contentProvider:PreloadAsync({ Content1.Uri })
@@ -44,12 +44,12 @@ return {
 					return
 				end
 			end,
-			getAudioSource = function() --[[ Line: 123 ]]
+			getAudioSource = function()
 				-- upvalues: AudioPlayer (copy)
 				return AudioPlayer
 			end,
 			audioStem = { stemId = p1.id, defaultVolume = Volume },
-			play = function() --[[ Line: 127 ]]
+			play = function()
 				-- upvalues: Flag (ref), AudioPlayer (copy)
 				if Flag then return end
 				AudioPlayer.PlaybackSpeed = 1
@@ -58,7 +58,7 @@ return {
 					AudioPlayer:Play()
 				end
 			end,
-			pause = function() --[[ Line: 137 ]]
+			pause = function()
 				-- upvalues: Flag (ref), AudioPlayer (copy)
 				if not Flag then
 					AudioPlayer.PlaybackSpeed = 0
@@ -66,7 +66,7 @@ return {
 					return
 				end
 			end,
-			seek = function(p3) --[[ Line: 146 ]]
+			seek = function(p3)
 				-- upvalues: Flag (ref), StartTime (copy), AudioPlayer (copy)
 				if Flag then return end
 				local NewStartTime = StartTime + p3
@@ -77,7 +77,7 @@ return {
 				end
 				AudioPlayer.TimePosition = NewStartTime
 			end,
-			realignToRegionStart = function() --[[ Line: 158 ]]
+			realignToRegionStart = function()
 				-- upvalues: Flag (ref), AudioPlayer (copy), StartTime (copy)
 				if not Flag then
 					AudioPlayer.TimePosition = StartTime
@@ -85,11 +85,11 @@ return {
 					return
 				end
 			end,
-			getRegion = function() --[[ Line: 165 ]]
+			getRegion = function()
 				-- upvalues: config (copy)
 				return config
 			end,
-			dispose = function() --[[ Line: 169 ]]
+			dispose = function()
 				-- upvalues: Flag (ref), AudioPlayer (copy)
 				if not Flag then
 					Flag = true

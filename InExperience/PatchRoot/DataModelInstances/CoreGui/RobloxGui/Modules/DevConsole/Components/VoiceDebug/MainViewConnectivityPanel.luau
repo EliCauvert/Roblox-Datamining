@@ -54,7 +54,7 @@ local _UDim8 = UDim.new(0.14, 0)
 local _UDim9 = UDim.new(0.17, 0)
 local _UDim10 = UDim.new(0.13, 0)
 
-local function _(Text: string): string --[[ Line: 65 | Named "richTextEscape" ]]
+local function _(Text: string): string
 	return (string.gsub(Text, "[<>&\"']", {
 		["<"] = "&lt;",
 		[">"] = "&gt;",
@@ -64,7 +64,7 @@ local function _(Text: string): string --[[ Line: 65 | Named "richTextEscape" ]]
 	}))
 end
 
-local function GroupHeader(p1) --[[ Line: 77 ]]
+local function GroupHeader(p1)
 	-- upvalues: RoactModule (copy), CellLabelModule (copy)
 	local Subtitle: string = p1.subtitle
 	local Formatted = string.format("<b>%s</b>", (string.gsub(p1.title, "[<>&\"']", {
@@ -93,7 +93,7 @@ local function GroupHeader(p1) --[[ Line: 77 ]]
 	})
 end
 
-local function HeaderCell(p1) --[[ Line: 95 ]]
+local function HeaderCell(p1)
 	-- upvalues: RoactModule (copy), ConstantsModule (copy)
 	return RoactModule.createElement("TextLabel", {
 		BackgroundTransparency = 1,
@@ -107,11 +107,11 @@ local function HeaderCell(p1) --[[ Line: 95 ]]
 	})
 end
 
-local _ = function(p1) --[[ Line: 108 | Named "formatLegState" ]]
+local _ = function(p1)
 	return if p1 == nil or p1 == "" then "—" else p1
 end
 
-local _ = function(p1) --[[ Line: 115 | Named "statusDotColor" ]]
+local _ = function(p1)
 	-- upvalues: config (copy), HoverGreen (copy), config1 (copy), WarningYellow (copy), config2 (copy), ErrorRed (copy), UnselectedGray (copy)
 	if p1 ~= nil then
 		if config[p1] then
@@ -125,12 +125,12 @@ local _ = function(p1) --[[ Line: 115 | Named "statusDotColor" ]]
 	return UnselectedGray
 end
 
-local _ = function(ErrorRed1): boolean --[[ Line: 128 | Named "isAlertColor" ]]
+local _ = function(ErrorRed1): boolean
 	-- upvalues: WarningYellow (copy), ErrorRed (copy)
 	return ErrorRed1 == WarningYellow or ErrorRed1 == ErrorRed
 end
 
-local function LegCell(p1) --[[ Line: 132 ]]
+local function LegCell(p1)
 	-- upvalues: RoactModule (copy), CellLabelModule (copy)
 	local Color = p1.color
 	local XOffset: number = if Color then 12 else 0
@@ -157,11 +157,11 @@ local function LegCell(p1) --[[ Line: 132 ]]
 	})
 end
 
-local function formatSelectedCandidatePair(SelectedCandidatePairLocalTypePublish, SelectedCandidatePairRemoteTypePublish, SelectedCandidatePairLocalProtocolPublish) --[[ Line: 165 ]]
+local function formatSelectedCandidatePair(SelectedCandidatePairLocalTypePublish, SelectedCandidatePairRemoteTypePublish, SelectedCandidatePairLocalProtocolPublish)
 	return if SelectedCandidatePairLocalTypePublish == nil or SelectedCandidatePairLocalTypePublish == "" or SelectedCandidatePairRemoteTypePublish == nil or SelectedCandidatePairRemoteTypePublish == "" then nil elseif SelectedCandidatePairLocalProtocolPublish and SelectedCandidatePairLocalProtocolPublish ~= "" then string.format("%s ↔ %s (%s)", SelectedCandidatePairLocalTypePublish, SelectedCandidatePairRemoteTypePublish, SelectedCandidatePairLocalProtocolPublish) else string.format("%s ↔ %s", SelectedCandidatePairLocalTypePublish, SelectedCandidatePairRemoteTypePublish)
 end
 
-local function TransportStateTable(p1) --[[ Line: 175 ]]
+local function TransportStateTable(p1)
 	-- upvalues: GetFFlagVoiceDebugConsoleV2Module (copy), config (copy), HoverGreen (copy), config1 (copy), WarningYellow (copy), config2 (copy), ErrorRed (copy), UnselectedGray (copy), RoactModule (copy), ConstantsModule (copy), CellLabelModule (copy), _UDim3 (copy), LegCell (copy), _UDim4 (copy), formatSelectedCandidatePair (copy), GroupHeader (copy), HeaderCell (copy)
 	local Connectivity = p1.connectivity or {}
 	local LayoutOrder = p1.layoutOrder
@@ -411,17 +411,17 @@ local function TransportStateTable(p1) --[[ Line: 175 ]]
 	})
 end
 
-local _ = function(p2): string --[[ Line: 401 | Named "formatMLineIndex" ]]
+local _ = function(p2): string
 	local SdpMLineIndex = p2.sdpMLineIndex
 	
 	return if SdpMLineIndex == nil then "—" else tostring(SdpMLineIndex)
 end
 
-local _ = function(p2) --[[ Line: 409 | Named "formatOrDash" ]]
+local _ = function(p2)
 	return if p2 == nil or p2 == "" then "—" else p2
 end
 
-local function TypePill(p2) --[[ Line: 416 ]]
+local function TypePill(p2)
 	-- upvalues: config3 (copy), config4 (copy), RoactModule (copy), ConstantsModule (copy)
 	local CandidateType = p2.candidateType
 	local Entry = CandidateType and config3[CandidateType] or config4
@@ -460,7 +460,7 @@ end
 
 local t = {}
 
-local _ = function(Key) --[[ Line: 459 | Named "parseIceCandidateCached" ]]
+local _ = function(Key)
 	-- upvalues: IceCandidateParserModule (copy), t (copy)
 	if not Key then
 		return IceCandidateParserModule(Key)
@@ -474,7 +474,7 @@ local _ = function(Key) --[[ Line: 459 | Named "parseIceCandidateCached" ]]
 	return Entry
 end
 
-local function CandidateTable(p2) --[[ Line: 471 ]]
+local function CandidateTable(p2)
 	-- upvalues: GetFFlagVoiceDebugConsoleV2Module (copy), IceCandidateParserModule (copy), t (copy), RoactModule (copy), TypePill (copy), _UDim5 (copy), CellLabelModule (copy), _UDim6 (copy), _UDim7 (copy), _UDim8 (copy), _UDim9 (copy), _UDim10 (copy), _UDim (copy), _UDim1 (copy), _UDim2 (copy), HeaderCell (copy), GroupHeader (copy)
 	local Title = p2.title
 	local Candidates = p2.candidates or {}
@@ -668,7 +668,7 @@ local function CandidateTable(p2) --[[ Line: 471 ]]
 	})
 end
 
-local _ = function(Text: string) --[[ Line: 674 | Named "toRichTextSdp" ]]
+local _ = function(Text: string)
 	return if Text == nil then nil else string.gsub(string.gsub(Text, "[<>&\"']", {
 		["<"] = "&lt;",
 		[">"] = "&gt;",
@@ -680,18 +680,18 @@ end
 
 local SdpSection = RoactModule.PureComponent:extend("SdpSection")
 
-function SdpSection.init(p3) --[[ Line: 689 ]]
+function SdpSection.init(p3)
 	p3.state = { expanded = false }
 	
-	function p3.onButtonPress() --[[ Line: 694 ]]
+	function p3.onButtonPress()
 		-- upvalues: p3 (copy)
-		p3:setState(function(p4) --[[ Line: 695 ]]
+		p3:setState(function(p4)
 			return { expanded = not p4.expanded }
 		end)
 	end
 end
 
-function SdpSection.render(p3) --[[ Line: 703 ]]
+function SdpSection.render(p3)
 	-- upvalues: GetFFlagVoiceDebugConsoleV2Module (copy), RoactModule (copy), BannerButtonModule (copy), CellLabelModule (copy), ConstantsModule (copy)
 	local Label = p3.props.label
 	local Sdp: string = p3.props.sdp
@@ -745,7 +745,7 @@ function SdpSection.render(p3) --[[ Line: 703 ]]
 	})
 end
 
-return function(p3) --[[ Line: 757 | Named "ConnectivityPanel" ]]
+return function(p3)
 	-- upvalues: GetFFlagVoiceDebugConsoleV2Module (copy), RoactModule (copy), TransportStateTable (copy), CandidateTable (copy), GroupHeader (copy), SdpSection (copy), CollapsibleSectionModule (copy), MainRowPadding (copy), CellLabelModule (copy)
 	local Connectivity = p3.connectivity or {}
 	local LayoutOrder = p3.layoutOrder

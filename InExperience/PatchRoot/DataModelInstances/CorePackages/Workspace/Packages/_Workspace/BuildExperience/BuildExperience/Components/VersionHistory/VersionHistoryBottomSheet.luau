@@ -19,7 +19,7 @@ local View = FoundationModule.View
 local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
 local VERSIONHISTORYVERSIONSTITLE = LocalizationStringsModule.VERSION_HISTORY_VERSIONS_TITLE
 
-local function VersionHistoryContent(p1) --[[ Line: 54 ]]
+local function VersionHistoryContent(p1)
 	-- upvalues: UseScrollPerformanceTrackerModule (copy), UseScrollEndReachedModule (copy), FIntBuildExperienceVersionHistoryLoadMoreViewportPercentModule (copy), ReactModule (copy), Sheet (copy)
 	UseScrollPerformanceTrackerModule("LuaApp_Build_VersionHistory_Scroll", p1.scrollingFrameRef)
 	UseScrollEndReachedModule(p1.scrollingFrameRef, FIntBuildExperienceVersionHistoryLoadMoreViewportPercentModule / 100, p1.onEndReached)
@@ -27,7 +27,7 @@ local function VersionHistoryContent(p1) --[[ Line: 54 ]]
 	return ReactModule.createElement(Sheet.Content, { scrollingFrameRef = p1.scrollingFrameRef }, p1.children)
 end
 
-return function(p1) --[[ Line: 71 | Named "VersionHistoryBottomSheet" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), VERSIONHISTORYVERSIONSTITLE (copy), LatestVersionCardViewModule (copy), VersionHistoryCardModule (copy), View (copy), Checkbox (copy), Text (copy), UseScaledValueFunction (copy), VersionHistorySectionModule (copy), LiveVersionCardViewModule (copy), Sheet (copy), VersionHistoryContent (copy), RestoreVersionDialogModule (copy)
 	local TestId = p1.testId or "version-history-bottom-sheet"
 	local UseRefResult = ReactModule.useRef(nil)
@@ -41,11 +41,11 @@ return function(p1) --[[ Line: 71 | Named "VersionHistoryBottomSheet" ]]
 		published = LocalizationStringsModule.VERSION_HISTORY_PUBLISHED,
 		title = VERSIONHISTORYVERSIONSTITLE
 	})
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 91 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(p2)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 95 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult1 (copy), UseStateResult2 (copy)
 		if not UseStateResult1 then
 			UseStateResult2(nil)
@@ -53,7 +53,7 @@ return function(p1) --[[ Line: 71 | Named "VersionHistoryBottomSheet" ]]
 			return
 		end
 	end, { UseStateResult1 })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 103 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult (copy), p1 (copy), UseStateResult1 (copy), UseStateResult2_1 (copy), UseStateResult2 (copy)
 		if UseStateResult == nil then return end
 		if p1.isRestoreDisabled or UseStateResult1 then return end
@@ -65,7 +65,7 @@ return function(p1) --[[ Line: 71 | Named "VersionHistoryBottomSheet" ]]
 			
 			return
 		else
-			OnRestoreResult:andThen(function() --[[ Line: 117 ]]
+			OnRestoreResult:andThen(function()
 				-- upvalues: UseStateResult2_1 (upval), UseStateResult2 (upval), p1 (upval)
 				UseStateResult2_1(false)
 				UseStateResult2(nil)
@@ -73,7 +73,7 @@ return function(p1) --[[ Line: 71 | Named "VersionHistoryBottomSheet" ]]
 				if p1.onRestoreStarted ~= nil then
 					p1.onRestoreStarted()
 				end
-			end):catch(function() --[[ Line: 124 ]]
+			end):catch(function()
 				-- upvalues: UseStateResult2_1 (upval)
 				UseStateResult2_1(false)
 			end)
@@ -92,7 +92,7 @@ return function(p1) --[[ Line: 71 | Named "VersionHistoryBottomSheet" ]]
 			defaultSnapPointIndex = 2,
 			isOpen = p1.isOpen == nil or p1.isOpen,
 			snapPoints = { 0.5, 1 },
-			onClose = ReactModule.useCallback(function() --[[ Line: 86 ]]
+			onClose = ReactModule.useCallback(function()
 				-- upvalues: UseStateResult2 (copy), p1 (copy)
 				UseStateResult2(nil)
 				p1.onClose()
@@ -149,7 +149,7 @@ return function(p1) --[[ Line: 71 | Named "VersionHistoryBottomSheet" ]]
 						Cards = ReactModule.createElement(View, {
 							LayoutOrder = 3,
 							tag = "col gap-medium size-full-0 auto-y padding-bottom-large"
-						}, (ReactModule.useMemo(function() --[[ Line: 138 ]]
+						}, (ReactModule.useMemo(function()
 							-- upvalues: p1 (copy), ReactModule (upval), LatestVersionCardViewModule (upval), UseStateResult3 (copy), TestId (copy), VersionHistoryCardModule (upval), UseResult (copy)
 							local Elements = {}
 							local HasLatestVersion = p1.latestVersion ~= nil
@@ -166,7 +166,7 @@ return function(p1) --[[ Line: 71 | Named "VersionHistoryBottomSheet" ]]
 										description = entry.description,
 										badgeText = entry.badgeText,
 										isRestoreDisabled = p1.isRestoreDisabled,
-										onRestore = function() --[[ Line: 159 ]]
+										onRestore = function()
 											-- upvalues: UseResult (upval), entry (copy)
 											UseResult(entry)
 										end,

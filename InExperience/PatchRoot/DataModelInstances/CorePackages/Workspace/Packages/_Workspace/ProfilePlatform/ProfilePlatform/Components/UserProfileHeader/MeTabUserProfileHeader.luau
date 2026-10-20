@@ -18,7 +18,7 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagEnableFontStylisticAlternativesOnSocialScreens = SharedFlagsModule.FFlagEnableFontStylisticAlternativesOnSocialScreens
 local FFlagEnableSocialTabsPage = SharedFlagsModule.FFlagEnableSocialTabsPage
 
-return function(p1) --[[ Line: 54 | Named "MeTabUserProfileHeader" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseProfileWrapperContextModule (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), UseProfileJsonComponentModule (copy), FFlagEnableFontStylisticAlternativesOnSocialScreens (copy), ConstantsModule (copy), ReactModule (copy), View (copy), UserTile (copy), LayoutMode (copy), CTARowModule (copy), HorizontalPageMargin (copy), SocialChipCountsRowContainer (copy), FFlagEnableSocialTabsPage (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ProfileId = UseProfileWrapperContextModule().profileId

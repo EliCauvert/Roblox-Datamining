@@ -7,12 +7,12 @@ local config = {
 	lastUpdated = { 2026, 9, 2 }
 }
 
-local function defaultEmit(p1, p2, p3) --[[ Line: 62 ]]
+local function defaultEmit(p1, p2, p3)
 	-- upvalues: LoggingProtocolModule (copy)
 	LoggingProtocolModule.default:logRobloxTelemetryCounter(p1, p2, p3)
 end
 
-return function(Surface, Reason, p1, p2) --[[ Line: 76 | Named "reportMomentSkip" ]]
+return function(Surface, Reason, p1, p2)
 	-- upvalues: defaultEmit (copy), config (copy)
 	local config1 = { surface = Surface, reason = Reason }
 	

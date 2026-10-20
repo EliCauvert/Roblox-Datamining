@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local SearchInput = FoundationModule.SearchInput
 
-return function(Frame) --[[ Line: 23 | Named "SearchFieldView" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), SearchInput (copy)
 	local TestId = Frame.testId or "SearchField"
 	

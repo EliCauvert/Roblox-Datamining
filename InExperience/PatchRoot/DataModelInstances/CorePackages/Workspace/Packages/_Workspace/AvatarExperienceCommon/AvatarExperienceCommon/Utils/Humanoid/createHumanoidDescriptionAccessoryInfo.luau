@@ -3,7 +3,7 @@ local ConstantsModule = require(AvatarExperienceCommon.Constants)
 local _ = require(AvatarExperienceCommon.Types.CategoryTypes.CategoryTypes)
 local _ = require(AvatarExperienceCommon.Types.CommonTypes)
 
-return function(p1, p2, p3) --[[ Line: 27 | Named "createHumanoidDescriptionAccessoryInfo" ]]
+return function(p1, p2, p3)
 	-- upvalues: ConstantsModule (copy)
 	local Number: number? = tonumber(p2)
 	assert(Number ~= nil, "assetIdAsNumber is not nil. Silence type checker.")

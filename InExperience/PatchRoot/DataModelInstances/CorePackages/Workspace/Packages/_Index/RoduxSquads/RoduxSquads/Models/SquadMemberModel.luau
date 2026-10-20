@@ -1,7 +1,7 @@
 ﻿local TModule = require(script:FindFirstAncestor("RoduxSquads").Parent.t)
 local SquadMemberModelModule = {}
 
-function SquadMemberModelModule.new(p1) --[[ Line: 8 ]]
+function SquadMemberModelModule.new(p1)
 	-- upvalues: SquadMemberModelModule (copy)
 	assert(SquadMemberModelModule.isValid(p1))
 	SquadMemberModelModule.__index = SquadMemberModelModule
@@ -10,7 +10,7 @@ function SquadMemberModelModule.new(p1) --[[ Line: 8 ]]
 	return p1
 end
 
-function SquadMemberModelModule.mock(p1) --[[ Line: 20 ]]
+function SquadMemberModelModule.mock(p1)
 	-- upvalues: SquadMemberModelModule (copy)
 	local P1 = p1 or {}
 	
@@ -20,7 +20,7 @@ function SquadMemberModelModule.mock(p1) --[[ Line: 20 ]]
 	}))
 end
 
-function SquadMemberModelModule.format(p1) --[[ Line: 31 ]]
+function SquadMemberModelModule.format(p1)
 	-- upvalues: SquadMemberModelModule (copy)
 	return (SquadMemberModelModule.new({
 		userId = p1.userId,

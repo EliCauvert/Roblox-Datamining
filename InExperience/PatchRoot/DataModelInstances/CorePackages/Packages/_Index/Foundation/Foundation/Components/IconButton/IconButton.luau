@@ -31,7 +31,7 @@ local config = {
 	variant = require(Foundation.Enums.ButtonVariant).Utility
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 79 | Named "IconButton" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UsePresentationContextFunction (copy), IsBuilderOrMigratedIconFunction (copy), GetIconScaleModule (copy), UseIconButtonVariantsModule (copy), UseIconSizeModule (copy), IsBuilderIconModule (copy), ReactModule (copy), FillBehaviorModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ConstantsModule (copy), TextModule (copy), IsMigratedFunction (copy), Uiblox (copy), BuilderIconsModule (copy), ImageModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
@@ -73,7 +73,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 79 |
 		cornerRadius = _UDim,
 		backgroundStyle = UseIconButtonVariantsModuleResult.container.style,
 		stroke = UseIconButtonVariantsModuleResult.container.stroke,
-		cursor = ReactModule.useMemo(function() --[[ Line: 111 ]]
+		cursor = ReactModule.useMemo(function()
 			-- upvalues: _UDim (copy), UseTokensModuleResult (copy)
 			return {
 				radius = _UDim,

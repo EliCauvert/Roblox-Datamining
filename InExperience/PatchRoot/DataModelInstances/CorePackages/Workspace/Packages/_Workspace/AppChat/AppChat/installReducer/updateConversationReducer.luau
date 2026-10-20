@@ -2,7 +2,7 @@
 local _ = require(AppChat.Models.ConversationChannels)
 local ConversationModule = require(AppChat.Models.Conversation)
 
-local function _(Tbl, Key, p1) --[[ Line: 10 | Named "set" ]]
+local function _(Tbl, Key, p1)
 	if Tbl[Key] == p1 then
 		return Tbl
 	else
@@ -13,7 +13,7 @@ local function _(Tbl, Key, p1) --[[ Line: 10 | Named "set" ]]
 	end
 end
 
-local function updateConversationMessages(p1, InsertResults, Key) --[[ Line: 22 ]]
+local function updateConversationMessages(p1, InsertResults, Key)
 	local List = {}
 	
 	for i, value in p1[Key]:CreateIterator() do
@@ -26,13 +26,13 @@ local function updateConversationMessages(p1, InsertResults, Key) --[[ Line: 22 
 	end
 end
 
-local _ = function(p2, p3, Key) --[[ Line: 40 | Named "updateConversationField" ]]
+local _ = function(p2, p3, Key)
 	if p3[Key] == nil then
 		p3[Key] = p2[Key]
 	end
 end
 
-return function(p2, p3) --[[ Line: 50 | Named "updateConversationToState" ]]
+return function(p2, p3)
 	-- upvalues: ConversationModule (copy), updateConversationMessages (copy)
 	if p3.conversationType == ConversationModule.Type.ONE_TO_ONE_CONVERSATION then
 		local IdForFakeOneOnOneResult = ConversationModule.IdForFakeOneOnOne(p3.participants)

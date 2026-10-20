@@ -57,7 +57,7 @@ local config = {
 	verticalPadding = 0
 }
 
-return (ReactModule.memo(function(p1) --[[ Line: 173 | Named "CollectionGrid" ]]
+return (ReactModule.memo(function(p1)
 	-- upvalues: ValidatePropsFunction (copy), StrictInterfaceResult (copy), CryoModule (copy), config (copy), UseCollectionLayoutModule (copy), ArgCheckModule (copy), UseDesignTokensFunction (copy), UseCollectionSizeBindingsModule (copy), ReactModule (copy), FFlagLuaAppRfyRevealRows (copy), FFlagSduiCollectionGridRevealRows (copy), CollectionHeaderModule (copy), FFlagLuaAppSortHeaderAnchorTag (copy), GridOfCollectionItemsModule (copy)
 	ValidatePropsFunction(StrictInterfaceResult, p1)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)

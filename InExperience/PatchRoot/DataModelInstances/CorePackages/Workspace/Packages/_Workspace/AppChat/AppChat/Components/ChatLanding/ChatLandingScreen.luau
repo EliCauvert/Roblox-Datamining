@@ -29,7 +29,7 @@ local IXPNavigationUtilsModule = require(AppChat.Utils.IXPNavigationUtils)
 local ChatLandingScreen = RoactModule.PureComponent:extend("ChatLandingScreen")
 ChatLandingScreen.defaultProps = { navigation = nil }
 
-function ChatLandingScreen.navigationOptions(p1) --[[ Line: 45 ]]
+function ChatLandingScreen.navigationOptions(p1)
 	-- upvalues: GetFFlagEnableAppChatInExperienceFunction (copy), FFlagEnableHeaderBarButtonsUpdate (copy), ArgoPartyExperimentation (copy), UniversalAppPolicyModule (copy), GetFFlagIsSquadEnabledFunction (copy)
 	local Navigation = p1.navigation
 	local NavigateToRootStackScreenProps = Navigation.getScreenProps("navigateToRootStack", nil)
@@ -66,14 +66,14 @@ function ChatLandingScreen.navigationOptions(p1) --[[ Line: 45 ]]
 	}
 end
 
-function ChatLandingScreen.init(p1) --[[ Line: 96 ]]
+function ChatLandingScreen.init(p1)
 	-- upvalues: FFlagAppChatIxpScreenExposureModule (copy), IXPNavigationUtilsModule (copy), FFlagAppChatIxpParallelScreenLayersModule (copy), FStringAppChatLandingConversationRowsIxpLayerModule (copy), FStringAppChatLandingConversationListIxpLayerModule (copy), FStringAppChatLandingPerformanceIxpLayerModule (copy), LoggerModule (copy), EnumScreensModule (copy), GetCurrentRouteModule (copy), FFlagEnablePartyQuickStartButton (copy), ResetForSquadLobbyForCompactModeModule (copy), RoactNavigationModule (copy), GetTopBarStoreModule (copy)
 	p1.ixpSubscription = if FFlagAppChatIxpScreenExposureModule then IXPNavigationUtilsModule.registerExposureOnFocus(p1.props.navigation, "Party.LandingPage") else nil
 	p1.conversationRowsIxpSubscription = if FFlagAppChatIxpScreenExposureModule and FFlagAppChatIxpParallelScreenLayersModule then IXPNavigationUtilsModule.registerExposureOnFocus(p1.props.navigation, FStringAppChatLandingConversationRowsIxpLayerModule) else nil
 	p1.conversationListIxpSubscription = if FFlagAppChatIxpScreenExposureModule and FFlagAppChatIxpParallelScreenLayersModule then IXPNavigationUtilsModule.registerExposureOnFocus(p1.props.navigation, FStringAppChatLandingConversationListIxpLayerModule) else nil
 	p1.performanceIxpSubscription = if FFlagAppChatIxpScreenExposureModule and FFlagAppChatIxpParallelScreenLayersModule then IXPNavigationUtilsModule.registerExposureOnFocus(p1.props.navigation, FStringAppChatLandingPerformanceIxpLayerModule) else nil
 	
-	function p1.navigateToConversation(ConversationId) --[[ Line: 116 ]]
+	function p1.navigateToConversation(ConversationId)
 		-- upvalues: LoggerModule (upval), p1 (copy), EnumScreensModule (upval)
 		LoggerModule:info("Navigate To Conversation: {} from {screen}", ConversationId)
 		p1.props.navigation.navigate(EnumScreensModule.ChatConversation, {
@@ -83,19 +83,19 @@ function ChatLandingScreen.init(p1) --[[ Line: 96 ]]
 		p1.resetScreenTopBar()
 	end
 	
-	function p1.navigateToCreateChat() --[[ Line: 125 ]]
+	function p1.navigateToCreateChat()
 		-- upvalues: LoggerModule (upval), p1 (copy), EnumScreensModule (upval)
 		LoggerModule:info("Navigate To CreateNewChat from {screen}")
 		p1.props.navigation.push(EnumScreensModule.CreateNewChat)
 	end
 	
-	function p1.navigateToToast(p2) --[[ Line: 130 ]]
+	function p1.navigateToToast(p2)
 		-- upvalues: LoggerModule (upval), p1 (copy), EnumScreensModule (upval)
 		LoggerModule:info("Navigate To Toast from {screen}")
 		p1.props.navigation.navigate(EnumScreensModule.RoactChatToast, p2)
 	end
 	
-	function p1.navigateToPrivacy() --[[ Line: 135 ]]
+	function p1.navigateToPrivacy()
 		-- upvalues: p1 (copy), EnumScreensModule (upval), LoggerModule (upval)
 		local NavigateToLuaAppPagesScreenProp: () -> () = p1.props.navigation.getScreenProps("navigateToLuaAppPages", {})[EnumScreensModule.PrivacySettings]
 		
@@ -109,7 +109,7 @@ function ChatLandingScreen.init(p1) --[[ Line: 96 ]]
 		end
 	end
 	
-	function p1.navigateToSquadLobby(ConversationId) --[[ Line: 146 ]]
+	function p1.navigateToSquadLobby(ConversationId)
 		-- upvalues: LoggerModule (upval), GetCurrentRouteModule (upval), p1 (copy), EnumScreensModule (upval), FFlagEnablePartyQuickStartButton (upval), ResetForSquadLobbyForCompactModeModule (upval), RoactNavigationModule (upval)
 		LoggerModule:info("Navigate To SquadLobby from {screen}")
 		local CurrentRouteModule = GetCurrentRouteModule(p1.props.navigation.state)
@@ -138,12 +138,12 @@ function ChatLandingScreen.init(p1) --[[ Line: 96 ]]
 		end
 	end
 	
-	function p1.setScreenTopBar(ChatLanding) --[[ Line: 178 ]]
+	function p1.setScreenTopBar(ChatLanding)
 		-- upvalues: GetTopBarStoreModule (upval), EnumScreensModule (upval)
 		GetTopBarStoreModule(false).setScreenTopBar(EnumScreensModule.ChatLanding, ChatLanding)
 	end
 	
-	function p1.resetScreenTopBar() --[[ Line: 182 ]]
+	function p1.resetScreenTopBar()
 		-- upvalues: GetTopBarStoreModule (upval), EnumScreensModule (upval), p1 (copy)
 		local v1 = GetTopBarStoreModule(false).getScreenTopBar(EnumScreensModule.ChatLanding)(false) or {}
 		
@@ -153,7 +153,7 @@ function ChatLandingScreen.init(p1) --[[ Line: 96 ]]
 	end
 end
 
-function ChatLandingScreen.render(p1) --[[ Line: 193 ]]
+function ChatLandingScreen.render(p1)
 	-- upvalues: LoggerModule (copy), ArgCheckModule (copy), RoactModule (copy), TopBarProviderModule (copy), EnumScreensModule (copy), ChatLandingContainerModule (copy), ChatSearchBoxModule (copy), GetFFlagEnablePushNotificationsUpsellModalChatFunction (copy), CheckAndOpenChatPushUpsellModule (copy)
 	LoggerModule:info("{screen} render")
 	local NavigationInChatLandingScreen = ArgCheckModule.isNotNil(p1.props.navigation, "navigation in ChatLandingScreen")
@@ -163,7 +163,7 @@ function ChatLandingScreen.render(p1) --[[ Line: 193 ]]
 	
 	return RoactModule.createElement(TopBarProviderModule, {
 		screenName = EnumScreensModule.ChatLanding,
-		render = function(p2) --[[ Line: 202 ]]
+		render = function(p2)
 			-- upvalues: EnumScreensModule (upval), ArgCheckModule (upval), RoactModule (upval), ChatLandingContainerModule (upval), ShowSearchRowScreenProps (copy), NavigationInChatLandingScreen (copy), p1 (copy), KeyParam (copy), ChatSearchBoxModule (upval), TopBarHeightScreenProps (copy), GetFFlagEnablePushNotificationsUpsellModalChatFunction (upval), CheckAndOpenChatPushUpsellModule (upval)
 			local ScreenTopBar = p2.getScreenTopBar(EnumScreensModule.ChatLanding)
 			ArgCheckModule.isType(ScreenTopBar, "table", "screenTopBar")
@@ -191,7 +191,7 @@ function ChatLandingScreen.render(p1) --[[ Line: 193 ]]
 				ChatSearchBox = RoactModule.createElement(ChatSearchBoxModule, {
 					height = TopBarHeightScreenProps,
 					initialText = ScreenTopBar.filterText,
-					onFilter = function(FilterText) --[[ Line: 236 ]]
+					onFilter = function(FilterText)
 						-- upvalues: p2 (copy), EnumScreensModule (upval)
 						p2.setScreenTopBar(EnumScreensModule.ChatLanding, { filterText = FilterText })
 					end
@@ -205,7 +205,7 @@ function ChatLandingScreen.render(p1) --[[ Line: 193 ]]
 	})
 end
 
-function ChatLandingScreen.didMount(p1) --[[ Line: 257 ]]
+function ChatLandingScreen.didMount(p1)
 	-- upvalues: LoggerModule (copy), GetFFlagEnableAppChatInExperienceFunction (copy), SharedFlagsModule (copy), ArgoPartyExperimentation (copy), UniversalAppPolicyModule (copy), GetFFlagIsSquadEnabledFunction (copy)
 	LoggerModule:info("{screen} mounted")
 	local Navigation = p1.props.navigation
@@ -243,7 +243,7 @@ function ChatLandingScreen.didMount(p1) --[[ Line: 257 ]]
 	})
 end
 
-function ChatLandingScreen.willUnmount(p1) --[[ Line: 309 ]]
+function ChatLandingScreen.willUnmount(p1)
 	if p1.ixpSubscription then
 		p1.ixpSubscription.remove()
 	end

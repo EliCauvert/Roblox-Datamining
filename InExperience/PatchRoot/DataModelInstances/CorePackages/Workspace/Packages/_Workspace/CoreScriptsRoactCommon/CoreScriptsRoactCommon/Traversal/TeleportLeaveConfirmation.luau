@@ -9,7 +9,7 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local Orientation = FoundationModule.Enums.Orientation
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 40 | Named "TeleportLeaveConfirmation" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), TraversalTelemetryModule (copy), TeleportBackModule (copy), Dialog (copy), DialogSize (copy), Orientation (copy), ButtonVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		leaveHeader = "CoreScripts.InGameMenu.Traversal.LeaveHeader",
@@ -23,7 +23,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 40 |
 	
 	return ReactModule.createElement(Dialog.Root, {
 		size = DialogSize.Small,
-		onClose = function(p2) --[[ Line: 65 ]]
+		onClose = function(p2)
 			-- upvalues: TraversalTelemetryModule (upval), p1 (copy)
 			TraversalTelemetryModule.sendTeleportConfirmationActions({ event_type = "cancel", source = p1.source })
 			
@@ -49,7 +49,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 40 |
 					testId = "--teleport-leave-continue",
 					text = UseLocalizationResult.leaveContinueAction,
 					variant = ButtonVariant.Emphasis,
-					onActivated = ReactModule.useCallback(function() --[[ Line: 54 ]]
+					onActivated = ReactModule.useCallback(function()
 						-- upvalues: TraversalTelemetryModule (upval), p1 (copy), TeleportBackModule (upval)
 						TraversalTelemetryModule.sendTeleportConfirmationActions({ event_type = "confirm", source = p1.source })
 						TeleportBackModule(p1.placeId)
@@ -59,7 +59,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 40 |
 					testId = "--teleport-leave-cancel",
 					text = UseLocalizationResult.leaveCancelAction,
 					variant = ButtonVariant.Standard,
-					onActivated = function() --[[ Line: 105 ]]
+					onActivated = function()
 						-- upvalues: TraversalTelemetryModule (upval), p1 (copy)
 						TraversalTelemetryModule.sendTeleportConfirmationActions({ event_type = "cancel", source = p1.source })
 						p1.onCancel()

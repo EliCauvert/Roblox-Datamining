@@ -12,19 +12,19 @@ local SubMenuContextModule = require(Chrome.ChromeShared.Unibar.SubMenuContext)
 local InExperienceAppChatModalModule = require(CorePackages.Workspace.Packages.AppChat.InExperienceAppChatModal)
 local FFlagTokenizeUnibarConstantsWithStyleProvider = require(Chrome.ChromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
 
-return function() --[[ Line: 26 | Named "PartyIcon" ]]
+return function()
 	-- upvalues: UseTokensFunction (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), MappedSignal (copy), InExperienceAppChatModalModule (copy), UseMappedSignalFunction (copy), UsePartyIconModule (copy), ReactModule (copy), SubMenuContextModule (copy), FoundationModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ICONSIZE = if FFlagTokenizeUnibarConstantsWithStyleProvider then UnibarStyle.use().ICON_SIZE else ConstantsModule.ICON_SIZE
-	local UsePartyIconModuleResult = UsePartyIconModule(ICONSIZE, 24, if UseMappedSignalFunction((MappedSignal.new(InExperienceAppChatModalModule.default.visibilitySignal.Event, function(_) --[[ Line: 37 ]]
+	local UsePartyIconModuleResult = UsePartyIconModule(ICONSIZE, 24, if UseMappedSignalFunction((MappedSignal.new(InExperienceAppChatModalModule.default.visibilitySignal.Event, function(_)
 		-- upvalues: InExperienceAppChatModalModule (upval)
 		return InExperienceAppChatModalModule:getVisible()
 	end))) then "icons/menu/2-person-with-bubble-on" else "icons/menu/2-person-with-bubble")
 	local UseContextResult = ReactModule.useContext(SubMenuContextModule)
 	
-	local function _(p1) --[[ Line: 45 | Named "getTransparency" ]]
+	local function _(p1)
 		-- upvalues: UseContextResult (copy)
-		return if UseContextResult then UseContextResult:map(function(p2: number): number --[[ Line: 47 ]]
+		return if UseContextResult then UseContextResult:map(function(p2: number): number
 			-- upvalues: p1 (copy)
 			return p1 + (1 - p1) * (1 - p2)
 		end) else p1
@@ -38,7 +38,7 @@ return function() --[[ Line: 26 | Named "PartyIcon" ]]
 	local Image = FoundationModule.Image
 	local config1 = {
 		tag = "anchor-center-center position-center-center radius-circle",
-		Size = UsePartyIconModuleResult.size:map(function(XOffset): UDim2 --[[ Line: 57 ]]
+		Size = UsePartyIconModuleResult.size:map(function(XOffset): UDim2
 			return UDim2.fromOffset(XOffset, XOffset)
 		end)
 	}
@@ -50,7 +50,7 @@ return function() --[[ Line: 26 | Named "PartyIcon" ]]
 		
 		if UseContextResult then
 			local v1 = 0
-			MapResult = UseContextResult:map(function(p1: number): number --[[ Line: 47 ]]
+			MapResult = UseContextResult:map(function(p1: number): number
 				-- upvalues: v1 (copy)
 				return v1 + (1 - v1) * (1 - p1)
 			end)
@@ -66,7 +66,7 @@ return function() --[[ Line: 26 | Named "PartyIcon" ]]
 	local Transparency = UseTokensResult.Color.Content.Emphasis.Transparency
 	config1.imageStyle = {
 		Color3 = UseTokensResult.Color.Content.Emphasis.Color3,
-		Transparency = if UseContextResult then UseContextResult:map(function(p1: number): number --[[ Line: 47 ]]
+		Transparency = if UseContextResult then UseContextResult:map(function(p1: number): number
 			-- upvalues: Transparency (copy)
 			return Transparency + (1 - Transparency) * (1 - p1)
 		end) else Transparency
@@ -75,7 +75,7 @@ return function() --[[ Line: 26 | Named "PartyIcon" ]]
 	local Transparency1 = UseTokensResult.Color.System.Success.Transparency
 	local BackgroundStyle = {
 		Color3 = UseTokensResult.Color.System.Success.Color3,
-		Transparency = if UseContextResult then UseContextResult:map(function(p1: number): number --[[ Line: 47 ]]
+		Transparency = if UseContextResult then UseContextResult:map(function(p1: number): number
 			-- upvalues: Transparency1 (copy)
 			return Transparency1 + (1 - Transparency1) * (1 - p1)
 		end) else Transparency1
@@ -88,7 +88,7 @@ return function() --[[ Line: 26 | Named "PartyIcon" ]]
 		backgroundStyle = BackgroundStyle,
 		stroke = {
 			Color = UseTokensResult.Color.Surface.Surface_0.Color3,
-			Transparency = if UseContextResult then UseContextResult:map(function(p1: number): number --[[ Line: 47 ]]
+			Transparency = if UseContextResult then UseContextResult:map(function(p1: number): number
 				-- upvalues: Transparency2 (copy)
 				return Transparency2 + (1 - Transparency2) * (1 - p1)
 			end) else Transparency2,

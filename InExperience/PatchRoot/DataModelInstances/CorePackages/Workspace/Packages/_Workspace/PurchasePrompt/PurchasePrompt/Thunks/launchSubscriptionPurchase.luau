@@ -15,9 +15,9 @@ local IsErrorReasonPrefixWithEconomicRestrictionsFunction = IAPExperienceModule.
 local ParseErrorReasonToEconomicRestrictionFunction = IAPExperienceModule.Utility.parseErrorReasonToEconomicRestriction
 local list = { ExternalSettingsModule, NetworkModule }
 
-return function(p1) --[[ Line: 23 | Named "launchSubscriptionPurchase" ]]
+return function(p1)
 	-- upvalues: ThunkModule (copy), list (copy), ExternalSettingsModule (copy), NetworkModule (copy), PurchaseCompleteRecievedModule (copy), HideWindowModule (copy), PerformSubscriptionPurchaseModule (copy), IsErrorReasonPrefixWithEconomicRestrictionsFunction (copy), ParseErrorReasonToEconomicRestrictionFunction (copy), SetEconomicRestrictionErrorModule (copy), ErrorOccurredModule (copy), PurchaseErrorModule (copy), SetPromptStateModule (copy), PromptStateModule (copy)
-	return ThunkModule.new(script.Name, list, function(p2, p3) --[[ Line: 24 ]]
+	return ThunkModule.new(script.Name, list, function(p2, p3)
 		-- upvalues: ExternalSettingsModule (upval), NetworkModule (upval), PurchaseCompleteRecievedModule (upval), HideWindowModule (upval), PerformSubscriptionPurchaseModule (upval), p1 (copy), IsErrorReasonPrefixWithEconomicRestrictionsFunction (upval), ParseErrorReasonToEconomicRestrictionFunction (upval), SetEconomicRestrictionErrorModule (upval), ErrorOccurredModule (upval), PurchaseErrorModule (upval), SetPromptStateModule (upval), PromptStateModule (upval)
 		local v1 = p3[NetworkModule]
 		
@@ -27,7 +27,7 @@ return function(p1) --[[ Line: 23 | Named "launchSubscriptionPurchase" ]]
 			
 			return nil
 		else
-			PerformSubscriptionPurchaseModule(v1, p2:getState().promptRequest.id, p1):catch(function(Err) --[[ Line: 35 ]]
+			PerformSubscriptionPurchaseModule(v1, p2:getState().promptRequest.id, p1):catch(function(Err)
 				-- upvalues: IsErrorReasonPrefixWithEconomicRestrictionsFunction (upval), ParseErrorReasonToEconomicRestrictionFunction (upval), p2 (copy), SetEconomicRestrictionErrorModule (upval), ErrorOccurredModule (upval), PurchaseErrorModule (upval)
 				if IsErrorReasonPrefixWithEconomicRestrictionsFunction(Err) then
 					local ParseErrorReasonToEconomicRestrictionResult = ParseErrorReasonToEconomicRestrictionFunction(Err)

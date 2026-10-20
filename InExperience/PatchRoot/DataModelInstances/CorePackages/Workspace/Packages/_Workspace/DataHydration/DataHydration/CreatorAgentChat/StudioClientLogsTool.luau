@@ -2,18 +2,18 @@
 local FFlagCreatorAgentChatFilterTerminalClientToolsModule = require(script.Parent.FFlagCreatorAgentChatFilterTerminalClientTools)
 local _ = require(script.Parent.types)
 
-local function _(Text: string): boolean --[[ Line: 42 | Named "valueLooksLikeToolName" ]]
+local function _(Text: string): boolean
 	return typeof(Text) == "string" and string.lower(Text) == "ask_for_logs"
 end
 
-local _ = function(p1) --[[ Line: 63 | Named "decodePersistedToolResultText" ]]
+local _ = function(p1)
 	-- upvalues: HttpService (copy)
 	local Success, Result = pcall(HttpService.JSONDecode, HttpService, p1)
 	
 	return if Success and typeof(Result) == "table" and typeof(Result.text) == "string" then Result.text else nil
 end
 
-local function getPersistedToolResultText(ToolCall) --[[ Line: 73 ]]
+local function getPersistedToolResultText(ToolCall)
 	-- upvalues: HttpService (copy)
 	if ToolCall.content == nil then
 		return nil
@@ -48,7 +48,7 @@ return {
 			properties = { reason = { type = "string" } }
 		}
 	},
-	toolCallLooksLikeClientLogsRequest = function(p1): boolean --[[ Line: 46 ]]
+	toolCallLooksLikeClientLogsRequest = function(p1): boolean
 		local Kind: string = p1.kind
 		
 		if typeof(Kind) ~= "string" or string.lower(Kind) ~= "ask_for_logs" then
@@ -72,7 +72,7 @@ return {
 		end
 		return true
 	end,
-	findClientLogsRequestInTurnState = function(p1, p2) --[[ Line: 96 ]]
+	findClientLogsRequestInTurnState = function(p1, p2)
 		-- upvalues: FFlagCreatorAgentChatFilterTerminalClientToolsModule (copy), getPersistedToolResultText (copy)
 		local List = {}
 		
@@ -122,7 +122,7 @@ return {
 		end
 		return nil, nil, nil, nil
 	end,
-	formatLogsContent = function(ClientLogs, ServerLogs) --[[ Line: 128 ]]
+	formatLogsContent = function(ClientLogs, ServerLogs)
 		-- upvalues: HttpService (copy)
 		return {
 			text = HttpService:JSONEncode({
@@ -132,7 +132,7 @@ return {
 			})
 		}
 	end,
-	formatNotInGameContent = function() --[[ Line: 138 ]]
+	formatNotInGameContent = function()
 		-- upvalues: HttpService (copy)
 		return {
 			text = HttpService:JSONEncode({
@@ -141,7 +141,7 @@ return {
 			})
 		}
 	end,
-	formatStaleLogsContent = function() --[[ Line: 147 ]]
+	formatStaleLogsContent = function()
 		-- upvalues: HttpService (copy)
 		return {
 			text = HttpService:JSONEncode({

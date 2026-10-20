@@ -5,26 +5,26 @@ local ReactModule = require(Parent.React)
 local PresetCooldownContextModule = require(script.Parent.PresetCooldownContext)
 local FIntPresetChatCooldownLuaMsRatio = require(Parent.ExpChatShared).Flags.FIntPresetChatCooldownLuaMs / 1000
 
-return ReactModule.memo(function(p1) --[[ Line: 21 | Named "PresetMessageButton" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), PresetCooldownContextModule (copy), FIntPresetChatCooldownLuaMsRatio (copy), TweenService (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local Circle = UseTokensResult.Radius.Circle
 	local UseContextResult = ReactModule.useContext(PresetCooldownContextModule)
 	local IsCooldownActive = UseContextResult ~= nil and UseContextResult.isCooldownActive
 	local EndsAt = if UseContextResult == nil then nil else UseContextResult.endsAt
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 28 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		p1.onActivated(p1.presetId)
 	end, { p1.onActivated, p1.presetId })
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult1 = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 35 ]]
+	local UseResult1 = ReactModule.useCallback(function(Frame: Frame)
 		-- upvalues: UseStateResult (copy), UseStateResult2 (copy)
 		if UseStateResult == nil and Frame and Frame.AbsoluteSize.X > 0 then
 			UseStateResult2(Frame.AbsoluteSize)
 		end
 	end, { UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 41 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: EndsAt (copy), UseStateResult (copy), UseRefResult (copy), FIntPresetChatCooldownLuaMsRatio (upval), TweenService (upval)
 		if EndsAt == nil or UseStateResult == nil then return end
 		local Current = UseRefResult.current
@@ -37,7 +37,7 @@ return ReactModule.memo(function(p1) --[[ Line: 21 | Named "PresetMessageButton"
 		local Tween = TweenService:Create(Current, TweenInfo.new(EndsAtDelta, Enum.EasingStyle.Linear), { Size = UDim2.fromOffset(0, UseStateResult.Y) })
 		Tween:Play()
 		
-		return function() --[[ Line: 59 ]]
+		return function()
 			-- upvalues: Tween (copy)
 			Tween:Cancel()
 			Tween:Destroy()

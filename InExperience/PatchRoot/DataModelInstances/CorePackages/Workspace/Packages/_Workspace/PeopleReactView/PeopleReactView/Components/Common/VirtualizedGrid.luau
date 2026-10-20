@@ -9,7 +9,7 @@ local _ = require(PeopleReactView.Stores.GetScrollingFrameStore)
 local GetVirtualizedGridStoreModule = require(PeopleReactView.Stores.GetVirtualizedGridStore)
 local FFlagFixVirtualizedGridNumItems = require(Parent.PeopleService).getService("Flags").FFlagFixVirtualizedGridNumItems
 
-return ReactModule.memo(function(p1) --[[ Line: 38 | Named "VirtualizedGrid" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: SignalsReactModule (copy), GetVirtualizedGridStoreModule (copy), ReactModule (copy), SignalsModule (copy), FFlagFixVirtualizedGridNumItems (copy), VirtualizedItemModule (copy), View (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetVirtualizedGridStoreModule)
 	local UseSignalStateResult1: number = SignalsReactModule.useSignalState(UseSignalStateResult.getNumVirtualizedItems)
@@ -19,20 +19,20 @@ return ReactModule.memo(function(p1) --[[ Line: 38 | Named "VirtualizedGrid" ]]
 		itemHeight = p1.itemHeight,
 		numColumns = p1.numColumns
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 51 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: JoinBindingsResult (copy), p1 (copy)
-		return JoinBindingsResult:map(function(p2): UDim2 --[[ Line: 52 ]]
+		return JoinBindingsResult:map(function(p2): UDim2
 			-- upvalues: p1 (upval)
 			return UDim2.new(1, 0, 0, math.ceil(p1.numItems / p2.numColumns) * (p2.itemHeight + p1.gapSize) - p1.gapSize)
 		end)
 	end, { p1.numItems, p1.gapSize })
-	ReactModule.useEffect(function() --[[ Line: 62 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseRefResult (copy), UseSignalStateResult (copy), SignalsModule (upval)
 		local Callback = nil
 		local Connection = nil
 		
 		if p1.scrollingFrameStore and UseRefResult.current then
-			local function handleCalculateVirtualizedGridLimits() --[[ Line: 68 ]]
+			local function handleCalculateVirtualizedGridLimits()
 				-- upvalues: UseSignalStateResult (upval), p1 (upval)
 				UseSignalStateResult.calculateVirtualizedGridLimits(p1.scrollingFrameStore.getCanvasPositionY(), p1.scrollingFrameStore.getAbsoluteSizeY(), p1.itemWidth:getValue(), p1.itemHeight:getValue(), p1.numColumns:getValue(), p1.gapSize)
 			end
@@ -41,13 +41,13 @@ return ReactModule.memo(function(p1) --[[ Line: 38 | Named "VirtualizedGrid" ]]
 				p1.onContainerWidthChanged(UseRefResult.current.AbsoluteSize.X)
 			end
 			handleCalculateVirtualizedGridLimits()
-			Callback = SignalsModule.createEffect(function(p2) --[[ Line: 85 ]]
+			Callback = SignalsModule.createEffect(function(p2)
 				-- upvalues: p1 (upval), handleCalculateVirtualizedGridLimits (copy)
 				p1.scrollingFrameStore.getCanvasPositionY(p2)
 				p1.scrollingFrameStore.getAbsoluteSizeY(p2)
 				handleCalculateVirtualizedGridLimits()
 			end)
-			Connection = UseRefResult.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 93 ]]
+			Connection = UseRefResult.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: p1 (upval), UseRefResult (upval), handleCalculateVirtualizedGridLimits (copy)
 				if p1.onContainerWidthChanged then
 					p1.onContainerWidthChanged(UseRefResult.current.AbsoluteSize.X)
@@ -55,7 +55,7 @@ return ReactModule.memo(function(p1) --[[ Line: 38 | Named "VirtualizedGrid" ]]
 				handleCalculateVirtualizedGridLimits()
 			end)
 		end
-		return function() --[[ Line: 102 ]]
+		return function()
 			-- upvalues: Callback (ref), Connection (ref)
 			if Callback then
 				Callback()

@@ -9,7 +9,7 @@ local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 
-local function PriceLine(Frame) --[[ Line: 41 ]]
+local function PriceLine(Frame)
 	-- upvalues: ReactModule (copy), View (copy), Text (copy), Icon (copy), IconName (copy), IconSize (copy)
 	local Line = Frame.line
 	local AutoXyTextTitleSmallContentEmphasis: string = if Frame.isTotal then "auto-xy text-title-small content-emphasis" else "auto-xy text-body-small content-emphasis"
@@ -46,7 +46,7 @@ local function PriceLine(Frame) --[[ Line: 41 ]]
 	})
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 84 | Named "GiftRobuxBreakdownView" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), PriceLine (copy), View (copy), StateLayerAffordance (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy), Divider (copy)
 	local Elements = {}
 	

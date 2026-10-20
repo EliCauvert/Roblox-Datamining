@@ -1,13 +1,13 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("InExperienceShop").Parent.React)
 local GuiService = game:GetService("GuiService")
 
-return function(Callback) --[[ Line: 11 | Named "useCloseOnCoreMenu" ]]
+return function(Callback)
 	-- upvalues: ReactModule (copy), GuiService (copy)
-	ReactModule.useEffect(function() --[[ Line: 12 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: GuiService (upval), Callback (copy)
 		local MenuOpenedConnection = GuiService.MenuOpened:Connect(Callback)
 		
-		return function() --[[ Line: 14 ]]
+		return function()
 			-- upvalues: MenuOpenedConnection (copy)
 			MenuOpenedConnection:Disconnect()
 		end

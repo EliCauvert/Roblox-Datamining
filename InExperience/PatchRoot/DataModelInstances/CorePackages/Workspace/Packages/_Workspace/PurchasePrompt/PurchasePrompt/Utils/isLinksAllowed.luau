@@ -4,7 +4,7 @@ local UpsellFlowModule = require(Parent.Enums.UpsellFlow)
 local GetUpsellFlowModule = require(Parent.NativeUpsell.getUpsellFlow)
 local GetAppFeaturePoliciesFunction = require(Parent.Parent.UniversalAppPolicy).getAppFeaturePolicies
 
-return function(): boolean --[[ Line: 11 ]]
+return function(): boolean
 	-- upvalues: UserInputService (copy), GetUpsellFlowModule (copy), GetAppFeaturePoliciesFunction (copy), UpsellFlowModule (copy)
 	local UpsellFlowModule1 = GetUpsellFlowModule((UserInputService:GetPlatform()))
 	

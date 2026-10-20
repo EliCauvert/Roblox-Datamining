@@ -16,16 +16,16 @@ local config = {
 	borderRadius = UDim.new(0, 8)
 }
 
-return function(p1) --[[ Line: 40 | Named "MediaGalleryCarousel" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), Button (copy), ButtonType (copy), _UDim2 (copy), ImageSetLabel (copy), _UDim2_1 (copy), Images (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.zero)
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 44 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: JoinResult (copy), UseStateResult2 (copy)
 		local XRatio = (Frame.AbsoluteSize.X - JoinResult.itemPadding * (JoinResult.numItemsShown - 1)) / JoinResult.numItemsShown
 		UseStateResult2(Vector2.new(XRatio, XRatio / JoinResult.itemAspectRatio))
 	end, { JoinResult.itemAspectRatio, JoinResult.numItemsShown })
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 55 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: JoinResult (copy)
 		if JoinResult.onVideoPlayActivated and JoinResult.items[p2].isYouTubeVideo then
 			return JoinResult.onVideoPlayActivated(p2)
@@ -46,7 +46,7 @@ return function(p1) --[[ Line: 40 | Named "MediaGalleryCarousel" ]]
 			ScaleType = Enum.ScaleType.Crop,
 			BackgroundTransparency = 1,
 			AutoButtonColor = false,
-			[ReactModule.Event.Activated] = function() --[[ Line: 82 ]]
+			[ReactModule.Event.Activated] = function()
 				-- upvalues: UseResult1 (copy), LayoutOrder (copy)
 				UseResult1(LayoutOrder)
 			end
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 40 | Named "MediaGalleryCarousel" ]]
 				size = _UDim2,
 				anchorPoint = Vector2.new(0.5, 0.5),
 				position = UDim2.fromScale(0.5, 0.5),
-				onActivated = function() --[[ Line: 95 ]]
+				onActivated = function()
 					-- upvalues: UseResult1 (copy), LayoutOrder (copy)
 					UseResult1(LayoutOrder)
 				end

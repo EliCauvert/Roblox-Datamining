@@ -16,7 +16,7 @@ local FFlagLuaAppHomePageFirstImageLoadObserver = require(Parent.SharedFlags).FF
 local FFlagLuaAppSduiVideoThumbnail = require(Parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
 local FFlagLuaAppHomeMomentVideoFallback = require(Parent.SharedFlags).FFlagLuaAppHomeMomentVideoFallback
 
-local function LoadableVideoFrame(Image, p1) --[[ Line: 45 ]]
+local function LoadableVideoFrame(Image, p1)
 	-- upvalues: ReactModule (copy), FFlagLuaAppEdpMediaGalleryAutoAdvance (copy), FFlagLuaAppEdpMediaGalleryFullScreen (copy), FFlagLuaAppEdpConsoleMediaGalleryVideo (copy), FFlagLuaAppEnableHomepageOneByTwoTile (copy), ArgCheckModule (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), VideoFrameWrapperModule (copy), FFlagLuaAppHomeMomentVideoFallback (copy), GetAuthorizedVideoUriModule (copy), FFlagLuaAppSduiVideoThumbnail (copy), LoadableImage (copy), Skeleton (copy), Radius (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseRefResult = if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableHomepageOneByTwoTile then nil else ReactModule.useRef(nil)
@@ -28,7 +28,7 @@ local function LoadableVideoFrame(Image, p1) --[[ Line: 45 ]]
 		UseRefResult1.current = nil
 	end
 	local IsNotThumbnailMatch: boolean = Image.thumbnail ~= nil and Image.thumbnail ~= ""
-	local UseResult = if FFlagLuaAppEdpMediaGalleryAutoAdvance then ReactModule.useCallback(function() --[[ Line: 111 ]]
+	local UseResult = if FFlagLuaAppEdpMediaGalleryAutoAdvance then ReactModule.useCallback(function()
 		-- upvalues: Image (copy)
 		if Image.onVideoEnded then
 			Image.onVideoEnded()
@@ -49,7 +49,7 @@ local function LoadableVideoFrame(Image, p1) --[[ Line: 45 ]]
 			isPlaying = Image.shouldStartPlayback,
 			looped = Image.looped,
 			volume = if Image.muted then 0 else nil,
-			onLoaded = ReactModule.useCallback(function() --[[ Line: 66 ]]
+			onLoaded = ReactModule.useCallback(function()
 				-- upvalues: FFlagLuaAppEdpMediaGalleryAutoAdvance (upval), FFlagLuaAppEdpMediaGalleryFullScreen (upval), FFlagLuaAppEdpConsoleMediaGalleryVideo (upval), FFlagLuaAppEnableHomepageOneByTwoTile (upval), p1 (copy), UseRefResult (copy), ArgCheckModule (upval), UseRefResult1 (copy), Image (copy), UseStateResult2 (copy)
 				local Current = nil
 				
@@ -77,7 +77,7 @@ local function LoadableVideoFrame(Image, p1) --[[ Line: 45 ]]
 				if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableHomepageOneByTwoTile then p1 else UseRefResult,
 				UseRefResult1
 			}),
-			onLooped = ReactModule.useCallback(function() --[[ Line: 118 ]]
+			onLooped = ReactModule.useCallback(function()
 				-- upvalues: Image (copy)
 				if Image.onVideoLooped then
 					Image.onVideoLooped()

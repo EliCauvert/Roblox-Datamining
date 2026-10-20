@@ -9,7 +9,7 @@ local FFlagLuaAppOneByTwoHoverIdleAutoplay = require(Parent.SharedFlags).FFlagLu
 local FeedVideoPlaybackContextModule = {}
 FeedVideoPlaybackContextModule.__index = FeedVideoPlaybackContextModule
 
-function FeedVideoPlaybackContextModule.new(NewResult, p1, p2, AutoplayAllCandidates) --[[ Line: 30 ]]
+function FeedVideoPlaybackContextModule.new(NewResult, p1, p2, AutoplayAllCandidates)
 	-- upvalues: VideoPlaybackCoordinatorModule (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), VideoPlaybackDetectionMethodModule (copy), ViewportVideoAutoplayModeModule (copy), ViewportVideoAutoplayControllerModule (copy), FFlagLuaAppVideoAutoplayFeedElection (copy), FeedVideoPlaybackContextModule (copy)
 	local NewVideoPlaybackCoordinator = VideoPlaybackCoordinatorModule.new()
 	local AutoplayAllCandidates1 = nil

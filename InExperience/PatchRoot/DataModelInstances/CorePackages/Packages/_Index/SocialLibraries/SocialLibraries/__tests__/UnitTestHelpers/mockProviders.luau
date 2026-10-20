@@ -4,11 +4,11 @@ local Roact = DependenciesModule.Roact
 local Rodux = DependenciesModule.Rodux
 local MockStyleModule = require(script.Parent.mockStyle)
 local MockNavigationModule = require(script.Parent.mockNavigation)
-local NewResult = Rodux.Store.new(function() --[[ Line: 10 ]]
+local NewResult = Rodux.Store.new(function()
 	return {}
 end, {}, { Rodux.thunkMiddleware })
 
-return function(p1, p2) --[[ Line: 14 ]]
+return function(p1, p2)
 	-- upvalues: NewResult (copy), MockNavigationModule (copy), MockStyleModule (copy), Roact (copy), RoactRoduxModule (copy)
 	local P1 = p2 or {}
 	

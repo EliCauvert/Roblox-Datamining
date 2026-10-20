@@ -1,6 +1,6 @@
 ﻿local CryoModule = require(script:FindFirstAncestor("AppBlox").Parent.Cryo)
 
-return function(p1) --[[ Line: 6 | Named "getShowItems" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy)
 	local JoinResults = {}
 	local JoinResults1 = {}

@@ -10,11 +10,11 @@ local Outcome = {
 
 return {
 	Outcome = Outcome,
-	resolveGalleryOutcome = function(p1, p2, PermissionDenied) --[[ Line: 56 ]]
+	resolveGalleryOutcome = function(p1, p2, PermissionDenied)
 		-- upvalues: Outcome (copy)
 		return if p1 then if p2 == 0 then Outcome.EducationShown else Outcome.GalleryOpened elseif PermissionDenied == Outcome.PermissionDenied then Outcome.PermissionDenied else Outcome.ReadError
 	end,
-	log = function(EntryOutcome, CreationSessionId) --[[ Line: 63 ]]
+	log = function(EntryOutcome, CreationSessionId)
 		-- upvalues: Analytics (copy)
 		local config = { entryOutcome = EntryOutcome }
 		

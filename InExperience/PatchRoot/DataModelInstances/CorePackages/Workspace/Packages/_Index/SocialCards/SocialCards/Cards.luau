@@ -13,11 +13,11 @@ local config = {
 	position = UDim2.fromScale(0, 0)
 }
 
-return function(p1) --[[ Line: 30 | Named "Cards" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), ReactModule (copy), CardComponent (copy), AltTextCard (copy), FoundationModule (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseTokensResult = UseTokensFunction()
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 34 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: CardComponent (upval), UnionResult (copy), CryoModule (upval), ReactModule (upval), AltTextCard (upval), FoundationModule (upval), UseTokensResult (copy)
 		local List = {}
 		

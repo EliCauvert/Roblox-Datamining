@@ -1,6 +1,6 @@
 ﻿local SignalsModule = require(script:FindFirstAncestor("SplitPane").Parent.Signals)
 
-local function createSplitL3Store() --[[ Line: 17 ]]
+local function createSplitL3Store()
 	-- upvalues: SignalsModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(nil)
 	local Signal1, Signal2_1 = SignalsModule.createSignal(nil)
@@ -22,7 +22,7 @@ end
 local v1 = nil
 
 return {
-	getStore = function() --[[ Line: 36 ]]
+	getStore = function()
 		-- upvalues: v1 (ref), createSplitL3Store (copy)
 		if v1 == nil then
 			v1 = createSplitL3Store()

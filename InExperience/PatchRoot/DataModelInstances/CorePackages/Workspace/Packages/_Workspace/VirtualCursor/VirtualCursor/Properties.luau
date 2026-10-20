@@ -10,7 +10,7 @@
 	ScrollingSpeed = 1000
 }
 setmetatable(PropertiesModule, {
-	__index = function(_, p1) --[[ Line: 20 ]]
+	__index = function(_, p1)
 		error(string.format("%q is not a valid member of properties", (tostring(p1))), 2)
 	end
 })

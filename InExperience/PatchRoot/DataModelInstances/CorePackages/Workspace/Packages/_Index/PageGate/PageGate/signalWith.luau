@@ -1,5 +1,5 @@
-﻿return function(p1, p2, p3) --[[ Line: 14 | Named "signalWith" ]]
-	p1.defer(function() --[[ Line: 17 ]]
+﻿return function(p1, p2, p3)
+	p1.defer(function()
 		-- upvalues: p1 (copy), p2 (copy), p3 (copy)
 		if not p1.isEnabled() then return end
 		local Success, Result = pcall(p1.getService)

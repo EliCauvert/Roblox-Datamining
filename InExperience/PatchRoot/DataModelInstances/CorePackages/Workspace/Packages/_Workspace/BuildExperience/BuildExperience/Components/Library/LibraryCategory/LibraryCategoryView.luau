@@ -6,7 +6,7 @@ local _ = require(script.Parent.Parent.LibraryTypes)
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 
-return function(p1) --[[ Line: 27 | Named "LibraryCategoryView" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), LibraryGridViewModule (copy), Text (copy)
 	return ReactModule.createElement(View, { tag = "col size-full", testId = "Library.CategoryPage" }, {
 		Content = ReactModule.createElement(View, { tag = "fill size-full-0" }, {
@@ -17,7 +17,7 @@ return function(p1) --[[ Line: 27 | Named "LibraryCategoryView" ]]
 							hasMore = false,
 							isLoading = true,
 							items = {},
-							onLoadMore = function() --[[ Line: 38 ]] end
+							onLoadMore = function() end
 						})
 					}) elseif #p1.items == 0 then ReactModule.createElement(Text, {
 						tag = "size-full-0 auto-y padding-large text-body-medium text-align-x-center content-muted",

@@ -6,7 +6,7 @@ local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant
 local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 local _ = require(Foundation.Providers.Style.Tokens)
 
-local function variantsFactory(p1) --[[ Line: 26 ]]
+local function variantsFactory(p1)
 	-- upvalues: LinkVariantModule (copy), InputSizeModule (copy)
 	return {
 		common = {
@@ -26,7 +26,7 @@ local function variantsFactory(p1) --[[ Line: 26 ]]
 	}
 end
 
-return function(p1, p2, p3) --[[ Line: 63 ]]
+return function(p1, p2, p3)
 	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
 	local Link = VariantsContextModule.useVariants("Link", variantsFactory, p1)
 	

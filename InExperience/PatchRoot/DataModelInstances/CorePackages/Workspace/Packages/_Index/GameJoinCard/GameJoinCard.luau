@@ -9,7 +9,7 @@ return {
 	DesktopGameJoinCard = require(script.Components.DesktopGameJoinCard.DesktopGameJoinCard),
 	DesktopGameJoinCardContainer = require(script.Components.DesktopGameJoinCard.DesktopGameJoinCardContainer),
 	GamepadJoinFocusBehavior = require(script.Components.DesktopGameJoinCard.GamepadJoinFocusBehavior),
-	getInExperienceGameJoinCard = function() --[[ Line: 16 ]]
+	getInExperienceGameJoinCard = function()
 		return require(script.Components.InExperienceGameJoinCard.InExperienceGameJoinCard)
 	end,
 	useGameJoinCardNavigation = require(script.Components.DesktopGameJoinCard.useGameJoinCardNavigation),

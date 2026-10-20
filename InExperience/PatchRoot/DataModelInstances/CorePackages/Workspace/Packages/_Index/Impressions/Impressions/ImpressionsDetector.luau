@@ -26,13 +26,13 @@ ImpressionsDetector.validateProps = TModule.strictInterface({
 })
 ImpressionsDetector.defaultProps = { scanDebounceSeconds = 1, viewFillPercent = 0.25 }
 
-function ImpressionsDetector.init(p1) --[[ Line: 56 ]]
+function ImpressionsDetector.init(p1)
 	p1.isMounted = false
 	p1.lastImpressionTick = nil
 	p1.nextImpressionTick = nil
 end
 
-function ImpressionsDetector._boundingBoxIntersectsView(p1, Frame: Frame): boolean --[[ Line: 62 ]]
+function ImpressionsDetector._boundingBoxIntersectsView(p1, Frame: Frame): boolean
 	-- upvalues: ArgCheckModule (copy)
 	if not Frame then
 		return false
@@ -52,7 +52,7 @@ function ImpressionsDetector._boundingBoxIntersectsView(p1, Frame: Frame): boole
 	end
 end
 
-function ImpressionsDetector._isInstanceVisible(p1, Frame: Frame): boolean --[[ Line: 87 ]]
+function ImpressionsDetector._isInstanceVisible(p1, Frame: Frame): boolean
 	-- upvalues: ArgCheckModule (copy), FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions (copy)
 	if not p1:_boundingBoxIntersectsView(Frame) then
 		return false
@@ -97,7 +97,7 @@ function ImpressionsDetector._isInstanceVisible(p1, Frame: Frame): boolean --[[ 
 	end
 end
 
-function ImpressionsDetector._calculateImpressions(p1) --[[ Line: 160 ]]
+function ImpressionsDetector._calculateImpressions(p1)
 	-- upvalues: CollectionService (copy), ConstantsModule (copy), ArgCheckModule (copy)
 	if not p1.isMounted then return end
 	if not p1.props.isFocused then return end
@@ -123,7 +123,7 @@ function ImpressionsDetector._calculateImpressions(p1) --[[ Line: 160 ]]
 	end
 end
 
-function ImpressionsDetector._requestImpressions(p2) --[[ Line: 199 ]]
+function ImpressionsDetector._requestImpressions(p2)
 	-- upvalues: ArgCheckModule (copy)
 	if not p2.isMounted then return end
 	if not p2.props.isFocused then return end
@@ -136,7 +136,7 @@ function ImpressionsDetector._requestImpressions(p2) --[[ Line: 199 ]]
 		Delay = p2.nextImpressionTick - tick()
 	end
 	if Delay > 0 then
-		task.delay(Delay, function() --[[ Line: 222 ]]
+		task.delay(Delay, function()
 			-- upvalues: ArgCheckModule (upval), p2 (copy)
 			ArgCheckModule.assert(p2.nextImpressionTick ~= nil and p2.nextImpressionTick < tick())
 			p2.nextImpressionTick = nil
@@ -150,23 +150,23 @@ function ImpressionsDetector._requestImpressions(p2) --[[ Line: 199 ]]
 	end
 end
 
-function ImpressionsDetector:render() --[[ Line: 234 ]]
+function ImpressionsDetector:render()
 	return nil
 end
 
-function ImpressionsDetector.didMount(p2) --[[ Line: 238 ]]
+function ImpressionsDetector.didMount(p2)
 	p2.isMounted = true
 	p2:_requestImpressions()
 	
 	if p2.props.onRequestImpressionsSignal then
-		p2.onRequestImpressionsConnection = p2.props.onRequestImpressionsSignal:connect(function() --[[ Line: 242 ]]
+		p2.onRequestImpressionsConnection = p2.props.onRequestImpressionsSignal:connect(function()
 			-- upvalues: p2 (copy)
 			p2:_requestImpressions()
 		end)
 	end
 end
 
-function ImpressionsDetector.willUnmount(p2) --[[ Line: 248 ]]
+function ImpressionsDetector.willUnmount(p2)
 	p2.isMounted = false
 	
 	if p2.onRequestImpressionsConnection ~= nil then
@@ -175,14 +175,14 @@ function ImpressionsDetector.willUnmount(p2) --[[ Line: 248 ]]
 	end
 end
 
-function ImpressionsDetector.didUpdate(p2, _, _) --[[ Line: 256 ]]
+function ImpressionsDetector.didUpdate(p2, _, _)
 	p2:_requestImpressions()
 end
 
 if FFlagEnableOnScreenAPIIntegration then
 	local UseIsRouteOnScreenFunction = require(Parent.RobloxAppNavigation).useIsRouteOnScreen
 	
-	return function(Tbl) --[[ Line: 262 | Named "ImpressionsDetectorOnScreenFocus" ]]
+	return function(Tbl)
 		-- upvalues: UseIsRouteOnScreenFunction (copy), RoactModule (copy), ImpressionDetectorWithoutNavigationModule (copy)
 		local UseIsRouteOnScreenResult = UseIsRouteOnScreenFunction()
 		

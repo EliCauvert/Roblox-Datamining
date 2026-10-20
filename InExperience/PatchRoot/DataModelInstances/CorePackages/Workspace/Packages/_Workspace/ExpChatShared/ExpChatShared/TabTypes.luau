@@ -1,5 +1,5 @@
 ﻿return {
-	unreachable = function(p1) --[[ Line: 27 ]]
+	unreachable = function(p1)
 		error(`unhandled tab type: {p1}`)
 	end
 }

@@ -2,7 +2,7 @@
 local Direction = MessageGroupShapeModule.Direction
 local Position = MessageGroupShapeModule.Position
 
-return function(p1, BottomLeft) --[[ Line: 15 | Named "getGroupCornerRadii" ]]
+return function(p1, BottomLeft)
 	-- upvalues: Position (copy), Direction (copy)
 	if p1.position == Position.Only then
 		return {

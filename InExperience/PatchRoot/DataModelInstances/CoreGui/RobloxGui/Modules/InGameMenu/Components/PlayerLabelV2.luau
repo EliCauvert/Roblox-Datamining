@@ -39,14 +39,14 @@ PlayerLabelV2.validateProps = T.strictInterface(require(CorePackages.Workspace.P
 PlayerLabelV2.defaultProps = { Visible = true }
 
 if FFlagLuaMenuPerfImprovementsModule then
-	function PlayerLabelV2.init(p1) --[[ Line: 78 ]]
-		function p1.onActivated() --[[ Line: 79 ]]
+	function PlayerLabelV2.init(p1)
+		function p1.onActivated()
 			-- upvalues: p1 (copy)
 			p1.props.onActivated(p1.props.userId)
 		end
 	end
 end
-function PlayerLabelV2.renderButtons(p1) --[[ Line: 85 ]]
+function PlayerLabelV2.renderButtons(p1)
 	-- upvalues: Roact (copy), Cryo (copy)
 	return (Cryo.Dictionary.join(p1.props[Roact.Children] or {}, {
 		List = Roact.createElement("UIListLayout", {
@@ -59,12 +59,12 @@ function PlayerLabelV2.renderButtons(p1) --[[ Line: 85 ]]
 	}))
 end
 
-function PlayerLabelV2.renderWithSelectionCursor(p1, Callback) --[[ Line: 100 ]]
+function PlayerLabelV2.renderWithSelectionCursor(p1, Callback)
 	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), FFlagLuaMenuPerfImprovementsModule (copy), Roact (copy), CursorType (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), Cryo (copy), config (copy), ImageSetLabel (copy), ThemedTextLabelModule (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), GetFFlagLuaAppEnableOpenTypeIGMFixFunction (copy), OpenTypeSupport (copy)
 	local Props = p1.props
 	local Username = if Props.displayName == "" then Props.username else Props.displayName or Props.username
 	
-	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 110 ]]
+	return WithFoundationOrUIBloxStyleFunction(function(p2)
 		return {
 			Theme = {
 				BackgroundContrast = {
@@ -77,7 +77,7 @@ function PlayerLabelV2.renderWithSelectionCursor(p1, Callback) --[[ Line: 100 ]]
 				}
 			}
 		}
-	end, function(p2) --[[ Line: 117 ]]
+	end, function(p2)
 		-- upvalues: p1 (copy), FFlagLuaMenuPerfImprovementsModule (upval), Roact (upval), Props (copy), Callback (copy), CursorType (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), Cryo (upval), config (upval), ImageSetLabel (upval), ThemedTextLabelModule (upval), Username (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (upval), GetFFlagLuaAppEnableOpenTypeIGMFixFunction (upval), OpenTypeSupport (upval)
 		local BackgroundOnHover = if p1.props.isSelected then p2.Theme.BackgroundOnHover else p2.Theme.BackgroundContrast
 		
@@ -138,15 +138,15 @@ function PlayerLabelV2.renderWithSelectionCursor(p1, Callback) --[[ Line: 100 ]]
 	end)
 end
 
-function PlayerLabelV2.render(p1) --[[ Line: 205 ]]
+function PlayerLabelV2.render(p1)
 	-- upvalues: WithCursorMigration (copy)
-	return WithCursorMigration(function(p2) --[[ Line: 206 ]]
+	return WithCursorMigration(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithSelectionCursor(p2)
 	end)
 end
 
-return Roact.forwardRef(function(p1, ForwardRef) --[[ Line: 211 ]]
+return Roact.forwardRef(function(p1, ForwardRef)
 	-- upvalues: Roact (copy), PlayerLabelV2 (copy), Cryo (copy)
 	return Roact.createElement(PlayerLabelV2, Cryo.Dictionary.join(p1, { forwardRef = ForwardRef }))
 end)

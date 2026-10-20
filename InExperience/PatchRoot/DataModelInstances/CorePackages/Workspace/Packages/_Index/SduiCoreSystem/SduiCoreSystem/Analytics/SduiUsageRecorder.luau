@@ -4,7 +4,7 @@ local IsRandomValueBelow1 = math.random(10000) <= game:DefineFastInt("DiscoveryS
 local t = {}
 local t1 = {}
 
-local function getOrCreateAccumulator(Key, Key1) --[[ Line: 66 ]]
+local function getOrCreateAccumulator(Key, Key1)
 	-- upvalues: t (ref)
 	local Entry = t[Key]
 	
@@ -30,7 +30,7 @@ local function getOrCreateAccumulator(Key, Key1) --[[ Line: 66 ]]
 	end
 end
 
-local function getOrCreateGlobalSeen(Page, Version) --[[ Line: 87 ]]
+local function getOrCreateGlobalSeen(Page, Version)
 	-- upvalues: t1 (ref)
 	local Entry = t1[Page]
 	
@@ -55,7 +55,7 @@ local function getOrCreateGlobalSeen(Page, Version) --[[ Line: 87 ]]
 	end
 end
 
-local function deltaAndCommit(ActionParams, ActionParams1) --[[ Line: 108 ]]
+local function deltaAndCommit(ActionParams, ActionParams1)
 	local t = {}
 	
 	for i, _ in ActionParams do
@@ -67,7 +67,7 @@ local function deltaAndCommit(ActionParams, ActionParams1) --[[ Line: 108 ]]
 	return t
 end
 
-local function flushPageVersion(Page, Version) --[[ Line: 165 ]]
+local function flushPageVersion(Page, Version)
 	-- upvalues: t (ref), getOrCreateGlobalSeen (copy), deltaAndCommit (copy), SduiUsageAnalyticsModule (copy)
 	local Entry = t[Page]
 	local Entry1 = Entry and Entry[Version]
@@ -101,7 +101,7 @@ local function flushPageVersion(Page, Version) --[[ Line: 165 ]]
 	end
 end
 
-local function flushAll() --[[ Line: 204 ]]
+local function flushAll()
 	-- upvalues: t (ref), flushPageVersion (copy)
 	local List = {}
 	
@@ -119,7 +119,7 @@ local Delay = 1
 local Flag = false
 
 return {
-	recordComponentType = function(p1, p2, p3) --[[ Line: 119 ]]
+	recordComponentType = function(p1, p2, p3)
 		-- upvalues: IsRandomValueBelow (ref), getOrCreateAccumulator (copy)
 		if not IsRandomValueBelow or not p3 then return end
 		local OrCreateAccumulator = getOrCreateAccumulator(p1, p2)
@@ -129,7 +129,7 @@ return {
 			OrCreateAccumulator.hasRecorded = true
 		end
 	end,
-	recordProp = function(p1, p2, p3, p4) --[[ Line: 130 ]]
+	recordProp = function(p1, p2, p3, p4)
 		-- upvalues: IsRandomValueBelow1 (ref), getOrCreateAccumulator (copy)
 		if not IsRandomValueBelow1 or not p3 or not p4 then return end
 		local OrCreateAccumulator = getOrCreateAccumulator(p1, p2)
@@ -140,7 +140,7 @@ return {
 			OrCreateAccumulator.hasRecorded = true
 		end
 	end,
-	recordActionType = function(p1, p2, p3) --[[ Line: 142 ]]
+	recordActionType = function(p1, p2, p3)
 		-- upvalues: IsRandomValueBelow (ref), getOrCreateAccumulator (copy)
 		if not IsRandomValueBelow or not p3 then return end
 		local OrCreateAccumulator = getOrCreateAccumulator(p1, p2)
@@ -150,7 +150,7 @@ return {
 			OrCreateAccumulator.hasRecorded = true
 		end
 	end,
-	recordActionParam = function(p1, p2, p3, p4) --[[ Line: 153 ]]
+	recordActionParam = function(p1, p2, p3, p4)
 		-- upvalues: IsRandomValueBelow1 (ref), getOrCreateAccumulator (copy)
 		if not IsRandomValueBelow1 or not p3 or not p4 then return end
 		local OrCreateAccumulator = getOrCreateAccumulator(p1, p2)
@@ -161,11 +161,11 @@ return {
 			OrCreateAccumulator.hasRecorded = true
 		end
 	end,
-	scheduleFlush = function() --[[ Line: 221 ]]
+	scheduleFlush = function()
 		-- upvalues: Flag (ref), Delay (ref), flushAll (copy)
 		if not Flag then
 			Flag = true
-			task.delay(Delay, function() --[[ Line: 226 ]]
+			task.delay(Delay, function()
 				-- upvalues: Flag (upval), flushAll (upval)
 				Flag = false
 				flushAll()
@@ -174,27 +174,27 @@ return {
 			return
 		end
 	end,
-	isTypeSamplingEnabled = function() --[[ Line: 232 ]]
+	isTypeSamplingEnabled = function()
 		-- upvalues: IsRandomValueBelow (ref)
 		return IsRandomValueBelow
 	end,
-	isParamSamplingEnabled = function() --[[ Line: 236 ]]
+	isParamSamplingEnabled = function()
 		-- upvalues: IsRandomValueBelow1 (ref)
 		return IsRandomValueBelow1
 	end,
 	_flushAllForTesting = flushAll,
-	_resetAllForTesting = function() --[[ Line: 240 ]]
+	_resetAllForTesting = function()
 		-- upvalues: t (ref), t1 (ref), Flag (ref)
 		t = {}
 		t1 = {}
 		Flag = false
 	end,
-	_setSamplingForTesting = function(p1, p2) --[[ Line: 246 ]]
+	_setSamplingForTesting = function(p1, p2)
 		-- upvalues: IsRandomValueBelow (ref), IsRandomValueBelow1 (ref)
 		IsRandomValueBelow = p1
 		IsRandomValueBelow1 = p2
 	end,
-	_setFlushDelayForTesting = function(p1) --[[ Line: 251 ]]
+	_setFlushDelayForTesting = function(p1)
 		-- upvalues: Delay (ref)
 		Delay = p1
 	end

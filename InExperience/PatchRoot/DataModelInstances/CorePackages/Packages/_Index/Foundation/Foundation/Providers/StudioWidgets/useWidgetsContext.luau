@@ -2,7 +2,7 @@
 local _ = require(script.Parent.Types)
 local WidgetsContextModule = require(script.Parent.WidgetsContext)
 
-return function() --[[ Line: 11 | Named "useWidgetsContext" ]]
+return function()
 	-- upvalues: ReactModule (copy), WidgetsContextModule (copy)
 	local UseContextResult = ReactModule.useContext(WidgetsContextModule)
 	

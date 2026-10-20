@@ -33,7 +33,7 @@ PartialPageModal.defaultProps = {
 	closeButtonIcon = CloseButtonIconModule.Close
 }
 
-function PartialPageModal.render(p1) --[[ Line: 66 ]]
+function PartialPageModal.render(p1)
 	-- upvalues: ModalWindowModule (copy), RoactModule (copy), ModalTitleModule (copy), FitFrameVertical (copy), ButtonStackModule (copy)
 	local ScreenSize = p1.props.screenSize
 	

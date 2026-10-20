@@ -2,14 +2,14 @@
 local ConstantsModule = require(Parent.Constants)
 local GetFFlagIBEnableCollectiblesSystemSupportModule = require(Parent.Flags.GetFFlagIBEnableCollectiblesSystemSupport)
 local UtilityFunctionsModule = {
-	getBundleId = function(p1) --[[ Line: 9 ]]
+	getBundleId = function(p1)
 		return if p1.parentBundleId == nil then nil else p1.parentBundleId
 	end,
-	isCollectibles = function(p1): boolean --[[ Line: 17 ]]
+	isCollectibles = function(p1): boolean
 		-- upvalues: ConstantsModule (copy)
 		return p1 and (p1.productType and p1.productType == ConstantsModule.ProductType.CollectibleItem)
 	end,
-	hasLimitedQuantity = function(p1) --[[ Line: 21 ]]
+	hasLimitedQuantity = function(p1)
 		-- upvalues: GetFFlagIBEnableCollectiblesSystemSupportModule (copy)
 		if p1 then
 			local IsLimitedUnique = if GetFFlagIBEnableCollectiblesSystemSupportModule() then p1.isLimitedUnique else nil
@@ -20,18 +20,18 @@ local UtilityFunctionsModule = {
 			return nil
 		end
 	end,
-	isLimited1Point0 = function(p1) --[[ Line: 34 ]]
+	isLimited1Point0 = function(p1)
 		return if p1 then p1.isLimited or p1.isLimitedUnique else nil
 	end,
-	isLimited1Point0_LimitedUnique = function(p1) --[[ Line: 43 ]]
+	isLimited1Point0_LimitedUnique = function(p1)
 		return if p1 then p1.isLimitedUnique else nil
 	end,
-	isLimited2Point0_Or_LimitedCollectible = function(p1) --[[ Line: 52 ]]
+	isLimited2Point0_Or_LimitedCollectible = function(p1)
 		return if p1 then p1.collectibleIsLimited else nil
 	end
 }
 
-function UtilityFunctionsModule.isUnlimitedCollectibleAsset(Asset, p1): boolean? --[[ Line: 61 ]]
+function UtilityFunctionsModule.isUnlimitedCollectibleAsset(Asset, p1): boolean?
 	-- upvalues: UtilityFunctionsModule (copy), ConstantsModule (copy)
 	if Asset and p1 then
 		local IsProductTypeMatch = p1.productType == ConstantsModule.ProductType.CollectibleItem
@@ -43,7 +43,7 @@ function UtilityFunctionsModule.isUnlimitedCollectibleAsset(Asset, p1): boolean?
 	end
 end
 
-function UtilityFunctionsModule.isLimitedBundle(Bundle, p1): boolean? --[[ Line: 73 ]]
+function UtilityFunctionsModule.isLimitedBundle(Bundle, p1): boolean?
 	-- upvalues: ConstantsModule (copy)
 	if Bundle and p1 then
 		local IsBundleMatch = Bundle == ConstantsModule.ItemType.Bundle
@@ -54,7 +54,7 @@ function UtilityFunctionsModule.isLimitedBundle(Bundle, p1): boolean? --[[ Line:
 	end
 end
 
-function UtilityFunctionsModule.isUnlimitedCollectibleBundle(Bundle, p1): boolean? --[[ Line: 84 ]]
+function UtilityFunctionsModule.isUnlimitedCollectibleBundle(Bundle, p1): boolean?
 	-- upvalues: ConstantsModule (copy)
 	if Bundle and p1 then
 		local IsProductTypeMatch = p1.productType == ConstantsModule.ProductType.CollectibleItem
@@ -66,7 +66,7 @@ function UtilityFunctionsModule.isUnlimitedCollectibleBundle(Bundle, p1): boolea
 	end
 end
 
-function UtilityFunctionsModule.isLimitedCollectible(p1): boolean? --[[ Line: 96 ]]
+function UtilityFunctionsModule.isLimitedCollectible(p1): boolean?
 	-- upvalues: UtilityFunctionsModule (copy), ConstantsModule (copy)
 	if p1 then
 		local IsProductTypeMatch = p1.productType == ConstantsModule.ProductType.CollectibleItem

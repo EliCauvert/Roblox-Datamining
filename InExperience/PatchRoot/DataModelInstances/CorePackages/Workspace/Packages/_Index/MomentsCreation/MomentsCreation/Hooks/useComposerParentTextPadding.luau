@@ -1,7 +1,7 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("MomentsCreation").Parent.React)
 local _UDim = UDim.new(0, 0)
 
-local function _(Parent) --[[ Line: 37 | Named "ensureUIPadding" ]]
+local function _(Parent)
 	local UIPadding = Parent:FindFirstChildOfClass("UIPadding")
 	
 	if UIPadding then
@@ -14,12 +14,12 @@ local function _(Parent) --[[ Line: 37 | Named "ensureUIPadding" ]]
 	end
 end
 
-local _ = function(UIPadding): boolean --[[ Line: 47 | Named "isZeroed" ]]
+local _ = function(UIPadding): boolean
 	-- upvalues: _UDim (copy)
 	return UIPadding.PaddingTop == _UDim and (UIPadding.PaddingBottom == _UDim and UIPadding.PaddingLeft == _UDim) and UIPadding.PaddingRight == _UDim
 end
 
-local function relocateBoxPadding(Object) --[[ Line: 54 ]]
+local function relocateBoxPadding(Object)
 	-- upvalues: _UDim (copy)
 	local UIPadding = Object:FindFirstChildOfClass("UIPadding")
 	
@@ -48,7 +48,7 @@ local function relocateBoxPadding(Object) --[[ Line: 54 ]]
 	UIPadding.PaddingRight = _UDim
 end
 
-local function tryRelocate(Descendant) --[[ Line: 86 ]]
+local function tryRelocate(Descendant)
 	-- upvalues: relocateBoxPadding (copy)
 	local v1 = nil
 	
@@ -66,11 +66,11 @@ local function tryRelocate(Descendant) --[[ Line: 86 ]]
 	end
 end
 
-return function(p1) --[[ Line: 101 | Named "useComposerParentTextPadding" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), tryRelocate (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	
-	return ReactModule.useCallback(function(Object) --[[ Line: 104 ]]
+	return ReactModule.useCallback(function(Object)
 		-- upvalues: UseRefResult (copy), p1 (copy), tryRelocate (upval)
 		if UseRefResult.current ~= nil then
 			UseRefResult.current:Disconnect()

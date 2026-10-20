@@ -6,7 +6,7 @@ local RetrievalStatus = require(Parent.Http).Enum.RetrievalStatus
 local _ = require(Parent.DiscoveryTypes)
 local FFlagLuaAppSortDeeplinkFix = require(Parent.SharedFlags).FFlagLuaAppSortDeeplinkFix
 
-local function initializeFetchStatus() --[[ Line: 11 ]]
+local function initializeFetchStatus()
 	-- upvalues: FetchStatusNamespaceModule (copy), RetrievalStatus (copy), FFlagLuaAppSortDeeplinkFix (copy)
 	return {
 		[FetchStatusNamespaceModule.GameSortToken] = {
@@ -23,7 +23,7 @@ end
 
 return {
 	key = "FetchStatusKey",
-	reducer = function(p1, p2) --[[ Line: 25 ]]
+	reducer = function(p1, p2)
 		-- upvalues: initializeFetchStatus (copy), SetFetchStatusModule (copy)
 		local Tbl1 = p1 or initializeFetchStatus()
 		

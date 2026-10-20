@@ -11,7 +11,7 @@ local RoduxModule = require(Parent.Rodux)
 UIBloxModule.init(require(Parent.Dev.RobloxAppUIBloxConfig))
 local AppStyleProvider = UIBloxModule.App.Style.AppStyleProvider
 
-local function createStore() --[[ Line: 16 ]]
+local function createStore()
 	-- upvalues: RoduxModule (copy)
 	return RoduxModule.Store.new(RoduxModule.createReducer({}, {}), nil, { RoduxModule.makeThunkMiddleware({}) })
 end
@@ -27,9 +27,9 @@ return {
 	storyRoot = VerifiedParentalConsentDialog,
 	roact = ReactModule,
 	reactRoblox = ReactRobloxModule,
-	mapStory = function(p1) --[[ Line: 43 ]]
+	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), LocalizationProvider (copy), Localization (copy), AppStyleProvider (copy), config (copy), RoactRoduxModule (copy), createStore (copy), DesignTokenProvider (copy)
-		return function(p2) --[[ Line: 44 ]]
+		return function(p2)
 			-- upvalues: ReactModule (upval), LocalizationProvider (upval), Localization (upval), AppStyleProvider (upval), config (upval), RoactRoduxModule (upval), createStore (upval), DesignTokenProvider (upval), p1 (copy)
 			return ReactModule.createElement(LocalizationProvider, { localization = Localization.new("en-us") }, {
 				AppStyleProvider = ReactModule.createElement(AppStyleProvider, { style = p2 and config[p2.theme] or config.Default }, {

@@ -17,7 +17,7 @@ return require(CorePackages.Packages.Rodux).createReducer({
 	reportCategory = ConstantsModule.Category.None,
 	sortedUserIds = {}
 }, {
-	[require(Parent.Actions.EndReportFlow).name] = function(p1, _) --[[ Line: 34 ]]
+	[require(Parent.Actions.EndReportFlow).name] = function(p1, _)
 		-- upvalues: CryoModule (copy), ConstantsModule (copy)
 		return CryoModule.Dictionary.join(p1, {
 			history = {},
@@ -26,7 +26,7 @@ return require(CorePackages.Packages.Rodux).createReducer({
 			reportType = ConstantsModule.ReportType.Any
 		})
 	end,
-	[require(Parent.Actions.BeginReportFlow).name] = function(p1, p2) --[[ Line: 42 ]]
+	[require(Parent.Actions.BeginReportFlow).name] = function(p1, p2)
 		-- upvalues: ConstantsModule (copy), CryoModule (copy)
 		local config = {
 			reportCategory = ConstantsModule.Category.None,
@@ -52,14 +52,14 @@ return require(CorePackages.Packages.Rodux).createReducer({
 			currentPage = if p1.voiceReportingFlowEnabled then ConstantsModule.Page.Category else ConstantsModule.Page.Listing
 		})
 	end,
-	[require(Parent.Actions.NavigateBack).name] = function(p1, _) --[[ Line: 76 ]]
+	[require(Parent.Actions.NavigateBack).name] = function(p1, _)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, {
 			history = CryoModule.List.removeIndex(p1.history, #p1.history),
 			currentPage = p1.history[#p1.history] or p1.currentPage
 		})
 	end,
-	[require(Parent.Actions.SelectReportCategory).name] = function(p1, p2) --[[ Line: 85 ]]
+	[require(Parent.Actions.SelectReportCategory).name] = function(p1, p2)
 		-- upvalues: ConstantsModule (copy), CryoModule (copy)
 		local IsReportCategoryMatch = p2.reportCategory == ConstantsModule.Category.Experience
 		local IsBeginningReportTypeMatch = p1.beginningReportType == ConstantsModule.ReportType.Player
@@ -80,7 +80,7 @@ return require(CorePackages.Packages.Rodux).createReducer({
 			reportCategory = p2.reportCategory
 		})
 	end,
-	[require(Parent.Actions.SelectReportListing).name] = function(p1, p2) --[[ Line: 109 ]]
+	[require(Parent.Actions.SelectReportListing).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy), ConstantsModule (copy)
 		return CryoModule.Dictionary.join(p1, {
 			sortedUserIds = CryoModule.List.join(p2.sortedUserIds or {}, {}),
@@ -90,15 +90,15 @@ return require(CorePackages.Packages.Rodux).createReducer({
 			targetPlayer = p2.targetPlayer or CryoModule.None
 		})
 	end,
-	[require(Parent.Actions.OpenReportMenu).name] = function(p1, _) --[[ Line: 120 ]]
+	[require(Parent.Actions.OpenReportMenu).name] = function(p1, _)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, { isReportMenuOpen = true })
 	end,
-	[require(Parent.Actions.CloseReportMenu).name] = function(p1, _) --[[ Line: 125 ]]
+	[require(Parent.Actions.CloseReportMenu).name] = function(p1, _)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, { isReportMenuOpen = false })
 	end,
-	[require(Parent.Actions.OpenReportSentDialog).name] = function(p1, p2) --[[ Line: 130 ]]
+	[require(Parent.Actions.OpenReportSentDialog).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy), ConstantsModule (copy)
 		return CryoModule.Dictionary.join(p1, {
 			currentPage = ConstantsModule.Page.ReportSent,
@@ -106,7 +106,7 @@ return require(CorePackages.Packages.Rodux).createReducer({
 			targetPlayer = p2.targetPlayer or CryoModule.None
 		})
 	end,
-	[require(Parent.Actions.SetVoiceReportingFlow).name] = function(p1, p2) --[[ Line: 137 ]]
+	[require(Parent.Actions.SetVoiceReportingFlow).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, { voiceReportingFlowEnabled = p2.enable })
 	end

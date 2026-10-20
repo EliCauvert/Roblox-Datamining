@@ -12,20 +12,20 @@ local UseValidatedBirthdayFunction = require(Parent.AuthSignup).Hooks.useValidat
 local FIntSinglePageSignupMinimumAge = require(Parent.SharedFlags).FIntSinglePageSignupMinimumAge
 local config = { frequency = 3 }
 
-local function useSlide(Current) --[[ Line: 47 ]]
+local function useSlide(Current)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), OtterModule (copy), config (copy)
 	local ReducedMotion = FoundationModule.Hooks.usePreferences().reducedMotion
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(if ReducedMotion then 1 else 0)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 50 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: OtterModule (upval), ReducedMotion (copy)
 		return OtterModule.createSingleMotor(if ReducedMotion then 1 else 0)
 	end, { ReducedMotion })
 	local UseRefResult = ReactModule.useRef(false)
 	local UseRefResult1 = ReactModule.useRef(Current)
 	UseRefResult1.current = Current
-	ReactModule.useEffect(function() --[[ Line: 57 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy), UseBindingResult2 (copy), UseRefResult (copy), UseRefResult1 (copy), ReducedMotion (copy), OtterModule (upval), config (upval)
-		local OnStepResult = UseMemoResult:onStep(function(p1: number) --[[ Line: 58 ]]
+		local OnStepResult = UseMemoResult:onStep(function(p1: number)
 			-- upvalues: UseBindingResult2 (upval), UseRefResult (upval), UseMemoResult (upval), UseRefResult1 (upval)
 			UseBindingResult2(p1)
 			
@@ -39,14 +39,14 @@ local function useSlide(Current) --[[ Line: 47 ]]
 		if not ReducedMotion then
 			UseMemoResult:setGoal(OtterModule.spring(1, config))
 		end
-		return function() --[[ Line: 69 ]]
+		return function()
 			-- upvalues: OnStepResult (copy), UseMemoResult (upval)
 			OnStepResult()
 			UseMemoResult:destroy()
 		end
 	end, { UseMemoResult, ReducedMotion })
 	
-	return UseBindingResult, (ReactModule.useCallback(function() --[[ Line: 75 ]]
+	return UseBindingResult, (ReactModule.useCallback(function()
 		-- upvalues: ReducedMotion (copy), UseRefResult1 (copy), UseRefResult (copy), UseMemoResult (copy), OtterModule (upval), config (upval)
 		if ReducedMotion then
 			UseRefResult1.current()
@@ -62,13 +62,13 @@ local function useSlide(Current) --[[ Line: 47 ]]
 	end, { UseMemoResult, ReducedMotion }))
 end
 
-return function(p1) --[[ Line: 90 | Named "useBirthdaySheetViewModel" ]]
+return function(p1)
 	-- upvalues: useSlide (copy), UseValidatedBirthdayFunction (copy), FIntSinglePageSignupMinimumAge (copy), UseRequireManualSelectionModule (copy), ReactModule (copy), UseLocalizationFunction (copy), DateHelper (copy), LocalizationService (copy)
 	local UseSlideResult, UseSlideResult2 = useSlide(p1.onClose)
 	local UseValidatedBirthdayResult, UseValidatedBirthdayResult2 = UseValidatedBirthdayFunction(FIntSinglePageSignupMinimumAge)
 	local UseRequireManualSelectionModuleResult = UseRequireManualSelectionModule()
 	local OnConfirmFunction = p1.onConfirm
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 103 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseValidatedBirthdayResult (copy), OnConfirmFunction (copy)
 		if UseValidatedBirthdayResult ~= nil then
 			OnConfirmFunction(UseValidatedBirthdayResult)
@@ -76,7 +76,7 @@ return function(p1) --[[ Line: 90 | Named "useBirthdaySheetViewModel" ]]
 	end, { UseValidatedBirthdayResult, OnConfirmFunction })
 	local OnAllPickedFunction = p1.onAllPicked
 	local UseRefResult = ReactModule.useRef(false)
-	local UseResult1 = ReactModule.useCallback(function(p2, p3, p4) --[[ Line: 111 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2, p3, p4)
 		-- upvalues: UseValidatedBirthdayResult2 (copy), OnAllPickedFunction (copy), UseRefResult (copy)
 		UseValidatedBirthdayResult2(p2, p3, p4)
 		
@@ -89,7 +89,7 @@ return function(p1) --[[ Line: 90 | Named "useBirthdaySheetViewModel" ]]
 	local AgeInYears = if UseValidatedBirthdayResult1 then UseValidatedBirthdayResult1:GetAgeInYears() else nil
 	local OnAgeSummaryShownFunction = p1.onAgeSummaryShown
 	local UseRefResult1 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 124 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: AgeInYears (copy), OnAgeSummaryShownFunction (copy), UseRefResult1 (copy)
 		if AgeInYears ~= nil and OnAgeSummaryShownFunction and not UseRefResult1.current then
 			UseRefResult1.current = true

@@ -23,7 +23,7 @@ local ProgressChecklistModule = require(script.Parent.ProgressChecklist)
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 local IdvWithQRCodeUpsellStrings = require(AmpUpsell.Common.LocalizationStrings).idvWithQRCodeUpsellStrings
 
-return function(p1) --[[ Line: 45 | Named "IDVWithQRCodeUpsell" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), IdvWithQRCodeUpsellStrings (copy), UseStyleFunction (copy), AnalyticsServiceModule (copy), UseSelectorFunction (copy), ReactModule (copy), PartialPageModal (copy), SendButtonClickEventModule (copy), AppScreensModule (copy), StyledTextLabel (copy), DirectionsTileModule (copy), ProgressChecklistModule (copy), DisplayQRCode (copy), ECLevels (copy), Loading (copy), IconSize (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), LinkButton (copy)
 	local FeatureName = p1.featureName
 	local QrCodeLink = p1.qrCodeLink
@@ -41,10 +41,10 @@ return function(p1) --[[ Line: 45 | Named "IDVWithQRCodeUpsell" ]]
 	return ReactModule.createElement(PartialPageModal, {
 		bottomPadding = 0,
 		title = UseLocalizationResult.title,
-		screenSize = UseSelectorFunction(function(p2) --[[ Line: 60 ]]
+		screenSize = UseSelectorFunction(function(p2)
 			return p2.ScreenSize
 		end),
-		onCloseClicked = function() --[[ Line: 67 ]]
+		onCloseClicked = function()
 			-- upvalues: SendButtonClickEventModule (upval), AnalyticsService (copy), AppScreensModule (upval), FeatureName (copy), OnCloseFunction (copy)
 			SendButtonClickEventModule(AnalyticsService, AppScreensModule.IDVWithQRCodeUpsell, FeatureName, "CloseModal")
 			OnCloseFunction()
@@ -183,7 +183,7 @@ return function(p1) --[[ Line: 45 | Named "IDVWithQRCodeUpsell" ]]
 					fontStyle = "CaptionBody",
 					underlineAlwaysEnabled = true,
 					text = UseLocalizationResult.privacyLinkText,
-					onActivated = function() --[[ Line: 232 ]]
+					onActivated = function()
 						-- upvalues: SendButtonClickEventModule (upval), AnalyticsService (copy), AppScreensModule (upval), FeatureName (copy), OpenPrivacyPolicyLinkFunction (copy)
 						SendButtonClickEventModule(AnalyticsService, AppScreensModule.IDVWithQRCodeUpsell, FeatureName, "OpenPrivacyPolicy")
 						OpenPrivacyPolicyLinkFunction()

@@ -14,7 +14,7 @@ local LinkTypeModule = require(InlineRichText.Enums.LinkType)
 local LinkBehaviorModule = require(InlineRichText.Enums.LinkBehavior)
 local GetLinkTypeModule = require(InlineRichText.Linker.getLinkType)
 
-local function createDefaultRootNode(Text) --[[ Line: 56 ]]
+local function createDefaultRootNode(Text)
 	-- upvalues: NodeTypeModule (copy)
 	return {
 		name = "ROOT",
@@ -58,17 +58,17 @@ local config1 = {
 local config2 = {
 	errorToastText = nil,
 	onActivatedSubscriber = nil,
-	evaluateLinkBehavior = function(_, p1) --[[ Line: 97 ]]
+	evaluateLinkBehavior = function(_, p1)
 		-- upvalues: config1 (copy), LinkBehaviorModule (copy)
 		return config1[p1] or LinkBehaviorModule.ErrorToast
 	end
 }
 
-return function(p1) --[[ Line: 104 | Named "InlineRichTextRenderer" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ParseXmlModule (copy), NewResult (copy), createDefaultRootNode (copy), FoundationModule (copy), CryoModule (copy), config2 (copy), UseLinkerOnActivatedModule (copy), GetLinkTypeModule (copy), config (copy), ProcessChildrenModule (copy), InlineLayout (copy)
 	local Ast = p1.ast
 	local Text = p1.text
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 107 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Ast (copy), ParseXmlModule (upval), Text (copy), p1 (copy), NewResult (upval), createDefaultRootNode (upval)
 		if Ast then
 			return Ast
@@ -92,12 +92,12 @@ return function(p1) --[[ Line: 104 | Named "InlineRichTextRenderer" ]]
 	}
 	local UnionResult = CryoModule.Dictionary.union(config2, p1.linkerOptions or {})
 	local UseLinkerOnActivatedModuleResult = UseLinkerOnActivatedModule({ errorToastTextOverride = UnionResult.errorToastText })
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 132 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseLinkerOnActivatedModuleResult (copy), UnionResult (copy), NewResult (upval)
 		UseLinkerOnActivatedModuleResult(p2)
 		
 		if UnionResult.onActivatedSubscriber then
-			local Success, Result = pcall(function(): boolean --[[ Line: 135 ]]
+			local Success, Result = pcall(function(): boolean
 				-- upvalues: UnionResult (upval), p2 (copy)
 				UnionResult.onActivatedSubscriber(p2)
 				
@@ -112,11 +112,11 @@ return function(p1) --[[ Line: 104 | Named "InlineRichTextRenderer" ]]
 		UnionResult.onActivatedSubscriber,
 		UseLinkerOnActivatedModuleResult
 	})
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 144 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: UnionResult (copy), GetLinkTypeModule (upval)
 		return UnionResult.evaluateLinkBehavior(p2, GetLinkTypeModule(p2))
 	end, { UnionResult.evaluateLinkBehavior })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 149 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: CryoModule (upval), config (upval), p1 (copy), ProcessChildrenModule (upval), Default (copy), config1 (copy), UseTokensResult (copy), UseResult (copy), UseResult1 (copy)
 		return {
 			inlineCustomRenderers = CryoModule.Dictionary.join(config, p1.renderers or {}),
@@ -138,7 +138,7 @@ return function(p1) --[[ Line: 104 | Named "InlineRichTextRenderer" ]]
 	
 	return ReactModule.createElement(FoundationModule.View, p1.wrapperProps, {
 		RichTextRoot = ReactModule.createElement(InlineLayout, {
-			Elements = ReactModule.useMemo(function() --[[ Line: 174 ]]
+			Elements = ReactModule.useMemo(function()
 				-- upvalues: ProcessChildrenModule (upval), UseMemoResult (copy), UseMemoResult1 (copy)
 				return ProcessChildrenModule(UseMemoResult, UseMemoResult1)
 			end, { UseMemoResult and UseMemoResult.children, UseMemoResult1 }),

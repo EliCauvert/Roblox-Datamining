@@ -4,7 +4,7 @@ local Signal, Signal2 = require(Parent.Signals).createSignal(nil)
 
 return {
 	getPregameOverride = Signal,
-	setPregameOverride = function(Tbl, p1) --[[ Line: 30 ]]
+	setPregameOverride = function(Tbl, p1)
 		-- upvalues: Signal2 (copy)
 		if Tbl == nil then
 			Signal2(nil)
@@ -16,7 +16,7 @@ return {
 			Signal2(Copy)
 		end
 	end,
-	claims = function(p1, PlaceId, p2): boolean --[[ Line: 40 ]]
+	claims = function(p1, PlaceId, p2): boolean
 		return p1.placeId == PlaceId and p2 - (p1.setAt or 0) <= 15
 	end
 }

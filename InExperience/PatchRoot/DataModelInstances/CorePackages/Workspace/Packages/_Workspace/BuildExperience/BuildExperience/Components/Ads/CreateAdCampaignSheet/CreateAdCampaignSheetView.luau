@@ -26,7 +26,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local SnapPoints = { 1 }
 local config = { name = "u", attributes = {} }
 
-local function createLegalTextElement(Segment, FontStyle, TextStyle) --[[ Line: 102 ]]
+local function createLegalTextElement(Segment, FontStyle, TextStyle)
 	-- upvalues: TextElement (copy)
 	return TextElement.new({
 		Text = Segment,
@@ -35,7 +35,7 @@ local function createLegalTextElement(Segment, FontStyle, TextStyle) --[[ Line: 
 	})
 end
 
-local function createLegalElements(Text: string, FontStyle, TextStyle, OnActivated, OnActivated1) --[[ Line: 111 ]]
+local function createLegalElements(Text: string, FontStyle, TextStyle, OnActivated, OnActivated1)
 	-- upvalues: CreateAdCampaignSheetConfigModule (copy), createLegalTextElement (copy), LinkElement (copy), TextElement (copy), config (copy)
 	local List = {}
 	local Init = 1
@@ -91,7 +91,7 @@ local function createLegalElements(Text: string, FontStyle, TextStyle, OnActivat
 				textStyle = TextStyle
 			})
 		}, {
-			onActivated = function() --[[ Line: 175 ]]
+			onActivated = function()
 				-- upvalues: OnActivatedFunction (copy), Segment (copy)
 				OnActivatedFunction(Segment)
 			end
@@ -101,7 +101,7 @@ local function createLegalElements(Text: string, FontStyle, TextStyle, OnActivat
 	return List
 end
 
-local function AdCampaignLegalText(Frame) --[[ Line: 186 ]]
+local function AdCampaignLegalText(Frame)
 	-- upvalues: UseTokensFunction (copy), createLegalElements (copy), ReactModule (copy), View (copy), InlineLayout (copy)
 	local UseTokensResult = UseTokensFunction()
 	local BodyMedium = UseTokensResult.Typography.BodyMedium
@@ -117,7 +117,7 @@ local function AdCampaignLegalText(Frame) --[[ Line: 186 ]]
 	})
 end
 
-local function createBenefitRows(Benefits) --[[ Line: 213 ]]
+local function createBenefitRows(Benefits)
 	-- upvalues: ReactModule (copy), View (copy), Icon (copy), IconSize (copy), Text (copy)
 	local Elements = {}
 	
@@ -142,7 +142,7 @@ local function createBenefitRows(Benefits) --[[ Line: 213 ]]
 	return Elements
 end
 
-local function CampaignPrice(p1) --[[ Line: 236 ]]
+local function CampaignPrice(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Icon (copy), FoundationModule (copy), IconSize (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	
@@ -203,11 +203,11 @@ local function CampaignPrice(p1) --[[ Line: 236 ]]
 	})
 end
 
-local function CampaignOptionItem(Frame) --[[ Line: 306 ]]
+local function CampaignOptionItem(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), OptionSelectorGroup (copy), CampaignPrice (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useImperativeHandle(Frame.optionRef, function() --[[ Line: 316 ]]
+	ReactModule.useImperativeHandle(Frame.optionRef, function()
 		-- upvalues: UseRefResult (copy)
 		return UseRefResult.current
 	end)
@@ -234,7 +234,7 @@ local function CampaignOptionItem(Frame) --[[ Line: 306 ]]
 	})
 end
 
-return function(p1) --[[ Line: 345 | Named "CreateAdCampaignSheetView" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Sheet (copy), SnapPoints (copy), View (copy), IconButton (copy), FoundationModule (copy), InputSize (copy), ButtonVariant (copy), FFlagBuildAdsUiPolishModule (copy), Chip (copy), ChipVariant (copy), ChipSize (copy), Icon (copy), IconSize (copy), Text (copy), OptionSelectorGroup (copy), OptionSelectorGroupSize (copy), CampaignOptionItem (copy), createBenefitRows (copy), AdCampaignLegalText (copy), Button (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsTwoOptions = p1.variant == "twoOptions"
@@ -273,7 +273,7 @@ return function(p1) --[[ Line: 345 | Named "CreateAdCampaignSheetView" ]]
 					leading = FoundationModule.Enums.IconName.Robux,
 					variant = ChipVariant.Standard,
 					size = ChipSize.Medium,
-					onActivated = if IsTwoOptions then p1.onOpenBuyRobux else function() --[[ Line: 397 ]] end,
+					onActivated = if IsTwoOptions then p1.onOpenBuyRobux else function() end,
 					isDisabled = not IsTwoOptions or p1.isCreatePending,
 					testId = if IsTwoOptions then "two-options-ad-campaign-balance" else nil
 				}) else ReactModule.createElement(View, {

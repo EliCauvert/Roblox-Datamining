@@ -6,7 +6,7 @@ local FFlagStableIdempotencyKeyForProductAndGamePassModule = require(PurchasePro
 local config = { requestType = RequestTypeModule.None }
 
 return (require(Parent.PurchasePromptDeps).Rodux.createReducer(config, {
-	[require(PurchasePrompt.Actions.RequestAssetPurchase).name] = function(_, p1) --[[ Line: 33 ]]
+	[require(PurchasePrompt.Actions.RequestAssetPurchase).name] = function(_, p1)
 		-- upvalues: HttpService (copy), RequestTypeModule (copy)
 		local IdempotencyKey = p1.idempotencyKey
 		
@@ -27,7 +27,7 @@ return (require(Parent.PurchasePromptDeps).Rodux.createReducer(config, {
 			expectedPrice = p1.expectedPrice or 0
 		}
 	end,
-	[require(PurchasePrompt.Actions.RequestGamepassPurchase).name] = function(_, p1) --[[ Line: 52 ]]
+	[require(PurchasePrompt.Actions.RequestGamepassPurchase).name] = function(_, p1)
 		-- upvalues: RequestTypeModule (copy), FFlagStableIdempotencyKeyForProductAndGamePassModule (copy), HttpService (copy)
 		local config = {
 			isRobloxPurchase = false,
@@ -46,7 +46,7 @@ return (require(Parent.PurchasePromptDeps).Rodux.createReducer(config, {
 		end
 		return config
 	end,
-	[require(PurchasePrompt.Actions.RequestProductPurchase).name] = function(_, p1) --[[ Line: 68 ]]
+	[require(PurchasePrompt.Actions.RequestProductPurchase).name] = function(_, p1)
 		-- upvalues: RequestTypeModule (copy), FFlagStableIdempotencyKeyForProductAndGamePassModule (copy), HttpService (copy)
 		local config = {
 			isRobloxPurchase = false,
@@ -65,7 +65,7 @@ return (require(Parent.PurchasePromptDeps).Rodux.createReducer(config, {
 		end
 		return config
 	end,
-	[require(PurchasePrompt.Actions.RequestBundlePurchase).name] = function(_, p1) --[[ Line: 84 ]]
+	[require(PurchasePrompt.Actions.RequestBundlePurchase).name] = function(_, p1)
 		-- upvalues: HttpService (copy), RequestTypeModule (copy)
 		local IdempotencyKey = p1.idempotencyKey
 		
@@ -85,18 +85,18 @@ return (require(Parent.PurchasePromptDeps).Rodux.createReducer(config, {
 			expectedPrice = p1.expectedPrice or 0
 		}
 	end,
-	[require(PurchasePrompt.Actions.RequestPremiumPurchase).name] = function(_, _) --[[ Line: 102 ]]
+	[require(PurchasePrompt.Actions.RequestPremiumPurchase).name] = function(_, _)
 		-- upvalues: RequestTypeModule (copy)
 		return { requestType = RequestTypeModule.Premium }
 	end,
-	[require(PurchasePrompt.Actions.RequestSubscriptionPurchase).name] = function(_, p1) --[[ Line: 107 ]]
+	[require(PurchasePrompt.Actions.RequestSubscriptionPurchase).name] = function(_, p1)
 		-- upvalues: RequestTypeModule (copy)
 		return {
 			id = p1.id,
 			requestType = RequestTypeModule.Subscription
 		}
 	end,
-	[require(PurchasePrompt.Actions.RequestAvatarCreationFeePurchase).name] = function(_, p1) --[[ Line: 113 ]]
+	[require(PurchasePrompt.Actions.RequestAvatarCreationFeePurchase).name] = function(_, p1)
 		-- upvalues: RequestTypeModule (copy)
 		return {
 			requestType = RequestTypeModule.AvatarCreationFee,
@@ -104,25 +104,25 @@ return (require(Parent.PurchasePromptDeps).Rodux.createReducer(config, {
 			id = p1.guid
 		}
 	end,
-	[require(PurchasePrompt.Actions.RequestExperiencePurchase).name] = function(_, p1) --[[ Line: 120 ]]
+	[require(PurchasePrompt.Actions.RequestExperiencePurchase).name] = function(_, p1)
 		-- upvalues: RequestTypeModule (copy)
 		return {
 			requestType = RequestTypeModule.Experience,
 			universeId = p1.universeId
 		}
 	end,
-	[require(PurchasePrompt.Actions.RequestLookPurchase).name] = function(_, p1) --[[ Line: 126 ]]
+	[require(PurchasePrompt.Actions.RequestLookPurchase).name] = function(_, p1)
 		-- upvalues: RequestTypeModule (copy)
 		return {
 			requestType = RequestTypeModule.Look,
 			lookId = p1.lookId
 		}
 	end,
-	[require(PurchasePrompt.Actions.RequestRobuxUpsellPurchase).name] = if require(Parent.SharedFlags).FFlagAXMISWithBlackbird then function(_, _) --[[ Line: 133 ]]
+	[require(PurchasePrompt.Actions.RequestRobuxUpsellPurchase).name] = if require(Parent.SharedFlags).FFlagAXMISWithBlackbird then function(_, _)
 		-- upvalues: RequestTypeModule (copy)
 		return { requestType = RequestTypeModule.RobuxUpsell }
 	end else nil,
-	[require(PurchasePrompt.Actions.RequestDeveloperSubscriptionPurchase).name] = function(_, p1) --[[ Line: 139 ]]
+	[require(PurchasePrompt.Actions.RequestDeveloperSubscriptionPurchase).name] = function(_, p1)
 		-- upvalues: RequestTypeModule (copy)
 		return {
 			requestType = RequestTypeModule.DeveloperSubscription,
@@ -130,17 +130,17 @@ return (require(Parent.PurchasePromptDeps).Rodux.createReducer(config, {
 			expectedPrice = p1.expectedPrice
 		}
 	end,
-	[require(PurchasePrompt.Actions.RequestVIPServerPurchase).name] = function(_, _) --[[ Line: 146 ]]
+	[require(PurchasePrompt.Actions.RequestVIPServerPurchase).name] = function(_, _)
 		-- upvalues: RequestTypeModule (copy)
 		return { requestType = RequestTypeModule.VIPServer }
 	end,
-	[require(PurchasePrompt.Actions.RefreshExpectedPrice).name] = function(Tbl, p1) --[[ Line: 151 ]]
+	[require(PurchasePrompt.Actions.RefreshExpectedPrice).name] = function(Tbl, p1)
 		local Copy = table.clone(Tbl)
 		Copy.expectedPrice = p1.expectedPrice
 		
 		return Copy
 	end,
-	[require(PurchasePrompt.Actions.CompleteRequest).name] = function(_, _) --[[ Line: 156 ]]
+	[require(PurchasePrompt.Actions.CompleteRequest).name] = function(_, _)
 		-- upvalues: config (copy)
 		return config
 	end

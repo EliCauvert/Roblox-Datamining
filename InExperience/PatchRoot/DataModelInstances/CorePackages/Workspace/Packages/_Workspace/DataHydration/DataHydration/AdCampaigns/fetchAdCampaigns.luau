@@ -7,14 +7,14 @@ local _ = require(script.Parent.AdCampaignsTypes)
 local FetchFunction = HttpClientModule.fetch
 local AsPromiseFunction = HttpClientModule.asPromise
 
-local function fetchBillingAccounts(p1) --[[ Line: 38 ]]
+local function fetchBillingAccounts(p1)
 	-- upvalues: FetchFunction (copy), UrlBase (copy), AsPromiseFunction (copy)
 	return AsPromiseFunction((FetchFunction({
 		method = "GET",
 		analyticsKey = "ads-billing-accounts.list",
 		network = p1.network,
 		url = (p1.baseUrl or UrlBase.APIS) .. "/ads-management/v1/billing-accounts",
-		decode = function(p2) --[[ Line: 44 ]]
+		decode = function(p2)
 			local BillingAccounts = if type(p2) == "table" then p2.billingAccounts else nil
 			
 			if type(BillingAccounts) ~= "table" then
@@ -25,7 +25,7 @@ local function fetchBillingAccounts(p1) --[[ Line: 38 ]]
 	})))
 end
 
-local function mapCampaign(p1) --[[ Line: 56 ]]
+local function mapCampaign(p1)
 	local Schedule = p1.schedule or {}
 	
 	return {
@@ -41,15 +41,15 @@ local function mapCampaign(p1) --[[ Line: 56 ]]
 	}
 end
 
-local function fetchAllCampaigns(p1) --[[ Line: 71 ]]
+local function fetchAllCampaigns(p1)
 	-- upvalues: UrlBase (copy), PromiseModule (copy), HttpService (copy), FetchFunction (copy), AsPromiseFunction (copy), mapCampaign (copy)
 	local BaseUrl = p1.baseUrl or UrlBase.APIS
 	
-	return PromiseModule.new(function(Callback1, Callback) --[[ Line: 74 ]]
+	return PromiseModule.new(function(Callback1, Callback)
 		-- upvalues: BaseUrl (copy), HttpService (upval), FetchFunction (upval), p1 (copy), AsPromiseFunction (upval), mapCampaign (upval)
 		local List = {}
 		
-		local function fetchPage(NextPageToken, p2) --[[ Line: 77 ]]
+		local function fetchPage(NextPageToken, p2)
 			-- upvalues: BaseUrl (upval), HttpService (upval), FetchFunction (upval), p1 (upval), AsPromiseFunction (upval), List (copy), mapCampaign (upval), Callback1 (copy), Callback (copy), fetchPage (copy)
 			local MaxPageSizeName: string = ("%s%s?maxPageSize=%d"):format(BaseUrl, "/ads-management/v1/campaigns", 100)
 			
@@ -61,10 +61,10 @@ local function fetchAllCampaigns(p1) --[[ Line: 71 ]]
 				analyticsKey = "ads-campaigns.list",
 				network = p1.network,
 				url = MaxPageSizeName,
-				decode = function(p3) --[[ Line: 88 ]]
+				decode = function(p3)
 					return p3
 				end
-			}))):andThen(function(Result) --[[ Line: 94 ]]
+			}))):andThen(function(Result)
 				-- upvalues: List (upval), mapCampaign (upval), Callback1 (upval), p2 (copy), Callback (upval), fetchPage (upval)
 				local Campaigns = if Result == nil then nil else Result.campaigns
 				
@@ -89,7 +89,7 @@ local function fetchAllCampaigns(p1) --[[ Line: 71 ]]
 				else
 					fetchPage(NextPageToken, p2 + 1)
 				end
-			end):catch(function(Err) --[[ Line: 114 ]]
+			end):catch(function(Err)
 				-- upvalues: Callback (upval)
 				Callback(Err)
 			end)
@@ -100,16 +100,16 @@ local function fetchAllCampaigns(p1) --[[ Line: 71 ]]
 end
 
 return {
-	fetchAdCampaigns = function(p2) --[[ Line: 127 ]]
+	fetchAdCampaigns = function(p2)
 		-- upvalues: PromiseModule (copy), fetchBillingAccounts (copy), fetchAllCampaigns (copy)
 		local P9 = p2 or {}
 		
 		return PromiseModule.race({
-			fetchBillingAccounts(P9):andThen(function(Result) --[[ Line: 132 ]]
+			fetchBillingAccounts(P9):andThen(function(Result)
 				-- upvalues: fetchAllCampaigns (upval), P9 (copy)
 				return if #Result == 0 then {} else fetchAllCampaigns(P9)
 			end),
-			((P9.delay or PromiseModule.delay)(P9.timeoutSec or 25):andThen(function() --[[ Line: 141 ]]
+			((P9.delay or PromiseModule.delay)(P9.timeoutSec or 25):andThen(function()
 				-- upvalues: PromiseModule (upval)
 				return PromiseModule.reject({ errorMessage = "Ad campaigns fetch timed out" })
 			end))

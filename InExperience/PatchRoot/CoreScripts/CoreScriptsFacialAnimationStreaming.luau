@@ -27,7 +27,7 @@ local UXForCameraPerformanceSessionDelay = game:DefineFastInt("UXForCameraPerfor
 local UXForCameraPerformanceDeviceDelay = game:DefineFastInt("UXForCameraPerformanceDeviceDelay", 43200)
 local GetFFlagUXForCameraPerformanceIXPEnabledModule = require(RobloxGui.Modules.Flags.GetFFlagUXForCameraPerformanceIXPEnabled)
 local GetFStringUXForCameraPerformanceIXPLayerNameModule = require(RobloxGui.Modules.Flags.GetFStringUXForCameraPerformanceIXPLayerName)
-local IsCamEnabledForUserAndPlaceModule = if DisableCameraOnLowspecAndroidCalls then require(RobloxGui.Modules.Settings.isCamEnabledForUserAndPlace) else function(): boolean --[[ Line: 47 ]]
+local IsCamEnabledForUserAndPlaceModule = if DisableCameraOnLowspecAndroidCalls then require(RobloxGui.Modules.Settings.isCamEnabledForUserAndPlace) else function(): boolean
 	return true
 end
 local FacialAnimationStreamingHeartbeatStatsModule = require(RobloxGui.Modules.FacialAnimationStreaming.FacialAnimationStreamingHeartbeatStats)
@@ -64,7 +64,7 @@ local EventConnection = nil
 local Connection = nil
 local Connection1 = nil
 
-local function _(p1, Player: Player) --[[ Line: 106 | Named "playerTrace" ]]
+local function _(p1, Player: Player)
 	-- upvalues: NewResult (copy)
 	local v1 = ""
 	local Name = ""
@@ -80,7 +80,7 @@ local function _(p1, Player: Player) --[[ Line: 106 | Named "playerTrace" ]]
 	NewResult:trace(string.format("%s {id: %s, name: %s}.", p1, v1, Name))
 end
 
-local _ = function(Player: Player, p1) --[[ Line: 120 | Named "clearConnection" ]]
+local _ = function(Player: Player, p1)
 	-- upvalues: t3 (copy)
 	if t3[Player.UserId] and t3[Player.UserId][p1] then
 		t3[Player.UserId][p1]:Disconnect()
@@ -88,7 +88,7 @@ local _ = function(Player: Player, p1) --[[ Line: 120 | Named "clearConnection" 
 	end
 end
 
-local function clearAllConnections(Player1: Player) --[[ Line: 127 ]]
+local function clearAllConnections(Player1: Player)
 	-- upvalues: Player (copy), t3 (copy)
 	if game:GetFastFlag("FacialAnimationStreamingClearAllConnectionsFix2") then
 		for _, value in pairs(Player) do
@@ -108,7 +108,7 @@ local function clearAllConnections(Player1: Player) --[[ Line: 127 ]]
 	t3[Player1.UserId] = {}
 end
 
-local function clearCharacterAnimations(Player: Player) --[[ Line: 141 ]]
+local function clearCharacterAnimations(Player: Player)
 	-- upvalues: NewResult (copy), t2 (copy), FacialAnimationStreamingClearTrackImprovementsV2 (copy)
 	local v1 = ""
 	local Name = ""
@@ -147,21 +147,21 @@ local function clearCharacterAnimations(Player: Player) --[[ Line: 141 ]]
 	end
 end
 
-local function getPlayerFaceControls(Player: Player) --[[ Line: 168 ]]
+local function getPlayerFaceControls(Player: Player)
 	return if Player and Player.Character then Player.Character:FindFirstChildWhichIsA("FaceControls", true) else nil
 end
 
-local function getPlayerHumanoid(Player: Player) --[[ Line: 176 ]]
+local function getPlayerHumanoid(Player: Player)
 	return if Player.Character then Player.Character:FindFirstChildOfClass("Humanoid") else nil
 end
 
-local function getPlayerAnimator(Player: Player) --[[ Line: 184 ]]
+local function getPlayerAnimator(Player: Player)
 	local Humanoid = if Player.Character then Player.Character:FindFirstChildOfClass("Humanoid") else nil
 	
 	return if Humanoid then Humanoid:FindFirstChildOfClass("Animator") else nil
 end
 
-local _ = function(Player: Player) --[[ Line: 193 | Named "pauseStreamingAnimationForPlayer" ]]
+local _ = function(Player: Player)
 	-- upvalues: t2 (copy), NewResult (copy)
 	if t2[Player.UserId] and t2[Player.UserId].animationTrack then
 		local v1 = ""
@@ -180,7 +180,7 @@ local _ = function(Player: Player) --[[ Line: 193 | Named "pauseStreamingAnimati
 	end
 end
 
-local _ = function(Player: Player) --[[ Line: 204 | Named "resumeStreamingAnimationForPlayer" ]]
+local _ = function(Player: Player)
 	-- upvalues: t2 (copy), NewResult (copy)
 	if t2[Player.UserId] and t2[Player.UserId].animationTrack then
 		local v1 = ""
@@ -199,7 +199,7 @@ local _ = function(Player: Player) --[[ Line: 204 | Named "resumeStreamingAnimat
 	end
 end
 
-local _ = function() --[[ Line: 211 | Named "updateStreamTrackStatus" ]]
+local _ = function()
 	-- upvalues: Players (copy), FaceAnimatorService (copy), t2 (copy), NewResult (copy)
 	local LocalPlayer = Players.LocalPlayer
 	
@@ -239,7 +239,7 @@ local _ = function() --[[ Line: 211 | Named "updateStreamTrackStatus" ]]
 	end
 end
 
-local function handleEmote(Player1: Player, AnyActiveDefaultChatTriggeredEmoteTrack, p1) --[[ Line: 225 ]]
+local function handleEmote(Player1: Player, AnyActiveDefaultChatTriggeredEmoteTrack, p1)
 	-- upvalues: NewResult (copy), Player (copy), t3 (copy), t2 (copy), EmoteHelperModule (copy), FaceAnimatorService (copy)
 	local Formatted = string.format("handleEmote {isChatTriggered:%s}", (tostring(p1)))
 	local v1 = ""
@@ -277,7 +277,7 @@ local function handleEmote(Player1: Player, AnyActiveDefaultChatTriggeredEmoteTr
 			NewResult:trace(string.format("%s {id: %s, name: %s}.", "Pausing facial streaming animations...", v2, Name1))
 			t2[Player1.UserId].animationTrack:AdjustWeight(0.1, 0.5)
 		end
-		t3[Player1.UserId][Player.EmoteFinished] = EmoteHelperModule.createEmoteFinishEvent(Player1, AnyActiveDefaultChatTriggeredEmoteTrack, p1):Connect(function() --[[ Line: 240 ]]
+		t3[Player1.UserId][Player.EmoteFinished] = EmoteHelperModule.createEmoteFinishEvent(Player1, AnyActiveDefaultChatTriggeredEmoteTrack, p1):Connect(function()
 			-- upvalues: Player1 (copy), Player (upval), t3 (upval), FaceAnimatorService (upval), t2 (upval), NewResult (upval)
 			local EmoteFinished = Player.EmoteFinished
 			
@@ -322,7 +322,7 @@ local function handleEmote(Player1: Player, AnyActiveDefaultChatTriggeredEmoteTr
 	end
 end
 
-local function onPlayerChatted(Player: Player, Text: string) --[[ Line: 256 ]]
+local function onPlayerChatted(Player: Player, Text: string)
 	-- upvalues: EmoteHelperModule (copy), handleEmote (copy)
 	if if Player.Character then Player.Character:FindFirstChildOfClass("Humanoid") else nil then
 		local Segment: string? = nil
@@ -343,7 +343,7 @@ local function onPlayerChatted(Player: Player, Text: string) --[[ Line: 256 ]]
 	end
 end
 
-local function onAnimatorAdded(Player1: Player, Object) --[[ Line: 279 ]]
+local function onAnimatorAdded(Player1: Player, Object)
 	-- upvalues: t2 (copy), NewResult (copy), Player (copy), t3 (copy), LoadStreamAnimationReplaceErrorsWithTelemetryFeatureEngineFeature (copy), FaceAnimatorService (copy), Players (copy), t4 (copy)
 	if not Object then return end
 	if not Object.Parent or not Object.Parent:IsA("Humanoid") then return end
@@ -369,7 +369,7 @@ local function onAnimatorAdded(Player1: Player, Object) --[[ Line: 279 ]]
 			t3[Player1.UserId][AnimatorDataModelReady]:Disconnect()
 			t3[Player1.UserId][AnimatorDataModelReady] = nil
 		end
-		local function v100() --[[ Line: 297 ]]
+		local function v100()
 			-- upvalues: Object (copy), Player1 (copy), LoadStreamAnimationReplaceErrorsWithTelemetryFeatureEngineFeature (upval), t2 (upval), FaceAnimatorService (upval), Players (upval), NewResult (upval), t4 (upval)
 			local config = { animation = Instance.new("TrackerStreamAnimation") }
 			
@@ -409,7 +409,7 @@ local function onAnimatorAdded(Player1: Player, Object) --[[ Line: 279 ]]
 			
 			return
 		else
-			t3[Player1.UserId][Player.AnimatorDataModelReady] = Object.AncestryChanged:Connect(function(_, _) --[[ Line: 335 ]]
+			t3[Player1.UserId][Player.AnimatorDataModelReady] = Object.AncestryChanged:Connect(function(_, _)
 				-- upvalues: Object (copy), Player1 (copy), Player (upval), t3 (upval), v100 (copy)
 				if Object:IsDescendantOf(game) then
 					local AnimatorDataModelReady = Player.AnimatorDataModelReady
@@ -425,7 +425,7 @@ local function onAnimatorAdded(Player1: Player, Object) --[[ Line: 279 ]]
 	end
 end
 
-local function onHumanoidAdded(Player1: Player, Humanoid) --[[ Line: 347 ]]
+local function onHumanoidAdded(Player1: Player, Humanoid)
 	-- upvalues: Player (copy), t3 (copy), handleEmote (copy), clearCharacterAnimations (copy)
 	if not Humanoid then return end
 	local PlayerEmoted = Player.PlayerEmoted
@@ -434,7 +434,7 @@ local function onHumanoidAdded(Player1: Player, Humanoid) --[[ Line: 347 ]]
 		t3[Player1.UserId][PlayerEmoted]:Disconnect()
 		t3[Player1.UserId][PlayerEmoted] = nil
 	end
-	t3[Player1.UserId][Player.PlayerEmoted] = Humanoid.EmoteTriggered:Connect(function(Success, AnimationTrack) --[[ Line: 355 ]]
+	t3[Player1.UserId][Player.PlayerEmoted] = Humanoid.EmoteTriggered:Connect(function(Success, AnimationTrack)
 		-- upvalues: handleEmote (upval), Player1 (copy)
 		if Success then
 			handleEmote(Player1, AnimationTrack, false)
@@ -448,14 +448,14 @@ local function onHumanoidAdded(Player1: Player, Humanoid) --[[ Line: 347 ]]
 			t3[Player1.UserId][PlayerDied]:Disconnect()
 			t3[Player1.UserId][PlayerDied] = nil
 		end
-		t3[Player1.UserId][Player.PlayerDied] = Humanoid.Died:Connect(function() --[[ Line: 365 ]]
+		t3[Player1.UserId][Player.PlayerDied] = Humanoid.Died:Connect(function()
 			-- upvalues: clearCharacterAnimations (upval), Player1 (copy)
 			clearCharacterAnimations(Player1)
 		end)
 	end
 end
 
-local function onFaceControlsAdded(Player: Player, p1) --[[ Line: 371 ]]
+local function onFaceControlsAdded(Player: Player, p1)
 	-- upvalues: Players (copy), t5 (copy), Default1 (copy), NewResult (copy), FaceAnimatorService (copy)
 	assert(game:GetFastFlag("FacialAnimationStreamingIfNoDynamicHeadDisableA2C"))
 	
@@ -528,7 +528,7 @@ local function onFaceControlsAdded(Player: Player, p1) --[[ Line: 371 ]]
 	end
 end
 
-local function onCharacterDescendantAdded(Player: Player, Object) --[[ Line: 407 ]]
+local function onCharacterDescendantAdded(Player: Player, Object)
 	-- upvalues: onAnimatorAdded (copy), onHumanoidAdded (copy), onFaceControlsAdded (copy), getPlayerFaceControls (copy)
 	if Object:IsDescendantOf(game) then
 		if Object:IsA("Animator") then
@@ -552,7 +552,7 @@ local function onCharacterDescendantAdded(Player: Player, Object) --[[ Line: 407
 	end
 end
 
-local function onCharacterDescendantRemoving(Player1: Player, Object) --[[ Line: 427 ]]
+local function onCharacterDescendantRemoving(Player1: Player, Object)
 	-- upvalues: t4 (copy), Player (copy), t3 (copy), clearCharacterAnimations (copy), onAnimatorAdded (copy), onFaceControlsAdded (copy), getPlayerFaceControls (copy)
 	if Object:IsA("Animator") then
 		if game:GetFastFlag("FacialAnimationStreamingValidateAnimatorBeforeRemoving") then
@@ -610,7 +610,7 @@ local function onCharacterDescendantRemoving(Player1: Player, Object) --[[ Line:
 	end
 end
 
-local function onCharacterAdded(Player1: Player, Character) --[[ Line: 460 ]]
+local function onCharacterAdded(Player1: Player, Character)
 	-- upvalues: NewResult (copy), Player (copy), t3 (copy), onCharacterDescendantAdded (copy), onCharacterDescendantRemoving (copy), onFaceControlsAdded (copy), getPlayerFaceControls (copy), onHumanoidAdded (copy), getPlayerHumanoid (copy), onAnimatorAdded (copy), getPlayerAnimator (copy)
 	local v1 = ""
 	local Name = ""
@@ -636,11 +636,11 @@ local function onCharacterAdded(Player1: Player, Character) --[[ Line: 460 ]]
 		t3[Player1.UserId][CharacterDescendantRemoving]:Disconnect()
 		t3[Player1.UserId][CharacterDescendantRemoving] = nil
 	end
-	t3[Player1.UserId][Player.CharacterDescendantAdded] = Character.DescendantAdded:Connect(function(Descendant) --[[ Line: 469 ]]
+	t3[Player1.UserId][Player.CharacterDescendantAdded] = Character.DescendantAdded:Connect(function(Descendant)
 		-- upvalues: onCharacterDescendantAdded (upval), Player1 (copy)
 		onCharacterDescendantAdded(Player1, Descendant)
 	end)
-	t3[Player1.UserId][Player.CharacterDescendantRemoving] = Character.DescendantRemoving:Connect(function(Descendant) --[[ Line: 474 ]]
+	t3[Player1.UserId][Player.CharacterDescendantRemoving] = Character.DescendantRemoving:Connect(function(Descendant)
 		-- upvalues: onCharacterDescendantRemoving (upval), Player1 (copy)
 		onCharacterDescendantRemoving(Player1, Descendant)
 	end)
@@ -652,7 +652,7 @@ local function onCharacterAdded(Player1: Player, Character) --[[ Line: 460 ]]
 	onAnimatorAdded(Player1, getPlayerAnimator(Player1))
 end
 
-local function onCharacterRemoving(Player1: Player, _) --[[ Line: 488 ]]
+local function onCharacterRemoving(Player1: Player, _)
 	-- upvalues: NewResult (copy), Player (copy), t3 (copy), clearAllConnections (copy), clearCharacterAnimations (copy)
 	local v1 = ""
 	local Name = ""
@@ -686,7 +686,7 @@ local function onCharacterRemoving(Player1: Player, _) --[[ Line: 488 ]]
 	clearCharacterAnimations(Player1)
 end
 
-local function playerUpdate(Player1: Player) --[[ Line: 502 ]]
+local function playerUpdate(Player1: Player)
 	-- upvalues: NewResult (copy), t1 (copy), t2 (copy), clearAllConnections (copy), onCharacterAdded (copy), t3 (copy), Player (copy), onCharacterRemoving (copy), onPlayerChatted (copy), clearCharacterAnimations (copy)
 	local v1 = ""
 	local Name = ""
@@ -738,15 +738,15 @@ local function playerUpdate(Player1: Player) --[[ Line: 502 ]]
 				if Player1.Character then
 					onCharacterAdded(Player1, Player1.Character)
 				end
-				t3[Player1.UserId][Player.CharacterAdded] = Player1.CharacterAdded:Connect(function(Character) --[[ Line: 530 ]]
+				t3[Player1.UserId][Player.CharacterAdded] = Player1.CharacterAdded:Connect(function(Character)
 					-- upvalues: onCharacterAdded (upval), Player1 (copy)
 					onCharacterAdded(Player1, Character)
 				end)
-				t3[Player1.UserId][Player.CharacterRemoving] = Player1.CharacterRemoving:Connect(function(Character) --[[ Line: 534 ]]
+				t3[Player1.UserId][Player.CharacterRemoving] = Player1.CharacterRemoving:Connect(function(Character)
 					-- upvalues: onCharacterRemoving (upval), Player1 (copy)
 					onCharacterRemoving(Player1, Character)
 				end)
-				t3[Player1.UserId][Player.PlayerChatted] = Player1.Chatted:Connect(function(Message) --[[ Line: 538 ]]
+				t3[Player1.UserId][Player.PlayerChatted] = Player1.Chatted:Connect(function(Message)
 					-- upvalues: onPlayerChatted (upval), Player1 (copy)
 					onPlayerChatted(Player1, Message)
 				end)
@@ -786,20 +786,20 @@ local function playerUpdate(Player1: Player) --[[ Line: 502 ]]
 	end
 end
 
-local _ = function(p1, Paused) --[[ Line: 547 | Named "toggleMute" ]]
+local _ = function(p1, Paused)
 	-- upvalues: t2 (copy)
 	if t2[p1] and t2[p1].animationTrack then
 		t2[p1].animationTrack:TogglePause(Paused)
 	end
 end
 
-local function JoinAllExistingPlayers() --[[ Line: 553 ]]
+local function JoinAllExistingPlayers()
 	-- upvalues: Players (copy), t1 (copy), playerUpdate (copy), NewResult (copy)
 	for _, player in ipairs(Players:GetPlayers()) do
 		t1[player.UserId] = true
 		playerUpdate(player)
 	end
-	Players.PlayerRemoving:Connect(function(Player: Player) --[[ Line: 559 ]]
+	Players.PlayerRemoving:Connect(function(Player: Player)
 		-- upvalues: NewResult (upval), t1 (upval), playerUpdate (upval)
 		local v1 = ""
 		local Name = ""
@@ -816,7 +816,7 @@ local function JoinAllExistingPlayers() --[[ Line: 553 ]]
 		t1[Player.UserId] = nil
 		playerUpdate(Player)
 	end)
-	Players.PlayerAdded:Connect(function(Player: Player) --[[ Line: 565 ]]
+	Players.PlayerAdded:Connect(function(Player: Player)
 		-- upvalues: NewResult (upval), t1 (upval), playerUpdate (upval)
 		local v1 = ""
 		local Name = ""
@@ -835,11 +835,11 @@ local function JoinAllExistingPlayers() --[[ Line: 553 ]]
 	end)
 end
 
-local function ConnectStateChangeCallback() --[[ Line: 572 ]]
+local function ConnectStateChangeCallback()
 	-- upvalues: Default1 (copy), Players (copy), t2 (copy), NewResult (copy), t (copy), playerUpdate (copy)
 	local Service = Default1:getService()
 	local UserId = Players.LocalPlayer.UserId
-	Default1.participantsUpdate.Event:Connect(function(List) --[[ Line: 576 ]]
+	Default1.participantsUpdate.Event:Connect(function(List)
 		-- upvalues: UserId (copy), t2 (upval)
 		for i, value in pairs(List) do
 			local Number: number? = tonumber(i)
@@ -855,7 +855,7 @@ local function ConnectStateChangeCallback() --[[ Line: 572 ]]
 	end)
 	
 	if Service then
-		Service.ParticipantsStateChanged:Connect(function(ParticipantsLeft, ParticipantsJoined, _) --[[ Line: 586 ]]
+		Service.ParticipantsStateChanged:Connect(function(ParticipantsLeft, ParticipantsJoined, _)
 			-- upvalues: Players (upval), NewResult (upval), t (upval), playerUpdate (upval)
 			for _, UserId in ipairs(ParticipantsLeft) do
 				local Player = Players:GetPlayerByUserId(UserId)
@@ -905,10 +905,10 @@ local function ConnectStateChangeCallback() --[[ Line: 572 ]]
 	end
 end
 
-local function AttemptToShowCameraPerformanceToast(p1) --[[ Line: 612 ]]
+local function AttemptToShowCameraPerformanceToast(p1)
 	-- upvalues: GetFFlagUXForCameraPerformanceIXPEnabledModule (copy), IXPServiceWrapper (copy), GetFStringUXForCameraPerformanceIXPLayerNameModule (copy), Timestamp (copy), UXForCameraPerformanceSessionDelay (copy), AttemptToShowCameraPerformanceToast (copy), AppStorageService (copy), UXForCameraPerformanceDeviceDelay (copy), TrackerMenuModule (copy), TrackerPromptTypeModule (copy), RbxAnalyticsService (copy), Players (copy)
 	if GetFFlagUXForCameraPerformanceIXPEnabledModule() then
-		local Success, Result = pcall(function() --[[ Line: 615 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: IXPServiceWrapper (upval), GetFStringUXForCameraPerformanceIXPLayerNameModule (upval)
 			return IXPServiceWrapper:GetLayerData(GetFStringUXForCameraPerformanceIXPLayerNameModule())
 		end)
@@ -920,7 +920,7 @@ local function AttemptToShowCameraPerformanceToast(p1) --[[ Line: 612 ]]
 	local Elapsed = os.time() - Timestamp
 	
 	if not p1 and Elapsed < UXForCameraPerformanceSessionDelay then
-		task.delay(UXForCameraPerformanceSessionDelay - Elapsed, function() --[[ Line: 636 ]]
+		task.delay(UXForCameraPerformanceSessionDelay - Elapsed, function()
 			-- upvalues: AttemptToShowCameraPerformanceToast (upval)
 			AttemptToShowCameraPerformanceToast(true)
 		end)
@@ -928,7 +928,7 @@ local function AttemptToShowCameraPerformanceToast(p1) --[[ Line: 612 ]]
 		return
 	end
 	local Number: number? = 0
-	local Success1, Result1 = pcall(function() --[[ Line: 644 ]]
+	local Success1, Result1 = pcall(function()
 		-- upvalues: AppStorageService (upval)
 		return AppStorageService:GetItem("CameraPerformanceUXUnixTimestamp")
 	end)
@@ -936,7 +936,7 @@ local function AttemptToShowCameraPerformanceToast(p1) --[[ Line: 612 ]]
 	if not Success1 then return end
 	Number = tonumber(Result1)
 	if os.time() - Number >= UXForCameraPerformanceDeviceDelay then
-		pcall(function() --[[ Line: 656 ]]
+		pcall(function()
 			-- upvalues: AppStorageService (upval), Number (ref), TrackerMenuModule (upval), TrackerPromptTypeModule (upval), RbxAnalyticsService (upval), Players (upval)
 			AppStorageService:SetItem("CameraPerformanceUXUnixTimestamp", (tostring(Number)))
 			AppStorageService:Flush()
@@ -951,9 +951,9 @@ local function AttemptToShowCameraPerformanceToast(p1) --[[ Line: 612 ]]
 	end
 end
 
-function InitializeVoiceChat() --[[ Line: 678 ]]
+function InitializeVoiceChat()
 	-- upvalues: ConnectStateChangeCallback (copy), Default1 (copy), NewResult (copy), EventConnection (ref), Players (copy), FaceAnimatorService (copy)
-	local function v161() --[[ Line: 679 ]]
+	local function v161()
 		-- upvalues: ConnectStateChangeCallback (upval)
 		ConnectStateChangeCallback()
 	end
@@ -963,11 +963,11 @@ function InitializeVoiceChat() --[[ Line: 678 ]]
 		
 		return
 	end
-	Default1:asyncInit():catch(function(_) --[[ Line: 685 ]]
+	Default1:asyncInit():catch(function(_)
 		-- upvalues: NewResult (upval)
 		NewResult:trace("VoiceChat:asyncInit failed (possibly denied mic permission)")
 	end):finally(v161)
-	EventConnection = Default1.muteChanged.Event:connect(function(p1) --[[ Line: 691 ]]
+	EventConnection = Default1.muteChanged.Event:connect(function(p1)
 		-- upvalues: Players (upval), NewResult (upval), FaceAnimatorService (upval)
 		if game:GetFastFlag("FacialAnimationStreamingIfNoDynamicHeadDisableA2C") then
 			local LocalPlayer = Players.LocalPlayer
@@ -996,7 +996,7 @@ function InitializeVoiceChat() --[[ Line: 678 ]]
 	FaceAnimatorService.AudioAnimationEnabled = NoLocalMuted
 end
 
-function CleanupVoiceChat() --[[ Line: 729 ]]
+function CleanupVoiceChat()
 	-- upvalues: EventConnection (ref)
 	if EventConnection then
 		EventConnection:Disconnect()
@@ -1004,11 +1004,11 @@ function CleanupVoiceChat() --[[ Line: 729 ]]
 	end
 end
 
-function InitializeFacialAnimationStreaming(p1) --[[ Line: 736 ]]
+function InitializeFacialAnimationStreaming(p1)
 	-- upvalues: Flag (ref), TrackerErrorConnection (ref), FaceAnimatorService (copy), NewResult (copy), TrackerMenuModule (copy), TrackerPromptTypeModule (copy), DisableCameraOnLowspecAndroidCalls (copy), IsCamEnabledForUserAndPlaceModule (ref), GetFFlagAvatarChatServiceEnabledFunction (copy), AvatarChatService (copy), FaceAnimatorNotifyLODRecommendCameraInputDisableEngineFeature (copy), TrackerPromptConnection (ref), UXForCameraPerformanceEnabled (copy), AttemptToShowCameraPerformanceToast (copy), Default (copy), Enums (copy), JoinAllExistingPlayers (copy), FacialAnimationStreamingHeartbeatStatsModule (copy)
 	if Flag then return end
 	Flag = true
-	TrackerErrorConnection = FaceAnimatorService.TrackerError:Connect(function(TrackerError) --[[ Line: 744 ]]
+	TrackerErrorConnection = FaceAnimatorService.TrackerError:Connect(function(TrackerError)
 		-- upvalues: NewResult (upval), TrackerMenuModule (upval), TrackerPromptTypeModule (upval)
 		NewResult:trace(string.format("%s {id: %s, name: %s}.", string.format("TrackerError: %s", (tostring(TrackerError))), "", ""))
 		
@@ -1040,7 +1040,7 @@ function InitializeFacialAnimationStreaming(p1) --[[ Line: 736 ]]
 		FaceAnimatorService:Init(AvatarChatService:IsEnabled(p1, Enum.AvatarChatServiceFeature.UserVideo), AvatarChatService:IsEnabled(p1, Enum.AvatarChatServiceFeature.UserAudio))
 	end
 	if FaceAnimatorNotifyLODRecommendCameraInputDisableEngineFeature then
-		TrackerPromptConnection = FaceAnimatorService.TrackerPrompt:Connect(function(Prompt) --[[ Line: 771 ]]
+		TrackerPromptConnection = FaceAnimatorService.TrackerPrompt:Connect(function(Prompt)
 			-- upvalues: NewResult (upval), UXForCameraPerformanceEnabled (upval), AttemptToShowCameraPerformanceToast (upval), TrackerMenuModule (upval), TrackerPromptTypeModule (upval)
 			NewResult:trace(string.format("%s {id: %s, name: %s}.", string.format("TrackerPrompt: %s", (tostring(Prompt))), "", ""))
 			
@@ -1054,7 +1054,7 @@ function InitializeFacialAnimationStreaming(p1) --[[ Line: 736 ]]
 			end
 		end)
 	end
-	Default:getCallState():andThen(function(Result) --[[ Line: 784 ]]
+	Default:getCallState():andThen(function(Result)
 		-- upvalues: Flag (upval), Enums (upval), FaceAnimatorService (upval), JoinAllExistingPlayers (upval), FacialAnimationStreamingHeartbeatStatsModule (upval)
 		if not Flag then return end
 		if Result.status == Enums.CallStatus.Idle.rawValue() or Result.status == Enums.CallStatus.Ringing.rawValue() then
@@ -1068,7 +1068,7 @@ function InitializeFacialAnimationStreaming(p1) --[[ Line: 736 ]]
 	end)
 end
 
-function CleanupFacialAnimationStreaming() --[[ Line: 809 ]]
+function CleanupFacialAnimationStreaming()
 	-- upvalues: Flag (ref), FacialAnimationStreamingHeartbeatStatsModule (copy), Players (copy), t1 (copy), playerUpdate (copy), TrackerErrorConnection (ref), Connection (ref), Connection1 (ref), FaceAnimatorNotifyLODRecommendCameraInputDisableEngineFeature (copy), TrackerPromptConnection (ref)
 	if not Flag then return end
 	Flag = false
@@ -1097,7 +1097,7 @@ function CleanupFacialAnimationStreaming() --[[ Line: 809 ]]
 	end
 end
 
-local function updateWithServiceState(ClientFeatures) --[[ Line: 847 ]]
+local function updateWithServiceState(ClientFeatures)
 	-- upvalues: NewResult (copy), GetFFlagAvatarChatServiceEnabledFunction (copy), AvatarChatService (copy)
 	NewResult:trace(string.format("[updateWithServiceState] state: %s", (tostring(ClientFeatures))))
 	
@@ -1115,7 +1115,7 @@ local function updateWithServiceState(ClientFeatures) --[[ Line: 847 ]]
 	end
 end
 
-Connection = FaceAnimatorService:GetPropertyChangedSignal("AudioAnimationEnabled"):Connect(function() --[[ Line: 868 ]]
+Connection = FaceAnimatorService:GetPropertyChangedSignal("AudioAnimationEnabled"):Connect(function()
 	-- upvalues: Players (copy), FaceAnimatorService (copy), t2 (copy), NewResult (copy)
 	local LocalPlayer = Players.LocalPlayer
 	
@@ -1154,7 +1154,7 @@ Connection = FaceAnimatorService:GetPropertyChangedSignal("AudioAnimationEnabled
 		t2[LocalPlayer.UserId].animationTrack:AdjustWeight(0.1, 0.5)
 	end
 end)
-Connection1 = FaceAnimatorService:GetPropertyChangedSignal("VideoAnimationEnabled"):Connect(function() --[[ Line: 872 ]]
+Connection1 = FaceAnimatorService:GetPropertyChangedSignal("VideoAnimationEnabled"):Connect(function()
 	-- upvalues: Players (copy), FaceAnimatorService (copy), t2 (copy), NewResult (copy)
 	local LocalPlayer = Players.LocalPlayer
 	
@@ -1199,7 +1199,7 @@ if GetFFlagAvatarChatServiceEnabledFunction() then
 		updateWithServiceState(AvatarChatService.ClientFeatures)
 	else
 		local Connection2 = nil
-		Connection2 = AvatarChatService:GetPropertyChangedSignal("ClientFeatures"):Connect(function() --[[ Line: 882 ]]
+		Connection2 = AvatarChatService:GetPropertyChangedSignal("ClientFeatures"):Connect(function()
 			-- upvalues: updateWithServiceState (copy), AvatarChatService (copy), Connection2 (ref)
 			updateWithServiceState(AvatarChatService.ClientFeatures)
 			Connection2:Disconnect()

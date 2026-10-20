@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("MomentsTTSComposerMaxLines", 8)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastInt("MomentsTTSComposerMaxLines")
 end

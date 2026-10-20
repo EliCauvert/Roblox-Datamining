@@ -19,7 +19,7 @@ local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local UsePlayButtonStateFunction = GamePlayButtonModule.usePlayButtonState
 local PlayButtonStates = GamePlayButtonModule.PlayButtonStates
 
-return function(p1) --[[ Line: 43 | Named "EventActionBar" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseExperienceSubtitleModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UsePlayButtonStateFunction (copy), PlayButtonStates (copy), ReactModule (copy), Text (copy), View (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy), ButtonSize (copy), ImageSetLabel (copy), Images (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseExperienceSubtitleModuleResult = if p1.universeId then UseExperienceSubtitleModule(p1.universeId) else nil
@@ -97,7 +97,7 @@ return function(p1) --[[ Line: 43 | Named "EventActionBar" ]]
 			CTAButton = ReactModule.createElement(Button, {
 				text = p1.ctaProps.button.text,
 				variant = ButtonVariant[p1.ctaProps.button.variant],
-				onActivated = if IsPlayButtonStateMatch then p1.ctaProps.button.onActivated else function() --[[ Line: 132 ]] end,
+				onActivated = if IsPlayButtonStateMatch then p1.ctaProps.button.onActivated else function() end,
 				fillBehavior = FillBehavior.Fill,
 				size = ButtonSize.Medium,
 				isDisabled = not IsPlayButtonStateMatch
@@ -108,7 +108,7 @@ return function(p1) --[[ Line: 43 | Named "EventActionBar" ]]
 			}, {
 				ShareButton = ReactModule.createElement(Button, {
 					variant = ButtonVariant.Standard,
-					onActivated = if IsPlayButtonStateMatch then p1.ctaProps.icon.onActivated else function() --[[ Line: 144 ]] end,
+					onActivated = if IsPlayButtonStateMatch then p1.ctaProps.icon.onActivated else function() end,
 					fillBehavior = FillBehavior.Fill,
 					size = ButtonSize.Medium,
 					isDisabled = not IsPlayButtonStateMatch

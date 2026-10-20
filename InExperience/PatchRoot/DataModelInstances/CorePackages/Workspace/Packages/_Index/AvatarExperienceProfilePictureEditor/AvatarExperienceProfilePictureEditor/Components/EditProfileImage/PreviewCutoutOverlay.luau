@@ -4,7 +4,7 @@ local ReactModule = require(Parent.React)
 local ConstantsModule = require(AvatarExperienceProfilePictureEditor.Constants)
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 
-local function _(p1) --[[ Line: 22 | Named "createCompositionGridLine" ]]
+local function _(p1)
 	-- upvalues: ReactModule (copy)
 	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -17,7 +17,7 @@ local function _(p1) --[[ Line: 22 | Named "createCompositionGridLine" ]]
 	})
 end
 
-local function buildCompositionGridChildren(XOffset, Color, Transparency) --[[ Line: 40 ]]
+local function buildCompositionGridChildren(XOffset, Color, Transparency)
 	-- upvalues: ReactModule (copy)
 	local _Vector2 = Vector2.new(0.5, 0)
 	local _Vector2_1 = Vector2.new(0, 0.5)
@@ -95,7 +95,7 @@ local function buildCompositionGridChildren(XOffset, Color, Transparency) --[[ L
 	}
 end
 
-return function(p1) --[[ Line: 81 | Named "PreviewCutoutOverlay" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ConstantsModule (copy), ReactModule (copy), buildCompositionGridChildren (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Largest = math.max(0, (math.floor((p1.width - p1.cutoutSize) / 2 + 0.5)))

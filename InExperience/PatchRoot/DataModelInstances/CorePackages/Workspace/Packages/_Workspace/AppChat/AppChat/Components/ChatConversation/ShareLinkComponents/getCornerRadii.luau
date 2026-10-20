@@ -1,4 +1,4 @@
-﻿return function(p1, p2) --[[ Line: 15 | Named "getCornerRadii" ]]
+﻿return function(p1, p2)
 	return {
 		topLeft = if p1.topLeft then p2 else 0,
 		topRight = if p1.topRight then p2 else 0,

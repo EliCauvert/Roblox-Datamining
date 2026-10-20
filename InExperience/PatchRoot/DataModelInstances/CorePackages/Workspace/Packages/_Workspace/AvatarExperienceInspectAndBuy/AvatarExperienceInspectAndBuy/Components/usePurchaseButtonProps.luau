@@ -14,12 +14,12 @@ local CalculatePurchaseStatusForItemFunction = ItemDetailsUtilsModule.calculateP
 local GetPriceInRobuxFunction = ItemDetailsUtilsModule.getPriceInRobux
 local FormatNumberModule = require(AvatarExperienceInspectAndBuy.Utils.formatNumber)
 
-return function(p1) --[[ Line: 40 | Named "usePurchaseButtonProps" ]]
+return function(p1)
 	-- upvalues: UseConvertedItemDataModule (copy), GetPriceStatusModule (copy), UseItemStatusLocalizationModule (copy), ReactModule (copy), FoundationModule (copy), PriceStatusModule (copy), IsCollectibleFunction (copy), CalculatePurchaseStatusForItemFunction (copy), FormatNumberModule (copy), GetPriceInRobuxFunction (copy)
 	local UseConvertedItemDataModuleResult = UseConvertedItemDataModule(p1.selectedItem)
 	local PriceStatusModule1 = GetPriceStatusModule(UseConvertedItemDataModuleResult)
 	local UseItemStatusLocalizationModuleResult = UseItemStatusLocalizationModule(UseConvertedItemDataModuleResult)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 46 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), FoundationModule (upval)
 		return {
 			showRobuxIcon = false,
@@ -29,7 +29,7 @@ return function(p1) --[[ Line: 40 | Named "usePurchaseButtonProps" ]]
 			variant = FoundationModule.Enums.ButtonVariant.Emphasis
 		}
 	end, { p1 })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 57 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: PriceStatusModule1 (copy), PriceStatusModule (upval), UseItemStatusLocalizationModuleResult (copy), FoundationModule (upval), UseConvertedItemDataModuleResult (copy), IsCollectibleFunction (upval), CalculatePurchaseStatusForItemFunction (upval), p1 (copy)
 		local IsPriceStatusModuleMatch: boolean = PriceStatusModule1 == PriceStatusModule.Free or (PriceStatusModule1 == PriceStatusModule.PurchaseFromRoblox or PriceStatusModule1 == PriceStatusModule.PurchaseFromResale)
 		
@@ -37,7 +37,7 @@ return function(p1) --[[ Line: 40 | Named "usePurchaseButtonProps" ]]
 			purchaseButtonText = UseItemStatusLocalizationModuleResult[PriceStatusModule1],
 			isDisabled = not IsPriceStatusModuleMatch,
 			variant = if IsPriceStatusModuleMatch then FoundationModule.Enums.ButtonVariant.Emphasis else FoundationModule.Enums.ButtonVariant.Standard,
-			onPurchase = function() --[[ Line: 70 ]]
+			onPurchase = function()
 				-- upvalues: UseConvertedItemDataModuleResult (upval), IsCollectibleFunction (upval), CalculatePurchaseStatusForItemFunction (upval), PriceStatusModule1 (upval), p1 (upval)
 				if UseConvertedItemDataModuleResult then
 					local IsCollectible = IsCollectibleFunction(UseConvertedItemDataModuleResult)

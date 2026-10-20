@@ -3,7 +3,7 @@ local SquadQuickStartExperimentLayer = game:DefineFastString("SquadQuickStartExp
 local SquadEnablePartyQuickStartVariant = game:DefineFastString("SquadEnablePartyQuickStartVariant", "enablePartyQuickStartChanges")
 local EnablePartyQuickStartChanges2 = game:DefineFastFlag("EnablePartyQuickStartChanges2", false)
 
-local function _(p1) --[[ Line: 12 | Named "getIsUserInTreatment" ]]
+local function _(p1)
 	-- upvalues: ExperimentCacheManager (copy), SquadQuickStartExperimentLayer (copy)
 	local LayerVariables = ExperimentCacheManager.default:getLayerVariables(SquadQuickStartExperimentLayer)
 	
@@ -11,7 +11,7 @@ local function _(p1) --[[ Line: 12 | Named "getIsUserInTreatment" ]]
 end
 
 return {
-	getPartyQuickStartChangesEnabled = function() --[[ Line: 22 ]]
+	getPartyQuickStartChangesEnabled = function()
 		-- upvalues: EnablePartyQuickStartChanges2 (copy), SquadEnablePartyQuickStartVariant (copy), ExperimentCacheManager (copy), SquadQuickStartExperimentLayer (copy)
 		local EnablePartyQuickStartChanges: boolean = EnablePartyQuickStartChanges2
 		
@@ -25,7 +25,7 @@ return {
 		end
 		return EnablePartyQuickStartChanges
 	end,
-	logExposure = function() --[[ Line: 26 ]]
+	logExposure = function()
 		-- upvalues: ExperimentCacheManager (copy), SquadQuickStartExperimentLayer (copy)
 		if ExperimentCacheManager.default:getLayerVariables(SquadQuickStartExperimentLayer) ~= nil then
 			ExperimentCacheManager.default:logLayerExposure(SquadQuickStartExperimentLayer)

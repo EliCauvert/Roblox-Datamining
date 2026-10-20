@@ -7,16 +7,16 @@ local CreateProfileCompletionPromptsConfigFunction = require(Parent.ProfilePlatf
 local ProfileFramesEditorScreen = game:DefineFastString("ProfileFramesEditorScreen", "EditProfileImageProfilePlatform")
 local ProfileFramesUpsellPromptType = game:DefineFastString("ProfileFramesUpsellPromptType", "ProfileFramesUpsell")
 
-return function(p1, _, p2, _) --[[ Line: 20 ]]
+return function(p1, _, p2, _)
 	-- upvalues: ReportPromptImpressionFunction (copy), ProfileFramesUpsellPromptType (copy), FetchPromptsFunction (copy), CreateProfileCompletionPromptsConfigFunction (copy), ProfileFramesEditorScreen (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	local PromptId = if ActionParams then ActionParams.promptId else nil
 	
 	if ReportPromptImpressionFunction then
-		ReportPromptImpressionFunction(ProfileFramesUpsellPromptType, PromptId):andThen(function() --[[ Line: 31 ]]
+		ReportPromptImpressionFunction(ProfileFramesUpsellPromptType, PromptId):andThen(function()
 			-- upvalues: FetchPromptsFunction (upval), CreateProfileCompletionPromptsConfigFunction (upval)
 			FetchPromptsFunction(CreateProfileCompletionPromptsConfigFunction(), true)
-		end):catch(function() --[[ Line: 34 ]] end)
+		end):catch(function() end)
 	end
 	p2.dependencies.getNavigation().navigate(ProfileFramesEditorScreen, { mode = "framesOnly" })
 end

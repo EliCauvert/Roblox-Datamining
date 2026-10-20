@@ -41,7 +41,7 @@ local config1 = {
 	searchForFriendsPrompt = TextKeysModule.AgedUpSearchForFriendsPrompt
 }
 
-return function() --[[ Line: 55 ]]
+return function()
 	-- upvalues: UseRealNamesInDisplayNamesEnabledModule (copy), RealNamesInDisplayNamesIXPModule (copy), config1 (copy), config (copy), FFlagEditProfileDisplayNameUseUnder17DescriptionModule (copy), UseLocalizationFunction (copy)
 	local UseRealNamesInDisplayNamesEnabledModuleResult = UseRealNamesInDisplayNamesEnabledModule()
 	local Config = if RealNamesInDisplayNamesIXPModule.useIsExperimentEnabled({ isExposureEnabled = true }) and UseRealNamesInDisplayNamesEnabledModuleResult then config1 else config

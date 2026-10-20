@@ -3,7 +3,7 @@ local _ = require(UserList.Common.Types)
 local TelemetryEmitterModule = require(UserList.Analytics.telemetryEmitter)
 local UserListInteractionEventModule = require(UserList.Analytics.userListInteractionEvent)
 
-return function(p1, ButtonType, TargetUserId, AbsolutePosition) --[[ Line: 18 | Named "reportCtaActivated" ]]
+return function(p1, ButtonType, TargetUserId, AbsolutePosition)
 	-- upvalues: TelemetryEmitterModule (copy), UserListInteractionEventModule (copy)
 	if p1 ~= nil then
 		pcall(TelemetryEmitterModule.emit, UserListInteractionEventModule, {

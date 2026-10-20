@@ -7,26 +7,26 @@ local UseStoreFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useStore
 local _ = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListInfoViewModel)
 local SelectHydratedLookTypeModule = require(AvatarExperienceCatalog.State.Selectors.selectHydratedLookType)
 
-return function(p1) --[[ Line: 48 | Named "useDeferLooksWithoutHydrationFilter" ]]
+return function(p1)
 	-- upvalues: UseStoreFunction (copy), ReactModule (copy), FIntAXLookImpressionDeferTimeoutMs (copy), ItemTypeEnum (copy), SelectHydratedLookTypeModule (copy)
 	local UseStoreResult = UseStoreFunction()
 	local Content = if p1 then p1.content else nil
 	local UseRefResult = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 54 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), FIntAXLookImpressionDeferTimeoutMs (upval)
 		UseRefResult.current = false
-		local DelayedThread = task.delay(math.max(0, FIntAXLookImpressionDeferTimeoutMs) / 1000, function() --[[ Line: 58 ]]
+		local DelayedThread = task.delay(math.max(0, FIntAXLookImpressionDeferTimeoutMs) / 1000, function()
 			-- upvalues: UseRefResult (upval)
 			UseRefResult.current = true
 		end)
 		
-		return function() --[[ Line: 62 ]]
+		return function()
 			-- upvalues: DelayedThread (copy)
 			task.cancel(DelayedThread)
 		end
 	end, {})
 	
-	return ReactModule.useCallback(function(p2): boolean --[[ Line: 67 ]]
+	return ReactModule.useCallback(function(p2): boolean
 		-- upvalues: UseRefResult (copy), Content (copy), ItemTypeEnum (upval), SelectHydratedLookTypeModule (upval), UseStoreResult (copy)
 		if UseRefResult.current then
 			return true

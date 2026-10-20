@@ -3,10 +3,10 @@ local CircularBufferModule = require(script.Parent.Parent.Parent.CircularBuffer)
 local ChartHeaderNames = require(script.Parent.Parent.Parent.Constants).MemoryFormatting.ChartHeaderNames
 local Number: number? = tonumber(settings():GetFVariable("NewDevConsoleMaxGraphCount"))
 local config = {
-	[ChartHeaderNames[1]] = function(p1, p2): boolean --[[ Line: 11 ]]
+	[ChartHeaderNames[1]] = function(p1, p2): boolean
 		return p1.name < p2.name
 	end,
-	[ChartHeaderNames[2]] = function(p1, p2): boolean --[[ Line: 14 ]]
+	[ChartHeaderNames[2]] = function(p1, p2): boolean
 		return p1.dataStats.dataSet:back().data < p2.dataStats.dataSet:back().data
 	end
 }
@@ -14,7 +14,7 @@ local GetClientReplicatorModule = require(script.Parent.Parent.Parent.Util.getCl
 local ServerMemoryDataModule = {}
 ServerMemoryDataModule.__index = ServerMemoryDataModule
 
-function ServerMemoryDataModule.new() --[[ Line: 24 ]]
+function ServerMemoryDataModule.new()
 	-- upvalues: ServerMemoryDataModule (copy), SignalModule (copy), ChartHeaderNames (copy)
 	local t = {}
 	setmetatable(t, ServerMemoryDataModule)
@@ -37,7 +37,7 @@ function ServerMemoryDataModule.new() --[[ Line: 24 ]]
 	return t
 end
 
-function ServerMemoryDataModule:updateEntry(Children, List, Name, Data) --[[ Line: 53 ]]
+function ServerMemoryDataModule:updateEntry(Children, List, Name, Data)
 	-- upvalues: CircularBufferModule (copy), Number (copy)
 	if not Children[Name] then
 		local NewCircularBuffer = CircularBufferModule.new(Number)
@@ -74,7 +74,7 @@ function ServerMemoryDataModule:updateEntry(Children, List, Name, Data) --[[ Lin
 	Children[Name].min = Min < Data and Min or Data
 end
 
-function ServerMemoryDataModule:updateEntryList(CoreScriptTreeData, List, List1): number --[[ Line: 109 ]]
+function ServerMemoryDataModule:updateEntryList(CoreScriptTreeData, List, List1): number
 	local Total = 0
 	
 	for i, value in pairs(List1) do
@@ -97,7 +97,7 @@ function ServerMemoryDataModule:updateEntryList(CoreScriptTreeData, List, List1)
 	return Total
 end
 
-function ServerMemoryDataModule:updateWithTreeStats(ServerMemoryTree) --[[ Line: 138 ]]
+function ServerMemoryDataModule:updateWithTreeStats(ServerMemoryTree)
 	local config = {
 		PlaceMemory = 0,
 		CoreMemory = 0,
@@ -150,19 +150,19 @@ function ServerMemoryDataModule:updateWithTreeStats(ServerMemoryTree) --[[ Line:
 	end
 end
 
-function ServerMemoryDataModule:totalMemSignal() --[[ Line: 204 ]]
+function ServerMemoryDataModule:totalMemSignal()
 	return self._totalMemoryUpdated
 end
 
-function ServerMemoryDataModule:treeUpdatedSignal() --[[ Line: 208 ]]
+function ServerMemoryDataModule:treeUpdatedSignal()
 	return self._treeViewUpdated
 end
 
-function ServerMemoryDataModule:getSortType() --[[ Line: 212 ]]
+function ServerMemoryDataModule:getSortType()
 	return self._sortType
 end
 
-local function recursiveSort(List, p1) --[[ Line: 216 ]]
+local function recursiveSort(List, p1)
 	-- upvalues: recursiveSort (copy)
 	table.sort(List, p1)
 	
@@ -173,7 +173,7 @@ local function recursiveSort(List, p1) --[[ Line: 216 ]]
 	end
 end
 
-function ServerMemoryDataModule:setSortType(_sortType) --[[ Line: 225 ]]
+function ServerMemoryDataModule:setSortType(_sortType)
 	-- upvalues: config (copy), recursiveSort (copy)
 	if config[_sortType] then
 		self._sortType = _sortType
@@ -185,20 +185,20 @@ function ServerMemoryDataModule:setSortType(_sortType) --[[ Line: 225 ]]
 	end
 end
 
-function ServerMemoryDataModule:getMemoryData() --[[ Line: 234 ]]
+function ServerMemoryDataModule:getMemoryData()
 	return self._memoryDataSorted
 end
 
-function ServerMemoryDataModule:isRunning() --[[ Line: 238 ]]
+function ServerMemoryDataModule:isRunning()
 	return self._isRunning
 end
 
-function ServerMemoryDataModule:start() --[[ Line: 242 ]]
+function ServerMemoryDataModule:start()
 	-- upvalues: GetClientReplicatorModule (copy)
 	local ClientReplicatorModule = GetClientReplicatorModule()
 	
 	if ClientReplicatorModule and not self._statsListenerConnection then
-		self._statsListenerConnection = ClientReplicatorModule.StatsReceived:connect(function(Stats) --[[ Line: 245 ]]
+		self._statsListenerConnection = ClientReplicatorModule.StatsReceived:connect(function(Stats)
 			-- upvalues: self (copy)
 			if not Stats.ServerMemoryTree then return end
 			self._lastUpdate = os.time()
@@ -214,7 +214,7 @@ function ServerMemoryDataModule:start() --[[ Line: 242 ]]
 	end
 end
 
-function ServerMemoryDataModule:stop() --[[ Line: 263 ]]
+function ServerMemoryDataModule:stop()
 	-- upvalues: GetClientReplicatorModule (copy)
 	local ClientReplicatorModule = GetClientReplicatorModule()
 	

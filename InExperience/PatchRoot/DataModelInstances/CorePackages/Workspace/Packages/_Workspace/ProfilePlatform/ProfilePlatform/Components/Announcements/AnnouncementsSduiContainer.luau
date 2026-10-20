@@ -11,7 +11,7 @@ local UseComponentConfigFunction = SduiSharedUtilitiesModule.useComponentConfig
 local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
 local GroupAnnouncementsSduiModule = nil
 
-local function _() --[[ Line: 21 | Named "getGroupAnnouncementsSdui" ]]
+local function _()
 	-- upvalues: GroupAnnouncementsSduiModule (ref), Parent (copy)
 	if GroupAnnouncementsSduiModule == nil then
 		GroupAnnouncementsSduiModule = require(Parent.GroupAnnouncementsSdui)
@@ -19,7 +19,7 @@ local function _() --[[ Line: 21 | Named "getGroupAnnouncementsSdui" ]]
 	return GroupAnnouncementsSduiModule
 end
 
-local function AnnouncementsSdui(p1) --[[ Line: 40 ]]
+local function AnnouncementsSdui(p1)
 	-- upvalues: GroupAnnouncementsSduiModule (ref), Parent (copy), UseComponentConfigFunction (copy), ReactModule (copy), HorizontalPageMargin (copy), SduiFeatureEntryPoint (copy)
 	if GroupAnnouncementsSduiModule == nil then
 		GroupAnnouncementsSduiModule = require(Parent.GroupAnnouncementsSdui)
@@ -43,20 +43,20 @@ local function AnnouncementsSdui(p1) --[[ Line: 40 ]]
 	})
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 66 | Named "AnnouncementsSduiContainer" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseProfileWrapperContextModule (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), ReactModule (copy), PromiseModule (copy), GroupAnnouncementsSduiModule (ref), Parent (copy), AnnouncementsSdui (copy)
 	local ProfileId = UseProfileWrapperContextModule().profileId
 	local IsNotProfileIdMatch: boolean = not (UsePreferredInputFunction() == ResponsiveModule.Input.Directional) and (ProfileId ~= nil and ProfileId ~= "")
-	ReactModule.useEffect(function() --[[ Line: 76 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsNotProfileIdMatch (copy), PromiseModule (upval), GroupAnnouncementsSduiModule (upval), Parent (upval), ProfileId (copy)
 		if IsNotProfileIdMatch then
-			PromiseModule.try(function() --[[ Line: 82 ]]
+			PromiseModule.try(function()
 				-- upvalues: GroupAnnouncementsSduiModule (upval), Parent (upval), ProfileId (upval)
 				if GroupAnnouncementsSduiModule == nil then
 					GroupAnnouncementsSduiModule = require(Parent.GroupAnnouncementsSdui)
 				end
 				return GroupAnnouncementsSduiModule.fetchGroupPeekPage(ProfileId)
-			end):catch(function() --[[ Line: 84 ]] end)
+			end):catch(function() end)
 			
 			return
 		end

@@ -4,7 +4,7 @@ local CreateTemplateApiPrewarmRequestConfigModule = require(SduiSharedUtilities.
 local GetSduiApiStoreModule = require(SduiSharedUtilities.getSduiApiStore)
 local PromiseModule = require(SduiSharedUtilities.Parent.Promise)
 
-return function(p1, p2) --[[ Line: 19 | Named "fetchSduiTemplates" ]]
+return function(p1, p2)
 	-- upvalues: CreateTemplateApiPrewarmRequestConfigModule (copy), PromiseModule (copy), GetSduiApiStoreModule (copy)
 	local TemplateApiPrewarmRequestConfigModule = CreateTemplateApiPrewarmRequestConfigModule(p1)
 	

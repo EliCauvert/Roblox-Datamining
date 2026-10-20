@@ -32,7 +32,7 @@ local list1 = {
 	}
 }
 
-return function(p1, p2) --[[ Line: 52 ]]
+return function(p1, p2)
 	-- upvalues: DashModule (copy), list1 (copy), list (copy)
 	local JoinDeepResults = {}
 	

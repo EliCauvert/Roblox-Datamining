@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("BlockingConsolePreparePaymentCheck", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("BlockingConsolePreparePaymentCheck")
 end

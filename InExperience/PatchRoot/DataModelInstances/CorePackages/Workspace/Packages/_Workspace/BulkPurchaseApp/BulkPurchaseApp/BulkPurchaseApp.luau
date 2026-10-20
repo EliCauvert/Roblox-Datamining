@@ -16,7 +16,7 @@ local FocusNavigationModalSurface = require(Parent.EconomyCommonCoreScriptHooks)
 local SelectPromptStateModule = require(BulkPurchaseApp.Store.Selectors.selectPromptState)
 local FixBulkPurchaseInputPerf = game:DefineFastFlag("FixBulkPurchaseInputPerf", false)
 
-return function() --[[ Line: 24 | Named "BulkPurchaseApp" ]]
+return function()
 	-- upvalues: ReactModule (copy), UseSelectorFunction (copy), SelectPromptStateModule (copy), FixBulkPurchaseInputPerf (copy), UseFocusNavigationSurfaceFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), UseBulkPurchaseRequestListenerEffectModule (copy), BulkPurchasePromptStateEnumModule (copy), GuiService (copy), ScreenSizeContext (copy), FocusNavigationModalSurface (copy), BulkPurchaseErrorContainerModule (copy), BulkPurchaseSuccessContainerModule (copy), BulkPurchaseRequestContainerModule (copy), BulkPurchasePartialSuccessContainerModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
 	local UseSelectorResult = UseSelectorFunction(SelectPromptStateModule)
@@ -25,7 +25,7 @@ return function() --[[ Line: 24 | Named "BulkPurchaseApp" ]]
 		focusNavigableSurfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay
 	})
 	UseBulkPurchaseRequestListenerEffectModule()
-	ReactModule.useEffect(function() --[[ Line: 36 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSelectorResult (copy), BulkPurchasePromptStateEnumModule (upval), GuiService (upval)
 		if UseSelectorResult == BulkPurchasePromptStateEnumModule.None then
 			GuiService.SelectedCoreObject = nil
@@ -33,7 +33,7 @@ return function() --[[ Line: 24 | Named "BulkPurchaseApp" ]]
 	end, { UseSelectorResult })
 	
 	return ReactModule.createElement(ScreenSizeContext.Provider, { value = UseStateResult }, ReactModule.createElement("ScreenGui", {
-		[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 46 ]]
+		[ReactModule.Change.AbsoluteSize] = function(Frame)
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(Frame.AbsoluteSize)
 		end,

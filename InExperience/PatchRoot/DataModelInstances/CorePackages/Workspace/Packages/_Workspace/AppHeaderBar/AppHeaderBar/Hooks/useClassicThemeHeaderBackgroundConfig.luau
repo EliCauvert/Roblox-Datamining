@@ -15,7 +15,7 @@ local config = {
 	}
 }
 
-return function() --[[ Line: 27 | Named "useClassicThemeHeaderBackgroundConfig" ]]
+return function()
 	-- upvalues: FFlagAppNavBarPerItemThemeOverride (copy), ReactModule (copy), StyleModule (copy), UiModeBrandThemeContext (copy), config (copy)
 	return if FFlagAppNavBarPerItemThemeOverride then config[`{ReactModule.useContext(UiModeBrandThemeContext).foundationThemeName}_{ReactModule.useContext(StyleModule.AppearanceContext).theme:lower()}`] else nil
 end

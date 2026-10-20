@@ -5,9 +5,9 @@ local UserProfileModule = require(Parent.DataHydration.UserProfile)
 local Signal = require(Parent.Signals).createSignal(nil)
 
 return {
-	useUserInfo = function(p1) --[[ Line: 19 ]]
+	useUserInfo = function(p1)
 		-- upvalues: ReactModule (copy), UserProfileModule (copy), SignalsReactModule (copy), Signal (copy)
-		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 20 ]]
+		local UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: p1 (copy), UserProfileModule (upval)
 			return if p1 == nil then nil else UserProfileModule.getAndFetchUserInfo(p1)
 		end, { p1 or "" })

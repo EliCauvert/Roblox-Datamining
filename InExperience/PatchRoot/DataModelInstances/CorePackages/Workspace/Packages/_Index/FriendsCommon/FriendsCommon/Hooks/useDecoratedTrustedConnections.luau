@@ -7,11 +7,11 @@ local DataHydrationModule = require(Parent.DataHydration)
 local _ = require(Parent.GraphQLServer)
 local GetResult = if FFlagConnectionManagementChips then DataHydrationModule.TrustedConnections.TrustedConnectionsStore.get() else nil
 
-return function(p1) --[[ Line: 17 | Named "useDecoratedTrustedConnections" ]]
+return function(p1)
 	-- upvalues: FFlagConnectionManagementChips (copy), GetResult (copy), SignalsReactModule (copy), ReactModule (copy), CryoModule (copy)
 	if not FFlagConnectionManagementChips then return end
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetResult.getUserTrustedConnections().data)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 25 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		if not p1 then
 			return {}
@@ -23,7 +23,7 @@ return function(p1) --[[ Line: 17 | Named "useDecoratedTrustedConnections" ]]
 		end
 		return t
 	end, { p1 })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 37 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult (copy)
 		if not UseSignalStateResult then
 			return {}
@@ -36,12 +36,12 @@ return function(p1) --[[ Line: 17 | Named "useDecoratedTrustedConnections" ]]
 		return t
 	end, { UseSignalStateResult })
 	
-	return (ReactModule.useMemo(function() --[[ Line: 49 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult (copy), CryoModule (upval), p1 (copy), UseMemoResult1 (copy), UseMemoResult (copy)
-		return if UseSignalStateResult then CryoModule.List.join(CryoModule.List.filter(p1 or {}, function(p2): boolean --[[ Line: 54 ]]
+		return if UseSignalStateResult then CryoModule.List.join(CryoModule.List.filter(p1 or {}, function(p2): boolean
 			-- upvalues: UseMemoResult1 (upval)
 			return UseMemoResult1[p2.id] == true
-		end), (CryoModule.List.filter(UseSignalStateResult, function(p2): boolean --[[ Line: 58 ]]
+		end), (CryoModule.List.filter(UseSignalStateResult, function(p2): boolean
 			-- upvalues: UseMemoResult (upval)
 			return UseMemoResult[p2.id] ~= true
 		end))) else {}

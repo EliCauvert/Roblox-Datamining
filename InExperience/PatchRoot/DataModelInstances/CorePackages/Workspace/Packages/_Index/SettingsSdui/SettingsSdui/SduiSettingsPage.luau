@@ -15,10 +15,10 @@ local Composition = {
 	layout = require(Parent.AppComposition).CompositionTags.Layout.Detail
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 28 | Named "SduiSettingsPage" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UsePageScopeRefFunction (copy), ConfigKey (copy), ReactModule (copy), SduiSurfaceLoadTimeTracker (copy), SurfaceLoadTimeEventName (copy), FetchSettingsPageModule (copy), SduiPageWrapperEntryPoint (copy), Settings (copy), Composition (copy), FFlagSduiSettingsFocusRef (copy)
 	UsePageScopeRefFunction(ConfigKey)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 30 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: SduiSurfaceLoadTimeTracker (upval), ConfigKey (upval), SurfaceLoadTimeEventName (upval)
 		local LoadTimerWithSurfaceLoadTime = SduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(ConfigKey, {
 			eventName = SurfaceLoadTimeEventName,
@@ -28,7 +28,7 @@ return ReactModule.memo(function(p1) --[[ Line: 28 | Named "SduiSettingsPage" ]]
 		
 		return LoadTimerWithSurfaceLoadTime
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 41 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FetchSettingsPageModule (upval), UseMemoResult (copy)
 		FetchSettingsPageModule(UseMemoResult)
 	end, { UseMemoResult })
@@ -37,7 +37,7 @@ return ReactModule.memo(function(p1) --[[ Line: 28 | Named "SduiSettingsPage" ]]
 		appPage = Settings,
 		configKey = ConfigKey,
 		pageTimer = UseMemoResult,
-		refresh = ReactModule.useCallback(function() --[[ Line: 45 ]]
+		refresh = ReactModule.useCallback(function()
 			-- upvalues: SduiSurfaceLoadTimeTracker (upval), ConfigKey (upval), SurfaceLoadTimeEventName (upval), FetchSettingsPageModule (upval)
 			local LoadTimerWithSurfaceLoadTime = SduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(ConfigKey, {
 				eventName = SurfaceLoadTimeEventName,

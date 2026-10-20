@@ -7,7 +7,7 @@ local ReactModule = require(Parent.React)
 local FireAnalyticsEventModule = require(MomentsCreation.Analytics.fireAnalyticsEvent)
 local EventNames = MomentsCommonModule.Analytics.EventNames
 
-local function fireVoiceCoachmarkFtuxEvent(FTUXTooltipDismissed) --[[ Line: 26 ]]
+local function fireVoiceCoachmarkFtuxEvent(FTUXTooltipDismissed)
 	-- upvalues: FireAnalyticsEventModule (copy), Players (copy)
 	FireAnalyticsEventModule(FTUXTooltipDismissed, {
 		identifier = "moments_tts_voice",
@@ -32,16 +32,16 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseCreationControllerFunction = require(MomentsCreation.CreationController).useCreationController
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
 
-local function VoiceCoachmark(p1) --[[ Line: 99 ]]
+local function VoiceCoachmark(p1)
 	-- upvalues: UseCreationControllerFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), fireVoiceCoachmarkFtuxEvent (copy), EventNames (copy), EducationalTooltip (copy), FoundationModule (copy)
 	local UseCreationControllerResult = UseCreationControllerFunction()
 	local UseLocalizationResult = UseLocalizationFunction({ title = p1.titleKey, text = p1.textKey })
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean --[[ Line: 110 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean
 		-- upvalues: UseCreationControllerResult (copy)
 		return not UseCreationControllerResult.getVoiceCoachmarkDismissed(false)
 	end)
 	local UseRefResult = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 116 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseRefResult (copy), fireVoiceCoachmarkFtuxEvent (upval), EventNames (upval)
 		if UseStateResult and not UseRefResult.current then
 			UseRefResult.current = true
@@ -52,7 +52,7 @@ local function VoiceCoachmark(p1) --[[ Line: 99 ]]
 	return if UseStateResult then ReactModule.createElement(EducationalTooltip, {
 		isOpen = true,
 		LayoutOrder = p1.layoutOrder,
-		onClose = function() --[[ Line: 130 ]]
+		onClose = function()
 			-- upvalues: fireVoiceCoachmarkFtuxEvent (upval), EventNames (upval), UseCreationControllerResult (copy), UseStateResult2 (copy)
 			fireVoiceCoachmarkFtuxEvent(EventNames.FTUXTooltipDismissed)
 			UseCreationControllerResult.dismissVoiceCoachmark()
@@ -65,7 +65,7 @@ local function VoiceCoachmark(p1) --[[ Line: 99 ]]
 	}, p1.children) else p1.children
 end
 
-local function PersistentToolCoachmark(p1) --[[ Line: 145 ]]
+local function PersistentToolCoachmark(p1)
 	-- upvalues: UseCreationControllerFunction (copy), UseLocalizationFunction (copy), Parent (copy), ReactModule (copy), fireVoiceCoachmarkFtuxEvent (copy), EventNames (copy), FoundationModule (copy)
 	local UseCreationControllerResult = UseCreationControllerFunction()
 	local UseLocalizationResult = UseLocalizationFunction({ title = p1.titleKey, text = p1.textKey })
@@ -79,11 +79,11 @@ local function PersistentToolCoachmark(p1) --[[ Line: 145 ]]
 		autoDismissSeconds = p1.autoDismissSeconds,
 		isSessionHandled = UseCreationControllerResult.getVoiceCoachmarkDismissed(false),
 		onSessionHandled = UseCreationControllerResult.dismissVoiceCoachmark,
-		onImpression = function() --[[ Line: 173 ]]
+		onImpression = function()
 			-- upvalues: fireVoiceCoachmarkFtuxEvent (upval), EventNames (upval)
 			fireVoiceCoachmarkFtuxEvent(EventNames.FTUXTooltipImpression)
 		end,
-		onDismissed = function() --[[ Line: 176 ]]
+		onDismissed = function()
 			-- upvalues: fireVoiceCoachmarkFtuxEvent (upval), EventNames (upval)
 			fireVoiceCoachmarkFtuxEvent(EventNames.FTUXTooltipDismissed)
 		end,
@@ -92,7 +92,7 @@ local function PersistentToolCoachmark(p1) --[[ Line: 145 ]]
 	}, p1.children)
 end
 
-return function(p1) --[[ Line: 184 ]]
+return function(p1)
 	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), GetFFlagEnableMomentTextGenerationFunction (copy), Loading (copy), FoundationModule (copy), Icon (copy), Text (copy), GetFFlagMomentsCoachmarkPersistenceFunction (copy), PersistentToolCoachmark (copy), GetFIntMomentsCoachmarkMaxImpressionsFunction (copy), GetFIntMomentsCoachmarkAutoDismissSecondsFunction (copy), VoiceCoachmark (copy), GradientBackdrop (copy)
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseTokensResult = UseTokensFunction()
@@ -106,7 +106,7 @@ return function(p1) --[[ Line: 184 ]]
 	end
 	local UseLocalizationResult = UseLocalizationFunction(LocalizationKeys)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UDim2.fromScale(1, 0))
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 205 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseBindingResult2 (copy)
 		UseBindingResult2(UDim2.new(0, 1.5 * Frame.AbsoluteSize.X, 1, 0))
 	end, {})
@@ -120,10 +120,10 @@ return function(p1) --[[ Line: 184 ]]
 		local Element = ReactModule.createElement(View, {
 			tag = "row align-x-right align-y-center gap-medium auto-xy padding-xsmall radius-medium",
 			LayoutOrder = tool1.cta.order or i,
-			onActivated = if IsIsLoading then nil elseif IsIsDisabled then if p1.onDisabledToolActivated == nil then nil else function() --[[ Line: 224 ]]
+			onActivated = if IsIsLoading then nil elseif IsIsDisabled then if p1.onDisabledToolActivated == nil then nil else function()
 				-- upvalues: p1 (copy), Kind (copy)
 				p1.onDisabledToolActivated(Kind)
-			end else function() --[[ Line: 228 ]]
+			end else function()
 				-- upvalues: p1 (copy), Kind (copy)
 				p1.onToolSelected(Kind)
 			end

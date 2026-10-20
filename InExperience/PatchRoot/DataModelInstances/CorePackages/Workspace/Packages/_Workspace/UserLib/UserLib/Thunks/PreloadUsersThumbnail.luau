@@ -7,7 +7,7 @@ local PromiseModule = require(Parent.Promise)
 local ConstantsModule = require(UserLib.Utils.Constants)
 local GetRbxthumbWithTypeSizeAndOptionsFunction = require(UserLib.Utils).getRbxthumbWithTypeSizeAndOptions
 
-local function subdivideEntries(p1, p2: number) --[[ Line: 33 ]]
+local function subdivideEntries(p1, p2: number)
 	-- upvalues: CryoModule (copy)
 	local List = {}
 	
@@ -17,9 +17,9 @@ local function subdivideEntries(p1, p2: number) --[[ Line: 33 ]]
 	return List
 end
 
-local function _(p3, p4, p5) --[[ Line: 42 | Named "makePreloadAsyncPromise" ]]
+local function _(p3, p4, p5)
 	-- upvalues: PromiseModule (copy), ConstantsModule (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy)
-	return (PromiseModule.new(function(Callback: () -> (), _) --[[ Line: 47 ]]
+	return (PromiseModule.new(function(Callback: () -> (), _)
 		-- upvalues: p3 (copy), p4 (copy), ConstantsModule (upval), GetRbxthumbWithTypeSizeAndOptionsFunction (upval), p5 (copy)
 		local List = {}
 		local t = {}
@@ -39,14 +39,14 @@ local function _(p3, p4, p5) --[[ Line: 42 | Named "makePreloadAsyncPromise" ]]
 	end))
 end
 
-return function(p6, p7, p8) --[[ Line: 80 ]]
+return function(p6, p7, p8)
 	-- upvalues: subdivideEntries (copy), PromiseModule (copy), ConstantsModule (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), PromiseUtilities (copy)
-	return function(_) --[[ Line: 81 ]]
+	return function(_)
 		-- upvalues: subdivideEntries (upval), p6 (copy), p7 (copy), p8 (copy), PromiseModule (upval), ConstantsModule (upval), GetRbxthumbWithTypeSizeAndOptionsFunction (upval), PromiseUtilities (upval)
 		local List = {}
 		
 		for _, value in pairs((subdivideEntries(p6, 100))) do
-			table.insert(List, (PromiseModule.new(function(Callback: () -> (), _) --[[ Line: 47 ]]
+			table.insert(List, (PromiseModule.new(function(Callback: () -> (), _)
 				-- upvalues: value (copy), p7 (copy), ConstantsModule (upval), GetRbxthumbWithTypeSizeAndOptionsFunction (upval), p8 (copy)
 				local List = {}
 				local t = {}

@@ -1,10 +1,10 @@
 ﻿local IsHomeSortDetailSortIncludedModule = require(script:FindFirstAncestor("Home").HomeSortDetailPage.isHomeSortDetailSortIncluded)
 
-local function _(p1): boolean --[[ Line: 12 | Named "isValidString" ]]
+local function _(p1): boolean
 	return typeof(p1) == "string" and p1 ~= ""
 end
 
-return function(p1) --[[ Line: 16 | Named "buildHomeSortDropDownOptions" ]]
+return function(p1)
 	-- upvalues: IsHomeSortDetailSortIncludedModule (copy)
 	local List = {}
 	

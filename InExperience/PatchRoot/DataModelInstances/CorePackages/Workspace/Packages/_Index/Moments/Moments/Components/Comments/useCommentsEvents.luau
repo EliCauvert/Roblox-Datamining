@@ -16,7 +16,7 @@ local CreateCommentsRecommendationSessionModule = require(script.Parent.createCo
 local CreateCommentsAnalyticsSessionModule = require(script.Parent.createCommentsAnalyticsSession)
 local UseCommentCapabilitiesModule = require(script.Parent.useCommentCapabilities)
 
-return function(p1, Callback) --[[ Line: 24 | Named "useCommentsEvents" ]]
+return function(p1, Callback)
 	-- upvalues: UseFeedOptionalFunction (copy), UseRoactServiceFunction (copy), AppAppLifecycleObserverService (copy), GetCommentsSheetStoreModule (copy), ReactModule (copy), SignalsModule (copy), UseCommentCapabilitiesModule (copy), MakeRecommendationAttributionModule (copy), CreateCommentsRecommendationSessionModule (copy), MomentsGetMomentsCommentsStoreModule (copy), MomentsCommonModule (copy), FFlagMomentsCommentsCountAnalyticsModule (copy), MakeCommentCountFieldsModule (copy), CreateCommentsAnalyticsSessionModule (copy)
 	local UseFeedOptionalResult = UseFeedOptionalFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(AppAppLifecycleObserverService)
@@ -24,33 +24,33 @@ return function(p1, Callback) --[[ Line: 24 | Named "useCommentsEvents" ]]
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local IsPlaybackActive = UseFeedOptionalResult ~= nil and (UseFeedOptionalResult.isActiveFeed and UseFeedOptionalResult.isPlaybackActive)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 34 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval)
 		local Signal, Signal2 = SignalsModule.createSignal(true)
 		
 		return { get = Signal, set = Signal2 }
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 39 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRoactServiceResult (copy), UseMemoResult (copy)
 		if UseRoactServiceResult == nil then return end
-		local OnHideConnection = UseRoactServiceResult.OnHide:Connect(function() --[[ Line: 44 ]]
+		local OnHideConnection = UseRoactServiceResult.OnHide:Connect(function()
 			-- upvalues: UseMemoResult (upval)
 			UseMemoResult.set(false)
 		end)
-		local OnUnhideConnection = UseRoactServiceResult.OnUnhide:Connect(function() --[[ Line: 47 ]]
+		local OnUnhideConnection = UseRoactServiceResult.OnUnhide:Connect(function()
 			-- upvalues: UseMemoResult (upval)
 			UseMemoResult.set(true)
 		end)
 		
-		return function() --[[ Line: 50 ]]
+		return function()
 			-- upvalues: OnHideConnection (copy), OnUnhideConnection (copy)
 			OnHideConnection:Disconnect()
 			OnUnhideConnection:Disconnect()
 		end
 	end, { UseRoactServiceResult, UseMemoResult })
-	ReactModule.useEffect(function() --[[ Line: 56 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SignalsModule (upval), UseMemoResult (copy), CommentsSheetStoreModule (copy), UseRefResult (copy), UseRefResult1 (copy), IsPlaybackActive (copy)
-		return SignalsModule.createEffect(function(p2) --[[ Line: 57 ]]
+		return SignalsModule.createEffect(function(p2)
 			-- upvalues: UseMemoResult (upval), CommentsSheetStoreModule (upval), UseRefResult (upval), UseRefResult1 (upval), IsPlaybackActive (upval)
 			local GetResult = UseMemoResult.get(p2)
 			local IsOpen = CommentsSheetStoreModule.getIsOpen(p2)
@@ -88,9 +88,9 @@ return function(p1, Callback) --[[ Line: 24 | Named "useCommentsEvents" ]]
 		CommentsSheetStoreModule,
 		UseMemoResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 85 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
-		return function() --[[ Line: 86 ]]
+		return function()
 			-- upvalues: UseRefResult (upval), UseRefResult1 (upval)
 			if UseRefResult.current ~= nil then
 				UseRefResult.current.finishView()
@@ -102,7 +102,7 @@ return function(p1, Callback) --[[ Line: 24 | Named "useCommentsEvents" ]]
 	end, {})
 	local CanRead = UseCommentCapabilitiesModule().canRead
 	
-	return ReactModule.useCallback(function() --[[ Line: 98 ]]
+	return ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), CanRead (copy), MakeRecommendationAttributionModule (upval), UseFeedOptionalResult (copy), CreateCommentsRecommendationSessionModule (upval), Callback (copy), MomentsGetMomentsCommentsStoreModule (upval), MomentsCommonModule (upval), FFlagMomentsCommentsCountAnalyticsModule (upval), MakeCommentCountFieldsModule (upval), CreateCommentsAnalyticsSessionModule (upval), UseRefResult (copy), UseRefResult1 (copy), CommentsSheetStoreModule (copy)
 		local FeedItemId = if p1 == nil then nil else p1.feedItemId
 		
@@ -116,10 +116,10 @@ return function(p1, Callback) --[[ Line: 24 | Named "useCommentsEvents" ]]
 		local MomentsGetMomentsCommentsStoreModuleResult = MomentsGetMomentsCommentsStoreModule(false)
 		local OwnerGeneration = MomentsGetMomentsCommentsStoreModuleResult.getOwnerGeneration(false)
 		local IsRecommendationSourceMatch: boolean = UseFeedOptionalResult ~= nil and (UseFeedOptionalResult.recommendationSource == MomentsCommonModule.Analytics.RecommendationSource.Profile or UseFeedOptionalResult.recommendationSource == MomentsCommonModule.Analytics.RecommendationSource.MyMoments)
-		local CommentsAnalyticsSessionModule = CreateCommentsAnalyticsSessionModule(FeedItemId, if IsRecommendationSourceMatch then "profile" else "watch_tab", function(): boolean --[[ Line: 125 ]]
+		local CommentsAnalyticsSessionModule = CreateCommentsAnalyticsSessionModule(FeedItemId, if IsRecommendationSourceMatch then "profile" else "watch_tab", function(): boolean
 			-- upvalues: MomentsGetMomentsCommentsStoreModuleResult (copy), OwnerGeneration (copy)
 			return MomentsGetMomentsCommentsStoreModuleResult.getOwnerGeneration(false) == OwnerGeneration
-		end, nil, nil, nil, if FFlagMomentsCommentsCountAnalyticsModule then function() --[[ Line: 118 ]]
+		end, nil, nil, nil, if FFlagMomentsCommentsCountAnalyticsModule then function()
 			-- upvalues: MakeCommentCountFieldsModule (upval), MomentsGetMomentsCommentsStoreModuleResult (copy), FeedItemId (copy)
 			return MakeCommentCountFieldsModule(MomentsGetMomentsCommentsStoreModuleResult.getCachedMomentComments(FeedItemId).data(false))
 		end else nil)

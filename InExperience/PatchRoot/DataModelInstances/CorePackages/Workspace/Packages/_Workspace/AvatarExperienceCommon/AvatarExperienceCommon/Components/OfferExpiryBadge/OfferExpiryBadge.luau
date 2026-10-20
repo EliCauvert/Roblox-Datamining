@@ -10,7 +10,7 @@ local BadgeShape = FoundationModule.Enums.BadgeShape
 local IconVariant = FoundationModule.Enums.IconVariant
 local IconPosition = FoundationModule.Enums.IconPosition
 
-return function(p1) --[[ Line: 21 | Named "OfferExpiryBadge" ]]
+return function(p1)
 	-- upvalues: UseRemainingTimeTextModule (copy), UseLocalizationFunction (copy), ReactModule (copy), FoundationModule (copy), BuilderIconsModule (copy), IconVariant (copy), IconPosition (copy), BadgeVariant (copy), BadgeShape (copy)
 	local UseRemainingTimeTextModuleResult = UseRemainingTimeTextModule(p1.expirationTimeInUTC)
 	local UseLocalizationResult = UseLocalizationFunction({

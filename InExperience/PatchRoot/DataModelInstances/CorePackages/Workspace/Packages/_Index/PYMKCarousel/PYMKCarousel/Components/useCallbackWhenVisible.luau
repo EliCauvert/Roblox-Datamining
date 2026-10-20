@@ -6,19 +6,19 @@ local FFlagEnableOnScreenAPIIntegration = require(Parent.SharedFlags).FFlagEnabl
 local UseIsRouteOnScreen = if FFlagEnableOnScreenAPIIntegration then require(Parent.RobloxAppNavigation).useIsRouteOnScreen else nil
 local HomePagePYMKPercentageOfViewPortToStartFetch = game:DefineFastInt("HomePagePYMKPercentageOfViewPortToStartFetch", 25)
 
-local function v5() --[[ Line: 28 ]]
+local function v5()
 	-- upvalues: UseSelectorFunction (copy), ReactModule (copy)
-	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 29 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p1)
 		return p1.ScreenSize
 	end)
-	local UseSelectorResult1 = UseSelectorFunction(function(p1) --[[ Line: 32 ]]
+	local UseSelectorResult1 = UseSelectorFunction(function(p1)
 		return p1.TopBar.topBarHeight
 	end)
-	local UseSelectorResult2 = UseSelectorFunction(function(p1) --[[ Line: 35 ]]
+	local UseSelectorResult2 = UseSelectorFunction(function(p1)
 		return p1.GlobalGuiInset
 	end)
 	
-	return (ReactModule.useMemo(function() --[[ Line: 38 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: UseSelectorResult1 (copy), UseSelectorResult (copy), UseSelectorResult2 (copy)
 		return {
 			min = Vector2.new(0, UseSelectorResult1),
@@ -31,7 +31,7 @@ local function v5() --[[ Line: 28 ]]
 	}))
 end
 
-local function _(p1, p2): boolean --[[ Line: 48 ]]
+local function _(p1, p2): boolean
 	-- upvalues: HomePagePYMKPercentageOfViewPortToStartFetch (copy)
 	local Current = p2 and p2.current
 	
@@ -47,14 +47,14 @@ local function _(p1, p2): boolean --[[ Line: 48 ]]
 	end
 end
 
-return function(p1) --[[ Line: 73 ]]
+return function(p1)
 	-- upvalues: FFlagEnableOnScreenAPIIntegration (copy), UseIsRouteOnScreen (copy), UseNavigationFocusFunction (copy), v5 (copy), ReactModule (copy), HomePagePYMKPercentageOfViewPortToStartFetch (copy)
 	local ElementRef = p1.elementRef
 	local ScrollViewPositionChangedSignal = p1.scrollViewPositionChangedSignal
 	local CallbackFunction = p1.callback
 	local UseIsRouteOnScreenResult = if FFlagEnableOnScreenAPIIntegration then UseIsRouteOnScreen() else UseNavigationFocusFunction()
 	local v1 = v5()
-	ReactModule.useEffect(function() --[[ Line: 82 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: v1 (copy), ElementRef (copy), HomePagePYMKPercentageOfViewPortToStartFetch (upval), UseIsRouteOnScreenResult (copy), CallbackFunction (copy), ScrollViewPositionChangedSignal (copy)
 		local Current = ElementRef and ElementRef.current
 		local v2 = nil
@@ -72,7 +72,7 @@ return function(p1) --[[ Line: 73 ]]
 			CallbackFunction()
 		end
 		if ScrollViewPositionChangedSignal then
-			ScrollViewPositionChangedSignal:connect(function() --[[ Line: 88 ]]
+			ScrollViewPositionChangedSignal:connect(function()
 				-- upvalues: v1 (upval), ElementRef (upval), HomePagePYMKPercentageOfViewPortToStartFetch (upval), UseIsRouteOnScreenResult (upval), CallbackFunction (upval)
 				local Current = ElementRef and ElementRef.current
 				local v3 = nil

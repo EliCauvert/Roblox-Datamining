@@ -8,7 +8,7 @@ local SduiBuilder = SduiCoreSystemModule.SduiBuilder
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local SendSduiFeedImpressionsFunction = require(Parent.UnifiedLogging).sendSduiFeedImpressions
 
-return function(p1) --[[ Line: 29 | Named "SduiFeedImpressionsDetector" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), SduiErrorType (copy), FindAnalyticsFieldFunction (copy), SduiBuilder (copy), SendSduiFeedImpressionsFunction (copy), ScreenSizeImpressionsTracker (copy)
 	local UseRefResult = ReactModule.useRef(p1.feedItems)
 	UseRefResult.current = p1.feedItems
@@ -19,7 +19,7 @@ return function(p1) --[[ Line: 29 | Named "SduiFeedImpressionsDetector" ]]
 		parentRef = p1.parentRef,
 		impressionsTag = p1.impressionsTag,
 		scrollViewPositionChangedSignal = p1.scrollViewPositionChangedSignal,
-		sendImpressions = ReactModule.useCallback(function(List) --[[ Line: 37 ]]
+		sendImpressions = ReactModule.useCallback(function(List)
 			-- upvalues: UseRefResult (copy), SduiContext (copy), SduiErrorType (upval), FindAnalyticsFieldFunction (upval), SduiBuilder (upval), SendSduiFeedImpressionsFunction (upval)
 			if not List or #List == 0 then return end
 			local Current = UseRefResult.current

@@ -1,6 +1,6 @@
 ﻿local Players = game:GetService("Players")
 
-return function(Object, p1) --[[ Line: 9 | Named "getWhisperChannelOtherDisplayName" ]]
+return function(Object, p1)
 	-- upvalues: Players (copy)
 	local Player = nil
 	for _, TextSource in Object:GetChildren() do

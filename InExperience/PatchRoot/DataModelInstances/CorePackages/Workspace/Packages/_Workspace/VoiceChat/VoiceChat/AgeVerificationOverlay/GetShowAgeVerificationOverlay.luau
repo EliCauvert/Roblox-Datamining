@@ -1,6 +1,6 @@
 ﻿local Url = require(script:FindFirstAncestor("VoiceChat").Parent.Http).Url
 
-return function(Callback, Text, Text1) --[[ Line: 10 ]]
+return function(Callback, Text, Text1)
 	-- upvalues: Url (copy)
 	assert(type(Text1) == "string", "GetShowAgeVerificationOverlay request expects placeId to be a string")
 	assert(type(Text) == "string", "GetShowAgeVerificationOverlay request expects universeId to be a string")

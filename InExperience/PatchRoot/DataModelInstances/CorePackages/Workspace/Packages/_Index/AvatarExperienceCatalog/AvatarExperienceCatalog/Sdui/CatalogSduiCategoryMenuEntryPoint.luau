@@ -8,7 +8,7 @@ local CatalogSduiEntryPointModule = require(script.Parent.CatalogSduiEntryPoint)
 local MarketplaceCategoryMenuSkeletonModule = require(AvatarExperienceCatalog.Components.MarketplaceCategoryMenuSkeleton.MarketplaceCategoryMenuSkeleton)
 local FFlagAXMarketplaceLoadingSkeleton = require(Parent.AvatarExperienceFlags).FFlagAXMarketplaceLoadingSkeleton
 
-return function(p1) --[[ Line: 26 | Named "CatalogSduiCategoryMenuEntryPoint" ]]
+return function(p1)
 	-- upvalues: FFlagAXMarketplaceLoadingSkeleton (copy), ReactModule (copy), MarketplaceCategoryMenuSkeletonModule (copy), CatalogSduiEntryPointModule (copy), ConstantsModule (copy)
 	return ReactModule.createElement(CatalogSduiEntryPointModule, {
 		context = p1.context,

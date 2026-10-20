@@ -2,7 +2,7 @@
 local GetHumanoidDescriptionUpdatesV2B = game:DefineFastFlag("GetHumanoidDescriptionUpdatesV2B", false)
 local GetFFlagGetHumanoidDescriptionUpdatesV2EFunction = require(script:FindFirstAncestor("GetHumanoidDescription").Parent.SharedFlags).GetFFlagGetHumanoidDescriptionUpdatesV2E
 
-local function v2(List) --[[ Line: 65 ]]
+local function v2(List)
 	local List1 = {}
 	
 	for _, value in ipairs(List) do
@@ -17,7 +17,7 @@ local function v2(List) --[[ Line: 65 ]]
 	return List1
 end
 
-local function v3(p1, List) --[[ Line: 79 ]]
+local function v3(p1, List)
 	local List1 = {}
 	
 	for _, value in ipairs(List) do
@@ -32,7 +32,7 @@ local function v3(p1, List) --[[ Line: 79 ]]
 	return List1
 end
 
-local function v4(p2) --[[ Line: 93 ]]
+local function v4(p2)
 	local List = {}
 	
 	for _, playingAnimationTrack in p2:GetPlayingAnimationTracks() do
@@ -46,7 +46,7 @@ local function v4(p2) --[[ Line: 93 ]]
 	return List
 end
 
-return function(UserId) --[[ Line: 108 ]]
+return function(UserId)
 	-- upvalues: Players (copy), v2 (copy), GetHumanoidDescriptionUpdatesV2B (copy), v3 (copy), GetFFlagGetHumanoidDescriptionUpdatesV2EFunction (copy), v4 (copy)
 	local Player = Players:GetPlayerByUserId(UserId)
 	local config = {
@@ -105,7 +105,7 @@ return function(UserId) --[[ Line: 108 ]]
 	end
 	local Result2 = nil
 	local Success2
-	Success2, Result2 = pcall(function() --[[ Line: 167 ]]
+	Success2, Result2 = pcall(function()
 		-- upvalues: Humanoid (copy)
 		return (Humanoid:GetAppliedDescription())
 	end)
@@ -118,7 +118,7 @@ return function(UserId) --[[ Line: 108 ]]
 	end
 	local Count = 0
 	
-	local function v22(Key) --[[ Line: 180 ]]
+	local function v22(Key)
 		-- upvalues: Result2 (ref), config (copy)
 		if typeof(Result2[Key]) == "Color3" then
 			config[Key] = { Result2[Key].R, Result2[Key].G, Result2[Key].B }

@@ -16,7 +16,7 @@ local LazyScrollingComponentModule = require(PeopleReactView.Components.Common.L
 local FlagsService = require(Parent.PeopleService).getService("Flags")
 local FFlagPeoplePageRemoveSkeletons = FlagsService.FFlagPeoplePageRemoveSkeletons
 local FFlagPeoplePageRemoveUseMemoElements = FlagsService.FFlagPeoplePageRemoveUseMemoElements
-local MemoResult = ReactModule.memo(function(p1) --[[ Line: 35 ]]
+local MemoResult = ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), FFlagPeoplePageRemoveSkeletons (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy)
 	local UseTokensResult = UseTokensFunction()
 	
@@ -51,16 +51,16 @@ local MemoResult = ReactModule.memo(function(p1) --[[ Line: 35 ]]
 	})
 end)
 
-return ReactModule.memo(function(p1) --[[ Line: 90 ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), UseDeviceOrientationFunction (copy), RobloxAppEnumsModule (copy), ReactModule (copy), PeoplePageLayoutContextModule (copy), FFlagPeopleListButtonOverflowModule (copy), FFlagPeoplePageRemoveUseMemoElements (copy), PersonRowModule (copy), MemoResult (copy), FFlagPeoplePageRemoveSkeletons (copy), View (copy), Skeleton (copy), Radius (copy), LazyScrollingComponentModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseContextResult = ReactModule.useContext(PeoplePageLayoutContextModule)
 	local IsUseDeviceOrientationResultMatch = UseDeviceOrientationFunction() == RobloxAppEnumsModule.DeviceOrientationMode.Portrait or FFlagPeopleListButtonOverflowModule and UseContextResult.isCompact
-	local Element = if FFlagPeoplePageRemoveUseMemoElements then ReactModule.createElement(PersonRowModule, { person = p1.person, layoutOrder = p1.layoutOrder }) else ReactModule.useMemo(function() --[[ Line: 104 ]]
+	local Element = if FFlagPeoplePageRemoveUseMemoElements then ReactModule.createElement(PersonRowModule, { person = p1.person, layoutOrder = p1.layoutOrder }) else ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), PersonRowModule (upval), p1 (copy)
 		return ReactModule.createElement(PersonRowModule, { person = p1.person, layoutOrder = p1.layoutOrder })
 	end, { p1.person, p1.layoutOrder })
-	local Element1 = if FFlagPeoplePageRemoveUseMemoElements then ReactModule.createElement(MemoResult, { isPortrait = IsUseDeviceOrientationResultMatch }) else ReactModule.useMemo(function() --[[ Line: 120 ]]
+	local Element1 = if FFlagPeoplePageRemoveUseMemoElements then ReactModule.createElement(MemoResult, { isPortrait = IsUseDeviceOrientationResultMatch }) else ReactModule.useMemo(function()
 		-- upvalues: FFlagPeoplePageRemoveSkeletons (upval), ReactModule (upval), View (upval), IsUseDeviceOrientationResultMatch (copy), Skeleton (upval), Radius (upval), UseTokensResult (copy)
 		return if FFlagPeoplePageRemoveSkeletons then ReactModule.createElement(View, {
 			tag = {

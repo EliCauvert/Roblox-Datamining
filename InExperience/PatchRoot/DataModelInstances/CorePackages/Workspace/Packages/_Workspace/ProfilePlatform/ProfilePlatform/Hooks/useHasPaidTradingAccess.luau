@@ -7,10 +7,10 @@ local EnumsModule = require(ProfilePlatform.Common.Enums)
 local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
 local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
 
-return function(p1) --[[ Line: 15 | Named "useHasPaidTradingAccess" ]]
+return function(p1)
 	-- upvalues: UseIsRobloxSubscriberFunction (copy), UseSelectorFunction (copy), UseProfileWrapperContextModule (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), FFlagEnableBlackbirdCheck (copy)
 	local UseIsRobloxSubscriberResult = UseIsRobloxSubscriberFunction(p1)
-	local UseSelectorResult = UseSelectorFunction(function(p2): boolean --[[ Line: 17 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2): boolean
 		-- upvalues: p1 (copy)
 		if p1 then
 			local Users = p2.Users

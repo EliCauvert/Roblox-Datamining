@@ -14,10 +14,10 @@ local FFlagSocialCarouselShareQREnabled = SharedFlagsModule.FFlagSocialCarouselS
 local FFlagLuaAppUserSeenCollectionUnifiedFields = SharedFlagsModule.FFlagLuaAppUserSeenCollectionUnifiedFields
 local RepeatValueFunction = require(Parent.SocialLuaAnalytics).Analytics.Formatters.repeatValue
 
-return function() --[[ Line: 25 ]]
+return function()
 	-- upvalues: UseSocialCarouselContextModule (copy), ReactModule (copy), InitializeSocialCarouselAnalyticsModule (copy), EventNamesModule (copy), Tile (copy), HttpService (copy), FFlagSocialCarouselEnableUserSeenEvents (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (copy), RepeatValueFunction (copy), FFlagSocialCarouselShareQREnabled (copy), RetrievalStatus (copy)
 	local UseSocialCarouselContextModuleResult = UseSocialCarouselContextModule()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 28 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseSocialCarouselContextModuleResult (copy), InitializeSocialCarouselAnalyticsModule (upval)
 		local SortAnalyticsData = UseSocialCarouselContextModuleResult.sortAnalyticsData
 		
@@ -32,7 +32,7 @@ return function() --[[ Line: 25 ]]
 		})
 	end, { UseSocialCarouselContextModuleResult.sortAnalyticsData })
 	local Source = UseSocialCarouselContextModuleResult.source or ""
-	local UseResult = if FFlagSocialCarouselEnableUserSeenEvents then ReactModule.useCallback(function(p1, p2) --[[ Line: 73 ]]
+	local UseResult = if FFlagSocialCarouselEnableUserSeenEvents then ReactModule.useCallback(function(p1, p2)
 		-- upvalues: UseMemoResult (copy), EventNamesModule (upval), Tile (upval), Source (copy)
 		UseMemoResult.fireAnalyticsEvent(EventNamesModule.UserSeen, {
 			userId = p1.id,
@@ -46,13 +46,13 @@ return function() --[[ Line: 25 ]]
 			universeId = if p1.presence then p1.presence.universeId else nil
 		})
 	end, { Source }) else nil
-	local UseResult1 = if FFlagSocialCarouselShareQREnabled then ReactModule.useCallback(function(AbsolutePosition) --[[ Line: 169 ]]
+	local UseResult1 = if FFlagSocialCarouselShareQREnabled then ReactModule.useCallback(function(AbsolutePosition)
 		-- upvalues: UseMemoResult (copy), EventNamesModule (upval), Source (copy)
 		UseMemoResult.fireAnalyticsEvent(EventNamesModule.ShareQRPressed, { absolutePosition = AbsolutePosition, source = Source })
 	end, { Source, UseMemoResult }) else nil
 	
 	return {
-		userPressed = ReactModule.useCallback(function(p1, p2) --[[ Line: 49 ]]
+		userPressed = ReactModule.useCallback(function(p1, p2)
 			-- upvalues: UseMemoResult (copy), EventNamesModule (upval), Tile (upval), Source (copy), HttpService (upval)
 			UseMemoResult.fireAnalyticsEvent(EventNamesModule.UserPressed, {
 				presence = if p1.presence then p1.presence.userPresenceType else "Offline",
@@ -69,7 +69,7 @@ return function() --[[ Line: 25 ]]
 			})
 		end, { Source, UseMemoResult }),
 		userSeen = if FFlagSocialCarouselEnableUserSeenEvents then UseResult else nil,
-		tilesSeenCollection = ReactModule.useCallback(function(p1) --[[ Line: 91 ]]
+		tilesSeenCollection = ReactModule.useCallback(function(p1)
 			-- upvalues: FFlagLuaAppUserSeenCollectionUnifiedFields (upval), UseSocialCarouselContextModuleResult (copy), UseMemoResult (copy), EventNamesModule (upval), Source (copy), HttpService (upval), RepeatValueFunction (upval)
 			local SortAnalyticsData = if FFlagLuaAppUserSeenCollectionUnifiedFields then UseSocialCarouselContextModuleResult.sortAnalyticsData else nil
 			local StartRow = if FFlagLuaAppUserSeenCollectionUnifiedFields and SortAnalyticsData then SortAnalyticsData.startRow else nil
@@ -100,7 +100,7 @@ return function() --[[ Line: 25 ]]
 			UseSocialCarouselContextModuleResult.sortAnalyticsData,
 			UseSocialCarouselContextModuleResult.tiles
 		}),
-		addFriendsPressed = ReactModule.useCallback(function(AbsolutePosition) --[[ Line: 183 ]]
+		addFriendsPressed = ReactModule.useCallback(function(AbsolutePosition)
 			-- upvalues: UseMemoResult (copy), EventNamesModule (upval), UseSocialCarouselContextModuleResult (copy), Source (copy), HttpService (upval)
 			UseMemoResult.fireAnalyticsEvent(EventNamesModule.ViewAddFriends, {
 				friendCount = UseSocialCarouselContextModuleResult.friendCount,
@@ -118,7 +118,7 @@ return function() --[[ Line: 25 ]]
 			Source,
 			UseMemoResult
 		}),
-		friendsHeaderPressed = ReactModule.useCallback(function() --[[ Line: 204 ]]
+		friendsHeaderPressed = ReactModule.useCallback(function()
 			-- upvalues: UseMemoResult (copy), EventNamesModule (upval), UseSocialCarouselContextModuleResult (copy), Source (copy)
 			UseMemoResult.fireAnalyticsEvent(EventNamesModule.ViewAllFriends, {
 				friendCount = UseSocialCarouselContextModuleResult.friendCount,
@@ -131,7 +131,7 @@ return function() --[[ Line: 25 ]]
 			Source,
 			UseMemoResult
 		}),
-		reportLoadingEvent = ReactModule.useCallback(function(Fetch, p1: number) --[[ Line: 220 ]]
+		reportLoadingEvent = ReactModule.useCallback(function(Fetch, p1: number)
 			-- upvalues: UseMemoResult (copy), EventNamesModule (upval), RetrievalStatus (upval), Source (copy)
 			UseMemoResult.fireAnalyticsEvent(EventNamesModule.FriendsCarouselUILoadingTime, {
 				loadingTime = if p1 and typeof(p1) == "number" and p1 >= 0 then p1 else 0,
@@ -140,7 +140,7 @@ return function() --[[ Line: 25 ]]
 				source = Source
 			})
 		end, { Source, UseMemoResult }),
-		startSquadPressed = ReactModule.useCallback(function(AbsolutePosition) --[[ Line: 155 ]]
+		startSquadPressed = ReactModule.useCallback(function(AbsolutePosition)
 			-- upvalues: UseMemoResult (copy), EventNamesModule (upval), Source (copy)
 			UseMemoResult.fireAnalyticsEvent(EventNamesModule.StartSquadPressed, { absolutePosition = AbsolutePosition, source = Source })
 		end, { Source, UseMemoResult }),

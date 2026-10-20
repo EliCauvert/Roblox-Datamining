@@ -1,6 +1,6 @@
 ﻿local UrlModule = {}
 
-local function _(Text: string): string --[[ Line: 7 | Named "getBaseDomain" ]]
+local function _(Text: string): string
 	local _, EndIndex = Text:find("%.")
 	local Segment: string = Text:sub(EndIndex + 1)
 	
@@ -29,8 +29,8 @@ local config = {
 	CREATE_URL = string.format("https://create.%s", Segment)
 }
 setmetatable(UrlModule, {
-	__newindex = function(_, _, _) --[[ Line: 43 ]] end,
-	__index = function(_, p1) --[[ Line: 44 ]]
+	__newindex = function(_, _, _) end,
+	__index = function(_, p1)
 		-- upvalues: config (copy)
 		return config[p1]
 	end

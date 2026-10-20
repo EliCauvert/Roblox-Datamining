@@ -9,7 +9,7 @@ local _ = require(script.Parent["merge-typedefs_types"])
 local CompareNodes = require(Parent.Utils).compareNodes
 
 return {
-	mergeEnumValues = function(List, ConcatResult, p1) --[[ Line: 30 ]]
+	mergeEnumValues = function(List, ConcatResult, p1)
 		-- upvalues: Boolean (copy), Array (copy), Map (copy), MergeDirectivesFunction (copy), CompareNodes (copy)
 		if Boolean.toJSBoolean(if typeof(p1) == "table" then p1.consistentEnumMerge else nil) then
 			local ConcatResult1 = {}

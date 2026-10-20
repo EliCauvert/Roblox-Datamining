@@ -31,15 +31,15 @@ local UseCreationFlowStringsModule = require(MomentsCreation.Hooks.useCreationFl
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
 local _ = require(Parent.MomentsTypes)
 
-return function(p1) --[[ Line: 57 | Named "StickerOverlayControls" ]]
+return function(p1)
 	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseCreationFlowStringsModule (copy), UseMemoFunction (copy), SignalsModule (copy), ConstantsModule (copy), UseSignalStateFunction (copy), UseCallbackFunction (copy), DashModule (copy), MakeDefaultStickerOverlayEditModule (copy), MakeCreationEventFieldsModule (copy), SessionManager (copy), FunnelEventNames (copy), FireAnalyticsEventModule (copy), EventNames (copy), UseFormFactorFunction (copy), FormFactor (copy), ReactionType (copy), ReactionAssets (copy), ReactModule (copy), StickerPickerItemModule (copy), View (copy), Slider (copy), Knob (copy), FoundationModule (copy), Button (copy), ScrollView (copy)
 	local Controller = p1.controller
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseTokensResult = UseTokensFunction()
 	local UseCreationFlowStringsModuleResult = UseCreationFlowStringsModule()
-	local UseSignalStateResult = UseSignalStateFunction((UseMemoFunction(function() --[[ Line: 64 ]]
+	local UseSignalStateResult = UseSignalStateFunction((UseMemoFunction(function()
 		-- upvalues: SignalsModule (upval), Controller (copy), ConstantsModule (upval)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 65 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: Controller (upval), ConstantsModule (upval)
 			local ActiveSession = Controller.getActiveSession(p2)
 			local Draft = if ActiveSession == nil then nil else ActiveSession.getDraft(p2)
@@ -48,7 +48,7 @@ return function(p1) --[[ Line: 57 | Named "StickerOverlayControls" ]]
 			return if DraftEntry == nil then ConstantsModule.StickerOverlay.DefaultStickerSize else DraftEntry.stickerSize
 		end)
 	end, { Controller })))
-	local UseCallbackResult = UseCallbackFunction(function(StickerSize) --[[ Line: 74 ]]
+	local UseCallbackResult = UseCallbackFunction(function(StickerSize)
 		-- upvalues: Controller (copy), DashModule (upval)
 		local ActiveSession = Controller.getActiveSession(false)
 		
@@ -64,15 +64,15 @@ return function(p1) --[[ Line: 57 | Named "StickerOverlayControls" ]]
 			return
 		end
 	end, { Controller })
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 87 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: Controller (copy)
 		Controller.discardActiveTool()
 	end, { Controller })
-	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 91 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function()
 		-- upvalues: Controller (copy)
 		Controller.commitActiveTool()
 	end, { Controller })
-	local UseCallbackResult3 = UseCallbackFunction(function(StickerURI) --[[ Line: 95 ]]
+	local UseCallbackResult3 = UseCallbackFunction(function(StickerURI)
 		-- upvalues: Controller (copy), DashModule (upval), MakeDefaultStickerOverlayEditModule (upval), MakeCreationEventFieldsModule (upval), SessionManager (upval), FunnelEventNames (upval), FireAnalyticsEventModule (upval), EventNames (upval)
 		local ActiveSession = Controller.getActiveSession(false)
 		
@@ -151,7 +151,7 @@ return function(p1) --[[ Line: 57 | Named "StickerOverlayControls" ]]
 					CanvasSize = UDim2.fromOffset(0, 0),
 					scrollBarVisibility = if IsUseFormFactorResultMatch then FoundationModule.Enums.Visibility.None else FoundationModule.Enums.Visibility.Auto
 				}
-			}, (UseMemoFunction(function() --[[ Line: 137 ]]
+			}, (UseMemoFunction(function()
 				-- upvalues: ReactionType (upval), ReactionAssets (upval), ReactModule (upval), StickerPickerItemModule (upval), UseCallbackResult3 (copy)
 				local Elements = {}
 				local LayoutOrder = 0

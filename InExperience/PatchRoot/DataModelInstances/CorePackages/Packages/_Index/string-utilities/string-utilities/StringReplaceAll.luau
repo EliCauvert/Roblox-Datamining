@@ -1,4 +1,4 @@
-﻿return function(Replaced, List) --[[ Line: 9 ]]
+﻿return function(Replaced, List)
 	if type(Replaced) ~= "string" then
 		return ""
 	end

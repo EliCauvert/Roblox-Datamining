@@ -8,17 +8,17 @@ local SquadRootViewTypeModule = require(SquadsCore.Enums.SquadRootViewType)
 local SquadViewFlagsModule = require(SquadsCore.Components.SquadExternalContractProvider.SquadViewFlags)
 local ReactModule = require(Parent.React)
 local SessionType = require(Parent.RobloxAppSessionization).SessionType
-local Context = ReactModule.createContext({ updateMetadata = function() --[[ Line: 29 ]] end })
+local Context = ReactModule.createContext({ updateMetadata = function() end })
 
 return {
 	Context = Context,
-	Provider = function(p1) --[[ Line: 32 ]]
+	Provider = function(p1)
 		-- upvalues: ReactModule (copy), SquadExternalContractContextModule (copy), SquadLocationEnumModule (copy), SessionType (copy), SquadViewFlagsModule (copy), SquadRootViewTypeModule (copy), SessionService (copy), LoggerModule (copy), Context (copy)
 		local UseContextResult = ReactModule.useContext(SquadExternalContractContextModule)
 		local UseSquadRootViewResult = UseContextResult.useSquadRootView()
 		local SquadLobbyPageInExpSessionInfo = if UseContextResult.squadLocation == SquadLocationEnumModule.InExperience then SessionType.StructuralIdentifier.SquadLobbyPageInExpSessionInfo else SessionType.StructuralIdentifier.SquadLobbyPageUASessionInfo
 		local IsNotUseSquadRootViewResultMatch: boolean = bit32.band(UseContextResult.useSquadViewFlags(), SquadViewFlagsModule.SquadLobby) ~= 0 and UseSquadRootViewResult ~= SquadRootViewTypeModule.None
-		local UseResult = ReactModule.useCallback(function() --[[ Line: 44 ]]
+		local UseResult = ReactModule.useCallback(function()
 			-- upvalues: SessionType (upval), SessionService (upval), SquadLobbyPageInExpSessionInfo (copy)
 			local Level1 = SessionType.StructuralIdentifier.Level1
 			
@@ -29,13 +29,13 @@ return {
 			SquadLobbyPageInExpSessionInfo,
 			UseContextResult.squadLocation
 		})
-		local UseResult1 = ReactModule.useCallback(function() --[[ Line: 52 ]]
+		local UseResult1 = ReactModule.useCallback(function()
 			-- upvalues: SessionService (upval), SquadLobbyPageInExpSessionInfo (copy)
 			if SessionService:SessionExists(SquadLobbyPageInExpSessionInfo) then
 				SessionService:RemoveSession(SquadLobbyPageInExpSessionInfo)
 			end
 		end, { SquadLobbyPageInExpSessionInfo })
-		local UseResult2 = ReactModule.useCallback(function(Key, Value) --[[ Line: 58 ]]
+		local UseResult2 = ReactModule.useCallback(function(Key, Value)
 			-- upvalues: SessionService (upval), SquadLobbyPageInExpSessionInfo (copy), LoggerModule (upval)
 			if SessionService:SessionExists(SquadLobbyPageInExpSessionInfo) then
 				SessionService:SetMetadata(SquadLobbyPageInExpSessionInfo, Key, Value)
@@ -45,17 +45,17 @@ return {
 				LoggerModule:warning("Squad {} session does not exist, cannot update metadata with key {}, value {}", SquadLobbyPageInExpSessionInfo, Key, Value)
 			end
 		end, { SquadLobbyPageInExpSessionInfo })
-		ReactModule.useEffect(function() --[[ Line: 71 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: IsNotUseSquadRootViewResultMatch (copy), UseResult (copy), UseResult1 (copy)
 			if IsNotUseSquadRootViewResultMatch then
 				UseResult()
 				
-				return function() --[[ Line: 75 ]]
+				return function()
 					-- upvalues: UseResult1 (upval)
 					UseResult1()
 				end
 			else
-				return function() --[[ Line: 80 ]] end
+				return function() end
 			end
 		end, { IsNotUseSquadRootViewResultMatch, UseResult, UseResult1 })
 		

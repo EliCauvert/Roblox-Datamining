@@ -1,20 +1,20 @@
-﻿return function(Callback) --[[ Line: 1 ]]
-	local function _(p1): string --[[ Line: 2 | Named "makeKeyString" ]]
+﻿return function(Callback)
+	local function _(p1): string
 		return if type(p1) == "string" then string.format("%s", p1) else string.format("[%s]", (tostring(p1)))
 	end
 	
-	local function makeValueString(Key): string --[[ Line: 10 ]]
+	local function makeValueString(Key): string
 		local ValueType = type(Key)
 		
 		return if ValueType == "string" then string.format("%q", Key) elseif ValueType == "function" or ValueType == "table" then string.format("<%s>", (tostring(Key))) else string.format("%s", (tostring(Key)))
 	end
 	
-	local function printKeypair(p1, p2, Repeated, p3) --[[ Line: 21 ]]
+	local function printKeypair(p1, p2, Repeated, p3)
 		-- upvalues: makeValueString (copy), Callback (copy)
 		Callback(string.format("%s%s = %s,%s", Repeated, if type(p1) == "string" then string.format("%s", p1) else string.format("[%s]", (tostring(p1))), makeValueString(p2), p3 and string.format(" -- %s", p3) or ""))
 	end
 	
-	return function(p1, p2) --[[ Line: 33 ]]
+	return function(p1, p2)
 		-- upvalues: Callback (copy), makeValueString (copy), printKeypair (copy)
 		local Text = p2 or "  "
 		
@@ -23,7 +23,7 @@
 		end
 		local t = {}
 		
-		local function recurse(Key, p3, Count: number) --[[ Line: 43 ]]
+		local function recurse(Key, p3, Count: number)
 			-- upvalues: t (copy), Text (ref), Callback (upval), makeValueString (upval), printKeypair (upval), recurse (copy)
 			t[Key] = true
 			local Repeated = string.rep(Text, Count)

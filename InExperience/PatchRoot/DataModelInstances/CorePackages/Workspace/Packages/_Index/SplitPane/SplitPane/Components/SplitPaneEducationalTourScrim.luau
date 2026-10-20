@@ -2,7 +2,7 @@
 local ReactModule = require(Parent.React)
 local UseDeviceInsetsFunction = require(Parent.Responsive).useDeviceInsets
 
-local function dimPanel(Name, Position, Size, p1) --[[ Line: 25 ]]
+local function dimPanel(Name, Position, Size, p1)
 	-- upvalues: ReactModule (copy)
 	return ReactModule.createElement("TextButton", {
 		BorderSizePixel = 0,
@@ -18,7 +18,7 @@ local function dimPanel(Name, Position, Size, p1) --[[ Line: 25 ]]
 	})
 end
 
-local function spotlightRing(XOffset, YOffset, X, Y, Offset) --[[ Line: 40 ]]
+local function spotlightRing(XOffset, YOffset, X, Y, Offset)
 	-- upvalues: ReactModule (copy)
 	return ReactModule.createElement("Frame", {
 		Name = "SpotlightRing",
@@ -36,7 +36,7 @@ local function spotlightRing(XOffset, YOffset, X, Y, Offset) --[[ Line: 40 ]]
 	})
 end
 
-local function cornerDim(Name, Position, Position1, XOffset: number) --[[ Line: 57 ]]
+local function cornerDim(Name, Position, Position1, XOffset: number)
 	-- upvalues: ReactModule (copy)
 	return ReactModule.createElement("TextButton", {
 		BackgroundTransparency = 1,
@@ -62,7 +62,7 @@ local function cornerDim(Name, Position, Position1, XOffset: number) --[[ Line: 
 	})
 end
 
-return function(p1) --[[ Line: 82 | Named "SplitPaneEducationalTourScrim" ]]
+return function(p1)
 	-- upvalues: UseDeviceInsetsFunction (copy), dimPanel (copy), cornerDim (copy), spotlightRing (copy), ReactModule (copy)
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local _Rect = if p1.targetRect == nil then nil else Rect.new(p1.targetRect.Min.X + UseDeviceInsetsResult.left, p1.targetRect.Min.Y + UseDeviceInsetsResult.top, p1.targetRect.Max.X + UseDeviceInsetsResult.left, p1.targetRect.Max.Y + UseDeviceInsetsResult.top)

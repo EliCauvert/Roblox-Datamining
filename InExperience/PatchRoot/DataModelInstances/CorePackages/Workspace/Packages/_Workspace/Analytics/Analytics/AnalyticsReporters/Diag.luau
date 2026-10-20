@@ -2,7 +2,7 @@
 local DiagModule = {}
 DiagModule.__index = DiagModule
 
-function DiagModule.new(_reporter) --[[ Line: 27 ]]
+function DiagModule.new(_reporter)
 	-- upvalues: DiagModule (copy)
 	local ValueType = type(_reporter)
 	assert(ValueType == "table" or ValueType == "userdata", "Unexpected value for reportingService")
@@ -12,18 +12,18 @@ function DiagModule.new(_reporter) --[[ Line: 27 ]]
 	return config
 end
 
-function DiagModule:setEnabled(_isEnabled) --[[ Line: 40 ]]
+function DiagModule:setEnabled(_isEnabled)
 	assert(type(_isEnabled) == "boolean", "Expected isEnabled to be a boolean")
 	self._isEnabled = _isEnabled
 end
 
-function DiagModule:reportCounter(CounterName: string, Amount) --[[ Line: 47 ]]
+function DiagModule:reportCounter(CounterName: string, Amount)
 	-- upvalues: UserInputService (copy)
 	assert(type(CounterName) == "string", "Expected counterName to be a string")
 	assert(type(Amount) == "number", "Expected amount to be a number")
 	assert(self._isEnabled, "This reporting service is disabled")
 	local None = Enum.Platform.None
-	pcall(function() --[[ Line: 56 ]]
+	pcall(function()
 		-- upvalues: None (ref), UserInputService (upval)
 		None = UserInputService:GetPlatform()
 	end)
@@ -34,13 +34,13 @@ function DiagModule:reportCounter(CounterName: string, Amount) --[[ Line: 47 ]]
 	self._reporter:ReportCounter(CounterName, Amount)
 end
 
-function DiagModule:reportCounterSimple(CounterName, Amount) --[[ Line: 69 ]]
+function DiagModule:reportCounterSimple(CounterName, Amount)
 	if self._isEnabled then
 		self._reporter:ReportCounter(CounterName, Amount)
 	end
 end
 
-function DiagModule:reportStats(Category, p1) --[[ Line: 77 ]]
+function DiagModule:reportStats(Category, p1)
 	assert(type(Category) == "string", "Expected category to be a string")
 	assert(type(p1) == "number", "Expected value to be a number")
 	assert(self._isEnabled, "This reporting service is disabled")

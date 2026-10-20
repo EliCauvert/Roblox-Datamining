@@ -14,7 +14,7 @@ local _ = require(SduiCoreSystem.ClientBinding.SduiPoolStoreTypes)
 local FFlagSduiPerSectionPoolSizing = require(Parent.SharedFlags).FFlagSduiPerSectionPoolSizing
 local PropResultCategory = require(SduiCoreSystem.ClientBinding.SduiClientBindingTypes).PropResultCategory
 
-local function _(List, p1): boolean --[[ Line: 34 | Named "canSorterReorder" ]]
+local function _(List, p1): boolean
 	if p1 ~= nil then
 		return true
 	end
@@ -26,7 +26,7 @@ local function _(List, p1): boolean --[[ Line: 34 | Named "canSorterReorder" ]]
 	return false
 end
 
-local function buildItemsFromEntries(NormalizeBoundDataResult, OrderedIdentifiers, CreateComputed, p2, p3, p4, CaptureErrorContextResult, p5, p6, DeferItemBuild, Callback, PoolEntryConfigs) --[[ Line: 51 ]]
+local function buildItemsFromEntries(NormalizeBoundDataResult, OrderedIdentifiers, CreateComputed, p2, p3, p4, CaptureErrorContextResult, p5, p6, DeferItemBuild, Callback, PoolEntryConfigs)
 	-- upvalues: SduiListEntrySorterModule (copy), SduiPoolEntryHelpersModule (copy), FFlagSduiPerSectionPoolSizing (copy), SduiListEntryRendererModule (copy)
 	if CreateComputed ~= nil then
 		local Flag = nil
@@ -62,7 +62,7 @@ local function buildItemsFromEntries(NormalizeBoundDataResult, OrderedIdentifier
 	return SduiListEntryRendererModule.buildEntryConfigs(ApplyOrderResult, InputSlicer, CreateComputed, p4, CaptureErrorContextResult, p5, p3, p6, DeferItemBuild, EntryConfigExtrasFn)
 end
 
-return function(_, p7, p8, Callback1, p9, p10) --[[ Line: 123 | Named "buildComponentList" ]]
+return function(_, p7, p8, Callback1, p9, p10)
 	-- upvalues: SduiLoggerModule (copy), SduiErrorsModule (copy), PropResultCategory (copy), SduiListEntryRendererModule (copy), SduiPoolEntryHelpersModule (copy), SduiPropUtilsModule (copy), SduiListEntryNormalizerModule (copy), buildItemsFromEntries (copy), SduiParseHelpersModule (copy), SignalsModule (copy)
 	local Source = p7 and p7.source
 	local DefaultItem = p7 and p7.default_item
@@ -78,7 +78,7 @@ return function(_, p7, p8, Callback1, p9, p10) --[[ Line: 123 | Named "buildComp
 			parserName = p9.currentParserName
 		}, p9.appPage)
 		
-		return function() --[[ Line: 146 ]]
+		return function()
 			return { data = {} }
 		end, PropResultCategory.PropSignal
 	end
@@ -92,7 +92,7 @@ return function(_, p7, p8, Callback1, p9, p10) --[[ Line: 123 | Named "buildComp
 	if Type == "binding_path" then
 		local CreateComputed = nil
 		
-		return SduiPropUtilsModule.generateDynamicBindingPropValue(Value, p8, p9, Callback1, function(p11, p12) --[[ Line: 178 ]]
+		return SduiPropUtilsModule.generateDynamicBindingPropValue(Value, p8, p9, Callback1, function(p11, p12)
 			-- upvalues: SduiListEntryNormalizerModule (upval), DefaultItem (copy), ItemOverrides (copy), p9 (copy), CreateComputed (ref), buildItemsFromEntries (upval), OrderedIdentifiers (copy), Callback1 (copy), p8 (copy), CaptureErrorContextResult (copy), p10 (copy), DeferItemBuild (copy), ResolvePoolDataGetterResult (copy), PoolEntryConfigs (copy)
 			CreateComputed = buildItemsFromEntries(SduiListEntryNormalizerModule.normalizeBoundData(p11, DefaultItem, ItemOverrides, p9), OrderedIdentifiers, CreateComputed, Callback1, p8, p9, CaptureErrorContextResult, p10, p12, DeferItemBuild, ResolvePoolDataGetterResult, PoolEntryConfigs)
 			
@@ -102,13 +102,13 @@ return function(_, p7, p8, Callback1, p9, p10) --[[ Line: 123 | Named "buildComp
 		local CreateComputed = Value and Value.items
 		
 		if CreateComputed == nil then
-			return function() --[[ Line: 207 ]]
+			return function()
 				return { data = {} }
 			end, PropResultCategory.PropSignal
 		else
-			return function(p11) --[[ Line: 215 ]]
+			return function(p11)
 				-- upvalues: SduiListEntryNormalizerModule (upval), CreateComputed (copy), DefaultItem (copy), p9 (copy), buildItemsFromEntries (upval), OrderedIdentifiers (copy), Callback1 (copy), p8 (copy), CaptureErrorContextResult (copy), p10 (copy), DeferItemBuild (copy), ResolvePoolDataGetterResult (copy), PoolEntryConfigs (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), SduiParseHelpersModule (upval)
-				local Success, Result = pcall(function() --[[ Line: 216 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: SduiListEntryNormalizerModule (upval), CreateComputed (upval), DefaultItem (upval), p9 (upval), buildItemsFromEntries (upval), OrderedIdentifiers (upval), Callback1 (upval), p8 (upval), CaptureErrorContextResult (upval), p10 (upval), p11 (copy), DeferItemBuild (upval), ResolvePoolDataGetterResult (upval), PoolEntryConfigs (upval)
 					return (buildItemsFromEntries(SduiListEntryNormalizerModule.normalizeLiteralItems(CreateComputed, DefaultItem, p9), OrderedIdentifiers, nil, Callback1, p8, p9, CaptureErrorContextResult, p10, p11, DeferItemBuild, ResolvePoolDataGetterResult, PoolEntryConfigs))
 				end)
@@ -135,9 +135,9 @@ return function(_, p7, p8, Callback1, p9, p10) --[[ Line: 123 | Named "buildComp
 	else
 		local CreateComputed = SignalsModule
 		CreateComputed = CreateComputed.createComputed
-		CreateComputed = CreateComputed(function(p11) --[[ Line: 256 ]]
+		CreateComputed = CreateComputed(function(p11)
 			-- upvalues: Callback1 (copy), SduiListEntryNormalizerModule (upval), DefaultItem (copy), ItemOverrides (copy), p9 (copy), buildItemsFromEntries (upval), OrderedIdentifiers (copy), p8 (copy), CaptureErrorContextResult (copy), p10 (copy), DeferItemBuild (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), SduiParseHelpersModule (upval)
-			local Success, Result = pcall(function() --[[ Line: 257 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: Callback1 (upval), p11 (copy), SduiListEntryNormalizerModule (upval), DefaultItem (upval), ItemOverrides (upval), p9 (upval), buildItemsFromEntries (upval), OrderedIdentifiers (upval), p8 (upval), CaptureErrorContextResult (upval), p10 (upval), DeferItemBuild (upval), SduiLoggerModule (upval), SduiErrorsModule (upval)
 				local Section = (Callback1(p11) or {})._section
 				

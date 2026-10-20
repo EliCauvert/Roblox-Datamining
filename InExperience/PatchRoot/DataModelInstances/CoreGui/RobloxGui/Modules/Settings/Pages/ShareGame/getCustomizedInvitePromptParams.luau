@@ -1,7 +1,7 @@
 ﻿local ConstantsModule = require(game:GetService("CoreGui").RobloxGui.Modules.Settings.Pages.ShareGame.Constants)
 local FFlagFixPromptGameInviteUIMissingDisplayName = require(game:GetService("CorePackages").Workspace.Packages.SharedFlags).FFlagFixPromptGameInviteUIMissingDisplayName
 
-return function(ExperienceInviteOptions, Callback) --[[ Line: 12 ]]
+return function(ExperienceInviteOptions, Callback)
 	-- upvalues: ConstantsModule (copy), FFlagFixPromptGameInviteUIMissingDisplayName (copy)
 	local InviteUser = if ExperienceInviteOptions and ExperienceInviteOptions.InviteUser ~= 0 then ExperienceInviteOptions.InviteUser else nil
 	local CallbackResult, CallbackResult2 = Callback(if InviteUser then ConstantsModule.Triggers.DeveloperSingle else ConstantsModule.Triggers.DeveloperMultiple, InviteUser)

@@ -15,7 +15,7 @@ local EmojiModule1 = require(Emoji.Enum.Emoji)
 local GenericTextLabelModule = require(Parent.Core.Text.GenericTextLabel.GenericTextLabel)
 local config = { fluidSizing = false, maxSize = Vector2.new(10000, 10000) }
 
-return function(p1) --[[ Line: 50 | Named "EmojiTextLabel" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleModule (copy), EmojiModule1 (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy), ReactModule (copy), GenericTextLabelModule (copy), EmojiModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local IsEnumValue = EmojiModule1.isEnumValue(JoinResult.emoji)

@@ -7,9 +7,9 @@ local AnalyticsConstantsModule = require(StreamNotifications.analytics.analytics
 local ConstantsModule = require(StreamNotifications.constants)
 
 return {
-	createOnSettingsActivated = function(p1, p2, Callback, Callback1) --[[ Line: 11 ]]
+	createOnSettingsActivated = function(p1, p2, Callback, Callback1)
 		-- upvalues: NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy), ConstantsModule (copy), NavigateDownToNotificationSettingsFunction (copy)
-		return function() --[[ Line: 17 ]]
+		return function()
 			-- upvalues: p1 (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), ConstantsModule (upval), p2 (copy), Callback (copy), Callback1 (copy), NavigateDownToNotificationSettingsFunction (upval)
 			if not p1 then return end
 			NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.click, AnalyticsConstantsModule.EventNames.goToSettingPage, {

@@ -1,7 +1,7 @@
 ﻿local UseCoreActionBindModule = require(script.Parent.useCoreActionBind)
 local SelectionInputsModule = require(script.Parent.SelectionInputs)
 
-return function(p1) --[[ Line: 23 | Named "useSelectionBackAction" ]]
+return function(p1)
 	-- upvalues: UseCoreActionBindModule (copy), SelectionInputsModule (copy)
 	UseCoreActionBindModule({
 		enabled = p1.enabled,

@@ -27,7 +27,7 @@ local Properties = {
 	CanDeepLink = "can_deep_link"
 }
 
-local function _() --[[ Line: 139 | Named "getPlaySessionId" ]]
+local function _()
 	-- upvalues: RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy)
 	return if RbxAnalyticsServiceExposePlaySessionIdEngineFeature then RbxAnalyticsService:GetPlaySessionId() else ""
 end
@@ -85,7 +85,7 @@ local Counters = {
 }
 local TelemetryService1 = TelemetryService
 
-local _ = function(Config, CustomFields) --[[ Line: 215 | Named "logDictationCounter" ]]
+local _ = function(Config, CustomFields)
 	-- upvalues: TelemetryService1 (ref)
 	if TelemetryService1 then
 		TelemetryService1:LogCounter(Config, { customFields = CustomFields }, 1)
@@ -136,7 +136,7 @@ return {
 		UserInteraction = "user_interaction"
 	},
 	Counters = Counters,
-	fire = function(p1, Tbl) --[[ Line: 146 ]]
+	fire = function(p1, Tbl)
 		-- upvalues: Properties (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy), Analytics (copy)
 		local Copy = if Tbl then table.clone(Tbl) else {}
 		Copy[Properties.PlaySessionId] = if RbxAnalyticsServiceExposePlaySessionIdEngineFeature then RbxAnalyticsService:GetPlaySessionId() else ""
@@ -146,11 +146,11 @@ return {
 		end
 		Analytics.FireClientAnalyticsWithEventName(p1, Copy)
 	end,
-	withTelemetryService = function(p1) --[[ Line: 211 ]]
+	withTelemetryService = function(p1)
 		-- upvalues: TelemetryService1 (ref), TelemetryService (copy)
 		TelemetryService1 = p1 or TelemetryService
 	end,
-	reportStartedCounter = function(Mode, Entry_point) --[[ Line: 221 ]]
+	reportStartedCounter = function(Mode, Entry_point)
 		-- upvalues: Counters (copy), TelemetryService1 (ref)
 		local Started = Counters.Started
 		local CustomFields = { mode = Mode, entry_point = Entry_point }
@@ -159,7 +159,7 @@ return {
 			TelemetryService1:LogCounter(Started, { customFields = CustomFields }, 1)
 		end
 	end,
-	reportEndedCounter = function(Mode, Reason) --[[ Line: 225 ]]
+	reportEndedCounter = function(Mode, Reason)
 		-- upvalues: Counters (copy), TelemetryService1 (ref)
 		local Ended = Counters.Ended
 		local CustomFields = { mode = Mode, reason = Reason }
@@ -168,7 +168,7 @@ return {
 			TelemetryService1:LogCounter(Ended, { customFields = CustomFields }, 1)
 		end
 	end,
-	reportVadStopCounter = function(Mode) --[[ Line: 229 ]]
+	reportVadStopCounter = function(Mode)
 		-- upvalues: Counters (copy), TelemetryService1 (ref)
 		local VadStop = Counters.VadStop
 		local CustomFields = { mode = Mode }
@@ -177,7 +177,7 @@ return {
 			TelemetryService1:LogCounter(VadStop, { customFields = CustomFields }, 1)
 		end
 	end,
-	reportPermissionCounter = function(Mode, Result) --[[ Line: 233 ]]
+	reportPermissionCounter = function(Mode, Result)
 		-- upvalues: Counters (copy), TelemetryService1 (ref)
 		local Permission = Counters.Permission
 		local CustomFields = { mode = Mode, result = Result }
@@ -186,7 +186,7 @@ return {
 			TelemetryService1:LogCounter(Permission, { customFields = CustomFields }, 1)
 		end
 	end,
-	reportTranscriptionCounter = function(p1, p2) --[[ Line: 237 ]]
+	reportTranscriptionCounter = function(p1, p2)
 		-- upvalues: Counters (copy), TelemetryService1 (ref)
 		local Transcription = Counters.Transcription
 		local CustomFields = {
@@ -198,7 +198,7 @@ return {
 			TelemetryService1:LogCounter(Transcription, { customFields = CustomFields }, 1)
 		end
 	end,
-	reportMessageSentCounter = function(Mode) --[[ Line: 244 ]]
+	reportMessageSentCounter = function(Mode)
 		-- upvalues: Counters (copy), TelemetryService1 (ref)
 		local MessageSent = Counters.MessageSent
 		local CustomFields = { mode = Mode }
@@ -207,7 +207,7 @@ return {
 			TelemetryService1:LogCounter(MessageSent, { customFields = CustomFields }, 1)
 		end
 	end,
-	reportSafetyReminderCounter = function() --[[ Line: 248 ]]
+	reportSafetyReminderCounter = function()
 		-- upvalues: Counters (copy), TelemetryService1 (ref)
 		local SafetyReminder = Counters.SafetyReminder
 		local CustomFields = {}

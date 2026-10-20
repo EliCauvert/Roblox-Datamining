@@ -8,13 +8,13 @@ local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local GetSelectedUsersStoreModule = require(AppChat.Stores.GetSelectedUsersStore)
 local UseUserDataModule = require(AppChat.Hooks.useUserData)
 
-return ReactModule.memo(function(p1) --[[ Line: 24 | Named "MemberEntry" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), GetSelectedUsersStoreModule (copy), UseSignalStateFunction (copy), UseUserDataModule (copy), ReactModule (copy), FoundationModule (copy), FFlagAppChatUseProfileFrameThumbnailModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local SelectedUsersStoreModule = GetSelectedUsersStoreModule(false)
 	local UseSignalStateResult = UseSignalStateFunction(SelectedUsersStoreModule.getSelectedUserIdAtIndex(p1.index))
 	local UseUserDataModuleResult = UseUserDataModule(UseSignalStateResult or "")
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 31 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseSignalStateResult (copy), SelectedUsersStoreModule (copy)
 		if UseSignalStateResult then
 			SelectedUsersStoreModule.removeUserId(UseSignalStateResult)

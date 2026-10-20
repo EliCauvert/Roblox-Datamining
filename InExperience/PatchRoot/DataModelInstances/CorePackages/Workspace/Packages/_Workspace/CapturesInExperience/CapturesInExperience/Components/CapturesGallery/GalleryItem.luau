@@ -15,27 +15,27 @@ local Text = require(Parent1.Foundation).Text
 local FFlagUseRbxstorageInGalleryModule = require(Parent.Flags.FFlagUseRbxstorageInGallery)
 local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 
-return function(p1) --[[ Line: 30 ]]
+return function(p1)
 	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), ReactModule (copy), EventNamesModule (copy), CarouselOpenedModule (copy), GetCropSizeFunction (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), GetContentFromObjectFunction (copy), FFlagUseRbxstorageInGalleryModule (copy), Text (copy), GetFormatTimeModule (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Vector2.new(0, 0))
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(UDim2.fromScale(1, 1))
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 38 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseAnalyticsModuleResult (copy), EventNamesModule (upval), UseDispatchResult (copy), CarouselOpenedModule (upval), p1 (copy)
 		UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesCarouselOpened)
 		UseDispatchResult(CarouselOpenedModule(p1.captureIndex))
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(Frame) --[[ Line: 43 ]]
+	local UseResult1 = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(Frame.AbsoluteSize)
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 47 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(p2.Resolution)
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 52 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2_2 (copy), GetCropSizeFunction (upval), UseStateResult (copy), UseStateResult1 (copy)
 		UseStateResult2_2(GetCropSizeFunction(UseStateResult, UseStateResult1))
 	end, { UseStateResult, UseStateResult1 })

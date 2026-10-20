@@ -11,7 +11,7 @@ local config = {
 	boolean = true
 }
 
-return function(p1, List, p2) --[[ Line: 27 ]]
+return function(p1, List, p2)
 	-- upvalues: CollectionService (copy), UnifiedEventLogConstantsModule (copy), FFlagAXMISEnableMultiShoppingUnifiedEvents (copy), FFlagAXUnifiedImpressionsOnThumbnail (copy), FFlagAXSkipTapDetection (copy), config (copy)
 	if not p1.current then return end
 	CollectionService:AddTag(p1.current, UnifiedEventLogConstantsModule.TAG_NAME)

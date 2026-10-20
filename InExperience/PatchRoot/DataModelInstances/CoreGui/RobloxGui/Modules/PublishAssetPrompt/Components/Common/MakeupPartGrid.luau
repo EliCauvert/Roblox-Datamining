@@ -16,7 +16,7 @@ local config = {
 	[Enum.AvatarAssetType.EyelashAccessory] = "Eyelash"
 }
 
-local function getItemsFromFolder(MakeupFolder, Name, MakeupEntries, NoShowAssetTypeInLabel) --[[ Line: 42 ]]
+local function getItemsFromFolder(MakeupFolder, Name, MakeupEntries, NoShowAssetTypeInLabel)
 	-- upvalues: GetFFlagUploadMakeupSupportModule (copy), config (copy)
 	local List = {}
 	
@@ -43,18 +43,18 @@ local function getItemsFromFolder(MakeupFolder, Name, MakeupEntries, NoShowAsset
 			})
 		end
 	end
-	table.sort(List, function(A, B): boolean --[[ Line: 92 ]]
+	table.sort(List, function(A, B): boolean
 		return (A.LayoutOrder or 0) < (B.LayoutOrder or 0)
 	end)
 	
 	return List
 end
 
-return function(Frame) --[[ Line: 99 | Named "MakeupPartGrid" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), getItemsFromFolder (copy), config (copy), GetFFlagUploadMakeupSupportModule (copy), ConstantsModule (copy), AvatarItemCardModule (copy), ItemTile (copy), DefaultMetricsGridView (copy), GridMetrics (copy), _Vector2 (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState({})
 	local NoShowAssetTypeInLabel = Frame.showAssetTypeInLabel == nil or Frame.showAssetTypeInLabel
-	ReactModule.useEffect(function() --[[ Line: 104 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy), UseStateResult2 (copy), getItemsFromFolder (upval), NoShowAssetTypeInLabel (copy), config (upval)
 		if Frame.makeupFolder then
 			UseStateResult2((getItemsFromFolder(Frame.makeupFolder, Frame.name, Frame.makeupEntries, NoShowAssetTypeInLabel)))
@@ -84,7 +84,7 @@ return function(Frame) --[[ Line: 99 | Named "MakeupPartGrid" ]]
 			}
 		})
 	end, { Frame.makeupFolder, Frame.singleDecal })
-	ReactModule.useEffect(function() --[[ Line: 139 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), GetFFlagUploadMakeupSupportModule (upval), NoShowAssetTypeInLabel (copy), config (upval), Frame (copy), UseStateResult2 (copy)
 		if UseStateResult[1] and UseStateResult[1].asset then
 			local t = {}
@@ -122,14 +122,14 @@ return function(Frame) --[[ Line: 99 | Named "MakeupPartGrid" ]]
 		LayoutOrder = Frame.LayoutOrder
 	}, {
 		Grid = ReactModule.createElement(DefaultMetricsGridView, {
-			getItemHeight = function(p1: number): number --[[ Line: 198 ]]
+			getItemHeight = function(p1: number): number
 				return p1 * 1.3333333333333333
 			end,
 			getItemMetrics = GridMetrics.makeCustomMetricsGetter({
 				minimumItemsPerRow = 2,
 				minimumItemWidth = ItemCardWidthPortrait
 			}),
-			renderItem = ReactModule.useCallback(function(p1) --[[ Line: 177 ]]
+			renderItem = ReactModule.useCallback(function(p1)
 				-- upvalues: ReactModule (upval), AvatarItemCardModule (upval), ItemCardWidthPortrait (copy), ItemTile (upval)
 				return if p1.asset then ReactModule.createElement(AvatarItemCardModule, {
 					asset = p1.asset,

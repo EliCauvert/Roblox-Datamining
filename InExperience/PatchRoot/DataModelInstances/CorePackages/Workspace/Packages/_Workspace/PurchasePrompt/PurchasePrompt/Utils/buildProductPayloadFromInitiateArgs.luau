@@ -1,6 +1,6 @@
 ﻿local ProductTypeEnum = require(script:FindFirstAncestor("PurchasePrompt").types).ProductTypeEnum
 
-return function(p1, InfoType, p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ Line: 10 | Named "buildProductPayloadFromInitiateArgs" ]]
+return function(p1, InfoType, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 	-- upvalues: ProductTypeEnum (copy)
 	local P10 = p10 or {}
 	

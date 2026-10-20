@@ -15,7 +15,7 @@ local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalizat
 local EnhancedVideoStoreModule = require(Parent.Parent.EnhancedVideoStore)
 local UseSignalStateFunction = require(Parent1.SignalsReact).useSignalState
 
-local function LegacyAdLabel(p1) --[[ Line: 27 ]]
+local function LegacyAdLabel(p1)
 	-- upvalues: UseLocalizationFunction (copy), Enums (copy), EnhancedVideoStoreModule (copy), UseSignalStateFunction (copy), ReactModule (copy), AdDisclosureTelemetry (copy), View (copy), Menu (copy), Text (copy), Icon (copy), WhyThisAdModal (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		adLabel = "Feature.EnhancedVideo.Label.Ad",
@@ -35,13 +35,13 @@ local function LegacyAdLabel(p1) --[[ Line: 27 ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	
-	local function _(p2) --[[ Line: 45 | Named "toggleMenu" ]]
+	local function _(p2)
 		-- upvalues: AdDisclosureTelemetry (upval), UseStateResult2 (copy)
 		AdDisclosureTelemetry.logAdDisclosureMenuToggled(p2)
 		UseStateResult2(p2)
 	end
 	
-	local _ = function(p2) --[[ Line: 50 | Named "toggleWhyThisAdModal" ]]
+	local _ = function(p2)
 		-- upvalues: AdDisclosureTelemetry (upval), UseStateResult2_1 (copy)
 		AdDisclosureTelemetry.logAdDisclosureWhyThisAdToggled(p2)
 		UseStateResult2_1(p2)
@@ -56,12 +56,12 @@ local function LegacyAdLabel(p1) --[[ Line: 27 ]]
 			size = Enums.InputSize.Medium,
 			align = Enums.PopoverAlign.End,
 			width = UDim.new(0, 180),
-			onPressedOutside = function() --[[ Line: 66 ]]
+			onPressedOutside = function()
 				-- upvalues: AdDisclosureTelemetry (upval), UseStateResult2 (copy)
 				AdDisclosureTelemetry.logAdDisclosureMenuToggled(false)
 				UseStateResult2(false)
 			end,
-			onActivated = function(p2) --[[ Line: 69 ]]
+			onActivated = function(p2)
 				-- upvalues: AdDisclosureTelemetry (upval), UseStateResult2 (copy), UseStateResult2_1 (copy), p1 (copy)
 				if p2 == "whyThisAd" then
 					AdDisclosureTelemetry.logAdDisclosureMenuToggled(false)
@@ -74,7 +74,7 @@ local function LegacyAdLabel(p1) --[[ Line: 27 ]]
 		}, {
 			AdLabel = ReactModule.createElement(View, {
 				tag = "size-1300-600 bg-over-media-100 radius-small stroke-standard stroke-default row align-x-center align-y-center",
-				onActivated = function() --[[ Line: 79 ]]
+				onActivated = function()
 					-- upvalues: UseStateResult (copy), AdDisclosureTelemetry (upval), UseStateResult2 (copy)
 					local NoUseStateResult = not UseStateResult
 					AdDisclosureTelemetry.logAdDisclosureMenuToggled(NoUseStateResult)
@@ -97,7 +97,7 @@ local function LegacyAdLabel(p1) --[[ Line: 27 ]]
 		WhyThisAdModal = if UseStateResult1 then ReactModule.createElement(WhyThisAdModal, {
 			adDisclosureBody = if UseSignalStateResult == "" then UseLocalizationResult.errorAdDisclosureText else UseSignalStateResult,
 			showAdPreferencesUrl = UseSignalStateResult1,
-			onClose = function() --[[ Line: 105 ]]
+			onClose = function()
 				-- upvalues: AdDisclosureTelemetry (upval), UseStateResult2_1 (copy)
 				AdDisclosureTelemetry.logAdDisclosureWhyThisAdToggled(false)
 				UseStateResult2_1(false)
@@ -106,7 +106,7 @@ local function LegacyAdLabel(p1) --[[ Line: 27 ]]
 	})
 end
 
-local v1 = if FFlagLuaAppEnhancedVideoAdLabelPropUpdateModule then function(p1) --[[ Line: 114 ]]
+local v1 = if FFlagLuaAppEnhancedVideoAdLabelPropUpdateModule then function(p1)
 	-- upvalues: EnhancedVideoStoreModule (copy), UseSignalStateFunction (copy), ReactModule (copy), AdLabel (copy)
 	local EnhancedVideoStoreModuleResult = EnhancedVideoStoreModule(false)
 	

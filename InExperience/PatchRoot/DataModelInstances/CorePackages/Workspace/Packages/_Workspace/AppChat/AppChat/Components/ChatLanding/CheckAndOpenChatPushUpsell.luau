@@ -18,37 +18,37 @@ local SetupPushNotificationsUpsell = NotificationsUpsellModule.setupPushNotifica
 local NotificationsUpsellConstants = NotificationsUpsellModule.NotificationsUpsellConstants
 local GetFStringPushUpsellChatVariantNameFunction = require(Parent.SharedFlags).GetFStringPushUpsellChatVariantName
 
-return function() --[[ Line: 27 | Named "CheckAndOpenChatPushUpsell" ]]
+return function()
 	-- upvalues: UseNavigationFocusFunction (copy), UseNavigationFunction (copy), UseChatIsVisibleModule (copy), UseIsInExperienceModule (copy), ReactModule (copy), UseUserExperimentFunction (copy), AppUserLayers (copy), GetFStringPushUpsellChatVariantNameFunction (copy), RoactNavigationModule (copy), SetupPushNotificationsUpsell (copy), NotificationsUpsellConstants (copy), IXPService (copy), Default (copy), PushUpsellEventConfig (copy), ModalEventConstants (copy), AppPage (copy)
 	local UseNavigationFocusResult = UseNavigationFocusFunction()
 	local UseNavigationResult = UseNavigationFunction()
 	local UseChatIsVisibleModuleResult = UseChatIsVisibleModule()
 	local UseIsInExperienceModuleResult = UseIsInExperienceModule()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseUserExperimentResult = UseUserExperimentFunction({ AppUserLayers.SocialAppChat }, function(p1) --[[ Line: 36 ]]
+	local UseUserExperimentResult = UseUserExperimentFunction({ AppUserLayers.SocialAppChat }, function(p1)
 		-- upvalues: AppUserLayers (upval), GetFStringPushUpsellChatVariantNameFunction (upval)
 		return {
 			pushUpsellChatVariant = (p1[AppUserLayers.SocialAppChat] or {})[GetFStringPushUpsellChatVariantNameFunction()] or -1
 		}
 	end)
-	ReactModule.useEffect(function() --[[ Line: 45 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseNavigationResult (copy), RoactNavigationModule (upval), UseStateResult2 (copy)
-		local AddListenerResult = UseNavigationResult.addListener(RoactNavigationModule.Events.WillBlur, function(p1) --[[ Line: 46 ]]
+		local AddListenerResult = UseNavigationResult.addListener(RoactNavigationModule.Events.WillBlur, function(p1)
 			-- upvalues: UseStateResult2 (upval)
 			if p1.action.routeName == "ChatConversation" then
 				UseStateResult2(true)
 			end
 		end)
 		
-		return function() --[[ Line: 53 ]]
+		return function()
 			-- upvalues: AddListenerResult (copy)
 			AddListenerResult.remove()
 		end
 	end, {})
 	
-	local function _() --[[ Line: 58 | Named "showUpsellOnChatLanding" ]]
+	local function _()
 		-- upvalues: SetupPushNotificationsUpsell (upval), NotificationsUpsellConstants (upval), IXPService (upval), AppUserLayers (upval), Default (upval), PushUpsellEventConfig (upval), ModalEventConstants (upval), AppPage (upval)
-		SetupPushNotificationsUpsell.ShouldShowUpsell(NotificationsUpsellConstants.ModalKey.PushUpsellChat):andThen(function(Result) --[[ Line: 59 ]]
+		SetupPushNotificationsUpsell.ShouldShowUpsell(NotificationsUpsellConstants.ModalKey.PushUpsellChat):andThen(function(Result)
 			-- upvalues: IXPService (upval), AppUserLayers (upval), Default (upval), PushUpsellEventConfig (upval), ModalEventConstants (upval), AppPage (upval), SetupPushNotificationsUpsell (upval), NotificationsUpsellConstants (upval)
 			if Result then
 				IXPService:LogUserLayerExposure(AppUserLayers.SocialAppChat)
@@ -63,11 +63,11 @@ return function() --[[ Line: 27 | Named "CheckAndOpenChatPushUpsell" ]]
 		end)
 	end
 	
-	local _ = function() --[[ Line: 73 | Named "showUpsellWhenReturnFromConversation" ]]
+	local _ = function()
 		-- upvalues: UseStateResult (copy), UseStateResult2 (copy), SetupPushNotificationsUpsell (upval), NotificationsUpsellConstants (upval), IXPService (upval), AppUserLayers (upval), Default (upval), PushUpsellEventConfig (upval), ModalEventConstants (upval)
 		if UseStateResult then
 			UseStateResult2(false)
-			SetupPushNotificationsUpsell.ShouldShowUpsell(NotificationsUpsellConstants.ModalKey.PushUpsellChat):andThen(function(Result) --[[ Line: 79 ]]
+			SetupPushNotificationsUpsell.ShouldShowUpsell(NotificationsUpsellConstants.ModalKey.PushUpsellChat):andThen(function(Result)
 				-- upvalues: IXPService (upval), AppUserLayers (upval), Default (upval), PushUpsellEventConfig (upval), ModalEventConstants (upval), SetupPushNotificationsUpsell (upval), NotificationsUpsellConstants (upval)
 				if Result then
 					IXPService:LogUserLayerExposure(AppUserLayers.SocialAppChat)
@@ -85,11 +85,11 @@ return function() --[[ Line: 27 | Named "CheckAndOpenChatPushUpsell" ]]
 		end
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 93 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseChatIsVisibleModuleResult (copy), UseNavigationFocusResult (copy), UseIsInExperienceModuleResult (copy), UseUserExperimentResult (copy), SetupPushNotificationsUpsell (upval), NotificationsUpsellConstants (upval), IXPService (upval), AppUserLayers (upval), Default (upval), PushUpsellEventConfig (upval), ModalEventConstants (upval), AppPage (upval), UseStateResult (copy), UseStateResult2 (copy)
 		if not UseChatIsVisibleModuleResult or not UseNavigationFocusResult or UseIsInExperienceModuleResult or UseUserExperimentResult.pushUpsellChatVariant == nil or UseUserExperimentResult.pushUpsellChatVariant < 0 then return end
 		if UseUserExperimentResult.pushUpsellChatVariant == 1 then
-			SetupPushNotificationsUpsell.ShouldShowUpsell(NotificationsUpsellConstants.ModalKey.PushUpsellChat):andThen(function(Result) --[[ Line: 59 ]]
+			SetupPushNotificationsUpsell.ShouldShowUpsell(NotificationsUpsellConstants.ModalKey.PushUpsellChat):andThen(function(Result)
 				-- upvalues: IXPService (upval), AppUserLayers (upval), Default (upval), PushUpsellEventConfig (upval), ModalEventConstants (upval), AppPage (upval), SetupPushNotificationsUpsell (upval), NotificationsUpsellConstants (upval)
 				if Result then
 					IXPService:LogUserLayerExposure(AppUserLayers.SocialAppChat)
@@ -108,7 +108,7 @@ return function() --[[ Line: 27 | Named "CheckAndOpenChatPushUpsell" ]]
 		if UseUserExperimentResult.pushUpsellChatVariant == 2 then
 			if not UseStateResult then return end
 			UseStateResult2(false)
-			SetupPushNotificationsUpsell.ShouldShowUpsell(NotificationsUpsellConstants.ModalKey.PushUpsellChat):andThen(function(Result) --[[ Line: 79 ]]
+			SetupPushNotificationsUpsell.ShouldShowUpsell(NotificationsUpsellConstants.ModalKey.PushUpsellChat):andThen(function(Result)
 				-- upvalues: IXPService (upval), AppUserLayers (upval), Default (upval), PushUpsellEventConfig (upval), ModalEventConstants (upval), SetupPushNotificationsUpsell (upval), NotificationsUpsellConstants (upval)
 				if Result then
 					IXPService:LogUserLayerExposure(AppUserLayers.SocialAppChat)

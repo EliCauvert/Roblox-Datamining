@@ -13,7 +13,7 @@ local TEAMLAYOUTMULTIPLIER = require(Parent.Common.Constants).TEAM_LAYOUT_MULTIP
 local Signal = SignalsModule.createSignal({})
 local config = { Selectable = true }
 
-local function buildEntryViewElement(p1, p2, LayoutOrder, OnActivated, RowRef, Selection) --[[ Line: 45 ]]
+local function buildEntryViewElement(p1, p2, LayoutOrder, OnActivated, RowRef, Selection)
 	-- upvalues: ReactModule (copy), PeopleCellModule (copy), ResolveDisplayNameModule (copy), StatCellModule (copy), LeaderboardRowShellModule (copy)
 	local RowHeight = p1.rowHeight
 	local StatColumns = p1.statColumns or {}
@@ -46,10 +46,10 @@ local function buildEntryViewElement(p1, p2, LayoutOrder, OnActivated, RowRef, S
 	}, config)
 end
 
-local function useEntryViewCore(p3) --[[ Line: 88 ]]
+local function useEntryViewCore(p3)
 	-- upvalues: ReactModule (copy), SignalsReactModule (copy), Signal (copy), SignalsModule (copy), TEAMLAYOUTMULTIPLIER (copy)
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 91 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p3 (copy), UseRefResult (copy)
 		if p3.onActivated then
 			p3.onActivated(p3.player, if UseRefResult.current then UseRefResult.current.AbsolutePosition else nil, UseRefResult.current)
@@ -58,21 +58,21 @@ local function useEntryViewCore(p3) --[[ Line: 88 ]]
 	local PlayerEntry = p3.leaderboardStore.getPlayerEntry(p3.player, false)
 	SignalsReactModule.useSignalState(if PlayerEntry then PlayerEntry.stats.getAllData else Signal)
 	
-	return UseRefResult, PlayerEntry, SignalsReactModule.useSignalBinding((ReactModule.useMemo(function() --[[ Line: 105 ]]
+	return UseRefResult, PlayerEntry, SignalsReactModule.useSignalBinding((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), PlayerEntry (copy), p3 (copy), TEAMLAYOUTMULTIPLIER (upval)
-		return SignalsModule.createComputed(function(p4) --[[ Line: 106 ]]
+		return SignalsModule.createComputed(function(p4)
 			-- upvalues: PlayerEntry (upval), p3 (upval), TEAMLAYOUTMULTIPLIER (upval)
 			return if PlayerEntry and p3.teamOrder ~= nil then p3.teamOrder * TEAMLAYOUTMULTIPLIER + PlayerEntry.order(p4) else p3.layoutOrder or 0
 		end)
 	end, { PlayerEntry, p3.teamOrder, p3.layoutOrder }))), UseResult
 end
 
-return ReactModule.memo(function(p3) --[[ Line: 120 | Named "EntryView" ]]
+return ReactModule.memo(function(p3)
 	-- upvalues: useEntryViewCore (copy), ReactModule (copy), buildEntryViewElement (copy), config (copy)
 	local UseEntryViewCoreResult, UseEntryViewCoreResult2, UseEntryViewCoreResult3, UseEntryViewCoreResult4 = useEntryViewCore(p3)
 	local RowRefForwardFunction = p3.rowRefForward
 	
-	return buildEntryViewElement(p3, UseEntryViewCoreResult2, UseEntryViewCoreResult3, UseEntryViewCoreResult4, ReactModule.useCallback(function(Current) --[[ Line: 124 ]]
+	return buildEntryViewElement(p3, UseEntryViewCoreResult2, UseEntryViewCoreResult3, UseEntryViewCoreResult4, ReactModule.useCallback(function(Current)
 		-- upvalues: UseEntryViewCoreResult (copy), RowRefForwardFunction (copy)
 		UseEntryViewCoreResult.current = Current
 		

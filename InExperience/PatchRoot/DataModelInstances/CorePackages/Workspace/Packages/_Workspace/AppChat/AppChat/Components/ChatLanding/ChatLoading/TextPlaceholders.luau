@@ -5,9 +5,9 @@ local Skeleton = require(Parent.Foundation).Skeleton
 local TextPlaceholders = RoactModule.PureComponent:extend("TextPlaceholders")
 TextPlaceholders.defaultProps = { LayoutOrder = 0, avatarSize = 60, avatarCellWidth = 60 }
 
-function TextPlaceholders.render(p1) --[[ Line: 18 ]]
+function TextPlaceholders.render(p1)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy), Skeleton (copy)
-	return WithStyleFunction(function(_) --[[ Line: 19 ]]
+	return WithStyleFunction(function(_)
 		-- upvalues: RoactModule (upval), p1 (copy), Skeleton (upval)
 		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,

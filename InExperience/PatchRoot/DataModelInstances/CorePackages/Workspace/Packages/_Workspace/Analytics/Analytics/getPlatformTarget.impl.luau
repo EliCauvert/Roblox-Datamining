@@ -1,9 +1,9 @@
-﻿return function(UserInputService) --[[ Line: 1 ]]
-	return function(): string --[[ Line: 2 | Named "getPlatformTarget" ]]
+﻿return function(UserInputService)
+	return function(): string
 		-- upvalues: UserInputService (copy)
 		local v1 = "unknownLua"
 		local None = Enum.Platform.None
-		pcall(function() --[[ Line: 8 ]]
+		pcall(function()
 			-- upvalues: None (ref), UserInputService (upval)
 			None = UserInputService:GetPlatform()
 		end)

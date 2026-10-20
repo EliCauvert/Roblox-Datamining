@@ -12,7 +12,7 @@ local config = {
 }
 local List = { "Unspecified", "Submit", "Abandon" }
 
-return function(p1, Value) --[[ Line: 22 | Named "submitAnalytics" ]]
+return function(p1, Value)
 	-- upvalues: NewResult (copy), config (copy), CryoModule (copy), List (copy), EventIngest (copy), EventIngestService (copy), AbuseReportAnalytics (copy)
 	local Diag = NewResult.Diag
 	Diag:reportStats(p1.context .. "_" .. config.ReportTimeSpent, p1.accumulated_time_ms)

@@ -12,7 +12,7 @@ local FFlagExpChatSelectTextChatTabByName = SharedFlagsModule.FFlagExpChatSelect
 local GetChannelTabsStoreModule = require(ExpChat.Stores.GetChannelTabsStore)
 local FFlagExpChatGlobalTabDefaultModule = require(ExpChat.Flags.FFlagExpChatGlobalTabDefault)
 
-return function(Callback: (any) -> (), p1) --[[ Line: 41 | Named "selectTabByType" ]]
+return function(Callback: (any) -> (), p1)
 	-- upvalues: FFlagExpChatGlobalTabDefaultModule (copy), UniverseChatChannelSelectedFunction (copy), FFlagExpChatUseChannelTabsStore (copy), FFlagExpChatEnableFriendsTab (copy), FriendsChatChannelSelectedFunction (copy), FFlagExpChatSelectTextChatTabByName (copy), TextChatChannelSelectedFunction (copy), TargetTextChannelPropertyChangedFunction (copy), GetChannelTabsStoreModule (copy)
 	local ChannelName = p1.channelName
 	local TabType = p1.tabType

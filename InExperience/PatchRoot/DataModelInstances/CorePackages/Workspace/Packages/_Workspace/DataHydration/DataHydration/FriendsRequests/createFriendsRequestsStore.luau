@@ -16,19 +16,19 @@ local FriendsStoreModule = require(DataHydration.Friends.FriendsStore)
 local FriendsRequestsPageSize = game:DefineFastInt("FriendsRequestsPageSize", 25)
 local FriendsRequestsCacheTtlSec = game:DefineFastInt("FriendsRequestsCacheTtlSec", 0)
 
-local function _(p1: number): number --[[ Line: 48 | Named "getCacheTTL" ]]
+local function _(p1: number): number
 	return if p1 > 0 then p1 else 1e999
 end
 
-local _ = function(p1) --[[ Line: 52 | Named "normalizeId" ]]
+local _ = function(p1)
 	return if p1 == nil then nil else tostring(p1)
 end
 
-local _ = function(p1) --[[ Line: 59 | Named "normalizeCursor" ]]
+local _ = function(p1)
 	return if p1 == nil or p1 == "" then nil else p1
 end
 
-local function normalizeFriendRequest(p1) --[[ Line: 66 ]]
+local function normalizeFriendRequest(p1)
 	local Id = p1.id
 	local Text = if Id == nil then nil else tostring(Id)
 	
@@ -57,7 +57,7 @@ local function normalizeFriendRequest(p1) --[[ Line: 66 ]]
 	}
 end
 
-local function normalizeGetFriendRequestsResponse(p2) --[[ Line: 96 ]]
+local function normalizeGetFriendRequestsResponse(p2)
 	-- upvalues: normalizeFriendRequest (copy)
 	local Requests = {}
 	local Data = if p2 and p2.data then p2.data else {}
@@ -78,7 +78,7 @@ local function normalizeGetFriendRequestsResponse(p2) --[[ Line: 96 ]]
 	}
 end
 
-local _ = function(p3, p4) --[[ Line: 116 | Named "mergeRequestsWithoutDuplicates" ]]
+local _ = function(p3, p4)
 	-- upvalues: FFlagAddFriendsPageTrustedFriendRequestSection (copy), FFlagFriendsRequestsMergeListsWithoutDuplicates (copy), MergeListsWithoutDuplicatesFunction (copy)
 	if not FFlagAddFriendsPageTrustedFriendRequestSection and not FFlagFriendsRequestsMergeListsWithoutDuplicates then
 		error("mergeRequestsWithoutDuplicates requires FFlagAddFriendsPageTrustedFriendRequestSection or FFlagFriendsRequestsMergeListsWithoutDuplicates to be enabled")
@@ -86,7 +86,7 @@ local _ = function(p3, p4) --[[ Line: 116 | Named "mergeRequestsWithoutDuplicate
 	return MergeListsWithoutDuplicatesFunction(p3, p4, "id")
 end
 
-local function updateFriendshipStatusesForPage(p3) --[[ Line: 133 ]]
+local function updateFriendshipStatusesForPage(p3)
 	-- upvalues: FFlagEnableGetFriendshipStatus (copy), FriendsStoreModule (copy)
 	if not FFlagEnableGetFriendshipStatus then return end
 	local GetResult = FriendsStoreModule.get()
@@ -96,7 +96,7 @@ local function updateFriendshipStatusesForPage(p3) --[[ Line: 133 ]]
 	end
 end
 
-local function mergeFriendsRequestsPage(DataResult, p4, NextPageCursor) --[[ Line: 144 ]]
+local function mergeFriendsRequestsPage(DataResult, p4, NextPageCursor)
 	-- upvalues: FFlagAddFriendsPageTrustedFriendRequestSection (copy), FFlagFriendsRequestsMergeListsWithoutDuplicates (copy), MergeListsWithoutDuplicatesFunction (copy)
 	if not DataResult then
 		return {
@@ -122,7 +122,7 @@ local function mergeFriendsRequestsPage(DataResult, p4, NextPageCursor) --[[ Lin
 	return t
 end
 
-local _ = function(p4) --[[ Line: 172 | Named "resolveLocalUserId" ]]
+local _ = function(p4)
 	-- upvalues: LocalUserIdStore (copy), GetLocalPlayerUserIdFunction (copy)
 	local CurrentUserId = LocalUserIdStore.getCurrentUserId(p4)
 	
@@ -135,7 +135,7 @@ local _ = function(p4) --[[ Line: 172 | Named "resolveLocalUserId" ]]
 	end
 end
 
-return function() --[[ Line: 181 | Named "createFriendsRequestsStore" ]]
+return function()
 	-- upvalues: CreateDataCacheModule (copy), FriendsRequestsCacheTtlSec (copy), CreateDataResolverModule (copy), RequestsModule (copy), FriendsRequestsPageSize (copy), normalizeGetFriendRequestsResponse (copy), updateFriendshipStatusesForPage (copy), mergeFriendsRequestsPage (copy), LocalUserIdStore (copy), GetLocalPlayerUserIdFunction (copy), DataStatus (copy), FriendsStoreModule (copy)
 	local DataCacheModule = CreateDataCacheModule(if FriendsRequestsCacheTtlSec > 0 then FriendsRequestsCacheTtlSec else 1e999)
 	local DataCacheModule1 = CreateDataCacheModule()
@@ -143,7 +143,7 @@ return function() --[[ Line: 181 | Named "createFriendsRequestsStore" ]]
 	local Flag = false
 	local v1 = nil
 	
-	local function _(p4) --[[ Line: 217 | Named "stageSessionId" ]]
+	local function _(p4)
 		-- upvalues: v1 (ref)
 		v1 = if p4 == "" then nil else p4
 	end
@@ -152,19 +152,19 @@ return function() --[[ Line: 181 | Named "createFriendsRequestsStore" ]]
 		supportsMultiGet = false,
 		replaceItems = true,
 		cache = DataCacheModule,
-		fetchFn = function(_, p4) --[[ Line: 225 ]]
+		fetchFn = function(_, p4)
 			-- upvalues: Flag (ref), RequestsModule (upval), FriendsRequestsPageSize (upval), v1 (ref), normalizeGetFriendRequestsResponse (upval), updateFriendshipStatusesForPage (upval), mergeFriendsRequestsPage (upval)
 			local DataResult = if Flag then nil else p4.data(false)
 			Flag = false
 			local NextPageCursor = if DataResult then DataResult.nextPageCursor else nil
 			
-			return RequestsModule.GetFriendsRequests(NextPageCursor, FriendsRequestsPageSize, v1):andThen(function(Result) --[[ Line: 232 ]]
+			return RequestsModule.GetFriendsRequests(NextPageCursor, FriendsRequestsPageSize, v1):andThen(function(Result)
 				-- upvalues: normalizeGetFriendRequestsResponse (upval), updateFriendshipStatusesForPage (upval), mergeFriendsRequestsPage (upval), DataResult (copy), NextPageCursor (copy)
 				local NormalizeGetFriendRequestsResponseResult = normalizeGetFriendRequestsResponse(Result)
 				updateFriendshipStatusesForPage(NormalizeGetFriendRequestsResponseResult)
 				
 				return (mergeFriendsRequestsPage(DataResult, NormalizeGetFriendRequestsResponseResult, NextPageCursor))
-			end):catch(function(Err) --[[ Line: 239 ]]
+			end):catch(function(Err)
 				error(Err)
 			end)
 		end
@@ -173,9 +173,9 @@ return function() --[[ Line: 181 | Named "createFriendsRequestsStore" ]]
 		supportsMultiGet = false,
 		replaceItems = true,
 		cache = DataCacheModule1,
-		fetchFn = function(_) --[[ Line: 249 ]]
+		fetchFn = function(_)
 			-- upvalues: RequestsModule (upval)
-			return RequestsModule.GetFriendRequestsCount():andThen(function(Result) --[[ Line: 250 ]]
+			return RequestsModule.GetFriendRequestsCount():andThen(function(Result)
 				return if Result and Result.count then Result.count else 0
 			end)
 		end
@@ -184,16 +184,16 @@ return function() --[[ Line: 181 | Named "createFriendsRequestsStore" ]]
 		supportsMultiGet = false,
 		replaceItems = true,
 		cache = DataCacheModule2,
-		fetchFn = function(_) --[[ Line: 260 ]]
+		fetchFn = function(_)
 			-- upvalues: RequestsModule (upval)
-			return RequestsModule.GetNewFriendRequestsCount():andThen(function(Result) --[[ Line: 261 ]]
+			return RequestsModule.GetNewFriendRequestsCount():andThen(function(Result)
 				return if Result and Result.count then Result.count else 0
 			end)
 		end
 	})
 	
 	return {
-		getFriendsRequests = function(p4) --[[ Line: 315 ]]
+		getFriendsRequests = function(p4)
 			-- upvalues: LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), DataResolverModule (copy), v1 (ref), Flag (ref)
 			local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
 			local CurrentUserId1 = nil
@@ -229,7 +229,7 @@ return function() --[[ Line: 181 | Named "createFriendsRequestsStore" ]]
 			
 			return DataResolverModule.getAndFetchItem(CurrentUserId1)
 		end,
-		fetchMoreFriendsRequests = function(p4) --[[ Line: 267 ]]
+		fetchMoreFriendsRequests = function(p4)
 			-- upvalues: LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), DataResolverModule (copy), DataStatus (upval), v1 (ref)
 			local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
 			local CurrentUserId1 = nil
@@ -252,7 +252,7 @@ return function() --[[ Line: 181 | Named "createFriendsRequestsStore" ]]
 				return
 			end
 		end,
-		refetchFriendRequests = function(p4) --[[ Line: 288 ]]
+		refetchFriendRequests = function(p4)
 			-- upvalues: LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), DataResolverModule (copy), v1 (ref), Flag (ref)
 			local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
 			local CurrentUserId1 = nil
@@ -271,9 +271,9 @@ return function() --[[ Line: 181 | Named "createFriendsRequestsStore" ]]
 				return
 			end
 		end,
-		declineAllFriendRequests = function() --[[ Line: 300 ]]
+		declineAllFriendRequests = function()
 			-- upvalues: RequestsModule (upval), LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), DataCacheModule (copy), DataCacheModule1 (copy)
-			return RequestsModule.DeclineAllFriendRequests():andThen(function(Result) --[[ Line: 301 ]]
+			return RequestsModule.DeclineAllFriendRequests():andThen(function(Result)
 				-- upvalues: LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), DataCacheModule (upval), DataCacheModule1 (upval)
 				local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
 				local CurrentUserId1 = nil
@@ -290,7 +290,7 @@ return function() --[[ Line: 181 | Named "createFriendsRequestsStore" ]]
 				return Result
 			end)
 		end,
-		removeFriendRequestByUserId = function(Id) --[[ Line: 376 ]]
+		removeFriendRequestByUserId = function(Id)
 			-- upvalues: LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), DataResolverModule (copy), DataCacheModule (copy)
 			local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
 			local CurrentUserId1 = nil
@@ -324,7 +324,7 @@ return function() --[[ Line: 181 | Named "createFriendsRequestsStore" ]]
 				return
 			end
 		end,
-		appendNewUserId = function(p4) --[[ Line: 401 ]]
+		appendNewUserId = function(p4)
 			-- upvalues: LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), DataResolverModule (copy), DataCacheModule (copy), FriendsStoreModule (upval)
 			local Text = if p4 == nil then nil else tostring(p4)
 			
@@ -363,7 +363,7 @@ return function() --[[ Line: 181 | Named "createFriendsRequestsStore" ]]
 			end
 			FriendsStoreModule.get().UpdateFriendshipStatus(Text, Enum.FriendStatus.FriendRequestReceived)
 		end,
-		getFriendsRequestCount = function(p5) --[[ Line: 336 ]]
+		getFriendsRequestCount = function(p5)
 			-- upvalues: LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), DataResolverModule1 (copy)
 			local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
 			local CurrentUserId1 = nil
@@ -392,7 +392,7 @@ return function() --[[ Line: 181 | Named "createFriendsRequestsStore" ]]
 			end
 			return DataResolverModule1.getAndFetchItem(CurrentUserId1)
 		end,
-		refetchFriendRequestCount = function() --[[ Line: 332 ]]
+		refetchFriendRequestCount = function()
 			-- upvalues: DataResolverModule1 (copy), LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval)
 			local FetchItemFunction: (any) -> () = DataResolverModule1.fetchItem
 			local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
@@ -406,7 +406,7 @@ return function() --[[ Line: 181 | Named "createFriendsRequestsStore" ]]
 			end
 			FetchItemFunction(CurrentUserId1)
 		end,
-		getNewFriendsRequestCount = function(p5) --[[ Line: 352 ]]
+		getNewFriendsRequestCount = function(p5)
 			-- upvalues: LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), DataResolverModule2 (copy)
 			local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
 			local CurrentUserId1 = nil
@@ -419,7 +419,7 @@ return function() --[[ Line: 181 | Named "createFriendsRequestsStore" ]]
 			end
 			return if p5 and p5.skipFetch then DataResolverModule2.getCachedItem(CurrentUserId1) else DataResolverModule2.getAndFetchItem(CurrentUserId1)
 		end,
-		refetchNewFriendRequestCount = function() --[[ Line: 362 ]]
+		refetchNewFriendRequestCount = function()
 			-- upvalues: DataResolverModule2 (copy), LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval)
 			local FetchItemFunction: (any) -> () = DataResolverModule2.fetchItem
 			local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
@@ -433,9 +433,9 @@ return function() --[[ Line: 181 | Named "createFriendsRequestsStore" ]]
 			end
 			FetchItemFunction(CurrentUserId1)
 		end,
-		clearNewFriendRequest = function() --[[ Line: 370 ]]
+		clearNewFriendRequest = function()
 			-- upvalues: RequestsModule (upval), DataCacheModule2 (copy), LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval)
-			return RequestsModule.ClearNewFriendRequests():andThen(function() --[[ Line: 371 ]]
+			return RequestsModule.ClearNewFriendRequests():andThen(function()
 				-- upvalues: DataCacheModule2 (upval), LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval)
 				local ReplaceItemFunction: (any, any) -> () = DataCacheModule2.replaceItem
 				local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
@@ -450,7 +450,7 @@ return function() --[[ Line: 181 | Named "createFriendsRequestsStore" ]]
 				ReplaceItemFunction(CurrentUserId1, 0)
 			end)
 		end,
-		clearNewFriendRequestCount = function() --[[ Line: 366 ]]
+		clearNewFriendRequestCount = function()
 			-- upvalues: DataCacheModule2 (copy), LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval)
 			local ReplaceItemFunction: (any, any) -> () = DataCacheModule2.replaceItem
 			local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
@@ -464,13 +464,13 @@ return function() --[[ Line: 181 | Named "createFriendsRequestsStore" ]]
 			end
 			ReplaceItemFunction(CurrentUserId1, 0)
 		end,
-		clear = function() --[[ Line: 440 ]]
+		clear = function()
 			-- upvalues: DataResolverModule (copy), DataResolverModule1 (copy), DataResolverModule2 (copy)
 			DataResolverModule.clear()
 			DataResolverModule1.clear()
 			DataResolverModule2.clear()
 		end,
-		dispose = function() --[[ Line: 446 ]]
+		dispose = function()
 			-- upvalues: DataResolverModule (copy), DataResolverModule1 (copy), DataResolverModule2 (copy)
 			DataResolverModule.dispose()
 			DataResolverModule1.dispose()

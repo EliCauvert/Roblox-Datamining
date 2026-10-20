@@ -6,7 +6,7 @@ local config = {
 	[DiscountType.RobloxPlusSubscription] = true
 }
 
-local function isValidRawDiscount(p1): boolean --[[ Line: 14 ]]
+local function isValidRawDiscount(p1): boolean
 	-- upvalues: FFlagNormalizePriceDiscountAcceptLowercaseModule (copy)
 	if type(p1) ~= "table" then
 		return false
@@ -33,7 +33,7 @@ local function isValidRawDiscount(p1): boolean --[[ Line: 14 ]]
 	return true
 end
 
-return function(List) --[[ Line: 48 | Named "normalizePriceDiscountDetails" ]]
+return function(List)
 	-- upvalues: isValidRawDiscount (copy), FFlagNormalizePriceDiscountAcceptLowercaseModule (copy), config (copy), DiscountType (copy)
 	if type(List) ~= "table" or #List == 0 then
 		return {}

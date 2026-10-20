@@ -3,7 +3,7 @@ local HttpService = game:GetService("HttpService")
 local AppStorageJsonCacheUtils = {}
 AppStorageJsonCacheUtils.__index = AppStorageJsonCacheUtils
 
-function AppStorageJsonCacheUtils.new(p1) --[[ Line: 20 ]]
+function AppStorageJsonCacheUtils.new(p1)
 	-- upvalues: AppStorageService (copy), HttpService (copy), AppStorageJsonCacheUtils (copy)
 	local config = {
 		_appStorageService = p1 or AppStorageService,
@@ -15,7 +15,7 @@ function AppStorageJsonCacheUtils.new(p1) --[[ Line: 20 ]]
 	return config
 end
 
-function AppStorageJsonCacheUtils:getCachedJsonForKey(p1, p2) --[[ Line: 30 ]]
+function AppStorageJsonCacheUtils:getCachedJsonForKey(p1, p2)
 	local DecodeInternalResult = nil
 	if self._jsonDecodeCache[p1] == nil or p2 then
 		DecodeInternalResult = self:decodeInternal(p1)
@@ -26,14 +26,14 @@ function AppStorageJsonCacheUtils:getCachedJsonForKey(p1, p2) --[[ Line: 30 ]]
 	return DecodeInternalResult.result
 end
 
-function AppStorageJsonCacheUtils.decodeInternal(p1, p2) --[[ Line: 41 ]]
-	local Success, Result = pcall(function() --[[ Line: 42 ]]
+function AppStorageJsonCacheUtils.decodeInternal(p1, p2)
+	local Success, Result = pcall(function()
 		-- upvalues: p1 (copy), p2 (copy)
 		return p1._appStorageService:GetItem(p2)
 	end)
 	
 	if Success then
-		local Success1, Result1 = pcall(function() --[[ Line: 50 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: p1 (copy), Result (copy)
 			return p1._httpService:JSONDecode(Result)
 		end)

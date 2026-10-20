@@ -16,24 +16,24 @@ local ChartsSortDetailScopeFieldsModule = require(Charts.ChartsSortDetailPage.Ch
 local FetchChartsSortDetailModule = require(Charts.ChartsSortDetailPage.fetchChartsSortDetail)
 local GetChartsSortDetailPageKeyModule = require(Charts.ChartsSortDetailPage.getChartsSortDetailPageKey)
 
-local function _(p1, p2) --[[ Line: 34 | Named "getFromPropsOrNavigationParams" ]]
+local function _(p1, p2)
 	return p1[p2] or p1.navigation and p1.navigation.getParam(p2)
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 38 | Named "ChartsSortDetailPage" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), GetSduiClientPageScopeFunction (copy), ChartsConstantsModule (copy), ChartsPageScopeFieldsModule (copy), GetChartsSortDetailPageKeyModule (copy), UsePageScopeRefFunction (copy), ChartsSortDetailScopeFieldsModule (copy), SduiSurfaceLoadTimeTracker (copy), ChartsSortDetailConstantsModule (copy), FetchChartsSortDetailModule (copy), SduiPageEntryPoint (copy), AppPage (copy), CompositionTags (copy)
 	local SortId = p1.sortId or p1.navigation and p1.navigation.getParam("sortId")
-	local ChartsSortDetailPageKeyModule = GetChartsSortDetailPageKeyModule(SortId, nil, (ReactModule.useMemo(function() --[[ Line: 43 ]]
+	local ChartsSortDetailPageKeyModule = GetChartsSortDetailPageKeyModule(SortId, nil, (ReactModule.useMemo(function()
 		-- upvalues: GetSduiClientPageScopeFunction (upval), ChartsConstantsModule (upval), ChartsPageScopeFieldsModule (upval)
 		return GetSduiClientPageScopeFunction(ChartsConstantsModule.ConfigKey).get(ChartsPageScopeFieldsModule.FilterSelections)
 	end, {})))
 	local PageTimer = p1.pageTimer or p1.navigation and p1.navigation.getParam("pageTimer")
 	UsePageScopeRefFunction(ChartsSortDetailPageKeyModule)
-	ReactModule.useMemo(function() --[[ Line: 50 ]]
+	ReactModule.useMemo(function()
 		-- upvalues: GetSduiClientPageScopeFunction (upval), ChartsSortDetailPageKeyModule (copy), ChartsSortDetailScopeFieldsModule (upval), SortId (copy)
 		GetSduiClientPageScopeFunction(ChartsSortDetailPageKeyModule).set(ChartsSortDetailScopeFieldsModule.SelectedSortId, SortId)
 	end, { ChartsSortDetailPageKeyModule, SortId })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 54 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: PageTimer (copy), SduiSurfaceLoadTimeTracker (upval), ChartsSortDetailPageKeyModule (copy), ChartsSortDetailConstantsModule (upval), GetSduiClientPageScopeFunction (upval)
 		local PageTimer1 = PageTimer or SduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(ChartsSortDetailPageKeyModule, {
 			eventName = ChartsSortDetailConstantsModule.SurfaceLoadTimeEventName,
@@ -43,13 +43,13 @@ return ReactModule.memo(function(p1) --[[ Line: 38 | Named "ChartsSortDetailPage
 		
 		return PageTimer1
 	end, { ChartsSortDetailPageKeyModule, PageTimer })
-	ReactModule.useEffect(function() --[[ Line: 66 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SortId (copy), FetchChartsSortDetailModule (upval), UseMemoResult (copy)
 		if SortId then
 			FetchChartsSortDetailModule(SortId, UseMemoResult)
 		end
 	end, { SortId, UseMemoResult })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 72 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: SortId (copy), SduiSurfaceLoadTimeTracker (upval), ChartsSortDetailPageKeyModule (copy), ChartsSortDetailConstantsModule (upval), FetchChartsSortDetailModule (upval)
 		if SortId then
 			local LoadTimerWithSurfaceLoadTime = SduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(ChartsSortDetailPageKeyModule, {
@@ -60,7 +60,7 @@ return ReactModule.memo(function(p1) --[[ Line: 38 | Named "ChartsSortDetailPage
 			FetchChartsSortDetailModule(SortId, LoadTimerWithSurfaceLoadTime)
 		end
 	end, { SortId, ChartsSortDetailPageKeyModule })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 85 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		return if p1.pageContext then { pageContext = p1.pageContext } else nil
 	end, { p1.pageContext })

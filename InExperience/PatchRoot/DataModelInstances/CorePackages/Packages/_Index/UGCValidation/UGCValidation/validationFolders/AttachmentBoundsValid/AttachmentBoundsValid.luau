@@ -12,7 +12,7 @@ local GetAttachmentCFrameInPartSpaceModule = require(Parent.util.getAttachmentCF
 local GetFStringUGCValidationAttachmentErrorLinkModule = require(Parent.flags.getFStringUGCValidationAttachmentErrorLink)
 local GetFFlagUGCValidateAttachmentBoundsErrorMessageModule = require(Parent.flags.getFFlagUGCValidateAttachmentBoundsErrorMessage)
 
-local function validateInMeshSpace(Name, p1, Bounds, p2, p3, HasFoundAt) --[[ Line: 34 ]]
+local function validateInMeshSpace(Name, p1, Bounds, p2, p3, HasFoundAt)
 	-- upvalues: GetAttachmentCFrameInPartSpaceModule (copy), BoundsDataUtilsModule (copy), ErrorSourceStringsModule (copy), MeshSpaceUtilsModule (copy), GetFFlagUGCValidateAttachmentBoundsErrorMessageModule (copy), PrettyPrintVector3Module (copy), GetFStringUGCValidationAttachmentErrorLinkModule (copy)
 	local ScaledCframe = p2.cframe * GetAttachmentCFrameInPartSpaceModule(Name)
 	local BoundsCenters = BoundsDataUtilsModule.calculateBoundsCenters(p2.boundsData)
@@ -61,7 +61,7 @@ local function validateInMeshSpace(Name, p1, Bounds, p2, p3, HasFoundAt) --[[ Li
 	end
 end
 
-local function checkAll(Object, Head, p4, p5) --[[ Line: 105 ]]
+local function checkAll(Object, Head, p4, p5)
 	-- upvalues: R15plusUtilsModule (copy), validateInMeshSpace (copy)
 	local Name = Object:FindFirstChild(Head.rigAttachmentToParent.name, R15plusUtilsModule.checkFlagEnabledForAllowHrd())
 	
@@ -89,7 +89,7 @@ return {
 	},
 	conditionalData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
 	expectedFailures = {},
-	run = function(p6, p7) --[[ Line: 141 ]]
+	run = function(p6, p7)
 		-- upvalues: ConstantsModule (copy), ValidationEnumsModule (copy), BoundsCalculatorModule (copy), ErrorSourceStringsModule (copy), checkAll (copy)
 		local RootInstance = p7.rootInstance
 		local AssetType = p7.uploadEnum.assetType

@@ -27,7 +27,7 @@ local FFlagTFClassmatesProfileInsight = require(Parent.SharedFlags).FFlagTFClass
 local SocialMetadataSectionMigrateUserProfileToSignals = game:DefineFastFlag("SocialMetadataSectionMigrateUserProfileToSignals", false)
 local GetResult = if SocialMetadataSectionMigrateUserProfileToSignals then UserProfilesModule.Stores.UserProfileStore.get() else nil
 
-return function(p1) --[[ Line: 52 ]]
+return function(p1)
 	-- upvalues: SocialMetadataSectionMigrateUserProfileToSignals (copy), UserProfilesModule (copy), ReactModule (copy), SignalsModule (copy), GetResult (copy), SignalsReactModule (copy), GetFFlagEnableProfileInsightsApolloMigrationFunction (copy), UseSignalProfileInsightsByUserIdFunction (copy), UseProfileInsightsByUserIdsFunction (copy), GetProfileInsightsByUserIdFromDataFunction (copy), IsCustomNilModule (copy), UseLocalizationFunction (copy), AmpApiProvider (copy), FStringParentLinkAmpNameSpace (copy), AccessResponseEnum (copy), FoundationModule (copy), View (copy), UserTile (copy), LayoutMode (copy), FFlagTFClassmatesProfileInsight (copy), Skeleton (copy), FFlagProfilePlatformAddTC (copy), SocialMetadataIconsAndTextsSectionModule (copy)
 	local UseUserProfilesFetchResult = if SocialMetadataSectionMigrateUserProfileToSignals then nil else UserProfilesModule.Hooks.useUserProfilesFetch({
 		userIds = { p1.userId },
@@ -41,9 +41,9 @@ return function(p1) --[[ Line: 52 ]]
 		Username = UserProfilesModule.Selectors.getUsernameFromId(UseUserProfilesFetchResult.data, p1.userId) or ""
 	end
 	if SocialMetadataSectionMigrateUserProfileToSignals then
-		local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 72 ]]
+		local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 			-- upvalues: SignalsModule (upval), GetResult (upval), p1 (copy)
-			return SignalsModule.createComputed(function(p2) --[[ Line: 73 ]]
+			return SignalsModule.createComputed(function(p2)
 				-- upvalues: GetResult (upval), p1 (upval)
 				local v1 = GetResult and GetResult.fetchNamesByUserIds({ (tostring(p1.userId)) })(p2)
 				local Entry = v1 and (v1.data and v1.data[1])
@@ -86,17 +86,17 @@ return function(p1) --[[ Line: 52 ]]
 	local UseStateResult = nil
 	local UseStateResult2 = nil
 	UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 141 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), AmpApiProvider (upval), FStringParentLinkAmpNameSpace (upval), UseStateResult2 (ref), AccessResponseEnum (upval)
 		UseStateResult2(AmpApiProvider.upsellFeatureAccess("IsLinkedChildOf", {}, FStringParentLinkAmpNameSpace, {
 			{ name = "otherUser", type = "UserId", value = p1.userId }
 		}).access == AccessResponseEnum.Granted)
 	end, { p1.userId })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 154 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseLocalizationResult (copy)
 		return if UseLocalizationResult.userAgeVerifiedBracket then ` • {UseLocalizationResult.userAgeVerifiedBracket}` else nil
 	end, { UseLocalizationResult.userAgeVerifiedBracket })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 192 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: IsCustomNilModule (upval), t (ref), FFlagTFClassmatesProfileInsight (upval)
 		return {
 			mutualFriends = if IsCustomNilModule(t.mutualFriends) then nil else t.mutualFriends,
@@ -116,7 +116,7 @@ return function(p1) --[[ Line: 52 ]]
 			["gap-large padding-large"] = not p1.isVerticallyConstrained
 		}
 	}, {
-		AvatarWithNames = ReactModule.useMemo(function() --[[ Line: 165 ]]
+		AvatarWithNames = ReactModule.useMemo(function()
 			-- upvalues: FoundationModule (upval), ReactModule (upval), View (upval), UserTile (upval), p1 (copy), LayoutMode (upval), UseStateResult (ref), UseLocalizationResult (copy), CombinedName (ref), Username (ref), UseMemoResult (copy)
 			local UseTokensResult = FoundationModule.Hooks.useTokens()
 			

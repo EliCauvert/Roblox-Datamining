@@ -7,12 +7,12 @@ local _ = require(Parent.Configs.ConfigTypes)
 local FFlagHelpPageCCLModule = require(Parent.Flags.FFlagHelpPageCCL)
 local View = require(Parent1.Foundation).View
 
-return ReactModule.memo(function() --[[ Line: 19 | Named "KeyboardHelpPage" ]]
+return ReactModule.memo(function()
 	-- upvalues: UseKeybindsModule (copy), ReactModule (copy), View (copy), KeyboardGroupModule (copy), FFlagHelpPageCCLModule (copy)
 	local UseKeybindsModuleResult = UseKeybindsModule()
 	local Controls = UseKeybindsModuleResult.controls
 	local Groups = UseKeybindsModuleResult.groups
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 24 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Controls (copy), Groups (copy), ReactModule (upval), View (upval), KeyboardGroupModule (upval)
 		if Controls == nil or Groups == nil then
 			return nil

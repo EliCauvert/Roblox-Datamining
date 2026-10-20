@@ -21,19 +21,19 @@ return {
 		cancelAnalyticsEvent = EventNames.EditingFlowStickerOverlayBackButtonPressed
 	},
 	supportedCaptureTypes = { Enum.CaptureType.Video },
-	createSession = function() --[[ Line: 40 ]]
+	createSession = function()
 		-- upvalues: CreateEditSessionModule (copy)
 		return CreateEditSessionModule()
 	end,
-	renderEditor = function(Controller) --[[ Line: 43 ]]
+	renderEditor = function(Controller)
 		-- upvalues: ReactModule (copy), StickerOverlayControlsModule (copy)
 		return ReactModule.createElement(StickerOverlayControlsModule, { layoutOrder = 2, controller = Controller })
 	end,
-	renderPreviewLayer = function(Controller, Ctx) --[[ Line: 48 ]]
+	renderPreviewLayer = function(Controller, Ctx)
 		-- upvalues: ReactModule (copy), StickerOverlayLayerModule (copy)
 		return ReactModule.createElement(StickerOverlayLayerModule, { zIndex = 3, controller = Controller, ctx = Ctx })
 	end,
-	toEdits = function(Entry) --[[ Line: 51 ]]
+	toEdits = function(Entry)
 		local Entry1 = Entry and Entry[1]
 		
 		return if Entry1 == nil or Entry1.stickerURI == nil or Entry1.stickerURI == "" then {} else { stickerOverlays = Entry }

@@ -10,27 +10,27 @@ local CompositionTags = require(Parent.AppComposition).CompositionTags
 local FetchDevStoreSeeAllPageIfNeededModule = require(ExperienceStoreServerDrivenUi.Api.fetchDevStoreSeeAllPageIfNeeded)
 local GetDevStoreSeeAllPageKeyModule = require(ExperienceStoreServerDrivenUi.Utils.getDevStoreSeeAllPageKey)
 
-local function _(p1, p2) --[[ Line: 32 | Named "getFromPropsOrNavigationParams" ]]
+local function _(p1, p2)
 	return p1[p2] or p1.navigation and p1.navigation.getParam(p2)
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 36 | Named "DevStoreSeeAllPage" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: GetDevStoreSeeAllPageKeyModule (copy), UseLocalizationFunction (copy), ReactModule (copy), SduiLoadTimer (copy), FetchDevStoreSeeAllPageIfNeededModule (copy), SduiPageEntryPoint (copy), CompositionTags (copy)
 	local UniverseId = p1.universeId or p1.navigation and p1.navigation.getParam("universeId")
 	local DevStoreSeeAllPageKeyModule = GetDevStoreSeeAllPageKeyModule(UniverseId)
 	local UseLocalizationResult = UseLocalizationFunction({ pageTitle = "Feature.GameDetails.Label.Store" })
 	local PageTimer = p1.pageTimer or p1.navigation and p1.navigation.getParam("pageTimer")
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 44 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: PageTimer (copy), SduiLoadTimer (upval)
 		return PageTimer or SduiLoadTimer.createLoadTimer("DevStoreSeeAll")
 	end, { DevStoreSeeAllPageKeyModule, PageTimer })
-	ReactModule.useEffect(function() --[[ Line: 48 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UniverseId (copy), FetchDevStoreSeeAllPageIfNeededModule (upval), UseMemoResult (copy)
 		if UniverseId then
 			FetchDevStoreSeeAllPageIfNeededModule(UniverseId, UseMemoResult)
 		end
 	end, { UniverseId, UseMemoResult })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 54 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UniverseId (copy), SduiLoadTimer (upval), FetchDevStoreSeeAllPageIfNeededModule (upval)
 		if UniverseId then
 			local DevStoreSeeAll = SduiLoadTimer.createLoadTimer("DevStoreSeeAll")

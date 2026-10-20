@@ -1,8 +1,8 @@
-﻿local function v0(): boolean --[[ Line: 3 ]]
+﻿local function v0(): boolean
 	return true
 end
 
-return function(List, p1): number --[[ Line: 39 | Named "count" ]]
+return function(List, p1): number
 	-- upvalues: v0 (copy)
 	local Count = 0
 	local Callback = p1 or v0

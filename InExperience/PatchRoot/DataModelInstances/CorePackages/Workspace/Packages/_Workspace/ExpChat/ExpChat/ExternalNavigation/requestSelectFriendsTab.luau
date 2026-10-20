@@ -8,7 +8,7 @@ local FriendsChatChannelSelectedFunction = ExpChatSharedModule.Actions.FriendsCh
 local FFlagExpChatEnableFriendsTab = SharedFlagsModule.FFlagExpChatEnableFriendsTab
 local FFlagExpChatUseChannelTabsStore = SharedFlagsModule.FFlagExpChatUseChannelTabsStore
 
-return function(): boolean --[[ Line: 18 | Named "requestSelectFriendsTab" ]]
+return function(): boolean
 	-- upvalues: FFlagExpChatEnableFriendsTab (copy), ExpChatSharedModule (copy), RequestSelectTabModule (copy), FriendsChatTabNameModule (copy), FFlagExpChatUseChannelTabsStore (copy), FriendsChatChannelSelectedFunction (copy)
 	if not FFlagExpChatEnableFriendsTab then
 		return false

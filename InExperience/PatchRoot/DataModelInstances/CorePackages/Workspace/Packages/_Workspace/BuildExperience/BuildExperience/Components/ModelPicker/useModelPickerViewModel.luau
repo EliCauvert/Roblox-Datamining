@@ -9,7 +9,7 @@ local UseClosableFocusRootModule = require(BuildExperience.utils.useClosableFocu
 local _ = require(script.Parent.ModelPickerTypes)
 local _ = require(script.Parent.ModelPickerView)
 
-return function(Frame) --[[ Line: 14 | Named "useModelPickerViewModel" ]]
+return function(Frame)
 	-- upvalues: LocalizationModule (copy), LocalizationStringsModule (copy), ReactModule (copy), UseClosableFocusRootModule (copy), FocusNavigationUtilsModule (copy), ResponsiveModule (copy)
 	local UseLocalizationResult = LocalizationModule.Hooks.useLocalization({
 		title = LocalizationStringsModule.MODEL_PICKER_TITLE,
@@ -20,17 +20,17 @@ return function(Frame) --[[ Line: 14 | Named "useModelPickerViewModel" ]]
 		advancedDescription = LocalizationStringsModule.MODEL_PICKER_ADVANCED_DESCRIPTION
 	})
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 24 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: Frame (copy), UseStateResult2 (copy)
 		if not Frame.isDisabled then
 			UseStateResult2(true)
 		end
 	end, { Frame.isDisabled })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 29 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function(Id) --[[ Line: 32 ]]
+	local UseResult2 = ReactModule.useCallback(function(Id)
 		-- upvalues: UseStateResult (copy), Frame (copy), UseStateResult2 (copy)
 		if not UseStateResult or Frame.isDisabled then return end
 		for _, option in Frame.data.options do

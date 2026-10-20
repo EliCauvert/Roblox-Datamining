@@ -3,11 +3,11 @@ local _ = require(script.Parent.types)
 local FFlagHttpClientRetryExtensionsModule = require(script.Parent.Flags.FFlagHttpClientRetryExtensions)
 local config = { [408] = true, [503] = true, [504] = true }
 
-local function _(p1: number, p2, p3) --[[ Line: 17 | Named "backoffSeconds" ]]
+local function _(p1: number, p2, p3)
 	return (p2 + math.random() * (p3 - p2)) * math.pow(2, p1 - 1) / 1000
 end
 
-local function shouldRetry(p1, RetryOnStatuses, RetryOnHttpErrors) --[[ Line: 21 ]]
+local function shouldRetry(p1, RetryOnStatuses, RetryOnHttpErrors)
 	-- upvalues: FFlagHttpClientRetryExtensionsModule (copy)
 	if FFlagHttpClientRetryExtensionsModule then
 		if p1.wasTransportFailure and RetryOnHttpErrors == nil then
@@ -30,7 +30,7 @@ local function shouldRetry(p1, RetryOnStatuses, RetryOnHttpErrors) --[[ Line: 21
 	return false, nil
 end
 
-return function(p1, p2) --[[ Line: 52 | Named "withRetry" ]]
+return function(p1, p2)
 	-- upvalues: config (copy), FFlagHttpClientRetryExtensionsModule (copy), MutedErrorFunction (copy), shouldRetry (copy)
 	local P7 = p2 or {}
 	local MaxRetryCount = P7.maxRetryCount or 4
@@ -54,7 +54,7 @@ return function(p1, p2) --[[ Line: 52 | Named "withRetry" ]]
 		RetryBudgetSec = nil
 	end
 	return {
-		request = function(Tbl, Callback) --[[ Line: 78 ]]
+		request = function(Tbl, Callback)
 			-- upvalues: FFlagHttpClientRetryExtensionsModule (upval), P7 (copy), p1 (copy), shouldRetry (upval), RetryOnStatuses (copy), RetryOnHttpErrors (copy), MaxRetryCount (ref), RetryJitterMinMs (ref), RetryJitterMaxMs (ref), RetryBudgetSec (ref)
 			local Count = 0
 			local ClockTime = if FFlagHttpClientRetryExtensionsModule then os.clock() else nil
@@ -65,13 +65,13 @@ return function(p1, p2) --[[ Line: 52 | Named "withRetry" ]]
 			local _ = nil
 			local OnMessageFunction = Tbl.onMessage
 			
-			local function handleMessage(p3) --[[ Line: 91 ]]
+			local function handleMessage(p3)
 				-- upvalues: Flag1 (ref), OnMessageFunction (copy)
 				Flag1 = true
 				OnMessageFunction(p3)
 			end
 			
-			local function v21() --[[ Line: 96 ]]
+			local function v21()
 				-- upvalues: Flag (ref), Tbl (copy), FFlagHttpClientRetryExtensionsModule (upval), OnMessageFunction (copy), handleMessage (copy), Count (ref), P7 (upval), RequestResult (ref), p1 (upval), Flag1 (ref), Callback (copy), shouldRetry (upval), RetryOnStatuses (upval), RetryOnHttpErrors (upval), MaxRetryCount (upval), RetryJitterMinMs (upval), RetryJitterMaxMs (upval), RetryBudgetSec (upval), ClockTime (copy), DelayedThread (ref), v21 (ref)
 				if Flag then return end
 				local Copy = Tbl
@@ -101,7 +101,7 @@ return function(p1, p2) --[[ Line: 52 | Named "withRetry" ]]
 						P7.onRetry(Count)
 					end
 				end
-				RequestResult = p1.request(Copy, function(p3, p4) --[[ Line: 121 ]]
+				RequestResult = p1.request(Copy, function(p3, p4)
 					-- upvalues: RequestResult (upval), Flag (upval), FFlagHttpClientRetryExtensionsModule (upval), Flag1 (upval), Callback (upval), shouldRetry (upval), RetryOnStatuses (upval), RetryOnHttpErrors (upval), Count (upval), MaxRetryCount (upval), RetryJitterMinMs (upval), RetryJitterMaxMs (upval), RetryBudgetSec (upval), ClockTime (upval), DelayedThread (upval), v21 (upval)
 					RequestResult = nil
 					
@@ -139,7 +139,7 @@ return function(p1, p2) --[[ Line: 52 | Named "withRetry" ]]
 						
 						return
 					else
-						DelayedThread = task.delay(Delay, function() --[[ Line: 163 ]]
+						DelayedThread = task.delay(Delay, function()
 							-- upvalues: DelayedThread (upval), v21 (upval)
 							DelayedThread = nil
 							v21()
@@ -150,7 +150,7 @@ return function(p1, p2) --[[ Line: 52 | Named "withRetry" ]]
 			
 			v21()
 			
-			return function() --[[ Line: 172 ]]
+			return function()
 				-- upvalues: Flag (ref), DelayedThread (ref), RequestResult (ref)
 				if Flag then return end
 				Flag = true

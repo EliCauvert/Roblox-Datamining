@@ -9,10 +9,10 @@ local StrictInterfaceResult = T.strictInterface({
 	onError = T.union(T.callback, T.table)
 })
 
-return function(Callback) --[[ Line: 16 ]]
+return function(Callback)
 	-- upvalues: StrictInterfaceResult (copy), FriendsNetworking (copy), Promise (copy)
 	return {
-		refreshPageData = function(p1) --[[ Line: 18 ]]
+		refreshPageData = function(p1)
 			-- upvalues: StrictInterfaceResult (upval), Callback (copy), FriendsNetworking (upval), Promise (upval)
 			assert(StrictInterfaceResult(p1))
 			local List = {}
@@ -20,7 +20,7 @@ return function(Callback) --[[ Line: 16 ]]
 			
 			return Promise.all(List):andThen(p1.onResolve):catch(p1.onError)
 		end,
-		getFriendRequestsCount = function() --[[ Line: 26 ]]
+		getFriendRequestsCount = function()
 			-- upvalues: Callback (copy), FriendsNetworking (upval)
 			return Callback(FriendsNetworking.GetFriendRequestsCount.API())
 		end

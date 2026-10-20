@@ -26,9 +26,9 @@ local config = {
 	JoinExperience = { buttonType = ButtonTypes.Join }
 }
 
-local function v9() --[[ Line: 52 ]] end
+local function v9() end
 
-local function _(List, p1): boolean --[[ Line: 54 | Named "isSupported" ]]
+local function _(List, p1): boolean
 	if not List then
 		return true
 	end
@@ -40,7 +40,7 @@ local function _(List, p1): boolean --[[ Line: 54 | Named "isSupported" ]]
 	return false
 end
 
-return function(p2, p3, p4, p5, p6) --[[ Line: 66 | Named "mapServerActionsToRowCta" ]]
+return function(p2, p3, p4, p5, p6)
 	-- upvalues: config (copy), FFlagUserListCanonicalCtaAnalyticsModule (copy), v9 (copy), FFlagUserListChatCtaStandardVariantModule (copy), ButtonTypes (copy), IconName (copy)
 	if not p2 or not p2.buttons then
 		return { primaryCta = nil, secondaryCta = nil }
@@ -70,7 +70,7 @@ return function(p2, p3, p4, p5, p6) --[[ Line: 66 | Named "mapServerActionsToRow
 				local Callback = if Entry.handlerKey then p3[Entry.handlerKey] else nil
 				local PrimaryCta = {
 					type = Entry.buttonType,
-					onActivated = if Callback then function() --[[ Line: 86 ]]
+					onActivated = if Callback then function()
 						-- upvalues: Callback (copy), p4 (copy), FFlagUserListCanonicalCtaAnalyticsModule (upval), p6 (copy)
 						Callback(p4, if FFlagUserListCanonicalCtaAnalyticsModule then p6 else nil)
 					end else v9,
@@ -87,7 +87,7 @@ return function(p2, p3, p4, p5, p6) --[[ Line: 66 | Named "mapServerActionsToRow
 					SecondaryCta = {
 						type = ButtonTypes.Dismiss,
 						icon = IconName.X,
-						onActivated = if Callback1 then function() --[[ Line: 104 ]]
+						onActivated = if Callback1 then function()
 							-- upvalues: Callback1 (copy), p4 (copy), FFlagUserListCanonicalCtaAnalyticsModule (upval), p6 (copy)
 							Callback1(p4, if FFlagUserListCanonicalCtaAnalyticsModule then p6 else nil)
 						end else v9

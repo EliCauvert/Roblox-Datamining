@@ -3,7 +3,7 @@ local HttpService = game:GetService("HttpService")
 local _ = require(Parent.Http)
 local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 
-return function(Callback, p1) --[[ Line: 25 ]]
+return function(Callback, p1)
 	-- upvalues: UrlBuilder (copy), HttpService (copy)
 	return Callback(UrlBuilder.fromString("auth:v1/account/upgrade")(), "POST", {
 		maxRetryCount = 0,

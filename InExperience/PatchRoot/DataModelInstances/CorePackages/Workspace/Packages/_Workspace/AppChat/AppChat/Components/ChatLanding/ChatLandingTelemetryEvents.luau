@@ -14,14 +14,14 @@ return {
 		description = "",
 		lastUpdated = { 2026, 10, 7 },
 		backendsList = {
-			NamedCounterConfigurationAndFormatFunction("AppChat.Navigation.Visible", function(p1) --[[ Line: 23 ]]
+			NamedCounterConfigurationAndFormatFunction("AppChat.Navigation.Visible", function(p1)
 				return {
 					isChatEnabled = p1.isChatEnabled,
 					isChatLoading = p1.isChatLoading,
 					isInConversation = p1.isInConversation
 				}
 			end),
-			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 35 ]]
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return {
 					isChatEnabled = p1.isChatEnabled,
 					isChatLoading = p1.isChatLoading
@@ -34,13 +34,13 @@ return {
 		description = "",
 		lastUpdated = { 2026, 2, 9 },
 		backendsList = {
-			NamedCounterConfigurationAndFormatFunction("AppChat.Navigation.Closed", function(p1) --[[ Line: 49 ]]
+			NamedCounterConfigurationAndFormatFunction("AppChat.Navigation.Closed", function(p1)
 				return {
 					isChatEnabled = p1.isChatEnabled,
 					isChatLoading = p1.isChatLoading
 				}
 			end),
-			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 59 ]]
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return {
 					isChatEnabled = p1.isChatEnabled,
 					isChatLoading = p1.isChatLoading
@@ -53,10 +53,10 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			NamedCounterConfigurationAndFormatFunction("AppChat.ChatLanding.Rendered", function(p1) --[[ Line: 73 ]]
+			NamedCounterConfigurationAndFormatFunction("AppChat.ChatLanding.Rendered", function(p1)
 				return { isChatEnabled = p1.isChatEnabled }
 			end),
-			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 80 ]]
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return { isChatEnabled = p1.isChatEnabled }
 			end)
 		}
@@ -66,10 +66,10 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			NamedCounterConfigurationAndFormatFunction("AppChat.ChatLanding.EmptyState.Rendered", function(p1) --[[ Line: 92 ]]
+			NamedCounterConfigurationAndFormatFunction("AppChat.ChatLanding.EmptyState.Rendered", function(p1)
 				return { emptyStateType = p1.emptyStateType }
 			end),
-			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 99 ]]
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return { emptyStateType = p1.emptyStateType }
 			end)
 		}
@@ -115,10 +115,10 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			NamedCounterConfigurationAndFormatFunction("AppChat.ChatLanding.Button.Snooze", function(p1) --[[ Line: 147 ]]
+			NamedCounterConfigurationAndFormatFunction("AppChat.ChatLanding.Button.Snooze", function(p1)
 				return { isChatNotificationsMuted = p1.isChatNotificationsMuted }
 			end),
-			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 155 ]]
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return { isChatNotificationsMuted = p1.isChatNotificationsMuted }
 			end)
 		}
@@ -128,7 +128,7 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			NamedCounterConfigurationAndFormatFunction("AppChat.ChatLanding.ConversationCell.Rendered", function(p1) --[[ Line: 168 ]]
+			NamedCounterConfigurationAndFormatFunction("AppChat.ChatLanding.ConversationCell.Rendered", function(p1)
 				return {
 					isFiltered = p1.isFiltered,
 					hasUnreadMessages = p1.hasUnreadMessages,
@@ -137,7 +137,7 @@ return {
 					osaAcknowledgementStatus = p1.osaAcknowledgementStatus
 				}
 			end),
-			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 189 ]]
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return {
 					isFiltered = p1.isFiltered,
 					conversationListCount = p1.conversationListCount,
@@ -157,7 +157,7 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 30 },
 		backendsList = {
-			NamedStatConfigurationAndFormatFunction("chatLandingConversationCellRenderedIndexStat", function(_) --[[ Line: 219 ]]
+			NamedStatConfigurationAndFormatFunction("chatLandingConversationCellRenderedIndexStat", function(_)
 				return {}
 			end)
 		}
@@ -167,7 +167,7 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			NamedCounterConfigurationAndFormatFunction("AppChat.ChatLanding.Button.Conversation", function(p1) --[[ Line: 231 ]]
+			NamedCounterConfigurationAndFormatFunction("AppChat.ChatLanding.Button.Conversation", function(p1)
 				return {
 					isFiltered = p1.isFiltered,
 					hasUnreadMessages = p1.hasUnreadMessages,
@@ -176,7 +176,7 @@ return {
 					osaAcknowledgementStatus = p1.osaAcknowledgementStatus
 				}
 			end),
-			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 251 ]]
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return {
 					isFiltered = p1.isFiltered,
 					conversationListCount = p1.conversationListCount,
@@ -197,7 +197,7 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 30 },
 		backendsList = {
-			NamedStatConfigurationAndFormatFunction("chatLandingConversationClickedIndexStat", function(_) --[[ Line: 283 ]]
+			NamedStatConfigurationAndFormatFunction("chatLandingConversationClickedIndexStat", function(_)
 				return {}
 			end)
 		}
@@ -216,10 +216,10 @@ return {
 		description = "A search query settled. Once per query, with the result count and outcome, which the cell events cannot express when zero cells render.",
 		lastUpdated = { 2026, 9, 21 },
 		backendsList = {
-			NamedCounterConfigurationAndFormatFunction("AppChat.ChatLanding.Search.ResultsRendered", function(p1) --[[ Line: 306 ]]
+			NamedCounterConfigurationAndFormatFunction("AppChat.ChatLanding.Search.ResultsRendered", function(p1)
 				return { searchResultType = p1.searchResultType }
 			end),
-			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 315 ]]
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return {
 					searchResultCount = p1.searchResultCount,
 					searchResultType = p1.searchResultType,

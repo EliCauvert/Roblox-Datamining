@@ -19,7 +19,7 @@ local Text = FoundationModule.Text
 local View = FoundationModule.View
 local Radius = FoundationModule.Enums.Radius
 
-return function(p1) --[[ Line: 80 | Named "LibraryDetailView" ]]
+return function(p1)
 	-- upvalues: UseHardwareInsetsModule (copy), FFlagBuildExperienceAnswerFormModule (copy), FoundationModule (copy), ReactModule (copy), FFlagBuildExperienceLibrary (copy), View (copy), ModelViewportModule (copy), Text (copy), Image (copy), ScrollView (copy), LibraryAudioPlayerContainerModule (copy), Skeleton (copy), Radius (copy), AnswerFormContainerModule (copy), ChatActionsModule (copy)
 	local Bottom: number = UseHardwareInsetsModule().bottom
 	local UseScaledValueResult = nil
@@ -35,7 +35,7 @@ return function(p1) --[[ Line: 80 | Named "LibraryDetailView" ]]
 		Callback = nil
 	end
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 92 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(Frame.AbsoluteSize.Y < 400)
 	end, {})
@@ -51,7 +51,7 @@ return function(p1) --[[ Line: 80 | Named "LibraryDetailView" ]]
 		end
 		local OnSendFunction = Copy.onSend
 		
-		function Copy.onSend() --[[ Line: 105 ]]
+		function Copy.onSend()
 			-- upvalues: OnSendFunction (copy), UseRefResult (copy)
 			local OnSendResult = OnSendFunction()
 			
@@ -152,11 +152,11 @@ return function(p1) --[[ Line: 80 | Named "LibraryDetailView" ]]
 			LayoutOrder = 3,
 			tag = "shrink size-full-0 padding-x-medium",
 			testId = "Library.Preview.AnswerFormScroll",
-			Size = UseBindingResult:map(function(p2: number): UDim2 --[[ Line: 234 ]]
+			Size = UseBindingResult:map(function(p2: number): UDim2
 				-- upvalues: UseScaledValueResult (ref)
 				return UDim2.new(1, 0, 0, (math.min(p2, UseScaledValueResult)))
 			end),
-			onAbsoluteCanvasSizeChanged = function(ScrollFrame) --[[ Line: 237 ]]
+			onAbsoluteCanvasSizeChanged = function(ScrollFrame)
 				-- upvalues: Callback (ref)
 				Callback(ScrollFrame.AbsoluteCanvasSize.Y)
 			end,

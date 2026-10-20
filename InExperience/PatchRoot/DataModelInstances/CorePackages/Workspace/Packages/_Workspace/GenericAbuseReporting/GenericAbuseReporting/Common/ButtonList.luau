@@ -11,7 +11,7 @@ local InputLabelSize = FoundationModule.Enums.InputLabelSize
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function createButtons(UseMemoResult, p1, Callback, Callback1, DefaultValue) --[[ Line: 30 ]]
+local function createButtons(UseMemoResult, p1, Callback, Callback1, DefaultValue)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ControlState (copy), View (copy), InputLabel (copy), InputLabelSize (copy), Icon (copy), IconSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Elements = {}
@@ -19,7 +19,7 @@ local function createButtons(UseMemoResult, p1, Callback, Callback1, DefaultValu
 	
 	for i, value in pairs(UseMemoResult) do
 		local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
-		local UseResult = ReactModule.useCallback(function() --[[ Line: 43 ]]
+		local UseResult = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (copy), value (copy), Callback (copy), Callback1 (copy), p1 (copy), UseStateResult2_1 (copy)
 			UseStateResult2(value.value)
 			Callback(value.value, value.text)
@@ -32,7 +32,7 @@ local function createButtons(UseMemoResult, p1, Callback, Callback1, DefaultValu
 		table.insert(Elements, ReactModule.createElement(View, { tag = "auto-xy col gap-xsmall padding-bottom-xsmall" }, {
 			ButtonContainer = ReactModule.createElement(View, {
 				tag = "size-full-0 auto-y radius-medium row flex-between",
-				onStateChanged = ReactModule.useCallback(function(Hover) --[[ Line: 52 ]]
+				onStateChanged = ReactModule.useCallback(function(Hover)
 					-- upvalues: ControlState (upval), UseStateResult2_1 (copy)
 					if Hover == ControlState.Hover or Hover == ControlState.Pressed then
 						UseStateResult2_1(true)
@@ -75,25 +75,25 @@ local function createButtons(UseMemoResult, p1, Callback, Callback1, DefaultValu
 	return Elements
 end
 
-return function(p2) --[[ Line: 112 | Named "ButtonList" ]]
+return function(p2)
 	-- upvalues: ReactModule (copy), CryoModule (copy), UseLocalizationFunction (copy), createButtons (copy), View (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 119 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CryoModule (upval), p2 (copy)
-		return CryoModule.Dictionary.map(p2.options, function(p3) --[[ Line: 120 ]]
+		return CryoModule.Dictionary.map(p2.options, function(p3)
 			return p3.descriptionLocalizationKey, p3.value
 		end)
 	end)
-	local UseLocalizationResult = UseLocalizationFunction((ReactModule.useMemo(function() --[[ Line: 113 ]]
+	local UseLocalizationResult = UseLocalizationFunction((ReactModule.useMemo(function()
 		-- upvalues: CryoModule (upval), p2 (copy)
-		return CryoModule.Dictionary.map(p2.options, function(p3) --[[ Line: 114 ]]
+		return CryoModule.Dictionary.map(p2.options, function(p3)
 			return p3.localizationKey, p3.value
 		end)
 	end)))
 	
 	return ReactModule.createElement(View, { tag = "size-full col" }, {
-		(createButtons(ReactModule.useMemo(function() --[[ Line: 128 ]]
+		(createButtons(ReactModule.useMemo(function()
 			-- upvalues: CryoModule (upval), p2 (copy), UseLocalizationResult (copy)
-			return CryoModule.List.map(p2.options, function(p3) --[[ Line: 129 ]]
+			return CryoModule.List.map(p2.options, function(p3)
 				-- upvalues: UseLocalizationResult (upval)
 				return {
 					text = UseLocalizationResult[p3.value] or "",

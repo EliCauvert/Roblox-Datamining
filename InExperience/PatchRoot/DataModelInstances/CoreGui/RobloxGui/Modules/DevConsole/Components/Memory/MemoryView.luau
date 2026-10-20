@@ -17,23 +17,23 @@ local NoResultSearchStr = ConstantsModule.GeneralFormatting.NoResultSearchStr
 local _TweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out, 0, false, 0)
 local MemoryView = RoactModule.Component:extend("MemoryView")
 
-local function getX(p1) --[[ Line: 39 ]]
+local function getX(p1)
 	return p1.time
 end
 
-local function getY(p1) --[[ Line: 43 ]]
+local function getY(p1)
 	return p1.data
 end
 
-local function formatValueStr(p1): string --[[ Line: 47 ]]
+local function formatValueStr(p1): string
 	return string.format("%.3f", p1)
 end
 
-function MemoryView.init(p1, p2) --[[ Line: 51 ]]
+function MemoryView.init(p1, p2)
 	-- upvalues: EntryFrameHeight (copy), TweenService (copy), _TweenInfo (copy), RoactModule (copy)
-	function p1.getOnButtonPress(ExpandIndex, LayoutOrder) --[[ Line: 52 ]]
+	function p1.getOnButtonPress(ExpandIndex, LayoutOrder)
 		-- upvalues: p1 (copy), EntryFrameHeight (upval), TweenService (upval), _TweenInfo (upval)
-		return function(_, _) --[[ Line: 53 ]]
+		return function(_, _)
 			-- upvalues: p1 (upval), ExpandIndex (copy), LayoutOrder (copy), EntryFrameHeight (upval), TweenService (upval), _TweenInfo (upval)
 			if p1.state.expandIndex ~= ExpandIndex and ExpandIndex then
 				local Current = p1.scrollingRef.current
@@ -50,7 +50,7 @@ function MemoryView.init(p1, p2) --[[ Line: 51 ]]
 		end
 	end
 	
-	function p1.onSortChanged(SortType) --[[ Line: 73 ]]
+	function p1.onSortChanged(SortType)
 		-- upvalues: p2 (copy), p1 (copy)
 		if SortType == p2.targetMemoryData:getSortType() then
 			p2.targetMemoryData:setSortType(SortType)
@@ -63,7 +63,7 @@ function MemoryView.init(p1, p2) --[[ Line: 51 ]]
 		end
 	end
 	
-	function p1.onCanvasPosChanged() --[[ Line: 89 ]]
+	function p1.onCanvasPosChanged()
 		-- upvalues: p1 (copy)
 		local CanvasPosition = p1.scrollingRef.current.CanvasPosition
 		
@@ -83,20 +83,20 @@ function MemoryView.init(p1, p2) --[[ Line: 51 ]]
 	}
 end
 
-function MemoryView.willUpdate(p1) --[[ Line: 108 ]]
+function MemoryView.willUpdate(p1)
 	if p1.canvasPosConnector then
 		p1.canvasPosConnector:Disconnect()
 	end
 end
 
-function MemoryView.didUpdate(p1) --[[ Line: 114 ]]
+function MemoryView.didUpdate(p1)
 	if p1.scrollingRef.current then
 		p1.canvasPosConnector = p1.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p1.onCanvasPosChanged)
 	end
 end
 
-function MemoryView.didMount(p1) --[[ Line: 121 ]]
-	p1.treeViewItemConnector = p1.props.targetMemoryData:treeUpdatedSignal():Connect(function(MemoryData) --[[ Line: 123 ]]
+function MemoryView.didMount(p1)
+	p1.treeViewItemConnector = p1.props.targetMemoryData:treeUpdatedSignal():Connect(function(MemoryData)
 		-- upvalues: p1 (copy)
 		p1:setState({ memoryData = MemoryData })
 	end)
@@ -110,11 +110,11 @@ function MemoryView.didMount(p1) --[[ Line: 121 ]]
 	end
 end
 
-function MemoryView.willUnmount(p1) --[[ Line: 140 ]]
+function MemoryView.willUnmount(p1)
 	p1.treeViewItemConnector:Disconnect()
 end
 
-function MemoryView.appendAdditionTabInformation(p1, Elements, AdditionalInfoResult, Text, Depth: number, p2) --[[ Line: 144 ]]
+function MemoryView.appendAdditionTabInformation(p1, Elements, AdditionalInfoResult, Text, Depth: number, p2)
 	-- upvalues: FFlagDevConsoleKeyCollisionFixModule (copy), EntryFrameHeight (copy), RoactModule (copy), MemoryViewEntryModule (copy), formatValueStr (copy)
 	local CanvasPosition = p1.scrollingRef.current.CanvasPosition
 	local AbsoluteSize = p1.scrollingRef.current.AbsoluteSize
@@ -153,7 +153,7 @@ function MemoryView.appendAdditionTabInformation(p1, Elements, AdditionalInfoRes
 	end
 end
 
-function MemoryView.recursiveConstructEntries(p3, Elements, p4, Depth: number, p5, p6) --[[ Line: 192 ]]
+function MemoryView.recursiveConstructEntries(p3, Elements, p4, Depth: number, p5, p6)
 	-- upvalues: FFlagDevConsoleKeyCollisionFixModule (copy), EntryFrameHeight (copy), LineGraphHeight (copy), RoactModule (copy), MemoryViewEntryModule (copy), formatValueStr (copy), getX (copy), getY (copy)
 	assert(p3.scrollingRef.current, "ScrollingFrame not initialized yet")
 	local ExpandIndex = p3.state.expandIndex
@@ -213,7 +213,7 @@ function MemoryView.recursiveConstructEntries(p3, Elements, p4, Depth: number, p
 	end
 end
 
-function MemoryView.render(p7) --[[ Line: 273 ]]
+function MemoryView.render(p7)
 	-- upvalues: RoactModule (copy), ConstantsModule (copy), NoResultSearchStr (copy), HeaderFrameHeight (copy), HeaderButtonModule (copy), ChartHeaderNames (copy), ValueCellWidth (copy), ValuePadding (copy), CellPadding (copy), LineColor (copy), LineWidth (copy)
 	local t = {}
 	local LayoutOrder = p7.props.layoutOrder

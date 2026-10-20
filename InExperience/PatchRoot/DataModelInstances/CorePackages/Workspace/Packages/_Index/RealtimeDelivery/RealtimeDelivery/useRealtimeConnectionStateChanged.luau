@@ -6,11 +6,11 @@ local _ = require(RealtimeDelivery.RealtimeTypes)
 local UseRobloxEventReceiverModule = require(script.Parent.useRobloxEventReceiver)
 local UseRealtimeNamespaceModule = require(script.Parent.useRealtimeNamespace)
 
-return function(p1, Callback, p2) --[[ Line: 12 | Named "useRealtimeConnectionStateChanged" ]]
+return function(p1, Callback, p2)
 	-- upvalues: UseRobloxEventReceiverModule (copy), ReactModule (copy), UseRealtimeNamespaceModule (copy), List (copy)
 	local UseRobloxEventReceiverModuleResult = UseRobloxEventReceiverModule()
 	local UseRefResult = ReactModule.useRef(nil)
-	UseRealtimeNamespaceModule(p1, function(p3) --[[ Line: 20 ]]
+	UseRealtimeNamespaceModule(p1, function(p3)
 		-- upvalues: UseRefResult (copy)
 		local SequenceNumber = p3.SequenceNumber
 		
@@ -18,9 +18,9 @@ return function(p1, Callback, p2) --[[ Line: 12 | Named "useRealtimeConnectionSt
 			UseRefResult.current = SequenceNumber
 		end
 	end, List.join({ p1 }, p2))
-	ReactModule.useEffect(function() --[[ Line: 29 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRobloxEventReceiverModuleResult (copy), p1 (copy), UseRefResult (copy), Callback (copy)
-		local SignalR = UseRobloxEventReceiverModuleResult:observeEvent("signalR", function(p3, _, p4) --[[ Line: 32 ]]
+		local SignalR = UseRobloxEventReceiverModuleResult:observeEvent("signalR", function(p3, _, p4)
 			-- upvalues: p1 (upval), UseRefResult (upval), Callback (upval)
 			local Current = p4[p1]
 			local NoCurrent: boolean = Current ~= nil and (UseRefResult.current == nil or UseRefResult.current ~= Current)
@@ -31,7 +31,7 @@ return function(p1, Callback, p2) --[[ Line: 12 | Named "useRealtimeConnectionSt
 			Callback(p3, NoCurrent)
 		end)
 		
-		return function() --[[ Line: 47 ]]
+		return function()
 			-- upvalues: SignalR (copy)
 			SignalR:disconnect()
 		end

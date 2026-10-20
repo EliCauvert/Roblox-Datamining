@@ -7,7 +7,7 @@ local GetScoreValueModule = require(script.Parent.getScoreValue)
 local _ = require(script.Parent.LeaderboardStoreTypes)
 local FFlagPlayerListFixLeaderstatsStacking = require(Parent.SharedFlags).FFlagPlayerListFixLeaderstatsStacking
 
-return function(Player: Player, Callback, Callback3, Callback2, Callback1, Callback4) --[[ Line: 54 | Named "createPlayerStore" ]]
+return function(Player: Player, Callback, Callback3, Callback2, Callback1, Callback4)
 	-- upvalues: SignalsModule (copy), CreateSignalMapFunction (copy), CreateRBXEventSignalModule (copy), GetScoreValueModule (copy), IsValidStatModule (copy), FFlagPlayerListFixLeaderstatsStacking (copy)
 	local Connections = {}
 	local t = {}
@@ -16,12 +16,12 @@ return function(Player: Player, Callback, Callback3, Callback2, Callback1, Callb
 	local Team = "Neutral"
 	local config = { order = Signal, stats = SignalMap }
 	
-	local function _() --[[ Line: 75 | Named "getPlayerTeam" ]]
+	local function _()
 		-- upvalues: Player (copy)
 		return Player.Team or "Neutral"
 	end
 	
-	local _ = function(Key, p1, p2) --[[ Line: 80 | Named "addStatConnection" ]]
+	local _ = function(Key, p1, p2)
 		-- upvalues: t (ref)
 		if t[Key] == nil then
 			t[Key] = {}
@@ -29,7 +29,7 @@ return function(Player: Player, Callback, Callback3, Callback2, Callback1, Callb
 		t[Key][p1] = p2
 	end
 	
-	local _ = function(p1, Key) --[[ Line: 87 | Named "_removeStatConnection" ]]
+	local _ = function(p1, Key)
 		-- upvalues: t (ref)
 		local Entry = t[p1]
 		
@@ -44,16 +44,16 @@ return function(Player: Player, Callback, Callback3, Callback2, Callback1, Callb
 		end
 	end
 	
-	local function onStatAdded(p1) --[[ Line: 102 ]]
+	local function onStatAdded(p1)
 		-- upvalues: CreateRBXEventSignalModule (upval), SignalsModule (upval), GetScoreValueModule (upval), Callback (copy), SignalMap (copy), Callback2 (copy), Team (ref), Callback1 (copy), t (ref)
 		local RBXEventSignalModule, RBXEventSignalModule2 = CreateRBXEventSignalModule(p1.Changed, p1.Value)
-		local Computed = SignalsModule.createComputed(function(p2) --[[ Line: 105 ]]
+		local Computed = SignalsModule.createComputed(function(p2)
 			-- upvalues: GetScoreValueModule (upval), RBXEventSignalModule (copy)
 			return GetScoreValueModule(RBXEventSignalModule(p2))
 		end)
 		Callback(p1)
 		SignalMap.setData(p1.Name, Computed, false)
-		local Effect = SignalsModule.createEffect(function(p2) --[[ Line: 114 ]]
+		local Effect = SignalsModule.createEffect(function(p2)
 			-- upvalues: Computed (copy), Callback2 (upval), Team (upval), p1 (copy), Callback1 (upval)
 			Computed(p2)
 			Callback2(Team, p1.Name)
@@ -61,7 +61,7 @@ return function(Player: Player, Callback, Callback3, Callback2, Callback1, Callb
 		end)
 		local Name = p1.Name
 		local StatChanged = {
-			Disconnect = function() --[[ Line: 121 ]]
+			Disconnect = function()
 				-- upvalues: Effect (copy), RBXEventSignalModule2 (copy)
 				Effect()
 				RBXEventSignalModule2:Disconnect()
@@ -72,7 +72,7 @@ return function(Player: Player, Callback, Callback3, Callback2, Callback1, Callb
 			t[Name] = {}
 		end
 		t[Name].StatChanged = StatChanged
-		local ChildAddedConnection = p1.ChildAdded:Connect(function() --[[ Line: 128 ]]
+		local ChildAddedConnection = p1.ChildAdded:Connect(function()
 			-- upvalues: Callback (upval), p1 (copy)
 			Callback(p1)
 		end)
@@ -82,7 +82,7 @@ return function(Player: Player, Callback, Callback3, Callback2, Callback1, Callb
 			t[Name1] = {}
 		end
 		t[Name1].StatChildAdded = ChildAddedConnection
-		local ChildRemovedConnection = p1.ChildRemoved:Connect(function() --[[ Line: 133 ]]
+		local ChildRemovedConnection = p1.ChildRemoved:Connect(function()
 			-- upvalues: Callback (upval), p1 (copy)
 			Callback(p1)
 		end)
@@ -94,7 +94,7 @@ return function(Player: Player, Callback, Callback3, Callback2, Callback1, Callb
 		t[Name2].StatChildRemoved = ChildRemovedConnection
 	end
 	
-	local function onStatRemoved(p1) --[[ Line: 139 ]]
+	local function onStatRemoved(p1)
 		-- upvalues: t (ref), SignalMap (copy), Callback3 (copy)
 		local Entry = t[p1.Name]
 		
@@ -109,15 +109,15 @@ return function(Player: Player, Callback, Callback3, Callback2, Callback1, Callb
 		Callback3(p1)
 	end
 	
-	local function leaderstatsAdded(Leaderstats) --[[ Line: 155 ]]
+	local function leaderstatsAdded(Leaderstats)
 		-- upvalues: IsValidStatModule (upval), onStatAdded (copy), Connections (ref), onStatRemoved (copy)
-		Connections.leaderstatsChildAdded = Leaderstats.ChildAdded:Connect(function(Child) --[[ Line: 156 ]]
+		Connections.leaderstatsChildAdded = Leaderstats.ChildAdded:Connect(function(Child)
 			-- upvalues: IsValidStatModule (upval), onStatAdded (upval)
 			if IsValidStatModule(Child) then
 				onStatAdded(Child)
 			end
 		end)
-		Connections.leaderstatsChildRemoved = Leaderstats.ChildRemoved:Connect(function(Child) --[[ Line: 163 ]]
+		Connections.leaderstatsChildRemoved = Leaderstats.ChildRemoved:Connect(function(Child)
 			-- upvalues: IsValidStatModule (upval), onStatRemoved (upval)
 			if IsValidStatModule(Child) then
 				onStatRemoved(Child)
@@ -131,12 +131,12 @@ return function(Player: Player, Callback, Callback3, Callback2, Callback1, Callb
 		end
 	end
 	
-	local function onPlayerChildAdded(Object) --[[ Line: 179 ]]
+	local function onPlayerChildAdded(Object)
 		-- upvalues: leaderstatsAdded (copy), Connections (ref)
 		local IsValueBase = Object:IsA("ValueBase") or (Object:IsA("Folder") or Object:IsA("Model"))
 		
 		if Object.Name ~= "leaderstats" and not IsValueBase then return end
-		Connections.LeaderstatNameChanged = Object.Changed:Connect(function(p2) --[[ Line: 186 ]]
+		Connections.LeaderstatNameChanged = Object.Changed:Connect(function(p2)
 			-- upvalues: Object (copy), leaderstatsAdded (upval)
 			if p2 == "Name" and Object.Name == "leaderstats" then
 				leaderstatsAdded(Object)
@@ -148,7 +148,7 @@ return function(Player: Player, Callback, Callback3, Callback2, Callback1, Callb
 		end
 	end
 	
-	local function onPlayerChildRemoved(Object) --[[ Line: 200 ]]
+	local function onPlayerChildRemoved(Object)
 		-- upvalues: IsValidStatModule (upval), onStatRemoved (copy), FFlagPlayerListFixLeaderstatsStacking (upval), Callback4 (copy), Callback1 (copy), Team (ref)
 		if Object.Name == "leaderstats" then
 			for _, child in ipairs((Object:GetChildren())) do
@@ -164,13 +164,13 @@ return function(Player: Player, Callback, Callback3, Callback2, Callback1, Callb
 	end
 	
 	Team = Player.Team or "Neutral";
-	(function() --[[ Line: 217 | Named "connectPlayerEvents" ]]
+	(function()
 		-- upvalues: Player (copy), onPlayerChildAdded (copy), Connections (ref), onPlayerChildRemoved (copy), leaderstatsAdded (copy)
-		Connections.PlayerChildAdded = Player.ChildAdded:Connect(function(Child) --[[ Line: 218 ]]
+		Connections.PlayerChildAdded = Player.ChildAdded:Connect(function(Child)
 			-- upvalues: onPlayerChildAdded (upval)
 			onPlayerChildAdded(Child)
 		end)
-		Connections.PlayerChildRemoved = Player.ChildRemoved:Connect(function(Child) --[[ Line: 223 ]]
+		Connections.PlayerChildRemoved = Player.ChildRemoved:Connect(function(Child)
 			-- upvalues: onPlayerChildRemoved (upval)
 			onPlayerChildRemoved(Child)
 		end)
@@ -187,33 +187,33 @@ return function(Player: Player, Callback, Callback3, Callback2, Callback1, Callb
 	end)()
 	
 	return {
-		getPlayer = function() --[[ Line: 281 ]]
+		getPlayer = function()
 			-- upvalues: Player (copy)
 			return Player
 		end,
-		getPlayerEntry = function() --[[ Line: 284 ]]
+		getPlayerEntry = function()
 			-- upvalues: config (copy)
 			return config
 		end,
-		getStatValue = function(p2, p3) --[[ Line: 243 ]]
+		getStatValue = function(p2, p3)
 			-- upvalues: SignalMap (copy)
 			local Data = SignalMap.getData(p2, false)
 			
 			return if Data then Data(p3) else nil
 		end,
-		getTeam = function() --[[ Line: 288 ]]
+		getTeam = function()
 			-- upvalues: Team (ref)
 			return Team
 		end,
-		setOrder = function(p2) --[[ Line: 251 ]]
+		setOrder = function(p2)
 			-- upvalues: Signal2 (copy)
 			Signal2(p2)
 		end,
-		setTeam = function(Value) --[[ Line: 255 ]]
+		setTeam = function(Value)
 			-- upvalues: Team (ref)
 			Team = Value
 		end,
-		destroy = function() --[[ Line: 259 ]]
+		destroy = function()
 			-- upvalues: t (ref), Connections (ref)
 			for _, value in pairs(t) do
 				for _, Connection in pairs(value) do

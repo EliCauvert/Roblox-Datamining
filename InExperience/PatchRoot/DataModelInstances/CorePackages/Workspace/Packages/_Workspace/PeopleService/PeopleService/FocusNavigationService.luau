@@ -5,7 +5,7 @@ PeopleListStore = if require(Parent.Flags).GetFFlagPeoplePageEnablePersonSignalS
 local PeopleUtilityModule = require(Parent.PeopleUtility)
 local SettingsHubServiceModule = require(Parent.Integration.SettingsHubService)
 
-return ((function() --[[ Line: 42 | Named "createFocusNavigationService" ]]
+return ((function()
 	-- upvalues: SettingsHubServiceModule (copy), GuiService (copy), PeopleListStore (ref), PeopleUtilityModule (copy)
 	local t = {}
 	local Keys = {}
@@ -17,7 +17,7 @@ return ((function() --[[ Line: 42 | Named "createFocusNavigationService" ]]
 	local CanvasPosition = nil
 	local BlockingModalRestoreMode = false
 	
-	local function _() --[[ Line: 78 | Named "restoreScrollPosition" ]]
+	local function _()
 		-- upvalues: CanvasPosition (ref), SettingsHubServiceModule (upval), BlockingModalRestoreMode (ref)
 		if CanvasPosition then
 			local HubRefResult = SettingsHubServiceModule.hubRef()
@@ -30,7 +30,7 @@ return ((function() --[[ Line: 42 | Named "createFocusNavigationService" ]]
 		end
 	end
 	
-	local function getFirstPersonButton() --[[ Line: 89 ]]
+	local function getFirstPersonButton()
 		-- upvalues: t (copy), t1 (copy)
 		local v2 = nil
 		local v3 = 1e999
@@ -59,7 +59,7 @@ return ((function() --[[ Line: 42 | Named "createFocusNavigationService" ]]
 		return v2
 	end
 	
-	local function handleSelectionChange() --[[ Line: 122 ]]
+	local function handleSelectionChange()
 		-- upvalues: GuiService (upval), v1 (ref), Keys (copy), getFirstPersonButton (copy), BlockingModalRestoreMode (ref), CanvasPosition (ref), SettingsHubServiceModule (upval), t3 (copy), t2 (copy)
 		local SelectedCoreObject = GuiService.SelectedCoreObject
 		
@@ -71,7 +71,7 @@ return ((function() --[[ Line: 42 | Named "createFocusNavigationService" ]]
 				local FirstPersonButton = getFirstPersonButton()
 				
 				if FirstPersonButton then
-					task.defer(function() --[[ Line: 133 ]]
+					task.defer(function()
 						-- upvalues: GuiService (upval), FirstPersonButton (copy)
 						GuiService.SelectedCoreObject = FirstPersonButton
 					end)
@@ -94,7 +94,7 @@ return ((function() --[[ Line: 42 | Named "createFocusNavigationService" ]]
 							local HubRefResult = SettingsHubServiceModule.hubRef()
 							
 							if HubRefResult then
-								task.defer(function() --[[ Line: 158 ]]
+								task.defer(function()
 									-- upvalues: HubRefResult (copy), Entry1 (copy)
 									HubRefResult:ScrollToFrame(Entry1, true)
 								end)
@@ -118,14 +118,14 @@ return ((function() --[[ Line: 42 | Named "createFocusNavigationService" ]]
 		v1 = SelectedCoreObject
 	end
 	
-	local _ = function() --[[ Line: 170 | Named "initializeSelectionListener" ]]
+	local _ = function()
 		-- upvalues: Connection (ref), GuiService (upval), handleSelectionChange (copy)
 		if not Connection then
 			Connection = GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(handleSelectionChange)
 		end
 	end
 	
-	local _ = function() --[[ Line: 177 | Named "disconnectSelectionListener" ]]
+	local _ = function()
 		-- upvalues: Connection (ref)
 		if Connection then
 			Connection:Disconnect()
@@ -133,7 +133,7 @@ return ((function() --[[ Line: 42 | Named "createFocusNavigationService" ]]
 		end
 	end
 	
-	local _ = function() --[[ Line: 224 | Named "getFocusedPersonInfo" ]]
+	local _ = function()
 		-- upvalues: GuiService (upval), Keys (copy)
 		local SelectedCoreObject = GuiService.SelectedCoreObject
 		
@@ -148,7 +148,7 @@ return ((function() --[[ Line: 42 | Named "createFocusNavigationService" ]]
 		return nil, nil
 	end
 	
-	local function findButtonForUser(UserId, p1) --[[ Line: 240 ]]
+	local function findButtonForUser(UserId, p1)
 		-- upvalues: t (copy)
 		local Entry = t[UserId]
 		
@@ -170,7 +170,7 @@ return ((function() --[[ Line: 42 | Named "createFocusNavigationService" ]]
 		return Frame
 	end
 	
-	local _ = function(p2, Entry) --[[ Line: 262 | Named "findNearestPerson" ]]
+	local _ = function(p2, Entry)
 		-- upvalues: t1 (copy)
 		if #Entry == 0 then
 			return nil
@@ -182,7 +182,7 @@ return ((function() --[[ Line: 42 | Named "createFocusNavigationService" ]]
 	end
 	
 	return {
-		registerButtonRow = function(Key, List, p2) --[[ Line: 184 ]]
+		registerButtonRow = function(Key, List, p2)
 			-- upvalues: t (copy), t1 (copy), Keys (copy), Connection (ref), GuiService (upval), handleSelectionChange (copy)
 			if not t[Key] then
 				t[Key] = {}
@@ -197,7 +197,7 @@ return ((function() --[[ Line: 42 | Named "createFocusNavigationService" ]]
 				Connection = GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(handleSelectionChange)
 			end
 		end,
-		unregisterButtonRow = function(Key) --[[ Line: 203 ]]
+		unregisterButtonRow = function(Key)
 			-- upvalues: t (copy), Keys (copy), t1 (copy), t3 (copy), Connection (ref)
 			local Entry = t[Key]
 			
@@ -215,23 +215,23 @@ return ((function() --[[ Line: 42 | Named "createFocusNavigationService" ]]
 				Connection = nil
 			end
 		end,
-		registerFrame = function(p3, Key) --[[ Line: 55 ]]
+		registerFrame = function(p3, Key)
 			-- upvalues: t2 (copy)
 			t2[Key] = p3
 		end,
-		unregisterFrame = function(Key) --[[ Line: 59 ]]
+		unregisterFrame = function(Key)
 			-- upvalues: t2 (copy)
 			t2[Key] = nil
 		end,
-		registerScrollCallback = function(Key, p3) --[[ Line: 63 ]]
+		registerScrollCallback = function(Key, p3)
 			-- upvalues: t3 (copy)
 			t3[Key] = p3
 		end,
-		unregisterScrollCallback = function(Key) --[[ Line: 67 ]]
+		unregisterScrollCallback = function(Key)
 			-- upvalues: t3 (copy)
 			t3[Key] = nil
 		end,
-		handlePersonRemoved = function(UserId) --[[ Line: 284 ]]
+		handlePersonRemoved = function(UserId)
 			-- upvalues: PeopleListStore (upval), GuiService (upval), Keys (copy), t1 (copy), t (copy), findButtonForUser (copy)
 			local PeopleResult = PeopleListStore.people(false)
 			
@@ -267,7 +267,7 @@ return ((function() --[[ Line: 42 | Named "createFocusNavigationService" ]]
 				local ButtonForUser = findButtonForUser(UserId2, v5)
 				
 				if ButtonForUser then
-					task.defer(function() --[[ Line: 301 ]]
+					task.defer(function()
 						-- upvalues: GuiService (upval), ButtonForUser (copy)
 						GuiService.SelectedCoreObject = ButtonForUser
 					end)
@@ -281,7 +281,7 @@ return ((function() --[[ Line: 42 | Named "createFocusNavigationService" ]]
 					ButtonForUser1 = findButtonForUser(i, v5)
 					
 					if ButtonForUser1 then
-						task.defer(function() --[[ Line: 313 ]]
+						task.defer(function()
 							-- upvalues: GuiService (upval), ButtonForUser1 (copy)
 							GuiService.SelectedCoreObject = ButtonForUser1
 						end)
@@ -290,7 +290,7 @@ return ((function() --[[ Line: 42 | Named "createFocusNavigationService" ]]
 				end
 			end
 		end,
-		hasSelectablePlatformButton = function(p3) --[[ Line: 322 ]]
+		hasSelectablePlatformButton = function(p3)
 			-- upvalues: PeopleListStore (upval), PeopleUtilityModule (upval)
 			if p3 then
 				local Text: string = PeopleListStore.getPlatformName(p3)(false)
@@ -301,7 +301,7 @@ return ((function() --[[ Line: 42 | Named "createFocusNavigationService" ]]
 				return false
 			end
 		end,
-		saveScrollPosition = function() --[[ Line: 71 ]]
+		saveScrollPosition = function()
 			-- upvalues: SettingsHubServiceModule (upval), CanvasPosition (ref)
 			local HubRefResult = SettingsHubServiceModule.hubRef()
 			
@@ -309,7 +309,7 @@ return ((function() --[[ Line: 42 | Named "createFocusNavigationService" ]]
 				CanvasPosition = HubRefResult.PageView.CanvasPosition
 			end
 		end,
-		setBlockingModalRestoreMode = function(Value) --[[ Line: 340 ]]
+		setBlockingModalRestoreMode = function(Value)
 			-- upvalues: BlockingModalRestoreMode (ref)
 			BlockingModalRestoreMode = Value
 		end,

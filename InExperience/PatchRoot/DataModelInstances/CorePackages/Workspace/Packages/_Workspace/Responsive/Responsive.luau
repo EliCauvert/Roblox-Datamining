@@ -15,14 +15,14 @@ local UsePreferredInputModule = require(script.Hooks.usePreferredInput)
 local GetVirtualResolutionScaleModule = require(script.getVirtualResolutionScale)
 local GetIsCompactTouchModule = require(script.getIsCompactTouch)
 
-function breakpointCompare(DefaultKey, DefaultKey1): boolean --[[ Line: 24 ]]
+function breakpointCompare(DefaultKey, DefaultKey1): boolean
 	-- upvalues: StandardBreakpointsModule (copy), ResponsiveModule (copy)
 	local KeyIndex = StandardBreakpointsModule.keyIndex
 	
 	return DefaultKey ~= ResponsiveModule.DefaultKey and DefaultKey1 ~= ResponsiveModule.DefaultKey and KeyIndex[DefaultKey] ~= nil and KeyIndex[DefaultKey1] ~= nil and KeyIndex[DefaultKey1] <= KeyIndex[DefaultKey]
 end
 
-function ResponsiveProvider(p1) --[[ Line: 32 ]]
+function ResponsiveProvider(p1)
 	-- upvalues: ReactModule (copy), ContainerRefModule (copy)
 	return ReactModule.createElement(ContainerRefModule.Provider, { value = ReactModule.useRef(nil) }, p1.children)
 end
@@ -36,7 +36,7 @@ return {
 	DefaultKey = ResponsiveModule.DefaultKey,
 	ContainerRef = ContainerRefModule,
 	ResponsiveProvider = ResponsiveProvider,
-	ResponsiveContainerFrame = function(p1) --[[ Line: 39 ]]
+	ResponsiveContainerFrame = function(p1)
 		-- upvalues: ReactModule (copy), ContainerRefModule (copy)
 		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -48,43 +48,43 @@ return {
 	end,
 	FindFirstAncestorWithTag = FindFirstAncestorWithTagModule,
 	useBreakpointX = UseResponsiveImplModule,
-	useBreakpointXOrLarger = function(p1) --[[ Line: 62 ]]
+	useBreakpointXOrLarger = function(p1)
 		-- upvalues: UseResponsiveImplModule (copy)
-		return UseResponsiveImplModule(function(p2) --[[ Line: 63 ]]
+		return UseResponsiveImplModule(function(p2)
 			-- upvalues: p1 (copy)
 			return breakpointCompare(p2, p1)
 		end, nil)
 	end,
-	useBreakpointXOrSmaller = function(p1) --[[ Line: 67 ]]
+	useBreakpointXOrSmaller = function(p1)
 		-- upvalues: UseResponsiveImplModule (copy)
-		return UseResponsiveImplModule(function(p2) --[[ Line: 68 ]]
+		return UseResponsiveImplModule(function(p2)
 			-- upvalues: p1 (copy)
 			return breakpointCompare(p1, p2)
 		end, nil)
 	end,
-	useBreakpointY = function() --[[ Line: 72 ]]
+	useBreakpointY = function()
 		-- upvalues: UseResponsiveImplModule (copy)
 		return UseResponsiveImplModule(nil, nil, "Y")
 	end,
-	useBreakpointYOrLarger = function(p1) --[[ Line: 75 ]]
+	useBreakpointYOrLarger = function(p1)
 		-- upvalues: UseResponsiveImplModule (copy)
-		return UseResponsiveImplModule(function(p2) --[[ Line: 76 ]]
+		return UseResponsiveImplModule(function(p2)
 			-- upvalues: p1 (copy)
 			return breakpointCompare(p2, p1)
 		end, nil, "Y")
 	end,
-	useBreakpointYOrSmaller = function(p1) --[[ Line: 80 ]]
+	useBreakpointYOrSmaller = function(p1)
 		-- upvalues: UseResponsiveImplModule (copy)
-		return UseResponsiveImplModule(function(p2) --[[ Line: 81 ]]
+		return UseResponsiveImplModule(function(p2)
 			-- upvalues: p1 (copy)
 			return breakpointCompare(p1, p2)
 		end, nil, "Y")
 	end,
-	useOrientation = function() --[[ Line: 85 ]]
+	useOrientation = function()
 		-- upvalues: UseResponsiveImplModule (copy)
 		return UseResponsiveImplModule(nil, nil, "Orientation")
 	end,
-	useResponsive = function(p1) --[[ Line: 88 ]]
+	useResponsive = function(p1)
 		-- upvalues: UseResponsiveImplModule (copy)
 		return UseResponsiveImplModule(nil, p1)
 	end,

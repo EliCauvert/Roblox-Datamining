@@ -1,4 +1,4 @@
-﻿return function(p1) --[[ Line: 5 | Named "parseProfileFrameAssetId" ]]
+﻿return function(p1)
 	if typeof(p1) == "table" then
 		local FrameAssetId = p1.FrameAssetId
 		

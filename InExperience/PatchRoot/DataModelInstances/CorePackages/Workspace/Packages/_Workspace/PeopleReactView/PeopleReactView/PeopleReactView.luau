@@ -37,15 +37,15 @@ local FFlagPeoplePageFlipVolumePopoverToFitViewport = FlagsService.FFlagPeoplePa
 local FFlagPeoplePageDismissCardMenuOnScrollOutOfView = FlagsService.FFlagPeoplePageDismissCardMenuOnScrollOutOfView
 local FFlagFixVirtualizedGridNumItems = FlagsService.FFlagFixVirtualizedGridNumItems
 
-return function(p1) --[[ Line: 59 | Named "_createPageView" ]]
+return function(p1)
 	-- upvalues: GetFFlagAddPeoplePageCardLayoutFunction (copy), UseGetPeopleServiceModule (copy), ReactModule (copy), PeopleServiceModule (copy), UseDeviceOrientationFunction (copy), RobloxAppEnumsModule (copy), FFlagPeopleListButtonOverflowModule (copy), UsePeopleWindowWidthModule (copy), IsPeoplePageCompactModule (copy), GameSettings (copy), GetFFlagPeoplePagePostponeInitialRenderFunction (copy), GetFFlagPeoplePageLazyRenderCardsFunction (copy), FFlagEnablePeopleListLazyRender (copy), FFlagPeopleCardsEnableVirtualizedGrid (copy), FFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (copy), FFlagPeoplePageFlipVolumePopoverToFitViewport (copy), FFlagPeoplePageDismissCardMenuOnScrollOutOfView (copy), UseScrollingFrameStoreModule (copy), FFlagFixVirtualizedGridNumItems (copy), FFlagPeoplePageRemoveUseMemoElements (copy), PeopleCardsModule (copy), FFlagSideSheetOpenPeoplePage (copy), PeopleListModule (copy), FFlagShowSwitchServerButton (copy), IsSideSheetEnabledModule (copy), MenuButtonsWrapperModule (copy), CoreButtonRowModule (copy), ConstantsModule (copy), SwitchServerTelemetry (copy), TitleBarModule (copy), View (copy), SwitchServerConfirmation (copy), PeoplePageLayoutContextModule (copy)
 	local PeopleAnalyticsManager = if GetFFlagAddPeoplePageCardLayoutFunction() then UseGetPeopleServiceModule("PeopleAnalyticsManager") else nil
 	local PeopleBlockingModalManager = nil
-	PeopleBlockingModalManager = if GetFFlagAddPeoplePageCardLayoutFunction() then UseGetPeopleServiceModule("PeopleBlockingModalManager") else ReactModule.useMemo(function() --[[ Line: 81 ]]
+	PeopleBlockingModalManager = if GetFFlagAddPeoplePageCardLayoutFunction() then UseGetPeopleServiceModule("PeopleBlockingModalManager") else ReactModule.useMemo(function()
 		-- upvalues: PeopleServiceModule (upval)
 		return PeopleServiceModule.getService("PeopleBlockingModalManager")
 	end, {})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 87 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: PeopleBlockingModalManager (ref), p1 (copy)
 		return PeopleBlockingModalManager.getModalManager(p1.blockingModalScreen, p1.blockingFlags)
 	end, {
@@ -62,7 +62,7 @@ return function(p1) --[[ Line: 59 | Named "_createPageView" ]]
 		v1 = UsePeopleWindowWidthModuleResult2
 		IsCompact = IsPeoplePageCompactModule(UsePeopleWindowWidthModuleResult)
 	end
-	local UseMemoResult1 = if FFlagPeopleListButtonOverflowModule then ReactModule.useMemo(function() --[[ Line: 103 ]]
+	local UseMemoResult1 = if FFlagPeopleListButtonOverflowModule then ReactModule.useMemo(function()
 		-- upvalues: IsCompact (ref)
 		return { isCompact = IsCompact }
 	end, { IsCompact }) else nil
@@ -79,13 +79,13 @@ return function(p1) --[[ Line: 59 | Named "_createPageView" ]]
 		v2, Callback1 = ReactModule.useState(false)
 	end
 	local UseScrollingFrameStoreModuleResult = if GetFFlagPeoplePageLazyRenderCardsFunction() or FFlagEnablePeopleListLazyRender or FFlagPeopleCardsEnableVirtualizedGrid or FFlagPeoplePageDismissVolumePopoverOnScrollOutOfView or FFlagPeoplePageFlipVolumePopoverToFitViewport or FFlagPeoplePageDismissCardMenuOnScrollOutOfView then UseScrollingFrameStoreModule(p1.scrollingFrame) else nil
-	local UseResult = if FFlagFixVirtualizedGridNumItems then ReactModule.useCallback(function(Frame) --[[ Line: 130 ]]
+	local UseResult = if FFlagFixVirtualizedGridNumItems then ReactModule.useCallback(function(Frame)
 		-- upvalues: UseScrollingFrameStoreModuleResult (copy)
 		if UseScrollingFrameStoreModuleResult then
 			UseScrollingFrameStoreModuleResult.setCanvasPositionYOffset(-Frame.AbsoluteSize.Y)
 		end
 	end, { UseScrollingFrameStoreModuleResult }) else nil
-	local UseResult1 = if GetFFlagAddPeoplePageCardLayoutFunction() then ReactModule.useCallback(function(p2) --[[ Line: 138 ]]
+	local UseResult1 = if GetFFlagAddPeoplePageCardLayoutFunction() then ReactModule.useCallback(function(p2)
 		-- upvalues: PeopleAnalyticsManager (copy), Callback (ref)
 		PeopleAnalyticsManager:trackPeoplePageLayoutChanged(p2)
 		Callback(p2)
@@ -99,7 +99,7 @@ return function(p1) --[[ Line: 59 | Named "_createPageView" ]]
 	}) else ReactModule.createElement(PeopleListModule, {
 		LayoutOrder = 3,
 		scrollingFrameStore = if FFlagEnablePeopleListLazyRender and p1.scrollingFrame then UseScrollingFrameStoreModuleResult else nil
-	}) elseif GetFFlagAddPeoplePageCardLayoutFunction() then ReactModule.useMemo(function() --[[ Line: 165 ]]
+	}) elseif GetFFlagAddPeoplePageCardLayoutFunction() then ReactModule.useMemo(function()
 		-- upvalues: PeoplePageLayout (ref), ReactModule (upval), PeopleCardsModule (upval), p1 (copy), FFlagSideSheetOpenPeoplePage (upval), UseScrollingFrameStoreModuleResult (copy), PeopleListModule (upval), FFlagEnablePeopleListLazyRender (upval)
 		return if PeoplePageLayout == Enum.PeoplePageLayout.Card then ReactModule.createElement(PeopleCardsModule, {
 			LayoutOrder = 3,
@@ -118,7 +118,7 @@ return function(p1) --[[ Line: 59 | Named "_createPageView" ]]
 	}) else nil
 	
 	if GetFFlagPeoplePagePostponeInitialRenderFunction() then
-		ReactModule.useEffect(function() --[[ Line: 196 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: Callback1 (ref)
 			Callback1(true)
 		end, {})
@@ -135,7 +135,7 @@ return function(p1) --[[ Line: 59 | Named "_createPageView" ]]
 			chromeEnabled = p1.chromeEnabled,
 			LayoutOrder = if GetFFlagAddPeoplePageCardLayoutFunction() then 1 else nil,
 			buttonActivatedTable = if FFlagShowSwitchServerButton then {
-				[ConstantsModule.PEOPLEPAGE.BUTTON_ACTIVATED_TABLE_KEYS.SWITCH_SERVER] = function() --[[ Line: 215 ]]
+				[ConstantsModule.PEOPLEPAGE.BUTTON_ACTIVATED_TABLE_KEYS.SWITCH_SERVER] = function()
 					-- upvalues: SwitchServerTelemetry (upval), Callback2 (ref)
 					SwitchServerTelemetry.sendSwitchServerButtonActions({ event_type = "click" })
 					Callback2(true)

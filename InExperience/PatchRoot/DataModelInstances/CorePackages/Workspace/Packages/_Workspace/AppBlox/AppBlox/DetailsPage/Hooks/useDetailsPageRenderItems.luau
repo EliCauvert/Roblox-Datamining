@@ -1,9 +1,9 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("AppBlox").Parent.React)
 local _ = require(script.Parent.Parent.Types)
 
-return function(p1, HeaderContainer, Vector, Vector1) --[[ Line: 9 | Named "useDetailsPageRenderItems" ]]
+return function(p1, HeaderContainer, Vector, Vector1)
 	-- upvalues: ReactModule (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 15 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		local List = {}
 		
@@ -16,21 +16,21 @@ return function(p1, HeaderContainer, Vector, Vector1) --[[ Line: 9 | Named "useD
 				key = Key
 			})
 		end
-		table.sort(List, function(A, B): boolean --[[ Line: 27 ]]
+		table.sort(List, function(A, B): boolean
 			return not B.index or (if A.index then A.index <= B.index else false)
 		end)
 		
 		return List
 	end, { p1 })
 	
-	return (ReactModule.useMemo(function() --[[ Line: 40 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), ReactModule (upval), Vector (copy), Vector1 (copy), HeaderContainer (copy)
 		local Copy = table.clone(UseMemoResult)
 		table.insert(Copy, 1, {
 			index = 1,
 			key = "Header",
 			showCornerGradient = true,
-			renderComponent = function() --[[ Line: 47 ]]
+			renderComponent = function()
 				-- upvalues: ReactModule (upval), Vector (upval), Vector1 (upval), HeaderContainer (upval)
 				return ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,

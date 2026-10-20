@@ -1,16 +1,16 @@
 ﻿local MockUserGameSettingsModule = {}
 MockUserGameSettingsModule.__index = MockUserGameSettingsModule
 
-function MockUserGameSettingsModule.new() --[[ Line: 8 ]]
+function MockUserGameSettingsModule.new()
 	-- upvalues: MockUserGameSettingsModule (copy)
 	local BindableEvent = Instance.new("BindableEvent")
 	local config = {
 		FullscreenChanged = {
-			Connect = function(_, Callback) --[[ Line: 13 ]]
+			Connect = function(_, Callback)
 				-- upvalues: BindableEvent (copy)
 				return BindableEvent.Event:Connect(Callback)
 			end,
-			GoFullscreen = function() --[[ Line: 16 ]]
+			GoFullscreen = function()
 				-- upvalues: BindableEvent (copy)
 				BindableEvent:Fire(true)
 			end
@@ -21,7 +21,7 @@ function MockUserGameSettingsModule.new() --[[ Line: 8 ]]
 	return config
 end
 
-function MockUserGameSettingsModule:InFullScreen(): boolean --[[ Line: 28 ]]
+function MockUserGameSettingsModule:InFullScreen(): boolean
 	return false
 end
 

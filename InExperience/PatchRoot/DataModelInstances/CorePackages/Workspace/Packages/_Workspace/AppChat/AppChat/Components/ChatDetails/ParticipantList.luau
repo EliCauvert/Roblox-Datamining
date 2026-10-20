@@ -32,14 +32,14 @@ local config = {
 	invitedKey = "Feature.SettingsHub.Label.Invited",
 	LayoutOrder = 0,
 	entries = {},
-	onEntryActivated = function(_, _) --[[ Line: 62 ]]
+	onEntryActivated = function(_, _)
 		-- upvalues: LoggerModule (copy)
 		LoggerModule:warning("onEntryActivated was not passed to ParticipantList")
 	end,
 	sortComparator = SocialLibrariesModule.Utils.presenceSortComparator
 }
 
-function ParticipantList(p1) --[[ Line: 75 ]]
+function ParticipantList(p1)
 	-- upvalues: CryoModule (copy), config (copy), GetFFlagAppChatParticipantDialogFoundationMenuModule (copy), ReactModule (copy), UseLocalizationFunction (copy), FFlagAppChatPresenceStoreMigrationModule (copy), SignalsModule (copy), GetResult (copy), Config (copy), SignalsReactModule (copy), FFlagAppChatParticipantDialogGamepadFocusModule (copy), ParticipantEntryModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), ParticipantEntryRightFrameModule (copy), SortedList (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local OnEntryActivated = JoinResult.onEntryActivated or config.onEntryActivated
@@ -49,9 +49,9 @@ function ParticipantList(p1) --[[ Line: 75 ]]
 		pendingLabelText = JoinResult.pendingKey,
 		invitedLabelText = JoinResult.invitedKey
 	})
-	local UseSignalStateResult = if FFlagAppChatPresenceStoreMigrationModule then SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 92 ]]
+	local UseSignalStateResult = if FFlagAppChatPresenceStoreMigrationModule then SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), JoinResult (copy), GetResult (upval), Config (upval)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 93 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: JoinResult (upval), GetResult (upval), Config (upval)
 			local t = {}
 			
@@ -67,7 +67,7 @@ function ParticipantList(p1) --[[ Line: 75 ]]
 		end)
 	end, { JoinResult.entries }))) else nil
 	
-	local function _(p2) --[[ Line: 110 ]]
+	local function _(p2)
 		-- upvalues: UseRefResult (ref), ReactModule (upval)
 		if UseRefResult == nil then
 			return nil
@@ -78,7 +78,7 @@ function ParticipantList(p1) --[[ Line: 75 ]]
 		return UseRefResult.current[p2]
 	end
 	
-	local function RenderEntry(p2, _) --[[ Line: 122 ]]
+	local function RenderEntry(p2, _)
 		-- upvalues: UseLocalizationResult (copy), FFlagAppChatParticipantDialogFoundationMenuModule (copy), UseRefResult (ref), ReactModule (upval), JoinResult (copy), FFlagAppChatParticipantDialogGamepadFocusModule (upval), OnEntryActivated (copy), ParticipantEntryModule (upval)
 		local IsInvited = p2.metadata and p2.metadata.isInvited
 		local Text = tostring(p2.id)
@@ -98,17 +98,17 @@ function ParticipantList(p1) --[[ Line: 75 ]]
 				CurrentEntry = UseRefResult.current[Text]
 			end
 			local IsActiveParticipantIdMatch = JoinResult.activeParticipantId == Text
-			config.onActivated = if FFlagAppChatParticipantDialogGamepadFocusModule then function() --[[ Line: 134 ]]
+			config.onActivated = if FFlagAppChatParticipantDialogGamepadFocusModule then function()
 				-- upvalues: IsActiveParticipantIdMatch (copy), OnEntryActivated (upval), p2 (copy), CurrentEntry (copy)
 				if not IsActiveParticipantIdMatch then
 					OnEntryActivated(p2, CurrentEntry)
 				end
-			end elseif IsActiveParticipantIdMatch then nil else function() --[[ Line: 140 ]]
+			end elseif IsActiveParticipantIdMatch then nil else function()
 				-- upvalues: OnEntryActivated (upval), p2 (copy), CurrentEntry (copy)
 				OnEntryActivated(p2, CurrentEntry)
 			end
 		else
-			function config.onActivated() --[[ Line: 144 ]]
+			function config.onActivated()
 				-- upvalues: OnEntryActivated (upval), p2 (copy)
 				OnEntryActivated(p2, nil)
 			end
@@ -148,7 +148,7 @@ function ParticipantList(p1) --[[ Line: 75 ]]
 				end
 				config1.dotsRef = CurrentEntry
 				
-				function config1.onDotsActivated() --[[ Line: 173 ]]
+				function config1.onDotsActivated()
 					-- upvalues: OnEntryActivated (copy), entry (copy), CurrentEntry (copy)
 					OnEntryActivated(entry, CurrentEntry)
 				end

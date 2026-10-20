@@ -8,13 +8,13 @@ local ChallengeRequestWrapperFunction = require(Parent.GenericChallenges).Middle
 local FFlagPymkCarouselPresenceStoreMigrationModule = require(PYMKCarousel.Flags.FFlagPymkCarouselPresenceStoreMigration)
 local PYMKCarouselNetworking = require(Parent.Lumberyak).Logger.new(nil, "PYMKCarousel"):new("PYMKCarousel Networking")
 local ConfigResult = HttpRequest.config({
-	requestFunction = function(p1, p2, p3) --[[ Line: 20 ]]
+	requestFunction = function(p1, p2, p3)
 		-- upvalues: PYMKCarouselNetworking (copy), MigratePymkCarouselHttpRequestToRequestInternal (copy), HttpRequest (copy)
 		PYMKCarouselNetworking:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p2, p1))
 		
 		return if MigratePymkCarouselHttpRequestToRequestInternal then HttpRequest.requestFunctions.RequestInternal(p1, p2, p3) else HttpRequest.requestFunctions.HttpRbxApi(p1, p2, p3)
 	end,
-	postRequestFunction = function(p1, p2) --[[ Line: 27 ]]
+	postRequestFunction = function(p1, p2)
 		-- upvalues: PYMKCarouselNetworking (copy)
 		PYMKCarouselNetworking:debug("Returned: {}", string.format("[ requestMethod = %q, url = %q, statusCode = %s, body = %s ]", p2.requestMethod, p2.url, p1.StatusCode, p1.Body))
 	end,

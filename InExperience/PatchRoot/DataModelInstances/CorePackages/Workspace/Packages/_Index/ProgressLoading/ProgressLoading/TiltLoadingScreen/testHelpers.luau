@@ -6,7 +6,7 @@ local InExperienceLocalesModule = require(Parent.InExperienceLocales)
 local LocalizationService = game:GetService("LocalizationService")
 
 return {
-	makeAnimationBindings = function() --[[ Line: 11 ]]
+	makeAnimationBindings = function()
 		-- upvalues: ReactModule (copy)
 		return {
 			keyart = {
@@ -30,7 +30,7 @@ return {
 			verified = { reveal = ReactModule.createBinding(1) }
 		}
 	end,
-	makeStatusPanelProps = function(List) --[[ Line: 37 ]]
+	makeStatusPanelProps = function(List)
 		local config = {
 			status = "",
 			statusText = "",
@@ -38,10 +38,10 @@ return {
 			queueTreatment = nil,
 			followUserId = 0,
 			isSubjectToChinaPolicies = false,
-			onAutoJoinNewServer = function() --[[ Line: 45 ]] end,
-			onJoinNewServer = function() --[[ Line: 46 ]] end,
-			onJoinTheLine = function() --[[ Line: 47 ]] end,
-			onShowConnectionHealth = function() --[[ Line: 48 ]] end
+			onAutoJoinNewServer = function() end,
+			onJoinNewServer = function() end,
+			onJoinTheLine = function() end,
+			onShowConnectionHealth = function() end
 		}
 		
 		if List then
@@ -51,7 +51,7 @@ return {
 		end
 		return config
 	end,
-	renderWithFoundation = function(Callback, Subject) --[[ Line: 58 ]]
+	renderWithFoundation = function(Callback, Subject)
 		-- upvalues: ReactModule (copy), FoundationModule (copy), LocalizationModule (copy), InExperienceLocalesModule (copy), LocalizationService (copy)
 		return Callback(ReactModule.createElement(FoundationModule.FoundationProvider, { colorMode = FoundationModule.Enums.ColorMode.Dark }, {
 			Localization = ReactModule.createElement(LocalizationModule.LocalizationProvider, {

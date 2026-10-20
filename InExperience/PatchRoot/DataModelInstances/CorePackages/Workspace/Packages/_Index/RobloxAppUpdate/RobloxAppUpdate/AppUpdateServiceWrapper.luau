@@ -2,7 +2,7 @@
 local AppUpdateServiceWrapperModule = {}
 AppUpdateServiceWrapperModule.__index = AppUpdateServiceWrapperModule
 
-function AppUpdateServiceWrapperModule.new(_appUpdate) --[[ Line: 9 ]]
+function AppUpdateServiceWrapperModule.new(_appUpdate)
 	-- upvalues: AppUpdateServiceWrapperModule (copy)
 	local config = { _appUpdate = _appUpdate }
 	setmetatable(config, AppUpdateServiceWrapperModule)
@@ -10,13 +10,13 @@ function AppUpdateServiceWrapperModule.new(_appUpdate) --[[ Line: 9 ]]
 	return config
 end
 
-function AppUpdateServiceWrapperModule.checkForUpdate(p1) --[[ Line: 18 ]]
+function AppUpdateServiceWrapperModule.checkForUpdate(p1)
 	-- upvalues: PromiseModule (copy)
-	return PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 19 ]]
+	return PromiseModule.new(function(Callback: (any) -> (), _)
 		-- upvalues: p1 (copy)
-		local Success, Result = pcall(function() --[[ Line: 20 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p1 (upval), Callback (copy)
-			p1._appUpdate:CheckForUpdate(function(AppUpdateStatus) --[[ Line: 21 ]]
+			p1._appUpdate:CheckForUpdate(function(AppUpdateStatus)
 				-- upvalues: Callback (upval)
 				Callback({ appUpdateStatus = AppUpdateStatus })
 			end)
@@ -28,11 +28,11 @@ function AppUpdateServiceWrapperModule.checkForUpdate(p1) --[[ Line: 18 ]]
 	end)
 end
 
-function AppUpdateServiceWrapperModule:performManagedUpdate() --[[ Line: 36 ]]
+function AppUpdateServiceWrapperModule:performManagedUpdate()
 	self._appUpdate:PerformManagedUpdate()
 end
 
-function AppUpdateServiceWrapperModule:canPerformBinaryUpdate() --[[ Line: 40 ]]
+function AppUpdateServiceWrapperModule:canPerformBinaryUpdate()
 	return self._appUpdate:CanPerformBinaryUpdate()
 end
 

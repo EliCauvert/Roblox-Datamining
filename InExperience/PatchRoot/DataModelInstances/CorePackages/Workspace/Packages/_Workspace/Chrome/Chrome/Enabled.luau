@@ -8,7 +8,7 @@ local VRService = game:GetService("VRService")
 local IsTenFootInterface = require(Parent.AppCommonLib).isTenFootInterface()
 local IsInExperienceUIVREnabled = require(Parent.SharedExperimentDefinition).isInExperienceUIVREnabled
 
-return function() --[[ Line: 16 ]]
+return function()
 	-- upvalues: DebugEnableChromeOnUnsupportedDevices (copy), VRService (copy), IsInExperienceUIVREnabled (copy), FFlagExperienceMenuGamepadExposureEnabled (copy), IsTenFootInterface (copy), FFlagEnableConsoleExpControls (copy)
 	return if DebugEnableChromeOnUnsupportedDevices then true elseif VRService.VREnabled then if IsInExperienceUIVREnabled then true else false elseif FFlagExperienceMenuGamepadExposureEnabled then true else (not IsTenFootInterface or FFlagEnableConsoleExpControls) and game:GetFastFlag("EnableInGameMenuChrome")
 end

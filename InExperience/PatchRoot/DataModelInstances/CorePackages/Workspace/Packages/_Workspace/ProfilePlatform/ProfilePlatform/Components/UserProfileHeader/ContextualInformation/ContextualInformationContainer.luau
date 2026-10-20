@@ -17,7 +17,7 @@ local ContextualMutualFriendsModule = require(script.Parent.ContextualMutualFrie
 local ContextualPlayedTogetherModule = require(script.Parent.ContextualPlayedTogether)
 local FFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceName)
 
-return function(p1) --[[ Line: 40 | Named "ContextualInformationContainer" ]]
+return function(p1)
 	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), FFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule (copy), UseDispatchFunction (copy), UseEffectOnMountFunction (copy), NetworkingGamesModule (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), ReactModule (copy), ContextualPresenceModule (copy), ContextualMutualFriendsModule (copy), ContextualPlayedTogetherModule (copy), ContextualGenericModule (copy), HorizontalPageMargin (copy)
 	local SourceInfo = UseProfileWrapperContextModule().sourceInfo
 	local ContextualInformation = (UseProfileJsonComponentModule(EnumsModule.Components.UserProfileHeader) or {}).contextualInformation
@@ -25,13 +25,13 @@ return function(p1) --[[ Line: 40 | Named "ContextualInformationContainer" ]]
 	local ContextDetails = ContextualInformation.contextDetails
 	local SourceUniverseId = if Context == EnumsModule.ContextualTypes.SentFromExperience then ContextDetails[Context].sourceUniverseId elseif FFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule and Context == EnumsModule.ContextualTypes.PlayedTogether then ContextDetails[Context].mostFrequentUniverseId else nil
 	local UseDispatchResult = UseDispatchFunction()
-	UseEffectOnMountFunction(function() --[[ Line: 59 ]]
+	UseEffectOnMountFunction(function()
 		-- upvalues: Context (copy), EnumsModule (upval), FFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule (upval), UseDispatchResult (copy), NetworkingGamesModule (upval), SourceUniverseId (copy)
 		if Context == EnumsModule.ContextualTypes.SentFromExperience or FFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule and Context == EnumsModule.ContextualTypes.PlayedTogether then
-			UseDispatchResult(NetworkingGamesModule.GetExperiencesDetails.API({ SourceUniverseId })):catch(function(_) --[[ Line: 67 ]] end)
+			UseDispatchResult(NetworkingGamesModule.GetExperiencesDetails.API({ SourceUniverseId })):catch(function(_) end)
 		end
 	end)
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 71 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: GetDeepValueFunction (upval), SourceUniverseId (copy)
 		return GetDeepValueFunction(p2, `ProfilePlatform.Games.byGameId.{tostring(SourceUniverseId)}.name`) or ""
 	end)

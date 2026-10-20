@@ -10,7 +10,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local View = FoundationModule.View
 local TakeItDownReportLink = game:DefineFastString("TakeItDownReportLink", "https://www.roblox.com/non-consensual-intimate-imagery-removal-request")
 
-return ReactModule.memo(function(p1) --[[ Line: 27 | Named "TakeItDownReportLink" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), GetIconRichTextFunction (copy), IconName (copy), Default (copy), TakeItDownReportLink (copy), ControlState (copy), View (copy), Text (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local Text1: string = `<b>{UseLocalizationFunction({
@@ -21,11 +21,11 @@ return ReactModule.memo(function(p1) --[[ Line: 27 | Named "TakeItDownReportLink
 		RichText = true,
 		tag = "auto-xy radius-small padding-xsmall text-wrap text-body-small",
 		Text = if UseStateResult then `<u>{Text1}</u>` else Text1,
-		onActivated = ReactModule.useCallback(function() --[[ Line: 37 ]]
+		onActivated = ReactModule.useCallback(function()
 			-- upvalues: Default (upval), TakeItDownReportLink (upval)
 			Default:openURL(TakeItDownReportLink)
 		end, {}),
-		onStateChanged = ReactModule.useCallback(function(Hover) --[[ Line: 41 ]]
+		onStateChanged = ReactModule.useCallback(function(Hover)
 			-- upvalues: UseStateResult2 (copy), ControlState (upval)
 			UseStateResult2(Hover == ControlState.Hover)
 		end, {})

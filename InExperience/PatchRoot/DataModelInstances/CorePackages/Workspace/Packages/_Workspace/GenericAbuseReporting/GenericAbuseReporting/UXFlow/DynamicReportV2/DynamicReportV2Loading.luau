@@ -6,7 +6,7 @@ local Sheet = FoundationModule.Sheet
 local Skeleton = FoundationModule.Skeleton
 local View = FoundationModule.View
 
-return ReactModule.memo(function(_) --[[ Line: 20 | Named "DynamicReportV2Loading" ]]
+return ReactModule.memo(function(_)
 	-- upvalues: ReactModule (copy), Sheet (copy), Skeleton (copy), Radius (copy), View (copy)
 	return ReactModule.createElement(ReactModule.Fragment, nil, {
 		Header = ReactModule.createElement(Sheet.Header, { hasCloseAffordance = true }, ReactModule.createElement(Skeleton, { Size = UDim2.new(1, 0, 0, 24), radius = Radius.Medium })),

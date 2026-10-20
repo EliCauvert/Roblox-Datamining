@@ -9,7 +9,7 @@ local _ = require(script.Parent.classifyMessage)
 local IconName = require(Parent.Foundation).Enums.IconName
 local _Color3 = Color3.fromRGB(255, 255, 255)
 
-local function _(Value: number): number --[[ Line: 83 | Named "ceilToEven" ]]
+local function _(Value: number): number
 	local Ceiled = math.ceil(Value)
 	
 	if Ceiled % 2 == 1 then
@@ -18,7 +18,7 @@ local function _(Value: number): number --[[ Line: 83 | Named "ceilToEven" ]]
 	return (math.max(0, Ceiled))
 end
 
-local function getSystemIconAttributes(SystemTextSize: number) --[[ Line: 95 ]]
+local function getSystemIconAttributes(SystemTextSize: number)
 	if SystemTextSize == nil then
 		return { weight = "600" }
 	end
@@ -30,16 +30,16 @@ local function getSystemIconAttributes(SystemTextSize: number) --[[ Line: 95 ]]
 	return { weight = "600", size = tostring((math.max(0, Ceiled))) }
 end
 
-local _ = function(p1) --[[ Line: 116 | Named "hashContent" ]]
+local _ = function(p1)
 	-- upvalues: GetModeratedMaskTextModule (copy)
 	return GetModeratedMaskTextModule(p1.messageId or p1.body)
 end
 
-local _ = function(p1): boolean --[[ Line: 120 | Named "isNameLoading" ]]
+local _ = function(p1): boolean
 	return p1.name == nil or p1.name == ""
 end
 
-local function makeSystemRow(SystemRow) --[[ Line: 127 ]]
+local function makeSystemRow(SystemRow)
 	-- upvalues: EscapeRichTextFunction (copy), FormatInlineIconFunction (copy), getSystemIconAttributes (copy)
 	local EscapeRichTextResult = EscapeRichTextFunction(SystemRow.content)
 	
@@ -50,7 +50,7 @@ local function makeSystemRow(SystemRow) --[[ Line: 127 ]]
 	}
 end
 
-local function buildReplyHeader(p1, p2, p3) --[[ Line: 139 ]]
+local function buildReplyHeader(p1, p2, p3)
 	-- upvalues: makeSystemRow (copy), GetReplyLabelDescriptorModule (copy), IconName (copy)
 	local LocalizeFunction = p3.localize
 	local SystemTextSize = p3.systemTextSize
@@ -82,7 +82,7 @@ local function buildReplyHeader(p1, p2, p3) --[[ Line: 139 ]]
 	end
 end
 
-local function buildHiddenUser(p1, p2) --[[ Line: 180 ]]
+local function buildHiddenUser(p1, p2)
 	-- upvalues: makeSystemRow (copy), IconName (copy)
 	if p1.name == nil or p1.name == "" then
 		return (makeSystemRow({ content = "", skeletonWidth = "full" }))
@@ -100,7 +100,7 @@ local function buildHiddenUser(p1, p2) --[[ Line: 180 ]]
 	end
 end
 
-local function buildUserText(p1, p2) --[[ Line: 195 ]]
+local function buildUserText(p1, p2)
 	-- upvalues: GetModeratedMaskTextModule (copy), EscapeRichTextFunction (copy), ComputeNameColorFunction (copy), _Color3 (copy)
 	local ModeratedMaskTextModule = if p1.moderated then GetModeratedMaskTextModule(p1.messageId or p1.body) else EscapeRichTextFunction(p1.body)
 	local Name = p2.name
@@ -122,7 +122,7 @@ local function buildUserText(p1, p2) --[[ Line: 195 ]]
 	end
 end
 
-return function(p1, p2, p3) --[[ Line: 228 | Named "buildRowDisplay" ]]
+return function(p1, p2, p3)
 	-- upvalues: IconName (copy), makeSystemRow (copy), buildHiddenUser (copy), buildReplyHeader (copy), buildUserText (copy)
 	local LocalizeFunction = p3.localize
 	local SystemTextSize = p3.systemTextSize

@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("AvatarExperienceRodux").Parent.Rodux).makeActionCreator("SetItemDetailsPeekViewState", function(ViewState) --[[ Line: 5 ]]
+﻿return require(script:FindFirstAncestor("AvatarExperienceRodux").Parent.Rodux).makeActionCreator("SetItemDetailsPeekViewState", function(ViewState)
 	return { viewState = ViewState }
 end)

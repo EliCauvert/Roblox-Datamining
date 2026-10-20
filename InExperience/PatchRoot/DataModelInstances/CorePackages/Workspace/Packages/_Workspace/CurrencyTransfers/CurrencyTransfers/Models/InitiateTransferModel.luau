@@ -3,7 +3,7 @@ local _ = require(CurrencyTransfers.types)
 local TModule = require(CurrencyTransfers.Parent.t)
 local InitiateTransferModelModule = {}
 
-function InitiateTransferModelModule.new(p1) --[[ Line: 24 ]]
+function InitiateTransferModelModule.new(p1)
 	-- upvalues: InitiateTransferModelModule (copy)
 	assert(InitiateTransferModelModule.isValid(p1))
 	InitiateTransferModelModule.__index = InitiateTransferModelModule
@@ -12,7 +12,7 @@ function InitiateTransferModelModule.new(p1) --[[ Line: 24 ]]
 	return p1
 end
 
-function InitiateTransferModelModule.mock(p1) --[[ Line: 36 ]]
+function InitiateTransferModelModule.mock(p1)
 	-- upvalues: InitiateTransferModelModule (copy)
 	local P1 = p1 or {}
 	local RobuxTransfer = P1.robuxTransfer or {}
@@ -43,7 +43,7 @@ function InitiateTransferModelModule.mock(p1) --[[ Line: 36 ]]
 	}))
 end
 
-function InitiateTransferModelModule.format(p1) --[[ Line: 73 ]]
+function InitiateTransferModelModule.format(p1)
 	-- upvalues: InitiateTransferModelModule (copy)
 	local RobuxTransfer = p1.robuxTransfer
 	local Sender = RobuxTransfer.sender

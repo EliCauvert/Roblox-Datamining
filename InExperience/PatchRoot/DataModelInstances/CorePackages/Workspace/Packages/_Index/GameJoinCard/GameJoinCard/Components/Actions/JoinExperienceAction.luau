@@ -11,7 +11,7 @@ local GetTelemetryFieldsModule = require(script.Parent.getTelemetryFields)
 local LogGamePlayIntentModule = require(script.Parent.logGamePlayIntent)
 
 return {
-	[UserCtaAction.JoinExperience] = function(p1) --[[ Line: 18 ]]
+	[UserCtaAction.JoinExperience] = function(p1)
 		-- upvalues: UserCtaAction (copy), ButtonVariant (copy), InputSize (copy), UseGameJoinCardAnalyticsModule (copy), GameJoinCardButtonAction (copy), GetTelemetryFieldsModule (copy), LogGamePlayIntentModule (copy)
 		local Experience = p1.experience
 		
@@ -23,7 +23,7 @@ return {
 			isLoading = Experience.isLoading,
 			isDisabled = if Experience.isInExperience == nil then nil else not Experience.isInExperience,
 			text = p1.localized[UserCtaAction.JoinExperience],
-			onActivated = function() --[[ Line: 28 ]]
+			onActivated = function()
 				-- upvalues: p1 (copy), UseGameJoinCardAnalyticsModule (upval), GameJoinCardButtonAction (upval), GetTelemetryFieldsModule (upval), LogGamePlayIntentModule (upval), Experience (copy)
 				if p1.userId ~= "" then
 					UseGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(GameJoinCardButtonAction.JoinGame, GetTelemetryFieldsModule(p1))

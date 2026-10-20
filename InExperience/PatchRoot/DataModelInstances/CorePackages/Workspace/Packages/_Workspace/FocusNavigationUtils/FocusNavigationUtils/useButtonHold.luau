@@ -7,29 +7,29 @@ local FFlagEnableFocusNavTelemetry = require(Parent.SharedFlags).FFlagEnableFocu
 local InputHandlersModule = require(Parent.InputHandlers)
 local ReactModule = require(Parent.React)
 
-local function useFakeCancelHoldAfterBlur(Frame, Callback, Callback1) --[[ Line: 21 ]]
+local function useFakeCancelHoldAfterBlur(Frame, Callback, Callback1)
 	-- upvalues: ReactModule (copy)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 22 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: Callback (copy), Callback1 (copy)
 		Callback({ eventData = { UserInputState = Enum.UserInputState.End } })
 		Callback1()
 	end, { Callback, Callback1 })
-	ReactModule.useEffect(function() --[[ Line: 34 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy), UseResult (copy)
 		if Frame and Frame:IsA("GuiObject") then
 			local SelectionLostConnection = Frame.SelectionLost:Connect(UseResult)
 			
-			return function() --[[ Line: 37 ]]
+			return function()
 				-- upvalues: SelectionLostConnection (copy)
 				SelectionLostConnection:Disconnect()
 			end
 		else
-			return function() --[[ Line: 41 ]] end
+			return function() end
 		end
 	end, { Frame, UseResult })
 end
 
-return function(p1: number, DurationSeconds: number, AllowReleaseAfterHold) --[[ Line: 45 | Named "useButtonHold" ]]
+return function(p1: number, DurationSeconds: number, AllowReleaseAfterHold)
 	-- upvalues: ArgCheckModule (copy), ReactModule (copy), ButtonHoldStateEnumModule (copy), FFlagEnableFocusNavTelemetry (copy), ButtonHoldCompletedSignalModule (copy), InputHandlersModule (copy), useFakeCancelHoldAfterBlur (copy)
 	ArgCheckModule.assert(p1 >= 0, "signalHoldIntentSeconds must be greater than or equal to 0")
 	ArgCheckModule.assert(DurationSeconds > 0, "signalHoldCompleteSeconds must be greater than 0")
@@ -39,7 +39,7 @@ return function(p1: number, DurationSeconds: number, AllowReleaseAfterHold) --[[
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
 	local UseRefResult1 = if FFlagEnableFocusNavTelemetry then ReactModule.useRef(nil) else nil
-	local UseResult = ReactModule.useCallback(function(_) --[[ Line: 71 ]]
+	local UseResult = ReactModule.useCallback(function(_)
 		-- upvalues: ArgCheckModule (upval), UseRefResult (copy), UseBindingResult2 (copy), UseBindingResult (copy), p1 (copy), UseStateResult2 (copy), ButtonHoldStateEnumModule (upval)
 		local CurrentTime = tick()
 		ArgCheckModule.assert(UseRefResult.current ~= nil, "startTime.current should not be nil")
@@ -52,7 +52,7 @@ return function(p1: number, DurationSeconds: number, AllowReleaseAfterHold) --[[
 			UseStateResult2(ButtonHoldStateEnumModule.HOLDING)
 		end
 	end, { UseBindingResult, p1 })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 86 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseBindingResult2 (copy), DurationSeconds (copy), UseRefResult (copy), UseStateResult2 (copy), ButtonHoldStateEnumModule (upval), FFlagEnableFocusNavTelemetry (upval), UseRefResult1 (ref), ButtonHoldCompletedSignalModule (upval)
 		UseBindingResult2(DurationSeconds)
 		UseRefResult.current = nil
@@ -63,7 +63,7 @@ return function(p1: number, DurationSeconds: number, AllowReleaseAfterHold) --[[
 			ButtonHoldCompletedSignalModule:fire(Current.eventName, Current.keyCode, Current.userInputType)
 		end
 	end, { DurationSeconds })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 96 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseBindingResult2 (copy), UseRefResult (copy), UseStateResult2 (copy), ButtonHoldStateEnumModule (upval)
 		UseBindingResult2(0)
 		UseRefResult.current = nil
@@ -76,7 +76,7 @@ return function(p1: number, DurationSeconds: number, AllowReleaseAfterHold) --[[
 			onComplete = UseResult1,
 			allowReleaseAfterHold = AllowReleaseAfterHold
 		},
-		onPress = ReactModule.useCallback(function() --[[ Line: 66 ]]
+		onPress = ReactModule.useCallback(function()
 			-- upvalues: UseRefResult (copy), UseStateResult2 (copy), ButtonHoldStateEnumModule (upval)
 			UseRefResult.current = tick()
 			UseStateResult2(ButtonHoldStateEnumModule.JUST_PRESSED)
@@ -89,7 +89,7 @@ return function(p1: number, DurationSeconds: number, AllowReleaseAfterHold) --[[
 		DurationSeconds,
 		AllowReleaseAfterHold
 	})
-	local UseResult4 = ReactModule.useCallback(function(p2) --[[ Line: 122 ]]
+	local UseResult4 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_1 (copy), FFlagEnableFocusNavTelemetry (upval), UseRefResult1 (ref), UseResult3 (copy)
 		UseStateResult2_1(p2.targetInstance)
 		
@@ -108,7 +108,7 @@ return function(p1: number, DurationSeconds: number, AllowReleaseAfterHold) --[[
 		eventHandler = UseResult4,
 		holdState = UseStateResult,
 		holdTime = UseBindingResult,
-		holdProgress = UseBindingResult:map(function(p2) --[[ Line: 140 ]]
+		holdProgress = UseBindingResult:map(function(p2)
 			-- upvalues: DurationSeconds (copy)
 			return p2 / DurationSeconds
 		end),

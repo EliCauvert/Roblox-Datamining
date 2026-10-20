@@ -3,7 +3,7 @@ local _ = require(PurchasePrompt.Parent.IAPExperience)
 local _ = require(PurchasePrompt.types)
 local DeriveSelectedOfferIdsFromCartPricingModule = require(script.Parent.deriveSelectedOfferIdsFromCartPricing)
 
-return function(p1) --[[ Line: 17 | Named "derivePurchaseOptionsFromCartPricingResponse" ]]
+return function(p1)
 	-- upvalues: DeriveSelectedOfferIdsFromCartPricingModule (copy)
 	if p1 == nil then
 		return nil

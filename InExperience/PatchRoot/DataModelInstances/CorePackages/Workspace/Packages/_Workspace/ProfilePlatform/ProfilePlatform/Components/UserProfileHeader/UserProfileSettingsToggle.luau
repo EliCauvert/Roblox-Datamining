@@ -13,7 +13,7 @@ local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfi
 local UserProfileSettingsNetworkingModule = require(ProfilePlatform.Networking.UserProfileSettingsNetworking)
 local RefreshProfilePlatformUserProfileHeaderModule = require(ProfilePlatform.Networking.refreshProfilePlatformUserProfileHeader)
 
-return function(p1) --[[ Line: 27 | Named "UserProfileSettingsToggle" ]]
+return function(p1)
 	-- upvalues: UseProfileWrapperContextModule (copy), UseStyleFunction (copy), UseDispatchFunction (copy), ReactModule (copy), UserProfileSettingsNetworkingModule (copy), RefreshProfilePlatformUserProfileHeaderModule (copy), HorizontalPageMargin (copy), StyledTextLabel (copy), Toggle (copy), ToggleSize (copy)
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	local UseStyleResult = UseStyleFunction()
@@ -39,9 +39,9 @@ return function(p1) --[[ Line: 27 | Named "UserProfileSettingsToggle" ]]
 			label = "",
 			size = ToggleSize.Medium,
 			isChecked = p1.isInExperienceNameEnabled,
-			onActivated = ReactModule.useCallback(function(IsInExperienceNameEnabled) --[[ Line: 32 ]]
+			onActivated = ReactModule.useCallback(function(IsInExperienceNameEnabled)
 				-- upvalues: UseDispatchResult (copy), UserProfileSettingsNetworkingModule (upval), RefreshProfilePlatformUserProfileHeaderModule (upval), UseProfileWrapperContextModuleResult (copy)
-				UseDispatchResult(UserProfileSettingsNetworkingModule.SetUserProfileSettings.API({ isInExperienceNameEnabled = IsInExperienceNameEnabled })):andThen(function(Result) --[[ Line: 35 ]]
+				UseDispatchResult(UserProfileSettingsNetworkingModule.SetUserProfileSettings.API({ isInExperienceNameEnabled = IsInExperienceNameEnabled })):andThen(function(Result)
 					-- upvalues: UseDispatchResult (upval), RefreshProfilePlatformUserProfileHeaderModule (upval), UseProfileWrapperContextModuleResult (upval)
 					if Result.responseBody.successfullyUpdated then
 						UseDispatchResult(RefreshProfilePlatformUserProfileHeaderModule(UseProfileWrapperContextModuleResult.profileId))

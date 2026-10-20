@@ -11,11 +11,11 @@ return {
 	},
 	requiredData = { ValidationEnumsModule.SharedDataMember.rootInstance },
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 21 ]]
+	run = function(p1, p2)
 		-- upvalues: UGCValidationBodyPartCollisionFidelity (copy), ErrorSourceStringsModule (copy)
 		local RootInstance = p2.rootInstance
 		local Default = Enum.CollisionFidelity.Default
-		pcall(function() --[[ Line: 29 ]]
+		pcall(function()
 			-- upvalues: Default (ref), UGCValidationBodyPartCollisionFidelity (upval)
 			Default = Enum.CollisionFidelity[UGCValidationBodyPartCollisionFidelity]
 		end)

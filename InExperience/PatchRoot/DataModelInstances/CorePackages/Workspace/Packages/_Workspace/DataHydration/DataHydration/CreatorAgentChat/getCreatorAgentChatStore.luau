@@ -6,7 +6,7 @@ local ResolveAcpUrlModule = require(script.Parent.Env.resolveAcpUrl)
 local _ = require(script.Parent.types)
 local WireCapDeliveryModule = require(script.Parent.Acp.wireCapDelivery)
 
-return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function() --[[ Line: 19 | Named "createDefaultStore" ]]
+return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function()
 	-- upvalues: ResolveAcpUrlModule (copy), DebugModule (copy), AcpProtocolModule (copy), CreateCreatorAgentChatStoreModule (copy), GetDefaultAuthHeadersModule (copy), WireCapDeliveryModule (copy)
 	local ResolveCreatorAgentAcpResult = ResolveAcpUrlModule.resolveCreatorAgentAcp()
 	DebugModule.log("info", "creating CreatorAgentChatStore", {

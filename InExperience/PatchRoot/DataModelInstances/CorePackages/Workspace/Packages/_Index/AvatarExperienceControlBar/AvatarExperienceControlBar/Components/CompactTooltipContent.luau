@@ -10,7 +10,7 @@ local config = {
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p1) --[[ Line: 23 | Named "CompactTooltipContent" ]]
+return function(p1)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), ReactFocusNavigationModule (copy), config (copy), Selection (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local HasOnDismiss = p1.onDismiss ~= nil
@@ -21,11 +21,11 @@ return function(p1) --[[ Line: 23 | Named "CompactTooltipContent" ]]
 		selectionGroup = false,
 		tag = "row align-y-center gap-xsmall auto-xy padding-medium",
 		testId = "--control-bar-compact-tooltip",
-		ref = ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function() --[[ Line: 36 ]]
+		ref = ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function()
 			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), p1 (copy)
 			return {
 				[FocusNavigationEventNameEnum.NavigateBack] = {
-					handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 39 ]]
+					handler = InputHandlersModule.onRelease(function(p2)
 						-- upvalues: p1 (upval)
 						if p1.onDismiss then
 							p1.onDismiss()
@@ -41,7 +41,7 @@ return function(p1) --[[ Line: 23 | Named "CompactTooltipContent" ]]
 			LayoutOrder = 1,
 			tag = "auto-xy text-body-medium text-wrap text-align-x-left content-inverse-default",
 			Text = p1.bodyText,
-			sizeConstraint = ReactModule.useMemo(function() --[[ Line: 30 ]]
+			sizeConstraint = ReactModule.useMemo(function()
 				-- upvalues: UseScaledValueResultDelta (copy)
 				return { MaxSize = Vector2.new(UseScaledValueResultDelta, 1e999) }
 			end, { UseScaledValueResultDelta })

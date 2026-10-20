@@ -7,7 +7,7 @@ local config = {
 	requests = { receivedCount = 0 }
 }
 
-return function(p1) --[[ Line: 16 ]]
+return function(p1)
 	-- upvalues: ConvertActionsModule (copy), RoduxFriends (copy), FriendsActionAdaptorModule (copy), config (copy)
 	return ConvertActionsModule(RoduxFriends.installReducer(), FriendsActionAdaptorModule(p1), config)
 end

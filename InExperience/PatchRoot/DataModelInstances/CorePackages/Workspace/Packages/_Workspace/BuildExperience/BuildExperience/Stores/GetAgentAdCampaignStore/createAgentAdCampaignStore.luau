@@ -7,25 +7,25 @@ local _ = require(Parent.DataHydration.CreatorAgentChat)
 local _ = require(BuildExperience.Storage.createAdCampaignCardStorage)
 local FFlagBuildAgentAdCampaignRefreshEligibilityModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignRefreshEligibility)
 
-local function _(Record): boolean --[[ Line: 37 | Named "hasToolCallIdempotency" ]]
+local function _(Record): boolean
 	return Record.idempotencyKey == Record.toolCallId
 end
 
-local _ = function(p1): boolean --[[ Line: 41 | Named "isWithinReplayWindow" ]]
+local _ = function(p1): boolean
 	local UnixTimestampMillisDelta = DateTime.now().UnixTimestampMillis - (p1.attemptStartedAtMs or 0)
 	
 	return UnixTimestampMillisDelta >= 0 and UnixTimestampMillisDelta < 82800000
 end
 
-local _ = function(p1): boolean --[[ Line: 46 | Named "isDefinitiveFailure" ]]
+local _ = function(p1): boolean
 	return not p1.isPending and (p1.hasAmbiguousFailure == false and (p1.failureKind ~= nil and p1.failureKind ~= "unknown"))
 end
 
-local function canReplaceRejectedAttempt(p1): boolean --[[ Line: 53 ]]
+local function canReplaceRejectedAttempt(p1): boolean
 	return not p1.isPending and (p1.hasAmbiguousFailure == false and (p1.failureKind ~= nil and p1.failureKind ~= "unknown")) and p1.failureKind ~= "payment_required"
 end
 
-local function getRetrySelection(Tbl, RunStartTimeMs) --[[ Line: 57 ]]
+local function getRetrySelection(Tbl, RunStartTimeMs)
 	if Tbl.idempotencyKey == Tbl.toolCallId then
 		local _DateTime = DateTime.now()
 		local LocalTime = _DateTime:ToLocalTime()
@@ -56,7 +56,7 @@ local function getRetrySelection(Tbl, RunStartTimeMs) --[[ Line: 57 ]]
 	end
 end
 
-local function getRetryOffers(p1, p2) --[[ Line: 86 ]]
+local function getRetryOffers(p1, p2)
 	if not p1.isPending and (p1.hasAmbiguousFailure == false and (p1.failureKind ~= nil and p1.failureKind ~= "unknown")) and p1.failureKind ~= "payment_required" then
 		return p2
 	else
@@ -68,7 +68,7 @@ local function getRetryOffers(p1, p2) --[[ Line: 86 ]]
 	end
 end
 
-local function toRecord(Record) --[[ Line: 108 ]]
+local function toRecord(Record)
 	local SelectedOption = Record.selectedOption
 	local Feedback = if SelectedOption.campaignOption == "feedback" then Record.offers.feedback else Record.offers.plays
 	assert(Feedback ~= nil, "A submitted campaign must have an offer")
@@ -92,12 +92,12 @@ local function toRecord(Record) --[[ Line: 108 ]]
 	}
 end
 
-return function() --[[ Line: 139 | Named "createAgentAdCampaignStore" ]]
+return function()
 	-- upvalues: SignalsUtilsModule (copy), HttpService (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (copy), getRetrySelection (copy), toRecord (copy), getRetryOffers (copy), canReplaceRejectedAttempt (copy)
 	local SessionScopedSignal, SessionScopedSignal2 = SignalsUtilsModule.createSessionScopedSignal({})
 	local SessionScopedSignal1, SessionScopedSignal2_1 = SignalsUtilsModule.createSessionScopedSignal({})
 	
-	local function start(Record, Tbl, UserId, p1) --[[ Line: 144 ]]
+	local function start(Record, Tbl, UserId, p1)
 		-- upvalues: SessionScopedSignal (copy), HttpService (upval), SessionScopedSignal2 (copy)
 		local SessionScopedSignalResult = SessionScopedSignal(false)
 		local SessionScopedSignalResultEntry = SessionScopedSignalResult[Record.toolCallId]
@@ -132,7 +132,7 @@ return function() --[[ Line: 139 | Named "createAgentAdCampaignStore" ]]
 		end
 	end
 	
-	local function restore(Record, UserId, p1): boolean --[[ Line: 229 ]]
+	local function restore(Record, UserId, p1): boolean
 		-- upvalues: SessionScopedSignal (copy), SessionScopedSignal2 (copy)
 		local GetResult = p1.get(Record.sessionId, Record.toolCallId)
 		
@@ -204,7 +204,7 @@ return function() --[[ Line: 139 | Named "createAgentAdCampaignStore" ]]
 		getRetryOffers = getRetryOffers,
 		canReplaceRejectedAttempt = canReplaceRejectedAttempt,
 		start = start,
-		finish = function(Tbl, p1, FailureKind, HasAmbiguousFailure): boolean --[[ Line: 203 ]]
+		finish = function(Tbl, p1, FailureKind, HasAmbiguousFailure): boolean
 			-- upvalues: SessionScopedSignal (copy), SessionScopedSignal2 (copy)
 			local SessionScopedSignalResult = SessionScopedSignal(false)
 			
@@ -230,7 +230,7 @@ return function() --[[ Line: 139 | Named "createAgentAdCampaignStore" ]]
 			return true
 		end,
 		restore = restore,
-		startDurable = function(p1, p2, UserId, p3) --[[ Line: 306 ]]
+		startDurable = function(p1, p2, UserId, p3)
 			-- upvalues: restore (copy), SessionScopedSignal (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (upval), getRetrySelection (upval), start (copy), toRecord (upval), SessionScopedSignal2 (copy)
 			if not restore(p1, UserId, p3) then
 				return nil
@@ -303,7 +303,7 @@ return function() --[[ Line: 139 | Named "createAgentAdCampaignStore" ]]
 				return nil
 			end
 		end,
-		finishDurable = function(Tbl, FailureKind, p1): boolean --[[ Line: 371 ]]
+		finishDurable = function(Tbl, FailureKind, p1): boolean
 			-- upvalues: SessionScopedSignal (copy), toRecord (upval), SessionScopedSignal2 (copy)
 			if SessionScopedSignal(false)[Tbl.toolCallId] ~= Tbl then
 				return false
@@ -332,7 +332,7 @@ return function() --[[ Line: 139 | Named "createAgentAdCampaignStore" ]]
 			
 			return true
 		end,
-		completeDurable = function(Record) --[[ Line: 390 ]]
+		completeDurable = function(Record)
 			-- upvalues: SessionScopedSignal (copy), SessionScopedSignal2 (copy)
 			local SessionScopedSignalResultEntry = SessionScopedSignal(false)[Record.toolCallId]
 			
@@ -346,7 +346,7 @@ return function() --[[ Line: 139 | Named "createAgentAdCampaignStore" ]]
 			end
 		end,
 		toRecord = toRecord,
-		markImpressed = function(Key, p1): boolean --[[ Line: 415 ]]
+		markImpressed = function(Key, p1): boolean
 			-- upvalues: SessionScopedSignal1 (copy), SessionScopedSignal2_1 (copy)
 			local SessionScopedSignalResult = SessionScopedSignal1(false)
 			
@@ -361,7 +361,7 @@ return function() --[[ Line: 139 | Named "createAgentAdCampaignStore" ]]
 				return false
 			end
 		end,
-		reset = function() --[[ Line: 426 ]]
+		reset = function()
 			-- upvalues: SessionScopedSignal2 (copy), SessionScopedSignal2_1 (copy)
 			SessionScopedSignal2({})
 			SessionScopedSignal2_1({})

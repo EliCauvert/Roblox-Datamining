@@ -18,22 +18,22 @@ local config1 = {
 	[VOICESTATUS.ERROR_VOICE_MIC_REJECTED] = nil
 }
 
-function isVoiceRetriableErrorByGameJoin(p1): boolean --[[ Line: 29 ]]
+function isVoiceRetriableErrorByGameJoin(p1): boolean
 	-- upvalues: config (copy)
 	return p1 ~= nil and config[p1] == true
 end
 
-function isMicPermissionsError(ERRORVOICEMICREJECTED): boolean --[[ Line: 36 ]]
+function isMicPermissionsError(ERRORVOICEMICREJECTED): boolean
 	-- upvalues: VOICESTATUS (copy)
 	return ERRORVOICEMICREJECTED ~= nil and ERRORVOICEMICREJECTED == VOICESTATUS.ERROR_VOICE_MIC_REJECTED
 end
 
-function isVoiceRetriableErrorByVoiceJoin(p1): boolean --[[ Line: 43 ]]
+function isVoiceRetriableErrorByVoiceJoin(p1): boolean
 	-- upvalues: config1 (copy)
 	return p1 ~= nil and config1[p1] == true
 end
 
-function isVoiceRetriableError(p1) --[[ Line: 51 ]]
+function isVoiceRetriableError(p1)
 	return isVoiceRetriableErrorByGameJoin(p1) or isVoiceRetriableErrorByVoiceJoin(p1)
 end
 

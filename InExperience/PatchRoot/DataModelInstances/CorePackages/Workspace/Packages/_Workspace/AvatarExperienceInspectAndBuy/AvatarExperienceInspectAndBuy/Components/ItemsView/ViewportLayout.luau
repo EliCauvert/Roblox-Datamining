@@ -9,7 +9,7 @@ local BuyActionBarLayoutModule = require(AvatarExperienceInspectAndBuy.Component
 local _ = require(AvatarExperienceInspectAndBuy.Components.Common.BuyActionBar)
 local _ = require(AvatarExperienceInspectAndBuy.Types)
 
-return function(Frame) --[[ Line: 64 | Named "ViewportLayout" ]]
+return function(Frame)
 	-- upvalues: ViewTypeModule (copy), UseTokensFunction (copy), ReactModule (copy), BackButtonModule (copy), FoundationModule (copy), BuyActionBarLayoutModule (copy)
 	local IsViewMatch = Frame.view == ViewTypeModule.WideLandscape
 	local OnBackButtonClick = Frame.backButtonProps and Frame.backButtonProps.onBackButtonClick

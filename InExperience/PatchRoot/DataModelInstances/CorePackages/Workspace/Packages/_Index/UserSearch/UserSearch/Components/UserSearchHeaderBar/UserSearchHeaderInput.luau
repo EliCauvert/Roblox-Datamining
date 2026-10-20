@@ -2,12 +2,12 @@
 local ReactModule = require(Parent.React)
 local UserSearchBar = require(Parent.SocialCommon).Components.UserSearchBar.UserSearchBar
 
-return function(p1) --[[ Line: 18 | Named "UserSearchHeaderInput" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UserSearchBar (copy)
 	local OnSubmitFunction = p1.onSubmit
 	local UseRefResult = ReactModule.useRef("")
 	local UseRefResult1 = ReactModule.useRef("")
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 35 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), OnSubmitFunction (copy)
 		if UseRefResult.current ~= UseRefResult1.current then
 			UseRefResult1.current = UseRefResult.current
@@ -23,18 +23,18 @@ return function(p1) --[[ Line: 18 | Named "UserSearchHeaderInput" ]]
 			searchPlaceholderText = p1.searchPlaceholderText,
 			captureFocusOnMount = p1.captureFocusOnMount,
 			cancelCallback = p1.onCancel,
-			textChangedCallback = ReactModule.useCallback(function(Current) --[[ Line: 30 ]]
+			textChangedCallback = ReactModule.useCallback(function(Current)
 				-- upvalues: UseRefResult1 (copy), UseRefResult (copy)
 				UseRefResult1.current = UseRefResult.current
 				UseRefResult.current = Current
 			end, {}),
-			focusChangedCallback = ReactModule.useCallback(function(Enabled, p2) --[[ Line: 42 ]]
+			focusChangedCallback = ReactModule.useCallback(function(Enabled, p2)
 				-- upvalues: UseResult (copy)
 				if Enabled == false and p2 then
 					UseResult()
 				end
 			end, { UseResult }),
-			returnPressedFromOnScreenKeyboardCallback = ReactModule.useCallback(function() --[[ Line: 48 ]]
+			returnPressedFromOnScreenKeyboardCallback = ReactModule.useCallback(function()
 				-- upvalues: UseResult (copy)
 				UseResult()
 			end, { UseResult })

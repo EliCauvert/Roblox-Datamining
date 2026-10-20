@@ -3,12 +3,12 @@ local SpyModule = require(script.Parent.Spy)
 local SetReturnValueModule = require(script.Parent.setReturnValue)
 local SetSideEffectModule = require(script.Parent.setSideEffect)
 
-local function _(p1, p2) --[[ Line: 8 | Named "isKeyInSpec" ]]
+local function _(p1, p2)
 	-- upvalues: SymbolsModule (copy)
 	local v1 = p1[SymbolsModule.Spec]
 	
 	if v1 then
-		local Success, Result = pcall(function() --[[ Line: 11 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: v1 (copy), p2 (copy)
 			return v1[p2]
 		end)
@@ -21,13 +21,13 @@ end
 
 local MagicMockModule = { is = require(script.Parent.isAMagicMock) }
 
-local _ = function(p1): boolean? --[[ Line: 78 | Named "isTuple" ]]
+local _ = function(p1): boolean?
 	-- upvalues: SymbolsModule (copy), MagicMockModule (copy)
 	if type(p1) ~= "table" or not p1[SymbolsModule.isTuple] then return end
 	return not MagicMockModule.is(p1)
 end
 
-local function getReturnValue(p1, ...) --[[ Line: 84 ]]
+local function getReturnValue(p1, ...)
 	-- upvalues: SymbolsModule (copy), SpyModule (copy), MagicMockModule (copy)
 	if p1[SymbolsModule.ReturnValue] then
 		return p1[SymbolsModule.ReturnValue]
@@ -57,9 +57,9 @@ local function getReturnValue(p1, ...) --[[ Line: 84 ]]
 	return nil
 end
 
-local _ = function(p1) --[[ Line: 144 | Named "operation" ]]
+local _ = function(p1)
 	-- upvalues: SymbolsModule (copy), MagicMockModule (copy)
-	return function(p2, p3) --[[ Line: 145 ]]
+	return function(p2, p3)
 		-- upvalues: p1 (copy), SymbolsModule (upval), MagicMockModule (upval)
 		local Meta = nil
 		local Formatted = nil
@@ -85,7 +85,7 @@ end
 
 local v1 = "add"
 
-local function v9(p1, p2) --[[ Line: 145 ]]
+local function v9(p1, p2)
 	-- upvalues: v1 (copy), SymbolsModule (copy), MagicMockModule (copy)
 	local Meta = nil
 	local Formatted = nil
@@ -110,7 +110,7 @@ end
 
 local v2 = "sub"
 
-local function v11(p1, p2) --[[ Line: 145 ]]
+local function v11(p1, p2)
 	-- upvalues: v2 (copy), SymbolsModule (copy), MagicMockModule (copy)
 	local Meta = nil
 	local Formatted = nil
@@ -135,7 +135,7 @@ end
 
 local v3 = "div"
 
-local function v13(p1, p2) --[[ Line: 145 ]]
+local function v13(p1, p2)
 	-- upvalues: v3 (copy), SymbolsModule (copy), MagicMockModule (copy)
 	local Meta = nil
 	local Formatted = nil
@@ -160,7 +160,7 @@ end
 
 local v4 = "mul"
 
-local function v15(p1, p2) --[[ Line: 145 ]]
+local function v15(p1, p2)
 	-- upvalues: v4 (copy), SymbolsModule (copy), MagicMockModule (copy)
 	local Meta = nil
 	local Formatted = nil
@@ -185,7 +185,7 @@ end
 
 local v5 = "mod"
 
-local function v17(p1, p2) --[[ Line: 145 ]]
+local function v17(p1, p2)
 	-- upvalues: v5 (copy), SymbolsModule (copy), MagicMockModule (copy)
 	local Meta = nil
 	local Formatted = nil
@@ -210,7 +210,7 @@ end
 
 local v6 = "pow"
 
-local function v19(p1, p2) --[[ Line: 145 ]]
+local function v19(p1, p2)
 	-- upvalues: v6 (copy), SymbolsModule (copy), MagicMockModule (copy)
 	local Meta = nil
 	local Formatted = nil
@@ -235,7 +235,7 @@ end
 
 local v7 = "neg"
 
-local function v21(p1, p2) --[[ Line: 145 ]]
+local function v21(p1, p2)
 	-- upvalues: v7 (copy), SymbolsModule (copy), MagicMockModule (copy)
 	local Meta = nil
 	local Formatted = nil
@@ -260,7 +260,7 @@ end
 
 local v8 = "concat"
 local config = {
-	__tostring = function(p1): string --[[ Line: 24 ]]
+	__tostring = function(p1): string
 		-- upvalues: SymbolsModule (copy)
 		local Meta = getmetatable(p1)
 		local List = { "id=" .. Meta[SymbolsModule.Address] }
@@ -271,14 +271,14 @@ local config = {
 		end
 		return "<MagicMock " .. table.concat(List, " ") .. ">"
 	end,
-	__index = function(p1, p2) --[[ Line: 36 ]]
+	__index = function(p1, p2)
 		-- upvalues: SymbolsModule (copy), MagicMockModule (copy)
 		local Meta = getmetatable(p1)
 		local Entry = Meta[SymbolsModule.Spec]
 		local Result1 = nil
 		
 		if Entry then
-			local Success, Result = pcall(function() --[[ Line: 11 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: Entry (copy), p2 (copy)
 				return Entry[p2]
 			end)
@@ -300,14 +300,14 @@ local config = {
 			return if Entry1 == SymbolsModule.None then nil else Entry1
 		end
 	end,
-	__newindex = function(p1, ReturnValue, NoneFunction) --[[ Line: 56 ]]
+	__newindex = function(p1, ReturnValue, NoneFunction)
 		-- upvalues: SymbolsModule (copy), SpyModule (copy)
 		local Meta = getmetatable(p1)
 		local Entry = Meta[SymbolsModule.Spec]
 		local Result1 = nil
 		
 		if Entry then
-			local Success, Result = pcall(function() --[[ Line: 11 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: Entry (copy), ReturnValue (copy)
 				return Entry[ReturnValue]
 			end)
@@ -332,7 +332,7 @@ local config = {
 			Meta[SymbolsModule.Children][ReturnValue] = NoneFunction
 		end
 	end,
-	__call = function(p1, ...) --[[ Line: 117 ]]
+	__call = function(p1, ...)
 		-- upvalues: getReturnValue (copy), MagicMockModule (copy), SymbolsModule (copy)
 		local Meta = getmetatable(p1)
 		local config = {
@@ -366,7 +366,7 @@ local config = {
 	__mod = v17,
 	__pow = v19,
 	__unm = v21,
-	__concat = function(p1, p2) --[[ Line: 145 ]]
+	__concat = function(p1, p2)
 		-- upvalues: v8 (copy), SymbolsModule (copy), MagicMockModule (copy)
 		local Meta = nil
 		local Formatted = nil
@@ -390,11 +390,11 @@ local config = {
 	end
 }
 
-function MagicMockModule.new(None) --[[ Line: 176 ]]
+function MagicMockModule.new(None)
 	-- upvalues: SymbolsModule (copy), config (copy), SetReturnValueModule (copy), SetSideEffectModule (copy)
 	local None1 = None or {}
 	
-	local function _() --[[ Line: 179 | Named "getName" ]]
+	local function _()
 		-- upvalues: None1 (ref)
 		return if None1.name then None1.name elseif None1.spec then tostring(None1.spec) else "mock"
 	end
@@ -426,7 +426,7 @@ function MagicMockModule.new(None) --[[ Line: 176 ]]
 	return self
 end
 
-function MagicMockModule.is(p1): boolean --[[ Line: 218 ]]
+function MagicMockModule.is(p1): boolean
 	-- upvalues: SymbolsModule (copy)
 	local Meta = getmetatable(p1)
 	

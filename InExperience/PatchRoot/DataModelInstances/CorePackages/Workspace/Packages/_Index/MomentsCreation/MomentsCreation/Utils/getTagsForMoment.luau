@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("MomentsCreation").Parent.MomentsTypes)
 
-return function(p1) --[[ Line: 12 | Named "getTagsForMoment" ]]
+return function(p1)
 	local List = {}
 	
 	if p1.captureType == Enum.CaptureType.Screenshot then

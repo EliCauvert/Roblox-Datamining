@@ -4,7 +4,7 @@ local GetFIntContactImporterUploadContactsMaxModule = require(ContactImporter.Fl
 local GetFIntContactImporterUploadContactsMinModule = require(ContactImporter.Flags.getFIntContactImporterUploadContactsMin)
 local DeviceContact = require(ContactImporter.dependencies).RoduxContacts.Models.DeviceContact
 
-return function(p1) --[[ Line: 12 ]]
+return function(p1)
 	-- upvalues: GetFIntContactImporterUploadContactsMaxModule (copy), GetFIntContactImporterUploadContactsMinModule (copy), DeviceContact (copy), ConstantsModule (copy)
 	local Contacts = {}
 	local FIntContactImporterUploadContactsMaxModule = GetFIntContactImporterUploadContactsMaxModule()

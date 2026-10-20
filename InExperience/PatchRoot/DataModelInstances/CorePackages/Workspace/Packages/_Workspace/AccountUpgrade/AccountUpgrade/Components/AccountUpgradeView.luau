@@ -15,7 +15,7 @@ local FFlagAccountUpgradeOAuthTelemetryModule = require(AccountUpgrade.Flags.FFl
 local View = FoundationModule.View
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
-local function createAuditContent(AuditContent) --[[ Line: 25 ]]
+local function createAuditContent(AuditContent)
 	-- upvalues: ReactModule (copy), RegisterAuditContent (copy)
 	local Elements = {}
 	
@@ -25,12 +25,12 @@ local function createAuditContent(AuditContent) --[[ Line: 25 ]]
 	return ReactModule.createElement(ReactModule.Fragment, nil, Elements)
 end
 
-return function(Form) --[[ Line: 33 | Named "AccountUpgradeView" ]]
+return function(Form)
 	-- upvalues: AccountUpgradeFieldModule (copy), ReactModule (copy), View (copy), AccountUpgradeFieldsModule (copy), AccountUpgradeDialogActionsModule (copy), ButtonVariant (copy), AccountUpgradeFieldErrorModule (copy), LegalTextWithLinks (copy), createAuditContent (copy), AccountUpgradeDialogModule (copy), BirthdayPickerSheetModule (copy), FFlagAccountUpgradeOAuthTelemetryModule (copy), CloseConfirmationDialogModule (copy)
 	local NoIsSubmitting: boolean = not Form.isSaveEnabled and not Form.isSubmitting
 	local HasFieldState = Form.fieldStates[AccountUpgradeFieldModule.Birthday] ~= nil
 	local OnCloseFunction = Form.onClose
-	local UseResult = ReactModule.useCallback(function(_) --[[ Line: 40 ]]
+	local UseResult = ReactModule.useCallback(function(_)
 		-- upvalues: OnCloseFunction (copy)
 		if OnCloseFunction then
 			OnCloseFunction()

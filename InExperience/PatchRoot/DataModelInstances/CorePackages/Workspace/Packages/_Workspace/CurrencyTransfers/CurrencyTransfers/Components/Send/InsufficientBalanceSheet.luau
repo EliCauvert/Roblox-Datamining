@@ -29,7 +29,7 @@ local FormatNumberModule = require(CurrencyTransfers.Utils.formatNumber)
 local GetFFlagCurrencyTransferFocusNavigationModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferFocusNavigation)
 local UseTransferSheetFocusModule = require(CurrencyTransfers.Hooks.useTransferSheetFocus)
 
-return function(_) --[[ Line: 46 | Named "InsufficientBalanceSheet" ]]
+return function(_)
 	-- upvalues: UseTransferStoreModule (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), SignalsReactModule (copy), ReactModule (copy), FormatNumberModule (copy), LocalizationService (copy), TransferLocaleFormatModule (copy), PurchaseRobuxConstantsModule (copy), WebViewServiceWrapperModule (copy), TransferOriginationModule (copy), SetTransferPromptStateModule (copy), PromptStateModule (copy), GetBalanceAfterPurchaseWebviewModule (copy), GetFFlagCurrencyTransferFocusNavigationModule (copy), UseTransferSheetFocusModule (copy), Sheet (copy), UseScaledValueFunction (copy), TransferRobuxHeaderModule (copy), View (copy), Icon (copy), Enums (copy), Text (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
 	local UseTransferStoreModuleResult = UseTransferStoreModule()
 	local UseTokensResult = UseTokensFunction()
@@ -37,7 +37,7 @@ return function(_) --[[ Line: 46 | Named "InsufficientBalanceSheet" ]]
 	local UseSignalStateResult = SignalsReactModule.useSignalState(UseTransferStoreModuleResult.getRobuxBalanceAmount) or 0
 	local UseRefResult = ReactModule.useRef(0)
 	local FormatNumberModuleResult = FormatNumberModule(LocalizationService.RobloxLocaleId, (math.max(0, (SignalsReactModule.useSignalState(UseTransferStoreModuleResult.getSelectedAmount) or 0 or 0) - UseSignalStateResult)))
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 55 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: TransferLocaleFormatModule (upval), UseLocalizationResult (copy), FormatNumberModuleResult (copy)
 		return TransferLocaleFormatModule.substituteAmount(UseLocalizationResult.InsufficientBalance or "", (tostring(FormatNumberModuleResult)))
 	end, {
@@ -45,15 +45,15 @@ return function(_) --[[ Line: 46 | Named "InsufficientBalanceSheet" ]]
 		UseLocalizationResult.InsufficientBalance
 	})
 	
-	local function goBackToInputAndOpenBuyRobux() --[[ Line: 59 ]]
+	local function goBackToInputAndOpenBuyRobux()
 		-- upvalues: UseTransferStoreModuleResult (copy), PurchaseRobuxConstantsModule (upval), WebViewServiceWrapperModule (upval), TransferOriginationModule (upval), SetTransferPromptStateModule (upval), PromptStateModule (upval), UseRefResult (copy), GetBalanceAfterPurchaseWebviewModule (upval)
 		local TransferOrigination = UseTransferStoreModuleResult.getTransferOrigination(false)
 		WebViewServiceWrapperModule.new({
 			url = PurchaseRobuxConstantsModule.getPurchaseRobuxUrl(),
 			title = PurchaseRobuxConstantsModule.PURCHASE_ROBUX_WEBVIEW_TITLE,
-			closeCallback = function() --[[ Line: 66 ]]
+			closeCallback = function()
 				-- upvalues: TransferOrigination (copy), TransferOriginationModule (upval), SetTransferPromptStateModule (upval), UseTransferStoreModuleResult (upval), PromptStateModule (upval), UseRefResult (upval), GetBalanceAfterPurchaseWebviewModule (upval)
-				local function _() --[[ Line: 67 | Named "applyPromptAfterBalance" ]]
+				local function _()
 					-- upvalues: TransferOrigination (upval), TransferOriginationModule (upval), SetTransferPromptStateModule (upval), UseTransferStoreModuleResult (upval), PromptStateModule (upval)
 					if TransferOrigination == TransferOriginationModule.InExperience then
 						SetTransferPromptStateModule(UseTransferStoreModuleResult, PromptStateModule.TransferConfirm)
@@ -66,7 +66,7 @@ return function(_) --[[ Line: 46 | Named "InsufficientBalanceSheet" ]]
 				
 				UseRefResult.current += 1
 				local Current = UseRefResult.current
-				GetBalanceAfterPurchaseWebviewModule(nil, UseTransferStoreModuleResult.getNetworkImpl()):andThen(function(Result) --[[ Line: 77 ]]
+				GetBalanceAfterPurchaseWebviewModule(nil, UseTransferStoreModuleResult.getNetworkImpl()):andThen(function(Result)
 					-- upvalues: UseRefResult (upval), Current (copy), UseTransferStoreModuleResult (upval), TransferOrigination (upval), TransferOriginationModule (upval), SetTransferPromptStateModule (upval), PromptStateModule (upval)
 					if UseRefResult.current ~= Current then return end
 					UseTransferStoreModuleResult.setRobuxBalanceAmount(Result)
@@ -79,7 +79,7 @@ return function(_) --[[ Line: 46 | Named "InsufficientBalanceSheet" ]]
 					else
 						SetTransferPromptStateModule(UseTransferStoreModuleResult, PromptStateModule.TransferInput)
 					end
-				end):catch(function(_) --[[ Line: 85 ]]
+				end):catch(function(_)
 					-- upvalues: UseRefResult (upval), Current (copy), TransferOrigination (upval), TransferOriginationModule (upval), SetTransferPromptStateModule (upval), UseTransferStoreModuleResult (upval), PromptStateModule (upval)
 					if UseRefResult.current ~= Current then return end
 					if TransferOrigination == TransferOriginationModule.InExperience then
@@ -94,7 +94,7 @@ return function(_) --[[ Line: 46 | Named "InsufficientBalanceSheet" ]]
 		}):open()
 	end
 	
-	local function handleClose() --[[ Line: 96 ]]
+	local function handleClose()
 		-- upvalues: UseTransferStoreModuleResult (copy), TransferOriginationModule (upval), SetTransferPromptStateModule (upval), PromptStateModule (upval)
 		if UseTransferStoreModuleResult.getTransferOrigination(false) == TransferOriginationModule.InExperience then
 			UseTransferStoreModuleResult.triggerOnClose()

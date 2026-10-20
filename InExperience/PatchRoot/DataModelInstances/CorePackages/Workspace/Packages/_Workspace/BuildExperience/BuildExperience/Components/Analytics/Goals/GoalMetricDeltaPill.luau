@@ -10,7 +10,7 @@ local IconPosition = FoundationModule.Enums.IconPosition
 local IconSize = FoundationModule.Enums.IconSize
 local IconVariant = FoundationModule.Enums.IconVariant
 
-return function(p1) --[[ Line: 29 | Named "GoalMetricDeltaPill" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), IconName (copy), IconPosition (copy), ReactModule (copy), View (copy), Icon (copy), IconSize (copy), IconVariant (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local TestId = p1.testId or "GoalMetricDeltaPill"

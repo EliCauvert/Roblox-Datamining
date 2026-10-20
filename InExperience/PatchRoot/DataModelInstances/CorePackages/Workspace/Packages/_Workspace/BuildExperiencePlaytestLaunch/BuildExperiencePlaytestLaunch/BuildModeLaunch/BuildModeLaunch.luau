@@ -3,7 +3,7 @@ local MemStorageService = game:GetService("MemStorageService")
 local NotificationService = game:GetService("NotificationService")
 local FFlagBuildExperienceLibrary = require(script:FindFirstAncestor("BuildExperiencePlaytestLaunch").Parent.SharedFlags).FFlagBuildExperienceLibrary
 
-local function _(Text: string): string? --[[ Line: 17 | Named "normalizeSelectedTheme" ]]
+local function _(Text: string): string?
 	if type(Text) == "string" then
 		local Lowered = string.lower(Text)
 		
@@ -17,7 +17,7 @@ end
 local BuildModeLaunchModule = {}
 BuildModeLaunchModule.__index = BuildModeLaunchModule
 
-function BuildModeLaunchModule.new() --[[ Line: 40 ]]
+function BuildModeLaunchModule.new()
 	-- upvalues: BuildModeLaunchModule (copy)
 	return (setmetatable({
 		cachedResult = nil,
@@ -28,7 +28,7 @@ function BuildModeLaunchModule.new() --[[ Line: 40 ]]
 	}, BuildModeLaunchModule))
 end
 
-function BuildModeLaunchModule:set(ChatSessionId, ChatPlaceId, p1) --[[ Line: 51 ]]
+function BuildModeLaunchModule:set(ChatSessionId, ChatPlaceId, p1)
 	-- upvalues: FFlagBuildExperienceLibrary (copy), NotificationService (copy), MemStorageService (copy), HttpService (copy)
 	local config = { hasBuildMode = true }
 	
@@ -62,7 +62,7 @@ function BuildModeLaunchModule:set(ChatSessionId, ChatPlaceId, p1) --[[ Line: 51
 	MemStorageService:SetItem("BuildExperienceLaunchData", HttpService:JSONEncode(config))
 end
 
-function BuildModeLaunchModule:hasBuildMode() --[[ Line: 66 ]]
+function BuildModeLaunchModule:hasBuildMode()
 	-- upvalues: FFlagBuildExperienceLibrary (copy), MemStorageService (copy), HttpService (copy)
 	if self.cachedResult ~= nil then
 		return self.cachedResult
@@ -117,7 +117,7 @@ function BuildModeLaunchModule:hasBuildMode() --[[ Line: 66 ]]
 	return self.cachedResult
 end
 
-function BuildModeLaunchModule:applyViewerTheme() --[[ Line: 109 ]]
+function BuildModeLaunchModule:applyViewerTheme()
 	-- upvalues: NotificationService (copy)
 	self:hasBuildMode()
 	
@@ -126,13 +126,13 @@ function BuildModeLaunchModule:applyViewerTheme() --[[ Line: 109 ]]
 	end
 end
 
-function BuildModeLaunchModule:getChatSessionId(CachedChatPlaceId) --[[ Line: 116 ]]
+function BuildModeLaunchModule:getChatSessionId(CachedChatPlaceId)
 	self:hasBuildMode()
 	
 	return if self.cachedChatPlaceId == CachedChatPlaceId then self.cachedChatSessionId else nil
 end
 
-function BuildModeLaunchModule:getTeamTestPlaceId() --[[ Line: 121 ]]
+function BuildModeLaunchModule:getTeamTestPlaceId()
 	self:hasBuildMode()
 	
 	return self.cachedTeamTestPlaceId

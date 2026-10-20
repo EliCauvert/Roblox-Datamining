@@ -34,17 +34,17 @@ ItemSplitTile.defaultProps = {
 	isHovered = false
 }
 
-function ItemSplitTile.init(p1) --[[ Line: 72 ]]
+function ItemSplitTile.init(p1)
 	-- upvalues: ControlStateModule (copy)
 	p1:setState({ controlState = ControlStateModule.Initialize })
 	
-	function p1:onStateChanged(ControlState) --[[ Line: 77 ]]
+	function p1:onStateChanged(ControlState)
 		-- upvalues: p1 (copy)
 		p1:setState({ controlState = ControlState })
 	end
 end
 
-function ItemSplitTile:renderImageFrame(Image, p1, p2, p3) --[[ Line: 84 ]]
+function ItemSplitTile:renderImageFrame(Image, p1, p2, p3)
 	-- upvalues: RoactModule (copy), ImageSetComponentModule (copy), _UDim (copy), LoadableImageModule (copy)
 	local Theme = p3.Theme
 	local P6 = p2 or not p1
@@ -77,7 +77,7 @@ function ItemSplitTile:renderImageFrame(Image, p1, p2, p3) --[[ Line: 84 ]]
 	})
 end
 
-function ItemSplitTile.renderTopContent(p1, p2) --[[ Line: 123 ]]
+function ItemSplitTile.renderTopContent(p1, p2)
 	-- upvalues: ImagesModule (copy), RoactModule (copy), ImageSetComponentModule (copy)
 	local HasBackground = p1.props.hasBackground
 	local IsHovered = p1.props.isHovered
@@ -114,7 +114,7 @@ function ItemSplitTile.renderTopContent(p1, p2) --[[ Line: 123 ]]
 	})
 end
 
-function ItemSplitTile.renderBottomContent(p1, p2) --[[ Line: 173 ]]
+function ItemSplitTile.renderBottomContent(p1, p2)
 	-- upvalues: ControlStateModule (copy), _UDim2 (copy), _UDim1 (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ItemSplitTileFooterModule (copy)
 	local ItemName: string = p1.props.itemName
 	local HasBackground = p1.props.hasBackground
@@ -166,7 +166,7 @@ function ItemSplitTile.renderBottomContent(p1, p2) --[[ Line: 173 ]]
 	})
 end
 
-function ItemSplitTile.renderTileContent(p1, p2) --[[ Line: 242 ]]
+function ItemSplitTile.renderTileContent(p1, p2)
 	-- upvalues: RoactModule (copy), _UDim (copy), InteractableModule (copy)
 	local HasBackground = p1.props.hasBackground
 	local Theme = p2.Theme
@@ -218,12 +218,12 @@ function ItemSplitTile.renderTileContent(p1, p2) --[[ Line: 242 ]]
 	})
 end
 
-function ItemSplitTile.render(p1) --[[ Line: 305 ]]
+function ItemSplitTile.render(p1)
 	-- upvalues: WithStyleModule (copy), RoactModule (copy), ImageSetComponentModule (copy), ImagesModule (copy)
 	local HasBackground = p1.props.hasBackground
 	local IsHovered = p1.props.isHovered
 	
-	return WithStyleModule(function(p2) --[[ Line: 309 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: RoactModule (upval), p1 (copy), IsHovered (copy), HasBackground (copy), ImageSetComponentModule (upval), ImagesModule (upval)
 		local Theme = p2.Theme
 		

@@ -9,7 +9,7 @@ local GetLocalizationServiceStoreFunction = LocalizationModule.GetLocalizationSe
 local Localization = require(Parent.InExperienceLocales).Localization
 local LocalizationProvider = LocalizationModule.LocalizationProvider
 
-local function UniversalShareSheetScreenGui() --[[ Line: 22 ]]
+local function UniversalShareSheetScreenGui()
 	-- upvalues: ReactModule (copy), GetLocalizationServiceStoreFunction (copy), SignalsReactModule (copy), Localization (copy), FoundationModule (copy), LocalizationProvider (copy), UniversalShareSheetHostModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetLocalizationServiceStoreFunction().getRobloxLocaleId)
@@ -24,7 +24,7 @@ local function UniversalShareSheetScreenGui() --[[ Line: 22 ]]
 	}, {
 		FoundationProvider = ReactModule.createElement(FoundationModule.FoundationProvider, { colorMode = FoundationModule.Enums.ColorMode.Dark }, {
 			LocalizationProvider = ReactModule.createElement(LocalizationProvider, {
-				localization = ReactModule.useMemo(function() --[[ Line: 26 ]]
+				localization = ReactModule.useMemo(function()
 					-- upvalues: Localization (upval), UseSignalStateResult (copy)
 					return Localization.new(UseSignalStateResult)
 				end, { UseSignalStateResult })
@@ -38,7 +38,7 @@ local function UniversalShareSheetScreenGui() --[[ Line: 22 ]]
 end
 
 return {
-	mount = function(Parent) --[[ Line: 56 ]]
+	mount = function(Parent)
 		-- upvalues: ReactRobloxModule (copy), ReactModule (copy), UniversalShareSheetScreenGui (copy)
 		local UniversalShareSheetScreenGuiRoot = Instance.new("Folder")
 		UniversalShareSheetScreenGuiRoot.Name = "UniversalShareSheetScreenGuiRoot"

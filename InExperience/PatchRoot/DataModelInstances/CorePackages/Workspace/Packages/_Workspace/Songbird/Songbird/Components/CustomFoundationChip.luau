@@ -14,11 +14,11 @@ local StateLayerMode = FoundationModule.Enums.StateLayerMode
 local CursorType = FoundationModule.Enums.CursorType
 local config = { isDisabled = false, isChecked = false }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 50 | Named "Chip" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsFunction (copy), config (copy), UseTokensFunction (copy), UseCursorFunction (copy), CursorType (copy), ReactModule (copy), IconPosition (copy), View (copy), WithCommonPropsFunction (copy), StateLayerMode (copy), Icon (copy), IconSize (copy), Text (copy)
 	local WithDefaultsResult = WithDefaultsFunction(p1, config)
 	local UseTokensResult = UseTokensFunction()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 56 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsResult (copy), IconPosition (upval)
 		return if typeof(WithDefaultsResult.icon) == "string" then {
 			name = WithDefaultsResult.icon,

@@ -8,7 +8,7 @@ local CreateSingleEntityResolverModule = require(DataHydration.createSingleEntit
 local FetchPlaceVersionHistoryModule = require(script.Parent.fetchPlaceVersionHistory)
 local _ = require(script.Parent.PlaceVersionHistoryStoreTypes)
 
-return function(p1) --[[ Line: 28 | Named "createPlaceVersionHistoryStore" ]]
+return function(p1)
 	-- upvalues: CreateSingleEntityResolverModule (copy), FetchPlaceVersionHistoryModule (copy), PromiseModule (copy), SignalsModule (copy), CryoModule (copy)
 	local P0 = p1 or {}
 	local config = {
@@ -16,20 +16,20 @@ return function(p1) --[[ Line: 28 | Named "createPlaceVersionHistoryStore" ]]
 		baseUrl = P0.baseUrl,
 		developBaseUrl = P0.developBaseUrl
 	}
-	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p2) --[[ Line: 36 ]]
+	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p2)
 		-- upvalues: FetchPlaceVersionHistoryModule (upval), config (copy)
 		return FetchPlaceVersionHistoryModule.fetchHistory(p2, config)
 	end)
-	local SingleEntityResolverModule1 = CreateSingleEntityResolverModule(function(p2) --[[ Line: 42 ]]
+	local SingleEntityResolverModule1 = CreateSingleEntityResolverModule(function(p2)
 		-- upvalues: FetchPlaceVersionHistoryModule (upval), config (copy)
-		return FetchPlaceVersionHistoryModule.fetchHistory(p2, config, { isPublished = true, pageSize = 1 }):andThen(function(Result) --[[ Line: 48 ]]
+		return FetchPlaceVersionHistoryModule.fetchHistory(p2, config, { isPublished = true, pageSize = 1 }):andThen(function(Result)
 			return { placeVersion = Result.placeVersions[1] }
 		end)
 	end, { resolver = { replaceItems = true } })
 	local t = {}
 	local ResolveResult = PromiseModule.resolve()
 	
-	local function _(Key) --[[ Line: 73 | Named "getFetchingMoreHistorySignal" ]]
+	local function _(Key)
 		-- upvalues: t (copy), SignalsModule (upval)
 		local Entry = t[Key]
 		
@@ -46,16 +46,16 @@ return function(p1) --[[ Line: 28 | Named "createPlaceVersionHistoryStore" ]]
 		fetchHistory = SingleEntityResolverModule.fetch,
 		getAndFetchHistory = SingleEntityResolverModule.getAndFetch,
 		updateHistory = SingleEntityResolverModule.update,
-		fetchPageHistory = function(p2, p3) --[[ Line: 56 ]]
+		fetchPageHistory = function(p2, p3)
 			-- upvalues: FetchPlaceVersionHistoryModule (upval), config (copy), SingleEntityResolverModule (copy)
-			return FetchPlaceVersionHistoryModule.fetchHistory(p2, config, p3):andThen(function(Result) --[[ Line: 62 ]]
+			return FetchPlaceVersionHistoryModule.fetchHistory(p2, config, p3):andThen(function(Result)
 				-- upvalues: SingleEntityResolverModule (upval), p2 (copy)
 				SingleEntityResolverModule.update(p2, Result)
 				
 				return Result
 			end)
 		end,
-		fetchMoreHistory = function(Key, Cursor) --[[ Line: 90 ]]
+		fetchMoreHistory = function(Key, Cursor)
 			-- upvalues: SingleEntityResolverModule (copy), t (copy), SignalsModule (upval), ResolveResult (copy), FetchPlaceVersionHistoryModule (upval), config (copy), CryoModule (upval)
 			local DataResult = SingleEntityResolverModule.get(Key).data(false)
 			local Entry = t[Key]
@@ -74,7 +74,7 @@ return function(p1) --[[ Line: 28 | Named "createPlaceVersionHistoryStore" ]]
 				local Promise = FetchPlaceVersionHistoryModule.fetchHistory(Key, config, {
 					cursor = Cursor,
 					pageSize = FetchPlaceVersionHistoryModule.DEFAULT_HISTORY_PAGE_SIZE
-				}):andThen(function(Result) --[[ Line: 108 ]]
+				}):andThen(function(Result)
 					-- upvalues: SingleEntityResolverModule (upval), Key (copy), DataResult (copy), Cursor (copy), CryoModule (upval)
 					if SingleEntityResolverModule.get(Key).data(false) == DataResult then
 						SingleEntityResolverModule.cache.replaceItem(tostring(Key), {
@@ -84,7 +84,7 @@ return function(p1) --[[ Line: 28 | Named "createPlaceVersionHistoryStore" ]]
 						})
 					end
 				end)
-				Promise:finally(function() --[[ Line: 120 ]]
+				Promise:finally(function()
 					-- upvalues: Entry1 (copy)
 					Entry1.setIsFetching(false)
 				end)
@@ -92,7 +92,7 @@ return function(p1) --[[ Line: 28 | Named "createPlaceVersionHistoryStore" ]]
 				return Promise
 			end
 		end,
-		getIsFetchingMoreHistory = function(Key) --[[ Line: 86 ]]
+		getIsFetchingMoreHistory = function(Key)
 			-- upvalues: t (copy), SignalsModule (upval)
 			local Entry = t[Key]
 			
@@ -106,9 +106,9 @@ return function(p1) --[[ Line: 28 | Named "createPlaceVersionHistoryStore" ]]
 		getLiveVersion = SingleEntityResolverModule1.get,
 		fetchLiveVersion = SingleEntityResolverModule1.fetch,
 		getAndFetchLiveVersion = SingleEntityResolverModule1.getAndFetch,
-		revertVersion = function(AssetId, AssetId1, AssetVersionNumber) --[[ Line: 126 ]]
+		revertVersion = function(AssetId, AssetId1, AssetVersionNumber)
 			-- upvalues: FetchPlaceVersionHistoryModule (upval), config (copy), SingleEntityResolverModule (copy)
-			return FetchPlaceVersionHistoryModule.revertVersion(AssetId1, AssetVersionNumber, config):andThen(function(_) --[[ Line: 133 ]]
+			return FetchPlaceVersionHistoryModule.revertVersion(AssetId1, AssetVersionNumber, config):andThen(function(_)
 				-- upvalues: AssetId1 (copy), AssetVersionNumber (copy), SingleEntityResolverModule (upval), AssetId (copy)
 				local config = {
 					assetId = AssetId1,
@@ -117,24 +117,24 @@ return function(p1) --[[ Line: 28 | Named "createPlaceVersionHistoryStore" ]]
 				SingleEntityResolverModule.fetch(AssetId)
 				
 				return config
-			end):catch(function(Err) --[[ Line: 142 ]]
+			end):catch(function(Err)
 				error(Err)
 			end)
 		end,
-		rollbackPlace = function(p2, p3, p4, p5) --[[ Line: 147 ]]
+		rollbackPlace = function(p2, p3, p4, p5)
 			-- upvalues: FetchPlaceVersionHistoryModule (upval), config (copy), SingleEntityResolverModule (copy)
-			return FetchPlaceVersionHistoryModule.rollbackPlace(p2, p3, p4, p5, config):andThen(function(Result) --[[ Line: 155 ]]
+			return FetchPlaceVersionHistoryModule.rollbackPlace(p2, p3, p4, p5, config):andThen(function(Result)
 				-- upvalues: SingleEntityResolverModule (upval), p2 (copy)
 				SingleEntityResolverModule.fetch(p2)
 				
 				return Result
-			end):catch(function(Err) --[[ Line: 159 ]]
+			end):catch(function(Err)
 				error(Err)
 			end)
 		end,
-		addVersionNote = function(p2, Version, p3) --[[ Line: 164 ]]
+		addVersionNote = function(p2, Version, p3)
 			-- upvalues: FetchPlaceVersionHistoryModule (upval), config (copy), SingleEntityResolverModule (copy)
-			return FetchPlaceVersionHistoryModule.addVersionNote(p2, Version, p3, config):andThen(function(Result) --[[ Line: 171 ]]
+			return FetchPlaceVersionHistoryModule.addVersionNote(p2, Version, p3, config):andThen(function(Result)
 				-- upvalues: SingleEntityResolverModule (upval), p2 (copy), Version (copy), p3 (copy)
 				local DataResult = SingleEntityResolverModule.get(p2).data(false)
 				
@@ -166,12 +166,12 @@ return function(p1) --[[ Line: 28 | Named "createPlaceVersionHistoryStore" ]]
 				return Result
 			end)
 		end,
-		clear = function() --[[ Line: 201 ]]
+		clear = function()
 			-- upvalues: SingleEntityResolverModule (copy), SingleEntityResolverModule1 (copy)
 			SingleEntityResolverModule.clear()
 			SingleEntityResolverModule1.clear()
 		end,
-		dispose = function() --[[ Line: 206 ]]
+		dispose = function()
 			-- upvalues: SingleEntityResolverModule (copy), SingleEntityResolverModule1 (copy)
 			SingleEntityResolverModule.dispose()
 			SingleEntityResolverModule1.dispose()

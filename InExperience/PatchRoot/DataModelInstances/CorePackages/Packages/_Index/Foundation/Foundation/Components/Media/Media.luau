@@ -20,7 +20,7 @@ local config1 = {
 	orientation = MediaOrientationModule.Landscape
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 51 | Named "Media" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: WithDefaultsModule (copy), config1 (copy), ReactModule (copy), config (copy), MediaOrientationModule (copy), ImageModule (copy), WithCommonPropsModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config1)
 	local Content = WithDefaultsModuleResult.content
@@ -29,7 +29,7 @@ return ReactModule.memo(function(p1) --[[ Line: 51 | Named "Media" ]]
 		Image = if Content and Content.type == "Image" then Content.source else nil,
 		ScaleType = Enum.ScaleType.Crop,
 		Size = UDim2.fromScale(1, 0),
-		aspectRatio = ReactModule.useMemo(function() --[[ Line: 54 ]]
+		aspectRatio = ReactModule.useMemo(function()
 			-- upvalues: config (upval), WithDefaultsModuleResult (copy), MediaOrientationModule (upval)
 			local Entry: number = config[WithDefaultsModuleResult.aspectRatio]
 			

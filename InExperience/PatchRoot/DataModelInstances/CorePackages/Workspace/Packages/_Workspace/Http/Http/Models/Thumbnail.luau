@@ -1,10 +1,10 @@
 ﻿local ThumbnailModule = {
-	new = function() --[[ Line: 12 ]]
+	new = function()
 		return {}
 	end
 }
 
-function ThumbnailModule.fromThumbnailData(p1, Size) --[[ Line: 18 ]]
+function ThumbnailModule.fromThumbnailData(p1, Size)
 	-- upvalues: ThumbnailModule (copy)
 	local NewThumbnail = ThumbnailModule.new()
 	NewThumbnail.universeId = tostring(p1.targetId)
@@ -15,11 +15,11 @@ function ThumbnailModule.fromThumbnailData(p1, Size) --[[ Line: 18 ]]
 	return NewThumbnail
 end
 
-function ThumbnailModule.isCompleteThumbnailData(p1): boolean --[[ Line: 29 ]]
+function ThumbnailModule.isCompleteThumbnailData(p1): boolean
 	return type(p1) == "table" and (type(p1.targetId) == "number" and type(p1.state) == "string") and (type(p1.imageUrl) == "string" or p1.imageUrl == nil)
 end
 
-function ThumbnailModule.checkStateIsFinal(p1): boolean --[[ Line: 36 ]]
+function ThumbnailModule.checkStateIsFinal(p1): boolean
 	return p1 ~= "Pending"
 end
 

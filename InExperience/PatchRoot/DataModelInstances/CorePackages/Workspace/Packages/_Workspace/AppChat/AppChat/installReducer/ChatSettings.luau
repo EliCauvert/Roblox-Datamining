@@ -3,7 +3,7 @@ local Parent = AppChat.Parent
 local CryoModule = require(Parent.Cryo)
 local RetrievalStatus = require(Parent.Http).Enum.RetrievalStatus
 
-local function checkRetrievals(UnionResult) --[[ Line: 35 ]]
+local function checkRetrievals(UnionResult)
 	-- upvalues: CryoModule (copy), RetrievalStatus (copy)
 	return if UnionResult.accountChatRetrieved and UnionResult.thirdPartyPrivacySettingsRetrieved then CryoModule.Dictionary.union(UnionResult, {
 		chatEnabled = UnionResult.accountChatEnabled and UnionResult.thirdPartyPrivacySettingsEnabled,
@@ -11,7 +11,7 @@ local function checkRetrievals(UnionResult) --[[ Line: 35 ]]
 	}) else UnionResult
 end
 
-local function handleGetMetadataSucceeded(p1, p2) --[[ Line: 52 ]]
+local function handleGetMetadataSucceeded(p1, p2)
 	-- upvalues: checkRetrievals (copy), CryoModule (copy)
 	local ResponseBody = p2.responseBody
 	
@@ -36,18 +36,18 @@ return require(Parent.Rodux).createReducer({
 	thirdPartyPrivacySettingsEnabled = false,
 	retrievalStatus = RetrievalStatus.NotStarted
 }, {
-	[require(AppChat.Actions.ThirdPartyChatSettingsLoaded).name] = function(p1, p2) --[[ Line: 45 ]]
+	[require(AppChat.Actions.ThirdPartyChatSettingsLoaded).name] = function(p1, p2)
 		-- upvalues: checkRetrievals (copy), CryoModule (copy)
 		return checkRetrievals(CryoModule.Dictionary.union(p1, {
 			thirdPartyPrivacySettingsRetrieved = p2.status ~= Enum.ChatRestrictionStatus.Unknown,
 			thirdPartyPrivacySettingsEnabled = p2.status == Enum.ChatRestrictionStatus.NotRestricted
 		}))
 	end,
-	[require(Parent.AppChatNetworking).rodux.GetMetadata.Succeeded.name] = function(p1, p2) --[[ Line: 66 ]]
+	[require(Parent.AppChatNetworking).rodux.GetMetadata.Succeeded.name] = function(p1, p2)
 		-- upvalues: handleGetMetadataSucceeded (copy)
 		return handleGetMetadataSucceeded(p1, p2)
 	end,
-	Debug_GroupChatEnabledToggled = function(p1, _) --[[ Line: 70 ]]
+	Debug_GroupChatEnabledToggled = function(p1, _)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.union(p1, { groupChatEnabled = not p1.groupChatEnabled })
 	end

@@ -3,10 +3,10 @@ local UseRobloxSystemMessageModule = require(script.Parent.useRobloxSystemMessag
 local _ = require(script.Parent.ChatAvailabilityContext)
 local FFlagExpChatMemoizeSystemMessageModule = require(script.Parent.Flags.FFlagExpChatMemoizeSystemMessage)
 
-return function(p1, p2) --[[ Line: 8 | Named "useAvailabilitySystemMessage" ]]
+return function(p1, p2)
 	-- upvalues: UseRobloxSystemMessageModule (copy), ReactModule (copy), FFlagExpChatMemoizeSystemMessageModule (copy)
 	local UseRobloxSystemMessageModuleResult = UseRobloxSystemMessageModule()
-	ReactModule.useEffect(function() --[[ Line: 15 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseRobloxSystemMessageModuleResult (copy)
 		if p1.messageKey then
 			UseRobloxSystemMessageModuleResult.displayRobloxSystemMessage(p1.messageKey, p1.messageFallback or "")

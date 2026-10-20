@@ -8,20 +8,20 @@ local UseInExperienceLocalizationFunction = require(Parent.ChatUIPrimitives).Hoo
 local FFlagExpChatTextChannelWindowWelcomeAndSummaryModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowWelcomeAndSummary)
 local self = setmetatable({}, { __mode = "k" })
 
-local function _(p1): boolean --[[ Line: 27 | Named "isWhisperChannel" ]]
+local function _(p1): boolean
 	return string.find(p1.Name, "^RBXWhisper") ~= nil
 end
 
-return function(p1, p2) --[[ Line: 31 | Named "useWelcomeSystemMessage" ]]
+return function(p1, p2)
 	-- upvalues: MessageWriterContextModule (copy), UseInExperienceLocalizationFunction (copy), ReactModule (copy), FFlagExpChatTextChannelWindowWelcomeAndSummaryModule (copy), self (copy), GetWhisperChannelOtherDisplayNameModule (copy), MessageModule (copy), Players (copy)
 	local UseMessageWriterResult = MessageWriterContextModule.useMessageWriter()
 	local UseInExperienceLocalizationResult = UseInExperienceLocalizationFunction()
-	ReactModule.useEffect(function() --[[ Line: 35 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagExpChatTextChannelWindowWelcomeAndSummaryModule (upval), UseMessageWriterResult (copy), p1 (copy), self (upval), GetWhisperChannelOtherDisplayNameModule (upval), p2 (copy), UseInExperienceLocalizationResult (copy), MessageModule (upval), Players (upval)
 		if not FFlagExpChatTextChannelWindowWelcomeAndSummaryModule then return end
 		if not UseMessageWriterResult or p1 == nil then return end
 		if string.find(p1.Name, "^RBXWhisper") == nil or self[p1] then return end
-		local function trySend(): boolean --[[ Line: 47 ]]
+		local function trySend(): boolean
 			-- upvalues: self (upval), p1 (copy), GetWhisperChannelOtherDisplayNameModule (upval), p2 (upval), UseInExperienceLocalizationResult (upval), UseMessageWriterResult (upval), MessageModule (upval)
 			if self[p1] then
 				return true
@@ -47,13 +47,13 @@ return function(p1, p2) --[[ Line: 31 | Named "useWelcomeSystemMessage" ]]
 		local Connection = nil
 		local Connection1 = nil
 		
-		local function cleanup() --[[ Line: 72 ]]
+		local function cleanup()
 			-- upvalues: Connection (ref), Connection1 (ref)
 			Connection:Disconnect()
 			Connection1:Disconnect()
 		end
 		
-		local function retry() --[[ Line: 76 ]]
+		local function retry()
 			-- upvalues: trySend (copy), Connection (ref), Connection1 (ref)
 			if trySend() then
 				Connection:Disconnect()

@@ -21,17 +21,17 @@ local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
 local Provider = require(Parent.FocusNavigationUtils).FocusNavigableSurfaceRegistry.Provider
 local NewResult = if FFlagSideSheetFocusNav then ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui) else nil
 local config = {
-	isFocused = function(): boolean --[[ Line: 46 ]]
+	isFocused = function(): boolean
 		return true
 	end,
-	addListener = function(_, _) --[[ Line: 49 ]]
-		return { remove = function() --[[ Line: 51 ]] end }
+	addListener = function(_, _)
+		return { remove = function() end }
 	end
 }
 
-return function(Element, List, p1) --[[ Line: 56 | Named "wrapWithProviders" ]]
+return function(Element, List, p1)
 	-- upvalues: RoduxModule (copy), IsPioneerLaunchFunction (copy), ReactModule (copy), RoactAppPolicy (copy), AppFeaturePolicies (copy), FFlagEnableDrawerFocusNav (copy), RoactNavigationModule (copy), config (copy), RoactRoduxModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), UiModeStyleProvider (copy), ColorMode (copy), Constants (copy), FFlagSideSheetFocusNav (copy), UnibarStyle (copy), ReactFocusNavigationModule (copy), NewResult (ref), Provider (copy)
-	local P4 = p1 or RoduxModule.Store.new(function(p2) --[[ Line: 57 ]]
+	local P4 = p1 or RoduxModule.Store.new(function(p2)
 		return p2 or {}
 	end)
 	local Element1 = Element

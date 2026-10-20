@@ -11,7 +11,7 @@ local View = FoundationModule.View
 local Text = FoundationModule.Text
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1) --[[ Line: 21 | Named "AttendanceChip" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), EventSocialProofModule (copy), Players (copy), Text (copy), FormatNumberWithShortUnitsModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -21,7 +21,7 @@ return function(p1) --[[ Line: 21 | Named "AttendanceChip" ]]
 	local ExperienceDetails = p1.virtualEvent.experienceDetails
 	local RsvpCounters = p1.virtualEvent.rsvpCounters
 	local IsOngoing = p1.eventStatus == "Ongoing"
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 32 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		local List = {}
 		

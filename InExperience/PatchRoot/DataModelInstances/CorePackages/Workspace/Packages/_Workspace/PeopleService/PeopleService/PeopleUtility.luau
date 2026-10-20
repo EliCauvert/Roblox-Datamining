@@ -6,12 +6,12 @@ local SortTableByValueFunction = require(Parent1.CoreScriptsRoactCommon).Utiliti
 local _ = require(Parent.createPersonStore)
 local GetFFlagPeoplePageEnablePersonSignalStoreFunction = require(Parent.Flags).GetFFlagPeoplePageEnablePersonSignalStore
 local FFlagUserProfilePlatformProfile = require(Parent1.SharedFlags).FFlagUserProfilePlatformProfile
-local _, Result = pcall(function() --[[ Line: 21 ]]
+local _, Result = pcall(function()
 	return game:GetService("PlatformFriendsService")
 end)
 local UserProfileStore = UserProfilesModule.Stores.UserProfileStore
 
-local function comparePeople(A, B): boolean --[[ Line: 74 ]]
+local function comparePeople(A, B): boolean
 	-- upvalues: Players (copy)
 	local LocalPlayer = Players.LocalPlayer
 	local Lowered = A.Name:lower()
@@ -26,9 +26,9 @@ local function comparePeople(A, B): boolean --[[ Line: 74 ]]
 	return Lowered < Lowered1
 end
 
-local v1 = if GetFFlagPeoplePageEnablePersonSignalStoreFunction() then function(p1) --[[ Line: 97 ]]
+local v1 = if GetFFlagPeoplePageEnablePersonSignalStoreFunction() then function(p1)
 	-- upvalues: SortTableByValueFunction (copy), Players (copy)
-	for i, value in SortTableByValueFunction(p1, function(p2, p3): boolean --[[ Line: 98 ]]
+	for i, value in SortTableByValueFunction(p1, function(p2, p3): boolean
 		-- upvalues: Players (upval)
 		local Person = p2.value.getPerson()
 		local Person1 = p3.value.getPerson()
@@ -53,7 +53,7 @@ local v1 = if GetFFlagPeoplePageEnablePersonSignalStoreFunction() then function(
 end else nil
 
 return {
-	getInExperienceCombinedName = function(p2) --[[ Line: 28 ]]
+	getInExperienceCombinedName = function(p2)
 		-- upvalues: UserProfileStore (copy)
 		local GetInExperienceCombinedNames = {}
 		
@@ -62,7 +62,7 @@ return {
 		end
 		return GetInExperienceCombinedNames
 	end,
-	getPlatformData = function(p3) --[[ Line: 42 ]]
+	getPlatformData = function(p3)
 		-- upvalues: UserProfileStore (copy), FFlagUserProfilePlatformProfile (copy)
 		local t = {}
 		
@@ -74,25 +74,25 @@ return {
 		end
 		return t
 	end,
-	canShowPlatformProfile = function(p4): boolean --[[ Line: 59 ]]
+	canShowPlatformProfile = function(p4): boolean
 		-- upvalues: Result (copy)
 		return game:GetEngineFeature("PlatformFriendsService") and (game:GetEngineFeature("PlatformFriendsProfile") and (Result and (Result:IsProfileEnabled() and (p4 and p4 ~= ""))))
 	end,
-	showPlatformProfile = function(PlatformUserId) --[[ Line: 68 ]]
+	showPlatformProfile = function(PlatformUserId)
 		-- upvalues: Result (copy)
 		if game:GetEngineFeature("PlatformFriendsService") and (game:GetEngineFeature("PlatformFriendsProfile") and (Result and (Result:IsProfileEnabled() and (PlatformUserId and PlatformUserId ~= "")))) then
 			Result:ShowProfile(PlatformUserId)
 		end
 	end,
 	comparePeople = comparePeople,
-	sortPeople = function(List) --[[ Line: 91 ]]
+	sortPeople = function(List)
 		-- upvalues: comparePeople (copy)
 		table.sort(List, comparePeople)
 		
 		return List
 	end,
 	sortPersonStores = if GetFFlagPeoplePageEnablePersonSignalStoreFunction() then v1 else nil,
-	showPersonButtons = function(LocalPlayer, p4: number): boolean --[[ Line: 112 ]]
+	showPersonButtons = function(LocalPlayer, p4: number): boolean
 		-- upvalues: Players (copy)
 		local LocalPlayer1 = Players.LocalPlayer
 		

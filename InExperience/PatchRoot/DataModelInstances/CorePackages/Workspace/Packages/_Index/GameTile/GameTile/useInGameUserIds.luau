@@ -1,8 +1,8 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("GameTile").Parent.React)
 
-return function(p1, p2) --[[ Line: 5 | Named "useInGameUserIds" ]]
+return function(p1, p2)
 	-- upvalues: ReactModule (copy)
-	return ReactModule.useMemo(function() --[[ Line: 6 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), p2 (copy)
 		if not p1 or not p2 then
 			return {}

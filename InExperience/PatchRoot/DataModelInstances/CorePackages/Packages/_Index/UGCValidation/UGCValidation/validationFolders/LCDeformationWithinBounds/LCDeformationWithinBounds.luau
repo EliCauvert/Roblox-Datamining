@@ -21,7 +21,7 @@ return {
 		ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH
 	},
 	requiredData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
-	run = function(p1, p2) --[[ Line: 33 ]]
+	run = function(p1, p2)
 		-- upvalues: ValidationRulesUtilModule (copy), config (copy), LCPostDeformSizeMultiplierGeneralHundredthsRatio (copy), GetEngineFeatureLayeredClothingDecompositionModule (copy), UGCValidationService (copy), Vector3UtilsModule (copy), ErrorSourceStringsModule (copy), ValueToStringModule (copy)
 		local Handle = p2.rootInstance:FindFirstChild("Handle")
 		local Handle1 = p2.renderMeshesData.Handle

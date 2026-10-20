@@ -2,7 +2,7 @@
 local InputTypeConstants = require(Parent.InputType).InputTypeConstants
 local GetInputGroupFunction = require(Parent.InputType).getInputGroup
 
-return function(p1): boolean --[[ Line: 5 | Named "isGamepadInput" ]]
+return function(p1): boolean
 	-- upvalues: GetInputGroupFunction (copy), InputTypeConstants (copy)
 	return GetInputGroupFunction(p1) == InputTypeConstants.Gamepad
 end

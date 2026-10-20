@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.ActionCreator)("SetSubjectToChinaPolicies", function(SubjectToChinaPolicies) --[[ Line: 4 ]]
+﻿return require(script.Parent.Parent.ActionCreator)("SetSubjectToChinaPolicies", function(SubjectToChinaPolicies)
 	return { subjectToChinaPolicies = SubjectToChinaPolicies }
 end)

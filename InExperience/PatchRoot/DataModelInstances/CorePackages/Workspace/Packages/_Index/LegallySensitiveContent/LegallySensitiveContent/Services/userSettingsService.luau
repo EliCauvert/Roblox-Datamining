@@ -11,7 +11,7 @@ local NewResult = DependenciesModule.UrlBuilder.new({
 	base = DependenciesModule.UrlBase.APIS
 })
 
-local function updateUserSettings(List, p1) --[[ Line: 72 ]]
+local function updateUserSettings(List, p1)
 	-- upvalues: UserSettingModule (copy), Promise (copy), NewResult (copy), FetchFunction (copy), HttpService (copy), Response (copy)
 	for i, _ in List do
 		if not UserSettingModule[i] then
@@ -20,9 +20,9 @@ local function updateUserSettings(List, p1) --[[ Line: 72 ]]
 	end
 	local Result = NewResult()
 	
-	return Promise.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 80 ]]
+	return Promise.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 		-- upvalues: FetchFunction (upval), Result (copy), HttpService (upval), List (copy), p1 (copy), Response (upval)
-		local Success, Result1 = pcall(function() --[[ Line: 81 ]]
+		local Success, Result1 = pcall(function()
 			-- upvalues: FetchFunction (upval), Result (upval), HttpService (upval), List (upval), p1 (upval), Response (upval)
 			return FetchFunction(Result, {
 				method = "POST",
@@ -32,7 +32,7 @@ local function updateUserSettings(List, p1) --[[ Line: 72 ]]
 					Accept = "application/json",
 					["rbx-audit-data"] = p1
 				}
-			}):catch(function(_) --[[ Line: 91 ]]
+			}):catch(function(_)
 				-- upvalues: Response (upval)
 				return Response.error()
 			end):expect()
@@ -54,13 +54,13 @@ local function updateUserSettings(List, p1) --[[ Line: 72 ]]
 end
 
 return {
-	updateUserSetting = function(p2, p3, p4) --[[ Line: 28 ]]
+	updateUserSetting = function(p2, p3, p4)
 		-- upvalues: NewResult (copy), Promise (copy), FetchFunction (copy), HttpService (copy), Response (copy)
 		local Result = NewResult()
 		
-		return Promise.new(function(Callback1: () -> (), Callback: (any) -> ()) --[[ Line: 30 ]]
+		return Promise.new(function(Callback1: () -> (), Callback: (any) -> ())
 			-- upvalues: FetchFunction (upval), Result (copy), HttpService (upval), p2 (copy), p3 (copy), p4 (copy), Response (upval)
-			local Success, Result1 = pcall(function() --[[ Line: 31 ]]
+			local Success, Result1 = pcall(function()
 				-- upvalues: FetchFunction (upval), Result (upval), HttpService (upval), p2 (upval), p3 (upval), p4 (upval), Response (upval)
 				return FetchFunction(Result, {
 					method = "POST",
@@ -70,7 +70,7 @@ return {
 						Accept = "application/json",
 						["rbx-audit-data"] = p4
 					}
-				}):catch(function(_) --[[ Line: 43 ]]
+				}):catch(function(_)
 					-- upvalues: Response (upval)
 					return Response.error()
 				end):expect()

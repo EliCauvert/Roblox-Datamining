@@ -8,7 +8,7 @@ local GetEncodedAuditHeaderFunction = require(LegallySensitiveContent.Utils.Audi
 local ConsentNameModule = require(LegallySensitiveContent.Enums.ConsentName)
 local _ = require(LegallySensitiveContent.Types.LegallySensitiveContentTypes)
 
-return function(p1, p2) --[[ Line: 31 | Named "useTranslatedLegallySensitiveContentAndActions" ]]
+return function(p1, p2)
 	-- upvalues: UseLocalizationFunction (copy), LegallySensitiveContentConstantsModule (copy), ConsentNameModule (copy), GetEncodedAuditHeaderFunction (copy), UpdateUserSettingFunction (copy), GrantOneTimeUserConsentFunction (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		phoneNumberDiscoverabilityUpsellNotNow = LegallySensitiveContentConstantsModule.phoneNumberDiscoverabilityUpsell.notNow,
@@ -32,14 +32,14 @@ return function(p1, p2) --[[ Line: 31 | Named "useTranslatedLegallySensitiveCont
 			}
 		}
 	})[p1], {
-		getBase64EncodedAuditHeader = function(p3) --[[ Line: 101 ]]
+		getBase64EncodedAuditHeader = function(p3)
 			-- upvalues: GetEncodedAuditHeaderFunction (upval), p1 (copy), UseLocalizationResult (copy), p2 (copy)
 			return GetEncodedAuditHeaderFunction(p1, UseLocalizationResult, p2, p3)
 		end,
-		updateSettingWithAuditing = function(p3, p4, p5) --[[ Line: 85 ]]
+		updateSettingWithAuditing = function(p3, p4, p5)
 			-- upvalues: GetEncodedAuditHeaderFunction (upval), p1 (copy), UseLocalizationResult (copy), p2 (copy), UpdateUserSettingFunction (upval)
 			local EncodedAuditHeader = GetEncodedAuditHeaderFunction(p1, UseLocalizationResult, p2, p5)
-			local Success, Result = pcall(function() --[[ Line: 92 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: UpdateUserSettingFunction (upval), p3 (copy), p4 (copy), EncodedAuditHeader (copy)
 				UpdateUserSettingFunction(p3, p4, EncodedAuditHeader)
 			end)
@@ -48,10 +48,10 @@ return function(p1, p2) --[[ Line: 31 | Named "useTranslatedLegallySensitiveCont
 				warn("Failed to update setting with auditing:", Result)
 			end
 		end,
-		grantOneTimeUserConsentWithAuditing = function(p3, p4) --[[ Line: 105 ]]
+		grantOneTimeUserConsentWithAuditing = function(p3, p4)
 			-- upvalues: GetEncodedAuditHeaderFunction (upval), p1 (copy), UseLocalizationResult (copy), p2 (copy), GrantOneTimeUserConsentFunction (upval)
 			local EncodedAuditHeader = GetEncodedAuditHeaderFunction(p1, UseLocalizationResult, p2, p4)
-			local Success, Result = pcall(function() --[[ Line: 111 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: GrantOneTimeUserConsentFunction (upval), p1 (upval), p3 (copy), EncodedAuditHeader (copy)
 				GrantOneTimeUserConsentFunction(p1, p3, EncodedAuditHeader)
 			end)

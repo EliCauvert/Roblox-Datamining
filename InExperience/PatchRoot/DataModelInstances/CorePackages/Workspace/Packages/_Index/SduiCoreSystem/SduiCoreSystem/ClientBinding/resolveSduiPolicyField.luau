@@ -2,7 +2,7 @@
 local SduiPolicyFieldKeyModule = require(SduiCoreSystem.ClientBinding.SduiPolicyFieldKey)
 local _ = require(SduiCoreSystem.Parent.UniversalAppPolicy)
 
-return function(p1, CatalogPremiumCategory) --[[ Line: 16 | Named "resolveSduiPolicyField" ]]
+return function(p1, CatalogPremiumCategory)
 	-- upvalues: SduiPolicyFieldKeyModule (copy)
 	if CatalogPremiumCategory == SduiPolicyFieldKeyModule.SearchBar then
 		return true, p1.getSearchBar()

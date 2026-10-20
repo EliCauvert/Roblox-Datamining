@@ -20,16 +20,16 @@ DetailsPageBody.validateProps = TModule.strictInterface({
 })
 DetailsPageBody.defaultProps = { bodyClipsDescendants = true, showPageDetails = false }
 
-function DetailsPageBody.init(p1) --[[ Line: 48 ]]
+function DetailsPageBody.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.state = { containerWidth = nil }
 	p1.containerFrameRef = RoactModule.createRef()
 	p1.mounted = false
 	
-	function p1.onContainerSizeChange(Frame: Frame) --[[ Line: 54 ]]
+	function p1.onContainerSizeChange(Frame: Frame)
 		-- upvalues: p1 (copy)
 		if p1.mounted then
-			p1:setState(function(p2, _) --[[ Line: 59 ]]
+			p1:setState(function(p2, _)
 				-- upvalues: Frame (copy)
 				return if p2.containerWidth == Frame.AbsoluteSize.x then nil else { containerWidth = Frame.AbsoluteSize.x }
 			end)
@@ -39,7 +39,7 @@ function DetailsPageBody.init(p1) --[[ Line: 48 ]]
 	end
 end
 
-function DetailsPageBody.renderSinglePanel(p1) --[[ Line: 70 ]]
+function DetailsPageBody.renderSinglePanel(p1)
 	-- upvalues: RoactModule (copy)
 	local config = {
 		Layout = RoactModule.createElement("UIListLayout", {
@@ -73,7 +73,7 @@ function DetailsPageBody.renderSinglePanel(p1) --[[ Line: 70 ]]
 	}
 end
 
-function DetailsPageBody.renderDualPanel(p2) --[[ Line: 110 ]]
+function DetailsPageBody.renderDualPanel(p2)
 	-- upvalues: RoactModule (copy), ContentPositionModule (copy)
 	local Offset: number = if p2.state.containerWidth < 1920 then 48 else 96
 	local config = {
@@ -128,13 +128,13 @@ function DetailsPageBody.renderDualPanel(p2) --[[ Line: 110 ]]
 	}
 end
 
-function DetailsPageBody.renderBodyContent(p3) --[[ Line: 177 ]]
+function DetailsPageBody.renderBodyContent(p3)
 	local DualPanelBreakpoint = p3.props.dualPanelBreakpoint or 1280
 	
 	return if p3.state.containerWidth and p3.props.componentList then if p3.state.containerWidth < DualPanelBreakpoint then p3:renderSinglePanel() else p3:renderDualPanel() else {}
 end
 
-function DetailsPageBody.render(p3) --[[ Line: 190 ]]
+function DetailsPageBody.render(p3)
 	-- upvalues: GetPlatformConfigModule (copy), RoactModule (copy), DetailsPageTitleContentModule (copy)
 	local PlatformConfigModule = GetPlatformConfigModule(p3.props.deviceType)
 	local SideMargin = if p3.props.sideMargin then p3.props.sideMargin else PlatformConfigModule.sideMargin
@@ -183,7 +183,7 @@ function DetailsPageBody.render(p3) --[[ Line: 190 ]]
 	})
 end
 
-function DetailsPageBody.didMount(p3) --[[ Line: 240 ]]
+function DetailsPageBody.didMount(p3)
 	p3.mounted = true
 	
 	if p3.containerFrameRef.current then
@@ -191,7 +191,7 @@ function DetailsPageBody.didMount(p3) --[[ Line: 240 ]]
 	end
 end
 
-function DetailsPageBody.willUnmount(p3) --[[ Line: 248 ]]
+function DetailsPageBody.willUnmount(p3)
 	p3.mounted = false
 end
 

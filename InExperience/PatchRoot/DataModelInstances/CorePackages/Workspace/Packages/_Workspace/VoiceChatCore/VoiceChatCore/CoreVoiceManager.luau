@@ -181,7 +181,7 @@ local config2 = {
 	permissionState = true
 }
 
-function config1.__index(p1, p2) --[[ Line: 321 ]]
+function config1.__index(p1, p2)
 	-- upvalues: GetFFlagCoreMicManagerRefactorModule (copy), config2 (copy), config1 (copy)
 	if GetFFlagCoreMicManagerRefactorModule() then
 		local RawValue = rawget(p1, "micManager")
@@ -193,7 +193,7 @@ function config1.__index(p1, p2) --[[ Line: 321 ]]
 	return config1[p2]
 end
 
-function config1.__newindex(p1, Key, p2) --[[ Line: 331 ]]
+function config1.__newindex(p1, Key, p2)
 	-- upvalues: GetFFlagCoreMicManagerRefactorModule (copy), config2 (copy)
 	if GetFFlagCoreMicManagerRefactorModule() then
 		local RawValue = rawget(p1, "micManager")
@@ -207,7 +207,7 @@ function config1.__newindex(p1, Key, p2) --[[ Line: 331 ]]
 	rawset(p1, Key, p2)
 end
 
-function config1.new(BlockStatusChanged, PermissionsService, HttpRbxApiService, Service, BlockStatusChanged1, NotificationService, AvatarChatService, p1, ThirdPartyUserService, CaptureService, AdService) --[[ Line: 342 ]]
+function config1.new(BlockStatusChanged, PermissionsService, HttpRbxApiService, Service, BlockStatusChanged1, NotificationService, AvatarChatService, p1, ThirdPartyUserService, CaptureService, AdService)
 	-- upvalues: UtilsModule (copy), AnalyticsModule (copy), AppStorageService (copy), config1 (copy), WATCHEDMESSAGETYPES (copy), GetFIntThrottleParticipantsUpdateMsModule (copy), Players1 (copy), NewResult (copy), IXPServiceWrapper (copy), VoicePerformanceThrottlingIXPLayerName (copy), ThrottleParticipantsUpdateIXPLayerValue (copy), GetFFlagCoreMicManagerRefactorModule (copy), MicInputManagerModule (copy), FFlagEnableVoiceChatMuteForVideoCaptures (copy), GetFFlagMicConsumerRegistryModule (copy)
 	local self = setmetatable({
 		previousSessionId = nil,
@@ -237,9 +237,9 @@ function config1.new(BlockStatusChanged, PermissionsService, HttpRbxApiService, 
 	self.lastStateUpdateCounter = 0
 	
 	if GetFIntThrottleParticipantsUpdateMsModule() > 0 then
-		task.spawn(function() --[[ Line: 384 ]]
+		task.spawn(function()
 			-- upvalues: Players1 (upval), Service (copy), NewResult (upval), IXPServiceWrapper (upval), VoicePerformanceThrottlingIXPLayerName (upval)
-			local Success, Result = pcall(function() --[[ Line: 385 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: Players1 (upval), Service (upval)
 				return if Players1.LocalPlayer then Service:IsVoiceEnabledForUserIdAsync(Players1.LocalPlayer.UserId) else false
 			end)
@@ -254,7 +254,7 @@ function config1.new(BlockStatusChanged, PermissionsService, HttpRbxApiService, 
 			end
 		end)
 		self.participantsStateThrottleTime = GetFIntThrottleParticipantsUpdateMsModule() / 1000
-		local Success, Result = pcall(function() --[[ Line: 401 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: IXPServiceWrapper (upval), VoicePerformanceThrottlingIXPLayerName (upval)
 			return IXPServiceWrapper:GetLayerData(VoicePerformanceThrottlingIXPLayerName)
 		end)
@@ -267,77 +267,77 @@ function config1.new(BlockStatusChanged, PermissionsService, HttpRbxApiService, 
 		self.micManager = MicInputManagerModule.new({
 			log = NewResult,
 			callbacks = {
-				emitGetPermissions = function(p2, p3, p4, p5) --[[ Line: 413 ]]
+				emitGetPermissions = function(p2, p3, p4, p5)
 					-- upvalues: self (copy)
 					self:emit("GetPermissions", p2, p3, p4, p5)
 				end,
-				emitOnPermissionRequested = function() --[[ Line: 416 ]]
+				emitOnPermissionRequested = function()
 					-- upvalues: self (copy)
 					self:emit("OnPermissionRequested")
 				end,
-				emitOnRequestMicPermissionResolved = function() --[[ Line: 419 ]]
+				emitOnRequestMicPermissionResolved = function()
 					-- upvalues: self (copy)
 					self:emit("OnRequestMicPermissionResolved")
 				end,
-				emitOnRequestMicPermissionRejected = function() --[[ Line: 422 ]]
+				emitOnRequestMicPermissionRejected = function()
 					-- upvalues: self (copy)
 					self:emit("OnRequestMicPermissionRejected")
 				end,
-				emitOnShowDataConsentToast = function() --[[ Line: 425 ]]
+				emitOnShowDataConsentToast = function()
 					-- upvalues: self (copy)
 					self:emit("OnShowDataConsentToast")
 				end,
-				emitOnMicPermissionDeniedToast = function() --[[ Line: 428 ]]
+				emitOnMicPermissionDeniedToast = function()
 					-- upvalues: self (copy)
 					self:emit("OnMicPermissionDeniedToast")
 				end,
-				emitOnMicFirstUnmutePrivacy = function() --[[ Line: 431 ]]
+				emitOnMicFirstUnmutePrivacy = function()
 					-- upvalues: self (copy)
 					self:emit("OnMicFirstUnmutePrivacy")
 				end,
-				getAudioDevices = function() --[[ Line: 434 ]]
+				getAudioDevices = function()
 					-- upvalues: self (copy)
 					return self.audioDevices
 				end,
-				getSendMuteEvent = function() --[[ Line: 437 ]]
+				getSendMuteEvent = function()
 					-- upvalues: self (copy)
 					return self:GetSendMuteEvent()
 				end,
-				isSignalActive = function(UserId) --[[ Line: 440 ]]
+				isSignalActive = function(UserId)
 					-- upvalues: self (copy)
 					return self:IsSignalActive(UserId)
 				end,
-				reportVoiceMuteSelf = function(p2) --[[ Line: 443 ]]
+				reportVoiceMuteSelf = function(p2)
 					-- upvalues: self (copy)
 					self.Analytics:reportVoiceMuteSelf(p2)
 				end,
-				getJoinWithVoiceMuteData = function(p2) --[[ Line: 446 ]]
+				getJoinWithVoiceMuteData = function(p2)
 					-- upvalues: self (copy)
 					return self:JoinWithVoiceMuteData(p2)
 				end,
-				recordExperienceJoinMicPerm = function(p2) --[[ Line: 449 ]]
+				recordExperienceJoinMicPerm = function(p2)
 					-- upvalues: self (copy)
 					self:RecordExperienceJoinMicPermissionStatus(p2)
 				end,
-				reportJoinFailed = function(p2, p3) --[[ Line: 452 ]]
+				reportJoinFailed = function(p2, p3)
 					-- upvalues: self (copy), AnalyticsModule (upval)
 					self:_reportJoinFailed(p2, p3 or AnalyticsModule.ERROR)
 				end,
-				requestPermissions = function(p2) --[[ Line: 455 ]]
+				requestPermissions = function(p2)
 					-- upvalues: self (copy)
 					return self.PermissionsService:requestPermissions(p2)
 				end,
-				getPassInitErrorInPromiseReject = function() --[[ Line: 458 ]]
+				getPassInitErrorInPromiseReject = function()
 					-- upvalues: self (copy)
 					return self.options.passInitErrorInPromiseReject
 				end,
-				onVoiceCapturedDuringVideoCapture = function(p2) --[[ Line: 461 ]]
+				onVoiceCapturedDuringVideoCapture = function(p2)
 					-- upvalues: FFlagEnableVoiceChatMuteForVideoCaptures (upval), self (copy)
 					if FFlagEnableVoiceChatMuteForVideoCaptures and self.CaptureService:IsCapturingVideo() then
 						self.voiceCapturedDuringVideoCapture = self.voiceCapturedDuringVideoCapture or p2
 					end
 				end,
-				getService = function() --[[ Line: 468 ]]
+				getService = function()
 					-- upvalues: self (copy)
 					return self.service
 				end
@@ -354,25 +354,25 @@ function config1.new(BlockStatusChanged, PermissionsService, HttpRbxApiService, 
 	return self
 end
 
-function config1:emit(p2, ...) --[[ Line: 485 ]]
+function config1:emit(p2, ...)
 	self.eventEmitter:emit(p2, ...)
 end
 
-function config1:subscribe(p2, p3) --[[ Line: 489 ]]
+function config1:subscribe(p2, p3)
 	self.eventEmitter:addListener(p2, p3)
 end
 
-function config1:unsubscribe(p2, p3) --[[ Line: 493 ]]
+function config1:unsubscribe(p2, p3)
 	self.eventEmitter:removeListener(p2, p3)
 end
 
-function config1:unsubscribeAll() --[[ Line: 497 ]]
+function config1:unsubscribeAll()
 	self.eventEmitter:removeAllListeners()
 end
 
-function config1.CheckCallStateWithPromise(p2) --[[ Line: 501 ]]
+function config1.CheckCallStateWithPromise(p2)
 	-- upvalues: Default (copy), NewResult (copy), Enums (copy)
-	return Default:getCallState():andThen(function(Result) --[[ Line: 503 ]]
+	return Default:getCallState():andThen(function(Result)
 		-- upvalues: NewResult (upval), Enums (upval), p2 (copy)
 		NewResult:trace("Got user call state")
 		
@@ -381,18 +381,18 @@ function config1.CheckCallStateWithPromise(p2) --[[ Line: 501 ]]
 			p2.callMutedState = Result.muted
 			NewResult:trace("Changing call muted state to {}", Result.muted)
 		end
-	end):catch(function(Err) --[[ Line: 515 ]]
+	end):catch(function(Err)
 		-- upvalues: NewResult (upval)
 		NewResult:trace("User not in call {}", Err)
 	end)
 end
 
-function config1.CheckCallState(p2) --[[ Line: 521 ]]
+function config1.CheckCallState(p2)
 	-- upvalues: NewResult (copy), Default (copy), Enums (copy)
 	NewResult:trace("Checking user call state")
-	local Success, Result = pcall(function() --[[ Line: 523 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: Default (upval), NewResult (upval), Enums (upval), p2 (copy)
-		Default:getCallState():andThen(function(Result) --[[ Line: 525 ]]
+		Default:getCallState():andThen(function(Result)
 			-- upvalues: NewResult (upval), Enums (upval), p2 (upval)
 			NewResult:trace("Got user call state")
 			
@@ -401,7 +401,7 @@ function config1.CheckCallState(p2) --[[ Line: 521 ]]
 				p2.callMutedState = Result.muted
 				NewResult:trace("Changing call muted state to {}", Result.muted)
 			end
-		end):catch(function(Err) --[[ Line: 537 ]]
+		end):catch(function(Err)
 			-- upvalues: NewResult (upval)
 			NewResult:trace("User not in call {}", Err)
 		end)
@@ -412,16 +412,16 @@ function config1.CheckCallState(p2) --[[ Line: 521 ]]
 	end
 end
 
-function config1._GetShowAgeVerificationOverlay(p2, p3) --[[ Line: 556 ]]
+function config1._GetShowAgeVerificationOverlay(p2, p3)
 	-- upvalues: GetShowAgeVerificationOverlayModule (copy), UtilsModule (copy)
 	return GetShowAgeVerificationOverlayModule(UtilsModule.bind(p2, "GetRequest"), tostring(game.GameId), tostring(game.PlaceId), p3)
 end
 
-function config1:FetchAgeVerificationOverlay(p2) --[[ Line: 565 ]]
+function config1:FetchAgeVerificationOverlay(p2)
 	-- upvalues: PromiseModule (copy)
 	if not self._getShowAgeVerificationOverlayResult then
 		if not self._getShowAgeVerificationOverlayPromise then
-			self._getShowAgeVerificationOverlayPromise = PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 568 ]]
+			self._getShowAgeVerificationOverlayPromise = PromiseModule.new(function(Callback: (any) -> (), _)
 				-- upvalues: self (copy), p2 (copy)
 				self._getShowAgeVerificationOverlayResult = self:_GetShowAgeVerificationOverlay(p2)
 				Callback(self._getShowAgeVerificationOverlayResult)
@@ -432,12 +432,12 @@ function config1:FetchAgeVerificationOverlay(p2) --[[ Line: 565 ]]
 	return self._getShowAgeVerificationOverlayResult
 end
 
-function config1._GetShowPhoneVerificationUpsell(p2, p3, p4) --[[ Line: 584 ]]
+function config1._GetShowPhoneVerificationUpsell(p2, p3, p4)
 	-- upvalues: GetShowPhoneVerificationUpsellModule (copy), UtilsModule (copy)
 	return (GetShowPhoneVerificationUpsellModule(UtilsModule.bind(p2, "GetRequest"), tostring(game.GameId), p3, p4))
 end
 
-function config1:FetchPhoneVerificationUpsell(EXITCONFIRMATIONPHONEUPSELLIXPLAYER, Timestamp, p2) --[[ Line: 597 ]]
+function config1:FetchPhoneVerificationUpsell(EXITCONFIRMATIONPHONEUPSELLIXPLAYER, Timestamp, p2)
 	-- upvalues: PromiseModule (copy), ConstantsModule (copy)
 	if not self._getShowPhoneVerificationUpsellResult then
 		self._getShowPhoneVerificationUpsellResult = {}
@@ -445,7 +445,7 @@ function config1:FetchPhoneVerificationUpsell(EXITCONFIRMATIONPHONEUPSELLIXPLAYE
 	end
 	if not self._getShowPhoneVerificationUpsellResult[EXITCONFIRMATIONPHONEUPSELLIXPLAYER] or p2 then
 		if not self._getShowPhoneVerificationUpsellPromise[EXITCONFIRMATIONPHONEUPSELLIXPLAYER] or p2 then
-			self._getShowPhoneVerificationUpsellPromise[EXITCONFIRMATIONPHONEUPSELLIXPLAYER] = PromiseModule.new(function(Callback: () -> (), _) --[[ Line: 608 ]]
+			self._getShowPhoneVerificationUpsellPromise[EXITCONFIRMATIONPHONEUPSELLIXPLAYER] = PromiseModule.new(function(Callback: () -> (), _)
 				-- upvalues: self (copy), EXITCONFIRMATIONPHONEUPSELLIXPLAYER (copy), Timestamp (copy), ConstantsModule (upval)
 				local ShowPhoneVerificationUpsell = self:_GetShowPhoneVerificationUpsell(EXITCONFIRMATIONPHONEUPSELLIXPLAYER, Timestamp)
 				self._getShowPhoneVerificationUpsellResult[EXITCONFIRMATIONPHONEUPSELLIXPLAYER] = if type(ShowPhoneVerificationUpsell) == "table" and ShowPhoneVerificationUpsell.valueProp ~= nil then ShowPhoneVerificationUpsell.valueProp else ConstantsModule.PHONE_UPSELL_VOICE_CHAT_PROP.None
@@ -457,20 +457,20 @@ function config1:FetchPhoneVerificationUpsell(EXITCONFIRMATIONPHONEUPSELLIXPLAYE
 	return self._getShowPhoneVerificationUpsellResult[EXITCONFIRMATIONPHONEUPSELLIXPLAYER]
 end
 
-function config1:DisablePhoneVerificationUpsell() --[[ Line: 622 ]]
+function config1:DisablePhoneVerificationUpsell()
 	-- upvalues: CryoModule (copy), ConstantsModule (copy)
-	self._getShowPhoneVerificationUpsellResult = CryoModule.Dictionary.map(self._getShowPhoneVerificationUpsellResult, function() --[[ Line: 625 ]]
+	self._getShowPhoneVerificationUpsellResult = CryoModule.Dictionary.map(self._getShowPhoneVerificationUpsellResult, function()
 		-- upvalues: ConstantsModule (upval)
 		return ConstantsModule.PHONE_UPSELL_VOICE_CHAT_PROP.None
 	end)
 end
 
-function config1:GetNudgeAnalyticsData() --[[ Line: 631 ]]
+function config1:GetNudgeAnalyticsData()
 	-- upvalues: Players (copy)
 	return Players.LocalPlayer.UserId, self:GetSessionId()
 end
 
-function config1:avatarChatUserAndPlaceSettingsValueOfClientFeatures(p2) --[[ Line: 636 ]]
+function config1:avatarChatUserAndPlaceSettingsValueOfClientFeatures(p2)
 	-- upvalues: GetFFlagEnableVoiceSignalFunction (copy)
 	return {
 		universePlaceVoiceEnabledSettings = {
@@ -491,15 +491,15 @@ function config1:avatarChatUserAndPlaceSettingsValueOfClientFeatures(p2) --[[ Li
 	}
 end
 
-function config1:resolveAvatarChatUserAndPlaceSettings() --[[ Line: 683 ]]
+function config1:resolveAvatarChatUserAndPlaceSettings()
 	local Success, Result = pcall(self.AvatarChatService.GetClientFeaturesAsync, self.AvatarChatService)
 	
 	return if Success then self:avatarChatUserAndPlaceSettingsValueOfClientFeatures(Result) else nil
 end
 
-function config1.GetRequest(p2, ApiUrl, _) --[[ Line: 693 ]]
+function config1.GetRequest(p2, ApiUrl, _)
 	-- upvalues: HttpService (copy)
-	local Success, Result = pcall(function() --[[ Line: 694 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: p2 (copy), ApiUrl (copy), HttpService (upval)
 		return HttpService:JSONDecode((p2.HttpRbxApiService:GetAsyncFullUrl(ApiUrl, Enum.ThrottlingPriority.Default, Enum.HttpRequestType.Players)))
 	end)
@@ -507,9 +507,9 @@ function config1.GetRequest(p2, ApiUrl, _) --[[ Line: 693 ]]
 	return Success and Result
 end
 
-function config1.PostUserVoiceConnectionStatus(p2, IsUserVoiceConnected) --[[ Line: 702 ]]
+function config1.PostUserVoiceConnectionStatus(p2, IsUserVoiceConnected)
 	-- upvalues: HttpService (copy), ConstantsModule (copy)
-	local Success, _ = pcall(function() --[[ Line: 703 ]]
+	local Success, _ = pcall(function()
 		-- upvalues: HttpService (upval), IsUserVoiceConnected (copy), p2 (copy), ConstantsModule (upval)
 		return HttpService:JSONDecode((p2.HttpRbxApiService:PostAsyncFullUrl(ConstantsModule.VOICE_URL .. "/v1/user-voice-connection-state", (HttpService:JSONEncode({ IsUserVoiceConnected = IsUserVoiceConnected })))))
 	end)
@@ -517,7 +517,7 @@ function config1.PostUserVoiceConnectionStatus(p2, IsUserVoiceConnected) --[[ Li
 	return Success
 end
 
-function config1.GetVoiceAnalyticsData(p2) --[[ Line: 712 ]]
+function config1.GetVoiceAnalyticsData(p2)
 	-- upvalues: RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy)
 	return {
 		micAvailability = "",
@@ -528,7 +528,7 @@ function config1.GetVoiceAnalyticsData(p2) --[[ Line: 712 ]]
 	}
 end
 
-function config1:RecordExperienceJoinMicPermissionStatus(p2) --[[ Line: 724 ]]
+function config1:RecordExperienceJoinMicPermissionStatus(p2)
 	-- upvalues: PermissionsProtocol (copy), PERMISSIONSTATE (copy)
 	local VoiceAnalyticsData = self:GetVoiceAnalyticsData()
 	
@@ -548,12 +548,12 @@ function config1:RecordExperienceJoinMicPermissionStatus(p2) --[[ Line: 724 ]]
 	self.Analytics:reportVoiceEvents("experienceJoinDeviceMicPermissionEvent", VoiceAnalyticsData)
 end
 
-function config1.CheckCaptureMute(p2) --[[ Line: 744 ]]
+function config1.CheckCaptureMute(p2)
 	-- upvalues: GetFFlagEnableVoiceChatMuteForVideoCapturesFunction (copy)
 	return if GetFFlagEnableVoiceChatMuteForVideoCapturesFunction() then p2.CaptureService:IsCapturingVideo() else false
 end
 
-function config1:ToggleMuteSome(List, p2, GroupType, Context) --[[ Line: 753 ]]
+function config1:ToggleMuteSome(List, p2, GroupType, Context)
 	-- upvalues: VoiceChatService (copy), EnableMutedByLocalUserEngineFeature (copy), Players (copy)
 	self:ensureInitialized("mute some players")
 	self._mutedAnyone = true
@@ -590,18 +590,18 @@ function config1:ToggleMuteSome(List, p2, GroupType, Context) --[[ Line: 753 ]]
 	end
 end
 
-function config1:GetMutedAnyone() --[[ Line: 798 ]]
+function config1:GetMutedAnyone()
 	return self._mutedAnyone
 end
 
-function config1:RecordGameSettingsOpened() --[[ Line: 802 ]]
+function config1:RecordGameSettingsOpened()
 	-- upvalues: v5 (copy), VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (copy)
 	if v5 and VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature and self._voiceJoinTimestampMs and not self._gameSettingsOpenedTimestampMs then
 		self._gameSettingsOpenedTimestampMs = DateTime.now().UnixTimestampMillis
 	end
 end
 
-function config1:ResetVoiceVolumeImpressionsSession() --[[ Line: 813 ]]
+function config1:ResetVoiceVolumeImpressionsSession()
 	-- upvalues: v5 (copy), VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (copy)
 	if v5 and VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature then
 		self._voiceJoinTimestampMs = nil
@@ -610,7 +610,7 @@ function config1:ResetVoiceVolumeImpressionsSession() --[[ Line: 813 ]]
 	end
 end
 
-function config1:ReportVoiceVolumeImpressionsIfNeeded() --[[ Line: 824 ]]
+function config1:ReportVoiceVolumeImpressionsIfNeeded()
 	-- upvalues: v5 (copy), VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (copy)
 	if v5 and VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature and self._voiceJoinTimestampMs and self._voiceVolumeSliderEligibleAtJoin then
 		local VoiceAnalyticsData = self:GetVoiceAnalyticsData()
@@ -627,7 +627,7 @@ function config1:ReportVoiceVolumeImpressionsIfNeeded() --[[ Line: 824 ]]
 	end
 end
 
-function config1:ToggleMutePlayer(UserId, Context) --[[ Line: 846 ]]
+function config1:ToggleMutePlayer(UserId, Context)
 	-- upvalues: VoiceChatService (copy), NewResult (copy), UtilsModule (copy), GetFFlagEnableFtuxExitOnMuteToggleModule (copy), EnableMutedByLocalUserEngineFeature (copy), Players (copy)
 	self:ensureInitialized("mute player " .. UserId)
 	self._mutedAnyone = true
@@ -670,7 +670,7 @@ function config1:ToggleMutePlayer(UserId, Context) --[[ Line: 846 ]]
 	end
 end
 
-function config1:MuteAll(p3, Context) --[[ Line: 900 ]]
+function config1:MuteAll(p3, Context)
 	-- upvalues: VoiceChatService (copy), NewResult (copy), VoiceChatMuteAllSyncMutedPlayers (copy), Players (copy), EnableMutedByLocalUserEngineFeature (copy), ConstantsModule (copy)
 	self:ensureInitialized("mute all")
 	self._mutedAnyone = true
@@ -720,14 +720,14 @@ function config1:MuteAll(p3, Context) --[[ Line: 900 ]]
 	end
 end
 
-function config1:FetchVoicePermissions() --[[ Line: 949 ]]
+function config1:FetchVoicePermissions()
 	if not self.communicationPermissionsResult then
 		self.communicationPermissionsResult = self:resolveAvatarChatUserAndPlaceSettings()
 	end
 	return self.communicationPermissionsResult
 end
 
-function config1:verifyUniverseAndPlaceCanUseVoice() --[[ Line: 957 ]]
+function config1:verifyUniverseAndPlaceCanUseVoice()
 	-- upvalues: GetFFlagAvatarChatServiceEnabledFunction (copy), GetFFlagVoiceChatServiceManagerUseAvatarChatModule (copy), AnalyticsModule (copy)
 	local ResolveAvatarChatUserAndPlaceSettingsResult = if GetFFlagAvatarChatServiceEnabledFunction() and GetFFlagVoiceChatServiceManagerUseAvatarChatModule() then self:resolveAvatarChatUserAndPlaceSettings() else self:FetchAgeVerificationOverlay()
 	
@@ -742,7 +742,7 @@ function config1:verifyUniverseAndPlaceCanUseVoice() --[[ Line: 957 ]]
 	end
 end
 
-function config1:IsUserInFTUX(): boolean --[[ Line: 977 ]]
+function config1:IsUserInFTUX(): boolean
 	-- upvalues: GetFFlagSeamlessVoiceFTUXFunction (copy), GetFFlagCheckUniversePlaceBeforeSuspendingFunction (copy), NewResult (copy)
 	if not GetFFlagSeamlessVoiceFTUXFunction() then
 		return false
@@ -752,7 +752,7 @@ function config1:IsUserInFTUX(): boolean --[[ Line: 977 ]]
 		local AppStorageService = game:GetService("AppStorageService")
 		local IsTrue = nil
 		
-		if not pcall(function() --[[ Line: 987 ]]
+		if not pcall(function()
 			-- upvalues: AppStorageService (copy), IsTrue (ref)
 			IsTrue = AppStorageService:GetItem("SeamlessVoiceFTUX") == "true"
 		end) then
@@ -772,7 +772,7 @@ function config1:IsUserInFTUX(): boolean --[[ Line: 977 ]]
 	end
 end
 
-function config1:isEnableDefaultVoiceOnForPlace() --[[ Line: 1010 ]]
+function config1:isEnableDefaultVoiceOnForPlace()
 	-- upvalues: VoiceChatService (copy)
 	if not game:IsLoaded() then
 		game.Loaded:Wait()
@@ -780,7 +780,7 @@ function config1:isEnableDefaultVoiceOnForPlace() --[[ Line: 1010 ]]
 	return VoiceChatService.UseNewAudioApi or VoiceChatService.EnableDefaultVoice
 end
 
-function config1:verifyPlaceCanUseVoice(UniversePlaceVoiceEnabledSettings, VoiceSettings): boolean --[[ Line: 1021 ]]
+function config1:verifyPlaceCanUseVoice(UniversePlaceVoiceEnabledSettings, VoiceSettings): boolean
 	-- upvalues: AnalyticsModule (copy)
 	if not UniversePlaceVoiceEnabledSettings or not VoiceSettings then
 		self:_reportJoinFailed("invalidResponse", AnalyticsModule.ERROR)
@@ -803,7 +803,7 @@ function config1:verifyPlaceCanUseVoice(UniversePlaceVoiceEnabledSettings, Voice
 	end
 end
 
-function config1:EligibleForFaeUpsell() --[[ Line: 1046 ]]
+function config1:EligibleForFaeUpsell()
 	-- upvalues: FAEENABLED (copy)
 	local AgeVerificationOverlay = self:FetchAgeVerificationOverlay()
 	
@@ -816,19 +816,19 @@ function config1:EligibleForFaeUpsell() --[[ Line: 1046 ]]
 	end
 end
 
-function config1:OptUserToJoinVoice() --[[ Line: 1056 ]]
+function config1:OptUserToJoinVoice()
 	-- upvalues: NewResult (copy)
 	NewResult:debug("Opting user to join voice on age verification")
 	self.hasOptedToJoinVoiceOnAgeVerification = true
 end
 
-function config1:SetupFAECompleteListener() --[[ Line: 1061 ]]
+function config1:SetupFAECompleteListener()
 	-- upvalues: NewResult (copy)
 	NewResult:debug("Setting up FAE complete listener")
 	
 	if game:GetEngineFeature("ChatReconcileAccess") then
 		NewResult:debug("Using ChatService ReconcileCommunicationAccessCompleted event")
-		self.ChatService.ReconcileCommunicationAccessCompleted:Connect(function() --[[ Line: 1065 ]]
+		self.ChatService.ReconcileCommunicationAccessCompleted:Connect(function()
 			-- upvalues: NewResult (upval), self (copy)
 			NewResult:debug("FAE complete listener triggered, re-fetching voice permissions")
 			self.communicationPermissionsResult = nil
@@ -848,7 +848,7 @@ function config1:SetupFAECompleteListener() --[[ Line: 1061 ]]
 	end
 end
 
-function config1:EligibleForAgeCheckToast(): boolean --[[ Line: 1085 ]]
+function config1:EligibleForAgeCheckToast(): boolean
 	-- upvalues: FAESETTINGSTOAST (copy)
 	local AgeVerificationOverlay = self:FetchAgeVerificationOverlay()
 	
@@ -861,7 +861,7 @@ function config1:EligibleForAgeCheckToast(): boolean --[[ Line: 1085 ]]
 	end
 end
 
-function config1:userAndPlaceCanUseVoice() --[[ Line: 1095 ]]
+function config1:userAndPlaceCanUseVoice()
 	-- upvalues: GetFFlagAvatarChatServiceEnabledFunction (copy), GetFFlagVoiceChatServiceManagerUseAvatarChatModule (copy), GetShowAgeVerificationOverlayModule (copy), UtilsModule (copy), AnalyticsModule (copy), NewResult (copy), GetFFlagEnableVoiceSignalFunction (copy), GetFFlagEnableInExpPhoneVoiceUpsellEntrypointsFunction (copy), ConstantsModule (copy), VOICEJOINPROGRESS (copy), GetFFlagEnableVoiceUxUpdatesFunction (copy), GetFFlagNonVoiceFTUXFunction (copy)
 	if self.ThirdPartyUserService ~= nil and self.ThirdPartyUserService:IsChatRestrictionSupported() and self.ThirdPartyUserService:GetVoiceChatRestrictionStatus() ~= Enum.ChatRestrictionStatus.NotRestricted then
 		return false
@@ -918,7 +918,7 @@ function config1:userAndPlaceCanUseVoice() --[[ Line: 1095 ]]
 				self:ChangeVoiceJoinProgress(VOICEJOINPROGRESS.Suspended)
 			end
 		end
-		task.spawn(function() --[[ Line: 1192 ]]
+		task.spawn(function()
 			-- upvalues: self (copy)
 			self:FetchAgeVerificationOverlay()
 		end)
@@ -929,23 +929,23 @@ function config1:userAndPlaceCanUseVoice() --[[ Line: 1095 ]]
 	return VoiceSettings.isVoiceEnabled
 end
 
-function config1:voicePermissionGranted(AUTHORIZED): boolean --[[ Line: 1207 ]]
+function config1:voicePermissionGranted(AUTHORIZED): boolean
 	-- upvalues: PermissionsProtocol (copy), CryoModule (copy)
 	return if typeof(AUTHORIZED) == "table" then AUTHORIZED.status == PermissionsProtocol.Status.AUTHORIZED or not CryoModule.List.find(AUTHORIZED.missingPermissions, PermissionsProtocol.Permissions.MICROPHONE_ACCESS) else AUTHORIZED == PermissionsProtocol.Status.AUTHORIZED
 end
 
-function config1.RawGetPermissions(p4, p5) --[[ Line: 1227 ]]
+function config1.RawGetPermissions(p4, p5)
 	-- upvalues: PromiseModule (copy)
-	return PromiseModule.new(function(Callback, _) --[[ Line: 1228 ]]
+	return PromiseModule.new(function(Callback, _)
 		-- upvalues: p4 (copy), p5 (copy)
-		p4:emit("GetPermissions", function(p6) --[[ Line: 1229 ]]
+		p4:emit("GetPermissions", function(p6)
 			-- upvalues: Callback (copy)
 			Callback(p6)
 		end, p5, true, true)
 	end)
 end
 
-function config1:requestMicPermission() --[[ Line: 1236 ]]
+function config1:requestMicPermission()
 	-- upvalues: GetFFlagCoreMicManagerRefactorModule (copy), GetFFlagDebugVoiceChatMicPermissionCliBypassModule (copy), PERMISSIONSTATE (copy), PromiseModule (copy), NewResult (copy), PermissionsProtocol (copy), GetFFlagEnableExpJoinMicPermAnalyticsModule (copy), AnalyticsModule (copy)
 	if GetFFlagCoreMicManagerRefactorModule() then
 		return self.micManager:RequestMicPermission()
@@ -958,7 +958,7 @@ function config1:requestMicPermission() --[[ Line: 1236 ]]
 		
 		return self.permissionPromise
 	else
-		self.permissionPromise = self.PermissionsService:requestPermissions({ PermissionsProtocol.Permissions.MICROPHONE_ACCESS }):andThen(function(Result) --[[ Line: 1256 ]]
+		self.permissionPromise = self.PermissionsService:requestPermissions({ PermissionsProtocol.Permissions.MICROPHONE_ACCESS }):andThen(function(Result)
 			-- upvalues: GetFFlagEnableExpJoinMicPermAnalyticsModule (upval), self (copy), NewResult (upval), AnalyticsModule (upval), PromiseModule (upval), PermissionsProtocol (upval)
 			if GetFFlagEnableExpJoinMicPermAnalyticsModule() then
 				self:RecordExperienceJoinMicPermissionStatus(Result)
@@ -974,12 +974,12 @@ function config1:requestMicPermission() --[[ Line: 1236 ]]
 				
 				return if self.options.passInitErrorInPromiseReject then PromiseModule.reject({ code = "INIT_ERROR_NO_PERM_RESPONSE" }) else PromiseModule.reject()
 			end
-		end):andThen(function() --[[ Line: 1276 ]]
+		end):andThen(function()
 			-- upvalues: self (copy), PromiseModule (upval)
 			self:emit("OnRequestMicPermissionResolved")
 			
 			return PromiseModule.resolve()
-		end):catch(function() --[[ Line: 1281 ]]
+		end):catch(function()
 			-- upvalues: self (copy), PromiseModule (upval)
 			self:emit("OnRequestMicPermissionRejected")
 			
@@ -990,38 +990,38 @@ function config1:requestMicPermission() --[[ Line: 1236 ]]
 	end
 end
 
-function config1:JoinByGroupIdToken(PreviousGroupId, PreviousMutedState) --[[ Line: 1291 ]]
+function config1:JoinByGroupIdToken(PreviousGroupId, PreviousMutedState)
 	self.previousGroupId = PreviousGroupId
 	self.previousMutedState = PreviousMutedState
 	
 	return self.service:JoinByGroupIdToken(PreviousGroupId, PreviousMutedState)
 end
 
-function config1:EnableVoice() --[[ Line: 1297 ]]
+function config1:EnableVoice()
 	-- upvalues: NewResult (copy)
 	NewResult:trace("Enabling voice")
-	self.AvatarChatService:GetPropertyChangedSignal("ClientFeatures"):Once(function() --[[ Line: 1300 ]]
+	self.AvatarChatService:GetPropertyChangedSignal("ClientFeatures"):Once(function()
 		-- upvalues: self (copy)
 		self.attemptVoiceRejoin:Fire()
 	end)
 	self.AvatarChatService:EnableVoice()
 end
 
-function config1:ChangeVoiceJoinProgress(Suspended) --[[ Line: 1306 ]]
+function config1:ChangeVoiceJoinProgress(Suspended)
 	self.VoiceJoinProgress = Suspended
 	self.VoiceJoinProgressChanged:Fire(self.VoiceJoinProgress)
 end
 
-function config1:setOptions(Options) --[[ Line: 1311 ]]
+function config1:setOptions(Options)
 	self.options = Options
 end
 
-function config1:ShouldShowJoinVoiceOnDisconnect(): boolean --[[ Line: 1315 ]]
+function config1:ShouldShowJoinVoiceOnDisconnect(): boolean
 	-- upvalues: VOICEJOINPROGRESS (copy)
 	return self:IsSeamlessVoice() and self.VoiceJoinProgress == VOICEJOINPROGRESS.Suspended
 end
 
-function config1:IsSeamlessVoice(): boolean --[[ Line: 1319 ]]
+function config1:IsSeamlessVoice(): boolean
 	-- upvalues: GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction (copy), GetFFlagCheckUniversePlaceBeforeSuspendingFunction (copy), ConstantsModule (copy)
 	if GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction() and not self.options.allowSeamlessVoice then
 		return false
@@ -1039,7 +1039,7 @@ function config1:IsSeamlessVoice(): boolean --[[ Line: 1319 ]]
 	end
 end
 
-function config1:HasSeamlessVoiceFeature(Entry) --[[ Line: 1341 ]]
+function config1:HasSeamlessVoiceFeature(Entry)
 	-- upvalues: GetFFlagEnableSeamlessVoiceFeatureModule (copy), UtilsModule (copy), ConstantsModule (copy)
 	if not self.options.allowSeamlessVoice or not self:verifyUniverseAndPlaceCanUseVoice() then
 		return false
@@ -1076,11 +1076,11 @@ function config1:HasSeamlessVoiceFeature(Entry) --[[ Line: 1341 ]]
 		end
 	else
 		local Entry1 = ({
-			[ConstantsModule.SeamlessVoiceFeatures.ConnectDisconnect] = function(Control): boolean --[[ Line: 1386 ]]
+			[ConstantsModule.SeamlessVoiceFeatures.ConnectDisconnect] = function(Control): boolean
 				-- upvalues: ConstantsModule (upval)
 				return Control ~= ConstantsModule.SeamlessVoiceVariants.Control
 			end,
-			[ConstantsModule.SeamlessVoiceFeatures.HearingWithoutMicPermissions] = function(HearingWithoutMicPermissions): boolean --[[ Line: 1389 ]]
+			[ConstantsModule.SeamlessVoiceFeatures.HearingWithoutMicPermissions] = function(HearingWithoutMicPermissions): boolean
 				-- upvalues: ConstantsModule (upval)
 				return HearingWithoutMicPermissions == ConstantsModule.SeamlessVoiceVariants.HearingWithoutMicPermissions
 			end
@@ -1093,7 +1093,7 @@ function config1:HasSeamlessVoiceFeature(Entry) --[[ Line: 1341 ]]
 	return false
 end
 
-function config1:IsNewSeamlessVoiceUserDisconnect(): boolean --[[ Line: 1403 ]]
+function config1:IsNewSeamlessVoiceUserDisconnect(): boolean
 	-- upvalues: ConstantsModule (copy)
 	if not self.options.allowSeamlessVoice or not self:verifyUniverseAndPlaceCanUseVoice() then
 		return false
@@ -1103,7 +1103,7 @@ function config1:IsNewSeamlessVoiceUserDisconnect(): boolean --[[ Line: 1403 ]]
 	if not self:_isValidAgeVerificationOverlayData(AgeVerificationOverlay) then
 		return false
 	elseif AgeVerificationOverlay.voiceSettings.seamlessVoiceStatus == ConstantsModule.SeamlessVoiceStatus.EnabledNewUser then
-		local Success, Result = pcall(function() --[[ Line: 1422 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: self (copy), ConstantsModule (upval)
 			return self.AppStorageService:GetItem(ConstantsModule.SEAMLESS_VOICE_FTUX_KEY)
 		end)
@@ -1114,11 +1114,11 @@ function config1:IsNewSeamlessVoiceUserDisconnect(): boolean --[[ Line: 1403 ]]
 	end
 end
 
-function config1:_isValidAgeVerificationOverlayData(AgeVerificationOverlay) --[[ Line: 1430 ]]
+function config1:_isValidAgeVerificationOverlayData(AgeVerificationOverlay)
 	return type(AgeVerificationOverlay) == "table" and (AgeVerificationOverlay and AgeVerificationOverlay.voiceSettings)
 end
 
-function config1:UserInInExperienceUpsellTreatment(): boolean --[[ Line: 1434 ]]
+function config1:UserInInExperienceUpsellTreatment(): boolean
 	-- upvalues: ConstantsModule (copy)
 	local AgeVerificationOverlay = self:FetchAgeVerificationOverlay()
 	
@@ -1131,7 +1131,7 @@ function config1:UserInInExperienceUpsellTreatment(): boolean --[[ Line: 1434 ]]
 	end
 end
 
-function config1:UserOnlyEligibleForVoice() --[[ Line: 1446 ]]
+function config1:UserOnlyEligibleForVoice()
 	-- upvalues: ShowJoinVoiceRaceConditionFix (copy)
 	local CommunicationPermissionsResult = self.communicationPermissionsResult
 	
@@ -1145,19 +1145,19 @@ function config1:UserOnlyEligibleForVoice() --[[ Line: 1446 ]]
 	return CommunicationPermissionsResult.voiceSettings.isUserVerifiedForVoice and (not CommunicationPermissionsResult.voiceSettings.isVoiceEnabled and CommunicationPermissionsResult.universePlaceVoiceEnabledSettings.isPlaceEnabledForVoice)
 end
 
-function config1:UserOnlyEligibleForVoiceViaOverlay() --[[ Line: 1462 ]]
+function config1:UserOnlyEligibleForVoiceViaOverlay()
 	local AgeVerificationOverlay = self:FetchAgeVerificationOverlay()
 	
 	return if self:_isValidAgeVerificationOverlayData(AgeVerificationOverlay) then AgeVerificationOverlay.voiceSettings.isVerifiedForVoice and (not AgeVerificationOverlay.voiceSettings.isVoiceEnabled and AgeVerificationOverlay.universePlaceVoiceEnabledSettings.isPlaceEnabledForVoice) else false
 end
 
-function config1:UserVoiceEnabled() --[[ Line: 1475 ]]
+function config1:UserVoiceEnabled()
 	local CommunicationPermissionsResult = self.communicationPermissionsResult
 	
 	return if CommunicationPermissionsResult and CommunicationPermissionsResult.voiceSettings and CommunicationPermissionsResult.universePlaceVoiceEnabledSettings then CommunicationPermissionsResult.voiceSettings.isVoiceEnabled and CommunicationPermissionsResult.universePlaceVoiceEnabledSettings.isPlaceEnabledForVoice else false
 end
 
-function config1:UserEligibleForInExperienceUpsell() --[[ Line: 1485 ]]
+function config1:UserEligibleForInExperienceUpsell()
 	-- upvalues: GetFFlagEnableVoiceSignalFunction (copy)
 	local UserOnlyEligibleForVoiceResult = self:UserOnlyEligibleForVoice()
 	
@@ -1174,7 +1174,7 @@ function config1:UserEligibleForInExperienceUpsell() --[[ Line: 1485 ]]
 	end
 end
 
-function config1:canUseServiceAsync() --[[ Line: 1506 ]]
+function config1:canUseServiceAsync()
 	-- upvalues: FFlagSkipVoiceInTeamCreateViewerModule (copy), RunService (copy), PromiseModule (copy), NewResult (copy), GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction (copy), GetFFlagEnableVoiceSignalFunction (copy), VOICEJOINPROGRESS (copy), VOICECHATAVAILABILITY (copy), VoiceChatService (copy), ConsoleVoiceIXPEnabled (copy), IXPServiceWrapper (copy), ConsoleVoiceIXPLayerName (copy), ConsoleVoiceEnabledIXPLayerValue (copy)
 	if FFlagSkipVoiceInTeamCreateViewerModule and RunService:IsTeamCreateViewer() then
 		return if self.options.passInitErrorInPromiseReject then PromiseModule.reject({ code = "INIT_ERROR_CONTEXT_NOT_ENABLED" }) else PromiseModule.reject()
@@ -1185,7 +1185,7 @@ function config1:canUseServiceAsync() --[[ Line: 1506 ]]
 		return if self.options.passInitErrorInPromiseReject then PromiseModule.reject({ code = "INIT_ERROR_VOICE_NOT_SUPPORTED" }) else PromiseModule.reject()
 	end
 	if not self.canUseServicePromise then
-		self.canUseServicePromise = PromiseModule.defer(function(Callback: () -> (), Callback1: (any) -> ()) --[[ Line: 1523 ]]
+		self.canUseServicePromise = PromiseModule.defer(function(Callback: () -> (), Callback1: (any) -> ())
 			-- upvalues: self (copy), GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction (upval), GetFFlagEnableVoiceSignalFunction (upval), VOICEJOINPROGRESS (upval), NewResult (upval), VOICECHATAVAILABILITY (upval), VoiceChatService (upval), ConsoleVoiceIXPEnabled (upval), IXPServiceWrapper (upval), ConsoleVoiceIXPLayerName (upval), ConsoleVoiceEnabledIXPLayerValue (upval)
 			local UserAndPlaceCanUseVoiceResult = self:userAndPlaceCanUseVoice()
 			
@@ -1235,7 +1235,7 @@ function config1:canUseServiceAsync() --[[ Line: 1506 ]]
 						return
 					end
 					IXPServiceWrapper:WaitForInitialization()
-					local Success, Result = pcall(function() --[[ Line: 1583 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: IXPServiceWrapper (upval), ConsoleVoiceIXPLayerName (upval)
 						return IXPServiceWrapper:GetLayerData(ConsoleVoiceIXPLayerName)
 					end)
@@ -1271,7 +1271,7 @@ function config1:canUseServiceAsync() --[[ Line: 1506 ]]
 					Callback1()
 				end
 			end
-		end):andThen(function() --[[ Line: 1605 ]]
+		end):andThen(function()
 			-- upvalues: self (copy)
 			return self:requestMicPermission()
 		end)
@@ -1279,27 +1279,27 @@ function config1:canUseServiceAsync() --[[ Line: 1506 ]]
 	return self.canUseServicePromise
 end
 
-function config1:_setRecentUserState(UserId, p4) --[[ Line: 1612 ]]
+function config1:_setRecentUserState(UserId, p4)
 	-- upvalues: CryoModule (copy)
 	self.recentUsersInteractionData = CryoModule.Dictionary.join(self.recentUsersInteractionData, {
 		[tostring(UserId)] = CryoModule.Dictionary.join(self.recentUsersInteractionData[tostring(UserId)] or {}, p4)
 	})
 end
 
-function config1:getRecentUsersInteractionData() --[[ Line: 1622 ]]
+function config1:getRecentUsersInteractionData()
 	self:_updateRecentUsersInteractionData()
 	
 	return self.recentUsersInteractionData
 end
 
-function config1:GetSignalREvent(p4) --[[ Line: 1627 ]]
+function config1:GetSignalREvent(p4)
 	return self.SignalREventTable[p4].Event
 end
 
-function config1:StartModerationSignal() --[[ Line: 1632 ]]
+function config1:StartModerationSignal()
 	-- upvalues: NewResult (copy), GetFFlagVoiceChatClientRewriteMasterLuaFunction (copy), VoiceChatService (copy)
 	if not self.playerModeratedConnection then
-		self.playerModeratedConnection = self:GetSignalREvent("ParticipantModeratedFromVoice"):Connect(function() --[[ Line: 1635 ]]
+		self.playerModeratedConnection = self:GetSignalREvent("ParticipantModeratedFromVoice"):Connect(function()
 			-- upvalues: NewResult (upval), self (copy), GetFFlagVoiceChatClientRewriteMasterLuaFunction (upval), VoiceChatService (upval)
 			NewResult:debug("User Moderated")
 			self.previousSessionId = self.service:GetSessionId()
@@ -1318,14 +1318,14 @@ function config1:StartModerationSignal() --[[ Line: 1632 ]]
 	end
 end
 
-function config1:StopModerationSignal() --[[ Line: 1650 ]]
+function config1:StopModerationSignal()
 	if self.playerModeratedConnection then
 		self.playerModeratedConnection:Disconnect()
 		self.playerModeratedConnection = nil
 	end
 end
 
-function config1:_updateRecentUsersInteractionData() --[[ Line: 1657 ]]
+function config1:_updateRecentUsersInteractionData()
 	-- upvalues: StringKeyFixForParticipantsTable (copy), GetFFlagClearUserFromRecentVoiceDataOnLeaveModule (copy), Players (copy), GetFIntVoiceUsersInteractionExpiryTimeSecondsModule (copy), CryoModule (copy)
 	local Timestamp = os.time()
 	local Nones = {}
@@ -1344,7 +1344,7 @@ function config1:_updateRecentUsersInteractionData() --[[ Line: 1657 ]]
 	end
 end
 
-function config1:SetupParticipantListeners() --[[ Line: 1681 ]]
+function config1:SetupParticipantListeners()
 	-- upvalues: NewResult (copy), GetFFlagClearUserFromRecentVoiceDataOnLeaveModule (copy), StringKeyFixForParticipantsTable (copy), GetFFlagFixGetPlayerByUserIdStringCastModule (copy), Players (copy), VoiceChatService (copy), FFlagEnablePartyVoiceChangersInLua (copy), GetFFlagBatchVoiceParticipantsUpdatesModule (copy), FFlagEnableVoiceChatMuteForVideoCaptures (copy), GetFFlagMicConsumerRegistryModule (copy), GetFFlagCoreMicManagerRefactorModule (copy), GetFFlagVoiceChatClientRewriteMasterLuaFunction (copy), StopModerationConnectionOnLeave (copy), v4 (copy), DisableRejoinGroupIdDoubleRead (copy), VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry (copy), GetFFlagDisconnectToastClientRewriteFunction (copy), v5 (copy), VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (copy), GetFFlagEnableVoiceSignalFunction (copy), VOICEJOINPROGRESS (copy), VoiceVolumeControlsEligibilityModule (copy), v3 (copy), MINVOICECHATAPIVERSIONLOCALMICACTIVITY (copy), GetFFlagLocalMutedNilFixFunction (copy), v1 (copy), GetFFlagLuaConsumePlayerModeratedModule (copy), GetFFlagEnableVoiceReverseNudgeModule (copy), UtilsModule (copy), config (copy)
 	self:ensureInitialized("setup participant listeners")
 	
@@ -1352,7 +1352,7 @@ function config1:SetupParticipantListeners() --[[ Line: 1681 ]]
 		self.participants = {}
 		self.recentUsersInteractionData = {}
 		self.updatedParticipants = {}
-		self.participantConnection = self.service.ParticipantsStateChanged:Connect(function(ParticipantsLeft, ParticipantsJoined, UpdatedStates) --[[ Line: 1690 ]]
+		self.participantConnection = self.service.ParticipantsStateChanged:Connect(function(ParticipantsLeft, ParticipantsJoined, UpdatedStates)
 			-- upvalues: NewResult (upval), GetFFlagClearUserFromRecentVoiceDataOnLeaveModule (upval), self (copy), StringKeyFixForParticipantsTable (upval), GetFFlagFixGetPlayerByUserIdStringCastModule (upval), Players (upval), VoiceChatService (upval), FFlagEnablePartyVoiceChangersInLua (upval), GetFFlagBatchVoiceParticipantsUpdatesModule (upval), FFlagEnableVoiceChatMuteForVideoCaptures (upval)
 			NewResult:trace("Participants state changed")
 			
@@ -1434,7 +1434,7 @@ function config1:SetupParticipantListeners() --[[ Line: 1681 ]]
 		end)
 		local FFlagCoreMicManagerRefactorModule = GetFFlagMicConsumerRegistryModule() and GetFFlagCoreMicManagerRefactorModule()
 		
-		local function onStateChanged(OldState, NewState) --[[ Line: 1810 ]]
+		local function onStateChanged(OldState, NewState)
 			-- upvalues: self (copy), GetFFlagVoiceChatClientRewriteMasterLuaFunction (upval), NewResult (upval), StopModerationConnectionOnLeave (upval), v4 (upval), DisableRejoinGroupIdDoubleRead (upval), FFlagCoreMicManagerRefactorModule (copy), VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry (upval), GetFFlagDisconnectToastClientRewriteFunction (upval), v5 (upval), VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (upval), GetFFlagEnableVoiceSignalFunction (upval), VOICEJOINPROGRESS (upval), VoiceVolumeControlsEligibilityModule (upval), VoiceChatService (upval)
 			self:emit("OnStateChanged", OldState, NewState)
 			local IsNewStateMatch = NewState == Enum.VoiceChatState.Failed
@@ -1509,7 +1509,7 @@ function config1:SetupParticipantListeners() --[[ Line: 1681 ]]
 				self._voiceVolumeSliderEligibleAtJoin = VoiceVolumeControlsEligibilityModule.isVoiceChatVolumeSliderVisible(true, VoiceChatService.UseNewAudioApi)
 			end
 			if VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry and (VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature and NewState == Enum.VoiceChatState.Joined and not self._voiceVolumeEligibilityReported) then
-				local Success, Result = pcall(function() --[[ Line: 1924 ]]
+				local Success, Result = pcall(function()
 					return UserSettings():GetService("UserGameSettings").VoiceChatVolume
 				end)
 				local UseNewAudioApi = VoiceChatService.UseNewAudioApi
@@ -1545,7 +1545,7 @@ function config1:SetupParticipantListeners() --[[ Line: 1681 ]]
 			end
 		elseif v3 and VoiceChatService.UseNewAudioApi then
 			if not self.localMeteringTask then
-				self.localMeteringTask = task.spawn(function() --[[ Line: 1963 ]]
+				self.localMeteringTask = task.spawn(function()
 					-- upvalues: self (copy)
 					while true do
 						self:UpdateLocalMetering()
@@ -1554,7 +1554,7 @@ function config1:SetupParticipantListeners() --[[ Line: 1681 ]]
 				end)
 			end
 		elseif MINVOICECHATAPIVERSIONLOCALMICACTIVITY <= self.service:GetVoiceChatApiVersion() then
-			self.micConnection = self.service.PlayerMicActivitySignalChange:Connect(function(ActivityInfo) --[[ Line: 1972 ]]
+			self.micConnection = self.service.PlayerMicActivitySignalChange:Connect(function(ActivityInfo)
 				-- upvalues: FFlagEnableVoiceChatMuteForVideoCaptures (upval), self (copy), GetFFlagLocalMutedNilFixFunction (upval), v1 (upval)
 				if FFlagEnableVoiceChatMuteForVideoCaptures and self.CaptureService:IsCapturingVideo() then
 					self.voiceCapturedDuringVideoCapture = self.voiceCapturedDuringVideoCapture or ActivityInfo.isActive
@@ -1586,7 +1586,7 @@ function config1:SetupParticipantListeners() --[[ Line: 1681 ]]
 		if GetFFlagLuaConsumePlayerModeratedModule() then
 			self:StartModerationSignal()
 		elseif game:GetEngineFeature("VoiceChatServicePlayerModeratedEvent") then
-			self.playerModeratedConnection = self.service.LocalPlayerModerated:connect(function() --[[ Line: 2006 ]]
+			self.playerModeratedConnection = self.service.LocalPlayerModerated:connect(function()
 				-- upvalues: NewResult (upval), self (copy), GetFFlagVoiceChatClientRewriteMasterLuaFunction (upval), VoiceChatService (upval)
 				NewResult:debug("User Moderated old")
 				self.previousSessionId = self.service:GetSessionId()
@@ -1602,12 +1602,12 @@ function config1:SetupParticipantListeners() --[[ Line: 1681 ]]
 			end)
 		end
 		NewResult:trace("Setting up voice nudge handlers")
-		self.voiceToxicityModalConnection = self:GetSignalREvent("VoiceToxicityModal"):Connect(function(p4) --[[ Line: 2019 ]]
+		self.voiceToxicityModalConnection = self:GetSignalREvent("VoiceToxicityModal"):Connect(function(p4)
 			-- upvalues: self (copy)
 			self.Analytics:reportReceivedNudge(p4, self:GetNudgeAnalyticsData())
 			self:emit("OnVoiceToxicityModal")
 		end)
-		self.VoiceToxicityToastConnection = self:GetSignalREvent("VoiceToxicityToast"):Connect(function(p4) --[[ Line: 2025 ]]
+		self.VoiceToxicityToastConnection = self:GetSignalREvent("VoiceToxicityToast"):Connect(function(p4)
 			-- upvalues: self (copy)
 			self.Analytics:reportReceivedNudge(p4, self:GetNudgeAnalyticsData())
 			self:emit("OnVoiceToxicityToast")
@@ -1615,12 +1615,12 @@ function config1:SetupParticipantListeners() --[[ Line: 1681 ]]
 		
 		if GetFFlagEnableVoiceReverseNudgeModule() then
 			NewResult:trace("Setting up voice reverse nudge handlers")
-			self.voiceReverseNudgeConnection = self:GetSignalREvent("VoiceReverseNudgeIconColorChange"):Connect(function(p4) --[[ Line: 2032 ]]
+			self.voiceReverseNudgeConnection = self:GetSignalREvent("VoiceReverseNudgeIconColorChange"):Connect(function(p4)
 				-- upvalues: self (copy)
 				self:emit("OnVoiceReverseNudgeIconColorChange", p4)
 			end)
 		end
-		self.blockConnection = self.BlockStatusChanged:Connect(function(UserId, p4) --[[ Line: 2037 ]]
+		self.blockConnection = self.BlockStatusChanged:Connect(function(UserId, p4)
 			-- upvalues: self (copy), NewResult (upval), UtilsModule (upval)
 			if not p4 then
 				NewResult:debug("UnBlocking {}", UtilsModule.shorten(UserId))
@@ -1637,13 +1637,13 @@ function config1:SetupParticipantListeners() --[[ Line: 1681 ]]
 			self:hookupAudioDeviceInputListener()
 		end
 		if self.service.TempSetMicMutedToggleMic then
-			self.tempSetMicMutedToggleMicConnection = self.service.TempSetMicMutedToggleMic:connect(function() --[[ Line: 2055 ]]
+			self.tempSetMicMutedToggleMicConnection = self.service.TempSetMicMutedToggleMic:connect(function()
 				-- upvalues: self (copy)
 				self:ToggleMic("TempSetMicMutedToggleMic")
 			end)
 		end
 		if FFlagEnableVoiceChatMuteForVideoCaptures then
-			self.videoCaptureInProgressConnection = self.CaptureService.VideoCaptureInProgress:connect(function(IsInProgress) --[[ Line: 2062 ]]
+			self.videoCaptureInProgressConnection = self.CaptureService.VideoCaptureInProgress:connect(function(IsInProgress)
 				-- upvalues: self (copy), config (upval)
 				if IsInProgress then
 					self.voiceCapturedDuringVideoCapture = false
@@ -1661,12 +1661,12 @@ end
 
 local NewResult1 = nil
 
-function config1.CheckAudioInputExists(p4) --[[ Line: 2077 ]]
+function config1.CheckAudioInputExists(p4)
 	-- upvalues: NewResult (copy), NewResult1 (ref), PromiseModule (copy), CryoModule (copy)
 	NewResult:trace("Checking for AudioDeviceInput")
 	
 	if not NewResult1 then
-		NewResult1 = PromiseModule.new(function(Callback: () -> (), _) --[[ Line: 2080 ]]
+		NewResult1 = PromiseModule.new(function(Callback: () -> (), _)
 			-- upvalues: CryoModule (upval), p4 (copy), NewResult (upval)
 			if #CryoModule.Dictionary.keys(p4.audioDevices) > 0 then
 				NewResult:trace("Found existing AudioDeviceInput")
@@ -1674,7 +1674,7 @@ function config1.CheckAudioInputExists(p4) --[[ Line: 2077 ]]
 				
 				return
 			else
-				p4.audioDeviceInputAdded.Event:Connect(function() --[[ Line: 2085 ]]
+				p4.audioDeviceInputAdded.Event:Connect(function()
 					-- upvalues: NewResult (upval), Callback (copy)
 					NewResult:trace("Found new AudioDeviceInput")
 					Callback()
@@ -1685,7 +1685,7 @@ function config1.CheckAudioInputExists(p4) --[[ Line: 2077 ]]
 	return NewResult1
 end
 
-function config1:checkAndUpdateSequence(Namespace, SequenceNumber): number --[[ Line: 2095 ]]
+function config1:checkAndUpdateSequence(Namespace, SequenceNumber): number
 	if not SequenceNumber then
 		return 0
 	end
@@ -1702,12 +1702,12 @@ function config1:checkAndUpdateSequence(Namespace, SequenceNumber): number --[[ 
 	return SequenceNumberDelta - 1
 end
 
-local function _(Object) --[[ Line: 2122 | Named "isIgnoredAudioInput" ]]
+local function _(Object)
 	-- upvalues: CoreGui (copy)
 	return Object:IsDescendantOf(CoreGui)
 end
 
-function config1:onInstanceAdded(AudioDeviceInput) --[[ Line: 2126 ]]
+function config1:onInstanceAdded(AudioDeviceInput)
 	-- upvalues: FFlagExpChatDictation (copy), CoreGui (copy), NewResult (copy)
 	if AudioDeviceInput:IsA("AudioDeviceInput") then
 		if FFlagExpChatDictation and AudioDeviceInput:IsDescendantOf(CoreGui) then return end
@@ -1718,7 +1718,7 @@ function config1:onInstanceAdded(AudioDeviceInput) --[[ Line: 2126 ]]
 	end
 end
 
-function config1:GetSendMuteEvent() --[[ Line: 2139 ]]
+function config1:GetSendMuteEvent()
 	-- upvalues: RobloxReplicatedStorage (copy)
 	if not self.SendMuteEvent then
 		self.SendMuteEvent = RobloxReplicatedStorage:WaitForChild("SetUserActive", 10)
@@ -1726,7 +1726,7 @@ function config1:GetSendMuteEvent() --[[ Line: 2139 ]]
 	return self.SendMuteEvent
 end
 
-function config1:GetToggleVoiceChangerEvent() --[[ Line: 2146 ]]
+function config1:GetToggleVoiceChangerEvent()
 	-- upvalues: ReplicatedStorage (copy)
 	if not self.SendVoiceChangerEvent then
 		self.SendVoiceChangerEvent = ReplicatedStorage:WaitForChild("ToggleUserVoiceChanger", 10)
@@ -1734,7 +1734,7 @@ function config1:GetToggleVoiceChangerEvent() --[[ Line: 2146 ]]
 	return self.SendVoiceChangerEvent
 end
 
-function config1:GetInputToModifierWire() --[[ Line: 2153 ]]
+function config1:GetInputToModifierWire()
 	-- upvalues: Players (copy)
 	if not self.InputToModifierWire then
 		self.InputToModifierWire = Players.LocalPlayer:FindFirstChild("InputToModifier")
@@ -1742,7 +1742,7 @@ function config1:GetInputToModifierWire() --[[ Line: 2153 ]]
 	return self.InputToModifierWire
 end
 
-function config1:GetPartyVoiceDeviceInput() --[[ Line: 2160 ]]
+function config1:GetPartyVoiceDeviceInput()
 	-- upvalues: Players (copy)
 	if not self.PartyVoiceDeviceInput then
 		self.PartyVoiceDeviceInput = Players.LocalPlayer:FindFirstChild("PartyVoiceDeviceInput")
@@ -1750,7 +1750,7 @@ function config1:GetPartyVoiceDeviceInput() --[[ Line: 2160 ]]
 	return self.PartyVoiceDeviceInput
 end
 
-function config1:GetSetVoicePackEvent() --[[ Line: 2168 ]]
+function config1:GetSetVoicePackEvent()
 	-- upvalues: ReplicatedStorage (copy)
 	if not self.SetVoicePackEvent then
 		self.SetVoicePackEvent = ReplicatedStorage:WaitForChild("SetVoicePack", 10)
@@ -1758,7 +1758,7 @@ function config1:GetSetVoicePackEvent() --[[ Line: 2168 ]]
 	return self.SetVoicePackEvent
 end
 
-function config1:GetVoiceChangerWasToggledEvent() --[[ Line: 2175 ]]
+function config1:GetVoiceChangerWasToggledEvent()
 	-- upvalues: ReplicatedStorage (copy)
 	if not self.VoiceChangerWasToggledEvent then
 		self.VoiceChangerWasToggledEvent = ReplicatedStorage:WaitForChild("VoiceChangerWasToggled", 3)
@@ -1766,7 +1766,7 @@ function config1:GetVoiceChangerWasToggledEvent() --[[ Line: 2175 ]]
 	return self.VoiceChangerWasToggledEvent
 end
 
-local _ = function(SourceInstance, Parent) --[[ Line: 2183 | Named "WireUp" ]]
+local _ = function(SourceInstance, Parent)
 	local Wire = Instance.new("Wire")
 	Wire.SourceInstance = SourceInstance
 	Wire.TargetInstance = Parent
@@ -1775,12 +1775,12 @@ local _ = function(SourceInstance, Parent) --[[ Line: 2183 | Named "WireUp" ]]
 	return Wire
 end
 
-local _ = function() --[[ Line: 2192 | Named "GetAnalysisHost" ]]
+local _ = function()
 	-- upvalues: RobloxReplicatedStorage (copy)
 	return RobloxReplicatedStorage
 end
 
-function config1:GetAnalyzer(Player) --[[ Line: 2196 ]]
+function config1:GetAnalyzer(Player)
 	-- upvalues: RobloxReplicatedStorage (copy)
 	local Text = Player.Name .. "_Analyzer"
 	local Text1 = RobloxReplicatedStorage:FindFirstChild(Text)
@@ -1794,11 +1794,11 @@ function config1:GetAnalyzer(Player) --[[ Line: 2196 ]]
 	return Text1
 end
 
-local _ = function(p4: number): number --[[ Line: 2209 | Named "toDecibels" ]]
+local _ = function(p4: number): number
 	return math.log10(p4) * 20
 end
 
-function config1.IsSignalActive(p4, UserId): boolean --[[ Line: 2213 ]]
+function config1.IsSignalActive(p4, UserId): boolean
 	-- upvalues: v3 (copy), Players (copy)
 	if v3 then
 		local Player = Players:GetPlayerByUserId(UserId)
@@ -1809,7 +1809,7 @@ function config1.IsSignalActive(p4, UserId): boolean --[[ Line: 2213 ]]
 	end
 end
 
-function config1:StopAnalysis(AudioDeviceInput) --[[ Line: 2227 ]]
+function config1:StopAnalysis(AudioDeviceInput)
 	-- upvalues: v3 (copy), RobloxReplicatedStorage (copy)
 	if not v3 then return end
 	for _, connectedWire in AudioDeviceInput:GetConnectedWires("Output") do
@@ -1821,7 +1821,7 @@ function config1:StopAnalysis(AudioDeviceInput) --[[ Line: 2227 ]]
 	end
 end
 
-function config1:StartAnalysis(SourceInstance) --[[ Line: 2243 ]]
+function config1:StartAnalysis(SourceInstance)
 	-- upvalues: v3 (copy)
 	if not v3 then return end
 	self:StopAnalysis(SourceInstance)
@@ -1838,9 +1838,9 @@ function config1:StartAnalysis(SourceInstance) --[[ Line: 2243 ]]
 	end
 end
 
-function config1.GetVoiceConnectCookie(p4) --[[ Line: 2257 ]]
+function config1.GetVoiceConnectCookie(p4)
 	-- upvalues: ConstantsModule (copy)
-	local Success, Result = pcall(function() --[[ Line: 2258 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: p4 (copy), ConstantsModule (upval)
 		return p4.AppStorageService:GetItem(ConstantsModule.VOICE_CONNECT_DISCONNECT_KEY_V3)
 	end)
@@ -1848,17 +1848,17 @@ function config1.GetVoiceConnectCookie(p4) --[[ Line: 2257 ]]
 	return if Success and Result then Result else ""
 end
 
-function config1.GetVoiceConnectCookieValue(p4): boolean --[[ Line: 2269 ]]
+function config1.GetVoiceConnectCookieValue(p4): boolean
 	-- upvalues: GetFFlagEnableVoiceUxUpdatesFunction (copy), ConstantsModule (copy)
 	if GetFFlagEnableVoiceUxUpdatesFunction() then
-		local Success, Result = pcall(function() --[[ Line: 2271 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p4 (copy), ConstantsModule (upval)
 			return p4.AppStorageService:GetItem(ConstantsModule.VOICE_CONNECT_DISCONNECT_KEY_V3)
 		end)
 		
 		return not Success or Result == "true"
 	else
-		local Success1, Result1 = pcall(function() --[[ Line: 2277 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: p4 (copy), ConstantsModule (upval)
 			return p4.AppStorageService:GetItem(ConstantsModule.VOICE_CONNECT_DISCONNECT_KEY_V2)
 		end)
@@ -1867,22 +1867,22 @@ function config1.GetVoiceConnectCookieValue(p4): boolean --[[ Line: 2269 ]]
 	end
 end
 
-function config1.SetVoiceConnectCookieValue(p4, p5) --[[ Line: 2285 ]]
+function config1.SetVoiceConnectCookieValue(p4, p5)
 	-- upvalues: GetFFlagEnableVoiceUxUpdatesFunction (copy), ConstantsModule (copy)
-	return if GetFFlagEnableVoiceUxUpdatesFunction() then pcall(function() --[[ Line: 2287 ]]
+	return if GetFFlagEnableVoiceUxUpdatesFunction() then pcall(function()
 		-- upvalues: p4 (copy), ConstantsModule (upval), p5 (copy)
 		p4.AppStorageService:SetItem(ConstantsModule.VOICE_CONNECT_DISCONNECT_KEY_V3, (tostring(p5)))
 		p4.AppStorageService:Flush()
-	end) else pcall(function() --[[ Line: 2293 ]]
+	end) else pcall(function()
 		-- upvalues: p4 (copy), ConstantsModule (upval), p5 (copy)
 		p4.AppStorageService:SetItem(ConstantsModule.VOICE_CONNECT_DISCONNECT_KEY_V2, (tostring(p5)))
 		p4.AppStorageService:Flush()
 	end)
 end
 
-function config1.GetVoiceRewarmCookie(p4) --[[ Line: 2301 ]]
+function config1.GetVoiceRewarmCookie(p4)
 	-- upvalues: ConstantsModule (copy), NewResult (copy)
-	local Success, Result = pcall(function() --[[ Line: 2302 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: p4 (copy), ConstantsModule (upval)
 		return p4.AppStorageService:GetItem(ConstantsModule.VOICE_REWARM_KEY)
 	end)
@@ -1898,34 +1898,34 @@ function config1.GetVoiceRewarmCookie(p4) --[[ Line: 2301 ]]
 	end
 end
 
-function config1.SetVoiceRewarmCookie(p4, p5) --[[ Line: 2315 ]]
+function config1.SetVoiceRewarmCookie(p4, p5)
 	-- upvalues: NewResult (copy), ConstantsModule (copy)
 	NewResult:debug("Setting voice re-warm cookie to {}", p5)
-	pcall(function() --[[ Line: 2317 ]]
+	pcall(function()
 		-- upvalues: p4 (copy), ConstantsModule (upval), p5 (copy)
 		p4.AppStorageService:SetItem(ConstantsModule.VOICE_REWARM_KEY, (tostring(p5)))
 		p4.AppStorageService:Flush()
 	end)
 end
 
-function config1:ShouldRewarmUser(): boolean --[[ Line: 2323 ]]
+function config1:ShouldRewarmUser(): boolean
 	return self:GetVoiceRewarmCookie() == ""
 end
 
-function config1:RewarmUser() --[[ Line: 2327 ]]
+function config1:RewarmUser()
 	self:SetVoiceRewarmCookie("true")
 end
 
-function config1.SetNewUserFTUXCookieValue(p4, p5) --[[ Line: 2331 ]]
+function config1.SetNewUserFTUXCookieValue(p4, p5)
 	-- upvalues: ConstantsModule (copy)
-	return (pcall(function() --[[ Line: 2332 ]]
+	return (pcall(function()
 		-- upvalues: p4 (copy), ConstantsModule (upval), p5 (copy)
 		p4.AppStorageService:SetItem(ConstantsModule.SEAMLESS_VOICE_FTUX_KEY, (tostring(p5)))
 		p4.AppStorageService:Flush()
 	end))
 end
 
-function config1:SetAndSyncActive(p4, Active) --[[ Line: 2339 ]]
+function config1:SetAndSyncActive(p4, Active)
 	-- upvalues: GetFFlagCoreMicManagerRefactorModule (copy), Players (copy)
 	if GetFFlagCoreMicManagerRefactorModule() then
 		return self.micManager:SetAndSyncActive(p4, Active)
@@ -1938,7 +1938,7 @@ function config1:SetAndSyncActive(p4, Active) --[[ Line: 2339 ]]
 	end
 end
 
-function config1:CreateAudioDeviceData(Object) --[[ Line: 2352 ]]
+function config1:CreateAudioDeviceData(Object)
 	-- upvalues: Players (copy), EnableMutedByLocalUserEngineFeature (copy), NewResult (copy), FFlagDebugShowAudioDeviceInputDebugger (copy), v4 (copy), VoiceChatService (copy)
 	local t = {}
 	local IsPlayerMatch = Object.Player == Players.LocalPlayer
@@ -1982,7 +1982,7 @@ function config1:CreateAudioDeviceData(Object) --[[ Line: 2352 ]]
 			SendMuteEvent:FireServer(NoCallMutedState)
 		end
 	end
-	t.onPlayerChanged = Object:GetPropertyChangedSignal("Player"):Connect(function() --[[ Line: 2402 ]]
+	t.onPlayerChanged = Object:GetPropertyChangedSignal("Player"):Connect(function()
 		-- upvalues: IsPlayerMatch (ref), Object (copy), Players (upval), self (copy), NewResult (upval), EnableMutedByLocalUserEngineFeature (upval)
 		IsPlayerMatch = Object.Player == Players.LocalPlayer
 		
@@ -2004,24 +2004,24 @@ function config1:CreateAudioDeviceData(Object) --[[ Line: 2352 ]]
 		self:emit("OnDevicePlayerChanged")
 		self:StartAnalysis(Object)
 	end)
-	t.onMutedChanged = Object:GetPropertyChangedSignal("Muted"):Connect(function() --[[ Line: 2427 ]]
+	t.onMutedChanged = Object:GetPropertyChangedSignal("Muted"):Connect(function()
 		-- upvalues: self (copy)
 		self:emit("OnDeviceMuteChanged")
 	end)
 	
 	if EnableMutedByLocalUserEngineFeature then
 		if FFlagDebugShowAudioDeviceInputDebugger then
-			t.onActiveChanged = Object:GetPropertyChangedSignal("Active"):Connect(function() --[[ Line: 2443 ]]
+			t.onActiveChanged = Object:GetPropertyChangedSignal("Active"):Connect(function()
 				-- upvalues: self (copy)
 				self:emit("OnDeviceActiveChanged")
 			end)
-			t.onMutedByLocalUserChanged = Object:GetPropertyChangedSignal("MutedByLocalUser"):Connect(function() --[[ Line: 2446 ]]
+			t.onMutedByLocalUserChanged = Object:GetPropertyChangedSignal("MutedByLocalUser"):Connect(function()
 				-- upvalues: self (copy)
 				self:emit("OnDeviceMutedByLocalUserChanged")
 			end)
 		end
 	else
-		t.onActiveChanged = Object:GetPropertyChangedSignal("Active"):Connect(function() --[[ Line: 2432 ]]
+		t.onActiveChanged = Object:GetPropertyChangedSignal("Active"):Connect(function()
 			-- upvalues: self (copy), IsPlayerMatch (ref), Object (copy)
 			self:emit("OnDeviceActiveChanged")
 			
@@ -2034,7 +2034,7 @@ function config1:CreateAudioDeviceData(Object) --[[ Line: 2352 ]]
 		end)
 	end
 	if v4 and VoiceChatService.UseNewAudioApi then
-		t.onActiveChangedDisconnectGuard = Object:GetPropertyChangedSignal("Active"):Connect(function() --[[ Line: 2452 ]]
+		t.onActiveChangedDisconnectGuard = Object:GetPropertyChangedSignal("Active"):Connect(function()
 			-- upvalues: Object (copy), Players (upval), self (copy)
 			if Object.Active and Object.Player == Players.LocalPlayer and self.localMuted == nil then
 				self:SetAndSyncActive(Object, false)
@@ -2044,7 +2044,7 @@ function config1:CreateAudioDeviceData(Object) --[[ Line: 2352 ]]
 	return t
 end
 
-function config1:onInstanceRemove(AudioDeviceInput) --[[ Line: 2462 ]]
+function config1:onInstanceRemove(AudioDeviceInput)
 	-- upvalues: FFlagExpChatDictation (copy), CoreGui (copy), NewResult (copy), EnableMutedByLocalUserEngineFeature (copy), FFlagDebugShowAudioDeviceInputDebugger (copy), v3 (copy)
 	if AudioDeviceInput:IsA("AudioDeviceInput") then
 		if FFlagExpChatDictation and AudioDeviceInput:IsDescendantOf(CoreGui) then return end
@@ -2081,11 +2081,11 @@ function config1:onInstanceRemove(AudioDeviceInput) --[[ Line: 2462 ]]
 	end
 end
 
-function config1:hookupAudioDeviceInputListener() --[[ Line: 2496 ]]
+function config1:hookupAudioDeviceInputListener()
 	-- upvalues: NewResult (copy), Players (copy), SoundService (copy), VoiceChatService (copy), CollectionService (copy), UtilsModule (copy)
 	NewResult:debug("Hooking up audio device listeners")
 	local LocalPlayer = Players.LocalPlayer
-	SoundService.AudioInstanceAdded:Connect(function(AudioDeviceInput) --[[ Line: 2499 ]]
+	SoundService.AudioInstanceAdded:Connect(function(AudioDeviceInput)
 		-- upvalues: self (copy)
 		self:onInstanceAdded(AudioDeviceInput)
 	end)
@@ -2118,7 +2118,7 @@ function config1:hookupAudioDeviceInputListener() --[[ Line: 2496 ]]
 			UtilsModule.avoidEmitting(LocalPlayer.Character)
 		end
 	end
-	game.DescendantRemoving:Connect(function(Descendant) --[[ Line: 2534 ]]
+	game.DescendantRemoving:Connect(function(Descendant)
 		-- upvalues: self (copy)
 		self:onInstanceRemove(Descendant)
 	end)
@@ -2126,7 +2126,7 @@ function config1:hookupAudioDeviceInputListener() --[[ Line: 2496 ]]
 	for _, descendant in game:GetDescendants() do
 		self:onInstanceAdded(descendant)
 	end
-	Players.PlayerRemoving:Connect(function(Player) --[[ Line: 2543 ]]
+	Players.PlayerRemoving:Connect(function(Player)
 		-- upvalues: self (copy)
 		for audioDevice in self.audioDevices do
 			if audioDevice.Player and audioDevice.Player == Player then
@@ -2136,9 +2136,9 @@ function config1:hookupAudioDeviceInputListener() --[[ Line: 2496 ]]
 	end)
 end
 
-function config1.RejoinCurrentChannel(p4) --[[ Line: 2553 ]]
+function config1.RejoinCurrentChannel(p4)
 	-- upvalues: NewResult (copy)
-	pcall(function() --[[ Line: 2554 ]]
+	pcall(function()
 		-- upvalues: p4 (copy), NewResult (upval)
 		local GroupId = p4.service:GetGroupId()
 		
@@ -2156,12 +2156,12 @@ function config1.RejoinCurrentChannel(p4) --[[ Line: 2553 ]]
 	end)
 end
 
-function config1.RejoinChannel(p4, GroupId, IsMicMuted) --[[ Line: 2570 ]]
+function config1.RejoinChannel(p4, GroupId, IsMicMuted)
 	-- upvalues: NewResult (copy)
 	NewResult:debug("Rejoining previous channel {} with mute status {}", GroupId, IsMicMuted)
 	
 	if GroupId and GroupId ~= "" then
-		pcall(function() --[[ Line: 2574 ]]
+		pcall(function()
 			-- upvalues: p4 (copy), GroupId (copy), IsMicMuted (copy)
 			p4.service:Leave()
 			p4.participants = {}
@@ -2174,7 +2174,7 @@ function config1.RejoinChannel(p4, GroupId, IsMicMuted) --[[ Line: 2570 ]]
 	end
 end
 
-function config1:RejoinVoice() --[[ Line: 2586 ]]
+function config1:RejoinVoice()
 	-- upvalues: GetFFlagVoiceChatClientRewriteMasterLuaFunction (copy), NewResult (copy), VoiceChatService (copy)
 	if GetFFlagVoiceChatClientRewriteMasterLuaFunction() then
 		NewResult:debug("Rejoining voice")
@@ -2184,9 +2184,9 @@ function config1:RejoinVoice() --[[ Line: 2586 ]]
 	end
 end
 
-function config1:watchSignalR() --[[ Line: 2597 ]]
+function config1:watchSignalR()
 	-- upvalues: WATCHEDNAMESPACES (copy), UtilsModule (copy), NewResult (copy)
-	self.signalRConnection = self.NotificationService.RobloxEventReceived:Connect(function(EventData) --[[ Line: 2598 ]]
+	self.signalRConnection = self.NotificationService.RobloxEventReceived:Connect(function(EventData)
 		-- upvalues: WATCHEDNAMESPACES (upval), UtilsModule (upval), self (copy), NewResult (upval)
 		local Namespace = EventData.namespace
 		
@@ -2210,7 +2210,7 @@ function config1:watchSignalR() --[[ Line: 2597 ]]
 			self.Analytics:reportOutOfOrderSequence()
 		end
 	end)
-	self.signalRConnectionChanged = self.NotificationService.RobloxConnectionChanged:Connect(function(ConnectionName, ConnectionState, _, NamespaceSequenceNumbers) --[[ Line: 2622 ]]
+	self.signalRConnectionChanged = self.NotificationService.RobloxConnectionChanged:Connect(function(ConnectionName, ConnectionState, _, NamespaceSequenceNumbers)
 		-- upvalues: NewResult (upval), UtilsModule (upval), WATCHEDNAMESPACES (upval), self (copy)
 		if ConnectionName == "signalR" then
 			if ConnectionState ~= Enum.ConnectionState.Connected then
@@ -2234,7 +2234,7 @@ function config1:watchSignalR() --[[ Line: 2597 ]]
 	end)
 end
 
-function config1:StopSignalRConnection() --[[ Line: 2647 ]]
+function config1:StopSignalRConnection()
 	if self.signalRConnectionChanged then
 		self.signalRConnectionChanged:Disconnect()
 		self.signalRConnectionChanged = nil
@@ -2245,11 +2245,11 @@ function config1:StopSignalRConnection() --[[ Line: 2647 ]]
 	end
 end
 
-function config1:getService() --[[ Line: 2658 ]]
+function config1:getService()
 	return self.service
 end
 
-function config1:ToggleMic(Context) --[[ Line: 2662 ]]
+function config1:ToggleMic(Context)
 	-- upvalues: GetFFlagCoreMicManagerRefactorModule (copy), NewResult (copy), GetFFlagJoinWithoutMicPermissionsFunction (copy), PERMISSIONSTATE (copy), PermissionsProtocol (copy), VoiceChatService (copy), Players (copy)
 	self:ensureInitialized("toggle mic")
 	
@@ -2266,7 +2266,7 @@ function config1:ToggleMic(Context) --[[ Line: 2662 ]]
 	if GetFFlagJoinWithoutMicPermissionsFunction() then
 		if self.permissionState == PERMISSIONSTATE.PENDING_MIC then
 			NewResult:debug("In pending mic mode, requesting permission")
-			self:emit("GetPermissions", function(p4) --[[ Line: 2678 ]]
+			self:emit("GetPermissions", function(p4)
 				-- upvalues: self (copy), PERMISSIONSTATE (upval), NewResult (upval), Context (copy)
 				self.permissionState = if p4.hasMicPermissions then PERMISSIONSTATE.LISTEN_AND_TALK else PERMISSIONSTATE.LISTEN_ONLY
 				NewResult:debug("Got permissions, setting state to {}", self.permissionState)
@@ -2321,7 +2321,7 @@ function config1:ToggleMic(Context) --[[ Line: 2662 ]]
 	end
 end
 
-function config1:ToggleVoiceChanger(_) --[[ Line: 2740 ]]
+function config1:ToggleVoiceChanger(_)
 	-- upvalues: VoiceChatService (copy), NewResult (copy)
 	self:ensureInitialized("toggle voice changer")
 	
@@ -2357,7 +2357,7 @@ function config1:ToggleVoiceChanger(_) --[[ Line: 2740 ]]
 	end
 end
 
-function config1:ToggleVoiceChangerHearMyself(_) --[[ Line: 2770 ]]
+function config1:ToggleVoiceChangerHearMyself(_)
 	-- upvalues: VoiceChatService (copy), NewResult (copy)
 	if self.localMuted == nil then return end
 	if VoiceChatService.UseNewAudioApi then
@@ -2382,7 +2382,7 @@ function config1:ToggleVoiceChangerHearMyself(_) --[[ Line: 2770 ]]
 	end
 end
 
-function config1:SetVoicePack(CurrentVoicePack) --[[ Line: 2795 ]]
+function config1:SetVoicePack(CurrentVoicePack)
 	-- upvalues: VoiceChatService (copy), NewResult (copy)
 	self:ensureInitialized("set voice pack")
 	
@@ -2401,7 +2401,7 @@ function config1:SetVoicePack(CurrentVoicePack) --[[ Line: 2795 ]]
 	end
 end
 
-function config1:JoinWithVoiceMuteData(p4) --[[ Line: 2814 ]]
+function config1:JoinWithVoiceMuteData(p4)
 	-- upvalues: Players (copy), CryoModule (copy)
 	return CryoModule.Dictionary.join({
 		userId = Players.LocalPlayer.UserId,
@@ -2410,12 +2410,12 @@ function config1:JoinWithVoiceMuteData(p4) --[[ Line: 2814 ]]
 	}, p4)
 end
 
-function config1:_reportJoinFailed(p4, ERROR) --[[ Line: 2823 ]]
+function config1:_reportJoinFailed(p4, ERROR)
 	self.Analytics:reportVoiceChatJoinResult(false, p4, ERROR)
 	self:emit("OnReportJoinFailed", p4)
 end
 
-function config1:_syncLocalAudioDeviceActive() --[[ Line: 2828 ]]
+function config1:_syncLocalAudioDeviceActive()
 	-- upvalues: GetFFlagCoreMicManagerRefactorModule (copy), VoiceChatService (copy), Players (copy)
 	if GetFFlagCoreMicManagerRefactorModule() then
 		return self.micManager:SyncLocalAudioDeviceActive()
@@ -2429,28 +2429,28 @@ function config1:_syncLocalAudioDeviceActive() --[[ Line: 2828 ]]
 	end
 end
 
-function config1:_setupEarlyAudioDeviceGuard() --[[ Line: 2844 ]]
+function config1:_setupEarlyAudioDeviceGuard()
 	-- upvalues: GetFFlagCoreMicManagerRefactorModule (copy), VoiceChatService (copy), FFlagExpChatDictation (copy), CoreGui (copy), Players (copy), SoundService (copy)
 	if GetFFlagCoreMicManagerRefactorModule() then
 		return self.micManager:SetupEarlyAudioDeviceGuard()
 	end
-	local function _(Object): boolean --[[ Line: 2848 | Named "shouldDeactivate" ]]
+	local function _(Object): boolean
 		-- upvalues: VoiceChatService (upval), FFlagExpChatDictation (upval), CoreGui (upval), Players (upval), self (copy)
 		return VoiceChatService.UseNewAudioApi and (not (FFlagExpChatDictation and Object:IsDescendantOf(CoreGui)) and (Object.Player == Players.LocalPlayer and (Object.Active and self.localMuted == nil)))
 	end
 	
-	local function guardDevice(Object) --[[ Line: 2856 ]]
+	local function guardDevice(Object)
 		-- upvalues: VoiceChatService (upval), FFlagExpChatDictation (upval), CoreGui (upval), Players (upval), self (copy)
 		if VoiceChatService.UseNewAudioApi and (not (FFlagExpChatDictation and Object:IsDescendantOf(CoreGui)) and (Object.Player == Players.LocalPlayer and (Object.Active and self.localMuted == nil))) then
 			Object.Active = false
 		end
-		Object:GetPropertyChangedSignal("Player"):Connect(function() --[[ Line: 2861 ]]
+		Object:GetPropertyChangedSignal("Player"):Connect(function()
 			-- upvalues: Object (copy), VoiceChatService (upval), FFlagExpChatDictation (upval), CoreGui (upval), Players (upval), self (upval)
 			if VoiceChatService.UseNewAudioApi and (not (FFlagExpChatDictation and Object:IsDescendantOf(CoreGui)) and (Object.Player == Players.LocalPlayer and (Object.Active and self.localMuted == nil))) then
 				Object.Active = false
 			end
 		end)
-		Object:GetPropertyChangedSignal("Active"):Connect(function() --[[ Line: 2867 ]]
+		Object:GetPropertyChangedSignal("Active"):Connect(function()
 			-- upvalues: Object (copy), VoiceChatService (upval), FFlagExpChatDictation (upval), CoreGui (upval), Players (upval), self (upval)
 			if VoiceChatService.UseNewAudioApi and (not (FFlagExpChatDictation and Object:IsDescendantOf(CoreGui)) and (Object.Player == Players.LocalPlayer and (Object.Active and self.localMuted == nil))) then
 				Object.Active = false
@@ -2458,7 +2458,7 @@ function config1:_setupEarlyAudioDeviceGuard() --[[ Line: 2844 ]]
 		end)
 	end
 	
-	SoundService.AudioInstanceAdded:Connect(function(AudioDeviceInput) --[[ Line: 2874 ]]
+	SoundService.AudioInstanceAdded:Connect(function(AudioDeviceInput)
 		-- upvalues: guardDevice (copy)
 		if AudioDeviceInput:IsA("AudioDeviceInput") then
 			guardDevice(AudioDeviceInput)
@@ -2472,14 +2472,14 @@ function config1:_setupEarlyAudioDeviceGuard() --[[ Line: 2844 ]]
 	end
 end
 
-function config1:_asyncInit() --[[ Line: 2888 ]]
+function config1:_asyncInit()
 	-- upvalues: v4 (copy), NewResult (copy), MINVOICECHATAPIVERSIONISCONTEXTENABLED (copy), GetFFlagVoiceChatClientRewriteMasterLuaFunction (copy), VoiceChatService (copy), AnalyticsModule (copy), PromiseModule (copy)
 	self:CheckCallState()
 	
 	if v4 then
 		self:_setupEarlyAudioDeviceGuard()
 	end
-	return self:canUseServiceAsync():andThen(function(_) --[[ Line: 2894 ]]
+	return self:canUseServiceAsync():andThen(function(_)
 		-- upvalues: NewResult (upval), MINVOICECHATAPIVERSIONISCONTEXTENABLED (upval), self (copy), GetFFlagVoiceChatClientRewriteMasterLuaFunction (upval), VoiceChatService (upval), AnalyticsModule (upval), PromiseModule (upval)
 		local ServiceName = "VoiceChatService"
 		
@@ -2487,7 +2487,7 @@ function config1:_asyncInit() --[[ Line: 2888 ]]
 			ServiceName = "VoiceChatInternal"
 			NewResult:debug("Using VoiceChatInternal")
 		end
-		local Success, Result = pcall(function() --[[ Line: 2900 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: ServiceName (ref), MINVOICECHATAPIVERSIONISCONTEXTENABLED (upval), self (upval)
 			local ServiceName1 = game:GetService(ServiceName)
 			
@@ -2528,7 +2528,7 @@ function config1:_asyncInit() --[[ Line: 2888 ]]
 	end)
 end
 
-function config1:UpdateLocalMetering() --[[ Line: 2950 ]]
+function config1:UpdateLocalMetering()
 	-- upvalues: GetFFlagCoreMicManagerRefactorModule (copy), Players (copy), v1 (copy)
 	if GetFFlagCoreMicManagerRefactorModule() then
 		return self.micManager:UpdateLocalMetering()
@@ -2545,7 +2545,7 @@ function config1:UpdateLocalMetering() --[[ Line: 2950 ]]
 	end
 end
 
-function config1:FireTalkingChangedDebounced(IsTalking) --[[ Line: 2965 ]]
+function config1:FireTalkingChangedDebounced(IsTalking)
 	-- upvalues: GetFFlagCoreMicManagerRefactorModule (copy), v2 (copy)
 	if GetFFlagCoreMicManagerRefactorModule() then
 		return self.micManager:FireTalkingChangedDebounced(IsTalking)
@@ -2560,7 +2560,7 @@ function config1:FireTalkingChangedDebounced(IsTalking) --[[ Line: 2965 ]]
 	end
 end
 
-function config1:asyncInit() --[[ Line: 2984 ]]
+function config1:asyncInit()
 	-- upvalues: NewResult (copy), PromiseModule (copy), ConstantsModule (copy), GetFFlagCoreMicManagerRefactorModule (copy), FFlagEnablePartyVoiceChangersInLua (copy), StringKeyFixForParticipantsTable (copy)
 	if self.service then
 		NewResult:trace("Manager already initialized")
@@ -2571,10 +2571,10 @@ function config1:asyncInit() --[[ Line: 2984 ]]
 		self.initPromise = self:_asyncInit()
 		
 		if self.AdService then
-			(function(p4) --[[ Line: 2994 | Named "setupRewardedAdMuting" ]]
+			(function(p4)
 				-- upvalues: ConstantsModule (upval), GetFFlagCoreMicManagerRefactorModule (upval)
 				local LocalMuted = false
-				p4.AdService.RewardedVideoAdStarted:Connect(function() --[[ Line: 2996 ]]
+				p4.AdService.RewardedVideoAdStarted:Connect(function()
 					-- upvalues: p4 (copy), LocalMuted (ref), ConstantsModule (upval), GetFFlagCoreMicManagerRefactorModule (upval)
 					if p4.localMuted == nil then return end
 					LocalMuted = p4.localMuted
@@ -2588,7 +2588,7 @@ function config1:asyncInit() --[[ Line: 2984 ]]
 						p4.micManager:SetAdMuteBlocked(true)
 					end
 				end)
-				p4.AdService.RewardedVideoAdEnded:Connect(function() --[[ Line: 3015 ]]
+				p4.AdService.RewardedVideoAdEnded:Connect(function()
 					-- upvalues: p4 (copy), GetFFlagCoreMicManagerRefactorModule (upval), LocalMuted (ref), ConstantsModule (upval)
 					if p4.localMuted == nil then return end
 					p4.isPlayerWatchingAd = false
@@ -2603,12 +2603,12 @@ function config1:asyncInit() --[[ Line: 2984 ]]
 			end)(self)
 		end
 		if FFlagEnablePartyVoiceChangersInLua and not self.voiceChangerWasToggledEvent then
-			task.spawn(function() --[[ Line: 3038 ]]
+			task.spawn(function()
 				-- upvalues: self (copy), StringKeyFixForParticipantsTable (upval)
 				local VoiceChangerWasToggledEvent = self:GetVoiceChangerWasToggledEvent()
 				
 				if VoiceChangerWasToggledEvent then
-					VoiceChangerWasToggledEvent.OnClientEvent:Connect(function(p4, IsVoiceChangerActive) --[[ Line: 3042 ]]
+					VoiceChangerWasToggledEvent.OnClientEvent:Connect(function(p4, IsVoiceChangerActive)
 						-- upvalues: StringKeyFixForParticipantsTable (upval), self (upval)
 						local Participant = if StringKeyFixForParticipantsTable then self.participants[tostring(p4)] else self.participants[p4]
 						
@@ -2625,29 +2625,29 @@ function config1:asyncInit() --[[ Line: 2984 ]]
 	return self.initPromise
 end
 
-function config1.IsInitialized(p4): boolean --[[ Line: 3062 ]]
+function config1.IsInitialized(p4): boolean
 	return if p4.service then true else false
 end
 
-function config1:ensureInitialized(Text) --[[ Line: 3066 ]]
+function config1:ensureInitialized(Text)
 	if not self.service then
 		error("[corescripts VCS Manager] " .. "Attempting to " .. Text .. " before calling init")
 	end
 end
 
-function config1:GetSessionId() --[[ Line: 3073 ]]
+function config1:GetSessionId()
 	self:ensureInitialized("get session id")
 	
 	return self.service:GetSessionId()
 end
 
-function config1:GetChannelId() --[[ Line: 3078 ]]
+function config1:GetChannelId()
 	self:ensureInitialized("get channel id")
 	
 	return self.service:GetChannelId()
 end
 
-function config1:Disconnect() --[[ Line: 3083 ]]
+function config1:Disconnect()
 	-- upvalues: GetFFlagCoreMicManagerRefactorModule (copy), GetFFlagMicConsumerRegistryModule (copy), FFlagEnableVoiceChatMuteForVideoCaptures (copy)
 	if GetFFlagCoreMicManagerRefactorModule() then
 		if GetFFlagMicConsumerRegistryModule() then
@@ -2697,15 +2697,15 @@ function config1:Disconnect() --[[ Line: 3083 ]]
 	end
 end
 
-function config1.RequestHidePublicVoiceUI(p4) --[[ Line: 3140 ]]
-	task.defer(function() --[[ Line: 3141 ]]
+function config1.RequestHidePublicVoiceUI(p4)
+	task.defer(function()
 		-- upvalues: p4 (copy)
 		p4.setVoiceUIVisibility:Fire(false)
 	end)
 end
 
-function config1.RequestShowPublicVoiceUI(p4) --[[ Line: 3146 ]]
-	task.defer(function() --[[ Line: 3147 ]]
+function config1.RequestShowPublicVoiceUI(p4)
+	task.defer(function()
 		-- upvalues: p4 (copy)
 		p4.setVoiceUIVisibility:Fire(true)
 	end)
@@ -2717,7 +2717,7 @@ if v5 and VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature then
 	local LocalPlayer = Players.LocalPlayer
 	
 	if LocalPlayer then
-		LocalPlayer.AncestryChanged:Connect(function(_, NewParent) --[[ Line: 3174 ]]
+		LocalPlayer.AncestryChanged:Connect(function(_, NewParent)
 			-- upvalues: config1 (copy)
 			if NewParent == nil then
 				config1.default:ReportVoiceVolumeImpressionsIfNeeded()

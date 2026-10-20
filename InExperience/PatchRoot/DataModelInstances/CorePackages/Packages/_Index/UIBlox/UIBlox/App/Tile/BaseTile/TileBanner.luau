@@ -9,11 +9,11 @@ local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFon
 local TileBanner = RoactModule.PureComponent:extend("TileBanner")
 TileBanner.validateProps = TModule.strictInterface({ bannerText = TModule.string })
 
-function TileBanner.render(p1) --[[ Line: 25 ]]
+function TileBanner.render(p1)
 	-- upvalues: WithStyleModule (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local BannerText = p1.props.bannerText
 	
-	return WithStyleModule(function(p2) --[[ Line: 28 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: RoactModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), BannerText (copy)
 		local _Font = p2.Font
 		local Theme = p2.Theme

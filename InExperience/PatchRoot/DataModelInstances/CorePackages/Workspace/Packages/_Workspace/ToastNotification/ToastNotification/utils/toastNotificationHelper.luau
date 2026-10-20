@@ -9,7 +9,7 @@ local Cryo = DependenciesModule.Cryo
 local TimeTrigger = DependenciesModule.ToastNotificationProtocolEnums.TimeTrigger
 local FFlagFriendshipNotifsUseSendrExperiment = require(Parent.Parent.SharedFlags).FFlagFriendshipNotifsUseSendrExperiment
 
-local function _(List, p1) --[[ Line: 43 ]]
+local function _(List, p1)
 	if List then
 		table.insert(List, p1)
 		
@@ -19,11 +19,11 @@ local function _(List, p1) --[[ Line: 43 ]]
 	end
 end
 
-local _ = function(VisualItems): string --[[ Line: 55 ]]
+local _ = function(VisualItems): string
 	return if VisualItems.button == nil then if VisualItems.textBody == nil then if VisualItems.thumbnail == nil then if VisualItems.metaAction == nil then if VisualItems.singleMetaAction == nil then "unknown" else "singleMetaAction" else "metaAction" else "thumbnail" else "textBody" else "button"
 end
 
-local function v12(State) --[[ Line: 70 ]]
+local function v12(State)
 	if not State then
 		return nil
 	end
@@ -90,17 +90,17 @@ local config3 = {
 }
 local _Vector2 = Vector2.new(800, 600)
 
-local _ = function(p1) --[[ Line: 159 ]]
+local _ = function(p1)
 	-- upvalues: ConstantsModule (copy)
 	return p1.Y * (ConstantsModule.FRRToastPosition.NotificationFrameTopScale + ConstantsModule.FRRToastPosition.NotificationFrameHeightScale) - ConstantsModule.FRRToastPosition.NotificationRightInset
 end
 
-local function v19(Vector) --[[ Line: 169 ]]
+local function v19(Vector)
 	-- upvalues: ConstantsModule (copy)
 	return -ConstantsModule.FRRToastPosition.NotificationRightInset, Vector.Y * (ConstantsModule.FRRToastPosition.NotificationFrameTopScale + ConstantsModule.FRRToastPosition.NotificationFrameHeightScale) - ConstantsModule.FRRToastPosition.NotificationRightInset - Vector.Y
 end
 
-local function v20(p1, p2, Vector) --[[ Line: 176 ]]
+local function v20(p1, p2, Vector)
 	-- upvalues: ConstantsModule (copy)
 	local YDelta = Vector.Y * (ConstantsModule.FRRToastPosition.NotificationFrameTopScale + ConstantsModule.FRRToastPosition.NotificationFrameHeightScale) - ConstantsModule.FRRToastPosition.NotificationRightInset - Vector.Y
 	local config = {
@@ -124,7 +124,7 @@ local function v20(p1, p2, Vector) --[[ Line: 176 ]]
 end
 
 return {
-	calculateToastPosition = function(p1, p2, PositionYOffset, p3, p4, p5) --[[ Line: 210 ]]
+	calculateToastPosition = function(p1, p2, PositionYOffset, p3, p4, p5)
 		-- upvalues: FFlagFriendshipNotifsUseSendrExperiment (copy), _Vector2 (copy), v20 (copy), GuiService (copy), Cryo (copy), config (copy), config2 (copy), config1 (copy), config3 (copy)
 		if FFlagFriendshipNotifsUseSendrExperiment and p4 == "legacyBottomRight" then
 			return (v20(p1, p3, p5 or (workspace.CurrentCamera and workspace.CurrentCamera.ViewportSize or _Vector2)))
@@ -136,22 +136,22 @@ return {
 		end
 	end,
 	getNotificationScript2LegacyToastOffsets = if FFlagFriendshipNotifsUseSendrExperiment then v19 else nil,
-	calculateTimeRemaining = function(TimerFromCardData, p1, p2): number --[[ Line: 307 ]]
+	calculateTimeRemaining = function(TimerFromCardData, p1, p2): number
 		-- upvalues: TimeTrigger (copy)
 		local P24 = p1 or DateTime.now().UnixTimestampMillis
 		local P25 = p2 or DateTime.now().UnixTimestampMillis
 		
 		return (math.max(if TimerFromCardData.trigger == TimeTrigger.OnReceive then TimerFromCardData.timespanMs - (DateTime.now().UnixTimestampMillis - P24) elseif TimerFromCardData.trigger == TimeTrigger.OnDisplay then TimerFromCardData.timespanMs - (DateTime.now().UnixTimestampMillis - P25) else 0, 0))
 	end,
-	getDeviceOrientation = function(Vector) --[[ Line: 23 ]]
+	getDeviceOrientation = function(Vector)
 		-- upvalues: TypeModule (copy)
 		return if Vector.Y < Vector.X then TypeModule.DeviceOrientationEnum.Landscape else TypeModule.DeviceOrientationEnum.Portrait
 	end,
-	getNotificationSize = function(p1, p2: number): UDim2 --[[ Line: 29 ]]
+	getNotificationSize = function(p1, p2: number): UDim2
 		-- upvalues: ConstantsModule (copy)
 		return if p2 < ConstantsModule.FullWidthDeviceThreshold then UDim2.new(0, p2 - 24, 0, 0) elseif p1 and p2 < ConstantsModule.CompactCardThreashold then UDim2.new(0, ConstantsModule.InExperienceToastWidth, 0, 0) else UDim2.new(0, ConstantsModule.InAppToastWidth, 0, 0)
 	end,
-	marshalNotificationData = function(p1) --[[ Line: 97 ]]
+	marshalNotificationData = function(p1)
 		-- upvalues: v12 (copy)
 		local config = {
 			currentState = p1.content.currentState,
@@ -170,24 +170,24 @@ return {
 		end
 		return config
 	end,
-	isToastToRight = function(Landscape): boolean --[[ Line: 120 ]]
+	isToastToRight = function(Landscape): boolean
 		-- upvalues: TypeModule (copy)
 		return Landscape == TypeModule.DeviceOrientationEnum.Landscape
 	end,
-	isDesktopDevice = function(): boolean --[[ Line: 261 ]]
+	isDesktopDevice = function(): boolean
 		-- upvalues: UserInputService (copy)
 		local None = Enum.Platform.None
-		pcall(function() --[[ Line: 263 ]]
+		pcall(function()
 			-- upvalues: None (ref), UserInputService (upval)
 			None = UserInputService:GetPlatform()
 		end)
 		
 		return None == Enum.Platform.Windows or (None == Enum.Platform.OSX or None == Enum.Platform.UWP)
 	end,
-	getNearestWholeNumber = function(Value: number): number --[[ Line: 274 ]]
+	getNearestWholeNumber = function(Value: number): number
 		return if Value % 1 < 0.5 then math.floor(Value) else math.ceil(Value)
 	end,
-	getTimerFromCardData = function(p1, p2) --[[ Line: 289 ]]
+	getTimerFromCardData = function(p1, p2)
 		-- upvalues: LoggerModule (copy), TimeTrigger (copy)
 		if p1 and p1.timers and p1.timers[p2] then
 			return p1.timers[p2]
@@ -197,10 +197,10 @@ return {
 			return { timespanMs = 0, trigger = TimeTrigger.OnDisplay }
 		end
 	end,
-	fireEvent = function(p1, p2) --[[ Line: 255 ]]
+	fireEvent = function(p1, p2)
 		p1.sendEventDeferred("ToastNotification", "toastNotificationClientEvent", p2)
 	end,
-	isUserThumbnail = function(p1): boolean --[[ Line: 326 ]]
+	isUserThumbnail = function(p1): boolean
 		-- upvalues: TypeModule (copy)
 		return p1.idType == TypeModule.SENDERThumbnailTypeEnum.User or p1.idType == TypeModule.SENDERThumbnailTypeEnum.AvatarImageUrl
 	end

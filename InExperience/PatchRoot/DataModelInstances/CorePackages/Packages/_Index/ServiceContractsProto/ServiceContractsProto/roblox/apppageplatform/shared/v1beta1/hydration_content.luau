@@ -35,7 +35,7 @@ local LeaderboardStatsDataModule = require(script.Parent.leaderboard_stats_data)
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 1154 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		badge = if p1 == nil or p1.badge == nil then {} else p1.badge,
@@ -72,7 +72,7 @@ function Module.new(p1) --[[ Line: 1154 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 1209 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -424,7 +424,7 @@ function Module:encode() --[[ Line: 1209 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 1655 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy), t (copy), BadgeDataModule (copy), UniverseDataModule (copy), CreatorDataModule (copy), EventDataModule (copy), SongDataModule (copy), GamePassDataModule (copy), MediaAssetDataModule (copy), SocialLinkDataModule (copy), GameDeveloperProductDataModule (copy), GameSubscriptionDataModule (copy), MarketplaceCatalogCategoryDataModule (copy), MarketplaceAssetDataModule (copy), MarketplaceBundleDataModule (copy), MarketplaceLookDataModule (copy), CatalogSortDataModule (copy), AgeRecommendationDataModule (copy), UniverseUserFollowDataModule (copy), UniverseUserVoteDataModule (copy), UserProfileDataModule (copy), UniverseUserFavoriteDataModule (copy), PlayabilityDataModule (copy), UniverseUserFollowLimitDataModule (copy), UniverseUserVoteFeedbackMetadataDataModule (copy), MomentDataModule (copy), CommunityDataModule (copy), CommunityUserMembershipDataModule (copy), FriendRecommendationDataModule (copy), UniversePrivateServerDataModule (copy), NotificationBadgeDataModule (copy), CollectibleItemDataModule (copy), LeaderboardStatsDataModule (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -639,7 +639,7 @@ function Module.decode(Buf) --[[ Line: 1655 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 2084 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.badge ~= nil and next(self.badge) ~= nil then
@@ -893,7 +893,7 @@ function Module:jsonEncode() --[[ Line: 2084 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 2341 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy), BadgeDataModule (copy), UniverseDataModule (copy), CreatorDataModule (copy), EventDataModule (copy), SongDataModule (copy), GamePassDataModule (copy), MediaAssetDataModule (copy), SocialLinkDataModule (copy), GameDeveloperProductDataModule (copy), GameSubscriptionDataModule (copy), MarketplaceCatalogCategoryDataModule (copy), MarketplaceAssetDataModule (copy), MarketplaceBundleDataModule (copy), MarketplaceLookDataModule (copy), CatalogSortDataModule (copy), AgeRecommendationDataModule (copy), UniverseUserFollowDataModule (copy), UniverseUserVoteDataModule (copy), UserProfileDataModule (copy), UniverseUserFavoriteDataModule (copy), PlayabilityDataModule (copy), UniverseUserFollowLimitDataModule (copy), UniverseUserVoteFeedbackMetadataDataModule (copy), MomentDataModule (copy), CommunityDataModule (copy), CommunityUserMembershipDataModule (copy), FriendRecommendationDataModule (copy), UniversePrivateServerDataModule (copy), NotificationBadgeDataModule (copy), CollectibleItemDataModule (copy), LeaderboardStatsDataModule (copy)
 	local NewModule = Module.new()
 	
@@ -1341,7 +1341,7 @@ TypeRegistryModule.default:register(t.HydrationContent)
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(p1) --[[ Line: 2996 ]]
+function Module1.new(p1)
 	-- upvalues: Module1 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -1349,7 +1349,7 @@ function Module1.new(p1) --[[ Line: 2996 ]]
 	}, Module1))
 end
 
-function Module1:encode() --[[ Line: 3005 ]]
+function Module1:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1369,7 +1369,7 @@ function Module1:encode() --[[ Line: 3005 ]]
 	return Buf1
 end
 
-function Module1.decode(Buf) --[[ Line: 3025 ]]
+function Module1.decode(Buf)
 	-- upvalues: Module1 (copy), ProtoModule (copy), BadgeDataModule (copy)
 	local NewModule = Module1.new()
 	local v2 = 0
@@ -1406,7 +1406,7 @@ function Module1.decode(Buf) --[[ Line: 3025 ]]
 	return NewModule
 end
 
-function Module1:jsonEncode() --[[ Line: 3073 ]]
+function Module1:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -1418,7 +1418,7 @@ function Module1:jsonEncode() --[[ Line: 3073 ]]
 	return t
 end
 
-function Module1:jsonDecode() --[[ Line: 3087 ]]
+function Module1:jsonDecode()
 	-- upvalues: Module1 (copy), BadgeDataModule (copy)
 	local NewModule = Module1.new()
 	
@@ -1440,7 +1440,7 @@ TypeRegistryModule.default:register(t.HydrationContent_BadgeEntry)
 local Module2 = {}
 Module2.__index = Module2
 
-function Module2.new(p1) --[[ Line: 3115 ]]
+function Module2.new(p1)
 	-- upvalues: Module2 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -1448,7 +1448,7 @@ function Module2.new(p1) --[[ Line: 3115 ]]
 	}, Module2))
 end
 
-function Module2:encode() --[[ Line: 3124 ]]
+function Module2:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1468,7 +1468,7 @@ function Module2:encode() --[[ Line: 3124 ]]
 	return Buf1
 end
 
-function Module2.decode(Buf) --[[ Line: 3144 ]]
+function Module2.decode(Buf)
 	-- upvalues: Module2 (copy), ProtoModule (copy), UniverseDataModule (copy)
 	local NewModule = Module2.new()
 	local v3 = 0
@@ -1505,7 +1505,7 @@ function Module2.decode(Buf) --[[ Line: 3144 ]]
 	return NewModule
 end
 
-function Module2:jsonEncode() --[[ Line: 3192 ]]
+function Module2:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -1517,7 +1517,7 @@ function Module2:jsonEncode() --[[ Line: 3192 ]]
 	return t
 end
 
-function Module2:jsonDecode() --[[ Line: 3206 ]]
+function Module2:jsonDecode()
 	-- upvalues: Module2 (copy), UniverseDataModule (copy)
 	local NewModule = Module2.new()
 	
@@ -1539,7 +1539,7 @@ TypeRegistryModule.default:register(t.HydrationContent_UniverseEntry)
 local Module3 = {}
 Module3.__index = Module3
 
-function Module3.new(p1) --[[ Line: 3234 ]]
+function Module3.new(p1)
 	-- upvalues: Module3 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -1547,7 +1547,7 @@ function Module3.new(p1) --[[ Line: 3234 ]]
 	}, Module3))
 end
 
-function Module3:encode() --[[ Line: 3243 ]]
+function Module3:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1567,7 +1567,7 @@ function Module3:encode() --[[ Line: 3243 ]]
 	return Buf1
 end
 
-function Module3.decode(Buf) --[[ Line: 3263 ]]
+function Module3.decode(Buf)
 	-- upvalues: Module3 (copy), ProtoModule (copy), CreatorDataModule (copy)
 	local NewModule = Module3.new()
 	local v4 = 0
@@ -1604,7 +1604,7 @@ function Module3.decode(Buf) --[[ Line: 3263 ]]
 	return NewModule
 end
 
-function Module3:jsonEncode() --[[ Line: 3311 ]]
+function Module3:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -1616,7 +1616,7 @@ function Module3:jsonEncode() --[[ Line: 3311 ]]
 	return t
 end
 
-function Module3:jsonDecode() --[[ Line: 3325 ]]
+function Module3:jsonDecode()
 	-- upvalues: Module3 (copy), CreatorDataModule (copy)
 	local NewModule = Module3.new()
 	
@@ -1638,7 +1638,7 @@ TypeRegistryModule.default:register(t.HydrationContent_CreatorEntry)
 local Module4 = {}
 Module4.__index = Module4
 
-function Module4.new(p1) --[[ Line: 3353 ]]
+function Module4.new(p1)
 	-- upvalues: Module4 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -1646,7 +1646,7 @@ function Module4.new(p1) --[[ Line: 3353 ]]
 	}, Module4))
 end
 
-function Module4:encode() --[[ Line: 3362 ]]
+function Module4:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1666,7 +1666,7 @@ function Module4:encode() --[[ Line: 3362 ]]
 	return Buf1
 end
 
-function Module4.decode(Buf) --[[ Line: 3382 ]]
+function Module4.decode(Buf)
 	-- upvalues: Module4 (copy), ProtoModule (copy), EventDataModule (copy)
 	local NewModule = Module4.new()
 	local v5 = 0
@@ -1703,7 +1703,7 @@ function Module4.decode(Buf) --[[ Line: 3382 ]]
 	return NewModule
 end
 
-function Module4:jsonEncode() --[[ Line: 3430 ]]
+function Module4:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -1715,7 +1715,7 @@ function Module4:jsonEncode() --[[ Line: 3430 ]]
 	return t
 end
 
-function Module4:jsonDecode() --[[ Line: 3444 ]]
+function Module4:jsonDecode()
 	-- upvalues: Module4 (copy), EventDataModule (copy)
 	local NewModule = Module4.new()
 	
@@ -1737,7 +1737,7 @@ TypeRegistryModule.default:register(t.HydrationContent_EventEntry)
 local Module5 = {}
 Module5.__index = Module5
 
-function Module5.new(p1) --[[ Line: 3472 ]]
+function Module5.new(p1)
 	-- upvalues: Module5 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -1745,7 +1745,7 @@ function Module5.new(p1) --[[ Line: 3472 ]]
 	}, Module5))
 end
 
-function Module5:encode() --[[ Line: 3481 ]]
+function Module5:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1765,7 +1765,7 @@ function Module5:encode() --[[ Line: 3481 ]]
 	return Buf1
 end
 
-function Module5.decode(Buf) --[[ Line: 3501 ]]
+function Module5.decode(Buf)
 	-- upvalues: Module5 (copy), ProtoModule (copy), SongDataModule (copy)
 	local NewModule = Module5.new()
 	local v6 = 0
@@ -1802,7 +1802,7 @@ function Module5.decode(Buf) --[[ Line: 3501 ]]
 	return NewModule
 end
 
-function Module5:jsonEncode() --[[ Line: 3549 ]]
+function Module5:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -1814,7 +1814,7 @@ function Module5:jsonEncode() --[[ Line: 3549 ]]
 	return t
 end
 
-function Module5:jsonDecode() --[[ Line: 3563 ]]
+function Module5:jsonDecode()
 	-- upvalues: Module5 (copy), SongDataModule (copy)
 	local NewModule = Module5.new()
 	
@@ -1836,7 +1836,7 @@ TypeRegistryModule.default:register(t.HydrationContent_SongEntry)
 local Module6 = {}
 Module6.__index = Module6
 
-function Module6.new(p1) --[[ Line: 3591 ]]
+function Module6.new(p1)
 	-- upvalues: Module6 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -1844,7 +1844,7 @@ function Module6.new(p1) --[[ Line: 3591 ]]
 	}, Module6))
 end
 
-function Module6:encode() --[[ Line: 3600 ]]
+function Module6:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1864,7 +1864,7 @@ function Module6:encode() --[[ Line: 3600 ]]
 	return Buf1
 end
 
-function Module6.decode(Buf) --[[ Line: 3620 ]]
+function Module6.decode(Buf)
 	-- upvalues: Module6 (copy), ProtoModule (copy), GamePassDataModule (copy)
 	local NewModule = Module6.new()
 	local v7 = 0
@@ -1901,7 +1901,7 @@ function Module6.decode(Buf) --[[ Line: 3620 ]]
 	return NewModule
 end
 
-function Module6:jsonEncode() --[[ Line: 3668 ]]
+function Module6:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -1913,7 +1913,7 @@ function Module6:jsonEncode() --[[ Line: 3668 ]]
 	return t
 end
 
-function Module6:jsonDecode() --[[ Line: 3682 ]]
+function Module6:jsonDecode()
 	-- upvalues: Module6 (copy), GamePassDataModule (copy)
 	local NewModule = Module6.new()
 	
@@ -1935,7 +1935,7 @@ TypeRegistryModule.default:register(t.HydrationContent_GamePassEntry)
 local Module7 = {}
 Module7.__index = Module7
 
-function Module7.new(p1) --[[ Line: 3710 ]]
+function Module7.new(p1)
 	-- upvalues: Module7 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -1943,7 +1943,7 @@ function Module7.new(p1) --[[ Line: 3710 ]]
 	}, Module7))
 end
 
-function Module7:encode() --[[ Line: 3719 ]]
+function Module7:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1963,7 +1963,7 @@ function Module7:encode() --[[ Line: 3719 ]]
 	return Buf1
 end
 
-function Module7.decode(Buf) --[[ Line: 3739 ]]
+function Module7.decode(Buf)
 	-- upvalues: Module7 (copy), ProtoModule (copy), MediaAssetDataModule (copy)
 	local NewModule = Module7.new()
 	local v8 = 0
@@ -2000,7 +2000,7 @@ function Module7.decode(Buf) --[[ Line: 3739 ]]
 	return NewModule
 end
 
-function Module7:jsonEncode() --[[ Line: 3787 ]]
+function Module7:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -2012,7 +2012,7 @@ function Module7:jsonEncode() --[[ Line: 3787 ]]
 	return t
 end
 
-function Module7:jsonDecode() --[[ Line: 3801 ]]
+function Module7:jsonDecode()
 	-- upvalues: Module7 (copy), MediaAssetDataModule (copy)
 	local NewModule = Module7.new()
 	
@@ -2034,7 +2034,7 @@ TypeRegistryModule.default:register(t.HydrationContent_MediaAssetEntry)
 local Module8 = {}
 Module8.__index = Module8
 
-function Module8.new(p1) --[[ Line: 3831 ]]
+function Module8.new(p1)
 	-- upvalues: Module8 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -2042,7 +2042,7 @@ function Module8.new(p1) --[[ Line: 3831 ]]
 	}, Module8))
 end
 
-function Module8:encode() --[[ Line: 3840 ]]
+function Module8:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -2062,7 +2062,7 @@ function Module8:encode() --[[ Line: 3840 ]]
 	return Buf1
 end
 
-function Module8.decode(Buf) --[[ Line: 3860 ]]
+function Module8.decode(Buf)
 	-- upvalues: Module8 (copy), ProtoModule (copy), SocialLinkDataModule (copy)
 	local NewModule = Module8.new()
 	local v9 = 0
@@ -2099,7 +2099,7 @@ function Module8.decode(Buf) --[[ Line: 3860 ]]
 	return NewModule
 end
 
-function Module8:jsonEncode() --[[ Line: 3908 ]]
+function Module8:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -2111,7 +2111,7 @@ function Module8:jsonEncode() --[[ Line: 3908 ]]
 	return t
 end
 
-function Module8:jsonDecode() --[[ Line: 3922 ]]
+function Module8:jsonDecode()
 	-- upvalues: Module8 (copy), SocialLinkDataModule (copy)
 	local NewModule = Module8.new()
 	
@@ -2133,7 +2133,7 @@ TypeRegistryModule.default:register(t.HydrationContent_SocialLinkEntry)
 local Module9 = {}
 Module9.__index = Module9
 
-function Module9.new(p1) --[[ Line: 3952 ]]
+function Module9.new(p1)
 	-- upvalues: Module9 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -2141,7 +2141,7 @@ function Module9.new(p1) --[[ Line: 3952 ]]
 	}, Module9))
 end
 
-function Module9:encode() --[[ Line: 3961 ]]
+function Module9:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -2161,7 +2161,7 @@ function Module9:encode() --[[ Line: 3961 ]]
 	return Buf1
 end
 
-function Module9.decode(Buf) --[[ Line: 3983 ]]
+function Module9.decode(Buf)
 	-- upvalues: Module9 (copy), ProtoModule (copy), GameDeveloperProductDataModule (copy)
 	local NewModule = Module9.new()
 	local v10 = 0
@@ -2198,7 +2198,7 @@ function Module9.decode(Buf) --[[ Line: 3983 ]]
 	return NewModule
 end
 
-function Module9:jsonEncode() --[[ Line: 4036 ]]
+function Module9:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -2210,7 +2210,7 @@ function Module9:jsonEncode() --[[ Line: 4036 ]]
 	return t
 end
 
-function Module9:jsonDecode() --[[ Line: 4052 ]]
+function Module9:jsonDecode()
 	-- upvalues: Module9 (copy), GameDeveloperProductDataModule (copy)
 	local NewModule = Module9.new()
 	
@@ -2232,7 +2232,7 @@ TypeRegistryModule.default:register(t.HydrationContent_GameDeveloperProductEntry
 local Module10 = {}
 Module10.__index = Module10
 
-function Module10.new(p1) --[[ Line: 4085 ]]
+function Module10.new(p1)
 	-- upvalues: Module10 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -2240,7 +2240,7 @@ function Module10.new(p1) --[[ Line: 4085 ]]
 	}, Module10))
 end
 
-function Module10:encode() --[[ Line: 4094 ]]
+function Module10:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -2260,7 +2260,7 @@ function Module10:encode() --[[ Line: 4094 ]]
 	return Buf1
 end
 
-function Module10.decode(Buf) --[[ Line: 4114 ]]
+function Module10.decode(Buf)
 	-- upvalues: Module10 (copy), ProtoModule (copy), GameSubscriptionDataModule (copy)
 	local NewModule = Module10.new()
 	local v11 = 0
@@ -2297,7 +2297,7 @@ function Module10.decode(Buf) --[[ Line: 4114 ]]
 	return NewModule
 end
 
-function Module10:jsonEncode() --[[ Line: 4163 ]]
+function Module10:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -2309,7 +2309,7 @@ function Module10:jsonEncode() --[[ Line: 4163 ]]
 	return t
 end
 
-function Module10:jsonDecode() --[[ Line: 4177 ]]
+function Module10:jsonDecode()
 	-- upvalues: Module10 (copy), GameSubscriptionDataModule (copy)
 	local NewModule = Module10.new()
 	
@@ -2331,7 +2331,7 @@ TypeRegistryModule.default:register(t.HydrationContent_GameSubscriptionEntry)
 local Module11 = {}
 Module11.__index = Module11
 
-function Module11.new(p1) --[[ Line: 4210 ]]
+function Module11.new(p1)
 	-- upvalues: Module11 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -2339,7 +2339,7 @@ function Module11.new(p1) --[[ Line: 4210 ]]
 	}, Module11))
 end
 
-function Module11:encode() --[[ Line: 4222 ]]
+function Module11:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -2359,7 +2359,7 @@ function Module11:encode() --[[ Line: 4222 ]]
 	return Buf1
 end
 
-function Module11.decode(Buf) --[[ Line: 4244 ]]
+function Module11.decode(Buf)
 	-- upvalues: Module11 (copy), ProtoModule (copy), MarketplaceCatalogCategoryDataModule (copy)
 	local NewModule = Module11.new()
 	local v12 = 0
@@ -2396,7 +2396,7 @@ function Module11.decode(Buf) --[[ Line: 4244 ]]
 	return NewModule
 end
 
-function Module11:jsonEncode() --[[ Line: 4297 ]]
+function Module11:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -2408,7 +2408,7 @@ function Module11:jsonEncode() --[[ Line: 4297 ]]
 	return t
 end
 
-function Module11:jsonDecode() --[[ Line: 4313 ]]
+function Module11:jsonDecode()
 	-- upvalues: Module11 (copy), MarketplaceCatalogCategoryDataModule (copy)
 	local NewModule = Module11.new()
 	
@@ -2430,7 +2430,7 @@ TypeRegistryModule.default:register(t.HydrationContent_MarketplaceCatalogCategor
 local Module12 = {}
 Module12.__index = Module12
 
-function Module12.new(p1) --[[ Line: 4347 ]]
+function Module12.new(p1)
 	-- upvalues: Module12 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -2438,7 +2438,7 @@ function Module12.new(p1) --[[ Line: 4347 ]]
 	}, Module12))
 end
 
-function Module12:encode() --[[ Line: 4356 ]]
+function Module12:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -2458,7 +2458,7 @@ function Module12:encode() --[[ Line: 4356 ]]
 	return Buf1
 end
 
-function Module12.decode(Buf) --[[ Line: 4376 ]]
+function Module12.decode(Buf)
 	-- upvalues: Module12 (copy), ProtoModule (copy), MarketplaceAssetDataModule (copy)
 	local NewModule = Module12.new()
 	local v13 = 0
@@ -2495,7 +2495,7 @@ function Module12.decode(Buf) --[[ Line: 4376 ]]
 	return NewModule
 end
 
-function Module12:jsonEncode() --[[ Line: 4425 ]]
+function Module12:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -2507,7 +2507,7 @@ function Module12:jsonEncode() --[[ Line: 4425 ]]
 	return t
 end
 
-function Module12:jsonDecode() --[[ Line: 4439 ]]
+function Module12:jsonDecode()
 	-- upvalues: Module12 (copy), MarketplaceAssetDataModule (copy)
 	local NewModule = Module12.new()
 	
@@ -2529,7 +2529,7 @@ TypeRegistryModule.default:register(t.HydrationContent_MarketplaceAssetEntry)
 local Module13 = {}
 Module13.__index = Module13
 
-function Module13.new(p1) --[[ Line: 4471 ]]
+function Module13.new(p1)
 	-- upvalues: Module13 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -2537,7 +2537,7 @@ function Module13.new(p1) --[[ Line: 4471 ]]
 	}, Module13))
 end
 
-function Module13:encode() --[[ Line: 4480 ]]
+function Module13:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -2557,7 +2557,7 @@ function Module13:encode() --[[ Line: 4480 ]]
 	return Buf1
 end
 
-function Module13.decode(Buf) --[[ Line: 4500 ]]
+function Module13.decode(Buf)
 	-- upvalues: Module13 (copy), ProtoModule (copy), MarketplaceBundleDataModule (copy)
 	local NewModule = Module13.new()
 	local v14 = 0
@@ -2594,7 +2594,7 @@ function Module13.decode(Buf) --[[ Line: 4500 ]]
 	return NewModule
 end
 
-function Module13:jsonEncode() --[[ Line: 4551 ]]
+function Module13:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -2606,7 +2606,7 @@ function Module13:jsonEncode() --[[ Line: 4551 ]]
 	return t
 end
 
-function Module13:jsonDecode() --[[ Line: 4565 ]]
+function Module13:jsonDecode()
 	-- upvalues: Module13 (copy), MarketplaceBundleDataModule (copy)
 	local NewModule = Module13.new()
 	
@@ -2628,7 +2628,7 @@ TypeRegistryModule.default:register(t.HydrationContent_MarketplaceBundleEntry)
 local Module14 = {}
 Module14.__index = Module14
 
-function Module14.new(p1) --[[ Line: 4598 ]]
+function Module14.new(p1)
 	-- upvalues: Module14 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -2636,7 +2636,7 @@ function Module14.new(p1) --[[ Line: 4598 ]]
 	}, Module14))
 end
 
-function Module14:encode() --[[ Line: 4607 ]]
+function Module14:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -2656,7 +2656,7 @@ function Module14:encode() --[[ Line: 4607 ]]
 	return Buf1
 end
 
-function Module14.decode(Buf) --[[ Line: 4627 ]]
+function Module14.decode(Buf)
 	-- upvalues: Module14 (copy), ProtoModule (copy), MarketplaceLookDataModule (copy)
 	local NewModule = Module14.new()
 	local v15 = 0
@@ -2693,7 +2693,7 @@ function Module14.decode(Buf) --[[ Line: 4627 ]]
 	return NewModule
 end
 
-function Module14:jsonEncode() --[[ Line: 4676 ]]
+function Module14:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -2705,7 +2705,7 @@ function Module14:jsonEncode() --[[ Line: 4676 ]]
 	return t
 end
 
-function Module14:jsonDecode() --[[ Line: 4690 ]]
+function Module14:jsonDecode()
 	-- upvalues: Module14 (copy), MarketplaceLookDataModule (copy)
 	local NewModule = Module14.new()
 	
@@ -2727,7 +2727,7 @@ TypeRegistryModule.default:register(t.HydrationContent_MarketplaceLookEntry)
 local Module15 = {}
 Module15.__index = Module15
 
-function Module15.new(p1) --[[ Line: 4721 ]]
+function Module15.new(p1)
 	-- upvalues: Module15 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -2735,7 +2735,7 @@ function Module15.new(p1) --[[ Line: 4721 ]]
 	}, Module15))
 end
 
-function Module15:encode() --[[ Line: 4730 ]]
+function Module15:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -2755,7 +2755,7 @@ function Module15:encode() --[[ Line: 4730 ]]
 	return Buf1
 end
 
-function Module15.decode(Buf) --[[ Line: 4750 ]]
+function Module15.decode(Buf)
 	-- upvalues: Module15 (copy), ProtoModule (copy), CatalogSortDataModule (copy)
 	local NewModule = Module15.new()
 	local v16 = 0
@@ -2792,7 +2792,7 @@ function Module15.decode(Buf) --[[ Line: 4750 ]]
 	return NewModule
 end
 
-function Module15:jsonEncode() --[[ Line: 4798 ]]
+function Module15:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -2804,7 +2804,7 @@ function Module15:jsonEncode() --[[ Line: 4798 ]]
 	return t
 end
 
-function Module15:jsonDecode() --[[ Line: 4812 ]]
+function Module15:jsonDecode()
 	-- upvalues: Module15 (copy), CatalogSortDataModule (copy)
 	local NewModule = Module15.new()
 	
@@ -2826,7 +2826,7 @@ TypeRegistryModule.default:register(t.HydrationContent_CatalogSortEntry)
 local Module16 = {}
 Module16.__index = Module16
 
-function Module16.new(p1) --[[ Line: 4843 ]]
+function Module16.new(p1)
 	-- upvalues: Module16 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -2834,7 +2834,7 @@ function Module16.new(p1) --[[ Line: 4843 ]]
 	}, Module16))
 end
 
-function Module16:encode() --[[ Line: 4852 ]]
+function Module16:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -2854,7 +2854,7 @@ function Module16:encode() --[[ Line: 4852 ]]
 	return Buf1
 end
 
-function Module16.decode(Buf) --[[ Line: 4872 ]]
+function Module16.decode(Buf)
 	-- upvalues: Module16 (copy), ProtoModule (copy), AgeRecommendationDataModule (copy)
 	local NewModule = Module16.new()
 	local v17 = 0
@@ -2891,7 +2891,7 @@ function Module16.decode(Buf) --[[ Line: 4872 ]]
 	return NewModule
 end
 
-function Module16:jsonEncode() --[[ Line: 4923 ]]
+function Module16:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -2903,7 +2903,7 @@ function Module16:jsonEncode() --[[ Line: 4923 ]]
 	return t
 end
 
-function Module16:jsonDecode() --[[ Line: 4937 ]]
+function Module16:jsonDecode()
 	-- upvalues: Module16 (copy), AgeRecommendationDataModule (copy)
 	local NewModule = Module16.new()
 	
@@ -2925,7 +2925,7 @@ TypeRegistryModule.default:register(t.HydrationContent_AgeRecommendationEntry)
 local Module17 = {}
 Module17.__index = Module17
 
-function Module17.new(p1) --[[ Line: 4970 ]]
+function Module17.new(p1)
 	-- upvalues: Module17 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -2933,7 +2933,7 @@ function Module17.new(p1) --[[ Line: 4970 ]]
 	}, Module17))
 end
 
-function Module17:encode() --[[ Line: 4979 ]]
+function Module17:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -2953,7 +2953,7 @@ function Module17:encode() --[[ Line: 4979 ]]
 	return Buf1
 end
 
-function Module17.decode(Buf) --[[ Line: 5001 ]]
+function Module17.decode(Buf)
 	-- upvalues: Module17 (copy), ProtoModule (copy), UniverseUserFollowDataModule (copy)
 	local NewModule = Module17.new()
 	local v18 = 0
@@ -2990,7 +2990,7 @@ function Module17.decode(Buf) --[[ Line: 5001 ]]
 	return NewModule
 end
 
-function Module17:jsonEncode() --[[ Line: 5054 ]]
+function Module17:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -3002,7 +3002,7 @@ function Module17:jsonEncode() --[[ Line: 5054 ]]
 	return t
 end
 
-function Module17:jsonDecode() --[[ Line: 5070 ]]
+function Module17:jsonDecode()
 	-- upvalues: Module17 (copy), UniverseUserFollowDataModule (copy)
 	local NewModule = Module17.new()
 	
@@ -3024,7 +3024,7 @@ TypeRegistryModule.default:register(t.HydrationContent_UniverseUserFollowEntry)
 local Module18 = {}
 Module18.__index = Module18
 
-function Module18.new(p1) --[[ Line: 5103 ]]
+function Module18.new(p1)
 	-- upvalues: Module18 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -3032,7 +3032,7 @@ function Module18.new(p1) --[[ Line: 5103 ]]
 	}, Module18))
 end
 
-function Module18:encode() --[[ Line: 5112 ]]
+function Module18:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -3052,7 +3052,7 @@ function Module18:encode() --[[ Line: 5112 ]]
 	return Buf1
 end
 
-function Module18.decode(Buf) --[[ Line: 5132 ]]
+function Module18.decode(Buf)
 	-- upvalues: Module18 (copy), ProtoModule (copy), UniverseUserVoteDataModule (copy)
 	local NewModule = Module18.new()
 	local v19 = 0
@@ -3089,7 +3089,7 @@ function Module18.decode(Buf) --[[ Line: 5132 ]]
 	return NewModule
 end
 
-function Module18:jsonEncode() --[[ Line: 5183 ]]
+function Module18:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -3101,7 +3101,7 @@ function Module18:jsonEncode() --[[ Line: 5183 ]]
 	return t
 end
 
-function Module18:jsonDecode() --[[ Line: 5197 ]]
+function Module18:jsonDecode()
 	-- upvalues: Module18 (copy), UniverseUserVoteDataModule (copy)
 	local NewModule = Module18.new()
 	
@@ -3123,7 +3123,7 @@ TypeRegistryModule.default:register(t.HydrationContent_UniverseUserVoteEntry)
 local Module19 = {}
 Module19.__index = Module19
 
-function Module19.new(p1) --[[ Line: 5229 ]]
+function Module19.new(p1)
 	-- upvalues: Module19 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -3131,7 +3131,7 @@ function Module19.new(p1) --[[ Line: 5229 ]]
 	}, Module19))
 end
 
-function Module19:encode() --[[ Line: 5238 ]]
+function Module19:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -3151,7 +3151,7 @@ function Module19:encode() --[[ Line: 5238 ]]
 	return Buf1
 end
 
-function Module19.decode(Buf) --[[ Line: 5258 ]]
+function Module19.decode(Buf)
 	-- upvalues: Module19 (copy), ProtoModule (copy), UserProfileDataModule (copy)
 	local NewModule = Module19.new()
 	local v20 = 0
@@ -3188,7 +3188,7 @@ function Module19.decode(Buf) --[[ Line: 5258 ]]
 	return NewModule
 end
 
-function Module19:jsonEncode() --[[ Line: 5306 ]]
+function Module19:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -3200,7 +3200,7 @@ function Module19:jsonEncode() --[[ Line: 5306 ]]
 	return t
 end
 
-function Module19:jsonDecode() --[[ Line: 5320 ]]
+function Module19:jsonDecode()
 	-- upvalues: Module19 (copy), UserProfileDataModule (copy)
 	local NewModule = Module19.new()
 	
@@ -3222,7 +3222,7 @@ TypeRegistryModule.default:register(t.HydrationContent_UserProfileEntry)
 local Module20 = {}
 Module20.__index = Module20
 
-function Module20.new(p1) --[[ Line: 5351 ]]
+function Module20.new(p1)
 	-- upvalues: Module20 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -3230,7 +3230,7 @@ function Module20.new(p1) --[[ Line: 5351 ]]
 	}, Module20))
 end
 
-function Module20:encode() --[[ Line: 5360 ]]
+function Module20:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -3250,7 +3250,7 @@ function Module20:encode() --[[ Line: 5360 ]]
 	return Buf1
 end
 
-function Module20.decode(Buf) --[[ Line: 5382 ]]
+function Module20.decode(Buf)
 	-- upvalues: Module20 (copy), ProtoModule (copy), UniverseUserFavoriteDataModule (copy)
 	local NewModule = Module20.new()
 	local v21 = 0
@@ -3287,7 +3287,7 @@ function Module20.decode(Buf) --[[ Line: 5382 ]]
 	return NewModule
 end
 
-function Module20:jsonEncode() --[[ Line: 5435 ]]
+function Module20:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -3299,7 +3299,7 @@ function Module20:jsonEncode() --[[ Line: 5435 ]]
 	return t
 end
 
-function Module20:jsonDecode() --[[ Line: 5451 ]]
+function Module20:jsonDecode()
 	-- upvalues: Module20 (copy), UniverseUserFavoriteDataModule (copy)
 	local NewModule = Module20.new()
 	
@@ -3321,7 +3321,7 @@ TypeRegistryModule.default:register(t.HydrationContent_UniverseUserFavoriteEntry
 local Module21 = {}
 Module21.__index = Module21
 
-function Module21.new(p1) --[[ Line: 5484 ]]
+function Module21.new(p1)
 	-- upvalues: Module21 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -3329,7 +3329,7 @@ function Module21.new(p1) --[[ Line: 5484 ]]
 	}, Module21))
 end
 
-function Module21:encode() --[[ Line: 5493 ]]
+function Module21:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -3349,7 +3349,7 @@ function Module21:encode() --[[ Line: 5493 ]]
 	return Buf1
 end
 
-function Module21.decode(Buf) --[[ Line: 5513 ]]
+function Module21.decode(Buf)
 	-- upvalues: Module21 (copy), ProtoModule (copy), PlayabilityDataModule (copy)
 	local NewModule = Module21.new()
 	local v22 = 0
@@ -3386,7 +3386,7 @@ function Module21.decode(Buf) --[[ Line: 5513 ]]
 	return NewModule
 end
 
-function Module21:jsonEncode() --[[ Line: 5561 ]]
+function Module21:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -3398,7 +3398,7 @@ function Module21:jsonEncode() --[[ Line: 5561 ]]
 	return t
 end
 
-function Module21:jsonDecode() --[[ Line: 5575 ]]
+function Module21:jsonDecode()
 	-- upvalues: Module21 (copy), PlayabilityDataModule (copy)
 	local NewModule = Module21.new()
 	
@@ -3420,7 +3420,7 @@ TypeRegistryModule.default:register(t.HydrationContent_PlayabilityEntry)
 local Module22 = {}
 Module22.__index = Module22
 
-function Module22.new(p1) --[[ Line: 5605 ]]
+function Module22.new(p1)
 	-- upvalues: Module22 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -3428,7 +3428,7 @@ function Module22.new(p1) --[[ Line: 5605 ]]
 	}, Module22))
 end
 
-function Module22:encode() --[[ Line: 5614 ]]
+function Module22:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -3448,7 +3448,7 @@ function Module22:encode() --[[ Line: 5614 ]]
 	return Buf1
 end
 
-function Module22.decode(Buf) --[[ Line: 5636 ]]
+function Module22.decode(Buf)
 	-- upvalues: Module22 (copy), ProtoModule (copy), UniverseUserFollowLimitDataModule (copy)
 	local NewModule = Module22.new()
 	local v23 = 0
@@ -3485,7 +3485,7 @@ function Module22.decode(Buf) --[[ Line: 5636 ]]
 	return NewModule
 end
 
-function Module22:jsonEncode() --[[ Line: 5689 ]]
+function Module22:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -3497,7 +3497,7 @@ function Module22:jsonEncode() --[[ Line: 5689 ]]
 	return t
 end
 
-function Module22:jsonDecode() --[[ Line: 5705 ]]
+function Module22:jsonDecode()
 	-- upvalues: Module22 (copy), UniverseUserFollowLimitDataModule (copy)
 	local NewModule = Module22.new()
 	
@@ -3519,7 +3519,7 @@ TypeRegistryModule.default:register(t.HydrationContent_UniverseUserFollowLimitEn
 local Module23 = {}
 Module23.__index = Module23
 
-function Module23.new(p1) --[[ Line: 5739 ]]
+function Module23.new(p1)
 	-- upvalues: Module23 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -3527,7 +3527,7 @@ function Module23.new(p1) --[[ Line: 5739 ]]
 	}, Module23))
 end
 
-function Module23:encode() --[[ Line: 5751 ]]
+function Module23:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -3547,7 +3547,7 @@ function Module23:encode() --[[ Line: 5751 ]]
 	return Buf1
 end
 
-function Module23.decode(Buf) --[[ Line: 5773 ]]
+function Module23.decode(Buf)
 	-- upvalues: Module23 (copy), ProtoModule (copy), UniverseUserVoteFeedbackMetadataDataModule (copy)
 	local NewModule = Module23.new()
 	local v24 = 0
@@ -3584,7 +3584,7 @@ function Module23.decode(Buf) --[[ Line: 5773 ]]
 	return NewModule
 end
 
-function Module23:jsonEncode() --[[ Line: 5826 ]]
+function Module23:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -3596,7 +3596,7 @@ function Module23:jsonEncode() --[[ Line: 5826 ]]
 	return t
 end
 
-function Module23:jsonDecode() --[[ Line: 5842 ]]
+function Module23:jsonDecode()
 	-- upvalues: Module23 (copy), UniverseUserVoteFeedbackMetadataDataModule (copy)
 	local NewModule = Module23.new()
 	
@@ -3618,7 +3618,7 @@ TypeRegistryModule.default:register(t.HydrationContent_UniverseUserVoteFeedbackM
 local Module24 = {}
 Module24.__index = Module24
 
-function Module24.new(p1) --[[ Line: 5876 ]]
+function Module24.new(p1)
 	-- upvalues: Module24 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -3626,7 +3626,7 @@ function Module24.new(p1) --[[ Line: 5876 ]]
 	}, Module24))
 end
 
-function Module24:encode() --[[ Line: 5885 ]]
+function Module24:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -3646,7 +3646,7 @@ function Module24:encode() --[[ Line: 5885 ]]
 	return Buf1
 end
 
-function Module24.decode(Buf) --[[ Line: 5905 ]]
+function Module24.decode(Buf)
 	-- upvalues: Module24 (copy), ProtoModule (copy), MomentDataModule (copy)
 	local NewModule = Module24.new()
 	local v25 = 0
@@ -3683,7 +3683,7 @@ function Module24.decode(Buf) --[[ Line: 5905 ]]
 	return NewModule
 end
 
-function Module24:jsonEncode() --[[ Line: 5953 ]]
+function Module24:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -3695,7 +3695,7 @@ function Module24:jsonEncode() --[[ Line: 5953 ]]
 	return t
 end
 
-function Module24:jsonDecode() --[[ Line: 5967 ]]
+function Module24:jsonDecode()
 	-- upvalues: Module24 (copy), MomentDataModule (copy)
 	local NewModule = Module24.new()
 	
@@ -3717,7 +3717,7 @@ TypeRegistryModule.default:register(t.HydrationContent_MomentEntry)
 local Module25 = {}
 Module25.__index = Module25
 
-function Module25.new(p1) --[[ Line: 5995 ]]
+function Module25.new(p1)
 	-- upvalues: Module25 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -3725,7 +3725,7 @@ function Module25.new(p1) --[[ Line: 5995 ]]
 	}, Module25))
 end
 
-function Module25:encode() --[[ Line: 6004 ]]
+function Module25:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -3745,7 +3745,7 @@ function Module25:encode() --[[ Line: 6004 ]]
 	return Buf1
 end
 
-function Module25.decode(Buf) --[[ Line: 6024 ]]
+function Module25.decode(Buf)
 	-- upvalues: Module25 (copy), ProtoModule (copy), CommunityDataModule (copy)
 	local NewModule = Module25.new()
 	local v26 = 0
@@ -3782,7 +3782,7 @@ function Module25.decode(Buf) --[[ Line: 6024 ]]
 	return NewModule
 end
 
-function Module25:jsonEncode() --[[ Line: 6072 ]]
+function Module25:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -3794,7 +3794,7 @@ function Module25:jsonEncode() --[[ Line: 6072 ]]
 	return t
 end
 
-function Module25:jsonDecode() --[[ Line: 6086 ]]
+function Module25:jsonDecode()
 	-- upvalues: Module25 (copy), CommunityDataModule (copy)
 	local NewModule = Module25.new()
 	
@@ -3816,7 +3816,7 @@ TypeRegistryModule.default:register(t.HydrationContent_CommunityEntry)
 local Module26 = {}
 Module26.__index = Module26
 
-function Module26.new(p1) --[[ Line: 6114 ]]
+function Module26.new(p1)
 	-- upvalues: Module26 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -3824,7 +3824,7 @@ function Module26.new(p1) --[[ Line: 6114 ]]
 	}, Module26))
 end
 
-function Module26:encode() --[[ Line: 6123 ]]
+function Module26:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -3844,7 +3844,7 @@ function Module26:encode() --[[ Line: 6123 ]]
 	return Buf1
 end
 
-function Module26.decode(Buf) --[[ Line: 6145 ]]
+function Module26.decode(Buf)
 	-- upvalues: Module26 (copy), ProtoModule (copy), CommunityUserMembershipDataModule (copy)
 	local NewModule = Module26.new()
 	local v27 = 0
@@ -3881,7 +3881,7 @@ function Module26.decode(Buf) --[[ Line: 6145 ]]
 	return NewModule
 end
 
-function Module26:jsonEncode() --[[ Line: 6198 ]]
+function Module26:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -3893,7 +3893,7 @@ function Module26:jsonEncode() --[[ Line: 6198 ]]
 	return t
 end
 
-function Module26:jsonDecode() --[[ Line: 6214 ]]
+function Module26:jsonDecode()
 	-- upvalues: Module26 (copy), CommunityUserMembershipDataModule (copy)
 	local NewModule = Module26.new()
 	
@@ -3915,7 +3915,7 @@ TypeRegistryModule.default:register(t.HydrationContent_CommunityUserMembershipEn
 local Module27 = {}
 Module27.__index = Module27
 
-function Module27.new(p1) --[[ Line: 6247 ]]
+function Module27.new(p1)
 	-- upvalues: Module27 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -3923,7 +3923,7 @@ function Module27.new(p1) --[[ Line: 6247 ]]
 	}, Module27))
 end
 
-function Module27:encode() --[[ Line: 6256 ]]
+function Module27:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -3943,7 +3943,7 @@ function Module27:encode() --[[ Line: 6256 ]]
 	return Buf1
 end
 
-function Module27.decode(Buf) --[[ Line: 6278 ]]
+function Module27.decode(Buf)
 	-- upvalues: Module27 (copy), ProtoModule (copy), FriendRecommendationDataModule (copy)
 	local NewModule = Module27.new()
 	local v28 = 0
@@ -3980,7 +3980,7 @@ function Module27.decode(Buf) --[[ Line: 6278 ]]
 	return NewModule
 end
 
-function Module27:jsonEncode() --[[ Line: 6331 ]]
+function Module27:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -3992,7 +3992,7 @@ function Module27:jsonEncode() --[[ Line: 6331 ]]
 	return t
 end
 
-function Module27:jsonDecode() --[[ Line: 6347 ]]
+function Module27:jsonDecode()
 	-- upvalues: Module27 (copy), FriendRecommendationDataModule (copy)
 	local NewModule = Module27.new()
 	
@@ -4014,7 +4014,7 @@ TypeRegistryModule.default:register(t.HydrationContent_FriendRecommendationEntry
 local Module28 = {}
 Module28.__index = Module28
 
-function Module28.new(p1) --[[ Line: 6380 ]]
+function Module28.new(p1)
 	-- upvalues: Module28 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -4022,7 +4022,7 @@ function Module28.new(p1) --[[ Line: 6380 ]]
 	}, Module28))
 end
 
-function Module28:encode() --[[ Line: 6389 ]]
+function Module28:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -4042,7 +4042,7 @@ function Module28:encode() --[[ Line: 6389 ]]
 	return Buf1
 end
 
-function Module28.decode(Buf) --[[ Line: 6411 ]]
+function Module28.decode(Buf)
 	-- upvalues: Module28 (copy), ProtoModule (copy), UniversePrivateServerDataModule (copy)
 	local NewModule = Module28.new()
 	local v29 = 0
@@ -4079,7 +4079,7 @@ function Module28.decode(Buf) --[[ Line: 6411 ]]
 	return NewModule
 end
 
-function Module28:jsonEncode() --[[ Line: 6464 ]]
+function Module28:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -4091,7 +4091,7 @@ function Module28:jsonEncode() --[[ Line: 6464 ]]
 	return t
 end
 
-function Module28:jsonDecode() --[[ Line: 6480 ]]
+function Module28:jsonDecode()
 	-- upvalues: Module28 (copy), UniversePrivateServerDataModule (copy)
 	local NewModule = Module28.new()
 	
@@ -4113,7 +4113,7 @@ TypeRegistryModule.default:register(t.HydrationContent_UniversePrivateServerEntr
 local Module29 = {}
 Module29.__index = Module29
 
-function Module29.new(p1) --[[ Line: 6513 ]]
+function Module29.new(p1)
 	-- upvalues: Module29 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -4121,7 +4121,7 @@ function Module29.new(p1) --[[ Line: 6513 ]]
 	}, Module29))
 end
 
-function Module29:encode() --[[ Line: 6522 ]]
+function Module29:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -4141,7 +4141,7 @@ function Module29:encode() --[[ Line: 6522 ]]
 	return Buf1
 end
 
-function Module29.decode(Buf) --[[ Line: 6542 ]]
+function Module29.decode(Buf)
 	-- upvalues: Module29 (copy), ProtoModule (copy), NotificationBadgeDataModule (copy)
 	local NewModule = Module29.new()
 	local v30 = 0
@@ -4178,7 +4178,7 @@ function Module29.decode(Buf) --[[ Line: 6542 ]]
 	return NewModule
 end
 
-function Module29:jsonEncode() --[[ Line: 6593 ]]
+function Module29:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -4190,7 +4190,7 @@ function Module29:jsonEncode() --[[ Line: 6593 ]]
 	return t
 end
 
-function Module29:jsonDecode() --[[ Line: 6607 ]]
+function Module29:jsonDecode()
 	-- upvalues: Module29 (copy), NotificationBadgeDataModule (copy)
 	local NewModule = Module29.new()
 	
@@ -4212,7 +4212,7 @@ TypeRegistryModule.default:register(t.HydrationContent_NotificationBadgeEntry)
 local Module30 = {}
 Module30.__index = Module30
 
-function Module30.new(p1) --[[ Line: 6640 ]]
+function Module30.new(p1)
 	-- upvalues: Module30 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -4220,7 +4220,7 @@ function Module30.new(p1) --[[ Line: 6640 ]]
 	}, Module30))
 end
 
-function Module30:encode() --[[ Line: 6649 ]]
+function Module30:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -4240,7 +4240,7 @@ function Module30:encode() --[[ Line: 6649 ]]
 	return Buf1
 end
 
-function Module30.decode(Buf) --[[ Line: 6669 ]]
+function Module30.decode(Buf)
 	-- upvalues: Module30 (copy), ProtoModule (copy), CollectibleItemDataModule (copy)
 	local NewModule = Module30.new()
 	local v31 = 0
@@ -4277,7 +4277,7 @@ function Module30.decode(Buf) --[[ Line: 6669 ]]
 	return NewModule
 end
 
-function Module30:jsonEncode() --[[ Line: 6718 ]]
+function Module30:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -4289,7 +4289,7 @@ function Module30:jsonEncode() --[[ Line: 6718 ]]
 	return t
 end
 
-function Module30:jsonDecode() --[[ Line: 6732 ]]
+function Module30:jsonDecode()
 	-- upvalues: Module30 (copy), CollectibleItemDataModule (copy)
 	local NewModule = Module30.new()
 	
@@ -4311,7 +4311,7 @@ TypeRegistryModule.default:register(t.HydrationContent_CollectibleItemEntry)
 local Module31 = {}
 Module31.__index = Module31
 
-function Module31.new(p1) --[[ Line: 6763 ]]
+function Module31.new(p1)
 	-- upvalues: Module31 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -4319,7 +4319,7 @@ function Module31.new(p1) --[[ Line: 6763 ]]
 	}, Module31))
 end
 
-function Module31:encode() --[[ Line: 6772 ]]
+function Module31:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -4339,7 +4339,7 @@ function Module31:encode() --[[ Line: 6772 ]]
 	return Buf1
 end
 
-function Module31.decode(Buf) --[[ Line: 6792 ]]
+function Module31.decode(Buf)
 	-- upvalues: Module31 (copy), ProtoModule (copy), LeaderboardStatsDataModule (copy)
 	local NewModule = Module31.new()
 	local v32 = 0
@@ -4376,7 +4376,7 @@ function Module31.decode(Buf) --[[ Line: 6792 ]]
 	return NewModule
 end
 
-function Module31:jsonEncode() --[[ Line: 6841 ]]
+function Module31:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -4388,7 +4388,7 @@ function Module31:jsonEncode() --[[ Line: 6841 ]]
 	return t
 end
 
-function Module31:jsonDecode() --[[ Line: 6855 ]]
+function Module31:jsonDecode()
 	-- upvalues: Module31 (copy), LeaderboardStatsDataModule (copy)
 	local NewModule = Module31.new()
 	

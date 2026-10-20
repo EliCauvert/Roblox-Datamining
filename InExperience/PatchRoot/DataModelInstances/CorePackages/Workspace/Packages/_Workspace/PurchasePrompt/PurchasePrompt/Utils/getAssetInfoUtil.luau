@@ -3,11 +3,11 @@ local IsCreatorStoreAssetTypeModule = require(Parent.Utils.isCreatorStoreAssetTy
 local _ = require(Parent.Promise)
 
 return {
-	isAssetValid = function(p1) --[[ Line: 17 ]]
+	isAssetValid = function(p1)
 		-- upvalues: IsCreatorStoreAssetTypeModule (copy)
 		return not IsCreatorStoreAssetTypeModule(p1.type) or p1.id and p1.type and p1.typeId and p1.creator
 	end,
-	fromAsset = function(p1) --[[ Line: 29 ]]
+	fromAsset = function(p1)
 		return {
 			id = p1.id,
 			type = p1.type,

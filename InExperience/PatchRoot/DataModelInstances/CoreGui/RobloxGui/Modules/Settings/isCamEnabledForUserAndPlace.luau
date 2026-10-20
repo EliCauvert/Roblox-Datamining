@@ -19,12 +19,12 @@ local DebugAlwaysShowDisableCameraToast = game:DefineFastFlag("DebugAlwaysShowDi
 local OnlyShowToastOnceInLifetime2 = game:DefineFastFlag("OnlyShowToastOnceInLifetime2", false)
 local DisableCameraToastShownStorageKeyEngineFeature = game:GetEngineFeature("DisableCameraToastShownStorageKey")
 
-local function ShouldCheckDeviceSpecs() --[[ Line: 28 ]]
+local function ShouldCheckDeviceSpecs()
 	-- upvalues: DisableCameraOnLowSpecDevices2 (copy), IXPService (copy), DisableCameraOnLowSpecDevicesIXPLayer (copy), DisableCameraOnLowSpecDevicesIXPField (copy)
 	if not DisableCameraOnLowSpecDevices2 then
 		return false
 	end
-	local Success, Result = pcall(function() --[[ Line: 31 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: IXPService (upval), DisableCameraOnLowSpecDevicesIXPLayer (upval)
 		return IXPService:GetUserLayerVariables(DisableCameraOnLowSpecDevicesIXPLayer)
 	end)
@@ -38,7 +38,7 @@ local function ShouldCheckDeviceSpecs() --[[ Line: 28 ]]
 	end
 end
 
-return function(): boolean --[[ Line: 46 ]]
+return function(): boolean
 	-- upvalues: GetFFlagAvatarChatServiceEnabledFunction (copy), AvatarChatService (copy), DisableCameraOnLowSpecDevices2 (copy), ShouldCheckDeviceSpecs (copy), OnlyShowToastOnceInLifetime2 (copy), DisableCameraToastShownStorageKeyEngineFeature (copy), AppStorageService (copy), DebugAlwaysShowDisableCameraToast (copy), TrackerMenuModule (copy), TrackerPromptTypeModule (copy), OnlyShowToastOnce2 (copy), MemStorageService (copy), GetFFlagUseCameraDevicesListenerModule (copy), CameraDevicesHelperModule (copy), VideoCaptureService (copy), CryoModule (copy)
 	if not GetFFlagAvatarChatServiceEnabledFunction() or _G.__TESTEZ_RUNNING_TEST__ then
 		return false
@@ -60,14 +60,14 @@ return function(): boolean --[[ Line: 46 ]]
 		return IsEnabled and (IsEnabled2 and (IsEnabled1 and Inverted))
 	end
 	if OnlyShowToastOnceInLifetime2 and DisableCameraToastShownStorageKeyEngineFeature then
-		local Success1, Result1 = pcall(function() --[[ Line: 68 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: AppStorageService (upval)
 			return AppStorageService:GetItem("DisableCameraToastShown")
 		end)
 		
 		if not Success1 or (not (Result1 == "true") or DebugAlwaysShowDisableCameraToast) then
 			TrackerMenuModule:showPrompt(TrackerPromptTypeModule.CameraUnavailable)
-			pcall(function() --[[ Line: 77 ]]
+			pcall(function()
 				-- upvalues: AppStorageService (upval)
 				AppStorageService:SetItem("DisableCameraToastShown", "true")
 				AppStorageService:Flush()

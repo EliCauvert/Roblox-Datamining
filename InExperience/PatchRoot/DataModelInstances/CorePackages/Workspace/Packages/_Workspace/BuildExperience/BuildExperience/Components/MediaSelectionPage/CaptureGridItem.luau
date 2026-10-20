@@ -7,14 +7,14 @@ local Checkbox = FoundationModule.Checkbox
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function _(p1) --[[ Line: 23 | Named "getCaptureContent" ]]
+local function _(p1)
 	return if typeof(p1) == "Object" then Content.fromObject(p1) else Content.none
 end
 
-local function CaptureGridItem(Frame) --[[ Line: 30 ]]
+local function CaptureGridItem(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FFlagBuildExperienceChatImageAttachmentsModule (copy), View (copy), FoundationModule (copy), Checkbox (copy)
 	local UseTokensResult = UseTokensFunction()
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 33 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: Frame (copy)
 		Frame.onActivated(Frame.capture)
 	end, { Frame.capture, Frame.onActivated })
@@ -47,7 +47,7 @@ local function CaptureGridItem(Frame) --[[ Line: 30 ]]
 					isChecked = true,
 					label = "",
 					AnchorPoint = Vector2.new(1, 0),
-					onActivated = function() --[[ Line: 67 ]]
+					onActivated = function()
 						-- upvalues: UseResult (copy)
 						UseResult()
 					end,
@@ -90,7 +90,7 @@ local function CaptureGridItem(Frame) --[[ Line: 30 ]]
 				isChecked = true,
 				label = "",
 				AnchorPoint = Vector2.new(1, 0),
-				onActivated = function() --[[ Line: 114 ]]
+				onActivated = function()
 					-- upvalues: UseResult (copy)
 					UseResult()
 				end,

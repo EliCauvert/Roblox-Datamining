@@ -1,4 +1,4 @@
-﻿local function valuesEqual(Key, Key1, Keys): boolean --[[ Line: 12 ]]
+﻿local function valuesEqual(Key, Key1, Keys): boolean
 	-- upvalues: valuesEqual (copy)
 	if Key == Key1 then
 		return true
@@ -26,7 +26,7 @@
 	return true
 end
 
-local function itemContentsEqual(List, List1): boolean --[[ Line: 39 ]]
+local function itemContentsEqual(List, List1): boolean
 	-- upvalues: valuesEqual (copy)
 	for i, value in List do
 		if i ~= "position" and not valuesEqual(value, List1[i]) then
@@ -42,7 +42,7 @@ local function itemContentsEqual(List, List1): boolean --[[ Line: 39 ]]
 end
 
 return {
-	build = function(p1, p2) --[[ Line: 61 ]]
+	build = function(p1, p2)
 		-- upvalues: itemContentsEqual (copy)
 		local T = if p2 == nil then {} else p2.items
 		local T1 = if p2 == nil then {} else p2.byKey
@@ -67,7 +67,7 @@ return {
 		end
 		return if p2 == nil or v1 or #Buffer ~= #T then { items = Buffer, byKey = ByKey } else p2
 	end,
-	getKey = function(p3) --[[ Line: 8 ]]
+	getKey = function(p3)
 		return p3.stable_key
 	end
 }

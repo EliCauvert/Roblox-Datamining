@@ -5,12 +5,12 @@ local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
 	base = require(Parent.Http).Url.NOTIFICATION_URL
 })
 
-return function(Callback) --[[ Line: 13 ]]
+return function(Callback)
 	-- upvalues: NewResult (copy), PromiseModule (copy)
-	return Callback(NewResult(), "POST", { postBody = "{}" }):andThen(function(Result) --[[ Line: 16 ]]
+	return Callback(NewResult(), "POST", { postBody = "{}" }):andThen(function(Result)
 		-- upvalues: PromiseModule (upval)
 		return if Result.responseCode == 200 then PromiseModule.resolve() else PromiseModule.reject()
-	end, function(p1) --[[ Line: 22 ]]
+	end, function(p1)
 		-- upvalues: PromiseModule (upval)
 		return PromiseModule.reject(p1)
 	end)

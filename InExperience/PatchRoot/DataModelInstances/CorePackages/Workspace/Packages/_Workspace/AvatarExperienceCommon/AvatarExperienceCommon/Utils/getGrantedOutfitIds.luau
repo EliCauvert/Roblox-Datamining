@@ -3,7 +3,7 @@ local OutfitTypesModule = require(AvatarExperienceCommon.Enums.OutfitTypes)
 local _ = require(AvatarExperienceCommon.Types.CategoryTypes.CategoryTypes)
 local NONEDITABLEMAKEUPGRANTKEY = require(AvatarExperienceCommon.Constants).NON_EDITABLE_MAKEUP_GRANT_KEY
 
-return function(p1, Avatar, p2) --[[ Line: 33 | Named "getGrantedOutfitIds" ]]
+return function(p1, Avatar, p2)
 	-- upvalues: OutfitTypesModule (copy), NONEDITABLEMAKEUPGRANTKEY (copy)
 	if not p1 then
 		return {}

@@ -3,12 +3,12 @@ local ConstantsModule = require(AbuseReportMenu.Components.Constants)
 local TnSIXPWrapperModule = require(AbuseReportMenu.IXP.TnSIXPWrapper)
 local Default = require(game:GetService("CoreGui").RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
 
-local function _(Player): boolean --[[ Line: 11 ]]
+local function _(Player): boolean
 	-- upvalues: Default (copy)
 	return Default:getRecentUsersInteractionData()[tostring(Player.UserId)] ~= nil
 end
 
-function handlePreselectedPlayer(Player: Player, p1, Callback: (any) -> (), Callback1: (any) -> ()) --[[ Line: 16 ]]
+function handlePreselectedPlayer(Player: Player, p1, Callback: (any) -> (), Callback1: (any) -> ())
 	-- upvalues: Default (copy), ConstantsModule (copy), TnSIXPWrapperModule (copy)
 	if p1 and Default:getRecentUsersInteractionData()[tostring(Player.UserId)] ~= nil then
 		Callback({

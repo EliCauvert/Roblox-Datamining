@@ -2,7 +2,7 @@
 local AnswerFormViewModule = require(script.Parent.AnswerFormView)
 local UseAnswerFormViewModelModule = require(script.Parent.useAnswerFormViewModel)
 
-return function(p1) --[[ Line: 10 | Named "AnswerFormContainer" ]]
+return function(p1)
 	-- upvalues: UseAnswerFormViewModelModule (copy), ReactModule (copy), AnswerFormViewModule (copy)
 	local UseAnswerFormViewModelModuleResult = UseAnswerFormViewModelModule(p1)
 	

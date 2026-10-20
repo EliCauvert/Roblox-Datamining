@@ -7,9 +7,9 @@ local FFlagAppChatPerfTrackingModule = require(AppChat.Flags.FFlagAppChatPerfTra
 local FFlagAppChatMessageTTIMilestonesModule = require(AppChat.Flags.FFlagAppChatMessageTTIMilestones)
 local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
 
-return function(ConversationId) --[[ Line: 18 ]]
+return function(ConversationId)
 	-- upvalues: LoggerModule (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), AppChatNetworkingModule (copy), ProcessConversationsModule (copy), ConversationChannelsModule (copy)
-	return function(p1) --[[ Line: 19 ]]
+	return function(p1)
 		-- upvalues: LoggerModule (upval), ConversationId (copy), FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), AppChatPerfTrackerModule (upval), AppChatNetworkingModule (upval), ProcessConversationsModule (upval), ConversationChannelsModule (upval)
 		LoggerModule:info("Fetching latest conversation details for conversationId: {}", ConversationId)
 		
@@ -19,7 +19,7 @@ return function(ConversationId) --[[ Line: 18 ]]
 			AppChatPerfTrackerModule.trackSubphase(AppChatPerfTrackerModule.Events.ChatConversationTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, AppChatPerfTrackerModule.Milestone.PrimaryDataStarted.Subphase.NetworkFetch, config)
 			AppChatPerfTrackerModule.trackRequest(AppChatPerfTrackerModule.Events.ChatConversationTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, "GetConversationDetails", config)
 		end
-		return p1:dispatch(AppChatNetworkingModule.rodux.GetConversationDetails.API(ConversationId)):andThen(function(Result) --[[ Line: 45 ]]
+		return p1:dispatch(AppChatNetworkingModule.rodux.GetConversationDetails.API(ConversationId)):andThen(function(Result)
 			-- upvalues: p1 (copy), ProcessConversationsModule (upval), FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), ConversationId (upval), AppChatPerfTrackerModule (upval), ConversationChannelsModule (upval)
 			local ResponseBody = Result.responseBody
 			assert(ResponseBody.conversations and #ResponseBody.conversations == 1, "Expected exactly one conversation in response body")
@@ -31,7 +31,7 @@ return function(ConversationId) --[[ Line: 18 ]]
 				AppChatPerfTrackerModule.trackSubphase(AppChatPerfTrackerModule.Events.ChatConversationTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataReady.Name, AppChatPerfTrackerModule.Milestone.PrimaryDataReady.Subphase.ResponseReceived, config)
 			end
 			return ConversationChannelsModule.fromChannelsApi(ResponseBody.conversations[1])
-		end):catch(function(Err) --[[ Line: 72 ]]
+		end):catch(function(Err)
 			-- upvalues: LoggerModule (upval)
 			LoggerModule:warning("Failure in fetchLatestConversationDetails, Status: " .. tostring(Err))
 		end)

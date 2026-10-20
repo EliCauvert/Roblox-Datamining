@@ -11,7 +11,7 @@ local _ = require(script.Parent.types.Cache)
 local Module = {}
 Module.__index = Module
 
-function Module.new() --[[ Line: 207 ]]
+function Module.new()
 	-- upvalues: Module (copy), WrapFunction (copy), GetFragmentQueryDocument (copy)
 	local self = setmetatable({}, Module)
 	self.getFragmentDoc = WrapFunction(GetFragmentQueryDocument)
@@ -19,73 +19,73 @@ function Module.new() --[[ Line: 207 ]]
 	return self
 end
 
-function Module:read(_) --[[ Line: 217 ]]
+function Module:read(_)
 	error("not implemented abstract method")
 end
 
-function Module:write(_) --[[ Line: 220 ]]
+function Module:write(_)
 	error("not implemented abstract method")
 end
 
-function Module:diff(_) --[[ Line: 223 ]]
+function Module:diff(_)
 	error("not implemented abstract method")
 end
 
-function Module:watch(_) --[[ Line: 226 ]]
+function Module:watch(_)
 	error("not implemented abstract method")
 end
 
-function Module:reset() --[[ Line: 229 ]]
+function Module:reset()
 	error("not implemented abstract method")
 end
 
-function Module:evict(_) --[[ Line: 233 ]]
+function Module:evict(_)
 	error("not implemented abstract method")
 end
 
-function Module:restore(_) --[[ Line: 237 ]]
+function Module:restore(_)
 	error("not implemented abstract method")
 end
 
-function Module:extract(_) --[[ Line: 241 ]]
+function Module:extract(_)
 	error("not implemented abstract method")
 end
 
-function Module:removeOptimistic(_) --[[ Line: 245 ]]
+function Module:removeOptimistic(_)
 	error("not implemented abstract method")
 end
 
-function Module:batch(p1) --[[ Line: 249 ]]
+function Module:batch(p1)
 	self:performTransaction(p1.update, if typeof(p1.optimistic) == "string" then p1.optimistic elseif p1.optimistic == false then nil else nil)
 end
 
-function Module:performTransaction(_, _) --[[ Line: 263 ]]
+function Module:performTransaction(_, _)
 	error("not implemented abstract method")
 end
 
-function Module:recordOptimisticTransaction(p1, p2) --[[ Line: 277 ]]
+function Module:recordOptimisticTransaction(p1, p2)
 	self:performTransaction(p1, p2)
 end
 
-function Module:transformDocument(p1) --[[ Line: 281 ]]
+function Module:transformDocument(p1)
 	return p1
 end
 
-function Module:identify(_) --[[ Line: 285 ]] end
+function Module:identify(_) end
 
-function Module:gc() --[[ Line: 289 ]]
+function Module:gc()
 	return {}
 end
 
-function Module:modify(_): boolean --[[ Line: 293 ]]
+function Module:modify(_): boolean
 	return false
 end
 
-function Module:transformForLink(p1) --[[ Line: 297 ]]
+function Module:transformForLink(p1)
 	return p1
 end
 
-function Module:readQuery(Tbl, Optimistic: boolean) --[[ Line: 301 ]]
+function Module:readQuery(Tbl, Optimistic: boolean)
 	-- upvalues: Object (copy), Boolean (copy)
 	if Optimistic == nil then
 		Optimistic = not not Tbl.optimistic
@@ -96,7 +96,7 @@ function Module:readQuery(Tbl, Optimistic: boolean) --[[ Line: 301 ]]
 	}))
 end
 
-function Module:readFragment(p1, Optimistic: boolean) --[[ Line: 320 ]]
+function Module:readFragment(p1, Optimistic: boolean)
 	-- upvalues: Object (copy)
 	if Optimistic == nil then
 		Optimistic = not not p1.optimistic
@@ -108,12 +108,12 @@ function Module:readFragment(p1, Optimistic: boolean) --[[ Line: 320 ]]
 	}))
 end
 
-function Module:writeQuery(Tbl) --[[ Line: 338 ]]
+function Module:writeQuery(Tbl)
 	-- upvalues: Object (copy)
 	return self:write(Object.assign(Object.assign(table.clone(Tbl), { id = Object.None, data = Object.None }), { dataId = Tbl.id or "ROOT_QUERY", result = Tbl.data }))
 end
 
-function Module:writeFragment(Tbl) --[[ Line: 350 ]]
+function Module:writeFragment(Tbl)
 	-- upvalues: Object (copy)
 	return self:write(Object.assign(Object.assign(table.clone(Tbl), {
 		id = Object.None,

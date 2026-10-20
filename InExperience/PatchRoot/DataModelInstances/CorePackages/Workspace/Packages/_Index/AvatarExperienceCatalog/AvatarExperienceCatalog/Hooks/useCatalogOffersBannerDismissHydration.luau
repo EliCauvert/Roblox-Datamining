@@ -4,9 +4,9 @@ local _ = require(AvatarExperienceCatalog.Api.GetMarketplaceOffersBanner.Marketp
 local _ = require(AvatarExperienceCatalog.Stores.createCatalogOffersBannerStore)
 local CatalogOffersBannerAppStorageModule = require(AvatarExperienceCatalog.Utils.catalogOffersBannerAppStorage)
 
-return function(p1, p2) --[[ Line: 18 | Named "useCatalogOffersBannerDismissHydration" ]]
+return function(p1, p2)
 	-- upvalues: ReactModule (copy), CatalogOffersBannerAppStorageModule (copy)
-	ReactModule.useLayoutEffect(function() --[[ Line: 22 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: p2 (copy), CatalogOffersBannerAppStorageModule (upval), p1 (copy)
 		if p2 == nil then return end
 		if CatalogOffersBannerAppStorageModule.shouldHydrateDismissed(p2) then

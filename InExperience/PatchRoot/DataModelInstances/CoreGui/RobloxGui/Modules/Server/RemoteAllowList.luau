@@ -3,7 +3,7 @@ local FFlagEnableModerateChatRemoteEvent = SharedFlagsModule.FFlagEnableModerate
 local FFlagPlatformLeaderboardRccEnabled = SharedFlagsModule.FFlagPlatformLeaderboardRccEnabled
 local RemoteAllowListAddExpChatFeatureValueChanged = game:DefineFastFlag("RemoteAllowListAddExpChatFeatureValueChanged", false)
 
-return function() --[[ Line: 8 ]]
+return function()
 	-- upvalues: FFlagEnableModerateChatRemoteEvent (copy), RemoteAllowListAddExpChatFeatureValueChanged (copy), FFlagPlatformLeaderboardRccEnabled (copy)
 	assert(game:FindService("NetworkServer") ~= nil)
 	local NetworkServer = game:GetService("NetworkServer")

@@ -11,7 +11,7 @@ local _ = require(Parent.AvatarExperienceCommon.PurchaseItemsTypes)
 local ConstantsModule = require(PurchasePrompt.Misc.Constants)
 
 if require(PurchasePrompt.Parent.SharedFlags).FFlagPurchasePromptFetchCartPricingForLooks then
-	local function toLegacyLookPurchaseResult(p1, p2) --[[ Line: 33 ]]
+	local function toLegacyLookPurchaseResult(p1, p2)
 		-- upvalues: ConstantsModule (copy)
 		local AssetPurchaseStatus = {}
 		local BundlePurchaseStatus = {}
@@ -47,7 +47,7 @@ if require(PurchasePrompt.Parent.SharedFlags).FFlagPurchasePromptFetchCartPricin
 		}
 	end
 	
-	return function(p3, p4, p5) --[[ Line: 78 | Named "performLookPurchase" ]]
+	return function(p3, p4, p5)
 		-- upvalues: PromiseModule (copy), PurchaseErrorModule (copy), Logging (copy), IsEconomicRestrictionResponseFunction (copy), toLegacyLookPurchaseResult (copy)
 		local t = {}
 		local List = {}
@@ -63,7 +63,7 @@ if require(PurchasePrompt.Parent.SharedFlags).FFlagPurchasePromptFetchCartPricin
 				offerIds = value.offerIds
 			})
 		end
-		return if #List == 0 then PromiseModule.reject(PurchaseErrorModule.UnknownFailure) else p3.performLookPurchaseBulkPurchase(p4, p5.idempotencyKey, List):andThen(function(Result) --[[ Line: 100 ]]
+		return if #List == 0 then PromiseModule.reject(PurchaseErrorModule.UnknownFailure) else p3.performLookPurchaseBulkPurchase(p4, p5.idempotencyKey, List):andThen(function(Result)
 			-- upvalues: Logging (upval), PromiseModule (upval), PurchaseErrorModule (upval), IsEconomicRestrictionResponseFunction (upval), toLegacyLookPurchaseResult (upval), t (copy)
 			if type(Result) ~= "table" then
 				Logging.warn("Response from performLookPurchase is malformed!")
@@ -76,15 +76,15 @@ if require(PurchasePrompt.Parent.SharedFlags).FFlagPurchasePromptFetchCartPricin
 				
 				return if LegacyLookPurchaseResult.purchaseLookStatus == "Success" or LegacyLookPurchaseResult.purchaseLookStatus == "PartialSuccess" then PromiseModule.resolve(LegacyLookPurchaseResult) else PromiseModule.reject(PurchaseErrorModule.UnknownFailure)
 			end
-		end, function(p6) --[[ Line: 119 ]]
+		end, function(p6)
 			-- upvalues: PromiseModule (upval)
 			return PromiseModule.reject(p6)
 		end)
 	end
 else
-	return function(p6, p7, p8) --[[ Line: 126 | Named "performLookPurchase" ]]
+	return function(p6, p7, p8)
 		-- upvalues: Logging (copy), PromiseModule (copy), PurchaseErrorModule (copy), IsEconomicRestrictionResponseFunction (copy)
-		return p6.performLookPurchase(p7, p8):andThen(function(Result) --[[ Line: 127 ]]
+		return p6.performLookPurchase(p7, p8):andThen(function(Result)
 			-- upvalues: Logging (upval), PromiseModule (upval), PurchaseErrorModule (upval), IsEconomicRestrictionResponseFunction (upval)
 			if type(Result) == "table" then
 				return if IsEconomicRestrictionResponseFunction(Result) then PromiseModule.reject(Result) elseif Result.purchaseLookStatus == "Success" or Result.purchaseLookStatus == "PartialSuccess" then PromiseModule.resolve(Result) else PromiseModule.reject(PurchaseErrorModule.UnknownFailure)
@@ -93,7 +93,7 @@ else
 				
 				return PromiseModule.reject(PurchaseErrorModule.UnknownFailure)
 			end
-		end, function(p9) --[[ Line: 145 ]]
+		end, function(p9)
 			-- upvalues: PromiseModule (upval)
 			return PromiseModule.reject(p9)
 		end)

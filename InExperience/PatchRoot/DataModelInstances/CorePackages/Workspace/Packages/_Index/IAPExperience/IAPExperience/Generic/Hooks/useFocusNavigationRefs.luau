@@ -7,8 +7,8 @@ local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavi
 local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
 local UseDefaultFocusBehaviorFunction = require(Parent.ReactFocusNavigation).useDefaultFocusBehavior
 
-local function _(p1, p2) --[[ Line: 13 | Named "mergeRefs" ]]
-	return function(Current) --[[ Line: 14 ]]
+local function _(p1, p2)
+	return function(Current)
 		-- upvalues: p1 (copy), p2 (copy)
 		if type(p1) == "function" then
 			p1(Current)
@@ -26,7 +26,7 @@ local function _(p1, p2) --[[ Line: 13 | Named "mergeRefs" ]]
 	end
 end
 
-return function(p1, Callback) --[[ Line: 31 | Named "useFocusNavigationRefs" ]]
+return function(p1, Callback)
 	-- upvalues: UseDefaultFocusBehaviorFunction (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), ReactModule (copy)
 	local UseDefaultFocusBehaviorResult, UseDefaultFocusBehaviorResult2 = UseDefaultFocusBehaviorFunction()
 	local UseFocusRootResult = UseFocusRootFunction({
@@ -36,9 +36,9 @@ return function(p1, Callback) --[[ Line: 31 | Named "useFocusNavigationRefs" ]]
 			[FocusNavigationEventNameEnum.NavigateBack] = { handler = InputHandlersModule.onRelease(p1) }
 		}
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 44 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseFocusRootResult (copy), UseDefaultFocusBehaviorResult2 (copy)
-		return function(Current) --[[ Line: 14 ]]
+		return function(Current)
 			-- upvalues: UseFocusRootResult (copy), UseDefaultFocusBehaviorResult2 (copy)
 			if type(UseFocusRootResult) == "function" then
 				UseFocusRootResult(Current)
@@ -56,9 +56,9 @@ return function(p1, Callback) --[[ Line: 31 | Named "useFocusNavigationRefs" ]]
 		end
 	end, { UseFocusRootResult, UseDefaultFocusBehaviorResult2 })
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 50 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseRefResult (copy), UseDefaultFocusBehaviorResult (copy)
-		return function(Current) --[[ Line: 14 ]]
+		return function(Current)
 			-- upvalues: UseRefResult (copy), UseDefaultFocusBehaviorResult (copy)
 			if type(UseRefResult) == "function" then
 				UseRefResult(Current)
@@ -76,7 +76,7 @@ return function(p1, Callback) --[[ Line: 31 | Named "useFocusNavigationRefs" ]]
 		end
 	end, { UseDefaultFocusBehaviorResult })
 	local UseRefResult1 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 56 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), Callback (copy)
 		local Current = UseRefResult.current
 		

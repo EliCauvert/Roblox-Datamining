@@ -10,81 +10,81 @@ local SetTimeoutFunction = LuauPolyfillModule.setTimeout
 local HttpService = game:GetService("HttpService")
 local config = {
 	Value = {
-		new = function(...) --[[ Line: 37 ]]
+		new = function(...)
 			return {
-				setOffset = function(_, _) --[[ Line: 40 ]] end,
-				interpolate = function(_, ...) --[[ Line: 43 ]] end
+				setOffset = function(_, _) end,
+				interpolate = function(_, ...) end
 			}
 		end
 	},
-	attachNativeEvent = function(...) --[[ Line: 49 ]]
+	attachNativeEvent = function(...)
 		return nil
 	end
 }
 local config1 = {
-	get = function(...) --[[ Line: 58 ]]
+	get = function(...)
 		return { height = 100 }
 	end
 }
 local v1 = nil
 v1 = {
 	OS = "roblox",
-	select = function(p1) --[[ Line: 68 ]]
+	select = function(p1)
 		-- upvalues: v1 (ref)
 		return p1[v1.OS]
 	end
 }
 local ReactModule = require(Parent1.React)
 local config2 = {
-	findNodeHandle = function(...) --[[ Line: 84 ]]
+	findNodeHandle = function(...)
 		return nil
 	end
 }
 local ScrollViewStickyHeaderModule = require(script.Parent.ScrollViewStickyHeader)
 local StyleSheetModule = require(Parent.StyleSheet.StyleSheet)
 local ViewModule = require(script.Parent.Parent.View.View)
-local config3 = { measureLayout = function(...) --[[ Line: 103 ]] end }
+local config3 = { measureLayout = function(...) end }
 local config4 = {
-	addListener = function(...) --[[ Line: 109 ]]
+	addListener = function(...)
 		return nil
 	end
 }
 local config5 = {
-	beginScroll = function(...) --[[ Line: 116 ]]
+	beginScroll = function(...)
 		warn("FrameRateLogger.beginScroll not implemented")
 	end,
-	endScroll = function(...) --[[ Line: 119 ]]
+	endScroll = function(...)
 		warn("FrameRateLogger.endScroll not implemented")
 	end
 }
 local config6 = {
-	blurTextInput = function(...) --[[ Line: 125 ]]
+	blurTextInput = function(...)
 		warn("TextInputState.blurTextInput not implemented")
 	end,
-	currentlyFocusedInput = function(...) --[[ Line: 128 ]]
+	currentlyFocusedInput = function(...)
 		warn("TextInputState.currentlyFocusedInput not implemented")
 		
 		return nil
 	end,
-	isTextInput = function(...) --[[ Line: 132 ]]
+	isTextInput = function(...)
 		warn("TextInputState.isTextInput not implemented")
 		
 		return nil
 	end
 }
 
-local function _() --[[ Line: 138 ]]
+local function _()
 	warn("dismissKeyboard not implemented")
 end
 
-local _ = function(p1) --[[ Line: 142 ]]
+local _ = function(p1)
 	return p1
 end
 
 local InvariantModule = require(Parent.jsUtils.invariant)
 local ProcessDecelerationRateModule = require(script.Parent.processDecelerationRate)
 
-local _ = function(Inner) --[[ Line: 152 ]]
+local _ = function(Inner)
 	return { outer = Inner, inner = Inner }
 end
 
@@ -118,7 +118,7 @@ NativeVerticalScrollViewTuple = Config.NativeVerticalScrollViewTuple
 local ScrollView = ReactModule.Component:extend("ScrollView")
 ScrollView.Context = Default
 
-function ScrollView.init(p1, Props) --[[ Line: 951 ]]
+function ScrollView.init(p1, Props)
 	-- upvalues: Map (copy), ReactModule (copy), SetAndForwardRefModule (copy), config2 (copy), Default1 (copy), Boolean (copy), config3 (copy), InvariantModule (copy), v1 (ref), Array (copy), Object (copy), Console (copy), config1 (copy), SetTimeoutFunction (copy), config5 (copy), config6 (copy), config (copy)
 	p1.props = Props
 	p1._scrollAnimatedValueAttachment = nil
@@ -140,11 +140,11 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 	p1.state = { layoutHeight = nil }
 	p1._listLayoutRef = ReactModule.createRef()
 	p1._setNativeRef = SetAndForwardRefModule({
-		getForwardedRef = function() --[[ Line: 984 ]]
+		getForwardedRef = function()
 			-- upvalues: p1 (copy)
 			return p1.props.scrollViewRef
 		end,
-		setLocalRef = function(_scrollViewRef) --[[ Line: 987 ]]
+		setLocalRef = function(_scrollViewRef)
 			-- upvalues: p1 (copy)
 			p1._scrollViewRef = _scrollViewRef
 			
@@ -164,32 +164,32 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		end
 	})
 	
-	function p1.getScrollResponder() --[[ Line: 1021 ]]
+	function p1.getScrollResponder()
 		-- upvalues: p1 (copy)
 		return p1
 	end
 	
-	function p1.getScrollableNode() --[[ Line: 1026 ]]
+	function p1.getScrollableNode()
 		-- upvalues: config2 (upval), p1 (copy)
 		return config2:findNodeHandle(p1._scrollViewRef)
 	end
 	
-	function p1.getInnerViewNode() --[[ Line: 1030 ]]
+	function p1.getInnerViewNode()
 		-- upvalues: config2 (upval), p1 (copy)
 		return config2:findNodeHandle(p1._innerViewRef)
 	end
 	
-	function p1.getInnerViewRef() --[[ Line: 1034 ]]
+	function p1.getInnerViewRef()
 		-- upvalues: p1 (copy)
 		return p1._innerViewRef
 	end
 	
-	function p1.getNativeScrollRef() --[[ Line: 1038 ]]
+	function p1.getNativeScrollRef()
 		-- upvalues: p1 (copy)
 		return p1._scrollViewRef
 	end
 	
-	function p1.scrollTo(ScrollViewRef) --[[ Line: 1053 ]]
+	function p1.scrollTo(ScrollViewRef)
 		-- upvalues: p1 (copy), Default1 (upval), Boolean (upval)
 		local X = nil
 		local Y = nil
@@ -207,7 +207,7 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		end
 	end
 	
-	function p1.scrollToEnd(ScrollViewRef) --[[ Line: 1101 ]]
+	function p1.scrollToEnd(ScrollViewRef)
 		-- upvalues: p1 (copy), Default1 (upval)
 		local v2 = (ScrollViewRef ~= nil and ScrollViewRef.animated) ~= false
 		
@@ -218,7 +218,7 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		end
 	end
 	
-	function p1.flashScrollIndicators() --[[ Line: 1117 ]]
+	function p1.flashScrollIndicators()
 		-- upvalues: p1 (copy), Default1 (upval)
 		if p1._scrollViewRef ~= nil then
 			Default1.flashScrollIndicators(p1._scrollViewRef)
@@ -227,7 +227,7 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		end
 	end
 	
-	function p1.scrollResponderScrollNativeHandleToKeyboard(p2, p3, p4) --[[ Line: 1134 ]]
+	function p1.scrollResponderScrollNativeHandleToKeyboard(p2, p3, p4)
 		-- upvalues: p1 (copy), Boolean (upval), config3 (upval), config2 (upval)
 		p1._additionalScrollOffset = Boolean.toJSBoolean(p3) and p3 or 0
 		p1._preventNegativeScrollOffset = Boolean.toJSBoolean(p4)
@@ -242,7 +242,7 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		end
 	end
 	
-	function p1.scrollResponderZoomTo(p2, Enabled) --[[ Line: 1170 ]]
+	function p1.scrollResponderZoomTo(p2, Enabled)
 		-- upvalues: InvariantModule (upval), v1 (upval), Array (upval), Object (upval), p1 (copy), Console (upval), Default1 (upval)
 		InvariantModule(v1.OS == "ios", "zoomToRect is not implemented")
 		
@@ -261,11 +261,11 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		end
 	end
 	
-	function p1:_inputMeasureAndScrollToKeyboard(p2, _, p3) --[[ Line: 1204 ]]
+	function p1:_inputMeasureAndScrollToKeyboard(p2, _, p3)
 		-- upvalues: config1 (upval), p1 (copy), SetTimeoutFunction (upval)
 		local Height = config1:get("window").height
 		
-		local function scrollTextInputIntoVisibleRect() --[[ Line: 1206 ]]
+		local function scrollTextInputIntoVisibleRect()
 			-- upvalues: p1 (upval), Height (ref), p2 (copy), p3 (copy)
 			if p1._keyboardWillOpenTo ~= nil then
 				Height = p1._keyboardWillOpenTo.endCoordinates.screenY
@@ -281,7 +281,7 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		end
 		
 		if p1._keyboardWillOpenTo == nil then
-			SetTimeoutFunction(function() --[[ Line: 1232 ]]
+			SetTimeoutFunction(function()
 				-- upvalues: scrollTextInputIntoVisibleRect (copy)
 				scrollTextInputIntoVisibleRect()
 			end, 0)
@@ -290,7 +290,7 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		end
 	end
 	
-	function p1._handleScroll(p2) --[[ Line: 1240 ]]
+	function p1._handleScroll(p2)
 		-- upvalues: p1 (copy), v1 (upval), Console (upval)
 		if _G.__DEV__ and p1.props.onScroll and p1.props.scrollEventThrottle == nil and v1.OS == "ios" then
 			Console.log("You specified `onScroll` on a <ScrollView> but not `scrollEventThrottle`. You will only receive one event. Using `16` you get all the events but be aware that it may cause frame drops, use a bigger number if you don't need as much precision.")
@@ -302,7 +302,7 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		end
 	end
 	
-	function p1._handleLayout(p2) --[[ Line: 1259 ]]
+	function p1._handleLayout(p2)
 		-- upvalues: p1 (copy)
 		if p1.props.invertStickyHeaders == true then
 			p1:setState({ layoutHeight = p2.AbsoluteWindowSize.Y })
@@ -312,7 +312,7 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		end
 	end
 	
-	function p1._overrideAutomaticCanvasSize(XOffset, YOffset) --[[ Line: 1273 ]]
+	function p1._overrideAutomaticCanvasSize(XOffset, YOffset)
 		-- upvalues: p1 (copy)
 		if p1._scrollViewRef == nil then return end
 		local Current = p1._scrollViewRef._nativeRef.current
@@ -333,7 +333,7 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		end
 	end
 	
-	function p1._handleContentOnLayout(Frame: Frame) --[[ Line: 1292 ]]
+	function p1._handleContentOnLayout(Frame: Frame)
 		-- upvalues: p1 (copy)
 		local X = Frame.AbsoluteSize.X
 		local Y = Frame.AbsoluteSize.Y
@@ -349,11 +349,11 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 	p1._scrollViewRef = nil
 	p1._innerViewRef = nil
 	p1._setInnerViewRef = SetAndForwardRefModule({
-		getForwardedRef = function() --[[ Line: 1307 ]]
+		getForwardedRef = function()
 			-- upvalues: p1 (copy)
 			return p1.props.innerViewRef
 		end,
-		setLocalRef = function(_innerViewRef) --[[ Line: 1310 ]]
+		setLocalRef = function(_innerViewRef)
 			-- upvalues: p1 (copy)
 			p1._innerViewRef = _innerViewRef
 			
@@ -361,7 +361,7 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		end
 	})
 	
-	function p1.scrollResponderKeyboardWillShow(_keyboardWillOpenTo) --[[ Line: 1346 ]]
+	function p1.scrollResponderKeyboardWillShow(_keyboardWillOpenTo)
 		-- upvalues: p1 (copy)
 		p1._keyboardWillOpenTo = _keyboardWillOpenTo
 		
@@ -370,7 +370,7 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		end
 	end
 	
-	function p1.scrollResponderKeyboardWillHide(p2) --[[ Line: 1353 ]]
+	function p1.scrollResponderKeyboardWillHide(p2)
 		-- upvalues: p1 (copy)
 		p1._keyboardWillOpenTo = nil
 		
@@ -379,7 +379,7 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		end
 	end
 	
-	function p1.scrollResponderKeyboardDidShow(_keyboardWillOpenTo) --[[ Line: 1360 ]]
+	function p1.scrollResponderKeyboardDidShow(_keyboardWillOpenTo)
 		-- upvalues: Boolean (upval), p1 (copy)
 		if Boolean.toJSBoolean(_keyboardWillOpenTo) then
 			p1._keyboardWillOpenTo = _keyboardWillOpenTo
@@ -389,7 +389,7 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		end
 	end
 	
-	function p1.scrollResponderKeyboardDidHide(p2) --[[ Line: 1371 ]]
+	function p1.scrollResponderKeyboardDidHide(p2)
 		-- upvalues: p1 (copy)
 		p1._keyboardWillOpenTo = nil
 		
@@ -398,7 +398,7 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		end
 	end
 	
-	function p1._handleMomentumScrollBegin(p2) --[[ Line: 1381 ]]
+	function p1._handleMomentumScrollBegin(p2)
 		-- upvalues: p1 (copy)
 		p1._lastMomentumScrollBeginTime = os.clock() * 1000
 		
@@ -407,7 +407,7 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		end
 	end
 	
-	function p1._handleMomentumScrollEnd(p2) --[[ Line: 1391 ]]
+	function p1._handleMomentumScrollEnd(p2)
 		-- upvalues: config5 (upval), p1 (copy)
 		config5:endScroll()
 		p1._lastMomentumScrollEndTime = os.clock() * 1000
@@ -417,7 +417,7 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		end
 	end
 	
-	function p1._handleScrollBeginDrag(p2) --[[ Line: 1406 ]]
+	function p1._handleScrollBeginDrag(p2)
 		-- upvalues: config5 (upval), v1 (upval), p1 (copy)
 		config5:beginScroll()
 		
@@ -429,7 +429,7 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		end
 	end
 	
-	function p1._handleScrollEndDrag(p2, p3) --[[ Line: 1419 ]]
+	function p1._handleScrollEndDrag(p2, p3)
 		-- upvalues: p1 (copy), Boolean (upval), config5 (upval)
 		if not p1:_isAnimating() and (not Boolean.toJSBoolean(nil) or (nil).x == 0 and (nil).y == 0) then
 			config5:endScroll()
@@ -439,12 +439,12 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		end
 	end
 	
-	function p1._isAnimating(): boolean --[[ Line: 1439 ]]
+	function p1._isAnimating(): boolean
 		-- upvalues: p1 (copy)
 		return os.clock() * 1000 - p1._lastMomentumScrollEndTime < 16
 	end
 	
-	function p1._handleResponderGrant(p2) --[[ Line: 1449 ]]
+	function p1._handleResponderGrant(p2)
 		-- upvalues: p1 (copy)
 		p1._observedScrollSinceBecomingResponder = false
 		
@@ -454,9 +454,9 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		p1._becameResponderWhileAnimating = p1:_isAnimating()
 	end
 	
-	function p1._handleResponderReject() --[[ Line: 1467 ]] end
+	function p1._handleResponderReject() end
 	
-	function p1._handleResponderRelease(p2) --[[ Line: 1472 ]]
+	function p1._handleResponderRelease(p2)
 		-- upvalues: p1 (copy), Console (upval), config6 (upval)
 		p1._isTouching = #p2.nativeEvent.touches ~= 0
 		
@@ -475,17 +475,17 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		end
 	end
 	
-	function p1._handleResponderTerminationRequest(): boolean --[[ Line: 1515 ]]
+	function p1._handleResponderTerminationRequest(): boolean
 		-- upvalues: p1 (copy)
 		return not p1._observedScrollSinceBecomingResponder
 	end
 	
-	function p1._handleScrollShouldSetResponder() --[[ Line: 1522 ]]
+	function p1._handleScrollShouldSetResponder()
 		-- upvalues: p1 (copy)
 		return p1.props.disableScrollViewPanResponder ~= true and p1._isTouching
 	end
 	
-	function p1._handleStartShouldSetResponder(p2): boolean --[[ Line: 1555 ]]
+	function p1._handleStartShouldSetResponder(p2): boolean
 		-- upvalues: p1 (copy), config6 (upval)
 		if p1.props.disableScrollViewPanResponder == true then
 			return false
@@ -496,7 +496,7 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		end
 	end
 	
-	function p1._handleStartShouldSetResponderCapture(p2): boolean --[[ Line: 1584 ]]
+	function p1._handleStartShouldSetResponderCapture(p2): boolean
 		-- upvalues: p1 (copy), Boolean (upval), Console (upval), config6 (upval)
 		if p1:_isAnimating() then
 			return true
@@ -516,7 +516,7 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		return false
 	end
 	
-	function p1._keyboardIsDismissible(): boolean --[[ Line: 1627 ]]
+	function p1._keyboardIsDismissible(): boolean
 		-- upvalues: config6 (upval), p1 (copy), v1 (upval)
 		local CurrentlyFocusedInputResult = config6:currentlyFocusedInput()
 		local HasKeyboardWillOpenTo: boolean = p1._keyboardWillOpenTo ~= nil or v1.OS == "android"
@@ -524,7 +524,7 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		return CurrentlyFocusedInputResult ~= nil and config6:isTextInput(CurrentlyFocusedInputResult) and HasKeyboardWillOpenTo
 	end
 	
-	function p1._handleTouchEnd(p2, p3) --[[ Line: 1650 ]]
+	function p1._handleTouchEnd(p2, p3)
 		-- upvalues: p1 (copy)
 		p1._isTouching = false
 		
@@ -533,7 +533,7 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		end
 	end
 	
-	function p1._handleTouchCancel(p2, p3) --[[ Line: 1666 ]]
+	function p1._handleTouchCancel(p2, p3)
 		-- upvalues: p1 (copy)
 		p1._isTouching = false
 		
@@ -542,7 +542,7 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		end
 	end
 	
-	function p1._handleTouchStart(p2, p3) --[[ Line: 1685 ]]
+	function p1._handleTouchStart(p2, p3)
 		-- upvalues: p1 (copy)
 		p1._isTouching = true
 		
@@ -551,7 +551,7 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 		end
 	end
 	
-	function p1._handleTouchMove(p2, p3) --[[ Line: 1703 ]]
+	function p1._handleTouchMove(p2, p3)
 		-- upvalues: p1 (copy)
 		if p1.props.onTouchMove then
 			p1.props.onTouchMove(p2, p3)
@@ -562,7 +562,7 @@ function ScrollView.init(p1, Props) --[[ Line: 951 ]]
 	p1._scrollAnimatedValue:setOffset(if p1.props.contentInset and Boolean.toJSBoolean(p1.props.contentInset.top) then p1.props.contentInset.top else 0)
 end
 
-function ScrollView.componentDidMount(p1) --[[ Line: 1721 ]]
+function ScrollView.componentDidMount(p1)
 	-- upvalues: Console (copy), Boolean (copy), config4 (copy)
 	if typeof(p1.props.keyboardShouldPersistTaps) == "boolean" then
 		Console.warn(("'keyboardShouldPersistTaps={%s}' is deprecated. "):format(if p1.props.keyboardShouldPersistTaps == true then "true" else "false") .. ("Use 'keyboardShouldPersistTaps=\"%s\"' instead"):format(if Boolean.toJSBoolean(p1.props.keyboardShouldPersistTaps) then "always" else "never"))
@@ -576,7 +576,7 @@ function ScrollView.componentDidMount(p1) --[[ Line: 1721 ]]
 	p1:_updateAnimatedNodeAttachment()
 end
 
-function ScrollView.componentDidUpdate(p1, p2) --[[ Line: 1743 ]]
+function ScrollView.componentDidUpdate(p1, p2)
 	-- upvalues: Boolean (copy)
 	local Top = if p1.props.contentInset then p1.props.contentInset.top else 0
 	
@@ -586,7 +586,7 @@ function ScrollView.componentDidUpdate(p1, p2) --[[ Line: 1743 ]]
 	p1:_updateAnimatedNodeAttachment()
 end
 
-function ScrollView.componentWillUnmount(p1) --[[ Line: 1753 ]]
+function ScrollView.componentWillUnmount(p1)
 	if p1._subscriptionKeyboardWillShow ~= nil then
 		p1._subscriptionKeyboardWillShow:remove()
 	end
@@ -604,18 +604,18 @@ function ScrollView.componentWillUnmount(p1) --[[ Line: 1753 ]]
 	end
 end
 
-function ScrollView._textInputFocusError() --[[ Line: 1772 ]]
+function ScrollView._textInputFocusError()
 	-- upvalues: Console (copy)
 	Console.warn("Error measuring text field.")
 end
 
-function ScrollView._getKeyForIndex(p1, Array) --[[ Line: 1776 ]]
+function ScrollView._getKeyForIndex(p1, Array)
 	local ArrayEntry = Array[p1]
 	
 	return if ArrayEntry then ArrayEntry.key else ArrayEntry
 end
 
-function ScrollView._updateAnimatedNodeAttachment(p1) --[[ Line: 1781 ]]
+function ScrollView._updateAnimatedNodeAttachment(p1)
 	-- upvalues: config (copy)
 	if p1._scrollAnimatedValueAttachment then
 		p1._scrollAnimatedValueAttachment:detach()
@@ -629,7 +629,7 @@ function ScrollView._updateAnimatedNodeAttachment(p1) --[[ Line: 1781 ]]
 	end
 end
 
-function ScrollView._setStickyHeaderRef(p1, Key, p2) --[[ Line: 1794 ]]
+function ScrollView._setStickyHeaderRef(p1, Key, p2)
 	-- upvalues: Boolean (copy)
 	if Boolean.toJSBoolean(p2) then
 		p1._stickyHeaderRefs:set(Key, p2)
@@ -640,7 +640,7 @@ function ScrollView._setStickyHeaderRef(p1, Key, p2) --[[ Line: 1794 ]]
 	end
 end
 
-function ScrollView._onStickyHeaderLayout(p1, p2, p3, Key) --[[ Line: 1802 ]]
+function ScrollView._onStickyHeaderLayout(p1, p2, p3, Key)
 	-- upvalues: ReactModule (copy), Array (copy), Boolean (copy)
 	local StickyHeaderIndices = p1.props.stickyHeaderIndices
 	
@@ -661,14 +661,14 @@ function ScrollView._onStickyHeaderLayout(p1, p2, p3, Key) --[[ Line: 1802 ]]
 	end
 end
 
-function ScrollView.render(p1) --[[ Line: 1825 ]]
+function ScrollView.render(p1)
 	-- upvalues: NativeHorizontalScrollViewTuple (ref), NativeVerticalScrollViewTuple (ref), Array (copy), InvariantModule (copy), HttpService (copy), ReactModule (copy), Boolean (copy), ScrollViewStickyHeaderModule (copy), Default (copy), HORIZONTAL (copy), VERTICAL (copy), Object (copy), v1 (ref), CreateResult (ref), StyleSheetModule (copy), ProcessDecelerationRateModule (copy)
 	local Unpacked, Unpacked2 = table.unpack(if p1.props.horizontal == true then NativeHorizontalScrollViewTuple else NativeVerticalScrollViewTuple, 1, 2)
 	local ContentContainerStyle = p1.props.contentContainerStyle
 	
 	if _G.__DEV__ and p1.props.style ~= nil then
 		local Style = p1.props.style
-		local FilterResult = Array.filter({ "alignItems", "justifyContent" }, function(p2): boolean --[[ Line: 1837 ]]
+		local FilterResult = Array.filter({ "alignItems", "justifyContent" }, function(p2): boolean
 			-- upvalues: Style (copy)
 			return type(Style) == "table" and Style[p2] ~= nil
 		end)
@@ -680,7 +680,7 @@ function ScrollView.render(p1) --[[ Line: 1825 ]]
 	
 	if StickyHeaderIndices ~= nil and #StickyHeaderIndices > 0 then
 		local Array1 = ReactModule.Children.toArray(p1.props.children)
-		Children = Array.map(Array1, function(p2, p3) --[[ Line: 1861 ]]
+		Children = Array.map(Array1, function(p2, p3)
 			-- upvalues: Boolean (upval), Array (upval), StickyHeaderIndices (copy), p1 (copy), ScrollViewStickyHeaderModule (upval), ReactModule (upval), Array1 (copy)
 			local IndexOfResult = if Boolean.toJSBoolean(p2) then Array.indexOf(StickyHeaderIndices, p3) else -1
 			
@@ -691,12 +691,12 @@ function ScrollView.render(p1) --[[ Line: 1825 ]]
 					Name = "StickyHeaderComponent",
 					key = Key,
 					nativeID = "StickyHeader-" .. tostring(Key),
-					ref = function(p4) --[[ Line: 1873 ]]
+					ref = function(p4)
 						-- upvalues: p1 (upval), Key (copy)
 						return p1:_setStickyHeaderRef(Key, p4)
 					end,
 					nextHeaderLayoutY = p1._headerLayoutYs:get(p1._getKeyForIndex(StickyHeaderIndices[IndexOfResult + 1], Array1)),
-					onLayout = function(p4) --[[ Line: 1877 ]]
+					onLayout = function(p4)
 						-- upvalues: p1 (upval), p3 (copy), Key (copy)
 						return p1:_onStickyHeaderLayout(p3, p4, Key)
 					end,
@@ -792,7 +792,7 @@ CreateResult = StyleSheetModule.create({
 	baseVertical = { ScrollingDirection = Enum.ScrollingDirection.Y },
 	baseHorizontal = { ScrollingDirection = Enum.ScrollingDirection.X }
 })
-local ForwardRefResult = ReactModule.forwardRef(function(Tbl, ScrollViewRef) --[[ Line: 2056 | Named "Wrapper" ]]
+local ForwardRefResult = ReactModule.forwardRef(function(Tbl, ScrollViewRef)
 	-- upvalues: ReactModule (copy), ScrollView (copy), Object (copy)
 	return ReactModule.createElement(ScrollView, Object.assign(table.clone(Tbl), { scrollViewRef = ScrollViewRef }))
 end)

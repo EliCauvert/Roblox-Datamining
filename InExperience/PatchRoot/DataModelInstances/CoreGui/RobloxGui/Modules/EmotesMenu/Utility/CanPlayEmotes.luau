@@ -10,7 +10,7 @@ local CanPlayEmotesModule = {
 	ChangedEvent = Instance.new("BindableEvent")
 }
 
-local function _(Object) --[[ Line: 15 | Named "getAnimateScript" ]]
+local function _(Object)
 	if Object then
 		local Animate = Object:FindFirstChild("Animate")
 		
@@ -20,7 +20,7 @@ local function _(Object) --[[ Line: 15 | Named "getAnimateScript" ]]
 	end
 end
 
-local _ = function(Object) --[[ Line: 31 | Named "getPlayEmoteBindable" ]]
+local _ = function(Object)
 	local Object1 = nil
 	if Object then
 		local Animate = Object:FindFirstChild("Animate")
@@ -37,7 +37,7 @@ local _ = function(Object) --[[ Line: 31 | Named "getPlayEmoteBindable" ]]
 	end
 end
 
-local _ = function(Object): boolean --[[ Line: 45 | Named "getCanPlayEmotes" ]]
+local _ = function(Object): boolean
 	local Object1 = nil
 	if Object then
 		local Animate = Object:FindFirstChild("Animate")
@@ -59,7 +59,7 @@ local ChildAddedConnection = nil
 local ChildAddedConnection1 = nil
 local AncestryChangedConnection = nil
 
-local _ = function() --[[ Line: 52 | Named "disconnectListeners" ]]
+local _ = function()
 	-- upvalues: ChildAddedConnection (ref), ChildAddedConnection1 (ref), AncestryChangedConnection (ref)
 	if ChildAddedConnection then
 		ChildAddedConnection:Disconnect()
@@ -77,7 +77,7 @@ end
 
 local Callback = nil
 
-local _ = function(Object) --[[ Line: 71 | Named "checkUpdate" ]]
+local _ = function(Object)
 	-- upvalues: CanPlayEmotesModule (copy), Callback (ref)
 	local Object1 = nil
 	if Object then
@@ -102,7 +102,7 @@ local _ = function(Object) --[[ Line: 71 | Named "checkUpdate" ]]
 	Callback(Value, Object)
 end
 
-local _ = function(Object) --[[ Line: 82 | Named "connectAnimateAddedListener" ]]
+local _ = function(Object)
 	-- upvalues: CanPlayEmotesModule (copy), Callback (ref), ChildAddedConnection (ref)
 	local v1 = nil
 	if Object then
@@ -112,7 +112,7 @@ local _ = function(Object) --[[ Line: 82 | Named "connectAnimateAddedListener" ]
 		v1 = nil
 	end
 	if not v1 then
-		ChildAddedConnection = Object.ChildAdded:Connect(function(Child) --[[ Line: 89 ]]
+		ChildAddedConnection = Object.ChildAdded:Connect(function(Child)
 			-- upvalues: Object (copy), CanPlayEmotesModule (upval), Callback (upval)
 			if (Child:IsA("LocalScript") or Child:IsA("Script") and Child.RunContext == Enum.RunContext.Client) and Child.Name == "Animate" then
 				local Object = nil
@@ -164,7 +164,7 @@ local _ = function(Object) --[[ Line: 82 | Named "connectAnimateAddedListener" ]
 	Callback(Value, Object)
 end
 
-local _ = function(Object, p1) --[[ Line: 98 | Named "connectPlayEmoteAddedListener" ]]
+local _ = function(Object, p1)
 	-- upvalues: CanPlayEmotesModule (copy), Callback (ref), ChildAddedConnection1 (ref)
 	local Object1 = nil
 	if Object then
@@ -181,7 +181,7 @@ local _ = function(Object, p1) --[[ Line: 98 | Named "connectPlayEmoteAddedListe
 		v1 = nil
 	end
 	if not v1 then
-		ChildAddedConnection1 = p1.ChildAdded:Connect(function(Child) --[[ Line: 105 ]]
+		ChildAddedConnection1 = p1.ChildAdded:Connect(function(Child)
 			-- upvalues: Object (copy), CanPlayEmotesModule (upval), Callback (upval)
 			if Child:IsA("BindableFunction") and Child.Name == "PlayEmote" then
 				local Object = nil
@@ -233,7 +233,7 @@ local _ = function(Object, p1) --[[ Line: 98 | Named "connectPlayEmoteAddedListe
 	Callback(Value, Object)
 end
 
-local _ = function(Object) --[[ Line: 112 | Named "connectPlayEmoteRemovedListener" ]]
+local _ = function(Object)
 	-- upvalues: CanPlayEmotesModule (copy), Callback (ref), AncestryChangedConnection (ref)
 	local Object1 = nil
 	if Object then
@@ -250,7 +250,7 @@ local _ = function(Object) --[[ Line: 112 | Named "connectPlayEmoteRemovedListen
 		v1 = nil
 	end
 	if v1 then
-		AncestryChangedConnection = v1.AncestryChanged:Connect(function(_, NewParent) --[[ Line: 119 ]]
+		AncestryChangedConnection = v1.AncestryChanged:Connect(function(_, NewParent)
 			-- upvalues: v1 (copy), Object (copy), CanPlayEmotesModule (upval), Callback (upval)
 			if not NewParent or not v1:IsDescendantOf(Object) then
 				local Object = nil
@@ -302,7 +302,7 @@ local _ = function(Object) --[[ Line: 112 | Named "connectPlayEmoteRemovedListen
 	Callback(Value, Object)
 end
 
-Callback = function(p1, Object) --[[ Line: 126 ]]
+Callback = function(p1, Object)
 	-- upvalues: ChildAddedConnection (ref), ChildAddedConnection1 (ref), AncestryChangedConnection (ref), CanPlayEmotesModule (copy), Callback (ref)
 	if ChildAddedConnection then
 		ChildAddedConnection:Disconnect()
@@ -333,7 +333,7 @@ Callback = function(p1, Object) --[[ Line: 126 ]]
 			Object2 = nil
 		end
 		if Object2 then
-			AncestryChangedConnection = Object2.AncestryChanged:Connect(function(_, NewParent) --[[ Line: 119 ]]
+			AncestryChangedConnection = Object2.AncestryChanged:Connect(function(_, NewParent)
 				-- upvalues: Object2 (copy), Object (copy), CanPlayEmotesModule (upval), Callback (upval)
 				if not NewParent or not Object2:IsDescendantOf(Object) then
 					local Object = nil
@@ -409,7 +409,7 @@ Callback = function(p1, Object) --[[ Line: 126 ]]
 				v3 = nil
 			end
 			if not v3 then
-				ChildAddedConnection1 = v2.ChildAdded:Connect(function(Child) --[[ Line: 105 ]]
+				ChildAddedConnection1 = v2.ChildAdded:Connect(function(Child)
 					-- upvalues: Object (copy), CanPlayEmotesModule (upval), Callback (upval)
 					if Child:IsA("BindableFunction") and Child.Name == "PlayEmote" then
 						local Object = nil
@@ -470,7 +470,7 @@ Callback = function(p1, Object) --[[ Line: 126 ]]
 				v5 = nil
 			end
 			if not v5 then
-				ChildAddedConnection = Object.ChildAdded:Connect(function(Child) --[[ Line: 89 ]]
+				ChildAddedConnection = Object.ChildAdded:Connect(function(Child)
 					-- upvalues: Object (copy), CanPlayEmotesModule (upval), Callback (upval)
 					if (Child:IsA("LocalScript") or Child:IsA("Script") and Child.RunContext == Enum.RunContext.Client) and Child.Name == "Animate" then
 						local Object = nil
@@ -524,7 +524,7 @@ Callback = function(p1, Object) --[[ Line: 126 ]]
 	end
 end
 
-local _ = function(Object) --[[ Line: 146 | Named "onCharacterChanged" ]]
+local _ = function(Object)
 	-- upvalues: ChildAddedConnection (ref), ChildAddedConnection1 (ref), AncestryChangedConnection (ref), CanPlayEmotesModule (copy), Callback (ref)
 	if ChildAddedConnection then
 		ChildAddedConnection:Disconnect()
@@ -561,7 +561,7 @@ local _ = function(Object) --[[ Line: 146 | Named "onCharacterChanged" ]]
 	Callback(Value, Object)
 end
 
-LocalPlayer:GetPropertyChangedSignal("Character"):Connect(function() --[[ Line: 151 ]]
+LocalPlayer:GetPropertyChangedSignal("Character"):Connect(function()
 	-- upvalues: LocalPlayer (ref), ChildAddedConnection (ref), ChildAddedConnection1 (ref), AncestryChangedConnection (ref), CanPlayEmotesModule (copy), Callback (ref)
 	local Character = LocalPlayer.Character
 	

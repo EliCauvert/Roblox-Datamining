@@ -15,7 +15,7 @@ local View = FoundationModule.View
 local Flags = require(Parent1.MarkdownCore).Flags
 local FFlagDebugInlineLayout = game:DefineFastFlag("FFlagDebugInlineLayout", false)
 
-local function layoutElements(Elements, X) --[[ Line: 39 ]]
+local function layoutElements(Elements, X)
 	-- upvalues: Flags (copy), HardBreakElementModule (copy), RenderInMeasuredFrameModule (copy), FFlagDebugInlineLayout (copy), MapFunction (copy), ReactModule (copy), View (copy)
 	if #Elements == 0 then
 		return {}
@@ -29,7 +29,7 @@ local function layoutElements(Elements, X) --[[ Line: 39 ]]
 	local Count2 = 0
 	local Flag = false
 	
-	local function _() --[[ Line: 58 | Named "flushRow" ]]
+	local function _()
 		-- upvalues: List (copy), List1 (ref), Total (ref), X (copy)
 		table.insert(List, List1)
 		List1 = {}
@@ -97,7 +97,7 @@ local function layoutElements(Elements, X) --[[ Line: 39 ]]
 	if #List1 > 0 then
 		table.insert(List, List1)
 	end
-	return MapFunction(List, function(p1, LayoutOrder) --[[ Line: 157 ]]
+	return MapFunction(List, function(p1, LayoutOrder)
 		-- upvalues: ReactModule (upval), View (upval)
 		return ReactModule.createElement(View, {
 			tag = "auto-xy row align-x-left",
@@ -107,12 +107,12 @@ local function layoutElements(Elements, X) --[[ Line: 39 ]]
 	end)
 end
 
-return function(p1) --[[ Line: 166 | Named "InlineLayout" ]]
+return function(p1)
 	-- upvalues: UseRefFunction (copy), FoundationModule (copy), UseStateFunction (copy), UseCallbackFunction (copy), layoutElements (copy), UseEffectFunction (copy), ReactModule (copy), HoverContextModule (copy), View (copy)
 	local UseRefResult = UseRefFunction(nil)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseStateResult, UseStateResult2 = UseStateFunction({})
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 171 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: UseRefResult (copy), UseStateResult2 (copy), layoutElements (upval), p1 (copy)
 		if UseRefResult.current == nil then return end
 		if UseRefResult.current.AbsoluteSize.X ~= 0 then

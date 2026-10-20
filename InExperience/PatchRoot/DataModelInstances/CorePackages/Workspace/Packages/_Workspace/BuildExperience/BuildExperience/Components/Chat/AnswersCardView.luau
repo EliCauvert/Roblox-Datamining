@@ -2,7 +2,7 @@
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 
-return function(Frame) --[[ Line: 24 | Named "AnswersCardView" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), FoundationModule (copy)
 	local Elements = {}
 	

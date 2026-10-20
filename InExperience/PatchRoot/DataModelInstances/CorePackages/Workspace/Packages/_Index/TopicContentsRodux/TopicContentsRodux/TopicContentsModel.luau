@@ -8,7 +8,7 @@ local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventE
 local FFlagLuaAppEnableHomepageOneByTwoTile = require(Parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile
 local FFlagLuaAppEnableOneByTwoTileFunnelTelemetry = require(Parent.SharedFlags).FFlagLuaAppEnableOneByTwoTileFunnelTelemetry
 local TopicContentsModelModule = {
-	new = function() --[[ Line: 19 ]]
+	new = function()
 		return {
 			entries = {},
 			rowsRequested = 0,
@@ -20,7 +20,7 @@ local TopicContentsModelModule = {
 	end
 }
 
-function TopicContentsModelModule.mock() --[[ Line: 33 ]]
+function TopicContentsModelModule.mock()
 	-- upvalues: TopicContentsModelModule (copy), TopicContentsEntryModelModule (copy)
 	local NewTopicContentsModel = TopicContentsModelModule.new()
 	NewTopicContentsModel.entries = { TopicContentsEntryModelModule.mock() }
@@ -33,7 +33,7 @@ function TopicContentsModelModule.mock() --[[ Line: 33 ]]
 	return NewTopicContentsModel
 end
 
-function TopicContentsModelModule.fromData(p1) --[[ Line: 47 ]]
+function TopicContentsModelModule.fromData(p1)
 	return {
 		entries = p1.entries,
 		rowsRequested = p1.rowsRequested,
@@ -44,7 +44,7 @@ function TopicContentsModelModule.fromData(p1) --[[ Line: 47 ]]
 	}
 end
 
-function TopicContentsModelModule.fromContentList(List, Callback, Callback1, UpdatedTimestamp, p1) --[[ Line: 61 ]]
+function TopicContentsModelModule.fromContentList(List, Callback, Callback1, UpdatedTimestamp, p1)
 	-- upvalues: TopicContentsModelModule (copy), TopicContentsEntryModelModule (copy), FFlagLuaAppEnableOneByTwoTileFunnelTelemetry (copy), FFlagLuaAppEnableHomepageOneByTwoTile (copy), GameCollectionItemType (copy), DiscoveryEventErrorLogger (copy), OmniRecommendationsContentType (copy)
 	local NewTopicContentsModel = TopicContentsModelModule.new()
 	NewTopicContentsModel.updatedTimestamp = UpdatedTimestamp
@@ -56,7 +56,7 @@ function TopicContentsModelModule.fromContentList(List, Callback, Callback1, Upd
 			if NewTopicContentsModel.hasMoreRows then
 				return NewTopicContentsModel
 			end
-			TopicContentsEntryModelModule.fromOmniRecommendations(value, if FFlagLuaAppEnableOneByTwoTileFunnelTelemetry then p1 else nil):match(function(p2) --[[ Line: 84 ]]
+			TopicContentsEntryModelModule.fromOmniRecommendations(value, if FFlagLuaAppEnableOneByTwoTileFunnelTelemetry then p1 else nil):match(function(p2)
 				-- upvalues: FFlagLuaAppEnableHomepageOneByTwoTile (upval), GameCollectionItemType (upval), DiscoveryEventErrorLogger (upval), OmniRecommendationsContentType (upval), NewTopicContentsModel (copy), value (copy), Callback (copy), Callback1 (copy)
 				if FFlagLuaAppEnableHomepageOneByTwoTile and p2.componentType == GameCollectionItemType.OneByTwoTile and (not p2.primaryVideoAssetId or not p2.primaryImageAssetId) then
 					DiscoveryEventErrorLogger.reportError("TopicContentsModel_OneByTwoTileMissingAssets", "OneByTwoTile entry dropped: missing primaryVideoAssetId or primaryImageAssetId", {
@@ -93,7 +93,7 @@ function TopicContentsModelModule.fromContentList(List, Callback, Callback1, Upd
 						NewTopicContentsModel.hasMoreRows = true
 					end
 				end
-			end):matchError(function(p2) --[[ Line: 135 ]]
+			end):matchError(function(p2)
 				warn(p2)
 			end)
 		end

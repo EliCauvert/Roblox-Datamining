@@ -2,7 +2,7 @@
 local StatsAggregatorModule = {}
 StatsAggregatorModule.__index = StatsAggregatorModule
 
-function StatsAggregatorModule.new(_statType, _numSamples: number, _pauseBetweenSamples) --[[ Line: 18 ]]
+function StatsAggregatorModule.new(_statType, _numSamples: number, _pauseBetweenSamples)
 	-- upvalues: StatsAggregatorModule (copy), StatsUtilsModule (copy)
 	local t = {}
 	setmetatable(t, StatsAggregatorModule)
@@ -23,7 +23,7 @@ function StatsAggregatorModule.new(_statType, _numSamples: number, _pauseBetween
 	return t
 end
 
-function StatsAggregatorModule:AddListener(p1) --[[ Line: 45 ]]
+function StatsAggregatorModule:AddListener(p1)
 	local NextListenerId = self._nextListenerId
 	self._nextListenerId += 1
 	self._listeners[NextListenerId] = p1
@@ -31,19 +31,19 @@ function StatsAggregatorModule:AddListener(p1) --[[ Line: 45 ]]
 	return NextListenerId
 end
 
-function StatsAggregatorModule:RemoveListener(p1) --[[ Line: 52 ]]
+function StatsAggregatorModule:RemoveListener(p1)
 	self._listeners[p1] = nil
 end
 
-function StatsAggregatorModule._notifyAllListeners(p1) --[[ Line: 56 ]]
+function StatsAggregatorModule._notifyAllListeners(p1)
 	for _, listener in pairs(p1._listeners) do
 		listener()
 	end
 end
 
-function StatsAggregatorModule:StartListening() --[[ Line: 62 ]]
+function StatsAggregatorModule:StartListening()
 	if self._listening ~= true then
-		spawn(function() --[[ Line: 70 ]]
+		spawn(function()
 			-- upvalues: self (copy)
 			self._listening = true
 			while self._listening do
@@ -57,11 +57,11 @@ function StatsAggregatorModule:StartListening() --[[ Line: 62 ]]
 	end
 end
 
-function StatsAggregatorModule:StopListening() --[[ Line: 81 ]]
+function StatsAggregatorModule:StopListening()
 	self._listening = false
 end
 
-function StatsAggregatorModule:GetValues() --[[ Line: 85 ]]
+function StatsAggregatorModule:GetValues()
 	local Samples = {}
 	
 	for i = 0, self._numSamples - 1 do
@@ -70,7 +70,7 @@ function StatsAggregatorModule:GetValues() --[[ Line: 85 ]]
 	return Samples
 end
 
-function StatsAggregatorModule:GetAverage() --[[ Line: 96 ]]
+function StatsAggregatorModule:GetAverage()
 	local NewSample = 0
 	
 	for i = 0, self._numSamples - 1 do
@@ -79,16 +79,16 @@ function StatsAggregatorModule:GetAverage() --[[ Line: 96 ]]
 	return NewSample / self._numSamples
 end
 
-function StatsAggregatorModule:GetLatestValue() --[[ Line: 105 ]]
+function StatsAggregatorModule:GetLatestValue()
 	return self._samples[(self._oldestIndex + self._numSamples - 1) % self._numSamples]
 end
 
-function StatsAggregatorModule:_storeStatValue(StatValue) --[[ Line: 111 ]]
+function StatsAggregatorModule:_storeStatValue(StatValue)
 	self._samples[self._oldestIndex] = StatValue
 	self._oldestIndex = (self._oldestIndex + 1) % self._numSamples
 end
 
-function StatsAggregatorModule:_getStatValue() --[[ Line: 117 ]]
+function StatsAggregatorModule:_getStatValue()
 	local StatsService = game:GetService("Stats")
 	
 	if StatsService == nil then
@@ -105,7 +105,7 @@ function StatsAggregatorModule:_getStatValue() --[[ Line: 117 ]]
 	end
 end
 
-function StatsAggregatorModule:GetTarget() --[[ Line: 137 ]]
+function StatsAggregatorModule:GetTarget()
 	local StatsService = game:GetService("Stats")
 	
 	if StatsService == nil then

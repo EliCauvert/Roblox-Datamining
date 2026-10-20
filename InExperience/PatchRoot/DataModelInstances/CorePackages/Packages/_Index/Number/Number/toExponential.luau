@@ -1,4 +1,4 @@
-﻿return function(p1, p2: number) --[[ Line: 17 ]]
+﻿return function(p1, p2: number)
 	local Number = if typeof(p1) == "string" then tonumber(p1) or -(0 / 0) else p1
 	
 	if typeof(Number) ~= "number" then

@@ -2,7 +2,7 @@
 local ReactModule = require(Parent.React)
 local Signal = require(Parent.AppCommonLib).Signal
 
-return function() --[[ Line: 20 | Named "useOnRequestImpressionsSignal" ]]
+return function()
 	-- upvalues: ReactModule (copy), Signal (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	
@@ -10,16 +10,16 @@ return function() --[[ Line: 20 | Named "useOnRequestImpressionsSignal" ]]
 		UseRefResult.current = Signal.new()
 	end
 	local Current = UseRefResult.current
-	ReactModule.useEffect(function() --[[ Line: 29 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Current (copy)
 		Current:fire()
 		local Flag = false
 		local DelayedThread = nil
 		
-		local function scheduleNext() --[[ Line: 37 ]]
+		local function scheduleNext()
 			-- upvalues: Flag (ref), DelayedThread (ref), Current (upval), scheduleNext (copy)
 			if not Flag then
-				DelayedThread = task.delay(1, function() --[[ Line: 41 ]]
+				DelayedThread = task.delay(1, function()
 					-- upvalues: Flag (upval), Current (upval), scheduleNext (upval)
 					if not Flag then
 						Current:fire()
@@ -34,7 +34,7 @@ return function() --[[ Line: 20 | Named "useOnRequestImpressionsSignal" ]]
 		end
 		
 		if not Flag then
-			DelayedThread = task.delay(1, function() --[[ Line: 41 ]]
+			DelayedThread = task.delay(1, function()
 				-- upvalues: Flag (ref), Current (upval), scheduleNext (copy)
 				if not Flag then
 					Current:fire()
@@ -44,7 +44,7 @@ return function() --[[ Line: 20 | Named "useOnRequestImpressionsSignal" ]]
 				end
 			end)
 		end
-		return function() --[[ Line: 51 ]]
+		return function()
 			-- upvalues: Flag (ref), DelayedThread (ref)
 			Flag = true
 			

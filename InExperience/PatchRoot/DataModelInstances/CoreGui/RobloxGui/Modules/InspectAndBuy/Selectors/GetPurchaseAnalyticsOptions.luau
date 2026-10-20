@@ -3,7 +3,7 @@ local ConstantsModule = require(Parent.Constants)
 local _ = require(Parent.Services.Analytics)
 local _ = require(game:GetService("CorePackages").Workspace.Packages.AvatarExperienceInspectAndBuy)
 
-return function(p1, p2, Bundle, Price) --[[ Line: 18 ]]
+return function(p1, p2, Bundle, Price)
 	-- upvalues: ConstantsModule (copy)
 	if not p2 then
 		return { price = Price }

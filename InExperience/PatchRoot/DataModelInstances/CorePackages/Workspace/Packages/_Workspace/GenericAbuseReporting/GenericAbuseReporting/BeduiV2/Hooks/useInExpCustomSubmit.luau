@@ -16,11 +16,11 @@ local SubmitPlaceReportFunction = ReportHelperModule.submitPlaceReport
 
 return {
 	REPORT_MESSAGE_NOT_SHOWN_ITEM_ID = "__MSG_NOT_SHOWN_ID",
-	useInExpCustomSubmit = function(p1) --[[ Line: 42 ]]
+	useInExpCustomSubmit = function(p1)
 		-- upvalues: UseVoiceSnapshotFunction (copy), ReactModule (copy), ComputeImpactedUserCountModule (copy), SubmitVoiceReportFunction (copy), PromiseModule (copy), SubmitChatReportWithoutMessageFunction (copy), SubmitChatReportFunction (copy), SubmitAvatarReportFunction (copy), SubmitPlaceReportFunction (copy)
 		local UseVoiceSnapshotResult = UseVoiceSnapshotFunction(p1.voiceChatServiceManager)
 		
-		return ReactModule.useCallback(function(p2) --[[ Line: 46 ]]
+		return ReactModule.useCallback(function(p2)
 			-- upvalues: UseVoiceSnapshotResult (copy), ComputeImpactedUserCountModule (upval), p1 (copy), SubmitVoiceReportFunction (upval), PromiseModule (upval), SubmitChatReportWithoutMessageFunction (upval), SubmitChatReportFunction (upval), SubmitAvatarReportFunction (upval), SubmitPlaceReportFunction (upval)
 			if not p2.endpoint then
 				error("SubmissionConfig must have an endpoint")
@@ -43,7 +43,7 @@ return {
 				if InExpChatMessagesLoader then
 					local TextChatMessageId = p2.data.custom and p2.data.custom.textChatMessageId
 					
-					return if TextChatMessageId == "__MSG_NOT_SHOWN_ID" then SubmitChatReportWithoutMessageFunction(p2) else InExpChatMessagesLoader.fetch({}):andThen(function(Result) --[[ Line: 92 ]]
+					return if TextChatMessageId == "__MSG_NOT_SHOWN_ID" then SubmitChatReportWithoutMessageFunction(p2) else InExpChatMessagesLoader.fetch({}):andThen(function(Result)
 						-- upvalues: TextChatMessageId (copy), SubmitChatReportFunction (upval), p2 (copy)
 						local EligibleMessages = {}
 						local TargetMessages = {}
@@ -81,10 +81,10 @@ return {
 			p1.reportAnythingSnapshotRef
 		})
 	end,
-	useInExpClientActionHandlers = function(p3) --[[ Line: 141 ]]
+	useInExpClientActionHandlers = function(p3)
 		-- upvalues: UseVoiceSnapshotFunction (copy), ReactModule (copy), ComputeImpactedUserCountModule (copy), SubmitVoiceReportFunction (copy), PromiseModule (copy), SubmitChatReportWithoutMessageFunction (copy), SubmitChatReportFunction (copy), SubmitAvatarReportFunction (copy), SubmitPlaceReportFunction (copy)
 		local UseVoiceSnapshotResult = UseVoiceSnapshotFunction(p3.voiceChatServiceManager)
-		local UseResult = ReactModule.useCallback(function(p4) --[[ Line: 145 ]]
+		local UseResult = ReactModule.useCallback(function(p4)
 			-- upvalues: UseVoiceSnapshotResult (copy), ComputeImpactedUserCountModule (upval), p3 (copy), SubmitVoiceReportFunction (upval)
 			local Current = UseVoiceSnapshotResult.current
 			
@@ -96,14 +96,14 @@ return {
 				menuOpenedUnixMilli = p3.menuOpenTimeRef.current
 			})
 		end, { p3.voiceChatServiceManager, p3.menuOpenTimeRef })
-		local UseResult1 = ReactModule.useCallback(function(p4) --[[ Line: 165 ]]
+		local UseResult1 = ReactModule.useCallback(function(p4)
 			-- upvalues: p3 (copy), PromiseModule (upval), SubmitChatReportWithoutMessageFunction (upval), SubmitChatReportFunction (upval)
 			local InExpChatMessagesLoader = p3.inExpChatMessagesLoader
 			
 			if InExpChatMessagesLoader then
 				local TextChatMessageId = p4.data.custom and p4.data.custom.textChatMessageId
 				
-				return if TextChatMessageId == "__MSG_NOT_SHOWN_ID" then SubmitChatReportWithoutMessageFunction(p4) else InExpChatMessagesLoader.fetch({}):andThen(function(Result) --[[ Line: 180 ]]
+				return if TextChatMessageId == "__MSG_NOT_SHOWN_ID" then SubmitChatReportWithoutMessageFunction(p4) else InExpChatMessagesLoader.fetch({}):andThen(function(Result)
 					-- upvalues: TextChatMessageId (copy), SubmitChatReportFunction (upval), p4 (copy)
 					local EligibleMessages = {}
 					local TargetMessages = {}
@@ -134,20 +134,20 @@ return {
 				return PromiseModule.reject("inExpChatMessagesLoader is required for chat reports")
 			end
 		end, { p3.inExpChatMessagesLoader })
-		local UseResult2 = ReactModule.useCallback(function(p5) --[[ Line: 204 ]]
+		local UseResult2 = ReactModule.useCallback(function(p5)
 			-- upvalues: SubmitAvatarReportFunction (upval), p3 (copy)
 			return SubmitAvatarReportFunction(p5, p3.reportAnythingSnapshotRef and p3.reportAnythingSnapshotRef.current)
 		end, { p3.reportAnythingSnapshotRef })
-		local UseResult3 = ReactModule.useCallback(function(p5) --[[ Line: 211 ]]
+		local UseResult3 = ReactModule.useCallback(function(p5)
 			-- upvalues: SubmitPlaceReportFunction (upval), p3 (copy)
 			return SubmitPlaceReportFunction(p5, p3.reportAnythingSnapshotRef and p3.reportAnythingSnapshotRef.current)
 		end, { p3.reportAnythingSnapshotRef })
-		local UseResult4 = ReactModule.useCallback(function(p5) --[[ Line: 218 ]]
+		local UseResult4 = ReactModule.useCallback(function(p5)
 			-- upvalues: SubmitChatReportWithoutMessageFunction (upval)
 			return SubmitChatReportWithoutMessageFunction(p5)
 		end, {})
 		
-		return (ReactModule.useMemo(function() --[[ Line: 222 ]]
+		return (ReactModule.useMemo(function()
 			-- upvalues: UseResult (copy), UseResult1 (copy), UseResult2 (copy), UseResult3 (copy), UseResult4 (copy)
 			return {
 				voice = UseResult,

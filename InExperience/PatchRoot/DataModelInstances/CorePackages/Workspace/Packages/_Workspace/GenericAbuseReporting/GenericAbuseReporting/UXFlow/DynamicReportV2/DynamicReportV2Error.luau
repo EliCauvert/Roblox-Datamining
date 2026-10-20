@@ -6,7 +6,7 @@ local Empty = FoundationModule.Empty
 local Sheet = FoundationModule.Sheet
 local View = FoundationModule.View
 
-return ReactModule.memo(function() --[[ Line: 12 | Named "DynamicReportV2Error" ]]
+return ReactModule.memo(function()
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), Sheet (copy), View (copy), Empty (copy)
 	return ReactModule.createElement(ReactModule.Fragment, nil, {
 		Content = ReactModule.createElement(Sheet.Content, {}, {

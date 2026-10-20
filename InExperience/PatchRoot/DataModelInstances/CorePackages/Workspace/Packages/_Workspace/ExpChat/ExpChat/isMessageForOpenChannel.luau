@@ -2,7 +2,7 @@
 local FFlagExpChatUseChannelTabsStore = require(ExpChat.Parent.SharedFlags).FFlagExpChatUseChannelTabsStore
 local GetChannelTabsStoreModule = if FFlagExpChatUseChannelTabsStore then require(ExpChat.Stores.GetChannelTabsStore) else nil
 
-local function getOpenChannelName(p1) --[[ Line: 10 ]]
+local function getOpenChannelName(p1)
 	-- upvalues: FFlagExpChatUseChannelTabsStore (copy), GetChannelTabsStoreModule (copy)
 	local TextChannels = p1.TextChannels
 	
@@ -21,7 +21,7 @@ local function getOpenChannelName(p1) --[[ Line: 10 ]]
 	end
 end
 
-local function _(p1, p2) --[[ Line: 37 | Named "getMessageChannelName" ]]
+local function _(p1, p2)
 	local Name = nil
 	
 	if p2 == nil then
@@ -38,7 +38,7 @@ local function _(p1, p2) --[[ Line: 37 | Named "getMessageChannelName" ]]
 	return Name
 end
 
-return function(p1, p2, Name): boolean --[[ Line: 54 | Named "isMessageForOpenChannel" ]]
+return function(p1, p2, Name): boolean
 	-- upvalues: getOpenChannelName (copy)
 	local OpenChannelName = getOpenChannelName(p1)
 	local v1 = nil

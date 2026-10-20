@@ -2,11 +2,11 @@
 local TweenService = game:GetService("TweenService")
 local ReactModule = require(script:FindFirstAncestor("VariableItemWidthCarousel").Parent.React)
 
-local function clampTargetCanvasPosition(Frame, Value: number): Vector2 --[[ Line: 8 ]]
+local function clampTargetCanvasPosition(Frame, Value: number): Vector2
 	return Vector2.new(math.round((math.clamp(Value, 0, Frame.AbsoluteCanvasSize.X - Frame.AbsoluteSize.X))), 0)
 end
 
-function useVariableItemWidthScrollHandlers(p1, p2, Callback, p3, p4) --[[ Line: 15 ]]
+function useVariableItemWidthScrollHandlers(p1, p2, Callback, p3, p4)
 	-- upvalues: ReactModule (copy), UserGameSettings (copy), TweenService (copy), clampTargetCanvasPosition (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(0)
@@ -14,7 +14,7 @@ function useVariableItemWidthScrollHandlers(p1, p2, Callback, p3, p4) --[[ Line:
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(true)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(Vector2.zero)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 28 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), Callback (copy)
 		local config = { [0] = 0 }
 		
@@ -23,26 +23,26 @@ function useVariableItemWidthScrollHandlers(p1, p2, Callback, p3, p4) --[[ Line:
 		end
 		return config
 	end, { p1, Callback })
-	ReactModule.useEffect(function() --[[ Line: 36 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p3 (copy), UseStateResult2_2 (copy)
 		local Connection = nil
 		
 		if p3.current then
 			local Current = p3.current
 			UseStateResult2_2(Current.AbsoluteSize)
-			Connection = Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 44 ]]
+			Connection = Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: UseStateResult2_2 (upval), Current (copy)
 				UseStateResult2_2(Current.AbsoluteSize)
 			end)
 		end
-		return function() --[[ Line: 49 ]]
+		return function()
 			-- upvalues: Connection (ref)
 			if Connection then
 				Connection:Disconnect()
 			end
 		end
 	end, { p3 })
-	local UseResult = ReactModule.useCallback(function(Target, CanvasPosition) --[[ Line: 57 ]]
+	local UseResult = ReactModule.useCallback(function(Target, CanvasPosition)
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UserGameSettings (upval), p4 (copy), TweenService (upval)
 		if UseRefResult.current then
 			UseRefResult.current:Cancel()
@@ -57,7 +57,7 @@ function useVariableItemWidthScrollHandlers(p1, p2, Callback, p3, p4) --[[ Line:
 			UseRefResult.current = TweenService:Create(Target, TweenInfo.new(p4 or 0.75, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), { CanvasPosition = CanvasPosition }):Play()
 		end
 	end, { UserGameSettings.ReducedMotion, p4 })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 73 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p3 (copy), UseStateResult2 (copy), UseRefResult1 (copy), UseStateResult2_1 (copy), UseStateResult3 (copy)
 		local Current = p3.current
 		
@@ -71,7 +71,7 @@ function useVariableItemWidthScrollHandlers(p1, p2, Callback, p3, p4) --[[ Line:
 			UseStateResult2_1(false)
 		end
 	end, { UseStateResult2, UseStateResult2_1, UseStateResult3 })
-	local UseResult2 = ReactModule.useCallback(function(_): number --[[ Line: 84 ]]
+	local UseResult2 = ReactModule.useCallback(function(_): number
 		-- upvalues: p1 (copy), UseMemoResult (copy), p2 (copy), UseStateResult3 (copy)
 		local Total = 0
 		
@@ -85,7 +85,7 @@ function useVariableItemWidthScrollHandlers(p1, p2, Callback, p3, p4) --[[ Line:
 		end
 		return 1
 	end, { p1, UseMemoResult, p2, UseStateResult3 })
-	local UseResult3 = ReactModule.useCallback(function(Frame, p5) --[[ Line: 97 ]]
+	local UseResult3 = ReactModule.useCallback(function(Frame, p5)
 		-- upvalues: UseStateResult3 (copy), UseRefResult2 (copy), p1 (copy), UseMemoResult (copy), p2 (copy), UseResult2 (copy)
 		local X = UseStateResult3.X
 		local Value = 0
@@ -110,7 +110,7 @@ function useVariableItemWidthScrollHandlers(p1, p2, Callback, p3, p4) --[[ Line:
 	end, {
 		p1, UseMemoResult, p2, clampTargetCanvasPosition, UseResult2, UseStateResult3
 	})
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 132 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: p3 (copy), UseResult3 (copy), UseRefResult2 (copy), UseResult (copy), UseResult1 (copy)
 		local Current = p3.current
 		
@@ -121,7 +121,7 @@ function useVariableItemWidthScrollHandlers(p1, p2, Callback, p3, p4) --[[ Line:
 			UseResult1()
 		end
 	end, { UseResult, UseResult1, UseResult3 })
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 149 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: p3 (copy), UseResult3 (copy), UseRefResult2 (copy), UseResult (copy), UseResult1 (copy)
 		local Current = p3.current
 		

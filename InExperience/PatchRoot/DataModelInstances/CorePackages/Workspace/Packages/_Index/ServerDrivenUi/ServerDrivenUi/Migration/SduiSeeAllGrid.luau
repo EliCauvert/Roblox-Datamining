@@ -16,14 +16,14 @@ local UseCollectionLayoutConfigFunction = require(Parent.CollectionViews).useCol
 local FIntLuaAppDelayImpressionsMaxUpdates = require(Parent.SharedFlags).FIntLuaAppDelayImpressionsMaxUpdates
 local FFlagLuaAppLayoutParamsInContext = require(Parent.SharedFlags).FFlagLuaAppLayoutParamsInContext
 
-return ReactModule.memo(function(p1) --[[ Line: 50 | Named "SduiSeeAllGrid" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ArgCheckModule (copy), UseSelectorFunction (copy), SduiConfigReducerModule (copy), TutilsModule (copy), FFlagLuaAppLayoutParamsInContext (copy), UseCollectionLayoutConfigFunction (copy), UseSduiContextModule (copy), ReactModule (copy), SduiErrors (copy), SduiBuilder (copy), SduiParsers (copy), SduiComponentType (copy), SduiComponent (copy), FIntLuaAppDelayImpressionsMaxUpdates (copy)
 	local LayoutOrder = p1.layoutOrder
 	local VerticalScrollingFrameRef = p1.verticalScrollingFrameRef
 	local ScrollViewPositionChangedSignal = p1.scrollViewPositionChangedSignal
 	ArgCheckModule.assert(p1.collectionId ~= nil, "collectionId id must exist")
 	ArgCheckModule.assert(p1.collectionIndex ~= nil, "collectionIndex id must exist")
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 60 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: SduiConfigReducerModule (upval), p1 (copy)
 		local t = {}
 		local PersonalizationEntry = p2.Personalization[SduiConfigReducerModule.key][p1.appPage]
@@ -47,7 +47,7 @@ return ReactModule.memo(function(p1) --[[ Line: 50 | Named "SduiSeeAllGrid" ]]
 		pageLayoutConfig = if FFlagLuaAppLayoutParamsInContext then UseCollectionLayoutConfigResult else nil
 	})
 	local FeedItemData = UseSelectorResult.feedItemData
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 91 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FeedItemData (copy), UseSduiContextModuleResult (copy), SduiErrors (upval), p1 (copy), SduiBuilder (upval), SduiParsers (upval), SduiComponentType (upval)
 		if not FeedItemData or not FeedItemData.sduiConfig then
 			UseSduiContextModuleResult.dependencies.logger.reportError(SduiErrors.SduiErrorType.NilComponentConfig, {
@@ -115,7 +115,7 @@ return ReactModule.memo(function(p1) --[[ Line: 50 | Named "SduiSeeAllGrid" ]]
 		UseSduiContextModuleResult
 	})
 	
-	return (ReactModule.useMemo(function() --[[ Line: 181 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), UseSduiContextModuleResult (copy), SduiErrors (upval), p1 (copy), ReactModule (upval), SduiComponent (upval), FeedItemData (copy), ScrollViewPositionChangedSignal (copy), VerticalScrollingFrameRef (copy), FIntLuaAppDelayImpressionsMaxUpdates (upval), LayoutOrder (copy), FFlagLuaAppLayoutParamsInContext (upval)
 		if UseMemoResult == nil then
 			UseSduiContextModuleResult.dependencies.logger.reportError(SduiErrors.SduiErrorType.NilComponentConfig, {

@@ -11,12 +11,12 @@ local IconSize = FoundationModule.Enums.IconSize
 local IconPosition = FoundationModule.Enums.IconPosition
 local config = { testId = "--badge" }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 54 | Named "BannerBadge" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsFunction (copy), config (copy), UseTokensFunction (copy), IconSize (copy), ReactModule (copy), IconPosition (copy), Icon (copy), View (copy), WithCommonPropsFunction (copy), Text (copy)
 	local WithDefaultsResult = WithDefaultsFunction(p1, config)
 	local UseTokensResult = UseTokensFunction()
 	local XSmall = IconSize.XSmall
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 61 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsResult (copy), IconPosition (upval)
 		return if typeof(WithDefaultsResult.icon) == "string" then {
 			name = WithDefaultsResult.icon,

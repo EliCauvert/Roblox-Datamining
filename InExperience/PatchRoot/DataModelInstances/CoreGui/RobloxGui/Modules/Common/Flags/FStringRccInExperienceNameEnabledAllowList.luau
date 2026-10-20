@@ -2,7 +2,7 @@
 local T = nil
 
 return {
-	isAllowListedUserId = function(p1): boolean --[[ Line: 7 ]]
+	isAllowListedUserId = function(p1): boolean
 		-- upvalues: T (ref), RccInExperienceNameSettingsEnabledAllowList (copy)
 		local Text = tostring(p1)
 		

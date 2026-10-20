@@ -3,7 +3,7 @@ local NewInviteMenuExperimentManagerModule = require(game:GetService("CoreGui").
 game:DefineFastInt("EnableNewInviteMenuStyleRollout", 0)
 game:DefineFastFlag("EnableNewInviteMenuStyle", false)
 
-return function() --[[ Line: 10 ]]
+return function()
 	-- upvalues: Players (copy), NewInviteMenuExperimentManagerModule (copy)
 	return if Players.LocalPlayer then if game:GetFastFlag("EnableNewInviteMenuStyle") then true else Players.LocalPlayer.UserId % 100 < game:GetFastInt("EnableNewInviteMenuStyleRollout") or NewInviteMenuExperimentManagerModule.default:getStyleEnabled() else false
 end

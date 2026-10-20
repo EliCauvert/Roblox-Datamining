@@ -1,7 +1,7 @@
 ﻿local FFlagBuildExperienceLibrary = require(script:FindFirstAncestor("BuildExperiencePlaytestLaunch").Parent.SharedFlags).FFlagBuildExperienceLibrary
 
 return {
-	isViewer = function(p1) --[[ Line: 4 ]]
+	isViewer = function(p1)
 		-- upvalues: FFlagBuildExperienceLibrary (copy)
 		local P0 = p1 or game
 		

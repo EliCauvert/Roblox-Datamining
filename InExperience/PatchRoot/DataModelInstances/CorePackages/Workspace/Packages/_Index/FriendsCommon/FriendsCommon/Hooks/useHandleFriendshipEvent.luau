@@ -11,7 +11,7 @@ local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
 local HandleFriendshipEventModule = require(FriendsCommon.EventHandlers.handleFriendshipEvent)
 local FFlagFriendSortedByPresenceSignalsImplementation = require(Parent.SharedFlags).FFlagFriendSortedByPresenceSignalsImplementation
 
-return function() --[[ Line: 25 | Named "useHandleFriendshipEvent" ]]
+return function()
 	-- upvalues: UseLocalUserIdFunction (copy), FFlagFriendSortedByPresenceSignalsImplementation (copy), UseApolloClientFunction (copy), UseQueryFunction (copy), Queries (copy), UserIdExistsFunction (copy), ApolloFriendsModule (copy), ReactModule (copy), HandleFriendshipEventModule (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseApolloClientResult = if FFlagFriendSortedByPresenceSignalsImplementation then nil else UseApolloClientFunction()
@@ -24,7 +24,7 @@ return function() --[[ Line: 25 | Named "useHandleFriendshipEvent" ]]
 		}
 	})
 	
-	return (ReactModule.useCallback(function(FriendshipUpdate) --[[ Line: 41 ]]
+	return (ReactModule.useCallback(function(FriendshipUpdate)
 		-- upvalues: HandleFriendshipEventModule (upval), UseLocalUserIdResult (copy), FFlagFriendSortedByPresenceSignalsImplementation (upval), UseQueryResult (copy), UseApolloClientResult (copy)
 		HandleFriendshipEventModule({
 			localUserId = UseLocalUserIdResult,

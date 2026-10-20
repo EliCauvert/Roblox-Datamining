@@ -6,7 +6,7 @@ local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local FFlagLuaAppAlignHeroUnitBottomRowCtaButton = require(Parent.SharedFlags).FFlagLuaAppAlignHeroUnitBottomRowCtaButton
 
-return ReactModule.memo(function(p1) --[[ Line: 29 | Named "SduiHeroUnitBottomRow" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), FFlagLuaAppAlignHeroUnitBottomRowCtaButton (copy)
 	local LayoutOrder = p1.layoutOrder
 	local ZIndex = p1.zIndex
@@ -44,7 +44,7 @@ return ReactModule.memo(function(p1) --[[ Line: 29 | Named "SduiHeroUnitBottomRo
 			Size = UDim2.new(1, 0, 1, 0)
 		}, {
 			UIFlexItem = ReactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }),
-			Label = ReactModule.useMemo(function() --[[ Line: 38 ]]
+			Label = ReactModule.useMemo(function()
 				-- upvalues: p1 (copy), ReactModule (upval), BodySmall (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), GrayColor3 (copy)
 				return if p1.rightLabelContent then ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,

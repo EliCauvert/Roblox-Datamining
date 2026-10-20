@@ -3,7 +3,7 @@ local Axis = require(ViewRecyclerRoblox.Parent.ViewRecycler).Axis
 local AxisMapModule = require(ViewRecyclerRoblox.RobloxAdapter.axisMap)
 local SlotGeometryModule = {}
 
-function SlotGeometryModule.get(p1, p2, p3, p4) --[[ Line: 11 ]]
+function SlotGeometryModule.get(p1, p2, p3, p4)
 	-- upvalues: SlotGeometryModule (copy), AxisMapModule (copy)
 	if p1 ~= nil then
 		return AxisMapModule.positionFor(p1, p2, p4), AxisMapModule.sizeFor(p1, p2, p3)
@@ -14,12 +14,12 @@ function SlotGeometryModule.get(p1, p2, p3, p4) --[[ Line: 11 ]]
 	end
 end
 
-function SlotGeometryModule.getAutomaticSize(Y, p1) --[[ Line: 26 ]]
+function SlotGeometryModule.getAutomaticSize(Y, p1)
 	-- upvalues: Axis (copy)
 	return if p1 then if Y == Axis.Y then Enum.AutomaticSize.Y else Enum.AutomaticSize.X else Enum.AutomaticSize.None
 end
 
-function SlotGeometryModule.getHostSize(AutomaticSize): UDim2 --[[ Line: 33 ]]
+function SlotGeometryModule.getHostSize(AutomaticSize): UDim2
 	return if AutomaticSize == Enum.AutomaticSize.None then UDim2.fromScale(1, 1) elseif AutomaticSize == Enum.AutomaticSize.X then UDim2.fromScale(0, 1) elseif AutomaticSize == Enum.AutomaticSize.Y then UDim2.fromScale(1, 0) else UDim2.new()
 end
 

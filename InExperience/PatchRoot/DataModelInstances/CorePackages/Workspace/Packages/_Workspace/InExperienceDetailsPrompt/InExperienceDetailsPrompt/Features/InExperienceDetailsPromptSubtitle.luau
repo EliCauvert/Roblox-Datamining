@@ -4,7 +4,7 @@ local _ = require(Parent.DataHydration)
 local VerifiedBadgesModule = require(Parent.VerifiedBadges)
 local Text = require(Parent.Foundation).Text
 
-return function(p1) --[[ Line: 16 | Named "InExperienceDetailsPromptSubtitle" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), VerifiedBadgesModule (copy), Text (copy)
 	return if p1.creator.hasVerifiedBadge then ReactModule.createElement(VerifiedBadgesModule.EmojiWrapper, {
 		emoji = VerifiedBadgesModule.emoji.verified,

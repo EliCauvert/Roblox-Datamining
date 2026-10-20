@@ -12,7 +12,7 @@ local _ = require(Commands.types)
 return {
 	name = script.Name,
 	alias = { "/whisper", "/w" },
-	clientRun = function(p1, p2, p3) --[[ Line: 21 ]]
+	clientRun = function(p1, p2, p3)
 		-- upvalues: GetNameFromWhisperModule (copy), Dictionary (copy), GetAutocompletePlayersFromStringModule (copy), Whisper (copy), TextChatService (copy), RobloxReplicatedStorage (copy), ChatInputBarActivatedWhisperModeModule (copy)
 		local NameFromWhisperModule = GetNameFromWhisperModule(p3, p1:getState().AutoCastCommands[script.Name])
 		

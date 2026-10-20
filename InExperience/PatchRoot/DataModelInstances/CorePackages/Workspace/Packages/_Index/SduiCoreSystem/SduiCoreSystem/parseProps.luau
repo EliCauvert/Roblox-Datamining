@@ -9,7 +9,7 @@ local SduiParseHelpersModule = require(SduiCoreSystem.SduiParseHelpers)
 local SduiBuilderProcessingPhase = require(SduiCoreSystem.SduiBuilderTypes).SduiBuilderProcessingPhase
 local ServerBindingPropMap = require(Parent.SduiCompat).ServerBindingPropMap
 
-local function parseProps(ComponentType, Messages, Name, p1, p2, p3, Render) --[[ Line: 32 ]]
+local function parseProps(ComponentType, Messages, Name, p1, p2, p3, Render)
 	-- upvalues: SduiBuilderProcessingPhase (copy), ServerBindingPropMap (copy), parseProps (copy), ReactModule (copy), SduiErrorType (copy), CryoModule (copy), SduiParseHelpersModule (copy)
 	if not Messages then return end
 	assert(Messages, "props must exist")
@@ -22,7 +22,7 @@ local function parseProps(ComponentType, Messages, Name, p1, p2, p3, Render) --[
 		local Callback = P5[PropName]
 		
 		if Callback and (Render ~= SduiBuilderProcessingPhase.Render or p1.componentDefinitions:doesParserRequireRenderContext(Callback)) then
-			local Success, Result = pcall(function() --[[ Line: 66 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: Callback (copy), message (copy), ServerBindingPropMap (upval), parseProps (upval), ComponentType (copy), Name (copy), p1 (copy), p2 (copy), Render (copy), ReactModule (upval)
 				if typeof(Callback) ~= "table" then
 					return if message == "NULL_PROP" then ReactModule.None else Callback(message, p1, p2, Render)

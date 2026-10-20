@@ -9,14 +9,14 @@ local config1 = {
 }
 
 return {
-	buildFavoriteUrl = function(UserId, p1, ItemId) --[[ Line: 22 ]]
+	buildFavoriteUrl = function(UserId, p1, ItemId)
 		-- upvalues: UrlBuilder (copy), Url (copy), config (copy)
 		return UrlBuilder.new({
 			path = "v1/favorites/users/{userId}/{itemPath}/{itemId}/favorite",
 			base = Url.CATALOG_URL
 		})({ userId = UserId, itemPath = config[p1], itemId = ItemId })
 	end,
-	getEndpointName = function(p1) --[[ Line: 33 ]]
+	getEndpointName = function(p1)
 		-- upvalues: config1 (copy)
 		return config1[p1]
 	end

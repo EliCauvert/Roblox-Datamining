@@ -1,6 +1,6 @@
 ﻿local CheckAndSendEventModule = require(script.Parent.Parent.Utils.checkAndSendEvent)
 
-return function(p1, Btn, State, Url, Is_alt_attempt, Origin, Ctype, AssociatedText) --[[ Line: 4 ]]
+return function(p1, Btn, State, Url, Is_alt_attempt, Origin, Ctype, AssociatedText)
 	-- upvalues: CheckAndSendEventModule (copy)
 	local t = {}
 	

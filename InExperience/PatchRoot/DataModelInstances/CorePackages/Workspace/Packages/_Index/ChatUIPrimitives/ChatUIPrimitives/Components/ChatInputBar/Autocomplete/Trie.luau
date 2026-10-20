@@ -1,7 +1,7 @@
 ﻿local Module = {}
 Module.__index = Module
 
-function Module.new(Data) --[[ Line: 4 ]]
+function Module.new(Data)
 	-- upvalues: Module (copy)
 	local self = setmetatable({}, Module)
 	self.children = {}
@@ -14,7 +14,7 @@ end
 local TrieModule = {}
 TrieModule.__index = TrieModule
 
-function TrieModule.new() --[[ Line: 15 ]]
+function TrieModule.new()
 	-- upvalues: TrieModule (copy), Module (copy)
 	local self = setmetatable({}, TrieModule)
 	self.root = Module.new("")
@@ -22,7 +22,7 @@ function TrieModule.new() --[[ Line: 15 ]]
 	return self
 end
 
-function TrieModule:insert(Text: string) --[[ Line: 21 ]]
+function TrieModule:insert(Text: string)
 	-- upvalues: Module (copy)
 	local Root = self.root
 	
@@ -37,7 +37,7 @@ function TrieModule:insert(Text: string) --[[ Line: 21 ]]
 	Root.isEndOfWord = true
 end
 
-function TrieModule:autocomplete(Text: string) --[[ Line: 33 ]]
+function TrieModule:autocomplete(Text: string)
 	local t = {}
 	local Root = self.root
 	
@@ -54,7 +54,7 @@ function TrieModule:autocomplete(Text: string) --[[ Line: 33 ]]
 	return t
 end
 
-function TrieModule:_collect(Root, List, Text) --[[ Line: 48 ]]
+function TrieModule:_collect(Root, List, Text)
 	if Root.isEndOfWord then
 		table.insert(List, Text .. Root.data)
 	end

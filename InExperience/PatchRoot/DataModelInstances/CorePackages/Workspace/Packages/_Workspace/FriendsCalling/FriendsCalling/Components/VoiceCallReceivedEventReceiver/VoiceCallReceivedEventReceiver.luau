@@ -9,12 +9,12 @@ local NotificationTypeEnum = ToastNotificationModule.ToastNotificationTypeModule
 local UseEventConnectionFunction = require(Parent.ReactUtils).useEventConnection
 local Default = require(Parent.ToastNotificationsProtocol).ToastNotificationProtocol.default
 
-return function(p1) --[[ Line: 25 | Named "VoiceCallReceivedEventReceiver" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), Default (copy), NotificationTypeEnum (copy), HttpService (copy), CallingStatusModule (copy), UseEventConnectionFunction (copy), LifecycleEvents (copy)
 	local CallingService = p1.callingService or game:GetService("CallingService")
 	local UseRefResult = ReactModule.useRef({})
 	
-	local function _(p2) --[[ Line: 30 | Named "forgetToast" ]]
+	local function _(p2)
 		-- upvalues: UseRefResult (copy)
 		for i, value in UseRefResult.current do
 			if value == p2 then
@@ -24,9 +24,9 @@ return function(p1) --[[ Line: 25 | Named "VoiceCallReceivedEventReceiver" ]]
 		end
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 39 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Default (upval), NotificationTypeEnum (upval), HttpService (upval), CallingService (copy), UseRefResult (copy), CallingStatusModule (upval)
-		local ListenToDisplayNotificationResult = Default:listenToDisplayNotification(function(p3) --[[ Line: 40 ]]
+		local ListenToDisplayNotificationResult = Default:listenToDisplayNotification(function(p3)
 			-- upvalues: NotificationTypeEnum (upval), HttpService (upval), CallingService (upval), UseRefResult (upval), CallingStatusModule (upval), Default (upval)
 			if p3 == nil or p3.notificationType ~= NotificationTypeEnum.VoiceCallReceived then return end
 			local CallData = HttpService:JSONDecode(p3.lifecycleData).callData
@@ -53,7 +53,7 @@ return function(p1) --[[ Line: 25 | Named "VoiceCallReceivedEventReceiver" ]]
 				return
 			end
 		end)
-		local ListenToDismissNotificationResult = Default:listenToDismissNotification(function(p3) --[[ Line: 63 ]]
+		local ListenToDismissNotificationResult = Default:listenToDismissNotification(function(p3)
 			-- upvalues: UseRefResult (upval)
 			if p3 ~= nil then
 				local NotificationId = p3.notificationId
@@ -67,13 +67,13 @@ return function(p1) --[[ Line: 25 | Named "VoiceCallReceivedEventReceiver" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 69 ]]
+		return function()
 			-- upvalues: ListenToDisplayNotificationResult (copy), ListenToDismissNotificationResult (copy)
 			ListenToDisplayNotificationResult:Disconnect()
 			ListenToDismissNotificationResult:Disconnect()
 		end
 	end, { CallingService })
-	UseEventConnectionFunction(CallingService.OnCallingStateChange, (ReactModule.useCallback(function(p3) --[[ Line: 75 ]]
+	UseEventConnectionFunction(CallingService.OnCallingStateChange, (ReactModule.useCallback(function(p3)
 		-- upvalues: UseRefResult (copy), CallingStatusModule (upval), Default (upval)
 		local CurrentEntry = UseRefResult.current[p3.callId]
 		
@@ -89,9 +89,9 @@ return function(p1) --[[ Line: 25 | Named "VoiceCallReceivedEventReceiver" ]]
 			Default:dismissNotification(CurrentEntry)
 		end
 	end, {})))
-	ReactModule.useEffect(function() --[[ Line: 94 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: LifecycleEvents (upval), NotificationTypeEnum (upval), HttpService (upval), CallingService (copy)
-		return LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.UserAction, NotificationTypeEnum.VoiceCallReceived, function(p3) --[[ Line: 98 ]]
+		return LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.UserAction, NotificationTypeEnum.VoiceCallReceived, function(p3)
 			-- upvalues: HttpService (upval), CallingService (upval)
 			local VisualItem = p3 and p3.visualItem
 			

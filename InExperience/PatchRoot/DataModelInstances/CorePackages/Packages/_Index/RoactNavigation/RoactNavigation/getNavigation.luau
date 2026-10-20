@@ -5,7 +5,7 @@ local GetNavigationActionCreatorsModule = require(Parent.routers.getNavigationAc
 local GetChildNavigationModule = require(Parent.getChildNavigation)
 local GetChildrenNavigationCacheModule = require(Parent.getChildrenNavigationCache)
 
-return function(Router, State, Dispatch, p1, GetScreenProps, Callback) --[[ Line: 13 ]]
+return function(Router, State, Dispatch, p1, GetScreenProps, Callback)
 	-- upvalues: GetChildrenNavigationCacheModule (copy), GetChildNavigationModule (copy), EventsModule (copy), Object (copy), GetNavigationActionCreatorsModule (copy)
 	local ActionCreators = Router.getActionCreators(State, nil)
 	local config = {
@@ -14,21 +14,21 @@ return function(Router, State, Dispatch, p1, GetScreenProps, Callback) --[[ Line
 		state = State,
 		dispatch = Dispatch,
 		getScreenProps = GetScreenProps,
-		_dangerouslyGetParent = function() --[[ Line: 24 ]]
+		_dangerouslyGetParent = function()
 			return nil
 		end,
-		isFirstRouteInParent = function(): boolean --[[ Line: 27 ]]
+		isFirstRouteInParent = function(): boolean
 			return true
 		end,
 		_childrenNavigation = GetChildrenNavigationCacheModule(Callback())
 	}
 	
-	function config.getChildNavigation(p2) --[[ Line: 33 ]]
+	function config.getChildNavigation(p2)
 		-- upvalues: GetChildNavigationModule (upval), config (copy), Callback (copy)
 		return GetChildNavigationModule(config, p2, Callback)
 	end
 	
-	function config.isFocused(Key): boolean --[[ Line: 37 ]]
+	function config.isFocused(Key): boolean
 		-- upvalues: Callback (copy)
 		local State = Callback().state
 		local Routes = State.routes
@@ -37,26 +37,26 @@ return function(Router, State, Dispatch, p1, GetScreenProps, Callback) --[[ Line
 		return Key == nil or Routes[Index].key == Key
 	end
 	
-	function config.addListener(Action, Key) --[[ Line: 45 ]]
+	function config.addListener(Action, Key)
 		-- upvalues: EventsModule (upval), p1 (copy)
 		if Action == EventsModule.Action then
 			p1[Key] = true
 			
 			return {
-				remove = function() --[[ Line: 51 ]]
+				remove = function()
 					-- upvalues: p1 (upval), Key (copy)
 					p1[Key] = nil
 				end
 			}
 		else
-			return { remove = function() --[[ Line: 47 ]] end }
+			return { remove = function() end }
 		end
 	end
 	
 	local AssignResult = Object.assign(GetNavigationActionCreatorsModule(config.state), ActionCreators)
 	
 	for i, _ in AssignResult do
-		config[i] = function(...) --[[ Line: 61 ]]
+		config[i] = function(...)
 			-- upvalues: config (copy), AssignResult (copy), i (copy)
 			config.dispatch(AssignResult[i](...))
 		end

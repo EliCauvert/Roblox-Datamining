@@ -13,7 +13,7 @@ local FFlagGetGameIconsFromThumbnailsDeliveryApiIxp = SharedFlagsModule.FFlagGet
 local FFlagForceGetGameIconsFromThumbnailsDeliveryApi = SharedFlagsModule.FFlagForceGetGameIconsFromThumbnailsDeliveryApi
 local FIntGameIconSmallSizePx = GameIconConstantsModule.FIntGameIconSmallSizePx
 
-local function _() --[[ Line: 27 | Named "resolveThumbnailHost" ]]
+local function _()
 	-- upvalues: FFlagForceGetGameIconsFromThumbnailsDeliveryApi (copy), Url (copy), FFlagGetGameIconsFromThumbnailsDeliveryApiIxp (copy), IXPServiceWrapper (copy), AppUserLayers (copy)
 	if FFlagForceGetGameIconsFromThumbnailsDeliveryApi then
 		return Url.THUMBNAILSDELIVERY_URL
@@ -28,7 +28,7 @@ local function _() --[[ Line: 27 | Named "resolveThumbnailHost" ]]
 	return Url.THUMBNAILS_URL
 end
 
-return function(List, p1, p2) --[[ Line: 39 | Named "fetchGameIcons" ]]
+return function(List, p1, p2)
 	-- upvalues: UrlBuilder (copy), FFlagForceGetGameIconsFromThumbnailsDeliveryApi (copy), Url (copy), FFlagGetGameIconsFromThumbnailsDeliveryApiIxp (copy), IXPServiceWrapper (copy), AppUserLayers (copy), SizeStringFunction (copy), FIntGameIconSmallSizePx (copy), FetchFunction (copy), AsPromiseFunction (copy)
 	local P1 = p2 or {}
 	local AddQueryStringFunction = UrlBuilder.addQueryString
@@ -59,7 +59,7 @@ return function(List, p1, p2) --[[ Line: 39 | Named "fetchGameIcons" ]]
 			universeIds = table.concat(List, ","),
 			size = p1 or SizeStringFunction(FIntGameIconSmallSizePx)
 		}),
-		decode = function(p3) --[[ Line: 56 ]]
+		decode = function(p3)
 			return p3.data or {}
 		end
 	})))

@@ -25,7 +25,7 @@ local config = {
 	zIndex = "ZIndex"
 }
 
-local function applyOverrides(p1, IconOverrides) --[[ Line: 89 ]]
+local function applyOverrides(p1, IconOverrides)
 	-- upvalues: config (copy), CryoModule (copy)
 	if IconOverrides == nil then
 		return p1
@@ -38,7 +38,7 @@ local function applyOverrides(p1, IconOverrides) --[[ Line: 89 ]]
 	return CryoModule.Dictionary.join(p1, t)
 end
 
-return ReactModule.memo(function(p2) --[[ Line: 100 | Named "SduiTextIconRow" ]]
+return ReactModule.memo(function(p2)
 	-- upvalues: TextSizeModule (copy), UseTokensFunction (copy), CheckAndFormatPossibleLinkFunction (copy), ReactModule (copy), applyOverrides (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ImageSetLabel (copy)
 	local LayoutOrder = p2.layoutOrder
 	local AnchorPoint = p2.anchorPoint

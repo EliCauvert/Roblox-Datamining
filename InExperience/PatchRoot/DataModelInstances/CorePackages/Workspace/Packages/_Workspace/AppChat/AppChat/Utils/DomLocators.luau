@@ -1,14 +1,14 @@
-﻿local function _(p1): string --[[ Line: 33 | Named "coerceToString" ]]
+﻿local function _(p1): string
 	return if p1 == nil then "" else tostring(p1)
 end
 
 local DomLocatorsModule = {
-	sanitizeSegment = function(p1) --[[ Line: 40 ]]
+	sanitizeSegment = function(p1)
 		return ((if p1 == nil then "" else tostring(p1)):gsub("%s+", "_"):gsub("[^%w_]", ""))
 	end
 }
 
-function DomLocatorsModule.build(List): string --[[ Line: 51 ]]
+function DomLocatorsModule.build(List): string
 	-- upvalues: DomLocatorsModule (copy)
 	local List1 = {}
 	
@@ -22,7 +22,7 @@ function DomLocatorsModule.build(List): string --[[ Line: 51 ]]
 	return table.concat(List1, "-")
 end
 
-function DomLocatorsModule.chatLandingTopBarIconButton(p1) --[[ Line: 62 ]]
+function DomLocatorsModule.chatLandingTopBarIconButton(p1)
 	-- upvalues: DomLocatorsModule (copy)
 	return DomLocatorsModule.build({
 		"chat",
@@ -33,12 +33,12 @@ function DomLocatorsModule.chatLandingTopBarIconButton(p1) --[[ Line: 62 ]]
 	})
 end
 
-function DomLocatorsModule.appChatLoadingOverlayBackButton() --[[ Line: 72 ]]
+function DomLocatorsModule.appChatLoadingOverlayBackButton()
 	-- upvalues: DomLocatorsModule (copy)
 	return DomLocatorsModule.build({ "chat", "loadingOverlay", "button", "back" })
 end
 
-function DomLocatorsModule.chatLandingConversationListHeader(p1) --[[ Line: 81 ]]
+function DomLocatorsModule.chatLandingConversationListHeader(p1)
 	-- upvalues: DomLocatorsModule (copy)
 	return DomLocatorsModule.build({
 		"chat",
@@ -49,7 +49,7 @@ function DomLocatorsModule.chatLandingConversationListHeader(p1) --[[ Line: 81 ]
 	})
 end
 
-function DomLocatorsModule.chatLandingConversationEntry(p1) --[[ Line: 91 ]]
+function DomLocatorsModule.chatLandingConversationEntry(p1)
 	-- upvalues: DomLocatorsModule (copy)
 	return DomLocatorsModule.build({
 		"chat",
@@ -60,7 +60,7 @@ function DomLocatorsModule.chatLandingConversationEntry(p1) --[[ Line: 91 ]]
 	})
 end
 
-function DomLocatorsModule.chatLandingConversationEntrySquadButton(p1) --[[ Line: 101 ]]
+function DomLocatorsModule.chatLandingConversationEntrySquadButton(p1)
 	-- upvalues: DomLocatorsModule (copy)
 	return DomLocatorsModule.build({
 		"chat", "chatLanding", "conversationList", "conversationEntry", "button",
@@ -68,7 +68,7 @@ function DomLocatorsModule.chatLandingConversationEntrySquadButton(p1) --[[ Line
 	})
 end
 
-function DomLocatorsModule.chatDetailsTopBarActionButton(p1) --[[ Line: 112 ]]
+function DomLocatorsModule.chatDetailsTopBarActionButton(p1)
 	-- upvalues: DomLocatorsModule (copy)
 	return DomLocatorsModule.build({
 		"chat",
@@ -79,7 +79,7 @@ function DomLocatorsModule.chatDetailsTopBarActionButton(p1) --[[ Line: 112 ]]
 	})
 end
 
-function DomLocatorsModule.chatDetailsListActionButton(p1) --[[ Line: 122 ]]
+function DomLocatorsModule.chatDetailsListActionButton(p1)
 	-- upvalues: DomLocatorsModule (copy)
 	return DomLocatorsModule.build({
 		"chat",
@@ -90,7 +90,7 @@ function DomLocatorsModule.chatDetailsListActionButton(p1) --[[ Line: 122 ]]
 	})
 end
 
-function DomLocatorsModule.chatDetailsParticipantMoreButton(p1) --[[ Line: 132 ]]
+function DomLocatorsModule.chatDetailsParticipantMoreButton(p1)
 	-- upvalues: DomLocatorsModule (copy)
 	return DomLocatorsModule.build({
 		"chat", "chatDetails", "detailsList", "participantList", "participantEntry",
@@ -98,7 +98,7 @@ function DomLocatorsModule.chatDetailsParticipantMoreButton(p1) --[[ Line: 132 ]
 	})
 end
 
-function DomLocatorsModule.chatConversationTopBarButton(p1) --[[ Line: 144 ]]
+function DomLocatorsModule.chatConversationTopBarButton(p1)
 	-- upvalues: DomLocatorsModule (copy)
 	return DomLocatorsModule.build({
 		"chat",
@@ -109,7 +109,7 @@ function DomLocatorsModule.chatConversationTopBarButton(p1) --[[ Line: 144 ]]
 	})
 end
 
-function DomLocatorsModule.chatConversationSystemMessageCard(List) --[[ Line: 154 ]]
+function DomLocatorsModule.chatConversationSystemMessageCard(List)
 	-- upvalues: DomLocatorsModule (copy)
 	return DomLocatorsModule.build({
 		"chat",
@@ -120,7 +120,7 @@ function DomLocatorsModule.chatConversationSystemMessageCard(List) --[[ Line: 15
 	})
 end
 
-function DomLocatorsModule.chatConversationSystemMessage(p1) --[[ Line: 164 ]]
+function DomLocatorsModule.chatConversationSystemMessage(p1)
 	-- upvalues: DomLocatorsModule (copy)
 	return DomLocatorsModule.build({
 		"chat",
@@ -131,7 +131,7 @@ function DomLocatorsModule.chatConversationSystemMessage(p1) --[[ Line: 164 ]]
 	})
 end
 
-function DomLocatorsModule.selectChatMembersUserCellWithCheckbox(p1, p2) --[[ Line: 174 ]]
+function DomLocatorsModule.selectChatMembersUserCellWithCheckbox(p1, p2)
 	-- upvalues: DomLocatorsModule (copy)
 	return DomLocatorsModule.build({
 		"chat", "selectChatMembers", "friendsList", "userCellWithCheckbox", "checkbox",
@@ -139,7 +139,7 @@ function DomLocatorsModule.selectChatMembersUserCellWithCheckbox(p1, p2) --[[ Li
 	})
 end
 
-function DomLocatorsModule.selectChatMembersSearchInput(p3) --[[ Line: 185 ]]
+function DomLocatorsModule.selectChatMembersSearchInput(p3)
 	-- upvalues: DomLocatorsModule (copy)
 	return DomLocatorsModule.build({
 		"chat",
@@ -150,7 +150,7 @@ function DomLocatorsModule.selectChatMembersSearchInput(p3) --[[ Line: 185 ]]
 	})
 end
 
-function DomLocatorsModule.selectChatMembersTopBarActionButton(p3) --[[ Line: 195 ]]
+function DomLocatorsModule.selectChatMembersTopBarActionButton(p3)
 	-- upvalues: DomLocatorsModule (copy)
 	return DomLocatorsModule.build({
 		"chat",

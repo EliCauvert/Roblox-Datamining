@@ -10,7 +10,7 @@ return SocialLuaAnalyticsModule.Telemetry.new({
 		{
 			type = SocialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends.EventIngest,
 			standardizedFields = { "addSessionInfo", "addSessionId" },
-			format = function(p1, _) --[[ Line: 49 ]]
+			format = function(p1, _)
 				return p1
 			end
 		}

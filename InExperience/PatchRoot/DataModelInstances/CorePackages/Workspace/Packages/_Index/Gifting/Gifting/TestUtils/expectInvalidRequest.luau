@@ -1,8 +1,8 @@
 ﻿local FailureReasonModule = require(script:FindFirstAncestor("Gifting").Enums.FailureReason)
 
-return function(Callback, Promise) --[[ Line: 7 | Named "expectInvalidRequest" ]]
+return function(Callback, Promise)
 	-- upvalues: FailureReasonModule (copy)
-	local Success, Result = pcall(function() --[[ Line: 8 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: Promise (copy)
 		Promise:expect()
 	end)

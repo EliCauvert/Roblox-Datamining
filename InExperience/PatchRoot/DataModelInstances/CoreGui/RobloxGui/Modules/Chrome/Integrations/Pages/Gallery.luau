@@ -20,13 +20,13 @@ if NoFFlagFixSpatialUICaptures1 then
 		label = "Feature.Captures.Title.Gallery",
 		initialAvailability = if NoFFlagFixSpatialUICaptures1 then ServiceModule.AvailabilitySignal.Available else ServiceModule.AvailabilitySignal.Unavailable,
 		sideSheetPlacement = SideSheetPlacement.BelowFold,
-		activated = function(_) --[[ Line: 38 ]]
+		activated = function(_)
 			-- upvalues: InGameMenuIntegrationUtilsModule (copy), CapturesPage (copy)
 			InGameMenuIntegrationUtilsModule.toggleIGMPage("CapturesPage", CapturesPage:get())
 		end,
 		isActivated = CapturesPage,
 		components = {
-			Icon = function(_) --[[ Line: 43 ]]
+			Icon = function(_)
 				-- upvalues: UpdateGalleryIcon (copy), CommonIconModule (copy), CapturesPage (copy)
 				return if UpdateGalleryIcon then CommonIconModule("Image", nil, CapturesPage) else CommonIconModule("icons/controls/cameraOff", "icons/controls/cameraOn", CapturesPage)
 			end

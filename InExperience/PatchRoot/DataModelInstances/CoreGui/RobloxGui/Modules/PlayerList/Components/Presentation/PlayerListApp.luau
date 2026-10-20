@@ -31,7 +31,7 @@ local config = { dampingRatio = 1, frequency = 7 }
 local Signal = if FFlagPlayerListFixPlatformLeaderboardSizing and FFlagPlayerListTwoTabsOnLegacy then SignalsModule.createSignal(false) else nil
 local PlayerListApp = RoactModule.PureComponent:extend("PlayerListApp")
 
-local function _(List): boolean --[[ Line: 62 | Named "shouldShowNeutralTeam" ]]
+local function _(List): boolean
 	for _, Player in ipairs(List) do
 		if Player.Team == nil then
 			return true
@@ -40,7 +40,7 @@ local function _(List): boolean --[[ Line: 62 | Named "shouldShowNeutralTeam" ]]
 	return false
 end
 
-local function getTeamCount(Teams, Players): number --[[ Line: 71 ]]
+local function getTeamCount(Teams, Players): number
 	local t = {}
 	local Count = 0
 	
@@ -66,22 +66,22 @@ local function getTeamCount(Teams, Players): number --[[ Line: 71 ]]
 	return Count
 end
 
-function PlayerListApp.init(p1) --[[ Line: 86 ]]
+function PlayerListApp.init(p1)
 	-- upvalues: RoactModule (copy), OtterModule (copy), SignalsModule (copy), DisplayModule (copy)
 	p1.state = { visible = true }
 	p1.positionOffset, p1.updatePositionOffset = RoactModule.createBinding(UDim2.new(0, 0, 0, 0))
 	p1.positionMotor = OtterModule.createSingleMotor(0)
-	p1.positionMotor:onStep(function(XScale) --[[ Line: 94 ]]
+	p1.positionMotor:onStep(function(XScale)
 		-- upvalues: p1 (copy)
 		p1.updatePositionOffset(UDim2.new(XScale, 0, 0, 0))
 	end)
-	p1.positionMotor:onComplete(function(_) --[[ Line: 97 ]]
+	p1.positionMotor:onComplete(function(_)
 		-- upvalues: p1 (copy)
 		if not p1.props.displayOptions.isVisible then
 			p1:setState({ visible = false })
 		end
 	end)
-	p1.disposeUiScaleEffect = SignalsModule.createEffect(function(p2) --[[ Line: 104 ]]
+	p1.disposeUiScaleEffect = SignalsModule.createEffect(function(p2)
 		-- upvalues: DisplayModule (upval), p1 (copy)
 		p1:setState({
 			UiScale = DisplayModule.GetDisplayStore(p2).getUIScale(p2)
@@ -89,9 +89,9 @@ function PlayerListApp.init(p1) --[[ Line: 86 ]]
 	end)
 end
 
-function PlayerListApp.render(p1) --[[ Line: 112 ]]
+function PlayerListApp.render(p1)
 	-- upvalues: RoactModule (copy), ContextActionsBinderModule (copy), FFlagAddNewPlayerListFocusNav (copy), EventConnectionsModule (copy), WithLayoutValuesFunction (copy), StatsUtilsModule (copy), FFlagPlayerListFixPlatformLeaderboardSizing (copy), Constants (copy), Players (copy), getTeamCount (copy), PlayerEntryContainerModule (copy), PlayerListDisplayContainerModule (copy), FFlagPlayerListRemoveTopStatModule (copy), TopStatConnectorModule (copy), TenFootSideBarModule (copy)
-	return if p1.state.visible then WithLayoutValuesFunction(function(Frame) --[[ Line: 120 ]]
+	return if p1.state.visible then WithLayoutValuesFunction(function(Frame)
 		-- upvalues: p1 (copy), StatsUtilsModule (upval), FFlagPlayerListFixPlatformLeaderboardSizing (upval), Constants (upval), Players (upval), getTeamCount (upval), RoactModule (upval), PlayerEntryContainerModule (upval), PlayerListDisplayContainerModule (upval), FFlagAddNewPlayerListFocusNav (upval), EventConnectionsModule (upval), ContextActionsBinderModule (upval), FFlagPlayerListRemoveTopStatModule (upval), TopStatConnectorModule (upval), TenFootSideBarModule (upval)
 		local ContainerPosition = Frame.ContainerPosition
 		local ContainerSize = Frame.ContainerSize
@@ -192,11 +192,11 @@ function PlayerListApp.render(p1) --[[ Line: 112 ]]
 	})
 end
 
-function PlayerListApp.didMount(p2) --[[ Line: 246 ]]
+function PlayerListApp.didMount(p2)
 	p2:setState({ visible = p2.props.displayOptions.isVisible })
 end
 
-function PlayerListApp.didUpdate(p2, p3, _) --[[ Line: 252 ]]
+function PlayerListApp.didUpdate(p2, p3, _)
 	-- upvalues: OtterModule (copy), config (copy)
 	if p2.props.displayOptions.isVisible ~= p3.displayOptions.isVisible then
 		if p2.props.displayOptions.isTenFootInterface then
@@ -217,7 +217,7 @@ function PlayerListApp.didUpdate(p2, p3, _) --[[ Line: 252 ]]
 	end
 end
 
-function PlayerListApp.willUnmount(p2) --[[ Line: 273 ]]
+function PlayerListApp.willUnmount(p2)
 	p2.positionMotor:destroy()
 	p2.positionMotor = nil
 	
@@ -226,7 +226,7 @@ function PlayerListApp.willUnmount(p2) --[[ Line: 273 ]]
 	end
 end
 
-return RoactRoduxModule.connect(function(p2) --[[ Line: 282 | Named "mapStateToProps" ]]
+return RoactRoduxModule.connect(function(p2)
 	return {
 		screenSizeX = p2.screenSize.X,
 		screenSizeY = p2.screenSize.Y,
@@ -238,10 +238,10 @@ return RoactRoduxModule.connect(function(p2) --[[ Line: 282 | Named "mapStateToP
 		gameStats = p2.gameStats,
 		teams = p2.teams
 	}
-end, nil)(function(p2) --[[ Line: 298 | Named "PlayerListAppWithLeaderboardStore" ]]
+end, nil)(function(p2)
 	-- upvalues: UseLeaderboardStoreFunction (copy), SignalsModule (copy), SignalsReactModule (copy), FFlagPlayerListFixPlatformLeaderboardSizing (copy), FFlagPlayerListTwoTabsOnLegacy (copy), UsePlatformLeaderboardFunction (copy), Signal (copy), RoactModule (copy), PlayerListApp (copy), CryoModule (copy)
 	local UseLeaderboardStoreResult = UseLeaderboardStoreFunction()
-	local UseSignalStateResult = SignalsReactModule.useSignalState((SignalsModule.createComputed(function(p3) --[[ Line: 301 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState((SignalsModule.createComputed(function(p3)
 		-- upvalues: UseLeaderboardStoreResult (copy), p2 (copy)
 		return if UseLeaderboardStoreResult then UseLeaderboardStoreResult.getGameStatsList().getCount(p3) else #p2.gameStats
 	end)))

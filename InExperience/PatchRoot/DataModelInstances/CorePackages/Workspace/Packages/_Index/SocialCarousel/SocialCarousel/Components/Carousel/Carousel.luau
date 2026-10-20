@@ -38,21 +38,21 @@ if FFlagSocialCarouselInGameTitleMarquee then
 	RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
 	UseNavigationFocusFunction = require(Parent.Navigation).useNavigationFocus
 end
-local function _(Enabled, p1): boolean --[[ Line: 47 | Named "isOverlaySheetOpen" ]]
+local function _(Enabled, p1): boolean
 	return Enabled ~= true or p1 ~= nil
 end
 
-local _ = function(Phone): boolean --[[ Line: 52 | Named "isIdleMarqueeEnabled" ]]
+local _ = function(Phone): boolean
 	-- upvalues: RobloxAppEnumsModule (ref)
 	return RobloxAppEnumsModule ~= nil and (Phone == RobloxAppEnumsModule.DeviceType.Phone or Phone == RobloxAppEnumsModule.DeviceType.Tablet)
 end
 
-local _ = function(Desktop, Enabled, p1): boolean --[[ Line: 60 | Named "isDesktopHoverEnabled" ]]
+local _ = function(Desktop, Enabled, p1): boolean
 	-- upvalues: RobloxAppEnumsModule (ref)
 	return RobloxAppEnumsModule ~= nil and (Desktop == RobloxAppEnumsModule.DeviceType.Desktop and Enabled == true and p1 == nil)
 end
 
-local _ = function(Friend, p1, p2, p3, p4, p5, p6, p7, p8, p9) --[[ Line: 68 | Named "friendTileMarqueeProps" ]]
+local _ = function(Friend, p1, p2, p3, p4, p5, p6, p7, p8, p9)
 	-- upvalues: Tile (copy)
 	if Friend == Tile.Friend and p2 ~= nil then
 		return if p2[p1] == true then if p3 then "Paused" else "Playing" else "Idle", if p8 then p5 else nil, p4, if p9 then p6 else nil, if p9 then p7 else nil
@@ -61,14 +61,14 @@ local _ = function(Friend, p1, p2, p3, p4, p5, p6, p7, p8, p9) --[[ Line: 68 | N
 	end
 end
 
-local _ = function(p1) --[[ Line: 97 | Named "whenMarqueeEnabled" ]]
+local _ = function(p1)
 	-- upvalues: FFlagSocialCarouselInGameTitleMarquee (copy)
 	return if FFlagSocialCarouselInGameTitleMarquee then p1 else nil
 end
 
 local t = {}
 
-return function(p1) --[[ Line: 115 | Named "Carousel" ]]
+return function(p1)
 	-- upvalues: FFlagLuaAppCompositionAlways (copy), FixCarouselTileSizeScaling (copy), UseTokensFunction (copy), UseSocialCarouselContextModule (copy), UseTilesSeenCollectionModule (copy), ReactModule (copy), FFlagSocialCarouselShowLoadingSkeletonModule (copy), ConstantsModule (copy), UseLocalizationFunction (copy), UsePageSideMarginFunction (copy), UseCollectionLayoutParamsFunction (copy), CollectionItemSize (copy), UseCollectionLayoutFunction (copy), FFlagSocialCarouselFixColdStartJitterModule (copy), RobloxAppHooksModule (copy), UseColdStartLayoutReadyModule (copy), FFlagSocialCarouselInGameTitleMarquee (copy), FoundationModule (copy), RobloxAppEnumsModule (ref), UseNavigationFocusFunction (ref), Tile (copy), MarqueeTextMotionModule (ref), CollectionViewsModule (copy), UseMarqueeActiveTilesFunction (ref), TileComponentsModule (copy), t (copy), CollectionCarousel (copy), FFlagLuaAppFriendsSortHeaderByPosition (copy), FFlagFlyoutHideFriendsHeaderModule (copy), FFlagEnableFlyoutFriendsHeaderFix (copy), FlyoutSidePanelIXP (copy)
 	local FFlagLuaAppCompositionAlways1 = FFlagLuaAppCompositionAlways or p1.appCompositionEnabled
 	local UseTokensResult = if FixCarouselTileSizeScaling then UseTokensFunction() else nil
@@ -100,12 +100,12 @@ return function(p1) --[[ Line: 115 | Named "Carousel" ]]
 	if FFlagSocialCarouselFixColdStartJitterModule then
 		local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Vector2.zero)
 		v1 = UseColdStartLayoutReadyModule(RobloxAppHooksModule.useDeviceOrientation() ~= nil, RobloxAppHooksModule.useScreenSize(), UseStateResult1.X, ItemsPerRow1)
-		UseResult = ReactModule.useCallback(function(p2) --[[ Line: 158 ]]
+		UseResult = ReactModule.useCallback(function(p2)
 			-- upvalues: UseStateResult2_1 (copy)
 			UseStateResult2_1(p2)
 		end, {})
 	end
-	ReactModule.useEffect(function() --[[ Line: 163 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ItemsPerRow1 (copy), UseRefResult3 (copy), UseRefResult2 (copy), UseRefResult4 (copy)
 		if ItemsPerRow1 ~= UseRefResult3.current then
 			UseRefResult3.current = ItemsPerRow1
@@ -114,23 +114,23 @@ return function(p1) --[[ Line: 115 | Named "Carousel" ]]
 			if UseRefResult4.current then
 				pcall(task.cancel, UseRefResult4.current)
 			end
-			UseRefResult4.current = task.delay(0.2, function() --[[ Line: 172 ]]
+			UseRefResult4.current = task.delay(0.2, function()
 				-- upvalues: UseRefResult2 (upval), UseRefResult4 (upval)
 				UseRefResult2.current = true
 				UseRefResult4.current = nil
 			end)
 		end
 	end, { ItemsPerRow1 })
-	ReactModule.useEffect(function() --[[ Line: 179 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult4 (copy)
-		return function() --[[ Line: 180 ]]
+		return function()
 			-- upvalues: UseRefResult4 (upval)
 			if UseRefResult4.current then
 				pcall(task.cancel, UseRefResult4.current)
 			end
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 187 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: FixCarouselTileSizeScaling (upval), ConstantsModule (upval), UseTokensResult (copy)
 		return p2 + (if FixCarouselTileSizeScaling then ConstantsModule.TILE_TEXT_HEIGHT * UseTokensResult.Config.UI.Scale else ConstantsModule.TILE_TEXT_HEIGHT)
 	end, {})
@@ -168,7 +168,7 @@ return function(p1) --[[ Line: 115 | Named "Carousel" ]]
 			containerWidth = math.max(0, X - 2 * (SideMargin or 0)),
 			tileWidth = if ItemsPerRow1 > 0 and X > 0 then CollectionViewsModule.calculateItemWidth(ItemsPerRow1, Gutter or 0, SideMargin or 0, X, FractionalItemAmount1 or 0, CarouselPeek or 0) else 0,
 			columnGap = Gutter or 0,
-			tiles = ReactModule.useMemo(function() --[[ Line: 215 ]]
+			tiles = ReactModule.useMemo(function()
 				-- upvalues: Tiles (copy), Tile (upval)
 				local List = {}
 				
@@ -211,7 +211,7 @@ return function(p1) --[[ Line: 115 | Named "Carousel" ]]
 	local OnMarqueeHoverEnd1 = OnMarqueeHoverEnd
 	local v4: boolean = v2
 	local v5: boolean = v3
-	local UseResult2 = ReactModule.useCallback(function(p2, p3) --[[ Line: 346 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: UseSocialCarouselContextModuleResult (copy), UseStateResult (copy), UseRefResult (copy), UseRefResult2 (copy), ItemsPerRow1 (copy), UseRefResult1 (copy), UseTilesSeenCollectionModuleResult (copy)
 		if UseSocialCarouselContextModuleResult.unifiedLogging then
 			UseSocialCarouselContextModuleResult.unifiedLogging.onCollectionViewabilityChanged(p2, p3)
@@ -236,7 +236,7 @@ return function(p1) --[[ Line: 115 | Named "Carousel" ]]
 		p1.onViewableItemsChanged, UseSocialCarouselContextModuleResult.tiles,
 		UseStateResult, UseRefResult, ItemsPerRow1, UseTilesSeenCollectionModuleResult
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 384 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FFlagSocialCarouselShowLoadingSkeletonModule (upval), ItemsPerRow1 (copy), Tile (upval)
 		local t = {}
 		
@@ -262,7 +262,7 @@ return function(p1) --[[ Line: 115 | Named "Carousel" ]]
 			onContainerSizeChanged = if FFlagSocialCarouselFixColdStartJitterModule then UseResult else nil,
 			title = UseLocalizationResult.friendsLabel,
 			items = if FFlagSocialCarouselFixColdStartJitterModule and not v1 then t else UseMemoResult1,
-			renderItem = ReactModule.useCallback(function(p4, p5, p6) --[[ Line: 290 ]]
+			renderItem = ReactModule.useCallback(function(p4, p5, p6)
 				-- upvalues: SelectionOrderBase (copy), FFlagSocialCarouselInGameTitleMarquee (upval), ActiveByIndex (ref), IsPaused (ref), MarqueeRunId (ref), OnMarqueeFinished (ref), OnMarqueeHover (ref), OnMarqueeHoverEnd (ref), v2 (ref), v3 (ref), Tile (upval), TileComponentsModule (upval), p1 (copy)
 				local NewSelectionOrderBase = if SelectionOrderBase then SelectionOrderBase + p5 else nil
 				local v6: string? = nil
@@ -305,7 +305,7 @@ return function(p1) --[[ Line: 115 | Named "Carousel" ]]
 					v9 = v16
 					v10 = v13
 				end
-				return TileComponentsModule[p4.tileType](p4, p5, p6, NewSelectionOrderBase, function(p7, p8) --[[ Line: 318 ]]
+				return TileComponentsModule[p4.tileType](p4, p5, p6, NewSelectionOrderBase, function(p7, p8)
 					-- upvalues: p1 (upval), p4 (copy)
 					if p1.onTileContentChanged then
 						p1.onTileContentChanged(p7, p8, p4)

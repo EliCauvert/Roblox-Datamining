@@ -2,7 +2,7 @@
 local UseCountdownTextModule = require(GamePlayButton.EarlyAccess.useCountdownText)
 local UseLocalizationFunction = require(GamePlayButton.Parent.Localization).Hooks.useLocalization
 
-return function(p1) --[[ Line: 8 | Named "useEarlyAccessCaption" ]]
+return function(p1)
 	-- upvalues: UseCountdownTextModule (copy), UseLocalizationFunction (copy)
 	local UseCountdownTextModuleResult = UseCountdownTextModule(if p1 then p1.unlockTimestamp else nil)
 	local UseLocalizationResult = UseLocalizationFunction({

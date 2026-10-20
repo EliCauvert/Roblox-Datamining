@@ -1,6 +1,6 @@
 ﻿local MessageGroupShapeModule = require(script:FindFirstAncestor("AppChat").Components.ChatConversation.Grouping.MessageGroupShape)
 
-return function(p1, p2, p3, p4) --[[ Line: 7 | Named "toMessageGroupShape" ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: MessageGroupShapeModule (copy)
 	return {
 		direction = if p4 then MessageGroupShapeModule.Direction.Incoming else MessageGroupShapeModule.Direction.Outgoing,

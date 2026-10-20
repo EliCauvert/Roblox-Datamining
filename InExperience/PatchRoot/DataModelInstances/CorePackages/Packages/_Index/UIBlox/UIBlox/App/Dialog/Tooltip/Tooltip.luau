@@ -32,8 +32,8 @@ Tooltip.defaultProps = {
 	orientation = TooltipOrientationModule.Bottom
 }
 
-function Tooltip.init(p1) --[[ Line: 67 ]]
-	function p1.onDismissDefault() --[[ Line: 68 ]]
+function Tooltip.init(p1)
+	function p1.onDismissDefault()
 		-- upvalues: p1 (copy)
 		if p1.props.forceClickTriggerPoint or p1.props.triggerOnHover then return end
 		if p1.props.onDismiss then
@@ -42,12 +42,12 @@ function Tooltip.init(p1) --[[ Line: 67 ]]
 	end
 end
 
-function Tooltip.render(p1) --[[ Line: 78 ]]
+function Tooltip.render(p1)
 	-- upvalues: WithStyleModule (copy), RoactModule (copy), TooltipContainerModule (copy)
 	local ForceClickTriggerPoint = p1.props.forceClickTriggerPoint or p1.props.triggerOnHover
 	local IsDirectChild = p1.props.isDirectChild
 	
-	return WithStyleModule(function(p2) --[[ Line: 81 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: p1 (copy), RoactModule (upval), IsDirectChild (copy), ForceClickTriggerPoint (copy), TooltipContainerModule (upval)
 		local Theme = p2.Theme
 		local config = {

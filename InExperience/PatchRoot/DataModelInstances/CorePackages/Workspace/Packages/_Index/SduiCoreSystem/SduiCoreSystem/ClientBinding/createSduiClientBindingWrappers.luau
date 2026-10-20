@@ -12,7 +12,7 @@ local _ = require(SduiCoreSystem.SduiComponentType)
 local GetSduiComponentRegistryModule = require(SduiCoreSystem.getSduiComponentRegistry)
 local ValidateInterfaceModule = require(SduiCoreSystem.validateInterface)
 
-local function SduiErrorComponent(_) --[[ Line: 21 ]]
+local function SduiErrorComponent(_)
 	-- upvalues: ReactModule (copy)
 	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -22,7 +22,7 @@ end
 
 local t = {}
 
-local function buildWrappedComponent(Callback, p1, List) --[[ Line: 38 ]]
+local function buildWrappedComponent(Callback, p1, List)
 	-- upvalues: t (copy), ReactModule (copy), GetSduiComponentRegistryModule (copy), SduiErrorType (copy), SduiErrorComponent (copy), ValidateInterfaceModule (copy)
 	local ComponentType = p1.componentConfig.componentType
 	local SduiContext = p1.sduiContext
@@ -109,23 +109,23 @@ local function buildWrappedComponent(Callback, p1, List) --[[ Line: 38 ]]
 	end
 end
 
-return function(p2) --[[ Line: 167 | Named "createSduiClientBindingWrappers" ]]
+return function(p2)
 	-- upvalues: ReactModule (copy), buildWrappedComponent (copy), CompareSduiPropsModule (copy), SignalsModule (copy), TutilsModule (copy), SignalsReactModule (copy)
 	return {
-		SduiClientBindingThinWrapper = ReactModule.memo(function(p3) --[[ Line: 173 ]]
+		SduiClientBindingThinWrapper = ReactModule.memo(function(p3)
 			-- upvalues: buildWrappedComponent (upval), p2 (copy)
 			return buildWrappedComponent(p2, p3)
 		end, CompareSduiPropsModule),
-		SduiDataBindingWrapper = ReactModule.memo(function(p3) --[[ Line: 179 ]]
+		SduiDataBindingWrapper = ReactModule.memo(function(p3)
 			-- upvalues: ReactModule (upval), SignalsModule (upval), TutilsModule (upval), SignalsReactModule (upval), buildWrappedComponent (upval), p2 (copy)
 			local PropSignals = p3.componentConfig.propSignals
 			local IsComponentFilteredSignalFunction = p3.componentConfig.isComponentFilteredSignal
 			local ExtraLocalPropSignals = p3.extraLocalPropSignals
-			local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 186 ]]
+			local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 				-- upvalues: PropSignals (copy), IsComponentFilteredSignalFunction (copy), ExtraLocalPropSignals (copy), SignalsModule (upval), TutilsModule (upval)
 				assert(PropSignals or (IsComponentFilteredSignalFunction or ExtraLocalPropSignals), "propSignals, isComponentFilteredSignal, or extraLocalPropSignals must exist")
 				
-				return SignalsModule.createComputed(function(p4) --[[ Line: 191 ]]
+				return SignalsModule.createComputed(function(p4)
 					-- upvalues: PropSignals (upval), ExtraLocalPropSignals (upval), IsComponentFilteredSignalFunction (upval)
 					local t = {}
 					

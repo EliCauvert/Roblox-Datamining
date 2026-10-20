@@ -5,12 +5,12 @@ local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
 	base = require(Parent.Http).Url.NOTIFICATION_URL
 })
 
-return function(Callback, NotificationId, ActionPath) --[[ Line: 13 ]]
+return function(Callback, NotificationId, ActionPath)
 	-- upvalues: PromiseModule (copy), NewResult (copy)
-	return if NotificationId == nil or NotificationId == "" or ActionPath == nil or ActionPath == "" then PromiseModule.reject() else Callback(NewResult({ notificationId = NotificationId, actionPath = ActionPath }), "POST", { postBody = "{}" }):andThen(function(Result) --[[ Line: 23 ]]
+	return if NotificationId == nil or NotificationId == "" or ActionPath == nil or ActionPath == "" then PromiseModule.reject() else Callback(NewResult({ notificationId = NotificationId, actionPath = ActionPath }), "POST", { postBody = "{}" }):andThen(function(Result)
 		-- upvalues: PromiseModule (upval)
 		return if Result.responseCode == 200 then PromiseModule.resolve() else PromiseModule.reject()
-	end, function(_) --[[ Line: 29 ]]
+	end, function(_)
 		-- upvalues: PromiseModule (upval)
 		return PromiseModule.reject()
 	end)

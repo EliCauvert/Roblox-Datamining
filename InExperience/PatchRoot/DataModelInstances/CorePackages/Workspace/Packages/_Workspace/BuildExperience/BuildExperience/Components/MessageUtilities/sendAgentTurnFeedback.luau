@@ -11,7 +11,7 @@ local config = {
 	lastUpdated = { 2026, 7, 30 }
 }
 
-return function(Action, p1) --[[ Line: 24 | Named "sendAgentTurnFeedback" ]]
+return function(Action, p1)
 	-- upvalues: Debug (copy), TelemetryService (copy), config (copy)
 	local CustomFields = {
 		action = Action,

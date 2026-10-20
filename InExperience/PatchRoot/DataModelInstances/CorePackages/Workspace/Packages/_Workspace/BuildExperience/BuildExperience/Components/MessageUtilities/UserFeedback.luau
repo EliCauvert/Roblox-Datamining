@@ -8,7 +8,7 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local IconVariant = FoundationModule.Enums.IconVariant
 local InputSize = FoundationModule.Enums.InputSize
 
-return function(p1) --[[ Line: 34 | Named "UserFeedback" ]]
+return function(p1)
 	-- upvalues: IconVariant (copy), ReactModule (copy), IconButton (copy), InputSize (copy), ButtonVariant (copy), View (copy)
 	local TestId = p1.testId or "user-feedback"
 	local OnActivatedFunction = p1.onActivated
@@ -21,7 +21,7 @@ return function(p1) --[[ Line: 34 | Named "UserFeedback" ]]
 			LayoutOrder = LayoutOrder,
 			icon = if IsSelectedActionMatch then { name = icon.iconName, variant = IconVariant.Filled } else icon.iconName,
 			isDisabled = icon.isDisabled,
-			onActivated = function() --[[ Line: 52 ]]
+			onActivated = function()
 				-- upvalues: SelectedAction (copy), icon (copy), OnActivatedFunction (copy)
 				if SelectedAction ~= icon.action or icon.allowRepeatedActivation == true then
 					OnActivatedFunction(icon)

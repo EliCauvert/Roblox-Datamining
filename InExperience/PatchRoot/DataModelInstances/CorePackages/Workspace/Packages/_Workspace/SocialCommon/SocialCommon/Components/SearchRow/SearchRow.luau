@@ -3,7 +3,7 @@ local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local SearchFieldModule = require(script.Parent.SearchField)
 
-return function(Frame) --[[ Line: 44 | Named "SearchRow" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), SearchFieldModule (copy)
 	local OnExit = Frame.onExit
 	local ExitVariant = Frame.exitVariant or "Cancel"

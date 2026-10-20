@@ -13,7 +13,7 @@ EmoteThumbnailView.validateProps = TModule.strictInterface({
 	size = TModule.optional(TModule.UDim2)
 })
 
-function EmoteThumbnailView.updateCameraAndCharacterPose(p1) --[[ Line: 32 ]]
+function EmoteThumbnailView.updateCameraAndCharacterPose(p1)
 	-- upvalues: EmoteUtility (copy), RunService (copy)
 	if p1.character == nil then return end
 	local Props = p1.props
@@ -34,7 +34,7 @@ function EmoteThumbnailView.updateCameraAndCharacterPose(p1) --[[ Line: 32 ]]
 	end
 	EmoteUtility.SetPlayerCharacterNeutralPose(Character)
 	EmoteUtility.ApplyKeyframe(Character, ThumbnailKeyframe1)
-	task.spawn(function() --[[ Line: 64 ]]
+	task.spawn(function()
 		-- upvalues: RunService (upval), Character (copy), EmoteUtility (upval), ThumbnailParameters (copy), p1 (copy)
 		RunService.PreAnimation:Wait()
 		RunService.PostSimulation:Wait()
@@ -47,7 +47,7 @@ function EmoteThumbnailView.updateCameraAndCharacterPose(p1) --[[ Line: 32 ]]
 	end)
 end
 
-function EmoteThumbnailView.addCharacterToViewportIfNeeded(p1) --[[ Line: 90 ]]
+function EmoteThumbnailView.addCharacterToViewportIfNeeded(p1)
 	if p1.character ~= nil and p1.character.Parent ~= nil then return end
 	if p1.worldModelRef:getValue() and p1.character ~= nil then
 		p1.character.Parent = p1.worldModelRef:getValue()
@@ -55,15 +55,15 @@ function EmoteThumbnailView.addCharacterToViewportIfNeeded(p1) --[[ Line: 90 ]]
 	end
 end
 
-function EmoteThumbnailView.init(p1) --[[ Line: 101 ]]
+function EmoteThumbnailView.init(p1)
 	-- upvalues: RoactModule (copy), Players (copy)
 	p1.cameraRef = RoactModule.createRef()
 	p1.worldModelRef = RoactModule.createRef()
 	p1.cameraCFrameBinding, p1.updateCameraCFrameBinding = RoactModule.createBinding(CFrame.new())
 	p1.cameraFocusBinding, p1.updateCameraFocusBinding = RoactModule.createBinding(CFrame.new())
-	task.spawn(function() --[[ Line: 108 ]]
+	task.spawn(function()
 		-- upvalues: Players (upval), p1 (copy)
-		local Success, Result = pcall(function() --[[ Line: 110 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Players (upval)
 			return (Players:GetHumanoidDescriptionFromOutfitIdAsync(1342485078))
 		end)
@@ -76,7 +76,7 @@ function EmoteThumbnailView.init(p1) --[[ Line: 101 ]]
 	end)
 end
 
-function EmoteThumbnailView.render(p1) --[[ Line: 123 ]]
+function EmoteThumbnailView.render(p1)
 	-- upvalues: RoactModule (copy)
 	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 0,
@@ -112,11 +112,11 @@ function EmoteThumbnailView.render(p1) --[[ Line: 123 ]]
 	})
 end
 
-function EmoteThumbnailView.didMount(p1) --[[ Line: 172 ]]
+function EmoteThumbnailView.didMount(p1)
 	p1:addCharacterToViewportIfNeeded()
 end
 
-function EmoteThumbnailView.didUpdate(p1, _) --[[ Line: 176 ]]
+function EmoteThumbnailView.didUpdate(p1, _)
 	p1:updateCameraAndCharacterPose()
 end
 

@@ -13,7 +13,7 @@ return {
 	prereqTests = {
 		ValidationEnumsModule.ValidationModule.ExpectedRootSchema
 	},
-	run = function(p1, p2) --[[ Line: 17 ]]
+	run = function(p1, p2)
 		-- upvalues: ErrorSourceStringsModule (copy)
 		if p2.uploadEnum.assetType ~= Enum.AssetType.IdleAnimation then return end
 		for _, NumberValue in p2.rootInstance:GetDescendants() do

@@ -19,10 +19,10 @@ local config = {
 	bodyText = "Placeholder body",
 	onAccepted = nil,
 	onDenied = nil,
-	onHeightChanged = function(_) --[[ Line: 45 ]] end
+	onHeightChanged = function(_) end
 }
 
-return function(p1) --[[ Line: 53 | Named "ConversationModal" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseTokensFunction (copy), UseIsInExperienceModule (copy), UseChatPagePaddingModule (copy), UseEffectFunction (copy), UseMemoFunction (copy), ButtonEnum (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ButtonStack (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseStyleResult = UseStyleFunction()
@@ -32,14 +32,14 @@ return function(p1) --[[ Line: 53 | Named "ConversationModal" ]]
 	local Size1000 = Style.Tokens.Size.Size_1000
 	local Size500 = Style.Tokens.Size.Size_500
 	local UseChatPagePaddingModuleResult = UseChatPagePaddingModule()
-	UseEffectFunction(function() --[[ Line: 64 ]]
+	UseEffectFunction(function()
 		-- upvalues: JoinResult (copy)
-		return function() --[[ Line: 65 ]]
+		return function()
 			-- upvalues: JoinResult (upval)
 			JoinResult.onHeightChanged(0)
 		end
 	end, {})
-	local UseMemoResult = UseMemoFunction(function() --[[ Line: 70 ]]
+	local UseMemoResult = UseMemoFunction(function()
 		-- upvalues: JoinResult (copy), ButtonEnum (upval)
 		local List = {}
 		
@@ -80,7 +80,7 @@ return function(p1) --[[ Line: 53 | Named "ConversationModal" ]]
 		LayoutOrder = JoinResult.layoutOrder,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 107 ]]
+		[ReactModule.Change.AbsoluteSize] = function(Frame)
 			-- upvalues: JoinResult (copy)
 			JoinResult.onHeightChanged(Frame.AbsoluteSize.Y)
 		end

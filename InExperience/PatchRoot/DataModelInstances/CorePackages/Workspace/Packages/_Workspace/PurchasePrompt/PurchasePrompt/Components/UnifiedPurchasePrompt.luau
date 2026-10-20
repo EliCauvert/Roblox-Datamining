@@ -15,10 +15,10 @@ local FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow = SharedFlagsModu
 local FFlagPurchasePromptSubtitleForTimedOptions = SharedFlagsModule.FFlagPurchasePromptSubtitleForTimedOptions
 local _ = require(PurchasePrompt.types)
 
-return function(p1) --[[ Line: 32 | Named "UnifiedPurchasePrompt" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), SetProductPayloadModule (copy), SetPurchaseCallbacksModule (copy), SetPostPurchaseActionsModule (copy), SetPurchaseAnalyticsMetadataModule (copy), FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), SetPurchaseOptionsModule (copy), DispatchPurchaseForProductPayloadModule (copy), PurchasePromptAppModule (copy), FFlagPurchasePromptSubtitleForTimedOptions (copy)
 	local Store = p1.store
-	ReactModule.useEffect(function() --[[ Line: 34 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), Store (copy), SetProductPayloadModule (upval), SetPurchaseCallbacksModule (upval), SetPostPurchaseActionsModule (upval), SetPurchaseAnalyticsMetadataModule (upval), FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (upval), SetPurchaseOptionsModule (upval), DispatchPurchaseForProductPayloadModule (upval)
 		local ProductPayload = p1.productPayload
 		Store:dispatch(SetProductPayloadModule(ProductPayload))
@@ -38,7 +38,7 @@ return function(p1) --[[ Line: 32 | Named "UnifiedPurchasePrompt" ]]
 		if FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow and p1.purchaseOptions then
 			Store:dispatch(SetPurchaseOptionsModule(p1.purchaseOptions))
 		end
-		DispatchPurchaseForProductPayloadModule(function(p2) --[[ Line: 58 ]]
+		DispatchPurchaseForProductPayloadModule(function(p2)
 			-- upvalues: Store (upval)
 			Store:dispatch(p2)
 		end, ProductPayload, nil, false)

@@ -8,13 +8,13 @@ local AssetListModule = require(Parent.Components.AssetList)
 local InspectAndBuyContextModule = require(Parent.Components.InspectAndBuyContext)
 local InitialView = RoactModule.PureComponent:extend("InitialView")
 
-function InitialView.render(p1) --[[ Line: 13 ]]
+function InitialView.render(p1)
 	-- upvalues: RoactModule (copy), InspectAndBuyContextModule (copy), AvatarHeadShotModule (copy), PlayerNameLabelModule (copy), AssetListModule (copy)
 	local View = p1.props.view
 	local DetailsInformation = p1.props.detailsInformation
 	
 	return RoactModule.createElement(InspectAndBuyContextModule.Consumer, {
-		render = function(p2) --[[ Line: 18 ]]
+		render = function(p2)
 			-- upvalues: View (copy), RoactModule (upval), DetailsInformation (copy), AvatarHeadShotModule (upval), PlayerNameLabelModule (upval), AssetListModule (upval)
 			local v1 = p2[View]
 			
@@ -51,7 +51,7 @@ function InitialView.render(p1) --[[ Line: 13 ]]
 	})
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 53 ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	return {
 		view = p1.view,
 		detailsInformation = p1.detailsInformation

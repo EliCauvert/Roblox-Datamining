@@ -7,7 +7,7 @@ local GetSduiApiStoreFunction = SduiSharedUtilitiesModule.getSduiApiStore
 local GetDevStoreSeeAllUrlModule = require(ExperienceStoreServerDrivenUi.Api.getDevStoreSeeAllUrl)
 local GetDevStoreSeeAllPageKeyModule = require(ExperienceStoreServerDrivenUi.Utils.getDevStoreSeeAllPageKey)
 
-return function(p1, LoadTimer, p2) --[[ Line: 13 | Named "fetchDevStoreSeeAllPageIfNeeded" ]]
+return function(p1, LoadTimer, p2)
 	-- upvalues: GetDevStoreSeeAllUrlModule (copy), GetDevStoreSeeAllPageKeyModule (copy), Parent (copy), GetSduiApiStoreFunction (copy), SduiResponseType (copy), AppPage (copy)
 	local DevStoreSeeAllUrlModule = GetDevStoreSeeAllUrlModule(p1)
 	GetSduiApiStoreFunction().fetchIfNeeded({

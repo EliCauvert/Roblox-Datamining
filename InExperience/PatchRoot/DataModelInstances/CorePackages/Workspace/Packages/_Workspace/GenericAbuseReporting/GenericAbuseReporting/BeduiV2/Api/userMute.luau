@@ -5,7 +5,7 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagExpChatUseChatMuteStore = SharedFlagsModule.FFlagExpChatUseChatMuteStore
 local FFlagAbuseReportVoiceMute = SharedFlagsModule.FFlagAbuseReportVoiceMute
 
-local function _(p1, p2) --[[ Line: 14 | Named "voiceMutePlayer" ]]
+local function _(p1, p2)
 	-- upvalues: FFlagAbuseReportVoiceMute (copy)
 	if not FFlagAbuseReportVoiceMute or not p2 then return end
 	local Participants = p2.participants
@@ -18,7 +18,7 @@ local function _(p1, p2) --[[ Line: 14 | Named "voiceMutePlayer" ]]
 	end
 end
 
-function muteUser(UserId, Player, p1): boolean --[[ Line: 29 ]]
+function muteUser(UserId, Player, p1): boolean
 	-- upvalues: FFlagExpChatUseChatMuteStore (copy), ChatMuteModule (copy), FFlagAbuseReportVoiceMute (copy), ExpChatSharedModule (copy)
 	if not UserId or not Player then
 		return false
@@ -67,7 +67,7 @@ function muteUser(UserId, Player, p1): boolean --[[ Line: 29 ]]
 	end
 end
 
-function isUserMuted(p1) --[[ Line: 60 ]]
+function isUserMuted(p1)
 	-- upvalues: FFlagExpChatUseChatMuteStore (copy), ChatMuteModule (copy), ExpChatSharedModule (copy)
 	if not p1 then
 		return false

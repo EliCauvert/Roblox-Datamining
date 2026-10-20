@@ -31,7 +31,7 @@ local DragHandleModule1 = require(MomentsCreation.Enums.DragHandle)
 local UseCreationFlowStringsModule = require(MomentsCreation.Hooks.useCreationFlowStrings)
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
 
-return function(p1) --[[ Line: 70 ]]
+return function(p1)
 	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseCreationFlowStringsModule (copy), UseSignalStateFunction (copy), UseMemoFunction (copy), SignalsModule (copy), UseRefFunction (copy), UseStateFunction (copy), UseEffectFunction (copy), GetCaptureVideoContentModule (copy), SampleVideoFramesModule (copy), UseCallbackFunction (copy), UseTrimDragControllerModule (copy), UseSignalBindingFunction (copy), ReactModule (copy), View (copy), Button (copy), FoundationModule (copy), TrimTooltipModule (copy), DragHandleModule (copy), DragHandleModule1 (copy), IconButton (copy), PauseLarge (copy), PlayLarge (copy), Text (copy), SpeakerSlash (copy), Speaker (copy)
 	local Controller = p1.controller
 	local Playback = Controller.preview.playback
@@ -42,9 +42,9 @@ return function(p1) --[[ Line: 70 ]]
 	local UseSignalStateResult1 = UseSignalStateFunction(Playback.getTimeLength)
 	local UseSignalStateResult2 = UseSignalStateFunction(Playback.getIsPlaying)
 	local UseSignalStateResult3 = UseSignalStateFunction(Playback.getIsMuted)
-	local UseSignalStateResult4 = UseSignalStateFunction((UseMemoFunction(function() --[[ Line: 85 ]]
+	local UseSignalStateResult4 = UseSignalStateFunction((UseMemoFunction(function()
 		-- upvalues: SignalsModule (upval), Controller (copy)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 86 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: Controller (upval)
 			local ActiveSession = Controller.getActiveSession(p2)
 			
@@ -55,7 +55,7 @@ return function(p1) --[[ Line: 70 ]]
 	local UseRefResult1 = UseRefFunction(false)
 	local UseStateResult, UseStateResult2 = UseStateFunction(nil)
 	local UseStateResult1, UseStateResult2_1 = UseStateFunction({})
-	UseEffectFunction(function() --[[ Line: 98 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseSignalStateResult (copy), UseSignalStateResult1 (copy), GetCaptureVideoContentModule (upval), SampleVideoFramesModule (upval), UseStateResult2_1 (copy)
 		if UseSignalStateResult == nil or UseSignalStateResult1 <= 0 then return end
 		local CaptureVideoContentModule = GetCaptureVideoContentModule(UseSignalStateResult)
@@ -71,7 +71,7 @@ return function(p1) --[[ Line: 70 ]]
 			SampleVideoFramesModule(CaptureVideoContentModule, UseSignalStateResult1, UseStateResult2_1)
 		end
 	end, { UseSignalStateResult, UseSignalStateResult1 })
-	local UseTrimDragControllerModuleResult = UseTrimDragControllerModule(true, UseCallbackFunction(function() --[[ Line: 124 ]]
+	local UseTrimDragControllerModuleResult = UseTrimDragControllerModule(true, UseCallbackFunction(function()
 		-- upvalues: UseRefResult (copy), Playback (copy), UseRefResult1 (copy), UseStateResult2 (copy)
 		if UseRefResult.current then
 			Playback.play()
@@ -82,14 +82,14 @@ return function(p1) --[[ Line: 70 ]]
 		UseRefResult.current = false
 		UseRefResult1.current = false
 		UseStateResult2(nil)
-	end, { Playback }), UseCallbackFunction(function(p2) --[[ Line: 116 ]]
+	end, { Playback }), UseCallbackFunction(function(p2)
 		-- upvalues: UseRefResult (copy), Playback (copy), UseRefResult1 (copy), UseStateResult2 (copy)
 		UseRefResult.current = Playback.getIsPlaying(false)
 		UseRefResult1.current = Playback.getIsMuted(false)
 		Playback.setMuted(true)
 		Playback.pause()
 		UseStateResult2(p2)
-	end, { Playback }), UseCallbackFunction(function(p2, p3) --[[ Line: 136 ]]
+	end, { Playback }), UseCallbackFunction(function(p2, p3)
 		-- upvalues: Controller (copy), Playback (copy)
 		local ActiveSession = Controller.getActiveSession(false)
 		
@@ -104,7 +104,7 @@ return function(p1) --[[ Line: 70 ]]
 			
 			return
 		end
-	end, { Controller, Playback }), UseCallbackFunction(function(p2) --[[ Line: 153 ]]
+	end, { Controller, Playback }), UseCallbackFunction(function(p2)
 		-- upvalues: Playback (copy)
 		Playback.seek(p2 * Playback.getDuration(false))
 	end, { Playback }), UseSignalStateResult4, UseSignalStateResult1)
@@ -130,7 +130,7 @@ return function(p1) --[[ Line: 70 ]]
 				fillBehavior = FoundationModule.Enums.FillBehavior.Fit,
 				text = UseCreationFlowStringsModuleResult.GeneralCtaBack,
 				variant = FoundationModule.Enums.ButtonVariant.Text,
-				onActivated = UseCallbackFunction(function() --[[ Line: 169 ]]
+				onActivated = UseCallbackFunction(function()
 					-- upvalues: Controller (copy)
 					Controller.discardActiveTool()
 				end, { Controller }),
@@ -141,7 +141,7 @@ return function(p1) --[[ Line: 70 ]]
 				fillBehavior = FoundationModule.Enums.FillBehavior.Fit,
 				text = UseCreationFlowStringsModuleResult.GeneralCtaDone,
 				variant = FoundationModule.Enums.ButtonVariant.Text,
-				onActivated = UseCallbackFunction(function() --[[ Line: 173 ]]
+				onActivated = UseCallbackFunction(function()
 					-- upvalues: Controller (copy)
 					Controller.commitActiveTool()
 				end, { Controller }),
@@ -167,7 +167,7 @@ return function(p1) --[[ Line: 70 ]]
 					}),
 					LeftHandle = ReactModule.createElement(DragHandleModule, {
 						anchorPoint = Vector2.new(1, 0.5),
-						position = LeftHandlePosition:map(function(XScale): UDim2 --[[ Line: 281 ]]
+						position = LeftHandlePosition:map(function(XScale): UDim2
 							return UDim2.fromScale(XScale, 0.5)
 						end),
 						dragDetectorRef = UseTrimDragControllerModuleResult.leftHandleRef
@@ -175,7 +175,7 @@ return function(p1) --[[ Line: 70 ]]
 					RightHandle = ReactModule.createElement(DragHandleModule, {
 						isFlipped = true,
 						anchorPoint = Vector2.new(0, 0.5),
-						position = RightHandlePosition:map(function(XScale): UDim2 --[[ Line: 290 ]]
+						position = RightHandlePosition:map(function(XScale): UDim2
 							return UDim2.fromScale(XScale, 0.5)
 						end),
 						dragDetectorRef = UseTrimDragControllerModuleResult.rightHandleRef
@@ -183,13 +183,13 @@ return function(p1) --[[ Line: 70 ]]
 					Outline = ReactModule.createElement(View, {
 						tag = "anchor-center-left",
 						ZIndex = 2,
-						Position = LeftHandlePosition:map(function(XScale): UDim2 --[[ Line: 297 ]]
+						Position = LeftHandlePosition:map(function(XScale): UDim2
 							return UDim2.fromScale(XScale, 0.5)
 						end),
 						Size = ReactModule.joinBindings({
 							leftHandlePosition = LeftHandlePosition,
 							rightHandlePosition = RightHandlePosition
-						}):map(function(p2): UDim2 --[[ Line: 303 ]]
+						}):map(function(p2): UDim2
 							return UDim2.fromScale(p2.rightHandlePosition - p2.leftHandlePosition, 1)
 						end),
 						stroke = {
@@ -202,15 +202,15 @@ return function(p1) --[[ Line: 70 ]]
 							tag = "anchor-center-center size-100-1400 radius-circle bg-system-contrast",
 							ref = UseTrimDragControllerModuleResult.scrubberDisplayRef,
 							Visible = not UseStateResult or UseStateResult == DragHandleModule1.Scrubber,
-							Position = UseSignalBindingFunction((UseMemoFunction(function() --[[ Line: 187 ]]
+							Position = UseSignalBindingFunction((UseMemoFunction(function()
 								-- upvalues: SignalsModule (upval), Playback (copy)
-								return SignalsModule.createComputed(function(p2): number --[[ Line: 188 ]]
+								return SignalsModule.createComputed(function(p2): number
 									-- upvalues: Playback (upval)
 									local Duration: number = Playback.getDuration(p2)
 									
 									return if Duration <= 0 then 0 else math.clamp(Playback.getPosition(p2) / Duration, 0, 1)
 								end)
-							end, { Playback }))):map(function(XScale): UDim2 --[[ Line: 321 ]]
+							end, { Playback }))):map(function(XScale): UDim2
 								return UDim2.fromScale(XScale, 0.5)
 							end)
 						}, {
@@ -230,7 +230,7 @@ return function(p1) --[[ Line: 70 ]]
 						tag = "position-center-left anchor-center-left",
 						ZIndex = 0,
 						backgroundStyle = UseTokensResult.Color.Extended.Black.Black_50,
-						Size = LeftHandlePosition:map(function(XScale): UDim2 --[[ Line: 341 ]]
+						Size = LeftHandlePosition:map(function(XScale): UDim2
 							return UDim2.fromScale(XScale, 1)
 						end)
 					}),
@@ -238,7 +238,7 @@ return function(p1) --[[ Line: 70 ]]
 						tag = "position-center-right anchor-center-right",
 						ZIndex = 0,
 						backgroundStyle = UseTokensResult.Color.Extended.Black.Black_50,
-						Size = RightHandlePosition:map(function(p2: number): UDim2 --[[ Line: 350 ]]
+						Size = RightHandlePosition:map(function(p2: number): UDim2
 							return UDim2.fromScale(1 - p2, 1)
 						end)
 					})
@@ -260,7 +260,7 @@ return function(p1) --[[ Line: 70 ]]
 						Padding = UDim.new(0, UseTokensResult.Size.Size_50),
 						SortOrder = Enum.SortOrder.LayoutOrder
 					}
-				}, (UseMemoFunction(function() --[[ Line: 208 ]]
+				}, (UseMemoFunction(function()
 					-- upvalues: UseSignalStateResult1 (copy), UseStateResult1 (copy), ReactModule (upval), View (upval)
 					local Elements = {}
 					
@@ -286,7 +286,7 @@ return function(p1) --[[ Line: 70 ]]
 			PlaybackToggle = ReactModule.createElement(IconButton, {
 				LayoutOrder = 1,
 				icon = if UseSignalStateResult2 then PauseLarge else PlayLarge,
-				onActivated = UseCallbackFunction(function() --[[ Line: 177 ]]
+				onActivated = UseCallbackFunction(function()
 					-- upvalues: Playback (copy)
 					Playback.toggle()
 				end, { Playback }),
@@ -295,9 +295,9 @@ return function(p1) --[[ Line: 70 ]]
 			DurationDisplay = ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				tag = "auto-xy text-label-medium content-default",
-				Text = UseSignalBindingFunction((UseMemoFunction(function() --[[ Line: 198 ]]
+				Text = UseSignalBindingFunction((UseMemoFunction(function()
 					-- upvalues: SignalsModule (upval), Playback (copy)
-					return SignalsModule.createComputed(function(p2): string --[[ Line: 199 ]]
+					return SignalsModule.createComputed(function(p2): string
 						-- upvalues: Playback (upval)
 						return `{string.format("%.1f", (math.max(0, Playback.getPosition(p2))))} / {string.format("%.1f", Playback.getDuration(p2))}`
 					end)
@@ -306,7 +306,7 @@ return function(p1) --[[ Line: 70 ]]
 			MuteToggle = ReactModule.createElement(IconButton, {
 				LayoutOrder = 3,
 				icon = if UseSignalStateResult3 then SpeakerSlash else Speaker,
-				onActivated = UseCallbackFunction(function() --[[ Line: 181 ]]
+				onActivated = UseCallbackFunction(function()
 					-- upvalues: Playback (copy)
 					Playback.toggleMute()
 				end, { Playback }),

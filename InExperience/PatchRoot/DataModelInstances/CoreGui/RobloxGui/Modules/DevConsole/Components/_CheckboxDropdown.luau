@@ -3,7 +3,7 @@ local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
 local ConstantsModule = require(script.Parent.Parent.Constants)
 local CheckboxDropdown = RoactModule.Component:extend("CheckboxDropdown")
 
-function CheckboxDropdown.render(p1) --[[ Line: 10 ]]
+function CheckboxDropdown.render(p1)
 	-- upvalues: RoactModule (copy), ConstantsModule (copy)
 	local FrameWidth = p1.props.frameWidth
 	local DropdownTargetGui = p1.props.dropdownTargetGui

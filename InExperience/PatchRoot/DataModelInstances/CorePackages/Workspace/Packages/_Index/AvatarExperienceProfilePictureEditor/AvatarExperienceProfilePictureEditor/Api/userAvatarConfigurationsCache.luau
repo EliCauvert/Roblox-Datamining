@@ -6,7 +6,7 @@ local UserAvatarConfigurationsApiModule = require(script.Parent.userAvatarConfig
 local Tbl = {}
 local Tbl1 = {}
 
-local function _(Tbl) --[[ Line: 25 | Named "normalizeSelectionTypes" ]]
+local function _(Tbl)
 	if typeof(Tbl) == "string" then
 		return { Tbl }
 	else
@@ -17,14 +17,14 @@ local function _(Tbl) --[[ Line: 25 | Named "normalizeSelectionTypes" ]]
 	end
 end
 
-local _ = function(Key) --[[ Line: 39 | Named "clearCacheEntry" ]]
+local _ = function(Key)
 	-- upvalues: Tbl (copy), Tbl1 (copy)
 	Tbl[Key] = nil
 	Tbl1[Key] = nil
 end
 
 return {
-	buildCacheKey = function(p1, Tbl): string --[[ Line: 35 ]]
+	buildCacheKey = function(p1, Tbl): string
 		local v1 = "%*:%*"
 		local ConcatFunction = table.concat
 		local list = nil
@@ -38,7 +38,7 @@ return {
 		end
 		return (v1:format(p1, (ConcatFunction(list, ","))))
 	end,
-	fetchCached = function(p1, p2, p3) --[[ Line: 53 ]]
+	fetchCached = function(p1, p2, p3)
 		-- upvalues: UserAvatarConfigurationsApiModule (copy), Tbl (copy), PromiseModule (copy), Tbl1 (copy), ParseUserAvatarConfigurationsV4Function (copy)
 		local Tbl2 = p3 or UserAvatarConfigurationsApiModule.DEFAULT_SELECTION_TYPES
 		local v1 = "%*:%*"
@@ -63,7 +63,7 @@ return {
 		if Entry1 then
 			return Entry1
 		else
-			local v2 = UserAvatarConfigurationsApiModule.fetchUserAvatarConfigurations(p1, p2, Tbl2):andThen(function(Result) --[[ Line: 69 ]]
+			local v2 = UserAvatarConfigurationsApiModule.fetchUserAvatarConfigurations(p1, p2, Tbl2):andThen(function(Result)
 				-- upvalues: ParseUserAvatarConfigurationsV4Function (upval), Tbl (upval), FormatResult (copy), Tbl1 (upval)
 				local config = {
 					response = Result,
@@ -73,7 +73,7 @@ return {
 				Tbl1[FormatResult] = nil
 				
 				return config
-			end):catch(function(Err) --[[ Line: 78 ]]
+			end):catch(function(Err)
 				-- upvalues: Tbl1 (upval), FormatResult (copy), PromiseModule (upval)
 				Tbl1[FormatResult] = nil
 				
@@ -84,7 +84,7 @@ return {
 			return v2
 		end
 	end,
-	invalidate = function(p1) --[[ Line: 44 ]]
+	invalidate = function(p1)
 		-- upvalues: Tbl (copy), Tbl1 (copy)
 		local Text: string = `{p1}:`
 		
@@ -95,7 +95,7 @@ return {
 			end
 		end
 	end,
-	clearCacheForTests = function() --[[ Line: 87 ]]
+	clearCacheForTests = function()
 		-- upvalues: Tbl (copy), Tbl1 (copy)
 		table.clear(Tbl)
 		table.clear(Tbl1)

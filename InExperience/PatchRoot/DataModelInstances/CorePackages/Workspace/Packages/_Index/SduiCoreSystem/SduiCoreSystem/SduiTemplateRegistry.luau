@@ -8,7 +8,7 @@ local ValidateInterfaceModule = require(SduiCoreSystem.validateInterface)
 local SduiTemplateInterface = require(SduiCoreSystem.SduiConfigTypes).SduiTemplateInterface
 local t = {}
 
-local function _(p1, p2) --[[ Line: 26 | Named "deepJoinArrays" ]]
+local function _(p1, p2)
 	-- upvalues: TutilsModule (copy)
 	local List = p2 or {}
 	
@@ -18,7 +18,7 @@ local function _(p1, p2) --[[ Line: 26 | Named "deepJoinArrays" ]]
 	return List
 end
 
-local function deepJoin(Props, Props1) --[[ Line: 36 ]]
+local function deepJoin(Props, Props1)
 	-- upvalues: t (copy), TutilsModule (copy), deepJoin (copy)
 	if not Props then
 		return Props1
@@ -38,7 +38,7 @@ end
 local SduiTemplateRegistry = {}
 SduiTemplateRegistry.__index = SduiTemplateRegistry
 
-function SduiTemplateRegistry.new(p3) --[[ Line: 60 ]]
+function SduiTemplateRegistry.new(p3)
 	-- upvalues: SduiTemplateRegistry (copy)
 	local config = { _registeredTemplates = p3 or {} }
 	setmetatable(config, SduiTemplateRegistry)
@@ -46,15 +46,15 @@ function SduiTemplateRegistry.new(p3) --[[ Line: 60 ]]
 	return config
 end
 
-function SduiTemplateRegistry:getTemplate(p3) --[[ Line: 69 ]]
+function SduiTemplateRegistry:getTemplate(p3)
 	return self._registeredTemplates[p3]
 end
 
-function SduiTemplateRegistry:shouldResolveTemplate(p3): boolean --[[ Line: 73 ]]
+function SduiTemplateRegistry:shouldResolveTemplate(p3): boolean
 	return p3.templateKey ~= nil and p3.templateKey ~= "NONE"
 end
 
-function SduiTemplateRegistry:resolveTemplateForConfig(RegisteredTemplate, p3, p4): boolean --[[ Line: 80 ]]
+function SduiTemplateRegistry:resolveTemplateForConfig(RegisteredTemplate, p3, p4): boolean
 	-- upvalues: SduiErrorsModule (copy), ValidateInterfaceModule (copy), SduiTemplateInterface (copy), SduiTemplateRegistry (copy), CryoModule (copy), t (copy), deepJoin (copy), TutilsModule (copy)
 	local TemplateKey = RegisteredTemplate.templateKey
 	
@@ -116,7 +116,7 @@ function SduiTemplateRegistry:resolveTemplateForConfig(RegisteredTemplate, p3, p
 		RegisteredTemplate.analyticsData = CryoModule.Dictionary.join(RegisteredTemplate1.analyticsData, RegisteredTemplate.analyticsData or t)
 	end
 	if RegisteredTemplate1.props then
-		local Success, Result = pcall(function() --[[ Line: 158 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: deepJoin (upval), RegisteredTemplate1 (copy), RegisteredTemplate (copy)
 			return (deepJoin(RegisteredTemplate1.props, RegisteredTemplate.props))
 		end)

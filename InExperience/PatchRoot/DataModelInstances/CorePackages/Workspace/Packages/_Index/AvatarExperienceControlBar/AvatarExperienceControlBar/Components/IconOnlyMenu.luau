@@ -13,15 +13,15 @@ local FFlagAXMigrateBuilderIcons = require(Parent.AvatarExperienceFlags).FFlagAX
 local FFlagAXResetAvatarButton = require(Parent.AvatarExperienceFlags).FFlagAXResetAvatarButton
 local FFlagMeProfileEntryTooltipEnabled = require(Parent.AvatarExperienceFlags).FFlagMeProfileEntryTooltipEnabled
 
-return ReactModule.memo(ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 29 | Named "IconOnlyMenu" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(Frame, Ref)
 	-- upvalues: UseSemanticTokensModule (copy), ReactModule (copy), FFlagAXResetAvatarButton (copy), FFlagMeProfileEntryTooltipEnabled (copy), ImageItemWithTooltipModule (copy), ImageItemModule (copy), IconItemModule (copy), FFlagAXMigrateBuilderIcons (copy), FFlagAXAddToolTipToIconItemMenu (copy), ColorItemModule (copy), FoundationModule (copy)
 	local UseSemanticTokensModuleResult = UseSemanticTokensModule()
-	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 32 ]]
+	local UseResult = ReactModule.useCallback(function(p1)
 		-- upvalues: FFlagAXResetAvatarButton (upval), ReactModule (upval), FFlagMeProfileEntryTooltipEnabled (upval), ImageItemWithTooltipModule (upval), ImageItemModule (upval), IconItemModule (upval), FFlagAXMigrateBuilderIcons (upval), FFlagAXAddToolTipToIconItemMenu (upval), Frame (copy), ColorItemModule (upval), FoundationModule (upval)
 		local Item = p1.item
 		local IsActive = p1.isActive
 		local OnItemActivatedFunction = p1.onItemActivated
-		local OnActivated = if FFlagAXResetAvatarButton and Item.type == "divider" then nil else function() --[[ Line: 45 ]]
+		local OnActivated = if FFlagAXResetAvatarButton and Item.type == "divider" then nil else function()
 			-- upvalues: OnItemActivatedFunction (copy), Item (copy)
 			if OnItemActivatedFunction then
 				OnItemActivatedFunction(Item.id)
@@ -85,7 +85,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 2
 		LayoutOrder = Frame.LayoutOrder,
 		onAbsoluteSizeChanged = Frame.onAbsoluteSizeChanged,
 		Position = Frame.Position
-	}, (ReactModule.useMemo(function() --[[ Line: 116 ]]
+	}, (ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), Frame (copy), UseSemanticTokensModuleResult (copy), UseResult (copy)
 		local config = {
 			IconOnlyMenuListLayout = ReactModule.createElement("UIListLayout", {

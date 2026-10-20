@@ -1,9 +1,9 @@
-﻿local function _(p1: number): number --[[ Line: 6 | Named "getWidth" ]]
+﻿local function _(p1: number): number
 	return p1 * 0.6596491228070176
 end
 
 return {
-	getSize = function(p1, p2): Vector2 --[[ Line: 10 ]]
+	getSize = function(p1, p2): Vector2
 		local Smallest = math.min(math.round(p1.Y * 0.7), 285)
 		local X = Smallest * 0.6596491228070176
 		

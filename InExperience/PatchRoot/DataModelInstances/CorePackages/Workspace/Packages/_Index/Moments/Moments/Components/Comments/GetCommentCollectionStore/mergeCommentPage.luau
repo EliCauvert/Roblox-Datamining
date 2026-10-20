@@ -4,7 +4,7 @@ local config = {
 	recentlyBlockedAuthorIds = {}
 }
 
-return function(p1) --[[ Line: 23 | Named "mergeCommentPage" ]]
+return function(p1)
 	-- upvalues: config (copy)
 	local Filters = p1.filters or config
 	local StickyPostedCommentIds = p1.stickyPostedCommentIds or {}

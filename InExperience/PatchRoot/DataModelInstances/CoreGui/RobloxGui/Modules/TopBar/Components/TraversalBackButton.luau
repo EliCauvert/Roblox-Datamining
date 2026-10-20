@@ -22,7 +22,7 @@ local _ = Traversal.Flags.FFlagUseLocalTraversalHistory
 local FFlagAddTraversalBackButtonAnimation = Traversal.Flags.FFlagAddTraversalBackButtonAnimation
 local FixTraversalBackButtonAnimation = game:DefineFastFlag("FixTraversalBackButtonAnimation", false)
 
-return ReactModule.memo(function(_) --[[ Line: 36 | Named "TraversalBackButton" ]]
+return ReactModule.memo(function(_)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), TeleportService (copy), Constants (copy), SettingsShowSignal (copy), TraversalTelemetry (copy), UseLocalizationFunction (copy), GetGameInfoStoreFunction (copy), DataHydrationTypes (copy), SignalsReactModule (copy), FixTraversalBackButtonAnimation (copy), FFlagAddTraversalBackButtonAnimation (copy), ReactOtterModule (copy), UserGameSettings (copy), View (copy), TeleportBackButton (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseRefResult = ReactModule.useRef(nil)
@@ -32,19 +32,19 @@ return ReactModule.memo(function(_) --[[ Line: 36 | Named "TraversalBackButton" 
 		return nil
 	end
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 46 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SettingsShowSignal (upval), UseStateResult2 (copy)
-		local Connection = SettingsShowSignal:connect(function(p1) --[[ Line: 47 ]]
+		local Connection = SettingsShowSignal:connect(function(p1)
 			-- upvalues: UseStateResult2 (upval)
 			UseStateResult2(p1)
 		end)
 		
-		return function() --[[ Line: 50 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 55 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), TraversalTelemetry (upval), ThirdPartyTeleportInfo (copy)
 		if UseStateResult then
 			TraversalTelemetry.sendBackButtonActionEvent({
@@ -57,7 +57,7 @@ return ReactModule.memo(function(_) --[[ Line: 36 | Named "TraversalBackButton" 
 	local UseLocalizationResult = UseLocalizationFunction({
 		defaultBackButtonText = "CoreScripts.TopBar.Traversal.BackButtonDefault"
 	})
-	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useCallback(function(p1) --[[ Line: 69 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useCallback(function(p1)
 		-- upvalues: GetGameInfoStoreFunction (upval), ThirdPartyTeleportInfo (copy), DataHydrationTypes (upval), UseLocalizationResult (copy)
 		local AndFetchGameInfo = GetGameInfoStoreFunction(p1).getAndFetchGameInfo((tostring(ThirdPartyTeleportInfo)))
 		local DataResult = AndFetchGameInfo.data(p1)
@@ -82,14 +82,14 @@ return ReactModule.memo(function(_) --[[ Line: 36 | Named "TraversalBackButton" 
 		if FixTraversalBackButtonAnimation then
 			UseRefResult2 = ReactModule.useRef(nil)
 		end
-		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 100 ]]
+		local UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: UseTokensResult (copy)
 			return {
 				duration = UseTokensResult.Time.Time_300,
 				easingStyle = UseTokensResult.Ease.StandardOut
 			}
 		end, { UseTokensResult })
-		v1, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0, function(p1) --[[ Line: 106 ]]
+		v1, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0, function(p1)
 			-- upvalues: UseRefResult3 (ref), FixTraversalBackButtonAnimation (upval), UseRefResult2 (ref), UseRefResult4 (ref)
 			UseRefResult3.current = nil
 			
@@ -106,7 +106,7 @@ return ReactModule.memo(function(_) --[[ Line: 36 | Named "TraversalBackButton" 
 				UseRefResult4.current = nil
 			end
 		end)
-		ReactModule.useEffect(function() --[[ Line: 119 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseStateResult (copy), FixTraversalBackButtonAnimation (upval), UseRefResult1 (ref), UseSignalStateResult (copy), UseRefResult2 (ref), UseRefResult (copy), UseAnimatedBindingResult2 (ref), ReactOtterModule (upval), UseMemoResult (copy)
 			if UseStateResult then
 				if FixTraversalBackButtonAnimation then
@@ -130,7 +130,7 @@ return ReactModule.memo(function(_) --[[ Line: 36 | Named "TraversalBackButton" 
 				UseRefResult1.current = UseSignalStateResult
 			end
 		end, { UseStateResult, UseMemoResult, UseSignalStateResult })
-		UseResult = ReactModule.useCallback(function(p1): UDim2 --[[ Line: 142 ]]
+		UseResult = ReactModule.useCallback(function(p1): UDim2
 			-- upvalues: FixTraversalBackButtonAnimation (upval), UseRefResult2 (ref), UseStateResult (copy), UseRefResult (copy), UseRefResult3 (ref), UseRefResult4 (ref), ScaledSize (copy)
 			if FixTraversalBackButtonAnimation then
 				if UseRefResult2.current then
@@ -171,7 +171,7 @@ return ReactModule.memo(function(_) --[[ Line: 36 | Named "TraversalBackButton" 
 				return UDim2.new(0, p1 * ScaledSize, 0, 0)
 			end
 		end, { UseStateResult })
-		UseResult1 = ReactModule.useCallback(function(p1: number) --[[ Line: 182 ]]
+		UseResult1 = ReactModule.useCallback(function(p1: number)
 			-- upvalues: UseStateResult (copy)
 			return p1 > 0 or UseStateResult
 		end, { UseStateResult })

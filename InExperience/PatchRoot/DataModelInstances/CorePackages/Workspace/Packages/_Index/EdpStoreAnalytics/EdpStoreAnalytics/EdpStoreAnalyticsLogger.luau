@@ -6,7 +6,7 @@ local ConstantsModule = require(EdpStoreAnalytics.Constants)
 local EdpStoreClicksDetectorThrottlingHundredthsPercent = game:DefineFastInt("EdpStoreClicksDetectorThrottlingHundredthsPercent", 0)
 local EdpStoreImpressionsDetectorThrottlingHundredthsPercent = game:DefineFastInt("EdpStoreImpressionsDetectorThrottlingHundredthsPercent", 0)
 
-local function sendLogEvent(CustomFields) --[[ Line: 17 ]]
+local function sendLogEvent(CustomFields)
 	-- upvalues: EdpStoreClicksDetectorThrottlingHundredthsPercent (copy), TelemetryService (copy)
 	TelemetryService:LogEvent({
 		eventName = "experienceStoreProducts",
@@ -17,7 +17,7 @@ local function sendLogEvent(CustomFields) --[[ Line: 17 ]]
 	}, { customFields = CustomFields })
 end
 
-local function sendImpressionLogEvent(CustomFields) --[[ Line: 32 ]]
+local function sendImpressionLogEvent(CustomFields)
 	-- upvalues: ConstantsModule (copy), EdpStoreImpressionsDetectorThrottlingHundredthsPercent (copy), TelemetryService (copy)
 	TelemetryService:LogEvent({
 		description = "Event fired from the lua app for every impression on the EDP store or preview",
@@ -29,7 +29,7 @@ local function sendImpressionLogEvent(CustomFields) --[[ Line: 32 ]]
 end
 
 return {
-	logEvent = function(ActionType, ProductType, LocationType, UniverseId, ProductId, ItemId, _) --[[ Line: 45 ]]
+	logEvent = function(ActionType, ProductType, LocationType, UniverseId, ProductId, ItemId, _)
 		-- upvalues: sendLogEvent (copy)
 		sendLogEvent({
 			actionType = ActionType,
@@ -40,11 +40,11 @@ return {
 			itemId = ItemId
 		})
 	end,
-	logImpression = function(CustomFields) --[[ Line: 69 ]]
+	logImpression = function(CustomFields)
 		-- upvalues: sendImpressionLogEvent (copy)
 		sendImpressionLogEvent(CustomFields)
 	end,
-	logExperienceStoreExposure = function() --[[ Line: 75 ]]
+	logExperienceStoreExposure = function()
 		-- upvalues: IXPService (copy), AppUserLayers (copy)
 		IXPService:LogUserLayerExposure(AppUserLayers.EconomyDeveloperMonetizationEdpVirtualProductsRanking)
 	end

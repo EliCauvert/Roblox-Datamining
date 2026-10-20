@@ -1,9 +1,9 @@
 ﻿local CaptureService = game:GetService("CaptureService")
 local PromptDismissedModule = require(script.Parent.Parent.Actions.PromptDismissed)
 
-return function(PromptId, WasAccepted) --[[ Line: 7 ]]
+return function(PromptId, WasAccepted)
 	-- upvalues: PromptDismissedModule (copy), CaptureService (copy)
-	return function(p1) --[[ Line: 8 ]]
+	return function(p1)
 		-- upvalues: PromptDismissedModule (upval), PromptId (copy), CaptureService (upval), WasAccepted (copy)
 		p1:dispatch(PromptDismissedModule(PromptId))
 		

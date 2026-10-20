@@ -12,11 +12,11 @@ local UseTopBarHeightFunction = RobloxAppHooksModule.useTopBarHeight
 local VisibilityControl = require(Parent.AppNavBar).VisibilityControl
 local FFlagPromptsActionEventLoggingModule = require(ServerTriggeredModals.Flags.FFlagPromptsActionEventLogging)
 
-local function noopGetter() --[[ Line: 31 ]]
+local function noopGetter()
 	return nil
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 35 | Named "SurfaceBanner" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseStatusBarHeightFunction (copy), UseTopBarHeightFunction (copy), ReactModule (copy), VisibilityControl (copy), UseComponentConfigFunction (copy), noopGetter (copy), SignalsReactModule (copy), View (copy), SduiFeatureEntryPoint (copy), FFlagPromptsActionEventLoggingModule (copy)
 	local UseStatusBarHeightResult = UseStatusBarHeightFunction()
 	local UseTopBarHeightResult = UseTopBarHeightFunction()
@@ -28,11 +28,11 @@ return ReactModule.memo(function(p1) --[[ Line: 35 | Named "SurfaceBanner" ]]
 	local BackgroundStyle = if UseComponentConfigResult1 and UseComponentConfigResult1.props then UseComponentConfigResult1.props.backgroundStyle else nil
 	local UseSignalStateResult = SignalsReactModule.useSignalState(if UseComponentConfigResult1 and UseComponentConfigResult1.propSignals and UseComponentConfigResult1.propSignals.backgroundStyle then UseComponentConfigResult1.propSignals.backgroundStyle else noopGetter)
 	local Data = if BackgroundStyle == nil then if UseSignalStateResult == nil then nil else UseSignalStateResult.data else BackgroundStyle
-	local MapResult = HeaderBinding:map(function(p2): UDim2 --[[ Line: 71 ]]
+	local MapResult = HeaderBinding:map(function(p2): UDim2
 		-- upvalues: UseStatusBarHeightResult (copy), UseTopBarHeightResult (copy)
 		return UDim2.new(0, 0, 0, (math.max(UseStatusBarHeightResult, p2 * UseTopBarHeightResult)))
 	end)
-	local MapResult1 = HeaderBinding:map(function(p2): UDim2 --[[ Line: 81 ]]
+	local MapResult1 = HeaderBinding:map(function(p2): UDim2
 		-- upvalues: UseStatusBarHeightResult (copy), UseTopBarHeightResult (copy)
 		return UDim2.new(1, 0, 0, (math.max(0, UseStatusBarHeightResult - p2 * UseTopBarHeightResult)))
 	end)
@@ -53,7 +53,7 @@ return ReactModule.memo(function(p1) --[[ Line: 35 | Named "SurfaceBanner" ]]
 			Position = MapResult,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
-			onAbsoluteSizeChanged = function(Frame) --[[ Line: 111 ]]
+			onAbsoluteSizeChanged = function(Frame)
 				-- upvalues: UseStateResult2 (copy)
 				UseStateResult2(Frame.AbsoluteSize.Y)
 			end

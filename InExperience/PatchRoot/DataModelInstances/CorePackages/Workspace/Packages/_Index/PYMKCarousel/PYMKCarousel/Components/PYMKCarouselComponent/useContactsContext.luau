@@ -9,15 +9,15 @@ local RecommendationContextType = RoduxFriends.Enums.RecommendationContextType
 local _ = require(PYMKCarousel.Common.DirectRecommendationTypes)
 local FFlagLuaAppEnableSduiHomePage = require(Parent.SharedFlags).FFlagLuaAppEnableSduiHomePage
 
-return function(p1, p2) --[[ Line: 32 | Named "useContactsContext" ]]
+return function(p1, p2)
 	-- upvalues: FFlagLuaAppEnableSduiHomePage (copy), UseSelectorFunction (copy), RoduxFriends (copy), TutilsModule (copy), ReactModule (copy), RecommendationContextType (copy)
 	local P1 = nil
-	P1 = if FFlagLuaAppEnableSduiHomePage then p2 or {} else UseSelectorFunction(function(p3) --[[ Line: 40 ]]
+	P1 = if FFlagLuaAppEnableSduiHomePage then p2 or {} else UseSelectorFunction(function(p3)
 		-- upvalues: RoduxFriends (upval)
 		return RoduxFriends.Selectors.selectRecommendationsForUserId(p3)((tostring(p3.LocalUserId))) or {}
 	end, TutilsModule.shallowEqual)
 	
-	return (ReactModule.useMemo(function() --[[ Line: 46 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), RecommendationContextType (upval), P1 (ref)
 		local Contacts = {}
 		

@@ -1,7 +1,7 @@
 ﻿local EventStreamReporterModule = {}
 EventStreamReporterModule.__index = EventStreamReporterModule
 
-function EventStreamReporterModule.new(_reporter) --[[ Line: 9 ]]
+function EventStreamReporterModule.new(_reporter)
 	-- upvalues: EventStreamReporterModule (copy)
 	local config = { _isEnabled = true, _reporter = _reporter }
 	setmetatable(config, EventStreamReporterModule)
@@ -9,11 +9,11 @@ function EventStreamReporterModule.new(_reporter) --[[ Line: 9 ]]
 	return config
 end
 
-function EventStreamReporterModule:setEnabled(_isEnabled) --[[ Line: 19 ]]
+function EventStreamReporterModule:setEnabled(_isEnabled)
 	self._isEnabled = _isEnabled
 end
 
-function EventStreamReporterModule:sendTelemetryEvent(p1, EventName, p2) --[[ Line: 26 ]]
+function EventStreamReporterModule:sendTelemetryEvent(p1, EventName, p2)
 	local P6 = p2 or {}
 	assert(type(p1) == "string", "Expected eventContext to be a string")
 	assert(type(EventName) == "string", "Expected eventName to be a string")

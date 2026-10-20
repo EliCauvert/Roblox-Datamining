@@ -14,7 +14,7 @@ local SduiDismissPromptActionModule = require(SduiSharedContent.Actions.SduiDism
 local FFlagSduiDismissPromptAction = require(Parent.SharedFlags).FFlagSduiDismissPromptAction
 local FFlagLuaAppSduiMovePromptsActions = require(Parent.SharedFlags).FFlagLuaAppSduiMovePromptsActions
 
-return function(p1, p2, p3, _) --[[ Line: 27 | Named "SduiShowToastAction" ]]
+return function(p1, p2, p3, _)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), GetStringParamFunction (copy), ToastType (copy), SetCurrentToastMessageFunction (copy), FFlagSduiDismissPromptAction (copy), GetBooleanParamFunction (copy), FFlagLuaAppSduiMovePromptsActions (copy), GetSduiActionHandlerRegistryFunction (copy), SduiDismissPromptActionModule (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	

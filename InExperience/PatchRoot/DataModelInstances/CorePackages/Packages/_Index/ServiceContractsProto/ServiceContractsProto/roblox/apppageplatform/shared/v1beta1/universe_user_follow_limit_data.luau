@@ -3,7 +3,7 @@ local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.pro
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 47 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		following_count_by_type = if p1 == nil or p1.following_count_by_type == nil then 0 else p1.following_count_by_type,
@@ -11,7 +11,7 @@ function Module.new(p1) --[[ Line: 47 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 60 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -30,7 +30,7 @@ function Module:encode() --[[ Line: 60 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 79 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -63,7 +63,7 @@ function Module.decode(Buf) --[[ Line: 79 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 127 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.following_count_by_type ~= nil and self.following_count_by_type ~= 0 then
@@ -75,7 +75,7 @@ function Module:jsonEncode() --[[ Line: 127 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 141 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy)
 	local NewModule = Module.new()
 	

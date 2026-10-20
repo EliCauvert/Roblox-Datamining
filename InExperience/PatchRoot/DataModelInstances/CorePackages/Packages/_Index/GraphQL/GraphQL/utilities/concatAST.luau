@@ -1,7 +1,7 @@
 ﻿local Array = require(script.Parent.Parent.Parent.LuauPolyfill).Array
 local _ = require(script.Parent.Parent.language.ast)
 
-function concatAST(List) --[[ Line: 23 ]]
+function concatAST(List)
 	-- upvalues: Array (copy)
 	local ConcatResult = {}
 	

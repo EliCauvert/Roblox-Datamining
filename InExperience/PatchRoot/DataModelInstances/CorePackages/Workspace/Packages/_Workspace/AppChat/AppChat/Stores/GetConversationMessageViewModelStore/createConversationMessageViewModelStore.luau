@@ -9,12 +9,12 @@ local MessageStatus = EnumsModule.MessageStatus
 local MessageType = EnumsModule.MessageType
 local MessageVisibility = EnumsModule.MessageVisibility
 
-local function _(p1): boolean --[[ Line: 43 | Named "isChatMessage" ]]
+local function _(p1): boolean
 	-- upvalues: MessageType (copy)
 	return p1 ~= nil and p1.type == MessageType.User
 end
 
-local _ = function(p1) --[[ Line: 50 | Named "parseTimestamp" ]]
+local _ = function(p1)
 	if p1 == nil then
 		return nil
 	else
@@ -24,7 +24,7 @@ local _ = function(p1) --[[ Line: 50 | Named "parseTimestamp" ]]
 	end
 end
 
-local _ = function(p1, p2): boolean --[[ Line: 61 | Named "timeDiffExceedsThreshold" ]]
+local _ = function(p1, p2): boolean
 	if p1 == nil or p2 == nil then
 		return false
 	end
@@ -49,21 +49,21 @@ local _ = function(p1, p2): boolean --[[ Line: 61 | Named "timeDiffExceedsThresh
 	return UnixTimestamp ~= nil and UnixTimestamp1 ~= nil and math.abs(UnixTimestamp - UnixTimestamp1) > 300
 end
 
-local _ = function(p1): boolean --[[ Line: 73 | Named "isModeratedMessage" ]]
+local _ = function(p1): boolean
 	-- upvalues: MessageStatus (copy)
 	return p1 ~= nil and p1.status == MessageStatus.Moderated
 end
 
-local _ = function(p1): boolean --[[ Line: 77 | Named "isHiddenMessage" ]]
+local _ = function(p1): boolean
 	-- upvalues: MessageVisibility (copy)
 	return p1 ~= nil and p1.visibility == MessageVisibility.Hidden
 end
 
-local _ = function(p1): boolean --[[ Line: 81 | Named "isReplyMessage" ]]
+local _ = function(p1): boolean
 	return p1 ~= nil and p1.replies_to ~= nil
 end
 
-local function canGroupWithAdjacent(p1, p2): boolean --[[ Line: 85 ]]
+local function canGroupWithAdjacent(p1, p2): boolean
 	-- upvalues: MessageType (copy), MessageVisibility (copy), MessageStatus (copy)
 	local Inverted = false
 	
@@ -121,7 +121,7 @@ local function canGroupWithAdjacent(p1, p2): boolean --[[ Line: 85 ]]
 	return Inverted
 end
 
-local function computeGroupedVariant(p1, p2, p3) --[[ Line: 96 ]]
+local function computeGroupedVariant(p1, p2, p3)
 	-- upvalues: MessageType (copy), canGroupWithAdjacent (copy), GroupedMessageVariant (copy)
 	if p1 ~= nil and p1.type == MessageType.User then
 		local Inverted: boolean = canGroupWithAdjacent(p1, p2) and not (p2 ~= nil and p2.replies_to ~= nil)
@@ -133,14 +133,14 @@ local function computeGroupedVariant(p1, p2, p3) --[[ Line: 96 ]]
 	end
 end
 
-return function(ConversationMessageStore, ConversationMessageListStore) --[[ Line: 126 | Named "createConversationMessageViewModelStore" ]]
+return function(ConversationMessageStore, ConversationMessageListStore)
 	-- upvalues: SignalsModule (copy), MessageType (copy), GroupedMessageVariant (copy), computeGroupedVariant (copy)
 	local t = {}
 	
 	return {
 		conversationMessageStore = ConversationMessageStore,
 		conversationMessageListStore = ConversationMessageListStore,
-		getGroupedVariant = function(Key, Key1) --[[ Line: 132 ]]
+		getGroupedVariant = function(Key, Key1)
 			-- upvalues: t (copy), SignalsModule (upval), ConversationMessageStore (copy), MessageType (upval), ConversationMessageListStore (copy), GroupedMessageVariant (upval), computeGroupedVariant (upval)
 			local Entry = t[Key1]
 			
@@ -154,7 +154,7 @@ return function(ConversationMessageStore, ConversationMessageListStore) --[[ Lin
 				Entry = {}
 				t[Key1] = Entry
 			end
-			local Computed = SignalsModule.createComputed(function(p1) --[[ Line: 145 ]]
+			local Computed = SignalsModule.createComputed(function(p1)
 				-- upvalues: ConversationMessageStore (upval), Key (copy), MessageType (upval), ConversationMessageListStore (upval), Key1 (copy), GroupedMessageVariant (upval), computeGroupedVariant (upval)
 				local MessagesResult = ConversationMessageStore.messages(p1)
 				local MessagesResultEntry = MessagesResult[Key]
@@ -176,7 +176,7 @@ return function(ConversationMessageStore, ConversationMessageListStore) --[[ Lin
 			
 			return Computed
 		end,
-		evictConversation = function(Key) --[[ Line: 174 ]]
+		evictConversation = function(Key)
 			-- upvalues: t (copy)
 			t[Key] = nil
 		end

@@ -4,7 +4,7 @@ local _ = require(script.Parent.types)
 return {
 	name = script.Name,
 	alias = { "/mute", "/m" },
-	clientRun = function(_, _, Text: string, p1) --[[ Line: 8 ]]
+	clientRun = function(_, _, Text: string, p1)
 		-- upvalues: Players (copy)
 		local Part: string = string.split(Text, " ")[2]
 		local IsSegmentMatch: boolean = Part ~= nil and string.sub(Part, 1, 1) == "@"

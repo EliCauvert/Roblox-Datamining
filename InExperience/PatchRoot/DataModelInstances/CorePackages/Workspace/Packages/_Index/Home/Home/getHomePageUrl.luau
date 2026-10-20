@@ -5,7 +5,7 @@ local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
 	path = require(Home.HomeConstants).ApiName
 })
 
-return function() --[[ Line: 13 | Named "getHomePageUrl" ]]
+return function()
 	-- upvalues: NewResult (copy)
 	return NewResult()
 end

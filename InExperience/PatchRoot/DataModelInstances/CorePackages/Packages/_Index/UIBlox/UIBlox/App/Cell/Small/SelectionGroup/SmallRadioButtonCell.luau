@@ -24,14 +24,14 @@ SmallRadioButtonCell.validateProps = TModule.strictInterface({
 })
 SmallRadioButtonCell.defaultProps = { text = "", isSelected = false }
 
-function SmallRadioButtonCell.init(p1) --[[ Line: 59 ]]
-	function p1.onSetValue() --[[ Line: 60 ]]
+function SmallRadioButtonCell.init(p1)
+	function p1.onSetValue()
 		-- upvalues: p1 (copy)
 		p1.props.onActivated(p1.props.id)
 	end
 end
 
-function SmallRadioButtonCell.render(p1) --[[ Line: 65 ]]
+function SmallRadioButtonCell.render(p1)
 	-- upvalues: RoactModule (copy), GenericSelectionCellModule (copy), ComponentAssetsCircle24Stroke1 (copy), ComponentAssetsCircle16 (copy)
 	assert(p1.validateProps(p1.props))
 	
@@ -61,7 +61,7 @@ function SmallRadioButtonCell.render(p1) --[[ Line: 65 ]]
 	})
 end
 
-return RoactModule.forwardRef(function(p1, ControlRef) --[[ Line: 95 ]]
+return RoactModule.forwardRef(function(p1, ControlRef)
 	-- upvalues: RoactModule (copy), SmallRadioButtonCell (copy), CryoModule (copy)
 	return RoactModule.createElement(SmallRadioButtonCell, CryoModule.Dictionary.join(p1, { controlRef = ControlRef }))
 end)

@@ -8,7 +8,7 @@ local GoalCardModule = require(script.Parent.GoalCard)
 local _ = require(BuildExperience.Analytics.Goals.GoalTypes)
 local _ = require(script.Parent.useGoalsSectionViewModel)
 
-return function(p1) --[[ Line: 32 | Named "GoalsSectionView" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), GoalCardModule (copy), View (copy)
 	local TestId = p1.testId or "GoalsSection"
 	local Elements = {}

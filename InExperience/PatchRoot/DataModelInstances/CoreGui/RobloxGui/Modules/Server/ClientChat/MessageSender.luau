@@ -2,16 +2,16 @@
 local Module = {}
 Module.__index = Module
 
-function Module.SendMessage(p1, p2, p3) --[[ Line: 15 ]]
+function Module.SendMessage(p1, p2, p3)
 	p1.SayMessageRequest:FireServer(p2, p3)
 end
 
-function Module.RegisterSayMessageFunction(p1, SayMessageRequest) --[[ Line: 19 ]]
+function Module.RegisterSayMessageFunction(p1, SayMessageRequest)
 	p1.SayMessageRequest = SayMessageRequest
 end
 
 return ({
-	new = function() --[[ Line: 26 ]]
+	new = function()
 		-- upvalues: Module (copy)
 		local self = setmetatable({}, Module)
 		self.SayMessageRequest = nil

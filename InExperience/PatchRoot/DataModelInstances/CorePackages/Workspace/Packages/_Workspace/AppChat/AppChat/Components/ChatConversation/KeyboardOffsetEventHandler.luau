@@ -5,14 +5,14 @@ local UsePositionOffsetForVirtualKeyboardModule = require(AppChat.Hooks.usePosit
 local ReactModule = require(Parent.React)
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function(p1) --[[ Line: 16 ]]
+return function(p1)
 	-- upvalues: UseSelectorFunction (copy), UsePositionOffsetForVirtualKeyboardModule (copy), ReactModule (copy), UserInputService (copy)
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 17 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		return if p2.GlobalGuiInset then p2.GlobalGuiInset.top else 0
 	end)
 	local Current = if p1.parentViewRef then p1.parentViewRef.current else nil
 	local UsePositionOffsetForVirtualKeyboardModuleResult = UsePositionOffsetForVirtualKeyboardModule({ isNearBottomOfScreen = true })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 23 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UserInputService (upval), UsePositionOffsetForVirtualKeyboardModuleResult (copy), Current (copy), UseSelectorResult (copy), p1 (copy)
 		local YDelta = 0
 		
@@ -34,14 +34,14 @@ return function(p1) --[[ Line: 16 ]]
 		p1.onKeyboardOffsetChanged,
 		Current
 	})
-	ReactModule.useEffect(function() --[[ Line: 40 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult (copy), UserInputService (upval), Current (copy)
 		UseResult()
 		local Connection = UserInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(UseResult)
 		local Connection1 = UserInputService:GetPropertyChangedSignal("OnScreenKeyboardPosition"):Connect(UseResult)
 		local Connection2 = if Current then Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(UseResult) else nil
 		
-		return function() --[[ Line: 53 ]]
+		return function()
 			-- upvalues: Connection (copy), Connection1 (copy), Connection2 (ref)
 			if Connection then
 				Connection:Disconnect()

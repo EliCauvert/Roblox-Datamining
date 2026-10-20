@@ -3,7 +3,7 @@ local ResultModule = require(Parent.Result)
 local PromiseModule = require(Parent.Promise)
 
 return {
-	Batch = function(List, Callback) --[[ Line: 30 ]]
+	Batch = function(List, Callback)
 		-- upvalues: PromiseModule (copy), ResultModule (copy)
 		assert(type(List) == "table", "PromiseUtilities expects a list of Promises!")
 		local Count = 0
@@ -12,12 +12,12 @@ return {
 			assert(PromiseModule.is(value), "PromiseUtilities expects a list of Promises!")
 			Count += 1
 		end
-		return PromiseModule.new(function(Callback1: (any) -> (), _) --[[ Line: 40 ]]
+		return PromiseModule.new(function(Callback1: (any) -> (), _)
 			-- upvalues: ResultModule (upval), Count (ref), List (copy), Callback (copy)
 			local Count1 = 0
 			local NewResults = {}
 			
-			local function _(Key, p1, p2) --[[ Line: 44 | Named "promiseCompleted" ]]
+			local function _(Key, p1, p2)
 				-- upvalues: NewResults (copy), ResultModule (upval), Count1 (ref), Count (upval), Callback1 (copy)
 				NewResults[Key] = ResultModule.new(p1, p2)
 				Count1 += 1
@@ -31,7 +31,7 @@ return {
 				Callback1(NewResults)
 			end
 			for i, Promise in pairs(List) do
-				Promise:andThen(function(Result, ...) --[[ Line: 58 ]]
+				Promise:andThen(function(Result, ...)
 					-- upvalues: i (copy), NewResults (copy), ResultModule (upval), Count1 (ref), Count (upval), Callback1 (copy)
 					if select("#", ...) > 0 then
 						warn("Promises in PromiseUtilities.Batch should not return tuple")
@@ -42,7 +42,7 @@ return {
 					if Count1 == Count then
 						Callback1(NewResults)
 					end
-				end, function(p1) --[[ Line: 63 ]]
+				end, function(p1)
 					-- upvalues: i (copy), NewResults (copy), ResultModule (upval), Count1 (ref), Count (upval), Callback1 (copy), Callback (upval)
 					NewResults[i] = ResultModule.new(false, p1)
 					Count1 += 1
@@ -57,7 +57,7 @@ return {
 			end
 		end)
 	end,
-	CountResults = function(List) --[[ Line: 73 ]]
+	CountResults = function(List)
 		local TotalCount = 0
 		local FailureCount = 0
 		

@@ -1,4 +1,4 @@
-﻿return function(p1): string --[[ Line: 7 | Named "littleTraceback" ]]
+﻿return function(p1): string
 	local Traceback: string = debug.traceback()
 	local v1: number? = nil
 	local v2 = 1

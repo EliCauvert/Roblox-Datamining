@@ -10,9 +10,9 @@ local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.Robl
 local FFlagUseSignalsForDeviceOrientation = SharedFlagsModule.FFlagUseSignalsForDeviceOrientation
 local GetDeviceOrientationStore = if FFlagUseSignalsForDeviceOrientation then require(Parent.DeviceOrientationStore).GetDeviceOrientationStore else nil
 
-return function(Title, Body) --[[ Line: 18 ]]
+return function(Title, Body)
 	-- upvalues: FFlagUseSignalsForDeviceOrientation (copy), GetDeviceOrientationStore (copy), GetDeviceTypeFunction (copy), DeviceType (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
-	return function(p1) --[[ Line: 19 ]]
+	return function(p1)
 		-- upvalues: FFlagUseSignalsForDeviceOrientation (upval), GetDeviceOrientationStore (upval), GetDeviceTypeFunction (upval), DeviceType (upval), AppPage (upval), Title (copy), Body (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval)
 		local DeviceType1 = GetDeviceTypeFunction(if FFlagUseSignalsForDeviceOrientation then GetDeviceOrientationStore(false).getDeviceOrientation(false) else p1:getState().DeviceOrientation)
 		

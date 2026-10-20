@@ -29,7 +29,7 @@ local config = {
 	isVerified = false
 }
 
-return function(p1) --[[ Line: 88 | Named "FriendTileWithTrustedIndicator" ]]
+return function(p1)
 	-- upvalues: Llama (copy), config (copy), UseStyleFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), React (copy), View (copy), StateLayerAffordance (copy), PlayerTile (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), OpenTypeSupport (copy), Skeleton (copy), Text (copy), VerifiedBadgesModule (copy), FFlagEnableBlackbirdCheck (copy), FoundationModule (copy), Enums (copy), PlayerContext (copy)
 	local JoinResult = Llama.Dictionary.join(config, p1 or {})
 	local UseStyleResult = UseStyleFunction()

@@ -5,13 +5,13 @@ local ReactModule = require(CorePackages.Packages.React)
 local ImageSetButton = UIBloxModule.Core.ImageSet.ImageSetButton
 local Images = UIBloxModule.App.ImageSet.Images
 
-return function(p1) --[[ Line: 25 | Named "ScreenshotHighlighter" ]]
+return function(p1)
 	-- upvalues: RobloxGui (copy), ReactModule (copy), ImageSetButton (copy), Images (copy)
 	local AbsoluteSize = RobloxGui.AbsoluteSize
 	local XOffset = (AbsoluteSize.X < AbsoluteSize.Y and AbsoluteSize.X or AbsoluteSize.Y) / 5
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	
-	local function v9(Frame: Frame, Position) --[[ Line: 35 ]]
+	local function v9(Frame: Frame, Position)
 		-- upvalues: p1 (copy), XOffset (copy)
 		table.insert(p1.annotationPoints, (Vector2.new(Position.X, Position.Y) - Frame.AbsolutePosition) / Frame.AbsoluteSize)
 		p1.setAnnotationCircleRadius(XOffset * 0.5 / (if Frame.AbsoluteSize.Y < Frame.AbsoluteSize.X then Frame.AbsoluteSize.X else Frame.AbsoluteSize.Y))
@@ -19,7 +19,7 @@ return function(p1) --[[ Line: 25 | Named "ScreenshotHighlighter" ]]
 		p1.handleAnnotationPoints(p1.annotationPoints)
 	end
 	
-	local function v10(Frame, Input) --[[ Line: 47 ]]
+	local function v10(Frame, Input)
 		-- upvalues: p1 (copy), UseStateResult2 (copy), v9 (copy)
 		local IsUserInputTypeMatch = Input.UserInputType == Enum.UserInputType.Touch
 		local IsUserInputTypeMatch1 = Input.UserInputType == Enum.UserInputType.MouseButton1
@@ -30,9 +30,9 @@ return function(p1) --[[ Line: 25 | Named "ScreenshotHighlighter" ]]
 		end
 	end
 	
-	local function v11(_, _) --[[ Line: 57 ]] end
+	local function v11(_, _) end
 	
-	local function v12(_, _) --[[ Line: 69 ]]
+	local function v12(_, _)
 		-- upvalues: UseStateResult (copy), UseStateResult2 (copy)
 		if UseStateResult then
 			UseStateResult2(false)

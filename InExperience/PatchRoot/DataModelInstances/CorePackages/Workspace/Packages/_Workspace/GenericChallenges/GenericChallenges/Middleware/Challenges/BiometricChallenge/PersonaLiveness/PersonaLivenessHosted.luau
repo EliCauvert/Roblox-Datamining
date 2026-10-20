@@ -18,19 +18,19 @@ local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local FocusNavigableSurfaceWrapper = FocusNavigationUtilsModule.FocusNavigableSurfaceWrapper
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 
-return function(p1) --[[ Line: 35 | Named "PersonaLivenessHosted" ]]
+return function(p1)
 	-- upvalues: UseRoactServiceFunction (copy), AppLinking (copy), ReactModule (copy), UseLocalizationFunction (copy), FullscreenPageWithSafeArea (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigableSurfaceIdentifierEnum (copy), Dialog (copy), DialogSize (copy), View (copy), Loading (copy), Text (copy), Button (copy), ButtonVariant (copy), InputSize (copy), FillBehavior (copy)
 	local WebLink = p1.webLink
 	local OnCancelFunction = p1.onCancel
 	local SessionId = p1.sessionId
 	local UseRoactServiceResult = UseRoactServiceFunction(AppLinking)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 44 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), UseRoactServiceResult (copy), WebLink (copy)
 		UseStateResult2(true)
 		UseRoactServiceResult:openURL(WebLink)
 	end, { UseRoactServiceResult, WebLink, SessionId })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 49 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: OnCancelFunction (copy)
 		OnCancelFunction()
 	end, { OnCancelFunction, SessionId })

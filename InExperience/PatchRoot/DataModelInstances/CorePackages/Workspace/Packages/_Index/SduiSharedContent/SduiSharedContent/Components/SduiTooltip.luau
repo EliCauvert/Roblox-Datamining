@@ -16,7 +16,7 @@ local config1 = {
 	End = PopoverAlign.End
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 40 | Named "SduiTooltip" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), Tooltip (copy), config (copy), config1 (copy)
 	return if p1.anchor == nil then nil else ReactModule.createElement(Tooltip, {
 		title = p1.title or "",

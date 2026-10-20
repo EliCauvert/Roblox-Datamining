@@ -10,7 +10,7 @@ local PartyVoiceTopbarActivityIndicatorAnimationMs = game:DefineFastInt("PartyVo
 local PartyVoiceTopbarActivityIndicatorDebounceMs = game:DefineFastInt("PartyVoiceTopbarActivityIndicatorDebounceMs", 50)
 local GetFFlagEnableCrossExpVoiceFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagEnableCrossExpVoice
 
-function createAnimations(Value, Value1) --[[ Line: 32 ]]
+function createAnimations(Value, Value1)
 	-- upvalues: PartyVoiceTopbarActivityIndicatorAnimationMs (copy)
 	return {
 		ICON_OUT_ANIMATION = {
@@ -36,7 +36,7 @@ function createAnimations(Value, Value1) --[[ Line: 32 ]]
 	}
 end
 
-function getDisplayImage(p1, p2) --[[ Line: 57 ]]
+function getDisplayImage(p1, p2)
 	-- upvalues: GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), GetColorFromUserIdModule (copy)
 	return {
 		thumbnail = if p1 == -1 then p2 else GetStandardSizeAvatarHeadShotRbxthumbFunction((tostring(p1))),
@@ -44,7 +44,7 @@ function getDisplayImage(p1, p2) --[[ Line: 57 ]]
 	}
 end
 
-function usePartyIcon(p1, p2, p3) --[[ Line: 64 ]]
+function usePartyIcon(p1, p2, p3)
 	-- upvalues: GetFFlagEnableCrossExpVoiceFunction (copy), UseLastActiveParticipantFunction (copy), UsePreviousFunction (copy), ReactModule (copy), UseSequentialAnimationFunction (copy), CrossExperienceVoiceModule (copy), PartyVoiceTopbarActivityIndicatorDebounceMs (copy)
 	if GetFFlagEnableCrossExpVoiceFunction() then
 		local UseLastActiveParticipantResult = UseLastActiveParticipantFunction()
@@ -52,27 +52,27 @@ function usePartyIcon(p1, p2, p3) --[[ Line: 64 ]]
 		local UsePreviousResult = UsePreviousFunction(UserId)
 		local UseStateResult, UseStateResult2 = ReactModule.useState(getDisplayImage(UserId, p3))
 		local UseSequentialAnimationResult, UseSequentialAnimationResult2 = UseSequentialAnimationFunction(if UserId == -1 then p1 else p2)
-		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 75 ]]
+		local UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: p1 (copy), p2 (copy)
 			return createAnimations(p1, p2)
 		end, { p1, p2 })
-		local UseResult = ReactModule.useCallback(function(p4) --[[ Line: 79 ]]
+		local UseResult = ReactModule.useCallback(function(p4)
 			-- upvalues: UseStateResult2 (copy), p3 (copy)
-			UseStateResult2(function(p5) --[[ Line: 80 ]]
+			UseStateResult2(function(p5)
 				-- upvalues: p4 (copy), p3 (upval)
 				local DisplayImage = getDisplayImage(p4, p3)
 				
 				return if p5.thumbnail == DisplayImage.thumbnail and p5.backgroundColor == DisplayImage.backgroundColor then p5 else DisplayImage
 			end)
 		end, { p3, UseStateResult2 })
-		local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 93 ]]
+		local UseMemoResult1 = ReactModule.useMemo(function()
 			-- upvalues: CrossExperienceVoiceModule (upval), UseSequentialAnimationResult2 (copy), PartyVoiceTopbarActivityIndicatorDebounceMs (upval)
-			return CrossExperienceVoiceModule.Utils.debounce(function(p4, p5) --[[ Line: 95 ]]
+			return CrossExperienceVoiceModule.Utils.debounce(function(p4, p5)
 				-- upvalues: UseSequentialAnimationResult2 (upval)
 				UseSequentialAnimationResult2(p4, p5)
 			end, PartyVoiceTopbarActivityIndicatorDebounceMs)
 		end, {})
-		ReactModule.useEffect(function() --[[ Line: 103 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UsePreviousResult (copy), UserId (copy), UseMemoResult1 (copy), UseMemoResult (copy), UseResult (copy), UseSequentialAnimationResult2 (copy)
 			if UsePreviousResult == nil or UserId == UsePreviousResult then
 				UseResult(UserId)
@@ -85,7 +85,7 @@ function usePartyIcon(p1, p2, p3) --[[ Line: 64 ]]
 				UseMemoResult1.call({
 					UseMemoResult.AVATAR_OUT_ANIMATION,
 					UseMemoResult.ICON_IN_ANIMATION
-				}, function() --[[ Line: 110 ]]
+				}, function()
 					-- upvalues: UseResult (upval)
 					UseResult(-1)
 				end)
@@ -96,7 +96,7 @@ function usePartyIcon(p1, p2, p3) --[[ Line: 64 ]]
 				UseSequentialAnimationResult2({
 					UseMemoResult.ICON_OUT_ANIMATION,
 					UseMemoResult.AVATAR_IN_ANIMATION
-				}, function() --[[ Line: 118 ]]
+				}, function()
 					-- upvalues: UseResult (upval), UserId (upval)
 					UseResult(UserId)
 				end)

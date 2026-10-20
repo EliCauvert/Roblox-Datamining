@@ -1,6 +1,6 @@
 ﻿local SelectTryOnBodyIdsModule = require(script.Parent.selectTryOnBodyIds)
 
-return function(p1): boolean --[[ Line: 3 | Named "selectShowColorQuickButton" ]]
+return function(p1): boolean
 	-- upvalues: SelectTryOnBodyIdsModule (copy)
 	local LastToggledItem = p1.AvatarExperience.AvatarScene.OutfitTryOn.LastToggledItem
 	

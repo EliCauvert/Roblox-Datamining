@@ -50,15 +50,15 @@ EmptyState.defaultProps = {
 	iconSize = UDim2.fromOffset(GetIconSizeModule(IconSizeModule.XLarge), GetIconSizeModule(IconSizeModule.XLarge))
 }
 
-local function _(p1) --[[ Line: 77 | Named "getCorrectedIconValue" ]]
+local function _(p1)
 	return if p1 == "" then nil else p1
 end
 
-function EmptyState.init(p1) --[[ Line: 81 ]]
+function EmptyState.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1:setState({ absoluteSize = Vector2.new(0, 0) })
 	
-	function p1.onAbsoluteSizeChange(Frame) --[[ Line: 85 ]]
+	function p1.onAbsoluteSizeChange(Frame)
 		-- upvalues: p1 (copy)
 		p1:setState({ absoluteSize = Frame.AbsoluteSize })
 	end
@@ -66,9 +66,9 @@ function EmptyState.init(p1) --[[ Line: 81 ]]
 	p1.buttonRef = RoactModule.createRef()
 end
 
-function EmptyState.render(p1) --[[ Line: 94 ]]
+function EmptyState.render(p1)
 	-- upvalues: WithStyleModule (copy), RoactModule (copy), RoactGamepadModule (copy), ImageSetComponentModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), GetFontFromFontStyleModule (copy), GenericTextLabelModule (copy), GetPageMarginModule (copy), ButtonModule (copy)
-	return WithStyleModule(function(p2) --[[ Line: 95 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: RoactModule (upval), RoactGamepadModule (upval), p1 (copy), ImageSetComponentModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), GetFontFromFontStyleModule (upval), GenericTextLabelModule (upval), GetPageMarginModule (upval), ButtonModule (upval)
 		local CreateElementFunction1 = RoactModule.createElement
 		local Frame = RoactGamepadModule.Focusable.Frame
@@ -192,7 +192,7 @@ function EmptyState.render(p1) --[[ Line: 94 ]]
 	end)
 end
 
-return RoactModule.forwardRef(function(p1, FrameRef) --[[ Line: 210 ]]
+return RoactModule.forwardRef(function(p1, FrameRef)
 	-- upvalues: RoactModule (copy), EmptyState (copy), CryoModule (copy)
 	return RoactModule.createElement(EmptyState, CryoModule.Dictionary.join(p1, { frameRef = FrameRef }))
 end)

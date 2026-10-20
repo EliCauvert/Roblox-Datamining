@@ -1,7 +1,7 @@
 ﻿local Logger = require(script.Parent.Parent.Parent.Loggers).Logger
 local HttpService = game:GetService("HttpService")
 
-local function _(p1) --[[ Line: 9 | Named "attachPackageName" ]]
+local function _(p1)
 	if not p1 then
 		p1 = {}
 	end
@@ -11,25 +11,25 @@ local function _(p1) --[[ Line: 9 | Named "attachPackageName" ]]
 end
 
 return {
-	debug = function(p1) --[[ Line: 17 ]]
+	debug = function(p1)
 		-- upvalues: Logger (copy), HttpService (copy)
 		local P1 = p1 or {}
 		P1.packageName = "IAPExperience"
 		Logger:debug(HttpService:JSONEncode(P1))
 	end,
-	info = function(p1) --[[ Line: 20 ]]
+	info = function(p1)
 		-- upvalues: Logger (copy), HttpService (copy)
 		local P2 = p1 or {}
 		P2.packageName = "IAPExperience"
 		Logger:info(HttpService:JSONEncode(P2))
 	end,
-	warn = function(p1) --[[ Line: 23 ]]
+	warn = function(p1)
 		-- upvalues: Logger (copy), HttpService (copy)
 		local P3 = p1 or {}
 		P3.packageName = "IAPExperience"
 		Logger:warn(HttpService:JSONEncode(P3))
 	end,
-	error = function(p1) --[[ Line: 26 ]]
+	error = function(p1)
 		-- upvalues: Logger (copy), HttpService (copy)
 		local P4 = p1 or {}
 		P4.packageName = "IAPExperience"

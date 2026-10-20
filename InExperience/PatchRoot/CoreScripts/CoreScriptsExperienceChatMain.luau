@@ -56,7 +56,7 @@ if require(RobloxGui.Modules.VR.IsSpatialRobloxGuiEnabled) then
 	if IsInExperienceUIVREnabled then
 		local ChatSelectorModule = require(CoreGui.RobloxGui.Modules.ChatSelector)
 		local NewResult = require(CorePackages.Workspace.Packages.Observable).ObservableValue.new(ChatSelectorModule:GetVisibility())
-		ChatSelectorModule.VisibilityStateChanged:connect(function(p1) --[[ Line: 73 ]]
+		ChatSelectorModule.VisibilityStateChanged:connect(function(p1)
 			-- upvalues: NewResult (copy)
 			NewResult:set(p1)
 		end)
@@ -70,7 +70,7 @@ else
 	ExperienceChat.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	ExperienceChat.Parent = CoreGui
 end
-local function findTextChannel(ChildName) --[[ Line: 87 ]]
+local function findTextChannel(ChildName)
 	-- upvalues: TextChatService (copy)
 	local ChildName1 = TextChatService:FindFirstChild(ChildName, true)
 	while not ChildName1 do
@@ -80,7 +80,7 @@ local function findTextChannel(ChildName) --[[ Line: 87 ]]
 	return ChildName1
 end
 
-StarterGui.CoreGuiChangedSignal:Connect(function(CoreGuiType, Enabled) --[[ Line: 97 ]]
+StarterGui.CoreGuiChangedSignal:Connect(function(CoreGuiType, Enabled)
 	-- upvalues: ExpChatModule (copy)
 	if CoreGuiType == Enum.CoreGuiType.All or CoreGuiType == Enum.CoreGuiType.Chat then
 		ExpChatModule.Events.SetCoreGuiEnabledChanged(Enabled)

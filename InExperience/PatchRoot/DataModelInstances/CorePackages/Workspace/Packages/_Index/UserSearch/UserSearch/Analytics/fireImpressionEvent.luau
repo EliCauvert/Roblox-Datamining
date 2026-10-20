@@ -1,7 +1,7 @@
 ﻿local EventNamesModule = require(script.Parent.EventNames)
 local GetTileRowInSortModule = require(script.Parent.getTileRowInSort)
 
-return function(p1, Callback: (any, any) -> ()) --[[ Line: 18 ]]
+return function(p1, Callback: (any, any) -> ())
 	-- upvalues: GetTileRowInSortModule (copy), EventNamesModule (copy)
 	local Impressions = p1.impressions
 	local Entries = p1.entries

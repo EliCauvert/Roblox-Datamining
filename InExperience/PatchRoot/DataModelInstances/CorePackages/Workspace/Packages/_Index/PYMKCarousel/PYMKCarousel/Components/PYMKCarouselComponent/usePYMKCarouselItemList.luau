@@ -4,9 +4,9 @@ local BtnValues = require(Parent.Analytics).BtnValues
 local GetFIntPYMKSeeAllTileLimitModule = require(Parent.Flags.getFIntPYMKSeeAllTileLimit)
 local _ = require(Parent.Common.DirectRecommendationTypes)
 
-return function(p1) --[[ Line: 18 | Named "usePYMKCarouselItemList" ]]
+return function(p1)
 	-- upvalues: React (copy), BtnValues (copy), GetFIntPYMKSeeAllTileLimitModule (copy)
-	return React.useMemo(function() --[[ Line: 24 ]]
+	return React.useMemo(function()
 		-- upvalues: p1 (copy), BtnValues (upval), GetFIntPYMKSeeAllTileLimitModule (upval)
 		if not p1.findFriendsTileEnabled and not p1.seeAllTileEnabled then
 			return p1.recommendationIds

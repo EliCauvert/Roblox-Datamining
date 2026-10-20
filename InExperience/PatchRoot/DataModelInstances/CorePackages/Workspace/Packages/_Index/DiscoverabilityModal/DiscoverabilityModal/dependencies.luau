@@ -7,13 +7,13 @@ local RODUXKEY = require(Parent.Common.Constants).RODUX_KEY
 local ConfigResult = LuaSocialLibrariesDepsModule.RoduxNetworking.config({
 	keyPath = RODUXKEY .. ".NetworkStatus",
 	networkImpl = HttpRequest.config({
-		requestFunction = function(p1, p2, p3) --[[ Line: 13 ]]
+		requestFunction = function(p1, p2, p3)
 			-- upvalues: DiscoverabilityModalNetworking (copy), HttpRequest (copy)
 			DiscoverabilityModalNetworking:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p2, p1))
 			
 			return HttpRequest.requestFunctions.HttpRbxApi(p1, p2, p3)
 		end,
-		postRequestFunction = function(p1, p2) --[[ Line: 17 ]]
+		postRequestFunction = function(p1, p2)
 			-- upvalues: DiscoverabilityModalNetworking (copy)
 			DiscoverabilityModalNetworking:debug("Returned: {}", string.format("[ requestMethod = %q, url = %q, statusCode = %s, body = %s ]", p2.requestMethod, p2.url, p1.StatusCode, p1.Body))
 		end,

@@ -5,7 +5,7 @@ local _UDim2 = UDim2.fromOffset(4, 4)
 local _Vector2 = Vector2.new(0.5, 0.5)
 local _UDim2_1 = UDim2.fromScale(0.8, 0.8)
 
-return function(Frame) --[[ Line: 18 | Named "CameraStatusDot" ]]
+return function(Frame)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), _Vector2 (copy), _UDim2 (copy), _UDim2_1 (copy)
 	return ReactModule.createElement("Frame", {
 		AnchorPoint = Frame.AnchorPoint or _Vector2,

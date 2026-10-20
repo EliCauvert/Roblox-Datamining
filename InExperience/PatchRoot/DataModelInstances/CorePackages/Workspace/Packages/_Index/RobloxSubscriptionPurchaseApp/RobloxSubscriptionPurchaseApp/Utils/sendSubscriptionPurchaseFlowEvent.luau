@@ -2,7 +2,7 @@
 local Default = require(RobloxSubscriptionPurchaseApp.Parent.LoggingProtocol).default
 local SubscriptionPurchaseFlowTelemetryModule = require(RobloxSubscriptionPurchaseApp.Events.SubscriptionPurchaseFlowTelemetry)
 
-function sendSubscriptionPurchaseFlowEvent(p1) --[[ Line: 7 ]]
+function sendSubscriptionPurchaseFlowEvent(p1)
 	-- upvalues: Default (copy), SubscriptionPurchaseFlowTelemetryModule (copy)
 	Default:logRobloxTelemetryEvent(SubscriptionPurchaseFlowTelemetryModule.SubscriptionPurchaseFlowEvent, {
 		Default.StandardizedFields.addOsInfo,

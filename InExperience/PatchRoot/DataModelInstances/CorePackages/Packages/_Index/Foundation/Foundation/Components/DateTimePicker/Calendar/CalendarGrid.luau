@@ -9,7 +9,7 @@ local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local BuildCalendarDayConfigsFunction = require(script.Parent.Parent.Utilities.DateTimeCalendarDayConfigUtilities).buildCalendarDayConfigs
 local DAYSPERWEEK = require(script.Parent.Parent.Utilities.DateTimeCalendarConstants).DAYS_PER_WEEK
 local GetDayCellAppearanceFunction = require(script.Parent.Parent.Utilities.DateTimeCalendarDayAppearanceUtilities).getDayCellAppearance
-local MemoResult = ReactModule.memo(function(Frame) --[[ Line: 59 | Named "CalendarGridDayCell" ]]
+local MemoResult = ReactModule.memo(function(Frame)
 	-- upvalues: UseTokensModule (copy), ReactModule (copy), ViewModule (copy), CalendarGridDayLabelModule (copy)
 	local UseTokensModuleResult = UseTokensModule()
 	local NoIsSelected: boolean = Frame.isHighlighted and not Frame.isSelected
@@ -33,7 +33,7 @@ local MemoResult = ReactModule.memo(function(Frame) --[[ Line: 59 | Named "Calen
 			emphasizeText = if Frame.applyEmphasis then Frame.isSelectable and not Frame.isSelected else nil,
 			isSelectable = Frame.isSelectable,
 			isSelected = Frame.isSelected,
-			onActivated = ReactModule.useCallback(function() --[[ Line: 71 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: Frame (copy)
 				Frame.handleDateActivated(Frame.day, Frame.month, Frame.year)
 			end, {
@@ -42,9 +42,9 @@ local MemoResult = ReactModule.memo(function(Frame) --[[ Line: 59 | Named "Calen
 				Frame.month,
 				Frame.year
 			}),
-			onHoverEnter = ReactModule.useMemo(function() --[[ Line: 62 ]]
+			onHoverEnter = ReactModule.useMemo(function()
 				-- upvalues: Frame (copy)
-				return if Frame.onHoverEnter == nil then nil else function() --[[ Line: 66 ]]
+				return if Frame.onHoverEnter == nil then nil else function()
 					-- upvalues: Frame (upval)
 					Frame.onHoverEnter(DateTime.fromLocalTime(Frame.year, Frame.month, Frame.day))
 				end
@@ -56,11 +56,11 @@ local MemoResult = ReactModule.memo(function(Frame) --[[ Line: 59 | Named "Calen
 end)
 
 return {
-	CalendarGrid = function(Frame) --[[ Line: 112 ]]
+	CalendarGrid = function(Frame)
 		-- upvalues: UseTokensModule (copy), ReactModule (copy), BuildCalendarDayConfigsFunction (copy), GetDayCellAppearanceFunction (copy), DAYSPERWEEK (copy), DateTimeUtilitiesModule (copy), TextModule (copy), MemoResult (copy), ViewModule (copy)
 		local None = UseTokensModule().Padding.None
 		local UseRefResult = ReactModule.useRef(nil)
-		ReactModule.useEffect(function() --[[ Line: 118 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRefResult (copy), Frame (copy)
 			local Current = UseRefResult.current
 			local OnHoverLeave = Frame.onHoverLeave
@@ -68,16 +68,16 @@ return {
 			if Current == nil or OnHoverLeave == nil then return end
 			local MouseLeaveConnection = Current.MouseLeave:Connect(OnHoverLeave)
 			
-			return function() --[[ Line: 125 ]]
+			return function()
 				-- upvalues: MouseLeaveConnection (copy)
 				MouseLeaveConnection:Disconnect()
 			end
 		end, { Frame.onHoverLeave })
-		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 130 ]]
+		local UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: BuildCalendarDayConfigsFunction (upval), Frame (copy)
 			return BuildCalendarDayConfigsFunction(Frame.currViewDate)
 		end, { Frame.currViewDate })
-		local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 135 ]]
+		local UseMemoResult1 = ReactModule.useMemo(function()
 			-- upvalues: UseMemoResult (copy), GetDayCellAppearanceFunction (upval), Frame (copy)
 			local t = {}
 			

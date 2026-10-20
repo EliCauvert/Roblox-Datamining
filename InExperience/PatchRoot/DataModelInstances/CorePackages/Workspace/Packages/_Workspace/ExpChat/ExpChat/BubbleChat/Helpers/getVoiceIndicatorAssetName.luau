@@ -1,6 +1,6 @@
 ﻿local GetFFlagExpChatEnableVoiceReverseNudgeModule = require(script:FindFirstAncestor("ExpChat").Flags.GetFFlagExpChatEnableVoiceReverseNudge)
 
-return function(p1, p2: number, Text, p3): string --[[ Line: 4 ]]
+return function(p1, p2: number, Text, p3): string
 	-- upvalues: GetFFlagExpChatEnableVoiceReverseNudgeModule (copy)
 	if p1 == "Connecting" then
 		return "icons/controls/voice/" .. Text .. "_0_dark"

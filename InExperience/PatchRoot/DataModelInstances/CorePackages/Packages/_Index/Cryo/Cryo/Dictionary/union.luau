@@ -1,4 +1,4 @@
-﻿return function(Tbl, List) --[[ Line: 2 | Named "union" ]]
+﻿return function(Tbl, List)
 	local Copy = table.clone(Tbl)
 	
 	for i, value in List do

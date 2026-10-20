@@ -4,7 +4,7 @@ local Images = require(Parent1.UIBlox).App.ImageSet.Images
 local FoundationModule = require(Parent1.Foundation)
 local FFlagPlayerListFoundationSubscriptionIconModule = require(Parent.Flags.FFlagPlayerListFoundationSubscriptionIcon)
 
-return (require(Parent1.AppCommonLib).memoize(function(IsTenFoot, p1) --[[ Line: 165 ]]
+return (require(Parent1.AppCommonLib).memoize(function(IsTenFoot, p1)
 	-- upvalues: Images (copy), FFlagPlayerListFoundationSubscriptionIconModule (copy), FoundationModule (copy)
 	local config = { IsTenFoot = IsTenFoot }
 	

@@ -22,11 +22,11 @@ local UsePageScopeRefFunction = SduiSharedUtilitiesModule.usePageScopeRef
 local UseUiStatusFunction = SduiSharedUtilitiesModule.useUiStatus
 local FFlagLuaAppSduiHomeSortDetailPageContext = require(Parent.SharedFlags).FFlagLuaAppSduiHomeSortDetailPageContext
 
-local function _(p1, p2) --[[ Line: 47 | Named "getFromPropsOrNavigationParams" ]]
+local function _(p1, p2)
 	return p1[p2] or p1.navigation and p1.navigation.getParam(p2)
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 51 | Named "HomeSortDetailPage" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: GetHomeSortDetailPageKeyModule (copy), UseInputDataFunction (copy), HomeConstantsModule (copy), UseUiStatusFunction (copy), ReactModule (copy), UsePageScopeRefFunction (copy), SduiSharedUtilitiesModule (copy), HomeSortDetailScopeFieldsModule (copy), SduiSurfaceLoadTimeTracker (copy), HomeSortDetailConstantsModule (copy), LoggingProtocolModule (copy), SortDeeplinkFailureCounter (copy), FetchHomePageModule (copy), UiStatus (copy), BuildHomeSortDetailPageEntryModule (copy), FetchHomeSortDetailModule (copy), RefreshHomePageModule (copy), SduiPageWrapperEntryPoint (copy), FFlagLuaAppSduiHomeSortDetailPageContext (copy), AppPage (copy)
 	local SortId = p1.sortId or p1.navigation and p1.navigation.getParam("sortId")
 	local SortIndex = p1.sortIndex or p1.navigation and p1.navigation.getParam("sortIndex")
@@ -38,13 +38,13 @@ return ReactModule.memo(function(p1) --[[ Line: 51 | Named "HomeSortDetailPage" 
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(false)
 	UsePageScopeRefFunction(HomeSortDetailPageKeyModule)
-	ReactModule.useMemo(function() --[[ Line: 64 ]]
+	ReactModule.useMemo(function()
 		-- upvalues: SduiSharedUtilitiesModule (upval), HomeSortDetailPageKeyModule (copy), HomeSortDetailScopeFieldsModule (upval), SortId (copy), SortIndex (copy)
 		local SduiClientPageScope = SduiSharedUtilitiesModule.getSduiClientPageScope(HomeSortDetailPageKeyModule)
 		SduiClientPageScope.set(HomeSortDetailScopeFieldsModule.SelectedSortId, SortId)
 		SduiClientPageScope.set(HomeSortDetailScopeFieldsModule.SelectedSortIndex, SortIndex)
 	end, { HomeSortDetailPageKeyModule, SortId, SortIndex })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 70 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: PageTimer (copy), SduiSurfaceLoadTimeTracker (upval), HomeSortDetailConstantsModule (upval), SduiSharedUtilitiesModule (upval), HomeSortDetailPageKeyModule (copy)
 		local PageTimer1 = PageTimer or SduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(HomeSortDetailConstantsModule.SurfaceKey, {
 			eventName = HomeSortDetailConstantsModule.SurfaceLoadTimeEventName,
@@ -54,7 +54,7 @@ return ReactModule.memo(function(p1) --[[ Line: 51 | Named "HomeSortDetailPage" 
 		
 		return PageTimer1
 	end, { HomeSortDetailPageKeyModule, PageTimer })
-	local UseResult = ReactModule.useCallback(function(Reason) --[[ Line: 83 ]]
+	local UseResult = ReactModule.useCallback(function(Reason)
 		-- upvalues: UseRefResult1 (copy), LoggingProtocolModule (upval), SortDeeplinkFailureCounter (upval), SortId (copy), p1 (copy)
 		if UseRefResult1.current then return end
 		UseRefResult1.current = true
@@ -64,11 +64,11 @@ return ReactModule.memo(function(p1) --[[ Line: 51 | Named "HomeSortDetailPage" 
 			p1.onSortUnavailable()
 		end
 	end, { p1.onSortUnavailable, SortId })
-	ReactModule.useEffect(function() --[[ Line: 98 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FetchHomePageModule (upval), SduiSharedUtilitiesModule (upval), HomeConstantsModule (upval)
 		FetchHomePageModule(SduiSharedUtilitiesModule.SduiLoadTimer.createLoadTimer(HomeConstantsModule.ConfigKey))
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 103 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SortId (copy), UseResult (copy), UseUiStatusResult (copy), UiStatus (upval), UseInputDataResult (copy), BuildHomeSortDetailPageEntryModule (upval), SortIndex (copy), UseRefResult (copy), HomeSortDetailPageKeyModule (copy), FetchHomeSortDetailModule (upval), UseMemoResult (copy)
 		if SortId == nil then
 			UseResult("InvalidSort")
@@ -97,7 +97,7 @@ return ReactModule.memo(function(p1) --[[ Line: 51 | Named "HomeSortDetailPage" 
 		HomeSortDetailPageKeyModule, UseInputDataResult, UseUiStatusResult,
 		UseMemoResult, UseResult, SortId, SortIndex
 	})
-	ReactModule.useEffect(function() --[[ Line: 141 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseUiStatusResult1 (copy), UiStatus (upval), UseResult (copy), UseUiStatusResult (copy), UseInputDataResult (copy), SortId (copy), BuildHomeSortDetailPageEntryModule (upval), SortIndex (copy), SduiSharedUtilitiesModule (upval), HomeSortDetailPageKeyModule (copy)
 		if UseUiStatusResult1 == UiStatus.Error then
 			UseResult("SortTokenFetchFailed")
@@ -114,7 +114,7 @@ return ReactModule.memo(function(p1) --[[ Line: 51 | Named "HomeSortDetailPage" 
 		HomeSortDetailPageKeyModule, UseUiStatusResult1, UseInputDataResult,
 		UseUiStatusResult, UseResult, SortId, SortIndex
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 173 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: SortId (copy), SduiSurfaceLoadTimeTracker (upval), HomeSortDetailConstantsModule (upval), RefreshHomePageModule (upval)
 		if SortId == nil then
 			return nil
@@ -127,7 +127,7 @@ return ReactModule.memo(function(p1) --[[ Line: 51 | Named "HomeSortDetailPage" 
 		local RefreshHomePageModuleResult = RefreshHomePageModule()
 		
 		if RefreshHomePageModuleResult then
-			return RefreshHomePageModuleResult:finally(function() --[[ Line: 188 ]]
+			return RefreshHomePageModuleResult:finally(function()
 				-- upvalues: LoadTimerWithSurfaceLoadTime (copy)
 				LoadTimerWithSurfaceLoadTime.logRefreshComplete()
 			end)

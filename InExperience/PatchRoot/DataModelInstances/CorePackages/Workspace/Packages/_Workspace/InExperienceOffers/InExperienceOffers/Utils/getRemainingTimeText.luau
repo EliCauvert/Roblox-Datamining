@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("InExperienceOffers").Parent.AvatarExperienceUIKit)
 
-return function(p1, p2) --[[ Line: 23 | Named "getRemainingTimeText" ]]
+return function(p1, p2)
 	local Unit = p1.unit
 	local IsValueMatch = p1.value == 1
 	

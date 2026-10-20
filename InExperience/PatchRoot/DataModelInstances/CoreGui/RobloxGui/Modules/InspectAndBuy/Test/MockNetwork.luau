@@ -84,12 +84,12 @@ local config6 = {
 }
 local config7 = { name = "fakename", id = 13, rootPlaceId = 17 }
 
-local function getRobloxProductInfo(AssetId) --[[ Line: 145 ]]
+local function getRobloxProductInfo(AssetId)
 	-- upvalues: CryoModule (copy), config3 (copy), PromiseModule (copy)
 	return PromiseModule.resolve((CryoModule.Dictionary.join(config3, { AssetId = AssetId })))
 end
 
-local function getProductInfo(AssetId) --[[ Line: 150 ]]
+local function getProductInfo(AssetId)
 	-- upvalues: CryoModule (copy), config3 (copy), PromiseModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config3, { AssetId = AssetId })
 	JoinResult.Creator.Id = 2
@@ -97,12 +97,12 @@ local function getProductInfo(AssetId) --[[ Line: 150 ]]
 	return PromiseModule.resolve(JoinResult)
 end
 
-local function getItemDetails(Id, ItemType) --[[ Line: 156 ]]
+local function getItemDetails(Id, ItemType)
 	-- upvalues: CryoModule (copy), config4 (copy), PromiseModule (copy)
 	return PromiseModule.resolve((CryoModule.Dictionary.join(config4, { Id = Id, ItemType = ItemType })))
 end
 
-local function getBatchItemDetails(Ids) --[[ Line: 161 ]]
+local function getBatchItemDetails(Ids)
 	-- upvalues: CryoModule (copy), config4 (copy), PromiseModule (copy)
 	local JoinResults = {}
 	
@@ -114,86 +114,86 @@ end
 
 local config8 = { data = { { assetId = 17, creatingUniverseId = 13 } } }
 
-local function getVersionInfo(AssetId) --[[ Line: 183 ]]
+local function getVersionInfo(AssetId)
 	-- upvalues: CryoModule (copy), config8 (copy), PromiseModule (copy)
 	return PromiseModule.resolve((CryoModule.Dictionary.join(config8, { AssetId = AssetId })))
 end
 
-local function getExperiencePlayability(UniverseId) --[[ Line: 188 ]]
+local function getExperiencePlayability(UniverseId)
 	-- upvalues: CryoModule (copy), config6 (copy), PromiseModule (copy)
 	return PromiseModule.resolve({
 		(CryoModule.Dictionary.join(config6, { universeId = UniverseId }))
 	})
 end
 
-local function getExperienceInfo(Id) --[[ Line: 193 ]]
+local function getExperienceInfo(Id)
 	-- upvalues: CryoModule (copy), config7 (copy), PromiseModule (copy)
 	return PromiseModule.resolve({
 		data = { (CryoModule.Dictionary.join(config7, { id = Id })) }
 	})
 end
 
-local function getAssetBundles(_) --[[ Line: 198 ]]
+local function getAssetBundles(_)
 	-- upvalues: PromiseModule (copy), config1 (copy)
 	return PromiseModule.resolve(config1)
 end
 
-local function getPlayerName(_) --[[ Line: 202 ]]
+local function getPlayerName(_)
 	-- upvalues: PromiseModule (copy)
 	return PromiseModule.resolve("TEST")
 end
 
-local function createFavoriteForAsset(_) --[[ Line: 206 ]]
+local function createFavoriteForAsset(_)
 	-- upvalues: PromiseModule (copy)
 	return PromiseModule.resolve()
 end
 
-local function createFavoriteForBundle(_) --[[ Line: 210 ]]
+local function createFavoriteForBundle(_)
 	-- upvalues: PromiseModule (copy)
 	return PromiseModule.resolve()
 end
 
-local function deleteFavoriteForAsset(_) --[[ Line: 214 ]]
+local function deleteFavoriteForAsset(_)
 	-- upvalues: PromiseModule (copy)
 	return PromiseModule.resolve()
 end
 
-local function deleteFavoriteForBundle(_) --[[ Line: 218 ]]
+local function deleteFavoriteForBundle(_)
 	-- upvalues: PromiseModule (copy)
 	return PromiseModule.resolve()
 end
 
-local function getAssetFavoriteCount(_) --[[ Line: 222 ]]
+local function getAssetFavoriteCount(_)
 	-- upvalues: PromiseModule (copy)
 	return PromiseModule.resolve(120)
 end
 
-local function getBundleFavoriteCount(_) --[[ Line: 226 ]]
+local function getBundleFavoriteCount(_)
 	-- upvalues: PromiseModule (copy)
 	return PromiseModule.resolve(120)
 end
 
-local function getFavoriteForAsset(p1) --[[ Line: 230 ]]
+local function getFavoriteForAsset(p1)
 	-- upvalues: PromiseModule (copy), config2 (copy)
 	return if p1 == "GetFavoriteModel" then PromiseModule.resolve(config2) else PromiseModule.resolve("null")
 end
 
-local function getFavoriteForBundle(p1) --[[ Line: 238 ]]
+local function getFavoriteForBundle(p1)
 	-- upvalues: PromiseModule (copy), config2 (copy)
 	return if p1 == "GetFavoriteModel" then PromiseModule.resolve(config2) else PromiseModule.resolve("null")
 end
 
-local function getEconomyProductInfo(_) --[[ Line: 246 ]]
+local function getEconomyProductInfo(_)
 	-- upvalues: PromiseModule (copy), config5 (copy)
 	return PromiseModule.resolve(config5)
 end
 
-local function getModelFromUserId(_) --[[ Line: 250 ]]
+local function getModelFromUserId(_)
 	-- upvalues: PromiseModule (copy)
 	return PromiseModule.resolve()
 end
 
-local function networkFailure(_, _) --[[ Line: 254 ]]
+local function networkFailure(_, _)
 	-- upvalues: PromiseModule (copy)
 	return PromiseModule.reject("Failed to access network service")
 end
@@ -201,7 +201,7 @@ end
 local MockNetworkModule = {}
 MockNetworkModule.__index = MockNetworkModule
 
-function MockNetworkModule.new(p1, p2) --[[ Line: 261 ]]
+function MockNetworkModule.new(p1, p2)
 	-- upvalues: networkFailure (copy), getProductInfo (copy), getRobloxProductInfo (copy), getPlayerName (copy), getAssetBundles (copy), createFavoriteForAsset (copy), createFavoriteForBundle (copy), deleteFavoriteForAsset (copy), deleteFavoriteForBundle (copy), getAssetFavoriteCount (copy), getBundleFavoriteCount (copy), getFavoriteForAsset (copy), getFavoriteForBundle (copy), getEconomyProductInfo (copy), getModelFromUserId (copy), getVersionInfo (copy), getExperiencePlayability (copy), getExperienceInfo (copy), getItemDetails (copy), getBatchItemDetails (copy)
 	local Config = if p1 then {
 		getProductInfo = networkFailure,
@@ -243,7 +243,7 @@ function MockNetworkModule.new(p1, p2) --[[ Line: 261 ]]
 		getBatchItemDetails = getBatchItemDetails
 	}
 	setmetatable(Config, {
-		__tostring = function(): string --[[ Line: 309 ]]
+		__tostring = function(): string
 			return "MockService(Network)"
 		end
 	})
@@ -251,64 +251,64 @@ function MockNetworkModule.new(p1, p2) --[[ Line: 261 ]]
 	return Config
 end
 
-function MockNetworkModule.GetMockAssetData() --[[ Line: 317 ]]
+function MockNetworkModule.GetMockAssetData()
 	-- upvalues: config (copy)
 	return config
 end
 
-function MockNetworkModule.GetMockHumanoidDescription() --[[ Line: 321 ]]
+function MockNetworkModule.GetMockHumanoidDescription()
 	-- upvalues: HumanoidDescription (copy)
 	return HumanoidDescription
 end
 
-function MockNetworkModule.GetMockHumanoidDescriptionEmpty() --[[ Line: 325 ]]
+function MockNetworkModule.GetMockHumanoidDescriptionEmpty()
 	-- upvalues: HumanoidDescription2 (copy)
 	return HumanoidDescription2
 end
 
-function MockNetworkModule.GetMockPlayerName(): string --[[ Line: 329 ]]
+function MockNetworkModule.GetMockPlayerName(): string
 	return "TEST"
 end
 
-function MockNetworkModule.GetMockAssetBundlesData() --[[ Line: 333 ]]
+function MockNetworkModule.GetMockAssetBundlesData()
 	-- upvalues: config1 (copy)
 	return config1
 end
 
-function MockNetworkModule.GetMockFavoriteCount(): number --[[ Line: 337 ]]
+function MockNetworkModule.GetMockFavoriteCount(): number
 	return 120
 end
 
-function MockNetworkModule.GetFavoriteModelId(): string --[[ Line: 341 ]]
+function MockNetworkModule.GetFavoriteModelId(): string
 	return "GetFavoriteModel"
 end
 
-function MockNetworkModule.GetProductInfo() --[[ Line: 345 ]]
+function MockNetworkModule.GetProductInfo()
 	-- upvalues: config3 (copy)
 	return config3
 end
 
-function MockNetworkModule.GetEconomyProductInfo() --[[ Line: 349 ]]
+function MockNetworkModule.GetEconomyProductInfo()
 	-- upvalues: config5 (copy)
 	return config5
 end
 
-function MockNetworkModule.GetMockHumanoidDescriptionEmotes() --[[ Line: 353 ]]
+function MockNetworkModule.GetMockHumanoidDescriptionEmotes()
 	-- upvalues: HumanoidDescription1 (copy)
 	return HumanoidDescription1
 end
 
-function MockNetworkModule.GetVersionInfo() --[[ Line: 357 ]]
+function MockNetworkModule.GetVersionInfo()
 	-- upvalues: config8 (copy)
 	return config8
 end
 
-function MockNetworkModule.GetExperiencePlayability() --[[ Line: 361 ]]
+function MockNetworkModule.GetExperiencePlayability()
 	-- upvalues: config6 (copy)
 	return { config6 }
 end
 
-function MockNetworkModule.GetExperienceInfo() --[[ Line: 365 ]]
+function MockNetworkModule.GetExperienceInfo()
 	-- upvalues: config7 (copy)
 	return { data = { config7 } }
 end

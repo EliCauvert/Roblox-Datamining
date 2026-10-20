@@ -300,7 +300,7 @@ local config10 = {
 	[FocusNavigationEventNameEnum.HoldToJoinFriend] = true
 }
 
-local function getLegacyInputBindings(p1, p2, p3, p4) --[[ Line: 406 ]]
+local function getLegacyInputBindings(p1, p2, p3, p4)
 	-- upvalues: config (copy), config3 (copy), ShortcutBarPlatformGamepadIcons (copy)
 	if p2.axes then
 		local Vertical = p2.axes.vertical
@@ -331,11 +331,11 @@ local function getLegacyInputBindings(p1, p2, p3, p4) --[[ Line: 406 ]]
 	end
 end
 
-local function selectRoactGamepadBindings(p1) --[[ Line: 448 ]]
+local function selectRoactGamepadBindings(p1)
 	return if p1.GamepadBottomBar then p1.GamepadBottomBar.boundInputs else nil
 end
 
-local function getPlatformGamepadImages() --[[ Line: 452 ]]
+local function getPlatformGamepadImages()
 	-- upvalues: config3 (copy), UserInputService (copy)
 	local ImageForKeyCodes = {}
 	
@@ -354,10 +354,10 @@ local function getPlatformGamepadImages() --[[ Line: 452 ]]
 	return ImageForKeyCodes
 end
 
-local function usePlatformGamepadImages() --[[ Line: 468 ]]
+local function usePlatformGamepadImages()
 	-- upvalues: ReactModule (copy), getPlatformGamepadImages (copy), UseExternalEventFunction (copy), UserInputService (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(getPlatformGamepadImages)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 471 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), getPlatformGamepadImages (upval)
 		UseStateResult2((getPlatformGamepadImages()))
 	end, {})
@@ -367,7 +367,7 @@ local function usePlatformGamepadImages() --[[ Line: 468 ]]
 	return UseStateResult
 end
 
-local function getGamepadItems(UseActiveEventMapResult, p1, UseContextResult, p2, p3, p4) --[[ Line: 481 ]]
+local function getGamepadItems(UseActiveEventMapResult, p1, UseContextResult, p2, p3, p4)
 	-- upvalues: list (copy), config1 (copy), config2 (copy), getLegacyInputBindings (copy), config5 (copy), config6 (copy), ShortcutBarPlatformGamepadIcons (copy), config8 (copy), config7 (copy), config9 (copy), config10 (copy), FocusNavigationEventNameEnum (copy), config3 (copy)
 	local List = {}
 	
@@ -441,7 +441,7 @@ local function getGamepadItems(UseActiveEventMapResult, p1, UseContextResult, p2
 	return List
 end
 
-local function getKeyboardItems(UseActiveEventMapResult, p5, UseContextResult, p6) --[[ Line: 572 ]]
+local function getKeyboardItems(UseActiveEventMapResult, p5, UseContextResult, p6)
 	-- upvalues: config1 (copy), List (copy), config7 (copy), config9 (copy), config10 (copy)
 	local List1 = {}
 	local t = {}
@@ -482,7 +482,7 @@ local function getKeyboardItems(UseActiveEventMapResult, p5, UseContextResult, p
 	return List1
 end
 
-local function useShortcutBarFrameProps() --[[ Line: 617 ]]
+local function useShortcutBarFrameProps()
 	-- upvalues: UseDesignTokensFunction (copy), UseSignalStateFunction (copy), DisplayModule (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local UseSignalStateResult = UseSignalStateFunction(DisplayModule.GetDisplayStore().getDeviceSafePadding)
@@ -493,7 +493,7 @@ local function useShortcutBarFrameProps() --[[ Line: 617 ]]
 	}
 end
 
-local function useShortcutBarItems() --[[ Line: 633 ]]
+local function useShortcutBarItems()
 	-- upvalues: ReactFocusNavigationModule (copy), ReactModule (copy), LocalizationRoactContext (copy), UseHeldProgressByEventFunction (copy), UseLastInputMethodFunction (copy), FFlagLuaAppResponsiveEnginePreferredInput (copy), ResponsiveModule (copy), NoShortcutBarWithTvRemote (copy), UseIsTvRemoteDeviceFunction (copy), ShortcutBarPlatformGamepadIcons (copy), usePlatformGamepadImages (copy), UseSelectorFunction (copy), selectRoactGamepadBindings (copy), UseAppPolicyFunction (copy), FFlagEnableStickyShortcutBarOnAllPlatforms (copy), getGamepadItems (copy), getKeyboardItems (copy)
 	local UseActiveEventMapResult = ReactFocusNavigationModule.useActiveEventMap()
 	local UseContextResult = ReactModule.useContext(LocalizationRoactContext)
@@ -503,7 +503,7 @@ local function useShortcutBarItems() --[[ Line: 633 ]]
 	local UseIsTvRemoteDeviceResult = if NoShortcutBarWithTvRemote then UseIsTvRemoteDeviceFunction() else nil
 	local UsePlatformGamepadImagesResult = if ShortcutBarPlatformGamepadIcons then usePlatformGamepadImages() else nil
 	local UseSelectorResult = UseSelectorFunction(selectRoactGamepadBindings)
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p7) --[[ Line: 645 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p7)
 		return p7.getStickyShortcutBarEnabled()
 	end) or FFlagEnableStickyShortcutBarOnAllPlatforms
 	local IsUsePreferredInputResultMatch: boolean = if FFlagLuaAppResponsiveEnginePreferredInput then UsePreferredInputResult == ResponsiveModule.Input.Directional else UseLastInputMethodResult == "Gamepad"
@@ -511,7 +511,7 @@ local function useShortcutBarItems() --[[ Line: 633 ]]
 	return if IsUsePreferredInputResultMatch then if UseIsTvRemoteDeviceResult then {} else getGamepadItems(UseActiveEventMapResult, UseHeldProgressByEventResult, UseContextResult, UseSelectorResult, UseAppPolicyResult, UsePlatformGamepadImagesResult) else getKeyboardItems(UseActiveEventMapResult, UseHeldProgressByEventResult, UseContextResult, UseAppPolicyResult)
 end
 
-function useAppShortcutBarProps() --[[ Line: 673 ]]
+function useAppShortcutBarProps()
 	-- upvalues: useShortcutBarFrameProps (copy), useShortcutBarItems (copy), CryoModule (copy)
 	return CryoModule.Dictionary.union(useShortcutBarFrameProps(), { items = useShortcutBarItems() })
 end

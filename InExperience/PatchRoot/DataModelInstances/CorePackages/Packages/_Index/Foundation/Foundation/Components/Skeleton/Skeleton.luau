@@ -19,7 +19,7 @@ local config = {
 	Size = UDim2.fromScale(1, 1)
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 40 | Named "Skeleton" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseClockFunction (copy), UsePulseBindingModule (copy), UseTokensModule (copy), UsePreferencesModule (copy), RadiusModule (copy), FlagsModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), LerpModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseClockResult = UseClockFunction()
@@ -30,7 +30,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 40 |
 	
 	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
 		cornerRadius = if WithDefaultsModuleResult.radius == RadiusModule.None then nil else UDim.new(0, UseTokensModuleResult.Radius[WithDefaultsModuleResult.radius]),
-		backgroundStyle = if UsePreferencesModuleResult.reducedMotion then UsePulseBindingModuleResult:map(function(p2) --[[ Line: 57 ]]
+		backgroundStyle = if UsePreferencesModuleResult.reducedMotion then UsePulseBindingModuleResult:map(function(p2)
 			-- upvalues: FlagsModule (upval), Shimmer (copy), UseTokensModuleResult (copy), LerpModule (upval)
 			local Transparency = if FlagsModule.FoundationSkeletonCommonShimmerToken then Shimmer.Transparency else UseTokensModuleResult.Color.Extended.White.White_10.Transparency
 			
@@ -54,7 +54,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 40 |
 				NumberSequenceKeypoint.new(0.5, UseTokensModuleResult.Color.Extended.White.White_30.Transparency),
 				NumberSequenceKeypoint.new(1, Shimmer.Transparency)
 			}),
-			Offset = UseClockResult:map(function(p2: number): Vector2 --[[ Line: 84 ]]
+			Offset = UseClockResult:map(function(p2: number): Vector2
 				return Vector2.new(p2 * 2 % 3 - 1.5, 0)
 			end)
 		})

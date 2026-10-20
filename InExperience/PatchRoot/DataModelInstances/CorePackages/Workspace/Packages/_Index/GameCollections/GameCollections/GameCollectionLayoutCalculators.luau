@@ -5,7 +5,7 @@ local _ = require(Parent.Style)
 
 return {
 	calculateNumColumns = CollectionLayoutCalculators.calculateNumColumns,
-	calculateTileHeightFromWidth = function(p1, _, p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ Line: 15 ]]
+	calculateTileHeightFromWidth = function(p1, _, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 		-- upvalues: GameTileViewConfig (copy)
 		return GameTileViewConfig.getTileHeight(p3, p1, p2, p4, p5, p6, p7, p8, p9, p10)
 	end,

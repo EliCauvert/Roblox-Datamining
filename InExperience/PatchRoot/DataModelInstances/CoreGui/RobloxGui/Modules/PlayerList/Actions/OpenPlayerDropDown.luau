@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.ActionCreator)("OpenPlayerDropDown", function(SelectedPlayer) --[[ Line: 4 ]]
+﻿return require(script.Parent.Parent.ActionCreator)("OpenPlayerDropDown", function(SelectedPlayer)
 	return { selectedPlayer = SelectedPlayer }
 end)

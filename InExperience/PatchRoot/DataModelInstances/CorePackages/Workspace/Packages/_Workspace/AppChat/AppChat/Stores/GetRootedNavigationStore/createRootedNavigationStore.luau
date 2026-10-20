@@ -1,12 +1,12 @@
 ﻿local SignalsModule = require(script:FindFirstAncestor("AppChat").Parent.Signals)
 
-return function() --[[ Line: 14 | Named "createRootedNavigationStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(false)
 	local Count = 0
 	local v1 = nil
 	
-	local function cancelNavigation() --[[ Line: 19 ]]
+	local function cancelNavigation()
 		-- upvalues: v1 (ref), Signal2 (copy)
 		v1 = nil
 		Signal2(false)
@@ -14,7 +14,7 @@ return function() --[[ Line: 14 | Named "createRootedNavigationStore" ]]
 	
 	return {
 		getIsNavigationPending = Signal,
-		beginNavigation = function(): number --[[ Line: 26 ]]
+		beginNavigation = function(): number
 			-- upvalues: Count (ref), v1 (ref), Signal2 (copy)
 			Count += 1
 			v1 = Count
@@ -22,7 +22,7 @@ return function() --[[ Line: 14 | Named "createRootedNavigationStore" ]]
 			
 			return Count
 		end,
-		completeNavigation = function(p1) --[[ Line: 32 ]]
+		completeNavigation = function(p1)
 			-- upvalues: Signal (copy), v1 (ref), Signal2 (copy)
 			if Signal(false) and p1 == v1 then
 				v1 = nil

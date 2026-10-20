@@ -7,12 +7,12 @@ local UniversalFeatureRestrictionsModule = require(CorePackages.Workspace.Packag
 local VoiceChatModule = require(CorePackages.Workspace.Packages.VoiceChat)
 local NewResult = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
 
-local function format(p1, p2) --[[ Line: 25 ]]
+local function format(p1, p2)
 	-- upvalues: NewResult (copy)
 	return NewResult:Format(p1, p2)
 end
 
-return function(p1) --[[ Line: 33 | Named "showProactiveVoiceRestriction" ]]
+return function(p1)
 	-- upvalues: Players (copy), GetRestrictionTypeModule (copy), BuildProactiveVoiceRestrictionDetailModule (copy), format (copy), VoiceChatModule (copy), UniversalFeatureRestrictionsModule (copy)
 	local LocalPlayer = Players.LocalPlayer
 	
@@ -42,13 +42,13 @@ return function(p1) --[[ Line: 33 | Named "showProactiveVoiceRestriction" ]]
 	local Flag1 = false
 	local Flag2 = false
 	
-	local function _(p2) --[[ Line: 67 | Named "reportBan" ]]
+	local function _(p2)
 		-- upvalues: Analytics (copy), BanReason (copy), UserId (copy), PreviousSessionId (copy)
 		Analytics:reportBanMessageEvent(p2)
 		Analytics:reportBanMessageEventV2(p2, BanReason, UserId, PreviousSessionId)
 	end
 	
-	local function onAppeal() --[[ Line: 81 ]]
+	local function onAppeal()
 		-- upvalues: Flag1 (ref), RestrictionTypeModule (copy), Analytics (copy), v1 (ref), v2 (ref), BanReason (copy), UserId (copy), PreviousSessionId (copy)
 		Flag1 = true
 		
@@ -63,7 +63,7 @@ return function(p1) --[[ Line: 33 | Named "showProactiveVoiceRestriction" ]]
 	end
 	
 	UniversalFeatureRestrictionsModule.showFeatureRestrictionDirect(UniversalFeatureRestrictionsModule.AbuseVector.Voice, ProactiveVoiceRestrictionDetailModule, {
-		onShown = function() --[[ Line: 72 ]]
+		onShown = function()
 			-- upvalues: Flag2 (ref), RestrictionTypeModule (copy), Analytics (copy), BanReason (copy), UserId (copy), PreviousSessionId (copy)
 			if not Flag2 then
 				Flag2 = true
@@ -74,13 +74,13 @@ return function(p1) --[[ Line: 33 | Named "showProactiveVoiceRestriction" ]]
 				end
 			end
 		end,
-		onDismiss = function() --[[ Line: 90 ]]
+		onDismiss = function()
 			-- upvalues: Flag (ref), RestrictionTypeModule (copy), Origin (copy), IsCurrentFunction (copy), VoiceChatModule (upval), Manager (copy), Analytics (copy), v1 (ref), v2 (ref), Flag1 (ref), BanReason (copy), UserId (copy), PreviousSessionId (copy)
 			if Flag then return end
 			Flag = true
 			
 			if Origin ~= "mic" and (RestrictionTypeModule == "TemporaryBan" or RestrictionTypeModule == "NudgeBan") and IsCurrentFunction() then
-				VoiceChatModule.PostInformedOfBan(function(p2, p3, p4) --[[ Line: 99 ]]
+				VoiceChatModule.PostInformedOfBan(function(p2, p3, p4)
 					-- upvalues: Manager (upval)
 					return Manager:PostRequest(p2, p3, p4)
 				end, true)

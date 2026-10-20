@@ -1,5 +1,5 @@
 ﻿return {
-	createLoadingOverlay = function(p1) --[[ Line: 4 ]]
+	createLoadingOverlay = function(p1)
 		p1.LoadingOverlay = Instance.new("Frame")
 		p1.LoadingOverlay.Name = "LoadingOverlay"
 		p1.LoadingOverlay.BackgroundColor3 = p1.defaultBackgroundColor3

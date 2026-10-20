@@ -24,7 +24,7 @@ local config = {
 	}
 }
 
-function RoactChatAnalyticsModule.new(p1, LocalUserId) --[[ Line: 44 ]]
+function RoactChatAnalyticsModule.new(p1, LocalUserId)
 	-- upvalues: RoactChatAnalyticsModule (copy)
 	assert(LocalUserId, "RoactChatAnalytics must be passed the ID of the local user")
 	local config = {
@@ -38,7 +38,7 @@ function RoactChatAnalyticsModule.new(p1, LocalUserId) --[[ Line: 44 ]]
 	return config
 end
 
-function RoactChatAnalyticsModule:userFetchedOlderConversations() --[[ Line: 58 ]]
+function RoactChatAnalyticsModule:userFetchedOlderConversations()
 	-- upvalues: RoactChatAnalyticsModule (copy)
 	if not self.hasAlreadyFetchedOlderConversations then
 		self.hasAlreadyFetchedOlderConversations = true
@@ -49,7 +49,7 @@ function RoactChatAnalyticsModule:userFetchedOlderConversations() --[[ Line: 58 
 	end
 end
 
-function RoactChatAnalyticsModule:loadGameLinkCardInChat(p1, p2) --[[ Line: 76 ]]
+function RoactChatAnalyticsModule:loadGameLinkCardInChat(p1, p2)
 	self._eventStreamImpl:setRBXEventStream("roactChat", "loadGameLinkCardInChat", {
 		uid = self.localUserId,
 		cid = tostring(p1),
@@ -57,13 +57,13 @@ function RoactChatAnalyticsModule:loadGameLinkCardInChat(p1, p2) --[[ Line: 76 ]
 	})
 end
 
-function RoactChatAnalyticsModule:userLoadedChat() --[[ Line: 87 ]]
+function RoactChatAnalyticsModule:userLoadedChat()
 	-- upvalues: RoactChatAnalyticsModule (copy)
 	self._eventStreamImpl:setRBXEventStream("roactChat", "userLoadedChat", { uid = self.localUserId })
 	self._diagImpl:reportCounter(RoactChatAnalyticsModule.DiagCounters.UserLoadedChat, 1)
 end
 
-function RoactChatAnalyticsModule:navigate(p1) --[[ Line: 99 ]]
+function RoactChatAnalyticsModule:navigate(p1)
 	-- upvalues: config (copy), RoactChatAnalyticsModule (copy), CryoModule (copy)
 	assert(config[p1], "Invalid navigation option given")
 	self._diagImpl:reportCounter(RoactChatAnalyticsModule.DiagCounters[p1], 1)

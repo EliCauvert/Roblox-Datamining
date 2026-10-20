@@ -2,7 +2,7 @@
 local SignalsModule = require(Parent.Signals)
 local CryoModule = require(Parent.Cryo)
 
-return function(List) --[[ Line: 22 | Named "createSignalMap" ]]
+return function(List)
 	-- upvalues: SignalsModule (copy), CryoModule (copy)
 	local t = {}
 	local Count = 0
@@ -17,11 +17,11 @@ return function(List) --[[ Line: 22 | Named "createSignalMap" ]]
 	local Signal1, Signal2_1 = SignalsModule.createSignal(Count)
 	
 	return {
-		getData = function(p1, p2) --[[ Line: 35 ]]
+		getData = function(p1, p2)
 			-- upvalues: Signal (copy)
 			return Signal(p2)[p1]
 		end,
-		setData = function(p1, p2, p3) --[[ Line: 39 ]]
+		setData = function(p1, p2, p3)
 			-- upvalues: Signal (copy), CryoModule (upval), Signal2_1 (copy), Signal1 (copy), Signal2 (copy)
 			local SignalResult = Signal(p3)
 			local JoinResult = CryoModule.Dictionary.join(SignalResult, { [p1] = p2 })
@@ -31,7 +31,7 @@ return function(List) --[[ Line: 22 | Named "createSignalMap" ]]
 			end
 			Signal2(JoinResult)
 		end,
-		removeData = function(p1, p2) --[[ Line: 49 ]]
+		removeData = function(p1, p2)
 			-- upvalues: Signal (copy), CryoModule (upval), Signal2_1 (copy), Signal1 (copy), Signal2 (copy)
 			local SignalResult = Signal(p2)
 			
@@ -42,16 +42,16 @@ return function(List) --[[ Line: 22 | Named "createSignalMap" ]]
 			end
 		end,
 		getCount = Signal1,
-		iterateData = function(Callback, p1) --[[ Line: 64 ]]
+		iterateData = function(Callback, p1)
 			-- upvalues: SignalsModule (upval), Signal (copy)
-			return SignalsModule.createEffect(function() --[[ Line: 65 ]]
+			return SignalsModule.createEffect(function()
 				-- upvalues: Signal (upval), p1 (copy), Callback (copy)
 				for i, value in pairs((Signal(p1))) do
 					Callback(i, value)
 				end
 			end)
 		end,
-		getAllData = SignalsModule.createComputed(function(p2) --[[ Line: 60 ]]
+		getAllData = SignalsModule.createComputed(function(p2)
 			-- upvalues: Signal (copy)
 			return Signal(p2)
 		end)

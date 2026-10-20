@@ -5,9 +5,9 @@ local FetchConversationDetailsToSignalsModule = require(Parent.AppChat.fetchConv
 local GetConversationStoreModule = require(Parent.AppChat.GetConversationStore)
 local GetFriendsChatNavigationStoreModule = require(FriendsChat.Stores.GetFriendsChatNavigationStore)
 
-return function(p1) --[[ Line: 16 | Named "openConversation" ]]
+return function(p1)
 	-- upvalues: FetchConversationDetailsToSignalsModule (copy), GetConversationStoreModule (copy), GetFriendsChatNavigationStoreModule (copy)
-	return FetchConversationDetailsToSignalsModule(p1):andThen(function(): boolean --[[ Line: 17 ]]
+	return FetchConversationDetailsToSignalsModule(p1):andThen(function(): boolean
 		-- upvalues: GetConversationStoreModule (upval), p1 (copy), GetFriendsChatNavigationStoreModule (upval)
 		if GetConversationStoreModule(false).getConversation(p1, false) == nil then
 			return false
@@ -16,7 +16,7 @@ return function(p1) --[[ Line: 16 | Named "openConversation" ]]
 			
 			return true
 		end
-	end, function(): boolean --[[ Line: 24 ]]
+	end, function(): boolean
 		return false
 	end)
 end

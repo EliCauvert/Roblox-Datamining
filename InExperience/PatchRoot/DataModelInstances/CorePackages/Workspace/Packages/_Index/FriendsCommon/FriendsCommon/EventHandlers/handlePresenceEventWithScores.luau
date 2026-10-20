@@ -5,7 +5,7 @@ local ApolloPresenceModule = require(Parent.ApolloPresence)
 local _ = require(Parent.GraphQLServer)
 local SocialLuaAnalyticsModule = require(Parent.SocialLuaAnalytics)
 
-local function rtnPresenceToGraphQLPresence(p1) --[[ Line: 37 ]]
+local function rtnPresenceToGraphQLPresence(p1)
 	-- upvalues: ApolloPresenceModule (copy)
 	return {
 		__typename = "UserPresence",
@@ -20,7 +20,7 @@ local function rtnPresenceToGraphQLPresence(p1) --[[ Line: 37 ]]
 	}
 end
 
-local function toUserIdToFriendMap(OnlineFriendsByUserId) --[[ Line: 51 ]]
+local function toUserIdToFriendMap(OnlineFriendsByUserId)
 	local t = {}
 	
 	for _, value in OnlineFriendsByUserId do
@@ -29,7 +29,7 @@ local function toUserIdToFriendMap(OnlineFriendsByUserId) --[[ Line: 51 ]]
 	return t
 end
 
-local function _(List) --[[ Line: 60 | Named "userIdFriendMapToList" ]]
+local function _(List)
 	local List1 = {}
 	
 	for _, value in List do
@@ -44,7 +44,7 @@ local Emitter = SocialLuaAnalyticsModule.Telemetry.createEmitter({
 		links = "https://docs.google.com/document/d/1uRCdl8pEuiW9wDiOTL39JPMGLhgxtpvVgiXovE8Xof4",
 		throttlingThousandths = game:DefineFastInt("FriendsCommonAnalyticsThrottlingThousandths", 10000)
 	},
-	getSharedInfo = function() --[[ Line: 82 ]]
+	getSharedInfo = function()
 		return {}
 	end
 })
@@ -55,14 +55,14 @@ local FriendsSortFeRtnMessage = SocialLuaAnalyticsModule.Telemetry.new({
 	backendsList = {
 		{
 			type = "EventIngest",
-			format = function(p1, _) --[[ Line: 94 ]]
+			format = function(p1, _)
 				return p1
 			end
 		}
 	}
 })
 
-return function(p1) --[[ Line: 101 | Named "handlePresenceEventWithScores" ]]
+return function(p1)
 	-- upvalues: ApolloFriendsModule (copy), Queries (copy), toUserIdToFriendMap (copy), rtnPresenceToGraphQLPresence (copy), Emitter (copy), FriendsSortFeRtnMessage (copy)
 	local Variables = {
 		userId = p1.localUserId,

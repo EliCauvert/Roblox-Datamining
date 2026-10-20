@@ -7,7 +7,7 @@ local TFActionsEnumModule = require(TrustedContacts.TrustedFriendActions.TFActio
 local UseGetTFActionsCallbacksModule = require(script.Parent.useGetTFActionsCallbacks)
 local FFlagTrustedFriendsLinkVPCModule = require(TrustedContacts.Flags.FFlagTrustedFriendsLinkVPC)
 
-return function(p1, _, p2, p3) --[[ Line: 25 | Named "useModalButtonActions" ]]
+return function(p1, _, p2, p3)
 	-- upvalues: UseGetTFActionsCallbacksModule (copy), UseLocalizationFunction (copy), ReactModule (copy), TFActionsEnumModule (copy), FoundationModule (copy), FFlagTrustedFriendsLinkVPCModule (copy)
 	local UseGetTFActionsCallbacksModuleResult = UseGetTFActionsCallbacksModule(p1, p3)
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -17,7 +17,7 @@ return function(p1, _, p2, p3) --[[ Line: 25 | Named "useModalButtonActions" ]]
 		ok = "CommonUI.Controls.Action.OK",
 		accept = "CommonUI.Controls.Action.Accept"
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 44 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseLocalizationResult (copy), UseGetTFActionsCallbacksModuleResult (copy), TFActionsEnumModule (upval), FoundationModule (upval), FFlagTrustedFriendsLinkVPCModule (upval)
 		local config = {
 			icon = nil,
@@ -89,7 +89,7 @@ return function(p1, _, p2, p3) --[[ Line: 25 | Named "useModalButtonActions" ]]
 				{
 					isDisabled = true,
 					text = UseLocalizationResult.accept,
-					onActivated = function() --[[ Line: 104 ]] end
+					onActivated = function() end
 				},
 				config
 			},
@@ -97,7 +97,7 @@ return function(p1, _, p2, p3) --[[ Line: 25 | Named "useModalButtonActions" ]]
 				{
 					isDisabled = true,
 					text = UseLocalizationResult.add,
-					onActivated = function() --[[ Line: 112 ]] end
+					onActivated = function() end
 				},
 				config
 			},
@@ -105,7 +105,7 @@ return function(p1, _, p2, p3) --[[ Line: 25 | Named "useModalButtonActions" ]]
 				{
 					isDisabled = true,
 					text = UseLocalizationResult.accept,
-					onActivated = function() --[[ Line: 120 ]] end
+					onActivated = function() end
 				},
 				config
 			}

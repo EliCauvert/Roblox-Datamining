@@ -5,11 +5,11 @@ local MarqueeEligibilityModule = require(script.Parent.marqueeEligibility)
 local ScrollPauseModule = require(script.Parent.scrollPause)
 local TileVisibilityModule = require(script.Parent.tileVisibility)
 
-local function drawsOnTop(Frame: Frame): boolean --[[ Line: 50 ]]
+local function drawsOnTop(Frame: Frame): boolean
 	return if Frame:IsA("GuiObject") and Frame.Visible then Frame.BackgroundTransparency < 0.95 or (if Frame:IsA("ImageLabel") or Frame:IsA("ImageButton") then Frame.Image ~= "" and Frame.ImageTransparency < 0.95 else false) else false
 end
 
-local function isCoveredAt(Ancestor, Callback, NewX, p1): boolean --[[ Line: 64 ]]
+local function isCoveredAt(Ancestor, Callback, NewX, p1): boolean
 	-- upvalues: drawsOnTop (copy)
 	for _, Ancestor1 in Callback(NewX, p1) do
 		if Ancestor1 == Ancestor or Ancestor1:IsDescendantOf(Ancestor) then
@@ -21,7 +21,7 @@ local function isCoveredAt(Ancestor, Callback, NewX, p1): boolean --[[ Line: 64 
 	return false
 end
 
-local function _(List, Id) --[[ Line: 77 | Named "indexOfTileId" ]]
+local function _(List, Id)
 	for i, value in ipairs(List) do
 		if value.id == Id then
 			return i
@@ -30,7 +30,7 @@ local function _(List, Id) --[[ Line: 77 | Named "indexOfTileId" ]]
 	return nil
 end
 
-local function lastLocationFor(Tiles, ResolveActiveTileIdResult) --[[ Line: 86 ]]
+local function lastLocationFor(Tiles, ResolveActiveTileIdResult)
 	for _, tile in ipairs(Tiles) do
 		if tile.id == ResolveActiveTileIdResult then
 			local Presence = tile.presence
@@ -43,7 +43,7 @@ local function lastLocationFor(Tiles, ResolveActiveTileIdResult) --[[ Line: 86 ]
 end
 
 return {
-	useMarqueeActiveTiles = function(p2, Current, p3, p4, p5) --[[ Line: 105 ]]
+	useMarqueeActiveTiles = function(p2, Current, p3, p4, p5)
 		-- upvalues: ReactModule (copy), ScrollPauseModule (copy), lastLocationFor (copy), MarqueeEligibilityModule (copy), RunService (copy), UserInputService (copy), TileVisibilityModule (copy), isCoveredAt (copy)
 		local UseStateResult, UseStateResult2 = ReactModule.useState({})
 		local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
@@ -56,7 +56,7 @@ return {
 		local UseRefResult5 = ReactModule.useRef(Current)
 		UseRefResult5.current = Current
 		
-		local function publishIndex(Current) --[[ Line: 133 ]]
+		local function publishIndex(Current)
 			-- upvalues: UseRefResult3 (copy), UseStateResult2 (copy)
 			if UseRefResult3.current == Current then return end
 			UseRefResult3.current = Current
@@ -70,7 +70,7 @@ return {
 			end
 		end
 		
-		local UseResult = ReactModule.useCallback(function(p6) --[[ Line: 145 ]]
+		local UseResult = ReactModule.useCallback(function(p6)
 			-- upvalues: UseRefResult5 (copy), lastLocationFor (upval), MarqueeEligibilityModule (upval), UseRefResult1 (copy), UseRefResult (copy), UseRefResult2 (copy), publishIndex (copy), UseRefResult4 (copy), UseStateResult2_2 (copy)
 			local Current = UseRefResult5.current
 			
@@ -125,7 +125,7 @@ return {
 			end
 		end, {})
 		
-		local function _(List, Id) --[[ Line: 192 | Named "tileById" ]]
+		local function _(List, Id)
 			for _, value in ipairs(List) do
 				if value.id == Id then
 					return value
@@ -134,7 +134,7 @@ return {
 			return nil
 		end
 		
-		local UseResult1 = ReactModule.useCallback(function(Current) --[[ Line: 204 ]]
+		local UseResult1 = ReactModule.useCallback(function(Current)
 			-- upvalues: UseRefResult5 (copy), MarqueeEligibilityModule (upval), UseRefResult2 (copy), publishIndex (copy), UseRefResult4 (copy), UseStateResult2_2 (copy)
 			local Current1 = UseRefResult5.current
 			
@@ -162,7 +162,7 @@ return {
 			UseRefResult4.current += 1
 			UseStateResult2_2(UseRefResult4.current)
 		end, {})
-		local UseResult2 = ReactModule.useCallback(function(Current) --[[ Line: 223 ]]
+		local UseResult2 = ReactModule.useCallback(function(Current)
 			-- upvalues: UseRefResult5 (copy), UseRefResult2 (copy), UseRefResult3 (copy), UseStateResult2 (copy)
 			if UseRefResult5.current.hoverEnabled ~= true then return end
 			if UseRefResult2.current ~= Current then return end
@@ -176,14 +176,14 @@ return {
 			end
 		end, {})
 		local UseRefResult6 = ReactModule.useRef({})
-		ReactModule.useEffect(function() --[[ Line: 239 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p2 (copy), p3 (copy), RunService (upval), p4 (copy), UserInputService (upval), p5 (copy), UseRefResult6 (copy), TileVisibilityModule (upval), isCoveredAt (upval), UseRefResult5 (copy), UseRefResult2 (copy), UseRefResult3 (copy), UseStateResult2 (copy), MarqueeEligibilityModule (upval), publishIndex (copy), UseRefResult1 (copy), UseRefResult (copy), ScrollPauseModule (upval), UseStateResult2_1 (copy)
 			local Current = p2.current
 			
 			if Current == nil then return end
 			local P10 = p3 or RunService.Heartbeat
 			local P11 = p4 or UserInputService
-			local P12 = p5 or function(p7, p8) --[[ Line: 248 ]]
+			local P12 = p5 or function(p7, p8)
 				-- upvalues: Current (copy)
 				local BasePlayerGui = Current:FindFirstAncestorWhichIsA("BasePlayerGui")
 				
@@ -195,7 +195,7 @@ return {
 			local startHeartbeat = nil
 			local Callback = nil
 			
-			local function _() --[[ Line: 261 | Named "stopHeartbeat" ]]
+			local function _()
 				-- upvalues: Connection (ref)
 				if Connection then
 					Connection:Disconnect()
@@ -203,7 +203,7 @@ return {
 				end
 			end
 			
-			local function verticalPage() --[[ Line: 269 ]]
+			local function verticalPage()
 				-- upvalues: Current (copy)
 				local v2 = nil
 				local v3 = 0
@@ -222,14 +222,14 @@ return {
 				return v2
 			end
 			
-			local _ = function() --[[ Line: 288 | Named "verticalCanvasY" ]]
+			local _ = function()
 				-- upvalues: verticalPage (copy)
 				local VerticalPageResult = verticalPage()
 				
 				return if VerticalPageResult == nil then nil else VerticalPageResult.CanvasPosition.Y
 			end
 			
-			local function rowIsVerticallyEligible(): boolean --[[ Line: 297 ]]
+			local function rowIsVerticallyEligible(): boolean
 				-- upvalues: verticalPage (copy), Current (copy), TileVisibilityModule (upval), isCoveredAt (upval), P12 (copy)
 				local VerticalPageResult = verticalPage()
 				
@@ -257,7 +257,7 @@ return {
 				return TileVisibilityModule.MIN_VISIBLE_FRACTION <= Count / 20
 			end
 			
-			local function publish(CanvasX) --[[ Line: 324 ]]
+			local function publish(CanvasX)
 				-- upvalues: UseRefResult5 (upval), UseRefResult2 (upval), UseRefResult3 (upval), UseStateResult2 (upval), MarqueeEligibilityModule (upval), publishIndex (upval), UseRefResult1 (upval)
 				local Current = UseRefResult5.current
 				
@@ -353,10 +353,10 @@ return {
 				end
 			end
 			
-			startHeartbeat = function() --[[ Line: 366 | Named "startHeartbeat" ]]
+			startHeartbeat = function()
 				-- upvalues: Connection (ref), P10 (copy), UseRefResult (upval), Callback (ref)
 				if not Connection then
-					Connection = P10:Connect(function(p7) --[[ Line: 370 ]]
+					Connection = P10:Connect(function(p7)
 						-- upvalues: UseRefResult (upval), Callback (upval)
 						local CanvasX = UseRefResult.current.canvasX
 						
@@ -371,7 +371,7 @@ return {
 				end
 			end
 			
-			Callback = function(X, p7, p8) --[[ Line: 380 | Named "apply" ]]
+			Callback = function(X, p7, p8)
 				-- upvalues: UseRefResult (upval), ScrollPauseModule (upval), config (copy), verticalPage (copy), UseStateResult2_1 (upval), startHeartbeat (ref), Connection (ref), rowIsVerticallyEligible (copy), UseRefResult2 (upval), UseRefResult3 (upval), UseStateResult2 (upval), publish (copy)
 				local Current = UseRefResult.current
 				local AdvanceFunction = ScrollPauseModule.advance
@@ -407,7 +407,7 @@ return {
 				end
 			end
 			
-			local function onInputBegan(Input) --[[ Line: 404 ]]
+			local function onInputBegan(Input)
 				-- upvalues: ScrollPauseModule (upval), verticalPage (copy), Current (copy), Current1 (copy), config (copy), Callback (ref)
 				if not ScrollPauseModule.isPointerHold(Input.UserInputType) then return end
 				local VerticalPageResult = verticalPage()
@@ -421,7 +421,7 @@ return {
 				end
 			end
 			
-			local _ = function(Key) --[[ Line: 427 | Named "releaseHold" ]]
+			local _ = function(Key)
 				-- upvalues: Current1 (copy), config (copy), Callback (ref), Current (copy)
 				if Key == nil then
 					table.clear(Current1)
@@ -433,7 +433,7 @@ return {
 				Callback(Current.CanvasPosition.X, 0)
 			end
 			
-			local function onCanvasPositionChanged() --[[ Line: 440 ]]
+			local function onCanvasPositionChanged()
 				-- upvalues: Callback (ref), Current (copy)
 				Callback(Current.CanvasPosition.X, 0)
 			end
@@ -447,7 +447,7 @@ return {
 			local Connection1 = if VerticalPageResult then VerticalPageResult:GetPropertyChangedSignal("CanvasPosition"):Connect(onCanvasPositionChanged) else nil
 			local Connection2 = Current:GetPropertyChangedSignal("CanvasPosition"):Connect(onCanvasPositionChanged)
 			local InputBeganConnection = P11.InputBegan:Connect(onInputBegan)
-			local InputEndedConnection = P11.InputEnded:Connect(function(Input) --[[ Line: 457 ]]
+			local InputEndedConnection = P11.InputEnded:Connect(function(Input)
 				-- upvalues: Current1 (copy), config (copy), Callback (ref), Current (copy)
 				if Input == nil then
 					table.clear(Current1)
@@ -458,14 +458,14 @@ return {
 				config.current = next(Current1) ~= nil
 				Callback(Current.CanvasPosition.X, 0)
 			end)
-			local WindowFocusReleasedConnection = if P11.WindowFocusReleased then P11.WindowFocusReleased:Connect(function() --[[ Line: 461 ]]
+			local WindowFocusReleasedConnection = if P11.WindowFocusReleased then P11.WindowFocusReleased:Connect(function()
 				-- upvalues: Current1 (copy), config (copy), Callback (ref), Current (copy)
 				table.clear(Current1)
 				config.current = next(Current1) ~= nil
 				Callback(Current.CanvasPosition.X, 0)
 			end) else nil
 			
-			return function() --[[ Line: 465 ]]
+			return function()
 				-- upvalues: Connection (ref), Connection2 (copy), Connection1 (copy), InputBeganConnection (copy), InputEndedConnection (copy), WindowFocusReleasedConnection (copy)
 				if Connection then
 					Connection:Disconnect()

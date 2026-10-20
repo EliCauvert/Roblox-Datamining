@@ -11,10 +11,10 @@ local RobloxSwitchNavigator = RoactNavigationModule.createRobloxSwitchNavigator(
 	backBehavior = RoactNavigationModule.BackBehavior.None
 })
 
-local function SocialTabsPageNavigatorComponent(p1) --[[ Line: 23 ]]
+local function SocialTabsPageNavigatorComponent(p1)
 	-- upvalues: UseNavigationPropsFunction (copy), UseProfileDockedPanelWidthFunction (copy), ReactModule (copy), RobloxSwitchNavigator (copy), SocialTabsPageModule (copy)
 	local Navigation = p1.navigation
-	local UseNavigationPropsResult = UseNavigationPropsFunction(function(_, p2) --[[ Line: 26 ]]
+	local UseNavigationPropsResult = UseNavigationPropsFunction(function(_, p2)
 		return {
 			profileId = p2.profileId,
 			title = p2.title,
@@ -25,7 +25,7 @@ local function SocialTabsPageNavigatorComponent(p1) --[[ Line: 23 ]]
 	end)
 	
 	return ReactModule.createElement(SocialTabsPageModule, {
-		renderNavigator = ReactModule.useCallback(function() --[[ Line: 38 ]]
+		renderNavigator = ReactModule.useCallback(function()
 			-- upvalues: ReactModule (upval), RobloxSwitchNavigator (upval), Navigation (copy)
 			return ReactModule.createElement(RobloxSwitchNavigator, { navigation = Navigation })
 		end, { Navigation }),
@@ -39,7 +39,7 @@ end
 
 local SocialTabsPageNavigatorClassWrapper = ReactModule.PureComponent:extend("SocialTabsPageNavigatorClassWrapper")
 
-function SocialTabsPageNavigatorClassWrapper.render(p1) --[[ Line: 56 ]]
+function SocialTabsPageNavigatorClassWrapper.render(p1)
 	-- upvalues: ReactModule (copy), SocialTabsPageNavigatorComponent (copy)
 	return ReactModule.createElement(SocialTabsPageNavigatorComponent, p1.props)
 end

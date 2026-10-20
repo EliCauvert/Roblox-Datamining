@@ -15,7 +15,7 @@ local FFlagAXUnifiedEventCounters = AvatarExperienceFlagsModule.FFlagAXUnifiedEv
 local FFlagAllowCustomUnifiedEventFilterModule = require(script.Parent.FFlagAllowCustomUnifiedEventFilter)
 local AXUnifiedEventFilterModule = require(script.Parent.AXUnifiedEventFilter)
 
-return function(Object, p1, p2) --[[ Line: 30 ]]
+return function(Object, p1, p2)
 	-- upvalues: SessionService (copy), UnifiedEventLogConstantsModule (copy), FFlagAXUnifiedEventPageContext (copy), IsRunningInStudioFunction (copy), FFlagAXMISEnableMultiShoppingUnifiedEvents (copy), UnifiedEventLoggingUtilsModule (copy), CryoModule (copy), UnifiedEventPageStoreModule (copy), FFlagAllowCustomUnifiedEventFilterModule (copy), AXUnifiedEventFilterModule (copy), SendUnifiedEventLogModule (copy), FFlagAXSendUnifiedEventLogWithInstance (copy), FFlagAXUnifiedEventCounters (copy)
 	local Level2aSessionTag = SessionService:GetSessionTag("level2a")
 	local Attribute = Object:GetAttribute(UnifiedEventLogConstantsModule.SESSION_TAG_NAME)

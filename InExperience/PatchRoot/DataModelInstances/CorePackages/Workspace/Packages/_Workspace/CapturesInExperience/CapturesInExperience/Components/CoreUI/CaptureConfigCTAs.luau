@@ -17,22 +17,22 @@ local UseKeyboardEnabledModule = require(Parent.Hooks.useKeyboardEnabled)
 local _UDim = UDim.new(0, 8)
 local Opt: string = if UserInputService:GetPlatform() == Enum.Platform.OSX then "Opt" else "Alt"
 
-return (require(Parent.App.CapturesPolicy).connect(function(p1) --[[ Line: 245 ]]
+return (require(Parent.App.CapturesPolicy).connect(function(p1)
 	return { eligibleForVideoCapture = p1.eligibleForVideoCapture() }
-end)(function(Frame) --[[ Line: 48 ]]
+end)(function(Frame)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), CapturesContextModule (copy), GuiService (copy), UseLocalizationFunction (copy), Opt (copy), UserInputService (copy), UseKeyboardEnabledModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), _UDim (copy), NormalizeFontFaceFunction (copy), OnOffButtonModule (copy), VideoCaptureCTAModule (copy)
 	local UseStyleResult = UseStyleFunction()
 	local ChromeEnabled = ReactModule.useContext(CapturesContextModule).chromeEnabled
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(GuiService.PreferredTextSize)
-	ReactModule.useEffect(function() --[[ Line: 55 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2_1 (copy), GuiService (upval)
-		local Connection = GuiService:GetPropertyChangedSignal("PreferredTextSize"):Connect(function() --[[ Line: 56 | Named "onPreferredTextSizeChangedSignal" ]]
+		local Connection = GuiService:GetPropertyChangedSignal("PreferredTextSize"):Connect(function()
 			-- upvalues: UseStateResult2_1 (upval), GuiService (upval)
 			UseStateResult2_1(GuiService.PreferredTextSize)
 		end)
 		
-		return function() --[[ Line: 62 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end
@@ -55,7 +55,7 @@ end)(function(Frame) --[[ Line: 48 ]]
 	local Color2 = UseStyleResult.Theme.TextEmphasis.Color
 	local TitleLargeFont = if FoundationFontFaceMigration then UseStyleResult.Tokens.Typography.TitleLarge.Font else UseStyleResult.Font.Header2.Font
 	local ScaledBaseSize1 = UseStyleResult.Font.BaseSize * UseStyleResult.Font.Header2.RelativeSize
-	local UseResult = ReactModule.useCallback(function(Frame1: Frame) --[[ Line: 97 ]]
+	local UseResult = ReactModule.useCallback(function(Frame1: Frame)
 		-- upvalues: UseStateResult2 (copy), Frame (copy)
 		UseStateResult2(Frame1.AbsoluteSize)
 		
@@ -63,7 +63,7 @@ end)(function(Frame) --[[ Line: 48 ]]
 			Frame.onAbsoluteSizeChanged(Frame1.AbsoluteSize)
 		end
 	end, {})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 104 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), HotkeyEducationalText (copy), ScaledBaseSize (copy), BodySmallFont (copy), Text (upval)
 		return if FoundationFontFaceMigration then GetTextSizeFunction(HotkeyEducationalText, ScaledBaseSize, BodySmallFont, Vector2.new(10000, 10000)).X else Text.GetTextWidth(HotkeyEducationalText, BodySmallFont, ScaledBaseSize)
 	end, {

@@ -7,10 +7,10 @@ local FFlagAbuseReportInExpPlayerListV3 = require(Parent.SharedFlags).FFlagAbuse
 local RecentlyLeftSignalsModule = require(GenericAbuseReporting.BeduiV2.Utils.Signals.recentlyLeftSignals)
 local AccessoryType = require(Parent.Foundation).Enums.AccessoryType
 
-local function appendRecentlyLeftItems(List, p1, Tbl) --[[ Line: 23 ]]
+local function appendRecentlyLeftItems(List, p1, Tbl)
 	-- upvalues: AccessoryType (copy)
 	local Copy = table.clone(Tbl)
-	table.sort(Copy, function(A, B): boolean --[[ Line: 29 ]]
+	table.sort(Copy, function(A, B): boolean
 		return A.username:lower() < B.username:lower()
 	end)
 	
@@ -31,14 +31,14 @@ local function appendRecentlyLeftItems(List, p1, Tbl) --[[ Line: 23 ]]
 	return List
 end
 
-return function() --[[ Line: 59 | Named "getUsers" ]]
+return function()
 	-- upvalues: PromiseModule (copy), Players (copy), LocalPlayer (copy), FFlagAbuseReportInExpPlayerListV3 (copy), AccessoryType (copy), appendRecentlyLeftItems (copy), RecentlyLeftSignalsModule (copy)
-	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ()) --[[ Line: 60 ]]
+	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ())
 		-- upvalues: Players (upval), LocalPlayer (upval), FFlagAbuseReportInExpPlayerListV3 (upval), AccessoryType (upval), appendRecentlyLeftItems (upval), RecentlyLeftSignalsModule (upval)
-		local Success, Result = pcall(function() --[[ Line: 61 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Players (upval), LocalPlayer (upval), FFlagAbuseReportInExpPlayerListV3 (upval), AccessoryType (upval), appendRecentlyLeftItems (upval), RecentlyLeftSignalsModule (upval)
 			local Players1 = Players:GetPlayers()
-			table.sort(Players1, function(A, B): boolean --[[ Line: 63 ]]
+			table.sort(Players1, function(A, B): boolean
 				return A.Name:lower() < B.Name:lower()
 			end)
 			local List = {}

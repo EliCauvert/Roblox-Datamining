@@ -3,7 +3,7 @@ local MomentsCommonModule = require(MomentsCreation.Parent.MomentsCommon)
 local LoggerModule = require(MomentsCreation.Logger)
 local FFlagMomentsRealtimeSessionTelemetry = MomentsCommonModule.Flags.FFlagMomentsRealtimeSessionTelemetry
 
-return function(AssetId, p1) --[[ Line: 38 | Named "completeMomentUpload" ]]
+return function(AssetId, p1)
 	-- upvalues: FFlagMomentsRealtimeSessionTelemetry (copy), MomentsCommonModule (copy), LoggerModule (copy)
 	p1.uploadStore.setSuccess(AssetId)
 	

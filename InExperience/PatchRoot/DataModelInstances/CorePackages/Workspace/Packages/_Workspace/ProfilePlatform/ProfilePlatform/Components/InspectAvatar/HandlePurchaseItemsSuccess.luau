@@ -11,11 +11,11 @@ local SendProfilePurchaseEventsModule = require(ProfilePlatform.Analytics.sendPr
 local FFlagProfileInspectAndBuyRefreshBalanceAfterPurchaseModule = require(ProfilePlatform.Flags.FFlagProfileInspectAndBuyRefreshBalanceAfterPurchase)
 local FFlagProfileUnifiedPurchaseLoggingModule = require(ProfilePlatform.Flags.FFlagProfileUnifiedPurchaseLogging)
 
-local function buildEquippableAssets(PurchasedWearIds, OwnedAssetIds, WearTypeMap) --[[ Line: 75 ]]
+local function buildEquippableAssets(PurchasedWearIds, OwnedAssetIds, WearTypeMap)
 	local List = {}
 	local t = {}
 	
-	local function append(List1) --[[ Line: 83 ]]
+	local function append(List1)
 		-- upvalues: t (copy), WearTypeMap (copy), List (copy)
 		for _, value in List1 do
 			if not t[value] then
@@ -38,7 +38,7 @@ local function buildEquippableAssets(PurchasedWearIds, OwnedAssetIds, WearTypeMa
 	return List
 end
 
-local function parseLineItems(LineItems) --[[ Line: 106 ]]
+local function parseLineItems(LineItems)
 	local List = {}
 	local List1 = {}
 	local Count = 0
@@ -58,7 +58,7 @@ local function parseLineItems(LineItems) --[[ Line: 106 ]]
 	return List, List1, Count
 end
 
-local function buildPurchasedItems(LineItems, PurchasedItems) --[[ Line: 130 ]]
+local function buildPurchasedItems(LineItems, PurchasedItems)
 	-- upvalues: EnumsModule (copy)
 	local ItemSubTypes = {}
 	
@@ -88,7 +88,7 @@ local function buildPurchasedItems(LineItems, PurchasedItems) --[[ Line: 130 ]]
 	return List
 end
 
-return function(p1) --[[ Line: 170 | Named "HandlePurchaseItemsSuccess" ]]
+return function(p1)
 	-- upvalues: parseLineItems (copy), FFlagProfileUnifiedPurchaseLoggingModule (copy), SendProfilePurchaseEventsModule (copy), MarketplaceUnifiedAction (copy), buildPurchasedItems (copy), PurchaseDetailsStore (copy), BundleOwnershipStore (copy), buildEquippableAssets (copy), FFlagProfileInspectAndBuyRefreshBalanceAfterPurchaseModule (copy), SetCurrentToastMessageFunction (copy)
 	local ResponseBody = p1.result and p1.result.responseBody
 	local FulfillmentGroups = ResponseBody and ResponseBody.fulfillmentGroups

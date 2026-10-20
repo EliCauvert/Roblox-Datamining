@@ -19,11 +19,11 @@ local FFlagAXUnifiedEventCounters = require(CorePackages.Workspace.Packages.Avat
 local AnalyticsModule = {}
 AnalyticsModule.__index = AnalyticsModule
 
-function AnalyticsModule.__tostring(): string --[[ Line: 45 ]]
+function AnalyticsModule.__tostring(): string
 	return "Service(Analytics)"
 end
 
-function AnalyticsModule.new(InspecteeUid, Ctx, p1) --[[ Line: 51 ]]
+function AnalyticsModule.new(InspecteeUid, Ctx, p1)
 	-- upvalues: AnalyticsModule (copy), EventStreamReporter (copy), Default (copy), Players (copy), FFlagAXEnableInspectAndBuyVersionAnalyticsModule (copy), UnifiedEventLogEnums (copy), TIMEDOPTIONBYDAYS (copy), ItemTypeEnum (copy), UserInputService (copy), HttpService (copy), RunService (copy), RbxAnalyticsService (copy)
 	local t = {}
 	setmetatable(t, AnalyticsModule)
@@ -35,17 +35,17 @@ function AnalyticsModule.new(InspecteeUid, Ctx, p1) --[[ Line: 51 ]]
 	t.ctx = Ctx
 	t.version = if FFlagAXEnableInspectAndBuyVersionAnalyticsModule then p1 else nil
 	
-	function t.reportOpenInspectMenu() --[[ Line: 65 ]]
+	function t.reportOpenInspectMenu()
 		-- upvalues: t (copy)
 		t:report("inspectUser", {})
 	end
 	
-	function t.reportTryOnButtonClicked(ItemType, ItemID) --[[ Line: 72 ]]
+	function t.reportTryOnButtonClicked(ItemType, ItemID)
 		-- upvalues: t (copy)
 		t:report("tryItem", { itemType = ItemType, itemID = ItemID })
 	end
 	
-	function t.reportFavoriteItem(ItemType, ItemID, Favorite, Success, FailureReason, FavoriteCount) --[[ Line: 82 ]]
+	function t.reportFavoriteItem(ItemType, ItemID, Favorite, Success, FailureReason, FavoriteCount)
 		-- upvalues: t (copy)
 		t:report("favoriteItem", {
 			itemType = ItemType,
@@ -57,12 +57,12 @@ function AnalyticsModule.new(InspecteeUid, Ctx, p1) --[[ Line: 51 ]]
 		})
 	end
 	
-	function t.reportPurchaseAttempt(ItemType, ItemID) --[[ Line: 96 ]]
+	function t.reportPurchaseAttempt(ItemType, ItemID)
 		-- upvalues: t (copy)
 		t:report("purchaseAttemptItem", { itemType = ItemType, itemID = ItemID })
 	end
 	
-	function t.reportPurchaseAttemptUnifiedEvent(ItemType, ItemID, p2) --[[ Line: 106 ]]
+	function t.reportPurchaseAttemptUnifiedEvent(ItemType, ItemID, p2)
 		-- upvalues: t (copy), UnifiedEventLogEnums (upval), TIMEDOPTIONBYDAYS (upval), ItemTypeEnum (upval)
 		t:reportUnifiedEvent({
 			action = UnifiedEventLogEnums.MarketplaceUnifiedAction.PURCHASE_ATTEMPT,
@@ -76,7 +76,7 @@ function AnalyticsModule.new(InspecteeUid, Ctx, p1) --[[ Line: 51 ]]
 		t:report("purchaseAttemptItem", { itemType = ItemType, itemID = ItemID })
 	end
 	
-	function t.reportPurchaseSuccessUnifiedEvent(ItemType, ItemID, p2) --[[ Line: 128 ]]
+	function t.reportPurchaseSuccessUnifiedEvent(ItemType, ItemID, p2)
 		-- upvalues: t (copy), UnifiedEventLogEnums (upval), TIMEDOPTIONBYDAYS (upval), ItemTypeEnum (upval)
 		t:reportUnifiedEvent({
 			action = UnifiedEventLogEnums.MarketplaceUnifiedAction.PURCHASE_SUCCESS,
@@ -90,17 +90,17 @@ function AnalyticsModule.new(InspecteeUid, Ctx, p1) --[[ Line: 51 ]]
 		t:report("purchaseSuccessItem", { itemType = ItemType, itemID = ItemID })
 	end
 	
-	function t.reportPurchaseSuccess(ItemType, ItemID) --[[ Line: 150 ]]
+	function t.reportPurchaseSuccess(ItemType, ItemID)
 		-- upvalues: t (copy)
 		t:report("purchaseSuccessItem", { itemType = ItemType, itemID = ItemID })
 	end
 	
-	function t.reportItemDetailPageOpened(ItemType, ItemID) --[[ Line: 164 ]]
+	function t.reportItemDetailPageOpened(ItemType, ItemID)
 		-- upvalues: t (copy)
 		t:report("itemDetailView", { itemType = ItemType, itemID = ItemID })
 	end
 	
-	t.platformStr = (function(): string --[[ Line: 174 | Named "getPlatformString" ]]
+	t.platformStr = (function(): string
 		-- upvalues: UserInputService (upval), HttpService (upval)
 		local Platform = UserInputService:GetPlatform()
 		local Amazon = "Unknown"
@@ -147,7 +147,7 @@ function AnalyticsModule.new(InspecteeUid, Ctx, p1) --[[ Line: 51 ]]
 		return Amazon
 	end)()
 	
-	function t.sendCounter(Text) --[[ Line: 207 ]]
+	function t.sendCounter(Text)
 		-- upvalues: RunService (upval), t (copy), RbxAnalyticsService (upval)
 		if not RunService:IsStudio() then
 			RbxAnalyticsService:ReportCounter("inspectAndBuy" .. "_" .. t.platformStr .. "_" .. Text)
@@ -159,7 +159,7 @@ function AnalyticsModule.new(InspecteeUid, Ctx, p1) --[[ Line: 51 ]]
 	return t
 end
 
-function AnalyticsModule:report(p1, p2) --[[ Line: 219 ]]
+function AnalyticsModule:report(p1, p2)
 	-- upvalues: FFlagAXEnableInspectAndBuyVersionAnalyticsModule (copy), CryoModule (copy)
 	self.eventStream:sendTelemetryEvent(self.ctx, p1, (CryoModule.Dictionary.join({
 		feature = "inspectAndBuy",
@@ -171,7 +171,7 @@ function AnalyticsModule:report(p1, p2) --[[ Line: 219 ]]
 	}, p2)))
 end
 
-function AnalyticsModule:reportUnifiedEvent(p1) --[[ Line: 233 ]]
+function AnalyticsModule:reportUnifiedEvent(p1)
 	-- upvalues: UnifiedLoggingSurface (copy), CryoModule (copy), FFlagAXUnifiedEventCounters (copy), UnifiedEventCounterAggregator (copy), AXUnifiedEventFilter (copy), UnifiedEventLogConstants (copy)
 	local JoinResult = CryoModule.Dictionary.join({
 		surface = UnifiedLoggingSurface.IN_EXPERIENCE_INSPECT_BUY

@@ -9,7 +9,7 @@ local _ = require(AvatarExperienceGifting.Types.GiftSendFlowNavigationOverrides)
 local CloseGiftSendFlowFunction = AvatarExperienceNavigationModule.Utils.closeGiftSendFlow
 local UseAvatarRouteFunction = AvatarExperienceNavigationModule.AvatarRoute.Hooks.useAvatarRoute
 
-return function(p1) --[[ Line: 19 | Named "useAvatarItemGiftReviewSheetViewModel" ]]
+return function(p1)
 	-- upvalues: UseNavigationFunction (copy), UseAvatarRouteFunction (copy), ReactModule (copy), BuildGiftItemModule (copy), CloseGiftSendFlowFunction (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseAvatarRouteResult = UseAvatarRouteFunction()
@@ -20,11 +20,11 @@ return function(p1) --[[ Line: 19 | Named "useAvatarItemGiftReviewSheetViewModel
 	local IsKeyMatch: boolean = UseAvatarRouteResult.isVisible and UseAvatarRouteResult.current.key == UseNavigationResult.state.key
 	
 	return {
-		isVisible = ReactModule.useMemo(function() --[[ Line: 26 ]]
+		isVisible = ReactModule.useMemo(function()
 			-- upvalues: BuildGiftItemModule (upval), CollectibleItemIdParam (copy)
 			return BuildGiftItemModule(CollectibleItemIdParam)
 		end, { CollectibleItemIdParam }) ~= nil and (RecipientIdParam ~= nil and IsKeyMatch),
-		onBack = ReactModule.useCallback(function() --[[ Line: 31 ]]
+		onBack = ReactModule.useCallback(function()
 			-- upvalues: GoBack (copy), UseNavigationResult (copy)
 			if GoBack then
 				GoBack()
@@ -34,7 +34,7 @@ return function(p1) --[[ Line: 19 | Named "useAvatarItemGiftReviewSheetViewModel
 				UseNavigationResult.pop()
 			end
 		end, { UseNavigationResult, GoBack }),
-		onClose = ReactModule.useCallback(function() --[[ Line: 40 ]]
+		onClose = ReactModule.useCallback(function()
 			-- upvalues: CloseSendFlow (copy), CloseGiftSendFlowFunction (upval), UseNavigationResult (copy)
 			if CloseSendFlow then
 				CloseSendFlow()

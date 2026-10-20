@@ -7,7 +7,7 @@ local Default = require(Parent.LoggingProtocol).default
 local AnalyticsServiceModule = require(script.Parent.AnalyticsService)
 local IsSpatialFunction = require(Parent.AppCommonLib).isSpatial
 
-local function getAXStatMetadata(MetaData) --[[ Line: 16 ]]
+local function getAXStatMetadata(MetaData)
 	-- upvalues: UserInputService (copy), IsSpatialFunction (copy), RunService (copy), HttpService (copy), DashModule (copy)
 	local AssignResult = {
 		AppVersion = RunService:GetRobloxVersion(),
@@ -22,7 +22,7 @@ local function getAXStatMetadata(MetaData) --[[ Line: 16 ]]
 	return AssignResult
 end
 
-return function(p1) --[[ Line: 46 | Named "sendAXStat" ]]
+return function(p1)
 	-- upvalues: getAXStatMetadata (copy), Default (copy), AnalyticsServiceModule (copy)
 	if not p1.excludeStat then
 		Default:logRobloxTelemetryStat({

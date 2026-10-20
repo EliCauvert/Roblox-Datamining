@@ -3,9 +3,9 @@ local Parent = script:FindFirstAncestor("AvatarExperienceSave").Parent
 local PromiseModule = require(Parent.Promise)
 local _ = require(Parent.LuauPolyfill)
 
-return function(HumanoidDescription, RigType, SaveDict, GearAssetId) --[[ Line: 28 | Named "saveAvatar" ]]
+return function(HumanoidDescription, RigType, SaveDict, GearAssetId)
 	-- upvalues: PromiseModule (copy), AvatarEditorService (copy)
-	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ()) --[[ Line: 34 ]]
+	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ())
 		-- upvalues: AvatarEditorService (upval), HumanoidDescription (copy), RigType (copy), SaveDict (copy), GearAssetId (copy)
 		local NoPromptSaveAvatarResult = AvatarEditorService:NoPromptSaveAvatar(HumanoidDescription, RigType, SaveDict, GearAssetId)
 		while not NoPromptSaveAvatarResult do

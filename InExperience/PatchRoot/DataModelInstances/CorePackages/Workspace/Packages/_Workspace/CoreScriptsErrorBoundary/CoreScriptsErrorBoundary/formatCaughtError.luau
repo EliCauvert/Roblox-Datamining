@@ -1,4 +1,4 @@
-﻿return function(p1, p2): string --[[ Line: 8 | Named "formatCaughtError" ]]
+﻿return function(p1, p2): string
 	local CoreScriptsErrorBoundaryName: string = `[CoreScriptsErrorBoundary surface={p2.surface}]`
 	
 	if p2.componentStack then

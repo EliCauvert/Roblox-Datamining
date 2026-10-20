@@ -29,7 +29,7 @@ local config = {
 	searchPlaceHolder = "Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename"
 }
 
-return (ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 48 ]]
+return (ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 	-- upvalues: UseStyleFunction (copy), UseTokensFunction (copy), ReactModule (copy), FriendsListContextModule (copy), GetLocalizedStringsFunction (copy), config (copy), Size200 (ref), Size150 (ref), Size400 (ref), Size600 (ref), Size100 (ref), FontSize300 (ref), Small (ref), NewSize (ref), UseCursorFunction (copy), FoundationModule (copy), GetFFlagEnableFriendsListSearchNormalizationErrorFixFunction (copy), DebounceFunction (copy), ImageSetLabel (copy), IconsMenuSearch (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ImageSetButton (copy), IconsActionsEditClear (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseTokensResult = UseTokensFunction()
@@ -55,14 +55,14 @@ return (ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 48 ]
 	local SearchFriendsString = UseContextResult.searchFriendsString
 	local SearchFriendsFunction = UseContextResult.searchFriends
 	local v1 = #SearchFriendsString > 0
-	local UseResult = if GetFFlagEnableFriendsListSearchNormalizationErrorFixFunction() then ReactModule.useCallback(DebounceFunction(function(p3) --[[ Line: 79 ]]
+	local UseResult = if GetFFlagEnableFriendsListSearchNormalizationErrorFixFunction() then ReactModule.useCallback(DebounceFunction(function(p3)
 		-- upvalues: SearchFriendsFunction (copy)
 		SearchFriendsFunction(p3.Text:lower())
-	end, 0.5), { SearchFriendsFunction }) else function(p3) --[[ Line: 87 ]]
+	end, 0.5), { SearchFriendsFunction }) else function(p3)
 		-- upvalues: SearchFriendsFunction (copy)
 		SearchFriendsFunction(p3.Text)
 	end
-	ReactModule.useEffect(function() --[[ Line: 94 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (ref), p1 (copy)
 		if UseRefResult.current and p1.focusElement then
 			UseRefResult.current:CaptureFocus()
@@ -128,7 +128,7 @@ return (ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 48 ]
 			Image = IconsActionsEditClear,
 			ImageColor3 = UseStyleResult.Theme.IconEmphasis.Color,
 			ImageTransparency = UseStyleResult.Theme.IconEmphasis.Transparency,
-			[ReactModule.Event.Activated] = function() --[[ Line: 163 ]]
+			[ReactModule.Event.Activated] = function()
 				-- upvalues: SearchFriendsFunction (copy)
 				SearchFriendsFunction("")
 			end,

@@ -24,7 +24,7 @@ for _, value in list do
 		t[alias] = true
 	end
 end
-return function(List) --[[ Line: 32 | Named "mapAnalyticsMetadataFields" ]]
+return function(List)
 	-- upvalues: t (copy), list (copy)
 	local t1 = {}
 	

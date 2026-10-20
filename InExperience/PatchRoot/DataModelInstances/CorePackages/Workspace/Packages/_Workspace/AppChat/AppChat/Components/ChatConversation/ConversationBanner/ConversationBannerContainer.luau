@@ -28,10 +28,10 @@ local config = {
 local config1 = {
 	actionText = "PLACEHOLDER Action",
 	bodyText = "PLACEHOLDER Body",
-	onDismissed = function() --[[ Line: 56 ]] end
+	onDismissed = function() end
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 59 | Named "ConversationBannerContainer" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config1 (copy), UseNavigationFunction (copy), config (copy), UseTelemetryModule (copy), ChatConversationTelemetryLayerModule (copy), UseGetConversationFromIdModule (copy), FFlagAppChatConsolidateTrustedFriendsModalModule (copy), UseGetOneToOneFriendIdFromConversationIdModule (copy), ReactModule (copy), ConversationTopModalTelemetryModule (copy), ModalTelemetryModule (copy), EnumScreensModule (copy), ConversationBannerModule (copy)
 	local UnionResult = CryoModule.Dictionary.union(config1, p1)
 	local UseNavigationResult = UseNavigationFunction()
@@ -44,14 +44,14 @@ return ReactModule.memo(function(p1) --[[ Line: 59 | Named "ConversationBannerCo
 		ModalContext = table.concat(UseGetConversationFromIdModuleResult.participants, ",")
 	end
 	local UseGetOneToOneFriendIdFromConversationIdModuleResult = if FFlagAppChatConsolidateTrustedFriendsModalModule then UseGetOneToOneFriendIdFromConversationIdModule(UnionResult.conversationId) else nil
-	ReactModule.useEffect(function() --[[ Line: 72 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseTelemetryModuleResult (copy), ConversationTopModalTelemetryModule (upval), UnionResult (copy), ModalContext (ref)
 		UseTelemetryModuleResult.emit(ConversationTopModalTelemetryModule.Events.ModalRendered, {
 			modalVariant = UnionResult.modalVariant,
 			modalContext = ModalContext
 		})
 	end, { UnionResult.modalVariant })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 79 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UnionResult (copy), UseTelemetryModuleResult (copy), ConversationTopModalTelemetryModule (upval), ModalTelemetryModule (upval), ModalContext (ref)
 		UnionResult.onDismissed()
 		UseTelemetryModuleResult.emit(ConversationTopModalTelemetryModule.Events.ModalAction, {
@@ -60,7 +60,7 @@ return ReactModule.memo(function(p1) --[[ Line: 59 | Named "ConversationBannerCo
 			modalContext = ModalContext
 		})
 	end, { UnionResult.onDismissed })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 88 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: Entry (copy), UseNavigationResult (copy), EnumScreensModule (upval), FFlagAppChatConsolidateTrustedFriendsModalModule (upval), UseGetOneToOneFriendIdFromConversationIdModuleResult (copy), UnionResult (copy), UseTelemetryModuleResult (copy), ConversationTopModalTelemetryModule (upval), ModalTelemetryModule (upval), ModalContext (ref)
 		if Entry then
 			UseNavigationResult.navigate(EnumScreensModule.TrustedConnectionsUpsell, {

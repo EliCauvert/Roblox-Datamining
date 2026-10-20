@@ -12,10 +12,10 @@ local FFlagAppChatPresenceStoreMigrationModule = require(AppChat.Flags.FFlagAppC
 local UserPresenceUtilsModule = require(AppChat.Users.userPresenceUtils)
 local GetConversationTimestampModule = require(AppChat.Utils.getConversationTimestamp)
 
-return function(p1, p2) --[[ Line: 40 ]]
+return function(p1, p2)
 	-- upvalues: CryoModule (copy), FFlagAppChatPresenceStoreMigrationModule (copy), GetOtherParticipantFunction (copy), RoduxPresenceModule (copy), UserPresenceUtilsModule (copy), GetConversationTimestampModule (copy), GetConversationTitleModule (copy), PopulateUserIdsWithStateModule (copy), GetLastMessageContentModule (copy), GetThumbnailsForUserIdsModule (copy), GetConversationGameIdFunction (copy)
 	local Participants = p2.participants or {}
-	local FilterResult = CryoModule.List.filter(Participants, function(LocalUserId): boolean --[[ Line: 42 ]]
+	local FilterResult = CryoModule.List.filter(Participants, function(LocalUserId): boolean
 		-- upvalues: p1 (copy)
 		return LocalUserId ~= p1.LocalUserId
 	end)

@@ -3,7 +3,7 @@ local AnalyticsKeysModule = require(BuildExperience.Analytics.AnalyticsKeys)
 local MetricGranularity = require(BuildExperience.Parent.DataHydration.ExperienceAnalytics).MetricGranularity
 local WindowId = { LastWeek = "LastWeek", LastMonth = "LastMonth" }
 
-local function _(Id, LabelKey, Days: number, CreatorHubRangeType) --[[ Line: 35 | Named "dailyWindow" ]]
+local function _(Id, LabelKey, Days: number, CreatorHubRangeType)
 	-- upvalues: MetricGranularity (copy)
 	return {
 		id = Id,

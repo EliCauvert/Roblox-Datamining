@@ -3,12 +3,12 @@ local FFlagCreatorAgentChatFilterTerminalClientToolsModule = require(script.Pare
 local _ = require(script.Parent.types)
 local config = { present_plan = true, propose_plan = true }
 
-local function _(Text: string): boolean --[[ Line: 36 | Named "valueLooksLikeToolName" ]]
+local function _(Text: string): boolean
 	-- upvalues: config (copy)
 	return typeof(Text) == "string" and config[string.lower(Text)] == true
 end
 
-local function getRawInputContent(RawInput) --[[ Line: 40 ]]
+local function getRawInputContent(RawInput)
 	if typeof(RawInput) == "string" then
 		return RawInput, nil, nil
 	elseif typeof(RawInput) ~= "table" then
@@ -29,7 +29,7 @@ local function getRawInputContent(RawInput) --[[ Line: 40 ]]
 	end
 end
 
-local _ = function(p1): boolean --[[ Line: 59 | Named "toolCallLooksLikeProposePlan" ]]
+local _ = function(p1): boolean
 	-- upvalues: config (copy)
 	local Kind: string = p1.kind
 	
@@ -55,14 +55,14 @@ local _ = function(p1): boolean --[[ Line: 59 | Named "toolCallLooksLikeProposeP
 	return true
 end
 
-local _ = function(p1) --[[ Line: 93 | Named "decodePersistedToolResultText" ]]
+local _ = function(p1)
 	-- upvalues: HttpService (copy)
 	local Success, Result = pcall(HttpService.JSONDecode, HttpService, p1)
 	
 	return if Success and typeof(Result) == "table" and typeof(Result.text) == "string" then Result.text else nil
 end
 
-local function getPersistedToolResultText(ToolCall) --[[ Line: 103 ]]
+local function getPersistedToolResultText(ToolCall)
 	-- upvalues: HttpService (copy)
 	if ToolCall.content == nil then
 		return nil
@@ -86,7 +86,7 @@ local function getPersistedToolResultText(ToolCall) --[[ Line: 103 ]]
 	return if #List > 0 then table.concat(List) else nil
 end
 
-local function getToolCallOrder(p1, ToolCallId) --[[ Line: 159 ]]
+local function getToolCallOrder(p1, ToolCallId)
 	if p1.activityItems ~= nil then
 		for i, activityItem in p1.activityItems do
 			if activityItem.kind == "tool_call" and activityItem.toolCallId == ToolCallId then
@@ -109,7 +109,7 @@ local function getToolCallOrder(p1, ToolCallId) --[[ Line: 159 ]]
 	return 0
 end
 
-local _ = function(p2) --[[ Line: 182 | Named "decodePlanResult" ]]
+local _ = function(p2)
 	-- upvalues: HttpService (copy)
 	local Success, Result = pcall(HttpService.JSONDecode, HttpService, p2)
 	
@@ -130,7 +130,7 @@ return {
 			}
 		}
 	},
-	extractPlanFromToolCall = function(p2) --[[ Line: 72 ]]
+	extractPlanFromToolCall = function(p2)
 		-- upvalues: config (copy), getRawInputContent (copy)
 		local Kind: string = p2.kind
 		local Flag = nil
@@ -168,7 +168,7 @@ return {
 			return nil
 		end
 	end,
-	findPlanInTurnState = function(p2, p3) --[[ Line: 126 ]]
+	findPlanInTurnState = function(p2, p3)
 		-- upvalues: FFlagCreatorAgentChatFilterTerminalClientToolsModule (copy), getPersistedToolResultText (copy), config (copy), getRawInputContent (copy)
 		local List = {}
 		
@@ -229,7 +229,7 @@ return {
 		end
 		return nil, nil, nil, nil, nil
 	end,
-	getCompletedPlansFromTurnState = function(p4) --[[ Line: 198 ]]
+	getCompletedPlansFromTurnState = function(p4)
 		-- upvalues: config (copy), getRawInputContent (copy), getPersistedToolResultText (copy), HttpService (copy), getToolCallOrder (copy)
 		local List = {}
 		local List1 = {}
@@ -300,11 +300,11 @@ return {
 		end
 		return List
 	end,
-	formatAcceptedContent = function() --[[ Line: 227 ]]
+	formatAcceptedContent = function()
 		-- upvalues: HttpService (copy)
 		return { text = HttpService:JSONEncode({ accepted = true }) }
 	end,
-	formatFeedbackContent = function(FeedbackText) --[[ Line: 235 ]]
+	formatFeedbackContent = function(FeedbackText)
 		-- upvalues: HttpService (copy)
 		return {
 			text = HttpService:JSONEncode({ accepted = false, feedbackText = FeedbackText })

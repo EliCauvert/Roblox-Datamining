@@ -9,16 +9,16 @@ local UseInExperienceLocalizationFunction = require(Parent.ChatUIPrimitives).Hoo
 local FFlagTCWTranslationSupport = ChatUIPrimitivesModule.Flags.FFlagTCWTranslationSupport
 local MessageLayoutContainer = ChatUIPrimitivesModule.MessageLayoutContainer
 
-return ReactModule.memo(function(p1) --[[ Line: 38 | Named "MessageListArea" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FoundationModule (copy), UseInExperienceLocalizationFunction (copy), FFlagTCWTranslationSupport (copy), UseTranslationToggleAvailableModule (copy), ReactModule (copy), TextChannelWindowAnalyticsModule (copy), MessageLayoutContainer (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseInExperienceLocalizationResult = UseInExperienceLocalizationFunction()
 	local UseTranslationToggleAvailableModuleResult = if FFlagTCWTranslationSupport then UseTranslationToggleAvailableModule() else nil
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 49 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: TextChannelWindowAnalyticsModule (upval), p1 (copy)
 		return TextChannelWindowAnalyticsModule.createOnScrollCallback(p1.windowName)
 	end, { p1.windowName })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 53 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseTokensResult (copy)
 		return {
 			top = UDim.new(0, UseTokensResult.Size.Size_100),

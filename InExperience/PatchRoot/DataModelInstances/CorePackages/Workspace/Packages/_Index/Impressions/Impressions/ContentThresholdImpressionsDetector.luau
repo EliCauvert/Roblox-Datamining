@@ -2,14 +2,14 @@
 local ReactModule = require(Parent.React)
 local UseViewportBoundsFunction = require(Parent.ViewportUtils).useViewportBounds
 
-return function(p1) --[[ Line: 24 | Named "ContentThresholdImpressionsDetector" ]]
+return function(p1)
 	-- upvalues: UseViewportBoundsFunction (copy), ReactModule (copy)
 	local UseViewportBoundsResult = UseViewportBoundsFunction()
 	local UseRefResult = ReactModule.useRef({})
 	local UseRefResult1 = ReactModule.useRef(0)
 	local UseRefResult2 = ReactModule.useRef(nil)
 	local UseRefResult3 = ReactModule.useRef(p1.impressionsTag)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 32 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), UseViewportBoundsResult (copy), UseRefResult1 (copy), UseRefResult (copy)
 		local Current = p1.containerRef.current
 		
@@ -42,18 +42,18 @@ return function(p1) --[[ Line: 24 | Named "ContentThresholdImpressionsDetector" 
 		p1.containerRef, p1.fullContentHeight, p1.thresholds, p1.viewportBoundsOffset,
 		p1.sendImpressions, UseViewportBoundsResult
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 89 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult2 (copy), UseResult (copy)
 		if UseRefResult2.current then
 			task.cancel(UseRefResult2.current)
 		end
-		UseRefResult2.current = task.delay(0.2, function() --[[ Line: 93 ]]
+		UseRefResult2.current = task.delay(0.2, function()
 			-- upvalues: UseRefResult2 (upval), UseResult (upval)
 			UseRefResult2.current = nil
 			UseResult()
 		end)
 	end, { UseResult })
-	ReactModule.useEffect(function() --[[ Line: 99 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult3 (copy), p1 (copy), UseRefResult (copy), UseRefResult1 (copy), UseResult1 (copy)
 		if UseRefResult3.current ~= p1.impressionsTag then
 			UseRefResult3.current = p1.impressionsTag
@@ -62,7 +62,7 @@ return function(p1) --[[ Line: 24 | Named "ContentThresholdImpressionsDetector" 
 			UseResult1()
 		end
 	end, { p1.impressionsTag, UseResult1 })
-	ReactModule.useEffect(function() --[[ Line: 108 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseResult1 (copy), UseRefResult2 (copy)
 		local Current = p1.containerRef.current
 		
@@ -71,7 +71,7 @@ return function(p1) --[[ Line: 24 | Named "ContentThresholdImpressionsDetector" 
 			local Connection = Current:GetPropertyChangedSignal("AbsolutePosition"):Connect(UseResult1)
 			local Connection1 = Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(UseResult1)
 			
-			return function() --[[ Line: 118 ]]
+			return function()
 				-- upvalues: UseRefResult2 (upval), Connection (copy), Connection1 (copy)
 				if UseRefResult2.current then
 					task.cancel(UseRefResult2.current)

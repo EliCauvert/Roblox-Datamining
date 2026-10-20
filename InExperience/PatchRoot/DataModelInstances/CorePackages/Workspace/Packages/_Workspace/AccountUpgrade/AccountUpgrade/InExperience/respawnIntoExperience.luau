@@ -1,13 +1,13 @@
 ﻿local config = {
-	getPlaceId = function() --[[ Line: 14 ]]
+	getPlaceId = function()
 		return game.PlaceId
 	end,
-	teleport = function(PlaceId) --[[ Line: 17 ]]
+	teleport = function(PlaceId)
 		game:GetService("TeleportService"):Teleport(PlaceId)
 	end
 }
 
-return function(p1) --[[ Line: 22 | Named "respawnIntoExperience" ]]
+return function(p1)
 	-- upvalues: config (copy)
 	local P1 = p1 or config
 	local PlaceId = P1.getPlaceId()
@@ -17,7 +17,7 @@ return function(p1) --[[ Line: 22 | Named "respawnIntoExperience" ]]
 		
 		return false
 	end
-	local Success, Result = pcall(function() --[[ Line: 32 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: P1 (copy), PlaceId (copy)
 		P1.teleport(PlaceId)
 	end)

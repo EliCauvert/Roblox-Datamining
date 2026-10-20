@@ -2,7 +2,7 @@
 local LibraryBrowserViewModule = require(script.Parent.LibraryBrowserView)
 local UseLibraryBrowserViewModelModule = require(script.Parent.useLibraryBrowserViewModel)
 
-return function(p1) --[[ Line: 11 | Named "LibraryBrowserContainer" ]]
+return function(p1)
 	-- upvalues: UseLibraryBrowserViewModelModule (copy), ReactModule (copy), LibraryBrowserViewModule (copy)
 	return ReactModule.createElement(LibraryBrowserViewModule, (UseLibraryBrowserViewModelModule(p1)))
 end

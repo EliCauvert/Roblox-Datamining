@@ -5,7 +5,7 @@ local DisplayModule = require(Parent.Display)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 
-return function(p1) --[[ Line: 30 | Named "InsetBackground" ]]
+return function(p1)
 	-- upvalues: UseSignalStateFunction (copy), DisplayModule (copy), UseTokensFunction (copy), CryoModule (copy), ReactModule (copy)
 	local UseSignalStateResult = UseSignalStateFunction(DisplayModule.GetDisplayStore().getGuiInset)
 	local Config = if p1.excludeGlobalGuiInset then { left = 0, top = 0, right = 0, bottom = 0 } else UseSignalStateResult

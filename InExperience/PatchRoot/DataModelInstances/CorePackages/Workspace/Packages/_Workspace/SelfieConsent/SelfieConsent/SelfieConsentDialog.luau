@@ -9,7 +9,7 @@ local RoactServices = require(Parent1.RoactServices).RoactServices
 local SelfieConsentConnectionModule = require(Parent.SelfieConsentConnection)
 local RequestInternalWrapperFunction = require(Parent1.Http).NetworkLayers.requestInternalWrapper
 
-local function v9(p1, p2) --[[ Line: 18 ]]
+local function v9(p1, p2)
 	-- upvalues: ReactModule (copy), CoreScriptsRootProvider (copy), RoactServices (copy), RoactNetworking (copy), RequestInternalWrapperFunction (copy), HttpService (copy), RoactCompatModule (copy)
 	return RoactCompatModule.mount(ReactModule.createElement("Folder", nil, (ReactModule.createElement(CoreScriptsRootProvider, {}, {
 		RoactServicesProvider = ReactModule.createElement(RoactServices.ServiceProvider, {
@@ -21,11 +21,11 @@ local function v9(p1, p2) --[[ Line: 18 ]]
 end
 
 return {
-	createDialog = function() --[[ Line: 30 ]]
+	createDialog = function()
 		-- upvalues: v9 (copy), ReactModule (copy), SelfieConsentConnectionModule (copy)
 		local t = {}
 		
-		function t.mountCoreUI(p1) --[[ Line: 33 ]]
+		function t.mountCoreUI(p1)
 			-- upvalues: t (copy), v9 (upval), ReactModule (upval), SelfieConsentConnectionModule (upval)
 			t._coreUiHandle = v9(p1, {
 				SelfieConsent = ReactModule.createElement(SelfieConsentConnectionModule, {})

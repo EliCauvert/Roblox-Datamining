@@ -1,6 +1,6 @@
 ﻿local WidgetPaddingSizing = game:DefineFastInt("WidgetPaddingSizing", 32)
 
-return function(p1) --[[ Line: 24 | Named "resolveWidgetListItemBottomPaddingPx" ]]
+return function(p1)
 	-- upvalues: WidgetPaddingSizing (copy)
 	local XXLarge = p1.Padding.XXLarge
 	

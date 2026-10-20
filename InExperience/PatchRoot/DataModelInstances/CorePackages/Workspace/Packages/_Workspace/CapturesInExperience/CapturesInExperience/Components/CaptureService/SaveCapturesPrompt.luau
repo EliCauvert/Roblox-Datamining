@@ -21,11 +21,11 @@ local SaveCapturesPromptFinishedModule = require(Parent.Thunks.SaveCapturesPromp
 local _ = require(Parent.Types)
 local FFlagCapturePermissionsPromptFreeMouseModule = require(Parent.Flags.FFlagCapturePermissionsPromptFreeMouse)
 
-local function _(p1) --[[ Line: 54 ]]
+local function _(p1)
 	return typeof(p1) == "Content" and (p1.Object ~= nil and p1.Object:IsA("VideoCapture"))
 end
 
-local _ = function(List): boolean --[[ Line: 58 ]]
+local _ = function(List): boolean
 	for _, value in List do
 		if typeof(value) == "Content" and (value.Object ~= nil and value.Object:IsA("VideoCapture")) then
 			return true
@@ -34,7 +34,7 @@ local _ = function(List): boolean --[[ Line: 58 ]]
 	return false
 end
 
-return function(p1) --[[ Line: 69 ]]
+return function(p1)
 	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseScreenSizeFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), UsePinInputStateWhileOpenModule (copy), FFlagCapturePermissionsPromptFreeMouseModule (copy), EventNamesModule (copy), UseEffectOnceFunction (copy), SaveCapturesPromptFinishedModule (copy), ButtonType (copy), View (copy), CapturePromptItemModule (copy), Text (copy), Icon (copy), InteractiveAlert (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
@@ -60,17 +60,17 @@ return function(p1) --[[ Line: 69 ]]
 		yes = "Feature.Captures.Action.Save"
 	})
 	UsePinInputStateWhileOpenModule(FFlagCapturePermissionsPromptFreeMouseModule)
-	ReactModule.useEffect(function() --[[ Line: 93 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseAnalyticsModuleResult (copy), EventNamesModule (upval)
 		UseAnalyticsModuleResult.fireEvent(EventNamesModule.SaveCapturesPromptViewed)
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 97 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Flag (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval)
 		if Flag then
 			UseAnalyticsModuleResult.fireEvent(EventNamesModule.SaveCapturesPromptVideoPrompted)
 		end
 	end, { Flag })
-	UseEffectOnceFunction(function() --[[ Line: 103 ]]
+	UseEffectOnceFunction(function()
 		-- upvalues: Contents (copy), UseStateResult2_3 (copy)
 		local t = {}
 		
@@ -79,9 +79,9 @@ return function(p1) --[[ Line: 69 ]]
 		end
 		UseStateResult2_3(t)
 	end, { Contents })
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 111 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_3 (copy), UseStateResult3 (copy)
-		UseStateResult2_3(function(Tbl) --[[ Line: 112 ]]
+		UseStateResult2_3(function(Tbl)
 			-- upvalues: UseStateResult3 (upval), p2 (copy)
 			local Copy = table.clone(Tbl)
 			Copy[UseStateResult3] = p2
@@ -89,11 +89,11 @@ return function(p1) --[[ Line: 69 ]]
 			return Copy
 		end)
 	end, { UseStateResult3 })
-	local UseResult1 = ReactModule.useCallback(function(Frame) --[[ Line: 123 ]]
+	local UseResult1 = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(Frame.AbsoluteSize)
 	end, { UseStateResult2_1 })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 127 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult4 (copy), Contents (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval), UseDispatchResult (copy), SaveCapturesPromptFinishedModule (upval), p1 (copy)
 		local SavedCaptures = 0
 		local TotalCaptures = 0
@@ -122,7 +122,7 @@ return function(p1) --[[ Line: 69 ]]
 		})
 		UseDispatchResult(SaveCapturesPromptFinishedModule(p1.promptId, t))
 	end, { p1.promptData, p1.promptId, UseStateResult4 })
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 156 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval), UseDispatchResult (copy), SaveCapturesPromptFinishedModule (upval)
 		local Flag = false
 		
@@ -143,11 +143,11 @@ return function(p1) --[[ Line: 69 ]]
 		end
 		UseDispatchResult(SaveCapturesPromptFinishedModule(p1.promptId, t))
 	end, { p1.promptData, p1.promptId })
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 170 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_2 (copy), UseStateResult3 (copy)
 		UseStateResult2_2((math.max(1, UseStateResult3 - 1)))
 	end, { UseStateResult3 })
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 174 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_2 (copy), Contents (copy), UseStateResult3 (copy)
 		UseStateResult2_2((math.min(#Contents, UseStateResult3 + 1)))
 	end, { Contents, UseStateResult3 })
@@ -155,7 +155,7 @@ return function(p1) --[[ Line: 69 ]]
 	return ReactModule.createElement(InteractiveAlert, {
 		isMiddleContentFocusable = false,
 		bodyText = UseLocalizationResult.bodyText,
-		buttonStackInfo = ReactModule.useMemo(function() --[[ Line: 178 ]]
+		buttonStackInfo = ReactModule.useMemo(function()
 			-- upvalues: UseResult3 (copy), UseLocalizationResult (copy), ButtonType (upval), NoEnableInputDelayed (copy), UseResult2 (copy)
 			return {
 				buttons = {
@@ -180,7 +180,7 @@ return function(p1) --[[ Line: 69 ]]
 				}
 			}
 		end, { UseLocalizationResult, UseResult2, UseResult3 }),
-		middleContent = ReactModule.useCallback(function() --[[ Line: 204 ]]
+		middleContent = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult (copy), UseStateResult1 (copy), UseScreenSizeResult (copy), ReactModule (upval), View (upval), UseResult1 (copy), CapturePromptItemModule (upval), Contents (copy), UseStateResult3 (copy), UseStateResult4 (copy), UseResult (copy), Text (upval), UseResult4 (copy), Icon (upval), UseResult5 (copy)
 			return ReactModule.createElement(View, {
 				Size = UDim2.new(1, 0, 0, 200),
@@ -227,7 +227,7 @@ return function(p1) --[[ Line: 69 ]]
 			UseStateResult, Contents, UseStateResult1, UseStateResult3, UseResult1,
 			UseResult5, UseResult4, UseScreenSizeResult, UseStateResult4, UseResult
 		}),
-		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 119 ]]
+		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(Frame.AbsoluteSize)
 		end, { UseStateResult2 }),

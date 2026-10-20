@@ -6,8 +6,8 @@ local _ = require(script.Parent.Parent.Types)
 local PlainTextContentModelModule = require(script.Parent.Parent.ContentKinds.PlainText.PlainTextContentModel)
 local PresetContentModelModule = require(script.Parent.Parent.ContentKinds.Preset.PresetContentModel)
 local StorySupportModule = {
-	noopDelivery = { sendMessageDraft = function(_) --[[ Line: 19 ]] end },
-	draftLabel = function(p1): string --[[ Line: 22 ]]
+	noopDelivery = { sendMessageDraft = function(_) end },
+	draftLabel = function(p1): string
 		-- upvalues: PlainTextContentModelModule (copy), PresetContentModelModule (copy)
 		local List = {}
 		
@@ -25,13 +25,13 @@ local StorySupportModule = {
 		end
 		return if #List == 0 then "(no content)" else table.concat(List, ", ")
 	end,
-	useEventLog = function() --[[ Line: 41 ]]
+	useEventLog = function()
 		-- upvalues: ReactModule (copy)
 		local UseStateResult, UseStateResult2 = ReactModule.useState({})
 		
-		return UseStateResult, (ReactModule.useCallback(function(p2) --[[ Line: 43 ]]
+		return UseStateResult, (ReactModule.useCallback(function(p2)
 			-- upvalues: UseStateResult2 (copy)
-			UseStateResult2(function(Tbl) --[[ Line: 44 ]]
+			UseStateResult2(function(Tbl)
 				-- upvalues: p2 (copy)
 				local Copy = table.clone(Tbl)
 				table.insert(Copy, p2)
@@ -42,16 +42,16 @@ local StorySupportModule = {
 	end
 }
 
-function StorySupportModule.useDeliveryLog() --[[ Line: 59 ]]
+function StorySupportModule.useDeliveryLog()
 	-- upvalues: StorySupportModule (copy), ReactModule (copy)
 	local UseEventLogResult, UseEventLogResult2 = StorySupportModule.useEventLog()
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 62 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseEventLogResult2 (copy), StorySupportModule (upval)
 		UseEventLogResult2(`sent: {StorySupportModule.draftLabel(p2)}`)
 	end, { UseEventLogResult2 })
 	
 	return {
-		messageDelivery = ReactModule.useMemo(function() --[[ Line: 66 ]]
+		messageDelivery = ReactModule.useMemo(function()
 			-- upvalues: UseResult (copy)
 			return { sendMessageDraft = UseResult }
 		end, { UseResult }),
@@ -59,7 +59,7 @@ function StorySupportModule.useDeliveryLog() --[[ Line: 59 ]]
 	}
 end
 
-function StorySupportModule.LogPanel(Frame) --[[ Line: 85 ]]
+function StorySupportModule.LogPanel(Frame)
 	-- upvalues: ReactModule (copy), FoundationModule (copy)
 	local Elements = {}
 	local LayoutOrder = 0
@@ -95,7 +95,7 @@ function StorySupportModule.LogPanel(Frame) --[[ Line: 85 ]]
 	}, Elements)
 end
 
-function StorySupportModule.Layout(p2) --[[ Line: 130 ]]
+function StorySupportModule.Layout(p2)
 	-- upvalues: ReactModule (copy), FoundationModule (copy)
 	return ReactModule.createElement(FoundationModule.View, { tag = "row gap-large auto-xy" }, {
 		composerColumn = ReactModule.createElement(FoundationModule.View, {

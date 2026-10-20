@@ -11,14 +11,14 @@ local RecentlyLeftSignalsModule = require(GenericAbuseReporting.BeduiV2.Utils.Si
 local VoiceSpeakingIconModule = require(GenericAbuseReporting.BeduiV2.Components.Shared.VoiceSpeakingIcon)
 local VoiceSpeakingSignalsModule = require(GenericAbuseReporting.BeduiV2.Utils.Signals.voiceSpeakingSignals)
 
-return ReactModule.memo(function(p1) --[[ Line: 26 | Named "InExpUserSelectionNode" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: DashModule (copy), VoiceSpeakingSignalsModule (copy), SignalsReactModule (copy), RecentlyLeftSignalsModule (copy), ReactModule (copy), VoiceSpeakingIconModule (copy), RecentlyLeftBadgeModule (copy), View (copy), ListNodeV2Module (copy)
 	local TrailingAccessories = p1.trailingAccessories
 	local UseVoiceSpeakingStoreResult = VoiceSpeakingSignalsModule.useVoiceSpeakingStore()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(RecentlyLeftSignalsModule.getRecentlyLeftIds())
 	
 	return ReactModule.createElement(ListNodeV2Module, DashModule.join(DashModule.join(p1, { trailingAccessories = DashModule.None }), {
-		renderTrailingAccessory = ReactModule.useCallback(function(p2) --[[ Line: 34 ]]
+		renderTrailingAccessory = ReactModule.useCallback(function(p2)
 			-- upvalues: TrailingAccessories (copy), ReactModule (upval), VoiceSpeakingIconModule (upval), UseVoiceSpeakingStoreResult (copy), UseSignalStateResult (copy), RecentlyLeftBadgeModule (upval), View (upval)
 			if not TrailingAccessories or #TrailingAccessories == 0 then
 				return nil

@@ -8,9 +8,9 @@ local CreateTiltLoadingScreenModelModule = require(TiltLoadingScreen.Models.crea
 local LoadingScreenTelemetryModule = require(Parent.LoadingScreenTelemetry)
 local _ = require(TiltLoadingScreen.Types)
 
-return function(p1, Vector, p2) --[[ Line: 18 | Named "useTiltLoadingScreenViewModel" ]]
+return function(p1, Vector, p2)
 	-- upvalues: ReactModule (copy), CreateTiltLoadingScreenModelModule (copy), SignalsReactModule (copy), LoadingScreenTelemetryModule (copy), ConstantsModule (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 23 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CreateTiltLoadingScreenModelModule (upval), p1 (copy), p2 (copy)
 		return CreateTiltLoadingScreenModelModule(p1, nil, p2)
 	end, { p1, p2 })
@@ -25,7 +25,7 @@ return function(p1, Vector, p2) --[[ Line: 18 | Named "useTiltLoadingScreenViewM
 	local UseSignalStateResult8 = SignalsReactModule.useSignalState(UseMemoResult.getServerStatusText)
 	local UseRefResult = ReactModule.useRef(UseSignalStateResult3)
 	local UseRefResult1 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 38 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy)
 		UseMemoResult.start()
 		
@@ -33,9 +33,9 @@ return function(p1, Vector, p2) --[[ Line: 18 | Named "useTiltLoadingScreenViewM
 	end, { UseMemoResult })
 	UseRefResult.current = UseSignalStateResult3
 	UseRefResult1.current = not (UseSignalStateResult1 <= 0)
-	ReactModule.useEffect(function() --[[ Line: 44 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), UseRefResult (copy), LoadingScreenTelemetryModule (upval)
-		return function() --[[ Line: 45 ]]
+		return function()
 			-- upvalues: UseRefResult1 (upval), UseRefResult (upval), LoadingScreenTelemetryModule (upval)
 			if UseRefResult1.current and UseRefResult.current == nil then
 				LoadingScreenTelemetryModule.countPlayerLocalizationChoiceNotReady()
@@ -45,7 +45,7 @@ return function(p1, Vector, p2) --[[ Line: 18 | Named "useTiltLoadingScreenViewM
 	
 	return {
 		isMobile = math.min(Vector.X, Vector.Y) <= ConstantsModule.MOBILE_BREAKPOINT,
-		gameData = ReactModule.useMemo(function() --[[ Line: 65 ]]
+		gameData = ReactModule.useMemo(function()
 			-- upvalues: UseSignalStateResult (copy)
 			return if UseSignalStateResult then {
 				name = UseSignalStateResult.name or "",
@@ -62,20 +62,20 @@ return function(p1, Vector, p2) --[[ Line: 18 | Named "useTiltLoadingScreenViewM
 			queueTreatment = UseSignalStateResult7,
 			followUserId = UseSignalStateResult2,
 			isSubjectToChinaPolicies = UseSignalStateResult4,
-			onAutoJoinNewServer = ReactModule.useCallback(function() --[[ Line: 56 ]]
+			onAutoJoinNewServer = ReactModule.useCallback(function()
 				-- upvalues: UseMemoResult (copy)
 				UseMemoResult.launchExperience()
 			end, { UseMemoResult }),
-			onJoinNewServer = ReactModule.useCallback(function(p3) --[[ Line: 52 ]]
+			onJoinNewServer = ReactModule.useCallback(function(p3)
 				-- upvalues: UseMemoResult (copy)
 				UseMemoResult.logQueuedStateButtonClick("JoinNewServer", p3)
 				UseMemoResult.launchExperience()
 			end, { UseMemoResult }),
-			onJoinTheLine = ReactModule.useCallback(function(p3) --[[ Line: 59 ]]
+			onJoinTheLine = ReactModule.useCallback(function(p3)
 				-- upvalues: UseMemoResult (copy)
 				UseMemoResult.logQueuedStateButtonClick("JoinTheLine", p3)
 			end, { UseMemoResult }),
-			onShowConnectionHealth = ReactModule.useCallback(function() --[[ Line: 62 ]]
+			onShowConnectionHealth = ReactModule.useCallback(function()
 				-- upvalues: UseMemoResult (copy)
 				UseMemoResult.showConnectionHealth()
 			end, { UseMemoResult })

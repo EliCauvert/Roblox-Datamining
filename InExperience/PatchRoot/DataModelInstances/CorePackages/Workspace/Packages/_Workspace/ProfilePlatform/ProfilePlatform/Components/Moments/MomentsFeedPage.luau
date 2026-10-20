@@ -34,25 +34,25 @@ local ImmersiveFeedKind = MomentsModule.Constants.ImmersiveFeedKind
 local CreateUserMomentsFeedSourceModule = require(Parent.Moments.CreateUserMomentsFeedSource)
 local ReportMomentFunction = MomentsModule.reportMoment
 
-local function MomentsFeedPageImmersive() --[[ Line: 70 ]]
+local function MomentsFeedPageImmersive()
 	-- upvalues: UseNavigationFunction (copy), FFlagMomentsOptimisticProfilePending (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), UseDispatchFunction (copy), FFlagMomentsServeEDPVideos (copy), OpenDynamicAbuseReportFunction (copy), AbuseVector (copy), CloseCentralOverlayFunction (copy), ReportMomentFunction (copy), FFlagAbuseReportSubmissionTargetV4 (copy), FFlagEnableMomentsCommentReporting (copy), FFlagEnableMomentsCommentBlocking (copy), UseOpenBlockingModalModule (copy), UseScreenSizeFunction (copy), View (copy), MomentsImmersivePresentation (copy), ImmersiveFeedKind (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local ExtraPropsParam = UseNavigationResult.getParam("extraProps")
 	local TargetUserId = if ExtraPropsParam and ExtraPropsParam.targetUserId then ExtraPropsParam.targetUserId else 0
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 80 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FireAnalyticsEventFunction (upval), EventNames (upval), TargetUserId (copy), UseNavigationResult (copy)
 		FireAnalyticsEventFunction(EventNames.ProfileClosePressed, { userId = tostring(TargetUserId) })
 		UseNavigationResult.goBack()
 	end, { UseNavigationResult.goBack, TargetUserId })
 	local UseDispatchResult = UseDispatchFunction()
-	local UseResult1 = ReactModule.useCallback(function(p1) --[[ Line: 90 ]]
+	local UseResult1 = ReactModule.useCallback(function(p1)
 		-- upvalues: FFlagMomentsServeEDPVideos (upval), UseDispatchResult (copy), OpenDynamicAbuseReportFunction (upval), AbuseVector (upval), CloseCentralOverlayFunction (upval), ReportMomentFunction (upval), FFlagAbuseReportSubmissionTargetV4 (upval)
 		if FFlagMomentsServeEDPVideos and p1.onCustomSubmit then
 			UseDispatchResult(OpenDynamicAbuseReportFunction({
 				abuseVector = AbuseVector.MomentsFeed,
 				targetId = p1.feedItemId,
 				onSubmit = p1.onSubmit,
-				onClose = function() --[[ Line: 103 ]]
+				onClose = function()
 					-- upvalues: p1 (copy), UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
 					p1.onClose()
 					UseDispatchResult(CloseCentralOverlayFunction())
@@ -64,11 +64,11 @@ local function MomentsFeedPageImmersive() --[[ Line: 70 ]]
 		else
 			local Flag = false
 			
-			local function submitMomentsIp(_) --[[ Line: 116 ]]
+			local function submitMomentsIp(_)
 				-- upvalues: Flag (ref), p1 (copy), UseDispatchResult (upval), CloseCentralOverlayFunction (upval), ReportMomentFunction (upval)
 				Flag = true
 				
-				local function _(p2) --[[ Line: 122 | Named "showConfirmation" ]]
+				local function _(p2)
 					-- upvalues: p1 (upval), UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
 					p1.onClose()
 					UseDispatchResult(CloseCentralOverlayFunction())
@@ -78,7 +78,7 @@ local function MomentsFeedPageImmersive() --[[ Line: 70 ]]
 					end
 				end
 				
-				return ReportMomentFunction(p1.feedItemId, "IntellectualProperty"):andThen(function(Result) --[[ Line: 129 ]]
+				return ReportMomentFunction(p1.feedItemId, "IntellectualProperty"):andThen(function(Result)
 					-- upvalues: p1 (upval), UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
 					local ReportCode = Result.reportCode
 					p1.onClose()
@@ -88,7 +88,7 @@ local function MomentsFeedPageImmersive() --[[ Line: 70 ]]
 						p1.onIpReportCode(ReportCode)
 					end
 					return Result
-				end, function() --[[ Line: 132 ]]
+				end, function()
 					-- upvalues: p1 (upval), UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
 					p1.onClose()
 					UseDispatchResult(CloseCentralOverlayFunction())
@@ -102,7 +102,7 @@ local function MomentsFeedPageImmersive() --[[ Line: 70 ]]
 			UseDispatchResult(OpenDynamicAbuseReportFunction({
 				abuseVector = AbuseVector.MomentsFeed,
 				targetId = p1.feedItemId,
-				onSubmit = function() --[[ Line: 139 ]]
+				onSubmit = function()
 					-- upvalues: Flag (ref), p1 (copy)
 					if not Flag then
 						p1.onSubmit()
@@ -110,12 +110,12 @@ local function MomentsFeedPageImmersive() --[[ Line: 70 ]]
 						return
 					end
 				end,
-				onClose = function() --[[ Line: 145 ]]
+				onClose = function()
 					-- upvalues: p1 (copy), UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
 					p1.onClose()
 					UseDispatchResult(CloseCentralOverlayFunction())
 				end,
-				onCustomSubmit = if FFlagAbuseReportSubmissionTargetV4 then nil else function(p2) --[[ Line: 150 ]]
+				onCustomSubmit = if FFlagAbuseReportSubmissionTargetV4 then nil else function(p2)
 					-- upvalues: submitMomentsIp (copy)
 					return if p2.endpoint == "moments-ip" then submitMomentsIp(p2) else nil
 				end,
@@ -137,7 +137,7 @@ local function MomentsFeedPageImmersive() --[[ Line: 70 ]]
 			initialMomentId = if FFlagMomentsOptimisticProfilePending and ExtraPropsParam ~= nil then ExtraPropsParam.initialMomentId else nil,
 			onBack = UseResult,
 			openMomentsFeedReport = UseResult1,
-			openMomentCommentReport = if FFlagEnableMomentsCommentReporting then ReactModule.useCallback(function(p1) --[[ Line: 167 ]]
+			openMomentCommentReport = if FFlagEnableMomentsCommentReporting then ReactModule.useCallback(function(p1)
 				-- upvalues: UseDispatchResult (copy), OpenDynamicAbuseReportFunction (upval), AbuseVector (upval), CloseCentralOverlayFunction (upval)
 				UseDispatchResult(OpenDynamicAbuseReportFunction({
 					abuseVector = AbuseVector.MomentComment,
@@ -147,7 +147,7 @@ local function MomentsFeedPageImmersive() --[[ Line: 70 ]]
 						reportedUserId = p1.reportedUserId
 					},
 					analyticsTargetId = p1.commentId,
-					onClose = function() --[[ Line: 183 ]]
+					onClose = function()
 						-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
 						UseDispatchResult(CloseCentralOverlayFunction())
 					end
@@ -158,27 +158,27 @@ local function MomentsFeedPageImmersive() --[[ Line: 70 ]]
 	})
 end
 
-local function MomentsFeedPageLegacy() --[[ Line: 221 ]]
+local function MomentsFeedPageLegacy()
 	-- upvalues: UseNavigationFunction (copy), FFlagMomentsOptimisticProfilePending (copy), ReactModule (copy), CreateUserMomentsFeedSourceModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), UseScreenSizeFunction (copy), UseSelectorFunction (copy), UseStatusBarHeightFunction (copy), View (copy), FoundationProvider (copy), ColorMode (copy), Feed (copy), IconButton (copy), ButtonSize (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local ExtraPropsParam = UseNavigationResult.getParam("extraProps")
 	local TargetUserId = if ExtraPropsParam and ExtraPropsParam.targetUserId then ExtraPropsParam.targetUserId else 0
 	local InitialIndex = if ExtraPropsParam and ExtraPropsParam.initialIndex then ExtraPropsParam.initialIndex else 1
 	local InitialMomentId = if FFlagMomentsOptimisticProfilePending and ExtraPropsParam ~= nil then ExtraPropsParam.initialMomentId else nil
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 231 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CreateUserMomentsFeedSourceModule (upval), TargetUserId (copy), InitialIndex (copy), InitialMomentId (copy)
 		return CreateUserMomentsFeedSourceModule(TargetUserId, {
 			initialIndex = InitialIndex,
 			initialMomentId = InitialMomentId
 		})
 	end, { TargetUserId, InitialIndex, InitialMomentId })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 238 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FireAnalyticsEventFunction (upval), EventNames (upval), TargetUserId (copy), UseNavigationResult (copy)
 		FireAnalyticsEventFunction(EventNames.ProfileClosePressed, { userId = tostring(TargetUserId) })
 		UseNavigationResult.goBack()
 	end, { UseNavigationResult.goBack, TargetUserId })
 	local UseScreenSizeResult = UseScreenSizeFunction()
-	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 248 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p1)
 		return p1.GlobalGuiInset
 	end)
 	

@@ -3,7 +3,7 @@ local Cryo = require(script:FindFirstAncestor("PurchasePrompt").Parent.PurchaseP
 local ClickScamDetectorModule = {}
 ClickScamDetectorModule.__index = ClickScamDetectorModule
 
-function ClickScamDetectorModule.new(p1) --[[ Line: 25 ]]
+function ClickScamDetectorModule.new(p1)
 	-- upvalues: Cryo (copy), ClickScamDetectorModule (copy), UserInputService (copy)
 	local config = {
 		_inputConnection = nil,
@@ -17,7 +17,7 @@ function ClickScamDetectorModule.new(p1) --[[ Line: 25 ]]
 		}, p1 or {})
 	}
 	setmetatable(config, ClickScamDetectorModule)
-	config._inputConnection = UserInputService.InputBegan:Connect(function(Input) --[[ Line: 50 ]]
+	config._inputConnection = UserInputService.InputBegan:Connect(function(Input)
 		-- upvalues: config (copy)
 		config:_onInput(Input)
 	end)
@@ -25,25 +25,25 @@ function ClickScamDetectorModule.new(p1) --[[ Line: 25 ]]
 	return config
 end
 
-function ClickScamDetectorModule:_onInput(Input) --[[ Line: 63 ]]
+function ClickScamDetectorModule:_onInput(Input)
 	local UserInputType = Input.UserInputType
 	local IsUserInputTypeMatch: boolean = UserInputType == Enum.UserInputType.MouseButton1 or UserInputType == Enum.UserInputType.Touch
 	
 	if self._options.buttonInput ~= nil and Input.KeyCode == self._options.buttonInput or IsUserInputTypeMatch then
 		self._clickCount += 1
-		delay(self._options.clickTimeWindow, function() --[[ Line: 73 ]]
+		delay(self._options.clickTimeWindow, function()
 			-- upvalues: self (copy)
 			self._clickCount -= 1
 		end)
 	end
 end
 
-function ClickScamDetectorModule:isClickValid(): boolean --[[ Line: 83 ]]
+function ClickScamDetectorModule:isClickValid(): boolean
 	-- upvalues: UserInputService (copy)
 	return UserInputService.MouseBehavior ~= Enum.MouseBehavior.LockCurrentPosition and (tick() - self._startTime >= self._options.initialDelay and self._clickCount / self._options.clickTimeWindow < self._options.clickSpeedThreshold)
 end
 
-function ClickScamDetectorModule:destroy() --[[ Line: 105 ]]
+function ClickScamDetectorModule:destroy()
 	self._inputConnection:Disconnect()
 end
 

@@ -5,7 +5,7 @@ local Variants = { Control = 0, OpenRobuxStore = 1, OpenPaymentsPage = 2 }
 
 return {
 	variants = Variants,
-	getVariant = function() --[[ Line: 14 ]]
+	getVariant = function()
 		-- upvalues: NewUpsellModalExperimentForDesktopV2 (copy), Variants (copy), IXPServiceWrapper (copy), DesktopUpsellIXPLayer (copy)
 		if NewUpsellModalExperimentForDesktopV2 then
 			local LayerData = IXPServiceWrapper:GetLayerData(DesktopUpsellIXPLayer)
@@ -15,7 +15,7 @@ return {
 			return Variants.Control
 		end
 	end,
-	logExposure = function() --[[ Line: 29 ]]
+	logExposure = function()
 		-- upvalues: NewUpsellModalExperimentForDesktopV2 (copy), IXPServiceWrapper (copy), DesktopUpsellIXPLayer (copy)
 		if NewUpsellModalExperimentForDesktopV2 then
 			IXPServiceWrapper:LogUserLayerExposure(DesktopUpsellIXPLayer)
@@ -23,7 +23,7 @@ return {
 			return
 		end
 	end,
-	shouldShowNewModal = function(): boolean --[[ Line: 37 ]]
+	shouldShowNewModal = function(): boolean
 		-- upvalues: NewUpsellModalExperimentForDesktopV2 (copy), IXPServiceWrapper (copy), DesktopUpsellIXPLayer (copy), Variants (copy)
 		if NewUpsellModalExperimentForDesktopV2 then
 			IXPServiceWrapper:LogUserLayerExposure(DesktopUpsellIXPLayer)

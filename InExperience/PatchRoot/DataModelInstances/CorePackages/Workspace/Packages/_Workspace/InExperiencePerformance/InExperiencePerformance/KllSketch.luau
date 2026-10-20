@@ -1,7 +1,7 @@
 ﻿local KllSketchModule = {}
 KllSketchModule.__index = KllSketchModule
 
-function KllSketchModule.new(p1: number) --[[ Line: 20 ]]
+function KllSketchModule.new(p1: number)
 	-- upvalues: KllSketchModule (copy)
 	return (setmetatable({
 		levels = { table.create(p1) },
@@ -10,7 +10,7 @@ function KllSketchModule.new(p1: number) --[[ Line: 20 ]]
 	}, KllSketchModule))
 end
 
-function KllSketchModule:insert(p1) --[[ Line: 36 ]]
+function KllSketchModule:insert(p1)
 	self.weightedSketch.cached = false
 	local Levels = self.levels
 	table.insert(Levels[1], p1)
@@ -22,7 +22,7 @@ function KllSketchModule:insert(p1) --[[ Line: 36 ]]
 	end
 end
 
-function compressWeightedKll(List1, Count: number) --[[ Line: 51 ]]
+function compressWeightedKll(List1, Count: number)
 	local List = List1[Count]
 	table.sort(List)
 	local Buffer = table.create(#List // 2)
@@ -38,7 +38,7 @@ function compressWeightedKll(List1, Count: number) --[[ Line: 51 ]]
 	table.clear(List1[Count])
 end
 
-function KllSketchModule:generateWeightedSketch() --[[ Line: 77 ]]
+function KllSketchModule:generateWeightedSketch()
 	local List = {}
 	local Weight = 1
 	local TotalWeight = 0
@@ -50,7 +50,7 @@ function KllSketchModule:generateWeightedSketch() --[[ Line: 77 ]]
 		end
 		Weight *= 2
 	end
-	table.sort(List, function(A, B): boolean --[[ Line: 94 ]]
+	table.sort(List, function(A, B): boolean
 		return A.value < B.value
 	end)
 	self.weightedSketch = {
@@ -60,7 +60,7 @@ function KllSketchModule:generateWeightedSketch() --[[ Line: 77 ]]
 	}
 end
 
-function KllSketchModule:getPercentile(p2: number) --[[ Line: 106 ]]
+function KllSketchModule:getPercentile(p2: number)
 	if not self.weightedSketch.cached then
 		self:generateWeightedSketch()
 	end

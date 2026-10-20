@@ -20,13 +20,13 @@ local config = {
 local JoinResult = require(Parent.Cryo).Dictionary.join(config, { Selectable = false })
 local ContentContainerStyle = { BackgroundTransparency = 1 }
 
-local function keyExtractor(p1, _) --[[ Line: 66 ]]
+local function keyExtractor(p1, _)
 	return p1
 end
 
-local function VerticalUserList(p1) --[[ Line: 70 ]]
+local function VerticalUserList(p1)
 	-- upvalues: UseEntitiesModule (copy), UseEntitySelectionHandlerModule (copy), ReactModule (copy), UseRenderEntityModule (copy), EnumsModule (copy), FFlagUserListSurfaceExtensions (copy), View (copy), FlatList (copy), keyExtractor (copy), JoinResult (copy), config (copy), ContentContainerStyle (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 75 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		if not p1.initialRowCount or p1.initialRowCount >= #p1.entities then
 			return p1.entities
@@ -38,7 +38,7 @@ local function VerticalUserList(p1) --[[ Line: 70 ]]
 		end
 		return Entities
 	end, { p1.entities, p1.initialRowCount })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 87 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy)
 		local Ids = {}
 		
@@ -55,7 +55,7 @@ local function VerticalUserList(p1) --[[ Line: 70 ]]
 		layoutMode = EnumsModule.LayoutMode.Vertical,
 		firstRowRef = if FFlagUserListSurfaceExtensions then p1.firstRowRef else nil
 	})
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 105 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRenderEntityModuleResult (copy)
 		return UseRenderEntityModuleResult(p2.item, p2.index)
 	end, { UseRenderEntityModuleResult })
@@ -78,7 +78,7 @@ local function VerticalUserList(p1) --[[ Line: 70 ]]
 		tag = "size-full-0 auto-y col gap-xxsmall",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		EntityRows = ReactModule.createElement(ReactModule.Fragment, {}, unpack(ReactModule.useMemo(function() --[[ Line: 147 ]]
+		EntityRows = ReactModule.createElement(ReactModule.Fragment, {}, unpack(ReactModule.useMemo(function()
 			-- upvalues: UseMemoResult1 (copy), ReactModule (upval), View (upval), UseRenderEntityModuleResult (copy)
 			local Elements = {}
 			
@@ -94,14 +94,14 @@ local function VerticalUserList(p1) --[[ Line: 70 ]]
 	})
 end
 
-local function VerticalUserListWithCta(Tbl) --[[ Line: 165 ]]
+local function VerticalUserListWithCta(Tbl)
 	-- upvalues: CtaModule (copy), FFlagUserListComposeRenderRowWithCta (copy), ReactModule (copy), VerticalUserList (copy)
 	local HasCtaConfig: boolean = if FFlagUserListComposeRenderRowWithCta then CtaModule ~= nil and Tbl.ctaConfig ~= nil else CtaModule ~= nil and (Tbl.ctaConfig ~= nil and Tbl.renderRow == nil)
 	
 	return if HasCtaConfig then ReactModule.createElement(CtaModule.CtaRenderRowBridge, {
 		ctaConfig = Tbl.ctaConfig,
 		renderRow = if FFlagUserListComposeRenderRowWithCta then Tbl.renderRow else nil,
-		render = function(RenderRow) --[[ Line: 175 ]]
+		render = function(RenderRow)
 			-- upvalues: Tbl (copy), ReactModule (upval), VerticalUserList (upval)
 			local Copy = table.clone(Tbl)
 			Copy.renderRow = RenderRow

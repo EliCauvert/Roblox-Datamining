@@ -4,7 +4,7 @@ local GetFFlagIsSquadEnabledFunction = require(Parent.SharedFlags).GetFFlagIsSqu
 local ArgoPartyExperimentation = require(Parent.SocialExperiments).ArgoPartyExperimentation
 local UniversalAppPolicyModule = require(Parent.UniversalAppPolicy)
 
-return function() --[[ Line: 11 ]]
+return function()
 	-- upvalues: UniversalAppPolicyModule (copy), ArgoPartyExperimentation (copy), GetFFlagIsSquadEnabledFunction (copy), FoundationModule (copy)
 	local GetCanSeeChatTerminologyFunction = UniversalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology
 	

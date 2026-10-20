@@ -14,7 +14,7 @@ local SelectHydratedWidgetDataModule = require(AvatarExperienceCatalog.State.Sel
 local ConstantsModule = require(AvatarExperienceCatalog.Constants)
 local UseCatalogPageMonolithDependenciesModule = require(AvatarExperienceCatalog.Providers.useCatalogPageMonolithDependencies)
 
-return function(p1) --[[ Line: 61 | Named "useOnCatalogSortImpressionsDetectedCallback" ]]
+return function(p1)
 	-- upvalues: UseCatalogPageMonolithDependenciesModule (copy), UseStoreFunction (copy), ReactModule (copy), SelectHydratedWidgetDataModule (copy), ItemTypeEnum (copy), FFlagAXDeferLookImpressionsForHydration (copy), SendAXCounterV2Function (copy), ConstantsModule (copy), CryoModule (copy), ImpressionEnums (copy)
 	local CatalogAnalytics = UseCatalogPageMonolithDependenciesModule().catalogAnalytics
 	local WidgetInfo = p1.widgetInfo
@@ -26,11 +26,11 @@ return function(p1) --[[ Line: 61 | Named "useOnCatalogSortImpressionsDetectedCa
 	local Id = WidgetInfo and WidgetInfo.id or ""
 	local Content = if WidgetInfo then WidgetInfo.content else nil
 	
-	return ReactModule.useCallback(function(ItemPositions) --[[ Line: 80 ]]
+	return ReactModule.useCallback(function(ItemPositions)
 		-- upvalues: SelectHydratedWidgetDataModule (upval), UseStoreResult (copy), ItemTypeEnum (upval), Content (copy), FFlagAXDeferLookImpressionsForHydration (upval), SendAXCounterV2Function (upval), ConstantsModule (upval), WidgetRow (copy), Id (copy), ItemsPerRow (copy), UiTreatmentType (copy), CatalogAnalytics (copy), CryoModule (upval), WidgetAnalyticsInfo (copy), ImpressionEnums (upval)
 		local v1 = nil
 		
-		local function _() --[[ Line: 86 | Named "getHydratedLooks" ]]
+		local function _()
 			-- upvalues: v1 (ref), SelectHydratedWidgetDataModule (upval), UseStoreResult (upval), ItemTypeEnum (upval)
 			if v1 == nil then
 				local SelectHydratedWidgetDataModuleResult = SelectHydratedWidgetDataModule(UseStoreResult:getState())

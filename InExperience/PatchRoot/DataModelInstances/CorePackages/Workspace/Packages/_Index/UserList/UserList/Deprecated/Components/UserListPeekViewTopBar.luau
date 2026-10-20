@@ -6,7 +6,7 @@ local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelec
 local View = FoundationModule.View
 local IconButton = FoundationModule.IconButton
 
-return function(p1) --[[ Line: 20 ]]
+return function(p1)
 	-- upvalues: UseSelectorFunction (copy), UseTopBarHeightFunction (copy), ReactModule (copy), View (copy), IconButton (copy)
 	return ReactModule.createElement(View, {
 		tag = "bg-surface-100",
@@ -18,10 +18,10 @@ return function(p1) --[[ Line: 20 ]]
 		LeftNavigationButton = ReactModule.createElement(IconButton, {
 			BackgroundTransparency = 1,
 			icon = "icons/navigation/close",
-			Position = UDim2.new(0, 15, 0, (UseSelectorFunction(function(p2) --[[ Line: 21 ]]
+			Position = UDim2.new(0, 15, 0, (UseSelectorFunction(function(p2)
 				return p2.TopBar.statusBarHeight
 			end))),
-			onActivated = ReactModule.useCallback(function() --[[ Line: 26 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: p1 (copy)
 				p1.navigateBack()
 			end, { p1.navigateBack })

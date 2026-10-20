@@ -7,22 +7,22 @@ local InputHandlersModule = require(Parent.InputHandlers)
 local FFlagLuaAppMediaGalleryGamepadSupport = require(Parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
 local _ = require(MediaGallery.MediaGalleryTypes)
 
-return function(p1) --[[ Line: 30 | Named "useCarouselGamepadInput" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), ReactFocusNavigationModule (copy)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 31 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		if p1.onFullscreenToggle then
 			p1.onFullscreenToggle()
 		end
 	end, { p1.onFullscreenToggle })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 37 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		if p1.isVideoActive then
 			p1.toggleMuteSignal:fire()
 		end
 	end, { p1.toggleMuteSignal, p1.isVideoActive })
 	
-	return (ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function() --[[ Line: 82 ]]
+	return (ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function()
 		-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), UseResult (copy), UseResult1 (copy), FFlagLuaAppMediaGalleryGamepadSupport (upval), p1 (copy)
 		local config = {
 			[FocusNavigationEventNameEnum.Fullscreen] = { handler = InputHandlersModule.onRelease(UseResult) },
@@ -35,10 +35,10 @@ return function(p1) --[[ Line: 30 | Named "useCarouselGamepadInput" ]]
 			config[FocusNavigationEventNameEnum.PageBackward] = { handler = InputHandlersModule.onPress(p1.scrollLeft) }
 			config[FocusNavigationEventNameEnum.PageForward] = { handler = InputHandlersModule.onPress(p1.scrollRight) }
 			config[FocusNavigationEventNameEnum.PlayVideo] = {
-				handler = InputHandlersModule.onRelease(function() --[[ Line: 108 ]] end)
+				handler = InputHandlersModule.onRelease(function() end)
 			}
 			config[FocusNavigationEventNameEnum.PauseVideo] = {
-				handler = InputHandlersModule.onRelease(function() --[[ Line: 109 ]] end)
+				handler = InputHandlersModule.onRelease(function() end)
 			}
 			
 			return config
@@ -48,7 +48,7 @@ return function(p1) --[[ Line: 30 | Named "useCarouselGamepadInput" ]]
 			
 			return config
 		end
-	end, { p1.scrollLeft, p1.scrollRight, UseResult, UseResult1 }), (ReactFocusNavigationModule.useEventMap((ReactModule.useMemo(function() --[[ Line: 43 ]]
+	end, { p1.scrollLeft, p1.scrollRight, UseResult, UseResult1 }), (ReactFocusNavigationModule.useEventMap((ReactModule.useMemo(function()
 		-- upvalues: FFlagLuaAppMediaGalleryGamepadSupport (upval), FocusNavigationEventNameEnum (upval), p1 (copy)
 		return {
 			[Enum.KeyCode.ButtonL1] = if FFlagLuaAppMediaGalleryGamepadSupport then nil else FocusNavigationEventNameEnum.TabBackward,

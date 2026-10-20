@@ -26,12 +26,12 @@ local FocusRoot = FocusNavigationUtilsModule.FocusRoot
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local NewResult = ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
 
-function ChatNudgeCustomDialog(p1) --[[ Line: 41 ]]
+function ChatNudgeCustomDialog(p1)
 	-- upvalues: ReactModule (copy), InExperienceInterventionAnalyticsModule (copy), UseLocalizationFunction (copy), Constants (copy), UseStyleFunction (copy), UseLayerCollectorFunction (copy), UseTokensFunction (copy), UsePropertyFunction (copy), LocalPlayer (copy), View (copy), Text (copy), PartialPageModal (copy), ScrollView (copy), ScrollBarVisibility (copy), ReactFocusNavigationModule (copy), NewResult (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy), InterventionContestFeedbackFooterModule (copy)
 	local UseRefResult = ReactModule.useRef(DateTime.now().UnixTimestampMillis)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
-	ReactModule.useEffect(function() --[[ Line: 45 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: InExperienceInterventionAnalyticsModule (upval), UseRefResult (copy), p1 (copy)
 		InExperienceInterventionAnalyticsModule.sendAnalyticsEvent(InExperienceInterventionAnalyticsModule.Constants.EventTypes.ModalAppeared, InExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Nudge, UseRefResult.current, p1.eventId, p1.violatingChatLine, nil)
 	end, { UseRefResult })
@@ -40,7 +40,7 @@ function ChatNudgeCustomDialog(p1) --[[ Line: 41 ]]
 	local UseLayerCollectorResult = UseLayerCollectorFunction()
 	local UseTokensResult = UseTokensFunction()
 	local AbsoluteSize = UsePropertyFunction(UseRefResult1, "AbsoluteSize")
-	ReactModule.useEffect(function() --[[ Line: 64 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: AbsoluteSize (copy), UseLayerCollectorResult (copy), Constants (upval), UseStateResult2 (copy)
 		UseStateResult2((math.min(UseLayerCollectorResult.absoluteSize.Y - Constants.UNIBAR_HEIGHT - Constants.DIALOG_HEADER_HEIGHT, if AbsoluteSize then AbsoluteSize.Y else 0)))
 	end, { UseLayerCollectorResult.absoluteSize.Y, AbsoluteSize })
@@ -139,7 +139,7 @@ function ChatNudgeCustomDialog(p1) --[[ Line: 41 ]]
 							UnderstandButton = ReactModule.createElement(Button, {
 								text = UseLocalizationResult.IUnderstandText,
 								variant = ButtonVariant.Standard,
-								onActivated = ReactModule.useCallback(function() --[[ Line: 75 ]]
+								onActivated = ReactModule.useCallback(function()
 									-- upvalues: InExperienceInterventionAnalyticsModule (upval), UseRefResult (copy), p1 (copy)
 									InExperienceInterventionAnalyticsModule.sendAnalyticsEvent(InExperienceInterventionAnalyticsModule.Constants.EventTypes.CtaClicked, InExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Nudge, UseRefResult.current, p1.eventId, p1.violatingChatLine, nil)
 									p1.onDismiss()

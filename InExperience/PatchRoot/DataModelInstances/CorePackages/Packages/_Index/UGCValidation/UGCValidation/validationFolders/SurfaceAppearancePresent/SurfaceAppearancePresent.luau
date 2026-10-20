@@ -12,7 +12,7 @@ return {
 	},
 	requiredData = {},
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 32 ]]
+	run = function(p1, p2)
 		-- upvalues: config (copy), ErrorSourceStringsModule (copy)
 		local RootInstance = p2.rootInstance
 		local IsEntry = config[p2.consumerConfig.source] == true

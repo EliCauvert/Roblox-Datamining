@@ -4,11 +4,11 @@ local _ = require(UniversalFeatureRestrictions.Parent.ModerationCommon.Types)
 local ShowFeatureRestrictionModule = require(UniversalFeatureRestrictions.Utils.showFeatureRestriction)
 local ShowFeatureRestrictionDirectModule = require(UniversalFeatureRestrictions.Utils.showFeatureRestrictionDirect)
 
-local function _(p1): boolean --[[ Line: 30 | Named "hasContent" ]]
+local function _(p1): boolean
 	return type(p1) == "string" and p1 ~= ""
 end
 
-local function buildEndDate(p1) --[[ Line: 38 ]]
+local function buildEndDate(p1)
 	if p1.type == "nudge" then
 		return "", 0
 	end
@@ -30,7 +30,7 @@ local function buildEndDate(p1) --[[ Line: 38 ]]
 	end
 end
 
-local function buildModerationDetail(ModerationDetail, EndDate, Duration) --[[ Line: 66 ]]
+local function buildModerationDetail(ModerationDetail, EndDate, Duration)
 	return {
 		punishedUserId = 0,
 		interventionId = "",
@@ -55,7 +55,7 @@ local function buildModerationDetail(ModerationDetail, EndDate, Duration) --[[ L
 	}
 end
 
-return function(p1, ModerationDetail, p2) --[[ Line: 99 | Named "showFeatureRestrictionFromRealtime" ]]
+return function(p1, ModerationDetail, p2)
 	-- upvalues: ShowFeatureRestrictionModule (copy), buildEndDate (copy), ShowFeatureRestrictionDirectModule (copy), buildModerationDetail (copy)
 	if not ModerationDetail.acknowledgeable and (ModerationDetail.type == "nudge" or ModerationDetail.type == "timeout") then
 		local DecisionEventId = ModerationDetail.decisionEventId

@@ -16,11 +16,11 @@ local ScrollViewGradientModule = require(GenericAbuseReporting.Common.ScrollView
 local SideModalModule = require(GenericAbuseReporting.Common.SideModal)
 local SideModalDropdownButtonModule = require(GenericAbuseReporting.Common.SideModalDropdownButton)
 
-local function _(p1, p2): number --[[ Line: 43 | Named "getContentRightPadding" ]]
+local function _(p1, p2): number
 	return if p2.Y < p1.Y then 16 else 1
 end
 
-return function(p1) --[[ Line: 47 | Named "DualDropdownSubmitDialog" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLayerCollectorFunction (copy), ReactModule (copy), UseLocalizedStringsModule (copy), UseLocalizationFunction (copy), CreateNextOrderFunction (copy), View (copy), SideModalModule (copy), ScrollViewGradientModule (copy), Text (copy), SideModalDropdownButtonModule (copy), CommentTextFieldModule (copy), ButtonListModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local AbsoluteSize = UseLayerCollectorFunction().absoluteSize
@@ -49,7 +49,7 @@ return function(p1) --[[ Line: 47 | Named "DualDropdownSubmitDialog" ]]
 		chooseOne = "Feature.ReportAbuse.Label.ChooseOne"
 	})
 	local NextOrder = CreateNextOrderFunction()
-	ReactModule.useLayoutEffect(function() --[[ Line: 80 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseRefResult (copy), UseStateResult2_11 (copy), UseStateResult2_12 (copy)
 		if UseRefResult.current then
 			local ScrollingFrame = UseRefResult.current:FindFirstChildWhichIsA("ScrollingFrame")
@@ -57,16 +57,16 @@ return function(p1) --[[ Line: 47 | Named "DualDropdownSubmitDialog" ]]
 			if ScrollingFrame then
 				UseStateResult2_11(ScrollingFrame.AbsoluteCanvasSize)
 				UseStateResult2_12(ScrollingFrame.AbsoluteWindowSize)
-				local Connection = ScrollingFrame:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function() --[[ Line: 89 ]]
+				local Connection = ScrollingFrame:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function()
 					-- upvalues: UseStateResult2_11 (upval), ScrollingFrame (copy)
 					UseStateResult2_11(ScrollingFrame.AbsoluteCanvasSize)
 				end)
-				local Connection1 = ScrollingFrame:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function() --[[ Line: 94 ]]
+				local Connection1 = ScrollingFrame:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
 					-- upvalues: UseStateResult2_12 (upval), ScrollingFrame (copy)
 					UseStateResult2_12(ScrollingFrame.AbsoluteWindowSize)
 				end)
 				
-				return function() --[[ Line: 97 ]]
+				return function()
 					-- upvalues: Connection (copy), Connection1 (copy)
 					Connection:Disconnect()
 					Connection1:Disconnect()
@@ -76,9 +76,9 @@ return function(p1) --[[ Line: 47 | Named "DualDropdownSubmitDialog" ]]
 			UseStateResult2_11(Vector2.zero)
 			UseStateResult2_12(Vector2.zero)
 		end
-		return function() --[[ Line: 106 ]] end
+		return function() end
 	end, { UseRefResult.current, AbsoluteSize })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 127 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_7 (copy), UseStateResult2_8 (copy)
 		UseStateResult2_7(false)
 		UseStateResult2_8(false)
@@ -89,7 +89,7 @@ return function(p1) --[[ Line: 47 | Named "DualDropdownSubmitDialog" ]]
 			screenSize = AbsoluteSize,
 			buttonProps = {
 				text = UseLocalizedStringsModuleResult.formSubmit,
-				onActivated = ReactModule.useCallback(function() --[[ Line: 109 ]]
+				onActivated = ReactModule.useCallback(function()
 					-- upvalues: p1 (copy), UseStateResult3 (copy), UseStateResult6 (copy), UseStateResult11 (copy)
 					p1.onSubmit(UseStateResult3, UseStateResult6, UseStateResult11)
 				end, {
@@ -98,7 +98,7 @@ return function(p1) --[[ Line: 47 | Named "DualDropdownSubmitDialog" ]]
 					UseStateResult6,
 					UseStateResult11
 				}),
-				validateState = ReactModule.useCallback(function(): boolean --[[ Line: 113 ]]
+				validateState = ReactModule.useCallback(function(): boolean
 					-- upvalues: UseStateResult3 (copy), UseStateResult6 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy)
 					if UseStateResult3 ~= "" and UseStateResult6 ~= "" then
 						return true
@@ -158,7 +158,7 @@ return function(p1) --[[ Line: 47 | Named "DualDropdownSubmitDialog" ]]
 					}, {
 						ProblemDropdown = ReactModule.createElement(SideModalDropdownButtonModule, {
 							setDropdownError = UseStateResult2,
-							onActivated = function() --[[ Line: 185 ]]
+							onActivated = function()
 								-- upvalues: UseStateResult2_7 (copy), UseStateResult2_9 (copy)
 								UseStateResult2_7(true)
 								UseStateResult2_9(false)
@@ -196,7 +196,7 @@ return function(p1) --[[ Line: 47 | Named "DualDropdownSubmitDialog" ]]
 					}, {
 						SurfaceDropdown = ReactModule.createElement(SideModalDropdownButtonModule, {
 							setDropdownError = UseStateResult2_1,
-							onActivated = function() --[[ Line: 224 ]]
+							onActivated = function()
 								-- upvalues: UseStateResult2_8 (copy), UseStateResult2_9 (copy)
 								UseStateResult2_8(true)
 								UseStateResult2_9(false)
@@ -264,7 +264,7 @@ return function(p1) --[[ Line: 47 | Named "DualDropdownSubmitDialog" ]]
 						Padding = ReactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, 16) }),
 						ButtonList = ReactModule.createElement(ButtonListModule, {
 							options = if UseStateResult8 then p1.reportProblems else p1.reportSurfaces,
-							onSelected = function(p2, p3) --[[ Line: 304 ]]
+							onSelected = function(p2, p3)
 								-- upvalues: UseStateResult8 (copy), UseStateResult2_2 (copy), UseStateResult2_3 (copy), UseStateResult2 (copy), UseStateResult2_9 (copy), UseStateResult2_5 (copy), UseStateResult2_6 (copy), UseStateResult2_1 (copy)
 								if UseStateResult8 then
 									UseStateResult2_2(p2)

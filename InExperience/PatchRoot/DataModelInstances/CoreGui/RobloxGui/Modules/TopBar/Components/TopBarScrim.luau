@@ -9,9 +9,9 @@ local Scrim = require(CorePackages.Workspace.Packages.CoreScriptsRoactCommon).Sc
 local FFlagEnableUISelector = CoreGuiCommonModule.Flags.FFlagEnableUISelector
 local GetUiSelectorSignalStore = if FFlagEnableUISelector then CoreGuiCommonModule.Stores.GetUiSelectorSignalStore else nil
 
-local function createComputedScrimVisible() --[[ Line: 19 ]]
+local function createComputedScrimVisible()
 	-- upvalues: SignalsModule (copy), GamepadConnectorModule (copy), ExpChatModule (copy), FFlagEnableUISelector (copy), GetUiSelectorSignalStore (copy)
-	return SignalsModule.createComputed(function(p1) --[[ Line: 20 ]]
+	return SignalsModule.createComputed(function(p1)
 		-- upvalues: GamepadConnectorModule (upval), ExpChatModule (upval), FFlagEnableUISelector (upval), GetUiSelectorSignalStore (upval)
 		local PBarFocused = GamepadConnectorModule:topBarFocused(p1)
 		local ChatInputBarFocused = ExpChatModule.Stores.GetFocusNavigationStore(p1).getChatInputBarFocused(p1)
@@ -21,7 +21,7 @@ local function createComputedScrimVisible() --[[ Line: 19 ]]
 	end)
 end
 
-return ReactModule.memo(function() --[[ Line: 29 | Named "TopBarScrim" ]]
+return ReactModule.memo(function()
 	-- upvalues: SignalsReactModule (copy), createComputedScrimVisible (copy), ReactModule (copy), Scrim (copy)
 	return ReactModule.createElement(Scrim, {
 		Visible = SignalsReactModule.useSignalBinding(createComputedScrimVisible())

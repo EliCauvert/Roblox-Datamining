@@ -7,12 +7,12 @@ local _ = require(Parent.AppCommonLib)
 local _ = require(Parent.PlayabilityRodux)
 local SendPlayButtonContextualMessageImpressionEventFunction = require(Parent.DiscoveryAnalytics).Events.sendPlayButtonContextualMessageImpressionEvent
 
-return function(p1) --[[ Line: 23 | Named "PlayButtonContextualMessageImpressionsDetector" ]]
+return function(p1)
 	-- upvalues: UseImpressionsTaggerFunction (copy), ReactModule (copy), SendPlayButtonContextualMessageImpressionEventFunction (copy), ScreenSizeImpressionsTracker (copy)
 	local PlayabilityStatus = p1.playabilityStatus and p1.playabilityStatus.playabilityStatus
 	local CONTEXTUALName: string = `PLAY_BUTTON_CONTEXTUAL_MESSAGE_{p1.universeId}_{PlayabilityStatus}`
 	UseImpressionsTaggerFunction(p1.containerRef, CONTEXTUALName, 1)
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 30 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: SendPlayButtonContextualMessageImpressionEventFunction (upval), p1 (copy), PlayabilityStatus (copy)
 		if #p2 ~= 0 then
 			SendPlayButtonContextualMessageImpressionEventFunction({

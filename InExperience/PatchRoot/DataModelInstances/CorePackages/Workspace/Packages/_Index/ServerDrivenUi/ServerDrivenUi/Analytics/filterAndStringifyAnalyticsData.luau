@@ -1,4 +1,4 @@
-﻿return function(List) --[[ Line: 1 ]]
+﻿return function(List)
 	if not List or type(List) ~= "table" then
 		return nil
 	end

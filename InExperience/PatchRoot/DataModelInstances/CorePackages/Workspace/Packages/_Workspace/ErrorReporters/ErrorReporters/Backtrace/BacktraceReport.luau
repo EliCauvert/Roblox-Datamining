@@ -4,9 +4,9 @@ local CryoModule = require(Parent.Cryo)
 local TModule = require(Parent.t)
 local ProcessErrorStackModule = require(script.Parent.Parent.ProcessErrorStack)
 local OptionalResult = TModule.optional(TModule.map(TModule.string, TModule.some(TModule.string, TModule.number, TModule.boolean)))
-local OptionalResult1 = TModule.optional(TModule.map(TModule.string, function(p1) --[[ Line: 76 ]]
+local OptionalResult1 = TModule.optional(TModule.map(TModule.string, function(p1)
 	-- upvalues: TModule (copy)
-	local function checkTypeRecursive(List) --[[ Line: 77 ]]
+	local function checkTypeRecursive(List)
 		-- upvalues: checkTypeRecursive (copy), TModule (upval)
 		if type(List) ~= "table" then
 			return TModule.some(TModule.string, TModule.number, TModule.boolean)(List)
@@ -86,7 +86,7 @@ local IntersectionResult = TModule.intersection(TModule.strictInterface({
 		debug_identifier = TModule.optional(TModule.string),
 		debug_file_exists = TModule.optional(TModule.boolean)
 	}))))
-}), function(p2) --[[ Line: 121 ]]
+}), function(p2)
 	local Flag = false
 	
 	for _, thread in pairs(p2.threads) do
@@ -114,7 +114,7 @@ local BacktraceReportModule = {
 }
 BacktraceReportModule.__index = BacktraceReportModule
 
-local function _(p3) --[[ Line: 154 ]]
+local function _(p3)
 	-- upvalues: CryoModule (copy)
 	if p3 and type(p3) == "table" then
 		local KeysResult = CryoModule.Dictionary.keys(p3)
@@ -130,12 +130,12 @@ local function _(p3) --[[ Line: 154 ]]
 	return ""
 end
 
-function BacktraceReportModule.validate(p3) --[[ Line: 167 ]]
+function BacktraceReportModule.validate(p3)
 	-- upvalues: IntersectionResult (copy)
 	return IntersectionResult(p3)
 end
 
-function BacktraceReportModule.new() --[[ Line: 172 ]]
+function BacktraceReportModule.new()
 	-- upvalues: HttpService (copy), BacktraceReportModule (copy)
 	local config = {
 		lang = "lua",
@@ -152,7 +152,7 @@ function BacktraceReportModule.new() --[[ Line: 172 ]]
 	return config
 end
 
-function BacktraceReportModule:addAttributes(p3) --[[ Line: 189 ]]
+function BacktraceReportModule:addAttributes(p3)
 	-- upvalues: CryoModule (copy)
 	if type(p3) == "table" then
 		self.attributes = CryoModule.Dictionary.join(self.attributes or {}, p3)
@@ -163,7 +163,7 @@ function BacktraceReportModule:addAttributes(p3) --[[ Line: 189 ]]
 	end
 end
 
-function BacktraceReportModule:addAnnotations(Annotations) --[[ Line: 202 ]]
+function BacktraceReportModule:addAnnotations(Annotations)
 	-- upvalues: CryoModule (copy)
 	if type(Annotations) == "table" then
 		self.annotations = CryoModule.Dictionary.join(self.annotations or {}, Annotations)
@@ -174,16 +174,16 @@ function BacktraceReportModule:addAnnotations(Annotations) --[[ Line: 202 ]]
 	end
 end
 
-function BacktraceReportModule:addStackToThread(Stack, Name) --[[ Line: 215 ]]
+function BacktraceReportModule:addStackToThread(Stack, Name)
 	-- upvalues: CryoModule (copy)
 	self.threads = CryoModule.Dictionary.join(self.threads, { [Name] = { name = Name, stack = Stack } })
 end
 
-function BacktraceReportModule:addStackToMainThread(Stack) --[[ Line: 228 ]]
+function BacktraceReportModule:addStackToMainThread(Stack)
 	self:addStackToThread(Stack, self.mainThread)
 end
 
-function BacktraceReportModule.fromMessageAndStack(p3, p4) --[[ Line: 232 ]]
+function BacktraceReportModule.fromMessageAndStack(p3, p4)
 	-- upvalues: BacktraceReportModule (copy), ProcessErrorStackModule (copy), CryoModule (copy)
 	local NewBacktraceReport = BacktraceReportModule.new()
 	NewBacktraceReport:addAttributes({ ["error.message"] = p3 })
@@ -214,7 +214,7 @@ function BacktraceReportModule.fromMessageAndStack(p3, p4) --[[ Line: 232 ]]
 	return NewBacktraceReport
 end
 
-function BacktraceReportModule:fromDetails() --[[ Line: 250 ]]
+function BacktraceReportModule:fromDetails()
 	-- upvalues: BacktraceReportModule (copy), ProcessErrorStackModule (copy), CryoModule (copy)
 	local NewBacktraceReport = BacktraceReportModule.new()
 	NewBacktraceReport:addAttributes({ ["error.message"] = self.message })

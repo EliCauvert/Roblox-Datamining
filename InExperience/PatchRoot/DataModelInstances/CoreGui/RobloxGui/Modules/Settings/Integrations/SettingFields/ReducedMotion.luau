@@ -3,10 +3,10 @@ local SettingsServiceModule = require(game:GetService("CorePackages").Workspace.
 local ValueChangedSignal = SettingsServiceModule.ValueChangedSignal
 local LAYOUTORDER = require(script:FindFirstAncestor("Settings").Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER
 
-local function _() --[[ Line: 21 | Named "ReducedMotionValue" ]]
+local function _()
 	-- upvalues: GameSettings (copy), ValueChangedSignal (copy)
 	local NewValueChangedSignal = ValueChangedSignal.new(GameSettings.ReducedMotion)
-	NewValueChangedSignal:connect(function(ReducedMotion) --[[ Line: 25 ]]
+	NewValueChangedSignal:connect(function(ReducedMotion)
 		-- upvalues: GameSettings (upval)
 		if GameSettings.ReducedMotion ~= ReducedMotion then
 			GameSettings.ReducedMotion = ReducedMotion
@@ -26,7 +26,7 @@ local ReducedMotionModule = {
 	field_type = SettingsServiceModule.SettingEnum.Toggle
 }
 local NewValueChangedSignal = ValueChangedSignal.new(GameSettings.ReducedMotion)
-NewValueChangedSignal:connect(function(ReducedMotion) --[[ Line: 25 ]]
+NewValueChangedSignal:connect(function(ReducedMotion)
 	-- upvalues: GameSettings (copy)
 	if GameSettings.ReducedMotion ~= ReducedMotion then
 		GameSettings.ReducedMotion = ReducedMotion

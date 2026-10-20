@@ -23,7 +23,7 @@ local FFlagLuaAppMobileEdpPlayButtonPartialUnificationIXP = require(Parent.Share
 local FIntLuaAppPlayButtonSecondaryButtonGap = require(Parent.SharedFlags).FIntLuaAppPlayButtonSecondaryButtonGap
 local FFlagLuaAppPlayButtonPrivatePT = require(Parent.SharedFlags).FFlagLuaAppPlayButtonPrivatePT
 
-local function v21(Frame) --[[ Line: 35 ]]
+local function v21(Frame)
 	-- upvalues: UseLocalizationFunction (copy), FFlagLuaAppPlayButtonPrivatePT (copy), UseTokensFunction (copy), RoactModule (copy), PlayButtonViewModule (copy), MenuDirection (copy), InputSize (copy)
 	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -49,7 +49,7 @@ local function v21(Frame) --[[ Line: 35 ]]
 			}),
 			tokens = UseTokensFunction(),
 			onPlayButtonActivated = Frame.onPlayButtonActivated,
-			onPlaySquadButtonActivated = Frame.onPlaySquadButtonActivated or function() --[[ Line: 60 ]] end,
+			onPlaySquadButtonActivated = Frame.onPlaySquadButtonActivated or function() end,
 			squadButtonMenuDirection = MenuDirection.Up,
 			buttonSize = InputSize.Large,
 			width = UDim.new(1, 0),
@@ -75,11 +75,11 @@ PlayButtonContainer.validateProps = TModule.strictInterface({
 	gameProductInfo = TModule.optional(TModule.table)
 })
 
-function PlayButtonContainer.init(p1) --[[ Line: 96 ]]
+function PlayButtonContainer.init(p1)
 	-- upvalues: GetFFlagIsSquadEnabledFunction (copy)
 	p1.isMounted = false
 	
-	function p1.onPlayButtonActivated() --[[ Line: 99 ]]
+	function p1.onPlayButtonActivated()
 		-- upvalues: p1 (copy)
 		if p1.isMounted then
 			p1.props.onPlayButtonCallback(p1.props.playButtonState)
@@ -88,7 +88,7 @@ function PlayButtonContainer.init(p1) --[[ Line: 96 ]]
 		end
 	end
 	
-	function p1.onSecondaryPlayButtonActivated() --[[ Line: 107 ]]
+	function p1.onSecondaryPlayButtonActivated()
 		-- upvalues: p1 (copy)
 		if p1.isMounted then
 			p1.props.onPlayButtonCallback(p1.props.secondaryPlayButtonState)
@@ -97,7 +97,7 @@ function PlayButtonContainer.init(p1) --[[ Line: 96 ]]
 		end
 	end
 	
-	p1.onPlaySquadButtonActivated = if GetFFlagIsSquadEnabledFunction() then function(p2) --[[ Line: 116 ]]
+	p1.onPlaySquadButtonActivated = if GetFFlagIsSquadEnabledFunction() then function(p2)
 		-- upvalues: p1 (copy)
 		if p1.isMounted then
 			p1.props.onPlaySquadButtonCallback(p2)
@@ -107,15 +107,15 @@ function PlayButtonContainer.init(p1) --[[ Line: 96 ]]
 	end else nil
 end
 
-function PlayButtonContainer.didMount(p1) --[[ Line: 126 ]]
+function PlayButtonContainer.didMount(p1)
 	p1.isMounted = true
 end
 
-function PlayButtonContainer.willUnmount(p1) --[[ Line: 130 ]]
+function PlayButtonContainer.willUnmount(p1)
 	p1.isMounted = false
 end
 
-function PlayButtonContainer.render(p1) --[[ Line: 134 ]]
+function PlayButtonContainer.render(p1)
 	-- upvalues: FFlagLuaAppMobileEdpPlayButtonPartialUnificationIXP (copy), FIntLuaAppPlayButtonSecondaryButtonGap (copy), RoactModule (copy), v21 (copy), LegacyPlayButtonModule (copy), GetFFlagIsSquadEnabledFunction (copy)
 	local Size = p1.props.Size
 	local LayoutOrder = p1.props.LayoutOrder
@@ -217,12 +217,12 @@ function PlayButtonContainer.render(p1) --[[ Line: 134 ]]
 	end
 end
 
-return (RoactRoduxModule.connect(function(p1, p2) --[[ Line: 293 ]]
+return (RoactRoduxModule.connect(function(p1, p2)
 	-- upvalues: GamesProductInfoReducer (copy)
 	return {
 		gameProductInfo = p1[GamesProductInfoReducer.key][p2.universeId]
 	}
-end)(function(p1) --[[ Line: 238 ]]
+end)(function(p1)
 	-- upvalues: UseRoactService (copy), RoactNetworking (copy), UsePlayButtonStateModule (copy), FFlagLuaAppPlayButtonLoadingDurationTelemetry (copy), UseOnPlayButtonCallbackModule (copy), GetFFlagIsSquadEnabledFunction (copy), UseOnPlaySquadButtonCallbackModule (copy), MenuDirection (copy), PlayButtonStatesModule (copy), CryoModule (copy), RoactModule (copy), PlayButtonContainer (copy)
 	local v1 = UsePlayButtonStateModule(UseRoactService(RoactNetworking), p1.universeId, nil, nil, if FFlagLuaAppPlayButtonLoadingDurationTelemetry then true else nil, if FFlagLuaAppPlayButtonLoadingDurationTelemetry then "PlayButton" else nil)
 	local PlayButton = UseOnPlayButtonCallbackModule(p1.universeId, p1.referralSource, "PlayButton", nil, "LuaGameCard", p1.experienceJoinData, p1.placeId)

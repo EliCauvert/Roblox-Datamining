@@ -11,7 +11,7 @@ if require(script:FindFirstAncestor("Home").Parent.SharedFlags).FFlagLuaAppSduiH
 		t1[i1] = true
 	end
 end
-return function(p1, p2): boolean --[[ Line: 22 | Named "isHomeSortDetailSortIncluded" ]]
+return function(p1, p2): boolean
 	-- upvalues: t (copy), t1 (copy)
 	return p1 ~= nil and (p2 ~= nil and (t[tostring(p1)] ~= true and t1[tostring(p2)] == true))
 end

@@ -7,7 +7,7 @@ local config = {
 	lastUpdated = { 25, 8, 29 }
 }
 
-return function(Endpoint_name, p1, Status_code, Default1) --[[ Line: 18 ]]
+return function(Endpoint_name, p1, Status_code, Default1)
 	-- upvalues: Default (copy), config (copy)
 	if Default1 == nil then
 		Default1 = Default

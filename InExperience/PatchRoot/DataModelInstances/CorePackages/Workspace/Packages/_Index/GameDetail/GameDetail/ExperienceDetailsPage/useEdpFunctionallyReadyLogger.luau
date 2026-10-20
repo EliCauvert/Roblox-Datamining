@@ -7,14 +7,14 @@ local Milestone = require(Parent.TimeToInteractiveTracker).TimeToInteractiveTrac
 local PageGateModule = require(Parent.PageGate)
 local FFlagEDPTTIParityDefinitions = require(Parent.SharedFlags).FFlagEDPTTIParityDefinitions
 
-return function(p1, p2) --[[ Line: 20 | Named "useEdpFunctionallyReadyLogger" ]]
+return function(p1, p2)
 	-- upvalues: UseSelectorFunction (copy), FetchGamePlayButtonData (copy), PageGateModule (copy), ReactModule (copy), Milestone (copy), FFlagEDPTTIParityDefinitions (copy)
-	local UseSelectorResult = UseSelectorFunction(function(p3) --[[ Line: 21 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p3)
 		-- upvalues: p2 (copy), FetchGamePlayButtonData (upval)
 		return not p2 or FetchGamePlayButtonData.IsLoading(p3, p2)
 	end)
 	local UseRefResult = if PageGateModule.FFlagEnablePLTPrefetchCallbacks then ReactModule.useRef(false) else nil
-	ReactModule.useEffect(function() --[[ Line: 38 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSelectorResult (copy), p2 (copy), p1 (copy), Milestone (upval), FFlagEDPTTIParityDefinitions (upval), PageGateModule (upval), UseRefResult (ref)
 		if not UseSelectorResult and p2 and p1.trackOnce then
 			p1.trackOnce(Milestone.FunctionallyReady)

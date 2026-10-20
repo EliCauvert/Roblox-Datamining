@@ -16,7 +16,7 @@ local _ = require(script.Parent.InstantStatCard)
 local InstantStatsRowModule = require(script.Parent.InstantStatsRow)
 local WindowSegmentedControlModule = require(script.Parent.WindowSegmentedControl)
 
-local function _(Text1, TestId) --[[ Line: 57 | Named "sectionHeading" ]]
+local function _(Text1, TestId)
 	-- upvalues: ReactModule (copy), Text (copy)
 	return ReactModule.createElement(Text, {
 		LayoutOrder = 1,
@@ -26,7 +26,7 @@ local function _(Text1, TestId) --[[ Line: 57 | Named "sectionHeading" ]]
 	})
 end
 
-return function(p1) --[[ Line: 66 | Named "AnalyticsOverviewView" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), Text (copy), InstantStatsRowModule (copy), FFlagBuildAnalyticsGoalsModule (copy), WindowSegmentedControlModule (copy), StatsCardContainerModule (copy), GoalsSectionModule (copy), MetricDetailSheetModule (copy)
 	local TestId = p1.testId or "AnalyticsOverviewView"
 	local Sheet = p1.sheet

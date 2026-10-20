@@ -7,13 +7,13 @@ local GetShouldRefetchMessagesModule = require(AppChat.Conversations.getShouldRe
 local PaginateAndRefreshConversations = require(AppChat.Logger):new("paginateAndRefreshConversations")
 local PaginateForNewerMessagesModule = require(AppChat.Conversations.Thunks.paginateForNewerMessages)
 
-local function paginateAndRefreshConversations(NextCursor) --[[ Line: 27 ]]
+local function paginateAndRefreshConversations(NextCursor)
 	-- upvalues: AppChatNetworkingModule (copy), GetDeepValueModule (copy), ConversationChannelsModule (copy), HasConversationChangedModule (copy), GetShouldRefetchMessagesModule (copy), PaginateAndRefreshConversations (copy), PaginateForNewerMessagesModule (copy), paginateAndRefreshConversations (copy)
-	return function(p1) --[[ Line: 28 ]]
+	return function(p1)
 		-- upvalues: AppChatNetworkingModule (upval), NextCursor (copy), GetDeepValueModule (upval), ConversationChannelsModule (upval), HasConversationChangedModule (upval), GetShouldRefetchMessagesModule (upval), PaginateAndRefreshConversations (upval), PaginateForNewerMessagesModule (upval), paginateAndRefreshConversations (upval)
 		local State = p1:getState()
 		
-		return p1:dispatch(AppChatNetworkingModule.rodux.GetUserConversations.API(NextCursor)):andThen(function(Result) --[[ Line: 35 ]]
+		return p1:dispatch(AppChatNetworkingModule.rodux.GetUserConversations.API(NextCursor)):andThen(function(Result)
 			-- upvalues: GetDeepValueModule (upval), State (copy), ConversationChannelsModule (upval), HasConversationChangedModule (upval), GetShouldRefetchMessagesModule (upval), PaginateAndRefreshConversations (upval), p1 (copy), PaginateForNewerMessagesModule (upval), paginateAndRefreshConversations (upval)
 			for _, conversation in Result.responseBody.conversations do
 				local Existing = GetDeepValueModule(State, `ChatAppReducer.Conversations.{tostring(conversation.id)}`)
@@ -29,7 +29,7 @@ local function paginateAndRefreshConversations(NextCursor) --[[ Line: 27 ]]
 			
 			if not NextCursor or NextCursor == "" or typeof(NextCursor) ~= "string" then return end
 			return p1:dispatch(paginateAndRefreshConversations(NextCursor))
-		end):catch(function(Err) --[[ Line: 63 ]]
+		end):catch(function(Err)
 			warn("Failure in paginateAndRefreshConversations: ", (tostring(Err)))
 			
 			return Err
@@ -37,17 +37,17 @@ local function paginateAndRefreshConversations(NextCursor) --[[ Line: 27 ]]
 	end
 end
 
-return function() --[[ Line: 70 ]]
+return function()
 	-- upvalues: AppChatNetworkingModule (copy), GetDeepValueModule (copy), ConversationChannelsModule (copy), HasConversationChangedModule (copy), GetShouldRefetchMessagesModule (copy), PaginateAndRefreshConversations (copy), PaginateForNewerMessagesModule (copy), paginateAndRefreshConversations (copy)
-	return function(p1) --[[ Line: 71 ]]
+	return function(p1)
 		-- upvalues: AppChatNetworkingModule (upval), GetDeepValueModule (upval), ConversationChannelsModule (upval), HasConversationChangedModule (upval), GetShouldRefetchMessagesModule (upval), PaginateAndRefreshConversations (upval), PaginateForNewerMessagesModule (upval), paginateAndRefreshConversations (upval)
 		local v1 = nil
 		
-		return p1:dispatch(function(p2) --[[ Line: 28 ]]
+		return p1:dispatch(function(p2)
 			-- upvalues: AppChatNetworkingModule (upval), v1 (copy), GetDeepValueModule (upval), ConversationChannelsModule (upval), HasConversationChangedModule (upval), GetShouldRefetchMessagesModule (upval), PaginateAndRefreshConversations (upval), PaginateForNewerMessagesModule (upval), paginateAndRefreshConversations (upval)
 			local State = p2:getState()
 			
-			return p2:dispatch(AppChatNetworkingModule.rodux.GetUserConversations.API(v1)):andThen(function(Result) --[[ Line: 35 ]]
+			return p2:dispatch(AppChatNetworkingModule.rodux.GetUserConversations.API(v1)):andThen(function(Result)
 				-- upvalues: GetDeepValueModule (upval), State (copy), ConversationChannelsModule (upval), HasConversationChangedModule (upval), GetShouldRefetchMessagesModule (upval), PaginateAndRefreshConversations (upval), p2 (copy), PaginateForNewerMessagesModule (upval), paginateAndRefreshConversations (upval)
 				for _, conversation in Result.responseBody.conversations do
 					local Existing = GetDeepValueModule(State, `ChatAppReducer.Conversations.{tostring(conversation.id)}`)
@@ -63,7 +63,7 @@ return function() --[[ Line: 70 ]]
 				
 				if not NextCursor or NextCursor == "" or typeof(NextCursor) ~= "string" then return end
 				return p2:dispatch(paginateAndRefreshConversations(NextCursor))
-			end):catch(function(Err) --[[ Line: 63 ]]
+			end):catch(function(Err)
 				warn("Failure in paginateAndRefreshConversations: ", (tostring(Err)))
 				
 				return Err

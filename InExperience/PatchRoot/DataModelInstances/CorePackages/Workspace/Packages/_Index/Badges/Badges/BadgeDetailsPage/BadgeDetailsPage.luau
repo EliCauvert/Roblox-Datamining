@@ -18,23 +18,23 @@ local CompositionTags = require(Parent.AppComposition).CompositionTags
 local SetIsBadgeDetailsSheetOpenFunction = require(script.Parent.BadgeDetailsSheetState).setIsBadgeDetailsSheetOpen
 local FFlagSduiPageEntryUseSharedHooks = require(Parent.SharedFlags).FFlagSduiPageEntryUseSharedHooks
 
-local function _(p1, p2) --[[ Line: 40 | Named "getFromPropsOrNavigationParams" ]]
+local function _(p1, p2)
 	local ExtraPropsParam = p1.navigation and p1.navigation.getParam("extraProps")
 	
 	return p1[p2] or ExtraPropsParam and ExtraPropsParam[p2]
 end
 
-local _ = function(Text, Text1): string --[[ Line: 52 ]]
+local _ = function(Text, Text1): string
 	return Text .. "_" .. Text1
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 56 | Named "BadgeDetailsPage" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), GetBadgeDetailsPageKeyModule (copy), ReactModule (copy), SduiLoadTimer (copy), UseNavigationFunction (copy), UseRouteNameFunction (copy), UseNavigationFocusFunction (copy), UseBreakpointXOrSmallerFunction (copy), ResponsiveModule (copy), FetchBadgeDetailsPageModule (copy), SetIsBadgeDetailsSheetOpenFunction (copy), SduiFeatureEntryPoint (copy), SduiPageEntryPoint (copy), FFlagSduiPageEntryUseSharedHooks (copy), CompositionTags (copy), FoundationModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ExtraPropsParam = p1.navigation and p1.navigation.getParam("extraProps")
 	local BadgeId = p1.badgeId or ExtraPropsParam and ExtraPropsParam.badgeId
 	local BadgeDetailsPageKeyModule = GetBadgeDetailsPageKeyModule(BadgeId)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 62 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), SduiLoadTimer (upval)
 		local ExtraPropsParam = p1.navigation and p1.navigation.getParam("extraProps")
 		
@@ -44,7 +44,7 @@ return ReactModule.memo(function(p1) --[[ Line: 56 | Named "BadgeDetailsPage" ]]
 	local UseRouteNameResult = UseRouteNameFunction()
 	local UseNavigationFocusResult = UseNavigationFocusFunction()
 	local UseBreakpointXOrSmallerResult = UseBreakpointXOrSmallerFunction(ResponsiveModule.Keys.Small)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 71 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRouteNameResult (copy), UseNavigationFocusResult (copy), UseNavigationResult (copy)
 		if UseRouteNameResult == "BadgeDetails" and UseNavigationFocusResult then
 			UseNavigationResult.goBack()
@@ -54,23 +54,23 @@ return ReactModule.memo(function(p1) --[[ Line: 56 | Named "BadgeDetailsPage" ]]
 		UseRouteNameResult,
 		UseNavigationFocusResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 77 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: BadgeId (copy), FetchBadgeDetailsPageModule (upval), UseMemoResult (copy)
 		if BadgeId then
 			FetchBadgeDetailsPageModule(BadgeId, UseMemoResult)
 		end
 	end, { BadgeId, UseMemoResult })
-	ReactModule.useEffect(function() --[[ Line: 83 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseBreakpointXOrSmallerResult (copy), UseNavigationFocusResult (copy), SetIsBadgeDetailsSheetOpenFunction (upval)
 		SetIsBadgeDetailsSheetOpenFunction(not UseBreakpointXOrSmallerResult and UseNavigationFocusResult)
 		
-		return function() --[[ Line: 87 ]]
+		return function()
 			-- upvalues: SetIsBadgeDetailsSheetOpenFunction (upval)
 			SetIsBadgeDetailsSheetOpenFunction(false)
 		end
 	end, { UseBreakpointXOrSmallerResult, UseNavigationFocusResult })
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 96 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: ReactModule (upval), SduiFeatureEntryPoint (upval), BadgeDetailsPageKeyModule (copy), UseMemoResult (copy)
 		return ReactModule.createElement(SduiFeatureEntryPoint, {
 			appPage = "BadgeDetails",

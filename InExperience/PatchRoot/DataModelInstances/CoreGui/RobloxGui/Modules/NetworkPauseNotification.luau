@@ -9,7 +9,7 @@ local _TweenInfo = TweenInfo.new(0.15, Enum.EasingStyle.Sine)
 local _TweenInfo1 = TweenInfo.new(0.6, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true)
 local LocalizeGameplayPaused = game:DefineFastFlag("LocalizeGameplayPaused", false)
 
-local function build() --[[ Line: 23 ]]
+local function build()
 	-- upvalues: CreateFunction (copy), _UDim2_1 (copy), AppFonts (copy), LocalizeGameplayPaused (copy), RobloxTranslatorModule (copy)
 	return CreateFunction("ImageLabel")({
 		Name = "NetworkPause",
@@ -88,7 +88,7 @@ end
 local NetworkPauseNotificationModule = {}
 NetworkPauseNotificationModule.__index = NetworkPauseNotificationModule
 
-function NetworkPauseNotificationModule.new() --[[ Line: 122 ]]
+function NetworkPauseNotificationModule.new()
 	-- upvalues: NetworkPauseNotificationModule (copy), build (copy), TweenService (copy), _TweenInfo (copy), _TweenInfo1 (copy), _UDim2 (copy)
 	local self = setmetatable({}, NetworkPauseNotificationModule)
 	local BuildResult = build()
@@ -104,7 +104,7 @@ function NetworkPauseNotificationModule.new() --[[ Line: 122 ]]
 	return self
 end
 
-function NetworkPauseNotificationModule:Show() --[[ Line: 146 ]]
+function NetworkPauseNotificationModule:Show()
 	-- upvalues: _UDim2_1 (copy)
 	self.__gui.Upper.IconContainer.Icon.Size = _UDim2_1
 	self.__gui.Upper.IconContainer.Icon.ImageTransparency = 0
@@ -113,13 +113,13 @@ function NetworkPauseNotificationModule:Show() --[[ Line: 146 ]]
 	self.__animations.pulse:Play()
 end
 
-function NetworkPauseNotificationModule:Hide() --[[ Line: 154 ]]
+function NetworkPauseNotificationModule:Hide()
 	self.__show = false
 	self.__gui.Parent = nil
 	self.__animations.pulse:Cancel()
 end
 
-function NetworkPauseNotificationModule:SetParent(Parent) --[[ Line: 160 ]]
+function NetworkPauseNotificationModule:SetParent(Parent)
 	self.__guiParent = Parent
 	
 	if self.__show then

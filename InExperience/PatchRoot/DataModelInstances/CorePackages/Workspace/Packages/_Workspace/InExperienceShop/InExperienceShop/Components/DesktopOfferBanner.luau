@@ -9,7 +9,7 @@ local IconSize = FoundationModule.Enums.IconSize
 local IconVariant = FoundationModule.Enums.IconVariant
 local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 
-local function _(Text: string): string --[[ Line: 21 | Named "escapeRichText" ]]
+local function _(Text: string): string
 	return (Text:gsub("[&<>\"']", {
 		["&"] = "&amp;",
 		["<"] = "&lt;",
@@ -19,7 +19,7 @@ local function _(Text: string): string --[[ Line: 21 | Named "escapeRichText" ]]
 	}))
 end
 
-return function(Frame) --[[ Line: 53 | Named "DesktopOfferBanner" ]]
+return function(Frame)
 	-- upvalues: IconName (copy), IconName (copy), ReactModule (copy), View (copy), Icon (copy), IconSize (copy), IconVariant (copy), Text (copy), StateLayerAffordance (copy)
 	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-medium size-full-0 auto-y padding-x-large padding-y-medium radius-medium bg-shift-200",

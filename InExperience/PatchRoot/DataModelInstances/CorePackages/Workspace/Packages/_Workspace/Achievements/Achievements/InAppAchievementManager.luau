@@ -13,30 +13,30 @@ local GetXboxLoginConsecutiveDaysModule = require(Achievements.Requests.GetXboxL
 local VoteCountRefresherModule = require(Achievements.AchievementDataRefresher.VoteCountRefresher)
 local FixOneNameManyFacesDisconnectCrash = game:DefineFastFlag("FixOneNameManyFacesDisconnectCrash", false)
 local ConfigResult = HttpRequestModule.config({
-	requestFunction = function(p1, p2, p3) --[[ Line: 25 ]]
+	requestFunction = function(p1, p2, p3)
 		-- upvalues: HttpRequestModule (copy)
 		return HttpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
 	end,
 	maxRetryCount = if require(Parent.SharedFlags).FFlagLuaAppDefaultHttpRetry then game:DefineFastInt("InAppAchievementManagerHttpRetryCount", 4) else nil
 })
 local PlatformCloudStorageService = nil
-pcall(function() --[[ Line: 34 ]]
+pcall(function()
 	-- upvalues: PlatformCloudStorageService (ref)
 	PlatformCloudStorageService = game:GetService("PlatformCloudStorageService")
 end)
 local AchievementService = nil
-pcall(function() --[[ Line: 41 ]]
+pcall(function()
 	-- upvalues: AchievementService (ref)
 	AchievementService = game:GetService("AchievementService")
 end)
 local InAppAchievementManager = {
-	startUp = function(p1) --[[ Line: 47 ]]
-		task.spawn(function() --[[ Line: 48 ]]
+	startUp = function(p1)
+		task.spawn(function()
 			-- upvalues: p1 (copy)
 			p1:initAchievements()
 		end)
 	end,
-	initAchievements = function(p1) --[[ Line: 53 ]]
+	initAchievements = function(p1)
 		-- upvalues: SignalModule (copy), VoteCountRefresherModule (copy), AchievementModule (copy)
 		local ReadableSignal, ReadableSignal2 = SignalModule.createReadableSignal(0)
 		local ReadableSignal1, ReadableSignal2_1 = SignalModule.createReadableSignal(0)
@@ -49,10 +49,10 @@ local InAppAchievementManager = {
 		p1.achievementOneNameManyFaces = AchievementModule.new(AchievementModule.NAMES.ACHIEVEMENT_ONE_NAME_MANY_FACES, ReadableSignal3, p1.achievementService)
 		p1:setupAchievements(ReadableSignal2_1, ReadableSignal2_2)
 	end,
-	setupAchievements = function(p1, Callback1, Callback) --[[ Line: 85 ]]
+	setupAchievements = function(p1, Callback1, Callback)
 		-- upvalues: GetXboxLoginConsecutiveDaysModule (copy), LoggerModule (copy), FixOneNameManyFacesDisconnectCrash (copy)
 		if p1.achievement3DayRoll.hasAchieved == false or p1.achievement10DayRoll.hasAchieved == false or p1.achievement20DayRoll.hasAchieved == false then
-			GetXboxLoginConsecutiveDaysModule(p1.requestImpl):andThen(function(Result) --[[ Line: 91 ]]
+			GetXboxLoginConsecutiveDaysModule(p1.requestImpl):andThen(function(Result)
 				-- upvalues: LoggerModule (upval), Callback1 (copy)
 				if Result.responseBody == nil then
 					LoggerModule:warning("Response body is empty.")
@@ -68,13 +68,13 @@ local InAppAchievementManager = {
 				else
 					Callback1(Count)
 				end
-			end):catch(function(Err) --[[ Line: 104 ]]
+			end):catch(function(Err)
 				-- upvalues: LoggerModule (upval)
 				LoggerModule:warning(Err)
 			end)
 		end
 		if p1.achievementOneNameManyFaces.hasAchieved == false then
-			p1.saveAvatarCompletedConnection = p1.avatarEditorService.PromptSaveAvatarCompleted:Connect(function(AvatarPromptResult) --[[ Line: 111 ]]
+			p1.saveAvatarCompletedConnection = p1.avatarEditorService.PromptSaveAvatarCompleted:Connect(function(AvatarPromptResult)
 				-- upvalues: Callback (copy), FixOneNameManyFacesDisconnectCrash (upval), p1 (copy)
 				if AvatarPromptResult == Enum.AvatarPromptResult.Success then
 					Callback(true)
@@ -94,7 +94,7 @@ local InAppAchievementManager = {
 			end)
 		end
 	end,
-	shutDown = function(p1) --[[ Line: 129 ]]
+	shutDown = function(p1)
 		-- upvalues: VoteCountRefresherModule (copy)
 		p1.achievementPollster = nil
 		p1.achievement3DayRoll = nil
@@ -109,7 +109,7 @@ local InAppAchievementManager = {
 	end
 }
 
-function InAppAchievementManager.new(Store, p1, AchievementService1, p2, p3) --[[ Line: 142 ]]
+function InAppAchievementManager.new(Store, p1, AchievementService1, p2, p3)
 	-- upvalues: ConfigResult (copy), AvatarEditorService (copy), PlatformCloudStorageService (ref), AchievementService (ref), InAppAchievementManager (copy), FFlagUseSignalsForAuthenticationStatus (copy), SignalsModule (copy), GetAuthenticationStatusStore (copy), LoginStatus (copy)
 	local self = setmetatable({
 		store = Store,
@@ -122,7 +122,7 @@ function InAppAchievementManager.new(Store, p1, AchievementService1, p2, p3) --[
 	if FFlagUseSignalsForAuthenticationStatus then
 		self._authStatusInitialized = false
 		self._lastAuthStatus = nil
-		self._disposeAuthStatus = SignalsModule.createEffect(function(p4) --[[ Line: 160 ]]
+		self._disposeAuthStatus = SignalsModule.createEffect(function(p4)
 			-- upvalues: GetAuthenticationStatusStore (upval), self (copy), LoginStatus (upval)
 			local Status = GetAuthenticationStatusStore(false).getStatus(p4)
 			
@@ -148,7 +148,7 @@ function InAppAchievementManager.new(Store, p1, AchievementService1, p2, p3) --[
 		
 		return self
 	else
-		Store.changed:connect(function(Value, p4) --[[ Line: 177 ]]
+		Store.changed:connect(function(Value, p4)
 			-- upvalues: LoginStatus (upval), self (copy)
 			local Status = if Value.AuthenticationStatus then Value.AuthenticationStatus.status else LoginStatus.UNKNOWN
 			

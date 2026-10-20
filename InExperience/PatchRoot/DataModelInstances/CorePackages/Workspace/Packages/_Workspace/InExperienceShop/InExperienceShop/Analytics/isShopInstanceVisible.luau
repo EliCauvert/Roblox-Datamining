@@ -1,4 +1,4 @@
-﻿return function(Frame: Frame, p1): boolean --[[ Line: 6 | Named "isShopInstanceVisible" ]]
+﻿return function(Frame: Frame, p1): boolean
 	local MaxDelta = p1.max - p1.min
 	
 	if MaxDelta.X <= 0 or MaxDelta.Y <= 0 then

@@ -12,14 +12,14 @@ local LayoutProviderModule = require(Parent.LayoutProvider)
 local InviteSingleUserContainerModule = require(Parent.InviteSingleUserContainer)
 local LoadingModalModule = require(Parent.LoadingModal)
 
-local function FoundationStyleLink() --[[ Line: 22 ]]
+local function FoundationStyleLink()
 	-- upvalues: UseStyleSheetFunction (copy), RoactModule (copy)
 	return RoactModule.createElement("StyleLink", { StyleSheet = UseStyleSheetFunction() })
 end
 
 local FullModalShareGameComponent = RoactModule.PureComponent:extend("FullModalShareGameComponent")
 
-function FullModalShareGameComponent.render(p1) --[[ Line: 31 ]]
+function FullModalShareGameComponent.render(p1)
 	-- upvalues: GetFFlagExtraInviteModalStringValidationModule (copy), RoactModule (copy), RoactRoduxModule (copy), FFlagFixPromptGameInviteUIButtonScalingModule (copy), FoundationStyleLink (copy), LoadingModalModule (copy), LayoutProviderModule (copy), ShareGameContainerModule (copy), InviteSingleUserContainerModule (copy), ModalShareGamePageFrameModule (copy)
 	local IsVisible = p1.props.isVisible
 	local Analytics = p1.props.analytics
@@ -59,7 +59,7 @@ function FullModalShareGameComponent.render(p1) --[[ Line: 31 ]]
 					inviteMessageId = InviteMessageId,
 					launchData = LaunchData,
 					requestImpl = RequestImpl,
-					onAfterClosePage = function() --[[ Line: 76 ]]
+					onAfterClosePage = function()
 						-- upvalues: Store (copy), OnAfterClosePageFunction (copy)
 						local List = {}
 						

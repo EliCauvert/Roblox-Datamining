@@ -7,7 +7,7 @@ local FFlagAXExtendUndoRedoTracking = AvatarExperienceFlagsModule.FFlagAXExtendU
 local FFlagAXResetAvatarButton = AvatarExperienceFlagsModule.FFlagAXResetAvatarButton
 local AvatarScreen = require(Parent.AvatarExperienceNavigation).Enums.AvatarScreen
 
-local function trackSlotClick(p1) --[[ Line: 16 ]]
+local function trackSlotClick(p1)
 	-- upvalues: ImpressionEnumsModule (copy), AnalyticsServiceModule (copy)
 	AnalyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 		actionType = ImpressionEnumsModule.ActionType.UI_BUTTON_CLICK,
@@ -16,7 +16,7 @@ local function trackSlotClick(p1) --[[ Line: 16 ]]
 	})
 end
 
-local function trackSaveClick() --[[ Line: 27 ]]
+local function trackSaveClick()
 	-- upvalues: ImpressionEnumsModule (copy), AnalyticsServiceModule (copy)
 	AnalyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 		group = "SaveAvatarButton",
@@ -25,7 +25,7 @@ local function trackSaveClick() --[[ Line: 27 ]]
 	})
 end
 
-local function trackSlotsCustomizeFtuxPrompt() --[[ Line: 36 ]]
+local function trackSlotsCustomizeFtuxPrompt()
 	-- upvalues: ImpressionEnumsModule (copy), AnalyticsServiceModule (copy)
 	AnalyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 		group = "SlotsCustomizeFtuxPrompt",
@@ -34,7 +34,7 @@ local function trackSlotsCustomizeFtuxPrompt() --[[ Line: 36 ]]
 	})
 end
 
-local function trackSlotsAvatarSwitcherFtuxPrompt() --[[ Line: 45 ]]
+local function trackSlotsAvatarSwitcherFtuxPrompt()
 	-- upvalues: ImpressionEnumsModule (copy), AnalyticsServiceModule (copy)
 	AnalyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 		group = "SlotsAvatarSwitcherFtuxPrompt",
@@ -43,7 +43,7 @@ local function trackSlotsAvatarSwitcherFtuxPrompt() --[[ Line: 45 ]]
 	})
 end
 
-local function trackSaveBlockPromptLeaveClick() --[[ Line: 54 ]]
+local function trackSaveBlockPromptLeaveClick()
 	-- upvalues: ImpressionEnumsModule (copy), AnalyticsServiceModule (copy)
 	AnalyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 		group = "SaveAvatarBlockPrompt_Leave",
@@ -52,7 +52,7 @@ local function trackSaveBlockPromptLeaveClick() --[[ Line: 54 ]]
 	})
 end
 
-local function trackSaveBlockPromptSaveClick() --[[ Line: 63 ]]
+local function trackSaveBlockPromptSaveClick()
 	-- upvalues: ImpressionEnumsModule (copy), AnalyticsServiceModule (copy)
 	AnalyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 		group = "SaveAvatarBlockPrompt_Save",
@@ -61,7 +61,7 @@ local function trackSaveBlockPromptSaveClick() --[[ Line: 63 ]]
 	})
 end
 
-local function trackControlBarClick(p1) --[[ Line: 72 ]]
+local function trackControlBarClick(p1)
 	-- upvalues: ImpressionEnumsModule (copy), AnalyticsServiceModule (copy)
 	AnalyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 		actionType = ImpressionEnumsModule.ActionType.UI_BUTTON_CLICK,
@@ -70,7 +70,7 @@ local function trackControlBarClick(p1) --[[ Line: 72 ]]
 	})
 end
 
-local function trackAdvancedCustomizationControlBarClick(p1) --[[ Line: 81 ]]
+local function trackAdvancedCustomizationControlBarClick(p1)
 	-- upvalues: ImpressionEnumsModule (copy), AnalyticsServiceModule (copy)
 	AnalyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 		actionType = ImpressionEnumsModule.ActionType.UI_BUTTON_CLICK,
@@ -79,7 +79,7 @@ local function trackAdvancedCustomizationControlBarClick(p1) --[[ Line: 81 ]]
 	})
 end
 
-local function trackAdvancedCustomizationControlBarClickFromSurface(p1, p2) --[[ Line: 90 ]]
+local function trackAdvancedCustomizationControlBarClickFromSurface(p1, p2)
 	-- upvalues: ImpressionEnumsModule (copy), AnalyticsServiceModule (copy)
 	AnalyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 		actionType = ImpressionEnumsModule.ActionType.UI_BUTTON_CLICK,
@@ -88,7 +88,7 @@ local function trackAdvancedCustomizationControlBarClickFromSurface(p1, p2) --[[
 	})
 end
 
-function mapAvatarScreenToSurface(AvatarEditor) --[[ Line: 101 ]]
+function mapAvatarScreenToSurface(AvatarEditor)
 	-- upvalues: ImpressionEnumsModule (copy), AvatarScreen (copy)
 	local HOMEPAGE = ImpressionEnumsModule.MarketplaceSurfaceType.HOMEPAGE
 	
@@ -108,7 +108,7 @@ function mapAvatarScreenToSurface(AvatarEditor) --[[ Line: 101 ]]
 	return HOMEPAGE
 end
 
-local function trackUndoHistoryCount(p1, p2) --[[ Line: 129 ]]
+local function trackUndoHistoryCount(p1, p2)
 	-- upvalues: ImpressionEnumsModule (copy), AnalyticsServiceModule (copy)
 	AnalyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 		actionType = ImpressionEnumsModule.ActionType.UI_BUTTON_CLICK,
@@ -117,7 +117,7 @@ local function trackUndoHistoryCount(p1, p2) --[[ Line: 129 ]]
 	})
 end
 
-local function trackAvatarRestoreClick(p1) --[[ Line: 140 ]]
+local function trackAvatarRestoreClick(p1)
 	-- upvalues: ImpressionEnumsModule (copy), AnalyticsServiceModule (copy)
 	AnalyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 		group = "AvatarRestoreSaved",
@@ -126,7 +126,7 @@ local function trackAvatarRestoreClick(p1) --[[ Line: 140 ]]
 	})
 end
 
-local function trackAvatarRemoveAllClick(p1) --[[ Line: 151 ]]
+local function trackAvatarRemoveAllClick(p1)
 	-- upvalues: ImpressionEnumsModule (copy), AnalyticsServiceModule (copy)
 	AnalyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 		group = "AvatarRemoveAll",
@@ -143,7 +143,7 @@ return {
 	trackAdvancedCustomizationControlBarClickFromSurface = trackAdvancedCustomizationControlBarClickFromSurface,
 	trackSaveBlockPromptLeaveClick = trackSaveBlockPromptLeaveClick,
 	trackSaveBlockPromptSaveClick = trackSaveBlockPromptSaveClick,
-	trackUndoRedoClick = function(p1, p2) --[[ Line: 113 ]]
+	trackUndoRedoClick = function(p1, p2)
 		-- upvalues: FFlagAXExtendUndoRedoTracking (copy), ImpressionEnumsModule (copy), AnalyticsServiceModule (copy)
 		local MapAvatarScreenToSurfaceResult = if FFlagAXExtendUndoRedoTracking and p2 then mapAvatarScreenToSurface(p2) else ImpressionEnumsModule.MarketplaceSurfaceType.MARKETPLACE_USER_INVENTORY
 		AnalyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
@@ -154,7 +154,7 @@ return {
 	end,
 	trackSlotsCustomizeFtuxPrompt = trackSlotsCustomizeFtuxPrompt,
 	trackSlotsAvatarSwitcherFtuxPrompt = trackSlotsAvatarSwitcherFtuxPrompt,
-	trackAddNewAvatarClick = function() --[[ Line: 162 ]]
+	trackAddNewAvatarClick = function()
 		-- upvalues: ImpressionEnumsModule (copy), AnalyticsServiceModule (copy)
 		AnalyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 			group = "AvatarSwitcher_AddNewAvatar",
@@ -162,7 +162,7 @@ return {
 			surface = ImpressionEnumsModule.MarketplaceSurfaceType.MARKETPLACE_USER_INVENTORY
 		})
 	end,
-	trackUpdateAvatarClick = function() --[[ Line: 171 ]]
+	trackUpdateAvatarClick = function()
 		-- upvalues: ImpressionEnumsModule (copy), AnalyticsServiceModule (copy)
 		AnalyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 			group = "AvatarSwitcher_UpdateAvatar",
@@ -170,7 +170,7 @@ return {
 			surface = ImpressionEnumsModule.MarketplaceSurfaceType.MARKETPLACE_USER_INVENTORY
 		})
 	end,
-	trackManageAvatarsClick = function() --[[ Line: 180 ]]
+	trackManageAvatarsClick = function()
 		-- upvalues: ImpressionEnumsModule (copy), AnalyticsServiceModule (copy)
 		AnalyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 			group = "AvatarSwitcher_ManageAvatars",
@@ -178,7 +178,7 @@ return {
 			surface = ImpressionEnumsModule.MarketplaceSurfaceType.MARKETPLACE_USER_INVENTORY
 		})
 	end,
-	trackDeleteAvatarAttemptClick = function(p3) --[[ Line: 189 ]]
+	trackDeleteAvatarAttemptClick = function(p3)
 		-- upvalues: ImpressionEnumsModule (copy), AnalyticsServiceModule (copy)
 		AnalyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 			actionType = ImpressionEnumsModule.ActionType.UI_BUTTON_CLICK,
@@ -186,7 +186,7 @@ return {
 			surface = ImpressionEnumsModule.MarketplaceSurfaceType.MARKETPLACE_USER_INVENTORY
 		})
 	end,
-	trackDeleteAvatarConfirm = function() --[[ Line: 201 ]]
+	trackDeleteAvatarConfirm = function()
 		-- upvalues: ImpressionEnumsModule (copy), AnalyticsServiceModule (copy)
 		AnalyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 			group = "AvatarSwitcher_DeleteAvatar_Confirm",
@@ -194,7 +194,7 @@ return {
 			surface = ImpressionEnumsModule.MarketplaceSurfaceType.MARKETPLACE_USER_INVENTORY
 		})
 	end,
-	trackSettingsTileClick = function() --[[ Line: 210 ]]
+	trackSettingsTileClick = function()
 		-- upvalues: ImpressionEnumsModule (copy), AnalyticsServiceModule (copy)
 		AnalyticsServiceModule.EventStream:sendTelemetryEvent("SlotBasedEditor", "marketplaceOrganicFELog", {
 			group = "AvatarSwitcher_SettingsTile",

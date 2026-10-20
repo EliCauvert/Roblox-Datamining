@@ -31,7 +31,7 @@ FriendsLandingAnalyticsModule.DiagStats = {
 }
 FriendsLandingAnalyticsModule.BASE_CONTEXT = "friendsLanding"
 
-function FriendsLandingAnalyticsModule.new(p1, LocalUserId, _getLoadingTimeInfo) --[[ Line: 71 ]]
+function FriendsLandingAnalyticsModule.new(p1, LocalUserId, _getLoadingTimeInfo)
 	-- upvalues: FriendsLandingAnalyticsModule (copy)
 	assert(LocalUserId, "FriendsLanding must be passed the ID of the local user")
 	local config = {
@@ -46,7 +46,7 @@ function FriendsLandingAnalyticsModule.new(p1, LocalUserId, _getLoadingTimeInfo)
 	return config
 end
 
-function FriendsLandingAnalyticsModule:navigate(p1) --[[ Line: 87 ]]
+function FriendsLandingAnalyticsModule:navigate(p1)
 	-- upvalues: LoggerModule (copy), FriendsLandingAnalyticsModule (copy)
 	LoggerModule:info("navigate to {}", p1)
 	local NavigationEntry = FriendsLandingAnalyticsModule.Navigation[p1]
@@ -60,7 +60,7 @@ function FriendsLandingAnalyticsModule:navigate(p1) --[[ Line: 87 ]]
 	end
 end
 
-function FriendsLandingAnalyticsModule:buttonClick(LoadMoreUsers, p1) --[[ Line: 97 ]]
+function FriendsLandingAnalyticsModule:buttonClick(LoadMoreUsers, p1)
 	-- upvalues: ButtonClickEventsModule (copy), LoggerModule (copy), Llama (copy), ShowMoreSectionTypeEnumModule (copy), FriendsLandingAnalyticsModule (copy)
 	assert(ButtonClickEventsModule.isEnumValue(LoadMoreUsers), "invalid button name used")
 	LoggerModule:info("eventName: buttonClick btn: {}{}", LoadMoreUsers, self:_toStringAdditionalArgs(p1))
@@ -85,7 +85,7 @@ function FriendsLandingAnalyticsModule:buttonClick(LoadMoreUsers, p1) --[[ Line:
 	end
 end
 
-function FriendsLandingAnalyticsModule:_toStringAdditionalArgs(p1) --[[ Line: 127 ]]
+function FriendsLandingAnalyticsModule:_toStringAdditionalArgs(p1)
 	-- upvalues: Tutils (copy)
 	if p1 then
 		local Replaced, _ = string.gsub(" args: " .. Tutils.toString(p1), "%s+", " ")
@@ -96,17 +96,17 @@ function FriendsLandingAnalyticsModule:_toStringAdditionalArgs(p1) --[[ Line: 12
 	end
 end
 
-function FriendsLandingAnalyticsModule:pageLoaded() --[[ Line: 136 ]]
+function FriendsLandingAnalyticsModule:pageLoaded()
 	-- upvalues: LoggerModule (copy), FriendsLandingAnalyticsModule (copy)
 	LoggerModule:info("pageLoaded")
 	self._diagImpl:reportCounter(FriendsLandingAnalyticsModule.DiagCounters.UserLoadedPage, 1)
 end
 
-function FriendsLandingAnalyticsModule:pageLoadedWithArgs(p1, p2) --[[ Line: 142 ]]
+function FriendsLandingAnalyticsModule:pageLoadedWithArgs(p1, p2)
 	self._eventStreamImpl:setRBXEventStream(p1 or self.BASE_CONTEXT, "luaPageLoad", p2)
 end
 
-function FriendsLandingAnalyticsModule:_pagePerformanceReport(LoadingPageTime, p1, p2) --[[ Line: 147 ]]
+function FriendsLandingAnalyticsModule:_pagePerformanceReport(LoadingPageTime, p1, p2)
 	-- upvalues: NavigatedFromPagesEnumModule (copy), LoggerModule (copy)
 	local P17 = p2 or os.clock()
 	local LoadingTimeInfo = self._getLoadingTimeInfo and self._getLoadingTimeInfo() or {}
@@ -132,7 +132,7 @@ function FriendsLandingAnalyticsModule:_pagePerformanceReport(LoadingPageTime, p
 	end
 end
 
-function FriendsLandingAnalyticsModule:_reportPagePerformanceOnceCheck(p1): boolean --[[ Line: 173 ]]
+function FriendsLandingAnalyticsModule:_reportPagePerformanceOnceCheck(p1): boolean
 	if self._reportedPagePerformanceOnce[p1] then
 		return true
 	else
@@ -142,7 +142,7 @@ function FriendsLandingAnalyticsModule:_reportPagePerformanceOnceCheck(p1): bool
 	end
 end
 
-function FriendsLandingAnalyticsModule:pageMountingTimeReport(p1) --[[ Line: 181 ]]
+function FriendsLandingAnalyticsModule:pageMountingTimeReport(p1)
 	-- upvalues: FriendsLandingAnalyticsModule (copy)
 	if not self:_reportPagePerformanceOnceCheck("pageMountingTime") then
 		self:_pagePerformanceReport(FriendsLandingAnalyticsModule.DiagStats.MountingPageTime, "pageMountingTime", p1)
@@ -151,7 +151,7 @@ function FriendsLandingAnalyticsModule:pageMountingTimeReport(p1) --[[ Line: 181
 	end
 end
 
-function FriendsLandingAnalyticsModule:pageLoadingTimeReport(p1) --[[ Line: 189 ]]
+function FriendsLandingAnalyticsModule:pageLoadingTimeReport(p1)
 	-- upvalues: FriendsLandingAnalyticsModule (copy)
 	if not self:_reportPagePerformanceOnceCheck("pageLoadingTime") then
 		self:_pagePerformanceReport(FriendsLandingAnalyticsModule.DiagStats.LoadingPageTime, "pageLoadingTime", p1)
@@ -160,7 +160,7 @@ function FriendsLandingAnalyticsModule:pageLoadingTimeReport(p1) --[[ Line: 189 
 	end
 end
 
-function FriendsLandingAnalyticsModule:reportAddFriendsEntrypoint(Home, p1) --[[ Line: 197 ]]
+function FriendsLandingAnalyticsModule:reportAddFriendsEntrypoint(Home, p1)
 	-- upvalues: FriendsLandingAnalyticsModule (copy), AppPage (copy)
 	assert(FriendsLandingAnalyticsModule.Navigation[Home] ~= nil, "invalid screen")
 	
@@ -174,7 +174,7 @@ function FriendsLandingAnalyticsModule:reportAddFriendsEntrypoint(Home, p1) --[[
 	self._diagImpl:reportCounter(FriendsLandingAnalyticsModule.Navigation[Home], 1)
 end
 
-function FriendsLandingAnalyticsModule:impressionEvent(p1, p2) --[[ Line: 209 ]]
+function FriendsLandingAnalyticsModule:impressionEvent(p1, p2)
 	-- upvalues: ImpressionEventsModule (copy)
 	assert(ImpressionEventsModule.isEnumValue(p1), "invalid impression name used")
 	self._eventStreamImpl:setRBXEventStream("addUniversalFriends", p1:rawValue(), p2)

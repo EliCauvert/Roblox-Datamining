@@ -6,7 +6,7 @@ local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 local GetFFlagFixConnectTabSearchBarHeightFunction = DependenciesModule.GetFFlagFixConnectTabSearchBarHeight
 local ReactModule = require(Parent.React)
 
-return function(p1) --[[ Line: 13 | Named "FriendsLandingHeaderBarPresentational" ]]
+return function(p1)
 	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy), HeaderBar (copy), GetFFlagFixConnectTabSearchBarHeightFunction (copy)
 	local Size2400 = UseDesignTokensFunction().Size.Size_2400
 	

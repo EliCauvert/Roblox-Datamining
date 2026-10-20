@@ -14,17 +14,17 @@ SystemMessage.defaultProps = {
 	maxWidth = 250
 }
 
-function SystemMessage.init(p1) --[[ Line: 29 ]]
+function SystemMessage.init(p1)
 	-- upvalues: MemoizeFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy)
-	p1.calculateSize = MemoizeFunction(function(p2, X, p3, p4) --[[ Line: 30 ]]
+	p1.calculateSize = MemoizeFunction(function(p2, X, p3, p4)
 		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Text (upval)
 		return if FoundationFontFaceMigration then GetTextSizeFunction(p2, p4, p3, Vector2.new(X, 1000)) else Text.GetTextBounds(p2, p3, p4, Vector2.new(X, 1000))
 	end)
 end
 
-function SystemMessage.render(p1) --[[ Line: 44 ]]
+function SystemMessage.render(p1)
 	-- upvalues: WithStyleFunction (copy), FoundationFontFaceMigration (copy), RoactModule (copy), NormalizeFontFaceFunction (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 45 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: p1 (copy), FoundationFontFaceMigration (upval), RoactModule (upval), NormalizeFontFaceFunction (upval)
 		local CaptionBody = p2.Font.CaptionBody
 		local ScaledBaseSize = p2.Font.BaseSize * CaptionBody.RelativeSize

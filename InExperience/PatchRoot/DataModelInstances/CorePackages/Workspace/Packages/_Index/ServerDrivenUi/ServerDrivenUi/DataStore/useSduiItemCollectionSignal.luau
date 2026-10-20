@@ -9,15 +9,15 @@ local GetItemCollectionKeyModule = require(ServerDrivenUi.DataStore.getItemColle
 local _ = require(ServerDrivenUi.DataStore.SduiFeedStoreTypes)
 local FFlagLuaAppFixInlineSignalsReactPattern = require(Parent.SharedFlags).FFlagLuaAppFixInlineSignalsReactPattern
 
-return function(p1, p2, p3, p4) --[[ Line: 19 | Named "useSduiItemCollectionSignal" ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: GetItemCollectionKeyModule (copy), FFlagLuaAppFixInlineSignalsReactPattern (copy), ReactModule (copy), GetSduiFeedStoreModule (copy), SignalsReactModule (copy)
 	local ItemCollectionKeyModule = GetItemCollectionKeyModule(p2, p3)
 	local P3 = p4 or p1
 	
-	return if FFlagLuaAppFixInlineSignalsReactPattern then SignalsReactModule.useSignalState((ReactModule.useCallback(function(p5) --[[ Line: 31 ]]
+	return if FFlagLuaAppFixInlineSignalsReactPattern then SignalsReactModule.useSignalState((ReactModule.useCallback(function(p5)
 		-- upvalues: GetSduiFeedStoreModule (upval), P3 (copy), ItemCollectionKeyModule (copy)
 		return GetSduiFeedStoreModule(P3).getItemCollection(ItemCollectionKeyModule, true)(p5)
-	end, { ItemCollectionKeyModule, P3 }))) else SignalsReactModule.useSignalState(function(p5) --[[ Line: 44 ]]
+	end, { ItemCollectionKeyModule, P3 }))) else SignalsReactModule.useSignalState(function(p5)
 		-- upvalues: GetSduiFeedStoreModule (upval), P3 (copy), ItemCollectionKeyModule (copy)
 		return GetSduiFeedStoreModule(P3).getItemCollection(ItemCollectionKeyModule, true)(p5)
 	end)

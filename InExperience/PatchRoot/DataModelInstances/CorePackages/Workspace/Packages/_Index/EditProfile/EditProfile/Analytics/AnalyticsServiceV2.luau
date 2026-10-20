@@ -23,7 +23,7 @@ local config = {
 	throttlingPercentage = game:DefineFastInt("EditProfileThrottleHundredthsPercent", 10000)
 }
 
-local function sendAnalyticsEvent(p1, p2) --[[ Line: 68 ]]
+local function sendAnalyticsEvent(p1, p2)
 	-- upvalues: CryoModule (copy), TelemetryService (copy), config (copy)
 	TelemetryService:LogEvent(config, {
 		customFields = CryoModule.Dictionary.join(p1 or {}, p2),
@@ -33,24 +33,24 @@ end
 
 return {
 	TelemetryEventType = TelemetryEventType,
-	sendEditProfileOpened = function() --[[ Line: 89 ]]
+	sendEditProfileOpened = function()
 		-- upvalues: sendAnalyticsEvent (copy), TelemetryEventType (copy)
 		sendAnalyticsEvent({ page = "EditProfilePage" }, { sub_event_type = TelemetryEventType.EditProfileOpened })
 	end,
-	sendDisplayNameModalOpened = function() --[[ Line: 93 ]]
+	sendDisplayNameModalOpened = function()
 		-- upvalues: sendAnalyticsEvent (copy), TelemetryEventType (copy)
 		sendAnalyticsEvent({ btn = "openEditDisplayName" }, {
 			sub_event_type = TelemetryEventType.DisplayNameModalOpened
 		})
 	end,
-	sendDisplayNameModalLoaded = function(StatValue) --[[ Line: 100 ]]
+	sendDisplayNameModalLoaded = function(StatValue)
 		-- upvalues: sendAnalyticsEvent (copy), TelemetryEventType (copy)
 		sendAnalyticsEvent({ page = "EditDisplayNameModal", statValue = StatValue }, {
 			sub_event_type = TelemetryEventType.DisplayNameModalLoaded,
 			statValue = StatValue
 		})
 	end,
-	sendDisplayNameSaved = function(DisplayName, StatValue) --[[ Line: 107 ]]
+	sendDisplayNameSaved = function(DisplayName, StatValue)
 		-- upvalues: sendAnalyticsEvent (copy), TelemetryEventType (copy)
 		sendAnalyticsEvent({
 			btn = "saveDisplayName",
@@ -62,38 +62,38 @@ return {
 			statValue = StatValue
 		})
 	end,
-	sendDisplayNameTooShort = function(DisplayName) --[[ Line: 114 ]]
+	sendDisplayNameTooShort = function(DisplayName)
 		-- upvalues: sendAnalyticsEvent (copy), TelemetryEventType (copy)
 		sendAnalyticsEvent({ displayName = DisplayName }, {
 			sub_event_type = TelemetryEventType.DisplayNameTooShort,
 			displayName = DisplayName
 		})
 	end,
-	sendFilteredDisplayName = function(DisplayName) --[[ Line: 121 ]]
+	sendFilteredDisplayName = function(DisplayName)
 		-- upvalues: sendAnalyticsEvent (copy), TelemetryEventType (copy)
 		sendAnalyticsEvent({ displayName = DisplayName }, {
 			sub_event_type = TelemetryEventType.FilteredDisplayName,
 			displayName = DisplayName
 		})
 	end,
-	sendEditUsernameOpened = function() --[[ Line: 128 ]]
+	sendEditUsernameOpened = function()
 		-- upvalues: sendAnalyticsEvent (copy), TelemetryEventType (copy)
 		sendAnalyticsEvent({ btn = "openEditUsername" }, { sub_event_type = TelemetryEventType.EditUsernameOpened })
 	end,
-	sendUsernameSaved = function(StatValue) --[[ Line: 132 ]]
+	sendUsernameSaved = function(StatValue)
 		-- upvalues: sendAnalyticsEvent (copy), TelemetryEventType (copy)
 		sendAnalyticsEvent({ statValue = StatValue }, {
 			sub_event_type = TelemetryEventType.UsernameSaved,
 			statValue = StatValue
 		})
 	end,
-	sendOpenAvatarMarketplace = function() --[[ Line: 145 ]]
+	sendOpenAvatarMarketplace = function()
 		-- upvalues: sendAnalyticsEvent (copy), TelemetryEventType (copy)
 		sendAnalyticsEvent({ btn = "openAvatarMarketplace" }, {
 			sub_event_type = TelemetryEventType.OpenAvatarMarketplace
 		})
 	end,
-	sendError = function(PinLocked) --[[ Line: 139 ]]
+	sendError = function(PinLocked)
 		-- upvalues: ConstantsModule (copy), sendAnalyticsEvent (copy), TelemetryEventType (copy)
 		if PinLocked == ConstantsModule.DescriptionErrorCodes.PinLocked then
 			sendAnalyticsEvent(nil, {

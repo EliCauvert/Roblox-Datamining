@@ -15,17 +15,17 @@ local ConversationModalModule = require(script.Parent.ConversationModal)
 local AppChatFAEBannerModule = require(AppChat.Components.FaeBanner.AppChatFAEBanner)
 local config = {
 	shouldShowLegacyBottomModal = false,
-	onHeightChanged = function(_) --[[ Line: 34 ]] end
+	onHeightChanged = function(_) end
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 37 | Named "ConversationBottomModalContainer" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseSelectorFunction (copy), GetDeepValue2Module (copy), ModalConfigurationModule (copy), ReactModule (copy), ConversationBottomModal (copy), AppChatFAEBannerModule (copy), FFlagTestDeviceForFAEUpsell (copy), DeviceMeetsRequirementsForFAEFunction (copy), ConversationModalModule (copy), FoundationModule (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 41 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: GetDeepValue2Module (upval), UnionResult (copy), ModalConfigurationModule (upval)
 		return GetDeepValue2Module(p2, `ChatAppReducer.Modals.conversationBottomModals.{UnionResult.conversationId}`) or ModalConfigurationModule.default
 	end)
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 46 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UnionResult (copy)
 		UnionResult.onHeightChanged(Frame.AbsoluteSize.Y)
 	end, { UnionResult.onHeightChanged })

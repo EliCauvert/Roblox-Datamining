@@ -29,7 +29,7 @@ local Constants = {
 }
 local UserId = if LocalPlayer then LocalPlayer.UserId else 0
 
-local function v6(Event_type, Intervention_type, p1, Event_id, Evidence, Timeout_duration_seconds, p2, Acknowledgeable) --[[ Line: 46 ]]
+local function v6(Event_type, Intervention_type, p1, Event_id, Evidence, Timeout_duration_seconds, p2, Acknowledgeable)
 	-- upvalues: UserId (ref), Constants (copy), CryoModule (copy)
 	local UnixTimestampMillis = DateTime.now().UnixTimestampMillis
 	local JoinResult = {
@@ -55,7 +55,7 @@ local function v6(Event_type, Intervention_type, p1, Event_id, Evidence, Timeout
 end
 
 return {
-	sendAnalyticsEvent = function(Event_type, Intervention_type, p1, Event_id, Evidence, Timeout_duration_seconds, p2, Acknowledgeable) --[[ Line: 89 ]]
+	sendAnalyticsEvent = function(Event_type, Intervention_type, p1, Event_id, Evidence, Timeout_duration_seconds, p2, Acknowledgeable)
 		-- upvalues: NewResult (copy), Constants (copy), v6 (copy)
 		NewResult:sendEventDeferred(Constants.EventContext, Constants.EventName, (v6(Event_type, Intervention_type, p1, Event_id, Evidence, Timeout_duration_seconds, p2, Acknowledgeable)))
 	end,

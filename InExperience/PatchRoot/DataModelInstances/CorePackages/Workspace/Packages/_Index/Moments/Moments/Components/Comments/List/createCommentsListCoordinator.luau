@@ -49,28 +49,28 @@ local config3 = {
 	Dec = 12
 }
 
-local function _(p1) --[[ Line: 217 | Named "cursorKey" ]]
+local function _(p1)
 	return p1 or "<initial>"
 end
 
-local function defaultSchedule(p1: number, p2) --[[ Line: 221 ]]
+local function defaultSchedule(p1: number, p2)
 	local DelayedThread = task.delay(p1 / 1000, p2)
 	
-	return function() --[[ Line: 223 ]]
+	return function()
 		-- upvalues: DelayedThread (copy)
 		pcall(task.cancel, DelayedThread)
 	end
 end
 
-local function defaultReadStatusCode(p1, p2) --[[ Line: 228 ]]
+local function defaultReadStatusCode(p1, p2)
 	return if p2 == nil then if p1.response == nil then p1.errorCode else p1.response.statusCode else p2
 end
 
-local function defaultReadRetryAfter(p1) --[[ Line: 238 ]]
+local function defaultReadRetryAfter(p1)
 	return if p1.headers == nil then nil else p1.headers["retry-after"] or p1.headers["Retry-After"]
 end
 
-local function parseHttpDateMs(Text: string) --[[ Line: 245 ]]
+local function parseHttpDateMs(Text: string)
 	-- upvalues: config3 (copy)
 	local Match, Match2, Match3, Match4, Match5, Match6 = string.match(Text, "^%a%a%a, (%d%d) (%a%a%a) (%d%d%d%d) (%d%d):(%d%d):(%d%d) GMT$")
 	local Entry = if Match2 == nil then nil else config3[Match2]
@@ -84,7 +84,7 @@ local function parseHttpDateMs(Text: string) --[[ Line: 245 ]]
 	end
 end
 
-local _ = function(p1, p2) --[[ Line: 264 | Named "retryAfterDelayMs" ]]
+local _ = function(p1, p2)
 	-- upvalues: parseHttpDateMs (copy)
 	if p1 == nil then
 		return 5000
@@ -99,31 +99,31 @@ local _ = function(p1, p2) --[[ Line: 264 | Named "retryAfterDelayMs" ]]
 	return if ScaledNumber == nil or ScaledNumber < 0 or ScaledNumber > 60000 then 5000 else ScaledNumber
 end
 
-local _ = function(p1: number, p2) --[[ Line: 286 | Named "definitePostRejectionCode" ]]
+local _ = function(p1: number, p2)
 	return if p2 == "CommentsUnavailable" then nil elseif p2 == nil then if p1 == nil or p1 == 408 or p1 < 400 or p1 >= 500 then nil elseif p1 == 429 then "RateLimited" elseif p1 == 401 then "AuthenticationRequired" else "PostRejected" else p2
 end
 
-local _ = function(p1) --[[ Line: 305 | Named "selectedEmoteId" ]]
+local _ = function(p1)
 	return if p1 == nil or p1.userReaction == nil then nil else p1.userReaction.emoteId
 end
 
-local _ = function(p1: number): boolean --[[ Line: 309 | Named "isUncertainStatus" ]]
+local _ = function(p1: number): boolean
 	return p1 == nil or (p1 == 408 or p1 ~= nil and (p1 >= 500 and p1 <= 599))
 end
 
-local _ = function(p1) --[[ Line: 313 | Named "errorCodeFrom" ]]
+local _ = function(p1)
 	-- upvalues: MomentsCommentsModule (copy)
 	local ParseCommentsErrorResult = MomentsCommentsModule.parseCommentsError(p1.error)
 	
 	return if ParseCommentsErrorResult == nil then "CommentsUnavailable" else ParseCommentsErrorResult.errorCode
 end
 
-local function observeRequest(p1, Callback1: (any) -> ()) --[[ Line: 318 ]]
+local function observeRequest(p1, Callback1: (any) -> ())
 	-- upvalues: SignalsModule (copy)
 	local Flag = false
 	local Callback: () -> () = nil
 	
-	local function stop() --[[ Line: 322 ]]
+	local function stop()
 		-- upvalues: Flag (ref), Callback (ref), p1 (copy)
 		if Flag then return end
 		Flag = true
@@ -135,7 +135,7 @@ local function observeRequest(p1, Callback1: (any) -> ()) --[[ Line: 318 ]]
 		p1.dispose()
 	end
 	
-	local function _(p2) --[[ Line: 334 | Named "settle" ]]
+	local function _(p2)
 		-- upvalues: Flag (ref), Callback (ref), p1 (copy), Callback1 (copy)
 		if Flag or p2.status == "pending" then return end
 		Flag = true
@@ -151,7 +151,7 @@ local function observeRequest(p1, Callback1: (any) -> ()) --[[ Line: 318 ]]
 	local StateResult = p1.state(false)
 	
 	if StateResult.status == "pending" then
-		Callback = SignalsModule.createEffect(function(p2) --[[ Line: 353 ]]
+		Callback = SignalsModule.createEffect(function(p2)
 			-- upvalues: p1 (copy), Flag (ref), Callback (ref), Callback1 (copy)
 			local StateResult = p1.state(p2)
 			
@@ -188,13 +188,13 @@ local function observeRequest(p1, Callback1: (any) -> ()) --[[ Line: 318 ]]
 	end
 end
 
-local function rejectReactionMutation(_, _, _, _): boolean --[[ Line: 364 ]]
+local function rejectReactionMutation(_, _, _, _): boolean
 	return false
 end
 
-local function noOp() --[[ Line: 373 ]] end
+local function noOp() end
 
-return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
+return function(p1)
 	-- upvalues: MomentsCommentsModule (copy), defaultSchedule (copy), defaultReadStatusCode (copy), defaultReadRetryAfter (copy), SignalsModule (copy), parseHttpDateMs (copy), LoadStatus (copy), SignalsExperimentalModule (copy), config (copy), config2 (copy), FFlagMomentsCommentActionsRealtimeModule (copy), observeRequest (copy), GetCommentsFailureReasonModule (copy), list (copy), FFlagMomentsComments (copy), EventNames (copy), FFlagMomentsCommentsCountAnalyticsModule (copy), config1 (copy), rejectReactionMutation (copy), noOp (copy)
 	local CollectionStore = p1.collectionStore
 	local CommentsStore = p1.commentsStore
@@ -206,7 +206,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 	local DeleteReaction = p1.deleteReaction or MomentsCommentsModule.deleteMomentCommentReaction
 	local DeleteComment = p1.deleteComment or MomentsCommentsModule.deleteMomentComment
 	local SessionFilters = p1.sessionFilters
-	local NowMs = p1.nowMs or function() --[[ Line: 389 ]]
+	local NowMs = p1.nowMs or function()
 		return DateTime.now().UnixTimestampMillis
 	end
 	local Schedule = p1.schedule or defaultSchedule
@@ -227,7 +227,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 	local CommentPostedCallback = nil
 	local AnalyticsSession = nil
 	
-	local function _(p2) --[[ Line: 410 | Named "cancelActivePage" ]]
+	local function _(p2)
 		local ActivePageRequest = p2.activePageRequest
 		p2.activePageRequest = nil
 		
@@ -236,19 +236,19 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		end
 	end
 	
-	local _ = function(FeedItemId, SessionId) --[[ Line: 418 | Named "getSession" ]]
+	local _ = function(FeedItemId, SessionId)
 		-- upvalues: v1 (ref), Flag (ref), CommentsStore (copy)
 		local v3 = v1
 		
 		return if Flag or v3 == nil or v3.feedItemId ~= FeedItemId or v3.sessionId ~= SessionId or v3.ownerGeneration ~= CommentsStore.getOwnerGeneration(false) or v3.refCount == 0 then nil else v3
 	end
 	
-	local _ = function(p2, FeedItemId, SessionId, OwnerGeneration): boolean --[[ Line: 433 | Named "isCurrentRequestSession" ]]
+	local _ = function(p2, FeedItemId, SessionId, OwnerGeneration): boolean
 		-- upvalues: Flag (ref), v1 (ref), CommentsStore (copy)
 		return not Flag and (v1 == p2 and (p2.feedItemId == FeedItemId and (p2.sessionId == SessionId and p2.ownerGeneration == OwnerGeneration)) and CommentsStore.getOwnerGeneration(false) == OwnerGeneration)
 	end
 	
-	local _ = function(Key) --[[ Line: 447 | Named "cancelIntentExpiry" ]]
+	local _ = function(Key)
 		-- upvalues: t1 (copy)
 		local Entry: () -> () = t1[Key]
 		t1[Key] = nil
@@ -258,7 +258,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		end
 	end
 	
-	local _ = function(Key, p2) --[[ Line: 455 | Named "scheduleIntentExpiry" ]]
+	local _ = function(Key, p2)
 		-- upvalues: t1 (copy), Schedule (copy), ReactionStore (copy), FeedItemIds (copy)
 		local Entry: () -> () = t1[Key]
 		t1[Key] = nil
@@ -266,7 +266,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		if Entry ~= nil then
 			Entry()
 		end
-		t1[Key] = Schedule(10000, function() --[[ Line: 457 ]]
+		t1[Key] = Schedule(10000, function()
 			-- upvalues: t1 (upval), Key (copy), ReactionStore (upval), p2 (copy), FeedItemIds (upval)
 			t1[Key] = nil
 			
@@ -276,7 +276,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		end)
 	end
 	
-	local function cancelReactionRequest(CommentId) --[[ Line: 465 ]]
+	local function cancelReactionRequest(CommentId)
 		-- upvalues: t (copy)
 		local Entry = t[CommentId]
 		t[CommentId] = nil
@@ -296,7 +296,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		end
 	end
 	
-	local _ = function(p2, Key, p3, p4) --[[ Line: 485 | Named "hardResetReaction" ]]
+	local _ = function(p2, Key, p3, p4)
 		-- upvalues: cancelReactionRequest (copy), t1 (copy), FeedItemIds (copy), ReactionStore (copy)
 		cancelReactionRequest(Key)
 		local Entry: () -> () = t1[Key]
@@ -313,7 +313,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		end
 	end
 	
-	local function clearReactionState() --[[ Line: 495 ]]
+	local function clearReactionState()
 		-- upvalues: t (copy), cancelReactionRequest (copy), t1 (copy), Callback (ref), FeedItemIds (copy), ReactionStore (copy)
 		local List = {}
 		
@@ -344,7 +344,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		ReactionStore.clear()
 	end
 	
-	local function clearReactionsForFeed(FeedItemId, CommentsUnavailable) --[[ Line: 518 ]]
+	local function clearReactionsForFeed(FeedItemId, CommentsUnavailable)
 		-- upvalues: FeedItemIds (copy), cancelReactionRequest (copy), t1 (copy), ReactionStore (copy)
 		local List = {}
 		
@@ -367,7 +367,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		ReactionStore.setFeedRestriction(FeedItemId, CommentsUnavailable)
 	end
 	
-	local function setReactionCooldown(p2) --[[ Line: 534 ]]
+	local function setReactionCooldown(p2)
 		-- upvalues: NowMs (copy), ReactionStore (copy), parseHttpDateMs (upval), Callback (ref), Schedule (copy)
 		local NowMsResult: number = NowMs()
 		local CooldownUntilMs: number = ReactionStore.getCooldownUntilMs(false)
@@ -391,7 +391,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		if Callback ~= nil then
 			Callback()
 		end
-		Callback = Schedule(math.max(0, Largest - NowMsResult), function() --[[ Line: 544 ]]
+		Callback = Schedule(math.max(0, Largest - NowMsResult), function()
 			-- upvalues: Callback (upval), ReactionStore (upval), Largest (copy)
 			Callback = nil
 			
@@ -401,7 +401,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		end)
 	end
 	
-	local _ = function() --[[ Line: 552 | Named "clearPostCooldown" ]]
+	local _ = function()
 		-- upvalues: Callback1 (ref), Signal2 (copy)
 		if Callback1 ~= nil then
 			Callback1()
@@ -410,7 +410,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		Signal2(0)
 	end
 	
-	local function setPostCooldown(p2) --[[ Line: 560 ]]
+	local function setPostCooldown(p2)
 		-- upvalues: NowMs (copy), Signal (copy), parseHttpDateMs (upval), Signal2 (copy), Callback1 (ref), Schedule (copy)
 		local NowMsResult: number = NowMs()
 		local SignalResult: number = Signal(false)
@@ -434,7 +434,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		if Callback1 ~= nil then
 			Callback1()
 		end
-		Callback1 = Schedule(math.max(0, Largest - NowMsResult), function() --[[ Line: 568 ]]
+		Callback1 = Schedule(math.max(0, Largest - NowMsResult), function()
 			-- upvalues: Callback1 (upval), Signal (upval), Largest (copy), Signal2 (upval)
 			Callback1 = nil
 			
@@ -444,7 +444,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		end)
 	end
 	
-	local _ = function(): boolean --[[ Line: 576 | Named "isPostCoolingDown" ]]
+	local _ = function(): boolean
 		-- upvalues: Signal (copy), NowMs (copy), Callback1 (ref), Signal2 (copy)
 		local SignalResult = Signal(false)
 		
@@ -463,7 +463,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		return false
 	end
 	
-	local function markFeedUnavailable(FeedItemId, RateLimited) --[[ Line: 588 ]]
+	local function markFeedUnavailable(FeedItemId, RateLimited)
 		-- upvalues: v1 (ref), CommentsStore (copy), CollectionStore (copy), LoadStatus (upval)
 		local v3 = v1
 		
@@ -477,14 +477,14 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		CollectionStore.failLoad(FeedItemId, if CollectionStore.getState(FeedItemId)(false).initialLoadStatus == LoadStatus.Success then "more" else "initial", RateLimited)
 	end
 	
-	local _ = function(FeedItemId) --[[ Line: 604 | Named "getOpenAnalyticsSession" ]]
+	local _ = function(FeedItemId)
 		-- upvalues: v1 (ref), p1 (copy)
 		local v3 = v1
 		
 		return if p1.getAnalyticsSession == nil or v3 == nil or v3.feedItemId ~= FeedItemId then nil else p1.getAnalyticsSession(FeedItemId, v3.sessionId)
 	end
 	
-	local _ = function(p2, p3, Status, FailureReason) --[[ Line: 612 | Named "logReactionRequest" ]]
+	local _ = function(p2, p3, Status, FailureReason)
 		local AnalyticsSession = p2.analyticsSession
 		
 		if AnalyticsSession == nil then return end
@@ -499,7 +499,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		AnalyticsSession.logRealtimeEvent("MomentsCommentReaction", config)
 	end
 	
-	local function commitProjectedReaction(p2) --[[ Line: 632 ]]
+	local function commitProjectedReaction(p2)
 		-- upvalues: ReactionStore (copy), CommentsStore (copy), SignalsExperimentalModule (upval)
 		local Intent = ReactionStore.getIntent(p2.commentId, false)
 		
@@ -519,7 +519,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 			local Copy = table.clone(DataResult)
 			Copy.reactions = Reactions
 			local ConfirmAndRebaseResult = false
-			SignalsExperimentalModule.batch(function() --[[ Line: 649 ]]
+			SignalsExperimentalModule.batch(function()
 				-- upvalues: CommentsStore (upval), Copy (copy), p2 (copy), ConfirmAndRebaseResult (ref), ReactionStore (upval), Reactions (copy)
 				CommentsStore.upsertComments({ Copy }, p2.ownerGeneration)
 				ConfirmAndRebaseResult = ReactionStore.confirmAndRebase(p2.commentId, p2.generation, Reactions)
@@ -529,7 +529,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		end
 	end
 	
-	local _ = function(p2) --[[ Line: 656 | Named "retainUncertainUntilExpiry" ]]
+	local _ = function(p2)
 		-- upvalues: t (copy), ReactionStore (copy), t1 (copy), Schedule (copy), FeedItemIds (copy)
 		t[p2.commentId] = nil
 		p2.cancelRetry = nil
@@ -542,7 +542,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		if Entry ~= nil then
 			Entry()
 		end
-		t1[CommentId] = Schedule(10000, function() --[[ Line: 457 ]]
+		t1[CommentId] = Schedule(10000, function()
 			-- upvalues: t1 (upval), CommentId (copy), ReactionStore (upval), Generation (copy), FeedItemIds (upval)
 			t1[CommentId] = nil
 			
@@ -552,7 +552,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		end)
 	end
 	
-	local function rollbackReaction(p2, p3) --[[ Line: 663 ]]
+	local function rollbackReaction(p2, p3)
 		-- upvalues: t1 (copy), ReactionStore (copy), FeedItemIds (copy), Schedule (copy)
 		local CommentId = p2.commentId
 		local Entry: () -> () = t1[CommentId]
@@ -578,7 +578,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		if Entry1 ~= nil then
 			Entry1()
 		end
-		t1[CommentId1] = Schedule(10000, function() --[[ Line: 457 ]]
+		t1[CommentId1] = Schedule(10000, function()
 			-- upvalues: t1 (upval), CommentId1 (copy), ReactionStore (upval), Generation (copy), FeedItemIds (upval)
 			t1[CommentId1] = nil
 			
@@ -588,7 +588,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		end)
 	end
 	
-	local function applyTerminalFailure(p2, p3, CommentsUnavailable) --[[ Line: 677 ]]
+	local function applyTerminalFailure(p2, p3, CommentsUnavailable)
 		-- upvalues: clearReactionsForFeed (copy), markFeedUnavailable (copy), config (upval), clearReactionState (copy), ReactionStore (copy), config2 (upval), cancelReactionRequest (copy), t1 (copy), FeedItemIds (copy), rollbackReaction (copy)
 		if CommentsUnavailable == "MomentUnavailable" then
 			clearReactionsForFeed(p2.feedItemId, CommentsUnavailable)
@@ -633,7 +633,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 	
 	local _ = nil
 	
-	local function v103(p2) --[[ Line: 695 ]]
+	local function v103(p2)
 		-- upvalues: Flag (ref), t (copy), CommentsStore (copy), ReactionStore (copy), rollbackReaction (copy), NowMs (copy), Schedule (copy), v103 (ref), t1 (copy), FeedItemIds (copy), ReadRetryAfter (copy), PutReaction (copy), DeleteReaction (copy), p1 (copy), FFlagMomentsCommentActionsRealtimeModule (upval), observeRequest (upval), commitProjectedReaction (copy), ReadStatusCode (copy), MomentsCommentsModule (upval), GetCommentsFailureReasonModule (upval), setReactionCooldown (copy), list (upval), applyTerminalFailure (copy)
 		if Flag or t[p2.commentId] ~= p2 or CommentsStore.getOwnerGeneration(false) ~= p2.ownerGeneration or ReactionStore.getIntent(p2.commentId, false) == nil then return end
 		if not p2.syncIsUncertain and p2.desiredEmoteId == p2.syncedEmoteId then
@@ -650,7 +650,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 			local CooldownUntilMsDelta = CooldownUntilMs - NowMsResult
 			
 			if NowMsResult - p2.startedAtMs + CooldownUntilMsDelta <= 2000 then
-				p2.cancelRetry = Schedule(CooldownUntilMsDelta, function() --[[ Line: 717 ]]
+				p2.cancelRetry = Schedule(CooldownUntilMsDelta, function()
 					-- upvalues: p2 (copy), v103 (upval)
 					p2.cancelRetry = nil
 					v103(p2)
@@ -669,7 +669,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 			if Entry ~= nil then
 				Entry()
 			end
-			t1[CommentId] = Schedule(10000, function() --[[ Line: 457 ]]
+			t1[CommentId] = Schedule(10000, function()
 				-- upvalues: t1 (upval), CommentId (copy), ReactionStore (upval), Generation (copy), FeedItemIds (upval)
 				t1[CommentId] = nil
 				
@@ -700,7 +700,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 				if Entry ~= nil then
 					Entry()
 				end
-				t1[CommentId1] = Schedule(10000, function() --[[ Line: 457 ]]
+				t1[CommentId1] = Schedule(10000, function()
 					-- upvalues: t1 (upval), CommentId1 (copy), ReactionStore (upval), Generation1 (copy), FeedItemIds (upval)
 					t1[CommentId1] = nil
 					
@@ -726,7 +726,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 				local v3 = nil
 				local v4 = (if Verb == "PUT" then PutReaction else DeleteReaction)(p2.feedItemId, p2.commentId, p2.emoteId, p1.network, {
 					[429] = {
-						function(p3) --[[ Line: 752 ]]
+						function(p3)
 							-- upvalues: StatusCode (ref), v3 (ref), ReadRetryAfter (upval)
 							StatusCode = p3.statusCode
 							v3 = ReadRetryAfter(p3)
@@ -744,7 +744,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 						})
 					end
 				end
-				p2.cancelRequest = observeRequest(v4, function(p3) --[[ Line: 763 ]]
+				p2.cancelRequest = observeRequest(v4, function(p3)
 					-- upvalues: Flag (upval), t (upval), p2 (copy), CommentsStore (upval), FFlagMomentsCommentActionsRealtimeModule (upval), Verb (copy), DesiredEmoteId (copy), Generation2 (copy), commitProjectedReaction (upval), t1 (upval), Schedule (upval), ReactionStore (upval), FeedItemIds (upval), v103 (upval), ReadStatusCode (upval), StatusCode (ref), MomentsCommentsModule (upval), GetCommentsFailureReasonModule (upval), rollbackReaction (upval), setReactionCooldown (upval), v3 (ref), list (upval), NowMs (upval), applyTerminalFailure (upval)
 					if Flag or t[p2.commentId] ~= p2 or CommentsStore.getOwnerGeneration(false) ~= p2.ownerGeneration then return end
 					p2.cancelRequest = nil
@@ -774,7 +774,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 								if Entry ~= nil then
 									Entry()
 								end
-								t1[CommentId1] = Schedule(10000, function() --[[ Line: 457 ]]
+								t1[CommentId1] = Schedule(10000, function()
 									-- upvalues: t1 (upval), CommentId1 (copy), ReactionStore (upval), Generation2 (copy), FeedItemIds (upval)
 									t1[CommentId1] = nil
 									
@@ -797,7 +797,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 									if Entry ~= nil then
 										Entry()
 									end
-									t1[CommentId] = Schedule(10000, function() --[[ Line: 457 ]]
+									t1[CommentId] = Schedule(10000, function()
 										-- upvalues: t1 (upval), CommentId (copy), ReactionStore (upval), Generation (copy), FeedItemIds (upval)
 										t1[CommentId] = nil
 										
@@ -854,7 +854,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 							local Entry = list[p2.attempt]
 							
 							if p2.attempt <= 2 and Entry ~= nil and NowMs() - p2.startedAtMs + Entry <= 2000 then
-								p2.cancelRetry = Schedule(Entry, function() --[[ Line: 825 ]]
+								p2.cancelRetry = Schedule(Entry, function()
 									-- upvalues: p2 (upval), t (upval), CommentsStore (upval), v103 (upval)
 									p2.cancelRetry = nil
 									
@@ -876,7 +876,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 							if Entry1 ~= nil then
 								Entry1()
 							end
-							t1[CommentId2] = Schedule(10000, function() --[[ Line: 457 ]]
+							t1[CommentId2] = Schedule(10000, function()
 								-- upvalues: t1 (upval), CommentId2 (copy), ReactionStore (upval), Generation1 (copy), FeedItemIds (upval)
 								t1[CommentId2] = nil
 								
@@ -895,7 +895,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		end
 	end
 	
-	local function scheduleReactionCommit(p2) --[[ Line: 845 ]]
+	local function scheduleReactionCommit(p2)
 		-- upvalues: ReactionDebounceMs (copy), v103 (ref), Schedule (copy), Flag (ref), t (copy)
 		if p2.cancelDebounce ~= nil then
 			p2.cancelDebounce()
@@ -904,7 +904,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		p2.readyToCommit = false
 		
 		if ReactionDebounceMs > 0 then
-			p2.cancelDebounce = Schedule(ReactionDebounceMs, function() --[[ Line: 858 ]]
+			p2.cancelDebounce = Schedule(ReactionDebounceMs, function()
 				-- upvalues: p2 (copy), Flag (upval), t (upval), v103 (upval)
 				p2.cancelDebounce = nil
 				
@@ -925,7 +925,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		end
 	end
 	
-	local function beginReactionMutation(FeedItemId, Key, EmoteId, p2, DesiredEmoteId, Verb, SyncedEmoteId): boolean --[[ Line: 870 ]]
+	local function beginReactionMutation(FeedItemId, Key, EmoteId, p2, DesiredEmoteId, Verb, SyncedEmoteId): boolean
 		-- upvalues: Flag (ref), ReactionStore (copy), NowMs (copy), t1 (copy), t (copy), CommentsStore (copy), FFlagMomentsCommentActionsRealtimeModule (upval), v1 (ref), p1 (copy), FeedItemIds (copy), scheduleReactionCommit (copy)
 		if Flag or ReactionStore.getRestriction(FeedItemId, Key, false) ~= nil then
 			return false
@@ -989,7 +989,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		return true
 	end
 	
-	local function ensureReactionPresent(FeedItemId, Key, DesiredEmoteId, p2) --[[ Line: 931 ]]
+	local function ensureReactionPresent(FeedItemId, Key, DesiredEmoteId, p2)
 		-- upvalues: ReactionStore (copy), beginReactionMutation (copy)
 		if p2 == nil then
 			return false
@@ -1003,7 +1003,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		end
 	end
 	
-	local function ensureReactionAbsent(FeedItemId, Key, EmoteId, p2) --[[ Line: 947 ]]
+	local function ensureReactionAbsent(FeedItemId, Key, EmoteId, p2)
 		-- upvalues: ReactionStore (copy), beginReactionMutation (copy)
 		if p2 == nil then
 			return false
@@ -1019,7 +1019,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 	
 	local Callback2 = nil
 	
-	local function failInvalidContinuation(FeedItemId) --[[ Line: 965 ]]
+	local function failInvalidContinuation(FeedItemId)
 		-- upvalues: CollectionStore (copy)
 		local v3 = CollectionStore.getState(FeedItemId)(false)
 		
@@ -1032,7 +1032,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		end
 	end
 	
-	local function continueAfterMerge(FeedItemId, SessionId, p2, ShouldContinuePaging) --[[ Line: 974 ]]
+	local function continueAfterMerge(FeedItemId, SessionId, p2, ShouldContinuePaging)
 		-- upvalues: v1 (ref), Flag (ref), CommentsStore (copy), failInvalidContinuation (copy), Callback2 (ref)
 		if not p2.hasMore then return end
 		local v3 = v1
@@ -1051,7 +1051,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		end
 	end
 	
-	local function commentsForUpsert(Comments, Generation) --[[ Line: 1000 ]]
+	local function commentsForUpsert(Comments, Generation)
 		-- upvalues: ReactionStore (copy), CommentsStore (copy)
 		local Buffer = table.create(#Comments)
 		
@@ -1085,7 +1085,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		return Buffer
 	end
 	
-	Callback2 = function(FeedItemId, SessionId, p2, NextCursor): boolean --[[ Line: 1020 ]]
+	Callback2 = function(FeedItemId, SessionId, p2, NextCursor): boolean
 		-- upvalues: v1 (ref), Flag (ref), CommentsStore (copy), FFlagMomentsComments (upval), ReactionStore (copy), failInvalidContinuation (copy), CollectionStore (copy), p1 (copy), EventNames (upval), FetchPage (copy), observeRequest (upval), FFlagMomentsCommentsCountAnalyticsModule (upval), GetCommentsFailureReasonModule (upval), MomentsCommentsModule (upval), ReadStatusCode (copy), commentsForUpsert (copy), cancelReactionRequest (copy), t1 (copy), FeedItemIds (copy), continueAfterMerge (copy), clearReactionsForFeed (copy), Callback2 (ref)
 		local v4 = v1
 		local v5 = if Flag or v4 == nil or v4.feedItemId ~= FeedItemId or v4.sessionId ~= SessionId or v4.ownerGeneration ~= CommentsStore.getOwnerGeneration(false) or v4.refCount == 0 then nil else v4
@@ -1119,13 +1119,13 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 				AnalyticsSession.logEvent(EventNames.MomentCommentsListLoadAttempted, { loadType = Pagination })
 			end
 		end
-		local ActivePageRequest = { cancel = function() --[[ Line: 1056 ]] end }
+		local ActivePageRequest = { cancel = function() end }
 		v5.activePageRequest = ActivePageRequest
 		ActivePageRequest.cancel = observeRequest(FetchPage({
 			sort = "newest",
 			feedItemId = FeedItemId,
 			cursor = NextCursor
-		}, p1.network), function(p3) --[[ Line: 1060 ]]
+		}, p1.network), function(p3)
 			-- upvalues: v5 (copy), FeedItemId (copy), SessionId (copy), OwnerGeneration (copy), Flag (upval), v1 (upval), CommentsStore (upval), ActivePageRequest (copy), FFlagMomentsComments (upval), AnalyticsSession (ref), Pagination (copy), FFlagMomentsCommentsCountAnalyticsModule (upval), EventNames (upval), GetCommentsFailureReasonModule (upval), MomentsCommentsModule (upval), ReadStatusCode (upval), commentsForUpsert (upval), Generation (copy), ReactionStore (upval), cancelReactionRequest (upval), t1 (upval), FeedItemIds (upval), p2 (copy), CollectionStore (upval), continueAfterMerge (upval), clearReactionsForFeed (upval), Callback2 (upval), NextCursor (copy)
 			if Flag or (v1 ~= v5 or (v5.feedItemId ~= FeedItemId or (v5.sessionId ~= SessionId or (v5.ownerGeneration ~= OwnerGeneration or CommentsStore.getOwnerGeneration(false) ~= OwnerGeneration)))) or v5.activePageRequest ~= ActivePageRequest then return end
 			v5.activePageRequest = nil
@@ -1205,7 +1205,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		return false
 	end
 	
-	local function revokeViewerWrite(FeedItemId, OwnerGeneration) --[[ Line: 1145 ]]
+	local function revokeViewerWrite(FeedItemId, OwnerGeneration)
 		-- upvalues: CommentsStore (copy), markFeedUnavailable (copy)
 		local DataResult = CommentsStore.getCachedMomentComments(FeedItemId).data(false)
 		
@@ -1220,7 +1220,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		end
 	end
 	
-	local function incrementMomentCommentCount(FeedItemId, OwnerGeneration) --[[ Line: 1156 ]]
+	local function incrementMomentCommentCount(FeedItemId, OwnerGeneration)
 		-- upvalues: CommentsStore (copy)
 		local DataResult = CommentsStore.getCachedMomentComments(FeedItemId).data(false)
 		
@@ -1233,7 +1233,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		end
 	end
 	
-	local function startPendingPost(p3, FeedItemId, SessionId, PendingSubmission, p4): boolean --[[ Line: 1167 ]]
+	local function startPendingPost(p3, FeedItemId, SessionId, PendingSubmission, p4): boolean
 		-- upvalues: v2 (ref), CommentsStore (copy), FFlagMomentsComments (upval), ReadRetryAfter (copy), AnalyticsSession (ref), EventNames (upval), PostComment (copy), p1 (copy), observeRequest (upval), Flag (ref), v1 (ref), CollectionStore (copy), incrementMomentCommentCount (copy), CommentPostedCallback (ref), ReadStatusCode (copy), MomentsCommentsModule (upval), setPostCooldown (copy), GetCommentsFailureReasonModule (upval), config1 (upval), markFeedUnavailable (copy), revokeViewerWrite (copy)
 		if v2 ~= nil then
 			return false
@@ -1243,7 +1243,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		local v6 = nil
 		local Config = if FFlagMomentsComments then {
 			[429] = {
-				function(p5) --[[ Line: 1188 ]]
+				function(p5)
 					-- upvalues: StatusCode (ref), v6 (ref), ReadRetryAfter (upval)
 					StatusCode = p5.statusCode
 					v6 = ReadRetryAfter(p5)
@@ -1265,10 +1265,10 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 			feedItemId = FeedItemId,
 			sessionId = SessionId,
 			ownerGeneration = OwnerGeneration,
-			cancel = function() --[[ Line: 1209 ]] end
+			cancel = function() end
 		}
 		v2 = config
-		config.cancel = observeRequest(PostCommentResult, function(p5) --[[ Line: 1212 ]]
+		config.cancel = observeRequest(PostCommentResult, function(p5)
 			-- upvalues: v2 (upval), config (copy), FeedItemId (copy), SessionId (copy), OwnerGeneration (copy), p3 (copy), Flag (upval), v1 (upval), CommentsStore (upval), CollectionStore (upval), incrementMomentCommentCount (upval), FFlagMomentsComments (upval), AnalyticsSession1 (copy), EventNames (upval), CommentPostedCallback (upval), ReadStatusCode (upval), StatusCode (ref), MomentsCommentsModule (upval), p4 (copy), setPostCooldown (upval), v6 (ref), GetCommentsFailureReasonModule (upval), config1 (upval), markFeedUnavailable (upval), revokeViewerWrite (upval)
 			if v2 ~= config or config.feedItemId ~= FeedItemId or config.sessionId ~= SessionId or config.ownerGeneration ~= OwnerGeneration or (Flag or (v1 ~= p3 or (p3.feedItemId ~= FeedItemId or (p3.sessionId ~= SessionId or (p3.ownerGeneration ~= OwnerGeneration or CommentsStore.getOwnerGeneration(false) ~= OwnerGeneration))))) then return end
 			v2 = nil
@@ -1355,7 +1355,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		return false
 	end
 	
-	local function decrementMomentCommentCount(p3, p4) --[[ Line: 1374 ]]
+	local function decrementMomentCommentCount(p3, p4)
 		-- upvalues: CommentsStore (copy)
 		local DataResult = CommentsStore.getCachedMomentComments(p3).data(false)
 		
@@ -1368,7 +1368,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		end
 	end
 	
-	local function removeDeletedComment(FeedItemId, Value, OwnerGeneration) --[[ Line: 1389 ]]
+	local function removeDeletedComment(FeedItemId, Value, OwnerGeneration)
 		-- upvalues: SessionFilters (copy), CollectionStore (copy), FFlagMomentsComments (upval), cancelReactionRequest (copy), t1 (copy), FeedItemIds (copy), ReactionStore (copy), decrementMomentCommentCount (copy)
 		if SessionFilters ~= nil then
 			SessionFilters.hideCommentForSession(Value)
@@ -1392,7 +1392,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		decrementMomentCommentCount(FeedItemId, OwnerGeneration)
 	end
 	
-	local _ = function() --[[ Line: 1480 | Named "cancelActiveDeletes" ]]
+	local _ = function()
 		-- upvalues: T (ref)
 		local T1 = T
 		T = {}
@@ -1402,7 +1402,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		end
 	end
 	
-	local function cancelActivePost(IsOwnerGenerationMatch) --[[ Line: 1488 ]]
+	local function cancelActivePost(IsOwnerGenerationMatch)
 		-- upvalues: v2 (ref), FFlagMomentsComments (upval), CommentsStore (copy), EventNames (upval), CollectionStore (copy)
 		local v6 = v2
 		v2 = nil
@@ -1422,7 +1422,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		end
 	end
 	
-	local _ = function(p3) --[[ Line: 1513 | Named "retireActiveSession" ]]
+	local _ = function(p3)
 		-- upvalues: FFlagMomentsComments (upval), CommentPostedCallback (ref), v1 (ref), cancelActivePost (copy), AnalyticsSession (ref)
 		if FFlagMomentsComments and not p3 then
 			CommentPostedCallback = nil
@@ -1445,7 +1445,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		end
 	end
 	
-	local function ensureInitialLoad(FeedItemId, SessionId) --[[ Line: 1584 ]]
+	local function ensureInitialLoad(FeedItemId, SessionId)
 		-- upvalues: v1 (ref), Flag (ref), CommentsStore (copy), CollectionStore (copy), LoadStatus (upval), Callback2 (ref)
 		local v6 = v1
 		
@@ -1458,14 +1458,14 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		end
 	end
 	
-	local function loadMore(FeedItemId, SessionId) --[[ Line: 1596 ]]
+	local function loadMore(FeedItemId, SessionId)
 		-- upvalues: CollectionStore (copy), LoadStatus (upval), Callback2 (ref)
 		local v6 = CollectionStore.getState(FeedItemId)(false)
 		
 		return v6.hasMore == true and v6.initialLoadStatus ~= LoadStatus.Loading and v6.loadMoreStatus ~= LoadStatus.Loading and v6.loadMoreStatus ~= LoadStatus.Failed and Callback2(FeedItemId, SessionId, "more", v6.nextCursor)
 	end
 	
-	local function retryInitial(FeedItemId, SessionId) --[[ Line: 1609 ]]
+	local function retryInitial(FeedItemId, SessionId)
 		-- upvalues: v1 (ref), Flag (ref), CommentsStore (copy), FFlagMomentsComments (upval), CollectionStore (copy), LoadStatus (upval), ensureInitialLoad (copy)
 		local v6 = v1
 		local v7 = if Flag or v6 == nil or v6.feedItemId ~= FeedItemId or v6.sessionId ~= SessionId or v6.ownerGeneration ~= CommentsStore.getOwnerGeneration(false) or v6.refCount == 0 then nil else v6
@@ -1488,14 +1488,14 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		return ensureInitialLoad(FeedItemId, SessionId)
 	end
 	
-	local function resolveCommentAuthor(p3) --[[ Line: 1644 ]]
+	local function resolveCommentAuthor(p3)
 		-- upvalues: CommentsStore (copy)
 		local DataResult = CommentsStore.getCachedComment(p3).data(false)
 		
 		return if DataResult == nil or DataResult.author == nil then nil else DataResult.author.userId
 	end
 	
-	local _ = function(List, UserId): boolean --[[ Line: 1652 | Named "containsCommentByAuthor" ]]
+	local _ = function(List, UserId): boolean
 		-- upvalues: CommentsStore (copy)
 		for _, value in List do
 			local DataResult = CommentsStore.getCachedComment(value).data(false)
@@ -1507,7 +1507,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		return false
 	end
 	
-	local Effect = SignalsModule.createEffect(function(p3) --[[ Line: 1702 ]]
+	local Effect = SignalsModule.createEffect(function(p3)
 		-- upvalues: CommentsStore (copy), OwnerGeneration (ref), FFlagMomentsComments (upval), CommentPostedCallback (ref), v1 (ref), v2 (ref), EventNames (upval), AnalyticsSession (ref), T (ref), clearReactionState (copy), Callback1 (ref), Signal2 (copy), CollectionStore (copy)
 		local OwnerGeneration1 = CommentsStore.getOwnerGeneration(p3)
 		
@@ -1560,10 +1560,10 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 	end)
 	
 	return {
-		acquireSession = function(FeedItemId, SessionId) --[[ Line: 1528 ]]
+		acquireSession = function(FeedItemId, SessionId)
 			-- upvalues: Flag (ref), FFlagMomentsComments (upval), CatalogStore (copy), CommentsStore (copy), v1 (ref), CollectionStore (copy), CommentPostedCallback (ref), cancelActivePost (copy), AnalyticsSession (ref)
 			if Flag then
-				return function() --[[ Line: 1530 ]] end
+				return function() end
 			end
 			if FFlagMomentsComments and CatalogStore ~= nil and CatalogStore.getAndFetchEmojiSets ~= nil then
 				CatalogStore.getAndFetchEmojiSets()
@@ -1611,7 +1611,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 			v7.refCount += 1
 			local Flag1 = false
 			
-			return function() --[[ Line: 1568 ]]
+			return function()
 				-- upvalues: Flag1 (ref), v1 (upval), v7 (copy)
 				if Flag1 then return end
 				Flag1 = true
@@ -1633,7 +1633,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		ensureInitialLoad = ensureInitialLoad,
 		loadMore = loadMore,
 		retryInitial = retryInitial,
-		retryLoadMore = function(FeedItemId, SessionId) --[[ Line: 1625 ]]
+		retryLoadMore = function(FeedItemId, SessionId)
 			-- upvalues: v1 (ref), Flag (ref), CommentsStore (copy), CollectionStore (copy), LoadStatus (upval), retryInitial (copy), Callback2 (ref)
 			local v7 = v1
 			local v8 = if Flag or v7 == nil or v7.feedItemId ~= FeedItemId or v7.sessionId ~= SessionId or v7.ownerGeneration ~= CommentsStore.getOwnerGeneration(false) or v7.refCount == 0 then nil else v7
@@ -1646,7 +1646,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 				return v9.hasMore == true and v9.initialLoadStatus ~= LoadStatus.Loading and v9.loadMoreStatus ~= LoadStatus.Loading and (if v9.nextCursor == nil or v8.requestedCursors[v9.nextCursor or "<initial>"] == true then retryInitial(FeedItemId, SessionId) else Callback2(FeedItemId, SessionId, "more", v9.nextCursor))
 			end
 		end,
-		submitComment = function(FeedItemId, SessionId, p4) --[[ Line: 1314 ]]
+		submitComment = function(FeedItemId, SessionId, p4)
 			-- upvalues: v1 (ref), Flag (ref), CommentsStore (copy), v2 (ref), CollectionStore (copy), FFlagMomentsComments (upval), Signal (copy), NowMs (copy), Callback1 (ref), Signal2 (copy), p1 (copy), AnalyticsSession (ref), CommentPostedCallback (ref), startPendingPost (copy)
 			local v7 = v1
 			local v8 = if Flag or v7 == nil or v7.feedItemId ~= FeedItemId or v7.sessionId ~= SessionId or v7.ownerGeneration ~= CommentsStore.getOwnerGeneration(false) or v7.refCount == 0 then nil else v7
@@ -1688,7 +1688,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 			end
 			return (startPendingPost(v8, FeedItemId, SessionId, PendingSubmission))
 		end,
-		retryPendingSubmission = function(FeedItemId, SessionId) --[[ Line: 1338 ]]
+		retryPendingSubmission = function(FeedItemId, SessionId)
 			-- upvalues: v1 (ref), Flag (ref), CommentsStore (copy), v2 (ref), CollectionStore (copy), FFlagMomentsComments (upval), Signal (copy), NowMs (copy), Callback1 (ref), Signal2 (copy), startPendingPost (copy)
 			local v7 = v1
 			local v8 = if Flag or v7 == nil or v7.feedItemId ~= FeedItemId or v7.sessionId ~= SessionId or v7.ownerGeneration ~= CommentsStore.getOwnerGeneration(false) or v7.refCount == 0 then nil else v7
@@ -1726,7 +1726,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 			
 			return PendingSubmission1 ~= nil and PendingSubmission1.clientRequestId == PendingSubmission.clientRequestId and startPendingPost(v8, FeedItemId, SessionId, PendingSubmission1, true)
 		end,
-		editPendingSubmission = function(FeedItemId, SessionId): boolean --[[ Line: 1361 ]]
+		editPendingSubmission = function(FeedItemId, SessionId): boolean
 			-- upvalues: v1 (ref), Flag (ref), CommentsStore (copy), v2 (ref), CollectionStore (copy)
 			local v7 = v1
 			
@@ -1747,7 +1747,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 		ensureReactionPresent = if FFlagMomentsComments then ensureReactionPresent else rejectReactionMutation,
 		ensureReactionAbsent = if FFlagMomentsComments then ensureReactionAbsent else rejectReactionMutation,
 		clearReactionState = if FFlagMomentsComments then clearReactionState else noOp,
-		deleteComment = function(FeedItemId, Key, Callback1, Callback2): boolean --[[ Line: 1411 ]]
+		deleteComment = function(FeedItemId, Key, Callback1, Callback2): boolean
 			-- upvalues: Flag (ref), T (ref), CommentsStore (copy), FFlagMomentsComments (upval), p1 (copy), v1 (ref), FFlagMomentsCommentActionsRealtimeModule (upval), DeleteComment (copy), observeRequest (upval), MomentsCommentsModule (upval), ReadStatusCode (copy), GetCommentsFailureReasonModule (upval), removeDeletedComment (copy)
 			if Flag or T[Key] ~= nil then
 				return false
@@ -1773,9 +1773,9 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 			if FFlagMomentsCommentActionsRealtimeModule and AnalyticsSession ~= nil then
 				AnalyticsSession.logRealtimeEvent("MomentsCommentDelete", { status = "attempted" })
 			end
-			local config = { cancel = function() --[[ Line: 1438 ]] end }
+			local config = { cancel = function() end }
 			T[Key] = config
-			config.cancel = observeRequest(DeleteCommentResult, function(p4) --[[ Line: 1441 ]]
+			config.cancel = observeRequest(DeleteCommentResult, function(p4)
 				-- upvalues: T (upval), Key (copy), config (copy), Flag (upval), CommentsStore (upval), OwnerGeneration (copy), MomentsCommentsModule (upval), ReadStatusCode (upval), FFlagMomentsCommentActionsRealtimeModule (upval), AnalyticsSession (ref), GetCommentsFailureReasonModule (upval), removeDeletedComment (upval), FeedItemId (copy), FFlagMomentsComments (upval), Callback2 (copy), Callback1 (copy), Callback (ref)
 				if T[Key] ~= config then return end
 				T[Key] = nil
@@ -1813,7 +1813,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 			
 			return true
 		end,
-		hideCommentsByAuthor = function(p4, UserId) --[[ Line: 1661 ]]
+		hideCommentsByAuthor = function(p4, UserId)
 			-- upvalues: Flag (ref), SessionFilters (copy), CollectionStore (copy), CommentsStore (copy), resolveCommentAuthor (copy), v1 (ref), loadMore (copy)
 			if Flag then return end
 			if SessionFilters ~= nil then
@@ -1850,7 +1850,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 				loadMore(p4, v8.sessionId)
 			end
 		end,
-		restoreCommentsByAuthor = function(FeedItemId, p5) --[[ Line: 1685 ]]
+		restoreCommentsByAuthor = function(FeedItemId, p5)
 			-- upvalues: Flag (ref), SessionFilters (copy), v1 (ref), retryInitial (copy)
 			if Flag then return end
 			if SessionFilters ~= nil then
@@ -1863,7 +1863,7 @@ return function(p1) --[[ Line: 377 | Named "createCommentsListCoordinator" ]]
 				retryInitial(FeedItemId, v9.sessionId)
 			end
 		end,
-		dispose = function() --[[ Line: 1719 ]]
+		dispose = function()
 			-- upvalues: Flag (ref), Effect (copy), FFlagMomentsComments (upval), CommentPostedCallback (ref), v1 (ref), v2 (ref), CommentsStore (copy), EventNames (upval), AnalyticsSession (ref), T (ref), clearReactionState (copy), Callback1 (ref), Signal2 (copy), CollectionStore (copy)
 			if Flag then return end
 			Flag = true

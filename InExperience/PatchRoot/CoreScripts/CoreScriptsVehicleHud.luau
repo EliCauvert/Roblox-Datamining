@@ -12,7 +12,7 @@ local RobloxGui = game:GetService("CoreGui").RobloxGui
 local IsEnabled = require(RobloxGui.Modules.TenFootInterface):IsEnabled()
 local v2: number = if IsEnabled then 100 else 70
 
-local function _(Name, Size, Position, Image, Parent) --[[ Line: 34 | Named "createImageLabel" ]]
+local function _(Name, Size, Position, Image, Parent)
 	local Image1 = Instance.new("ImageLabel")
 	Image1.Name = Name
 	Image1.Size = Size
@@ -24,7 +24,7 @@ local function _(Name, Size, Position, Image, Parent) --[[ Line: 34 | Named "cre
 	return Image1
 end
 
-local function createTextLabel(Name, TextXAlignment, Text, Frame) --[[ Line: 46 ]]
+local function createTextLabel(Name, TextXAlignment, Text, Frame)
 	-- upvalues: IsEnabled (copy)
 	local Label = Instance.new("TextLabel")
 	Label.Name = Name
@@ -84,7 +84,7 @@ SpeedBarImage.Parent = SpeedBarClippingFrame
 createTextLabel("SpeedLabel", Enum.TextXAlignment.Left, "Speed", VehicleHudFrame)
 local SpeedText = createTextLabel("SpeedText", Enum.TextXAlignment.Right, "0", VehicleHudFrame)
 
-local _ = function() --[[ Line: 89 | Named "getHumanoid" ]]
+local _ = function()
 	-- upvalues: LocalPlayer (copy)
 	local Character = LocalPlayer and LocalPlayer.Character
 	
@@ -97,7 +97,7 @@ local _ = function() --[[ Line: 89 | Named "getHumanoid" ]]
 	end
 end
 
-local function onHeartbeat() --[[ Line: 100 ]]
+local function onHeartbeat()
 	-- upvalues: v1 (ref), SpeedText (copy), SpeedBG (copy), SpeedBarClippingFrame (copy), IsEnabled (copy)
 	if v1 then
 		local Magnitude: number = v1.Velocity.magnitude
@@ -106,14 +106,14 @@ local function onHeartbeat() --[[ Line: 100 ]]
 	end
 end
 
-local function onVehicleSeatChanged(p1) --[[ Line: 110 ]]
+local function onVehicleSeatChanged(p1)
 	-- upvalues: VehicleHudFrame (copy)
 	if p1 == "HeadsUpDisplay" then
 		VehicleHudFrame.Visible = not VehicleHudFrame.Visible
 	end
 end
 
-local function onSeated(Active, SeatPart) --[[ Line: 116 ]]
+local function onSeated(Active, SeatPart)
 	-- upvalues: v1 (ref), VehicleHudFrame (copy), HeartbeatConnection (ref), RunService (copy), onHeartbeat (copy), ChangedConnection (ref), onVehicleSeatChanged (copy)
 	if not Active then
 		if v1 then
@@ -142,7 +142,7 @@ end
 local SeatedConnection = nil
 local ChildAddedConnection = nil
 
-local _ = function() --[[ Line: 143 | Named "disconnectSeatedConnection" ]]
+local _ = function()
 	-- upvalues: SeatedConnection (ref)
 	if SeatedConnection then
 		SeatedConnection:Disconnect()
@@ -150,7 +150,7 @@ local _ = function() --[[ Line: 143 | Named "disconnectSeatedConnection" ]]
 	end
 end
 
-local _ = function() --[[ Line: 150 | Named "disconnectChildAddedConnection" ]]
+local _ = function()
 	-- upvalues: ChildAddedConnection (ref)
 	if ChildAddedConnection then
 		ChildAddedConnection:Disconnect()
@@ -158,7 +158,7 @@ local _ = function() --[[ Line: 150 | Named "disconnectChildAddedConnection" ]]
 	end
 end
 
-local function characterAdded(Character) --[[ Line: 157 ]]
+local function characterAdded(Character)
 	-- upvalues: SeatedConnection (ref), ChildAddedConnection (ref), onSeated (copy)
 	if SeatedConnection then
 		SeatedConnection:Disconnect()
@@ -175,7 +175,7 @@ local function characterAdded(Character) --[[ Line: 157 ]]
 		
 		return
 	else
-		ChildAddedConnection = Character.ChildAdded:Connect(function(Child: Humanoid) --[[ Line: 167 ]]
+		ChildAddedConnection = Character.ChildAdded:Connect(function(Child: Humanoid)
 			-- upvalues: SeatedConnection (upval), ChildAddedConnection (upval), onSeated (upval)
 			if Child:IsA("Humanoid") then
 				if SeatedConnection then
@@ -195,7 +195,7 @@ end
 if LocalPlayer.Character then
 	characterAdded(LocalPlayer.Character)
 end
-LocalPlayer.CharacterAdded:connect(function(Character) --[[ Line: 178 ]]
+LocalPlayer.CharacterAdded:connect(function(Character)
 	-- upvalues: v1 (ref), VehicleHudFrame (copy), HeartbeatConnection (ref), ChangedConnection (ref), characterAdded (copy)
 	if v1 then
 		VehicleHudFrame.Visible = false

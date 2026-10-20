@@ -5,7 +5,7 @@ local SerializeChatTimeoutRangeModule = require(AppChat.Utils.serializeChatTimeo
 local FFlagAppChatReactiveFeatureRestrictions = require(Parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
 
 return (require(Parent.Rodux).createReducer({ userTimeout = {}, byConversationId = {} }, {
-	[require(Parent.AppChatNetworking).rodux.GetChatModerationStatuses.Succeeded.name] = function(JoinResult, p1) --[[ Line: 37 ]]
+	[require(Parent.AppChatNetworking).rodux.GetChatModerationStatuses.Succeeded.name] = function(JoinResult, p1)
 		-- upvalues: SerializeChatTimeoutRangeModule (copy), CryoModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy)
 		local ResponseBody = p1.responseBody
 		local Ids = if p1.postBody then p1.postBody.ids else nil
@@ -41,13 +41,13 @@ return (require(Parent.Rodux).createReducer({ userTimeout = {}, byConversationId
 		end
 		return JoinResult
 	end,
-	[require(AppChat.Conversations.Actions.RemovedConversation).name] = function(p2, p3) --[[ Line: 89 ]]
+	[require(AppChat.Conversations.Actions.RemovedConversation).name] = function(p2, p3)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p2, {
 			byConversationId = CryoModule.Dictionary.join(p2.byConversationId, { [p3.conversationId] = CryoModule.None })
 		})
 	end,
-	[require(AppChat.Conversations.Actions.CurrentConversationTimeoutEnded).name] = function(JoinResult, p2) --[[ Line: 97 ]]
+	[require(AppChat.Conversations.Actions.CurrentConversationTimeoutEnded).name] = function(JoinResult, p2)
 		-- upvalues: FFlagAppChatReactiveFeatureRestrictions (copy), CryoModule (copy)
 		local JoinResult1 = JoinResult
 		local UnixTimestamp = DateTime.now().UnixTimestamp

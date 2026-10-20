@@ -1,4 +1,4 @@
-﻿return function(p1, p2) --[[ Line: 6 | Named "removeFriendFromCache" ]]
+﻿return function(p1, p2)
 	p1.cache:evict({
 		id = p1.cache:identify({
 			__typename = "Friend",

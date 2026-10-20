@@ -9,31 +9,31 @@ local UpdateUserDisplayNameModule = require(EditProfile.Stores.Requests.updateUs
 local ValidateUserDisplayNameModule = require(EditProfile.Stores.Requests.validateUserDisplayName)
 local AnalyticsServiceV2Module = require(EditProfile.Analytics.AnalyticsServiceV2)
 
-return function(p1) --[[ Line: 21 ]]
+return function(p1)
 	-- upvalues: UseLocalUserIdFunction (copy), ReactModule (copy), GetResult (copy), UseSignalStateFunction (copy), AnalyticsServiceV2Module (copy), UpdateUserDisplayNameModule (copy), ValidateUserDisplayNameModule (copy), EditDisplayNameModule (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
-	local UseSignalStateResult = UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 23 ]]
+	local UseSignalStateResult = UseSignalStateFunction((ReactModule.useMemo(function()
 		-- upvalues: GetResult (upval), UseLocalUserIdResult (copy)
 		return GetResult.fetchNamesByUserIds({ (tostring(UseLocalUserIdResult)) })
 	end, { UseLocalUserIdResult })))
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 28 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult (copy)
 		return UseSignalStateResult and UseSignalStateResult.status == "success" and UseSignalStateResult.data and #UseSignalStateResult.data > 0 and UseSignalStateResult.data[1].names.getDisplayName(false) or ""
 	end, { UseSignalStateResult })
 	local UseStateResult, UseStateResult2 = ReactModule.useState(UseMemoResult)
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 36 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(p2)
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 40 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: AnalyticsServiceV2Module (upval)
 		AnalyticsServiceV2Module.sendDisplayNameModalLoaded()
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 44 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UpdateUserDisplayNameModule (upval), UseLocalUserIdResult (copy), UseStateResult (copy), AnalyticsServiceV2Module (upval), UseSignalStateResult (copy)
-		p1.registerSaveHandler(function() --[[ Line: 45 ]]
+		p1.registerSaveHandler(function()
 			-- upvalues: UpdateUserDisplayNameModule (upval), UseLocalUserIdResult (upval), UseStateResult (upval), AnalyticsServiceV2Module (upval), UseSignalStateResult (upval)
-			return UpdateUserDisplayNameModule(tostring(UseLocalUserIdResult), UseStateResult):andThen(function(Result) --[[ Line: 46 ]]
+			return UpdateUserDisplayNameModule(tostring(UseLocalUserIdResult), UseStateResult):andThen(function(Result)
 				-- upvalues: AnalyticsServiceV2Module (upval), UseStateResult (upval), UseSignalStateResult (upval)
 				AnalyticsServiceV2Module.sendDisplayNameSaved(UseStateResult)
 				
@@ -56,7 +56,7 @@ return function(p1) --[[ Line: 21 ]]
 	return ReactModule.createElement(EditDisplayNameModule, {
 		initialDisplayName = UseMemoResult,
 		onDataChange = UseResult,
-		validateDisplayName = function(p2) --[[ Line: 58 ]]
+		validateDisplayName = function(p2)
 			-- upvalues: ValidateUserDisplayNameModule (upval), UseLocalUserIdResult (copy)
 			return ValidateUserDisplayNameModule(tostring(UseLocalUserIdResult), p2)
 		end,

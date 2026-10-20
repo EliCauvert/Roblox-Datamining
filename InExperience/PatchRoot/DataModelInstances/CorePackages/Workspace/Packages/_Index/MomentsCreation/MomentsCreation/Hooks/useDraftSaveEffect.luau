@@ -8,12 +8,12 @@ local FireAnalyticsEventModule = require(MomentsCreation.Analytics.fireAnalytics
 local FFlagMomentsCommentsCreatorControlModule = require(MomentsCreation.Flags.FFlagMomentsCommentsCreatorControl)
 local EventNames = require(Parent.MomentsCommon).Analytics.EventNames
 
-return function(p1) --[[ Line: 24 | Named "useDraftSaveEffect" ]]
+return function(p1)
 	-- upvalues: GetCreationFlowStoreModule (copy), ReactModule (copy), SignalsModule (copy), FFlagMomentsCommentsCreatorControlModule (copy), MomentsDraftStorageModule (copy), FireAnalyticsEventModule (copy), EventNames (copy)
 	local CreationFlowStoreModule = GetCreationFlowStoreModule(false)
-	ReactModule.useEffect(function() --[[ Line: 27 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), SignalsModule (upval), CreationFlowStoreModule (copy), FFlagMomentsCommentsCreatorControlModule (upval), MomentsDraftStorageModule (upval), FireAnalyticsEventModule (upval), EventNames (upval)
-		return if p1 then nil else SignalsModule.createEffect(function(p2) --[[ Line: 32 ]]
+		return if p1 then nil else SignalsModule.createEffect(function(p2)
 			-- upvalues: CreationFlowStoreModule (upval), FFlagMomentsCommentsCreatorControlModule (upval), MomentsDraftStorageModule (upval), FireAnalyticsEventModule (upval), EventNames (upval)
 			local SelectedCapture = CreationFlowStoreModule.getSelectedCapture(p2)
 			local Description = CreationFlowStoreModule.getDescription(p2)

@@ -2,7 +2,7 @@
 local Immutable = require(GameDetailRodux.Parent.AppCommonLib).Immutable
 local AddGameDetailsV2Module = require(GameDetailRodux.GameDetails.AddGameDetailsV2)
 
-return function(p1, p2) --[[ Line: 9 ]]
+return function(p1, p2)
 	-- upvalues: AddGameDetailsV2Module (copy), Immutable (copy)
 	local P0 = p1 or {}
 	

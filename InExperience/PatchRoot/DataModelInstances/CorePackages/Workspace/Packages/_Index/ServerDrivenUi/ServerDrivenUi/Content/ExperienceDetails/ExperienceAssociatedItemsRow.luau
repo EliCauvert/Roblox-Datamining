@@ -13,7 +13,7 @@ local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
 local SduiAssociatedItemsRowModule = require(ServerDrivenUi.Content.SduiAssociatedItemsRow)
 local GetFFlagEdpPlayerFeedbackEnabledFunction = require(Parent.SharedFlags).GetFFlagEdpPlayerFeedbackEnabled
 
-return ReactModule.memo(function(p1) --[[ Line: 35 | Named "ExperienceAssociatedItemsRow" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), Game (copy), SignalsReactModule (copy), ReactModule (copy), GetFFlagEdpPlayerFeedbackEnabledFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), SduiAssociatedItemsRowModule (copy), CryoModule (copy), GamePlayerFeedbackPrompt (copy)
 	local LayoutOrder = p1.layoutOrder
 	local UseTokensResult = UseTokensFunction()
@@ -22,18 +22,18 @@ return ReactModule.memo(function(p1) --[[ Line: 35 | Named "ExperienceAssociated
 	local UseSignalStateResult = SignalsReactModule.useSignalState(Game.getGameInfoStore(false).getAndFetchGameInfo(UniverseId).data)
 	local RootPlaceId = UseSignalStateResult and UseSignalStateResult.rootPlaceId
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(Game.getVotesStore(false).getAndFetchUserVote(UniverseId).data)
-	local UseSignalStateResult11 = SignalsReactModule.useSignalState((ReactModule.useCallback(function(p2) --[[ Line: 49 ]]
+	local UseSignalStateResult11 = SignalsReactModule.useSignalState((ReactModule.useCallback(function(p2)
 		-- upvalues: RootPlaceId (copy), Game (upval)
 		return if RootPlaceId then Game.getUserVoteFeedbackMetadataStore(p2).getUserVoteFeedbackMetadata(RootPlaceId).data(p2) else nil
 	end, { RootPlaceId })))
 	local CanSubmitReview = GetFFlagEdpPlayerFeedbackEnabledFunction() and (UseSignalStateResult11 and UseSignalStateResult11.canSubmitReview)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 66 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: RootPlaceId (copy), Game (upval)
 		if RootPlaceId then
 			Game.getUserVoteFeedbackMetadataStore(false).clearItem(RootPlaceId)
 		end
 	end, { RootPlaceId })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 74 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseSignalStateResult11 (copy), UseSignalStateResult1 (copy), UseDispatchResult (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval), UniverseId (copy), UseResult (copy)
 		if UseSignalStateResult11 and UseSignalStateResult11.canSubmitReview and UseSignalStateResult1 and (UseSignalStateResult1.userVote == true or UseSignalStateResult1.userVote == false) then
 			local config = { [true] = "Upvote", [false] = "Downvote" }

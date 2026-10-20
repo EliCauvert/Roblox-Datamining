@@ -1,4 +1,4 @@
-﻿return function(Vector, Vector1): UDim2 --[[ Line: 1 | Named "getFitSize" ]]
+﻿return function(Vector, Vector1): UDim2
 	if Vector.X == 0 or Vector.Y == 0 or Vector1.X == 0 or Vector1.Y == 0 then
 		return UDim2.fromScale(1, 1)
 	else

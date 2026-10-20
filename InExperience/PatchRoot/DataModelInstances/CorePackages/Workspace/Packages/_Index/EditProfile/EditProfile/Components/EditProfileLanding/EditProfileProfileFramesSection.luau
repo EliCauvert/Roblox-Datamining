@@ -19,7 +19,7 @@ local config = {
 	hasDivider = { hasDivider = true, isInset = false }
 }
 
-return function(p1) --[[ Line: 36 | Named "EditProfileProfileFramesSection" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), UseUserAvatarConfigurationsFunction (copy), UseProfileFramesNewLabelModule (copy), FFlagProfileFramesNewLabelEnabledModule (copy), ReactModule (copy), List (copy), config (copy), View (copy), Badge (copy), BadgeVariant (copy), BadgeShape (copy), ProfileFramePreviewThumbnail (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		ProfileFrameLabel = TextKeysModule.ProfileFrame,
@@ -28,7 +28,7 @@ return function(p1) --[[ Line: 36 | Named "EditProfileProfileFramesSection" ]]
 	local _, UseUserAvatarConfigurationsResult2, UseUserAvatarConfigurationsResult3 = UseUserAvatarConfigurationsFunction(p1.userId)
 	local UseProfileFramesNewLabelModuleResult, UseProfileFramesNewLabelModuleResult2 = UseProfileFramesNewLabelModule()
 	
-	local function OnActivated() --[[ Line: 45 ]]
+	local function OnActivated()
 		-- upvalues: FFlagProfileFramesNewLabelEnabledModule (upval), UseProfileFramesNewLabelModuleResult2 (copy), p1 (copy)
 		if FFlagProfileFramesNewLabelEnabledModule then
 			UseProfileFramesNewLabelModuleResult2()

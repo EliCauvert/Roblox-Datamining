@@ -24,7 +24,7 @@ local ReportCategories = {
 	}
 }
 
-local function buildReport(p1) --[[ Line: 57 ]]
+local function buildReport(p1)
 	-- upvalues: AbuseEntrypointModule (copy), AbuseCategoryModule (copy), HttpService (copy)
 	local config = {
 		tags = {
@@ -41,7 +41,7 @@ local function buildReport(p1) --[[ Line: 57 ]]
 			VARIANT = { valueList = { { data = p1.variant } } }
 		}
 	}
-	local Success, Result = pcall(function() --[[ Line: 110 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: HttpService (upval), config (copy)
 		return HttpService:JSONEncode(config)
 	end)
@@ -49,10 +49,10 @@ local function buildReport(p1) --[[ Line: 57 ]]
 	return if Success then Result else nil
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 117 | Named "ReportSongDialog" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseLocalUserIdFunction (copy), UseCallbackFunction (copy), ReportCategories (copy), buildReport (copy), Players (copy), LoggerModule (copy), ReactModule (copy), FoundationModule (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), DefaultTwoStepReportFlowModule (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 120 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: p1 (copy)
 		if p1.onClose then
 			p1.onClose()
@@ -70,7 +70,7 @@ return ReactModule.memo(function(p1) --[[ Line: 117 | Named "ReportSongDialog" ]
 				onCloseProps = { hasPreviousSteps = false, onAbandon = UseCallbackResult },
 				onSubmitProps = {
 					hasNextSteps = false,
-					onSubmit = UseCallbackFunction(function(p2, Comment): boolean --[[ Line: 126 ]]
+					onSubmit = UseCallbackFunction(function(p2, Comment): boolean
 						-- upvalues: ReportCategories (upval), p1 (copy), buildReport (upval), UseLocalUserIdResult (copy), Players (upval), LoggerModule (upval)
 						local IsValueMatch = p2 == ReportCategories[1].value
 						local AssetId = if IsValueMatch then p1.audio.assetId else p1.audio.thumbnailAssetId
@@ -88,7 +88,7 @@ return ReactModule.memo(function(p1) --[[ Line: 117 | Named "ReportSongDialog" ]
 								local LocalPlayer = Players.LocalPlayer
 								
 								if LocalPlayer then
-									local Success, Result = pcall(function() --[[ Line: 142 ]]
+									local Success, Result = pcall(function()
 										-- upvalues: Players (upval), LocalPlayer (copy), Report (copy)
 										Players:ReportAbuseV3(LocalPlayer, Report)
 									end)

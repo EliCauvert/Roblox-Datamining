@@ -33,12 +33,12 @@ local Character = LocalPlayer.Character
 if not Character or Character.Parent == nil then
 	Character = LocalPlayer.CharacterAdded:Wait()
 end
-LocalPlayer.CharacterAdded:Connect(function(Character1) --[[ Line: 48 ]]
+LocalPlayer.CharacterAdded:Connect(function(Character1)
 	-- upvalues: Character (ref)
 	Character = Character1
 end)
 
-function setUsingGamepad(Input, _) --[[ Line: 52 ]]
+function setUsingGamepad(Input, _)
 	-- upvalues: Enabled (ref)
 	if Input.UserInputType == Enum.UserInputType.Gamepad1 or Input.UserInputType == Enum.UserInputType.Gamepad2 or Input.UserInputType == Enum.UserInputType.Gamepad3 or Input.UserInputType == Enum.UserInputType.Gamepad4 then
 		Enabled = true
@@ -85,8 +85,8 @@ end
 ControlFrame = if RobloxGui:FindFirstChild("ControlFrame") then RobloxGui.ControlFrame else RobloxGui
 local TouchEnabled = game:GetService("UserInputService").TouchEnabled
 
-local function _(p1) --[[ Line: 118 | Named "isDialogMultiplePlayers" ]]
-	local Success, Result = pcall(function(): boolean --[[ Line: 119 ]]
+local function _(p1)
+	local Success, Result = pcall(function(): boolean
 		-- upvalues: p1 (copy)
 		return p1.BehaviorType == Enum.DialogBehaviorType.MultiplePlayers
 	end)
@@ -94,12 +94,12 @@ local function _(p1) --[[ Line: 118 | Named "isDialogMultiplePlayers" ]]
 	return Success and Result or false
 end
 
-function currentTone() --[[ Line: 123 ]]
+function currentTone()
 	-- upvalues: Key (ref)
 	return if Key then Key.Tone else Enum.DialogTone.Neutral
 end
 
-function createChatNotificationGui() --[[ Line: 132 ]]
+function createChatNotificationGui()
 	-- upvalues: Billboard (ref), _Vector2 (copy), UserInputService (copy)
 	Billboard = Instance.new("BillboardGui")
 	Billboard.Name = "ChatNotificationGui"
@@ -135,7 +135,7 @@ function createChatNotificationGui() --[[ Line: 132 ]]
 	ActivationButton.Parent = Background
 end
 
-function getChatColor(DialogTone) --[[ Line: 170 ]]
+function getChatColor(DialogTone)
 	if DialogTone == Enum.DialogTone.Neutral then
 		return Enum.ChatColor.Blue
 	elseif DialogTone == Enum.DialogTone.Friendly then
@@ -144,7 +144,7 @@ function getChatColor(DialogTone) --[[ Line: 170 ]]
 	return Enum.ChatColor.Red
 end
 
-function styleChoices() --[[ Line: 180 ]]
+function styleChoices()
 	-- upvalues: Choices (copy), Choice (ref)
 	for _, choice in pairs(Choices) do
 		choice.BackgroundTransparency = 1
@@ -152,7 +152,7 @@ function styleChoices() --[[ Line: 180 ]]
 	Choice.BackgroundTransparency = 1
 end
 
-function styleMainFrame(DialogTone) --[[ Line: 187 ]]
+function styleMainFrame(DialogTone)
 	-- upvalues: Frame (ref)
 	if DialogTone == Enum.DialogTone.Neutral then
 		Frame.Style = Enum.FrameStyle.ChatBlue
@@ -164,7 +164,7 @@ function styleMainFrame(DialogTone) --[[ Line: 187 ]]
 	styleChoices()
 end
 
-function setChatNotificationTone(p1, p2, DialogTone) --[[ Line: 198 ]]
+function setChatNotificationTone(p1, p2, DialogTone)
 	-- upvalues: config (copy), _Vector2 (copy)
 	if DialogTone == Enum.DialogTone.Neutral then
 		p1.Background.Image = "rbxasset://textures/ui/chatBubble_blue_notify_bkg.png"
@@ -180,7 +180,7 @@ function setChatNotificationTone(p1, p2, DialogTone) --[[ Line: 198 ]]
 	p1.Background.Icon.Image = Unpacked
 end
 
-function createMessageDialog() --[[ Line: 214 ]]
+function createMessageDialog()
 	-- upvalues: Frame1 (ref)
 	Frame1 = Instance.new("Frame")
 	Frame1.Name = "DialogScriptMessage"
@@ -199,7 +199,7 @@ function createMessageDialog() --[[ Line: 214 ]]
 	Text.Parent = Frame1
 end
 
-function showMessage(Text, XOffset) --[[ Line: 233 ]]
+function showMessage(Text, XOffset)
 	-- upvalues: Frame1 (ref)
 	Frame1.Text.Text = Text
 	Frame1.Size = UDim2.new(0, XOffset, 0, 40)
@@ -209,33 +209,33 @@ function showMessage(Text, XOffset) --[[ Line: 233 ]]
 	Frame1.Visible = false
 end
 
-function variableDelay(Text: string) --[[ Line: 242 ]]
+function variableDelay(Text: string)
 	wait(math.min(string.len(Text), 100) / 75 * 1.5 + 0.75)
 end
 
-function resetColor(p1) --[[ Line: 247 ]]
+function resetColor(p1)
 	p1.BackgroundTransparency = 1
 end
 
-function wanderDialog() --[[ Line: 251 ]]
+function wanderDialog()
 	-- upvalues: Frame (ref)
 	Frame.Visible = false
 	endDialog()
 	showMessage("Chat ended because you walked away", 350)
 end
 
-function timeoutDialog() --[[ Line: 257 ]]
+function timeoutDialog()
 	-- upvalues: Frame (ref)
 	Frame.Visible = false
 	endDialog()
 	showMessage("Chat ended because you didn't reply", 350)
 end
 
-function normalEndDialog() --[[ Line: 263 ]]
+function normalEndDialog()
 	endDialog()
 end
 
-function endDialog() --[[ Line: 267 ]]
+function endDialog()
 	-- upvalues: Thread (ref), t1 (copy), Key (ref), SetDialogInUse (copy), Guis (copy), ContextActionService (copy), v2 (ref), TouchControlFrame (ref), Flag1 (ref), ControlFrame (ref), GuiService (copy), Frame (ref)
 	if Thread then
 		t1[Thread] = false
@@ -245,7 +245,7 @@ function endDialog() --[[ Line: 267 ]]
 	Key = nil
 	
 	if Dialog and Dialog.InUse then
-		delay(5, function() --[[ Line: 277 ]]
+		delay(5, function()
 			-- upvalues: SetDialogInUse (upval), Dialog (copy)
 			SetDialogInUse:FireServer(Dialog, false)
 			Dialog.InUse = false
@@ -270,12 +270,12 @@ function endDialog() --[[ Line: 267 ]]
 	end
 end
 
-function sanitizeMessage(Text: string): string --[[ Line: 306 ]]
+function sanitizeMessage(Text: string): string
 	return if string.len(Text) == 0 then "..." else Text
 end
 
-local function chatFunc(Key, ...) --[[ Line: 314 ]]
-	local Success, Result = pcall(function(): boolean --[[ Line: 119 ]]
+local function chatFunc(Key, ...)
+	local Success, Result = pcall(function(): boolean
 		-- upvalues: Key (copy)
 		return Key.BehaviorType == Enum.DialogBehaviorType.MultiplePlayers
 	end)
@@ -289,7 +289,7 @@ local function chatFunc(Key, ...) --[[ Line: 314 ]]
 	end
 end
 
-function selectChoice(Choice1) --[[ Line: 322 ]]
+function selectChoice(Choice1)
 	-- upvalues: Key (ref), Character (ref), Frame (ref), Choice (ref), chatFunc (copy), t (ref), LocalPlayer (ref), v2 (ref)
 	if not Key then return end
 	renewKillswitch(Key)
@@ -317,7 +317,7 @@ function selectChoice(Choice1) --[[ Line: 322 ]]
 	end
 end
 
-function newChoice() --[[ Line: 357 ]]
+function newChoice()
 	-- upvalues: Size24 (ref), UserInputService (copy)
 	local Frame = Instance.new("Frame")
 	Frame.Visible = false
@@ -327,16 +327,16 @@ function newChoice() --[[ Line: 357 ]]
 	Button.AutoButtonColor = false
 	Button.BorderSizePixel = 0
 	Button.Text = ""
-	Button.MouseEnter:connect(function() --[[ Line: 367 ]]
+	Button.MouseEnter:connect(function()
 		-- upvalues: Button (copy)
 		Button.BackgroundTransparency = 0
 	end)
-	Button.MouseLeave:connect(function() --[[ Line: 370 ]]
+	Button.MouseLeave:connect(function()
 		-- upvalues: Button (copy)
 		Button.BackgroundTransparency = 1
 	end)
 	Button.SelectionImageObject = Frame
-	Button.Activated:connect(function() --[[ Line: 374 ]]
+	Button.Activated:connect(function()
 		-- upvalues: Button (copy)
 		selectChoice(Button)
 	end)
@@ -365,7 +365,7 @@ function newChoice() --[[ Line: 357 ]]
 	return Button
 end
 
-function initialize(Parent) --[[ Line: 404 ]]
+function initialize(Parent)
 	-- upvalues: Choices (copy), Choice (ref), v1 (ref), Frame (ref), XOffset (ref)
 	Choices[1] = newChoice()
 	Choices[2] = newChoice()
@@ -390,7 +390,7 @@ function initialize(Parent) --[[ Line: 404 ]]
 	Frame.Parent = Parent
 end
 
-function presentDialogChoices(p1, DialogChoices, p2) --[[ Line: 432 ]]
+function presentDialogChoices(p1, DialogChoices, p2)
 	-- upvalues: Key (ref), v2 (ref), t (ref), Choices (copy), v1 (ref), GameTranslatorModule (copy), Choice (ref), Frame (ref), XOffset (ref), IsSmallTouchScreen (copy), LocalPlayer (ref), TouchControlFrame (ref), TouchEnabled (copy), ControlFrame (ref), Flag1 (ref), Enabled (ref)
 	if not Key then return end
 	v2 = p1
@@ -401,7 +401,7 @@ function presentDialogChoices(p1, DialogChoices, p2) --[[ Line: 432 ]]
 			table.insert(List, dialogChoice)
 		end
 	end
-	table.sort(List, function(A, B): boolean --[[ Line: 444 ]]
+	table.sort(List, function(A, B): boolean
 		return A.Name < B.Name
 	end)
 	
@@ -467,14 +467,14 @@ function presentDialogChoices(p1, DialogChoices, p2) --[[ Line: 432 ]]
 	end
 end
 
-function doDialog(Object) --[[ Line: 516 ]]
+function doDialog(Object)
 	-- upvalues: Key (ref), ContextActionService (copy), SetDialogInUse (copy), chatFunc (copy)
 	if Object.InitialPrompt == "" then
 		warn("Can't start a dialog with an empty InitialPrompt")
 		
 		return
 	end
-	local Success, Result = pcall(function(): boolean --[[ Line: 119 ]]
+	local Success, Result = pcall(function(): boolean
 		-- upvalues: Object (copy)
 		return Object.BehaviorType == Enum.DialogBehaviorType.MultiplePlayers
 	end)
@@ -482,7 +482,7 @@ function doDialog(Object) --[[ Line: 516 ]]
 	if not Object.InUse or (Success and Result or false) then
 		Key = Object
 		Object.InUse = true
-		ContextActionService:BindCoreAction("Nothing", function() --[[ Line: 530 ]] end, false, Enum.UserInputType.Gamepad1, Enum.UserInputType.Gamepad2, Enum.UserInputType.Gamepad3, Enum.UserInputType.Gamepad4)
+		ContextActionService:BindCoreAction("Nothing", function() end, false, Enum.UserInputType.Gamepad1, Enum.UserInputType.Gamepad2, Enum.UserInputType.Gamepad3, Enum.UserInputType.Gamepad4)
 		SetDialogInUse:FireServer(Object, true)
 		chatFunc(Object, Object.Parent, Object.InitialPrompt, getChatColor(Object.Tone))
 		variableDelay(Object.InitialPrompt)
@@ -492,13 +492,13 @@ function doDialog(Object) --[[ Line: 516 ]]
 	end
 end
 
-function renewKillswitch(p3) --[[ Line: 541 ]]
+function renewKillswitch(p3)
 	-- upvalues: Thread (ref), t1 (copy), SetDialogInUse (copy)
 	if Thread then
 		t1[Thread] = false
 		Thread = nil
 	end
-	Thread = coroutine.create(function(Key) --[[ Line: 547 ]]
+	Thread = coroutine.create(function(Key)
 		-- upvalues: t1 (upval), SetDialogInUse (upval), p3 (copy)
 		wait(15)
 		
@@ -513,7 +513,7 @@ function renewKillswitch(p3) --[[ Line: 541 ]]
 	coroutine.resume(Thread, Thread)
 end
 
-function checkForLeaveArea() --[[ Line: 560 ]]
+function checkForLeaveArea()
 	-- upvalues: Key (ref), LocalPlayer (ref)
 	while Key do
 		if Key.Parent and Key.ConversationDistance <= LocalPlayer:DistanceFromCharacter(Key.Parent.Position) then
@@ -523,7 +523,7 @@ function checkForLeaveArea() --[[ Line: 560 ]]
 	end
 end
 
-function startDialog(p3) --[[ Line: 569 ]]
+function startDialog(p3)
 	-- upvalues: RbxAnalyticsService (copy), LocalPlayer (ref), Guis (copy)
 	if p3.Parent and p3.Parent:IsA("BasePart") then
 		RbxAnalyticsService:TrackEvent("Dialogue", "Old Dialogue", "Conversation Initiated")
@@ -544,7 +544,7 @@ function startDialog(p3) --[[ Line: 569 ]]
 	end
 end
 
-function removeDialog(Key) --[[ Line: 591 ]]
+function removeDialog(Key)
 	-- upvalues: Guis (copy), ChangedConnections (copy)
 	if Guis[Key] then
 		Guis[Key]:Destroy()
@@ -556,7 +556,7 @@ function removeDialog(Key) --[[ Line: 591 ]]
 	end
 end
 
-function addDialog(Key1) --[[ Line: 602 ]]
+function addDialog(Key1)
 	-- upvalues: Flag (ref), RbxAnalyticsService (copy), Billboard (ref), CoreGui (copy), Guis (copy), ChangedConnections (copy), Key (ref)
 	if Key1.Parent then
 		if Key1.Parent:IsA("BasePart") and Key1:IsDescendantOf(game.Workspace) then
@@ -568,7 +568,7 @@ function addDialog(Key1) --[[ Line: 602 ]]
 			local NoInUse = not Key1.InUse
 			
 			if not NoInUse then
-				local Success, Result = pcall(function(): boolean --[[ Line: 119 ]]
+				local Success, Result = pcall(function(): boolean
 					-- upvalues: Key1 (copy)
 					return Key1.BehaviorType == Enum.DialogBehaviorType.MultiplePlayers
 				end)
@@ -576,7 +576,7 @@ function addDialog(Key1) --[[ Line: 602 ]]
 			end
 			BillboardClone.Enabled = NoInUse
 			BillboardClone.Parent = CoreGui
-			BillboardClone.Background.MouseButton1Click:connect(function() --[[ Line: 614 ]]
+			BillboardClone.Background.MouseButton1Click:connect(function()
 				-- upvalues: Key1 (copy)
 				startDialog(Key1)
 			end)
@@ -586,7 +586,7 @@ function addDialog(Key1) --[[ Line: 602 ]]
 				Key1:SetGuiObject(BillboardClone)
 			end
 			Guis[Key1] = BillboardClone
-			ChangedConnections[Key1] = Key1.Changed:connect(function(p4) --[[ Line: 624 ]]
+			ChangedConnections[Key1] = Key1.Changed:connect(function(p4)
 				-- upvalues: Key1 (copy), BillboardClone (copy), Key (upval)
 				if p4 == "Parent" and Key1.Parent then
 					removeDialog(Key1)
@@ -595,7 +595,7 @@ function addDialog(Key1) --[[ Line: 602 ]]
 					return
 				end
 				if p4 == "InUse" then
-					local Success, Result = pcall(function(): boolean --[[ Line: 119 ]]
+					local Success, Result = pcall(function(): boolean
 						-- upvalues: Key1 (copy)
 						return Key1.BehaviorType == Enum.DialogBehaviorType.MultiplePlayers
 					end)
@@ -606,7 +606,7 @@ function addDialog(Key1) --[[ Line: 602 ]]
 						BillboardClone.Enabled = Key == nil and not Key1.InUse
 					end
 					if not Key1.InUse then
-						local Success1, Result1 = pcall(function(): boolean --[[ Line: 119 ]]
+						local Success1, Result1 = pcall(function(): boolean
 							-- upvalues: Key1 (copy)
 							return Key1.BehaviorType == Enum.DialogBehaviorType.MultiplePlayers
 						end)
@@ -624,7 +624,7 @@ function addDialog(Key1) --[[ Line: 602 ]]
 			
 			return
 		else
-			ChangedConnections[Key1] = Key1.Changed:connect(function(p4) --[[ Line: 644 ]]
+			ChangedConnections[Key1] = Key1.Changed:connect(function(p4)
 				-- upvalues: Key1 (copy)
 				if p4 == "Parent" and Key1.Parent then
 					removeDialog(Key1)
@@ -635,7 +635,7 @@ function addDialog(Key1) --[[ Line: 602 ]]
 	end
 end
 
-function onLoad() --[[ Line: 655 ]]
+function onLoad()
 	-- upvalues: Frame1 (ref), ControlFrame (ref), TouchEnabled (copy), IsSmallTouchScreen (copy)
 	createChatNotificationGui()
 	createMessageDialog()
@@ -662,12 +662,12 @@ function onLoad() --[[ Line: 655 ]]
 		DialogFrame.Parent = ControlFrame.BottomLeftControl
 	end
 	initialize(DialogFrame)
-	game:GetService("CollectionService").ItemAdded:Connect(function(Dialog) --[[ Line: 686 ]]
+	game:GetService("CollectionService").ItemAdded:Connect(function(Dialog)
 		if Dialog:IsA("Dialog") then
 			addDialog(Dialog)
 		end
 	end)
-	game:GetService("CollectionService").ItemRemoved:Connect(function(Dialog) --[[ Line: 691 ]]
+	game:GetService("CollectionService").ItemRemoved:Connect(function(Dialog)
 		if Dialog:IsA("Dialog") then
 			removeDialog(Dialog)
 		end
@@ -680,19 +680,19 @@ function onLoad() --[[ Line: 655 ]]
 	end
 end
 
-function getLocalHumanoidRootPart() --[[ Line: 703 ]]
+function getLocalHumanoidRootPart()
 	-- upvalues: LocalPlayer (ref)
 	if not LocalPlayer.Character then return end
 	return LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
 end
 
-function dialogIsValid(p4) --[[ Line: 709 ]]
+function dialogIsValid(p4)
 	return p4 and (p4.Parent and p4.Parent:IsA("BasePart"))
 end
 
 local ClosestVisibleDialogToPosition = nil
 local GetClosestDialogToPositionFunction = GuiService.GetClosestDialogToPosition
-game:GetService("RunService").Heartbeat:Connect(function() --[[ Line: 716 ]]
+game:GetService("RunService").Heartbeat:Connect(function()
 	-- upvalues: GetClosestDialogToPositionFunction (copy), GuiService (copy), Key (ref), LocalPlayer (ref), Enabled (ref), ClosestVisibleDialogToPosition (ref), Guis (copy), ContextActionService (copy)
 	local ClosestVisibleDialogToPosition1 = nil
 	local LocalHumanoidRootPart = getLocalHumanoidRootPart()
@@ -720,7 +720,7 @@ game:GetService("RunService").Heartbeat:Connect(function() --[[ Line: 716 ]]
 			ContextActionService:UnbindCoreAction("StartDialogAction")
 			
 			if ClosestVisibleDialogToPosition1 ~= nil then
-				ContextActionService:BindCoreAction("StartDialogAction", function(_, UserInputState, _) --[[ Line: 755 ]]
+				ContextActionService:BindCoreAction("StartDialogAction", function(_, UserInputState, _)
 					-- upvalues: ClosestVisibleDialogToPosition1 (ref)
 					if UserInputState == Enum.UserInputState.Begin and ClosestVisibleDialogToPosition1 and ClosestVisibleDialogToPosition1.Parent then
 						startDialog(ClosestVisibleDialogToPosition1)
@@ -735,7 +735,7 @@ game:GetService("RunService").Heartbeat:Connect(function() --[[ Line: 716 ]]
 	end
 end)
 local SelectedCoreObject = nil
-GuiService.Changed:connect(function(Property) --[[ Line: 772 ]]
+GuiService.Changed:connect(function(Property)
 	-- upvalues: SelectedCoreObject (ref), GuiService (copy)
 	if Property == "SelectedCoreObject" then
 		if SelectedCoreObject and SelectedCoreObject:FindFirstChild("RBXchatDialogSelectionButton") then

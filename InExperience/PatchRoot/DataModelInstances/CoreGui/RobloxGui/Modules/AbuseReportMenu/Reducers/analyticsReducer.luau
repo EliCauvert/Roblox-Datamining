@@ -8,7 +8,7 @@ local config = {
 	reasonSelection = CryoModule.None
 }
 
-return function(Tbl, p1) --[[ Line: 15 | Named "analyticsReducer" ]]
+return function(Tbl, p1)
 	-- upvalues: AnalyticsActions (copy), ConstantsModule (copy), CryoModule (copy), config (copy)
 	local Copy = table.clone(Tbl)
 	local Type = p1.type

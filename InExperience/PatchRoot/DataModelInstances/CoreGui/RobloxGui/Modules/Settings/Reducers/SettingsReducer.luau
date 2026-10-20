@@ -1,3 +1,3 @@
-﻿return function(_, _) --[[ Line: 1 ]]
+﻿return function(_, _)
 	return {}
 end

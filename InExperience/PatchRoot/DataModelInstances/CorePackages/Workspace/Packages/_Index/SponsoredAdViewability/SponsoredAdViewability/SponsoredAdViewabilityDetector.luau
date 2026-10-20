@@ -9,10 +9,10 @@ local TerminalReason = {
 	FeedRefresh = "FeedRefresh"
 }
 
-local function invokeCallback(p1, OnMilestone, ...) --[[ Line: 52 ]]
+local function invokeCallback(p1, OnMilestone, ...)
 	local v1 = nil
 	
-	if not xpcall(OnMilestone, function(Err) --[[ Line: 54 ]]
+	if not xpcall(OnMilestone, function(Err)
 		-- upvalues: v1 (ref)
 		v1 = Err
 	end, ...) then
@@ -24,7 +24,7 @@ local Frozen = table.freeze({})
 local SponsoredAdViewabilityDetectorModule = {}
 SponsoredAdViewabilityDetectorModule.__index = SponsoredAdViewabilityDetectorModule
 
-function SponsoredAdViewabilityDetectorModule.new(_callbacks) --[[ Line: 102 ]]
+function SponsoredAdViewabilityDetectorModule.new(_callbacks)
 	-- upvalues: SponsoredAdViewabilityDetectorModule (copy)
 	return (setmetatable({
 		_surfaceScope = nil,
@@ -37,11 +37,11 @@ function SponsoredAdViewabilityDetectorModule.new(_callbacks) --[[ Line: 102 ]]
 	}, SponsoredAdViewabilityDetectorModule))
 end
 
-local function _(p1): boolean --[[ Line: 114 | Named "isVideoMetadata" ]]
+local function _(p1): boolean
 	return p1.mediaType == "video"
 end
 
-local _ = function(p1) --[[ Line: 118 | Named "readVideoPlaybackState" ]]
+local _ = function(p1)
 	if p1.mediaType ~= "video" then
 		return nil
 	end
@@ -57,7 +57,7 @@ local _ = function(p1) --[[ Line: 118 | Named "readVideoPlaybackState" ]]
 	end
 end
 
-local function getLayerCollectorAndVisibility(Frame) --[[ Line: 131 ]]
+local function getLayerCollectorAndVisibility(Frame)
 	local Parent = Frame
 	local Flag = true
 	while Parent do
@@ -72,7 +72,7 @@ local function getLayerCollectorAndVisibility(Frame) --[[ Line: 131 ]]
 	return nil, false
 end
 
-local function getRegisteredTile(Gui, SurfaceScope) --[[ Line: 146 ]]
+local function getRegisteredTile(Gui, SurfaceScope)
 	-- upvalues: ConstantsModule (copy), SponsoredAdViewabilityRegistryModule (copy)
 	if not Gui:IsA("GuiObject") then
 		return nil, nil, nil
@@ -93,14 +93,14 @@ local function getRegisteredTile(Gui, SurfaceScope) --[[ Line: 146 ]]
 	end
 end
 
-local function measureRegisteredTile(Frame: Frame, ViewabilityTargetId, Metadata, ViewportBounds) --[[ Line: 168 ]]
+local function measureRegisteredTile(Frame: Frame, ViewabilityTargetId, Metadata, ViewportBounds)
 	-- upvalues: getLayerCollectorAndVisibility (copy), CalculateIntersectionRatioModule (copy)
 	local IsIsFullscreen = Metadata.isFullscreen == true
 	local AbsolutePosition = nil
 	local AbsoluteSize = nil
 	local Config = ViewportBounds
 	
-	if not pcall(function() --[[ Line: 178 ]]
+	if not pcall(function()
 		-- upvalues: IsIsFullscreen (copy), getLayerCollectorAndVisibility (upval), Frame (copy), Config (ref), AbsolutePosition (ref), AbsoluteSize (ref)
 		if IsIsFullscreen then
 			local LayerCollectorAndVisibility, LayerCollectorAndVisibility2 = getLayerCollectorAndVisibility(Frame)
@@ -143,7 +143,7 @@ local function measureRegisteredTile(Frame: Frame, ViewabilityTargetId, Metadata
 	return config
 end
 
-local function shouldReplaceCandidate(p1, p2) --[[ Line: 206 ]]
+local function shouldReplaceCandidate(p1, p2)
 	if p1.isFullscreen ~= p2.isFullscreen then
 		return if p1.videoStateSnapshot ~= nil == (p2.videoStateSnapshot ~= nil) then p2.isFullscreen else p2.videoStateSnapshot ~= nil
 	elseif p1.ratio ~= p2.ratio then
@@ -158,7 +158,7 @@ local function shouldReplaceCandidate(p1, p2) --[[ Line: 206 ]]
 	end
 end
 
-local _ = function(p1, p2) --[[ Line: 230 | Named "selectBetterMeasurement" ]]
+local _ = function(p1, p2)
 	-- upvalues: shouldReplaceCandidate (copy)
 	local EncryptedAdTrackingData = p2.metadata.encryptedAdTrackingData
 	local v1 = p1[EncryptedAdTrackingData]
@@ -169,15 +169,15 @@ local _ = function(p1, p2) --[[ Line: 230 | Named "selectBetterMeasurement" ]]
 	end
 end
 
-local _ = function(p1, p2): boolean --[[ Line: 242 | Named "canStartOrContinueSession" ]]
+local _ = function(p1, p2): boolean
 	return not p1.isFullscreen or p2 ~= nil and p2.video ~= nil
 end
 
-local _ = function(p1): boolean --[[ Line: 246 | Named "canMeasureViewport" ]]
+local _ = function(p1): boolean
 	return p1.min.X < p1.max.X and p1.min.Y < p1.max.Y
 end
 
-local _ = function(List): boolean --[[ Line: 250 | Named "hasVideoSession" ]]
+local _ = function(List): boolean
 	for _, value in List do
 		if value.video ~= nil then
 			return true
@@ -186,7 +186,7 @@ local _ = function(List): boolean --[[ Line: 250 | Named "hasVideoSession" ]]
 	return false
 end
 
-function SponsoredAdViewabilityDetectorModule:_advanceSession(Session, Callbacks, Ratio, Geometry, VideoStateSnapshot, IsFullscreen, Metadata) --[[ Line: 259 ]]
+function SponsoredAdViewabilityDetectorModule:_advanceSession(Session, Callbacks, Ratio, Geometry, VideoStateSnapshot, IsFullscreen, Metadata)
 	-- upvalues: invokeCallback (copy)
 	local AdvanceResult, AdvanceResult2 = Session.state:advance(Callbacks, Ratio, Geometry, VideoStateSnapshot, IsFullscreen)
 	local Metadata1 = Metadata or Session.metadata
@@ -202,7 +202,7 @@ function SponsoredAdViewabilityDetectorModule:_advanceSession(Session, Callbacks
 	end
 end
 
-function SponsoredAdViewabilityDetectorModule:_processMeasurement(p1, p2, Callbacks) --[[ Line: 283 ]]
+function SponsoredAdViewabilityDetectorModule:_processMeasurement(p1, p2, Callbacks)
 	-- upvalues: SponsoredAdViewabilityStateModule (copy), invokeCallback (copy)
 	local Metadata = p2.metadata
 	local IsVideo = Metadata.mediaType == "video"
@@ -232,7 +232,7 @@ function SponsoredAdViewabilityDetectorModule:_processMeasurement(p1, p2, Callba
 	end
 end
 
-function SponsoredAdViewabilityDetectorModule:_applySelectedVideoMeasurement(Session, p1, Callbacks) --[[ Line: 322 ]]
+function SponsoredAdViewabilityDetectorModule:_applySelectedVideoMeasurement(Session, p1, Callbacks)
 	local Video = Session.video
 	
 	if Video == nil then return end
@@ -253,7 +253,7 @@ function SponsoredAdViewabilityDetectorModule:_applySelectedVideoMeasurement(Ses
 	self:_advanceSession(Session, Callbacks, p1.ratio, p1.geometry, p1.videoStateSnapshot, p1.isFullscreen)
 end
 
-function SponsoredAdViewabilityDetectorModule:_collectCurrentVideoMeasurements() --[[ Line: 359 ]]
+function SponsoredAdViewabilityDetectorModule:_collectCurrentVideoMeasurements()
 	-- upvalues: Frozen (copy), CollectionService (copy), ConstantsModule (copy), getRegisteredTile (copy), measureRegisteredTile (copy), shouldReplaceCandidate (copy)
 	local Flag = false
 	
@@ -296,15 +296,15 @@ function SponsoredAdViewabilityDetectorModule:_collectCurrentVideoMeasurements()
 	return t
 end
 
-function SponsoredAdViewabilityDetectorModule:setSurfaceScope(_surfaceScope) --[[ Line: 388 ]]
+function SponsoredAdViewabilityDetectorModule:setSurfaceScope(_surfaceScope)
 	self._surfaceScope = _surfaceScope
 end
 
-function SponsoredAdViewabilityDetectorModule:setViewportBounds(_viewportBounds) --[[ Line: 392 ]]
+function SponsoredAdViewabilityDetectorModule:setViewportBounds(_viewportBounds)
 	self._viewportBounds = _viewportBounds
 end
 
-function SponsoredAdViewabilityDetectorModule:start() --[[ Line: 399 ]]
+function SponsoredAdViewabilityDetectorModule:start()
 	if self._running then return end
 	self._running = true
 	
@@ -313,7 +313,7 @@ function SponsoredAdViewabilityDetectorModule:start() --[[ Line: 399 ]]
 	end
 end
 
-function SponsoredAdViewabilityDetectorModule:_cancelScheduledScan() --[[ Line: 409 ]]
+function SponsoredAdViewabilityDetectorModule:_cancelScheduledScan()
 	local ScanThread = self._scanThread
 	
 	if ScanThread ~= nil and coroutine.status(ScanThread) == "suspended" then
@@ -322,9 +322,9 @@ function SponsoredAdViewabilityDetectorModule:_cancelScheduledScan() --[[ Line: 
 	self._scanThread = nil
 end
 
-function SponsoredAdViewabilityDetectorModule:_scheduleNextScan() --[[ Line: 417 ]]
+function SponsoredAdViewabilityDetectorModule:_scheduleNextScan()
 	if self._scanThread == nil then
-		self._scanThread = task.delay(0.2, function() --[[ Line: 421 ]]
+		self._scanThread = task.delay(0.2, function()
 			-- upvalues: self (copy)
 			self._scanThread = nil
 			
@@ -346,7 +346,7 @@ function SponsoredAdViewabilityDetectorModule:_scheduleNextScan() --[[ Line: 417
 	end
 end
 
-function SponsoredAdViewabilityDetectorModule:_scanTick(p1) --[[ Line: 443 ]]
+function SponsoredAdViewabilityDetectorModule:_scanTick(p1)
 	-- upvalues: CollectionService (copy), ConstantsModule (copy), getRegisteredTile (copy), measureRegisteredTile (copy), shouldReplaceCandidate (copy)
 	local SurfaceScope = self._surfaceScope
 	local ViewportBounds = self._viewportBounds
@@ -398,7 +398,7 @@ function SponsoredAdViewabilityDetectorModule:_scanTick(p1) --[[ Line: 443 ]]
 	end
 end
 
-function SponsoredAdViewabilityDetectorModule:pause(p2) --[[ Line: 502 ]]
+function SponsoredAdViewabilityDetectorModule:pause(p2)
 	if self._paused then return end
 	local P48 = p2 or DateTime.now().UnixTimestampMillis
 	local CollectCurrentVideoMeasurementsResult = self:_collectCurrentVideoMeasurements()
@@ -413,7 +413,7 @@ function SponsoredAdViewabilityDetectorModule:pause(p2) --[[ Line: 502 ]]
 	self:_cancelScheduledScan()
 end
 
-function SponsoredAdViewabilityDetectorModule:resume(p3) --[[ Line: 518 ]]
+function SponsoredAdViewabilityDetectorModule:resume(p3)
 	if not self._paused then return end
 	local P50 = p3 or DateTime.now().UnixTimestampMillis
 	for _, session in self._sessions do
@@ -426,7 +426,7 @@ function SponsoredAdViewabilityDetectorModule:resume(p3) --[[ Line: 518 ]]
 	end
 end
 
-function SponsoredAdViewabilityDetectorModule:_terminateAllSessions(p4, FeedRefresh) --[[ Line: 533 ]]
+function SponsoredAdViewabilityDetectorModule:_terminateAllSessions(p4, FeedRefresh)
 	-- upvalues: invokeCallback (copy)
 	local T = if self._paused then {} else self:_collectCurrentVideoMeasurements()
 	self._sessions = {}
@@ -439,12 +439,12 @@ function SponsoredAdViewabilityDetectorModule:_terminateAllSessions(p4, FeedRefr
 	end
 end
 
-function SponsoredAdViewabilityDetectorModule:onFeedRefresh(p5) --[[ Line: 553 ]]
+function SponsoredAdViewabilityDetectorModule:onFeedRefresh(p5)
 	-- upvalues: TerminalReason (copy)
 	self:_terminateAllSessions(p5 or DateTime.now().UnixTimestampMillis, TerminalReason.FeedRefresh)
 end
 
-function SponsoredAdViewabilityDetectorModule:reset(p5) --[[ Line: 558 ]]
+function SponsoredAdViewabilityDetectorModule:reset(p5)
 	-- upvalues: TerminalReason (copy)
 	self._running = false
 	self:_cancelScheduledScan()

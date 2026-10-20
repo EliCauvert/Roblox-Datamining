@@ -4,11 +4,11 @@ local WeakMap = LuauPolyfillModule.WeakMap
 local NewWeakMap = WeakMap.new()
 
 return {
-	memoize1 = function(Callback) --[[ Line: 13 ]]
+	memoize1 = function(Callback)
 		-- upvalues: WeakMap (copy)
 		local NewWeakMap = WeakMap.new()
 		
-		return function(p1) --[[ Line: 18 ]]
+		return function(p1)
 			-- upvalues: NewWeakMap (copy), Callback (copy)
 			local GetResult = NewWeakMap:get(p1)
 			
@@ -22,11 +22,11 @@ return {
 			end
 		end
 	end,
-	memoize2 = function(Callback) --[[ Line: 37 ]]
+	memoize2 = function(Callback)
 		-- upvalues: WeakMap (copy), Boolean (copy)
 		local NewWeakMap = WeakMap.new()
 		
-		return function(p1, p2) --[[ Line: 42 ]]
+		return function(p1, p2)
 			-- upvalues: NewWeakMap (copy), Boolean (upval), WeakMap (upval), Callback (copy)
 			local GetResult = NewWeakMap:get(p1)
 			
@@ -50,11 +50,11 @@ return {
 			end
 		end
 	end,
-	memoize3 = function(Callback) --[[ Line: 72 ]]
+	memoize3 = function(Callback)
 		-- upvalues: WeakMap (copy), Boolean (copy)
 		local NewWeakMap = WeakMap.new()
 		
-		return function(p1, p2, p3) --[[ Line: 77 ]]
+		return function(p1, p2, p3)
 			-- upvalues: NewWeakMap (copy), Boolean (upval), WeakMap (upval), Callback (copy)
 			local GetResult = NewWeakMap:get(p1)
 			
@@ -90,11 +90,11 @@ return {
 			end
 		end
 	end,
-	memoize4 = function(Callback) --[[ Line: 120 ]]
+	memoize4 = function(Callback)
 		-- upvalues: WeakMap (copy), Boolean (copy)
 		local NewWeakMap = WeakMap.new()
 		
-		return function(p1, p2, p3, p4) --[[ Line: 125 ]]
+		return function(p1, p2, p3, p4)
 			-- upvalues: NewWeakMap (copy), Boolean (upval), WeakMap (upval), Callback (copy)
 			local GetResult = NewWeakMap:get(p1)
 			
@@ -144,11 +144,11 @@ return {
 			end
 		end
 	end,
-	memoize5 = function(Callback) --[[ Line: 186 ]]
+	memoize5 = function(Callback)
 		-- upvalues: WeakMap (copy), Boolean (copy)
 		local NewWeakMap = WeakMap.new()
 		
-		return function(p1, p2, p3, p4, p5) --[[ Line: 191 ]]
+		return function(p1, p2, p3, p4, p5)
 			-- upvalues: NewWeakMap (copy), Boolean (upval), WeakMap (upval), Callback (copy)
 			local GetResult = NewWeakMap:get(p1)
 			
@@ -214,9 +214,9 @@ return {
 			end
 		end
 	end,
-	memoize2of4 = function(Callback) --[[ Line: 267 ]]
+	memoize2of4 = function(Callback)
 		-- upvalues: NewWeakMap (copy), Boolean (copy), WeakMap (copy)
-		return function(p1, p2, p3, p4) --[[ Line: 271 ]]
+		return function(p1, p2, p3, p4)
 			-- upvalues: NewWeakMap (upval), Boolean (upval), WeakMap (upval), Callback (copy)
 			local GetResult = NewWeakMap:get(p1)
 			

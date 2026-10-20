@@ -14,7 +14,7 @@ local UseHoverBindingModule = require(AvatarExperienceControlBar.Hooks.useHoverB
 local X = if FFlagAXMigrateBuilderIcons then FoundationModule.Enums.IconName.X else "icons/navigation/close"
 local config = { dampingRatio = 1, frequency = 5 }
 
-return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 44 | Named "IconItem" ]]
+return ReactModule.forwardRef(function(Frame: Frame, Ref)
 	-- upvalues: UseSemanticTokensModule (copy), UseHoverBindingModule (copy), ReactOtterModule (copy), FFlagAXMigrateBuilderIcons (copy), X (copy), IconVariant (copy), ReactModule (copy), config (copy), FFlagAXAddToolTipToIconItemMenu (copy), FoundationModule (copy), TooltipModule (copy), IsBuilderIconFunction (copy)
 	local UseSemanticTokensModuleResult = UseSemanticTokensModule()
 	local UseHoverBindingModuleResult, UseHoverBindingModuleResult2 = UseHoverBindingModule()
@@ -25,7 +25,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 44 | Named 
 	local ActiveIcon = if Frame.activeIcon then Frame.activeIcon else X
 	local ActiveIconVariant = if FFlagAXMigrateBuilderIcons then if Frame.activeIconVariant then Frame.activeIconVariant else IconVariant.Regular else nil
 	local ActiveIconSize = if Frame.activeIconSize then Frame.activeIconSize elseif ActiveIcon == X then UseSemanticTokensModuleResult.closeIconSize else IconSize
-	ReactModule.useEffect(function() --[[ Line: 64 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), IsActive (copy), config (upval)
 		if Frame.animate then
 			UseAnimatedBindingResult2(ReactOtterModule.spring(if IsActive then 1 else 0, config))
@@ -56,7 +56,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 44 | Named 
 			Icon = ReactModule.createElement(FoundationModule.View, {
 				Size = UDim2.fromScale(1, 1),
 				Visible = not Frame.isActive or Frame.animate,
-				backgroundStyle = if Frame.disabled then nil else UseHoverBindingModuleResult:map(function(p1) --[[ Line: 98 ]]
+				backgroundStyle = if Frame.disabled then nil else UseHoverBindingModuleResult:map(function(p1)
 					-- upvalues: UseSemanticTokensModuleResult (copy)
 					return {
 						Color3 = UseSemanticTokensModuleResult.hoverIconBackgroundStyle.Color3,
@@ -71,7 +71,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 44 | Named 
 				IconImage = if FFlagAXMigrateBuilderIcons and IsBuilderIconFunction(Frame.icon) then ReactModule.createElement(FoundationModule.Icon, {
 					tag = "position-center-center anchor-center-center content-emphasis",
 					name = Frame.icon,
-					size = UseAnimatedBindingResult:map(function(p1: number): number --[[ Line: 114 ]]
+					size = UseAnimatedBindingResult:map(function(p1: number): number
 						-- upvalues: IconSize (copy)
 						return (math.round((1 - p1) * IconSize))
 					end),
@@ -83,7 +83,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 44 | Named 
 				}) else ReactModule.createElement(FoundationModule.Image, {
 					tag = "position-center-center anchor-center-center content-emphasis",
 					Image = Frame.icon,
-					Size = UseAnimatedBindingResult:map(function(p1: number): UDim2 --[[ Line: 129 ]]
+					Size = UseAnimatedBindingResult:map(function(p1: number): UDim2
 						-- upvalues: IconSize (copy)
 						local Rounded = math.round((1 - p1) * IconSize)
 						
@@ -97,10 +97,10 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 44 | Named 
 			}),
 			ActiveIcon = if IsActive or Frame.animate then ReactModule.createElement(FoundationModule.View, {
 				Size = UDim2.fromScale(1, 1),
-				GroupTransparency = UseAnimatedBindingResult:map(function(p1: number): number --[[ Line: 145 ]]
+				GroupTransparency = UseAnimatedBindingResult:map(function(p1: number): number
 					return 1 - p1
 				end),
-				backgroundStyle = if Frame.disabled then nil else UseHoverBindingModuleResult:map(function(p1) --[[ Line: 150 ]]
+				backgroundStyle = if Frame.disabled then nil else UseHoverBindingModuleResult:map(function(p1)
 					-- upvalues: UseSemanticTokensModuleResult (copy)
 					return if p1 then UseSemanticTokensModuleResult.hoverIconBackgroundStyle else UseSemanticTokensModuleResult.activeIconBackgroundStyle
 				end),
@@ -112,7 +112,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 44 | Named 
 				ActiveIconImage = if FFlagAXMigrateBuilderIcons and IsBuilderIconFunction(ActiveIcon) then ReactModule.createElement(FoundationModule.Icon, {
 					tag = "size-full-full position-center-center anchor-center-center content-emphasis",
 					name = ActiveIcon,
-					size = UseAnimatedBindingResult:map(function(p1): number --[[ Line: 166 ]]
+					size = UseAnimatedBindingResult:map(function(p1): number
 						-- upvalues: IconSize (copy)
 						return (math.round(p1 * IconSize))
 					end),
@@ -124,7 +124,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 44 | Named 
 				}) else ReactModule.createElement(FoundationModule.Image, {
 					tag = "position-center-center anchor-center-center clip content-emphasis",
 					Image = ActiveIcon,
-					Size = UseAnimatedBindingResult:map(function(p1): UDim2 --[[ Line: 181 ]]
+					Size = UseAnimatedBindingResult:map(function(p1): UDim2
 						-- upvalues: ActiveIconSize (copy)
 						local Rounded = math.round(p1 * ActiveIconSize)
 						
@@ -148,7 +148,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 44 | Named 
 		Icon = ReactModule.createElement(FoundationModule.View, {
 			Size = UDim2.fromScale(1, 1),
 			Visible = not Frame.isActive or Frame.animate,
-			backgroundStyle = if Frame.disabled then nil else UseHoverBindingModuleResult:map(function(p1) --[[ Line: 210 ]]
+			backgroundStyle = if Frame.disabled then nil else UseHoverBindingModuleResult:map(function(p1)
 				-- upvalues: UseSemanticTokensModuleResult (copy)
 				return {
 					Color3 = UseSemanticTokensModuleResult.hoverIconBackgroundStyle.Color3,
@@ -163,7 +163,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 44 | Named 
 			IconImage = if FFlagAXMigrateBuilderIcons and IsBuilderIconFunction(Frame.icon) then ReactModule.createElement(FoundationModule.Icon, {
 				tag = "position-center-center anchor-center-center content-emphasis",
 				name = Frame.icon,
-				size = UseAnimatedBindingResult:map(function(p1: number): number --[[ Line: 226 ]]
+				size = UseAnimatedBindingResult:map(function(p1: number): number
 					-- upvalues: IconSize (copy)
 					return (math.round((1 - p1) * IconSize))
 				end),
@@ -175,7 +175,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 44 | Named 
 			}) else ReactModule.createElement(FoundationModule.Image, {
 				tag = "position-center-center anchor-center-center content-emphasis",
 				Image = Frame.icon,
-				Size = UseAnimatedBindingResult:map(function(p1: number): UDim2 --[[ Line: 241 ]]
+				Size = UseAnimatedBindingResult:map(function(p1: number): UDim2
 					-- upvalues: IconSize (copy)
 					local Rounded = math.round((1 - p1) * IconSize)
 					
@@ -189,10 +189,10 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 44 | Named 
 		}),
 		ActiveIcon = if IsActive or Frame.animate then ReactModule.createElement(FoundationModule.View, {
 			Size = UDim2.fromScale(1, 1),
-			GroupTransparency = UseAnimatedBindingResult:map(function(p1: number): number --[[ Line: 257 ]]
+			GroupTransparency = UseAnimatedBindingResult:map(function(p1: number): number
 				return 1 - p1
 			end),
-			backgroundStyle = if Frame.disabled then nil else UseHoverBindingModuleResult:map(function(p1) --[[ Line: 262 ]]
+			backgroundStyle = if Frame.disabled then nil else UseHoverBindingModuleResult:map(function(p1)
 				-- upvalues: UseSemanticTokensModuleResult (copy)
 				return if p1 then UseSemanticTokensModuleResult.hoverIconBackgroundStyle else UseSemanticTokensModuleResult.activeIconBackgroundStyle
 			end),
@@ -204,7 +204,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 44 | Named 
 			ActiveIconImage = if FFlagAXMigrateBuilderIcons and IsBuilderIconFunction(ActiveIcon) then ReactModule.createElement(FoundationModule.Icon, {
 				tag = "position-center-center anchor-center-center clip content-emphasis",
 				name = ActiveIcon,
-				size = UseAnimatedBindingResult:map(function(p1: number): number --[[ Line: 278 ]]
+				size = UseAnimatedBindingResult:map(function(p1: number): number
 					-- upvalues: IconSize (copy)
 					return (math.round((1 - p1) * IconSize))
 				end),
@@ -212,7 +212,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 44 | Named 
 			}) else ReactModule.createElement(FoundationModule.Image, {
 				tag = "position-center-center anchor-center-center clip content-emphasis",
 				Image = ActiveIcon,
-				Size = UseAnimatedBindingResult:map(function(p1): UDim2 --[[ Line: 287 ]]
+				Size = UseAnimatedBindingResult:map(function(p1): UDim2
 					-- upvalues: ActiveIconSize (copy)
 					local Rounded = math.round(p1 * ActiveIconSize)
 					

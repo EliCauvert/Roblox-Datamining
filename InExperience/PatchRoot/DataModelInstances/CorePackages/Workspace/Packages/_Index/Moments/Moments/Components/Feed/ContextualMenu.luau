@@ -57,7 +57,7 @@ local config = {
 	reportSubmittedBody = "Feature.Moments.Label.ReportSubmittedBody"
 }
 
-return function(p1) --[[ Line: 96 ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), FFlagMomentsCreatorAnalyticsModule (copy), PostInsightsStringsModule (copy), UseFeedFunction (copy), FFlagMomentsServeEDPVideos (copy), UseMomentsHostFunction (copy), UseToggleStateFunction (copy), ReactModule (copy), UseMomentsSessionFunction (copy), GetMomentsPreferencesStoreModule (copy), GetModeratedItemsStoreModule (copy), GetToastStoreModule (copy), SignalsReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), CheckDebugAccessModule (copy), ReportMomentModule (copy), MakeRecommendationAttributionModule (copy), SignalActionTypeModule (copy), MakeFeedActionFieldsModule (copy), MomentsReportButtonAnalytics (copy), ReportMomentsEngagementFunction (copy), GetPostFeedItemIdModule (copy), ReportModalCovering (copy), Moments (copy), GetFFlagMomentsCoachmarkPersistenceFunction (copy), DismissPostInsightsCoachmarkModule (copy), GetPostInsightsPageStoreModule (copy), LocalPlayer (copy), FoundationModule (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), FFlagMomentsOptimisticProfilePending (copy), Menu (copy), MomentsUseSmallOverflowMenu (copy), IconButton (copy), ThreeDotsVertical (copy), PostInsightsCoachmarkModule (copy), ReportMomentDialogModule (copy), IpReportConfirmationDialogModule (copy), View (copy), SpeakerSlash (copy), Speaker (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local Analytics = if FFlagMomentsCreatorAnalyticsModule then UseLocalizationFunction(PostInsightsStringsModule.MENU_KEYS).analytics else ""
@@ -68,7 +68,7 @@ return function(p1) --[[ Line: 96 ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local ReportCode, v1 = ReactModule.useState("------")
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 121 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseToggleStateResult (copy)
 		if UseToggleStateResult.enabled then
 			UseToggleStateResult.disable()
@@ -88,7 +88,7 @@ return function(p1) --[[ Line: 96 ]]
 	local ToastStoreModule = GetToastStoreModule(false)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(UseMomentsSessionResult.getHideDetails)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(MomentsPreferencesStoreModule.getMinimized)
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 137 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseToggleStateResult (copy), UseMomentsSessionResult (copy), FireAnalyticsEventFunction (upval), EventNames (upval), p1 (copy)
 		UseToggleStateResult.disable()
 		UseMomentsSessionResult.toggleFeedDetailVisibility()
@@ -98,7 +98,7 @@ return function(p1) --[[ Line: 96 ]]
 		UseToggleStateResult.disable,
 		UseMomentsSessionResult.toggleFeedDetailVisibility
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 145 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseToggleStateResult (copy), MomentsPreferencesStoreModule (copy), FireAnalyticsEventFunction (upval), EventNames (upval), p1 (copy)
 		UseToggleStateResult.disable()
 		MomentsPreferencesStoreModule.toggleFeedScaleType()
@@ -108,7 +108,7 @@ return function(p1) --[[ Line: 96 ]]
 		UseToggleStateResult.disable,
 		MomentsPreferencesStoreModule.toggleFeedScaleType
 	})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 153 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: CheckDebugAccessModule (upval), MomentsPreferencesStoreModule (copy), UseToggleStateResult (copy)
 		if CheckDebugAccessModule() then
 			MomentsPreferencesStoreModule.toggleFeedDebugMode()
@@ -118,7 +118,7 @@ return function(p1) --[[ Line: 96 ]]
 		UseToggleStateResult.disable,
 		MomentsPreferencesStoreModule.toggleFeedDebugMode
 	})
-	local UseResult4 = ReactModule.useCallback(function(p2, p3, p4) --[[ Line: 161 ]]
+	local UseResult4 = ReactModule.useCallback(function(p2, p3, p4)
 		-- upvalues: p1 (copy), ReportMomentModule (upval), MakeRecommendationAttributionModule (upval), UseFeedResult (copy), SignalActionTypeModule (upval), MakeFeedActionFieldsModule (upval), FireAnalyticsEventFunction (upval), EventNames (upval), ModeratedItemsStoreModule (copy), ToastStoreModule (copy), UseLocalizationResult (copy)
 		if not p1.moment then
 			return nil
@@ -128,7 +128,7 @@ return function(p1) --[[ Line: 96 ]]
 		local v4 = nil
 		
 		if not p4 then
-			v2, v3, v76 = pcall(function() --[[ Line: 170 ]]
+			v2, v3, v76 = pcall(function()
 				-- upvalues: ReportMomentModule (upval), p1 (upval), p2 (copy)
 				return ReportMomentModule(p1.moment.recommendationMetadata.feedItemId, p2):await()
 			end)
@@ -137,7 +137,7 @@ return function(p1) --[[ Line: 96 ]]
 		local RecommendationAttributionModule = MakeRecommendationAttributionModule(RecommendationMetadata)
 		
 		if RecommendationAttributionModule then
-			local Success, Result = pcall(function() --[[ Line: 183 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: UseFeedResult (upval), SignalActionTypeModule (upval), RecommendationAttributionModule (copy)
 				UseFeedResult.logAction(SignalActionTypeModule.Report, RecommendationAttributionModule, {})
 			end)
@@ -165,7 +165,7 @@ return function(p1) --[[ Line: 96 ]]
 		ModeratedItemsStoreModule.markReported, ToastStoreModule.triggerToast,
 		UseLocalizationResult
 	})
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 229 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseToggleStateResult (copy), MomentsReportButtonAnalytics (upval), ReportMomentsEngagementFunction (upval), GetPostFeedItemIdModule (upval), p1 (copy), FFlagMomentsServeEDPVideos (upval), IsEdpVideo (copy), OpenMomentsFeedReportFunction (copy), ReportModalCovering (upval), UseResult4 (copy), v1 (copy), UseStateResult2_1 (copy), Moments (upval), UseStateResult2 (copy)
 		UseToggleStateResult.disable()
 		
@@ -180,15 +180,15 @@ return function(p1) --[[ Line: 96 ]]
 			OpenMomentsFeedReportFunction({
 				feedItemId = FeedItemId,
 				momentId = p1.moment.momentId,
-				onSubmit = function() --[[ Line: 247 ]]
+				onSubmit = function()
 					-- upvalues: UseResult4 (upval)
 					UseResult4(nil, false, true)
 				end,
-				onClose = function() --[[ Line: 250 ]]
+				onClose = function()
 					-- upvalues: ReportModalCovering (upval)
 					ReportModalCovering.setCovering(false)
 				end,
-				onIpReportCode = function(p2) --[[ Line: 254 ]]
+				onIpReportCode = function(p2)
 					-- upvalues: UseResult4 (upval), v1 (upval), UseStateResult2_1 (upval)
 					UseResult4(nil, true, true)
 					v1(if p2 and p2 ~= "" then p2 else "------")
@@ -211,17 +211,17 @@ return function(p1) --[[ Line: 96 ]]
 		p1.moment,
 		if FFlagMomentsServeEDPVideos then IsEdpVideo else false
 	})
-	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 282 ]]
+	local UseResult6 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {})
-	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 286 ]]
+	local UseResult7 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy)
 		if UseStateResult2_1 then
 			UseStateResult2_1(false)
 		end
 	end, {})
-	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 292 ]]
+	local UseResult8 = ReactModule.useCallback(function()
 		-- upvalues: UseToggleStateResult (copy), UseMomentsSessionResult (copy), p1 (copy)
 		UseToggleStateResult.disable()
 		UseMomentsSessionResult.requestDeletion(p1.moment.momentId, p1.moment.recommendationMetadata and p1.moment.recommendationMetadata.feedItemId, if p1.moment.recommendationMetadata then p1.moment.recommendationMetadata.tracingId else nil)
@@ -230,7 +230,7 @@ return function(p1) --[[ Line: 96 ]]
 		UseToggleStateResult.disable,
 		UseMomentsSessionResult.requestDeletion
 	})
-	local UseResult9 = if FFlagMomentsCreatorAnalyticsModule then ReactModule.useCallback(function() --[[ Line: 306 ]]
+	local UseResult9 = if FFlagMomentsCreatorAnalyticsModule then ReactModule.useCallback(function()
 		-- upvalues: UseToggleStateResult (copy), GetFFlagMomentsCoachmarkPersistenceFunction (upval), DismissPostInsightsCoachmarkModule (upval), p1 (copy), GetPostInsightsPageStoreModule (upval)
 		UseToggleStateResult.disable()
 		
@@ -245,7 +245,7 @@ return function(p1) --[[ Line: 96 ]]
 		p1.momentStore or false,
 		UseToggleStateResult.disable
 	}) else nil
-	local UseResult10 = ReactModule.useCallback(function() --[[ Line: 318 ]]
+	local UseResult10 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		if not p1.isDisabled then
 			p1.playbackVolume.toggle()
@@ -253,7 +253,7 @@ return function(p1) --[[ Line: 96 ]]
 			return
 		end
 	end, { p1.isDisabled, p1.playbackVolume })
-	local UseResult11 = ReactModule.useCallback(function() --[[ Line: 331 ]]
+	local UseResult11 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), FireAnalyticsEventFunction (upval), EventNames (upval)
 		if not p1.isDisabled then
 			FireAnalyticsEventFunction(if p1.playbackVolume.isMuted then EventNames.FeedUnmuteButtonPressed else EventNames.FeedMuteButtonPressed, { momentId = p1.moment.momentId })
@@ -266,7 +266,7 @@ return function(p1) --[[ Line: 96 ]]
 	local Element = ReactModule.createElement(Menu, {
 		align = FoundationModule.Enums.PopoverAlign.End,
 		isOpen = UseToggleStateResult.enabled,
-		items = ReactModule.useMemo(function() --[[ Line: 357 ]]
+		items = ReactModule.useMemo(function()
 			-- upvalues: UseSignalStateResult (copy), UseLocalizationResult (copy), UseResult1 (copy), UseSignalStateResult1 (copy), UseResult2 (copy), p1 (copy), FFlagMomentsServeEDPVideos (upval), IsEdpVideo (copy), LocalPlayer (upval), FoundationModule (upval), UseResult5 (copy), FFlagMomentsPassFeedItemIdToBackendApis (upval), FFlagMomentsOptimisticProfilePending (upval), UseResult8 (copy), FFlagMomentsCreatorAnalyticsModule (upval), Analytics (ref), UseResult9 (ref), CheckDebugAccessModule (upval), UseResult3 (copy)
 			local List = {
 				{

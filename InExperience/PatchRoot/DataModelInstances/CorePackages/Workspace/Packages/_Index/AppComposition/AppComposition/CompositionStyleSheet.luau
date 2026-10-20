@@ -6,19 +6,19 @@ local UseStyleSheetFunction = FoundationModule.Hooks.useStyleSheet
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local SetupCompositionStyleRulesModule = require(AppComposition.setupCompositionStyleRules)
 
-return function() --[[ Line: 18 | Named "CompositionStyleSheet" ]]
+return function()
 	-- upvalues: ReactModule (copy), UseStyleSheetFunction (copy), UseTokensFunction (copy), SetupCompositionStyleRulesModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStyleSheetResult = UseStyleSheetFunction()
 	local UseTokensResult = UseTokensFunction()
-	ReactModule.useLayoutEffect(function() --[[ Line: 23 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseRefResult (copy), UseStyleSheetResult (copy), SetupCompositionStyleRulesModule (upval), UseTokensResult (copy)
 		if UseRefResult.current and UseStyleSheetResult then
 			UseRefResult.current:SetDerives({ UseStyleSheetResult })
 			
 			return SetupCompositionStyleRulesModule(UseRefResult.current, UseTokensResult)
 		else
-			return function() --[[ Line: 28 ]] end
+			return function() end
 		end
 	end, { UseRefResult, UseStyleSheetResult, UseTokensResult })
 	

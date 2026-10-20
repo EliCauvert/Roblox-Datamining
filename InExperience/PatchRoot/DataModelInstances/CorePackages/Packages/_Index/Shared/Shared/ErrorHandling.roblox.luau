@@ -9,7 +9,7 @@ local ChildNames = {
 }
 local v1 = nil
 
-local function getReactPackagePrefixes() --[[ Line: 52 ]]
+local function getReactPackagePrefixes()
 	-- upvalues: v1 (ref), ChildNames (copy), Parent (copy)
 	if _G.ENVIRONMENT == "PRODUCTION" then
 		return {}
@@ -31,7 +31,7 @@ local function getReactPackagePrefixes() --[[ Line: 52 ]]
 	return Games
 end
 
-local function _(Text: string): boolean --[[ Line: 85 | Named "isInternalFrame" ]]
+local function _(Text: string): boolean
 	-- upvalues: getReactPackagePrefixes (copy)
 	for _, value in getReactPackagePrefixes() do
 		if string.sub(Text, 1, #value) == value then
@@ -41,7 +41,7 @@ local function _(Text: string): boolean --[[ Line: 85 | Named "isInternalFrame" 
 	return false
 end
 
-local function buildStackString(p1: number): string --[[ Line: 104 ]]
+local function buildStackString(p1: number): string
 	-- upvalues: getReactPackagePrefixes (copy)
 	local Text = ""
 	local Flag = false
@@ -87,7 +87,7 @@ end
 
 return {
 	__ERROR_DIVIDER = "\n------ Error caught by React ------\n",
-	describeError = function(Text: string) --[[ Line: 147 ]]
+	describeError = function(Text: string)
 		-- upvalues: LuauPolyfillModule (copy), FilterInternalStackFrames (copy), buildStackString (copy)
 		if typeof(Text) ~= "string" then
 			return Text
@@ -105,11 +105,11 @@ return {
 			return NewResult
 		end
 	end,
-	errorToString = function(p2) --[[ Line: 171 ]]
+	errorToString = function(p2)
 		-- upvalues: InspectFunction (copy)
 		return if typeof(p2) == "table" and (p2.message and p2.stack) then "\n------ Error caught by React ------\n" .. p2.message .. "\n------ Error caught by React ------\n" .. tostring(p2.stack) else InspectFunction(p2)
 	end,
-	parseReactError = function(Text: string) --[[ Line: 197 ]]
+	parseReactError = function(Text: string)
 		-- upvalues: Error (copy)
 		local Parts = string.split(Text, "\n------ Error caught by React ------\n")
 		

@@ -7,7 +7,7 @@ local RefreshOmniRecommendationFeedItemModule = require(ServerDrivenUi.Actions.r
 local RefreshHomePageFeedItemModule = require(Parent.Home.refreshHomePageFeedItem)
 local FFlagLuaAppEnableSduiHomePage = require(Parent.SharedFlags).FFlagLuaAppEnableSduiHomePage
 
-local function _(p1, Message, PropName) --[[ Line: 18 | Named "reportInvalidActionParams" ]]
+local function _(p1, Message, PropName)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy)
 	p1.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 		name = SduiActionType.RefreshOmniRecommendationFeedItem,
@@ -16,7 +16,7 @@ local function _(p1, Message, PropName) --[[ Line: 18 | Named "reportInvalidActi
 	}, p1.appPage)
 end
 
-return function(p1, _, p2) --[[ Line: 28 ]]
+return function(p1, _, p2)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), FFlagLuaAppEnableSduiHomePage (copy), RefreshHomePageFeedItemModule (copy), RefreshOmniRecommendationFeedItemModule (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	
@@ -75,10 +75,10 @@ return function(p1, _, p2) --[[ Line: 28 ]]
 			}, p2.appPage)
 		end
 	end
-	return if FFlagLuaAppEnableSduiHomePage then RefreshHomePageFeedItemModule(TopicId, FeedItemKey, RequestIntent, function(p3, p4) --[[ Line: 73 ]]
+	return if FFlagLuaAppEnableSduiHomePage then RefreshHomePageFeedItemModule(TopicId, FeedItemKey, RequestIntent, function(p3, p4)
 		-- upvalues: p2 (copy)
 		p2.dependencies.logger.reportError(p3, p4, p2.appPage)
-	end, { contextFeatures = ContextFeatures }) else RefreshOmniRecommendationFeedItemModule(p2.dependencies.networking, p2.appPage, TopicId, FeedItemKey, RequestIntent, function(p3, p4) --[[ Line: 84 ]]
+	end, { contextFeatures = ContextFeatures }) else RefreshOmniRecommendationFeedItemModule(p2.dependencies.networking, p2.appPage, TopicId, FeedItemKey, RequestIntent, function(p3, p4)
 		-- upvalues: p2 (copy)
 		p2.dependencies.logger.reportError(p3, p4, p2.appPage)
 	end, { contextFeatures = ContextFeatures })

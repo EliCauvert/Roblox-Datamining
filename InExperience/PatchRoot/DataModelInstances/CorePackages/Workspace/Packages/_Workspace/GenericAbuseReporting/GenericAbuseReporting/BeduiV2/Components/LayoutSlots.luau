@@ -12,7 +12,7 @@ local View = FoundationModule.View
 local UseIsSlideAnimatingFunction = require(GenericAbuseReporting.BeduiV2.Components.SlideTransitionContext).useIsSlideAnimating
 local Context = ReactModule.createContext(false)
 local SheetSlots = {
-	Title = ReactModule.forwardRef(function(p1, _) --[[ Line: 70 ]]
+	Title = ReactModule.forwardRef(function(p1, _)
 		-- upvalues: ReactModule (copy), TextWithTranslationModule (copy)
 		return ReactModule.createElement(TextWithTranslationModule, {
 			tag = "size-full-0 auto-y text-heading-medium",
@@ -20,14 +20,14 @@ local SheetSlots = {
 			layoutOrder = p1.layoutOrder
 		})
 	end),
-	Layout = ReactModule.forwardRef(function(p1, Ref) --[[ Line: 100 ]]
+	Layout = ReactModule.forwardRef(function(p1, Ref)
 		-- upvalues: ReactModule (copy), Sheet (copy)
 		return ReactModule.createElement(ReactModule.Fragment, nil, {
 			Content = ReactModule.createElement(Sheet.Content, { ref = Ref, isContentFullBleed = p1.isContentFullBleed }, p1.body),
 			Actions = if p1.actions == nil then nil else ReactModule.createElement(Sheet.Actions, nil, p1.actions)
 		})
 	end),
-	ContentInset = ReactModule.forwardRef(function(p1, _) --[[ Line: 116 ]]
+	ContentInset = ReactModule.forwardRef(function(p1, _)
 		-- upvalues: ReactModule (copy), View (copy)
 		return ReactModule.createElement(View, {
 			tag = "col gap-medium size-full-0 auto-y padding-x-xlarge",
@@ -41,7 +41,7 @@ return {
 	INLINE_LANDSCAPE_WIDTH = 468,
 	sheetSlots = SheetSlots,
 	inlineSlots = {
-		Title = ReactModule.forwardRef(function(p1, _) --[[ Line: 78 ]]
+		Title = ReactModule.forwardRef(function(p1, _)
 			-- upvalues: ReactModule (copy), View (copy), TextWithTranslationModule (copy), SubtitleModule (copy)
 			return ReactModule.createElement(View, {
 				tag = "col gap-xsmall size-full-0 auto-y",
@@ -58,7 +58,7 @@ return {
 				})
 			})
 		end),
-		Layout = ReactModule.forwardRef(function(p1, Ref) --[[ Line: 145 ]]
+		Layout = ReactModule.forwardRef(function(p1, Ref)
 			-- upvalues: ReactModule (copy), Context (copy), UseTokensFunction (copy), UseIsSlideAnimatingFunction (copy), View (copy)
 			local UseContextResult = ReactModule.useContext(Context)
 			local UseTokensResult = UseTokensFunction()
@@ -74,7 +74,7 @@ return {
 					AutomaticCanvasSize = Enum.AutomaticSize.Y,
 					CanvasSize = UDim2.new(1, 0, 0, 0),
 					ScrollingDirection = Enum.ScrollingDirection.Y,
-					ScrollBarImageTransparency = UseIsSlideAnimatingFunction():map(function(p2): number --[[ Line: 149 ]]
+					ScrollBarImageTransparency = UseIsSlideAnimatingFunction():map(function(p2): number
 						return if p2 then 1 else 0
 					end)
 				}, ReactModule.createElement(View, {
@@ -104,7 +104,7 @@ return {
 				}, p1.actions))
 			})
 		end),
-		ContentInset = ReactModule.forwardRef(function(p1, _) --[[ Line: 225 ]]
+		ContentInset = ReactModule.forwardRef(function(p1, _)
 			-- upvalues: ReactModule (copy), View (copy)
 			return ReactModule.createElement(View, {
 				tag = "col gap-medium size-full-0 auto-y",
@@ -112,19 +112,19 @@ return {
 			}, p1.children)
 		end)
 	},
-	LayoutSlotsProvider = function(p1) --[[ Line: 245 ]]
+	LayoutSlotsProvider = function(p1)
 		-- upvalues: ReactModule (copy), Context1 (copy)
 		return ReactModule.createElement(Context1.Provider, { value = p1.slots }, p1.children)
 	end,
-	useLayoutSlots = function() --[[ Line: 256 ]]
+	useLayoutSlots = function()
 		-- upvalues: ReactModule (copy), Context1 (copy)
 		return ReactModule.useContext(Context1)
 	end,
-	OverlaidControlsProvider = function(p1) --[[ Line: 58 ]]
+	OverlaidControlsProvider = function(p1)
 		-- upvalues: ReactModule (copy), Context (copy)
 		return ReactModule.createElement(Context.Provider, { value = p1.value }, p1.children)
 	end,
-	useShouldUseOverlaidControls = function() --[[ Line: 65 ]]
+	useShouldUseOverlaidControls = function()
 		-- upvalues: ReactModule (copy), Context (copy)
 		return ReactModule.useContext(Context)
 	end

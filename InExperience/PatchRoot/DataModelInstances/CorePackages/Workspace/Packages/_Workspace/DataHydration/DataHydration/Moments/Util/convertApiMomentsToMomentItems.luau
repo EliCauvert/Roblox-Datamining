@@ -15,26 +15,26 @@ local _Color3 = Color3.new(0, 0, 0)
 local Center = Enum.TextXAlignment.Center
 local _UDim2 = UDim2.fromScale(0.5, 0.5)
 
-local function _(p1) --[[ Line: 33 | Named "toCaptureType" ]]
+local function _(p1)
 	return if p1 == "Screenshot" then Enum.CaptureType.Screenshot else Enum.CaptureType.Video
 end
 
-local _ = function(Deleted) --[[ Line: 41 | Named "toMomentStatus" ]]
+local _ = function(Deleted)
 	-- upvalues: MomentStatus (copy)
 	return if Deleted == MomentStatus.Deleted then MomentStatus.Deleted else MomentStatus.Public
 end
 
-local _ = function(p1) --[[ Line: 49 | Named "toMomentEntityType" ]]
+local _ = function(p1)
 	-- upvalues: FFlagMomentsServeEDPVideos (copy)
 	return if p1 == "experience" or p1 == "ad" then p1 elseif FFlagMomentsServeEDPVideos and p1 == "edpVideo" then p1 else nil
 end
 
-local function toEnumItem(TextXAlignment, Text: string, BuilderSansMedium) --[[ Line: 59 ]]
+local function toEnumItem(TextXAlignment, Text: string, BuilderSansMedium)
 	if typeof(Text) == "EnumItem" then
 		return Text
 	elseif type(Text) == "string" then
 		local Match: string = string.match(Text, "([^%.]+)$") or Text
-		local Success, Result = pcall(function() --[[ Line: 68 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: TextXAlignment (copy), Match (copy)
 			return TextXAlignment[Match]
 		end)
@@ -45,7 +45,7 @@ local function toEnumItem(TextXAlignment, Text: string, BuilderSansMedium) --[[ 
 	end
 end
 
-local function toColor3(Entry) --[[ Line: 77 ]]
+local function toColor3(Entry)
 	-- upvalues: _Color3 (copy)
 	if typeof(Entry) == "Color3" then
 		return Entry
@@ -60,7 +60,7 @@ local function toColor3(Entry) --[[ Line: 77 ]]
 	end
 end
 
-local function toUDim2(Entry) --[[ Line: 98 ]]
+local function toUDim2(Entry)
 	-- upvalues: _UDim2 (copy)
 	if typeof(Entry) == "UDim2" then
 		return Entry
@@ -76,7 +76,7 @@ local function toUDim2(Entry) --[[ Line: 98 ]]
 	end
 end
 
-local function normalizeTextOverlayEdit(p1) --[[ Line: 129 ]]
+local function normalizeTextOverlayEdit(p1)
 	-- upvalues: toUDim2 (copy), toEnumItem (copy), BuilderSansMedium (copy), toColor3 (copy), Center (copy)
 	if type(p1) == "table" then
 		local TextOverlayStyle = p1.textOverlayStyle or {}
@@ -99,7 +99,7 @@ local function normalizeTextOverlayEdit(p1) --[[ Line: 129 ]]
 	end
 end
 
-local function normalizeStickerOverlayEdit(p1) --[[ Line: 152 ]]
+local function normalizeStickerOverlayEdit(p1)
 	-- upvalues: toUDim2 (copy)
 	return if type(p1) == "table" and (type(p1.stickerURI) == "string" and p1.stickerURI ~= "") then {
 		position = toUDim2(p1.position),
@@ -111,7 +111,7 @@ local function normalizeStickerOverlayEdit(p1) --[[ Line: 152 ]]
 	} else nil
 end
 
-local function normalizeTtsEdit(p1) --[[ Line: 171 ]]
+local function normalizeTtsEdit(p1)
 	if type(p1) == "table" then
 		local Number: number? = tonumber(p1.assetId)
 		
@@ -127,7 +127,7 @@ local function normalizeTtsEdit(p1) --[[ Line: 171 ]]
 	end
 end
 
-local function normalizeCaptureEdits(ScreenshotCaptureEdits) --[[ Line: 189 ]]
+local function normalizeCaptureEdits(ScreenshotCaptureEdits)
 	-- upvalues: normalizeTextOverlayEdit (copy), FFlagMomentsStickerOverlayNormalizationModule (copy), normalizeStickerOverlayEdit (copy), normalizeTtsEdit (copy)
 	if ScreenshotCaptureEdits == nil then
 		return nil
@@ -189,7 +189,7 @@ local function normalizeCaptureEdits(ScreenshotCaptureEdits) --[[ Line: 189 ]]
 	}
 end
 
-local _ = function(p1): number? --[[ Line: 246 | Named "reactionTotal" ]]
+local _ = function(p1): number?
 	if p1 == nil or p1.counts == nil then
 		return nil
 	end
@@ -201,7 +201,7 @@ local _ = function(p1): number? --[[ Line: 246 | Named "reactionTotal" ]]
 	return Total
 end
 
-local function convertApiMomentToMomentItem(p2) --[[ Line: 259 ]]
+local function convertApiMomentToMomentItem(p2)
 	-- upvalues: FFlagMomentsServeEDPVideos (copy), normalizeCaptureEdits (copy), MomentStatus (copy), FFlagEnableMomentsCommentReporting (copy), GetFFlagMomentsRenderPostAssetsModule (copy), FFlagMomentsComments (copy), FFlagMomentsCommentsIxpEnabled (copy), ConvertApiMomentCommentsModule (copy)
 	local CaptionedAssetMoment = p2.captionedAssetMoment
 	local Owner = p2.owner
@@ -273,7 +273,7 @@ local function convertApiMomentToMomentItem(p2) --[[ Line: 259 ]]
 	return config
 end
 
-return function(List) --[[ Line: 344 | Named "convertApiMomentsToMomentItems" ]]
+return function(List)
 	-- upvalues: convertApiMomentToMomentItem (copy)
 	local List1 = {}
 	

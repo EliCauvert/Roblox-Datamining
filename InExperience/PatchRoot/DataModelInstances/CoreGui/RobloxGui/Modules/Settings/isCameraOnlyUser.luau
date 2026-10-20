@@ -7,7 +7,7 @@ local GetFFlagAvatarChatServiceEnabledFunction = require(CorePackages.Workspace.
 local GetFFlagUseCameraDevicesListenerModule = require(RobloxGui.Modules.Flags.getFFlagUseCameraDevicesListener)
 local CameraDevicesHelperModule = require(RobloxGui.Modules.Settings.cameraDevicesHelper)
 
-return function(): boolean --[[ Line: 14 ]]
+return function(): boolean
 	-- upvalues: GetFFlagAvatarChatServiceEnabledFunction (copy), AvatarChatService (copy), GetFFlagUseCameraDevicesListenerModule (copy), CameraDevicesHelperModule (copy), VideoCaptureService (copy), CryoModule (copy)
 	if not GetFFlagAvatarChatServiceEnabledFunction() then
 		return false

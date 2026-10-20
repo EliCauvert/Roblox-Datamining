@@ -25,7 +25,7 @@ local ZeroVector = Vector2.zero
 local _UDim2_3 = UDim2.new(0.5, 0, 0.5, -(TALLSIZE.Y.Offset / 2 + 8))
 local _Vector2_2 = Vector2.new(0.5, 1)
 
-local function AnchorTarget(p1) --[[ Line: 192 ]]
+local function AnchorTarget(p1)
 	-- upvalues: ReactModule (copy), ViewModule (copy), _UDim2_1 (copy), _Vector2_1 (copy), _UDim2 (copy), TextModule (copy)
 	return ReactModule.createElement(ViewModule, {
 		tag = "row align-x-center align-y-center radius-medium stroke-neutral bg-surface-300",
@@ -42,7 +42,7 @@ local function AnchorTarget(p1) --[[ Line: 192 ]]
 	})
 end
 
-local function PopoverPanel(p1) --[[ Line: 215 ]]
+local function PopoverPanel(p1)
 	-- upvalues: ReactModule (copy), ViewModule (copy), TextModule (copy)
 	return ReactModule.createElement(ViewModule, {
 		tag = "row align-x-center align-y-center padding-small",
@@ -56,7 +56,7 @@ local function PopoverPanel(p1) --[[ Line: 215 ]]
 	})
 end
 
-local function PanelSlot(Frame) --[[ Line: 233 ]]
+local function PanelSlot(Frame)
 	-- upvalues: ReactModule (copy), ViewModule (copy), TextModule (copy)
 	return ReactModule.createElement(ViewModule, {
 		tag = "row align-x-center align-y-center radius-small bg-shift-200",
@@ -71,13 +71,13 @@ local function PanelSlot(Frame) --[[ Line: 233 ]]
 	})
 end
 
-local function useCenteredRect(Frame: Frame, p1) --[[ Line: 278 ]]
+local function useCenteredRect(Frame: Frame, p1)
 	-- upvalues: ReactModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.zero)
-	ReactModule.useEffect(function() --[[ Line: 281 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy), UseStateResult2 (copy), p1 (copy)
 		if Frame == nil then return end
-		local function update() --[[ Line: 286 ]]
+		local function update()
 			-- upvalues: UseStateResult2 (upval), Frame (upval), p1 (upval)
 			UseStateResult2(Frame.AbsolutePosition + (Frame.AbsoluteSize - p1) / 2)
 		end
@@ -86,7 +86,7 @@ local function useCenteredRect(Frame: Frame, p1) --[[ Line: 278 ]]
 		local Connection = Frame:GetPropertyChangedSignal("AbsolutePosition"):Connect(update)
 		local Connection1 = Frame:GetPropertyChangedSignal("AbsoluteSize"):Connect(update)
 		
-		return function() --[[ Line: 294 ]]
+		return function()
 			-- upvalues: Connection (copy), Connection1 (copy)
 			Connection:Disconnect()
 			Connection1:Disconnect()
@@ -125,7 +125,7 @@ return {
 		RadiusModule.Circle
 	},
 	COMPOSITION_ORDER = { "Body", "Title + body", "Title + body + actions" },
-	makePanelChildren = function(p1) --[[ Line: 255 ]]
+	makePanelChildren = function(p1)
 		-- upvalues: ReactModule (copy), ViewModule (copy), PanelSlot (copy)
 		local IsNotBody = p1 ~= "Body"
 		local IsTitleBodyActions = p1 == "Title + body + actions"
@@ -146,7 +146,7 @@ return {
 	TALL_ANCHOR_SIZE = TALLSIZE,
 	PLAYGROUND_FRAME_SIZE = UDim2.new(1, 0, 0, NewOffset),
 	PLAYGROUND_TAG = OverlayStoryAnchorModule.PLAYGROUND_TAG,
-	PopoverStage = function(Frame) --[[ Line: 328 ]]
+	PopoverStage = function(Frame)
 		-- upvalues: ReactModule (copy), useCenteredRect (copy), _Vector2 (copy), UseMeasurableRefModule (copy), OverlayStoryAnchorModule (copy), _UDim2_2 (copy), ZeroVector (copy), PopoverModule (copy), _UDim2_1 (copy), _Vector2_1 (copy), PopoverPanel (copy), AnchorTarget (copy), TextModule (copy), _UDim2_3 (copy), _Vector2_2 (copy), ViewModule (copy), NewOffset (copy), OverlayModule (copy)
 		local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 		local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
@@ -158,7 +158,7 @@ return {
 			Position = if UseRefResult1 then _UDim2_2 else nil,
 			AnchorPoint = if UseRefResult1 then ZeroVector else nil,
 			Size = Frame.anchorSize,
-			onActivated = function() --[[ Line: 345 ]]
+			onActivated = function()
 				-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
 				UseStateResult2(not UseStateResult)
 			end
@@ -173,7 +173,7 @@ return {
 					hasArrow = Frame.hasArrow,
 					radius = Frame.radius,
 					backgroundStyle = Frame.backgroundStyle,
-					onPressedOutside = if Frame.hasOutsidePressDismiss then function() --[[ Line: 364 ]]
+					onPressedOutside = if Frame.hasOutsidePressDismiss then function()
 						-- upvalues: UseStateResult2 (copy)
 						UseStateResult2(false)
 					end else nil
@@ -199,7 +199,7 @@ return {
 			}) else nil
 		})
 	end,
-	PopoverTarget = function(Frame) --[[ Line: 425 ]]
+	PopoverTarget = function(Frame)
 		-- upvalues: ReactModule (copy), PopoverModule (copy), OverlayStoryAnchorModule (copy), PopoverPanel (copy)
 		local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 		
@@ -207,7 +207,7 @@ return {
 			Anchor = ReactModule.createElement(PopoverModule.Anchor, { LayoutOrder = Frame.LayoutOrder }, {
 				Anchor = ReactModule.createElement(OverlayStoryAnchorModule.Anchor, {
 					Size = Frame.anchorSize,
-					onActivated = function() --[[ Line: 432 ]]
+					onActivated = function()
 						-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
 						UseStateResult2(not UseStateResult)
 					end
@@ -219,20 +219,20 @@ return {
 				hasArrow = Frame.hasArrow,
 				radius = Frame.radius,
 				backgroundStyle = Frame.backgroundStyle,
-				onPressedOutside = function() --[[ Line: 443 ]]
+				onPressedOutside = function()
 					-- upvalues: UseStateResult2 (copy)
 					UseStateResult2(false)
 				end
 			}, Frame.panel or ReactModule.createElement(PopoverPanel, {}))
 		})
 	end,
-	headerLabels = function(p1) --[[ Line: 454 ]]
+	headerLabels = function(p1)
 		-- upvalues: DashModule (copy)
-		return DashModule.map(p1, function(p2): string --[[ Line: 455 ]]
+		return DashModule.map(p1, function(p2): string
 			return (tostring(p2))
 		end)
 	end,
-	useBackgroundStylePreset = function(p1) --[[ Line: 460 ]]
+	useBackgroundStylePreset = function(p1)
 		-- upvalues: UseTokensModule (copy), SurfacePresetsModule (copy)
 		local UseTokensModuleResult = UseTokensModule()
 		

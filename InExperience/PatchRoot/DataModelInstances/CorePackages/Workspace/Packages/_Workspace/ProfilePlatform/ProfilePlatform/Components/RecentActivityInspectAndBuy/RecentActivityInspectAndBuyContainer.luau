@@ -5,13 +5,13 @@ local RecentActivityInspectAndBuyViewModule = require(script.Parent.RecentActivi
 local UseRecentActivityInspectAndBuyViewModelModule = require(script.Parent.useRecentActivityInspectAndBuyViewModel)
 local t = {}
 
-return function() --[[ Line: 12 | Named "RecentActivityInspectAndBuyContainer" ]]
+return function()
 	-- upvalues: UseNavigationFunction (copy), ReactModule (copy), t (copy), UseRecentActivityInspectAndBuyViewModelModule (copy), RecentActivityInspectAndBuyViewModule (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	
 	return ReactModule.createElement(RecentActivityInspectAndBuyViewModule, (UseRecentActivityInspectAndBuyViewModelModule({
 		assetIds = UseNavigationResult.getParam("assetIds") or t,
-		onClose = ReactModule.useCallback(function() --[[ Line: 15 ]]
+		onClose = ReactModule.useCallback(function()
 			-- upvalues: UseNavigationResult (copy)
 			UseNavigationResult.goBack()
 		end, { UseNavigationResult })

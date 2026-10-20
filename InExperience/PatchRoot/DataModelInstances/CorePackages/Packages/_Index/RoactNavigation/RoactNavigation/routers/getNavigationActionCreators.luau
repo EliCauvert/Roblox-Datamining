@@ -1,10 +1,10 @@
 ﻿local NavigationActionsModule = require(script.Parent.Parent.NavigationActions)
 local InvariantModule = require(script.Parent.Parent.utils.invariant)
 
-return function(p1) --[[ Line: 4 ]]
+return function(p1)
 	-- upvalues: InvariantModule (copy), NavigationActionsModule (copy)
 	return {
-		goBack = function(Key) --[[ Line: 8 ]]
+		goBack = function(Key)
 			-- upvalues: p1 (copy), InvariantModule (upval), NavigationActionsModule (upval)
 			if Key == nil and p1.key then
 				InvariantModule(type(p1.key) == "string", ".goBack(): key should be a string")
@@ -12,7 +12,7 @@ return function(p1) --[[ Line: 4 ]]
 			end
 			return NavigationActionsModule.back({ key = Key })
 		end,
-		navigate = function(RouteName, Params, Action) --[[ Line: 19 ]]
+		navigate = function(RouteName, Params, Action)
 			-- upvalues: NavigationActionsModule (upval), InvariantModule (upval)
 			if type(RouteName) == "string" then
 				return NavigationActionsModule.navigate({ routeName = RouteName, params = Params, action = Action })
@@ -24,7 +24,7 @@ return function(p1) --[[ Line: 4 ]]
 				return NavigationActionsModule.navigate(RouteName)
 			end
 		end,
-		setParams = function(Params) --[[ Line: 36 ]]
+		setParams = function(Params)
 			-- upvalues: InvariantModule (upval), p1 (copy), NavigationActionsModule (upval)
 			InvariantModule(type(p1.key) == "string", ".setParams(): cannot be called by the root navigator")
 			

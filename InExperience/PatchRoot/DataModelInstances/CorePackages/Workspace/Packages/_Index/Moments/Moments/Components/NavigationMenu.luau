@@ -13,16 +13,16 @@ local config = {
 	myMoments = "Feature.Moments.Label.FeedMyMoments"
 }
 
-return function(p1) --[[ Line: 43 | Named "NavigationMenu" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), UseToggleStateFunction (copy), ReactModule (copy), IconButton (copy), ThreeDotsHorizontal (copy), ButtonVariant (copy), InputSize (copy), Menu (copy), FoundationModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseToggleStateResult = UseToggleStateFunction()
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 58 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseToggleStateResult (copy), p1 (copy)
 		UseToggleStateResult.disable()
 		p1.onNavigateToTrending()
 	end, { UseToggleStateResult.disable, p1.onNavigateToTrending })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 63 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseToggleStateResult (copy), p1 (copy)
 		UseToggleStateResult.disable()
 		p1.onNavigateToMyMoments()
@@ -31,7 +31,7 @@ return function(p1) --[[ Line: 43 | Named "NavigationMenu" ]]
 	return ReactModule.createElement(Menu, {
 		align = FoundationModule.Enums.PopoverAlign.End,
 		isOpen = UseToggleStateResult.enabled,
-		items = ReactModule.useMemo(function() --[[ Line: 68 ]]
+		items = ReactModule.useMemo(function()
 			-- upvalues: UseLocalizationResult (copy), UseResult (copy), UseResult1 (copy)
 			return {
 				{
@@ -55,7 +55,7 @@ return function(p1) --[[ Line: 43 | Named "NavigationMenu" ]]
 			Selectable = true,
 			LayoutOrder = p1.layoutOrder,
 			icon = ThreeDotsHorizontal,
-			onActivated = ReactModule.useCallback(function() --[[ Line: 50 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: UseToggleStateResult (copy)
 				if UseToggleStateResult.enabled then
 					UseToggleStateResult.disable()

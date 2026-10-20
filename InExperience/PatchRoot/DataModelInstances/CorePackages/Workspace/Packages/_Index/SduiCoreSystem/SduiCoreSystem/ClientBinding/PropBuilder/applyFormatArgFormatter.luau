@@ -4,12 +4,12 @@ local SduiErrorsModule = require(SduiCoreSystem.SduiErrors)
 local SduiLoggerModule = require(SduiCoreSystem.SduiLogger)
 local LocalizationService = game:GetService("LocalizationService")
 
-local function _(p1) --[[ Line: 30 | Named "coerceNumericArg" ]]
+local function _(p1)
 	return if type(p1) == "number" then p1 elseif type(p1) == "string" then tonumber(p1) else nil
 end
 
-local _ = function(p1) --[[ Line: 40 | Named "tryDateTimeFromIsoString" ]]
-	local Success, Result = pcall(function() --[[ Line: 41 ]]
+local _ = function(p1)
+	local Success, Result = pcall(function()
 		-- upvalues: p1 (copy)
 		return DateTime.fromIsoDate(p1)
 	end)
@@ -17,7 +17,7 @@ local _ = function(p1) --[[ Line: 40 | Named "tryDateTimeFromIsoString" ]]
 	return if Success and Result then Result else nil
 end
 
-local function resolveDateTimeForFormat(Seconds) --[[ Line: 52 ]]
+local function resolveDateTimeForFormat(Seconds)
 	-- upvalues: resolveDateTimeForFormat (copy)
 	if type(Seconds) == "number" then
 		return DateTime.fromUnixTimestamp(Seconds)
@@ -27,7 +27,7 @@ local function resolveDateTimeForFormat(Seconds) --[[ Line: 52 ]]
 		local Seconds1 = if type(Seconds) == "number" then Seconds elseif type(Seconds) == "string" then tonumber(Seconds) else nil
 		
 		if Seconds1 == nil then
-			local Success, Result = pcall(function() --[[ Line: 41 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: Seconds (copy)
 				return DateTime.fromIsoDate(Seconds)
 			end)
@@ -40,7 +40,7 @@ local function resolveDateTimeForFormat(Seconds) --[[ Line: 52 ]]
 end
 
 return {
-	applyFormatArgFormatter = function(p1, p2, p3) --[[ Line: 78 ]]
+	applyFormatArgFormatter = function(p1, p2, p3)
 		-- upvalues: SduiLoggerModule (copy), SduiErrorsModule (copy), LocalizationModule (copy), LocalizationService (copy), resolveDateTimeForFormat (copy)
 		if p2.type == "TYPE_INVALID" or p2.type == nil then
 			SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.FailedToParseProp, { message = "Formatter specified without a type" }, p3)

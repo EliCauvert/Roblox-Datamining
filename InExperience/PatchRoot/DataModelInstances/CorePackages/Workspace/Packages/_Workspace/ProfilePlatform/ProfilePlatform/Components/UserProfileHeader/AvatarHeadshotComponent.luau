@@ -29,7 +29,7 @@ local UseNavigationFunction = require(Parent.Navigation).useNavigation
 local UseIsRobloxSubscriberFunction = require(Parent.UserProfiles).Hooks.useIsRobloxSubscriber
 local GetBuilderIconForCurrentPlatformFunction = FoundationModule.Utility.getBuilderIconForCurrentPlatform
 
-return function(p1) --[[ Line: 53 | Named "AvatarHeadshotComponent" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseDynamicSizeMarginModule (copy), UseLocalUserIdFunction (copy), ConvertToFoundationPresenceEnumFunction (copy), FFlagEnableFontStylisticAlternativesOnSocialScreens (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), FFlagAddPlatformNameToProfileHeader (copy), GetBuilderIconForCurrentPlatformFunction (copy), FFlagEnableBlackbirdCheck (copy), UseIsRobloxSubscriberFunction (copy), FFlagDisableCopyUsernameOnConsole (copy), ResponsiveModule (copy), FFlagEnableUserRecentActivityEntryPoint (copy), UseCurrentProfileFriendStatusModule (copy), EnumsModule (copy), UseNavigationFunction (copy), AppPage (copy), Default (copy), Contexts (copy), SetCurrentToastMessageFunction (copy), IconsActionsEditCopy (copy), ConstantsModule (copy), UserTile (copy), LayoutMode (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDynamicSizeMarginModuleResult, UseDynamicSizeMarginModuleResult2 = UseDynamicSizeMarginModule()
@@ -40,7 +40,7 @@ return function(p1) --[[ Line: 53 | Named "AvatarHeadshotComponent" ]]
 		usernameCopied = TextKeysModule.UsernameCopied,
 		viewRecentActivity = TextKeysModule.ViewRecentActivity
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 77 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FFlagAddPlatformNameToProfileHeader (upval), GetBuilderIconForCurrentPlatformFunction (upval)
 		return if FFlagAddPlatformNameToProfileHeader then GetBuilderIconForCurrentPlatformFunction() else nil
 	end, {})
@@ -49,11 +49,11 @@ return function(p1) --[[ Line: 53 | Named "AvatarHeadshotComponent" ]]
 	local UseCurrentProfileFriendStatusModuleResult = if FFlagEnableUserRecentActivityEntryPoint then UseCurrentProfileFriendStatusModule() else nil
 	local IsUserIdMatch1: boolean = if FFlagEnableUserRecentActivityEntryPoint then IsUserIdMatch or UseCurrentProfileFriendStatusModuleResult == EnumsModule.FriendStatus.Friends else false
 	local UseNavigationResult = if FFlagEnableUserRecentActivityEntryPoint then UseNavigationFunction() else nil
-	local UseResult = if FFlagEnableUserRecentActivityEntryPoint then ReactModule.useCallback(function() --[[ Line: 99 ]]
+	local UseResult = if FFlagEnableUserRecentActivityEntryPoint then ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy), AppPage (upval), p1 (copy)
 		UseNavigationResult.navigate(AppPage.UserRecentActivity, { userId = p1.userId, primaryName = p1.primaryName })
 	end, { UseNavigationResult, p1.userId, p1.primaryName }) else nil
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 107 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: Default (upval), Contexts (upval), p1 (copy), UseDispatchResult (copy), SetCurrentToastMessageFunction (upval), UseLocalizationResult (copy), IconsActionsEditCopy (upval)
 		Default:setClipboardText({ context = Contexts.ProfileCard, text = p1.username })
 		UseDispatchResult(SetCurrentToastMessageFunction({

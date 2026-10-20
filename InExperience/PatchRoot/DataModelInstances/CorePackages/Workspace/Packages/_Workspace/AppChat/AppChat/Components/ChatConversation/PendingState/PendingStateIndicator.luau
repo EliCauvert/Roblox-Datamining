@@ -86,7 +86,7 @@ local config = {
 	size = UDim2.new(1, 0, 1, 0)
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 113 | Named "PendingStateIndicator" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseCallbackFunction (copy), ReactModule (copy), PendingShimmerBubbleModule (copy), BidirectionalFlatList (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseStyleResult = UseStyleFunction()
@@ -103,7 +103,7 @@ return ReactModule.memo(function(p1) --[[ Line: 113 | Named "PendingStateIndicat
 			inverted = true,
 			optimizeInvertedCanvasResize = true,
 			data = JoinResult.itemList,
-			renderItem = UseCallbackFunction(function(p2) --[[ Line: 119 ]]
+			renderItem = UseCallbackFunction(function(p2)
 				-- upvalues: JoinResult (copy), ReactModule (upval), PendingShimmerBubbleModule (upval), CryoModule (upval)
 				return ReactModule.createElement(PendingShimmerBubbleModule, CryoModule.Dictionary.join(p2.item, {
 					backgroundTransparency = JoinResult.maxTransparency - (JoinResult.maxTransparency - JoinResult.minTransparency) * (p2.index - 1) / math.max(1, #JoinResult.itemList)
@@ -115,7 +115,7 @@ return ReactModule.memo(function(p1) --[[ Line: 113 | Named "PendingStateIndicat
 				Name = "ShimmerMessageList"
 			},
 			contentContainerStyle = { BackgroundTransparency = 1 },
-			keyExtractor = function(_, p2) --[[ Line: 154 ]]
+			keyExtractor = function(_, p2)
 				return p2
 			end
 		})

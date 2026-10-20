@@ -2,13 +2,13 @@
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 
-return function() --[[ Line: 21 | Named "createMyCreationsFilterStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy), SignalsReactModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal({ games = "MyGames" })
 	
 	return {
 		getFilter = Signal,
-		useFilter = function() --[[ Line: 24 ]]
+		useFilter = function()
 			-- upvalues: SignalsReactModule (upval), Signal (copy)
 			return SignalsReactModule.useSignalState(Signal)
 		end,

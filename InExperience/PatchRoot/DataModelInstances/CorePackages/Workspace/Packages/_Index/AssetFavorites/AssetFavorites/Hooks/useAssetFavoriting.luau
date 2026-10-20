@@ -20,12 +20,12 @@ local ConfigResult = HttpRequestModule.config({
 	maxRetryCount = if require(AssetFavorites.Parent.SharedFlags).FFlagLuaAppDefaultHttpRetry then game:DefineFastInt("UseAssetFavoritingHttpRetryCount", 4) else nil
 })
 
-return function(p1) --[[ Line: 32 | Named "useAssetFavoriting" ]]
+return function(p1)
 	-- upvalues: UseLocalUserIdModule (copy), UseStateFunction (copy), UseRefFunction (copy), UseCallbackFunction (copy), LoggerModule (copy), PromiseModule (copy), DeleteFavoriteForAssetModule (copy), ConfigResult (copy), PostFavoriteForAssetModule (copy), UseMemoFunction (copy), CryoModule (copy), UseEffectFunction (copy), GetFavoriteForAssetModule (copy), StatusCodes (copy)
 	local UseLocalUserIdModuleResult = UseLocalUserIdModule()
 	local UseStateResult, UseStateResult2 = UseStateFunction({})
 	local UseRefResult = UseRefFunction({})
-	local UseCallbackResult = UseCallbackFunction(function(p2: number): boolean --[[ Line: 42 ]]
+	local UseCallbackResult = UseCallbackFunction(function(p2: number): boolean
 		-- upvalues: LoggerModule (upval), UseLocalUserIdModuleResult (copy)
 		if not p2 then
 			return false
@@ -41,27 +41,27 @@ return function(p1) --[[ Line: 32 | Named "useAssetFavoriting" ]]
 			return false
 		end
 	end, { UseLocalUserIdModuleResult })
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 62 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: UseStateResult (copy)
 		return UseStateResult
 	end, { UseStateResult })
-	local UseCallbackResult2 = UseCallbackFunction(function(p2) --[[ Line: 66 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function(p2)
 		-- upvalues: UseStateResult (copy)
 		local UseStateResultEntry = UseStateResult[tostring(p2)]
 		
 		return UseStateResultEntry ~= nil and UseStateResultEntry
 	end, { UseStateResult })
-	local UseCallbackResult3 = UseCallbackFunction(function(p2): boolean --[[ Line: 71 ]]
+	local UseCallbackResult3 = UseCallbackFunction(function(p2): boolean
 		-- upvalues: UseStateResult (copy)
 		return UseStateResult[tostring(p2)] ~= nil
 	end, { UseStateResult })
-	local UseCallbackResult4 = UseCallbackFunction(function(p2): boolean --[[ Line: 75 ]]
+	local UseCallbackResult4 = UseCallbackFunction(function(p2): boolean
 		-- upvalues: UseRefResult (copy)
 		return UseRefResult.current[tostring(p2)] ~= nil
 	end, {})
-	local UseCallbackResult5 = UseCallbackFunction(function(p2, p3) --[[ Line: 79 ]]
+	local UseCallbackResult5 = UseCallbackFunction(function(p2, p3)
 		-- upvalues: UseStateResult2 (copy)
-		UseStateResult2(function(Tbl) --[[ Line: 80 ]]
+		UseStateResult2(function(Tbl)
 			-- upvalues: p2 (copy), p3 (copy)
 			local Copy = table.clone(Tbl)
 			Copy[tostring(p2)] = p3
@@ -69,13 +69,13 @@ return function(p1) --[[ Line: 32 | Named "useAssetFavoriting" ]]
 			return Copy
 		end)
 	end, {})
-	local UseCallbackResult6 = UseCallbackFunction(function(p2) --[[ Line: 87 ]]
+	local UseCallbackResult6 = UseCallbackFunction(function(p2)
 		-- upvalues: UseCallbackResult (copy), PromiseModule (upval), UseCallbackResult2 (copy), UseCallbackResult5 (copy), DeleteFavoriteForAssetModule (upval), ConfigResult (upval), UseLocalUserIdModuleResult (copy), PostFavoriteForAssetModule (upval), LoggerModule (upval)
 		if UseCallbackResult(p2) then
 			local UseCallbackResultResult = UseCallbackResult2(p2)
 			UseCallbackResult5(p2, not UseCallbackResultResult)
 			
-			return (if UseCallbackResultResult then DeleteFavoriteForAssetModule(ConfigResult, tostring(UseLocalUserIdModuleResult), (tostring(p2))) else PostFavoriteForAssetModule(ConfigResult, tostring(UseLocalUserIdModuleResult), (tostring(p2)))):catch(function(Err) --[[ Line: 106 ]]
+			return (if UseCallbackResultResult then DeleteFavoriteForAssetModule(ConfigResult, tostring(UseLocalUserIdModuleResult), (tostring(p2))) else PostFavoriteForAssetModule(ConfigResult, tostring(UseLocalUserIdModuleResult), (tostring(p2)))):catch(function(Err)
 				-- upvalues: UseCallbackResult5 (upval), p2 (copy), UseCallbackResultResult (copy), LoggerModule (upval)
 				UseCallbackResult5(p2, UseCallbackResultResult)
 				LoggerModule:warning(Err.StatusMessage)
@@ -88,9 +88,9 @@ return function(p1) --[[ Line: 32 | Named "useAssetFavoriting" ]]
 		UseCallbackResult,
 		UseCallbackResult2
 	})
-	local UseMemoResult = UseMemoFunction(function() --[[ Line: 114 ]]
+	local UseMemoResult = UseMemoFunction(function()
 		-- upvalues: CryoModule (upval), p1 (copy), UseCallbackResult (copy), UseCallbackResult3 (copy), UseCallbackResult4 (copy)
-		return CryoModule.List.filter(p1, function(p2): boolean --[[ Line: 115 ]]
+		return CryoModule.List.filter(p1, function(p2): boolean
 			-- upvalues: UseCallbackResult (upval), UseCallbackResult3 (upval), UseCallbackResult4 (upval)
 			return UseCallbackResult(p2) and (not UseCallbackResult3(p2) and not UseCallbackResult4(p2))
 		end)
@@ -99,22 +99,22 @@ return function(p1) --[[ Line: 32 | Named "useAssetFavoriting" ]]
 		UseCallbackResult4,
 		UseCallbackResult
 	}))
-	UseEffectFunction(function() --[[ Line: 120 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseMemoResult (copy), UseRefResult (copy), UseCallbackResult5 (copy), LoggerModule (upval), GetFavoriteForAssetModule (upval), ConfigResult (upval), UseLocalUserIdModuleResult (copy), StatusCodes (upval)
 		for _, value in UseMemoResult do
 			local Text = tostring(value)
 			UseRefResult.current[Text] = true
 			UseCallbackResult5(value, false)
 			LoggerModule:debug(`fetching initial favorite status for asset {value}`)
-			GetFavoriteForAssetModule(ConfigResult, tostring(UseLocalUserIdModuleResult), Text):andThen(function(Result) --[[ Line: 129 ]]
+			GetFavoriteForAssetModule(ConfigResult, tostring(UseLocalUserIdModuleResult), Text):andThen(function(Result)
 				-- upvalues: StatusCodes (upval), UseCallbackResult5 (upval), value (copy)
 				if Result.responseCode == StatusCodes.OK and Result.responseBody then
 					UseCallbackResult5(value, true)
 				end
-			end):catch(function(Err) --[[ Line: 138 ]]
+			end):catch(function(Err)
 				-- upvalues: LoggerModule (upval)
 				LoggerModule:warning(Err.StatusMessage)
-			end):finally(function() --[[ Line: 141 ]]
+			end):finally(function()
 				-- upvalues: UseRefResult (upval), Text (copy)
 				UseRefResult.current[Text] = nil
 			end)

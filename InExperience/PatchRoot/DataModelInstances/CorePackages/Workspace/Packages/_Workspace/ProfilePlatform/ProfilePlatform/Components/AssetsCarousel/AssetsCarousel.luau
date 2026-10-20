@@ -33,7 +33,7 @@ local ProfilePlatformUseNewLayoutForAssetsCarousel = game:DefineFastFlag("Profil
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local v1 = 2
 
-return function(p1) --[[ Line: 78 | Named "AssetsCarousel" ]]
+return function(p1)
 	-- upvalues: FFlagAXEnableProfileTab (copy), EnumsModule (copy), UseProfileFormFactorModule (copy), FFlagAddIEMProfilePage (copy), UseProfileWrapperContextModule (copy), ProfilePlatformUseNewLayoutForAssetsCarousel (copy), UseTokensFunction (copy), FFlagProfilePlatformEnableVRModule (copy), UseIsSpatialFunction (copy), FFlagProfilePlatformDisableCurrentlyWearingOnConsoleModule (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), UseScreenSizeFunction1 (copy), UseScreenSizeFunction (copy), UseDynamicSizeMarginModule (copy), ReactModule (copy), FFlagProfilePlatformEnableInventory (copy), UseLocalizationFunction (copy), TextKeysModule (copy), SeeMoreCurrentlyWearingCompact (copy), SeeMoreCurrentlyWearingWide (copy), UseSelectorFunction (copy), FormFactor (copy), v1 (ref), UseBreakpointXFunction (copy), MarketplaceAssetTileModule (copy), AssetTileModule (copy), FFlagProfilePlatformFixResaleLimitedPriceModule (copy), FFlagProfilePlatformEnableBundlesInAssetsCarousel (copy), FFlagSplitPaneProfileMaxWidth (copy), CollectionCarousel (copy)
 	local IsTileVariantMatch: boolean = FFlagAXEnableProfileTab and p1.tileVariant == EnumsModule.ProfileTabVariants.MeTab
 	local IsFormFactorMatch = if FFlagAXEnableProfileTab then UseProfileFormFactorModule().formFactor == EnumsModule.ProfileFormFactor.Wide else nil
@@ -53,7 +53,7 @@ return function(p1) --[[ Line: 78 | Named "AssetsCarousel" ]]
 	local Title = if FFlagProfilePlatformEnableInventory then p1.title else UseLocalizationFunction({ currentlyWearing = TextKeysModule.CurrentlyWearing })
 	
 	if SeeMoreCurrentlyWearingCompact or SeeMoreCurrentlyWearingWide then
-		local UseSelectorResult = UseSelectorFunction(function(p2): boolean --[[ Line: 107 ]]
+		local UseSelectorResult = UseSelectorFunction(function(p2): boolean
 			-- upvalues: FormFactor (upval)
 			return p2.FormFactor == FormFactor.WIDE
 		end)
@@ -70,7 +70,7 @@ return function(p1) --[[ Line: 78 | Named "AssetsCarousel" ]]
 		v1 = if UseBreakpointXResult == ResponsiveModule.Keys.XSmall then 2 elseif UseBreakpointXResult == ResponsiveModule.Keys.Small then 3 else 5
 	end
 	local v2: number = if FFlagAXEnableProfileTab and IsTileVariantMatch and IsFormFactorMatch then 5 else v1
-	local UseResult = ReactModule.useCallback(function(p2, LayoutOrder, Size) --[[ Line: 139 ]]
+	local UseResult = ReactModule.useCallback(function(p2, LayoutOrder, Size)
 		-- upvalues: ReactModule (upval), IsTileVariantMatch (copy), MarketplaceAssetTileModule (upval), AssetTileModule (upval), FFlagProfilePlatformFixResaleLimitedPriceModule (upval), FFlagProfilePlatformEnableBundlesInAssetsCarousel (upval), UseIsSpatialResult1 (copy), p1 (copy)
 		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -84,7 +84,7 @@ return function(p1) --[[ Line: 78 | Named "AssetsCarousel" ]]
 				lowestResalePrice = if FFlagProfilePlatformFixResaleLimitedPriceModule then p2.lowestResalePrice else nil,
 				assetId = p2.id,
 				itemType = if FFlagProfilePlatformEnableBundlesInAssetsCarousel then p2.itemType else "Asset",
-				onActivated = function() --[[ Line: 161 ]]
+				onActivated = function()
 					-- upvalues: UseIsSpatialResult1 (upval), p1 (upval), p2 (copy), LayoutOrder (copy)
 					if not UseIsSpatialResult1 then
 						p1.openItemDetails(p2.id, p2.itemType, nil, nil, LayoutOrder)
@@ -99,7 +99,7 @@ return function(p1) --[[ Line: 78 | Named "AssetsCarousel" ]]
 		UseIsSpatialResult1,
 		if FFlagAXEnableProfileTab then IsTileVariantMatch else nil
 	})
-	local UseResult1 = ReactModule.useCallback(function(p2: number): number --[[ Line: 176 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2: number): number
 		-- upvalues: UseStateResult2 (copy), FFlagAddIEMProfilePage (upval), Source (copy), EnumsModule (upval)
 		UseStateResult2(p2)
 		

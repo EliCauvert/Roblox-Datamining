@@ -16,7 +16,7 @@ local FFlagAXFixSingleItemPurchaseWidgetLogging = AvatarExperienceFlagsModule.FF
 local FFlagAXFixUnifiedPurchaseFieldLanding = AvatarExperienceFlagsModule.FFlagAXFixUnifiedPurchaseFieldLanding
 local FFlagAXFixDeferredItemIdTypeMatch = AvatarExperienceFlagsModule.FFlagAXFixDeferredItemIdTypeMatch
 
-return function(p1) --[[ Line: 22 ]]
+return function(p1)
 	-- upvalues: FFlagAXFixUnifiedPurchaseFieldLanding (copy), MapAnalyticsMetadataFieldsModule (copy), FFlagAXMISEnableMultiShoppingUnifiedEvents (copy), UnifiedSelectionListStoreModule (copy), UnifiedEventLogConstantsModule (copy), FFlagAXFixDeferredItemIdTypeMatch (copy), FFlagAXFixSingleItemPurchaseWidgetLogging (copy), UnifiedEventLogEnumsModule (copy), LastDeferredSingleItemStoreModule (copy), UnifiedEventLoggingUtilsModule (copy), SendUnifiedEventLogModule (copy), CryoModule (copy), CollectionService (copy), SendUnifiedEventLogForInstanceModule (copy)
 	if FFlagAXFixUnifiedPurchaseFieldLanding then
 		p1 = MapAnalyticsMetadataFieldsModule(p1)

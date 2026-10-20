@@ -11,16 +11,16 @@ local config = {
 	years = "Feature.Moments.Label.CommentTimestampYears"
 }
 
-return function(p1) --[[ Line: 25 | Named "useCommentTimestamp" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), CommentTimestampModule (copy), UseLocalizationFunction (copy), config (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 26 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CommentTimestampModule (upval), p1 (copy)
 		return CommentTimestampModule.parseTimestamp(p1)
 	end, { p1 })
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 29 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 		return DateTime.now().UnixTimestampMillis
 	end)
-	ReactModule.useEffect(function() --[[ Line: 33 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), UseMemoResult (copy), CommentTimestampModule (upval)
 		UseStateResult2(DateTime.now().UnixTimestampMillis)
 		
@@ -28,7 +28,7 @@ return function(p1) --[[ Line: 25 | Named "useCommentTimestamp" ]]
 		local Flag = false
 		local DelayedThread = nil
 		
-		local function scheduleUpdate() --[[ Line: 42 ]]
+		local function scheduleUpdate()
 			-- upvalues: CommentTimestampModule (upval), UseMemoResult (upval), DelayedThread (ref), Flag (ref), UseStateResult2 (upval), scheduleUpdate (copy)
 			local UnixTimestampMillis = DateTime.now().UnixTimestampMillis
 			local NextChangeTimestamp = CommentTimestampModule.getNextChangeTimestamp(UseMemoResult, UnixTimestampMillis)
@@ -38,7 +38,7 @@ return function(p1) --[[ Line: 25 | Named "useCommentTimestamp" ]]
 				
 				return
 			else
-				DelayedThread = task.delay(math.max(0, NextChangeTimestamp - UnixTimestampMillis) / 1000, function() --[[ Line: 50 ]]
+				DelayedThread = task.delay(math.max(0, NextChangeTimestamp - UnixTimestampMillis) / 1000, function()
 					-- upvalues: DelayedThread (upval), Flag (upval), UseStateResult2 (upval), scheduleUpdate (upval)
 					DelayedThread = nil
 					
@@ -54,7 +54,7 @@ return function(p1) --[[ Line: 25 | Named "useCommentTimestamp" ]]
 		
 		scheduleUpdate()
 		
-		return function() --[[ Line: 61 ]]
+		return function()
 			-- upvalues: Flag (ref), DelayedThread (ref)
 			Flag = true
 			

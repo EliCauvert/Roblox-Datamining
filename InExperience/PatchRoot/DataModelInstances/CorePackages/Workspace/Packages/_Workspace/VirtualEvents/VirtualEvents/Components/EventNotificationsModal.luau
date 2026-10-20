@@ -11,11 +11,11 @@ local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
 local _UDim = UDim.new(0, 24)
 local _UDim1 = UDim.new(0, 12)
 
-local function selectScreenSize(p1) --[[ Line: 17 ]]
+local function selectScreenSize(p1)
 	return p1.ScreenSize
 end
 
-return function(p1) --[[ Line: 26 | Named "EventNotificationsModal" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), UseNavigationFunction (copy), UseSelectorFunction (copy), selectScreenSize (copy), UseLocalizationFunction (copy), ReactModule (copy), PartialPageModal (copy), ButtonType (copy), _UDim (copy), _UDim1 (copy), StyledTextLabel (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseNavigationResult = UseNavigationFunction()
@@ -26,7 +26,7 @@ return function(p1) --[[ Line: 26 | Named "EventNotificationsModal" ]]
 		notNow = "Feature.VirtualEvents.NotNowButton",
 		getNotified = "Feature.VirtualEvents.GetNotifiedButton"
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 38 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), UseNavigationResult (copy)
 		if p1.onClose then
 			p1.onClose()
@@ -51,7 +51,7 @@ return function(p1) --[[ Line: 26 | Named "EventNotificationsModal" ]]
 				{
 					buttonType = ButtonType.PrimarySystem,
 					props = {
-						onActivated = ReactModule.useCallback(function() --[[ Line: 46 ]]
+						onActivated = ReactModule.useCallback(function()
 							-- upvalues: p1 (copy), UseResult (copy)
 							if p1.onConfirm then
 								p1.onConfirm()

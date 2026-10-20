@@ -20,7 +20,7 @@ local config = {
 }
 require(Parent.FoundationCloudAssets).preloadAsset("pictograms/chat")
 
-return function(p1) --[[ Line: 41 | Named "CommentsPanelStateView" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), CommentsListSkeletonViewModule (copy), Empty (copy), IconSize (copy), View (copy), Text (copy), Button (copy), InputSize (copy), ButtonVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	

@@ -16,7 +16,7 @@ local Uiblox = BuilderIconsModule.Migration.uiblox
 local v1 = nil
 local Contexts = Enums.Contexts
 local EventTypes = Enums.EventTypes
-v1 = (function() --[[ Line: 37 | Named "Initialize" ]]
+v1 = (function()
 	-- upvalues: RobloxGui (copy), Uiblox (copy), BuilderIconsModule (copy), VRService (copy), ThemeModule (copy), CreateFunction (copy), TextService (copy), UtilityModule (copy), RbxAnalyticsService (copy), Contexts (copy), EventTypes (copy), EventNames (copy), CoreGui (copy)
 	local NewPage = require(RobloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	local v2 = false
@@ -24,7 +24,7 @@ v1 = (function() --[[ Line: 37 | Named "Initialize" ]]
 	RecordingEvent.Name = "RecordingEvent"
 	NewPage.RecordingChanged = RecordingEvent.Event
 	
-	function NewPage:IsRecording() --[[ Line: 45 ]]
+	function NewPage:IsRecording()
 		-- upvalues: v2 (ref)
 		return v2
 	end
@@ -35,7 +35,7 @@ v1 = (function() --[[ Line: 37 | Named "Initialize" ]]
 	NewPage.TabHeader.Name = "RecordTab"
 	NewPage.TabHeader.TabLabel.Title.Text = "Record"
 	
-	local function onVREnabled() --[[ Line: 55 ]]
+	local function onVREnabled()
 		-- upvalues: NewPage (copy), VRService (upval)
 		NewPage.TabHeader.Visible = not VRService.VREnabled
 	end
@@ -44,7 +44,7 @@ v1 = (function() --[[ Line: 37 | Named "Initialize" ]]
 	VRService:GetPropertyChangedSignal("VREnabled"):connect(onVREnabled)
 	NewPage.Page.Name = "Record"
 	
-	local function makeTextLabel(Name, Text, p1, Page: Frame, LayoutOrder) --[[ Line: 64 ]]
+	local function makeTextLabel(Name, Text, p1, Page: Frame, LayoutOrder)
 		-- upvalues: ThemeModule (upval), CreateFunction (upval), TextService (upval)
 		local XOffset = 10
 		local v3 = 0
@@ -82,7 +82,7 @@ v1 = (function() --[[ Line: 37 | Named "Initialize" ]]
 			Parent = Parent
 		})
 		
-		local function onResized(p2) --[[ Line: 96 ]]
+		local function onResized(p2)
 			-- upvalues: TextService (upval), Text (copy), Label (copy), Page (copy), XOffset (ref), v3 (ref), Parent (copy), v4 (ref)
 			if p2 == "AbsoluteSize" then
 				Parent.Size = UDim2.new(1, 0, 0, TextService:GetTextSize(Text, Label.TextSize, Label.Font, Vector2.new(Page.AbsoluteSize.X - XOffset - v3, 10000)).Y + v4)
@@ -95,11 +95,11 @@ v1 = (function() --[[ Line: 37 | Named "Initialize" ]]
 		return Label, Parent
 	end
 	
-	function NewPage:SetHub(HubRef) --[[ Line: 110 ]]
+	function NewPage:SetHub(HubRef)
 		-- upvalues: NewPage (copy), makeTextLabel (copy), UtilityModule (upval), RbxAnalyticsService (upval), Contexts (upval), EventTypes (upval), v2 (ref), EventNames (upval), RecordingEvent (copy), CoreGui (upval)
 		NewPage.HubRef = HubRef
 		
-		local function v30() --[[ Line: 114 ]]
+		local function v30()
 			-- upvalues: NewPage (upval)
 			NewPage.HubRef:SetVisibility(false, true)
 		end
@@ -112,7 +112,7 @@ v1 = (function() --[[ Line: 37 | Named "Initialize" ]]
 		local _ = makeTextLabel("VideoBody", "By clicking the 'Record Video' button, the menu will close and start recording your screen.", false, NewPage.Page, 5)
 		local RecordButton, RecordButton2 = UtilityModule:AddButtonRow(NewPage, "RecordButton", "Record Video", UDim2.new(0, 300, 0, 44), v30)
 		RecordButton.LayoutOrder = 6
-		RecordButton2.MouseButton1Click:connect(function() --[[ Line: 130 ]]
+		RecordButton2.MouseButton1Click:connect(function()
 			-- upvalues: RbxAnalyticsService (upval), Contexts (upval), EventTypes (upval), v2 (upval), EventNames (upval), RecordingEvent (upval)
 			RbxAnalyticsService:SendEventDeferred("mobile", Contexts.Captures, EventTypes.ButtonClick, {
 				btn = if v2 then EventNames.CapturesLegacyVideoRecordDeactivated else EventNames.CapturesLegacyVideoRecordActivated
@@ -122,7 +122,7 @@ v1 = (function() --[[ Line: 37 | Named "Initialize" ]]
 		local GameOptions = settings():FindFirstChild("Game Options")
 		
 		if GameOptions then
-			GameOptions.VideoRecordingChangeRequest:connect(function(Recording) --[[ Line: 142 ]]
+			GameOptions.VideoRecordingChangeRequest:connect(function(Recording)
 				-- upvalues: v2 (upval), RecordButton2 (copy)
 				v2 = Recording
 				
@@ -135,11 +135,11 @@ v1 = (function() --[[ Line: 37 | Named "Initialize" ]]
 				end
 			end)
 		end
-		RecordButton2.Activated:Connect(function() --[[ Line: 152 ]]
+		RecordButton2.Activated:Connect(function()
 			-- upvalues: CoreGui (upval)
 			CoreGui:ToggleRecording()
 		end)
-		NewPage.ScreenshotButton.Activated:Connect(function() --[[ Line: 155 ]]
+		NewPage.ScreenshotButton.Activated:Connect(function()
 			-- upvalues: CoreGui (upval)
 			CoreGui:TakeScreenshot()
 		end)
@@ -148,7 +148,7 @@ v1 = (function() --[[ Line: 37 | Named "Initialize" ]]
 	
 	return NewPage
 end)()
-v1.Displayed.Event:connect(function(p1) --[[ Line: 169 ]]
+v1.Displayed.Event:connect(function(p1)
 	-- upvalues: GuiService (copy), v1 (ref)
 	if p1 then
 		GuiService.SelectedCoreObject = v1.ScreenshotButton

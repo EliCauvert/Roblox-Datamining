@@ -27,7 +27,7 @@ local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local FocusRoot = FocusNavigationUtilsModule.FocusRoot
 
-function InterventionDialog(p1) --[[ Line: 50 ]]
+function InterventionDialog(p1)
 	-- upvalues: UseLayerCollectorFunction (copy), ReactModule (copy), UseTokensFunction (copy), UseStyleFunction (copy), UseInterventionPlacementModule (copy), UseLocalizationFunction (copy), ConstantsModule (copy), InterventionAnalyticsModule (copy), NotificationModalsManagerModule (copy), IconsActionsAccept (copy), UseScrollFrameHeightCalculationModule (copy), UseCursorFunction (copy), ModalWindow (copy), View (copy), ScrollView (copy), ScrollBarVisibility (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), Icon (copy), Text (copy), FFlagExpChatEnableFriendsTab (copy), ButtonStack (copy), ButtonType (copy)
 	local AbsoluteSize = UseLayerCollectorFunction().absoluteSize
 	local UseRefResult = ReactModule.useRef(DateTime.now().UnixTimestampMillis)
@@ -35,7 +35,7 @@ function InterventionDialog(p1) --[[ Line: 50 ]]
 	local UseStyleResult = UseStyleFunction()
 	local UseInterventionPlacementModuleResult = UseInterventionPlacementModule()
 	local UseLocalizationResult = UseLocalizationFunction(ConstantsModule.localizationKeys)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 61 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: InterventionAnalyticsModule (upval), p1 (copy), UseInterventionPlacementModuleResult (copy), UseRefResult (copy)
 		InterventionAnalyticsModule.sendAnalyticsEvent(InterventionAnalyticsModule.TelemetryConfigs.DialogCtaClicked, {
 			eventType = InterventionAnalyticsModule.Constants.EventTypes.CtaClicked,
@@ -52,7 +52,7 @@ function InterventionDialog(p1) --[[ Line: 50 ]]
 		UseRefResult, p1.interventionTypeForAnalytics, p1.eventId, p1.evidence,
 		p1.durationForAnalytics, p1.onDismiss
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 85 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), NotificationModalsManagerModule (upval), IconsActionsAccept (upval), UseLocalizationResult (copy), UseStyleResult (copy), InterventionAnalyticsModule (upval), UseInterventionPlacementModuleResult (copy), UseRefResult (copy)
 		p1.onDismiss()
 		NotificationModalsManagerModule.SetUIBloxToast({
@@ -82,7 +82,7 @@ function InterventionDialog(p1) --[[ Line: 50 ]]
 		p1.evidence,
 		p1.durationForAnalytics
 	})
-	ReactModule.useEffect(function() --[[ Line: 120 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: InterventionAnalyticsModule (upval), p1 (copy), UseInterventionPlacementModuleResult (copy), UseRefResult (copy)
 		InterventionAnalyticsModule.sendAnalyticsEvent(InterventionAnalyticsModule.TelemetryConfigs.DialogRendered, {
 			eventType = InterventionAnalyticsModule.Constants.EventTypes.ModalAppeared,

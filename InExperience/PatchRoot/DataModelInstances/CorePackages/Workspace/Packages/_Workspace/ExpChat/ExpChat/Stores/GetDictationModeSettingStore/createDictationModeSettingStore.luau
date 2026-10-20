@@ -6,18 +6,18 @@ local FFlagExpChatDictationContinuousByDefaultModule = require(ExpChat.Flags.FFl
 local DictationModeModule = require(ExpChat.ChatInput.UI.ChatInputBar.Dictation.DictationMode)
 local DictationModeSettingStorageModule = require(script.Parent.DictationModeSettingStorage)
 
-local function _() --[[ Line: 26 | Named "getDefaultMode" ]]
+local function _()
 	-- upvalues: FFlagExpChatDictationContinuousByDefaultModule (copy), DictationModeModule (copy)
 	return if FFlagExpChatDictationContinuousByDefaultModule then DictationModeModule.Continuous else DictationModeModule.Standard
 end
 
-return function(p1) --[[ Line: 30 ]]
+return function(p1)
 	-- upvalues: DictationModeSettingStorageModule (copy), CreateSignalFunction (copy), CreateComputedFunction (copy), FFlagExpChatDictationContinuousByDefaultModule (copy), DictationModeModule (copy)
 	local P0 = p1 or DictationModeSettingStorageModule
 	local Signal, Signal2 = CreateSignalFunction((P0.read()))
 	
 	return {
-		getMode = CreateComputedFunction(function(p2) --[[ Line: 36 ]]
+		getMode = CreateComputedFunction(function(p2)
 			-- upvalues: Signal (copy), FFlagExpChatDictationContinuousByDefaultModule (upval), DictationModeModule (upval)
 			local SignalResult = Signal(p2)
 			
@@ -29,7 +29,7 @@ return function(p1) --[[ Line: 30 ]]
 			end
 			return SignalResult
 		end),
-		setMode = function(p2) --[[ Line: 40 ]]
+		setMode = function(p2)
 			-- upvalues: Signal (copy), Signal2 (copy), P0 (copy)
 			if Signal(false) ~= p2 then
 				Signal2(p2)

@@ -6,10 +6,10 @@ local HandleNativePurchaseFailureOrCancelModule = require(PurchasePrompt.Thunks.
 local ExternalEventConnectionModule = require(script.Parent.ExternalEventConnection)
 local FFlagLuaAppEnableNativePurchaseFinishedV2Signals = require(PurchasePrompt.Parent.SharedFlags).FFlagLuaAppEnableNativePurchaseFinishedV2Signals
 
-return (require(PurchasePrompt.connectToStore)(nil, function(Callback) --[[ Line: 72 | Named "mapDispatchToProps" ]]
+return (require(PurchasePrompt.connectToStore)(nil, function(Callback)
 	-- upvalues: RetryAfterUpsellModule (copy), HandleNativePurchaseFailureOrCancelModule (copy)
 	return {
-		nativePurchaseFinished = function(_, _, p1, _) --[[ Line: 74 ]]
+		nativePurchaseFinished = function(_, _, p1, _)
 			-- upvalues: Callback (copy), RetryAfterUpsellModule (upval), HandleNativePurchaseFailureOrCancelModule (upval)
 			if p1 then
 				Callback(RetryAfterUpsellModule())
@@ -19,7 +19,7 @@ return (require(PurchasePrompt.connectToStore)(nil, function(Callback) --[[ Line
 				Callback(HandleNativePurchaseFailureOrCancelModule())
 			end
 		end,
-		nativePurchaseFinishedWithLocalPlayer = function(_, p1, _) --[[ Line: 81 ]]
+		nativePurchaseFinishedWithLocalPlayer = function(_, p1, _)
 			-- upvalues: Callback (copy), RetryAfterUpsellModule (upval), HandleNativePurchaseFailureOrCancelModule (upval)
 			if p1 then
 				Callback(RetryAfterUpsellModule())
@@ -30,7 +30,7 @@ return (require(PurchasePrompt.connectToStore)(nil, function(Callback) --[[ Line
 			end
 		end
 	}
-end)(function(p1) --[[ Line: 24 | Named "NativePurchaseFinishedConnector" ]]
+end)(function(p1)
 	-- upvalues: Roact (copy), ExternalEventConnectionModule (copy), MarketplaceService (copy), FFlagLuaAppEnableNativePurchaseFinishedV2Signals (copy)
 	local NativePurchaseFinished = p1.nativePurchaseFinished
 	local NativePurchaseFinishedWithLocalPlayer = p1.nativePurchaseFinishedWithLocalPlayer

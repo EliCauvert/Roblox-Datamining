@@ -30,12 +30,12 @@ local config1 = {
 }
 local config2 = { dark = ColorMode.Dark, light = ColorMode.Light }
 
-local function _() --[[ Line: 73 | Named "useTokenScale" ]]
+local function _()
 	-- upvalues: SignalsReactModule (copy), GetUIScale (copy)
 	return (SignalsReactModule.useSignalState(GetUIScale))
 end
 
-local function UiModeStyleProvider(p1) --[[ Line: 78 ]]
+local function UiModeStyleProvider(p1)
 	-- upvalues: UseDeviceTypeFunction (copy), EnableDisplaySizeEngineFeature (copy), SignalsReactModule (copy), GetUIScale (copy), ReactModule (copy), UserGameSettings (copy), CryoModule (copy), AppClassicThemeGreenButtonColors (copy), ThemeName (copy), config2 (copy), ColorMode (copy), config1 (copy), config (copy), FoundationProvider (copy), SceneOverridesRegistryModule (copy), AppStyleProvider (copy)
 	local UseDeviceTypeResult = UseDeviceTypeFunction()
 	local UseSignalStateResult = if EnableDisplaySizeEngineFeature then SignalsReactModule.useSignalState(GetUIScale) else nil
@@ -44,9 +44,9 @@ local function UiModeStyleProvider(p1) --[[ Line: 78 ]]
 		reducedMotion = UserGameSettings.ReducedMotion,
 		preferredTextSize = UserGameSettings.PreferredTextSize
 	})
-	ReactModule.useEffect(function() --[[ Line: 92 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), UserGameSettings (upval)
-		local function updateSettings() --[[ Line: 93 ]]
+		local function updateSettings()
 			-- upvalues: UseStateResult2 (upval), UserGameSettings (upval)
 			UseStateResult2({
 				preferredTransparency = UserGameSettings.PreferredTransparency,
@@ -59,7 +59,7 @@ local function UiModeStyleProvider(p1) --[[ Line: 78 ]]
 		local Connection1 = UserGameSettings:GetPropertyChangedSignal("ReducedMotion"):Connect(updateSettings)
 		local Connection2 = UserGameSettings:GetPropertyChangedSignal("PreferredTextSize"):Connect(updateSettings)
 		
-		return function() --[[ Line: 107 ]]
+		return function()
 			-- upvalues: Connection (copy), Connection1 (copy), Connection2 (copy)
 			Connection:Disconnect()
 			Connection1:Disconnect()
@@ -67,7 +67,7 @@ local function UiModeStyleProvider(p1) --[[ Line: 78 ]]
 		end
 	end, {})
 	local Style = p1.style
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 115 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CryoModule (upval), Style (copy), UseDeviceTypeResult (copy), EnableDisplaySizeEngineFeature (upval), UseStateResult (copy), UseSignalStateResult (ref)
 		return CryoModule.Dictionary.join({ deviceType = Style.deviceType or UseDeviceTypeResult }, Style, {
 			settings = if EnableDisplaySizeEngineFeature then CryoModule.Dictionary.join(UseStateResult, { scale = UseSignalStateResult }) else UseStateResult
@@ -94,7 +94,7 @@ local function UiModeStyleProvider(p1) --[[ Line: 78 ]]
 	}, ReactModule.createElement(SceneOverridesRegistryModule, { isActive = HasFoundationThemeName }, ReactModule.createElement(AppStyleProvider, { style = UseMemoResult }, p1.children)))
 end
 
-return function(Tbl) --[[ Line: 164 | Named "ThemeProvider" ]]
+return function(Tbl)
 	-- upvalues: ReactModule (copy), FFlagAppNavBarPerItemThemeOverride (copy), CryoModule (copy), AppearanceContextModule (copy), UiModeStyleProvider (copy), UiModeBrandThemeContextModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Tbl.style.themeName)
 	local ThemeName = if FFlagAppNavBarPerItemThemeOverride and Tbl.syncThemeFromProps then Tbl.style.themeName else UseStateResult

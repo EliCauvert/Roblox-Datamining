@@ -7,72 +7,72 @@ local _ = require(SquadsCore.Enums.SquadExperienceInviteSource)
 
 return (require(Parent.React).createContext({
 	showGroupOSADialog = nil,
-	closeSquadPrompt = function() --[[ Line: 57 ]] end,
-	createConversation = function(_, _, _, _) --[[ Line: 58 ]]
+	closeSquadPrompt = function() end,
+	createConversation = function(_, _, _, _)
 		-- upvalues: PromiseModule (copy)
-		return function(_) --[[ Line: 64 ]]
+		return function(_)
 			-- upvalues: PromiseModule (upval)
 			return PromiseModule.reject("No createConversation function supplied.")
 		end
 	end,
-	createFriendConversation = function(_, _) --[[ Line: 68 ]] end,
-	createExperienceInvite = if require(Parent.SharedFlags).FFlagEnableSquadRegroupExperimentation then function(_, _) --[[ Line: 70 ]]
+	createFriendConversation = function(_, _) end,
+	createExperienceInvite = if require(Parent.SharedFlags).FFlagEnableSquadRegroupExperimentation then function(_, _)
 		-- upvalues: PromiseModule (copy)
-		return function(_) --[[ Line: 71 ]]
+		return function(_)
 			-- upvalues: PromiseModule (upval)
 			return PromiseModule.reject("No createExperienceInvite function supplied.")
 		end
 	end else nil,
-	disableSquadTopBanner = function(_, _) --[[ Line: 76 ]] end,
-	fetchParentChannelDetails = function(_, _) --[[ Line: 77 ]]
+	disableSquadTopBanner = function(_, _) end,
+	fetchParentChannelDetails = function(_, _)
 		return nil
 	end,
-	fireSquadAnalytics = function(p1, p2) --[[ Line: 80 ]]
+	fireSquadAnalytics = function(p1, p2)
 		return p1, p2
 	end,
-	inviteToParentChannel = function(_, _, _) --[[ Line: 83 ]]
+	inviteToParentChannel = function(_, _, _)
 		return nil
 	end,
-	navigateIntoSquadLobby = function(_, _) --[[ Line: 86 ]] end,
-	removeUserFromParentChannel = function(_, _, _) --[[ Line: 87 ]]
+	navigateIntoSquadLobby = function(_, _) end,
+	removeUserFromParentChannel = function(_, _, _)
 		return nil
 	end,
-	setSquadPrompt = function(_, _) --[[ Line: 90 ]] end,
-	showSearchOverlay = function(_, _) --[[ Line: 91 ]] end,
+	setSquadPrompt = function(_, _) end,
+	showSearchOverlay = function(_, _) end,
 	squadLocation = require(SquadsCore.Enums.SquadLocationEnum).Unknown,
-	updateSquadViewFlags = function(_, _) --[[ Line: 93 ]] end,
-	useGetConversationFromId = function(_) --[[ Line: 94 ]]
+	updateSquadViewFlags = function(_, _) end,
+	useGetConversationFromId = function(_)
 		return nil
 	end,
-	useIsChatEnabled = function(): boolean --[[ Line: 97 ]]
+	useIsChatEnabled = function(): boolean
 		return false
 	end,
-	useIsLoadingChatSettings = function(): boolean --[[ Line: 100 ]]
+	useIsLoadingChatSettings = function(): boolean
 		return false
 	end,
-	useParentChannelHasGroupUp = function(_): boolean --[[ Line: 103 ]]
+	useParentChannelHasGroupUp = function(_): boolean
 		return false
 	end,
-	useParentChannelHasSquadAccess = function(_): boolean --[[ Line: 106 ]]
+	useParentChannelHasSquadAccess = function(_): boolean
 		return false
 	end,
-	useParentChannelIsPartyVoiceEligible = function(_) --[[ Line: 109 ]]
+	useParentChannelIsPartyVoiceEligible = function(_)
 		return nil
 	end,
-	useParentChannelTitleSelector = function(_): string --[[ Line: 112 ]]
+	useParentChannelTitleSelector = function(_): string
 		return ""
 	end,
-	useSquadRootView = function() --[[ Line: 115 ]]
+	useSquadRootView = function()
 		-- upvalues: SquadRootViewTypeModule (copy)
 		return SquadRootViewTypeModule.None
 	end,
-	useSquadTopBannerDisabled = function(): boolean --[[ Line: 118 ]]
+	useSquadTopBannerDisabled = function(): boolean
 		return false
 	end,
-	useSquadViewFlags = function(): number --[[ Line: 121 ]]
+	useSquadViewFlags = function(): number
 		return 0
 	end,
-	shouldShowOSAForConversation = function(): boolean --[[ Line: 124 ]]
+	shouldShowOSAForConversation = function(): boolean
 		return false
 	end
 }))

@@ -41,7 +41,7 @@ local list = {
 	}
 }
 
-return function(p1) --[[ Line: 63 | Named "HowToCaptureModal" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseFormFactorFunction (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), list (copy), View (copy), FormFactor (copy), Icon (copy), FoundationModule (copy), Text (copy), Image (copy), Button (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
@@ -49,22 +49,22 @@ return function(p1) --[[ Line: 63 | Named "HowToCaptureModal" ]]
 	local UseFormFactorResult = UseFormFactorFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(1)
 	local UseRefResult = ReactModule.useRef({ [1] = true })
-	ReactModule.useEffect(function() --[[ Line: 73 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseStateResult (copy), FireAnalyticsEventFunction (upval), EventNames (upval)
 		if not UseRefResult.current[UseStateResult] then
 			UseRefResult.current[UseStateResult] = true
 			FireAnalyticsEventFunction(EventNames.FTUXHowToCaptureCarouselImpression)
 		end
 	end, { UseStateResult })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 80 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
-		UseStateResult2(function(p2: number): number --[[ Line: 81 ]]
+		UseStateResult2(function(p2: number): number
 			return (math.max(1, p2 - 1))
 		end)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 86 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), list (upval)
-		UseStateResult2(function(p2: number): number --[[ Line: 87 ]]
+		UseStateResult2(function(p2: number): number
 			-- upvalues: list (upval)
 			return (math.min(#list, p2 + 1))
 		end)

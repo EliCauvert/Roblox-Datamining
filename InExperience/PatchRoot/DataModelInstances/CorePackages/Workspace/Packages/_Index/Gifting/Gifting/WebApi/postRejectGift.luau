@@ -3,7 +3,7 @@ local FetchGiftingModule = require(Gifting.WebApi.fetchGifting)
 local UrlsModule = require(Gifting.WebApi.Urls)
 local _ = require(Gifting.Types)
 
-return function(Body, Network) --[[ Line: 17 | Named "postRejectGift" ]]
+return function(Body, Network)
 	-- upvalues: FetchGiftingModule (copy), UrlsModule (copy)
 	return FetchGiftingModule({
 		method = "POST",
@@ -11,7 +11,7 @@ return function(Body, Network) --[[ Line: 17 | Named "postRejectGift" ]]
 		network = Network,
 		url = UrlsModule.reject(),
 		body = Body,
-		decode = function() --[[ Line: 24 ]]
+		decode = function()
 			return {}
 		end
 	})

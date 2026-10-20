@@ -3,7 +3,7 @@ local _ = require(FriendsMenu.friendsMenuModalType)
 local ConstantsModule = require(FriendsMenu.Constants)
 local GetFFlagFriendsMenuDummyLoadingFriendsFixFunction = require(FriendsMenu.Parent.SharedFlags).GetFFlagFriendsMenuDummyLoadingFriendsFix
 
-local function v3(FriendFrequentRank) --[[ Line: 9 ]]
+local function v3(FriendFrequentRank)
 	-- upvalues: GetFFlagFriendsMenuDummyLoadingFriendsFixFunction (copy), ConstantsModule (copy)
 	return {
 		displayName = "",
@@ -21,7 +21,7 @@ local function v3(FriendFrequentRank) --[[ Line: 9 ]]
 	}
 end
 
-return function(p1) --[[ Line: 28 ]]
+return function(p1)
 	-- upvalues: v3 (copy)
 	local t = {}
 	

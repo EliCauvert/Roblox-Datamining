@@ -17,31 +17,31 @@ local UseSignalStateFunction = SignalsReactModule.useSignalState
 local UseSignalBindingFunction = SignalsReactModule.useSignalBinding
 local Frozen = table.freeze({})
 
-return function(Frame) --[[ Line: 78 | Named "MomentMediaView" ]]
+return function(Frame)
 	-- upvalues: UseMomentMediaControllerModule (copy), ReactModule (copy), SignalsModule (copy), MediaSurfaceContextModule (copy), FFlagMomentsSmartVideoFillModule (copy), GetSmartFillScaleTypeModule (copy), UseSignalBindingFunction (copy), UseSignalStateFunction (copy), FFlagMomentsTextOverlayAfterVideoLoadedModule (copy), UseHasPresentedFrameModule (copy), Frozen (copy), View (copy), Skeleton (copy), FoundationModule (copy)
 	local UseMomentMediaControllerModuleResult = UseMomentMediaControllerModule(Frame.momentId)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 85 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval)
 		return (SignalsModule.createSignal(Enum.ScaleType.Crop))
 	end, {})
 	local GetScaleType = Frame.getScaleType or UseMemoResult
 	local CornerRadius = ReactModule.useContext(MediaSurfaceContextModule).cornerRadius
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 98 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval)
 		local Signal, Signal2 = SignalsModule.createSignal(Vector2.zero)
 		
 		return { get = Signal, set = Signal2 }
 	end, {})
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 103 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseMemoResult1 (copy)
 		UseMemoResult1.set(Frame.AbsoluteSize)
 	end, { UseMemoResult1 })
 	
 	if FFlagMomentsSmartVideoFillModule then
 		local Callback = GetScaleType
-		GetScaleType = ReactModule.useMemo(function() --[[ Line: 114 ]]
+		GetScaleType = ReactModule.useMemo(function()
 			-- upvalues: SignalsModule (upval), Callback (copy), UseMomentMediaControllerModuleResult (copy), GetSmartFillScaleTypeModule (upval), UseMemoResult1 (copy)
-			return SignalsModule.createComputed(function(p1) --[[ Line: 115 ]]
+			return SignalsModule.createComputed(function(p1)
 				-- upvalues: Callback (upval), UseMomentMediaControllerModuleResult (upval), GetSmartFillScaleTypeModule (upval), UseMemoResult1 (upval)
 				local CallbackResult = Callback(p1)
 				
@@ -55,15 +55,15 @@ return function(Frame) --[[ Line: 78 | Named "MomentMediaView" ]]
 	end
 	local UseSignalBindingResult = UseSignalBindingFunction(GetScaleType)
 	local IsSuppressTapToToggle = Frame.suppressTapToToggle == true
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 131 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseMomentMediaControllerModuleResult (copy)
 		if UseMomentMediaControllerModuleResult ~= nil then
 			UseMomentMediaControllerModuleResult.toggle()
 		end
 	end, { UseMomentMediaControllerModuleResult })
-	local UseMemoResult11 = ReactModule.useMemo(function() --[[ Line: 140 ]]
+	local UseMemoResult11 = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), UseMomentMediaControllerModuleResult (copy)
-		return SignalsModule.createComputed(function(p1) --[[ Line: 141 ]]
+		return SignalsModule.createComputed(function(p1)
 			-- upvalues: UseMomentMediaControllerModuleResult (upval)
 			return if UseMomentMediaControllerModuleResult == nil then "Idle" else UseMomentMediaControllerModuleResult.getState(p1).readiness
 		end)
@@ -74,9 +74,9 @@ return function(Frame) --[[ Line: 78 | Named "MomentMediaView" ]]
 	
 	if FFlagMomentsTextOverlayAfterVideoLoadedModule then
 		local HasVideoPreview = UseMomentMediaControllerModuleResult ~= nil and UseMomentMediaControllerModuleResult.getHasVideoPreview()
-		v1 = UseSignalBindingFunction((ReactModule.useMemo(function() --[[ Line: 153 ]]
+		v1 = UseSignalBindingFunction((ReactModule.useMemo(function()
 			-- upvalues: SignalsModule (upval), HasVideoPreview (copy), UseMemoResult11 (copy)
-			return SignalsModule.createComputed(function(p1): boolean --[[ Line: 154 ]]
+			return SignalsModule.createComputed(function(p1): boolean
 				-- upvalues: HasVideoPreview (upval), UseMemoResult11 (upval)
 				return not HasVideoPreview or UseMemoResult11(p1) == "Ready"
 			end)
@@ -84,14 +84,14 @@ return function(Frame) --[[ Line: 78 | Named "MomentMediaView" ]]
 	end
 	local UseHasPresentedFrameModuleResult = UseHasPresentedFrameModule(UseMomentMediaControllerModuleResult, Frame.holdPosterUntilPlaying)
 	local NoUseHasPresentedFrameModuleResult: boolean = if Frame.holdPosterUntilPlaying then not UseHasPresentedFrameModuleResult else not IsReady
-	local UseSignalStateResult1 = UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 168 ]]
+	local UseSignalStateResult1 = UseSignalStateFunction((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), UseMomentMediaControllerModuleResult (copy), Frozen (upval)
-		return SignalsModule.createComputed(function(p1) --[[ Line: 169 ]]
+		return SignalsModule.createComputed(function(p1)
 			-- upvalues: UseMomentMediaControllerModuleResult (upval), Frozen (upval)
 			return if UseMomentMediaControllerModuleResult == nil then Frozen else UseMomentMediaControllerModuleResult.getVisualLayers(p1)
 		end)
 	end, { UseMomentMediaControllerModuleResult })))
-	local Copy = table.clone((ReactModule.useMemo(function() --[[ Line: 181 ]]
+	local Copy = table.clone((ReactModule.useMemo(function()
 		-- upvalues: UseMomentMediaControllerModuleResult (copy), UseSignalStateResult1 (copy), UseMemoResult1 (copy), UseSignalBindingResult (copy), GetScaleType (ref), CornerRadius (copy), ReactModule (upval), View (upval), FFlagMomentsTextOverlayAfterVideoLoadedModule (upval), v1 (ref)
 		local Elements = {}
 		
@@ -106,11 +106,11 @@ return function(Frame) --[[ Line: 78 | Named "MomentMediaView" ]]
 					Surface = value.render({
 						getItemSize = UseMemoResult1.get,
 						getPlaybackPosition = UseMomentMediaControllerModuleResult.getPosition,
-						getResolution = function(p1) --[[ Line: 189 ]]
+						getResolution = function(p1)
 							-- upvalues: UseMomentMediaControllerModuleResult (upval)
 							return UseMomentMediaControllerModuleResult.getState(p1).resolution
 						end,
-						setSurface = function(Id1) --[[ Line: 192 ]]
+						setSurface = function(Id1)
 							-- upvalues: UseMomentMediaControllerModuleResult (upval), Id (copy)
 							UseMomentMediaControllerModuleResult.setSurface(Id, Id1)
 						end,

@@ -36,7 +36,7 @@ local FFlagEnableMobilePlayerListOnConsole = PlayerListModule.Flags.FFlagEnableM
 local FFlagPlayerListFixLeaderstatsStacking = require(SharedFlags).FFlagPlayerListFixLeaderstatsStacking
 local FFlagPlayerListUseFocusNavHook = PlayerListModule.Flags.FFlagPlayerListUseFocusNavHook
 local config = { Transparency = 1, Color = Color3.new(1, 1, 1) }
-local MemoResult = ReactModule.memo(function(p1) --[[ Line: 121 | Named "IconAndName" ]]
+local MemoResult = ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), PlayerIconModule (copy), PlayerNameTagModule (copy)
 	return ReactModule.createElement(ReactModule.Fragment, {}, {
 		Layout = ReactModule.createElement("UIListLayout", {
@@ -64,7 +64,7 @@ local MemoResult = ReactModule.memo(function(p1) --[[ Line: 121 | Named "IconAnd
 		})
 	})
 end)
-local MemoResult1 = ReactModule.memo(function(p1) --[[ Line: 176 | Named "PlayerEntryChildren" ]]
+local MemoResult1 = ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), MemoResult (ref), EntryFrameView (copy), FFlagRemoveNewPlayerListOverlay (copy), FFlagPlayerListFixLeaderstatsStacking (copy), SignalsReactModule (copy), SignalsModule (copy), StatEntryContainerModule (copy), CryoModule (copy), CellExtenderModule (copy)
 	local IsSmallTouchDevice = p1.isSmallTouchDevice or false
 	local IsDirectionalPreferred = p1.isDirectionalPreferred or false
@@ -139,12 +139,12 @@ local MemoResult1 = ReactModule.memo(function(p1) --[[ Line: 176 | Named "Player
 		end
 	end
 	if FFlagPlayerListFixLeaderstatsStacking then
-		local UseSignalStateResult = SignalsReactModule.useSignalState(SignalsModule.createComputed(function(p2) --[[ Line: 272 ]]
+		local UseSignalStateResult = SignalsReactModule.useSignalState(SignalsModule.createComputed(function(p2)
 			-- upvalues: PlayerStats (copy)
 			return if PlayerStats then PlayerStats.getAllData(p2) else {}
 		end))
 		
-		for StatName, value in SignalsReactModule.useSignalState(SignalsModule.createComputed(function(p2) --[[ Line: 268 ]]
+		for StatName, value in SignalsReactModule.useSignalState(SignalsModule.createComputed(function(p2)
 			-- upvalues: GameStats (copy)
 			return if GameStats then GameStats.getAllData(p2) else {}
 		end)) do
@@ -156,7 +156,7 @@ local MemoResult1 = ReactModule.memo(function(p1) --[[ Line: 176 | Named "Player
 			end
 		end
 	elseif GameStats and GameStatsCount and (GameStatsCount > 0 and PlayerStats and PlayerStatsCount and PlayerStatsCount >= 0) then
-		GameStats.iterateData(function(StatName, p2) --[[ Line: 291 ]]
+		GameStats.iterateData(function(StatName, p2)
 			-- upvalues: MaxLeaderstats (copy), PlayerStats (copy), Elements (copy), ReactModule (upval), StatEntryContainerModule (upval), CryoModule (upval), config2 (copy)
 			if MaxLeaderstats >= p2.order(false) then
 				Elements["GameStat_" .. StatName] = ReactModule.createElement(StatEntryContainerModule, CryoModule.Dictionary.join(config2, {
@@ -180,18 +180,18 @@ local MemoResult1 = ReactModule.memo(function(p1) --[[ Line: 176 | Named "Player
 	return ReactModule.createElement(ReactModule.Fragment, {}, Elements)
 end)
 
-return ReactModule.memo(function(p2) --[[ Line: 331 | Named "PlayerEntryView" ]]
+return ReactModule.memo(function(p2)
 	-- upvalues: FFlagPlayerListFixLeaderstatsStacking (copy), SignalsReactModule (copy), SignalsModule (copy), ReactModule (copy), FFlagPlayerListUseFocusNavHook (copy), UseFocusGuiObjectFunction (copy), EnabledFunction (copy), UseLayoutValuesFunction (copy), UseStyleFunction (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), Players (copy), Constants (copy), GetFFlagGateLeaderboardPlayerDropdownViaGUACFunction (copy), InExperienceCapabilities (copy), ControlState (copy), config (copy), NormalizeFontFaceFunction (copy), FFlagEnableMobilePlayerListOnConsole (copy), FFlagRemoveNewPlayerListOverlay (copy), FFlagAddNewPlayerListFocusNav (copy), GuiService (copy), FFlagAddNewPlayerListMobileFocusNav (copy), View (copy), MemoResult1 (ref), EntryFrameView (copy), CryoModule (copy)
 	local UseSignalStateResult = if FFlagPlayerListFixLeaderstatsStacking then nil else SignalsReactModule.useSignalState(p2.playerData.stats.getCount)
-	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(SignalsModule.createComputed(function(p3): number --[[ Line: 335 ]]
+	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(SignalsModule.createComputed(function(p3): number
 		-- upvalues: p2 (copy)
 		return p2.playerData.order(p3) * 2 - 1
 	end))
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 339 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p2 (copy), UseSignalBindingResult (copy)
 		return if p2.layoutOrder then p2.layoutOrder else UseSignalBindingResult
 	end, { p2.layoutOrder, UseSignalBindingResult })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 343 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: p2 (copy)
 		return if p2.playerData.order(false) == 1 then p2.firstPlayerRef else nil
 	end, { p2.playerData.order, p2.firstPlayerRef })
@@ -208,7 +208,7 @@ return ReactModule.memo(function(p2) --[[ Line: 331 | Named "PlayerEntryView" ]]
 	local IsSmallTouchDevice = p2.isSmallTouchDevice
 	local IsTenFoot = UseLayoutValuesResult.IsTenFoot
 	local IsPlayerMatch = p2.player == Players.LocalPlayer
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 366 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p2 (copy), FFlagPlayerListUseFocusNavHook (upval), Constants (upval), GetFFlagGateLeaderboardPlayerDropdownViaGUACFunction (upval), InExperienceCapabilities (upval), UseRefResult (copy)
 		if not p2.openDropdown or not p2.closeDropdown then return end
 		if p2.dropdownOpen and p2.selectedPlayer == p2.player then
@@ -251,7 +251,7 @@ return ReactModule.memo(function(p2) --[[ Line: 331 | Named "PlayerEntryView" ]]
 		p2.closeDropdown, p2.setDropDownPlayerDimensionY, p2.titlePlayerEntry,
 		p2.setSelectedPlayerId, UseRefResult.current
 	})
-	local UseResult1 = ReactModule.useCallback(function(Default) --[[ Line: 407 ]]
+	local UseResult1 = ReactModule.useCallback(function(Default)
 		-- upvalues: ControlState (upval), UseStateResult2_1 (copy), UseStateResult2 (copy)
 		if Default == ControlState.Pressed or Default == ControlState.SelectedPressed then
 			UseStateResult2_1(true)
@@ -268,28 +268,28 @@ return ReactModule.memo(function(p2) --[[ Line: 331 | Named "PlayerEntryView" ]]
 			UseStateResult2_1(false)
 		end
 	end, {})
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 418 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: EnabledResult (copy), UseStyleResult (copy)
 		return {
 			Transparency = 1,
 			Color = if EnabledResult then UseStyleResult.Theme.BackgroundUIContrast.Color else UseStyleResult.Theme.BackgroundContrast.Color
 		}
 	end, { EnabledResult, IsTenFoot })
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 428 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: UseLayoutValuesResult (copy)
 		return {
 			Transparency = 0.8,
 			Color = UseLayoutValuesResult.RowHoverColor
 		}
 	end, { UseLayoutValuesResult })
-	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 435 ]]
+	local UseMemoResult4 = ReactModule.useMemo(function()
 		-- upvalues: UseLayoutValuesResult (copy)
 		return {
 			Transparency = 0.8,
 			Color = UseLayoutValuesResult.RowDefaultColor
 		}
 	end, { UseLayoutValuesResult })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 509 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: IsTenFoot (copy), p2 (copy), UseStateResult1 (copy), UseStyleResult (copy), UseStateResult (copy), config (upval)
 		if not IsTenFoot then
 			local IsSelectedPlayerMatch: boolean = p2.dropdownOpen and p2.selectedPlayer == p2.player
@@ -307,7 +307,7 @@ return ReactModule.memo(function(p2) --[[ Line: 331 | Named "PlayerEntryView" ]]
 		UseStateResult, UseStateResult1, p2.dropdownOpen, p2.selectedPlayer, p2.player,
 		UseStyleResult, IsTenFoot
 	})
-	local UseMemoResult5 = ReactModule.useMemo(function() --[[ Line: 532 ]]
+	local UseMemoResult5 = ReactModule.useMemo(function()
 		-- upvalues: IsSmallTouchDevice (copy), IsPlayerMatch (copy), UseStyleResult (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), UseTokensResult (copy), FFlagEnableMobilePlayerListOnConsole (upval), UseLayoutValuesResult (copy), IsTenFoot (copy), p2 (copy)
 		return if IsSmallTouchDevice then if IsPlayerMatch then {
 			Font = UseStyleResult.Font.CaptionHeader.Font,
@@ -344,7 +344,7 @@ return ReactModule.memo(function(p2) --[[ Line: 331 | Named "PlayerEntryView" ]]
 		IsSmallTouchDevice, IsTenFoot, IsPlayerMatch, UseStyleResult,
 		UseLayoutValuesResult, UseTokensResult
 	})
-	local BackgroundStyle = ReactModule.useCallback(function() --[[ Line: 443 ]]
+	local BackgroundStyle = ReactModule.useCallback(function()
 		-- upvalues: IsSmallTouchDevice (copy), UseStateResult (copy), UseStateResult1 (copy), UseMemoResult3 (copy), UseMemoResult4 (copy), IsTenFoot (copy), UseMemoResult2 (copy), p2 (copy), UseLayoutValuesResult (copy)
 		if IsSmallTouchDevice then
 			return (UseStateResult or UseStateResult1) and UseMemoResult3 or UseMemoResult4
@@ -366,7 +366,7 @@ return ReactModule.memo(function(p2) --[[ Line: 331 | Named "PlayerEntryView" ]]
 		UseMemoResult2, IsSmallTouchDevice, p2.dropdownOpen, p2.selectedPlayer,
 		p2.player, p2.titlePlayerEntry, UseStateResult, UseStateResult1
 	})()
-	local TextStyle = ReactModule.useCallback(function() --[[ Line: 488 ]]
+	local TextStyle = ReactModule.useCallback(function()
 		-- upvalues: IsTenFoot (copy), UseStateResult (copy), UseLayoutValuesResult (copy), IsPlayerMatch (copy), UseStyleResult (copy)
 		if IsTenFoot then
 			if UseStateResult then
@@ -387,7 +387,7 @@ return ReactModule.memo(function(p2) --[[ Line: 331 | Named "PlayerEntryView" ]]
 		UseStyleResult
 	})()
 	local UseResultResult = if FFlagRemoveNewPlayerListOverlay then nil else UseResult2()
-	local UseMemoResult6 = ReactModule.useMemo(function() --[[ Line: 591 ]]
+	local UseMemoResult6 = ReactModule.useMemo(function()
 		-- upvalues: p2 (copy), UseLayoutValuesResult (copy), BackgroundStyle (copy), FFlagRemoveNewPlayerListOverlay (upval), UseResultResult (ref), UseStateResult1 (copy), UseMemoResult1 (copy), FFlagPlayerListUseFocusNavHook (upval), FFlagAddNewPlayerListFocusNav (upval), UseRefResult1 (copy), UseResult (copy), UseResult1 (copy)
 		return {
 			isTeamFrame = false,
@@ -404,7 +404,7 @@ return ReactModule.memo(function(p2) --[[ Line: 331 | Named "PlayerEntryView" ]]
 		p2.entrySizeX, UseLayoutValuesResult.PlayerEntrySizeY, BackgroundStyle,
 		UseResultResult, UseStateResult1, UseRefResult1, UseResult, UseResult1
 	})
-	local UseMemoResult7 = ReactModule.useMemo(function() --[[ Line: 615 ]]
+	local UseMemoResult7 = ReactModule.useMemo(function()
 		-- upvalues: IsSmallTouchDevice (copy), IsTenFoot (copy), UseLayoutValuesResult (copy), TextStyle (copy), UseMemoResult5 (copy), UseStateResult (copy), BackgroundStyle (copy), FFlagRemoveNewPlayerListOverlay (upval), UseResultResult (ref), UseStateResult1 (copy), p2 (copy), UseSignalStateResult (copy), UseMemoResult6 (copy)
 		return {
 			isSmallTouchDevice = IsSmallTouchDevice,
@@ -436,18 +436,18 @@ return ReactModule.memo(function(p2) --[[ Line: 331 | Named "PlayerEntryView" ]]
 	})
 	
 	if not FFlagPlayerListUseFocusNavHook then
-		ReactModule.useEffect(function() --[[ Line: 660 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: FFlagAddNewPlayerListFocusNav (upval), UseRefResult1 (copy), p2 (copy), GuiService (upval), UseFocusGuiObjectResult (copy)
 			local Connection = nil
 			local Connection1 = nil
 			
 			if FFlagAddNewPlayerListFocusNav and UseRefResult1.current and p2.prevFocusedEntry and p2.destroyedFocusedPlayerId then
 				local Current = UseRefResult1.current
-				Connection = UseRefResult1.current.SelectionLost:Connect(function() --[[ Line: 668 ]]
+				Connection = UseRefResult1.current.SelectionLost:Connect(function()
 					-- upvalues: p2 (upval), Current (copy)
 					p2.prevFocusedEntry.current = Current
 				end)
-				Connection1 = UseRefResult1.current.Destroying:Connect(function() --[[ Line: 673 ]]
+				Connection1 = UseRefResult1.current.Destroying:Connect(function()
 					-- upvalues: Connection (ref), GuiService (upval), Current (copy), p2 (upval), UseFocusGuiObjectResult (upval), Connection1 (ref)
 					Connection:Disconnect()
 					
@@ -458,7 +458,7 @@ return ReactModule.memo(function(p2) --[[ Line: 331 | Named "PlayerEntryView" ]]
 					Connection1:Disconnect()
 				end)
 			end
-			return function() --[[ Line: 687 ]]
+			return function()
 				-- upvalues: Connection (ref)
 				if Connection then
 					Connection:Disconnect()
@@ -473,9 +473,9 @@ return ReactModule.memo(function(p2) --[[ Line: 331 | Named "PlayerEntryView" ]]
 		})
 	end
 	if FFlagPlayerListUseFocusNavHook then
-		ReactModule.useEffect(function() --[[ Line: 696 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p2 (copy)
-			return function() --[[ Line: 697 ]]
+			return function()
 				-- upvalues: p2 (upval)
 				if p2.unregisterPlayerInstance then
 					p2.unregisterPlayerInstance(p2.player.UserId)
@@ -483,7 +483,7 @@ return ReactModule.memo(function(p2) --[[ Line: 331 | Named "PlayerEntryView" ]]
 			end
 		end, { p2.unregisterPlayerInstance, p2.player })
 	end
-	local UseResult3 = ReactModule.useCallback(function(Current) --[[ Line: 705 ]]
+	local UseResult3 = ReactModule.useCallback(function(Current)
 		-- upvalues: FFlagPlayerListUseFocusNavHook (upval), p2 (copy), FFlagAddNewPlayerListMobileFocusNav (upval), UseRefResult1 (copy), UseRefResult (copy)
 		if FFlagPlayerListUseFocusNavHook and p2.registerPlayerInstance then
 			p2.registerPlayerInstance(p2.player.UserId, Current, p2.playerData.order)

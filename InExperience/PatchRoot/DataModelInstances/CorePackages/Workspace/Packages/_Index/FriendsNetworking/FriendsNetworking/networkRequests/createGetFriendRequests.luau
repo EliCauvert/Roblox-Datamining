@@ -4,9 +4,9 @@ local _ = require(script.Parent.Parent.networkingFriendsTypes)
 local FFlagAddFriendsSessionId = require(Parent.SharedFlags).FFlagAddFriendsSessionId
 local FFlagAddFriendsPageHighlightUnseenRequests = require(Parent.SharedFlags).FFlagAddFriendsPageHighlightUnseenRequests
 
-return function(p1) --[[ Line: 11 ]]
+return function(p1)
 	-- upvalues: FRIENDSURLModule (copy), FFlagAddFriendsSessionId (copy), FFlagAddFriendsPageHighlightUnseenRequests (copy)
-	return p1.roduxNetworking.GET("GetFriendRequests", function(Callback, p2) --[[ Line: 16 ]]
+	return p1.roduxNetworking.GET("GetFriendRequests", function(Callback, p2)
 		-- upvalues: FRIENDSURLModule (upval), FFlagAddFriendsSessionId (upval), FFlagAddFriendsPageHighlightUnseenRequests (upval)
 		return Callback(FRIENDSURLModule, { currentUserId = p2.currentUserId }):path("v1"):path("my"):path("friends"):path("requests"):queryArgs({
 			fetchMutualFriends = p2.fetchMutualFriends,

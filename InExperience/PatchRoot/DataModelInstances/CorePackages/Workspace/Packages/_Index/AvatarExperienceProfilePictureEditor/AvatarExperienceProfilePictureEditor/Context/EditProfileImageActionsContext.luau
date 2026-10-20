@@ -4,7 +4,7 @@ local Context = ReactModule.createContext(nil)
 return {
 	Context = Context,
 	Provider = Context.Provider,
-	useEditProfileImageActions = function() --[[ Line: 19 ]]
+	useEditProfileImageActions = function()
 		-- upvalues: ReactModule (copy), Context (copy)
 		local UseContextResult = ReactModule.useContext(Context)
 		

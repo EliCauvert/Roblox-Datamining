@@ -12,7 +12,7 @@ local SupportPaneInputRulesModule = require(script.Parent.Parent.Utils.supportPa
 local UsePreferredInputFunction = require(Parent.Responsive).usePreferredInput
 local TempRnSwitchNavigatorName = require(Parent.NavigationRodux).Constants.TempRnSwitchNavigatorName
 
-return function(Entry, Tbl, List, p1) --[[ Line: 54 | Named "useSplitPaneRender" ]]
+return function(Entry, Tbl, List, p1)
 	-- upvalues: SplitPaneStoreModule (copy), SignalsReactModule (copy), ReactModule (copy), SplitPaneContextModule (copy), UsePreferredInputFunction (copy), TempRnSwitchNavigatorName (copy), FFlagEnableSplitPaneTelemetry (copy), SplitPaneTelemetryModule (copy), SplitPaneVariantModule (copy), SupportPaneInputRulesModule (copy), IsSupportPaneScreenModule (copy)
 	local Store = SplitPaneStoreModule.getStore()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(Store.getSupportPaneMode)
@@ -68,7 +68,7 @@ return function(Entry, Tbl, List, p1) --[[ Line: 54 | Named "useSplitPaneRender"
 	end
 	local IsRouteNameMatch: boolean = Entry[1] ~= nil and (Entry[1].descriptor ~= nil and (Entry[1].descriptor.state ~= nil and Entry[1].descriptor.state.routeName == TempRnSwitchNavigatorName))
 	local UseRefResult = ReactModule.useRef(0)
-	ReactModule.useEffect(function() --[[ Line: 122 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), CountList (copy), IsRouteNameMatch (copy), FFlagEnableSplitPaneTelemetry (upval), SplitPaneTelemetryModule (upval), SplitPaneVariantModule (upval), Store (copy), SupportPaneInputRulesModule (upval), UsePreferredInputResult (copy)
 		local Current: number = UseRefResult.current
 		UseRefResult.current = CountList

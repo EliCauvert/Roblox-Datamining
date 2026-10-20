@@ -7,14 +7,14 @@ local SquadStateModule = require(SquadsCore.Enums.SquadState)
 local UseCurrentSquadIdModule = require(SquadsCore.Hooks.useCurrentSquadId)
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function() --[[ Line: 13 ]]
+return function()
 	-- upvalues: UseCurrentSquadIdModule (copy), ReactModule (copy), NetworkingSquadsModule (copy), UseSelectorFunction (copy), SquadStateModule (copy), NetworkStatus (copy)
 	local UseCurrentSquadIdModuleResult = UseCurrentSquadIdModule() or ""
-	local UseSelectorResult = UseSelectorFunction((ReactModule.useCallback(function(p1) --[[ Line: 16 ]]
+	local UseSelectorResult = UseSelectorFunction((ReactModule.useCallback(function(p1)
 		-- upvalues: NetworkingSquadsModule (upval)
 		return NetworkingSquadsModule.JoinSquad.getStatus(p1, {})
 	end, {})))
-	local UseSelectorResult1 = UseSelectorFunction((ReactModule.useCallback(function(p1) --[[ Line: 21 ]]
+	local UseSelectorResult1 = UseSelectorFunction((ReactModule.useCallback(function(p1)
 		-- upvalues: NetworkingSquadsModule (upval)
 		return NetworkingSquadsModule.CreateOrJoinSquad.getStatus(p1, {})
 	end, {})))

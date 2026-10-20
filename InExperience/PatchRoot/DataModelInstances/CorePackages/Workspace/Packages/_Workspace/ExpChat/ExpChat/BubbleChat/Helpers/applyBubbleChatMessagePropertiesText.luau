@@ -1,4 +1,4 @@
-﻿return function(p1, p2, TextChatMessageProperties) --[[ Line: 1 | Named "applyBubbleChatMessagePropertiesText" ]]
+﻿return function(p1, p2, TextChatMessageProperties)
 	if TextChatMessageProperties and TextChatMessageProperties:IsA("TextChatMessageProperties") then
 		if TextChatMessageProperties.Text ~= "" then
 			p1 = TextChatMessageProperties.Text

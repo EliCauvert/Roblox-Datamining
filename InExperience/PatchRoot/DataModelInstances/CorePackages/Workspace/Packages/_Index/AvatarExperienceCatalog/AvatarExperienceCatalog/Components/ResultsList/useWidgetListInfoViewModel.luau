@@ -66,7 +66,7 @@ local config3 = {
 }
 local config4 = { Dark = "dark", Light = "light", Default = "default" }
 
-local function getQueryStringForSearchWidgets(SearchesParameter): string? --[[ Line: 72 ]]
+local function getQueryStringForSearchWidgets(SearchesParameter): string?
 	if not SearchesParameter or not SearchesParameter.searchKeyword then
 		return nil
 	end
@@ -80,17 +80,17 @@ local function getQueryStringForSearchWidgets(SearchesParameter): string? --[[ L
 	return table.concat(List, " ")
 end
 
-local function _(p1) --[[ Line: 87 | Named "getDefaultItemGroupTemplate" ]]
+local function _(p1)
 	-- upvalues: CryoModule (copy), config1 (copy)
 	return if p1 and p1.defaultItemGroupTemplate then CryoModule.Dictionary.join(config1, p1.defaultItemGroupTemplate) elseif p1 and p1.defaultTemplate then CryoModule.Dictionary.join(config1, p1.defaultTemplate) else config1
 end
 
-local _ = function(p1) --[[ Line: 98 | Named "getDefaultCarouselTemplate" ]]
+local _ = function(p1)
 	-- upvalues: CryoModule (copy), config (copy)
 	return if p1 and p1.defaultItemCarouselTemplate then CryoModule.Dictionary.join(config, p1.defaultItemCarouselTemplate) else config
 end
 
-local _ = function(p1, p2) --[[ Line: 105 | Named "getResponsiveValue" ]]
+local _ = function(p1, p2)
 	-- upvalues: config3 (copy)
 	if p1 then
 		local Entry = if p2 and config3[p2] then config3[p2] else "default"
@@ -101,7 +101,7 @@ local _ = function(p1, p2) --[[ Line: 105 | Named "getResponsiveValue" ]]
 	end
 end
 
-local _ = function(p1, p2) --[[ Line: 113 | Named "getThemeValue" ]]
+local _ = function(p1, p2)
 	-- upvalues: config4 (copy)
 	if p1 then
 		local Entry = if p2 and config4[p2] then config4[p2] else "default"
@@ -112,19 +112,19 @@ local _ = function(p1, p2) --[[ Line: 113 | Named "getThemeValue" ]]
 	end
 end
 
-local function colorToColor3(Color): Color3 --[[ Line: 121 ]]
+local function colorToColor3(Color): Color3
 	return Color3.new(Color.r, Color.g, Color.b)
 end
 
-local function pointToVector2(Vector): Vector2 --[[ Line: 125 ]]
+local function pointToVector2(Vector): Vector2
 	return Vector2.new(Vector.x, Vector.y)
 end
 
-local function pointToUDim2(Vector): UDim2 --[[ Line: 129 ]]
+local function pointToUDim2(Vector): UDim2
 	return UDim2.fromOffset(Vector.x, Vector.y)
 end
 
-local _ = function(p1, p2) --[[ Line: 133 | Named "formatResponsivePointToVector" ]]
+local _ = function(p1, p2)
 	-- upvalues: config3 (copy), pointToVector2 (copy)
 	local Default = nil
 	if p1 then
@@ -136,7 +136,7 @@ local _ = function(p1, p2) --[[ Line: 133 | Named "formatResponsivePointToVector
 	return pointToVector2(if Default then Default else { x = 0, y = 0 })
 end
 
-local _ = function(p1, p2) --[[ Line: 141 | Named "formatResponsivePointToUDim2" ]]
+local _ = function(p1, p2)
 	-- upvalues: config3 (copy), pointToUDim2 (copy)
 	local Default = nil
 	if p1 then
@@ -148,7 +148,7 @@ local _ = function(p1, p2) --[[ Line: 141 | Named "formatResponsivePointToUDim2"
 	return pointToUDim2(if Default then Default else { x = 0, y = 0 })
 end
 
-local function formatColorSequence(ColorSequence1): ColorSequence --[[ Line: 149 ]]
+local function formatColorSequence(ColorSequence1): ColorSequence
 	-- upvalues: colorToColor3 (copy)
 	local ColorSequenceKeypoints = {}
 	
@@ -158,7 +158,7 @@ local function formatColorSequence(ColorSequence1): ColorSequence --[[ Line: 149
 	return ColorSequence.new(ColorSequenceKeypoints)
 end
 
-local function formatNumberSequence(Transparency): NumberSequence? --[[ Line: 157 ]]
+local function formatNumberSequence(Transparency): NumberSequence?
 	if type(Transparency) == "number" then
 		return NumberSequence.new(Transparency)
 	end
@@ -173,7 +173,7 @@ local function formatNumberSequence(Transparency): NumberSequence? --[[ Line: 15
 	return NumberSequence.new(List)
 end
 
-local function formatImageBackground(p1, p2) --[[ Line: 171 ]]
+local function formatImageBackground(p1, p2)
 	-- upvalues: config3 (copy)
 	local AnchorPoint1 = nil
 	if p1.anchorPoint then
@@ -253,7 +253,7 @@ local function formatImageBackground(p1, p2) --[[ Line: 171 ]]
 	return config
 end
 
-local function formatGradientBackground(p1) --[[ Line: 195 ]]
+local function formatGradientBackground(p1)
 	-- upvalues: formatColorSequence (copy), formatNumberSequence (copy)
 	local config = {
 		type = "GradientBackground",
@@ -274,7 +274,7 @@ local function formatGradientBackground(p1) --[[ Line: 195 ]]
 	return config
 end
 
-local function getFormattedBackgroundLayers(BackgroundLayers, p1, p2) --[[ Line: 209 ]]
+local function getFormattedBackgroundLayers(BackgroundLayers, p1, p2)
 	-- upvalues: config4 (copy), formatImageBackground (copy), formatGradientBackground (copy)
 	local Default = nil
 	if BackgroundLayers then
@@ -298,7 +298,7 @@ local function getFormattedBackgroundLayers(BackgroundLayers, p1, p2) --[[ Line:
 	return List
 end
 
-local _ = function(CardStyle, p3, p4) --[[ Line: 226 | Named "formatCardStyle" ]]
+local _ = function(CardStyle, p3, p4)
 	-- upvalues: getFormattedBackgroundLayers (copy)
 	return {
 		backgroundLayers = if CardStyle.backgroundLayers then getFormattedBackgroundLayers(CardStyle.backgroundLayers, p3, p4) else nil,
@@ -306,14 +306,14 @@ local _ = function(CardStyle, p3, p4) --[[ Line: 226 | Named "formatCardStyle" ]
 	}
 end
 
-local _ = function(p3, p4, p5) --[[ Line: 239 | Named "formatWidgetStyle" ]]
+local _ = function(p3, p4, p5)
 	-- upvalues: getFormattedBackgroundLayers (copy)
 	return {
 		backgroundLayers = if p3.backgroundLayers then getFormattedBackgroundLayers(p3.backgroundLayers, p4, p5) else nil
 	}
 end
 
-local function formatWidgetTemplateAsItemGroup(JoinResult, p3, p4) --[[ Line: 251 ]]
+local function formatWidgetTemplateAsItemGroup(JoinResult, p3, p4)
 	-- upvalues: config3 (copy), getFormattedBackgroundLayers (copy)
 	local PreviewColumns = JoinResult.previewColumns
 	local Default = nil
@@ -373,7 +373,7 @@ local function formatWidgetTemplateAsItemGroup(JoinResult, p3, p4) --[[ Line: 25
 	return config
 end
 
-local function formatWidgetTemplateAsCarousel(JoinResult, p3, p4) --[[ Line: 273 ]]
+local function formatWidgetTemplateAsCarousel(JoinResult, p3, p4)
 	-- upvalues: config3 (copy), getFormattedBackgroundLayers (copy)
 	local PreviewColumns = JoinResult.previewColumns
 	local Default = nil
@@ -434,7 +434,7 @@ local function formatWidgetTemplateAsCarousel(JoinResult, p3, p4) --[[ Line: 273
 	return config
 end
 
-local function formatWidgetTemplateAsHeroUnit(p3, p4, p5) --[[ Line: 296 ]]
+local function formatWidgetTemplateAsHeroUnit(p3, p4, p5)
 	-- upvalues: config3 (copy), getFormattedBackgroundLayers (copy)
 	local PreviewColumns = p3.previewColumns
 	local Default = nil
@@ -496,7 +496,7 @@ local function formatWidgetTemplateAsHeroUnit(p3, p4, p5) --[[ Line: 296 ]]
 	return config
 end
 
-local function mergeCardStyle(CardStyle, CardStyle1) --[[ Line: 320 ]]
+local function mergeCardStyle(CardStyle, CardStyle1)
 	-- upvalues: CryoModule (copy)
 	if CardStyle or CardStyle1 then
 		local ThumbnailAspectRatio = if CardStyle1 then CardStyle1.thumbnailAspectRatio else nil
@@ -511,14 +511,14 @@ local function mergeCardStyle(CardStyle, CardStyle1) --[[ Line: 320 ]]
 	end
 end
 
-local function mergeWidgetStyle(WidgetStyle, WidgetStyle1) --[[ Line: 336 ]]
+local function mergeWidgetStyle(WidgetStyle, WidgetStyle1)
 	-- upvalues: CryoModule (copy)
 	return if WidgetStyle or WidgetStyle1 then {
 		backgroundLayers = CryoModule.Dictionary.join(if WidgetStyle and WidgetStyle.backgroundLayers then WidgetStyle.backgroundLayers else {}, if WidgetStyle1 and WidgetStyle1.backgroundLayers then WidgetStyle1.backgroundLayers else {})
 	} else nil
 end
 
-local function mergeItemGroupTemplates(JoinResult, Template) --[[ Line: 351 ]]
+local function mergeItemGroupTemplates(JoinResult, Template)
 	-- upvalues: mergeWidgetStyle (copy), mergeCardStyle (copy), CryoModule (copy)
 	return {
 		type = "ItemGroup",
@@ -535,7 +535,7 @@ local function mergeItemGroupTemplates(JoinResult, Template) --[[ Line: 351 ]]
 	}
 end
 
-local function mergeCarouselTemplates(JoinResult, Template) --[[ Line: 370 ]]
+local function mergeCarouselTemplates(JoinResult, Template)
 	-- upvalues: mergeWidgetStyle (copy), mergeCardStyle (copy), CryoModule (copy)
 	return {
 		type = "Carousel",
@@ -553,7 +553,7 @@ local function mergeCarouselTemplates(JoinResult, Template) --[[ Line: 370 ]]
 	}
 end
 
-local function mergeHeroUnitTemplates(p3, Template) --[[ Line: 390 ]]
+local function mergeHeroUnitTemplates(p3, Template)
 	-- upvalues: mergeWidgetStyle (copy), mergeCardStyle (copy), CryoModule (copy)
 	return {
 		type = "HeroUnit",
@@ -572,7 +572,7 @@ local function mergeHeroUnitTemplates(p3, Template) --[[ Line: 390 ]]
 	}
 end
 
-local _ = function(Tbl) --[[ Line: 411 | Named "convertCarouselTemplateToItemGroupTemplate" ]]
+local _ = function(Tbl)
 	local Copy = table.clone(Tbl)
 	Copy.type = "ItemGroup"
 	Copy.numItemsToShow = nil
@@ -580,7 +580,7 @@ local _ = function(Tbl) --[[ Line: 411 | Named "convertCarouselTemplateToItemGro
 	return Copy
 end
 
-local function formatWidgetListStateToWidgetListInfoViewModel(p3, Default, Name, Directional) --[[ Line: 420 ]]
+local function formatWidgetListStateToWidgetListInfoViewModel(p3, Default, Name, Directional)
 	-- upvalues: FFlagAXNoCarouselsOnCatalogWithGamepadModule (copy), ResponsiveModule (copy), CryoModule (copy), config (copy), config1 (copy), formatWidgetTemplateAsHeroUnit (copy), mergeHeroUnitTemplates (copy), config2 (copy), formatWidgetTemplateAsCarousel (copy), mergeCarouselTemplates (copy), formatWidgetTemplateAsItemGroup (copy), mergeItemGroupTemplates (copy)
 	local config3 = { configuration = {}, widgets = {} }
 	local Configuration = if p3 then p3.Configuration else nil
@@ -626,11 +626,11 @@ local function formatWidgetListStateToWidgetListInfoViewModel(p3, Default, Name,
 	return config3
 end
 
-return function(p4, p5, p6) --[[ Line: 503 | Named "useWidgetListInfoViewModel" ]]
+return function(p4, p5, p6)
 	-- upvalues: WidgetListBreakPointEnumModule (copy), FFlagAXNoCarouselsOnCatalogWithGamepadModule (copy), UseSignalStateFunction (copy), InputModeStore (copy), ReactModule (copy), getQueryStringForSearchWidgets (copy), UseSelectorFunction (copy), UseTokensFunction (copy), formatWidgetListStateToWidgetListInfoViewModel (copy)
 	local Default = if p6 then p6 else WidgetListBreakPointEnumModule.Default
 	local UseSignalStateResult = if FFlagAXNoCarouselsOnCatalogWithGamepadModule then UseSignalStateFunction(InputModeStore.getLastInputType) else nil
-	local UseSelectorResult = UseSelectorFunction((ReactModule.useCallback(function(p7) --[[ Line: 512 ]]
+	local UseSelectorResult = UseSelectorFunction((ReactModule.useCallback(function(p7)
 		-- upvalues: p4 (copy), getQueryStringForSearchWidgets (upval), p5 (copy)
 		local SearchesParameter = p7.SearchesParameters[p4]
 		local HasSearchKeyword: boolean = SearchesParameter and SearchesParameter.searchKeyword ~= nil
@@ -640,7 +640,7 @@ return function(p4, p5, p6) --[[ Line: 503 | Named "useWidgetListInfoViewModel" 
 	end, { p4, p5 })))
 	local UseTokensResult = UseTokensFunction()
 	
-	return (ReactModule.useMemo(function() --[[ Line: 528 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: formatWidgetListStateToWidgetListInfoViewModel (upval), UseSelectorResult (copy), Default (copy), UseTokensResult (copy), FFlagAXNoCarouselsOnCatalogWithGamepadModule (upval), UseSignalStateResult (copy)
 		return (formatWidgetListStateToWidgetListInfoViewModel(UseSelectorResult, Default, UseTokensResult.Config.ColorMode.Name, if FFlagAXNoCarouselsOnCatalogWithGamepadModule then UseSignalStateResult else nil))
 	end, {

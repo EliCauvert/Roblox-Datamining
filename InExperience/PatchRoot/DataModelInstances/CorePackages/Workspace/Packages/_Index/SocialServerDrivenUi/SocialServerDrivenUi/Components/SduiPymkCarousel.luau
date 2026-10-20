@@ -13,7 +13,7 @@ local NormalizeDirectRecommendationsModule = require(SocialServerDrivenUi.Common
 local FFlagCreateConnectionsHub = require(Parent.SharedFlags).FFlagCreateConnectionsHub
 local t = {}
 
-local function readRecommendationHydration(Items, Store, p1) --[[ Line: 43 ]]
+local function readRecommendationHydration(Items, Store, p1)
 	local DataResults = {}
 	
 	for _, item in Items do
@@ -26,7 +26,7 @@ local function readRecommendationHydration(Items, Store, p1) --[[ Line: 43 ]]
 	return DataResults
 end
 
-return function(p2) --[[ Line: 60 | Named "SduiPymkCarousel" ]]
+return function(p2)
 	-- upvalues: t (copy), SduiCoreSystemModule (copy), FriendRecommendations (copy), ReactModule (copy), SignalsModule (copy), NormalizeDirectRecommendationsModule (copy), readRecommendationHydration (copy), SignalsReactModule (copy), PymkNavigationBridgeModule (copy), SetCurrentToastMessageFunction (copy), FFlagCreateConnectionsHub (copy), AppPage (copy), PYMKCarouselModule (copy)
 	local Items = p2.items or t
 	local Dependencies = p2.sduiContext.dependencies
@@ -37,23 +37,23 @@ return function(p2) --[[ Line: 60 | Named "SduiPymkCarousel" ]]
 	return ReactModule.createElement(PYMKCarouselModule.PYMKCarouselEntryPoint, {
 		key = p2.recommendationRequestId,
 		carouselTitle = p2.title or "",
-		recommendations = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 68 ]]
+		recommendations = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 			-- upvalues: SignalsModule (upval), NormalizeDirectRecommendationsModule (upval), Items (copy), readRecommendationHydration (upval), Store (copy)
-			return SignalsModule.createComputed(function(p3) --[[ Line: 69 ]]
+			return SignalsModule.createComputed(function(p3)
 				-- upvalues: NormalizeDirectRecommendationsModule (upval), Items (upval), readRecommendationHydration (upval), Store (upval)
 				return NormalizeDirectRecommendationsModule(Items, (readRecommendationHydration(Items, Store, p3)))
 			end)
 		end, { Items, Store }))),
 		recommendationSessionId = p2.recommendationRequestId,
-		openProfilePeekView = ReactModule.useCallback(function(p3, p4) --[[ Line: 87 ]]
+		openProfilePeekView = ReactModule.useCallback(function(p3, p4)
 			-- upvalues: PymkNavigationBridgeModule (upval)
 			PymkNavigationBridgeModule.requestOpenProfile(p3, p4)
 		end, {}),
-		showToast = ReactModule.useCallback(function(ToastMessage) --[[ Line: 91 ]]
+		showToast = ReactModule.useCallback(function(ToastMessage)
 			-- upvalues: Dependencies (copy), SetCurrentToastMessageFunction (upval)
 			Dependencies.dispatch(SetCurrentToastMessageFunction({ toastMessage = ToastMessage }))
 		end, { Dependencies.dispatch }),
-		goToAddFriendsPage = ReactModule.useCallback(function(_) --[[ Line: 97 ]]
+		goToAddFriendsPage = ReactModule.useCallback(function(_)
 			-- upvalues: FFlagCreateConnectionsHub (upval), Dependencies (copy), AppPage (upval), PymkNavigationBridgeModule (upval)
 			if FFlagCreateConnectionsHub then
 				Dependencies.getNavigation().navigate(AppPage.CoHubAddConnections)
@@ -65,7 +65,7 @@ return function(p2) --[[ Line: 60 | Named "SduiPymkCarousel" ]]
 		end, { Dependencies.getNavigation }),
 		pageContext = p2.sduiContext.appPage,
 		scrollViewPositionChangedSignal = p2.scrollViewPositionChangedSignal,
-		sortAnalyticsData = ReactModule.useMemo(function() --[[ Line: 78 ]]
+		sortAnalyticsData = ReactModule.useMemo(function()
 			-- upvalues: Number (copy), p2 (copy), StartRow (copy)
 			return {
 				sortIndex = Number,

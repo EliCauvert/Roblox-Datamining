@@ -31,7 +31,7 @@ local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
 	}
 })
 
-return function(p1, _, p2) --[[ Line: 47 | Named "SduiOpenFaeTrialUpsellAction" ]]
+return function(p1, _, p2)
 	-- upvalues: FFlagRobloxPlusUpsellRefreshOnComplete (copy), AppPage (copy), SurfaceName (copy), SurfaceContext (copy), NewResult (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), ClaimTrialFunction (copy), SubscriptionGrantType (copy), GetSduiApiStoreFunction (copy), FFlagSduiDismissPromptPageScope (copy), SetPromptDismissedInPageScopeFunction (copy), SduiErrorType (copy), SduiActionType (copy), SduiParseHelpers (copy), StartFacialAgeEstimationFunction (copy)
 	local DispatchFunction: (any) -> () = p2.dependencies.dispatch
 	local Localization = p2.dependencies.localization
@@ -50,9 +50,9 @@ return function(p1, _, p2) --[[ Line: 47 | Named "SduiOpenFaeTrialUpsellAction" 
 			},
 			surfaceName = SurfaceName.HomepageFaeTrialBanner,
 			surfaceContext = SurfaceContext.InApp,
-			onCtaOverride = function(Callback, p3) --[[ Line: 81 ]]
+			onCtaOverride = function(Callback, p3)
 				-- upvalues: AppPage (upval), NewResult (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), DispatchFunction (copy), NavigateDownFunction (upval), ClaimTrialFunction (upval), SubscriptionGrantType (upval), FFlagRobloxPlusUpsellRefreshOnComplete (upval), GetSduiApiStoreFunction (upval), FFlagSduiDismissPromptPageScope (upval), PromptType (copy), p2 (copy), SetPromptDismissedInPageScopeFunction (upval), SduiErrorType (upval), SduiActionType (upval), SduiParseHelpers (upval), StartFacialAgeEstimationFunction (upval)
-				local function openConfirmationWebview(OnClose) --[[ Line: 82 ]]
+				local function openConfirmationWebview(OnClose)
 					-- upvalues: AppPage (upval), NewResult (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), DispatchFunction (upval), NavigateDownFunction (upval)
 					local config = {
 						name = AppPage.GenericWebPage,
@@ -69,11 +69,11 @@ return function(p1, _, p2) --[[ Line: 47 | Named "SduiOpenFaeTrialUpsellAction" 
 					end
 				end
 				
-				DispatchFunction(StartFacialAgeEstimationFunction("FacialAgeEstimationHomepagePlusFreeTrialBanner", function() --[[ Line: 98 | Named "onFaeSuccess" ]]
+				DispatchFunction(StartFacialAgeEstimationFunction("FacialAgeEstimationHomepagePlusFreeTrialBanner", function()
 					-- upvalues: ClaimTrialFunction (upval), SubscriptionGrantType (upval), Callback (copy), FFlagRobloxPlusUpsellRefreshOnComplete (upval), GetSduiApiStoreFunction (upval), FFlagSduiDismissPromptPageScope (upval), PromptType (upval), p2 (upval), SetPromptDismissedInPageScopeFunction (upval), openConfirmationWebview (copy), SduiErrorType (upval), SduiActionType (upval), SduiParseHelpers (upval)
-					ClaimTrialFunction(SubscriptionGrantType.FaeFreeTrial):andThen(function() --[[ Line: 104 ]]
+					ClaimTrialFunction(SubscriptionGrantType.FaeFreeTrial):andThen(function()
 						-- upvalues: Callback (upval), FFlagRobloxPlusUpsellRefreshOnComplete (upval), GetSduiApiStoreFunction (upval), FFlagSduiDismissPromptPageScope (upval), PromptType (upval), p2 (upval), SetPromptDismissedInPageScopeFunction (upval), openConfirmationWebview (upval)
-						local Callback1 = if FFlagRobloxPlusUpsellRefreshOnComplete then function() --[[ Line: 112 ]]
+						local Callback1 = if FFlagRobloxPlusUpsellRefreshOnComplete then function()
 							-- upvalues: GetSduiApiStoreFunction (upval), FFlagSduiDismissPromptPageScope (upval), PromptType (upval), p2 (upval), SetPromptDismissedInPageScopeFunction (upval), Callback (upval)
 							local DismissEntryFunction: (any) -> () = GetSduiApiStoreFunction().dismissEntry
 							
@@ -91,11 +91,11 @@ return function(p1, _, p2) --[[ Line: 47 | Named "SduiOpenFaeTrialUpsellAction" 
 							end
 							Callback()
 						end else Callback
-						task.delay(1, function() --[[ Line: 139 ]]
+						task.delay(1, function()
 							-- upvalues: openConfirmationWebview (upval), Callback1 (ref)
 							openConfirmationWebview(Callback1)
 						end)
-					end):catch(function(Err) --[[ Line: 143 ]]
+					end):catch(function(Err)
 						-- upvalues: p2 (upval), SduiErrorType (upval), SduiActionType (upval), SduiParseHelpers (upval)
 						p2.dependencies.logger.reportError(SduiErrorType.ActionNetworkRequestFailed, {
 							name = SduiActionType.OpenFaeTrialUpsell,

@@ -13,7 +13,7 @@ local ExitConfirmationModalComponentModule = require(Components.ExitConfirmation
 local FlagsModule = require(AdPlayer.Flags)
 local Frozen = table.freeze({ Loading = 1, Paused = 2, Playing = 3 })
 
-return function(p1) --[[ Line: 35 | Named "AdPlayerComponent" ]]
+return function(p1)
 	-- upvalues: FlagsModule (copy), UseTokensFunction (copy), ReactModule (copy), Frozen (copy), RunService (copy), Components (copy), View (copy), StateLayerAffordance (copy), ExitConfirmationModalComponentModule (copy), ReportAdPopup (copy), VideoOverlayComponentModule (copy)
 	local EnableLuaRewardTimerUI = FlagsModule.GetEnableLuaRewardTimerUI()
 	local UseTokensResult = UseTokensFunction()
@@ -40,13 +40,13 @@ return function(p1) --[[ Line: 35 | Named "AdPlayerComponent" ]]
 	end
 	local DurationNeededForReward = p1.durationNeededForReward
 	
-	local function dismissParentModals() --[[ Line: 58 ]]
+	local function dismissParentModals()
 		-- upvalues: UseStateResult2_1 (copy), UseStateResult2_2 (copy)
 		UseStateResult2_1(false)
 		UseStateResult2_2(false)
 	end
 	
-	local function _() --[[ Line: 63 | Named "dismissModals" ]]
+	local function _()
 		-- upvalues: UseStateResult2_1 (copy), UseStateResult2_2 (copy), EnableLuaRewardTimerUI (copy), Ref (ref)
 		UseStateResult2_1(false)
 		UseStateResult2_2(false)
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 35 | Named "AdPlayerComponent" ]]
 		end
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 78 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: EnableLuaRewardTimerUI (copy), Ref1 (ref), UseStateResult2_3 (copy), Frozen (upval), UseStateResult2 (copy), p1 (copy), RunService (upval), UseBindingResult2 (copy), DurationNeededForReward (copy), Callback (ref)
 		local Current = nil
 		Current = if EnableLuaRewardTimerUI then Ref1.current else Ref1:getValue()
@@ -68,7 +68,7 @@ return function(p1) --[[ Line: 35 | Named "AdPlayerComponent" ]]
 		UseStateResult2_3(Frozen.Playing)
 		UseStateResult2(Current.TimeLength)
 		Current.Ended:Connect(p1.onComplete)
-		local RenderSteppedConnection = RunService.RenderStepped:Connect(function() --[[ Line: 93 ]]
+		local RenderSteppedConnection = RunService.RenderStepped:Connect(function()
 			-- upvalues: Current (ref), UseBindingResult2 (upval), EnableLuaRewardTimerUI (upval), DurationNeededForReward (upval), Callback (upval)
 			if Current.TimeLength > 0 then
 				UseBindingResult2(Current.TimePosition / Current.TimeLength)
@@ -85,7 +85,7 @@ return function(p1) --[[ Line: 35 | Named "AdPlayerComponent" ]]
 		end)
 		p1.onVideoFrameLoaded(Current)
 		
-		return function() --[[ Line: 111 ]]
+		return function()
 			-- upvalues: RenderSteppedConnection (copy)
 			RenderSteppedConnection:Disconnect()
 		end
@@ -95,7 +95,7 @@ return function(p1) --[[ Line: 35 | Named "AdPlayerComponent" ]]
 	
 	return ReactModule.createElement(View, {
 		tag = "size-full",
-		onActivated = function() --[[ Line: 128 ]] end,
+		onActivated = function() end,
 		stateLayer = { affordance = StateLayerAffordance.None },
 		backgroundStyle = UseTokensResult.Color.Extended.Black.Black_100
 	}, {
@@ -116,7 +116,7 @@ return function(p1) --[[ Line: 35 | Named "AdPlayerComponent" ]]
 			testAdDisclaimer = if RunService:IsStudio() then ReactModule.createElement(require(Components.TestAdDisclaimerComponent), { isEligible = p1.isEligible }) else nil,
 			confirmExitModal = ReactModule.createElement(ExitConfirmationModalComponentModule, {
 				Enabled = UseStateResult1,
-				onCancel = function() --[[ Line: 152 ]]
+				onCancel = function()
 					-- upvalues: UseStateResult2_1 (copy)
 					UseStateResult2_1(false)
 				end,
@@ -124,11 +124,11 @@ return function(p1) --[[ Line: 35 | Named "AdPlayerComponent" ]]
 			}),
 			reportAdModal = ReactModule.createElement(ReportAdPopup, {
 				showReportAdPopup = UseStateResult3,
-				onClose = function() --[[ Line: 159 ]]
+				onClose = function()
 					-- upvalues: UseStateResult2_2 (copy)
 					UseStateResult2_2(false)
 				end,
-				onOpen = function() --[[ Line: 162 ]]
+				onOpen = function()
 					-- upvalues: UseStateResult2_2 (copy)
 					UseStateResult2_2(true)
 				end,
@@ -144,17 +144,17 @@ return function(p1) --[[ Line: 35 | Named "AdPlayerComponent" ]]
 				dismissModals = dismissParentModals,
 				parentPaused = not NoUseStateResult1_1,
 				showWhyThisAd = p1.showWhyThisAd,
-				setPaused = function(p2) --[[ Line: 177 ]]
+				setPaused = function(p2)
 					-- upvalues: UseStateResult4 (copy), Frozen (upval), UseStateResult2_3 (copy)
 					if UseStateResult4 ~= Frozen.Loading then
 						UseStateResult2_3(if p2 then Frozen.Paused else Frozen.Playing)
 					end
 				end,
-				showReportAdModal = function() --[[ Line: 182 ]]
+				showReportAdModal = function()
 					-- upvalues: UseStateResult2_2 (copy)
 					UseStateResult2_2(true)
 				end,
-				showExitConfirmationModal = function() --[[ Line: 185 ]]
+				showExitConfirmationModal = function()
 					-- upvalues: FlagsModule (upval), v1 (ref), p1 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), EnableLuaRewardTimerUI (copy), Ref (ref)
 					if FlagsModule.GetEnableLuaRewardTimerUI() and v1:getValue() >= 1 then
 						p1.onComplete()

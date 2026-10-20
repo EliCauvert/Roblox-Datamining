@@ -1,8 +1,8 @@
 ﻿local HttpService = game:GetService("HttpService")
 
-return function(Text) --[[ Line: 3 | Named "getDecodedJSON" ]]
+return function(Text)
 	-- upvalues: HttpService (copy)
-	local Success, Result = pcall(function() --[[ Line: 4 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: HttpService (upval), Text (copy)
 		return HttpService:JSONDecode(Text)
 	end)

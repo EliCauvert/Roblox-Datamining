@@ -10,9 +10,9 @@ local IconSize = UIBloxModule.App.ImageSet.Enum.IconSize
 local Images = UIBloxModule.App.ImageSet.Images
 local WithStyleFunction = UIBloxModule.Style.withStyle
 
-local function _(OnActivated, _, _) --[[ Line: 28 | Named "renderHeaderBarLeft" ]]
+local function _(OnActivated, _, _)
 	-- upvalues: ReactModule (copy), IconButton (copy), IconSize (copy), Images (copy)
-	return function() --[[ Line: 29 ]]
+	return function()
 		-- upvalues: ReactModule (upval), IconButton (upval), IconSize (upval), Images (upval), OnActivated (copy)
 		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -34,11 +34,11 @@ local function _(OnActivated, _, _) --[[ Line: 28 | Named "renderHeaderBarLeft" 
 	end
 end
 
-local _ = function(Text) --[[ Line: 50 | Named "renderCenter" ]]
+local _ = function(Text)
 	-- upvalues: WithStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
-	return function() --[[ Line: 51 ]]
+	return function()
 		-- upvalues: WithStyleFunction (upval), ReactModule (upval), Text (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
-		return WithStyleFunction(function(p1) --[[ Line: 52 ]]
+		return WithStyleFunction(function(p1)
 			-- upvalues: ReactModule (upval), Text (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 			local CurrentCamera = game.Workspace.CurrentCamera
 			local Theme = p1.Theme
@@ -61,9 +61,9 @@ local _ = function(Text) --[[ Line: 50 | Named "renderCenter" ]]
 	end
 end
 
-local _ = function(_, OnActivated, OnActivated1, p1, p2) --[[ Line: 82 | Named "renderHeaderBarRight" ]]
+local _ = function(_, OnActivated, OnActivated1, p1, p2)
 	-- upvalues: ReactModule (copy), IconButton (copy), IconSize (copy), Images (copy)
-	return function() --[[ Line: 89 ]]
+	return function()
 		-- upvalues: ReactModule (upval), IconButton (upval), IconSize (upval), Images (upval), p1 (copy), OnActivated (copy), p2 (copy), OnActivated1 (copy)
 		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -93,7 +93,7 @@ local _ = function(_, OnActivated, OnActivated1, p1, p2) --[[ Line: 82 | Named "
 	end
 end
 
-return function(p1) --[[ Line: 117 | Named "ScreenshotDialogPortraitModeHeader" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), HeaderBar (copy), IconButton (copy), IconSize (copy), Images (copy), WithStyleFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local CreateElementFunction1 = ReactModule.createElement
 	local v1 = "Frame"
@@ -114,7 +114,7 @@ return function(p1) --[[ Line: 117 | Named "ScreenshotDialogPortraitModeHeader" 
 		barHeight = 48,
 		margin = 12,
 		isSecondary = true,
-		renderLeft = function() --[[ Line: 29 ]]
+		renderLeft = function()
 			-- upvalues: ReactModule (upval), IconButton (upval), IconSize (upval), Images (upval), BackAction (copy)
 			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -143,7 +143,7 @@ return function(p1) --[[ Line: 117 | Named "ScreenshotDialogPortraitModeHeader" 
 		local IsUndoEnabled = p1.isUndoEnabled
 		local IsRedoEnabled = p1.isRedoEnabled
 		
-		local function RenderRight() --[[ Line: 89 ]]
+		local function RenderRight()
 			-- upvalues: ReactModule (upval), IconButton (upval), IconSize (upval), Images (upval), IsUndoEnabled (copy), UndoAnnotationPoints (copy), IsRedoEnabled (copy), RedoAnnotationPoints (copy)
 			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -172,14 +172,14 @@ return function(p1) --[[ Line: 117 | Named "ScreenshotDialogPortraitModeHeader" 
 			})
 		end
 	else
-		local function RenderRight() --[[ Line: 140 ]] end
+		local function RenderRight() end
 	end
 	config1.renderRight = RenderRight
 	local TitleText = p1.titleText
 	
-	function config1.renderCenter() --[[ Line: 51 ]]
+	function config1.renderCenter()
 		-- upvalues: WithStyleFunction (upval), ReactModule (upval), TitleText (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
-		return WithStyleFunction(function(p2) --[[ Line: 52 ]]
+		return WithStyleFunction(function(p2)
 			-- upvalues: ReactModule (upval), TitleText (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 			local CurrentCamera = game.Workspace.CurrentCamera
 			local Theme = p2.Theme

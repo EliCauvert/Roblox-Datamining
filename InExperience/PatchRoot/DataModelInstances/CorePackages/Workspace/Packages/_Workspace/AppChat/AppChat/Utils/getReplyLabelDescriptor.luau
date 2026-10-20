@@ -1,4 +1,4 @@
-﻿return function(p1) --[[ Line: 35 | Named "getReplyLabelDescriptor" ]]
+﻿return function(p1)
 	local SenderIsLocalUser = p1.senderIsLocalUser
 	local SenderRepliedToSelf = p1.senderRepliedToSelf
 	local SenderRepliedToLocalUser = p1.senderRepliedToLocalUser

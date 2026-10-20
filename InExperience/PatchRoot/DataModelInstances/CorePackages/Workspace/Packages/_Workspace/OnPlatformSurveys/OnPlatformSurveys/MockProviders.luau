@@ -10,11 +10,11 @@ local ProviderContainer = require(Parent.RoactUtils).Components.ProviderContaine
 local RoactAppPolicy = UniversalAppPolicyModule.RoactAppPolicy
 local StyleProviderWithDefaultTheme = require(Parent.Style).StyleProviderWithDefaultTheme
 
-local function reducer(p1) --[[ Line: 30 ]]
+local function reducer(p1)
 	return p1 or {}
 end
 
-return function(p1) --[[ Line: 34 | Named "MockProviders" ]]
+return function(p1)
 	-- upvalues: RoduxModule (copy), reducer (copy), StyleProviderWithDefaultTheme (copy), LocalizationProvider (copy), LayerCollectorProvider (copy), RoactRoduxModule (copy), RoactAppPolicy (copy), AppFeaturePolicies (copy), ReactModule (copy), ProviderContainer (copy)
 	local List = {}
 	local NewResult = RoduxModule.Store.new(reducer, {}, { RoduxModule.thunkMiddleware })
@@ -26,7 +26,7 @@ return function(p1) --[[ Line: 34 | Named "MockProviders" ]]
 		class = LocalizationProvider,
 		props = {
 			localization = {
-				Format = function(_, p2) --[[ Line: 52 ]]
+				Format = function(_, p2)
 					return p2
 				end
 			}

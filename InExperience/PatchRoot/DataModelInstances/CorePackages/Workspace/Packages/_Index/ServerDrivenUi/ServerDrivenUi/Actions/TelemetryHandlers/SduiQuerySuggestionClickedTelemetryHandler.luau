@@ -5,7 +5,7 @@ local GetActionTelemetryFieldValueFunction = require(Parent.SduiCoreSystem).getA
 local OpenSearchResultsWithQueryParamsModule = require(ServerDrivenUi.Actions.openSearchResultsWithQueryParams)
 local LuaAppSduiQuerySuggestionClickedSortPos = game:DefineFastFlag("LuaAppSduiQuerySuggestionClickedSortPos", false)
 
-return function(p1, p2, p3) --[[ Line: 23 ]]
+return function(p1, p2, p3)
 	-- upvalues: GetActionTelemetryFieldValueFunction (copy), OpenSearchResultsWithQueryParamsModule (copy), QuerySuggestionClickedFunction (copy), LuaAppSduiQuerySuggestionClickedSortPos (copy)
 	local QueryText = GetActionTelemetryFieldValueFunction(p1, p2, "queryText") or OpenSearchResultsWithQueryParamsModule.resolveSearchQuery(p1)
 	

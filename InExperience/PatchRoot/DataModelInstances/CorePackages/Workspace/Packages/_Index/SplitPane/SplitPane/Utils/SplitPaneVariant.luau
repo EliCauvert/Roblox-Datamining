@@ -45,7 +45,7 @@ local config3 = {
 local Flag = false
 local config4 = config
 
-local function _() --[[ Line: 87 | Named "resolveVariant" ]]
+local function _()
 	-- upvalues: config (copy), FFlagSplitPaneVariantCollapsedAutoOpen (copy), config3 (copy), FFlagSplitPaneVariantAvatarOnHomeOnly (copy), config2 (copy), FFlagSplitPaneVariantDefaultCollapsed (copy), config1 (copy), Flag (ref), config4 (ref)
 	local Config = if FFlagSplitPaneVariantCollapsedAutoOpen then config3 elseif FFlagSplitPaneVariantAvatarOnHomeOnly then config2 elseif FFlagSplitPaneVariantDefaultCollapsed then config1 else config
 	Flag = true
@@ -55,7 +55,7 @@ local function _() --[[ Line: 87 | Named "resolveVariant" ]]
 end
 
 return {
-	getVariantConfig = function() --[[ Line: 102 ]]
+	getVariantConfig = function()
 		-- upvalues: Flag (ref), config (copy), FFlagSplitPaneVariantCollapsedAutoOpen (copy), config3 (copy), FFlagSplitPaneVariantAvatarOnHomeOnly (copy), config2 (copy), FFlagSplitPaneVariantDefaultCollapsed (copy), config1 (copy), config4 (ref)
 		if not Flag then
 			Flag = true
@@ -63,7 +63,7 @@ return {
 		end
 		return config4
 	end,
-	isPaneCollapsedByDefault = function(): boolean --[[ Line: 109 ]]
+	isPaneCollapsedByDefault = function(): boolean
 		-- upvalues: Flag (ref), config (copy), FFlagSplitPaneVariantCollapsedAutoOpen (copy), config3 (copy), FFlagSplitPaneVariantAvatarOnHomeOnly (copy), config2 (copy), FFlagSplitPaneVariantDefaultCollapsed (copy), config1 (copy), config4 (ref)
 		if not Flag then
 			Flag = true
@@ -71,7 +71,7 @@ return {
 		end
 		return not config4.defaultOpen
 	end,
-	shouldAutoExpandOnSupportOpen = function() --[[ Line: 113 ]]
+	shouldAutoExpandOnSupportOpen = function()
 		-- upvalues: Flag (ref), config (copy), FFlagSplitPaneVariantCollapsedAutoOpen (copy), config3 (copy), FFlagSplitPaneVariantAvatarOnHomeOnly (copy), config2 (copy), FFlagSplitPaneVariantDefaultCollapsed (copy), config1 (copy), config4 (ref)
 		if not Flag then
 			Flag = true
@@ -79,7 +79,7 @@ return {
 		end
 		return config4.autoExpandOnSupportOpen
 	end,
-	shouldCollapseOnSupportClose = function(): boolean --[[ Line: 118 ]]
+	shouldCollapseOnSupportClose = function(): boolean
 		-- upvalues: Flag (ref), config (copy), FFlagSplitPaneVariantCollapsedAutoOpen (copy), config3 (copy), FFlagSplitPaneVariantAvatarOnHomeOnly (copy), config2 (copy), FFlagSplitPaneVariantDefaultCollapsed (copy), config1 (copy), config4 (ref)
 		if not Flag then
 			Flag = true
@@ -87,7 +87,7 @@ return {
 		end
 		return not config4.avatarOnHome
 	end,
-	shouldShowAvatarOnHome = function() --[[ Line: 122 ]]
+	shouldShowAvatarOnHome = function()
 		-- upvalues: Flag (ref), config (copy), FFlagSplitPaneVariantCollapsedAutoOpen (copy), config3 (copy), FFlagSplitPaneVariantAvatarOnHomeOnly (copy), config2 (copy), FFlagSplitPaneVariantDefaultCollapsed (copy), config1 (copy), config4 (ref)
 		if not Flag then
 			Flag = true
@@ -95,7 +95,7 @@ return {
 		end
 		return config4.avatarOnHome
 	end,
-	isEducationModalEnabled = function() --[[ Line: 126 ]]
+	isEducationModalEnabled = function()
 		-- upvalues: Flag (ref), config (copy), FFlagSplitPaneVariantCollapsedAutoOpen (copy), config3 (copy), FFlagSplitPaneVariantAvatarOnHomeOnly (copy), config2 (copy), FFlagSplitPaneVariantDefaultCollapsed (copy), config1 (copy), config4 (ref)
 		if not Flag then
 			Flag = true
@@ -103,7 +103,7 @@ return {
 		end
 		return config4.educationModal
 	end,
-	getGameDetailsSplitPaneEligibility = function() --[[ Line: 132 ]]
+	getGameDetailsSplitPaneEligibility = function()
 		-- upvalues: FFlagSplitPaneExperimentVariants (copy), Flag (ref), config (copy), FFlagSplitPaneVariantCollapsedAutoOpen (copy), config3 (copy), FFlagSplitPaneVariantAvatarOnHomeOnly (copy), config2 (copy), FFlagSplitPaneVariantDefaultCollapsed (copy), config1 (copy), config4 (ref), SplitPaneSlot (copy)
 		if FFlagSplitPaneExperimentVariants then
 			if not Flag then
@@ -116,7 +116,7 @@ return {
 		end
 		return SplitPaneSlot.Support
 	end,
-	getProfileSplitPaneEligibility = function(Collapsed) --[[ Line: 139 ]]
+	getProfileSplitPaneEligibility = function(Collapsed)
 		-- upvalues: FFlagSplitPaneExperimentVariants (copy), Flag (ref), config (copy), FFlagSplitPaneVariantCollapsedAutoOpen (copy), config3 (copy), FFlagSplitPaneVariantAvatarOnHomeOnly (copy), config2 (copy), FFlagSplitPaneVariantDefaultCollapsed (copy), config1 (copy), config4 (ref), AppSplitViewModule (copy), SplitPaneSlot (copy)
 		if FFlagSplitPaneExperimentVariants then
 			if not Flag then
@@ -133,7 +133,7 @@ return {
 		end
 		return SplitPaneSlot.Support
 	end,
-	getProfileRoutePresentation = function(Collapsed) --[[ Line: 155 ]]
+	getProfileRoutePresentation = function(Collapsed)
 		-- upvalues: FFlagSplitPaneExperimentVariants (copy), SplitPaneSlot (copy), Flag (ref), config (copy), FFlagSplitPaneVariantCollapsedAutoOpen (copy), config3 (copy), FFlagSplitPaneVariantAvatarOnHomeOnly (copy), config2 (copy), FFlagSplitPaneVariantDefaultCollapsed (copy), config1 (copy), config4 (ref), AppSplitViewModule (copy)
 		local Support = nil
 		if not FFlagSplitPaneExperimentVariants then
@@ -197,7 +197,7 @@ return {
 			rendersAboveSplitPane = not HasSupport and not NoHasSupport
 		}
 	end,
-	getExperienceDetailSplitPaneEligibility = function() --[[ Line: 178 ]]
+	getExperienceDetailSplitPaneEligibility = function()
 		-- upvalues: FFlagSplitPaneExperimentVariants (copy), Flag (ref), config (copy), FFlagSplitPaneVariantCollapsedAutoOpen (copy), config3 (copy), FFlagSplitPaneVariantAvatarOnHomeOnly (copy), config2 (copy), FFlagSplitPaneVariantDefaultCollapsed (copy), config1 (copy), config4 (ref), SplitPaneSlot (copy)
 		if FFlagSplitPaneExperimentVariants then
 			if not Flag then

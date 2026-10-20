@@ -2,7 +2,7 @@
 local _ = require(IAPExperience.ProductPurchase.PricingTypes)
 local MultiItemPriceQualifiesForDetailsDiscountSummaryModule = require(IAPExperience.Generic.multiItemPriceQualifiesForDetailsDiscountSummary)
 
-return function(p1) --[[ Line: 16 | Named "multiItemPriceShowsDiscountAccordion" ]]
+return function(p1)
 	-- upvalues: MultiItemPriceQualifiesForDetailsDiscountSummaryModule (copy)
 	if p1 then
 		local BasePriceInRobux = p1.basePriceInRobux

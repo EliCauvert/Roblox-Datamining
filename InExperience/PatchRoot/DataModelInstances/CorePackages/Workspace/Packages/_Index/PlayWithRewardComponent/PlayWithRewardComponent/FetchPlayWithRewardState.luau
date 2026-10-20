@@ -18,17 +18,17 @@ local InterfaceResult = TModule.interface({
 })
 local InterfaceResult1 = TModule.interface({ IsEligible = TModule.boolean })
 
-local function _(p1): number --[[ Line: 28 | Named "getDurationSinceStartFetchMs" ]]
+local function _(p1): number
 	return (os.clock() - p1) * 1000
 end
 
-local _ = function(AdService, p1, _) --[[ Line: 32 | Named "fetchAd" ]]
+local _ = function(AdService, p1, _)
 	local AdAvailabilityNowForUniverseAsync = AdService:GetAdAvailabilityNowForUniverseAsync(Enum.AdFormat.RewardedVideo, tonumber(p1), true)
 	
 	return if AdAvailabilityNowForUniverseAsync then AdAvailabilityNowForUniverseAsync else nil
 end
 
-local function fetchPlayWithRewardStateAsync(AdService, p1, _, Guid) --[[ Line: 43 ]]
+local function fetchPlayWithRewardStateAsync(AdService, p1, _, Guid)
 	-- upvalues: Logger (copy), PlayWithRewardTelemetryModule (copy), InterfaceResult (copy), MutedErrorFunction (copy), PlayWithRewardAdData (copy)
 	if not AdService then
 		Logger:warning(`AdService is not available. Cannot fetch Play with Reward data for universe ID {p1}.`)
@@ -65,14 +65,14 @@ local function fetchPlayWithRewardStateAsync(AdService, p1, _, Guid) --[[ Line: 
 	end
 end
 
-local function shouldShowShimmer(AdService, p2): boolean --[[ Line: 108 ]]
+local function shouldShowShimmer(AdService, p2): boolean
 	-- upvalues: Logger (copy), InterfaceResult1 (copy)
 	if not AdService then
 		Logger:warning(`AdService is not available. Cannot determine whether to show shimmer for universe ID {p2}.`)
 		
 		return false
 	end
-	local Success, Result = pcall(function() --[[ Line: 115 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: AdService (copy)
 		return AdService:GetUniversalAppAdsEligibility()
 	end)
@@ -86,9 +86,9 @@ local function shouldShowShimmer(AdService, p2): boolean --[[ Line: 108 ]]
 	end
 end
 
-return function(p3, p4, p5) --[[ Line: 128 | Named "FetchPlayWithRewardState" ]]
+return function(p3, p4, p5)
 	-- upvalues: HttpService (copy), shouldShowShimmer (copy), PlayWithRewardTelemetryModule (copy), SetPlayWithRewardStateFunction (copy), PromiseModule (copy), fetchPlayWithRewardStateAsync (copy), Logger (copy)
-	return function(p6) --[[ Line: 129 ]]
+	return function(p6)
 		-- upvalues: HttpService (upval), shouldShowShimmer (upval), p3 (copy), p4 (copy), PlayWithRewardTelemetryModule (upval), SetPlayWithRewardStateFunction (upval), PromiseModule (upval), fetchPlayWithRewardStateAsync (upval), p5 (copy), Logger (upval)
 		local Guid = HttpService:GenerateGUID(false)
 		
@@ -96,9 +96,9 @@ return function(p3, p4, p5) --[[ Line: 128 | Named "FetchPlayWithRewardState" ]]
 			PlayWithRewardTelemetryModule.logPlayWithRewardShimmerShown(Guid, p4)
 			p6:dispatch(SetPlayWithRewardStateFunction(Guid, p4, true, nil))
 		end
-		return PromiseModule.new(function(Callback1: () -> (), Callback: (any) -> ()) --[[ Line: 136 ]]
+		return PromiseModule.new(function(Callback1: () -> (), Callback: (any) -> ())
 			-- upvalues: fetchPlayWithRewardStateAsync (upval), p3 (upval), p4 (upval), p5 (upval), Guid (copy), p6 (copy), SetPlayWithRewardStateFunction (upval)
-			local Success, Result = pcall(function() --[[ Line: 137 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: fetchPlayWithRewardStateAsync (upval), p3 (upval), p4 (upval), p5 (upval), Guid (upval)
 				return fetchPlayWithRewardStateAsync(p3, p4, p5, Guid)
 			end)
@@ -112,7 +112,7 @@ return function(p3, p4, p5) --[[ Line: 128 | Named "FetchPlayWithRewardState" ]]
 				p6:dispatch(SetPlayWithRewardStateFunction(Guid, p4, false, nil))
 				Callback(Result)
 			end
-		end):catch(function(Err) --[[ Line: 147 ]]
+		end):catch(function(Err)
 			-- upvalues: Logger (upval), p4 (upval)
 			Logger:warning(`Promise for fetching Play With Reward data rejected for universe ID {p4}: {tostring(Err)}`)
 		end)

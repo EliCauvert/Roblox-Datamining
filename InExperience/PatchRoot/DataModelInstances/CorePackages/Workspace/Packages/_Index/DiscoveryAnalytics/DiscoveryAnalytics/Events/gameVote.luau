@@ -8,10 +8,10 @@ local StrictInterfaceResult = TModule.strictInterface({
 	vote = TModule.union(TModule.literal("UpVoted"), TModule.literal("DownVoted"), TModule.literal("NotVoted")),
 	prevVote = TModule.union(TModule.literal("UpVoted"), TModule.literal("DownVoted"), TModule.literal("NotVoted")),
 	uid = TModule.string,
-	universeId = if require(Parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents then TModule.optional(TModule.string) else nil
+	targetId = if require(Parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents then TModule.optional(TModule.string) else nil
 })
 
-return function(CustomFields, EventContext) --[[ Line: 21 ]]
+return function(CustomFields, EventContext)
 	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), GameVoteThrottleHundrethsPercent (copy), TelemetryService (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	

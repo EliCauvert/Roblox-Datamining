@@ -9,7 +9,7 @@ local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return ReactModule.memo(function(Frame) --[[ Line: 29 | Named "PlusSubscribeBanner" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), FFlagAXPlusSubscribeBannerRestyleModule (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local TestId = Frame.testId or "PlusSubscribeBanner"

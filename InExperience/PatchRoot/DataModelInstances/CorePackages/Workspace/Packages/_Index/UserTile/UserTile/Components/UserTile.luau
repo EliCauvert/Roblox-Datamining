@@ -18,7 +18,7 @@ local FFlagUserTileAddContextualInfoIcon = require(Parent.SharedFlags).FFlagUser
 local FFlagUserTileTitleStackAddExtraInfo = require(Parent.SharedFlags).FFlagUserTileTitleStackAddExtraInfo
 local FFlagUserTileUnfilteredChatIndicator = require(Parent.SharedFlags).FFlagUserTileUnfilteredChatIndicator
 
-return function(p1) --[[ Line: 62 | Named "UserTile" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ControlState (copy), View (copy), LayoutModeModule (copy), Enums (copy), AvatarPileModule (copy), AvatarModule (copy), FFlagUserTileShowShimmerWhenLoadingModule (copy), TitleStackModule (copy), FFlagUserTileShowBadges (copy), FFlagUserTileAddContextualInfoIcon (copy), FFlagProfilePlatformNewProfileHeader (copy), FFlagEnableMobileGameJoinCard (copy), FFlagUserTileUnfilteredChatIndicator (copy), FFlagEnableBlackbirdCheck (copy), FFlagUserTileTitleStackAddExtraInfo (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local HasOnActivated = p1.onActivated ~= nil
@@ -30,7 +30,7 @@ return function(p1) --[[ Line: 62 | Named "UserTile" ]]
 			["row align-y-center gap-medium"] = p1.layoutMode == LayoutModeModule.wide
 		},
 		selection = { Selectable = p1.selectable },
-		onStateChanged = ReactModule.useCallback(function(Hover) --[[ Line: 65 ]]
+		onStateChanged = ReactModule.useCallback(function(Hover)
 			-- upvalues: UseStateResult2 (copy), HasOnActivated (copy), ControlState (upval), p1 (copy)
 			UseStateResult2(HasOnActivated and (Hover == ControlState.Hover or Hover == ControlState.Pressed))
 			

@@ -7,14 +7,14 @@ local LoadingScreenMilestonesModule = require(ProgressLoading.LoadingScreenMiles
 local ConstantsModule = require(ProgressLoading.LoadingScreenMilestones.Constants)
 local FFlagLoadingScreenMilestones = require(Parent.SharedFlags).FFlagLoadingScreenMilestones
 
-return function(p1, Object, Current) --[[ Line: 11 | Named "useDeferredLoadingLifecycle" ]]
+return function(p1, Object, Current)
 	-- upvalues: ReactModule (copy), ConstantsModule (copy), RunService (copy), FFlagLoadingScreenMilestones (copy), LoadingScreenMilestonesModule (copy), UserGameSettings (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(Current)
 	UseRefResult1.current = Current
 	local UseRefResult2 = ReactModule.useRef(false)
-	local UseResult = ReactModule.useCallback(function(p2, p3) --[[ Line: 21 ]]
+	local UseResult = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: UseRefResult2 (copy), UseRefResult (copy), ConstantsModule (upval), UseRefResult1 (copy)
 		if UseRefResult2.current then return end
 		UseRefResult2.current = true
@@ -26,7 +26,7 @@ return function(p1, Object, Current) --[[ Line: 11 | Named "useDeferredLoadingLi
 			UseRefResult1.current(p2, p3)
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 34 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), RunService (upval), FFlagLoadingScreenMilestones (upval), LoadingScreenMilestonesModule (upval), ConstantsModule (upval), UserGameSettings (upval), UseRefResult (copy), UseStateResult2 (copy), Object (copy), UseRefResult2 (copy)
 		if not p1 then return end
 		RunService:SetRobloxGuiFocused(true)
@@ -47,7 +47,7 @@ return function(p1, Object, Current) --[[ Line: 11 | Named "useDeferredLoadingLi
 				StartResult.record(ConstantsModule.Milestone.ScreenVisible)
 			end
 			if StartResult and Object then
-				local function onLoadingStateChanged() --[[ Line: 54 ]]
+				local function onLoadingStateChanged()
 					-- upvalues: UseRefResult2 (upval), Object (upval), StartResult (ref), ConstantsModule (upval)
 					if UseRefResult2.current then return end
 					local PrefetchDownloadStatus = Object:GetPrefetchDownloadStatus()
@@ -71,7 +71,7 @@ return function(p1, Object, Current) --[[ Line: 11 | Named "useDeferredLoadingLi
 				onLoadingStateChanged()
 			end
 		end
-		return function() --[[ Line: 80 ]]
+		return function()
 			-- upvalues: List (copy), StartResult (ref), Callback (ref), ConstantsModule (upval), RunService (upval)
 			for _, Connection in List do
 				Connection:Disconnect()

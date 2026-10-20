@@ -3,7 +3,7 @@ local DiagActionListModule = require(script.Parent.DiagActionList)
 local EventStreamActionListModule = require(script.Parent.EventStreamActionList)
 local TelemetryActionListModule = require(script.Parent.TelemetryActionList)
 
-return function(p1) --[[ Line: 10 ]]
+return function(p1)
 	-- upvalues: AnalyticsFactory (copy), EventStreamActionListModule (copy), DiagActionListModule (copy), TelemetryActionListModule (copy)
 	return AnalyticsFactory.setUpAnalyticsFactory({
 		eventLists = {

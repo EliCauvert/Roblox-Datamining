@@ -40,14 +40,14 @@ local FallbackSignalsModule = require(Parent.Common.FallbackSignals)
 local SignalMap = CreateSignalMapFunction()
 local SignalMap1 = CreateSignalMapFunction()
 
-local function wrapWithSlide(PanelContent, Position, XOffset, YOffset) --[[ Line: 63 ]]
+local function wrapWithSlide(PanelContent, Position, XOffset, YOffset)
 	-- upvalues: ReactModule (copy), View (copy)
 	return if Position == nil then PanelContent else ReactModule.createElement(View, { Size = UDim2.fromOffset(XOffset, YOffset) }, {
 		SlideOffset = ReactModule.createElement(View, { tag = "size-full", Position = Position }, { PanelContent = PanelContent })
 	})
 end
 
-local function createZoomDecorations(Scale, Transparency, p1) --[[ Line: 85 ]]
+local function createZoomDecorations(Scale, Transparency, p1)
 	-- upvalues: ReactModule (copy)
 	if Scale == nil then
 		return nil
@@ -67,12 +67,12 @@ local function createZoomDecorations(Scale, Transparency, p1) --[[ Line: 85 ]]
 	return config
 end
 
-local function renderWithSlideAndZoomDecorations(TabbedLeaderboardBodyModule, UseMemoResult, p1, SlidePosition, PanelWidth, PanelHeight, p2) --[[ Line: 109 ]]
+local function renderWithSlideAndZoomDecorations(TabbedLeaderboardBodyModule, UseMemoResult, p1, SlidePosition, PanelWidth, PanelHeight, p2)
 	-- upvalues: CryoModule (copy), wrapWithSlide (copy), ReactModule (copy)
 	return wrapWithSlide(ReactModule.createElement(TabbedLeaderboardBodyModule, UseMemoResult, if p2 == nil then p1 else CryoModule.Dictionary.join(p1, p2)), SlidePosition, PanelWidth, PanelHeight)
 end
 
-local function PlayerListPanelContent(p1) --[[ Line: 141 ]]
+local function PlayerListPanelContent(p1)
 	-- upvalues: UseLeaderboardStoreModule (copy), SignalMap (copy), SignalMap1 (copy), SignalsReactModule (copy), FFlagPlayerListReskinModule (copy), UsePlatformLeaderboardModule (copy), FallbackSignalsModule (copy), UsePanelLayoutModule (copy), UseTokensFunction (copy), UsePreferredBackgroundStyleModule (copy), PlayerListVisibilityStoreModule (copy), ReactModule (copy), PlayerContextualMenuStoreModule (copy), ToggleContextMenu (copy), ReactOtterModule (copy), MOBILEZOOMSPRING (copy), MENUZOOMCLOSEDSCALE (copy), PANELRECESSSCALE (copy), PANELRECESSTRANSPARENCY (copy), createZoomDecorations (copy), UseReportPanelContentHeightModule (copy), PanelContentHeightStoreModule (copy), ComputeStatColumnsModule (copy), ConstantsModule (copy), ConsoleFocusScrollViewModule (copy), TeamListViewModule (copy), ScrollView (copy), EntryViewModule (copy), ColumnHeaderRowModule (copy), PanelHeaderModule (copy), FoundationModule (copy), View (copy), renderWithSlideAndZoomDecorations (copy), TabbedLeaderboardBodyModule (copy)
 	local IsIsSmallTouchDevice = p1.isSmallTouchDevice == true
 	local Title = p1.title
@@ -90,7 +90,7 @@ local function PlayerListPanelContent(p1) --[[ Line: 141 ]]
 	local UseTokensResult = UseTokensFunction()
 	local UsePreferredBackgroundStyleModuleResult = UsePreferredBackgroundStyleModule(UseTokensResult.Color.OverMedia.OverMedia_200)
 	local UseSignalStateResult2 = SignalsReactModule.useSignalState(PlayerListVisibilityStoreModule.getEffectiveVisible)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 186 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: PlayerListVisibilityStoreModule (upval), PlayerContextualMenuStoreModule (upval)
 		if PlayerListVisibilityStoreModule.getEffectiveVisible(false) then
 			PlayerContextualMenuStoreModule.closeContextMenu()
@@ -102,7 +102,7 @@ local function PlayerListPanelContent(p1) --[[ Line: 141 ]]
 	local ToggleContextMenu1 = if UseSignalStateResult2 then ToggleContextMenu else nil
 	local HasUseSignalStateResult = SignalsReactModule.useSignalState(PlayerContextualMenuStoreModule.getMenuData) ~= nil
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
-	ReactModule.useEffect(function() --[[ Line: 203 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsIsSmallTouchDevice (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), HasUseSignalStateResult (copy), MOBILEZOOMSPRING (upval)
 		if IsIsSmallTouchDevice then
 			UseAnimatedBindingResult2(ReactOtterModule.spring(if HasUseSignalStateResult then 1 else 0, MOBILEZOOMSPRING))
@@ -112,9 +112,9 @@ local function PlayerListPanelContent(p1) --[[ Line: 141 ]]
 	end, { HasUseSignalStateResult, IsIsSmallTouchDevice })
 	local OpenCloseOffset = p1.openCloseOffset
 	local HasOpenCloseOffset: boolean = IsIsSmallTouchDevice and OpenCloseOffset ~= nil
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 223 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: HasOpenCloseOffset (copy), OpenCloseOffset (copy), ReactModule (upval), UseAnimatedBindingResult (copy), PANELRECESSTRANSPARENCY (upval)
-		return if HasOpenCloseOffset and OpenCloseOffset ~= nil then ReactModule.joinBindings({ OpenCloseOffset, UseAnimatedBindingResult }):map(function(Entry): number --[[ Line: 227 ]]
+		return if HasOpenCloseOffset and OpenCloseOffset ~= nil then ReactModule.joinBindings({ OpenCloseOffset, UseAnimatedBindingResult }):map(function(Entry): number
 			-- upvalues: PANELRECESSTRANSPARENCY (upval)
 			return 1 - (1 - Entry[1]) * (1 - PANELRECESSTRANSPARENCY * Entry[2])
 		end) else nil
@@ -123,14 +123,14 @@ local function PlayerListPanelContent(p1) --[[ Line: 141 ]]
 		OpenCloseOffset,
 		UseAnimatedBindingResult
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 234 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), UseTokensResult (copy)
 		if UseMemoResult == nil then
 			return nil
 		else
 			local Transparency = UseTokensResult.Color.Stroke.Default.Transparency
 			
-			return UseMemoResult:map(function(p2): number --[[ Line: 239 ]]
+			return UseMemoResult:map(function(p2): number
 				-- upvalues: Transparency (copy)
 				return Transparency + (1 - Transparency) * p2
 			end)
@@ -139,9 +139,9 @@ local function PlayerListPanelContent(p1) --[[ Line: 141 ]]
 		UseMemoResult,
 		UseTokensResult.Color.Stroke.Default.Transparency
 	})
-	local ZoomDecorations = createZoomDecorations(ReactModule.useMemo(function() --[[ Line: 211 ]]
+	local ZoomDecorations = createZoomDecorations(ReactModule.useMemo(function()
 		-- upvalues: HasOpenCloseOffset (copy), OpenCloseOffset (copy), ReactModule (upval), UseAnimatedBindingResult (copy), MENUZOOMCLOSEDSCALE (upval), PANELRECESSSCALE (upval)
-		return if HasOpenCloseOffset and OpenCloseOffset ~= nil then ReactModule.joinBindings({ OpenCloseOffset, UseAnimatedBindingResult }):map(function(Entry): number --[[ Line: 215 ]]
+		return if HasOpenCloseOffset and OpenCloseOffset ~= nil then ReactModule.joinBindings({ OpenCloseOffset, UseAnimatedBindingResult }):map(function(Entry): number
 			-- upvalues: MENUZOOMCLOSEDSCALE (upval), PANELRECESSSCALE (upval)
 			return (1 + (MENUZOOMCLOSEDSCALE - 1) * Entry[1]) * (1 - (1 - PANELRECESSSCALE) * Entry[2])
 		end) else nil
@@ -151,16 +151,16 @@ local function PlayerListPanelContent(p1) --[[ Line: 141 ]]
 		UseAnimatedBindingResult
 	}), UseMemoResult1, UseTokensResult)
 	local UseReportPanelContentHeightModuleResult = UseReportPanelContentHeightModule(UsePanelLayoutModuleResult.columnHeaderHeight)
-	ReactModule.useEffect(function() --[[ Line: 252 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: PanelContentHeightStoreModule (upval)
-		return function() --[[ Line: 253 ]]
+		return function()
 			-- upvalues: PanelContentHeightStoreModule (upval)
 			PanelContentHeightStoreModule.reset()
 		end
 	end, {})
 	local IsCountAbove: boolean = if IsIsSmallTouchDevice and LocalPlayerOverride ~= nil and UseLeaderboardStoreModuleResult ~= nil then TeamList.getCount(false) > 0 or Count > 0 else false
 	local MaxStatColumns = UsePanelLayoutModuleResult.maxStatColumns
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 270 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: ComputeStatColumnsModule (upval), GameStatsList (copy), MaxStatColumns (copy)
 		return ComputeStatColumnsModule(GameStatsList, MaxStatColumns)
 	end, { UseSignalStateResult1, GameStatsList, MaxStatColumns })
@@ -247,7 +247,7 @@ local function PlayerListPanelContent(p1) --[[ Line: 141 ]]
 		PlayerRows = Element
 	}
 	local NoUseMemoResult = UseMemoResult1 == nil
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 373 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: UsePanelLayoutModuleResult (copy), NoUseMemoResult (copy), UsePreferredBackgroundStyleModuleResult (copy), UseMemoResult (copy), ConstantsModule (upval)
 		return {
 			Visible = true,
@@ -289,7 +289,7 @@ local function PlayerListPanelContent(p1) --[[ Line: 141 ]]
 	}, p1.slidePosition, UsePanelLayoutModuleResult.panelWidth, UsePanelLayoutModuleResult.panelHeight, ZoomDecorations)
 end
 
-return ReactModule.memo(function(p2) --[[ Line: 431 | Named "PlayerListPanel" ]]
+return ReactModule.memo(function(p2)
 	-- upvalues: SignalsReactModule (copy), PlayerListVisibilityStoreModule (copy), UseSlideOpenCloseAnimationFunction (copy), PANELZOOMCONFIG (copy), PANELSLIDECONFIG (copy), ReactModule (copy), PlayerListPanelContent (copy)
 	local IsIsSmallTouchDevice = p2.isSmallTouchDevice == true
 	local UseSlideOpenCloseAnimationResult = UseSlideOpenCloseAnimationFunction(SignalsReactModule.useSignalState(PlayerListVisibilityStoreModule.getEffectiveVisible), if IsIsSmallTouchDevice then PANELZOOMCONFIG else PANELSLIDECONFIG)

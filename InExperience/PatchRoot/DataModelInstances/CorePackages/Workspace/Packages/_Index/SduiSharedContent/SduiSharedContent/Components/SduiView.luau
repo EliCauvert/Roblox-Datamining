@@ -4,7 +4,7 @@ local FoundationModule = require(Parent.Foundation)
 local _ = require(Parent.SduiCompat)
 local FFlagSduiViewContainerRefEnabled = require(Parent.SharedFlags).FFlagSduiViewContainerRefEnabled
 
-return ReactModule.memo(function(p1) --[[ Line: 49 | Named "SduiView" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), FFlagSduiViewContainerRefEnabled (copy)
 	return ReactModule.createElement(FoundationModule.View, {
 		ref = if FFlagSduiViewContainerRefEnabled then p1.containerRef else nil,

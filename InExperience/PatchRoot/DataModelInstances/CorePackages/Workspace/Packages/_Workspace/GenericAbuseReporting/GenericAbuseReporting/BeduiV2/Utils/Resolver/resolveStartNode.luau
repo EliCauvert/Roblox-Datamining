@@ -3,7 +3,7 @@ local ConfigResolversModule = require(script.Parent.configResolvers)
 
 return {
 	DEFAULT_START_NODE_ID = "root",
-	resolveStartNode = function(p1) --[[ Line: 26 ]]
+	resolveStartNode = function(p1)
 		-- upvalues: ConfigResolversModule (copy)
 		if p1.startNode == nil or p1.startNode == "" then
 			return "root"

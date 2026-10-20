@@ -5,9 +5,9 @@ local StyleWidgetsModule = require(game:GetService("CoreGui").RobloxGui.Modules.
 local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
 local _ = require(CorePackages.Workspace.Packages.Loggers).mutedError
 
-function LocalizeWithFallback(p1, p2) --[[ Line: 20 ]]
+function LocalizeWithFallback(p1, p2)
 	-- upvalues: RobloxTranslatorModule (copy)
-	local Success, Result = pcall(function() --[[ Line: 21 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: RobloxTranslatorModule (upval), p1 (copy)
 		return RobloxTranslatorModule:FormatByKey(p1)
 	end)
@@ -107,31 +107,31 @@ StatsUtils.MemoryAnalyzerTypeToName = {
 	Meshes = "Meshes"
 }
 
-function StatsUtils.GetMemoryAnalyzerStatName(p1) --[[ Line: 158 ]]
+function StatsUtils.GetMemoryAnalyzerStatName(p1)
 	-- upvalues: StatsUtils (copy)
 	return if StatsUtils.MemoryAnalyzerTypeToName[p1] == nil then p1 else StatsUtils.MemoryAnalyzerTypeToName[p1]
 end
 
-function StatsUtils.StyleFrame(p1) --[[ Line: 166 ]]
+function StatsUtils.StyleFrame(p1)
 	-- upvalues: StatsUtils (copy)
 	p1.BackgroundColor3 = StatsUtils.NormalColor
 	p1.BackgroundTransparency = StatsUtils.Transparency
 end
 
-function StatsUtils.StyleButton(p1) --[[ Line: 171 ]]
+function StatsUtils.StyleButton(p1)
 	-- upvalues: StatsUtils (copy)
 	p1.BackgroundColor3 = StatsUtils.NormalColor
 	p1.BackgroundTransparency = StatsUtils.Transparency
 end
 
-function StatsUtils.StyleTextWidget(Label) --[[ Line: 176 ]]
+function StatsUtils.StyleTextWidget(Label)
 	-- upvalues: StatsUtils (copy)
 	Label.BackgroundTransparency = 1
 	Label.TextColor3 = StatsUtils.FontColor
 	Label.Font = Enum.Font.SourceSansBold
 end
 
-function StatsUtils.StyleButtonSelected(p1, p2) --[[ Line: 182 ]]
+function StatsUtils.StyleButtonSelected(p1, p2)
 	-- upvalues: StatsUtils (copy)
 	StatsUtils.StyleButton(p1)
 	
@@ -140,7 +140,7 @@ function StatsUtils.StyleButtonSelected(p1, p2) --[[ Line: 182 ]]
 	end
 end
 
-function StatsUtils.FormatTypedValue(p1, StatTypeCPU): string? --[[ Line: 189 ]]
+function StatsUtils.FormatTypedValue(p1, StatTypeCPU): string?
 	-- upvalues: StatsUtils (copy)
 	if StatTypeCPU == StatsUtils.StatType_Memory then
 		return string.format("%.2f MB", p1)
@@ -156,19 +156,19 @@ function StatsUtils.FormatTypedValue(p1, StatTypeCPU): string? --[[ Line: 189 ]]
 	return string.format("%.0f ms", p1)
 end
 
-function StatsUtils.StyleAverageLine(p1) --[[ Line: 205 ]]
+function StatsUtils.StyleAverageLine(p1)
 	-- upvalues: StatsUtils (copy)
 	p1.BackgroundColor3 = StatsUtils.GraphAverageLineColor
 	p1.BorderSizePixel = StatsUtils.GraphAverageLineBorderThickness
 	p1.BorderColor3 = StatsUtils.GraphAverageLineBorderColor
 end
 
-function StatsUtils.GetColorForValue(p1, p2: number) --[[ Line: 211 ]]
+function StatsUtils.GetColorForValue(p1, p2: number)
 	-- upvalues: StatsUtils (copy)
 	return if p1 < 0.666 * p2 then StatsUtils.GraphBarGreenColor elseif p1 < 1.333 * p2 then StatsUtils.GraphBarYellowColor else StatsUtils.GraphBarRedColor
 end
 
-function StatsUtils.PerformanceStatsShouldBeVisible(): boolean --[[ Line: 221 ]]
+function StatsUtils.PerformanceStatsShouldBeVisible(): boolean
 	-- upvalues: Players (copy), GameSettings (copy)
 	local LocalPlayer = Players.LocalPlayer
 	

@@ -15,10 +15,10 @@ local GameTileOverflowMenuActionFunction = require(Parent.DiscoveryAnalytics).Ev
 local FFlagLuaAppEnableHomepageOneByTwoTile = SharedFlagsModule.FFlagLuaAppEnableHomepageOneByTwoTile
 local FFlagLuaAppGameTileDirectActionTelemetry = SharedFlagsModule.FFlagLuaAppGameTileDirectActionTelemetry
 
-return function(p1) --[[ Line: 34 | Named "GameTileDirectAction" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), CryoModule (copy), FFlagLuaAppGameTileDirectActionTelemetry (copy), GameTileOverflowMenuActionFunction (copy), FFlagLuaAppEnableHomepageOneByTwoTile (copy), UseGameTileActionsModule (copy), View (copy), IconButton (copy), IconSize (copy), ButtonVariant (copy)
 	local UseTokensResult = UseTokensFunction()
-	local UseResult = if FFlagLuaAppGameTileDirectActionTelemetry then ReactModule.useCallback(function(AvailableMenuItems) --[[ Line: 48 ]]
+	local UseResult = if FFlagLuaAppGameTileDirectActionTelemetry then ReactModule.useCallback(function(AvailableMenuItems)
 		-- upvalues: GameTileOverflowMenuActionFunction (upval), p1 (copy), FFlagLuaAppEnableHomepageOneByTwoTile (upval)
 		GameTileOverflowMenuActionFunction({
 			actionType = "GameTileOverflowMenuItemActivated",
@@ -36,7 +36,7 @@ return function(p1) --[[ Line: 34 | Named "GameTileDirectAction" ]]
 		if FFlagLuaAppEnableHomepageOneByTwoTile then p1.contentType else nil
 	}) else nil
 	local UseGameTileActionsModuleResultEntry = UseGameTileActionsModule(CryoModule.Dictionary.join(p1, {
-		availableMenuItems = ReactModule.useMemo(function() --[[ Line: 36 ]]
+		availableMenuItems = ReactModule.useMemo(function()
 			-- upvalues: p1 (copy)
 			return { [p1.actionId] = true }
 		end, { p1.actionId })
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 34 | Named "GameTileDirectAction" ]]
 				isCircular = true,
 				testId = "game-tile-direct-action",
 				icon = IconOverride,
-				onActivated = function() --[[ Line: 91 ]]
+				onActivated = function()
 					-- upvalues: OnActivatedFunction (copy), Id (copy)
 					OnActivatedFunction(Id)
 				end,

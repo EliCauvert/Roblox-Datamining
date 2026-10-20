@@ -1,11 +1,11 @@
-﻿local function _(p1) --[[ Line: 43 | Named "getBaseLanguage" ]]
+﻿local function _(p1)
 	return p1:match("^(%w+)[-_]")
 end
 
 local LocalizationContextModule = {}
 LocalizationContextModule.__index = LocalizationContextModule
 
-function LocalizationContextModule.new(_translations) --[[ Line: 50 ]]
+function LocalizationContextModule.new(_translations)
 	-- upvalues: LocalizationContextModule (copy)
 	local config = { _translations = _translations }
 	setmetatable(config, LocalizationContextModule)
@@ -13,11 +13,11 @@ function LocalizationContextModule.new(_translations) --[[ Line: 50 ]]
 	return config
 end
 
-function LocalizationContextModule:addTranslations(_translations) --[[ Line: 64 ]]
+function LocalizationContextModule:addTranslations(_translations)
 	self._translations = _translations
 end
 
-function LocalizationContextModule:getRelevantLanguages() --[[ Line: 74 ]]
+function LocalizationContextModule:getRelevantLanguages()
 	local List = {}
 	table.insert(List, self)
 	local W = self:match("^(%w+)[-_]")
@@ -30,13 +30,13 @@ function LocalizationContextModule:getRelevantLanguages() --[[ Line: 74 ]]
 	return List
 end
 
-function LocalizationContextModule:_getSourceString(W, p1) --[[ Line: 91 ]]
+function LocalizationContextModule:_getSourceString(W, p1)
 	local Translation = self._translations[W]
 	
 	return if Translation then Translation[p1] else nil
 end
 
-function LocalizationContextModule:getString(p1, p2, p3) --[[ Line: 106 ]]
+function LocalizationContextModule:getString(p1, p2, p3)
 	local W = p1:match("^(%w+)[-_]")
 	local SourceString = if W then self:_getSourceString(W, p2) else nil
 	local EnUs = self:_getSourceString("en-us", p2)

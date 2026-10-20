@@ -28,7 +28,7 @@ local list1 = {
 	"30_40", "40_50", "50_60", "60_80", "80_100"
 }
 
-local function _(p1) --[[ Line: 67 | Named "jankBandForRate" ]]
+local function _(p1)
 	-- upvalues: list (copy), list1 (copy)
 	for i, value in list do
 		if p1 < value then
@@ -40,7 +40,7 @@ end
 
 local DeviceMemoryTier = nil
 
-local _ = function() --[[ Line: 81 | Named "getMemTier" ]]
+local _ = function()
 	-- upvalues: DeviceMemoryTier (ref), DeviceTier (copy)
 	if DeviceMemoryTier == nil then
 		DeviceMemoryTier = DeviceTier.GetDeviceMemoryTier()
@@ -48,12 +48,12 @@ local _ = function() --[[ Line: 81 | Named "getMemTier" ]]
 	return DeviceMemoryTier or "unknown"
 end
 
-local _ = function() --[[ Line: 88 | Named "getPlatform" ]]
+local _ = function()
 	-- upvalues: IsSpatialFunction (copy), UserInputService (copy)
 	if IsSpatialFunction() then
 		return "VR"
 	else
-		local Success, Result = pcall(function() --[[ Line: 92 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: UserInputService (upval)
 			return UserInputService:GetPlatform()
 		end)
@@ -62,9 +62,9 @@ local _ = function() --[[ Line: 88 | Named "getPlatform" ]]
 	end
 end
 
-return function(p2) --[[ Line: 101 | Named "sendScrollFrameCounters" ]]
+return function(p2)
 	-- upvalues: HttpService (copy), DeviceMemoryTier (ref), DeviceTier (copy), IsSpatialFunction (copy), UserInputService (copy), JANKYFRAMEBANDS (copy), Default (copy), config (copy), list (copy), list1 (copy), config1 (copy)
-	local Success, Result = pcall(function() --[[ Line: 106 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: HttpService (upval), p2 (copy)
 		return HttpService:JSONDecode(p2.frameBucketsJson)
 	end)
@@ -81,7 +81,7 @@ return function(p2) --[[ Line: 101 | Named "sendScrollFrameCounters" ]]
 	if IsSpatialFunction() then
 		Name = "VR"
 	else
-		local Success1, Result1 = pcall(function() --[[ Line: 92 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: UserInputService (upval)
 			return UserInputService:GetPlatform()
 		end)

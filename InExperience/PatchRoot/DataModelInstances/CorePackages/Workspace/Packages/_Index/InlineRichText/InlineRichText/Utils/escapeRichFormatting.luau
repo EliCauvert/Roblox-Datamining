@@ -1,4 +1,4 @@
-﻿return function(Text: string) --[[ Line: 2 | Named "escapeRichFormatting" ]]
+﻿return function(Text: string)
 	return (Text:gsub("[&<>\"']", {
 		["&"] = "&amp;",
 		["<"] = "&lt;",

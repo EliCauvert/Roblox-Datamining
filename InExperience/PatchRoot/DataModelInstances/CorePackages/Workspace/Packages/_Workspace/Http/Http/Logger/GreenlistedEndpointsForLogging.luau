@@ -12,12 +12,12 @@
 	["marketplace-widgets/v1/pills"] = "avatar_experience_catalog_categories"
 }
 local GreenlistedEndpointsForLoggingModule = {
-	isSuccessStatusCode = function(_, p1: number): boolean --[[ Line: 25 ]]
+	isSuccessStatusCode = function(_, p1: number): boolean
 		return p1 >= 200 and p1 < 300
 	end
 }
 
-function GreenlistedEndpointsForLoggingModule.getMatchingName(Text: string, p1): string --[[ Line: 32 ]]
+function GreenlistedEndpointsForLoggingModule.getMatchingName(Text: string, p1): string
 	-- upvalues: GreenlistedEndpointsForLoggingModule (copy), config (copy)
 	local v1: string? = nil
 	local Text1 = tostring(p1)
@@ -32,7 +32,7 @@ function GreenlistedEndpointsForLoggingModule.getMatchingName(Text: string, p1):
 	return v1
 end
 
-function GreenlistedEndpointsForLoggingModule.sendStatusCodeCounter(p2, p3, RbxAnalyticsService) --[[ Line: 49 ]]
+function GreenlistedEndpointsForLoggingModule.sendStatusCodeCounter(p2, p3, RbxAnalyticsService)
 	-- upvalues: GreenlistedEndpointsForLoggingModule (copy)
 	if not RbxAnalyticsService then
 		RbxAnalyticsService = game:GetService("RbxAnalyticsService")

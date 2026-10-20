@@ -7,7 +7,7 @@ local config = {
 	transparency = NumberSequence.new(0)
 }
 
-return function(p1) --[[ Line: 22 | Named "BackgroundGradient" ]]
+return function(p1)
 	-- upvalues: DashModule (copy), config (copy), ReactModule (copy)
 	local JoinResult = DashModule.join(config, p1)
 	

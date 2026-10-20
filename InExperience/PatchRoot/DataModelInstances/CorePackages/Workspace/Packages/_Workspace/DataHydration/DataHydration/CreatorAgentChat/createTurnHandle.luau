@@ -5,7 +5,7 @@ local TurnStateModule = require(script.Parent.turnState)
 local _ = require(script.Parent.types)
 local FFlagBuildExperiencePromptFailureTelemetry = require(Parent.SharedFlags).FFlagBuildExperiencePromptFailureTelemetry
 
-return function(p1, RequestId, Cancel, p2, List) --[[ Line: 36 | Named "createTurnHandle" ]]
+return function(p1, RequestId, Cancel, p2, List)
 	-- upvalues: CreateSignalFunction (copy), TurnStateModule (copy), AcpProtocolModule (copy), FFlagBuildExperiencePromptFailureTelemetry (copy)
 	local Signal, Signal2 = CreateSignalFunction(p2 or TurnStateModule.createEmptyTurnState(p1, RequestId))
 	local ExtractTurnIdResult = nil
@@ -17,7 +17,7 @@ return function(p1, RequestId, Cancel, p2, List) --[[ Line: 36 | Named "createTu
 	local v2 = nil
 	local Total = 0
 	
-	local function noteProcessedSequenceNumber(Key): boolean --[[ Line: 54 ]]
+	local function noteProcessedSequenceNumber(Key): boolean
 		-- upvalues: t2 (copy), v1 (ref), v2 (ref), Total (ref)
 		if t2[Key] == true then
 			return false
@@ -39,7 +39,7 @@ return function(p1, RequestId, Cancel, p2, List) --[[ Line: 36 | Named "createTu
 		return true
 	end
 	
-	local function hasSequenceGap(): boolean --[[ Line: 75 ]]
+	local function hasSequenceGap(): boolean
 		-- upvalues: Total (ref)
 		return Total > 0
 	end
@@ -64,10 +64,10 @@ return function(p1, RequestId, Cancel, p2, List) --[[ Line: 36 | Named "createTu
 			end
 		end
 	end
-	local function fireUpdateHandlers(Update, SequenceId) --[[ Line: 106 ]]
+	local function fireUpdateHandlers(Update, SequenceId)
 		-- upvalues: t1 (copy)
 		for _, value in t1 do
-			local Success, Result = pcall(function() --[[ Line: 108 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: value (copy), Update (copy), SequenceId (copy)
 				value(Update, SequenceId)
 			end)
@@ -78,9 +78,9 @@ return function(p1, RequestId, Cancel, p2, List) --[[ Line: 36 | Named "createTu
 		end
 	end
 	
-	local function _(p3) --[[ Line: 118 | Named "mutate" ]]
+	local function _(p3)
 		-- upvalues: Signal2 (copy)
-		Signal2(function(Tbl) --[[ Line: 119 ]]
+		Signal2(function(Tbl)
 			-- upvalues: p3 (copy)
 			if Tbl.isDone then
 				return Tbl
@@ -93,10 +93,10 @@ return function(p1, RequestId, Cancel, p2, List) --[[ Line: 36 | Named "createTu
 		end)
 	end
 	
-	local function fireHandlers(Notification) --[[ Line: 129 ]]
+	local function fireHandlers(Notification)
 		-- upvalues: t (copy)
 		for _, value in t do
-			local Success, Result = pcall(function() --[[ Line: 132 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: value (copy), Notification (copy)
 				value(Notification)
 			end)
@@ -107,12 +107,12 @@ return function(p1, RequestId, Cancel, p2, List) --[[ Line: 36 | Named "createTu
 		end
 	end
 	
-	local _ = function(p3) --[[ Line: 141 | Named "completeFromResponse" ]]
+	local _ = function(p3)
 		-- upvalues: Signal2 (copy)
 		if p3.error then
 			local Error = p3.error
 			
-			local function v31(p4) --[[ Line: 144 ]]
+			local function v31(p4)
 				-- upvalues: Error (copy)
 				p4.error = tostring(Error.message or "JSON-RPC error")
 				p4.errorCode = tonumber(Error.code)
@@ -120,7 +120,7 @@ return function(p1, RequestId, Cancel, p2, List) --[[ Line: 36 | Named "createTu
 				p4.isDone = true
 			end
 			
-			Signal2(function(Tbl) --[[ Line: 119 ]]
+			Signal2(function(Tbl)
 				-- upvalues: v31 (copy)
 				if Tbl.isDone then
 					return Tbl
@@ -134,7 +134,7 @@ return function(p1, RequestId, Cancel, p2, List) --[[ Line: 36 | Named "createTu
 		end
 	end
 	
-	local _ = function(p3, p4) --[[ Line: 153 | Named "getEventSequenceId" ]]
+	local _ = function(p3, p4)
 		local SequenceId = p3.sequenceId
 		
 		if typeof(SequenceId) == "number" then
@@ -146,12 +146,12 @@ return function(p1, RequestId, Cancel, p2, List) --[[ Line: 36 | Named "createTu
 		end
 	end
 	
-	local _ = function(p3) --[[ Line: 167 | Named "applyTerminalUpdate" ]]
+	local _ = function(p3)
 		-- upvalues: Signal (copy), Signal2 (copy)
 		local IsIdle: boolean = p3.sessionUpdate == "state_change" and p3.state == "idle"
 		
 		if IsIdle or Signal(false).status == "queued" then
-			local function v35(p4) --[[ Line: 172 ]]
+			local function v35(p4)
 				-- upvalues: IsIdle (copy), p3 (copy)
 				if p4.status == "queued" then
 					p4.status = "streaming"
@@ -164,7 +164,7 @@ return function(p1, RequestId, Cancel, p2, List) --[[ Line: 36 | Named "createTu
 				end
 			end
 			
-			Signal2(function(Tbl) --[[ Line: 119 ]]
+			Signal2(function(Tbl)
 				-- upvalues: v35 (copy)
 				if Tbl.isDone then
 					return Tbl
@@ -182,38 +182,38 @@ return function(p1, RequestId, Cancel, p2, List) --[[ Line: 36 | Named "createTu
 	
 	return {
 		state = Signal,
-		getTurnId = function() --[[ Line: 247 ]]
+		getTurnId = function()
 			-- upvalues: ExtractTurnIdResult (ref)
 			return ExtractTurnIdResult
 		end,
-		onNotification = function(p3) --[[ Line: 88 ]]
+		onNotification = function(p3)
 			-- upvalues: Count (ref), t (copy)
 			local Count1: number = Count
 			Count += 1
 			t[Count1] = p3
 			
-			return function() --[[ Line: 92 ]]
+			return function()
 				-- upvalues: t (upval), Count1 (copy)
 				t[Count1] = nil
 			end
 		end,
-		onUpdate = function(p3) --[[ Line: 97 ]]
+		onUpdate = function(p3)
 			-- upvalues: Count (ref), t1 (copy)
 			local Count1: number = Count
 			Count += 1
 			t1[Count1] = p3
 			
-			return function() --[[ Line: 101 ]]
+			return function()
 				-- upvalues: t1 (upval), Count1 (copy)
 				t1[Count1] = nil
 			end
 		end,
-		getLatestProcessedSequenceNumber = function() --[[ Line: 252 ]]
+		getLatestProcessedSequenceNumber = function()
 			-- upvalues: v1 (ref)
 			return v1
 		end,
 		hasSequenceGap = hasSequenceGap,
-		noteProcessedSequenceNumber = function(Key) --[[ Line: 256 ]]
+		noteProcessedSequenceNumber = function(Key)
 			-- upvalues: t2 (copy), v1 (ref), v2 (ref), Total (ref)
 			if t2[Key] == true then return end
 			t2[Key] = true
@@ -241,7 +241,7 @@ return function(p1, RequestId, Cancel, p2, List) --[[ Line: 36 | Named "createTu
 		end,
 		cancel = Cancel
 	}, {
-		dispatchFrame = function(p3, p4, Enabled): boolean --[[ Line: 185 ]]
+		dispatchFrame = function(p3, p4, Enabled): boolean
 			-- upvalues: Signal (copy), AcpProtocolModule (upval), t2 (copy), v1 (ref), v2 (ref), Total (ref), ExtractTurnIdResult (ref), TurnStateModule (upval), Signal2 (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), fireUpdateHandlers (copy), fireHandlers (copy)
 			if Signal(false).isDone then
 				return false
@@ -291,7 +291,7 @@ return function(p1, RequestId, Cancel, p2, List) --[[ Line: 36 | Named "createTu
 						local IsIdle: boolean = Update.sessionUpdate == "state_change" and Update.state == "idle"
 						
 						if IsIdle or Signal(false).status == "queued" then
-							local function v44(p5) --[[ Line: 172 ]]
+							local function v44(p5)
 								-- upvalues: IsIdle (copy), Update (copy)
 								if p5.status == "queued" then
 									p5.status = "streaming"
@@ -304,7 +304,7 @@ return function(p1, RequestId, Cancel, p2, List) --[[ Line: 36 | Named "createTu
 								end
 							end
 							
-							Signal2(function(Tbl) --[[ Line: 119 ]]
+							Signal2(function(Tbl)
 								-- upvalues: v44 (copy)
 								if Tbl.isDone then
 									return Tbl
@@ -334,7 +334,7 @@ return function(p1, RequestId, Cancel, p2, List) --[[ Line: 36 | Named "createTu
 				if Response.error then
 					local Error = Response.error
 					
-					local function v47(p5) --[[ Line: 144 ]]
+					local function v47(p5)
 						-- upvalues: Error (copy)
 						p5.error = tostring(Error.message or "JSON-RPC error")
 						p5.errorCode = tonumber(Error.code)
@@ -342,7 +342,7 @@ return function(p1, RequestId, Cancel, p2, List) --[[ Line: 36 | Named "createTu
 						p5.isDone = true
 					end
 					
-					Signal2(function(Tbl) --[[ Line: 119 ]]
+					Signal2(function(Tbl)
 						-- upvalues: v47 (copy)
 						if Tbl.isDone then
 							return Tbl
@@ -359,9 +359,9 @@ return function(p1, RequestId, Cancel, p2, List) --[[ Line: 36 | Named "createTu
 			return HasError
 		end,
 		noteProcessedSequenceNumber = noteProcessedSequenceNumber,
-		fail = function(p3, ErrorCode, RequestFailure) --[[ Line: 224 ]]
+		fail = function(p3, ErrorCode, RequestFailure)
 			-- upvalues: FFlagBuildExperiencePromptFailureTelemetry (upval), Signal2 (copy)
-			local function v48(p4) --[[ Line: 225 ]]
+			local function v48(p4)
 				-- upvalues: p3 (copy), ErrorCode (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), RequestFailure (copy)
 				p4.error = p3
 				p4.errorCode = ErrorCode
@@ -373,7 +373,7 @@ return function(p1, RequestId, Cancel, p2, List) --[[ Line: 36 | Named "createTu
 				p4.isDone = true
 			end
 			
-			Signal2(function(Tbl) --[[ Line: 119 ]]
+			Signal2(function(Tbl)
 				-- upvalues: v48 (copy)
 				if Tbl.isDone then
 					return Tbl
@@ -385,15 +385,15 @@ return function(p1, RequestId, Cancel, p2, List) --[[ Line: 36 | Named "createTu
 				end
 			end)
 		end,
-		markCancelled = function() --[[ Line: 237 ]]
+		markCancelled = function()
 			-- upvalues: Signal2 (copy)
-			local function v49(p3) --[[ Line: 238 ]]
+			local function v49(p3)
 				p3.status = "cancelled"
 				p3.stopReason = "cancelled"
 				p3.isDone = true
 			end
 			
-			Signal2(function(Tbl) --[[ Line: 119 ]]
+			Signal2(function(Tbl)
 				-- upvalues: v49 (copy)
 				if Tbl.isDone then
 					return Tbl
@@ -405,7 +405,7 @@ return function(p1, RequestId, Cancel, p2, List) --[[ Line: 36 | Named "createTu
 				end
 			end)
 		end,
-		isDone = function() --[[ Line: 267 ]]
+		isDone = function()
 			-- upvalues: Signal (copy)
 			return Signal(false).isDone
 		end,

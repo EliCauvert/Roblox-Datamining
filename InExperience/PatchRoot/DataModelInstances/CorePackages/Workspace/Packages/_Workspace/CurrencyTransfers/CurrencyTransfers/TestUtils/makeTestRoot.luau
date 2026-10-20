@@ -8,11 +8,11 @@ local FoundationProvider = FoundationModule.FoundationProvider
 local Localization = require(Parent.AppLocales).Localization
 local LocalizationProvider = require(Parent.Localization).LocalizationProvider
 
-return function(p1) --[[ Line: 16 ]]
+return function(p1)
 	-- upvalues: Localization (copy), LocalizationService (copy), ReactModule (copy), LocalizationProvider (copy), FoundationProvider (copy), FoundationModule (copy), TransferContextModule (copy)
 	local NewLocalization = Localization.new(LocalizationService.RobloxLocaleId)
 	
-	return function(p2) --[[ Line: 18 ]]
+	return function(p2)
 		-- upvalues: ReactModule (upval), LocalizationProvider (upval), NewLocalization (copy), FoundationProvider (upval), FoundationModule (upval), TransferContextModule (upval), p1 (copy)
 		return ReactModule.createElement(LocalizationProvider, { localization = NewLocalization }, {
 			ReactModule.createElement(FoundationProvider, { colorMode = FoundationModule.Enums.ColorMode.Dark }, {

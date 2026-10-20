@@ -5,7 +5,7 @@ local GetClientReplicatorModule = require(script.Parent.Parent.Parent.Util.getCl
 local DataStoresDataModule = {}
 DataStoresDataModule.__index = DataStoresDataModule
 
-function DataStoresDataModule.new() --[[ Line: 12 ]]
+function DataStoresDataModule.new()
 	-- upvalues: DataStoresDataModule (copy), SignalModule (copy)
 	local t = {}
 	setmetatable(t, DataStoresDataModule)
@@ -18,15 +18,15 @@ function DataStoresDataModule.new() --[[ Line: 12 ]]
 	return t
 end
 
-function DataStoresDataModule:Signal() --[[ Line: 24 ]]
+function DataStoresDataModule:Signal()
 	return self._dataStoresUpdated
 end
 
-function DataStoresDataModule:getCurrentData() --[[ Line: 28 ]]
+function DataStoresDataModule:getCurrentData()
 	return self._dataStoresData, self._dataStoresDataCount
 end
 
-function DataStoresDataModule:updateValue(p1, Value) --[[ Line: 32 ]]
+function DataStoresDataModule:updateValue(p1, Value)
 	-- upvalues: CircularBufferModule (copy), Number (copy)
 	if not self._dataStoresData[p1] then
 		local NewCircularBuffer = CircularBufferModule.new(Number)
@@ -63,16 +63,16 @@ function DataStoresDataModule:updateValue(p1, Value) --[[ Line: 32 ]]
 	self._dataStoresData[p1].min = Min < Value and Min or Value
 end
 
-function DataStoresDataModule:isRunning() --[[ Line: 80 ]]
+function DataStoresDataModule:isRunning()
 	return self._isRunning
 end
 
-function DataStoresDataModule:start() --[[ Line: 84 ]]
+function DataStoresDataModule:start()
 	-- upvalues: GetClientReplicatorModule (copy)
 	local ClientReplicatorModule = GetClientReplicatorModule()
 	
 	if ClientReplicatorModule and not self._statsListenerConnection then
-		self._statsListenerConnection = ClientReplicatorModule.StatsReceived:connect(function(Stats) --[[ Line: 87 ]]
+		self._statsListenerConnection = ClientReplicatorModule.StatsReceived:connect(function(Stats)
 			-- upvalues: self (copy)
 			local DataStoreBudget = Stats.DataStoreBudget
 			self._lastUpdateTime = os.time()
@@ -95,7 +95,7 @@ function DataStoresDataModule:start() --[[ Line: 84 ]]
 	end
 end
 
-function DataStoresDataModule:stop() --[[ Line: 107 ]]
+function DataStoresDataModule:stop()
 	if self._statsListenerConnection then
 		self._statsListenerConnection:Disconnect()
 		self._statsListenerConnection = nil

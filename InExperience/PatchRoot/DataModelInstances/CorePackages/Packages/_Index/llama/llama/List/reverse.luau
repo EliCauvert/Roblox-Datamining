@@ -1,4 +1,4 @@
-﻿return function(p1) --[[ Line: 2 | Named "reverse" ]]
+﻿return function(p1)
 	local ValueType = type(p1)
 	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)
 	local t = {}

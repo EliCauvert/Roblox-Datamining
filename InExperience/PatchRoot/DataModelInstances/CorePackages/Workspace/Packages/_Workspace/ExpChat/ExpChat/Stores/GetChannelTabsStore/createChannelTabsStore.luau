@@ -20,7 +20,7 @@ local CreateSignalFunction = SignalsModule.createSignal
 local CreateComputedFunction = SignalsModule.createComputed
 local Callback = nil
 
-local function reorderTabs(Tbl) --[[ Line: 86 ]]
+local function reorderTabs(Tbl)
 	-- upvalues: Callback (ref)
 	local Copy = table.clone(Tbl)
 	local List = {}
@@ -28,7 +28,7 @@ local function reorderTabs(Tbl) --[[ Line: 86 ]]
 	for _, value in pairs(Copy) do
 		table.insert(List, value)
 	end
-	table.sort(List, function(A, B): boolean --[[ Line: 94 ]]
+	table.sort(List, function(A, B): boolean
 		-- upvalues: Callback (upval)
 		local CallbackResult = Callback(A.name)
 		local CallbackResult1 = Callback(B.name)
@@ -47,7 +47,7 @@ local function reorderTabs(Tbl) --[[ Line: 86 ]]
 	return Copy
 end
 
-local function _(Tbl, p1) --[[ Line: 121 | Named "insertTabAndReorder" ]]
+local function _(Tbl, p1)
 	-- upvalues: reorderTabs (copy)
 	local Copy = table.clone(Tbl)
 	Copy[p1.name] = p1
@@ -55,7 +55,7 @@ local function _(Tbl, p1) --[[ Line: 121 | Named "insertTabAndReorder" ]]
 	return (reorderTabs(Copy))
 end
 
-local _ = function(Tbl, p1) --[[ Line: 131 | Named "removeTabAndReorder" ]]
+local _ = function(Tbl, p1)
 	-- upvalues: reorderTabs (copy)
 	local Copy = table.clone(Tbl)
 	Copy[p1.name] = nil
@@ -63,12 +63,12 @@ local _ = function(Tbl, p1) --[[ Line: 131 | Named "removeTabAndReorder" ]]
 	return (reorderTabs(Copy))
 end
 
-Callback = function(Name) --[[ Line: 144 | Named "getFixedTabPriority" ]]
+Callback = function(Name)
 	-- upvalues: FFlagExpChatGlobalTabDefaultModule (copy), IsGlobalTabFirstModule (copy), FriendsChatTabNameModule (copy), FFlagExpChatEnableFriendsTab (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy)
 	return if FFlagExpChatGlobalTabDefaultModule and IsGlobalTabFirstModule() then if Name == "RBXGlobal" then 1 elseif Name == "RBXGeneral" then 2 elseif Name == FriendsChatTabNameModule and FFlagExpChatEnableFriendsTab then 3 else nil elseif Name == "RBXGeneral" then 1 elseif Name == "RBXGlobal" and GetFFlagTextChatEnableUniverseChatTabsFunction() then 2 elseif Name == FriendsChatTabNameModule and FFlagExpChatEnableFriendsTab then 3 else nil
 end
 
-local function pruneNonSpecialTabs(AllChannelTabs) --[[ Line: 171 ]]
+local function pruneNonSpecialTabs(AllChannelTabs)
 	-- upvalues: Callback (ref), reorderTabs (copy)
 	local t = {}
 	
@@ -80,12 +80,12 @@ local function pruneNonSpecialTabs(AllChannelTabs) --[[ Line: 171 ]]
 	return (reorderTabs(t))
 end
 
-local _ = function(p1): boolean --[[ Line: 188 | Named "isDefaultTabOnlyMode" ]]
+local _ = function(p1): boolean
 	-- upvalues: GetFFlagTextChatEnableUniverseChatTabsFunction (copy), FFlagExpChatFriendsTabRequireDefaultChannels (copy), FFlagExpChatEnableFriendsTab (copy)
 	return if GetFFlagTextChatEnableUniverseChatTabsFunction() then not p1.channelTabsConfigurationEnabled else FFlagExpChatFriendsTabRequireDefaultChannels and (FFlagExpChatEnableFriendsTab and not p1.channelTabsConfigurationEnabled)
 end
 
-local function markTabUnread(Tbl, Name) --[[ Line: 195 ]]
+local function markTabUnread(Tbl, Name)
 	local AllChannelTab = Tbl.allChannelTabs[Name]
 	
 	if AllChannelTab == nil or AllChannelTab.HasUnreadMessages or Name == Tbl.selectedTabName then
@@ -101,7 +101,7 @@ local function markTabUnread(Tbl, Name) --[[ Line: 195 ]]
 	end
 end
 
-local function isTargetChannelNoOp(p1, SelectedTabName, p2, p3): boolean --[[ Line: 209 ]]
+local function isTargetChannelNoOp(p1, SelectedTabName, p2, p3): boolean
 	-- upvalues: FFlagExpChatGlobalTabDefaultModule (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), FFlagExpChatFriendsTabRequireDefaultChannels (copy), FFlagExpChatEnableFriendsTab (copy), Callback (ref)
 	if FFlagExpChatGlobalTabDefaultModule and p3 and not p1.hasUserSelectedTab then
 		return false
@@ -112,7 +112,7 @@ local function isTargetChannelNoOp(p1, SelectedTabName, p2, p3): boolean --[[ Li
 	end
 end
 
-return function() --[[ Line: 231 | Named "createChannelTabsStore" ]]
+return function()
 	-- upvalues: CreateSignalFunction (copy), CreateComputedFunction (copy), TutilsModule (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), GetFFlagExpChatSuppressWelcomeMessageTabUnreadFunction (copy), ShouldSuppressUnreadForTabMetadataModule (copy), markTabUnread (copy), isTargetChannelNoOp (copy), FFlagExpChatGlobalTabDefaultModule (copy), reorderTabs (copy), FFlagExpChatFriendsTabRequireDefaultChannels (copy), FFlagExpChatEnableFriendsTab (copy), Callback (ref), GetDefaultTabNameModule (copy), IsGlobalTabFirstModule (copy), ShouldRenderTextChannelInDefaultWindowFunction (copy), GetTextChannelDisplayModeFunction (copy), GetFFlagExpChatFixChannelTabsMidExperienceToggleModule (copy), pruneNonSpecialTabs (copy)
 	local Signal, Signal2 = CreateSignalFunction({
 		selectedTabName = nil,
@@ -123,11 +123,11 @@ return function() --[[ Line: 231 | Named "createChannelTabsStore" ]]
 	
 	return {
 		getChannelTabsState = Signal,
-		getSelectedTabName = CreateComputedFunction(function(p1) --[[ Line: 242 ]]
+		getSelectedTabName = CreateComputedFunction(function(p1)
 			-- upvalues: Signal (copy)
 			return Signal(p1).selectedTabName
 		end),
-		getUnreadChannels = CreateComputedFunction(function(p1) --[[ Line: 247 ]]
+		getUnreadChannels = CreateComputedFunction(function(p1)
 			-- upvalues: Signal (copy)
 			local t = {}
 			
@@ -138,7 +138,7 @@ return function() --[[ Line: 231 | Named "createChannelTabsStore" ]]
 			end
 			return t
 		end, TutilsModule.deepEqual),
-		handleIncomingOrOutgoingMessage = function(TextChatMessage, p2, p3) --[[ Line: 260 ]]
+		handleIncomingOrOutgoingMessage = function(TextChatMessage, p2, p3)
 			-- upvalues: GetFFlagTextChatEnableUniverseChatTabsFunction (upval), GetFFlagExpChatSuppressWelcomeMessageTabUnreadFunction (upval), ShouldSuppressUnreadForTabMetadataModule (upval), Signal2 (copy), markTabUnread (upval)
 			if not GetFFlagTextChatEnableUniverseChatTabsFunction() and not TextChatMessage.TextChannel or p2 then return end
 			if GetFFlagExpChatSuppressWelcomeMessageTabUnreadFunction() and ShouldSuppressUnreadForTabMetadataModule(TextChatMessage.Metadata) then return end
@@ -152,7 +152,7 @@ return function() --[[ Line: 231 | Named "createChannelTabsStore" ]]
 					Name = TextChatMessage.TextChannel.Name
 				end
 			end
-			Signal2(function(p4) --[[ Line: 289 ]]
+			Signal2(function(p4)
 				-- upvalues: GetFFlagTextChatEnableUniverseChatTabsFunction (upval), TextChatMessage (copy), Name (ref), markTabUnread (upval)
 				if not GetFFlagTextChatEnableUniverseChatTabsFunction() then
 					local TextChannel = TextChatMessage.TextChannel
@@ -168,9 +168,9 @@ return function() --[[ Line: 231 | Named "createChannelTabsStore" ]]
 				return (markTabUnread(p4, Name))
 			end)
 		end,
-		setSelectedTab = function(SelectedTabName) --[[ Line: 330 ]]
+		setSelectedTab = function(SelectedTabName)
 			-- upvalues: Signal2 (copy)
-			Signal2(function(Tbl) --[[ Line: 331 ]]
+			Signal2(function(Tbl)
 				-- upvalues: SelectedTabName (copy)
 				local AllChannelTab = Tbl.allChannelTabs[SelectedTabName]
 				
@@ -189,9 +189,9 @@ return function() --[[ Line: 231 | Named "createChannelTabsStore" ]]
 				return Copy
 			end)
 		end,
-		setTargetChannel = function(SelectedTabName, p2, p3) --[[ Line: 351 ]]
+		setTargetChannel = function(SelectedTabName, p2, p3)
 			-- upvalues: Signal2 (copy), isTargetChannelNoOp (upval), FFlagExpChatGlobalTabDefaultModule (upval), reorderTabs (upval), GetFFlagTextChatEnableUniverseChatTabsFunction (upval), FFlagExpChatFriendsTabRequireDefaultChannels (upval), FFlagExpChatEnableFriendsTab (upval), Callback (upval)
-			Signal2(function(Tbl) --[[ Line: 352 ]]
+			Signal2(function(Tbl)
 				-- upvalues: isTargetChannelNoOp (upval), SelectedTabName (copy), p2 (copy), p3 (copy), FFlagExpChatGlobalTabDefaultModule (upval), reorderTabs (upval), GetFFlagTextChatEnableUniverseChatTabsFunction (upval), FFlagExpChatFriendsTabRequireDefaultChannels (upval), FFlagExpChatEnableFriendsTab (upval), Callback (upval)
 				if isTargetChannelNoOp(Tbl, SelectedTabName, p2, p3) then
 					return Tbl
@@ -224,10 +224,10 @@ return function() --[[ Line: 231 | Named "createChannelTabsStore" ]]
 				end
 			end)
 		end,
-		addChannelTab = function(p2, p3) --[[ Line: 402 ]]
+		addChannelTab = function(p2, p3)
 			-- upvalues: Signal2 (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (upval), FFlagExpChatFriendsTabRequireDefaultChannels (upval), FFlagExpChatEnableFriendsTab (upval), reorderTabs (upval), Callback (upval), FFlagExpChatGlobalTabDefaultModule (upval), GetDefaultTabNameModule (upval), IsGlobalTabFirstModule (upval)
 			local Name = p2.name
-			Signal2(function(Tbl) --[[ Line: 405 ]]
+			Signal2(function(Tbl)
 				-- upvalues: Name (copy), p2 (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (upval), FFlagExpChatFriendsTabRequireDefaultChannels (upval), FFlagExpChatEnableFriendsTab (upval), p3 (copy), reorderTabs (upval), Callback (upval), FFlagExpChatGlobalTabDefaultModule (upval), GetDefaultTabNameModule (upval), IsGlobalTabFirstModule (upval)
 				if Tbl.allChannelTabs[Name] ~= nil then
 					return Tbl
@@ -282,14 +282,14 @@ return function() --[[ Line: 231 | Named "createChannelTabsStore" ]]
 				return Copy
 			end)
 		end,
-		handleLocalTextChannelParticipantAdded = function(p4) --[[ Line: 485 ]]
+		handleLocalTextChannelParticipantAdded = function(p4)
 			-- upvalues: ShouldRenderTextChannelInDefaultWindowFunction (upval), GetTextChannelDisplayModeFunction (upval), Signal2 (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (upval), FFlagExpChatFriendsTabRequireDefaultChannels (upval), FFlagExpChatEnableFriendsTab (upval), reorderTabs (upval), Callback (upval), FFlagExpChatGlobalTabDefaultModule (upval), GetDefaultTabNameModule (upval), IsGlobalTabFirstModule (upval)
 			if p4.Name == "RBXSystem" then return end
 			if ShouldRenderTextChannelInDefaultWindowFunction(p4, GetTextChannelDisplayModeFunction()) then
 				local config = { type = "TextChat", name = p4.Name }
 				local Name = config.name
 				local v1 = nil
-				Signal2(function(Tbl) --[[ Line: 405 ]]
+				Signal2(function(Tbl)
 					-- upvalues: Name (copy), config (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (upval), FFlagExpChatFriendsTabRequireDefaultChannels (upval), FFlagExpChatEnableFriendsTab (upval), v1 (copy), reorderTabs (upval), Callback (upval), FFlagExpChatGlobalTabDefaultModule (upval), GetDefaultTabNameModule (upval), IsGlobalTabFirstModule (upval)
 					if Tbl.allChannelTabs[Name] ~= nil then
 						return Tbl
@@ -347,9 +347,9 @@ return function() --[[ Line: 231 | Named "createChannelTabsStore" ]]
 				return
 			end
 		end,
-		handleChannelRemoved = function(p5) --[[ Line: 497 ]]
+		handleChannelRemoved = function(p5)
 			-- upvalues: Signal2 (copy), reorderTabs (upval), FFlagExpChatGlobalTabDefaultModule (upval), GetDefaultTabNameModule (upval)
-			Signal2(function(Tbl) --[[ Line: 498 ]]
+			Signal2(function(Tbl)
 				-- upvalues: p5 (copy), reorderTabs (upval), FFlagExpChatGlobalTabDefaultModule (upval), GetDefaultTabNameModule (upval)
 				local AllChannelTab = Tbl.allChannelTabs[p5]
 				
@@ -377,16 +377,16 @@ return function() --[[ Line: 231 | Named "createChannelTabsStore" ]]
 				return Copy
 			end)
 		end,
-		markChannelUnread = function(p5) --[[ Line: 308 ]]
+		markChannelUnread = function(p5)
 			-- upvalues: Signal2 (copy), markTabUnread (upval)
-			Signal2(function(p6) --[[ Line: 309 ]]
+			Signal2(function(p6)
 				-- upvalues: markTabUnread (upval), p5 (copy)
 				return (markTabUnread(p6, p5))
 			end)
 		end,
-		setChannelUnreadStatus = function(p5, HasUnreadMessages) --[[ Line: 314 ]]
+		setChannelUnreadStatus = function(p5, HasUnreadMessages)
 			-- upvalues: Signal2 (copy)
-			Signal2(function(Tbl) --[[ Line: 315 ]]
+			Signal2(function(Tbl)
 				-- upvalues: p5 (copy), HasUnreadMessages (copy)
 				local AllChannelTab = Tbl.allChannelTabs[p5]
 				
@@ -403,9 +403,9 @@ return function() --[[ Line: 231 | Named "createChannelTabsStore" ]]
 				end
 			end)
 		end,
-		setChannelTabsConfigurationEnabled = function(ChannelTabsConfigurationEnabled) --[[ Line: 529 ]]
+		setChannelTabsConfigurationEnabled = function(ChannelTabsConfigurationEnabled)
 			-- upvalues: Signal2 (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (upval), GetFFlagExpChatFixChannelTabsMidExperienceToggleModule (upval), pruneNonSpecialTabs (upval), FFlagExpChatGlobalTabDefaultModule (upval), GetDefaultTabNameModule (upval)
-			Signal2(function(Tbl) --[[ Line: 530 ]]
+			Signal2(function(Tbl)
 				-- upvalues: GetFFlagTextChatEnableUniverseChatTabsFunction (upval), GetFFlagExpChatFixChannelTabsMidExperienceToggleModule (upval), ChannelTabsConfigurationEnabled (copy), pruneNonSpecialTabs (upval), FFlagExpChatGlobalTabDefaultModule (upval), GetDefaultTabNameModule (upval)
 				if not GetFFlagTextChatEnableUniverseChatTabsFunction() then
 					return Tbl

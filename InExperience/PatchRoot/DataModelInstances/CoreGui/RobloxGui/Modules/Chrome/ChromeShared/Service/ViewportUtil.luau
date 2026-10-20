@@ -5,7 +5,7 @@ local NewObservableValue = ObservableValue.new(Vector2.new(0, 0))
 local NewObservableValue1 = ObservableValue.new(false)
 local Connection = nil
 
-function createViewportInfo(Size) --[[ Line: 25 ]]
+function createViewportInfo(Size)
 	-- upvalues: UserInputService (copy)
 	local IsXBelow = Size.X < Size.Y
 	local Platform = UserInputService:GetPlatform()
@@ -21,17 +21,17 @@ end
 
 local NewObservableValue2 = ObservableValue.new(createViewportInfo(Vector2.zero))
 
-function updateViewportSize(Vector) --[[ Line: 39 ]]
+function updateViewportSize(Vector)
 	-- upvalues: NewObservableValue (copy), NewObservableValue2 (copy)
 	local _Vector2 = Vector2.new(Vector.X, Vector.Y)
 	NewObservableValue:set(_Vector2)
 	NewObservableValue2:set(createViewportInfo(_Vector2))
 end
 
-function setCurrentCamera(Camera: Camera) --[[ Line: 45 ]]
+function setCurrentCamera(Camera: Camera)
 	-- upvalues: Connection (ref), UserInputService (copy), NewObservableValue1 (copy)
 	if Connection then
-		pcall(function() --[[ Line: 47 ]]
+		pcall(function()
 			-- upvalues: Connection (upval)
 			Connection:Disconnect()
 		end)
@@ -40,7 +40,7 @@ function setCurrentCamera(Camera: Camera) --[[ Line: 45 ]]
 	if Camera then
 		local Platform = UserInputService:GetPlatform()
 		NewObservableValue1:set(Platform == Enum.Platform.IOS or Platform == Enum.Platform.Android)
-		Connection = Camera:GetPropertyChangedSignal("ViewportSize"):Connect(function() --[[ Line: 56 ]]
+		Connection = Camera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
 			-- upvalues: Camera (copy)
 			updateViewportSize(Camera.ViewportSize)
 		end)
@@ -48,7 +48,7 @@ function setCurrentCamera(Camera: Camera) --[[ Line: 45 ]]
 	end
 end
 
-Workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function() --[[ Line: 63 ]]
+Workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
 	-- upvalues: Workspace (copy)
 	setCurrentCamera(Workspace.CurrentCamera)
 end)
@@ -58,7 +58,7 @@ return {
 	screenSize = NewObservableValue,
 	mobileDevice = NewObservableValue1,
 	viewport = NewObservableValue2,
-	isSmallTouchScreen = function(): boolean --[[ Line: 72 ]]
+	isSmallTouchScreen = function(): boolean
 		-- upvalues: NewObservableValue (copy), UserInputService (copy)
 		local GetResult = NewObservableValue:get()
 		

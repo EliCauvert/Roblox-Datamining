@@ -11,7 +11,7 @@ local list = {
 	}
 }
 
-return function(List) --[[ Line: 20 ]]
+return function(List)
 	-- upvalues: list (copy), PrivacyType (copy)
 	for _, value in list do
 		if table.find(List, value.audience) then

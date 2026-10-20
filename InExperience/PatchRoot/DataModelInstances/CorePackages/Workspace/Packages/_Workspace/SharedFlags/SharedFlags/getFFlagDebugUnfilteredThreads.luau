@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("DebugUnfilteredThreads", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("DebugUnfilteredThreads")
 end

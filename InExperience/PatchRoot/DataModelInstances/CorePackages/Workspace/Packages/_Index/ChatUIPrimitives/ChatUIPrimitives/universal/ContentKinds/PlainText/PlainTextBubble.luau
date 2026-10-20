@@ -7,7 +7,7 @@ local BubbleStyleContextModule = require(script.Parent.Parent.Parent.MessageList
 local UseBubbleContentMaxWidthFunction = require(script.Parent.Parent.Parent.MessageList.Bubble.useBubbleMaxWidth).useBubbleContentMaxWidth
 local _ = require(script.Parent.PlainTextTypes)
 
-return function(Frame) --[[ Line: 19 | Named "PlainTextBubble" ]]
+return function(Frame)
 	-- upvalues: BubbleStyleContextModule (copy), SignalsReactModule (copy), UseBubbleContentMaxWidthFunction (copy), ReactModule (copy), FoundationModule (copy)
 	local UseBubbleFontStyleResult, UseBubbleFontStyleResult2 = BubbleStyleContextModule.useBubbleFontStyle()
 	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(Frame.getContent)
@@ -15,12 +15,12 @@ return function(Frame) --[[ Line: 19 | Named "PlainTextBubble" ]]
 	
 	return ReactModule.createElement(FoundationModule.Text, {
 		tag = "auto-xy text-wrap text-align-x-left text-align-y-top",
-		Text = UseSignalBindingResult:map(function(p1) --[[ Line: 34 ]]
+		Text = UseSignalBindingResult:map(function(p1)
 			return p1.displayText.text
 		end),
 		textStyle = UseBubbleFontStyleResult.textStyle,
 		fontStyle = UseBubbleFontStyleResult2,
-		sizeConstraint = ReactModule.useMemo(function() --[[ Line: 25 ]]
+		sizeConstraint = ReactModule.useMemo(function()
 			-- upvalues: UseBubbleContentMaxWidthResult (copy)
 			return {
 				MinSize = Vector2.new(0, 0),

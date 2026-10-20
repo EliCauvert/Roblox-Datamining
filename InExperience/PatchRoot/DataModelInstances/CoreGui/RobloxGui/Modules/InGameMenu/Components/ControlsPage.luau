@@ -19,12 +19,12 @@ ControlsPage.validateProps = T.strictInterface({
 	canCaptureFocus = T.optional(T.boolean)
 })
 
-function ControlsPage.init(p1) --[[ Line: 33 ]]
+function ControlsPage.init(p1)
 	-- upvalues: Roact (copy)
 	p1.closeButtonRef = Roact.createRef()
 end
 
-function ControlsPage.render(p1) --[[ Line: 37 ]]
+function ControlsPage.render(p1)
 	-- upvalues: ControlsModule (copy), Roact (copy), KeyboardControlsModule (copy), VRService (copy), VRUtil (copy), VRGamepadControlsWrapperModule (copy), GamepadControlsModule (copy), FocusHandlerModule (copy), GuiService (copy)
 	local ControlLayout = p1.props.controlLayout
 	
@@ -32,13 +32,13 @@ function ControlsPage.render(p1) --[[ Line: 37 ]]
 		GamepadControls = Roact.createElement(GamepadControlsModule, { closeButtonRef = p1.closeButtonRef }),
 		FocusHandler = Roact.createElement(FocusHandlerModule, {
 			isFocused = p1.props.canCaptureFocus,
-			didFocus = function() --[[ Line: 52 ]]
+			didFocus = function()
 				-- upvalues: p1 (copy), GuiService (upval)
 				local Value = p1.closeButtonRef:getValue()
 				GuiService:AddSelectionParent("IGMControlsPage_CloseButtonSelectionGroup", Value)
 				GuiService.SelectedCoreObject = Value
 			end,
-			didBlur = function() --[[ Line: 57 ]]
+			didBlur = function()
 				-- upvalues: GuiService (upval)
 				GuiService:RemoveSelectionGroup("IGMControlsPage_CloseButtonSelectionGroup")
 			end
@@ -46,7 +46,7 @@ function ControlsPage.render(p1) --[[ Line: 37 ]]
 	}) else nil
 end
 
-return RoactRodux.UNSTABLE_connect2(function(p1) --[[ Line: 69 ]]
+return RoactRodux.UNSTABLE_connect2(function(p1)
 	return {
 		controlLayout = p1.controlLayout,
 		canCaptureFocus = p1.menuPage == "Controls"

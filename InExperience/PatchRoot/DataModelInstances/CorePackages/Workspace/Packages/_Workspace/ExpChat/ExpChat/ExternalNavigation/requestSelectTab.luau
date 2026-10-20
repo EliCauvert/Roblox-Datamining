@@ -4,7 +4,7 @@ local ExpChatSharedModule = require(Parent.ExpChatShared)
 local GetChannelTabsStoreModule = require(ExpChat.Stores.GetChannelTabsStore)
 local FFlagExpChatUseChannelTabsStore = require(Parent.SharedFlags).FFlagExpChatUseChannelTabsStore
 
-return function(p1): boolean --[[ Line: 14 | Named "requestSelectTab" ]]
+return function(p1): boolean
 	-- upvalues: ExpChatSharedModule (copy), FFlagExpChatUseChannelTabsStore (copy), GetChannelTabsStoreModule (copy)
 	local Store = ExpChatSharedModule.context.store
 	

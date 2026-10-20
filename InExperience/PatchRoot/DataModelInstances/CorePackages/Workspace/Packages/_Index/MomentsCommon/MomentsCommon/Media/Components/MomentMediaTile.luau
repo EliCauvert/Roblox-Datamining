@@ -7,7 +7,7 @@ local UseVideoPosterFrameModule = require(script.Parent.Parent.useVideoPosterFra
 local Skeleton = FoundationModule.Skeleton
 local Radius = FoundationModule.Enums.Radius
 
-return function(p1) --[[ Line: 41 | Named "MomentMediaTile" ]]
+return function(p1)
 	-- upvalues: UseVideoPosterFrameModule (copy), ReactModule (copy), MomentMediaViewModule (copy), Skeleton (copy), Radius (copy)
 	local MediaItem = p1.mediaItem
 	local CornerRadius = MediaItem.cornerRadius

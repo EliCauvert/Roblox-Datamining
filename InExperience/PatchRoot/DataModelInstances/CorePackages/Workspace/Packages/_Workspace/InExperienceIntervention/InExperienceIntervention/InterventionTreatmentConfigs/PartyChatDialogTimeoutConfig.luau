@@ -10,33 +10,33 @@ local FFlagAppChatReactiveFeatureRestrictions = require(Parent.SharedFlags).FFla
 local FFlagAppChatUniversalFeatureRestriction = require(Parent.SharedFlags).FFlagAppChatUniversalFeatureRestriction
 local _ = require(InExperienceIntervention.Utils.Types)
 
-local function onPartyChatTimeoutUFRShown() --[[ Line: 17 ]]
+local function onPartyChatTimeoutUFRShown()
 	-- upvalues: InterventionTreatmentShownSignal (copy), Constants (copy)
 	InterventionTreatmentShownSignal:fire(Constants.TreatmentType.PartyChatTimeoutDialog)
 end
 
-local function onPartyChatTimeoutAcknowledgementSuccess() --[[ Line: 20 ]]
+local function onPartyChatTimeoutAcknowledgementSuccess()
 	-- upvalues: PartyChatTimeoutReceivedSignal (copy)
 	PartyChatTimeoutReceivedSignal:fire(nil)
 end
 
-local function onPartyChatTimeoutUFRAppeal() --[[ Line: 25 ]] end
+local function onPartyChatTimeoutUFRAppeal() end
 
 return {
 	configName = "PartyChatDialogNudge",
-	shouldTriggerVisualTreatment = function(p1): boolean --[[ Line: 29 ]]
+	shouldTriggerVisualTreatment = function(p1): boolean
 		-- upvalues: Constants (copy)
 		return p1.type == Constants.NotificationDialogType.ChatTimeout and p1.abuseVector == Constants.AbuseVectorType.PartyChat
 	end,
-	shouldTriggerBehavioralTreatment = function(p1): boolean --[[ Line: 33 ]]
+	shouldTriggerBehavioralTreatment = function(p1): boolean
 		-- upvalues: Constants (copy)
 		return p1.type == Constants.NotificationDialogType.ChatTimeout and p1.abuseVector == Constants.AbuseVectorType.PartyChat
 	end,
-	shouldTriggerEventReceived = function(p1): boolean --[[ Line: 37 ]]
+	shouldTriggerEventReceived = function(p1): boolean
 		-- upvalues: Constants (copy)
 		return p1.type == Constants.NotificationDialogType.ChatTimeout and p1.abuseVector == Constants.AbuseVectorType.PartyChat
 	end,
-	onTriggerVisualTreatment = function(Callback: (any) -> (), Detail) --[[ Line: 41 ]]
+	onTriggerVisualTreatment = function(Callback: (any) -> (), Detail)
 		-- upvalues: FFlagAppChatUniversalFeatureRestriction (copy), ShowFeatureRestrictionFromRealtimeModule (copy), AbuseVectorModule (copy), onPartyChatTimeoutUFRAppeal (copy), onPartyChatTimeoutUFRShown (copy), FFlagAppChatReactiveFeatureRestrictions (copy), onPartyChatTimeoutAcknowledgementSuccess (copy), Constants (copy)
 		if FFlagAppChatUniversalFeatureRestriction then
 			ShowFeatureRestrictionFromRealtimeModule(AbuseVectorModule.PartyChat, Detail, {
@@ -56,11 +56,11 @@ return {
 			})
 		end
 	end,
-	onTriggerBehavioralTreatment = function(p1) --[[ Line: 60 ]]
+	onTriggerBehavioralTreatment = function(p1)
 		-- upvalues: PartyChatTimeoutReceivedSignal (copy)
 		PartyChatTimeoutReceivedSignal:fire(p1.vectorTargetId)
 	end,
-	onTriggerEventReceived = function(p1) --[[ Line: 63 ]]
+	onTriggerEventReceived = function(p1)
 		-- upvalues: InterventionAnalytics (copy), Constants (copy)
 		InterventionAnalytics.sendAnalyticsEvent(InterventionAnalytics.TelemetryConfigs.MessageReceived, {
 			eventType = InterventionAnalytics.Constants.EventTypes.ModalMessageReceived,

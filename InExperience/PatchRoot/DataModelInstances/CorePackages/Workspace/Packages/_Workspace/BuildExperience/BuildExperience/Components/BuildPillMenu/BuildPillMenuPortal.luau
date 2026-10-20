@@ -15,17 +15,17 @@ local UseOverlayFunction = FoundationModule.Hooks.useOverlay
 local UseStyleSheetFunction = FoundationModule.Hooks.useStyleSheet
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function _(DisplaySize, Vector): boolean --[[ Line: 46 | Named "isSideSheet" ]]
+local function _(DisplaySize, Vector): boolean
 	return DisplaySize ~= Enum.DisplaySize.Small or Vector.Y < Vector.X
 end
 
-local _ = function(Frame, Frame1: Frame): UDim2 --[[ Line: 50 | Named "getOverlayPosition" ]]
+local _ = function(Frame, Frame1: Frame): UDim2
 	local AbsolutePositionDelta = Frame.AbsolutePosition - (if Frame1:IsA("GuiObject") then Frame1.AbsolutePosition else Vector2.zero)
 	
 	return UDim2.fromOffset(AbsolutePositionDelta.X, AbsolutePositionDelta.Y)
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 57 | Named "BuildPillMenuPortal" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: GetBuildPillMenuPortalStoreModule (copy), SignalsReactModule (copy), UseOverlayFunction (copy), UseStyleSheetFunction (copy), UseTokensFunction (copy), DisplayModule (copy), ReactModule (copy), FFlagBuildPublishNavigationSheetModule (copy), View (copy), BuildPillMenuModule (copy), ReactRobloxModule (copy), BuildPillMenuPageHostModule (copy), PublishSheetControllerModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetBuildPillMenuPortalStoreModule().getPortalTarget)
 	local UseOverlayResult = UseOverlayFunction()
@@ -42,7 +42,7 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "BuildPillMenuPortal"
 	if p1.sheet ~= nil and (UseSignalStateResult1 ~= Enum.DisplaySize.Small or UseSignalStateResult2.X > UseSignalStateResult2.Y) then
 		Sheet = p1.sheet
 	end
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 74 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UseSignalStateResult (copy), UseOverlayResult (copy)
 		local Current = UseRefResult.current
 		
@@ -53,12 +53,12 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "BuildPillMenuPortal"
 			return
 		end
 	end, { UseSignalStateResult, UseOverlayResult })
-	local UseResult1 = ReactModule.useCallback(function(Current) --[[ Line: 83 ]]
+	local UseResult1 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), UseResult (copy)
 		UseRefResult.current = Current
 		UseResult()
 	end, { UseResult })
-	local UseResult2 = ReactModule.useCallback(function(Page) --[[ Line: 88 ]]
+	local UseResult2 = ReactModule.useCallback(function(Page)
 		-- upvalues: FFlagBuildPublishNavigationSheetModule (upval), UseStateResult2_1 (copy), UseStateResult2 (copy)
 		if FFlagBuildPublishNavigationSheetModule and Page == "publish" then
 			UseStateResult2_1(true)
@@ -68,27 +68,27 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "BuildPillMenuPortal"
 			UseStateResult2({ type = "overflow", page = Page })
 		end
 	end, {})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 99 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2({ type = "agents" })
 	end, {})
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 105 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2({ type = "invitePicker" })
 	end, {})
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 111 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2({ type = "playtestManagement" })
 	end, {})
-	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 117 ]]
+	local UseResult6 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2({ type = "creator-credit" })
 	end, {})
-	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 123 ]]
+	local UseResult7 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(nil)
 	end, {})
-	local UseResult8 = ReactModule.useCallback(function(p2) --[[ Line: 127 ]]
+	local UseResult8 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseResult7 (copy), p1 (copy)
 		UseResult7()
 		
@@ -96,11 +96,11 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "BuildPillMenuPortal"
 			p1.onOpenChat(p2)
 		end
 	end, { UseResult7, p1.onOpenChat })
-	local UseResult9 = ReactModule.useCallback(function() --[[ Line: 134 ]]
+	local UseResult9 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(false)
 	end, {})
-	local UseResult10 = ReactModule.useCallback(function(Screen, p2) --[[ Line: 141 ]]
+	local UseResult10 = ReactModule.useCallback(function(Screen, p2)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2({
 			type = "screen",
@@ -113,18 +113,18 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "BuildPillMenuPortal"
 			}
 		})
 	end, {})
-	ReactModule.useLayoutEffect(function() --[[ Line: 154 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: Sheet (ref)
 		if Sheet == nil then return end
 		local ClipsDescendants = Sheet.ClipsDescendants
 		Sheet.ClipsDescendants = false
 		
-		return function() --[[ Line: 163 ]]
+		return function()
 			-- upvalues: Sheet (upval), ClipsDescendants (copy)
 			Sheet.ClipsDescendants = ClipsDescendants
 		end
 	end, { Sheet })
-	ReactModule.useLayoutEffect(function() --[[ Line: 169 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: Sheet (ref), UseSignalStateResult (copy), UseOverlayResult (copy), UseResult (copy)
 		if Sheet ~= nil then return end
 		if UseSignalStateResult == nil or UseOverlayResult == nil then return end
@@ -132,7 +132,7 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "BuildPillMenuPortal"
 		local Connection = UseSignalStateResult:GetPropertyChangedSignal("AbsolutePosition"):Connect(UseResult)
 		local Connection1 = if UseOverlayResult:IsA("GuiObject") then UseOverlayResult:GetPropertyChangedSignal("AbsolutePosition"):Connect(UseResult) else nil
 		
-		return function() --[[ Line: 185 ]]
+		return function()
 			-- upvalues: Connection (copy), Connection1 (copy)
 			Connection:Disconnect()
 			

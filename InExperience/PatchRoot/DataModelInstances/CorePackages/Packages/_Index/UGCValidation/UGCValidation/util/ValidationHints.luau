@@ -9,7 +9,7 @@ local GetMeshVertsModule = require(Parent.util.getMeshVerts)
 local config = { MeshPart = { "MeshId" } }
 local config1 = { MeshPart = { MeshId = true } }
 
-local function validateMeshIds(Part, p1) --[[ Line: 34 ]]
+local function validateMeshIds(Part, p1)
 	-- upvalues: ParseContentIdsModule (copy), config (copy), config1 (copy)
 	if ParseContentIdsModule.parseWithErrorCheck({}, {}, Part, config, config1, p1) then
 		return true
@@ -18,7 +18,7 @@ local function validateMeshIds(Part, p1) --[[ Line: 34 ]]
 	end
 end
 
-local function validateAllMeshParts(p1, p2) --[[ Line: 52 ]]
+local function validateAllMeshParts(p1, p2)
 	-- upvalues: ConstantsModule (copy), validateMeshIds (copy)
 	local ValidateMeshIdsResult2 = nil
 	for _, value in ConstantsModule.ASSET_TYPE_INFO do
@@ -69,13 +69,13 @@ local function validateAllMeshParts(p1, p2) --[[ Line: 52 ]]
 	return true
 end
 
-local function _(p3, p4): boolean --[[ Line: 107 | Named "isWindowValid" ]]
+local function _(p3, p4): boolean
 	return p3 <= p4
 end
 
 local list = { "X", "Y", "Z" }
 
-local function calculateScalingWindow(CombineBoundsResult, Bounds) --[[ Line: 116 ]]
+local function calculateScalingWindow(CombineBoundsResult, Bounds)
 	-- upvalues: BoundsDataUtilsModule (copy), list (copy)
 	local BoundsDimensions, _, BoundsDimensions3 = BoundsDataUtilsModule.calculateBoundsDimensions(CombineBoundsResult)
 	local config = {
@@ -102,7 +102,7 @@ local function calculateScalingWindow(CombineBoundsResult, Bounds) --[[ Line: 11
 	return config
 end
 
-local function combineScalingWindows(List) --[[ Line: 144 ]]
+local function combineScalingWindows(List)
 	local t = {}
 	
 	for _, value in List do
@@ -115,7 +115,7 @@ local function combineScalingWindows(List) --[[ Line: 144 ]]
 	return t
 end
 
-local function createFinalResults(p3) --[[ Line: 160 ]]
+local function createFinalResults(p3)
 	-- upvalues: list (copy)
 	local config = { meshSize = p3.meshSize, overallSize = p3.overallSize }
 	
@@ -134,7 +134,7 @@ local function createFinalResults(p3) --[[ Line: 160 ]]
 end
 
 return {
-	preprocessDataAsync = function(p4, p5) --[[ Line: 180 ]]
+	preprocessDataAsync = function(p4, p5)
 		-- upvalues: validateAllMeshParts (copy), ConstantsModule (copy), GetMeshInfoModule (copy), GetMeshVertsModule (copy)
 		local ValidateAllMeshPartsResult, ValidateAllMeshPartsResult2 = validateAllMeshParts(p4, p5)
 		
@@ -170,7 +170,7 @@ return {
 		end
 		return { ok = true, cache = { meshData = MeshData } }
 	end,
-	isPreprocessDataCached = function(p6, p7): boolean --[[ Line: 232 ]]
+	isPreprocessDataCached = function(p6, p7): boolean
 		-- upvalues: ConstantsModule (copy)
 		local MeshData = p7.meshData
 		
@@ -197,7 +197,7 @@ return {
 		end
 		return true
 	end,
-	calculateScaleToValidateBoundsAsync = function(p8, p9, p10) --[[ Line: 268 ]]
+	calculateScaleToValidateBoundsAsync = function(p8, p9, p10)
 		-- upvalues: validateAllMeshParts (copy), BoundsCalculatorModule (copy), BoundsDataUtilsModule (copy), calculateScalingWindow (copy), ConstantsModule (copy), combineScalingWindows (copy), createFinalResults (copy)
 		local ValidateAllMeshPartsResult, ValidateAllMeshPartsResult2 = validateAllMeshParts(p8, p9)
 		

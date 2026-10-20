@@ -5,7 +5,7 @@
 	["'"] = "&apos;"
 }
 
-return function(Text: string) --[[ Line: 11 ]]
+return function(Text: string)
 	-- upvalues: config (copy)
 	local Text1 = Text:gsub("&", "&amp;")
 	

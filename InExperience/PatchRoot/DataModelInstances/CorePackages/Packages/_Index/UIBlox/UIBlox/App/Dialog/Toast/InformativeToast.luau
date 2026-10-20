@@ -26,9 +26,9 @@ InformativeToast.defaultProps = {
 	size = UDim2.new(1, 0, 1, 0)
 }
 
-function InformativeToast.render(p1) --[[ Line: 44 ]]
+function InformativeToast.render(p1)
 	-- upvalues: WithStyleModule (copy), RoactModule (copy), ToastFrameModule (copy)
-	return WithStyleModule(function(p2) --[[ Line: 45 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: RoactModule (upval), p1 (copy), ToastFrameModule (upval)
 		local Theme = p2.Theme
 		

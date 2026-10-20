@@ -26,7 +26,7 @@ local PreciseSelectionBugfixesEnabled = game:DefineFastFlag("PreciseSelectionBug
 local FFlagPrefillPreciseSelectionChoices = require(Parent.SharedFlags).FFlagPrefillPreciseSelectionChoices
 local Text = string.gsub(string.gsub(string.gsub(game:GetService("ContentProvider").BaseUrl:lower(), "/m.", "/www."), "http:", "https:"), "https://www", "https://apis") .. "rights-management-api/rights/v1/snapshots"
 
-return function(p1) --[[ Line: 55 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), AnalyticsReducerModule (copy), ConstantsModule (copy), SetTimeoutFunction (copy), ClearTimeoutFunction (copy), PreciseSelectionBugfixesEnabled (copy), ScreenshotManager (copy), SceneAnalysisModule (copy), InGameAssetReportAnalyticsModule (copy), ExperienceStateCaptureService (copy), UserInputService (copy), HttpService (copy), Text (copy), GetHighlightModeVariantModule (copy), BuildReportModule (copy), Players (copy), WithLocalizationFunction (copy), ReportPreciseSelectionPortraitHeaderFooterModule (copy), ReportPreciseSelectionLandscapeHeaderModule (copy), InGameAssetReportSubmitDialogModule (copy), FFlagPrefillPreciseSelectionChoices (copy), InGameAssetReportCompleteModalModule (copy), InGameAssetReportIPInfringementModalModule (copy), InGameAssetIPInfringementErrorModalModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
@@ -45,7 +45,7 @@ return function(p1) --[[ Line: 55 ]]
 	local UseStateResult14, UseStateResult2_13 = ReactModule.useState(false)
 	local ViewportSize = game.Workspace.CurrentCamera.ViewportSize
 	local IsSmallPortraitMode = p1.getIsSmallPortraitMode(ViewportSize)
-	ReactModule.useEffect(function() --[[ Line: 77 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseReducerResult2 (copy), ConstantsModule (upval), UseStateResult2_10 (copy), SetTimeoutFunction (upval), UseStateResult2_9 (copy)
 		UseReducerResult2({
 			type = ConstantsModule.AnalyticsActions.AccumulateForTimeSpent,
@@ -55,12 +55,12 @@ return function(p1) --[[ Line: 55 ]]
 			type = ConstantsModule.AnalyticsActions.SetPlaceId,
 			place_id = game.PlaceId
 		})
-		UseStateResult2_10(SetTimeoutFunction(function() --[[ Line: 86 ]]
+		UseStateResult2_10(SetTimeoutFunction(function()
 			-- upvalues: UseStateResult2_9 (upval)
 			UseStateResult2_9(true)
 		end, 10000))
 	end, { UseStateResult2_9, UseStateResult2_10 })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 91 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_9 (copy), UseStateResult11 (copy), ClearTimeoutFunction (upval)
 		UseStateResult2_9(false)
 		
@@ -68,7 +68,7 @@ return function(p1) --[[ Line: 55 ]]
 			ClearTimeoutFunction(UseStateResult11)
 		end
 	end, { UseStateResult2_9, UseStateResult11 })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 99 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: PreciseSelectionBugfixesEnabled (upval), UseStateResult4 (copy), ScreenshotManager (upval), UseStateResult2_3 (copy), UseResult (copy), UseStateResult2 (copy), UseReducerResult2 (copy), ConstantsModule (upval), ViewportSize (copy), IsSmallPortraitMode (copy)
 		if PreciseSelectionBugfixesEnabled then
 			if UseStateResult4 == "" then
@@ -92,22 +92,22 @@ return function(p1) --[[ Line: 55 ]]
 		UseStateResult2, UseStateResult2_3, UseStateResult4, ViewportSize,
 		IsSmallPortraitMode, UseReducerResult2, UseResult
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 139 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_4 (copy), SceneAnalysisModule (upval), UseStateResult9 (copy), UseResult1 (copy)
 		UseStateResult2_4(SceneAnalysisModule.interpretAndExtractItemsFromInstanceForPreciseSelection(UseStateResult9))
 		UseResult1()
 	end, { UseResult1, UseStateResult2_4, UseStateResult9 })
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 145 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: InGameAssetReportAnalyticsModule (upval), UseReducerResult (copy), p1 (copy)
 		InGameAssetReportAnalyticsModule(UseReducerResult, 2)
 		p1.backAction()
 	end, { p1.backAction, UseReducerResult })
-	ReactModule.useEffect(function() --[[ Line: 153 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult8 (copy), ExperienceStateCaptureService (upval), UseStateResult2_8 (copy), UseReducerResult2 (copy), ConstantsModule (upval), PreciseSelectionBugfixesEnabled (upval), UseResult (copy), UserInputService (upval), UseStateResult2_4 (copy), SceneAnalysisModule (upval), UseResult1 (copy), UseStateResult2_7 (copy)
 		if UseStateResult8 then
 			UseStateResult8:Disconnect()
 		end
-		UseStateResult2_7((ExperienceStateCaptureService.ItemSelectedInCaptureMode:Connect(function(p2) --[[ Line: 157 ]]
+		UseStateResult2_7((ExperienceStateCaptureService.ItemSelectedInCaptureMode:Connect(function(p2)
 			-- upvalues: UseStateResult2_8 (upval), UseReducerResult2 (upval), ConstantsModule (upval), PreciseSelectionBugfixesEnabled (upval), UseResult (upval), UserInputService (upval), UseStateResult2_4 (upval), SceneAnalysisModule (upval), UseResult1 (upval)
 			UseStateResult2_8(p2)
 			
@@ -129,7 +129,7 @@ return function(p1) --[[ Line: 55 ]]
 		UseStateResult2_8, UseStateResult2_7, UseResult1, UseStateResult2_4,
 		UseReducerResult2, UseResult
 	})
-	local UseResult4 = ReactModule.useCallback(function(Reason_selection, Surface_selection, p2) --[[ Line: 190 ]]
+	local UseResult4 = ReactModule.useCallback(function(Reason_selection, Surface_selection, p2)
 		-- upvalues: UseStateResult5 (copy), UseStateResult2_12 (copy), ConstantsModule (upval), UseStateResult4 (copy), HttpService (upval), Text (upval), UseStateResult2_11 (copy), UseStateResult2_2 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), UseReducerResult2 (copy), GetHighlightModeVariantModule (upval), BuildReportModule (upval), Players (upval)
 		if Reason_selection == "ip infringement" then
 			if not UseStateResult5 or not UseStateResult5.extractedAssets then
@@ -165,7 +165,7 @@ return function(p1) --[[ Line: 55 ]]
 						universe_id = game.GameId,
 						contents = Contents
 					})
-				}):Start(function(_, p3) --[[ Line: 233 ]]
+				}):Start(function(_, p3)
 					-- upvalues: HttpService (upval), UseStateResult2_11 (upval), UseStateResult2_2 (upval), UseStateResult2_12 (upval), ConstantsModule (upval)
 					if p3.StatusCode == 200 then
 						local Success, Result = pcall(HttpService.JSONDecode, HttpService, p3.Body)
@@ -232,19 +232,19 @@ return function(p1) --[[ Line: 55 ]]
 		UseStateResult5, UseStateResult2, UseStateResult2_1, UseStateResult4,
 		UseStateResult2_12, UseStateResult2_2, UseStateResult2_11, UseReducerResult2
 	})
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 319 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_4 (copy), UseStateResult2 (copy), ExperienceStateCaptureService (upval)
 		UseStateResult2_4(nil)
 		UseStateResult2(false)
 		ExperienceStateCaptureService:ResetHighlight()
 	end, { UseStateResult2, UseStateResult2_4 })
-	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 326 ]]
+	local UseResult6 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy), InGameAssetReportAnalyticsModule (upval), UseReducerResult (copy), p1 (copy)
 		UseStateResult2_1(false)
 		InGameAssetReportAnalyticsModule(UseReducerResult, 1)
 		p1.onReportComplete()
 	end, { p1.onReportComplete, UseStateResult2_1, UseReducerResult })
-	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 332 ]]
+	local UseResult7 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult6 (copy), UseStateResult2_5 (copy), UseReducerResult2 (copy), ConstantsModule (upval)
 		if UseStateResult6 then
 			UseStateResult2_5(false)
@@ -262,23 +262,23 @@ return function(p1) --[[ Line: 55 ]]
 		UseReducerResult2,
 		UseStateResult2_5
 	})
-	ReactModule.useEffect(function() --[[ Line: 345 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult7 (copy), UserInputService (upval), UseResult3 (copy), UseStateResult2_6 (copy)
 		if UseStateResult7 then
 			UseStateResult7:Disconnect()
 		end
-		UseStateResult2_6((UserInputService.InputEnded:Connect(function(Input) --[[ Line: 350 ]]
+		UseStateResult2_6((UserInputService.InputEnded:Connect(function(Input)
 			-- upvalues: UseResult3 (upval)
 			if Input.KeyCode == Enum.KeyCode.Escape then
 				UseResult3()
 			end
 		end)))
 	end, { UseResult3, UseStateResult2_6 })
-	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 359 ]]
+	local UseResult8 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_12 (copy)
 		UseStateResult2_12(nil)
 	end, {})
-	local UseResult9 = ReactModule.useCallback(function() --[[ Line: 366 ]]
+	local UseResult9 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_13 (copy), HttpService (upval), UseStateResult4 (copy), Text (upval), UseStateResult2_11 (copy), UseStateResult2_12 (copy), UseStateResult2_2 (copy), ConstantsModule (upval)
 		UseStateResult2_13(true)
 		HttpService:RequestInternal({
@@ -293,7 +293,7 @@ return function(p1) --[[ Line: 55 ]]
 				universe_id = game.GameId,
 				contents = {}
 			})
-		}):Start(function(_, p3) --[[ Line: 385 ]]
+		}):Start(function(_, p3)
 			-- upvalues: UseStateResult2_13 (upval), HttpService (upval), UseStateResult2_11 (upval), UseStateResult2_12 (upval), UseStateResult2_2 (upval), ConstantsModule (upval)
 			UseStateResult2_13(false)
 			
@@ -323,7 +323,7 @@ return function(p1) --[[ Line: 55 ]]
 		next = "CommonUI.Controls.Action.Continue",
 		coachmarkTitle = "Feature.ReportAbuse.Label.CantSelectTitle",
 		coachmarkText = "Feature.ReportAbuse.Label.CantSelectSubtitle"
-	})(function(p3) --[[ Line: 413 ]]
+	})(function(p3)
 		-- upvalues: ReactModule (upval), UseResult7 (copy), IsSmallPortraitMode (copy), ReportPreciseSelectionPortraitHeaderFooterModule (upval), UseResult3 (copy), ReportPreciseSelectionLandscapeHeaderModule (upval), UseResult2 (copy), UseStateResult10 (copy), UseResult (copy), UseStateResult (copy), InGameAssetReportSubmitDialogModule (upval), ViewportSize (copy), UseResult4 (copy), UseResult5 (copy), UseReducerResult2 (copy), FFlagPrefillPreciseSelectionChoices (upval), UseStateResult5 (copy), UseStateResult1 (copy), InGameAssetReportCompleteModalModule (upval), UseResult6 (copy), UseStateResult3 (copy), InGameAssetReportIPInfringementModalModule (upval), UseStateResult12 (copy), UseStateResult13 (copy), InGameAssetIPInfringementErrorModalModule (upval), UseResult8 (copy), UseResult9 (copy), UseStateResult14 (copy)
 		return ReactModule.createElement("Frame", {
 			Size = UDim2.new(1, 0, 1, 0),

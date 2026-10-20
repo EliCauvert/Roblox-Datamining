@@ -7,7 +7,7 @@ local _ = require(CurrencyTransfers.Enums.TransferOrigination)
 local _ = require(CurrencyTransfers.Models.ErrorTransferModel)
 local _ = require(CurrencyTransfers.Enums.TransferRetryOrigin)
 
-return function() --[[ Line: 77 ]]
+return function()
 	-- upvalues: SignalsModule (copy), PromptStateModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(PromptStateModule.Unspecified)
 	local Signal1, Signal2_1 = SignalsModule.createSignal(nil)
@@ -79,32 +79,32 @@ return function() --[[ Line: 77 ]]
 		setMinimumTransferAmount = Signal2_19,
 		getMaximumTransferAmount = Signal21,
 		setMaximumTransferAmount = Signal2_20,
-		setOnClose = function(Value) --[[ Line: 106 ]]
+		setOnClose = function(Value)
 			-- upvalues: Callback (ref)
 			Callback = Value
 		end,
-		triggerOnClose = function() --[[ Line: 110 ]]
+		triggerOnClose = function()
 			-- upvalues: Callback (ref)
 			if Callback then
 				Callback()
 			end
 		end,
-		setOnPromptOptimisticHide = function(Value) --[[ Line: 116 ]]
+		setOnPromptOptimisticHide = function(Value)
 			-- upvalues: Callback1 (ref)
 			Callback1 = Value
 		end,
-		triggerOnPromptOptimisticHide = function() --[[ Line: 120 ]]
+		triggerOnPromptOptimisticHide = function()
 			-- upvalues: Callback1 (ref)
 			if Callback1 then
 				Callback1()
 			end
 		end,
-		setOnPromptDismissCommitted = function(Value) --[[ Line: 126 ]]
+		setOnPromptDismissCommitted = function(Value)
 			-- upvalues: Callback2 (ref), Flag (ref)
 			Callback2 = Value
 			Flag = false
 		end,
-		triggerOnPromptDismissCommitted = function() --[[ Line: 131 ]]
+		triggerOnPromptDismissCommitted = function()
 			-- upvalues: Flag (ref), Callback2 (ref)
 			if not Flag and Callback2 ~= nil then
 				Flag = true
@@ -113,11 +113,11 @@ return function() --[[ Line: 77 ]]
 				return
 			end
 		end,
-		getNetworkImpl = function() --[[ Line: 145 ]]
+		getNetworkImpl = function()
 			-- upvalues: NetworkImpl (ref)
 			return NetworkImpl
 		end,
-		setNetworkImpl = function(Value) --[[ Line: 142 ]]
+		setNetworkImpl = function(Value)
 			-- upvalues: NetworkImpl (ref)
 			NetworkImpl = Value
 		end

@@ -8,7 +8,7 @@ local UseStyleFunction = require(CorePackages.Packages.UIBlox).Core.Style.useSty
 local NameTextBoxModule = require(script.Parent.NameTextBox)
 local config = { textBoxHeight = 30, topPadding = 0 }
 
-return function(p1) --[[ Line: 46 | Named "LabeledTextBox" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), NameTextBoxModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseStyleResult = UseStyleFunction()

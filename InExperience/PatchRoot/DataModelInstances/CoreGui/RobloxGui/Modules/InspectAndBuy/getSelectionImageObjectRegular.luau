@@ -1,6 +1,6 @@
 ﻿local ColorsModule = require(script.Parent.Colors)
 
-return function() --[[ Line: 4 | Named "getSelectionImageObjectRegular" ]]
+return function()
 	-- upvalues: ColorsModule (copy)
 	local Image = Instance.new("ImageLabel")
 	Image.Image = "rbxasset://textures/ui/InspectMenu/selection_regular.png"

@@ -8,9 +8,9 @@ local ExpChatCrossAgeChatActivityIXPLayerValue = game:DefineFastString("ExpChatC
 local v1 = nil
 local v2 = nil
 
-local function fetchIXPData() --[[ Line: 21 ]]
+local function fetchIXPData()
 	-- upvalues: v1 (ref), v2 (ref), IXPServiceWrapperModule (copy), ExpChatCrossAgeChatActivityIXPLayerName (copy), ExpChatCrossAgeChatActivityIXPLayerValue (copy)
-	v1, v8 = pcall(function() --[[ Line: 22 ]]
+	v1, v8 = pcall(function()
 		-- upvalues: IXPServiceWrapperModule (upval), ExpChatCrossAgeChatActivityIXPLayerName (upval)
 		return IXPServiceWrapperModule:GetLayerData(ExpChatCrossAgeChatActivityIXPLayerName)
 	end)
@@ -24,7 +24,7 @@ local function fetchIXPData() --[[ Line: 21 ]]
 	end
 end
 
-return function() --[[ Line: 35 ]]
+return function()
 	-- upvalues: FFlagExpChatUseGuacForCrossAgeChat (copy), UniversalAppPolicyModule (ref), v1 (ref), v2 (ref), ExpChatCrossAgeChatActivityIXPLayerValue (copy), fetchIXPData (copy)
 	return if FFlagExpChatUseGuacForCrossAgeChat and UniversalAppPolicyModule.getAppFeaturePolicies().getShowCrossAgeChat() then if v1 and v2 then v2[ExpChatCrossAgeChatActivityIXPLayerValue] else fetchIXPData() else false
 end

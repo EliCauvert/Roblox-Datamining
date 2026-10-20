@@ -6,11 +6,11 @@ local _ = require(Parent.cache)
 local config = { __value = "nil placeholder" }
 
 return {
-	useReactiveVar = function(Callback) --[[ Line: 25 ]]
+	useReactiveVar = function(Callback)
 		-- upvalues: UseStateFunction (copy), UseEffectFunction (copy), config (copy)
 		local CallbackResult = Callback()
 		local _, UseStateResult2 = UseStateFunction(CallbackResult)
-		UseEffectFunction(function() --[[ Line: 34 ]]
+		UseEffectFunction(function()
 			-- upvalues: Callback (copy), CallbackResult (copy), UseStateResult2 (copy)
 			local CallbackResult1 = Callback()
 			

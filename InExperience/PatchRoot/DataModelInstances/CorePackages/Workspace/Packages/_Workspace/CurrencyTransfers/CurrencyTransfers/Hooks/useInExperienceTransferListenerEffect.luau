@@ -10,14 +10,14 @@ local TransferDirectionModule = require(CurrencyTransfers.Enums.TransferDirectio
 local TransferOriginationModule = require(CurrencyTransfers.Enums.TransferOrigination)
 local _ = require(CurrencyTransfers.Flows.InExperienceTransferFlow)
 
-return function(Callback) --[[ Line: 19 | Named "useInExperienceTransferListenerEffect" ]]
+return function(Callback)
 	-- upvalues: ReactModule (copy), MarketplaceService (copy), Players (copy), HttpService (copy), LoggingProtocolModule (copy), CurrencyTransferTelemetryModule (copy), TransferDirectionModule (copy), TransferOriginationModule (copy)
-	ReactModule.useEffect(function() --[[ Line: 20 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: MarketplaceService (upval), Players (upval), HttpService (upval), LoggingProtocolModule (upval), CurrencyTransferTelemetryModule (upval), TransferDirectionModule (upval), TransferOriginationModule (upval), Callback (copy)
-		local PromptRobuxTransferRequestedConnection = MarketplaceService.PromptRobuxTransferRequested:Connect(function(Player, JsonResponse) --[[ Line: 22 ]]
+		local PromptRobuxTransferRequestedConnection = MarketplaceService.PromptRobuxTransferRequested:Connect(function(Player, JsonResponse)
 			-- upvalues: Players (upval), HttpService (upval), LoggingProtocolModule (upval), CurrencyTransferTelemetryModule (upval), TransferDirectionModule (upval), TransferOriginationModule (upval), Callback (upval)
 			if Player == Players.LocalPlayer then
-				local Success, Result = pcall(function() --[[ Line: 24 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: HttpService (upval), JsonResponse (copy)
 					return HttpService:JSONDecode(JsonResponse)
 				end)
@@ -35,7 +35,7 @@ return function(Callback) --[[ Line: 19 | Named "useInExperienceTransferListener
 			end
 		end)
 		
-		return function() --[[ Line: 47 ]]
+		return function()
 			-- upvalues: PromptRobuxTransferRequestedConnection (ref)
 			if PromptRobuxTransferRequestedConnection then
 				PromptRobuxTransferRequestedConnection:Disconnect()

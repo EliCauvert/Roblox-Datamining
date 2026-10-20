@@ -25,29 +25,29 @@ local config2 = {
 	springOptions = { frequency = 4, damping = 1 }
 }
 
-local function selectCurrentMessage(p1) --[[ Line: 49 ]]
+local function selectCurrentMessage(p1)
 	return p1.currentToastMessages[1]
 end
 
-return function(p1) --[[ Line: 53 | Named "Toast" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config2 (copy), UseDispatchFunction (copy), UseSelectorFunction (copy), selectCurrentMessage (copy), UseStyleFunction (copy), ReactModule (copy), ToastRoduxModule (copy), ToastType (copy), config1 (copy), Toast (copy)
 	local JoinResult = CryoModule.Dictionary.join(config2, p1)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseSelectorResult = UseSelectorFunction(selectCurrentMessage)
 	local Tokens = UseStyleFunction().Tokens
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 61 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseDispatchResult (copy), ToastRoduxModule (upval)
 		UseDispatchResult(ToastRoduxModule.Actions.RemoveCurrentToastMessage())
 	end, { UseDispatchResult })
 	
-	local function v18() --[[ Line: 66 ]]
+	local function v18()
 		-- upvalues: UseSelectorResult (copy), UseResult (copy)
 		if UseSelectorResult then
 			UseResult()
 		end
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 73 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSelectorResult (copy), UseResult (copy)
 		if UseSelectorResult and (not next(UseSelectorResult) or not UseSelectorResult.toastTitle) then
 			UseResult()

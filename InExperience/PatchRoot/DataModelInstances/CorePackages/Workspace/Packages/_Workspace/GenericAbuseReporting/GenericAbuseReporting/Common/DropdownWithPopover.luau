@@ -22,7 +22,7 @@ local View = FoundationModule.View
 local SideModalDropdownButtonModule = require(GenericAbuseReporting.Common.SideModalDropdownButton)
 local UseScrollbarOffsetModule = require(GenericAbuseReporting.Common.useScrollbarOffset)
 
-return ReactModule.memo(function(p1) --[[ Line: 44 | Named "DropdownWithPopover" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseLayerCollectorFunction (copy), UseTokensFunction (copy), ReactModule (copy), UseScrollbarOffsetModule (copy), ReactFocusNavigationModule (copy), CoreGui (copy), View (copy), Text (copy), OverlayProvider (copy), Popover (copy), SideModalDropdownButtonModule (copy), PopoverAlign (copy), PopoverSide (copy), AppFocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), ScrollView (copy), ScrollBarVisibility (copy)
 	local UseLayerCollectorResult = UseLayerCollectorFunction()
 	local UseTokensResult = UseTokensFunction()
@@ -37,7 +37,7 @@ return ReactModule.memo(function(p1) --[[ Line: 44 | Named "DropdownWithPopover"
 	local UseRefResult = ReactModule.useRef(nil)
 	local VRCentralOverlay = CoreGui:FindFirstChild("VRCentralOverlay")
 	local CentralOverlaySurfaceGui = if VRCentralOverlay then VRCentralOverlay:FindFirstChild("CentralOverlay_SurfaceGui") else nil
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 68 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: CentralOverlaySurfaceGui (copy), UseFocusGuiObjectResult (copy), UseRefResult (copy), UseStateResult2 (copy)
 		if not CentralOverlaySurfaceGui then
 			UseFocusGuiObjectResult(UseRefResult.current)
@@ -53,7 +53,7 @@ return ReactModule.memo(function(p1) --[[ Line: 44 | Named "DropdownWithPopover"
 		DropdownWithPopover = ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y",
 			ref = UseRefResult,
-			onAbsoluteSizeChanged = function(Frame) --[[ Line: 126 ]]
+			onAbsoluteSizeChanged = function(Frame)
 				-- upvalues: UseStateResult2_2 (copy)
 				UseStateResult2_2(Frame.AbsoluteSize)
 			end,
@@ -64,7 +64,7 @@ return ReactModule.memo(function(p1) --[[ Line: 44 | Named "DropdownWithPopover"
 					Size = UDim2.new(0, UseStateResult3.X, 0, UseStateResult3.Y)
 				}, {
 					DropdownButton = ReactModule.createElement(SideModalDropdownButtonModule, {
-						onActivated = ReactModule.useCallback(function() --[[ Line: 116 ]]
+						onActivated = ReactModule.useCallback(function()
 							-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
 							UseStateResult2(not UseStateResult)
 						end, { UseStateResult }),
@@ -96,11 +96,11 @@ return ReactModule.memo(function(p1) --[[ Line: 44 | Named "DropdownWithPopover"
 									ScrollingDirection = Enum.ScrollingDirection.Y,
 									scrollBarVisibility = ScrollBarVisibility.Always
 								},
-								onAbsoluteCanvasSizeChanged = function(ScrollFrame) --[[ Line: 194 ]]
+								onAbsoluteCanvasSizeChanged = function(ScrollFrame)
 									-- upvalues: UseStateResult2_4 (copy)
 									UseStateResult2_4(ScrollFrame.AbsoluteCanvasSize)
 								end,
-								onAbsoluteWindowSizeChanged = function(p2) --[[ Line: 197 ]]
+								onAbsoluteWindowSizeChanged = function(p2)
 									-- upvalues: UseStateResult2_5 (copy)
 									UseStateResult2_5(p2.AbsoluteWindowSize)
 								end
@@ -108,18 +108,18 @@ return ReactModule.memo(function(p1) --[[ Line: 44 | Named "DropdownWithPopover"
 								BaseMenu = ReactModule.createElement(View, {
 									tag = "auto-y col align-y-center gap-xsmall padding-xsmall",
 									Size = UDim2.new(0, UseStateResult3.X + UseTokensResult.Stroke.Standard * 2, 0, 0),
-									onAbsoluteSizeChanged = function(Frame) --[[ Line: 204 ]]
+									onAbsoluteSizeChanged = function(Frame)
 										-- upvalues: UseStateResult2_3 (copy)
 										UseStateResult2_3(Frame.AbsoluteSize)
 									end,
 									ref = ReactModule.useRef(nil)
-								}, (ReactModule.useMemo(function() --[[ Line: 76 ]]
+								}, (ReactModule.useMemo(function()
 									-- upvalues: p1 (copy), UseStateResult2_1 (copy), UseResult (copy), ReactModule (upval), View (upval), UseStateResult1 (copy), Text (upval)
 									local Elements = {}
 									
 									for _, cellData in ipairs(p1.cellDatas) do
 										table.insert(Elements, ReactModule.createElement(View, {
-											onActivated = function() --[[ Line: 79 ]]
+											onActivated = function()
 												-- upvalues: p1 (upval), cellData (copy), UseStateResult2_1 (upval), UseResult (upval)
 												p1.onChange(if cellData.value == nil then cellData.text else cellData.value)
 												UseStateResult2_1(cellData)

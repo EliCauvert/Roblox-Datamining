@@ -2,7 +2,7 @@
 local t = {}
 
 return {
-	add = function(Key, p1) --[[ Line: 11 ]]
+	add = function(Key, p1)
 		-- upvalues: t (ref)
 		local Entry = t[Key]
 		
@@ -12,7 +12,7 @@ return {
 		end
 		table.insert(Entry, p1)
 	end,
-	remove = function(Key, p1) --[[ Line: 21 ]]
+	remove = function(Key, p1)
 		-- upvalues: t (ref)
 		local Entry = t[Key]
 		
@@ -27,11 +27,11 @@ return {
 			t[Key] = nil
 		end
 	end,
-	clear = function() --[[ Line: 37 ]]
+	clear = function()
 		-- upvalues: t (ref)
 		t = {}
 	end,
-	snapshot = function() --[[ Line: 42 ]]
+	snapshot = function()
 		-- upvalues: t (ref)
 		if next(t) == nil then
 			return nil

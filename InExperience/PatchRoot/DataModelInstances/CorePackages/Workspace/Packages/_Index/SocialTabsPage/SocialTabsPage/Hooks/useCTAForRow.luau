@@ -7,16 +7,16 @@ local ButtonTypes = require(Parent.UserList).Enums.ButtonTypes
 local MapProfileCTAToRowCTAModule = require(SocialTabsPage.Utils.mapProfileCTAToRowCTA)
 local _ = require(SocialTabsPage.Common.Types)
 
-local function v7() --[[ Line: 27 ]]
+local function v7()
 	return nil
 end
 
-return function(p1, p2, p3, p4) --[[ Line: 31 | Named "useCTAForRow" ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: v7 (copy), UseSignalStateFunction (copy), ReactModule (copy), DataStatus (copy), MapProfileCTAToRowCTAModule (copy), ButtonTypes (copy)
 	local UseSignalStateResult = UseSignalStateFunction(if p1 then p1.data else v7)
 	local UseSignalStateResult1 = UseSignalStateFunction(if p1 then p1.status else v7)
 	
-	return ReactModule.useMemo(function() --[[ Line: 43 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult1 (copy), DataStatus (upval), MapProfileCTAToRowCTAModule (upval), UseSignalStateResult (copy), p2 (copy), p3 (copy), ButtonTypes (upval), p4 (copy)
 		if UseSignalStateResult1 == DataStatus.NotReady then
 			return nil
@@ -28,7 +28,7 @@ return function(p1, p2, p3, p4) --[[ Line: 31 | Named "useCTAForRow" ]]
 			
 			return {
 				type = MapProfileCTAToRowCTAModuleResult.type,
-				onActivated = function() --[[ Line: 54 ]]
+				onActivated = function()
 					-- upvalues: OnActivatedFunction (copy), p4 (upval)
 					if OnActivatedFunction then
 						OnActivatedFunction()

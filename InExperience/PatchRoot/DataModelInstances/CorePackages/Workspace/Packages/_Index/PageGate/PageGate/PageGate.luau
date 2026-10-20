@@ -1,13 +1,13 @@
 ﻿local SignalWithModule = require(script.Parent.signalWith)
 local config = {
-	isEnabled = function() --[[ Line: 28 ]]
+	isEnabled = function()
 		return game:GetEngineFeature("PageMilestoneSignalEnabled")
 	end,
-	getService = function() --[[ Line: 31 ]]
+	getService = function()
 		return game:GetService("AppLifecycleObserverService")
 	end,
 	resolveEnumItem = require(script.Parent.resolveEnumItem),
-	defer = function(Callback) --[[ Line: 35 ]]
+	defer = function(Callback)
 		task.defer(Callback)
 	end,
 	warn = warn
@@ -27,7 +27,7 @@ return {
 		FunctionallyReady = "FunctionallyReady",
 		SurfaceReady = "SurfaceReady"
 	},
-	signal = function(p1, p2) --[[ Line: 41 ]]
+	signal = function(p1, p2)
 		-- upvalues: SignalWithModule (copy), config (copy)
 		SignalWithModule(config, p1, p2)
 	end

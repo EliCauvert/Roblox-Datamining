@@ -2,7 +2,7 @@
 local _ = require(Parent.UnifiedLogging)
 local SduiErrors = require(Parent.SduiCoreSystem).SduiErrors
 
-return function(p1, p2, p3, Name): string --[[ Line: 13 | Named "getImpressionsTag" ]]
+return function(p1, p2, p3, Name): string
 	-- upvalues: SduiErrors (copy)
 	local CollectionId = nil
 	local CollectionComponentType = nil

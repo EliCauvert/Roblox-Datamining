@@ -10,13 +10,13 @@ local AppPage = require(Parent.RobloxAppEnums).AppPage
 local UseSduiContextFunction = ServerDrivenUiModule.useSduiContext
 local SduiComponent = ServerDrivenUiModule.SduiComponent
 
-return ReactModule.memo(function(p1) --[[ Line: 22 ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseRoactServiceFunction (copy), RoactServiceTagsModule (copy), UseSduiContextFunction (copy), AppPage (copy), ReactModule (copy), ReportModalImpressionModule (copy), SendModalImpressionEventFunction (copy), SduiComponent (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactServiceTagsModule.RoactNetworking)
 	local UseSduiContextResult = UseSduiContextFunction({ appPage = AppPage.Home, dataUpdatedTimestamp = os.time() })
 	local ModalId = p1.modalId
 	local ModalType = p1.modalType
-	ReactModule.useEffect(function() --[[ Line: 31 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ReportModalImpressionModule (upval), UseRoactServiceResult (copy), ModalId (copy), ModalType (copy), SendModalImpressionEventFunction (upval)
 		ReportModalImpressionModule(UseRoactServiceResult, ModalId, ModalType)
 		SendModalImpressionEventFunction(ModalId, ModalType)

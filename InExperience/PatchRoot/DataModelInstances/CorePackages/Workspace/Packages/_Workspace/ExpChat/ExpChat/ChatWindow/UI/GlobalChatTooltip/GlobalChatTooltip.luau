@@ -22,17 +22,17 @@ local FFlagExpChatGlobalTabDefaultModule = require(ExpChat.Flags.FFlagExpChatGlo
 local MinTabWidth = ConfigModule.ChannelTabsSettings.MinTabWidth
 local DropdownIconContainerWidth = ConfigModule.ChannelTabsSettings.DropdownIconContainerWidth
 
-local function useGlobalTabIndex() --[[ Line: 47 ]]
+local function useGlobalTabIndex()
 	-- upvalues: FFlagExpChatUseChannelTabsStore (copy), ReactModule (copy), SignalsModule (copy), GetChannelTabsStoreModule (copy), SignalsReactModule (copy), UseSelectorFunction (copy)
-	return if FFlagExpChatUseChannelTabsStore then SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 49 ]]
+	return if FFlagExpChatUseChannelTabsStore then SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), GetChannelTabsStoreModule (upval)
-		return SignalsModule.createComputed(function(p1) --[[ Line: 50 ]]
+		return SignalsModule.createComputed(function(p1)
 			-- upvalues: GetChannelTabsStoreModule (upval)
 			local RBXGlobal = GetChannelTabsStoreModule(false).getChannelTabsState(p1).allChannelTabs.RBXGlobal
 			
 			return if RBXGlobal then RBXGlobal.tabIndex else 2
 		end)
-	end, {}))) else UseSelectorFunction(function(p1) --[[ Line: 58 ]]
+	end, {}))) else UseSelectorFunction(function(p1)
 		local AllChannelTabs = p1.ChannelTabs and p1.ChannelTabs.allChannelTabs
 		local RBXGlobal = AllChannelTabs and AllChannelTabs.RBXGlobal
 		
@@ -40,11 +40,11 @@ local function useGlobalTabIndex() --[[ Line: 47 ]]
 	end)
 end
 
-local function useTabCount() --[[ Line: 65 ]]
+local function useTabCount()
 	-- upvalues: FFlagExpChatUseChannelTabsStore (copy), ReactModule (copy), SignalsModule (copy), GetChannelTabsStoreModule (copy), SignalsReactModule (copy), UseSelectorFunction (copy)
-	return if FFlagExpChatUseChannelTabsStore then SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 67 ]]
+	return if FFlagExpChatUseChannelTabsStore then SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), GetChannelTabsStoreModule (upval)
-		return SignalsModule.createComputed(function(p1): number --[[ Line: 68 ]]
+		return SignalsModule.createComputed(function(p1): number
 			-- upvalues: GetChannelTabsStoreModule (upval)
 			local Count = 0
 			
@@ -53,7 +53,7 @@ local function useTabCount() --[[ Line: 65 ]]
 			end
 			return Count
 		end)
-	end, {}))) else UseSelectorFunction(function(p1): number --[[ Line: 79 ]]
+	end, {}))) else UseSelectorFunction(function(p1): number
 		local AllChannelTabs = p1.ChannelTabs and p1.ChannelTabs.allChannelTabs
 		
 		if AllChannelTabs == nil then
@@ -68,7 +68,7 @@ local function useTabCount() --[[ Line: 65 ]]
 	end)
 end
 
-local function GlobalChatTooltipNew(p1) --[[ Line: 94 ]]
+local function GlobalChatTooltipNew(p1)
 	-- upvalues: GetChatTooltipStoreModule (copy), SignalsReactModule (copy), useTabCount (copy), ReactModule (copy), FFlagExpChatGlobalTabDefaultModule (copy), useGlobalTabIndex (copy), MinTabWidth (copy), DropdownIconContainerWidth (copy), UseSelectorFunction (copy), UseChatTooltipLifecycleModule (copy), LocalizationModule (copy), Coachmark (copy), PopoverSide (copy), PopoverAlign (copy), ConfigModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetChatTooltipStoreModule(false).getShouldShow("GlobalChatTooltip"))
 	local UseTabCountResult = useTabCount()
@@ -86,7 +86,7 @@ local function GlobalChatTooltipNew(p1) --[[ Line: 94 ]]
 	else
 		XScale = UseGlobalTabIndexResult / UseTabCountResult
 	end
-	local UseSelectorResult = UseSelectorFunction(function(p2): boolean --[[ Line: 137 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2): boolean
 		local Alignment = p2.ChatLayout and p2.ChatLayout.Alignment
 		
 		return Alignment ~= nil and (Alignment.AnchorPoint.X == 0 and Alignment.AnchorPoint.Y == 0)
@@ -101,7 +101,7 @@ local function GlobalChatTooltipNew(p1) --[[ Line: 94 ]]
 	})
 	
 	if p1.visible and UseSignalStateResult and UseSelectorResult then
-		local function onAnchorChanged(p2) --[[ Line: 156 ]]
+		local function onAnchorChanged(p2)
 			-- upvalues: UseStateResult2 (copy)
 			local Parent = p2.Parent
 			
@@ -133,7 +133,7 @@ local function GlobalChatTooltipNew(p1) --[[ Line: 94 ]]
 	end
 end
 
-local function GlobalChatTooltipLegacy(p1) --[[ Line: 194 ]]
+local function GlobalChatTooltipLegacy(p1)
 	-- upvalues: GetGlobalChatTooltipStoreModule (copy), GetTransparencyStoreModule (copy), SignalsReactModule (copy), useTabCount (copy), ReactModule (copy), FFlagExpChatGlobalTabDefaultModule (copy), useGlobalTabIndex (copy), MinTabWidth (copy), DropdownIconContainerWidth (copy), UseSelectorFunction (copy), IsUserChatEnabledModule (copy), ConfigModule (copy), LocalizationModule (copy), Coachmark (copy), PopoverSide (copy), PopoverAlign (copy)
 	local GlobalChatTooltipStoreModule = GetGlobalChatTooltipStoreModule(false)
 	local TransparencyStoreModule = GetTransparencyStoreModule(false)
@@ -156,7 +156,7 @@ local function GlobalChatTooltipLegacy(p1) --[[ Line: 194 ]]
 	else
 		XScale = UseGlobalTabIndexResult / UseTabCountResult
 	end
-	local UseSelectorResult = UseSelectorFunction(function(p2): boolean --[[ Line: 243 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2): boolean
 		local Alignment = p2.ChatLayout and p2.ChatLayout.Alignment
 		
 		return Alignment ~= nil and (Alignment.AnchorPoint.X == 0 and Alignment.AnchorPoint.Y == 0)
@@ -167,7 +167,7 @@ local function GlobalChatTooltipLegacy(p1) --[[ Line: 194 ]]
 	local UseRefResult = ReactModule.useRef(false)
 	local UseRefResult1 = ReactModule.useRef(0)
 	local UseRefResult2 = ReactModule.useRef(p1.targetTextChannel)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 257 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), GlobalChatTooltipStoreModule (copy)
 		if not UseRefResult.current then
 			UseRefResult.current = true
@@ -178,16 +178,16 @@ local function GlobalChatTooltipLegacy(p1) --[[ Line: 194 ]]
 		GlobalChatTooltipStoreModule.setIsGlobalChatTooltipDismissed,
 		GlobalChatTooltipStoreModule.reportImpression
 	})
-	ReactModule.useEffect(function() --[[ Line: 265 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: GlobalChatTooltipStoreModule (copy), p1 (copy)
 		GlobalChatTooltipStoreModule.setIsChatWindowOpen(p1.visible)
 		
-		return function() --[[ Line: 267 ]]
+		return function()
 			-- upvalues: GlobalChatTooltipStoreModule (upval)
 			GlobalChatTooltipStoreModule.setIsChatWindowOpen(false)
 		end
 	end, { p1.visible })
-	ReactModule.useEffect(function() --[[ Line: 272 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult3 (copy), UseStateResult2_1 (copy), ConfigModule (upval), UseSignalStateResult2 (copy)
 		if UseSignalStateResult3 then
 			UseStateResult2_1(true)
@@ -202,27 +202,27 @@ local function GlobalChatTooltipLegacy(p1) --[[ Line: 194 ]]
 			return nil
 		else
 			UseStateResult2_1(true)
-			local DelayedThread = task.delay(ChatWindowBackgroundFadeOutTimeDelta, function() --[[ Line: 286 ]]
+			local DelayedThread = task.delay(ChatWindowBackgroundFadeOutTimeDelta, function()
 				-- upvalues: UseStateResult2_1 (upval)
 				UseStateResult2_1(false)
 			end)
 			
-			return function() --[[ Line: 289 ]]
+			return function()
 				-- upvalues: DelayedThread (copy)
 				task.cancel(DelayedThread)
 			end
 		end
 	end, { UseSignalStateResult2, UseSignalStateResult3 })
-	ReactModule.useEffect(function() --[[ Line: 295 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult1 (copy), UseSignalStateResult1 (copy), UseStateResult3 (copy), UseSignalStateResult (copy), NoChatStatus (copy), UseRefResult1 (copy), UseStateResult2_2 (copy)
 		if UseStateResult1 and UseSignalStateResult1 and not UseStateResult3 and UseSignalStateResult and NoChatStatus then
 			local ClockTime = os.clock()
-			local DelayedThread = task.delay(math.max(0, 10 - UseRefResult1.current), function() --[[ Line: 302 ]]
+			local DelayedThread = task.delay(math.max(0, 10 - UseRefResult1.current), function()
 				-- upvalues: UseStateResult2_2 (upval)
 				UseStateResult2_2(true)
 			end)
 			
-			return function() --[[ Line: 305 ]]
+			return function()
 				-- upvalues: UseRefResult1 (upval), ClockTime (copy), DelayedThread (copy)
 				UseRefResult1.current += os.clock() - ClockTime
 				task.cancel(DelayedThread)
@@ -237,15 +237,15 @@ local function GlobalChatTooltipLegacy(p1) --[[ Line: 194 ]]
 		UseSignalStateResult,
 		NoChatStatus
 	})
-	ReactModule.useEffect(function() --[[ Line: 312 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult3 (copy), UseResult (copy)
 		if UseStateResult3 then
-			local DelayedThread = task.delay(1, function() --[[ Line: 316 ]]
+			local DelayedThread = task.delay(1, function()
 				-- upvalues: UseResult (upval)
 				UseResult()
 			end)
 			
-			return function() --[[ Line: 319 ]]
+			return function()
 				-- upvalues: DelayedThread (copy)
 				task.cancel(DelayedThread)
 			end
@@ -253,7 +253,7 @@ local function GlobalChatTooltipLegacy(p1) --[[ Line: 194 ]]
 			return nil
 		end
 	end, { UseStateResult3, UseResult })
-	ReactModule.useEffect(function() --[[ Line: 325 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult2 (copy), p1 (copy), UseSignalStateResult (copy), NoChatStatus (copy), UseStateResult3 (copy), UseStateResult2_2 (copy)
 		local Current = UseRefResult2.current
 		UseRefResult2.current = p1.targetTextChannel
@@ -273,7 +273,7 @@ local function GlobalChatTooltipLegacy(p1) --[[ Line: 194 ]]
 	})
 	
 	if p1.visible and UseSignalStateResult and UseSelectorResult then
-		local function onAnchorChanged(p2) --[[ Line: 346 ]]
+		local function onAnchorChanged(p2)
 			-- upvalues: UseStateResult2 (copy)
 			local Parent = p2.Parent
 			
@@ -305,7 +305,7 @@ local function GlobalChatTooltipLegacy(p1) --[[ Line: 194 ]]
 	end
 end
 
-return function(p1) --[[ Line: 382 | Named "GlobalChatTooltip" ]]
+return function(p1)
 	-- upvalues: FFlagExpChatUseUnifiedTooltipStore (copy), GlobalChatTooltipNew (copy), GlobalChatTooltipLegacy (copy)
 	return if FFlagExpChatUseUnifiedTooltipStore then GlobalChatTooltipNew(p1) else GlobalChatTooltipLegacy(p1)
 end

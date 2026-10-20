@@ -3,10 +3,10 @@ local ItemTypeModule = require(Gifting.Enums.ItemType)
 local _ = require(Gifting.Types)
 
 return {
-	buildItemGiftabilityKey = function(p1): string --[[ Line: 13 ]]
+	buildItemGiftabilityKey = function(p1): string
 		return `{p1.itemType}:{p1.itemId}`
 	end,
-	parseItemGiftabilityKey = function(Text: string) --[[ Line: 21 ]]
+	parseItemGiftabilityKey = function(Text: string)
 		-- upvalues: ItemTypeModule (copy)
 		local FoundAt: number? = string.find(Text, ":", 1, true)
 		

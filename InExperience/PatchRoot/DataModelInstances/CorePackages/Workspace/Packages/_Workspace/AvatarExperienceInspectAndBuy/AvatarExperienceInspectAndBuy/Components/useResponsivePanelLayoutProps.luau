@@ -22,15 +22,15 @@ local UseInspectPlayerModule = require(AvatarExperienceInspectAndBuy.Hooks.useIn
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local FormatNumberModule = require(AvatarExperienceInspectAndBuy.Utils.formatNumber)
 
-local function selectView(p1) --[[ Line: 50 ]]
+local function selectView(p1)
 	return p1.view
 end
 
-local function selectInspectPreviewDetails(p1) --[[ Line: 54 ]]
+local function selectInspectPreviewDetails(p1)
 	return p1.avatarPreviewDetails
 end
 
-local function _(Compact, p1): boolean --[[ Line: 65 | Named "shouldRenderSecondPanel" ]]
+local function _(Compact, p1): boolean
 	-- upvalues: ViewTypeModule (copy)
 	return Compact == ViewTypeModule.WideLandscape or (Compact == ViewTypeModule.Wide or Compact == ViewTypeModule.Compact) and not p1
 end
@@ -65,7 +65,7 @@ local config = {
 	}
 }
 
-return function(p1) --[[ Line: 127 ]]
+return function(p1)
 	-- upvalues: UseSelectorFunction (copy), selectView (copy), TutilsModule (copy), ViewTypeModule (copy), ReactModule (copy), selectInspectPreviewDetails (copy), UseRemoteBulkPurchaseEventModule (copy), UseInspectPlayerModule (copy), FormatNumberModule (copy), UseTokensFunction (copy), UseItemSelectionStoreFunction (copy), UseLocalizationFunction (copy), VerifiedBadgesModule (copy), UsePurchaseButtonPropsModule (copy), UseEventConnectionFunction (copy), MarketplaceService (copy), ItemDetailsLayoutModule (copy), AvatarItemsViewLayoutModule (copy), ViewportLayoutModule (copy), GetItemThumbnailUrlModule (copy), config (copy)
 	local UseSelectorResult = UseSelectorFunction(selectView, TutilsModule.deepEqual)
 	local IsUseSelectorResultMatch = UseSelectorResult == ViewTypeModule.WideLandscape
@@ -95,9 +95,9 @@ return function(p1) --[[ Line: 127 ]]
 			itemCount = #Items
 		} else nil
 	})
-	local UseResult = ReactModule.useCallback(function(TryOnItem) --[[ Line: 171 ]]
+	local UseResult = ReactModule.useCallback(function(TryOnItem)
 		-- upvalues: UseStateResult2_1 (copy), p1 (copy)
-		UseStateResult2_1(function(p2) --[[ Line: 172 ]]
+		UseStateResult2_1(function(p2)
 			-- upvalues: TryOnItem (copy), p1 (upval)
 			local TryOnItem1 = TryOnItem
 			local NoIsTryOnEnabled = not p2.isTryOnEnabled
@@ -124,31 +124,31 @@ return function(p1) --[[ Line: 127 ]]
 		onPromptPurchase = p1.onPromptPurchase
 	})
 	UseEventConnectionFunction(MarketplaceService.PromptBulkPurchaseFinished, p1.onBulkPurchaseFinished)
-	ReactModule.useEffect(function() --[[ Line: 211 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
 		if UseRefResult.current then
 			UseRefResult.current.CanvasPosition = Vector2.new(0, UseRefResult1.current)
 		end
 	end, { UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 218 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), p1 (copy)
 		if UseStateResult then
 			p1.onItemDetailsOpened(UseStateResult)
 		end
 	end, { UseStateResult, p1.onItemDetailsOpened })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 224 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseItemSelectionStoreResult (copy), p1 (copy)
 		UseItemSelectionStoreResult.clearAll()
 		p1.onInspectMenuClosed()
 	end, { UseItemSelectionStoreResult, p1.onInspectMenuClosed })
 	
-	local function v42() --[[ Line: 278 ]]
+	local function v42()
 		-- upvalues: ReactModule (upval), ViewportLayoutModule (upval), UseSelectorResult (copy), UseStateResult (copy), GetItemThumbnailUrlModule (upval), UseInspectPlayerModuleResult (copy), UseStateResult2 (copy), p1 (copy), IsUseSelectorResultMatch (copy), UsePurchaseButtonPropsModuleResult (copy), UseStateResult1 (copy), UseTokensResult (copy)
 		return ReactModule.createElement(ViewportLayoutModule, {
 			view = UseSelectorResult,
 			thumbnailUrl = if UseStateResult then GetItemThumbnailUrlModule(UseStateResult) or "" else "rbxthumb://type=Avatar&id=" .. tostring(UseInspectPlayerModuleResult.playerId) .. "&w=420&h=420",
 			backButtonProps = {
-				onBackButtonClick = if UseStateResult then function() --[[ Line: 286 ]]
+				onBackButtonClick = if UseStateResult then function()
 					-- upvalues: UseStateResult2 (upval)
 					UseStateResult2(nil)
 				end else p1.onInspectMenuClosed
@@ -175,13 +175,13 @@ return function(p1) --[[ Line: 127 ]]
 	
 	return {
 		view = UseSelectorResult,
-		renderFirstPanel = function() --[[ Line: 230 ]]
+		renderFirstPanel = function()
 			-- upvalues: UseStateResult (copy), ReactModule (upval), ItemDetailsLayoutModule (upval), UseSelectorResult (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), p1 (copy), ViewTypeModule (upval), UsePurchaseButtonPropsModuleResult (copy), UseResult (copy), UseStateResult1 (copy), FormatNumberModule (upval), AvatarItemsViewLayoutModule (upval), Items (copy), UseLocalizationResult (copy), UseResult1 (copy), UseRefResult (copy), UseRefResult1 (copy), FormatNumberModuleResult (copy)
 			return if UseStateResult then ReactModule.createElement(ItemDetailsLayoutModule, {
 				itemDetailsViewProps = {
 					view = UseSelectorResult,
 					item = UseStateResult,
-					onItemDetailsClosed = function() --[[ Line: 236 ]]
+					onItemDetailsClosed = function()
 						-- upvalues: UseStateResult2 (upval), UseStateResult2_1 (upval)
 						UseStateResult2(nil)
 						UseStateResult2_1({ isTryOnEnabled = false, tryOnItem = {} })
@@ -202,7 +202,7 @@ return function(p1) --[[ Line: 127 ]]
 				items = Items,
 				headerText = UseLocalizationResult.headerText,
 				onInspectMenuClosed = UseResult1,
-				onItemCardActivated = function(p2) --[[ Line: 262 ]]
+				onItemCardActivated = function(p2)
 					-- upvalues: UseRefResult (upval), UseRefResult1 (upval), UseStateResult2 (upval)
 					if UseRefResult.current then
 						UseRefResult1.current = UseRefResult.current.CanvasPosition.Y

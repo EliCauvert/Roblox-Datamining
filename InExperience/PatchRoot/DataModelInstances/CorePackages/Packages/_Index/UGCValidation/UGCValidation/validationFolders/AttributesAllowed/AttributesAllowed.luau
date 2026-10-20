@@ -25,7 +25,7 @@ if GetFFlagUGCValidateCurveAnimAttributesModule() then
 end
 AttributesAllowedModule.expectedFailures = {}
 
-local function hasOnlyAllowedAttribute(Attributes, p1, p2): boolean --[[ Line: 40 ]]
+local function hasOnlyAllowedAttribute(Attributes, p1, p2): boolean
 	-- upvalues: ConstantsModule (copy)
 	for i, attribute in Attributes do
 		if (not p1 or i ~= ConstantsModule.AlternateMeshIdAttributeName) and (not p2 or not p2[i]) then
@@ -43,7 +43,7 @@ local function hasOnlyAllowedAttribute(Attributes, p1, p2): boolean --[[ Line: 4
 	return true
 end
 
-local function _(p3, Object) --[[ Line: 69 | Named "reportInstanceWithDisallowedAttributes" ]]
+local function _(p3, Object)
 	-- upvalues: ErrorSourceStringsModule (copy)
 	p3:fail(ErrorSourceStringsModule.Keys.NoAttributes, {
 		RootInstanceName = Object.Name,
@@ -51,7 +51,7 @@ local function _(p3, Object) --[[ Line: 69 | Named "reportInstanceWithDisallowed
 	})
 end
 
-local function walkInstanceTree(p3, Object, IsConsumerEnvMatch, p4) --[[ Line: 77 ]]
+local function walkInstanceTree(p3, Object, IsConsumerEnvMatch, p4)
 	-- upvalues: hasOnlyAllowedAttribute (copy), ErrorSourceStringsModule (copy), ConstantsModule (copy)
 	if not hasOnlyAllowedAttribute(Object:GetAttributes(), IsConsumerEnvMatch, p4) then
 		p3:fail(ErrorSourceStringsModule.Keys.NoAttributes, {
@@ -69,7 +69,7 @@ local function walkInstanceTree(p3, Object, IsConsumerEnvMatch, p4) --[[ Line: 7
 	end
 end
 
-function AttributesAllowedModule.run(p5, p6) --[[ Line: 97 ]]
+function AttributesAllowedModule.run(p5, p6)
 	-- upvalues: ValidationEnumsModule (copy), walkInstanceTree (copy), GetFFlagUGCValidateR15FixedAttributesModule (copy), GetFFlagUGCValidateCurveAnimAttributesModule (copy), config (copy)
 	local IsConsumerEnvMatch = p6.consumerConfig.consumerEnv == ValidationEnumsModule.ConsumerEnv.IEC
 	walkInstanceTree(p5, p6.rootInstance, IsConsumerEnvMatch)

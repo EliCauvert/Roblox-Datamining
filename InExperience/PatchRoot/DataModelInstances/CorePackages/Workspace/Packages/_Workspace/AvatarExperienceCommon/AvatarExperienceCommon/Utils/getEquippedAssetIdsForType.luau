@@ -1,4 +1,4 @@
-﻿return function(p1, p2) --[[ Line: 1 ]]
+﻿return function(p1, p2)
 	local List = {}
 	
 	if not p1 then

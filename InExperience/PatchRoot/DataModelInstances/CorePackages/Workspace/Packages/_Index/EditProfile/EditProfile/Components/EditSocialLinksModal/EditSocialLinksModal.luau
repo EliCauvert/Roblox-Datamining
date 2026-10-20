@@ -21,7 +21,7 @@ local SocialNetworksInEditProfileIXPModule = require(EditProfile.Flags.SocialNet
 local FFlagEditProfileFixFocusNavigationModule = require(EditProfile.Flags.FFlagEditProfileFixFocusNavigation)
 local FocusNavigatorWrapperModule = require(EditProfile.Utils.FocusNavigatorWrapper)
 
-return function(p1) --[[ Line: 44 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ConstantsModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseNavigationPropsFunction (copy), SocialNetworksInEditProfileIXPModule (copy), UseStyleFunction (copy), UseScreenSizeFunction (copy), FFlagEditProfileFixFocusNavigationModule (copy), FocusNavigatorWrapperModule (copy), VerticalScrollView (copy), InteractiveAlert (copy), EditSocialNetworksItemModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), DropdownMenu (copy), ButtonType (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(p1.socialNetworks.facebook)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(p1.socialNetworks.twitter)
@@ -52,7 +52,7 @@ return function(p1) --[[ Line: 44 ]]
 		FriendsAndFollowing = TextKeysModule.FriendsAndFollowingDropDown,
 		VisibleTo = TextKeysModule.VisibleTo
 	})
-	local UseNavigationPropsResult = UseNavigationPropsFunction(function(_, p2) --[[ Line: 74 ]]
+	local UseNavigationPropsResult = UseNavigationPropsFunction(function(_, p2)
 		return { focusOn = p2.focusOn }
 	end)
 	local UseGetExperimentVariantResult = SocialNetworksInEditProfileIXPModule.useGetExperimentVariant({ isExposureEnabled = true })
@@ -62,12 +62,12 @@ return function(p1) --[[ Line: 44 ]]
 	local ScaledBaseSize = UseStyleResultFont.BaseSize * UseStyleResultFont.Body.RelativeSize
 	local UseScreenSizeResult = UseScreenSizeFunction()
 	
-	local function onSave() --[[ Line: 88 ]]
+	local function onSave()
 		-- upvalues: p1 (copy), UseStateResult6 (copy), UseStateResult (copy), UseStateResult1 (copy), UseStateResult3 (copy), UseStateResult4 (copy), UseStateResult5 (copy)
 		p1.saveOnActivated(UseStateResult6, UseStateResult, UseStateResult1, UseStateResult3, UseStateResult4, UseStateResult5)
 	end
 	
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 92 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_5 (copy)
 		UseStateResult2_5(p2)
 	end, {})
@@ -83,7 +83,7 @@ return function(p1) --[[ Line: 44 ]]
 				screenSize = UseScreenSizeResult,
 				anchorPoint = Vector2.new(0.5, 0),
 				position = UDim2.new(0.5, 0, 0, 30 + UseStateResult7),
-				middleContent = function() --[[ Line: 110 ]]
+				middleContent = function()
 					-- upvalues: ReactModule (upval), EditSocialNetworksItemModule (upval), UseStateResult2 (copy), UseLocalizationResult (copy), UseStateResult (copy), UseGetExperimentVariantResult (copy), SocialNetworksInEditProfileIXPModule (upval), UseNavigationPropsResult (copy), IsUseStateResultMatch (copy), UseStateResult2_6 (copy), UseStateResult2_1 (copy), UseStateResult1 (copy), UseStateResult2_2 (copy), UseStateResult3 (copy), UseStateResult2_3 (copy), UseStateResult4 (copy), UseStateResult2_4 (copy), UseStateResult5 (copy), FoundationFontFaceMigration (upval), UseStyleResultFont (copy), NormalizeFontFaceFunction (upval), UseStyleResult (copy), ScaledBaseSize (copy), Theme (copy), DropdownMenu (upval), UseStateResult6 (copy), UseResult (copy), UseScreenSizeResult (copy), ConstantsModule (upval)
 					return ReactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
@@ -236,7 +236,7 @@ return function(p1) --[[ Line: 44 ]]
 			screenSize = UseScreenSizeResult,
 			anchorPoint = Vector2.new(0.5, 0),
 			position = UDim2.new(0.5, 0, 0, 30 + UseStateResult7),
-			middleContent = function() --[[ Line: 296 ]]
+			middleContent = function()
 				-- upvalues: ReactModule (upval), EditSocialNetworksItemModule (upval), UseStateResult2 (copy), UseLocalizationResult (copy), UseStateResult (copy), UseGetExperimentVariantResult (copy), SocialNetworksInEditProfileIXPModule (upval), UseNavigationPropsResult (copy), IsUseStateResultMatch (copy), UseStateResult2_6 (copy), UseStateResult2_1 (copy), UseStateResult1 (copy), UseStateResult2_2 (copy), UseStateResult3 (copy), UseStateResult2_3 (copy), UseStateResult4 (copy), UseStateResult2_4 (copy), UseStateResult5 (copy), FoundationFontFaceMigration (upval), UseStyleResultFont (copy), NormalizeFontFaceFunction (upval), UseStyleResult (copy), ScaledBaseSize (copy), Theme (copy), DropdownMenu (upval), UseStateResult6 (copy), UseResult (copy), UseScreenSizeResult (copy), ConstantsModule (upval)
 				return ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,

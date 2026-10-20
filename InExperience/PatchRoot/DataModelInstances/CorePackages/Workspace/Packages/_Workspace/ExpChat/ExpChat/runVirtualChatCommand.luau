@@ -9,7 +9,7 @@ local FFlagExpChatReportVirtualCommandTelemetry = ExpChatSharedModule.Flags.FFla
 local Context = ExpChatSharedModule.context
 local NewResult = ExpChatSharedModule.Logger:new("ExpChat/" .. script.Name)
 
-return function(Text: string, p1, List, p2): boolean --[[ Line: 21 ]]
+return function(Text: string, p1, List, p2): boolean
 	-- upvalues: Context (copy), NewResult (copy), FFlagExpChatReportVirtualCommandTelemetry (copy), Analytics (copy), GetMessagesStoreModule (copy), FFlagExpChatUseChannelTabsStore (copy), GetChannelTabsStoreModule (copy)
 	if not Context.translator then
 		NewResult:warning("context.translator is nil, cannot execute command")
@@ -22,7 +22,7 @@ return function(Text: string, p1, List, p2): boolean --[[ Line: 21 ]]
 				if FFlagExpChatReportVirtualCommandTelemetry then
 					Analytics:reportTextChatCommandClientSent(value.name)
 				end
-				task.spawn(function() --[[ Line: 38 ]]
+				task.spawn(function()
 					-- upvalues: value (copy), Context (upval), p1 (copy), Text (copy), GetMessagesStoreModule (upval), p2 (copy), FFlagExpChatUseChannelTabsStore (upval), GetChannelTabsStoreModule (upval)
 					local ClientRunResult = value.clientRun(Context.store, p1, Text, Context)
 					

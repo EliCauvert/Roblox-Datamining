@@ -35,7 +35,7 @@ local config = {
 	localizedName = "United States"
 }
 
-local function CloseUpsell() --[[ Line: 117 ]] end
+local function CloseUpsell() end
 
 local config1 = {
 	origin = "",
@@ -51,33 +51,33 @@ local config1 = {
 	onCancelled = CloseUpsell,
 	onExtraButtonClick = CloseUpsell,
 	closeUpsell = CloseUpsell,
-	showWebpage = function(_) --[[ Line: 133 ]] end
+	showWebpage = function(_) end
 }
 
-return function(p1) --[[ Line: 136 | Named "usePhoneVerificationUpsellProps" ]]
+return function(p1)
 	-- upvalues: MergePropsModule (copy), config1 (copy), FFlagUseSignalsForCountryCodeList (copy), UseSignalStateFunction (copy), GetCountryCodeListStoreFunction (copy), UseSelectorFunction (copy), UseDispatchFunction (copy), SetPhoneNumberModule (copy), VerifyPhoneCodeModule (copy), ResendPhoneCodeModule (copy), SetIsPhoneVerifiedFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), RoactAnalyticsAuthEventsModule (copy), UseUserExperimentFunction (copy), GetFStringAndroidPhoneVerificationLayerFunction (copy), GetFStringIOSPhoneVerificationLayerFunction (copy), ReactModule (copy), PhoneVerificationUpsellStateModule (copy), config (copy), UseLocalizationFunction (copy), IdentityProtocol (copy), GetPrefixAndNationalNumberFromRawPhoneAndDefaultPrefixModule (copy), UserInputService (copy), GetFFlagAddMorePhoneUpsellEventsFunction (copy), EventStreamConstantsModule (copy), ConstantsModule (copy), DebounceModule (copy), GetFFlagPhoneUseParentSizeForScreenSizeModule (copy)
 	local MergePropsModuleResult = MergePropsModule(config1, p1)
-	local UseSignalStateResult = if FFlagUseSignalsForCountryCodeList then UseSignalStateFunction(GetCountryCodeListStoreFunction(false).getCountryCodeList) else UseSelectorFunction(function(p2) --[[ Line: 141 ]]
+	local UseSignalStateResult = if FFlagUseSignalsForCountryCodeList then UseSignalStateFunction(GetCountryCodeListStoreFunction(false).getCountryCodeList) else UseSelectorFunction(function(p2)
 		return p2.CountryCodeList
 	end)
 	local UseDispatchResult = UseDispatchFunction()
 	
-	local function _(p2, p3, p4, p5) --[[ Line: 146 ]]
+	local function _(p2, p3, p4, p5)
 		-- upvalues: UseDispatchResult (copy), SetPhoneNumberModule (upval)
 		return UseDispatchResult(SetPhoneNumberModule(p2, p3, p4, p5, nil))
 	end
 	
-	local _ = function(p2, p3) --[[ Line: 149 ]]
+	local _ = function(p2, p3)
 		-- upvalues: UseDispatchResult (copy), VerifyPhoneCodeModule (upval)
 		return UseDispatchResult(VerifyPhoneCodeModule(p2, p3))
 	end
 	
-	local _ = function(p2) --[[ Line: 152 ]]
+	local _ = function(p2)
 		-- upvalues: UseDispatchResult (copy), ResendPhoneCodeModule (upval)
 		return UseDispatchResult(ResendPhoneCodeModule(p2))
 	end
 	
-	local _ = function(p2) --[[ Line: 155 ]]
+	local _ = function(p2)
 		-- upvalues: UseDispatchResult (copy), SetIsPhoneVerifiedFunction (upval)
 		return UseDispatchResult(SetIsPhoneVerifiedFunction(p2))
 	end
@@ -87,7 +87,7 @@ return function(p1) --[[ Line: 136 | Named "usePhoneVerificationUpsellProps" ]]
 	local UseUserExperimentResult, UseUserExperimentResult2, UseUserExperimentResult3, UseUserExperimentResult4 = UseUserExperimentFunction({
 		GetFStringAndroidPhoneVerificationLayerFunction(),
 		GetFStringIOSPhoneVerificationLayerFunction()
-	}, function(p2) --[[ Line: 164 ]]
+	}, function(p2)
 		-- upvalues: GetFStringAndroidPhoneVerificationLayerFunction (upval), GetFStringIOSPhoneVerificationLayerFunction (upval)
 		local v1 = p2[GetFStringAndroidPhoneVerificationLayerFunction()] or {}
 		local v2 = p2[GetFStringIOSPhoneVerificationLayerFunction()] or {}
@@ -119,7 +119,7 @@ return function(p1) --[[ Line: 136 | Named "usePhoneVerificationUpsellProps" ]]
 		genericErrorKey = "Feature.VerificationUpsell.Response.ErrorTryAgain"
 	})
 	local Connection = nil
-	ReactModule.useEffect(function() --[[ Line: 205 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult4 (copy), UseSignalStateResult (copy), UseStateResult2_2 (copy), UseStateResult2_3 (copy)
 		if not UseStateResult4 and UseSignalStateResult and #UseSignalStateResult > 0 then
 			for _, value in UseSignalStateResult do
@@ -131,10 +131,10 @@ return function(p1) --[[ Line: 136 | Named "usePhoneVerificationUpsellProps" ]]
 		end
 	end, { UseSignalStateResult, UseStateResult4 })
 	
-	local _ = function() --[[ Line: 217 ]]
+	local _ = function()
 		-- upvalues: IdentityProtocol (upval), UseRoactServiceResult1 (copy), MergePropsModuleResult (copy), UseStateResult (copy), GetPrefixAndNationalNumberFromRawPhoneAndDefaultPrefixModule (upval), UseStateResult3 (copy), config (upval), UseStateResult2_1 (copy)
 		local Default = IdentityProtocol.default
-		Default:supportsGetPhoneNumber():andThen(function(Result) --[[ Line: 219 ]]
+		Default:supportsGetPhoneNumber():andThen(function(Result)
 			-- upvalues: UseRoactServiceResult1 (upval), MergePropsModuleResult (upval), UseStateResult (upval), Default (copy), GetPrefixAndNationalNumberFromRawPhoneAndDefaultPrefixModule (upval), UseStateResult3 (upval), config (upval), UseStateResult2_1 (upval)
 			print("PhoneVerification: Autofill phone number supported: {}!", Result)
 			
@@ -143,7 +143,7 @@ return function(p1) --[[ Line: 136 | Named "usePhoneVerificationUpsellProps" ]]
 			local PhoneNumber = Default:getPhoneNumber()
 			
 			if PhoneNumber then
-				PhoneNumber:andThen(function(Result) --[[ Line: 235 ]]
+				PhoneNumber:andThen(function(Result)
 					-- upvalues: GetPrefixAndNationalNumberFromRawPhoneAndDefaultPrefixModule (upval), UseStateResult3 (upval), config (upval), UseRoactServiceResult1 (upval), MergePropsModuleResult (upval), UseStateResult (upval), UseStateResult2_1 (upval)
 					if not Result or Result == "" then
 						UseRoactServiceResult1.reportModalActionWithSection(MergePropsModuleResult.eventContext, "phoneAutofillNull", "autofill", MergePropsModuleResult.origin, UseStateResult)
@@ -164,10 +164,10 @@ return function(p1) --[[ Line: 136 | Named "usePhoneVerificationUpsellProps" ]]
 		end)
 	end
 	
-	local _ = function() --[[ Line: 271 ]]
+	local _ = function()
 		-- upvalues: IdentityProtocol (upval), UseRoactServiceResult1 (copy), MergePropsModuleResult (copy), UseStateResult (copy), UseStateResult2_4 (copy), UseStateResult2_5 (copy)
 		local Default = IdentityProtocol.default
-		Default:supportsGetSMSOTP():andThen(function(Result) --[[ Line: 273 ]]
+		Default:supportsGetSMSOTP():andThen(function(Result)
 			-- upvalues: UseRoactServiceResult1 (upval), MergePropsModuleResult (upval), UseStateResult (upval), Default (copy), UseStateResult2_4 (upval), UseStateResult2_5 (upval)
 			print("PhoneVerification: Autofill OTP supported: {}!", Result)
 			
@@ -176,7 +176,7 @@ return function(p1) --[[ Line: 136 | Named "usePhoneVerificationUpsellProps" ]]
 				local SMSOTP = Default:getSMSOTP()
 				
 				if SMSOTP then
-					SMSOTP:andThen(function(Result) --[[ Line: 285 ]]
+					SMSOTP:andThen(function(Result)
 						-- upvalues: UseStateResult2_4 (upval), UseStateResult2_5 (upval), UseRoactServiceResult1 (upval), MergePropsModuleResult (upval), UseStateResult (upval)
 						if Result and Result ~= "" then
 							UseStateResult2_4(Result)
@@ -189,16 +189,16 @@ return function(p1) --[[ Line: 136 | Named "usePhoneVerificationUpsellProps" ]]
 		end)
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 303 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseStateResult10 (copy)
-		return function() --[[ Line: 304 ]]
+		return function()
 			-- upvalues: UseRefResult (upval), UseStateResult10 (upval)
 			UseRefResult.current = UseStateResult10
 		end
 	end, { UseStateResult10 })
-	ReactModule.useEffect(function() --[[ Line: 309 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Connection (ref), UserInputService (upval), UseStateResult2_10 (copy), UseStateResult2_11 (copy), UseRoactServiceResult1 (copy), MergePropsModuleResult (copy), GetFFlagAddMorePhoneUpsellEventsFunction (upval), UseStateResult (copy), PhoneVerificationUpsellStateModule (upval), UseUserExperimentResult (copy), IdentityProtocol (upval), GetPrefixAndNationalNumberFromRawPhoneAndDefaultPrefixModule (upval), UseStateResult3 (copy), config (upval), UseStateResult2_1 (copy), UseRefResult (copy)
-		Connection = UserInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(function() --[[ Line: 311 ]]
+		Connection = UserInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(function()
 			-- upvalues: UseStateResult2_10 (upval), UserInputService (upval), UseStateResult2_11 (upval)
 			UseStateResult2_10(UserInputService.OnScreenKeyboardVisible)
 			UseStateResult2_11(UserInputService.OnScreenKeyboardVisible and UserInputService.OnScreenKeyboardSize.Y or 0)
@@ -207,7 +207,7 @@ return function(p1) --[[ Line: 136 | Named "usePhoneVerificationUpsellProps" ]]
 		
 		if UseUserExperimentResult then
 			local Default = IdentityProtocol.default
-			Default:supportsGetPhoneNumber():andThen(function(Result) --[[ Line: 219 ]]
+			Default:supportsGetPhoneNumber():andThen(function(Result)
 				-- upvalues: UseRoactServiceResult1 (upval), MergePropsModuleResult (upval), UseStateResult (upval), Default (copy), GetPrefixAndNationalNumberFromRawPhoneAndDefaultPrefixModule (upval), UseStateResult3 (upval), config (upval), UseStateResult2_1 (upval)
 				print("PhoneVerification: Autofill phone number supported: {}!", Result)
 				
@@ -216,7 +216,7 @@ return function(p1) --[[ Line: 136 | Named "usePhoneVerificationUpsellProps" ]]
 				local PhoneNumber = Default:getPhoneNumber()
 				
 				if PhoneNumber then
-					PhoneNumber:andThen(function(Result) --[[ Line: 235 ]]
+					PhoneNumber:andThen(function(Result)
 						-- upvalues: GetPrefixAndNationalNumberFromRawPhoneAndDefaultPrefixModule (upval), UseStateResult3 (upval), config (upval), UseRoactServiceResult1 (upval), MergePropsModuleResult (upval), UseStateResult (upval), UseStateResult2_1 (upval)
 						if not Result or Result == "" then
 							UseRoactServiceResult1.reportModalActionWithSection(MergePropsModuleResult.eventContext, "phoneAutofillNull", "autofill", MergePropsModuleResult.origin, UseStateResult)
@@ -236,7 +236,7 @@ return function(p1) --[[ Line: 136 | Named "usePhoneVerificationUpsellProps" ]]
 				end
 			end)
 		end
-		return function() --[[ Line: 326 ]]
+		return function()
 			-- upvalues: Connection (upval), UseRefResult (upval), MergePropsModuleResult (upval)
 			if Connection then
 				Connection:Disconnect()
@@ -248,28 +248,28 @@ return function(p1) --[[ Line: 136 | Named "usePhoneVerificationUpsellProps" ]]
 			end
 		end
 	end, {})
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 337 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		return p2.ScreenSize
 	end)
 	
-	local function handleCloseClick() --[[ Line: 341 ]]
+	local function handleCloseClick()
 		-- upvalues: UseRoactServiceResult1 (copy), MergePropsModuleResult (copy), UseStateResult (copy)
 		UseRoactServiceResult1.reportModalDismissedWithSection(MergePropsModuleResult.eventContext, MergePropsModuleResult.origin, UseStateResult)
 		MergePropsModuleResult.closeUpsell()
 	end
 	
-	local _ = function(p2) --[[ Line: 346 | Named "handlePhoneErrors" ]]
+	local _ = function(p2)
 		-- upvalues: UseLocalizationResult (copy)
 		return if p2 == 2 then UseLocalizationResult.invalidPhoneFormatKey elseif p2 == 6 then UseLocalizationResult.tooManyAttemptsKey elseif p2 == 7 then UseLocalizationResult.invalidVerificationCodeKey elseif p2 == 8 then UseLocalizationResult.invalidPhoneNumberKey elseif p2 == 9 then UseLocalizationResult.tooManyAccountsKey else UseLocalizationResult.genericErrorKey
 	end
 	
-	local function handleSetPhone() --[[ Line: 362 ]]
+	local function handleSetPhone()
 		-- upvalues: UseStateResult2_9 (copy), UseRoactServiceResult (copy), UseStateResult3 (copy), UseStateResult1 (copy), UseDispatchResult (copy), SetPhoneNumberModule (upval), UseStateResult2 (copy), PhoneVerificationUpsellStateModule (upval), UseRoactServiceResult1 (copy), MergePropsModuleResult (copy), UseUserExperimentResult2 (copy), IdentityProtocol (upval), UseStateResult (copy), UseStateResult2_4 (copy), UseStateResult2_5 (copy), EventStreamConstantsModule (upval), UseStateResult2_6 (copy), UseLocalizationResult (copy)
 		UseStateResult2_9(true)
 		local UseDispatchResultResult = UseDispatchResult(SetPhoneNumberModule(UseRoactServiceResult, UseStateResult3.code, UseStateResult3.prefix, UseStateResult1, nil))
 		
 		if UseDispatchResultResult then
-			UseDispatchResultResult:andThen(function() --[[ Line: 367 ]]
+			UseDispatchResultResult:andThen(function()
 				-- upvalues: UseStateResult2 (upval), PhoneVerificationUpsellStateModule (upval), UseStateResult2_9 (upval), UseRoactServiceResult1 (upval), MergePropsModuleResult (upval), UseUserExperimentResult2 (upval), IdentityProtocol (upval), UseStateResult (upval), UseStateResult2_4 (upval), UseStateResult2_5 (upval)
 				UseStateResult2(PhoneVerificationUpsellStateModule.VerifyPhone)
 				UseStateResult2_9(false)
@@ -277,7 +277,7 @@ return function(p1) --[[ Line: 136 | Named "usePhoneVerificationUpsellProps" ]]
 				
 				if UseUserExperimentResult2 then
 					local Default = IdentityProtocol.default
-					Default:supportsGetSMSOTP():andThen(function(Result) --[[ Line: 273 ]]
+					Default:supportsGetSMSOTP():andThen(function(Result)
 						-- upvalues: UseRoactServiceResult1 (upval), MergePropsModuleResult (upval), UseStateResult (upval), Default (copy), UseStateResult2_4 (upval), UseStateResult2_5 (upval)
 						print("PhoneVerification: Autofill OTP supported: {}!", Result)
 						
@@ -286,7 +286,7 @@ return function(p1) --[[ Line: 136 | Named "usePhoneVerificationUpsellProps" ]]
 							local SMSOTP = Default:getSMSOTP()
 							
 							if SMSOTP then
-								SMSOTP:andThen(function(Result) --[[ Line: 285 ]]
+								SMSOTP:andThen(function(Result)
 									-- upvalues: UseStateResult2_4 (upval), UseStateResult2_5 (upval), UseRoactServiceResult1 (upval), MergePropsModuleResult (upval), UseStateResult (upval)
 									if Result and Result ~= "" then
 										UseStateResult2_4(Result)
@@ -298,7 +298,7 @@ return function(p1) --[[ Line: 136 | Named "usePhoneVerificationUpsellProps" ]]
 						end
 					end)
 				end
-			end):catch(function(Err) --[[ Line: 381 ]]
+			end):catch(function(Err)
 				-- upvalues: UseRoactServiceResult1 (upval), MergePropsModuleResult (upval), EventStreamConstantsModule (upval), PhoneVerificationUpsellStateModule (upval), UseStateResult2_6 (upval), UseLocalizationResult (upval), UseStateResult2_9 (upval)
 				if Err then
 					if Err.PhoneRegexFailed then
@@ -319,16 +319,16 @@ return function(p1) --[[ Line: 136 | Named "usePhoneVerificationUpsellProps" ]]
 		UseRoactServiceResult1.reportInteractWithActionAndSection(MergePropsModuleResult.eventContext, "", "", MergePropsModuleResult.origin, EventStreamConstantsModule.Button.Continue, PhoneVerificationUpsellStateModule.AddPhone)
 	end
 	
-	local function handleVerifyPhone() --[[ Line: 423 ]]
+	local function handleVerifyPhone()
 		-- upvalues: UseStateResult2_9 (copy), UseRoactServiceResult (copy), UseStateResult6 (copy), UseDispatchResult (copy), VerifyPhoneCodeModule (upval), UseStateResult2_8 (copy), UseRoactServiceResult1 (copy), MergePropsModuleResult (copy), EventStreamConstantsModule (upval), PhoneVerificationUpsellStateModule (upval), UseStateResult2_7 (copy), UseLocalizationResult (copy)
 		UseStateResult2_9(true)
 		local UseDispatchResultResult = UseDispatchResult(VerifyPhoneCodeModule(UseRoactServiceResult, UseStateResult6))
 		
 		if UseDispatchResultResult then
-			UseDispatchResultResult:andThen(function() --[[ Line: 428 ]]
+			UseDispatchResultResult:andThen(function()
 				-- upvalues: UseStateResult2_8 (upval)
 				UseStateResult2_8(true)
-			end):catch(function(Err) --[[ Line: 431 ]]
+			end):catch(function(Err)
 				-- upvalues: UseRoactServiceResult1 (upval), MergePropsModuleResult (upval), EventStreamConstantsModule (upval), PhoneVerificationUpsellStateModule (upval), UseStateResult2_7 (upval), UseLocalizationResult (upval), UseStateResult2_9 (upval)
 				if Err then
 					UseRoactServiceResult1.reportModalShownWithSectionAndError(MergePropsModuleResult.eventContext, EventStreamConstantsModule.Field.ErrorMessage, MergePropsModuleResult.origin, PhoneVerificationUpsellStateModule.VerifyPhone, Err.ErrorCode)
@@ -344,13 +344,13 @@ return function(p1) --[[ Line: 136 | Named "usePhoneVerificationUpsellProps" ]]
 		UseRoactServiceResult1.reportInteractWithActionAndSection(MergePropsModuleResult.eventContext, "", "", MergePropsModuleResult.origin, EventStreamConstantsModule.Button.AutoSubmit, PhoneVerificationUpsellStateModule.VerifyPhone)
 	end
 	
-	local function handleResendCode() --[[ Line: 464 ]]
+	local function handleResendCode()
 		-- upvalues: UseStateResult2_7 (copy), UseRoactServiceResult (copy), UseDispatchResult (copy), ResendPhoneCodeModule (upval), UseRoactServiceResult1 (copy), MergePropsModuleResult (copy), EventStreamConstantsModule (upval), PhoneVerificationUpsellStateModule (upval), UseLocalizationResult (copy)
 		UseStateResult2_7("")
 		local UseDispatchResultResult = UseDispatchResult(ResendPhoneCodeModule(UseRoactServiceResult))
 		
 		if UseDispatchResultResult then
-			UseDispatchResultResult:andThen(function() --[[ Line: 468 ]] end):catch(function(Err) --[[ Line: 468 ]]
+			UseDispatchResultResult:andThen(function() end):catch(function(Err)
 				-- upvalues: UseRoactServiceResult1 (upval), MergePropsModuleResult (upval), EventStreamConstantsModule (upval), PhoneVerificationUpsellStateModule (upval), UseStateResult2_7 (upval), UseLocalizationResult (upval)
 				if Err then
 					UseRoactServiceResult1.reportModalShownWithSectionAndError(MergePropsModuleResult.eventContext, EventStreamConstantsModule.Field.ErrorMessage, MergePropsModuleResult.origin, PhoneVerificationUpsellStateModule.VerifyPhone, Err.ErrorCode)
@@ -367,19 +367,19 @@ return function(p1) --[[ Line: 136 | Named "usePhoneVerificationUpsellProps" ]]
 		UseRoactServiceResult1.reportInteractWithActionAndSection(MergePropsModuleResult.eventContext, "", "", MergePropsModuleResult.origin, EventStreamConstantsModule.Button.ResendCode, PhoneVerificationUpsellStateModule.VerifyPhone)
 	end
 	
-	local function returnToAddPhone() --[[ Line: 500 ]]
+	local function returnToAddPhone()
 		-- upvalues: UseStateResult2 (copy), PhoneVerificationUpsellStateModule (upval), UseRoactServiceResult1 (copy), MergePropsModuleResult (copy), EventStreamConstantsModule (upval)
 		UseStateResult2(PhoneVerificationUpsellStateModule.AddPhone)
 		UseRoactServiceResult1.reportInteractWithActionAndSection(MergePropsModuleResult.eventContext, "", "", MergePropsModuleResult.origin, EventStreamConstantsModule.Button.ChangePhoneNumber, PhoneVerificationUpsellStateModule.VerifyPhone)
 	end
 	
-	local function proceedToAddPhone() --[[ Line: 512 ]]
+	local function proceedToAddPhone()
 		-- upvalues: UseStateResult2 (copy), PhoneVerificationUpsellStateModule (upval), UseRoactServiceResult1 (copy), MergePropsModuleResult (copy), EventStreamConstantsModule (upval)
 		UseStateResult2(PhoneVerificationUpsellStateModule.AddPhone)
 		UseRoactServiceResult1.reportInteractWithActionAndSection(MergePropsModuleResult.eventContext, "", "", MergePropsModuleResult.origin, EventStreamConstantsModule.Button.Continue, PhoneVerificationUpsellStateModule.Entry)
 	end
 	
-	local function navigateToSMSTerms() --[[ Line: 524 ]]
+	local function navigateToSMSTerms()
 		-- upvalues: UseStateResult11 (copy), UseRoactServiceResult1 (copy), MergePropsModuleResult (copy), EventStreamConstantsModule (upval), UseStateResult (copy), ConstantsModule (upval)
 		if not UseStateResult11 then
 			UseRoactServiceResult1.reportModalActionWithSection(MergePropsModuleResult.eventContext, EventStreamConstantsModule.Field.TermsOfService, "", MergePropsModuleResult.origin, UseStateResult)
@@ -387,7 +387,7 @@ return function(p1) --[[ Line: 136 | Named "usePhoneVerificationUpsellProps" ]]
 		end
 	end
 	
-	local function navigateToPrivacy() --[[ Line: 537 ]]
+	local function navigateToPrivacy()
 		-- upvalues: UseStateResult11 (copy), UseRoactServiceResult1 (copy), MergePropsModuleResult (copy), EventStreamConstantsModule (upval), UseStateResult (copy), ConstantsModule (upval)
 		if not UseStateResult11 then
 			UseRoactServiceResult1.reportModalActionWithSection(MergePropsModuleResult.eventContext, EventStreamConstantsModule.Field.PrivacyPolicy, "", MergePropsModuleResult.origin, UseStateResult)
@@ -395,7 +395,7 @@ return function(p1) --[[ Line: 136 | Named "usePhoneVerificationUpsellProps" ]]
 		end
 	end
 	
-	local function OnPhoneNumberTextChange(p2) --[[ Line: 551 ]]
+	local function OnPhoneNumberTextChange(p2)
 		-- upvalues: UseStateResult11 (copy), UseStateResult2_6 (copy), UseStateResult2_1 (copy)
 		if not UseStateResult11 then
 			UseStateResult2_6("")
@@ -403,18 +403,18 @@ return function(p1) --[[ Line: 136 | Named "usePhoneVerificationUpsellProps" ]]
 		end
 	end
 	
-	local function OnCountryCodeSelectorClick() --[[ Line: 558 ]]
+	local function OnCountryCodeSelectorClick()
 		-- upvalues: UseRoactServiceResult1 (copy), MergePropsModuleResult (copy), EventStreamConstantsModule (upval), PhoneVerificationUpsellStateModule (upval)
 		UseRoactServiceResult1.reportInteractWithActionAndSection(MergePropsModuleResult.eventContext, EventStreamConstantsModule.Field.CountryPrefix, EventStreamConstantsModule.ActionType.Focus, MergePropsModuleResult.origin, "", PhoneVerificationUpsellStateModule.AddPhone)
 	end
 	
-	local function OnPhoneInputFocus() --[[ Line: 569 ]]
+	local function OnPhoneInputFocus()
 		-- upvalues: UseRoactServiceResult1 (copy), MergePropsModuleResult (copy), EventStreamConstantsModule (upval), PhoneVerificationUpsellStateModule (upval), IdentityProtocol (upval), UseStateResult (copy), GetPrefixAndNationalNumberFromRawPhoneAndDefaultPrefixModule (upval), UseStateResult3 (copy), config (upval), UseStateResult2_1 (copy)
 		UseRoactServiceResult1.reportInteractWithActionAndSection(MergePropsModuleResult.eventContext, EventStreamConstantsModule.Field.PhoneNumber, EventStreamConstantsModule.ActionType.Focus, MergePropsModuleResult.origin, "", PhoneVerificationUpsellStateModule.AddPhone)
 		
 		if not MergePropsModuleResult.shouldAutofillAndroidPhoneNumberAtLaunch then
 			local Default = IdentityProtocol.default
-			Default:supportsGetPhoneNumber():andThen(function(Result) --[[ Line: 219 ]]
+			Default:supportsGetPhoneNumber():andThen(function(Result)
 				-- upvalues: UseRoactServiceResult1 (upval), MergePropsModuleResult (upval), UseStateResult (upval), Default (copy), GetPrefixAndNationalNumberFromRawPhoneAndDefaultPrefixModule (upval), UseStateResult3 (upval), config (upval), UseStateResult2_1 (upval)
 				print("PhoneVerification: Autofill phone number supported: {}!", Result)
 				
@@ -423,7 +423,7 @@ return function(p1) --[[ Line: 136 | Named "usePhoneVerificationUpsellProps" ]]
 				local PhoneNumber = Default:getPhoneNumber()
 				
 				if PhoneNumber then
-					PhoneNumber:andThen(function(Result) --[[ Line: 235 ]]
+					PhoneNumber:andThen(function(Result)
 						-- upvalues: GetPrefixAndNationalNumberFromRawPhoneAndDefaultPrefixModule (upval), UseStateResult3 (upval), config (upval), UseRoactServiceResult1 (upval), MergePropsModuleResult (upval), UseStateResult (upval), UseStateResult2_1 (upval)
 						if not Result or Result == "" then
 							UseRoactServiceResult1.reportModalActionWithSection(MergePropsModuleResult.eventContext, "phoneAutofillNull", "autofill", MergePropsModuleResult.origin, UseStateResult)
@@ -445,12 +445,12 @@ return function(p1) --[[ Line: 136 | Named "usePhoneVerificationUpsellProps" ]]
 		end
 	end
 	
-	local DebounceModuleResult = DebounceModule(function(p2) --[[ Line: 583 ]]
+	local DebounceModuleResult = DebounceModule(function(p2)
 		-- upvalues: UseStateResult2_5 (copy)
 		UseStateResult2_5(p2)
 	end, 0.5)
 	
-	local function OnCodeTextChange(p2) --[[ Line: 587 ]]
+	local function OnCodeTextChange(p2)
 		-- upvalues: UseStateResult5 (copy), UseStateResult2_7 (copy), UseStateResult2_4 (copy), DebounceModuleResult (copy)
 		local Segment = string.sub(p2.Text, 1, 6)
 		
@@ -461,18 +461,18 @@ return function(p1) --[[ Line: 136 | Named "usePhoneVerificationUpsellProps" ]]
 		DebounceModuleResult(Segment)
 	end
 	
-	local function OnCodeInputFocus() --[[ Line: 596 ]]
+	local function OnCodeInputFocus()
 		-- upvalues: UseRoactServiceResult1 (copy), MergePropsModuleResult (copy), EventStreamConstantsModule (upval), PhoneVerificationUpsellStateModule (upval)
 		UseRoactServiceResult1.reportInteractWithActionAndSection(MergePropsModuleResult.eventContext, EventStreamConstantsModule.Field.VerificationCode, EventStreamConstantsModule.ActionType.Focus, MergePropsModuleResult.origin, "", PhoneVerificationUpsellStateModule.VerifyPhone)
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 608 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult6 (copy), handleVerifyPhone (copy)
 		if string.len(UseStateResult6) == 6 then
 			handleVerifyPhone()
 		end
 	end, { UseStateResult6 })
-	ReactModule.useEffect(function() --[[ Line: 615 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult10 (copy), UseDispatchResult (copy), SetIsPhoneVerifiedFunction (upval), UseRoactServiceResult1 (copy), MergePropsModuleResult (copy), PhoneVerificationUpsellStateModule (upval)
 		if UseStateResult10 then
 			local _ = UseDispatchResult(SetIsPhoneVerifiedFunction({ isPhoneVerified = true }))

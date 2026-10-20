@@ -2,7 +2,7 @@
 local Array = LuauPolyfillModule.Array
 local String1 = LuauPolyfillModule.String
 
-function dedent(p1, ...) --[[ Line: 18 ]]
+function dedent(p1, ...)
 	-- upvalues: Array (copy)
 	local list = { ... }
 	local Text = ""
@@ -30,7 +30,7 @@ function dedent(p1, ...) --[[ Line: 18 ]]
 	return removeCommonIndent(RemoveTrailingSpacesAndTabsResult, Text1)
 end
 
-function removeLeadingNewLines(Text: string): string --[[ Line: 50 ]]
+function removeLeadingNewLines(Text: string): string
 	-- upvalues: String1 (copy)
 	local Or = String1.findOr(Text, { "\n*" })
 	
@@ -40,7 +40,7 @@ function removeLeadingNewLines(Text: string): string --[[ Line: 50 ]]
 	return Text
 end
 
-function removeTrailingSpacesAndTabs(Text: string): string --[[ Line: 59 ]]
+function removeTrailingSpacesAndTabs(Text: string): string
 	-- upvalues: String1 (copy)
 	local v1 = nil
 	local NewIndex = 1
@@ -58,7 +58,7 @@ function removeTrailingSpacesAndTabs(Text: string): string --[[ Line: 59 ]]
 	return if v1 == nil or v1.index + string.len(v1.match) ~= string.len(Text) + 1 then Text else string.sub(Text, 1, v1.index - 1)
 end
 
-function removeCommonIndent(Text: string, Pattern): string --[[ Line: 90 ]]
+function removeCommonIndent(Text: string, Pattern): string
 	return (string.gsub(string.gsub(Text, Pattern, "", 1), "\n" .. Pattern, "\n"))
 end
 

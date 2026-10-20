@@ -5,13 +5,13 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local ConfigModule = require(ExpChat.Config)
 local ParentModule = require(script.Parent)
 
-return function() --[[ Line: 12 | Named "useIsChatBackgroundVisible" ]]
+return function()
 	-- upvalues: ParentModule (copy), SignalsReactModule (copy), ReactModule (copy), ConfigModule (copy)
 	local ParentModuleResult = ParentModule(false)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(ParentModuleResult.getIsFocused or ParentModuleResult.getIsTextBoxFocused)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(ParentModuleResult.getLastActivity)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
-	ReactModule.useEffect(function() --[[ Line: 20 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult (copy), UseStateResult2 (copy), ConfigModule (upval), UseSignalStateResult1 (copy)
 		if UseSignalStateResult then
 			UseStateResult2(true)
@@ -26,12 +26,12 @@ return function() --[[ Line: 12 | Named "useIsChatBackgroundVisible" ]]
 			return nil
 		else
 			UseStateResult2(true)
-			local DelayedThread = task.delay(ChatWindowBackgroundFadeOutTimeDelta, function() --[[ Line: 32 ]]
+			local DelayedThread = task.delay(ChatWindowBackgroundFadeOutTimeDelta, function()
 				-- upvalues: UseStateResult2 (upval)
 				UseStateResult2(false)
 			end)
 			
-			return function() --[[ Line: 35 ]]
+			return function()
 				-- upvalues: DelayedThread (copy)
 				pcall(task.cancel, DelayedThread)
 			end

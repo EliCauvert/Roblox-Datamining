@@ -13,17 +13,17 @@ local config = {
 	showLess = "Feature.Moments.Action.CommentShowLess"
 }
 
-return function(Text: string, p1) --[[ Line: 49 | Named "useCommentBodyClamp" ]]
+return function(Text: string, p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), config (copy), ReactModule (copy), EscapeRichTextModule (copy), TruncateCommentTextModule (copy), RunService (copy), IsPointInGuiObjectBoundsFunction (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local ShowMore = UseLocalizationResult.showMore
 	local ShowLess = UseLocalizationResult.showLess
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 54 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseTokensResult (copy), EscapeRichTextModule (upval), ShowMore (copy), ShowLess (copy)
 		local Muted = UseTokensResult.Color.Content.Muted
 		
-		local function _(p2): string --[[ Line: 56 | Named "label" ]]
+		local function _(p2): string
 			-- upvalues: EscapeRichTextModule (upval), Muted (copy)
 			return `<font color="#{Muted.Color3:ToHex()}" transparency="{Muted.Transparency}"><b>{EscapeRichTextModule(p2)}</b></font>`
 		end
@@ -49,12 +49,12 @@ return function(Text: string, p1) --[[ Line: 49 | Named "useCommentBodyClamp" ]]
 	}
 	local UseRefResult4 = ReactModule.useRef(Current)
 	UseRefResult4.current = Current
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 96 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult1 (copy), UseRefResult4 (copy), UseRefResult2 (copy), UseRefResult3 (copy), UseStateResult2 (copy), TruncateCommentTextModule (upval)
 		local Current = UseRefResult1.current
 		
 		if Current == nil or not Current:IsDescendantOf(game) or Current.AbsoluteSize.X <= 0 then return end
-		local function measure(Text) --[[ Line: 103 ]]
+		local function measure(Text)
 			-- upvalues: Current (copy)
 			Current.Text = Text
 			
@@ -78,11 +78,11 @@ return function(Text: string, p1) --[[ Line: 49 | Named "useCommentBodyClamp" ]]
 		Current.Text = "M\nM\nM"
 	end, {})
 	local UseRefResult5 = ReactModule.useRef(false)
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 128 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult5 (copy), RunService (upval), UseRefResult (copy), UseRefResult3 (copy), UseRefResult4 (copy), UseRefResult2 (copy), UseResult (copy)
 		if not UseRefResult5.current then
 			UseRefResult5.current = true
-			RunService.Heartbeat:Once(function() --[[ Line: 133 ]]
+			RunService.Heartbeat:Once(function()
 				-- upvalues: UseRefResult5 (upval), UseRefResult (upval), UseRefResult3 (upval), UseRefResult4 (upval), UseRefResult2 (upval), UseResult (upval)
 				UseRefResult5.current = false
 				local Current = UseRefResult.current
@@ -97,31 +97,31 @@ return function(Text: string, p1) --[[ Line: 49 | Named "useCommentBodyClamp" ]]
 			return
 		end
 	end, { UseResult })
-	local UseResult2 = ReactModule.useCallback(function(_) --[[ Line: 151 ]]
+	local UseResult2 = ReactModule.useCallback(function(_)
 		-- upvalues: UseResult1 (copy)
 		UseResult1()
 	end, { UseResult1 })
-	ReactModule.useEffect(function() --[[ Line: 156 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), UseResult1 (copy)
 		local Current = UseRefResult1.current
 		
 		if Current == nil then
 			return nil
 		else
-			local AncestryChangedConnection = Current.AncestryChanged:Connect(function() --[[ Line: 161 ]]
+			local AncestryChangedConnection = Current.AncestryChanged:Connect(function()
 				-- upvalues: Current (copy), UseResult1 (upval)
 				if Current:IsDescendantOf(game) then
 					UseResult1()
 				end
 			end)
 			
-			return function() --[[ Line: 166 ]]
+			return function()
 				-- upvalues: AncestryChangedConnection (copy)
 				AncestryChangedConnection:Disconnect()
 			end
 		end
 	end, { UseResult1 })
-	ReactModule.useLayoutEffect(function() --[[ Line: 172 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseResult (copy)
 		UseResult()
 	end, { UseResult, Text, ShowMoreSuffix })
@@ -132,7 +132,7 @@ return function(Text: string, p1) --[[ Line: 49 | Named "useCommentBodyClamp" ]]
 		measureRef = UseRefResult1,
 		onBodyAbsoluteSizeChanged = UseResult2,
 		isTruncatable = HasCollapsedText,
-		containsPoint = ReactModule.useCallback(function(p2) --[[ Line: 176 ]]
+		containsPoint = ReactModule.useCallback(function(p2)
 			-- upvalues: IsPointInGuiObjectBoundsFunction (upval), UseRefResult (copy)
 			return IsPointInGuiObjectBoundsFunction(UseRefResult.current, p2)
 		end, {})

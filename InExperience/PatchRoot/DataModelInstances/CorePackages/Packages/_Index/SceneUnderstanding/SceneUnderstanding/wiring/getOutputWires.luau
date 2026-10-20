@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("SceneUnderstanding").wiring.types)
 
-return function(p1) --[[ Line: 7 | Named "getOutputWires" ]]
+return function(p1)
 	local List = {}
 	
 	for _, outputPin in p1:GetOutputPins() do

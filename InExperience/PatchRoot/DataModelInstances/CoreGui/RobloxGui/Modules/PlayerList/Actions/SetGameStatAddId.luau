@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.ActionCreator)("SetGameStatAddId", function(StatName, ServerAddId) --[[ Line: 4 ]]
+﻿return require(script.Parent.Parent.ActionCreator)("SetGameStatAddId", function(StatName, ServerAddId)
 	return { statName = StatName, serverAddId = ServerAddId }
 end)

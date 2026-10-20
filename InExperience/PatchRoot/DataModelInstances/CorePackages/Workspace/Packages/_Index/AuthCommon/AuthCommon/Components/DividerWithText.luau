@@ -6,7 +6,7 @@ local FoundationModule = require(Parent.Foundation)
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
-return function(p1) --[[ Line: 24 ]]
+return function(p1)
 	-- upvalues: FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), ReactModule (copy), NormalizeFontFaceFunction (copy)
 	local X = if FoundationFontFaceMigration then GetTextSizeFunction(p1.text, p1.fontSize, p1.font, Vector2.new(1e999, p1.fontSize), { addTemporaryPadding = false }).X else TextService:GetTextSize(p1.text, p1.fontSize, p1.font, Vector2.new(1e999, p1.fontSize)).X
 	

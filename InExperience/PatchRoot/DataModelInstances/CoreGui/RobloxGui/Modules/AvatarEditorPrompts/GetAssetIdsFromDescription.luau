@@ -4,7 +4,7 @@
 	"RightLeg", "RunAnimation", "Shirt", "SwimAnimation", "Torso", "WalkAnimation"
 }
 
-return function(Humanoid: Humanoid) --[[ Line: 23 ]]
+return function(Humanoid: Humanoid)
 	-- upvalues: list (copy)
 	local List = {}
 	

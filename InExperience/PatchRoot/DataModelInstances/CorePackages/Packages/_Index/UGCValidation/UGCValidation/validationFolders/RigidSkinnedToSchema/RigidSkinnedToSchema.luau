@@ -7,7 +7,7 @@ return {
 	fflag = require(Parent.flags.getEngineFeatureEngineUGCValidationConsolidateAccessorySkinning),
 	categories = { ValidationEnumsModule.UploadCategory.RIGID_ACCESSORY },
 	requiredData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
-	run = function(p1, p2) --[[ Line: 11 ]]
+	run = function(p1, p2)
 		-- upvalues: ErrorSourceStringsModule (copy)
 		local Handle = p2.renderMeshesData.Handle
 		

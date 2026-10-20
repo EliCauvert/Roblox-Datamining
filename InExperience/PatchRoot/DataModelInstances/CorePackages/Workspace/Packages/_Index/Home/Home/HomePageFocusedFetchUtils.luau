@@ -8,12 +8,12 @@ local HomeConstantsModule = require(Home.HomeConstants)
 local RequestIds = {}
 local RequestId = 0
 
-local function _() --[[ Line: 30 | Named "getMountedInputData" ]]
+local function _()
 	-- upvalues: GetSduiApiStoreFunction (copy), HomeConstantsModule (copy)
 	return GetSduiApiStoreFunction().getInputData(HomeConstantsModule.ConfigKey, HomeConstantsModule.ContentIdentifier)
 end
 
-local _ = function(p1): boolean --[[ Line: 34 | Named "isTargetMounted" ]]
+local _ = function(p1): boolean
 	-- upvalues: GetSduiApiStoreFunction (copy), HomeConstantsModule (copy)
 	local InputData = GetSduiApiStoreFunction().getInputData(HomeConstantsModule.ConfigKey, HomeConstantsModule.ContentIdentifier)
 	
@@ -21,7 +21,7 @@ local _ = function(p1): boolean --[[ Line: 34 | Named "isTargetMounted" ]]
 end
 
 local HomePageFocusedFetchUtils = {
-	isCurrent = function(p1): boolean --[[ Line: 41 ]]
+	isCurrent = function(p1): boolean
 		-- upvalues: GetSduiApiStoreFunction (copy), RequestIds (copy), HomeConstantsModule (copy)
 		local SduiApiStore = GetSduiApiStoreFunction()
 		local HasEntry = false
@@ -37,7 +37,7 @@ local HomePageFocusedFetchUtils = {
 		end
 		return HasEntry
 	end,
-	register = function(Options) --[[ Line: 48 ]]
+	register = function(Options)
 		-- upvalues: GetSduiApiStoreFunction (copy), HomeConstantsModule (copy), RequestId (ref), RequestIds (copy)
 		local DataUpdatedTimestamp = GetSduiApiStoreFunction().getDataUpdatedTimestamp(HomeConstantsModule.ConfigKey, false, HomeConstantsModule.FeedEntryCacheKey)
 		
@@ -61,12 +61,12 @@ local HomePageFocusedFetchUtils = {
 	end
 }
 
-function HomePageFocusedFetchUtils.applyToRequestConfig(p1, p2) --[[ Line: 65 ]]
+function HomePageFocusedFetchUtils.applyToRequestConfig(p1, p2)
 	-- upvalues: HomeConstantsModule (copy), SduiRequestConcurrencyPolicy (copy), HomePageFocusedFetchUtils (copy)
 	p1.concurrencyKey = `{HomeConstantsModule.ConfigKey}_{p2.options.feedItemKey}`
 	p1.concurrencyPolicy = SduiRequestConcurrencyPolicy.LatestWins
 	
-	function p1.isResponseCurrent() --[[ Line: 68 ]]
+	function p1.isResponseCurrent()
 		-- upvalues: HomePageFocusedFetchUtils (upval), p2 (copy)
 		return HomePageFocusedFetchUtils.isCurrent(p2)
 	end
@@ -74,7 +74,7 @@ function HomePageFocusedFetchUtils.applyToRequestConfig(p1, p2) --[[ Line: 65 ]]
 	p1.enableInputDataMerge = true
 	p1.cacheSingleEntryWithIdentifier = true
 	
-	function p1.mergeStrategy(Entry) --[[ Line: 73 ]]
+	function p1.mergeStrategy(Entry)
 		-- upvalues: p2 (copy)
 		if #Entry == 1 then
 			return if Entry[1] == "entry_map" then nil elseif Entry[1] == "content_pools" then "merge" else "preserve"
@@ -90,7 +90,7 @@ function HomePageFocusedFetchUtils.applyToRequestConfig(p1, p2) --[[ Line: 65 ]]
 	end
 end
 
-local _ = function(p1, p2, p3) --[[ Line: 91 | Named "reportError" ]]
+local _ = function(p1, p2, p3)
 	-- upvalues: HomeConstantsModule (copy)
 	p1.options.reportError(p2, {
 		name = HomeConstantsModule.ApiName,
@@ -98,9 +98,9 @@ local _ = function(p1, p2, p3) --[[ Line: 91 | Named "reportError" ]]
 	})
 end
 
-function HomePageFocusedFetchUtils.resolve(Promise, p1) --[[ Line: 98 ]]
+function HomePageFocusedFetchUtils.resolve(Promise, p1)
 	-- upvalues: HomePageFocusedFetchUtils (copy), SduiCoreSystemModule (copy), HomeConstantsModule (copy)
-	return Promise:andThen(function(): boolean --[[ Line: 99 ]]
+	return Promise:andThen(function(): boolean
 		-- upvalues: HomePageFocusedFetchUtils (upval), p1 (copy), SduiCoreSystemModule (upval), HomeConstantsModule (upval)
 		if not HomePageFocusedFetchUtils.isCurrent(p1) then
 			return false
@@ -114,7 +114,7 @@ function HomePageFocusedFetchUtils.resolve(Promise, p1) --[[ Line: 98 ]]
 			
 			return false
 		end
-	end, function(p2): boolean --[[ Line: 112 ]]
+	end, function(p2): boolean
 		-- upvalues: HomePageFocusedFetchUtils (upval), p1 (copy), SduiCoreSystemModule (upval), HomeConstantsModule (upval)
 		if HomePageFocusedFetchUtils.isCurrent(p1) then
 			p1.options.reportError(SduiCoreSystemModule.SduiErrors.SduiErrorType.FailedToFetchPage, {

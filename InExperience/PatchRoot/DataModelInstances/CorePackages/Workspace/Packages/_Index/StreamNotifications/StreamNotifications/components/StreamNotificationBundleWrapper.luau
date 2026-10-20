@@ -24,7 +24,7 @@ local EventStream = require(StreamNotifications.analytics.analyticsService).Even
 local AnalyticsConstantsModule = require(StreamNotifications.analytics.analyticsConstants)
 local config = { stiffness = 207, damping = 24, mass = 1 }
 
-return function(p1) --[[ Line: 58 ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), NormalizeFontFaceFunction (copy), ReactModule (copy), ReactOtterModule (copy), UseLocalizationFunction (copy), ConstantsModule (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy), config (copy), StreamNotificationAnimationWrapperModule (copy), _UDim (copy), _UDim1 (copy), ImageSetLabel (copy), _UDim2 (copy), IconsActionsTruncationCollapse (copy), ScaledDefaultPadding (copy), IconsActionsTruncationExpand (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseTokensResult = if FoundationFontFaceMigration then UseTokensFunction() else nil
@@ -40,14 +40,14 @@ return function(p1) --[[ Line: 58 ]]
 		moreText = ConstantsModule.Text.ShowMoreKey,
 		lessText = ConstantsModule.Text.ShowLessKey
 	})
-	local UseResult = ReactModule.useCallback(function(p2, p3) --[[ Line: 87 ]]
+	local UseResult = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: UseStateResult (copy), UseStateResult2_1 (copy)
 		if p2 == 1 and UseStateResult then
 			UseStateResult2_1(p3)
 		end
 	end)
 	
-	local function v37(Notifications) --[[ Line: 93 ]]
+	local function v37(Notifications)
 		local Ids = {}
 		
 		for _, notification in Notifications do
@@ -58,9 +58,9 @@ return function(p1) --[[ Line: 58 ]]
 		return Ids
 	end
 	
-	local function v38() --[[ Line: 103 ]]
+	local function v38()
 		-- upvalues: UseStateResult2 (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), p1 (copy), v37 (copy)
-		UseStateResult2(function(p2): boolean --[[ Line: 104 ]]
+		UseStateResult2(function(p2): boolean
 			-- upvalues: NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), p1 (upval), v37 (upval)
 			NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.click, if p2 then AnalyticsConstantsModule.EventNames.bundleOpened else AnalyticsConstantsModule.EventNames.bundleClosed, {
 				bundleKey = p1.notifications[1].content.bundleKey or nil,
@@ -83,19 +83,19 @@ return function(p1) --[[ Line: 58 ]]
 		end)
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 142 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseStateResult (copy), config (upval)
 		UseAnimatedBindingResult2({
 			shadowHeight = ReactOtterModule.spring(if UseStateResult then 0 else 1, config),
 			shadowWidth = ReactOtterModule.spring(if UseStateResult then 1 else 0, config)
 		})
 	end, { UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 150 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2_2 (copy), p1 (copy)
 		UseStateResult2_2(#p1.notifications > 1)
 	end, { p1.notifications })
 	
-	return (ReactModule.useMemo(function() --[[ Line: 155 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), UseStateResult (copy), UseStateResult3 (copy), ReactModule (upval), StreamNotificationAnimationWrapperModule (upval), UseResult (copy), UseAnimatedBindingResult (copy), UseStateResult1 (copy), ConstantsModule (upval), UseStyleResult (copy), _UDim (upval), HeaderFont (copy), NormalizeFontFaceResult (copy), FontSize (copy), v38 (copy), _UDim1 (upval), UseLocalizationResult (copy), ImageSetLabel (upval), _UDim2 (upval), IconsActionsTruncationCollapse (upval), ScaledDefaultPadding (upval), IconsActionsTruncationExpand (upval)
 		local Elements = {}
 		
@@ -129,7 +129,7 @@ return function(p1) --[[ Line: 58 ]]
 		Elements.Shadow1 = if UseStateResult and UseStateResult3 then ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			Size = UseAnimatedBindingResult:map(function(p2): UDim2 --[[ Line: 195 ]]
+			Size = UseAnimatedBindingResult:map(function(p2): UDim2
 				-- upvalues: UseStateResult1 (upval), ConstantsModule (upval)
 				return UDim2.new(1, 0, 0, p2.shadowHeight * UseStateResult1 + ConstantsModule.DefaultPadding)
 			end),
@@ -139,7 +139,7 @@ return function(p1) --[[ Line: 58 ]]
 			ReactModule.createElement("Frame", {
 				BackgroundTransparency = 0,
 				BorderSizePixel = 0,
-				Size = UseAnimatedBindingResult:map(function(p2): UDim2 --[[ Line: 204 ]]
+				Size = UseAnimatedBindingResult:map(function(p2): UDim2
 					-- upvalues: ConstantsModule (upval), UseStateResult1 (upval)
 					return UDim2.new(1, -(ConstantsModule.DefaultPadding * 4 * p2.shadowWidth), 0, UseStateResult1 - ConstantsModule.DefaultPadding)
 				end),
@@ -153,7 +153,7 @@ return function(p1) --[[ Line: 58 ]]
 		Elements.Shadow2 = if UseStateResult and UseStateResult3 then ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			Size = UseAnimatedBindingResult:map(function(p2): UDim2 --[[ Line: 229 ]]
+			Size = UseAnimatedBindingResult:map(function(p2): UDim2
 				-- upvalues: UseStateResult1 (upval), ConstantsModule (upval)
 				return UDim2.new(1, 0, 0, p2.shadowHeight * UseStateResult1 + ConstantsModule.DefaultPadding * 2)
 			end),
@@ -163,7 +163,7 @@ return function(p1) --[[ Line: 58 ]]
 			ReactModule.createElement("Frame", {
 				BackgroundTransparency = 0,
 				BorderSizePixel = 0,
-				Size = UseAnimatedBindingResult:map(function(p2): UDim2 --[[ Line: 238 ]]
+				Size = UseAnimatedBindingResult:map(function(p2): UDim2
 					-- upvalues: ConstantsModule (upval), UseStateResult1 (upval)
 					return UDim2.new(1, -(ConstantsModule.DefaultPadding * 6 * p2.shadowWidth), 0, UseStateResult1 - ConstantsModule.DefaultPadding)
 				end),

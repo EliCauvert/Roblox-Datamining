@@ -3,28 +3,28 @@ local MomentsLocalStorageModule = require(MomentsCommon.Storage.MomentsLocalStor
 local Players = game:GetService("Players")
 local CoachmarkImpressions = require(MomentsCommon.Storage.MomentsLocalStorageKeys).CoachmarkImpressions
 
-return function(p1) --[[ Line: 54 | Named "createCoachmarkImpressionCache" ]]
+return function(p1)
 	-- upvalues: Players (copy), MomentsLocalStorageModule (copy), CoachmarkImpressions (copy)
 	local DismissedValue = p1.dismissedValue
 	local CoachmarkId = p1.coachmarkId
 	local PlayersService = p1.PlayersService or Players
 	local LocalStorage = p1.localStorage or MomentsLocalStorageModule
 	
-	local function _() --[[ Line: 61 | Named "getLocalUserId" ]]
+	local function _()
 		-- upvalues: PlayersService (copy)
 		local LocalPlayer = PlayersService.LocalPlayer
 		
 		return if LocalPlayer and LocalPlayer.UserId and LocalPlayer.UserId > 0 then tostring(LocalPlayer.UserId) else nil
 	end
 	
-	local _ = function() --[[ Line: 69 | Named "getStoredObject" ]]
+	local _ = function()
 		-- upvalues: LocalStorage (copy), CoachmarkImpressions (upval)
 		local Field = LocalStorage.getField(CoachmarkImpressions)
 		
 		return if type(Field) == "table" then Field else {}
 	end
 	
-	local function setValue(DismissedValue) --[[ Line: 74 ]]
+	local function setValue(DismissedValue)
 		-- upvalues: PlayersService (copy), LocalStorage (copy), CoachmarkImpressions (upval), CoachmarkId (copy)
 		local LocalPlayer = PlayersService.LocalPlayer
 		local Text = if LocalPlayer and LocalPlayer.UserId and LocalPlayer.UserId > 0 then tostring(LocalPlayer.UserId) else nil
@@ -43,7 +43,7 @@ return function(p1) --[[ Line: 54 | Named "createCoachmarkImpressionCache" ]]
 	end
 	
 	return {
-		getValue = function() --[[ Line: 90 ]]
+		getValue = function()
 			-- upvalues: PlayersService (copy), DismissedValue (copy), LocalStorage (copy), CoachmarkImpressions (upval), CoachmarkId (copy)
 			local LocalPlayer = PlayersService.LocalPlayer
 			local Text = if LocalPlayer and LocalPlayer.UserId and LocalPlayer.UserId > 0 then tostring(LocalPlayer.UserId) else nil
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 54 | Named "createCoachmarkImpressionCache" ]]
 				return DismissedValue
 			end
 		end,
-		incrementValue = function() --[[ Line: 104 ]]
+		incrementValue = function()
 			-- upvalues: setValue (copy), PlayersService (copy), DismissedValue (copy), LocalStorage (copy), CoachmarkImpressions (upval), CoachmarkId (copy)
 			local LocalPlayer = PlayersService.LocalPlayer
 			local Text = if LocalPlayer and LocalPlayer.UserId and LocalPlayer.UserId > 0 then tostring(LocalPlayer.UserId) else nil
@@ -72,7 +72,7 @@ return function(p1) --[[ Line: 54 | Named "createCoachmarkImpressionCache" ]]
 			end
 			setValue(Number + 1)
 		end,
-		dismissValue = function() --[[ Line: 108 ]]
+		dismissValue = function()
 			-- upvalues: setValue (copy), DismissedValue (copy)
 			setValue(DismissedValue)
 		end

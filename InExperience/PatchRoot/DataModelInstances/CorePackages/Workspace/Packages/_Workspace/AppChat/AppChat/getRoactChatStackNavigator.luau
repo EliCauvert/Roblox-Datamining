@@ -16,7 +16,7 @@ local AppChatFixRootChatBackNavigationIxpLayer = game:DefineFastString("AppChatF
 local GetTopBarStoreModule = require(AppChat.Stores.GetTopBarStore)
 local _ = require(AppChat.types)
 
-local function getActiveChildParams(Route) --[[ Line: 28 ]]
+local function getActiveChildParams(Route)
 	-- upvalues: getActiveChildParams (copy)
 	local Index = Route.index
 	local Route1 = Route.routes and Route.routes[Index]
@@ -24,7 +24,7 @@ local function getActiveChildParams(Route) --[[ Line: 28 ]]
 	return if Route1 then getActiveChildParams(Route1) else Route.params
 end
 
-local function getActiveChildNavigationOptions(ChildNavigation) --[[ Line: 38 ]]
+local function getActiveChildNavigationOptions(ChildNavigation)
 	-- upvalues: getActiveChildNavigationOptions (copy), RoactNavigationModule (copy)
 	local State = ChildNavigation.state
 	local Index = State.index
@@ -33,17 +33,17 @@ local function getActiveChildNavigationOptions(ChildNavigation) --[[ Line: 38 ]]
 	return if Route and Route.routes then getActiveChildNavigationOptions((ChildNavigation.getChildNavigation(Route.key))) else RoactNavigationModule.getActiveChildNavigationOptions(ChildNavigation)
 end
 
-local function _(p1) --[[ Line: 51 | Named "getActiveConversationId" ]]
+local function _(p1)
 	return if p1 then if p1.conversation then p1.conversation.id else p1.conversationId else nil
 end
 
-local function RoactChatStackNavigatorWithFocusNavigation(p1) --[[ Line: 64 ]]
+local function RoactChatStackNavigatorWithFocusNavigation(p1)
 	-- upvalues: ReactModule (copy), InputHandlersModule (copy), ReactFocusNavigationModule (copy), FocusNavigationEventNameEnum (copy), RoactModule (copy)
 	return RoactModule.createFragment({
 		FocusNavigationContainer = RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0),
-			ref = ReactFocusNavigationModule.useEventHandler(FocusNavigationEventNameEnum.NavigateBack, (ReactModule.useCallback(InputHandlersModule.onRelease(function(p2) --[[ Line: 66 ]]
+			ref = ReactFocusNavigationModule.useEventHandler(FocusNavigationEventNameEnum.NavigateBack, (ReactModule.useCallback(InputHandlersModule.onRelease(function(p2)
 				-- upvalues: p1 (copy)
 				if p1.shouldSuppressNavigateBack(p2) then
 					p2:cancel()
@@ -60,7 +60,7 @@ local function RoactChatStackNavigatorWithFocusNavigation(p1) --[[ Line: 64 ]]
 	})
 end
 
-local function RoactChatStackNavigatorWithBackHandler(p1) --[[ Line: 95 ]]
+local function RoactChatStackNavigatorWithBackHandler(p1)
 	-- upvalues: RoactModule (copy), BackHandlerContextModule (copy), RoactChatStackNavigatorWithFocusNavigation (copy)
 	return RoactModule.createElement(BackHandlerContextModule.Provider, { value = p1.registerBackHandler }, {
 		FocusNavigation = RoactModule.createElement(RoactChatStackNavigatorWithFocusNavigation, {
@@ -72,29 +72,29 @@ local function RoactChatStackNavigatorWithBackHandler(p1) --[[ Line: 95 ]]
 	})
 end
 
-return function(Navigator, Callback, p1, p2) --[[ Line: 108 ]]
+return function(Navigator, Callback, p1, p2)
 	-- upvalues: RoactModule (copy), FFlagAppChatParticipantDialogGamepadFocusModule (copy), getActiveChildNavigationOptions (copy), RoactNavigationModule (copy), AppChatFixRootChatBackNavigationIxpEnabled (copy), IXPService (copy), AppChatFixRootChatBackNavigationIxpLayer (copy), EnumScreensModule (copy), FFlagAppChatFixRootChatBackNavigation (copy), getActiveChildParams (copy), GetTopBarStoreModule (copy), RoactChatStackNavigatorWithBackHandler (copy)
 	local RoactChatStackNavigator = RoactModule.PureComponent:extend("RoactChatStackNavigator")
 	RoactChatStackNavigator.defaultProps = {
 		navigation = nil,
 		parameters = nil,
 		notificationCount = 0,
-		setActiveConversationId = function() --[[ Line: 119 ]] end,
-		setBackButtonEnabled = function() --[[ Line: 120 ]] end,
-		setTabBarVisible = function() --[[ Line: 121 ]] end
+		setActiveConversationId = function() end,
+		setBackButtonEnabled = function() end,
+		setTabBarVisible = function() end
 	}
 	
-	function RoactChatStackNavigator.init(p3) --[[ Line: 125 ]]
+	function RoactChatStackNavigator.init(p3)
 		-- upvalues: FFlagAppChatParticipantDialogGamepadFocusModule (upval), getActiveChildNavigationOptions (upval), RoactNavigationModule (upval), Callback (copy), AppChatFixRootChatBackNavigationIxpEnabled (upval), IXPService (upval), AppChatFixRootChatBackNavigationIxpLayer (upval), EnumScreensModule (upval), FFlagAppChatFixRootChatBackNavigation (upval), p2 (copy)
 		p3.backButtonConnection = nil
 		p3.backHandler = nil
 		p3.suppressNextButtonBRelease = false
 		
-		function p3.registerBackHandler(BackHandler) --[[ Line: 129 ]]
+		function p3.registerBackHandler(BackHandler)
 			-- upvalues: p3 (copy)
 			p3.backHandler = BackHandler
 			
-			return function() --[[ Line: 132 ]]
+			return function()
 				-- upvalues: p3 (upval), BackHandler (copy)
 				if p3.backHandler == BackHandler then
 					p3.backHandler = nil
@@ -102,7 +102,7 @@ return function(Navigator, Callback, p1, p2) --[[ Line: 108 ]]
 			end
 		end
 		
-		function p3.shouldSuppressNavigateBack(p4): boolean --[[ Line: 139 ]]
+		function p3.shouldSuppressNavigateBack(p4): boolean
 			-- upvalues: FFlagAppChatParticipantDialogGamepadFocusModule (upval), p3 (copy)
 			if FFlagAppChatParticipantDialogGamepadFocusModule and p3.suppressNextButtonBRelease then
 				p3.suppressNextButtonBRelease = false
@@ -113,7 +113,7 @@ return function(Navigator, Callback, p1, p2) --[[ Line: 108 ]]
 			end
 		end
 		
-		function p3.onBackButtonPressed(): boolean --[[ Line: 149 ]]
+		function p3.onBackButtonPressed(): boolean
 			-- upvalues: FFlagAppChatParticipantDialogGamepadFocusModule (upval), p3 (copy), getActiveChildNavigationOptions (upval), RoactNavigationModule (upval), Callback (upval), AppChatFixRootChatBackNavigationIxpEnabled (upval), IXPService (upval), AppChatFixRootChatBackNavigationIxpLayer (upval), EnumScreensModule (upval), FFlagAppChatFixRootChatBackNavigation (upval), p2 (upval)
 			if FFlagAppChatParticipantDialogGamepadFocusModule and p3.backHandler then
 				p3.backHandler()
@@ -143,7 +143,7 @@ return function(Navigator, Callback, p1, p2) --[[ Line: 108 ]]
 			return false
 		end
 		
-		function p3.onDirectBackButtonPressed() --[[ Line: 177 ]]
+		function p3.onDirectBackButtonPressed()
 			-- upvalues: FFlagAppChatParticipantDialogGamepadFocusModule (upval), p3 (copy)
 			if FFlagAppChatParticipantDialogGamepadFocusModule then
 				p3.suppressNextButtonBRelease = p3.backHandler ~= nil
@@ -152,7 +152,7 @@ return function(Navigator, Callback, p1, p2) --[[ Line: 108 ]]
 		end
 	end
 	
-	function RoactChatStackNavigator.willUpdate(p3, p4) --[[ Line: 186 ]]
+	function RoactChatStackNavigator.willUpdate(p3, p4)
 		-- upvalues: getActiveChildParams (upval), getActiveChildNavigationOptions (upval), RoactNavigationModule (upval), GetTopBarStoreModule (upval)
 		local State = p3.props.navigation.state
 		local Index = State.index
@@ -184,7 +184,7 @@ return function(Navigator, Callback, p1, p2) --[[ Line: 108 ]]
 		end
 	end
 	
-	function RoactChatStackNavigator.didMount(p3) --[[ Line: 217 ]]
+	function RoactChatStackNavigator.didMount(p3)
 		-- upvalues: p1 (copy), Callback (copy), EnumScreensModule (upval)
 		if p1 and Callback then
 			p3.backButtonConnection = p1:connect(p3.onDirectBackButtonPressed)
@@ -197,7 +197,7 @@ return function(Navigator, Callback, p1, p2) --[[ Line: 108 ]]
 		end
 	end
 	
-	function RoactChatStackNavigator.willUnmount(p3) --[[ Line: 230 ]]
+	function RoactChatStackNavigator.willUnmount(p3)
 		p3.props.setActiveConversationId(nil)
 		p3.backHandler = nil
 		p3.suppressNextButtonBRelease = false
@@ -207,7 +207,7 @@ return function(Navigator, Callback, p1, p2) --[[ Line: 108 ]]
 		end
 	end
 	
-	function RoactChatStackNavigator.render(p3) --[[ Line: 240 ]]
+	function RoactChatStackNavigator.render(p3)
 		-- upvalues: RoactModule (upval), RoactChatStackNavigatorWithBackHandler (upval), Navigator (copy)
 		return RoactModule.createElement(RoactChatStackNavigatorWithBackHandler, {
 			navigation = p3.props.navigation,

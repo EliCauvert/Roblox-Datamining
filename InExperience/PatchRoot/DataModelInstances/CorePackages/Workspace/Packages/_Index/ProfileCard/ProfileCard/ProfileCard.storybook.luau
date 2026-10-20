@@ -21,7 +21,7 @@ local config = {
 	Light = ColorMode.Light
 }
 
-local function isControlEnabled(Controls, Segment): boolean --[[ Line: 32 ]]
+local function isControlEnabled(Controls, Segment): boolean
 	if Controls == nil then
 		return false
 	end
@@ -40,11 +40,11 @@ return {
 	name = "ProfileCard",
 	roact = ReactModule,
 	reactRoblox = ReactRobloxModule,
-	mapStory = function(p1) --[[ Line: 47 ]]
+	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), Localization (copy), LocalizationService (copy), config (copy), isControlEnabled (copy), LocalizationProvider (copy), RoactAppPolicy (copy), AppFeaturePolicies (copy), FoundationProvider (copy), Device (copy), AppStyleProvider (copy)
-		return function(p2) --[[ Line: 48 ]]
+		return function(p2)
 			-- upvalues: ReactModule (upval), Localization (upval), LocalizationService (upval), config (upval), isControlEnabled (upval), LocalizationProvider (upval), RoactAppPolicy (upval), AppFeaturePolicies (upval), FoundationProvider (upval), Device (upval), AppStyleProvider (upval), p1 (copy)
-			local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 49 ]]
+			local UseMemoResult = ReactModule.useMemo(function()
 				-- upvalues: Localization (upval), LocalizationService (upval)
 				return Localization.new(LocalizationService.RobloxLocaleId)
 			end, {})

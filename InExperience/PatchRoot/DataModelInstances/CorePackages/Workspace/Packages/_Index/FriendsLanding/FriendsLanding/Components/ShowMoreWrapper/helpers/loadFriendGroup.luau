@@ -9,7 +9,7 @@ local InterfaceResult = T.interface({
 })
 local InterfaceResult1 = T.interface({ width = T.number, filterFriendCounts = T.table })
 
-return function(p1, p2) --[[ Line: 19 ]]
+return function(p1, p2)
 	-- upvalues: InterfaceResult1 (copy), InterfaceResult (copy), FriendsPerLoadGroupModule (copy), Llama (copy)
 	assert(InterfaceResult1(p1))
 	assert(InterfaceResult(p2))

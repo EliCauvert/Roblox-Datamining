@@ -8,7 +8,7 @@ local FFlagPioneerLeaveOnInExpFaeDownAge = SharedFlagsModule.FFlagPioneerLeaveOn
 local Logging = require(CorePackages.Workspace.Packages.AppCommonLib).Logging
 local MaybeLeavePioneerOnFaeDownAgeModule = require(CorePackages.Workspace.Packages.PioneerUtils.maybeLeavePioneerOnFaeDownAge)
 
-local function onPromptAgeCheckRequested(Player) --[[ Line: 25 ]]
+local function onPromptAgeCheckRequested(Player)
 	-- upvalues: Players (copy), CorePackages (copy), CoreGui (copy), FStringLuaAppPlayButtonAgeCheckAmpFeatureName (copy), Logging (copy), FFlagPioneerLeaveOnInExpFaeDownAge (copy), MaybeLeavePioneerOnFaeDownAgeModule (copy), FStringLuaAppPlayButtonAgeCheckAmpNameSpace (copy)
 	local LocalPlayer = Players.LocalPlayer
 	
@@ -19,12 +19,12 @@ local function onPromptAgeCheckRequested(Player) --[[ Line: 25 ]]
 	local Success1, Result1 = pcall(require, CoreGui.RobloxGui.Modules.ApolloClient)
 	
 	if Success1 and Result1 then
-		Result.InExpAmpWizardController.OpenAmpWizardContainerInExp(FStringLuaAppPlayButtonAgeCheckAmpFeatureName, function(p1, p2) --[[ Line: 43 ]]
+		Result.InExpAmpWizardController.OpenAmpWizardContainerInExp(FStringLuaAppPlayButtonAgeCheckAmpFeatureName, function(p1, p2)
 			-- upvalues: LocalPlayer (copy), Logging (upval), FFlagPioneerLeaveOnInExpFaeDownAge (upval), Result (copy), MaybeLeavePioneerOnFaeDownAgeModule (upval)
-			local function notifyIfGranted() --[[ Line: 44 ]]
+			local function notifyIfGranted()
 				-- upvalues: p1 (copy), LocalPlayer (upval), Logging (upval)
 				if p1 == "Granted" then
-					local Success, Result = pcall(function() --[[ Line: 46 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: LocalPlayer (upval)
 						LocalPlayer:NotifyAgeCheckPassed()
 					end)
@@ -42,7 +42,7 @@ local function onPromptAgeCheckRequested(Player) --[[ Line: 25 ]]
 				return
 			end
 			if p1 == "Granted" then
-				local Success, Result1 = pcall(function() --[[ Line: 46 ]]
+				local Success, Result1 = pcall(function()
 					-- upvalues: LocalPlayer (upval)
 					LocalPlayer:NotifyAgeCheckPassed()
 				end)
@@ -58,7 +58,7 @@ local function onPromptAgeCheckRequested(Player) --[[ Line: 25 ]]
 end
 
 return {
-	init = function() --[[ Line: 72 ]]
+	init = function()
 		-- upvalues: Players (copy), onPromptAgeCheckRequested (copy)
 		Players.PromptAgeCheckRequested:Connect(onPromptAgeCheckRequested)
 	end

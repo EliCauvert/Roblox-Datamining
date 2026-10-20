@@ -11,22 +11,22 @@ local IconsActionsInfo = Images["icons/actions/info"]
 local IconsActionsFeedback = Images["icons/actions/feedback"]
 local AdGuiInteractivityPixelsPerStudRatio = require(script.Parent.Flags).GetAdGuiInteractivityPixelsPerStud() / 50
 
-local function _(p1): UDim --[[ Line: 20 | Named "applyScalingUDim" ]]
+local function _(p1): UDim
 	-- upvalues: AdGuiInteractivityPixelsPerStudRatio (copy)
 	return UDim.new(p1.Scale, p1.Offset * AdGuiInteractivityPixelsPerStudRatio)
 end
 
-local _ = function(Vector): UDim2 --[[ Line: 24 | Named "applyScalingUDim2" ]]
+local _ = function(Vector): UDim2
 	-- upvalues: AdGuiInteractivityPixelsPerStudRatio (copy)
 	return UDim2.new(Vector.X.Scale, Vector.X.Offset * AdGuiInteractivityPixelsPerStudRatio, Vector.Y.Scale, Vector.Y.Offset * AdGuiInteractivityPixelsPerStudRatio)
 end
 
-local _ = function(p1) --[[ Line: 28 | Named "applyScalingNumber" ]]
+local _ = function(p1)
 	-- upvalues: AdGuiInteractivityPixelsPerStudRatio (copy)
 	return p1 * AdGuiInteractivityPixelsPerStudRatio
 end
 
-local function WhyThisAdRow(Frame) --[[ Line: 41 ]]
+local function WhyThisAdRow(Frame)
 	-- upvalues: RoactModule (copy), Interactable (copy), AdGuiInteractivityPixelsPerStudRatio (copy), ImageSetLabel (copy), IconsActionsInfo (copy), CoreScriptsAdsLabelWhyThisAd (copy)
 	local _UDim = UDim.new(0, 10)
 	local config = {
@@ -58,7 +58,7 @@ local function WhyThisAdRow(Frame) --[[ Line: 41 ]]
 		AutomaticSize = Enum.AutomaticSize.XY,
 		BackgroundTransparency = 1,
 		[RoactModule.Event.Activated] = Frame.onWhyThisAdActivated,
-		onStateChanged = function() --[[ Line: 46 ]] end
+		onStateChanged = function() end
 	}, {
 		UICorner = RoactModule.createElement("UICorner", config),
 		UIPadding = RoactModule.createElement("UIPadding", config1),
@@ -81,7 +81,7 @@ local function WhyThisAdRow(Frame) --[[ Line: 41 ]]
 	})
 end
 
-local function ReportAdRow(Frame) --[[ Line: 81 ]]
+local function ReportAdRow(Frame)
 	-- upvalues: RoactModule (copy), Interactable (copy), AdGuiInteractivityPixelsPerStudRatio (copy), ImageSetLabel (copy), IconsActionsFeedback (copy), CoreScriptsAdsLabelReportAd (copy)
 	local _UDim = UDim.new(0, 10)
 	local config = {
@@ -113,7 +113,7 @@ local function ReportAdRow(Frame) --[[ Line: 81 ]]
 		AutomaticSize = Enum.AutomaticSize.XY,
 		BackgroundTransparency = 1,
 		[RoactModule.Event.Activated] = Frame.onReportAdActivated,
-		onStateChanged = function() --[[ Line: 86 ]] end
+		onStateChanged = function() end
 	}, {
 		UICorner = RoactModule.createElement("UICorner", config),
 		UIPadding = RoactModule.createElement("UIPadding", config1),
@@ -136,7 +136,7 @@ local function ReportAdRow(Frame) --[[ Line: 81 ]]
 	})
 end
 
-function AdDropdownMenu(Frame) --[[ Line: 121 ]]
+function AdDropdownMenu(Frame)
 	-- upvalues: RoactModule (copy), AdGuiInteractivityPixelsPerStudRatio (copy), WhyThisAdRow (copy), ReportAdRow (copy)
 	local _UDim2 = UDim2.new(0.24, 0, 0.12, 0)
 	local _UDim = UDim.new(0, 10)

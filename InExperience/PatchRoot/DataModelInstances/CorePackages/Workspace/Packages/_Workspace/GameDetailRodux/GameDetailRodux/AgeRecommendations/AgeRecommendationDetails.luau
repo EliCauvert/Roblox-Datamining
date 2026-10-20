@@ -3,7 +3,7 @@ local DashModule = require(Parent.Dash)
 local TModule = require(Parent.t)
 local ResultModule = require(Parent.Result)
 local AgeRecommendationDetailsModule = {
-	new = function() --[[ Line: 47 ]]
+	new = function()
 		return {}
 	end,
 	validateModel = TModule.interface({
@@ -36,7 +36,7 @@ local AgeRecommendationDetailsModule = {
 	})
 }
 
-function AgeRecommendationDetailsModule.mock(p1) --[[ Line: 80 ]]
+function AgeRecommendationDetailsModule.mock(p1)
 	-- upvalues: AgeRecommendationDetailsModule (copy), DashModule (copy)
 	local P0 = p1 or {}
 	local NewAgeRecommendationDetails = AgeRecommendationDetailsModule.new()
@@ -82,7 +82,7 @@ function AgeRecommendationDetailsModule.mock(p1) --[[ Line: 80 ]]
 	return if AgeRecommendationDetailsModule.validateModel(JoinDeepResult) then JoinDeepResult else error("AgeRecommendationDetails mockData is invalid")
 end
 
-function AgeRecommendationDetailsModule.fromJsonData(p1) --[[ Line: 140 ]]
+function AgeRecommendationDetailsModule.fromJsonData(p1)
 	-- upvalues: AgeRecommendationDetailsModule (copy), ResultModule (copy), DashModule (copy)
 	return if AgeRecommendationDetailsModule.validateModel(p1) then ResultModule.success((DashModule.joinDeep(AgeRecommendationDetailsModule.new(), p1))) else ResultModule.error("AgeRecommendationDetails.fromJsonData expects a valid moderation JSON response")
 end

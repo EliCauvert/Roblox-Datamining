@@ -9,10 +9,10 @@ local PcallDeferredModule = require(Parent.util.pcallDeferred)
 local GetEditableMeshFromContextModule = require(Parent.util.getEditableMeshFromContext)
 local GetEngineFeatureEngineUGCValidateMinMaxMeshSizeAcrossAllFacsModule = require(Parent.flags.getEngineFeatureEngineUGCValidateMinMaxMeshSizeAcrossAllFacs)
 
-local function validateFacialBounds(Object, p1) --[[ Line: 27 ]]
+local function validateFacialBounds(Object, p1)
 	-- upvalues: PcallDeferredModule (copy), GetExpectedPartSizeModule (copy), GetEditableMeshFromContextModule (copy), UGCValidationService (copy), UGCValidateFacialBoundsScaleRatio (copy)
 	local IsServer = p1.isServer
-	local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function() --[[ Line: 33 ]]
+	local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function()
 		-- upvalues: GetExpectedPartSizeModule (upval), Object (copy), p1 (copy), GetEditableMeshFromContextModule (upval), UGCValidationService (upval), UGCValidateFacialBoundsScaleRatio (upval)
 		local ExpectedPartSizeModule = GetExpectedPartSizeModule(Object, p1)
 		local MeshId, MeshId2 = GetEditableMeshFromContextModule(Object, "MeshId", p1)
@@ -39,7 +39,7 @@ local function validateFacialBounds(Object, p1) --[[ Line: 27 ]]
 	end
 end
 
-return function(p1, p2) --[[ Line: 67 | Named "validateDynamicHeadData" ]]
+return function(p1, p2)
 	-- upvalues: FailureReasonsAccumulatorModule (copy), GetEngineFeatureEngineUGCValidateMinMaxMeshSizeAcrossAllFacsModule (copy), validateFacialBounds (copy), AnalyticsModule (copy)
 	local CurrentTime = tick()
 	local NewFailureReasonsAccumulator = FailureReasonsAccumulatorModule.new()

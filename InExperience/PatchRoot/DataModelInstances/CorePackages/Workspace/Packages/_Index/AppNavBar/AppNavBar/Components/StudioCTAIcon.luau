@@ -20,7 +20,7 @@ local ConstantsModule = require(Parent.Constants)
 local Studiologo = if FFlagCoreUiMigrateUIBloxToFoundation then "icons/logo/studiologo" else Images["icons/logo/studiologo"]
 local WebViewRedesignEnabledEngineFeature = game:GetEngineFeature("WebViewRedesignEnabled")
 
-return function(p1) --[[ Line: 48 | Named "StudioCTAIcon" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), UseLocalizationFunction (copy), UseEffectOnceFunction (copy), ConstantsModule (copy), ControlState (copy), PromiseModule (copy), TooltipOrientation (copy), CoreGui (copy), WebViewRedesignEnabledEngineFeature (copy), WithTooltipFunction (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), Studiologo (copy), ImageSetLabel (copy)
 	local Theme = nil
 	Theme = UseStyleFunction().Theme
@@ -31,14 +31,14 @@ return function(p1) --[[ Line: 48 | Named "StudioCTAIcon" ]]
 		bodyText = "CommonUI.Features.StudioCTA.Tooltip.Body"
 	})
 	local UseRefResult = ReactModule.useRef(nil)
-	UseEffectOnceFunction(function() --[[ Line: 63 ]]
+	UseEffectOnceFunction(function()
 		-- upvalues: UseRoactServiceResult (copy), ConstantsModule (upval)
 		UseRoactServiceResult:setRBXEventStream(ConstantsModule.STUDIO_CTA_EVENT_CONTEXT, ConstantsModule.STUDIO_CTA_EVENT_NAME_MOUNT)
 	end, {})
 	
 	if p1.controlState == ControlState.Hover or p1.controlState == ControlState.Selected then
 		if not UseRefResult.current then
-			UseRefResult.current = PromiseModule.delay(0.4):andThenCall(function() --[[ Line: 71 ]]
+			UseRefResult.current = PromiseModule.delay(0.4):andThenCall(function()
 				-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
 				UseRefResult.current = nil
 				UseStateResult2(true)
@@ -61,7 +61,7 @@ return function(p1) --[[ Line: 48 | Named "StudioCTAIcon" ]]
 		preferredOrientation = TooltipOrientation.Top,
 		guiTarget = CoreGui,
 		active = if WebViewRedesignEnabledEngineFeature then p1.showTooltip and UseStateResult else UseStateResult
-	}, function(OnAbsolutePositionChanged) --[[ Line: 99 ]]
+	}, function(OnAbsolutePositionChanged)
 		-- upvalues: FFlagCoreUiMigrateUIBloxToFoundation (upval), ReactModule (upval), Image (upval), Studiologo (upval), Theme (ref), ImageSetLabel (upval)
 		return if FFlagCoreUiMigrateUIBloxToFoundation then ReactModule.createElement(Image, {
 			Size = UDim2.fromScale(1, 1),

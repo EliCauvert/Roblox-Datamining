@@ -16,20 +16,20 @@ return {
 	Consumer = Consumer,
 	Context = Context,
 	Enum = config,
-	useChatPlacementContext = function() --[[ Line: 42 ]]
+	useChatPlacementContext = function()
 		-- upvalues: ReactModule (copy), Context (copy)
 		return ReactModule.useContext(Context)
 	end,
-	withChatPlacementContext = function(Callback) --[[ Line: 45 ]]
+	withChatPlacementContext = function(Callback)
 		-- upvalues: ReactModule (copy), Consumer (copy)
 		return ReactModule.createElement(Consumer, {
-			render = function(p1) --[[ Line: 47 ]]
+			render = function(p1)
 				-- upvalues: Callback (copy)
 				return Callback(p1)
 			end
 		})
 	end,
-	isPlacementInExperience = function(InExperienceDefault): boolean --[[ Line: 52 ]]
+	isPlacementInExperience = function(InExperienceDefault): boolean
 		-- upvalues: FFlagExpChatEnableFriendsTab (copy), config (copy)
 		return FFlagExpChatEnableFriendsTab and InExperienceDefault == config.InExperienceFriendsTab or InExperienceDefault == config.InExperienceDefault
 	end

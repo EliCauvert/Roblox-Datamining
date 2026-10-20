@@ -12,13 +12,13 @@ local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 local InputSize = FoundationModule.Enums.InputSize
 
-local function formatTime(Value: number): string --[[ Line: 34 ]]
+local function formatTime(Value: number): string
 	local Largest = math.max(0, (math.floor(Value)))
 	
 	return `{math.floor(Largest / 60)}:{string.format("%02d", Largest % 60)}`
 end
 
-local function _(p1: number): string --[[ Line: 40 | Named "formatRemaining" ]]
+local function _(p1: number): string
 	local Ceiled = math.ceil(p1 - 0.001)
 	
 	if Ceiled <= 0 then
@@ -30,7 +30,7 @@ local function _(p1: number): string --[[ Line: 40 | Named "formatRemaining" ]]
 	end
 end
 
-return function(Frame) --[[ Line: 45 | Named "LibraryAudioPlayerContentView" ]]
+return function(Frame)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), View (copy), Image (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy), Slider (copy), InputSize (copy), formatTime (copy), IconButton (copy), ButtonVariant (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseScaledValueResult = FoundationModule.Hooks.useScaledValue(168)
@@ -113,7 +113,7 @@ return function(Frame) --[[ Line: 45 | Named "LibraryAudioPlayerContentView" ]]
 				Slider = ReactModule.createElement(Slider, {
 					LayoutOrder = 1,
 					testId = "Library.AudioPlayer.Timeline.Slider",
-					value = Frame.elapsed:map(function(p1): number --[[ Line: 49 ]]
+					value = Frame.elapsed:map(function(p1): number
 						-- upvalues: Frame (copy)
 						return if Frame.duration <= 0 then 0 else math.clamp(p1 / Frame.duration, 0, 1)
 					end),
@@ -134,7 +134,7 @@ return function(Frame) --[[ Line: 45 | Named "LibraryAudioPlayerContentView" ]]
 					Remaining = ReactModule.createElement(Text, {
 						LayoutOrder = 2,
 						tag = "auto-xy text-caption-large content-default",
-						Text = Frame.elapsed:map(function(p1): string --[[ Line: 157 ]]
+						Text = Frame.elapsed:map(function(p1): string
 							-- upvalues: Frame (copy)
 							local Ceiled = math.ceil(Frame.duration - p1 - 0.001)
 							

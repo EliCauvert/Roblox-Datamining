@@ -7,13 +7,13 @@ local ProfileShareLinksNetworking = require(Parent.Lumberyak).Logger.new(nil, "P
 return (LuaSocialLibrariesDepsModule.RoduxNetworking.config({
 	keyPath = require(ProfileShareLinks.Common.Constants).RODUX_KEY .. ".NetworkStatus",
 	networkImpl = HttpRequest.config({
-		requestFunction = function(p1, p2, p3) --[[ Line: 14 ]]
+		requestFunction = function(p1, p2, p3)
 			-- upvalues: ProfileShareLinksNetworking (copy), HttpRequest (copy)
 			ProfileShareLinksNetworking:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p2, p1))
 			
 			return HttpRequest.requestFunctions.RequestInternal(p1, p2, p3)
 		end,
-		postRequestFunction = function(p1, p2) --[[ Line: 18 ]]
+		postRequestFunction = function(p1, p2)
 			-- upvalues: ProfileShareLinksNetworking (copy)
 			ProfileShareLinksNetworking:debug("Returned: {}", string.format("[ requestMethod = %q, url = %q, statusCode = %s, body = %s ]", p2.requestMethod, p2.url, p1.StatusCode, p1.Body))
 		end,

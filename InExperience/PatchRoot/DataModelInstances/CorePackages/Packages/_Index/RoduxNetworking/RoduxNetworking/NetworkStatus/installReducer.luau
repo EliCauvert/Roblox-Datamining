@@ -2,12 +2,12 @@
 local CryoModule = require(script.Parent.Parent.Cryo)
 local BuildActionNameModule = require(script.Parent.buildActionName)
 
-return function(p1) --[[ Line: 11 ]]
+return function(p1)
 	-- upvalues: RoduxModule (copy), BuildActionNameModule (copy), CryoModule (copy)
-	return function() --[[ Line: 12 ]]
+	return function()
 		-- upvalues: RoduxModule (upval), BuildActionNameModule (upval), p1 (copy), CryoModule (upval)
 		return RoduxModule.createReducer({}, {
-			[BuildActionNameModule(p1)] = function(p2, p3) --[[ Line: 14 ]]
+			[BuildActionNameModule(p1)] = function(p2, p3)
 				-- upvalues: CryoModule (upval)
 				local Statuses = {}
 				

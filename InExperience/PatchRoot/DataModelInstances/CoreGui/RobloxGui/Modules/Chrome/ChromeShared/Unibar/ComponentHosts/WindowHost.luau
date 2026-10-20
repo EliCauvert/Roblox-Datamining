@@ -31,28 +31,28 @@ local UseWindowSizeModule = require(ChromeShared.Hooks.useWindowSize)
 local config = { dampingRatio = 1, frequency = 3 }
 local Flag = false
 
-return function(p1) --[[ Line: 71 ]]
+return function(p1)
 	-- upvalues: UseWindowSizeModule (copy), ReactModule (copy), FFlagTopBarSignalizeMenuOpen (copy), UseSelectorFunction (copy), ReactOtterModule (copy), config (copy), SignalsModule (copy), CoreGuiCommonModule (copy), SettingsShowSignal (copy), ServiceModule (copy), ConstantsModule (copy), ChromeAnalyticsModule (copy), UserInputService (copy), ShouldRejectMultiTouchModule (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), GetUIScaleFunction (copy), VRService (copy), Flag (ref), MouseIconOverrideService (copy), SelfieViewCursorOverride (copy), FixWindowDragStaleConnection (copy), FixWindowDragError (copy), TweenService (copy), ChromeWindowLayoutOrder (copy), UseStyleSheetFunction (copy), ReactRobloxModule (copy), DebounceModule (copy), Interactable (copy), CoreGui (copy)
 	local UseWindowSizeModuleResult = UseWindowSizeModule(p1.integration.integration)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(false)
 	local Magnitude = 0
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 77 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		return nil
 	end, {})
 	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(false)
 	local UseBindingResult3, UseBindingResult2_2 = ReactModule.useBinding(false)
-	local MapResult = if FFlagTopBarSignalizeMenuOpen then ReactModule.joinBindings({ UseBindingResult1, UseBindingResult3 }):map(function(Entry) --[[ Line: 85 ]]
+	local MapResult = if FFlagTopBarSignalizeMenuOpen then ReactModule.joinBindings({ UseBindingResult1, UseBindingResult3 }):map(function(Entry)
 		return Entry[1] or Entry[2]
 	end) else nil
-	local UseSelectorResult = if FFlagTopBarSignalizeMenuOpen then nil else UseSelectorFunction(function(p2) --[[ Line: 91 ]]
+	local UseSelectorResult = if FFlagTopBarSignalizeMenuOpen then nil else UseSelectorFunction(function(p2)
 		return p2.displayOptions.menuOpen or p2.displayOptions.inspectMenuOpen
 	end)
 	local UseBindingResult4, UseBindingResult2_3 = ReactModule.useBinding(false)
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(UseWindowSizeModuleResult.X.Offset)
 	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = ReactOtterModule.useAnimatedBinding(UseWindowSizeModuleResult.Y.Offset)
-	local UseResult = ReactModule.useCallback(function(): Vector2 --[[ Line: 102 ]]
+	local UseResult = ReactModule.useCallback(function(): Vector2
 		-- upvalues: UseAnimatedBindingResult (copy), UseAnimatedBindingResult1 (copy), p1 (copy)
 		return Vector2.new(UseAnimatedBindingResult:getValue(), UseAnimatedBindingResult1:getValue()) * (p1.integration.integration.windowAnchorPoint or Vector2.zero)
 	end, {
@@ -60,7 +60,7 @@ return function(p1) --[[ Line: 71 ]]
 		UseAnimatedBindingResult1,
 		p1.integration
 	})
-	ReactModule.useEffect(function() --[[ Line: 107 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseAnimatedBindingResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseWindowSizeModuleResult (copy), config (upval)
 		if UseAnimatedBindingResult:getValue() == 0 then
 			UseAnimatedBindingResult2((ReactOtterModule.instant(UseWindowSizeModuleResult.X.Offset)))
@@ -70,7 +70,7 @@ return function(p1) --[[ Line: 71 ]]
 			UseAnimatedBindingResult2(ReactOtterModule.spring(UseWindowSizeModuleResult.X.Offset, config))
 		end
 	end, { UseWindowSizeModuleResult.X.Offset })
-	ReactModule.useEffect(function() --[[ Line: 115 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseAnimatedBindingResult1 (copy), UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval), UseWindowSizeModuleResult (copy), config (upval)
 		if UseAnimatedBindingResult1:getValue() == 0 then
 			UseAnimatedBindingResult2_1((ReactOtterModule.instant(UseWindowSizeModuleResult.Y.Offset)))
@@ -82,24 +82,24 @@ return function(p1) --[[ Line: 71 ]]
 	end, { UseWindowSizeModuleResult.Y.Offset })
 	
 	if FFlagTopBarSignalizeMenuOpen then
-		ReactModule.useEffect(function() --[[ Line: 124 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: SignalsModule (upval), CoreGuiCommonModule (upval), UseBindingResult2_2 (copy), SettingsShowSignal (upval), UseBindingResult2_1 (copy)
-			local Effect = SignalsModule.createEffect(function(p2) --[[ Line: 125 ]]
+			local Effect = SignalsModule.createEffect(function(p2)
 				-- upvalues: CoreGuiCommonModule (upval), UseBindingResult2_2 (upval)
 				UseBindingResult2_2((CoreGuiCommonModule.Stores.GetInspectAndBuyStore(p2).getInspectAndBuyOpen(p2)))
 			end)
-			SettingsShowSignal:connect(function(p2) --[[ Line: 130 ]]
+			SettingsShowSignal:connect(function(p2)
 				-- upvalues: UseBindingResult2_1 (upval)
 				UseBindingResult2_1(p2)
 			end)
 			
-			return function() --[[ Line: 134 ]]
+			return function()
 				-- upvalues: Effect (copy)
 				Effect()
 			end
 		end, {})
 	end
-	ReactModule.useEffect(function() --[[ Line: 144 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ServiceModule (upval), p1 (copy), UseRefResult (copy), UseRefResult1 (ref), UseBindingResult2 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), ConstantsModule (upval), UseAnimatedBindingResult2_1 (copy), UseWindowSizeModuleResult (copy), config (upval), ChromeAnalyticsModule (upval), UserInputService (upval), ShouldRejectMultiTouchModule (upval), FFlagTokenizeUnibarConstantsWithStyleProvider (upval), GetUIScaleFunction (upval)
 		local Connection = nil
 		local InputObject = nil
@@ -139,7 +139,7 @@ return function(p1) --[[ Line: 71 ]]
 				task.defer(UseAnimatedBindingResult2_1, ReactOtterModule.spring(UseWindowSizeModuleResult.Y.Offset, config))
 				local _Vector3 = Vector3.new(UseRefResult.current.AbsolutePosition.X, UseRefResult.current.AbsolutePosition.Y, 0)
 				ChromeAnalyticsModule.default:setWindowDefaultPosition(p1.integration.id, Vector2.new(_Vector3.X, _Vector3.Y))
-				UseRefResult1.current = UserInputService.InputChanged:Connect(function(Input, _) --[[ Line: 179 ]]
+				UseRefResult1.current = UserInputService.InputChanged:Connect(function(Input, _)
 					-- upvalues: ShouldRejectMultiTouchModule (upval), InputObject (ref), _Vector3 (copy), _Vector3 (copy), AbsoluteSize (copy), Current (copy)
 					local Position = Input.Position
 					
@@ -157,13 +157,13 @@ return function(p1) --[[ Line: 71 ]]
 			end
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 220 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy), ServiceModule (upval)
 		if p1.integration.integration.cachePosition then
 			ServiceModule:updateWindowPosition(p1.integration.id, p2)
 		end
 	end, { p1.integration })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 233 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: Flag (upval), MouseIconOverrideService (upval), SelfieViewCursorOverride (upval)
 		if Flag then
 			Flag = false
@@ -171,7 +171,7 @@ return function(p1) --[[ Line: 71 ]]
 		end
 	end)
 	
-	local function v51(Current): boolean --[[ Line: 346 ]]
+	local function v51(Current): boolean
 		-- upvalues: UseResult (copy), UseAnimatedBindingResult (copy), UseAnimatedBindingResult1 (copy)
 		local Parent = Current.Parent
 		local Offset = Current.Position.X.Offset
@@ -182,7 +182,7 @@ return function(p1) --[[ Line: 71 ]]
 		return Offset < UseResultResult.X or (AbsoluteSize.X - (UseAnimatedBindingResult:getValue() - UseResultResult.X) < Offset or (Offset1 < UseResultResult.Y or AbsoluteSize.Y - (UseAnimatedBindingResult1:getValue() - UseResultResult.Y) < Offset1))
 	end
 	
-	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 363 ]]
+	local UseResult3 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult (copy), UseMemoResult (ref), v51 (copy), UseResult (copy), UseAnimatedBindingResult (copy), UseAnimatedBindingResult1 (copy), UseResult1 (copy), UseBindingResult2_3 (copy), TweenService (upval)
 		if UseRefResult == nil or UseRefResult.current == nil then return end
 		assert(UseRefResult.current ~= nil)
@@ -223,7 +223,7 @@ return function(p1) --[[ Line: 71 ]]
 			UseBindingResult2_3(true)
 			UseMemoResult = TweenService:Create(Current, TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { Position = _UDim2 })
 			assert(UseMemoResult ~= nil)
-			UseMemoResult.Completed:Connect(function(_) --[[ Line: 417 ]]
+			UseMemoResult.Completed:Connect(function(_)
 				-- upvalues: UseBindingResult2_3 (upval), UseMemoResult (upval)
 				UseBindingResult2_3(false)
 				UseMemoResult = nil
@@ -235,11 +235,11 @@ return function(p1) --[[ Line: 71 ]]
 	return ReactRobloxModule.createPortal({
 		Name = ReactModule.createElement("ScreenGui", {
 			Name = ConstantsModule.WINDOW_HOST_GUI_NAME .. ":" .. p1.integration.id,
-			[ReactModule.Change.AbsoluteSize] = DebounceModule(function() --[[ Line: 463 ]]
+			[ReactModule.Change.AbsoluteSize] = DebounceModule(function()
 				-- upvalues: UseResult3 (copy)
 				UseResult3()
 			end, 0.2),
-			DisplayOrder = if FFlagTopBarSignalizeMenuOpen and MapResult then MapResult:map(function(p2) --[[ Line: 467 ]]
+			DisplayOrder = if FFlagTopBarSignalizeMenuOpen and MapResult then MapResult:map(function(p2)
 				-- upvalues: ChromeWindowLayoutOrder (copy)
 				return if p2 then -1 else ChromeWindowLayoutOrder
 			end) elseif UseSelectorResult then -1 else ChromeWindowLayoutOrder,
@@ -249,7 +249,7 @@ return function(p1) --[[ Line: 71 ]]
 				LayoutOrder = 1,
 				BorderSizePixel = 0,
 				BackgroundTransparency = 1,
-				Size = ReactModule.joinBindings({ UseAnimatedBindingResult, UseAnimatedBindingResult1 }):map(function(Entry): UDim2 --[[ Line: 475 ]]
+				Size = ReactModule.joinBindings({ UseAnimatedBindingResult, UseAnimatedBindingResult1 }):map(function(Entry): UDim2
 					-- upvalues: UseResult3 (copy)
 					UseResult3(true)
 					
@@ -274,7 +274,7 @@ return function(p1) --[[ Line: 71 ]]
 						ZIndex = 4,
 						Size = UDim2.fromScale(1, 1),
 						BackgroundTransparency = 1,
-						[ReactModule.Event.InputBegan] = ReactModule.useCallback(function(_, Input) --[[ Line: 240 ]]
+						[ReactModule.Event.InputBegan] = ReactModule.useCallback(function(_, Input)
 							-- upvalues: UseRefResult (copy), UseResult (copy), ChromeAnalyticsModule (upval), p1 (copy), FixWindowDragStaleConnection (upval), UseRefResult1 (ref), UseBindingResult2 (copy), UseBindingResult4 (copy), FixWindowDragError (upval), UseAnimatedBindingResult (copy), UseAnimatedBindingResult1 (copy), UserInputService (upval), ShouldRejectMultiTouchModule (upval), Magnitude (ref), ConstantsModule (upval)
 							assert(UseRefResult.current ~= nil)
 							assert(UseRefResult.current.Parent ~= nil)
@@ -298,7 +298,7 @@ return function(p1) --[[ Line: 71 ]]
 										Y = math.clamp(_Vector3.Y, 0, if FixWindowDragError then math.max(0, AbsoluteSize.Y - (UseAnimatedBindingResult1:getValue() - UseResultResult.Y)) else AbsoluteSize.Y - (UseAnimatedBindingResult1:getValue() - UseResultResult.Y))
 									}
 									Current.Position = UDim2.fromOffset(config.X, config.Y)
-									UseRefResult1.current = UserInputService.InputChanged:Connect(function(Input1, _) --[[ Line: 300 ]]
+									UseRefResult1.current = UserInputService.InputChanged:Connect(function(Input1, _)
 										-- upvalues: ShouldRejectMultiTouchModule (upval), Input (copy), Position (copy), Magnitude (upval), FixWindowDragStaleConnection (upval), ConstantsModule (upval), UseBindingResult2 (upval), _Vector3 (copy), UseResultResult (copy), FixWindowDragError (upval), AbsoluteSize (copy), UseAnimatedBindingResult (upval), UseAnimatedBindingResult1 (upval), Current (copy), ChromeAnalyticsModule (upval), p1 (upval)
 										if ShouldRejectMultiTouchModule(Input, Input1) then return end
 										local Position1 = Input1.Position
@@ -318,7 +318,7 @@ return function(p1) --[[ Line: 71 ]]
 								end
 							end
 						end, { UseResult }),
-						[ReactModule.Event.InputEnded] = ReactModule.useCallback(function(_, Input) --[[ Line: 430 ]]
+						[ReactModule.Event.InputEnded] = ReactModule.useCallback(function(_, Input)
 							-- upvalues: Magnitude (ref), UseRefResult (copy), ChromeAnalyticsModule (upval), p1 (copy), v51 (copy), UseRefResult1 (ref), UseBindingResult2 (copy), ServiceModule (upval), UseResult3 (copy)
 							Magnitude = 0
 							
@@ -335,7 +335,7 @@ return function(p1) --[[ Line: 71 ]]
 								end
 							end
 						end, {}),
-						[ReactModule.Event.MouseEnter] = ReactModule.useCallback(function() --[[ Line: 226 ]]
+						[ReactModule.Event.MouseEnter] = ReactModule.useCallback(function()
 							-- upvalues: VRService (upval), Flag (upval), MouseIconOverrideService (upval), SelfieViewCursorOverride (upval)
 							if not VRService.VREnabled then
 								Flag = true

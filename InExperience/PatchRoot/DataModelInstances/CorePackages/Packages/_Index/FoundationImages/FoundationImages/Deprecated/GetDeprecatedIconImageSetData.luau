@@ -1,6 +1,6 @@
 ﻿local Config = nil
 
-function make_assets_1x() --[[ Line: 7 ]]
+function make_assets_1x()
 	-- upvalues: Config (ref)
 	Config = {
 		["icons/actions/accept"] = {
@@ -3723,7 +3723,7 @@ end
 
 local Config1 = nil
 
-function make_assets_2x() --[[ Line: 756 ]]
+function make_assets_2x()
 	-- upvalues: Config1 (ref)
 	Config1 = {
 		["icons/actions/accept"] = {
@@ -7446,7 +7446,7 @@ end
 
 local Config2 = nil
 
-function make_assets_3x() --[[ Line: 1505 ]]
+function make_assets_3x()
 	-- upvalues: Config2 (ref)
 	Config2 = {
 		["icons/actions/accept"] = {
@@ -11167,7 +11167,7 @@ function make_assets_3x() --[[ Line: 1505 ]]
 	}
 end
 
-return function(p1: number) --[[ Line: 2253 ]]
+return function(p1: number)
 	-- upvalues: Config2 (ref), Config1 (ref), Config (ref)
 	if p1 > 2.5 then
 		if not Config2 then

@@ -10,17 +10,17 @@ local _ = require(InlineRichText.Types)
 local FFlagInlineRichTextUseWebViewService = require(Parent.SharedFlags).FFlagInlineRichTextUseWebViewService
 local OpenWebViewModule = require(InlineRichText.Utils.openWebView)
 
-return function(_) --[[ Line: 20 ]]
+return function(_)
 	-- upvalues: FFlagInlineRichTextUseWebViewService (copy), ReactModule (copy), OpenWebViewModule (copy), UseDispatchFunction (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
 	if FFlagInlineRichTextUseWebViewService then
-		return ReactModule.useCallback(function(p1) --[[ Line: 22 ]]
+		return ReactModule.useCallback(function(p1)
 			-- upvalues: OpenWebViewModule (upval)
 			OpenWebViewModule(p1)
 		end, {})
 	else
 		local UseDispatchResult = UseDispatchFunction()
 		
-		return ReactModule.useCallback(function(Detail) --[[ Line: 27 ]]
+		return ReactModule.useCallback(function(Detail)
 			-- upvalues: AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 			local config = { name = AppPage.GenericWebPage, detail = Detail }
 			

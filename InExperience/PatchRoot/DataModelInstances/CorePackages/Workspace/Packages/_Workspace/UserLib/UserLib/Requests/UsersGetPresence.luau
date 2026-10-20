@@ -1,7 +1,7 @@
 ﻿local HttpService = game:GetService("HttpService")
 local Url = require(script:FindFirstAncestor("UserLib").Parent.Http).Url
 
-return function(Callback, List) --[[ Line: 9 ]]
+return function(Callback, List)
 	-- upvalues: HttpService (copy), Url (copy)
 	local UserIds = {}
 	

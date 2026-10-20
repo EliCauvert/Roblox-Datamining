@@ -68,28 +68,28 @@ local FreezeResult1 = Object.freeze({
 	ARG_DEFAULT_VALUE_CHANGE = "ARG_DEFAULT_VALUE_CHANGE"
 })
 
-local function findBreakingChanges(p1, p2) --[[ Line: 122 ]]
+local function findBreakingChanges(p1, p2)
 	-- upvalues: Array (copy), Callback (ref), FreezeResult (copy)
-	return (Array.filter(Callback(p1, p2), function(p3): boolean --[[ Line: 126 ]]
+	return (Array.filter(Callback(p1, p2), function(p3): boolean
 		-- upvalues: FreezeResult (upval)
 		return FreezeResult[p3.type] ~= nil
 	end))
 end
 
-local function findDangerousChanges(p1, p2) --[[ Line: 136 ]]
+local function findDangerousChanges(p1, p2)
 	-- upvalues: Array (copy), Callback (ref), FreezeResult1 (copy)
-	return (Array.filter(Callback(p1, p2), function(p3): boolean --[[ Line: 140 ]]
+	return (Array.filter(Callback(p1, p2), function(p3): boolean
 		-- upvalues: FreezeResult1 (upval)
 		return FreezeResult1[p3.type] ~= nil
 	end))
 end
 
-Callback = function(p1, p2) --[[ Line: 146 | Named "findSchemaChanges" ]]
+Callback = function(p1, p2)
 	-- upvalues: Array (copy), Callback1 (ref), Callback2 (ref)
 	return Array.concat(Callback1(p1, p2), Callback2(p1, p2))
 end
 
-Callback2 = function(p1, p2) --[[ Line: 156 | Named "findDirectiveChanges" ]]
+Callback2 = function(p1, p2)
 	-- upvalues: Callback3 (ref), FreezeResult (copy), IsRequiredArgumentFunction (copy)
 	local List = {}
 	local CallbackResult = Callback3(p1:getDirectives(), p2:getDirectives())
@@ -137,7 +137,7 @@ Callback2 = function(p1, p2) --[[ Line: 156 | Named "findDirectiveChanges" ]]
 	return List
 end
 
-Callback1 = function(p3, p4) --[[ Line: 215 | Named "findTypeChanges" ]]
+Callback1 = function(p3, p4)
 	-- upvalues: Callback3 (ref), FreezeResult (copy), IsSpecifiedScalarTypeFunction (copy), IsEnumTypeFunction (copy), Callback4 (ref), IsUnionTypeFunction (copy), Callback5 (ref), IsInputObjectTypeFunction (copy), Callback6 (ref), IsObjectTypeFunction (copy), Array (copy), Callback7 (ref), Callback8 (ref), IsInterfaceTypeFunction (copy), Callback9 (ref)
 	local List = {}
 	local CallbackResult = Callback3(p3:getTypeMap():values(), p4:getTypeMap():values())
@@ -184,7 +184,7 @@ Callback1 = function(p3, p4) --[[ Line: 215 | Named "findTypeChanges" ]]
 	return List
 end
 
-Callback6 = function(p5, p6) --[[ Line: 284 | Named "findInputObjectTypeChanges" ]]
+Callback6 = function(p5, p6)
 	-- upvalues: Callback3 (ref), IsRequiredInputFieldFunction (copy), FreezeResult (copy), FreezeResult1 (copy), Callback10 (ref)
 	local List = {}
 	local CallbackResult = Callback3(p5:getFields():values(), p6:getFields():values())
@@ -222,7 +222,7 @@ Callback6 = function(p5, p6) --[[ Line: 284 | Named "findInputObjectTypeChanges"
 	return List
 end
 
-Callback5 = function(p7, p8) --[[ Line: 339 | Named "findUnionTypeChanges" ]]
+Callback5 = function(p7, p8)
 	-- upvalues: Callback3 (ref), FreezeResult1 (copy), FreezeResult (copy)
 	local List = {}
 	local CallbackResult = Callback3(p7:getTypes(), p8:getTypes())
@@ -242,7 +242,7 @@ Callback5 = function(p7, p8) --[[ Line: 339 | Named "findUnionTypeChanges" ]]
 	return List
 end
 
-Callback4 = function(p9, p10) --[[ Line: 368 | Named "findEnumTypeChanges" ]]
+Callback4 = function(p9, p10)
 	-- upvalues: Callback3 (ref), FreezeResult1 (copy), FreezeResult (copy)
 	local List = {}
 	local CallbackResult = Callback3(p9:getValues(), p10:getValues())
@@ -262,7 +262,7 @@ Callback4 = function(p9, p10) --[[ Line: 368 | Named "findEnumTypeChanges" ]]
 	return List
 end
 
-Callback8 = function(p11, p12) --[[ Line: 390 | Named "findImplementedInterfacesChanges" ]]
+Callback8 = function(p11, p12)
 	-- upvalues: Callback3 (ref), FreezeResult1 (copy), FreezeResult (copy)
 	local List = {}
 	local CallbackResult = Callback3(p11:getInterfaces(), p12:getInterfaces())
@@ -282,7 +282,7 @@ Callback8 = function(p11, p12) --[[ Line: 390 | Named "findImplementedInterfaces
 	return List
 end
 
-Callback7 = function(p13, p14) --[[ Line: 420 | Named "findFieldChanges" ]]
+Callback7 = function(p13, p14)
 	-- upvalues: Callback3 (ref), FreezeResult (copy), Callback11 (ref), Callback12 (ref)
 	local List = {}
 	local CallbackResult = Callback3(p13:getFields():values(), p14:getFields():values())
@@ -310,7 +310,7 @@ Callback7 = function(p13, p14) --[[ Line: 420 | Named "findFieldChanges" ]]
 	return List
 end
 
-Callback11 = function(p15, p16, p17) --[[ Line: 461 | Named "findArgChanges" ]]
+Callback11 = function(p15, p16, p17)
 	-- upvalues: Callback3 (ref), FreezeResult (copy), Callback10 (ref), FreezeResult1 (copy), Callback13 (ref), IsRequiredArgumentFunction (copy)
 	local List = {}
 	local CallbackResult = Callback3(p16.args, p17.args)
@@ -365,17 +365,17 @@ Callback11 = function(p15, p16, p17) --[[ Line: 461 | Named "findArgChanges" ]]
 	return List
 end
 
-Callback12 = function(OfType, OfType1) --[[ Line: 550 | Named "isChangeSafeForObjectOrInterfaceField" ]]
+Callback12 = function(OfType, OfType1)
 	-- upvalues: IsListTypeFunction (copy), Callback12 (ref), IsNonNullTypeFunction (copy), IsNamedTypeFunction (copy)
 	return if IsListTypeFunction(OfType) then IsListTypeFunction(OfType1) and Callback12(OfType.ofType, OfType1.ofType) or IsNonNullTypeFunction(OfType1) and Callback12(OfType, OfType1.ofType) elseif IsNonNullTypeFunction(OfType) then IsNonNullTypeFunction(OfType1) and Callback12(OfType.ofType, OfType1.ofType) else IsNamedTypeFunction(OfType1) and OfType.name == OfType1.name or IsNonNullTypeFunction(OfType1) and Callback12(OfType, OfType1.ofType)
 end
 
-Callback10 = function(OfType, OfType1) --[[ Line: 572 | Named "isChangeSafeForInputObjectFieldOrFieldArg" ]]
+Callback10 = function(OfType, OfType1)
 	-- upvalues: IsListTypeFunction (copy), Callback10 (ref), IsNonNullTypeFunction (copy), IsNamedTypeFunction (copy)
 	return if IsListTypeFunction(OfType) then IsListTypeFunction(OfType1) and Callback10(OfType.ofType, OfType1.ofType) elseif IsNonNullTypeFunction(OfType) then IsNonNullTypeFunction(OfType1) and Callback10(OfType.ofType, OfType1.ofType) or not IsNonNullTypeFunction(OfType1) and Callback10(OfType.ofType, OfType1) else IsNamedTypeFunction(OfType1) and OfType.name == OfType1.name
 end
 
-Callback9 = function(p18): string --[[ Line: 593 | Named "typeKindName" ]]
+Callback9 = function(p18): string
 	-- upvalues: IsScalarTypeFunction (copy), IsObjectTypeFunction (copy), IsInterfaceTypeFunction (copy), IsUnionTypeFunction (copy), IsEnumTypeFunction (copy), IsInputObjectTypeFunction (copy), InvariantFunction (copy), InspectFunction (copy)
 	if IsScalarTypeFunction(p18) then
 		return "a Scalar type"
@@ -396,16 +396,16 @@ Callback9 = function(p18): string --[[ Line: 593 | Named "typeKindName" ]]
 	end
 end
 
-Callback13 = function(DefaultValue, Type) --[[ Line: 620 | Named "stringifyValue" ]]
+Callback13 = function(DefaultValue, Type)
 	-- upvalues: AstFromValueFunction (copy), InvariantFunction (copy), VisitFunction (copy), Array (copy), NaturalCompareFunction (copy), Object (copy), PrintFunction (copy)
 	local AstFromValueResult = AstFromValueFunction(DefaultValue, Type)
 	InvariantFunction(AstFromValueResult ~= nil)
 	
 	return PrintFunction((VisitFunction(AstFromValueResult, {
-		ObjectValue = function(_, p18) --[[ Line: 628 ]]
+		ObjectValue = function(_, p18)
 			-- upvalues: Array (upval), NaturalCompareFunction (upval), Object (upval)
 			local ConcatResult = Array.concat({}, p18.fields)
-			Array.sort(ConcatResult, function(p19, p20) --[[ Line: 632 ]]
+			Array.sort(ConcatResult, function(p19, p20)
 				-- upvalues: NaturalCompareFunction (upval)
 				return NaturalCompareFunction(p19.name.value, p20.name.value)
 			end)
@@ -415,15 +415,15 @@ Callback13 = function(DefaultValue, Type) --[[ Line: 620 | Named "stringifyValue
 	})))
 end
 
-Callback3 = function(ValuesResult, ValuesResult1) --[[ Line: 645 | Named "diff" ]]
+Callback3 = function(ValuesResult, ValuesResult1)
 	-- upvalues: KeyMapOrderedFunction (copy)
 	local Added = {}
 	local Removed = {}
 	local Persisted = {}
-	local KeyMapOrderedResult = KeyMapOrderedFunction(ValuesResult, function(p18) --[[ Line: 656 ]]
+	local KeyMapOrderedResult = KeyMapOrderedFunction(ValuesResult, function(p18)
 		return p18.name
 	end)
-	local KeyMapOrderedResult1 = KeyMapOrderedFunction(ValuesResult1, function(p18) --[[ Line: 659 ]]
+	local KeyMapOrderedResult1 = KeyMapOrderedFunction(ValuesResult1, function(p18)
 		return p18.name
 	end)
 	

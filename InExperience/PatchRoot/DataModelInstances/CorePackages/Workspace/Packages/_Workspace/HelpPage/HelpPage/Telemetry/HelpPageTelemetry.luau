@@ -4,7 +4,7 @@ local HelpPageThrottleHundredthsPercent = game:DefineFastInt("HelpPageThrottleHu
 local HelpPageTelemetryModule = {}
 HelpPageTelemetryModule.__index = HelpPageTelemetryModule
 
-function HelpPageTelemetryModule.new() --[[ Line: 35 ]]
+function HelpPageTelemetryModule.new()
 	-- upvalues: HelpPageTelemetryModule (copy)
 	return (setmetatable({}, HelpPageTelemetryModule))
 end
@@ -27,7 +27,7 @@ HelpPageTelemetryModule.telemetryConfigs = {
 	}
 }
 
-function HelpPageTelemetryModule:logHelpPageInteraction(EventContext, CustomFields) --[[ Line: 59 ]]
+function HelpPageTelemetryModule:logHelpPageInteraction(EventContext, CustomFields)
 	-- upvalues: HelpPageTelemetryModule (copy), TelemetryService (copy)
 	TelemetryService:LogEvent(HelpPageTelemetryModule.telemetryConfigs.helpPageInteraction.eventConfig, {
 		eventContext = EventContext,

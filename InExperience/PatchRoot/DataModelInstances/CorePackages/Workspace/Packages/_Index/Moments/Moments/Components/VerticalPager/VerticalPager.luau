@@ -15,27 +15,27 @@ local FIntMomentsFeedAnimationSpeedModule = require(Moments.Flags.FIntMomentsFee
 local VerticalPagerContextModule = require(script.Parent.VerticalPagerContext)
 local VerticalPagerContext = VerticalPagerContextModule.VerticalPagerContext
 local PagerItemContext = VerticalPagerContextModule.PagerItemContext
-local MemoResult = ReactModule.memo(function(p1) --[[ Line: 57 | Named "PagerItemProviderInner" ]]
+local MemoResult = ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), SignalsModule (copy), PagerItemContext (copy), SnapMathModule (copy)
 	local Index = p1.index
 	local GetActiveIndexFunction = p1.getActiveIndex
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 61 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), GetActiveIndexFunction (copy), Index (copy)
-		return SignalsModule.createComputed(function(p2): boolean --[[ Line: 62 ]]
+		return SignalsModule.createComputed(function(p2): boolean
 			-- upvalues: GetActiveIndexFunction (upval), Index (upval)
 			return GetActiveIndexFunction(p2) == Index
 		end)
 	end, { GetActiveIndexFunction, Index })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 70 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), GetActiveIndexFunction (copy), Index (copy)
-		return SignalsModule.createComputed(function(p2): boolean --[[ Line: 71 ]]
+		return SignalsModule.createComputed(function(p2): boolean
 			-- upvalues: GetActiveIndexFunction (upval), Index (upval)
 			return math.abs(GetActiveIndexFunction(p2) - Index) <= 1
 		end)
 	end, { GetActiveIndexFunction, Index })
 	
 	return ReactModule.createElement(PagerItemContext.Provider, {
-		value = ReactModule.useMemo(function() --[[ Line: 76 ]]
+		value = ReactModule.useMemo(function()
 			-- upvalues: Index (copy), p1 (copy), UseMemoResult (copy), UseMemoResult1 (copy)
 			return {
 				index = Index,
@@ -53,21 +53,21 @@ local MemoResult = ReactModule.memo(function(p1) --[[ Line: 57 | Named "PagerIte
 	})
 end)
 
-local function useNativeScrollEnabled() --[[ Line: 121 ]]
+local function useNativeScrollEnabled()
 	-- upvalues: ReactModule (copy), UserInputService (copy)
-	local function _(UserInputType): boolean --[[ Line: 122 | Named "isNonTouch" ]]
+	local function _(UserInputType): boolean
 		return UserInputType == Enum.UserInputType.MouseWheel or (UserInputType == Enum.UserInputType.MouseButton1 or (UserInputType == Enum.UserInputType.MouseMovement or UserInputType == Enum.UserInputType.Keyboard))
 	end
 	
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean --[[ Line: 129 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean
 		-- upvalues: UserInputService (upval)
 		local LastInputType = UserInputService:GetLastInputType()
 		
 		return not (LastInputType == Enum.UserInputType.MouseWheel or (LastInputType == Enum.UserInputType.MouseButton1 or (LastInputType == Enum.UserInputType.MouseMovement or LastInputType == Enum.UserInputType.Keyboard)))
 	end)
-	ReactModule.useEffect(function() --[[ Line: 133 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UserInputService (upval), UseStateResult2 (copy)
-		local LastInputTypeChangedConnection = UserInputService.LastInputTypeChanged:Connect(function(UserInputType) --[[ Line: 134 ]]
+		local LastInputTypeChangedConnection = UserInputService.LastInputTypeChanged:Connect(function(UserInputType)
 			-- upvalues: UseStateResult2 (upval)
 			if UserInputType == Enum.UserInputType.Touch then
 				UseStateResult2(true)
@@ -79,7 +79,7 @@ local function useNativeScrollEnabled() --[[ Line: 121 ]]
 			end
 		end)
 		
-		return function() --[[ Line: 141 ]]
+		return function()
 			-- upvalues: LastInputTypeChangedConnection (copy)
 			LastInputTypeChangedConnection:Disconnect()
 		end
@@ -88,7 +88,7 @@ local function useNativeScrollEnabled() --[[ Line: 121 ]]
 	return UseStateResult
 end
 
-return function(Frame: Frame) --[[ Line: 149 | Named "VerticalPager" ]]
+return function(Frame: Frame)
 	-- upvalues: ConstantsModule (copy), FFlagMomentsFeedSwipeSensitivityConfigModule (copy), FIntMomentsFeedSnapSensitivityMilliModule (copy), FIntMomentsFeedAnimationSpeedModule (copy), ReactModule (copy), useNativeScrollEnabled (copy), UsePagerControllerModule (copy), UsePagerInputNavigationModule (copy), SignalsReactModule (copy), SnapMathModule (copy), MemoResult (copy), VerticalPagerContext (copy)
 	local Store = Frame.store
 	local RenderItem = Frame.renderItem
@@ -112,7 +112,7 @@ return function(Frame: Frame) --[[ Line: 149 | Named "VerticalPager" ]]
 	local InitialIndex = Frame.initialIndex
 	local KeyboardNavigation = Tuning.keyboardNavigation or "global"
 	
-	local function _(p1, p2) --[[ Line: 180 | Named "keyOf" ]]
+	local function _(p1, p2)
 		-- upvalues: KeyExtractorFunction (copy)
 		return if KeyExtractorFunction == nil then tostring(p2) else KeyExtractorFunction(p1, p2)
 	end
@@ -121,7 +121,7 @@ return function(Frame: Frame) --[[ Line: 149 | Named "VerticalPager" ]]
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef({})
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 194 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy)
 		UseStateResult2(Frame)
 		
@@ -129,7 +129,7 @@ return function(Frame: Frame) --[[ Line: 149 | Named "VerticalPager" ]]
 			UseStateResult2_1(Frame.AbsoluteSize.Y)
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(Frame) --[[ Line: 201 ]]
+	local UseResult1 = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(Frame.AbsoluteSize.Y)
 	end, {})
@@ -154,7 +154,7 @@ return function(Frame: Frame) --[[ Line: 149 | Named "VerticalPager" ]]
 	local UseSignalStateResult: number = SignalsReactModule.useSignalState(Store.getCount)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(Store.getItems)
 	local UseSignalStateResult2 = SignalsReactModule.useSignalState(UsePagerControllerModuleResult.getActiveIndex)
-	ReactModule.useEffect(function() --[[ Line: 238 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: OnEndReachedFunction (copy), UseSignalStateResult (copy), UseSignalStateResult2 (copy), EndReachedThreshold (copy), UseRefResult (copy), UseSignalStateResult1 (copy)
 		if OnEndReachedFunction == nil or UseSignalStateResult <= 0 then return end
 		if UseSignalStateResult - EndReachedThreshold <= UseSignalStateResult2 and UseRefResult.current ~= UseSignalStateResult1 then
@@ -168,7 +168,7 @@ return function(Frame: Frame) --[[ Line: 149 | Named "VerticalPager" ]]
 		EndReachedThreshold,
 		OnEndReachedFunction
 	})
-	ReactModule.useEffect(function() --[[ Line: 250 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Analytics (copy), UseSignalStateResult (copy), UseSignalStateResult1 (copy), UseSignalStateResult2 (copy), KeyExtractorFunction (copy), UseRefResult1 (copy)
 		local OnItemImpression: (any, any) -> () = if Analytics == nil then nil else Analytics.onItemImpression
 		
@@ -191,7 +191,7 @@ return function(Frame: Frame) --[[ Line: 149 | Named "VerticalPager" ]]
 		Analytics,
 		KeyExtractorFunction
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 267 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Store (copy), UsePagerControllerModuleResult (copy), Analytics (copy)
 		return {
 			store = Store,
@@ -205,7 +205,7 @@ return function(Frame: Frame) --[[ Line: 149 | Named "VerticalPager" ]]
 		}
 	end, { Store, UsePagerControllerModuleResult, Analytics })
 	local UseRefResult2 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 286 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult2 (copy), InitialIndex (copy), UseSignalStateResult (copy), Store (copy)
 		if UseRefResult2.current then return end
 		if InitialIndex == nil then
@@ -225,7 +225,7 @@ return function(Frame: Frame) --[[ Line: 149 | Named "VerticalPager" ]]
 		Store.getCurrentIndex,
 		Store.goToItem
 	})
-	ReactModule.useImperativeHandle(Frame.controllerRef, function() --[[ Line: 305 ]]
+	ReactModule.useImperativeHandle(Frame.controllerRef, function()
 		-- upvalues: UsePagerControllerModuleResult (copy)
 		return UsePagerControllerModuleResult
 	end, { UsePagerControllerModuleResult })

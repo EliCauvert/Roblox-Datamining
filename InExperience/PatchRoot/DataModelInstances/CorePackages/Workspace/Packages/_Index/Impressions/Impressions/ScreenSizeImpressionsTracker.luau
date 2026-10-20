@@ -6,7 +6,7 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local GetShortcutBarStatusStoreFunction = require(Parent.AppShortcutBarStore).GetShortcutBarStatusStore
 local FFlagUnifyShortcutBarFixImpressions = require(Parent.SharedFlags).FFlagUnifyShortcutBarFixImpressions
 
-return function(p1) --[[ Line: 35 ]]
+return function(p1)
 	-- upvalues: FFlagUnifyShortcutBarFixImpressions (copy), SignalsReactModule (copy), GetShortcutBarStatusStoreFunction (copy), UseViewportBoundsFunction (copy), ReactModule (copy), ImpressionsTrackerModule (copy)
 	local UseSignalStateResult = if FFlagUnifyShortcutBarFixImpressions then SignalsReactModule.useSignalState(GetShortcutBarStatusStoreFunction(false).getShortcutBarReservedHeight) else nil
 	

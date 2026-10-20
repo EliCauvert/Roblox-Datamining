@@ -1,7 +1,7 @@
 ﻿local ExpChatSharedModule = require(script:FindFirstAncestor("ExpChat").Parent.ExpChatShared)
 game:DefineFastFlag("ExpChatGlobalCommandAutocompletePrimaryAliasOnly", false)
 
-return function(p1) --[[ Line: 7 ]]
+return function(p1)
 	-- upvalues: ExpChatSharedModule (copy)
 	for _, value in ExpChatSharedModule.GlobalCommands.getGlobalEnabledCommands() do
 		if game:GetFastFlag("ExpChatGlobalCommandAutocompletePrimaryAliasOnly") then

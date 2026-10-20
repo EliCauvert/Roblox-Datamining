@@ -2,7 +2,7 @@
 local _ = require(script.Parent.source)
 
 return {
-	getLocation = function(p1, Column: number) --[[ Line: 27 ]]
+	getLocation = function(p1, Column: number)
 		-- upvalues: String1 (copy)
 		local list = { "\r\n", "\r", "\n" }
 		local Line = 1

@@ -4,21 +4,21 @@ local VOICESTATE = nil
 VOICESTATE = if require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Flags.FFlagEnableVoiceChatStorybookFix)() then require(CorePackages.Workspace.Packages.VoiceChat).Constants.VOICE_STATE else require(script.Parent.Parent.VoiceChatServiceManager).default.VOICE_STATE
 
 return (require(CorePackages.Packages.Rodux).createReducer({}, {
-	[require(script.Parent.Parent.Actions.VoiceEnabledChanged).name] = function(p1, p2) --[[ Line: 26 ]]
+	[require(script.Parent.Parent.Actions.VoiceEnabledChanged).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, { voiceEnabled = p2.enabled })
 	end,
-	[require(script.Parent.Parent.Actions.ParticipantAdded).name] = function(p1, p2) --[[ Line: 32 ]]
+	[require(script.Parent.Parent.Actions.ParticipantAdded).name] = function(p1, p2)
 		-- upvalues: VOICESTATE (ref), CryoModule (copy)
 		local UserId = p2.userId
 		
 		return CryoModule.Dictionary.join(p1, { [UserId] = p1[UserId] or VOICESTATE.HIDDEN })
 	end,
-	[require(script.Parent.Parent.Actions.ParticipantRemoved).name] = function(p1, p2) --[[ Line: 42 ]]
+	[require(script.Parent.Parent.Actions.ParticipantRemoved).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, { [p2.userId] = CryoModule.None })
 	end,
-	[require(script.Parent.Parent.Actions.ParticipantsChanged).name] = function(Tbl, p1) --[[ Line: 49 ]]
+	[require(script.Parent.Parent.Actions.ParticipantsChanged).name] = function(Tbl, p1)
 		-- upvalues: VOICESTATE (ref)
 		local Copy = table.clone(Tbl)
 		
@@ -27,7 +27,7 @@ return (require(CorePackages.Packages.Rodux).createReducer({}, {
 		end
 		return Copy
 	end,
-	[require(script.Parent.Parent.Actions.VoiceStateChanged).name] = function(p2, p3) --[[ Line: 69 ]]
+	[require(script.Parent.Parent.Actions.VoiceStateChanged).name] = function(p2, p3)
 		-- upvalues: CryoModule (copy)
 		return if p2[p3.userId] then CryoModule.Dictionary.join(p2, { [p3.userId] = p3.newState }) else p2
 	end

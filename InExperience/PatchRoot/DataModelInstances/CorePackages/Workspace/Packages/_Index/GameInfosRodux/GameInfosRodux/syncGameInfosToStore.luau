@@ -5,7 +5,7 @@ local _ = require(Parent.DiscoveryTypes)
 local TutilsModule = require(Parent.tutils)
 local config = { creator = true }
 
-local function toStoreItem(p1) --[[ Line: 19 ]]
+local function toStoreItem(p1)
 	return {
 		universeId = p1.universeId,
 		rootPlaceId = p1.placeId,
@@ -18,7 +18,7 @@ local function toStoreItem(p1) --[[ Line: 19 ]]
 	}
 end
 
-local function _(p1, p2) --[[ Line: 43 | Named "isUnchanged" ]]
+local function _(p1, p2)
 	-- upvalues: TutilsModule (copy), CryoModule (copy), config (copy)
 	if not p1 then
 		return false
@@ -31,7 +31,7 @@ local function _(p1, p2) --[[ Line: 43 | Named "isUnchanged" ]]
 	end
 end
 
-local function syncVotesToStore(List) --[[ Line: 63 ]]
+local function syncVotesToStore(List)
 	-- upvalues: DataHydrationModule (copy)
 	local VotesStore = DataHydrationModule.Game.getVotesStore(false)
 	local t = {}
@@ -57,7 +57,7 @@ local function syncVotesToStore(List) --[[ Line: 63 ]]
 	end
 end
 
-return function(List) --[[ Line: 91 | Named "syncGameInfosToStore" ]]
+return function(List)
 	-- upvalues: DataHydrationModule (copy), toStoreItem (copy), CryoModule (copy), TutilsModule (copy), config (copy), syncVotesToStore (copy)
 	local GameInfoStore = DataHydrationModule.Game.getGameInfoStore(false)
 	local t = {}

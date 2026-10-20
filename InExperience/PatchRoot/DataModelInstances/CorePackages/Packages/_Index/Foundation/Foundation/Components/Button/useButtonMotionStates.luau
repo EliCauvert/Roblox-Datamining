@@ -3,7 +3,7 @@ local _ = require(Parent.React)
 local MotionModule = require(Parent.Motion)
 local TransitionPreset = MotionModule.TransitionPreset
 
-return function(p1, TextTransparency) --[[ Line: 27 | Named "useButtonMotionStates" ]]
+return function(p1, TextTransparency)
 	-- upvalues: MotionModule (copy), TransitionPreset (copy)
 	return {
 		Default = MotionModule.createState({

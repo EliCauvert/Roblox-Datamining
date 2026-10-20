@@ -18,7 +18,7 @@ ExtendResult.defaultProps = {
 	borderState = AuthStatefulRoundCornerBorderModule.BorderState.Default
 }
 
-function ExtendResult.render(p1) --[[ Line: 32 ]]
+function ExtendResult.render(p1)
 	-- upvalues: GetFFlagEnableAuthStatefulTextInputUpdatesFunction (copy), WithStyleFunction (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), AuthStatefulRoundCornerBorderModule (copy), PasswordBoxModule (copy), GenericTextBoxModule (copy)
 	local Text = p1.props.text
 	local TextInputType = p1.props.textInputType
@@ -35,7 +35,7 @@ function ExtendResult.render(p1) --[[ Line: 32 ]]
 	local MaxLength = p1.props.maxLength
 	local IsTextInputTypeMatch = p1.props.textInputType == Enum.TextInputType.Password
 	
-	return WithStyleFunction(function(p2) --[[ Line: 51 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: p1 (copy), RoactModule (upval), LayoutOrder (copy), TextInputListPadding (copy), LabelText (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), AuthStatefulRoundCornerBorderModule (upval), TextInputHeight (copy), GetFFlagEnableAuthStatefulTextInputUpdatesFunction (upval), BorderState (copy), IsTextInputTypeMatch (copy), PasswordBoxModule (upval), Text (copy), PlaceholderText (copy), OnChangeTextCallback (copy), GenericTextBoxModule (upval), TextInputType (copy), OnFocused (copy), OnFocusLost (copy), MaxLength (copy), ErrorText (copy)
 		local BodyFont = p2.Font.Body.Font
 		local ScaledBaseSize = p2.Font.BaseSize * p2.Font.Body.RelativeSize

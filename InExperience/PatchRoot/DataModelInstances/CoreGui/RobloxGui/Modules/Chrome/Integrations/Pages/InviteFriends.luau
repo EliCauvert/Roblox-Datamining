@@ -8,16 +8,16 @@ local CommonIconModule = require(Chrome.Integrations.CommonIcon)
 local SideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement
 local InGameMenuIntegrationUtilsModule = require(script.Parent.InGameMenuIntegrationUtils)
 local NewResult = require(CorePackages.Workspace.Packages.AppCommonLib).Signal.new()
-local NewResult1 = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(NewResult, function() --[[ Line: 22 ]]
+local NewResult1 = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(NewResult, function()
 	-- upvalues: GameInviteModalManager (copy)
 	return GameInviteModalManager:isGameModalOpen()
 end)
-GameInviteModalManager.ToggleGameInviteModalEvent.Event:Connect(function() --[[ Line: 25 ]]
+GameInviteModalManager.ToggleGameInviteModalEvent.Event:Connect(function()
 	-- upvalues: NewResult (copy)
 	NewResult:fire()
 end)
 
-local function _(): boolean --[[ Line: 29 | Named "shouldShowInviteFriends" ]]
+local function _(): boolean
 	-- upvalues: RunService (copy), Players (copy)
 	return not RunService:IsStudio() and (Players.LocalPlayer ~= nil and Players.LocalPlayer.UserId > 0)
 end
@@ -30,7 +30,7 @@ local config = {
 	activated = InGameMenuIntegrationUtilsModule.toggleInviteFriendsPage,
 	isActivated = NewResult1,
 	components = {
-		Icon = function() --[[ Line: 43 ]]
+		Icon = function()
 			-- upvalues: CommonIconModule (copy), NewResult1 (copy)
 			return CommonIconModule("PersonArrowFromBottomRight", nil, NewResult1)
 		end

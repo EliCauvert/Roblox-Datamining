@@ -20,7 +20,7 @@ local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 
-return function(p1) --[[ Line: 37 ]]
+return function(p1)
 	-- upvalues: UseScreenSizeFunction (copy), UseStyleFunction (copy), UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseStateFunction (copy), UseEffectFunction (copy), UseCallbackFunction (copy), DeleteWarningModalClosedModule (copy), EventNamesModule (copy), RecordDeleteWarningModalOptOutModule (copy), ReactModule (copy), InteractiveAlert (copy), ButtonType (copy), Checkbox (copy)
 	local UseScreenSizeResult = UseScreenSizeFunction()
 	local UseStyleResult = UseStyleFunction()
@@ -36,16 +36,16 @@ return function(p1) --[[ Line: 37 ]]
 		optOutText = "Feature.Captures.Label.DeleteCaptureWarningOptOut"
 	})
 	local Theme = UseStyleResult.Theme
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 56 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
 		return p2[ConstantsModule.RoduxKey].Carousel.IsDeleteWarningModalOpen
 	end)
-	local UseSelectorResult1 = UseSelectorFunction(function(p2) --[[ Line: 60 ]]
+	local UseSelectorResult1 = UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
 		return p2[ConstantsModule.RoduxKey].CaptureManager.SelectedCaptures
 	end)
 	local UseStateResult, UseStateResult2 = UseStateFunction(false)
-	UseEffectFunction(function() --[[ Line: 66 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseSelectorResult (copy), UseStateResult2 (copy)
 		if UseSelectorResult then
 			UseStateResult2(false)
@@ -69,7 +69,7 @@ return function(p1) --[[ Line: 37 ]]
 					{
 						buttonType = ButtonType.Secondary,
 						props = {
-							onActivated = UseCallbackFunction(function() --[[ Line: 72 ]]
+							onActivated = UseCallbackFunction(function()
 								-- upvalues: UseDispatchResult (copy), DeleteWarningModalClosedModule (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval)
 								UseDispatchResult(DeleteWarningModalClosedModule())
 								UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesDeleteWarningModalCancelPressed)
@@ -80,7 +80,7 @@ return function(p1) --[[ Line: 37 ]]
 					{
 						buttonType = ButtonType.PrimarySystem,
 						props = {
-							onActivated = UseCallbackFunction(function() --[[ Line: 77 ]]
+							onActivated = UseCallbackFunction(function()
 								-- upvalues: p1 (copy), UseStateResult (copy), RecordDeleteWarningModalOptOutModule (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval), UseDispatchResult (copy), DeleteWarningModalClosedModule (upval)
 								p1.deleteItem()
 								
@@ -95,13 +95,13 @@ return function(p1) --[[ Line: 37 ]]
 					}
 				}
 			},
-			middleContent = function() --[[ Line: 118 ]]
+			middleContent = function()
 				-- upvalues: ReactModule (upval), Checkbox (upval), UseLocalizationResult (copy), UseStateResult (copy), UseStateResult2 (copy)
 				return ReactModule.createElement(Checkbox, {
 					isDisabled = false,
 					label = UseLocalizationResult.optOutText,
 					isChecked = UseStateResult,
-					onActivated = function() --[[ Line: 123 ]]
+					onActivated = function()
 						-- upvalues: UseStateResult2 (upval), UseStateResult (upval)
 						UseStateResult2(not UseStateResult)
 					end

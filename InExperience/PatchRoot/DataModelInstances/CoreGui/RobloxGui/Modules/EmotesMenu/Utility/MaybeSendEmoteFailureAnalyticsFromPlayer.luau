@@ -1,6 +1,6 @@
 ﻿local ConstantsModule = require(script.Parent.Parent.Constants)
 
-return function(Player, Callback: (any) -> ()): boolean --[[ Line: 16 | Named "MaybeSendEmoteFailureAnalyticsFromPlayer" ]]
+return function(Player, Callback: (any) -> ()): boolean
 	-- upvalues: ConstantsModule (copy)
 	local Character = Player.Character
 	

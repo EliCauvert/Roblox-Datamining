@@ -1,7 +1,7 @@
 ﻿local ExperimentCacheManager = require(script:FindFirstAncestor("DiscoveryUtils").Parent.ExperimentCacheManager).ExperimentCacheManager
 local LuaAppVerticalEfficiencyExpLayer = game:DefineFastString("LuaAppVerticalEfficiencyExpLayer", "PlayerApp.HomePage.UX")
 
-local function _(p1) --[[ Line: 12 | Named "getIsUserInTreatmentAndSendExposureLog" ]]
+local function _(p1)
 	-- upvalues: LuaAppVerticalEfficiencyExpLayer (copy), ExperimentCacheManager (copy)
 	local LayerVariables = ExperimentCacheManager.default:getLayerVariables(LuaAppVerticalEfficiencyExpLayer, true)
 	
@@ -15,7 +15,7 @@ local function _(p1) --[[ Line: 12 | Named "getIsUserInTreatmentAndSendExposureL
 end
 
 return {
-	getIsProfileMovedToTopBar = function() --[[ Line: 24 ]]
+	getIsProfileMovedToTopBar = function()
 		-- upvalues: LuaAppVerticalEfficiencyExpLayer (copy), ExperimentCacheManager (copy)
 		local LayerVariables = ExperimentCacheManager.default:getLayerVariables(LuaAppVerticalEfficiencyExpLayer, true)
 		
@@ -27,7 +27,7 @@ return {
 			return false
 		end
 	end,
-	getIsRobloxLogoHeaderEnabled = function() --[[ Line: 28 ]]
+	getIsRobloxLogoHeaderEnabled = function()
 		-- upvalues: LuaAppVerticalEfficiencyExpLayer (copy), ExperimentCacheManager (copy)
 		local LayerVariables = ExperimentCacheManager.default:getLayerVariables(LuaAppVerticalEfficiencyExpLayer, true)
 		

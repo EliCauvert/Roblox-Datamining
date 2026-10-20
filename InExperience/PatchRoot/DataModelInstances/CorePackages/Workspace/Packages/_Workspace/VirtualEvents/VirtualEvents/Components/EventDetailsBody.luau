@@ -15,18 +15,18 @@ local Text1 = FoundationModule.Text
 local Icon = FoundationModule.Icon
 local IconSize = FoundationModule.Enums.IconSize
 
-return function(p1) --[[ Line: 36 | Named "EventDetailsBody" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Text (copy), GetEventCategoryModule (copy), GetVirtualEventDatesModule (copy), UseLocalizationFunction (copy), AttendanceChipModule (copy), Text1 (copy), DescriptionExpanderModule (copy), Icon (copy), IconSize (copy), FormatDateModule (copy)
 	local UseTokensResult = UseTokensFunction()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 39 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), Text (upval)
 		return if p1.virtualEvent.description == nil then nil else Text.Trim(p1.virtualEvent.description)
 	end, { p1.virtualEvent.description })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 46 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: GetEventCategoryModule (upval), p1 (copy)
 		return GetEventCategoryModule(p1.virtualEvent)
 	end, { p1.virtualEvent })
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 50 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: GetVirtualEventDatesModule (upval), p1 (copy)
 		return GetVirtualEventDatesModule(p1.virtualEvent)
 	end, { p1.virtualEvent })

@@ -25,7 +25,7 @@ local RobloxSubscriptionPurchaseAppModule = require(Parent.RobloxSubscriptionPur
 local SurfaceName = RobloxSubscriptionPurchaseAppModule.SurfaceName
 local SurfaceContext = RobloxSubscriptionPurchaseAppModule.SurfaceContext
 
-return function(p1) --[[ Line: 56 | Named "SubscriptionUpsellContainer" ]]
+return function(p1)
 	-- upvalues: UseTransferStoreModule (copy), UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), TransferOriginationModule (copy), SurfaceContext (copy), SharedFlagsModule (copy), RobloxSubscriptionPurchaseAppModule (copy), SurfaceName (copy), ReactModule (copy), LogCurrencyTransferCounterModule (copy), CurrencyTransferTelemetryModule (copy), LogRobuxTransferFlowEventModule (copy), RobuxTransferFlowEventNameModule (copy), PromptStateModule (copy), GetCounterUserIdModule (copy), InExpAmpWizardController (copy), AccessResponseEnum (copy), TransferRetryOriginModule (copy), AcceptTransferModule (copy), InitiateTransferModule (copy), ProcessTransferModule (copy), TransferDirectionModule (copy), AmpWizardTransferConstantsModule (copy)
 	local UseTransferStoreModuleResult = UseTransferStoreModule()
 	local Direction = p1.direction
@@ -46,7 +46,7 @@ return function(p1) --[[ Line: 56 | Named "SubscriptionUpsellContainer" ]]
 			}
 		} else nil
 	}
-	ReactModule.useEffect(function() --[[ Line: 99 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), TriggerOnCloseFunction (copy), LogCurrencyTransferCounterModule (upval), UseTransferStoreModuleResult (copy), CurrencyTransferTelemetryModule (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval), PromptStateModule (upval), GetCounterUserIdModule (upval), Direction (copy), InExpAmpWizardController (upval), AccessResponseEnum (upval), TransferRetryOrigin (copy), TransferRetryOriginModule (upval), AcceptTransferModule (upval), InitiateTransferModule (upval), ProcessTransferModule (upval), SelectedAmount (copy), TransferDirectionModule (upval), config (copy), AmpWizardTransferConstantsModule (upval)
 		if not p1.ampFeatureCheck then
 			TriggerOnCloseFunction()
@@ -61,7 +61,7 @@ return function(p1) --[[ Line: 56 | Named "SubscriptionUpsellContainer" ]]
 		UseTransferStoreModuleResult.setPreviousPromptState((UseTransferStoreModuleResult.getPromptState(false)))
 		UseTransferStoreModuleResult.setPromptState(PromptStateModule.Hidden)
 		local CounterUserIdModule = GetCounterUserIdModule(UseTransferStoreModuleResult, Direction)
-		InExpAmpWizardController.OpenAmpWizardContainerInExp(p1.ampFeatureCheck, function(Granted, _) --[[ Line: 128 ]]
+		InExpAmpWizardController.OpenAmpWizardContainerInExp(p1.ampFeatureCheck, function(Granted, _)
 			-- upvalues: AccessResponseEnum (upval), LogCurrencyTransferCounterModule (upval), UseTransferStoreModuleResult (upval), CurrencyTransferTelemetryModule (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval), TransferRetryOrigin (upval), TransferRetryOriginModule (upval), AcceptTransferModule (upval), InitiateTransferModule (upval), ProcessTransferModule (upval), SelectedAmount (upval), Direction (upval), TransferDirectionModule (upval), TriggerOnCloseFunction (upval)
 			if Granted == AccessResponseEnum.Granted then
 				LogCurrencyTransferCounterModule(UseTransferStoreModuleResult, CurrencyTransferTelemetryModule.CurrencyTransferSubscriptionUpsellWizardResultGrantedCounter, { recourseSurface = "subscription" })

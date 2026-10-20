@@ -7,7 +7,7 @@ local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local PublishBottomSheetModule = require(script.Parent.PublishBottomSheet)
 local GameInfoUtilsModule = require(BuildExperience.utils.GameInfoUtils)
 
-local function getEnrichedTarget(EnrichedTarget, GameInfo, Loading) --[[ Line: 39 ]]
+local function getEnrichedTarget(EnrichedTarget, GameInfo, Loading)
 	-- upvalues: GameInfoUtilsModule (copy)
 	local GameInfo1 = if GameInfoUtilsModule.isGameInfoReady(GameInfo) then GameInfo else nil
 	local Creator = if GameInfo1 then GameInfo1.creator else nil
@@ -24,7 +24,7 @@ local function getEnrichedTarget(EnrichedTarget, GameInfo, Loading) --[[ Line: 3
 	}
 end
 
-return function(p1) --[[ Line: 55 | Named "PublishBottomSheetContainer" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), getEnrichedTarget (copy), ReactModule (copy), PublishBottomSheetModule (copy)
 	return ReactModule.createElement(PublishBottomSheetModule, {
 		isOpen = p1.isOpen,

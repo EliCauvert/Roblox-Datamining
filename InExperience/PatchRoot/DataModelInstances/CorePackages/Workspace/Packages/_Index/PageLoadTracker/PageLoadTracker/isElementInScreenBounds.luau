@@ -1,6 +1,6 @@
 ﻿local PageLoadConfigModule = require(script.Parent.PageLoadConfig)
 
-function isElementInScreenBounds(Frame: Frame, Vector, p1: number): boolean --[[ Line: 3 ]]
+function isElementInScreenBounds(Frame: Frame, Vector, p1: number): boolean
 	-- upvalues: PageLoadConfigModule (copy)
 	local AbsolutePosition = Frame.AbsolutePosition
 	local AbsoluteSize = Frame.AbsoluteSize

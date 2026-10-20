@@ -19,11 +19,11 @@ local Frozen = table.freeze({
 	content = table.freeze({})
 })
 
-local function _(p1, p2) --[[ Line: 78 | Named "buildTag" ]]
+local function _(p1, p2)
 	return if p2 then `{p1} {p2}` else p1
 end
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 89 | Named "Page" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: Frozen (copy), FFlagSduiFeedScrollBarFixes (copy), UseDeviceInsetsFunction (copy), ReactModule (copy), ComputeStickyOffsetModule (copy), CreatePageScrollStoreModule (copy), CreateFeedContextAdapterModule (copy), SignalsModule (copy), ResolveCompositionTagsModule (copy), PageWholeContentModule (copy), PullToRefreshSpinnerModule (copy), PageContextModule (copy), View (copy), PageStickyHeaderModule (copy)
 	local ContentConfig = p1.contentConfig or Frozen
 	local ContentMode = ContentConfig.contentMode
@@ -39,9 +39,9 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 89 |
 	
 	if FFlagSduiFeedScrollBarFixes then
 		local Top = UseDeviceInsetsFunction().top
-		UseMemoResult = ReactModule.useMemo(function() --[[ Line: 104 ]]
+		UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: LiveHeightBinding (copy), Height (copy), ComputeStickyOffsetModule (upval), ScrollAwayHeight (copy), Top (copy)
-			return if LiveHeightBinding == nil or Height <= 0 then nil else LiveHeightBinding:map(function(p2): number --[[ Line: 108 ]]
+			return if LiveHeightBinding == nil or Height <= 0 then nil else LiveHeightBinding:map(function(p2): number
 				-- upvalues: ComputeStickyOffsetModule (upval), ScrollAwayHeight (upval), Top (upval), Height (upval)
 				return (math.clamp(-ComputeStickyOffsetModule(p2, ScrollAwayHeight, Top), 0, Height))
 			end)
@@ -51,31 +51,31 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 89 |
 	UseRefResult.current = OnScrollToEnd
 	local UseMemoResult1 = ReactModule.useMemo(CreatePageScrollStoreModule, {})
 	local UseRefResult1 = ReactModule.useRef(nil)
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 127 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: CreateFeedContextAdapterModule (upval), UseMemoResult1 (copy), UseRefResult1 (copy)
 		return CreateFeedContextAdapterModule(UseMemoResult1, UseRefResult1)
 	end, { UseMemoResult1, UseRefResult1 })
-	ReactModule.useEffect(function() --[[ Line: 131 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult2 (copy)
-		return function() --[[ Line: 132 ]]
+		return function()
 			-- upvalues: UseMemoResult2 (upval)
 			UseMemoResult2.destroy()
 		end
 	end, { UseMemoResult2 })
-	ReactModule.useEffect(function() --[[ Line: 138 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult1 (copy), OnScrollToEndThreshold (copy)
 		UseMemoResult1.setEndReachedThreshold(OnScrollToEndThreshold)
 	end, { UseMemoResult1, OnScrollToEndThreshold })
-	ReactModule.useEffect(function() --[[ Line: 142 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SignalsModule (upval), UseMemoResult1 (copy), UseRefResult (copy)
-		return SignalsModule.createEffect(function(p2) --[[ Line: 143 ]]
+		return SignalsModule.createEffect(function(p2)
 			-- upvalues: UseMemoResult1 (upval), UseRefResult (upval)
 			if UseMemoResult1.getIsEndReached(p2) and UseRefResult.current ~= nil then
 				UseRefResult.current()
 			end
 		end)
 	end, { UseMemoResult1 })
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 174 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: ResolveCompositionTagsModule (upval), Composition (copy)
 		return ResolveCompositionTagsModule(Composition)
 	end, { Composition })
@@ -103,7 +103,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 89 |
 	local CreateElementFunction2 = ReactModule.createElement
 	local Provider = PageContextModule.Provider
 	local config = {
-		value = ReactModule.useMemo(function() --[[ Line: 165 ]]
+		value = ReactModule.useMemo(function()
 			-- upvalues: UseMemoResult2 (copy), UseMemoResult1 (copy), ContentMode (copy)
 			return {
 				scrollViewPositionChangedSignal = UseMemoResult2.scrollViewPositionChangedSignal,
@@ -117,10 +117,10 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 89 |
 	local CreateElementFunction1 = ReactModule.createElement
 	local config1 = {
 		tag = "col size-full",
-		padding = ReactModule.useMemo(function() --[[ Line: 150 ]]
+		padding = ReactModule.useMemo(function()
 			-- upvalues: Height (copy), FFlagSduiFeedScrollBarFixes (upval), UseMemoResult (ref)
 			return if Height <= 0 then nil elseif FFlagSduiFeedScrollBarFixes and UseMemoResult ~= nil then table.freeze({
-				top = UseMemoResult:map(function(p2): UDim --[[ Line: 157 ]]
+				top = UseMemoResult:map(function(p2): UDim
 					-- upvalues: Height (upval)
 					return UDim.new(0, Height - p2)
 				end)

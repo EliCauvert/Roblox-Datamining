@@ -16,7 +16,7 @@ local FriendCarouselRefreshThrottleInterval = game:DefineFastInt("FriendCarousel
 local FFlagSocialCarouselShareQREnabled = require(Parent.SharedFlags).FFlagSocialCarouselShareQREnabled
 local CarouselModule = require(SocialCarousel.Components.Carousel)
 
-return function(p1) --[[ Line: 51 ]]
+return function(p1)
 	-- upvalues: UseRoactServiceFunction (copy), RoactAnalytics (copy), AppEventIngestService (copy), UseSocialCarouselAnalyticsModule (copy), UseSocialCarouselLoadTimerModule (copy), ReactModule (copy), UseSocialCarouselListModule (copy), UseSocialCarouselUnifiedLoggingModule (copy), UseThrottledCallbackFunction (copy), FriendCarouselRefreshThrottleInterval (copy), SocialCarouselContextModule (copy), FFlagSocialCarouselShareQREnabled (copy), CarouselModule (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactAnalytics)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(AppEventIngestService)
@@ -25,11 +25,11 @@ return function(p1) --[[ Line: 51 ]]
 	local UseSocialCarouselListModuleResult = UseSocialCarouselListModule(p1.roduxKey, p1.customTileList)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseSocialCarouselUnifiedLoggingModuleResult = UseSocialCarouselUnifiedLoggingModule(UseRoactServiceResult, UseRoactServiceResult1, p1.unifiedLogging, UseSocialCarouselListModuleResult, UseRefResult)
-	local UseThrottledCallbackResult = UseThrottledCallbackFunction(function() --[[ Line: 68 ]]
+	local UseThrottledCallbackResult = UseThrottledCallbackFunction(function()
 		-- upvalues: UseSocialCarouselListModuleResult (copy)
 		UseSocialCarouselListModuleResult.refreshFriendsList()
 	end, FriendCarouselRefreshThrottleInterval)
-	ReactModule.useEffect(function() --[[ Line: 72 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseThrottledCallbackResult (copy)
 		if p1.refreshSignal then
 			p1.refreshSignal:connect(UseThrottledCallbackResult)

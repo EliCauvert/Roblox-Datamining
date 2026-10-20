@@ -6,9 +6,9 @@ local AssetInfoModule = require(Parent.Models.AssetInfo)
 local SetBundlesModule = require(Parent.Actions.SetBundles)
 local SetAssetsModule = require(Parent.Actions.SetAssets)
 
-return function(p1, Asset) --[[ Line: 12 | Named "UpdateOwnedStatus" ]]
+return function(p1, Asset)
 	-- upvalues: ThunkModule (copy), ConstantsModule (copy), AssetInfoModule (copy), SetAssetsModule (copy), BundleInfoModule (copy), SetBundlesModule (copy)
-	return ThunkModule.new(script.Name, {}, function(p2, _) --[[ Line: 13 ]]
+	return ThunkModule.new(script.Name, {}, function(p2, _)
 		-- upvalues: Asset (copy), ConstantsModule (upval), p1 (copy), AssetInfoModule (upval), SetAssetsModule (upval), BundleInfoModule (upval), SetBundlesModule (upval)
 		local State = p2:getState()
 		

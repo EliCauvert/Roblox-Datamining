@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("MomentsDebugModeAllowList", "")
 
-return function() --[[ Line: 8 ]]
+return function()
 	return game:GetFastString("MomentsDebugModeAllowList")
 end

@@ -21,7 +21,7 @@ local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
 local Count = 0
 local NewResult = require(AppChat.Logger):new(script.Name)
 
-local function _(): number --[[ Line: 31 | Named "getAscendingNumber" ]]
+local function _(): number
 	-- upvalues: Count (ref)
 	Count += 1
 	
@@ -31,7 +31,7 @@ end
 local self = setmetatable({}, (require(script.Parent.SendMessagePolicy)))
 self.__index = self
 
-function self.new(p1, ConversationId, ReplyingToMessage) --[[ Line: 39 ]]
+function self.new(p1, ConversationId, ReplyingToMessage)
 	-- upvalues: MessageModelModule (copy)
 	return (setmetatable({
 		messageSendingId = MessageModelModule.newSendingId(),
@@ -40,7 +40,7 @@ function self.new(p1, ConversationId, ReplyingToMessage) --[[ Line: 39 ]]
 	}, p1))
 end
 
-function self:onBeforeSendingMessage(p1) --[[ Line: 47 ]]
+function self:onBeforeSendingMessage(p1)
 	-- upvalues: NewResult (copy), GetDeepValue2Module (copy), MessageModelModule (copy), Immutable (copy), Count (ref), _DateTime (copy), SendingMessageModule (copy)
 	NewResult:trace("onBeforeSendingMessage conversationId: {} messageSendingId: {}, replyingToId: {}", self.conversationId, self.messageSendingId, if self.replyingToMessage then self.replyingToMessage.id else nil)
 	local DeepValue2Module = GetDeepValue2Module(p1:getState(), `ChatAppReducer.Conversations.{self.conversationId}`)
@@ -58,11 +58,11 @@ function self:onBeforeSendingMessage(p1) --[[ Line: 47 ]]
 	p1:dispatch(SendingMessageModule(self.conversationId, Sending))
 end
 
-function self:sendingMessagePayload() --[[ Line: 74 ]]
+function self:sendingMessagePayload()
 	error("Override me")
 end
 
-function self:onSuccess(p1, p2) --[[ Line: 78 ]]
+function self:onSuccess(p1, p2)
 	-- upvalues: NewResult (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), SentMessageModule (copy), ReceivedChatResponseModule (copy)
 	NewResult:debug("Message sent successfully. conversationId: {} messageSendingId: {} replyingToId: {}", self.conversationId, self.messageSendingId, if self.replyingToMessage then self.replyingToMessage.id else nil)
 	
@@ -81,7 +81,7 @@ function self:onSuccess(p1, p2) --[[ Line: 78 ]]
 	return p2
 end
 
-function self:onFailure(p1, p2) --[[ Line: 112 ]]
+function self:onFailure(p1, p2)
 	-- upvalues: NewResult (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), StatusCodes (copy), ReceivedChannelsMigrationConflictModule (copy), NavigateIntoChatModule (copy), EnumScreensModule (copy), MessageFailedToSendModule (copy), ResponseStatus (copy), MessageModeratedModule (copy)
 	NewResult:error("Failed to send message. conversationId: {}, messageSendingId: {}, responseCode: {}", self.conversationId, self.messageSendingId, p2.responseCode)
 	

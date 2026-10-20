@@ -12,12 +12,12 @@ local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
 local ProfileTypes = EnumsModule.ProfileTypes
 
 return {
-	[EnumsModule.ProfileActions.TradeItems] = if require(ProfilePlatform.Flags.FFlagProfilePlatformEnableTradeItems) then function(p1) --[[ Line: 28 ]]
+	[EnumsModule.ProfileActions.TradeItems] = if require(ProfilePlatform.Flags.FFlagProfilePlatformEnableTradeItems) then function(p1)
 		-- upvalues: EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), AppPage (copy), Url (copy), TextKeysModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
 		return {
 			text = p1.localized[EnumsModule.ProfileActions.TradeItems],
 			onActivated = {
-				[ProfileTypes.User] = function() --[[ Line: 32 ]]
+				[ProfileTypes.User] = function()
 					-- upvalues: p1 (copy), EnumsModule (upval), EventNamesModule (upval), AppPage (upval), Url (upval), TextKeysModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval)
 					if p1.buttonSurface == EnumsModule.ButtonSurface.ContextualMenu then
 						p1.analytics.fireAnalyticsEvent(EventNamesModule.ContextualMenuButtonTradeItems, { buttonSurface = p1.buttonSurface })

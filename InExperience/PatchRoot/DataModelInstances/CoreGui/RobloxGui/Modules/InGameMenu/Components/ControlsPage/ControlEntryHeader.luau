@@ -7,12 +7,12 @@ local ThemedTextLabelModule = require(Parent.Components.ThemedTextLabel)
 local WithLocalizationModule = require(Parent.Localization.withLocalization)
 local StrictInterfaceResult = T.strictInterface({ title = T.string, LayoutOrder = T.integer })
 
-return function(Frame) --[[ Line: 26 | Named "ControlEntry" ]]
+return function(Frame)
 	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), WithLocalizationModule (copy), Roact (copy), ThemedTextLabelModule (copy)
 	if GlobalConfigModule.propValidation then
 		assert(StrictInterfaceResult(Frame))
 	end
-	return WithLocalizationModule({ title = Frame.title })(function(p1) --[[ Line: 33 ]]
+	return WithLocalizationModule({ title = Frame.title })(function(p1)
 		-- upvalues: Roact (upval), Frame (copy), ThemedTextLabelModule (upval)
 		return Roact.createElement("Frame", {
 			BackgroundTransparency = 1,

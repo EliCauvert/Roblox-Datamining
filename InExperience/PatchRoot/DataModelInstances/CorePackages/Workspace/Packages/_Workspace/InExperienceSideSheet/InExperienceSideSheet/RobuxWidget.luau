@@ -11,9 +11,9 @@ local SidesheetAnalyticsModule = require(InExperienceSideSheet.Analytics.Sideshe
 local UseRobuxBalanceModule = require(InExperienceSideSheet.Hooks.useRobuxBalance)
 local ToggleSideSheetModule = require(InExperienceSideSheet.Utils.toggleSideSheet)
 
-return ReactModule.memo(function(p1) --[[ Line: 27 | Named "RobuxWidget" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseRobuxBalanceModule (copy), UseLocalizationFunction (copy), ReactModule (copy), ToggleSideSheetModule (copy), SidesheetAnalyticsModule (copy), AnalyticsConstantsModule (copy), FFlagSideSheetFocusNav (copy), View (copy), RobuxPill (copy)
-	local UseResult = if FFlagSideSheetFocusNav then ReactModule.useCallback(function(p2) --[[ Line: 41 ]]
+	local UseResult = if FFlagSideSheetFocusNav then ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy)
 		if p2 and p1.firstIntegrationToFocusCallback then
 			p1.firstIntegrationToFocusCallback(p2)
@@ -29,7 +29,7 @@ return ReactModule.memo(function(p1) --[[ Line: 27 | Named "RobuxWidget" ]]
 			isCompact = true,
 			robuxBalance = UseRobuxBalanceModule(),
 			buyButtonText = UseLocalizationFunction({ buyRobux = "IAPExperience.RobuxUpsell.Action.BuyRobux" }).buyRobux,
-			onBuyActivated = ReactModule.useCallback(function() --[[ Line: 34 ]]
+			onBuyActivated = ReactModule.useCallback(function()
 				-- upvalues: p1 (copy), ToggleSideSheetModule (upval), SidesheetAnalyticsModule (upval), AnalyticsConstantsModule (upval)
 				p1.onBuyActivated()
 				ToggleSideSheetModule(false)

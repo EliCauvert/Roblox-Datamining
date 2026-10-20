@@ -6,7 +6,7 @@ local _ = require(Parent.DiscoveryTypes)
 
 return {
 	key = "GameFiltersKey",
-	reducer = function(p1, p2) --[[ Line: 11 ]]
+	reducer = function(p1, p2)
 		-- upvalues: SetGameFiltersModule (copy), CryoModule (copy)
 		local P0 = p1 or {}
 		

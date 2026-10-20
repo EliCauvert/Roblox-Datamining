@@ -15,7 +15,7 @@ local UseLocalizationFunction = require(CorePackages.Workspace.Packages.Localiza
 local GetInputModeStoreFunction = ResponsiveModule.GetInputModeStore
 local Input = ResponsiveModule.Input
 
-return ReactModule.memo(function(p1) --[[ Line: 36 | Named "TraversalLeaveConfirmation" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), SignalsReactModule (copy), GetGameInfoStoreFunction (copy), SignalsModule (copy), UserInputService (copy), GetInputModeStoreFunction (copy), Input (copy), Constants (copy), ContextActionService (copy), GuiService (copy), View (copy), TeleportLeaveConfirmation (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -31,7 +31,7 @@ return ReactModule.memo(function(p1) --[[ Line: 36 | Named "TraversalLeaveConfir
 	else
 		Name = UseLocalizationResult.previous
 	end
-	local UseResult = ReactModule.useCallback(function(_, UserInputState) --[[ Line: 53 ]]
+	local UseResult = ReactModule.useCallback(function(_, UserInputState)
 		-- upvalues: p1 (copy)
 		if UserInputState == Enum.UserInputState.End then
 			p1.onCancel()
@@ -41,9 +41,9 @@ return ReactModule.memo(function(p1) --[[ Line: 36 | Named "TraversalLeaveConfir
 			return Enum.ContextActionResult.Pass
 		end
 	end, { p1.onCancel })
-	ReactModule.useEffect(function() --[[ Line: 61 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SignalsModule (upval), UserInputService (upval), GetInputModeStoreFunction (upval), Input (upval), Number (ref), Constants (upval), ContextActionService (upval), UseResult (copy), GuiService (upval), UseRefResult (copy)
-		local Effect = SignalsModule.createEffect(function(p2) --[[ Line: 62 ]]
+		local Effect = SignalsModule.createEffect(function(p2)
 			-- upvalues: UserInputService (upval), GetInputModeStoreFunction (upval), Input (upval), Number (upval), Constants (upval), ContextActionService (upval), UseResult (upval), GuiService (upval), UseRefResult (upval)
 			local LastInputType = UserInputService:GetLastInputType()
 			local LastInputType1 = GetInputModeStoreFunction(p2).getLastInputType(p2)
@@ -55,7 +55,7 @@ return ReactModule.memo(function(p1) --[[ Line: 36 | Named "TraversalLeaveConfir
 					ContextActionService:UnbindCoreAction("EXIT_DIALOG")
 				end
 			elseif IsLastInputTypeMatch then
-				ContextActionService:BindCoreAction("FREEZE_CONTROLLER", function() --[[ Line: 68 ]] end, false, Enum.UserInputType.Gamepad1)
+				ContextActionService:BindCoreAction("FREEZE_CONTROLLER", function() end, false, Enum.UserInputType.Gamepad1)
 				ContextActionService:BindCoreAction("EXIT_DIALOG", UseResult, false, Enum.KeyCode.ButtonB)
 				GuiService.SelectedCoreObject = UseRefResult.current
 				
@@ -63,7 +63,7 @@ return ReactModule.memo(function(p1) --[[ Line: 36 | Named "TraversalLeaveConfir
 			end
 		end)
 		
-		return function() --[[ Line: 79 ]]
+		return function()
 			-- upvalues: Effect (copy)
 			Effect()
 		end

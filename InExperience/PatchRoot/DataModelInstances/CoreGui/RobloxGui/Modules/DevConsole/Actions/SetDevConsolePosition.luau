@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.Action)("SetDevConsolePosition", function(Position) --[[ Line: 4 ]]
+﻿return require(script.Parent.Parent.Action)("SetDevConsolePosition", function(Position)
 	return { position = Position }
 end)

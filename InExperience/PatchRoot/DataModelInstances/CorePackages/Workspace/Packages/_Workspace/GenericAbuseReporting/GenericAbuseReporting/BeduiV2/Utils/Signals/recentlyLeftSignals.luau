@@ -1,11 +1,11 @@
 ﻿local Players = game:GetService("Players")
 local SignalsModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.Signals)
 
-local function createRecentlyLeftStore(p1) --[[ Line: 43 ]]
+local function createRecentlyLeftStore(p1)
 	-- upvalues: SignalsModule (copy), Players (copy)
 	local Callback = p1 or os.clock
 	local Signal, Signal2 = SignalsModule.createSignal({})
-	local Computed = SignalsModule.createComputed(function(p2) --[[ Line: 46 ]]
+	local Computed = SignalsModule.createComputed(function(p2)
 		-- upvalues: Signal (copy)
 		local t = {}
 		
@@ -16,7 +16,7 @@ local function createRecentlyLeftStore(p1) --[[ Line: 43 ]]
 	end)
 	local Flag = false
 	
-	local function prune(List) --[[ Line: 55 ]]
+	local function prune(List)
 		-- upvalues: Callback (copy)
 		local CallbackResult = Callback()
 		local t = {}
@@ -29,7 +29,7 @@ local function createRecentlyLeftStore(p1) --[[ Line: 43 ]]
 		return t
 	end
 	
-	local function handlePlayerRemoving(Player: Player) --[[ Line: 67 ]]
+	local function handlePlayerRemoving(Player: Player)
 		-- upvalues: Players (upval), Signal (copy), Callback (copy), Signal2 (copy), prune (copy)
 		local LocalPlayer = Players.LocalPlayer
 		
@@ -47,7 +47,7 @@ local function createRecentlyLeftStore(p1) --[[ Line: 43 ]]
 		end
 	end
 	
-	local function handlePlayerAdded(Player: Player) --[[ Line: 83 ]]
+	local function handlePlayerAdded(Player: Player)
 		-- upvalues: Signal (copy), Signal2 (copy), prune (copy)
 		local SignalResult = Signal(false)
 		
@@ -61,7 +61,7 @@ local function createRecentlyLeftStore(p1) --[[ Line: 43 ]]
 	end
 	
 	return {
-		init = function() --[[ Line: 93 ]]
+		init = function()
 			-- upvalues: Flag (ref), Players (upval), handlePlayerRemoving (copy), handlePlayerAdded (copy)
 			if not Flag then
 				Flag = true
@@ -71,7 +71,7 @@ local function createRecentlyLeftStore(p1) --[[ Line: 43 ]]
 				return
 			end
 		end,
-		getRecentlyLeft = function() --[[ Line: 102 ]]
+		getRecentlyLeft = function()
 			-- upvalues: prune (copy), Signal (copy)
 			local List = {}
 			
@@ -84,7 +84,7 @@ local function createRecentlyLeftStore(p1) --[[ Line: 43 ]]
 			end
 			return List
 		end,
-		getRecentlyLeftIds = function() --[[ Line: 115 ]]
+		getRecentlyLeftIds = function()
 			-- upvalues: Computed (copy)
 			return Computed
 		end,

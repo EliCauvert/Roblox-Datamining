@@ -3,15 +3,15 @@ local FacialAgeEstimationServiceAvailableEngineFeature = game:GetEngineFeature("
 local FacialAgeEstimationService = if FacialAgeEstimationServiceAvailableEngineFeature then game:GetService("FacialAgeEstimationService") else nil
 
 return {
-	isAvailable = function() --[[ Line: 13 ]]
+	isAvailable = function()
 		-- upvalues: FacialAgeEstimationServiceAvailableEngineFeature (copy), FacialAgeEstimationService (copy)
 		return FacialAgeEstimationServiceAvailableEngineFeature and FacialAgeEstimationService:IsAvailable()
 	end,
-	startFlow = function(InquiryId, SessionToken) --[[ Line: 16 ]]
+	startFlow = function(InquiryId, SessionToken)
 		-- upvalues: PromiseModule (copy), FacialAgeEstimationService (copy)
-		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 17 ]]
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 			-- upvalues: FacialAgeEstimationService (upval), InquiryId (copy), SessionToken (copy)
-			local Success, Result = pcall(function() --[[ Line: 18 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: FacialAgeEstimationService (upval), InquiryId (upval), SessionToken (upval)
 				return FacialAgeEstimationService:InquiryAsync({ inquiryId = InquiryId, sessionToken = SessionToken })
 			end)

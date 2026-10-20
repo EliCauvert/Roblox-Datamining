@@ -4,7 +4,7 @@ local CryoModule = require(ScrollIntervalTracker.Parent.Cryo)
 local RunService = game:GetService("RunService")
 local config = { minDistancePx = 50, stableFramesRequired = 5 }
 
-return function(Callback1, Callback, ScrollFrame, p1, p2) --[[ Line: 49 | Named "createScrollIntervalTracker" ]]
+return function(Callback1, Callback, ScrollFrame, p1, p2)
 	-- upvalues: CryoModule (copy), config (copy), LoggerModule (copy), RunService (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p2 or {})
 	local Flag = false
@@ -13,19 +13,19 @@ return function(Callback1, Callback, ScrollFrame, p1, p2) --[[ Line: 49 | Named 
 	local Count = 0
 	local v2 = nil
 	
-	local function _() --[[ Line: 68 | Named "resetStopDetection" ]]
+	local function _()
 		-- upvalues: Count (ref), v2 (ref)
 		Count = 0
 		v2 = nil
 	end
 	
-	local _ = function() --[[ Line: 73 | Named "resetStartDetection" ]]
+	local _ = function()
 		-- upvalues: v1 (ref), NewMagnitude (ref)
 		v1 = nil
 		NewMagnitude = 0
 	end
 	
-	local _ = function(p3) --[[ Line: 78 | Named "stopInterval" ]]
+	local _ = function(p3)
 		-- upvalues: LoggerModule (upval), JoinResult (copy), Callback (copy), p1 (copy), Flag (ref), Count (ref), v2 (ref), v1 (ref), NewMagnitude (ref)
 		LoggerModule:debug("Scroll {} stopping (reason={})", JoinResult.debugName, p3)
 		Callback(p1)
@@ -36,13 +36,13 @@ return function(Callback1, Callback, ScrollFrame, p1, p2) --[[ Line: 49 | Named 
 		NewMagnitude = 0
 	end
 	
-	local _ = function(p3) --[[ Line: 86 | Named "recordCanvasPositionChanged" ]]
+	local _ = function(p3)
 		-- upvalues: Count (ref), v2 (ref)
 		Count = 0
 		v2 = p3
 	end
 	
-	local _ = function(p3): boolean --[[ Line: 92 | Named "isPastMinScrollDistance" ]]
+	local _ = function(p3): boolean
 		-- upvalues: v1 (ref), NewMagnitude (ref), JoinResult (copy)
 		if v1 ~= nil then
 			NewMagnitude += math.abs(p3 - v1)
@@ -52,7 +52,7 @@ return function(Callback1, Callback, ScrollFrame, p1, p2) --[[ Line: 49 | Named 
 		return JoinResult.minDistancePx <= NewMagnitude
 	end
 	
-	local _ = function(p3) --[[ Line: 100 | Named "tryStartInterval" ]]
+	local _ = function(p3)
 		-- upvalues: LoggerModule (upval), JoinResult (copy), Callback1 (copy), p1 (copy), Flag (ref), v1 (ref), NewMagnitude (ref), Count (ref), v2 (ref)
 		LoggerModule:debug("Scroll {} starting", JoinResult.debugName)
 		
@@ -67,7 +67,7 @@ return function(Callback1, Callback, ScrollFrame, p1, p2) --[[ Line: 49 | Named 
 		end
 	end
 	
-	local RenderSteppedConnection = RunService.RenderStepped:Connect(function() --[[ Line: 116 ]]
+	local RenderSteppedConnection = RunService.RenderStepped:Connect(function()
 		-- upvalues: Flag (ref), ScrollFrame (copy), v2 (ref), Count (ref), JoinResult (copy), LoggerModule (upval), Callback (copy), p1 (copy), v1 (ref), NewMagnitude (ref)
 		if not Flag then return end
 		local Y = ScrollFrame.CanvasPosition.Y
@@ -97,7 +97,7 @@ return function(Callback1, Callback, ScrollFrame, p1, p2) --[[ Line: 49 | Named 
 	end)
 	
 	return {
-		onScrollTick = function() --[[ Line: 141 ]]
+		onScrollTick = function()
 			-- upvalues: ScrollFrame (copy), Flag (ref), v1 (ref), NewMagnitude (ref), JoinResult (copy), LoggerModule (upval), Callback1 (copy), p1 (copy), Count (ref), v2 (ref)
 			local Y = ScrollFrame.CanvasPosition.Y
 			
@@ -125,7 +125,7 @@ return function(Callback1, Callback, ScrollFrame, p1, p2) --[[ Line: 49 | Named 
 				return
 			end
 		end,
-		cleanup = function() --[[ Line: 156 ]]
+		cleanup = function()
 			-- upvalues: RenderSteppedConnection (copy), Flag (ref), LoggerModule (upval), JoinResult (copy), Callback (copy), p1 (copy), Count (ref), v2 (ref), v1 (ref), NewMagnitude (ref)
 			if RenderSteppedConnection then
 				RenderSteppedConnection:Disconnect()

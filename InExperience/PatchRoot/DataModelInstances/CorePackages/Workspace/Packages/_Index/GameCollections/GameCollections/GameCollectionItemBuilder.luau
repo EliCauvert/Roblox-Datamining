@@ -26,7 +26,7 @@ end
 local SpanForItemType = if FFlagLuaAppEnableNxMRoduxApportioning then GameCollectionItemTypes.SpanForItemType else nil
 
 return {
-	BuildCollectionEntries = function(List, ItemsPerRow, p1, p2, p3, PageContext, SortIndex, TopicId, Layout) --[[ Line: 49 ]]
+	BuildCollectionEntries = function(List, ItemsPerRow, p1, p2, p3, PageContext, SortIndex, TopicId, Layout)
 		-- upvalues: FFlagLuaAppEnableNxMRoduxApportioning (copy), config (copy), SpanForItemType (copy), FFlagLuaAppEnableNxMApportioningExtraLogging (copy), ApportioningDiagnosticTelemetry (copy), CalculateGridLayoutModule (copy), FFlagLuaAppFixTotalColsBound (copy), GridLayoutTelemetryModule (copy), DiscoveryEventErrorLogger (copy), GameCollectionItemTypes (copy), RenderBlankTileModule (copy), CryoModule (copy)
 		local List1 = {}
 		local v1 = nil

@@ -14,7 +14,7 @@ local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
 local InExperienceDetailsPromptSubtitleModule = require(InExperienceDetailsPrompt.Features.InExperienceDetailsPromptSubtitle)
 local UseImageLoadingStateModule = require(InExperienceDetailsPrompt.Hooks.useImageLoadingState)
 
-return function(p1) --[[ Line: 30 | Named "InExperienceDetailsPromptHeader" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseScaledValueFunction (copy), UseImageLoadingStateModule (copy), ReactModule (copy), Sheet (copy), View (copy), Image (copy), Skeleton (copy), Radius (copy), Text (copy), InExperienceDetailsPromptSubtitleModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseScaledValueResult = UseScaledValueFunction(200)

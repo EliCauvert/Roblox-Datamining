@@ -6,9 +6,9 @@ local ConstantsModule = require(Parent.Resources.Constants)
 local SetCurrentPageModule = require(Parent.Actions.SetCurrentPage)
 local List = { ConstantsModule.ReportDialogKey }
 
-return function(Source, Value) --[[ Line: 14 ]]
+return function(Source, Value)
 	-- upvalues: ConstantsModule (copy), List (copy), GuiService (copy), SetMenuOpenModule (copy), SetCurrentPageModule (copy), SendAnalyticsModule (copy)
-	return function(p1) --[[ Line: 15 ]]
+	return function(p1)
 		-- upvalues: Value (ref), ConstantsModule (upval), List (upval), GuiService (upval), SetMenuOpenModule (upval), SetCurrentPageModule (upval), SendAnalyticsModule (upval), Source (copy)
 		if not Value then
 			Value = ConstantsModule.defaultPageKey

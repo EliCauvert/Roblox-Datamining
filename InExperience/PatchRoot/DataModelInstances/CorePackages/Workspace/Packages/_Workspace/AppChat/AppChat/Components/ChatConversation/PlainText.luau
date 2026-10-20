@@ -28,10 +28,10 @@ local config = {
 	isRepliedTo = false,
 	isPressed = false,
 	isLastMessageInMessageGroup = false,
-	[ReactModule.Change.AbsoluteSize] = function() --[[ Line: 56 ]] end
+	[ReactModule.Change.AbsoluteSize] = function() end
 }
 
-function PlainText(p1) --[[ Line: 63 ]]
+function PlainText(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), UseStyleFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), FFlagAppChatBlueSentBubblesModule (copy), FFlagAppChatEnableAutotranslationModule (copy), ReactModule (copy), NormalizeFontFaceFunction (copy), ChatBubbleContainerModule (copy), View (copy), Text (copy), Divider (copy), DividerVariant (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseTokensResult = UseTokensFunction()
@@ -49,14 +49,14 @@ function PlainText(p1) --[[ Line: 63 ]]
 	local IsRepliedTo1 = JoinResult.isRepliedTo
 	local NoIsIncoming: boolean = if JoinResult.isUnfiltered then not JoinResult.isIncoming else FFlagAppChatBlueSentBubblesModule and not JoinResult.isIncoming
 	local Color = if IsRepliedTo1 then UseStyleResult.Theme.TextDefault.Color elseif NoIsIncoming then Color3.new(1, 1, 1) elseif JoinResult.isIncoming then UseTokensResult.Color.Content.Emphasis.Color3 else UseTokensResult.Color.ActionEmphasis.Foreground.Color3
-	local UseMemoResult = if FFlagAppChatEnableAutotranslationModule then ReactModule.useMemo(function() --[[ Line: 102 ]]
+	local UseMemoResult = if FFlagAppChatEnableAutotranslationModule then ReactModule.useMemo(function()
 		-- upvalues: IsRepliedTo (copy), TextSize (copy)
 		return {
 			MinSize = Vector2.new(0, 0),
 			MaxSize = Vector2.new(1e999, if IsRepliedTo then TextSize * 3 else 1e999)
 		}
 	end, { IsRepliedTo, JoinResult.textSize }) else nil
-	local UseMemoResult1 = if FFlagAppChatEnableAutotranslationModule then ReactModule.useMemo(function() --[[ Line: 110 ]]
+	local UseMemoResult1 = if FFlagAppChatEnableAutotranslationModule then ReactModule.useMemo(function()
 		-- upvalues: Largest (copy), MaxWidth (copy)
 		return {
 			MinSize = Vector2.new(0, 0),

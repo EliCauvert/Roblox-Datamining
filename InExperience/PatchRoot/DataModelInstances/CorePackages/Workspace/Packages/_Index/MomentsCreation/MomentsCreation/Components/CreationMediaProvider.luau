@@ -6,17 +6,17 @@ local EnableAudioPlaybackInAppFunction = require(Parent.MediaPlayback).enableAud
 local FeedPlaybackSuspension = require(Parent.MomentsCommon).Media.feedPlaybackSuspension
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
 
-return function(p1) --[[ Line: 45 | Named "CreationMediaProvider" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), EnableAudioPlaybackInAppFunction (copy), FeedPlaybackSuspension (copy)
-	ReactModule.useEffect(function() --[[ Line: 46 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: EnableAudioPlaybackInAppFunction (upval)
 		EnableAudioPlaybackInAppFunction()
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 51 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FeedPlaybackSuspension (upval)
 		FeedPlaybackSuspension.setSuspended(true)
 		
-		return function() --[[ Line: 53 ]]
+		return function()
 			-- upvalues: FeedPlaybackSuspension (upval)
 			FeedPlaybackSuspension.setSuspended(false)
 		end

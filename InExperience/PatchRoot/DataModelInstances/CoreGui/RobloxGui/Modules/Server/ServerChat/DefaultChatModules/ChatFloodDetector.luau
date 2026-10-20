@@ -1,6 +1,6 @@
 ﻿local ChatConstantsModule = require(game:GetService("Chat"):WaitForChild("ClientChatModules"):WaitForChild("ChatConstants"))
 local v1 = false
-local Success, Result = pcall(function() --[[ Line: 11 ]]
+local Success, Result = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserAddChatThrottlingToAllChannels")
 end)
 
@@ -11,7 +11,7 @@ local NoV1 = not v1
 local t = {}
 local t1 = {}
 local ChatLocalizationModule = nil
-pcall(function() --[[ Line: 33 ]]
+pcall(function()
 	-- upvalues: ChatLocalizationModule (ref)
 	ChatLocalizationModule = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
@@ -20,17 +20,17 @@ if ChatLocalizationModule == nil then
 	ChatLocalizationModule = {}
 end
 if not ChatLocalizationModule.FormatMessageToSend or not ChatLocalizationModule.LocalizeFormattedMessage then
-	function ChatLocalizationModule:FormatMessageToSend(_, Formatted) --[[ Line: 37 ]]
+	function ChatLocalizationModule:FormatMessageToSend(_, Formatted)
 		return Formatted
 	end
 end
-local function _(List) --[[ Line: 40 | Named "EnterTimeIntoLog" ]]
+local function _(List)
 	table.insert(List, tick() + 15)
 end
 
-return function(p1) --[[ Line: 44 | Named "Run" ]]
+return function(p1)
 	-- upvalues: t1 (copy), t (copy), NoV1 (ref), ChatLocalizationModule (ref), ChatConstantsModule (copy)
-	p1:RegisterProcessCommandsFunction("flood_detection", function(Key, _, p2): boolean --[[ Line: 45 | Named "FloodDetectionProcessCommandsFunction" ]]
+	p1:RegisterProcessCommandsFunction("flood_detection", function(Key, _, p2): boolean
 		-- upvalues: t1 (upval), p1 (copy), t (upval), NoV1 (upval), ChatLocalizationModule (upval)
 		if t1[Key] then
 			return false
@@ -70,7 +70,7 @@ return function(p1) --[[ Line: 44 | Named "Run" ]]
 			return true
 		end
 	end, ChatConstantsModule.LowPriority)
-	p1.SpeakerRemoved:connect(function(Key) --[[ Line: 102 ]]
+	p1.SpeakerRemoved:connect(function(Key)
 		-- upvalues: t (upval)
 		t[Key] = nil
 	end)

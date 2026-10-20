@@ -5,14 +5,14 @@ local UseFocusGuiObjectFunction = require(Parent.ReactFocusNavigation).useFocusG
 local GetFirstFocusableDescendantFunction = require(Parent.FocusNavigationUtils).getFirstFocusableDescendant
 local FFlagFriendsChatConversationListFocusNav = require(Parent.SharedFlags).FFlagFriendsChatConversationListFocusNav
 
-return function(p1, p2) --[[ Line: 27 | Named "useFocusConversationInput" ]]
+return function(p1, p2)
 	-- upvalues: ChatUIPrimitivesModule (copy), FFlagFriendsChatConversationListFocusNav (copy), UseFocusGuiObjectFunction (copy), ReactModule (copy), GetFirstFocusableDescendantFunction (copy)
 	local UseFocusInputBarResult = ChatUIPrimitivesModule.Hooks.useFocusInputBar()
 	local Focus = UseFocusInputBarResult.focus
 	
 	if FFlagFriendsChatConversationListFocusNav then
 		local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
-		Focus = ReactModule.useCallback(function() --[[ Line: 37 ]]
+		Focus = ReactModule.useCallback(function()
 			-- upvalues: p2 (copy), p1 (copy), GetFirstFocusableDescendantFunction (upval), UseFocusGuiObjectResult (copy), UseFocusInputBarResult (copy)
 			if p2 then
 				UseFocusInputBarResult.focus()

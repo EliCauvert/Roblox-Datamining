@@ -1,7 +1,7 @@
 ﻿local ParseCloseupCameraConfigModule = require(script.Parent.parseCloseupCameraConfig)
 local ParseProfileFrameAssetIdModule = require(script.Parent.parseProfileFrameAssetId)
 
-local function parseProfileFrameAssetIdFromV4(ProfileFrame) --[[ Line: 11 ]]
+local function parseProfileFrameAssetIdFromV4(ProfileFrame)
 	-- upvalues: ParseProfileFrameAssetIdModule (copy)
 	if ProfileFrame == nil then
 		return nil
@@ -19,7 +19,7 @@ end
 
 return {
 	parseProfileFrameAssetIdFromV4 = parseProfileFrameAssetIdFromV4,
-	parseUserAvatarConfigurationsV4 = function(p1) --[[ Line: 32 ]]
+	parseUserAvatarConfigurationsV4 = function(p1)
 		-- upvalues: ParseCloseupCameraConfigModule (copy), parseProfileFrameAssetIdFromV4 (copy)
 		local AvatarConfigurations = if typeof(p1) == "table" then p1.avatarConfigurations else nil
 		

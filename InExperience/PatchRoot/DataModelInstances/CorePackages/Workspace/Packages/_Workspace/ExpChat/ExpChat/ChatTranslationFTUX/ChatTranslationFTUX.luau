@@ -17,14 +17,14 @@ local config = { dampingRatio = 1, frequency = 2 }
 if game:GetEngineFeature("TextChatServiceSettingsSaved") then
 	GameSettings.ChatTranslationFTUXShown = true
 end
-function ChatTranslationFTUX.init(p1) --[[ Line: 37 ]]
+function ChatTranslationFTUX.init(p1)
 	-- upvalues: RoactModule (copy), OtterModule (copy)
 	p1.transparency, p1.updateTransparency = RoactModule.createBinding(1)
 	p1.transparencyMotor = OtterModule.createSingleMotor(1)
 	p1.transparencyMotor:onStep(p1.updateTransparency)
 end
 
-function ChatTranslationFTUX.render(p1) --[[ Line: 43 ]]
+function ChatTranslationFTUX.render(p1)
 	-- upvalues: FFlagExpChatUnmountTranslationFTUXModule (copy), RoactModule (copy), ImageSetLabel (copy), Images (copy), _Font (copy), _Font1 (copy)
 	return if FFlagExpChatUnmountTranslationFTUXModule and p1.state.isDismissed then nil else RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -48,11 +48,11 @@ function ChatTranslationFTUX.render(p1) --[[ Line: 43 ]]
 			AutomaticSize = Enum.AutomaticSize.XY,
 			ZIndex = 100,
 			Style = Enum.FrameStyle.Custom,
-			[RoactModule.Event.TouchTap] = function() --[[ Line: 69 ]]
+			[RoactModule.Event.TouchTap] = function()
 				-- upvalues: p1 (copy)
 				p1:fadeOut()
 			end,
-			[RoactModule.Event.InputEnded] = function(_, Input) --[[ Line: 72 ]]
+			[RoactModule.Event.InputEnded] = function(_, Input)
 				-- upvalues: p1 (copy)
 				if Input.UserInputType == Enum.UserInputType.MouseButton1 then
 					p1:fadeOut()
@@ -106,41 +106,41 @@ function ChatTranslationFTUX.render(p1) --[[ Line: 43 ]]
 	})
 end
 
-function ChatTranslationFTUX.fadeOut(p1) --[[ Line: 133 ]]
+function ChatTranslationFTUX.fadeOut(p1)
 	-- upvalues: FFlagExpChatUnmountTranslationFTUXModule (copy), OtterModule (copy), config (copy)
 	if not p1.isFadingOut then
 		p1.isFadingOut = true
 		
 		if FFlagExpChatUnmountTranslationFTUXModule then
-			p1.transparencyMotor:onComplete(function() --[[ Line: 138 ]]
+			p1.transparencyMotor:onComplete(function()
 				-- upvalues: p1 (copy)
 				p1:setState({ isDismissed = true })
 			end)
 		end
-		p1.transparencyMotor:setGoal((function(p2) --[[ Line: 143 ]]
+		p1.transparencyMotor:setGoal((function(p2)
 			-- upvalues: OtterModule (upval), config (upval)
 			return OtterModule.spring(p2, config)
 		end)(1))
 	end
 end
 
-function ChatTranslationFTUX.didMount(p1) --[[ Line: 150 ]]
+function ChatTranslationFTUX.didMount(p1)
 	-- upvalues: OtterModule (copy), config (copy)
-	p1.transparencyMotor:setGoal((function(p2) --[[ Line: 151 ]]
+	p1.transparencyMotor:setGoal((function(p2)
 		-- upvalues: OtterModule (upval), config (upval)
 		return OtterModule.spring(p2, config)
 	end)(0))
-	p1.props.timer:start():andThen(function() --[[ Line: 157 ]]
+	p1.props.timer:start():andThen(function()
 		-- upvalues: p1 (copy)
 		p1:fadeOut()
 	end)
 end
 
-function ChatTranslationFTUX.willUnmount(p1) --[[ Line: 162 ]]
+function ChatTranslationFTUX.willUnmount(p1)
 	p1.transparencyMotor:destroy()
 end
 
-return LocalizationModule.connect(function() --[[ Line: 166 ]]
+return LocalizationModule.connect(function()
 	return {
 		FTUXTitle = "CoreScripts.TextChat.ChatTranslation.FTUX.TitleNew",
 		FTUXBody = "CoreScripts.TextChat.ChatTranslation.FTUX.BodyNew"

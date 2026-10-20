@@ -23,7 +23,7 @@ local config = {
 	isSquadIndicatorEnabled = false
 }
 
-return function(p1) --[[ Line: 48 | Named "ConnectIcon" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), ReactModule (copy), InExperienceAppChatModalModule (copy), MappedSignal (copy), UseMappedSignalFunction (copy), UsePartyIconModule (copy), On (copy), Off (copy), SubMenuContextModule (copy), FFlagEnableChatIconUnibarDropdownFixEnabled (copy), FoundationModule (copy), ArgoPartyExperimentation (copy), v1 (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseTokensResult = UseTokensFunction()
@@ -31,14 +31,14 @@ return function(p1) --[[ Line: 48 | Named "ConnectIcon" ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(InExperienceAppChatModalModule.default.unreadCount)
 	
 	if UnionResult.shouldShowCustomBadge then
-		ReactModule.useEffect(function() --[[ Line: 63 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: InExperienceAppChatModalModule (upval), UseStateResult2 (copy)
-			local EventConnection = InExperienceAppChatModalModule.default.unreadCountSignal.Event:Connect(function(p2) --[[ Line: 64 ]]
+			local EventConnection = InExperienceAppChatModalModule.default.unreadCountSignal.Event:Connect(function(p2)
 				-- upvalues: UseStateResult2 (upval)
 				UseStateResult2(p2)
 			end)
 			
-			return function() --[[ Line: 67 ]]
+			return function()
 				-- upvalues: EventConnection (copy)
 				EventConnection:Disconnect()
 			end
@@ -53,20 +53,20 @@ return function(p1) --[[ Line: 48 | Named "ConnectIcon" ]]
 	if UnionResult.isSquadIndicatorEnabled then
 		v2, Callback = ReactModule.useState(InExperienceAppChatModalModule.default.currentSquadId)
 	end
-	ReactModule.useEffect(function() --[[ Line: 80 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UnionResult (copy), InExperienceAppChatModalModule (upval), Callback (ref)
 		if UnionResult.isSquadIndicatorEnabled then
-			local EventConnection = InExperienceAppChatModalModule.default.currentSquadIdSignal.Event:Connect(function(p2) --[[ Line: 83 ]]
+			local EventConnection = InExperienceAppChatModalModule.default.currentSquadIdSignal.Event:Connect(function(p2)
 				-- upvalues: Callback (upval)
 				Callback(p2)
 			end)
 			
-			return function() --[[ Line: 87 ]]
+			return function()
 				-- upvalues: EventConnection (copy)
 				EventConnection:Disconnect()
 			end
 		else
-			return function() --[[ Line: 91 ]] end
+			return function() end
 		end
 	end, { UnionResult.isSquadIndicatorEnabled, Callback })
 	
@@ -80,16 +80,16 @@ return function(p1) --[[ Line: 48 | Named "ConnectIcon" ]]
 		end
 	end
 	local Contrast1 = if UnionResult.isSquadIndicatorEnabled then Contrast else UseStateResult > 0
-	local UseMappedSignalResult = UseMappedSignalFunction((MappedSignal.new(InExperienceAppChatModalModule.default.visibilitySignal.Event, function(_) --[[ Line: 104 ]]
+	local UseMappedSignalResult = UseMappedSignalFunction((MappedSignal.new(InExperienceAppChatModalModule.default.visibilitySignal.Event, function(_)
 		-- upvalues: InExperienceAppChatModalModule (upval)
 		return InExperienceAppChatModalModule:getVisible()
 	end)))
 	local UsePartyIconModuleResult = UsePartyIconModule(ICONSIZE, 24, if UseMappedSignalResult then On else Off)
 	local UseContextResult = ReactModule.useContext(SubMenuContextModule)
 	
-	local function _(p2) --[[ Line: 112 | Named "getTransparency" ]]
+	local function _(p2)
 		-- upvalues: UseContextResult (copy)
-		return if UseContextResult then UseContextResult:map(function(p3: number): number --[[ Line: 114 ]]
+		return if UseContextResult then UseContextResult:map(function(p3: number): number
 			-- upvalues: p2 (copy)
 			return p2 + (1 - p2) * (1 - p3)
 		end) else p2
@@ -99,7 +99,7 @@ return function(p1) --[[ Line: 48 | Named "ConnectIcon" ]]
 	
 	if FFlagEnableChatIconUnibarDropdownFixEnabled then
 		local Transparency2 = UseTokensResult.Color.Content.Default.Transparency
-		MapResult = if UseContextResult then UseContextResult:map(function(p2: number) --[[ Line: 124 ]]
+		MapResult = if UseContextResult then UseContextResult:map(function(p2: number)
 			-- upvalues: UseTokensResult (copy), Transparency2 (copy)
 			return {
 				Color3 = UseTokensResult.Color.Content.Default.Color3,
@@ -127,7 +127,7 @@ return function(p1) --[[ Line: 48 | Named "ConnectIcon" ]]
 		local config2 = {
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
-			Size = UsePartyIconModuleResult.size:map(function(XOffset): UDim2 --[[ Line: 147 ]]
+			Size = UsePartyIconModuleResult.size:map(function(XOffset): UDim2
 				return UDim2.fromOffset(XOffset, XOffset)
 			end)
 		}
@@ -139,7 +139,7 @@ return function(p1) --[[ Line: 48 | Named "ConnectIcon" ]]
 			
 			if UseContextResult then
 				local v3 = 0
-				MapResult1 = UseContextResult:map(function(p2: number): number --[[ Line: 114 ]]
+				MapResult1 = UseContextResult:map(function(p2: number): number
 					-- upvalues: v3 (copy)
 					return v3 + (1 - v3) * (1 - p2)
 				end)
@@ -156,7 +156,7 @@ return function(p1) --[[ Line: 48 | Named "ConnectIcon" ]]
 		local Transparency3 = UseTokensResult.Color.Content.Emphasis.Transparency
 		config2.imageStyle = {
 			Color3 = UseTokensResult.Color.Content.Emphasis.Color3,
-			Transparency = if UseContextResult then UseContextResult:map(function(p2: number): number --[[ Line: 114 ]]
+			Transparency = if UseContextResult then UseContextResult:map(function(p2: number): number
 				-- upvalues: Transparency3 (copy)
 				return Transparency3 + (1 - Transparency3) * (1 - p2)
 			end) else Transparency3
@@ -179,7 +179,7 @@ return function(p1) --[[ Line: 48 | Named "ConnectIcon" ]]
 			local Transparency4 = Contrast.Transparency
 			BackgroundStyle = {
 				Color3 = Contrast.Color3,
-				Transparency = if UseContextResult then UseContextResult:map(function(p2: number): number --[[ Line: 114 ]]
+				Transparency = if UseContextResult then UseContextResult:map(function(p2: number): number
 					-- upvalues: Transparency4 (copy)
 					return Transparency4 + (1 - Transparency4) * (1 - p2)
 				end) else Transparency4
@@ -188,7 +188,7 @@ return function(p1) --[[ Line: 48 | Named "ConnectIcon" ]]
 			local Transparency = UseTokensResult.Color.System.Contrast.Transparency
 			BackgroundStyle = {
 				Color3 = UseTokensResult.Color.System.Contrast.Color3,
-				Transparency = if UseContextResult then UseContextResult:map(function(p2: number): number --[[ Line: 114 ]]
+				Transparency = if UseContextResult then UseContextResult:map(function(p2: number): number
 					-- upvalues: Transparency (copy)
 					return Transparency + (1 - Transparency) * (1 - p2)
 				end) else Transparency
@@ -198,7 +198,7 @@ return function(p1) --[[ Line: 48 | Named "ConnectIcon" ]]
 		local Transparency1 = UseTokensResult.Color.Surface.Surface_0.Transparency
 		config3.stroke = {
 			Color = UseTokensResult.Color.Surface.Surface_0.Color3,
-			Transparency = if UseContextResult then UseContextResult:map(function(p2: number): number --[[ Line: 114 ]]
+			Transparency = if UseContextResult then UseContextResult:map(function(p2: number): number
 				-- upvalues: Transparency1 (copy)
 				return Transparency1 + (1 - Transparency1) * (1 - p2)
 			end) else Transparency1,

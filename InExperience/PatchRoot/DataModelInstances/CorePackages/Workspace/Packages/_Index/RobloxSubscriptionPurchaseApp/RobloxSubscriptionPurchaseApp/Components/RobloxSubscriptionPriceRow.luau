@@ -13,7 +13,7 @@ local GetFreeTrialOfferModule = require(RobloxSubscriptionPurchaseApp.Utils.getF
 local IsSupportedTrialPeriodTypeModule = require(RobloxSubscriptionPurchaseApp.Utils.isSupportedTrialPeriodType)
 local FFlagRobloxPlusDynamicFreeTrialLengthModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusDynamicFreeTrialLength)
 
-return function(p1) --[[ Line: 24 | Named "RobloxSubscriptionPriceRow" ]]
+return function(p1)
 	-- upvalues: RobloxSubscriptionStoreModule (copy), SignalsReactModule (copy), GetPeriodTypeDisplayLabelModule (copy), FFlagRobloxPlusDynamicFreeTrialLengthModule (copy), GetFreeTrialOfferModule (copy), IsSupportedTrialPeriodTypeModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), Text (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(RobloxSubscriptionStoreModule.get().getRobloxSubscriptionProduct)
 	local LocalizedPriceDisplayString = UseSignalStateResult and UseSignalStateResult.LocalizedPriceDisplayString

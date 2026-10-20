@@ -18,7 +18,7 @@ ExtendResult.defaultProps = {
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function ExtendResult.init(p1) --[[ Line: 47 ]]
+function ExtendResult.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.contentRef = RoactModule.createRef()
 	p1.state = {
@@ -26,7 +26,7 @@ function ExtendResult.init(p1) --[[ Line: 47 ]]
 		footerSize = Vector2.new(0, 0)
 	}
 	
-	function p1.changeContentSize(Frame: Frame) --[[ Line: 54 ]]
+	function p1.changeContentSize(Frame: Frame)
 		-- upvalues: p1 (copy)
 		if p1.state.contentSize ~= Frame.AbsoluteSize then
 			p1:setState({ contentSize = Frame.AbsoluteSize })
@@ -34,7 +34,7 @@ function ExtendResult.init(p1) --[[ Line: 47 ]]
 	end
 end
 
-function ExtendResult.render(p1) --[[ Line: 63 ]]
+function ExtendResult.render(p1)
 	-- upvalues: RoactModule (copy), MultiTextLocalizerModule (copy)
 	return RoactModule.createElement(MultiTextLocalizerModule, {
 		keys = {
@@ -47,18 +47,18 @@ function ExtendResult.render(p1) --[[ Line: 63 ]]
 			},
 			ButtonCancel = { key = "IAPExperience.InsufficientRobux.Action.Cancel" }
 		},
-		render = function(p2) --[[ Line: 79 ]]
+		render = function(p2)
 			-- upvalues: p1 (copy)
 			return p1:renderAlert(p2)
 		end
 	})
 end
 
-function ExtendResult.renderAlert(p1, p2) --[[ Line: 85 ]]
+function ExtendResult.renderAlert(p1, p2)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy), InteractiveAlert (copy), FitFrameVertical (copy), ProductDetailsModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ButtonType (copy)
 	local Props = p1.props
 	
-	return WithStyleFunction(function(p3) --[[ Line: 88 ]]
+	return WithStyleFunction(function(p3)
 		-- upvalues: Props (copy), p2 (copy), RoactModule (upval), InteractiveAlert (upval), FitFrameVertical (upval), p1 (copy), ProductDetailsModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), ButtonType (upval)
 		local Theme = p3.Theme
 		local _Font = p3.Font
@@ -69,7 +69,7 @@ function ExtendResult.renderAlert(p1, p2) --[[ Line: 85 ]]
 			position = Props.position,
 			anchorPoint = Props.anchorPoint,
 			title = p2.InsufficientRobuxTitle,
-			middleContent = function() --[[ Line: 112 ]]
+			middleContent = function()
 				-- upvalues: RoactModule (upval), FitFrameVertical (upval), p1 (upval), ProductDetailsModule (upval), Props (upval), Theme (copy), FoundationFontFaceMigration (upval), _Font (copy), NormalizeFontFaceFunction (upval), p3 (copy), Robux (copy)
 				return RoactModule.createElement(FitFrameVertical, {
 					BackgroundTransparency = 1,

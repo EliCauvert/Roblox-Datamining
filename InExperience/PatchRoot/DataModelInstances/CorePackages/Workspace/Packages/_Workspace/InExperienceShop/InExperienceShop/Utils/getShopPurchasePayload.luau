@@ -8,7 +8,7 @@ local Inputs = {
 	"categoryName", "stableCategoryId"
 }
 
-local function encodeLocation(p1): string --[[ Line: 33 ]]
+local function encodeLocation(p1): string
 	-- upvalues: HttpService (copy), Inputs (copy)
 	local List = {
 		`"locationType":{HttpService:JSONEncode("personalizedShop")}`
@@ -26,7 +26,7 @@ local function encodeLocation(p1): string --[[ Line: 33 ]]
 	return "{" .. table.concat(List, ",") .. "}"
 end
 
-local function encodePayload(p2): string --[[ Line: 46 ]]
+local function encodePayload(p2): string
 	-- upvalues: HttpService (copy), SHOPPURCHASELOCATION (copy), encodeLocation (copy)
 	local Json: string = HttpService:JSONEncode({
 		surface = {
@@ -51,7 +51,7 @@ local Json = HttpService:JSONEncode({
 	}
 })
 
-return function(p2) --[[ Line: 73 | Named "getShopPurchasePayload" ]]
+return function(p2)
 	-- upvalues: FFlagCategoryLoggingInShopPurchaseModule (copy), encodePayload (copy), Json (copy)
 	return if FFlagCategoryLoggingInShopPurchaseModule then encodePayload(p2) else Json
 end

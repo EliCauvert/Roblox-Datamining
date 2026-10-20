@@ -18,12 +18,12 @@ local _ = require(VideoUtils.ViewportVideoAutoplayController)
 local FFlagLuaAppEdpMediaGalleryVideoPreview = require(Parent.SharedFlags).FFlagLuaAppEdpMediaGalleryVideoPreview
 local FFlagLuaAppGameTileSelectionVideoPlayback = require(Parent.SharedFlags).FFlagLuaAppGameTileSelectionVideoPlayback
 
-return function(p1) --[[ Line: 55 | Named "VideoPlaybackDetector" ]]
+return function(p1)
 	-- upvalues: VideoPlaybackCoordinatorModule (copy), ReactModule (copy), FFlagLuaAppEdpMediaGalleryVideoPreview (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), UseLastInputFunction (copy), AppLifecycleObserverService (copy), VideoEndReason (copy), ExperienceService (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), VideoPlaybackDetectionMethodModule (copy), VideoViewportPlaybackDetectorModule (copy), VideoHoverPlaybackDetectorModule (copy), VideoSelectionPlaybackDetectorModule (copy), ResponsiveModule (copy)
 	local VideoPlaybackCoordinator = p1.videoPlaybackCoordinator or VideoPlaybackCoordinatorModule.default
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseLastInputResult = if FFlagLuaAppEdpMediaGalleryVideoPreview or FFlagLuaAppGameTileSelectionVideoPlayback then nil else UseLastInputFunction()
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 66 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy), VideoPlaybackCoordinator (copy)
 		if p1.onPlaybackCandidate then
 			p1.onPlaybackCandidate()
@@ -41,7 +41,7 @@ return function(p1) --[[ Line: 55 | Named "VideoPlaybackDetector" ]]
 		p1.onVideoIneligible, p1.onPlaybackCandidate, p1.videoDwellTimeInSec,
 		VideoPlaybackCoordinator
 	})
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 96 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: VideoPlaybackCoordinator (copy), p1 (copy)
 		VideoPlaybackCoordinator:cancelPlayback(p1.videoKey, p2, p1.itemIndex, p1.videoAnalytics)
 	end, {
@@ -50,9 +50,9 @@ return function(p1) --[[ Line: 55 | Named "VideoPlaybackDetector" ]]
 		p1.videoAnalytics,
 		VideoPlaybackCoordinator
 	})
-	ReactModule.useEffect(function() --[[ Line: 108 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult (copy), UseStateResult2 (copy), VideoPlaybackCoordinator (copy)
-		local function _(VideoKey) --[[ Line: 109 | Named "checkAndUpdateState" ]]
+		local function _(VideoKey)
 			-- upvalues: p1 (upval), UseStateResult (upval), UseStateResult2 (upval)
 			local IsVideoKeyMatch = VideoKey == p1.videoKey
 			
@@ -68,7 +68,7 @@ return function(p1) --[[ Line: 55 | Named "VideoPlaybackDetector" ]]
 			p1.onPlaybackChange(IsPlayingVideoKeyMatch)
 			UseStateResult2(IsPlayingVideoKeyMatch)
 		end
-		local ChangedConnection = VideoPlaybackCoordinator.changed:connect(function(VideoKey) --[[ Line: 120 ]]
+		local ChangedConnection = VideoPlaybackCoordinator.changed:connect(function(VideoKey)
 			-- upvalues: p1 (upval), UseStateResult (upval), UseStateResult2 (upval)
 			local IsVideoKeyMatch = VideoKey == p1.videoKey
 			
@@ -78,7 +78,7 @@ return function(p1) --[[ Line: 55 | Named "VideoPlaybackDetector" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 124 ]]
+		return function()
 			-- upvalues: ChangedConnection (ref)
 			if ChangedConnection ~= nil then
 				ChangedConnection:disconnect()
@@ -91,11 +91,11 @@ return function(p1) --[[ Line: 55 | Named "VideoPlaybackDetector" ]]
 		VideoPlaybackCoordinator,
 		UseStateResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 134 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), AppLifecycleObserverService (upval), VideoEndReason (upval), UseResult1 (copy), ExperienceService (upval)
 		local ViewportVideoAutoplayController = p1.viewportVideoAutoplayController
 		local Current = p1.itemFrameRef.current
-		local OnHideConnection = AppLifecycleObserverService.OnHide:Connect(function() --[[ Line: 139 ]]
+		local OnHideConnection = AppLifecycleObserverService.OnHide:Connect(function()
 			-- upvalues: ViewportVideoAutoplayController (copy), VideoEndReason (upval), UseResult1 (upval)
 			if ViewportVideoAutoplayController then
 				ViewportVideoAutoplayController:reset(VideoEndReason.AppBackgrounded)
@@ -105,7 +105,7 @@ return function(p1) --[[ Line: 55 | Named "VideoPlaybackDetector" ]]
 				UseResult1(VideoEndReason.AppBackgrounded)
 			end
 		end)
-		local RegisterForExperienceJoinResult = ExperienceService:RegisterForExperienceJoin(function() --[[ Line: 149 ]]
+		local RegisterForExperienceJoinResult = ExperienceService:RegisterForExperienceJoin(function()
 			-- upvalues: ViewportVideoAutoplayController (copy), VideoEndReason (upval), UseResult1 (upval)
 			if ViewportVideoAutoplayController then
 				ViewportVideoAutoplayController:reset(VideoEndReason.ExperienceLaunched)
@@ -116,7 +116,7 @@ return function(p1) --[[ Line: 55 | Named "VideoPlaybackDetector" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 158 ]]
+		return function()
 			-- upvalues: ViewportVideoAutoplayController (copy), Current (copy), VideoEndReason (upval), UseResult1 (upval), RegisterForExperienceJoinResult (ref), OnHideConnection (ref)
 			if ViewportVideoAutoplayController and Current then
 				ViewportVideoAutoplayController:resetIfActiveInstance(Current, VideoEndReason.Unmounted)

@@ -21,7 +21,7 @@ end
 if FFlagEnableEdpPreviewPurchaseSurface then
 	config[Enums.ProductPurchaseSurface.EDPPreview] = true
 end
-function emitPerformanceMetrics(p1, p2) --[[ Line: 33 ]]
+function emitPerformanceMetrics(p1, p2)
 	-- upvalues: config (copy)
 	if p2 ~= nil and config[p2] then
 		emitFPSMetrics(p1, p2)
@@ -29,13 +29,13 @@ function emitPerformanceMetrics(p1, p2) --[[ Line: 33 ]]
 	end
 end
 
-function emitFPSMetrics(Text, Text1) --[[ Line: 41 ]]
+function emitFPSMetrics(Text, Text1)
 	-- upvalues: IntervalPerformanceTracker (copy), ConstantsModule (copy), ProductPurchaseContainerFPSDuration (copy)
 	IntervalPerformanceTracker:startTracking(ConstantsModule.PerformanceMetrics.Prefix.UnifiedPurchaseModal .. "_" .. Text .. "_" .. Text1, ProductPurchaseContainerFPSDuration, nil, true, true)
 	IntervalPerformanceTracker:startTracking(ConstantsModule.PerformanceMetrics.Prefix.PurchaseModal .. "_" .. Text .. "_" .. Text1, ProductPurchaseContainerFPSDuration, nil, true, true)
 end
 
-function emitTTIMetrics(p1) --[[ Line: 62 ]]
+function emitTTIMetrics(p1)
 	-- upvalues: GetTTIEventNameFunction (copy), TimeToInteractiveTracker (copy), FIntTTIUnifiedPurchaseSamplingRate (copy)
 	TimeToInteractiveTracker.trackEnd(GetTTIEventNameFunction(p1), {
 		samplingRateOverride = FIntTTIUnifiedPurchaseSamplingRate

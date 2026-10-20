@@ -8,11 +8,11 @@ local ErrorsModule = require(script.Parent.Errors)
 local ShopDebugLoggerModule = require(InExperienceShop.Internal.ShopDebugLogger)
 local Text = require(Parent.Http).Url.APIS_URL .. "game-passes/v1/game-passes:batchGetOwnership"
 
-return function(GamePassId) --[[ Line: 24 | Named "userOwnsGamePassHttp" ]]
+return function(GamePassId)
 	-- upvalues: PromiseModule (copy), Players (copy), ErrorsModule (copy), ShopDebugLoggerModule (copy), HttpRbxApiService (copy), Text (copy), HttpService (copy)
-	return PromiseModule.new(function(Callback1, Callback) --[[ Line: 25 ]]
+	return PromiseModule.new(function(Callback1, Callback)
 		-- upvalues: Players (upval), ErrorsModule (upval), GamePassId (copy), ShopDebugLoggerModule (upval), HttpRbxApiService (upval), Text (upval), HttpService (upval)
-		task.spawn(function() --[[ Line: 26 ]]
+		task.spawn(function()
 			-- upvalues: Players (upval), Callback (copy), ErrorsModule (upval), GamePassId (upval), ShopDebugLoggerModule (upval), HttpRbxApiService (upval), Text (upval), HttpService (upval), Callback1 (copy)
 			local LocalPlayer = Players.LocalPlayer
 			
@@ -25,19 +25,19 @@ return function(GamePassId) --[[ Line: 24 | Named "userOwnsGamePassHttp" ]]
 			local config = {
 				ownershipIdentifiers = { { userId = UserId, gamePassId = GamePassId } }
 			}
-			ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 43 ]]
+			ShopDebugLoggerModule.logLazy(function(): string
 				-- upvalues: GamePassId (upval), UserId (copy)
 				return "userOwnsGamePassHttp: POST gamePassId=" .. GamePassId .. " userId=" .. UserId
 			end)
 			local StartTimerResult = ShopDebugLoggerModule.startTimer()
-			local Success, Result = pcall(function() --[[ Line: 48 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: HttpRbxApiService (upval), Text (upval), HttpService (upval), config (copy)
 				return HttpRbxApiService:PostAsyncFullUrl(Text, HttpService:JSONEncode(config))
 			end)
 			
 			if not Success then
 				ShopDebugLoggerModule.logElapsed("userOwnsGamePassHttp: HTTP error", StartTimerResult)
-				ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 53 ]]
+				ShopDebugLoggerModule.logLazy(function(): string
 					-- upvalues: Result (copy)
 					return "userOwnsGamePassHttp: HTTP error detail=" .. tostring(Result)
 				end)
@@ -46,13 +46,13 @@ return function(GamePassId) --[[ Line: 24 | Named "userOwnsGamePassHttp" ]]
 				return
 			end
 			ShopDebugLoggerModule.logElapsed("userOwnsGamePassHttp: HTTP response received", StartTimerResult)
-			local Success1, Result1 = pcall(function() --[[ Line: 62 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
 			
 			if not Success1 then
-				ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 66 ]]
+				ShopDebugLoggerModule.logLazy(function(): string
 					-- upvalues: Result1 (copy)
 					return "userOwnsGamePassHttp: JSON parse error=" .. tostring(Result1)
 				end)
@@ -68,7 +68,7 @@ return function(GamePassId) --[[ Line: 24 | Named "userOwnsGamePassHttp" ]]
 			end
 			for _, ownershipIdentifier in Result1.ownershipIdentifiers do
 				if typeof(ownershipIdentifier) == "table" and ownershipIdentifier.userId == UserId and ownershipIdentifier.gamePassId == GamePassId then
-					ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 92 ]]
+					ShopDebugLoggerModule.logLazy(function(): string
 						-- upvalues: GamePassId (upval)
 						return "userOwnsGamePassHttp: owns=true gamePassId=" .. GamePassId
 					end)
@@ -77,7 +77,7 @@ return function(GamePassId) --[[ Line: 24 | Named "userOwnsGamePassHttp" ]]
 					return
 				end
 			end
-			ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 100 ]]
+			ShopDebugLoggerModule.logLazy(function(): string
 				-- upvalues: GamePassId (upval)
 				return "userOwnsGamePassHttp: owns=false gamePassId=" .. GamePassId
 			end)

@@ -9,7 +9,7 @@ local Localization = require(Parent1.InExperienceLocales).Localization
 local SettingsService = {}
 SettingsService.__index = SettingsService
 
-function SettingsService.new() --[[ Line: 72 ]]
+function SettingsService.new()
 	-- upvalues: LocalizationService (copy), Localization (copy), SettingsService (copy)
 	return (setmetatable({
 		_localization = Localization.new(LocalizationService.RobloxLocaleId),
@@ -19,7 +19,7 @@ function SettingsService.new() --[[ Line: 72 ]]
 	}, SettingsService))
 end
 
-function SettingsService:registerSetting(RegisterDropdownResult) --[[ Line: 82 ]]
+function SettingsService:registerSetting(RegisterDropdownResult)
 	-- upvalues: SignalsModule (copy), SettingEnumModule (copy)
 	self._disposables[RegisterDropdownResult.id] = {}
 	
@@ -29,7 +29,7 @@ function SettingsService:registerSetting(RegisterDropdownResult) --[[ Line: 82 ]
 	local Signal, Signal2 = SignalsModule.createSignal(true)
 	
 	if RegisterDropdownResult.onAvailabilityChanged then
-		table.insert(self._disposables[RegisterDropdownResult.id], SignalsModule.createEffect(function(p1) --[[ Line: 93 ]]
+		table.insert(self._disposables[RegisterDropdownResult.id], SignalsModule.createEffect(function(p1)
 			-- upvalues: Signal (copy), RegisterDropdownResult (copy)
 			RegisterDropdownResult.onAvailabilityChanged((Signal(p1)))
 		end))
@@ -40,7 +40,7 @@ function SettingsService:registerSetting(RegisterDropdownResult) --[[ Line: 82 ]
 	local Signal1, Signal2_1 = SignalsModule.createSignal(true)
 	
 	if RegisterDropdownResult.onVisibilityChanged then
-		table.insert(self._disposables[RegisterDropdownResult.id], SignalsModule.createEffect(function(p1) --[[ Line: 106 ]]
+		table.insert(self._disposables[RegisterDropdownResult.id], SignalsModule.createEffect(function(p1)
 			-- upvalues: Signal1 (copy), RegisterDropdownResult (copy)
 			RegisterDropdownResult.onVisibilityChanged((Signal1(p1)))
 		end))
@@ -81,14 +81,14 @@ function SettingsService:registerSetting(RegisterDropdownResult) --[[ Line: 82 ]
 	return RegisterDropdownResult1
 end
 
-function SettingsService:setting(Text) --[[ Line: 147 ]]
+function SettingsService:setting(Text)
 	if not self._settings[Text] then
 		error("No setting registered with id: " .. Text)
 	end
 	return self._settings[Text]
 end
 
-function SettingsService:updateSetting(Text, p1) --[[ Line: 154 ]]
+function SettingsService:updateSetting(Text, p1)
 	assert(typeof(self:setting(Text)) == "table", "No setting registered with id: " .. Text)
 	
 	if p1.available ~= nil then
@@ -99,7 +99,7 @@ function SettingsService:updateSetting(Text, p1) --[[ Line: 154 ]]
 	end
 end
 
-function SettingsService:disconnect() --[[ Line: 164 ]]
+function SettingsService:disconnect()
 	for _, disposable in self._disposables do
 		for _, value in disposable do
 			value()
@@ -110,7 +110,7 @@ function SettingsService:disconnect() --[[ Line: 164 ]]
 	self._settings = {}
 end
 
-function SettingsService:_updateLocalization(Placeholder) --[[ Line: 176 ]]
+function SettingsService:_updateLocalization(Placeholder)
 	if Placeholder == nil then
 		return nil
 	else
@@ -120,11 +120,11 @@ function SettingsService:_updateLocalization(Placeholder) --[[ Line: 176 ]]
 	end
 end
 
-function SettingsService:_registerToggle(RegisterDropdownResult) --[[ Line: 188 ]]
+function SettingsService:_registerToggle(RegisterDropdownResult)
 	return RegisterDropdownResult
 end
 
-function SettingsService:_registerOptions(AlreadyLocalized, Options) --[[ Line: 193 ]]
+function SettingsService:_registerOptions(AlreadyLocalized, Options)
 	for _, option in ipairs(Options) do
 		if not AlreadyLocalized then
 			option.text = self:_updateLocalization(option.text)
@@ -138,7 +138,7 @@ function SettingsService:_registerOptions(AlreadyLocalized, Options) --[[ Line: 
 	return Options
 end
 
-function SettingsService:_registerSlider(RegisterDropdownResult) --[[ Line: 212 ]]
+function SettingsService:_registerSlider(RegisterDropdownResult)
 	if not RegisterDropdownResult.alreadyLocalized then
 		RegisterDropdownResult.sliderLeftLabel = self:_updateLocalization(RegisterDropdownResult.sliderLeftLabel)
 		RegisterDropdownResult.sliderRightLabel = self:_updateLocalization(RegisterDropdownResult.sliderRightLabel)
@@ -146,14 +146,14 @@ function SettingsService:_registerSlider(RegisterDropdownResult) --[[ Line: 212 
 	return RegisterDropdownResult
 end
 
-function SettingsService:_registerTextButton(RegisterDropdownResult) --[[ Line: 221 ]]
+function SettingsService:_registerTextButton(RegisterDropdownResult)
 	if not RegisterDropdownResult.alreadyLocalized then
 		RegisterDropdownResult.text = self:_updateLocalization(RegisterDropdownResult.text)
 	end
 	return RegisterDropdownResult
 end
 
-function SettingsService:_registerDropdown(RegisterDropdownResult) --[[ Line: 233 ]]
+function SettingsService:_registerDropdown(RegisterDropdownResult)
 	-- upvalues: ValueChangedSignalModule (copy)
 	if not RegisterDropdownResult.alreadyLocalized then
 		RegisterDropdownResult.placeholder = self:_updateLocalization(RegisterDropdownResult.placeholder)
@@ -164,7 +164,7 @@ function SettingsService:_registerDropdown(RegisterDropdownResult) --[[ Line: 23
 	return RegisterDropdownResult
 end
 
-function SettingsService:_registerSelector(RegisterDropdownResult) --[[ Line: 243 ]]
+function SettingsService:_registerSelector(RegisterDropdownResult)
 	if not RegisterDropdownResult.alreadyLocalized then
 		RegisterDropdownResult.placeholder = self:_updateLocalization(RegisterDropdownResult.placeholder)
 	end

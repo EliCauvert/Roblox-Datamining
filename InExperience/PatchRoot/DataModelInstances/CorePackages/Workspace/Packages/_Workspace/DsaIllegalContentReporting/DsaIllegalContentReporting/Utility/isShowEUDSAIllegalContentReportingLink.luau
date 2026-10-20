@@ -7,7 +7,7 @@ local Players = game:GetService("Players")
 local Flag = false
 
 if GetFFlagDSAIllegalContentReportingFunction() then
-	task.spawn(function() --[[ Line: 18 ]]
+	task.spawn(function()
 		-- upvalues: Players (copy), LocalizationService (copy), ConstantsModule (copy), Flag (ref)
 		local LocalPlayer = Players.LocalPlayer
 		while not LocalPlayer do
@@ -25,7 +25,7 @@ if GetFFlagDSAIllegalContentReportingFunction() then
 		end
 	end)
 end
-function isShowEUDSAIllegalContentReportingLink() --[[ Line: 41 ]]
+function isShowEUDSAIllegalContentReportingLink()
 	-- upvalues: IsInDSAFeaturesOverrideListModule (copy), GetFFlagDSAIllegalContentReportingFunction (copy), Flag (ref)
 	return if IsInDSAFeaturesOverrideListModule() then true else GetFFlagDSAIllegalContentReportingFunction() and Flag
 end

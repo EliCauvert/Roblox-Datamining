@@ -6,7 +6,7 @@ local View = require(Parent1.Foundation).View
 local FFlagAddNewPlayerListFocusNavModule = require(Parent.Flags.FFlagAddNewPlayerListFocusNav)
 local FFlagRemoveNewPlayerListOverlayModule = require(Parent.Flags.FFlagRemoveNewPlayerListOverlay)
 
-local function EntryFrameView(p1) --[[ Line: 30 ]]
+local function EntryFrameView(p1)
 	-- upvalues: ReactModule (copy), View (copy), FFlagRemoveNewPlayerListOverlayModule (copy), FFlagAddNewPlayerListFocusNavModule (copy)
 	return ReactModule.createElement(View, {
 		Size = p1.size,
@@ -49,7 +49,7 @@ local function EntryFrameView(p1) --[[ Line: 30 ]]
 	})
 end
 
-return if FFlagAddNewPlayerListFocusNavModule then ReactModule.memo((ReactModule.forwardRef(function(p1, ForwardRef) --[[ Line: 85 ]]
+return if FFlagAddNewPlayerListFocusNavModule then ReactModule.memo((ReactModule.forwardRef(function(p1, ForwardRef)
 	-- upvalues: ReactModule (copy), EntryFrameView (copy), CryoModule (copy)
 	return ReactModule.createElement(EntryFrameView, CryoModule.Dictionary.join(p1, { forwardRef = ForwardRef }))
 end))) else ReactModule.memo(EntryFrameView)

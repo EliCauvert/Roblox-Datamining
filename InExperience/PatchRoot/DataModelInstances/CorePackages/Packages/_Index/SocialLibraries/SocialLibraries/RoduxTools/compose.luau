@@ -1,9 +1,9 @@
-﻿return function(...) --[[ Line: 4 ]]
+﻿return function(...)
 	local list = { ... }
 	local CountList = #list
 	
 	if CountList == 0 then
-		return function(p1) --[[ Line: 9 ]]
+		return function(p1)
 			return p1
 		end
 	end
@@ -12,7 +12,7 @@
 	for i = 2, CountList do
 		local Callback1 = list[i]
 		
-		Callback = function(...) --[[ Line: 18 ]]
+		Callback = function(...)
 			-- upvalues: Callback (copy), Callback1 (copy)
 			return Callback(Callback1(...))
 		end

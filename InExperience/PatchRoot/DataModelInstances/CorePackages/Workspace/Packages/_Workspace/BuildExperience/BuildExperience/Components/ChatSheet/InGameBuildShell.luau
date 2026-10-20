@@ -21,9 +21,9 @@ local UseOverlayFunction = FoundationModule.Hooks.useOverlay
 local UsePreferencesFunction = FoundationModule.Hooks.usePreferences
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function noop() --[[ Line: 70 ]] end
+local function noop() end
 
-local function createToolbarButtons(p1, UseResult, p2) --[[ Line: 72 ]]
+local function createToolbarButtons(p1, UseResult, p2)
 	-- upvalues: ReactModule (copy), IconButton (copy), IconName (copy), noop (copy), InputSize (copy), ButtonVariant (copy)
 	if p1.isSelecting then
 		return {
@@ -87,12 +87,12 @@ local function createToolbarButtons(p1, UseResult, p2) --[[ Line: 72 ]]
 	return config
 end
 
-return function(p1) --[[ Line: 141 | Named "InGameBuildShell" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), GetCurrentExperienceProjectModule (copy), UseTokensFunction (copy), UsePreferencesFunction (copy), UseOverlayFunction (copy), UseHardwareInsetsModule (copy), DisplayModule (copy), CoreGuiCommonModule (copy), SignalsReactModule (copy), MotionModule (copy), View (copy), noop (copy), StateLayerAffordance (copy), createToolbarButtons (copy), Image (copy), FoundationModule (copy), PublishSheetControllerModule (copy), BuildPillMenuPageHostModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 146 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: GetCurrentExperienceProjectModule (upval), UseStateResult2_2 (copy), UseStateResult2 (copy)
 		local CurrentExperienceProjectModule = GetCurrentExperienceProjectModule()
 		
@@ -108,15 +108,15 @@ return function(p1) --[[ Line: 141 | Named "InGameBuildShell" ]]
 			return
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 159 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 162 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(nil)
 	end, {})
-	local UseResult3 = ReactModule.useCallback(function(Screen, p2) --[[ Line: 165 ]]
+	local UseResult3 = ReactModule.useCallback(function(Screen, p2)
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1({
 			type = "screen",
@@ -142,12 +142,12 @@ return function(p1) --[[ Line: 141 | Named "InGameBuildShell" ]]
 	local IsNotUseSignalStateResultMatch: boolean = UseSignalStateResult2 ~= nil and UseSignalStateResult2 ~= Enum.DisplaySize.Small
 	local IsNotUseSignalStateResultMatch1: boolean = IsNotUseSignalStateResultMatch or p1.isVisible ~= false
 	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(nil)
-	local UseResult4 = ReactModule.useCallback(function(p2) --[[ Line: 191 ]]
+	local UseResult4 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_4 (copy)
 		UseStateResult2_4(p2)
 	end, {})
 	local Size1200: number = UseTokensResult.Size.Size_1200
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 195 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: MotionModule (upval), ReducedMotion (copy), UseTokensResult (copy)
 		return {
 			visible = MotionModule.createState({ progress = 1 }, {
@@ -166,7 +166,7 @@ return function(p1) --[[ Line: 141 | Named "InGameBuildShell" ]]
 	end, { ReducedMotion, UseTokensResult })
 	local UseMotionResult, UseMotionResult2 = MotionModule.useMotion(if IsNotUseSignalStateResultMatch1 then UseMemoResult.visible else UseMemoResult.hidden)
 	local UseStateResult6, UseStateResult2_5 = ReactModule.useState(IsNotUseSignalStateResultMatch1)
-	ReactModule.useEffect(function() --[[ Line: 219 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsNotUseSignalStateResultMatch1 (copy), UseMotionResult2 (copy), UseMemoResult (copy), p1 (copy), UseStateResult2_5 (copy)
 		local Flag = false
 		
@@ -175,7 +175,7 @@ return function(p1) --[[ Line: 141 | Named "InGameBuildShell" ]]
 			UseMotionResult2(UseMemoResult.visible)
 		else
 			UseMotionResult2(UseMemoResult.hidden, {
-				onAnimationComplete = function(Enabled) --[[ Line: 223 ]]
+				onAnimationComplete = function(Enabled)
 					-- upvalues: Flag (ref), p1 (upval), UseStateResult2_5 (upval)
 					if not Flag and Enabled == true then
 						if p1.onInsetsChanged ~= nil then
@@ -186,7 +186,7 @@ return function(p1) --[[ Line: 141 | Named "InGameBuildShell" ]]
 				end
 			})
 		end
-		return function() --[[ Line: 236 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end
@@ -198,16 +198,16 @@ return function(p1) --[[ Line: 141 | Named "InGameBuildShell" ]]
 	})
 	local UseStateResult7, UseStateResult2_6 = ReactModule.useState(0)
 	local UseStateResult8, UseStateResult2_7 = ReactModule.useState(0)
-	local UseResult5 = ReactModule.useCallback(function(Frame) --[[ Line: 243 ]]
+	local UseResult5 = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2_6 (copy)
 		UseStateResult2_6(Frame.AbsoluteSize.Y)
 	end, {})
-	local UseResult6 = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 246 ]]
+	local UseResult6 = ReactModule.useCallback(function(Frame: Frame)
 		-- upvalues: UseStateResult2_7 (copy), KeepOutAreasStore (copy)
 		UseStateResult2_7(Frame.AbsoluteSize.X)
 		KeepOutAreasStore.setKeepOutArea("build-shell-right-inset", Frame.AbsolutePosition, Frame.AbsoluteSize)
 	end, { KeepOutAreasStore })
-	local UseResult7 = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 254 ]]
+	local UseResult7 = ReactModule.useCallback(function(Frame: Frame)
 		-- upvalues: p1 (copy), IsYBelow (copy), IsNotUseSignalStateResultMatch (copy)
 		if p1.onInsetsChanged ~= nil then
 			p1.onInsetsChanged(0, if IsYBelow and not IsNotUseSignalStateResultMatch then Frame.AbsoluteSize.X else 0, if IsYBelow or IsNotUseSignalStateResultMatch then 0 else Frame.AbsoluteSize.Y)
@@ -217,13 +217,13 @@ return function(p1) --[[ Line: 141 | Named "InGameBuildShell" ]]
 		p1.onInsetsChanged,
 		IsNotUseSignalStateResultMatch
 	})
-	ReactModule.useEffect(function() --[[ Line: 263 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsNotUseSignalStateResultMatch (copy), p1 (copy)
 		if IsNotUseSignalStateResultMatch and p1.onInsetsChanged ~= nil then
 			p1.onInsetsChanged(0, 0, 0)
 		end
 	end, { p1.onInsetsChanged, IsNotUseSignalStateResultMatch })
-	ReactModule.useEffect(function() --[[ Line: 268 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult6 (copy), IsYBelow (copy), IsNotUseSignalStateResultMatch (copy), KeepOutAreasStore (copy)
 		if not UseStateResult6 or not IsYBelow or IsNotUseSignalStateResultMatch then
 			KeepOutAreasStore.removeKeepOutArea("build-shell-right-inset")
@@ -234,32 +234,32 @@ return function(p1) --[[ Line: 141 | Named "InGameBuildShell" ]]
 		KeepOutAreasStore,
 		IsNotUseSignalStateResultMatch
 	})
-	ReactModule.useEffect(function() --[[ Line: 273 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: KeepOutAreasStore (copy)
-		return function() --[[ Line: 274 ]]
+		return function()
 			-- upvalues: KeepOutAreasStore (upval)
 			KeepOutAreasStore.removeKeepOutArea("build-shell-right-inset")
 		end
 	end, { KeepOutAreasStore })
 	local Progress = UseMotionResult.progress
-	local MapResult = Progress:map(function(p2: number): UDim2 --[[ Line: 279 ]]
+	local MapResult = Progress:map(function(p2: number): UDim2
 		-- upvalues: UseStateResult8 (copy)
 		return UDim2.new(1, UseStateResult8 * (1 - p2), 0, 0)
 	end)
-	local MapResult1 = Progress:map(function(p2): UDim2 --[[ Line: 282 ]]
+	local MapResult1 = Progress:map(function(p2): UDim2
 		-- upvalues: UseStateResult8 (copy)
 		return UDim2.new(1, -UseStateResult8 * p2 + 1, 0, 0)
 	end)
-	local MapResult2 = Progress:map(function(p2): UDim2 --[[ Line: 288 ]]
+	local MapResult2 = Progress:map(function(p2): UDim2
 		-- upvalues: UseStateResult7 (copy)
 		return UDim2.new(0, -1, 1, -UseStateResult7 * p2 + 1)
 	end)
-	local MapResult3 = Progress:map(function(p2): UDim2 --[[ Line: 291 ]]
+	local MapResult3 = Progress:map(function(p2): UDim2
 		-- upvalues: IsYBelow (copy), UseStateResult8 (copy), UseStateResult7 (copy)
 		return UDim2.new(1, -(if IsYBelow then UseStateResult8 else 0) * p2 + 1, 1, -(if IsYBelow then 0 else UseStateResult7) * p2 + 1)
 	end)
 	local Surface100 = UseTokensResult.Color.Surface.Surface_100
-	local MapResult4 = Progress:map(function(p2) --[[ Line: 306 ]]
+	local MapResult4 = Progress:map(function(p2)
 		-- upvalues: Surface100 (copy)
 		return {
 			Color3 = Surface100.Color3,
@@ -309,7 +309,7 @@ return function(p1) --[[ Line: 141 | Named "InGameBuildShell" ]]
 			}) else nil,
 			InsetReporter = ReactModule.createElement(View, {
 				testId = "in-game-build-shell-inset-reporter",
-				Size = Progress:map(function(p2): UDim2 --[[ Line: 296 ]]
+				Size = Progress:map(function(p2): UDim2
 					-- upvalues: IsNotUseSignalStateResultMatch (copy), IsYBelow (copy), UseStateResult8 (copy), UseStateResult7 (copy)
 					return if IsNotUseSignalStateResultMatch then UDim2.fromOffset(0, 0) else UDim2.fromOffset((if IsYBelow then UseStateResult8 else 0) * p2, (if IsYBelow then 0 else UseStateResult7) * p2)
 				end),
@@ -378,7 +378,7 @@ return function(p1) --[[ Line: 141 | Named "InGameBuildShell" ]]
 			BottomBar = ReactModule.createElement(View, {
 				tag = "row align-x-center align-y-center gap-xsmall anchor-bottom-left size-full-0 auto-y bg-surface-100",
 				testId = "in-game-build-shell-bottom-inset",
-				Position = Progress:map(function(p2: number): UDim2 --[[ Line: 285 ]]
+				Position = Progress:map(function(p2: number): UDim2
 					-- upvalues: UseStateResult7 (copy)
 					return UDim2.new(0, 0, 1, UseStateResult7 * (1 - p2))
 				end),

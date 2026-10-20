@@ -2,7 +2,7 @@
 local PromiseModule = require(CorePackages.Packages.Promise)
 local UserProfileStore = require(CorePackages.Workspace.Packages.UserProfiles).Stores.UserProfileStore
 
-local function collectUserIdsMissingUsername(List) --[[ Line: 8 ]]
+local function collectUserIdsMissingUsername(List)
 	local t = {}
 	local List1 = {}
 	
@@ -21,7 +21,7 @@ local function collectUserIdsMissingUsername(List) --[[ Line: 8 ]]
 	return List1
 end
 
-local function enrichGroupsWithProfileUsernames(List, List1) --[[ Line: 27 ]]
+local function enrichGroupsWithProfileUsernames(List, List1)
 	local Usernames = {}
 	
 	for _, value in List1 do
@@ -49,13 +49,13 @@ end
 return {
 	collectUserIdsMissingUsername = collectUserIdsMissingUsername,
 	enrichGroupsWithProfileUsernames = enrichGroupsWithProfileUsernames,
-	enrichMissingUsernames = function(p1) --[[ Line: 50 ]]
+	enrichMissingUsernames = function(p1)
 		-- upvalues: collectUserIdsMissingUsername (copy), PromiseModule (copy), UserProfileStore (copy), enrichGroupsWithProfileUsernames (copy)
 		local CollectUserIdsMissingUsernameResult = collectUserIdsMissingUsername(p1)
 		
-		return if #CollectUserIdsMissingUsernameResult == 0 then PromiseModule.resolve(p1) else PromiseModule.new(function(Callback) --[[ Line: 56 ]]
+		return if #CollectUserIdsMissingUsernameResult == 0 then PromiseModule.resolve(p1) else PromiseModule.new(function(Callback)
 			-- upvalues: UserProfileStore (upval), CollectUserIdsMissingUsernameResult (copy), enrichGroupsWithProfileUsernames (upval), p1 (copy)
-			UserProfileStore.get().fetchNamesByUserIds(CollectUserIdsMissingUsernameResult, function(p2) --[[ Line: 57 ]]
+			UserProfileStore.get().fetchNamesByUserIds(CollectUserIdsMissingUsernameResult, function(p2)
 				-- upvalues: enrichGroupsWithProfileUsernames (upval), p1 (upval), Callback (copy)
 				if p2.status == "success" and p2.data then
 					enrichGroupsWithProfileUsernames(p1, p2.data)

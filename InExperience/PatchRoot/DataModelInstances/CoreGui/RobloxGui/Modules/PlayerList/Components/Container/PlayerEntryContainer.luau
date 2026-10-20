@@ -15,26 +15,26 @@ local PlayerIconInfoStore = if FFlagReplacePlayerIconRoduxWithSignal then Player
 local FFlagPlayerListFixLeaderstatsStacking = SharedFlagsModule.FFlagPlayerListFixLeaderstatsStacking
 local FFlagPlayerListUseFocusNavHook = PlayerListModule.Flags.FFlagPlayerListUseFocusNavHook
 
-return ReactModule.memo(require(CorePackages.Packages.RoactRodux).connect(function(p1) --[[ Line: 116 | Named "mapStateToProps" ]]
+return ReactModule.memo(require(CorePackages.Packages.RoactRodux).connect(function(p1)
 	return {
 		selectedPlayer = p1.playerDropDown.selectedPlayer,
 		dropdownOpen = p1.playerDropDown.isVisible,
 		isSmallTouchDevice = p1.displayOptions.isSmallTouchDevice,
 		isDirectionalPreferred = p1.displayOptions.isTenFootInterface
 	}
-end, function(Callback) --[[ Line: 126 | Named "mapDispatchToProps" ]]
+end, function(Callback)
 	-- upvalues: ClosePlayerDropDownModule (copy), OpenPlayerDropDownModule (copy)
 	return {
-		closeDropdown = function() --[[ Line: 128 ]]
+		closeDropdown = function()
 			-- upvalues: Callback (copy), ClosePlayerDropDownModule (upval)
 			return Callback(ClosePlayerDropDownModule())
 		end,
-		openDropdown = function(p1) --[[ Line: 131 ]]
+		openDropdown = function(p1)
 			-- upvalues: Callback (copy), OpenPlayerDropDownModule (upval)
 			return Callback(OpenPlayerDropDownModule(p1))
 		end
 	}
-end)(function(p1) --[[ Line: 71 | Named "PlayerEntryContainer" ]]
+end)(function(p1)
 	-- upvalues: UseLeaderboardStoreFunction (copy), FFlagReplacePlayerIconRoduxWithSignal (copy), PlayerIconInfoStore (copy), SignalsReactModule (copy), FFlagPlayerListFixLeaderstatsStacking (copy), ReactModule (copy), PlayerEntryViewModule (copy), FFlagPlayerListUseFocusNavHook (copy)
 	local UseLeaderboardStoreResult = UseLeaderboardStoreFunction()
 	local UseSignalStateResult = if FFlagReplacePlayerIconRoduxWithSignal then SignalsReactModule.useSignalState((PlayerIconInfoStore.getPlayerIconInfoReactive(p1.player.UserId))) else p1.playerIconInfo

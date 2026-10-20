@@ -6,10 +6,10 @@ return {
 	Events = {
 		ModalRendered = ModalTelemetryModule.Events.modalRenderedWithSequence({
 			modalSequence = ModalTelemetryModule.Enums.ModalSequence.ConversationListOverlay,
-			counterFormat = function(p1, _) --[[ Line: 12 ]]
+			counterFormat = function(p1, _)
 				return { modalVariant = p1.modalVariant }
 			end,
-			eventStreamFormat = function(p1, _) --[[ Line: 17 ]]
+			eventStreamFormat = function(p1, _)
 				return {
 					modalVariant = p1.modalVariant,
 					conversationId = p1.conversationId,
@@ -19,10 +19,10 @@ return {
 		}),
 		ModalAction = ModalTelemetryModule.Events.modalActionWithSequence({
 			modalSequence = ModalTelemetryModule.Enums.ModalSequence.ConversationListOverlay,
-			counterFormat = function(p1, _) --[[ Line: 27 ]]
+			counterFormat = function(p1, _)
 				return { modalVariant = p1.modalVariant, action = p1.action }
 			end,
-			eventStreamFormat = function(p1, _) --[[ Line: 36 ]]
+			eventStreamFormat = function(p1, _)
 				return {
 					modalVariant = p1.modalVariant,
 					action = p1.action,
@@ -33,14 +33,14 @@ return {
 		}),
 		ModalActionResult = ModalTelemetryModule.Events.modalActionResultWithSequence({
 			modalSequence = ModalTelemetryModule.Enums.ModalSequence.ConversationListOverlay,
-			counterFormat = function(p1, _) --[[ Line: 52 ]]
+			counterFormat = function(p1, _)
 				return {
 					modalVariant = p1.modalVariant,
 					action = p1.action,
 					actionResult = p1.actionResult
 				}
 			end,
-			eventStreamFormat = function(p1, _) --[[ Line: 65 ]]
+			eventStreamFormat = function(p1, _)
 				return {
 					modalVariant = p1.modalVariant,
 					action = p1.action,

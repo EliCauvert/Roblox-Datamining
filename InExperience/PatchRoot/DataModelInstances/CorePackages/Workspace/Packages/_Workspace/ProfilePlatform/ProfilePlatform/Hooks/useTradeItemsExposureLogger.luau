@@ -7,7 +7,7 @@ local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfi
 local UseHasPaidTradingAccessModule = require(ProfilePlatform.Hooks.useHasPaidTradingAccess)
 local LogTradeItemsExposureIfEligibleModule = require(ProfilePlatform.Utils.logTradeItemsExposureIfEligible)
 
-return function() --[[ Line: 12 | Named "useTradeItemsExposureLogger" ]]
+return function()
 	-- upvalues: UseProfileWrapperContextModule (copy), EnumsModule (copy), UseLocalUserIdFunction (copy), UseHasPaidTradingAccessModule (copy), ReactModule (copy), LogTradeItemsExposureIfEligibleModule (copy)
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	local ProfileId = UseProfileWrapperContextModuleResult.profileId
@@ -16,7 +16,7 @@ return function() --[[ Line: 12 | Named "useTradeItemsExposureLogger" ]]
 	local UseHasPaidTradingAccessModuleResult = UseHasPaidTradingAccessModule(Text)
 	local UseHasPaidTradingAccessModuleResult1 = UseHasPaidTradingAccessModule(if IsProfileTypeMatch then ProfileId else nil)
 	
-	return ReactModule.useCallback(function() --[[ Line: 21 ]]
+	return ReactModule.useCallback(function()
 		-- upvalues: IsProfileTypeMatch (copy), LogTradeItemsExposureIfEligibleModule (upval), ProfileId (copy), Text (copy), UseHasPaidTradingAccessModuleResult (copy), UseHasPaidTradingAccessModuleResult1 (copy)
 		if IsProfileTypeMatch then
 			LogTradeItemsExposureIfEligibleModule({

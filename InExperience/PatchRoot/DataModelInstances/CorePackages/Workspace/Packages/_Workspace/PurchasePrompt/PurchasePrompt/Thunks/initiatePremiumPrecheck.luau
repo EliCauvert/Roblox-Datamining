@@ -18,7 +18,7 @@ local CheckUserPurchaseSettingsFailureReason = IAPExperienceModule.Enums.CheckUs
 local MapCheckUserPurchaseSettingsFailureReasonToViolationTypeFunction = IAPExperienceModule.Utility.mapCheckUserPurchaseSettingsFailureReasonToViolationType
 local list = { AnalyticsModule, NetworkModule, ExternalSettingsModule }
 
-local function handleCheckUserSettingsResult(p1, p2, p3) --[[ Line: 35 ]]
+local function handleCheckUserSettingsResult(p1, p2, p3)
 	-- upvalues: ErrorOccurredModule (copy), PurchaseErrorModule (copy), MapCheckUserPurchaseSettingsFailureReasonToViolationTypeFunction (copy), EconomicRestrictionsViolationType (copy), LaunchPremiumUpsellModule (copy), CheckUserPurchaseSettingsFailureReason (copy), SetPromptStateModule (copy), PromptStateModule (copy), SetEconomicRestrictionErrorModule (copy)
 	if p1 == nil then
 		return p2:dispatch(ErrorOccurredModule(PurchaseErrorModule.UnknownFailure))
@@ -46,18 +46,18 @@ local function handleCheckUserSettingsResult(p1, p2, p3) --[[ Line: 35 ]]
 	end
 end
 
-return function() --[[ Line: 72 | Named "initiatePremiumPrecheck" ]]
+return function()
 	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), AnalyticsModule (copy), ExternalSettingsModule (copy), LaunchPremiumUpsellModule (copy), GetPaymentPlatformModule (copy), PaymentPlatformModule (copy), CheckUserPurchaseSettingsModule (copy), handleCheckUserSettingsResult (copy), ErrorOccurredModule (copy), PurchaseErrorModule (copy)
-	return ThunkModule.new(script.Name, list, function(p1, p2) --[[ Line: 73 ]]
+	return ThunkModule.new(script.Name, list, function(p1, p2)
 		-- upvalues: NetworkModule (upval), AnalyticsModule (upval), ExternalSettingsModule (upval), LaunchPremiumUpsellModule (upval), GetPaymentPlatformModule (upval), PaymentPlatformModule (upval), CheckUserPurchaseSettingsModule (upval), handleCheckUserSettingsResult (upval), ErrorOccurredModule (upval), PurchaseErrorModule (upval)
 		local v1 = p2[NetworkModule]
 		local v2 = p2[AnalyticsModule]
 		local v3 = p2[ExternalSettingsModule]
 		
-		return if v3.isStudio() then p1:dispatch(LaunchPremiumUpsellModule()) elseif GetPaymentPlatformModule(v3.getPlatform()) == PaymentPlatformModule.Web then p1:dispatch(LaunchPremiumUpsellModule()) else CheckUserPurchaseSettingsModule(v1):andThen(function(Result) --[[ Line: 90 ]]
+		return if v3.isStudio() then p1:dispatch(LaunchPremiumUpsellModule()) elseif GetPaymentPlatformModule(v3.getPlatform()) == PaymentPlatformModule.Web then p1:dispatch(LaunchPremiumUpsellModule()) else CheckUserPurchaseSettingsModule(v1):andThen(function(Result)
 			-- upvalues: handleCheckUserSettingsResult (upval), p1 (copy), v2 (copy)
 			return handleCheckUserSettingsResult(Result, p1, v2)
-		end):catch(function(_) --[[ Line: 93 ]]
+		end):catch(function(_)
 			-- upvalues: p1 (copy), ErrorOccurredModule (upval), PurchaseErrorModule (upval)
 			return p1:dispatch(ErrorOccurredModule(PurchaseErrorModule.UnknownFailure))
 		end)

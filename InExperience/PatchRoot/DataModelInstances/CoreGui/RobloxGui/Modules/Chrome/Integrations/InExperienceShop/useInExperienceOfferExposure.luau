@@ -11,7 +11,7 @@ local InExperienceOfferExposureStorageKey = game:DefineFastString("InExperienceO
 local InExperienceOfferExposureMaxStoredOffers = game:DefineFastInt("InExperienceOfferExposureMaxStoredOffers", 50)
 local t = {}
 
-local function loadPersistedTally() --[[ Line: 36 ]]
+local function loadPersistedTally()
 	-- upvalues: LocalStoreModule (copy), InExperienceOfferExposureStorageKey (copy)
 	local ForLocalPlayer = LocalStoreModule.loadForLocalPlayer(InExperienceOfferExposureStorageKey)
 	local t = {}
@@ -30,7 +30,7 @@ local function loadPersistedTally() --[[ Line: 36 ]]
 	return t
 end
 
-local function withOldestEvicted(List) --[[ Line: 61 ]]
+local function withOldestEvicted(List)
 	-- upvalues: InExperienceOfferExposureMaxStoredOffers (copy)
 	local List1 = {}
 	
@@ -40,7 +40,7 @@ local function withOldestEvicted(List) --[[ Line: 61 ]]
 	if #List1 <= InExperienceOfferExposureMaxStoredOffers then
 		return List
 	end
-	table.sort(List1, function(A, B): boolean --[[ Line: 70 ]]
+	table.sort(List1, function(A, B): boolean
 		-- upvalues: List (copy)
 		return List[B].lastExposureUTCTime < List[A].lastExposureUTCTime
 	end)
@@ -53,7 +53,7 @@ local function withOldestEvicted(List) --[[ Line: 61 ]]
 	return t
 end
 
-local function tallyExposures(Offers, OfferExposureSnapshot) --[[ Line: 84 ]]
+local function tallyExposures(Offers, OfferExposureSnapshot)
 	-- upvalues: t (copy), IsNotificationEligibleFunction (copy), loadPersistedTally (copy), withOldestEvicted (copy), LocalStoreModule (copy), InExperienceOfferExposureStorageKey (copy)
 	if Offers == nil or OfferExposureSnapshot == nil then return end
 	local List = {}
@@ -80,14 +80,14 @@ local function tallyExposures(Offers, OfferExposureSnapshot) --[[ Line: 84 ]]
 	LocalStoreModule.storeForLocalPlayer(InExperienceOfferExposureStorageKey, (withOldestEvicted(PersistedTally)))
 end
 
-return function() --[[ Line: 118 | Named "useInExperienceOfferExposure" ]]
+return function()
 	-- upvalues: ReactModule (copy), GetOffersStoreFunction (copy), loadPersistedTally (copy), SignalsModule (copy), FFlagOfferNotifyOnGlobalIcon (copy), NotificationLocation (copy), tallyExposures (copy)
-	ReactModule.useEffect(function() --[[ Line: 119 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: GetOffersStoreFunction (upval), loadPersistedTally (upval), SignalsModule (upval), FFlagOfferNotifyOnGlobalIcon (upval), NotificationLocation (upval), tallyExposures (upval)
 		local OffersStore = GetOffersStoreFunction(false)
 		OffersStore.hydrateOfferExposureSnapshot((loadPersistedTally()))
 		
-		return SignalsModule.createEffect(function(p1) --[[ Line: 128 ]]
+		return SignalsModule.createEffect(function(p1)
 			-- upvalues: FFlagOfferNotifyOnGlobalIcon (upval), OffersStore (copy), NotificationLocation (upval), tallyExposures (upval)
 			if FFlagOfferNotifyOnGlobalIcon then
 				if OffersStore.getOfferNotificationShownWithEnum(p1) == NotificationLocation.None then return end

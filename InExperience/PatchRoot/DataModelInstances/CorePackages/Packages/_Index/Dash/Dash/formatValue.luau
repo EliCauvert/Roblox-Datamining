@@ -1,6 +1,6 @@
 ﻿local Parent = script.Parent
 
-return function(p1: number, p2): string --[[ Line: 19 | Named "formatValue" ]]
+return function(p1: number, p2): string
 	-- upvalues: Parent (copy)
 	local P1 = p2 or ""
 	local StartIndex, EndIndex = P1:find("[A-Za-z#?]+")

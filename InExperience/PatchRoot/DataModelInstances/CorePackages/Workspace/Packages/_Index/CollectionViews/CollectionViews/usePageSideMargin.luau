@@ -11,17 +11,17 @@ local FFlagLuaAppCompositionAlways = require(Parent.SharedFlags).FFlagLuaAppComp
 local GAMECAROUSELSIDECOMPACTPADDING = DiscoveryTypesModule.Constants.GAME_CAROUSEL_SIDE_COMPACT_PADDING
 local GAMECAROUSELSIDEWIDEPADDING = DiscoveryTypesModule.Constants.GAME_CAROUSEL_SIDE_WIDE_PADDING
 
-return function(p1, p2) --[[ Line: 17 | Named "usePageSideMargin" ]]
+return function(p1, p2)
 	-- upvalues: AppCompositionModule (copy), FFlagLuaAppCompositionAlways (copy), UseSelectorFunction (copy), UseAppPolicyFunction (copy), FormFactor (copy), GAMECAROUSELSIDECOMPACTPADDING (copy), GAMECAROUSELSIDEWIDEPADDING (copy), UseCollectionLayoutParamsModule (copy), CollectionItemSize (copy)
 	local Margin = AppCompositionModule.useCompositionLayout().margin
 	
 	if FFlagLuaAppCompositionAlways then
 		return Margin
 	else
-		local UseSelectorResult = UseSelectorFunction(function(p3) --[[ Line: 25 ]]
+		local UseSelectorResult = UseSelectorFunction(function(p3)
 			return p3.FormFactor
 		end)
-		local UseCollectionLayoutParamsModuleResult = UseCollectionLayoutParamsModule(CollectionItemSize.Small, p1, false, if UseAppPolicyFunction(function(p3) --[[ Line: 29 ]]
+		local UseCollectionLayoutParamsModuleResult = UseCollectionLayoutParamsModule(CollectionItemSize.Small, p1, false, if UseAppPolicyFunction(function(p3)
 			return p3.useGridPageLayout()
 		end) then nil else {
 			sideMargin = if UseSelectorResult == FormFactor.COMPACT then GAMECAROUSELSIDECOMPACTPADDING else GAMECAROUSELSIDEWIDEPADDING

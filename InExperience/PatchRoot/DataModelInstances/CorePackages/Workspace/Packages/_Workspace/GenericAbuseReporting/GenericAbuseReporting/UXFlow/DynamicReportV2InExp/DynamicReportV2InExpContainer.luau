@@ -32,18 +32,18 @@ local FFlagAbuseReportInExpPlayerListV3 = require(Parent.SharedFlags).FFlagAbuse
 local FFlagAbuseReportSubmissionTargetV4 = require(Parent.SharedFlags).FFlagAbuseReportSubmissionTargetV4
 local FFlagAbuseReportVoiceMute = require(Parent.SharedFlags).FFlagAbuseReportVoiceMute
 
-return ReactModule.memo(function(p1) --[[ Line: 73 | Named "DynamicReportV2InExpContainer" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), UseIsVoiceChatReportableFunction (copy), GetIsInExpSceneSelectionAvailableModule (copy), UseDynamicInExpConfigFunction (copy), UseDeviceOrientationFunction (copy), GuiService (copy), FFlagAbuseReportInExpShowConfigLoadingSkeletonModule (copy), UseInExpConfigLoadingSkeletonFunction (copy), GetUsersModule (copy), FFlagAbuseReportInExpPlayerListV3 (copy), RecentlyLeftSignalsModule (copy), FFlagAbuseReportSubmissionTargetV4 (copy), UseInExpClientActionHandlersFunction (copy), UseInExpCustomSubmitFunction (copy), FFlagInlineSurveyOnInExpReportModule (copy), SendBoundaryErrorTelemetryModule (copy), DynamicReportV2InExpLoadingModule (copy), DynamicReportV2InExpErrorModule (copy), InlineSurveyModule (copy), InlineEventTypeModule (copy), InlineSurveyPresetModule (copy), AbuseReportErrorBoundaryModule (copy), AbuseReportContentInExpModule (copy), FFlagAbuseReportVoiceMute (copy)
 	local PreselectedPlayer = p1.preselectedPlayer
-	local UseMemoResult = ReactModule.useMemo(function(): string --[[ Line: 76 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): string
 		return (tostring(game.GameId))
 	end, {})
 	local UseIsVoiceChatReportableResult = UseIsVoiceChatReportableFunction(p1.voiceChatServiceManager)
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 85 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), GetIsInExpSceneSelectionAvailableModule (upval)
 		return p1.isReportTabVisible and GetIsInExpSceneSelectionAvailableModule()
 	end, { p1.isReportTabVisible })
-	local UseDynamicInExpConfigResult = UseDynamicInExpConfigFunction(p1.isReportTabVisible, (ReactModule.useMemo(function() --[[ Line: 89 ]]
+	local UseDynamicInExpConfigResult = UseDynamicInExpConfigFunction(p1.isReportTabVisible, (ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), UseIsVoiceChatReportableResult (copy), UseMemoResult1 (copy), PreselectedPlayer (copy)
 		local config = {
 			experienceTargetId = UseMemoResult,
@@ -72,7 +72,7 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "DynamicReportV2InExp
 	local IsLandscape: boolean = UseDeviceOrientationFunction() == "Landscape" or not IsViewportDisplaySizeMatch
 	local NoHasError: boolean = p1.isReportTabVisible and (Config == nil and not HasError)
 	local UseInExpConfigLoadingSkeletonResult = if FFlagAbuseReportInExpShowConfigLoadingSkeletonModule then UseInExpConfigLoadingSkeletonFunction(p1.isReportTabVisible, NoHasError) else false
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 120 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: GetUsersModule (upval), p1 (copy)
 		local config = { users = { type = "listItem", fetch = GetUsersModule } }
 		
@@ -85,7 +85,7 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "DynamicReportV2InExp
 		return config
 	end, { p1.inExpChatMessagesLoader, p1.inExpVoiceUsersLoader })
 	local UseRefResult = ReactModule.useRef(DateTime.now().UnixTimestampMillis)
-	ReactModule.useEffect(function() --[[ Line: 141 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseRefResult (copy)
 		if p1.isReportTabVisible then
 			UseRefResult.current = DateTime.now().UnixTimestampMillis
@@ -93,12 +93,12 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "DynamicReportV2InExp
 	end, { p1.isReportTabVisible })
 	
 	if FFlagAbuseReportInExpPlayerListV3 then
-		ReactModule.useEffect(function() --[[ Line: 153 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: RecentlyLeftSignalsModule (upval)
 			RecentlyLeftSignalsModule.init()
 		end, {})
 	end
-	ReactModule.useEffect(function() --[[ Line: 158 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult2 (copy)
 		if not p1.isReportTabVisible then
 			UseStateResult2(nil)
@@ -126,7 +126,7 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "DynamicReportV2InExp
 	if FFlagInlineSurveyOnInExpReportModule then
 		v3, UseStateResult2_1 = ReactModule.useState(false)
 		local OnReportFinishFunction = p1.onReportFinish
-		UseResult = ReactModule.useCallback(function(p2) --[[ Line: 190 ]]
+		UseResult = ReactModule.useCallback(function(p2)
 			-- upvalues: UseStateResult2_1 (ref), OnReportFinishFunction (copy)
 			if p2.didSubmit and UseStateResult2_1 then
 				UseStateResult2_1(true)
@@ -135,24 +135,24 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "DynamicReportV2InExp
 				OnReportFinishFunction(p2)
 			end
 		end, { OnReportFinishFunction, UseStateResult2_1 })
-		UseResult1 = ReactModule.useCallback(function() --[[ Line: 199 ]]
+		UseResult1 = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2_1 (ref)
 			if UseStateResult2_1 then
 				UseStateResult2_1(false)
 			end
 		end, { UseStateResult2_1 })
 	end
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 206 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: SetHasErrorFunction (copy)
 		SetHasErrorFunction(true)
 	end, { SetHasErrorFunction })
-	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 210 ]]
+	local UseResult3 = ReactModule.useCallback(function(p2)
 		-- upvalues: SendBoundaryErrorTelemetryModule (upval), AbuseVector (copy), UseMemoResult (copy), SetHasErrorFunction (copy)
 		warn("AbuseReportErrorBoundary (in-exp) caught:", p2)
 		SendBoundaryErrorTelemetryModule(p2, { abuse_vector = AbuseVector, target_id = UseMemoResult })
 		SetHasErrorFunction(true)
 	end, { AbuseVector, UseMemoResult, SetHasErrorFunction })
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 219 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: UseStateResult (copy), UseStateResult2 (copy)
 		return {
 			pendingInlineAlert = UseStateResult,

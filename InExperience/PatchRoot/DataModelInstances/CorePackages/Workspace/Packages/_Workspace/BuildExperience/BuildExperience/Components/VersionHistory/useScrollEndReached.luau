@@ -1,13 +1,13 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
 
-return function(p1, p2, Callback) --[[ Line: 8 | Named "useScrollEndReached" ]]
+return function(p1, p2, Callback)
 	-- upvalues: ReactModule (copy)
-	ReactModule.useEffect(function() --[[ Line: 13 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), p2 (copy), Callback (copy)
 		local Current = p1.current
 		
 		if Current == nil then return end
-		local function checkDistanceToEnd() --[[ Line: 19 ]]
+		local function checkDistanceToEnd()
 			-- upvalues: Current (copy), p2 (upval), Callback (upval)
 			local Y = Current.AbsoluteWindowSize.Y
 			
@@ -30,7 +30,7 @@ return function(p1, p2, Callback) --[[ Line: 8 | Named "useScrollEndReached" ]]
 		if Current.AbsoluteCanvasSize.Y - Y - Current.CanvasPosition.Y <= Y * p2 then
 			Callback()
 		end
-		return function() --[[ Line: 34 ]]
+		return function()
 			-- upvalues: List (copy)
 			for _, Connection in List do
 				Connection:Disconnect()

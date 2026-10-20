@@ -5,9 +5,9 @@ local FriendsLandingContainerModule = require(FriendsLanding.Components.FriendsL
 local FriendsLandingScreen = Roact.PureComponent:extend("FriendsLandingScreen")
 FriendsLandingScreen.defaultProps = { friends = {} }
 
-function FriendsLandingScreen:render() --[[ Line: 13 ]]
+function FriendsLandingScreen:render()
 	-- upvalues: FriendsLandingContextModule (copy), Roact (copy), FriendsLandingContainerModule (copy)
-	return FriendsLandingContextModule.with(function(_) --[[ Line: 14 ]]
+	return FriendsLandingContextModule.with(function(_)
 		-- upvalues: Roact (upval), FriendsLandingContainerModule (upval)
 		return Roact.createElement(FriendsLandingContainerModule, {})
 	end)

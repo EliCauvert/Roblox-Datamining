@@ -7,12 +7,12 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local CurrencyTransferTelemetryModule = require(CurrencyTransfers.Events.CurrencyTransferTelemetry)
 local TransferOriginationModule = require(CurrencyTransfers.Enums.TransferOrigination)
 
-return function(Callback) --[[ Line: 14 | Named "useRobuxTransferSubscriptionUpsellListenerEffect" ]]
+return function(Callback)
 	-- upvalues: ReactModule (copy), SharedFlagsModule (copy), MarketplaceService (copy), LoggingProtocolModule (copy), CurrencyTransferTelemetryModule (copy), TransferOriginationModule (copy)
-	ReactModule.useEffect(function() --[[ Line: 15 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SharedFlagsModule (upval), MarketplaceService (upval), LoggingProtocolModule (upval), CurrencyTransferTelemetryModule (upval), TransferOriginationModule (upval), Callback (copy)
 		if SharedFlagsModule.GetEngineFeatureEnablePromptRobuxTransferDedicatedUpsellEvent() then
-			local PromptRobuxTransferSubscriptionUpsellRequestedConnection = MarketplaceService.PromptRobuxTransferSubscriptionUpsellRequested:Connect(function() --[[ Line: 22 ]]
+			local PromptRobuxTransferSubscriptionUpsellRequestedConnection = MarketplaceService.PromptRobuxTransferSubscriptionUpsellRequested:Connect(function()
 				-- upvalues: LoggingProtocolModule (upval), CurrencyTransferTelemetryModule (upval), TransferOriginationModule (upval), Callback (upval)
 				LoggingProtocolModule.default:logRobloxTelemetryCounter(CurrencyTransferTelemetryModule.CurrencyTransferEngineUpsellSignalReceivedCounter, 1, {
 					transferOrigination = tostring(TransferOriginationModule.InExperience)
@@ -20,7 +20,7 @@ return function(Callback) --[[ Line: 14 | Named "useRobuxTransferSubscriptionUps
 				Callback()
 			end)
 			
-			return function() --[[ Line: 33 ]]
+			return function()
 				-- upvalues: PromptRobuxTransferSubscriptionUpsellRequestedConnection (ref)
 				if PromptRobuxTransferSubscriptionUpsellRequestedConnection then
 					PromptRobuxTransferSubscriptionUpsellRequestedConnection:Disconnect()
@@ -28,7 +28,7 @@ return function(Callback) --[[ Line: 14 | Named "useRobuxTransferSubscriptionUps
 				end
 			end
 		else
-			return function() --[[ Line: 19 ]] end
+			return function() end
 		end
 	end, { Callback })
 end

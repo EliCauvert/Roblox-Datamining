@@ -45,73 +45,73 @@ local FFlagSduiSetPageScopeFieldActionModule = require(SduiSharedContent.Flags.F
 local FFlagLuaAppSduiVideoThumbnail = require(Parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
 local FFlagEnableGameJoinEarlyAccess = require(Parent.SharedFlags).FFlagEnableGameJoinEarlyAccess
 
-local function registerSharedActions() --[[ Line: 61 ]]
+local function registerSharedActions()
 	-- upvalues: SduiActionType (copy), SduiSharedContent (copy), FFlagSduiDismissPromptAction (copy), FFlagLuaAppSduiMovePromptsActions (copy), FFlagSduiShowToastAction (copy), FFlagSduiActionSequence (copy), FFlagSduiNavigate (copy), FFlagSduiSetPageScopeFieldActionModule (copy), GetSduiActionHandlerRegistryFunction (copy)
 	GetSduiActionHandlerRegistryFunction().registerActionHandlerConfigs({
 		[SduiActionType.CustomAnalyticsEvent] = {
 			skipUnifiedLogging = true,
-			lazyHandler = function() --[[ Line: 67 ]]
+			lazyHandler = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Actions.SduiAnalyticsEventAction)
 			end
 		},
 		[SduiActionType.LoadMoreFromApi] = {
 			skipUnifiedLogging = true,
-			lazyHandler = function() --[[ Line: 73 ]]
+			lazyHandler = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Actions.SduiLoadMoreFromApi)
 			end
 		},
 		[SduiActionType.RefreshFromApi] = {
 			skipUnifiedLogging = true,
-			lazyHandler = function() --[[ Line: 79 ]]
+			lazyHandler = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Actions.SduiRefreshFromApi)
 			end
 		},
 		[SduiActionType.Share] = {
 			skipUnifiedLogging = false,
-			lazyHandler = function() --[[ Line: 85 ]]
+			lazyHandler = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Actions.SduiShareAction)
 			end
 		},
 		[SduiActionType.OpenSocialProofUserListSheet] = {
 			skipUnifiedLogging = true,
-			lazyHandler = function() --[[ Line: 91 ]]
+			lazyHandler = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Actions.SduiOpenSocialProofUserListSheetAction)
 			end
 		},
 		[SduiActionType.DismissPrompt] = if FFlagSduiDismissPromptAction and not FFlagLuaAppSduiMovePromptsActions then {
 			skipUnifiedLogging = false,
-			lazyHandler = function() --[[ Line: 100 ]]
+			lazyHandler = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Actions.SduiDismissPromptAction)
 			end
 		} else nil,
 		[SduiActionType.ShowToast] = if FFlagSduiShowToastAction then {
 			skipUnifiedLogging = false,
-			lazyHandler = function() --[[ Line: 108 ]]
+			lazyHandler = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Actions.SduiShowToastAction)
 			end
 		} else nil,
 		[SduiActionType.ActionSequence] = if FFlagSduiActionSequence then {
 			skipUnifiedLogging = true,
-			lazyHandler = function() --[[ Line: 118 ]]
+			lazyHandler = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Actions.SduiActionSequenceAction)
 			end
 		} else nil,
 		[SduiActionType.Navigate] = if FFlagSduiNavigate then {
-			lazyHandler = function() --[[ Line: 126 ]]
+			lazyHandler = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Actions.SduiNavigateAction)
 			end
 		} else nil,
 		[SduiActionType.SetPageScopeField] = if FFlagSduiSetPageScopeFieldActionModule then {
-			lazyHandler = function() --[[ Line: 133 ]]
+			lazyHandler = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Actions.SduiSetPageScopeFieldAction)
 			end
@@ -119,59 +119,59 @@ local function registerSharedActions() --[[ Line: 61 ]]
 	})
 end
 
-local function registerSharedUiComponents() --[[ Line: 142 ]]
+local function registerSharedUiComponents()
 	-- upvalues: SduiComponentType (copy), SduiSharedContent (copy), FFlagSduiCardComponent (copy), FFlagSduiSystemBannerComponent (copy), FFlagSduiBannerContextComponent (copy), FFlagSduiViewportVisibilityComponent (copy), GetLuaTableEnumParserFunction (copy), FoundationModule (copy), ParseColorTokenProp (copy), ParseVector2Prop (copy), ParseIntegerProp (copy), ParseUDim2Prop (copy), ParseBooleanProp (copy), ParseNumberProp (copy), ParseStringProp (copy), FFlagSduiShimmerTextComponentEnabled (copy), FFlagSduiRevealTextComponentEnabled (copy), FFlagSduiPreferredTextSizeLineBudgets (copy), FFlagLuaAppSduiVideoThumbnail (copy), FFlagEnableGameJoinEarlyAccess (copy), FFlagSduiPlayWithRewardRefactor (copy), FFlagSduiPlayWithReward (copy), ParseUiComponentProp (copy), ParseCallbackProp (copy), FFlagSduiContentRowStateLayerModule (copy), FFlagSDUIContentRowSelectableModule (copy), FFlagSduiListComponents (copy), FFlagSduiAccordionComponent (copy), FFlagSduiDevStoreSeeAllSupport (copy), FFlagSduiTooltipComponentEnabled (copy), FFlagSduiCollectionCarouselPlaceholderItem (copy), FFlagSduiAiOverviewEnabled (copy), FFlagSduiVerticalListWithImpressionsEnabled (copy), GetSduiComponentRegistryFunction (copy)
 	GetSduiComponentRegistryFunction().registerComponentDefinitions({
 		[SduiComponentType.DetailsPageImageHeader] = {
-			getLazyComponent = function() --[[ Line: 145 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiDetailsPageImageHeader)
 			end
 		},
 		[SduiComponentType.AvatarGroup] = {
-			getLazyComponent = function() --[[ Line: 150 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiAvatarGroup)
 			end
 		},
 		[SduiComponentType.Card] = if FFlagSduiCardComponent then {
-			getLazyComponent = function() --[[ Line: 156 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiCard)
 			end
 		} else nil,
 		[SduiComponentType.Coachmark] = {
-			getLazyComponent = function() --[[ Line: 162 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiCoachmark)
 			end
 		},
 		[SduiComponentType.SystemBanner] = if FFlagSduiSystemBannerComponent then {
-			getLazyComponent = function() --[[ Line: 168 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiSystemBanner)
 			end
 		} else nil,
 		[SduiComponentType.BannerContext] = if FFlagSduiBannerContextComponent then {
-			getLazyComponent = function() --[[ Line: 175 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiBannerContext)
 			end
 		} else nil,
 		[SduiComponentType.ViewportVisibility] = if FFlagSduiViewportVisibilityComponent then {
-			getLazyComponent = function() --[[ Line: 182 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiViewportVisibility)
 			end
 		} else nil,
 		[SduiComponentType.CircleIcon] = {
-			getLazyComponent = function() --[[ Line: 188 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiCircleIcon)
 			end
 		},
 		[SduiComponentType.Icon] = {
-			getLazyComponent = function() --[[ Line: 193 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiIcon)
 			end,
@@ -189,79 +189,79 @@ local function registerSharedUiComponents() --[[ Line: 142 ]]
 			}
 		},
 		[SduiComponentType.IconButton] = {
-			getLazyComponent = function() --[[ Line: 211 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiIconButton)
 			end
 		},
 		[SduiComponentType.LinkText] = {
-			getLazyComponent = function() --[[ Line: 217 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiLinkText)
 			end
 		},
 		[SduiComponentType.ShimmerText] = if FFlagSduiShimmerTextComponentEnabled then {
-			getLazyComponent = function() --[[ Line: 223 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiShimmerText)
 			end
 		} else nil,
 		[SduiComponentType.RevealText] = if FFlagSduiRevealTextComponentEnabled then {
-			getLazyComponent = function() --[[ Line: 230 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiRevealText)
 			end
 		} else nil,
 		[SduiComponentType.LineLimitedText] = if FFlagSduiPreferredTextSizeLineBudgets then {
-			getLazyComponent = function() --[[ Line: 237 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiLineLimitedText)
 			end
 		} else nil,
 		[SduiComponentType.ContentRatingLabel] = {
-			getLazyComponent = function() --[[ Line: 243 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiContentRatingLabel)
 			end
 		},
 		[SduiComponentType.MediaGallery] = {
-			getLazyComponent = function() --[[ Line: 248 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiMediaGallery)
 			end
 		},
 		[SduiComponentType.VideoPlayer] = if FFlagLuaAppSduiVideoThumbnail then {
-			getLazyComponent = function() --[[ Line: 254 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiVideoPlayer)
 			end
 		} else nil,
 		[SduiComponentType.ActionBar] = {
-			getLazyComponent = function() --[[ Line: 260 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiActionBar)
 			end
 		},
 		[SduiComponentType.PlayButtonContextualMessage] = {
-			getLazyComponent = function() --[[ Line: 265 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiPlayButtonContextualMessage)
 			end
 		},
 		[SduiComponentType.PlusEarlyAccessUpsell] = if FFlagEnableGameJoinEarlyAccess then {
-			getLazyComponent = function() --[[ Line: 271 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiPlusEarlyAccessUpsell)
 			end
 		} else nil,
 		[SduiComponentType.PlayWithReward] = if FFlagSduiPlayWithRewardRefactor then nil elseif FFlagSduiPlayWithReward then {
-			getLazyComponent = function() --[[ Line: 280 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiPlayWithReward)
 			end
 		} else nil,
 		[SduiComponentType.ContentRow] = {
-			getLazyComponent = function() --[[ Line: 286 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiContentRow)
 			end,
@@ -283,79 +283,79 @@ local function registerSharedUiComponents() --[[ Line: 142 ]]
 			}
 		},
 		[SduiComponentType.ListRoot] = if FFlagSduiListComponents then {
-			getLazyComponent = function() --[[ Line: 310 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiListRoot)
 			end
 		} else nil,
 		[SduiComponentType.ListItem] = if FFlagSduiListComponents then {
-			getLazyComponent = function() --[[ Line: 317 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiListItem)
 			end
 		} else nil,
 		[SduiComponentType.Accordion] = if FFlagSduiAccordionComponent then {
-			getLazyComponent = function() --[[ Line: 324 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiAccordion)
 			end
 		} else nil,
 		[SduiComponentType.AccordionItem] = if FFlagSduiAccordionComponent then {
-			getLazyComponent = function() --[[ Line: 331 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiAccordionItem)
 			end
 		} else nil,
 		[SduiComponentType.SubscriptionCell] = if FFlagSduiDevStoreSeeAllSupport then {
-			getLazyComponent = function() --[[ Line: 338 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiSubscriptionCell)
 			end
 		} else nil,
 		[SduiComponentType.Tooltip] = if FFlagSduiTooltipComponentEnabled then {
-			getLazyComponent = function() --[[ Line: 345 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiTooltip)
 			end
 		} else nil,
 		[SduiComponentType.FilterPillsCarousel] = {
-			getLazyComponent = function() --[[ Line: 351 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiFilterPillsCarousel)
 			end
 		},
 		[SduiComponentType.Placeholder] = {
-			getLazyComponent = function() --[[ Line: 356 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiPlaceholder)
 			end
 		},
 		[SduiComponentType.PlaceholderTile] = if FFlagSduiCollectionCarouselPlaceholderItem then {
-			getLazyComponent = function() --[[ Line: 362 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiPlaceholderTile)
 			end
 		} else nil,
 		[SduiComponentType.PlaceholderWrapper] = {
-			getLazyComponent = function() --[[ Line: 368 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiPlaceholderWrapper)
 			end
 		},
 		[SduiComponentType.Skeleton] = {
-			getLazyComponent = function() --[[ Line: 373 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiSkeleton)
 			end
 		},
 		[SduiComponentType.AiOverview] = if FFlagSduiAiOverviewEnabled then {
-			getLazyComponent = function() --[[ Line: 379 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiAiOverview)
 			end
 		} else nil,
 		[SduiComponentType.VerticalListWithImpressions] = if FFlagSduiVerticalListWithImpressionsEnabled then {
-			getLazyComponent = function() --[[ Line: 386 ]]
+			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiVerticalListWithImpressions)
 			end
@@ -363,9 +363,9 @@ local function registerSharedUiComponents() --[[ Line: 142 ]]
 	})
 end
 
-return ReactModule.memo(function() --[[ Line: 396 | Named "SduiSharedRegister" ]]
+return ReactModule.memo(function()
 	-- upvalues: ReactModule (copy), registerSharedActions (copy), registerSharedUiComponents (copy)
-	ReactModule.useEffect(function() --[[ Line: 397 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: registerSharedActions (upval), registerSharedUiComponents (upval)
 		registerSharedActions()
 		registerSharedUiComponents()

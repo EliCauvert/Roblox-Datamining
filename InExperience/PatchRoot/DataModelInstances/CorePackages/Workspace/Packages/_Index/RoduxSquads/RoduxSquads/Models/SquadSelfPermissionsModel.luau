@@ -1,7 +1,7 @@
 ﻿local TModule = require(script:FindFirstAncestor("RoduxSquads").Parent.t)
 local SquadSelfPermissionsModelModule = {}
 
-function SquadSelfPermissionsModelModule.new(p1) --[[ Line: 8 ]]
+function SquadSelfPermissionsModelModule.new(p1)
 	-- upvalues: SquadSelfPermissionsModelModule (copy)
 	assert(SquadSelfPermissionsModelModule.isValid(p1))
 	SquadSelfPermissionsModelModule.__index = SquadSelfPermissionsModelModule
@@ -10,7 +10,7 @@ function SquadSelfPermissionsModelModule.new(p1) --[[ Line: 8 ]]
 	return p1
 end
 
-function SquadSelfPermissionsModelModule.mock(p1) --[[ Line: 20 ]]
+function SquadSelfPermissionsModelModule.mock(p1)
 	-- upvalues: SquadSelfPermissionsModelModule (copy)
 	local P1 = p1 or {}
 	
@@ -20,7 +20,7 @@ function SquadSelfPermissionsModelModule.mock(p1) --[[ Line: 20 ]]
 	}))
 end
 
-function SquadSelfPermissionsModelModule.format(p1) --[[ Line: 31 ]]
+function SquadSelfPermissionsModelModule.format(p1)
 	-- upvalues: SquadSelfPermissionsModelModule (copy)
 	return (SquadSelfPermissionsModelModule.new({
 		canSeeRegroupPromptToast = p1.canSeeRegroupPromptToast,

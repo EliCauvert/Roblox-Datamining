@@ -10,11 +10,11 @@ local GetYPositionOffsetForMotionFunction = ParallaxUtilsModule.getYPositionOffs
 local GetNormalizedTopPositionFunction = ParallaxUtilsModule.getNormalizedTopPosition
 local _ = require(DiscoveryHeroUnit.HeroUnitTypes)
 
-local function _(p1: number, p2: number, p3: number): number --[[ Line: 71 | Named "calculateModifiedNormalizedPosition" ]]
+local function _(p1: number, p2: number, p3: number): number
 	return if p1 < 0 and p3 and p3 > 0 then math.clamp(p1 / p3, -1, 0) elseif p2 == nil or p2 <= 0 or p2 >= 1 then p1 else math.clamp(p1 / p2, 0, 1)
 end
 
-local _ = function(p1, p2) --[[ Line: 87 | Named "computeNormalizedHeroUnitHeight" ]]
+local _ = function(p1, p2)
 	if p1 == nil then
 		return nil
 	else
@@ -24,19 +24,19 @@ local _ = function(p1, p2) --[[ Line: 87 | Named "computeNormalizedHeroUnitHeigh
 	end
 end
 
-return ReactModule.memo(function(Frame: Frame) --[[ Line: 99 | Named "HeroImages" ]]
+return ReactModule.memo(function(Frame: Frame)
 	-- upvalues: ArgCheckModule (copy), ReactModule (copy), GetNormalizedTopPositionFunction (copy), UseNormalizedVerticalProgressFunction (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), GetYPositionOffsetForMotionFunction (copy)
 	ArgCheckModule.assert(Frame.foregroundAspectRatio > 0, "HeroImages: foregroundAspectRatio must be > 0")
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.new(0, 0))
-	ReactModule.useEffect(function() --[[ Line: 107 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseBindingResult2 (copy)
 		if UseRefResult and UseRefResult.current then
 			UseBindingResult2(UseRefResult.current.AbsoluteSize)
 		end
 	end, {})
-	local UseResult = ReactModule.useCallback(function(Frame1) --[[ Line: 113 ]]
+	local UseResult = ReactModule.useCallback(function(Frame1)
 		-- upvalues: UseRefResult1 (copy), GetNormalizedTopPositionFunction (upval), Frame (copy), UseBindingResult2 (copy)
 		if Frame1 then
 			UseRefResult1.current = GetNormalizedTopPositionFunction(Frame.verticalScrollingFrameRef.current, Frame1)
@@ -45,7 +45,7 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 99 | Named "HeroImages
 	end, { Frame.verticalScrollingFrameRef })
 	local UseNormalizedVerticalProgressResult = UseNormalizedVerticalProgressFunction(Frame.verticalScrollingFrameRef, UseRefResult)
 	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(Vector2.new(0, 0))
-	local UseResult1 = ReactModule.useCallback(function(p1, p2, p3: number, p4: number, p5: number): Vector2 --[[ Line: 124 ]]
+	local UseResult1 = ReactModule.useCallback(function(p1, p2, p3: number, p4: number, p5: number): Vector2
 		-- upvalues: ArgCheckModule (upval)
 		ArgCheckModule.assert(p4 > 0)
 		ArgCheckModule.assert(p5 > 0)
@@ -83,7 +83,7 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 99 | Named "HeroImages
 				normalizedPosition = UseNormalizedVerticalProgressResult,
 				imageSize = UseBindingResult1,
 				frameSize = UseBindingResult
-			}):map(function(p1): Vector2 --[[ Line: 190 ]]
+			}):map(function(p1): Vector2
 				-- upvalues: UseRefResult1 (copy), GetNormalizedTopPositionFunction (upval), Frame (copy), UseRefResult (copy), GetYPositionOffsetForMotionFunction (upval), ScaledBackgroundOverflow (copy), BackgroundOverflow (copy), UseResult1 (copy)
 				if UseRefResult1.current == nil then
 					UseRefResult1.current = GetNormalizedTopPositionFunction(Frame.verticalScrollingFrameRef.current, UseRefResult.current)
@@ -115,7 +115,7 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 99 | Named "HeroImages
 			ImageRectSize = if Frame.enableBackgroundAnimation then ReactModule.joinBindings({
 				imageSize = UseBindingResult1,
 				frameSize = UseBindingResult
-			}):map(function(p1): Vector2 --[[ Line: 233 ]]
+			}):map(function(p1): Vector2
 				-- upvalues: UseRefResult (copy), UseResult1 (copy), Frame (copy)
 				local ImageSize = p1.imageSize
 				
@@ -128,7 +128,7 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 99 | Named "HeroImages
 					return Vector2.new(0, 0)
 				end
 			end) else nil,
-			[ReactModule.Change.ContentImageSize] = function(p1) --[[ Line: 262 ]]
+			[ReactModule.Change.ContentImageSize] = function(p1)
 				-- upvalues: UseBindingResult2_1 (copy)
 				if p1 then
 					UseBindingResult2_1(p1.ContentImageSize)
@@ -144,7 +144,7 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 99 | Named "HeroImages
 			Position = if Frame.enableForegroundAnimation then ReactModule.joinBindings({
 				normalizedPosition = UseNormalizedVerticalProgressResult,
 				frameSize = UseBindingResult
-			}):map(function(p1): UDim2 --[[ Line: 287 ]]
+			}):map(function(p1): UDim2
 				-- upvalues: UseRefResult1 (copy), GetNormalizedTopPositionFunction (upval), Frame (copy), UseRefResult (copy), GetYPositionOffsetForMotionFunction (upval), NewForegroundOverflow (copy)
 				if UseRefResult1.current == nil then
 					UseRefResult1.current = GetNormalizedTopPositionFunction(Frame.verticalScrollingFrameRef.current, UseRefResult.current)

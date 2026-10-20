@@ -31,7 +31,7 @@ local config1 = {
 	UPDATE_PROFILE = "Failed to update profile"
 }
 
-local function getErrorType(Text: string) --[[ Line: 37 ]]
+local function getErrorType(Text: string)
 	-- upvalues: ErrorType (copy), HttpStatusCode (copy)
 	if typeof(Text) == "table" then
 		if Text.message and string.find(string.lower(Text.message), "timeout") then
@@ -66,7 +66,7 @@ return {
 	ERROR_MESSAGES = config,
 	DEFAULT_ERROR_MESSAGES = config1,
 	getErrorType = getErrorType,
-	getErrorMessage = function(p1, p2) --[[ Line: 66 ]]
+	getErrorMessage = function(p1, p2)
 		-- upvalues: getErrorType (copy), config (copy), config1 (copy)
 		local Entry = config[getErrorType(p1)]
 		

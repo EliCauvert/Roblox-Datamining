@@ -7,7 +7,7 @@ local config = {
 	TEXT_X_ALIGNMENT_RIGHT = Enum.TextXAlignment.Right
 }
 
-local function toEnumFont(Text: string) --[[ Line: 19 ]]
+local function toEnumFont(Text: string)
 	if type(Text) ~= "string" then
 		return nil
 	end
@@ -21,7 +21,7 @@ local function toEnumFont(Text: string) --[[ Line: 19 ]]
 	for Text1 in string.gmatch(Match, "[^_]+") do
 		table.insert(List, string.upper((string.sub(Text1, 1, 1))) .. string.lower((string.sub(Text1, 2))))
 	end
-	local Success, Result = pcall(function() --[[ Line: 31 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: List (copy)
 		return Enum.Font[table.concat(List)]
 	end)
@@ -29,11 +29,11 @@ local function toEnumFont(Text: string) --[[ Line: 19 ]]
 	return if Success then Result else nil
 end
 
-local function _(p1) --[[ Line: 37 | Named "durationSeconds" ]]
+local function _(p1)
 	return if p1 == nil then 0 else (p1.seconds or 0) + (p1.nanos or 0) / 1000000000
 end
 
-local _ = function(p1) --[[ Line: 44 | Named "toTrim" ]]
+local _ = function(p1)
 	if p1 == nil then
 		return nil
 	else
@@ -46,7 +46,7 @@ local _ = function(p1) --[[ Line: 44 | Named "toTrim" ]]
 	end
 end
 
-local function toTextOverlay(p1, p2, TextOverlayStyleFont) --[[ Line: 59 ]]
+local function toTextOverlay(p1, p2, TextOverlayStyleFont)
 	-- upvalues: toEnumFont (copy), config (copy)
 	local Transform = p1.transform
 	local FontSource = if p2.font == nil then nil else p2.font.font_source
@@ -67,7 +67,7 @@ local function toTextOverlay(p1, p2, TextOverlayStyleFont) --[[ Line: 59 ]]
 	}
 end
 
-local _ = function(p1, AssetId) --[[ Line: 89 | Named "getTtsAssetAccessContext" ]]
+local _ = function(p1, AssetId)
 	if p1 == nil or p1.ttsAudios == nil then
 		return nil
 	end
@@ -79,7 +79,7 @@ local _ = function(p1, AssetId) --[[ Line: 89 | Named "getTtsAssetAccessContext"
 	return nil
 end
 
-return function(Tbl, p2) --[[ Line: 101 | Named "deriveMomentFromPost" ]]
+return function(Tbl, p2)
 	-- upvalues: toTextOverlay (copy), FFlagMomentsAvatarLookTryOn (copy)
 	local Copy = table.clone(Tbl.metadata)
 	local Edits = Copy.edits

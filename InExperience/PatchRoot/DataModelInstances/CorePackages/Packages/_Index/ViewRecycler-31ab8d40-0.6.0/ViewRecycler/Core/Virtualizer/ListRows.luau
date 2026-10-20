@@ -21,11 +21,11 @@ local Frozen3 = table.freeze({
 	placements = Frozen1
 })
 
-local function _(p1, p2): boolean --[[ Line: 124 | Named "sameRange" ]]
+local function _(p1, p2): boolean
 	return p1.firstIndex == p2.firstIndex and p1.lastIndex == p2.lastIndex
 end
 
-local _ = function(p1, p2): boolean --[[ Line: 130 | Named "measuresSameContent" ]]
+local _ = function(p1, p2): boolean
 	if p1 == p2 then
 		return true
 	else
@@ -36,12 +36,12 @@ local _ = function(p1, p2): boolean --[[ Line: 130 | Named "measuresSameContent"
 	end
 end
 
-local function resolveLayout(Tbl, ItemLayout, p1) --[[ Line: 143 ]]
+local function resolveLayout(Tbl, ItemLayout, p1)
 	-- upvalues: ContainsEqualFunction (copy), ITEMLAYOUTKEYS (copy), CloneFrozenFunction (copy)
 	return if ItemLayout == nil or not ContainsEqualFunction(ItemLayout, Tbl, ITEMLAYOUTKEYS) then if table.isfrozen(Tbl) then Tbl elseif p1 then table.freeze(Tbl) else CloneFrozenFunction(Tbl) else ItemLayout
 end
 
-local function resolvePlacement(p1, ScrollOffset, State) --[[ Line: 157 ]]
+local function resolvePlacement(p1, ScrollOffset, State)
 	-- upvalues: Frozen1 (copy), ContainsEqualFunction (copy), ITEMPLACEMENTKEYS (copy), OptionalContainsEqualFunction (copy)
 	local Tbl = Frozen1
 	local Tbl1 = nil
@@ -89,7 +89,7 @@ local function resolvePlacement(p1, ScrollOffset, State) --[[ Line: 157 ]]
 	return Tbl, Tbl1
 end
 
-return function(p1) --[[ Line: 202 | Named "createListRows" ]]
+return function(p1)
 	-- upvalues: Frozen (copy), Frozen3 (copy), Frozen2 (copy), DataSourceChangeTypeModule (copy), TypesModule (copy), resolveLayout (copy), Frozen1 (copy), resolvePlacement (copy), DiagnosticsModule (copy)
 	local SlotBinder = p1.slotBinder
 	local Flag = false
@@ -112,12 +112,12 @@ return function(p1) --[[ Line: 202 | Named "createListRows" ]]
 	local v1 = nil
 	local Frozen7 = Frozen
 	
-	local function _() --[[ Line: 231 | Named "knownRange" ]]
+	local function _()
 		-- upvalues: Flag1 (ref), Frozen4 (ref), v1 (ref), Frozen (upval), Frozen7 (ref)
 		return if Flag1 then Frozen4 elseif v1 == nil then Frozen else Frozen7
 	end
 	
-	local function publish(p2, ItemLayout, CanvasPlacement, ViewportPlacement, ContentStartOffset): boolean --[[ Line: 283 ]]
+	local function publish(p2, ItemLayout, CanvasPlacement, ViewportPlacement, ContentStartOffset): boolean
 		local State = p2.state
 		local Assignment = p2.assignment
 		
@@ -156,7 +156,7 @@ return function(p1) --[[ Line: 202 | Named "createListRows" ]]
 	local v3 = nil
 	local Placements = {}
 	
-	local _ = function(Key, Index, Value, ViewType) --[[ Line: 336 | Named "enter" ]]
+	local _ = function(Key, Index, Value, ViewType)
 		-- upvalues: Epoch (ref), Count1 (ref), List (copy)
 		local config = {
 			side = false,
@@ -174,7 +174,7 @@ return function(p1) --[[ Line: 202 | Named "createListRows" ]]
 		return config
 	end
 	
-	local _ = function(p2, Value, ViewType) --[[ Line: 354 | Named "replace" ]]
+	local _ = function(p2, Value, ViewType)
 		-- upvalues: Keys (copy), Epoch (ref), Count1 (ref), List (copy)
 		table.insert(Keys, p2.key)
 		local config = {
@@ -194,7 +194,7 @@ return function(p1) --[[ Line: 202 | Named "createListRows" ]]
 		return config
 	end
 	
-	local _ = function(p2, p3) --[[ Line: 361 | Named "claim" ]]
+	local _ = function(p2, p3)
 		-- upvalues: Epoch (ref)
 		assert(p2.epoch ~= Epoch, `Virtualizer: duplicate key "{p24}"`)
 		p2.epoch = Epoch
@@ -202,7 +202,7 @@ return function(p1) --[[ Line: 202 | Named "createListRows" ]]
 		p2.changed = false
 	end
 	
-	local function enterIndex(Index) --[[ Line: 368 ]]
+	local function enterIndex(Index)
 		-- upvalues: DataSource (ref), t2 (ref), Epoch (ref), p1 (copy), Count1 (ref), List (copy)
 		local ItemKey = DataSource.getItemKey(Index)
 		local Entry = t2[ItemKey]
@@ -235,7 +235,7 @@ return function(p1) --[[ Line: 202 | Named "createListRows" ]]
 		end
 	end
 	
-	local function reread(p2, Changed) --[[ Line: 382 ]]
+	local function reread(p2, Changed)
 		-- upvalues: DataSource (ref), p1 (copy), Keys (copy), Epoch (ref), Count1 (ref), List (copy)
 		local Index = p2.index
 		
@@ -274,7 +274,7 @@ return function(p1) --[[ Line: 202 | Named "createListRows" ]]
 		end
 	end
 	
-	local function restate(p2) --[[ Line: 401 ]]
+	local function restate(p2)
 		-- upvalues: Placements (ref), resolveLayout (upval), v2 (ref), v3 (ref), FirstIndex (ref), Smallest (ref), Layout1 (ref), Frozen1 (upval), resolvePlacement (upval), ScrollOffset (ref), publish (copy), ContentStartOffset1 (ref), T (ref), T1 (ref)
 		local State = p2.state
 		local ItemLayout = if State == nil then nil else State.itemLayout
@@ -302,7 +302,7 @@ return function(p1) --[[ Line: 202 | Named "createListRows" ]]
 		end
 	end
 	
-	local function release() --[[ Line: 736 ]]
+	local function release()
 		-- upvalues: Flag1 (ref), Frozen2 (upval), IsLargestMatch (ref), t (ref), Flag2 (ref), v1 (ref), Frozen7 (ref), Frozen4 (ref), SlotBinder (copy), t1 (ref), t2 (ref), t3 (ref), Frozen (upval), Frozen5 (ref), Frozen3 (upval), Layout (ref), Frozen6 (ref)
 		if not Flag1 then
 			return Frozen2
@@ -334,7 +334,7 @@ return function(p1) --[[ Line: 202 | Named "createListRows" ]]
 	end
 	
 	return {
-		noteDataChange = function(p2) --[[ Line: 238 ]]
+		noteDataChange = function(p2)
 			-- upvalues: DataSourceChangeTypeModule (upval), Flag2 (ref), Flag3 (ref), Tbl (copy), Flag1 (ref), Frozen4 (ref), v1 (ref), Frozen (upval), Frozen7 (ref), TypesModule (upval)
 			for _, change in p2.changes do
 				local Type = change.type
@@ -376,19 +376,19 @@ return function(p1) --[[ Line: 202 | Named "createListRows" ]]
 				end
 			end
 		end,
-		invalidateKeys = function() --[[ Line: 767 ]]
+		invalidateKeys = function()
 			-- upvalues: Flag2 (ref)
 			Flag2 = true
 		end,
-		invalidatePayloads = function() --[[ Line: 770 ]]
+		invalidatePayloads = function()
 			-- upvalues: Flag3 (ref)
 			Flag3 = true
 		end,
-		invalidateLayout = function() --[[ Line: 773 ]]
+		invalidateLayout = function()
 			-- upvalues: Flag4 (ref)
 			Flag4 = true
 		end,
-		apply = function(Keys1) --[[ Line: 435 ]]
+		apply = function(Keys1)
 			-- upvalues: Flag (ref), DataSource (ref), Layout1 (ref), Frozen3 (upval), ScrollOffset (ref), ContentStartOffset1 (ref), v2 (ref), Flag4 (ref), Layout (ref), ContentStartOffset (ref), Frozen4 (ref), Tbl (copy), Flag1 (ref), Flag2 (ref), Flag3 (ref), Frozen5 (ref), Count (ref), Epoch (ref), FirstIndex (ref), Smallest (ref), List (copy), Keys (copy), Count1 (ref), IsLargestMatch (ref), t (ref), t1 (ref), enterIndex (copy), v1 (ref), Frozen7 (ref), t2 (ref), p1 (copy), reread (copy), SlotBinder (copy), t3 (ref), T (ref), Frozen2 (upval), T1 (ref), v3 (ref), Placements (ref), restate (copy), Frozen6 (ref), DiagnosticsModule (upval)
 			if Flag then
 				return nil, nil
@@ -738,7 +738,7 @@ return function(p1) --[[ Line: 202 | Named "createListRows" ]]
 			end
 		end,
 		release = release,
-		destroy = function() --[[ Line: 778 ]]
+		destroy = function()
 			-- upvalues: Flag (ref), release (copy), v1 (ref), SlotBinder (copy)
 			if not Flag then
 				release()
@@ -749,15 +749,15 @@ return function(p1) --[[ Line: 202 | Named "createListRows" ]]
 				return
 			end
 		end,
-		isApplied = function() --[[ Line: 787 ]]
+		isApplied = function()
 			-- upvalues: Flag1 (ref)
 			return Flag1
 		end,
-		getMountedViews = function() --[[ Line: 790 ]]
+		getMountedViews = function()
 			-- upvalues: Frozen6 (ref)
 			return Frozen6
 		end,
-		validate = function(List) --[[ Line: 793 ]]
+		validate = function(List)
 			-- upvalues: t3 (ref), t2 (ref)
 			local List1 = {}
 			local Count = 0

@@ -46,7 +46,7 @@ local v1 = require(CorePackages.Workspace.Packages.AppCommonLib).Create("ScreenG
 	Parent = CoreGui
 })
 
-local function reportPauseSessionAnalytics() --[[ Line: 83 ]]
+local function reportPauseSessionAnalytics()
 	-- upvalues: NewClockTime (ref), ClockTime1 (ref), TelemetryService (copy), config (copy), ClockTime (copy), Count (ref), v1 (copy)
 	local NewClockTime1 = NewClockTime
 	
@@ -63,7 +63,7 @@ local function reportPauseSessionAnalytics() --[[ Line: 83 ]]
 	})
 end
 
-local function _(Focus) --[[ Line: 99 | Named "setNotificationVisible" ]]
+local function _(Focus)
 	-- upvalues: NewResult (copy), RunService (copy), ClockTime1 (ref), Count (ref), NewClockTime (ref)
 	if Focus then
 		NewResult:Show()
@@ -85,7 +85,7 @@ local function _(Focus) --[[ Line: 99 | Named "setNotificationVisible" ]]
 	end
 end
 
-local _ = function() --[[ Line: 121 | Named "cancelTimers" ]]
+local _ = function()
 	-- upvalues: DelayedThread (ref), DelayedThread1 (ref)
 	if DelayedThread ~= nil then
 		task.cancel(DelayedThread)
@@ -97,12 +97,12 @@ local _ = function() --[[ Line: 121 | Named "cancelTimers" ]]
 	end
 end
 
-local _ = function(): boolean --[[ Line: 132 | Named "isRapidRepause" ]]
+local _ = function(): boolean
 	-- upvalues: ClockTime2 (ref), RapidGameplayPauseIntervalMs (copy)
 	return (os.clock() - ClockTime2) * 1000 < RapidGameplayPauseIntervalMs
 end
 
-local function enterStage(UNPAUSED1) --[[ Line: 136 ]]
+local function enterStage(UNPAUSED1)
 	-- upvalues: UNPAUSED (ref), DelayedThread (ref), DelayedThread1 (ref), Frozen (copy), IsClockTimeBelow (ref), NewResult (copy), RunService (copy), ClockTime1 (ref), NewClockTime (ref), GameplayPauseShowDelayMs (copy), LocalPlayer (ref), v1 (copy), enterStage (copy), ClockTime2 (ref), RapidGameplayPauseIntervalMs (copy), Count (ref), RapidGameplayPauseMinNotificationDurationMs (copy)
 	UNPAUSED = UNPAUSED1
 	
@@ -126,7 +126,7 @@ local function enterStage(UNPAUSED1) --[[ Line: 136 ]]
 			return
 		end
 	elseif UNPAUSED1 == Frozen.PENDING_SHOW then
-		DelayedThread = task.delay(GameplayPauseShowDelayMs / 1000, function() --[[ Line: 145 ]]
+		DelayedThread = task.delay(GameplayPauseShowDelayMs / 1000, function()
 			-- upvalues: DelayedThread (upval), UNPAUSED (upval), Frozen (upval), LocalPlayer (upval), v1 (upval), enterStage (upval)
 			DelayedThread = nil
 			
@@ -149,7 +149,7 @@ local function enterStage(UNPAUSED1) --[[ Line: 136 ]]
 				return
 			end
 		elseif UNPAUSED1 == Frozen.RAPID_PAUSE_PENDING_DISMISS then
-			DelayedThread1 = task.delay(RapidGameplayPauseMinNotificationDurationMs / 1000, function() --[[ Line: 158 ]]
+			DelayedThread1 = task.delay(RapidGameplayPauseMinNotificationDurationMs / 1000, function()
 				-- upvalues: DelayedThread1 (upval), UNPAUSED (upval), Frozen (upval), LocalPlayer (upval), enterStage (upval)
 				DelayedThread1 = nil
 				
@@ -161,7 +161,7 @@ local function enterStage(UNPAUSED1) --[[ Line: 136 ]]
 	end
 end
 
-local function onGameplayPausedChanged() --[[ Line: 168 ]]
+local function onGameplayPausedChanged()
 	-- upvalues: LocalPlayer (ref), v1 (copy), Flag (ref), UNPAUSED (ref), Frozen (copy), ClockTime2 (ref), RapidGameplayPauseIntervalMs (copy), enterStage (copy), IsClockTimeBelow (ref)
 	local NoFlag: boolean = LocalPlayer.GameplayPaused and (v1.Enabled and not Flag)
 	Flag = false
@@ -195,7 +195,7 @@ end
 
 LocalPlayer:GetPropertyChangedSignal("GameplayPaused"):Connect(onGameplayPausedChanged)
 
-local function enableNotification(Enabled) --[[ Line: 198 ]]
+local function enableNotification(Enabled)
 	-- upvalues: v1 (copy), onGameplayPausedChanged (copy), enterStage (copy), Frozen (copy)
 	assert(type(Enabled) == "boolean", "Specified argument 'enabled' must be of type boolean")
 	

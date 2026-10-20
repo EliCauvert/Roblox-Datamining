@@ -7,7 +7,7 @@ local config = {
 	[ConstantsModule.RbxthumbTypes.Outfit] = SharedFlagsModule.FFlagAXBackgroundsInOutfitThumbnails
 }
 
-return function(p1, AvatarHeadShot, p2, p3, p4, p5): string --[[ Line: 14 ]]
+return function(p1, AvatarHeadShot, p2, p3, p4, p5): string
 	-- upvalues: config (copy), ConstantsModule (copy)
 	local Formatted = string.format("rbxthumb://type=%s&id=%s&w=%d&h=%d", AvatarHeadShot, tostring(p1), p2, p2)
 	

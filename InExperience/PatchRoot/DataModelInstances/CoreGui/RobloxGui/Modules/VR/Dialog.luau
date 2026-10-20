@@ -22,13 +22,13 @@ local T = {}
 local Flag = false
 local v2 = 0
 
-local function _(p1) --[[ Line: 46 | Named "positionDialogPanel" ]]
+local function _(p1)
 	-- upvalues: v1 (ref), UserInputService (copy), Dialog (copy), LocalCF (copy)
 	v1 = p1
 	Dialog.localCF = CFrame.new(UserInputService:GetUserCFrame(Enum.UserCFrame.Head).p) * CFrame.Angles(0, p1, 0) * LocalCF
 end
 
-function Dialog:CalculateTransparency(): number --[[ Line: 53 ]]
+function Dialog:CalculateTransparency(): number
 	-- upvalues: UserInputService (copy), v2 (ref), v1 (ref), Flag (ref)
 	local UserCFrame = UserInputService:GetUserCFrame(Enum.UserCFrame.Head)
 	local ScaledLookVector = UserCFrame.lookVector * vector.create(1, 0, 1)
@@ -40,7 +40,7 @@ function Dialog:CalculateTransparency(): number --[[ Line: 53 ]]
 	return (math.min(math.max(0, (math.acos((ScaledLookVector:Dot(_Vector3))) - 0.6544984694978736) / 0.11344640137963136), 1))
 end
 
-local function updatePanelPosition() --[[ Line: 69 ]]
+local function updatePanelPosition()
 	-- upvalues: UserInputService (copy), v2 (ref), Flag (ref), v1 (ref), Dialog (copy), LocalCF (copy)
 	local ScaledLookVector = UserInputService:GetUserCFrame(Enum.UserCFrame.Head).lookVector * vector.create(1, 0, 1)
 	local AngleRemainder = (math.atan2(-ScaledLookVector.Z, ScaledLookVector.X) - 1.5707963267948966) % 6.283185307179586
@@ -54,7 +54,7 @@ local function updatePanelPosition() --[[ Line: 69 ]]
 	Dialog.localCF = CFrame.new(UserInputService:GetUserCFrame(Enum.UserCFrame.Head).p) * CFrame.Angles(0, NewFloored, 0) * LocalCF
 end
 
-function dialogPanelRenderUpdate() --[[ Line: 84 ]]
+function dialogPanelRenderUpdate()
 	-- upvalues: Dialog (copy), Flag (ref), updatePanelPosition (copy), T (ref)
 	if Dialog.transparency == 1 or Flag then
 		updatePanelPosition()
@@ -78,7 +78,7 @@ local List = {}
 local DescendantAddedConnection = nil
 local v4 = nil
 
-local function updatePanel() --[[ Line: 107 ]]
+local function updatePanel()
 	-- upvalues: List (copy), v4 (ref), Dialog (copy), T (ref), DescendantAddedConnection (ref), Flag (ref), updatePanelPosition (copy)
 	local Entry = List[1]
 	
@@ -95,7 +95,7 @@ local function updatePanel() --[[ Line: 107 ]]
 		Dialog:SetVisible(true)
 		T = {}
 		
-		local function search(Object) --[[ Line: 131 ]]
+		local function search(Object)
 			-- upvalues: T (upval), search (copy)
 			if Object:IsA("ImageLabel") or Object:IsA("ImageButton") then
 				T[Object] = 1 - Object.ImageTransparency
@@ -115,7 +115,7 @@ local function updatePanel() --[[ Line: 107 ]]
 			DescendantAddedConnection:disconnect()
 			DescendantAddedConnection = nil
 		end
-		DescendantAddedConnection = Dialog:GetGUI().DescendantAdded:connect(function(Descendant) --[[ Line: 148 ]]
+		DescendantAddedConnection = Dialog:GetGUI().DescendantAdded:connect(function(Descendant)
 			-- upvalues: search (copy)
 			search(Descendant)
 		end)
@@ -135,7 +135,7 @@ end
 local DialogModule = {}
 DialogModule.__index = DialogModule
 
-function DialogModule.new(Content) --[[ Line: 160 ]]
+function DialogModule.new(Content)
 	-- upvalues: DialogModule (copy)
 	local self = setmetatable({}, DialogModule)
 	self.content = Content
@@ -143,7 +143,7 @@ function DialogModule.new(Content) --[[ Line: 160 ]]
 	return self
 end
 
-function DialogModule:SetContent(Content) --[[ Line: 166 ]]
+function DialogModule:SetContent(Content)
 	if not Content and self.content then
 		self.content.Parent = nil
 	end
@@ -152,7 +152,7 @@ end
 
 local Flag1 = false
 
-function DialogModule.Show(p1, p2) --[[ Line: 174 ]]
+function DialogModule.Show(p1, p2)
 	-- upvalues: Flag1 (ref), RunService (copy), List (copy), updatePanel (copy)
 	if not Flag1 then
 		Flag1 = true
@@ -166,7 +166,7 @@ function DialogModule.Show(p1, p2) --[[ Line: 174 ]]
 	updatePanel()
 end
 
-function DialogModule.Close(p1) --[[ Line: 187 ]]
+function DialogModule.Close(p1)
 	-- upvalues: List (copy), Flag1 (ref), RunService (copy), updatePanel (copy)
 	for i, value in pairs(List) do
 		if value == p1 then

@@ -39,7 +39,7 @@ local ExperiencesOnProfileIxpEnabled = game:DefineFastFlag("ExperiencesOnProfile
 local ExperiencesOnProfileIxpLayer = game:DefineFastString("ExperiencesOnProfileIxpLayer", "")
 local t = {}
 
-local function chunkList(p1, Amount: number) --[[ Line: 67 ]]
+local function chunkList(p1, Amount: number)
 	local List = {}
 	local Total = 1
 	while Total <= #p1 do
@@ -54,19 +54,19 @@ local function chunkList(p1, Amount: number) --[[ Line: 67 ]]
 	return List
 end
 
-local function _(p2, p3) --[[ Line: 81 | Named "formatVotePercent" ]]
+local function _(p2, p3)
 	local Largest = math.max(0, p2 or 0)
 	local NewLargest = Largest + math.max(0, p3 or 0)
 	
 	return if NewLargest == 0 then nil else tostring((math.floor(Largest / NewLargest * 100 + 0.5))) .. "%"
 end
 
-local _ = function(Callback, p2) --[[ Line: 95 | Named "getGameVotes" ]]
+local _ = function(Callback, p2)
 	-- upvalues: Url (copy)
 	return Callback(string.format("%sv1/games/%s/votes", Url.GAME_URL, p2), "GET")
 end
 
-return ReactModule.memo(function(p2) --[[ Line: 104 | Named "ExperiencesWideCarousel" ]]
+return ReactModule.memo(function(p2)
 	-- upvalues: UseDynamicSizeMarginModule (copy), UseDesignTokensFunction (copy), UseTextSizeOffsetFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), UseDispatchFunction (copy), UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), ProfilePlatform (copy), UseRoactServiceFunction (copy), RoactAnalyticsCommonGameEvents (copy), UseNavigationFunction (copy), UseSelectorFunction (copy), GetDeepValueModule (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), t (copy), chunkList (copy), NetworkingGamesModule (copy), MyRoduxNetworkingImplModule (copy), Url (copy), SetGameVotesFunction (copy), FormatExperienceDetailsForImpressionsModule (copy), UseSendItemImpressionsModule (copy), ContentType (copy), FormatExperienceThumbnailFunction (copy), GameStats (copy), GameTileView (copy), GameTileViewConfig (copy), AppPage (copy), OpenGameDetailsFunction (copy), ExperiencesOnProfileIxpEnabled (copy), IXPService (copy), ExperiencesOnProfileIxpLayer (copy), CollectionHeader (copy), CollectionCarousel (copy)
 	local UseDynamicSizeMarginModuleResult, UseDynamicSizeMarginModuleResult2 = UseDynamicSizeMarginModule()
 	local UseDesignTokensResult = UseDesignTokensFunction()
@@ -82,12 +82,12 @@ return ReactModule.memo(function(p2) --[[ Line: 104 | Named "ExperiencesWideCaro
 	local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactAnalyticsCommonGameEvents)
 	local UseNavigationResult = UseNavigationFunction()
-	local UseSelectorResult = UseSelectorFunction(function(p3) --[[ Line: 123 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p3)
 		-- upvalues: GetDeepValueModule (upval)
 		return GetDeepValueModule(p3, "GameVotes") or {}
 	end)
 	local Experiences = (UseProfileJsonComponentModule(EnumsModule.Components.Experiences) or {}).experiences or {}
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 129 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Experiences (copy)
 		local List = {}
 		
@@ -98,16 +98,16 @@ return ReactModule.memo(function(p2) --[[ Line: 104 | Named "ExperiencesWideCaro
 		end
 		return List
 	end, { Experiences })
-	ReactModule.useEffect(function() --[[ Line: 139 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy)
 		if #UseMemoResult == 0 then return end
 	end, { UseMemoResult })
-	local UseSelectorResult1 = UseSelectorFunction(function(p3) --[[ Line: 145 ]]
+	local UseSelectorResult1 = UseSelectorFunction(function(p3)
 		-- upvalues: GetDeepValueModule (upval)
 		return GetDeepValueModule(p3, "ProfilePlatform.Games.byGameId") or {}
 	end)
 	local UseRefResult = ReactModule.useRef({ key = "", at = 0 })
-	ReactModule.useEffect(function() --[[ Line: 154 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy), UseRefResult (copy), t (upval), UseSelectorResult1 (copy), chunkList (upval), UseDispatchResult (copy), NetworkingGamesModule (upval), UseSelectorResult (copy), MyRoduxNetworkingImplModule (upval), Url (upval), SetGameVotesFunction (upval)
 		if #UseMemoResult == 0 then return end
 		local ClockTime = os.clock()
@@ -124,7 +124,7 @@ return ReactModule.memo(function(p2) --[[ Line: 104 | Named "ExperiencesWideCaro
 			end
 		end
 		for _, value1 in chunkList(List, 10) do
-			UseDispatchResult(NetworkingGamesModule.GetExperiencesDetails.API(value1)):catch(function() --[[ Line: 179 ]]
+			UseDispatchResult(NetworkingGamesModule.GetExperiencesDetails.API(value1)):catch(function()
 				-- upvalues: value1 (copy), t (upval)
 				for _, value in value1 do
 					t[value] = true
@@ -135,18 +135,18 @@ return ReactModule.memo(function(p2) --[[ Line: 104 | Named "ExperiencesWideCaro
 			local UseMemoResultEntry = UseMemoResult[i]
 			
 			if UseSelectorResult[UseMemoResultEntry] == nil then
-				MyRoduxNetworkingImplModule(string.format("%sv1/games/%s/votes", Url.GAME_URL, UseMemoResultEntry), "GET"):andThen(function(Result) --[[ Line: 192 ]]
+				MyRoduxNetworkingImplModule(string.format("%sv1/games/%s/votes", Url.GAME_URL, UseMemoResultEntry), "GET"):andThen(function(Result)
 					-- upvalues: UseDispatchResult (upval), SetGameVotesFunction (upval), UseMemoResultEntry (copy)
 					local ResponseBody = Result.responseBody
 					
 					if ResponseBody ~= nil and ResponseBody.upVotes ~= nil and ResponseBody.downVotes ~= nil then
 						UseDispatchResult(SetGameVotesFunction(UseMemoResultEntry, if ResponseBody.upVotes < 0 then 0 else ResponseBody.upVotes, if ResponseBody.downVotes < 0 then 0 else ResponseBody.downVotes))
 					end
-				end):catch(function() --[[ Line: 204 ]] end)
+				end):catch(function() end)
 			end
 		end
 	end, { UseMemoResult, UseSelectorResult1, UseSelectorResult })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 209 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), UseSelectorResult1 (copy)
 		local List = {}
 		
@@ -159,11 +159,11 @@ return ReactModule.memo(function(p2) --[[ Line: 104 | Named "ExperiencesWideCaro
 		end
 		return List
 	end, { UseMemoResult, UseSelectorResult1 })
-	local ExperiencesWideCarousel = UseSendItemImpressionsModule(ReactModule.useMemo(function() --[[ Line: 221 ]]
+	local ExperiencesWideCarousel = UseSendItemImpressionsModule(ReactModule.useMemo(function()
 		-- upvalues: FormatExperienceDetailsForImpressionsModule (upval), UseMemoResult1 (copy)
 		return FormatExperienceDetailsForImpressionsModule(UseMemoResult1)
 	end, { UseMemoResult1 }), 2, ContentType.Game, 1, "ExperiencesWideCarousel")
-	local UseResult = ReactModule.useCallback(function(ExperienceId, Position, p3, VotePercentage, p4, p5, p6) --[[ Line: 236 ]]
+	local UseResult = ReactModule.useCallback(function(ExperienceId, Position, p3, VotePercentage, p4, p5, p6)
 		-- upvalues: UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (copy), ProfileId (copy)
 		UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.ExperienceOpened, {
 			row = 1,
@@ -179,7 +179,7 @@ return ReactModule.memo(function(p2) --[[ Line: 104 | Named "ExperiencesWideCaro
 			visits = p6 or 0
 		})
 	end, { UseProfileAnalyticsContextModuleResult, ProfileId })
-	local UseResult1 = ReactModule.useCallback(function(p3, LayoutOrder, Size) --[[ Line: 265 ]]
+	local UseResult1 = ReactModule.useCallback(function(p3, LayoutOrder, Size)
 		-- upvalues: FormatExperienceThumbnailFunction (upval), ReactModule (upval), GameStats (upval), UseSelectorResult (copy), GameTileView (upval), GameTileViewConfig (upval), UseResult (copy), UseMemoResult1 (copy), UseRoactServiceResult (copy), AppPage (upval), p2 (copy), UseDispatchResult (copy), OpenGameDetailsFunction (upval), UseNavigationResult (copy)
 		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -203,7 +203,7 @@ return ReactModule.memo(function(p2) --[[ Line: 104 | Named "ExperiencesWideCaro
 						totalDownVotes = UseSelectorResult[p3.experienceId] and UseSelectorResult[p3.experienceId].downVotes or 0
 					}
 				}),
-				onActivated = function() --[[ Line: 295 ]]
+				onActivated = function()
 					-- upvalues: UseSelectorResult (upval), p3 (copy), UseResult (upval), LayoutOrder (copy), UseMemoResult1 (upval), UseRoactServiceResult (upval), AppPage (upval), p2 (upval), UseDispatchResult (upval), OpenGameDetailsFunction (upval), UseNavigationResult (upval)
 					local UseSelectorResultEntry = UseSelectorResult[p3.experienceId]
 					local Text = nil
@@ -226,7 +226,7 @@ return ReactModule.memo(function(p2) --[[ Line: 104 | Named "ExperiencesWideCaro
 		UseNavigationResult, UseRoactServiceResult, p2.layoutOrder, UseMemoResult1,
 		UseSelectorResult
 	})
-	local UseResult2 = ReactModule.useCallback(function(p3) --[[ Line: 347 ]]
+	local UseResult2 = ReactModule.useCallback(function(p3)
 		-- upvalues: UseStateResult3 (copy), UseStateResult2_2 (copy), GameTileViewConfig (upval), UseDesignTokensResult (copy), UseTextSizeOffsetResult (copy)
 		if UseStateResult3 ~= p3 then
 			UseStateResult2_2(p3)
@@ -237,10 +237,10 @@ return ReactModule.memo(function(p2) --[[ Line: 104 | Named "ExperiencesWideCaro
 		UseTextSizeOffsetResult,
 		UseStateResult3
 	})
-	local UseResult3 = ReactModule.useCallback(function(p3, p4: number): number --[[ Line: 369 ]]
+	local UseResult3 = ReactModule.useCallback(function(p3, p4: number): number
 		return (math.max(1, (math.max(0, p3 - p4 * 2) - 12) / 2))
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 374 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseResult3 (copy), UseDynamicSizeMarginModuleResult (copy), UseMemoResult1 (copy), UseStateResult2_1 (copy)
 		if UseStateResult > 0 then
 			local UseResultResult: number = UseResult3(UseStateResult, UseDynamicSizeMarginModuleResult)
@@ -254,7 +254,7 @@ return ReactModule.memo(function(p2) --[[ Line: 104 | Named "ExperiencesWideCaro
 		UseMemoResult1,
 		UseResult3
 	})
-	ReactModule.useEffect(function() --[[ Line: 389 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult1 (copy), ExperiencesWideCarousel (copy)
 		if #UseMemoResult1 > 0 then
 			local List = {}
@@ -265,7 +265,7 @@ return ReactModule.memo(function(p2) --[[ Line: 104 | Named "ExperiencesWideCaro
 			ExperiencesWideCarousel(List)
 		end
 	end, { UseMemoResult1, ExperiencesWideCarousel })
-	ReactModule.useEffect(function() --[[ Line: 401 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult1 (copy), ExperiencesOnProfileIxpEnabled (upval), IXPService (upval), ExperiencesOnProfileIxpLayer (upval)
 		if #UseMemoResult1 > 0 and ExperiencesOnProfileIxpEnabled then
 			IXPService:LogFlagLinkedUserLayerExposure(ExperiencesOnProfileIxpLayer)
@@ -277,7 +277,7 @@ return ReactModule.memo(function(p2) --[[ Line: 104 | Named "ExperiencesWideCaro
 		AutomaticSize = Enum.AutomaticSize.Y,
 		BackgroundTransparency = 1,
 		LayoutOrder = p2.layoutOrder,
-		[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 417 ]]
+		[ReactModule.Change.AbsoluteSize] = function(Frame)
 			-- upvalues: UseDynamicSizeMarginModuleResult2 (copy), UseStateResult2 (copy)
 			UseDynamicSizeMarginModuleResult2(Frame)
 			UseStateResult2(Frame.AbsoluteSize.X)

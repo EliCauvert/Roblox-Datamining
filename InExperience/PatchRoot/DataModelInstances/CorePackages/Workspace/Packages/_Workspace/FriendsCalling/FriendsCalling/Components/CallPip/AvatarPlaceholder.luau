@@ -4,7 +4,7 @@ local ReactModule = require(Parent.React)
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 
-return function(p1) --[[ Line: 16 | Named "AvatarPlaceholder" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), Text (copy)
 	return ReactModule.createElement(View, {
 		tag = "align-x-center align-y-center radius-circle bg-surface-300",

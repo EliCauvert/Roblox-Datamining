@@ -8,13 +8,13 @@ local FetchContactImporterParamsModule = require(Parent.Networking.FetchContactI
 local PermissionsProtocol = DependenciesModule.PermissionsProtocol
 local UseContactImporterConfigurationModule = require(script.Parent.useContactImporterConfiguration)
 
-return function(p1) --[[ Line: 12 ]]
+return function(p1)
 	-- upvalues: UseSelectorFunction (copy), UseDispatchFunction (copy), FetchContactImporterParamsModule (copy), PermissionsProtocol (copy), AppStorageService (copy), UseContactImporterConfigurationModule (copy), UseEffectOnceFunction (copy)
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 13 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		return p2.LocalUserId
 	end)
 	local UseDispatchResult = UseDispatchFunction()
-	UseEffectOnceFunction(function() --[[ Line: 19 ]]
+	UseEffectOnceFunction(function()
 		-- upvalues: UseDispatchResult (copy), FetchContactImporterParamsModule (upval), UseSelectorResult (copy), PermissionsProtocol (upval), AppStorageService (upval)
 		UseDispatchResult(FetchContactImporterParamsModule(UseSelectorResult, PermissionsProtocol.default, AppStorageService))
 	end, UseContactImporterConfigurationModule(p1).shouldFetchContactImporterData and (UseSelectorResult and (UseSelectorResult ~= "" and UseSelectorResult ~= "0")))

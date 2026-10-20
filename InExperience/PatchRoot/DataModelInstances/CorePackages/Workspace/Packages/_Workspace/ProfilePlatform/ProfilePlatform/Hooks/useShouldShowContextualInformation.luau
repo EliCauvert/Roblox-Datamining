@@ -3,7 +3,7 @@ local EnumsModule = require(ProfilePlatform.Common.Enums)
 local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
 local FFlagProfilePlatformAddCurrentlyPlayingModule = require(ProfilePlatform.Flags.FFlagProfilePlatformAddCurrentlyPlaying)
 
-return function(InGame): boolean --[[ Line: 8 ]]
+return function(InGame): boolean
 	-- upvalues: UseProfileJsonComponentModule (copy), EnumsModule (copy), FFlagProfilePlatformAddCurrentlyPlayingModule (copy)
 	local ContextualInformation = (UseProfileJsonComponentModule(EnumsModule.Components.UserProfileHeader) or {}).contextualInformation
 	local Context = ContextualInformation and ContextualInformation.context

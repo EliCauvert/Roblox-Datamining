@@ -21,13 +21,13 @@ local FFlagEnableSideSheetRobuxWidgetModule = require(Chrome.Flags.FFlagEnableSi
 local Traversal = if FFlagIntegrateTraversalHistoryInSideSheet then require(CorePackages.Workspace.Packages.CoreScriptsRoactCommon).Traversal else nil
 local FFlagAddTraversalHistory = if Traversal then Traversal.Flags.FFlagAddTraversalHistory else false
 
-local function _(p1, Key, p2) --[[ Line: 35 | Named "reorder" ]]
+local function _(p1, Key, p2)
 	if p1[Key] ~= nil then
 		p1[Key] = p2
 	end
 end
 
-return function() --[[ Line: 42 | Named "buildMenuOrder" ]]
+return function()
 	-- upvalues: IsConnectDropdownEnabledModule (copy), FFlagRemoveFriendsChatUnibarEntrypoints (copy), ArgoPartyExperimentation (copy), FFlagExpChatCanShowFriendsTab (copy), IsSpatialFunction (copy), IsTenFootInterfaceFunction (copy), IsInExperienceUIVREnabled (copy), FFlagAddTraversalHistory (copy), FFlagIntegrateTraversalHistoryInSideSheet (copy), FFlagEnableSideSheetRobuxWidgetModule (copy), IsSideSheetEnabledModule (copy), FFlagAddInviteFriendsIntegration (copy), ConstantsModule (copy), FFlagEnableInExperienceAvatarSwitcher (copy), FFlagShowSwitchServerButton (copy), IsPioneerLaunchFunction (copy), FFlagEnableInExperienceShop (copy), InExperienceSideSheetModule (copy)
 	local Inverted: boolean = IsConnectDropdownEnabledModule() and not (FFlagRemoveFriendsChatUnibarEntrypoints and (ArgoPartyExperimentation.getIsRenameEnabled() and FFlagExpChatCanShowFriendsTab))
 	local Inverted1: boolean = not IsSpatialFunction() and not IsTenFootInterfaceFunction()
@@ -111,7 +111,7 @@ return function() --[[ Line: 42 | Named "buildMenuOrder" ]]
 	for i in config do
 		table.insert(List, i)
 	end
-	table.sort(List, function(A, B): boolean --[[ Line: 117 ]]
+	table.sort(List, function(A, B): boolean
 		-- upvalues: config (copy)
 		return config[A] < config[B]
 	end)

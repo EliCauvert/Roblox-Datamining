@@ -28,7 +28,7 @@ local FFlagPeopleCardsEnableVirtualizedGrid = FlagsService.FFlagPeopleCardsEnabl
 local MaxNumUniversesExposedToCardTooltip = game:DefineFastInt("MaxNumUniversesExposedToCardTooltip", 3)
 local Flag = false
 
-return ReactModule.memo(function(Frame: Frame) --[[ Line: 62 | Named "PeopleCards" ]]
+return ReactModule.memo(function(Frame: Frame)
 	-- upvalues: UseTokensFunction (copy), UseScaledValueFunction (copy), ConstantsModule (copy), FFlagSideSheetOpenPeoplePage (copy), ReactModule (copy), FFlagPeopleCardsEnableVirtualizedGrid (copy), UseCardLayoutValuesModule (copy), UseCardWidthModule (copy), UseGetPeopleServiceModule (copy), GetFFlagPeoplePageEnablePersonSignalStoreFunction (copy), SignalsReactModule (copy), GetFFlagPeoplePageLazyRenderCardsFunction (copy), UseLastInputModeFunction (copy), UsePreferredInputFunction (copy), Input (copy), Flag (ref), MaxNumUniversesExposedToCardTooltip (copy), FFlagPeoplePageRemoveUseMemoElements (copy), LazyPersonCardModule (copy), PersonCardModule (copy), LocalPlayer (copy), VirtualizedGridModule (copy), View (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Medium = UseTokensResult.Gap.Medium
@@ -40,7 +40,7 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 62 | Named "PeopleCard
 	
 	if FFlagSideSheetOpenPeoplePage then
 		IsCompactCardLayout, UseStateResult2 = ReactModule.useState(false)
-		Callback2 = ReactModule.useCallback(function(p1) --[[ Line: 77 ]]
+		Callback2 = ReactModule.useCallback(function(p1)
 			-- upvalues: UseStateResult2 (ref), UseScaledValueResult (copy)
 			UseStateResult2(p1 < UseScaledValueResult)
 		end, { UseScaledValueResult })
@@ -67,11 +67,11 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 62 | Named "PeopleCard
 	local UseSignalStateResult1 = if GetFFlagPeoplePageEnablePersonSignalStoreFunction() then SignalsReactModule.useSignalState(PeopleListStore.peopleSignalMap.getCount) else nil
 	local UseLastInputModeResult = if GetFFlagPeoplePageLazyRenderCardsFunction() then UseLastInputModeFunction() else nil
 	local UsePreferredInputResult = if GetFFlagPeoplePageLazyRenderCardsFunction() then UsePreferredInputFunction() else nil
-	local UseMemoResult = if GetFFlagPeoplePageLazyRenderCardsFunction() then ReactModule.useMemo(function(): boolean --[[ Line: 109 ]]
+	local UseMemoResult = if GetFFlagPeoplePageLazyRenderCardsFunction() then ReactModule.useMemo(function(): boolean
 		-- upvalues: UseLastInputModeResult (copy), UsePreferredInputResult (copy), Input (upval)
 		return UseLastInputModeResult == "Focus" or UsePreferredInputResult ~= Input.Pointer
 	end, { UseLastInputModeResult, UsePreferredInputResult }) else nil
-	local UseMemoResult1 = ReactModule.useMemo(function(): boolean --[[ Line: 115 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function(): boolean
 		-- upvalues: FFlagPeopleCardsEnableVirtualizedGrid (upval), v1 (ref), Flag (upval), Frame (copy), ConstantsModule (upval), MaxNumUniversesExposedToCardTooltip (upval)
 		if FFlagPeopleCardsEnableVirtualizedGrid and v1 or (Flag or not Frame.getUniversesExposedTo or not Frame.addUniverseToExposureList) then
 			return false
@@ -99,7 +99,7 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 62 | Named "PeopleCard
 		Frame.getUniversesExposedTo,
 		Frame.addUniverseToExposureList
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 150 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: Flag (upval), FFlagPeopleCardsEnableVirtualizedGrid (upval), Callback (ref)
 		Flag = true
 		
@@ -107,14 +107,14 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 62 | Named "PeopleCard
 			Callback(true)
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 157 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult (copy)
-		return function() --[[ Line: 158 ]]
+		return function()
 			-- upvalues: UseResult (upval)
 			UseResult()
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(Frame) --[[ Line: 164 ]]
+	local UseResult1 = ReactModule.useCallback(function(Frame)
 		-- upvalues: Callback1 (ref), ScaledMinimumCardWidth (copy), Medium (copy), FFlagSideSheetOpenPeoplePage (upval), Callback2 (ref)
 		local CallbackResult = Callback1(ScaledMinimumCardWidth, Frame.AbsoluteSize.X, Medium)
 		
@@ -128,7 +128,7 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 62 | Named "PeopleCard
 		if FFlagPeoplePageRemoveUseMemoElements then
 			if GetFFlagPeoplePageEnablePersonSignalStoreFunction() then
 				Elements = {}
-				PeopleListStore.peopleSignalMap.iterateData(function(Text, p1) --[[ Line: 181 ]]
+				PeopleListStore.peopleSignalMap.iterateData(function(Text, p1)
 					-- upvalues: Elements (ref), ReactModule (upval), GetFFlagPeoplePageLazyRenderCardsFunction (upval), LazyPersonCardModule (upval), PersonCardModule (upval), UseCardLayoutValuesModuleResult (ref), UseMemoResult1 (copy), LocalPlayer (upval), UseResult (copy), Frame (copy), UseMemoResult (copy), IsCompactCardLayout (ref)
 					Elements["PersonCard_" .. Text] = ReactModule.createElement(if GetFFlagPeoplePageLazyRenderCardsFunction() then LazyPersonCardModule else PersonCardModule, {
 						width = UseCardLayoutValuesModuleResult,
@@ -158,10 +158,10 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 62 | Named "PeopleCard
 				end
 			end
 		else
-			Elements = if GetFFlagPeoplePageEnablePersonSignalStoreFunction() then ReactModule.useMemo(function() --[[ Line: 222 ]]
+			Elements = if GetFFlagPeoplePageEnablePersonSignalStoreFunction() then ReactModule.useMemo(function()
 				-- upvalues: PeopleListStore (copy), ReactModule (upval), GetFFlagPeoplePageLazyRenderCardsFunction (upval), LazyPersonCardModule (upval), PersonCardModule (upval), UseCardLayoutValuesModuleResult (ref), UseMemoResult1 (copy), LocalPlayer (upval), UseResult (copy), Frame (copy), UseMemoResult (copy), IsCompactCardLayout (ref)
 				local Elements = {}
-				PeopleListStore.peopleSignalMap.iterateData(function(Text, p1) --[[ Line: 225 ]]
+				PeopleListStore.peopleSignalMap.iterateData(function(Text, p1)
 					-- upvalues: Elements (copy), ReactModule (upval), GetFFlagPeoplePageLazyRenderCardsFunction (upval), LazyPersonCardModule (upval), PersonCardModule (upval), UseCardLayoutValuesModuleResult (upval), UseMemoResult1 (upval), LocalPlayer (upval), UseResult (upval), Frame (upval), UseMemoResult (upval), IsCompactCardLayout (upval)
 					Elements["PersonCard_" .. Text] = ReactModule.createElement(if GetFFlagPeoplePageLazyRenderCardsFunction() then LazyPersonCardModule else PersonCardModule, {
 						width = UseCardLayoutValuesModuleResult,
@@ -182,7 +182,7 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 62 | Named "PeopleCard
 				Frame.scrollingFrameStore,
 				UseMemoResult,
 				IsCompactCardLayout
-			}) else ReactModule.useMemo(function() --[[ Line: 259 ]]
+			}) else ReactModule.useMemo(function()
 				-- upvalues: UseSignalStateResult (copy), ReactModule (upval), GetFFlagPeoplePageLazyRenderCardsFunction (upval), LazyPersonCardModule (upval), PersonCardModule (upval), UseCardLayoutValuesModuleResult (ref), UseMemoResult1 (copy), UseResult (copy), Frame (copy), UseMemoResult (copy), IsCompactCardLayout (ref)
 				local Elements = {}
 				
@@ -216,7 +216,7 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 62 | Named "PeopleCard
 		gapSize = Medium,
 		numItems = #UseSignalStateResult,
 		layoutOrder = Frame.LayoutOrder,
-		onContainerWidthChanged = ReactModule.useCallback(function(p1) --[[ Line: 298 ]]
+		onContainerWidthChanged = ReactModule.useCallback(function(p1)
 			-- upvalues: Callback3 (ref), ScaledMinimumCardWidth (copy), Medium (copy), FFlagSideSheetOpenPeoplePage (upval), Callback2 (ref)
 			local CallbackResult = Callback3(ScaledMinimumCardWidth, p1, Medium)
 			
@@ -224,7 +224,7 @@ return ReactModule.memo(function(Frame: Frame) --[[ Line: 62 | Named "PeopleCard
 				Callback2(CallbackResult)
 			end
 		end, if FFlagSideSheetOpenPeoplePage then { Callback3, Callback2, ScaledMinimumCardWidth, Medium } else { ScaledMinimumCardWidth, Medium }),
-		getElement = ReactModule.useCallback(function(p1: number) --[[ Line: 309 ]]
+		getElement = ReactModule.useCallback(function(p1: number)
 			-- upvalues: UseSignalStateResult (copy), ReactModule (upval), PersonCardModule (upval), UseCardLayoutValuesModuleResult (ref), UseMemoResult1 (copy), UseResult (copy), UseMemoResult (copy), IsCompactCardLayout (ref)
 			local UseSignalStateResultEntry = if p1 > 0 and p1 <= #UseSignalStateResult then UseSignalStateResult[p1] else nil
 			

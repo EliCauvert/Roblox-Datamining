@@ -7,7 +7,7 @@ local Parent = script.Parent.Parent.Parent
 local FTUXSlideshowDataModule = require(Parent.Resources.FTUXSlideshowData)
 local _ = require(Parent.Enums.PlatformEnum)
 
-return function(p1) --[[ Line: 19 | Named "Title" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), FTUXSlideshowDataModule (copy), WithLocalizationFunction (copy), ReactModule (copy), UIBloxModule (copy)
 	local UseStyleResult = UseStyleFunction()
 	local Theme = UseStyleResult.Theme
@@ -15,7 +15,7 @@ return function(p1) --[[ Line: 19 | Named "Title" ]]
 	
 	return WithLocalizationFunction({
 		titleText = FTUXSlideshowDataModule[p1.platform][p1.currentIndex].title
-	})(function(p2) --[[ Line: 30 ]]
+	})(function(p2)
 		-- upvalues: ReactModule (upval), UIBloxModule (upval), UseStyleResultFont (copy), Theme (copy)
 		return ReactModule.createElement(UIBloxModule.App.Text.StyledTextLabel, {
 			layoutOrder = 1,

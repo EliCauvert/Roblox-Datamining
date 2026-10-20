@@ -3,7 +3,7 @@ local DisplayModule = require(Parent.Display)
 local LocalUserIdStore = require(Parent.LocalUserIdStore).LocalUserIdStore
 local SplitPaneTelemetryModule = require(script.Parent.SplitPaneTelemetry)
 
-return function(p1, p2) --[[ Line: 14 | Named "getTelemetrySnapshot" ]]
+return function(p1, p2)
 	-- upvalues: DisplayModule (copy), SplitPaneTelemetryModule (copy), LocalUserIdStore (copy)
 	local DisplayStore = DisplayModule.GetDisplayStore(p2)
 	local ViewportSize = DisplayStore.getViewportSize(p2)

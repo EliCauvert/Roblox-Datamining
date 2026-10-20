@@ -23,7 +23,7 @@ local NumberSequence2 = NumberSequence.new({
 	NumberSequenceKeypoint.new(1, 0)
 })
 
-local function OverflowButton(p1) --[[ Line: 36 ]]
+local function OverflowButton(p1)
 	-- upvalues: ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), IconButtonModule (copy), InputSizeModule (copy)
 	return ReactModule.createElement(ViewModule, WithCommonPropsModule(p1, {
 		tag = `col align-y-center size-0-full auto-x bg-surface-0 {p1.tag}`
@@ -37,12 +37,12 @@ local function OverflowButton(p1) --[[ Line: 36 ]]
 	})
 end
 
-return function(p1) --[[ Line: 73 | Named "OverflowScrollContainer" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ReactOtterModule (copy), DashModule (copy), OtterModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ScrollViewModule (copy), VisibilityModule (copy), OverflowButton (copy), NumberSequence1 (copy), Icon (copy), NumberSequence2 (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(false)
 	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(false)
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseMotorResult = ReactOtterModule.useMotor(0, function(X) --[[ Line: 77 ]]
+	local UseMotorResult = ReactOtterModule.useMotor(0, function(X)
 		-- upvalues: UseRefResult (copy)
 		local Current = UseRefResult.current
 		
@@ -52,7 +52,7 @@ return function(p1) --[[ Line: 73 | Named "OverflowScrollContainer" ]]
 			return
 		end
 	end)
-	local UseResult = ReactModule.useCallback(DashModule.throttle(function(ScrollFrame) --[[ Line: 86 ]]
+	local UseResult = ReactModule.useCallback(DashModule.throttle(function(ScrollFrame)
 		-- upvalues: UseBindingResult2 (copy), UseBindingResult2_1 (copy)
 		if ScrollFrame.AbsoluteWindowSize.X ~= 0 then
 			UseBindingResult2(ScrollFrame.AbsoluteWindowSize.X + ScrollFrame.CanvasPosition.X < ScrollFrame.AbsoluteCanvasSize.X - 1)
@@ -61,7 +61,7 @@ return function(p1) --[[ Line: 73 | Named "OverflowScrollContainer" ]]
 			return
 		end
 	end, 0.2), {})
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 99 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult (copy), UseMotorResult (copy), OtterModule (upval)
 		local Current = UseRefResult.current
 		
@@ -71,7 +71,7 @@ return function(p1) --[[ Line: 73 | Named "OverflowScrollContainer" ]]
 			return
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 113 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseResult (copy)
 		if UseRefResult.current then
 			UseResult(UseRefResult.current)
@@ -101,7 +101,7 @@ return function(p1) --[[ Line: 73 | Named "OverflowScrollContainer" ]]
 			Position = UDim2.fromScale(0, 0),
 			size = p1.size,
 			Visible = UseBindingResult1,
-			onActivated = ReactModule.useCallback(function() --[[ Line: 119 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: UseResult1 (copy)
 				UseResult1(-90)
 			end, { UseResult1 }),
@@ -116,7 +116,7 @@ return function(p1) --[[ Line: 73 | Named "OverflowScrollContainer" ]]
 			Position = UDim2.fromScale(1, 0),
 			size = p1.size,
 			Visible = UseBindingResult,
-			onActivated = ReactModule.useCallback(function() --[[ Line: 123 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: UseResult1 (copy)
 				UseResult1(90)
 			end, { UseResult1 }),

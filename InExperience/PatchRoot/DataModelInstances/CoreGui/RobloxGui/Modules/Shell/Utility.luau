@@ -5,24 +5,24 @@ local Players = game:GetService("Players")
 local _ = game:GetService("CoreGui")
 local LocalizationService = game:GetService("LocalizationService")
 local PlatformService = nil
-pcall(function() --[[ Line: 10 ]]
+pcall(function()
 	-- upvalues: PlatformService (ref)
 	PlatformService = game:GetService("PlatformService")
 end)
 local UtilityModule = {
-	IsFinite = function(X): boolean --[[ Line: 15 ]]
+	IsFinite = function(X): boolean
 		return X == X and (X ~= 1e999 and X ~= -1e999)
 	end
 }
 
-function UtilityModule.FindAncestorOfType(Parent, ClassName) --[[ Line: 19 ]]
+function UtilityModule.FindAncestorOfType(Parent, ClassName)
 	-- upvalues: UtilityModule (copy)
 	local Parent1 = Parent and Parent.Parent
 	
 	return if Parent1 then if Parent1:IsA(ClassName) then Parent1 else UtilityModule.FindAncestorOfType(Parent1, ClassName) else nil
 end
 
-function UtilityModule.CalculateRelativeDimensions(p1, p2, Vector, _): UDim2 --[[ Line: 31 ]]
+function UtilityModule.CalculateRelativeDimensions(p1, p2, Vector, _): UDim2
 	-- upvalues: GuiService (copy), UtilityModule (copy)
 	local ScreenResolution = GuiService:GetScreenResolution()
 	local SurfaceGui = UtilityModule.FindAncestorOfType(p1, "SurfaceGui")
@@ -61,14 +61,14 @@ UtilityModule.Enum = {
 	}
 }
 
-function UtilityModule.CalculateFit(Frame, p1): UDim2 --[[ Line: 76 ]]
+function UtilityModule.CalculateFit(Frame, p1): UDim2
 	local AbsoluteSizeRatio = Frame.AbsoluteSize / p1
 	local ScaledSmallest = p1 * math.min(AbsoluteSizeRatio.X, AbsoluteSizeRatio.Y)
 	
 	return UDim2.new(0, ScaledSmallest.X, 0, ScaledSmallest.Y)
 end
 
-function UtilityModule.CalculateFill(Frame, p1): UDim2 --[[ Line: 84 ]]
+function UtilityModule.CalculateFill(Frame, p1): UDim2
 	local AbsoluteSizeRatio = Frame.AbsoluteSize / p1
 	local ScaledLargest = p1 * math.max(AbsoluteSizeRatio.X, AbsoluteSizeRatio.Y)
 	
@@ -77,12 +77,12 @@ end
 
 local t = {}
 
-local function _(p1, p2) --[[ Line: 95 | Named "getActiveTween" ]]
+local function _(p1, p2)
 	-- upvalues: t (copy)
 	return t[p1] and t[p1][p2]
 end
 
-local _ = function(Key, p1, p2) --[[ Line: 99 | Named "setActiveTween" ]]
+local _ = function(Key, p1, p2)
 	-- upvalues: t (copy)
 	if not t[Key] then
 		t[Key] = {}
@@ -90,11 +90,11 @@ local _ = function(Key, p1, p2) --[[ Line: 99 | Named "setActiveTween" ]]
 	t[Key][p1] = p2
 end
 
-function UtilityModule.Linear(p1, p2, p3, p4) --[[ Line: 106 ]]
+function UtilityModule.Linear(p1, p2, p3, p4)
 	return if p4 <= p1 then p2 + p3 else p3 * p1 / p4 + p2
 end
 
-function UtilityModule.EaseOutQuad(p1, p2, p3, p4) --[[ Line: 112 ]]
+function UtilityModule.EaseOutQuad(p1, p2, p3, p4)
 	if p4 <= p1 then
 		return p2 + p3
 	else
@@ -104,7 +104,7 @@ function UtilityModule.EaseOutQuad(p1, p2, p3, p4) --[[ Line: 112 ]]
 	end
 end
 
-function UtilityModule.EaseInOutQuad(p1, p2: number, p3: number, p4: number): number --[[ Line: 119 ]]
+function UtilityModule.EaseInOutQuad(p1, p2: number, p3: number, p4: number): number
 	if p4 <= p1 then
 		return p2 + p3
 	end
@@ -119,7 +119,7 @@ function UtilityModule.EaseInOutQuad(p1, p2: number, p3: number, p4: number): nu
 	end
 end
 
-function UtilityModule.SCurveUDim2(p1, p2, Vector, p3) --[[ Line: 128 ]]
+function UtilityModule.SCurveUDim2(p1, p2, Vector, p3)
 	if p3 <= p1 then
 		return p2 + Vector
 	end
@@ -136,7 +136,7 @@ function UtilityModule.SCurveUDim2(p1, p2, Vector, p3) --[[ Line: 128 ]]
 	return UDim2.new(v2 * Vector.X.Scale, v2 * Vector.X.Offset, v2 * Vector.Y.Scale, v2 * Vector.Y.Offset) + p2
 end
 
-function UtilityModule.SCurveVector2(p1, p2, Vector, p3) --[[ Line: 141 ]]
+function UtilityModule.SCurveVector2(p1, p2, Vector, p3)
 	if p3 <= p1 then
 		return p2 + Vector
 	end
@@ -153,7 +153,7 @@ function UtilityModule.SCurveVector2(p1, p2, Vector, p3) --[[ Line: 141 ]]
 	return Vector2.new(v2 * Vector.X, v2 * Vector.Y) + p2
 end
 
-function UtilityModule.PropertyTweener(p1, Key, p2, p3, p4, p5, p6, Callback1) --[[ Line: 152 ]]
+function UtilityModule.PropertyTweener(p1, Key, p2, p3, p4, p5, p6, Callback1)
 	-- upvalues: UtilityModule (copy), t (copy), RunService (copy)
 	local Callback = p5 or UtilityModule.Linear
 	local P42 = p6 or false
@@ -163,14 +163,14 @@ function UtilityModule.PropertyTweener(p1, Key, p2, p3, p4, p5, p6, Callback1) -
 	local Flag = false
 	local ClampResult = 0
 	
-	local function _(p7) --[[ Line: 165 | Named "setValue" ]]
+	local function _(p7)
 		-- upvalues: p1 (copy), Key (copy)
 		if p1 then
 			p1[Key] = p7
 		end
 	end
 	
-	local function finalize() --[[ Line: 171 ]]
+	local function finalize()
 		-- upvalues: Callback (ref), p2 (copy), p3 (copy), p1 (copy), Key (copy), Flag (ref), ClampResult (ref), t (upval), config (copy), Callback1 (copy)
 		local CallbackResult = Callback(1, p2, p3 - p2, 1)
 		
@@ -204,7 +204,7 @@ function UtilityModule.PropertyTweener(p1, Key, p2, p3, p4, p5, p6, Callback1) -
 		if p1 then
 			p1[Key] = CallbackResult
 		end
-		spawn(function() --[[ Line: 193 ]]
+		spawn(function()
 			-- upvalues: config (copy), p1 (copy), Callback (ref), p2 (copy), p3 (copy), p4 (copy), Key (copy), ClampResult (ref), UtilityModule (upval), RunService (upval), finalize (copy), t (upval)
 			local CurrentTime = tick()
 			while CurrentTime < config.EndTime and (p1 and not config.Cancelled) do
@@ -230,22 +230,22 @@ function UtilityModule.PropertyTweener(p1, Key, p2, p3, p4, p5, p6, Callback1) -
 	else
 		Flag = true
 	end
-	function config:GetFinal() --[[ Line: 213 ]]
+	function config:GetFinal()
 		-- upvalues: p3 (copy)
 		return p3
 	end
 	
-	function config:GetPercentComplete() --[[ Line: 217 ]]
+	function config:GetPercentComplete()
 		-- upvalues: ClampResult (ref)
 		return ClampResult
 	end
 	
-	function config:IsFinished() --[[ Line: 221 ]]
+	function config:IsFinished()
 		-- upvalues: Flag (ref)
 		return Flag
 	end
 	
-	function config.Finish(p7) --[[ Line: 225 ]]
+	function config.Finish(p7)
 		-- upvalues: Flag (ref), finalize (copy)
 		if not Flag then
 			p7:Cancel()
@@ -253,7 +253,7 @@ function UtilityModule.PropertyTweener(p1, Key, p2, p3, p4, p5, p6, Callback1) -
 		end
 	end
 	
-	function config:Cancel() --[[ Line: 232 ]]
+	function config:Cancel()
 		-- upvalues: config (copy), Flag (ref), Key (copy), p1 (copy), t (upval)
 		config.Cancelled = true
 		Flag = true
@@ -269,36 +269,36 @@ function UtilityModule.PropertyTweener(p1, Key, p2, p3, p4, p5, p6, Callback1) -
 	return config
 end
 
-function UtilityModule.CancelTweens(List) --[[ Line: 243 ]]
+function UtilityModule.CancelTweens(List)
 	for i, value in pairs(List) do
 		value:Finish()
 		List[i] = nil
 	end
 end
 
-function UtilityModule.Signal() --[[ Line: 252 ]]
+function UtilityModule.Signal()
 	local BindableEvent = Instance.new("BindableEvent")
 	local List = nil
 	local Selected = nil
 	
 	return {
-		fire = function(_, ...) --[[ Line: 260 ]]
+		fire = function(_, ...)
 			-- upvalues: List (ref), Selected (ref), BindableEvent (copy)
 			List = { ... }
 			Selected = select("#", ...)
 			BindableEvent:Fire()
 		end,
-		connect = function(_, Callback) --[[ Line: 266 ]]
+		connect = function(_, Callback)
 			-- upvalues: BindableEvent (copy), List (ref), Selected (ref)
 			if not Callback then
 				error("connect(nil)", 2)
 			end
-			return BindableEvent.Event:connect(function() --[[ Line: 268 ]]
+			return BindableEvent.Event:connect(function()
 				-- upvalues: Callback (copy), List (upval), Selected (upval)
 				Callback(unpack(List, 1, Selected))
 			end)
 		end,
-		wait = function(_) --[[ Line: 273 ]]
+		wait = function(_)
 			-- upvalues: BindableEvent (copy), List (ref), Selected (ref)
 			BindableEvent.Event:wait()
 			assert(List, "Missing arg data, likely due to :TweenSize/Position corrupting threadrefs.")
@@ -308,14 +308,14 @@ function UtilityModule.Signal() --[[ Line: 252 ]]
 	}
 end
 
-function UtilityModule.DisconnectEvent(p7) --[[ Line: 282 ]]
+function UtilityModule.DisconnectEvent(p7)
 	if p7 then
 		p7:disconnect()
 	end
 	return nil
 end
 
-function UtilityModule.DisconnectEvents(List) --[[ Line: 289 ]]
+function UtilityModule.DisconnectEvents(List)
 	if List and type(List) == "table" then
 		for _, value in pairs(List) do
 			value:disconnect()
@@ -323,16 +323,16 @@ function UtilityModule.DisconnectEvents(List) --[[ Line: 289 ]]
 	end
 end
 
-function UtilityModule.Clamp(X: number, X1: number, X2: number): number --[[ Line: 299 ]]
+function UtilityModule.Clamp(X: number, X1: number, X2: number): number
 	return (math.max(X, (math.min(X1, X2))))
 end
 
-function UtilityModule.ClampVector2(Vector, Vector1, Vector3): Vector2 --[[ Line: 303 ]]
+function UtilityModule.ClampVector2(Vector, Vector1, Vector3): Vector2
 	-- upvalues: UtilityModule (copy)
 	return Vector2.new(UtilityModule.Clamp(Vector.x, Vector1.x, Vector3.x), UtilityModule.Clamp(Vector.y, Vector1.y, Vector3.y))
 end
 
-function UtilityModule.TweenPositionOrSet(Object, ...) --[[ Line: 307 ]]
+function UtilityModule.TweenPositionOrSet(Object, ...)
 	if Object:IsDescendantOf(game) then
 		Object:TweenPositionInternal(...)
 		
@@ -342,7 +342,7 @@ function UtilityModule.TweenPositionOrSet(Object, ...) --[[ Line: 307 ]]
 	end
 end
 
-function UtilityModule.ClampCanvasPosition(ScrollFrame, Vector): Vector2 --[[ Line: 316 ]]
+function UtilityModule.ClampCanvasPosition(ScrollFrame, Vector): Vector2
 	-- upvalues: UtilityModule (copy)
 	local AbsoluteSize = ScrollFrame.Parent and ScrollFrame.Parent.AbsoluteSize or Vector2.new(0, 0)
 	local _Vector2 = Vector2.new(ScrollFrame.CanvasSize.X.Scale * AbsoluteSize.X + ScrollFrame.CanvasSize.X.Offset, ScrollFrame.CanvasSize.Y.Scale * AbsoluteSize.Y + ScrollFrame.CanvasSize.Y.Offset)
@@ -350,21 +350,21 @@ function UtilityModule.ClampCanvasPosition(ScrollFrame, Vector): Vector2 --[[ Li
 	return Vector2.new(UtilityModule.Clamp(0, _Vector2.X - ScrollFrame.AbsoluteWindowSize.X, Vector.X), (UtilityModule.Clamp(0, _Vector2.Y - ScrollFrame.AbsoluteWindowSize.Y, Vector.Y)))
 end
 
-function UtilityModule.Round(p7, p8) --[[ Line: 327 ]]
+function UtilityModule.Round(p7, p8)
 	local P65 = p8 or 1
 	
 	return math.floor((p7 + P65 / 2) / P65) * P65
 end
 
-function UtilityModule.ChompString(p7) --[[ Line: 335 ]]
+function UtilityModule.ChompString(p7)
 	return tostring(p7):gsub("^%s+", ""):gsub("%s+$", "")
 end
 
-function UtilityModule.SpaceNormalizeString(p7) --[[ Line: 340 ]]
+function UtilityModule.SpaceNormalizeString(p7)
 	return tostring(p7):gsub("%s+", " "):gsub("^%s+", ""):gsub("%s+$", "")
 end
 
-local function getDelimiterByLocale() --[[ Line: 344 ]]
+local function getDelimiterByLocale()
 	-- upvalues: LocalizationService (copy)
 	local Lowered = LocalizationService.RobloxLocaleId:lower()
 	local config = {
@@ -390,7 +390,7 @@ local function getDelimiterByLocale() --[[ Line: 344 ]]
 	return if config[Lowered] then config[Lowered] else ","
 end
 
-function UtilityModule.FormatNumberString(p7): string --[[ Line: 375 ]]
+function UtilityModule.FormatNumberString(p7): string
 	-- upvalues: getDelimiterByLocale (copy), UtilityModule (copy)
 	local ChompStringResult: string = UtilityModule.ChompString(p7)
 	local Formatted = string.format("%%1%s%%2", (getDelimiterByLocale()))
@@ -401,7 +401,7 @@ function UtilityModule.FormatNumberString(p7): string --[[ Line: 375 ]]
 	return ChompStringResult
 end
 
-function UtilityModule.PrettyPrint(List): string --[[ Line: 391 ]]
+function UtilityModule.PrettyPrint(List): string
 	-- upvalues: UtilityModule (copy)
 	if type(List) ~= "table" then
 		return if type(List) == "string" then "'" .. List .. "'" else tostring(List)
@@ -421,7 +421,7 @@ function UtilityModule.PrettyPrint(List): string --[[ Line: 391 ]]
 	return v1 .. "}"
 end
 
-local _ = function(p7, p8, p9) --[[ Line: 415 | Named "SCurveTranform" ]]
+local _ = function(p7, p8, p9)
 	-- upvalues: UtilityModule (copy)
 	local P71 = p8 or 0.35
 	local P72 = p9 or 0.8
@@ -430,17 +430,17 @@ local _ = function(p7, p8, p9) --[[ Line: 415 | Named "SCurveTranform" ]]
 	return if ClampResult >= 0 then P71 * ClampResult / (P71 - ClampResult + 1) else -(P72 * -ClampResult / (P72 + ClampResult + 1))
 end
 
-local _ = function(Value: number, p7): number --[[ Line: 425 | Named "toSCurveSpace" ]]
+local _ = function(Value: number, p7): number
 	local P73 = p7 or 0.1
 	
 	return (1 + P73) * (math.abs(Value) * 2 - 1) - P73
 end
 
-local _ = function(p7: number): number --[[ Line: 430 | Named "fromSCurveSpace" ]]
+local _ = function(p7: number): number
 	return p7 / 2 + 0.5
 end
 
-function UtilityModule.GamepadLinearToCurve(Vector, p7, _, _): Vector2 --[[ Line: 434 ]]
+function UtilityModule.GamepadLinearToCurve(Vector, p7, _, _): Vector2
 	-- upvalues: UtilityModule (copy)
 	local X: number = Vector.x
 	local P76 = p7 or 0.1
@@ -449,7 +449,7 @@ function UtilityModule.GamepadLinearToCurve(Vector, p7, _, _): Vector2 --[[ Line
 	local v3 = 0.8
 	local ClampResult: number = UtilityModule.Clamp(-1, 1, PDelta)
 	
-	return Vector2.new(UtilityModule.Clamp(-1, 1, ((if ClampResult >= 0 then v2 * ClampResult / (v2 - ClampResult + 1) else -(v3 * -ClampResult / (v3 + ClampResult + 1))) / 2 + 0.5) * (if X < 0 then -1 else 1)), (function(Value: number) --[[ Line: 435 | Named "onAxis" ]]
+	return Vector2.new(UtilityModule.Clamp(-1, 1, ((if ClampResult >= 0 then v2 * ClampResult / (v2 - ClampResult + 1) else -(v3 * -ClampResult / (v3 + ClampResult + 1))) / 2 + 0.5) * (if X < 0 then -1 else 1)), (function(Value: number)
 		-- upvalues: p7 (copy), UtilityModule (upval)
 		local P76 = p7 or 0.1
 		local PDelta = (1 + P76) * (math.abs((math.abs(Value))) * 2 - 1) - P76
@@ -461,8 +461,8 @@ function UtilityModule.GamepadLinearToCurve(Vector, p7, _, _): Vector2 --[[ Line
 	end)(Vector.y))
 end
 
-function UtilityModule.IsFastFlagEnabled(p7) --[[ Line: 444 ]]
-	local Success, Result = pcall(function() --[[ Line: 445 ]]
+function UtilityModule.IsFastFlagEnabled(p7)
+	local Success, Result = pcall(function()
 		-- upvalues: p7 (copy)
 		return settings():GetFFlag(p7)
 	end)
@@ -470,8 +470,8 @@ function UtilityModule.IsFastFlagEnabled(p7) --[[ Line: 444 ]]
 	return Success and Result
 end
 
-function UtilityModule.GetFastVariable(p7) --[[ Line: 452 ]]
-	local Success, Result = pcall(function() --[[ Line: 453 ]]
+function UtilityModule.GetFastVariable(p7)
+	local Success, Result = pcall(function()
 		-- upvalues: p7 (copy)
 		return settings():GetFVariable(p7)
 	end)
@@ -479,7 +479,7 @@ function UtilityModule.GetFastVariable(p7) --[[ Line: 452 ]]
 	return Success and Result
 end
 
-local _ = function() --[[ Line: 460 | Named "getLocalPlayer" ]]
+local _ = function()
 	-- upvalues: Players (copy)
 	while Players.LocalPlayer == nil do
 		wait()
@@ -487,12 +487,12 @@ local _ = function() --[[ Line: 460 | Named "getLocalPlayer" ]]
 	return Players.LocalPlayer
 end
 
-function UtilityModule.IsFeatureNonZero(p7): boolean --[[ Line: 467 ]]
+function UtilityModule.IsFeatureNonZero(p7): boolean
 	-- upvalues: UtilityModule (copy)
 	return (tonumber(UtilityModule.GetFastVariable(p7)) or 0) ~= 0
 end
 
-function UtilityModule.IsFeatureRolledOut(p7): boolean --[[ Line: 471 ]]
+function UtilityModule.IsFeatureRolledOut(p7): boolean
 	-- upvalues: Players (copy), UtilityModule (copy)
 	while Players.LocalPlayer == nil do
 		wait()
@@ -500,7 +500,7 @@ function UtilityModule.IsFeatureRolledOut(p7): boolean --[[ Line: 471 ]]
 	return Players.LocalPlayer.UserId % 100 < (tonumber(UtilityModule.GetFastVariable(p7)) or 0)
 end
 
-function UtilityModule.ExponentialRepeat(p8, Callback, p9) --[[ Line: 476 ]]
+function UtilityModule.ExponentialRepeat(p8, Callback, p9)
 	local Count = 1
 	local P84 = p9 or 6
 	while Count <= P84 and p8() do
@@ -510,7 +510,7 @@ function UtilityModule.ExponentialRepeat(p8, Callback, p9) --[[ Line: 476 ]]
 	end
 end
 
-function UtilityModule.SplitString(Text: string, Text1) --[[ Line: 490 ]]
+function UtilityModule.SplitString(Text: string, Text1)
 	local List = {}
 	
 	if Text and Text1 then
@@ -521,7 +521,7 @@ function UtilityModule.SplitString(Text: string, Text1) --[[ Line: 490 ]]
 	return List
 end
 
-local function findAssetsHelper(Object, List, Text) --[[ Line: 501 ]]
+local function findAssetsHelper(Object, List, Text)
 	-- upvalues: findAssetsHelper (copy)
 	if not Object then return end
 	if Object:IsA("CharacterMesh") then
@@ -549,7 +549,7 @@ local function findAssetsHelper(Object, List, Text) --[[ Line: 501 ]]
 	end
 end
 
-function UtilityModule.FindAssetsInModel(p10, p11) --[[ Line: 529 ]]
+function UtilityModule.FindAssetsInModel(p10, p11)
 	-- upvalues: findAssetsHelper (copy)
 	local t = {}
 	findAssetsHelper(p10, t, p11 or "https://assetgame.roblox.com/asset/?id=")
@@ -557,31 +557,31 @@ function UtilityModule.FindAssetsInModel(p10, p11) --[[ Line: 529 ]]
 	return t
 end
 
-function UtilityModule.ConvertFontSizeEnumToInt(p10): string --[[ Line: 536 ]]
+function UtilityModule.ConvertFontSizeEnumToInt(p10): string
 	return string.match(p10.Name, "%d+") or 10
 end
 
-function UtilityModule.Upper(Text: string) --[[ Line: 543 ]]
+function UtilityModule.Upper(Text: string)
 	-- upvalues: PlatformService (ref)
 	return if PlatformService then PlatformService:Upper(Text) else string.upper(Text)
 end
 
-function UtilityModule.SetSelectedCoreObject(SelectedCoreObject) --[[ Line: 551 ]]
+function UtilityModule.SetSelectedCoreObject(SelectedCoreObject)
 	-- upvalues: GuiService (copy)
 	GuiService.SelectedCoreObject = SelectedCoreObject
 end
 
-function UtilityModule.AddSelectionParent(SelectionName, SelectionName1) --[[ Line: 555 ]]
+function UtilityModule.AddSelectionParent(SelectionName, SelectionName1)
 	-- upvalues: GuiService (copy)
 	GuiService:AddSelectionParent(SelectionName, SelectionName1)
 end
 
-function UtilityModule.RemoveSelectionGroup(SelectionName) --[[ Line: 559 ]]
+function UtilityModule.RemoveSelectionGroup(SelectionName)
 	-- upvalues: GuiService (copy)
 	GuiService:RemoveSelectionGroup(SelectionName)
 end
 
-function UtilityModule.GetTextBounds(Label) --[[ Line: 563 ]]
+function UtilityModule.GetTextBounds(Label)
 	-- upvalues: TextService (copy)
 	local Flag = false
 	local TextBounds = nil
@@ -601,7 +601,7 @@ function UtilityModule.GetTextBounds(Label) --[[ Line: 563 ]]
 	return Flag, TextBounds
 end
 
-function UtilityModule.ResizeButtonWithText(p10, Label, p11: number, p12: number): boolean --[[ Line: 589 ]]
+function UtilityModule.ResizeButtonWithText(p10, Label, p11: number, p12: number): boolean
 	-- upvalues: UtilityModule (copy)
 	local Flag = false
 	local TextBounds, TextBounds2 = UtilityModule.GetTextBounds(Label)
@@ -626,7 +626,7 @@ function UtilityModule.ResizeButtonWithText(p10, Label, p11: number, p12: number
 	return Flag
 end
 
-function UtilityModule.ResizeButtonWithDynamicText(p10, p11, p12, p13, p14) --[[ Line: 616 ]]
+function UtilityModule.ResizeButtonWithDynamicText(p10, p11, p12, p13, p14)
 	-- upvalues: UtilityModule (copy)
 	local ResizeButtonWithTextResult = UtilityModule.ResizeButtonWithText(p10, p11, p13, p14) or false
 	local Text = p11.Text

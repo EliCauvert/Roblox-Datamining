@@ -9,15 +9,15 @@ local config = {
 	[LoginErrorCodesModule.ParentEmptyAccountSwitchBlobRequired] = true
 }
 
-local function _(p1): boolean --[[ Line: 26 | Named "isXboxPlatform" ]]
+local function _(p1): boolean
 	return string.find(p1 or "", "Xbox", 1, true) ~= nil
 end
 
-local _ = function(p1, Platform) --[[ Line: 30 | Named "withPlatform" ]]
+local _ = function(p1, Platform)
 	return { p1, platform = Platform }
 end
 
-local function xboxErrorMessage(ExternalIdentityAlreadyConnected, Platform, p1, p2) --[[ Line: 34 ]]
+local function xboxErrorMessage(ExternalIdentityAlreadyConnected, Platform, p1, p2)
 	-- upvalues: LoginErrorCodesModule (copy), LoginErrorCodeSSOModule (copy), FFlagEnableIllegalChildAccountLinkingErrorMessageOnSSOModule (copy)
 	return if ExternalIdentityAlreadyConnected == LoginErrorCodesModule.IncorrectCValueOrPassword then p1 elseif ExternalIdentityAlreadyConnected == LoginErrorCodesModule.MoreThanOneUsername or ExternalIdentityAlreadyConnected == LoginErrorCodesModule.MultipleUsersPerCredential then "Authentication.Login.Response.MoreThanOneUsername" elseif ExternalIdentityAlreadyConnected == LoginErrorCodesModule.AccountNotVerified then p2 elseif ExternalIdentityAlreadyConnected == LoginErrorCodesModule.ServiceUnavailable then "Authentication.Login.Response.ServiceUnavailable" elseif ExternalIdentityAlreadyConnected == LoginErrorCodeSSOModule.FloodedXbox then "Authentication.TwoStepVerification.Response.TooManyAttempts" elseif ExternalIdentityAlreadyConnected == LoginErrorCodeSSOModule.RobloxAccountAlreadyConnectedXbox then {
 		"Authentication.Login.Response.AlreadyLinked",
@@ -28,7 +28,7 @@ local function xboxErrorMessage(ExternalIdentityAlreadyConnected, Platform, p1, 
 	} elseif FFlagEnableIllegalChildAccountLinkingErrorMessageOnSSOModule and ExternalIdentityAlreadyConnected == LoginErrorCodesModule.IllegalChildAccountLinking then "Authentication.Login.LinkIllegalChildAccountLinking" else "Authentication.Login.Response.SomethingWentWrong"
 end
 
-local _ = function(ExternalIdentityAlreadyConnected, Platform, p1) --[[ Line: 66 | Named "playstationErrorMessage" ]]
+local _ = function(ExternalIdentityAlreadyConnected, Platform, p1)
 	-- upvalues: LoginErrorCodeSSOModule (copy)
 	return if ExternalIdentityAlreadyConnected == LoginErrorCodeSSOModule.IncorrectCValueOrPassword then p1 elseif ExternalIdentityAlreadyConnected == LoginErrorCodeSSOModule.ExternalIdentityAlreadyConnected then {
 		"Authentication.Login.Response.PlatformAlreadyLinked",
@@ -40,7 +40,7 @@ local _ = function(ExternalIdentityAlreadyConnected, Platform, p1) --[[ Line: 66
 end
 
 return {
-	getMessage = function(ExternalIdentityAlreadyConnected, p1, p2) --[[ Line: 82 ]]
+	getMessage = function(ExternalIdentityAlreadyConnected, p1, p2)
 		-- upvalues: GetAppFeaturePoliciesFunction (copy), xboxErrorMessage (copy), LoginErrorCodeSSOModule (copy)
 		local PlatformAccountName = GetAppFeaturePoliciesFunction().getPlatformAccountName()
 		
@@ -52,7 +52,7 @@ return {
 			platform = PlatformAccountName
 		} else "Authentication.Login.Response.SomethingWentWrong"
 	end,
-	getUiErrorCode = function(p1) --[[ Line: 95 ]]
+	getUiErrorCode = function(p1)
 		-- upvalues: GetAppFeaturePoliciesFunction (copy), config (copy)
 		return if string.find(GetAppFeaturePoliciesFunction().getPlatformAccountName() or "", "Xbox", 1, true) ~= nil and config[p1] then p1 else nil
 	end

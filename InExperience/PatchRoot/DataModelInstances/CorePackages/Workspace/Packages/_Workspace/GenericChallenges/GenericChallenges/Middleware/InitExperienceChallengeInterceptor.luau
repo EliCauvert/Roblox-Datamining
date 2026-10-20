@@ -7,7 +7,7 @@ local GenericChallengeService = game:GetService("GenericChallengeService")
 local FFlagEnableMutexOnGenericChallengeInterceptorMount = game:DefineFastFlag("FFlagEnableMutexOnGenericChallengeInterceptorMount", false)
 local Flag = false
 
-function challengeRequiredEventHandler(GenericChallengeId, GenericChallengeType, GenericChallengeMetadata) --[[ Line: 15 ]]
+function challengeRequiredEventHandler(GenericChallengeId, GenericChallengeType, GenericChallengeMetadata)
 	-- upvalues: RenderChallengeModule (copy), ChallengeTypeModule (copy), GenericChallengeService (copy), Base64 (copy), HttpService (copy)
 	RenderChallengeModule({
 		renderWebViewInModal = true,
@@ -18,33 +18,33 @@ function challengeRequiredEventHandler(GenericChallengeId, GenericChallengeType,
 			genericChallengeMetadata = GenericChallengeMetadata
 		},
 		callbacks = {
-			OnChallengeLoadFailed = function(_) --[[ Line: 24 ]]
+			OnChallengeLoadFailed = function(_)
 				-- upvalues: GenericChallengeService (upval), GenericChallengeId (copy)
 				GenericChallengeService:SignalChallengeLoaded(GenericChallengeId, false)
 			end,
-			OnChallengeCompleted = function(p1) --[[ Line: 29 ]]
+			OnChallengeCompleted = function(p1)
 				-- upvalues: Base64 (upval), HttpService (upval), GenericChallengeService (upval), GenericChallengeId (copy), GenericChallengeType (copy)
 				if p1.data.metadata ~= nil then
 					GenericChallengeService:SignalChallengeCompleted(GenericChallengeId, GenericChallengeType, (Base64.Encode(HttpService:JSONEncode(p1.data.metadata))))
 				end
 			end,
-			OnChallengeInvalidated = function(_) --[[ Line: 35 ]]
+			OnChallengeInvalidated = function(_)
 				-- upvalues: GenericChallengeService (upval), GenericChallengeId (copy)
 				GenericChallengeService:SignalChallengeInvalidated(GenericChallengeId)
 			end,
-			OnChallengeAbandoned = function() --[[ Line: 38 ]]
+			OnChallengeAbandoned = function()
 				-- upvalues: GenericChallengeService (upval), GenericChallengeId (copy)
 				GenericChallengeService:SignalChallengeAbandoned(GenericChallengeId)
 			end
 		},
-		onWebViewOpen = function() --[[ Line: 43 ]]
+		onWebViewOpen = function()
 			-- upvalues: GenericChallengeService (upval), GenericChallengeId (copy)
 			GenericChallengeService:SignalChallengeLoaded(GenericChallengeId, true)
 		end
 	})
 end
 
-return function() --[[ Line: 49 ]]
+return function()
 	-- upvalues: FFlagEnableMutexOnGenericChallengeInterceptorMount (copy), Flag (ref), GenericChallengeService (copy)
 	if not FFlagEnableMutexOnGenericChallengeInterceptorMount then
 		GenericChallengeService.ChallengeRequiredEvent:Connect(challengeRequiredEventHandler)

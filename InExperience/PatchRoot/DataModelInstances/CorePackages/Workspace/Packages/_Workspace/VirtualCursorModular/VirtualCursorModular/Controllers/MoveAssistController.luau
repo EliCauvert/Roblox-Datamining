@@ -5,21 +5,21 @@ local PropertiesModule = require(script.Parent.Parent.Properties)
 local MoveAssistMinInputMagnitude = PropertiesModule.MoveAssistMinInputMagnitude
 local ScaledCursorRadius = PropertiesModule.CursorRadius * 0.5
 
-local function _(Offset) --[[ Line: 50 | Named "normalizeSafe" ]]
+local function _(Offset)
 	local Magnitude: number = Offset.Magnitude
 	
 	return if Magnitude > 0.00001 then Offset / Magnitude else Vector2.zero
 end
 
-local _ = function(Vector, Vector1, Vector3): Vector2 --[[ Line: 58 | Named "closestPointOnRect" ]]
+local _ = function(Vector, Vector1, Vector3): Vector2
 	return Vector2.new(math.clamp(Vector.X, Vector1.X, Vector1.X + Vector3.X), (math.clamp(Vector.Y, Vector1.Y, Vector1.Y + Vector3.Y)))
 end
 
-local _ = function(p1: number): number --[[ Line: 67 | Named "smoothStep" ]]
+local _ = function(p1: number): number
 	return p1 * p1 * (3 - p1 * 2)
 end
 
-local function computeAimPoint(Frame: Frame, Vector, X, X1) --[[ Line: 75 ]]
+local function computeAimPoint(Frame: Frame, Vector, X, X1)
 	local AbsoluteSize: number = Frame.AbsoluteSize
 	local AbsolutePosition = Frame.AbsolutePosition
 	local AbsolutePositionDelta = AbsolutePosition - Vector2.new(X, X)
@@ -30,7 +30,7 @@ local function computeAimPoint(Frame: Frame, Vector, X, X1) --[[ Line: 75 ]]
 	return Vector2.new(math.clamp(Vector.X, AbsolutePositionDelta.X, AbsolutePositionDelta.X + NewAbsoluteSize.X), (math.clamp(Vector.Y, AbsolutePositionDelta.Y, AbsolutePositionDelta.Y + NewAbsoluteSize.Y))):Lerp(NewAbsolutePosition, ClampedValue), (Vector2.new(math.clamp(Vector.X, AbsolutePosition.X, AbsolutePosition.X + AbsoluteSize.X), (math.clamp(Vector.Y, AbsolutePosition.Y, AbsolutePosition.Y + AbsoluteSize.Y))):Lerp(NewAbsolutePosition, ClampedValue))
 end
 
-local function scoreCandidate(Frame: Frame, CursorPosition, Vector, CursorRadius, p1) --[[ Line: 111 ]]
+local function scoreCandidate(Frame: Frame, CursorPosition, Vector, CursorRadius, p1)
 	-- upvalues: computeAimPoint (copy), PropertiesModule (copy)
 	local AbsoluteSize = Frame.AbsoluteSize
 	local XRatio = (AbsoluteSize.X * math.abs(Vector.Y) + AbsoluteSize.Y * math.abs(Vector.X)) / p1
@@ -62,7 +62,7 @@ local function scoreCandidate(Frame: Frame, CursorPosition, Vector, CursorRadius
 	}
 end
 
-local function computeAssistStrength(BestInfluence: number, p1: number, Dot: number, Distance, IsAssistTargetMatch, ClampedValue, ClampedValue1) --[[ Line: 164 ]]
+local function computeAssistStrength(BestInfluence: number, p1: number, Dot: number, Distance, IsAssistTargetMatch, ClampedValue, ClampedValue1)
 	-- upvalues: ScaledCursorRadius (copy)
 	local BestInfluenceRatio = if BestInfluence > 0 then (BestInfluence - p1) / BestInfluence else 0
 	local v1: number = if IsAssistTargetMatch then 0.08 else 0.15
@@ -82,7 +82,7 @@ end
 local MoveAssistController = {}
 MoveAssistController.__index = MoveAssistController
 
-function MoveAssistController.new() --[[ Line: 232 ]]
+function MoveAssistController.new()
 	-- upvalues: MoveAssistController (copy), FFlagEnableVirtualCursorDebugging (copy)
 	local self = setmetatable({ _assistTarget = nil, _debugSnapshot = nil }, MoveAssistController)
 	
@@ -92,7 +92,7 @@ function MoveAssistController.new() --[[ Line: 232 ]]
 	return self
 end
 
-function MoveAssistController:applyMoveAssist(Offset, _debugSnapshot) --[[ Line: 248 ]]
+function MoveAssistController:applyMoveAssist(Offset, _debugSnapshot)
 	-- upvalues: FFlagEnableVirtualCursorDebugging (copy), PropertiesModule (copy), FFlagVirtualCursorMoveAssistIntentRamp (copy), MoveAssistMinInputMagnitude (copy), scoreCandidate (copy), computeAssistStrength (copy)
 	local CursorPosition = _debugSnapshot.cursorPosition
 	local Candidates = _debugSnapshot.candidates
@@ -263,7 +263,7 @@ function MoveAssistController:applyMoveAssist(Offset, _debugSnapshot) --[[ Line:
 	return ScaledInterpolatedRatio
 end
 
-function MoveAssistController:clearDebugSnapshot() --[[ Line: 439 ]]
+function MoveAssistController:clearDebugSnapshot()
 	self._debugSnapshot = nil
 end
 

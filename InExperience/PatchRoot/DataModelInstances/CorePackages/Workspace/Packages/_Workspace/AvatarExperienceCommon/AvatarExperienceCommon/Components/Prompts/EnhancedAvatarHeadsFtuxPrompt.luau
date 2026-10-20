@@ -18,7 +18,7 @@ local config = {
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p1) --[[ Line: 29 | Named "EnhancedAvatarHeadsFtuxPrompt" ]]
+return function(p1)
 	-- upvalues: UseNavigationFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), ReactFocusNavigationModule (copy), config (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusOnMountEffectModule (copy), View (copy), Text (copy), AXPartialPageModalModule (copy), ButtonVariant (copy), InputSize (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -28,11 +28,11 @@ return function(p1) --[[ Line: 29 | Named "EnhancedAvatarHeadsFtuxPrompt" ]]
 	})
 	local Params = UseNavigationResult.state.params or {}
 	local OnConfirm = p1.onConfirm or Params.onConfirm
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 40 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy)
 		UseNavigationResult.goBack()
 	end, { UseNavigationResult })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 44 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy), OnConfirm (copy)
 		UseResult()
 		
@@ -42,11 +42,11 @@ return function(p1) --[[ Line: 29 | Named "EnhancedAvatarHeadsFtuxPrompt" ]]
 	end, { OnConfirm, UseResult })
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function() --[[ Line: 55 ]]
+	ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function()
 		-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), UseResult1 (copy)
 		return {
 			[FocusNavigationEventNameEnum.NavigateBack] = {
-				handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 58 ]]
+				handler = InputHandlersModule.onRelease(function(p2)
 					-- upvalues: UseResult1 (upval)
 					p2.cancelled = true
 					UseResult1()
@@ -54,7 +54,7 @@ return function(p1) --[[ Line: 29 | Named "EnhancedAvatarHeadsFtuxPrompt" ]]
 			}
 		}
 	end, { UseResult1 }), (ReactFocusNavigationModule.useEventMap(config, UseRefResult)))
-	ReactModule.useEffect(function() --[[ Line: 67 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(true)
 	end, {})

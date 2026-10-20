@@ -1,14 +1,14 @@
-﻿return function(p1) --[[ Line: 1 | Named "AvatarPolicies" ]]
+﻿return function(p1)
 	return {
-		getAvatarHeaderIcon = function() --[[ Line: 3 ]]
+		getAvatarHeaderIcon = function()
 			-- upvalues: p1 (copy)
 			return p1.AvatarHeaderIcon or "LuaApp/icons/ic-back"
 		end,
-		getAvatarEditorShowBuyRobuxOnTopBar = function() --[[ Line: 6 ]]
+		getAvatarEditorShowBuyRobuxOnTopBar = function()
 			-- upvalues: p1 (copy)
 			return p1.AvatarEditorShowBuyRobuxOnTopBar or false
 		end,
-		getCustomOutfitNames = function() --[[ Line: 9 ]]
+		getCustomOutfitNames = function()
 			-- upvalues: p1 (copy)
 			return p1.CustomCostumeNames == nil or p1.CustomCostumeNames
 		end

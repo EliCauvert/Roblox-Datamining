@@ -5,7 +5,7 @@ local ShareSheetItemViewModule = require(script.Parent.ShareSheetItemView)
 local UseGetPresenceByUserIdFunction = require(Parent.FriendsCommon).Hooks.useGetPresenceByUserId
 local ConvertToFoundationPresenceEnumFunction = require(Parent.SocialCommon).Utils.convertToFoundationPresenceEnum
 
-return function(Frame) --[[ Line: 25 | Named "ShareSheetItemContainer" ]]
+return function(Frame)
 	-- upvalues: UseGetPresenceByUserIdFunction (copy), ConvertToFoundationPresenceEnumFunction (copy), FoundationModule (copy), ReactModule (copy), ShareSheetItemViewModule (copy)
 	local UseGetPresenceByUserIdResult = UseGetPresenceByUserIdFunction(Frame.primaryUserId)
 	

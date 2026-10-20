@@ -5,10 +5,10 @@ local _ = require(VirtualEventsState.types)
 local VirtualEventModel = require(VirtualEventsState.network).NetworkingVirtualEvents.VirtualEventModel
 local LoggerModule = require(VirtualEventsState.logger)
 
-return function(p1) --[[ Line: 14 ]]
+return function(p1)
 	-- upvalues: RoduxModule (copy), VirtualEventModel (copy), LoggerModule (copy), CryoModule (copy)
 	return (RoduxModule.createReducer({}, {
-		[p1.GetActiveVirtualEvents.Succeeded.name] = function(_, p2) --[[ Line: 16 ]]
+		[p1.GetActiveVirtualEvents.Succeeded.name] = function(_, p2)
 			-- upvalues: VirtualEventModel (upval), LoggerModule (upval)
 			local FromResponseResults = {}
 			
@@ -25,10 +25,10 @@ return function(p1) --[[ Line: 14 ]]
 			end
 			return FromResponseResults
 		end,
-		[p1.GetActiveVirtualEvents.Failed.name] = function(_, _) --[[ Line: 34 ]]
+		[p1.GetActiveVirtualEvents.Failed.name] = function(_, _)
 			return {}
 		end,
-		[p1.GetVirtualEvent.Succeeded.name] = function(p3, p4) --[[ Line: 38 ]]
+		[p1.GetVirtualEvent.Succeeded.name] = function(p3, p4)
 			-- upvalues: VirtualEventModel (upval), CryoModule (upval)
 			local FromResponseResults = {}
 			local FromResponseResult = VirtualEventModel.fromResponse(p4.responseBody)
@@ -38,10 +38,10 @@ return function(p1) --[[ Line: 14 ]]
 			end
 			return CryoModule.Dictionary.join(p3, FromResponseResults)
 		end,
-		[p1.GetVirtualEvent.Failed.name] = function(p3, _) --[[ Line: 49 ]]
+		[p1.GetVirtualEvent.Failed.name] = function(p3, _)
 			return p3
 		end,
-		[p1.UpdateMyRsvpStatus.Succeeded.name] = function(p3, p4) --[[ Line: 53 ]]
+		[p1.UpdateMyRsvpStatus.Succeeded.name] = function(p3, p4)
 			-- upvalues: CryoModule (upval)
 			local Id = p4.ids[1]
 			local v1 = p3[Id]

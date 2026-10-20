@@ -44,9 +44,9 @@ local config = {
 	}
 }
 
-return function(Frame: Frame) --[[ Line: 36 | Named "Frame" ]]
+return function(Frame: Frame)
 	-- upvalues: ReactModule (copy), config (copy)
-	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 37 ]]
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: Frame (copy), config (upval)
 		if Frame.horizontalAlignment and Frame.verticalAlignment then
 			return config[Frame.horizontalAlignment][Frame.verticalAlignment].anchor, config[Frame.horizontalAlignment][Frame.verticalAlignment].position

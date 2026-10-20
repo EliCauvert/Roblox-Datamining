@@ -3,11 +3,11 @@ local AcpProtocolModule = require(script.Parent.Acp.AcpProtocol)
 local _ = require(script.Parent.types)
 local CreateCreatorAgentChatStoreModule = require(script.Parent.createCreatorAgentChatStore)
 
-local function _() --[[ Line: 74 | Named "isoNow" ]]
+local function _()
 	return DateTime.now():ToIsoDate()
 end
 
-local function jsonError(Id, Code, Message, StatusCode) --[[ Line: 78 ]]
+local function jsonError(Id, Code, Message, StatusCode)
 	-- upvalues: HttpService (copy)
 	return {
 		statusCode = StatusCode,
@@ -19,7 +19,7 @@ local function jsonError(Id, Code, Message, StatusCode) --[[ Line: 78 ]]
 	}
 end
 
-local function jsonOk(Id, Result) --[[ Line: 89 ]]
+local function jsonOk(Id, Result)
 	-- upvalues: HttpService (copy)
 	return {
 		statusCode = 200,
@@ -27,7 +27,7 @@ local function jsonOk(Id, Result) --[[ Line: 89 ]]
 	}
 end
 
-local function streamWords(Text: string) --[[ Line: 96 ]]
+local function streamWords(Text: string)
 	local List = {}
 	local Flag = true
 	
@@ -42,12 +42,12 @@ local function streamWords(Text: string) --[[ Line: 96 ]]
 	return List
 end
 
-local function httpStatusForCode(Code): number --[[ Line: 111 ]]
+local function httpStatusForCode(Code): number
 	-- upvalues: AcpProtocolModule (copy)
 	return if Code == AcpProtocolModule.ErrorCodes.NotFound then 404 elseif Code == AcpProtocolModule.ErrorCodes.Gone then 410 elseif Code == AcpProtocolModule.ErrorCodes.Conflict then 409 elseif Code == AcpProtocolModule.ErrorCodes.UpstreamUnavailable then 502 elseif Code == AcpProtocolModule.ErrorCodes.Unauthorized then 401 elseif Code == AcpProtocolModule.ErrorCodes.Forbidden then 403 elseif Code == AcpProtocolModule.ErrorCodes.InternalError then 500 else 400
 end
 
-return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
+return function(p1)
 	-- upvalues: AcpProtocolModule (copy), streamWords (copy), jsonError (copy), httpStatusForCode (copy), jsonOk (copy), HttpService (copy), CreateCreatorAgentChatStoreModule (copy)
 	local P8 = p1 or {}
 	local ChunkDelay = P8.chunkDelay or 0.04
@@ -68,7 +68,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 			}
 		end
 	end
-	local function _(): string --[[ Line: 152 | Named "newSessionId" ]]
+	local function _(): string
 		-- upvalues: Count (ref)
 		Count += 1
 		
@@ -77,7 +77,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 	
 	local v1 = nil
 	
-	local function emitNotification(SessionId, Update, Count) --[[ Line: 159 ]]
+	local function emitNotification(SessionId, Update, Count)
 		-- upvalues: v1 (ref), AcpProtocolModule (upval)
 		v1.ingestFrame({
 			kind = "notification",
@@ -88,7 +88,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 		}, { sequenceNumber = Count })
 	end
 	
-	local function emitResponse(Id, p2) --[[ Line: 171 ]]
+	local function emitResponse(Id, p2)
 		-- upvalues: v1 (ref)
 		v1.ingestFrame({
 			kind = "response",
@@ -101,7 +101,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 		})
 	end
 	
-	local function defaultResponder(p2) --[[ Line: 183 ]]
+	local function defaultResponder(p2)
 		-- upvalues: streamWords (upval), ChunkDelay (copy)
 		for _, value in streamWords((("Sure! I'll work on \"%s\" for you."):format(p2.promptText:sub(1, 60)))) do
 			p2.emitText(value)
@@ -110,9 +110,9 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 		p2.finish("end_turn")
 	end
 	
-	local _ = function(p3) --[[ Line: 192 | Named "stringResponder" ]]
+	local _ = function(p3)
 		-- upvalues: streamWords (upval), ChunkDelay (copy)
-		return function(p4) --[[ Line: 193 ]]
+		return function(p4)
 			-- upvalues: streamWords (upval), p3 (copy), ChunkDelay (upval)
 			for _, value in streamWords(p3) do
 				p4.emitText(value)
@@ -122,11 +122,11 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 		end
 	end
 	
-	local _ = function() --[[ Line: 202 | Named "pickResponder" ]]
+	local _ = function()
 		-- upvalues: P8 (copy), defaultResponder (copy), streamWords (upval), ChunkDelay (copy)
 		local Respond = P8.respond
 		
-		return if Respond == nil then defaultResponder elseif typeof(Respond) == "string" then function(p4) --[[ Line: 193 ]]
+		return if Respond == nil then defaultResponder elseif typeof(Respond) == "string" then function(p4)
 			-- upvalues: streamWords (upval), Respond (copy), ChunkDelay (upval)
 			for _, value in streamWords(Respond) do
 				p4.emitText(value)
@@ -136,7 +136,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 		end else Respond
 	end
 	
-	local function runResponder(Id, SessionId, Content) --[[ Line: 212 ]]
+	local function runResponder(Id, SessionId, Content)
 		-- upvalues: P8 (copy), emitNotification (copy), emitResponse (copy), t (copy), defaultResponder (copy), streamWords (upval), ChunkDelay (copy), AcpProtocolModule (upval)
 		local Text = tostring(Id)
 		local UserName: string = `{Text}:user`
@@ -154,7 +154,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 		end
 		local Count = 0
 		
-		local function _(Update) --[[ Line: 224 | Named "emitSessionUpdate" ]]
+		local function _(Update)
 			-- upvalues: P8 (upval), Count (ref), emitNotification (upval), SessionId (copy)
 			if P8.onSessionUpdate then
 				P8.onSessionUpdate(Update, Count)
@@ -165,7 +165,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 		
 		local Flag = false
 		
-		local _ = function(p4) --[[ Line: 233 | Named "finishTurn" ]]
+		local _ = function(p4)
 			-- upvalues: Flag (ref), P8 (upval), Count (ref), emitNotification (upval), SessionId (copy)
 			if Flag then return end
 			Flag = true
@@ -182,7 +182,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 			Count += 1
 		end
 		
-		local function failTurn(Code, Message) --[[ Line: 245 ]]
+		local function failTurn(Code, Message)
 			-- upvalues: Flag (ref), emitResponse (upval), Id (copy)
 			if not Flag then
 				Flag = true
@@ -215,7 +215,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 			promptText = Text1,
 			promptBlocks = Content,
 			sleep = task.wait,
-			emitText = function(Text) --[[ Line: 268 ]]
+			emitText = function(Text)
 				-- upvalues: AssistantName (copy), P8 (upval), Count (ref), emitNotification (upval), SessionId (copy)
 				local config = {
 					sessionUpdate = "agent_message_chunk",
@@ -229,7 +229,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 				emitNotification(SessionId, config, Count)
 				Count += 1
 			end,
-			emitToolCall = function(Update) --[[ Line: 275 ]]
+			emitToolCall = function(Update)
 				-- upvalues: P8 (upval), Count (ref), emitNotification (upval), SessionId (copy)
 				local config = {
 					sessionUpdate = "tool_call_update",
@@ -246,7 +246,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 				emitNotification(SessionId, config, Count)
 				Count += 1
 			end,
-			updateToolCall = function(ToolCallId, Update) --[[ Line: 285 ]]
+			updateToolCall = function(ToolCallId, Update)
 				-- upvalues: P8 (upval), Count (ref), emitNotification (upval), SessionId (copy)
 				local config = {
 					sessionUpdate = "tool_call_update",
@@ -262,7 +262,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 				emitNotification(SessionId, config, Count)
 				Count += 1
 			end,
-			setTitle = function(Title) --[[ Line: 294 ]]
+			setTitle = function(Title)
 				-- upvalues: t (upval), SessionId (copy), P8 (upval), Count (ref), emitNotification (upval)
 				local Entry = t[SessionId]
 				
@@ -278,7 +278,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 				emitNotification(SessionId, config, Count)
 				Count += 1
 			end,
-			finish = function(p4) --[[ Line: 302 ]]
+			finish = function(p4)
 				-- upvalues: Flag (ref), P8 (upval), Count (ref), emitNotification (upval), SessionId (copy)
 				if Flag then return end
 				Flag = true
@@ -294,17 +294,17 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 				emitNotification(SessionId, config, Count)
 				Count += 1
 			end,
-			fail = function(Code, Message) --[[ Line: 305 ]]
+			fail = function(Code, Message)
 				-- upvalues: failTurn (copy)
 				failTurn(Code, Message)
 			end
 		}
-		task.spawn(function() --[[ Line: 310 ]]
+		task.spawn(function()
 			-- upvalues: P8 (upval), defaultResponder (upval), streamWords (upval), ChunkDelay (upval), config2 (copy), failTurn (copy), AcpProtocolModule (upval), Flag (ref), Count (ref), emitNotification (upval), SessionId (copy)
-			local Success, Result = pcall(function() --[[ Line: 312 | Named "callResponder" ]]
+			local Success, Result = pcall(function()
 				-- upvalues: P8 (upval), defaultResponder (upval), streamWords (upval), ChunkDelay (upval), config2 (upval)
 				local Respond = P8.respond;
-				(if Respond == nil then defaultResponder elseif typeof(Respond) == "string" then function(p4) --[[ Line: 193 ]]
+				(if Respond == nil then defaultResponder elseif typeof(Respond) == "string" then function(p4)
 					-- upvalues: streamWords (upval), Respond (copy), ChunkDelay (upval)
 					for _, value in streamWords(Respond) do
 						p4.emitText(value)
@@ -339,7 +339,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 		end)
 	end
 	
-	local _ = function(p4) --[[ Line: 325 | Named "findSession" ]]
+	local _ = function(p4)
 		-- upvalues: t (copy), AcpProtocolModule (upval)
 		local Entry = t[p4]
 		
@@ -353,7 +353,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 		end
 	end
 	
-	local function sessionListEntry(p4) --[[ Line: 333 ]]
+	local function sessionListEntry(p4)
 		local config = {
 			sessionId = p4.sessionId,
 			title = p4.title,
@@ -367,7 +367,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 	end
 	
 	local config = {
-		[AcpProtocolModule.Methods.Initialize] = function() --[[ Line: 352 ]]
+		[AcpProtocolModule.Methods.Initialize] = function()
 			-- upvalues: AcpProtocolModule (upval)
 			return {
 				protocolVersion = AcpProtocolModule.ProtocolVersion,
@@ -382,7 +382,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 				agentInfo = { name = "mock-my-stats-service", version = "0.0.1-mock" }
 			}, nil
 		end,
-		[AcpProtocolModule.Methods.SessionNew] = function(p4) --[[ Line: 367 ]]
+		[AcpProtocolModule.Methods.SessionNew] = function(p4)
 			-- upvalues: AcpProtocolModule (upval), Count (ref), t (copy)
 			local ExtractSessionNewProjectResult = AcpProtocolModule.extractSessionNewProject(p4)
 			
@@ -407,7 +407,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 				return { sessionId = MockName }, nil
 			end
 		end,
-		[AcpProtocolModule.Methods.SessionList] = function(_) --[[ Line: 388 ]]
+		[AcpProtocolModule.Methods.SessionList] = function(_)
 			-- upvalues: t (copy), sessionListEntry (copy)
 			local List = {}
 			
@@ -416,13 +416,13 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 					table.insert(List, (sessionListEntry(value)))
 				end
 			end
-			table.sort(List, function(A, B): boolean --[[ Line: 395 ]]
+			table.sort(List, function(A, B): boolean
 				return (B.updatedAt or "") < (A.updatedAt or "")
 			end)
 			
 			return { sessions = List }, nil
 		end,
-		[AcpProtocolModule.Methods.SessionFindByUniverse] = function(p4) --[[ Line: 400 ]]
+		[AcpProtocolModule.Methods.SessionFindByUniverse] = function(p4)
 			-- upvalues: AcpProtocolModule (upval), t (copy), sessionListEntry (copy)
 			if typeof(p4.universeId) ~= "number" or p4.universeId == 0 then
 				return nil, {
@@ -437,13 +437,13 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 					table.insert(List, (sessionListEntry(value)))
 				end
 			end
-			table.sort(List, function(A, B): boolean --[[ Line: 418 ]]
+			table.sort(List, function(A, B): boolean
 				return (B.updatedAt or "") < (A.updatedAt or "")
 			end)
 			
 			return { sessions = List }, nil
 		end,
-		[AcpProtocolModule.Methods.SessionLoad] = function(p5) --[[ Line: 423 ]]
+		[AcpProtocolModule.Methods.SessionLoad] = function(p5)
 			-- upvalues: t (copy), AcpProtocolModule (upval)
 			local Entry = t[p5.sessionId]
 			local v2 = nil
@@ -471,7 +471,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 				}, nil
 			end
 		end,
-		[AcpProtocolModule.Methods.SessionReadTasks] = function(p5) --[[ Line: 439 ]]
+		[AcpProtocolModule.Methods.SessionReadTasks] = function(p5)
 			-- upvalues: t (copy), AcpProtocolModule (upval)
 			local Entry = t[p5.sessionId]
 			local Config = if Entry == nil or Entry.closedUtc ~= nil then {
@@ -485,7 +485,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 				return { tasks = {} }, nil
 			end
 		end,
-		[AcpProtocolModule.Methods.SessionCancel] = function(p5) --[[ Line: 446 ]]
+		[AcpProtocolModule.Methods.SessionCancel] = function(p5)
 			-- upvalues: t (copy), AcpProtocolModule (upval)
 			local Entry = t[p5.sessionId]
 			local Config = if Entry == nil or Entry.closedUtc ~= nil then {
@@ -499,7 +499,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 				return {}, nil
 			end
 		end,
-		[AcpProtocolModule.Methods.SessionDelete] = function(p5) --[[ Line: 454 ]]
+		[AcpProtocolModule.Methods.SessionDelete] = function(p5)
 			-- upvalues: t (copy), AcpProtocolModule (upval)
 			local Entry = t[p5.sessionId]
 			
@@ -514,7 +514,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 				return {}, nil
 			end
 		end,
-		[AcpProtocolModule.Methods.SessionUpdateInfo] = function(p5) --[[ Line: 462 ]]
+		[AcpProtocolModule.Methods.SessionUpdateInfo] = function(p5)
 			-- upvalues: t (copy), AcpProtocolModule (upval)
 			local Entry = t[p5.sessionId]
 			local v2 = nil
@@ -539,10 +539,10 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 			end
 			return {}, nil
 		end,
-		[AcpProtocolModule.Methods.SessionSaveAndPublish] = function(_) --[[ Line: 474 ]]
+		[AcpProtocolModule.Methods.SessionSaveAndPublish] = function(_)
 			return { status = "success", version = "1" }, nil
 		end,
-		[AcpProtocolModule.Methods.AdCampaignEligibility] = function(p5) --[[ Line: 477 ]]
+		[AcpProtocolModule.Methods.AdCampaignEligibility] = function(p5)
 			-- upvalues: AcpProtocolModule (upval)
 			if typeof(p5.universeId) == "number" and p5.universeId > 0 then
 				return {
@@ -575,7 +575,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 				}
 			end
 		end,
-		[AcpProtocolModule.Methods.AdCampaignCheckFunds] = function(p5) --[[ Line: 509 ]]
+		[AcpProtocolModule.Methods.AdCampaignCheckFunds] = function(p5)
 			-- upvalues: AcpProtocolModule (upval)
 			if p5.campaignOption == "feedback" or p5.campaignOption == "plays" then
 				return { canFund = true, fundingSource = "robux" }, nil
@@ -586,7 +586,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 				}
 			end
 		end,
-		[AcpProtocolModule.Methods.AdCampaignCreate] = function(p5) --[[ Line: 518 ]]
+		[AcpProtocolModule.Methods.AdCampaignCreate] = function(p5)
 			-- upvalues: AcpProtocolModule (upval)
 			if typeof(p5.universeId) ~= "number" or p5.universeId <= 0 then
 				return nil, {
@@ -608,7 +608,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 		end
 	}
 	
-	local function dispatch(p5) --[[ Line: 534 ]]
+	local function dispatch(p5)
 		-- upvalues: AcpProtocolModule (upval), t (copy), jsonError (upval), httpStatusForCode (upval), runResponder (copy), jsonOk (upval), config (copy)
 		if p5.method == AcpProtocolModule.Methods.SessionPrompt then
 			local Entry = t[p5.params.sessionId]
@@ -649,7 +649,7 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 	v1 = CreateCreatorAgentChatStoreModule({
 		baseUrl = "mock://my-stats/v2",
 		network = {
-			request = function(p5, Callback: (any, any) -> ()) --[[ Line: 563 ]]
+			request = function(p5, Callback: (any, any) -> ())
 				-- upvalues: HttpService (upval), dispatch (copy)
 				local Data = HttpService:JSONDecode(p5.body or "{}")
 				
@@ -659,11 +659,11 @@ return function(p1) --[[ Line: 130 | Named "createMockStore" ]]
 						responseBody = "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{}}"
 					})
 					
-					return function() --[[ Line: 571 ]] end
+					return function() end
 				else
 					Callback(true, (dispatch(Data)))
 					
-					return function() --[[ Line: 574 ]] end
+					return function() end
 				end
 			end
 		}

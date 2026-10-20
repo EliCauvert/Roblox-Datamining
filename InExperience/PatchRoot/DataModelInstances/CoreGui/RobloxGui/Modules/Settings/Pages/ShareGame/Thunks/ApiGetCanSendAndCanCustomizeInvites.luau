@@ -2,7 +2,7 @@
 local HttpRbxApiService = game:GetService("HttpRbxApiService")
 local HttpRequestModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Common.httpRequest)
 
-return function(p1, p2) --[[ Line: 12 ]]
+return function(p1, p2)
 	-- upvalues: HttpRequestModule (copy), HttpRbxApiService (copy), GetCanSendAndCanCustomizeInvitesFunction (copy)
 	local v1, v2 = GetCanSendAndCanCustomizeInvitesFunction(HttpRequestModule(HttpRbxApiService), p1, p2):await()
 	

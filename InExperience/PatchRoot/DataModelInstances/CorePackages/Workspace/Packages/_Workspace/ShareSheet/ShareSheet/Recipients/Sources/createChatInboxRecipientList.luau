@@ -7,11 +7,11 @@ local ListRecipientsStatusModule = require(ShareSheet.Recipients.ListRecipientsS
 local RecipientModule = require(ShareSheet.Recipients.Recipient)
 local _ = require(ShareSheet.Types)
 
-return function() --[[ Line: 16 | Named "createChatInboxRecipientList" ]]
+return function()
 	-- upvalues: GetConversationListStoreModule (copy), SignalsModule (copy), RecipientModule (copy), ListRecipientsStatusModule (copy), FetchConversationListPageToSignalsModule (copy)
 	local ConversationListStoreModule = GetConversationListStoreModule(false)
 	local t = {}
-	local Computed = SignalsModule.createComputed(function(p1) --[[ Line: 23 ]]
+	local Computed = SignalsModule.createComputed(function(p1)
 		-- upvalues: ConversationListStoreModule (copy), t (ref), RecipientModule (upval)
 		local Conversations = ConversationListStoreModule.getConversations(p1)
 		local Buffer = table.create(#Conversations)
@@ -26,7 +26,7 @@ return function() --[[ Line: 16 | Named "createChatInboxRecipientList" ]]
 		
 		return Buffer
 	end)
-	local Computed1 = SignalsModule.createComputed(function(p2) --[[ Line: 36 ]]
+	local Computed1 = SignalsModule.createComputed(function(p2)
 		-- upvalues: Computed (copy), ConversationListStoreModule (copy), ListRecipientsStatusModule (upval)
 		local ComputedResult = Computed(p2)
 		local ListStatus = ConversationListStoreModule.getListStatus(p2)
@@ -42,11 +42,11 @@ return function() --[[ Line: 16 | Named "createChatInboxRecipientList" ]]
 	
 	return {
 		getResult = Computed1,
-		refresh = function() --[[ Line: 55 ]]
+		refresh = function()
 			-- upvalues: FetchConversationListPageToSignalsModule (upval)
 			FetchConversationListPageToSignalsModule()
 		end,
-		loadMore = function(Cursor) --[[ Line: 58 ]]
+		loadMore = function(Cursor)
 			-- upvalues: Computed1 (copy), FetchConversationListPageToSignalsModule (upval)
 			if Computed1(false).nextPageToken == Cursor then
 				FetchConversationListPageToSignalsModule({ cursor = Cursor })

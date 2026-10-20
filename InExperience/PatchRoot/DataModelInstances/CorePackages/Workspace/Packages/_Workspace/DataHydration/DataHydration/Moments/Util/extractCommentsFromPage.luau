@@ -2,7 +2,7 @@
 local _ = require(DataHydration.Parent.MomentsTypes)
 local ConvertApiCommentToCommentModule = require(DataHydration.Moments.Util.convertApiCommentToComment)
 
-return function(p1) --[[ Line: 11 | Named "extractCommentsFromPage" ]]
+return function(p1)
 	-- upvalues: ConvertApiCommentToCommentModule (copy)
 	local t = {}
 	

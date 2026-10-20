@@ -1,7 +1,7 @@
 ﻿local Enums = require(script:FindFirstAncestor("VirtualEvents").Parent.VirtualEventsState).enums
 local SendEventDeferredModule = require(script.Parent.sendEventDeferred)
 
-return function(p1) --[[ Line: 14 ]]
+return function(p1)
 	-- upvalues: SendEventDeferredModule (copy), Enums (copy)
 	SendEventDeferredModule(Enums.AnalyticsEvent.VirtualEventJoined, p1)
 end

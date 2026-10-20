@@ -9,12 +9,12 @@ local HttpService = game:GetService("HttpService")
 local _ = require(AvatarExperienceCatalog.Models.CatalogCategories)
 local FFlagAXCatalogCategoriesSDUI = require(Parent.AvatarExperienceFlags).FFlagAXCatalogCategoriesSDUI
 
-local function _() --[[ Line: 19 | Named "SearchUuid" ]]
+local function _()
 	-- upvalues: HttpService (copy)
 	return HttpService:GenerateGUID(true)
 end
 
-local function extractShowCatalogContentActionRequestParams(p1) --[[ Line: 37 ]]
+local function extractShowCatalogContentActionRequestParams(p1)
 	local RequestParams = nil
 	
 	if p1.props and p1.props.OnActivated then
@@ -29,7 +29,7 @@ local function extractShowCatalogContentActionRequestParams(p1) --[[ Line: 37 ]]
 	return RequestParams
 end
 
-local function extractWidgetContext(p2) --[[ Line: 51 ]]
+local function extractWidgetContext(p2)
 	local Context = nil
 	
 	if p2.props and p2.props.OnActivated then
@@ -44,7 +44,7 @@ local function extractWidgetContext(p2) --[[ Line: 51 ]]
 	return Context
 end
 
-local _ = function(p3) --[[ Line: 67 | Named "stringToBoolean" ]]
+local _ = function(p3)
 	if type(p3) == "boolean" then
 		return p3, nil
 	elseif type(p3) ~= "string" then
@@ -58,7 +58,7 @@ local _ = function(p3) --[[ Line: 67 | Named "stringToBoolean" ]]
 	end
 end
 
-local function splitCommaSeparatedString(Text: string) --[[ Line: 86 ]]
+local function splitCommaSeparatedString(Text: string)
 	if not Text or Text == "" then
 		return nil
 	end
@@ -72,7 +72,7 @@ local function splitCommaSeparatedString(Text: string) --[[ Line: 86 ]]
 	return #List > 0 and List or nil
 end
 
-local _ = function(p3) --[[ Line: 103 | Named "normalizeAssetTypeIdStrings" ]]
+local _ = function(p3)
 	-- upvalues: extractShowCatalogContentActionRequestParams (copy), NormalizeStringFunction (copy), splitCommaSeparatedString (copy)
 	local ExtractShowCatalogContentActionRequestParamsResult = extractShowCatalogContentActionRequestParams(p3)
 	local AssetTypeIds = ExtractShowCatalogContentActionRequestParamsResult and ExtractShowCatalogContentActionRequestParamsResult.assetTypeIds
@@ -89,7 +89,7 @@ local _ = function(p3) --[[ Line: 103 | Named "normalizeAssetTypeIdStrings" ]]
 	end
 end
 
-local _ = function(p3) --[[ Line: 121 | Named "normalizeBundleTypes" ]]
+local _ = function(p3)
 	-- upvalues: extractShowCatalogContentActionRequestParams (copy), NormalizeStringFunction (copy), splitCommaSeparatedString (copy)
 	local ExtractShowCatalogContentActionRequestParamsResult = extractShowCatalogContentActionRequestParams(p3)
 	local BundleTypeIds = ExtractShowCatalogContentActionRequestParamsResult and ExtractShowCatalogContentActionRequestParamsResult.bundleTypeIds
@@ -106,7 +106,7 @@ local _ = function(p3) --[[ Line: 121 | Named "normalizeBundleTypes" ]]
 	end
 end
 
-local _ = function(p3) --[[ Line: 139 | Named "normalizeTaxonomy" ]]
+local _ = function(p3)
 	-- upvalues: extractShowCatalogContentActionRequestParams (copy), NormalizeNotEmptyStringFunction (copy)
 	local ExtractShowCatalogContentActionRequestParamsResult = extractShowCatalogContentActionRequestParams(p3)
 	local NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2 = NormalizeNotEmptyStringFunction(ExtractShowCatalogContentActionRequestParamsResult and ExtractShowCatalogContentActionRequestParamsResult.taxonomyId)
@@ -114,17 +114,17 @@ local _ = function(p3) --[[ Line: 139 | Named "normalizeTaxonomy" ]]
 	return NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2
 end
 
-local _ = function(p3) --[[ Line: 148 | Named "normalizeWidgetContext" ]]
+local _ = function(p3)
 	-- upvalues: extractWidgetContext (copy)
 	return extractWidgetContext(p3), nil
 end
 
-local _ = function() --[[ Line: 154 | Named "normalizeSearchUuid" ]]
+local _ = function()
 	-- upvalues: HttpService (copy)
 	return HttpService:GenerateGUID(true), nil
 end
 
-local _ = function(p3) --[[ Line: 160 | Named "normalizePillTitle" ]]
+local _ = function(p3)
 	-- upvalues: FFlagAXCatalogCategoriesSDUI (copy), NormalizeNotEmptyStringFunction (copy), NormalizeStringFunction (copy)
 	local PillTitle = p3.props and p3.props.pillTitle
 	
@@ -139,7 +139,7 @@ local _ = function(p3) --[[ Line: 160 | Named "normalizePillTitle" ]]
 	end
 end
 
-local _ = function(p3) --[[ Line: 172 | Named "normalizePillId" ]]
+local _ = function(p3)
 	-- upvalues: FFlagAXCatalogCategoriesSDUI (copy), NormalizeNotEmptyStringFunction (copy), NormalizeStringFunction (copy)
 	local PillId = p3.props and p3.props.pillId
 	
@@ -154,7 +154,7 @@ local _ = function(p3) --[[ Line: 172 | Named "normalizePillId" ]]
 	end
 end
 
-local _ = function(p3) --[[ Line: 184 | Named "normalizeTimeToRefresh" ]]
+local _ = function(p3)
 	-- upvalues: NormalizeNumberFunction (copy)
 	local TimeToRefresh = p3.props and p3.props.timeToRefresh
 	
@@ -173,14 +173,14 @@ local _ = function(p3) --[[ Line: 184 | Named "normalizeTimeToRefresh" ]]
 	end
 end
 
-local _ = function(p3) --[[ Line: 202 | Named "normalizeCameraFocus" ]]
+local _ = function(p3)
 	-- upvalues: NormalizeNotEmptyStringFunction (copy)
 	local NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2 = NormalizeNotEmptyStringFunction(p3.props and p3.props.cameraFocus)
 	
 	return NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2
 end
 
-local _ = function(p3) --[[ Line: 209 | Named "normalizeCameraZoomRadius" ]]
+local _ = function(p3)
 	-- upvalues: NormalizeNumberFunction (copy)
 	local CameraZoomRadius = p3.props and p3.props.cameraZoomRadius
 	
@@ -199,7 +199,7 @@ local _ = function(p3) --[[ Line: 209 | Named "normalizeCameraZoomRadius" ]]
 	end
 end
 
-local _ = function(p3) --[[ Line: 227 | Named "normalizeCanAnimateCameraBasedMood" ]]
+local _ = function(p3)
 	-- upvalues: NormalizeBooleanFunction (copy)
 	local CanAnimateCameraBasedMood = p3.props and p3.props.canAnimateCameraBasedMood
 	
@@ -235,7 +235,7 @@ local _ = function(p3) --[[ Line: 227 | Named "normalizeCanAnimateCameraBasedMoo
 	end
 end
 
-local _ = function(p3) --[[ Line: 243 | Named "normalizeDisableFilters" ]]
+local _ = function(p3)
 	-- upvalues: NormalizeBooleanFunction (copy)
 	local DisableFilters = p3.props and p3.props.disableFilters
 	
@@ -271,14 +271,14 @@ local _ = function(p3) --[[ Line: 243 | Named "normalizeDisableFilters" ]]
 	end
 end
 
-local _ = function(p3) --[[ Line: 259 | Named "normalizePageType" ]]
+local _ = function(p3)
 	-- upvalues: NormalizeNotEmptyStringFunction (copy)
 	local NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2 = NormalizeNotEmptyStringFunction(p3.props and p3.props.pageType)
 	
 	return NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2
 end
 
-local _ = function(p3) --[[ Line: 266 | Named "normalizeLooksWidgetContextForOrganicContent" ]]
+local _ = function(p3)
 	-- upvalues: extractShowCatalogContentActionRequestParams (copy), NormalizeStringFunction (copy)
 	local ExtractShowCatalogContentActionRequestParamsResult = extractShowCatalogContentActionRequestParams(p3)
 	local Context = ExtractShowCatalogContentActionRequestParamsResult and ExtractShowCatalogContentActionRequestParamsResult.context
@@ -292,21 +292,21 @@ local _ = function(p3) --[[ Line: 266 | Named "normalizeLooksWidgetContextForOrg
 	end
 end
 
-local _ = function(p3) --[[ Line: 279 | Named "normalizeTooltipKey" ]]
+local _ = function(p3)
 	-- upvalues: NormalizeNotEmptyStringFunction (copy)
 	local NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2 = NormalizeNotEmptyStringFunction(p3.props and p3.props.tooltipKey)
 	
 	return NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2
 end
 
-local _ = function(p3) --[[ Line: 286 | Named "normalizeTooltipBody" ]]
+local _ = function(p3)
 	-- upvalues: NormalizeNotEmptyStringFunction (copy)
 	local NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2 = NormalizeNotEmptyStringFunction(p3.props and p3.props.tooltipBody)
 	
 	return NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2
 end
 
-local _ = function(p3) --[[ Line: 293 | Named "normalizeTileType" ]]
+local _ = function(p3)
 	-- upvalues: NormalizeNotEmptyStringFunction (copy)
 	local NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2 = NormalizeNotEmptyStringFunction(p3.props and p3.props.tileType)
 	
@@ -316,7 +316,7 @@ end
 local Callback = nil
 local v1 = nil
 
-v1 = function(p3) --[[ Line: 304 ]]
+v1 = function(p3)
 	-- upvalues: Callback (ref)
 	if not p3.props or not p3.props.Configs or type(p3.props.Configs) ~= "table" then
 		return nil, nil
@@ -337,7 +337,7 @@ v1 = function(p3) --[[ Line: 304 ]]
 	return List, if next(List1) then table.concat(List1, " ") else nil
 end
 
-local function normalizeCategoryOrSubcategory(p4, p5) --[[ Line: 332 ]]
+local function normalizeCategoryOrSubcategory(p4, p5)
 	-- upvalues: FFlagAXCatalogCategoriesSDUI (copy), NormalizeNotEmptyStringFunction (copy), NormalizeStringFunction (copy), HttpService (copy), extractShowCatalogContentActionRequestParams (copy), splitCommaSeparatedString (copy), extractWidgetContext (copy), NormalizeNumberFunction (copy), v1 (ref), NormalizeBooleanFunction (copy)
 	if type(p4) ~= "table" then
 		return nil, "Config must be a table"
@@ -670,21 +670,21 @@ local function normalizeCategoryOrSubcategory(p4, p5) --[[ Line: 332 ]]
 	return config, nil
 end
 
-Callback = function(p4) --[[ Line: 489 ]]
+Callback = function(p4)
 	-- upvalues: normalizeCategoryOrSubcategory (copy)
 	return normalizeCategoryOrSubcategory(p4, { isSubcategory = true })
 end
 
 local v2 = nil
 
-v2 = function(p4) --[[ Line: 495 ]]
+v2 = function(p4)
 	-- upvalues: normalizeCategoryOrSubcategory (copy)
 	return normalizeCategoryOrSubcategory(p4, { isSubcategory = false })
 end
 
 local NormalizeTableFn = Normalize.makeNormalizeTableFn({
 	Configs = {
-		fn = function(List) --[[ Line: 500 ]]
+		fn = function(List)
 			-- upvalues: v2 (ref)
 			if type(List) ~= "table" then
 				return {}, "Configs field must be a table"
@@ -707,7 +707,7 @@ local NormalizeTableFn = Normalize.makeNormalizeTableFn({
 	}
 })
 
-return function(p4) --[[ Line: 533 ]]
+return function(p4)
 	-- upvalues: NormalizeTableFn (copy)
 	if p4 and type(p4.Configs) == "table" then
 		local NormalizeTableFnResult, NormalizeTableFnResult2 = NormalizeTableFn(p4)

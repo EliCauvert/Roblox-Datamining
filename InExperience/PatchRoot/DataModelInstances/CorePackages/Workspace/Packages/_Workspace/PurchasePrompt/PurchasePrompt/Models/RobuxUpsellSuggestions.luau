@@ -1,11 +1,11 @@
 ﻿local RobuxUpsellModule = require(script.Parent.Parent.Models.RobuxUpsell)
 local RobuxUpsellSuggestionsModule = {
-	new = function(Products) --[[ Line: 17 ]]
+	new = function(Products)
 		return { products = Products }
 	end
 }
 
-function RobuxUpsellSuggestionsModule.fromJson(p1) --[[ Line: 25 ]]
+function RobuxUpsellSuggestionsModule.fromJson(p1)
 	-- upvalues: RobuxUpsellModule (copy), RobuxUpsellSuggestionsModule (copy)
 	local FromJsonResults = {}
 	

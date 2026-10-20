@@ -21,21 +21,21 @@ local FFlagEnableLuaAppsFollowUserId1 = game:GetEngineFeature("ExperienceService
 local PlaceJoinStateEnabledEngineFeature = game:GetEngineFeature("PlaceJoinStateEnabled")
 local RequestInternalWrapperResult = HttpModule.NetworkLayers.requestInternalWrapper((game:GetService("HttpService")))
 
-local function defaultFetchUniverseId(p1) --[[ Line: 79 ]]
+local function defaultFetchUniverseId(p1)
 	-- upvalues: HttpModule (copy), RequestInternalWrapperResult (copy)
 	local v1, v2 = RequestInternalWrapperResult(string.format("%suniverses/v1/places/%d/universe", HttpModule.Url.APIS_URL, p1), "GET"):await()
 	
 	return if v1 and v2 and v2.responseBody then v2.responseBody.universeId else nil
 end
 
-local function defaultFetchProductInfo(AssetId) --[[ Line: 88 ]]
+local function defaultFetchProductInfo(AssetId)
 	-- upvalues: MarketplaceService (copy)
 	return (MarketplaceService:GetProductInfoAsync(AssetId))
 end
 
-local function defaultFetchPlayerLocalizationChoice(UniverseId) --[[ Line: 92 ]]
+local function defaultFetchPlayerLocalizationChoice(UniverseId)
 	-- upvalues: RequestInternalWrapperResult (copy), HttpModule (copy)
-	return RequestInternalWrapperResult(string.format("%sv1/user-localization-settings/player-choice/%s", HttpModule.Url.GAME_INTERNATIONALIZATION_URL, UniverseId), "GET"):andThen(function(Result) --[[ Line: 100 ]]
+	return RequestInternalWrapperResult(string.format("%sv1/user-localization-settings/player-choice/%s", HttpModule.Url.GAME_INTERNATIONALIZATION_URL, UniverseId), "GET"):andThen(function(Result)
 		-- upvalues: UniverseId (copy)
 		if not Result or not Result.responseBody then
 			error({
@@ -59,25 +59,25 @@ local function defaultFetchPlayerLocalizationChoice(UniverseId) --[[ Line: 92 ]]
 	end)
 end
 
-local function _() --[[ Line: 123 | Named "getQueueTreatment" ]]
+local function _()
 	-- upvalues: PlaceJoinStateEnabledEngineFeature (copy), QueueExperimentation (copy), ConstantsModule (copy)
 	return if PlaceJoinStateEnabledEngineFeature then if QueueExperimentation.getIsAutoJoinNewServerEnabled() then ConstantsModule.AUTO_JOIN_TREATMENT elseif QueueExperimentation.getIsJoinNewServerButtonEnabled() then ConstantsModule.JOIN_NEW_SERVER_TREATMENT else nil else nil
 end
 
-return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScreenModel" ]]
+return function(p1: number, p2, p3)
 	-- upvalues: ExperienceService (copy), GuiService (copy), defaultFetchUniverseId (copy), defaultFetchProductInfo (copy), CachedPolicyServiceModule (copy), defaultFetchPlayerLocalizationChoice (copy), MarketplaceGetMarketplaceAssetStoreModule (copy), CreateDataCacheFunction (copy), CreateDataResolverFunction (copy), LoadingScreenTelemetryModule (copy), SignalsModule (copy), PlaceJoinStateEnabledEngineFeature (copy), QueueExperimentation (copy), ConstantsModule (copy), FFlagEnableLuaAppsFollowUserId1 (copy), QueuePositionEnabledEngineFeature (copy), UserInputService (copy)
 	local DataModel = if p2 and p2.dataModel then p2.dataModel else game
 	local ExperienceService1 = if p2 and p2.experienceService then p2.experienceService else ExperienceService
 	local GuiService1 = if p2 and p2.guiService then p2.guiService else GuiService
 	local FetchUniverseId = p2 and p2.fetchUniverseId or defaultFetchUniverseId
 	local FetchProductInfo = p2 and p2.fetchProductInfo or defaultFetchProductInfo
-	local FetchIsSubjectToChinaPolicies = p2 and p2.fetchIsSubjectToChinaPolicies or function() --[[ Line: 149 ]]
+	local FetchIsSubjectToChinaPolicies = p2 and p2.fetchIsSubjectToChinaPolicies or function()
 		-- upvalues: CachedPolicyServiceModule (upval)
 		return CachedPolicyServiceModule:IsSubjectToChinaPolicies()
 	end
 	local FetchPlayerLocalizationChoice = p2 and p2.fetchPlayerLocalizationChoice or defaultFetchPlayerLocalizationChoice
 	
-	local function _() --[[ Line: 155 | Named "readServerStatusText" ]]
+	local function _()
 		-- upvalues: GuiService1 (copy)
 		if GuiService1.GetUiMessage then
 			local Success, Result = pcall(GuiService1.GetUiMessage, GuiService1)
@@ -93,7 +93,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 	local DataResolver = CreateDataResolverFunction({
 		supportsMultiGet = false,
 		cache = DataCache,
-		logError = function(p4) --[[ Line: 167 ]]
+		logError = function(p4)
 			-- upvalues: LoadingScreenTelemetryModule (upval)
 			if type(p4) == "table" then
 				LoadingScreenTelemetryModule.countPlayerLocalizationChoiceFailed({ responseCode = p4.responseCode, errorType = p4.errorType })
@@ -103,7 +103,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 				LoadingScreenTelemetryModule.countPlayerLocalizationChoiceFailed({ errorType = "PlayerLocalizationChoiceFetchError" })
 			end
 		end,
-		fetchFn = function(p4) --[[ Line: 179 ]]
+		fetchFn = function(p4)
 			-- upvalues: FetchPlayerLocalizationChoice (copy)
 			return FetchPlayerLocalizationChoice(p4)
 		end
@@ -146,20 +146,20 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 	local Flag3 = false
 	local Flag4 = false
 	
-	local _ = function(Thread) --[[ Line: 242 | Named "cancel" ]]
+	local _ = function(Thread)
 		if Thread and coroutine.status(Thread) ~= "dead" then
 			task.cancel(Thread)
 		end
 	end
 	
-	local _ = function(Connection) --[[ Line: 248 | Named "disconnect" ]]
+	local _ = function(Connection)
 		if Connection then
 			Connection:Disconnect()
 		end
 		return nil
 	end
 	
-	local _ = function() --[[ Line: 255 | Named "readFollowUserId" ]]
+	local _ = function()
 		-- upvalues: FFlagEnableLuaAppsFollowUserId1 (upval), ExperienceService1 (copy)
 		if FFlagEnableLuaAppsFollowUserId1 and ExperienceService1.GetFollowUserId then
 			local Success, Result = pcall(ExperienceService1.GetFollowUserId, ExperienceService1)
@@ -170,7 +170,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 		end
 	end
 	
-	local _ = function() --[[ Line: 263 | Named "readExposureFollowUserId" ]]
+	local _ = function()
 		-- upvalues: ExperienceService1 (copy)
 		if ExperienceService1.GetFollowUserId then
 			local Success, Result = pcall(ExperienceService1.GetFollowUserId, ExperienceService1)
@@ -181,7 +181,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 		end
 	end
 	
-	local _ = function() --[[ Line: 271 | Named "readQueuePosition" ]]
+	local _ = function()
 		-- upvalues: QueuePositionEnabledEngineFeature (upval), ExperienceService1 (copy)
 		if QueuePositionEnabledEngineFeature and ExperienceService1.GetQueuePosition then
 			local Success, Result = pcall(ExperienceService1.GetQueuePosition, ExperienceService1)
@@ -192,7 +192,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 		end
 	end
 	
-	local function updateQueuePosition() --[[ Line: 279 ]]
+	local function updateQueuePosition()
 		-- upvalues: Signal2_3 (copy), QueuePositionEnabledEngineFeature (upval), ExperienceService1 (copy)
 		local v2 = nil
 		if QueuePositionEnabledEngineFeature and ExperienceService1.GetQueuePosition then
@@ -204,7 +204,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 		Signal2_3(v2)
 	end
 	
-	local _ = function(QUEUEDSTATE) --[[ Line: 283 | Named "logQueueExposureIfNeeded" ]]
+	local _ = function(QUEUEDSTATE)
 		-- upvalues: Flag3 (ref), ConstantsModule (upval), Signal (copy), ExperienceService1 (copy), QueueExperimentation (upval)
 		if not Flag3 and QUEUEDSTATE == ConstantsModule.QUEUED_STATE and Signal(false) > 0 then
 			local v2 = nil
@@ -223,7 +223,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 		end
 	end
 	
-	local function updateJoinState(State) --[[ Line: 297 ]]
+	local function updateJoinState(State)
 		-- upvalues: Signal2_2 (copy), ConstantsModule (upval), Signal2_3 (copy), Flag3 (ref), Signal (copy), ExperienceService1 (copy), QueueExperimentation (upval)
 		if type(State) ~= "string" then return end
 		Signal2_2(State)
@@ -247,7 +247,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 		end
 	end
 	
-	local _ = function(p4: number) --[[ Line: 308 | Named "resolveUniverseId" ]]
+	local _ = function(p4: number)
 		-- upvalues: Flag2 (ref), Signal1 (copy), Signal2_1 (copy), Connection1 (ref)
 		if Flag2 or p4 <= 0 or Signal1(false) > 0 then return end
 		Signal2_1(p4)
@@ -259,7 +259,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 		Connection1 = nil
 	end
 	
-	local function watchUniverseId() --[[ Line: 316 ]]
+	local function watchUniverseId()
 		-- upvalues: Connection1 (ref), Flag2 (ref), Signal1 (copy), DataModel (copy), Signal2_1 (copy)
 		local Connection = Connection1
 		
@@ -269,7 +269,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 		Connection1 = nil
 		
 		if Flag2 or Signal1(false) > 0 then return end
-		Connection1 = DataModel:GetPropertyChangedSignal("GameId"):Connect(function() --[[ Line: 321 ]]
+		Connection1 = DataModel:GetPropertyChangedSignal("GameId"):Connect(function()
 			-- upvalues: DataModel (upval), Flag2 (upval), Signal1 (upval), Signal2_1 (upval), Connection1 (upval)
 			local GameId: number = DataModel.GameId
 			
@@ -298,7 +298,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 		end
 	end
 	
-	local _ = function(p4) --[[ Line: 327 | Named "fetchUniverseIdForPlace" ]]
+	local _ = function(p4)
 		-- upvalues: Signal1 (copy), DeferredThread1 (ref), FetchUniverseId (copy), Flag2 (ref), Signal (copy), Signal2_1 (copy), Connection1 (ref)
 		if Signal1(false) > 0 then return end
 		local Thread = DeferredThread1
@@ -306,7 +306,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 		if Thread and coroutine.status(Thread) ~= "dead" then
 			task.cancel(Thread)
 		end
-		DeferredThread1 = task.defer(function() --[[ Line: 332 ]]
+		DeferredThread1 = task.defer(function()
 			-- upvalues: FetchUniverseId (upval), p4 (copy), Flag2 (upval), Signal (upval), Signal1 (upval), Signal2_1 (upval), Connection1 (upval)
 			local Success, Result = pcall(FetchUniverseId, p4)
 			
@@ -323,14 +323,14 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 		end)
 	end
 	
-	local _ = function(p4) --[[ Line: 340 | Named "fetchGameDataForPlace" ]]
+	local _ = function(p4)
 		-- upvalues: DeferredThread (ref), FetchProductInfo (copy), Flag2 (ref), Signal (copy), MarketplaceGetMarketplaceAssetStoreModuleResult (copy)
 		local Thread = DeferredThread
 		
 		if Thread and coroutine.status(Thread) ~= "dead" then
 			task.cancel(Thread)
 		end
-		DeferredThread = task.defer(function() --[[ Line: 342 ]]
+		DeferredThread = task.defer(function()
 			-- upvalues: FetchProductInfo (upval), p4 (copy), Flag2 (upval), Signal (upval), MarketplaceGetMarketplaceAssetStoreModuleResult (upval)
 			local Success, Result = pcall(FetchProductInfo, p4)
 			
@@ -352,14 +352,14 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 		end)
 	end
 	
-	local _ = function() --[[ Line: 361 | Named "resolveChinaPolicy" ]]
+	local _ = function()
 		-- upvalues: DeferredThread2 (ref), FetchIsSubjectToChinaPolicies (copy), Flag2 (ref), Signal2_6 (copy)
 		local Thread = DeferredThread2
 		
 		if Thread and coroutine.status(Thread) ~= "dead" then
 			task.cancel(Thread)
 		end
-		DeferredThread2 = task.defer(function() --[[ Line: 363 ]]
+		DeferredThread2 = task.defer(function()
 			-- upvalues: FetchIsSubjectToChinaPolicies (upval), Flag2 (upval), Signal2_6 (upval)
 			local Success, Result = pcall(FetchIsSubjectToChinaPolicies)
 			
@@ -369,7 +369,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 		end)
 	end
 	
-	local _ = function(p4: number) --[[ Line: 371 | Named "beginRequests" ]]
+	local _ = function(p4: number)
 		-- upvalues: DeferredThread (ref), FetchProductInfo (copy), Flag2 (ref), Signal (copy), MarketplaceGetMarketplaceAssetStoreModuleResult (copy), Signal1 (copy), DeferredThread1 (ref), FetchUniverseId (copy), Signal2_1 (copy), Connection1 (ref)
 		if p4 <= 0 then return end
 		local Thread = DeferredThread
@@ -377,7 +377,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 		if Thread and coroutine.status(Thread) ~= "dead" then
 			task.cancel(Thread)
 		end
-		DeferredThread = task.defer(function() --[[ Line: 342 ]]
+		DeferredThread = task.defer(function()
 			-- upvalues: FetchProductInfo (upval), p4 (copy), Flag2 (upval), Signal (upval), MarketplaceGetMarketplaceAssetStoreModuleResult (upval)
 			local Success, Result = pcall(FetchProductInfo, p4)
 			
@@ -404,7 +404,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 		if Thread1 and coroutine.status(Thread1) ~= "dead" then
 			task.cancel(Thread1)
 		end
-		DeferredThread1 = task.defer(function() --[[ Line: 332 ]]
+		DeferredThread1 = task.defer(function()
 			-- upvalues: FetchUniverseId (upval), p4 (copy), Flag2 (upval), Signal (upval), Signal1 (upval), Signal2_1 (upval), Connection1 (upval)
 			local Success, Result = pcall(FetchUniverseId, p4)
 			
@@ -421,7 +421,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 		end)
 	end
 	
-	local _ = function(p4: number) --[[ Line: 379 | Named "resolvePlaceId" ]]
+	local _ = function(p4: number)
 		-- upvalues: Flag2 (ref), Signal (copy), Signal2 (copy), Connection (ref), DeferredThread (ref), FetchProductInfo (copy), MarketplaceGetMarketplaceAssetStoreModuleResult (copy), Signal1 (copy), DeferredThread1 (ref), FetchUniverseId (copy), Signal2_1 (copy), Connection1 (ref)
 		if Flag2 or p4 <= 0 or Signal(false) == p4 then return end
 		Signal2(p4)
@@ -438,7 +438,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 		if Thread and coroutine.status(Thread) ~= "dead" then
 			task.cancel(Thread)
 		end
-		DeferredThread = task.defer(function() --[[ Line: 342 ]]
+		DeferredThread = task.defer(function()
 			-- upvalues: FetchProductInfo (upval), p4 (copy), Flag2 (upval), Signal (upval), MarketplaceGetMarketplaceAssetStoreModuleResult (upval)
 			local Success, Result = pcall(FetchProductInfo, p4)
 			
@@ -465,7 +465,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 		if Thread1 and coroutine.status(Thread1) ~= "dead" then
 			task.cancel(Thread1)
 		end
-		DeferredThread1 = task.defer(function() --[[ Line: 332 ]]
+		DeferredThread1 = task.defer(function()
 			-- upvalues: FetchUniverseId (upval), p4 (copy), Flag2 (upval), Signal (upval), Signal1 (upval), Signal2_1 (upval), Connection1 (upval)
 			local Success, Result = pcall(FetchUniverseId, p4)
 			
@@ -483,7 +483,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 	end
 	
 	return {
-		getAssetInfo = SignalsModule.createComputed(function(p4) --[[ Line: 199 ]]
+		getAssetInfo = SignalsModule.createComputed(function(p4)
 			-- upvalues: Signal (copy), MarketplaceGetMarketplaceAssetStoreModuleResult (copy)
 			local SignalResult: number = Signal(p4)
 			
@@ -500,7 +500,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 			end
 		end),
 		getFollowUserId = Signal7,
-		getIsAutoTranslated = SignalsModule.createComputed(function(p4) --[[ Line: 215 ]]
+		getIsAutoTranslated = SignalsModule.createComputed(function(p4)
 			-- upvalues: Signal1 (copy), Flag (ref), LoadingScreenTelemetryModule (upval), DataResolver (copy)
 			local SignalResult: number = Signal1(p4)
 			
@@ -521,7 +521,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 		getQueueTreatment = Signal3,
 		getServerStatusText = Signal6,
 		getUniverseId = Signal1,
-		launchExperience = function() --[[ Line: 468 ]]
+		launchExperience = function()
 			-- upvalues: Signal (copy), ExperienceService1 (copy)
 			local SignalResult: number = Signal(false)
 			
@@ -529,7 +529,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 				ExperienceService1:LaunchExperience({ placeId = SignalResult })
 			end
 		end,
-		logQueuedStateButtonClick = function(ButtonName, TimeElapsedMs) --[[ Line: 482 ]]
+		logQueuedStateButtonClick = function(ButtonName, TimeElapsedMs)
 			-- upvalues: AUTOJOINTREATMENT (copy), LoadingScreenTelemetryModule (upval), FFlagEnableLuaAppsFollowUserId1 (upval), Signal7 (copy), Signal (copy), QueuePositionEnabledEngineFeature (upval), Signal5 (copy), Signal1 (copy)
 			if AUTOJOINTREATMENT then
 				LoadingScreenTelemetryModule.logQueuedStateButtonClick({
@@ -544,21 +544,21 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 				return
 			end
 		end,
-		showConnectionHealth = function() --[[ Line: 475 ]]
+		showConnectionHealth = function()
 			-- upvalues: GuiService1 (copy), Flag4 (ref)
 			if GuiService1.ShowStatsBasedOnInputString then
 				Flag4 = true
 				GuiService1:ShowStatsBasedOnInputString("ConnectionHealth")
 			end
 		end,
-		start = function() --[[ Line: 389 ]]
+		start = function()
 			-- upvalues: Flag1 (ref), Flag2 (ref), p3 (copy), DeferredThread2 (ref), FetchIsSubjectToChinaPolicies (copy), Signal2_6 (copy), Signal (copy), DeferredThread (ref), FetchProductInfo (copy), MarketplaceGetMarketplaceAssetStoreModuleResult (copy), Signal1 (copy), DeferredThread1 (ref), FetchUniverseId (copy), Signal2_1 (copy), Connection1 (ref), Connection (ref), DataModel (copy), Signal2 (copy), watchUniverseId (copy), Signal2_5 (copy), FFlagEnableLuaAppsFollowUserId1 (upval), ExperienceService1 (copy), GuiService1 (copy), UiMessageChangedConnection (ref), Signal2_4 (copy), QueueExperimentation (upval), Signal2_2 (copy), ConstantsModule (upval), Signal2_3 (copy), Flag3 (ref), PlaceJoinStateChangedConnection (ref), updateJoinState (copy), QueuePositionEnabledEngineFeature (upval), QueuePositionChangedConnection (ref), updateQueuePosition (copy)
 			if Flag1 or Flag2 then return end
 			Flag1 = true
 			
 			if p3 == nil then
 				if Signal(false) <= 0 then
-					Connection = DataModel:GetPropertyChangedSignal("PlaceId"):Connect(function() --[[ Line: 400 ]]
+					Connection = DataModel:GetPropertyChangedSignal("PlaceId"):Connect(function()
 						-- upvalues: DataModel (upval), Flag2 (upval), Signal (upval), Signal2 (upval), Connection (upval), DeferredThread (upval), FetchProductInfo (upval), MarketplaceGetMarketplaceAssetStoreModuleResult (upval), Signal1 (upval), DeferredThread1 (upval), FetchUniverseId (upval), Signal2_1 (upval), Connection1 (upval)
 						local PlaceId: number = DataModel.PlaceId
 						
@@ -578,7 +578,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 							if Thread and coroutine.status(Thread) ~= "dead" then
 								task.cancel(Thread)
 							end
-							DeferredThread = task.defer(function() --[[ Line: 342 ]]
+							DeferredThread = task.defer(function()
 								-- upvalues: FetchProductInfo (upval), PlaceId (copy), Flag2 (upval), Signal (upval), MarketplaceGetMarketplaceAssetStoreModuleResult (upval)
 								local Success, Result = pcall(FetchProductInfo, PlaceId)
 								
@@ -605,7 +605,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 							if Thread1 and coroutine.status(Thread1) ~= "dead" then
 								task.cancel(Thread1)
 							end
-							DeferredThread1 = task.defer(function() --[[ Line: 332 ]]
+							DeferredThread1 = task.defer(function()
 								-- upvalues: FetchUniverseId (upval), PlaceId (copy), Flag2 (upval), Signal (upval), Signal1 (upval), Signal2_1 (upval), Connection1 (upval)
 								local Success, Result = pcall(FetchUniverseId, PlaceId)
 								
@@ -629,7 +629,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 				if Thread5 and coroutine.status(Thread5) ~= "dead" then
 					task.cancel(Thread5)
 				end
-				DeferredThread2 = task.defer(function() --[[ Line: 363 ]]
+				DeferredThread2 = task.defer(function()
 					-- upvalues: FetchIsSubjectToChinaPolicies (upval), Flag2 (upval), Signal2_6 (upval)
 					local Success, Result = pcall(FetchIsSubjectToChinaPolicies)
 					
@@ -648,7 +648,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 				Signal2_5(v2)
 				
 				if GuiService1.UiMessageChanged then
-					UiMessageChangedConnection = GuiService1.UiMessageChanged:Connect(function(MsgType, NewUiMessage) --[[ Line: 408 ]]
+					UiMessageChangedConnection = GuiService1.UiMessageChanged:Connect(function(MsgType, NewUiMessage)
 						-- upvalues: Signal2_4 (upval)
 						if MsgType == Enum.UiMessageType.UiMessageInfo and type(NewUiMessage) == "string" then
 							Signal2_4(NewUiMessage)
@@ -725,7 +725,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 						if Thread6 and coroutine.status(Thread6) ~= "dead" then
 							task.cancel(Thread6)
 						end
-						DeferredThread = task.defer(function() --[[ Line: 342 ]]
+						DeferredThread = task.defer(function()
 							-- upvalues: FetchProductInfo (upval), PlaceId (copy), Flag2 (upval), Signal (upval), MarketplaceGetMarketplaceAssetStoreModuleResult (upval)
 							local Success, Result = pcall(FetchProductInfo, PlaceId)
 							
@@ -752,7 +752,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 						if Thread2 and coroutine.status(Thread2) ~= "dead" then
 							task.cancel(Thread2)
 						end
-						DeferredThread1 = task.defer(function() --[[ Line: 332 ]]
+						DeferredThread1 = task.defer(function()
 							-- upvalues: FetchUniverseId (upval), PlaceId (copy), Flag2 (upval), Signal (upval), Signal1 (upval), Signal2_1 (upval), Connection1 (upval)
 							local Success, Result = pcall(FetchUniverseId, PlaceId)
 							
@@ -779,7 +779,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 					if Thread and coroutine.status(Thread) ~= "dead" then
 						task.cancel(Thread)
 					end
-					DeferredThread = task.defer(function() --[[ Line: 342 ]]
+					DeferredThread = task.defer(function()
 						-- upvalues: FetchProductInfo (upval), SignalResult1 (copy), Flag2 (upval), Signal (upval), MarketplaceGetMarketplaceAssetStoreModuleResult (upval)
 						local Success, Result = pcall(FetchProductInfo, SignalResult1)
 						
@@ -806,7 +806,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 					if Thread7 and coroutine.status(Thread7) ~= "dead" then
 						task.cancel(Thread7)
 					end
-					DeferredThread1 = task.defer(function() --[[ Line: 332 ]]
+					DeferredThread1 = task.defer(function()
 						-- upvalues: FetchUniverseId (upval), SignalResult1 (copy), Flag2 (upval), Signal (upval), Signal1 (upval), Signal2_1 (upval), Connection1 (upval)
 						local Success, Result = pcall(FetchUniverseId, SignalResult1)
 						
@@ -829,7 +829,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 				if Thread1 and coroutine.status(Thread1) ~= "dead" then
 					task.cancel(Thread1)
 				end
-				DeferredThread2 = task.defer(function() --[[ Line: 363 ]]
+				DeferredThread2 = task.defer(function()
 					-- upvalues: FetchIsSubjectToChinaPolicies (upval), Flag2 (upval), Signal2_6 (upval)
 					local Success, Result = pcall(FetchIsSubjectToChinaPolicies)
 					
@@ -845,7 +845,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 				if Thread3 and coroutine.status(Thread3) ~= "dead" then
 					task.cancel(Thread3)
 				end
-				DeferredThread = task.defer(function() --[[ Line: 342 ]]
+				DeferredThread = task.defer(function()
 					-- upvalues: FetchProductInfo (upval), SignalResult (copy), Flag2 (upval), Signal (upval), MarketplaceGetMarketplaceAssetStoreModuleResult (upval)
 					local Success, Result = pcall(FetchProductInfo, SignalResult)
 					
@@ -872,7 +872,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 				if Thread4 and coroutine.status(Thread4) ~= "dead" then
 					task.cancel(Thread4)
 				end
-				DeferredThread1 = task.defer(function() --[[ Line: 332 ]]
+				DeferredThread1 = task.defer(function()
 					-- upvalues: FetchUniverseId (upval), SignalResult (copy), Flag2 (upval), Signal (upval), Signal1 (upval), Signal2_1 (upval), Connection1 (upval)
 					local Success, Result = pcall(FetchUniverseId, SignalResult)
 					
@@ -889,7 +889,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 				end)
 			end
 		end,
-		destroy = function() --[[ Line: 440 ]]
+		destroy = function()
 			-- upvalues: Flag2 (ref), Connection (ref), Connection1 (ref), PlaceJoinStateChangedConnection (ref), QueuePositionChangedConnection (ref), UiMessageChangedConnection (ref), DeferredThread (ref), DeferredThread1 (ref), DeferredThread2 (ref), DataResolver (copy), DataCache (copy), Flag4 (ref), GuiService1 (copy), UserInputService (upval)
 			if Flag2 then return end
 			Flag2 = true
@@ -944,7 +944,7 @@ return function(p1: number, p2, p3) --[[ Line: 136 | Named "createTiltLoadingScr
 			
 			if Flag4 and GuiService1.CloseStatsBasedOnInputString then
 				local Connection7 = nil
-				Connection7 = UserInputService.InputBegan:Connect(function() --[[ Line: 458 ]]
+				Connection7 = UserInputService.InputBegan:Connect(function()
 					-- upvalues: Connection7 (ref), GuiService1 (upval)
 					if Connection7 then
 						Connection7:Disconnect()

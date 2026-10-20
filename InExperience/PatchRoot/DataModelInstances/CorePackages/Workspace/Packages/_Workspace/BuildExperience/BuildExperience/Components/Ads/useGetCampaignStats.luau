@@ -9,14 +9,14 @@ local config = {
 	adViews = false,
 	playtimeSeconds = false
 }
-local Computed = CreateComputedFunction(function() --[[ Line: 29 ]]
+local Computed = CreateComputedFunction(function()
 	return nil
 end)
-local Computed1 = CreateComputedFunction(function(): string --[[ Line: 32 ]]
+local Computed1 = CreateComputedFunction(function(): string
 	return "NotReady"
 end)
 
-local function hasFailedMetric(p1) --[[ Line: 36 ]]
+local function hasFailedMetric(p1)
 	if p1 == nil then
 		return false
 	else
@@ -26,7 +26,7 @@ local function hasFailedMetric(p1) --[[ Line: 36 ]]
 	end
 end
 
-return function(UniverseId, p1) --[[ Line: 44 | Named "useGetCampaignStats" ]]
+return function(UniverseId, p1)
 	-- upvalues: CampaignStatsModule (copy), ReactModule (copy), hasFailedMetric (copy), UseSignalStateFunction (copy), Computed (copy), Computed1 (copy), config (copy)
 	local P2 = p1 or CampaignStatsModule.getCampaignStatsStore(false)
 	local IsNotUniverseIdMatch: boolean = UniverseId ~= nil and UniverseId ~= 0

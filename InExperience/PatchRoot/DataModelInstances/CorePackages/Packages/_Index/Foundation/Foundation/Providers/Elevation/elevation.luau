@@ -9,7 +9,7 @@ local config = {
 
 return {
 	ELEVATION_LAYERS = config,
-	getRelativeIndex = function(p1) --[[ Line: 23 ]]
+	getRelativeIndex = function(p1)
 		-- upvalues: config (copy)
 		return p1.zIndex - config[p1.layer].start
 	end

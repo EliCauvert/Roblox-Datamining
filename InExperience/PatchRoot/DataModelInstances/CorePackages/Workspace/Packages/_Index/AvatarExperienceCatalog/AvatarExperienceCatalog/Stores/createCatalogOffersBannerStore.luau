@@ -12,7 +12,7 @@ local MockGetOffersForUserFunction = require(AvatarExperienceCatalog.Api.GetMark
 local _ = require(AvatarExperienceCatalog.Api.GetMarketplaceOffersBanner.MarketplaceOffersBannerTypes)
 local GetLocalUserIdModule = require(AvatarExperienceCatalog.Utils.getLocalUserId)
 
-return function() --[[ Line: 53 | Named "createCatalogOffersBannerStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy), FFlagAXCatalogOffersBannerMockApi (copy), MockGetOffersForUserFunction (copy), SendAXCounterV2Function (copy), ConstantsModule (copy), GetLocalUserIdModule (copy), Players (copy), GetMarketplaceOffersBannerFunction (copy), PurchasePromptLiteModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(nil)
 	local Signal1, Signal2_1 = SignalsModule.createSignal(false)
@@ -20,9 +20,9 @@ return function() --[[ Line: 53 | Named "createCatalogOffersBannerStore" ]]
 	local Signal4, Signal2_3 = SignalsModule.createSignal(false)
 	local v1 = nil
 	
-	local function notifyPurchaseCompleted() --[[ Line: 65 ]] end
+	local function notifyPurchaseCompleted() end
 	
-	local function fetchOffers(p1, p2) --[[ Line: 67 ]]
+	local function fetchOffers(p1, p2)
 		-- upvalues: v1 (ref), Signal2_2 (copy), Signal2_3 (copy), FFlagAXCatalogOffersBannerMockApi (upval), MockGetOffersForUserFunction (upval), SendAXCounterV2Function (upval), ConstantsModule (upval), Signal2 (copy), GetLocalUserIdModule (upval), Players (upval), GetMarketplaceOffersBannerFunction (upval)
 		v1 = p1
 		Signal2_2(true)
@@ -30,7 +30,7 @@ return function() --[[ Line: 53 | Named "createCatalogOffersBannerStore" ]]
 		local Flag1 = false
 		local Callback = nil
 		
-		local function _(p3) --[[ Line: 78 | Named "finishOnce" ]]
+		local function _(p3)
 			-- upvalues: Flag1 (ref), Signal2_2 (upval), Signal2_3 (upval)
 			if Flag1 then return end
 			Flag1 = true
@@ -41,7 +41,7 @@ return function() --[[ Line: 53 | Named "createCatalogOffersBannerStore" ]]
 			end
 		end
 		
-		local function cleanup() --[[ Line: 89 ]]
+		local function cleanup()
 			-- upvalues: Flag (ref), Callback (ref), Flag1 (ref), Signal2_2 (upval)
 			if Flag then return end
 			Flag = true
@@ -60,7 +60,7 @@ return function() --[[ Line: 53 | Named "createCatalogOffersBannerStore" ]]
 		if FFlagAXCatalogOffersBannerMockApi then
 			local MockGetOffersForUserResult, MockGetOffersForUserResult2 = MockGetOffersForUserFunction()
 			Callback = MockGetOffersForUserResult2
-			MockGetOffersForUserResult:andThen(function(Result) --[[ Line: 104 ]]
+			MockGetOffersForUserResult:andThen(function(Result)
 				-- upvalues: Flag (ref), SendAXCounterV2Function (upval), ConstantsModule (upval), Signal2 (upval), Flag1 (ref), Signal2_2 (upval), Signal2_3 (upval)
 				if not Flag and Result then
 					SendAXCounterV2Function(ConstantsModule.COUNTERS.CatalogOffersBanner.fetchSucceeded)
@@ -75,7 +75,7 @@ return function() --[[ Line: 53 | Named "createCatalogOffersBannerStore" ]]
 				if not Flag2 then
 					Signal2_3(true)
 				end
-			end):catch(function(Err) --[[ Line: 111 ]]
+			end):catch(function(Err)
 				-- upvalues: Flag (ref), SendAXCounterV2Function (upval), ConstantsModule (upval), Flag1 (ref), Signal2_2 (upval), Signal2_3 (upval)
 				if not Flag then
 					SendAXCounterV2Function(ConstantsModule.COUNTERS.CatalogOffersBanner.fetchFailed)
@@ -99,7 +99,7 @@ return function() --[[ Line: 53 | Named "createCatalogOffersBannerStore" ]]
 		if LocalUserIdModule ~= nil then
 			local MarketplaceOffersBanner, MarketplaceOffersBanner2 = GetMarketplaceOffersBannerFunction(LocalUserIdModule, p1, p2)
 			Callback = MarketplaceOffersBanner2
-			MarketplaceOffersBanner:andThen(function(Result) --[[ Line: 131 ]]
+			MarketplaceOffersBanner:andThen(function(Result)
 				-- upvalues: Flag (ref), SendAXCounterV2Function (upval), ConstantsModule (upval), Signal2 (upval), Flag1 (ref), Signal2_2 (upval), Signal2_3 (upval)
 				if not Flag then
 					if Result then
@@ -116,7 +116,7 @@ return function() --[[ Line: 53 | Named "createCatalogOffersBannerStore" ]]
 				if not Flag2 then
 					Signal2_3(true)
 				end
-			end):catch(function(Err) --[[ Line: 140 ]]
+			end):catch(function(Err)
 				-- upvalues: Flag (ref), SendAXCounterV2Function (upval), ConstantsModule (upval), Flag1 (ref), Signal2_2 (upval), Signal2_3 (upval)
 				if not Flag then
 					SendAXCounterV2Function(ConstantsModule.COUNTERS.CatalogOffersBanner.fetchFailed)
@@ -142,10 +142,10 @@ return function() --[[ Line: 53 | Named "createCatalogOffersBannerStore" ]]
 			Signal2_2(false)
 			Signal2_3(true)
 		end
-		return function() --[[ Line: 125 ]] end
+		return function() end
 	end
 	
-	PurchasePromptLiteModule.Events.purchaseCompletedEvent:Connect(function() --[[ Line: 154 ]]
+	PurchasePromptLiteModule.Events.purchaseCompletedEvent:Connect(function()
 		-- upvalues: v1 (ref), Signal3 (copy), fetchOffers (copy)
 		if not v1 then return end
 		if not Signal3(false) then

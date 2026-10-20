@@ -1,7 +1,7 @@
 ﻿local HttpService = game:GetService("HttpService")
 local UrlBuilder = require(script:FindFirstAncestor("PhoneUpsell").Parent.UrlBuilder).UrlBuilder
 
-return function(Callback, Text: string) --[[ Line: 19 ]]
+return function(Callback, Text: string)
 	-- upvalues: UrlBuilder (copy), HttpService (copy)
 	assert(type(Text) == "string", "invalid code in verify phone code")
 	assert(not string.match(Text, "%D"), "invalid code in verify phone code")

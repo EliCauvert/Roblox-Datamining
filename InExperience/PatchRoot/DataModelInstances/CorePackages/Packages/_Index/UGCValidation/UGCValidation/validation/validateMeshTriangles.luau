@@ -5,10 +5,10 @@ local PcallDeferredModule = require(Parent.util.pcallDeferred)
 local AnalyticsModule = require(Parent.Analytics)
 local ConstantsModule = require(Parent.Constants)
 
-return function(p1, p2, p3) --[[ Line: 12 | Named "validateMeshTriangles" ]]
+return function(p1, p2, p3)
 	-- upvalues: PcallDeferredModule (copy), UGCValidationService (copy), ConstantsModule (copy), AnalyticsModule (copy)
 	local IsServer = p3.isServer
-	local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function() --[[ Line: 19 ]]
+	local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function()
 		-- upvalues: UGCValidationService (upval), p1 (copy)
 		return UGCValidationService:GetEditableMeshTriCount(p1.editableMesh)
 	end, p3)

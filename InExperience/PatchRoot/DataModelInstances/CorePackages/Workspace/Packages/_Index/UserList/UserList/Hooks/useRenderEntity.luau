@@ -8,7 +8,7 @@ local FFlagUserListCtaIntegrationEnabled = require(Parent.SharedFlags).FFlagUser
 local FFlagAddStatusIndicatorToBaseRow = require(Parent.SharedFlags).FFlagAddStatusIndicatorToBaseRow
 local FFlagUserListSurfaceExtensions = require(Parent.SharedFlags).FFlagUserListSurfaceExtensions
 
-return function(p1) --[[ Line: 42 | Named "useRenderEntity" ]]
+return function(p1)
 	-- upvalues: FFlagUserListSurfaceExtensions (copy), ReactModule (copy), View (copy), EntityRow (copy), FFlagUserListCtaIntegrationEnabled (copy), FFlagAddStatusIndicatorToBaseRow (copy)
 	local OnActivated = p1.onActivated
 	local RenderRowFunction = p1.renderRow
@@ -17,11 +17,11 @@ return function(p1) --[[ Line: 42 | Named "useRenderEntity" ]]
 	local LayoutMode = p1.layoutMode
 	local FirstRowRef = if FFlagUserListSurfaceExtensions then p1.firstRowRef else nil
 	
-	return (ReactModule.useCallback(function(p2, LayoutOrder, Size) --[[ Line: 51 ]]
+	return (ReactModule.useCallback(function(p2, LayoutOrder, Size)
 		-- upvalues: EntitiesMap (copy), RenderRowFunction (copy), OnActivated (copy), ReactModule (upval), View (upval), FFlagUserListSurfaceExtensions (upval), FirstRowRef (copy), EntityRow (upval), FFlagUserListCtaIntegrationEnabled (upval), FFlagAddStatusIndicatorToBaseRow (upval), Configs (copy), LayoutMode (copy)
 		local Entities = EntitiesMap[p2]
 		
-		return if Entities then if RenderRowFunction then RenderRowFunction(function(p3) --[[ Line: 59 ]]
+		return if Entities then if RenderRowFunction then RenderRowFunction(function(p3)
 			-- upvalues: Entities (copy), LayoutOrder (copy), OnActivated (upval), ReactModule (upval), View (upval), Size (copy), FFlagUserListSurfaceExtensions (upval), FirstRowRef (upval), EntityRow (upval), FFlagUserListCtaIntegrationEnabled (upval), FFlagAddStatusIndicatorToBaseRow (upval), Configs (upval), LayoutMode (upval)
 			return ReactModule.createElement(View, {
 				tag = "size-full-full",
@@ -31,7 +31,7 @@ return function(p1) --[[ Line: 42 | Named "useRenderEntity" ]]
 			}, {
 				ReactModule.createElement(EntityRow, {
 					entity = Entities,
-					onActivated = if p3.onRowActivated then function() --[[ Line: 62 ]]
+					onActivated = if p3.onRowActivated then function()
 						-- upvalues: p3 (copy), Entities (upval), LayoutOrder (upval)
 						p3.onRowActivated(Entities.id, Entities.type, LayoutOrder)
 					end else OnActivated,

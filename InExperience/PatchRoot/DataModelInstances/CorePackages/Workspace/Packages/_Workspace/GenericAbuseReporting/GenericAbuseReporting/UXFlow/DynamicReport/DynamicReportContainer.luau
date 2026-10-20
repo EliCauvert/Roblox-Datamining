@@ -16,10 +16,10 @@ local FFlagEnableMomentsCommentReporting = SharedFlagsModule.FFlagEnableMomentsC
 local FFlagEnableNewReportFlowGameTile = SharedFlagsModule.FFlagEnableNewReportFlowGameTile
 local FFlagAbuseReportAttributes = SharedFlagsModule.FFlagAbuseReportAttributes
 
-local function DynamicReportV2Adapter(p1) --[[ Line: 52 ]]
+local function DynamicReportV2Adapter(p1)
 	-- upvalues: ReactModule (copy), DynamicReportV2ContainerModule (copy)
 	local TargetId = p1.targetId
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 54 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: TargetId (copy)
 		if TargetId == nil then
 			return nil
@@ -42,7 +42,7 @@ local function DynamicReportV2Adapter(p1) --[[ Line: 52 ]]
 	})
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 76 | Named "DynamicReportContainer" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FFlagAbuseReportAttributes (copy), AbuseVectorModule (copy), FFlagEnableMomentsCommentReporting (copy), FFlagEnableNewReportFlowGameTile (copy), ReactModule (copy), DynamicReportV2Adapter (copy), DynamicReportV2ContainerModule (copy), LayerCollectorProvider (copy), AbuseReportBeduiProviderModule (copy), AbuseReportFormDataProviderModule (copy), FFlagAddThumbnailSelectorReport (copy), AbuseReportAnalyticsProviderModule (copy), DynamicReportModule (copy)
 	if FFlagAbuseReportAttributes and p1.targetId ~= nil and (p1.attributes ~= nil or p1.analyticsTargetId ~= nil) then
 		error("targetId is mutually exclusive with attributes and analyticsTargetId")

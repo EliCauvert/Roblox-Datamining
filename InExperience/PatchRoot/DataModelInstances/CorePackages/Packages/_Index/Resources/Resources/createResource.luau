@@ -1,9 +1,9 @@
 ﻿local _ = require(script.Parent.types)
 
-local function _(p1) --[[ Line: 5 | Named "once" ]]
+local function _(p1)
 	local v1 = false
 	
-	return function() --[[ Line: 7 | Named "notAgain" ]]
+	return function()
 		-- upvalues: v1 (ref), p1 (copy)
 		if not v1 then
 			v1 = true
@@ -12,7 +12,7 @@ local function _(p1) --[[ Line: 5 | Named "once" ]]
 	end
 end
 
-local function disposeChildren(p1) --[[ Line: 16 ]]
+local function disposeChildren(p1)
 	local List = {}
 	
 	for i = #p1, 1, -1 do
@@ -27,12 +27,12 @@ local function disposeChildren(p1) --[[ Line: 16 ]]
 	end
 end
 
-return function(p2) --[[ Line: 32 | Named "createResource" ]]
+return function(p2)
 	-- upvalues: disposeChildren (copy)
 	local Flag = false
 	local List = {}
 	
-	local function dispose() --[[ Line: 37 ]]
+	local function dispose()
 		-- upvalues: Flag (ref), List (ref), disposeChildren (upval)
 		if not Flag then
 			Flag = true
@@ -42,7 +42,7 @@ return function(p2) --[[ Line: 32 | Named "createResource" ]]
 		end
 	end
 	
-	local function _(p3) --[[ Line: 46 | Named "capture" ]]
+	local function _(p3)
 		-- upvalues: Flag (ref), List (ref)
 		if Flag then
 			error("attempted to track a child after the resource has been disposed")
@@ -55,13 +55,13 @@ return function(p2) --[[ Line: 32 | Named "createResource" ]]
 	
 	local v1 = false
 	
-	return function() --[[ Line: 7 | Named "notAgain" ]]
+	return function()
 		-- upvalues: v1 (ref), dispose (copy)
 		if not v1 then
 			v1 = true
 			dispose()
 		end
-	end, (function(p3, ...) --[[ Line: 59 | Named "handleError" ]]
+	end, (function(p3, ...)
 		-- upvalues: Flag (ref), List (ref), disposeChildren (upval)
 		if not p3 then
 			if not Flag then
@@ -73,7 +73,7 @@ return function(p2) --[[ Line: 32 | Named "createResource" ]]
 			error((select(1, ...)))
 		end
 		return ...
-	end)(pcall(p2, function(p3, ...) --[[ Line: 54 | Named "own" ]]
+	end)(pcall(p2, function(p3, ...)
 		-- upvalues: Flag (ref), List (ref)
 		if Flag then
 			error("attempted to track a child after the resource has been disposed")

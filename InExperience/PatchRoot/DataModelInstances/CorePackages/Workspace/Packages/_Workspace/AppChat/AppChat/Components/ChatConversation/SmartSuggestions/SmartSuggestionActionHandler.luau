@@ -1,24 +1,24 @@
 ﻿local SuggestionType = require(script.Parent.Types).SuggestionType
 
 return {
-	createSmartSuggestionActionHandler = function(p1) --[[ Line: 21 ]]
+	createSmartSuggestionActionHandler = function(p1)
 		-- upvalues: SuggestionType (copy)
 		local config = {
-			[SuggestionType.Message] = function(p2, p3) --[[ Line: 25 ]]
+			[SuggestionType.Message] = function(p2, p3)
 				-- upvalues: p1 (copy)
 				return p1.sendMessage(p3, p2.message.text)
 			end,
-			[SuggestionType.GameCard] = function(p2, p3) --[[ Line: 28 ]]
+			[SuggestionType.GameCard] = function(p2, p3)
 				-- upvalues: p1 (copy)
 				return p1.sendGameLinkChatMessage(p3, p2.game_card.universe_id)
 			end,
-			[SuggestionType.StartParty] = function(_, p2) --[[ Line: 31 ]]
+			[SuggestionType.StartParty] = function(_, p2)
 				-- upvalues: p1 (copy)
 				return p1.startParty(p2)
 			end
 		}
 		
-		return function(p2, p3) --[[ Line: 36 ]]
+		return function(p2, p3)
 			-- upvalues: config (copy)
 			local Entry = config[p2.type]
 			

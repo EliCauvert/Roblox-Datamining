@@ -47,7 +47,7 @@ local BadgeTypeModule = require(Parent.Enums.BadgeType)
 local _ = require(Parent.Enums.VirtualItemBadgeType)
 local _ = require(Parent.ProductPurchase.v3.UnifiedProductPurchaseModalTypes)
 
-local function UpsellProductDetailsLegacyImpl(p1, p2) --[[ Line: 97 ]]
+local function UpsellProductDetailsLegacyImpl(p1, p2)
 	-- upvalues: BadgeTypeModule (copy), ReactModule (copy), View (copy), Text (copy), FormatNumberModule (copy), LocalizationService (copy), YellowBadgeModule (copy)
 	local Popular = if p1.badgeType == BadgeTypeModule.Popular then p2.Popular elseif p1.badgeType == BadgeTypeModule.LastPurchased then p2.LastPurchased else nil
 	local FireFill = if p1.badgeType == BadgeTypeModule.Popular then "icons/menu/fire_fill" else nil
@@ -92,7 +92,7 @@ local function UpsellProductDetailsLegacyImpl(p1, p2) --[[ Line: 97 ]]
 	})
 end
 
-local function UpsellProductDetailsMultiDisplayImpl(p1, p2) --[[ Line: 170 ]]
+local function UpsellProductDetailsMultiDisplayImpl(p1, p2)
 	-- upvalues: GetFFlagIAPExperienceUseUpsellBadgeHelperModule (copy), GetUpsellBadgeInfoModule (copy), BadgeTypeModule (copy), Enums (copy), ReactModule (copy), View (copy), Text (copy), GetIconRichTextFunction (copy), FormatNumberModule (copy), LocalizationService (copy), GrayBadgeModule (copy)
 	local Text1 = nil
 	local Icon = nil
@@ -146,7 +146,7 @@ local function UpsellProductDetailsMultiDisplayImpl(p1, p2) --[[ Line: 170 ]]
 	})
 end
 
-local function UpsellProductDetails(p1) --[[ Line: 261 ]]
+local function UpsellProductDetails(p1)
 	-- upvalues: UseLocalizationFunction (copy), GetFFlagIAPExperienceEnableMultiDisplayUpsellModule (copy), UpsellProductDetailsMultiDisplayImpl (copy), UpsellProductDetailsLegacyImpl (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		Popular = "IAPExperience.RobuxUpsell.Text.PopularItem",
@@ -159,7 +159,7 @@ local function UpsellProductDetails(p1) --[[ Line: 261 ]]
 	return if GetFFlagIAPExperienceEnableMultiDisplayUpsellModule() then UpsellProductDetailsMultiDisplayImpl(p1, UseLocalizationResult) else UpsellProductDetailsLegacyImpl(p1, UseLocalizationResult)
 end
 
-local function UnifiedRobuxUpsellModalV2(p1) --[[ Line: 312 ]]
+local function UnifiedRobuxUpsellModalV2(p1)
 	-- upvalues: FFlagEnableRobuxUpsellPlusButtonExperimentModule (copy), UseCartPricingModule (copy), ReactModule (copy), UseLocalizationFunction (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), FFlagAXMISWithBlackbird (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), UnifiedPurchaseModalTypeEnumModule (copy), CompactUpsellModalBreakpoint (copy), FFlagShouldFixDevSubsFlashingTitleModule (copy), UseFocusNavigationRefsModule (copy), BuildCartPricingOfferCheckboxesModule (copy), ButtonVariant (copy), Checkbox (copy), View (copy), FFlagShouldApplyDevSubsUpsellFixModule (copy), Image (copy), Text (copy), FFlagAXFixMISUpsellDiscountSummary (copy), ProductDetailsContainerModule (copy), Dialog (copy), DialogSize (copy), PriceSummaryModule (copy), UnifiedProductDetailsModule (copy), CartPricingLoadingModule (copy), GetFFlagIAPExperienceEnableMultiDisplayUpsellModule (copy), UpsellProductDetails (copy), ButtonGroup (copy), Orientation (copy), Enums (copy)
 	local RobloxPlusDiscountPercentage = if FFlagEnableRobuxUpsellPlusButtonExperimentModule and type(p1.robloxPlusDiscountPercentage) == "number" then p1.robloxPlusDiscountPercentage else nil
 	local OnRobloxPlusButtonActivated = if RobloxPlusDiscountPercentage == nil then nil else p1.onRobloxPlusButtonActivated
@@ -170,7 +170,7 @@ local function UnifiedRobuxUpsellModalV2(p1) --[[ Line: 312 ]]
 		onCartOfferAppliedChanged = p1.onCartOfferAppliedChanged
 	})
 	local UseStateResult, UseStateResult2 = ReactModule.useState(p1.postPurchaseActions or {})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 330 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult (copy), p1 (copy)
 		if UseStateResult and p1.setPostPurchaseActions then
 			p1.setPostPurchaseActions(UseStateResult)
@@ -181,7 +181,7 @@ local function UnifiedRobuxUpsellModalV2(p1) --[[ Line: 312 ]]
 		p1.setPostPurchaseActions,
 		UseStateResult
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 338 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseCartPricingModuleResult (copy), p1 (copy)
 		return if UseCartPricingModuleResult.showCartOfferUi then UseCartPricingModuleResult.mergedProductForDetails else p1.product
 	end, {
@@ -209,7 +209,7 @@ local function UnifiedRobuxUpsellModalV2(p1) --[[ Line: 312 ]]
 	})
 	local IsYBelow: boolean = if FFlagEnableUnifiedPurchaseFlowForDevSubs and p1.purchaseModalType == UnifiedPurchaseModalTypeEnumModule.DeveloperSubscription then p1.screenSize.Y > 0 and p1.screenSize.Y < CompactUpsellModalBreakpoint else p1.screenSize.Y < CompactUpsellModalBreakpoint
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(UseLocalizationResult.BuyRobuxAndItem)
-	ReactModule.useEffect(function() --[[ Line: 382 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (upval), UnifiedPurchaseModalTypeEnumModule (upval), UseLocalizationResult (copy), FFlagShouldFixDevSubsFlashingTitleModule (upval), UseStateResult2_1 (copy), FFlagAXMISWithBlackbird (upval), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (upval)
 		local PurchaseModalType = p1.purchaseModalType
 		
@@ -254,9 +254,9 @@ local function UnifiedRobuxUpsellModalV2(p1) --[[ Line: 312 ]]
 		if FFlagAXMISWithBlackbird then UseLocalizationResult.BuyRobuxOnly else nil
 	})
 	local UseFocusNavigationRefsModuleResult, UseFocusNavigationRefsModuleResult2 = UseFocusNavigationRefsModule(p1.buttons.cancelPurchaseActivated, p1.onBuyItemButtonMounted)
-	ReactModule.useEffect(function() --[[ Line: 437 ]] end, { p1.upsellSuggestions })
+	ReactModule.useEffect(function() end, { p1.upsellSuggestions })
 	
-	local function _(p2) --[[ Line: 439 ]]
+	local function _(p2)
 		-- upvalues: p1 (copy)
 		p1.onUpsellSuggestionsSelected(p2)
 	end
@@ -285,7 +285,7 @@ local function UnifiedRobuxUpsellModalV2(p1) --[[ Line: 312 ]]
 		isDisabled = IsBuyItemDisabled
 	})))
 	
-	for i, value in pairs((ReactModule.useMemo(function() --[[ Line: 475 ]]
+	for i, value in pairs((ReactModule.useMemo(function()
 		-- upvalues: UseStateResult (copy), ReactModule (upval), Checkbox (upval), CountCartPricingOffers (copy), IsBuyItemDisabled (copy), UseStateResult2 (copy)
 		local Elements = {}
 		
@@ -296,9 +296,9 @@ local function UnifiedRobuxUpsellModalV2(p1) --[[ Line: 312 ]]
 				label = value.label,
 				isChecked = value.isActionSelected,
 				isDisabled = IsBuyItemDisabled,
-				onActivated = function() --[[ Line: 484 ]]
+				onActivated = function()
 					-- upvalues: UseStateResult2 (upval), i (copy), value (copy)
-					UseStateResult2(function(Tbl) --[[ Line: 485 ]]
+					UseStateResult2(function(Tbl)
 						-- upvalues: i (upval), value (upval)
 						local Copy = table.clone(Tbl)
 						Copy[i] = {
@@ -427,7 +427,7 @@ local function UnifiedRobuxUpsellModalV2(p1) --[[ Line: 312 ]]
 				product = upsellSuggestion,
 				selected = p1.selectedUpsellIndex == LayoutOrder,
 				isCompact = IsYBelow,
-				onSelected = function() --[[ Line: 631 ]]
+				onSelected = function()
 					-- upvalues: LayoutOrder (copy), p1 (copy)
 					p1.onUpsellSuggestionsSelected(LayoutOrder)
 				end,
@@ -442,7 +442,7 @@ local function UnifiedRobuxUpsellModalV2(p1) --[[ Line: 312 ]]
 				product = p1.upsellSuggestions[1],
 				selected = p1.selectedUpsellIndex == 1,
 				isCompact = IsYBelow,
-				onSelected = function() --[[ Line: 645 ]]
+				onSelected = function()
 					-- upvalues: p1 (copy)
 					p1.onUpsellSuggestionsSelected(1)
 				end
@@ -452,7 +452,7 @@ local function UnifiedRobuxUpsellModalV2(p1) --[[ Line: 312 ]]
 				product = p1.upsellSuggestions[2],
 				selected = p1.selectedUpsellIndex == 2,
 				isCompact = IsYBelow,
-				onSelected = function() --[[ Line: 655 ]]
+				onSelected = function()
 					-- upvalues: p1 (copy)
 					p1.onUpsellSuggestionsSelected(2)
 				end,
@@ -512,7 +512,7 @@ local function UnifiedRobuxUpsellModalV2(p1) --[[ Line: 312 ]]
 	return CreateElementFunction3(Root, config1, config2)
 end
 
-return function(p2) --[[ Line: 717 | Named "UnifiedRobuxUpsellModalV2Container" ]]
+return function(p2)
 	-- upvalues: ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), UnifiedRobuxUpsellModalV2 (copy)
 	return ReactModule.createElement(LocalizationProvider, {
 		localization = Localization.new(LocalizationService.RobloxLocaleId)

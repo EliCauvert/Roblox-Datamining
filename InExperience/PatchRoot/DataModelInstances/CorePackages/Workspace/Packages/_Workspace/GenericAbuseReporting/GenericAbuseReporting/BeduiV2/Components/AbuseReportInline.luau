@@ -18,7 +18,7 @@ local SlideTransitionModule = require(GenericAbuseReporting.BeduiV2.Components.S
 local UseArTranslationFunction = require(GenericAbuseReporting.BeduiV2.Utils.Translate.arTranslation).useArTranslation
 local INLINELANDSCAPEWIDTH = require(GenericAbuseReporting.BeduiV2.Components.LayoutSlots).INLINE_LANDSCAPE_WIDTH
 
-return ReactModule.memo(function(p1) --[[ Line: 42 | Named "AbuseReportInline" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), UseArTranslationFunction (copy), ReactModule (copy), AnimatePresence (copy), FeedbackModule (copy), INLINELANDSCAPEWIDTH (copy), SlideTransitionModule (copy), View (copy), UseScrollNavigationBindingsModule (copy), UseInExpFocusNavigationRefsModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), Icon (copy), IconName (copy), InputSize (copy), AbuseReportTooltipModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local TranslateIntoStringFunction = UseArTranslationFunction().translateIntoString
@@ -45,14 +45,14 @@ return ReactModule.memo(function(p1) --[[ Line: 42 | Named "AbuseReportInline" ]
 		direction = AbuseReportFlow.navigationDirection
 	})
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Config.display.titleDisclosure and Config.display.titleDisclosure.openByDefault or false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 102 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
-		UseStateResult2(function(p2): boolean --[[ Line: 103 ]]
+		UseStateResult2(function(p2): boolean
 			return not p2
 		end)
 	end, {})
 	local UseScrollNavigationBindingsModuleResult = UseScrollNavigationBindingsModule()
-	local UseInExpFocusNavigationRefsModuleResult = UseInExpFocusNavigationRefsModule(FocusNavigableSurfaceIdentifierEnum.CentralOverlay, ReactModule.useCallback(function() --[[ Line: 110 ]]
+	local UseInExpFocusNavigationRefsModuleResult = UseInExpFocusNavigationRefsModule(FocusNavigableSurfaceIdentifierEnum.CentralOverlay, ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {}), UseStateResult, UseStateResult)
@@ -71,7 +71,7 @@ return ReactModule.memo(function(p1) --[[ Line: 42 | Named "AbuseReportInline" ]
 				["row flex-between size-full-0 auto-y"] = not p1.shouldUseOverlaidControls
 			}
 		}, {
-			BackButtonContainer = ReactModule.useMemo(function() --[[ Line: 126 ]]
+			BackButtonContainer = ReactModule.useMemo(function()
 				-- upvalues: ReactModule (upval), View (upval), p1 (copy), AbuseReportFlow (copy), Icon (upval), IconName (upval), InputSize (upval)
 				return ReactModule.createElement(View, {
 					LayoutOrder = 1,
@@ -96,7 +96,7 @@ return ReactModule.memo(function(p1) --[[ Line: 42 | Named "AbuseReportInline" ]
 				AbuseReportFlow.goBack,
 				p1.shouldUseOverlaidControls
 			}),
-			AbuseReportTooltipContainer = ReactModule.useMemo(function() --[[ Line: 158 ]]
+			AbuseReportTooltipContainer = ReactModule.useMemo(function()
 				-- upvalues: Config (copy), ReactModule (upval), View (upval), p1 (copy), UseResult (copy), AbuseReportTooltipModule (upval), UseStateResult (copy), UseInExpFocusNavigationRefsModuleResult (copy), Icon (upval), IconName (upval), InputSize (upval)
 				return if Config.display.titleDisclosure then ReactModule.createElement(View, {
 					LayoutOrder = 3,

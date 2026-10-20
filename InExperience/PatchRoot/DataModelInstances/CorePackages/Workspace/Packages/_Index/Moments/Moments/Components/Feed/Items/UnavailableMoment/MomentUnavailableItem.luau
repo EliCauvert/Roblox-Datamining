@@ -8,7 +8,7 @@ local UseIsPagerItemActiveFunction = require(Moments.Components.VerticalPager).u
 local FFlagMomentsFeedAboveNavBarModule = require(Moments.Flags.FFlagMomentsFeedAboveNavBar)
 local UsePreferencesFunction = require(Parent.Foundation).Hooks.usePreferences
 
-return function(Frame) --[[ Line: 32 | Named "MomentUnavailableItem" ]]
+return function(Frame)
 	-- upvalues: UseFeedFunction (copy), UsePreferencesFunction (copy), MomentOverlayInsetContextModule (copy), FFlagMomentsFeedAboveNavBarModule (copy), UseIsPagerItemActiveFunction (copy), ReactModule (copy), MomentUnavailableViewModule (copy)
 	local UseFeedResult = UseFeedFunction()
 	local ReducedMotion = UsePreferencesFunction().reducedMotion
@@ -19,7 +19,7 @@ return function(Frame) --[[ Line: 32 | Named "MomentUnavailableItem" ]]
 	return ReactModule.createElement(MomentUnavailableViewModule, {
 		LayoutOrder = Frame.LayoutOrder,
 		isModerated = Frame.isModerated,
-		onNext = ReactModule.useCallback(function() --[[ Line: 41 ]]
+		onNext = ReactModule.useCallback(function()
 			-- upvalues: ScrollToNextFunction (copy)
 			if ScrollToNextFunction ~= nil then
 				ScrollToNextFunction()

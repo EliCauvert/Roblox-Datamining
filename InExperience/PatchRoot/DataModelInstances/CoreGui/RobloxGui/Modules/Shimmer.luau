@@ -7,7 +7,7 @@ local _TweenInfo = TweenInfo.new(1, Enum.EasingStyle.Linear, Enum.EasingDirectio
 local ShimmerModule = {}
 ShimmerModule.__index = ShimmerModule
 local config = {
-	PrimaryButton = function(Parent) --[[ Line: 16 ]]
+	PrimaryButton = function(Parent)
 		-- upvalues: CreateFunction (copy), Constants (copy)
 		return CreateFunction("ImageLabel")({
 			Name = "ShimmerFrame",
@@ -43,7 +43,7 @@ local config = {
 	end
 }
 
-function ShimmerModule.new(p1, p2) --[[ Line: 51 ]]
+function ShimmerModule.new(p1, p2)
 	-- upvalues: config (copy), ShimmerModule (copy), TweenService (copy), _TweenInfo (copy)
 	if not p2 or not config[p2] then return end
 	local self = setmetatable({}, ShimmerModule)
@@ -53,12 +53,12 @@ function ShimmerModule.new(p1, p2) --[[ Line: 51 ]]
 	return self
 end
 
-function ShimmerModule:play() --[[ Line: 61 ]]
+function ShimmerModule:play()
 	self._shimmer.Visible = true
 	self._shimmerAnimation:Play()
 end
 
-function ShimmerModule:stop() --[[ Line: 66 ]]
+function ShimmerModule:stop()
 	self._shimmerAnimation:Cancel()
 	self._shimmer.Visible = false
 end

@@ -3,15 +3,15 @@ local SignalsExperimentalModule = require(Parent.SignalsExperimental)
 local ActionHandlersModule = require(script.Parent.ActionHandlers)
 local FFlagSignalsRegistryOwnedFanout = require(Parent.SharedFlags).FFlagSignalsRegistryOwnedFanout
 
-return function(p1) --[[ Line: 8 | Named "createSignalsMiddleware" ]]
+return function(p1)
 	-- upvalues: FFlagSignalsRegistryOwnedFanout (copy), SignalsExperimentalModule (copy), ActionHandlersModule (copy)
-	return function(Callback, _) --[[ Line: 9 ]]
+	return function(Callback, _)
 		-- upvalues: FFlagSignalsRegistryOwnedFanout (upval), SignalsExperimentalModule (upval), ActionHandlersModule (upval), p1 (copy)
-		return function(p2) --[[ Line: 10 ]]
+		return function(p2)
 			-- upvalues: FFlagSignalsRegistryOwnedFanout (upval), SignalsExperimentalModule (upval), ActionHandlersModule (upval), p1 (upval), Callback (copy)
 			if FFlagSignalsRegistryOwnedFanout then
 				local v1 = nil
-				SignalsExperimentalModule.batch(function() --[[ Line: 13 ]]
+				SignalsExperimentalModule.batch(function()
 					-- upvalues: ActionHandlersModule (upval), p1 (upval), p2 (copy), v1 (ref), Callback (upval)
 					ActionHandlersModule.handleAction(p1, p2)
 					v1 = Callback(p2)
@@ -22,7 +22,7 @@ return function(p1) --[[ Line: 8 | Named "createSignalsMiddleware" ]]
 			local v1 = p1[p2.type]
 			
 			if v1 and #v1 > 0 then
-				SignalsExperimentalModule.batch(function() --[[ Line: 25 ]]
+				SignalsExperimentalModule.batch(function()
 					-- upvalues: v1 (copy), p2 (copy), Callback (upval)
 					local v2 = true
 					

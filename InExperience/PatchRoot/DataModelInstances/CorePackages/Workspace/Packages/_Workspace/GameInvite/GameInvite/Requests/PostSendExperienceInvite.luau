@@ -2,7 +2,7 @@
 local Url = require(script:FindFirstAncestor("GameInvite").Parent.Http).Url
 game:DefineFastFlag("LuaAppExperienceJoinIdempotencyKey", false)
 
-return function(Callback, RecipientUserId, PlaceId, Trigger, InviteMessageId, LaunchData) --[[ Line: 9 ]]
+return function(Callback, RecipientUserId, PlaceId, Trigger, InviteMessageId, LaunchData)
 	-- upvalues: HttpService (copy), Url (copy)
 	return Callback(string.format("%snotifications/v1/send-experience-invite", Url.APIS_URL), "POST", {
 		postBody = HttpService:JSONEncode({

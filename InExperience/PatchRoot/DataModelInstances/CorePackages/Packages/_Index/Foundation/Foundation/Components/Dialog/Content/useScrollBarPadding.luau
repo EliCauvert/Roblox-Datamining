@@ -3,13 +3,13 @@ local ReactModule = require(Foundation.Parent.React)
 local IsScrollingFrameOverflowingYModule = require(Foundation.Utility.isScrollingFrameOverflowingY)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 
-return function() --[[ Line: 9 | Named "useScrollBarPadding" ]]
+return function()
 	-- upvalues: ReactModule (copy), UseTokensModule (copy), IsScrollingFrameOverflowingYModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseTokensModuleResult = UseTokensModule()
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	
-	return UseStateResult, UseBindingResult, (ReactModule.useCallback(function(p1) --[[ Line: 14 ]]
+	return UseStateResult, UseBindingResult, (ReactModule.useCallback(function(p1)
 		-- upvalues: IsScrollingFrameOverflowingYModule (upval), UseStateResult2 (copy), UseBindingResult2 (copy), UseTokensModuleResult (copy)
 		local IsScrollingFrameOverflowingYModule1 = IsScrollingFrameOverflowingYModule(p1, 1)
 		UseStateResult2(IsScrollingFrameOverflowingYModule1)

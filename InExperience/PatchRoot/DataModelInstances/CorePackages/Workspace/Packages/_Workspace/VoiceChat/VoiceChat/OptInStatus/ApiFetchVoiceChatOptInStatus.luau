@@ -8,11 +8,11 @@ local Logging = require(Parent.AppCommonLib).Logging
 
 return {
 	KeyMapper = "luaapp.voicechatoptinstatus",
-	Fetch = function(p1) --[[ Line: 16 ]]
+	Fetch = function(p1)
 		-- upvalues: PerformFetch (copy), GetVoiceChatOptInStatusModule (copy), SetVoiceChatOptInStatusModule (copy), PromiseModule (copy), Logging (copy)
-		return PerformFetch.Single("luaapp.voicechatoptinstatus", function(p2) --[[ Line: 17 ]]
+		return PerformFetch.Single("luaapp.voicechatoptinstatus", function(p2)
 			-- upvalues: GetVoiceChatOptInStatusModule (upval), p1 (copy), SetVoiceChatOptInStatusModule (upval), PromiseModule (upval), Logging (upval)
-			return GetVoiceChatOptInStatusModule(p1):andThen(function(Result) --[[ Line: 18 ]]
+			return GetVoiceChatOptInStatusModule(p1):andThen(function(Result)
 				-- upvalues: p2 (copy), SetVoiceChatOptInStatusModule (upval), PromiseModule (upval), Logging (upval)
 				local ResponseBody = Result.responseBody
 				
@@ -28,7 +28,7 @@ return {
 			end)
 		end)
 	end,
-	GetFetchingStatus = function(p1) --[[ Line: 31 ]]
+	GetFetchingStatus = function(p1)
 		-- upvalues: PerformFetch (copy)
 		return PerformFetch.GetStatus(p1, "luaapp.voicechatoptinstatus")
 	end

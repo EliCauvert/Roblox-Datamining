@@ -5,11 +5,11 @@ local Context = ReactModule.createContext(nil)
 
 return {
 	AbuseReportAnalyticsContext = Context,
-	AbuseReportAnalyticsProvider = function(p1) --[[ Line: 25 ]]
+	AbuseReportAnalyticsProvider = function(p1)
 		-- upvalues: ReactModule (copy), Context (copy)
 		return ReactModule.createElement(Context.Provider, { value = p1.analytics }, p1.children)
 	end,
-	useAbuseReportAnalytics = function() --[[ Line: 36 ]]
+	useAbuseReportAnalytics = function()
 		-- upvalues: ReactModule (copy), Context (copy)
 		local UseContextResult = ReactModule.useContext(Context)
 		
@@ -18,7 +18,7 @@ return {
 		end
 		return UseContextResult
 	end,
-	useOptionalAbuseReportAnalytics = function() --[[ Line: 52 ]]
+	useOptionalAbuseReportAnalytics = function()
 		-- upvalues: ReactModule (copy), Context (copy)
 		return ReactModule.useContext(Context)
 	end

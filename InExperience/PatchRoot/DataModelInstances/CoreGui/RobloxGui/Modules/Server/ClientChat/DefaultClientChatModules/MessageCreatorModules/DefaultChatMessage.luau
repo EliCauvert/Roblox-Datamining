@@ -1,5 +1,5 @@
 ﻿local Result1 = false
-local Success, Result = pcall(function() --[[ Line: 8 ]]
+local Success, Result = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserIsChatTranslationEnabled2")
 end)
 Result1 = Success and Result
@@ -10,12 +10,12 @@ local ChatConstantsModule = require(Parent:WaitForChild("ChatConstants"))
 local UtilModule = require(script.Parent:WaitForChild("Util"))
 local Character = utf8.char(57344)
 
-function IsPlayerVerified(UserId) --[[ Line: 23 ]]
+function IsPlayerVerified(UserId)
 	-- upvalues: Players (copy)
 	local Player = Players:GetPlayerByUserId(UserId)
 	
 	if Player then
-		local Success, Result = pcall(function() --[[ Line: 30 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Player (copy)
 			return Player.HasVerifiedBadge
 		end)
@@ -26,12 +26,12 @@ function IsPlayerVerified(UserId) --[[ Line: 23 ]]
 	end
 end
 
-function AppendVerifiedBadge(Text): string --[[ Line: 37 ]]
+function AppendVerifiedBadge(Text): string
 	-- upvalues: Character (copy)
 	return Text .. Character
 end
 
-function CreateMessageLabel(p1, OriginalChannel, Callback) --[[ Line: 41 ]]
+function CreateMessageLabel(p1, OriginalChannel, Callback)
 	-- upvalues: ChatSettingsModule (copy), UtilModule (copy), Result1 (ref)
 	local FromSpeaker = p1.FromSpeaker
 	local SpeakerDisplayName = if ChatSettingsModule.PlayerDisplayNamesEnabled and p1.SpeakerDisplayName then p1.SpeakerDisplayName else FromSpeaker
@@ -76,14 +76,14 @@ function CreateMessageLabel(p1, OriginalChannel, Callback) --[[ Line: 41 ]]
 	local AddTranslationButtonToBaseMessageResult = nil
 	
 	if Result1 then
-		pcall(function() --[[ Line: 105 ]]
+		pcall(function()
 			-- upvalues: AddTranslationButtonToBaseMessageResult (ref), UtilModule (upval), BaseMessage2 (copy), _UDim2 (ref), AddNameButtonToBaseMessageResult (copy)
 			AddTranslationButtonToBaseMessageResult = UtilModule:AddTranslationButtonToBaseMessage(BaseMessage2)
 			_UDim2 += UDim2.new(0, AddNameButtonToBaseMessageResult.Size.X.Offset + 2, 0, 0)
 			AddTranslationButtonToBaseMessageResult.Position = _UDim2
 		end)
 	end
-	local function useOriginalText(p2) --[[ Line: 112 ]]
+	local function useOriginalText(p2)
 		-- upvalues: Flag (ref), p1 (copy), BaseMessage2 (copy), UtilModule (upval), NewNumberOfSpaces (ref)
 		Flag = false
 		
@@ -96,7 +96,7 @@ function CreateMessageLabel(p1, OriginalChannel, Callback) --[[ Line: 41 ]]
 		end
 	end
 	
-	local function _(p2) --[[ Line: 122 | Named "useTranslatedText" ]]
+	local function _(p2)
 		-- upvalues: AddTranslationButtonToBaseMessageResult (ref), NewNumberOfSpaces (ref), Flag (ref), useOriginalText (copy), BaseMessage2 (copy), UtilModule (upval)
 		if AddTranslationButtonToBaseMessageResult == nil then return end
 		if AddTranslationButtonToBaseMessageResult.Visible == false then
@@ -114,7 +114,7 @@ function CreateMessageLabel(p1, OriginalChannel, Callback) --[[ Line: 41 ]]
 		end
 	end
 	
-	local _ = function(p2) --[[ Line: 142 | Named "UpdateTextFunction_Chat" ]]
+	local _ = function(p2)
 		-- upvalues: p1 (copy), AddTranslationButtonToBaseMessageResult (ref), NewNumberOfSpaces (ref), Flag (ref), useOriginalText (copy), BaseMessage2 (copy), UtilModule (upval)
 		p1.TranslatedMessage = p2.TranslatedMessage
 		
@@ -139,7 +139,7 @@ function CreateMessageLabel(p1, OriginalChannel, Callback) --[[ Line: 41 ]]
 		end
 	end
 	
-	local function UpdateTextFunction(p2) --[[ Line: 151 ]]
+	local function UpdateTextFunction(p2)
 		-- upvalues: Result1 (upval), p1 (copy), AddTranslationButtonToBaseMessageResult (ref), NewNumberOfSpaces (ref), Flag (ref), useOriginalText (copy), BaseMessage2 (copy), UtilModule (upval)
 		if Result1 then
 			p1.TranslatedMessage = p2.TranslatedMessage
@@ -174,7 +174,7 @@ function CreateMessageLabel(p1, OriginalChannel, Callback) --[[ Line: 41 ]]
 		end
 	end
 	
-	local _ = function() --[[ Line: 164 | Named "toggleTranslation" ]]
+	local _ = function()
 		-- upvalues: Flag (ref), p1 (copy), AddTranslationButtonToBaseMessageResult (ref), NewNumberOfSpaces (ref), useOriginalText (copy), BaseMessage2 (copy), UtilModule (upval), Callback (copy)
 		if Flag or not p1.TranslatedMessage then
 			useOriginalText(p1)
@@ -197,7 +197,7 @@ function CreateMessageLabel(p1, OriginalChannel, Callback) --[[ Line: 41 ]]
 	end
 	
 	if Result1 and AddTranslationButtonToBaseMessageResult ~= nil then
-		local MouseButton1ClickConnection = AddTranslationButtonToBaseMessageResult.MouseButton1Click:connect(function() --[[ Line: 176 ]]
+		local MouseButton1ClickConnection = AddTranslationButtonToBaseMessageResult.MouseButton1Click:connect(function()
 			-- upvalues: Flag (ref), p1 (copy), AddTranslationButtonToBaseMessageResult (ref), NewNumberOfSpaces (ref), useOriginalText (copy), BaseMessage2 (copy), UtilModule (upval), Callback (copy)
 			if Flag or not p1.TranslatedMessage then
 				useOriginalText(p1)
@@ -219,7 +219,7 @@ function CreateMessageLabel(p1, OriginalChannel, Callback) --[[ Line: 41 ]]
 			end
 		end)
 		local Connection = nil
-		Connection = AddTranslationButtonToBaseMessageResult.Changed:connect(function(p2) --[[ Line: 181 ]]
+		Connection = AddTranslationButtonToBaseMessageResult.Changed:connect(function(p2)
 			-- upvalues: MouseButton1ClickConnection (copy), Connection (ref)
 			if p2 == "Parent" then
 				MouseButton1ClickConnection:Disconnect()
@@ -229,7 +229,7 @@ function CreateMessageLabel(p1, OriginalChannel, Callback) --[[ Line: 41 ]]
 	end
 	UpdateTextFunction(p1)
 	
-	local function GetHeightFunction(p2) --[[ Line: 191 ]]
+	local function GetHeightFunction(p2)
 		-- upvalues: UtilModule (upval), BaseMessage2 (copy), BaseMessage (copy)
 		return UtilModule:GetMessageHeight(BaseMessage2, BaseMessage, p2)
 	end

@@ -38,7 +38,7 @@ local SplitPaneModule = if FFlagEnableSplitPane then require(Parent.SplitPane) e
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local config = { skipFetch = true }
 
-return function(_) --[[ Line: 56 ]]
+return function(_)
 	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileScrollContextModule (copy), UseScreenSizeFunction (copy), UseTopBarHeightFunction (copy), FFlagEnableMobileGameJoinCard (copy), ReactModule (copy), UseSelectorFunction (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), FFlagEnableSplitPane (copy), SplitPaneModule (copy), UseSignalStateFunction (copy), ProfilePlatformPageModule (copy), ProfileTopBarModule (copy), GetSafeAreaSizeFunction (copy), FFlagProfilePlatformNewProfileHeader (copy), FFlagSwitchProfileWidthHookToSocialCommon (copy), UseProfileCardWidthFunction (copy), UseProfileCardWidthModule (copy), ConstantsModule (copy), FFlagProfilePlatformPresenceStoreMigrationModule (copy), UseEffectOnMountFunction (copy), GetResult (copy), UseGetPresenceByUserId (copy), config (copy), ConvertPresenceEnumModule (copy), PresenceModule (copy), UseDispatchFunction (copy), NetworkingPresenceModule (copy), UseShouldShowContextualInformationModule (copy), UseProfilePeekViewHeightModule (copy), GetPeekViewOpenHeightByProfileTypeModule (copy), ProfileFullViewModule (copy), ProfileModalViewModule (copy), ProfilePeekViewModule (copy)
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	local UseProfileScrollContextModuleResult = UseProfileScrollContextModule()
@@ -47,15 +47,15 @@ return function(_) --[[ Line: 56 ]]
 	local UseScreenSizeResult = UseScreenSizeFunction()
 	local UseTopBarHeightResult = UseTopBarHeightFunction()
 	local MountAsFullView = FFlagEnableMobileGameJoinCard and UseProfileWrapperContextModuleResult.mountAsFullView or false
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 67 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: PreviousViewFunction (copy)
 		PreviousViewFunction(false)
 	end, { PreviousViewFunction })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 72 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: PreviousViewFunction (copy)
 		PreviousViewFunction(true)
 	end, { PreviousViewFunction })
-	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 77 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p1)
 		return p1.GlobalGuiInset
 	end)
 	local UseProfileFormFactorModuleResult = UseProfileFormFactorModule()
@@ -66,12 +66,12 @@ return function(_) --[[ Line: 56 ]]
 		local UseSignalStateResult = UseSignalStateFunction(SplitPaneModule.SplitPaneStore.getStore().getSupportPaneModeIfActive)
 		HasProfileSplitPaneEligibility = UseSignalStateResult ~= nil and SplitPaneModule.SplitPaneVariant.getProfileSplitPaneEligibility(UseSignalStateResult) ~= nil
 	end
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 92 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: ReactModule (upval), ProfilePlatformPageModule (upval)
 		return ReactModule.createElement(ProfilePlatformPageModule, {})
 	end, {})
 	local HasProfileSplitPaneEligibility1: boolean = FFlagEnableSplitPane and HasProfileSplitPaneEligibility
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 98 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: ReactModule (upval), ProfileTopBarModule (upval), UseResult (copy), FFlagEnableSplitPane (upval), HasProfileSplitPaneEligibility1 (copy)
 		return ReactModule.createElement(ProfileTopBarModule, {
 			transparentBackground = true,
@@ -89,7 +89,7 @@ return function(_) --[[ Line: 56 ]]
 		local ConvertPresenceEnumModuleResult = nil
 		
 		if FFlagProfilePlatformPresenceStoreMigrationModule then
-			UseEffectOnMountFunction(function() --[[ Line: 120 ]]
+			UseEffectOnMountFunction(function()
 				-- upvalues: GetResult (upval), ProfileId (copy)
 				GetResult.RefreshPresenceByUserId((tostring(ProfileId)))
 			end)
@@ -97,11 +97,11 @@ return function(_) --[[ Line: 56 ]]
 			ConvertPresenceEnumModuleResult = ConvertPresenceEnumModule(UseGetPresenceByUserIdResult and UseGetPresenceByUserIdResult.userPresenceType or PresenceModule.Enums.PresenceType.Offline, UseGetPresenceByUserIdResult and UseGetPresenceByUserIdResult.universeId ~= "" and tonumber(UseGetPresenceByUserIdResult.universeId) or nil)
 		else
 			local UseDispatchResult = UseDispatchFunction()
-			UseEffectOnMountFunction(function() --[[ Line: 131 ]]
+			UseEffectOnMountFunction(function()
 				-- upvalues: UseDispatchResult (copy), NetworkingPresenceModule (upval), ProfileId (copy)
-				UseDispatchResult(NetworkingPresenceModule.GetPresencesFromUserIds.API({ ProfileId })):catch(function(_) --[[ Line: 132 ]] end)
+				UseDispatchResult(NetworkingPresenceModule.GetPresencesFromUserIds.API({ ProfileId })):catch(function(_) end)
 			end)
-			local UseSelectorResult1 = UseSelectorFunction(function(p1) --[[ Line: 135 ]]
+			local UseSelectorResult1 = UseSelectorFunction(function(p1)
 				-- upvalues: PresenceModule (upval), ProfileId (copy)
 				return PresenceModule.Selectors.getUserPresenceByUserId(p1, ProfileId) or {
 					lastLocation = "",
@@ -133,7 +133,7 @@ return function(_) --[[ Line: 56 ]]
 		topBarHeight = UseTopBarHeightResult,
 		topBarSlot = UseResult3(),
 		viewWidth = UDim.new(0, SafeAreaSize.X.Offset),
-		transitionPercentCallback = function(p1) --[[ Line: 193 ]]
+		transitionPercentCallback = function(p1)
 			-- upvalues: UseProfileScrollContextModuleResult (copy)
 			UseProfileScrollContextModuleResult.setPeekViewOpenPercent(p1)
 		end,

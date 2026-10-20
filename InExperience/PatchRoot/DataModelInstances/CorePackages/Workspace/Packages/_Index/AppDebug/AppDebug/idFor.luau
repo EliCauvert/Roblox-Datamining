@@ -1,7 +1,7 @@
 ﻿local Count = 1
 local self = setmetatable({}, { __mode = "k" })
 
-return function(Key) --[[ Line: 15 | Named "idFor" ]]
+return function(Key)
 	-- upvalues: self (copy), Count (ref)
 	if Key == nil then
 		return 0

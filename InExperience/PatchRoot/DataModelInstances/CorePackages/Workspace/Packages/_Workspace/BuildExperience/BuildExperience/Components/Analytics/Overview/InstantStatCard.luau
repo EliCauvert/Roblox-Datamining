@@ -9,7 +9,7 @@ local IconSize = FoundationModule.Enums.IconSize
 local Radius = FoundationModule.Enums.Radius
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1) --[[ Line: 28 | Named "InstantStatCard" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Text (copy), Icon (copy), IconSize (copy), Skeleton (copy), Radius (copy)
 	local UseTokensResult = UseTokensFunction()
 	local TestId = p1.testId or "InstantStatCard"

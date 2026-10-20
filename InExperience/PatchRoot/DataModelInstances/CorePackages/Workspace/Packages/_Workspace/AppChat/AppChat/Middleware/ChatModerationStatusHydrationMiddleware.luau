@@ -5,9 +5,9 @@ local RemovedConversationModule = require(AppChat.Conversations.Actions.RemovedC
 local GetChatModerationStatusDataHydrationModule = require(AppChat.Stores.GetChatModerationStatusDataHydration)
 local FFlagAppChatReactiveFeatureRestrictions = require(Parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
 
-return function(Callback, _) --[[ Line: 13 | Named "ChatModerationStatusHydrationMiddleware" ]]
+return function(Callback, _)
 	-- upvalues: AppChatNetworkingModule (copy), GetChatModerationStatusDataHydrationModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy), RemovedConversationModule (copy)
-	return function(p1) --[[ Line: 14 ]]
+	return function(p1)
 		-- upvalues: Callback (copy), AppChatNetworkingModule (upval), GetChatModerationStatusDataHydrationModule (upval), FFlagAppChatReactiveFeatureRestrictions (upval), RemovedConversationModule (upval)
 		local CallbackResult = Callback(p1)
 		

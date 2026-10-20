@@ -9,11 +9,11 @@ local _ = require(ViewRecyclerReact.ReactAdapter.VirtualList)
 local CreateRecyclableViewModule = require(ViewRecyclerReact.ReactAdapter.createRecyclableView)
 local CreateElementFunction = ReactModule.createElement
 
-local function createItemViewType(p1) --[[ Line: 57 ]]
+local function createItemViewType(p1)
 	-- upvalues: CreateRecyclableViewModule (copy), ItemHooksModule (copy), SignalsReactModule (copy), ReactModule (copy), CreateElementFunction (copy)
 	local Component = p1.component
 	
-	return CreateRecyclableViewModule(function(p2) --[[ Line: 59 ]]
+	return CreateRecyclableViewModule(function(p2)
 		-- upvalues: ItemHooksModule (upval), SignalsReactModule (upval), ReactModule (upval), CreateElementFunction (upval), Component (copy)
 		local UseSignalStateResult = SignalsReactModule.useSignalState((ItemHooksModule.useRecyclingAssignment()))
 		local UseSignalStateResult1 = SignalsReactModule.useSignalState(ItemHooksModule.useRecyclingIndex())
@@ -41,9 +41,9 @@ local function createItemViewType(p1) --[[ Line: 57 ]]
 end
 
 return {
-	create = function(p1) --[[ Line: 87 ]]
+	create = function(p1)
 		-- upvalues: createItemViewType (copy), Axis (copy), CreateElementFunction (copy)
-		return function(p2) --[[ Line: 88 ]]
+		return function(p2)
 			-- upvalues: createItemViewType (upval), Axis (upval), CreateElementFunction (upval), p1 (copy)
 			assert(type(p2) == "table", "createVirtualList: definition must be a table")
 			local ItemViewType = nil
@@ -61,7 +61,7 @@ return {
 					assert(t[ComponentFunction] == nil, "createVirtualList: each component may be declared only once")
 					t[ComponentFunction] = createItemViewType(itemComponent)
 				end
-				ItemViewType = function(p3, p4) --[[ Line: 120 ]]
+				ItemViewType = function(p3, p4)
 					-- upvalues: GetItemComponentFunction (copy), t (copy)
 					local Entry = t[GetItemComponentFunction(p3, p4)]
 					assert(Entry ~= nil, "createVirtualList: getItemComponent returned an undeclared component")
@@ -77,7 +77,7 @@ return {
 					hideWhilePending = p2.hideWhilePending
 				})
 			end
-			return function(Tbl) --[[ Line: 128 | Named "SpecializedVirtualList" ]]
+			return function(Tbl)
 				-- upvalues: Axis (upval), ItemViewType (ref), CreateElementFunction (upval), p1 (upval)
 				assert(Tbl.pinnedStartItem == nil and Tbl.pinnedEndItem == nil, "createVirtualList: pinned Items require VirtualList")
 				local Copy = table.clone(Tbl)

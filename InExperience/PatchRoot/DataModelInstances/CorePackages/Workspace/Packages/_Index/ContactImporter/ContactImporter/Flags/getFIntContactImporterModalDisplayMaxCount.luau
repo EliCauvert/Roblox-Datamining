@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("ContactImporterModalDisplayMaxCount", 3)
 
-return function() --[[ Line: 2 ]]
+return function()
 	return game:GetFastInt("ContactImporterModalDisplayMaxCount")
 end

@@ -3,11 +3,11 @@ local ReactModule = require(Parent.React)
 local MockableWarnFunction = require(Parent.FocusNavigationUtils).mockableWarn
 local FocusNavigationContextModule = require(script.Parent.FocusNavigationContext)
 
-return function() --[[ Line: 10 | Named "useFocusGuiObject" ]]
+return function()
 	-- upvalues: ReactModule (copy), FocusNavigationContextModule (copy), MockableWarnFunction (copy)
 	local UseContextResult = ReactModule.useContext(FocusNavigationContextModule)
 	
-	return ReactModule.useCallback(function(p1, p2) --[[ Line: 13 ]]
+	return ReactModule.useCallback(function(p1, p2)
 		-- upvalues: UseContextResult (copy), MockableWarnFunction (upval)
 		if UseContextResult then
 			UseContextResult:focusGuiObject(p1, not not p2)

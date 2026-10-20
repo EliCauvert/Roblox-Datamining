@@ -12,7 +12,7 @@ local CloseCentralOverlayFunction = CentralOverlayModule.Thunks.CloseCentralOver
 local DialogSize = require(Parent.Foundation).Enums.DialogSize
 local FFlagLuaAppPlaytestTrustedFriendsRefetchPlayability = require(Parent.SharedFlags).FFlagLuaAppPlaytestTrustedFriendsRefetchPlayability
 
-return function(UserId, p1) --[[ Line: 27 | Named "useTrustedFriendsPlaytestUpsell" ]]
+return function(UserId, p1)
 	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), DialogSize (copy), CloseCentralOverlayFunction (copy), AppPage (copy), FFlagLuaAppPlaytestTrustedFriendsRefetchPlayability (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseNavigationResult = UseNavigationFunction()
@@ -25,7 +25,7 @@ return function(UserId, p1) --[[ Line: 27 | Named "useTrustedFriendsPlaytestUpse
 	})
 	local HasUserId: boolean = UseNavigationResult ~= nil and UserId ~= nil
 	
-	return (ReactModule.useCallback(function() --[[ Line: 42 ]]
+	return (ReactModule.useCallback(function()
 		-- upvalues: UseDispatchResult (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval), UseLocalizationResult (copy), HasUserId (copy), DialogSize (upval), CloseCentralOverlayFunction (upval), UseNavigationResult (copy), AppPage (upval), UserId (copy), FFlagLuaAppPlaytestTrustedFriendsRefetchPlayability (upval), p1 (copy)
 		UseDispatchResult(SetCentralOverlayFunction(CentralOverlayType.ConfirmationDialog, {
 			showCloseButton = false,
@@ -36,7 +36,7 @@ return function(UserId, p1) --[[ Line: 27 | Named "useTrustedFriendsPlaytestUpse
 			cancelButtonText = if HasUserId then UseLocalizationResult.cancel else UseLocalizationResult.ok,
 			hideConfirmButton = not HasUserId,
 			size = DialogSize.Small,
-			onConfirm = function() --[[ Line: 53 ]]
+			onConfirm = function()
 				-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval), HasUserId (upval), UseNavigationResult (upval), AppPage (upval), UserId (upval), FFlagLuaAppPlaytestTrustedFriendsRefetchPlayability (upval), p1 (upval)
 				UseDispatchResult(CloseCentralOverlayFunction())
 				
@@ -49,7 +49,7 @@ return function(UserId, p1) --[[ Line: 27 | Named "useTrustedFriendsPlaytestUpse
 					})
 				end
 			end,
-			onCancel = function() --[[ Line: 66 ]]
+			onCancel = function()
 				-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
 				UseDispatchResult(CloseCentralOverlayFunction())
 			end

@@ -62,7 +62,7 @@ local config = {
 	paddingRight = 0
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 146 | Named "PresenceBubbleCell" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseTextSizeOffsetFunction (copy), FFlagAppChatTimestampInSubtitleModule (copy), ReactModule (copy), BaseCellModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), ConversationFacePileModule (copy), AvatarCircleModule (copy), Skeleton (copy), Radius (copy), FFlagAppChatFixPlusBadgeAlignmentModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), FoundationModule (copy), FFlagEnableBlackbirdCheck (copy), ImageSetLabel (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseTextSizeOffsetResult = UseTextSizeOffsetFunction()
@@ -79,15 +79,15 @@ return ReactModule.memo(function(p1) --[[ Line: 146 | Named "PresenceBubbleCell"
 		UseBindingResult, Callback = ReactModule.useBinding(1e999)
 		local UseBindingResult1
 		UseBindingResult1, Callback1 = ReactModule.useBinding(0)
-		MapResult = ReactModule.joinBindings({ UseBindingResult, UseBindingResult1 }):map(function(Entry): Vector2 --[[ Line: 161 ]]
+		MapResult = ReactModule.joinBindings({ UseBindingResult, UseBindingResult1 }):map(function(Entry): Vector2
 			return Vector2.new(math.max(0, Entry[1] - Entry[2]), 1e999)
 		end)
-		UseMemoResult = ReactModule.useMemo(function() --[[ Line: 164 ]]
+		UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: JoinResult (copy)
 			if JoinResult.subTitleTimestamp then
 				local SubTitleText = JoinResult.subTitleText
 				
-				return if SubTitleText and SubTitleText ~= "" then JoinResult.subTitleTimestamp:map(function(Text): string --[[ Line: 170 ]]
+				return if SubTitleText and SubTitleText ~= "" then JoinResult.subTitleTimestamp:map(function(Text): string
 					return if Text == "" then "" else " · " .. Text
 				end) else JoinResult.subTitleTimestamp
 			else
@@ -255,7 +255,7 @@ return ReactModule.memo(function(p1) --[[ Line: 146 | Named "PresenceBubbleCell"
 					BackgroundTransparency = 1,
 					Size = UDim2.new(1, 0, 0, NewSubTitleTextSize),
 					LayoutOrder = 2,
-					[ReactModule.Change.AbsoluteSize] = if FFlagAppChatTimestampInSubtitleModule then function(Frame) --[[ Line: 380 ]]
+					[ReactModule.Change.AbsoluteSize] = if FFlagAppChatTimestampInSubtitleModule then function(Frame)
 						-- upvalues: Callback (ref)
 						Callback(Frame.AbsoluteSize.X)
 					end else nil
@@ -307,7 +307,7 @@ return ReactModule.memo(function(p1) --[[ Line: 146 | Named "PresenceBubbleCell"
 						Font = if FoundationFontFaceMigration then nil else JoinResult.subTitleTextFont,
 						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(JoinResult.subTitleTextFont) else nil,
 						LayoutOrder = 3,
-						[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 473 ]]
+						[ReactModule.Change.AbsoluteSize] = function(Frame)
 							-- upvalues: Callback1 (ref)
 							Callback1(Frame.AbsoluteSize.X)
 						end

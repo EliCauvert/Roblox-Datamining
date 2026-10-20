@@ -27,7 +27,7 @@ local FFlagLuaAppSponsoredGamePreviewVideo = require(Parent.SharedFlags).FFlagLu
 local FFlagLuaAppHomeMomentVideoFallback = require(Parent.SharedFlags).FFlagLuaAppHomeMomentVideoFallback
 local FFlagLuaAppDiscoveryMomentVideoTelemetry = require(Parent.SharedFlags).FFlagLuaAppDiscoveryMomentVideoTelemetry
 
-local function logSponsoredGamePreviewVideoExposureIfEligible(EntryIndexes, p1, PageContext) --[[ Line: 63 ]]
+local function logSponsoredGamePreviewVideoExposureIfEligible(EntryIndexes, p1, PageContext)
 	-- upvalues: AppPage (copy), IXPService (copy), AppUserLayers (copy), DiscoveryEventErrorLogger (copy)
 	for _, entryIndex in ipairs(EntryIndexes) do
 		local v1 = p1[entryIndex]
@@ -44,7 +44,7 @@ local function logSponsoredGamePreviewVideoExposureIfEligible(EntryIndexes, p1, 
 	end
 end
 
-local function addGameFields(EntryIndexes, p2, p3: number, p4, p5, GameSortId, p6, p7, PageContext) --[[ Line: 88 ]]
+local function addGameFields(EntryIndexes, p2, p3: number, p4, p5, GameSortId, p6, p7, PageContext)
 	-- upvalues: FFlagLuaAppDiscoveryMomentVideoTelemetry (copy), FFlagLuaAppFixSearchImpressions (copy), GameCollectionItemTypes (copy), DiscoveryEventErrorLogger (copy), CalculateRowPositionFieldsFunction (copy), ArgCheckModule (copy), GetGameTileLayoutDataFunction (copy), GetTileBadgeByPositionConfigFromEntryFunction (copy), GetValidTileBadgesFunction (copy), CryoModule (copy), ItemLayoutDataParsingUtils (copy), FFlagLuaAppHomeMomentVideoFallback (copy), GameTileModule (copy), FFlagLuaAppGameImpressionsAddUnifiedFields (copy)
 	local List = {}
 	local List1 = {}
@@ -124,7 +124,7 @@ local function addGameFields(EntryIndexes, p2, p3: number, p4, p5, GameSortId, p
 				local List17 = {}
 				
 				for i, value in GetValidTileBadgesFunction(TileBadgeByPositionConfigFromEntry) do
-					local MapResult = CryoModule.List.map(value, function(p8) --[[ Line: 206 ]]
+					local MapResult = CryoModule.List.map(value, function(p8)
 						return p8.analyticsId
 					end)
 					
@@ -280,7 +280,7 @@ local function addGameFields(EntryIndexes, p2, p3: number, p4, p5, GameSortId, p
 	return config, CountList
 end
 
-local function _(p8) --[[ Line: 405 | Named "addMobileAdvertisingIdToEventParams" ]]
+local function _(p8)
 	-- upvalues: AppStorageService (copy)
 	local MobileAdvertisingIdItem = AppStorageService:GetItem("MobileAdvertisingId")
 	
@@ -289,13 +289,13 @@ local function _(p8) --[[ Line: 405 | Named "addMobileAdvertisingIdToEventParams
 	end
 end
 
-local _ = function(p8): boolean --[[ Line: 415 | Named "hasNoEntries" ]]
+local _ = function(p8): boolean
 	-- upvalues: FFlagSduiFixSearchTelemetry (copy)
 	return if FFlagSduiFixSearchTelemetry then not p8 or next(p8) == nil else not p8 or #p8 == 0
 end
 
 return {
-	sendFromTopicContents = function(p8, p9, p10, p11, PageContext, GameSetTypeId, SortPos, p12, GameSetTargetId, PageId, p13, p14, ComponentType, AppliedFilters, LoadSource, Callback: (any) -> (), SortSubId, p15) --[[ Line: 422 ]]
+	sendFromTopicContents = function(p8, p9, p10, p11, PageContext, GameSetTypeId, SortPos, p12, GameSetTargetId, PageId, p13, p14, ComponentType, AppliedFilters, LoadSource, Callback: (any) -> (), SortSubId, p15)
 		-- upvalues: FFlagSduiFixSearchTelemetry (copy), FFlagLuaAppSponsoredGamePreviewVideo (copy), logSponsoredGamePreviewVideoExposureIfEligible (copy), LoggingProtocolModule (copy), FeedItemRowDataHitCounterModule (copy), FeedItemRowDataMissingCounterModule (copy), addGameFields (copy), CryoModule (copy), LocalizationService (copy), FFlagLuaAppGameImpressionsMobileAdsId (copy), AppStorageService (copy), GameImpressionsEventModule (copy), ReportGameImpressionCountsModule (copy)
 		if p8 and p9 then
 			if p10 and #p10 ~= 0 then
@@ -344,7 +344,7 @@ return {
 			Callback(`Missing analytics service eventIngest: {p8} appAnalytics: {p9}`)
 		end
 	end,
-	sendFromSearch = function(p8, p9, p10, p11, p12, p13, p14, p15, p16, ComponentType) --[[ Line: 504 ]]
+	sendFromSearch = function(p8, p9, p10, p11, p12, p13, p14, p15, p16, ComponentType)
 		-- upvalues: FFlagSduiFixSearchTelemetry (copy), addGameFields (copy), FFlagLuaAppFixSearchImpressions (copy), CryoModule (copy), LocalizationService (copy), FFlagLuaAppGameImpressionsMobileAdsId (copy), AppStorageService (copy), GameImpressionsEventModule (copy), ReportGameImpressionCountsModule (copy)
 		if not p8 or not p9 then return end
 		if not p10 or #p10 == 0 then return end
@@ -365,7 +365,7 @@ return {
 		GameImpressionsEventModule(p8, p12, JoinResult)
 		ReportGameImpressionCountsModule(p9, p12, AddGameFieldsResult2)
 	end,
-	sendFromGameDetails = function(p8, p9, p10, p11, RefId) --[[ Line: 552 ]]
+	sendFromGameDetails = function(p8, p9, p10, p11, RefId)
 		-- upvalues: addGameFields (copy), LocalizationService (copy), FFlagLuaAppGameImpressionsMobileAdsId (copy), AppStorageService (copy), GameImpressionsEventModule (copy), ReportGameImpressionCountsModule (copy)
 		local AddGameFieldsResult, AddGameFieldsResult2 = addGameFields(p10, p11)
 		AddGameFieldsResult.locale = LocalizationService.RobloxLocaleId
@@ -381,7 +381,7 @@ return {
 		GameImpressionsEventModule(p8, "recommended", AddGameFieldsResult)
 		ReportGameImpressionCountsModule(p9, "recommended", AddGameFieldsResult2)
 	end,
-	sendFromSeeAll = function(p8, p9, p10, p11, PageContext, GameSetTypeId, GameSetTargetId, PageId, AppliedFilters, p12) --[[ Line: 572 ]]
+	sendFromSeeAll = function(p8, p9, p10, p11, PageContext, GameSetTypeId, GameSetTargetId, PageId, AppliedFilters, p12)
 		-- upvalues: FFlagSduiFixSearchTelemetry (copy), FFlagLuaAppSponsoredGamePreviewVideo (copy), logSponsoredGamePreviewVideoExposureIfEligible (copy), addGameFields (copy), CryoModule (copy), LocalizationService (copy), FFlagLuaAppGameImpressionsMobileAdsId (copy), AppStorageService (copy), GameImpressionsEventModule (copy), ReportGameImpressionCountsModule (copy)
 		if not p8 or not p9 then return end
 		if not p10 or #p10 == 0 then return end
@@ -409,7 +409,7 @@ return {
 		GameImpressionsEventModule(p8, PageContext, JoinResult)
 		ReportGameImpressionCountsModule(p9, PageContext, AddGameFieldsResult2, 1)
 	end,
-	sendFromTraversalHistoryPage = if require(Parent.SharedFlags).FFlagTraversalHistoryDiscoveryTelemetry then function(p8, p9, p10, p11, p12, p13) --[[ Line: 625 ]]
+	sendFromTraversalHistoryPage = if require(Parent.SharedFlags).FFlagTraversalHistoryDiscoveryTelemetry then function(p8, p9, p10, p11, p12, p13)
 		-- upvalues: addGameFields (copy), CryoModule (copy), LocalizationService (copy), GameImpressionsEventModule (copy), ReportGameImpressionCountsModule (copy)
 		if p8 and p9 then
 			local AddGameFieldsResult, AddGameFieldsResult2 = addGameFields(p10, p11, p12, false, p13)

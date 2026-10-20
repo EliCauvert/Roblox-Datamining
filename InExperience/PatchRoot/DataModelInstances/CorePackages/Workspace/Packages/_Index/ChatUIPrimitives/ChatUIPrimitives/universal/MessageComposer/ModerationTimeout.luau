@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local CountdownModule = require(script.Parent.Countdown)
 
-return function(p1) --[[ Line: 20 | Named "ModerationTimeout" ]]
+return function(p1)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), CountdownModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UntilTimestamp = p1.state.untilTimestamp

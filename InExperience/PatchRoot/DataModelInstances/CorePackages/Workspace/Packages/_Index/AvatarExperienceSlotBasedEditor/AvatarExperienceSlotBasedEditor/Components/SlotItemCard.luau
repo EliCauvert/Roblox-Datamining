@@ -13,12 +13,12 @@ local FFlagAXSlotBasedEditorCategoryTooltip = require(Parent.AvatarExperienceFla
 local AXSlotBasedEditorCategoryTooltipKey = game:DefineFastString("AXSlotBasedEditorCategoryTooltipKey", "SlotEditorSecondCategory")
 local config = { dampingRatio = 1, frequency = 1 }
 
-return (ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 46 ]]
+return (ReactModule.forwardRef(function(Frame: Frame, Ref)
 	-- upvalues: UseTokensFunction (copy), ReactOtterModule (copy), ReactModule (copy), FoundationModule (copy), config (copy), FFlagAXSlotBasedEditorCategoryTooltip (copy), ItemCard (copy), ItemCardHeader (copy), View (copy), AXTooltip (copy), AXSlotBasedEditorCategoryTooltipKey (copy), SlotItemCardFooterModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function(Default) --[[ Line: 52 ]]
+	local UseResult = ReactModule.useCallback(function(Default)
 		-- upvalues: FoundationModule (upval), UseStateResult2 (copy)
 		if Default == FoundationModule.Enums.ControlState.Default then
 			UseStateResult2(false)
@@ -29,7 +29,7 @@ return (ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 46 ]]
 			UseStateResult2(true)
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 62 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseTokensResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval)
 		UseAnimatedBindingResult2(ReactOtterModule.spring(if UseStateResult then UseTokensResult.Color.Stroke.Emphasis.Transparency else 1, config))
 	end, { UseStateResult })
@@ -38,7 +38,7 @@ return (ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 46 ]]
 	
 	if FFlagAXSlotBasedEditorCategoryTooltip then
 		Ref1 = ReactModule.createRef()
-		UseResult1 = ReactModule.useCallback(function() --[[ Line: 71 ]]
+		UseResult1 = ReactModule.useCallback(function()
 			-- upvalues: Ref1 (ref), Frame (copy)
 			if Ref1.current then
 				Ref1.current()

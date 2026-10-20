@@ -1,34 +1,34 @@
-﻿local function _(p1) --[[ Line: 3 | Named "getSelectedRobuxPackage" ]]
+﻿local function _(p1)
 	return if p1.robuxUpsellSuggestions and p1.robuxUpsellSuggestions.products and p1.robuxUpsellSuggestions.selection then p1.robuxUpsellSuggestions.products[p1.robuxUpsellSuggestions.selection] else nil
 end
 
 return {
-	getRobuxProductId = function(p1) --[[ Line: 14 ]]
+	getRobuxProductId = function(p1)
 		local Product = if p1.robuxUpsellSuggestions and p1.robuxUpsellSuggestions.products and p1.robuxUpsellSuggestions.selection then p1.robuxUpsellSuggestions.products[p1.robuxUpsellSuggestions.selection] else nil
 		
 		return if Product then Product.providerId else nil
 	end,
-	getProductId = function(p1) --[[ Line: 23 ]]
+	getProductId = function(p1)
 		local Product = if p1.robuxUpsellSuggestions and p1.robuxUpsellSuggestions.products and p1.robuxUpsellSuggestions.selection then p1.robuxUpsellSuggestions.products[p1.robuxUpsellSuggestions.selection] else nil
 		
 		return if Product then Product.productId else nil
 	end,
-	getProductName = function(p1) --[[ Line: 32 ]]
+	getProductName = function(p1)
 		local Product = if p1.robuxUpsellSuggestions and p1.robuxUpsellSuggestions.products and p1.robuxUpsellSuggestions.selection then p1.robuxUpsellSuggestions.products[p1.robuxUpsellSuggestions.selection] else nil
 		
 		return if Product then Product.productName else nil
 	end,
-	getRobuxPurchaseAmount = function(p1) --[[ Line: 41 ]]
+	getRobuxPurchaseAmount = function(p1)
 		local Product = if p1.robuxUpsellSuggestions and p1.robuxUpsellSuggestions.products and p1.robuxUpsellSuggestions.selection then p1.robuxUpsellSuggestions.products[p1.robuxUpsellSuggestions.selection] else nil
 		
 		return if Product then Product.robuxAmount else nil
 	end,
-	getRobuxAmountBeforeBonus = function(p1) --[[ Line: 59 ]]
+	getRobuxAmountBeforeBonus = function(p1)
 		local Product = if p1.robuxUpsellSuggestions and p1.robuxUpsellSuggestions.products and p1.robuxUpsellSuggestions.selection then p1.robuxUpsellSuggestions.products[p1.robuxUpsellSuggestions.selection] else nil
 		
 		return if Product then Product.robuxAmountBeforeBonus else nil
 	end,
-	getPrice = function(p1) --[[ Line: 50 ]]
+	getPrice = function(p1)
 		local Product = if p1.robuxUpsellSuggestions and p1.robuxUpsellSuggestions.products and p1.robuxUpsellSuggestions.selection then p1.robuxUpsellSuggestions.products[p1.robuxUpsellSuggestions.selection] else nil
 		
 		return if Product then Product.price else nil

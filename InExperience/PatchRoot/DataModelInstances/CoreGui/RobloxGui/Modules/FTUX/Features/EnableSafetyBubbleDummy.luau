@@ -10,13 +10,13 @@ local IsNotVRSafetyBubbleModeMatch = true
 local Largest = math.max(require(CorePackages.Workspace.Packages.VrCommon).FIntSafetyBubbleRadius * CurrentCamera.HeadScale, 0.1)
 local Character = nil
 
-function initDummy() --[[ Line: 22 ]]
+function initDummy()
 	-- upvalues: Character (ref), GenerateDummyModule (copy), Workspace1 (copy)
 	Character = GenerateDummyModule(vector.create(0, 8.800000190734863, -50.5), vector.create(0, 180, 0))
 	Character.Parent = Workspace1
 end
 
-local function calculateTransparency(_, IsNotVRSafetyBubbleModeMatch): number --[[ Line: 27 ]]
+local function calculateTransparency(_, IsNotVRSafetyBubbleModeMatch): number
 	-- upvalues: VRService (copy), CurrentCamera (copy), Character (ref), Largest (copy), ScaledFIntSafetyBubbleTransparencyPercent (copy)
 	if IsNotVRSafetyBubbleModeMatch then
 		local Distance: number = ((CurrentCamera.CFrame * VRService:GetUserCFrame(Enum.UserCFrame.Head)).Position - Character.HumanoidRootPart.Position).Magnitude
@@ -28,10 +28,10 @@ local function calculateTransparency(_, IsNotVRSafetyBubbleModeMatch): number --
 	end
 end
 
-function EnableSafetyBubbleDummy() --[[ Line: 50 ]]
+function EnableSafetyBubbleDummy()
 	-- upvalues: Character (ref), UserGameSettings (copy), IsNotVRSafetyBubbleModeMatch (ref), calculateTransparency (copy), RunService (copy)
 	initDummy()
-	RunService.Stepped:Connect(function() --[[ Line: 53 | Named "onStep" ]]
+	RunService.Stepped:Connect(function()
 		-- upvalues: Character (upval), UserGameSettings (upval), IsNotVRSafetyBubbleModeMatch (upval), calculateTransparency (upval)
 		local Children = Character:GetChildren()
 		IsNotVRSafetyBubbleModeMatch = UserGameSettings.VRSafetyBubbleMode ~= Enum.VRSafetyBubbleMode.Anyone

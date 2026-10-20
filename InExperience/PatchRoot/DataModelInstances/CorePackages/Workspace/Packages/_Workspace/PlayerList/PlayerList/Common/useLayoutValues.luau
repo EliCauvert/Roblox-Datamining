@@ -11,7 +11,7 @@ local LayoutValuesContextModule = require(script.Parent.LayoutValuesContext)
 local FFlagEnableMobilePlayerListOnConsoleModule = require(Parent.Flags.FFlagEnableMobilePlayerListOnConsole)
 local FFlagPlayerListDropDownShowPlatformNameModule = require(Parent.Flags.FFlagPlayerListDropDownShowPlatformName)
 
-return function() --[[ Line: 21 | Named "useLayoutValues" ]]
+return function()
 	-- upvalues: ReactModule (copy), LayoutValuesContextModule (copy), UseTokensFunction (copy), FFlagEnableMobilePlayerListOnConsoleModule (copy), UseScaledValueFunction (copy), SignalsReactModule (copy), DisplayModule (copy), FFlagPlayerListDropDownShowPlatformNameModule (copy), CryoModule (copy)
 	local UseContextResult = ReactModule.useContext(LayoutValuesContextModule)
 	local UseTokensResult = UseTokensFunction()

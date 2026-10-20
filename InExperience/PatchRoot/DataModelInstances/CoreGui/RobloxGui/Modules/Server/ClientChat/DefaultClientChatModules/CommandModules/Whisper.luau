@@ -2,7 +2,7 @@
 local ChatSettingsModule = require(script.Parent.Parent:WaitForChild("ChatSettings"))
 local Players = game:GetService("Players")
 local ChatLocalizationModule = nil
-pcall(function() --[[ Line: 13 ]]
+pcall(function()
 	-- upvalues: ChatLocalizationModule (ref)
 	ChatLocalizationModule = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
@@ -14,20 +14,20 @@ end
 local Module = {}
 Module.__index = Module
 
-function Module:TrimWhisperCommand(Text: string) --[[ Line: 26 ]]
+function Module:TrimWhisperCommand(Text: string)
 	return if string.sub(Text, 1, 3):lower() == "/w " then string.sub(Text, 4) elseif string.sub(Text, 1, 9):lower() == "/whisper " then string.sub(Text, 10) else nil
 end
 
-function Module:TrimWhiteSpace(Text: string) --[[ Line: 35 ]]
+function Module:TrimWhiteSpace(Text: string)
 	return string.gsub(Text, "%s+", ""), Text[#Text] == " "
 end
 
-function Module:ShouldAutoCompleteNames() --[[ Line: 41 ]]
+function Module:ShouldAutoCompleteNames()
 	-- upvalues: ChatSettingsModule (copy)
 	return ChatSettingsModule.WhisperCommandAutoCompletePlayerNames == nil or ChatSettingsModule.WhisperCommandAutoCompletePlayerNames
 end
 
-function Module.GetWhisperingPlayer(p1, Text: string) --[[ Line: 48 ]]
+function Module.GetWhisperingPlayer(p1, Text: string)
 	-- upvalues: Players (copy), LocalPlayer (ref), ChatSettingsModule (copy)
 	local TrimWhisperCommandResult = p1:TrimWhisperCommand((Text:lower()))
 	
@@ -84,11 +84,11 @@ function Module.GetWhisperingPlayer(p1, Text: string) --[[ Line: 48 ]]
 	return nil
 end
 
-function Module.GetWhisperChanneNameColor(p2) --[[ Line: 106 ]]
+function Module.GetWhisperChanneNameColor(p2)
 	return if p2.ChatSettings.WhisperChannelNameColor then p2.ChatSettings.WhisperChannelNameColor else Color3.fromRGB(102, 14, 102)
 end
 
-function Module.EnterWhisperState(p2, Player: Player) --[[ Line: 113 ]]
+function Module.EnterWhisperState(p2, Player: Player)
 	-- upvalues: ChatSettingsModule (copy), ChatLocalizationModule (ref)
 	p2.PlayerNameEntered = true
 	p2.PlayerName = Player.Name
@@ -108,7 +108,7 @@ function Module.EnterWhisperState(p2, Player: Player) --[[ Line: 113 ]]
 	p2.TextBox.Text = " "
 end
 
-function Module.TextUpdated(p2) --[[ Line: 142 ]]
+function Module.TextUpdated(p2)
 	local Text = p2.TextBox.Text
 	
 	if not p2.PlayerNameEntered then
@@ -131,21 +131,21 @@ function Module.TextUpdated(p2) --[[ Line: 142 ]]
 	end
 end
 
-function Module.GetMessage(p2) --[[ Line: 166 ]]
+function Module.GetMessage(p2)
 	return if p2.PlayerNameEntered then "/w " .. p2.PlayerName .. " " .. p2.TextBox.Text else p2.TextBox.Text
 end
 
-function Module:ProcessCompletedMessage(): boolean --[[ Line: 173 ]]
+function Module:ProcessCompletedMessage(): boolean
 	return false
 end
 
-function Module.Destroy(p2) --[[ Line: 177 ]]
+function Module.Destroy(p2)
 	p2.MessageModeConnection:disconnect()
 	p2.Destroyed = true
 end
 
 local config = {
-	new = function(ChatWindow, ChatBar, ChatSettings, Player) --[[ Line: 182 ]]
+	new = function(ChatWindow, ChatBar, ChatSettings, Player)
 		-- upvalues: Module (copy)
 		local self = setmetatable({}, Module)
 		self.Destroyed = false
@@ -156,7 +156,7 @@ local config = {
 		self.MessageModeButton = ChatBar:GetMessageModeTextButton()
 		self.OriginalWhisperText = ""
 		self.PlayerNameEntered = false
-		self.MessageModeConnection = self.MessageModeButton.MouseButton1Click:connect(function() --[[ Line: 193 ]]
+		self.MessageModeConnection = self.MessageModeButton.MouseButton1Click:connect(function()
 			-- upvalues: self (copy)
 			local Text = self.TextBox.Text
 			
@@ -180,12 +180,12 @@ local config = {
 	end
 }
 
-function ProcessMessage(Text: string, ChatWindow, ChatBar, ChatSettings) --[[ Line: 212 ]]
+function ProcessMessage(Text: string, ChatWindow, ChatBar, ChatSettings)
 	-- upvalues: config (copy)
 	return if string.sub(Text, 1, 3):lower() == "/w " or string.sub(Text, 1, 9):lower() == "/whisper " then config.new(ChatWindow, ChatBar, ChatSettings) else nil
 end
 
-function CreateCustomState(p2, ChatWindow, ChatBar, ChatSettings) --[[ Line: 219 ]]
+function CreateCustomState(p2, ChatWindow, ChatBar, ChatSettings)
 	-- upvalues: config (copy)
 	return config.new(ChatWindow, ChatBar, ChatSettings, p2)
 end

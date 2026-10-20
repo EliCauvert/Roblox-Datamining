@@ -8,7 +8,7 @@ local Tbl = {
 	chatEntryPoint = require(Parent.SocialCommon).Enums.ChatEntryPointNames.SocialTabsPage
 }
 
-local function _(Subpage) --[[ Line: 31 | Named "forTab" ]]
+local function _(Subpage)
 	-- upvalues: Tbl (copy), CtaSurfaces (copy)
 	local Copy = table.clone(Tbl)
 	Copy.analytics = { surface = CtaSurfaces.SocialTabsPage, subpage = Subpage }

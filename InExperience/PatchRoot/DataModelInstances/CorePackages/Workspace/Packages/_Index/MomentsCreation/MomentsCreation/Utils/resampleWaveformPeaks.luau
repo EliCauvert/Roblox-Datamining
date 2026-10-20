@@ -1,4 +1,4 @@
-﻿return function(p1, p2, MinValue: number, MaxValue: number) --[[ Line: 9 | Named "resampleWaveformPeaks" ]]
+﻿return function(p1, p2, MinValue: number, MaxValue: number)
 	local ClampedValues = {}
 	local CountP0 = #p1
 	

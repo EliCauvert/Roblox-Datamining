@@ -16,7 +16,7 @@ local Style = {
 	fontName = StyleModule.Constants.FontName.Gotham
 }
 
-return function(p1) --[[ Line: 47 | Named "AccountUpgradePage" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), IsAccountUpgradeErrorUnrecoverableModule (copy), UseAccountUpgradeViewModelModule (copy), AccountUpgradeSurfaceModule (copy), UseIOSStatusBarStylerFunction (copy), View (copy), StyleModule (copy), Style (copy), AccountUpgradePageViewModule (copy)
 	local OnCompleteFunction = p1.onComplete
 	local OnUnrecoverableFailureFunction = p1.onUnrecoverableFailure
@@ -24,13 +24,13 @@ return function(p1) --[[ Line: 47 | Named "AccountUpgradePage" ]]
 		flow = p1.flow,
 		surface = AccountUpgradeSurfaceModule.FullPage,
 		currentUsername = p1.currentUsername,
-		onSignUpComplete = ReactModule.useCallback(function(p2) --[[ Line: 49 ]]
+		onSignUpComplete = ReactModule.useCallback(function(p2)
 			-- upvalues: OnCompleteFunction (copy)
 			if p2.isSuccess then
 				OnCompleteFunction(p2)
 			end
 		end, { OnCompleteFunction }),
-		onSignUpFailed = ReactModule.useCallback(function(p2) --[[ Line: 56 ]]
+		onSignUpFailed = ReactModule.useCallback(function(p2)
 			-- upvalues: OnUnrecoverableFailureFunction (copy), IsAccountUpgradeErrorUnrecoverableModule (upval)
 			if OnUnrecoverableFailureFunction and IsAccountUpgradeErrorUnrecoverableModule(p2) then
 				OnUnrecoverableFailureFunction()

@@ -3,7 +3,7 @@ local PresenceImageByPresenceModule = require(User.presenceImageByPresence)
 local GetPresenceTextFromUserModule = require(User.getPresenceTextFromUser)
 local GetOtherParticipantModule = require(script.Parent.getOtherParticipant)
 
-return function(p1, p2) --[[ Line: 8 ]]
+return function(p1, p2)
 	-- upvalues: GetOtherParticipantModule (copy), PresenceImageByPresenceModule (copy), GetPresenceTextFromUserModule (copy)
 	if p2.conversationType == "OneToOneConversation" then
 		local OtherParticipantModule = GetOtherParticipantModule(p1, p2.participants)

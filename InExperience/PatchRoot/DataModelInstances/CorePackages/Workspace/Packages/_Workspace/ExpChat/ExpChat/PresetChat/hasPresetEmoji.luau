@@ -2,7 +2,7 @@
 local EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint = require(ExpChat.Parent.SharedFlags).EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint
 local _ = require(ExpChat.Stores.GetPresetChatStore.createPresetChatStore)
 
-return function(List): boolean --[[ Line: 10 | Named "hasPresetEmoji" ]]
+return function(List): boolean
 	-- upvalues: EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy)
 	if not EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint then
 		return false

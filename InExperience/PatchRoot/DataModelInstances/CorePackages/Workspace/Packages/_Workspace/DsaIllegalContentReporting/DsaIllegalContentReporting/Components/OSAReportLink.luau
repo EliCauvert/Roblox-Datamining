@@ -11,7 +11,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local View = FoundationModule.View
 
-return ReactModule.memo(function() --[[ Line: 24 | Named "OSAReportLink" ]]
+return ReactModule.memo(function()
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), UseLocalizationFunction (copy), HttpService (copy), GuiService (copy), ControlState (copy), View (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
@@ -25,7 +25,7 @@ return ReactModule.memo(function() --[[ Line: 24 | Named "OSAReportLink" ]]
 		OSACopy4 = "Feature.ReportAbuse.Message.OSACopy4",
 		OSACopyReadOnly = "Feature.ReportAbuse.Message.OSACopyReadOnly"
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 40 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: HttpService (upval), UseLocalizationResult (copy), GuiService (upval)
 		GuiService:BroadcastNotification(HttpService:JSONEncode({
 			presentationStyle = nil,
@@ -34,7 +34,7 @@ return ReactModule.memo(function() --[[ Line: 24 | Named "OSAReportLink" ]]
 			title = UseLocalizationResult.HelpPageTitle
 		}), 20)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(Hover) --[[ Line: 50 ]]
+	local UseResult1 = ReactModule.useCallback(function(Hover)
 		-- upvalues: ControlState (upval), UseStateResult2 (copy), UseTokensResult (copy)
 		if Hover == ControlState.Hover then
 			UseStateResult2(UseTokensResult.Color.State.Hover)

@@ -11,15 +11,15 @@ local EventNamesModule = require(Parent.Analytics.EventNames)
 local OnToggleActivationModule = require(Parent.Utils.onToggleActivation)
 local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
 
-return function(p1) --[[ Line: 25 ]]
+return function(p1)
 	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseLocalizationFunction (copy), ReactModule (copy), OnToggleActivationModule (copy), EventNamesModule (copy), SegmentedControl (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 29 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
 		return p2[ConstantsModule.RoduxKey].IsCapturesCoreGuiEnabled
 	end)
-	local UseSelectorResult1 = UseSelectorFunction(function(p2) --[[ Line: 33 ]]
+	local UseSelectorResult1 = UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
 		return p2[ConstantsModule.RoduxKey].IsActive
 	end)
@@ -36,7 +36,7 @@ return function(p1) --[[ Line: 25 ]]
 	}, {
 		Control = ReactModule.createElement(SegmentedControl, {
 			height = p1.height,
-			onTabActivated = ReactModule.useCallback(function(p2) --[[ Line: 42 ]]
+			onTabActivated = ReactModule.useCallback(function(p2)
 				-- upvalues: OnToggleActivationModule (upval), UseSelectorResult1 (copy), UseAnalyticsModuleResult (copy), UseDispatchResult (copy), EventNamesModule (upval)
 				OnToggleActivationModule(UseSelectorResult1, p2, UseAnalyticsModuleResult.fireEvent, UseDispatchResult, EventNamesModule.CapturesActivatedInGameMenu, EventNamesModule.CapturesDeactivatedInGameMenu)
 			end, { UseSelectorResult1 }),

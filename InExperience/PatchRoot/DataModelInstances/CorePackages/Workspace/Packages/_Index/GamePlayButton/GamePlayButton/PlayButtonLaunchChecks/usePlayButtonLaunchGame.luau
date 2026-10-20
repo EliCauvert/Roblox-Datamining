@@ -34,19 +34,19 @@ local FFlagLuaAppEnableStratusStreamingCheck = require(Parent.SharedFlags).FFlag
 local FFlagLuaAppDemoModePlayButtonTelemetry = require(Parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
 local VideoService = game:GetService("VideoService")
 
-return function(UniverseId, p1, p2, ReferralSource, Ctx, LaunchSource, ExtraParams) --[[ Line: 45 ]]
+return function(UniverseId, p1, p2, ReferralSource, Ctx, LaunchSource, ExtraParams)
 	-- upvalues: UseRoactServiceFunction (copy), RoactAnalytics (copy), AppEventIngestService (copy), AppGame (copy), UseSelectorFunction (copy), UseDispatchFunction (copy), FFlagLuaAppEnablePlayButtonThrottle (copy), ReactModule (copy), FIntLuaAppPlayButtonThrottleTimeSeconds (copy), GetFFlagLuaAppEnableVirtualEventPlaceIdFunction (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy), GamePlayIntentFunction (copy), JoinGamePlayButtonFunction (copy), FFlagLuaAppEnableStratusStreamingTestOnly (copy), FFlagLuaAppEnableStratusStreamingCheck (copy), VideoService (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateToRouteFunction (copy), IsVRAppBuildFunction (copy), SplashScreenManager (copy), FFlagDeferInExperienceRbxmDownload (copy), DashModule (copy), FFlagLuaAppFixLaunchGameSourceParam (copy), LaunchGameFunction (copy), ReasonForNotVoteable (copy), ClearUserGameVotesFunction (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactAnalytics)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(AppEventIngestService)
 	local UseRoactServiceResult2 = UseRoactServiceFunction(AppGame)
-	local UseSelectorResult = UseSelectorFunction(function(p3) --[[ Line: 58 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p3)
 		-- upvalues: UniverseId (copy)
 		return p3.UserGameVotes[UniverseId]
 	end)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseRefResult = if FFlagLuaAppEnablePlayButtonThrottle then ReactModule.useRef(0) else nil
 	
-	return (ReactModule.useCallback(function(Callback: (any) -> (), p3) --[[ Line: 66 ]]
+	return (ReactModule.useCallback(function(Callback: (any) -> (), p3)
 		-- upvalues: FFlagLuaAppEnablePlayButtonThrottle (upval), UseRefResult (copy), FIntLuaAppPlayButtonThrottleTimeSeconds (upval), GetFFlagLuaAppEnableVirtualEventPlaceIdFunction (upval), p1 (copy), p2 (copy), FFlagLuaAppDemoModePlayButtonTelemetry (upval), GamePlayIntentFunction (upval), UseRoactServiceResult1 (copy), ReferralSource (copy), UniverseId (copy), ExtraParams (ref), JoinGamePlayButtonFunction (upval), UseRoactServiceResult (copy), Ctx (copy), FFlagLuaAppEnableStratusStreamingTestOnly (upval), FFlagLuaAppEnableStratusStreamingCheck (upval), VideoService (upval), AppPage (upval), LaunchSource (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateToRouteFunction (upval), IsVRAppBuildFunction (upval), SplashScreenManager (upval), FFlagDeferInExperienceRbxmDownload (upval), DashModule (upval), FFlagLuaAppFixLaunchGameSourceParam (upval), LaunchGameFunction (upval), UseRoactServiceResult2 (copy), UseSelectorResult (copy), ReasonForNotVoteable (upval), ClearUserGameVotesFunction (upval)
 		if FFlagLuaAppEnablePlayButtonThrottle then
 			local CurrentTime = tick()

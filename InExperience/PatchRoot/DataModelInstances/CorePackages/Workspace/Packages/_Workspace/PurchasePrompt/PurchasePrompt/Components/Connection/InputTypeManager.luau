@@ -15,11 +15,11 @@ local config = {
 }
 local InputTypeManager = Roact.Component:extend("InputTypeManager")
 
-function InputTypeManager.init(p1) --[[ Line: 31 ]]
+function InputTypeManager.init(p1)
 	-- upvalues: config (copy)
 	local SetGamepadEnabledFunction = p1.props.setGamepadEnabled
 	
-	function p1.dispatchOnChange(p2) --[[ Line: 34 ]]
+	function p1.dispatchOnChange(p2)
 		-- upvalues: config (upval), p1 (copy), SetGamepadEnabledFunction (copy)
 		local GamepadEnabled: boolean = if config[p2] then true else false
 		
@@ -33,7 +33,7 @@ function InputTypeManager.init(p1) --[[ Line: 31 ]]
 	p1.cursorOverridden = false
 end
 
-function InputTypeManager.render(p1) --[[ Line: 50 ]]
+function InputTypeManager.render(p1)
 	-- upvalues: Roact (copy), ExternalEventConnectionModule (copy), UserInputService (copy)
 	return Roact.createElement(ExternalEventConnectionModule, {
 		event = UserInputService.LastInputTypeChanged,
@@ -41,7 +41,7 @@ function InputTypeManager.render(p1) --[[ Line: 50 ]]
 	})
 end
 
-function InputTypeManager.didUpdate(p1, p2, _) --[[ Line: 57 ]]
+function InputTypeManager.didUpdate(p1, p2, _)
 	-- upvalues: PromptStateModule (copy), MouseIconOverrideService (copy)
 	local IsNotPromptStateMatch: boolean = p2.promptState == PromptStateModule.None and p1.props.promptState ~= PromptStateModule.None
 	local IsPromptStateMatch: boolean = p2.promptState ~= PromptStateModule.None and p1.props.promptState == PromptStateModule.None
@@ -68,15 +68,15 @@ function InputTypeManager.didUpdate(p1, p2, _) --[[ Line: 57 ]]
 	end
 end
 
-return (ConnectToStoreModule(function(p1) --[[ Line: 84 | Named "mapStateToProps" ]]
+return (ConnectToStoreModule(function(p1)
 	return {
 		promptState = p1.promptState,
 		gamepadEnabled = p1.gamepadEnabled
 	}
-end, function(Callback) --[[ Line: 91 | Named "mapDispatchToProps" ]]
+end, function(Callback)
 	-- upvalues: SetGamepadEnabledModule (copy)
 	return {
-		setGamepadEnabled = function(p1) --[[ Line: 93 ]]
+		setGamepadEnabled = function(p1)
 			-- upvalues: Callback (copy), SetGamepadEnabledModule (upval)
 			Callback(SetGamepadEnabledModule(p1))
 		end

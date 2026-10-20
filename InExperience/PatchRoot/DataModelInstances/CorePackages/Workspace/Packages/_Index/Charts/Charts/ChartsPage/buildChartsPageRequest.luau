@@ -8,7 +8,7 @@ local FFlagSduiPreferredTextSizeLineBudgets = SharedFlagsModule.FFlagSduiPreferr
 local FFlagSduiChartsAudienceFilterModule = require(Charts.Flags.FFlagSduiChartsAudienceFilter)
 local _UDim = UDim.new(1, 72)
 
-return function(p1, p2) --[[ Line: 36 | Named "buildChartsPageRequest" ]]
+return function(p1, p2)
 	-- upvalues: AddSystemInfoToArgsFunction (copy), FFlagSduiChartsAudienceFilterModule (copy), FFlagSduiChartsRequestPlaceholders (copy), BuildSduiCollectionInfoFunction (copy), _UDim (copy), FFlagSduiPreferredTextSizeLineBudgets (copy)
 	local t = {}
 	local t1 = {}

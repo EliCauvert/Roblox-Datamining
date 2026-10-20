@@ -1,4 +1,4 @@
-﻿return function() --[[ Line: 10 ]]
+﻿return function()
 	return {
 		label = "CoreScripts.TopBar.Chat",
 		icon = {

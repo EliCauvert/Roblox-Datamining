@@ -36,7 +36,7 @@ local InterfaceResult = TModule.interface({
 })
 
 return {
-	signUp = function(Callback, Username, Password, Birthdate, BundleId, p1) --[[ Line: 40 ]]
+	signUp = function(Callback, Username, Password, Birthdate, BundleId, p1)
 		-- upvalues: Url (copy), HttpService (copy), FFlagEnableLuaAccountSwitch (copy), AppStorageUtilities (copy)
 		assert(type(Username) == "string", "invalid username has been passed into SignUpRequests.signUp")
 		assert(type(Password) == "string", "invalid password has been passed into SignUpRequests.signUp")
@@ -57,7 +57,7 @@ return {
 			})
 		})
 	end,
-	signUpV2 = function(Callback, p1, p2) --[[ Line: 121 ]]
+	signUpV2 = function(Callback, p1, p2)
 		-- upvalues: UnionResult (copy), Url (copy), HttpService (copy), FFlagEnableKoreaKISACompliance (copy), FFlagEnableLuaAccountSwitch (copy), AppStorageUtilities (copy), GetFFlagEnableAuditForSinglePageSignUpFunction (copy)
 		assert(UnionResult(p1))
 		
@@ -88,7 +88,7 @@ return {
 			})
 		})
 	end,
-	verifiedSignup = function(Callback, p1, p2) --[[ Line: 169 ]]
+	verifiedSignup = function(Callback, p1, p2)
 		-- upvalues: InterfaceResult (copy), Url (copy), HttpService (copy), FFlagEnableLuaAccountSwitch (copy), AppStorageUtilities (copy)
 		assert(InterfaceResult(p1))
 		
@@ -109,7 +109,7 @@ return {
 			})
 		})
 	end,
-	singleSignOnSignup = function(p1, p2) --[[ Line: 194 ]]
+	singleSignOnSignup = function(p1, p2)
 		-- upvalues: GetSingleSignOnUrlsFunction (copy), GetFFlagEnableAuditForSsoFunction (copy), HttpService (copy), ConsoleAuthRequestWrapperFunction (copy), PromiseModule (copy), SignUpV2ErrorCodesModule (copy)
 		local SingleSignOnUrls = GetSingleSignOnUrlsFunction()
 		local SignupFunction = SingleSignOnUrls.signup
@@ -132,7 +132,7 @@ return {
 		
 		return if SignupFunction then ConsoleAuthRequestWrapperFunction(p1, SignupFunction(), "POST", { maxRetryCount = 0, postBody = Json }) else PromiseModule.reject(SignUpV2ErrorCodesModule.TokenValidationFailed)
 	end,
-	expressLinkedSignup = function(p1, Locale, AgreementIds) --[[ Line: 236 ]]
+	expressLinkedSignup = function(p1, Locale, AgreementIds)
 		-- upvalues: GetSingleSignOnUrlsFunction (copy), PromiseModule (copy), SignUpV2ErrorCodesModule (copy), HttpService (copy), ConsoleAuthRequestWrapperFunction (copy)
 		local SingleSignOnUrls = GetSingleSignOnUrlsFunction()
 		local SignupFunction = SingleSignOnUrls.signup

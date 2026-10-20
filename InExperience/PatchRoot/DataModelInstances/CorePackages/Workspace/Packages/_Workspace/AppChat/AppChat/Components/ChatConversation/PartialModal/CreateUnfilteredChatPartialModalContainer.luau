@@ -25,12 +25,12 @@ local config = {
 	networkErrorTextKey = "Feature.Toast.NetworkingError.SomethingIsWrong",
 	actionKey = "Feature.Chat.Action.Create",
 	cancelAlertKey = "Feature.Chat.Action.Cancel",
-	onDismissed = function() --[[ Line: 41 ]] end,
-	navigateToConversation = function(_) --[[ Line: 42 ]] end,
-	navigateToToast = function(_) --[[ Line: 43 ]] end
+	onDismissed = function() end,
+	navigateToConversation = function(_) end,
+	navigateToToast = function(_) end
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 53 | Named "CreateUnfilteredChatPartialModalContainer" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseScreenSizeFunction (copy), UseLayerCollectorFunction (copy), UseStateFunction (copy), UseDispatchFunction (copy), UseAnalyticsModule (copy), UseIsLocalPlayerPartyVoiceEligibleFunction (copy), UseEffectOnMountFunction (copy), EventNamesModule (copy), UseLocalizationFunction (copy), UseCallbackFunction (copy), AppChatNetworkingModule (copy), ReactModule (copy), PartialModalModule (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseStyleResult = UseStyleFunction()
@@ -44,7 +44,7 @@ return ReactModule.memo(function(p1) --[[ Line: 53 | Named "CreateUnfilteredChat
 	local UseDispatchResult = UseDispatchFunction()
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseIsLocalPlayerPartyVoiceEligibleResult = UseIsLocalPlayerPartyVoiceEligibleFunction()
-	UseEffectOnMountFunction(function() --[[ Line: 66 ]]
+	UseEffectOnMountFunction(function()
 		-- upvalues: UseAnalyticsModuleResult (copy), EventNamesModule (upval), UnionResult (copy)
 		if UseAnalyticsModuleResult then
 			UseAnalyticsModuleResult.fireAnalyticsEvent(EventNamesModule.ConversationUpgradeDialogRendered, { conversationId = UnionResult.conversationId })
@@ -58,7 +58,7 @@ return ReactModule.memo(function(p1) --[[ Line: 53 | Named "CreateUnfilteredChat
 		actionText = UnionResult.actionKey,
 		cancelAlertText = UnionResult.cancelAlertKey
 	})
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 83 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: UnionResult (copy), UseLocalizationResult (copy)
 		UnionResult.navigateToToast(UseLocalizationResult.networkErrorText)
 	end, {
@@ -73,13 +73,13 @@ return ReactModule.memo(function(p1) --[[ Line: 53 | Named "CreateUnfilteredChat
 		cancelAlertText = UseLocalizationResult.cancelAlertText,
 		isButtonDisabled = UseStateResult,
 		screenSize = UseScreenSizeResult,
-		onActivated = UseCallbackFunction(function() --[[ Line: 88 ]]
+		onActivated = UseCallbackFunction(function()
 			-- upvalues: UseAnalyticsModuleResult (copy), EventNamesModule (upval), UnionResult (copy), UseStateResult2 (copy), UseDispatchResult (copy), AppChatNetworkingModule (upval), UseCallbackResult (copy)
 			if UseAnalyticsModuleResult then
 				UseAnalyticsModuleResult.fireAnalyticsEvent(EventNamesModule.ConversationUpgradeDialogActionClicked, { conversationId = UnionResult.conversationId })
 			end
 			UseStateResult2(true)
-			UseDispatchResult(AppChatNetworkingModule.rodux.DuplicateConversation.API(UnionResult.conversationId, "trusted_comms")):andThen(function(Result) --[[ Line: 96 ]]
+			UseDispatchResult(AppChatNetworkingModule.rodux.DuplicateConversation.API(UnionResult.conversationId, "trusted_comms")):andThen(function(Result)
 				-- upvalues: UnionResult (upval), UseCallbackResult (upval)
 				local ResponseBody = Result.responseBody
 				local Id = ResponseBody and (ResponseBody.conversations and (ResponseBody.conversations[1] and ResponseBody.conversations[1].id))
@@ -91,10 +91,10 @@ return ReactModule.memo(function(p1) --[[ Line: 53 | Named "CreateUnfilteredChat
 				else
 					UseCallbackResult()
 				end
-			end):catch(function() --[[ Line: 108 ]]
+			end):catch(function()
 				-- upvalues: UseCallbackResult (upval)
 				UseCallbackResult()
-			end):finally(function() --[[ Line: 111 ]]
+			end):finally(function()
 				-- upvalues: UseStateResult2 (upval)
 				UseStateResult2(false)
 			end)
@@ -103,7 +103,7 @@ return ReactModule.memo(function(p1) --[[ Line: 53 | Named "CreateUnfilteredChat
 			UnionResult.navigateToConversation, UnionResult.conversationId,
 			UseAnalyticsModuleResult
 		}),
-		onDismissed = UseCallbackFunction(function() --[[ Line: 117 ]]
+		onDismissed = UseCallbackFunction(function()
 			-- upvalues: UseAnalyticsModuleResult (copy), EventNamesModule (upval), UnionResult (copy)
 			if UseAnalyticsModuleResult then
 				UseAnalyticsModuleResult.fireAnalyticsEvent(EventNamesModule.ConversationUpgradeDialogDismissed, { conversationId = UnionResult.conversationId })

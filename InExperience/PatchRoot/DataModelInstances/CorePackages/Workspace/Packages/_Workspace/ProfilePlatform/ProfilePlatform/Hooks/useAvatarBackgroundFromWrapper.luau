@@ -4,7 +4,7 @@ local EnumsModule = require(ProfilePlatform.Common.Enums)
 local InsertServiceLoadAssetModule = require(ProfilePlatform.Utils.insertServiceLoadAsset)
 local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
 
-local function _(p1): number? --[[ Line: 14 | Named "parseAssetId" ]]
+local function _(p1): number?
 	if p1 == nil then
 		return nil
 	end
@@ -23,7 +23,7 @@ local function _(p1): number? --[[ Line: 14 | Named "parseAssetId" ]]
 	return nil
 end
 
-local function findInnerImageId(Object): number? --[[ Line: 37 ]]
+local function findInnerImageId(Object): number?
 	if type(Object) == "table" then
 		local ImageId = Object.ImageId
 		
@@ -55,7 +55,7 @@ local function findInnerImageId(Object): number? --[[ Line: 37 ]]
 	end
 end
 
-return function() --[[ Line: 73 | Named "useAvatarBackgroundFromWrapper" ]]
+return function()
 	-- upvalues: UseProfileJsonComponentModule (copy), EnumsModule (copy), ReactModule (copy), InsertServiceLoadAssetModule (copy), findInnerImageId (copy)
 	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.ProfileBackground)
 	local v1 = nil
@@ -81,7 +81,7 @@ return function() --[[ Line: 73 | Named "useAvatarBackgroundFromWrapper" ]]
 		v1 = nil
 	until true
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-	ReactModule.useEffect(function() --[[ Line: 81 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: v1 (copy), UseStateResult2 (copy), InsertServiceLoadAssetModule (upval), findInnerImageId (upval)
 		if v1 == nil then
 			UseStateResult2(nil)
@@ -89,9 +89,9 @@ return function() --[[ Line: 73 | Named "useAvatarBackgroundFromWrapper" ]]
 			return nil
 		else
 			local Flag = false
-			task.spawn(function() --[[ Line: 88 ]]
+			task.spawn(function()
 				-- upvalues: InsertServiceLoadAssetModule (upval), v1 (upval), Flag (ref), findInnerImageId (upval), UseStateResult2 (upval)
-				local Success, Result = pcall(function() --[[ Line: 89 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: InsertServiceLoadAssetModule (upval), v1 (upval)
 					return InsertServiceLoadAssetModule(v1)
 				end)
@@ -109,7 +109,7 @@ return function() --[[ Line: 73 | Named "useAvatarBackgroundFromWrapper" ]]
 				end
 			end)
 			
-			return function() --[[ Line: 109 ]]
+			return function()
 				-- upvalues: Flag (ref)
 				Flag = true
 			end

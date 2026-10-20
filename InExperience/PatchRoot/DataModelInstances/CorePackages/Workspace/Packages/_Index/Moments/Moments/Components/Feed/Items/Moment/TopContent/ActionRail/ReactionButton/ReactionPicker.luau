@@ -12,7 +12,7 @@ local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local MomentsGetMomentsReactionsStoreModule = if FFlagMomentsEmojiSetsApiModule then require(Parent.DataHydration.MomentsGetMomentsReactionsStore) else nil
 local PICKERREACTIONORDER = ReactionTypesFromEmojisModule.PICKER_REACTION_ORDER
 local ReactionTypesFromEmojisFunction = ReactionTypesFromEmojisModule.reactionTypesFromEmojis
-local v1 = if FFlagMomentsEmojiSetsApiModule then function(p1) --[[ Line: 30 ]]
+local v1 = if FFlagMomentsEmojiSetsApiModule then function(p1)
 	-- upvalues: MomentsGetMomentsReactionsStoreModule (copy), ReactionTypesFromEmojisFunction (copy)
 	assert(MomentsGetMomentsReactionsStoreModule ~= nil, "expected Moments reactions store when FFlagMomentsEmojiSetsApi is on")
 	local GetEmojisFunction = MomentsGetMomentsReactionsStoreModule(false).getEmojis
@@ -21,11 +21,11 @@ local v1 = if FFlagMomentsEmojiSetsApiModule then function(p1) --[[ Line: 30 ]]
 	return ReactionTypesFromEmojisFunction(GetEmojisFunction(p1))
 end else nil
 
-return ReactModule.memo(function() --[[ Line: 38 | Named "ReactionPicker" ]]
+return ReactModule.memo(function()
 	-- upvalues: MomentContextModule (copy), UseReactionCommitModule (copy), PICKERREACTIONORDER (copy), FFlagMomentsEmojiSetsApiModule (copy), UseSignalStateFunction (copy), v1 (copy), ReactModule (copy), PickerItemModule (copy), View (copy)
 	local Store = MomentContextModule.useMoment().store
 	local UseReactionCommitModuleResult = UseReactionCommitModule()
-	local UseResult = ReactModule.useCallback(function(p1, p2) --[[ Line: 50 ]]
+	local UseResult = ReactModule.useCallback(function(p1, p2)
 		-- upvalues: UseReactionCommitModuleResult (copy), Store (copy)
 		UseReactionCommitModuleResult("pickerSelect", p2, p1)
 		Store.setReactionPickerOpen(false)

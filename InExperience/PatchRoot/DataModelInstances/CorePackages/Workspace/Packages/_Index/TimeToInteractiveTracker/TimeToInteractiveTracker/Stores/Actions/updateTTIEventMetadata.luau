@@ -2,11 +2,11 @@
 local _ = require(script.Parent.Parent.types)
 local MergeTTIEventMetadataModule = require(script.Parent.Parent.Parent.Utils.mergeTTIEventMetadata)
 
-return function(Callback) --[[ Line: 14 ]]
+return function(Callback)
 	-- upvalues: NewResult (copy), MergeTTIEventMetadataModule (copy)
-	return function(p1, p2) --[[ Line: 15 ]]
+	return function(p1, p2)
 		-- upvalues: Callback (copy), NewResult (upval), MergeTTIEventMetadataModule (upval)
-		Callback(function(Tbl1) --[[ Line: 16 ]]
+		Callback(function(Tbl1)
 			-- upvalues: p1 (copy), NewResult (upval), MergeTTIEventMetadataModule (upval), p2 (copy)
 			local Tbl = Tbl1[p1]
 			

@@ -3,9 +3,9 @@ local ReactModule = require(BuildExperience.Parent.React)
 local _ = require(BuildExperience.Stores.BuildLibrary.createBuildLibraryStore)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 
-return function(p1, List, Kind, Text: string, Count, p2, FolderId) --[[ Line: 6 | Named "useLibraryItems" ]]
+return function(p1, List, Kind, Text: string, Count, p2, FolderId)
 	-- upvalues: ReactModule (copy), SendBuildExperienceEventModule (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 15 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		return {}
 	end, {
 		p1,
@@ -48,7 +48,7 @@ return function(p1, List, Kind, Text: string, Count, p2, FolderId) --[[ Line: 6 
 	end
 	local IsCountBelow = Count1 < Count2
 	local UseRefResult = ReactModule.useRef({ key = UseMemoResult, count = Count1 })
-	ReactModule.useEffect(function() --[[ Line: 53 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseMemoResult (copy), Count1 (copy), Count2 (ref), SendBuildExperienceEventModule (upval), p2 (copy), Kind (copy), FolderId (copy)
 		local Current = UseRefResult.current
 		
@@ -70,7 +70,7 @@ return function(p1, List, Kind, Text: string, Count, p2, FolderId) --[[ Line: 6 
 		UseMemoResult, Count1, Count2, Kind or false, p2 or false, FolderId or false
 	})
 	
-	return List1, IsCountBelow, (ReactModule.useCallback(function() --[[ Line: 69 ]]
+	return List1, IsCountBelow, (ReactModule.useCallback(function()
 		-- upvalues: IsCountBelow (copy), UseStateResult2 (copy), UseMemoResult (copy), Count1 (copy), Count (copy)
 		if IsCountBelow then
 			UseStateResult2({ key = UseMemoResult, count = Count1 + Count })

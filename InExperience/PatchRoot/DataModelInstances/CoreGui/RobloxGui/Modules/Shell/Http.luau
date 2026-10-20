@@ -7,12 +7,12 @@ local Replaced = string.gsub(string.gsub(game:GetService("ContentProvider").Base
 local _ = string.gsub(Replaced, "https://www.", "https://accountsettings.")
 local GetFStringAppLocationForAppPresenceModule = require(Modules.Shell.Flags.GetFStringAppLocationForAppPresence)
 
-local function _(p1) --[[ Line: 47 | Named "decodeJSON" ]]
+local function _(p1)
 	-- upvalues: HttpService (copy)
 	if p1 == nil or #p1 == 0 then
 		return nil
 	else
-		local Success, Result = pcall(function() --[[ Line: 52 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: HttpService (upval), p1 (copy)
 			return HttpService:JSONDecode(p1)
 		end)
@@ -21,9 +21,9 @@ local function _(p1) --[[ Line: 47 | Named "decodeJSON" ]]
 	end
 end
 
-local _ = function(p1, p2) --[[ Line: 62 | Named "rbxGetAsync" ]]
+local _ = function(p1, p2)
 	-- upvalues: HttpService (copy)
-	local Success, Result = pcall(function() --[[ Line: 63 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: p1 (copy)
 		return game:HttpGetAsync(p1)
 	end)
@@ -35,7 +35,7 @@ local _ = function(p1, p2) --[[ Line: 62 | Named "rbxGetAsync" ]]
 	elseif Result == nil or #Result == 0 then
 		return nil
 	else
-		local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: HttpService (upval), Result (copy)
 			return HttpService:JSONDecode(Result)
 		end)
@@ -44,9 +44,9 @@ local _ = function(p1, p2) --[[ Line: 62 | Named "rbxGetAsync" ]]
 	end
 end
 
-local _ = function(p1, p2, p3) --[[ Line: 77 | Named "rbxPostAsync" ]]
+local _ = function(p1, p2, p3)
 	-- upvalues: HttpService (copy)
-	local Success, Result = pcall(function() --[[ Line: 78 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: p1 (copy), p2 (copy), p3 (copy)
 		return game:HttpPostAsync(p1, p2, p3)
 	end)
@@ -56,7 +56,7 @@ local _ = function(p1, p2, p3) --[[ Line: 77 | Named "rbxPostAsync" ]]
 	elseif Result == nil or #Result == 0 then
 		return nil
 	else
-		local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: HttpService (upval), Result (copy)
 			return HttpService:JSONDecode(Result)
 		end)
@@ -65,9 +65,9 @@ local _ = function(p1, p2, p3) --[[ Line: 77 | Named "rbxPostAsync" ]]
 	end
 end
 
-local _ = function(ApiUrlPath) --[[ Line: 89 | Named "rbxApiGetAsync" ]]
+local _ = function(ApiUrlPath)
 	-- upvalues: HttpRbxApiService (copy), HttpService (copy)
-	local Success, Result = pcall(function() --[[ Line: 90 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: HttpRbxApiService (upval), ApiUrlPath (copy)
 		return HttpRbxApiService:GetAsync(ApiUrlPath)
 	end)
@@ -77,7 +77,7 @@ local _ = function(ApiUrlPath) --[[ Line: 89 | Named "rbxApiGetAsync" ]]
 	elseif Result == nil or #Result == 0 then
 		return nil
 	else
-		local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: HttpService (upval), Result (copy)
 			return HttpService:JSONDecode(Result)
 		end)
@@ -86,9 +86,9 @@ local _ = function(ApiUrlPath) --[[ Line: 89 | Named "rbxApiGetAsync" ]]
 	end
 end
 
-local _ = function(ApiUrlPath, Data, Priority, ContentType) --[[ Line: 101 | Named "rbxApiPostAsync" ]]
+local _ = function(ApiUrlPath, Data, Priority, ContentType)
 	-- upvalues: HttpRbxApiService (copy), HttpService (copy)
-	local Success, Result = pcall(function() --[[ Line: 102 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: HttpRbxApiService (upval), ApiUrlPath (copy), Data (copy), Priority (copy), ContentType (copy)
 		return HttpRbxApiService:PostAsync(ApiUrlPath, Data, Priority, ContentType)
 	end)
@@ -98,7 +98,7 @@ local _ = function(ApiUrlPath, Data, Priority, ContentType) --[[ Line: 101 | Nam
 	elseif Result == nil or #Result == 0 then
 		return nil
 	else
-		local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: HttpService (upval), Result (copy)
 			return HttpService:JSONDecode(Result)
 		end)
@@ -107,9 +107,9 @@ local _ = function(ApiUrlPath, Data, Priority, ContentType) --[[ Line: 101 | Nam
 	end
 end
 
-local _ = function(p1, p2, p3, p4) --[[ Line: 113 | Named "rbxApiPostAsyncFullUrl" ]]
+local _ = function(p1, p2, p3, p4)
 	-- upvalues: HttpRbxApiService (copy), HttpService (copy)
-	local Success, Result = pcall(function() --[[ Line: 114 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: HttpRbxApiService (upval), p1 (copy), p2 (copy), p3 (copy), p4 (copy)
 		return HttpRbxApiService:PostAsyncFullUrl(p1, p2, p3, p4)
 	end)
@@ -119,7 +119,7 @@ local _ = function(p1, p2, p3, p4) --[[ Line: 113 | Named "rbxApiPostAsyncFullUr
 	elseif Result == nil or #Result == 0 then
 		return nil
 	else
-		local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: HttpService (upval), Result (copy)
 			return HttpService:JSONDecode(Result)
 		end)
@@ -128,11 +128,11 @@ local _ = function(p1, p2, p3, p4) --[[ Line: 113 | Named "rbxApiPostAsyncFullUr
 	end
 end
 
-local _ = function(Options) --[[ Line: 125 | Named "rbxRequestInternal" ]]
+local _ = function(Options)
 	-- upvalues: UtilityModule (copy), HttpService (copy)
 	local v1 = nil
 	local SignalResult = UtilityModule.Signal()
-	HttpService:RequestInternal(Options):Start(function(p1, p2) --[[ Line: 130 ]]
+	HttpService:RequestInternal(Options):Start(function(p1, p2)
 		-- upvalues: v1 (ref), HttpService (upval), SignalResult (copy)
 		if p1 and p2.StatusCode ~= 401 and p2.StatusCode >= 200 and p2.StatusCode < 400 then
 			local Body = p2.Body
@@ -141,7 +141,7 @@ local _ = function(Options) --[[ Line: 125 | Named "rbxRequestInternal" ]]
 			if Body == nil or #Body == 0 then
 				v2 = nil
 			else
-				local Success, Result = pcall(function() --[[ Line: 52 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: HttpService (upval), Body (copy)
 					return HttpService:JSONDecode(Body)
 				end)
@@ -156,22 +156,22 @@ local _ = function(Options) --[[ Line: 125 | Named "rbxRequestInternal" ]]
 	return v1
 end
 
-local function buildServiceUrl(Text): string --[[ Line: 145 ]]
+local function buildServiceUrl(Text): string
 	-- upvalues: Replaced (ref)
 	return string.gsub(Replaced, "https://www.", "https://" .. Text .. ".")
 end
 
-local _ = function(p1): boolean --[[ Line: 149 | Named "isStringNilOrEmpty" ]]
+local _ = function(p1): boolean
 	return p1 == nil or #p1 == 0
 end
 
 return {
 	BaseUrl = Replaced,
 	AssetGameBaseUrl = string.gsub(Replaced, "https://www.", "https://assetgame."),
-	GetCuratedSortAsync = function(p1, p2) --[[ Line: 192 ]]
+	GetCuratedSortAsync = function(p1, p2)
 		-- upvalues: Replaced (ref), HttpService (copy)
 		local Formatted = string.format("%sgames/set?GameSetTargetId=%d&MaxRows=%d", Replaced, p1, p2)
-		local Success, Result = pcall(function() --[[ Line: 63 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Formatted (copy)
 			return game:HttpGetAsync(Formatted)
 		end)
@@ -181,7 +181,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -189,9 +189,9 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	GetCuratedSortByUrlAsync = function(p1) --[[ Line: 200 ]]
+	GetCuratedSortByUrlAsync = function(p1)
 		-- upvalues: HttpService (copy)
-		local Success, Result = pcall(function() --[[ Line: 63 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p1 (copy)
 			return game:HttpGetAsync(p1)
 		end)
@@ -201,7 +201,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -209,10 +209,10 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	GetUserPlacesAsync = function(p1, p2, p3) --[[ Line: 234 ]]
+	GetUserPlacesAsync = function(p1, p2, p3)
 		-- upvalues: Replaced (ref), HttpService (copy)
 		local Formatted = string.format("%sgames/list-users-games-json?userid=%d&startIndex=%d&pageSize=%d", Replaced, p3, p1, p2)
-		local Success, Result = pcall(function() --[[ Line: 63 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Formatted (copy)
 			return game:HttpGetAsync(Formatted)
 		end)
@@ -222,7 +222,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -230,10 +230,10 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	SearchGamesAsync = function(p1, p2, Input) --[[ Line: 242 ]]
+	SearchGamesAsync = function(p1, p2, Input)
 		-- upvalues: Replaced (ref), HttpService (copy)
 		local Formatted = string.format("%sgames/list-json?keyword=%s&StartRows=%d&MaxRows=%d&filterByDeviceType=true", Replaced, HttpService:UrlEncode(Input), p1, p2)
-		local Success, Result = pcall(function() --[[ Line: 63 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Formatted (copy)
 			return game:HttpGetAsync(Formatted)
 		end)
@@ -243,7 +243,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -251,10 +251,10 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	GetGamesAsync = function(List) --[[ Line: 305 ]]
+	GetGamesAsync = function(List)
 		-- upvalues: Replaced (ref), HttpService (copy)
 		local Text = string.gsub(Replaced, "https://www.", "https://games.") .. "v1/games?universeIds=" .. table.concat(List, ",")
-		local Success, Result = pcall(function() --[[ Line: 63 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Text (copy)
 			return game:HttpGetAsync(Text)
 		end)
@@ -264,7 +264,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -272,7 +272,7 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	PostExperienceGuidelines = function(UniverseId) --[[ Line: 343 ]]
+	PostExperienceGuidelines = function(UniverseId)
 		-- upvalues: buildServiceUrl (copy), HttpService (copy), UtilityModule (copy)
 		local config = {
 			Method = "POST",
@@ -285,7 +285,7 @@ return {
 		}
 		local v1 = nil
 		local SignalResult = UtilityModule.Signal()
-		HttpService:RequestInternal(config):Start(function(p1, p2) --[[ Line: 130 ]]
+		HttpService:RequestInternal(config):Start(function(p1, p2)
 			-- upvalues: v1 (ref), HttpService (upval), SignalResult (copy)
 			if p1 and p2.StatusCode ~= 401 and p2.StatusCode >= 200 and p2.StatusCode < 400 then
 				local Body = p2.Body
@@ -294,7 +294,7 @@ return {
 				if Body == nil or #Body == 0 then
 					v2 = nil
 				else
-					local Success, Result = pcall(function() --[[ Line: 52 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: HttpService (upval), Body (copy)
 						return HttpService:JSONDecode(Body)
 					end)
@@ -308,10 +308,10 @@ return {
 		
 		return v1
 	end,
-	GetGameIconIdAsync = function(p1) --[[ Line: 369 ]]
+	GetGameIconIdAsync = function(p1)
 		-- upvalues: Replaced (ref), HttpService (copy)
 		local Text = Replaced .. "places/icons/json?placeId=" .. tostring(p1)
-		local Success, Result = pcall(function() --[[ Line: 63 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Text (copy)
 			return game:HttpGetAsync(Text)
 		end)
@@ -321,7 +321,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -329,10 +329,10 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	GetGameVotesAsync = function(p1) --[[ Line: 388 ]]
+	GetGameVotesAsync = function(p1)
 		-- upvalues: Replaced (ref), HttpService (copy)
 		local Text = Replaced .. "PlaceItem/GameDetailsVotingPanelJson?placeId=" .. tostring(p1)
-		local Success, Result = pcall(function() --[[ Line: 63 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Text (copy)
 			return game:HttpGetAsync(Text)
 		end)
@@ -342,7 +342,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -350,10 +350,10 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	GetRecommendedGamesAsync = function(p1) --[[ Line: 415 ]]
+	GetRecommendedGamesAsync = function(p1)
 		-- upvalues: Replaced (ref), HttpService (copy)
 		local Text = Replaced .. "Games/GetRecommendedGamesJson?currentPlaceId=" .. tostring(p1)
-		local Success, Result = pcall(function() --[[ Line: 63 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Text (copy)
 			return game:HttpGetAsync(Text)
 		end)
@@ -363,7 +363,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -371,10 +371,10 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	GetGameThumbnailsAsync = function(p1) --[[ Line: 444 ]]
+	GetGameThumbnailsAsync = function(p1)
 		-- upvalues: Replaced (ref), HttpService (copy)
 		local Text = Replaced .. "thumbnail/place-thumbnails?placeId=" .. tostring(p1)
-		local Success, Result = pcall(function() --[[ Line: 63 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Text (copy)
 			return game:HttpGetAsync(Text)
 		end)
@@ -384,7 +384,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -392,14 +392,14 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	GetBadgesForUniverseAsync = function(p1, p2) --[[ Line: 476 ]]
+	GetBadgesForUniverseAsync = function(p1, p2)
 		-- upvalues: Replaced (ref), HttpService (copy)
 		local Formatted = string.format("%sv1/universes/%d/badges?sortOrder=Asc&limit=100", string.gsub(Replaced, "https://www.", "https://badges."), p1)
 		
 		if p2 then
 			Formatted = string.format(Formatted .. "&cursor=%s", p2)
 		end
-		local Success, Result = pcall(function() --[[ Line: 63 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Formatted (copy)
 			return game:HttpGetAsync(Formatted)
 		end)
@@ -409,7 +409,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -417,10 +417,10 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	GetUserAwardedBadgesAsync = function(p1, List) --[[ Line: 497 ]]
+	GetUserAwardedBadgesAsync = function(p1, List)
 		-- upvalues: Replaced (ref), HttpService (copy)
 		local Formatted = string.format("%sv1/users/%d/badges/awarded-dates?badgeIds=%s", string.gsub(Replaced, "https://www.", "https://badges."), p1, (table.concat(List, ",")))
-		local Success, Result = pcall(function() --[[ Line: 63 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Formatted (copy)
 			return game:HttpGetAsync(Formatted)
 		end)
@@ -430,7 +430,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -438,12 +438,12 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	PostFavoriteToggleAsync = function(p1) --[[ Line: 510 ]]
+	PostFavoriteToggleAsync = function(p1)
 		-- upvalues: Replaced (ref), HttpService (copy)
 		local Text = Replaced .. "favorite/toggle?assetID=" .. tostring(p1)
 		local v1 = "favoriteToggle"
 		local v2 = nil
-		local Success, Result = pcall(function() --[[ Line: 78 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Text (copy), v1 (copy), v2 (copy)
 			return game:HttpPostAsync(Text, v1, v2)
 		end)
@@ -453,7 +453,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -461,12 +461,12 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	PostGameVoteAsync = function(p1, p2) --[[ Line: 531 ]]
+	PostGameVoteAsync = function(p1, p2)
 		-- upvalues: Replaced (ref), HttpService (copy)
 		local Text = Replaced .. "voting/vote?assetId=" .. tostring(p1) .. "&vote=" .. tostring(p2)
 		local v1 = "vote"
 		local v2 = nil
-		local Success, Result = pcall(function() --[[ Line: 78 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Text (copy), v1 (copy), v2 (copy)
 			return game:HttpPostAsync(Text, v1, v2)
 		end)
@@ -476,7 +476,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -484,12 +484,12 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	RegisterAppPresence = function() --[[ Line: 542 ]]
+	RegisterAppPresence = function()
 		-- upvalues: buildServiceUrl (copy), GetFStringAppLocationForAppPresenceModule (copy), HttpService (copy)
 		local Formatted = string.format("%s/v1/presence/register-app-presence", buildServiceUrl("presence"))
 		local Json = HttpService:JSONEncode({ location = GetFStringAppLocationForAppPresenceModule() })
 		local v1 = nil
-		local Success, Result = pcall(function() --[[ Line: 78 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Formatted (copy), Json (copy), v1 (copy)
 			return game:HttpPostAsync(Formatted, Json, v1)
 		end)
@@ -499,7 +499,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -507,7 +507,7 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	GetCrossplayEnabledStatusAsync = function() --[[ Line: 565 ]]
+	GetCrossplayEnabledStatusAsync = function()
 		-- upvalues: buildServiceUrl (copy), UtilityModule (copy), HttpService (copy)
 		local config = {
 			Method = "GET",
@@ -515,7 +515,7 @@ return {
 		}
 		local v1 = nil
 		local SignalResult = UtilityModule.Signal()
-		HttpService:RequestInternal(config):Start(function(p1, p2) --[[ Line: 130 ]]
+		HttpService:RequestInternal(config):Start(function(p1, p2)
 			-- upvalues: v1 (ref), HttpService (upval), SignalResult (copy)
 			if p1 and p2.StatusCode ~= 401 and p2.StatusCode >= 200 and p2.StatusCode < 400 then
 				local Body = p2.Body
@@ -524,7 +524,7 @@ return {
 				if Body == nil or #Body == 0 then
 					v2 = nil
 				else
-					local Success, Result = pcall(function() --[[ Line: 52 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: HttpService (upval), Body (copy)
 						return HttpService:JSONDecode(Body)
 					end)
@@ -538,7 +538,7 @@ return {
 		
 		return v1
 	end,
-	PostCrossplayStatusAsync = function(XboxCrossPlayStatusIsEnabled) --[[ Line: 578 ]]
+	PostCrossplayStatusAsync = function(XboxCrossPlayStatusIsEnabled)
 		-- upvalues: buildServiceUrl (copy), HttpService (copy), UtilityModule (copy)
 		local config = {
 			Method = "POST",
@@ -553,7 +553,7 @@ return {
 		}
 		local v1 = nil
 		local SignalResult = UtilityModule.Signal()
-		HttpService:RequestInternal(config):Start(function(p1, p2) --[[ Line: 130 ]]
+		HttpService:RequestInternal(config):Start(function(p1, p2)
 			-- upvalues: v1 (ref), HttpService (upval), SignalResult (copy)
 			if p1 and p2.StatusCode ~= 401 and p2.StatusCode >= 200 and p2.StatusCode < 400 then
 				local Body = p2.Body
@@ -562,7 +562,7 @@ return {
 				if Body == nil or #Body == 0 then
 					v2 = nil
 				else
-					local Success, Result = pcall(function() --[[ Line: 52 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: HttpService (upval), Body (copy)
 						return HttpService:JSONDecode(Body)
 					end)
@@ -576,10 +576,10 @@ return {
 		
 		return v1
 	end,
-	GetRecommendedUsersndsAsync = function() --[[ Line: 604 ]]
+	GetRecommendedUsersndsAsync = function()
 		-- upvalues: buildServiceUrl (copy), HttpService (copy)
 		local Formatted = string.format("%s/v1/recommended-users", buildServiceUrl("friends"))
-		local Success, Result = pcall(function() --[[ Line: 63 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Formatted (copy)
 			return game:HttpGetAsync(Formatted)
 		end)
@@ -589,7 +589,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -597,12 +597,12 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	GetUsersPresenceAsync = function(UserIds) --[[ Line: 626 ]]
+	GetUsersPresenceAsync = function(UserIds)
 		-- upvalues: HttpService (copy), buildServiceUrl (copy)
 		local Json = HttpService:JSONEncode({ userIds = UserIds })
 		local Formatted = string.format("%s/v1/presence/users", buildServiceUrl("presence"))
 		local v1 = nil
-		local Success, Result = pcall(function() --[[ Line: 78 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Formatted (copy), Json (copy), v1 (copy)
 			return game:HttpPostAsync(Formatted, Json, v1)
 		end)
@@ -612,7 +612,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -620,10 +620,10 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	GetPlatformUserBalanceAsync = function() --[[ Line: 644 ]]
+	GetPlatformUserBalanceAsync = function()
 		-- upvalues: buildServiceUrl (copy), HttpService (copy)
 		local Formatted = string.format("%sv1/user/currency", buildServiceUrl("economy"))
-		local Success, Result = pcall(function() --[[ Line: 63 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Formatted (copy)
 			return game:HttpGetAsync(Formatted)
 		end)
@@ -633,7 +633,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -641,10 +641,10 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	GetTotalUserBalanceAsync = function() --[[ Line: 655 ]]
+	GetTotalUserBalanceAsync = function()
 		-- upvalues: buildServiceUrl (copy), HttpService (copy)
 		local Formatted = string.format("%sv1/user/currency", buildServiceUrl("economy"))
-		local Success, Result = pcall(function() --[[ Line: 63 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Formatted (copy)
 			return game:HttpGetAsync(Formatted)
 		end)
@@ -654,7 +654,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -662,10 +662,10 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	GetUserOwnedPackagesAsync = function(p1, p2) --[[ Line: 747 ]]
+	GetUserOwnedPackagesAsync = function(p1, p2)
 		-- upvalues: Replaced (ref), HttpService (copy)
 		local Text = Replaced .. "users/inventory/list-json?userId=" .. tostring(p1) .. "&assetTypeId=" .. tostring(32) .. "&pageNumber=" .. tostring(p2 or 1)
-		local Success, Result = pcall(function() --[[ Line: 63 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Text (copy)
 			return game:HttpGetAsync(Text)
 		end)
@@ -675,7 +675,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -683,10 +683,10 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	GetCurrentlyWearingAsync = function(p1) --[[ Line: 763 ]]
+	GetCurrentlyWearingAsync = function(p1)
 		-- upvalues: Replaced (ref), HttpService (copy)
 		local Formatted = string.format("%s/v1/users/%d/currently-wearing", string.gsub(Replaced, "https://www.", "https://avatar."), p1)
-		local Success, Result = pcall(function() --[[ Line: 63 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Formatted (copy)
 			return game:HttpGetAsync(Formatted)
 		end)
@@ -696,7 +696,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -704,7 +704,7 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	SetWearingAssetsAsync = function(AssetIds) --[[ Line: 791 ]]
+	SetWearingAssetsAsync = function(AssetIds)
 		-- upvalues: HttpService (copy), buildServiceUrl (copy), UtilityModule (copy)
 		local config = {
 			Method = "POST",
@@ -714,7 +714,7 @@ return {
 		}
 		local v1 = nil
 		local SignalResult = UtilityModule.Signal()
-		HttpService:RequestInternal(config):Start(function(p1, p2) --[[ Line: 130 ]]
+		HttpService:RequestInternal(config):Start(function(p1, p2)
 			-- upvalues: v1 (ref), HttpService (upval), SignalResult (copy)
 			if p1 and p2.StatusCode ~= 401 and p2.StatusCode >= 200 and p2.StatusCode < 400 then
 				local Body = p2.Body
@@ -723,7 +723,7 @@ return {
 				if Body == nil or #Body == 0 then
 					v2 = nil
 				else
-					local Success, Result = pcall(function() --[[ Line: 52 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: HttpService (upval), Body (copy)
 						return HttpService:JSONDecode(Body)
 					end)
@@ -737,7 +737,7 @@ return {
 		
 		return v1
 	end,
-	PurchaseProductAsync = function(p1, ExpectedPrice, ExpectedSellerId, ExpectedCurrency) --[[ Line: 848 ]]
+	PurchaseProductAsync = function(p1, ExpectedPrice, ExpectedSellerId, ExpectedCurrency)
 		-- upvalues: Replaced (ref), HttpService (copy)
 		local Formatted = string.format("%s/v1/purchases/products/%d", string.gsub(Replaced, "https://www.", "https://economy."), p1)
 		local Json = HttpService:JSONEncode({
@@ -746,7 +746,7 @@ return {
 			expectedSellerId = ExpectedSellerId
 		})
 		local v1 = nil
-		local Success, Result = pcall(function() --[[ Line: 78 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Formatted (copy), Json (copy), v1 (copy)
 			return game:HttpPostAsync(Formatted, Json, v1)
 		end)
@@ -756,7 +756,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -764,10 +764,10 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	MultiGetBundleDetailsAsync = function(List) --[[ Line: 889 ]]
+	MultiGetBundleDetailsAsync = function(List)
 		-- upvalues: Replaced (ref), HttpService (copy)
 		local Formatted = string.format("%sv1/bundles/details?bundleIds=%s", string.gsub(Replaced, "https://www.", "https://catalog."), (table.concat(List, ",")))
-		local Success, Result = pcall(function() --[[ Line: 63 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Formatted (copy)
 			return game:HttpGetAsync(Formatted)
 		end)
@@ -777,7 +777,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -785,14 +785,14 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	GetUserOwnedBundlesAsync = function(p1, p2) --[[ Line: 914 ]]
+	GetUserOwnedBundlesAsync = function(p1, p2)
 		-- upvalues: Replaced (ref), HttpService (copy)
 		local Formatted = string.format("%sv1/users/%s/bundles?sortOrder=Asc&limit=100", string.gsub(Replaced, "https://www.", "https://catalog."), (tostring(p1)))
 		
 		if p2 then
 			Formatted = string.format(Formatted .. "&cursor=%s", p2)
 		end
-		local Success, Result = pcall(function() --[[ Line: 63 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Formatted (copy)
 			return game:HttpGetAsync(Formatted)
 		end)
@@ -802,7 +802,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -810,10 +810,10 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	GetAssetThumbnailBatchAsync = function(List, p1, p2) --[[ Line: 938 ]]
+	GetAssetThumbnailBatchAsync = function(List, p1, p2)
 		-- upvalues: Replaced (ref), HttpService (copy)
 		local Formatted = string.format(string.gsub(Replaced, "https://www.", "https://games.") .. "v1/games/game-thumbnails?%s&height=" .. tostring(p2) .. "&width=" .. tostring(p1), "imageTokens=" .. table.concat(List, "&imageTokens="))
-		local Success, Result = pcall(function() --[[ Line: 63 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Formatted (copy)
 			return game:HttpGetAsync(Formatted)
 		end)
@@ -823,7 +823,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -831,7 +831,7 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	ReportAbuseAsyncV2 = function(Data, Data1, Data2, Data3, Data4, Data5, Data6, Data7, Data8) --[[ Line: 952 ]]
+	ReportAbuseAsyncV2 = function(Data, Data1, Data2, Data3, Data4, Data5, Data6, Data7, Data8)
 		-- upvalues: HttpService (copy), Url (copy), HttpRbxApiService (copy)
 		local Json = HttpService:JSONEncode({
 			tags = {
@@ -853,7 +853,7 @@ return {
 		end
 		local Default = Enum.ThrottlingPriority.Default
 		local ApplicationJson = Enum.HttpContentType.ApplicationJson
-		local Success, Result = pcall(function() --[[ Line: 114 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: HttpRbxApiService (upval), Text (copy), Json (copy), Default (copy), ApplicationJson (copy)
 			return HttpRbxApiService:PostAsyncFullUrl(Text, Json, Default, ApplicationJson)
 		end)
@@ -863,7 +863,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -871,7 +871,7 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	GetConsecutiveDaysLoggedInAsync = function() --[[ Line: 1035 ]]
+	GetConsecutiveDaysLoggedInAsync = function()
 		-- upvalues: buildServiceUrl (copy), UtilityModule (copy), HttpService (copy)
 		local config = {
 			Method = "GET",
@@ -879,7 +879,7 @@ return {
 		}
 		local v1 = nil
 		local SignalResult = UtilityModule.Signal()
-		HttpService:RequestInternal(config):Start(function(p1, p2) --[[ Line: 130 ]]
+		HttpService:RequestInternal(config):Start(function(p1, p2)
 			-- upvalues: v1 (ref), HttpService (upval), SignalResult (copy)
 			if p1 and p2.StatusCode ~= 401 and p2.StatusCode >= 200 and p2.StatusCode < 400 then
 				local Body = p2.Body
@@ -888,7 +888,7 @@ return {
 				if Body == nil or #Body == 0 then
 					v2 = nil
 				else
-					local Success, Result = pcall(function() --[[ Line: 52 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: HttpService (upval), Body (copy)
 						return HttpService:JSONDecode(Body)
 					end)
@@ -902,7 +902,7 @@ return {
 		
 		return v1
 	end,
-	IsValidUsername = function(Input, p1) --[[ Line: 1051 ]]
+	IsValidUsername = function(Input, p1)
 		-- upvalues: Replaced (ref), HttpService (copy), UtilityModule (copy)
 		if Input == nil or #Input == 0 or (p1 == nil or #p1 == 0) then return end
 		local v1 = nil
@@ -910,7 +910,7 @@ return {
 		HttpService:RequestInternal({
 			Method = "GET",
 			Url = string.format("%sv2/usernames/validate?request.username=%s&request.birthday=%s", string.gsub(Replaced, "https://www.", "https://auth."), HttpService:UrlEncode(Input), p1)
-		}):Start(function(p2, p3) --[[ Line: 130 ]]
+		}):Start(function(p2, p3)
 			-- upvalues: v1 (ref), HttpService (upval), SignalResult (copy)
 			if p2 and p3.StatusCode ~= 401 and p3.StatusCode >= 200 and p3.StatusCode < 400 then
 				local Body = p3.Body
@@ -919,7 +919,7 @@ return {
 				if Body == nil or #Body == 0 then
 					v2 = nil
 				else
-					local Success, Result = pcall(function() --[[ Line: 52 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: HttpService (upval), Body (copy)
 						return HttpService:JSONDecode(Body)
 					end)
@@ -933,7 +933,7 @@ return {
 		
 		return v1
 	end,
-	IsValidPassword = function(Input, Input1) --[[ Line: 1073 ]]
+	IsValidPassword = function(Input, Input1)
 		-- upvalues: Replaced (ref), HttpService (copy), UtilityModule (copy)
 		if Input == nil or #Input == 0 or (Input1 == nil or #Input1 == 0) then return end
 		local v1 = nil
@@ -941,7 +941,7 @@ return {
 		HttpService:RequestInternal({
 			Method = "GET",
 			Url = string.format("%sv2/passwords/validate?request.username=%s&request.password=%s", string.gsub(Replaced, "https://www.", "https://auth."), HttpService:UrlEncode(Input), HttpService:UrlEncode(Input1))
-		}):Start(function(p1, p2) --[[ Line: 130 ]]
+		}):Start(function(p1, p2)
 			-- upvalues: v1 (ref), HttpService (upval), SignalResult (copy)
 			if p1 and p2.StatusCode ~= 401 and p2.StatusCode >= 200 and p2.StatusCode < 400 then
 				local Body = p2.Body
@@ -950,7 +950,7 @@ return {
 				if Body == nil or #Body == 0 then
 					v2 = nil
 				else
-					local Success, Result = pcall(function() --[[ Line: 52 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: HttpService (upval), Body (copy)
 						return HttpService:JSONDecode(Body)
 					end)
@@ -964,11 +964,11 @@ return {
 		
 		return v1
 	end,
-	PostSponsoredGameClickAsync = function(p1) --[[ Line: 1100 ]]
+	PostSponsoredGameClickAsync = function(p1)
 		-- upvalues: buildServiceUrl (copy), HttpService (copy)
 		local Formatted = string.format("%sv1/sponsored-games/click", buildServiceUrl("ads"))
 		local Formatted1, Formatted2 = string.format("\"%s\"", p1)
-		local Success, Result = pcall(function() --[[ Line: 78 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Formatted (copy), Formatted1 (copy), Formatted2 (copy)
 			return game:HttpPostAsync(Formatted, Formatted1, Formatted2)
 		end)
@@ -978,7 +978,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -986,7 +986,7 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	GetUserVoteCountFromVotingApiAsync = function() --[[ Line: 1117 ]]
+	GetUserVoteCountFromVotingApiAsync = function()
 		-- upvalues: buildServiceUrl (copy), UtilityModule (copy), HttpService (copy)
 		local config = {
 			Method = "GET",
@@ -994,7 +994,7 @@ return {
 		}
 		local v1 = nil
 		local SignalResult = UtilityModule.Signal()
-		HttpService:RequestInternal(config):Start(function(p1, p2) --[[ Line: 130 ]]
+		HttpService:RequestInternal(config):Start(function(p1, p2)
 			-- upvalues: v1 (ref), HttpService (upval), SignalResult (copy)
 			if p1 and p2.StatusCode ~= 401 and p2.StatusCode >= 200 and p2.StatusCode < 400 then
 				local Body = p2.Body
@@ -1003,7 +1003,7 @@ return {
 				if Body == nil or #Body == 0 then
 					v2 = nil
 				else
-					local Success, Result = pcall(function() --[[ Line: 52 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: HttpService (upval), Body (copy)
 						return HttpService:JSONDecode(Body)
 					end)
@@ -1017,12 +1017,12 @@ return {
 		
 		return v1
 	end,
-	CreateCrossDeviceLoginCode = function() --[[ Line: 1134 ]]
+	CreateCrossDeviceLoginCode = function()
 		-- upvalues: buildServiceUrl (copy), HttpService (copy)
 		local Formatted = string.format("%sauth-token-service/v1/login/create", buildServiceUrl("apis"))
 		local Data = ""
 		local ContentType = nil
-		local Success, Result = pcall(function() --[[ Line: 78 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Formatted (copy), Data (copy), ContentType (copy)
 			return game:HttpPostAsync(Formatted, Data, ContentType)
 		end)
@@ -1032,7 +1032,7 @@ return {
 		elseif Result == nil or #Result == 0 then
 			return nil
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 52 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)
@@ -1040,7 +1040,7 @@ return {
 			return if Success1 then Result1 else nil
 		end
 	end,
-	CheckCrossDeviceLoginStatus = function(Code, PrivateKey) --[[ Line: 1148 ]]
+	CheckCrossDeviceLoginStatus = function(Code, PrivateKey)
 		-- upvalues: buildServiceUrl (copy), HttpService (copy), UtilityModule (copy)
 		local config = {
 			Method = "POST",
@@ -1053,7 +1053,7 @@ return {
 		}
 		local v1 = nil
 		local SignalResult = UtilityModule.Signal()
-		HttpService:RequestInternal(config):Start(function(p1, p2) --[[ Line: 130 ]]
+		HttpService:RequestInternal(config):Start(function(p1, p2)
 			-- upvalues: v1 (ref), HttpService (upval), SignalResult (copy)
 			if p1 and p2.StatusCode ~= 401 and p2.StatusCode >= 200 and p2.StatusCode < 400 then
 				local Body = p2.Body
@@ -1062,7 +1062,7 @@ return {
 				if Body == nil or #Body == 0 then
 					v2 = nil
 				else
-					local Success, Result = pcall(function() --[[ Line: 52 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: HttpService (upval), Body (copy)
 						return HttpService:JSONDecode(Body)
 					end)
@@ -1076,7 +1076,7 @@ return {
 		
 		return v1
 	end,
-	CancelCrossDeviceLogin = function(Code) --[[ Line: 1167 ]]
+	CancelCrossDeviceLogin = function(Code)
 		-- upvalues: buildServiceUrl (copy), HttpService (copy), UtilityModule (copy)
 		local config = {
 			Method = "POST",
@@ -1089,7 +1089,7 @@ return {
 		}
 		local v1 = nil
 		local SignalResult = UtilityModule.Signal()
-		HttpService:RequestInternal(config):Start(function(p1, p2) --[[ Line: 130 ]]
+		HttpService:RequestInternal(config):Start(function(p1, p2)
 			-- upvalues: v1 (ref), HttpService (upval), SignalResult (copy)
 			if p1 and p2.StatusCode ~= 401 and p2.StatusCode >= 200 and p2.StatusCode < 400 then
 				local Body = p2.Body
@@ -1098,7 +1098,7 @@ return {
 				if Body == nil or #Body == 0 then
 					v2 = nil
 				else
-					local Success, Result = pcall(function() --[[ Line: 52 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: HttpService (upval), Body (copy)
 						return HttpService:JSONDecode(Body)
 					end)

@@ -1,6 +1,6 @@
 ﻿local TModule = {
-	type = function(ValueType) --[[ Line: 5 ]]
-		return function(p1) --[[ Line: 6 ]]
+	type = function(ValueType)
+		return function(p1)
 			-- upvalues: ValueType (copy)
 			local ValueType1 = type(p1)
 			
@@ -11,8 +11,8 @@
 			end
 		end
 	end,
-	typeof = function(ValueType) --[[ Line: 16 ]]
-		return function(p1) --[[ Line: 17 ]]
+	typeof = function(ValueType)
+		return function(p1)
 			-- upvalues: ValueType (copy)
 			local ValueType1 = typeof(p1)
 			
@@ -23,7 +23,7 @@
 			end
 		end
 	end,
-	any = function(p1) --[[ Line: 34 ]]
+	any = function(p1)
 		if p1 == nil then
 			return false, "any expected, got nil"
 		else
@@ -41,7 +41,7 @@ TModule.string = TModule.typeof("string")
 TModule.table = TModule.typeof("table")
 TModule.userdata = TModule.type("userdata")
 
-function TModule.number(p1) --[[ Line: 116 ]]
+function TModule.number(p1)
 	local ValueType = typeof(p1)
 	
 	if ValueType ~= "number" then
@@ -53,7 +53,7 @@ function TModule.number(p1) --[[ Line: 116 ]]
 	end
 end
 
-function TModule.nan(p1) --[[ Line: 136 ]]
+function TModule.nan(p1)
 	local ValueType = typeof(p1)
 	
 	if ValueType ~= "number" then
@@ -101,14 +101,14 @@ TModule.Vector2int16 = TModule.typeof("Vector2int16")
 TModule.Vector3 = TModule.typeof("Vector3")
 TModule.Vector3int16 = TModule.typeof("Vector3int16")
 
-function TModule.literal(...) --[[ Line: 473 ]]
+function TModule.literal(...)
 	-- upvalues: TModule (copy)
 	local Selected = select("#", ...)
 	
 	if Selected == 1 then
 		local v1 = (...)
 		
-		return function(p1) --[[ Line: 477 ]]
+		return function(p1)
 			-- upvalues: v1 (copy)
 			if p1 == v1 then
 				return true
@@ -127,7 +127,7 @@ end
 
 TModule.exactly = TModule.literal
 
-function TModule.keyOf(List) --[[ Line: 508 ]]
+function TModule.keyOf(List)
 	-- upvalues: TModule (copy)
 	local t = {}
 	local Count = 0
@@ -139,7 +139,7 @@ function TModule.keyOf(List) --[[ Line: 508 ]]
 	return TModule.literal(table.unpack(t, 1, Count))
 end
 
-function TModule.valueOf(List) --[[ Line: 526 ]]
+function TModule.valueOf(List)
 	-- upvalues: TModule (copy)
 	local t = {}
 	local Count = 0
@@ -151,7 +151,7 @@ function TModule.valueOf(List) --[[ Line: 526 ]]
 	return TModule.literal(table.unpack(t, 1, Count))
 end
 
-function TModule.integer(p1: number) --[[ Line: 544 ]]
+function TModule.integer(p1: number)
 	-- upvalues: TModule (copy)
 	local NumberResult, NumberResult2 = TModule.number(p1)
 	
@@ -164,9 +164,9 @@ function TModule.integer(p1: number) --[[ Line: 544 ]]
 	end
 end
 
-function TModule.numberMin(p1) --[[ Line: 564 ]]
+function TModule.numberMin(p1)
 	-- upvalues: TModule (copy)
-	return function(p2) --[[ Line: 565 ]]
+	return function(p2)
 		-- upvalues: TModule (upval), p1 (copy)
 		local NumberResult, NumberResult2 = TModule.number(p2)
 		
@@ -180,9 +180,9 @@ function TModule.numberMin(p1) --[[ Line: 564 ]]
 	end
 end
 
-function TModule.numberMax(p1) --[[ Line: 586 ]]
+function TModule.numberMax(p1)
 	-- upvalues: TModule (copy)
-	return function(p2) --[[ Line: 587 ]]
+	return function(p2)
 		-- upvalues: TModule (upval), p1 (copy)
 		local NumberResult, NumberResult2 = TModule.number(p2)
 		
@@ -196,9 +196,9 @@ function TModule.numberMax(p1) --[[ Line: 586 ]]
 	end
 end
 
-function TModule.numberMinExclusive(p1) --[[ Line: 608 ]]
+function TModule.numberMinExclusive(p1)
 	-- upvalues: TModule (copy)
-	return function(p2) --[[ Line: 609 ]]
+	return function(p2)
 		-- upvalues: TModule (upval), p1 (copy)
 		local NumberResult, NumberResult2 = TModule.number(p2)
 		
@@ -212,9 +212,9 @@ function TModule.numberMinExclusive(p1) --[[ Line: 608 ]]
 	end
 end
 
-function TModule.numberMaxExclusive(p1) --[[ Line: 630 ]]
+function TModule.numberMaxExclusive(p1)
 	-- upvalues: TModule (copy)
-	return function(p2) --[[ Line: 631 ]]
+	return function(p2)
 		-- upvalues: TModule (upval), p1 (copy)
 		local NumberResult, NumberResult2 = TModule.number(p2)
 		
@@ -231,14 +231,14 @@ end
 TModule.numberPositive = TModule.numberMinExclusive(0)
 TModule.numberNegative = TModule.numberMaxExclusive(0)
 
-function TModule.numberConstrained(p1, p2) --[[ Line: 667 ]]
+function TModule.numberConstrained(p1, p2)
 	-- upvalues: TModule (copy)
 	assert(TModule.number(p1))
 	assert(TModule.number(p2))
 	local NumberMinResult = TModule.numberMin(p1)
 	local NumberMaxResult = TModule.numberMax(p2)
 	
-	return function(p3) --[[ Line: 673 ]]
+	return function(p3)
 		-- upvalues: NumberMinResult (copy), NumberMaxResult (copy)
 		local NumberMinResultResult, NumberMinResultResult2 = NumberMinResult(p3)
 		
@@ -255,14 +255,14 @@ function TModule.numberConstrained(p1, p2) --[[ Line: 667 ]]
 	end
 end
 
-function TModule.numberConstrainedExclusive(p1, p2) --[[ Line: 696 ]]
+function TModule.numberConstrainedExclusive(p1, p2)
 	-- upvalues: TModule (copy)
 	assert(TModule.number(p1))
 	assert(TModule.number(p2))
 	local NumberMinExclusiveResult = TModule.numberMinExclusive(p1)
 	local NumberMaxExclusiveResult = TModule.numberMaxExclusive(p2)
 	
-	return function(p3) --[[ Line: 702 ]]
+	return function(p3)
 		-- upvalues: NumberMinExclusiveResult (copy), NumberMaxExclusiveResult (copy)
 		local NumberMinExclusiveResultResult, NumberMinExclusiveResultResult2 = NumberMinExclusiveResult(p3)
 		
@@ -279,11 +279,11 @@ function TModule.numberConstrainedExclusive(p1, p2) --[[ Line: 696 ]]
 	end
 end
 
-function TModule.match(Pattern) --[[ Line: 724 ]]
+function TModule.match(Pattern)
 	-- upvalues: TModule (copy)
 	assert(TModule.string(Pattern))
 	
-	return function(Text: string) --[[ Line: 726 ]]
+	return function(Text: string)
 		-- upvalues: TModule (upval), Pattern (copy)
 		local v2, v3 = TModule.string(Text)
 		
@@ -297,11 +297,11 @@ function TModule.match(Pattern) --[[ Line: 724 ]]
 	end
 end
 
-function TModule.optional(Callback) --[[ Line: 747 ]]
+function TModule.optional(Callback)
 	-- upvalues: TModule (copy)
 	assert(TModule.callback(Callback))
 	
-	return function(p1) --[[ Line: 749 ]]
+	return function(p1)
 		-- upvalues: Callback (copy)
 		if p1 == nil then
 			return true
@@ -316,10 +316,10 @@ function TModule.optional(Callback) --[[ Line: 747 ]]
 	end
 end
 
-function TModule.tuple(...) --[[ Line: 770 ]]
+function TModule.tuple(...)
 	local list = { ... }
 	
-	return function(...) --[[ Line: 772 ]]
+	return function(...)
 		-- upvalues: list (copy)
 		local list1 = { ... }
 		local v2 = nil
@@ -336,11 +336,11 @@ function TModule.tuple(...) --[[ Line: 770 ]]
 	end
 end
 
-function TModule.keys(Callback) --[[ Line: 792 ]]
+function TModule.keys(Callback)
 	-- upvalues: TModule (copy)
 	assert(TModule.callback(Callback))
 	
-	return function(List) --[[ Line: 794 ]]
+	return function(List)
 		-- upvalues: TModule (upval), Callback (copy)
 		local v2, v3 = TModule.table(List)
 		
@@ -360,11 +360,11 @@ function TModule.keys(Callback) --[[ Line: 792 ]]
 	end
 end
 
-function TModule.values(Callback) --[[ Line: 818 ]]
+function TModule.values(Callback)
 	-- upvalues: TModule (copy)
 	assert(TModule.callback(Callback))
 	
-	return function(List) --[[ Line: 820 ]]
+	return function(List)
 		-- upvalues: TModule (upval), Callback (copy)
 		local v2, v3 = TModule.table(List)
 		
@@ -384,14 +384,14 @@ function TModule.values(Callback) --[[ Line: 818 ]]
 	end
 end
 
-function TModule.map(Any, Callback) --[[ Line: 845 ]]
+function TModule.map(Any, Callback)
 	-- upvalues: TModule (copy)
 	assert(TModule.callback(Any))
 	assert(TModule.callback(Callback))
 	local KeysResult = TModule.keys(Any)
 	local ValuesResult = TModule.values(Callback)
 	
-	return function(p1) --[[ Line: 851 ]]
+	return function(p1)
 		-- upvalues: KeysResult (copy), ValuesResult (copy)
 		local KeysResultResult, KeysResultResult2 = KeysResult(p1)
 		
@@ -408,19 +408,19 @@ function TModule.map(Any, Callback) --[[ Line: 845 ]]
 	end
 end
 
-function TModule.set(p1) --[[ Line: 873 ]]
+function TModule.set(p1)
 	-- upvalues: TModule (copy)
 	return TModule.map(p1, TModule.literal(true))
 end
 
 local KeysResult = TModule.keys(TModule.integer)
 
-function TModule.array(Callback) --[[ Line: 886 ]]
+function TModule.array(Callback)
 	-- upvalues: TModule (copy), KeysResult (copy)
 	assert(TModule.callback(Callback))
 	local ValuesResult = TModule.values(Callback)
 	
-	return function(List) --[[ Line: 890 ]]
+	return function(List)
 		-- upvalues: KeysResult (upval), ValuesResult (copy)
 		local KeysResultResult, KeysResultResult2 = KeysResult(List)
 		
@@ -447,12 +447,12 @@ function TModule.array(Callback) --[[ Line: 886 ]]
 	end
 end
 
-function TModule.strictArray(...) --[[ Line: 926 ]]
+function TModule.strictArray(...)
 	-- upvalues: TModule (copy), KeysResult (copy)
 	local list = { ... }
 	assert(TModule.array(TModule.callback)(list))
 	
-	return function(p1) --[[ Line: 930 ]]
+	return function(p1)
 		-- upvalues: KeysResult (upval), list (copy)
 		local KeysResultResult, KeysResultResult2 = KeysResult(p1)
 		
@@ -477,12 +477,12 @@ end
 
 local ArrayResult = TModule.array(TModule.callback)
 
-function TModule.union(...) --[[ Line: 962 ]]
+function TModule.union(...)
 	-- upvalues: ArrayResult (copy)
 	local list = { ... }
 	assert(ArrayResult(list))
 	
-	return function(p1) --[[ Line: 966 ]]
+	return function(p1)
 		-- upvalues: list (copy)
 		for _, value in ipairs(list) do
 			if value(p1) then
@@ -495,12 +495,12 @@ end
 
 TModule.some = TModule.union
 
-function TModule.intersection(...) --[[ Line: 989 ]]
+function TModule.intersection(...)
 	-- upvalues: ArrayResult (copy)
 	local list = { ... }
 	assert(ArrayResult(list))
 	
-	return function(p1) --[[ Line: 993 ]]
+	return function(p1)
 		-- upvalues: list (copy)
 		local v2 = nil
 		for _, value in ipairs(list) do
@@ -518,11 +518,11 @@ end
 TModule.every = TModule.intersection
 local MapResult = TModule.map(TModule.any, TModule.callback)
 
-function TModule.interface(p1) --[[ Line: 1020 ]]
+function TModule.interface(p1)
 	-- upvalues: MapResult (copy), TModule (copy)
 	assert(MapResult(p1))
 	
-	return function(p2) --[[ Line: 1022 ]]
+	return function(p2)
 		-- upvalues: TModule (upval), p1 (copy)
 		local v2, v3 = TModule.table(p2)
 		
@@ -542,11 +542,11 @@ function TModule.interface(p1) --[[ Line: 1020 ]]
 	end
 end
 
-function TModule.strictInterface(p2) --[[ Line: 1046 ]]
+function TModule.strictInterface(p2)
 	-- upvalues: MapResult (copy), TModule (copy)
 	assert(MapResult(p2))
 	
-	return function(List) --[[ Line: 1048 ]]
+	return function(List)
 		-- upvalues: TModule (upval), p2 (copy)
 		local v2, v3 = TModule.table(List)
 		
@@ -571,12 +571,12 @@ function TModule.strictInterface(p2) --[[ Line: 1046 ]]
 	end
 end
 
-function TModule.instanceOf(ClassName, p3) --[[ Line: 1079 ]]
+function TModule.instanceOf(ClassName, p3)
 	-- upvalues: TModule (copy)
 	assert(TModule.string(ClassName))
 	local ChildrenResult = if p3 == nil then nil else TModule.children(p3)
 	
-	return function(p4) --[[ Line: 1087 ]]
+	return function(p4)
 		-- upvalues: TModule (upval), ClassName (copy), ChildrenResult (ref)
 		local v6, v7 = TModule.Instance(p4)
 		
@@ -599,12 +599,12 @@ end
 
 TModule.instance = TModule.instanceOf
 
-function TModule.instanceIsA(ClassName, p3) --[[ Line: 1117 ]]
+function TModule.instanceIsA(ClassName, p3)
 	-- upvalues: TModule (copy)
 	assert(TModule.string(ClassName))
 	local ChildrenResult = if p3 == nil then nil else TModule.children(p3)
 	
-	return function(Object) --[[ Line: 1125 ]]
+	return function(Object)
 		-- upvalues: TModule (upval), ClassName (copy), ChildrenResult (ref)
 		local v6, v7 = TModule.Instance(Object)
 		
@@ -625,11 +625,11 @@ function TModule.instanceIsA(ClassName, p3) --[[ Line: 1117 ]]
 	end
 end
 
-function TModule.enum(EnumType) --[[ Line: 1153 ]]
+function TModule.enum(EnumType)
 	-- upvalues: TModule (copy)
 	assert(TModule.Enum(EnumType))
 	
-	return function(p3) --[[ Line: 1155 ]]
+	return function(p3)
 		-- upvalues: TModule (upval), EnumType (copy)
 		local EnumItemResult, EnumItemResult2 = TModule.EnumItem(p3)
 		
@@ -645,11 +645,11 @@ end
 
 local TupleResult = TModule.tuple(TModule.callback, TModule.callback)
 
-function TModule.wrap(Callback, Callback1) --[[ Line: 1180 ]]
+function TModule.wrap(Callback, Callback1)
 	-- upvalues: TupleResult (copy)
 	assert(TupleResult(Callback, Callback1))
 	
-	return function(...) --[[ Line: 1182 ]]
+	return function(...)
 		-- upvalues: Callback1 (copy), Callback (copy)
 		assert(Callback1(...))
 		
@@ -657,8 +657,8 @@ function TModule.wrap(Callback, Callback1) --[[ Line: 1180 ]]
 	end
 end
 
-function TModule.strict(Callback) --[[ Line: 1196 ]]
-	return function(...) --[[ Line: 1197 ]]
+function TModule.strict(Callback)
+	return function(...)
 		-- upvalues: Callback (copy)
 		assert(Callback(...))
 	end
@@ -666,11 +666,11 @@ end
 
 local MapResult1 = TModule.map(TModule.string, TModule.callback)
 
-function TModule.children(p3) --[[ Line: 1216 ]]
+function TModule.children(p3)
 	-- upvalues: MapResult1 (copy), TModule (copy)
 	assert(MapResult1(p3))
 	
-	return function(Object) --[[ Line: 1219 ]]
+	return function(Object)
 		-- upvalues: TModule (upval), p3 (copy)
 		local v6, v7 = TModule.Instance(Object)
 		

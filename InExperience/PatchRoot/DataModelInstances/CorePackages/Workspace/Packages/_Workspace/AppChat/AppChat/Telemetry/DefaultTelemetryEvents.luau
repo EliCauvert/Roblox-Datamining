@@ -3,7 +3,7 @@ local SocialLuaAnalyticsModule = require(Parent.SocialLuaAnalytics)
 local CryoModule = require(Parent.Cryo)
 local StandardizedFields = { "addSessionInfo", "addOSInfo" }
 
-local function _(_, p1) --[[ Line: 23 | Named "defaultFormatCounter" ]]
+local function _(_, p1)
 	return {
 		placement = p1.placement,
 		entryPoint = p1.entryPoint,
@@ -11,16 +11,16 @@ local function _(_, p1) --[[ Line: 23 | Named "defaultFormatCounter" ]]
 	}
 end
 
-local function namedCounterConfigurationAndFormat(p1, Callback) --[[ Line: 30 ]]
+local function namedCounterConfigurationAndFormat(p1, Callback)
 	-- upvalues: SocialLuaAnalyticsModule (copy), CryoModule (copy)
 	return {
 		throttlingThousandths = nil,
 		type = SocialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends.RobloxTelemetryCounter,
-		overrideName = function() --[[ Line: 36 ]]
+		overrideName = function()
 			-- upvalues: p1 (copy)
 			return p1
 		end,
-		format = function(p2, p3) --[[ Line: 39 ]]
+		format = function(p2, p3)
 			-- upvalues: CryoModule (upval), Callback (copy)
 			return CryoModule.Dictionary.join({
 				placement = p3.placement,
@@ -31,7 +31,7 @@ local function namedCounterConfigurationAndFormat(p1, Callback) --[[ Line: 30 ]]
 	}
 end
 
-local _ = function(_, p1) --[[ Line: 55 | Named "defaultFormatStat" ]]
+local _ = function(_, p1)
 	return {
 		placement = p1.placement,
 		entryPoint = p1.entryPoint,
@@ -39,18 +39,18 @@ local _ = function(_, p1) --[[ Line: 55 | Named "defaultFormatStat" ]]
 	}
 end
 
-local _ = function(_, p1) --[[ Line: 78 | Named "defaultEventIngestFormat" ]]
+local _ = function(_, p1)
 	return p1
 end
 
-local function eventIngestWithFormatFunction(Callback) --[[ Line: 81 ]]
+local function eventIngestWithFormatFunction(Callback)
 	-- upvalues: SocialLuaAnalyticsModule (copy), StandardizedFields (copy), CryoModule (copy)
 	return {
 		overrideName = nil,
 		throttlingThousandths = nil,
 		type = SocialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends.EventIngest,
 		standardizedFields = StandardizedFields,
-		format = function(p1, p2) --[[ Line: 87 ]]
+		format = function(p1, p2)
 			-- upvalues: CryoModule (upval), Callback (copy)
 			return CryoModule.Dictionary.join(p2, Callback(p1, p2))
 		end
@@ -59,22 +59,22 @@ end
 
 return {
 	namedCounterConfigurationAndFormat = namedCounterConfigurationAndFormat,
-	namedCounterConfigurationNoEmittedInfo = function(p1) --[[ Line: 45 ]]
+	namedCounterConfigurationNoEmittedInfo = function(p1)
 		-- upvalues: namedCounterConfigurationAndFormat (copy)
-		return (namedCounterConfigurationAndFormat(p1, function(_, _) --[[ Line: 48 ]]
+		return (namedCounterConfigurationAndFormat(p1, function(_, _)
 			return {}
 		end))
 	end,
-	namedStatConfigurationAndFormat = function(p1, Callback) --[[ Line: 62 ]]
+	namedStatConfigurationAndFormat = function(p1, Callback)
 		-- upvalues: SocialLuaAnalyticsModule (copy), CryoModule (copy)
 		return {
 			throttlingThousandths = nil,
 			type = SocialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends.RobloxTelemetryStat,
-			overrideName = function() --[[ Line: 68 ]]
+			overrideName = function()
 				-- upvalues: p1 (copy)
 				return p1
 			end,
-			format = function(p2, p3) --[[ Line: 71 ]]
+			format = function(p2, p3)
 				-- upvalues: CryoModule (upval), Callback (copy)
 				return CryoModule.Dictionary.join({
 					placement = p3.placement,
@@ -85,7 +85,7 @@ return {
 		}
 	end,
 	eventIngestWithFormatFunction = eventIngestWithFormatFunction,
-	EVENT_INGEST_NO_EMITTED_INFO = eventIngestWithFormatFunction(function(_, _) --[[ Line: 98 ]]
+	EVENT_INGEST_NO_EMITTED_INFO = eventIngestWithFormatFunction(function(_, _)
 		return {}
 	end),
 	STANDARDIZED_FIELDS = StandardizedFields

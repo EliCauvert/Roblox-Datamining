@@ -5,7 +5,7 @@ local ActionStatusEnum = AmpUpsellModule.AmpEnums.ActionStatusEnum
 local ActionTypeEnum = AmpUpsellModule.AmpEnums.ActionTypeEnum
 local AgeCheckUpsellDismissedData = require(Parent.GameDetail).AgeCheckUpsellDismissedData
 
-return function(Granted, p1) --[[ Line: 17 | Named "onAmpWizardCompletion" ]]
+return function(Granted, p1)
 	-- upvalues: AccessResponseEnum (copy), ActionTypeEnum (copy), ActionStatusEnum (copy), AgeCheckUpsellDismissedData (copy)
 	if Granted == AccessResponseEnum.Granted and p1 and p1[ActionTypeEnum.AgeEstimation] == ActionStatusEnum.Success then
 		AgeCheckUpsellDismissedData.setAgeCheckUpsellDismissed()

@@ -17,7 +17,7 @@ local GetFFlagUploadMakeupSupportModule = require(Parent.Flags.GetFFlagUploadMak
 local FFlagPublishAssetPromptItemDetailsTelemetryModule = require(Parent.Flags.FFlagPublishAssetPromptItemDetailsTelemetry)
 local PromptImportAnimationClipFromVideoAsyncEnabledEngineFeature = game:GetEngineFeature("PromptImportAnimationClipFromVideoAsyncEnabled")
 
-local function updateModelAttachmentsWithWrapDeformers(DeserializeAvatarModelResult) --[[ Line: 32 ]]
+local function updateModelAttachmentsWithWrapDeformers(DeserializeAvatarModelResult)
 	-- upvalues: RobloxReplicatedStorage (copy)
 	DeserializeAvatarModelResult.Parent = RobloxReplicatedStorage
 	
@@ -36,7 +36,7 @@ local function updateModelAttachmentsWithWrapDeformers(DeserializeAvatarModelRes
 	end
 end
 
-local function setAnalyticsItemDetails(p1) --[[ Line: 56 ]]
+local function setAnalyticsItemDetails(p1)
 	-- upvalues: PublishAssetAnalytics (copy)
 	if p1.instanceToPublish or p1.serializedInstance then
 		PublishAssetAnalytics.setItemDetails(PublishAssetAnalytics.ItemType.Asset, p1.assetType.Name)
@@ -58,10 +58,10 @@ local function setAnalyticsItemDetails(p1) --[[ Line: 56 ]]
 	end
 end
 
-return function(p1) --[[ Line: 68 | Named "ConnectAssetServiceEvents" ]]
+return function(p1)
 	-- upvalues: ExperienceAuthService (copy), PromptImportAnimationClipFromVideoAsyncEnabledEngineFeature (copy), FFlagPublishAssetPromptItemDetailsTelemetryModule (copy), setAnalyticsItemDetails (copy), OpenPublishAssetPromptModule (copy), AssetService (copy), OpenPublishAvatarPromptModule (copy), GetFFlagUploadMakeupSupportModule (copy), OpenPublishMakeupLookPromptModule (copy), OpenPublishAvatarAssetPromptModule (copy), OpenResultModalModule (copy), AvatarCreationService (copy), SetAccessoryInstanceModule (copy), SetPriceInRobuxModule (copy), updateModelAttachmentsWithWrapDeformers (copy), SetHumanoidModelModule (copy), OpenValidationErrorModalModule (copy)
 	local List = {}
-	table.insert(List, ExperienceAuthService.OpenAuthPrompt:Connect(function(Guid, Entry, Metadata) --[[ Line: 74 ]]
+	table.insert(List, ExperienceAuthService.OpenAuthPrompt:Connect(function(Guid, Entry, Metadata)
 		-- upvalues: PromptImportAnimationClipFromVideoAsyncEnabledEngineFeature (upval), FFlagPublishAssetPromptItemDetailsTelemetryModule (upval), setAnalyticsItemDetails (upval), p1 (copy), OpenPublishAssetPromptModule (upval), AssetService (upval), OpenPublishAvatarPromptModule (upval), GetFFlagUploadMakeupSupportModule (upval), OpenPublishMakeupLookPromptModule (upval), OpenPublishAvatarAssetPromptModule (upval)
 		local IsVideoToAnimationFlow = PromptImportAnimationClipFromVideoAsyncEnabledEngineFeature and Metadata.isVideoToAnimationFlow
 		
@@ -94,18 +94,18 @@ return function(p1) --[[ Line: 68 | Named "ConnectAssetServiceEvents" ]]
 			end
 		end
 	end))
-	table.insert(List, AssetService.OpenPublishResultModal:Connect(function(ResultType) --[[ Line: 111 ]]
+	table.insert(List, AssetService.OpenPublishResultModal:Connect(function(ResultType)
 		-- upvalues: p1 (copy), OpenResultModalModule (upval)
 		p1:dispatch(OpenResultModalModule(ResultType))
 	end))
 	
-	local function checkNewEventsExist() --[[ Line: 115 ]]
+	local function checkNewEventsExist()
 		-- upvalues: AvatarCreationService (upval)
 		return AvatarCreationService.UgcValidationSuccess and AvatarCreationService.UgcValidationFailure
 	end
 	
 	if pcall(checkNewEventsExist) then
-		table.insert(List, AvatarCreationService.UgcValidationSuccess:Connect(function(Guid, SerializedModel, Price) --[[ Line: 123 ]]
+		table.insert(List, AvatarCreationService.UgcValidationSuccess:Connect(function(Guid, SerializedModel, Price)
 			-- upvalues: p1 (copy), GetFFlagUploadMakeupSupportModule (upval), AvatarCreationService (upval), SetAccessoryInstanceModule (upval), SetPriceInRobuxModule (upval), updateModelAttachmentsWithWrapDeformers (upval), SetHumanoidModelModule (upval)
 			local State = p1:getState()
 			
@@ -125,7 +125,7 @@ return function(p1) --[[ Line: 68 | Named "ConnectAssetServiceEvents" ]]
 		end))
 	end
 	if pcall(checkNewEventsExist) then
-		table.insert(List, AvatarCreationService.UgcValidationFailure:Connect(function(Guid, ErrorMessage) --[[ Line: 162 ]]
+		table.insert(List, AvatarCreationService.UgcValidationFailure:Connect(function(Guid, ErrorMessage)
 			-- upvalues: p1 (copy), OpenValidationErrorModalModule (upval)
 			local State = p1:getState()
 			

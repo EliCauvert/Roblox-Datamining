@@ -1,4 +1,4 @@
-﻿local function isPartySystemMessage(p1): boolean --[[ Line: 50 ]]
+﻿local function isPartySystemMessage(p1): boolean
 	local Cards = p1.cards
 	
 	if type(Cards) ~= "table" then
@@ -20,14 +20,14 @@
 	return false
 end
 
-local function _(p2) --[[ Line: 74 | Named "getSystemMessageBody" ]]
+local function _(p2)
 	local Cards = p2.cards
 	local Card = if type(Cards) == "table" then Cards[1] else nil
 	
 	return if type(Card) == "table" and type(Card.alt_text) == "string" and Card.alt_text ~= "" then Card.alt_text else p2.content or ""
 end
 
-local _ = function(p2) --[[ Line: 83 | Named "classifySystemMessage" ]]
+local _ = function(p2)
 	-- upvalues: isPartySystemMessage (copy)
 	local Cards = p2.cards
 	local Card = if type(Cards) == "table" then Cards[1] else nil
@@ -39,7 +39,7 @@ local _ = function(p2) --[[ Line: 83 | Named "classifySystemMessage" ]]
 	}
 end
 
-return function(p2) --[[ Line: 91 | Named "classifyMessage" ]]
+return function(p2)
 	-- upvalues: isPartySystemMessage (copy)
 	if p2.type == "system" or p2.sender_user_id == nil then
 		local Cards = p2.cards

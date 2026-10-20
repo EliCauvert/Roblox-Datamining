@@ -41,16 +41,16 @@ local Replaced6 = string.gsub(Replaced, "https://www.", "https://premiumfeatures
 local Replaced7 = string.gsub(Replaced, "https://www.", "https://economycreatorstats.")
 local Replaced8 = string.gsub(Replaced, "https://www", "https://users")
 
-local function request(Options, Callback1, Callback) --[[ Line: 57 ]]
+local function request(Options, Callback1, Callback)
 	-- upvalues: DebugLogModule (copy), SerializeTableModule (copy), HttpService (copy)
-	DebugLogModule(function(): string --[[ Line: 58 ]]
+	DebugLogModule(function(): string
 		-- upvalues: Options (copy), SerializeTableModule (upval)
 		return "Request " .. Options.Url .. "\n" .. SerializeTableModule(Options)
 	end)
 	
-	return HttpService:RequestInternal(Options):Start(function(p1, p2) --[[ Line: 61 ]]
+	return HttpService:RequestInternal(Options):Start(function(p1, p2)
 		-- upvalues: DebugLogModule (upval), Options (copy), SerializeTableModule (upval), HttpService (upval), Callback1 (copy), Callback (copy)
-		DebugLogModule(function(): string --[[ Line: 62 ]]
+		DebugLogModule(function(): string
 			-- upvalues: Options (upval), SerializeTableModule (upval), p2 (copy)
 			return "Response " .. Options.Url .. "\n" .. SerializeTableModule(p2)
 		end)
@@ -72,7 +72,7 @@ local function request(Options, Callback1, Callback) --[[ Line: 57 ]]
 	end)
 end
 
-local function getABTestGroup(SubjectTargetId, ExperimentName) --[[ Line: 82 ]]
+local function getABTestGroup(SubjectTargetId, ExperimentName)
 	-- upvalues: PromiseModule (copy), request (copy), Replaced3 (copy), HttpService (copy)
 	local Input = {
 		{
@@ -82,7 +82,7 @@ local function getABTestGroup(SubjectTargetId, ExperimentName) --[[ Line: 82 ]]
 		}
 	}
 	
-	return PromiseModule.new(function(p1, p2) --[[ Line: 91 ]]
+	return PromiseModule.new(function(p1, p2)
 		-- upvalues: request (upval), Replaced3 (upval), HttpService (upval), Input (copy)
 		return request({
 			Method = "POST",
@@ -96,24 +96,24 @@ local function getABTestGroup(SubjectTargetId, ExperimentName) --[[ Line: 82 ]]
 	end)
 end
 
-local function getProductInfo(AssetId, InfoType) --[[ Line: 104 ]]
+local function getProductInfo(AssetId, InfoType)
 	-- upvalues: MarketplaceService (copy)
 	return MarketplaceService:GetProductInfoAsync(AssetId, InfoType)
 end
 
-local function getSubscriptionProductInfo(SubscriptionId) --[[ Line: 108 ]]
+local function getSubscriptionProductInfo(SubscriptionId)
 	-- upvalues: MarketplaceService (copy)
 	return MarketplaceService:GetSubscriptionProductInfoAsync(SubscriptionId)
 end
 
-local function getPremiumProductInfo() --[[ Line: 112 ]]
+local function getPremiumProductInfo()
 	-- upvalues: PromiseModule (copy), request (copy), Replaced6 (copy), PremiumProductModule (copy), UserInputService (copy)
-	return PromiseModule.new(function(Callback, p1) --[[ Line: 113 ]]
+	return PromiseModule.new(function(Callback, p1)
 		-- upvalues: request (upval), Replaced6 (upval), PremiumProductModule (upval), UserInputService (upval)
 		request({
 			Method = "GET",
 			Url = Replaced6 .. "v1/products?typeName=Subscription"
-		}, function(p2) --[[ Line: 117 ]]
+		}, function(p2)
 			-- upvalues: PremiumProductModule (upval), UserInputService (upval), Callback (copy)
 			local v1 = nil
 			
@@ -132,7 +132,7 @@ local function getPremiumProductInfo() --[[ Line: 112 ]]
 	end)
 end
 
-local function getPlayerOwns(Player, GamePassId, InfoType) --[[ Line: 140 ]]
+local function getPlayerOwns(Player, GamePassId, InfoType)
 	-- upvalues: MarketplaceService (copy), EnablePlayerOwnsBundleApiEngineFeature (copy), FFlagUseGetGamePassOwnershipApi (copy), IsGetPassOwnershipApiEnabledModule (copy)
 	if InfoType == Enum.InfoType.Asset then
 		return MarketplaceService:PlayerOwnsAssetAsync(Player, GamePassId)
@@ -144,7 +144,7 @@ local function getPlayerOwns(Player, GamePassId, InfoType) --[[ Line: 140 ]]
 		return InfoType == Enum.InfoType.Subscription and MarketplaceService:IsPlayerSubscribed(Player, GamePassId)
 	end
 	if FFlagUseGetGamePassOwnershipApi then
-		local Success, Result = pcall(function() --[[ Line: 148 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: MarketplaceService (upval), Player (copy), GamePassId (copy)
 			return MarketplaceService:GetPassOwnershipAsync(Player, GamePassId)
 		end)
@@ -159,9 +159,9 @@ local function getPlayerOwns(Player, GamePassId, InfoType) --[[ Line: 140 ]]
 	return MarketplaceService:UserOwnsGamePassAsync(Player.UserId, GamePassId)
 end
 
-local function performPurchase(InfoType, ProductId, ExpectedPrice, RequestId, IsRobloxPurchase, CollectibleItemId, CollectibleProductId, IdempotencyKey, PurchaseAuthToken, TimedOptionsDays, PurchasePayload, PurchaseOptions) --[[ Line: 168 ]]
+local function performPurchase(InfoType, ProductId, ExpectedPrice, RequestId, IsRobloxPurchase, CollectibleItemId, CollectibleProductId, IdempotencyKey, PurchaseAuthToken, TimedOptionsDays, PurchasePayload, PurchaseOptions)
 	-- upvalues: GetFFlagEnablePromptPurchaseRequestedV2Module (copy), GetFFlagEnablePromptPurchaseRequestedV2Take2Module (copy), FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), MarketplaceService (copy), FFlagEnablePurchasePayloadInExperienceShop (copy), FFlagEnableMarketplacePurchaseDeepLinkAttribution (copy), IsGenericChallengeResponseModule (copy)
-	local Success, Result = pcall(function() --[[ Line: 182 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: GetFFlagEnablePromptPurchaseRequestedV2Module (upval), GetFFlagEnablePromptPurchaseRequestedV2Take2Module (upval), FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (upval), MarketplaceService (upval), InfoType (copy), ProductId (copy), ExpectedPrice (copy), RequestId (copy), IsRobloxPurchase (copy), CollectibleItemId (copy), CollectibleProductId (copy), IdempotencyKey (copy), PurchaseAuthToken (copy), TimedOptionsDays (copy), FFlagEnablePurchasePayloadInExperienceShop (upval), PurchasePayload (copy), PurchaseOptions (copy), FFlagEnableMarketplacePurchaseDeepLinkAttribution (upval)
 		return if GetFFlagEnablePromptPurchaseRequestedV2Module() or GetFFlagEnablePromptPurchaseRequestedV2Take2Module() then if FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow then MarketplaceService:PerformPurchase(InfoType, ProductId, ExpectedPrice, RequestId, IsRobloxPurchase, CollectibleItemId, CollectibleProductId, IdempotencyKey, PurchaseAuthToken, TimedOptionsDays, if FFlagEnablePurchasePayloadInExperienceShop then PurchasePayload else nil, PurchaseOptions) elseif FFlagEnablePurchasePayloadInExperienceShop then MarketplaceService:PerformPurchase(InfoType, ProductId, ExpectedPrice, RequestId, IsRobloxPurchase, CollectibleItemId, CollectibleProductId, IdempotencyKey, PurchaseAuthToken, nil, PurchasePayload, if FFlagEnableMarketplacePurchaseDeepLinkAttribution then PurchaseOptions else nil) else MarketplaceService:PerformPurchase(InfoType, ProductId, ExpectedPrice, RequestId, IsRobloxPurchase, CollectibleItemId, CollectibleProductId, IdempotencyKey, PurchaseAuthToken, nil, nil, if FFlagEnableMarketplacePurchaseDeepLinkAttribution then PurchaseOptions else nil) else MarketplaceService:PerformPurchase(InfoType, ProductId, ExpectedPrice, RequestId, IsRobloxPurchase, CollectibleItemId, CollectibleProductId, IdempotencyKey)
 	end)
@@ -175,9 +175,9 @@ local function performPurchase(InfoType, ProductId, ExpectedPrice, RequestId, Is
 	end
 end
 
-local function performPurchaseV2(InfoType, ProductId, ExpectedPrice, RequestId, IsRobloxPurchase, CollectibleItemId, CollectibleProductId, IdempotencyKey, PurchaseAuthToken, CollectibleItemInstanceId, PurchaseOptions) --[[ Line: 258 ]]
+local function performPurchaseV2(InfoType, ProductId, ExpectedPrice, RequestId, IsRobloxPurchase, CollectibleItemId, CollectibleProductId, IdempotencyKey, PurchaseAuthToken, CollectibleItemInstanceId, PurchaseOptions)
 	-- upvalues: MarketplaceService (copy), IsGenericChallengeResponseModule (copy)
-	local Success, Result = pcall(function() --[[ Line: 271 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: CollectibleItemId (copy), CollectibleProductId (copy), IdempotencyKey (copy), PurchaseAuthToken (copy), CollectibleItemInstanceId (copy), PurchaseOptions (copy), MarketplaceService (upval), InfoType (copy), ProductId (copy), ExpectedPrice (copy), RequestId (copy), IsRobloxPurchase (copy)
 		return MarketplaceService:PerformPurchaseV2(InfoType, ProductId, ExpectedPrice, RequestId, IsRobloxPurchase, {
 			CollectibleItemId = CollectibleItemId,
@@ -198,9 +198,9 @@ local function performPurchaseV2(InfoType, ProductId, ExpectedPrice, RequestId, 
 	end
 end
 
-local function performCreatorStorePurchase(p1, p2) --[[ Line: 305 ]]
+local function performCreatorStorePurchase(p1, p2)
 	-- upvalues: CreatorStoreService (copy), IsGenericChallengeResponseModule (copy)
-	local Success, Result = pcall(function() --[[ Line: 306 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: CreatorStoreService (upval), p1 (copy), p2 (copy)
 		return CreatorStoreService:performCreatorStorePurchase(p1, p2)
 	end)
@@ -214,24 +214,24 @@ local function performCreatorStorePurchase(p1, p2) --[[ Line: 305 ]]
 	end
 end
 
-local function getAssetInfo(p1) --[[ Line: 325 ]]
+local function getAssetInfo(p1)
 	-- upvalues: CreatorStoreService (copy)
 	return CreatorStoreService:getAssetInfoAsync(p1)
 end
 
-local function getCreatorStoreProductInfo(p1, p2) --[[ Line: 329 ]]
+local function getCreatorStoreProductInfo(p1, p2)
 	-- upvalues: CreatorStoreService (copy)
 	return CreatorStoreService:getCreatorStoreProductInfoAsync(p1, p2)
 end
 
-local function loadAssetForEquip(AssetId) --[[ Line: 333 ]]
+local function loadAssetForEquip(AssetId)
 	-- upvalues: InsertService (copy)
 	return InsertService:LoadAsset(AssetId)
 end
 
-local function getAccountInfo() --[[ Line: 337 ]]
+local function getAccountInfo()
 	-- upvalues: PromiseModule (copy), request (copy), Replaced8 (copy)
-	return PromiseModule.new(function(p1, p2) --[[ Line: 338 ]]
+	return PromiseModule.new(function(p1, p2)
 		-- upvalues: request (upval), Replaced8 (upval)
 		request({
 			Method = "GET",
@@ -240,79 +240,79 @@ local function getAccountInfo() --[[ Line: 337 ]]
 	end)
 end
 
-local function getBalanceInfo() --[[ Line: 346 ]]
+local function getBalanceInfo()
 	-- upvalues: PromiseModule (copy), request (copy), Replaced5 (copy)
-	return PromiseModule.new(function(p1, p2) --[[ Line: 347 ]]
+	return PromiseModule.new(function(p1, p2)
 		-- upvalues: request (upval), Replaced5 (upval)
 		request({ Method = "GET", Url = Replaced5 .. "v1/user/currency" }, p1, p2)
 	end)
 end
 
-local function getBundleDetails(p1) --[[ Line: 355 ]]
+local function getBundleDetails(p1)
 	-- upvalues: Replaced4 (copy), PromiseModule (copy), request (copy)
 	local config = {
 		Method = "GET",
 		Url = Replaced4 .. "v1/bundles/" .. tostring(p1) .. "/details"
 	}
 	
-	return PromiseModule.new(function(p2, p3) --[[ Line: 362 ]]
+	return PromiseModule.new(function(p2, p3)
 		-- upvalues: request (upval), config (copy)
-		spawn(function() --[[ Line: 363 ]]
+		spawn(function()
 			-- upvalues: request (upval), config (upval), p2 (copy), p3 (copy)
 			request(config, p2, p3)
 		end)
 	end)
 end
 
-local function getProductPurchasableDetails(p1) --[[ Line: 369 ]]
+local function getProductPurchasableDetails(p1)
 	-- upvalues: Replaced5 (copy), PromiseModule (copy), request (copy)
 	local config = {
 		Method = "GET",
 		Url = Replaced5 .. "v1/products/" .. tostring(p1) .. "?showPurchasable=true"
 	}
 	
-	return PromiseModule.new(function(p2, p3) --[[ Line: 376 ]]
+	return PromiseModule.new(function(p2, p3)
 		-- upvalues: request (upval), config (copy)
-		spawn(function() --[[ Line: 377 ]]
+		spawn(function()
 			-- upvalues: request (upval), config (upval), p2 (copy), p3 (copy)
 			request(config, p2, p3)
 		end)
 	end)
 end
 
-local function getCatalogItemDetails(p1, p2) --[[ Line: 383 ]]
+local function getCatalogItemDetails(p1, p2)
 	-- upvalues: Replaced4 (copy), PromiseModule (copy), request (copy)
 	local config = {
 		Method = "GET",
 		Url = string.format("%sv1/catalog/items/%d/details?itemType=%s", Replaced4, p1, p2)
 	}
 	
-	return PromiseModule.new(function(p3, p4) --[[ Line: 389 ]]
+	return PromiseModule.new(function(p3, p4)
 		-- upvalues: request (upval), config (copy)
-		spawn(function() --[[ Line: 390 ]]
+		spawn(function()
 			-- upvalues: request (upval), config (upval), p3 (copy), p4 (copy)
 			request(config, p3, p4)
 		end)
 	end)
 end
 
-local function getResellers(p1, p2) --[[ Line: 396 ]]
+local function getResellers(p1, p2)
 	-- upvalues: Replaced1 (copy), PromiseModule (copy), request (copy)
 	local config = {
 		Method = "GET",
 		Url = string.format("%smarketplace-sales/v1/item/%s/resellers?cursor=&limit=%d", Replaced1, p1, p2 or 10)
 	}
 	
-	return PromiseModule.new(function(p3, p4) --[[ Line: 408 ]]
+	return PromiseModule.new(function(p3, p4)
 		-- upvalues: request (upval), config (copy)
-		spawn(function() --[[ Line: 409 ]]
+		spawn(function()
 			-- upvalues: request (upval), config (upval), p3 (copy), p4 (copy)
 			request(config, p3, p4)
 		end)
 	end)
 end
 
-local function postCartPricing(Input) --[[ Line: 415 ]]
+local function postCartPricing(Input)
 	-- upvalues: Replaced1 (copy), HttpService (copy), PromiseModule (copy), request (copy)
 	local config = {
 		Method = "POST",
@@ -324,14 +324,14 @@ local function postCartPricing(Input) --[[ Line: 415 ]]
 		}
 	}
 	
-	return PromiseModule.new(function(Callback, Callback1) --[[ Line: 428 ]]
+	return PromiseModule.new(function(Callback, Callback1)
 		-- upvalues: request (upval), config (copy)
-		spawn(function() --[[ Line: 429 ]]
+		spawn(function()
 			-- upvalues: request (upval), config (upval), Callback (copy), Callback1 (copy)
-			request(config, function(p1) --[[ Line: 430 ]]
+			request(config, function(p1)
 				-- upvalues: Callback (upval)
 				Callback(p1)
-			end, function(p1) --[[ Line: 432 ]]
+			end, function(p1)
 				-- upvalues: Callback1 (upval)
 				Callback1(p1)
 			end)
@@ -339,7 +339,7 @@ local function postCartPricing(Input) --[[ Line: 415 ]]
 	end)
 end
 
-local function postInGameItemCartPricing(Input) --[[ Line: 440 ]]
+local function postInGameItemCartPricing(Input)
 	-- upvalues: Replaced1 (copy), HttpService (copy), PromiseModule (copy), request (copy)
 	local config = {
 		Method = "POST",
@@ -351,13 +351,13 @@ local function postInGameItemCartPricing(Input) --[[ Line: 440 ]]
 		}
 	}
 	
-	return PromiseModule.new(function(p1, p2) --[[ Line: 451 ]]
+	return PromiseModule.new(function(p1, p2)
 		-- upvalues: request (upval), config (copy)
 		request(config, p1, p2)
 	end)
 end
 
-local function postPremiumImpression() --[[ Line: 456 ]]
+local function postPremiumImpression()
 	-- upvalues: Replaced7 (copy), HttpService (copy), PromiseModule (copy)
 	local config = {
 		Method = "POST",
@@ -369,27 +369,27 @@ local function postPremiumImpression() --[[ Line: 456 ]]
 		}
 	}
 	
-	return PromiseModule.new(function(_, _) --[[ Line: 471 ]]
+	return PromiseModule.new(function(_, _)
 		-- upvalues: HttpService (upval), config (copy)
-		spawn(function() --[[ Line: 472 ]]
+		spawn(function()
 			-- upvalues: HttpService (upval), config (upval)
-			return HttpService:RequestInternal(config):Start(function(_, _) --[[ Line: 473 ]] end)
+			return HttpService:RequestInternal(config):Start(function(_, _) end)
 		end)
 	end)
 end
 
-local function getPremiumUpsellPrecheck() --[[ Line: 480 ]]
+local function getPremiumUpsellPrecheck()
 	-- upvalues: Replaced6 (copy), Players (copy), PromiseModule (copy), HttpService (copy)
 	local config = {
 		Method = "GET",
 		Url = string.format("%sv1/users/%d/premium-upsell-precheck?universeId=%d&placeId=%d", Replaced6, Players.LocalPlayer.UserId, game.GameId, game.PlaceId)
 	}
 	
-	return PromiseModule.new(function(Callback1, Callback) --[[ Line: 492 ]]
+	return PromiseModule.new(function(Callback1, Callback)
 		-- upvalues: HttpService (upval), config (copy)
-		spawn(function() --[[ Line: 493 ]]
+		spawn(function()
 			-- upvalues: HttpService (upval), config (upval), Callback1 (copy), Callback (copy)
-			return HttpService:RequestInternal(config):Start(function(p1, p2) --[[ Line: 494 ]]
+			return HttpService:RequestInternal(config):Start(function(p1, p2)
 				-- upvalues: Callback1 (upval), Callback (upval)
 				if p1 and p2.StatusCode == 200 then
 					Callback1()
@@ -403,33 +403,33 @@ local function getPremiumUpsellPrecheck() --[[ Line: 480 ]]
 	end)
 end
 
-local function getSubscriptionPurchaseInfo(SubscriptionId) --[[ Line: 505 ]]
+local function getSubscriptionPurchaseInfo(SubscriptionId)
 	-- upvalues: MarketplaceService (copy)
 	return MarketplaceService:GetSubscriptionPurchaseInfoAsync(SubscriptionId)
 end
 
-local function performSubscriptionPurchase(SubscriptionId, PaymentProvider) --[[ Line: 509 ]]
+local function performSubscriptionPurchase(SubscriptionId, PaymentProvider)
 	-- upvalues: MarketplaceService (copy)
 	return MarketplaceService:PerformSubscriptionPurchaseV2(SubscriptionId, PaymentProvider)
 end
 
-local function getPurchaseWarning(p1, p2, p3) --[[ Line: 513 ]]
+local function getPurchaseWarning(p1, p2, p3)
 	-- upvalues: UrlBuilder (copy), PromiseModule (copy), request (copy)
 	local config = {
 		Method = "GET",
 		Url = UrlBuilder.economy.purchaseWarning.getPurchaseWarning(p1, p2, not p3)
 	}
 	
-	return PromiseModule.new(function(p4, p5) --[[ Line: 519 ]]
+	return PromiseModule.new(function(p4, p5)
 		-- upvalues: request (upval), config (copy)
-		spawn(function() --[[ Line: 520 ]]
+		spawn(function()
 			-- upvalues: request (upval), config (upval), p4 (copy), p5 (copy)
 			request(config, p4, p5)
 		end)
 	end)
 end
 
-local function postPurchaseWarningAcknowledge(Acknowledgement) --[[ Line: 526 ]]
+local function postPurchaseWarningAcknowledge(Acknowledgement)
 	-- upvalues: UrlBuilder (copy), HttpService (copy), PromiseModule (copy)
 	local config = {
 		Method = "POST",
@@ -441,16 +441,16 @@ local function postPurchaseWarningAcknowledge(Acknowledgement) --[[ Line: 526 ]]
 		}
 	}
 	
-	return PromiseModule.new(function(_, _) --[[ Line: 540 ]]
+	return PromiseModule.new(function(_, _)
 		-- upvalues: HttpService (upval), config (copy)
-		spawn(function() --[[ Line: 541 ]]
+		spawn(function()
 			-- upvalues: HttpService (upval), config (upval)
-			return HttpService:RequestInternal(config):Start(function(_, _) --[[ Line: 542 ]] end)
+			return HttpService:RequestInternal(config):Start(function(_, _) end)
 		end)
 	end)
 end
 
-local function checkUserPurchaseSettings() --[[ Line: 549 ]]
+local function checkUserPurchaseSettings()
 	-- upvalues: UrlBuilder (copy), HttpService (copy), PromiseModule (copy), request (copy)
 	local config = {
 		Method = "POST",
@@ -462,32 +462,32 @@ local function checkUserPurchaseSettings() --[[ Line: 549 ]]
 		}
 	}
 	
-	return PromiseModule.new(function(p1, p2) --[[ Line: 562 ]]
+	return PromiseModule.new(function(p1, p2)
 		-- upvalues: request (upval), config (copy)
-		spawn(function() --[[ Line: 563 ]]
+		spawn(function()
 			-- upvalues: request (upval), config (upval), p1 (copy), p2 (copy)
 			request(config, p1, p2)
 		end)
 	end)
 end
 
-local function getVngShopUrl() --[[ Line: 569 ]]
+local function getVngShopUrl()
 	-- upvalues: UrlBuilder (copy), PromiseModule (copy), request (copy)
 	local config = {
 		Method = "GET",
 		Url = UrlBuilder.economy.vngPayments.getVngShopUrl()
 	}
 	
-	return PromiseModule.new(function(p1, p2) --[[ Line: 577 ]]
+	return PromiseModule.new(function(p1, p2)
 		-- upvalues: request (upval), config (copy)
-		spawn(function() --[[ Line: 578 ]]
+		spawn(function()
 			-- upvalues: request (upval), config (upval), p1 (copy), p2 (copy)
 			request(config, p1, p2)
 		end)
 	end)
 end
 
-local function performDevProductEdpPurchase(p1, Input) --[[ Line: 584 ]]
+local function performDevProductEdpPurchase(p1, Input)
 	-- upvalues: FFlagEnableRequestLocationTypeForSduiPurchaseModule (copy), Replaced1 (copy), HttpService (copy), PromiseModule (copy), request (copy)
 	local SdeveloperName = nil
 	if FFlagEnableRequestLocationTypeForSduiPurchaseModule then
@@ -506,48 +506,48 @@ local function performDevProductEdpPurchase(p1, Input) --[[ Line: 584 ]]
 		}
 	}
 	
-	return PromiseModule.new(function(p2, p3) --[[ Line: 612 ]]
+	return PromiseModule.new(function(p2, p3)
 		-- upvalues: request (upval), config (copy)
-		spawn(function() --[[ Line: 613 ]]
+		spawn(function()
 			-- upvalues: request (upval), config (upval), p2 (copy), p3 (copy)
 			request(config, p2, p3)
 		end)
 	end)
 end
 
-local function getExperienceProductInfo(p1) --[[ Line: 619 ]]
+local function getExperienceProductInfo(p1)
 	-- upvalues: Replaced2 (copy), PromiseModule (copy), request (copy)
 	local config = {
 		Method = "GET",
 		Url = ("%sv1/games/games-product-info?universeIds=%s"):format(Replaced2, p1)
 	}
 	
-	return PromiseModule.new(function(p2, p3) --[[ Line: 627 ]]
+	return PromiseModule.new(function(p2, p3)
 		-- upvalues: request (upval), config (copy)
-		spawn(function() --[[ Line: 628 ]]
+		spawn(function()
 			-- upvalues: request (upval), config (upval), p2 (copy), p3 (copy)
 			request(config, p2, p3)
 		end)
 	end)
 end
 
-local function getUniversePrivateServerSettings(p1) --[[ Line: 634 ]]
+local function getUniversePrivateServerSettings(p1)
 	-- upvalues: Replaced1 (copy), PromiseModule (copy), request (copy)
 	local config = {
 		Method = "GET",
 		Url = ("%sprivate-servers-api/universe-private-server-settings?universeId=%d"):format(Replaced1, p1)
 	}
 	
-	return PromiseModule.new(function(p2, p3) --[[ Line: 642 ]]
+	return PromiseModule.new(function(p2, p3)
 		-- upvalues: request (upval), config (copy)
-		spawn(function() --[[ Line: 643 ]]
+		spawn(function()
 			-- upvalues: request (upval), config (upval), p2 (copy), p3 (copy)
 			request(config, p2, p3)
 		end)
 	end)
 end
 
-local function performExperiencePurchase(p1, Input) --[[ Line: 649 ]]
+local function performExperiencePurchase(p1, Input)
 	-- upvalues: Replaced5 (copy), HttpService (copy), PromiseModule (copy), request (copy)
 	local config = {
 		Method = "POST",
@@ -559,16 +559,16 @@ local function performExperiencePurchase(p1, Input) --[[ Line: 649 ]]
 		}
 	}
 	
-	return PromiseModule.new(function(p2, p3) --[[ Line: 662 ]]
+	return PromiseModule.new(function(p2, p3)
 		-- upvalues: request (upval), config (copy)
-		spawn(function() --[[ Line: 663 ]]
+		spawn(function()
 			-- upvalues: request (upval), config (upval), p2 (copy), p3 (copy)
 			request(config, p2, p3)
 		end)
 	end)
 end
 
-local function performLookPurchase(p1, Input) --[[ Line: 669 ]]
+local function performLookPurchase(p1, Input)
 	-- upvalues: Replaced1 (copy), HttpService (copy), PromiseModule (copy), request (copy)
 	local config = {
 		Method = "POST",
@@ -580,16 +580,16 @@ local function performLookPurchase(p1, Input) --[[ Line: 669 ]]
 		}
 	}
 	
-	return PromiseModule.new(function(p2, p3) --[[ Line: 682 ]]
+	return PromiseModule.new(function(p2, p3)
 		-- upvalues: request (upval), config (copy)
-		spawn(function() --[[ Line: 683 ]]
+		spawn(function()
 			-- upvalues: request (upval), config (upval), p2 (copy), p3 (copy)
 			request(config, p2, p3)
 		end)
 	end)
 end
 
-local function performLookPurchaseBulkPurchase(LookId, p1, LineItems) --[[ Line: 689 ]]
+local function performLookPurchaseBulkPurchase(LookId, p1, LineItems)
 	-- upvalues: Replaced1 (copy), HttpService (copy), Players (copy), PromiseModule (copy), request (copy)
 	local config = {
 		Method = "POST",
@@ -609,23 +609,23 @@ local function performLookPurchaseBulkPurchase(LookId, p1, LineItems) --[[ Line:
 		}
 	}
 	
-	return PromiseModule.new(function(p2, p3) --[[ Line: 721 ]]
+	return PromiseModule.new(function(p2, p3)
 		-- upvalues: request (upval), config (copy)
-		spawn(function() --[[ Line: 722 ]]
+		spawn(function()
 			-- upvalues: request (upval), config (upval), p2 (copy), p3 (copy)
 			request(config, p2, p3)
 		end)
 	end)
 end
 
-local function performDeveloperSubscriptionRobuxPurchase(SubscriptionId, PriceInRobux) --[[ Line: 728 ]]
+local function performDeveloperSubscriptionRobuxPurchase(SubscriptionId, PriceInRobux)
 	-- upvalues: EnableDevSubscriptionPurchaseWithRobuxEngineFeature (copy), MarketplaceService (copy)
 	if not EnableDevSubscriptionPurchaseWithRobuxEngineFeature then
 		error("Developer subscription Robux purchase requires engine feature to be enabled")
 		
 		return
 	end
-	local Success, Result = pcall(function() --[[ Line: 730 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: MarketplaceService (upval), SubscriptionId (copy), PriceInRobux (copy)
 		MarketplaceService:PerformSubscriptionPurchaseWithRobuxAsync(SubscriptionId, PriceInRobux)
 	end)
@@ -635,32 +635,32 @@ local function performDeveloperSubscriptionRobuxPurchase(SubscriptionId, PriceIn
 	end
 end
 
-local function getUnifiedPurchaseFlowUserEligibility() --[[ Line: 742 ]]
+local function getUnifiedPurchaseFlowUserEligibility()
 	-- upvalues: Replaced1 (copy), PromiseModule (copy), request (copy)
 	local config = {
 		Method = "GET",
 		Url = ("%sroblox-subscriptions/v1/metadata"):format(Replaced1)
 	}
 	
-	return PromiseModule.new(function(p1, p2) --[[ Line: 750 ]]
+	return PromiseModule.new(function(p1, p2)
 		-- upvalues: request (upval), config (copy)
-		spawn(function() --[[ Line: 751 ]]
+		spawn(function()
 			-- upvalues: request (upval), config (upval), p1 (copy), p2 (copy)
 			request(config, p1, p2)
 		end)
 	end)
 end
 
-local function GetLookDetailsV2ProductInfo(p1) --[[ Line: 757 ]]
+local function GetLookDetailsV2ProductInfo(p1)
 	-- upvalues: Replaced1 (copy), PromiseModule (copy), request (copy)
 	local config = {
 		Method = "GET",
 		Url = string.format("%slook-api/v2/looks/%s", Replaced1, p1)
 	}
 	
-	return PromiseModule.new(function(p2, p3) --[[ Line: 765 ]]
+	return PromiseModule.new(function(p2, p3)
 		-- upvalues: request (upval), config (copy)
-		spawn(function() --[[ Line: 766 ]]
+		spawn(function()
 			-- upvalues: request (upval), config (upval), p2 (copy), p3 (copy)
 			request(config, p2, p3)
 		end)
@@ -668,7 +668,7 @@ local function GetLookDetailsV2ProductInfo(p1) --[[ Line: 757 ]]
 end
 
 return {
-	new = function() --[[ Line: 776 ]]
+	new = function()
 		-- upvalues: PromiseModule (copy), getABTestGroup (copy), getProductInfo (copy), getPlayerOwns (copy), performPurchase (copy), performPurchaseV2 (copy), GetFFlagEnableCreatorStorePurchasingCutoverModule (copy), performCreatorStorePurchase (copy), loadAssetForEquip (copy), getAccountInfo (copy), getAssetInfo (copy), getBalanceInfo (copy), getBundleDetails (copy), getProductPurchasableDetails (copy), FFlagRefreshPriceOnRetryAfterUpsellModule (copy), getCatalogItemDetails (copy), getResellers (copy), getCreatorStoreProductInfo (copy), getPremiumProductInfo (copy), postPremiumImpression (copy), getPremiumUpsellPrecheck (copy), getSubscriptionPurchaseInfo (copy), performSubscriptionPurchase (copy), getPurchaseWarning (copy), postPurchaseWarningAcknowledge (copy), checkUserPurchaseSettings (copy), getVngShopUrl (copy), performDevProductEdpPurchase (copy), getExperienceProductInfo (copy), performExperiencePurchase (copy), getUniversePrivateServerSettings (copy), performLookPurchase (copy), getUnifiedPurchaseFlowUserEligibility (copy), FFlagPurchasePromptFetchCartPricingForLooks (copy), performLookPurchaseBulkPurchase (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), performDeveloperSubscriptionRobuxPurchase (copy), getSubscriptionProductInfo (copy), FFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule (copy), GetLookDetailsV2ProductInfo (copy), postCartPricing (copy), FFlagEnableInExperienceOffersPurchaseFlow (copy), postInGameItemCartPricing (copy)
 		local config = {
 			getABTestGroup = PromiseModule.promisify(getABTestGroup),
@@ -709,7 +709,7 @@ return {
 			postInGameItemCartPricing = if FFlagEnableInExperienceOffersPurchaseFlow then postInGameItemCartPricing else nil
 		}
 		setmetatable(config, {
-			__tostring = function(): string --[[ Line: 832 ]]
+			__tostring = function(): string
 				return "Service(Network)"
 			end
 		})

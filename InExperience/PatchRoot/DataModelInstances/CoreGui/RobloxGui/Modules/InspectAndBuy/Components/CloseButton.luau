@@ -9,7 +9,7 @@ local InspectAndBuyContextModule = require(Parent.Components.InspectAndBuyContex
 local ThemeModule = require(game:GetService("CoreGui").RobloxGui.Modules.Settings.Theme)
 local CloseButton = RoactModule.PureComponent:extend("CloseButton")
 
-function CloseButton.render(p1) --[[ Line: 19 ]]
+function CloseButton.render(p1)
 	-- upvalues: RoactModule (copy), InspectAndBuyContextModule (copy), ThemeModule (copy), GuiService (copy)
 	local View = p1.props.view
 	local ViewingDetails = p1.props.detailsInformation.viewingDetails
@@ -17,7 +17,7 @@ function CloseButton.render(p1) --[[ Line: 19 ]]
 	local SetTryingOnInfoFunction = p1.props.setTryingOnInfo
 	
 	return RoactModule.createElement(InspectAndBuyContextModule.Consumer, {
-		render = function(p2) --[[ Line: 26 ]]
+		render = function(p2)
 			-- upvalues: View (copy), ThemeModule (upval), RoactModule (upval), ViewingDetails (copy), CloseDetailsFunction (copy), SetTryingOnInfoFunction (copy), GuiService (upval)
 			local v1 = p2[View]
 			local _UDim2 = UDim2.new(0, 0, 0, 0)
@@ -34,7 +34,7 @@ function CloseButton.render(p1) --[[ Line: 19 ]]
 				Selectable = false,
 				Image = if ViewingDetails then "rbxasset://textures/ui/InspectMenu/caret_tail_left.png" else "rbxasset://textures/ui/InspectMenu/x.png",
 				ZIndex = 2,
-				[RoactModule.Event.Activated] = function() --[[ Line: 42 ]]
+				[RoactModule.Event.Activated] = function()
 					-- upvalues: ViewingDetails (upval), CloseDetailsFunction (upval), SetTryingOnInfoFunction (upval), GuiService (upval)
 					if ViewingDetails then
 						CloseDetailsFunction()
@@ -50,19 +50,19 @@ function CloseButton.render(p1) --[[ Line: 19 ]]
 	})
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 55 ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	return {
 		view = p1.view,
 		detailsInformation = p1.detailsInformation
 	}
-end, function(Callback) --[[ Line: 60 ]]
+end, function(Callback)
 	-- upvalues: SetDetailsInformationModule (copy), SetTryingOnInfoModule (copy)
 	return {
-		closeDetails = function() --[[ Line: 62 ]]
+		closeDetails = function()
 			-- upvalues: Callback (copy), SetDetailsInformationModule (upval)
 			Callback(SetDetailsInformationModule(false, nil))
 		end,
-		setTryingOnInfo = function(p1, p2) --[[ Line: 65 ]]
+		setTryingOnInfo = function(p1, p2)
 			-- upvalues: Callback (copy), SetTryingOnInfoModule (upval)
 			Callback(SetTryingOnInfoModule(p1, p2))
 		end

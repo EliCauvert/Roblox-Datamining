@@ -3,7 +3,7 @@ local HttpModule = require(Parent.Http)
 local HttpClientModule = require(Parent.HttpClient)
 local _ = require(script.Parent.AvatarBackgroundStoreTypes)
 
-local function parseAvatarBackground(p1) --[[ Line: 18 ]]
+local function parseAvatarBackground(p1)
 	local AvatarConfigurations = if typeof(p1) == "table" then p1.avatarConfigurations else nil
 	local Background = if typeof(AvatarConfigurations) == "table" then AvatarConfigurations.background else nil
 	local BackgroundAsset = if typeof(Background) == "table" then Background.backgroundAsset else nil
@@ -12,7 +12,7 @@ local function parseAvatarBackground(p1) --[[ Line: 18 ]]
 	return { assetId = if Number and Number > 0 then Number else nil }
 end
 
-return function(p1, p2) --[[ Line: 28 | Named "fetchAvatarBackground" ]]
+return function(p1, p2)
 	-- upvalues: HttpModule (copy), HttpClientModule (copy), parseAvatarBackground (copy)
 	local P2 = p2 or {}
 	

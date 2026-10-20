@@ -1,7 +1,7 @@
 ﻿local Players = game:GetService("Players")
 game:DefineFastString("DSAReportingAndTransparencyOverrideUserIds", "")
 
-function isInDSAFeaturesOverrideList(p1): boolean --[[ Line: 5 ]]
+function isInDSAFeaturesOverrideList(p1): boolean
 	-- upvalues: Players (copy)
 	local UserId = 0
 	

@@ -9,7 +9,7 @@ local View = FoundationModule.View
 local Radius = FoundationModule.Enums.Radius
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(Frame) --[[ Line: 27 | Named "CommentRowSkeletonView" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), GetLineHeightsModule (copy), FFlagMomentsCommentRowRedesignModule (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Size300 = UseTokensResult.Size.Size_300

@@ -17,7 +17,7 @@ local _ = require(script.Parent.ChatSession.sessionDeps)
 local FFlagBuildExperiencePinForBuild = SharedFlagsModule.FFlagBuildExperiencePinForBuild
 local FFlagBuildExperiencePromptFailureTelemetry = SharedFlagsModule.FFlagBuildExperiencePromptFailureTelemetry
 
-return function(Deps, UniverseId, PlaceId, p1) --[[ Line: 39 | Named "createChatSession" ]]
+return function(Deps, UniverseId, PlaceId, p1)
 	-- upvalues: SessionScalarStateModule (copy), ConstantsModule (copy), SessionHistoryCacheModule (copy), ExperimentOverrideModule (copy), SessionHistoryMergeModule (copy), SignalsModule (copy), HistoryPageUtilsModule (copy), HistoryLoaderModule (copy), HistoryPollingModule (copy), AcpProtocolModule (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), ClassifyRequestFailureModule (copy), FFlagBuildExperiencePinForBuild (copy), SendPromptModule (copy)
 	local LoadedBySequenceId = {}
 	local OverlayBySequenceId = {}
@@ -29,24 +29,24 @@ return function(Deps, UniverseId, PlaceId, p1) --[[ Line: 39 | Named "createChat
 	local PendingExperimentKey = nil
 	local Experiment = nil
 	
-	local function _() --[[ Line: 61 | Named "getExperimentKey" ]]
+	local function _()
 		-- upvalues: ExperimentOverrideModule (upval), SessionScalarState (copy), PendingExperimentKey (ref)
 		return ExperimentOverrideModule.getKey(SessionScalarState.getCasSessionId(false)) or PendingExperimentKey
 	end
 	
-	local _ = function() --[[ Line: 65 | Named "captureSessionNewExperiment" ]]
+	local _ = function()
 		-- upvalues: Experiment (ref), ExperimentOverrideModule (upval), SessionScalarState (copy), PendingExperimentKey (ref)
 		Experiment = if ExperimentOverrideModule.isEnabled() then ExperimentOverrideModule.getExperiment(ExperimentOverrideModule.getKey(SessionScalarState.getCasSessionId(false)) or PendingExperimentKey) else nil
 	end
 	
-	local function buildMergedHistory() --[[ Line: 71 ]]
+	local function buildMergedHistory()
 		-- upvalues: SessionHistoryMergeModule (upval), LoadedBySequenceId (ref), OverlayBySequenceId (ref)
 		return SessionHistoryMergeModule.orderMergedHistoryItems(LoadedBySequenceId, OverlayBySequenceId)
 	end
 	
 	local Signal, Signal2 = SignalsModule.createSignal(buildMergedHistory())
 	
-	local function snapshotActiveSession() --[[ Line: 94 ]]
+	local function snapshotActiveSession()
 		-- upvalues: SessionScalarState (copy), LoadedBySequenceId (ref), OverlayBySequenceId (ref)
 		local CasSessionId = SessionScalarState.getCasSessionId(false)
 		
@@ -59,7 +59,7 @@ return function(Deps, UniverseId, PlaceId, p1) --[[ Line: 39 | Named "createChat
 		}
 	end
 	
-	local _ = function() --[[ Line: 108 | Named "saveActiveSessionToCache" ]]
+	local _ = function()
 		-- upvalues: SessionScalarState (copy), snapshotActiveSession (copy), SessionHistoryCache (copy)
 		local CasSessionId = SessionScalarState.getCasSessionId(false)
 		
@@ -71,7 +71,7 @@ return function(Deps, UniverseId, PlaceId, p1) --[[ Line: 39 | Named "createChat
 		end
 	end
 	
-	local _ = function(p2): boolean --[[ Line: 119 | Named "restoreSessionFromCache" ]]
+	local _ = function(p2): boolean
 		-- upvalues: SessionHistoryCache (copy), LoadedBySequenceId (ref), OverlayBySequenceId (ref), SessionScalarState (copy), Signal2 (copy), buildMergedHistory (copy)
 		local RestoreResult = SessionHistoryCache.restore(p2)
 		
@@ -89,7 +89,7 @@ return function(Deps, UniverseId, PlaceId, p1) --[[ Line: 39 | Named "createChat
 		end
 	end
 	
-	local function clearActiveSessionState() --[[ Line: 133 ]]
+	local function clearActiveSessionState()
 		-- upvalues: LoadedBySequenceId (ref), OverlayBySequenceId (ref), SessionScalarState (copy), Signal2 (copy), buildMergedHistory (copy)
 		LoadedBySequenceId = {}
 		OverlayBySequenceId = {}
@@ -100,7 +100,7 @@ return function(Deps, UniverseId, PlaceId, p1) --[[ Line: 39 | Named "createChat
 		Signal2(buildMergedHistory())
 	end
 	
-	local function setCasSessionIdInternal(SessionId) --[[ Line: 143 ]]
+	local function setCasSessionIdInternal(SessionId)
 		-- upvalues: SessionScalarState (copy), Count (ref), snapshotActiveSession (copy), SessionHistoryCache (copy), LoadedBySequenceId (ref), OverlayBySequenceId (ref), Signal2 (copy), buildMergedHistory (copy), Deps (copy), clearActiveSessionState (copy)
 		if SessionId == "" then return end
 		if SessionScalarState.getCasSessionId(false) == SessionId then return end
@@ -140,7 +140,7 @@ return function(Deps, UniverseId, PlaceId, p1) --[[ Line: 39 | Named "createChat
 		end
 	end
 	
-	local function mergeHistoryPage(p2, p3) --[[ Line: 163 ]]
+	local function mergeHistoryPage(p2, p3)
 		-- upvalues: SessionHistoryMergeModule (upval), LoadedBySequenceId (ref), OverlayBySequenceId (ref), SessionScalarState (copy), HistoryPageUtilsModule (upval), Signal2 (copy), buildMergedHistory (copy)
 		SessionHistoryMergeModule.mergeHistoryIntoMap(LoadedBySequenceId, p2, OverlayBySequenceId)
 		SessionScalarState.setNextHistoryPageToken(p3)
@@ -151,52 +151,52 @@ return function(Deps, UniverseId, PlaceId, p1) --[[ Line: 39 | Named "createChat
 	local HistoryLoader = HistoryLoaderModule.createHistoryLoader({
 		deps = Deps,
 		rpcTimeoutSeconds = RpcTimeoutSeconds,
-		getCasSessionId = function() --[[ Line: 180 ]]
+		getCasSessionId = function()
 			-- upvalues: SessionScalarState (copy)
 			return SessionScalarState.getCasSessionId(false)
 		end,
-		getHistoryLoadInFlight = function() --[[ Line: 183 ]]
+		getHistoryLoadInFlight = function()
 			-- upvalues: SessionScalarState (copy)
 			return SessionScalarState.getHistoryLoadInFlight(false)
 		end,
 		setHistoryLoadInFlight = SessionScalarState.setHistoryLoadInFlight,
-		getNextHistoryPageToken = function() --[[ Line: 187 ]]
+		getNextHistoryPageToken = function()
 			-- upvalues: SessionScalarState (copy)
 			return SessionScalarState.getNextHistoryPageToken(false)
 		end,
 		setNextHistoryPageToken = SessionScalarState.setNextHistoryPageToken,
-		getLoadedBySequenceId = function() --[[ Line: 191 ]]
+		getLoadedBySequenceId = function()
 			-- upvalues: LoadedBySequenceId (ref)
 			return LoadedBySequenceId
 		end,
-		setLoadedBySequenceId = function(Value) --[[ Line: 194 ]]
+		setLoadedBySequenceId = function(Value)
 			-- upvalues: LoadedBySequenceId (ref)
 			LoadedBySequenceId = Value
 		end,
-		getOverlayBySequenceId = function() --[[ Line: 197 ]]
+		getOverlayBySequenceId = function()
 			-- upvalues: OverlayBySequenceId (ref)
 			return OverlayBySequenceId
 		end,
-		setOverlayBySequenceId = function(Value) --[[ Line: 200 ]]
+		setOverlayBySequenceId = function(Value)
 			-- upvalues: OverlayBySequenceId (ref)
 			OverlayBySequenceId = Value
 		end,
 		buildMergedHistory = buildMergedHistory,
 		mergeHistoryPage = mergeHistoryPage,
-		noteHistorySequenceIds = function(p2) --[[ Line: 83 ]]
+		noteHistorySequenceIds = function(p2)
 			-- upvalues: SessionScalarState (copy), HistoryPageUtilsModule (upval)
 			SessionScalarState.noteHistorySequenceId(HistoryPageUtilsModule.getMaxHistorySequenceId(p2))
 		end,
-		notifyMergedHistoryChanged = function() --[[ Line: 79 ]]
+		notifyMergedHistoryChanged = function()
 			-- upvalues: Signal2 (copy), buildMergedHistory (copy)
 			Signal2(buildMergedHistory())
 		end,
 		markHistoryLoaded = SessionScalarState.markHistoryLoaded,
-		getRefreshGeneration = function() --[[ Line: 208 ]]
+		getRefreshGeneration = function()
 			-- upvalues: Count (ref)
 			return Count
 		end,
-		onInitialSessionLoad = function(p2, p3) --[[ Line: 211 ]]
+		onInitialSessionLoad = function(p2, p3)
 			-- upvalues: ExperimentOverrideModule (upval)
 			if not ExperimentOverrideModule.isEnabled() then return end
 			local Key = ExperimentOverrideModule.getKey(p2)
@@ -216,18 +216,18 @@ return function(Deps, UniverseId, PlaceId, p1) --[[ Line: 39 | Named "createChat
 	local HistoryPolling = HistoryPollingModule.createHistoryPolling({
 		deps = Deps,
 		rpcTimeoutSeconds = RpcTimeoutSeconds,
-		getCasSessionId = function() --[[ Line: 238 ]]
+		getCasSessionId = function()
 			-- upvalues: SessionScalarState (copy)
 			return SessionScalarState.getCasSessionId(false)
 		end,
-		getNextHistoryPageToken = function() --[[ Line: 241 ]]
+		getNextHistoryPageToken = function()
 			-- upvalues: SessionScalarState (copy)
 			return SessionScalarState.getNextHistoryPageToken(false)
 		end,
 		mergeHistoryPage = mergeHistoryPage
 	})
 	
-	local function ensureInitialized() --[[ Line: 247 ]]
+	local function ensureInitialized()
 		-- upvalues: SessionScalarState (copy), Deps (copy), AcpProtocolModule (upval), HistoryPageUtilsModule (upval), RpcTimeoutSeconds (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), ClassifyRequestFailureModule (upval)
 		if SessionScalarState.getInitialized(false) then
 			return true, nil, nil
@@ -251,7 +251,7 @@ return function(Deps, UniverseId, PlaceId, p1) --[[ Line: 39 | Named "createChat
 	
 	local SendPrompt = SendPromptModule.createSendPrompt({
 		ensureInitialized = ensureInitialized,
-		ensureCasSession = function() --[[ Line: 262 ]]
+		ensureCasSession = function()
 			-- upvalues: SessionScalarState (copy), UniverseId (copy), PlaceId (copy), ensureInitialized (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), Deps (copy), Experiment (ref), FFlagBuildExperiencePinForBuild (upval), HistoryPageUtilsModule (upval), RpcTimeoutSeconds (copy), ClassifyRequestFailureModule (upval), ExperimentOverrideModule (upval), PendingExperimentKey (ref), setCasSessionIdInternal (copy)
 			local CasSessionId = SessionScalarState.getCasSessionId(false)
 			
@@ -303,11 +303,11 @@ return function(Deps, UniverseId, PlaceId, p1) --[[ Line: 39 | Named "createChat
 			
 			return SessionId, nil
 		end,
-		getLatestObservedHistorySequenceId = function() --[[ Line: 318 ]]
+		getLatestObservedHistorySequenceId = function()
 			-- upvalues: SessionScalarState (copy)
 			return SessionScalarState.getLatestObservedHistorySequenceId(false)
 		end,
-		noteTurnSequenceIds = function(p2) --[[ Line: 87 ]]
+		noteTurnSequenceIds = function(p2)
 			-- upvalues: SessionScalarState (copy)
 			local GetLatestProcessedSequenceNumberFunction = p2.getLatestProcessedSequenceNumber
 			
@@ -316,12 +316,12 @@ return function(Deps, UniverseId, PlaceId, p1) --[[ Line: 39 | Named "createChat
 			end
 		end,
 		startPollingTurnFromHistory = HistoryPolling.startPollingTurnFromHistory,
-		getAssistantTurnSequence = function() --[[ Line: 323 ]]
+		getAssistantTurnSequence = function()
 			-- upvalues: SessionScalarState (copy)
 			return SessionScalarState.getAssistantTurnSequence(false)
 		end,
 		incrementAssistantTurnSequence = SessionScalarState.incrementAssistantTurnSequence,
-		sessionPrompt = function(p2) --[[ Line: 330 ]]
+		sessionPrompt = function(p2)
 			-- upvalues: ExperimentOverrideModule (upval), SessionScalarState (copy), PendingExperimentKey (ref), Deps (copy)
 			local PromptExperiment = if ExperimentOverrideModule.isEnabled() then ExperimentOverrideModule.getPromptExperiment(ExperimentOverrideModule.getKey(SessionScalarState.getCasSessionId(false)) or PendingExperimentKey) else nil
 			local SessionPromptResult = Deps.sessionPrompt({
@@ -336,7 +336,7 @@ return function(Deps, UniverseId, PlaceId, p1) --[[ Line: 39 | Named "createChat
 			end
 			return SessionPromptResult
 		end,
-		setActiveStop = function(Value) --[[ Line: 345 ]]
+		setActiveStop = function(Value)
 			-- upvalues: Callback (ref)
 			Callback = Value
 		end
@@ -345,26 +345,26 @@ return function(Deps, UniverseId, PlaceId, p1) --[[ Line: 39 | Named "createChat
 	return {
 		universeId = UniverseId,
 		placeId = PlaceId,
-		getCasSessionId = function() --[[ Line: 386 ]]
+		getCasSessionId = function()
 			-- upvalues: SessionScalarState (copy)
 			return SessionScalarState.getCasSessionId(false)
 		end,
 		setCasSessionId = setCasSessionIdInternal,
-		setPendingExperimentKey = function(Value) --[[ Line: 390 ]]
+		setPendingExperimentKey = function(Value)
 			-- upvalues: PendingExperimentKey (ref)
 			PendingExperimentKey = Value
 		end,
-		hasLoadedHistory = function() --[[ Line: 393 ]]
+		hasLoadedHistory = function()
 			-- upvalues: SessionScalarState (copy)
 			return SessionScalarState.getHasLoadedHistory(false)
 		end,
 		markHistoryLoaded = SessionScalarState.markHistoryLoaded,
-		getNextHistoryPageToken = function() --[[ Line: 397 ]]
+		getNextHistoryPageToken = function()
 			-- upvalues: SessionScalarState (copy)
 			return SessionScalarState.getNextHistoryPageToken(false)
 		end,
 		getMergedHistory = Signal,
-		ingestRealtimeUpdate = function(p2, p3) --[[ Line: 170 ]]
+		ingestRealtimeUpdate = function(p2, p3)
 			-- upvalues: SessionHistoryMergeModule (upval), OverlayBySequenceId (ref), LoadedBySequenceId (ref), SessionScalarState (copy), Signal2 (copy), buildMergedHistory (copy)
 			if SessionHistoryMergeModule.ingestOverlayUpdate(OverlayBySequenceId, LoadedBySequenceId, p2, p3) then
 				SessionScalarState.noteHistorySequenceId(p3)
@@ -375,19 +375,19 @@ return function(Deps, UniverseId, PlaceId, p1) --[[ Line: 39 | Named "createChat
 		refreshSession = HistoryLoader.refreshSession,
 		loadOlderHistory = HistoryLoader.loadOlderHistory,
 		requestOlderHistoryWhile = HistoryLoader.requestOlderHistoryWhile,
-		sendPrompt = function(p2) --[[ Line: 406 ]]
+		sendPrompt = function(p2)
 			-- upvalues: Experiment (ref), ExperimentOverrideModule (upval), SessionScalarState (copy), PendingExperimentKey (ref), SendPrompt (copy)
 			Experiment = if ExperimentOverrideModule.isEnabled() then ExperimentOverrideModule.getExperiment(ExperimentOverrideModule.getKey(SessionScalarState.getCasSessionId(false)) or PendingExperimentKey) else nil
 			
 			return SendPrompt.sendPrompt(p2)
 		end,
-		stopActiveTurn = function() --[[ Line: 377 ]]
+		stopActiveTurn = function()
 			-- upvalues: Callback (ref)
 			if Callback ~= nil then
 				Callback()
 			end
 		end,
-		submitActiveToolResult = function(Content, p2, TurnId, ReferenceId) --[[ Line: 358 ]]
+		submitActiveToolResult = function(Content, p2, TurnId, ReferenceId)
 			-- upvalues: SessionScalarState (copy), Deps (copy)
 			local CasSessionId = SessionScalarState.getCasSessionId(false)
 			
@@ -399,17 +399,17 @@ return function(Deps, UniverseId, PlaceId, p1) --[[ Line: 39 | Named "createChat
 				isError = p2 ~= nil and p2
 			})
 		end,
-		getActiveTurnHandle = function() --[[ Line: 350 ]]
+		getActiveTurnHandle = function()
 			-- upvalues: SessionScalarState (copy), Deps (copy)
 			local CasSessionId = SessionScalarState.getCasSessionId(false)
 			
 			return if CasSessionId == nil then nil else Deps.getActiveTurnHandle(CasSessionId)
 		end,
-		startPollingActiveTurn = function(CasSessionId) --[[ Line: 413 ]]
+		startPollingActiveTurn = function(CasSessionId)
 			-- upvalues: SessionScalarState (copy), HistoryPolling (copy)
 			local CasSessionId1 = SessionScalarState.getCasSessionId(false)
 			
-			return if CasSessionId1 == nil then function() --[[ Line: 416 ]] end else HistoryPolling.startPollingActiveTurn(CasSessionId1, CasSessionId)
+			return if CasSessionId1 == nil then function() end else HistoryPolling.startPollingActiveTurn(CasSessionId1, CasSessionId)
 		end
 	}
 end

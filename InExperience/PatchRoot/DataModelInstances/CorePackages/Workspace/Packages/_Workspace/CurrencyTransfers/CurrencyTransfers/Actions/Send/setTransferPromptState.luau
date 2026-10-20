@@ -22,7 +22,7 @@ local config = {
 	[PromptStateModule.TransferProcessing] = { PromptStateModule.TransferSuccess }
 }
 
-local function _(p1, p2): boolean --[[ Line: 26 | Named "isValidPromptStateTransition" ]]
+local function _(p1, p2): boolean
 	-- upvalues: config (copy)
 	for _, value in ipairs(config[p1]) do
 		if value == p2 then
@@ -32,7 +32,7 @@ local function _(p1, p2): boolean --[[ Line: 26 | Named "isValidPromptStateTrans
 	return false
 end
 
-return function(p3, p4) --[[ Line: 36 | Named "setTransferPromptState" ]]
+return function(p3, p4)
 	-- upvalues: config (copy), PromptStateModule (copy)
 	local SetPromptStateFunction: (any) -> () = p3.setPromptState
 	local Flag = false

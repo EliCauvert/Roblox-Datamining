@@ -15,7 +15,7 @@ local SquadComponentAccessWrapper = SquadsModule.SquadComponentAccessWrapper
 local SquadJoinButton = SquadsModule.SquadJoinButton
 local MemoResult = ReactModule.memo((require(AppChat.Components.Cells.ConversationFacePile)))
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Callback) --[[ Line: 46 | Named "ConversationRow" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Callback)
 	-- upvalues: UseConversationRowPresentationModule (copy), FoundationModule (copy), ReactModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), FFlagAppChatExtendConversationListRowDividersModule (copy), MemoResult (copy), FFlagAppChatTimestampInSubtitleConversationRowModule (copy), ConversationRowSubtitleModule (copy), SquadComponentAccessWrapper (copy), SquadJoinButton (copy), SquadButtonSourceEnum (copy), DomLocatorsModule (copy), FFlagAppChatRemoveConversationListDividerModule (copy)
 	local UseConversationRowPresentationModuleResult = UseConversationRowPresentationModule({
 		conversationId = p1.conversationId,
@@ -30,7 +30,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Callback) --[[ Line:
 	})
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local RowRef = UseConversationRowPresentationModuleResult.rowRef
-	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 63 ]]
+	local UseResult = ReactModule.useCallback(function(Current)
 		-- upvalues: RowRef (copy), Callback (copy)
 		RowRef.current = Current
 		

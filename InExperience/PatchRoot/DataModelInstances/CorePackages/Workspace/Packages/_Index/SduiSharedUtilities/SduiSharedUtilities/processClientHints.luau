@@ -6,7 +6,7 @@ local config = {
 	prewarm_large_icon = SduiGameIconPrewarmModule.prewarmLargeIcons
 }
 
-local function collectHintsInTemplateTree(Key, Callback, p1, p2) --[[ Line: 43 ]]
+local function collectHintsInTemplateTree(Key, Callback, p1, p2)
 	-- upvalues: collectHintsInTemplateTree (copy)
 	if type(Key) ~= "table" then return end
 	for i, value in Key do
@@ -38,7 +38,7 @@ end
 
 local self = setmetatable({}, { __mode = "k" })
 
-local function getHintsDeclaredBy(Key, GetTemplateForRobloxComponent) --[[ Line: 83 ]]
+local function getHintsDeclaredBy(Key, GetTemplateForRobloxComponent)
 	-- upvalues: self (copy), collectHintsInTemplateTree (copy)
 	if Key == nil then
 		return {}
@@ -56,7 +56,7 @@ local function getHintsDeclaredBy(Key, GetTemplateForRobloxComponent) --[[ Line:
 	end
 end
 
-local function _(p3, p4): boolean --[[ Line: 100 | Named "declaresHintWithHandler" ]]
+local function _(p3, p4): boolean
 	-- upvalues: getHintsDeclaredBy (copy), config (copy)
 	for i in getHintsDeclaredBy(p3, p4) do
 		if config[i] then
@@ -66,7 +66,7 @@ local function _(p3, p4): boolean --[[ Line: 100 | Named "declaresHintWithHandle
 	return false
 end
 
-local _ = function(p5, p6): boolean --[[ Line: 112 | Named "anyTemplateDeclaresHintWithHandler" ]]
+local _ = function(p5, p6): boolean
 	-- upvalues: getHintsDeclaredBy (copy), config (copy)
 	local Flag = nil
 	for _, value in p5.getKnownTemplates() do
@@ -85,7 +85,7 @@ local _ = function(p5, p6): boolean --[[ Line: 112 | Named "anyTemplateDeclaresH
 	return false
 end
 
-local _ = function(p7, Key, p8) --[[ Line: 124 | Named "attributeHintTo" ]]
+local _ = function(p7, Key, p8)
 	local List = p7[Key]
 	
 	if List == nil then
@@ -95,7 +95,7 @@ local _ = function(p7, Key, p8) --[[ Line: 124 | Named "attributeHintTo" ]]
 	table.insert(List, p8)
 end
 
-local function attributeHintsInInputData(ComponentInputData, Callback, Tbl, p7) --[[ Line: 147 ]]
+local function attributeHintsInInputData(ComponentInputData, Callback, Tbl, p7)
 	-- upvalues: getHintsDeclaredBy (copy), config (copy), attributeHintsInInputData (copy)
 	if type(ComponentInputData) ~= "table" then return end
 	local Tbl1 = Tbl
@@ -126,7 +126,7 @@ local function attributeHintsInInputData(ComponentInputData, Callback, Tbl, p7) 
 	end
 end
 
-return function(p8) --[[ Line: 194 | Named "processClientHints" ]]
+return function(p8)
 	-- upvalues: getHintsDeclaredBy (copy), config (copy), attributeHintsInInputData (copy)
 	local GetTemplateForRobloxComponentFunction = p8.getTemplateForRobloxComponent
 	

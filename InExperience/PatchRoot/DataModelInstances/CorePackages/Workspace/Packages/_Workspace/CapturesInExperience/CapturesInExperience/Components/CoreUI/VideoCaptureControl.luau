@@ -28,7 +28,7 @@ local FFlagCapturesControlsUseBuilderIconsModule = require(Parent.Flags.FFlagCap
 local FrameVideoCamera = if FFlagCapturesControlsUseBuilderIconsModule then IconName.FrameVideoCamera else "icons/controls/screenRecord_alt"
 local Large = if FFlagCapturesControlsUseBuilderIconsModule then IconSize.Large else nil
 
-return function(p1) --[[ Line: 53 ]]
+return function(p1)
 	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), UseTokensFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseCallbackFunction (copy), EventNamesModule (copy), StopVideoCaptureModule (copy), ReactOtterModule (copy), UseEffectFunction (copy), MaxVideoCaptureDurationSeconds (copy), StartVideoCaptureModule (copy), ReactModule (copy), View (copy), Tooltip (copy), PopoverAlign (copy), Icon (copy), FrameVideoCamera (copy), Large (copy), CaptureTriggerTypeModule (copy), FoundationModule (copy), RadialProgressBarModule (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
@@ -37,15 +37,15 @@ return function(p1) --[[ Line: 53 ]]
 		videoCaptureInProgressTitle = "Feature.Captures.Title.VideoCaptureInProgressTooltip"
 	})
 	local UseTokensResult = UseTokensFunction()
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 62 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
 		return p2[ConstantsModule.RoduxKey].IsVideoCaptureActive.status
 	end)
-	local UseSelectorResult1 = UseSelectorFunction(function(p2) --[[ Line: 66 ]]
+	local UseSelectorResult1 = UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
 		return p2[ConstantsModule.RoduxKey].IsVideoCaptureActive.triggerType
 	end)
-	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0, (UseCallbackFunction(function() --[[ Line: 70 ]]
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0, (UseCallbackFunction(function()
 		-- upvalues: UseSelectorResult (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval), UseDispatchResult (copy), StopVideoCaptureModule (upval)
 		if UseSelectorResult then
 			UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesEntrypointVideoDeactivatedAutomatically)
@@ -54,7 +54,7 @@ return function(p1) --[[ Line: 53 ]]
 			return
 		end
 	end, { UseSelectorResult })))
-	UseEffectFunction(function() --[[ Line: 82 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseSelectorResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), MaxVideoCaptureDurationSeconds (upval)
 		if UseSelectorResult then
 			UseAnimatedBindingResult2(ReactOtterModule.ease(1, {
@@ -67,7 +67,7 @@ return function(p1) --[[ Line: 53 ]]
 			UseAnimatedBindingResult2(ReactOtterModule.instant(0))
 		end
 	end, { UseAnimatedBindingResult2, UseSelectorResult })
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 93 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: UseSelectorResult (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval), UseDispatchResult (copy), StartVideoCaptureModule (upval)
 		if not UseSelectorResult then
 			UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesEntrypointVideoActivated)
@@ -76,7 +76,7 @@ return function(p1) --[[ Line: 53 ]]
 			return
 		end
 	end, { UseSelectorResult })
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 103 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: UseSelectorResult (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval), UseDispatchResult (copy), StopVideoCaptureModule (upval)
 		if UseSelectorResult then
 			UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesEntrypointVideoDeactivated)

@@ -6,7 +6,7 @@ local UtilModule = require(CommandModules:WaitForChild("Util"))
 local _ = script.Parent
 local ChatSettingsModule = require(ClientChatModules:WaitForChild("ChatSettings"))
 
-function Module.SetupCommandProcessors(p1) --[[ Line: 19 ]]
+function Module.SetupCommandProcessors(p1)
 	-- upvalues: CommandModules (copy), UtilModule (copy)
 	local Children = CommandModules:GetChildren()
 	
@@ -25,7 +25,7 @@ function Module.SetupCommandProcessors(p1) --[[ Line: 19 ]]
 	end
 end
 
-function Module.ProcessCompletedChatMessage(p2, p3, p4): boolean --[[ Line: 37 ]]
+function Module.ProcessCompletedChatMessage(p2, p3, p4): boolean
 	-- upvalues: ChatSettingsModule (copy)
 	for i = 1, #p2.CompletedMessageProcessors do
 		if p2.CompletedMessageProcessors[i](p3, p4, ChatSettingsModule) then
@@ -35,7 +35,7 @@ function Module.ProcessCompletedChatMessage(p2, p3, p4): boolean --[[ Line: 37 ]
 	return false
 end
 
-function Module.ProcessInProgressChatMessage(p5, p6, p7, p8) --[[ Line: 47 ]]
+function Module.ProcessInProgressChatMessage(p5, p6, p7, p8)
 	-- upvalues: ChatSettingsModule (copy)
 	local v1 = nil
 	for i = 1, #p5.InProgressMessageProcessors do
@@ -49,7 +49,7 @@ function Module.ProcessInProgressChatMessage(p5, p6, p7, p8) --[[ Line: 47 ]]
 end
 
 return {
-	new = function() --[[ Line: 60 ]]
+	new = function()
 		-- upvalues: Module (copy)
 		local self = setmetatable({}, Module)
 		self.CompletedMessageProcessors = {}

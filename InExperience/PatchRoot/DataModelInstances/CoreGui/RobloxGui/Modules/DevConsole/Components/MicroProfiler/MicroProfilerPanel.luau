@@ -4,14 +4,14 @@ local ImmutableModule = require(script.Parent.Parent.Parent.Immutable)
 local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
 local MicroProfilerPanel = RoactModule.Component:extend("MicroProfilerPanel")
 
-function MicroProfilerPanel.createTabSelector(p1, Frame) --[[ Line: 10 ]]
+function MicroProfilerPanel.createTabSelector(p1, Frame)
 	-- upvalues: RoactModule (copy), ConstantsModule (copy), BoxButtonModule (copy)
 	local Size = Frame.Size
 	local Position = Frame.Position or UDim2.new(0, 0, 0, 0)
 	local ButtonSize = Frame.ButtonSize
 	local LayoutOrder = Frame.LayoutOrder
 	
-	local function createHighlight(Name, p2: number) --[[ Line: 16 ]]
+	local function createHighlight(Name, p2: number)
 		-- upvalues: p1 (copy), RoactModule (upval), ConstantsModule (upval)
 		return if p1.state.CurrentSection == Name then RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
@@ -29,7 +29,7 @@ function MicroProfilerPanel.createTabSelector(p1, Frame) --[[ Line: 10 ]]
 			text = section.Name,
 			size = ButtonSize,
 			pos = UDim2.new(0, (i - 1) * ButtonSize.X.Offset, 0, 0),
-			onClicked = function() --[[ Line: 44 ]]
+			onClicked = function()
 				-- upvalues: p1 (copy), section (copy)
 				p1:setState({ CurrentSection = section.Name })
 			end
@@ -44,12 +44,12 @@ function MicroProfilerPanel.createTabSelector(p1, Frame) --[[ Line: 10 ]]
 	}, Elements)
 end
 
-function MicroProfilerPanel.init(p2) --[[ Line: 59 ]]
+function MicroProfilerPanel.init(p2)
 	assert(p2.props.Sections[1] ~= nil, "MicroProfilerPanel requires at least one section.")
 	p2.state = { CurrentSection = p2.props.Sections[1].Name }
 end
 
-function MicroProfilerPanel.render(p2) --[[ Line: 67 ]]
+function MicroProfilerPanel.render(p2)
 	-- upvalues: RoactModule (copy), ConstantsModule (copy), ImmutableModule (copy)
 	assert(p2.props.Sections[1] ~= nil, "MicroProfilerPanel requires at least one section.")
 	local Sections = p2.props.Sections

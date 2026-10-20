@@ -6,12 +6,12 @@ local TextElement = InlineLayoutModule.Components.InlineLayoutElements.TextEleme
 local LinkElement = InlineLayoutModule.Components.InlineLayoutElements.LinkElement
 local config = { name = "u", attributes = {} }
 
-return function(Callback) --[[ Line: 21 | Named "createLegalLinkRenderer" ]]
+return function(Callback)
 	-- upvalues: CryoModule (copy), TextElement (copy), config (copy), LinkElement (copy)
-	return function(p1, p2) --[[ Line: 22 ]]
+	return function(p1, p2)
 		-- upvalues: CryoModule (upval), TextElement (upval), config (upval), LinkElement (upval), Callback (copy)
 		local Href = p1.attributes.href or ""
-		local MapResult = CryoModule.List.map(p2.processChildren(p1, p2), function(p3, LayoutOrder) --[[ Line: 25 ]]
+		local MapResult = CryoModule.List.map(p2.processChildren(p1, p2), function(p3, LayoutOrder)
 			-- upvalues: TextElement (upval), CryoModule (upval), config (upval), p2 (copy)
 			return TextElement.new({
 				LayoutOrder = LayoutOrder,
@@ -24,7 +24,7 @@ return function(Callback) --[[ Line: 21 | Named "createLegalLinkRenderer" ]]
 		
 		return if #MapResult == 0 then {} else {
 			LinkElement.new(MapResult, {
-				onActivated = function() --[[ Line: 41 ]]
+				onActivated = function()
 					-- upvalues: Callback (upval), Href (copy)
 					Callback(Href)
 				end

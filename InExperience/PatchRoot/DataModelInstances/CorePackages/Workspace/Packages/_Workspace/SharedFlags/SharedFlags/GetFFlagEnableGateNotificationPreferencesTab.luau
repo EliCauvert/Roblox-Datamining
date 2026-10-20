@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableGateNotificationPreferencesTab", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("EnableGateNotificationPreferencesTab")
 end

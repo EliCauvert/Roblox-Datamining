@@ -10,14 +10,14 @@ local UseGroupsWrapperContextModule = require(Groups.Contexts.useGroupsWrapperCo
 local InitializeGroupsAnalyticsModule = require(Groups.Analytics.initializeGroupsAnalytics)
 local GroupsAnalyticsContextModule = require(Groups.Analytics.GroupsAnalyticsContext)
 
-local function GroupsWithContext(p1) --[[ Line: 23 ]]
+local function GroupsWithContext(p1)
 	-- upvalues: UseGroupsWrapperContextModule (copy), FFlagEnableGroupDetailPane (copy), UseIsCompactTouchModule (copy), ReactModule (copy), GroupsRoutesModule (copy), InitializeGroupsAnalyticsModule (copy), GroupsNavigatorModule (copy), GroupsPageModule (copy), GroupsAnalyticsContextModule (copy)
 	local UseGroupsWrapperContextModuleResult = UseGroupsWrapperContextModule()
 	
 	if FFlagEnableGroupDetailPane then
 		local UseIsCompactTouchModuleResult = UseIsCompactTouchModule()
 		local UseRefResult = ReactModule.useRef(nil)
-		ReactModule.useEffect(function() --[[ Line: 28 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseGroupsWrapperContextModuleResult (copy), UseRefResult (copy), p1 (copy), UseIsCompactTouchModuleResult (copy), GroupsRoutesModule (upval)
 			if UseGroupsWrapperContextModuleResult.groupId == nil then
 				UseRefResult.current = nil
@@ -39,7 +39,7 @@ local function GroupsWithContext(p1) --[[ Line: 23 ]]
 		})
 	end
 	return ReactModule.createElement(GroupsAnalyticsContextModule.Provider, {
-		value = ReactModule.useMemo(function() --[[ Line: 44 ]]
+		value = ReactModule.useMemo(function()
 			-- upvalues: InitializeGroupsAnalyticsModule (upval), UseGroupsWrapperContextModuleResult (copy)
 			local InitializeGroupsAnalyticsModuleResult = InitializeGroupsAnalyticsModule()
 			InitializeGroupsAnalyticsModuleResult.updateInfoForAllEvents({ userId = UseGroupsWrapperContextModuleResult.userId })
@@ -56,7 +56,7 @@ end
 if FFlagEnableGroupDetailPane then
 	local GroupsNavigatorWithProviders = ReactModule.PureComponent:extend("GroupsNavigatorWithProviders")
 	
-	function GroupsNavigatorWithProviders.render(p1) --[[ Line: 71 ]]
+	function GroupsNavigatorWithProviders.render(p1)
 		-- upvalues: ReactModule (copy), GroupsWithContext (copy)
 		return ReactModule.createElement(GroupsWithContext, p1.props)
 	end

@@ -2,7 +2,7 @@
 local AttributeType = MomentsCommonModule.Enums.AttributeType
 local GetTagsForMomentFunction = MomentsCommonModule.Utils.getTagsForMoment
 
-return function(p1, p2) --[[ Line: 12 | Named "makeRegistrationInfo" ]]
+return function(p1, p2)
 	-- upvalues: AttributeType (copy), GetTagsForMomentFunction (copy)
 	local Edits = p2.edits
 	local List = {}

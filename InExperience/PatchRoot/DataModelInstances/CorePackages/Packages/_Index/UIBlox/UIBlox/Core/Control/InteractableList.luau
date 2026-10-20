@@ -26,7 +26,7 @@ InteractableList.validateProps = TModule.strictInterface({
 	itemSize = TModule.optional(TModule.union(TModule.UDim2, require(Parent.Core.Utility.bindingValidator)(TModule.UDim2)))
 })
 InteractableList.defaultProps = {
-	renderList = function(List, Callback, p1) --[[ Line: 60 ]]
+	renderList = function(List, Callback, p1)
 		-- upvalues: RoactModule (copy)
 		local List1 = {
 			RoactModule.createElement("UIListLayout", {
@@ -55,7 +55,7 @@ InteractableList.defaultProps = {
 	selectionMode = SelectionModeModule.Single
 }
 
-function InteractableList.init(p2) --[[ Line: 88 ]]
+function InteractableList.init(p2)
 	-- upvalues: SelectionModeModule (copy), CryoModule (copy)
 	local config = { interactable = {}, selection = {} }
 	
@@ -68,9 +68,9 @@ function InteractableList.init(p2) --[[ Line: 88 ]]
 	end
 	p2:setState(config)
 	
-	function p2.setInteractableState(p3, p4) --[[ Line: 101 ]]
+	function p2.setInteractableState(p3, p4)
 		-- upvalues: p2 (copy), CryoModule (upval)
-		p2:setState(function(p5) --[[ Line: 102 ]]
+		p2:setState(function(p5)
 			-- upvalues: CryoModule (upval), p3 (copy), p4 (copy)
 			return {
 				interactable = CryoModule.Dictionary.join(p5.interactable, { [p3] = p4 })
@@ -78,13 +78,13 @@ function InteractableList.init(p2) --[[ Line: 88 ]]
 		end)
 	end
 	
-	function p2.setSelection(Selection) --[[ Line: 110 ]]
+	function p2.setSelection(Selection)
 		-- upvalues: p2 (copy)
 		p2:setState({ selection = Selection })
 	end
 end
 
-function InteractableList.getSelection(p2) --[[ Line: 117 ]]
+function InteractableList.getSelection(p2)
 	-- upvalues: SelectionModeModule (copy), CryoModule (copy)
 	if p2.props.selection then
 		return p2.props.selection
@@ -92,7 +92,7 @@ function InteractableList.getSelection(p2) --[[ Line: 117 ]]
 	if p2.props.selectionMode == SelectionModeModule.None then
 		return {}
 	end
-	local FilterResult = CryoModule.List.filter(p2.state.selection, function(p3): boolean --[[ Line: 124 ]]
+	local FilterResult = CryoModule.List.filter(p2.state.selection, function(p3): boolean
 		-- upvalues: p2 (copy)
 		return p2.props.itemList[p3] ~= nil
 	end)
@@ -108,15 +108,15 @@ function InteractableList.getSelection(p2) --[[ Line: 117 ]]
 	return if FilterResultEntry == nil then {} else { FilterResultEntry }
 end
 
-function InteractableList.didMount(p2) --[[ Line: 142 ]]
+function InteractableList.didMount(p2)
 	if p2.props.selection == nil and p2.props.onSelectionChanged then
 		p2.props.onSelectionChanged(p2:getSelection())
 	end
 end
 
-function InteractableList.render(p2) --[[ Line: 148 ]]
+function InteractableList.render(p2)
 	-- upvalues: ControlStateModule (copy), RoactModule (copy), InteractableListItemModule (copy)
-	return p2.props.renderList(p2.props.itemList, function(Id) --[[ Line: 149 ]]
+	return p2.props.renderList(p2.props.itemList, function(Id)
 		-- upvalues: p2 (copy), ControlStateModule (upval), RoactModule (upval), InteractableListItemModule (upval)
 		return RoactModule.createElement(InteractableListItemModule, {
 			id = Id,

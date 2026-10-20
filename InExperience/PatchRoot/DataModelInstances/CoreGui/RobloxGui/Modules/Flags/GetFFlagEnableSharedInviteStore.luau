@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableSharedInviteStore", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("EnableSharedInviteStore")
 end

@@ -16,13 +16,13 @@ local FFlagMomentsVideoPermissionContextFix = require(Parent.MomentsCommon).Flag
 local GetRbxThumbFunction = FoundationModule.Utility.getRbxThumb
 local ThumbnailType = FoundationModule.Enums.ThumbnailType
 
-local function _(p1, CaptureType, p2): string --[[ Line: 54 | Named "getMediaContentUri" ]]
+local function _(p1, CaptureType, p2): string
 	local AssetId: string = `rbxassetid://{p1}`
 	
 	return if CaptureType == Enum.CaptureType.Video and p2 ~= nil then `{AssetId}&accessContext={p2}&permissionContext=ignoreUniverse` else AssetId
 end
 
-local function getMediaContents(AssetId, CaptureType, p1) --[[ Line: 63 ]]
+local function getMediaContents(AssetId, CaptureType, p1)
 	-- upvalues: FFlagMomentsVideoPermissionContextFix (copy)
 	local AssetId1: string = `rbxassetid://{AssetId}`
 	local Content1 = Content.fromUri(if CaptureType == Enum.CaptureType.Video and p1 ~= nil then `{AssetId1}&accessContext={p1}&permissionContext=ignoreUniverse` else AssetId1)
@@ -34,7 +34,7 @@ local function getMediaContents(AssetId, CaptureType, p1) --[[ Line: 63 ]]
 	end
 end
 
-local _ = function(p1, p2) --[[ Line: 85 | Named "getLocalTts" ]]
+local _ = function(p1, p2)
 	if p1 == nil or p2 == nil then
 		return nil
 	else
@@ -44,7 +44,7 @@ local _ = function(p1, p2) --[[ Line: 85 | Named "getLocalTts" ]]
 	end
 end
 
-return function(p1, p2) --[[ Line: 96 | Named "toMediaItem" ]]
+return function(p1, p2)
 	-- upvalues: GetFFlagMomentsRenderPostAssetsModule (copy), FFlagMomentsOptimisticProfilePending (copy), FFlagMomentsServeEDPVideos (copy), HttpService (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), FFlagMomentsTTSFeedPlaybackModule (copy), getMediaContents (copy), FFlagMomentsTTSPendingPreviewPlaybackModule (copy), MomentsGetPostAssetStoreModule (copy), DeriveMomentFromPostModule (copy), TutilsModule (copy)
 	local IsIncludeLocalTts: boolean = p2 ~= nil and p2.includeLocalTts == true
 	
@@ -57,7 +57,7 @@ return function(p1, p2) --[[ Line: 96 | Named "toMediaItem" ]]
 		return nil
 	end
 	if GetFFlagMomentsRenderPostAssetsModule() then
-		local function createMediaItem(Moment, SourceKey) --[[ Line: 108 ]]
+		local function createMediaItem(Moment, SourceKey)
 			-- upvalues: FFlagMomentsOptimisticProfilePending (upval), FFlagMomentsServeEDPVideos (upval), HttpService (upval), GetRbxThumbFunction (upval), ThumbnailType (upval), FFlagMomentsTTSFeedPlaybackModule (upval), getMediaContents (upval), FFlagMomentsTTSPendingPreviewPlaybackModule (upval), IsIncludeLocalTts (copy)
 			local LocalContent = if FFlagMomentsOptimisticProfilePending then Moment.localContent else nil
 			local AssetId: number = Moment.assetId
@@ -106,7 +106,7 @@ return function(p1, p2) --[[ Line: 96 | Named "toMediaItem" ]]
 		if PostAssetId == nil or PostAssetId <= 0 then
 			return MediaItem
 		else
-			function MediaItem.resolve(p3) --[[ Line: 164 ]]
+			function MediaItem.resolve(p3)
 				-- upvalues: MomentsGetPostAssetStoreModule (upval), PostAssetId (copy), DeriveMomentFromPostModule (upval), Moment (copy), createMediaItem (copy), MediaItem (copy), TutilsModule (upval)
 				local DataResult = MomentsGetPostAssetStoreModule(false).getAndFetchPostAsset(PostAssetId).data(p3)
 				

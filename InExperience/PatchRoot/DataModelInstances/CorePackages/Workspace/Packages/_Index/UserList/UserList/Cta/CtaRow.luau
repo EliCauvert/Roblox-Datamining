@@ -11,7 +11,7 @@ local FFlagUserListComposeRenderRowWithCta = require(Parent.SharedFlags).FFlagUs
 local FFlagUserListSurfaceExtensions = require(Parent.SharedFlags).FFlagUserListSurfaceExtensions
 local FFlagUserListSurfacePresenceWins = require(Parent.SharedFlags).FFlagUserListSurfacePresenceWins
 
-return require(Parent.React).memo(function(p1) --[[ Line: 41 | Named "CtaRow" ]]
+return require(Parent.React).memo(function(p1)
 	-- upvalues: UseProfileCtaModule (copy), UseGetPresenceByUserIdFunction (copy), UseJoinUserInExperienceFunction (copy), UseCtaForRowModule (copy), FFlagUserListCanonicalCtaAnalyticsModule (copy), FFlagUserListSurfaceExtensions (copy), ComposeCtaRowModule (copy), FFlagUserListComposeRenderRowWithCta (copy), FFlagUserListSurfacePresenceWins (copy)
 	local Id = p1.entity.id
 	local UseProfileCtaModuleResult, UseProfileCtaModuleResult2 = UseProfileCtaModule(Id)
@@ -32,7 +32,7 @@ return require(Parent.React).memo(function(p1) --[[ Line: 41 | Named "CtaRow" ]]
 	if FFlagUserListComposeRenderRowWithCta and RenderRowFunction then
 		local CreateRowFunction = p1.createRow
 		
-		return RenderRowFunction(function(Tbl) --[[ Line: 78 ]]
+		return RenderRowFunction(function(Tbl)
 			-- upvalues: UseGetPresenceByUserIdResult (copy), FFlagUserListSurfacePresenceWins (upval), UseCtaForRowModuleResult (copy), Config (copy), CreateRowFunction (copy)
 			local Copy = table.clone(Tbl)
 			Copy.presence = if UseGetPresenceByUserIdResult then UseGetPresenceByUserIdResult.userPresenceType else nil

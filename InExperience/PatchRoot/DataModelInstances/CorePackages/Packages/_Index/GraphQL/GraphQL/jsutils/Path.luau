@@ -1,10 +1,10 @@
 ﻿local Array = require(script.Parent.Parent.Parent.LuauPolyfill).Array
 
 return {
-	addPath = function(Prev, Key, Typename) --[[ Line: 21 ]]
+	addPath = function(Prev, Key, Typename)
 		return { prev = Prev, key = Key, typename = Typename }
 	end,
-	pathToArray = function(Prev) --[[ Line: 29 ]]
+	pathToArray = function(Prev)
 		-- upvalues: Array (copy)
 		local Keys = {}
 		local Prev1 = Prev

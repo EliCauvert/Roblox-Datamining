@@ -14,11 +14,11 @@ local InputSize = FoundationModule.Enums.InputSize
 local Radius = FoundationModule.Enums.Radius
 local FFlagRobuxPillSingleFocusTargetModule = require(RobuxPill.Flags.FFlagRobuxPillSingleFocusTarget)
 
-local function _(p1) --[[ Line: 32 | Named "numWithCommas" ]]
+local function _(p1)
 	return tostring(p1):reverse():gsub("(%d%d%d)", "%1,"):reverse():gsub("^,", "")
 end
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 36 | Named "RobuxPill" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: UseTokensFunction (copy), FFlagRobuxPillSingleFocusTargetModule (copy), ReactModule (copy), FoundationModule (copy), Icon (copy), IconName (copy), IconSize (copy), Skeleton (copy), Radius (copy), Text (copy), Button (copy), InputSize (copy), FillBehavior (copy)
 	local UseTokensResult = UseTokensFunction()
 	local NoShowBorder = p1.showBorder == nil or p1.showBorder

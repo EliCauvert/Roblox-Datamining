@@ -2,12 +2,12 @@
 local TModule = require(GenericAbuseReporting.Parent.t)
 local BeduiDataTypeInterface = require(GenericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes).BeduiDataTypeInterface
 
-local function _(p1, p2) --[[ Line: 15 | Named "validateInterface" ]]
+local function _(p1, p2)
 	-- upvalues: TModule (copy)
 	return TModule.interface(p2)(p1)
 end
 
-local function validateStepId(p1) --[[ Line: 24 ]]
+local function validateStepId(p1)
 	local Flag = false
 	local List = {}
 	
@@ -30,7 +30,7 @@ local function validateStepId(p1) --[[ Line: 24 ]]
 	end
 end
 
-return function(p2) --[[ Line: 51 | Named "validateBeduiData" ]]
+return function(p2)
 	-- upvalues: BeduiDataTypeInterface (copy), TModule (copy), validateStepId (copy)
 	if p2 == nil then
 		return false, "Bedui data is nil"

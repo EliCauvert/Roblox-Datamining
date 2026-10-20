@@ -4,7 +4,7 @@ local HomeConstantsModule = require(Home.HomeConstants)
 local HomeSortDetailConstantsModule = require(Home.HomeSortDetailPage.HomeSortDetailConstants)
 local IsHomeSortDetailSortIncludedModule = require(Home.HomeSortDetailPage.isHomeSortDetailSortIncluded)
 
-local function _(p1) --[[ Line: 18 | Named "readSortInputData" ]]
+local function _(p1)
 	if typeof(p1) == "table" then
 		local InputData = p1.input_data
 		local Kind = if typeof(InputData) == "table" then InputData.kind else nil
@@ -15,14 +15,14 @@ local function _(p1) --[[ Line: 18 | Named "readSortInputData" ]]
 	end
 end
 
-local _ = function(p1) --[[ Line: 30 | Named "readSortInputDataType" ]]
+local _ = function(p1)
 	local InputData = if typeof(p1) == "table" then p1.input_data else nil
 	local Kind = if typeof(InputData) == "table" then InputData.kind else nil
 	
 	return if typeof(Kind) == "table" and typeof(Kind.type) == "string" then Kind.type else nil
 end
 
-local _ = function(p1, p2): boolean --[[ Line: 36 | Named "matchesSort" ]]
+local _ = function(p1, p2): boolean
 	-- upvalues: IsHomeSortDetailSortIncludedModule (copy)
 	local v1 = nil
 	if typeof(p1) == "table" then
@@ -47,7 +47,7 @@ local _ = function(p1, p2): boolean --[[ Line: 36 | Named "matchesSort" ]]
 	return Flag
 end
 
-local function findFeedEntry(EntryOrder, EntryMap, p1, p2: number) --[[ Line: 45 ]]
+local function findFeedEntry(EntryOrder, EntryMap, p1, p2: number)
 	-- upvalues: IsHomeSortDetailSortIncludedModule (copy)
 	if p2 ~= nil and p2 >= 1 and p2 % 1 == 0 then
 		local EntryOrderEntry = EntryOrder[p2]
@@ -109,7 +109,7 @@ local function findFeedEntry(EntryOrder, EntryMap, p1, p2: number) --[[ Line: 45
 	return nil
 end
 
-local function selectHomeSortDetailFeedEntry(InputData, p3, p4) --[[ Line: 68 ]]
+local function selectHomeSortDetailFeedEntry(InputData, p3, p4)
 	-- upvalues: findFeedEntry (copy)
 	if typeof(InputData) ~= "table" then
 		return nil
@@ -146,7 +146,7 @@ local function selectHomeSortDetailFeedEntry(InputData, p3, p4) --[[ Line: 68 ]]
 	}
 end
 
-local function buildVerticalFeedInputData(p3) --[[ Line: 103 ]]
+local function buildVerticalFeedInputData(p3)
 	-- upvalues: HomeSortDetailConstantsModule (copy)
 	local Copy = table.clone(p3.inputData)
 	Copy.entry_order = {
@@ -164,14 +164,14 @@ local function buildVerticalFeedInputData(p3) --[[ Line: 103 ]]
 	return Copy
 end
 
-local _ = function(p3, p4) --[[ Line: 119 | Named "getHomeInputData" ]]
+local _ = function(p3, p4)
 	-- upvalues: HomeConstantsModule (copy)
 	local InputData = p3.getInputData(HomeConstantsModule.ConfigKey, HomeConstantsModule.ContentIdentifier, p4)
 	
 	return if InputData == nil then p3.getInputData(HomeConstantsModule.ConfigKey, nil, p4) else InputData
 end
 
-return function(p3, p4) --[[ Line: 127 | Named "buildHomeSortDetailPageEntry" ]]
+return function(p3, p4)
 	-- upvalues: SduiSharedUtilitiesModule (copy), selectHomeSortDetailFeedEntry (copy), HomeConstantsModule (copy), HomeSortDetailConstantsModule (copy), buildVerticalFeedInputData (copy)
 	if p3 == "" then
 		return nil
@@ -182,7 +182,7 @@ return function(p3, p4) --[[ Line: 127 | Named "buildHomeSortDetailPageEntry" ]]
 		return if selectHomeSortDetailFeedEntry(if InputData == nil then SduiApiStore.getInputData(HomeConstantsModule.ConfigKey, nil, nil) else InputData, p3, p4) == nil then nil else {
 			robloxComponentType = HomeSortDetailConstantsModule.RobloxComponent,
 			identifier = HomeSortDetailConstantsModule.Identifier,
-			componentInputDataGetter = function(p5) --[[ Line: 141 ]]
+			componentInputDataGetter = function(p5)
 				-- upvalues: selectHomeSortDetailFeedEntry (upval), SduiApiStore (copy), HomeConstantsModule (upval), p3 (copy), p4 (copy), buildVerticalFeedInputData (upval)
 				local InputData = SduiApiStore.getInputData(HomeConstantsModule.ConfigKey, HomeConstantsModule.ContentIdentifier, p5)
 				local SelectHomeSortDetailFeedEntryResult = selectHomeSortDetailFeedEntry(if InputData == nil then SduiApiStore.getInputData(HomeConstantsModule.ConfigKey, nil, p5) else InputData, p3, p4)

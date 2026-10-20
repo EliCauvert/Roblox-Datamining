@@ -10,12 +10,12 @@ local GetRawItemLicensingInfoFunction = AvatarExperienceCommonModule.Utils.getRa
 local ParseItemLicensingFunction = AvatarExperienceCommonModule.Utils.parseItemLicensing
 local MockIdModule = require(script.Parent.Parent.MockId)
 local BundleInfoModule = {
-	new = function() --[[ Line: 43 ]]
+	new = function()
 		return {}
 	end
 }
 
-function BundleInfoModule.mock() --[[ Line: 49 ]]
+function BundleInfoModule.mock()
 	-- upvalues: BundleInfoModule (copy), MockIdModule (copy)
 	local NewBundleInfo = BundleInfoModule.new()
 	NewBundleInfo.name = ""
@@ -45,7 +45,7 @@ function BundleInfoModule.mock() --[[ Line: 49 ]]
 	return NewBundleInfo
 end
 
-function BundleInfoModule.fromBulkPurchaseResult(p1, p2) --[[ Line: 82 ]]
+function BundleInfoModule.fromBulkPurchaseResult(p1, p2)
 	-- upvalues: BundleInfoModule (copy), ItemRestrictions (copy)
 	local NewBundleInfo = BundleInfoModule.new()
 	local ItemRestrictions1 = if p2 and p2.itemRestrictions then p2.itemRestrictions else {}
@@ -61,7 +61,7 @@ function BundleInfoModule.fromBulkPurchaseResult(p1, p2) --[[ Line: 82 ]]
 	return NewBundleInfo
 end
 
-function BundleInfoModule.fromGetFavoriteForAsset(p1, IsFavorited) --[[ Line: 111 ]]
+function BundleInfoModule.fromGetFavoriteForAsset(p1, IsFavorited)
 	-- upvalues: BundleInfoModule (copy)
 	local NewBundleInfo = BundleInfoModule.new()
 	NewBundleInfo.bundleId = tostring(p1)
@@ -70,7 +70,7 @@ function BundleInfoModule.fromGetFavoriteForAsset(p1, IsFavorited) --[[ Line: 11
 	return NewBundleInfo
 end
 
-function BundleInfoModule.fromAvatarPreviewItem(p1) --[[ Line: 118 ]]
+function BundleInfoModule.fromAvatarPreviewItem(p1)
 	-- upvalues: BundleInfoModule (copy), FFlagAXMarketplaceLicensing (copy), ParseItemLicensingFunction (copy), GetRawItemLicensingInfoFunction (copy)
 	local NewBundleInfo = BundleInfoModule.new()
 	NewBundleInfo.name = p1.name
@@ -117,7 +117,7 @@ function BundleInfoModule.fromAvatarPreviewItem(p1) --[[ Line: 118 ]]
 	return NewBundleInfo
 end
 
-function BundleInfoModule.fromGetAssetBundles(p2) --[[ Line: 166 ]]
+function BundleInfoModule.fromGetAssetBundles(p2)
 	-- upvalues: BundleInfoModule (copy), ConstantsModule (copy)
 	local NewBundleInfo = BundleInfoModule.new()
 	NewBundleInfo.name = p2.name
@@ -154,7 +154,7 @@ function BundleInfoModule.fromGetAssetBundles(p2) --[[ Line: 166 ]]
 	return NewBundleInfo
 end
 
-function BundleInfoModule.fromGetItemDetailsV2(p3) --[[ Line: 213 ]]
+function BundleInfoModule.fromGetItemDetailsV2(p3)
 	-- upvalues: BundleInfoModule (copy), GetRawItemLicensingInfoFunction (copy), FFlagAXMarketplaceLicensing (copy), ParseItemLicensingFunction (copy), CryoModule (copy)
 	local NewBundleInfo = BundleInfoModule.new()
 	NewBundleInfo.bundleId = tostring(p3.id)
@@ -186,7 +186,7 @@ function BundleInfoModule.fromGetItemDetailsV2(p3) --[[ Line: 213 ]]
 	return NewBundleInfo
 end
 
-function BundleInfoModule.fromGetItemDetails(p4) --[[ Line: 249 ]]
+function BundleInfoModule.fromGetItemDetails(p4)
 	-- upvalues: BundleInfoModule (copy)
 	local NewBundleInfo = BundleInfoModule.new()
 	NewBundleInfo.bundleId = tostring(p4.Id)
@@ -214,7 +214,7 @@ function BundleInfoModule.fromGetItemDetails(p4) --[[ Line: 249 ]]
 	return NewBundleInfo
 end
 
-function BundleInfoModule.fromGetBundleFavoriteCount(p5, NumFavorites) --[[ Line: 282 ]]
+function BundleInfoModule.fromGetBundleFavoriteCount(p5, NumFavorites)
 	-- upvalues: BundleInfoModule (copy)
 	local NewBundleInfo = BundleInfoModule.new()
 	NewBundleInfo.bundleId = tostring(p5)
@@ -223,7 +223,7 @@ function BundleInfoModule.fromGetBundleFavoriteCount(p5, NumFavorites) --[[ Line
 	return NewBundleInfo
 end
 
-function BundleInfoModule.fromGetEconomyProductInfo(Owned, p5, Price, IsForSale) --[[ Line: 289 ]]
+function BundleInfoModule.fromGetEconomyProductInfo(Owned, p5, Price, IsForSale)
 	-- upvalues: BundleInfoModule (copy)
 	local NewBundleInfo = BundleInfoModule.new()
 	NewBundleInfo.bundleId = tostring(p5)
@@ -234,7 +234,7 @@ function BundleInfoModule.fromGetEconomyProductInfo(Owned, p5, Price, IsForSale)
 	return NewBundleInfo
 end
 
-function BundleInfoModule.fromPurchaseSuccess(p5) --[[ Line: 298 ]]
+function BundleInfoModule.fromPurchaseSuccess(p5)
 	-- upvalues: BundleInfoModule (copy)
 	local NewBundleInfo = BundleInfoModule.new()
 	NewBundleInfo.bundleId = tostring(p5)
@@ -243,7 +243,7 @@ function BundleInfoModule.fromPurchaseSuccess(p5) --[[ Line: 298 ]]
 	return NewBundleInfo
 end
 
-function BundleInfoModule.getSaleDetailsForCollectibles(p5) --[[ Line: 305 ]]
+function BundleInfoModule.getSaleDetailsForCollectibles(p5)
 	-- upvalues: DashModule (copy), ConstantsModule (copy)
 	local JoinDeepResult = DashModule.joinDeep({}, p5)
 	

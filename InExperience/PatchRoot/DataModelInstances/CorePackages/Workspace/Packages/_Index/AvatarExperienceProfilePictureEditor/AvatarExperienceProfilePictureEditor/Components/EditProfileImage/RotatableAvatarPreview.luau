@@ -19,14 +19,14 @@ local UseRotatableOrbitViewportFunction = AvatarViewportModule.useRotatableOrbit
 local AvatarViewportScene = AvatarViewportModule.AvatarViewportScene
 local ViewportInteractionOverlay = AvatarViewportModule.ViewportInteractionOverlay
 
-local function _(p1) --[[ Line: 55 | Named "stopAnimatorTracks" ]]
+local function _(p1)
 	if not p1 then return end
 	for _, playingAnimationTrack in p1:GetPlayingAnimationTracks() do
 		playingAnimationTrack:Stop(0)
 	end
 end
 
-return function(p2) --[[ Line: 64 | Named "RotatableAvatarPreview" ]]
+return function(p2)
 	-- upvalues: UseTokensFunction (copy), CameraMath (copy), FFlagEditProfileImageCameraControlBarModule (copy), UseRotatableAvatarPreviewViewModelModule (copy), ReactModule (copy), FrameCloseupPreviewCameraModule (copy), FFlagEditProfileImageRigTypeOverride (copy), AvatarViewportModule (copy), UseRotatableOrbitViewportFunction (copy), ApplyCloseupPreviewPoseModule (copy), View (copy), AvatarViewportScene (copy), PreviewCutoutOverlayModule (copy), Loading (copy), IconSize (copy), ProfilePictureCameraControlBarModule (copy), ViewportInteractionOverlay (copy)
 	local UseTokensResult = UseTokensFunction()
 	local CutoutSize = p2.cutoutSize
@@ -41,7 +41,7 @@ return function(p2) --[[ Line: 64 | Named "RotatableAvatarPreview" ]]
 		onDistanceScaleChanged = p2.onDistanceScaleChanged,
 		onYRotDegChanged = p2.onYRotDegChanged
 	}) else nil
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 83 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Height (copy), CutoutTopOffset (copy), CutoutSize (copy)
 		return {
 			viewportHeight = Height,
@@ -52,7 +52,7 @@ return function(p2) --[[ Line: 64 | Named "RotatableAvatarPreview" ]]
 	local UseRefResult = ReactModule.useRef(0)
 	local UseRotatableOrbitViewportResult = UseRotatableOrbitViewportFunction({
 		gamepadActionName = "EditProfileRotatableAvatarPreviewOrbit",
-		modelSource = ReactModule.useMemo(function() --[[ Line: 109 ]]
+		modelSource = ReactModule.useMemo(function()
 			-- upvalues: FFlagEditProfileImageRigTypeOverride (upval), p2 (copy), AvatarViewportModule (upval)
 			return if FFlagEditProfileImageRigTypeOverride and p2.rigTypeOverride then AvatarViewportModule.ModelSources.fromUserIdWithRigType(p2.userId, p2.rigTypeOverride) else AvatarViewportModule.ModelSources.fromUserId(p2.userId)
 		end, {
@@ -66,9 +66,9 @@ return function(p2) --[[ Line: 64 | Named "RotatableAvatarPreview" ]]
 		onYRotDegChanged = p2.onYRotDegChanged,
 		onDistanceScaleChanged = p2.onDistanceScaleChanged,
 		layout = UseMemoResult,
-		frameCloseupPreviewCamera = ReactModule.useMemo(function() --[[ Line: 93 ]]
+		frameCloseupPreviewCamera = ReactModule.useMemo(function()
 			-- upvalues: FrameCloseupPreviewCameraModule (upval), UseMemoResult (copy)
-			return function(p3) --[[ Line: 94 ]]
+			return function(p3)
 				-- upvalues: FrameCloseupPreviewCameraModule (upval), UseMemoResult (upval)
 				return FrameCloseupPreviewCameraModule({
 					character = p3.character,
@@ -81,14 +81,14 @@ return function(p2) --[[ Line: 64 | Named "RotatableAvatarPreview" ]]
 			end
 		end, { UseMemoResult })
 	})
-	ReactModule.useEffect(function() --[[ Line: 135 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRotatableOrbitViewportResult (copy), UseRefResult (copy), p2 (copy), ApplyCloseupPreviewPoseModule (upval)
 		if not UseRotatableOrbitViewportResult.modelLoader.isReady or not UseRotatableOrbitViewportResult.modelLoader.model then return end
 		UseRefResult.current += 1
 		local Current = UseRefResult.current
 		local Model = UseRotatableOrbitViewportResult.modelLoader.model
 		local EmoteAssetId = p2.emoteAssetId
-		task.spawn(function() --[[ Line: 145 ]]
+		task.spawn(function()
 			-- upvalues: Model (copy), ApplyCloseupPreviewPoseModule (upval), EmoteAssetId (copy), UseRefResult (upval), Current (copy), UseRotatableOrbitViewportResult (upval)
 			local Humanoid = Model:FindFirstChildOfClass("Humanoid")
 			local Animator = if Humanoid then Humanoid:FindFirstChildOfClass("Animator") else nil
@@ -107,7 +107,7 @@ return function(p2) --[[ Line: 64 | Named "RotatableAvatarPreview" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 156 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			UseRefResult.current += 1
 		end

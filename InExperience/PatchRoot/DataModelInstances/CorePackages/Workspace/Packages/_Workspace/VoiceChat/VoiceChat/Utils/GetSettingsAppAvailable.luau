@@ -6,14 +6,14 @@ local FFlagEnableRetryForLinkingProtocolFetch = SharedFlags.FFlagEnableRetryForL
 local FIntLinkingProtocolFetchRetries = SharedFlags.FIntLinkingProtocolFetchRetries
 local FIntLinkingProtocolFetchTimeoutMS = SharedFlags.FIntLinkingProtocolFetchTimeoutMS
 
-return function(): boolean --[[ Line: 20 ]]
+return function(): boolean
 	-- upvalues: FFlagEnableRetryForLinkingProtocolFetch (copy), FIntLinkingProtocolFetchRetries (copy), Default (copy), SettingsRoute (copy), FIntLinkingProtocolFetchTimeoutMS (copy)
 	local v1 = false
 	local Enabled = false
 	
 	if FFlagEnableRetryForLinkingProtocolFetch then
 		for _ = 0, FIntLinkingProtocolFetchRetries do
-			local SpawnedThread = task.spawn(function() --[[ Line: 26 ]]
+			local SpawnedThread = task.spawn(function()
 				-- upvalues: v1 (ref), Enabled (ref), Default (upval), SettingsRoute (upval)
 				v1, Enabled = Default:supportsSwitchToSettingsApp(SettingsRoute.Microphone):await()
 			end)

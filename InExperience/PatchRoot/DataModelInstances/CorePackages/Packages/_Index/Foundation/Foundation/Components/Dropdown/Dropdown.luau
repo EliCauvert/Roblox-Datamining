@@ -20,39 +20,39 @@ local Side = {
 	position = require(Foundation.Enums.PopoverSide).Bottom
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 82 | Named "Dropdown" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), MarkSelectedItemModule (copy), PopoverModule (copy), DropdownControlModule (copy), WithCommonPropsModule (copy), PopoverAlignModule (copy), Side (copy), RadiusModule (copy), BaseMenuModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
-	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 87 ]]
+	local UseResult = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), UseStateResult2_1 (copy)
 		UseRefResult.current = Current
 		UseStateResult2_1(Current)
 	end, {})
-	ReactModule.useImperativeHandle(p2, function() --[[ Line: 91 ]]
+	ReactModule.useImperativeHandle(p2, function()
 		-- upvalues: UseStateResult1 (copy)
 		return UseStateResult1
 	end, { UseStateResult1 })
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(WithDefaultsModuleResult.width)
 	local MarkSelectedItemModuleResult, MarkSelectedItemModuleResult2 = MarkSelectedItemModule(WithDefaultsModuleResult.items, WithDefaultsModuleResult.value)
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 100 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
-		UseStateResult2(function(p3): boolean --[[ Line: 101 ]]
+		UseStateResult2(function(p3): boolean
 			return not p3
 		end)
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 106 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {})
-	local UseResult3 = ReactModule.useCallback(function(p3) --[[ Line: 110 ]]
+	local UseResult3 = ReactModule.useCallback(function(p3)
 		-- upvalues: UseStateResult2 (copy), WithDefaultsModuleResult (copy)
 		UseStateResult2(false)
 		WithDefaultsModuleResult.onItemChanged(p3)
 	end, { WithDefaultsModuleResult.onItemChanged })
-	WithDefaultsModuleResult.onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 115 ]]
+	WithDefaultsModuleResult.onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
 		-- upvalues: p1 (copy), UseBindingResult2 (copy)
 		if p1.onAbsoluteSizeChanged then
 			p1.onAbsoluteSizeChanged(Frame)

@@ -18,14 +18,14 @@ local InExpAmpWizardController = AmpUpsellModule.InExpAmpWizardController
 local FStringCommsFAEFeatureNameModule = if ManuallyInvokeAmpUpsell2 then require(SocialUpsell.Flag.FStringCommsFAEFeatureName) else game:DefineFastString("CommsFAEFeatureName", "TriggerAgeVerifyRecourse")
 local FStringCommsFAENamespaceModule = if ManuallyInvokeAmpUpsell2 then require(SocialUpsell.Flag.FStringCommsFAENamespace) else game:DefineFastString("CommsFAENamespace", "social/Upsells")
 
-return function(p1, Callback, Callback1, Source, p2, p3) --[[ Line: 32 ]]
+return function(p1, Callback, Callback1, Source, p2, p3)
 	-- upvalues: SocialUpsellTypeModule (copy), AccessResponseEnum (copy), FFlagEnableAEGIS2CommsFAEUpsell (copy), InExpAmpWizardController (copy), FStringTriggerAgeCheckUpsellIncludingVPCAmpFeature (copy), FStringCoreContentAmpNameSpace (copy), OpenAmpWizardContainerFunction (copy), ManuallyInvokeAmpUpsell2 (copy), ManuallyInvokeAmpUpsellModule (copy), FStringCommsFAEFeatureNameModule (copy), FStringCommsFAENamespaceModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), NavigateDownFunction (copy)
-	return function(p4) --[[ Line: 41 ]]
+	return function(p4)
 		-- upvalues: p3 (copy), p1 (copy), SocialUpsellTypeModule (upval), Source (copy), AccessResponseEnum (upval), Callback (copy), Callback1 (copy), FFlagEnableAEGIS2CommsFAEUpsell (upval), p2 (copy), InExpAmpWizardController (upval), FStringTriggerAgeCheckUpsellIncludingVPCAmpFeature (upval), FStringCoreContentAmpNameSpace (upval), OpenAmpWizardContainerFunction (upval), ManuallyInvokeAmpUpsell2 (upval), ManuallyInvokeAmpUpsellModule (upval), FStringCommsFAEFeatureNameModule (upval), FStringCommsFAENamespaceModule (upval), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateBackFunction (upval), NavigateDownFunction (upval)
 		if p3 then
 			local P0 = p1 or SocialUpsellTypeModule.FacialAgeEstimation .. (Source or "")
 			
-			local function vpcCompletionCallback(Granted, _) --[[ Line: 45 ]]
+			local function vpcCompletionCallback(Granted, _)
 				-- upvalues: AccessResponseEnum (upval), Callback (upval), Callback1 (upval)
 				if Granted == AccessResponseEnum.Granted then
 					if Callback then
@@ -42,7 +42,7 @@ return function(p1, Callback, Callback1, Source, p2, p3) --[[ Line: 32 ]]
 		elseif FFlagEnableAEGIS2CommsFAEUpsell and p2 then
 			local P0 = p1 or SocialUpsellTypeModule.FacialAgeEstimation
 			
-			return if ManuallyInvokeAmpUpsell2 then ManuallyInvokeAmpUpsellModule(P0, Callback, Callback1) else InExpAmpWizardController.OpenAmpWizardContainerInExp(FStringCommsFAEFeatureNameModule, function(Granted, _) --[[ Line: 84 ]]
+			return if ManuallyInvokeAmpUpsell2 then ManuallyInvokeAmpUpsellModule(P0, Callback, Callback1) else InExpAmpWizardController.OpenAmpWizardContainerInExp(FStringCommsFAEFeatureNameModule, function(Granted, _)
 				-- upvalues: AccessResponseEnum (upval), Callback (upval), Callback1 (upval)
 				if Granted == AccessResponseEnum.Granted then
 					if Callback then
@@ -63,7 +63,7 @@ return function(p1, Callback, Callback1, Source, p2, p3) --[[ Line: 32 ]]
 					nameSpace = FStringCommsFAENamespaceModule,
 					entryPointEventCtx = p1 or SocialUpsellTypeModule.FacialAgeEstimation,
 					metadata = { source = Source },
-					completionCallback = function(Granted, _) --[[ Line: 112 ]]
+					completionCallback = function(Granted, _)
 						-- upvalues: FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), p4 (copy), NavigateBackFunction (upval), AccessResponseEnum (upval), Callback (upval), Callback1 (upval)
 						if FFlagSignalsNavP3Dispatch then
 							NavigationCommands.back(true)

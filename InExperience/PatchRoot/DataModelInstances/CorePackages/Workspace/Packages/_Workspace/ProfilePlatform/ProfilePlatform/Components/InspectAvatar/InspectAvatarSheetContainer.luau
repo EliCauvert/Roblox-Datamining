@@ -29,7 +29,7 @@ local IsItemPurchasableFunction = InspectAvatarUtilsModule.isItemPurchasable
 local GetPriceStatusFunction = InspectAvatarUtilsModule.getPriceStatus
 local PriceStatusEnum = InspectAvatarUtilsModule.PriceStatusEnum
 
-return function(p1) --[[ Line: 52 | Named "InspectAvatarSheetContainer" ]]
+return function(p1)
 	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseMarketplaceAnalyticsContextModule (copy), RobloxAppHooksModule (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), UseSelectorFunction (copy), UseProfileCardWidthFunction (copy), UseProfileJsonComponentModule (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), ConstantsModule (copy), FFlagProfileInspectAvatarBackgroundModule (copy), UseAvatarBackgroundFromWrapperModule (copy), UseInspectAvatarDataModule (copy), ReactModule (copy), IsItemPurchasableFunction (copy), DashModule (copy), FFlagProfileUnifiedPurchaseLoggingModule (copy), InspectAvatarUtilsModule (copy), GetPriceStatusFunction (copy), PriceStatusEnum (copy), FFlagSocialEnableProfileInspectAndBuyAnalytics (copy), EventNamesModule (copy), InspectAvatarSheetModule (copy)
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	local UseProfileAnalyticsContextModuleResult = UseProfileAnalyticsContextModule()
@@ -37,7 +37,7 @@ return function(p1) --[[ Line: 52 | Named "InspectAvatarSheetContainer" ]]
 	local UseLocalRobuxBalanceResult = RobloxAppHooksModule.useLocalRobuxBalance()
 	local IsFormFactorMatch = UseProfileFormFactorModule().formFactor == EnumsModule.ProfileFormFactor.Wide
 	local ProfileId = UseProfileWrapperContextModuleResult.profileId
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 62 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		return p2.TopBar.statusBarHeight
 	end)
 	local UseSelectorResult1 = if IsFormFactorMatch then 0 else UseSelectorResult
@@ -51,7 +51,7 @@ return function(p1) --[[ Line: 52 | Named "InspectAvatarSheetContainer" ]]
 	local DisplayItems = UseInspectAvatarDataModuleResult.displayItems
 	local UseStateResult, UseStateResult2 = ReactModule.useState({})
 	local UseRefResult = ReactModule.useRef({})
-	ReactModule.useEffect(function() --[[ Line: 95 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: DisplayItems (copy), IsItemPurchasableFunction (upval), UseRefResult (copy), UseStateResult2 (copy), DashModule (upval)
 		if #DisplayItems == 0 then return end
 		local t = {}
@@ -67,7 +67,7 @@ return function(p1) --[[ Line: 52 | Named "InspectAvatarSheetContainer" ]]
 			end
 		end
 		if Flag then
-			UseStateResult2(function(p2) --[[ Line: 112 ]]
+			UseStateResult2(function(p2)
 				-- upvalues: DashModule (upval), t (copy)
 				return DashModule.join(p2, t)
 			end)
@@ -75,7 +75,7 @@ return function(p1) --[[ Line: 52 | Named "InspectAvatarSheetContainer" ]]
 			return
 		end
 	end, { DisplayItems })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 124 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FFlagProfileUnifiedPurchaseLoggingModule (upval), DisplayItems (copy), UseStateResult (copy), IsItemPurchasableFunction (upval), InspectAvatarUtilsModule (upval), GetPriceStatusFunction (upval), PriceStatusEnum (upval), EnumsModule (upval)
 		local LineItems = {}
 		local TotalPrice = 0
@@ -139,7 +139,7 @@ return function(p1) --[[ Line: 52 | Named "InspectAvatarSheetContainer" ]]
 			purchasedItems = T
 		}
 	end, { DisplayItems, UseStateResult })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 193 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: DisplayItems (copy)
 		local Numbers = {}
 		
@@ -179,14 +179,14 @@ return function(p1) --[[ Line: 52 | Named "InspectAvatarSheetContainer" ]]
 			totalPrice = UseMemoResult.totalPrice,
 			count = UseMemoResult.count
 		},
-		onToggleItem = ReactModule.useCallback(function(p2) --[[ Line: 117 ]]
+		onToggleItem = ReactModule.useCallback(function(p2)
 			-- upvalues: UseStateResult2 (copy), DashModule (upval)
-			UseStateResult2(function(p3) --[[ Line: 118 ]]
+			UseStateResult2(function(p3)
 				-- upvalues: DashModule (upval), p2 (copy)
 				return DashModule.join(p3, { [p2] = not p3[p2] })
 			end)
 		end, {}),
-		onBuyAll = ReactModule.useCallback(function() --[[ Line: 215 ]]
+		onBuyAll = ReactModule.useCallback(function()
 			-- upvalues: UseMemoResult (copy), UseInspectAvatarDataModuleResult (copy), FFlagSocialEnableProfileInspectAndBuyAnalytics (upval), UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), UseProfileWrapperContextModuleResult (copy), UseLocalRobuxBalanceResult (copy), p1 (copy), EnumsModule (upval), FFlagProfileUnifiedPurchaseLoggingModule (upval), UseMemoResult1 (copy)
 			if #UseMemoResult.lineItems == 0 or not UseInspectAvatarDataModuleResult.localUserId then return end
 			if FFlagSocialEnableProfileInspectAndBuyAnalytics then
@@ -225,14 +225,14 @@ return function(p1) --[[ Line: 52 | Named "InspectAvatarSheetContainer" ]]
 			if FFlagSocialEnableProfileInspectAndBuyAnalytics then UseProfileAnalyticsContextModuleResult else nil,
 			if FFlagSocialEnableProfileInspectAndBuyAnalytics then UseProfileWrapperContextModuleResult.profileSessionId else nil
 		}),
-		onClose = ReactModule.useCallback(function() --[[ Line: 263 ]]
+		onClose = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy)
 			p1.navigation.pop()
 		end, { p1.navigation }),
-		onDismiss = ReactModule.useCallback(function() --[[ Line: 267 ]]
+		onDismiss = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy), UseProfileWrapperContextModuleResult (copy)
 			p1.navigation.pop()
-			task.defer(function() --[[ Line: 269 ]]
+			task.defer(function()
 				-- upvalues: UseProfileWrapperContextModuleResult (upval)
 				UseProfileWrapperContextModuleResult.navigateTo.previousView(false)
 			end)
@@ -240,7 +240,7 @@ return function(p1) --[[ Line: 52 | Named "InspectAvatarSheetContainer" ]]
 			p1.navigation,
 			UseProfileWrapperContextModuleResult.navigateTo
 		}),
-		openItemDetails = ReactModule.useCallback(function(p2, p3, p4) --[[ Line: 275 ]]
+		openItemDetails = ReactModule.useCallback(function(p2, p3, p4)
 			-- upvalues: UseProfileWrapperContextModuleResult (copy), UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), UseMarketplaceAnalyticsContextModuleResult (copy)
 			UseProfileWrapperContextModuleResult.navigateTo.itemOrBundleDetails(p2, p3)
 			UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.CatalogItemOpened, {

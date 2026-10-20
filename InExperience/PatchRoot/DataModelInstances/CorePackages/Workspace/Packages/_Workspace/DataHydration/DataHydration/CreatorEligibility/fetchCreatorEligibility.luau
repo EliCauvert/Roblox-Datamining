@@ -6,7 +6,7 @@ local FetchFunction = HttpClientModule.fetch
 local AsPromiseFunction = HttpClientModule.asPromise
 
 return {
-	fetchEligibility = function(p1, p2) --[[ Line: 19 ]]
+	fetchEligibility = function(p1, p2)
 		-- upvalues: UrlBase (copy), FetchFunction (copy), AsPromiseFunction (copy)
 		local P1 = p2 or {}
 		
@@ -15,12 +15,12 @@ return {
 			analyticsKey = "creator-eligibility.get",
 			network = P1.network,
 			url = ("%s/core-content/v1/creator-eligibility/%d"):format(P1.baseUrl or UrlBase.APIS, p1),
-			decode = function(p3) --[[ Line: 30 ]]
+			decode = function(p3)
 				return p3
 			end
 		})))
 	end,
-	isFlagPresent = function(p1, Value): boolean --[[ Line: 37 ]]
+	isFlagPresent = function(p1, Value): boolean
 		return table.find(p1.creatorEligibility, Value) ~= nil
 	end
 }

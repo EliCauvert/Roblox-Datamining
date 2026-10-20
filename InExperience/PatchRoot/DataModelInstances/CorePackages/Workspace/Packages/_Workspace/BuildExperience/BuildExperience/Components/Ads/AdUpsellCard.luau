@@ -18,7 +18,7 @@ local FillBehavior = FoundationModule.Enums.FillBehavior
 local IconName = FoundationModule.Enums.IconName
 local InputSize = FoundationModule.Enums.InputSize
 
-return function(Frame) --[[ Line: 41 | Named "AdUpsellCard" ]]
+return function(Frame)
 	-- upvalues: FoundationModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildAgentAdCampaignCardModule (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), UseChatCardEmphasisModule (copy), ChatCardPriorityModule (copy), ReactModule (copy), View (copy), Icon (copy), IconName (copy), Text (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseLocalizationResult = UseLocalizationFunction({

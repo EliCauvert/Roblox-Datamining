@@ -5,7 +5,7 @@ local PostPromptImpressionFunction = ServerTriggeredModalImpressionsModule.postP
 local SendModalImpressionEventFunction = ServerTriggeredModalImpressionsModule.sendModalImpressionEvent
 local t = {}
 
-return function(p1, List, p2, _, _) --[[ Line: 16 | Named "SduiPromptImpressionsHandler" ]]
+return function(p1, List, p2, _, _)
 	-- upvalues: t (copy), SduiErrorType (copy), PostPromptImpressionFunction (copy), SendModalImpressionEventFunction (copy)
 	local P2 = p2 or t
 	
@@ -28,7 +28,7 @@ return function(p1, List, p2, _, _) --[[ Line: 16 | Named "SduiPromptImpressions
 			continue
 		end
 		if typeof(Entry.promptId) == "string" then
-			PostPromptImpressionFunction(p1.dependencies.networking, Entry.promptType, Entry.promptId):catch(function() --[[ Line: 53 ]]
+			PostPromptImpressionFunction(p1.dependencies.networking, Entry.promptType, Entry.promptId):catch(function()
 				-- upvalues: p1 (copy), SduiErrorType (upval), Entry (copy)
 				p1.dependencies.logger.reportError(SduiErrorType.FailedToLogPromptImpressions, {
 					name = "SduiPromptImpressionsHandler",

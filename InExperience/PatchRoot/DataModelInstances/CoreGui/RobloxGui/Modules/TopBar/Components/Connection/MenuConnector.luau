@@ -19,7 +19,7 @@ MenuConnector.validateProps = TModule.strictInterface({
 	setRespawnBehaviour = TModule.callback
 })
 
-function MenuConnector.didMount(p1) --[[ Line: 38 ]]
+function MenuConnector.didMount(p1)
 	-- upvalues: IsNewInGameMenuEnabledModule (copy), RobloxGui (copy), FFlagTopBarSignalizeMenuOpen (copy)
 	if IsNewInGameMenuEnabledModule() then
 		local InGameMenuInitModule = require(RobloxGui.Modules.InGameMenuInit)
@@ -42,7 +42,7 @@ function MenuConnector.didMount(p1) --[[ Line: 38 ]]
 	end
 end
 
-function MenuConnector.render(p1) --[[ Line: 58 ]]
+function MenuConnector.render(p1)
 	-- upvalues: IsNewInGameMenuEnabledModule (copy), RobloxGui (copy), RoactModule (copy), FFlagTopBarSignalizeMenuOpen (copy), EventConnectionModule (copy), GetFFlagEnableInGameMenuDurationLoggerModule (copy), PerfUtilsModule (copy)
 	if IsNewInGameMenuEnabledModule() then
 		local InGameMenuInitModule = require(RobloxGui.Modules.InGameMenuInit)
@@ -51,14 +51,14 @@ function MenuConnector.render(p1) --[[ Line: 58 ]]
 		return RoactModule.createFragment({
 			MenuOpenChangedConnection = if FFlagTopBarSignalizeMenuOpen then nil else RoactModule.createElement(EventConnectionModule, {
 				event = OpenChangedEvent.Event,
-				callback = function(p2) --[[ Line: 70 ]]
+				callback = function(p2)
 					-- upvalues: p1 (copy)
 					p1.props.setMenuOpen(p2)
 				end
 			}),
 			RespawnBehaviourConnection = RoactModule.createElement(EventConnectionModule, {
 				event = InGameMenuInitModule.getRespawnBehaviourChangedEvent().Event,
-				callback = function(p2, p3) --[[ Line: 77 ]]
+				callback = function(p2, p3)
 					-- upvalues: p1 (copy)
 					p1.props.setRespawnBehaviour(p2, p3)
 				end
@@ -71,7 +71,7 @@ function MenuConnector.render(p1) --[[ Line: 58 ]]
 		return RoactModule.createFragment({
 			MenuOpenChangedConnection = if FFlagTopBarSignalizeMenuOpen then nil else RoactModule.createElement(EventConnectionModule, {
 				event = SettingsShowEvent.Event,
-				callback = function(p2) --[[ Line: 91 ]]
+				callback = function(p2)
 					-- upvalues: GetFFlagEnableInGameMenuDurationLoggerModule (upval), PerfUtilsModule (upval), p1 (copy)
 					if GetFFlagEnableInGameMenuDurationLoggerModule() and p2 then
 						PerfUtilsModule.menuOpenBegin()
@@ -81,7 +81,7 @@ function MenuConnector.render(p1) --[[ Line: 58 ]]
 			}),
 			RespawnBehaviourConnection = RoactModule.createElement(EventConnectionModule, {
 				event = SettingsHubModule.RespawnBehaviourChangedEvent.Event,
-				callback = function(p2, p3) --[[ Line: 101 ]]
+				callback = function(p2, p3)
 					-- upvalues: p1 (copy)
 					p1.props.setRespawnBehaviour(p2, p3)
 				end
@@ -90,14 +90,14 @@ function MenuConnector.render(p1) --[[ Line: 58 ]]
 	end
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 109 | Named "mapDispatchToProps" ]]
+return RoactRoduxModule.UNSTABLE_connect2(nil, function(Callback)
 	-- upvalues: FFlagTopBarSignalizeMenuOpen (copy), SetMenuOpenModule (copy), FFlagTopBarDeprecateRespawnRoduxModule (copy), SetRespawnBehaviourModule (copy)
 	return {
-		setMenuOpen = if FFlagTopBarSignalizeMenuOpen then nil else function(p1) --[[ Line: 111 ]]
+		setMenuOpen = if FFlagTopBarSignalizeMenuOpen then nil else function(p1)
 			-- upvalues: Callback (copy), SetMenuOpenModule (upval)
 			return Callback(SetMenuOpenModule(p1))
 		end,
-		setRespawnBehaviour = if FFlagTopBarDeprecateRespawnRoduxModule then nil else function(p1, p2) --[[ Line: 115 ]]
+		setRespawnBehaviour = if FFlagTopBarDeprecateRespawnRoduxModule then nil else function(p1, p2)
 			-- upvalues: Callback (copy), SetRespawnBehaviourModule (upval)
 			return Callback(SetRespawnBehaviourModule(p1, p2))
 		end or nil

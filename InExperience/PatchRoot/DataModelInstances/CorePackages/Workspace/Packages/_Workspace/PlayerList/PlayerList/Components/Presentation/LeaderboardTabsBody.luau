@@ -7,7 +7,7 @@ local PlayerListVisibilityStoreModule = require(Parent.Common.PlayerListVisibili
 local LeaderboardTabsModule = require(Parent.Components.Presentation.LeaderboardTabs)
 local PlatformLeaderboardViewModule = require(Parent.Components.Presentation.PlatformLeaderboardView)
 
-return ReactModule.memo(function(p1) --[[ Line: 32 | Named "LeaderboardTabsBody" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: PlayerListVisibilityStoreModule (copy), SignalsReactModule (copy), ReactModule (copy), PlatformLeaderboardViewModule (copy), LeaderboardTabsModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.getEffectiveVisible or PlayerListVisibilityStoreModule.getEffectiveVisible)
 	local IsServer: boolean = p1.activeTabId == "server" or not UseSignalStateResult

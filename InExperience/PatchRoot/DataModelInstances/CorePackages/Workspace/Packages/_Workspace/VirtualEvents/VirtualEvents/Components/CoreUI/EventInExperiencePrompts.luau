@@ -13,12 +13,12 @@ local config = {
 	PromptRsvp = require(Parent.Components.CoreUI.RsvpPrompt)
 }
 
-return function(p1) --[[ Line: 52 ]]
+return function(p1)
 	-- upvalues: UseStateFunction (copy), ReactModule (copy), CryoModule (copy), config (copy), FixFocusWhenInGameMenuIsOpen (copy), GuiService (copy), PromptConnectionsModule (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
 	local UseStateResult, UseStateResult2 = UseStateFunction({ promptType = nil, promptData = nil, promptQueue = {} })
 	local PromptData = UseStateResult.promptData
 	local PromptType = UseStateResult.promptType
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 62 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: CryoModule (upval), UseStateResult (copy), UseStateResult2 (copy)
 		if CryoModule.isEmpty(UseStateResult.promptQueue) then
 			UseStateResult2({ promptType = nil, promptData = {}, promptQueue = {} })
@@ -48,7 +48,7 @@ return function(p1) --[[ Line: 52 ]]
 			error(`Unexpected prompt type: {PromptType}!`)
 		end
 	end
-	local UseResult1 = ReactModule.useCallback(function(EventId, EventDetails) --[[ Line: 93 ]]
+	local UseResult1 = ReactModule.useCallback(function(EventId, EventDetails)
 		-- upvalues: UseStateResult (copy), UseStateResult2 (copy), CryoModule (upval)
 		if UseStateResult.promptType == nil then
 			UseStateResult2({
@@ -74,20 +74,20 @@ return function(p1) --[[ Line: 52 ]]
 	
 	if FixFocusWhenInGameMenuIsOpen then
 		v1, UseStateResult2_1 = ReactModule.useState(GuiService.MenuIsOpen)
-		ReactModule.useEffect(function() --[[ Line: 123 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: Element (ref), UseStateResult2_1 (ref), GuiService (upval)
 			if not Element then return end
 			UseStateResult2_1(GuiService.MenuIsOpen)
-			local MenuOpenedConnection = GuiService.MenuOpened:Connect(function() --[[ Line: 131 ]]
+			local MenuOpenedConnection = GuiService.MenuOpened:Connect(function()
 				-- upvalues: UseStateResult2_1 (upval)
 				UseStateResult2_1(true)
 			end)
-			local MenuClosedConnection = GuiService.MenuClosed:Connect(function() --[[ Line: 134 ]]
+			local MenuClosedConnection = GuiService.MenuClosed:Connect(function()
 				-- upvalues: UseStateResult2_1 (upval)
 				UseStateResult2_1(false)
 			end)
 			
-			return function() --[[ Line: 137 ]]
+			return function()
 				-- upvalues: MenuOpenedConnection (copy), MenuClosedConnection (copy)
 				MenuOpenedConnection:Disconnect()
 				MenuClosedConnection:Disconnect()

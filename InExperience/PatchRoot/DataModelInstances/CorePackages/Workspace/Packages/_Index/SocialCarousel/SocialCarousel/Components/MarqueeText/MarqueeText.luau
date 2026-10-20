@@ -9,7 +9,7 @@ local Text = FoundationModule.Text
 local MarqueeTextMotionModule = require(script.Parent.MarqueeTextMotion)
 local MarqueePlayStatus = require(SocialCarousel.Common.Enums).MarqueePlayStatus
 
-local function renderCopy(Text1, FontStyle, XOffset1, XOffset) --[[ Line: 16 ]]
+local function renderCopy(Text1, FontStyle, XOffset1, XOffset)
 	-- upvalues: ReactModule (copy), Text (copy)
 	return ReactModule.createElement(Text, {
 		tag = "auto-y text-align-x-left content-default",
@@ -21,7 +21,7 @@ local function renderCopy(Text1, FontStyle, XOffset1, XOffset) --[[ Line: 16 ]]
 	})
 end
 
-return function(Frame) --[[ Line: 46 | Named "MarqueeText" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), UsePreferencesFunction (copy), MarqueeTextMotionModule (copy), MarqueePlayStatus (copy), ReactModule (copy), View (copy), renderCopy (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UsePreferencesResult = UsePreferencesFunction()
@@ -43,14 +43,14 @@ return function(Frame) --[[ Line: 46 | Named "MarqueeText" ]]
 	local IsNotRequiresOverflow = PlayStatus ~= MarqueePlayStatus.Idle and (not ReducedMotion and (not UseStateResult3 and (TravelDistanceResult > 0 and (Frame.requiresOverflow ~= true or OverflowsResult))))
 	local IsPlayStatusMatch: boolean = IsNotRequiresOverflow and PlayStatus == MarqueePlayStatus.Playing
 	local OverflowsResult1 = not IsNotRequiresOverflow and OverflowsResult
-	ReactModule.useEffect(function() --[[ Line: 79 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseBindingResult2 (copy), UseStateResult2_2 (copy)
 		UseRefResult.current = 0
 		UseRefResult1.current = false
 		UseBindingResult2(0)
 		UseStateResult2_2(false)
 	end, { Frame.text, DEFAULTMAXLOOPS, ReducedMotion, Frame.runId })
-	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 86 ]]
+	local UseResult = ReactModule.useCallback(function(p1)
 		-- upvalues: IsPlayStatusMatch (copy), MarqueeTextMotionModule (upval), UseBindingResult (copy), UseRefResult (copy), TravelDistanceResult (copy), DEFAULTSPEED (copy), DEFAULTMAXLOOPS (copy), UseRefResult1 (copy), UseBindingResult2 (copy), UseStateResult2_2 (copy), Frame (copy)
 		if not IsPlayStatusMatch then return end
 		local AdvanceResult = MarqueeTextMotionModule.advance({
@@ -76,21 +76,21 @@ return function(Frame) --[[ Line: 46 | Named "MarqueeText" ]]
 		IsPlayStatusMatch, TravelDistanceResult, DEFAULTSPEED, DEFAULTMAXLOOPS,
 		Frame.onFinished, UseBindingResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 114 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsPlayStatusMatch (copy), Heartbeat (copy), UseResult (copy)
 		if IsPlayStatusMatch then
 			local Connection = Heartbeat:Connect(UseResult)
 			
-			return function() --[[ Line: 120 ]]
+			return function()
 				-- upvalues: Connection (copy)
 				Connection:Disconnect()
 			end
 		else
-			return function() --[[ Line: 116 ]] end
+			return function() end
 		end
 	end, { IsPlayStatusMatch, Heartbeat, UseResult })
 	local IsDirectionMatch = Direction == Enum.TextDirection.RightToLeft
-	local MapResult = UseBindingResult:map(function(p1): UDim2 --[[ Line: 127 ]]
+	local MapResult = UseBindingResult:map(function(p1): UDim2
 		-- upvalues: IsNotRequiresOverflow (copy), MarqueeTextMotionModule (upval), Direction (copy), IsDirectionMatch (copy)
 		if IsNotRequiresOverflow then
 			local SignedOffsetResult = MarqueeTextMotionModule.signedOffset(p1, Direction)
@@ -104,7 +104,7 @@ return function(Frame) --[[ Line: 46 | Named "MarqueeText" ]]
 	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y clip",
 		LayoutOrder = Frame.LayoutOrder,
-		onAbsoluteSizeChanged = function(Frame) --[[ Line: 168 ]]
+		onAbsoluteSizeChanged = function(Frame)
 			-- upvalues: UseStateResult2_1 (copy)
 			UseStateResult2_1(Frame.AbsoluteSize.X)
 		end
@@ -115,7 +115,7 @@ return function(Frame) --[[ Line: 46 | Named "MarqueeText" ]]
 			Text = Frame.text,
 			fontStyle = FontStyle,
 			TextTruncate = Enum.TextTruncate.None,
-			onAbsoluteSizeChanged = function(Frame) --[[ Line: 178 ]]
+			onAbsoluteSizeChanged = function(Frame)
 				-- upvalues: UseStateResult2 (copy)
 				UseStateResult2(Frame.AbsoluteSize.X)
 			end

@@ -9,7 +9,7 @@ local PrefetchProtocolModule = {
 }
 PrefetchProtocolModule.__index = PrefetchProtocolModule
 
-function PrefetchProtocolModule.new(p1) --[[ Line: 31 ]]
+function PrefetchProtocolModule.new(p1)
 	-- upvalues: MessageBus (copy), PrefetchProtocolModule (copy)
 	local config = { messageBus = p1 or MessageBus }
 	setmetatable(config, PrefetchProtocolModule)
@@ -17,7 +17,7 @@ function PrefetchProtocolModule.new(p1) --[[ Line: 31 ]]
 	return config
 end
 
-function PrefetchProtocolModule:popPendingPrefetchGuid() --[[ Line: 39 ]]
+function PrefetchProtocolModule:popPendingPrefetchGuid()
 	return self.messageBus.call(self.POP_GUID_DESCRIPTOR, {})
 end
 

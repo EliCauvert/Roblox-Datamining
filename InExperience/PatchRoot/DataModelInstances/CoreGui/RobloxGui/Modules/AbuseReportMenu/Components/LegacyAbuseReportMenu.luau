@@ -61,9 +61,9 @@ local SegmentedControl = require(CorePackages.Packages.UIBlox).App.Control.Segme
 local list = { ReportModes.Classic, ReportModes.SelectInScene }
 local list1 = { ReportTypes.Person, ReportTypes.Experience }
 
-local function _() --[[ Line: 98 | Named "isInSelectInSceneExperiment" ]]
+local function _()
 	-- upvalues: IXPService (copy), FStringReportMenuIXPLayer (copy), FStringSelectInSceneIXPField (copy)
-	local Success, Result = pcall(function() --[[ Line: 100 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: IXPService (upval), FStringReportMenuIXPLayer (upval)
 		return IXPService:GetUserLayerVariables(FStringReportMenuIXPLayer)
 	end)
@@ -77,7 +77,7 @@ local function _() --[[ Line: 98 | Named "isInSelectInSceneExperiment" ]]
 	end
 end
 
-local function v55(p1) --[[ Line: 112 ]]
+local function v55(p1)
 	-- upvalues: ReactModule (copy), AnalyticsReducerModule (copy), ConstantsModule (copy), list (copy), list1 (copy), CreateCleanupModule (copy), UseReportAnythingWithScreenshotModule (copy), GetMenuItemSizingsModule (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), IsAbuseReportMenuOpenCloseSignalEnabledModule (copy), SafetyService (copy), AnnotationModalModule (copy), ModalBasedSelectorDialogControllerModule (copy), AbuseReportTabClearCapturedScreenshotOnCloseFix (copy), SetTimeoutFunction (copy), ReportAbuseAnalyticsModule (copy), FIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (copy), Players (copy), IsShowSelectInSceneReportMenuModule (copy), IXPService (copy), FStringReportMenuIXPLayer (copy), FStringSelectInSceneIXPField (copy), FFlagReportFocusNavIEMButtonsModule (copy), GuiService (copy), FFlagIEMTabFocusNav (copy), FFlagHideShortcutsOnReportDropdownModule (copy), ReportAnythingAnalyticsModule (copy), ReportTypes (copy), ReportPersonMenuItemsContainerModule (copy), ReportExperienceMenuItemsContainerModule (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), IEMReportScrollingFix (copy), SegmentedControl (copy), ReportModes (copy), SelectInSceneReportMenuModule (copy), FFlagHighlightModePreciseSelectionEnabled (copy), GetHighlightModeVariantFunction (copy), ReportTypeSelectorModule (copy), View (copy), Text (copy), IsShowUKOSAIllegalContentReportingLinkFunction (copy), FFlagMigrateAllOsaMessagingToCentralService (copy), IsShowEUDSAIllegalContentReportingLinkFunction (copy), DSAReportLink (copy), OSAReportLink (copy), IsShowGenericIllegalContentReportingLinkFunction (copy), GenericReportLink (copy), FFlagAddTakeItDownReportLinkToSurfaces (copy), GetTakeItDownReportLinkVisibilityFunction (copy), TakeItDownReportLink (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(1)
@@ -98,9 +98,9 @@ local function v55(p1) --[[ Line: 112 ]]
 	local MenuItemSizingsModule = GetMenuItemSizingsModule()
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction(ConstantsModule.localizationKeys)
-	ReactModule.useEffect(function() --[[ Line: 143 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult2 (copy), IsAbuseReportMenuOpenCloseSignalEnabledModule (upval), UseReportAnythingWithScreenshotModuleResult (copy), SafetyService (upval), AnnotationModalModule (upval), ModalBasedSelectorDialogControllerModule (upval), UseStateResult2_3 (copy), UseStateResult2_4 (copy), AbuseReportTabClearCapturedScreenshotOnCloseFix (upval), SetTimeoutFunction (upval), ReportAbuseAnalyticsModule (upval), UseReportAnythingWithScreenshotModuleResult2 (copy), ConstantsModule (upval), FIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (upval)
-		p1.registerOnReportTabDisplayed(function() --[[ Line: 144 ]]
+		p1.registerOnReportTabDisplayed(function()
 			-- upvalues: UseStateResult2 (upval), IsAbuseReportMenuOpenCloseSignalEnabledModule (upval), UseReportAnythingWithScreenshotModuleResult (upval), SafetyService (upval)
 			UseStateResult2(true)
 			
@@ -108,7 +108,7 @@ local function v55(p1) --[[ Line: 112 ]]
 				SafetyService:ReportMenuTabOpen()
 			end
 		end)
-		p1.registerOnReportTabHidden(function() --[[ Line: 153 ]]
+		p1.registerOnReportTabHidden(function()
 			-- upvalues: UseStateResult2 (upval), AnnotationModalModule (upval), ModalBasedSelectorDialogControllerModule (upval), IsAbuseReportMenuOpenCloseSignalEnabledModule (upval), SafetyService (upval)
 			UseStateResult2(false)
 			AnnotationModalModule.unmountAnnotationPage()
@@ -118,18 +118,18 @@ local function v55(p1) --[[ Line: 112 ]]
 				SafetyService:ReportMenuTabClose()
 			end
 		end)
-		p1.registerSetNextPlayerToReport(function(p2) --[[ Line: 162 ]]
+		p1.registerSetNextPlayerToReport(function(p2)
 			-- upvalues: UseStateResult2_3 (upval)
 			UseStateResult2_3(p2)
 		end)
-		p1.registerOnMenuWidthChange(function(p2) --[[ Line: 165 ]]
+		p1.registerOnMenuWidthChange(function(p2)
 			-- upvalues: UseStateResult2_4 (upval)
 			UseStateResult2_4(p2)
 		end)
-		p1.registerOnSettingsHidden(function() --[[ Line: 168 ]]
+		p1.registerOnSettingsHidden(function()
 			-- upvalues: AbuseReportTabClearCapturedScreenshotOnCloseFix (upval), SetTimeoutFunction (upval), ReportAbuseAnalyticsModule (upval), UseReportAnythingWithScreenshotModuleResult2 (upval), ConstantsModule (upval), FIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (upval)
 			if AbuseReportTabClearCapturedScreenshotOnCloseFix then
-				SetTimeoutFunction(function() --[[ Line: 175 ]]
+				SetTimeoutFunction(function()
 					-- upvalues: ReportAbuseAnalyticsModule (upval), UseReportAnythingWithScreenshotModuleResult2 (upval), ConstantsModule (upval)
 					if ReportAbuseAnalyticsModule:getAbuseReportSessionEntryPoint() == "" then
 						UseReportAnythingWithScreenshotModuleResult2({ type = ConstantsModule.ReportAnythingActions.ClearAll })
@@ -145,7 +145,7 @@ local function v55(p1) --[[ Line: 112 ]]
 			end
 		end)
 	end, { UseReportAnythingWithScreenshotModuleResult })
-	ReactModule.useEffect(function() --[[ Line: 193 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseStateResult2_2 (copy), UseStateResult2_1 (copy), UseStateResult2_6 (copy), Players (upval), UseStateResult2_5 (copy)
 		if not UseStateResult then
 			UseStateResult2_2(0)
@@ -164,7 +164,7 @@ local function v55(p1) --[[ Line: 112 ]]
 			UseStateResult2_5(false)
 		end
 	end, { UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 213 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseReducerResult2 (copy), ConstantsModule (upval), ReportAbuseAnalyticsModule (upval), IsShowSelectInSceneReportMenuModule (upval), IXPService (upval), FStringReportMenuIXPLayer (upval), FStringSelectInSceneIXPField (upval), UseStateResult2_6 (copy), UseStateResult2_8 (copy)
 		if UseStateResult then
 			UseReducerResult2({
@@ -174,7 +174,7 @@ local function v55(p1) --[[ Line: 112 ]]
 			ReportAbuseAnalyticsModule:startAbuseReportSession("ReportPage")
 			
 			if IsShowSelectInSceneReportMenuModule(UseReducerResult2) then
-				local Success, Result = pcall(function() --[[ Line: 100 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: IXPService (upval), FStringReportMenuIXPLayer (upval)
 					return IXPService:GetUserLayerVariables(FStringReportMenuIXPLayer)
 				end)
@@ -205,10 +205,10 @@ local function v55(p1) --[[ Line: 112 ]]
 	end, { UseStateResult, UseStateResult5 })
 	
 	if FFlagReportFocusNavIEMButtonsModule then
-		ReactModule.useEffect(function() --[[ Line: 247 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseStateResult (copy), p1 (copy), GuiService (upval), UseStateResult2_7 (copy)
 			if not UseStateResult then return end
-			local function _() --[[ Line: 252 | Named "isMenuSelected" ]]
+			local function _()
 				-- upvalues: p1 (upval), GuiService (upval)
 				local GetSettingsHubRefFunction = p1.getSettingsHubRef
 				local SettingsHubRef = GetSettingsHubRefFunction and GetSettingsHubRefFunction()
@@ -221,7 +221,7 @@ local function v55(p1) --[[ Line: 112 ]]
 			local SettingsHubRef = GetSettingsHubRefFunction and GetSettingsHubRefFunction()
 			local MenuContainer = SettingsHubRef and SettingsHubRef.MenuContainer
 			UseStateResult2_7(not (GuiService.SelectedCoreObject ~= nil and (MenuContainer ~= nil and GuiService.SelectedCoreObject:IsDescendantOf(MenuContainer))))
-			local Connection = GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ Line: 263 ]]
+			local Connection = GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function()
 				-- upvalues: UseStateResult2_7 (upval), p1 (upval), GuiService (upval)
 				local GetSettingsHubRefFunction = p1.getSettingsHubRef
 				local SettingsHubRef = GetSettingsHubRefFunction and GetSettingsHubRefFunction()
@@ -229,14 +229,14 @@ local function v55(p1) --[[ Line: 112 ]]
 				UseStateResult2_7(not (GuiService.SelectedCoreObject ~= nil and (MenuContainer ~= nil and GuiService.SelectedCoreObject:IsDescendantOf(MenuContainer))))
 			end)
 			
-			return function() --[[ Line: 267 ]]
+			return function()
 				-- upvalues: Connection (copy)
 				Connection:Disconnect()
 			end
 		end, { UseStateResult, p1.getSettingsHubRef })
 	end
 	if FFlagIEMTabFocusNav then
-		ReactModule.useEffect(function() --[[ Line: 275 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseStateResult (copy), UseRefResult (copy), p1 (copy)
 			if not UseStateResult then return end
 			local List = if UseRefResult.current and UseRefResult.current.tabRefs then {
@@ -332,7 +332,7 @@ local function v55(p1) --[[ Line: 112 ]]
 						AnchorPoint = Vector2.new(0.5, 0)
 					}, {
 						SelectInSceneToggle = ReactModule.createElement(SegmentedControl, {
-							onTabActivated = function(p2) --[[ Line: 379 ]]
+							onTabActivated = function(p2)
 								-- upvalues: UseStateResult2_1 (copy)
 								UseStateResult2_1(p2)
 							end,
@@ -367,7 +367,7 @@ local function v55(p1) --[[ Line: 112 ]]
 							isSelectionDisabled = UseStateResult6,
 							menuWidth = UseStateResult5,
 							isSmallPortraitViewport = IsWidthBelow,
-							onClickLeft = function() --[[ Line: 422 ]]
+							onClickLeft = function()
 								-- upvalues: UseReportAnythingWithScreenshotModuleResult2 (copy), ConstantsModule (upval), UseReducerResult2 (copy), UseStateResult2_2 (copy), UseStateResult3 (copy), list1 (upval)
 								UseReportAnythingWithScreenshotModuleResult2({
 									type = ConstantsModule.ReportAnythingActions.ClearAnnotationFlowProperties
@@ -377,7 +377,7 @@ local function v55(p1) --[[ Line: 112 ]]
 								})
 								UseStateResult2_2((UseStateResult3 - 1 - 1) % #list1 + 1)
 							end,
-							onClickRight = function() --[[ Line: 432 ]]
+							onClickRight = function()
 								-- upvalues: UseReportAnythingWithScreenshotModuleResult2 (copy), ConstantsModule (upval), UseReducerResult2 (copy), UseStateResult2_2 (copy), UseStateResult3 (copy), list1 (upval)
 								UseReportAnythingWithScreenshotModuleResult2({
 									type = ConstantsModule.ReportAnythingActions.ClearAnnotationFlowProperties
@@ -429,7 +429,7 @@ local function v55(p1) --[[ Line: 112 ]]
 	})
 end
 
-return function(p1) --[[ Line: 516 ]]
+return function(p1)
 	-- upvalues: Localization (copy), LocalizationService (copy), ReactModule (copy), CoreScriptsRootProvider (copy), LocalizationProvider (copy), ConstantsModule (copy), v55 (copy)
 	return ReactModule.createElement(CoreScriptsRootProvider, {}, {
 		LocalizationProvider = ReactModule.createElement(LocalizationProvider, {

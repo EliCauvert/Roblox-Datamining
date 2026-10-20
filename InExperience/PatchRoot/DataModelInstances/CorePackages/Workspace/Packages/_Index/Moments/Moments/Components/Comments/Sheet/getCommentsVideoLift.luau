@@ -1,6 +1,6 @@
 ﻿local CommentsSheetSnapPointsModule = require(script.Parent.CommentsSheetSnapPoints)
 
-return function(p1, p2) --[[ Line: 21 | Named "getCommentsVideoLift" ]]
+return function(p1, p2)
 	-- upvalues: CommentsSheetSnapPointsModule (copy)
 	if p1.sheetInset <= 0 then
 		return nil

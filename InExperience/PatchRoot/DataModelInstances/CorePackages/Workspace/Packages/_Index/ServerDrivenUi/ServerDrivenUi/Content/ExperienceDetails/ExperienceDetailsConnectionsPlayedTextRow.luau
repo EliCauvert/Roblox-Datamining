@@ -18,7 +18,7 @@ local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
 local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return ReactModule.memo(function(p1) --[[ Line: 52 | Named "ExperienceDetailsConnectionsPlayedTextRow" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), UseDeviceTypeFunction (copy), DeviceType (copy), Game1 (copy), SignalsReactModule (copy), UseLocalizationFunction (copy), ReactModule (copy), Players (copy), GameConnectionsPlayedChipClickedFunction (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), AvatarGroupType (copy), InputSize (copy), SduiTextAccessoryRow (copy)
 	local LayoutOrder = p1.layoutOrder
 	local UniverseId = p1.universeId
@@ -49,7 +49,7 @@ return ReactModule.memo(function(p1) --[[ Line: 52 | Named "ExperienceDetailsCon
 	})
 	local PlayedByUser = if Name and Name ~= "" then if TotalCount == 1 then UseLocalizationResult.playedByUser elseif TotalCount == 2 then UseLocalizationResult.playedByUserAndOneOther else UseLocalizationResult.playedByUserAndOthersPlural elseif TotalCount == 1 then UseLocalizationResult.connectionRecentlyPlayed else UseLocalizationResult.connectionsRecentlyPlayed
 	local RootPlaceId = UseSignalStateResult1 and UseSignalStateResult1.rootPlaceId
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 118 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: RootPlaceId (copy), Players (upval), GameConnectionsPlayedChipClickedFunction (upval), UniverseId (copy), TotalCount (copy), AppPage (upval), UserIds (copy), UseLocalizationResult (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 		if RootPlaceId then
 			GameConnectionsPlayedChipClickedFunction({
@@ -78,12 +78,12 @@ return ReactModule.memo(function(p1) --[[ Line: 52 | Named "ExperienceDetailsCon
 		UseDispatchResult, UniverseId, RootPlaceId, UserIds, TotalCount,
 		UseLocalizationResult, Players.LocalPlayer
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 147 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UserIds (copy)
 		return { table.unpack(UserIds, 1, (math.min(2, #UserIds))) }
 	end, { UserIds })
 	local Surface100 = if IsUseDeviceTypeResultMatch then UseTokensResult.Color.Surface.Surface_100 else UseTokensResult.Color.Surface.Surface_0
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 153 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), AvatarGroupType (upval), InputSize (upval), Surface100 (copy)
 		return {
 			type = "AvatarGroup",
@@ -94,7 +94,7 @@ return ReactModule.memo(function(p1) --[[ Line: 52 | Named "ExperienceDetailsCon
 			backplateStyle = Surface100
 		}
 	end, { UseMemoResult, Surface100 })
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 164 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: UseTokensResult (copy)
 		return { FontSize = UseTokensResult.FontSize.FontSize_300 }
 	end, { UseTokensResult })

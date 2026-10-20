@@ -4,9 +4,9 @@ local ReactModule = require(Parent.React)
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 
-return function(p1) --[[ Line: 19 | Named "makeStepStub" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), Text (copy)
-	return function(_) --[[ Line: 20 | Named "StepStub" ]]
+	return function(_)
 		-- upvalues: ReactModule (upval), View (upval), Text (upval), p1 (copy)
 		return ReactModule.createElement(View, { tag = "col align-x-center align-y-center size-full" }, {
 			Label = ReactModule.createElement(Text, {

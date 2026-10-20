@@ -11,7 +11,7 @@ local GetItemCollectionKeyModule = require(ServerDrivenUi.DataStore.getItemColle
 
 return {
 	key = "SduiConfigKey",
-	reducer = function(p1, p2) --[[ Line: 30 ]]
+	reducer = function(p1, p2)
 		-- upvalues: ArgCheckModule (copy), AddSduiRootConfigModule (copy), SduiLogger (copy), SduiErrors (copy), GetItemCollectionKeyModule (copy), CryoModule (copy), RemoveSduiRootConfigModule (copy)
 		local P0 = p1 or {}
 		assert(P0, "state must exist")

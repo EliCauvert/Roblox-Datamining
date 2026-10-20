@@ -1,6 +1,6 @@
 ﻿local UserInputService = game:GetService("UserInputService")
 local config = {
-	[require(script.Parent.MessageFtuxTooltipVariant).Replies] = function() --[[ Line: 15 ]]
+	[require(script.Parent.MessageFtuxTooltipVariant).Replies] = function()
 		-- upvalues: UserInputService (copy)
 		return {
 			storageKey = "AppChatEnableRepliesUIFtuxTooltip",
@@ -9,7 +9,7 @@ local config = {
 	end
 }
 
-return function(p1) --[[ Line: 28 ]]
+return function(p1)
 	-- upvalues: config (copy)
 	return config[p1]()
 end

@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local GetTrustedFriendActionModule = require(script.Parent.getTrustedFriendAction)
 
-return function(p1) --[[ Line: 23 | Named "useTrustedFriendAction" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), GetTrustedFriendActionModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
@@ -13,13 +13,13 @@ return function(p1) --[[ Line: 23 | Named "useTrustedFriendAction" ]]
 		removeTrustedFriendText = "Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend",
 		removeTrustedFriendToastText = "Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved"
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 35 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy)
-		UseStateResult2_1(function(p2: number): number --[[ Line: 36 ]]
+		UseStateResult2_1(function(p2: number): number
 			return p2 + 1
 		end)
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 41 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult2 (copy), GetTrustedFriendActionModule (upval)
 		if p1 == "" then
 			UseStateResult2(nil)
@@ -28,19 +28,19 @@ return function(p1) --[[ Line: 23 | Named "useTrustedFriendAction" ]]
 		end
 		local Flag = true
 		UseStateResult2(nil)
-		GetTrustedFriendActionModule(p1):andThen(function(Result) --[[ Line: 54 ]]
+		GetTrustedFriendActionModule(p1):andThen(function(Result)
 			-- upvalues: Flag (ref), UseStateResult2 (upval)
 			if Flag then
 				UseStateResult2(Result)
 			end
-		end):catch(function() --[[ Line: 59 ]]
+		end):catch(function()
 			-- upvalues: Flag (ref), UseStateResult2 (upval)
 			if Flag then
 				UseStateResult2(nil)
 			end
 		end)
 		
-		return function() --[[ Line: 65 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = false
 		end

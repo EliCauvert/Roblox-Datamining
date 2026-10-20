@@ -9,7 +9,7 @@ local FFlagLuaAppAddUniverseIdToGameDetailsEvents = require(Parent.SharedFlags).
 local OpenSearchResultsWithQueryParamsModule = require(ServerDrivenUi.Actions.openSearchResultsWithQueryParams)
 local SduiOpenSearchResultsWithQueryTelemetryHandlerModule = require(ServerDrivenUi.Actions.TelemetryHandlers.SduiOpenSearchResultsWithQueryTelemetryHandler)
 
-return function(p1, p2, p3) --[[ Line: 31 ]]
+return function(p1, p2, p3)
 	-- upvalues: OpenSearchResultsWithQueryParamsModule (copy), GetActionTelemetryFieldValueFunction (copy), SduiErrorType (copy), FFlagLuaAppAddUniverseIdToGameDetailsEvents (copy), SduiOpenSearchResultsWithQueryTelemetryHandlerModule (copy), GameDetailsSubpageFunction (copy), Players (copy)
 	local ResolveSearchQueryResult = OpenSearchResultsWithQueryParamsModule.resolveSearchQuery(p1)
 	local ResolveSearchTypeResult = OpenSearchResultsWithQueryParamsModule.resolveSearchType(p1)

@@ -26,7 +26,7 @@ for _, overviewMetric in AnalyticsMetricModule.OverviewMetrics do
 end
 local NoDataPlaceholderModule = require(BuildExperience.Components.Analytics.noDataPlaceholder)
 
-return function(UniverseId, Window, Id, MetricId, Callback) --[[ Line: 63 | Named "useAnalyticsOverviewViewModel" ]]
+return function(UniverseId, Window, Id, MetricId, Callback)
 	-- upvalues: LocalizationService (copy), UseMetricMetadataModule (copy), Ids (copy), UseOverviewStatsModule (copy), UseInstantStatsModule (copy), AnalyticsKeysModule (copy), AnalyticsWindowModule (copy), AnalyticsMetricModule (copy), UseLocalizationFunction (copy), ScaleValueToUnitModule (copy), DataStatus (copy), MetricValueRoundsToZeroModule (copy), AnalyticsUnitModule (copy), ReactModule (copy), IconName (copy), NumberLocalization (copy), NoDataPlaceholderModule (copy)
 	local RobloxLocaleId = LocalizationService.RobloxLocaleId
 	local UseMetricMetadataModuleResult = UseMetricMetadataModule(Ids)
@@ -47,12 +47,12 @@ return function(UniverseId, Window, Id, MetricId, Callback) --[[ Line: 63 | Name
 	end
 	local UseLocalizationResult = UseLocalizationFunction(Copy)
 	
-	local function _(p1) --[[ Line: 92 | Named "copy" ]]
+	local function _(p1)
 		-- upvalues: UseLocalizationResult (copy)
 		return UseLocalizationResult[p1]
 	end
 	
-	local _ = function(p1) --[[ Line: 95 | Named "titleFor" ]]
+	local _ = function(p1)
 		-- upvalues: UseLocalizationResult (copy)
 		return UseLocalizationResult[p1.id]
 	end
@@ -76,7 +76,7 @@ return function(UniverseId, Window, Id, MetricId, Callback) --[[ Line: 63 | Name
 			hasData = UseOverviewStatsModuleResultEntry.hasData,
 			isLoading = IsStatusMatch,
 			isSelected = overviewMetric1.id == Id,
-			onActivated = if UseOverviewStatsModuleResultEntry.hasData then function() --[[ Line: 136 ]]
+			onActivated = if UseOverviewStatsModuleResultEntry.hasData then function()
 				-- upvalues: Callback (copy), overviewMetric1 (copy)
 				Callback(overviewMetric1.id)
 			end else nil,
@@ -87,7 +87,7 @@ return function(UniverseId, Window, Id, MetricId, Callback) --[[ Line: 63 | Name
 	local Visits = UseLocalizationResult.visits
 	local Players = UseLocalizationResult.players
 	local Likes = UseLocalizationResult.likes
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 146 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Visits (copy), IconName (upval), UseInstantStatsModuleResult (copy), Players (copy), Likes (copy), NumberLocalization (upval), RobloxLocaleId (copy), NoDataPlaceholderModule (upval)
 		local t = {}
 		

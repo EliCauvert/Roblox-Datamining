@@ -10,19 +10,19 @@ local FetchUserVoteFeedbackMetadataModule = require(script.Parent.fetchUserVoteF
 local UserVoteFeedbackMetdataUrlBuilderModule = require(script.Parent.UserVoteFeedbackMetdataUrlBuilder)
 local UserVoteFeedbackMetadataDerivedFieldsModule = require(script.Parent.UserVoteFeedbackMetadataDerivedFields)
 
-return function() --[[ Line: 17 | Named "createUserVoteFeedbackMetadataStore" ]]
+return function()
 	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), LogResponseErrorFunction (copy), UserVoteFeedbackMetdataUrlBuilderModule (copy), FetchUserVoteFeedbackMetadataModule (copy), UserVoteFeedbackMetadataStoreTypesModule (copy), DiscoveryEventErrorLogger (copy), UserVoteFeedbackMetadataDerivedFieldsModule (copy)
 	local DataCacheModule = CreateDataCacheModule()
 	local DataResolverModule = CreateDataResolverModule({
 		supportsMultiGet = false,
 		cache = DataCacheModule,
-		logError = function(p1) --[[ Line: 24 ]]
+		logError = function(p1)
 			-- upvalues: LogResponseErrorFunction (upval), UserVoteFeedbackMetdataUrlBuilderModule (upval)
 			LogResponseErrorFunction(UserVoteFeedbackMetdataUrlBuilderModule.USER_VOTE_FEEDBACK_METADATA_URL, p1)
 		end,
-		fetchFn = function(RootPlaceId, _) --[[ Line: 27 ]]
+		fetchFn = function(RootPlaceId, _)
 			-- upvalues: FetchUserVoteFeedbackMetadataModule (upval), UserVoteFeedbackMetadataStoreTypesModule (upval), DiscoveryEventErrorLogger (upval)
-			return FetchUserVoteFeedbackMetadataModule(RootPlaceId):andThen(function(Result) --[[ Line: 33 ]]
+			return FetchUserVoteFeedbackMetadataModule(RootPlaceId):andThen(function(Result)
 				-- upvalues: UserVoteFeedbackMetadataStoreTypesModule (upval), DiscoveryEventErrorLogger (upval), RootPlaceId (copy)
 				local ResponseBody = Result.responseBody
 				
@@ -49,17 +49,17 @@ return function() --[[ Line: 17 | Named "createUserVoteFeedbackMetadataStore" ]]
 		getUserVoteFeedbackMetadatas = DataResolverModule.getCachedItems,
 		getAndFetchUserVoteFeedbackMetadata = DataResolverModule.getAndFetchItem,
 		getAndFetchUserVoteFeedbackMetadatas = DataResolverModule.getAndFetchItems,
-		clearItem = function(p1) --[[ Line: 80 ]]
+		clearItem = function(p1)
 			-- upvalues: DataCacheModule (copy)
 			DataCacheModule.replaceItem(p1, nil)
 		end,
 		calculateDerivedField = UserVoteFeedbackMetadataDerivedFieldsModule.calculateDerivedField,
-		clear = function() --[[ Line: 63 ]]
+		clear = function()
 			-- upvalues: DataCacheModule (copy), DataResolverModule (copy)
 			DataCacheModule.clear()
 			DataResolverModule.clear()
 		end,
-		dispose = function() --[[ Line: 68 ]]
+		dispose = function()
 			-- upvalues: DataResolverModule (copy)
 			DataResolverModule.dispose()
 		end

@@ -25,20 +25,20 @@ local config = {
 	[InviteStatus.Pending] = "Feature.SettingsHub.Label.Sending"
 }
 
-return function(p1) --[[ Line: 50 ]]
+return function(p1)
 	-- upvalues: FFlagUseSignalsForGameInvitesStatus (copy), ReactModule (copy), SignalsModule (copy), GetGameInvitesStatusStore (copy), UseSignalStateFunction (copy), UseSelectorFunction (copy), GetLocalizedStringsFunction (copy), config (copy), FriendsListContextModule (copy), UseStyleFunction (copy), InviteStatus (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseSignalStateResult = nil
 	if FFlagUseSignalsForGameInvitesStatus then
 		local Id = p1.friend and p1.friend.id
-		UseSignalStateResult = UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 54 ]]
+		UseSignalStateResult = UseSignalStateFunction((ReactModule.useMemo(function()
 			-- upvalues: SignalsModule (upval), GetGameInvitesStatusStore (upval), Id (copy)
-			return SignalsModule.createComputed(function(p2) --[[ Line: 55 ]]
+			return SignalsModule.createComputed(function(p2)
 				-- upvalues: GetGameInvitesStatusStore (upval), Id (upval)
 				return GetGameInvitesStatusStore(false).getGameInvitesStatus(p2)[Id]
 			end)
 		end, { Id })))
 	else
-		UseSignalStateResult = UseSelectorFunction(function(p2) --[[ Line: 61 ]]
+		UseSignalStateResult = UseSelectorFunction(function(p2)
 			-- upvalues: p1 (copy)
 			local Friend = p1.friend
 			assert(Friend, "friend should be non-nil. Silence type checker.")

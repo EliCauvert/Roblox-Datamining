@@ -1,7 +1,7 @@
 ﻿local SecondsToTimeStrModule = require(script.Parent.SecondsToTimeStr)
 
 return {
-	createScrubber = function(p1) --[[ Line: 7 ]]
+	createScrubber = function(p1)
 		-- upvalues: SecondsToTimeStrModule (copy)
 		p1.ScrubberLoadProgress = Instance.new("Frame")
 		p1.ScrubberLoadProgress.Name = "ScrubberLoadProgress"
@@ -55,7 +55,7 @@ return {
 		local ScrubberControlBar = p1.ScrubberControlBar
 		
 		if ScrubberControlBar then
-			local function v3(p2) --[[ Line: 69 ]]
+			local function v3(p2)
 				-- upvalues: p1 (copy), ScrubberControlBar (copy), SecondsToTimeStrModule (upval)
 				local ScrubberTimeLabel = p1.ScrubberTimeLabel
 				
@@ -78,16 +78,16 @@ return {
 				end
 			end
 			
-			ScrubberControlBar.MouseEnter:Connect(function(X) --[[ Line: 90 ]]
+			ScrubberControlBar.MouseEnter:Connect(function(X)
 				-- upvalues: p1 (copy), v3 (copy)
 				p1.ScrubberTimeLabel.Visible = true
 				v3(X)
 			end)
-			ScrubberControlBar.MouseMoved:Connect(function(X) --[[ Line: 94 ]]
+			ScrubberControlBar.MouseMoved:Connect(function(X)
 				-- upvalues: v3 (copy)
 				v3(X)
 			end)
-			ScrubberControlBar.MouseLeave:Connect(function() --[[ Line: 97 ]]
+			ScrubberControlBar.MouseLeave:Connect(function()
 				-- upvalues: p1 (copy)
 				p1.ScrubberTimeLabel.Visible = false
 			end)

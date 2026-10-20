@@ -18,7 +18,7 @@ local config = {
 	size = InputSizeModule.Medium
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 44 | Named "AvatarGroup" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UsePresentationContextFunction (copy), UseTokensModule (copy), AvatarGroupTypeModule (copy), InputSizeModule (copy), GetAvatarSizeModule (copy), ReactModule (copy), AvatarModule (copy), InternalAvatarGroupModule (copy), WithCommonPropsModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UsePresentationContextResult = UsePresentationContextFunction()
@@ -34,7 +34,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 44 |
 		gap = if WithDefaultsModuleResult.type == AvatarGroupTypeModule.Spread then UseTokensModuleResult.Size.Size_200 elseif UsePresentationContextResult.isIconSize then if Size == InputSizeModule.Large or Size == InputSizeModule.Medium then -UseTokensModuleResult.Size.Size_50 else -UseTokensModuleResult.Size.Size_0 elseif Size == InputSizeModule.XSmall then -UseTokensModuleResult.Size.Size_50 else -UseTokensModuleResult.Size.Size_100,
 		backplateStyle = WithDefaultsModuleResult.backplateStyle or UseTokensModuleResult.Color.Surface.Surface_0,
 		avatars = WithDefaultsModuleResult.avatars,
-		renderAvatar = ReactModule.useCallback(function(p2, Frame) --[[ Line: 64 ]]
+		renderAvatar = ReactModule.useCallback(function(p2, Frame)
 			-- upvalues: ReactModule (upval), AvatarModule (upval), WithDefaultsModuleResult (copy)
 			local UserPresence = nil
 			local UserId = nil

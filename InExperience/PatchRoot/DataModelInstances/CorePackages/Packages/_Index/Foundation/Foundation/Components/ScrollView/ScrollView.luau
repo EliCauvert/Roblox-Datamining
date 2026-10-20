@@ -19,14 +19,14 @@ local config = {
 	}
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 62 | Named "ScrollView" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseDefaultTagsModule (copy), UseStyleTagsModule (copy), ReactModule (copy), ControlStateModule (copy), ViewModule (copy), ScrollingFrameModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseStyleTagsModuleResult = UseStyleTagsModule((UseDefaultTagsModule(WithDefaultsModuleResult.tag, "gui-object-defaults")))
 	local UseStateResult, UseStateResult2 = ReactModule.useState(ControlStateModule.Initialize)
 	local Copy = table.clone(WithDefaultsModuleResult)
 	
-	function Copy.onStateChanged(p2) --[[ Line: 74 ]]
+	function Copy.onStateChanged(p2)
 		-- upvalues: UseStateResult2 (copy), WithDefaultsModuleResult (copy)
 		UseStateResult2(p2)
 		

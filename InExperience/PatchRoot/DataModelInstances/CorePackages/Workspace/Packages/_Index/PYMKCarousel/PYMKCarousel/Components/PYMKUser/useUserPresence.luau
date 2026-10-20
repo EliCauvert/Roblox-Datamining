@@ -12,10 +12,10 @@ local PresenceType = if FFlagPymkCarouselPresenceStoreMigrationModule then DataH
 local GetResult = if FFlagPymkCarouselPresenceStoreMigrationModule then DataHydrationModule.Presence.PresenceStore.get() else nil
 local config = { skipFetch = true }
 
-return function(p1) --[[ Line: 36 | Named "useUserPresence" ]]
+return function(p1)
 	-- upvalues: FFlagPymkCarouselPresenceStoreMigrationModule (copy), React (copy), EntityType (copy), GetResult (copy), UseGetPresenceByUserId (copy), config (copy), PresenceType (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy)
 	if FFlagPymkCarouselPresenceStoreMigrationModule then
-		React.useEffect(function() --[[ Line: 38 ]]
+		React.useEffect(function()
 			-- upvalues: p1 (copy), EntityType (upval), GetResult (upval)
 			if p1.forceFetchUserPresence > 0 and p1.entityType ~= EntityType.Contact then
 				GetResult.RefreshPresenceByUserId((tostring(p1.userId)))
@@ -25,12 +25,12 @@ return function(p1) --[[ Line: 36 | Named "useUserPresence" ]]
 		
 		return UseGetPresenceByUserIdResult and UseGetPresenceByUserIdResult.userPresenceType or PresenceType.Offline
 	else
-		local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 47 ]]
+		local UseSelectorResult = UseSelectorFunction(function(p2)
 			-- upvalues: GetDeepValueFunction (upval), p1 (copy)
 			return GetDeepValueFunction(p2, string.format("PYMKCarousel.Presence.byUserId.%s", p1.userId)) or {}
 		end)
 		
-		return (React.useMemo(function(): string --[[ Line: 50 ]]
+		return (React.useMemo(function(): string
 			-- upvalues: UseSelectorResult (copy)
 			return if UseSelectorResult and UseSelectorResult.userPresenceType then string.gsub(tostring(UseSelectorResult.userPresenceType), "PresenceType%.", "") else "Offline"
 		end, { UseSelectorResult }))

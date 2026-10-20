@@ -12,11 +12,11 @@ local GetOptionContextTagModule = require(GameFilters.Analytics.getOptionContext
 local FFlagLuaAppChartsFilterOptionTextTag = require(Parent.SharedFlags).FFlagLuaAppChartsFilterOptionTextTag
 local X = if FFlagLuaAppChartsFilterOptionTextTag then nil else 10000
 
-local function _(p1, p2) --[[ Line: 38 | Named "applyTokenScaling" ]]
+local function _(p1, p2)
 	return p1 * p2.Config.UI.Scale
 end
 
-return function(p1) --[[ Line: 43 | Named "FilterMenuDropdown" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), ReactModule (copy), FFlagLuaAppChartsFilterOptionTextTag (copy), X (copy), FilterClickButtonNameModule (copy), GetOptionContextTagModule (copy), FilterMenuHeaderModule (copy), FilterMenuOptionsModule (copy), FilterMenuActionBarModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDispatchResult = UseDispatchFunction()
@@ -46,14 +46,14 @@ return function(p1) --[[ Line: 43 | Named "FilterMenuDropdown" ]]
 	
 	if FFlagLuaAppChartsFilterOptionTextTag then
 		v3, UseBindingResult2_2 = ReactModule.useBinding(0)
-		UseResult = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 73 ]]
+		UseResult = ReactModule.useCallback(function(ScrollFrame)
 			-- upvalues: UseBindingResult2_2 (ref)
 			UseBindingResult2_2(ScrollFrame.AbsoluteCanvasSize.Y)
 		end, {})
 	else
 		v1, v27 = ReactModule.useBinding(Vector2.new(X, 0))
 	end
-	local MapResult = UseBindingResult:map(function(Vector): Vector2 --[[ Line: 80 ]]
+	local MapResult = UseBindingResult:map(function(Vector): Vector2
 		-- upvalues: p1 (copy), ScaledScale (copy)
 		local Largest = nil
 		local Largest1 = nil
@@ -66,10 +66,10 @@ return function(p1) --[[ Line: 43 | Named "FilterMenuDropdown" ]]
 		end
 		return Vector2.new(Largest, Largest1)
 	end)
-	local MapResult1 = if FFlagLuaAppChartsFilterOptionTextTag then nil else MapResult:map(function(p2) --[[ Line: 97 ]]
+	local MapResult1 = if FFlagLuaAppChartsFilterOptionTextTag then nil else MapResult:map(function(p2)
 		return p2.X
 	end)
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 121 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseDispatchResult (copy), p1 (copy), FilterClickButtonNameModule (upval), UseStateResult (copy), FFlagLuaAppChartsFilterOptionTextTag (upval), GetOptionContextTagModule (upval)
 		UseDispatchResult(p1.closeCentralOverlayThunk())
 		p1.onFilterMenuClosed()
@@ -90,7 +90,7 @@ return function(p1) --[[ Line: 43 | Named "FilterMenuDropdown" ]]
 		Text = "",
 		AutoButtonColor = false,
 		[ReactModule.Event.Activated] = UseResult1,
-		[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 176 ]]
+		[ReactModule.Change.AbsoluteSize] = function(Frame)
 			-- upvalues: UseBindingResult2 (copy)
 			UseBindingResult2(Frame.AbsoluteSize)
 		end,
@@ -109,7 +109,7 @@ return function(p1) --[[ Line: 43 | Named "FilterMenuDropdown" ]]
 			Size = ReactModule.joinBindings({
 				UseBindingResult1,
 				if FFlagLuaAppChartsFilterOptionTextTag then v3 else v1
-			}):map(function(Entry): UDim2 --[[ Line: 104 ]]
+			}):map(function(Entry): UDim2
 				-- upvalues: FFlagLuaAppChartsFilterOptionTextTag (upval), ScaledScale1 (copy)
 				local Entry1 = Entry[1]
 				
@@ -144,7 +144,7 @@ return function(p1) --[[ Line: 43 | Named "FilterMenuDropdown" ]]
 			}),
 			Options = ReactModule.createElement(FilterMenuOptionsModule, {
 				LayoutOrder = 2,
-				Size = UseBindingResult1:map(function(p2): UDim2 --[[ Line: 117 ]]
+				Size = UseBindingResult1:map(function(p2): UDim2
 					-- upvalues: FFlagLuaAppChartsFilterOptionTextTag (upval), ScaledScale1 (copy)
 					return UDim2.new(if FFlagLuaAppChartsFilterOptionTextTag then 0 else 1, 0, 1, -p2 - ScaledScale1)
 				end),
@@ -158,7 +158,7 @@ return function(p1) --[[ Line: 43 | Named "FilterMenuDropdown" ]]
 				LayoutOrder = 3,
 				Size = UDim2.new(if FFlagLuaAppChartsFilterOptionTextTag then 0 else 1, 0, 0, ScaledScale1),
 				applyEnabled = UseStateResult ~= p1.filter.selectedOptionId,
-				onApply = ReactModule.useCallback(function() --[[ Line: 144 ]]
+				onApply = ReactModule.useCallback(function()
 					-- upvalues: p1 (copy), UseStateResult (copy), UseDispatchResult (copy), FilterClickButtonNameModule (upval), FFlagLuaAppChartsFilterOptionTextTag (upval), GetOptionContextTagModule (upval)
 					p1.onFilterApplied(p1.filter.filterType, UseStateResult)
 					UseDispatchResult(p1.closeCentralOverlayThunk())

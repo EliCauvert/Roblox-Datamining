@@ -2,7 +2,7 @@
 local ConstantsModule = require(Moments.Constants)
 local _ = require(Moments.Enums.NavigationDestinationType)
 
-return function(p1) --[[ Line: 34 | Named "makeMomentsNavigationFields" ]]
+return function(p1)
 	-- upvalues: ConstantsModule (copy)
 	local config = {
 		client_event_timestamp_ms = p1.clientEventTimestampMs,

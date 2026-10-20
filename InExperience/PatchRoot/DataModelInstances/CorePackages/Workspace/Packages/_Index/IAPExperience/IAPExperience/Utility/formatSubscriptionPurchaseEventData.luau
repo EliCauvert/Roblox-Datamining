@@ -1,4 +1,4 @@
-﻿return function(Purchase_flow_uuid, Purchase_flow_event_type, View_name, Input_type, Subscription_provider_id, Text: string, Localized_subscription_name, Localized_subscription_description, Subscription_period, Price_in_cents_usd, Display_price) --[[ Line: 1 ]]
+﻿return function(Purchase_flow_uuid, Purchase_flow_event_type, View_name, Input_type, Subscription_provider_id, Text: string, Localized_subscription_name, Localized_subscription_description, Subscription_period, Price_in_cents_usd, Display_price)
 	local Subscription_id = nil
 	local Uppered: string? = nil
 	

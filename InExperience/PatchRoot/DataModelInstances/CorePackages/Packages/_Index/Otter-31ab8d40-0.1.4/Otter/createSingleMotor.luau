@@ -3,7 +3,7 @@ local CreateSignalModule = require(script.Parent.createSignal)
 local config = { prototype = {} }
 config.__index = config.prototype
 
-local function createSingleMotor(Value) --[[ Line: 9 ]]
+local function createSingleMotor(Value)
 	-- upvalues: CreateSignalModule (copy), config (copy)
 	assert(typeof(Value) == "number")
 	local config1 = {
@@ -18,10 +18,10 @@ local function createSingleMotor(Value) --[[ Line: 9 ]]
 	return config1
 end
 
-function config.prototype.start(p1) --[[ Line: 28 ]]
+function config.prototype.start(p1)
 	-- upvalues: RunService (copy)
 	if not p1.__running then
-		p1.__connection = RunService.Heartbeat:Connect(function(DeltaTime) --[[ Line: 33 ]]
+		p1.__connection = RunService.Heartbeat:Connect(function(DeltaTime)
 			-- upvalues: p1 (copy)
 			p1:step(DeltaTime)
 		end)
@@ -31,14 +31,14 @@ function config.prototype.start(p1) --[[ Line: 28 ]]
 	end
 end
 
-function config.prototype.stop(p1) --[[ Line: 40 ]]
+function config.prototype.stop(p1)
 	if p1.__connection ~= nil then
 		p1.__connection:Disconnect()
 	end
 	p1.__running = false
 end
 
-function config.prototype.step(p1, p2) --[[ Line: 48 ]]
+function config.prototype.step(p1, p2)
 	assert(typeof(p2) == "number")
 	
 	if p1.__state.complete then return end
@@ -56,25 +56,25 @@ function config.prototype.step(p1, p2) --[[ Line: 48 ]]
 	end
 end
 
-function config.prototype.setGoal(p1, p2) --[[ Line: 73 ]]
+function config.prototype.setGoal(p1, p2)
 	p1.__goal = p2
 	p1.__state.complete = false
 	p1:start()
 end
 
-function config.prototype.onStep(p1, p2) --[[ Line: 79 ]]
+function config.prototype.onStep(p1, p2)
 	assert(typeof(p2) == "function")
 	
 	return p1.__onStep:subscribe(p2)
 end
 
-function config.prototype.onComplete(p1, p2) --[[ Line: 85 ]]
+function config.prototype.onComplete(p1, p2)
 	assert(typeof(p2) == "function")
 	
 	return p1.__onComplete:subscribe(p2)
 end
 
-function config.prototype.destroy(p1) --[[ Line: 91 ]]
+function config.prototype.destroy(p1)
 	p1:stop()
 end
 

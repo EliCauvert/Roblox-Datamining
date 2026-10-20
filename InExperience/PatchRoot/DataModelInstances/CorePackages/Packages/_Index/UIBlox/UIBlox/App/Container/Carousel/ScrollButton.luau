@@ -12,9 +12,9 @@ local ImageSetComponentModule = require(Core.ImageSet.ImageSetComponent)
 local ScrollButton = RoactModule.PureComponent:extend("ScrollButton")
 ScrollButton.validateProps = TModule.strictInterface({ icon = TModule.table, callback = TModule.callback })
 
-function ScrollButton.render(p1) --[[ Line: 28 ]]
+function ScrollButton.render(p1)
 	-- upvalues: WithStyleModule (copy), RoactModule (copy), InteractableModule (copy), ImageSetComponentModule (copy), GetIconSizeModule (copy), IconSizeModule (copy)
-	return WithStyleModule(function(p2) --[[ Line: 29 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: RoactModule (upval), InteractableModule (upval), p1 (copy), ImageSetComponentModule (upval), GetIconSizeModule (upval), IconSizeModule (upval)
 		return RoactModule.createElement(InteractableModule, {
 			AutoButtonColor = false,
@@ -23,7 +23,7 @@ function ScrollButton.render(p1) --[[ Line: 28 ]]
 			BackgroundTransparency = p2.Theme.BackgroundUIContrast.Transparency,
 			BorderSizePixel = 0,
 			[RoactModule.Event.Activated] = p1.props.callback,
-			onStateChanged = function() --[[ Line: 38 ]] end
+			onStateChanged = function() end
 		}, {
 			Icon = RoactModule.createElement(ImageSetComponentModule.Label, {
 				BackgroundTransparency = 1,

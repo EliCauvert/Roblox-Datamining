@@ -2,9 +2,9 @@
 local CryoModule = require(Parent.Cryo)
 local ReactModule = require(Parent.React)
 
-return function(p1, p2, p3) --[[ Line: 7 ]]
+return function(p1, p2, p3)
 	-- upvalues: ReactModule (copy), CryoModule (copy)
-	return ReactModule.useMemo(function() --[[ Line: 8 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), CryoModule (upval), p2 (copy), p3 (copy)
 		local List = {}
 		local Flag = false

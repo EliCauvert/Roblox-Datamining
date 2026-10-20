@@ -12,7 +12,7 @@ local Rsvps = UrlBuilder.fromString("apis:virtual-events/v1/virtual-events/{even
 local FFlagEnableCommunityProfileLoadingSkeletonsModule = require(ProfilePlatform.Flags.FFlagEnableCommunityProfileLoadingSkeletons)
 local t = {}
 
-return function(Id1) --[[ Line: 22 | Named "createGroupEventsStore" ]]
+return function(Id1)
 	-- upvalues: InternalHttpStoreModule (copy), FFlagLuaAppUseAppHttpStore (copy), HttpStoreModule (copy), SignalsModule (copy), Id (copy), t (copy), HttpService (copy), FFlagEnableCommunityProfileLoadingSkeletonsModule (copy), Rsvps (copy)
 	local HttpStore = InternalHttpStoreModule.GetHttpStore()
 	
@@ -27,7 +27,7 @@ return function(Id1) --[[ Line: 22 | Named "createGroupEventsStore" ]]
 	local Tbl = {}
 	local Signal1, Signal2_1 = SignalsModule.createSignal(Tbl)
 	
-	local function _(Key, p1) --[[ Line: 37 ]]
+	local function _(Key, p1)
 		-- upvalues: Tbl (ref), Signal2_1 (copy)
 		local Copy = table.clone(Tbl)
 		Copy[Key] = p1
@@ -35,7 +35,7 @@ return function(Id1) --[[ Line: 22 | Named "createGroupEventsStore" ]]
 		Tbl = Copy
 	end
 	
-	local Computed = SignalsModule.createComputed(function(p1) --[[ Line: 45 ]]
+	local Computed = SignalsModule.createComputed(function(p1)
 		-- upvalues: Signal (copy), Id1 (copy), Id (upval), HttpStore (ref)
 		return HttpStore.fetch(string.format("GetEvents_%d_%d", Id1, (Signal(p1))), { Method = "GET", Url = Id({ id = Id1 }) })
 	end)
@@ -43,7 +43,7 @@ return function(Id1) --[[ Line: 22 | Named "createGroupEventsStore" ]]
 	local Effect = nil
 	
 	return {
-		getEvents = SignalsModule.createComputed(function(p1) --[[ Line: 59 ]]
+		getEvents = SignalsModule.createComputed(function(p1)
 			-- upvalues: Computed (copy), Signal1 (copy), HttpService (upval), t1 (ref)
 			local v1 = Computed(p1)(p1)
 			local SignalResult = Signal1(p1)
@@ -69,11 +69,11 @@ return function(Id1) --[[ Line: 22 | Named "createGroupEventsStore" ]]
 			
 			return t
 		end),
-		isLoading = if FFlagEnableCommunityProfileLoadingSkeletonsModule then SignalsModule.createComputed(function(p2): boolean --[[ Line: 94 ]]
+		isLoading = if FFlagEnableCommunityProfileLoadingSkeletonsModule then SignalsModule.createComputed(function(p2): boolean
 			-- upvalues: Computed (copy)
 			return Computed(p2)(p2).status == "Fetching"
 		end) else nil,
-		updateRsvpStatus = function(p2, RsvpStatus) --[[ Line: 101 ]]
+		updateRsvpStatus = function(p2, RsvpStatus)
 			-- upvalues: Rsvps (upval), HttpService (upval), HttpStore (ref), Tbl (ref), Signal2_1 (copy), Effect (ref), SignalsModule (upval)
 			local FetchResult = HttpStore.fetch(string.format("UpdateEventRsvpStatus_%s_%s", p2.id, RsvpStatus), {
 				Method = "POST",
@@ -90,7 +90,7 @@ return function(Id1) --[[ Line: 22 | Named "createGroupEventsStore" ]]
 			if Effect then
 				Effect()
 			end
-			Effect = SignalsModule.createEffect(function(p3) --[[ Line: 118 ]]
+			Effect = SignalsModule.createEffect(function(p3)
 				-- upvalues: FetchResult (copy), p2 (copy), Entry (copy), Tbl (upval), Signal2_1 (upval)
 				if FetchResult(p3).status == "Failed" then
 					local Copy = table.clone(Tbl)
@@ -102,12 +102,12 @@ return function(Id1) --[[ Line: 22 | Named "createGroupEventsStore" ]]
 			
 			return FetchResult
 		end,
-		refetch = function() --[[ Line: 129 ]]
+		refetch = function()
 			-- upvalues: Signal2 (copy), Signal2_1 (copy)
-			Signal2(function(p2: number): number --[[ Line: 131 ]]
+			Signal2(function(p2: number): number
 				return p2 + 1
 			end)
-			Signal2_1(function(_) --[[ Line: 135 ]]
+			Signal2_1(function(_)
 				return {}
 			end)
 		end

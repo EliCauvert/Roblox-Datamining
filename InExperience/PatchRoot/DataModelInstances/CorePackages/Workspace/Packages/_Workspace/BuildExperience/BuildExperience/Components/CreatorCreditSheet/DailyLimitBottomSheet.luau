@@ -23,12 +23,12 @@ local IconSize = FoundationModule.Enums.IconSize
 local InputSize = FoundationModule.Enums.InputSize
 local list = { 2000, 5000 }
 
-local function _(Value: number) --[[ Line: 85 | Named "formatNumber" ]]
+local function _(Value: number)
 	-- upvalues: NumberLocalization (copy), LocalizationService (copy)
 	return NumberLocalization.localize(string.format("%.0f", (math.floor(Value))), LocalizationService.RobloxLocaleId)
 end
 
-local function DailyLimitBottomSheetContent(p1) --[[ Line: 89 ]]
+local function DailyLimitBottomSheetContent(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), NumberLocalization (copy), LocalizationService (copy), ReactModule (copy), Chip (copy), IconName (copy), ChipVariant (copy), ChipSize (copy), list (copy), Sheet (copy), Text (copy), View (copy), IconButton (copy), ButtonVariant (copy), InputSize (copy), Icon (copy), IconSize (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), Button (copy), FillBehavior (copy)
 	local AdditionalUsed = p1.additionalUsed or 0
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -50,28 +50,28 @@ local function DailyLimitBottomSheetContent(p1) --[[ Line: 89 ]]
 	local IsIsSaving = p1.isSaving == true
 	local UseStateResult, UseStateResult2 = ReactModule.useState((math.max(p1.initialValue or 500, 100)))
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(p1.initialIsNoLimit == true)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 114 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy), UseStateResult2 (copy)
 		UseStateResult2_1(false)
-		UseStateResult2(function(p2: number): number --[[ Line: 116 ]]
+		UseStateResult2(function(p2: number): number
 			return (math.max(p2 - 500, 100))
 		end)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 121 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy), UseStateResult2 (copy)
 		UseStateResult2_1(false)
-		UseStateResult2(function(p2: number): number --[[ Line: 123 ]]
+		UseStateResult2(function(p2: number): number
 			return p2 + 500
 		end)
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function(p2: number) --[[ Line: 128 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2: number)
 		-- upvalues: UseStateResult2_1 (copy), UseStateResult2 (copy)
 		UseStateResult2_1(false)
 		UseStateResult2((math.max(p2, 100)))
 	end, {})
 	local IsUseStateResultBelow: boolean = not UseStateResult1 and UseStateResult < AdditionalUsed
 	local BelowSpend1 = if IsUseStateResultBelow then BelowSpend elseif p1.saveError then SaveError else nil
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 142 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult1 (copy), p1 (copy), UseStateResult (copy), AdditionalUsed (copy)
 		if UseStateResult1 then
 			p1.onConfirm(nil)
@@ -96,7 +96,7 @@ local function DailyLimitBottomSheetContent(p1) --[[ Line: 89 ]]
 			leading = IconName.CircleX,
 			variant = ChipVariant.Standard,
 			size = ChipSize.Medium,
-			onActivated = ReactModule.useCallback(function() --[[ Line: 133 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: UseStateResult2_1 (copy)
 				UseStateResult2_1(true)
 			end, {}),
@@ -112,7 +112,7 @@ local function DailyLimitBottomSheetContent(p1) --[[ Line: 89 ]]
 			leading = IconName.Robux,
 			variant = ChipVariant.Standard,
 			size = ChipSize.Medium,
-			onActivated = function() --[[ Line: 182 ]]
+			onActivated = function()
 				-- upvalues: UseResult2 (copy), value (copy)
 				UseResult2(value)
 			end,
@@ -202,7 +202,7 @@ local function DailyLimitBottomSheetContent(p1) --[[ Line: 89 ]]
 	})
 end
 
-return function(p2) --[[ Line: 294 | Named "DailyLimitBottomSheet" ]]
+return function(p2)
 	-- upvalues: ReactModule (copy), DailyLimitBottomSheetContent (copy)
 	return if p2.isOpen then ReactModule.createElement(DailyLimitBottomSheetContent, p2) else nil
 end

@@ -1,6 +1,6 @@
 ﻿local CheckAndSendEventModule = require(script.Parent.Parent.Utils.checkAndSendEvent)
 
-return function(p1, List, List1, List2) --[[ Line: 4 ]]
+return function(p1, List, List1, List2)
 	-- upvalues: CheckAndSendEventModule (copy)
 	CheckAndSendEventModule(p1, "authAccountPickerAccountsFetched", {
 		validSessionUserIds = `[{table.concat(List, ",")}]`,

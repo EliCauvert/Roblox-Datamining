@@ -3,9 +3,9 @@ local UseLocalizationFunction = require(VirtualEvents.Parent.Localization).Hooks
 local GetDeepValueFunction = require(VirtualEvents.Parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Dictionary.getDeepValue
 local UseSelectorFunction = require(VirtualEvents.Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function(p1) --[[ Line: 9 | Named "useExperienceSubtitle" ]]
+return function(p1)
 	-- upvalues: UseSelectorFunction (copy), GetDeepValueFunction (copy), UseLocalizationFunction (copy)
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 10 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: GetDeepValueFunction (upval), p1 (copy)
 		local DeepValue: number = GetDeepValueFunction(p2, "GameVotes." .. p1 .. ".upVotes")
 		local DeepValue1: number = GetDeepValueFunction(p2, "GameVotes." .. p1 .. ".downVotes")
@@ -14,7 +14,7 @@ return function(p1) --[[ Line: 9 | Named "useExperienceSubtitle" ]]
 	end)
 	
 	if UseSelectorResult ~= UseSelectorResult or not UseSelectorResult then
-		local UseSelectorResult1 = UseSelectorFunction(function(p2) --[[ Line: 24 ]]
+		local UseSelectorResult1 = UseSelectorFunction(function(p2)
 			-- upvalues: p1 (copy)
 			return p2.AgeRecommendations and p2.AgeRecommendations[p1]
 		end)

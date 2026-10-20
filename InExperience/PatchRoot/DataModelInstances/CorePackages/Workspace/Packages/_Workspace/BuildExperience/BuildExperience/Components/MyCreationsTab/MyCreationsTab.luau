@@ -36,7 +36,7 @@ local ExperienceResultsLoadingSkeletonModule = require(script.Parent.ExperienceR
 local MyCreationsFilterContainerModule = require(BuildExperience.Components.MyCreationsFilter.MyCreationsFilterContainer)
 local UseMyCreationsResultsModule = require(script.Parent.useMyCreationsResults)
 
-return function(Frame: Frame) --[[ Line: 133 | Named "MyCreationsTab" ]]
+return function(Frame: Frame)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperienceMyCreationsCreateGameButtonModule (copy), GetSearchQueryStoreModule (copy), ReactModule (copy), UseScrollPerformanceTrackerModule (copy), FFlagBuildExperienceMyCreationsUseUniverseListModule (copy), FFlagBuildWithGroupsModule (copy), GetMyCreationsFilterStoreModule (copy), UseMyCreationsResultsModule (copy), ChatConstantsModule (copy), Players (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), FFlagBuildExperienceStableMyCreationsListItemsModule (copy), ListItemInputType (copy), ExperienceResultsLoadingSkeletonModule (copy), List (copy), IconName (copy), MyCreationsTabNewGameRow (copy), SearchEmptyStateModule (copy), View (copy), InputSize (copy), BuildEmptyStateModule (copy), ExperienceResultsListModule (copy), RefreshScrollingFrame (copy), MyCreationsFilterContainerModule (copy), Button (copy), ButtonVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		building = LocalizationStringsModule.MY_CREATIONS_BUILDING,
@@ -85,7 +85,7 @@ return function(Frame: Frame) --[[ Line: 133 | Named "MyCreationsTab" ]]
 	local RetryLoadMore = UseMyCreationsResultsModuleResult.retryLoadMore
 	local Refresh = UseMyCreationsResultsModuleResult.refresh
 	local LoadMoreIfNeeded = UseMyCreationsResultsModuleResult.loadMoreIfNeeded
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 192 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult1 (copy), Frame (copy), ChatConstantsModule (upval), Players (upval)
 		UseRefResult1.current = true
 		Frame.onOpenChat({
@@ -95,7 +95,7 @@ return function(Frame: Frame) --[[ Line: 133 | Named "MyCreationsTab" ]]
 		})
 	end, { Frame.onOpenChat })
 	local IsUseDraftQueryResultMatch: boolean = if FFlagBuildExperienceMyCreationsUseUniverseListModule then UseMyCreationsResultsModuleResult.hasCompletedFocusedRefresh and (UseMyCreationsResultsModuleResult.sessionListStatus == "Ready" and UseMyCreationsResultsModuleResult.sessionCount == 0 and UseDraftQueryResult == "") else UseMyCreationsResultsModuleResult.hasCompletedFocusedRefresh and (ListStatus == "Ready" and SourceItemCount == 0)
-	ReactModule.useEffect(function() --[[ Line: 208 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy), IsIsFocused (copy), IsUseDraftQueryResultMatch (copy), UseRefResult1 (copy), UseResult (copy)
 		if Frame.autoOpenNewGame ~= false and IsIsFocused and IsUseDraftQueryResultMatch and not UseRefResult1.current then
 			UseResult()
@@ -107,7 +107,7 @@ return function(Frame: Frame) --[[ Line: 133 | Named "MyCreationsTab" ]]
 		Frame.autoOpenNewGame
 	})
 	local None = if FFlagBuildExperienceMyCreationsLongPressMenuModule and FFlagBuildExperienceStableMyCreationsListItemsModule and Frame.onOpenConfigurationPage ~= nil then ListItemInputType.None else nil
-	local UseMemoResult = if FFlagBuildExperienceMyCreationsCreateGameButtonModule then nil else ReactModule.useMemo(function() --[[ Line: 246 ]]
+	local UseMemoResult = if FFlagBuildExperienceMyCreationsCreateGameButtonModule then nil else ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), List (upval), IconName (upval), NewGame (copy), BuildWithAI (copy), MyCreationsTabNewGameRow (upval), UseResult (copy), None (copy)
 		return {
 			CreateRow = ReactModule.createElement(List.Item, {
@@ -127,7 +127,7 @@ return function(Frame: Frame) --[[ Line: 133 | Named "MyCreationsTab" ]]
 		ref = UseRefResult,
 		onCanvasPositionChangedCallback = LoadMoreIfNeeded,
 		onCanvasSizeChangedCallback = LoadMoreIfNeeded,
-		createFooter = ReactModule.useCallback(function() --[[ Line: 233 ]]
+		createFooter = ReactModule.useCallback(function()
 			-- upvalues: UseMyCreationsResultsModuleResult (copy), ReactModule (upval), ExperienceResultsLoadingSkeletonModule (upval)
 			return if UseMyCreationsResultsModuleResult.isLoadingMore then ReactModule.createElement(ExperienceResultsLoadingSkeletonModule, {
 				LayoutOrder = 1,

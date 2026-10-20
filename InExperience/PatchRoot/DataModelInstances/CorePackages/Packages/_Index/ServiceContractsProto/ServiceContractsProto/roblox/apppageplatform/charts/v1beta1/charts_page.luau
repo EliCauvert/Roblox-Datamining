@@ -9,7 +9,7 @@ local ClientCapabilitiesModule = require(script.Parent.Parent.Parent.shared.v1be
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 446 ]]
+function Module.new(p1)
 	-- upvalues: HydrationStreamModeModule (copy), Module (copy)
 	return (setmetatable({
 		feed_page_token = if p1 == nil or p1.feed_page_token == nil then "" else p1.feed_page_token,
@@ -31,7 +31,7 @@ function Module.new(p1) --[[ Line: 446 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 483 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy), HydrationStreamModeModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -114,7 +114,7 @@ function Module:encode() --[[ Line: 483 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 598 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy), HydrationStreamModeModule (copy), t (copy), ClientCapabilitiesModule (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -210,7 +210,7 @@ function Module.decode(Buf) --[[ Line: 598 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 729 ]]
+function Module:jsonEncode()
 	-- upvalues: HydrationStreamModeModule (copy)
 	local t = {}
 	
@@ -270,7 +270,7 @@ function Module:jsonEncode() --[[ Line: 729 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 817 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy), HydrationStreamModeModule (copy), t (copy), ClientCapabilitiesModule (copy)
 	local NewModule = Module.new()
 	
@@ -383,7 +383,7 @@ TypeRegistryModule.default:register(t.GetChartsPageRequest)
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(p1) --[[ Line: 982 ]]
+function Module1.new(p1)
 	-- upvalues: Module1 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -391,7 +391,7 @@ function Module1.new(p1) --[[ Line: 982 ]]
 	}, Module1))
 end
 
-function Module1:encode() --[[ Line: 994 ]]
+function Module1:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -410,7 +410,7 @@ function Module1:encode() --[[ Line: 994 ]]
 	return Buf1
 end
 
-function Module1.decode(Buf) --[[ Line: 1015 ]]
+function Module1.decode(Buf)
 	-- upvalues: Module1 (copy), ProtoModule (copy)
 	local NewModule = Module1.new()
 	local v2 = 0
@@ -447,7 +447,7 @@ function Module1.decode(Buf) --[[ Line: 1015 ]]
 	return NewModule
 end
 
-function Module1:jsonEncode() --[[ Line: 1065 ]]
+function Module1:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -459,7 +459,7 @@ function Module1:jsonEncode() --[[ Line: 1065 ]]
 	return t
 end
 
-function Module1:jsonDecode() --[[ Line: 1081 ]]
+function Module1:jsonDecode()
 	-- upvalues: Module1 (copy)
 	local NewModule = Module1.new()
 	
@@ -481,7 +481,7 @@ TypeRegistryModule.default:register(t.GetChartsPageRequest_CachedRobloxComponent
 local Module2 = {}
 Module2.__index = Module2
 
-function Module2.new(p1) --[[ Line: 1112 ]]
+function Module2.new(p1)
 	-- upvalues: Module2 (copy)
 	return (setmetatable({
 		items_per_row = if p1 == nil or p1.items_per_row == nil then {} else p1.items_per_row,
@@ -489,7 +489,7 @@ function Module2.new(p1) --[[ Line: 1112 ]]
 	}, Module2))
 end
 
-function Module2:encode() --[[ Line: 1119 ]]
+function Module2:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -514,7 +514,7 @@ function Module2:encode() --[[ Line: 1119 ]]
 	return Buf1
 end
 
-function Module2.decode(Buf) --[[ Line: 1146 ]]
+function Module2.decode(Buf)
 	-- upvalues: Module2 (copy), ProtoModule (copy), t (copy)
 	local NewModule = Module2.new()
 	local v3 = 0
@@ -552,7 +552,7 @@ function Module2.decode(Buf) --[[ Line: 1146 ]]
 	return NewModule
 end
 
-function Module2:jsonEncode() --[[ Line: 1201 ]]
+function Module2:jsonEncode()
 	local t = {}
 	
 	if self.items_per_row ~= nil and next(self.items_per_row) ~= nil then
@@ -569,7 +569,7 @@ function Module2:jsonEncode() --[[ Line: 1201 ]]
 	return t
 end
 
-function Module2:jsonDecode() --[[ Line: 1219 ]]
+function Module2:jsonDecode()
 	-- upvalues: Module2 (copy)
 	local NewModule = Module2.new()
 	
@@ -607,7 +607,7 @@ TypeRegistryModule.default:register(t.CollectionLayoutInfo)
 local Module3 = {}
 Module3.__index = Module3
 
-function Module3.new(p1) --[[ Line: 1265 ]]
+function Module3.new(p1)
 	-- upvalues: Module3 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -615,7 +615,7 @@ function Module3.new(p1) --[[ Line: 1265 ]]
 	}, Module3))
 end
 
-function Module3:encode() --[[ Line: 1274 ]]
+function Module3:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -634,7 +634,7 @@ function Module3:encode() --[[ Line: 1274 ]]
 	return Buf1
 end
 
-function Module3.decode(Buf) --[[ Line: 1293 ]]
+function Module3.decode(Buf)
 	-- upvalues: Module3 (copy), ProtoModule (copy)
 	local NewModule = Module3.new()
 	local v4 = 0
@@ -671,7 +671,7 @@ function Module3.decode(Buf) --[[ Line: 1293 ]]
 	return NewModule
 end
 
-function Module3:jsonEncode() --[[ Line: 1341 ]]
+function Module3:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -683,7 +683,7 @@ function Module3:jsonEncode() --[[ Line: 1341 ]]
 	return t
 end
 
-function Module3:jsonDecode() --[[ Line: 1355 ]]
+function Module3:jsonDecode()
 	-- upvalues: Module3 (copy)
 	local NewModule = Module3.new()
 	
@@ -705,7 +705,7 @@ TypeRegistryModule.default:register(t.CollectionLayoutInfo_ItemsPerRowEntry)
 local Module4 = {}
 Module4.__index = Module4
 
-function Module4.new(p1) --[[ Line: 1385 ]]
+function Module4.new(p1)
 	-- upvalues: Module4 (copy)
 	return (setmetatable({
 		page_entries = if p1 == nil or p1.page_entries == nil then {} else p1.page_entries,
@@ -715,7 +715,7 @@ function Module4.new(p1) --[[ Line: 1385 ]]
 	}, Module4))
 end
 
-function Module4:encode() --[[ Line: 1394 ]]
+function Module4:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -759,7 +759,7 @@ function Module4:encode() --[[ Line: 1394 ]]
 	return Buf1
 end
 
-function Module4.decode(Buf) --[[ Line: 1444 ]]
+function Module4.decode(Buf)
 	-- upvalues: Module4 (copy), ProtoModule (copy), PageEntryContentModule (copy), HydrationContentModule (copy), t (copy), TemplateEntryModule (copy)
 	local NewModule = Module4.new()
 	local v5 = 0
@@ -807,7 +807,7 @@ function Module4.decode(Buf) --[[ Line: 1444 ]]
 	return NewModule
 end
 
-function Module4:jsonEncode() --[[ Line: 1520 ]]
+function Module4:jsonEncode()
 	local t = {}
 	
 	if self.page_entries ~= nil and #self.page_entries > 0 then
@@ -840,7 +840,7 @@ function Module4:jsonEncode() --[[ Line: 1520 ]]
 	return t
 end
 
-function Module4:jsonDecode() --[[ Line: 1554 ]]
+function Module4:jsonDecode()
 	-- upvalues: Module4 (copy), PageEntryContentModule (copy), HydrationContentModule (copy), TemplateEntryModule (copy)
 	local NewModule = Module4.new()
 	
@@ -902,7 +902,7 @@ TypeRegistryModule.default:register(t.GetChartsPageResponse)
 local Module5 = {}
 Module5.__index = Module5
 
-function Module5.new(p1) --[[ Line: 1637 ]]
+function Module5.new(p1)
 	-- upvalues: Module5 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -910,7 +910,7 @@ function Module5.new(p1) --[[ Line: 1637 ]]
 	}, Module5))
 end
 
-function Module5:encode() --[[ Line: 1646 ]]
+function Module5:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -930,7 +930,7 @@ function Module5:encode() --[[ Line: 1646 ]]
 	return Buf1
 end
 
-function Module5.decode(Buf) --[[ Line: 1666 ]]
+function Module5.decode(Buf)
 	-- upvalues: Module5 (copy), ProtoModule (copy), TemplateEntryModule (copy)
 	local NewModule = Module5.new()
 	local v6 = 0
@@ -967,7 +967,7 @@ function Module5.decode(Buf) --[[ Line: 1666 ]]
 	return NewModule
 end
 
-function Module5:jsonEncode() --[[ Line: 1714 ]]
+function Module5:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -979,7 +979,7 @@ function Module5:jsonEncode() --[[ Line: 1714 ]]
 	return t
 end
 
-function Module5:jsonDecode() --[[ Line: 1728 ]]
+function Module5:jsonDecode()
 	-- upvalues: Module5 (copy), TemplateEntryModule (copy)
 	local NewModule = Module5.new()
 	
@@ -1001,7 +1001,7 @@ TypeRegistryModule.default:register(t.GetChartsPageResponse_TemplatesEntry)
 local Module6 = {}
 Module6.__index = Module6
 
-function Module6.new(p1) --[[ Line: 1758 ]]
+function Module6.new(p1)
 	-- upvalues: Module6 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -1009,7 +1009,7 @@ function Module6.new(p1) --[[ Line: 1758 ]]
 	}, Module6))
 end
 
-function Module6:encode() --[[ Line: 1767 ]]
+function Module6:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1028,7 +1028,7 @@ function Module6:encode() --[[ Line: 1767 ]]
 	return Buf1
 end
 
-function Module6.decode(Buf) --[[ Line: 1788 ]]
+function Module6.decode(Buf)
 	-- upvalues: Module6 (copy), ProtoModule (copy)
 	local NewModule = Module6.new()
 	local v7 = 0
@@ -1065,7 +1065,7 @@ function Module6.decode(Buf) --[[ Line: 1788 ]]
 	return NewModule
 end
 
-function Module6:jsonEncode() --[[ Line: 1838 ]]
+function Module6:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -1077,7 +1077,7 @@ function Module6:jsonEncode() --[[ Line: 1838 ]]
 	return t
 end
 
-function Module6:jsonDecode() --[[ Line: 1854 ]]
+function Module6:jsonDecode()
 	-- upvalues: Module6 (copy)
 	local NewModule = Module6.new()
 	
@@ -1099,7 +1099,7 @@ TypeRegistryModule.default:register(t.GetChartsPageResponse_LocalizedLiteralsEnt
 local Module7 = {}
 Module7.__index = Module7
 
-function Module7.new(p1) --[[ Line: 1884 ]]
+function Module7.new(p1)
 	-- upvalues: Module7 (copy)
 	return (setmetatable({
 		sort_id = if p1 == nil or p1.sort_id == nil then "" else p1.sort_id,
@@ -1116,7 +1116,7 @@ function Module7.new(p1) --[[ Line: 1884 ]]
 	}, Module7))
 end
 
-function Module7:encode() --[[ Line: 1907 ]]
+function Module7:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1178,7 +1178,7 @@ function Module7:encode() --[[ Line: 1907 ]]
 	return Buf1
 end
 
-function Module7.decode(Buf) --[[ Line: 1983 ]]
+function Module7.decode(Buf)
 	-- upvalues: Module7 (copy), ProtoModule (copy), t (copy), ClientCapabilitiesModule (copy)
 	local NewModule = Module7.new()
 	local v8 = 0
@@ -1252,7 +1252,7 @@ function Module7.decode(Buf) --[[ Line: 1983 ]]
 	return NewModule
 end
 
-function Module7:jsonEncode() --[[ Line: 2086 ]]
+function Module7:jsonEncode()
 	local t = {}
 	
 	if self.sort_id ~= nil and self.sort_id ~= "" then
@@ -1296,7 +1296,7 @@ function Module7:jsonEncode() --[[ Line: 2086 ]]
 	return t
 end
 
-function Module7:jsonDecode() --[[ Line: 2143 ]]
+function Module7:jsonDecode()
 	-- upvalues: Module7 (copy), ClientCapabilitiesModule (copy)
 	local NewModule = Module7.new()
 	
@@ -1379,7 +1379,7 @@ TypeRegistryModule.default:register(t.GetChartsSortDetailRequest)
 local Module8 = {}
 Module8.__index = Module8
 
-function Module8.new(p1) --[[ Line: 2256 ]]
+function Module8.new(p1)
 	-- upvalues: Module8 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -1387,7 +1387,7 @@ function Module8.new(p1) --[[ Line: 2256 ]]
 	}, Module8))
 end
 
-function Module8:encode() --[[ Line: 2268 ]]
+function Module8:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1406,7 +1406,7 @@ function Module8:encode() --[[ Line: 2268 ]]
 	return Buf1
 end
 
-function Module8.decode(Buf) --[[ Line: 2289 ]]
+function Module8.decode(Buf)
 	-- upvalues: Module8 (copy), ProtoModule (copy)
 	local NewModule = Module8.new()
 	local v9 = 0
@@ -1443,7 +1443,7 @@ function Module8.decode(Buf) --[[ Line: 2289 ]]
 	return NewModule
 end
 
-function Module8:jsonEncode() --[[ Line: 2339 ]]
+function Module8:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -1455,7 +1455,7 @@ function Module8:jsonEncode() --[[ Line: 2339 ]]
 	return t
 end
 
-function Module8:jsonDecode() --[[ Line: 2355 ]]
+function Module8:jsonDecode()
 	-- upvalues: Module8 (copy)
 	local NewModule = Module8.new()
 	
@@ -1477,7 +1477,7 @@ TypeRegistryModule.default:register(t.GetChartsSortDetailRequest_CachedRobloxCom
 local Module9 = {}
 Module9.__index = Module9
 
-function Module9.new(p1) --[[ Line: 2386 ]]
+function Module9.new(p1)
 	-- upvalues: Module9 (copy)
 	return (setmetatable({
 		page_entries = if p1 == nil or p1.page_entries == nil then {} else p1.page_entries,
@@ -1488,7 +1488,7 @@ function Module9.new(p1) --[[ Line: 2386 ]]
 	}, Module9))
 end
 
-function Module9:encode() --[[ Line: 2400 ]]
+function Module9:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1536,7 +1536,7 @@ function Module9:encode() --[[ Line: 2400 ]]
 	return Buf1
 end
 
-function Module9.decode(Buf) --[[ Line: 2455 ]]
+function Module9.decode(Buf)
 	-- upvalues: Module9 (copy), ProtoModule (copy), PageEntryContentModule (copy), HydrationContentModule (copy), t (copy), TemplateEntryModule (copy)
 	local NewModule = Module9.new()
 	local v10 = 0
@@ -1588,7 +1588,7 @@ function Module9.decode(Buf) --[[ Line: 2455 ]]
 	return NewModule
 end
 
-function Module9:jsonEncode() --[[ Line: 2536 ]]
+function Module9:jsonEncode()
 	local t = {}
 	
 	if self.page_entries ~= nil and #self.page_entries > 0 then
@@ -1624,7 +1624,7 @@ function Module9:jsonEncode() --[[ Line: 2536 ]]
 	return t
 end
 
-function Module9:jsonDecode() --[[ Line: 2574 ]]
+function Module9:jsonDecode()
 	-- upvalues: Module9 (copy), PageEntryContentModule (copy), HydrationContentModule (copy), TemplateEntryModule (copy)
 	local NewModule = Module9.new()
 	
@@ -1692,7 +1692,7 @@ TypeRegistryModule.default:register(t.GetChartsSortDetailResponse)
 local Module10 = {}
 Module10.__index = Module10
 
-function Module10.new(p1) --[[ Line: 2665 ]]
+function Module10.new(p1)
 	-- upvalues: Module10 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -1700,7 +1700,7 @@ function Module10.new(p1) --[[ Line: 2665 ]]
 	}, Module10))
 end
 
-function Module10:encode() --[[ Line: 2674 ]]
+function Module10:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1720,7 +1720,7 @@ function Module10:encode() --[[ Line: 2674 ]]
 	return Buf1
 end
 
-function Module10.decode(Buf) --[[ Line: 2696 ]]
+function Module10.decode(Buf)
 	-- upvalues: Module10 (copy), ProtoModule (copy), TemplateEntryModule (copy)
 	local NewModule = Module10.new()
 	local v11 = 0
@@ -1757,7 +1757,7 @@ function Module10.decode(Buf) --[[ Line: 2696 ]]
 	return NewModule
 end
 
-function Module10:jsonEncode() --[[ Line: 2746 ]]
+function Module10:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -1769,7 +1769,7 @@ function Module10:jsonEncode() --[[ Line: 2746 ]]
 	return t
 end
 
-function Module10:jsonDecode() --[[ Line: 2762 ]]
+function Module10:jsonDecode()
 	-- upvalues: Module10 (copy), TemplateEntryModule (copy)
 	local NewModule = Module10.new()
 	
@@ -1791,7 +1791,7 @@ TypeRegistryModule.default:register(t.GetChartsSortDetailResponse_TemplatesEntry
 local Module11 = {}
 Module11.__index = Module11
 
-function Module11.new(p1) --[[ Line: 2793 ]]
+function Module11.new(p1)
 	-- upvalues: Module11 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -1799,7 +1799,7 @@ function Module11.new(p1) --[[ Line: 2793 ]]
 	}, Module11))
 end
 
-function Module11:encode() --[[ Line: 2805 ]]
+function Module11:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1818,7 +1818,7 @@ function Module11:encode() --[[ Line: 2805 ]]
 	return Buf1
 end
 
-function Module11.decode(Buf) --[[ Line: 2826 ]]
+function Module11.decode(Buf)
 	-- upvalues: Module11 (copy), ProtoModule (copy)
 	local NewModule = Module11.new()
 	local v12 = 0
@@ -1855,7 +1855,7 @@ function Module11.decode(Buf) --[[ Line: 2826 ]]
 	return NewModule
 end
 
-function Module11:jsonEncode() --[[ Line: 2876 ]]
+function Module11:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -1867,7 +1867,7 @@ function Module11:jsonEncode() --[[ Line: 2876 ]]
 	return t
 end
 
-function Module11:jsonDecode() --[[ Line: 2892 ]]
+function Module11:jsonDecode()
 	-- upvalues: Module11 (copy)
 	local NewModule = Module11.new()
 	

@@ -5,19 +5,19 @@ local FFlagExpChatEnableFriendsTab = require(Parent.SharedFlags).FFlagExpChatEna
 local GetFriendsChatMetadataStoreModule = require(AppChat.Stores.GetFriendsChatMetadataStore)
 local GetFriendsChatSettingsStoreModule = require(AppChat.Stores.GetFriendsChatSettingsStore)
 local config = {
-	[require(Parent.AppChatNetworking).rodux.GetMetadata.Succeeded.name] = function(p1) --[[ Line: 12 ]]
+	[require(Parent.AppChatNetworking).rodux.GetMetadata.Succeeded.name] = function(p1)
 		-- upvalues: GetFriendsChatMetadataStoreModule (copy)
 		GetFriendsChatMetadataStoreModule(false).updateFriendsChatMetadata(p1.responseBody)
 	end,
-	[require(AppChat.Actions.ThirdPartyChatSettingsLoaded).name] = function(p1) --[[ Line: 16 ]]
+	[require(AppChat.Actions.ThirdPartyChatSettingsLoaded).name] = function(p1)
 		-- upvalues: GetFriendsChatSettingsStoreModule (copy)
 		GetFriendsChatSettingsStoreModule(false).setThirdPartyChatRestrictionStatus(p1.status)
 	end
 }
 
-return function(Callback, _) --[[ Line: 25 | Named "SignalsFriendsChatSettingsMiddleware" ]]
+return function(Callback, _)
 	-- upvalues: FFlagAppChatFriendsTabIxpEnabledModule (copy), FFlagExpChatEnableFriendsTab (copy), config (copy)
-	return function(p1) --[[ Line: 26 ]]
+	return function(p1)
 		-- upvalues: Callback (copy), FFlagAppChatFriendsTabIxpEnabledModule (upval), FFlagExpChatEnableFriendsTab (upval), config (upval)
 		local CallbackResult = Callback(p1)
 		

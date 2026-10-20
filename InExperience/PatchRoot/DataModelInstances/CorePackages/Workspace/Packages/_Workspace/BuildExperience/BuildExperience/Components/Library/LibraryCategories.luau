@@ -2,7 +2,7 @@
 local _ = require(script.Parent.LibraryTypes)
 
 return {
-	fromItems = function(List, p1) --[[ Line: 13 ]]
+	fromItems = function(List, p1)
 		local List1 = {}
 		
 		for _, value in { "Model", "Image", "Sound" } do

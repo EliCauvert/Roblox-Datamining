@@ -17,23 +17,23 @@ local DisplayOrderEnum = require(Parent.DisplayOrder).DisplayOrderEnum
 local StyleProviderWithDefaultTheme = require(Parent.Style).StyleProviderWithDefaultTheme
 local GetFFlagSocialContextToastEventStreamFunction = require(Parent.SharedFlags).GetFFlagSocialContextToastEventStream
 
-local function _(p1) --[[ Line: 29 | Named "renderWithStyleProvider" ]]
+local function _(p1)
 	-- upvalues: ReactModule (copy), StyleProviderWithDefaultTheme (copy)
 	return ReactModule.createElement(StyleProviderWithDefaultTheme, {}, p1)
 end
 
-return function(Services, GameId, PlaceId) --[[ Line: 33 | Named "SocialContextToastContainer" ]]
+return function(Services, GameId, PlaceId)
 	-- upvalues: CoreGui (copy), ToastTypesModule (copy), RoduxModule (copy), CryoModule (copy), ReactModule (copy), RoactRoduxModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), DisplayOrderEnum (copy), SocialContextToastDispatcherModule (copy), ToastRootModule (copy), GetFFlagSocialContextToastEventStreamFunction (copy), ConfirmationModalRootModule (copy), StyleProviderWithDefaultTheme (copy), ReactRobloxModule (copy)
 	local SocialContextToast = Instance.new("Folder")
 	SocialContextToast.Name = "SocialContextToast"
 	SocialContextToast.Parent = CoreGui
 	local Element = ReactModule.createElement(RoactRoduxModule.StoreProvider, {
 		store = RoduxModule.Store.new(RoduxModule.createReducer({}, {
-			SetToastContent = function(p1, p2) --[[ Line: 50 ]]
+			SetToastContent = function(p1, p2)
 				-- upvalues: CryoModule (upval)
 				return (CryoModule.Dictionary.join(p1, { ToastContent = p2.toastContent }))
 			end,
-			SetConfirmationModal = function(p1, p2) --[[ Line: 56 ]]
+			SetConfirmationModal = function(p1, p2)
 				-- upvalues: CryoModule (upval)
 				return (CryoModule.Dictionary.join(p1, {
 					ConfirmationModal = {

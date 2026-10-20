@@ -3,7 +3,7 @@ local OffersDebugLoggerModule = require(InExperienceOffers.Internal.OffersDebugL
 local OfferStatusModule = require(InExperienceOffers.Enums.OfferStatus)
 local _ = require(InExperienceOffers.Types)
 
-local function _(p1, p2) --[[ Line: 11 | Named "secondsUntilExpiry" ]]
+local function _(p1, p2)
 	-- upvalues: OfferStatusModule (copy)
 	if p1.offerStatus ~= OfferStatusModule.Available then
 		return nil
@@ -20,7 +20,7 @@ local function _(p1, p2) --[[ Line: 11 | Named "secondsUntilExpiry" ]]
 	end
 end
 
-local function keyEmptiesInSeconds(List, UnixTimestampMillis) --[[ Line: 26 ]]
+local function keyEmptiesInSeconds(List, UnixTimestampMillis)
 	-- upvalues: OfferStatusModule (copy)
 	local v1 = nil
 	
@@ -46,7 +46,7 @@ local function keyEmptiesInSeconds(List, UnixTimestampMillis) --[[ Line: 26 ]]
 	return v1
 end
 
-return function(List) --[[ Line: 41 | Named "getSecondsUntilAnyKeyEmpties" ]]
+return function(List)
 	-- upvalues: keyEmptiesInSeconds (copy), OffersDebugLoggerModule (copy)
 	local UnixTimestampMillis = DateTime.now().UnixTimestampMillis
 	local v3 = nil
@@ -58,7 +58,7 @@ return function(List) --[[ Line: 41 | Named "getSecondsUntilAnyKeyEmpties" ]]
 			v3 = KeyEmptiesInSecondsResult
 		end
 	end
-	OffersDebugLoggerModule.logLazy(function(): string --[[ Line: 51 ]]
+	OffersDebugLoggerModule.logLazy(function(): string
 		-- upvalues: v3 (ref)
 		return string.format("getSecondsUntilAnyKeyEmpties return %s", (tostring(v3)))
 	end)

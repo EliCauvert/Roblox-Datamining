@@ -1,7 +1,7 @@
 ﻿local TModule = require(script:FindFirstAncestor("RoduxSquads").Parent.t)
 local SquadInviteeModelModule = {}
 
-function SquadInviteeModelModule.new(p1) --[[ Line: 8 ]]
+function SquadInviteeModelModule.new(p1)
 	-- upvalues: SquadInviteeModelModule (copy)
 	assert(SquadInviteeModelModule.isValid(p1))
 	SquadInviteeModelModule.__index = SquadInviteeModelModule
@@ -10,7 +10,7 @@ function SquadInviteeModelModule.new(p1) --[[ Line: 8 ]]
 	return p1
 end
 
-function SquadInviteeModelModule.mock(p1) --[[ Line: 20 ]]
+function SquadInviteeModelModule.mock(p1)
 	-- upvalues: SquadInviteeModelModule (copy)
 	local P1 = p1 or {}
 	
@@ -20,7 +20,7 @@ function SquadInviteeModelModule.mock(p1) --[[ Line: 20 ]]
 	}))
 end
 
-function SquadInviteeModelModule.format(p1) --[[ Line: 31 ]]
+function SquadInviteeModelModule.format(p1)
 	-- upvalues: SquadInviteeModelModule (copy)
 	return (SquadInviteeModelModule.new({
 		invitedAtTimestampMs = p1.invitedAtTimestampMs,

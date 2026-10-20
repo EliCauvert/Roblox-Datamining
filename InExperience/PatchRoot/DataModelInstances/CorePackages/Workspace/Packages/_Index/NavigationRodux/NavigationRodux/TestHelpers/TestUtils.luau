@@ -12,7 +12,7 @@ local GetLegacyRouteFromRoactNavigationStateFunction = require(NavigationRodux.U
 local CreateMockStackStateFunction = NavigationModule.TestUtils.createMockStackState
 local CreateMockScreenStateFunction = NavigationModule.TestUtils.createMockScreenState
 
-local function createMockReducerStateFromRouteState(RoactNavigationState) --[[ Line: 28 ]]
+local function createMockReducerStateFromRouteState(RoactNavigationState)
 	-- upvalues: GetLegacyRouteFromRoactNavigationStateFunction (copy), GetCurrentRouteStateFunction (copy)
 	return {
 		lockNavigationActions = false,
@@ -25,7 +25,7 @@ local function createMockReducerStateFromRouteState(RoactNavigationState) --[[ L
 	}
 end
 
-local function createMockRouteStateFromPages(List) --[[ Line: 41 ]]
+local function createMockRouteStateFromPages(List)
 	-- upvalues: CreateMockScreenStateFunction (copy), CreateMockStackStateFunction (copy)
 	local List1 = {}
 	
@@ -44,7 +44,7 @@ local config = {
 	[AppPage.More] = true
 }
 
-local function navigateToRoute(p1, List) --[[ Line: 67 ]]
+local function navigateToRoute(p1, List)
 	-- upvalues: Actions (copy), config (copy), ConstantsModule (copy), StackActions (copy)
 	local Actions1 = {}
 	
@@ -67,7 +67,7 @@ end
 return {
 	createMockReducerStateFromRouteState = createMockReducerStateFromRouteState,
 	createMockRouteStateFromPages = createMockRouteStateFromPages,
-	createMockNavigationState = function(...) --[[ Line: 49 ]]
+	createMockNavigationState = function(...)
 		-- upvalues: createMockRouteStateFromPages (copy), createMockReducerStateFromRouteState (copy)
 		local List = {}
 		
@@ -76,7 +76,7 @@ return {
 		end
 		return (createMockReducerStateFromRouteState((createMockRouteStateFromPages(List))))
 	end,
-	resetNavigation = function(p2, p3) --[[ Line: 87 ]]
+	resetNavigation = function(p2, p3)
 		-- upvalues: navigateToRoute (copy)
 		p2.notifyEvents()
 		

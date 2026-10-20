@@ -14,7 +14,7 @@ local Parameters = {
 	endPrivacyTag = "</a>"
 }
 
-return function(Frame) --[[ Line: 35 | Named "DisclaimerTextWithLinks" ]]
+return function(Frame)
 	-- upvalues: Parameters (copy), UseLocalizationFunction (copy), UseOpenDisclaimerLinksModule (copy), ReactModule (copy), LegalTextWithLinksModule (copy), RegisterAuditContentModule (copy), RegisterAdditionalAuditContentModule (copy), UrlBuilder (copy)
 	local IsEnableAuditContentCapture = Frame.enableAuditContentCapture == true
 	local Copy = table.clone(Parameters)
@@ -32,7 +32,7 @@ return function(Frame) --[[ Line: 35 | Named "DisclaimerTextWithLinks" ]]
 	return ReactModule.createElement(ReactModule.Fragment, nil, {
 		Text = ReactModule.createElement(LegalTextWithLinksModule, {
 			text = UseLocalizationResult.text,
-			onLinkActivated = ReactModule.useCallback(function(p1) --[[ Line: 51 ]]
+			onLinkActivated = ReactModule.useCallback(function(p1)
 				-- upvalues: UseOpenDisclaimerLinksModuleResult (copy)
 				if p1 == "terms" then
 					UseOpenDisclaimerLinksModuleResult.openTerms()

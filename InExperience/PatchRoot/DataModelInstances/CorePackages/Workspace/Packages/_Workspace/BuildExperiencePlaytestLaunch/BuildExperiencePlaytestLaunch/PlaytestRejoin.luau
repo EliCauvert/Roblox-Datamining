@@ -7,11 +7,11 @@ local BuildExperiencePlaytestRejoinDelayMs = game:DefineFastInt("BuildExperience
 local BuildExperiencePlaytestRejoinExpiryMs = game:DefineFastInt("BuildExperiencePlaytestRejoinExpiryMs", 60000)
 local GameMessageId = MessageBusService:GetMessageId("Game", "onGameLeave")
 
-local function _() --[[ Line: 27 | Named "now" ]]
+local function _()
 	return DateTime.now().UnixTimestampMillis
 end
 
-local function takeIntent() --[[ Line: 31 ]]
+local function takeIntent()
 	-- upvalues: MemStorageService (copy), HttpService (copy), BuildExperiencePlaytestRejoinExpiryMs (copy), Logger (copy)
 	local BuildExperiencePlaytestRejoinItem = MemStorageService:GetItem("BuildExperiencePlaytestRejoin")
 	
@@ -36,7 +36,7 @@ local function takeIntent() --[[ Line: 31 ]]
 end
 
 local PlaytestRejoinModule = {
-	request = function(PlaceId, Source, IsTeamTest) --[[ Line: 57 ]]
+	request = function(PlaceId, Source, IsTeamTest)
 		-- upvalues: MemStorageService (copy), HttpService (copy)
 		MemStorageService:SetItem("BuildExperiencePlaytestRejoin", HttpService:JSONEncode({
 			placeId = PlaceId,
@@ -45,7 +45,7 @@ local PlaytestRejoinModule = {
 			createdAt = DateTime.now().UnixTimestampMillis
 		}))
 	end,
-	resume = function(p1): boolean --[[ Line: 62 ]]
+	resume = function(p1): boolean
 		-- upvalues: takeIntent (copy), BuildExperiencePlaytestRejoinDelayMs (copy), LaunchExperienceModule (copy)
 		local TakeIntentResult = takeIntent()
 		
@@ -55,7 +55,7 @@ local PlaytestRejoinModule = {
 		local P3 = p1 or BuildExperiencePlaytestRejoinDelayMs
 		
 		if P3 > 0 then
-			task.delay(P3 / 1000, function() --[[ Line: 70 ]]
+			task.delay(P3 / 1000, function()
 				-- upvalues: LaunchExperienceModule (upval), TakeIntentResult (copy)
 				LaunchExperienceModule(TakeIntentResult.placeId, TakeIntentResult.source, TakeIntentResult.isTeamTest)
 			end)
@@ -66,15 +66,15 @@ local PlaytestRejoinModule = {
 	end
 }
 
-function PlaytestRejoinModule.listen() --[[ Line: 80 ]]
+function PlaytestRejoinModule.listen()
 	-- upvalues: PlaytestRejoinModule (copy), MessageBusService (copy), GameMessageId (copy)
 	PlaytestRejoinModule.resume()
-	local SubscribeResult = MessageBusService:Subscribe(GameMessageId, function() --[[ Line: 82 ]]
+	local SubscribeResult = MessageBusService:Subscribe(GameMessageId, function()
 		-- upvalues: PlaytestRejoinModule (upval)
 		PlaytestRejoinModule.resume()
 	end, false, false)
 	
-	return function() --[[ Line: 85 ]]
+	return function()
 		-- upvalues: SubscribeResult (copy)
 		SubscribeResult:Disconnect()
 	end

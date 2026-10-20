@@ -2,7 +2,7 @@
 local ReactModule = require(Parent.React)
 local GiftSheetLayoutView = require(Parent.Gifting).Components.GiftSheetLayoutView
 
-return function(p1) --[[ Line: 16 | Named "AvatarItemGiftReviewSheetPlaceholderView" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), GiftSheetLayoutView (copy)
 	return if p1.isVisible then ReactModule.createElement(GiftSheetLayoutView, {
 		isOpen = true,

@@ -21,7 +21,7 @@ local LocalizationService = game:GetService("LocalizationService")
 local UserGameSettings = UserSettings():GetService("UserGameSettings")
 local _ = require(script.Parent.Types)
 
-return function(p1) --[[ Line: 30 | Named "TiltLoadingScreenContainer" ]]
+return function(p1)
 	-- upvalues: FFlagEnableTiltLoadingScreen (copy), UseExperienceLoadingLifecycleModule (copy), UseDeferredLoadingLifecycleModule (copy), UserGameSettings (copy), ReactModule (copy), FFlagTiltLoadingScreenConsoleHints (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), GetBuilderIconForKeycodeFunction (copy), UseDeviceInsetsFunction (copy), InExperienceLocalesModule (copy), LocalizationService (copy), IsPioneerLaunchFunction (copy), ContextActionService (copy), FFlagIncreaseLoadingScreenOrder (copy), ConstantsModule (copy), FoundationModule (copy), LocalizationModule (copy), TiltLoadingScreenContentModule (copy), FFlagTiltLoadingScreenEnterExitHold (copy)
 	if FFlagEnableTiltLoadingScreen then
 		local HasDeferredJoin = p1.deferredJoin ~= nil
@@ -34,16 +34,16 @@ return function(p1) --[[ Line: 30 | Named "TiltLoadingScreenContainer" ]]
 		local IsUsePreferredInputResultMatch: boolean = FFlagTiltLoadingScreenConsoleHints and UsePreferredInputResult == ResponsiveModule.Input.Directional
 		local BuilderIconForKeycode = if IsUsePreferredInputResultMatch then GetBuilderIconForKeycodeFunction(Enum.KeyCode.ButtonB) else nil
 		local UseDeviceInsetsResult = UseDeviceInsetsFunction()
-		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 49 ]]
+		local UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: InExperienceLocalesModule (upval), LocalizationService (upval)
 			return InExperienceLocalesModule.Localization.new(LocalizationService.RobloxLocaleId)
 		end, {})
-		ReactModule.useEffect(function() --[[ Line: 53 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: IsPioneerLaunchFunction (upval), p1 (copy), ContextActionService (upval), UseRefResult (copy)
 			if IsPioneerLaunchFunction() then return end
 			local ContextActionService1 = p1.contextActionService or ContextActionService
 			local Flag = false
-			ContextActionService1:BindCoreAction("CancelGameLoad", function(_, UserInputState) --[[ Line: 59 ]]
+			ContextActionService1:BindCoreAction("CancelGameLoad", function(_, UserInputState)
 				-- upvalues: Flag (ref), UseRefResult (upval)
 				if UserInputState == Enum.UserInputState.Begin then
 					Flag = true
@@ -59,16 +59,16 @@ return function(p1) --[[ Line: 30 | Named "TiltLoadingScreenContainer" ]]
 				end
 			end, false, Enum.KeyCode.ButtonB)
 			
-			return function() --[[ Line: 70 ]]
+			return function()
 				-- upvalues: ContextActionService1 (copy)
 				ContextActionService1:UnbindCoreAction("CancelGameLoad")
 			end
 		end, { p1.contextActionService })
-		local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 74 ]]
+		local UseMemoResult1 = ReactModule.useMemo(function()
 			-- upvalues: ReducedMotion (copy)
 			return { reducedMotion = ReducedMotion }
 		end, { ReducedMotion })
-		local UseResult = ReactModule.useCallback(function() --[[ Line: 77 ]]
+		local UseResult = ReactModule.useCallback(function()
 			-- upvalues: UseRefResult (copy)
 			if UseRefResult.current then
 				UseRefResult.current(true)

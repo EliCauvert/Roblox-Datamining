@@ -12,17 +12,17 @@ local SduiErrorsModule = require(SduiCoreSystem.SduiErrors)
 local SduiParseHelpersModule = require(SduiCoreSystem.SduiParseHelpers)
 local _ = require(SduiCoreSystem.SduiComponentType)
 
-local function buildNestedComponentProp(p1, p2, p3, p4, p5, p6, p7) --[[ Line: 47 ]]
+local function buildNestedComponentProp(p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: SduiPropUtilsModule (copy), BuildConfigForComponentFunction (copy), SignalsModule (copy), BuildInputsForNestedComponentModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), SduiParseHelpersModule (copy), PropResultCategory (copy), buildNestedComponentProp (copy)
 	local CurrentComponentType = p5.currentComponentType
 	local CurrentParserName = p5.currentParserName
 	
 	if p1 == "literal" then
 		local ResolveTemplateFromDataResult = SduiPropUtilsModule.resolveTemplateFromData(p2, p5)
-		local ConfigForComponent = if p2.inline_component == nil then BuildConfigForComponentFunction(ResolveTemplateFromDataResult, SignalsModule.createComputed(function(p8) --[[ Line: 71 ]]
+		local ConfigForComponent = if p2.inline_component == nil then BuildConfigForComponentFunction(ResolveTemplateFromDataResult, SignalsModule.createComputed(function(p8)
 			-- upvalues: BuildInputsForNestedComponentModule (upval), p4 (copy), p2 (copy), p3 (copy), p5 (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), SduiParseHelpersModule (upval), CurrentComponentType (copy), CurrentParserName (copy)
 			local t = {}
-			local Success, Result = pcall(function() --[[ Line: 73 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: BuildInputsForNestedComponentModule (upval), p4 (upval), p2 (upval), p3 (upval), p8 (copy), t (copy), p5 (upval)
 				BuildInputsForNestedComponentModule(p4, p2.inputs, p3, p8, t, p5)
 			end)

@@ -38,17 +38,17 @@ local config = {
 }
 local BuildExperienceAudienceTooltipMaxWidth = game:DefineFastInt("BuildExperienceAudienceTooltipMaxWidth", 220)
 
-local function _(p1) --[[ Line: 70 | Named "getSelectedAudience" ]]
+local function _(p1)
 	-- upvalues: config (copy), UniverseConfigurationModule (copy)
 	return if p1 == nil then nil else config[UniverseConfigurationModule.getPrivacyTypeForAudiences(p1)]
 end
 
-local _ = function(Friends): boolean --[[ Line: 76 | Named "isVisibilityAudience" ]]
+local _ = function(Friends): boolean
 	-- upvalues: UniverseActivationModule (copy)
 	return Friends == UniverseActivationModule.Audience.Public or Friends == UniverseActivationModule.Audience.Friends
 end
 
-local function getAudiencesForValue(p1, Audiences) --[[ Line: 80 ]]
+local function getAudiencesForValue(p1, Audiences)
 	-- upvalues: UniverseActivationModule (copy)
 	local List = {}
 	
@@ -68,9 +68,9 @@ local function getAudiencesForValue(p1, Audiences) --[[ Line: 80 ]]
 	return List
 end
 
-local function AudienceRow(Frame: Frame) --[[ Line: 111 ]]
+local function AudienceRow(Frame: Frame)
 	-- upvalues: ReactModule (copy), Icon (copy), IconName (copy), IconSize (copy), View (copy), List (copy), RadioGroup (copy), InputSize (copy)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 112 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: Frame (copy)
 		Frame.onActivated(Frame.value)
 	end, { Frame.onActivated, Frame.value })
@@ -107,7 +107,7 @@ local function AudienceRow(Frame: Frame) --[[ Line: 111 ]]
 	})
 end
 
-local _ = function(p2, p3, p4) --[[ Line: 181 | Named "getSelectedAudienceFromState" ]]
+local _ = function(p2, p3, p4)
 	-- upvalues: config (copy), UniverseConfigurationModule (copy)
 	if p2 ~= nil then
 		return p2
@@ -120,22 +120,22 @@ local _ = function(p2, p3, p4) --[[ Line: 181 | Named "getSelectedAudienceFromSt
 	end
 end
 
-local function getUniverseActivationStore(p2) --[[ Line: 193 ]]
+local function getUniverseActivationStore(p2)
 	-- upvalues: UniverseActivationModule (copy)
 	return UniverseActivationModule.getUniverseActivationStore(p2)
 end
 
-local function getQuestionnaireStore(p2) --[[ Line: 197 ]]
+local function getQuestionnaireStore(p2)
 	-- upvalues: ExperienceQuestionnaireModule (copy)
 	return ExperienceQuestionnaireModule.getExperienceQuestionnaireStore(p2)
 end
 
-local function getUniverseConfigurationStore(p2) --[[ Line: 201 ]]
+local function getUniverseConfigurationStore(p2)
 	-- upvalues: UniverseConfigurationModule (copy)
 	return UniverseConfigurationModule.getUniverseConfigurationStore(p2)
 end
 
-local function useAudienceStores() --[[ Line: 205 ]]
+local function useAudienceStores()
 	-- upvalues: SignalsReactModule (copy), getUniverseActivationStore (copy), getQuestionnaireStore (copy), getUniverseConfigurationStore (copy)
 	return {
 		universeActivationStore = SignalsReactModule.useSignalState(getUniverseActivationStore),
@@ -144,38 +144,38 @@ local function useAudienceStores() --[[ Line: 205 ]]
 	}
 end
 
-local function useAudienceData(UniverseId, UniverseActivationStore, UniverseConfigurationStore, SelectedAudience) --[[ Line: 217 ]]
+local function useAudienceData(UniverseId, UniverseActivationStore, UniverseConfigurationStore, SelectedAudience)
 	-- upvalues: ReactModule (copy), Debug (copy), FormatErrorModule (copy), SignalsReactModule (copy), ContentMaturityUtilsModule (copy), config (copy), UniverseConfigurationModule (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 223 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UniverseConfigurationStore (copy), UniverseId (copy)
 		return UniverseConfigurationStore.getAndFetchConfiguration(UniverseId)
 	end, { UniverseId, UniverseConfigurationStore })
 	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
-	ReactModule.useEffect(function() --[[ Line: 229 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), UniverseConfigurationStore (copy), UniverseId (copy), Debug (upval), FormatErrorModule (upval)
 		local Flag = true
 		UseStateResult2(true)
-		UniverseConfigurationStore.refreshConfiguration(UniverseId):catch(function(Err) --[[ Line: 234 ]]
+		UniverseConfigurationStore.refreshConfiguration(UniverseId):catch(function(Err)
 			-- upvalues: Debug (upval), FormatErrorModule (upval), UniverseId (upval)
 			Debug.log("warn", "AudienceConfigurationContent configuration refresh failed", {
 				errorMessage = FormatErrorModule(Err),
 				universeId = UniverseId
 			})
-		end):finally(function() --[[ Line: 240 ]]
+		end):finally(function()
 			-- upvalues: Flag (ref), UseStateResult2 (upval)
 			if Flag then
 				UseStateResult2(false)
 			end
 		end)
 		
-		return function() --[[ Line: 246 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = false
 		end
 	end, { UniverseConfigurationStore, UniverseId })
 	local UseSignalStateResult = SignalsReactModule.useSignalState(UseMemoResult.data)
 	local HasUseSignalStateResult: boolean = SignalsReactModule.useSignalState(UseMemoResult.status) == "Ready" and UseSignalStateResult ~= nil
-	local UseSignalStateResult1 = SignalsReactModule.useSignalState(ReactModule.useMemo(function() --[[ Line: 256 ]]
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(ReactModule.useMemo(function()
 		-- upvalues: UniverseActivationStore (copy), UniverseId (copy)
 		return UniverseActivationStore.getAndFetchEligibility(UniverseId)
 	end, { UniverseActivationStore, UniverseId }).status)
@@ -206,24 +206,24 @@ local function useAudienceData(UniverseId, UniverseActivationStore, UniverseConf
 	return config1
 end
 
-local function useQuestionnaireHandler(UniverseId, QuestionnaireStore) --[[ Line: 282 ]]
+local function useQuestionnaireHandler(UniverseId, QuestionnaireStore)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOpenWebViewFunction (copy), ReactModule (copy), RefreshPublishEligibilityModule (copy), GameConfigurationActionsModule (copy)
 	local CreatorHub = UseLocalizationFunction({
 		creatorHub = LocalizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB
 	}).creatorHub
 	local UseOpenWebViewResult = UseOpenWebViewFunction()
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 289 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: RefreshPublishEligibilityModule (upval), UniverseId (copy)
 		RefreshPublishEligibilityModule(UniverseId)
 	end, { QuestionnaireStore, UniverseId })
 	
-	return ReactModule.useCallback(function() --[[ Line: 295 ]]
+	return ReactModule.useCallback(function()
 		-- upvalues: UseOpenWebViewResult (copy), GameConfigurationActionsModule (upval), UniverseId (copy), CreatorHub (copy), UseResult (copy)
 		UseOpenWebViewResult(GameConfigurationActionsModule.getExperienceQuestionnaireUrl(UniverseId), CreatorHub, UseResult)
 	end, { CreatorHub, UseOpenWebViewResult, UseResult, UniverseId })
 end
 
-local _ = function(p2) --[[ Line: 304 | Named "cancelEligibilityRecheck" ]]
+local _ = function(p2)
 	local Current = p2.current
 	p2.current = nil
 	
@@ -232,7 +232,7 @@ local _ = function(p2) --[[ Line: 304 | Named "cancelEligibilityRecheck" ]]
 	end
 end
 
-local function useAudienceController(UniverseId) --[[ Line: 312 ]]
+local function useAudienceController(UniverseId)
 	-- upvalues: useAudienceStores (copy), ReactModule (copy), useAudienceData (copy), useQuestionnaireHandler (copy), getAudiencesForValue (copy), GameConfigurationActionsModule (copy), FFlagEnableBuildAdPromotionModule (copy), RefreshAdCampaignEligibilityModule (copy), Debug (copy), FormatErrorModule (copy), ContentMaturityUtilsModule (copy)
 	local UseAudienceStoresResult = useAudienceStores()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
@@ -240,9 +240,9 @@ local function useAudienceController(UniverseId) --[[ Line: 312 ]]
 	local UseRefResult1 = nil
 	local UseRefResult = ReactModule.useRef(nil)
 	UseRefResult1 = UseRefResult
-	ReactModule.useEffect(function() --[[ Line: 319 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy)
-		return function() --[[ Line: 320 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			local Current = UseRefResult.current
 			UseRefResult.current = nil
@@ -253,7 +253,7 @@ local function useAudienceController(UniverseId) --[[ Line: 312 ]]
 		end
 	end, { UseRefResult, UniverseId })
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 326 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_2 (copy)
 		UseStateResult2_2(nil)
 	end, {})
@@ -264,43 +264,43 @@ local function useAudienceController(UniverseId) --[[ Line: 312 ]]
 	local NoIsAudiencesReady = not UseAudienceDataResult.isAudiencesReady or (UseStateResult1 or IsConfigurationRefreshPending)
 	
 	return {
-		handleAudienceActivated = ReactModule.useCallback(function(p2) --[[ Line: 341 ]]
+		handleAudienceActivated = ReactModule.useCallback(function(p2)
 			-- upvalues: UseStateResult2_2 (copy), NoIsAudiencesReady (copy), getAudiencesForValue (upval), ConfigurationData (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), UseAudienceStoresResult (copy), UniverseId (copy), GameConfigurationActionsModule (upval), FFlagEnableBuildAdPromotionModule (upval), RefreshAdCampaignEligibilityModule (upval), Debug (upval), FormatErrorModule (upval), IsNonPrivateLocked (copy), UseRefResult1 (ref), ContentMaturityUtilsModule (upval)
-			local function _() --[[ Line: 342 | Named "showLockedTooltip" ]]
+			local function _()
 				-- upvalues: UseStateResult2_2 (upval), p2 (copy)
-				UseStateResult2_2(function(p3) --[[ Line: 343 ]]
+				UseStateResult2_2(function(p3)
 					-- upvalues: p2 (upval)
 					return if p3 == p2 then nil else p2
 				end)
 			end
 			
-			local function applyAudienceChange() --[[ Line: 348 ]]
+			local function applyAudienceChange()
 				-- upvalues: NoIsAudiencesReady (upval), getAudiencesForValue (upval), p2 (copy), ConfigurationData (upval), UseStateResult2_2 (upval), UseStateResult2 (upval), UseStateResult2_1 (upval), UseAudienceStoresResult (upval), UniverseId (upval), GameConfigurationActionsModule (upval), FFlagEnableBuildAdPromotionModule (upval), RefreshAdCampaignEligibilityModule (upval), Debug (upval), FormatErrorModule (upval)
 				if not NoIsAudiencesReady then
 					local AudiencesForValue = getAudiencesForValue(p2, ConfigurationData.audiences)
 					UseStateResult2_2(nil)
 					UseStateResult2(p2)
 					UseStateResult2_1(true)
-					UseAudienceStoresResult.universeActivationStore.setAudiences(UniverseId, AudiencesForValue):andThen(function(Result) --[[ Line: 364 ]]
+					UseAudienceStoresResult.universeActivationStore.setAudiences(UniverseId, AudiencesForValue):andThen(function(Result)
 						-- upvalues: GameConfigurationActionsModule (upval), UniverseId (upval), UseAudienceStoresResult (upval), FFlagEnableBuildAdPromotionModule (upval), RefreshAdCampaignEligibilityModule (upval), Debug (upval), FormatErrorModule (upval), UseStateResult2 (upval), UseStateResult2_1 (upval)
 						GameConfigurationActionsModule.updateCachedAudience(UniverseId, Result.audiences)
-						UseAudienceStoresResult.universeActivationStore.activate(UniverseId):andThen(function() --[[ Line: 368 ]]
+						UseAudienceStoresResult.universeActivationStore.activate(UniverseId):andThen(function()
 							-- upvalues: FFlagEnableBuildAdPromotionModule (upval), RefreshAdCampaignEligibilityModule (upval), UniverseId (upval)
 							if FFlagEnableBuildAdPromotionModule then
 								RefreshAdCampaignEligibilityModule(UniverseId)
 							end
-						end):catch(function(Err) --[[ Line: 375 ]]
+						end):catch(function(Err)
 							-- upvalues: Debug (upval), FormatErrorModule (upval), UniverseId (upval), UseStateResult2 (upval)
 							Debug.log("warn", "AudienceConfigurationContent activate after audience update failed", {
 								errorMessage = FormatErrorModule(Err),
 								universeId = UniverseId
 							})
 							UseStateResult2(nil)
-						end):finally(function() --[[ Line: 386 ]]
+						end):finally(function()
 							-- upvalues: UseStateResult2_1 (upval)
 							UseStateResult2_1(false)
 						end)
-					end):catch(function(Err) --[[ Line: 390 ]]
+					end):catch(function(Err)
 						-- upvalues: Debug (upval), FormatErrorModule (upval), UniverseId (upval), UseStateResult2 (upval), UseStateResult2_1 (upval)
 						Debug.log("warn", "AudienceConfigurationContent set audiences failed", {
 							errorMessage = FormatErrorModule(Err),
@@ -317,7 +317,7 @@ local function useAudienceController(UniverseId) --[[ Line: 312 ]]
 			local IsNotPrivate: boolean = IsNonPrivateLocked and p2 ~= "Private"
 			
 			if IsNotPrivate then
-				UseStateResult2_2(function(p3) --[[ Line: 343 ]]
+				UseStateResult2_2(function(p3)
 					-- upvalues: p2 (copy)
 					return if p3 == p2 then nil else p2
 				end)
@@ -343,7 +343,7 @@ local function useAudienceController(UniverseId) --[[ Line: 312 ]]
 			end
 			local RefreshEligibilityResult = UseAudienceStoresResult.universeActivationStore.refreshEligibility(UniverseId)
 			UseRefResult.current = RefreshEligibilityResult
-			RefreshEligibilityResult:catch(function(Err) --[[ Line: 426 ]]
+			RefreshEligibilityResult:catch(function(Err)
 				-- upvalues: UseRefResult (copy), RefreshEligibilityResult (copy), Debug (upval), FormatErrorModule (upval), UniverseId (upval)
 				if UseRefResult.current == RefreshEligibilityResult then
 					Debug.log("warn", "AudienceConfigurationContent eligibility recheck failed", {
@@ -351,7 +351,7 @@ local function useAudienceController(UniverseId) --[[ Line: 312 ]]
 						universeId = UniverseId
 					})
 				end
-			end):finally(function() --[[ Line: 434 ]]
+			end):finally(function()
 				-- upvalues: UseRefResult (copy), RefreshEligibilityResult (copy), ContentMaturityUtilsModule (upval), UniverseId (upval), IsNotPrivate (copy), UseStateResult2 (upval), UseStateResult2_1 (upval), UseStateResult2_2 (upval), p2 (copy), applyAudienceChange (copy)
 				if UseRefResult.current ~= RefreshEligibilityResult then return end
 				UseRefResult.current = nil
@@ -364,7 +364,7 @@ local function useAudienceController(UniverseId) --[[ Line: 312 ]]
 				if not IsNotPrivate then
 					UseStateResult2(nil)
 					UseStateResult2_1(false)
-					UseStateResult2_2(function(p3) --[[ Line: 343 ]]
+					UseStateResult2_2(function(p3)
 						-- upvalues: p2 (upval)
 						return if p3 == p2 then nil else p2
 					end)
@@ -386,7 +386,7 @@ local function useAudienceController(UniverseId) --[[ Line: 312 ]]
 	}
 end
 
-local function AudienceHeader() --[[ Line: 477 ]]
+local function AudienceHeader()
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), View (copy), Text (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		body = LocalizationStringsModule.GAME_CONFIGURATION_AUDIENCE_BODY,
@@ -410,7 +410,7 @@ local function AudienceHeader() --[[ Line: 477 ]]
 	})
 end
 
-local function AudienceList(p2) --[[ Line: 512 ]]
+local function AudienceList(p2)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), RadioGroup (copy), List (copy), InputSize (copy), AudienceRow (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		friends = LocalizationStringsModule.GAME_CONFIGURATION_AUDIENCE_FRIENDS,
@@ -422,7 +422,7 @@ local function AudienceList(p2) --[[ Line: 512 ]]
 		LayoutOrder = 2,
 		Selectable = false,
 		tag = "size-full-0 auto-y",
-		onValueChanged = ReactModule.useCallback(function(p3) --[[ Line: 521 ]]
+		onValueChanged = ReactModule.useCallback(function(p3)
 			-- upvalues: p2 (copy)
 			p2.onAudienceActivated(p3)
 		end, { p2.onAudienceActivated }),
@@ -468,7 +468,7 @@ local function AudienceList(p2) --[[ Line: 512 ]]
 	})
 end
 
-local function EligibilityTooltip(p2) --[[ Line: 583 ]]
+local function EligibilityTooltip(p2)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseTokensFunction (copy), UseScaledValueFunction (copy), BuildExperienceAudienceTooltipMaxWidth (copy), ReactModule (copy), Popover (copy), PopoverAlign (copy), Radius (copy), PopoverSide (copy), View (copy), Text (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		notEligible = LocalizationStringsModule.GAME_CONFIGURATION_AUDIENCE_NOT_ELIGIBLE,
@@ -520,7 +520,7 @@ local function EligibilityTooltip(p2) --[[ Line: 583 ]]
 	})
 end
 
-local function EligibilityBanner(p2) --[[ Line: 648 ]]
+local function EligibilityBanner(p2)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy)
 	return ReactModule.createElement(View, {
 		LayoutOrder = 3,
@@ -551,7 +551,7 @@ local function EligibilityBanner(p2) --[[ Line: 648 ]]
 	})
 end
 
-return function(p2) --[[ Line: 681 | Named "AudienceConfigurationContent" ]]
+return function(p2)
 	-- upvalues: useAudienceController (copy), ReactModule (copy), View (copy), AudienceHeader (copy), AudienceList (copy), EligibilityTooltip (copy), EligibilityBanner (copy)
 	local TestId = p2.testId or "audience-configuration-content"
 	local UseAudienceControllerResult = useAudienceController(p2.universeId)

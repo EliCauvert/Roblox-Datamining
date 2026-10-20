@@ -14,7 +14,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local LinkButton = UIBloxModule.App.Button.LinkButton
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 
-function DSAReportLink() --[[ Line: 26 ]]
+function DSAReportLink()
 	-- upvalues: UseStyleFunction (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), IsInExperienceUIVREnabled (copy), UseLocalizationFunction (copy), ReactModule (copy), StyledTextLabel (copy), LinkButton (copy), HttpService (copy), ConstantsModule (copy), GuiService (copy)
 	local UseStyleResult = UseStyleFunction()
 	local IsUsePreferredInputResultMatch = UsePreferredInputFunction() == ResponsiveModule.Input.Directional
@@ -56,7 +56,7 @@ function DSAReportLink() --[[ Line: 26 ]]
 			fontStyle = if IsUsePreferredInputResultMatch then "CaptionBody" else "Footer",
 			size = UDim2.new(0, 100, 0, 20),
 			text = UseLocalizationResult.reportLinkText,
-			onActivated = function() --[[ Line: 59 ]]
+			onActivated = function()
 				-- upvalues: HttpService (upval), ConstantsModule (upval), GuiService (upval)
 				GuiService:BroadcastNotification(HttpService:JSONEncode({
 					presentationStyle = nil,
@@ -69,7 +69,7 @@ function DSAReportLink() --[[ Line: 26 ]]
 	})
 end
 
-function WrapperContainer() --[[ Line: 95 ]]
+function WrapperContainer()
 	-- upvalues: ReactModule (copy), StyleProviderWithDefaultTheme (copy)
 	return ReactModule.createElement(StyleProviderWithDefaultTheme, { withDarkTheme = true }, { Button = ReactModule.createElement(DSAReportLink) })
 end

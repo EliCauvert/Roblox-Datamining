@@ -2,7 +2,7 @@
 local IsOverLengthModule = require(AppChat.Utils.isOverLength)
 local FFlagAppChatUseGraphemeMessageLengthModule = require(AppChat.Flags.FFlagAppChatUseGraphemeMessageLength)
 
-return function(p1, p2): boolean --[[ Line: 9 ]]
+return function(p1, p2): boolean
 	-- upvalues: FFlagAppChatUseGraphemeMessageLengthModule (copy), IsOverLengthModule (copy)
 	if FFlagAppChatUseGraphemeMessageLengthModule then
 		if IsOverLengthModule(p1, p2, 300) then

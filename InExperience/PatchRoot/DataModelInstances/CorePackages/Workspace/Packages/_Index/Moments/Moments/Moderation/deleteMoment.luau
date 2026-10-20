@@ -4,7 +4,7 @@ local PromiseModule = require(Parent.Promise)
 local FFlagMomentsPassFeedItemIdToBackendApis = require(Parent.SharedFlags).FFlagMomentsPassFeedItemIdToBackendApis
 local Text = require(Parent.Http).Url.APIS_URL .. "content-captures-api/v2/moments/"
 
-return function(p1, Network, Text1) --[[ Line: 22 | Named "deleteMoment" ]]
+return function(p1, Network, Text1)
 	-- upvalues: FFlagMomentsPassFeedItemIdToBackendApis (copy), PromiseModule (copy), HttpClientModule (copy), Text (copy)
 	local v1: string = p1
 	
@@ -19,7 +19,7 @@ return function(p1, Network, Text1) --[[ Line: 22 | Named "deleteMoment" ]]
 		analyticsKey = "moments.delete-moment",
 		url = Text .. v1,
 		network = Network,
-		decode = function(_) --[[ Line: 36 ]]
+		decode = function(_)
 			return { ok = true }
 		end
 	}))

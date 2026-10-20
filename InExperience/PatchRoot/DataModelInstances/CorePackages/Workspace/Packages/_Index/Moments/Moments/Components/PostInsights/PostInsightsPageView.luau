@@ -31,9 +31,9 @@ local EventMap = {
 }
 local Frozen = table.freeze({ ZIndex = require(Moments.Constants).DisplayOrder.Modals })
 
-local function noop() --[[ Line: 65 ]] end
+local function noop() end
 
-local function Thumbnail(Frame) --[[ Line: 67 ]]
+local function Thumbnail(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), _Vector2 (copy), MomentMediaTile (copy)
 	return ReactModule.createElement(View, {
 		tag = "radius-small clip bg-surface-300",
@@ -46,7 +46,7 @@ local function Thumbnail(Frame) --[[ Line: 67 ]]
 	})
 end
 
-local function InteractionCounts(Frame) --[[ Line: 85 ]]
+local function InteractionCounts(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Icon (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Elements = {}
@@ -81,7 +81,7 @@ local function InteractionCounts(Frame) --[[ Line: 85 ]]
 	}, Elements)
 end
 
-local function Summary(Frame: Frame) --[[ Line: 123 ]]
+local function Summary(Frame: Frame)
 	-- upvalues: ReactModule (copy), View (copy), Thumbnail (copy), Text (copy), InteractionCounts (copy)
 	local ViewProps = Frame.viewProps
 	
@@ -116,7 +116,7 @@ local function Summary(Frame: Frame) --[[ Line: 123 ]]
 	})
 end
 
-local function SectionHeading(Frame) --[[ Line: 171 ]]
+local function SectionHeading(Frame)
 	-- upvalues: ReactModule (copy), Text (copy)
 	return ReactModule.createElement(Text, {
 		tag = "auto-xy text-heading-small content-emphasis",
@@ -125,7 +125,7 @@ local function SectionHeading(Frame) --[[ Line: 171 ]]
 	})
 end
 
-local function Metric(Frame) --[[ Line: 179 ]]
+local function Metric(Frame)
 	-- upvalues: ReactModule (copy), View (copy), Text (copy)
 	return ReactModule.createElement(View, {
 		tag = "col fill gap-xxsmall auto-y padding-x-xsmall padding-y-small",
@@ -145,7 +145,7 @@ local function Metric(Frame) --[[ Line: 179 ]]
 	})
 end
 
-local function OverviewSection(Frame) --[[ Line: 198 ]]
+local function OverviewSection(Frame)
 	-- upvalues: ReactModule (copy), SectionHeading (copy), Metric (copy), View (copy)
 	local config = {
 		Heading = ReactModule.createElement(SectionHeading, { LayoutOrder = 1, text = Frame.heading })
@@ -177,7 +177,7 @@ local function OverviewSection(Frame) --[[ Line: 198 ]]
 	}, config)
 end
 
-local function EngagementSection(Frame) --[[ Line: 229 ]]
+local function EngagementSection(Frame)
 	-- upvalues: ReactModule (copy), View (copy), Reaction (copy), ReactionSize (copy), Text (copy), SectionHeading (copy)
 	local Elements = {}
 	
@@ -234,7 +234,7 @@ local function EngagementSection(Frame) --[[ Line: 229 ]]
 	})
 end
 
-return function(ViewProps) --[[ Line: 285 | Named "PostInsightsPageView" ]]
+return function(ViewProps)
 	-- upvalues: UseDeviceInsetsFunction (copy), UseFormFactorFunction (copy), FormFactor (copy), ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), Frozen (copy), View (copy), noop (copy), StateLayerAffordance (copy), HeaderBar (copy), IconName (copy), Text (copy), ScrollView (copy), Summary (copy), OverviewSection (copy), EngagementSection (copy)
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local OnBackFunction = ViewProps.onBack
@@ -243,11 +243,11 @@ return function(ViewProps) --[[ Line: 285 | Named "PostInsightsPageView" ]]
 		isAutoFocusRoot = true,
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay,
 		eventMap = EventMap,
-		eventHandlers = ReactModule.useMemo(function() --[[ Line: 290 ]]
+		eventHandlers = ReactModule.useMemo(function()
 			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), OnBackFunction (copy)
 			return {
 				[FocusNavigationEventNameEnum.NavigateBack] = {
-					handler = InputHandlersModule.onRelease(function(p1) --[[ Line: 293 ]]
+					handler = InputHandlersModule.onRelease(function(p1)
 						-- upvalues: OnBackFunction (upval)
 						OnBackFunction()
 						p1:cancel()

@@ -6,7 +6,7 @@ local list = {
 	"rawFrameTimesMs", "rawScrollPositionSamplesCsv"
 }
 
-return function(p1, p2, p3, p4) --[[ Line: 65 | Named "createScrollIntervalPerformanceTracker" ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: list (copy), IntervalPerformanceTrackerModule (copy), ScrollIntervalTrackerModule (copy)
 	local MetricsToTrack = if p4 and p4.metricsToTrack then p4.metricsToTrack else list
 	local NoP3 = not p4 or p4.countersEnabled == nil or p4.countersEnabled
@@ -15,7 +15,7 @@ return function(p1, p2, p3, p4) --[[ Line: 65 | Named "createScrollIntervalPerfo
 	local ExtraFields = if p4 then p4.extraFields else nil
 	local Flag = false
 	
-	local function _() --[[ Line: 84 | Named "buildExtraFields" ]]
+	local function _()
 		-- upvalues: Flag (ref), NoP3_2 (copy), ExtraFields (copy)
 		local Warm: string = if Flag then "warm" else "cold"
 		
@@ -34,7 +34,7 @@ return function(p1, p2, p3, p4) --[[ Line: 65 | Named "createScrollIntervalPerfo
 		return t
 	end
 	
-	return ScrollIntervalTrackerModule.createScrollIntervalTracker(function(_): boolean --[[ Line: 101 | Named "tryStart" ]]
+	return ScrollIntervalTrackerModule.createScrollIntervalTracker(function(_): boolean
 		-- upvalues: IntervalPerformanceTrackerModule (upval), p1 (copy), MetricsToTrack (copy), NoP3 (copy), NoP3_1 (copy), Flag (ref), NoP3_2 (copy), ExtraFields (copy), p2 (copy)
 		local v1 = nil
 		local Warm: string = if Flag then "warm" else "cold"
@@ -57,7 +57,7 @@ return function(p1, p2, p3, p4) --[[ Line: 65 | Named "createScrollIntervalPerfo
 		Flag = true
 		
 		return true
-	end, function(_) --[[ Line: 115 | Named "finish" ]]
+	end, function(_)
 		-- upvalues: IntervalPerformanceTrackerModule (upval), p1 (copy)
 		IntervalPerformanceTrackerModule:stopAndLogTracking(p1)
 	end, p2, p3, if p4 then p4.scrollOptions else nil)

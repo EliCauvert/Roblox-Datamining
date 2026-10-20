@@ -19,12 +19,12 @@ local config = {
 	DressSkirtAccessory = "Dresses & Skirts"
 }
 
-local function _(p1): boolean --[[ Line: 38 | Named "isBundle" ]]
+local function _(p1): boolean
 	-- upvalues: EnumsModule (copy)
 	return p1.itemType == EnumsModule.ItemTypes.Bundle or p1.itemType == "Bundle"
 end
 
-local function getAssetTypeDisplayName(ItemSubType, AssetTypeNames) --[[ Line: 47 ]]
+local function getAssetTypeDisplayName(ItemSubType, AssetTypeNames)
 	-- upvalues: config (copy)
 	if not ItemSubType then
 		return ""
@@ -46,22 +46,22 @@ local function getAssetTypeDisplayName(ItemSubType, AssetTypeNames) --[[ Line: 4
 end
 
 return {
-	isPurchasableStatus = function(Free): boolean --[[ Line: 32 ]]
+	isPurchasableStatus = function(Free): boolean
 		-- upvalues: PriceStatus (copy)
 		return Free == PriceStatus.Free or (Free == PriceStatus.PurchaseFromRoblox or Free == PriceStatus.PurchaseFromResale)
 	end,
-	getPriceStatus = function(p1) --[[ Line: 96 ]]
+	getPriceStatus = function(p1)
 		-- upvalues: GetPriceStatusInShopFunction (copy)
 		return GetPriceStatusInShopFunction(p1)
 	end,
 	PriceStatusEnum = PriceStatus,
-	getThumbnailUrl = function(p1) --[[ Line: 42 ]]
+	getThumbnailUrl = function(p1)
 		-- upvalues: EnumsModule (copy), BundleThumbnail (copy), Asset (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy)
 		local IsItemTypeMatch: boolean = p1.itemType == EnumsModule.ItemTypes.Bundle or p1.itemType == "Bundle"
 		
 		return GetRbxthumbWithTypeSizeAndOptionsFunction(p1.id, if IsItemTypeMatch then BundleThumbnail else Asset, 150)
 	end,
-	getItemTypeDisplayName = function(p1, p2) --[[ Line: 69 ]]
+	getItemTypeDisplayName = function(p1, p2)
 		-- upvalues: EnumsModule (copy), getAssetTypeDisplayName (copy)
 		if p1.taxonomyName then
 			return p1.taxonomyName
@@ -72,7 +72,7 @@ return {
 			return if IsItemTypeMatch then if p1.itemSubType and AssetTypeNames and AssetTypeNames[p1.itemSubType] then AssetTypeNames[p1.itemSubType] elseif p2 and p2.bundle then p2.bundle else "Bundle" else getAssetTypeDisplayName(p1.itemSubType, AssetTypeNames)
 		end
 	end,
-	shouldShowBundleParts = function(p1): boolean --[[ Line: 86 ]]
+	shouldShowBundleParts = function(p1): boolean
 		-- upvalues: GetPriceStatusInShopFunction (copy), PriceStatus (copy)
 		local PriceStatusInShop = GetPriceStatusInShopFunction(p1)
 		

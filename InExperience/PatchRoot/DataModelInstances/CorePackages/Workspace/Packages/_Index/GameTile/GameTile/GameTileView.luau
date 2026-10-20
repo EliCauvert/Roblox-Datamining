@@ -19,7 +19,7 @@ local FFlagLuaAppMigrateGameTileHoverFixes = require(Parent.SharedFlags).FFlagLu
 local FFlagLuaAppGameViewTileBackgroundColorOverride = require(Parent.SharedFlags).FFlagLuaAppGameViewTileBackgroundColorOverride
 local FFlagLuaAppHomePageFirstImageLoadObserver = require(Parent.SharedFlags).FFlagLuaAppHomePageFirstImageLoadObserver
 
-return function(Gui) --[[ Line: 100 | Named "GameTileView" ]]
+return function(Gui)
 	-- upvalues: UseDesignTokensFunction (copy), UseTokensFunction (copy), GameTileViewConfigModule (copy), UseCursorFunction (copy), FFlagLuaAppMigrateGameTileHoverFixes (copy), FFlagLuaAppGameViewTileBackgroundColorOverride (copy), ReactModule (copy), FFlagLuaAppContinueSortInstantPlay (copy), ZoomAnimatedFrameModule (copy), ImageSetLabel (copy), Images (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), LoadableImage (copy), RightAlignedButtonWrapperModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local NumLinesForTitle = if Gui.isUnifiedGameTile then Gui.numLinesForTitle or 1 else nil
@@ -59,7 +59,7 @@ return function(Gui) --[[ Line: 100 | Named "GameTileView" ]]
 	end
 	local UseRefResult = nil
 	UseRefResult = ReactModule.useRef(false)
-	local UseResult = ReactModule.useCallback(function(...) --[[ Line: 201 ]]
+	local UseResult = ReactModule.useCallback(function(...)
 		-- upvalues: UseRefResult (ref), Gui (copy)
 		UseRefResult.current = false
 		
@@ -67,7 +67,7 @@ return function(Gui) --[[ Line: 100 | Named "GameTileView" ]]
 			Gui.onGuiStateChanged(...)
 		end
 	end, { Gui.onGuiStateChanged })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 208 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: Gui (copy), UseRefResult (ref)
 		if Gui.onTouchLongPress and not Gui.isDisabled then
 			UseRefResult.current = true
@@ -77,7 +77,7 @@ return function(Gui) --[[ Line: 100 | Named "GameTileView" ]]
 			end
 		end
 	end, { Gui.onTouchLongPress, Gui.isDisabled })
-	local UseResult2 = if FFlagLuaAppContinueSortInstantPlay then ReactModule.useCallback(function() --[[ Line: 232 ]]
+	local UseResult2 = if FFlagLuaAppContinueSortInstantPlay then ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (ref), Gui (copy)
 		if UseRefResult.current then
 			UseRefResult.current = false
@@ -118,7 +118,7 @@ return function(Gui) --[[ Line: 100 | Named "GameTileView" ]]
 			SelectionImageObject = UseCursorResult,
 			Active = not Gui.isDisabled,
 			[ReactModule.Change.GuiState] = UseResult,
-			[ReactModule.Event.Activated] = ReactModule.useCallback(function() --[[ Line: 218 ]]
+			[ReactModule.Event.Activated] = ReactModule.useCallback(function()
 				-- upvalues: UseRefResult (ref), Gui (copy)
 				if UseRefResult.current then
 					UseRefResult.current = false

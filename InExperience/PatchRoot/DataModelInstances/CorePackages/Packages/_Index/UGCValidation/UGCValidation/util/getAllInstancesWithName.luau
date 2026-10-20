@@ -1,4 +1,4 @@
-﻿return function(Object, Name) --[[ Line: 1 ]]
+﻿return function(Object, Name)
 	local Descendants = Object:GetDescendants()
 	table.insert(Descendants, Object)
 	local List = {}

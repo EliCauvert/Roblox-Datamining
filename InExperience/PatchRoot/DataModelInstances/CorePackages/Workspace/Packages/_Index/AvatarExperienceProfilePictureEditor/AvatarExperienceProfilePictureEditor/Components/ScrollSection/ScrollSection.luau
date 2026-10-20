@@ -11,7 +11,7 @@ local Scroll = {
 	scrollBarVisibility = FoundationModule.Enums.Visibility.Auto
 }
 
-local function renderScrollView(p1) --[[ Line: 40 ]]
+local function renderScrollView(p1)
 	-- upvalues: ReactModule (copy), ScrollView (copy), Scroll (copy), View (copy)
 	return ReactModule.createElement(ScrollView, {
 		tag = "grow size-full-0",
@@ -25,28 +25,28 @@ local function renderScrollView(p1) --[[ Line: 40 ]]
 	})
 end
 
-local function _(ScrollFrame): boolean --[[ Line: 55 | Named "hasVerticalScrollOverflow" ]]
+local function _(ScrollFrame): boolean
 	return ScrollFrame.AbsoluteWindowSize.Y + 1 < ScrollFrame.AbsoluteCanvasSize.Y
 end
 
-return function(p1) --[[ Line: 59 | Named "ScrollSection" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), Divider (copy), View (copy), renderScrollView (copy)
 	local PinHeader = p1.pinHeader
 	local UseInternalScroll = p1.useInternalScroll
 	local Children = p1.children
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 66 ]]
+	local UseResult = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(ScrollFrame.AbsoluteWindowSize.Y + 1 < ScrollFrame.AbsoluteCanvasSize.Y)
 	end, {})
 	local Element = if UseStateResult then ReactModule.createElement(Divider, { LayoutOrder = 2, Size = UDim2.new(1, 0, 0, 1) }) else nil
 	local Element1 = if p1.header then ReactModule.createElement(View, { tag = "auto-xy", LayoutOrder = 1 }, p1.header) else nil
 	local config = {
-		onAbsoluteCanvasSizeChanged = ReactModule.useCallback(function(p2) --[[ Line: 70 ]]
+		onAbsoluteCanvasSizeChanged = ReactModule.useCallback(function(p2)
 			-- upvalues: UseResult (copy)
 			UseResult(p2)
 		end, { UseResult }),
-		onAbsoluteWindowSizeChanged = ReactModule.useCallback(function(p2) --[[ Line: 74 ]]
+		onAbsoluteWindowSizeChanged = ReactModule.useCallback(function(p2)
 			-- upvalues: UseResult (copy)
 			UseResult(p2)
 		end, { UseResult })

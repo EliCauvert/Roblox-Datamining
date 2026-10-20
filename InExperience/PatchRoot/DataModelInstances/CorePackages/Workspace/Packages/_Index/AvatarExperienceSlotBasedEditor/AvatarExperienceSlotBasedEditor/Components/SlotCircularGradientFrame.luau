@@ -2,7 +2,7 @@
 local ColorGradientCircle = require(Parent.AXCommon).Components.ColorGradientCircle
 local ReactModule = require(Parent.React)
 
-return function(p1) --[[ Line: 18 | Named "SlotCircularGradientFrame" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ColorGradientCircle (copy)
 	return ReactModule.createElement(ColorGradientCircle, {
 		hasBorder = true,

@@ -1,7 +1,7 @@
 ﻿local Players = game:GetService("Players")
 local _ = require(script:FindFirstAncestor("PlayWithRewardComponent").Parent.PlayWithRewardState)
 
-return function(p1, p2, p3, p4): boolean --[[ Line: 10 | Named "shouldRenderPlayWithRewardBanner" ]]
+return function(p1, p2, p3, p4): boolean
 	-- upvalues: Players (copy)
 	local Number: number = tonumber(p4 and p4.productId or 0) or 0
 	

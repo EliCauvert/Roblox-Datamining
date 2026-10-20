@@ -31,7 +31,7 @@ local list = {
 }
 local config = { skipFetch = true }
 
-return function(p1, p2) --[[ Line: 52 ]]
+return function(p1, p2)
 	-- upvalues: list (copy), UseLocalUserIdFunction (copy), UseGetRecommendationsModule (copy), UseFriendsListOrderedByPresenceFunction (copy), FIntFriendsCarouselInitialFetchSize (copy), PrefetchFriendGameMedia (copy), UsePrefetchInGameFriendsMediaFunction (copy), FFlagFixIsConsoleCheckForSocialCarousel (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), FFlagEnableRecommendationsForPCGDK (copy), ThirdPartyUserService (copy), FFlagSocialCarouselShareQREnabled (copy), UseIsSpatialFunction (copy), UseSelectorFunction (copy), FFlagFriendsCountDataHydrationMigrationEnabled (copy), GetDeepValueModule (copy), ConstantsModule (copy), UseGetFriendsCountByUserIdFunction (copy), config (copy), FIntSocialCarouselShowRecsLimit (copy), ReactModule (copy), TileGroup (copy), Tile (copy), CryoModule (copy), FFlagSocialCarouselShowLoadingSkeletonModule (copy)
 	local P1 = p2 or list
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
@@ -46,7 +46,7 @@ return function(p1, p2) --[[ Line: 52 ]]
 	end
 	local IsUsePreferredInputResultMatch = if FFlagFixIsConsoleCheckForSocialCarousel then UsePreferredInputFunction() == ResponsiveModule.Input.Directional elseif FFlagEnableRecommendationsForPCGDK and ThirdPartyUserService then ThirdPartyUserService:HaveActiveUser() else UsePreferredInputFunction() == ResponsiveModule.Input.Directional
 	local UseIsSpatialResult = if FFlagSocialCarouselShareQREnabled then UseIsSpatialFunction() else false
-	local UseSelectorResult = UseSelectorFunction(function(p3) --[[ Line: 71 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p3)
 		-- upvalues: FFlagFriendsCountDataHydrationMigrationEnabled (upval), GetDeepValueModule (upval), p1 (copy), ConstantsModule (upval), UseLocalUserIdResult (copy)
 		return {
 			friendCount = if FFlagFriendsCountDataHydrationMigrationEnabled then nil else GetDeepValueModule(p3, string.format("%s.Friends.countsByUserId.%s", p1 or ConstantsModule.RODUX_KEY, UseLocalUserIdResult or "")) or 0,
@@ -57,7 +57,7 @@ return function(p1, p2) --[[ Line: 52 ]]
 	local IsUseGetFriendsCountByUserIdResultBelow: boolean = IsUsePreferredInputResultMatch and UseGetFriendsCountByUserIdResult <= FIntSocialCarouselShowRecsLimit
 	local NoIsUsePreferredInputResultMatch: boolean = UseGetFriendsCountByUserIdResult == 0 and not IsUsePreferredInputResultMatch
 	local NoUseIsSpatialResult: boolean = FFlagSocialCarouselShareQREnabled and (UseGetFriendsCountByUserIdResult == 0 and (not IsUsePreferredInputResultMatch and not UseIsSpatialResult))
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 100 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: TileGroup (upval), UseFriendsListOrderedByPresenceResult (copy), Tile (upval), IsUseGetFriendsCountByUserIdResultBelow (copy), UseGetRecommendationsModuleResult (copy), NoUseIsSpatialResult (copy), NoIsUsePreferredInputResultMatch (copy)
 		return {
 			[TileGroup.FriendsList] = {
@@ -100,7 +100,7 @@ return function(p1, p2) --[[ Line: 52 ]]
 	})
 	
 	return {
-		tiles = ReactModule.useMemo(function() --[[ Line: 133 ]]
+		tiles = ReactModule.useMemo(function()
 			-- upvalues: P1 (copy), UseMemoResult (copy), CryoModule (upval)
 			local List = {}
 			

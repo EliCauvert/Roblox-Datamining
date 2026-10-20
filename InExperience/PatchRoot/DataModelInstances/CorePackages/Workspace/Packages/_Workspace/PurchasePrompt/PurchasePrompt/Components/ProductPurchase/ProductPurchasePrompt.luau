@@ -34,12 +34,12 @@ local FFlagAddCenterDialogForUnifiedPurchaseModal = require(Parent.SharedFlags).
 local FFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase = require(Parent.SharedFlags).FFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase
 local FFlagLuaAppsEnablePromptVIPServerPurchase = require(Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 
-local function getPurchaseErrorText(p1, PurchaseError) --[[ Line: 72 ]]
+local function getPurchaseErrorText(p1, PurchaseError)
 	-- upvalues: PurchaseErrorModule (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy)
 	return if PurchaseError == PurchaseErrorModule.CannotGetBalance then p1.PurchaseErrorCannotGetBalanceText elseif PurchaseError == PurchaseErrorModule.CannotGetItemPrice then p1.PurchaseErrorCannotGetItemPriceText elseif PurchaseError == PurchaseErrorModule.NotForSale then p1.PurchaseErrorNotForSaleText elseif PurchaseError == PurchaseErrorModule.NotForSaleHere then p1.PurchaseErrorNotForSaleHereText elseif PurchaseError == PurchaseErrorModule.AlreadyOwn then p1.PurchaseErrorAlreadyOwnText elseif PurchaseError == PurchaseErrorModule.Under13 then p1.PurchaseErrorUnder13Text elseif PurchaseError == PurchaseErrorModule.Limited then p1.PurchaseErrorLimitedText elseif PurchaseError == PurchaseErrorModule.ThirdPartyDisabled then p1.PurchaseErrorThirdPartyDisabledText elseif PurchaseError == PurchaseErrorModule.NotEnoughRobux then p1.PurchaseErrorNotEnoughRobuxText elseif PurchaseError == PurchaseErrorModule.NotEnoughRobuxXbox then p1.PurchaseErrorNotEnoughRobuxXboxText elseif PurchaseError == PurchaseErrorModule.NotEnoughRobuxNoUpsell then p1.PurchaseErrorNotEnoughRobuxNoUpsellText elseif PurchaseError == PurchaseErrorModule.TwoFactorNeeded then p1.PurchaseErrorTwoFactorNeededText elseif PurchaseError == PurchaseErrorModule.TwoFactorNeededSettings then p1.PurchaseErrorTwoFactorNeededSettingsText elseif PurchaseError == PurchaseErrorModule.UnknownFailure then p1.PurchaseErrorUnknownFailureText elseif PurchaseError == PurchaseErrorModule.UnknownFailureNoItemName then p1.PurchaseErrorUnknownFailureNoItemNameText elseif PurchaseError == PurchaseErrorModule.PurchaseDisabled then p1.PurchaseErrorPurchaseDisabledText elseif PurchaseError == PurchaseErrorModule.InvalidFunds then p1.PurchaseErrorInvalidFundsText elseif PurchaseError == PurchaseErrorModule.InvalidFundsUnknown then p1.PurchaseErrorInvalidFundsUnknownText elseif PurchaseError == PurchaseErrorModule.PremiumOnly then p1.PurchaseErrorPremiumOnlyText elseif FFlagLuaAppsEnablePromptVIPServerPurchase and PurchaseError == PurchaseErrorModule.VIPServerUnavailable then p1.PurchaseErrorVIPServerUnavailableText elseif FFlagLuaAppsEnablePromptVIPServerPurchase and PurchaseError == PurchaseErrorModule.UnsupportedInStudio then p1.PurchaseErrorUnsupportedInStudioText else p1.PurchaseErrorUnknownFailureNoItemNameText
 end
 
-local function getModalContent(p1, p2) --[[ Line: 120 ]]
+local function getModalContent(p1, p2)
 	-- upvalues: PromptStateModule (copy), FFlagPurchaseModalTimedOptionExtension (copy), FormatTextWithParamsModule (copy), PurchaseErrorModule (copy), FormatEconomicRestrictionTextFunction (copy), FFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase (copy), getPurchaseErrorText (copy)
 	local PromptState = p2.promptState
 	local PurchaseError = p2.purchaseError
@@ -94,7 +94,7 @@ local function getModalContent(p1, p2) --[[ Line: 120 ]]
 	}
 end
 
-local function getButtonStackInfo(p1, p2) --[[ Line: 216 ]]
+local function getButtonStackInfo(p1, p2)
 	-- upvalues: ButtonType (copy)
 	return if p1.includeCancelButton then {
 		{
@@ -124,7 +124,7 @@ local function getButtonStackInfo(p1, p2) --[[ Line: 216 ]]
 	}
 end
 
-local function ProductPurchasePrompt(p1) --[[ Line: 251 ]]
+local function ProductPurchasePrompt(p1)
 	-- upvalues: FFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase (copy), AddEconomicRestrictionKeysToLocalizationFunction (copy), UseLocalizationFunction (copy), UseMemoFunction (copy), getModalContent (copy), UseEffectFunction (copy), LogProductPurchasePromptCounterModule (copy), PurchaseErrorModule (copy), Default (copy), UniversalEconomicRestrictionsCounter (copy), EconomicRestrictionsSurface (copy), PromptStateModule (copy), FFlagAddCenterDialogForUnifiedPurchaseModal (copy), AppContextModule (copy), ReactModule (copy), UnifiedPurchaseCompletionModalV2 (copy), UnifiedPurchaseCompletionModal (copy), InteractiveAlert (copy), getButtonStackInfo (copy)
 	local config = {
 		PurchaseCompleteTitle = "IAPExperience.PurchasePrompt.Title.PurchaseCompleted",
@@ -167,11 +167,11 @@ local function ProductPurchasePrompt(p1) --[[ Line: 251 ]]
 	}
 	AddEconomicRestrictionKeysToLocalizationFunction(config)
 	local UseLocalizationResult = UseLocalizationFunction(config)
-	local UseMemoResult = UseMemoFunction(function() --[[ Line: 299 ]]
+	local UseMemoResult = UseMemoFunction(function()
 		-- upvalues: getModalContent (upval), UseLocalizationResult (copy), p1 (copy)
 		return (getModalContent(UseLocalizationResult, p1))
 	end, { p1 })
-	UseEffectFunction(function() --[[ Line: 303 ]]
+	UseEffectFunction(function()
 		-- upvalues: LogProductPurchasePromptCounterModule (upval), p1 (copy), PurchaseErrorModule (upval), Default (upval), UniversalEconomicRestrictionsCounter (upval), EconomicRestrictionsSurface (upval)
 		LogProductPurchasePromptCounterModule(p1.promptState, p1.purchaseError, p1.surface, p1.productType)
 		
@@ -217,7 +217,7 @@ local function ProductPurchasePrompt(p1) --[[ Line: 251 ]]
 	end
 end
 
-return function(p1) --[[ Line: 359 | Named "ProductPurchasePromptContainer" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), ProductPurchasePrompt (copy)
 	return ReactModule.createElement(LocalizationProvider, {
 		localization = Localization.new(LocalizationService.RobloxLocaleId)

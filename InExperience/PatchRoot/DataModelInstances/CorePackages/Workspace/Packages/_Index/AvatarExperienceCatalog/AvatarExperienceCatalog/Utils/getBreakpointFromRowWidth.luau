@@ -2,7 +2,7 @@
 local WidgetListBreakPointEnumModule = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListBreakPointEnum)
 local WidgetListBreakPointThresholdsModule = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListBreakPointThresholds)
 
-return function(p1, p2) --[[ Line: 14 | Named "getBreakpointFromRowWidth" ]]
+return function(p1, p2)
 	-- upvalues: WidgetListBreakPointEnumModule (copy), WidgetListBreakPointThresholdsModule (copy)
 	local P1 = p2 or 1
 	

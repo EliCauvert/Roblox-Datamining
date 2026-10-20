@@ -4,7 +4,7 @@ local View = require(Parent.Foundation).View
 local _ = require(Parent.AvatarExperienceCommon)
 local WearTimeListItemModule = require(script.Parent.WearTimeListItem)
 
-return function(Frame) --[[ Line: 17 | Named "WearTimeList" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), WearTimeListItemModule (copy), View (copy)
 	local Elements = {}
 	
@@ -13,7 +13,7 @@ return function(Frame) --[[ Line: 17 | Named "WearTimeList" ]]
 			days = option.days,
 			price = option.price,
 			isActive = option.selected ~= nil and option.selected,
-			onActivated = if Frame.onOptionActivated then function() --[[ Line: 26 ]]
+			onActivated = if Frame.onOptionActivated then function()
 				-- upvalues: Frame (copy), LayoutOrder (copy)
 				Frame.onOptionActivated(LayoutOrder)
 			end else nil,

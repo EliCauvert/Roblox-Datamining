@@ -2,7 +2,7 @@
 local Default = require(Parent.LoggingProtocol).default
 local BulkPurchaseMissingPurchaseOptionsCounter = require(Parent.AvatarExperienceAnalytics).Events.BulkPurchaseMissingPurchaseOptionsCounter
 
-local function reportMissingPurchaseOptions(List) --[[ Line: 8 ]]
+local function reportMissingPurchaseOptions(List)
 	-- upvalues: Default (copy), BulkPurchaseMissingPurchaseOptionsCounter (copy)
 	for _, value in List do
 		local PurchaseOptions = value.purchaseOptions
@@ -14,7 +14,7 @@ local function reportMissingPurchaseOptions(List) --[[ Line: 8 ]]
 	end
 end
 
-return function(p1) --[[ Line: 20 | Named "reportBulkPurchaseRequestIssues" ]]
+return function(p1)
 	-- upvalues: reportMissingPurchaseOptions (copy)
 	if p1 ~= nil then
 		reportMissingPurchaseOptions(p1)

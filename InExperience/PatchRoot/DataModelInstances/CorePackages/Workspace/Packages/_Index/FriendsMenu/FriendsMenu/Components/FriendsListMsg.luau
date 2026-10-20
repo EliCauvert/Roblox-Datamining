@@ -6,7 +6,7 @@ local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFon
 local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
 local GetLocalizedStringsFunction = require(Parent.NotificationsCommon).LocalizationHelper.getLocalizedStrings
 
-return function(p1) --[[ Line: 19 ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), GetLocalizedStringsFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseStyleResult = UseStyleFunction()
 	local Theme = UseStyleResult.Theme

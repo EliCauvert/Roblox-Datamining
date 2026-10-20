@@ -2,7 +2,7 @@
 local ReactModule = require(Parent.React)
 local OtterModule = require(Parent.Otter)
 
-return function(p1, p2, p3) --[[ Line: 13 | Named "useMotor" ]]
+return function(p1, p2, p3)
 	-- upvalues: ReactModule (copy), OtterModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
@@ -11,14 +11,14 @@ return function(p1, p2, p3) --[[ Line: 13 | Named "useMotor" ]]
 		local SingleMotor = nil
 		SingleMotor = if typeof(p1) == "number" then OtterModule.createSingleMotor(p1) else OtterModule.createGroupMotor(p1)
 		
-		function UseRefResult1.current(p4) --[[ Line: 26 ]]
+		function UseRefResult1.current(p4)
 			-- upvalues: SingleMotor (ref)
 			SingleMotor:setGoal(p4)
 		end
 		
 		UseRefResult.current = SingleMotor
 	end
-	ReactModule.useEffect(function() --[[ Line: 34 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), p3 (copy), p2 (copy)
 		local Callback = nil
 		local Callback1 = nil
@@ -29,7 +29,7 @@ return function(p1, p2, p3) --[[ Line: 13 | Named "useMotor" ]]
 			end
 			Callback1 = UseRefResult.current:onStep(p2)
 		end
-		return function() --[[ Line: 43 ]]
+		return function()
 			-- upvalues: Callback (ref), Callback1 (ref)
 			if Callback then
 				Callback()
@@ -39,9 +39,9 @@ return function(p1, p2, p3) --[[ Line: 13 | Named "useMotor" ]]
 			end
 		end
 	end, { p2, p3 })
-	ReactModule.useEffect(function() --[[ Line: 54 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy)
-		return function() --[[ Line: 55 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			if UseRefResult.current then
 				UseRefResult.current:destroy()

@@ -25,14 +25,14 @@ local StrictInterfaceResult = T.strictInterface({
 	closeButtonRef = T.optional(T.table)
 })
 
-local function ControlLayoutContainerWithSelectionCursor(p1, Callback) --[[ Line: 53 ]]
+local function ControlLayoutContainerWithSelectionCursor(p1, Callback)
 	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), WithLocalizationModule (copy), WithFoundationOrUIBloxStyleFunction (copy), Roact (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), AssetsModule (copy), CursorType (copy), ImageSetButton (copy), ThemedTextLabelModule (copy), DividerModule (copy), ImageSetLabel (copy)
 	if GlobalConfigModule.propValidation then
 		assert(StrictInterfaceResult(p1))
 	end
-	return WithLocalizationModule({ titleText = p1.titleText })(function(p2) --[[ Line: 60 ]]
+	return WithLocalizationModule({ titleText = p1.titleText })(function(p2)
 		-- upvalues: WithFoundationOrUIBloxStyleFunction (upval), Roact (upval), p1 (copy), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), AssetsModule (upval), Callback (copy), CursorType (upval), ImageSetButton (upval), ThemedTextLabelModule (upval), DividerModule (upval), ImageSetLabel (upval)
-		return WithFoundationOrUIBloxStyleFunction(function(p3) --[[ Line: 61 ]]
+		return WithFoundationOrUIBloxStyleFunction(function(p3)
 			return {
 				Theme = {
 					Overlay = {
@@ -41,7 +41,7 @@ local function ControlLayoutContainerWithSelectionCursor(p1, Callback) --[[ Line
 					}
 				}
 			}
-		end, function(p3) --[[ Line: 70 ]]
+		end, function(p3)
 			-- upvalues: Roact (upval), p1 (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), AssetsModule (upval), Callback (upval), CursorType (upval), ImageSetButton (upval), ThemedTextLabelModule (upval), p2 (copy), DividerModule (upval), ImageSetLabel (upval)
 			return Roact.createElement("Frame", {
 				BackgroundTransparency = 0,
@@ -131,17 +131,17 @@ local function ControlLayoutContainerWithSelectionCursor(p1, Callback) --[[ Line
 	end)
 end
 
-return InGameMenuDependenciesModule.RoactRodux.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 188 ]]
+return InGameMenuDependenciesModule.RoactRodux.UNSTABLE_connect2(nil, function(Callback)
 	-- upvalues: NavigateBackModule (copy)
 	return {
-		onClosed = function() --[[ Line: 190 ]]
+		onClosed = function()
 			-- upvalues: Callback (copy), NavigateBackModule (upval)
 			Callback(NavigateBackModule())
 		end
 	}
-end)(function(p1) --[[ Line: 182 | Named "ControlLayoutContainer" ]]
+end)(function(p1)
 	-- upvalues: WithCursorMigration (copy), ControlLayoutContainerWithSelectionCursor (copy)
-	return WithCursorMigration(function(p2) --[[ Line: 183 ]]
+	return WithCursorMigration(function(p2)
 		-- upvalues: ControlLayoutContainerWithSelectionCursor (upval), p1 (copy)
 		return ControlLayoutContainerWithSelectionCursor(p1, p2)
 	end)

@@ -15,7 +15,7 @@ local Tbl = {
 	overlayTransparency = 0.7,
 	transparent = false,
 	overlayColor3 = Color3.new(0, 0, 0),
-	renderOverlay = function(NavigationOptions, InitialTransitionValue, TransitionChangedSignal) --[[ Line: 22 ]]
+	renderOverlay = function(NavigationOptions, InitialTransitionValue, TransitionChangedSignal)
 		-- upvalues: ReactModule (copy), StackViewOverlayFrameModule (copy)
 		return ReactModule.createElement(StackViewOverlayFrameModule, {
 			navigationOptions = NavigationOptions,
@@ -25,34 +25,34 @@ local Tbl = {
 	end
 }
 
-local function _(p1, p2: number): number --[[ Line: 34 | Named "calculateTransitionValue" ]]
+local function _(p1, p2: number): number
 	return (math.max(math.min(1 + p2 - p1, 1), 0))
 end
 
 local StackViewLayout = ReactModule.Component:extend("StackViewLayout")
 
-function StackViewLayout.init(p1) --[[ Line: 40 ]]
+function StackViewLayout.init(p1)
 	p1:setState({})
 	p1._isMounted = false
 	p1._positionLastValue = p1.props.transitionProps.navigation.state.index
 	
-	function p1._renderScene(p2) --[[ Line: 47 ]]
+	function p1._renderScene(p2)
 		-- upvalues: p1 (copy)
 		return p1:_renderInnerScene(p2)
 	end
 	
-	function p1._subscribeToOverlayUpdates(Callback) --[[ Line: 51 ]]
+	function p1._subscribeToOverlayUpdates(Callback)
 		-- upvalues: p1 (copy)
 		local Index = p1.props.transitionProps.scene.index
 		
-		return p1.props.transitionProps.position:onStep(function(p2: number) --[[ Line: 55 ]]
+		return p1.props.transitionProps.position:onStep(function(p2: number)
 			-- upvalues: Callback (copy), Index (copy)
 			Callback((math.max(math.min(1 + p2 - Index, 1), 0)))
 		end)
 	end
 end
 
-function StackViewLayout._renderCard(p1, Scene, AssignResult) --[[ Line: 61 ]]
+function StackViewLayout._renderCard(p1, Scene, AssignResult)
 	-- upvalues: Object (copy), ReactModule (copy), StackViewCardModule (copy)
 	local TransitionProps = p1.props.transitionProps
 	local LastTransitionProps = p1.props.lastTransitionProps
@@ -74,7 +74,7 @@ function StackViewLayout._renderCard(p1, Scene, AssignResult) --[[ Line: 61 ]]
 	}))
 end
 
-function StackViewLayout._renderInnerScene(p1, p2) --[[ Line: 96 ]]
+function StackViewLayout._renderInnerScene(p1, p2)
 	-- upvalues: ReactModule (copy), SceneViewModule (copy)
 	return ReactModule.createElement(SceneViewModule, {
 		screenProps = p1.props.screenProps,
@@ -83,7 +83,7 @@ function StackViewLayout._renderInnerScene(p1, p2) --[[ Line: 96 ]]
 	})
 end
 
-function StackViewLayout.render(p1) --[[ Line: 109 ]]
+function StackViewLayout.render(p1)
 	-- upvalues: Object (copy), Tbl (copy), ReactModule (copy)
 	local TopMostOpaqueSceneIndex = p1.state.topMostOpaqueSceneIndex
 	local Elements = {}
@@ -142,7 +142,7 @@ function StackViewLayout.render(p1) --[[ Line: 109 ]]
 	}, Elements)
 end
 
-function StackViewLayout.getDerivedStateFromProps(p2, _) --[[ Line: 204 ]]
+function StackViewLayout.getDerivedStateFromProps(p2, _)
 	-- upvalues: StackPresentationStyleModule (copy), Object (copy), Tbl (copy), StackViewTransitionConfigsModule (copy)
 	local TransitionProps = p2.transitionProps
 	local Scenes = TransitionProps.scenes
@@ -167,15 +167,15 @@ function StackViewLayout.getDerivedStateFromProps(p2, _) --[[ Line: 204 ]]
 	}
 end
 
-function StackViewLayout.didMount(p3) --[[ Line: 243 ]]
+function StackViewLayout.didMount(p3)
 	p3._isMounted = true
-	p3._positionDisconnector = p3.props.transitionProps.position:onStep(function(...) --[[ Line: 246 ]]
+	p3._positionDisconnector = p3.props.transitionProps.position:onStep(function(...)
 		-- upvalues: p3 (copy)
 		p3:_onPositionStep(...)
 	end)
 end
 
-function StackViewLayout.willUnmount(p3) --[[ Line: 251 ]]
+function StackViewLayout.willUnmount(p3)
 	p3._isMounted = false
 	
 	if p3._positionDisconnector then
@@ -184,19 +184,19 @@ function StackViewLayout.willUnmount(p3) --[[ Line: 251 ]]
 	end
 end
 
-function StackViewLayout.didUpdate(p3, p4) --[[ Line: 260 ]]
+function StackViewLayout.didUpdate(p3, p4)
 	local Position = p3.props.transitionProps.position
 	
 	if Position ~= p4.transitionProps.position then
 		p3._positionDisconnector()
-		p3._positionDisconnector = Position:onStep(function(...) --[[ Line: 265 ]]
+		p3._positionDisconnector = Position:onStep(function(...)
 			-- upvalues: p3 (copy)
 			p3:_onPositionStep(...)
 		end)
 	end
 end
 
-function StackViewLayout._onPositionStep(p3, _positionLastValue) --[[ Line: 271 ]]
+function StackViewLayout._onPositionStep(p3, _positionLastValue)
 	if p3._isMounted then
 		p3._positionLastValue = _positionLastValue
 	end

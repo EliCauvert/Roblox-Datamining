@@ -7,7 +7,7 @@ local UsePeoplePickerListViewModelModule = require(script.Parent.usePeoplePicker
 local _ = require(ShareSheet.Components.PeoplePicker.usePeoplePickerPagination)
 local View = require(Parent.Foundation).View
 
-return function(Frame) --[[ Line: 20 | Named "PeoplePickerListContainer" ]]
+return function(Frame)
 	-- upvalues: UsePeoplePickerListViewModelModule (copy), ReactModule (copy), View (copy), PeoplePickerVirtualizedListModule (copy), PeoplePickerEmptyStateModule (copy)
 	local UsePeoplePickerListViewModelModuleResult = UsePeoplePickerListViewModelModule(Frame)
 	

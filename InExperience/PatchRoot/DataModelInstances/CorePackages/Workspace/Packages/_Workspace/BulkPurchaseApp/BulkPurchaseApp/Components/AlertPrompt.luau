@@ -7,7 +7,7 @@ local UseCloseOnEscapeEffectModule = require(BulkPurchaseApp.Hooks.useCloseOnEsc
 local FFlagBulkPurchaseCloseOnEscapeModule = require(BulkPurchaseApp.Flags.FFlagBulkPurchaseCloseOnEscape)
 local ScrimModule = require(script.Parent.Scrim)
 
-return function(p1) --[[ Line: 22 | Named "AlertPrompt" ]]
+return function(p1)
 	-- upvalues: FFlagBulkPurchaseCloseOnEscapeModule (copy), UseCloseOnEscapeEffectModule (copy), UseScreenSizeFunction (copy), ReactModule (copy), ScrimModule (copy), InteractiveAlert (copy)
 	if FFlagBulkPurchaseCloseOnEscapeModule then
 		UseCloseOnEscapeEffectModule("BulkPurchaseCloseAlertPrompt", p1.onDismiss)

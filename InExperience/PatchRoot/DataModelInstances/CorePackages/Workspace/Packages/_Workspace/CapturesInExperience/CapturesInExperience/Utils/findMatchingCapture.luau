@@ -1,10 +1,10 @@
 ﻿local _ = require(script.Parent.Parent.Types)
 
-local function _(p1) --[[ Line: 5 | Named "getLocalId" ]]
+local function _(p1)
 	return if p1 and p1.LocalId then p1.LocalId else nil
 end
 
-return function(List, p1) --[[ Line: 12 | Named "findMatchingCapture" ]]
+return function(List, p1)
 	local LocalId = if p1 and p1.LocalId then p1.LocalId else nil
 	
 	if LocalId == nil then

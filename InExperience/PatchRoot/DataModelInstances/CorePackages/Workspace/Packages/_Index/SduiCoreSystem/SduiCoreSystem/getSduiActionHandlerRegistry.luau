@@ -2,11 +2,11 @@
 local _ = require(SduiCoreSystem.SduiActionType)
 local _ = require(SduiCoreSystem.SduiBuilderTypes)
 
-local function createSduiActionHandlerRegistry() --[[ Line: 31 ]]
+local function createSduiActionHandlerRegistry()
 	local Tbl = {}
 	
 	return {
-		getActionHandlerConfig = function(p1) --[[ Line: 34 ]]
+		getActionHandlerConfig = function(p1)
 			-- upvalues: Tbl (copy)
 			local Entry = Tbl[p1]
 			
@@ -22,17 +22,17 @@ local function createSduiActionHandlerRegistry() --[[ Line: 31 ]]
 			end
 			return Entry
 		end,
-		registerActionHandlerConfig = function(Key, p1) --[[ Line: 50 ]]
+		registerActionHandlerConfig = function(Key, p1)
 			-- upvalues: Tbl (copy)
 			Tbl[Key] = p1
 		end,
-		registerActionHandlerConfigs = function(List) --[[ Line: 57 ]]
+		registerActionHandlerConfigs = function(List)
 			-- upvalues: Tbl (copy)
 			for i, value in List do
 				Tbl[i] = value
 			end
 		end,
-		getRegisteredActionTypes = function() --[[ Line: 65 ]]
+		getRegisteredActionTypes = function()
 			-- upvalues: Tbl (copy)
 			local List = {}
 			
@@ -43,11 +43,11 @@ local function createSduiActionHandlerRegistry() --[[ Line: 31 ]]
 			
 			return List
 		end,
-		debug_clear = function() --[[ Line: 74 ]]
+		debug_clear = function()
 			-- upvalues: Tbl (copy)
 			table.clear(Tbl)
 		end,
-		debug_getRegisteredActionHandlerConfigs = function() --[[ Line: 78 ]]
+		debug_getRegisteredActionHandlerConfigs = function()
 			-- upvalues: Tbl (copy)
 			return Tbl
 		end
@@ -56,7 +56,7 @@ end
 
 local v1 = nil
 
-return function() --[[ Line: 97 | Named "getSduiActionHandlerRegistry" ]]
+return function()
 	-- upvalues: v1 (ref), createSduiActionHandlerRegistry (copy)
 	if v1 == nil then
 		v1 = createSduiActionHandlerRegistry()

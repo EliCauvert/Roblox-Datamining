@@ -7,9 +7,9 @@ local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local SduiActionType = SduiCoreSystemModule.SduiActionType
 
-local function noopCompletion(_, _) --[[ Line: 15 ]] end
+local function noopCompletion(_, _) end
 
-return function(p1, _, p2, _) --[[ Line: 30 ]]
+return function(p1, _, p2, _)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), FFlagLuaAppDismissUnlockUpsell (copy), OnAmpWizardCompletionModule (copy), noopCompletion (copy), OpenAmpWizardContainerFunction (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	

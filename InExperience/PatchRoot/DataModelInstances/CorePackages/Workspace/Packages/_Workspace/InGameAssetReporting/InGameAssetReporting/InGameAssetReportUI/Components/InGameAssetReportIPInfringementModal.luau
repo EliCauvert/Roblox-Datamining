@@ -10,7 +10,7 @@ local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local config = { stiffness = 400, damping = 40, mass = 1 }
 
-return function(p1) --[[ Line: 31 | Named "InGameAssetReportIPInfringementModal" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), ReactOtterModule (copy), config (copy), View (copy), Text (copy), InteractiveAlert (copy), ButtonType (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -19,21 +19,21 @@ return function(p1) --[[ Line: 31 | Named "InGameAssetReportIPInfringementModal"
 		reportCompleteClose = "Feature.ReportAbuse.Action.Close",
 		thankYouIpInfringementReport = "Feature.ReportAbuse.Title.SelectInSceneIpReport"
 	})
-	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1, function() --[[ Line: 40 ]]
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1, function()
 		-- upvalues: UseStateResult (copy), p1 (copy)
 		if not UseStateResult then
 			p1.onClose()
 		end
 	end)
-	local UseMemoResult = ReactModule.useMemo(function(): number --[[ Line: 47 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): number
 		-- upvalues: UseStateResult (copy)
 		return if UseStateResult then 0 else 1
 	end, { UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 51 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseMemoResult (copy), config (upval)
 		UseAnimatedBindingResult2(ReactOtterModule.spring(UseMemoResult, config))
 	end, { UseMemoResult })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 55 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, { UseStateResult2 })
@@ -41,7 +41,7 @@ return function(p1) --[[ Line: 31 | Named "InGameAssetReportIPInfringementModal"
 	return ReactModule.createElement("TextButton", {
 		AutoButtonColor = false,
 		BorderSizePixel = 0,
-		BackgroundTransparency = UseAnimatedBindingResult:map(function(p2: number): number --[[ Line: 85 ]]
+		BackgroundTransparency = UseAnimatedBindingResult:map(function(p2: number): number
 			return p2 + 0.3
 		end),
 		BackgroundColor3 = Color3.fromHex("#000000"),
@@ -56,7 +56,7 @@ return function(p1) --[[ Line: 31 | Named "InGameAssetReportIPInfringementModal"
 			richText = true,
 			screenSize = p1.screenSize,
 			title = UseLocalizationResult.thankYouIpInfringementReport,
-			middleContent = ReactModule.useCallback(function() --[[ Line: 59 ]]
+			middleContent = ReactModule.useCallback(function()
 				-- upvalues: ReactModule (upval), View (upval), Text (upval), UseLocalizationResult (copy), p1 (copy)
 				return ReactModule.createElement(View, { tag = "auto-xy col gap-small align-x-center" }, {
 					text1 = ReactModule.createElement(Text, {
@@ -78,7 +78,7 @@ return function(p1) --[[ Line: 31 | Named "InGameAssetReportIPInfringementModal"
 				})
 			end, { p1.reportCode }),
 			anchorPoint = Vector2.new(0.5, 0.5),
-			position = UseAnimatedBindingResult:map(function(Alpha) --[[ Line: 102 ]]
+			position = UseAnimatedBindingResult:map(function(Alpha)
 				return UDim2.new(0.5, 0, 0.5, 0):Lerp(UDim2.new(0.5, 0, -0.5, 0), Alpha)
 			end),
 			buttonStackInfo = {

@@ -12,7 +12,7 @@ local config = {
 	PromptJoinGroup = require(Parent.Components.CoreUI.GroupJoinPrompt)
 }
 
-return function(p1) --[[ Line: 54 ]]
+return function(p1)
 	-- upvalues: UseStateFunction (copy), ReactModule (copy), CryoModule (copy), config (copy), PromptConnectionsModule (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
 	local UseStateResult, UseStateResult2 = UseStateFunction({
 		promptType = nil,
@@ -25,7 +25,7 @@ return function(p1) --[[ Line: 54 ]]
 	local PromptType = UseStateResult.promptType
 	local Data = UseStateResult.data
 	local Callbacks = UseStateResult.callbacks
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 68 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: CryoModule (upval), UseStateResult (copy), UseStateResult2 (copy)
 		if CryoModule.isEmpty(UseStateResult.promptQueue) then
 			UseStateResult2({
@@ -66,7 +66,7 @@ return function(p1) --[[ Line: 54 ]]
 	end
 	return ReactModule.createElement(ReactModule.Fragment, {}, {
 		PromptConnections = ReactModule.createElement(PromptConnectionsModule, {
-			openGroupJoinPrompt = ReactModule.useCallback(function(GroupId, Data, Callbacks) --[[ Line: 105 ]]
+			openGroupJoinPrompt = ReactModule.useCallback(function(GroupId, Data, Callbacks)
 				-- upvalues: UseStateResult (copy), UseStateResult2 (copy), CryoModule (upval)
 				if UseStateResult.promptType == nil then
 					UseStateResult2({

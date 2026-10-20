@@ -5,11 +5,11 @@ local SetFriendCountFunction = require(LegacyFriendsRodux.Actions).SetFriendCoun
 local IsNewFriendsEndpointsEnabledFunction = require(Parent.SharedFlags).isNewFriendsEndpointsEnabled
 local FFlagRemoveUnusedFriendCountRoduxSlice = require(Parent.SharedFlags).FFlagRemoveUnusedFriendCountRoduxSlice
 
-return function(p1) --[[ Line: 10 ]]
+return function(p1)
 	-- upvalues: UsersGetFriendCountFunction (copy), FFlagRemoveUnusedFriendCountRoduxSlice (copy), IsNewFriendsEndpointsEnabledFunction (copy), SetFriendCountFunction (copy)
-	return function(p2) --[[ Line: 11 ]]
+	return function(p2)
 		-- upvalues: UsersGetFriendCountFunction (upval), p1 (copy), FFlagRemoveUnusedFriendCountRoduxSlice (upval), IsNewFriendsEndpointsEnabledFunction (upval), SetFriendCountFunction (upval)
-		return UsersGetFriendCountFunction(p1):andThen(function(Result) --[[ Line: 12 ]]
+		return UsersGetFriendCountFunction(p1):andThen(function(Result)
 			-- upvalues: FFlagRemoveUnusedFriendCountRoduxSlice (upval), IsNewFriendsEndpointsEnabledFunction (upval), p2 (copy), SetFriendCountFunction (upval)
 			local ResponseBody = Result.responseBody
 			

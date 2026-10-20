@@ -1,7 +1,7 @@
 ﻿local TweenService = game:GetService("TweenService")
 local _ = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
 
-return function(p1, p2) --[[ Line: 13 | Named "scrollToItem" ]]
+return function(p1, p2)
 	-- upvalues: TweenService (copy)
 	if not p1 or not p1.current or not p2 then return end
 	local ScrollingFrame = p1.current:FindFirstChildWhichIsA("ScrollingFrame", true)

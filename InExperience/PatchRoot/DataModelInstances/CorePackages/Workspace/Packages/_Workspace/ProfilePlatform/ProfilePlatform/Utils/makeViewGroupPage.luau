@@ -7,7 +7,7 @@ local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
 local FFlagEnableGroupDetailPane = require(Parent.SharedFlags).FFlagEnableGroupDetailPane
 local Sources = require(Parent.SocialLuaAnalytics).Analytics.Enums.Sources
 
-return function(GroupId, OnClose) --[[ Line: 17 | Named "makeViewGroupPage" ]]
+return function(GroupId, OnClose)
 	-- upvalues: FFlagEnableGroupDetailPane (copy), AppPage (copy), Sources (copy), UrlBuilder (copy), TextKeysModule (copy)
 	return if FFlagEnableGroupDetailPane then {
 		name = AppPage.Groups,

@@ -8,7 +8,7 @@ local _ = require(Graphing.Types)
 local UseViewportVisibilityFunction = require(Graphing.Util.useViewportBinding).useViewportVisibility
 local MaxControlPoints = nil
 
-local function _() --[[ Line: 41 | Named "getMaxPointsPerPath" ]]
+local function _()
 	-- upvalues: MaxControlPoints (ref)
 	if not MaxControlPoints then
 		local Path2D = Instance.new("Path2D")
@@ -20,7 +20,7 @@ local function _() --[[ Line: 41 | Named "getMaxPointsPerPath" ]]
 	return MaxControlPoints
 end
 
-local function curvePointsToControlPoints(UseContextResult, Points) --[[ Line: 51 ]]
+local function curvePointsToControlPoints(UseContextResult, Points)
 	local List = {}
 	
 	for _, point in Points do
@@ -32,7 +32,7 @@ local function curvePointsToControlPoints(UseContextResult, Points) --[[ Line: 5
 	return List
 end
 
-local function applyControlPoints(GetResult, p1, MaxControlPoints: number) --[[ Line: 75 ]]
+local function applyControlPoints(GetResult, p1, MaxControlPoints: number)
 	local Total = 1
 	
 	for _, child in GetResult:GetChildren() do
@@ -48,7 +48,7 @@ local function applyControlPoints(GetResult, p1, MaxControlPoints: number) --[[ 
 	end
 end
 
-function Curve(p2) --[[ Line: 94 ]]
+function Curve(p2)
 	-- upvalues: ReactModule (copy), CanvasContextModule (copy), MaxControlPoints (ref), SignalsModule (copy), curvePointsToControlPoints (copy), applyControlPoints (copy), UseViewportVisibilityFunction (copy), StyleUtilModule (copy)
 	local UseContextResult = ReactModule.useContext(CanvasContextModule)
 	
@@ -67,13 +67,13 @@ function Curve(p2) --[[ Line: 94 ]]
 	end
 	local Current = UseRefResult.current
 	local PointCount = p2.PointCount or (p2.Points and #p2.Points or 0)
-	ReactModule.useLayoutEffect(function() --[[ Line: 107 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: p2 (copy), SignalsModule (upval), UseContextResult (copy), curvePointsToControlPoints (upval), Current (copy), applyControlPoints (upval), MaxControlPoints1 (copy)
 		local Computed = nil
 		
 		if p2.ObservePoints then
 			local ObservePointsFunction = p2.ObservePoints
-			Computed = SignalsModule.createComputed(function(p3) --[[ Line: 111 ]]
+			Computed = SignalsModule.createComputed(function(p3)
 				-- upvalues: UseContextResult (upval), curvePointsToControlPoints (upval), ObservePointsFunction (copy)
 				UseContextResult.viewportRectGetter(p3)
 				
@@ -81,14 +81,14 @@ function Curve(p2) --[[ Line: 94 ]]
 			end)
 		else
 			local Points = p2.Points or {}
-			Computed = SignalsModule.createComputed(function(p3) --[[ Line: 117 ]]
+			Computed = SignalsModule.createComputed(function(p3)
 				-- upvalues: UseContextResult (upval), curvePointsToControlPoints (upval), Points (copy)
 				UseContextResult.viewportRectGetter(p3)
 				
 				return (curvePointsToControlPoints(UseContextResult, Points))
 			end)
 		end
-		return SignalsModule.createEffect(function(p3) --[[ Line: 123 ]]
+		return SignalsModule.createEffect(function(p3)
 			-- upvalues: Computed (ref), p2 (upval), Current (upval), applyControlPoints (upval), MaxControlPoints1 (upval)
 			local ComputedResult = Computed(p3)
 			local ObserveThicknessResult = if p2.ObserveThickness then p2.ObserveThickness(p3) else nil
@@ -111,7 +111,7 @@ function Curve(p2) --[[ Line: 94 ]]
 		p2.ObserveThickness
 	})
 	
-	if not UseViewportVisibilityFunction(function(p3) --[[ Line: 138 ]]
+	if not UseViewportVisibilityFunction(function(p3)
 		-- upvalues: p2 (copy)
 		local Points = p2.Points
 		

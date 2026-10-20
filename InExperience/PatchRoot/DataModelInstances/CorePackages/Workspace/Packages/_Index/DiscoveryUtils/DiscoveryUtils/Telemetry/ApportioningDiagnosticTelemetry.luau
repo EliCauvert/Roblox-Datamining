@@ -10,7 +10,7 @@ local config = {
 local StandardizedFields = { "addOSInfo", "addSessionInfo", "addSessionId" }
 
 return {
-	log = function(EventKind, p1) --[[ Line: 33 ]]
+	log = function(EventKind, p1)
 		-- upvalues: CryoModule (copy), TelemetryService (copy), config (copy), StandardizedFields (copy)
 		TelemetryService:LogEvent(config, {
 			standardizedFields = StandardizedFields,

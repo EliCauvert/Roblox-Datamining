@@ -26,7 +26,7 @@ local config = {
 	reserveHeaderBarSpace = true
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 75 | Named "DetailsPageLayoutRoot" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), WithDefaultsFunction (copy), config (copy), CompositionTags (copy), ReactModule (copy), ResponsiveModule (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), UseNavBarSizeFunction (copy), UseNavBarPlacementFunction (copy), DisplayModule (copy), AppNavBarModule (copy), DetailsPageLayoutUtilsModule (copy), FFlagDetailsPageLayoutUseMeasuredSizeForInitialScrollModule (copy), FFlagLuaAppEdpDirectionalGradientMidTransparency (copy), DetailsPageLayoutContextModule (copy), View (copy), StateLayerAffordance (copy)
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseTokensResult = UseTokensFunction()
@@ -51,7 +51,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 75 |
 	local NoNoIsFullscreen = not NoIsFullscreen or (UseStateResult3 or HasUseStateResult)
 	local UseNavBarSizeResult = UseNavBarSizeFunction()
 	local UseNavBarPlacementResult = UseNavBarPlacementFunction()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 128 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: DisplayModule (upval), UseNavBarPlacementResult (copy), AppNavBarModule (upval), UseNavBarSizeResult (copy), NoIsFullscreen (copy), DetailsPageLayoutUtilsModule (upval), FullBleedAspectRatio1 (copy), NewTop (copy), ScaledFullBleedOverlapOffset (copy), p1 (copy)
 		local ViewportSize = DisplayModule.GetDisplayStore(false).getViewportSize(false)
 		local _Vector2 = Vector2.new(if UseNavBarPlacementResult == AppNavBarModule.Placement.Left then math.max(0, ViewportSize.X - UseNavBarSizeResult) else ViewportSize.X, ViewportSize.Y)
@@ -75,22 +75,22 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 75 |
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(InitialScrollY)
 	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(true)
 	local UseRefResult = ReactModule.useRef(NoIsFullscreen and not FFlagDetailsPageLayoutUseMeasuredSizeForInitialScrollModule)
-	local MapResult = UseBindingResult4:map(function(p2) --[[ Line: 162 ]]
+	local MapResult = UseBindingResult4:map(function(p2)
 		return p2.Y
 	end)
-	local MapResult1 = UseBindingResult4:map(function(Vector): UDim2 --[[ Line: 166 ]]
+	local MapResult1 = UseBindingResult4:map(function(Vector): UDim2
 		-- upvalues: FullBleedAspectRatio1 (copy)
 		return UDim2.new(0, Vector.X, 0, Vector.X / FullBleedAspectRatio1)
 	end)
-	local MapResult2 = UseBindingResult4:map(function(p2) --[[ Line: 172 ]]
+	local MapResult2 = UseBindingResult4:map(function(p2)
 		-- upvalues: NoIsFullscreen (copy), DetailsPageLayoutUtilsModule (upval), FullBleedAspectRatio1 (copy), NewTop (copy)
 		return if NoIsFullscreen then DetailsPageLayoutUtilsModule.computeContentTopOffset(p2.X, FullBleedAspectRatio1, NewTop) else 0
 	end)
-	local MapResult3 = ReactModule.joinBindings({ MapResult2, UseBindingResult5 }):map(function(Entry): UDim2 --[[ Line: 181 ]]
+	local MapResult3 = ReactModule.joinBindings({ MapResult2, UseBindingResult5 }):map(function(Entry): UDim2
 		-- upvalues: NewTop (copy)
 		return UDim2.new(0.5, 0, 0, math.max(0, Entry[1] + NewTop - Entry[2]) / 2)
 	end)
-	local MapResult4 = ReactModule.joinBindings({ UseBindingResult5, MapResult2, UseBindingResult6 }):map(function(Entry): number --[[ Line: 191 ]]
+	local MapResult4 = ReactModule.joinBindings({ UseBindingResult5, MapResult2, UseBindingResult6 }):map(function(Entry): number
 		-- upvalues: DetailsPageLayoutUtilsModule (upval), NewTop (copy), ScaledFullBleedOverlapOffset (copy)
 		local Entry1 = Entry[1]
 		local Entry2 = Entry[2]
@@ -105,14 +105,14 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 75 |
 		end
 	end)
 	local UseRefResult1 = ReactModule.useRef(0)
-	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 237 ]]
+	local UseResult = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult1 (copy), UseBindingResult2_5 (copy)
 		if math.abs(Current - UseRefResult1.current) > 0.5 then
 			UseRefResult1.current = Current
 			UseBindingResult2_5(Current)
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 244 ]]
+	local UseResult1 = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: UseBindingResult2_4 (copy), NoIsFullscreen (copy), MapResult2 (copy), UseBindingResult6 (copy), DetailsPageLayoutUtilsModule (upval), ScaledFullBleedOverlapOffset (copy), UseStateResult2_2 (copy)
 		local Y = ScrollFrame.CanvasPosition.Y
 		UseBindingResult2_4(Y)
@@ -125,7 +125,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 75 |
 	end, { NoIsFullscreen, ScaledFullBleedOverlapOffset })
 	
 	return ReactModule.createElement(DetailsPageLayoutContextModule.Provider, {
-		value = ReactModule.useMemo(function() --[[ Line: 266 ]]
+		value = ReactModule.useMemo(function()
 			-- upvalues: NoIsFullscreen (copy), UseBindingResult (copy), UseBindingResult2 (copy), UseBindingResult1 (copy), UseBindingResult2_1 (copy), WithDefaultsResult (copy), NewTop (copy), UseBindingResult3 (copy), UseBindingResult2_2 (copy), UseResult1 (copy), MapResult2 (copy), ScaledFullBleedOverlapOffset (copy), ScaledGradientTopBleedOffset (copy), FFlagLuaAppEdpDirectionalGradientMidTransparency (upval), UseStateResult4 (copy), UseStateResult5 (copy), FFlagLuaAppMediaGalleryGamepadSupport (upval), MapResult (copy), MapResult4 (copy), NoNoIsFullscreen (copy), UseResult (copy), HasUseStateResult (copy), UseStateResult2 (copy), UseStateResult1 (copy), UseStateResult2_1 (copy)
 			return {
 				hasFullBleed = NoIsFullscreen,
@@ -168,7 +168,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 75 |
 	}, ReactModule.createElement(View, {
 		tag = `size-full clip bg-surface-0 {CompositionLayoutTag}`,
 		stateLayer = { affordance = StateLayerAffordance.None },
-		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 207 ]]
+		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
 			-- upvalues: UseBindingResult2_3 (copy), UseStateResult2_4 (copy), NoIsFullscreen (copy), UseRefResult (copy), DetailsPageLayoutUtilsModule (upval), FullBleedAspectRatio1 (copy), NewTop (copy), ScaledFullBleedOverlapOffset (copy), p1 (copy), UseStateResult2_3 (copy), UseBindingResult2_4 (copy)
 			local AbsoluteSize = Frame.AbsoluteSize
 			UseBindingResult2_3(AbsoluteSize)
@@ -212,11 +212,11 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 75 |
 		FullscreenOverlay = if HasUseStateResult then ReactModule.createElement(View, {
 			ZIndex = 10,
 			tag = "clip",
-			Size = UseBindingResult:map(function(p2): UDim2 --[[ Line: 351 ]]
+			Size = UseBindingResult:map(function(p2): UDim2
 				-- upvalues: NewTop (copy)
 				return if p2 then UDim2.new(1, 0, 1, -NewTop) else UDim2.fromScale(1, 1)
 			end),
-			Position = UseBindingResult:map(function(p2): UDim2 --[[ Line: 354 ]]
+			Position = UseBindingResult:map(function(p2): UDim2
 				-- upvalues: NewTop (copy)
 				return if p2 then UDim2.fromOffset(0, NewTop) else UDim2.fromOffset(0, 0)
 			end),

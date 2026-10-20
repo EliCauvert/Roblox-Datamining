@@ -3,7 +3,7 @@ local MomentsCommonModule = require(MomentsCreation.Parent.MomentsCommon)
 local _ = require(MomentsCreation.Enums.CreationFlowState)
 local GetCreationFlowStoreModule = require(MomentsCreation.Stores.GetCreationFlowStore)
 
-return function(p1) --[[ Line: 12 | Named "resetCreationFlow" ]]
+return function(p1)
 	-- upvalues: GetCreationFlowStoreModule (copy), MomentsCommonModule (copy)
 	local CreationFlowStoreModule = GetCreationFlowStoreModule(false)
 	local TTSAudio = CreationFlowStoreModule.getTTSAudio(false)

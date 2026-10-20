@@ -11,7 +11,7 @@ local DebugImmersionModeNonVR = game:DefineFastFlag("DebugImmersionModeNonVR", f
 local VRAvatarGesturesFixFirstPersonHeadScale = game:DefineFastFlag("VRAvatarGesturesFixFirstPersonHeadScale", false)
 local VRAvatarGesturesAnalyticsThrottleHundrethsPercent = game:DefineFastInt("VRAvatarGesturesAnalyticsThrottleHundrethsPercent", 0)
 
-local function _(p1): boolean --[[ Line: 31 | Named "isVRFirstPerson" ]]
+local function _(p1): boolean
 	-- upvalues: VRAvatarGesturesFixFirstPersonHeadScale (copy)
 	return (p1.CFrame.Position - p1.Focus.Position).Magnitude <= (if VRAvatarGesturesFixFirstPersonHeadScale then 5 * p1.HeadScale else 5)
 end
@@ -19,13 +19,13 @@ end
 local Module = {}
 Module.__index = Module
 
-function Module.new() --[[ Line: 66 ]]
+function Module.new()
 	-- upvalues: Module (copy), ConnectionUtil (copy), VRService (copy)
 	local self = setmetatable({}, Module)
 	self.partCFrameMap = {}
 	self.connections = ConnectionUtil.new()
 	self.analyticsSendEnabled = true
-	self.connections:connect("AvatarGestures", VRService:GetPropertyChangedSignal("AvatarGestures"), function() --[[ Line: 71 ]]
+	self.connections:connect("AvatarGestures", VRService:GetPropertyChangedSignal("AvatarGestures"), function()
 		-- upvalues: self (copy)
 		self:onAvatarGesturesChanged()
 	end)
@@ -36,7 +36,7 @@ function Module.new() --[[ Line: 66 ]]
 	return self
 end
 
-function Module:onCharacterChanged(Character) --[[ Line: 76 ]]
+function Module:onCharacterChanged(Character)
 	-- upvalues: VRAvatarGesturesFixFirstPersonHeadScale (copy), VRService (copy)
 	local Humanoid = Character:FindFirstChild("Humanoid")
 	
@@ -55,7 +55,7 @@ function Module:onCharacterChanged(Character) --[[ Line: 76 ]]
 	local CurrentCamera = workspace.CurrentCamera
 	
 	if CurrentCamera then
-		local function updateSeated(Sit) --[[ Line: 97 ]]
+		local function updateSeated(Sit)
 			-- upvalues: CurrentCamera (copy), VRAvatarGesturesFixFirstPersonHeadScale (upval), Humanoid (copy)
 			local IsVehicleSeat = CurrentCamera.CameraSubject and CurrentCamera.CameraSubject:IsA("VehicleSeat")
 			local IsMagnitudeBelow = (CurrentCamera.CFrame.Position - CurrentCamera.Focus.Position).Magnitude <= (if VRAvatarGesturesFixFirstPersonHeadScale then 5 * CurrentCamera.HeadScale else 5)
@@ -72,7 +72,7 @@ function Module:onCharacterChanged(Character) --[[ Line: 76 ]]
 		end
 		
 		updateSeated(Humanoid.Sit)
-		self.connections:connect("Seated", Humanoid.Seated, function(p1) --[[ Line: 113 ]]
+		self.connections:connect("Seated", Humanoid.Seated, function(p1)
 			-- upvalues: updateSeated (copy), CurrentCamera (copy), VRAvatarGesturesFixFirstPersonHeadScale (upval), VRService (upval)
 			updateSeated(p1)
 			
@@ -85,7 +85,7 @@ function Module:onCharacterChanged(Character) --[[ Line: 76 ]]
 	end
 end
 
-function Module:onAvatarGesturesChanged() --[[ Line: 122 ]]
+function Module:onAvatarGesturesChanged()
 	-- upvalues: VRService (copy), DebugImmersionModeNonVR (copy), RobloxReplicatedStorage (copy), AvatarUtil (copy), Players (copy), RbxAnalyticsService (copy), VRAvatarGesturesAnalyticsThrottleHundrethsPercent (copy)
 	if VRService.AvatarGestures then
 		if VRService.VREnabled or DebugImmersionModeNonVR then
@@ -105,7 +105,7 @@ function Module:onAvatarGesturesChanged() --[[ Line: 122 ]]
 				end
 			else
 				self.avatarUtil = AvatarUtil.new()
-				self.avatarUtil:connectLocalCharacterChanges(function(p1) --[[ Line: 139 ]]
+				self.avatarUtil:connectLocalCharacterChanges(function(p1)
 					-- upvalues: self (copy)
 					self:onCharacterChanged(p1)
 				end)
@@ -126,14 +126,14 @@ function Module:onAvatarGesturesChanged() --[[ Line: 122 ]]
 			end
 		end
 		self.connections:disconnectAll()
-		self.connections:connect("AvatarGestures", VRService:GetPropertyChangedSignal("AvatarGestures"), function() --[[ Line: 168 ]]
+		self.connections:connect("AvatarGestures", VRService:GetPropertyChangedSignal("AvatarGestures"), function()
 			-- upvalues: self (copy)
 			self:onAvatarGesturesChanged()
 		end)
 	end
 end
 
-function Module:updateCFrames(Text, p1) --[[ Line: 172 ]]
+function Module:updateCFrames(Text, p1)
 	-- upvalues: Players (copy), VRService (copy), VRAvatarGesturesFixFirstPersonHeadScale (copy)
 	local LocalPlayer = Players.LocalPlayer
 	
@@ -193,16 +193,16 @@ function Module:updateCFrames(Text, p1) --[[ Line: 172 ]]
 	Text1.CFrame = CFrame.new(Child.Position) * Child1.CFrame.Rotation
 end
 
-function Module:steppedCframes() --[[ Line: 264 ]]
+function Module:steppedCframes()
 	for i, value in pairs(self.partCFrameMap) do
 		self:updateCFrames(i, value)
 	end
 end
 
-function Module:connectInputCFrames() --[[ Line: 270 ]]
+function Module:connectInputCFrames()
 	-- upvalues: VRService (copy), DebugImmersionModeNonVR (copy), RunService (copy)
 	if VRService.VREnabled then
-		self.connections:connect("UserCFrameChanged", VRService.UserCFrameChanged, function(UserCFrame, TrackedHead) --[[ Line: 272 ]]
+		self.connections:connect("UserCFrameChanged", VRService.UserCFrameChanged, function(UserCFrame, TrackedHead)
 			-- upvalues: self (copy)
 			if UserCFrame == Enum.UserCFrame.LeftHand then
 				self.partCFrameMap.TrackedLeftHand = TrackedHead
@@ -219,7 +219,7 @@ function Module:connectInputCFrames() --[[ Line: 270 ]]
 			end
 		end)
 	elseif DebugImmersionModeNonVR then
-		self.connections:connect("NonVRSimulateInput", RunService.RenderStepped, function(_) --[[ Line: 282 ]]
+		self.connections:connect("NonVRSimulateInput", RunService.RenderStepped, function(_)
 			-- upvalues: self (copy)
 			self.partCFrameMap.TrackedLeftHand = CFrame.new(-0.5, 0, -0.5)
 			self.partCFrameMap.TrackedRightHand = CFrame.new(0.5, 0, -0.5)
@@ -227,7 +227,7 @@ function Module:connectInputCFrames() --[[ Line: 270 ]]
 		end)
 	end
 	if VRService.VREnabled or DebugImmersionModeNonVR then
-		self.connections:connect("RenderStepped", RunService.RenderStepped, function(_) --[[ Line: 290 ]]
+		self.connections:connect("RenderStepped", RunService.RenderStepped, function(_)
 			-- upvalues: self (copy)
 			self:steppedCframes()
 		end)

@@ -8,17 +8,17 @@ local FFlagMomentsFixRecommendationImpressionLifecycleModule = require(Moments.F
 local FFlagMomentsNavigationEventModule = require(Moments.Flags.FFlagMomentsNavigationEvent)
 local HttpService = game:GetService("HttpService")
 
-local function _() --[[ Line: 93 | Named "mintViewId" ]]
+local function _()
 	-- upvalues: HttpService (copy)
 	return HttpService:GenerateGUID(false)
 end
 
-local _ = function(Current, LeftItemId, ToIndex) --[[ Line: 99 | Named "resolvePagerDestination" ]]
+local _ = function(Current, LeftItemId, ToIndex)
 	-- upvalues: NavigationDestinationTypeModule (copy)
 	return if Current == nil or LeftItemId == nil or Current.leftItemId ~= LeftItemId or Current.toIndex ~= ToIndex then NavigationDestinationTypeModule.Unknown else Current.destination
 end
 
-return function(p1, p2) --[[ Line: 113 | Named "useFeedTelemetry" ]]
+return function(p1, p2)
 	-- upvalues: ReactModule (copy), FFlagMomentsNavigationEventModule (copy), NavigationDestinationTypeModule (copy), SignalsModule (copy), HttpService (copy), FFlagMomentsFixRecommendationImpressionLifecycleModule (copy)
 	local Active = p2.active
 	local UseRefResult = ReactModule.useRef(nil)
@@ -43,7 +43,7 @@ return function(p1, p2) --[[ Line: 113 | Named "useFeedTelemetry" ]]
 	UseRefResult12.current = p2.inactiveDestination
 	local UseRefResult13 = ReactModule.useRef(Active)
 	UseRefResult13.current = Active
-	local UseResult = ReactModule.useCallback(function(p3) --[[ Line: 154 ]]
+	local UseResult = ReactModule.useCallback(function(p3)
 		-- upvalues: UseRefResult (copy), UseRefResult2 (copy), UseRefResult3 (copy), UseRefResult4 (copy), UseRefResult6 (copy), UseRefResult1 (copy), UseRefResult7 (copy), UseRefResult11 (copy), FFlagMomentsNavigationEventModule (upval), NavigationDestinationTypeModule (upval)
 		local Current = UseRefResult.current
 		
@@ -81,9 +81,9 @@ return function(p1, p2) --[[ Line: 113 | Named "useFeedTelemetry" ]]
 		end
 		return Current2
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 198 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SignalsModule (upval), p1 (copy), FFlagMomentsNavigationEventModule (upval), UseRefResult (copy), UseRefResult5 (copy), NavigationDestinationTypeModule (upval), UseResult (copy), UseRefResult13 (copy), UseRefResult10 (copy), UseRefResult8 (copy), UseRefResult1 (copy), UseRefResult2 (copy), UseRefResult4 (copy), HttpService (upval), UseRefResult3 (copy), UseRefResult9 (copy)
-		local Effect = SignalsModule.createEffect(function(p3) --[[ Line: 199 ]]
+		local Effect = SignalsModule.createEffect(function(p3)
 			-- upvalues: p1 (upval), FFlagMomentsNavigationEventModule (upval), UseRefResult (upval), UseRefResult5 (upval), NavigationDestinationTypeModule (upval), UseResult (upval), UseRefResult13 (upval), UseRefResult10 (upval), UseRefResult8 (upval), UseRefResult1 (upval), UseRefResult2 (upval), UseRefResult4 (upval), HttpService (upval), UseRefResult3 (upval), UseRefResult9 (upval)
 			local CurrentItem = p1.getCurrentItem(p3)
 			local Unknown = nil
@@ -116,13 +116,13 @@ return function(p1, p2) --[[ Line: 113 | Named "useFeedTelemetry" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 241 ]]
+		return function()
 			-- upvalues: Effect (copy), UseResult (upval)
 			Effect()
 			UseResult()
 		end
 	end, { p1, UseResult })
-	ReactModule.useEffect(function() --[[ Line: 252 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Active (copy), FFlagMomentsFixRecommendationImpressionLifecycleModule (upval), UseRefResult (copy), p1 (copy), UseRefResult8 (copy), UseRefResult1 (copy), UseRefResult2 (copy), UseRefResult3 (copy), UseRefResult4 (copy), FFlagMomentsNavigationEventModule (upval), HttpService (upval), UseResult (copy), UseRefResult12 (copy)
 		if Active then
 			if FFlagMomentsFixRecommendationImpressionLifecycleModule and UseRefResult.current == nil then
@@ -160,11 +160,11 @@ return function(p1, p2) --[[ Line: 113 | Named "useFeedTelemetry" ]]
 	
 	return {
 		flushView = UseResult,
-		getViewId = function() --[[ Line: 282 ]]
+		getViewId = function()
 			-- upvalues: UseRefResult4 (copy)
 			return UseRefResult4.current
 		end,
-		noteUserStep = function(p3, ToIndex) --[[ Line: 285 ]]
+		noteUserStep = function(p3, ToIndex)
 			-- upvalues: UseRefResult5 (copy), UseRefResult (copy), NavigationDestinationTypeModule (upval)
 			local ToIndexDelta = ToIndex - p3
 			

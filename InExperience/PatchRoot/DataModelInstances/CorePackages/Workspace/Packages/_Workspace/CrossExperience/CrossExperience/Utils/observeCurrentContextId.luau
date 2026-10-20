@@ -1,10 +1,10 @@
 ﻿local v1 = nil
 local Flag = false
 
-local function _() --[[ Line: 3 ]]
+local function _()
 	-- upvalues: Flag (ref), v1 (ref)
 	if not Flag then
-		local Success, Result = pcall(function() --[[ Line: 5 ]]
+		local Success, Result = pcall(function()
 			return game:GetService("AudioFocusService")
 		end)
 		
@@ -16,10 +16,10 @@ local function _() --[[ Line: 3 ]]
 	return v1
 end
 
-return function(Callback: (any) -> ()) --[[ Line: 16 ]]
+return function(Callback: (any) -> ())
 	-- upvalues: Flag (ref), v1 (ref)
 	if not Flag then
-		local Success, Result = pcall(function() --[[ Line: 5 ]]
+		local Success, Result = pcall(function()
 			return game:GetService("AudioFocusService")
 		end)
 		
@@ -34,7 +34,7 @@ return function(Callback: (any) -> ()) --[[ Line: 16 ]]
 		local FocusedContextId = AudioFocusService:GetFocusedContextId()
 		Callback(FocusedContextId)
 		
-		local function Callback1() --[[ Line: 21 ]]
+		local function Callback1()
 			-- upvalues: AudioFocusService (copy), FocusedContextId (ref), Callback (copy)
 			local FocusedContextId1 = AudioFocusService:GetFocusedContextId()
 			

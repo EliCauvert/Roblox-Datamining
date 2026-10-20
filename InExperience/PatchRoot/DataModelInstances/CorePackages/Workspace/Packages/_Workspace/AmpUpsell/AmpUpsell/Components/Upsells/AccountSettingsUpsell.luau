@@ -12,7 +12,7 @@ local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 
-function AccountSettingsUpsell(p1) --[[ Line: 27 ]]
+function AccountSettingsUpsell(p1)
 	-- upvalues: UseLocalizationFunction (copy), UseStyleFunction (copy), AnalyticsServiceModule (copy), ReactModule (copy), PartialPageModal (copy), SendButtonClickEventModule (copy), AppScreensModule (copy), ButtonType (copy), StyledTextLabel (copy)
 	local OnCloseModalFunction = p1.onCloseModal
 	local OnCloseModalFunction1 = p1.onCloseModal
@@ -37,7 +37,7 @@ function AccountSettingsUpsell(p1) --[[ Line: 27 ]]
 			Content = ReactModule.createElement(PartialPageModal, {
 				title = UseLocalizationResult.title,
 				screenSize = p1.screenSize,
-				onCloseClicked = function() --[[ Line: 39 ]]
+				onCloseClicked = function()
 					-- upvalues: SendButtonClickEventModule (upval), AnalyticsService (copy), AppScreensModule (upval), FeatureName (copy), OnCloseModalFunction (copy)
 					SendButtonClickEventModule(AnalyticsService, AppScreensModule.AccountSettingsUpsell, FeatureName, "CloseModal")
 					OnCloseModalFunction()
@@ -50,7 +50,7 @@ function AccountSettingsUpsell(p1) --[[ Line: 27 ]]
 							buttonType = ButtonType.Secondary,
 							props = {
 								isDisabled = false,
-								onActivated = function() --[[ Line: 51 ]]
+								onActivated = function()
 									-- upvalues: SendButtonClickEventModule (upval), AnalyticsService (copy), AppScreensModule (upval), FeatureName (copy), OnCloseModalFunction1 (copy)
 									SendButtonClickEventModule(AnalyticsService, AppScreensModule.AccountSettingsUpsell, FeatureName, "Cancelled")
 									OnCloseModalFunction1()
@@ -62,7 +62,7 @@ function AccountSettingsUpsell(p1) --[[ Line: 27 ]]
 							buttonType = ButtonType.PrimarySystem,
 							props = {
 								isDisabled = false,
-								onActivated = function() --[[ Line: 67 ]]
+								onActivated = function()
 									-- upvalues: SendButtonClickEventModule (upval), AnalyticsService (copy), AppScreensModule (upval), FeatureName (copy), p1 (copy), UseLocalizationResult (copy)
 									SendButtonClickEventModule(AnalyticsService, AppScreensModule.AccountSettingsUpsell, FeatureName, "OpenAccountSettings")
 									p1.openAccountSettings(UseLocalizationResult.buttonSettings)
@@ -97,7 +97,7 @@ function AccountSettingsUpsell(p1) --[[ Line: 27 ]]
 	})
 end
 
-AccountSettingsUpsell = RoactRoduxModule.connect(function(p1, _) --[[ Line: 121 ]]
+AccountSettingsUpsell = RoactRoduxModule.connect(function(p1, _)
 	return { screenSize = p1.ScreenSize }
 end)(AccountSettingsUpsell)
 

@@ -7,7 +7,7 @@ local RobloxSubscriptionStoreModule = require(RobloxSubscriptionPurchaseApp.Stor
 local Callback = nil
 
 return {
-	render = function() --[[ Line: 19 ]]
+	render = function()
 		-- upvalues: RobloxSubscriptionStoreModule (copy), ReactRobloxModule (copy), ReactModule (copy), RobloxSubscriptionHeadlessListenerHostModule (copy), Callback (ref)
 		local GetResult = RobloxSubscriptionStoreModule.get()
 		GetResult.triggerUnmountUI()
@@ -17,7 +17,7 @@ return {
 		local Root = ReactRobloxModule.createRoot(RobloxSubscriptionPurchaseHeadlessOverlay)
 		Root:render(ReactModule.createElement(RobloxSubscriptionHeadlessListenerHostModule))
 		
-		local function cleanup() --[[ Line: 30 ]]
+		local function cleanup()
 			-- upvalues: Root (copy), RobloxSubscriptionPurchaseHeadlessOverlay (copy)
 			Root:unmount()
 			RobloxSubscriptionPurchaseHeadlessOverlay:Destroy()
@@ -28,7 +28,7 @@ return {
 		
 		return cleanup
 	end,
-	close = function() --[[ Line: 12 ]]
+	close = function()
 		-- upvalues: Callback (ref)
 		if Callback then
 			Callback()

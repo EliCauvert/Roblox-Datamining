@@ -3,7 +3,7 @@ local _ = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local LoadableImage = require(Parent.UIBlox).App.Loading.LoadableImage
 
-return function(p1) --[[ Line: 18 | Named "SduiDefaultTileImage" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), LoadableImage (copy)
 	return ReactModule.createElement(LoadableImage, {
 		showFailedStateWhenLoadingFailed = true,

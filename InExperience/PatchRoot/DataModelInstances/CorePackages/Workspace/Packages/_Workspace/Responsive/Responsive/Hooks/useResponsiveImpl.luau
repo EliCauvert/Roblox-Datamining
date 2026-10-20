@@ -3,11 +3,11 @@ local ResponsiveModule = require(script.Parent.Parent.Responsive)
 local ContainerRefModule = require(script.Parent.Parent.Context.ContainerRef)
 local LuaAppResponsiveFixHookDeps = game:DefineFastFlag("LuaAppResponsiveFixHookDeps", false)
 
-function id(p1) --[[ Line: 9 ]]
+function id(p1)
 	return p1
 end
 
-function useResponsiveImpl(List, p1, p2) --[[ Line: 17 ]]
+function useResponsiveImpl(List, p1, p2)
 	-- upvalues: ReactModule (copy), ContainerRefModule (copy), ResponsiveModule (copy), LuaAppResponsiveFixHookDeps (copy)
 	local List1 = if typeof(List) == "function" then List else id
 	local UseContextResult = ReactModule.useContext(ContainerRefModule)
@@ -23,11 +23,11 @@ function useResponsiveImpl(List, p1, p2) --[[ Line: 17 ]]
 			v1[value] = true
 		end
 	end
-	ReactModule.useEffect(function() --[[ Line: 34 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseContextResult (copy), ResponsiveModule (upval), p1 (copy), p2 (copy), v1 (ref), UseRefResult (copy), UseRefResult1 (copy), UseStateResult2 (copy), List1 (copy)
 		if UseContextResult and UseContextResult.current then
 			local BindContainerResult = ResponsiveModule.bindContainer(UseContextResult.current, p1)
-			local Connection = BindContainerResult:connect(function() --[[ Line: 37 ]]
+			local Connection = BindContainerResult:connect(function()
 				-- upvalues: BindContainerResult (copy), p2 (upval), v1 (upval), UseRefResult (upval), UseRefResult1 (upval), UseStateResult2 (upval), List1 (upval)
 				local CurrentKeyResult = BindContainerResult:currentKey(p2)
 				
@@ -47,13 +47,13 @@ function useResponsiveImpl(List, p1, p2) --[[ Line: 17 ]]
 			UseStateResult2(List1(CurrentKeyResult))
 			UseRefResult.current = CurrentKeyResult
 			
-			return function() --[[ Line: 56 ]]
+			return function()
 				-- upvalues: Connection (copy), BindContainerResult (copy)
 				Connection:disconnect()
 				BindContainerResult:destroy()
 			end
 		else
-			return function() --[[ Line: 61 ]] end
+			return function() end
 		end
 	end, {
 		UseContextResult,

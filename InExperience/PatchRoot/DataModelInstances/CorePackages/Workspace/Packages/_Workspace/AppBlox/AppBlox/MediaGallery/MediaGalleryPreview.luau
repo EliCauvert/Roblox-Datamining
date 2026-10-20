@@ -36,7 +36,7 @@ MediaGalleryPreview.defaultProps = {
 	size = UDim2.fromScale(1, 1)
 }
 
-function MediaGalleryPreview.getDerivedStateFromProps(State, State1) --[[ Line: 77 ]]
+function MediaGalleryPreview.getDerivedStateFromProps(State, State1)
 	-- upvalues: GetShowItemsModule (copy)
 	if State1.items == State.items and State1.numberOfThumbnails == State.numberOfThumbnails then return end
 	local ShowItemsModule, ShowItemsModule2, ShowItemsModule3 = GetShowItemsModule(State)
@@ -53,7 +53,7 @@ function MediaGalleryPreview.getDerivedStateFromProps(State, State1) --[[ Line: 
 	}
 end
 
-function MediaGalleryPreview.init(p1) --[[ Line: 95 ]]
+function MediaGalleryPreview.init(p1)
 	-- upvalues: OtterModule (copy), RoactModule (copy)
 	p1.state = {
 		items = nil,
@@ -78,17 +78,17 @@ function MediaGalleryPreview.init(p1) --[[ Line: 95 ]]
 	p1.progress, p1.updateProgress = RoactModule.createBinding(0)
 	p1.previewTransparency, p1.updatePreviewTransparency = RoactModule.createBinding(0)
 	
-	function p1.onResize(Frame) --[[ Line: 122 ]]
+	function p1.onResize(Frame)
 		-- upvalues: p1 (copy)
 		p1:updateSizes(Frame)
 		p1.updateCanvasPosition(Vector2.new(p1:getCanvasPositionX(), 0))
 	end
 	
-	function p1:onMouseLeave(Input) --[[ Line: 127 ]]
+	function p1:onMouseLeave(Input)
 		-- upvalues: p1 (copy)
 		if Input.UserInputType == Enum.UserInputType.MouseMovement then
 			p1.resetAnimation()
-			p1:setState(function(State) --[[ Line: 133 ]]
+			p1:setState(function(State)
 				-- upvalues: p1 (upval)
 				local SelectedIndex = State.selectedIndex
 				
@@ -103,7 +103,7 @@ function MediaGalleryPreview.init(p1) --[[ Line: 95 ]]
 		end
 	end
 	
-	function p1.onPreviewActivated() --[[ Line: 145 ]]
+	function p1.onPreviewActivated()
 		-- upvalues: p1 (copy)
 		p1.resetAnimation()
 		p1:setState({ animationOn = false })
@@ -113,10 +113,10 @@ function MediaGalleryPreview.init(p1) --[[ Line: 95 ]]
 		end
 	end
 	
-	function p1:onMouseEnterPagination(Input) --[[ Line: 160 ]]
+	function p1:onMouseEnterPagination(Input)
 		-- upvalues: p1 (copy)
 		if Input.UserInputType == Enum.UserInputType.MouseMovement then
-			p1:setState(function(p2) --[[ Line: 165 ]]
+			p1:setState(function(p2)
 				if p2.showArrows then return end
 				return { showArrows = true }
 			end)
@@ -125,10 +125,10 @@ function MediaGalleryPreview.init(p1) --[[ Line: 95 ]]
 		end
 	end
 	
-	function p1:onMouseLeavePagination(Input) --[[ Line: 176 ]]
+	function p1:onMouseLeavePagination(Input)
 		-- upvalues: p1 (copy)
 		if Input.UserInputType == Enum.UserInputType.MouseMovement then
-			p1:setState(function(p2) --[[ Line: 181 ]]
+			p1:setState(function(p2)
 				if not p2.showArrows then return end
 				return { showArrows = false }
 			end)
@@ -137,7 +137,7 @@ function MediaGalleryPreview.init(p1) --[[ Line: 95 ]]
 		end
 	end
 	
-	function p1.onCycleLeftActivated() --[[ Line: 192 ]]
+	function p1.onCycleLeftActivated()
 		-- upvalues: p1 (copy)
 		if not p1.scrolling then
 			local Largest = math.max(p1.state.focusIndex - 1, 1)
@@ -148,7 +148,7 @@ function MediaGalleryPreview.init(p1) --[[ Line: 95 ]]
 		end
 	end
 	
-	function p1.onCycleRightActivated() --[[ Line: 206 ]]
+	function p1.onCycleRightActivated()
 		-- upvalues: p1 (copy)
 		if not p1.scrolling then
 			local Smallest = math.min(p1.state.focusIndex + 1, #p1.props.items)
@@ -159,7 +159,7 @@ function MediaGalleryPreview.init(p1) --[[ Line: 95 ]]
 		end
 	end
 	
-	function p1.onItemActivated(p2) --[[ Line: 221 ]]
+	function p1.onItemActivated(p2)
 		-- upvalues: p1 (copy)
 		local IsYouTubeVideo = p1.state.itemsToShow[p2].isYouTubeVideo
 		local SelectedIndex = p1.state.selectedIndex
@@ -177,21 +177,21 @@ function MediaGalleryPreview.init(p1) --[[ Line: 95 ]]
 		end
 	end
 	
-	function p1.onItemPlayActivated(p2) --[[ Line: 241 ]]
+	function p1.onItemPlayActivated(p2)
 		-- upvalues: p1 (copy)
 		p1.resetAnimation()
 		p1:setState({ animationOn = false })
 		p1.onVideoPlayActivated(p2)
 	end
 	
-	function p1.onVideoPlayActivated(p2) --[[ Line: 250 ]]
+	function p1.onVideoPlayActivated(p2)
 		-- upvalues: p1 (copy)
 		if p1.props.onVideoPlayActivated then
 			p1.props.onVideoPlayActivated(p1.state.itemsToShow[p2].originalIndex)
 		end
 	end
 	
-	function p1.getNextFocusIndex(SelectedIndex) --[[ Line: 259 ]]
+	function p1.getNextFocusIndex(SelectedIndex)
 		-- upvalues: p1 (copy)
 		local FocusIndex = p1.state.focusIndex
 		local NumberOfThumbnails = p1.props.numberOfThumbnails
@@ -199,14 +199,14 @@ function MediaGalleryPreview.init(p1) --[[ Line: 95 ]]
 		return if SelectedIndex < FocusIndex then SelectedIndex elseif FocusIndex + NumberOfThumbnails <= SelectedIndex then SelectedIndex - NumberOfThumbnails + 1 else FocusIndex
 	end
 	
-	function p1.resetAnimation() --[[ Line: 274 ]]
+	function p1.resetAnimation()
 		-- upvalues: p1 (copy)
 		p1.animationTime = 0
 		p1.updateProgress(0)
 		p1.updatePreviewTransparency(0)
 	end
 	
-	function p1.renderSteppedCallback(p2) --[[ Line: 280 ]]
+	function p1.renderSteppedCallback(p2)
 		-- upvalues: p1 (copy)
 		p1.animationTime += p2
 		local AnimationTimeDelta = p1.animationTime - 4.5
@@ -232,12 +232,12 @@ function MediaGalleryPreview.init(p1) --[[ Line: 95 ]]
 		end
 	end
 	
-	function p1.scrollMotorOnStep(X) --[[ Line: 310 ]]
+	function p1.scrollMotorOnStep(X)
 		-- upvalues: p1 (copy)
 		p1.updateCanvasPosition(Vector2.new(X, 0))
 	end
 	
-	function p1.scrollMotorOnComplete() --[[ Line: 314 ]]
+	function p1.scrollMotorOnComplete()
 		-- upvalues: p1 (copy)
 		p1.scrolling = false
 	end
@@ -246,7 +246,7 @@ function MediaGalleryPreview.init(p1) --[[ Line: 95 ]]
 	p1.scrollMotor:onComplete(p1.scrollMotorOnComplete)
 end
 
-function MediaGalleryPreview.render(p1) --[[ Line: 322 ]]
+function MediaGalleryPreview.render(p1)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy), IconButton (copy), IconSize (copy), Images (copy), EventConnection (copy), RunService (copy)
 	local LayoutOrder = p1.props.layoutOrder
 	local AnchorPoint = p1.props.anchorPoint
@@ -267,7 +267,7 @@ function MediaGalleryPreview.render(p1) --[[ Line: 322 ]]
 	local IsFocusIndexBelow = FocusIndex <= 1
 	local IsFocusIndexAbove = #ItemsToShow < FocusIndex + NumberOfThumbnails
 	
-	return WithStyleFunction(function(p2) --[[ Line: 346 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: RoactModule (upval), LayoutOrder (copy), Size (copy), AnchorPoint (copy), Position (copy), p1 (copy), NoAnimationOn (copy), AnimationOn (copy), NewSelectedIndex (copy), ItemsToShow (copy), SelectedIndex (copy), IsNumberOfThumbnailsBelow (copy), ShowArrows (copy), IconButton (upval), IconSize (upval), Images (upval), IsFocusIndexBelow (copy), IsFocusIndexAbove (copy), EventConnection (upval), RunService (upval)
 		return RoactModule.createElement("Frame", {
 			LayoutOrder = LayoutOrder,
@@ -350,7 +350,7 @@ function MediaGalleryPreview.render(p1) --[[ Line: 322 ]]
 	end)
 end
 
-function MediaGalleryPreview.renderScroller(p1, p2) --[[ Line: 432 ]]
+function MediaGalleryPreview.renderScroller(p1, p2)
 	-- upvalues: RoactModule (copy), IconSize (copy)
 	return RoactModule.createElement("ScrollingFrame", {
 		BackgroundTransparency = 1,
@@ -366,7 +366,7 @@ function MediaGalleryPreview.renderScroller(p1, p2) --[[ Line: 432 ]]
 	}, p1:renderThumbnails(p2))
 end
 
-function MediaGalleryPreview.renderThumbnails(p1, p2) --[[ Line: 447 ]]
+function MediaGalleryPreview.renderThumbnails(p1, p2)
 	-- upvalues: RoactModule (copy), ThumbnailButtonModule (copy)
 	local SelectedIndex = p1.state.selectedIndex
 	local AnimationOn = p1.state.animationOn
@@ -402,7 +402,7 @@ function MediaGalleryPreview.renderThumbnails(p1, p2) --[[ Line: 447 ]]
 	return config
 end
 
-function MediaGalleryPreview.renderTimerBar(p3, p4) --[[ Line: 488 ]]
+function MediaGalleryPreview.renderTimerBar(p3, p4)
 	-- upvalues: RoactModule (copy)
 	local UIDefault = p4.Theme.UIDefault
 	local SecondaryContent = p4.Theme.SecondaryContent
@@ -429,7 +429,7 @@ function MediaGalleryPreview.renderTimerBar(p3, p4) --[[ Line: 488 ]]
 				BorderSizePixel = 0,
 				BackgroundTransparency = 1,
 				ClipsDescendants = true,
-				Size = p3.progress:map(function(XScale): UDim2 --[[ Line: 513 ]]
+				Size = p3.progress:map(function(XScale): UDim2
 					return UDim2.fromScale(XScale, 1)
 				end)
 			}, {
@@ -446,7 +446,7 @@ function MediaGalleryPreview.renderTimerBar(p3, p4) --[[ Line: 488 ]]
 	})
 end
 
-function MediaGalleryPreview.didUpdate(p3, _, State) --[[ Line: 535 ]]
+function MediaGalleryPreview.didUpdate(p3, _, State)
 	if p3.state.focusIndex ~= State.focusIndex then
 		p3:scrollToNewIndex()
 	end
@@ -455,7 +455,7 @@ function MediaGalleryPreview.didUpdate(p3, _, State) --[[ Line: 535 ]]
 	end
 end
 
-function MediaGalleryPreview.updateSizes(p3, Frame: Frame) --[[ Line: 545 ]]
+function MediaGalleryPreview.updateSizes(p3, Frame: Frame)
 	-- upvalues: CalcMediaGallerySizesFromWidthModule (copy), CalcMediaGallerySizesFromHeightModule (copy)
 	local Y = Frame.AbsoluteSize.Y
 	local NumberOfThumbnails = p3.props.numberOfThumbnails
@@ -470,11 +470,11 @@ function MediaGalleryPreview.updateSizes(p3, Frame: Frame) --[[ Line: 545 ]]
 	p3.updateThumbnailSize(MediaGallerySizesFromWidthModule.thumbnailSize)
 end
 
-function MediaGalleryPreview.getCanvasPositionX(p3): number --[[ Line: 561 ]]
+function MediaGalleryPreview.getCanvasPositionX(p3): number
 	return (p3.state.focusIndex - 1) * (p3.thumbnailSize:getValue().X.Offset + 12)
 end
 
-function MediaGalleryPreview.scrollToNewIndex(p3) --[[ Line: 567 ]]
+function MediaGalleryPreview.scrollToNewIndex(p3)
 	-- upvalues: OtterModule (copy), config (copy)
 	local CanvasPositionX = p3:getCanvasPositionX()
 	p3.scrollMotor:setGoal(OtterModule.instant(p3.canvasPosition:getValue().X))

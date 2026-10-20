@@ -1,6 +1,6 @@
 ﻿local HttpResponseStatus = require(script.Parent.Parent.InternalHttpStore).HttpResponseStatus
 
-return function(p1): boolean --[[ Line: 9 | Named "isHttpStoreFetchCancelled" ]]
+return function(p1): boolean
 	-- upvalues: HttpResponseStatus (copy)
 	if p1.status ~= HttpResponseStatus.Failed then
 		return false

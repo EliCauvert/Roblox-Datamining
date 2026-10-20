@@ -8,14 +8,14 @@ local _ = require(MomentsCommon.Media.mediaNodeRegistry)
 local PreloadFastIntsModule = require(MomentsCommon.Media.Preload.preloadFastInts)
 local FFlagMomentsPreloadScreenshotImageLabelModule = require(MomentsCommon.Flags.FFlagMomentsPreloadScreenshotImageLabel)
 
-local function _(CornerRadius) --[[ Line: 73 | Named "renderCorner" ]]
+local function _(CornerRadius)
 	-- upvalues: ReactModule (copy)
 	return if CornerRadius == nil then nil else ReactModule.createElement("UICorner", { CornerRadius = CornerRadius })
 end
 
 return {
 	kind = "screenshot",
-	create = function(p1, p2) --[[ Line: 81 ]]
+	create = function(p1, p2)
 		-- upvalues: PreloadFastIntsModule (copy), SignalsModule (copy), FFlagMomentsPreloadScreenshotImageLabelModule (copy), ReactModule (copy), View (copy)
 		local Image = p1.image
 		assert(Image ~= nil or p1.imageContent ~= nil, "createScreenshotNode: screenshot content is required")
@@ -28,7 +28,7 @@ return {
 		local Signal3, Signal2_2 = SignalsModule.createSignal(nil)
 		local Flag = false
 		local Flag1 = false
-		local HeartbeatConnection = p2.runService.Heartbeat:Connect(function(DeltaTime) --[[ Line: 98 ]]
+		local HeartbeatConnection = p2.runService.Heartbeat:Connect(function(DeltaTime)
 			-- upvalues: Flag1 (ref), Flag (ref), Signal (copy), DurationSeconds (copy), Signal2 (copy)
 			if Flag1 or not Flag then return end
 			local NewSignalResult = Signal(false) + DeltaTime
@@ -39,7 +39,7 @@ return {
 			Signal2(NewSignalResult)
 		end)
 		
-		local function refreshLoaded() --[[ Line: 113 ]]
+		local function refreshLoaded()
 			-- upvalues: p2 (copy), Image (copy), Signal2_1 (copy), Signal2_2 (copy)
 			local AssetFetchStatus = p2.contentProvider:GetAssetFetchStatus(Image)
 			Signal2_1(AssetFetchStatus == Enum.AssetFetchStatus.Success)
@@ -61,11 +61,11 @@ return {
 			usesDecoder = false,
 			zIndex = 0,
 			id = p1.id,
-			assets = function() --[[ Line: 129 ]]
+			assets = function()
 				-- upvalues: PosterContent (copy), ImageContent (copy)
 				return if PosterContent == nil then { ImageContent } else { ImageContent, PosterContent }
 			end,
-			download = function() --[[ Line: 136 ]]
+			download = function()
 				-- upvalues: Flag1 (ref), FFlagMomentsPreloadScreenshotImageLabelModule (upval), ImageContent (copy), PosterContent (copy), p2 (copy)
 				if Flag1 then return end
 				if FFlagMomentsPreloadScreenshotImageLabelModule then
@@ -113,7 +113,7 @@ return {
 					end
 				end
 			end,
-			render = function(p3) --[[ Line: 195 ]]
+			render = function(p3)
 				-- upvalues: ReactModule (upval), View (upval), PosterContent (copy), ImageContent (copy)
 				local CreateElementFunction = ReactModule.createElement
 				local config = { tag = "size-full", ZIndex = 0 }
@@ -149,19 +149,19 @@ return {
 				
 				return CreateElementFunction(View, config, t)
 			end,
-			play = function() --[[ Line: 178 ]]
+			play = function()
 				-- upvalues: Flag (ref)
 				Flag = true
 			end,
-			pause = function() --[[ Line: 182 ]]
+			pause = function()
 				-- upvalues: Flag (ref)
 				Flag = false
 			end,
-			seek = function(Value: number) --[[ Line: 187 ]]
+			seek = function(Value: number)
 				-- upvalues: Signal2 (copy), DurationSeconds (copy)
 				Signal2((math.clamp(Value, 0, DurationSeconds)))
 			end,
-			dispose = function() --[[ Line: 226 ]]
+			dispose = function()
 				-- upvalues: Flag1 (ref), Flag (ref), HeartbeatConnection (copy), Connection (ref)
 				if Flag1 then return end
 				Flag1 = true
@@ -173,7 +173,7 @@ return {
 				end
 			end,
 			getPosition = Signal,
-			getDuration = function() --[[ Line: 191 ]]
+			getDuration = function()
 				-- upvalues: DurationSeconds (copy)
 				return DurationSeconds
 			end,

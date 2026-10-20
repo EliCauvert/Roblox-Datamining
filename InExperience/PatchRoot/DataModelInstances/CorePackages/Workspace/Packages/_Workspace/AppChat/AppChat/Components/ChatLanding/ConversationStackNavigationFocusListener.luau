@@ -20,13 +20,13 @@ local config = {
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p1) --[[ Line: 39 | Named "ConversationStackNavigationFocusListener" ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), ReactFocusNavigationModule (copy), SquadExternalContractContext (copy), UseCurrentSquadParentChannelIdFunction (copy), FFlagAppChatConsoleFocusFixesModule (copy), GetFirstFocusableDescendantFunction (copy), EnumScreensModule (copy), LeaveSquadFunction (copy), SquadPromptType (copy), MutedErrorFunction (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), config (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseContextResult = ReactModule.useContext(ReactFocusNavigationModule.FocusNavigationContext)
 	local UseContextResult1 = ReactModule.useContext(SquadExternalContractContext)
 	local UseCurrentSquadParentChannelIdResult = UseCurrentSquadParentChannelIdFunction()
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 45 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy), UseContextResult (copy), FFlagAppChatConsoleFocusFixesModule (upval), GetFirstFocusableDescendantFunction (upval)
 		local ConversationStackNavigatorChildNavigation = p1.navigation.getChildNavigation("ConversationStackNavigator")
 		
@@ -52,7 +52,7 @@ return function(p1) --[[ Line: 39 | Named "ConversationStackNavigationFocusListe
 		p1.navigation, p1.leftContainerRef, p1.rightContainerRef,
 		p1.conversationTopBarRef, p1.conversationPanelRef, UseContextResult
 	})
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 79 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy), EnumScreensModule (upval), UseCurrentSquadParentChannelIdResult (copy), UseDispatchResult (copy), LeaveSquadFunction (upval), SquadPromptType (upval), UseContextResult1 (copy), MutedErrorFunction (upval)
 		local ConversationStackNavigatorChildNavigation = p1.navigation.getChildNavigation("ConversationStackNavigator")
 		
@@ -70,7 +70,7 @@ return function(p1) --[[ Line: 39 | Named "ConversationStackNavigationFocusListe
 				if UseCurrentSquadParentChannelIdResult == nil or UseCurrentSquadParentChannelIdResult == ConversationId then
 					p1.navigation.navigate(EnumScreensModule.SquadLobby, { conversationId = ConversationId })
 				else
-					UseDispatchResult(LeaveSquadFunction(SquadPromptType.JoinAnotherSquad, UseContextResult1.setSquadPrompt, function() --[[ Line: 89 ]]
+					UseDispatchResult(LeaveSquadFunction(SquadPromptType.JoinAnotherSquad, UseContextResult1.setSquadPrompt, function()
 						-- upvalues: p1 (upval), EnumScreensModule (upval), ConversationId (copy)
 						p1.navigation.navigate(EnumScreensModule.SquadLobby, { conversationId = ConversationId })
 					end, UseContextResult1.squadLocation, true))
@@ -93,7 +93,7 @@ return function(p1) --[[ Line: 39 | Named "ConversationStackNavigationFocusListe
 	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0),
-		ref = ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function() --[[ Line: 111 ]]
+		ref = ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function()
 			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), UseResult (copy), UseResult1 (copy)
 			return {
 				[FocusNavigationEventNameEnum.NavigateBack] = { handler = InputHandlersModule.onRelease(UseResult) },

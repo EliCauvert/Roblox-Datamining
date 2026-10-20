@@ -6,24 +6,24 @@ local StyleUtilModule = require(Graphing.Util.StyleUtil)
 local TypesModule = require(Graphing.Types)
 local UseViewportBindingFunction = require(Graphing.Util.useViewportBinding).useViewportBinding
 
-local function _(Vector, AXISX) --[[ Line: 43 | Named "getDim" ]]
+local function _(Vector, AXISX)
 	-- upvalues: TypesModule (copy)
 	return if AXISX == TypesModule.AXIS_X then Vector.X else Vector.Y
 end
 
-local _ = function(XScale, XOffset, AXISX): UDim2 --[[ Line: 47 | Named "makeUDim2" ]]
+local _ = function(XScale, XOffset, AXISX): UDim2
 	-- upvalues: TypesModule (copy)
 	return if AXISX == TypesModule.AXIS_X then UDim2.new(XScale, XOffset) else UDim2.new(XOffset, XScale)
 end
 
-function Scrollbar(p1) --[[ Line: 51 ]]
+function Scrollbar(p1)
 	-- upvalues: StyleUtilModule (copy), ReactModule (copy), CanvasContextModule (copy), UseViewportBindingFunction (copy), TypesModule (copy), ScrollbarButtonModule (copy)
 	local Distance = p1.Distance or StyleUtilModule.SCROLLBAR_DISTANCE
 	local Size = p1.Size or StyleUtilModule.SCROLLBAR_SIZE
 	local ScrollButtonSize = p1.ScrollButtonSize or StyleUtilModule.SCROLLBAR_SCROLL_BUTTON_SIZE
 	local ZoomButtonSize = p1.ZoomButtonSize or StyleUtilModule.SCROLLBAR_ZOOM_BUTTON_SIZE
 	local UseContextResult = ReactModule.useContext(CanvasContextModule)
-	local UseViewportBindingResult = UseViewportBindingFunction(function(p2) --[[ Line: 59 ]]
+	local UseViewportBindingResult = UseViewportBindingFunction(function(p2)
 		-- upvalues: p1 (copy), TypesModule (upval)
 		local PlotToGraphX = if p1.Axis == TypesModule.AXIS_X then p2.plotToGraphX else p2.plotToGraphY
 		local ViewportRect = p2.getViewportRect()
@@ -42,7 +42,7 @@ function Scrollbar(p1) --[[ Line: 51 ]]
 			size = if p1.Axis == TypesModule.AXIS_X then UDim2.new(_UDim3, _UDim31) else UDim2.new(_UDim31, _UDim3)
 		}
 	end, { p1.Axis })
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 72 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy), TypesModule (upval), UseContextResult (copy)
 		if p1.OnViewChanged then
 			local PlotToGraphX = if p1.Axis == TypesModule.AXIS_X then UseContextResult.plotToGraphX else UseContextResult.plotToGraphY
@@ -100,7 +100,7 @@ function Scrollbar(p1) --[[ Line: 51 ]]
 			Rotation = Rotation,
 			Size = _UDim2_3,
 			Image = StyleUtilModule.SCROLLBAR_LEFT_SCROLL_BUTTON_IMAGE,
-			OnClick = ReactModule.useCallback(function() --[[ Line: 155 ]]
+			OnClick = ReactModule.useCallback(function()
 				-- upvalues: UseResult (copy)
 				UseResult(-0.04)
 			end, { UseResult })
@@ -111,7 +111,7 @@ function Scrollbar(p1) --[[ Line: 51 ]]
 			Rotation = Rotation,
 			Size = _UDim2_3,
 			Image = StyleUtilModule.SCROLLBAR_RIGHT_SCROLL_BUTTON_IMAGE,
-			OnClick = ReactModule.useCallback(function() --[[ Line: 159 ]]
+			OnClick = ReactModule.useCallback(function()
 				-- upvalues: UseResult (copy)
 				UseResult(0.04)
 			end, { UseResult })
@@ -126,10 +126,10 @@ function Scrollbar(p1) --[[ Line: 51 ]]
 			Body = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				Position = UseViewportBindingResult:map(function(p2) --[[ Line: 204 ]]
+				Position = UseViewportBindingResult:map(function(p2)
 					return p2.position
 				end),
-				Size = UseViewportBindingResult:map(function(p2) --[[ Line: 207 ]]
+				Size = UseViewportBindingResult:map(function(p2)
 					return p2.size
 				end)
 			}, {
@@ -137,7 +137,7 @@ function Scrollbar(p1) --[[ Line: 51 ]]
 					AnchorPoint = if p1.Axis == TypesModule.AXIS_X then Vector2.new(0, 0) else Vector2.new(0, 1),
 					Position = if p1.Axis == TypesModule.AXIS_X then UDim2.fromScale(0, 0) else UDim2.fromScale(0, 1),
 					Size = UDim2.fromScale(1, 1),
-					OnMoved = ReactModule.useCallback(function(p2) --[[ Line: 109 ]]
+					OnMoved = ReactModule.useCallback(function(p2)
 						-- upvalues: p1 (copy), TypesModule (upval), UseContextResult (copy), UseResult (copy)
 						local Min = UseContextResult.getViewportRect().Min
 						local PlotToViewResult = UseContextResult.plotToView(p2)
@@ -150,7 +150,7 @@ function Scrollbar(p1) --[[ Line: 51 ]]
 					Rotation = Rotation,
 					Size = _UDim2_4,
 					Image = StyleUtilModule.SCROLLBAR_LEFT_ZOOM_BUTTON_IMAGE,
-					OnMoved = ReactModule.useCallback(function(p2) --[[ Line: 119 ]]
+					OnMoved = ReactModule.useCallback(function(p2)
 						-- upvalues: p1 (copy), UseContextResult (copy), TypesModule (upval)
 						if p1.OnViewChanged then
 							local GraphToPlotResult = UseContextResult.graphToPlot((UseContextResult.plotToView(p2)))
@@ -167,7 +167,7 @@ function Scrollbar(p1) --[[ Line: 51 ]]
 					Rotation = Rotation,
 					Size = _UDim2_4,
 					Image = StyleUtilModule.SCROLLBAR_RIGHT_ZOOM_BUTTON_IMAGE,
-					OnMoved = ReactModule.useCallback(function(p2) --[[ Line: 137 ]]
+					OnMoved = ReactModule.useCallback(function(p2)
 						-- upvalues: p1 (copy), UseContextResult (copy), TypesModule (upval)
 						if p1.OnViewChanged then
 							local GraphToPlotResult = UseContextResult.graphToPlot((UseContextResult.plotToView(p2)))

@@ -1,8 +1,8 @@
 ﻿local MemStorageService = game:GetService("MemStorageService")
 
-return function(Key) --[[ Line: 3 ]]
+return function(Key)
 	-- upvalues: MemStorageService (copy)
-	local Success, Result = pcall(function() --[[ Line: 4 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: MemStorageService (upval), Key (copy)
 		return MemStorageService:GetItem(Key)
 	end)

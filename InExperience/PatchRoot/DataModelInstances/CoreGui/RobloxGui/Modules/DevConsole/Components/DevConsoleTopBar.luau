@@ -12,12 +12,12 @@ local LiveUpdateElementModule = require(script.Parent.Parent.Components.LiveUpda
 local SetDevConsolePositionModule = require(script.Parent.Parent.Actions.SetDevConsolePosition)
 local DevConsoleTopBar = RoactModule.Component:extend("DevConsoleTopBar")
 
-function DevConsoleTopBar.init(p1) --[[ Line: 24 ]]
+function DevConsoleTopBar.init(p1)
 	-- upvalues: UserInputService (copy), RoactModule (copy)
 	p1.inputChangedConnection = nil
 	p1.inputChangedDisconnectRetries = 0
 	
-	function p1:inputBegan(Input) --[[ Line: 29 ]]
+	function p1:inputBegan(Input)
 		-- upvalues: p1 (copy), UserInputService (upval)
 		if p1.props.isMinimized then return end
 		if Input.UserInputType == Enum.UserInputType.MouseButton1 then
@@ -28,7 +28,7 @@ function DevConsoleTopBar.init(p1) --[[ Line: 24 ]]
 				p1.inputChangedConnection:Disconnect()
 				p1.inputChangedConnection = nil
 			end
-			p1.inputChangedConnection = UserInputService.InputChanged:Connect(function(Input) --[[ Line: 44 ]]
+			p1.inputChangedConnection = UserInputService.InputChanged:Connect(function(Input)
 				-- upvalues: p1 (upval)
 				p1.inputChanged(nil, Input)
 			end)
@@ -41,7 +41,7 @@ function DevConsoleTopBar.init(p1) --[[ Line: 24 ]]
 		end
 	end
 	
-	function p1:inputChanged(Input) --[[ Line: 58 ]]
+	function p1:inputChanged(Input)
 		-- upvalues: p1 (copy)
 		if p1.state.moving then
 			if Input.UserInputType == Enum.UserInputType.MouseMovement then
@@ -61,7 +61,7 @@ function DevConsoleTopBar.init(p1) --[[ Line: 24 ]]
 		end
 	end
 	
-	function p1:inputEnded(Input) --[[ Line: 75 ]]
+	function p1:inputEnded(Input)
 		-- upvalues: p1 (copy)
 		if Input.UserInputType == Enum.UserInputType.MouseButton1 and Input.UserInputState == Enum.UserInputState.End then
 			if p1.inputChangedConnection then
@@ -75,7 +75,7 @@ function DevConsoleTopBar.init(p1) --[[ Line: 24 ]]
 	p1.ref = RoactModule.createRef()
 end
 
-function DevConsoleTopBar.render(p1) --[[ Line: 95 ]]
+function DevConsoleTopBar.render(p1)
 	-- upvalues: RoactModule (copy), ConstantsModule (copy), DeveloperConsoleTextSize (copy), FrameHeight (copy), LiveUpdateElementModule (copy), XOffset (copy), FrameHeightRatio (copy)
 	local IsMinimized = p1.props.isMinimized
 	local FormFactor = p1.props.formFactor
@@ -158,10 +158,10 @@ function DevConsoleTopBar.render(p1) --[[ Line: 95 ]]
 	}, config)
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 191 | Named "mapDispatchToProps" ]]
+return RoactRoduxModule.UNSTABLE_connect2(nil, function(Callback)
 	-- upvalues: SetDevConsolePositionModule (copy)
 	return {
-		dispatchSetDevConsolePosition = function(p1) --[[ Line: 193 ]]
+		dispatchSetDevConsolePosition = function(p1)
 			-- upvalues: Callback (copy), SetDevConsolePositionModule (upval)
 			Callback(SetDevConsolePositionModule(p1))
 		end

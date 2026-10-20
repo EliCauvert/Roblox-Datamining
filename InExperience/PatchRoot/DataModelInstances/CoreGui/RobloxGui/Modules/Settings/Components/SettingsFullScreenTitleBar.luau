@@ -24,37 +24,37 @@ SettingsFullScreenTitleBar.validateProps = T.strictInterface({
 })
 SettingsFullScreenTitleBar.defaultProps = { titleText = "Roblox" }
 
-function SettingsFullScreenTitleBar.init(p1) --[[ Line: 44 ]]
+function SettingsFullScreenTitleBar.init(p1)
 	p1:setState({ isTriggered = false })
 	
-	function p1.show() --[[ Line: 49 ]]
+	function p1.show()
 		-- upvalues: p1 (copy)
 		p1:setTriggered(true)
 	end
 	
-	function p1.hide() --[[ Line: 52 ]]
+	function p1.hide()
 		-- upvalues: p1 (copy)
 		p1:setTriggered(false)
 	end
 	
-	function p1.cancel() --[[ Line: 55 ]]
+	function p1.cancel()
 		-- upvalues: p1 (copy)
 		p1:unsetTriggered()
 	end
 	
-	function p1.onFullscreenChanged() --[[ Line: 58 ]]
+	function p1.onFullscreenChanged()
 		-- upvalues: p1 (copy)
 		p1:unsetTriggered()
 		p1:setState({ isTriggered = false })
 	end
 end
 
-function SettingsFullScreenTitleBar.setTriggered(p1, IsTriggered) --[[ Line: 66 ]]
+function SettingsFullScreenTitleBar.setTriggered(p1, IsTriggered)
 	-- upvalues: UserGameSettings (copy), Promise (copy), GetFIntFullscreenTitleBarTriggerDelayMillisModule (copy)
 	p1:unsetTriggered()
 	
 	if UserGameSettings:InFullScreen() or p1.props._mockFullScreen then
-		p1.triggerPromise = Promise.delay(GetFIntFullscreenTitleBarTriggerDelayMillisModule() / 1000):andThenCall(function() --[[ Line: 69 ]]
+		p1.triggerPromise = Promise.delay(GetFIntFullscreenTitleBarTriggerDelayMillisModule() / 1000):andThenCall(function()
 			-- upvalues: p1 (copy), IsTriggered (copy)
 			p1.triggerPromise = nil
 			p1:setState({ isTriggered = IsTriggered })
@@ -62,19 +62,19 @@ function SettingsFullScreenTitleBar.setTriggered(p1, IsTriggered) --[[ Line: 66 
 	end
 end
 
-function SettingsFullScreenTitleBar.unsetTriggered(p1) --[[ Line: 78 ]]
+function SettingsFullScreenTitleBar.unsetTriggered(p1)
 	if p1.triggerPromise then
 		p1.triggerPromise:cancel()
 		p1.triggerPromise = nil
 	end
 end
 
-function SettingsFullScreenTitleBar:toggleFullscreen() --[[ Line: 85 ]]
+function SettingsFullScreenTitleBar:toggleFullscreen()
 	-- upvalues: GuiService (copy)
 	GuiService:ToggleFullscreen()
 end
 
-function SettingsFullScreenTitleBar:leaveGame() --[[ Line: 89 ]]
+function SettingsFullScreenTitleBar:leaveGame()
 	-- upvalues: GuiService (copy), RunService (copy), GetDefaultQualityLevelFunction (copy)
 	GuiService.SelectedCoreObject = nil
 	RunService.RenderStepped:Wait()
@@ -83,7 +83,7 @@ function SettingsFullScreenTitleBar:leaveGame() --[[ Line: 89 ]]
 	settings().Rendering.QualityLevel = GetDefaultQualityLevelFunction()
 end
 
-function SettingsFullScreenTitleBar.render(p1) --[[ Line: 103 ]]
+function SettingsFullScreenTitleBar.render(p1)
 	-- upvalues: Roact (copy), CoreGui (copy), ConstantsModule (copy), ExternalEventConnectionModule (copy), UserGameSettings (copy), FullscreenTitleBar (copy), RenderWithCoreScriptsStyleProviderModule (copy)
 	return RenderWithCoreScriptsStyleProviderModule({
 		FullscreenTitleBar = Roact.createElement(Roact.Portal, { target = CoreGui }, {
@@ -117,20 +117,20 @@ function SettingsFullScreenTitleBar.render(p1) --[[ Line: 103 ]]
 	})
 end
 
-function SettingsFullScreenTitleBar.willUnmount(p1) --[[ Line: 139 ]]
+function SettingsFullScreenTitleBar.willUnmount(p1)
 	p1:unsetTriggered()
 end
 
 return {
-	mount = function(Element, p1, p2) --[[ Line: 144 ]]
+	mount = function(Element, p1, p2)
 		-- upvalues: Roact (copy), SettingsFullScreenTitleBar (copy)
 		return Roact.mount(Roact.createElement(SettingsFullScreenTitleBar, Element or {}), p1, p2)
 	end,
-	update = function(p1, Element) --[[ Line: 147 ]]
+	update = function(p1, Element)
 		-- upvalues: Roact (copy), SettingsFullScreenTitleBar (copy)
 		return Roact.update(p1, Roact.createElement(SettingsFullScreenTitleBar, Element))
 	end,
-	unmount = function(p1) --[[ Line: 150 ]]
+	unmount = function(p1)
 		-- upvalues: Roact (copy)
 		return Roact.unmount(p1)
 	end

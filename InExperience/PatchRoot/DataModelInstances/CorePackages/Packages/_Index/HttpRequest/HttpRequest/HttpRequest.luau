@@ -11,7 +11,7 @@ local config = {
 local HttpRequestModule = {}
 HttpRequestModule.__index = HttpRequestModule
 
-function HttpRequestModule.new(p1, Url, RequestMethod, p2) --[[ Line: 34 ]]
+function HttpRequestModule.new(p1, Url, RequestMethod, p2)
 	-- upvalues: CryoModule (copy), HttpSessionModule (copy), HttpRequestModule (copy)
 	local P0 = p1 or {}
 	local config = {
@@ -35,13 +35,13 @@ function HttpRequestModule.new(p1, Url, RequestMethod, p2) --[[ Line: 34 ]]
 	return config
 end
 
-function HttpRequestModule:start(Resolve, Reject) --[[ Line: 59 ]]
+function HttpRequestModule:start(Resolve, Reject)
 	self.resolve = Resolve
 	self.reject = Reject
 	self:makeRequest()
 end
 
-function HttpRequestModule:processResponse(p1) --[[ Line: 65 ]]
+function HttpRequestModule:processResponse(p1)
 	-- upvalues: HttpService (copy), HttpResponseModule (copy)
 	local Success, Result = pcall(HttpService.JSONDecode, HttpService, p1.Body)
 	
@@ -61,7 +61,7 @@ function HttpRequestModule:processResponse(p1) --[[ Line: 65 ]]
 	self.resolve(HttpResponseModule.success(p1.StatusCode, Result))
 end
 
-function HttpRequestModule:retry(p1, Number) --[[ Line: 84 ]]
+function HttpRequestModule:retry(p1, Number)
 	self.retryCount += 1
 	
 	if self.maxRetryCount < self.retryCount then
@@ -73,18 +73,18 @@ function HttpRequestModule:retry(p1, Number) --[[ Line: 84 ]]
 	end
 end
 
-function HttpRequestModule:wait(p1) --[[ Line: 94 ]]
-	self.waitImpl(p1, function() --[[ Line: 95 ]]
+function HttpRequestModule:wait(p1)
+	self.waitImpl(p1, function()
 		-- upvalues: self (copy)
 		self:makeRequest()
 	end)
 end
 
-function HttpRequestModule:makeRequest() --[[ Line: 100 ]]
+function HttpRequestModule:makeRequest()
 	-- upvalues: HttpSessionModule (copy), config (copy), StatusCodeModule (copy), HttpResponseModule (copy)
 	if not self.canceled then
 		self.httpRequest = self.requestFunction(self.url, self.requestMethod, self.options)
-		self.httpRequest:Start(function(p1, p2) --[[ Line: 105 ]]
+		self.httpRequest:Start(function(p1, p2)
 			-- upvalues: self (copy), HttpSessionModule (upval), config (upval), StatusCodeModule (upval), HttpResponseModule (upval)
 			if self.session ~= HttpSessionModule.currentSession() then
 				warn("Http request aborted", self.url)
@@ -127,7 +127,7 @@ function HttpRequestModule:makeRequest() --[[ Line: 100 ]]
 	end
 end
 
-function HttpRequestModule:cancel() --[[ Line: 132 ]]
+function HttpRequestModule:cancel()
 	-- upvalues: HttpResponseModule (copy)
 	self.canceled = true
 	self.reject(HttpResponseModule.error(Enum.HttpError.Aborted))

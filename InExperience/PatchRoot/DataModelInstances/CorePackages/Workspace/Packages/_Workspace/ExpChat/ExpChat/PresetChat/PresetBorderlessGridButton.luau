@@ -2,7 +2,7 @@
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 
-return ReactModule.memo(function(p1) --[[ Line: 20 | Named "PresetBorderlessGridButton" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FoundationModule (copy), ReactModule (copy)
 	local Unicode = p1.unicode
 	
@@ -11,7 +11,7 @@ return ReactModule.memo(function(p1) --[[ Line: 20 | Named "PresetBorderlessGrid
 			tag = "position-center-center anchor-center-center size-1100-1100 radius-medium",
 			testId = "PresetBorderlessGridButton",
 			backgroundStyle = FoundationModule.Hooks.useTokens().Color.None,
-			onActivated = ReactModule.useCallback(function() --[[ Line: 24 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: p1 (copy), Unicode (copy)
 				p1.onActivated(Unicode)
 			end, { p1.onActivated, Unicode }),

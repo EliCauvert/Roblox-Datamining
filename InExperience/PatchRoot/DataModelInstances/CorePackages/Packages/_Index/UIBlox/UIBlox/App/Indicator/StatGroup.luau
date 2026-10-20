@@ -11,7 +11,7 @@ local UseStyleModule = require(Core.Style.useStyle)
 local _ = require(Parent.Style.Fonts)
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
-local function renderStatItem(p1, p2, Text, p3) --[[ Line: 30 ]]
+local function renderStatItem(p1, p2, Text, p3)
 	-- upvalues: ReactModule (copy), ImageSetComponentModule (copy), ImagesModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local Tokens = p3.Tokens
 	local _Font = p3.Font
@@ -58,7 +58,7 @@ local function renderStatItem(p1, p2, Text, p3) --[[ Line: 30 ]]
 	})
 end
 
-return function(p1) --[[ Line: 83 | Named "StatGroup" ]]
+return function(p1)
 	-- upvalues: UseStyleModule (copy), ReactModule (copy), renderStatItem (copy)
 	local UseStyleModuleResult = UseStyleModule()
 	

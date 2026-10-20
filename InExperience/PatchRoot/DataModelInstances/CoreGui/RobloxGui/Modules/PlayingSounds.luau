@@ -2,7 +2,7 @@
 local PlayingSoundsModule = {}
 PlayingSoundsModule.__index = PlayingSoundsModule
 
-function PlayingSoundsModule.new(AggregatedData) --[[ Line: 9 ]]
+function PlayingSoundsModule.new(AggregatedData)
 	-- upvalues: PlayingSoundsModule (copy)
 	local t = {}
 	setmetatable(t, PlayingSoundsModule)
@@ -12,7 +12,7 @@ function PlayingSoundsModule.new(AggregatedData) --[[ Line: 9 ]]
 	return t
 end
 
-function PlayingSoundsModule:addSound(p1, p2) --[[ Line: 17 ]]
+function PlayingSoundsModule:addSound(p1, p2)
 	-- upvalues: GetFFlagSoundTelemetryOsClockModule (copy)
 	local Sound = self.sounds[p1]
 	
@@ -40,7 +40,7 @@ function PlayingSoundsModule:addSound(p1, p2) --[[ Line: 17 ]]
 	end
 end
 
-function PlayingSoundsModule:removeSound(p1, p2) --[[ Line: 37 ]]
+function PlayingSoundsModule:removeSound(p1, p2)
 	-- upvalues: GetFFlagSoundTelemetryOsClockModule (copy)
 	local Sound = self.sounds[p1]
 	
@@ -59,7 +59,7 @@ function PlayingSoundsModule:removeSound(p1, p2) --[[ Line: 37 ]]
 	end
 end
 
-function PlayingSoundsModule:loopSound(p1, Key) --[[ Line: 66 ]]
+function PlayingSoundsModule:loopSound(p1, Key)
 	local Sound = self.sounds[p1]
 	
 	if Sound ~= nil and Sound.instances[Key] ~= nil then

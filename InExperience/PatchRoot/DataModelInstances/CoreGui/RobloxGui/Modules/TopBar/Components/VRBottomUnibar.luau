@@ -18,10 +18,10 @@ local FFlagShowGameAgeRating = require(CorePackages.Workspace.Packages.SharedFla
 local FFlagShowGameAgeRating1 = FFlagExperienceAgeRatingBadge and FFlagShowGameAgeRating
 local FFlagTopBarRefactor = InExperienceTopBarModule.Flags.FFlagTopBarRefactor
 
-local function MenuIconWrapper(p1) --[[ Line: 31 ]]
+local function MenuIconWrapper(p1)
 	-- upvalues: FFlagTopBarSignalizeKeepOutAreas (copy), CoreGuiCommonModule (copy), UseSelectorFunction (copy), FFlagTopBarRefactor (copy), ReactModule (copy), MenuIconModule1 (copy), MenuIconModule (copy)
 	local KeepOutAreasStore = if FFlagTopBarSignalizeKeepOutAreas then CoreGuiCommonModule.Stores.GetKeepOutAreasStore(false) else nil
-	local IconScale: number = if UseSelectorFunction(function(p2) --[[ Line: 37 ]]
+	local IconScale: number = if UseSelectorFunction(function(p2)
 		return if p2 and p2.displayOptions then p2.displayOptions.menuOpen else false
 	end) then 1.5 else 1
 	
@@ -33,7 +33,7 @@ local function MenuIconWrapper(p1) --[[ Line: 31 ]]
 	})
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 53 | Named "VRBottomUnibar" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FFlagShowGameAgeRating1 (copy), FFlagExperienceAgeRatingBadge (copy), FFlagShowGameAgeRating (copy), ReactModule (copy), Panel3DInSpatialUI (copy), PanelType (copy), FFlagTopBarRefactor (copy), FoundationModule (copy), MenuIconWrapper (copy), UnibarModule (copy), ExperienceAgeRatingBadgeModule (copy)
 	local IsShowBadgeOver: boolean = FFlagShowGameAgeRating1 and p1.showBadgeOver12 == true
 	local v1 = nil
@@ -42,7 +42,7 @@ return ReactModule.memo(function(p1) --[[ Line: 53 | Named "VRBottomUnibar" ]]
 	
 	if FFlagExperienceAgeRatingBadge and FFlagShowGameAgeRating then
 		v1, UseBindingResult2 = ReactModule.useBinding(true)
-		UseResult = ReactModule.useCallback(function(p2) --[[ Line: 59 ]]
+		UseResult = ReactModule.useCallback(function(p2)
 			-- upvalues: UseBindingResult2 (ref)
 			UseBindingResult2(p2.GroupTransparency < 1)
 		end, { UseBindingResult2 })
@@ -51,7 +51,7 @@ return ReactModule.memo(function(p1) --[[ Line: 53 | Named "VRBottomUnibar" ]]
 		panelType = PanelType.BottomBar,
 		keepVisibleWhenTopBarHidden = if FFlagShowGameAgeRating1 then IsShowBadgeOver else nil,
 		controlsVisible = if FFlagShowGameAgeRating1 then v1 else nil,
-		renderFunction = function(p2) --[[ Line: 70 ]]
+		renderFunction = function(p2)
 			-- upvalues: ReactModule (upval), FFlagShowGameAgeRating1 (upval), v1 (ref), UseResult (ref), FFlagTopBarRefactor (upval), FoundationModule (upval), MenuIconWrapper (upval), p1 (copy), IsShowBadgeOver (copy), UnibarModule (upval), ExperienceAgeRatingBadgeModule (upval)
 			local Element = ReactModule.createElement(if FFlagShowGameAgeRating1 then "CanvasGroup" else "Frame", {
 				Name = if FFlagShowGameAgeRating1 then "AnimatablePanelManagedContent" else nil,
@@ -100,8 +100,8 @@ return ReactModule.memo(function(p1) --[[ Line: 53 | Named "VRBottomUnibar" ]]
 				}, {
 					Unibar = ReactModule.createElement(UnibarModule, {
 						layoutOrder = 1,
-						onAreaChanged = function() --[[ Line: 126 ]] end,
-						onMinWidthChanged = function() --[[ Line: 127 ]] end
+						onAreaChanged = function() end,
+						onMinWidthChanged = function() end
 					})
 				})
 			})

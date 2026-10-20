@@ -17,7 +17,7 @@ EnterOutfitNamePrompt.validateProps = TModule.strictInterface({
 	performCreateOutfit = TModule.callback
 })
 
-function EnterOutfitNamePrompt.init(p1) --[[ Line: 33 ]]
+function EnterOutfitNamePrompt.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1:setState({
 		outfitName = "",
@@ -25,18 +25,18 @@ function EnterOutfitNamePrompt.init(p1) --[[ Line: 33 ]]
 	})
 	p1.textBoxRef = RoactModule.createRef()
 	
-	function p1.confirmCreateOutfit() --[[ Line: 41 ]]
+	function p1.confirmCreateOutfit()
 		-- upvalues: p1 (copy)
 		p1.props.performCreateOutfit(p1.state.outfitName)
 	end
 	
-	function p1.textUpdated(OutfitName) --[[ Line: 45 ]]
+	function p1.textUpdated(OutfitName)
 		-- upvalues: p1 (copy)
 		p1:setState({ outfitName = OutfitName })
 	end
 end
 
-function EnterOutfitNamePrompt.render(p1) --[[ Line: 52 ]]
+function EnterOutfitNamePrompt.render(p1)
 	-- upvalues: RoactModule (copy), PromptWithTextFieldModule (copy), RobloxTranslatorModule (copy), ButtonType (copy)
 	return RoactModule.createElement(PromptWithTextFieldModule, {
 		fieldText = p1.state.outfitName,
@@ -65,16 +65,16 @@ function EnterOutfitNamePrompt.render(p1) --[[ Line: 52 ]]
 	})
 end
 
-return RoactRoduxModule.connect(function(p1) --[[ Line: 82 | Named "mapStateToProps" ]]
+return RoactRoduxModule.connect(function(p1)
 	return { screenSize = p1.screenSize }
-end, function(Callback) --[[ Line: 88 | Named "mapDispatchToProps" ]]
+end, function(Callback)
 	-- upvalues: SignalCreateOutfitPermissionDeniedModule (copy), PerformCreateOutfitModule (copy)
 	return {
-		signalCreateOutfitPermissionDenied = function() --[[ Line: 90 ]]
+		signalCreateOutfitPermissionDenied = function()
 			-- upvalues: Callback (copy), SignalCreateOutfitPermissionDeniedModule (upval)
 			return Callback(SignalCreateOutfitPermissionDeniedModule)
 		end,
-		performCreateOutfit = function(p1) --[[ Line: 94 ]]
+		performCreateOutfit = function(p1)
 			-- upvalues: Callback (copy), PerformCreateOutfitModule (upval)
 			return Callback(PerformCreateOutfitModule(p1))
 		end

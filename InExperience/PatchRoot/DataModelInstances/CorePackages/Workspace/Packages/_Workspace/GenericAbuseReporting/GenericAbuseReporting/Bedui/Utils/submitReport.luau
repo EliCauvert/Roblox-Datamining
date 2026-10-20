@@ -3,7 +3,7 @@ local HttpService = game:GetService("HttpService")
 local Url = require(Parent.Http).Url
 local FFlagAddThumbnailSelectorReport = require(Parent.SharedFlags).FFlagAddThumbnailSelectorReport
 
-return function(Callback, List) --[[ Line: 9 ]]
+return function(Callback, List)
 	-- upvalues: FFlagAddThumbnailSelectorReport (copy), HttpService (copy), Url (copy)
 	if FFlagAddThumbnailSelectorReport and List == nil then
 		List = {}
@@ -25,7 +25,7 @@ return function(Callback, List) --[[ Line: 9 ]]
 		end
 		config.tags[i] = { valueList = ValueList }
 	end
-	local Success, Result = pcall(function() --[[ Line: 46 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: HttpService (upval), config (copy)
 		return HttpService:JSONEncode(config)
 	end)

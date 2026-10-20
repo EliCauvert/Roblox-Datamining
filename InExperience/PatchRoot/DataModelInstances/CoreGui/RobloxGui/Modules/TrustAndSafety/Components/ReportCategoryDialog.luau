@@ -40,7 +40,7 @@ local config = {
 	BackgroundOnPress = { Transparency = 0, Color = Colors.Graphite }
 }
 
-local function Divider(p1) --[[ Line: 68 ]]
+local function Divider(p1)
 	-- upvalues: RoactModule (copy), CryoModule (copy), Colors (copy)
 	return RoactModule.createElement("Frame", CryoModule.Dictionary.join({ Size = UDim2.new(1, 0, 0, 1) }, p1, {
 		BorderSizePixel = 0,
@@ -50,7 +50,7 @@ local function Divider(p1) --[[ Line: 68 ]]
 	}))
 end
 
-local function CategoryCellContent(p1) --[[ Line: 86 ]]
+local function CategoryCellContent(p1)
 	-- upvalues: RoactModule (copy), ImageSetLabel (copy), ThemedTextLabelModule (copy)
 	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -110,7 +110,7 @@ local function CategoryCellContent(p1) --[[ Line: 86 ]]
 	})
 end
 
-local function CategoryCell(p1) --[[ Line: 145 ]]
+local function CategoryCell(p1)
 	-- upvalues: RoactModule (copy), Cell (copy), CategoryCellContent (copy)
 	return RoactModule.createElement(Cell, {
 		userInteractionEnabled = true,
@@ -134,32 +134,32 @@ ReportCategoryDialog.validateProps = TModule.strictInterface({
 	playerFocusedFlow = TModule.boolean
 })
 
-function ReportCategoryDialog.init(p1) --[[ Line: 169 ]]
+function ReportCategoryDialog.init(p1)
 	-- upvalues: RoactModule (copy), FFlagTopBarSignalizeScreenSize (copy), DisplayModule (copy), SignalsModule (copy)
 	p1.buttonRef = RoactModule.createRef()
 	
-	function p1.onCancel() --[[ Line: 172 ]]
+	function p1.onCancel()
 		-- upvalues: p1 (copy)
 		p1.props.closeDialog()
 	end
 	
 	if FFlagTopBarSignalizeScreenSize then
 		local GetViewportSizeFunction = DisplayModule.GetDisplayStore(false).getViewportSize
-		p1.disposeScreenSize = SignalsModule.createEffect(function(p2) --[[ Line: 179 ]]
+		p1.disposeScreenSize = SignalsModule.createEffect(function(p2)
 			-- upvalues: p1 (copy), GetViewportSizeFunction (copy)
 			p1:setState({ screenSize = GetViewportSizeFunction(p2) })
 		end)
 	end
 end
 
-function ReportCategoryDialog.willUnmount(p1) --[[ Line: 187 ]]
+function ReportCategoryDialog.willUnmount(p1)
 	-- upvalues: FFlagTopBarSignalizeScreenSize (copy)
 	if FFlagTopBarSignalizeScreenSize then
 		p1.disposeScreenSize()
 	end
 end
 
-function ReportCategoryDialog.renderContents(p1, VoiceEnabled, p2) --[[ Line: 193 ]]
+function ReportCategoryDialog.renderContents(p1, VoiceEnabled, p2)
 	-- upvalues: RoactModule (copy), Default (copy), CryoModule (copy), CategoryCell (copy), AssetsModule (copy), ConstantsModule (copy), Divider (copy), GameIconModule (copy), WithStyleFunction (copy), config (copy), Provider (copy), BarOnTopScrollingFrameModule (copy)
 	local _ = p1.props
 	local Elements = {
@@ -187,7 +187,7 @@ function ReportCategoryDialog.renderContents(p1, VoiceEnabled, p2) --[[ Line: 19
 			subtext = p2.voiceDescription,
 			icon = AssetsModule.Images.VoiceChatIcon,
 			layoutOrder = #Elements + 1,
-			onActivated = function() --[[ Line: 227 ]]
+			onActivated = function()
 				-- upvalues: p1 (copy), ConstantsModule (upval)
 				p1.props.selectReportCategory(ConstantsModule.Category.Voice)
 			end
@@ -199,7 +199,7 @@ function ReportCategoryDialog.renderContents(p1, VoiceEnabled, p2) --[[ Line: 19
 		subtext = p2.textDescription,
 		icon = AssetsModule.Images.TextChatIcon,
 		layoutOrder = #Elements + 1,
-		onActivated = function() --[[ Line: 247 ]]
+		onActivated = function()
 			-- upvalues: p1 (copy), ConstantsModule (upval)
 			p1.props.selectReportCategory(ConstantsModule.Category.Text)
 		end
@@ -216,7 +216,7 @@ function ReportCategoryDialog.renderContents(p1, VoiceEnabled, p2) --[[ Line: 19
 			text = p2.experienceHeader,
 			subtext = p2.experienceDescription,
 			layoutOrder = #Elements + 1,
-			onActivated = function() --[[ Line: 271 ]]
+			onActivated = function()
 				-- upvalues: p1 (copy), ConstantsModule (upval)
 				p1.props.selectReportCategory(ConstantsModule.Category.Experience)
 			end
@@ -228,14 +228,14 @@ function ReportCategoryDialog.renderContents(p1, VoiceEnabled, p2) --[[ Line: 19
 		subtext = p2.otherDescription,
 		icon = AssetsModule.Images.OtherIcon,
 		layoutOrder = #Elements + 1,
-		onActivated = function() --[[ Line: 292 ]]
+		onActivated = function()
 			-- upvalues: p1 (copy), ConstantsModule (upval)
 			p1.props.selectReportCategory(ConstantsModule.Category.Other)
 		end
 	}))
 	table.insert(Elements, RoactModule.createElement(Divider, { LayoutOrder = #Elements + 1 }))
 	
-	return WithStyleFunction(function(p3) --[[ Line: 305 ]]
+	return WithStyleFunction(function(p3)
 		-- upvalues: CryoModule (upval), config (upval), RoactModule (upval), Provider (upval), BarOnTopScrollingFrameModule (upval), p1 (copy), Elements (copy)
 		return RoactModule.createElement(Provider, {
 			style = CryoModule.Dictionary.join(p3, { Theme = CryoModule.Dictionary.join(p3.Theme, config) })
@@ -249,9 +249,9 @@ function ReportCategoryDialog.renderContents(p1, VoiceEnabled, p2) --[[ Line: 19
 	end)
 end
 
-function ReportCategoryDialog.render(p1) --[[ Line: 322 ]]
+function ReportCategoryDialog.render(p1)
 	-- upvalues: WithVoiceStateFunction (copy), WithLocalizationModule (copy), RoactModule (copy), ModalDialogModule (copy), FFlagTopBarSignalizeScreenSize (copy)
-	return WithVoiceStateFunction(function(p2) --[[ Line: 323 ]]
+	return WithVoiceStateFunction(function(p2)
 		-- upvalues: WithLocalizationModule (upval), RoactModule (upval), ModalDialogModule (upval), p1 (copy), FFlagTopBarSignalizeScreenSize (upval)
 		return WithLocalizationModule({
 			titleText = "CoreScripts.InGameMenu.Report.MenuTitle",
@@ -264,7 +264,7 @@ function ReportCategoryDialog.render(p1) --[[ Line: 322 ]]
 			experienceDescription = "CoreScripts.InGameMenu.Report.Category.Description.Experience",
 			otherHeader = "CoreScripts.InGameMenu.Report.Category.Header.Other",
 			otherDescription = "CoreScripts.InGameMenu.Report.Category.Description.Other"
-		})(function(p3) --[[ Line: 335 ]]
+		})(function(p3)
 			-- upvalues: RoactModule (upval), ModalDialogModule (upval), p1 (upval), FFlagTopBarSignalizeScreenSize (upval), p2 (copy)
 			return RoactModule.createFragment({
 				ModalDialog = RoactModule.createElement(ModalDialogModule, {
@@ -280,7 +280,7 @@ function ReportCategoryDialog.render(p1) --[[ Line: 322 ]]
 	end)
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 350 ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	-- upvalues: ConstantsModule (copy), FFlagTopBarSignalizeScreenSize (copy)
 	return {
 		isReportCategoryMenuOpen = p1.report.currentPage == ConstantsModule.Page.Category,
@@ -289,14 +289,14 @@ return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 350 ]]
 		screenSize = if FFlagTopBarSignalizeScreenSize then nil else p1.displayOptions.screenSize,
 		playerFocusedFlow = p1.report.beginningReportType == ConstantsModule.ReportType.Player
 	}
-end, function(Callback) --[[ Line: 359 ]]
+end, function(Callback)
 	-- upvalues: SelectReportCategoryModule (copy), EndReportFlowModule (copy), SendAnalyticsModule (copy), ConstantsModule (copy), SessionUtilityModule (copy)
 	return {
-		selectReportCategory = function(p1) --[[ Line: 361 ]]
+		selectReportCategory = function(p1)
 			-- upvalues: Callback (copy), SelectReportCategoryModule (upval)
 			Callback(SelectReportCategoryModule(p1))
 		end,
-		closeDialog = function() --[[ Line: 364 ]]
+		closeDialog = function()
 			-- upvalues: Callback (copy), EndReportFlowModule (upval), SendAnalyticsModule (upval), ConstantsModule (upval), SessionUtilityModule (upval)
 			Callback(EndReportFlowModule())
 			SendAnalyticsModule(ConstantsModule.Analytics.ReportType, ConstantsModule.Analytics.ReportFlowAbandoned, { source = ConstantsModule.Analytics.ReportType })

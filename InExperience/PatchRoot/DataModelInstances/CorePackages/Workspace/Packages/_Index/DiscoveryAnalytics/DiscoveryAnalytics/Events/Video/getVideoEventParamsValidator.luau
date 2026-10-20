@@ -5,7 +5,7 @@ local OmniRecommendationsContentType = DiscoveryTypesModule.OmniRecommendationsC
 local VideoEventInterfaceKeyModule = require(script.Parent.VideoEventInterfaceKey)
 local FFlagLuaAppEnableHomepageOneByTwoTile = require(Parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile
 
-return function(p1) --[[ Line: 12 | Named "getVideoEventParamsValidator" ]]
+return function(p1)
 	-- upvalues: FFlagLuaAppEnableHomepageOneByTwoTile (copy), GameCollectionItemType (copy), VideoEventInterfaceKeyModule (copy), OmniRecommendationsContentType (copy)
 	local IsTileTypeMatch: boolean = FFlagLuaAppEnableHomepageOneByTwoTile and p1.tileType == GameCollectionItemType.OneByTwoTile
 	

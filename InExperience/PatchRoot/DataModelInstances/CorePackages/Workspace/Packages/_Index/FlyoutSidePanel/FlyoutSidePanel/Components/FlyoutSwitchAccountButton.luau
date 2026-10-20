@@ -7,7 +7,7 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local ButtonSize = FoundationModule.Enums.ButtonSize
 local FFlagCTAChangeMorePageFlyoutButtonText = require(Parent.SharedFlags).FFlagCTAChangeMorePageFlyoutButtonText
 
-return function(p1) --[[ Line: 19 | Named "FlyoutSwitchAccountButton" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), FFlagCTAChangeMorePageFlyoutButtonText (copy), Button (copy), ButtonVariant (copy), ButtonSize (copy)
 	return ReactModule.createElement(Button, {
 		testId = "--core-ui-flyout-button-switch-account",
@@ -17,7 +17,7 @@ return function(p1) --[[ Line: 19 | Named "FlyoutSwitchAccountButton" ]]
 		}).title,
 		variant = ButtonVariant.Standard,
 		LayoutOrder = p1.layoutOrder,
-		onActivated = ReactModule.useCallback(function() --[[ Line: 20 ]]
+		onActivated = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy)
 			p1.closeDrawer()
 			

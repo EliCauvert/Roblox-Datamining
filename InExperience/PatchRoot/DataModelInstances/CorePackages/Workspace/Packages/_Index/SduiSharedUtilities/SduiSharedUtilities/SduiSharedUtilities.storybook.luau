@@ -10,9 +10,9 @@ return {
 	name = "SduiSharedUtilities",
 	roact = ReactModule,
 	reactRoblox = require(Parent.ReactRoblox),
-	mapStory = function(p1) --[[ Line: 15 ]]
+	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), FoundationProvider (copy), config (copy), Device (copy)
-		return function(p2) --[[ Line: 16 ]]
+		return function(p2)
 			-- upvalues: ReactModule (upval), FoundationProvider (upval), config (upval), Device (upval), p1 (copy)
 			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,

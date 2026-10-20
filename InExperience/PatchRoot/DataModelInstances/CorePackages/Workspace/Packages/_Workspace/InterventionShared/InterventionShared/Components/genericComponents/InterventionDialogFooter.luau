@@ -9,7 +9,7 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 
-return ReactModule.memo(function(p1) --[[ Line: 26 | Named "InterventionDialogFooter" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), View (copy), InlineAppealLinkModule (copy), Button (copy), ButtonVariant (copy), ButtonSize (copy), Text (copy)
 	return ReactModule.createElement(View, {
 		tag = "col no-flex gap-medium size-full-0 auto-y",

@@ -9,7 +9,7 @@ local GraphQLSchema = require(script.Parent.Parent.type.schema).GraphQLSchema
 local SpecifiedDirectives = require(script.Parent.Parent.type.directives).specifiedDirectives
 local ExtendSchemaImplFunction = require(script.Parent.extendSchema).extendSchemaImpl
 
-local function BuildASTSchema(p1, p2) --[[ Line: 44 ]]
+local function BuildASTSchema(p1, p2)
 	-- upvalues: DevAssertFunction (copy), Kind (copy), AssertValidSDLFunction (copy), ExtendSchemaImplFunction (copy), SpecifiedDirectives (copy), Array (copy), GraphQLSchema (copy)
 	DevAssertFunction(p1 ~= nil and p1.kind == Kind.DOCUMENT, "Must provide valid Document AST.")
 	
@@ -39,7 +39,7 @@ local function BuildASTSchema(p1, p2) --[[ Line: 44 ]]
 	local Directives = ExtendSchemaImplResult.directives
 	
 	for _, specifiedDirective in ipairs(SpecifiedDirectives) do
-		if Array.every(Directives, function(p3): boolean --[[ Line: 86 ]]
+		if Array.every(Directives, function(p3): boolean
 			-- upvalues: specifiedDirective (copy)
 			return p3.name ~= specifiedDirective.name
 		end) then
@@ -51,7 +51,7 @@ end
 
 return {
 	buildASTSchema = BuildASTSchema,
-	buildSchema = function(p3, p4) --[[ Line: 97 ]]
+	buildSchema = function(p3, p4)
 		-- upvalues: ParseFunction (copy), BuildASTSchema (copy)
 		return BuildASTSchema(ParseFunction(p3, {
 			noLocation = if p4 then p4.noLocation else nil,

@@ -4,19 +4,19 @@ local ReactModule = require(Parent.React)
 local UseSignalProfileInsightsByUserIdFunction = require(Parent.ProfileInsights).useSignalProfileInsightsByUserId
 local UsePageSizeModule = require(SocialTabsPage.Hooks.usePageSize)
 
-return function(UserId) --[[ Line: 24 | Named "useMutualsList" ]]
+return function(UserId)
 	-- upvalues: UsePageSizeModule (copy), UseSignalProfileInsightsByUserIdFunction (copy), ReactModule (copy)
 	local UsePageSizeModuleResult = UsePageSizeModule()
 	local UseSignalProfileInsightsByUserIdResult, UseSignalProfileInsightsByUserIdResult2 = UseSignalProfileInsightsByUserIdFunction({ rankingStrategy = "tc_info_boost", userId = UserId })
 	local MutualFriends = if UseSignalProfileInsightsByUserIdResult and UseSignalProfileInsightsByUserIdResult.mutualFriends then UseSignalProfileInsightsByUserIdResult.mutualFriends else {}
 	local UseStateResult, UseStateResult2 = ReactModule.useState(UsePageSizeModuleResult)
-	ReactModule.useEffect(function() --[[ Line: 38 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), UsePageSizeModuleResult (copy)
 		UseStateResult2(UsePageSizeModuleResult)
 	end, { UserId, UsePageSizeModuleResult })
 	
 	return {
-		mutualFriends = ReactModule.useMemo(function() --[[ Line: 42 ]]
+		mutualFriends = ReactModule.useMemo(function()
 			-- upvalues: UseStateResult (copy), MutualFriends (copy)
 			local List = {}
 			
@@ -27,9 +27,9 @@ return function(UserId) --[[ Line: 24 | Named "useMutualsList" ]]
 		end, { MutualFriends, UseStateResult }),
 		isLoading = UseSignalProfileInsightsByUserIdResult2,
 		hasMore = UseStateResult < #MutualFriends,
-		loadMore = ReactModule.useCallback(function() --[[ Line: 52 ]]
+		loadMore = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (copy), UsePageSizeModuleResult (copy), MutualFriends (copy)
-			UseStateResult2(function(p1): number --[[ Line: 53 ]]
+			UseStateResult2(function(p1): number
 				-- upvalues: UsePageSizeModuleResult (upval), MutualFriends (upval)
 				return (math.min(p1 + UsePageSizeModuleResult, #MutualFriends))
 			end)

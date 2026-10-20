@@ -8,11 +8,11 @@ local ConstantsModule = require(AppChat.Constants)
 local ConversationModule = require(script.Parent.Conversation)
 local _DateTime = require(Parent.Time).DateTime
 
-local function getMessageId(p1) --[[ Line: 13 ]]
+local function getMessageId(p1)
 	return p1.id
 end
 
-local function messageSortPredicate(p1, p2): boolean --[[ Line: 17 ]]
+local function messageSortPredicate(p1, p2): boolean
 	local Sent = p1 and p1.sent
 	local Sent1 = p2 and p2.sent
 	
@@ -30,16 +30,16 @@ local function messageSortPredicate(p1, p2): boolean --[[ Line: 17 ]]
 	end
 end
 
-local function sendingMessageSortPredicate(p1, p2): boolean --[[ Line: 40 ]]
+local function sendingMessageSortPredicate(p1, p2): boolean
 	return p1.order < p2.order
 end
 
-local function _(p1, p2) --[[ Line: 46 | Named "convertToLegacyConversationType" ]]
+local function _(p1, p2)
 	-- upvalues: ConversationModule (copy)
 	return if p2 == "friends" then ConversationModule.Type.ONE_TO_ONE_CONVERSATION elseif p1 == "group" then ConversationModule.Type.MULTI_USER_CONVERSATION elseif p1 == "one_to_one" then ConversationModule.Type.ONE_TO_ONE_CONVERSATION else ConversationModule.Type.ONE_TO_ONE_CONVERSATION
 end
 
-local function getFriendId(p1): string --[[ Line: 59 ]]
+local function getFriendId(p1): string
 	-- upvalues: Players (copy)
 	local LocalPlayer = Players.LocalPlayer
 	
@@ -53,7 +53,7 @@ local function getFriendId(p1): string --[[ Line: 59 ]]
 	return "friends:unknown-id"
 end
 
-local _ = function(p2) --[[ Line: 72 | Named "getConversationId" ]]
+local _ = function(p2)
 	-- upvalues: getFriendId (copy)
 	return if p2.source == "friends" then getFriendId(p2) else tostring(p2.id)
 end
@@ -79,17 +79,17 @@ local ConversationChannelsModule = {
 		Chat = "chat"
 	},
 	Type = { Group = "group", OneToOne = "one_to_one" },
-	getEmptyMessages = function() --[[ Line: 112 ]]
+	getEmptyMessages = function()
 		-- upvalues: OrderedMap (copy), getMessageId (copy), messageSortPredicate (copy)
 		return OrderedMap.new(getMessageId, messageSortPredicate)
 	end,
-	getEmptySendingMessages = function() --[[ Line: 115 ]]
+	getEmptySendingMessages = function()
 		-- upvalues: OrderedMap (copy), getMessageId (copy), sendingMessageSortPredicate (copy)
 		return OrderedMap.new(getMessageId, sendingMessageSortPredicate)
 	end
 }
 
-function ConversationChannelsModule.mockBase() --[[ Line: 119 ]]
+function ConversationChannelsModule.mockBase()
 	-- upvalues: ConversationChannelsModule (copy), ConversationModule (copy), ConstantsModule (copy), _DateTime (copy)
 	return {
 		source = "channels",
@@ -127,12 +127,12 @@ function ConversationChannelsModule.mockBase() --[[ Line: 119 ]]
 	}
 end
 
-function ConversationChannelsModule.mock(p2) --[[ Line: 167 ]]
+function ConversationChannelsModule.mock(p2)
 	-- upvalues: CryoModule (copy), ConversationChannelsModule (copy)
 	return CryoModule.Dictionary.join(ConversationChannelsModule.mockBase(), p2 or {})
 end
 
-function ConversationChannelsModule.response(p2) --[[ Line: 171 ]]
+function ConversationChannelsModule.response(p2)
 	return {
 		source = if p2.source then p2.source else "channels",
 		type = if p2.type then p2.type else "one_to_one",
@@ -156,7 +156,7 @@ function ConversationChannelsModule.response(p2) --[[ Line: 171 ]]
 	}
 end
 
-function ConversationChannelsModule.fromChannelsApi(p2) --[[ Line: 222 ]]
+function ConversationChannelsModule.fromChannelsApi(p2)
 	-- upvalues: ConversationChannelsModule (copy), getFriendId (copy), ConversationModule (copy), ConstantsModule (copy), _DateTime (copy)
 	local Type = p2.type
 	local config = {
@@ -209,12 +209,12 @@ function ConversationChannelsModule.fromChannelsApi(p2) --[[ Line: 222 ]]
 	return config
 end
 
-function ConversationChannelsModule.getFriendConversationId(Participant_user_ids) --[[ Line: 281 ]]
+function ConversationChannelsModule.getFriendConversationId(Participant_user_ids)
 	-- upvalues: getFriendId (copy)
 	return (getFriendId({ participant_user_ids = Participant_user_ids }))
 end
 
-function ConversationChannelsModule.getConversationId(p3) --[[ Line: 288 ]]
+function ConversationChannelsModule.getConversationId(p3)
 	-- upvalues: getFriendId (copy)
 	return if p3.source == "friends" then getFriendId(p3) else tostring(p3.id)
 end

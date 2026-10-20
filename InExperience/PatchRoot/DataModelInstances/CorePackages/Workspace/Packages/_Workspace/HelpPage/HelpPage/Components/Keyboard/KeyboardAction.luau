@@ -13,7 +13,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
 local KEYCODEORDER = ConstantsModule.HELP_PAGE.KEYCODE_ORDER
 
-local function getKeyCodeName(KeyCode) --[[ Line: 49 ]]
+local function getKeyCodeName(KeyCode)
 	-- upvalues: ConstantsModule (copy), UserInputService (copy)
 	return if ConstantsModule.HELP_PAGE.KEYCODES_LOCALIZED[KeyCode] then {
 		needsLocalization = true,
@@ -27,12 +27,12 @@ local function getKeyCodeName(KeyCode) --[[ Line: 49 ]]
 	}
 end
 
-local function _(DPad) --[[ Line: 69 | Named "getKeycodeLayoutOrder" ]]
+local function _(DPad)
 	-- upvalues: KEYCODEORDER (copy), ExtraKeysEnumModule (copy)
 	return if KEYCODEORDER[DPad] then KEYCODEORDER[DPad] elseif DPad == ExtraKeysEnumModule.DPad or DPad == ExtraKeysEnumModule.TouchPad then 1e999 else DPad.Value
 end
 
-local function KeyCodeComponent(p1) --[[ Line: 79 ]]
+local function KeyCodeComponent(p1)
 	-- upvalues: UseTokensFunction (copy), getKeyCodeName (copy), UseLocalizationFunction (copy), ConstantsModule (copy), ReactModule (copy), Text (copy), FFlagHelpPageCCLModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local KeyCodeName = getKeyCodeName(p1.keyCode)
@@ -54,11 +54,11 @@ local function KeyCodeComponent(p1) --[[ Line: 79 ]]
 	})
 end
 
-local function KeyCodeComboComponent(p1) --[[ Line: 103 ]]
+local function KeyCodeComboComponent(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Text (copy), FFlagHelpPageCCLModule (copy), ConstantsModule (copy), KeyCodeComponent (copy)
 	local UseTokensResult = UseTokensFunction()
 	
-	return ReactModule.createElement(View, { tag = "row auto-xy wrap" }, (ReactModule.useMemo(function() --[[ Line: 106 ]]
+	return ReactModule.createElement(View, { tag = "row auto-xy wrap" }, (ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), ReactModule (upval), View (upval), Text (upval), FFlagHelpPageCCLModule (upval), UseTokensResult (copy), ConstantsModule (upval), KeyCodeComponent (upval)
 		local Elements = {}
 		
@@ -90,17 +90,17 @@ local function KeyCodeComboComponent(p1) --[[ Line: 103 ]]
 	})))
 end
 
-local function InputComponent(p2) --[[ Line: 160 ]]
+local function InputComponent(p2)
 	-- upvalues: ReactModule (copy), KEYCODEORDER (copy), ExtraKeysEnumModule (copy), View (copy), KeyCodeComboComponent (copy)
-	return ReactModule.createElement(View, { tag = "row auto-xy wrap" }, (ReactModule.useMemo(function() --[[ Line: 161 ]]
+	return ReactModule.createElement(View, { tag = "row auto-xy wrap" }, (ReactModule.useMemo(function()
 		-- upvalues: p2 (copy), KEYCODEORDER (upval), ExtraKeysEnumModule (upval), ReactModule (upval), View (upval), KeyCodeComboComponent (upval)
 		for _, value in ipairs(p2.input) do
-			table.sort(value, function(A, B): boolean --[[ Line: 166 ]]
+			table.sort(value, function(A, B): boolean
 				-- upvalues: KEYCODEORDER (upval), ExtraKeysEnumModule (upval)
 				return (if KEYCODEORDER[A] then KEYCODEORDER[A] elseif A == ExtraKeysEnumModule.DPad or A == ExtraKeysEnumModule.TouchPad then 1e999 else A.Value) < (if KEYCODEORDER[B] then KEYCODEORDER[B] elseif B == ExtraKeysEnumModule.DPad or B == ExtraKeysEnumModule.TouchPad then 1e999 else B.Value)
 			end)
 		end
-		table.sort(p2.input, function(A, B): boolean --[[ Line: 171 ]]
+		table.sort(p2.input, function(A, B): boolean
 			-- upvalues: KEYCODEORDER (upval), ExtraKeysEnumModule (upval)
 			if #A ~= #B then
 				return #A < #B
@@ -135,13 +135,13 @@ local function InputComponent(p2) --[[ Line: 160 ]]
 	end, { p2.input, p2.disabled })))
 end
 
-return ReactModule.memo(function(p3) --[[ Line: 214 ]]
+return ReactModule.memo(function(p3)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), UserInputService (copy), FFlagHelpPageCCLModule (copy), View (copy), Text (copy), InputComponent (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({ actionText = p3.control.label })
 	local Control = p3.control
 	local KeyboardInput = Control.keyboardInput
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 225 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: KeyboardInput (copy), UserInputService (upval)
 		if KeyboardInput == nil then
 			return nil

@@ -15,21 +15,21 @@ local Signal = SignalsModule.createSignal(nil)
 local PlatformLeaderboardUnrankedLabel = game:DefineFastString("PlatformLeaderboardUnrankedLabel", "100+")
 local Signal1 = SignalsModule.createSignal(nil)
 
-local function formatScoreCell(p1) --[[ Line: 32 ]]
+local function formatScoreCell(p1)
 	-- upvalues: FFlagPlayerListPlatformLeaderboardAbbreviateScoresModule (copy), FormatStatStringModule (copy), NumberLocalization (copy), LocalizationService (copy)
 	return if FFlagPlayerListPlatformLeaderboardAbbreviateScoresModule then FormatStatStringModule(p1) elseif p1 == nil then "-" else NumberLocalization.localize(p1, LocalizationService.RobloxLocaleId)
 end
 
-local function formatRankCell(p1) --[[ Line: 42 ]]
+local function formatRankCell(p1)
 	-- upvalues: PlatformLeaderboardUnrankedLabel (copy)
 	return if p1 == nil then PlatformLeaderboardUnrankedLabel else tostring(p1)
 end
 
-local function rankToLayoutOrder(p1) --[[ Line: 46 ]]
+local function rankToLayoutOrder(p1)
 	return if p1 == nil then 1000000 else p1
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 69 | Named "PlatformEntryViewImpl" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: SignalsReactModule (copy), Signal (copy), Signal1 (copy), ReactModule (copy), formatScoreCell (copy), formatRankCell (copy), rankToLayoutOrder (copy), ConstantsModule (copy), LeaderboardRowShellModule (copy), LeaderboardTextCellModule (copy), PeopleCellModule (copy)
 	local IsIsHeader = p1.isHeader == true
 	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(p1.scoreGetter or Signal)
@@ -40,7 +40,7 @@ return ReactModule.memo(function(p1) --[[ Line: 69 | Named "PlatformEntryViewImp
 	
 	return ReactModule.createElement(LeaderboardRowShellModule, {
 		rowHeight = RowHeight,
-		layoutOrder = ReactModule.useMemo(function() --[[ Line: 93 ]]
+		layoutOrder = ReactModule.useMemo(function()
 			-- upvalues: p1 (copy), UseSignalBindingResult1 (copy), rankToLayoutOrder (upval)
 			return if p1.layoutOrder == nil then UseSignalBindingResult1:map(rankToLayoutOrder) else p1.layoutOrder
 		end, { p1.layoutOrder, UseSignalBindingResult1 }),
@@ -50,7 +50,7 @@ return ReactModule.memo(function(p1) --[[ Line: 69 | Named "PlatformEntryViewImp
 	}, {
 		RankCell = ReactModule.createElement(LeaderboardTextCellModule, {
 			layoutOrder = 1,
-			text = ReactModule.useMemo(function() --[[ Line: 84 ]]
+			text = ReactModule.useMemo(function()
 				-- upvalues: IsIsHeader (copy), RankHeaderText (copy), UseSignalBindingResult1 (copy), formatRankCell (upval)
 				return if IsIsHeader then RankHeaderText or "Rank" else UseSignalBindingResult1:map(formatRankCell)
 			end, { IsIsHeader, UseSignalBindingResult1, RankHeaderText }),
@@ -66,7 +66,7 @@ return ReactModule.memo(function(p1) --[[ Line: 69 | Named "PlatformEntryViewImp
 		}),
 		ScoreCell = ReactModule.createElement(LeaderboardTextCellModule, {
 			layoutOrder = 3,
-			text = ReactModule.useMemo(function() --[[ Line: 76 ]]
+			text = ReactModule.useMemo(function()
 				-- upvalues: IsIsHeader (copy), ScoreLabel (copy), UseSignalBindingResult (copy), formatScoreCell (upval)
 				return if IsIsHeader then ScoreLabel or "-" else UseSignalBindingResult:map(formatScoreCell)
 			end, { IsIsHeader, UseSignalBindingResult, ScoreLabel }),

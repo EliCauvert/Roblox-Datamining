@@ -13,12 +13,12 @@ local GetFFlagMomentsStickerOverlayMediaRectModule = require(MomentsCommon.Flags
 local FFlagMomentsOverlayContainerScaleFallbackModule = require(MomentsCommon.Flags.FFlagMomentsOverlayContainerScaleFallback)
 local Signal = SignalsModule.createSignal(Enum.ScaleType.Crop)
 
-local function StickerOverlayLayer(p1) --[[ Line: 86 ]]
+local function StickerOverlayLayer(p1)
 	-- upvalues: ReactModule (copy), SignalsModule (copy), UseSignalStateFunction (copy), Signal (copy), FFlagMomentsOverlayContainerScaleFallbackModule (copy), OverlayDisplayModule (copy), StickerOverlayModule (copy)
 	local GetResolutionFunction = p1.getResolution
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 98 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), GetResolutionFunction (copy)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 99 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: GetResolutionFunction (upval)
 			return GetResolutionFunction(p2)
 		end)
@@ -37,7 +37,7 @@ local function StickerOverlayLayer(p1) --[[ Line: 86 ]]
 	})
 end
 
-local function LegacyStickerOverlayLayer(p1) --[[ Line: 139 ]]
+local function LegacyStickerOverlayLayer(p1)
 	-- upvalues: UseSignalStateFunction (copy), OverlayScaleModule (copy), ReactModule (copy), StickerOverlayModule (copy)
 	return ReactModule.createElement(StickerOverlayModule, {
 		draggable = false,
@@ -49,7 +49,7 @@ end
 
 return {
 	kind = "sticker",
-	create = function(p1, _) --[[ Line: 152 ]]
+	create = function(p1, _)
 		-- upvalues: GetFFlagMomentsStickerOverlayMediaRectModule (copy), ReactModule (copy), LegacyStickerOverlayLayer (copy), StickerOverlayLayer (copy)
 		local Overlay = p1.overlay
 		assert(Overlay ~= nil, "createStickerOverlayNode: spec.overlay (a StickerOverlayEdit) is required")
@@ -58,12 +58,12 @@ return {
 			kind = "sticker",
 			usesDecoder = false,
 			id = p1.id,
-			assets = function() --[[ Line: 164 ]]
+			assets = function()
 				return {}
 			end,
-			download = function() --[[ Line: 190 ]] end,
+			download = function() end,
 			zIndex = p1.zIndex or Overlay.zIndex,
-			render = function(p2) --[[ Line: 168 ]]
+			render = function(p2)
 				-- upvalues: GetFFlagMomentsStickerOverlayMediaRectModule (upval), ReactModule (upval), LegacyStickerOverlayLayer (upval), Overlay (copy), StickerOverlayLayer (upval)
 				return if GetFFlagMomentsStickerOverlayMediaRectModule() then ReactModule.createElement(StickerOverlayLayer, {
 					overlay = Overlay,
@@ -72,7 +72,7 @@ return {
 					getScaleType = p2.getScaleType
 				}) else ReactModule.createElement(LegacyStickerOverlayLayer, { overlay = Overlay, getItemSize = p2.getItemSize })
 			end,
-			dispose = function() --[[ Line: 194 ]] end
+			dispose = function() end
 		}
 	end
 }

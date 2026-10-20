@@ -7,7 +7,7 @@ local GetSduiClientPageScopeFunction = SduiSharedUtilitiesModule.getSduiClientPa
 local SduiSurfaceLoadTimeTracker = SduiSharedUtilitiesModule.SduiSurfaceLoadTimeTracker
 local Milestone = require(Parent.TimeToInteractiveTracker).TimeToInteractiveTracker.Milestone
 
-return function(p1, _, p2, _) --[[ Line: 23 | Named "SduiReportSurfaceLoadTimeMilestoneAction" ]]
+return function(p1, _, p2, _)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), GetSduiClientPageScopeFunction (copy), SduiSurfaceLoadTimeTracker (copy), Milestone (copy)
 	local Logger = p2.dependencies and p2.dependencies.logger
 	local ConfigKey = p2.configKey

@@ -18,9 +18,9 @@ local Size = {
 	InputSizeModule.Small
 }
 
-local function noop() --[[ Line: 55 ]] end
+local function noop() end
 
-local function Section(Frame) --[[ Line: 57 ]]
+local function Section(Frame)
 	-- upvalues: ReactModule (copy), ViewModule (copy), TextModule (copy)
 	return ReactModule.createElement(ViewModule, {
 		tag = "col gap-medium size-full-0 auto-y",
@@ -38,14 +38,14 @@ local function Section(Frame) --[[ Line: 57 ]]
 	})
 end
 
-local function Page(p1) --[[ Line: 79 ]]
+local function Page(p1)
 	-- upvalues: ReactModule (copy), ViewModule (copy)
 	return ReactModule.createElement(ViewModule, {
 		tag = "col gap-xxlarge size-full-0 auto-y padding-y-large bg-surface-0"
 	}, p1.children)
 end
 
-local function createItems(Item, States) --[[ Line: 87 ]]
+local function createItems(Item, States)
 	-- upvalues: ReactModule (copy), noop (copy)
 	local Elements = {}
 	
@@ -63,7 +63,7 @@ local function createItems(Item, States) --[[ Line: 87 ]]
 	return Elements
 end
 
-local function staticItems() --[[ Line: 105 ]]
+local function staticItems()
 	return {
 		{ label = "Option A", isChecked = true },
 		{ label = "Option B", isChecked = false },
@@ -72,14 +72,14 @@ local function staticItems() --[[ Line: 105 ]]
 end
 
 return {
-	create = function(p1) --[[ Line: 113 ]]
+	create = function(p1)
 		-- upvalues: ReactModule (copy), ViewModule (copy), createItems (copy), Page (copy), Section (copy), DashModule (copy), list (copy), staticItems (copy), InputSizeModule (copy), Placement (copy), Size (copy), Placement (copy)
 		return {
 			summary = p1.summary,
 			stories = {
 				{
 					name = "Playground",
-					story = function(p2) --[[ Line: 114 ]]
+					story = function(p2)
 						-- upvalues: ReactModule (upval), p1 (copy), ViewModule (upval), createItems (upval)
 						local Controls = p2.controls
 						local UseStateResult, UseStateResult2 = ReactModule.useState({ true, false, true, false })
@@ -90,9 +90,9 @@ return {
 								label = label,
 								hint = if Controls.showHints then p1.hints[i] else nil,
 								isChecked = UseStateResult[i],
-								onActivated = function(p3) --[[ Line: 131 ]]
+								onActivated = function(p3)
 									-- upvalues: UseStateResult2 (copy), i (copy)
-									UseStateResult2(function(Tbl) --[[ Line: 132 ]]
+									UseStateResult2(function(Tbl)
 										-- upvalues: i (upval), p3 (copy)
 										local Copy = table.clone(Tbl)
 										Copy[i] = p3
@@ -113,14 +113,14 @@ return {
 				},
 				{
 					name = "Sizing",
-					story = function() --[[ Line: 152 ]]
+					story = function()
 						-- upvalues: ReactModule (upval), Page (upval), Section (upval), DashModule (upval), list (upval), p1 (copy), createItems (upval), staticItems (upval)
 						return ReactModule.createElement(Page, nil, {
 							Size = ReactModule.createElement(Section, {
 								LayoutOrder = 1,
 								name = "Size",
 								contentTag = "row gap-xxlarge auto-xy wrap"
-							}, DashModule.map(list, function(Legend, LayoutOrder) --[[ Line: 161 ]]
+							}, DashModule.map(list, function(Legend, LayoutOrder)
 								-- upvalues: ReactModule (upval), p1 (upval), createItems (upval), staticItems (upval)
 								return ReactModule.createElement(p1.Group, {
 									legend = Legend,
@@ -133,7 +133,7 @@ return {
 				},
 				{
 					name = "States",
-					story = function() --[[ Line: 172 ]]
+					story = function()
 						-- upvalues: ReactModule (upval), Page (upval), Section (upval), p1 (copy), InputSizeModule (upval), createItems (upval)
 						return ReactModule.createElement(Page, nil, {
 							States = ReactModule.createElement(Section, {
@@ -148,14 +148,14 @@ return {
 				},
 				{
 					name = "Placement",
-					story = function() --[[ Line: 188 ]]
+					story = function()
 						-- upvalues: ReactModule (upval), Page (upval), Section (upval), DashModule (upval), Placement (upval), p1 (copy), createItems (upval), staticItems (upval)
 						return ReactModule.createElement(Page, nil, {
 							Placement = ReactModule.createElement(Section, {
 								LayoutOrder = 1,
 								name = "Placement",
 								contentTag = "row gap-xxlarge auto-xy wrap"
-							}, DashModule.map(Placement, function(Legend, LayoutOrder) --[[ Line: 197 ]]
+							}, DashModule.map(Placement, function(Legend, LayoutOrder)
 								-- upvalues: ReactModule (upval), p1 (upval), createItems (upval), staticItems (upval)
 								return ReactModule.createElement(p1.Group, {
 									legend = Legend,

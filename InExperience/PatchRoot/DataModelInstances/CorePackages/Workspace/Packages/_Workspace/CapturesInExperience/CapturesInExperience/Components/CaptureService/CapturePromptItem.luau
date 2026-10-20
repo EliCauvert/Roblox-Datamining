@@ -5,27 +5,27 @@ local Checkbox = FoundationModule.Checkbox
 local View = FoundationModule.View
 local GetCropSizeFunction = require(Parent.CapturesCommon).Utils.getCropSize
 
-return function(p1) --[[ Line: 20 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), FoundationModule (copy), Checkbox (copy), GetCropSizeFunction (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Vector2.new(0, 0))
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 25 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		p1.updateSelected(not p1.isSelected)
 	end, { p1.isSelected, p1.updateSelected })
-	local UseResult1 = ReactModule.useCallback(function(Frame) --[[ Line: 29 ]]
+	local UseResult1 = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(Frame.AbsoluteSize)
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function(Current) --[[ Line: 33 ]]
+	local UseResult2 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), UseStateResult2_1 (copy)
 		UseRefResult.current = Current
 		UseStateResult2_1(Current.Resolution)
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 38 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy)
-		return function() --[[ Line: 39 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			if UseRefResult.current then
 				UseRefResult.current.Video = ""

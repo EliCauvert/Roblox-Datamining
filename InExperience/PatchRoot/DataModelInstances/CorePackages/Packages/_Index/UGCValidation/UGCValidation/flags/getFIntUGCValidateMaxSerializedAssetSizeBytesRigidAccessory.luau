@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("UGCValidateMaxSerializedAssetSizeBytesRigidAccessory", 16384)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastInt("UGCValidateMaxSerializedAssetSizeBytesRigidAccessory")
 end

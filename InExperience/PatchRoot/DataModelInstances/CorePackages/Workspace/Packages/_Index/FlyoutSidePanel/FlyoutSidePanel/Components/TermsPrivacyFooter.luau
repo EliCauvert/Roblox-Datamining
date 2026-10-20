@@ -7,7 +7,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local FlyoutContentSettingsModule = require(script.Parent.Parent.Config.FlyoutContentSettings)
 local UseFlyoutItemNavigationModule = require(script.Parent.Parent.Hooks.useFlyoutItemNavigation)
 
-return function(p1) --[[ Line: 17 | Named "TermsPrivacyFooter" ]]
+return function(p1)
 	-- upvalues: FlyoutContentSettingsModule (copy), UseFlyoutItemNavigationModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), Text (copy)
 	local Item = FlyoutContentSettingsModule.ItemInfo[FlyoutContentSettingsModule.ItemType.Terms]
 	local Item1 = FlyoutContentSettingsModule.ItemInfo[FlyoutContentSettingsModule.ItemType.Privacy]

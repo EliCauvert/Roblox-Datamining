@@ -21,7 +21,7 @@ local FFlagMomentsRemoveDeletedFromProfile = SharedFlagsModule.FFlagMomentsRemov
 local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
 local MomentsGetMomentsCommentsStoreModule = if FFlagMomentsComments then require(Parent.DataHydration.MomentsGetMomentsCommentsStore) else nil
 
-return function(p1, p2) --[[ Line: 49 | Named "createUserMomentsFeedSource" ]]
+return function(p1, p2)
 	-- upvalues: MomentsGetMomentsUserStoreModule (copy), FFlagMomentsComments (copy), MomentsGetMomentsCommentsStoreModule (copy), FFlagMomentsOptimisticProfilePending (copy), CreatePendingFeedGetterModule (copy), RecommendationSource (copy), FFlagProfileMomentsOrderingAndReactions (copy), GetReactionsStoreModule (copy), GetShareCountsStoreModule (copy), FFlagMomentsRemoveDeletedFromProfile (copy), GetDeletedMomentsStoreModule (copy), FFlagMomentsContentStatsTelemetry (copy), Analytics (copy), ShouldShowMomentInFeedModule (copy), ReportUnavailableFeedItemModule (copy)
 	local P1 = p2 or {}
 	local MomentsGetMomentsUserStoreModuleResult = if P1.userStore == nil then MomentsGetMomentsUserStoreModule(false) else P1.userStore
@@ -41,7 +41,7 @@ return function(p1, p2) --[[ Line: 49 | Named "createUserMomentsFeedSource" ]]
 		initialMomentId = if FFlagMomentsOptimisticProfilePending then P1.initialMomentId else nil,
 		getPendingItems = if FFlagMomentsOptimisticProfilePending then CreatePendingFeedGetterModule(p1, MomentsGetMomentsUserStoreModuleResult) else nil,
 		recommendationSource = RecommendationSource.Profile,
-		fetchAsync = function(NextCursor) --[[ Line: 69 ]]
+		fetchAsync = function(NextCursor)
 			-- upvalues: CommentsStore (ref), MomentsGetMomentsUserStoreModuleResult (copy), p1 (copy), FFlagProfileMomentsOrderingAndReactions (upval), GetReactionsStoreModule (upval), GetShareCountsStoreModule (upval), FFlagMomentsRemoveDeletedFromProfile (upval), FFlagMomentsOptimisticProfilePending (upval), GetDeletedMomentsStoreModule (upval), FFlagMomentsContentStatsTelemetry (upval), Analytics (upval), RecommendationSource (upval), ShouldShowMomentInFeedModule (upval), ReportUnavailableFeedItemModule (upval), InitialIndex (copy), FFlagMomentsComments (upval)
 			local OwnerGeneration = if CommentsStore == nil then nil else CommentsStore.getOwnerGeneration(false)
 			local v1 = nil
@@ -89,7 +89,7 @@ return function(p1, p2) --[[ Line: 49 | Named "createUserMomentsFeedSource" ]]
 			if FFlagMomentsComments and CommentsStore ~= nil and OwnerGeneration ~= nil and v1 ~= nil then
 				local CommentsStore1 = CommentsStore
 				
-				OnAccepted = function() --[[ Line: 143 ]]
+				OnAccepted = function()
 					-- upvalues: CommentsStore1 (copy), v1 (copy), OwnerGeneration (copy)
 					CommentsStore1.upsertMomentComments(v1, OwnerGeneration)
 				end

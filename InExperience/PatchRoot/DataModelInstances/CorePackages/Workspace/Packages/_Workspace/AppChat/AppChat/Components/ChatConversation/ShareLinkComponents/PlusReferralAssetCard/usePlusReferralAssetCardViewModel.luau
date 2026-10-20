@@ -9,9 +9,9 @@ local UseIsInExperienceModule = require(AppChat.Hooks.useIsInExperience)
 local FIntPlusReferralRewardRobux = require(Parent.SharedFlags).FIntPlusReferralRewardRobux
 local FFlagEnablePlusReferralEntrypointTelemetry = require(Parent.SharedFlags).FFlagEnablePlusReferralEntrypointTelemetry
 
-return function(p1) --[[ Line: 26 | Named "usePlusReferralAssetCardViewModel" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), LoadFoundationCloudAssetModule (copy), UseLocalizationFunction (copy), FIntPlusReferralRewardRobux (copy), UseIsInExperienceModule (copy), Parent (copy), FFlagEnablePlusReferralEntrypointTelemetry (copy), AssetCardTypesModule (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 27 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: LoadFoundationCloudAssetModule (upval)
 		return Content.fromUri((LoadFoundationCloudAssetModule("pictograms/plus_robux")))
 	end, {})
@@ -24,7 +24,7 @@ return function(p1) --[[ Line: 26 | Named "usePlusReferralAssetCardViewModel" ]]
 	})
 	local UseIsInExperienceModuleResult = UseIsInExperienceModule()
 	local ReferrerId = p1.referrerId
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 42 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: Parent (upval), UseIsInExperienceModuleResult (copy), FFlagEnablePlusReferralEntrypointTelemetry (upval), ReferrerId (copy)
 		local RobloxSubscriptionPurchaseAppModule = require(Parent.RobloxSubscriptionPurchaseApp)
 		RobloxSubscriptionPurchaseAppModule.initiateRobloxSubscriptionPurchase(nil, nil, nil, RobloxSubscriptionPurchaseAppModule.SurfaceName.PlusReferralLandingSheet, if UseIsInExperienceModuleResult then RobloxSubscriptionPurchaseAppModule.SurfaceContext.InGame else RobloxSubscriptionPurchaseAppModule.SurfaceContext.InApp, nil, if FFlagEnablePlusReferralEntrypointTelemetry then {
@@ -32,7 +32,7 @@ return function(p1) --[[ Line: 26 | Named "usePlusReferralAssetCardViewModel" ]]
 		} else nil, (tonumber(ReferrerId)))
 	end, { ReferrerId, UseIsInExperienceModuleResult })
 	
-	return ReactModule.useMemo(function() --[[ Line: 62 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: AssetCardTypesModule (upval), p1 (copy), UseMemoResult (copy), UseResult (copy), UseLocalizationResult (copy)
 		return {
 			status = AssetCardTypesModule.Status.Ready,

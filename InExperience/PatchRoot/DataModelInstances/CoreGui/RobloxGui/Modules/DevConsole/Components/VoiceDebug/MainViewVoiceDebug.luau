@@ -42,40 +42,40 @@ for _, value in {
 } do
 	table.insert(Copy, value)
 end
-local function getX(p1) --[[ Line: 105 ]]
+local function getX(p1)
 	return p1.time
 end
 
-local function getY(p1) --[[ Line: 109 ]]
+local function getY(p1)
 	return p1.value
 end
 
-local function _(p1) --[[ Line: 113 | Named "makeStringFormatY" ]]
+local function _(p1)
 	-- upvalues: VoiceDebugFieldMetaModule (copy)
 	local Unit = VoiceDebugFieldMetaModule[p1] and VoiceDebugFieldMetaModule[p1].unit
 	
-	return function(p2): string --[[ Line: 115 ]]
+	return function(p2): string
 		-- upvalues: Unit (copy)
 		return if Unit then string.format("%.1f %s", p2, Unit) else string.format("%.1f", p2)
 	end
 end
 
-local _ = function(p1, p2) --[[ Line: 123 | Named "getFieldSeverity" ]]
+local _ = function(p1, p2)
 	-- upvalues: VoiceDebugFieldMetaModule (copy)
 	return VoiceDebugFieldMetaModule.getFieldSeverity(p1, p2)
 end
 
-local _ = function(p1, p2) --[[ Line: 127 | Named "severityColor" ]]
+local _ = function(p1, p2)
 	-- upvalues: ConstantsModule (copy)
 	return if p1 == "error" then ConstantsModule.Color.ErrorRed elseif p1 == "warn" then ConstantsModule.Color.WarningYellow elseif p1 == "ok" then ConstantsModule.Color.HoverGreen else p2
 end
 
-local _ = function(p1, p2): string --[[ Line: 138 | Named "formatNumber" ]]
+local _ = function(p1, p2): string
 	-- upvalues: config (copy)
 	return if config[p1] then string.format("%.2f", p2) else tostring(p2)
 end
 
-local function formatValue(p1, p2): string --[[ Line: 145 ]]
+local function formatValue(p1, p2): string
 	-- upvalues: VoiceDebugFieldMetaModule (copy), config (copy)
 	if p2 == nil then
 		return "—"
@@ -88,17 +88,17 @@ local function formatValue(p1, p2): string --[[ Line: 145 ]]
 	end
 end
 
-local _ = function(p1, p2): string --[[ Line: 158 | Named "formatCardSubCaption" ]]
+local _ = function(p1, p2): string
 	local Formatted: string = p1 and string.format("%.1f", p1.max) or "—"
 	
 	return if p2 then string.format("%s · peak %s%s", p2, Formatted, p2) else string.format("peak %s", Formatted)
 end
 
-local _ = function(p1, p2): string --[[ Line: 166 | Named "formatCardValue" ]]
+local _ = function(p1, p2): string
 	return if type(p1) == "number" then string.format("%." .. tostring(p2 or 0) .. "f", p1) else "—"
 end
 
-local function HealthCard(p1) --[[ Line: 173 ]]
+local function HealthCard(p1)
 	-- upvalues: ConstantsModule (copy), RoactModule (copy)
 	local Severity = p1.severity
 	local Text = ConstantsModule.Color.Text
@@ -156,14 +156,14 @@ end
 
 local MainViewVoiceDebug = RoactModule.PureComponent:extend("MainViewVoiceDebug")
 
-function MainViewVoiceDebug.init(p1) --[[ Line: 236 ]]
+function MainViewVoiceDebug.init(p1)
 	-- upvalues: RoactModule (copy)
-	function p1.onUtilTabHeightChanged(UtilTabHeight) --[[ Line: 237 ]]
+	function p1.onUtilTabHeightChanged(UtilTabHeight)
 		-- upvalues: p1 (copy)
 		p1:setState({ utilTabHeight = UtilTabHeight })
 	end
 	
-	function p1.onStatsUpdated(Stats) --[[ Line: 243 ]]
+	function p1.onStatsUpdated(Stats)
 		-- upvalues: p1 (copy)
 		if not p1.state.frozen then
 			p1:setState({
@@ -178,7 +178,7 @@ function MainViewVoiceDebug.init(p1) --[[ Line: 236 ]]
 		end
 	end
 	
-	function p1.onFreezeToggled() --[[ Line: 256 ]]
+	function p1.onFreezeToggled()
 		-- upvalues: p1 (copy)
 		if p1.state.frozen then
 			p1:setState({
@@ -213,11 +213,11 @@ function MainViewVoiceDebug.init(p1) --[[ Line: 236 ]]
 	}
 end
 
-function MainViewVoiceDebug.didMount(p1) --[[ Line: 291 ]]
+function MainViewVoiceDebug.didMount(p1)
 	p1:setState({ utilTabHeight = p1.utilRef.current.Size.Y.Offset })
 end
 
-function MainViewVoiceDebug.didUpdate(p1) --[[ Line: 298 ]]
+function MainViewVoiceDebug.didUpdate(p1)
 	local Size = p1.utilRef.current.Size
 	
 	if Size.Y.Offset ~= p1.state.utilTabHeight then
@@ -225,14 +225,14 @@ function MainViewVoiceDebug.didUpdate(p1) --[[ Line: 298 ]]
 	end
 end
 
-function MainViewVoiceDebug.willUnmount(p1) --[[ Line: 307 ]]
+function MainViewVoiceDebug.willUnmount(p1)
 	if p1._statsUpdatedConnection then
 		p1._statsUpdatedConnection:Disconnect()
 		p1._statsUpdatedConnection = nil
 	end
 end
 
-function MainViewVoiceDebug.onGraphRowClicked(p1, p2) --[[ Line: 314 ]]
+function MainViewVoiceDebug.onGraphRowClicked(p1, p2)
 	-- upvalues: VoiceDebugFieldMetaModule (copy)
 	local VoiceDebugFieldMetaModuleEntry = VoiceDebugFieldMetaModule[p2]
 	local Group = VoiceDebugFieldMetaModuleEntry and VoiceDebugFieldMetaModuleEntry.group or p2
@@ -246,7 +246,7 @@ function MainViewVoiceDebug.onGraphRowClicked(p1, p2) --[[ Line: 314 ]]
 	p1:setState({ selectedGraphKeyByGroup = Copy })
 end
 
-function MainViewVoiceDebug.renderHealthStrip(p1) --[[ Line: 327 ]]
+function MainViewVoiceDebug.renderHealthStrip(p1)
 	-- upvalues: RoactModule (copy), MainRowPadding (copy), HealthCard (copy), VoiceDebugFieldMetaModule (copy)
 	local Stats = p1.state.stats
 	local Series = p1.state.series
@@ -300,7 +300,7 @@ function MainViewVoiceDebug.renderHealthStrip(p1) --[[ Line: 327 ]]
 	})
 end
 
-local function buildStatRow(p1, Key, Stat, Count) --[[ Line: 380 ]]
+local function buildStatRow(p1, Key, Stat, Count)
 	-- upvalues: VoiceDebugFieldMetaModule (copy), GetFFlagVoiceDebugConsoleV2Module (copy), ConstantsModule (copy), RoactModule (copy), config (copy), SparklineModule (copy), getY (copy), formatValue (copy)
 	local VoiceDebugFieldMetaModuleEntry = VoiceDebugFieldMetaModule[Key]
 	local Label = VoiceDebugFieldMetaModuleEntry and VoiceDebugFieldMetaModuleEntry.label or Key
@@ -381,7 +381,7 @@ local function buildStatRow(p1, Key, Stat, Count) --[[ Line: 380 ]]
 			Text = "",
 			AutoButtonColor = false,
 			BackgroundTransparency = 1,
-			[RoactModule.Event.Activated] = function() --[[ Line: 463 ]]
+			[RoactModule.Event.Activated] = function()
 				-- upvalues: p1 (copy), Key (copy)
 				p1:onGraphRowClicked(Key)
 			end
@@ -403,7 +403,7 @@ local function buildStatRow(p1, Key, Stat, Count) --[[ Line: 380 ]]
 	}, config1)
 end
 
-local function buildGraphElement(Sery, p1, SelectedGraphKeyByGroupEntry, LayoutOrder) --[[ Line: 496 ]]
+local function buildGraphElement(Sery, p1, SelectedGraphKeyByGroupEntry, LayoutOrder)
 	-- upvalues: RoactModule (copy), LineGraphModule (copy), MainRowPadding (copy), LineGraphHeight (copy), getX (copy), getY (copy), ConvertTimeStampModule (copy), VoiceDebugFieldMetaModule (copy)
 	local Unit = VoiceDebugFieldMetaModule[SelectedGraphKeyByGroupEntry] and VoiceDebugFieldMetaModule[SelectedGraphKeyByGroupEntry].unit
 	
@@ -419,27 +419,27 @@ local function buildGraphElement(Sery, p1, SelectedGraphKeyByGroupEntry, LayoutO
 		getY = getY,
 		axisLabelY = p1.label,
 		stringFormatX = ConvertTimeStampModule,
-		stringFormatY = function(p2): string --[[ Line: 115 ]]
+		stringFormatY = function(p2): string
 			-- upvalues: Unit (copy)
 			return if Unit then string.format("%.1f %s", p2, Unit) else string.format("%.1f", p2)
 		end
 	})
 end
 
-function MainViewVoiceDebug.renderStatLabels(p1, List) --[[ Line: 517 ]]
+function MainViewVoiceDebug.renderStatLabels(p1, List)
 	-- upvalues: buildStatRow (copy), LineGraphHeight (copy), MainRowPadding (copy), buildGraphElement (copy), GetFFlagVoiceDebugConsoleV2Module (copy), list (copy), VoiceDebugFieldMetaModule (copy), RoactModule (copy), ConstantsModule (copy), config1 (copy)
 	local TextLabels = {}
 	local LayoutOrder = 0
 	local Count = 0
 	
-	local function _(Key) --[[ Line: 522 | Named "addRow" ]]
+	local function _(Key)
 		-- upvalues: LayoutOrder (ref), Count (ref), TextLabels (copy), buildStatRow (upval), p1 (copy)
 		LayoutOrder += 1
 		Count += 20
 		TextLabels[Key] = buildStatRow(p1, Key, p1.state.stats[Key], LayoutOrder)
 	end
 	
-	local _ = function(Text, p2) --[[ Line: 528 | Named "insertGraph" ]]
+	local _ = function(Text, p2)
 		-- upvalues: p1 (copy), LayoutOrder (ref), Count (ref), LineGraphHeight (upval), MainRowPadding (upval), TextLabels (copy), buildGraphElement (upval)
 		local Sery = p1.state.series[Text]
 		
@@ -541,7 +541,7 @@ function MainViewVoiceDebug.renderStatLabels(p1, List) --[[ Line: 517 ]]
 	return TextLabels, Count
 end
 
-function MainViewVoiceDebug.renderGraphs(p2, List) --[[ Line: 604 ]]
+function MainViewVoiceDebug.renderGraphs(p2, List)
 	-- upvalues: GetFFlagVoiceDebugConsoleV2Module (copy), VoiceDebugFieldMetaModule (copy), RoactModule (copy), LineGraphModule (copy), LineGraphHeight (copy), getX (copy), getY (copy), ConvertTimeStampModule (copy)
 	local Elements = {}
 	local LayoutOrder = 0
@@ -568,7 +568,7 @@ function MainViewVoiceDebug.renderGraphs(p2, List) --[[ Line: 604 ]]
 				getY = getY,
 				axisLabelY = VoiceDebugFieldMetaModuleEntry.label,
 				stringFormatX = ConvertTimeStampModule,
-				stringFormatY = function(p3): string --[[ Line: 115 ]]
+				stringFormatY = function(p3): string
 					-- upvalues: Unit (copy)
 					return if Unit then string.format("%.1f %s", p3, Unit) else string.format("%.1f", p3)
 				end
@@ -578,7 +578,7 @@ function MainViewVoiceDebug.renderGraphs(p2, List) --[[ Line: 604 ]]
 	return Elements, LayoutOrder
 end
 
-function MainViewVoiceDebug.render(p3) --[[ Line: 641 ]]
+function MainViewVoiceDebug.render(p3)
 	-- upvalues: GetFFlagVoiceDebugConsoleV2Module (copy), Copy (copy), VoiceDebugFieldDisplayOrderModule (copy), LineGraphHeight (copy), MainRowPadding (copy), RoactModule (copy), UtilAndTabModule (copy), ConstantsModule (copy), FreezeToggleModule (copy), CollapsibleSectionModule (copy), MainViewConnectivityPanelModule (copy), MainViewSubscriptionsPanelModule (copy), MainViewRemoteOperationsPanelModule (copy), MainViewClientOperationQueuePanelModule (copy)
 	local Size = p3.props.size
 	local FormFactor = p3.props.formFactor

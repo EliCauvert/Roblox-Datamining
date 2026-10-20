@@ -12,7 +12,7 @@ local config = {
 	Right = UDim2.fromScale(1, 0.5)
 }
 
-return function(p1) --[[ Line: 31 ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Popover (copy), config (copy), PopoverAlign (copy), Radius (copy), FoundationModule (copy)
 	return ReactModule.createElement(Popover.Root, { isOpen = p1.isOpen }, {
 		AXTooltipAnchor = ReactModule.createElement(Popover.Anchor, { Position = config[p1.popoverSide] }),

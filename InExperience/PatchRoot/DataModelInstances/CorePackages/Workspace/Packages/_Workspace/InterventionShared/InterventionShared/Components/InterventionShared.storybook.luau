@@ -11,7 +11,7 @@ local FoundationProvider = require(Parent.Foundation).FoundationProvider
 local LayerCollectorProvider = UIBloxModule.Core.Layout.LayerCollector.LayerCollectorProvider
 local Signal = require(Parent.AppCommonLib).Signal
 
-local function MockProviders(p1) --[[ Line: 28 ]]
+local function MockProviders(p1)
 	-- upvalues: FoundationProvider (copy), StyleProviderWithDefaultTheme (copy), LocalizationProvider (copy), Signal (copy), LayerCollectorProvider (copy), ReactModule (copy), ProviderContainer (copy)
 	local List = {}
 	table.insert(List, { class = FoundationProvider, props = {} })
@@ -23,7 +23,7 @@ local function MockProviders(p1) --[[ Line: 28 ]]
 		class = LocalizationProvider,
 		props = {
 			localization = {
-				Format = function(_, p2) --[[ Line: 48 ]]
+				Format = function(_, p2)
 					return p2
 				end,
 				changed = Signal.new()
@@ -37,9 +37,9 @@ end
 
 return {
 	roact = RoactModule,
-	mapStory = function(p1) --[[ Line: 68 ]]
+	mapStory = function(p1)
 		-- upvalues: RoactModule (copy), MockProviders (copy), CryoModule (copy)
-		return function(p2) --[[ Line: 69 ]]
+		return function(p2)
 			-- upvalues: RoactModule (upval), MockProviders (upval), p1 (copy), CryoModule (upval)
 			return RoactModule.createElement(MockProviders, {}, {
 				story = RoactModule.createElement(p1, CryoModule.Dictionary.union(p2 and p2.definition and p2.definition.props or {}, p2))

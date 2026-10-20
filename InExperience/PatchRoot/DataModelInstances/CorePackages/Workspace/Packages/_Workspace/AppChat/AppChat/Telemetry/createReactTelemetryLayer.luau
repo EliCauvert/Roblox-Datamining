@@ -2,21 +2,21 @@
 local ReactModule = require(Parent.React)
 local CryoModule = require(Parent.Cryo)
 
-return function(p1, p2) --[[ Line: 11 | Named "createReactTelemetryLayer" ]]
+return function(p1, p2)
 	-- upvalues: ReactModule (copy), CryoModule (copy)
-	local Context = ReactModule.createContext(function() --[[ Line: 16 ]]
+	local Context = ReactModule.createContext(function()
 		-- upvalues: CryoModule (upval), p2 (copy)
 		return CryoModule.Dictionary.union({}, p2)
 	end)
 	
 	return {
 		Context = Context,
-		Provider = function(p3) --[[ Line: 23 ]]
+		Provider = function(p3)
 			-- upvalues: ReactModule (upval), p1 (copy), CryoModule (upval), Context (copy)
 			local UseContextResult = ReactModule.useContext(p1)
 			
 			return ReactModule.createElement(Context.Provider, {
-				value = ReactModule.useCallback(function() --[[ Line: 25 ]]
+				value = ReactModule.useCallback(function()
 					-- upvalues: p3 (copy), CryoModule (upval), UseContextResult (copy)
 					local ValueFunction = p3.value
 					

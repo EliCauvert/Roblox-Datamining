@@ -32,41 +32,41 @@ if FFlagEnableDrawerFocusNav then
 	FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
 	InputHandlersModule = require(Parent.InputHandlers)
 end
-return ReactModule.memo(function(p1) --[[ Line: 42 ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseSetDrawerVisibleModule (copy), UseSetDrawerShouldMountModule (copy), FFlagEnableDrawerAnimatingHook (copy), UseSetDrawerAnimatingModule (copy), ReactModule (copy), DrawerPanelStatus (copy), FFlagEnableDrawerFocusNav (copy), ReactIsModule (copy), FFlagFixOverlayTopInsetForDeviceSafeInsets (copy), FFlagSideSheetOpenPeoplePage (copy), ReactOtterModule (copy), ConstantsModule (copy), GetDrawerVisibleStoreModule (copy), SignalsModule (copy), UserInputService (copy), FoundationModule (copy), FocusNavigationEventNameEnum (ref), InputHandlersModule (ref), FFlagFixDrawerNavigateBackWhileClosing (copy), ScrimModule (copy), FocusNavigableSurfaceWrapper (ref), FocusNavigableSurfaceIdentifierEnum (ref)
 	local UseSetDrawerVisibleModuleResult = UseSetDrawerVisibleModule()
 	local UseSetDrawerShouldMountModuleResult = UseSetDrawerShouldMountModule()
-	local UseSetDrawerAnimatingModuleResult = if FFlagEnableDrawerAnimatingHook then UseSetDrawerAnimatingModule() else function(_) --[[ Line: 47 ]] end
+	local UseSetDrawerAnimatingModuleResult = if FFlagEnableDrawerAnimatingHook then UseSetDrawerAnimatingModule() else function(_) end
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(DrawerPanelStatus.Scrollable)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 51 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseBindingResult (copy), DrawerPanelStatus (upval)
-		return UseBindingResult:map(function(Scrollable): boolean --[[ Line: 52 ]]
+		return UseBindingResult:map(function(Scrollable): boolean
 			-- upvalues: DrawerPanelStatus (upval)
 			return Scrollable == DrawerPanelStatus.Scrollable
 		end)
 	end, {})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 57 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseBindingResult (copy), DrawerPanelStatus (upval)
-		return UseBindingResult:map(function(Movable): number --[[ Line: 58 ]]
+		return UseBindingResult:map(function(Movable): number
 			-- upvalues: DrawerPanelStatus (upval)
 			return if Movable == DrawerPanelStatus.Movable then 3 else 1
 		end)
 	end, {})
-	local UseMemoResult2 = if FFlagEnableDrawerFocusNav then ReactModule.useMemo(function() --[[ Line: 70 ]]
+	local UseMemoResult2 = if FFlagEnableDrawerFocusNav then ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), ReactIsModule (upval)
 		local BackgroundStyle = p1.backgroundStyle
 		
-		return if BackgroundStyle == nil then nil elseif ReactIsModule.isBinding(BackgroundStyle) then BackgroundStyle:map(function(p2) --[[ Line: 76 ]]
+		return if BackgroundStyle == nil then nil elseif ReactIsModule.isBinding(BackgroundStyle) then BackgroundStyle:map(function(p2)
 			return p2.Color3
 		end) else BackgroundStyle.Color3
 	end, { p1.backgroundStyle }) else nil
-	local UseMemoResult3 = if FFlagEnableDrawerFocusNav then ReactModule.useMemo(function() --[[ Line: 85 ]]
+	local UseMemoResult3 = if FFlagEnableDrawerFocusNav then ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), ReactIsModule (upval)
 		local BackgroundStyle = p1.backgroundStyle
 		
-		return if BackgroundStyle == nil then nil elseif ReactIsModule.isBinding(BackgroundStyle) then BackgroundStyle:map(function(p2) --[[ Line: 91 ]]
+		return if BackgroundStyle == nil then nil elseif ReactIsModule.isBinding(BackgroundStyle) then BackgroundStyle:map(function(p2)
 			return p2.Transparency
 		end) else BackgroundStyle.Transparency
 	end, { p1.backgroundStyle }) else nil
@@ -77,7 +77,7 @@ return ReactModule.memo(function(p1) --[[ Line: 42 ]]
 	local IsAllowOutsideInteraction: boolean = FFlagSideSheetOpenPeoplePage and p1.allowOutsideInteraction == true
 	local NewMenuWidth = p1.menuWidth + LeftOffset
 	local UseRefResult2 = ReactModule.useRef(false)
-	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(-NewMenuWidth, (ReactModule.useCallback(function(p2) --[[ Line: 107 ]]
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(-NewMenuWidth, (ReactModule.useCallback(function(p2)
 		-- upvalues: FFlagEnableDrawerAnimatingHook (upval), UseSetDrawerAnimatingModuleResult (copy), UseBindingResult (copy), DrawerPanelStatus (upval), UseBindingResult2 (copy), NewMenuWidth (copy), UseSetDrawerShouldMountModuleResult (copy)
 		if FFlagEnableDrawerAnimatingHook then
 			UseSetDrawerAnimatingModuleResult(false)
@@ -97,7 +97,7 @@ return ReactModule.memo(function(p1) --[[ Line: 42 ]]
 	UseRefResult3.current = NewMenuWidth
 	local UseRefResult4 = ReactModule.useRef(nil)
 	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = ReactOtterModule.useAnimatedBinding(1)
-	local UseResult = if FFlagSideSheetOpenPeoplePage then ReactModule.useCallback(function(p2): boolean --[[ Line: 131 ]]
+	local UseResult = if FFlagSideSheetOpenPeoplePage then ReactModule.useCallback(function(p2): boolean
 		-- upvalues: UseRefResult4 (copy)
 		local Current = UseRefResult4.current
 		
@@ -111,7 +111,7 @@ return ReactModule.memo(function(p1) --[[ Line: 42 ]]
 			return AbsolutePosition.X <= Position.X and (Position.X <= AbsolutePosition.X + AbsoluteSize.X and AbsolutePosition.Y <= Position.Y) and Position.Y <= AbsolutePosition.Y + AbsoluteSize.Y
 		end
 	end, {}) else nil
-	local UseResult1 = ReactModule.useCallback(function(Source) --[[ Line: 151 ]]
+	local UseResult1 = ReactModule.useCallback(function(Source)
 		-- upvalues: UseSetDrawerVisibleModuleResult (copy), UseBindingResult2 (copy), DrawerPanelStatus (upval), p1 (copy)
 		UseSetDrawerVisibleModuleResult(false)
 		UseBindingResult2(DrawerPanelStatus.Closing)
@@ -123,7 +123,7 @@ return ReactModule.memo(function(p1) --[[ Line: 42 ]]
 		p1.onDrawerClosedAnalytics,
 		UseSetDrawerVisibleModuleResult
 	} else { p1.onDrawerClosedAnalytics })
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 167 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult2 (copy), UseBindingResult (copy), DrawerPanelStatus (upval), IsAllowOutsideInteraction (copy), UseResult (copy), UseRefResult (copy), UseRefResult1 (copy), UseBindingResult2 (copy)
 		if not UseRefResult2.current then return end
 		if UseBindingResult:getValue() == DrawerPanelStatus.Closing then return end
@@ -135,7 +135,7 @@ return ReactModule.memo(function(p1) --[[ Line: 42 ]]
 			return
 		end
 	end, if FFlagSideSheetOpenPeoplePage then { IsAllowOutsideInteraction, UseResult } else {})
-	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 184 ]]
+	local UseResult3 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult2 (copy), UseRefResult (copy), UseRefResult1 (copy), UseBindingResult (copy), DrawerPanelStatus (upval), UseRefResult3 (copy), ConstantsModule (upval), UseResult1 (copy), FFlagEnableDrawerAnimatingHook (upval), UseSetDrawerAnimatingModuleResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseBindingResult2 (copy)
 		if not UseRefResult2.current then
 			UseRefResult.current = nil
@@ -170,7 +170,7 @@ return ReactModule.memo(function(p1) --[[ Line: 42 ]]
 		UseRefResult.current = nil
 		UseRefResult1.current = nil
 	end, if FFlagEnableDrawerAnimatingHook then { UseResult1, UseSetDrawerAnimatingModuleResult } else {})
-	local UseResult4 = ReactModule.useCallback(function(p2) --[[ Line: 225 ]]
+	local UseResult4 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult2 (copy), UseRefResult (copy), UseBindingResult (copy), DrawerPanelStatus (upval), UseBindingResult2 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
 		if not UseRefResult2.current then return end
 		if UseRefResult.current == nil or UseBindingResult:getValue() == DrawerPanelStatus.Closing then return end
@@ -190,11 +190,11 @@ return ReactModule.memo(function(p1) --[[ Line: 42 ]]
 			UseRefResult.current = p2.Position
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 255 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: GetDrawerVisibleStoreModule (upval), SignalsModule (upval), UseRefResult2 (copy), UseRefResult3 (copy), FFlagEnableDrawerAnimatingHook (upval), UseSetDrawerAnimatingModuleResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), ConstantsModule (upval), FFlagSideSheetOpenPeoplePage (upval), UseAnimatedBindingResult2_1 (copy)
 		local GetDrawerVisibleFunction = GetDrawerVisibleStoreModule(false).getDrawerVisible
 		
-		return SignalsModule.createEffect(function(p2) --[[ Line: 257 ]]
+		return SignalsModule.createEffect(function(p2)
 			-- upvalues: GetDrawerVisibleFunction (copy), UseRefResult2 (upval), UseRefResult3 (upval), FFlagEnableDrawerAnimatingHook (upval), UseSetDrawerAnimatingModuleResult (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), ConstantsModule (upval), FFlagSideSheetOpenPeoplePage (upval), UseAnimatedBindingResult2_1 (upval)
 			local DrawerVisible = GetDrawerVisibleFunction(p2)
 			UseRefResult2.current = DrawerVisible
@@ -212,36 +212,36 @@ return ReactModule.memo(function(p1) --[[ Line: 42 ]]
 	end, if FFlagEnableDrawerAnimatingHook then { UseSetDrawerAnimatingModuleResult } else {})
 	
 	if FFlagSideSheetOpenPeoplePage then
-		ReactModule.useEffect(function() --[[ Line: 275 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: GetDrawerVisibleStoreModule (upval), SignalsModule (upval), IsAllowOutsideInteraction (copy), ConstantsModule (upval), UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval)
 			local GetDrawerVisibleFunction = GetDrawerVisibleStoreModule(false).getDrawerVisible
 			
-			return SignalsModule.createEffect(function(p2) --[[ Line: 277 ]]
+			return SignalsModule.createEffect(function(p2)
 				-- upvalues: GetDrawerVisibleFunction (copy), IsAllowOutsideInteraction (upval), ConstantsModule (upval), UseAnimatedBindingResult2_1 (upval), ReactOtterModule (upval)
 				UseAnimatedBindingResult2_1(ReactOtterModule.ease(if GetDrawerVisibleFunction(p2) and not IsAllowOutsideInteraction then ConstantsModule.SCRIM_TRANSPARENCY else 1, ConstantsModule.DRAWER_ANIM_SETTINGS))
 			end)
 		end, { IsAllowOutsideInteraction })
 	end
-	ReactModule.useEffect(function() --[[ Line: 289 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagSideSheetOpenPeoplePage (upval), UseRefResult2 (copy), UseAnimatedBindingResult (copy), NewMenuWidth (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
 		if FFlagSideSheetOpenPeoplePage and not UseRefResult2.current and UseAnimatedBindingResult:getValue() ~= -NewMenuWidth then
 			UseAnimatedBindingResult2((ReactOtterModule.instant(-NewMenuWidth)))
 		end
 	end, { NewMenuWidth })
-	ReactModule.useEffect(function() --[[ Line: 299 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UserInputService (upval), UseResult2 (copy), UseResult3 (copy), UseResult4 (copy)
 		local TouchStartedConnection = UserInputService.TouchStarted:Connect(UseResult2)
 		local TouchEndedConnection = UserInputService.TouchEnded:Connect(UseResult3)
 		local TouchMovedConnection = UserInputService.TouchMoved:Connect(UseResult4)
 		
-		return function() --[[ Line: 303 ]]
+		return function()
 			-- upvalues: TouchStartedConnection (copy), TouchEndedConnection (copy), TouchMovedConnection (copy)
 			TouchStartedConnection:Disconnect()
 			TouchEndedConnection:Disconnect()
 			TouchMovedConnection:Disconnect()
 		end
 	end, if FFlagSideSheetOpenPeoplePage then { UseResult3, UseResult4, UseResult2 } else {})
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 310 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseBindingResult (copy), DrawerPanelStatus (upval), UseResult1 (copy)
 		if UseBindingResult:getValue() == DrawerPanelStatus.Closing then return end
 		if UseBindingResult:getValue() ~= DrawerPanelStatus.Movable then
@@ -281,11 +281,11 @@ return ReactModule.memo(function(p1) --[[ Line: 42 ]]
 			ZIndex = UseMemoResult1
 		})
 	}
-	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 376 ]]
+	local UseMemoResult4 = ReactModule.useMemo(function()
 		-- upvalues: FFlagEnableDrawerFocusNav (upval), FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), FFlagFixDrawerNavigateBackWhileClosing (upval), UseBindingResult (copy), DrawerPanelStatus (upval), UseResult1 (copy)
 		return if FFlagEnableDrawerFocusNav then {
 			[FocusNavigationEventNameEnum.NavigateBack] = {
-				handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 382 ]]
+				handler = InputHandlersModule.onRelease(function(p2)
 					-- upvalues: FFlagFixDrawerNavigateBackWhileClosing (upval), UseBindingResult (upval), DrawerPanelStatus (upval), UseResult1 (upval)
 					if FFlagFixDrawerNavigateBackWhileClosing then
 						if UseBindingResult:getValue() ~= DrawerPanelStatus.Closing then
@@ -305,16 +305,16 @@ return ReactModule.memo(function(p1) --[[ Line: 42 ]]
 		Size = if IsAllowOutsideInteraction then UDim2.new(0, NewMenuWidth, 1, 0) else UDim2.fromScale(1, 1),
 		ClipsDescendants = IsAllowOutsideInteraction,
 		backgroundStyle = { Transparency = 1 },
-		Visible = if FFlagSideSheetOpenPeoplePage then ReactModule.useMemo(function() --[[ Line: 323 ]]
+		Visible = if FFlagSideSheetOpenPeoplePage then ReactModule.useMemo(function()
 			-- upvalues: ReactModule (upval), UseAnimatedBindingResult (copy), UseAnimatedBindingResult1 (copy), NewMenuWidth (copy)
 			return ReactModule.joinBindings({
 				menuPosX = UseAnimatedBindingResult,
 				scrimTransparency = UseAnimatedBindingResult1
-			}):map(function(p2): boolean --[[ Line: 327 ]]
+			}):map(function(p2): boolean
 				-- upvalues: NewMenuWidth (upval)
 				return -NewMenuWidth < p2.menuPosX or p2.scrimTransparency < 1
 			end)
-		end, { NewMenuWidth }) else UseAnimatedBindingResult1:map(function(p2: number): boolean --[[ Line: 332 ]]
+		end, { NewMenuWidth }) else UseAnimatedBindingResult1:map(function(p2: number): boolean
 			return p2 < 1
 		end)
 	}, {
@@ -343,7 +343,7 @@ return ReactModule.memo(function(p1) --[[ Line: 42 ]]
 				ZIndex = 2,
 				BorderSizePixel = 0,
 				Selectable = false,
-				Position = UseAnimatedBindingResult:map(function(XOffset): UDim2 --[[ Line: 435 ]]
+				Position = UseAnimatedBindingResult:map(function(XOffset): UDim2
 					return UDim2.fromOffset(XOffset, 0)
 				end),
 				Size = UDim2.new(0, NewMenuWidth, 1, 0),
@@ -356,7 +356,7 @@ return ReactModule.memo(function(p1) --[[ Line: 42 ]]
 			ZIndex = 2,
 			BorderSizePixel = 0,
 			Selectable = false,
-			Position = UseAnimatedBindingResult:map(function(XOffset): UDim2 --[[ Line: 450 ]]
+			Position = UseAnimatedBindingResult:map(function(XOffset): UDim2
 				return UDim2.fromOffset(XOffset, 0)
 			end),
 			Size = UDim2.new(0, NewMenuWidth, 1, 0),

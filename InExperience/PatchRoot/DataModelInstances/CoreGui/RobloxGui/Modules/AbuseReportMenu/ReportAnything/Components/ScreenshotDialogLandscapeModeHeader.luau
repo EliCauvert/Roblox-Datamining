@@ -13,11 +13,11 @@ local IconSize = UIBloxModule.App.ImageSet.Enum.IconSize
 local Images = UIBloxModule.App.ImageSet.Images
 local WithStyleFunction = UIBloxModule.Style.withStyle
 
-local function _(Text) --[[ Line: 33 | Named "renderWrappingCenter" ]]
+local function _(Text)
 	-- upvalues: WithStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
-	return function() --[[ Line: 34 ]]
+	return function()
 		-- upvalues: WithStyleFunction (upval), ReactModule (upval), Text (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
-		return WithStyleFunction(function(p1) --[[ Line: 35 ]]
+		return WithStyleFunction(function(p1)
 			-- upvalues: ReactModule (upval), Text (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 			local Theme = p1.Theme
 			local _Font = p1.Font
@@ -39,11 +39,11 @@ local function _(Text) --[[ Line: 33 | Named "renderWrappingCenter" ]]
 	end
 end
 
-local _ = function(OnActivated, OnActivated1, OnActivated2, p1, p2) --[[ Line: 58 | Named "renderHeaderBarLeft" ]]
+local _ = function(OnActivated, OnActivated1, OnActivated2, p1, p2)
 	-- upvalues: ReactModule (copy), IconButton (copy), IconSize (copy), Images (copy)
 	local P5 = p1 or p2
 	
-	return function() --[[ Line: 60 ]]
+	return function()
 		-- upvalues: ReactModule (upval), IconButton (upval), IconSize (upval), Images (upval), OnActivated (copy), P5 (copy), p2 (copy), OnActivated1 (copy), p1 (copy), OnActivated2 (copy)
 		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -79,9 +79,9 @@ local _ = function(OnActivated, OnActivated1, OnActivated2, p1, p2) --[[ Line: 5
 	end
 end
 
-local _ = function(p1, p2) --[[ Line: 95 | Named "renderHeaderBarRight" ]]
+local _ = function(p1, p2)
 	-- upvalues: ReactModule (copy), ButtonStack (copy), ButtonType (copy), RobloxTranslatorModule (copy)
-	return function() --[[ Line: 96 ]]
+	return function()
 		-- upvalues: ReactModule (upval), ButtonStack (upval), ButtonType (upval), p1 (copy), p2 (copy), RobloxTranslatorModule (upval)
 		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -97,7 +97,7 @@ local _ = function(p1, p2) --[[ Line: 95 | Named "renderHeaderBarRight" ]]
 					{
 						buttonType = ButtonType.PrimarySystem,
 						props = {
-							onActivated = function() --[[ Line: 111 ]]
+							onActivated = function()
 								-- upvalues: p1 (upval), p2 (upval)
 								p1(p2)
 							end,
@@ -110,7 +110,7 @@ local _ = function(p1, p2) --[[ Line: 95 | Named "renderHeaderBarRight" ]]
 	end
 end
 
-return function(p1) --[[ Line: 122 | Named "LandscapeModeHeader" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), HeaderBar (copy), IconButton (copy), IconSize (copy), Images (copy), ButtonStack (copy), ButtonType (copy), RobloxTranslatorModule (copy), WithStyleFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local BackAction = p1.backAction
 	local UndoAnnotationPoints = p1.undoAnnotationPoints
@@ -119,7 +119,7 @@ return function(p1) --[[ Line: 122 | Named "LandscapeModeHeader" ]]
 	local IsUndoEnabled = p1.isUndoEnabled
 	local IsRedoEnabled1 = IsRedoEnabled or IsUndoEnabled
 	
-	local function RenderLeft() --[[ Line: 60 ]]
+	local function RenderLeft()
 		-- upvalues: ReactModule (upval), IconButton (upval), IconSize (upval), Images (upval), BackAction (copy), IsRedoEnabled1 (copy), IsUndoEnabled (copy), UndoAnnotationPoints (copy), IsRedoEnabled (copy), RedoAnnotationPoints (copy)
 		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -157,7 +157,7 @@ return function(p1) --[[ Line: 122 | Named "LandscapeModeHeader" ]]
 	local FinishAnnotationActionFunction = p1.finishAnnotationAction
 	local AnnotationPoints = p1.annotationPoints
 	
-	local function RenderRight() --[[ Line: 96 ]]
+	local function RenderRight()
 		-- upvalues: ReactModule (upval), ButtonStack (upval), ButtonType (upval), FinishAnnotationActionFunction (copy), AnnotationPoints (copy), RobloxTranslatorModule (upval)
 		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -173,7 +173,7 @@ return function(p1) --[[ Line: 122 | Named "LandscapeModeHeader" ]]
 					{
 						buttonType = ButtonType.PrimarySystem,
 						props = {
-							onActivated = function() --[[ Line: 111 ]]
+							onActivated = function()
 								-- upvalues: FinishAnnotationActionFunction (upval), AnnotationPoints (upval)
 								FinishAnnotationActionFunction(AnnotationPoints)
 							end,
@@ -199,9 +199,9 @@ return function(p1) --[[ Line: 122 | Named "LandscapeModeHeader" ]]
 			barHeight = 48,
 			renderLeft = RenderLeft,
 			renderRight = RenderRight,
-			renderCenter = function() --[[ Line: 34 ]]
+			renderCenter = function()
 				-- upvalues: WithStyleFunction (upval), ReactModule (upval), TitleText (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
-				return WithStyleFunction(function(p2) --[[ Line: 35 ]]
+				return WithStyleFunction(function(p2)
 					-- upvalues: ReactModule (upval), TitleText (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 					local Theme = p2.Theme
 					local _Font = p2.Font

@@ -10,7 +10,7 @@ local _ = require(Parent.AvatarExperienceCommon)
 local WearTimeOptionButtonModule = require(script.Parent.WearTimeOptionButton)
 local AXTooltip = require(Parent.AvatarExperienceUIKit).AXTooltipComponents.AXTooltip
 
-return function(Frame) --[[ Line: 27 | Named "WearTimeOptionsCarousel" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), WearTimeOptionButtonModule (copy), View (copy), Text (copy), FoundationModule (copy), Enums (copy), AXTooltip (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -18,19 +18,19 @@ return function(Frame) --[[ Line: 27 | Named "WearTimeOptionsCarousel" ]]
 		tooltipText = "Feature.Durables.FTUX.Tooltip"
 	})
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 36 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy)
-		local DelayedThread = task.delay(5, function() --[[ Line: 37 ]]
+		local DelayedThread = task.delay(5, function()
 			-- upvalues: UseStateResult2 (upval)
 			UseStateResult2(false)
 		end)
 		
-		return function() --[[ Line: 41 ]]
+		return function()
 			-- upvalues: DelayedThread (copy)
 			task.cancel(DelayedThread)
 		end
 	end, {})
-	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(function() --[[ Line: 46 ]]
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(function()
 		-- upvalues: Frame (copy)
 		for i, option in Frame.options do
 			if option.selected then
@@ -39,7 +39,7 @@ return function(Frame) --[[ Line: 27 | Named "WearTimeOptionsCarousel" ]]
 		end
 		return 1
 	end)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 57 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Frame (copy), ReactModule (upval), WearTimeOptionButtonModule (upval), UseStateResult1 (copy), UseStateResult2_1 (copy)
 		local Elements = {}
 		
@@ -50,7 +50,7 @@ return function(Frame) --[[ Line: 27 | Named "WearTimeOptionsCarousel" ]]
 					price = option.price,
 					selected = LayoutOrder == UseStateResult1
 				},
-				onActivated = function() --[[ Line: 66 ]]
+				onActivated = function()
 					-- upvalues: UseStateResult2_1 (upval), LayoutOrder (copy), Frame (upval)
 					UseStateResult2_1(LayoutOrder)
 					
@@ -89,7 +89,7 @@ return function(Frame) --[[ Line: 27 | Named "WearTimeOptionsCarousel" ]]
 				InfoIcon = ReactModule.createElement(FoundationModule.IconButton, {
 					icon = Enums.IconName.CircleI,
 					size = Enums.IconSize.Small,
-					onActivated = function() --[[ Line: 144 ]]
+					onActivated = function()
 						-- upvalues: UseStateResult2 (copy)
 						UseStateResult2(true)
 					end
@@ -99,7 +99,7 @@ return function(Frame) --[[ Line: 27 | Named "WearTimeOptionsCarousel" ]]
 					isOpen = UseStateResult,
 					tooltipText = UseLocalizationResult.tooltipText,
 					maxWidth = UseTokensResult.Size.Size_1200 * 3,
-					onTooltipActivated = function() --[[ Line: 153 ]]
+					onTooltipActivated = function()
 						-- upvalues: UseStateResult2 (copy)
 						UseStateResult2(false)
 					end

@@ -26,15 +26,15 @@ if TeleportHistoryButtonsEngineFeature and v2 == 0 then
 	end
 	Flag = false
 end
-local function _(Text: string, p1: number): string --[[ Line: 37 | Named "truncateWithEllipsis" ]]
+local function _(Text: string, p1: number): string
 	return if p1 < #Text then string.sub(Text, 1, p1 - 3) .. "..." else Text
 end
 
 local Name = nil
-local DeferResult = PromiseModule.defer(function(Callback: () -> ()) --[[ Line: 46 ]]
+local DeferResult = PromiseModule.defer(function(Callback: () -> ())
 	-- upvalues: v2 (ref), GetGameNameAndDescriptionFunction (copy), v1 (copy), Name (ref), TeleportHistoryButtonsEngineFeature (copy)
 	if v2 > 0 then
-		GetGameNameAndDescriptionFunction(v1, v2):andThen(function(Result) --[[ Line: 48 ]]
+		GetGameNameAndDescriptionFunction(v1, v2):andThen(function(Result)
 			-- upvalues: Name (upval), TeleportHistoryButtonsEngineFeature (upval)
 			Name = Result.Name
 			
@@ -51,13 +51,13 @@ local DeferResult = PromiseModule.defer(function(Callback: () -> ()) --[[ Line: 
 	end
 end)
 local config = {
-	getTooltipText = function() --[[ Line: 62 ]]
+	getTooltipText = function()
 		-- upvalues: Name (ref), RobloxTranslatorModule (copy)
 		return if Name == nil then RobloxTranslatorModule:FormatByKey("InGame.CommonUI.Label.ReturnFallback") else RobloxTranslatorModule:FormatByKey("InGame.CommonUI.Label.ReturnTo", { placeName = Name })
 	end
 }
 
-function config.getTooltipTextTimeout() --[[ Line: 72 ]]
+function config.getTooltipTextTimeout()
 	-- upvalues: Name (ref), PromiseModule (copy), DeferResult (copy), config (copy)
 	if Name == nil then
 		PromiseModule.any({ DeferResult, PromiseModule.delay(1) }):await()
@@ -65,14 +65,14 @@ function config.getTooltipTextTimeout() --[[ Line: 72 ]]
 	return config.getTooltipText()
 end
 
-function config.getMenuText() --[[ Line: 79 ]]
+function config.getMenuText()
 	-- upvalues: RoactModule (copy), config (copy), Name (ref), DeferResult (copy)
 	local Binding, Binding2 = RoactModule.createBinding(config.getTooltipText())
 	
 	if Name == nil then
-		pcall(function() --[[ Line: 82 ]]
+		pcall(function()
 			-- upvalues: DeferResult (upval), Binding2 (copy), config (upval)
-			DeferResult:andThen(function() --[[ Line: 83 ]]
+			DeferResult:andThen(function()
 				-- upvalues: Binding2 (upval), config (upval)
 				Binding2(config.getTooltipText())
 			end)
@@ -81,7 +81,7 @@ function config.getMenuText() --[[ Line: 79 ]]
 	return Binding
 end
 
-function config.initiateBackButtonTeleport(AdTeleportMethod) --[[ Line: 91 ]]
+function config.initiateBackButtonTeleport(AdTeleportMethod)
 	-- upvalues: TeleportHistoryButtonsEngineFeature (copy), Flag (ref), AdService (copy), TeleportService (copy)
 	if TeleportHistoryButtonsEngineFeature then
 		if Flag then
@@ -93,7 +93,7 @@ function config.initiateBackButtonTeleport(AdTeleportMethod) --[[ Line: 91 ]]
 	AdService:ReturnToPublisherExperience(AdTeleportMethod)
 end
 
-function config.hasReturnUniverse(): boolean --[[ Line: 102 ]]
+function config.hasReturnUniverse(): boolean
 	-- upvalues: v2 (ref)
 	return v2 > 0
 end

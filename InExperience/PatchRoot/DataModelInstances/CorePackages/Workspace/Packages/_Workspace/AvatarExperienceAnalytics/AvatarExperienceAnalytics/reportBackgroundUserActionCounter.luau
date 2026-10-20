@@ -8,13 +8,13 @@ local config = {
 	RemoveTryOn = ConstantsModule.AVATAR_EVENT_COUNTER_NAME.AXRemoveTryOnBackground
 }
 local ReportBackgroundUserActionCounterModule = {
-	report = function(p1) --[[ Line: 25 ]]
+	report = function(p1)
 		-- upvalues: SendAXCounterV2Module (copy), config (copy)
 		SendAXCounterV2Module(config[p1])
 	end
 }
 
-function ReportBackgroundUserActionCounterModule.reportIfAvatarBackgroundAsset(p1, p2, AvatarBackground1) --[[ Line: 30 ]]
+function ReportBackgroundUserActionCounterModule.reportIfAvatarBackgroundAsset(p1, p2, AvatarBackground1)
 	-- upvalues: AvatarBackground (copy), ReportBackgroundUserActionCounterModule (copy)
 	if AvatarBackground and p2 == "Asset" and AvatarBackground1 == AvatarBackground then
 		ReportBackgroundUserActionCounterModule.report(p1)

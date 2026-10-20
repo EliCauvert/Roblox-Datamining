@@ -10,13 +10,13 @@ local GetShareCountsStoreModule = require(Moments.Stores.GetShareCountsStore)
 local GetToastStoreModule = require(Moments.Stores.GetToastStore)
 local ReadAppPolicyModule = require(script.Parent.readAppPolicy)
 
-return function(p1) --[[ Line: 40 | Named "shareMoment" ]]
+return function(p1)
 	-- upvalues: GetToastStoreModule (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), FetchShareLinkModule (copy), ReadAppPolicyModule (copy), Default (copy), GetShareCountsStoreModule (copy), MakeFeedActionFieldsModule (copy), Analytics (copy), EventNames (copy)
 	local MomentId = p1.momentId
 	local Strings = p1.strings
-	task.spawn(function() --[[ Line: 44 ]]
+	task.spawn(function()
 		-- upvalues: GetToastStoreModule (upval), Strings (copy), FFlagMomentsPassFeedItemIdToBackendApis (upval), p1 (copy), FetchShareLinkModule (upval), MomentId (copy), ReadAppPolicyModule (upval), Default (upval), GetShareCountsStoreModule (upval), MakeFeedActionFieldsModule (upval), Analytics (upval), EventNames (upval)
-		local function _() --[[ Line: 45 | Named "notifyFailure" ]]
+		local function _()
 			-- upvalues: GetToastStoreModule (upval), Strings (upval)
 			GetToastStoreModule(false).triggerToast({ text = "", title = Strings.linkCopyFailed })
 		end
@@ -38,7 +38,7 @@ return function(p1) --[[ Line: 40 | Named "shareMoment" ]]
 			
 			return
 		end
-		if not pcall(function() --[[ Line: 65 ]]
+		if not pcall(function()
 			-- upvalues: ReadAppPolicyModule (upval), Default (upval), Result (copy)
 			local AppPolicyModule = ReadAppPolicyModule()
 			

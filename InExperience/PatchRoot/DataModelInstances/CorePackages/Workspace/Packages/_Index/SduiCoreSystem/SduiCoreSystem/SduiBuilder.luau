@@ -16,13 +16,13 @@ local RecordV1ComponentUsageModule = require(SduiCoreSystem.Analytics.recordV1Co
 local t = {}
 
 return {
-	getComponentType = function(p1, p2) --[[ Line: 35 ]]
+	getComponentType = function(p1, p2)
 		if not p1.__isClientBinding and p2.templateRegistry:shouldResolveTemplate(p1) then
 			p2.templateRegistry:resolveTemplateForConfig(p1, p2)
 		end
 		return p1.componentType
 	end,
-	buildAnalyticsContext = function(p1, p2, p3) --[[ Line: 45 ]]
+	buildAnalyticsContext = function(p1, p2, p3)
 		-- upvalues: t (copy), CryoModule (copy)
 		local P3 = p2 or t
 		local AnalyticsData = p1.analyticsData or t
@@ -38,7 +38,7 @@ return {
 			getCollectionData = GetCollectionData
 		}
 	end,
-	tryCreateEagerProcessedComponentConfig = function(p1, p2, Name, p3, p4) --[[ Line: 79 ]]
+	tryCreateEagerProcessedComponentConfig = function(p1, p2, Name, p3, p4)
 		-- upvalues: SduiErrorType (copy), TutilsModule (copy), ValidateInterfaceModule (copy), UiComponentInterface (copy), MapServerBindingPropsFunction (copy), ServerBindingPropMap (copy), RecordV1ComponentUsageModule (copy), SduiUsageRecorderModule (copy), ParsePropsModule (copy), SduiBuilderProcessingPhase (copy)
 		local Instrumentation = p2.dependencies.instrumentation
 		Instrumentation:startTimerFlow("EagerProcess")

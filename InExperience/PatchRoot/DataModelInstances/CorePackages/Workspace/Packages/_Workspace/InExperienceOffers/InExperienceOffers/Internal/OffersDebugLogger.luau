@@ -3,35 +3,35 @@ local PromiseModule = require(InExperienceOffers.Parent.Promise)
 local FFlagEnableOffersDebugLoggingModule = require(InExperienceOffers.Flags.FFlagEnableOffersDebugLogging)
 
 return {
-	log = function(p1) --[[ Line: 9 ]]
+	log = function(p1)
 		-- upvalues: FFlagEnableOffersDebugLoggingModule (copy)
 		if FFlagEnableOffersDebugLoggingModule then
 			print("[OffersDebug]", p1)
 		end
 	end,
-	logLazy = function(Callback) --[[ Line: 17 ]]
+	logLazy = function(Callback)
 		-- upvalues: FFlagEnableOffersDebugLoggingModule (copy)
 		if FFlagEnableOffersDebugLoggingModule then
 			print("[OffersDebug]", Callback())
 		end
 	end,
-	startTimer = function() --[[ Line: 26 ]]
+	startTimer = function()
 		-- upvalues: FFlagEnableOffersDebugLoggingModule (copy)
 		return if FFlagEnableOffersDebugLoggingModule then os.clock() else nil
 	end,
-	logElapsed = function(p1, p2) --[[ Line: 33 ]]
+	logElapsed = function(p1, p2)
 		-- upvalues: FFlagEnableOffersDebugLoggingModule (copy)
 		if FFlagEnableOffersDebugLoggingModule and p2 ~= nil then
 			print("[OffersDebug]", p1, string.format("(%.3fs)", os.clock() - p2))
 		end
 	end,
-	logElapsedLazy = function(Callback, p1) --[[ Line: 39 ]]
+	logElapsedLazy = function(Callback, p1)
 		-- upvalues: FFlagEnableOffersDebugLoggingModule (copy)
 		if FFlagEnableOffersDebugLoggingModule and p1 ~= nil then
 			print("[OffersDebug]", Callback(), string.format("(%.3fs)", os.clock() - p1))
 		end
 	end,
-	tracePromise = function(Promise, p1) --[[ Line: 52 ]]
+	tracePromise = function(Promise, p1)
 		-- upvalues: FFlagEnableOffersDebugLoggingModule (copy), PromiseModule (copy)
 		if not FFlagEnableOffersDebugLoggingModule then
 			return Promise
@@ -40,7 +40,7 @@ return {
 		
 		if p1.onSuccess then
 			local OnSuccessFunction = p1.onSuccess
-			Promise1 = Promise1:andThen(function(Result) --[[ Line: 60 ]]
+			Promise1 = Promise1:andThen(function(Result)
 				-- upvalues: OnSuccessFunction (copy)
 				OnSuccessFunction(Result)
 				
@@ -49,7 +49,7 @@ return {
 		end
 		if p1.onError then
 			local OnErrorFunction = p1.onError
-			Promise1 = Promise1:catch(function(Err) --[[ Line: 67 ]]
+			Promise1 = Promise1:catch(function(Err)
 				-- upvalues: OnErrorFunction (copy), PromiseModule (upval)
 				OnErrorFunction(Err)
 				

@@ -18,11 +18,11 @@ local CollectCommentFunction = require(Parent.Utils).collectComment
 
 return {
 	schemaDefSymbol = "SCHEMA_DEF_SYMBOL",
-	isNamedDefinitionNode = function(p1): boolean --[[ Line: 71 ]]
+	isNamedDefinitionNode = function(p1): boolean
 		-- upvalues: Array (copy), Object (copy)
 		return Array.indexOf(Object.keys(p1), "name") ~= -1
 	end,
-	mergeGraphQLNodes = function(List, p1) --[[ Line: 77 ]]
+	mergeGraphQLNodes = function(List, p1)
 		-- upvalues: Map (copy), Boolean (copy), Array (copy), Object (copy), CollectCommentFunction (copy), Kind (copy), MergeTypeFunction (copy), MergeEnumFunction (copy), MergeUnionFunction (copy), MergeScalarFunction (copy), MergeInputTypeFunction (copy), MergeInterfaceFunction (copy), MergeDirectiveFunction (copy), MergeSchemaDefsFunction (copy)
 		local NewMap = Map.new()
 		

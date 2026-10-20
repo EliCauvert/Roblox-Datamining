@@ -36,7 +36,7 @@ local Config = if FFlagAXResetAvatarButton then {
 	toastType = ToastType.SuccessConfirmation
 } else nil
 
-return function() --[[ Line: 58 | Named "useUndoRedoBarViewModel" ]]
+return function()
 	-- upvalues: UseNavigationFunction (copy), UseDispatchFunction (copy), FFlagAXMigrateBuilderIcons (copy), UseTokensFunction (copy), UseAvatarSaveContextFunction (copy), FFlagAXResetAvatarButton (copy), UseSelectorSignalFunction (copy), SelectCharacterData (copy), TutilsModule (copy), FFlagAXExtendUndoRedoTracking (copy), UseAvatarRouteFunction (copy), SignalsReactModule (copy), ReactModule (copy), ConstantsModule (copy), SlotBasedEditorAnalytics (copy), CharacterHistoryStateChangeButtonActivatedFunction (copy), ClearScreensFunction (copy), AvatarScreen (copy), ClearTryOnsFunction (copy), SetCurrentToastMessageFunction (copy), Config (copy), MenuItemEnumModule (copy), IconName (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseDispatchResult = UseDispatchFunction()
@@ -47,15 +47,15 @@ return function() --[[ Line: 58 | Named "useUndoRedoBarViewModel" ]]
 	local UseSignalStateResult = SignalsReactModule.useSignalState(UseAvatarSaveContextResult.getHistorySignal)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(UseAvatarSaveContextResult.getCurrentHistoryIndexSignal)
 	local UseSignalStateResult2 = if FFlagAXResetAvatarButton then SignalsReactModule.useSignalState(UseSelectorSignalResult) else nil
-	local UseMemoResult = ReactModule.useMemo(function(): boolean --[[ Line: 83 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): boolean
 		-- upvalues: UseSignalStateResult1 (copy), UseSignalStateResult (copy)
 		return not UseSignalStateResult1 or not UseSignalStateResult or UseSignalStateResult1 == 1
 	end, { UseSignalStateResult1, UseSignalStateResult })
-	local UseMemoResult1 = ReactModule.useMemo(function(): boolean --[[ Line: 91 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function(): boolean
 		-- upvalues: UseSignalStateResult1 (copy), UseSignalStateResult (copy)
 		return not UseSignalStateResult1 or not UseSignalStateResult or UseSignalStateResult1 == #UseSignalStateResult
 	end, { UseSignalStateResult1, UseSignalStateResult })
-	local UseMemoResult2 = if FFlagAXResetAvatarButton then ReactModule.useMemo(function(): boolean --[[ Line: 100 ]]
+	local UseMemoResult2 = if FFlagAXResetAvatarButton then ReactModule.useMemo(function(): boolean
 		-- upvalues: UseSignalStateResult2 (copy), ConstantsModule (upval)
 		if UseSignalStateResult2 and UseSignalStateResult2.tryOn and UseSignalStateResult2.tryOn.OutfitTryOn and next(UseSignalStateResult2.tryOn.OutfitTryOn.TryOnItems) ~= nil then
 			return false
@@ -70,7 +70,7 @@ return function() --[[ Line: 58 | Named "useUndoRedoBarViewModel" ]]
 		end
 		return true
 	end, { UseSignalStateResult2, UseSignalStateResult }) else nil
-	local UseResult = ReactModule.useCallback(function(IsUndo) --[[ Line: 125 ]]
+	local UseResult = ReactModule.useCallback(function(IsUndo)
 		-- upvalues: UseAvatarSaveContextResult (copy), UseSignalStateResult1 (copy), SlotBasedEditorAnalytics (upval), FFlagAXExtendUndoRedoTracking (upval), UseAvatarRouteResult (copy), UseDispatchResult (copy), CharacterHistoryStateChangeButtonActivatedFunction (upval), UseNavigationResult (copy), ClearScreensFunction (upval), AvatarScreen (upval)
 		if UseAvatarSaveContextResult then
 			local UpdateHistoryIndexAndGetCharacterDataResult = UseAvatarSaveContextResult.updateHistoryIndexAndGetCharacterData(UseSignalStateResult1 + (if IsUndo then -1 else 1))
@@ -89,7 +89,7 @@ return function() --[[ Line: 58 | Named "useUndoRedoBarViewModel" ]]
 		UseDispatchResult, UseAvatarSaveContextResult, UseSignalStateResult1,
 		UseNavigationResult, UseAvatarRouteResult, UseSignalStateResult
 	})
-	local UseResult1 = if FFlagAXResetAvatarButton then ReactModule.useCallback(function() --[[ Line: 152 ]]
+	local UseResult1 = if FFlagAXResetAvatarButton then ReactModule.useCallback(function()
 		-- upvalues: UseSelectorSignalResult (copy), SlotBasedEditorAnalytics (upval), UseAvatarRouteResult (copy), ConstantsModule (upval), UseDispatchResult (copy), CharacterHistoryStateChangeButtonActivatedFunction (upval), ClearTryOnsFunction (upval), SetCurrentToastMessageFunction (upval), Config (upval)
 		local UseSelectorSignalResultResult = UseSelectorSignalResult(false)
 		
@@ -110,7 +110,7 @@ return function() --[[ Line: 58 | Named "useUndoRedoBarViewModel" ]]
 	end, { UseDispatchResult }) else nil
 	
 	if FFlagAXExtendUndoRedoTracking then
-		ReactModule.useEffect(function() --[[ Line: 182 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: SlotBasedEditorAnalytics (upval), UseAvatarRouteResult (copy), UseSignalStateResult (copy)
 			if SlotBasedEditorAnalytics.trackUndoHistoryCount and UseAvatarRouteResult and UseAvatarRouteResult.opaque and UseSignalStateResult and #UseSignalStateResult then
 				SlotBasedEditorAnalytics.trackUndoHistoryCount(UseAvatarRouteResult.opaque.name, #UseSignalStateResult)
@@ -118,7 +118,7 @@ return function() --[[ Line: 58 | Named "useUndoRedoBarViewModel" ]]
 		end, { UseSignalStateResult, UseAvatarRouteResult })
 	end
 	return {
-		items = ReactModule.useMemo(function() --[[ Line: 197 ]]
+		items = ReactModule.useMemo(function()
 			-- upvalues: FFlagAXResetAvatarButton (upval), MenuItemEnumModule (upval), IconName (upval), UseTokensResult (copy), UseResult1 (copy), UseMemoResult2 (copy), FFlagAXMigrateBuilderIcons (upval), UseResult (copy), UseMemoResult (copy), UseMemoResult1 (copy)
 			return if FFlagAXResetAvatarButton then {
 				{
@@ -127,7 +127,7 @@ return function() --[[ Line: 58 | Named "useUndoRedoBarViewModel" ]]
 					id = MenuItemEnumModule.Reset.Reset,
 					icon = IconName.ArrowSpinClockwise,
 					iconSize = UseTokensResult.Size.Size_500,
-					onActivated = function() --[[ Line: 206 ]]
+					onActivated = function()
 						-- upvalues: UseResult1 (upval)
 						UseResult1()
 					end,
@@ -138,7 +138,7 @@ return function() --[[ Line: 58 | Named "useUndoRedoBarViewModel" ]]
 					isActive = false,
 					id = MenuItemEnumModule.Undo,
 					icon = if FFlagAXMigrateBuilderIcons then IconName.ArrowCurlToLeft else "icons/actions/edit/undo",
-					onActivated = function() --[[ Line: 217 ]]
+					onActivated = function()
 						-- upvalues: UseResult (upval)
 						UseResult(true)
 					end,
@@ -149,7 +149,7 @@ return function() --[[ Line: 58 | Named "useUndoRedoBarViewModel" ]]
 					isActive = false,
 					id = MenuItemEnumModule.Redo,
 					icon = if FFlagAXMigrateBuilderIcons then IconName.ArrowCurlToRight else "icons/actions/edit/redo",
-					onActivated = function() --[[ Line: 229 ]]
+					onActivated = function()
 						-- upvalues: UseResult (upval)
 						UseResult(false)
 					end,
@@ -161,7 +161,7 @@ return function() --[[ Line: 58 | Named "useUndoRedoBarViewModel" ]]
 					isActive = false,
 					id = MenuItemEnumModule.Undo,
 					icon = if FFlagAXMigrateBuilderIcons then IconName.ArrowCurlToLeft else "icons/actions/edit/undo",
-					onActivated = function() --[[ Line: 244 ]]
+					onActivated = function()
 						-- upvalues: UseResult (upval)
 						UseResult(true)
 					end,
@@ -172,7 +172,7 @@ return function() --[[ Line: 58 | Named "useUndoRedoBarViewModel" ]]
 					isActive = false,
 					id = MenuItemEnumModule.Redo,
 					icon = if FFlagAXMigrateBuilderIcons then IconName.ArrowCurlToRight else "icons/actions/edit/redo",
-					onActivated = function() --[[ Line: 256 ]]
+					onActivated = function()
 						-- upvalues: UseResult (upval)
 						UseResult(false)
 					end,

@@ -2,15 +2,15 @@
 local SignalsModule = require(Parent.Signals)
 local _ = require(Parent.MomentsTypes)
 
-local function _(p1) --[[ Line: 90 | Named "selectedEmoteId" ]]
+local function _(p1)
 	return if p1 == nil or p1.userReaction == nil then nil else p1.userReaction.emoteId
 end
 
-local _ = function(p1, EmoteId): boolean --[[ Line: 94 | Named "selectionsAgree" ]]
+local _ = function(p1, EmoteId): boolean
 	return (if p1 == nil or p1.userReaction == nil then nil else p1.userReaction.emoteId) == EmoteId
 end
 
-local _ = function(p1, FeedItemId, p2) --[[ Line: 98 | Named "restrictionFromState" ]]
+local _ = function(p1, FeedItemId, p2)
 	local CommentRestrictionsByCommentIdEntry = p1.commentRestrictionsByCommentId[p2]
 	local GlobalRestriction = p1.globalRestriction
 	
@@ -27,7 +27,7 @@ local _ = function(p1, FeedItemId, p2) --[[ Line: 98 | Named "restrictionFromSta
 	return GlobalRestriction
 end
 
-local _ = function(Key, Key1) --[[ Line: 107 | Named "transitionDeltas" ]]
+local _ = function(Key, Key1)
 	local t = {}
 	
 	if Key ~= nil and Key ~= Key1 then
@@ -39,7 +39,7 @@ local _ = function(Key, Key1) --[[ Line: 107 | Named "transitionDeltas" ]]
 	return t
 end
 
-local function combineDeltas(Tbl, List) --[[ Line: 118 ]]
+local function combineDeltas(Tbl, List)
 	local Copy = table.clone(Tbl)
 	
 	for i, value in List do
@@ -54,7 +54,7 @@ local function combineDeltas(Tbl, List) --[[ Line: 118 ]]
 	return Copy
 end
 
-local function projectReactions(p1, RollbackState) --[[ Line: 131 ]]
+local function projectReactions(p1, RollbackState)
 	local Buffer = table.create(#p1.counts)
 	local t = {}
 	
@@ -76,7 +76,7 @@ local function projectReactions(p1, RollbackState) --[[ Line: 131 ]]
 	}
 end
 
-return function() --[[ Line: 157 | Named "createCommentReactionsStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy), projectReactions (copy), combineDeltas (copy)
 	local Signal, Signal2 = SignalsModule.createSignal({
 		globalRestriction = nil,
@@ -88,21 +88,21 @@ return function() --[[ Line: 157 | Named "createCommentReactionsStore" ]]
 	local Signal1, Signal2_1 = SignalsModule.createSignal(0)
 	local Flag = false
 	
-	local function _(Callback) --[[ Line: 168 | Named "updateState" ]]
+	local function _(Callback)
 		-- upvalues: Flag (ref), Signal2 (copy), Signal (copy)
 		if not Flag then
 			Signal2(Callback(Signal(false)))
 		end
 	end
 	
-	local _ = function(p2, Generation, Status): boolean --[[ Line: 255 | Named "updateIntentStatus" ]]
+	local _ = function(p2, Generation, Status): boolean
 		-- upvalues: Signal (copy), Flag (ref), Signal2 (copy)
 		local IntentsByCommentIdEntry = Signal(false).intentsByCommentId[p2]
 		
 		if Flag or IntentsByCommentIdEntry == nil or IntentsByCommentIdEntry.generation ~= Generation then
 			return false
 		end
-		local function v42(p3) --[[ Line: 260 ]]
+		local function v42(p3)
 			-- upvalues: IntentsByCommentIdEntry (copy), Status (copy), p2 (copy)
 			local Copy = table.clone(p3.intentsByCommentId)
 			local Copy1 = table.clone(IntentsByCommentIdEntry)
@@ -128,7 +128,7 @@ return function() --[[ Line: 157 | Named "createCommentReactionsStore" ]]
 		return true
 	end
 	
-	local function clear() --[[ Line: 530 ]]
+	local function clear()
 		-- upvalues: Flag (ref), Signal2_1 (copy), Signal1 (copy), Signal2 (copy)
 		if not Flag then
 			Signal2_1(Signal1(false) + 1)
@@ -146,15 +146,15 @@ return function() --[[ Line: 157 | Named "createCommentReactionsStore" ]]
 	
 	return {
 		getGeneration = Signal1,
-		getCooldownUntilMs = function(p2) --[[ Line: 178 ]]
+		getCooldownUntilMs = function(p2)
 			-- upvalues: Signal (copy)
 			return Signal(p2 or false).cooldownUntilMs
 		end,
-		getIntent = function(p2, p3) --[[ Line: 174 ]]
+		getIntent = function(p2, p3)
 			-- upvalues: Signal (copy)
 			return Signal(p3 or false).intentsByCommentId[p2]
 		end,
-		getRestriction = function(FeedItemId, p2, p3) --[[ Line: 182 ]]
+		getRestriction = function(FeedItemId, p2, p3)
 			-- upvalues: Signal (copy)
 			local SignalResult = Signal(p3 or false)
 			local CommentRestrictionsByCommentIdEntry = SignalResult.commentRestrictionsByCommentId[p2]
@@ -172,7 +172,7 @@ return function() --[[ Line: 157 | Named "createCommentReactionsStore" ]]
 			end
 			return GlobalRestriction
 		end,
-		getProjection = function(FeedItemId, p2, p3, p4) --[[ Line: 186 ]]
+		getProjection = function(FeedItemId, p2, p3, p4)
 			-- upvalues: Signal (copy), projectReactions (upval)
 			local SignalResult = Signal(p4 or false)
 			local IntentsByCommentIdEntry = SignalResult.intentsByCommentId[p2]
@@ -185,7 +185,7 @@ return function() --[[ Line: 157 | Named "createCommentReactionsStore" ]]
 				generation = if IntentsByCommentIdEntry == nil then nil else IntentsByCommentIdEntry.generation
 			}
 		end,
-		beginIntent = function(FeedItemId, p2, p3, DesiredEmoteId) --[[ Line: 204 ]]
+		beginIntent = function(FeedItemId, p2, p3, DesiredEmoteId)
 			-- upvalues: Flag (ref), Signal1 (copy), Signal2_1 (copy), combineDeltas (upval), Signal2 (copy), Signal (copy)
 			if Flag then
 				return Signal1(false)
@@ -193,7 +193,7 @@ return function() --[[ Line: 157 | Named "createCommentReactionsStore" ]]
 			local NewSignalResult = Signal1(false) + 1
 			Signal2_1(NewSignalResult)
 			
-			local function v31(p4) --[[ Line: 215 ]]
+			local function v31(p4)
 				-- upvalues: p2 (copy), p3 (copy), FeedItemId (copy), DesiredEmoteId (copy), combineDeltas (upval), NewSignalResult (copy)
 				local Copy = table.clone(p4.intentsByCommentId)
 				local Entry = Copy[p2]
@@ -253,7 +253,7 @@ return function() --[[ Line: 157 | Named "createCommentReactionsStore" ]]
 			end
 			return NewSignalResult
 		end,
-		markPending = function(p2, Generation): boolean --[[ Line: 559 ]]
+		markPending = function(p2, Generation): boolean
 			-- upvalues: Signal (copy), Flag (ref), Signal2 (copy)
 			local IntentsByCommentIdEntry = Signal(false).intentsByCommentId[p2]
 			
@@ -262,7 +262,7 @@ return function() --[[ Line: 157 | Named "createCommentReactionsStore" ]]
 			end
 			local Status = "Pending"
 			
-			local function v92(p3) --[[ Line: 260 ]]
+			local function v92(p3)
 				-- upvalues: IntentsByCommentIdEntry (copy), Status (copy), p2 (copy)
 				local Copy = table.clone(p3.intentsByCommentId)
 				local Copy1 = table.clone(IntentsByCommentIdEntry)
@@ -287,7 +287,7 @@ return function() --[[ Line: 157 | Named "createCommentReactionsStore" ]]
 			end
 			return true
 		end,
-		markUncertain = function(p2, Generation): boolean --[[ Line: 562 ]]
+		markUncertain = function(p2, Generation): boolean
 			-- upvalues: Signal (copy), Flag (ref), Signal2 (copy)
 			local IntentsByCommentIdEntry = Signal(false).intentsByCommentId[p2]
 			
@@ -296,7 +296,7 @@ return function() --[[ Line: 157 | Named "createCommentReactionsStore" ]]
 			end
 			local Status = "Uncertain"
 			
-			local function v95(p3) --[[ Line: 260 ]]
+			local function v95(p3)
 				-- upvalues: IntentsByCommentIdEntry (copy), Status (copy), p2 (copy)
 				local Copy = table.clone(p3.intentsByCommentId)
 				local Copy1 = table.clone(IntentsByCommentIdEntry)
@@ -321,7 +321,7 @@ return function() --[[ Line: 157 | Named "createCommentReactionsStore" ]]
 			end
 			return true
 		end,
-		markLocallyConfirmed = function(p2, Generation): boolean --[[ Line: 565 ]]
+		markLocallyConfirmed = function(p2, Generation): boolean
 			-- upvalues: Signal (copy), Flag (ref), Signal2 (copy)
 			local IntentsByCommentIdEntry = Signal(false).intentsByCommentId[p2]
 			
@@ -330,7 +330,7 @@ return function() --[[ Line: 157 | Named "createCommentReactionsStore" ]]
 			end
 			local Status = "LocallyConfirmed"
 			
-			local function v98(p3) --[[ Line: 260 ]]
+			local function v98(p3)
 				-- upvalues: IntentsByCommentIdEntry (copy), Status (copy), p2 (copy)
 				local Copy = table.clone(p3.intentsByCommentId)
 				local Copy1 = table.clone(IntentsByCommentIdEntry)
@@ -355,14 +355,14 @@ return function() --[[ Line: 157 | Named "createCommentReactionsStore" ]]
 			end
 			return true
 		end,
-		confirmAndRebase = function(p2, Generation, p3): boolean --[[ Line: 279 ]]
+		confirmAndRebase = function(p2, Generation, p3): boolean
 			-- upvalues: Signal (copy), Flag (ref), Signal2 (copy)
 			local IntentsByCommentIdEntry = Signal(false).intentsByCommentId[p2]
 			
 			if Flag or IntentsByCommentIdEntry == nil or IntentsByCommentIdEntry.generation ~= Generation then
 				return false
 			end
-			local function v46(p4) --[[ Line: 288 ]]
+			local function v46(p4)
 				-- upvalues: IntentsByCommentIdEntry (copy), p3 (copy), p2 (copy)
 				local Copy = table.clone(p4.intentsByCommentId)
 				local Copy1 = table.clone(IntentsByCommentIdEntry)
@@ -395,14 +395,14 @@ return function() --[[ Line: 157 | Named "createCommentReactionsStore" ]]
 			end
 			return true
 		end,
-		rollback = function(p2, Generation, ErrorCode): boolean --[[ Line: 307 ]]
+		rollback = function(p2, Generation, ErrorCode): boolean
 			-- upvalues: Signal (copy), Flag (ref), Signal2 (copy)
 			local IntentsByCommentIdEntry = Signal(false).intentsByCommentId[p2]
 			
 			if Flag or IntentsByCommentIdEntry == nil or IntentsByCommentIdEntry.generation ~= Generation then
 				return false
 			end
-			local function v53(p3) --[[ Line: 312 ]]
+			local function v53(p3)
 				-- upvalues: IntentsByCommentIdEntry (copy), p2 (copy), ErrorCode (copy)
 				local Copy = table.clone(p3.intentsByCommentId)
 				
@@ -443,14 +443,14 @@ return function() --[[ Line: 157 | Named "createCommentReactionsStore" ]]
 			end
 			return true
 		end,
-		expireIntent = function(Key, Generation): boolean --[[ Line: 347 ]]
+		expireIntent = function(Key, Generation): boolean
 			-- upvalues: Signal (copy), Flag (ref), Signal2 (copy)
 			local IntentsByCommentIdEntry = Signal(false).intentsByCommentId[Key]
 			
 			if Flag or IntentsByCommentIdEntry == nil or IntentsByCommentIdEntry.generation ~= Generation then
 				return false
 			end
-			local function _(p2) --[[ Line: 352 ]]
+			local function _(p2)
 				-- upvalues: Key (copy)
 				local Copy = table.clone(p2.intentsByCommentId)
 				Copy[Key] = nil
@@ -478,14 +478,14 @@ return function() --[[ Line: 157 | Named "createCommentReactionsStore" ]]
 			end
 			return true
 		end,
-		reconcile = function(FeedItemId, p2, p3, p4): boolean --[[ Line: 366 ]]
+		reconcile = function(FeedItemId, p2, p3, p4): boolean
 			-- upvalues: Flag (ref), Signal2 (copy), Signal (copy)
 			if p3 == nil then
 				return false
 			end
 			local Flag1 = false
 			
-			local function v62(p5) --[[ Line: 376 ]]
+			local function v62(p5)
 				-- upvalues: p2 (copy), FeedItemId (copy), p4 (copy), p3 (copy), Flag1 (ref)
 				local Copy = table.clone(p5.commentRestrictionsByCommentId)
 				local Entry = Copy[p2]
@@ -548,9 +548,9 @@ return function() --[[ Line: 157 | Named "createCommentReactionsStore" ]]
 			end
 			return Flag1
 		end,
-		setGlobalRestriction = function(GlobalRestriction) --[[ Line: 419 ]]
+		setGlobalRestriction = function(GlobalRestriction)
 			-- upvalues: Flag (ref), Signal2 (copy), Signal (copy)
-			local function _(p2) --[[ Line: 420 ]]
+			local function _(p2)
 				-- upvalues: GlobalRestriction (copy)
 				return {
 					intentsByCommentId = p2.intentsByCommentId,
@@ -572,9 +572,9 @@ return function() --[[ Line: 157 | Named "createCommentReactionsStore" ]]
 				})
 			end
 		end,
-		setFeedRestriction = function(p2, p3) --[[ Line: 431 ]]
+		setFeedRestriction = function(p2, p3)
 			-- upvalues: Flag (ref), Signal2 (copy), Signal (copy)
-			local function v77(p4) --[[ Line: 432 ]]
+			local function v77(p4)
 				-- upvalues: p3 (copy), p2 (copy)
 				local Copy = table.clone(p4.feedRestrictionsByFeedItemId)
 				
@@ -596,9 +596,9 @@ return function() --[[ Line: 157 | Named "createCommentReactionsStore" ]]
 				Signal2((v77(Signal(false))))
 			end
 		end,
-		setCommentRestriction = function(FeedItemId, p2, ErrorCode, Generation) --[[ Line: 449 ]]
+		setCommentRestriction = function(FeedItemId, p2, ErrorCode, Generation)
 			-- upvalues: Flag (ref), Signal2 (copy), Signal (copy)
-			local function v79(p3) --[[ Line: 455 ]]
+			local function v79(p3)
 				-- upvalues: ErrorCode (copy), p2 (copy), FeedItemId (copy), Generation (copy)
 				local Copy = table.clone(p3.commentRestrictionsByCommentId)
 				
@@ -624,9 +624,9 @@ return function() --[[ Line: 157 | Named "createCommentReactionsStore" ]]
 				Signal2((v79(Signal(false))))
 			end
 		end,
-		setCooldownUntilMs = function(p2: number) --[[ Line: 476 ]]
+		setCooldownUntilMs = function(p2: number)
 			-- upvalues: Flag (ref), Signal2 (copy), Signal (copy)
-			local function _(p3) --[[ Line: 477 ]]
+			local function _(p3)
 				-- upvalues: p2 (copy)
 				return {
 					intentsByCommentId = p3.intentsByCommentId,
@@ -648,9 +648,9 @@ return function() --[[ Line: 157 | Named "createCommentReactionsStore" ]]
 				})
 			end
 		end,
-		clearComment = function(p2) --[[ Line: 488 ]]
+		clearComment = function(p2)
 			-- upvalues: Flag (ref), Signal2 (copy), Signal (copy)
-			local function v83(p3) --[[ Line: 489 ]]
+			local function v83(p3)
 				-- upvalues: p2 (copy)
 				local Copy = table.clone(p3.intentsByCommentId)
 				Copy[p2] = nil
@@ -670,9 +670,9 @@ return function() --[[ Line: 157 | Named "createCommentReactionsStore" ]]
 				Signal2((v83(Signal(false))))
 			end
 		end,
-		clearFeed = function(FeedItemId) --[[ Line: 504 ]]
+		clearFeed = function(FeedItemId)
 			-- upvalues: Flag (ref), Signal2 (copy), Signal (copy)
-			local function v86(p2) --[[ Line: 505 ]]
+			local function v86(p2)
 				-- upvalues: FeedItemId (copy)
 				local Copy = table.clone(p2.intentsByCommentId)
 				
@@ -704,7 +704,7 @@ return function() --[[ Line: 157 | Named "createCommentReactionsStore" ]]
 			end
 		end,
 		clear = clear,
-		dispose = function() --[[ Line: 544 ]]
+		dispose = function()
 			-- upvalues: Flag (ref), clear (copy)
 			if not Flag then
 				clear()

@@ -24,7 +24,7 @@ local FFlagAddIEMProfilePage = SharedFlagsModule.FFlagAddIEMProfilePage
 local FFlagEnableSocialTabsPage = SharedFlagsModule.FFlagEnableSocialTabsPage
 local FFlagProfilePlatformEnableSchoolChip = SharedFlagsModule.FFlagProfilePlatformEnableSchoolChip
 
-return function(p1) --[[ Line: 46 | Named "SocialCountsChipRowContainer" ]]
+return function(p1)
 	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseAreWebViewsSupportedModule (copy), UseLocalUserIdFunction (copy), UseDynamicSizeMarginModule (copy), FFlagAddIEMProfilePage (copy), GetFFlagEnableProfileInsightsApolloMigrationFunction (copy), UseSignalProfileInsightsByUserIdFunction (copy), UseProfileInsightsByUserIdsFunction (copy), GetProfileInsightsByUserIdFromDataFunction (copy), UseSocialCountsDataModule (copy), UseSocialCountsActionsModule (copy), FFlagEnableSocialTabsPage (copy), FFlagProfilePlatformEnableSchoolChip (copy), UseSchoolChipModule (copy), ReactModule (copy), EnumsModule (copy), ChipSize (copy), ChipGroup (copy)
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	local UseProfileAnalyticsContextModuleResult = UseProfileAnalyticsContextModule()
@@ -67,7 +67,7 @@ return function(p1) --[[ Line: 46 | Named "SocialCountsChipRowContainer" ]]
 		}),
 		ChipGroup = ReactModule.createElement(ChipGroup, {
 			scrollingEnabledOverride = true,
-			chips = ReactModule.useMemo(function() --[[ Line: 99 ]]
+			chips = ReactModule.useMemo(function()
 				-- upvalues: FFlagAddIEMProfilePage (upval), Source (copy), EnumsModule (upval), FFlagProfilePlatformEnableSchoolChip (upval), UseSchoolChipModuleResult (ref), UseSocialCountsDataModuleResult (copy), UseSocialCountsActionsModuleResult (copy), ChipSize (upval)
 				local List = {}
 				local IsSourceMatch: boolean = FFlagAddIEMProfilePage and Source == EnumsModule.Sources.InExperienceProfile

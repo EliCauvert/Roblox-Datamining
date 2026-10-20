@@ -11,11 +11,11 @@ local Interactable = UIBloxModule.Core.Control.Interactable
 local config = {
 	bodyText = "Chat Disabled",
 	defaultCountdownString = "",
-	onActivated = function() --[[ Line: 28 ]] end,
+	onActivated = function() end,
 	contentVerticalAlignment = Enum.VerticalAlignment.Top
 }
 
-return function(p1) --[[ Line: 32 | Named "ChatInputBoxDisabled" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), FoundationModule (copy), UseCountdownBindingFunction (copy), ReactModule (copy), Interactable (copy), FoundationFontFaceMigration (copy), ImageSetLabel (copy), Images (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()

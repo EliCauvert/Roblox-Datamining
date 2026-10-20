@@ -4,10 +4,10 @@ local OtterModule = require(Parent.Otter)
 local UseAnimatedBindingFunction = require(Parent.ReactOtter).useAnimatedBinding
 local config = { frequency = 10, dampingRatio = 1 }
 
-return function(p1) --[[ Line: 53 | Named "usePulseAnimationBinding" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), OtterModule (copy), config (copy), UseAnimatedBindingFunction (copy)
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = UseAnimatedBindingFunction({ thickness = 0, transparency = 0 }, (ReactModule.useCallback(function(p2) --[[ Line: 56 ]]
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = UseAnimatedBindingFunction({ thickness = 0, transparency = 0 }, (ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult (copy), p1 (copy), OtterModule (upval), config (upval)
 		if UseRefResult.current and p1 then
 			if p2.thickness == 10 then
@@ -26,7 +26,7 @@ return function(p1) --[[ Line: 53 | Named "usePulseAnimationBinding" ]]
 			end
 		end
 	end, { p1 })))
-	ReactModule.useEffect(function() --[[ Line: 76 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseRefResult (copy), UseAnimatedBindingResult2 (copy), OtterModule (upval), config (upval)
 		if p1 then
 			if not UseRefResult.current then
@@ -37,7 +37,7 @@ return function(p1) --[[ Line: 53 | Named "usePulseAnimationBinding" ]]
 				transparency = OtterModule.ease(1, config)
 			})
 		end
-		return function() --[[ Line: 87 ]]
+		return function()
 			-- upvalues: UseAnimatedBindingResult2 (upval), OtterModule (upval)
 			UseAnimatedBindingResult2({
 				thickness = OtterModule.instant(0),

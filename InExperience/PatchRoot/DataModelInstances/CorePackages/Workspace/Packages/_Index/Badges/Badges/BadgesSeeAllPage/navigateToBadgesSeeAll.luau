@@ -4,7 +4,7 @@ local AppPage = require(Parent.RobloxAppEnums).AppPage
 local SduiLoadTimer = require(Parent.SduiSharedUtilities).SduiLoadTimer
 local FetchBadgesSeeAllPageIfNeededModule = require(Badges.BadgesSeeAllPage.fetchBadgesSeeAllPageIfNeeded)
 
-return function(p1, UniverseId) --[[ Line: 9 | Named "navigateToBadgesSeeAll" ]]
+return function(p1, UniverseId)
 	-- upvalues: SduiLoadTimer (copy), AppPage (copy), FetchBadgesSeeAllPageIfNeededModule (copy)
 	local LoadTimer = SduiLoadTimer.createLoadTimer(AppPage.BadgesSeeAll)
 	LoadTimer.start("navigate")

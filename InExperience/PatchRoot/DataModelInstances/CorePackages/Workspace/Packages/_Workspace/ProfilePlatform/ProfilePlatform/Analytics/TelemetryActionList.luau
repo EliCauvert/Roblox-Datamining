@@ -29,22 +29,22 @@ return {
 			{
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					status = function(p1) --[[ Line: 41 ]]
+					status = function(p1)
 						return p1
 					end
 				}
 			},
 			{
 				type = SupportedTelemetryBackends.RobloxTelemetryStat,
-				overrideName = function(p1): string --[[ Line: 48 ]]
+				overrideName = function(p1): string
 					-- upvalues: EventNamesModule (copy)
 					return EventNamesModule.ProfileLoadingStage .. "Time" .. p1.status
 				end,
 				dynamicCustomFields = {
-					status = function(p1) --[[ Line: 52 ]]
+					status = function(p1)
 						return p1
 					end,
-					isProfilePlatform = function(p1) --[[ Line: 55 ]]
+					isProfilePlatform = function(p1)
 						return p1 or false
 					end
 				}
@@ -58,7 +58,7 @@ return {
 			{
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					reloadCount = function(p1: number): string --[[ Line: 69 ]]
+					reloadCount = function(p1: number): string
 						return if p1 <= 10 then `ReloadCount${p1}` else "ReloadCount5+"
 					end
 				}
@@ -72,10 +72,10 @@ return {
 			{
 				type = SupportedTelemetryBackends.RobloxTelemetryStat,
 				dynamicCustomFields = {
-					status = function(p1) --[[ Line: 89 ]]
+					status = function(p1)
 						return p1
 					end,
-					isInExperience = function(p1) --[[ Line: 92 ]]
+					isInExperience = function(p1)
 						return p1
 					end
 				}
@@ -89,7 +89,7 @@ return {
 			{
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					friendStatus = function(p1) --[[ Line: 106 ]]
+					friendStatus = function(p1)
 						return p1
 					end
 				}
@@ -103,7 +103,7 @@ return {
 			{
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					presenceType = function(p1) --[[ Line: 120 ]]
+					presenceType = function(p1)
 						return p1
 					end
 				}
@@ -201,7 +201,7 @@ return {
 			{
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					modalVariantOverride = function(p1) --[[ Line: 244 ]]
+					modalVariantOverride = function(p1)
 						return p1
 					end
 				}
@@ -411,11 +411,11 @@ return {
 			{
 				type = SupportedTelemetryBackends.RobloxTelemetryStat,
 				dynamicCustomFields = if FFlagProfilePlatformEnableStore then if FFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule then {
-					btnContext = function(p1) --[[ Line: 514 ]]
+					btnContext = function(p1)
 						return p1
 					end
 				} else {
-					source = function(p1) --[[ Line: 519 ]]
+					source = function(p1)
 						return p1
 					end
 				} else nil
@@ -429,7 +429,7 @@ return {
 			{
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					component = function(p1) --[[ Line: 534 ]]
+					component = function(p1)
 						return p1
 					end
 				}
@@ -526,7 +526,7 @@ return {
 		backendsList = {
 			{
 				type = SupportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ Line: 680 ]]
+				overrideName = function()
 					-- upvalues: EventTypes (copy)
 					return EventTypes.UserSeen
 				end,
@@ -535,7 +535,7 @@ return {
 					btn = AnalyticsConstantsModule.Btns.InspectAvatarInsufficientRobux
 				},
 				dynamicCustomFields = {
-					totalPrice = function(p1) --[[ Line: 688 ]]
+					totalPrice = function(p1)
 						return p1
 					end
 				}
@@ -549,7 +549,7 @@ return {
 		backendsList = {
 			{
 				type = SupportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ Line: 706 ]]
+				overrideName = function()
 					-- upvalues: EventTypes (copy)
 					return EventTypes.ButtonClick
 				end,
@@ -558,7 +558,7 @@ return {
 					btn = AnalyticsConstantsModule.Btns.InspectAvatarBuyRobux
 				},
 				dynamicCustomFields = {
-					totalPrice = function(p1) --[[ Line: 714 ]]
+					totalPrice = function(p1)
 						return p1
 					end
 				}
@@ -572,7 +572,7 @@ return {
 		backendsList = {
 			{
 				type = SupportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ Line: 732 ]]
+				overrideName = function()
 					-- upvalues: EventTypes (copy)
 					return EventTypes.ButtonClick
 				end,

@@ -1,11 +1,11 @@
 ﻿local DiagnosticsModule = require(script:FindFirstAncestor("ViewRecycler").Core.Diagnostics)
 local Frozen = table.freeze({})
 
-local function _(p1: number): boolean --[[ Line: 65 | Named "validMaximum" ]]
+local function _(p1: number): boolean
 	return p1 == nil or p1 >= 0 and p1 % 1 == 0
 end
 
-local _ = function(List, p1, p2, p3, p4, p5) --[[ Line: 69 | Named "appendChange" ]]
+local _ = function(List, p1, p2, p3, p4, p5)
 	table.insert(List, {
 		p1,
 		p2,
@@ -15,7 +15,7 @@ local _ = function(List, p1, p2, p3, p4, p5) --[[ Line: 69 | Named "appendChange
 	})
 end
 
-return function(p1) --[[ Line: 73 | Named "createRecyclingScope" ]]
+return function(p1)
 	-- upvalues: Frozen (copy), DiagnosticsModule (copy)
 	local MaxPoolSize: number = p1.maxPoolSize
 	local MaxPoolSize1: boolean = MaxPoolSize == nil or MaxPoolSize >= 0 and MaxPoolSize % 1 == 0
@@ -29,11 +29,11 @@ return function(p1) --[[ Line: 73 | Named "createRecyclingScope" ]]
 	local Count1 = 1
 	local Flag = false
 	local Flag1 = false
-	local Batch = Adapter.batch or function(Callback: () -> ()) --[[ Line: 84 ]]
+	local Batch = Adapter.batch or function(Callback: () -> ())
 		Callback()
 	end
 	
-	local function poolFor(ViewType) --[[ Line: 88 ]]
+	local function poolFor(ViewType)
 		-- upvalues: Tbl (copy)
 		local Entry = Tbl[ViewType]
 		
@@ -44,7 +44,7 @@ return function(p1) --[[ Line: 73 | Named "createRecyclingScope" ]]
 		return Entry
 	end
 	
-	local function _(Key) --[[ Line: 97 | Named "removeInventory" ]]
+	local function _(Key)
 		-- upvalues: Tbl1 (copy), Tbl2 (copy)
 		local Entry = Tbl1[Key]
 		local CountTbl2 = #Tbl2
@@ -58,7 +58,7 @@ return function(p1) --[[ Line: 73 | Named "createRecyclingScope" ]]
 		Tbl1[Key] = nil
 	end
 	
-	local function notify(Action, ViewType, OccupiedDelta, VacantDelta, TotalDelta) --[[ Line: 110 ]]
+	local function notify(Action, ViewType, OccupiedDelta, VacantDelta, TotalDelta)
 		-- upvalues: p1 (copy)
 		if p1.onPoolChanged ~= nil then
 			p1.onPoolChanged({
@@ -71,7 +71,7 @@ return function(p1) --[[ Line: 73 | Named "createRecyclingScope" ]]
 		end
 	end
 	
-	local function evictExcess() --[[ Line: 314 ]]
+	local function evictExcess()
 		-- upvalues: Tbl (copy), MaxPoolSize1 (ref), Tbl1 (copy), Tbl2 (copy), DiagnosticsModule (upval), p1 (copy), Adapter (copy)
 		local Items = {}
 		local List = {}
@@ -115,7 +115,7 @@ return function(p1) --[[ Line: 73 | Named "createRecyclingScope" ]]
 	end
 	
 	return {
-		exchange = function(Owner, List1, List2) --[[ Line: 122 ]]
+		exchange = function(Owner, List1, List2)
 			-- upvalues: Flag (ref), Flag1 (ref), Count1 (ref), Tbl1 (copy), p1 (copy), Frozen (upval), Tbl (copy), MaxPoolSize1 (ref), Tbl2 (copy), Batch (copy), Adapter (copy), DiagnosticsModule (upval), poolFor (copy), Count (ref)
 			assert(not Flag, "RecyclingScope: cannot exchange after destruction")
 			assert(not Flag1, "RecyclingScope: cannot mutate during an exchange")
@@ -161,7 +161,7 @@ return function(p1) --[[ Line: 73 | Named "createRecyclingScope" ]]
 					end
 				end
 				Flag1 = false
-				Batch(function() --[[ Line: 167 ]]
+				Batch(function()
 					-- upvalues: Items (copy), Adapter (upval)
 					for _, item in Items do
 						Adapter.destroy(item)
@@ -193,7 +193,7 @@ return function(p1) --[[ Line: 73 | Named "createRecyclingScope" ]]
 				local CreateResults = {}
 				local T2 = if T1 == nil then nil else {}
 				local Frozen1 = if T2 == nil then Frozen else {}
-				local Success, Result = pcall(function() --[[ Line: 197 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: List2 (copy), T1 (copy), T2 (copy), Frozen1 (copy), NewLasts (copy), Adapter (upval), Tbl1 (upval), T (copy), CreateResults (copy)
 					for i, value in List2 do
 						local Entry = if T1 == nil then nil else T1[value.viewType]
@@ -331,7 +331,7 @@ return function(p1) --[[ Line: 73 | Named "createRecyclingScope" ]]
 					end
 				end
 				Flag1 = false
-				Batch(function() --[[ Line: 301 ]]
+				Batch(function()
 					-- upvalues: T3 (copy), p1 (upval), Items1 (copy), Adapter (upval)
 					if T3 ~= nil then
 						for _, value in T3 do
@@ -361,24 +361,24 @@ return function(p1) --[[ Line: 73 | Named "createRecyclingScope" ]]
 			end
 		end,
 		batch = Batch,
-		isLeaseCurrent = function(Owner, p2, LeaseToken): boolean --[[ Line: 338 ]]
+		isLeaseCurrent = function(Owner, p2, LeaseToken): boolean
 			-- upvalues: Tbl1 (copy), Flag (ref)
 			local Entry = Tbl1[p2]
 			
 			return not Flag and (Entry ~= nil and (Entry.owner == Owner and Entry.leaseToken == LeaseToken))
 		end,
-		setMaxPoolSize = function(Value: number) --[[ Line: 342 ]]
+		setMaxPoolSize = function(Value: number)
 			-- upvalues: Flag (ref), Flag1 (ref), MaxPoolSize1 (ref), evictExcess (copy)
 			assert(not Flag and not Flag1, "RecyclingScope: cannot set capacity now")
 			assert(Value == nil or Value >= 0 and Value % 1 == 0, "RecyclingScope: maxPoolSize must be a non-negative integer")
 			MaxPoolSize1 = Value
 			evictExcess()
 		end,
-		getScopeInventory = function() --[[ Line: 348 ]]
+		getScopeInventory = function()
 			-- upvalues: Tbl2 (copy)
 			return table.clone(Tbl2)
 		end,
-		getVacantViews = function() --[[ Line: 351 ]]
+		getVacantViews = function()
 			-- upvalues: Tbl (copy)
 			local Items = {}
 			
@@ -389,7 +389,7 @@ return function(p1) --[[ Line: 73 | Named "createRecyclingScope" ]]
 			end
 			return Items
 		end,
-		destroy = function() --[[ Line: 360 ]]
+		destroy = function()
 			-- upvalues: Flag (ref), Flag1 (ref), Tbl2 (copy), p1 (copy), Tbl1 (copy), Tbl (copy), Batch (copy), notify (copy), DiagnosticsModule (upval), Adapter (copy)
 			if Flag then return end
 			assert(not Flag1, "RecyclingScope: cannot destroy during an exchange")
@@ -408,14 +408,14 @@ return function(p1) --[[ Line: 73 | Named "createRecyclingScope" ]]
 			table.clear(Tbl)
 			local v1 = nil
 			
-			local function _(p2, p3) --[[ Line: 384 | Named "captureFailure" ]]
+			local function _(p2, p3)
 				-- upvalues: v1 (ref)
 				if not p2 and v1 == nil then
 					v1 = p3
 				end
 			end
 			
-			Batch(function() --[[ Line: 389 ]]
+			Batch(function()
 				-- upvalues: Copy (copy), Buffer (copy), notify (upval), DiagnosticsModule (upval), v1 (ref), Adapter (upval)
 				for i, value in Copy do
 					local NoBuffer = Buffer == nil

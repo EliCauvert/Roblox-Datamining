@@ -8,7 +8,7 @@ local UseEffectFunction = ReactModule.useEffect
 local UseRefFunction = ReactModule.useRef
 local UseStateFunction = ReactModule.useState
 
-return function(p1) --[[ Line: 26 | Named "VoicePreviewLayer" ]]
+return function(p1)
 	-- upvalues: UseStateFunction (copy), UseEffectFunction (copy), SignalsModule (copy), UseRefFunction (copy), GetFFlagMomentsTTSStartTimePositioningModule (copy)
 	local Controller = p1.controller
 	local TtsAudio = Controller.ttsAudio
@@ -16,9 +16,9 @@ return function(p1) --[[ Line: 26 | Named "VoicePreviewLayer" ]]
 	local UseStateResult, UseStateResult2 = UseStateFunction(Controller.getActiveTool(false))
 	local UseStateResult1, UseStateResult2_1 = UseStateFunction(Controller.getEffectiveTTS(false))
 	local UseStateResult3, UseStateResult2_2 = UseStateFunction(TtsAudio.getIsLoaded(false))
-	UseEffectFunction(function() --[[ Line: 36 ]]
+	UseEffectFunction(function()
 		-- upvalues: SignalsModule (upval), UseStateResult2 (copy), Controller (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), TtsAudio (copy)
-		return SignalsModule.createEffect(function(p2) --[[ Line: 37 ]]
+		return SignalsModule.createEffect(function(p2)
 			-- upvalues: UseStateResult2 (upval), Controller (upval), UseStateResult2_1 (upval), UseStateResult2_2 (upval), TtsAudio (upval)
 			UseStateResult2(Controller.getActiveTool(p2))
 			UseStateResult2_1(Controller.getEffectiveTTS(p2))
@@ -31,7 +31,7 @@ return function(p1) --[[ Line: 26 | Named "VoicePreviewLayer" ]]
 	local HasUseStateResult: boolean = not IsVoice and UseStateResult1 ~= nil
 	local Text: string = if UseStateResult1 == nil then "" else `{UseStateResult1.text}:{UseStateResult1.voiceId}`
 	local StartTime = if UseStateResult1 == nil then 0 else UseStateResult1.startTime or 0
-	UseEffectFunction(function() --[[ Line: 59 ]]
+	UseEffectFunction(function()
 		-- upvalues: HasUseStateResult (copy), UseStateResult1 (copy), TtsAudio (copy)
 		if HasUseStateResult and UseStateResult1 ~= nil then
 			TtsAudio.generate(UseStateResult1.text, UseStateResult1.voiceId)
@@ -39,7 +39,7 @@ return function(p1) --[[ Line: 26 | Named "VoicePreviewLayer" ]]
 			return
 		end
 	end, { HasUseStateResult, Text })
-	UseEffectFunction(function() --[[ Line: 68 ]]
+	UseEffectFunction(function()
 		-- upvalues: IsVoice (copy), UseRefResult (copy), TtsAudio (copy)
 		if IsVoice and UseRefResult.current then
 			TtsAudio.pause()
@@ -47,14 +47,14 @@ return function(p1) --[[ Line: 26 | Named "VoicePreviewLayer" ]]
 		end
 	end, { IsVoice })
 	local UseStateResult4, UseStateResult2_3 = UseStateFunction(Controller.preview.playback.getIsPlaying(false))
-	UseEffectFunction(function() --[[ Line: 77 ]]
+	UseEffectFunction(function()
 		-- upvalues: SignalsModule (upval), UseStateResult2_3 (copy), Controller (copy)
-		return SignalsModule.createEffect(function(p2) --[[ Line: 78 ]]
+		return SignalsModule.createEffect(function(p2)
 			-- upvalues: UseStateResult2_3 (upval), Controller (upval)
 			UseStateResult2_3(Controller.preview.playback.getIsPlaying(p2))
 		end)
 	end, { Controller })
-	UseEffectFunction(function() --[[ Line: 84 ]]
+	UseEffectFunction(function()
 		-- upvalues: HasUseStateResult (copy), UseStateResult1 (copy), TtsAudio (copy), Controller (copy), UseStateResult4 (copy), UseRefResult (copy), GetFFlagMomentsTTSStartTimePositioningModule (upval)
 		if not HasUseStateResult or UseStateResult1 == nil then return end
 		if not TtsAudio.getIsLoaded(false) then return end
@@ -77,7 +77,7 @@ return function(p1) --[[ Line: 26 | Named "VoicePreviewLayer" ]]
 			TtsAudio.pause()
 			UseRefResult.current = false
 		end
-		return function() --[[ Line: 117 ]]
+		return function()
 			-- upvalues: UseRefResult (upval), TtsAudio (upval)
 			if UseRefResult.current then
 				TtsAudio.pause()
@@ -91,12 +91,12 @@ return function(p1) --[[ Line: 26 | Named "VoicePreviewLayer" ]]
 		UseStateResult4,
 		UseStateResult3
 	})
-	UseEffectFunction(function() --[[ Line: 128 ]]
+	UseEffectFunction(function()
 		-- upvalues: HasUseStateResult (copy), UseStateResult1 (copy), SignalsModule (upval), Controller (copy), UseRefResult1 (copy), TtsAudio (copy), UseRefResult (copy), GetFFlagMomentsTTSStartTimePositioningModule (upval)
 		if not HasUseStateResult or UseStateResult1 == nil then return end
 		local StartTime = UseStateResult1.startTime or 0
 		
-		return SignalsModule.createEffect(function(p2) --[[ Line: 135 ]]
+		return SignalsModule.createEffect(function(p2)
 			-- upvalues: Controller (upval), UseRefResult1 (upval), TtsAudio (upval), StartTime (copy), UseRefResult (upval), GetFFlagMomentsTTSStartTimePositioningModule (upval)
 			local Position: number = Controller.preview.playback.getPosition(p2)
 			local Current: number = UseRefResult1.current

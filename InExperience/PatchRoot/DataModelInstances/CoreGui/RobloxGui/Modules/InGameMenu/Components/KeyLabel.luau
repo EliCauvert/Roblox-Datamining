@@ -44,7 +44,7 @@ local StrictInterfaceResult = T.strictInterface({
 	ZIndex = T.optional(T.integer)
 })
 
-local function getLabelWidthAndContent(Input, p1, TextThemeKey) --[[ Line: 71 ]]
+local function getLabelWidthAndContent(Input, p1, TextThemeKey)
 	-- upvalues: config (copy), Roact (copy), ImageSetLabel (copy), UserInputService (copy), TextService (copy), ThemedTextLabelModule (copy)
 	local Entry = config[Input]
 	
@@ -87,12 +87,12 @@ local function getLabelWidthAndContent(Input, p1, TextThemeKey) --[[ Line: 71 ]]
 	}), Alignment
 end
 
-return function(Frame: Frame) --[[ Line: 142 | Named "KeyLabel" ]]
+return function(Frame: Frame)
 	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), WithStyleFunction (copy), getLabelWidthAndContent (copy), Roact (copy), ImageSetLabel (copy), AssetsModule (copy)
 	if GlobalConfigModule.propValidation then
 		assert(StrictInterfaceResult(Frame))
 	end
-	return WithStyleFunction(function(p1) --[[ Line: 147 ]]
+	return WithStyleFunction(function(p1)
 		-- upvalues: Frame (copy), getLabelWidthAndContent (upval), Roact (upval), ImageSetLabel (upval), AssetsModule (upval)
 		local ThemeEntry = p1.Theme[Frame.borderThemeKey or "UIEmphasis"]
 		local LabelWidthAndContent, LabelWidthAndContent2, LabelWidthAndContent3 = getLabelWidthAndContent(Frame.input, p1, Frame.textThemeKey)

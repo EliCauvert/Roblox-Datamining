@@ -10,7 +10,7 @@ local _ = require(Parent.validation.validateBundleReadyForUpload)
 local LegacyValidationAdapterModule = require(Parent.util.LegacyValidationAdapter)
 local HttpService = game:GetService("HttpService")
 
-local function hasExactStringValueNames(Folder, List): boolean --[[ Line: 21 ]]
+local function hasExactStringValueNames(Folder, List): boolean
 	local t = {}
 	
 	for _, value in List do
@@ -34,9 +34,9 @@ local function hasExactStringValueNames(Folder, List): boolean --[[ Line: 21 ]]
 	return true
 end
 
-return function(Model: Model, p1, p2, p3, AllowEditableInstances, BypassFlags) --[[ Line: 46 | Named "validateAnimationBundleReadyForUpload" ]]
+return function(Model: Model, p1, p2, p3, AllowEditableInstances, BypassFlags)
 	-- upvalues: PromiseModule (copy), ConstantsModule (copy), hasExactStringValueNames (copy), ErrorSourceStringsModule (copy), HttpService (copy), CreateEditableInstancesForContextModule (copy), LegacyValidationAdapterModule (copy), DestroyEditableInstancesModule (copy)
-	local Callback: (any) -> () = p3 or function() --[[ Line: 54 ]] end
+	local Callback: (any) -> () = p3 or function() end
 	assert(Callback ~= nil, "Luau")
 	
 	if not Model:IsA("Model") then
@@ -148,7 +148,7 @@ return function(Model: Model, p1, p2, p3, AllowEditableInstances, BypassFlags) -
 	Callback(Tbl)
 	local Guid = HttpService:GenerateGUID()
 	
-	return PromiseModule.each(Pieces, function(p4, p5) --[[ Line: 208 ]]
+	return PromiseModule.each(Pieces, function(p4, p5)
 		-- upvalues: AllowEditableInstances (copy), BypassFlags (copy), CreateEditableInstancesForContextModule (upval), LegacyValidationAdapterModule (upval), Guid (copy), DestroyEditableInstancesModule (upval), Tbl (ref), Callback (ref)
 		if p4.status == "finished" then return end
 		assert(p4.instance ~= nil, "Unfinished piece doesn't have an instance")
@@ -188,9 +188,9 @@ return function(Model: Model, p1, p2, p3, AllowEditableInstances, BypassFlags) -
 		Tbl.pieces = table.clone(Tbl.pieces)
 		Tbl.pieces[p5].status = "finished"
 		Callback(Tbl)
-	end):andThen(function() --[[ Line: 267 ]]
+	end):andThen(function()
 		-- upvalues: Tbl (ref), AllowEditableInstances (copy), BypassFlags (copy), CreateEditableInstancesForContextModule (upval), LegacyValidationAdapterModule (upval), Guid (copy), DestroyEditableInstancesModule (upval), Callback (ref)
-		local FullBodyData = (function(List) --[[ Line: 268 | Named "createFullBodyData" ]]
+		local FullBodyData = (function(List)
 			local List1 = {}
 			
 			for _, value in List do
@@ -240,7 +240,7 @@ return function(Model: Model, p1, p2, p3, AllowEditableInstances, BypassFlags) -
 			end
 		end
 		Callback(Tbl)
-	end):andThen(function() --[[ Line: 339 ]]
+	end):andThen(function()
 		-- upvalues: Tbl (ref)
 		return Tbl
 	end)

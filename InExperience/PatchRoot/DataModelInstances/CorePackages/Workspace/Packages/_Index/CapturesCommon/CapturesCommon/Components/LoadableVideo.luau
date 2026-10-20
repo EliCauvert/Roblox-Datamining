@@ -10,32 +10,32 @@ local GetFitSizeModule = require(Parent.Utils.getFitSize)
 local LoadingStateModule = require(Parent.Enums.LoadingState)
 local FFlagUseRbxStorageInCapturesCommonModule = require(Parent.Flags.FFlagUseRbxStorageInCapturesCommon)
 
-return function(Frame: Frame) --[[ Line: 36 ]]
+return function(Frame: Frame)
 	-- upvalues: ReactModule (copy), LoadingStateModule (copy), ContentProvider (copy), View (copy), GetFitSizeModule (copy), GetCropSizeModule (copy), FFlagUseRbxStorageInCapturesCommonModule (copy), Skeleton (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(LoadingStateModule.Loading)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(Vector2.new(0, 0))
-	ReactModule.useEffect(function() --[[ Line: 41 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy), ContentProvider (upval), UseStateResult2_1 (copy), LoadingStateModule (upval)
 		if Frame.Video == nil or Frame.Video == "" then return end
-		local Connection = ContentProvider:GetAssetFetchStatusChangedSignal(Frame.Video):Connect(function(AssetFetchStatus) --[[ Line: 47 ]]
+		local Connection = ContentProvider:GetAssetFetchStatusChangedSignal(Frame.Video):Connect(function(AssetFetchStatus)
 			-- upvalues: UseStateResult2_1 (upval), LoadingStateModule (upval)
 			if AssetFetchStatus == Enum.AssetFetchStatus.Failure then
 				UseStateResult2_1(LoadingStateModule.Failed)
 			end
 		end)
 		
-		return function() --[[ Line: 53 ]]
+		return function()
 			-- upvalues: Connection (copy), UseStateResult2_1 (upval), LoadingStateModule (upval)
 			Connection:Disconnect()
 			UseStateResult2_1(LoadingStateModule.Loading)
 		end
 	end, { Frame.Video })
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 59 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(Frame.AbsoluteSize)
 	end, { UseStateResult2 })
-	local UseResult1 = ReactModule.useCallback(function(p1) --[[ Line: 63 ]]
+	local UseResult1 = ReactModule.useCallback(function(p1)
 		-- upvalues: UseStateResult2_2 (copy), Frame (copy)
 		local Resolution = p1.Resolution
 		UseStateResult2_2(Resolution)
@@ -44,7 +44,7 @@ return function(Frame: Frame) --[[ Line: 36 ]]
 			Frame.onResolutionChanged(Resolution)
 		end
 	end, { Frame.onResolutionChanged, UseStateResult2_2 })
-	local UseResult2 = ReactModule.useCallback(function(p1) --[[ Line: 72 ]]
+	local UseResult2 = ReactModule.useCallback(function(p1)
 		-- upvalues: UseStateResult1 (copy), LoadingStateModule (upval), UseStateResult2_1 (copy), Frame (copy)
 		if UseStateResult1 == LoadingStateModule.Loading then
 			UseStateResult2_1(LoadingStateModule.Finished)

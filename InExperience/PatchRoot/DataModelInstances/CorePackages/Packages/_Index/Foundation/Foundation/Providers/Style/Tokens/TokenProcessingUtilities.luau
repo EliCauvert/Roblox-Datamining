@@ -2,11 +2,11 @@
 local LoggerModule = require(Foundation.Utility.Logger)
 local _ = require(Foundation.Components.Types)
 
-local function _(p1: number): number --[[ Line: 27 | Named "getRoundedNumber" ]]
+local function _(p1: number): number
 	return math.round(p1 * 1000) / 1000
 end
 
-local _ = function(p1, p2: number) --[[ Line: 31 | Named "getRGBAValues" ]]
+local _ = function(p1, p2: number)
 	local Rounded = math.round(p1.R * 255)
 	local Rounded1 = math.round(p1.G * 255)
 	local Rounded2 = math.round(p1.B * 255)
@@ -18,7 +18,7 @@ local _ = function(p1, p2: number) --[[ Line: 31 | Named "getRGBAValues" ]]
 	end
 end
 
-local function collectTokens(List, Category, FullPath, p1) --[[ Line: 77 ]]
+local function collectTokens(List, Category, FullPath, p1)
 	-- upvalues: collectTokens (copy)
 	local List1 = {}
 	
@@ -41,7 +41,7 @@ local function collectTokens(List, Category, FullPath, p1) --[[ Line: 77 ]]
 	return List1
 end
 
-local function getTokenValue(p2, Text: string) --[[ Line: 243 ]]
+local function getTokenValue(p2, Text: string)
 	local v1 = p2
 	
 	for _, value in string.split(Text, ".") do
@@ -53,7 +53,7 @@ local function getTokenValue(p2, Text: string) --[[ Line: 243 ]]
 	return v1
 end
 
-local function tokenOverrideValuesCompatible(List, List1): boolean --[[ Line: 272 ]]
+local function tokenOverrideValuesCompatible(List, List1): boolean
 	-- upvalues: tokenOverrideValuesCompatible (copy)
 	if List == nil or List1 == nil then
 		return false
@@ -75,10 +75,10 @@ local function tokenOverrideValuesCompatible(List, List1): boolean --[[ Line: 27
 end
 
 return {
-	isColorStyle = function(p3): boolean --[[ Line: 19 ]]
+	isColorStyle = function(p3): boolean
 		return type(p3) == "table" and (p3.Color3 ~= nil and (typeof(p3.Color3) == "Color3" and (p3.Transparency ~= nil and typeof(p3.Transparency) == "number")))
 	end,
-	formatColorPreviewHTML = function(p3, p4: number): string --[[ Line: 39 ]]
+	formatColorPreviewHTML = function(p3, p4: number): string
 		local Rounded = math.round(p3.R * 255)
 		local Rounded1 = math.round(p3.G * 255)
 		local Rounded2 = math.round(p3.B * 255)
@@ -100,7 +100,7 @@ return {
 		end
 		return `<span class="color-preview" style="background-color: rgba({Rounded3},{Rounded4},{Rounded5},{RoundedRatio or 1});"></span>`
 	end,
-	formatTokenValue = function(p3: number): string --[[ Line: 45 ]]
+	formatTokenValue = function(p3: number): string
 		if typeof(p3) == "Color3" then
 			return `rgb({math.round(p3.R * 255)}, {math.round(p3.G * 255)}, {math.round(p3.B * 255)})`
 		end
@@ -133,7 +133,7 @@ return {
 		end
 		return `rgba({Rounded3}, {Rounded4}, {Rounded5}, {RoundedRatio})`
 	end,
-	formatTokenValueHTML = function(p3: number): string --[[ Line: 60 ]]
+	formatTokenValueHTML = function(p3: number): string
 		if typeof(p3) == "Color3" then
 			return `<span class="color">{`<span class="color-preview" style="background-color: rgba({math.round(p7.R * 255)},{math.round(p7.G * 255)},{math.round(p7.B * 255)},{1});"></span>`} rgb({math.round(p3.R * 255)}, {math.round(p3.G * 255)}, {math.round(p3.B * 255)})</span>`
 		end
@@ -188,7 +188,7 @@ return {
 		return `<span class="color">{`<span class="color-preview" style="background-color: rgba({Rounded8},{Rounded9},{Rounded10},{RoundedRatio1 or 1});"></span>`} rgba({Rounded3}, {Rounded4}, {Rounded5}, {RoundedRatio})</span>`
 	end,
 	collectTokens = collectTokens,
-	collectTokensWithSubcategories = function(List, Category, Text: string, p3) --[[ Line: 104 ]]
+	collectTokensWithSubcategories = function(List, Category, Text: string, p3)
 		-- upvalues: collectTokens (copy)
 		local t = {}
 		
@@ -245,7 +245,7 @@ return {
 		end
 		return t
 	end,
-	hasSubcategories = function(List): boolean --[[ Line: 168 ]]
+	hasSubcategories = function(List): boolean
 		local Flag = nil
 		for _, value in List do
 			if type(value) == "table" then
@@ -264,7 +264,7 @@ return {
 		end
 		return false
 	end,
-	sortTokens = function(p4: string, p5: string, p6): boolean --[[ Line: 196 ]]
+	sortTokens = function(p4: string, p5: string, p6): boolean
 		if p4:find("(%u%a+)_(%d+)%.?(%u?%w*)") and p5:find("(%u%a+)_(%d+)%.?(%u?%w*)") then
 			local UADUW, UADUW2, UADUW3 = p4:match("(%u%a+)_(%d+)%.?(%u?%w*)")
 			local UADUW1, UADUW2_1, UADUW3_1 = p5:match("(%u%a+)_(%d+)%.?(%u?%w*)")
@@ -280,7 +280,7 @@ return {
 		"LightMode", "Config"
 	},
 	getTokenValue = getTokenValue,
-	setTokenValue = function(p4, Text: string, p5) --[[ Line: 255 ]]
+	setTokenValue = function(p4, Text: string, p5)
 		local Parts = string.split(Text, ".")
 		local v3 = p4
 		
@@ -296,7 +296,7 @@ return {
 			v3[Part1] = p5
 		end
 	end,
-	resolveTokenOverride = function(p6, p7, p8) --[[ Line: 306 ]]
+	resolveTokenOverride = function(p6, p7, p8)
 		-- upvalues: getTokenValue (copy), LoggerModule (copy), tokenOverrideValuesCompatible (copy)
 		local v4 = nil
 		if type(p8) == "string" then
@@ -328,7 +328,7 @@ return {
 			return nil
 		end
 	end,
-	_resolveTokenOverrideSource = function(p9, p10) --[[ Line: 293 ]]
+	_resolveTokenOverrideSource = function(p9, p10)
 		-- upvalues: getTokenValue (copy), LoggerModule (copy)
 		if type(p10) ~= "string" then
 			return p10

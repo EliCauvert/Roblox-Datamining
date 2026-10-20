@@ -6,7 +6,7 @@ local UseStyleModule = require(Parent.Core.Style.useStyle)
 local ConstantsModule = require(script.Parent.Constants)
 local _ = require(script.Parent.Types)
 
-return function(p1, p2) --[[ Line: 22 ]]
+return function(p1, p2)
 	-- upvalues: UseStyleModule (copy), RoactModule (copy), ConstantsModule (copy), Object (copy)
 	local UseStyleModuleResult = UseStyleModule()
 	

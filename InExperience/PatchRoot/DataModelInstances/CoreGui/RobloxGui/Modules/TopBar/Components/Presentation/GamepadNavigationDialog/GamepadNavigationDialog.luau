@@ -20,7 +20,7 @@ local config = {
 	ButtonShare = "CoreScripts.InGameMenu.Label.ShareButton"
 }
 
-local function HeaderArea() --[[ Line: 45 ]]
+local function HeaderArea()
 	-- upvalues: UseDesignTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local MenuNavigationPrompt = UseDesignTokensFunction().LuaApps.MenuNavigationPrompt
 	local Typography = MenuNavigationPrompt.Typography
@@ -54,7 +54,7 @@ local function HeaderArea() --[[ Line: 45 ]]
 	})
 end
 
-local function GamepadImageArea() --[[ Line: 82 ]]
+local function GamepadImageArea()
 	-- upvalues: UseDesignTokensFunction (copy), UserInputService (copy), config (copy), UseLocalizationFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local MenuNavigationPrompt = UseDesignTokensFunction().LuaApps.MenuNavigationPrompt
 	local Typography = MenuNavigationPrompt.Typography
@@ -122,7 +122,7 @@ local function GamepadImageArea() --[[ Line: 82 ]]
 	})
 end
 
-local function Body(p1) --[[ Line: 159 ]]
+local function Body(p1)
 	-- upvalues: UseDesignTokensFunction (copy), UserInputService (copy), config (copy), UseLocalizationFunction (copy), ReactModule (copy), GamepadImageArea (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), Button (copy), ButtonType (copy)
 	local MenuNavigationPrompt = UseDesignTokensFunction().LuaApps.MenuNavigationPrompt
 	local Typography = MenuNavigationPrompt.Typography
@@ -180,24 +180,24 @@ local function Body(p1) --[[ Line: 159 ]]
 	})
 end
 
-return function(p1) --[[ Line: 222 | Named "GamepadNavigationDialog" ]]
+return function(p1)
 	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy), Default (copy), ContextActionService (copy), HeaderArea (copy), Body (copy)
 	local MenuNavigationPrompt = UseDesignTokensFunction().LuaApps.MenuNavigationPrompt
 	local Color = MenuNavigationPrompt.Color
 	local Size = MenuNavigationPrompt.Size
 	local Space = MenuNavigationPrompt.Space
 	local Radius = MenuNavigationPrompt.Radius
-	ReactModule.useEffect(function() --[[ Line: 230 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Default (upval), ContextActionService (upval), p1 (copy)
 		Default:onShowGamepadNavigationDialog()
-		ContextActionService:BindCoreAction("ConfirmBindComponentMapperTokenModule", function(_, UserInputState, _) --[[ Line: 234 ]]
+		ContextActionService:BindCoreAction("ConfirmBindComponentMapperTokenModule", function(_, UserInputState, _)
 			-- upvalues: p1 (upval)
 			if UserInputState == Enum.UserInputState.End then
 				p1.onDismissed()
 			end
 		end, false, if p1.selectButtonDismissesGamepadNavigationDialog then Enum.KeyCode.ButtonSelect else Enum.KeyCode.ButtonA)
 		
-		return function() --[[ Line: 245 ]]
+		return function()
 			-- upvalues: Default (upval), ContextActionService (upval)
 			Default:onDismissGamepadNavigationDialog()
 			ContextActionService:UnbindCoreAction("ConfirmBindComponentMapperTokenModule")

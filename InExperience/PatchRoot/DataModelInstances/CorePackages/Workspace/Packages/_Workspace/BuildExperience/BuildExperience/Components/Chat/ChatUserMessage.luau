@@ -27,15 +27,15 @@ local config = {
 	affordance = FoundationModule.Enums.StateLayerAffordance.None
 }
 
-local function _(p1) --[[ Line: 58 | Named "useEscapedRichText" ]]
+local function _(p1)
 	-- upvalues: ReactModule (copy), EscapeRichTextModule (copy)
-	return ReactModule.useMemo(function() --[[ Line: 59 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: EscapeRichTextModule (upval), p1 (copy)
 		return EscapeRichTextModule(p1)
 	end, { p1 })
 end
 
-local function UserMessageBubble(Frame: Frame) --[[ Line: 64 ]]
+local function UserMessageBubble(Frame: Frame)
 	-- upvalues: UseTokensFunction (copy), FFlagBuildExperienceRichTextUserMessagesModule (copy), ReactModule (copy), EscapeRichTextModule (copy), Text (copy), config (copy), View (copy)
 	local UseTokensResult = UseTokensFunction()
 	
@@ -49,7 +49,7 @@ local function UserMessageBubble(Frame: Frame) --[[ Line: 64 ]]
 			cornerRadius = UDim.new(0, UseTokensResult.Size.Size_500),
 			onSecondaryActivated = Frame.onSecondaryActivated,
 			stateLayer = if Frame.onSecondaryActivated == nil then nil else config,
-			Text = ReactModule.useMemo(function() --[[ Line: 59 ]]
+			Text = ReactModule.useMemo(function()
 				-- upvalues: EscapeRichTextModule (upval), MessageText (copy)
 				return EscapeRichTextModule(MessageText)
 			end, { MessageText }),
@@ -72,7 +72,7 @@ local function UserMessageBubble(Frame: Frame) --[[ Line: 64 ]]
 	end
 end
 
-local function CopyableUserMessageBubble(Frame) --[[ Line: 102 ]]
+local function CopyableUserMessageBubble(Frame)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), FFlagBuildExperienceUserMessageHapticFeedbackModule (copy), UseTriggerFeedback (copy), IconName (copy), Menu (copy), PopoverAlign (copy), Default (copy), PopoverSide (copy), InputSize (copy), UserMessageBubble (copy)
 	local UseLocalizationResult = UseLocalizationFunction({ copyText = LocalizationStringsModule.CHAT_COPY_TEXT })
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
@@ -89,14 +89,14 @@ local function CopyableUserMessageBubble(Frame) --[[ Line: 102 ]]
 				text = UseLocalizationResult.copyText
 			}
 		},
-		onActivated = function(p1) --[[ Line: 121 ]]
+		onActivated = function(p1)
 			-- upvalues: Default (upval), Frame (copy), UseStateResult2 (copy)
 			if p1 == "copy-text" then
 				Default:setClipboardText({ context = "Build-UserMessage", text = Frame.messageText })
 			end
 			UseStateResult2(false)
 		end,
-		onPressedOutside = function() --[[ Line: 130 ]]
+		onPressedOutside = function()
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(false)
 		end,
@@ -107,7 +107,7 @@ local function CopyableUserMessageBubble(Frame) --[[ Line: 102 ]]
 			LayoutOrder = 1,
 			testId = "ChatUserMessage.Bubble",
 			messageText = Frame.messageText,
-			onSecondaryActivated = function() --[[ Line: 139 ]]
+			onSecondaryActivated = function()
 				-- upvalues: FFlagBuildExperienceUserMessageHapticFeedbackModule (upval), UseTriggerFeedbackResult (copy), UseStateResult2 (copy)
 				if FFlagBuildExperienceUserMessageHapticFeedbackModule then
 					UseTriggerFeedbackResult("Default", "SecondaryActivated")
@@ -118,7 +118,7 @@ local function CopyableUserMessageBubble(Frame) --[[ Line: 102 ]]
 	})
 end
 
-return ReactModule.memo(function(Frame) --[[ Line: 150 | Named "ChatUserMessage" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), ReactModule (copy), View (copy), ChatResourceAttachmentListModule (copy), ChatImagePreviewListModule (copy), FFlagBuildExperienceCopyChatMessagesModule (copy), CopyableUserMessageBubble (copy), UserMessageBubble (copy)
 	local Text = Frame.message.text
 	local ResourceAttachments = Frame.message.resourceAttachments or {}

@@ -31,7 +31,7 @@ if IsInExperienceUIVREnabled then
 	UIManager = VrSpatialUiModule.UIManager
 	PanelType = VrSpatialUiModule.Constants.PanelType
 end
-local function ModalBaseSelectorDialog(p1) --[[ Line: 63 ]]
+local function ModalBaseSelectorDialog(p1)
 	-- upvalues: UseTokensFunction (copy), UseStyleFunction (copy), IsInExperienceUIVREnabled (copy), ResponsiveModule (ref), UIManager (ref), PanelType (ref), ReactModule (copy), GetFFlagModalSelectorCloseButtonModule (copy), CryoModule (copy), IconButton (copy), IconSize (copy), Images (copy), ScrollingListTable (copy), DashModule (copy), Cell (copy), CellHeadDetail (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), OpenTypeSupport (copy), CellTailDescription (copy), ModalWindow (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseStyleResult = UseStyleFunction()
@@ -73,7 +73,7 @@ local function ModalBaseSelectorDialog(p1) --[[ Line: 63 ]]
 					size = UDim2.fromOffset(0, 0),
 					iconSize = IconSize.Medium,
 					icon = Images["icons/navigation/close"],
-					onActivated = function() --[[ Line: 120 ]]
+					onActivated = function()
 						-- upvalues: p1 (copy)
 						p1.onClose()
 					end
@@ -100,7 +100,7 @@ local function ModalBaseSelectorDialog(p1) --[[ Line: 63 ]]
 			ModalSelector = ReactModule.createElement(ScrollingListTable, {
 				selectable = false,
 				size = UDim2.new(1, 0, 1, 0),
-				cells = DashModule.map(p1.cellData, function(p2) --[[ Line: 149 ]]
+				cells = DashModule.map(p1.cellData, function(p2)
 					-- upvalues: ReactModule (upval), Cell (upval), CellHeadDetail (upval), GetFFlagLuaAppEnableOpenTypeSupportFunction (upval), OpenTypeSupport (upval), CellTailDescription (upval), UseTokensResult (copy), p1 (copy)
 					return ReactModule.createElement(Cell, {
 						userInteractionEnabled = true,
@@ -112,7 +112,7 @@ local function ModalBaseSelectorDialog(p1) --[[ Line: 63 ]]
 						tail = ReactModule.createElement(CellTailDescription, { text = "", showArrow = false }),
 						background = ReactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }),
 						size = UDim2.new(1, 0, 0, UseTokensResult.Size.Size_1000),
-						onActivated = function() --[[ Line: 168 ]]
+						onActivated = function()
 							-- upvalues: p1 (upval), p2 (copy)
 							p1.onSelect(p2.label, p2.subLabel, p2.identifier)
 							p1.onClose()
@@ -139,7 +139,7 @@ local function ModalBaseSelectorDialog(p1) --[[ Line: 63 ]]
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			ZIndex = 10,
 			Text = "",
-			[ReactModule.Event.Activated] = function() --[[ Line: 195 ]]
+			[ReactModule.Event.Activated] = function()
 				-- upvalues: p1 (copy)
 				p1.onClose()
 			end
@@ -160,7 +160,7 @@ local function ModalBaseSelectorDialog(p1) --[[ Line: 63 ]]
 	})
 end
 
-function DialogWrapper(p1) --[[ Line: 216 ]]
+function DialogWrapper(p1)
 	-- upvalues: ReactModule (copy), CoreScriptsRootProvider (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), ModalBaseSelectorDialog (copy)
 	return ReactModule.createElement(CoreScriptsRootProvider, {}, {
 		FocusNavigationCoreScriptsWrapper = ReactModule.createElement(FocusRoot, {

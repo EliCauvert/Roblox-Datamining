@@ -4,14 +4,14 @@ local ReactModule = require(Parent.React)
 local UseFocusGuiObjectFunction = require(Parent.ReactFocusNavigation).useFocusGuiObject
 local ShouldFocusBackButtonOnKeyModule = require(script.Parent.shouldFocusBackButtonOnKey)
 
-return function(p1, p2, p3) --[[ Line: 17 | Named "useFocusBackButtonOnUp" ]]
+return function(p1, p2, p3)
 	-- upvalues: UseFocusGuiObjectFunction (copy), UserInputService (copy), ReactModule (copy), ShouldFocusBackButtonOnKeyModule (copy)
 	local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
 	local P2 = p3 or UserInputService
-	ReactModule.useEffect(function() --[[ Line: 27 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p2 (copy), P2 (copy), p1 (copy), ShouldFocusBackButtonOnKeyModule (upval), UseFocusGuiObjectResult (copy)
 		if p2 == nil then return end
-		local InputBeganConnection = P2.InputBegan:Connect(function(Input) --[[ Line: 31 ]]
+		local InputBeganConnection = P2.InputBegan:Connect(function(Input)
 			-- upvalues: p1 (upval), P2 (upval), ShouldFocusBackButtonOnKeyModule (upval), p2 (upval), UseFocusGuiObjectResult (upval)
 			local Current = p1.current
 			
@@ -25,7 +25,7 @@ return function(p1, p2, p3) --[[ Line: 17 | Named "useFocusBackButtonOnUp" ]]
 			UseFocusGuiObjectResult(Current1)
 		end)
 		
-		return function() --[[ Line: 47 ]]
+		return function()
 			-- upvalues: InputBeganConnection (copy)
 			InputBeganConnection:Disconnect()
 		end

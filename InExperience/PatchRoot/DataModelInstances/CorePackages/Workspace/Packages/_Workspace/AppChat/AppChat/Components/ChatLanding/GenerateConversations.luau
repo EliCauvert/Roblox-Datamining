@@ -1,9 +1,9 @@
 ﻿local CryoModule = require(script:FindFirstAncestor("AppChat").Parent.Cryo)
 
 return {
-	init = function() --[[ Line: 11 ]]
+	init = function()
 		-- upvalues: CryoModule (copy)
-		local function generate(Id) --[[ Line: 12 ]]
+		local function generate(Id)
 			return {
 				presenceImage = "",
 				alias = "(alias)",
@@ -26,15 +26,15 @@ return {
 			table.insert(List, (generate(i)))
 		end
 		return {
-			getItemList = function() --[[ Line: 38 ]]
+			getItemList = function()
 				-- upvalues: List (copy)
 				return List
 			end,
-			loadNext = function(p1) --[[ Line: 42 ]]
+			loadNext = function(p1)
 				-- upvalues: CryoModule (upval), generate (copy)
 				return CryoModule.List.join(p1, { (generate(p1[#p1].id + 1)) })
 			end,
-			loadPrevious = function(Entry) --[[ Line: 46 ]]
+			loadPrevious = function(Entry)
 				-- upvalues: CryoModule (upval), generate (copy)
 				return CryoModule.List.join({ (generate(Entry[1].id - 1)) }, Entry)
 			end

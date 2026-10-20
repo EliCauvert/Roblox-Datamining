@@ -41,7 +41,7 @@ InputButton.defaultProps = {
 	isRoactGamepadEnabled = true
 }
 
-function InputButton.init(p1) --[[ Line: 57 ]]
+function InputButton.init(p1)
 	-- upvalues: ControlStateModule (copy), RoactModule (copy)
 	p1.state = {
 		outerTransparency = 1,
@@ -52,7 +52,7 @@ function InputButton.init(p1) --[[ Line: 57 ]]
 		innerImageColor = p1.props.fillImageColor
 	}
 	
-	function p1.changeSprite(Default) --[[ Line: 67 ]]
+	function p1.changeSprite(Default)
 		-- upvalues: ControlStateModule (upval), p1 (copy)
 		if Default == ControlStateModule.Hover then
 			if not p1.props.isDisabled then
@@ -68,7 +68,7 @@ function InputButton.init(p1) --[[ Line: 57 ]]
 	if not p1.props.size then
 		p1.sizeBinding, p1.updateSizeBinding = RoactModule.createBinding(UDim2.new(1, 0, 0, 26))
 		
-		function p1.textAbsoluteSizeChanged(Frame: Frame) --[[ Line: 85 ]]
+		function p1.textAbsoluteSizeChanged(Frame: Frame)
 			-- upvalues: p1 (copy)
 			local YOffset = 26
 			
@@ -80,9 +80,9 @@ function InputButton.init(p1) --[[ Line: 57 ]]
 	end
 end
 
-function InputButton.render(p1) --[[ Line: 95 ]]
+function InputButton.render(p1)
 	-- upvalues: WithStyleModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), CryoModule (copy), RoactModule (copy), FitFrameHorizontal (copy), FitTextLabel (copy), RoactGamepadModule (copy), ControllableModule (copy), ImageSetComponentModule (copy)
-	return WithStyleModule(function(p2) --[[ Line: 96 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: p1 (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), CryoModule (upval), RoactModule (upval), FitFrameHorizontal (upval), FitTextLabel (upval), RoactGamepadModule (upval), ControllableModule (upval), ImageSetComponentModule (upval)
 		local _Font = p2.Font
 		local BodyFont = _Font.Body.Font
@@ -177,7 +177,7 @@ function InputButton.render(p1) --[[ Line: 95 ]]
 					}
 				},
 				isDisabled = p1.props.isDisabled,
-				onStateChanged = function(_, p3) --[[ Line: 204 ]]
+				onStateChanged = function(_, p3)
 					-- upvalues: p1 (upval)
 					p1.changeSprite(p3)
 				end
@@ -185,7 +185,7 @@ function InputButton.render(p1) --[[ Line: 95 ]]
 			InputButtonText = p1.props.text ~= "" and RoactModule.createElement(ControllableModule, {
 				controlComponent = { component = Component, props = JoinResult },
 				isDisabled = p1.props.isDisabled,
-				onStateChanged = function(_, p3) --[[ Line: 215 ]]
+				onStateChanged = function(_, p3)
 					-- upvalues: p1 (upval)
 					p1.changeSprite(p3)
 				end
@@ -194,7 +194,7 @@ function InputButton.render(p1) --[[ Line: 95 ]]
 	end)
 end
 
-return RoactModule.forwardRef(function(p1, FrameRef) --[[ Line: 224 ]]
+return RoactModule.forwardRef(function(p1, FrameRef)
 	-- upvalues: RoactModule (copy), InputButton (copy), CryoModule (copy)
 	return RoactModule.createElement(InputButton, CryoModule.Dictionary.join(p1, { frameRef = FrameRef }))
 end)

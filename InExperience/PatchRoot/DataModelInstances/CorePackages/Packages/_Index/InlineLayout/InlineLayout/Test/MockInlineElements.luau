@@ -5,7 +5,7 @@ local Module = {}
 Module.__index = Module
 Module.__type = InlineElementTypeModule
 
-function Module.new(Width, CanForceSplit) --[[ Line: 12 ]]
+function Module.new(Width, CanForceSplit)
 	-- upvalues: Module (copy)
 	local self = setmetatable({}, Module)
 	self.width = Width
@@ -14,16 +14,16 @@ function Module.new(Width, CanForceSplit) --[[ Line: 12 ]]
 	return self
 end
 
-function Module:getWidth() --[[ Line: 19 ]]
+function Module:getWidth()
 	return self.width
 end
 
-function Module:split(_, _) --[[ Line: 23 ]]
+function Module:split(_, _)
 	-- upvalues: Module (copy)
 	return Module.new(self.width, self.canForceSplit)
 end
 
-function Module:render(p1, LayoutOrder) --[[ Line: 28 ]]
+function Module:render(p1, LayoutOrder)
 	-- upvalues: ReactModule (copy)
 	return ReactModule.createElement("TextLabel", {
 		key = tostring(LayoutOrder),
@@ -37,7 +37,7 @@ local Module1 = {}
 Module1.__index = Module1
 Module1.__type = InlineElementTypeModule
 
-function Module1.new(Width, CanForceSplit) --[[ Line: 42 ]]
+function Module1.new(Width, CanForceSplit)
 	-- upvalues: Module1 (copy)
 	local self = setmetatable({}, Module1)
 	self.width = Width
@@ -46,11 +46,11 @@ function Module1.new(Width, CanForceSplit) --[[ Line: 42 ]]
 	return self
 end
 
-function Module1:getWidth() --[[ Line: 49 ]]
+function Module1:getWidth()
 	return self.width
 end
 
-function Module1:split(p1, p2) --[[ Line: 53 ]]
+function Module1:split(p1, p2)
 	-- upvalues: Module1 (copy)
 	local Floored = math.floor(self.width / 2)
 	local Width: number = Floored
@@ -63,7 +63,7 @@ function Module1:split(p1, p2) --[[ Line: 53 ]]
 	return Module1.new(Width, self.canForceSplit), (Module1.new(WidthDelta, self.canForceSplit))
 end
 
-function Module1:render(p1, LayoutOrder) --[[ Line: 70 ]]
+function Module1:render(p1, LayoutOrder)
 	-- upvalues: ReactModule (copy)
 	return ReactModule.createElement("TextLabel", {
 		key = tostring(LayoutOrder),

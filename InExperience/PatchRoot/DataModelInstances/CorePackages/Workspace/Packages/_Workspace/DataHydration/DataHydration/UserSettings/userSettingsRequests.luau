@@ -7,12 +7,12 @@ local _ = require(script.Parent.UserSettingsStoreTypes)
 local FetchFunction = HttpClientModule.fetch
 local AsPromiseFunction = HttpClientModule.asPromise
 
-local function _(): string --[[ Line: 23 | Named "settingsAndOptionsUrl" ]]
+local function _(): string
 	-- upvalues: HttpModule (copy)
 	return `{HttpModule.Url.APIS_URL}user-settings-api/v1/user-settings`
 end
 
-local function normalizeCachedUserSettings(CurrentValues) --[[ Line: 27 ]]
+local function normalizeCachedUserSettings(CurrentValues)
 	if typeof(CurrentValues) ~= "table" then
 		return {}
 	end
@@ -24,26 +24,26 @@ local function normalizeCachedUserSettings(CurrentValues) --[[ Line: 27 ]]
 	return t
 end
 
-local _ = function(): string --[[ Line: 38 | Named "settingsUpdateUrl" ]]
+local _ = function(): string
 	-- upvalues: HttpModule (copy)
 	return `{HttpModule.Url.APIS_URL}user-settings-api/v1/user-settings`
 end
 
 return {
-	fetchSettingsAndOptions = function(p1) --[[ Line: 42 ]]
+	fetchSettingsAndOptions = function(p1)
 		-- upvalues: HttpClientModule (copy), FetchFunction (copy), HttpModule (copy), normalizeCachedUserSettings (copy), AsPromiseFunction (copy)
 		return AsPromiseFunction((FetchFunction({
 			method = "GET",
 			analyticsKey = "user-settings.settings-and-options.get",
 			url = `{HttpModule.Url.APIS_URL}user-settings-api/v1/user-settings`,
 			network = p1 and p1.network or HttpClientModule.createRequestInternalNetwork(),
-			decode = function(p2) --[[ Line: 49 ]]
+			decode = function(p2)
 				-- upvalues: normalizeCachedUserSettings (upval)
 				return (normalizeCachedUserSettings(p2))
 			end
 		})))
 	end,
-	postUserSettings = function(Body, p1) --[[ Line: 56 ]]
+	postUserSettings = function(Body, p1)
 		-- upvalues: HttpClientModule (copy), FetchFunction (copy), HttpModule (copy), WithCsrfRetryModule (copy), AsPromiseFunction (copy)
 		return AsPromiseFunction((FetchFunction({
 			method = "POST",
@@ -51,7 +51,7 @@ return {
 			url = `{HttpModule.Url.APIS_URL}user-settings-api/v1/user-settings`,
 			body = Body,
 			network = WithCsrfRetryModule(p1 and p1.network or HttpClientModule.createRequestInternalNetwork()),
-			decode = function(_) --[[ Line: 64 ]]
+			decode = function(_)
 				-- upvalues: Body (copy)
 				return Body
 			end

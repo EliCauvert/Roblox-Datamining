@@ -19,7 +19,7 @@ local config = {
 	size = if FlagsModule.FoundationOptionSelectorGroupBeta then OptionSelectorGroupSizeModule.Medium else nil
 }
 
-local function OptionSelectorGroupInner(p1) --[[ Line: 59 ]]
+local function OptionSelectorGroupInner(p1)
 	-- upvalues: UseTokensModule (copy), UseOptionSelectorGroupVariantsModule (copy), OptionSelectorGroupSizeModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), InputLabelModule (copy), OptionSelectorGroupContextModule (copy)
 	local Props = p1.props
 	local UseOptionSelectorGroupVariantsModuleResult = UseOptionSelectorGroupVariantsModule(UseTokensModule(), Props.size or OptionSelectorGroupSizeModule.Medium, Props.orientation)
@@ -40,7 +40,7 @@ local function OptionSelectorGroupInner(p1) --[[ Line: 59 ]]
 			testId = `{Props.testId}--list`
 		}, {
 			OptionSelectorGroupContext = ReactModule.createElement(OptionSelectorGroupContextModule.Provider, {
-				value = ReactModule.useMemo(function() --[[ Line: 66 ]]
+				value = ReactModule.useMemo(function()
 					-- upvalues: p1 (copy), Props (copy)
 					return {
 						value = p1.value,
@@ -60,17 +60,17 @@ local function OptionSelectorGroupInner(p1) --[[ Line: 59 ]]
 	})
 end
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 118 | Named "OptionSelectorGroup" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), FlagsModule (copy), OptionSelectorGroupInner (copy), ViewModule (copy), WithCommonPropsModule (copy), OrientationModule (copy), OptionSelectorGroupContextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(WithDefaultsModuleResult.value)
-	ReactModule.useEffect(function() --[[ Line: 122 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: WithDefaultsModuleResult (copy), UseStateResult2 (copy)
 		if WithDefaultsModuleResult.value ~= nil then
 			UseStateResult2(WithDefaultsModuleResult.value)
 		end
 	end, { WithDefaultsModuleResult.value })
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 128 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2 (copy), WithDefaultsModuleResult (copy)
 		UseStateResult2(p2)
 		WithDefaultsModuleResult.onValueChanged(p2)
@@ -93,7 +93,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 118 
 		ref = Ref
 	}), {
 		OptionSelectorGroupContext = ReactModule.createElement(OptionSelectorGroupContextModule.Provider, {
-			value = ReactModule.useMemo(function() --[[ Line: 144 ]]
+			value = ReactModule.useMemo(function()
 				-- upvalues: UseStateResult (copy), UseResult (copy), WithDefaultsModuleResult (copy)
 				return {
 					value = UseStateResult,

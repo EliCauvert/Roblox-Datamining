@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.Action)("ActionBindingsUpdateSearchFilter", function(SearchTerm) --[[ Line: 4 ]]
+﻿return require(script.Parent.Parent.Action)("ActionBindingsUpdateSearchFilter", function(SearchTerm)
 	return { searchTerm = SearchTerm }
 end)

@@ -4,27 +4,27 @@ local _ = require(Parent.Types)
 local ValueChangedSignalModule = {}
 ValueChangedSignalModule.__index = ValueChangedSignalModule
 
-function ValueChangedSignalModule.new(_value) --[[ Line: 29 ]]
+function ValueChangedSignalModule.new(_value)
 	-- upvalues: Signal (copy), ValueChangedSignalModule (copy)
 	return (setmetatable({ _value = _value, _changeSignal = Signal.new() }, ValueChangedSignalModule))
 end
 
-function ValueChangedSignalModule:get() --[[ Line: 36 ]]
+function ValueChangedSignalModule:get()
 	return self._value
 end
 
-function ValueChangedSignalModule:set(_value) --[[ Line: 40 ]]
+function ValueChangedSignalModule:set(_value)
 	if self._value ~= _value then
 		self._value = _value
 		self._changeSignal:fire(_value)
 	end
 end
 
-function ValueChangedSignalModule:signal() --[[ Line: 47 ]]
+function ValueChangedSignalModule:signal()
 	return self._changeSignal
 end
 
-function ValueChangedSignalModule:connect(Callback: (any) -> (), Enabled) --[[ Line: 51 ]]
+function ValueChangedSignalModule:connect(Callback: (any) -> (), Enabled)
 	local ChangeSignalConnection = self._changeSignal:connect(Callback)
 	
 	if Enabled == true then

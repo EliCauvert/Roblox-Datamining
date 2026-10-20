@@ -12,7 +12,7 @@ local Flag1 = false
 local Flag2 = false
 
 return {
-	startTracking = function(Page) --[[ Line: 22 ]]
+	startTracking = function(Page)
 		-- upvalues: Flag (ref), Flag1 (ref), Flag2 (ref), TimeToInteractiveTracker (copy), EDPTTIEVENTNAME (copy), EnableEDPTTIManagerColdWarmDetection (copy)
 		Flag = false
 		Flag1 = false
@@ -24,7 +24,7 @@ return {
 			TimeToInteractiveTracker.updateMetadata(EDPTTIEVENTNAME, { page = Page })
 		end
 	end,
-	restartTracking = function(Page) --[[ Line: 41 ]]
+	restartTracking = function(Page)
 		-- upvalues: Flag (ref), Flag1 (ref), Flag2 (ref), TimeToInteractiveTracker (copy), EDPTTIEVENTNAME (copy), EnableEDPTTIManagerColdWarmDetection (copy)
 		Flag = false
 		Flag1 = false
@@ -32,11 +32,11 @@ return {
 		TimeToInteractiveTracker.trackStart(EDPTTIEVENTNAME, if EnableEDPTTIManagerColdWarmDetection then true else nil)
 		TimeToInteractiveTracker.updateMetadata(EDPTTIEVENTNAME, { page = Page })
 	end,
-	setImplementation = function(Category) --[[ Line: 55 ]]
+	setImplementation = function(Category)
 		-- upvalues: TimeToInteractiveTracker (copy), EDPTTIEVENTNAME (copy)
 		TimeToInteractiveTracker.updateMetadata(EDPTTIEVENTNAME, { category = Category })
 	end,
-	trackFunctionallyReady = function() --[[ Line: 61 ]]
+	trackFunctionallyReady = function()
 		-- upvalues: Flag (ref), TimeToInteractiveTracker (copy), EDPTTIEVENTNAME (copy), Milestone (copy), FFlagEnablePLTPrefetchCallbacks (copy), PageGateModule (copy)
 		if Flag then return end
 		Flag = true
@@ -48,7 +48,7 @@ return {
 			PageGateModule.signal(PageGateModule.Page.ExperienceDetail, PageGateModule.Milestone.FunctionallyReady)
 		end
 	end,
-	trackFirstMediaResolved = function(Id) --[[ Line: 75 ]]
+	trackFirstMediaResolved = function(Id)
 		-- upvalues: Flag2 (ref), TimeToInteractiveTracker (copy), EDPTTIEVENTNAME (copy), FIRSTMEDIARESOLVED (copy)
 		if Flag2 then return end
 		Flag2 = true
@@ -57,7 +57,7 @@ return {
 			TimeToInteractiveTracker.trackMilestone(EDPTTIEVENTNAME, FIRSTMEDIARESOLVED, { id = Id })
 		end
 	end,
-	trackSurfaceReady = function(p1) --[[ Line: 86 ]]
+	trackSurfaceReady = function(p1)
 		-- upvalues: Flag1 (ref), TimeToInteractiveTracker (copy), EDPTTIEVENTNAME (copy), Milestone (copy)
 		if Flag1 then return end
 		Flag1 = true

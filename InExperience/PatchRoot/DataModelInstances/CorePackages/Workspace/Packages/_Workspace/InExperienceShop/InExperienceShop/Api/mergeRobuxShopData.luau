@@ -2,12 +2,12 @@
 local _ = require(InExperienceShop.Types)
 local ROBUXCATEGORYNAME = require(InExperienceShop.Constants).ROBUX_CATEGORY_NAME
 
-local function _(p1): boolean --[[ Line: 12 | Named "isRobuxNamed" ]]
+local function _(p1): boolean
 	-- upvalues: ROBUXCATEGORYNAME (copy)
 	return p1.name == ROBUXCATEGORYNAME
 end
 
-local _ = function(List) --[[ Line: 16 | Named "findRobux" ]]
+local _ = function(List)
 	-- upvalues: ROBUXCATEGORYNAME (copy)
 	for _, value in ipairs(List) do
 		if value.name == ROBUXCATEGORYNAME then
@@ -17,7 +17,7 @@ local _ = function(List) --[[ Line: 16 | Named "findRobux" ]]
 	return nil
 end
 
-local function replaceOrRemoveRobux(List, p1) --[[ Line: 28 ]]
+local function replaceOrRemoveRobux(List, p1)
 	-- upvalues: ROBUXCATEGORYNAME (copy)
 	local Buffer = table.create(#List)
 	local Flag = false
@@ -38,7 +38,7 @@ local function replaceOrRemoveRobux(List, p1) --[[ Line: 28 ]]
 	return Buffer
 end
 
-return function(p2, p3, p4) --[[ Line: 51 | Named "mergeRobuxShopData" ]]
+return function(p2, p3, p4)
 	-- upvalues: ROBUXCATEGORYNAME (copy), replaceOrRemoveRobux (copy)
 	local v1 = nil
 	

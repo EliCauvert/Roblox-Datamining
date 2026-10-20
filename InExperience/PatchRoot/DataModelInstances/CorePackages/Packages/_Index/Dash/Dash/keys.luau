@@ -1,6 +1,6 @@
 ﻿local InsertFunction = table.insert
 
-return function(List) --[[ Line: 12 | Named "keys" ]]
+return function(List)
 	-- upvalues: InsertFunction (copy)
 	local t = {}
 	

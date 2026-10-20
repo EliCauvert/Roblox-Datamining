@@ -18,9 +18,9 @@ local UsePresenceImpressionEventsModule = require(script.Parent.usePresenceImpre
 local UseFriendsListOrderedByIdPresenceImpressionEventsEnabled = game:DefineFastFlag("UseFriendsListOrderedByIdPresenceImpressionEventsEnabled", false)
 local GetResult = DataHydrationModule.Friends.FriendsStore.get()
 
-local function _(p1) --[[ Line: 48 ]]
+local function _(p1)
 	-- upvalues: CryoModule (copy), PresenceType (copy)
-	return CryoModule.List.map(p1, function(p2) --[[ Line: 49 ]]
+	return CryoModule.List.map(p1, function(p2)
 		-- upvalues: PresenceType (upval), CryoModule (upval)
 		return if p2.presence and p2.presence.userPresenceType == PresenceType.InGame and p2.presence.universeId == "" then CryoModule.Dictionary.join(p2, {
 			presence = CryoModule.Dictionary.join(p2.presence, { userPresenceType = PresenceType.Online })
@@ -28,22 +28,22 @@ local function _(p1) --[[ Line: 48 ]]
 	end)
 end
 
-local function v17(MapResult, Friends) --[[ Line: 62 ]]
+local function v17(MapResult, Friends)
 	-- upvalues: CryoModule (copy)
 	local Presences = {}
 	
 	for _, value in MapResult do
 		Presences[value.id] = value.presence
 	end
-	return CryoModule.List.sort(MapResult, function(p1, p2): boolean --[[ Line: 79 ]]
+	return CryoModule.List.sort(MapResult, function(p1, p2): boolean
 		return p2.sortScore < p1.sortScore
-	end), (CryoModule.List.filter(Friends or {}, function(p1): boolean --[[ Line: 72 ]]
+	end), (CryoModule.List.filter(Friends or {}, function(p1): boolean
 		-- upvalues: Presences (copy)
 		return not Presences[p1.id]
 	end))
 end
 
-local function shouldRefetchOnlineFriends(p1, Variables, p2): boolean --[[ Line: 88 ]]
+local function shouldRefetchOnlineFriends(p1, Variables, p2): boolean
 	-- upvalues: Queries (copy), CryoModule (copy), ApolloPresenceModule (copy), PresenceType (copy)
 	local Query = p1:readQuery({
 		query = Queries.onlineFriendsByUserId,
@@ -54,13 +54,13 @@ local function shouldRefetchOnlineFriends(p1, Variables, p2): boolean --[[ Line:
 	for _, value in OnlineFriendsByUserId do
 		Presences[value.id] = value.presence
 	end
-	return #CryoModule.List.filter(p2, function(p3): boolean --[[ Line: 101 ]]
+	return #CryoModule.List.filter(p2, function(p3): boolean
 		-- upvalues: ApolloPresenceModule (upval), PresenceType (upval), Presences (copy)
 		return ApolloPresenceModule.Formatters.formatNumberToPresenceType(p3.userPresenceType) ~= PresenceType.Offline and not Presences[tostring(p3.userId)]
 	end) > 0
 end
 
-local function bulkUpdateUserPresences(p3, List) --[[ Line: 109 ]]
+local function bulkUpdateUserPresences(p3, List)
 	-- upvalues: ApolloPresenceModule (copy)
 	for _, value in List do
 		ApolloPresenceModule.Mutations.createUserPresenceCache(p3, {
@@ -76,21 +76,21 @@ local function bulkUpdateUserPresences(p3, List) --[[ Line: 109 ]]
 	end
 end
 
-return function(p4) --[[ Line: 124 | Named "useFriendsListOrderedByPresence" ]]
+return function(p4)
 	-- upvalues: FFlagFriendSortedByPresenceSignalsImplementation (copy), UseApolloClientFunction (copy), ReactModule (copy), GetResult (copy), UseSignalStateFunction (copy), FriendsListDefaultPageSize (copy), ApolloFriendsModule (copy), UseQueryFunction (copy), Queries (copy), CryoModule (copy), FriendsCommonPresenceUpdateSignal (copy), bulkUpdateUserPresences (copy), shouldRefetchOnlineFriends (copy), v17 (copy), PresenceType (copy), UseFriendsListOrderedByIdPresenceImpressionEventsEnabled (copy), UsePresenceImpressionEventsModule (copy), DataHydrationModule (copy)
 	local UseApolloClientResult = if FFlagFriendSortedByPresenceSignalsImplementation then nil else UseApolloClientFunction()
-	local UseMemoResult = if FFlagFriendSortedByPresenceSignalsImplementation then ReactModule.useMemo(function() --[[ Line: 135 ]]
+	local UseMemoResult = if FFlagFriendSortedByPresenceSignalsImplementation then ReactModule.useMemo(function()
 		-- upvalues: GetResult (upval)
 		return GetResult.GetOnlineFriends()
 	end, {}) else nil
 	local UseSignalStateResult = if FFlagFriendSortedByPresenceSignalsImplementation then UseSignalStateFunction(UseMemoResult) else nil
 	local PageSize = p4.pageSize or FriendsListDefaultPageSize
-	local UseMemoResult1 = if FFlagFriendSortedByPresenceSignalsImplementation then ReactModule.useMemo(function() --[[ Line: 147 ]]
+	local UseMemoResult1 = if FFlagFriendSortedByPresenceSignalsImplementation then ReactModule.useMemo(function()
 		-- upvalues: GetResult (upval)
 		return GetResult.GetAllFriends()
 	end, {}) else nil
 	local UseSignalStateResult1 = if FFlagFriendSortedByPresenceSignalsImplementation then UseSignalStateFunction(UseMemoResult1) else nil
-	local UseMemoResult2 = if FFlagFriendSortedByPresenceSignalsImplementation then ReactModule.useMemo(function() --[[ Line: 157 ]]
+	local UseMemoResult2 = if FFlagFriendSortedByPresenceSignalsImplementation then ReactModule.useMemo(function()
 		-- upvalues: GetResult (upval)
 		return GetResult.GetAllFriendsStatus()
 	end, {}) else nil
@@ -116,7 +116,7 @@ return function(p4) --[[ Line: 124 | Named "useFriendsListOrderedByPresence" ]]
 	local Friends = if FFlagFriendSortedByPresenceSignalsImplementation then UseSignalStateResult1 and UseSignalStateResult1.friends or nil elseif UseQueryResult.data then UseQueryResult.data.allFriendsByUserId.friends else nil
 	local HasMore = FFlagFriendSortedByPresenceSignalsImplementation and (UseSignalStateResult1 and UseSignalStateResult1.hasMore) or nil
 	local UseSignalStateResult3 = if FFlagFriendSortedByPresenceSignalsImplementation then UseSignalStateResult or {} else UseQueryResult1.data and UseQueryResult1.data.onlineFriendsByUserId or {}
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 208 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FFlagFriendSortedByPresenceSignalsImplementation (upval), HasMore (copy), NextCursor (copy), UseQueryResult (copy), GetResult (upval), PageSize (copy), UseRefResult1 (copy), UseRefResult (copy)
 		if FFlagFriendSortedByPresenceSignalsImplementation then
 			if not HasMore then return end
@@ -128,7 +128,7 @@ return function(p4) --[[ Line: 124 | Named "useFriendsListOrderedByPresence" ]]
 		else
 			UseQueryResult:fetchMore({
 				variables = { pageCursor = NextCursor, pageLimit = PageSize }
-			}):andThen(function(Result) --[[ Line: 231 ]]
+			}):andThen(function(Result)
 				-- upvalues: UseRefResult1 (upval)
 				UseRefResult1.current = Result and Result.errors
 			end)
@@ -140,7 +140,7 @@ return function(p4) --[[ Line: 124 | Named "useFriendsListOrderedByPresence" ]]
 		if FFlagFriendSortedByPresenceSignalsImplementation then HasMore else nil
 	})
 	
-	local function RefreshFriendsData() --[[ Line: 243 ]]
+	local function RefreshFriendsData()
 		-- upvalues: FFlagFriendSortedByPresenceSignalsImplementation (upval), GetResult (upval), UseQueryResult1 (copy), UseQueryResult (copy), UseRefResult (copy), UseRefResult1 (copy)
 		if FFlagFriendSortedByPresenceSignalsImplementation then
 			GetResult.RefetchOnlineFriends()
@@ -156,9 +156,9 @@ return function(p4) --[[ Line: 124 | Named "useFriendsListOrderedByPresence" ]]
 	end
 	
 	if not FFlagFriendSortedByPresenceSignalsImplementation then
-		ReactModule.useEffect(function() --[[ Line: 256 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: FriendsCommonPresenceUpdateSignal (upval), bulkUpdateUserPresences (upval), UseApolloClientResult (copy), shouldRefetchOnlineFriends (upval), Variables (copy), FFlagFriendSortedByPresenceSignalsImplementation (upval), GetResult (upval), UseQueryResult1 (copy)
-			FriendsCommonPresenceUpdateSignal.Event:Connect(function(p5) --[[ Line: 257 ]]
+			FriendsCommonPresenceUpdateSignal.Event:Connect(function(p5)
 				-- upvalues: bulkUpdateUserPresences (upval), UseApolloClientResult (upval), shouldRefetchOnlineFriends (upval), Variables (upval), FFlagFriendSortedByPresenceSignalsImplementation (upval), GetResult (upval), UseQueryResult1 (upval)
 				bulkUpdateUserPresences(UseApolloClientResult, p5)
 				
@@ -172,15 +172,15 @@ return function(p4) --[[ Line: 124 | Named "useFriendsListOrderedByPresence" ]]
 				end
 			end)
 			
-			return function() --[[ Line: 268 ]]
+			return function()
 				-- upvalues: FriendsCommonPresenceUpdateSignal (upval)
 				FriendsCommonPresenceUpdateSignal:Destroy()
 			end
 		end, {})
 	end
-	local UseMemoResult3, UseMemoResult21 = ReactModule.useMemo(function() --[[ Line: 274 ]]
+	local UseMemoResult3, UseMemoResult21 = ReactModule.useMemo(function()
 		-- upvalues: v17 (upval), UseSignalStateResult3 (copy), CryoModule (upval), PresenceType (upval), Friends (copy)
-		return v17(CryoModule.List.map(UseSignalStateResult3, function(p5) --[[ Line: 49 ]]
+		return v17(CryoModule.List.map(UseSignalStateResult3, function(p5)
 			-- upvalues: PresenceType (upval), CryoModule (upval)
 			return if p5.presence and p5.presence.userPresenceType == PresenceType.InGame and p5.presence.universeId == "" then CryoModule.Dictionary.join(p5, {
 				presence = CryoModule.Dictionary.join(p5.presence, { userPresenceType = PresenceType.Online })

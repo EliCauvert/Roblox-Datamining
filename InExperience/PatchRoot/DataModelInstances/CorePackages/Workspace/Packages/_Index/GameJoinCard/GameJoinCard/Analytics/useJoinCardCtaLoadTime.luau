@@ -5,7 +5,7 @@ local GameJoinCardTTIModule = require(GameJoinCard.Telemetry.GameJoinCardTTI)
 local UseGameJoinCardAnalyticsModule = require(script.Parent.useGameJoinCardAnalytics)
 local FFlagGameJoinCardOptionalActions = require(Parent.SharedFlags).FFlagGameJoinCardOptionalActions
 
-return function(p1) --[[ Line: 45 | Named "useJoinCardCtaLoadTime" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FFlagGameJoinCardOptionalActions (copy), GameJoinCardTTIModule (copy), UseGameJoinCardAnalyticsModule (copy)
 	local UseRefResult = ReactModule.useRef(tick())
 	local UseRefResult1 = ReactModule.useRef(nil)
@@ -15,7 +15,7 @@ return function(p1) --[[ Line: 45 | Named "useJoinCardCtaLoadTime" ]]
 	UseRefResult4.current = p1.ctaType
 	local UseRefResult5 = ReactModule.useRef(p1.wasCached)
 	UseRefResult5.current = p1.wasCached
-	ReactModule.useEffect(function() --[[ Line: 56 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagGameJoinCardOptionalActions (upval), p1 (copy), UseRefResult2 (copy), UseRefResult1 (copy), GameJoinCardTTIModule (upval), UseRefResult3 (copy), UseRefResult (copy), UseGameJoinCardAnalyticsModule (upval), UseRefResult4 (copy), UseRefResult5 (copy)
 		if FFlagGameJoinCardOptionalActions and p1.isDisabled then return end
 		if not UseRefResult2.current then

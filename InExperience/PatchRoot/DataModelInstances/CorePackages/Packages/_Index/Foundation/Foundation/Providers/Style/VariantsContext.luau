@@ -1,6 +1,6 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
 
-function getOrSet(p1, Key, Callback, ...) --[[ Line: 7 ]]
+function getOrSet(p1, Key, Callback, ...)
 	local v1 = p1[Key]
 	
 	if not v1 then
@@ -10,12 +10,12 @@ function getOrSet(p1, Key, Callback, ...) --[[ Line: 7 ]]
 	return v1
 end
 
-function useVariantsState() --[[ Line: 22 ]]
+function useVariantsState()
 	-- upvalues: ReactModule (copy)
 	local UseRefResult = ReactModule.useRef({})
 	local UseRefResult1 = ReactModule.useRef(nil)
 	
-	return ReactModule.useCallback(function(p1, p2, Current) --[[ Line: 26 ]]
+	return ReactModule.useCallback(function(p1, p2, Current)
 		-- upvalues: UseRefResult1 (copy), UseRefResult (copy)
 		if UseRefResult1.current ~= Current then
 			table.clear(UseRefResult.current)
@@ -27,7 +27,7 @@ end
 
 local Context = ReactModule.createContext(nil)
 
-function useVariants(p1, p2, p3) --[[ Line: 39 ]]
+function useVariants(p1, p2, p3)
 	-- upvalues: ReactModule (copy), Context (copy)
 	local UseContextResult = ReactModule.useContext(Context)
 	

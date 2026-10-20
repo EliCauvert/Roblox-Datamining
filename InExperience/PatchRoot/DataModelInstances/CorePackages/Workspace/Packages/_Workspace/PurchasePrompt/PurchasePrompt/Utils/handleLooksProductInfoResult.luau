@@ -5,7 +5,7 @@ local FFlagPurchasePromptFetchCartPricingForLooks = SharedFlagsModule.FFlagPurch
 local FIntBlackbirdUpsellMinPriceForDiscountInclusive = SharedFlagsModule.FIntBlackbirdUpsellMinPriceForDiscountInclusive
 local FIntBlackbirdUpsellMaxPriceForDiscountInclusive = SharedFlagsModule.FIntBlackbirdUpsellMaxPriceForDiscountInclusive
 
-return function(p1, p2) --[[ Line: 37 | Named "handleLooksProductInfoResult" ]]
+return function(p1, p2)
 	-- upvalues: FFlagPurchasePromptFetchCartPricingForLooks (copy), FIntBlackbirdUpsellMaxPriceForDiscountInclusive (copy), FIntBlackbirdUpsellMinPriceForDiscountInclusive (copy), FFlagHideLookDiscountPercentWithIneligibleItemsModule (copy)
 	if not p1 or not p1.look or not p1.look.items then
 		return nil

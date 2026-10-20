@@ -24,7 +24,7 @@ MediaGalleryFullScreen.validateProps = TModule.strictInterface({
 })
 MediaGalleryFullScreen.defaultProps = { showIndex = 1, size = UDim2.fromScale(1, 1) }
 
-function MediaGalleryFullScreen.getDerivedStateFromProps(State, State1) --[[ Line: 53 ]]
+function MediaGalleryFullScreen.getDerivedStateFromProps(State, State1)
 	-- upvalues: GetShowItemsModule (copy)
 	local State2 = nil
 	
@@ -45,7 +45,7 @@ function MediaGalleryFullScreen.getDerivedStateFromProps(State, State1) --[[ Lin
 	return State2
 end
 
-function MediaGalleryFullScreen.init(p1) --[[ Line: 76 ]]
+function MediaGalleryFullScreen.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.state = {
 		items = nil,
@@ -59,7 +59,7 @@ function MediaGalleryFullScreen.init(p1) --[[ Line: 76 ]]
 	p1.leftArrowPosition, p1.updateLeftArrowPosition = RoactModule.createBinding(UDim2.new(0.5, 0, 0.5, 0))
 	p1.rightArrowPosition, p1.updateRightArrowPosition = RoactModule.createBinding(UDim2.new(0.5, 0, 0.5, 0))
 	
-	function p1.onResize(Frame: Frame) --[[ Line: 90 ]]
+	function p1.onResize(Frame: Frame)
 		-- upvalues: p1 (copy)
 		local X = Frame.AbsoluteSize.X
 		local Y = Frame.AbsoluteSize.Y
@@ -72,7 +72,7 @@ function MediaGalleryFullScreen.init(p1) --[[ Line: 76 ]]
 		p1.updateItemFrameSize(UDim2.new(0, Floored, 0, Y))
 	end
 	
-	function p1.onImageResize(Frame: Frame) --[[ Line: 104 ]]
+	function p1.onImageResize(Frame: Frame)
 		-- upvalues: p1 (copy)
 		local X: number = Frame.AbsoluteSize.X
 		local Y = Frame.AbsoluteSize.Y
@@ -81,7 +81,7 @@ function MediaGalleryFullScreen.init(p1) --[[ Line: 76 ]]
 		p1.updateArrowButtonSize(UDim2.new(0, 96, 0, Y))
 	end
 	
-	function p1.onUserInputBegan(Input) --[[ Line: 113 ]]
+	function p1.onUserInputBegan(Input)
 		-- upvalues: p1 (copy)
 		if Input.UserInputType ~= Enum.UserInputType.Keyboard then return end
 		local FocusIndex: number = p1.state.focusIndex
@@ -97,7 +97,7 @@ function MediaGalleryFullScreen.init(p1) --[[ Line: 76 ]]
 		end
 	end
 	
-	function p1.showPreviousItem() --[[ Line: 128 ]]
+	function p1.showPreviousItem()
 		-- upvalues: p1 (copy)
 		local FocusIndexDelta = p1.state.focusIndex - 1
 		
@@ -107,7 +107,7 @@ function MediaGalleryFullScreen.init(p1) --[[ Line: 76 ]]
 		p1:setState({ focusIndex = FocusIndexDelta })
 	end
 	
-	function p1.showNextItem() --[[ Line: 139 ]]
+	function p1.showNextItem()
 		-- upvalues: p1 (copy)
 		local CountItems = #p1.props.items
 		local NewFocusIndex = p1.state.focusIndex + 1
@@ -118,7 +118,7 @@ function MediaGalleryFullScreen.init(p1) --[[ Line: 76 ]]
 		p1:setState({ focusIndex = NewFocusIndex })
 	end
 	
-	function p1.cycleNext() --[[ Line: 151 ]]
+	function p1.cycleNext()
 		-- upvalues: p1 (copy)
 		local NewFocusIndex = p1.state.focusIndex + 1
 		
@@ -128,7 +128,7 @@ function MediaGalleryFullScreen.init(p1) --[[ Line: 76 ]]
 		p1:setState({ focusIndex = NewFocusIndex })
 	end
 	
-	function p1.onVideoPlayActivated(p2) --[[ Line: 163 ]]
+	function p1.onVideoPlayActivated(p2)
 		-- upvalues: p1 (copy)
 		if p1.props.onVideoPlayActivated then
 			p1.props.onVideoPlayActivated(p1.state.itemsToShow[p2].originalIndex)
@@ -136,7 +136,7 @@ function MediaGalleryFullScreen.init(p1) --[[ Line: 76 ]]
 	end
 end
 
-local function renderArrowButton(_, p1, IsDisabled, Vector, Position, ArrowButtonSize, OnActivated) --[[ Line: 172 ]]
+local function renderArrowButton(_, p1, IsDisabled, Vector, Position, ArrowButtonSize, OnActivated)
 	-- upvalues: RoactModule (copy), IconButton (copy), Images (copy)
 	return RoactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -157,15 +157,15 @@ local function renderArrowButton(_, p1, IsDisabled, Vector, Position, ArrowButto
 	})
 end
 
-function MediaGalleryFullScreen.render(p1) --[[ Line: 192 ]]
+function MediaGalleryFullScreen.render(p1)
 	-- upvalues: WithStyleFunction (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 193 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithProvider(p2)
 	end)
 end
 
-function MediaGalleryFullScreen.renderWithProvider(p1, p2) --[[ Line: 198 ]]
+function MediaGalleryFullScreen.renderWithProvider(p1, p2)
 	-- upvalues: RoactModule (copy), renderArrowButton (copy), ThumbnailButtonModule (copy), EventConnection (copy), UserInputService (copy)
 	local ItemsToShow = p1.state.itemsToShow
 	local ShowArrows = p1.state.showArrows

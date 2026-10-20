@@ -1,8 +1,8 @@
-﻿local function _(Text: string): string --[[ Line: 13 | Named "trimWhitespace" ]]
+﻿local function _(Text: string): string
 	return (Text:gsub("^%s*(.-)%s*$", "%1"))
 end
 
-return function(p1) --[[ Line: 52 | Named "computeVoiceButtonState" ]]
+return function(p1)
 	local IsLoading = p1.ttsState == "loading"
 	local IsError = p1.ttsState == "error"
 	local SS = p1.text:gsub("^%s*(.-)%s*$", "%1")

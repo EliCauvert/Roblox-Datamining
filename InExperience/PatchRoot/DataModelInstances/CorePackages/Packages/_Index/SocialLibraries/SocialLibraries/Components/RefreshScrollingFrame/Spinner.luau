@@ -21,8 +21,8 @@ Spinner.validateProps = T.interface({
 	forwardRef = T.optional(T.table)
 })
 
-function Spinner.init(p1) --[[ Line: 37 ]]
-	function p1.renderSteppedCallback(p2) --[[ Line: 38 ]]
+function Spinner.init(p1)
+	function p1.renderSteppedCallback(p2)
 		-- upvalues: p1 (copy)
 		local SpinSpeed = p1.props.spinSpeed
 		
@@ -32,7 +32,7 @@ function Spinner.init(p1) --[[ Line: 37 ]]
 	end
 end
 
-function Spinner.render(p1) --[[ Line: 48 ]]
+function Spinner.render(p1)
 	-- upvalues: Roact (copy), WithStyleFunction (copy), ImageSetLabel (copy), Images (copy), ExternalEventConnectionModule (copy), RunService (copy)
 	local Size = p1.props.Size
 	local Position = p1.props.Position
@@ -42,7 +42,7 @@ function Spinner.render(p1) --[[ Line: 48 ]]
 	local IsSpinning = p1.props.isSpinning
 	p1.ref = p1.props.forwardRef or (p1.ref or Roact.createRef())
 	
-	return WithStyleFunction(function(p2) --[[ Line: 60 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: Roact (upval), ImageSetLabel (upval), Size (copy), Position (copy), AnchorPoint (copy), Images (upval), ImageColor3 (copy), ImageTransparency (copy), p1 (copy), IsSpinning (copy), ExternalEventConnectionModule (upval), RunService (upval)
 		return Roact.createElement(ImageSetLabel, {
 			Size = Size,
@@ -62,7 +62,7 @@ function Spinner.render(p1) --[[ Line: 48 ]]
 	end)
 end
 
-return Roact.forwardRef(function(p1, ForwardRef) --[[ Line: 79 ]]
+return Roact.forwardRef(function(p1, ForwardRef)
 	-- upvalues: Roact (copy), Spinner (copy), Cryo (copy)
 	return Roact.createElement(Spinner, Cryo.Dictionary.join(p1, { forwardRef = ForwardRef }))
 end)

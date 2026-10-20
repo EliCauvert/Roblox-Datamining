@@ -8,7 +8,7 @@ local v1 = require(TnSAvatarIdentification.Flags.GetFIntReportAnythingAvatarIden
 local v2 = require(TnSAvatarIdentification.Flags.GetFIntReportAnythingAvatarIdentificationOffScreenDiscardDistancePercent)() / 100
 local v3 = require(TnSAvatarIdentification.Flags.GetFIntReportAnythingAvatarIdentificationDiscardFractionSkipThresholdPercent)() / 100
 
-function getBBCorners(CF, Vector) --[[ Line: 28 ]]
+function getBBCorners(CF, Vector)
 	local Buffer = table.create(8)
 	local XVector = CF.XVector
 	local YVector = CF.YVector
@@ -33,7 +33,7 @@ end
 local v4 = v2 + 1
 local Negated = -v2
 
-local function _(Vector): boolean --[[ Line: 52 ]]
+local function _(Vector): boolean
 	-- upvalues: v4 (copy), Negated (copy)
 	return v4 < Vector.Y or (Vector.Y < Negated or (v4 < Vector.X or Vector.X < Negated))
 end
@@ -45,7 +45,7 @@ local config = {
 	wasSkipped = false
 }
 
-function getCoveringPolygon(List, p1, p2) --[[ Line: 73 ]]
+function getCoveringPolygon(List, p1, p2)
 	-- upvalues: config (copy), IdentificationUtilsModule (copy), v1 (copy), v4 (copy), Negated (copy), v3 (copy)
 	if #List == 0 then
 		return {}, config
@@ -91,13 +91,13 @@ function getCoveringPolygon(List, p1, p2) --[[ Line: 73 ]]
 	end
 end
 
-function getDistanceAlongCamLookVector(p3, p4) --[[ Line: 128 ]]
+function getDistanceAlongCamLookVector(p3, p4)
 	local _CFrame = p4.CFrame
 	
 	return ((p3.Position - _CFrame.Position):Dot(_CFrame.LookVector))
 end
 
-function getVisibleParts(p3, Player, FilterDescendantsInstances) --[[ Line: 141 ]]
+function getVisibleParts(p3, Player, FilterDescendantsInstances)
 	local Position = p3.CFrame.Position
 	local Character = Player.Character
 	
@@ -125,11 +125,11 @@ function getVisibleParts(p3, Player, FilterDescendantsInstances) --[[ Line: 141 
 	return Count, List
 end
 
-local _ = function(p4, p5, p6) --[[ Line: 182 | Named "counterclockwise" ]]
+local _ = function(p4, p5, p6)
 	return (p5 - p4):Cross(p6 - p5)
 end
 
-function getConvexHull(Entry) --[[ Line: 186 ]]
+function getConvexHull(Entry)
 	if #Entry <= 2 then
 		return {}
 	end
@@ -146,7 +146,7 @@ function getConvexHull(Entry) --[[ Line: 186 ]]
 	end
 	table.insert(List, Entry1)
 	
-	local function _(p4): number --[[ Line: 203 | Named "angleFromLowest" ]]
+	local function _(p4): number
 		-- upvalues: Entry1 (ref)
 		local Vector = p4 - Entry1
 		
@@ -159,7 +159,7 @@ function getConvexHull(Entry) --[[ Line: 186 ]]
 			table.insert(List1, (Vector3.new(Vector.X, Vector.Y, (math.atan2(VectorDelta.Y, VectorDelta.X)))))
 		end
 	end
-	table.sort(List1, function(A, B): boolean --[[ Line: 215 | Named "compareByAngle" ]]
+	table.sort(List1, function(A, B): boolean
 		-- upvalues: Entry1 (ref)
 		return if A.Z == B.Z then (Vector2.new(A.X, A.Y) - Entry1).Magnitude < (Vector2.new(B.X, B.Y) - Entry1).Magnitude else A.Z < B.Z
 	end)
@@ -197,7 +197,7 @@ function getConvexHull(Entry) --[[ Line: 186 ]]
 	return List
 end
 
-function projectVertices(List, p4, p5) --[[ Line: 287 ]]
+function projectVertices(List, p4, p5)
 	local v5 = 1e999
 	local v6 = -1e999
 	
@@ -214,7 +214,7 @@ function projectVertices(List, p4, p5) --[[ Line: 287 ]]
 	return v5, v6
 end
 
-function projectCircle(p6, p7, Direction) --[[ Line: 307 ]]
+function projectCircle(p6, p7, Direction)
 	local ScaledUnit = Direction.Unit * p7
 	local DotProduct = (p6 + ScaledUnit):Dot(Direction)
 	local DotProduct1 = (p6 - ScaledUnit):Dot(Direction)
@@ -227,7 +227,7 @@ function projectCircle(p6, p7, Direction) --[[ Line: 307 ]]
 	return DotProduct, DotProduct1
 end
 
-function getClosestPoint(Vector, List, p6): number --[[ Line: 326 ]]
+function getClosestPoint(Vector, List, p6): number
 	local v7 = -1
 	local v8 = 1e999
 	
@@ -243,7 +243,7 @@ function getClosestPoint(Vector, List, p6): number --[[ Line: 326 ]]
 	return v7
 end
 
-function intersectCirclePolygon(p7, p8, List, p9): boolean --[[ Line: 340 ]]
+function intersectCirclePolygon(p7, p8, List, p9): boolean
 	for i, _ in ipairs(List) do
 		local EntryDelta = List[i % #List + 1] * p9 - List[i] * p9
 		local Direction = Vector2.new(EntryDelta.Y, -EntryDelta.X).Unit
@@ -267,7 +267,7 @@ function intersectCirclePolygon(p7, p8, List, p9): boolean --[[ Line: 340 ]]
 	end
 end
 
-function intersectCircleBox(Vector, p10, Vector1, Vector4, _): boolean --[[ Line: 371 ]]
+function intersectCircleBox(Vector, p10, Vector1, Vector4, _): boolean
 	local X = Vector.X
 	local Y = Vector.Y
 	local X1 = X
@@ -294,7 +294,7 @@ function intersectCircleBox(Vector, p10, Vector1, Vector4, _): boolean --[[ Line
 end
 
 return {
-	getAvatarsForRegion = function(List, p10, p11, p12, p13) --[[ Line: 410 ]]
+	getAvatarsForRegion = function(List, p10, p11, p12, p13)
 		local Players = {}
 		local v9 = p13 < p12
 		local X = if v9 then p12 / p13 else p13 / p12
@@ -306,7 +306,7 @@ return {
 		end
 		return Players
 	end,
-	getAvatarsForPoint = function(List, Vector) --[[ Line: 457 ]]
+	getAvatarsForPoint = function(List, Vector)
 		local Players = {}
 		
 		for _, value in pairs(List) do
@@ -336,7 +336,7 @@ return {
 		end
 		return Players
 	end,
-	getVisibleAvatars = function(p14, p15) --[[ Line: 494 ]]
+	getVisibleAvatars = function(p14, p15)
 		-- upvalues: Players (copy), IdentificationUtilsModule (copy), GetFFlagGetHumanoidDescriptionUpdatesV2EFunction (copy), GetHumanoidDescriptionModule (copy)
 		local Players1 = Players:GetPlayers()
 		local config = { totalPlayers = 0, checkedPlayers = 0, duration = 0 }
@@ -369,20 +369,20 @@ return {
 		local ClockTime = os.clock()
 		config.totalPlayers = #Players1 - 1
 		
-		local function _() --[[ Line: 535 ]]
+		local function _()
 			-- upvalues: config (copy), ClockTime (copy)
 			config.duration = os.clock() - ClockTime
 			
 			return config
 		end
 		
-		local _ = function(): boolean --[[ Line: 539 ]]
+		local _ = function(): boolean
 			-- upvalues: p15 (copy), ClockTime (copy)
 			return (if p15 then p15 else 0.5) < os.clock() - ClockTime
 		end
 		
 		if LocalCharacterPosition then
-			table.sort(Players1, function(A: Player, B: Player): boolean --[[ Line: 546 ]]
+			table.sort(Players1, function(A: Player, B: Player): boolean
 				-- upvalues: LocalCharacterPosition (ref)
 				return A:DistanceFromCharacter(LocalCharacterPosition) < B:DistanceFromCharacter(LocalCharacterPosition)
 			end)

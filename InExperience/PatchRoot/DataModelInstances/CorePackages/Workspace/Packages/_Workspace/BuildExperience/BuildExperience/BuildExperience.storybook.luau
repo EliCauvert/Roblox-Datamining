@@ -13,7 +13,7 @@ local UseStyleSheetFunction = FoundationModule.Hooks.useStyleSheet
 local config = { Light = ColorMode.Light, Dark = ColorMode.Dark }
 local config1 = { Console = Device.Console, Desktop = Device.Desktop }
 
-local function StyleLinkPortal(p1) --[[ Line: 29 ]]
+local function StyleLinkPortal(p1)
 	-- upvalues: UseStyleSheetFunction (copy), ReactRobloxModule (copy), ReactModule (copy)
 	return ReactRobloxModule.createPortal(ReactModule.createElement("StyleLink", { StyleSheet = UseStyleSheetFunction() }), p1.overlay)
 end
@@ -22,23 +22,23 @@ return {
 	name = BuildExperience.Name,
 	roact = ReactModule,
 	reactRoblox = ReactRobloxModule,
-	mapStory = function(p1) --[[ Line: 39 ]]
+	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), Localization (copy), LocalizationService (copy), LocalizationProvider (copy), FoundationProvider (copy), config (copy), config1 (copy), StyleLinkPortal (copy)
-		return function(p2) --[[ Line: 40 ]]
+		return function(p2)
 			-- upvalues: ReactModule (upval), Localization (upval), LocalizationService (upval), LocalizationProvider (upval), FoundationProvider (upval), config (upval), config1 (upval), p1 (copy), StyleLinkPortal (upval)
 			local UseRefResult = ReactModule.useRef(Instance.new("Frame"))
 			
 			if UseRefResult.current.Parent ~= p2.focus then
 				UseRefResult.current.Parent = p2.focus
 			end
-			ReactModule.useLayoutEffect(function() --[[ Line: 46 ]]
+			ReactModule.useLayoutEffect(function()
 				-- upvalues: UseRefResult (copy)
 				UseRefResult.current.Size = UDim2.fromScale(1, 1)
 				UseRefResult.current.BackgroundTransparency = 1
 			end, {})
 			
 			return ReactModule.createElement(LocalizationProvider, {
-				localization = ReactModule.useMemo(function() --[[ Line: 51 ]]
+				localization = ReactModule.useMemo(function()
 					-- upvalues: Localization (upval), LocalizationService (upval)
 					return Localization.new(LocalizationService.RobloxLocaleId)
 				end, {})

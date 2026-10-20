@@ -2,7 +2,7 @@
 local _ = require(Parent.React)
 local UseCursorFunction = require(Parent.Foundation).Hooks.useCursor
 
-return function(Radius, Offset, BorderWidth) --[[ Line: 7 | Named "useCursor" ]]
+return function(Radius, Offset, BorderWidth)
 	-- upvalues: UseCursorFunction (copy)
 	return UseCursorFunction({
 		radius = Radius,

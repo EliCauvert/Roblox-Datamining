@@ -6,7 +6,7 @@ local _ = require(Parent.DiscoveryTypes)
 
 return {
 	key = "TopicInfosKey",
-	reducer = function(p1, p2) --[[ Line: 14 ]]
+	reducer = function(p1, p2)
 		-- upvalues: AddTopicInfosModule (copy), CryoModule (copy)
 		local P0 = p1 or {}
 		assert(P0, "")

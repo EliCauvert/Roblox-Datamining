@@ -5,7 +5,7 @@ local SupportPaneMode = require(Parent.AppSplitView).Enums.SupportPaneMode
 local TempRnSwitchNavigatorName = require(Parent.NavigationRodux).Constants.TempRnSwitchNavigatorName
 local config = { isOnScreen = false }
 
-local function _(p1) --[[ Line: 20 | Named "onScreenRouteKeyForScreen" ]]
+local function _(p1)
 	-- upvalues: TempRnSwitchNavigatorName (copy), GetCurrentNavigationStateFunction (copy)
 	local Descriptor = p1.descriptor
 	local State = Descriptor.state
@@ -19,7 +19,7 @@ local function _(p1) --[[ Line: 20 | Named "onScreenRouteKeyForScreen" ]]
 	end
 end
 
-return function(p1, ContentTopCandidate, p2) --[[ Line: 30 | Named "getOnScreenContextValue" ]]
+return function(p1, ContentTopCandidate, p2)
 	-- upvalues: SupportPaneMode (copy), config (copy), TempRnSwitchNavigatorName (copy), GetCurrentNavigationStateFunction (copy)
 	local v1 = false
 	local ContentTopCandidate1 = nil

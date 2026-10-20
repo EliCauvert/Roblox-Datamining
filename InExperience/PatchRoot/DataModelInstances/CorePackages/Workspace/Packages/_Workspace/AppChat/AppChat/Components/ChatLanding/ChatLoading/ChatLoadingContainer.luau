@@ -11,9 +11,9 @@ ChatLoadingContainer.defaultProps = {
 	topPadding = if FFlagAppIaScrollAway then 0 else nil
 }
 
-function ChatLoadingContainer.render(p1) --[[ Line: 21 ]]
+function ChatLoadingContainer.render(p1)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy), FFlagAppIaScrollAway (copy), ChatLoadingIndicatorModule (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 22 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: RoactModule (upval), FFlagAppIaScrollAway (upval), p1 (copy), ChatLoadingIndicatorModule (upval)
 		return RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,

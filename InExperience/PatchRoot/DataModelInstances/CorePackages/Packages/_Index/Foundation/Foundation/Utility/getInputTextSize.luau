@@ -8,7 +8,7 @@ local config = {
 	[InputSizeModule.XSmall] = InputLabelSizeModule.XSmall
 }
 
-return function(p1) --[[ Line: 19 | Named "getInputTextSize" ]]
+return function(p1)
 	-- upvalues: config (copy)
 	return config[p1]
 end

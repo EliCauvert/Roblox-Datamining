@@ -25,38 +25,38 @@ local _ = require(ShareSheet.Recipients.RecipientSource)
 local ShareSheetTelemetryModule = require(ShareSheet.telemetry.ShareSheetTelemetry)
 local _ = require(ShareSheet.Types)
 
-local function setDefaultContentScrollingFrameRef(p1) --[[ Line: 62 ]]
+local function setDefaultContentScrollingFrameRef(p1)
 	if p1 then
 		p1.AutomaticSize = Enum.AutomaticSize.Y
 		p1.ScrollBarThickness = 0
 	end
 end
 
-local function setPeoplePickerContentScrollingFrameRef(p1) --[[ Line: 69 ]]
+local function setPeoplePickerContentScrollingFrameRef(p1)
 	if p1 then
 		p1.AutomaticSize = Enum.AutomaticSize.None
 		p1.ScrollBarThickness = 0
 	end
 end
 
-local function useOverlaySize() --[[ Line: 76 ]]
+local function useOverlaySize()
 	-- upvalues: UseOverlayFunction (copy), ReactModule (copy)
 	local UseOverlayResult = UseOverlayFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.zero)
 	local AbsoluteSize = if UseOverlayResult then UseOverlayResult.AbsoluteSize else UseStateResult
-	ReactModule.useLayoutEffect(function() --[[ Line: 81 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseOverlayResult (copy), UseStateResult2 (copy)
 		if UseOverlayResult == nil then return end
-		local Connection = UseOverlayResult:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 86 | Named "updateSize" ]]
+		local Connection = UseOverlayResult:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 			-- upvalues: UseOverlayResult (upval), UseStateResult2 (upval)
 			local AbsoluteSize = UseOverlayResult.AbsoluteSize
-			UseStateResult2(function(AbsoluteSize1) --[[ Line: 88 ]]
+			UseStateResult2(function(AbsoluteSize1)
 				-- upvalues: AbsoluteSize (copy)
 				return if AbsoluteSize1 == AbsoluteSize then AbsoluteSize1 else AbsoluteSize
 			end)
 		end)
 		
-		return function() --[[ Line: 94 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end
@@ -65,7 +65,7 @@ local function useOverlaySize() --[[ Line: 76 ]]
 	return AbsoluteSize
 end
 
-return function(p1) --[[ Line: 102 | Named "ShareSheetView" ]]
+return function(p1)
 	-- upvalues: FFlagShareSheetUseFoundationCenterSheetHeightFixModule (copy), UseTokensFunction (copy), useOverlaySize (copy), UseScaledValueFunction (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), FIntShareSheetPeoplePickerEnabledSnapPointHundredthsPercent (copy), GetCenterSheetHeightModule (copy), ReactModule (copy), ShareSheetTelemetryModule (copy), Sheet (copy), FFlagShareSheetDesktopReadinessModule (copy), DialogSize (copy), PeoplePickerModule (copy), Text (copy), setPeoplePickerContentScrollingFrameRef (copy), setDefaultContentScrollingFrameRef (copy), View (copy), ShareSheetSocialRowModule (copy), FFlagShareSheetFriendsSort (copy), Divider (copy), ShareSendRowModule (copy), ShareSheetActionRowModule (copy)
 	local v1 = nil
 	local v2 = nil
@@ -98,7 +98,7 @@ return function(p1) --[[ Line: 102 | Named "ShareSheetView" ]]
 		preferCenterSheet = true,
 		centerSheetHeight = if FFlagShareSheetPeoplePickerEnabledModule then v5 else nil,
 		isOpen = p1.isOpen,
-		onClose = ReactModule.useCallback(function() --[[ Line: 133 ]]
+		onClose = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy), ShareSheetTelemetryModule (upval)
 			p1.onCloseWithReason(ShareSheetTelemetryModule.CloseReason.UserDismissed)
 		end, { p1.onCloseWithReason }),

@@ -10,7 +10,7 @@ local InterfaceResult = TModule.interface({
 	interactionType = TModule.string
 })
 
-return function(CustomFields, EventContext) --[[ Line: 20 ]]
+return function(CustomFields, EventContext)
 	-- upvalues: DiscoveryEventErrorLogger (copy), InterfaceResult (copy), HapticTriggerAttemptThrottleHundredthsPercent (copy), UserGameSettings (copy), TelemetryService (copy)
 	if not EventContext then
 		DiscoveryEventErrorLogger.reportError("HapticTriggerAttemptInvalidInterface", "event is missing context")

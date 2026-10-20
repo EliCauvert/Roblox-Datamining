@@ -1,6 +1,6 @@
 ﻿local AudioDuckingFastInts = require(script:FindFirstAncestor("MomentsCreation").Parent.MomentsCommon).Media.audioDuckingFastInts
 
-return function(): number --[[ Line: 19 | Named "getTtsDuckScalar" ]]
+return function(): number
 	-- upvalues: AudioDuckingFastInts (copy)
 	local CompressorParams = AudioDuckingFastInts.getCompressorParams()
 	

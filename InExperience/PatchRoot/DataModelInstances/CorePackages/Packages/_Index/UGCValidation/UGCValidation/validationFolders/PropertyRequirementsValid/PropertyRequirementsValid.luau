@@ -6,7 +6,7 @@ local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local ValueToStringModule = require(Parent.util.valueToString)
 
-local function comparitorMethodImpl(B, B1, FOUNDIN): boolean? --[[ Line: 28 ]]
+local function comparitorMethodImpl(B, B1, FOUNDIN): boolean?
 	-- upvalues: ConstantsModule (copy)
 	if FOUNDIN == ConstantsModule.COMPARISON_METHODS.SMALLER then
 		return B < B1
@@ -25,7 +25,7 @@ local function comparitorMethodImpl(B, B1, FOUNDIN): boolean? --[[ Line: 28 ]]
 	end
 end
 
-local function doesPropertyMatchExpectations(Vector, Vector1, ComparisonMethod) --[[ Line: 46 ]]
+local function doesPropertyMatchExpectations(Vector, Vector1, ComparisonMethod)
 	-- upvalues: CryoModule (copy), ConstantsModule (copy), doesPropertyMatchExpectations (copy), comparitorMethodImpl (copy)
 	if Vector1 == CryoModule.None then
 		return Vector == nil
@@ -41,7 +41,7 @@ local function doesPropertyMatchExpectations(Vector, Vector1, ComparisonMethod) 
 	return v1
 end
 
-local function _(p1, CF) --[[ Line: 78 | Named "extractSubProperty" ]]
+local function _(p1, CF)
 	if typeof(CF) == "CFrame" and p1 == "PositionMagnitude" then
 		return true, CF.Position.Magnitude
 	elseif typeof(CF) == "CFrame" and p1 == "Orientation" then
@@ -53,7 +53,7 @@ local function _(p1, CF) --[[ Line: 78 | Named "extractSubProperty" ]]
 	end
 end
 
-local function getAllActiveTestsOnProperty(Value, PropertyName, CF, List) --[[ Line: 90 ]]
+local function getAllActiveTestsOnProperty(Value, PropertyName, CF, List)
 	-- upvalues: ConstantsModule (copy), getAllActiveTestsOnProperty (copy)
 	if typeof(List) ~= "table" then
 		return {
@@ -132,7 +132,7 @@ return {
 		ValidationEnumsModule.SharedDataMember.uploadEnum
 	},
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 143 ]]
+	run = function(p1, p2)
 		-- upvalues: ConstantsModule (copy), ErrorSourceStringsModule (copy), getAllActiveTestsOnProperty (copy), doesPropertyMatchExpectations (copy), ValueToStringModule (copy)
 		local RootInstance = p2.rootInstance
 		local AssetType = p2.uploadEnum.assetType
@@ -143,7 +143,7 @@ return {
 			for ClassName, pROPERTy in ConstantsModule.PROPERTIES do
 				if descendant:IsA(ClassName) then
 					for PropertyName, value in pROPERTy do
-						local Success, Result = pcall(function() --[[ Line: 154 ]]
+						local Success, Result = pcall(function()
 							-- upvalues: descendant (copy), PropertyName (copy)
 							return descendant[PropertyName]
 						end)

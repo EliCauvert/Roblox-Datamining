@@ -11,7 +11,7 @@ local _ = require(ProgressLoading.LoadingScreenMilestones.Types)
 local ContentId = require(ProgressLoading.LoadingScreenMilestones.Constants).ContentId
 local _ = require(script.Parent.Types)
 
-return ReactModule.memo(function(p1) --[[ Line: 21 | Named "TiltLoadingScreenContent" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseScreenSizeModule (copy), UseTiltLoadingScreenViewModelModule (copy), UseViewportSettledModule (copy), FFlagLoadingScreenMilestones (copy), ReactModule (copy), ContentId (copy), UseLoadingScreenAnimationModule (copy), TiltLoadingScreenViewModule (copy)
 	local UseScreenSizeModuleResult = UseScreenSizeModule()
 	local UseTiltLoadingScreenViewModelModuleResult = UseTiltLoadingScreenViewModelModule(p1.placeId, UseScreenSizeModuleResult, p1.destinationUniverseId)
@@ -26,7 +26,7 @@ return ReactModule.memo(function(p1) --[[ Line: 21 | Named "TiltLoadingScreenCon
 	local IsNotNameMatch: boolean = UseTiltLoadingScreenViewModelModuleResult.gameData ~= nil and UseTiltLoadingScreenViewModelModuleResult.gameData.name ~= ""
 	local IsNotCreatorMatch: boolean = UseTiltLoadingScreenViewModelModuleResult.gameData ~= nil and UseTiltLoadingScreenViewModelModuleResult.gameData.creator ~= ""
 	local IsThumbnailUrlMatch: boolean = ThumbnailUrl ~= nil and ThumbnailUrl == UseTiltLoadingScreenViewModelModuleResult.thumbnailUrl
-	local UseResult = if FFlagLoadingScreenMilestones then ReactModule.useCallback(function(Creator) --[[ Line: 34 ]]
+	local UseResult = if FFlagLoadingScreenMilestones then ReactModule.useCallback(function(Creator)
 		-- upvalues: p1 (copy), ContentId (upval), IsNotNameMatch (copy), IsNotCreatorMatch (copy), IsThumbnailUrlMatch (copy), NoIsDismissing (copy)
 		local Milestones = p1.milestones
 		
@@ -49,7 +49,7 @@ return ReactModule.memo(function(p1) --[[ Line: 21 | Named "TiltLoadingScreenCon
 	})
 	
 	if FFlagLoadingScreenMilestones then
-		ReactModule.useEffect(function() --[[ Line: 53 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseLoadingScreenAnimationModuleResult (copy), UseResult (copy), ContentId (upval)
 			if UseLoadingScreenAnimationModuleResult.title.reveal:getValue() == 1 and UseResult then
 				UseResult(ContentId.Title)

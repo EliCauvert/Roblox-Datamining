@@ -21,17 +21,17 @@ local GetFFlagFriendsMenuDummyLoadingFriendsFixFunction = SharedFlagsModule.GetF
 local FFlagUseSignalsForGameInvitesStatus = SharedFlagsModule.FFlagUseSignalsForGameInvitesStatus
 local GetGameInvitesStatusStore = if FFlagUseSignalsForGameInvitesStatus then require(Parent1.NotificationsCommon).GetGameInvitesStatusStore else nil
 
-return function(p1) --[[ Line: 48 ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), FFlagUseSignalsForGameInvitesStatus (copy), UseSignalStateFunction (copy), GetGameInvitesStatusStore (copy), UseSelectorFunction (copy), GetFFlagFriendsMenuDummyLoadingFriendsFixFunction (copy), InviteStatus (copy), ReceivedUserInviteStatusModule (copy), GameInviteAnalyticsManagerModule (copy), PostSendExperienceInviteModule (copy), NetworkImpl (copy), FFlagGameInviteSpaceSendsModule (copy), SpacedSenderModule (copy), Players (copy), ThrottleFunction (copy), InviteFriendContext (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseRefResult = ReactModule.useRef(0)
-	local UseSignalStateResult = if FFlagUseSignalsForGameInvitesStatus then UseSignalStateFunction(GetGameInvitesStatusStore(false).getGameInvitesStatus) else UseSelectorFunction(function(p2) --[[ Line: 55 ]]
+	local UseSignalStateResult = if FFlagUseSignalsForGameInvitesStatus then UseSignalStateFunction(GetGameInvitesStatusStore(false).getGameInvitesStatus) else UseSelectorFunction(function(p2)
 		return p2.GameInvitesStatus
 	end)
 	
 	return ReactModule.createElement(InviteFriendContext.Provider, {
 		value = {
-			inviteSingleFriend = ThrottleFunction(function(Recipient_user_id, Recipient_row_number: number) --[[ Line: 63 ]]
+			inviteSingleFriend = ThrottleFunction(function(Recipient_user_id, Recipient_row_number: number)
 				-- upvalues: UseRefResult (copy), GetFFlagFriendsMenuDummyLoadingFriendsFixFunction (upval), UseSignalStateResult (copy), InviteStatus (upval), p1 (copy), FFlagUseSignalsForGameInvitesStatus (upval), GetGameInvitesStatusStore (upval), UseDispatchResult (copy), ReceivedUserInviteStatusModule (upval), GameInviteAnalyticsManagerModule (upval), PostSendExperienceInviteModule (upval), NetworkImpl (upval), FFlagGameInviteSpaceSendsModule (upval), SpacedSenderModule (upval), Players (upval)
 				UseRefResult.current = math.max(Recipient_row_number, UseRefResult.current)
 				
@@ -67,12 +67,12 @@ return function(p1) --[[ Line: 48 ]]
 					else
 						UseDispatchResult(ReceivedUserInviteStatusModule(Recipient_user_id, InviteStatus.Pending))
 					end
-					local function v25() --[[ Line: 118 ]]
+					local function v25()
 						-- upvalues: PostSendExperienceInviteModule (upval), NetworkImpl (upval), Recipient_user_id (copy), Text (ref), p1 (upval)
 						return PostSendExperienceInviteModule(NetworkImpl, Recipient_user_id, Text, p1.trigger, p1.inviteMessageId, p1.launchData)
 					end
 					
-					;(if FFlagGameInviteSpaceSendsModule then SpacedSenderModule.send(v25) else PostSendExperienceInviteModule(NetworkImpl, Recipient_user_id, Text, p1.trigger, p1.inviteMessageId, p1.launchData)):andThen(function(Result) --[[ Line: 130 ]]
+					;(if FFlagGameInviteSpaceSendsModule then SpacedSenderModule.send(v25) else PostSendExperienceInviteModule(NetworkImpl, Recipient_user_id, Text, p1.trigger, p1.inviteMessageId, p1.launchData)):andThen(function(Result)
 						-- upvalues: Players (upval), Recipient_user_id (copy), GameInviteAnalyticsManagerModule (upval), p1 (upval), FFlagUseSignalsForGameInvitesStatus (upval), GetGameInvitesStatusStore (upval), InviteStatus (upval), UseDispatchResult (upval), ReceivedUserInviteStatusModule (upval)
 						GameInviteAnalyticsManagerModule:onActivatedInviteSent(Players.LocalPlayer.UserId, Result.conversationId, { Recipient_user_id }, p1.rootPlaceId, p1.universeId)
 						
@@ -83,7 +83,7 @@ return function(p1) --[[ Line: 48 ]]
 						else
 							UseDispatchResult(ReceivedUserInviteStatusModule(Recipient_user_id, InviteStatus.Success))
 						end
-					end, function() --[[ Line: 145 ]]
+					end, function()
 						-- upvalues: GameInviteAnalyticsManagerModule (upval), p1 (upval), IsNotLaunchDataMatch (copy), IsNotPromptMessageMatch (copy), IsNotInviteMessageIdMatch (copy), Recipient_user_id (copy), Recipient_row_number (copy), FFlagUseSignalsForGameInvitesStatus (upval), GetGameInvitesStatusStore (upval), InviteStatus (upval), UseDispatchResult (upval), ReceivedUserInviteStatusModule (upval)
 						GameInviteAnalyticsManagerModule:sendGameInviteModalEvent(p1.trigger, {
 							action_type = GameInviteAnalyticsManagerModule.ActionType.InviteFailure,
@@ -104,7 +104,7 @@ return function(p1) --[[ Line: 48 ]]
 					end)
 				end
 			end),
-			getMaxRecipientRowNum = function() --[[ Line: 59 ]]
+			getMaxRecipientRowNum = function()
 				-- upvalues: UseRefResult (copy)
 				return UseRefResult.current
 			end

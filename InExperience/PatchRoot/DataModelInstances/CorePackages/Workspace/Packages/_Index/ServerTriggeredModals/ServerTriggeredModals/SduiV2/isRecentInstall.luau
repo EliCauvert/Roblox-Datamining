@@ -3,14 +3,14 @@ local HttpService = game:GetService("HttpService")
 local FIntEdpGameLeavePromptsRecentInstallWindowDays = require(script:FindFirstAncestor("ServerTriggeredModals").Parent.SharedFlags).FIntEdpGameLeavePromptsRecentInstallWindowDays
 local IsAppFirstLaunchTimestampsSupportedModule = require(script.Parent.isAppFirstLaunchTimestampsSupported)
 
-local function readFirstLaunchTimestamp(p1) --[[ Line: 16 ]]
+local function readFirstLaunchTimestamp(p1)
 	-- upvalues: AppStorageService (copy), HttpService (copy)
 	local AppFirstLaunchTimestampsItem = AppStorageService:GetItem("AppFirstLaunchTimestamps")
 	
 	if typeof(AppFirstLaunchTimestampsItem) ~= "string" or AppFirstLaunchTimestampsItem == "" then
 		return nil
 	end
-	local Success, Result = pcall(function() --[[ Line: 22 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: HttpService (upval), AppFirstLaunchTimestampsItem (copy)
 		return HttpService:JSONDecode(AppFirstLaunchTimestampsItem)
 	end)
@@ -24,7 +24,7 @@ local function readFirstLaunchTimestamp(p1) --[[ Line: 16 ]]
 	end
 end
 
-return function(p1): boolean --[[ Line: 35 | Named "isRecentInstall" ]]
+return function(p1): boolean
 	-- upvalues: IsAppFirstLaunchTimestampsSupportedModule (copy), readFirstLaunchTimestamp (copy), FIntEdpGameLeavePromptsRecentInstallWindowDays (copy)
 	if not IsAppFirstLaunchTimestampsSupportedModule() then
 		return false

@@ -1,6 +1,6 @@
 ﻿local DeriveCartPricingViewFunction = require(script:FindFirstAncestor("PurchasePrompt").Parent.IAPExperience).deriveCartPricingView
 
-return function(p1) --[[ Line: 14 | Named "deriveSelectedOfferIdsFromCartPricing" ]]
+return function(p1)
 	-- upvalues: DeriveCartPricingViewFunction (copy)
 	local DeriveCartPricingViewResult = DeriveCartPricingViewFunction(p1)
 	

@@ -1,12 +1,12 @@
-﻿return function(Callback, Delay) --[[ Line: 1 ]]
+﻿return function(Callback, Delay)
 	local CurrentTime = 0
 	
-	return function(...) --[[ Line: 3 ]]
+	return function(...)
 		-- upvalues: CurrentTime (ref), Delay (copy), Callback (copy)
 		local list = { ... }
 		local CurrentTime1 = time()
 		CurrentTime = CurrentTime1
-		task.delay(Delay, function() --[[ Line: 7 ]]
+		task.delay(Delay, function()
 			-- upvalues: CurrentTime (upval), CurrentTime1 (copy), Callback (upval), list (copy)
 			if CurrentTime == CurrentTime1 then
 				Callback(unpack(list))

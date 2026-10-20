@@ -17,14 +17,14 @@ local EventConnection = require(Parent1.ReactUtils).EventConnection
 local UseFocusGuiObjectFunction = require(Parent1.ReactFocusNavigation).useFocusGuiObject
 local ConstantsModule = require(Parent.constants)
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, _) --[[ Line: 39 | Named "ClientNotificationWrapper" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, _)
 	-- upvalues: ReactModule (copy), UseInputTypeFunction (copy), UseFocusGuiObjectFunction (copy), ControlState (copy), HttpService (copy), GuiService (copy), View (copy), StateLayerAffordance (copy), CryoModule (copy), Toast (copy), InputTypeConstants (copy), EventConnection (copy), UserInputService (copy), KeyLabel (copy), ConstantsModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(false)
 	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(Enum.SelectionBehavior.Escape)
 	local UseInputTypeResult = UseInputTypeFunction()
 	local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
-	local UseResult = if p1.onHover then ReactModule.useCallback(function(Hover) --[[ Line: 48 ]]
+	local UseResult = if p1.onHover then ReactModule.useCallback(function(Hover)
 		-- upvalues: p1 (copy), ControlState (upval)
 		p1.onHover(Hover == ControlState.Hover or (Hover == ControlState.Pressed or Hover == ControlState.SelectedPressed))
 	end, { p1.onHover }) else nil
@@ -36,7 +36,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, _) --[[ Line: 39 | N
 			table.insert(Actions, {
 				text = button.Text,
 				variant = button.ButtonType,
-				onActivated = function() --[[ Line: 64 ]]
+				onActivated = function()
 					-- upvalues: GuiService (upval), p1 (copy), i (copy)
 					GuiService:OnNotificationInteraction(p1.notificationId, i - 1)
 				end
@@ -67,7 +67,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, _) --[[ Line: 39 | N
 		}, {
 			EventConnection = ReactModule.createElement(EventConnection, {
 				event = UserInputService.InputBegan,
-				callback = function(Input) --[[ Line: 101 ]]
+				callback = function(Input)
 					-- upvalues: UseFocusGuiObjectResult (copy), p1 (copy)
 					if Input.KeyCode == Enum.KeyCode.ButtonB then
 						UseFocusGuiObjectResult(nil)
@@ -81,11 +81,11 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, _) --[[ Line: 39 | N
 				holdBehavior = {
 					holdTime = ConstantsModule.MenuButtonPressHoldTime,
 					resetTime = ConstantsModule.MenuButtonPressResetTime,
-					onBeginHold = function() --[[ Line: 114 ]]
+					onBeginHold = function()
 						-- upvalues: p1 (copy)
 						p1.onPause(true)
 					end,
-					onEndHold = function(p2) --[[ Line: 117 ]]
+					onEndHold = function(p2)
 						-- upvalues: Actions (copy), p1 (copy), UseBindingResult2 (copy), UseBindingResult2_1 (copy), UseFocusGuiObjectResult (copy), UseRefResult (copy)
 						if not p2 then
 							p1.onPause(false)

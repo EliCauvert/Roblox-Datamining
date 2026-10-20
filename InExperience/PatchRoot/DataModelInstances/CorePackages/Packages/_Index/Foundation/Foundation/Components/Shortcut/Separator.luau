@@ -8,7 +8,7 @@ local config = {
 	[ShortcutSeparatorModule.More] = "…"
 }
 
-return function(Frame) --[[ Line: 27 | Named "Separator" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), TextModule (copy), config (copy)
 	return ReactModule.createElement(TextModule, {
 		Text = config[Frame.separator],

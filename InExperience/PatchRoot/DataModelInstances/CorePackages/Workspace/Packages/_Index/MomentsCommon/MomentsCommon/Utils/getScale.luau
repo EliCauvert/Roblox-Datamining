@@ -1,4 +1,4 @@
-﻿return function(Vector, Vector1, ScaleType) --[[ Line: 3 | Named "getScale" ]]
+﻿return function(Vector, Vector1, ScaleType)
 	if Vector.X == 0 or Vector.Y == 0 or Vector1.X == 0 or Vector1.Y == 0 then
 		return 1
 	else

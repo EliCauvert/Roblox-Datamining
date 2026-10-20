@@ -1,3 +1,3 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator("RemoveScreen", function(Item) --[[ Line: 4 ]]
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator("RemoveScreen", function(Item)
 	return { item = Item }
 end)

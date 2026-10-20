@@ -26,19 +26,19 @@ local FFlagLuaAppDemoModePlayButtonTelemetry = require(Parent.SharedFlags).FFlag
 local FFlagLuaAppPlaytestTrustedFriendsRefetchPlayability = require(Parent.SharedFlags).FFlagLuaAppPlaytestTrustedFriendsRefetchPlayability
 local Type = PlaytestUnlockUpsellModule.Type
 
-return function(p1, UniverseId, Callback, p2, PageName, p3) --[[ Line: 38 ]]
+return function(p1, UniverseId, Callback, p2, PageName, p3)
 	-- upvalues: UseRoactServiceFunction (copy), RoactNetworking (copy), AppEventIngestService (copy), UseDispatchFunction (copy), UseStoreFunction (copy), UseUpdatePlaytestSettingsUpsellModule (copy), ReactModule (copy), FetchGamePlayButtonDataModule (copy), UseTrustedFriendsPlaytestUpsellModule (copy), FFlagLuaAppPlaytestTrustedFriendsRefetchPlayability (copy), UnlockPlayIntentFunction (copy), InvalidPlayIntentFunction (copy), PlayButtonStatesModule (copy), OpenAmpWizardContainerFunction (copy), FStringLuaAppPlayButtonAgeCheckAmpFeatureName (copy), FStringLuaAppPlayButtonAgeCheckAmpNameSpace (copy), FFlagLuaAppPlayButtonWizardCloseDelay (copy), DelayedAmpWizardCompletionCallbackOverrideModule (copy), FIntLuaAppPlayButtonWizardCloseDelayMs (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy), PlaytestUnlockUpsellModule (copy), Type (copy), ApiFetchPlayabilityStatus (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(AppEventIngestService)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseStoreResult = UseStoreFunction()
 	local UseUpdatePlaytestSettingsUpsellModuleResult = UseUpdatePlaytestSettingsUpsellModule()
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 52 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseDispatchResult (copy), FetchGamePlayButtonDataModule (upval), UseRoactServiceResult (copy), UniverseId (copy)
 		UseDispatchResult(FetchGamePlayButtonDataModule.Fetch(UseRoactServiceResult, UniverseId, true))
 	end, { UseDispatchResult, UseRoactServiceResult, UniverseId })
 	local UseTrustedFriendsPlaytestUpsellModuleResult = UseTrustedFriendsPlaytestUpsellModule(p3, if FFlagLuaAppPlaytestTrustedFriendsRefetchPlayability then UseResult else nil)
-	local UseResult1 = ReactModule.useCallback(function(UpsellName, PlayabilityStatus) --[[ Line: 62 ]]
+	local UseResult1 = ReactModule.useCallback(function(UpsellName, PlayabilityStatus)
 		-- upvalues: UnlockPlayIntentFunction (upval), UseRoactServiceResult1 (copy), UniverseId (copy), PageName (copy)
 		UnlockPlayIntentFunction(UseRoactServiceResult1, {
 			universeId = UniverseId,
@@ -47,7 +47,7 @@ return function(p1, UniverseId, Callback, p2, PageName, p3) --[[ Line: 38 ]]
 			pageName = PageName
 		})
 	end, { UseRoactServiceResult1, UniverseId, PageName })
-	local UseResult2 = ReactModule.useCallback(function(p4) --[[ Line: 77 ]]
+	local UseResult2 = ReactModule.useCallback(function(p4)
 		-- upvalues: InvalidPlayIntentFunction (upval), p2 (copy), UniverseId (copy), PlayButtonStatesModule (upval)
 		InvalidPlayIntentFunction(p2, {
 			universeId = UniverseId,
@@ -55,20 +55,20 @@ return function(p1, UniverseId, Callback, p2, PageName, p3) --[[ Line: 38 ]]
 			playabilityStatus = p4 or "None"
 		})
 	end, { p2, UniverseId })
-	local UseResult3 = ReactModule.useCallback(function(p4) --[[ Line: 89 ]]
+	local UseResult3 = ReactModule.useCallback(function(p4)
 		-- upvalues: UseDispatchResult (copy), OpenAmpWizardContainerFunction (upval), FStringLuaAppPlayButtonAgeCheckAmpFeatureName (upval), UseResult (copy), PageName (copy), FStringLuaAppPlayButtonAgeCheckAmpNameSpace (upval), FFlagLuaAppPlayButtonWizardCloseDelay (upval), DelayedAmpWizardCompletionCallbackOverrideModule (upval), FIntLuaAppPlayButtonWizardCloseDelayMs (upval), UseResult1 (copy)
 		UseDispatchResult(OpenAmpWizardContainerFunction(FStringLuaAppPlayButtonAgeCheckAmpFeatureName, UseResult, nil, if PageName then `gameJoinAgeCheckRequired-{PageName}` else "gameJoinAgeCheckRequired", nil, FStringLuaAppPlayButtonAgeCheckAmpNameSpace, nil, nil, if FFlagLuaAppPlayButtonWizardCloseDelay then DelayedAmpWizardCompletionCallbackOverrideModule(UseResult, FIntLuaAppPlayButtonWizardCloseDelayMs) else nil))
 		UseResult1("AgeCheckRequired", p4)
 	end, { UseDispatchResult, UseResult, PageName, UseResult1 })
 	
-	return (ReactModule.useCallback(function(p4, p5) --[[ Line: 120 ]]
+	return (ReactModule.useCallback(function(p4, p5)
 		-- upvalues: Callback (copy), FFlagLuaAppDemoModePlayButtonTelemetry (upval), UseResult2 (copy), PlaytestUnlockUpsellModule (upval), Type (upval), UseResult3 (copy), UseUpdatePlaytestSettingsUpsellModuleResult (copy), UseResult1 (copy), UseTrustedFriendsPlaytestUpsellModuleResult (copy), UseDispatchResult (copy), ApiFetchPlayabilityStatus (upval), UseRoactServiceResult (copy), UniverseId (copy), UseStoreResult (copy), p1 (copy)
-		local function _() --[[ Line: 121 | Named "launchPrivatePlaytest" ]]
+		local function _()
 			-- upvalues: Callback (upval), p4 (copy), FFlagLuaAppDemoModePlayButtonTelemetry (upval), p5 (copy)
 			Callback(p4, if FFlagLuaAppDemoModePlayButtonTelemetry then p5 else nil)
 		end
 		
-		local function handlePrivatePlaytestInfo(PrivatePlaytestInfo) --[[ Line: 128 ]]
+		local function handlePrivatePlaytestInfo(PrivatePlaytestInfo)
 			-- upvalues: UseResult2 (upval), Callback (upval), p4 (copy), FFlagLuaAppDemoModePlayButtonTelemetry (upval), p5 (copy), PlaytestUnlockUpsellModule (upval), Type (upval), UseResult3 (upval), UseUpdatePlaytestSettingsUpsellModuleResult (upval), UseResult1 (upval), UseTrustedFriendsPlaytestUpsellModuleResult (upval)
 			if PrivatePlaytestInfo == nil then
 				UseResult2(nil)
@@ -104,11 +104,11 @@ return function(p1, UniverseId, Callback, p2, PageName, p3) --[[ Line: 38 ]]
 			end
 		end
 		
-		UseDispatchResult(ApiFetchPlayabilityStatus.Fetch(UseRoactServiceResult, { UniverseId })):andThen(function() --[[ Line: 155 ]]
+		UseDispatchResult(ApiFetchPlayabilityStatus.Fetch(UseRoactServiceResult, { UniverseId })):andThen(function()
 			-- upvalues: UseStoreResult (upval), UniverseId (upval), handlePrivatePlaytestInfo (copy)
 			local PlayabilityStatusEntry = UseStoreResult:getState().PlayabilityStatus[UniverseId]
 			handlePrivatePlaytestInfo(PlayabilityStatusEntry and PlayabilityStatusEntry.privatePlaytestInfo or nil)
-		end):catch(function() --[[ Line: 161 ]]
+		end):catch(function()
 			-- upvalues: handlePrivatePlaytestInfo (copy), p1 (upval)
 			handlePrivatePlaytestInfo(p1 and p1.privatePlaytestInfo or nil)
 		end)

@@ -8,10 +8,10 @@ local NavPaginationLayoutModule = require(script.Parent.Nav.NavPaginationLayout)
 local PaginationSlotsUtilsModule = require(script.Parent.paginationSlotsUtils)
 local UsePaginationSelectionChainModule = require(script.Parent.usePaginationSelectionChain)
 
-local function useNavCallbacks(Gui, p1) --[[ Line: 60 ]]
+local function useNavCallbacks(Gui, p1)
 	-- upvalues: ReactModule (copy), PaginationDirectionModule (copy)
 	return {
-		onDirectionActivated = ReactModule.useCallback(function(Backward) --[[ Line: 64 ]]
+		onDirectionActivated = ReactModule.useCallback(function(Backward)
 			-- upvalues: PaginationDirectionModule (upval), Gui (copy)
 			if Backward == PaginationDirectionModule.First then
 				Gui.onActivated(1)
@@ -36,7 +36,7 @@ local function useNavCallbacks(Gui, p1) --[[ Line: 60 ]]
 	}
 end
 
-local function _(p1, p2, Ref) --[[ Line: 85 | Named "mergeNavPaginationLayoutProps" ]]
+local function _(p1, p2, Ref)
 	-- upvalues: WithCommonPropsModule (copy)
 	local WithCommonPropsModuleResult = WithCommonPropsModule(p1, p2)
 	WithCommonPropsModuleResult.ref = Ref
@@ -44,10 +44,10 @@ local function _(p1, p2, Ref) --[[ Line: 85 | Named "mergeNavPaginationLayoutPro
 	return WithCommonPropsModuleResult
 end
 
-return function(Gui, p1, p2) --[[ Line: 95 | Named "usePaginationNav" ]]
+return function(Gui, p1, p2)
 	-- upvalues: ReactModule (copy), PaginationSlotsUtilsModule (copy), UsePaginationSelectionChainModule (copy), useNavCallbacks (copy), NavPaginationLayoutModule (copy), WithCommonPropsModule (copy)
 	local DisabledState = p1.disabledState
-	local UsePaginationSelectionChainModuleResult = UsePaginationSelectionChainModule(ReactModule.useMemo(function() --[[ Line: 103 ]]
+	local UsePaginationSelectionChainModuleResult = UsePaginationSelectionChainModule(ReactModule.useMemo(function()
 		-- upvalues: PaginationSlotsUtilsModule (upval), p1 (copy), DisabledState (copy)
 		return PaginationSlotsUtilsModule.getPaginationSelectableSlotOrder({
 			hasFirstLastButtons = p1.hasFirstLastButtons,
@@ -73,7 +73,7 @@ return function(Gui, p1, p2) --[[ Line: 95 | Named "usePaginationNav" ]]
 	
 	return {
 		selection = UsePaginationSelectionChainModuleResult,
-		createLayout = ReactModule.useCallback(function(PageContent, Ref) --[[ Line: 136 ]]
+		createLayout = ReactModule.useCallback(function(PageContent, Ref)
 			-- upvalues: ReactModule (upval), NavPaginationLayoutModule (upval), Gui (copy), DisabledState (copy), UseNavCallbacksResult (copy), UsePaginationSelectionChainModuleResult (copy), p1 (copy), WithCommonPropsModule (upval)
 			local CreateElementFunction = ReactModule.createElement
 			local WithCommonPropsModuleResult = WithCommonPropsModule(Gui, {

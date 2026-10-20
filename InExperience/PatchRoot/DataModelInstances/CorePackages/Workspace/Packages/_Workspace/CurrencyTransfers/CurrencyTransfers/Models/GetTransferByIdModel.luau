@@ -3,7 +3,7 @@ local _ = require(CurrencyTransfers.types)
 local TModule = require(CurrencyTransfers.Parent.t)
 local GetTransferByIdModelModule = {}
 
-function GetTransferByIdModelModule.new(p1) --[[ Line: 14 ]]
+function GetTransferByIdModelModule.new(p1)
 	-- upvalues: GetTransferByIdModelModule (copy)
 	assert(GetTransferByIdModelModule.isValid(p1))
 	GetTransferByIdModelModule.__index = GetTransferByIdModelModule
@@ -12,7 +12,7 @@ function GetTransferByIdModelModule.new(p1) --[[ Line: 14 ]]
 	return p1
 end
 
-function GetTransferByIdModelModule.mock(p1) --[[ Line: 26 ]]
+function GetTransferByIdModelModule.mock(p1)
 	-- upvalues: CurrencyTransfers (copy), GetTransferByIdModelModule (copy)
 	local TransferStatusModule = require(CurrencyTransfers.Enums.TransferStatus)
 	
@@ -39,7 +39,7 @@ function GetTransferByIdModelModule.mock(p1) --[[ Line: 26 ]]
 	}))
 end
 
-local function formatRobuxTransfer(Transfer) --[[ Line: 56 ]]
+local function formatRobuxTransfer(Transfer)
 	-- upvalues: CurrencyTransfers (copy)
 	local TransferStatusModule = require(CurrencyTransfers.Enums.TransferStatus)
 	local Sender = Transfer.sender
@@ -66,7 +66,7 @@ local function formatRobuxTransfer(Transfer) --[[ Line: 56 ]]
 	}
 end
 
-function GetTransferByIdModelModule.format(p1) --[[ Line: 81 ]]
+function GetTransferByIdModelModule.format(p1)
 	-- upvalues: GetTransferByIdModelModule (copy), formatRobuxTransfer (copy)
 	local Transfer = p1.transfer
 	

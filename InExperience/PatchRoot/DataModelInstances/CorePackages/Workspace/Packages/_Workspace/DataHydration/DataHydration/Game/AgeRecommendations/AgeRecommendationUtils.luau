@@ -17,7 +17,7 @@ if require(Parent.SharedFlags).FFlagLuaAppAddIgrsImages then
 	end
 end
 return {
-	getIgrsImage = function(p1) --[[ Line: 31 ]]
+	getIgrsImage = function(p1)
 		-- upvalues: config (copy), DiscoveryEventErrorLogger (copy)
 		if config[p1] then
 			return config[p1]

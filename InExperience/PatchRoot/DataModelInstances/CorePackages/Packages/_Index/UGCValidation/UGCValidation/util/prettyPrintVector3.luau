@@ -1,6 +1,6 @@
 ﻿local t = {}
 
-return function(Vector, p1): string --[[ Line: 7 | Named "prettyPrintVector3" ]]
+return function(Vector, p1): string
 	-- upvalues: t (copy)
 	local P1 = p1 or 2
 	

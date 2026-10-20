@@ -15,7 +15,7 @@ local config = {
 	readiness = ViewRecyclerModule.RecyclableViewReadiness.ReadyOnCommit
 }
 local Frozen = table.freeze({
-	comment = ViewRecyclerModule.createRecyclableView(function(p1) --[[ Line: 40 | Named "CommentItemView" ]]
+	comment = ViewRecyclerModule.createRecyclableView(function(p1)
 		-- upvalues: SignalsReactModule (copy), UseCommentsListRowFunction (copy), ReactModule (copy), FoundationModule (copy), CommentRowContainerModule (copy)
 		local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
 		local UseCommentsListRowResult = UseCommentsListRowFunction()
@@ -42,7 +42,7 @@ local Frozen = table.freeze({
 			})
 		}) else nil
 	end, config),
-	pending = ViewRecyclerModule.createRecyclableView(function(p1) --[[ Line: 71 | Named "PendingItemView" ]]
+	pending = ViewRecyclerModule.createRecyclableView(function(p1)
 		-- upvalues: SignalsReactModule (copy), UseCommentsListRowFunction (copy), ReactModule (copy), FoundationModule (copy), PendingCommentRowViewModule (copy)
 		local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
 		local UseCommentsListRowResult = UseCommentsListRowFunction()
@@ -65,7 +65,7 @@ local Frozen = table.freeze({
 			return nil
 		end
 	end, config),
-	loadMore = ViewRecyclerModule.createRecyclableView(function(p1) --[[ Line: 93 | Named "LoadMoreItemView" ]]
+	loadMore = ViewRecyclerModule.createRecyclableView(function(p1)
 		-- upvalues: SignalsReactModule (copy), UseCommentsListRowFunction (copy), ReactModule (copy), FoundationModule (copy), CommentsListFooterViewModule (copy)
 		local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
 		local UseCommentsListRowResult = UseCommentsListRowFunction()
@@ -77,7 +77,7 @@ local Frozen = table.freeze({
 			})
 		}) else nil
 	end),
-	readOnlyNotice = ViewRecyclerModule.createRecyclableView(function(_) --[[ Line: 109 | Named "ReadOnlyNoticeItemView" ]]
+	readOnlyNotice = ViewRecyclerModule.createRecyclableView(function(_)
 		-- upvalues: ReactModule (copy), FoundationModule (copy), CommentsReadOnlyNoticeViewModule (copy)
 		return ReactModule.createElement(FoundationModule.View, { tag = "size-full-0 auto-y padding-x-large" }, {
 			Notice = ReactModule.createElement(CommentsReadOnlyNoticeViewModule)
@@ -85,7 +85,7 @@ local Frozen = table.freeze({
 	end)
 })
 
-local function getItemType(p1, _) --[[ Line: 124 ]]
+local function getItemType(p1, _)
 	-- upvalues: Frozen (copy)
 	local FrozenEntry = Frozen[p1.type]
 	assert(FrozenEntry ~= nil, `CommentsListItems: unknown item type "{tostring(p4.type)}"`)
@@ -93,7 +93,7 @@ local function getItemType(p1, _) --[[ Line: 124 ]]
 	return FrozenEntry
 end
 
-local function getItemKey(p1, _) --[[ Line: 130 ]]
+local function getItemKey(p1, _)
 	return p1.key
 end
 
@@ -104,7 +104,7 @@ table.freeze(config1)
 return table.freeze({
 	getItemType = getItemType,
 	getItemKey = getItemKey,
-	loadMore = function(Status) --[[ Line: 142 ]]
+	loadMore = function(Status)
 		-- upvalues: t (copy)
 		local Entry = t[Status]
 		
@@ -122,7 +122,7 @@ return table.freeze({
 			return Entry
 		end
 	end,
-	readOnlyNotice = function() --[[ Line: 157 ]]
+	readOnlyNotice = function()
 		-- upvalues: config1 (copy)
 		return config1
 	end

@@ -4,9 +4,9 @@ local ClientDataModelCollectorModule = require(BuildExperience.Chat.clientDataMo
 local InGameBuildShellModule = require(script.Parent.InGameBuildShell)
 local InstanceSelectionProtocolModule = require(script.Parent.InstanceSelectionProtocol)
 
-local function noop() --[[ Line: 15 ]] end
+local function noop() end
 
-local function _(p1) --[[ Line: 17 | Named "finishWithInstance" ]]
+local function _(p1)
 	-- upvalues: InstanceSelectionProtocolModule (copy), ClientDataModelCollectorModule (copy)
 	InstanceSelectionProtocolModule.finishSelection({
 		status = "selected",
@@ -16,17 +16,17 @@ local function _(p1) --[[ Line: 17 | Named "finishWithInstance" ]]
 	})
 end
 
-local function cancelSelection() --[[ Line: 26 ]]
+local function cancelSelection()
 	-- upvalues: InstanceSelectionProtocolModule (copy)
 	InstanceSelectionProtocolModule.finishSelection({ status = "cancelled" })
 end
 
-return function(p1) --[[ Line: 30 | Named "InstanceSelectionShell" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), InstanceSelectionProtocolModule (copy), ClientDataModelCollectorModule (copy), InGameBuildShellModule (copy), noop (copy), cancelSelection (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-	ReactModule.useEffect(function() --[[ Line: 33 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult2 (copy), InstanceSelectionProtocolModule (upval), ClientDataModelCollectorModule (upval)
-		local ItemSelectedConnection = p1.itemSelected:Connect(function(p2) --[[ Line: 34 ]]
+		local ItemSelectedConnection = p1.itemSelected:Connect(function(p2)
 			-- upvalues: p1 (upval), UseStateResult2 (upval), InstanceSelectionProtocolModule (upval), ClientDataModelCollectorModule (upval)
 			if p1.isTouchInput() then
 				UseStateResult2(p2)
@@ -43,7 +43,7 @@ return function(p1) --[[ Line: 30 | Named "InstanceSelectionShell" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 42 ]]
+		return function()
 			-- upvalues: ItemSelectedConnection (copy)
 			ItemSelectedConnection:Disconnect()
 		end
@@ -53,7 +53,7 @@ return function(p1) --[[ Line: 30 | Named "InstanceSelectionShell" ]]
 		isSelecting = true,
 		onActivated = noop,
 		onSelectionCancelled = cancelSelection,
-		onSelectionConfirmed = if UseStateResult == nil then nil else function() --[[ Line: 52 ]]
+		onSelectionConfirmed = if UseStateResult == nil then nil else function()
 			-- upvalues: UseStateResult (copy), InstanceSelectionProtocolModule (upval), ClientDataModelCollectorModule (upval)
 			InstanceSelectionProtocolModule.finishSelection({
 				status = "selected",

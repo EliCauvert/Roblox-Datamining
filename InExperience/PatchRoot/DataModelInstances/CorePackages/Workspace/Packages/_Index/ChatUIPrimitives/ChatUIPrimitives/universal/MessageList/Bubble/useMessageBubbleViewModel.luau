@@ -11,18 +11,18 @@ local UseMessageRowContentsModule = require(script.Parent.Parent.useMessageRowCo
 local GetBubbleCornerRadiiModule = require(script.Parent.getBubbleCornerRadii)
 local _ = require(script.Parent.Types)
 
-local function _(p1): string --[[ Line: 37 | Named "renderKeyOf" ]]
+local function _(p1): string
 	local Author = p1.message.author
 	
 	return `{p1.groupPosition.isFirst}|{p1.groupPosition.isLast}|{if Author == nil then "" else Author.userId}|{if p1.message.deliveryState == nil then "" else p1.message.deliveryState}`
 end
 
-return function(Callback) --[[ Line: 44 | Named "useMessageBubbleViewModel" ]]
+return function(Callback)
 	-- upvalues: ObservingUserContextModule (copy), FoundationModule (copy), UseMessageRowContentsModule (copy), ReactModule (copy), SignalsModule (copy), SignalsReactModule (copy), IsObservingAuthorModule (copy), GetBubbleCornerRadiiModule (copy)
 	local UseObservingUserIdResult = ObservingUserContextModule.useObservingUserId()
 	local Size500 = FoundationModule.Hooks.useTokens().Size.Size_500
 	local UseMessageRowContentsModuleResult = UseMessageRowContentsModule(Callback)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 56 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Callback (copy), IsObservingAuthorModule (upval), UseObservingUserIdResult (copy), GetBubbleCornerRadiiModule (upval), Size500 (copy)
 		local CallbackResult = Callback(false)
 		local IsObservingAuthorModule1 = IsObservingAuthorModule(CallbackResult.message.author, UseObservingUserIdResult)
@@ -40,9 +40,9 @@ return function(Callback) --[[ Line: 44 | Named "useMessageBubbleViewModel" ]]
 		}
 	end, {
 		Callback,
-		SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 49 ]]
+		SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 			-- upvalues: SignalsModule (upval), Callback (copy)
-			return SignalsModule.createComputed(function(p2): string --[[ Line: 50 ]]
+			return SignalsModule.createComputed(function(p2): string
 				-- upvalues: Callback (upval)
 				local CallbackResult = Callback(p2)
 				local Author = CallbackResult.message.author

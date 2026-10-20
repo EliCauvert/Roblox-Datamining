@@ -7,7 +7,7 @@ local Localization = require(Parent1.RobloxAppLocales).Localization
 local LocaleProvider = RoactModule.Component:extend("LocaleProvider")
 LocaleProvider.validateProps = TModule.interface({ locale = TModule.string })
 
-function LocaleProvider.render(p1) --[[ Line: 19 ]]
+function LocaleProvider.render(p1)
 	-- upvalues: Localization (copy), RoactModule (copy), LocaleRoactContextModule (copy)
 	return RoactModule.createElement(LocaleRoactContextModule.Provider, { value = Localization.new(p1.props.locale) }, p1.props[RoactModule.Children])
 end

@@ -3,7 +3,7 @@ local SignalsModule = require(ExpChat.Parent.Signals)
 local CreateSignalFunction = SignalsModule.createSignal
 local FFlagExpChatWindowStatusEventFixesModule = require(ExpChat.Flags.FFlagExpChatWindowStatusEventFixes)
 
-return function() --[[ Line: 41 ]]
+return function()
 	-- upvalues: CreateSignalFunction (copy), SignalsModule (copy), FFlagExpChatWindowStatusEventFixesModule (copy)
 	local Signal, Signal2 = CreateSignalFunction(0)
 	local Signal1, Signal2_1 = CreateSignalFunction(0)
@@ -24,18 +24,18 @@ return function() --[[ Line: 41 ]]
 	})
 	local v5 = nil
 	
-	local function _(p1) --[[ Line: 65 | Named "getStateStartTime" ]]
+	local function _(p1)
 		-- upvalues: Signal3 (copy), Signal4 (copy), Signal1 (copy), Signal (copy)
 		return if p1 == "open" then Signal3(false) elseif p1 == "closed" then Signal4(false) elseif p1 == "textIdle" then Signal1(false) elseif p1 == "backgroundIdle" then Signal(false) else 0
 	end
 	
-	local _ = function(p1, p2) --[[ Line: 78 | Named "addDurationDelta" ]]
+	local _ = function(p1, p2)
 		-- upvalues: Signal3 (copy), Signal4 (copy), Signal1 (copy), Signal (copy), Signal2_5 (copy)
 		if p1 == "unknown" then return end
 		local v6 = p2 - (if p1 == "open" then Signal3(false) elseif p1 == "closed" then Signal4(false) elseif p1 == "textIdle" then Signal1(false) elseif p1 == "backgroundIdle" then Signal(false) else 0)
 		
 		if v6 > 0 then
-			Signal2_5(function(p3) --[[ Line: 88 ]]
+			Signal2_5(function(p3)
 				-- upvalues: p1 (copy), v6 (copy)
 				return if p1 == "open" then {
 					openDuration = p3.openDuration + v6,
@@ -81,7 +81,7 @@ return function() --[[ Line: 41 ]]
 		setCurrentChatWindowState = Unknown2,
 		setPreviousChatWindowState = Unknown2_1,
 		setDurationUpdates = Signal2_5,
-		flushFinalDuration = function(p1) --[[ Line: 181 ]]
+		flushFinalDuration = function(p1)
 			-- upvalues: v5 (ref), Unknown (copy), Signal6 (copy), Signal3 (copy), Signal4 (copy), Signal1 (copy), Signal (copy), Signal2_5 (copy)
 			if v5 then
 				return v5, false
@@ -97,7 +97,7 @@ return function() --[[ Line: 41 ]]
 				local PDelta = P7 - (if UnknownResult == "open" then Signal3(false) elseif UnknownResult == "closed" then Signal4(false) elseif UnknownResult == "textIdle" then Signal1(false) elseif UnknownResult == "backgroundIdle" then Signal(false) else 0)
 				
 				if PDelta > 0 then
-					Signal2_5(function(p2) --[[ Line: 88 ]]
+					Signal2_5(function(p2)
 						-- upvalues: UnknownResult (copy), PDelta (copy)
 						return if UnknownResult == "open" then {
 							openDuration = p2.openDuration + PDelta,
@@ -128,7 +128,7 @@ return function() --[[ Line: 41 ]]
 			
 			return SignalResult, true
 		end,
-		newStateEffect = SignalsModule.createEffect(function(p1) --[[ Line: 124 ]]
+		newStateEffect = SignalsModule.createEffect(function(p1)
 			-- upvalues: Signal (copy), Signal1 (copy), Signal3 (copy), Signal4 (copy), Unknown2_1 (copy), Unknown (copy), Unknown2 (copy), Signal2_4 (copy)
 			local SignalResult: number = Signal(p1)
 			local SignalResult1 = Signal1(p1)
@@ -163,7 +163,7 @@ return function() --[[ Line: 41 ]]
 				Unknown2("unknown")
 			end
 		end),
-		changingWindowStateEffect = SignalsModule.createEffect(function(p1) --[[ Line: 154 ]]
+		changingWindowStateEffect = SignalsModule.createEffect(function(p1)
 			-- upvalues: Unknown1 (copy), Signal5 (copy), FFlagExpChatWindowStatusEventFixesModule (upval), Signal3 (copy), Signal4 (copy), Signal1 (copy), Signal (copy), Signal2_5 (copy), v1 (ref), v2 (ref), v3 (ref), v4 (ref)
 			local UnknownResult = Unknown1(p1)
 			local SignalResult = Signal5(p1)
@@ -178,7 +178,7 @@ return function() --[[ Line: 41 ]]
 				elseif UnknownResult == "backgroundIdle" then
 					v4 = SignalResult - Signal(p1)
 				end
-				Signal2_5(function(p2) --[[ Line: 171 ]]
+				Signal2_5(function(p2)
 					-- upvalues: v1 (upval), v2 (upval), v3 (upval), v4 (upval)
 					return {
 						openDuration = p2.openDuration + v1,
@@ -193,7 +193,7 @@ return function() --[[ Line: 41 ]]
 			local SignalResultDelta = SignalResult - (if UnknownResult == "open" then Signal3(false) elseif UnknownResult == "closed" then Signal4(false) elseif UnknownResult == "textIdle" then Signal1(false) elseif UnknownResult == "backgroundIdle" then Signal(false) else 0)
 			
 			if SignalResultDelta > 0 then
-				Signal2_5(function(p2) --[[ Line: 88 ]]
+				Signal2_5(function(p2)
 					-- upvalues: UnknownResult (copy), SignalResultDelta (copy)
 					return if UnknownResult == "open" then {
 						openDuration = p2.openDuration + SignalResultDelta,

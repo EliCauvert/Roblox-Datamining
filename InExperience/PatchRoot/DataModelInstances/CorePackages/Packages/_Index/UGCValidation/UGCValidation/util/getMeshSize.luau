@@ -1,7 +1,7 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
 local _ = require(script.Parent.Parent.util.Types)
 
-return function(p1): Vector3 --[[ Line: 7 | Named "getMeshSize" ]]
+return function(p1): Vector3
 	-- upvalues: UGCValidationService (copy)
 	local EditableMeshVerts = UGCValidationService:GetEditableMeshVerts(p1.editableMesh)
 	local Smallest = 1e999

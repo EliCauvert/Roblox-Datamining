@@ -60,14 +60,14 @@ local config = {
 	[SettingsRoute.Contacts] = PermissionsProtocol.Permissions.CONTACTS_ACCESS
 }
 
-return function(p1) --[[ Line: 95 | Named "SettingsPermissionInteractiveAlert" ]]
+return function(p1)
 	-- upvalues: UseScreenSizeFunction (copy), UseDispatchFunction (copy), UseStyleFunction (copy), ReactModule (copy), AnalyticsFactory (copy), EventStream (copy), DefaultAnalyticsService (copy), FFlagQRInSearchScanner (copy), FFlagEnableRetryForLinkingProtocolFetch (copy), FIntLinkingProtocolFetchRetries (copy), Default (copy), FIntLinkingProtocolFetchTimeoutMS (copy), AppStorageService (copy), ProfileQrCodeCameraSettingsModalSeen (copy), MessageBusService (copy), RealtimeMessageId (copy), PermissionsProtocol (copy), config (copy), UseAppPolicyFunction (copy), FFlagPermissionAlertContentUpgradeModule (copy), UseLocalizationFunction (copy), SettingsRoute (copy), Images (copy), ButtonType (copy), StyledTextLabel (copy), Text (copy), ButtonVariant (copy), Dialog (copy), DialogSize (copy), View (copy), Text1 (copy), Orientation (copy), InteractiveAlert (copy)
 	local UseScreenSizeResult = UseScreenSizeFunction()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseStyleResult = UseStyleFunction()
 	local SettingsRoute1 = p1.settingsRoute or p1.navigation and p1.navigation.getParam("settingsRoute")
 	local Source = p1.source or p1.navigation and p1.navigation.getParam("source")
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 104 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), UseDispatchResult (copy)
 		return if p1.closeCentralOverlayThunk then UseDispatchResult(p1.closeCentralOverlayThunk()) else p1.navigation and p1.navigation.pop()
 	end, {
@@ -75,7 +75,7 @@ return function(p1) --[[ Line: 95 | Named "SettingsPermissionInteractiveAlert" ]
 		p1.closeCentralOverlayThunk,
 		p1.navigation
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 111 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: AnalyticsFactory (upval), EventStream (upval), DefaultAnalyticsService (upval), FFlagQRInSearchScanner (upval), Source (copy)
 		return AnalyticsFactory.setUpAnalyticsFactory({
 			eventLists = { EventStream = EventStream },
@@ -90,7 +90,7 @@ return function(p1) --[[ Line: 95 | Named "SettingsPermissionInteractiveAlert" ]
 	if SettingsAppAvailable == nil then
 		if FFlagEnableRetryForLinkingProtocolFetch then
 			for _ = 0, FIntLinkingProtocolFetchRetries do
-				local SpawnedThread = task.spawn(function() --[[ Line: 141 ]]
+				local SpawnedThread = task.spawn(function()
 					-- upvalues: v1 (ref), v2 (ref), Default (upval), SettingsRoute1 (copy)
 					v1, v44 = Default:supportsSwitchToSettingsApp(SettingsRoute1):await()
 				end)
@@ -104,7 +104,7 @@ return function(p1) --[[ Line: 95 | Named "SettingsPermissionInteractiveAlert" ]
 		end
 		SettingsAppAvailable = v1 and v2
 	end
-	ReactModule.useEffect(function() --[[ Line: 158 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy), SettingsRoute1 (copy), SettingsAppAvailable (ref), AppStorageService (upval), ProfileQrCodeCameraSettingsModalSeen (upval), MessageBusService (upval), RealtimeMessageId (upval), PermissionsProtocol (upval), config (upval), UseResult (copy)
 		UseMemoResult.fireAnalyticsEvent("SettingsPermissionInteractiveAlertImpression", {
 			settingsRoute = SettingsRoute1,
@@ -112,9 +112,9 @@ return function(p1) --[[ Line: 95 | Named "SettingsPermissionInteractiveAlert" ]
 		})
 		AppStorageService:SetItem(ProfileQrCodeCameraSettingsModalSeen, "true")
 		AppStorageService:Flush()
-		local SubscribeResult = MessageBusService:Subscribe(RealtimeMessageId, function() --[[ Line: 167 ]]
+		local SubscribeResult = MessageBusService:Subscribe(RealtimeMessageId, function()
 			-- upvalues: PermissionsProtocol (upval), config (upval), SettingsRoute1 (upval), UseResult (upval)
-			PermissionsProtocol.default:hasPermissions({ config[SettingsRoute1] }):andThen(function(Result) --[[ Line: 172 ]]
+			PermissionsProtocol.default:hasPermissions({ config[SettingsRoute1] }):andThen(function(Result)
 				-- upvalues: PermissionsProtocol (upval), UseResult (upval)
 				if Result and Result.status == PermissionsProtocol.Status.AUTHORIZED then
 					UseResult()
@@ -122,12 +122,12 @@ return function(p1) --[[ Line: 95 | Named "SettingsPermissionInteractiveAlert" ]
 			end)
 		end, false, true)
 		
-		return function() --[[ Line: 179 ]]
+		return function()
 			-- upvalues: SubscribeResult (copy)
 			SubscribeResult:Disconnect()
 		end
 	end, {})
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 184 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2)
 		return p2.getShouldShowSettingsPermissionsAdditionalInstructions()
 	end)
 	local SettingsAppAvailable1 = FFlagPermissionAlertContentUpgradeModule and SettingsAppAvailable
@@ -167,7 +167,7 @@ return function(p1) --[[ Line: 95 | Named "SettingsPermissionInteractiveAlert" ]
 		}
 	}
 	local Text2 = "<b>" .. config4[SettingsRoute1][if SettingsAppAvailable then "deepLinkSupported" else "deepLinkNotSupported"] .. "</b>"
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 248 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseMemoResult (copy), SettingsRoute1 (copy), UseResult (copy)
 		UseMemoResult.fireAnalyticsEvent("SettingsPermissionInteractiveAlertButtonClick", { btn = "notNow", settingsRoute = SettingsRoute1 })
 		
@@ -180,7 +180,7 @@ return function(p1) --[[ Line: 95 | Named "SettingsPermissionInteractiveAlert" ]
 			text = UseLocalizationResult.notNow
 		}
 	}
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 263 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseMemoResult (copy), SettingsRoute1 (copy), UseResult (copy)
 		UseMemoResult.fireAnalyticsEvent("SettingsPermissionInteractiveAlertButtonClick", { btn = "ok", settingsRoute = SettingsRoute1 })
 		
@@ -193,7 +193,7 @@ return function(p1) --[[ Line: 95 | Named "SettingsPermissionInteractiveAlert" ]
 			text = UseLocalizationResult.ok
 		}
 	}
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 278 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseMemoResult (copy), SettingsRoute1 (copy), Default (upval)
 		UseMemoResult.fireAnalyticsEvent("SettingsPermissionInteractiveAlertButtonClick", { btn = "openSettings", settingsRoute = SettingsRoute1 })
 		
@@ -209,7 +209,7 @@ return function(p1) --[[ Line: 95 | Named "SettingsPermissionInteractiveAlert" ]
 	local ButtonStackInfo = {
 		buttons = if SettingsAppAvailable then { config5, config7 } else { config6 }
 	}
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 298 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: ReactModule (upval), StyledTextLabel (upval), UseStyleResult (copy), config3 (copy), SettingsRoute1 (copy), UseAppPolicyResult (copy), Text (upval), Text2 (copy)
 		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,

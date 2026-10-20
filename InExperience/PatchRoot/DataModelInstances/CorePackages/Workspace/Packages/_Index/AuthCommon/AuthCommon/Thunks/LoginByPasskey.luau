@@ -12,11 +12,11 @@ local FFlagEnableRecordLogin = require(Parent.SharedFlags).FFlagEnableRecordLogi
 local Logger = require(Parent.Loggers).Logger
 local RecordLoginModule = require(AuthCommon.Utils.recordLogin)
 
-return function(p1, p2, p3) --[[ Line: 19 | Named "loginByPasskey" ]]
+return function(p1, p2, p3)
 	-- upvalues: LoginRequestsModule (copy), LoginResultModule (copy), FFlagEnableLastLoginMethodTracking (copy), AppStorageUtilitiesModule (copy), LoginMethodsModule (copy), FFlagEnableRecordLogin (copy), RecordLoginModule (copy), Logger (copy), HttpService (copy), LoginErrorCodesModule (copy), PromiseModule (copy)
-	return function(_) --[[ Line: 20 ]]
+	return function(_)
 		-- upvalues: LoginRequestsModule (upval), p1 (copy), p2 (copy), p3 (copy), LoginResultModule (upval), FFlagEnableLastLoginMethodTracking (upval), AppStorageUtilitiesModule (upval), LoginMethodsModule (upval), FFlagEnableRecordLogin (upval), RecordLoginModule (upval), Logger (upval), HttpService (upval), LoginErrorCodesModule (upval), PromiseModule (upval)
-		return LoginRequestsModule.logByPasskey(p1, p2, p3):andThen(function(Entry) --[[ Line: 21 ]]
+		return LoginRequestsModule.logByPasskey(p1, p2, p3):andThen(function(Entry)
 			-- upvalues: LoginResultModule (upval), FFlagEnableLastLoginMethodTracking (upval), AppStorageUtilitiesModule (upval), LoginMethodsModule (upval), FFlagEnableRecordLogin (upval), RecordLoginModule (upval)
 			assert(Entry, "no login attempt result")
 			assert(#Entry == 1, "no result or more than one result")
@@ -27,13 +27,13 @@ return function(p1, p2, p3) --[[ Line: 19 | Named "loginByPasskey" ]]
 				AppStorageUtilitiesModule.setLastSuccessfulSignInMethod(LoginMethodsModule.Passkey)
 			end
 			if FFlagEnableRecordLogin then
-				pcall(function() --[[ Line: 30 ]]
+				pcall(function()
 					-- upvalues: RecordLoginModule (upval), FromJsonDataResult (copy), LoginMethodsModule (upval)
 					RecordLoginModule(FromJsonDataResult, LoginMethodsModule.Passkey, FromJsonDataResult.user.name)
 				end)
 			end
 			return FromJsonDataResult
-		end, function(p4) --[[ Line: 36 ]]
+		end, function(p4)
 			-- upvalues: Logger (upval), HttpService (upval), LoginErrorCodesModule (upval), PromiseModule (upval)
 			Logger:error("Error logging in by passkey. Error: {}", p4.Body)
 			local Data = HttpService:JSONDecode(p4.Body)

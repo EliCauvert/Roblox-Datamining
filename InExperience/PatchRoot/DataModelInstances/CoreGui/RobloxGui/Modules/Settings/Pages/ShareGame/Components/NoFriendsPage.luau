@@ -9,12 +9,12 @@ local ThemeModule = require(RobloxGui.Modules.Settings.Theme)
 local Translator = require(ShareGame.getTranslator)()
 local NoFriendsPage = RoactModule.PureComponent:extend("NoFriendsPage")
 
-function NoFriendsPage.render(p1) --[[ Line: 23 ]]
+function NoFriendsPage.render(p1)
 	-- upvalues: RoactModule (copy), ImagePath (copy), FriendsFrame (copy), Translator (copy), ConstantsModule (copy), ThemeModule (copy)
 	local ZIndex = p1.props.ZIndex
 	local LayoutOrder = 0
 	
-	local function _(): number --[[ Line: 29 | Named "incrementLayoutOrder" ]]
+	local function _(): number
 		-- upvalues: LayoutOrder (ref)
 		LayoutOrder += 1
 		

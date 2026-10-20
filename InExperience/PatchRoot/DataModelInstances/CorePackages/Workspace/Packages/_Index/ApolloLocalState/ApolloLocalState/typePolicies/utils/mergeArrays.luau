@@ -1,6 +1,6 @@
 ﻿local Array = require(script:FindFirstAncestor("ApolloLocalState").Parent.LuauPolyfill).Array
 
-return function(_, p1, p2) --[[ Line: 6 | Named "mergeArrays" ]]
+return function(_, p1, p2)
 	-- upvalues: Array (copy)
 	local Tbl = p1 or {}
 	local P2 = p2 or {}

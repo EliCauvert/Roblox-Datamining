@@ -12,7 +12,7 @@ local config = {
 	preset = WithMessageContentModule(require(script.Parent.Parent.Parent.ContentKinds.Preset.PresetInline), require(script.Parent.Parent.Parent.ContentKinds.Preset.PresetContentModel).getDetail)
 }
 
-return function(p1) --[[ Line: 30 | Named "MessageInlineItem" ]]
+return function(p1)
 	-- upvalues: UseMessageInlineViewModelModule (copy), CreateNextOrderFunction (copy), config (copy), ReactModule (copy), IdentityInlineModule (copy), FoundationModule (copy)
 	local UseMessageInlineViewModelModuleResult = UseMessageInlineViewModelModule(p1.itemSignal)
 	local NextOrder = CreateNextOrderFunction()

@@ -3,7 +3,7 @@ local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return function(p1) --[[ Line: 14 | Named "PolicyContainer" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FoundationModule (copy)
 	return ReactModule.createElement(FoundationModule.Text, {
 		tag = "size-full-0 auto-y text-title-medium text-wrap text-align-x-center content-system-contrast",

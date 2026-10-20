@@ -1,11 +1,11 @@
 ﻿local CreateProfileInsightsStoreModule = require(script.Parent.createProfileInsightsStore)
-local Computed = require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function() --[[ Line: 8 ]]
+local Computed = require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function()
 	-- upvalues: CreateProfileInsightsStoreModule (copy)
 	return CreateProfileInsightsStoreModule()
 end)
 
 return {
-	get = function() --[[ Line: 13 ]]
+	get = function()
 		-- upvalues: Computed (copy)
 		return Computed(false)
 	end

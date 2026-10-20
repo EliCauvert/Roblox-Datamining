@@ -6,10 +6,10 @@ local Url = require(Parent.Http).Url
 local PlaceInfoController = {}
 PlaceInfoController.__index = PlaceInfoController
 
-function PlaceInfoController.new(p1) --[[ Line: 59 ]]
+function PlaceInfoController.new(p1)
 	-- upvalues: HttpRequestModule (copy), PlaceInfoController (copy)
 	local ConfigResult = HttpRequestModule.config({
-		requestFunction = function(p2, p3, p4) --[[ Line: 63 ]]
+		requestFunction = function(p2, p3, p4)
 			-- upvalues: HttpRequestModule (upval)
 			return HttpRequestModule.requestFunctions.HttpRbxApi(p2, p3, p4)
 		end
@@ -18,28 +18,28 @@ function PlaceInfoController.new(p1) --[[ Line: 59 ]]
 	return (setmetatable({ _placeInfo = {}, _requestImpl = p1 or ConfigResult }, PlaceInfoController))
 end
 
-function PlaceInfoController:name(p1) --[[ Line: 74 ]]
+function PlaceInfoController:name(p1)
 	return self:_getInfo(p1, "name")
 end
 
-function PlaceInfoController:description(p1) --[[ Line: 78 ]]
+function PlaceInfoController:description(p1)
 	return self:_getInfo(p1, "description")
 end
 
-function PlaceInfoController:universeId(p1) --[[ Line: 82 ]]
+function PlaceInfoController:universeId(p1)
 	return self:_getInfo(p1, "universeId")
 end
 
-function PlaceInfoController:_fetchPlacesInfo(PlaceIds) --[[ Line: 88 ]]
+function PlaceInfoController:_fetchPlacesInfo(PlaceIds)
 	-- upvalues: Url (copy)
 	return self._requestImpl(string.format("%sv1/games/multiget-place-details?%s", Url.GAME_URL, (Url:makeQueryString({ placeIds = PlaceIds }))), "GET")
 end
 
-function PlaceInfoController:getPlacesInfo(PlaceIds) --[[ Line: 101 ]]
+function PlaceInfoController:getPlacesInfo(PlaceIds)
 	-- upvalues: PromiseModule (copy)
-	local NewPromise = PromiseModule.new(function(Callback, Callback1) --[[ Line: 102 ]]
+	local NewPromise = PromiseModule.new(function(Callback, Callback1)
 		-- upvalues: self (copy), PlaceIds (copy)
-		self:_fetchPlacesInfo(PlaceIds):andThen(function(Result) --[[ Line: 104 ]]
+		self:_fetchPlacesInfo(PlaceIds):andThen(function(Result)
 			-- upvalues: Callback (copy), self (upval)
 			if not Result or not Result.responseBody then
 				Callback(nil)
@@ -58,7 +58,7 @@ function PlaceInfoController:getPlacesInfo(PlaceIds) --[[ Line: 101 ]]
 				self._placeInfo[value.placeId] = config
 			end
 			Callback(t)
-		end):catch(function(Err) --[[ Line: 124 ]]
+		end):catch(function(Err)
 			-- upvalues: Callback1 (copy)
 			Callback1(Err)
 		end)
@@ -69,7 +69,7 @@ function PlaceInfoController:getPlacesInfo(PlaceIds) --[[ Line: 101 ]]
 		if self._placeInfo[placeId] then
 			Places[placeId] = PromiseModule.resolve(self._placeInfo[placeId])
 		else
-			self._placeInfo[placeId] = NewPromise:andThen(function(Result) --[[ Line: 135 ]]
+			self._placeInfo[placeId] = NewPromise:andThen(function(Result)
 				-- upvalues: placeId (copy)
 				return Result[placeId]
 			end)
@@ -79,12 +79,12 @@ function PlaceInfoController:getPlacesInfo(PlaceIds) --[[ Line: 101 ]]
 	return Places
 end
 
-function PlaceInfoController._getInfo(p1, p2, p3) --[[ Line: 144 ]]
+function PlaceInfoController._getInfo(p1, p2, p3)
 	-- upvalues: PromiseModule (copy)
-	return if p1._placeInfo[p2] and p1._placeInfo[p2][p3] then PromiseModule.resolve(p1._placeInfo[p2][p3]) elseif p1._placeInfo[p2] then p1._placeInfo[p2]:andThen(function(_) --[[ Line: 151 ]]
+	return if p1._placeInfo[p2] and p1._placeInfo[p2][p3] then PromiseModule.resolve(p1._placeInfo[p2][p3]) elseif p1._placeInfo[p2] then p1._placeInfo[p2]:andThen(function(_)
 		-- upvalues: p1 (copy), p2 (copy), p3 (copy)
 		return p1._placeInfo[p2][p3]
-	end) else p1:getPlacesInfo({ p2 })[p2]:andThen(function(Result) --[[ Line: 156 ]]
+	end) else p1:getPlacesInfo({ p2 })[p2]:andThen(function(Result)
 		-- upvalues: p3 (copy)
 		return Result[p3]
 	end)

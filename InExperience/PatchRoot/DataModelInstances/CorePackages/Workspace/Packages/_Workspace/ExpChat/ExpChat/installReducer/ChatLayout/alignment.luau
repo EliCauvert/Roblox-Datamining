@@ -9,7 +9,7 @@ return require(Parent.Rodux).createReducer({
 	AnchorPoint = Vector2.new(0, 0),
 	UIListLayoutVerticalAlignment = Enum.VerticalAlignment.Top
 }, {
-	[require(Actions.ChatLayoutHorizontalAlignmentChanged).name] = function(Frame, p1) --[[ Line: 22 ]]
+	[require(Actions.ChatLayoutHorizontalAlignmentChanged).name] = function(Frame, p1)
 		-- upvalues: Dictionary (copy)
 		local Position = Frame.Position
 		local AnchorPoint = Frame.AnchorPoint
@@ -26,7 +26,7 @@ return require(Parent.Rodux).createReducer({
 		end
 		return Dictionary.join(Frame, { Position = Position, AnchorPoint = AnchorPoint })
 	end,
-	[require(Actions.ChatLayoutVerticalAlignmentChanged).name] = function(Frame, p1) --[[ Line: 43 ]]
+	[require(Actions.ChatLayoutVerticalAlignmentChanged).name] = function(Frame, p1)
 		-- upvalues: Y (copy), Dictionary (copy)
 		local Position = Frame.Position
 		local AnchorPoint = Frame.AnchorPoint

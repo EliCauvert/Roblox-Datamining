@@ -17,7 +17,7 @@ end
 local FoundationProvider = FoundationModule.FoundationProvider
 local Migration = BuilderIconsModule.Migration
 
-local function createGameSettings() --[[ Line: 27 ]]
+local function createGameSettings()
 	-- upvalues: SettingsPageFactoryModule (copy), Constants (ref), Migration (copy), BuilderIconsModule (copy), ReactModule (copy), FoundationProvider (copy), FoundationModule (copy), Utils (ref), ReactRobloxModule (copy)
 	local NewPage = SettingsPageFactoryModule:CreateNewPage()
 	NewPage.TabHeader.Name = Constants.GAMESETTINGS.TAB_HEADER.NAME
@@ -28,12 +28,12 @@ local function createGameSettings() --[[ Line: 27 ]]
 	NewPage.Page:ClearAllChildren()
 	NewPage.PageOpen = false
 	
-	function NewPage.OpenSettingsPage() --[[ Line: 41 ]]
+	function NewPage.OpenSettingsPage()
 		-- upvalues: NewPage (copy)
 		NewPage.PageOpen = true
 	end
 	
-	function NewPage.CloseSettingsPage() --[[ Line: 44 ]]
+	function NewPage.CloseSettingsPage()
 		-- upvalues: NewPage (copy)
 		NewPage.PageOpen = false
 	end

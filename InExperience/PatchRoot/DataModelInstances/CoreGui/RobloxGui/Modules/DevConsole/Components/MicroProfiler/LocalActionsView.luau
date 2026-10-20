@@ -15,12 +15,12 @@ local config = {
 	lastUpdated = { 2025, 11, 17 }
 }
 
-function LocalActionsView.init(p1) --[[ Line: 28 ]]
+function LocalActionsView.init(p1)
 	-- upvalues: GameSettings (copy)
 	p1:setState({
 		OnScreenMicroProfilerVisible = GameSettings.OnScreenProfilerEnabled
 	})
-	p1.onScreenMpToggledConn = GameSettings:GetPropertyChangedSignal("OnScreenProfilerEnabled"):Connect(function() --[[ Line: 33 ]]
+	p1.onScreenMpToggledConn = GameSettings:GetPropertyChangedSignal("OnScreenProfilerEnabled"):Connect(function()
 		-- upvalues: p1 (copy), GameSettings (upval)
 		p1:setState({
 			OnScreenMicroProfilerVisible = GameSettings.OnScreenProfilerEnabled
@@ -28,7 +28,7 @@ function LocalActionsView.init(p1) --[[ Line: 28 ]]
 	end)
 end
 
-function LocalActionsView.willUnmount(p1) --[[ Line: 40 ]]
+function LocalActionsView.willUnmount(p1)
 	if p1.onScreenMpToggledConn then
 		if p1.onScreenMpToggledConn.Connected then
 			p1.onScreenMpToggledConn:Disconnect()
@@ -37,13 +37,13 @@ function LocalActionsView.willUnmount(p1) --[[ Line: 40 ]]
 	end
 end
 
-function LocalActionsView:toggleOnScreenMicroProfiler(OnScreenProfilerEnabled) --[[ Line: 49 ]]
+function LocalActionsView:toggleOnScreenMicroProfiler(OnScreenProfilerEnabled)
 	-- upvalues: GameSettings (copy), TelemetryService (copy), config (copy)
 	GameSettings.OnScreenProfilerEnabled = OnScreenProfilerEnabled
 	TelemetryService:LogCounter(config, { customFields = { visible = `{OnScreenProfilerEnabled}` } }, 1)
 end
 
-function LocalActionsView.render(p1) --[[ Line: 59 ]]
+function LocalActionsView.render(p1)
 	-- upvalues: RoactModule (copy), MicroProfilerPanelModule (copy), ConstantsModule (copy), CheckboxModule (copy), DevConsoleMpEnableOpenDumpsFolderButton (copy), RunService (copy), BoxButtonModule (copy)
 	return RoactModule.createElement(MicroProfilerPanelModule, {
 		Title = "Local actions",
@@ -83,7 +83,7 @@ function LocalActionsView.render(p1) --[[ Line: 59 ]]
 								IsSelected = p1.state.OnScreenMicroProfilerVisible,
 								Size = UDim2.fromOffset(ConstantsModule.MicroProfilerFormatting.OptionCheckboxSize, ConstantsModule.MicroProfilerFormatting.OptionCheckboxSize),
 								Position = UDim2.fromOffset((ConstantsModule.MicroProfilerFormatting.OptionRowHeight - ConstantsModule.MicroProfilerFormatting.OptionCheckboxSize) / 2, (ConstantsModule.MicroProfilerFormatting.OptionRowHeight - ConstantsModule.MicroProfilerFormatting.OptionCheckboxSize) / 2),
-								OnSelectedStateChanged = function(_, OnScreenProfilerEnabled) --[[ Line: 115 ]]
+								OnSelectedStateChanged = function(_, OnScreenProfilerEnabled)
 									-- upvalues: p1 (copy)
 									p1:toggleOnScreenMicroProfiler(OnScreenProfilerEnabled)
 								end
@@ -101,7 +101,7 @@ function LocalActionsView.render(p1) --[[ Line: 59 ]]
 							text = "Open dump folder",
 							size = UDim2.fromScale(1, 1),
 							pos = UDim2.new(0, 0, 0, 0),
-							onClicked = function() --[[ Line: 135 ]]
+							onClicked = function()
 								game:OpenLogsFolder()
 							end
 						})

@@ -17,13 +17,13 @@ local AppHeaderBarModule = require(Parent.AppHeaderBar)
 local GetTopBarStoreModule = require(AppChat.Stores.GetTopBarStore)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
-local function noOp() --[[ Line: 33 ]]
+local function noOp()
 	return nil
 end
 
-return function(p1) --[[ Line: 49 | Named "ChatTopBarBase" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), GetTopBarStoreModule (copy), UseSignalStateFunction (copy), FFlagAppIaScrollAway (copy), AppHeaderBarModule (copy), UseLocalizationFunction (copy), UseStyleFunction (copy), UseTokensFunction (copy), noOp (copy), CreateBackFuncModule (copy), AppNavBarModule (copy), VisibilityControl (copy), FoundationModule (copy), HeaderBar (copy)
-	ReactModule.useEffect(function() --[[ Line: 50 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval)
 		if FFlagAppChatPerfTrackingModule then
 			AppChatPerfTrackerModule.finish(AppChatPerfTrackerModule.Events.TopBarRenderInterval)
@@ -78,7 +78,7 @@ return function(p1) --[[ Line: 49 | Named "ChatTopBarBase" ]]
 		RenderLeft = nil
 	end
 	local Medium = UseTokensResult.Padding.Medium
-	local MapResult = if FFlagAppIaScrollAway and not IsInExperienceScreenProps and AppNavBarModule.getScrollAwayEnabled() then VisibilityControl.getHeaderBinding():map(function(p2: number): UDim2 --[[ Line: 132 ]]
+	local MapResult = if FFlagAppIaScrollAway and not IsInExperienceScreenProps and AppNavBarModule.getScrollAwayEnabled() then VisibilityControl.getHeaderBinding():map(function(p2: number): UDim2
 		-- upvalues: TopBarHeightScreenProps (copy)
 		return UDim2.new(0, 0, 0, (p2 - 1) * (TopBarHeightScreenProps + 36))
 	end) else nil

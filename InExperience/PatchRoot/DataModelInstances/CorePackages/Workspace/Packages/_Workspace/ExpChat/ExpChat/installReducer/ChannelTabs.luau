@@ -19,7 +19,7 @@ local IsGlobalTabFirstModule = require(ExpChat.isGlobalTabFirst)
 local GetDefaultTabNameModule = require(ExpChat.getDefaultTabName)
 local FFlagExpChatGlobalTabDefaultModule = require(ExpChat.Flags.FFlagExpChatGlobalTabDefault)
 
-local function insertTabAndReorder(AllChannelTabs, JoinResult) --[[ Line: 72 ]]
+local function insertTabAndReorder(AllChannelTabs, JoinResult)
 	-- upvalues: Dictionary (copy)
 	local JoinResult1 = { [JoinResult.Name] = JoinResult }
 	
@@ -31,12 +31,12 @@ local function insertTabAndReorder(AllChannelTabs, JoinResult) --[[ Line: 72 ]]
 	return JoinResult1
 end
 
-local function _(p1): boolean --[[ Line: 90 | Named "hasFriendsTab" ]]
+local function _(p1): boolean
 	-- upvalues: FFlagExpChatEnableFriendsTab (copy), FriendsChatTabNameModule (copy)
 	return if FFlagExpChatEnableFriendsTab then p1[FriendsChatTabNameModule] ~= nil else false
 end
 
-local _ = function(p1): number --[[ Line: 99 | Named "priorityTabCount" ]]
+local _ = function(p1): number
 	-- upvalues: GetFFlagTextChatEnableUniverseChatTabsFunction (copy), FFlagExpChatEnableFriendsTab (copy), FriendsChatTabNameModule (copy)
 	local HasRBXGeneral = p1.RBXGeneral ~= nil
 	local HasRBXGlobal: boolean = GetFFlagTextChatEnableUniverseChatTabsFunction() and p1.RBXGlobal ~= nil
@@ -45,7 +45,7 @@ local _ = function(p1): number --[[ Line: 99 | Named "priorityTabCount" ]]
 	return (if HasRBXGeneral then 1 else 0) + (if HasRBXGlobal then 1 else 0) + (if v1 then 1 else 0)
 end
 
-local _ = function(p1): number --[[ Line: 109 | Named "nextDeveloperTabIndex" ]]
+local _ = function(p1): number
 	-- upvalues: GetFFlagTextChatEnableUniverseChatTabsFunction (copy), FFlagExpChatEnableFriendsTab (copy), FriendsChatTabNameModule (copy)
 	local HasRBXGeneral = p1.RBXGeneral ~= nil
 	local HasRBXGlobal: boolean = GetFFlagTextChatEnableUniverseChatTabsFunction() and p1.RBXGlobal ~= nil
@@ -54,12 +54,12 @@ local _ = function(p1): number --[[ Line: 109 | Named "nextDeveloperTabIndex" ]]
 	return (if HasRBXGeneral then 1 else 0) + (if HasRBXGlobal then 1 else 0) + (if v1 then 1 else 0) + 1
 end
 
-local _ = function(p1, p2): number --[[ Line: 117 | Named "getPlatformTabIndex" ]]
+local _ = function(p1, p2): number
 	-- upvalues: FFlagExpChatGlobalTabDefaultModule (copy), IsGlobalTabFirstModule (copy)
 	return if FFlagExpChatGlobalTabDefaultModule and IsGlobalTabFirstModule() then if p1 == "RBXGlobal" then 1 elseif p2.RBXGlobal then 2 else 1 elseif p1 == "RBXGeneral" then 1 elseif p2.RBXGeneral then 2 else 1
 end
 
-local _ = function(p1): number --[[ Line: 131 | Named "getFriendsTabIndex" ]]
+local _ = function(p1): number
 	-- upvalues: GetFFlagTextChatEnableUniverseChatTabsFunction (copy)
 	local HasRBXGeneral = p1.RBXGeneral ~= nil
 	local HasRBXGlobal: boolean = GetFFlagTextChatEnableUniverseChatTabsFunction() and p1.RBXGlobal ~= nil
@@ -67,7 +67,7 @@ local _ = function(p1): number --[[ Line: 131 | Named "getFriendsTabIndex" ]]
 	return (if HasRBXGeneral then 1 else 0) + 1 + (if HasRBXGlobal then 1 else 0)
 end
 
-local function removeTabAndReorder(AllChannelTabs, AllChannelTab) --[[ Line: 137 ]]
+local function removeTabAndReorder(AllChannelTabs, AllChannelTab)
 	-- upvalues: Dictionary (copy)
 	if AllChannelTab == nil then
 		return AllChannelTabs
@@ -84,7 +84,7 @@ local function removeTabAndReorder(AllChannelTabs, AllChannelTab) --[[ Line: 137
 	return JoinResult
 end
 
-local function removeChannelTab(p1, ChannelName) --[[ Line: 161 ]]
+local function removeChannelTab(p1, ChannelName)
 	-- upvalues: removeTabAndReorder (copy), FFlagExpChatGlobalTabDefaultModule (copy), GetDefaultTabNameModule (copy), Dictionary (copy)
 	local AllChannelTab = p1.allChannelTabs[ChannelName]
 	
@@ -106,7 +106,7 @@ local function removeChannelTab(p1, ChannelName) --[[ Line: 161 ]]
 	end
 end
 
-local function onChannelRemoved(p1, TextChannel) --[[ Line: 189 ]]
+local function onChannelRemoved(p1, TextChannel)
 	-- upvalues: FFlagExpChatEnableFriendsTab (copy), removeTabAndReorder (copy), FFlagExpChatGlobalTabDefaultModule (copy), GetDefaultTabNameModule (copy), Dictionary (copy), removeChannelTab (copy)
 	if FFlagExpChatEnableFriendsTab then
 		return (removeChannelTab(p1, TextChannel.Name))
@@ -131,7 +131,7 @@ local function onChannelRemoved(p1, TextChannel) --[[ Line: 189 ]]
 	end
 end
 
-local function handleIncomingMessageReceived(p1, p2) --[[ Line: 221 ]]
+local function handleIncomingMessageReceived(p1, p2)
 	-- upvalues: NewResult (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), GetFFlagExpChatSuppressWelcomeMessageTabUnreadFunction (copy), ShouldSuppressUnreadForTabMetadataModule (copy), Dictionary (copy)
 	NewResult:trace("IncomingMessageReceived dispatched")
 	local AllChannelTab = p1.allChannelTabs[if GetFFlagTextChatEnableUniverseChatTabsFunction() and p2.channelNameOverride then p2.channelNameOverride elseif p2.textChatMessage.TextChannel then if p2.textChatMessage.TextChannel.Name == "RBXSystem" then "RBXGeneral" else p2.textChatMessage.TextChannel.Name else nil]
@@ -143,7 +143,7 @@ local function handleIncomingMessageReceived(p1, p2) --[[ Line: 221 ]]
 	})
 end
 
-local function handleUniverseChatSystemMessageAdded(p3, p4) --[[ Line: 262 ]]
+local function handleUniverseChatSystemMessageAdded(p3, p4)
 	-- upvalues: GetFFlagTextChatEnableUniverseChatTabsFunction (copy), GetFFlagExpChatSuppressWelcomeMessageTabUnreadFunction (copy), ShouldSuppressUnreadForTabMetadataModule (copy), Dictionary (copy)
 	if GetFFlagTextChatEnableUniverseChatTabsFunction() then
 		local AllChannelTab = p3.allChannelTabs[p4.channelNameOverride]
@@ -158,7 +158,7 @@ local function handleUniverseChatSystemMessageAdded(p3, p4) --[[ Line: 262 ]]
 	end
 end
 
-local function pruneNonSpecialTabs(AllChannelTabs) --[[ Line: 295 ]]
+local function pruneNonSpecialTabs(AllChannelTabs)
 	-- upvalues: FFlagExpChatGlobalTabDefaultModule (copy), Dictionary (copy), IsGlobalTabFirstModule (copy), FFlagExpChatEnableFriendsTab (copy), FriendsChatTabNameModule (copy)
 	local t = {}
 	local HasRBXGeneral = AllChannelTabs.RBXGeneral ~= nil
@@ -183,12 +183,12 @@ local function pruneNonSpecialTabs(AllChannelTabs) --[[ Line: 295 ]]
 	return t
 end
 
-local _ = function(p3): boolean --[[ Line: 340 | Named "isDefaultTabOnlyMode" ]]
+local _ = function(p3): boolean
 	-- upvalues: GetFFlagTextChatEnableUniverseChatTabsFunction (copy), FFlagExpChatFriendsTabRequireDefaultChannels (copy), FFlagExpChatEnableFriendsTab (copy)
 	return if GetFFlagTextChatEnableUniverseChatTabsFunction() then not p3.channelTabsConfigurationEnabled else FFlagExpChatFriendsTabRequireDefaultChannels and (FFlagExpChatEnableFriendsTab and not p3.channelTabsConfigurationEnabled)
 end
 
-local function selectTextChannelTabByName(JoinResult, ChannelName, ShouldReorderTabs) --[[ Line: 347 ]]
+local function selectTextChannelTabByName(JoinResult, ChannelName, ShouldReorderTabs)
 	-- upvalues: FFlagExpChatGlobalTabDefaultModule (copy), IsGlobalTabFirstModule (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), FFlagExpChatEnableFriendsTab (copy), FriendsChatTabNameModule (copy), Dictionary (copy), insertTabAndReorder (copy), removeTabAndReorder (copy), FFlagExpChatFriendsTabRequireDefaultChannels (copy)
 	if not ChannelName or not JoinResult.allChannelTabs[ChannelName] then
 		local NoChannelTabsConfigurationEnabled: boolean = if GetFFlagTextChatEnableUniverseChatTabsFunction() then not JoinResult.channelTabsConfigurationEnabled else FFlagExpChatFriendsTabRequireDefaultChannels and (FFlagExpChatEnableFriendsTab and not JoinResult.channelTabsConfigurationEnabled)
@@ -233,7 +233,7 @@ return require(Parent.Rodux).createReducer({
 	hasUserSelectedTab = false,
 	allChannelTabs = {}
 }, {
-	[require(Actions.ChannelTabsConfigurationEnabled).name] = function(p3, p4) --[[ Line: 389 ]]
+	[require(Actions.ChannelTabsConfigurationEnabled).name] = function(p3, p4)
 		-- upvalues: GetFFlagTextChatEnableUniverseChatTabsFunction (copy), GetFFlagExpChatFixChannelTabsMidExperienceToggleModule (copy), Dictionary (copy), pruneNonSpecialTabs (copy), FFlagExpChatGlobalTabDefaultModule (copy), GetDefaultTabNameModule (copy)
 		if not GetFFlagTextChatEnableUniverseChatTabsFunction() then
 			return p3
@@ -259,7 +259,7 @@ return require(Parent.Rodux).createReducer({
 			hasUserSelectedTab = if FFlagExpChatGlobalTabDefaultModule then p3.hasUserSelectedTab else nil
 		}
 	end,
-	[require(Actions.LocalTextChannelParticipantAdded).name] = function(p3, p4) --[[ Line: 430 ]]
+	[require(Actions.LocalTextChannelParticipantAdded).name] = function(p3, p4)
 		-- upvalues: NewResult (copy), ShouldRenderTextChannelInDefaultWindowFunction (copy), GetTextChannelDisplayModeFunction (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), FFlagExpChatFriendsTabRequireDefaultChannels (copy), FFlagExpChatEnableFriendsTab (copy), FFlagExpChatGlobalTabDefaultModule (copy), IsGlobalTabFirstModule (copy), FriendsChatTabNameModule (copy), insertTabAndReorder (copy), Dictionary (copy)
 		local Name = p4.textChannel.Name
 		NewResult:trace("LocalTextChannelParticipantAdded dispatched: {}", Name)
@@ -320,25 +320,25 @@ return require(Parent.Rodux).createReducer({
 			selectedTabName = SelectedTabName
 		})
 	end,
-	[ExpChatSharedModule.Actions.LocalTextChannelParticipantRemoved.name] = function(p3, p4) --[[ Line: 511 ]]
+	[ExpChatSharedModule.Actions.LocalTextChannelParticipantRemoved.name] = function(p3, p4)
 		-- upvalues: NewResult (copy), onChannelRemoved (copy)
 		NewResult:trace("LocalTextChannelParticipantRemoved dispatched: {}", p4.textChannel.Name)
 		
 		return (onChannelRemoved(p3, p4.textChannel))
 	end,
-	[ExpChatSharedModule.Actions.TextChannelRemoved.name] = function(p3, p4) --[[ Line: 519 ]]
+	[ExpChatSharedModule.Actions.TextChannelRemoved.name] = function(p3, p4)
 		-- upvalues: NewResult (copy), onChannelRemoved (copy)
 		NewResult:trace("TextChannelRemoved dispatched: {}", p4.textChannel.Name)
 		
 		return (onChannelRemoved(p3, p4.textChannel))
 	end,
-	[ExpChatSharedModule.Actions.TargetTextChannelPropertyChanged.name] = function(p3, p4) --[[ Line: 524 ]]
+	[ExpChatSharedModule.Actions.TargetTextChannelPropertyChanged.name] = function(p3, p4)
 		-- upvalues: NewResult (copy), selectTextChannelTabByName (copy)
 		NewResult:trace("TargetTextChannelPropertyChanged dispatched")
 		
 		return selectTextChannelTabByName(p3, if p4.textChannel then p4.textChannel.Name else nil, p4.shouldReorderTabs)
 	end,
-	[ExpChatSharedModule.Actions.TextChatChannelSelected.name] = function(p3, p4) --[[ Line: 534 ]]
+	[ExpChatSharedModule.Actions.TextChatChannelSelected.name] = function(p3, p4)
 		-- upvalues: NewResult (copy), FFlagExpChatGlobalTabDefaultModule (copy), selectTextChannelTabByName (copy), Dictionary (copy)
 		NewResult:trace("TextChatChannelSelected dispatched: {}", p4.channelName)
 		
@@ -348,7 +348,7 @@ return require(Parent.Rodux).createReducer({
 	[require(Actions.MarkChannelUnreadForIncomingMessage).name] = if FFlagExpChatUnreadTabIndicatorV2WindowModule then handleIncomingMessageReceived else nil,
 	[require(Actions.UniverseChatSystemMessageAdded).name] = handleUniverseChatSystemMessageAdded,
 	[require(Actions.MarkChannelUnreadForSystemMessage).name] = if FFlagExpChatUnreadTabIndicatorV2WindowModule then handleUniverseChatSystemMessageAdded else nil,
-	[require(Actions.UniverseChatChannelAdded).name] = function(p3, p4) --[[ Line: 562 ]]
+	[require(Actions.UniverseChatChannelAdded).name] = function(p3, p4)
 		-- upvalues: NewResult (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), FFlagExpChatGlobalTabDefaultModule (copy), IsGlobalTabFirstModule (copy), insertTabAndReorder (copy), GetDefaultTabNameModule (copy), FFlagExpChatEnableFriendsTab (copy), FriendsChatTabNameModule (copy), Dictionary (copy)
 		NewResult:trace("UniverseChatChannelAdded dispatched: {}", p4.channelName)
 		
@@ -391,7 +391,7 @@ return require(Parent.Rodux).createReducer({
 			selectedTabName = SelectedTabName
 		})
 	end,
-	[require(Actions.FriendsChatChannelAdded).name] = function(p3, p4) --[[ Line: 614 ]]
+	[require(Actions.FriendsChatChannelAdded).name] = function(p3, p4)
 		-- upvalues: FFlagExpChatEnableFriendsTab (copy), NewResult (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), insertTabAndReorder (copy), FFlagExpChatGlobalTabDefaultModule (copy), GetDefaultTabNameModule (copy), Dictionary (copy)
 		if not FFlagExpChatEnableFriendsTab then
 			return p3
@@ -421,7 +421,7 @@ return require(Parent.Rodux).createReducer({
 			selectedTabName = SelectedTabName
 		})
 	end,
-	[require(Actions.FriendsChatChannelRemoved).name] = function(p3, p4) --[[ Line: 645 ]]
+	[require(Actions.FriendsChatChannelRemoved).name] = function(p3, p4)
 		-- upvalues: FFlagExpChatEnableFriendsTab (copy), NewResult (copy), removeChannelTab (copy)
 		if FFlagExpChatEnableFriendsTab then
 			NewResult:trace("FriendsChatChannelRemoved dispatched: {}", p4.channelName)
@@ -431,7 +431,7 @@ return require(Parent.Rodux).createReducer({
 			return p3
 		end
 	end,
-	[ExpChatSharedModule.Actions.FriendsChatChannelSelected.name] = function(p3, p4) --[[ Line: 653 ]]
+	[ExpChatSharedModule.Actions.FriendsChatChannelSelected.name] = function(p3, p4)
 		-- upvalues: FFlagExpChatEnableFriendsTab (copy), NewResult (copy), Dictionary (copy)
 		if FFlagExpChatEnableFriendsTab then
 			NewResult:trace("FriendsChatChannelSelected dispatched: {}", p4.channelName)
@@ -441,7 +441,7 @@ return require(Parent.Rodux).createReducer({
 			return p3
 		end
 	end,
-	[require(Actions.SetChannelUnreadStatus).name] = function(p3, p4) --[[ Line: 665 ]]
+	[require(Actions.SetChannelUnreadStatus).name] = function(p3, p4)
 		-- upvalues: Dictionary (copy)
 		local AllChannelTab = p3.allChannelTabs[p4.channelName]
 		
@@ -451,7 +451,7 @@ return require(Parent.Rodux).createReducer({
 			})
 		})
 	end,
-	[ExpChatSharedModule.Actions.UniverseChatChannelSelected.name] = function(p3, p4) --[[ Line: 680 ]]
+	[ExpChatSharedModule.Actions.UniverseChatChannelSelected.name] = function(p3, p4)
 		-- upvalues: NewResult (copy), FFlagExpChatGlobalTabDefaultModule (copy), Dictionary (copy)
 		NewResult:trace("UniverseChatChannelSelected dispatched: {}", p4.channelName)
 		local AllChannelTab = p3.allChannelTabs[p4.channelName]

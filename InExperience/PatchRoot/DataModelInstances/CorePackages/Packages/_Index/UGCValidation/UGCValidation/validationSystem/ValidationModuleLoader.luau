@@ -30,7 +30,7 @@ for i, value2 in ValidationEnumsModule do
 		end
 	end
 end
-local function tableOnlyHasExistingEnums(ChildName, Categories, p1) --[[ Line: 50 ]]
+local function tableOnlyHasExistingEnums(ChildName, Categories, p1)
 	-- upvalues: t2 (copy)
 	if typeof(Categories) ~= "table" then
 		error(`Invalid config option {p1} inside of {ChildName} - expected to be table`)
@@ -42,11 +42,11 @@ local function tableOnlyHasExistingEnums(ChildName, Categories, p1) --[[ Line: 5
 	end
 end
 
-local function defaultFlagCheck(): boolean --[[ Line: 62 ]]
+local function defaultFlagCheck(): boolean
 	return true
 end
 
-local function defaultShadowCheck(): boolean --[[ Line: 66 ]]
+local function defaultShadowCheck(): boolean
 	return false
 end
 
@@ -93,7 +93,7 @@ for ChildName, value3 in t1 do
 		error(`Missing module run function in {ChildName}`)
 	end
 	setmetatable(Module, {
-		__index = function(_, p2) --[[ Line: 123 ]]
+		__index = function(_, p2)
 			-- upvalues: ChildName (copy)
 			error(`Invalid ValidationConfig {p2} used on the module {ChildName}`)
 		end
@@ -113,7 +113,7 @@ for ChildName, value3 in t1 do
 end
 t.allModules = AllModules
 
-function t.getValidationModule(p2) --[[ Line: 146 ]]
+function t.getValidationModule(p2)
 	-- upvalues: AllModules (copy)
 	if AllModules[p2] == nil then
 		error(`{p2} does not exist in the preload table.`)

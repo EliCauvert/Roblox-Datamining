@@ -1,1 +1,1 @@
-﻿return function(_) --[[ Line: 1 | Named "useMutualFriendsForContextualInfo" ]] end
+﻿return function(_) end

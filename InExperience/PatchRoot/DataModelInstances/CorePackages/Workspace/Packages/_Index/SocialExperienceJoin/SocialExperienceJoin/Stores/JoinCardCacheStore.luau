@@ -2,7 +2,7 @@
 local CryoModule = require(Parent.Cryo)
 local SignalsModule = require(Parent.Signals)
 local CreateSignalFunction = SignalsModule.createSignal
-local Computed = SignalsModule.createComputed(function(_) --[[ Line: 27 ]]
+local Computed = SignalsModule.createComputed(function(_)
 	-- upvalues: CreateSignalFunction (copy), CryoModule (copy)
 	local Signal, Signal2 = CreateSignalFunction({})
 	local Signal1, Signal2_1 = CreateSignalFunction(nil)
@@ -10,7 +10,7 @@ local Computed = SignalsModule.createComputed(function(_) --[[ Line: 27 ]]
 	return {
 		getPlayabilityEntries = Signal,
 		getUserSettings = Signal1,
-		setPlayabilityEntry = function(p1, p2) --[[ Line: 31 ]]
+		setPlayabilityEntry = function(p1, p2)
 			-- upvalues: Signal (copy), Signal2 (copy), CryoModule (upval)
 			if p1 and p1 ~= "" then
 				Signal2(CryoModule.Dictionary.join(Signal(false), { [p1] = p2 }))
@@ -18,11 +18,11 @@ local Computed = SignalsModule.createComputed(function(_) --[[ Line: 27 ]]
 				return
 			end
 		end,
-		setUserSettings = function(p1) --[[ Line: 39 ]]
+		setUserSettings = function(p1)
 			-- upvalues: Signal2_1 (copy)
 			Signal2_1(p1)
 		end,
-		clearPlayabilityEntry = function(p1) --[[ Line: 43 ]]
+		clearPlayabilityEntry = function(p1)
 			-- upvalues: Signal (copy), Signal2 (copy), CryoModule (upval)
 			if not p1 or p1 == "" then return end
 			local SignalResult = Signal(false)
@@ -33,7 +33,7 @@ local Computed = SignalsModule.createComputed(function(_) --[[ Line: 27 ]]
 				return
 			end
 		end,
-		clearCache = function(p1) --[[ Line: 54 ]]
+		clearCache = function(p1)
 			-- upvalues: Signal (copy), Signal2 (copy), CryoModule (upval), Signal2_1 (copy)
 			if p1 and p1 ~= "" then
 				Signal2(CryoModule.Dictionary.join(Signal(false), { [p1] = CryoModule.None }))
@@ -46,7 +46,7 @@ local Computed = SignalsModule.createComputed(function(_) --[[ Line: 27 ]]
 end)
 
 return {
-	get = function() --[[ Line: 75 ]]
+	get = function()
 		-- upvalues: Computed (copy)
 		return Computed(false)
 	end

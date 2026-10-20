@@ -25,16 +25,16 @@ local AppLogging = require(Parent.RoactServiceTags).AppLogging
 local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
 local OmniFeedConstants = require(Parent.DiscoveryTypes).OmniFeedConstants
 
-return function(Callback1, Callback) --[[ Line: 45 | Named "useClientCacheFallbackBannerConfig" ]]
+return function(Callback1, Callback)
 	-- upvalues: UseDispatchFunction (copy), FFlagSignalsNavP3fGameDetails (copy), ReactModule (copy), SignalsModule (copy), GetLegacyNavigationStoreFunction (copy), AppPage (copy), SignalsModule1 (copy), SignalsReactModule (copy), UseSelectorFunction (copy), SelectCurrentRoactNavigationRoute (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), AppOmniRecommendationsRequest (copy), AppLogging (copy), FFlagUseSignalsForStartup (copy), GetStartupStore (copy), RetrievalStatus (copy), FFlagLuaAppEnableSduiHomePage (copy), DiscoveryEventErrorLogger (copy), PromiseModule (copy), OmniFeedConstants (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local RouteName = nil
 	local UseSignalStateResult = nil
 	
 	if FFlagSignalsNavP3fGameDetails then
-		UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 53 ]]
+		UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 			-- upvalues: SignalsModule (upval), GetLegacyNavigationStoreFunction (upval), AppPage (upval), SignalsModule1 (upval)
-			return SignalsModule.createComputed(function(p1): boolean --[[ Line: 54 ]]
+			return SignalsModule.createComputed(function(p1): boolean
 				-- upvalues: GetLegacyNavigationStoreFunction (upval), AppPage (upval), SignalsModule1 (upval)
 				local CurrentRoute = GetLegacyNavigationStoreFunction(false).getCurrentRoute(p1)
 				local HomePageDataSource = SignalsModule1.getCacheStore().getHomePageDataSource(p1)
@@ -49,14 +49,14 @@ return function(Callback1, Callback) --[[ Line: 45 | Named "useClientCacheFallba
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(AppOmniRecommendationsRequest)
 	local UseRoactServiceResult2 = UseRoactServiceFunction(AppLogging)
-	local UseSignalStateResult1 = if FFlagUseSignalsForStartup then SignalsReactModule.useSignalState(GetStartupStore(false).getHomePageDataStatus) else UseSelectorFunction(function(p1) --[[ Line: 73 ]]
+	local UseSignalStateResult1 = if FFlagUseSignalsForStartup then SignalsReactModule.useSignalState(GetStartupStore(false).getHomePageDataStatus) else UseSelectorFunction(function(p1)
 		return p1.Startup.HomePageDataStatus
 	end)
 	local UseSignalStateResult2 = SignalsReactModule.useSignalState(SignalsModule1.getCacheStore().getHomePageDataSource)
 	
 	return {
 		shouldShowBanner = if FFlagSignalsNavP3fGameDetails then UseSignalStateResult and UseSignalStateResult1 == RetrievalStatus.Done else RouteName == AppPage.Home and UseSignalStateResult1 == RetrievalStatus.Done and UseSignalStateResult2 == "Cache",
-		onRefreshButtonClick = ReactModule.useCallback(function() --[[ Line: 87 ]]
+		onRefreshButtonClick = ReactModule.useCallback(function()
 			-- upvalues: FFlagSignalsNavP3fGameDetails (upval), GetLegacyNavigationStoreFunction (upval), AppPage (upval), RouteName (ref), FFlagLuaAppEnableSduiHomePage (upval), Callback (copy), DiscoveryEventErrorLogger (upval), PromiseModule (upval), UseDispatchResult (copy), Callback1 (copy), UseRoactServiceResult (copy), UseRoactServiceResult1 (copy), OmniFeedConstants (upval), UseRoactServiceResult2 (copy)
 			local IsHomeMatch = nil
 			if FFlagSignalsNavP3fGameDetails then
@@ -72,14 +72,14 @@ return function(Callback1, Callback) --[[ Line: 45 | Named "useClientCacheFallba
 			elseif FFlagLuaAppEnableSduiHomePage then
 				local CallbackResult = Callback()
 				
-				return if CallbackResult then CallbackResult:catch(function(Err) --[[ Line: 102 ]]
+				return if CallbackResult then CallbackResult:catch(function(Err)
 					-- upvalues: DiscoveryEventErrorLogger (upval), PromiseModule (upval)
 					DiscoveryEventErrorLogger.reportError("ClientCacheFallbackBannerRefreshError", "Error refreshing SDUI home page")
 					
 					return PromiseModule.reject(Err)
 				end) else PromiseModule.resolve()
 			else
-				return UseDispatchResult(Callback1(UseRoactServiceResult, UseRoactServiceResult1, AppPage.Home, nil, nil, OmniFeedConstants.OmniRecommendationsRequestIntent.ManualRefresh, UseRoactServiceResult2)):catch(function(Err) --[[ Line: 122 ]]
+				return UseDispatchResult(Callback1(UseRoactServiceResult, UseRoactServiceResult1, AppPage.Home, nil, nil, OmniFeedConstants.OmniRecommendationsRequestIntent.ManualRefresh, UseRoactServiceResult2)):catch(function(Err)
 					-- upvalues: DiscoveryEventErrorLogger (upval), PromiseModule (upval)
 					DiscoveryEventErrorLogger.reportError("ClientCacheFallbackBannerRefreshError", "Error refreshing omni recommendations")
 					

@@ -7,7 +7,7 @@ local UseCurrentSquadSelectorFunction = DependenciesModule.Hooks.useCurrentSquad
 local GetFFlagEnablePartyVoiceOnlyForEligibleUsersFunction = require(Parent.SquadsCore.Flags).GetFFlagEnablePartyVoiceOnlyForEligibleUsers
 local GetFStringPartyVoiceEligibilityAllowListFunction = require(Parent.SquadsCore.Flags).GetFStringPartyVoiceEligibilityAllowList
 
-function getIsUserWhitelisted(Number): boolean --[[ Line: 18 ]]
+function getIsUserWhitelisted(Number): boolean
 	-- upvalues: GetFStringPartyVoiceEligibilityAllowListFunction (copy)
 	for i in GetFStringPartyVoiceEligibilityAllowListFunction():gmatch("%d+") do
 		if tonumber(i) == Number then
@@ -17,16 +17,16 @@ function getIsUserWhitelisted(Number): boolean --[[ Line: 18 ]]
 	return false
 end
 
-function useIsAnyOtherUserPartyVoiceEligible() --[[ Line: 27 ]]
+function useIsAnyOtherUserPartyVoiceEligible()
 	-- upvalues: Players (copy), UseCurrentSquadSelectorFunction (copy), React (copy)
 	local UserId = Players.LocalPlayer and Players.LocalPlayer.UserId or 0
 	local UseCurrentSquadSelectorResult = UseCurrentSquadSelectorFunction()
-	local UseMemoResult = React.useMemo(function() --[[ Line: 30 ]]
+	local UseMemoResult = React.useMemo(function()
 		-- upvalues: UseCurrentSquadSelectorResult (copy)
 		return if UseCurrentSquadSelectorResult then UseCurrentSquadSelectorResult.members else {}
 	end, { UseCurrentSquadSelectorResult })
 	
-	return React.useMemo(function(): boolean --[[ Line: 37 ]]
+	return React.useMemo(function(): boolean
 		-- upvalues: UserId (copy), UseMemoResult (copy)
 		if UserId ~= 0 then
 			for _, value in ipairs(UseMemoResult) do
@@ -39,6 +39,6 @@ function useIsAnyOtherUserPartyVoiceEligible() --[[ Line: 27 ]]
 	end, { UserId, UseMemoResult })
 end
 
-return if GetFFlagEnablePartyVoiceOnlyForEligibleUsersFunction() then useIsAnyOtherUserPartyVoiceEligible else function(): boolean --[[ Line: 55 ]]
+return if GetFFlagEnablePartyVoiceOnlyForEligibleUsersFunction() then useIsAnyOtherUserPartyVoiceEligible else function(): boolean
 	return true
 end

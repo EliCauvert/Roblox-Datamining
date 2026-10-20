@@ -1,4 +1,4 @@
-﻿local function waitForChildOfClass(LocalPlayer, ClassName) --[[ Line: 10 ]]
+﻿local function waitForChildOfClass(LocalPlayer, ClassName)
 	local ClassName1 = LocalPlayer:FindFirstChildOfClass(ClassName)
 	while not ClassName1 or ClassName1.ClassName ~= ClassName do
 		ClassName1 = LocalPlayer.ChildAdded:Wait()
@@ -9,7 +9,7 @@ end
 local PlayerScripts = waitForChildOfClass(game:GetService("Players").LocalPlayer, "PlayerScripts")
 local StarterPlayerScripts = waitForChildOfClass(game:GetService("StarterPlayer"), "StarterPlayerScripts")
 
-function VerifyScriptExistence() --[[ Line: 22 ]]
+function VerifyScriptExistence()
 	-- upvalues: PlayerScripts (copy), StarterPlayerScripts (copy)
 	local Value = script:WaitForChild("ScriptToVerify").Value
 	

@@ -22,7 +22,7 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local GetFFlagEnableMultiPageSignupV2UpdatesFunction = SharedFlagsModule.GetFFlagEnableMultiPageSignupV2Updates
 local GetFFlagEnableLuafiedRecoveryFlowFunction = SharedFlagsModule.GetFFlagEnableLuafiedRecoveryFlow
 
-return function(p1) --[[ Line: 68 | Named "AuthTextInputValidator" ]]
+return function(p1)
 	-- upvalues: UseDesignTokensFunction (copy), UseTokensFunction (copy), UseDispatchFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UseStyleFunction (copy), ReactModule (copy), InputValidity (copy), DebounceModule (copy), GetFFlagEnableLuafiedRecoveryFlowFunction (copy), IssueCondition (copy), GetFFlagEnableMultiPageSignupV2UpdatesFunction (copy), UIConstants (copy), UseLocalizationFunction (copy), Text (copy), StyledTextLabel (copy), TextInput (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local UseTokensResult = UseTokensFunction()
@@ -36,11 +36,11 @@ return function(p1) --[[ Line: 68 | Named "AuthTextInputValidator" ]]
 	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(InputValidity.Unvalidated)
 	local UseStateResult6, UseStateResult2_5 = ReactModule.useState(nil)
 	local UseStateResult7, UseStateResult2_6 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(DebounceModule(function(p2) --[[ Line: 87 ]]
+	local UseResult = ReactModule.useCallback(DebounceModule(function(p2)
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(p2)
 	end, p1.debounceTime or 0.5), { UseStateResult2_1 })
-	ReactModule.useEffect(function() --[[ Line: 92 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult1 (copy), UseStateResult (copy), UseResult (copy)
 		if UseStateResult1 ~= UseStateResult then
 			UseResult(UseStateResult)
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 68 | Named "AuthTextInputValidator" ]]
 			end
 		end
 	end
-	ReactModule.useEffect(function() --[[ Line: 108 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult1 (copy), UseStateResult2_4 (copy), InputValidity (upval), UseStateResult2_2 (copy), p1 (copy), UseDispatchResult (copy), UseRoactServiceResult (copy), UseStateResult3 (copy), UseStateResult (copy), UseStateResult2 (copy)
 		if #UseStateResult1 == 0 then
 			UseStateResult2_4(InputValidity.Unvalidated)
@@ -65,7 +65,7 @@ return function(p1) --[[ Line: 68 | Named "AuthTextInputValidator" ]]
 			
 			return
 		else
-			UseDispatchResult(p1.validator.validateFunction(UseRoactServiceResult, UseStateResult1, UseStateResult3, p1.validatorAdditionalProps)):andThen(function(Result) --[[ Line: 117 ]]
+			UseDispatchResult(p1.validator.validateFunction(UseRoactServiceResult, UseStateResult1, UseStateResult3, p1.validatorAdditionalProps)):andThen(function(Result)
 				-- upvalues: InputValidity (upval), UseStateResult (upval), p1 (upval), UseStateResult2_2 (upval), UseStateResult2_4 (upval), UseStateResult2 (upval)
 				local Valid = if Result.InputValid then InputValidity.Valid else InputValidity.Invalid
 				
@@ -78,7 +78,7 @@ return function(p1) --[[ Line: 68 | Named "AuthTextInputValidator" ]]
 			end)
 		end
 	end, list)
-	ReactModule.useEffect(function() --[[ Line: 131 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult5 (copy), InputValidity (upval), UseStateResult2_5 (copy), p1 (copy), UseStateResult3 (copy), IssueCondition (upval)
 		if UseStateResult5 ~= InputValidity.Invalid then
 			UseStateResult2_5(nil)
@@ -121,7 +121,7 @@ return function(p1) --[[ Line: 68 | Named "AuthTextInputValidator" ]]
 			UseStateResult2_5(p1.validator.getIssueMessageList()[v1])
 		end
 	end, { UseStateResult5 })
-	ReactModule.useEffect(function() --[[ Line: 172 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: GetFFlagEnableMultiPageSignupV2UpdatesFunction (upval), UseStateResult7 (copy), p1 (copy), UseStateResult2_6 (copy)
 		if GetFFlagEnableMultiPageSignupV2UpdatesFunction() and UseStateResult7 then
 			local TextBoxRef = p1.textBoxRef
@@ -133,24 +133,24 @@ return function(p1) --[[ Line: 68 | Named "AuthTextInputValidator" ]]
 		end
 	end, { UseStateResult7 })
 	
-	local function OnChanged(p2) --[[ Line: 185 ]]
+	local function OnChanged(p2)
 		-- upvalues: p1 (copy), InputValidity (upval), UseStateResult2_4 (copy), UseStateResult2 (copy)
 		p1.onTextChanged(p2, InputValidity.Unvalidated)
 		UseStateResult2_4(InputValidity.Unvalidated)
 		UseStateResult2(p2)
 	end
 	
-	local function _() --[[ Line: 191 | Named "getTextInputType" ]]
+	local function _()
 		-- upvalues: p1 (copy), UseStateResult4 (copy)
 		return if p1.textInputType == Enum.TextInputType.Password then if UseStateResult4 then Enum.TextInputType.Password else Enum.TextInputType.PasswordShown else p1.textInputType
 	end
 	
-	local function getShowPasswordIconButton() --[[ Line: 201 ]]
+	local function getShowPasswordIconButton()
 		-- upvalues: p1 (copy), UseStateResult4 (copy), UIConstants (upval), UseStateResult2_3 (copy), GetFFlagEnableMultiPageSignupV2UpdatesFunction (upval), UseStateResult2_6 (copy)
 		if p1.textInputType ~= Enum.TextInputType.Password then
 			return nil, nil
 		elseif UseStateResult4 then
-			return UIConstants.HIDE_PASSWORD_ICON, function() --[[ Line: 205 ]]
+			return UIConstants.HIDE_PASSWORD_ICON, function()
 				-- upvalues: UseStateResult2_3 (upval), GetFFlagEnableMultiPageSignupV2UpdatesFunction (upval), UseStateResult2_6 (upval)
 				UseStateResult2_3(false)
 				
@@ -159,7 +159,7 @@ return function(p1) --[[ Line: 68 | Named "AuthTextInputValidator" ]]
 				end
 			end
 		else
-			return UIConstants.SHOW_PASSWORD_ICON, function() --[[ Line: 213 ]]
+			return UIConstants.SHOW_PASSWORD_ICON, function()
 				-- upvalues: UseStateResult2_3 (upval), GetFFlagEnableMultiPageSignupV2UpdatesFunction (upval), UseStateResult2_6 (upval)
 				UseStateResult2_3(true)
 				

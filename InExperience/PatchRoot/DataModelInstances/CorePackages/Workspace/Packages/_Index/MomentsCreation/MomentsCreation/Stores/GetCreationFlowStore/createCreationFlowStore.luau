@@ -14,7 +14,7 @@ local CreateSignalFunction = SignalsModule.createSignal
 local FFlagMomentTextGenerationFilteredSignal = MomentsCommonModule.Flags.FFlagMomentTextGenerationFilteredSignal
 local GetFFlagEnableMomentTextGenerationFunction = MomentsCommonModule.Flags.GetFFlagEnableMomentTextGeneration
 
-return function() --[[ Line: 108 | Named "createCreationFlowStore" ]]
+return function()
 	-- upvalues: CreateNavigationMachineModule (copy), CreationFlowStateModule (copy), CreateSelectionStoreModule (copy), CreateDescriptionStoreModule (copy), CreateEditsStoreModule (copy), CreateSignalFunction (copy), CreateComputedFunction (copy), FFlagMomentTextGenerationFilteredSignal (copy), GetFFlagEnableMomentTextGenerationFunction (copy), FFlagMomentsTTSDraftRestoreModule (copy)
 	local NavigationMachineModule = CreateNavigationMachineModule(CreationFlowStateModule.Gallery)
 	local SelectionStoreModule = CreateSelectionStoreModule()
@@ -42,15 +42,15 @@ return function() --[[ Line: 108 | Named "createCreationFlowStore" ]]
 		getGeneratedSummary = DescriptionStoreModule.getGeneratedSummary,
 		getCommentsEnabled = DescriptionStoreModule.getCommentsEnabled,
 		getMusicList = Signal1,
-		getMusicEdit = CreateComputedFunction(function(p1) --[[ Line: 140 ]]
+		getMusicEdit = CreateComputedFunction(function(p1)
 			-- upvalues: EditsStoreModule (copy)
 			return EditsStoreModule.getMap(p1).music
 		end),
-		getTextOverlayEdits = CreateComputedFunction(function(p1) --[[ Line: 143 ]]
+		getTextOverlayEdits = CreateComputedFunction(function(p1)
 			-- upvalues: EditsStoreModule (copy)
 			return EditsStoreModule.getMap(p1).text
 		end),
-		getTrimEdit = CreateComputedFunction(function(p1) --[[ Line: 137 ]]
+		getTrimEdit = CreateComputedFunction(function(p1)
 			-- upvalues: EditsStoreModule (copy)
 			return EditsStoreModule.getMap(p1).trim
 		end),
@@ -60,47 +60,47 @@ return function() --[[ Line: 108 | Named "createCreationFlowStore" ]]
 		getActiveGeneration = Signal5,
 		getTTSAudio = Signal6,
 		getPendingRestoredVoice = Signal7,
-		updateCurrentState = function(p1) --[[ Line: 149 ]]
+		updateCurrentState = function(p1)
 			-- upvalues: NavigationMachineModule (copy)
 			NavigationMachineModule.reset(p1)
 		end,
-		onSelectedCaptureUpdated = function(p1) --[[ Line: 154 ]]
+		onSelectedCaptureUpdated = function(p1)
 			-- upvalues: SelectionStoreModule (copy)
 			SelectionStoreModule.setSelectedCapture(p1)
 		end,
-		updateDescription = function(p1) --[[ Line: 159 ]]
+		updateDescription = function(p1)
 			-- upvalues: DescriptionStoreModule (copy)
 			DescriptionStoreModule.setDescription(p1)
 		end,
-		setGeneratedDescription = function(p1) --[[ Line: 163 ]]
+		setGeneratedDescription = function(p1)
 			-- upvalues: DescriptionStoreModule (copy)
 			DescriptionStoreModule.setGeneratedDescription(p1)
 		end,
-		setGenerationToken = function(p1) --[[ Line: 171 ]]
+		setGenerationToken = function(p1)
 			-- upvalues: DescriptionStoreModule (copy)
 			DescriptionStoreModule.setGenerationToken(p1)
 		end,
-		setGeneratedTextFeedback = function(p1) --[[ Line: 179 ]]
+		setGeneratedTextFeedback = function(p1)
 			-- upvalues: DescriptionStoreModule (copy)
 			DescriptionStoreModule.setGeneratedTextFeedback(p1)
 		end,
-		setGeneratedSummary = function(p1) --[[ Line: 167 ]]
+		setGeneratedSummary = function(p1)
 			-- upvalues: DescriptionStoreModule (copy)
 			DescriptionStoreModule.setGeneratedSummary(p1)
 		end,
-		updateCommentsEnabled = function(p1) --[[ Line: 183 ]]
+		updateCommentsEnabled = function(p1)
 			-- upvalues: DescriptionStoreModule (copy)
 			DescriptionStoreModule.setCommentsEnabled(p1)
 		end,
-		updateTrimEdit = function(p1) --[[ Line: 188 ]]
+		updateTrimEdit = function(p1)
 			-- upvalues: EditsStoreModule (copy)
 			EditsStoreModule.setCommitted("trim", p1)
 		end,
-		updateMusicEdit = function(p1) --[[ Line: 193 ]]
+		updateMusicEdit = function(p1)
 			-- upvalues: EditsStoreModule (copy)
 			EditsStoreModule.setCommitted("music", p1)
 		end,
-		updateTextOverlayEdits = function(p1) --[[ Line: 198 ]]
+		updateTextOverlayEdits = function(p1)
 			-- upvalues: EditsStoreModule (copy)
 			EditsStoreModule.setCommitted("text", p1)
 		end,
@@ -109,15 +109,15 @@ return function() --[[ Line: 108 | Named "createCreationFlowStore" ]]
 		setIsGenerating = Signal2_3,
 		setActiveGeneration = Signal2_4,
 		setTTSAudio = Signal2_5,
-		setPendingRestoredVoice = function(p1) --[[ Line: 175 ]]
+		setPendingRestoredVoice = function(p1)
 			-- upvalues: Signal2_6 (copy)
 			Signal2_6(p1)
 		end,
-		onMusicSearchRetrieved = function(p1) --[[ Line: 203 ]]
+		onMusicSearchRetrieved = function(p1)
 			-- upvalues: Signal2_1 (copy)
 			Signal2_1(p1)
 		end,
-		clearEdits = function(p1) --[[ Line: 208 ]]
+		clearEdits = function(p1)
 			-- upvalues: Signal2 (copy), SelectionStoreModule (copy), NavigationMachineModule (copy), DescriptionStoreModule (copy), FFlagMomentTextGenerationFilteredSignal (upval), GetFFlagEnableMomentTextGenerationFunction (upval), Signal2_1 (copy), EditsStoreModule (copy), Signal2_2 (copy), FFlagMomentsTTSDraftRestoreModule (upval), Signal2_6 (copy)
 			Signal2(true)
 			SelectionStoreModule.setSelectedCapture(nil)

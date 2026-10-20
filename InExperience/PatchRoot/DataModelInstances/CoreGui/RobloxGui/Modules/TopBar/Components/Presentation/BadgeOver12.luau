@@ -9,7 +9,7 @@ local DataStatus = DataHydrationModule.DataHydrationTypes.DataStatus
 local FFlagShowGameAgeRating = require(CorePackages.Workspace.Packages.SharedFlags).FFlagShowGameAgeRating
 local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 
-return function(p1) --[[ Line: 23 ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), FFlagShowGameAgeRating (copy), IsSideSheetEnabledModule (copy), ReactModule (copy), GetAgeRecommendationStoreFunction (copy), DataStatus (copy), SignalsReactModule (copy), AppFonts (copy)
 	local UseStyleResult = UseStyleFunction()
 	local _UDim2 = if FFlagShowGameAgeRating then if IsSideSheetEnabledModule then UDim2.fromOffset(-6, -2) else UDim2.fromOffset(0, 2) else p1.position
@@ -17,7 +17,7 @@ return function(p1) --[[ Line: 23 ]]
 	
 	if FFlagShowGameAgeRating then
 		local Text = tostring(game.GameId)
-		UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useCallback(function(p2) --[[ Line: 33 ]]
+		UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useCallback(function(p2)
 			-- upvalues: GetAgeRecommendationStoreFunction (upval), Text (copy), DataStatus (upval)
 			local AndFetchAgeRecommendation = GetAgeRecommendationStoreFunction(p2).getAndFetchAgeRecommendation(Text)
 			local StatusResult = AndFetchAgeRecommendation.status(p2)

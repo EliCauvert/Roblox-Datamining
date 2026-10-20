@@ -2,7 +2,7 @@
 local ReactModule = require(AvatarViewport.Parent.React)
 local _ = require(AvatarViewport.Types)
 
-return function(p1) --[[ Line: 18 | Named "ViewportInteractionOverlay" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy)
 	return ReactModule.createElement("Frame", {
 		Name = p1.name or "InteractionOverlay",

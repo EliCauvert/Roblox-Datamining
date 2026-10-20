@@ -2,7 +2,7 @@
 local RoactNavigationModule = require(AppChat.Parent.RoactNavigation)
 local EnumScreensModule = require(AppChat.EnumScreens)
 
-return function(p1, ConversationId, ExtraParams) --[[ Line: 9 ]]
+return function(p1, ConversationId, ExtraParams)
 	-- upvalues: RoactNavigationModule (copy), EnumScreensModule (copy)
 	p1.reset({
 		RoactNavigationModule.Actions.navigate({ routeName = EnumScreensModule.ChatLanding }),

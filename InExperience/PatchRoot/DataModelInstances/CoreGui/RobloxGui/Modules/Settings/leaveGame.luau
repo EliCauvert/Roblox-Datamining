@@ -24,7 +24,7 @@ local ConstantsModule = require(RobloxGui.Modules:WaitForChild("InGameMenu"):Wai
 local ReactSchedulingTrackerModule = require(RobloxGui.Modules.Common.ReactSchedulingTracker)
 local Default = if FFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry then require(RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default else nil
 
-return function(p1, p2) --[[ Line: 52 ]]
+return function(p1, p2)
 	-- upvalues: FFlagEnableGameLeftMessage (copy), MessageBus (copy), ConstantsModule (copy), GetFFlagEnableInGameMenuDurationLoggerModule (copy), PerfUtilsModule (copy), ReactSchedulingTrackerModule (copy), CorePackages (copy), GuiService (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy), FFlagLeaveActionChromeShortcutTelemetryModule (copy), CryoModule (copy), FFlagSurvBloxEventTypeEnabled (copy), SurveyEventPublisherModule (copy), WebViewEventTypeModule (copy), Players (copy), NewResult (copy), FFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry (copy), Default (copy), RunService (copy), IsExitModalRemovedModule (copy), GetDefaultQualityLevelFunction (copy)
 	if FFlagEnableGameLeftMessage and (not p2 or not p2.inhibitAppRating) then
 		MessageBus.publish(ConstantsModule.OnAppRatingPromptEventDescriptor, { gameTime = game:getGameTime() })

@@ -4,13 +4,13 @@ local ReactModule = require(Songbird.Parent.React)
 local FoundationModule = require(Songbird.Parent.Foundation)
 local config = { size = require(Songbird.constants).ICON_SIZE }
 
-return function(p1) --[[ Line: 20 | Named "LikeButton" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), FoundationModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	
 	return ReactModule.createElement(FoundationModule.IconButton, {
 		icon = if JoinResult.isFavorited then "icons/common/ratingFilled_medium" else "icons/common/rating_medium",
 		size = FoundationModule.Enums.IconSize.Medium,
-		onActivated = if JoinResult.onFavorite then JoinResult.onFavorite else function() --[[ Line: 26 ]] end
+		onActivated = if JoinResult.onFavorite then JoinResult.onFavorite else function() end
 	})
 end

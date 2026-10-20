@@ -6,7 +6,7 @@
 		lastUpdated = { 26, 3, 25 },
 		throttlingPercentage = game:DefineFastInt("VideoBlockingTelemetryThrottleHundredthsPercent", 10000)
 	},
-	isInPipeDenyList = function(Text: string, Text1: string): boolean --[[ Line: 15 ]]
+	isInPipeDenyList = function(Text: string, Text1: string): boolean
 		if not Text or not Text1 or Text1 == "" then
 			return false
 		end

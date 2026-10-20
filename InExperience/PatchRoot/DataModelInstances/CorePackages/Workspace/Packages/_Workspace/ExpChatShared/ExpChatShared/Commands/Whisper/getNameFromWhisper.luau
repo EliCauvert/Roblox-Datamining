@@ -1,4 +1,4 @@
-﻿local function getArgs(Text: string, List): string? --[[ Line: 2 ]]
+﻿local function getArgs(Text: string, List): string?
 	local Length = nil
 	for _, value in pairs(List) do
 		local Text1 = value .. " "
@@ -11,7 +11,7 @@
 	return nil
 end
 
-return function(p1, p2) --[[ Line: 15 ]]
+return function(p1, p2)
 	-- upvalues: getArgs (copy)
 	local Args: string = getArgs(p1, p2)
 	

@@ -1,6 +1,6 @@
 ﻿local Replaced = string.gsub(string.gsub(string.gsub(game:GetService("ContentProvider").BaseUrl, ".*://", ""), "/.*", ""), "^www%.", "")
 local UrlBaseModule = {
-	new = function(Text, Version): string --[[ Line: 24 ]]
+	new = function(Text, Version): string
 		-- upvalues: Replaced (ref)
 		assert(type(Text) == "string", "UrlBase.new: `name` should be a string")
 		

@@ -12,9 +12,9 @@ local config = {
 
 return {
 	roact = RoactModule,
-	mapStory = function(p1) --[[ Line: 35 ]]
+	mapStory = function(p1)
 		-- upvalues: config (copy), RoactModule (copy), MockProvidersModule (copy), CryoModule (copy)
-		return function(p2) --[[ Line: 36 ]]
+		return function(p2)
 			-- upvalues: config (upval), RoactModule (upval), MockProvidersModule (upval), p1 (copy), CryoModule (upval)
 			return RoactModule.createElement(MockProvidersModule, {
 				themeName = (p2 and config[p2.theme] or config.Default).themeName

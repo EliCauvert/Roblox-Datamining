@@ -2,7 +2,7 @@
 local _ = require(script.Parent.Parent.Types)
 local _ = require(script.Parent.Parent.Enums.Categories)
 
-return function(List, p1) --[[ Line: 13 | Named "buildSlotCategoryTabItems" ]]
+return function(List, p1)
 	local List1 = {}
 	
 	for Id, value in List do
@@ -13,7 +13,7 @@ return function(List, p1) --[[ Line: 13 | Named "buildSlotCategoryTabItems" ]]
 			})
 		end
 	end
-	table.sort(List1, function(A, B): boolean --[[ Line: 26 ]]
+	table.sort(List1, function(A, B): boolean
 		-- upvalues: List (copy)
 		return List[A.id].index < List[B.id].index
 	end)

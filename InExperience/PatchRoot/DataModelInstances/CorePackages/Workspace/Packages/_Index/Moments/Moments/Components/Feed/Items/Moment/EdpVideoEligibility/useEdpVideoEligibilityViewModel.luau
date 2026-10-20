@@ -8,22 +8,22 @@ local IsVideoEligibleForPlayabilityFunction = require(Parent.VideoUtils).isVideo
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local UseVerticalPagerFunction = require(Moments.Components.VerticalPager.VerticalPagerContext).useVerticalPager
 local config = {
-	data = SignalsModule.createComputed(function() --[[ Line: 35 ]]
+	data = SignalsModule.createComputed(function()
 		return nil
 	end),
-	status = SignalsModule.createComputed(function(): string --[[ Line: 38 ]]
+	status = SignalsModule.createComputed(function(): string
 		return "Ready"
 	end)
 }
 
-return function(p1) --[[ Line: 43 | Named "useEdpVideoEligibilityViewModel" ]]
+return function(p1)
 	-- upvalues: UseVerticalPagerFunction (copy), GameGetPlayabilityStoreModule (copy), ReactModule (copy), config (copy), UseSignalStateFunction (copy), IsVideoEligibleForPlayabilityFunction (copy)
 	local UseVerticalPagerResult = UseVerticalPagerFunction()
 	local GameGetPlayabilityStoreModuleResult = GameGetPlayabilityStoreModule(false)
 	local Text = tostring(p1.universeId or 0)
 	local IsUniverseIdAbove: boolean = p1.universeId ~= nil and p1.universeId > 0
 	local UseRefResult = ReactModule.useRef(false)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 50 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: IsUniverseIdAbove (copy), config (upval), GameGetPlayabilityStoreModuleResult (copy), Text (copy)
 		return if IsUniverseIdAbove then GameGetPlayabilityStoreModuleResult.getAndFetchPlayability(Text) else config
 	end, {
@@ -36,7 +36,7 @@ return function(p1) --[[ Line: 43 | Named "useEdpVideoEligibilityViewModel" ]]
 	local IsVideoEligibleForPlayability = IsVideoEligibleForPlayabilityFunction(UseSignalStateResult1 == "Ready", UseSignalStateResult)
 	local Eligible = nil
 	Eligible = if IsUniverseIdAbove and UseSignalStateResult1 ~= "Failed" then if UseSignalStateResult1 == "Ready" then if IsVideoEligibleForPlayability then "Eligible" else "Ineligible" else "Loading" else "Ineligible"
-	ReactModule.useEffect(function() --[[ Line: 71 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Eligible (ref), UseRefResult (copy), UseVerticalPagerResult (copy), p1 (copy)
 		if Eligible ~= "Ineligible" or UseRefResult.current then return end
 		for i, value in UseVerticalPagerResult.store.getItems(false) do

@@ -4,7 +4,7 @@ local EnableSchedulerTracing = require(Parent.Shared).ReactFeatureFlags.enableSc
 local SubscriberRef = require(script.Parent.Tracing).__subscriberRef
 local T = if EnableSchedulerTracing then {} else {}
 local TracingSubscriptionsModule = {
-	unstable_subscribe = function(Key) --[[ Line: 30 ]]
+	unstable_subscribe = function(Key)
 		-- upvalues: EnableSchedulerTracing (copy), T (ref), Object (copy), SubscriberRef (copy)
 		if EnableSchedulerTracing then
 			T[Key] = true
@@ -21,7 +21,7 @@ local TracingSubscriptionsModule = {
 			end
 		end
 	end,
-	unstable_unsubscribe = function(Key) --[[ Line: 47 ]]
+	unstable_unsubscribe = function(Key)
 		-- upvalues: EnableSchedulerTracing (copy), T (ref), Object (copy), SubscriberRef (copy)
 		if EnableSchedulerTracing then
 			T[Key] = nil
@@ -33,7 +33,7 @@ local TracingSubscriptionsModule = {
 	end
 }
 
-function onInteractionTraced(p1) --[[ Line: 57 ]]
+function onInteractionTraced(p1)
 	-- upvalues: T (ref)
 	local Flag = false
 	local v1 = nil
@@ -51,7 +51,7 @@ function onInteractionTraced(p1) --[[ Line: 57 ]]
 	end
 end
 
-function onInteractionScheduledWorkCompleted(p2) --[[ Line: 79 ]]
+function onInteractionScheduledWorkCompleted(p2)
 	-- upvalues: T (ref)
 	local Flag = false
 	local v2 = nil
@@ -69,7 +69,7 @@ function onInteractionScheduledWorkCompleted(p2) --[[ Line: 79 ]]
 	end
 end
 
-function onWorkScheduled(p3, p4) --[[ Line: 102 ]]
+function onWorkScheduled(p3, p4)
 	-- upvalues: T (ref)
 	local Flag = false
 	local v3 = nil
@@ -87,7 +87,7 @@ function onWorkScheduled(p3, p4) --[[ Line: 102 ]]
 	end
 end
 
-function onWorkStarted(p5, p6) --[[ Line: 124 ]]
+function onWorkStarted(p5, p6)
 	-- upvalues: T (ref)
 	local Flag = false
 	local v4 = nil
@@ -105,7 +105,7 @@ function onWorkStarted(p5, p6) --[[ Line: 124 ]]
 	end
 end
 
-function onWorkStopped(p7, p8) --[[ Line: 146 ]]
+function onWorkStopped(p7, p8)
 	-- upvalues: T (ref)
 	local Flag = false
 	local v5 = nil
@@ -123,7 +123,7 @@ function onWorkStopped(p7, p8) --[[ Line: 146 ]]
 	end
 end
 
-function onWorkCanceled(p9, p10) --[[ Line: 168 ]]
+function onWorkCanceled(p9, p10)
 	-- upvalues: T (ref)
 	local Flag = false
 	local v6 = nil

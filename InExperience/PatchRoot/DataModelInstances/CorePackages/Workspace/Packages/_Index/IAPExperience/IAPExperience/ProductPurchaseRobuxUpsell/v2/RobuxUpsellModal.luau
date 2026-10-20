@@ -28,7 +28,7 @@ local _ = require(Parent.Enums.VirtualItemBadgeType)
 local UseDefaultFocusBehaviorFunction = require(Parent1.ReactFocusNavigation).useDefaultFocusBehavior
 local FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule = require(Parent.Flags.FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePrompt)
 
-local function MiddleContent(p1) --[[ Line: 72 ]]
+local function MiddleContent(p1)
 	-- upvalues: ReactModule (copy), View (copy), ProductDetailsModule (copy), RobuxUpsellModalUpsellDetailsWithBonusModule (copy), Text (copy), FormatNumberModule (copy), LocalizationService (copy)
 	return ReactModule.createElement(View, {
 		tag = "col gap-xxlarge auto-y size-full-0 align-x-center align-y-center"
@@ -67,7 +67,7 @@ local function MiddleContent(p1) --[[ Line: 72 ]]
 	})
 end
 
-local function ButtonStackInfo(p1) --[[ Line: 133 ]]
+local function ButtonStackInfo(p1)
 	-- upvalues: UseLocalizationFunction (copy), FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (copy), ButtonType (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		ButtonCancel = "IAPExperience.RobuxUpsell.Action.Cancel",
@@ -103,7 +103,7 @@ local function ButtonStackInfo(p1) --[[ Line: 133 ]]
 	}
 end
 
-local function RobuxUpsellModal(p1) --[[ Line: 180 ]]
+local function RobuxUpsellModal(p1)
 	-- upvalues: FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (copy), UseDefaultFocusBehaviorFunction (copy), ReactModule (copy), LoggerModule (copy), GetAppContextModule (copy), Default (copy), SinglePackageUpsellShownCounter (copy), SinglePackageUpsellModalClosedCounter (copy), SinglePackageUpsellModalBuyClickedCounter (copy), InteractiveAlert (copy), RobuxUpsellModalTitleModule (copy), MiddleContent (copy), ButtonStackInfo (copy), RobuxUpsellModalFooterModule (copy)
 	local ButtonRef = nil
 	local v1 = nil
@@ -111,7 +111,7 @@ local function RobuxUpsellModal(p1) --[[ Line: 180 ]]
 	if FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then
 		ButtonRef, v32 = UseDefaultFocusBehaviorFunction()
 	end
-	ReactModule.useEffect(function() --[[ Line: 186 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: LoggerModule (upval), p1 (copy), GetAppContextModule (upval), Default (upval), SinglePackageUpsellShownCounter (upval)
 		LoggerModule.debug({
 			message = "Single Package Upsell Modal Shown",
@@ -130,7 +130,7 @@ local function RobuxUpsellModal(p1) --[[ Line: 180 ]]
 		})
 	end, {})
 	
-	local function CancelPurchaseActivated() --[[ Line: 209 ]]
+	local function CancelPurchaseActivated()
 		-- upvalues: LoggerModule (upval), Default (upval), SinglePackageUpsellModalClosedCounter (upval), GetAppContextModule (upval), p1 (copy)
 		LoggerModule.debug({ message = "Single Package Upsell Modal Closed" })
 		Default:logRobloxTelemetryCounter(SinglePackageUpsellModalClosedCounter, 1, { appContext = GetAppContextModule() })
@@ -139,7 +139,7 @@ local function RobuxUpsellModal(p1) --[[ Line: 180 ]]
 	
 	local BuyItemActivatedFunction = p1.buttons.buyItemActivated
 	
-	function p1.buttons.buyItemActivated() --[[ Line: 219 ]]
+	function p1.buttons.buyItemActivated()
 		-- upvalues: LoggerModule (upval), Default (upval), SinglePackageUpsellModalBuyClickedCounter (upval), GetAppContextModule (upval), BuyItemActivatedFunction (copy)
 		LoggerModule.debug({ message = "Single Package Upsell Modal Buy Clicked" })
 		Default:logRobloxTelemetryCounter(SinglePackageUpsellModalBuyClickedCounter, 1, { appContext = GetAppContextModule() })
@@ -155,14 +155,14 @@ local function RobuxUpsellModal(p1) --[[ Line: 180 ]]
 		screenSize = p1.screenSize,
 		anchorPoint = Vector2.new(0.5, 0.5),
 		position = UDim2.new(0.5, 0, 0.5, 0),
-		titleContent = function() --[[ Line: 237 ]]
+		titleContent = function()
 			-- upvalues: ReactModule (upval), RobuxUpsellModalTitleModule (upval), p1 (copy), CancelPurchaseActivated (copy)
 			return ReactModule.createElement(RobuxUpsellModalTitleModule, {
 				balanceAmount = p1.upsell.balanceAmount,
 				cancelPurchaseActivated = CancelPurchaseActivated
 			})
 		end,
-		middleContent = function() --[[ Line: 243 ]]
+		middleContent = function()
 			-- upvalues: ReactModule (upval), MiddleContent (upval), p1 (copy)
 			return ReactModule.createElement(MiddleContent, {
 				product = p1.product,
@@ -171,14 +171,14 @@ local function RobuxUpsellModal(p1) --[[ Line: 180 ]]
 			})
 		end,
 		buttonStackInfo = ButtonStackInfo({ buttons = p1.buttons, isQuest = p1.isQuest }),
-		footerContent = function() --[[ Line: 254 ]]
+		footerContent = function()
 			-- upvalues: ReactModule (upval), RobuxUpsellModalFooterModule (upval)
 			return ReactModule.createElement(RobuxUpsellModalFooterModule)
 		end
 	})
 end
 
-return function(p1) --[[ Line: 260 | Named "RobuxUpsellModalContainer" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), RobuxUpsellModal (copy)
 	return ReactModule.createElement(LocalizationProvider, {
 		localization = Localization.new(LocalizationService.RobloxLocaleId)

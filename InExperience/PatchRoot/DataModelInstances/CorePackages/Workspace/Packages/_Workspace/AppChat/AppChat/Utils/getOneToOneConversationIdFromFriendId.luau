@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("AppChat").Models.ConversationChannels)
 
-return function(List, p1) --[[ Line: 8 ]]
+return function(List, p1)
 	for i, value in List do
 		if value and value.type == "one_to_one" and value.participants then
 			for _, participant in value.participants do

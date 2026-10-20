@@ -5,13 +5,13 @@ local Url = require(Parent.Http).Url
 local MyHttpRequestModule = require(DataHydration.Friends.Networking.myHttpRequest)
 local FFlagEnableFriendsStoreChallengeInterceptor = require(Parent.SharedFlags).FFlagEnableFriendsStoreChallengeInterceptor
 
-return function(p1, FriendshipOriginSourceType, p2) --[[ Line: 24 ]]
+return function(p1, FriendshipOriginSourceType, p2)
 	-- upvalues: FFlagEnableFriendsStoreChallengeInterceptor (copy), MyHttpRequestModule (copy), Url (copy), HttpService (copy)
 	return (if FFlagEnableFriendsStoreChallengeInterceptor and p2 then p2 else MyHttpRequestModule)(string.format("%s/users/%s/request-friendship", Url.FRIEND_URL, (tostring(p1))), "POST", {
 		postBody = HttpService:JSONEncode({ friendshipOriginSourceType = FriendshipOriginSourceType })
-	}):andThen(function() --[[ Line: 33 ]]
+	}):andThen(function()
 		return nil
-	end):catch(function(Err) --[[ Line: 36 ]]
+	end):catch(function(Err)
 		-- upvalues: HttpService (upval)
 		local StatusCode = if type(Err) == "table" then Err.StatusCode else nil
 		local Code = nil

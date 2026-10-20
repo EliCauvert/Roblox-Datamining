@@ -16,17 +16,17 @@ local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFon
 local FFlagAppPageShellScrollToTopFocus = require(Parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
 local SelectionOrder: number = if FFlagAppPageShellScrollToTopFocus then 1000000 else 1e999
 
-local function scrollBackWithFocus(Target) --[[ Line: 40 ]]
+local function scrollBackWithFocus(Target)
 	-- upvalues: TweenService (copy), GuiService (copy)
 	local Tween = TweenService:Create(Target, TweenInfo.new(0.3), { CanvasPosition = Vector2.new(0, 0) })
 	Tween:Play()
-	Tween.Completed:Connect(function() --[[ Line: 45 ]]
+	Tween.Completed:Connect(function()
 		-- upvalues: GuiService (upval), Target (copy)
 		GuiService:Select(Target)
 	end)
 end
 
-return function(p1) --[[ Line: 50 | Named "BackToTopButton" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseCursorFunction (copy), CursorType (copy), FFlagAppPageShellScrollToTopFocus (copy), ResponsiveModule (copy), UseLocalizationFunction (copy), ReactModule (copy), ScrollToTopFunction (copy), UserGameSettings (copy), scrollBackWithFocus (copy), BackToTopClickEventFunction (copy), SelectionOrder (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsUseLastInputResultMatch = if FFlagAppPageShellScrollToTopFocus then nil else ResponsiveModule.useLastInput() == ResponsiveModule.Input.Directional
@@ -52,7 +52,7 @@ return function(p1) --[[ Line: 50 | Named "BackToTopButton" ]]
 			TextXAlignment = Enum.TextXAlignment.Center,
 			TextYAlignment = Enum.TextYAlignment.Center,
 			SelectionImageObject = UseCursorFunction(CursorType.RoundedRect),
-			[ReactModule.Event.Activated] = ReactModule.useCallback(function() --[[ Line: 60 ]]
+			[ReactModule.Event.Activated] = ReactModule.useCallback(function()
 				-- upvalues: p1 (copy), FFlagAppPageShellScrollToTopFocus (upval), ScrollToTopFunction (upval), UserGameSettings (upval), IsUseLastInputResultMatch (copy), scrollBackWithFocus (upval), BackToTopClickEventFunction (upval)
 				local Current = p1.scrollingFrameRef.current
 				

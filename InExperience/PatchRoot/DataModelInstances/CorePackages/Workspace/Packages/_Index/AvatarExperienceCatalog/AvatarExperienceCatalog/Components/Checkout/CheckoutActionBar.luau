@@ -14,11 +14,11 @@ local UseNavBarSizeFunction = require(Parent.AppNavBar).useNavBarSize
 local SplitPaneStore = if FFlagEnableSplitPane then require(Parent.SplitPane).SplitPaneStore else nil
 local UseSignalState = if FFlagEnableSplitPane then require(Parent.SignalsReact).useSignalState else nil
 
-local function selectDeviceOrientation(p1) --[[ Line: 26 ]]
+local function selectDeviceOrientation(p1)
 	return p1.DeviceOrientation
 end
 
-return ReactModule.memo((ReactModule.forwardRef(function(p1, Ref) --[[ Line: 41 ]]
+return ReactModule.memo((ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: FoundationModule (copy), FFlagStackedBottomNavMarketplaceCTA (copy), FFlagAXFixBottomNavCTAHeight (copy), UseNavBarSizeFunction (copy), FFlagEnableSplitPane (copy), UseSignalState (copy), SplitPaneStore (copy), UseSelectorFunction (copy), selectDeviceOrientation (copy), ResponsiveModule (copy), UseLocalizationFunction (copy), ReactModule (copy), Constants (copy), Constants1 (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseNavBarSizeResult = if FFlagStackedBottomNavMarketplaceCTA and not FFlagAXFixBottomNavCTAHeight then UseNavBarSizeFunction() else nil
@@ -35,7 +35,7 @@ return ReactModule.memo((ReactModule.forwardRef(function(p1, Ref) --[[ Line: 41 
 		}
 	})
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseMemoResult = ReactModule.useMemo(function(): UDim2 --[[ Line: 83 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): UDim2
 		-- upvalues: IsPortraitMatch (copy), FFlagEnableSplitPane (upval), UseSignalStateResult (copy), UseSignalStateResult1 (copy), Constants (upval)
 		return if IsPortraitMatch then UDim2.fromScale(0, 1) elseif FFlagEnableSplitPane then UDim2.fromScale(if UseSignalStateResult then 1 - UseSignalStateResult1 else Constants.LANDSCAPE_UI_WIDTH_PERCENTAGE, 1) else UDim2.fromScale(Constants.LANDSCAPE_UI_WIDTH_PERCENTAGE, 1)
 	end, {
@@ -50,7 +50,7 @@ return ReactModule.memo((ReactModule.forwardRef(function(p1, Ref) --[[ Line: 41 
 		testId = if FFlagEnableSplitPane then "CheckoutActionBar" else nil,
 		ref = Ref,
 		Visible = p1.Visible,
-		Size = ReactModule.useMemo(function(): UDim2 --[[ Line: 70 ]]
+		Size = ReactModule.useMemo(function(): UDim2
 			-- upvalues: IsPortraitMatch (copy), FFlagEnableSplitPane (upval), UseSignalStateResult (copy), UseSignalStateResult1 (copy), Constants (upval)
 			return if IsPortraitMatch then UDim2.fromScale(1, 0) elseif FFlagEnableSplitPane then UDim2.fromScale(if UseSignalStateResult then UseSignalStateResult1 else Constants.LANDSCAPE_SCENE_WIDTH_PERCENTAGE, 0) else UDim2.fromScale(Constants.LANDSCAPE_SCENE_WIDTH_PERCENTAGE, 0)
 		end, {
@@ -58,9 +58,9 @@ return ReactModule.memo((ReactModule.forwardRef(function(p1, Ref) --[[ Line: 41 
 			UseSignalStateResult,
 			UseSignalStateResult1
 		}),
-		Position = if FFlagStackedBottomNavMarketplaceCTA then ReactModule.useMemo(function() --[[ Line: 97 ]]
+		Position = if FFlagStackedBottomNavMarketplaceCTA then ReactModule.useMemo(function()
 			-- upvalues: p1 (copy), FFlagAXFixBottomNavCTAHeight (upval), Constants1 (upval), UseMemoResult (copy), UseNavBarSizeResult (copy)
-			return if p1.footerVisibilityBinding then p1.footerVisibilityBinding:map(function(p2): UDim2 --[[ Line: 99 ]]
+			return if p1.footerVisibilityBinding then p1.footerVisibilityBinding:map(function(p2): UDim2
 				-- upvalues: FFlagAXFixBottomNavCTAHeight (upval), Constants1 (upval), UseMemoResult (upval), UseNavBarSizeResult (upval)
 				return if FFlagAXFixBottomNavCTAHeight then UseMemoResult + UDim2.new(0, 0, 0, -math.max(0, Constants1.BOTTOM_BAR_SIZE * p2 - 8)) else UseMemoResult + UDim2.new(0, 0, 0, -(UseNavBarSizeResult - 8) * p2)
 			end) else UseMemoResult

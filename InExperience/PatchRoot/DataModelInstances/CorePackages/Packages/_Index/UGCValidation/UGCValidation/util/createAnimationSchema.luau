@@ -1,6 +1,6 @@
 ﻿local ConstantsModule = require(script.Parent.Parent.Constants)
 
-local function createAnimationEntry(p1, p2) --[[ Line: 4 ]]
+local function createAnimationEntry(p1, p2)
 	local config = { ClassName = "Animation" }
 	
 	if p1 then
@@ -18,7 +18,7 @@ local function createAnimationEntry(p1, p2) --[[ Line: 4 ]]
 	return config
 end
 
-local function createStringValueWithAnimations(Name, p1: number, p2) --[[ Line: 23 ]]
+local function createStringValueWithAnimations(Name, p1: number, p2)
 	-- upvalues: createAnimationEntry (copy)
 	local List = {}
 	table.insert(List, (createAnimationEntry(false, p2)))
@@ -29,7 +29,7 @@ local function createStringValueWithAnimations(Name, p1: number, p2) --[[ Line: 
 	return { ClassName = "StringValue", Name = Name, _children = List }
 end
 
-return function(AssetType) --[[ Line: 42 | Named "createAnimationSchema" ]]
+return function(AssetType)
 	-- upvalues: ConstantsModule (copy), createStringValueWithAnimations (copy)
 	local ANIMATIONASSET = ConstantsModule.ANIMATION_ASSET_INFO[AssetType]
 	assert(ANIMATIONASSET, `No ANIMATION_ASSET_INFO for {AssetType}`)

@@ -10,7 +10,7 @@ local UseRefFunction = ReactModule.useRef
 local ValidateRefsModule = require(MomentsCreationFlow.Utils.validateRefs)
 local DragHandleModule = require(MomentsCreationFlow.Enums.DragHandle)
 
-return function(p1, Callback2, Callback, Callback1, Callback3, p2, p3) --[[ Line: 20 | Named "useTrimDragController" ]]
+return function(p1, Callback2, Callback, Callback1, Callback3, p2, p3)
 	-- upvalues: UseRefFunction (copy), UseAnimatedBindingFunction (copy), UseCallbackFunction (copy), ValidateRefsModule (copy), DragHandleModule (copy), MomentsCommonModule (copy), ReactOtterModule (copy), UseEffectFunction (copy)
 	local UseRefResult = UseRefFunction(nil)
 	local UseRefResult1 = UseRefFunction(nil)
@@ -24,7 +24,7 @@ return function(p1, Callback2, Callback, Callback1, Callback3, p2, p3) --[[ Line
 	local UseRefResult7 = UseRefFunction(nil)
 	local UseRefResult8 = UseRefFunction(nil)
 	local UseRefResult9 = UseRefFunction(nil)
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 47 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: ValidateRefsModule (upval), UseRefResult1 (copy), UseRefResult9 (copy), DragHandleModule (upval), UseRefResult6 (copy), UseAnimatedBindingResult (copy), Callback (copy)
 		if ValidateRefsModule({ UseRefResult1 }) and not UseRefResult9.current then
 			assert(UseRefResult1.current ~= nil, "Left handle ref is nil")
@@ -35,7 +35,7 @@ return function(p1, Callback2, Callback, Callback1, Callback3, p2, p3) --[[ Line
 			return
 		end
 	end, { Callback })
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 58 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: ValidateRefsModule (upval), UseRefResult6 (copy), UseRefResult1 (copy), UseAnimatedBindingResult1 (copy), MomentsCommonModule (upval), p3 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
 		if ValidateRefsModule({ UseRefResult6, UseRefResult1 }) then
 			assert(UseRefResult6.current ~= nil, "Left handle initial position ref is nil")
@@ -45,7 +45,7 @@ return function(p1, Callback2, Callback, Callback1, Callback3, p2, p3) --[[ Line
 			return
 		end
 	end, { p3 })
-	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 75 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function()
 		-- upvalues: UseRefResult9 (copy), DragHandleModule (upval), Callback1 (copy), UseAnimatedBindingResult (copy), p3 (copy), UseRefResult6 (copy), Callback2 (copy)
 		if UseRefResult9.current == DragHandleModule.LeftHandle then
 			Callback1(UseAnimatedBindingResult:getValue() * p3, nil)
@@ -56,7 +56,7 @@ return function(p1, Callback2, Callback, Callback1, Callback3, p2, p3) --[[ Line
 			return
 		end
 	end, { Callback2, Callback1, p3 })
-	local UseCallbackResult3 = UseCallbackFunction(function() --[[ Line: 86 ]]
+	local UseCallbackResult3 = UseCallbackFunction(function()
 		-- upvalues: ValidateRefsModule (upval), UseRefResult2 (copy), UseRefResult9 (copy), DragHandleModule (upval), UseRefResult7 (copy), UseAnimatedBindingResult1 (copy), Callback (copy)
 		if ValidateRefsModule({ UseRefResult2 }) and not UseRefResult9.current then
 			assert(UseRefResult2.current ~= nil, "Right handle ref is nil")
@@ -67,7 +67,7 @@ return function(p1, Callback2, Callback, Callback1, Callback3, p2, p3) --[[ Line
 			return
 		end
 	end, { Callback })
-	local UseCallbackResult4 = UseCallbackFunction(function() --[[ Line: 97 ]]
+	local UseCallbackResult4 = UseCallbackFunction(function()
 		-- upvalues: ValidateRefsModule (upval), UseRefResult7 (copy), UseRefResult2 (copy), UseAnimatedBindingResult (copy), MomentsCommonModule (upval), p3 (copy), UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval)
 		if ValidateRefsModule({ UseRefResult7, UseRefResult2 }) then
 			assert(UseRefResult2.current ~= nil, "Right handle ref is nil")
@@ -76,7 +76,7 @@ return function(p1, Callback2, Callback, Callback1, Callback3, p2, p3) --[[ Line
 			return
 		end
 	end, { p3 })
-	local UseCallbackResult5 = UseCallbackFunction(function() --[[ Line: 113 ]]
+	local UseCallbackResult5 = UseCallbackFunction(function()
 		-- upvalues: UseRefResult9 (copy), DragHandleModule (upval), Callback1 (copy), UseAnimatedBindingResult1 (copy), p3 (copy), UseRefResult7 (copy), Callback2 (copy)
 		if UseRefResult9.current == DragHandleModule.RightHandle then
 			Callback1(nil, UseAnimatedBindingResult1:getValue() * p3)
@@ -87,7 +87,7 @@ return function(p1, Callback2, Callback, Callback1, Callback3, p2, p3) --[[ Line
 			return
 		end
 	end, { Callback2, Callback1, p3 })
-	local UseCallbackResult6 = UseCallbackFunction(function() --[[ Line: 124 ]]
+	local UseCallbackResult6 = UseCallbackFunction(function()
 		-- upvalues: ValidateRefsModule (upval), UseRefResult5 (copy), UseRefResult4 (copy), UseRefResult9 (copy), DragHandleModule (upval), UseRefResult8 (copy), Callback (copy)
 		if ValidateRefsModule({ UseRefResult5, UseRefResult4 }) and not UseRefResult9.current then
 			assert(UseRefResult5.current ~= nil, "Scrubber ref is nil")
@@ -99,7 +99,7 @@ return function(p1, Callback2, Callback, Callback1, Callback3, p2, p3) --[[ Line
 			return
 		end
 	end, { Callback })
-	local UseCallbackResult7 = UseCallbackFunction(function() --[[ Line: 136 ]]
+	local UseCallbackResult7 = UseCallbackFunction(function()
 		-- upvalues: ValidateRefsModule (upval), UseRefResult8 (copy), UseRefResult5 (copy), Callback3 (copy)
 		if ValidateRefsModule({ UseRefResult8, UseRefResult5 }) then
 			assert(UseRefResult8.current ~= nil, "Scrubber initial position ref is nil")
@@ -109,7 +109,7 @@ return function(p1, Callback2, Callback, Callback1, Callback3, p2, p3) --[[ Line
 			return
 		end
 	end, { Callback3 })
-	local UseCallbackResult8 = UseCallbackFunction(function() --[[ Line: 149 ]]
+	local UseCallbackResult8 = UseCallbackFunction(function()
 		-- upvalues: UseRefResult9 (copy), DragHandleModule (upval), UseRefResult8 (copy), Callback2 (copy)
 		if UseRefResult9.current == DragHandleModule.Scrubber then
 			UseRefResult9.current = nil
@@ -119,7 +119,7 @@ return function(p1, Callback2, Callback, Callback1, Callback3, p2, p3) --[[ Line
 			return
 		end
 	end, { Callback2 })
-	local UseCallbackResult9 = UseCallbackFunction(function() --[[ Line: 159 ]]
+	local UseCallbackResult9 = UseCallbackFunction(function()
 		-- upvalues: ValidateRefsModule (upval), UseRefResult3 (copy), UseRefResult9 (copy), DragHandleModule (upval), UseRefResult6 (copy), UseAnimatedBindingResult (copy), UseRefResult7 (copy), UseAnimatedBindingResult1 (copy), Callback (copy)
 		if ValidateRefsModule({ UseRefResult3 }) and not UseRefResult9.current then
 			assert(UseRefResult3.current ~= nil, "Selected outline ref is nil")
@@ -131,7 +131,7 @@ return function(p1, Callback2, Callback, Callback1, Callback3, p2, p3) --[[ Line
 			return
 		end
 	end, { Callback })
-	local UseCallbackResult10 = UseCallbackFunction(function() --[[ Line: 171 ]]
+	local UseCallbackResult10 = UseCallbackFunction(function()
 		-- upvalues: ValidateRefsModule (upval), UseRefResult3 (copy), UseRefResult6 (copy), UseRefResult1 (copy), UseRefResult7 (copy), UseRefResult2 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseAnimatedBindingResult2_1 (copy), Callback1 (copy), p3 (copy)
 		if not ValidateRefsModule({
 			UseRefResult3,
@@ -160,7 +160,7 @@ return function(p1, Callback2, Callback, Callback1, Callback3, p2, p3) --[[ Line
 			return
 		end
 	end, { Callback1, p3 })
-	local UseCallbackResult11 = UseCallbackFunction(function() --[[ Line: 209 ]]
+	local UseCallbackResult11 = UseCallbackFunction(function()
 		-- upvalues: UseRefResult9 (copy), DragHandleModule (upval), UseRefResult6 (copy), UseRefResult7 (copy), Callback2 (copy)
 		if UseRefResult9.current == DragHandleModule.Segment then
 			UseRefResult9.current = nil
@@ -171,7 +171,7 @@ return function(p1, Callback2, Callback, Callback1, Callback3, p2, p3) --[[ Line
 			return
 		end
 	end, { Callback2 })
-	UseEffectFunction(function() --[[ Line: 220 ]]
+	UseEffectFunction(function()
 		-- upvalues: p1 (copy), UseRefResult1 (copy), UseCallbackResult (copy), UseCallbackResult1 (copy), UseCallbackResult2 (copy), UseRefResult2 (copy), UseCallbackResult3 (copy), UseCallbackResult4 (copy), UseCallbackResult5 (copy), UseRefResult5 (copy), UseCallbackResult6 (copy), UseCallbackResult7 (copy), UseCallbackResult8 (copy), UseRefResult3 (copy), UseCallbackResult9 (copy), UseCallbackResult10 (copy), UseCallbackResult11 (copy)
 		if not p1 then return end
 		local List = {}
@@ -196,7 +196,7 @@ return function(p1, Callback2, Callback, Callback1, Callback3, p2, p3) --[[ Line
 			table.insert(List, UseRefResult3.current.DragContinue:Connect(UseCallbackResult10))
 			table.insert(List, UseRefResult3.current.DragEnd:Connect(UseCallbackResult11))
 		end
-		return function() --[[ Line: 251 ]]
+		return function()
 			-- upvalues: List (copy)
 			for _, Connection in List do
 				Connection:Disconnect()

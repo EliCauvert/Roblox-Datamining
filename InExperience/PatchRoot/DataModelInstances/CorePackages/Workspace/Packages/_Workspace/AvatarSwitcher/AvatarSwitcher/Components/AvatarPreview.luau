@@ -18,10 +18,10 @@ local config = {
 	AVATAR_ISSUE = FoundationCloudAssetsModule.Assets["pictograms/avatar_issue"]
 }
 
-return function(p1) --[[ Line: 46 | Named "AvatarPreview" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), UseTokensFunction (copy), FoundationModule (copy), config (copy), AvatarSwitcher3DPreview (copy), OutfitViewportModule (copy), FFlagAvatarSwitcherCounters (copy), SendAXCounterV2Function (copy), ConstantsModule (copy), FFlagAvatarSwitcherAccurateAvatarWarning (copy), FFlagAvatarSwitcherWarningLayoutFix (copy), FFlagAXBackgroundsInOutfitThumbnails (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 48 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, { p1.outfitId })
@@ -86,7 +86,7 @@ return function(p1) --[[ Line: 46 | Named "AvatarPreview" ]]
 			OutfitViewport = ReactModule.createElement(OutfitViewportModule, {
 				outfitId = p1.outfitId,
 				rigType = p1.rigType,
-				onLoadingFailed = function() --[[ Line: 131 ]]
+				onLoadingFailed = function()
 					-- upvalues: FFlagAvatarSwitcherCounters (upval), SendAXCounterV2Function (upval), ConstantsModule (upval), UseStateResult2 (copy)
 					if FFlagAvatarSwitcherCounters then
 						SendAXCounterV2Function(ConstantsModule.Counters.AvatarPreviewLoadFailed)

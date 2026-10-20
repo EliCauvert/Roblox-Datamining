@@ -9,7 +9,7 @@ local ForceEnableExpChatGlobalTabBubbleChat = game:DefineFastFlag("ForceEnableEx
 local ForceEnableExpChatGlobalTabMessagePrefix = game:DefineFastFlag("ForceEnableExpChatGlobalTabMessagePrefix", false)
 local ForceEnableExpChatGlobalTabShortWelcome = game:DefineFastFlag("ForceEnableExpChatGlobalTabShortWelcome", false)
 
-local function _(p1) --[[ Line: 43 | Named "getIsUserInTreatment" ]]
+local function _(p1)
 	-- upvalues: ExperimentCacheManager (copy), ExpChatGlobalTabDefaultExperimentLayer (copy)
 	local LayerVariables = ExperimentCacheManager.default:getLayerVariables(ExpChatGlobalTabDefaultExperimentLayer)
 	
@@ -17,7 +17,7 @@ local function _(p1) --[[ Line: 43 | Named "getIsUserInTreatment" ]]
 end
 
 return {
-	getIsGlobalTabDefault = function() --[[ Line: 54 ]]
+	getIsGlobalTabDefault = function()
 		-- upvalues: ForceEnableExpChatGlobalTabDefault (copy), ExpChatGlobalTabDefaultVariant (copy), ExperimentCacheManager (copy), ExpChatGlobalTabDefaultExperimentLayer (copy)
 		local Flag: boolean = ForceEnableExpChatGlobalTabDefault
 		
@@ -31,7 +31,7 @@ return {
 		end
 		return Flag
 	end,
-	getIsGlobalBubbleChatEnabled = function() --[[ Line: 60 ]]
+	getIsGlobalBubbleChatEnabled = function()
 		-- upvalues: ForceEnableExpChatGlobalTabBubbleChat (copy), ExpChatGlobalTabBubbleChatVariant (copy), ExperimentCacheManager (copy), ExpChatGlobalTabDefaultExperimentLayer (copy)
 		local Flag: boolean = ForceEnableExpChatGlobalTabBubbleChat
 		
@@ -45,7 +45,7 @@ return {
 		end
 		return Flag
 	end,
-	getIsGlobalMessagePrefixEnabled = function() --[[ Line: 66 ]]
+	getIsGlobalMessagePrefixEnabled = function()
 		-- upvalues: ForceEnableExpChatGlobalTabMessagePrefix (copy), ExpChatGlobalTabMessagePrefixVariant (copy), ExperimentCacheManager (copy), ExpChatGlobalTabDefaultExperimentLayer (copy)
 		local Flag: boolean = ForceEnableExpChatGlobalTabMessagePrefix
 		
@@ -59,7 +59,7 @@ return {
 		end
 		return Flag
 	end,
-	getGlobalWelcomeMessageKey = function(): string --[[ Line: 73 ]]
+	getGlobalWelcomeMessageKey = function(): string
 		-- upvalues: ForceEnableExpChatGlobalTabShortWelcome (copy), ExpChatGlobalTabShortWelcomeVariant (copy), ExperimentCacheManager (copy), ExpChatGlobalTabDefaultExperimentLayer (copy)
 		local ForceEnableExpChatGlobalTabShortWelcome1 = ForceEnableExpChatGlobalTabShortWelcome
 		
@@ -69,7 +69,7 @@ return {
 		end
 		return if ForceEnableExpChatGlobalTabShortWelcome1 then "CoreScripts.TextChat.ChatWindow.ChatEnabled.Global3" else "CoreScripts.TextChat.ChatWindow.ChatEnabled.Global2"
 	end,
-	logExposure = function() --[[ Line: 82 ]]
+	logExposure = function()
 		-- upvalues: ExperimentCacheManager (copy), ExpChatGlobalTabDefaultExperimentLayer (copy)
 		if ExperimentCacheManager.default:getLayerVariables(ExpChatGlobalTabDefaultExperimentLayer) ~= nil then
 			ExperimentCacheManager.default:logLayerExposure(ExpChatGlobalTabDefaultExperimentLayer)

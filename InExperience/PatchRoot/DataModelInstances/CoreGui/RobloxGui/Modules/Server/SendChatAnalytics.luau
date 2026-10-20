@@ -1,6 +1,6 @@
 ﻿local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
 
-return function(EventName, AdditionalArgs) --[[ Line: 3 ]]
+return function(EventName, AdditionalArgs)
 	-- upvalues: RbxAnalyticsService (copy)
 	if not AdditionalArgs then
 		AdditionalArgs = {}

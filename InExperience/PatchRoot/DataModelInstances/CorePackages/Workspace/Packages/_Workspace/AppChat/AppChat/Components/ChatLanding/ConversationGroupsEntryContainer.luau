@@ -15,7 +15,7 @@ local CustomConversationListRowModule = require(script.Parent.CustomConversation
 local FFlagAppChatUseFoundationCustomConversationListRowModule = require(AppChat.Flags.FFlagAppChatUseFoundationCustomConversationListRow)
 local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
 
-function ConversationGroupsEntryContainer(p1) --[[ Line: 30 ]]
+function ConversationGroupsEntryContainer(p1)
 	-- upvalues: GetAppChatCommunitiesVisualConfigModule (copy), UseLocalizationFunction (copy), ReactModule (copy), LuaAppNavigationContextModule (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), Images (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), ChatLandingTelemetryEventsModule (copy), FFlagAppChatUseFoundationCustomConversationListRowModule (copy), CustomConversationListRowModule (copy), IconName (copy), CustomConversationListEntryModule (copy)
 	local AppChatCommunitiesVisualConfigModule = GetAppChatCommunitiesVisualConfigModule()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -26,7 +26,7 @@ function ConversationGroupsEntryContainer(p1) --[[ Line: 30 ]]
 	local UseTelemetryModuleResult = UseTelemetryModule(ChatLandingTelemetryLayerModule.Context)
 	local Image = Images[AppChatCommunitiesVisualConfigModule.icon]
 	local Communities = if FFlagDebugAppChatEnableDomLocatorsModule then DomLocatorsModule.chatLandingConversationListHeader("communities") else nil
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 43 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseTelemetryModuleResult (copy), ChatLandingTelemetryEventsModule (upval), UseContextResult (copy)
 		UseTelemetryModuleResult.emit(ChatLandingTelemetryEventsModule.ChatLandingGroupsBtnClicked, {})
 		UseContextResult.navigateToGroups()

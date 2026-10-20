@@ -1,7 +1,7 @@
 ﻿local MessageEffectModule = require(script.Parent.MessageEffect)
 local IsSingleSupportedEmojiModule = require(script.Parent.isSingleSupportedEmoji)
 
-return function(p1) --[[ Line: 16 | Named "getMessageEffects" ]]
+return function(p1)
 	-- upvalues: IsSingleSupportedEmojiModule (copy), MessageEffectModule (copy)
 	local List = {}
 	

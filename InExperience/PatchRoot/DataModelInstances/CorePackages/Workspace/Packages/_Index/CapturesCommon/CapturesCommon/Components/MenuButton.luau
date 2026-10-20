@@ -6,7 +6,7 @@ local Button = FoundationModule.Button
 local ButtonSize = FoundationModule.Enums.ButtonSize
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
-return function(Frame: Frame) --[[ Line: 22 ]]
+return function(Frame: Frame)
 	-- upvalues: ReactModule (copy), View (copy), Button (copy), ButtonSize (copy), ButtonVariant (copy)
 	return ReactModule.createElement(View, {
 		tag = "bg-action-subtle align-x-center align-y-center auto-xy padding-bottom-medium",

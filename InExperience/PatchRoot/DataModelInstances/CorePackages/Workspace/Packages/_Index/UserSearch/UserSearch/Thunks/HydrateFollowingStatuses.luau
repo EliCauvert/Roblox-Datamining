@@ -5,19 +5,19 @@ local RODUXKEY = require(UserSearch.Common.Constants).RODUX_KEY
 local GetDeepValueFunction = require(Parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Dictionary.getDeepValue
 local HydrateEmptyIdsHelperFunction = require(Parent.SocialCommon).Utils.hydrateEmptyIdsHelper
 
-return function(Ids) --[[ Line: 14 ]]
+return function(Ids)
 	-- upvalues: GetDeepValueFunction (copy), RODUXKEY (copy), HydrateEmptyIdsHelperFunction (copy), FriendsNetworkingModule (copy)
-	return function(p1) --[[ Line: 15 ]]
+	return function(p1)
 		-- upvalues: GetDeepValueFunction (upval), RODUXKEY (upval), HydrateEmptyIdsHelperFunction (upval), Ids (copy), FriendsNetworkingModule (upval)
 		local DeepValue = GetDeepValueFunction(p1:getState() or {}, string.format("%s.Friends.followings.followingStatuses", RODUXKEY)) or {}
 		
 		return HydrateEmptyIdsHelperFunction({
 			ids = Ids,
-			selector = function(p2) --[[ Line: 24 ]]
+			selector = function(p2)
 				-- upvalues: DeepValue (copy)
 				return DeepValue[p2]
 			end,
-			hydrate = function(TargetUserIds) --[[ Line: 27 ]]
+			hydrate = function(TargetUserIds)
 				-- upvalues: p1 (copy), FriendsNetworkingModule (upval)
 				return p1:dispatch(FriendsNetworkingModule.GetFollowingExists.API({ targetUserIds = TargetUserIds }))
 			end

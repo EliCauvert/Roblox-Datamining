@@ -8,11 +8,11 @@ local Debug = require(Parent.DataHydration.CreatorAgentChat).debug
 local FetchFunction = HttpClientModule.fetch
 local AsPromiseFunction = HttpClientModule.asPromise
 
-local function cropToSquareAsync(Url) --[[ Line: 19 ]]
+local function cropToSquareAsync(Url)
 	-- upvalues: PromiseModule (copy), AssetService (copy)
-	return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 20 ]]
+	return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 		-- upvalues: AssetService (upval), Url (copy)
-		local Success, Result = pcall(function() --[[ Line: 21 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: AssetService (upval), Url (upval)
 			return AssetService:CreateEditableImageAsync(Content.fromUri(Url))
 		end)
@@ -63,29 +63,29 @@ local function cropToSquareAsync(Url) --[[ Line: 19 ]]
 	end)
 end
 
-return function(Url, p1, CropSquare, p2) --[[ Line: 87 | Named "createImageAssetAsync" ]]
+return function(Url, p1, CropSquare, p2)
 	-- upvalues: Players (copy), PromiseModule (copy), cropToSquareAsync (copy), FetchFunction (copy), AsPromiseFunction (copy), Debug (copy), GetAssetUserAuthStoreFunction (copy)
 	local LocalPlayer = Players.LocalPlayer
 	
 	if LocalPlayer then
-		local function getImageContent() --[[ Line: 98 ]]
+		local function getImageContent()
 			-- upvalues: CropSquare (copy), cropToSquareAsync (upval), Url (copy), FetchFunction (upval), AsPromiseFunction (upval)
 			return if CropSquare then cropToSquareAsync(Url) else AsPromiseFunction((FetchFunction({
 				method = "GET",
 				analyticsKey = "build-experience.download-thumbnail",
 				responseEncoding = "protobuf",
 				url = Url,
-				decode = function(p3) --[[ Line: 107 ]]
+				decode = function(p3)
 					return p3
 				end
-			}))):andThen(function(Buf): string --[[ Line: 111 ]]
+			}))):andThen(function(Buf): string
 				return buffer.tostring(Buf)
 			end)
 		end
 		
 		Debug.log("info", "create_image_asset starting", { cropSquare = CropSquare })
 		
-		return getImageContent():andThen(function(Result) --[[ Line: 120 ]]
+		return getImageContent():andThen(function(Result)
 			-- upvalues: CropSquare (copy), GetAssetUserAuthStoreFunction (upval), p1 (copy), p2 (copy), LocalPlayer (copy)
 			local Bmp: string = if CropSquare then "image/bmp" else "image/png"
 			local AssetUserAuthStore = GetAssetUserAuthStoreFunction()
@@ -97,10 +97,10 @@ return function(Url, p1, CropSquare, p2) --[[ Line: 87 | Named "createImageAsset
 				config.userId = tostring(LocalPlayer.UserId)
 			end
 			return AssetUserAuthStore.createImageAsset(Result, Bmp, config)
-		end):andThen(function(Result) --[[ Line: 133 ]]
+		end):andThen(function(Result)
 			-- upvalues: GetAssetUserAuthStoreFunction (upval)
 			return GetAssetUserAuthStoreFunction().pollUntilDone(Result)
-		end):andThen(function(Result) --[[ Line: 137 ]]
+		end):andThen(function(Result)
 			-- upvalues: PromiseModule (upval), Debug (upval)
 			if typeof(Result) == "table" and Result.status == "timed_out" then
 				return PromiseModule.reject("Operation did not complete in time")

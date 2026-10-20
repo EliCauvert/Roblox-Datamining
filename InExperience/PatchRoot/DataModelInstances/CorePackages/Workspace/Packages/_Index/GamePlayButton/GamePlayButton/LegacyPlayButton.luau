@@ -35,7 +35,7 @@ PlayButton.validateProps = TModule.strictInterface({
 	testId = TModule.optional(TModule.string)
 })
 
-function PlayButton.renderWithLocalization(p1, p2) --[[ Line: 47 ]]
+function PlayButton.renderWithLocalization(p1, p2)
 	-- upvalues: GetFFlagIsSquadEnabledFunction (copy), PlayButtonStatesModule (copy), FFlagLuaAppPlayButtonLoadingPrimary (copy), ButtonType (copy), FFlagLuaAppTextOnlyPlayButton (copy), FFlagLuaAppIconTextPlayButton (copy), FFlagLuaAppUpdatePlayButtonText (copy), IconsCommonPlay (copy), IconsCommonRobux (copy), FFlagLuaAppPlayButtonPrivatePT (copy), IconsStatusUnavailable (copy), FFlagEnableGameJoinEarlyAccess (copy), RoactModule (copy), ComboButton (copy), IconsActionsTruncationCollapse (copy), Button (copy), FFlagLuaAppPlayLoadingClickTelemetryMobile (copy), ReactModule (copy), GetFFlagUIBloxUseFoundationButtonFunction (copy), FFlagLuaAppPlayButtonOptOutFoundationButton (copy)
 	local Size = p1.props.Size
 	local LayoutOrder = p1.props.LayoutOrder
@@ -109,12 +109,12 @@ function PlayButton.renderWithLocalization(p1, p2) --[[ Line: 47 ]]
 				icon = Icon,
 				text = Unavailable,
 				isDisabled = IsDisabled,
-				onActivated = if IsDisabled then function() --[[ Line: 120 ]] end else OnPlayButtonActivated
+				onActivated = if IsDisabled then function() end else OnPlayButtonActivated
 			},
 			overflow = {
 				icon = IconsActionsTruncationCollapse,
 				isDisabled = IsDisabled1,
-				onActivated = if IsDisabled1 then function() --[[ Line: 125 ]] end else OnPlaySquadButtonActivated
+				onActivated = if IsDisabled1 then function() end else OnPlaySquadButtonActivated
 			},
 			testId = p1.props.testId
 		})
@@ -128,7 +128,7 @@ function PlayButton.renderWithLocalization(p1, p2) --[[ Line: 47 ]]
 			buttonType = PrimaryContextual,
 			userInteractionEnabled = not IsDisabled,
 			isDisabled = IsDisabled,
-			onActivated = if IsDisabled then function() --[[ Line: 139 ]] end else OnPlayButtonActivated,
+			onActivated = if IsDisabled then function() end else OnPlayButtonActivated,
 			[ReactModule.Tag] = if p1.props.testId then `data-testid={p1.props.testId}` else nil,
 			DO_NOT_USE_useUIBloxButton = if GetFFlagUIBloxUseFoundationButtonFunction() or FFlagLuaAppPlayButtonOptOutFoundationButton then true else nil
 		})
@@ -153,7 +153,7 @@ function PlayButton.renderWithLocalization(p1, p2) --[[ Line: 47 ]]
 	end
 end
 
-function PlayButton.render(p1) --[[ Line: 173 ]]
+function PlayButton.render(p1)
 	-- upvalues: WithLocalizationFunction (copy), FFlagLuaAppTextOnlyPlayButton (copy), FFlagLuaAppIconTextPlayButton (copy), FFlagLuaAppUpdatePlayButtonText (copy), FFlagLuaAppPlayButtonPrivatePT (copy)
 	return WithLocalizationFunction({
 		join = "Feature.ExperienceDetails.PlayButtonText.ActionNeeded",
@@ -164,7 +164,7 @@ function PlayButton.render(p1) --[[ Line: 173 ]]
 		playDemo = "Feature.ExperienceDetails.PlayButtonText.PlayDemo",
 		play = if (FFlagLuaAppTextOnlyPlayButton or FFlagLuaAppIconTextPlayButton) and FFlagLuaAppUpdatePlayButtonText then "Feature.ExperienceDetails.PlayButtonText.Play" else nil,
 		playtest = if FFlagLuaAppPlayButtonPrivatePT then "Feature.ExperienceDetails.PlayButtonText.Playtest" else nil
-	})(function(p2) --[[ Line: 186 ]]
+	})(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithLocalization(p2)
 	end)

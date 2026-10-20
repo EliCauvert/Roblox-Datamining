@@ -6,12 +6,12 @@ local FFlagShareSheetFriendsSort = require(Parent.SharedFlags).FFlagShareSheetFr
 local RecipientSourceModule = require(ShareSheet.Recipients.RecipientSource)
 local ShareSheetTelemetryModule = require(ShareSheet.telemetry.ShareSheetTelemetry)
 
-return function() --[[ Line: 40 | Named "createUniversalShareSheetStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), ShareSheetTelemetryModule (copy), FFlagShareSheetFriendsSort (copy), RecipientSourceModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(false)
 	local Signal1, Signal2_1 = SignalsModule.createSignal(nil)
 	
-	local function hide(Replaced) --[[ Line: 45 ]]
+	local function hide(Replaced)
 		-- upvalues: FFlagShareSheetPeoplePickerEnabledModule (upval), Signal2 (copy), Signal1 (copy), Signal2_1 (copy), ShareSheetTelemetryModule (upval), FFlagShareSheetFriendsSort (upval)
 		if FFlagShareSheetPeoplePickerEnabledModule then
 			Signal2(false)
@@ -37,7 +37,7 @@ return function() --[[ Line: 40 | Named "createUniversalShareSheetStore" ]]
 		getIsPeoplePickerDisplayed = Signal,
 		getRequest = Signal1,
 		setIsPeoplePickerDisplayed = Signal2,
-		show = function(Tbl) --[[ Line: 67 ]]
+		show = function(Tbl)
 			-- upvalues: FFlagShareSheetFriendsSort (upval), RecipientSourceModule (upval), hide (copy), ShareSheetTelemetryModule (upval), Signal2_1 (copy)
 			if FFlagShareSheetFriendsSort and Tbl.recipientSource ~= nil and not RecipientSourceModule.isValidRecipientSource(Tbl.recipientSource) then
 				error(`Invalid recipient source {Tbl.recipientSource}`)

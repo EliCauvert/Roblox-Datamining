@@ -17,13 +17,13 @@ local CommonIconModule = if EnabledResult1 then require(Chrome.Integrations.Comm
 local ServiceModule = if EnabledResult1 then require(Chrome.Service) else nil
 local ConstantsModule = if EnabledResult1 then require(Chrome.ChromeShared.Unibar.Constants) else nil
 local UseMappedSignal = if EnabledResult1 then require(CorePackages.Workspace.Packages.Chrome).Hooks.useMappedSignal else nil
-local NewResult1 = if EnabledResult1 and ServiceModule and ConstantsModule then require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(ServiceModule:onIntegrationStatusChanged(), function() --[[ Line: 52 ]]
+local NewResult1 = if EnabledResult1 and ServiceModule and ConstantsModule then require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(ServiceModule:onIntegrationStatusChanged(), function()
 	-- upvalues: ServiceModule (copy), ConstantsModule (copy)
 	return ServiceModule:isWindowOpen(ConstantsModule.IN_EXPERIENCE_SHOP_ID)
 end) else nil
 local ToggleInExperienceShopWindow = if EnabledResult1 then require(Chrome.Integrations.InExperienceShop.ShopWindowLayout).toggleInExperienceShopWindow else nil
 
-local function getShopGlobalIconEnabled(p1) --[[ Line: 61 ]]
+local function getShopGlobalIconEnabled(p1)
 	-- upvalues: EnabledResult1 (copy), InExperienceShopModule (copy)
 	if EnabledResult1 then
 		local GetShopGlobalIconStoreFunction = InExperienceShopModule.GetShopGlobalIconStore
@@ -34,7 +34,7 @@ local function getShopGlobalIconEnabled(p1) --[[ Line: 61 ]]
 	end
 end
 
-local function getShopGlobalStatusIndicatorEnabled(p1) --[[ Line: 69 ]]
+local function getShopGlobalStatusIndicatorEnabled(p1)
 	-- upvalues: EnabledResult1 (copy), InExperienceShopModule (copy)
 	if EnabledResult1 then
 		local GetShopGlobalIconStoreFunction = InExperienceShopModule.GetShopGlobalIconStore
@@ -45,7 +45,7 @@ local function getShopGlobalStatusIndicatorEnabled(p1) --[[ Line: 69 ]]
 	end
 end
 
-local function handleShopGlobalIconActivated() --[[ Line: 77 ]]
+local function handleShopGlobalIconActivated()
 	-- upvalues: EnabledResult1 (copy), FFlagCenterInExperienceShopWindow (copy), ToggleInExperienceShopWindow (copy), ServiceModule (copy), ConstantsModule (copy)
 	if not EnabledResult1 then return end
 	if FFlagCenterInExperienceShopWindow then
@@ -59,16 +59,16 @@ local function handleShopGlobalIconActivated() --[[ Line: 77 ]]
 	end
 end
 
-return function(p1) --[[ Line: 101 | Named "ShopIcon" ]]
+return function(p1)
 	-- upvalues: SignalsReactModule (copy), getShopGlobalIconEnabled (copy), getShopGlobalStatusIndicatorEnabled (copy), ReactModule (copy), EnabledResult1 (copy), InExperienceShopModule (copy), UseMappedSignal (copy), NewResult1 (copy), UseObservableValueModule (copy), GamepadConnectorModule (copy), NewResult (copy), ShopGlobalIcon (copy), handleShopGlobalIconActivated (copy), FFlagExperienceShopNewIconography (copy), CommonIconModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(getShopGlobalIconEnabled)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(getShopGlobalStatusIndicatorEnabled)
-	ReactModule.useEffect(function() --[[ Line: 105 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: EnabledResult1 (upval), InExperienceShopModule (upval)
 		if not EnabledResult1 then return end
-		return InExperienceShopModule.initShopGlobalIcon and InExperienceShopModule.initShopGlobalIcon() or function() --[[ Line: 110 ]] end
+		return InExperienceShopModule.initShopGlobalIcon and InExperienceShopModule.initShopGlobalIcon() or function() end
 	end, {})
-	local IsActive = (UseMappedSignal or function() --[[ Line: 116 ]]
+	local IsActive = (UseMappedSignal or function()
 		return nil
 	end)(if UseSignalStateResult then NewResult1 else nil)
 	local UseObservableValueModuleResult = UseObservableValueModule(if GamepadConnectorModule == nil then NewResult else GamepadConnectorModule:getShowTopBar())

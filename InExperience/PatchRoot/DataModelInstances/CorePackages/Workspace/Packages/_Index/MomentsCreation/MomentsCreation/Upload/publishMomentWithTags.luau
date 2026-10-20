@@ -7,7 +7,7 @@ local GetTagsForMomentModule = require(MomentsCreation.Utils.getTagsForMoment)
 local MakeMomentMetadataModule = require(MomentsCreation.Utils.makeMomentMetadata)
 local MakeRegistrationInfoModule = require(MomentsCreation.Utils.makeRegistrationInfo)
 
-return function(p1, p2, p3, p4, p5, p6): boolean --[[ Line: 16 | Named "publishMomentWithTags" ]]
+return function(p1, p2, p3, p4, p5, p6): boolean
 	-- upvalues: IsStudioModule (copy), MakeMomentMetadataModule (copy), MakeRegistrationInfoModule (copy), GetTagsForMomentModule (copy), CreateMomentModule (copy)
 	if IsStudioModule() then
 		print(`[moments-creation] dev publish (not uploaded): "{p2}"`)
@@ -16,7 +16,7 @@ return function(p1, p2, p3, p4, p5, p6): boolean --[[ Line: 16 | Named "publishM
 	else
 		local MomentMetadataModule = MakeMomentMetadataModule(p1, p3, p2, p5, p6)
 		local RegistrationInfoModule = MakeRegistrationInfoModule(p1, MomentMetadataModule, GetTagsForMomentModule(MomentMetadataModule))
-		task.spawn(function() --[[ Line: 34 ]]
+		task.spawn(function()
 			-- upvalues: CreateMomentModule (upval), p1 (copy), MomentMetadataModule (copy), RegistrationInfoModule (copy), p4 (copy)
 			CreateMomentModule(p1, MomentMetadataModule, RegistrationInfoModule, p4)
 		end)

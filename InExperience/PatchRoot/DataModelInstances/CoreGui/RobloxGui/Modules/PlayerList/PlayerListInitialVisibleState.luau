@@ -14,12 +14,12 @@ local IsReskinConsoleMobileRouteFunction = PlayerListModule.Common.isReskinConso
 local FFlagPlayerListUseMobileOnSmallDisplay = PlayerListModule.Flags.FFlagPlayerListUseMobileOnSmallDisplay
 local FFlagLuaSupportMicroGamepadPreferredInput = require(CorePackages.Workspace.Packages.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
 
-local function _(PreferredInput): boolean --[[ Line: 22 | Named "isTouchOrGamepad" ]]
+local function _(PreferredInput): boolean
 	-- upvalues: FFlagLuaSupportMicroGamepadPreferredInput (copy)
 	return PreferredInput == Enum.PreferredInput.Touch or (PreferredInput == Enum.PreferredInput.Gamepad or FFlagLuaSupportMicroGamepadPreferredInput and PreferredInput == Enum.PreferredInput.MicroGamepad)
 end
 
-local _ = function(PreferredInput) --[[ Line: 34 | Named "isCurrentReskinConsoleMobileRoute" ]]
+local _ = function(PreferredInput)
 	-- upvalues: IsReskinConsoleMobileRouteFunction (copy), GuiService (copy)
 	return IsReskinConsoleMobileRouteFunction({
 		displaySize = GuiService.ViewportDisplaySize,
@@ -27,7 +27,7 @@ local _ = function(PreferredInput) --[[ Line: 34 | Named "isCurrentReskinConsole
 	})
 end
 
-local function isSmallTouchScreen(PreferredInput) --[[ Line: 41 ]]
+local function isSmallTouchScreen(PreferredInput)
 	-- upvalues: IsReskinConsoleMobileRouteFunction (copy), GuiService (copy), FFlagPlayerListUseMobileOnSmallDisplay (copy), FFlagEnableMobilePlayerListOnConsole (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy), UtilityModule (copy), FStringPlayerListOverrideTypeModule (copy)
 	if IsReskinConsoleMobileRouteFunction({
 		displaySize = GuiService.ViewportDisplaySize,
@@ -43,7 +43,7 @@ local function isSmallTouchScreen(PreferredInput) --[[ Line: 41 ]]
 	end
 end
 
-return function(p1) --[[ Line: 61 ]]
+return function(p1)
 	-- upvalues: UserInputService (copy), isSmallTouchScreen (copy), VRService (copy), IsReskinConsoleMobileRouteFunction (copy), GuiService (copy), FFlagEnableMobilePlayerListOnConsole (copy), TenFootInterfaceModule (copy), FFlagPlayerListPersistVisibilityModule (copy)
 	local PreferredInput = if p1 == nil then UserInputService.PreferredInput else p1
 	local Inverted = not isSmallTouchScreen(PreferredInput)

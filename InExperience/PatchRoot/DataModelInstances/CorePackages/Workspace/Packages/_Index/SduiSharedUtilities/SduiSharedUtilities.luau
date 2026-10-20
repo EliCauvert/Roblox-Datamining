@@ -8,42 +8,42 @@ return {
 	["jest.mockDataModel.config"] = script["jest.mockDataModel.config"],
 	SduiFocusTags = require(script.FocusNavigation.SduiFocusTags),
 	OnNavigateBackWrapper = require(script.FocusNavigation.NavigateBackBindings).OnNavigateBackWrapper,
-	useOnNavigateBack = function(p1, p2) --[[ Line: 49 ]]
+	useOnNavigateBack = function(p1, p2)
 		return require(script.FocusNavigation.NavigateBackBindings).useOnNavigateBack(p1, p2)
 	end,
-	useInitialFocusOnTag = function(p1, p2) --[[ Line: 52 ]]
+	useInitialFocusOnTag = function(p1, p2)
 		require(script.FocusNavigation.useInitialFocusOnTag)(p1, p2)
 	end,
-	useSelectionOrderTracking = function(p1) --[[ Line: 55 ]]
+	useSelectionOrderTracking = function(p1)
 		require(script.FocusNavigation.useSelectionOrderTracking)(p1)
 	end,
-	usePageButtonBindings = function(p1, p2, p3) --[[ Line: 58 ]]
+	usePageButtonBindings = function(p1, p2, p3)
 		return require(script.FocusNavigation.usePageButtonBindings)(p1, p2, p3)
 	end,
-	useBackButtonBinding = function(p1) --[[ Line: 65 ]]
+	useBackButtonBinding = function(p1)
 		return require(script.FocusNavigation.useBackButtonBinding)(p1)
 	end,
-	createSduiFocusActivationStore = function() --[[ Line: 68 ]]
+	createSduiFocusActivationStore = function()
 		return require(script.FocusNavigation.createSduiFocusActivationStore)()
 	end,
-	getSduiFocusActivationStore = function() --[[ Line: 71 ]]
+	getSduiFocusActivationStore = function()
 		return require(script.FocusNavigation.getSduiFocusActivationStore)()
 	end,
-	useSduiFocusActivation = function(p1, p2) --[[ Line: 74 ]]
+	useSduiFocusActivation = function(p1, p2)
 		require(script.FocusNavigation.useSduiFocusActivation)(p1, p2)
 	end,
 	createSduiApiStore = require(script.createSduiApiStore),
 	getSduiApiStore = require(script.getSduiApiStore),
 	SduiInputDataUpdates = if require(Parent.SharedFlags).FFlagSduiApiStoreUpdateInputData then require(script.SduiInputDataUpdates) else nil,
 	useDataHydrationAccountGeneration = if FFlagHomePageRefetchOnDataHydrationAccountReset then require(script.hooks.useDataHydrationAccountGeneration) else nil,
-	fetchSduiTemplates = function(p1, p2) --[[ Line: 85 ]]
+	fetchSduiTemplates = function(p1, p2)
 		return require(script.fetchSduiTemplates)(p1, p2)
 	end,
-	createTemplateApiRequestConfig = function(p1) --[[ Line: 88 ]]
+	createTemplateApiRequestConfig = function(p1)
 		return require(script.createTemplateApiRequestConfig)(p1)
 	end,
 	handleSduiApiResponse = require(script.handleSduiApiResponse),
-	prewarmAppTemplatesOnLaunch = function() --[[ Line: 92 ]]
+	prewarmAppTemplatesOnLaunch = function()
 		return require(script.prewarmAppTemplatesOnLaunch)()
 	end,
 	SduiLoadTimer = require(script.SduiLoadTimer),

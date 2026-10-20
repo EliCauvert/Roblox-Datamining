@@ -3,7 +3,7 @@ local SessionType = require(script:FindFirstAncestor("SessionizationUtil").Paren
 local SessionInfoModule = {}
 SessionInfoModule.__index = SessionInfoModule
 
-function SessionInfoModule.new(Level, SessionId, TagName, CreationTimestamp, p1) --[[ Line: 40 ]]
+function SessionInfoModule.new(Level, SessionId, TagName, CreationTimestamp, p1)
 	-- upvalues: SessionInfoModule (copy)
 	local self = setmetatable({}, SessionInfoModule)
 	self.level = Level
@@ -15,7 +15,7 @@ function SessionInfoModule.new(Level, SessionId, TagName, CreationTimestamp, p1)
 	return self
 end
 
-function SessionInfoModule:__tostring(): string --[[ Line: 63 ]]
+function SessionInfoModule:__tostring(): string
 	local Count = 0
 	
 	for _ in pairs(self.metadata) do
@@ -24,7 +24,7 @@ function SessionInfoModule:__tostring(): string --[[ Line: 63 ]]
 	return string.format("SessionInfo{level=%s, sessionId=%s, tagName=%s, creationTimestamp=%s, metadata_count=%d}", tostring(self.level), tostring(self.sessionId), tostring(self.tagName), tostring(self.creationTimestamp), Count)
 end
 
-function SessionInfoModule.getSessionByLevel(Level) --[[ Line: 97 ]]
+function SessionInfoModule.getSessionByLevel(Level)
 	-- upvalues: SessionType (copy), SessionService (copy), SessionInfoModule (copy)
 	local StructuralIdentifierEntry = SessionType.StructuralIdentifier[Level]
 	local RootSID = nil

@@ -3,7 +3,7 @@ local TrieNodeModule = require(script:FindFirstAncestor("Autocomplete").Trie.Tri
 local TrieModule = {}
 TrieModule.__index = TrieModule
 
-function TrieModule.new() --[[ Line: 11 ]]
+function TrieModule.new()
 	-- upvalues: TrieModule (copy), TrieNodeModule (copy)
 	local t = {}
 	setmetatable(t, TrieModule)
@@ -12,7 +12,7 @@ function TrieModule.new() --[[ Line: 11 ]]
 	return t
 end
 
-function TrieModule:insert(Text: string) --[[ Line: 18 ]]
+function TrieModule:insert(Text: string)
 	-- upvalues: TrieNodeModule (copy)
 	local Root = self.root
 	
@@ -27,7 +27,7 @@ function TrieModule:insert(Text: string) --[[ Line: 18 ]]
 	Root.isEndOfWord = true
 end
 
-function TrieModule:autocomplete(Text: string) --[[ Line: 30 ]]
+function TrieModule:autocomplete(Text: string)
 	local HelperResult = {}
 	local Root = self.root
 	
@@ -42,7 +42,7 @@ function TrieModule:autocomplete(Text: string) --[[ Line: 30 ]]
 	return (self:helper(Root, HelperResult, (string.sub(Text, 1, #Text - 1))))
 end
 
-function TrieModule:helper(Root, HelperResult, Text) --[[ Line: 45 ]]
+function TrieModule:helper(Root, HelperResult, Text)
 	-- upvalues: List (copy)
 	if Root.isEndOfWord then
 		HelperResult = List.push(HelperResult, Text .. Root.data)

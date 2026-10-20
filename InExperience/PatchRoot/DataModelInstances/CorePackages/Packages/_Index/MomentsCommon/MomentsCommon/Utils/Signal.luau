@@ -2,7 +2,7 @@
 local SignalModule = {}
 SignalModule.__index = SignalModule
 
-function SignalModule.new() --[[ Line: 32 ]]
+function SignalModule.new()
 	-- upvalues: SignalModule (copy)
 	local config = { _listeners = {} }
 	setmetatable(config, SignalModule)
@@ -10,13 +10,13 @@ function SignalModule.new() --[[ Line: 32 ]]
 	return config
 end
 
-function SignalModule:connect(Callback) --[[ Line: 42 ]]
+function SignalModule:connect(Callback)
 	-- upvalues: ImmutableModule (copy)
 	local config = { isConnected = true, callback = Callback }
 	self._listeners = ImmutableModule.Append(self._listeners, config)
 	
 	return {
-		disconnect = function() --[[ Line: 49 ]]
+		disconnect = function()
 			-- upvalues: config (copy), self (copy), ImmutableModule (upval)
 			config.isConnected = false
 			self._listeners = ImmutableModule.RemoveValueFromList(self._listeners, config)
@@ -24,7 +24,7 @@ function SignalModule:connect(Callback) --[[ Line: 42 ]]
 	}
 end
 
-function SignalModule.fire(p1, ...) --[[ Line: 59 ]]
+function SignalModule.fire(p1, ...)
 	for _, listener in ipairs(p1._listeners) do
 		if listener.isConnected then
 			listener.callback(...)

@@ -17,7 +17,7 @@ return {
 		swipe = "swipe",
 		handleTap = "handleTap"
 	},
-	logEvent = function(p1, p2, p3) --[[ Line: 31 ]]
+	logEvent = function(p1, p2, p3)
 		-- upvalues: UnionResult (copy), MutedErrorFunction (copy)
 		local UnionResultResult, UnionResultResult2 = UnionResult(p3)
 		

@@ -1,4 +1,4 @@
-﻿return function(p1): boolean? --[[ Line: 4 ]]
+﻿return function(p1): boolean?
 	local AssetId = p1.detailsInformation.assetId
 	
 	if AssetId == nil then

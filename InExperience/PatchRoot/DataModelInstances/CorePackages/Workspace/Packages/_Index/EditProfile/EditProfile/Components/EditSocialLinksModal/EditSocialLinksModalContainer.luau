@@ -15,17 +15,17 @@ local UseNavigationFunction = require(Parent.Navigation).useNavigation
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 local FFlagProfileEnableSocialNetworksUsernames = require(Parent.SharedFlags).FFlagProfileEnableSocialNetworksUsernames
 
-return function() --[[ Line: 25 | Named "EditSocialLinksModalContainer" ]]
+return function()
 	-- upvalues: UseDispatchFunction (copy), UseLocalUserIdFunction (copy), UseNavigationFunction (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), SocialLinksNetworkingModule (copy), FFlagProfileEnableSocialNetworksUsernames (copy), HttpService (copy), ReactModule (copy), EditSocialLinksModalModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseNavigationResult = UseNavigationFunction()
-	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 30 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p1)
 		-- upvalues: GetDeepValueFunction (upval)
 		return GetDeepValueFunction(p1, "Profile.SocialLinks.selfSocialLinks")
 	end)
 	
-	local function openEditSocialNetworksErrorModal(ErrorCode) --[[ Line: 38 ]]
+	local function openEditSocialNetworksErrorModal(ErrorCode)
 		-- upvalues: AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 		local config = {
 			name = AppPage.EditSocialNetworksError,
@@ -44,11 +44,11 @@ return function() --[[ Line: 25 | Named "EditSocialLinksModalContainer" ]]
 	return ReactModule.createElement(EditSocialLinksModalModule, {
 		socialNetworksVisbility = UseSelectorResult.visibility,
 		socialNetworks = UseSelectorResult.socialLinks,
-		cancelOnActivated = function() --[[ Line: 34 ]]
+		cancelOnActivated = function()
 			-- upvalues: UseNavigationResult (copy)
 			UseNavigationResult.goBack()
 		end,
-		saveOnActivated = function(PromotionChannelsVisibilityPrivacy, Facebook, Twitter, Youtube, Twitch, Guilded) --[[ Line: 52 ]]
+		saveOnActivated = function(PromotionChannelsVisibilityPrivacy, Facebook, Twitter, Youtube, Twitch, Guilded)
 			-- upvalues: UseDispatchResult (copy), SocialLinksNetworkingModule (upval), UseLocalUserIdResult (copy), FFlagProfileEnableSocialNetworksUsernames (upval), UseNavigationResult (copy), HttpService (upval), openEditSocialNetworksErrorModal (copy)
 			return UseDispatchResult(SocialLinksNetworkingModule.SetSocialLinks.API({
 				promotionChannelsVisibilityPrivacy = PromotionChannelsVisibilityPrivacy,
@@ -57,14 +57,14 @@ return function() --[[ Line: 25 | Named "EditSocialLinksModalContainer" ]]
 				youtube = Youtube,
 				twitch = Twitch,
 				guilded = Guilded
-			})):andThen(function(_) --[[ Line: 68 ]]
+			})):andThen(function(_)
 				-- upvalues: UseDispatchResult (upval), SocialLinksNetworkingModule (upval), UseLocalUserIdResult (upval), FFlagProfileEnableSocialNetworksUsernames (upval), UseNavigationResult (upval)
-				UseDispatchResult(SocialLinksNetworkingModule.GetSelfSocialLinks.API({ alwaysReturnUrls = false, filterLink = false })):catch(function(_) --[[ Line: 70 ]] end)
+				UseDispatchResult(SocialLinksNetworkingModule.GetSelfSocialLinks.API({ alwaysReturnUrls = false, filterLink = false })):catch(function(_) end)
 				UseDispatchResult(SocialLinksNetworkingModule.GetSocialLinks.API({
 					alwaysReturnUrls = true,
 					filterLink = true,
 					userId = UseLocalUserIdResult
-				})):andThen(function(_) --[[ Line: 77 ]]
+				})):andThen(function(_)
 					-- upvalues: FFlagProfileEnableSocialNetworksUsernames (upval), UseDispatchResult (upval), SocialLinksNetworkingModule (upval), UseLocalUserIdResult (upval)
 					if FFlagProfileEnableSocialNetworksUsernames then
 						UseDispatchResult(SocialLinksNetworkingModule.GetSocialLinks.API({
@@ -73,11 +73,11 @@ return function() --[[ Line: 25 | Named "EditSocialLinksModalContainer" ]]
 							userId = UseLocalUserIdResult
 						}))
 					end
-				end):catch(function(_) --[[ Line: 86 ]] end)
+				end):catch(function(_) end)
 				UseNavigationResult.goBack()
-			end):catch(function(Err) --[[ Line: 89 ]]
+			end):catch(function(Err)
 				-- upvalues: HttpService (upval), openEditSocialNetworksErrorModal (upval)
-				local Success, Result = pcall(function() --[[ Line: 90 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: HttpService (upval), Err (copy)
 					return HttpService:JSONDecode(Err.Body)
 				end)

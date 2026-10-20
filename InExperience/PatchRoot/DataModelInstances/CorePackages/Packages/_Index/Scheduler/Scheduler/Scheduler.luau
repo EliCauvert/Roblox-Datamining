@@ -1,4 +1,4 @@
-﻿return function(p1) --[[ Line: 12 ]]
+﻿return function(p1)
 	local Parent = script.Parent.Parent
 	local ReactGlobalsModule = require(Parent.ReactGlobals)
 	local SharedModule = require(Parent.Shared)
@@ -18,18 +18,18 @@
 	local Callback = nil
 	local Callback1 = nil
 	
-	local function _(p2, p3) --[[ Line: 51 ]]
+	local function _(p2, p3)
 		-- upvalues: Callback (ref)
 		local v1 = #p2 + 1
 		p2[v1] = p3
 		Callback(p2, p3, v1)
 	end
 	
-	local _ = function(Entry) --[[ Line: 58 ]]
+	local _ = function(Entry)
 		return Entry[1]
 	end
 	
-	local _ = function(Entry) --[[ Line: 62 ]]
+	local _ = function(Entry)
 		-- upvalues: Callback1 (ref)
 		local Entry1 = Entry[1]
 		
@@ -46,7 +46,7 @@
 		return Entry1
 	end
 	
-	Callback = function(p2, p3, Floored: number) --[[ Line: 78 ]]
+	Callback = function(p2, p3, Floored: number)
 		-- upvalues: Callback2 (ref)
 		while true do
 			local Floored1 = math.floor(Floored / 2)
@@ -58,7 +58,7 @@
 		end
 	end
 	
-	Callback1 = function(p4, p5, Key: number) --[[ Line: 94 ]]
+	Callback1 = function(p4, p5, Key: number)
 		-- upvalues: Callback2 (ref)
 		local CountP6 = #p4
 		while Key < CountP6 do
@@ -84,7 +84,7 @@
 		end
 	end
 	
-	Callback2 = function(p6, p7) --[[ Line: 124 ]]
+	Callback2 = function(p6, p7)
 		local SortIndexDelta = p6.sortIndex - p7.sortIndex
 		
 		return if SortIndexDelta == 0 then p6.id - p7.id else SortIndexDelta
@@ -120,7 +120,7 @@
 	local v5 = nil
 	local Callback3 = nil
 	
-	local function advanceTimers(p6) --[[ Line: 191 ]]
+	local function advanceTimers(p6)
 		-- upvalues: t1 (copy), Callback1 (ref), t (copy), Callback (ref), EnableProfiling (copy), MarkTaskStartFunction (copy)
 		local Entry = t1[1]
 		while Entry ~= nil do
@@ -167,7 +167,7 @@
 		end
 	end
 	
-	local function v35(p7) --[[ Line: 217 ]]
+	local function v35(p7)
 		-- upvalues: Flag3 (ref), advanceTimers (copy), Flag2 (ref), t (copy), RequestHostCallbackFunction (copy), v5 (ref), t1 (copy), RequestHostTimeoutFunction (copy), v35 (ref)
 		Flag3 = false
 		advanceTimers(p7)
@@ -187,7 +187,7 @@
 		end
 	end
 	
-	v5 = function(p7, p8) --[[ Line: 234 ]]
+	v5 = function(p7, p8)
 		-- upvalues: EnableProfiling (copy), MarkSchedulerUnsuspendedFunction (copy), Flag2 (ref), Flag3 (ref), CancelHostTimeoutFunction (copy), Flag1 (ref), PriorityLevel (ref), ReactGlobalsModule (copy), Callback3 (ref), DescribeError (copy), v4 (ref), GetCurrentTimeFunction (copy), MarkTaskErroredFunction (copy), MarkSchedulerSuspendedFunction (copy)
 		if EnableProfiling then
 			MarkSchedulerUnsuspendedFunction(p8)
@@ -230,7 +230,7 @@
 		return CallbackResult
 	end
 	
-	Callback3 = function(p7, p8): boolean --[[ Line: 291 ]]
+	Callback3 = function(p7, p8): boolean
 		-- upvalues: ReactGlobalsModule (copy), ReactFeatureFlags (copy), advanceTimers (copy), v4 (ref), t (copy), EnableSchedulerDebugging (copy), Flag (ref), ShouldYieldToHost (copy), PriorityLevel (ref), MarkTaskRunFunction (copy), NoYieldModule (copy), GetCurrentTimeFunction (copy), MarkTaskYieldFunction (copy), EnableProfiling (copy), MarkTaskCompletedFunction (copy), Callback1 (ref), t1 (copy), RequestHostTimeoutFunction (copy), v35 (ref)
 		local CatchYieldingInDEV = ReactGlobalsModule.__DEV__ and ReactFeatureFlags.catchYieldingInDEV
 		local v7 = p8
@@ -306,7 +306,7 @@
 		unstable_NormalPriority = NormalPriority,
 		unstable_IdlePriority = IdlePriority,
 		unstable_LowPriority = LowPriority,
-		unstable_runWithPriority = function(NormalPriority1, Callback) --[[ Line: 358 ]]
+		unstable_runWithPriority = function(NormalPriority1, Callback)
 			-- upvalues: ImmediatePriority (copy), UserBlockingPriority (copy), NormalPriority (copy), LowPriority (copy), IdlePriority (copy), PriorityLevel (ref), ReactGlobalsModule (copy), DescribeError (copy)
 			if NormalPriority1 ~= ImmediatePriority and NormalPriority1 ~= UserBlockingPriority and NormalPriority1 ~= NormalPriority and NormalPriority1 ~= LowPriority and NormalPriority1 ~= IdlePriority then
 				NormalPriority1 = NormalPriority
@@ -329,7 +329,7 @@
 			end
 			return Result
 		end,
-		unstable_next = function(Callback) --[[ Line: 393 ]]
+		unstable_next = function(Callback)
 			-- upvalues: PriorityLevel (ref), ImmediatePriority (copy), UserBlockingPriority (copy), NormalPriority (copy), ReactGlobalsModule (copy), DescribeError (copy)
 			local PriorityLevel1 = PriorityLevel
 			PriorityLevel = if PriorityLevel == ImmediatePriority or PriorityLevel == UserBlockingPriority or PriorityLevel == NormalPriority then NormalPriority else PriorityLevel
@@ -349,7 +349,7 @@
 			end
 			return Result
 		end,
-		unstable_scheduleCallback = function(PriorityLevel, Callback1, p9) --[[ Line: 457 ]]
+		unstable_scheduleCallback = function(PriorityLevel, Callback1, p9)
 			-- upvalues: GetCurrentTimeFunction (copy), ImmediatePriority (copy), UserBlockingPriority (copy), IdlePriority (copy), LowPriority (copy), Id (ref), EnableProfiling (copy), t1 (copy), Callback (ref), t (copy), Flag3 (ref), CancelHostTimeoutFunction (copy), RequestHostTimeoutFunction (copy), v35 (ref), MarkTaskStartFunction (copy), Flag2 (ref), Flag1 (ref), RequestHostCallbackFunction (copy), v5 (ref)
 			local CurrentTime: number = GetCurrentTimeFunction()
 			local NewCurrentTime = nil
@@ -407,7 +407,7 @@
 			end
 			return config
 		end,
-		unstable_cancelCallback = function(p9) --[[ Line: 553 ]]
+		unstable_cancelCallback = function(p9)
 			-- upvalues: EnableProfiling (copy), GetCurrentTimeFunction (copy), MarkTaskCanceledFunction (copy)
 			if EnableProfiling and p9.isQueued then
 				MarkTaskCanceledFunction(p9, (GetCurrentTimeFunction()))
@@ -415,11 +415,11 @@
 			end
 			p9.callback = nil
 		end,
-		unstable_wrapCallback = function(Callback) --[[ Line: 429 ]]
+		unstable_wrapCallback = function(Callback)
 			-- upvalues: PriorityLevel (ref), ReactGlobalsModule (copy), DescribeError (copy)
 			local PriorityLevel1 = PriorityLevel
 			
-			return function(...) --[[ Line: 432 ]]
+			return function(...)
 				-- upvalues: PriorityLevel (upval), PriorityLevel1 (copy), ReactGlobalsModule (upval), Callback (copy), DescribeError (upval)
 				local PriorityLevel2 = PriorityLevel
 				PriorityLevel = PriorityLevel1
@@ -440,13 +440,13 @@
 				return Result
 			end
 		end,
-		unstable_getCurrentPriorityLevel = function() --[[ Line: 568 ]]
+		unstable_getCurrentPriorityLevel = function()
 			-- upvalues: PriorityLevel (ref)
 			return PriorityLevel
 		end,
 		unstable_shouldYield = ShouldYieldToHost,
 		unstable_requestPaint = P0.requestPaint,
-		unstable_continueExecution = function() --[[ Line: 541 ]]
+		unstable_continueExecution = function()
 			-- upvalues: Flag (ref), Flag2 (ref), Flag1 (ref), RequestHostCallbackFunction (copy), v5 (ref)
 			Flag = false
 			
@@ -455,11 +455,11 @@
 				RequestHostCallbackFunction(v5)
 			end
 		end,
-		unstable_pauseExecution = function() --[[ Line: 537 ]]
+		unstable_pauseExecution = function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end,
-		unstable_getFirstCallbackNode = function() --[[ Line: 549 ]]
+		unstable_getFirstCallbackNode = function()
 			-- upvalues: t (copy)
 			return t[1]
 		end,

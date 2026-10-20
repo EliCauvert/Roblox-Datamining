@@ -4,7 +4,7 @@ local GameDetailsContextModule = require(Parent.GameDetailsContext)
 local ReactModule = require(Parent1.Parent.React)
 local _ = require(Parent1.gameInviteModalType)
 
-return function(p1) --[[ Line: 17 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), GameDetailsContextModule (copy)
 	return ReactModule.createElement(GameDetailsContextModule.Provider, {
 		value = {

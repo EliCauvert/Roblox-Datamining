@@ -7,12 +7,12 @@ local UserModule = {
 		IN_GAME = "IN_GAME",
 		IN_STUDIO = "IN_STUDIO"
 	},
-	new = function() --[[ Line: 17 ]]
+	new = function()
 		return {}
 	end
 }
 
-function UserModule.fromData(p1, DisplayName, IsFriend, p2) --[[ Line: 25 ]]
+function UserModule.fromData(p1, DisplayName, IsFriend, p2)
 	-- upvalues: UserModule (copy), Players (copy)
 	local NewUser = UserModule.new()
 	NewUser.id = tostring(p1)
@@ -34,7 +34,7 @@ function UserModule.fromData(p1, DisplayName, IsFriend, p2) --[[ Line: 25 ]]
 	return NewUser
 end
 
-function UserModule.fromDataTable(p1) --[[ Line: 51 ]]
+function UserModule.fromDataTable(p1)
 	-- upvalues: UserModule (copy), Players (copy), GetFFlagInviteListRerankFunction (copy)
 	local NewUser = UserModule.new()
 	NewUser.id = tostring(p1.id)
@@ -60,7 +60,7 @@ function UserModule.fromDataTable(p1) --[[ Line: 51 ]]
 	return NewUser
 end
 
-function UserModule.compare(List, List1): boolean --[[ Line: 80 ]]
+function UserModule.compare(List, List1): boolean
 	assert(not (List == nil and List1 == nil), "user1 and user2 cannot both be nil")
 	assert(List == nil or typeof(List) == "table", "user1 must be a table or nil")
 	assert(List1 == nil or typeof(List1) == "table", "user2 must be a table or nil")
@@ -81,7 +81,7 @@ function UserModule.compare(List, List1): boolean --[[ Line: 80 ]]
 	return true
 end
 
-function UserModule.userPresenceToText(p1, p2) --[[ Line: 105 ]]
+function UserModule.userPresenceToText(p1, p2)
 	-- upvalues: UserModule (copy)
 	local Presence = p2.presence
 	local LastLocation = p2.lastLocation

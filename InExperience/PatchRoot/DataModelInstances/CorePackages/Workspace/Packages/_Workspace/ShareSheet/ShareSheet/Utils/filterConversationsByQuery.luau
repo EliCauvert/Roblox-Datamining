@@ -2,7 +2,7 @@
 local MatchesQueryModule = require(script.Parent.matchesQuery)
 local _ = require(script:FindFirstAncestor("ShareSheet").Types)
 
-return function(List, Text: string, p1, p2) --[[ Line: 11 | Named "filterConversationsByQuery" ]]
+return function(List, Text: string, p1, p2)
 	-- upvalues: ConversationUtilsModule (copy), MatchesQueryModule (copy)
 	if Text == "" then
 		return List

@@ -2,7 +2,7 @@
 local NelderMeadModule = {}
 NelderMeadModule.__index = NelderMeadModule
 
-function NelderMeadModule.new(Entry, ObjectFunction, TerminateFunction) --[[ Line: 24 ]]
+function NelderMeadModule.new(Entry, ObjectFunction, TerminateFunction)
 	-- upvalues: NelderMeadModule (copy), FloatVectorModule (copy)
 	local self = setmetatable({}, NelderMeadModule)
 	
@@ -28,12 +28,12 @@ function NelderMeadModule.new(Entry, ObjectFunction, TerminateFunction) --[[ Lin
 	return self
 end
 
-function NelderMeadModule:evaluate() --[[ Line: 51 ]]
+function NelderMeadModule:evaluate()
 	-- upvalues: FloatVectorModule (copy)
 	local Simplex = self.simplex
 	local ObjectResults = {}
 	
-	local function _(Key) --[[ Line: 55 ]]
+	local function _(Key)
 		-- upvalues: ObjectResults (ref), self (copy)
 		local ObjectResult = ObjectResults[Key]
 		
@@ -47,7 +47,7 @@ function NelderMeadModule:evaluate() --[[ Line: 51 ]]
 	local Count = 0
 	while not self.terminateFunction(Simplex, Count) do
 		ObjectResults = {}
-		table.sort(Simplex, function(A, B): boolean --[[ Line: 68 ]]
+		table.sort(Simplex, function(A, B): boolean
 			-- upvalues: ObjectResults (ref), self (copy)
 			local ObjectResult = ObjectResults[A]
 			
@@ -167,7 +167,7 @@ function NelderMeadModule:evaluate() --[[ Line: 51 ]]
 	end
 end
 
-function NelderMeadModule:calculateMaxLengthBetweenVertices(): number --[[ Line: 122 ]]
+function NelderMeadModule:calculateMaxLengthBetweenVertices(): number
 	local Largest = 0
 	
 	for i = 1, #self - 1 do

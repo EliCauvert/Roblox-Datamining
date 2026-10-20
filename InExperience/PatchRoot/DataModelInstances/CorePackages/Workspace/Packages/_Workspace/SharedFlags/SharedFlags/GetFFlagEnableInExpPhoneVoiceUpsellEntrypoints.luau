@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableInExpPhoneVoiceUpsellEntrypoints2", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("EnableInExpPhoneVoiceUpsellEntrypoints2")
 end

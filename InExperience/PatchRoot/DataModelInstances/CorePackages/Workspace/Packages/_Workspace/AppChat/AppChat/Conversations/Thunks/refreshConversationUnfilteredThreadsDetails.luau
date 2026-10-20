@@ -8,9 +8,9 @@ local GetOtherParticipantsModule = require(AppChat.Conversations.getOtherPartici
 local FFlagAppChatConversationTrustedFriendUpsellBanner = require(Parent.SharedFlags).FFlagAppChatConversationTrustedFriendUpsellBanner
 local SeedConversationTopModalFromRequestModule = if FFlagAppChatConversationTrustedFriendUpsellBanner then require(AppChat.Sdui.seedConversationTopModalFromRequest) else nil
 
-return function(p1, IsInExperience) --[[ Line: 21 ]]
+return function(p1, IsInExperience)
 	-- upvalues: GetDeepValue2Module (copy), NewResult (copy), GetOtherParticipantsModule (copy), AppChatNetworkingModule (copy), FFlagAppChatConversationTrustedFriendUpsellBanner (copy), SeedConversationTopModalFromRequestModule (copy)
-	return function(p2) --[[ Line: 22 ]]
+	return function(p2)
 		-- upvalues: GetDeepValue2Module (upval), p1 (copy), NewResult (upval), GetOtherParticipantsModule (upval), AppChatNetworkingModule (upval), IsInExperience (copy), FFlagAppChatConversationTrustedFriendUpsellBanner (upval), SeedConversationTopModalFromRequestModule (upval)
 		local State = p2:getState()
 		local DeepValue2Module = GetDeepValue2Module(State, `ChatAppReducer.Conversations.{p1}`)
@@ -48,7 +48,7 @@ return function(p1, IsInExperience) --[[ Line: 21 ]]
 		if FFlagAppChatConversationTrustedFriendUpsellBanner then
 			DispatchResult = SeedConversationTopModalFromRequestModule(DispatchResult, p1)
 		end
-		DispatchResult:catch(function(Err) --[[ Line: 56 ]]
+		DispatchResult:catch(function(Err)
 			-- upvalues: NewResult (upval)
 			NewResult:warning(`refreshConversationUnfilteredThreadsDetails: Error in GetModalSequence -> conversationTopModal request. Error: {tostring(Err)}`)
 		end)
@@ -57,7 +57,7 @@ return function(p1, IsInExperience) --[[ Line: 21 ]]
 			isInExperience = IsInExperience,
 			conversationId = if DeepValue2Module.source == "channels" then v1 else nil,
 			friendId = if DeepValue2Module.source == "friends" then v1 else nil
-		})):catch(function(Err) --[[ Line: 71 ]]
+		})):catch(function(Err)
 			-- upvalues: NewResult (upval)
 			NewResult:warning(`refreshConversationUnfilteredThreadsDetails: Error in GetModalSequence -> conversationOverlay request. Error: {tostring(Err)}`)
 		end)

@@ -3,7 +3,7 @@ local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local LibraryAudioPlayerContentViewModule = require(script.Parent.LibraryAudioPlayerContentView)
 
-return function(p1) --[[ Line: 10 | Named "LibraryAudioPlayerView" ]]
+return function(p1)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), LibraryAudioPlayerContentViewModule (copy)
 	local UseScaledValueResult = FoundationModule.Hooks.useScaledValue(168)
 	

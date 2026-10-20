@@ -6,10 +6,10 @@ local ForEachModule = require(Parent.Array.forEach)
 local FromStringModule = require(Parent.Array.from.fromString)
 local _ = require(Parent.Parent.ES7Types)
 local SetModule = {
-	__iter = function(p1) --[[ Line: 39 ]]
+	__iter = function(p1)
 		return next, p1._array
 	end,
-	__tostring = function(p1): string --[[ Line: 42 ]]
+	__tostring = function(p1): string
 		-- upvalues: InspectModule (copy)
 		local Text = "Set "
 		
@@ -21,7 +21,7 @@ local SetModule = {
 }
 SetModule.__index = SetModule
 
-function SetModule.new(Tbl) --[[ Line: 54 ]]
+function SetModule.new(Tbl)
 	-- upvalues: IsArrayModule (copy), DEV (copy), FromStringModule (copy), SetModule (copy)
 	local _map = {}
 	local _array = nil
@@ -64,7 +64,7 @@ function SetModule.new(Tbl) --[[ Line: 54 ]]
 	return (setmetatable({ size = #_array, _map = _map, _array = _array }, SetModule))
 end
 
-function SetModule:add(p1) --[[ Line: 100 ]]
+function SetModule:add(p1)
 	if not self._map[p1] then
 		self.size += 1
 		self._map[p1] = true
@@ -73,13 +73,13 @@ function SetModule:add(p1) --[[ Line: 100 ]]
 	return self
 end
 
-function SetModule:clear() --[[ Line: 110 ]]
+function SetModule:clear()
 	self.size = 0
 	table.clear(self._map)
 	table.clear(self._array)
 end
 
-function SetModule:delete(Value): boolean --[[ Line: 116 ]]
+function SetModule:delete(Value): boolean
 	if not self._map[Value] then
 		return false
 	end
@@ -93,12 +93,12 @@ function SetModule:delete(Value): boolean --[[ Line: 116 ]]
 	return true
 end
 
-function SetModule:forEach(Callback, p1) --[[ Line: 132 ]]
+function SetModule:forEach(Callback, p1)
 	-- upvalues: ForEachModule (copy)
 	if typeof(Callback) ~= "function" then
 		error("callback is not a function")
 	end
-	ForEachModule(self._array, function(p2) --[[ Line: 138 ]]
+	ForEachModule(self._array, function(p2)
 		-- upvalues: p1 (copy), Callback (copy), self (copy)
 		if p1 == nil then
 			Callback(p2, p2, self)
@@ -110,11 +110,11 @@ function SetModule:forEach(Callback, p1) --[[ Line: 132 ]]
 	end)
 end
 
-function SetModule:has(p1): boolean --[[ Line: 147 ]]
+function SetModule:has(p1): boolean
 	return self._map[p1] ~= nil
 end
 
-function SetModule:ipairs() --[[ Line: 151 ]]
+function SetModule:ipairs()
 	-- upvalues: DEV (copy)
 	if DEV then
 		warn(debug.traceback("`for _,_ in mySet:ipairs() do` is deprecated and will be removed in a future release, please use `for _,_ in mySet do` instead\n", 2))

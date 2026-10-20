@@ -8,11 +8,11 @@ local config = {
 	appTopBannerContentProps = nil,
 	appTopBannerContentHeight = 0,
 	appTopBannerType = require(AppTopBanner.Enums.AppTopBannerType).None,
-	onAppTopBannerClick = function() --[[ Line: 37 ]] end
+	onAppTopBannerClick = function() end
 }
 
 return require(Parent.Rodux).createReducer(config, {
-	[require(AppTopBanner.Actions.SetAppTopBanner).name] = function(JoinResult, p1) --[[ Line: 41 ]]
+	[require(AppTopBanner.Actions.SetAppTopBanner).name] = function(JoinResult, p1)
 		-- upvalues: CryoModule (copy), ConstantsModule (copy), config (copy)
 		local IsDisabled = JoinResult.isDisabled
 		
@@ -33,7 +33,7 @@ return require(Parent.Rodux).createReducer(config, {
 		end
 		return JoinResult
 	end,
-	[require(AppTopBanner.Actions.DisableAppTopBanner).name] = function(p1, p2) --[[ Line: 61 ]]
+	[require(AppTopBanner.Actions.DisableAppTopBanner).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return if p1.isDisabled == p2.isDisabled then p1 else CryoModule.Dictionary.join(p1, { isDisabled = not p1.isDisabled })
 	end

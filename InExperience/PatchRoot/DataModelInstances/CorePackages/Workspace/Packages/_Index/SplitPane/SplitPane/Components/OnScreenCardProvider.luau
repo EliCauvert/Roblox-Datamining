@@ -2,7 +2,7 @@
 local ReactModule = require(Parent.React)
 local OnScreenContext = require(Parent.RobloxAppNavigation).OnScreenContext
 
-return function(p1) --[[ Line: 16 | Named "OnScreenCardProvider" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), OnScreenContext (copy)
 	local Value = p1.value
 	local UseRefResult = ReactModule.useRef(nil)

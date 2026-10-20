@@ -5,7 +5,7 @@ local FoundationModule = require(Foundation.Providers.Foundation)
 local _ = require(Foundation.Providers.Preferences.PreferencesProvider)
 local ViewModule = require(Foundation.Components.View)
 
-return function(p1, Preferences, p2) --[[ Line: 12 ]]
+return function(p1, Preferences, p2)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), ColorModeModule (copy), ViewModule (copy)
 	return ReactModule.createElement(FoundationModule, {
 		colorMode = p2 or ColorModeModule.Dark,

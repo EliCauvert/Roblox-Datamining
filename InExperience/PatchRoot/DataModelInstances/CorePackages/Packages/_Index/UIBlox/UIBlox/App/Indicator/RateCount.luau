@@ -72,8 +72,8 @@ RateCount.defaultProps = {
 	voteState = VoteStatesModule.notVoted
 }
 
-function RateCount.init(p1) --[[ Line: 151 ]]
-	function p1.onVoteDownActivated() --[[ Line: 152 ]]
+function RateCount.init(p1)
+	function p1.onVoteDownActivated()
 		-- upvalues: p1 (copy)
 		local OnVoteDownActivatedFunction: () -> () = p1.props.onVoteDownActivated
 		
@@ -82,7 +82,7 @@ function RateCount.init(p1) --[[ Line: 151 ]]
 		end
 	end
 	
-	function p1.onVoteUpActivated() --[[ Line: 159 ]]
+	function p1.onVoteUpActivated()
 		-- upvalues: p1 (copy)
 		local OnVoteUpActivatedFunction: () -> () = p1.props.onVoteUpActivated
 		
@@ -92,7 +92,7 @@ function RateCount.init(p1) --[[ Line: 151 ]]
 	end
 end
 
-function RateCount.render(p1) --[[ Line: 167 ]]
+function RateCount.render(p1)
 	-- upvalues: VoteStatesModule (copy), WithStyleModule (copy), CryoModule (copy), config (copy), GetIconSizeModule (copy), RoactModule (copy), Label (copy), IconsStatusGamesRatingLarge (copy), GenericTextLabelModule (copy), IconButtonModule (copy), IconsActionsVoteVoteDownOn (copy), IconsActionsVoteVoteDownOff (copy), IconsActionsVoteVoteUpOn (copy), IconsActionsVoteVoteUpOff (copy)
 	local Position = p1.props.position
 	local LayoutOrder = p1.props.layoutOrder
@@ -107,7 +107,7 @@ function RateCount.render(p1) --[[ Line: 167 ]]
 	local IsVoteStateMatch = VoteState == VoteStatesModule.votedDown
 	local IsVoteStateMatch1 = VoteState == VoteStatesModule.votedUp
 	
-	return WithStyleModule(function(p2) --[[ Line: 187 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: CryoModule (upval), config (upval), p1 (copy), GetIconSizeModule (upval), RoactModule (upval), _UDim2 (ref), Position (copy), AnchorPoint (copy), LayoutOrder (copy), Label (upval), IconsStatusGamesRatingLarge (upval), GenericTextLabelModule (upval), RateText (copy), RateLabel (copy), IconButtonModule (upval), IsVoteStateMatch (copy), IconsActionsVoteVoteDownOn (upval), IconsActionsVoteVoteDownOff (upval), IsVoteStateMatch1 (copy), IconsActionsVoteVoteUpOn (upval), IconsActionsVoteVoteUpOff (upval)
 		local JoinResult = CryoModule.Dictionary.join(config, p1.props.styleProps or {})
 		local ContainerBackgroundColor = JoinResult.containerBackgroundColor or p2.Theme.BackgroundContrast

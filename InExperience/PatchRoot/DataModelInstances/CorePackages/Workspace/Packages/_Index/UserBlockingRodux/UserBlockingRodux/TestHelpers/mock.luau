@@ -4,13 +4,13 @@ return {
 	mockBlockUserById = "BLOCK_USER_BY_ID_SUCCEEDED_ACTION",
 	mockUnblockUserById = "UNBLOCK_USER_BY_ID_SUCCEEDED_ACTION",
 	mockIsBlockedById = "IS_BLOCKED_BY_ID_SUCCEEDED_ACTION",
-	mockBlockUserByIdAction = RoduxModule.makeActionCreator("BLOCK_USER_BY_ID_SUCCEEDED_ACTION", function(p1) --[[ Line: 6 ]]
+	mockBlockUserByIdAction = RoduxModule.makeActionCreator("BLOCK_USER_BY_ID_SUCCEEDED_ACTION", function(p1)
 		return { responseBody = {}, namedIds = { users = p1.userId } }
 	end),
-	mockUnblockUserByIdAction = RoduxModule.makeActionCreator("UNBLOCK_USER_BY_ID_SUCCEEDED_ACTION", function(p1) --[[ Line: 14 ]]
+	mockUnblockUserByIdAction = RoduxModule.makeActionCreator("UNBLOCK_USER_BY_ID_SUCCEEDED_ACTION", function(p1)
 		return { responseBody = {}, namedIds = { users = p1.userId } }
 	end),
-	mockIsBlockedByIdAction = RoduxModule.makeActionCreator("IS_BLOCKED_BY_ID_SUCCEEDED_ACTION", function(p1) --[[ Line: 22 ]]
+	mockIsBlockedByIdAction = RoduxModule.makeActionCreator("IS_BLOCKED_BY_ID_SUCCEEDED_ACTION", function(p1)
 		return { responseBody = true, namedIds = { users = p1.userId } }
 	end)
 }

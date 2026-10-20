@@ -3,7 +3,7 @@ local SquadCoordinationExperienceJoinExperimentLayer = game:DefineFastString("Sq
 local IsSquadCoordinationExperienceJoinExperimentExposureEnabled = game:DefineFastFlag("IsSquadCoordinationExperienceJoinExperimentExposureEnabled", false)
 local IsSquadLobbySessionEnabled = game:DefineFastFlag("IsSquadLobbySessionEnabled", false)
 
-local function _(p1) --[[ Line: 12 | Named "getIsUserInTreatment" ]]
+local function _(p1)
 	-- upvalues: ExperimentCacheManager (copy), SquadCoordinationExperienceJoinExperimentLayer (copy)
 	local LayerVariables = ExperimentCacheManager.default:getLayerVariables(SquadCoordinationExperienceJoinExperimentLayer)
 	
@@ -11,35 +11,35 @@ local function _(p1) --[[ Line: 12 | Named "getIsUserInTreatment" ]]
 end
 
 return {
-	getIsSquadLobbySessionEnabled = function() --[[ Line: 23 ]]
+	getIsSquadLobbySessionEnabled = function()
 		-- upvalues: IsSquadLobbySessionEnabled (copy)
 		return IsSquadLobbySessionEnabled
 	end,
-	getShouldOpenSLPFromExpPickerEnabled = function() --[[ Line: 27 ]]
+	getShouldOpenSLPFromExpPickerEnabled = function()
 		-- upvalues: ExperimentCacheManager (copy), SquadCoordinationExperienceJoinExperimentLayer (copy)
 		local LayerVariables = ExperimentCacheManager.default:getLayerVariables(SquadCoordinationExperienceJoinExperimentLayer)
 		
 		return if LayerVariables and LayerVariables.ShouldOpenSLPFromExpPickerEnabled ~= nil then LayerVariables.ShouldOpenSLPFromExpPickerEnabled else false
 	end,
-	getShouldShowFTUXOnExpPickerEnabled = function() --[[ Line: 31 ]]
+	getShouldShowFTUXOnExpPickerEnabled = function()
 		-- upvalues: ExperimentCacheManager (copy), SquadCoordinationExperienceJoinExperimentLayer (copy)
 		local LayerVariables = ExperimentCacheManager.default:getLayerVariables(SquadCoordinationExperienceJoinExperimentLayer)
 		
 		return if LayerVariables and LayerVariables.ShouldShowFTUXOnExpPickerEnabled ~= nil then LayerVariables.ShouldShowFTUXOnExpPickerEnabled else false
 	end,
-	getIsSearchIconOnExpPickerEnabled = function() --[[ Line: 35 ]]
+	getIsSearchIconOnExpPickerEnabled = function()
 		-- upvalues: ExperimentCacheManager (copy), SquadCoordinationExperienceJoinExperimentLayer (copy)
 		local LayerVariables = ExperimentCacheManager.default:getLayerVariables(SquadCoordinationExperienceJoinExperimentLayer)
 		
 		return if LayerVariables and LayerVariables.IsSearchIconOnExpPickerEnabled ~= nil then LayerVariables.IsSearchIconOnExpPickerEnabled else false
 	end,
-	getIsNewTooltipCopyEnabled = function() --[[ Line: 39 ]]
+	getIsNewTooltipCopyEnabled = function()
 		-- upvalues: ExperimentCacheManager (copy), SquadCoordinationExperienceJoinExperimentLayer (copy)
 		local LayerVariables = ExperimentCacheManager.default:getLayerVariables(SquadCoordinationExperienceJoinExperimentLayer)
 		
 		return if LayerVariables and LayerVariables.IsNewTooltipCopyEnabled ~= nil then LayerVariables.IsNewTooltipCopyEnabled else false
 	end,
-	logExposure = function() --[[ Line: 43 ]]
+	logExposure = function()
 		-- upvalues: IsSquadCoordinationExperienceJoinExperimentExposureEnabled (copy), ExperimentCacheManager (copy), SquadCoordinationExperienceJoinExperimentLayer (copy)
 		if IsSquadCoordinationExperienceJoinExperimentExposureEnabled and ExperimentCacheManager.default:getLayerVariables(SquadCoordinationExperienceJoinExperimentLayer) ~= nil then
 			ExperimentCacheManager.default:logLayerExposure(SquadCoordinationExperienceJoinExperimentLayer)

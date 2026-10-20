@@ -7,7 +7,7 @@ local FTUXConstantsModule = require(Parent.Resources.FTUXConstants)
 local _ = require(Parent.Enums.PlatformEnum)
 local FTUXPanelXOffset = game:DefineFastInt("FTUXPanelXOffset", 50)
 
-return function(p1) --[[ Line: 20 | Named "FTUXPanel" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), FTUXConstantsModule (copy), ReactModule (copy), FTUXPanelXOffset (copy), FTUXSlideshowModule (copy)
 	local PanelConstants = FTUXConstantsModule[p1.platform].PanelConstants
 	local MAINSCREENSIZEWIDTH = PanelConstants.MAIN_SCREEN_SIZE_WIDTH

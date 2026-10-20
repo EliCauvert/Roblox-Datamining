@@ -10,7 +10,7 @@ local TextQuestionModule = require(OnPlatformSurveys.Components.Questions.TextQu
 local ThumbsQuestionModule = require(OnPlatformSurveys.Components.Questions.ThumbsQuestion)
 local _ = require(OnPlatformSurveys.Types.InlineSurveyTypes)
 
-local function isThumbsQuestion(Question): boolean --[[ Line: 35 ]]
+local function isThumbsQuestion(Question): boolean
 	-- upvalues: InlineQuestionTypeModule (copy), FFlagInlineSurveyChoiceTextEntry (copy)
 	if Question.type ~= InlineQuestionTypeModule.MultipleChoiceSingle then
 		return false
@@ -36,7 +36,7 @@ local function isThumbsQuestion(Question): boolean --[[ Line: 35 ]]
 end
 
 return {
-	renderQuestion = function(p1) --[[ Line: 58 ]]
+	renderQuestion = function(p1)
 		-- upvalues: isThumbsQuestion (copy), ReactModule (copy), ThumbsQuestionModule (copy), FFlagInlineSurveyEnhancements (copy), InlineQuestionTypeModule (copy), TextQuestionModule (copy), MultipleChoiceQuestionModule (copy)
 		local Question = p1.question
 		

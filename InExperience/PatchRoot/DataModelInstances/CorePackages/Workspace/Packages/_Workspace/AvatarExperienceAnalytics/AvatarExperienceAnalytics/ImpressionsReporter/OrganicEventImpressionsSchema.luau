@@ -1,9 +1,9 @@
 ﻿local ImpressionEnumsModule = require(script.Parent.Parent.Enums.ImpressionEnums)
 local config = {
-	__newindex = function(_, Text) --[[ Line: 18 ]]
+	__newindex = function(_, Text)
 		error("Attempt to insert into impressions schemas: " .. Text)
 	end,
-	__index = function(p1, Text) --[[ Line: 22 ]]
+	__index = function(p1, Text)
 		if not Text then
 			warn("Nil ImpressionsSchema lookup")
 			

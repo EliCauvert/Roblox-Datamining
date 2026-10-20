@@ -11,7 +11,7 @@ local UGCValidatePoseArmMaxDegFromXVectorOnXYPlane = game:DefineFastInt("UGCVali
 local UGCValidatePoseLegMinDegFromXVectorOnXYPlane = game:DefineFastInt("UGCValidatePoseLegMinDegFromXVectorOnXYPlane", -93)
 local UGCValidatePoseLegMaxDegFromXVectorOnXYPlane = game:DefineFastInt("UGCValidatePoseLegMaxDegFromXVectorOnXYPlane", -60)
 
-local function validateAngleFromXYPlane(p1, AssetType, Vector, p2) --[[ Line: 38 ]]
+local function validateAngleFromXYPlane(p1, AssetType, Vector, p2)
 	-- upvalues: UGCValidatePoseDegFromXYPlane (copy), ErrorSourceStringsModule (copy)
 	local Degrees = math.deg((math.acos((Vector:Dot(p2)))))
 	
@@ -24,7 +24,7 @@ local function validateAngleFromXYPlane(p1, AssetType, Vector, p2) --[[ Line: 38
 	end
 end
 
-local function validateAngleFromWorldXVectorOnXYPlane(p1, AssetType, Vector, p2, UGCValidatePoseArmMinDegFromXVectorOnXYPlane, UGCValidatePoseArmMaxDegFromXVectorOnXYPlane) --[[ Line: 54 ]]
+local function validateAngleFromWorldXVectorOnXYPlane(p1, AssetType, Vector, p2, UGCValidatePoseArmMinDegFromXVectorOnXYPlane, UGCValidatePoseArmMaxDegFromXVectorOnXYPlane)
 	-- upvalues: ErrorSourceStringsModule (copy), PrettyPrintVector3Module (copy)
 	local Degrees = math.deg((math.acos((Vector:Dot(p2)))))
 	
@@ -42,7 +42,7 @@ local function validateAngleFromWorldXVectorOnXYPlane(p1, AssetType, Vector, p2,
 	end
 end
 
-local function _(p1) --[[ Line: 76 | Named "getAssetTypeFromUploadEnum" ]]
+local function _(p1)
 	return if p1.uploadEnum and p1.uploadEnum.assetType then p1.uploadEnum.assetType else nil
 end
 
@@ -50,7 +50,7 @@ return {
 	categories = { ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS },
 	requiredData = { ValidationEnumsModule.SharedDataMember.rootInstance },
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 83 ]]
+	run = function(p1, p2)
 		-- upvalues: AssetCalculatorModule (copy), ErrorSourceStringsModule (copy), CanBeNormalizedModule (copy), validateAngleFromXYPlane (copy), UGCValidatePoseArmMinDegFromXVectorOnXYPlane (copy), UGCValidatePoseArmMaxDegFromXVectorOnXYPlane (copy), UGCValidatePoseLegMinDegFromXVectorOnXYPlane (copy), UGCValidatePoseLegMaxDegFromXVectorOnXYPlane (copy), validateAngleFromWorldXVectorOnXYPlane (copy)
 		local RootInstance = p2.rootInstance
 		local AssetType = if p2.uploadEnum and p2.uploadEnum.assetType then p2.uploadEnum.assetType else nil

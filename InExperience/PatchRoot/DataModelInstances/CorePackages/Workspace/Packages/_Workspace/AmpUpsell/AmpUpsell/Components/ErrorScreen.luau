@@ -9,11 +9,11 @@ local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local SendButtonClickEventModule = require(AmpUpsell.Analytics.sendButtonClickEvent)
 
-local function selectScreenSize(p1) --[[ Line: 19 ]]
+local function selectScreenSize(p1)
 	return p1.ScreenSize
 end
 
-return function(p1) --[[ Line: 23 | Named "ErrorScreen" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), AnalyticsServiceModule (copy), UseSelectorFunction (copy), selectScreenSize (copy), ReactModule (copy), InteractiveAlert (copy), ButtonType (copy), SendButtonClickEventModule (copy)
 	local OnRetryFunction = p1.onRetry
 	local OnCancelFunction = p1.onCancel
@@ -38,7 +38,7 @@ return function(p1) --[[ Line: 23 | Named "ErrorScreen" ]]
 					buttonType = ButtonType.Secondary,
 					props = {
 						isDisabled = false,
-						onActivated = function() --[[ Line: 48 ]]
+						onActivated = function()
 							-- upvalues: SendButtonClickEventModule (upval), AnalyticsService (copy), FeatureName (copy), OnCancelFunction (copy)
 							SendButtonClickEventModule(AnalyticsService, "AmpErrorScreen", FeatureName, "Cancel")
 							OnCancelFunction()
@@ -50,7 +50,7 @@ return function(p1) --[[ Line: 23 | Named "ErrorScreen" ]]
 					buttonType = ButtonType.PrimarySystem,
 					props = {
 						isDisabled = false,
-						onActivated = function() --[[ Line: 59 ]]
+						onActivated = function()
 							-- upvalues: SendButtonClickEventModule (upval), AnalyticsService (copy), FeatureName (copy), OnRetryFunction (copy)
 							SendButtonClickEventModule(AnalyticsService, "AmpErrorScreen", FeatureName, "Retry")
 							OnRetryFunction()

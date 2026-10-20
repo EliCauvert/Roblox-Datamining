@@ -2,7 +2,7 @@
 local ImmutableModule = require(script.Parent.Parent.Immutable)
 local DataContextModule = require(script.Parent.Parent.Components.DataContext)
 
-return function(p1, ...) --[[ Line: 8 ]]
+return function(p1, ...)
 	-- upvalues: RoactModule (copy), ImmutableModule (copy), DataContextModule (copy)
 	if not p1 then
 		error("Expected component to be passed to connection, got nil.")
@@ -14,7 +14,7 @@ return function(p1, ...) --[[ Line: 8 ]]
 	end
 	local ExtendResult = RoactModule.Component:extend((string.format("Consumer(%s)_DependsOn_%s", tostring(p1), t[1])))
 	
-	function ExtendResult.init(p2) --[[ Line: 21 ]]
+	function ExtendResult.init(p2)
 		-- upvalues: t (copy)
 		local DevConsoles = {}
 		
@@ -31,15 +31,15 @@ return function(p1, ...) --[[ Line: 8 ]]
 		p2:setState(DevConsoles)
 	end
 	
-	function ExtendResult.render(p3) --[[ Line: 40 ]]
+	function ExtendResult.render(p3)
 		-- upvalues: ImmutableModule (upval), RoactModule (upval), p1 (copy)
 		return RoactModule.createElement(p1, (ImmutableModule.JoinDictionaries(p3.props.componentProps, p3.state)))
 	end
 	
-	return function(ComponentProps) --[[ Line: 45 | Named "DataConsumerWrapper" ]]
+	return function(ComponentProps)
 		-- upvalues: RoactModule (upval), DataContextModule (upval), ExtendResult (copy)
 		return RoactModule.createElement(DataContextModule.Consumer, {
-			render = function(DevConsoleData) --[[ Line: 47 ]]
+			render = function(DevConsoleData)
 				-- upvalues: RoactModule (upval), ExtendResult (upval), ComponentProps (copy)
 				return RoactModule.createElement(ExtendResult, {
 					componentProps = ComponentProps,

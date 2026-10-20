@@ -25,7 +25,7 @@ local config = {
 	deviceType = if IsTenFootInterfaceFunction() then DeviceType.Console else DeviceType.Desktop
 }
 
-return function(p1) --[[ Line: 62 | Named "CoreScriptsRootProvider" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), RoactRoduxModule (copy), RoduxModule (copy), UIBloxModule (copy), DesignTokenProvider (copy), GamepadDisconnectTokenMapper (copy), SelectionCursorProvider (copy), LocalizationProvider (copy), Localization (ref), LocalizationService (copy), ReactFocusNavigationModule (copy), NewResult (copy), Provider (copy), FoundationModule (copy), DeviceType (copy), AppInteractionFeedbackProvider (copy), FeedbackManagerInjectionContextProvider (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1.styleOverride or {})
 	
@@ -36,7 +36,7 @@ return function(p1) --[[ Line: 62 | Named "CoreScriptsRootProvider" ]]
 				device = if JoinResult.deviceType == DeviceType.Console then FoundationModule.Enums.Device.Console else FoundationModule.Enums.Device.Desktop
 			}, {
 				tree = ReactModule.createElement(RoactRoduxModule.StoreProvider, {
-					store = RoduxModule.Store.new(function(p2) --[[ Line: 66 ]]
+					store = RoduxModule.Store.new(function(p2)
 						return p2
 					end, {}, {})
 				}, {

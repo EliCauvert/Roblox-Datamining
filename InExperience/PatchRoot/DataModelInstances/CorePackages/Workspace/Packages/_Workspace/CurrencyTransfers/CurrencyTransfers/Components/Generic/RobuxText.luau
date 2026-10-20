@@ -11,9 +11,9 @@ local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local GetFFlagCurrencyTransferCenterRobuxIconModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferCenterRobuxIcon)
 
-return function(p1) --[[ Line: 25 | Named "RobuxText" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FormatNumberModule (copy), LocalizationService (copy), GetFFlagCurrencyTransferCenterRobuxIconModule (copy), UseTokensFunction (copy), Icon (copy), Text (copy), View (copy), GetIconRichTextFunction (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 26 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FormatNumberModule (upval), LocalizationService (upval), p1 (copy)
 		return FormatNumberModule(LocalizationService.RobloxLocaleId, p1.amount or 0)
 	end, { p1.amount, LocalizationService.RobloxLocaleId })

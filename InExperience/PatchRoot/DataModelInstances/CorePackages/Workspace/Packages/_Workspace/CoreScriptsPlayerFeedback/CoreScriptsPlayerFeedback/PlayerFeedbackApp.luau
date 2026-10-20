@@ -9,15 +9,15 @@ local CoreGui = game:GetService("CoreGui")
 local RobloxGui = CoreGui:FindFirstChild("RobloxGui") or CoreGui:WaitForChild("RobloxGui")
 local v1 = require(CoreScriptsPlayerFeedback.Flags.GetFFlagEnablePlayerSupportPrompt)()
 local Result1 = nil
-local Success, Result = pcall(function() --[[ Line: 21 ]]
+local Success, Result = pcall(function()
 	-- upvalues: RobloxGui (copy)
 	return if RobloxGui then require(RobloxGui.Modules.Common.renderWithCoreScriptsStyleProvider) else nil
 end)
-Result1 = if Success and Result then Result else function(p1) --[[ Line: 31 ]]
+Result1 = if Success and Result then Result else function(p1)
 	return p1.App
 end
 
-return function(p1) --[[ Line: 37 | Named "createApp" ]]
+return function(p1)
 	-- upvalues: Result1 (ref), v1 (copy), ReactRobloxModule (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), PlayerFeedbackPromptsModule (copy)
 	local Callback = p1 or Result1
 	local ScreenGui = Instance.new("ScreenGui")
@@ -36,7 +36,7 @@ return function(p1) --[[ Line: 37 | Named "createApp" ]]
 	
 	return {
 		instance = ScreenGui,
-		unmount = function() --[[ Line: 67 ]]
+		unmount = function()
 			-- upvalues: Root (copy)
 			Root:unmount()
 		end

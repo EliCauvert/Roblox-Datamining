@@ -6,7 +6,7 @@ local View = FoundationModule.View
 local Text = FoundationModule.Text
 local config = { layoutOrder = 2, userText = "", contentText = "" }
 
-function ReplyComposeBarText(p1) --[[ Line: 22 ]]
+function ReplyComposeBarText(p1)
 	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), View (copy), Text (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	

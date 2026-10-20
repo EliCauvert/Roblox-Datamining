@@ -21,32 +21,32 @@ FocusHandler.validateProps = T.strictInterface({
 })
 
 if GetFFlagIGMGamepadSelectionHistoryModule() then
-	function FocusHandler.init(p1) --[[ Line: 50 ]]
+	function FocusHandler.init(p1)
 		-- upvalues: Id (ref)
 		p1.id = Id
 		Id += 1
 	end
 end
-function FocusHandler.render(p1) --[[ Line: 56 ]]
+function FocusHandler.render(p1)
 	-- upvalues: Roact (copy)
 	return Roact.createFragment(p1.props[Roact.Children])
 end
 
 if GetFFlagIGMGamepadSelectionHistoryModule() then
-	function FocusHandler.didMount(p1) --[[ Line: 61 ]]
+	function FocusHandler.didMount(p1)
 		if p1.props.isFocused then
 			p1.props.requestFocusForHandlerId(p1.id)
 		end
 	end
 else
-	function FocusHandler.didMount(p1) --[[ Line: 67 ]]
+	function FocusHandler.didMount(p1)
 		if p1.props.isFocused then
 			p1.props.didFocus()
 		end
 	end
 end
 if GetFFlagIGMGamepadSelectionHistoryModule() then
-	function FocusHandler.didUpdate(p1, p2) --[[ Line: 75 ]]
+	function FocusHandler.didUpdate(p1, p2)
 		local PreviousSelection = p1.props.previousSelections[p1.id]
 		
 		if p1.props.shouldForgetPreviousSelection and not p2.shouldForgetPreviousSelection or PreviousSelection ~= nil and not PreviousSelection:IsDescendantOf(game) then
@@ -73,7 +73,7 @@ if GetFFlagIGMGamepadSelectionHistoryModule() then
 		end
 	end
 else
-	function FocusHandler.didUpdate(p1, p2) --[[ Line: 135 ]]
+	function FocusHandler.didUpdate(p1, p2)
 		if p1.props.isFocused and not p2.isFocused and p1.props.didFocus then
 			p1.props.didFocus()
 			
@@ -85,7 +85,7 @@ else
 	end
 end
 if GetFFlagIGMGamepadSelectionHistoryModule() then
-	function FocusHandler.willUnmount(p1) --[[ Line: 145 ]]
+	function FocusHandler.willUnmount(p1)
 		if p1.props.isFocused then
 			p1.props.blurCurrentFocusHandler(p1.id, true)
 			
@@ -99,16 +99,16 @@ if GetFFlagIGMGamepadSelectionHistoryModule() then
 		end
 	end
 else
-	function FocusHandler.willUnmount(p1) --[[ Line: 156 ]]
+	function FocusHandler.willUnmount(p1)
 		if p1.props.isFocused and p1.props.didBlur then
 			p1.props.didBlur()
 		end
 	end
 end
-return if GetFFlagIGMGamepadSelectionHistoryModule() then function(p1) --[[ Line: 164 | Named "FocusHandlerWithContext" ]]
+return if GetFFlagIGMGamepadSelectionHistoryModule() then function(p1)
 	-- upvalues: Roact (copy), FocusHandlerContextModule (copy), FocusHandler (copy), Cryo (copy)
 	return Roact.createElement(FocusHandlerContextModule.Consumer, {
-		render = function(p2) --[[ Line: 166 ]]
+		render = function(p2)
 			-- upvalues: Roact (upval), FocusHandler (upval), Cryo (upval), p1 (copy)
 			return Roact.createElement(FocusHandler, Cryo.Dictionary.join(p1, {
 				currentHandlerId = p2.currentHandlerId,

@@ -2,7 +2,7 @@
 local Module = {}
 Module.__index = Module
 
-function Module.new() --[[ Line: 20 ]]
+function Module.new()
 	-- upvalues: Module (copy), Error1 (copy)
 	local t = {}
 	setmetatable(t, Module)
@@ -13,7 +13,7 @@ function Module.new() --[[ Line: 20 ]]
 	return t
 end
 
-function Module.abort(p1) --[[ Line: 32 ]]
+function Module.abort(p1)
 	-- upvalues: Module (copy), Error1 (copy)
 	local NewModule = Module.new()
 	NewModule.reason = p1 or Error1.new("Signal Aborted")
@@ -21,11 +21,11 @@ function Module.abort(p1) --[[ Line: 32 ]]
 	return NewModule
 end
 
-function Module.timeout(p1: number) --[[ Line: 38 ]]
+function Module.timeout(p1: number)
 	-- upvalues: Module (copy), Error1 (copy)
 	local NewModule = Module.new()
 	NewModule.reason = Error1.new("TimeoutError")
-	task.delay(p1 / 1000, function() --[[ Line: 41 ]]
+	task.delay(p1 / 1000, function()
 		-- upvalues: NewModule (copy)
 		NewModule:fire()
 	end)
@@ -33,17 +33,17 @@ function Module.timeout(p1: number) --[[ Line: 38 ]]
 	return NewModule
 end
 
-function Module:throwIfAborted() --[[ Line: 47 ]]
+function Module:throwIfAborted()
 	if self.aborted then
 		error(self.reason)
 	end
 end
 
-function Module:connect(Callback) --[[ Line: 55 ]]
+function Module:connect(Callback)
 	return self._signal.Event:Connect(Callback)
 end
 
-function Module:fire() --[[ Line: 60 ]]
+function Module:fire()
 	self.aborted = true
 	self._signal:Fire()
 end

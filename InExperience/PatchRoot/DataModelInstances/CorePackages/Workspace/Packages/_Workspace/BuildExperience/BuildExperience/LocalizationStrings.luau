@@ -6,15 +6,15 @@ local FFlagEnableShareSheet = SharedFlagsModule.FFlagEnableShareSheet
 local FFlagEnableTeamTestLua = SharedFlagsModule.FFlagEnableTeamTestLua
 local FFlagBuildExperienceClientDataModelTools = SharedFlagsModule.FFlagBuildExperienceClientDataModelTools
 
-local function formatShareExperience(p1): string --[[ Line: 20 ]]
+local function formatShareExperience(p1): string
 	return `Share {p1}`
 end
 
-local function formatGameSharedWithTarget(p1): string --[[ Line: 24 ]]
+local function formatGameSharedWithTarget(p1): string
 	return if p1 == "" then "Game shared" else `Game shared with {p1}`
 end
 
-local function formatCampaignDate(p1) --[[ Line: 32 ]]
+local function formatCampaignDate(p1)
 	-- upvalues: LocalizationService (copy)
 	local RobloxLocaleId = LocalizationService.RobloxLocaleId
 	
@@ -24,7 +24,7 @@ local function formatCampaignDate(p1) --[[ Line: 32 ]]
 	return DateTime.fromUnixTimestampMillis(p1):FormatLocalTime("MMM D", RobloxLocaleId)
 end
 
-local function formatAdCampaignSheetDate(p1) --[[ Line: 41 ]]
+local function formatAdCampaignSheetDate(p1)
 	-- upvalues: LocalizationService (copy)
 	local RobloxLocaleId = LocalizationService.RobloxLocaleId
 	
@@ -34,7 +34,7 @@ local function formatAdCampaignSheetDate(p1) --[[ Line: 41 ]]
 	return DateTime.fromUnixTimestampMillis(p1):FormatUniversalTime("MMM D", RobloxLocaleId)
 end
 
-local function formatAdCampaignSheetLocalDate(p1) --[[ Line: 49 ]]
+local function formatAdCampaignSheetLocalDate(p1)
 	-- upvalues: LocalizationService (copy)
 	local RobloxLocaleId = LocalizationService.RobloxLocaleId
 	
@@ -657,7 +657,7 @@ return {
 	MONETIZATION_COMPOSER_DETAIL = "Feature.Build.Placeholder.DescribeProductUpdate",
 	formatGameSharedWithTarget = formatGameSharedWithTarget,
 	formatShareExperience = formatShareExperience,
-	getChatToolActivityLocalizationKey = function(p1, p2) --[[ Line: 211 ]]
+	getChatToolActivityLocalizationKey = function(p1, p2)
 		-- upvalues: config (copy)
 		if p1 == nil then
 			return nil

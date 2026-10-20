@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local _ = require(Parent.SduiCompat)
 
-return ReactModule.memo(function(p1) --[[ Line: 25 | Named "SduiPlaceholder" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local CornerRadius = p1.cornerRadius or UDim.new(0, UseTokensResult.Radius.Medium)

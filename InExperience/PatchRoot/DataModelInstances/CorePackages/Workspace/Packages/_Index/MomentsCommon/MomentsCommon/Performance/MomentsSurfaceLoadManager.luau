@@ -11,12 +11,12 @@ local FIntMomentsSurfaceLoadTTISamplingRate = SharedFlagsModule.FIntMomentsSurfa
 local Count = 0
 local ClockTime = nil
 
-local function _(Count1) --[[ Line: 47 | Named "scheduleCapTimeout" ]]
+local function _(Count1)
 	-- upvalues: SharedFlagsModule (copy), Count (ref), TimeToInteractiveTracker (copy), AnalyticsModule (copy), ClockTime (ref)
 	local FIntMomentsSurfaceLoadTTIMaxMs: number = SharedFlagsModule.FIntMomentsSurfaceLoadTTIMaxMs
 	
 	if FIntMomentsSurfaceLoadTTIMaxMs > 0 then
-		task.delay(FIntMomentsSurfaceLoadTTIMaxMs / 1000, function() --[[ Line: 52 ]]
+		task.delay(FIntMomentsSurfaceLoadTTIMaxMs / 1000, function()
 			-- upvalues: Count1 (copy), Count (upval), TimeToInteractiveTracker (upval), AnalyticsModule (upval), ClockTime (upval)
 			if Count1 == Count then
 				local Events = TimeToInteractiveTracker.getEvents()
@@ -42,7 +42,7 @@ end
 
 return {
 	EVENT_NAME = "Watch_MomentsFeed",
-	start = function() --[[ Line: 63 ]]
+	start = function()
 		-- upvalues: Count (ref), ClockTime (ref), TimeToInteractiveTracker (copy), SharedFlagsModule (copy), AnalyticsModule (copy)
 		Count += 1
 		ClockTime = os.clock()
@@ -51,7 +51,7 @@ return {
 		local FIntMomentsSurfaceLoadTTIMaxMs: number = SharedFlagsModule.FIntMomentsSurfaceLoadTTIMaxMs
 		
 		if FIntMomentsSurfaceLoadTTIMaxMs > 0 then
-			task.delay(FIntMomentsSurfaceLoadTTIMaxMs / 1000, function() --[[ Line: 52 ]]
+			task.delay(FIntMomentsSurfaceLoadTTIMaxMs / 1000, function()
 				-- upvalues: Count1 (copy), Count (upval), TimeToInteractiveTracker (upval), AnalyticsModule (upval), ClockTime (upval)
 				if Count1 == Count then
 					local Events = TimeToInteractiveTracker.getEvents()
@@ -74,21 +74,21 @@ return {
 			return
 		end
 	end,
-	isSessionActive = function(): boolean --[[ Line: 24 ]]
+	isSessionActive = function(): boolean
 		-- upvalues: TimeToInteractiveTracker (copy)
 		local Events = TimeToInteractiveTracker.getEvents()
 		
 		return Events ~= nil and Events.Watch_MomentsFeed ~= nil
 	end,
-	getSessionGeneration = function() --[[ Line: 72 ]]
+	getSessionGeneration = function()
 		-- upvalues: Count (ref)
 		return Count
 	end,
-	elapsedMs = function(): number --[[ Line: 29 ]]
+	elapsedMs = function(): number
 		-- upvalues: ClockTime (ref)
 		return if ClockTime == nil then 0 else (os.clock() - ClockTime) * 1000
 	end,
-	renderStarted = function() --[[ Line: 78 ]]
+	renderStarted = function()
 		-- upvalues: TimeToInteractiveTracker (copy), Milestone (copy)
 		local Events = TimeToInteractiveTracker.getEvents()
 		
@@ -98,7 +98,7 @@ return {
 			return
 		end
 	end,
-	surfaceMounted = function() --[[ Line: 85 ]]
+	surfaceMounted = function()
 		-- upvalues: TimeToInteractiveTracker (copy), Milestone (copy)
 		local Events = TimeToInteractiveTracker.getEvents()
 		
@@ -108,7 +108,7 @@ return {
 			return
 		end
 	end,
-	primaryDataStarted = function() --[[ Line: 92 ]]
+	primaryDataStarted = function()
 		-- upvalues: TimeToInteractiveTracker (copy), Milestone (copy)
 		local Events = TimeToInteractiveTracker.getEvents()
 		
@@ -118,7 +118,7 @@ return {
 			return
 		end
 	end,
-	primaryDataNetworkFetch = function() --[[ Line: 99 ]]
+	primaryDataNetworkFetch = function()
 		-- upvalues: TimeToInteractiveTracker (copy), Milestone (copy)
 		local Events = TimeToInteractiveTracker.getEvents()
 		
@@ -128,7 +128,7 @@ return {
 			return
 		end
 	end,
-	primaryDataResponseReceived = function() --[[ Line: 110 ]]
+	primaryDataResponseReceived = function()
 		-- upvalues: TimeToInteractiveTracker (copy), Milestone (copy)
 		local Events = TimeToInteractiveTracker.getEvents()
 		
@@ -138,7 +138,7 @@ return {
 			return
 		end
 	end,
-	primaryDataReady = function() --[[ Line: 121 ]]
+	primaryDataReady = function()
 		-- upvalues: TimeToInteractiveTracker (copy), Milestone (copy)
 		local Events = TimeToInteractiveTracker.getEvents()
 		
@@ -148,7 +148,7 @@ return {
 			return
 		end
 	end,
-	markSurfaceReady = function(Subcategory) --[[ Line: 128 ]]
+	markSurfaceReady = function(Subcategory)
 		-- upvalues: TimeToInteractiveTracker (copy), ClockTime (ref), SharedFlagsModule (copy), AnalyticsModule (copy), Milestone (copy), FIntMomentsSurfaceLoadTTISamplingRate (copy), FireAnalyticsEventFunction (copy), EventNames (copy)
 		local Events = TimeToInteractiveTracker.getEvents()
 		
@@ -179,7 +179,7 @@ return {
 			ClockTime = nil
 		end
 	end,
-	abort = function(p1) --[[ Line: 36 ]]
+	abort = function(p1)
 		-- upvalues: TimeToInteractiveTracker (copy), AnalyticsModule (copy), ClockTime (ref)
 		local Events = TimeToInteractiveTracker.getEvents()
 		

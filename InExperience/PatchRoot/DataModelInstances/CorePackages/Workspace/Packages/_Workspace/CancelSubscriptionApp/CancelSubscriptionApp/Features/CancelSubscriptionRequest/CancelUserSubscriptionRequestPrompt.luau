@@ -12,7 +12,7 @@ local config = {
 	yesButtonText = "CoreScripts.CancelUserSubscriptionPrompt.RequestPrompt.YesCancelButton"
 }
 
-return function(p1) --[[ Line: 24 | Named "CancelUserSubscriptionRequestPrompt" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), InteractiveAlert (copy), ButtonType (copy), UseScreenSizeFunction (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	
@@ -25,7 +25,7 @@ return function(p1) --[[ Line: 24 | Named "CancelUserSubscriptionRequestPrompt" 
 				{
 					isDefaultChild = true,
 					props = {
-						onActivated = p1.onCancel or function() --[[ Line: 35 ]] end,
+						onActivated = p1.onCancel or function() end,
 						text = UseLocalizationResult.noButtonText,
 						delayInputSeconds = 0.75,
 						[ReactModule.Tag] = "data-testid=CancelSubscriptionApp_DontCancelButton"
@@ -35,7 +35,7 @@ return function(p1) --[[ Line: 24 | Named "CancelUserSubscriptionRequestPrompt" 
 					isDefaultChild = false,
 					buttonType = ButtonType.PrimarySystem,
 					props = {
-						onActivated = p1.onConfirm or function() --[[ Line: 45 ]] end,
+						onActivated = p1.onConfirm or function() end,
 						text = UseLocalizationResult.yesButtonText,
 						delayInputSeconds = 0.75,
 						[ReactModule.Tag] = "data-testid=CancelSubscriptionApp_YesCancelButton"

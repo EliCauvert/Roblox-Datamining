@@ -10,7 +10,7 @@ local SquadJoinButtonModule = require(Parent.Squads.SquadJoinButton)
 local SquadComponentAccessWrapperModule = require(Parent.Squads.SquadComponentAccessWrapper)
 local SquadButtonSourceEnum = require(Parent.Squads.Enums).SquadButtonSourceEnum
 
-return function(p1) --[[ Line: 23 | Named "SquadStartedCard" ]]
+return function(p1)
 	-- upvalues: UseNavigationFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), ImagePile (copy), FoundationModule (copy), SquadComponentAccessWrapperModule (copy), SquadJoinButtonModule (copy), SquadButtonSourceEnum (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseTokensResult = UseTokensFunction()
@@ -22,7 +22,7 @@ return function(p1) --[[ Line: 23 | Named "SquadStartedCard" ]]
 			userCount = #p1.participantUserIds
 		}
 	})
-	local UseResult = ReactModule.useCallback(function(List) --[[ Line: 32 ]]
+	local UseResult = ReactModule.useCallback(function(List)
 		-- upvalues: GetStandardSizeAvatarHeadShotRbxthumbFunction (upval), UseTokensResult (copy), ReactModule (upval), ImagePile (upval)
 		local Images = {}
 		
@@ -107,7 +107,7 @@ return function(p1) --[[ Line: 23 | Named "SquadStartedCard" ]]
 				layoutOrder = 3,
 				shouldAnimate = false,
 				conversationId = p1.conversationId,
-				onActivated = function() --[[ Line: 133 ]]
+				onActivated = function()
 					-- upvalues: UseNavigationResult (copy), p1 (copy)
 					UseNavigationResult.navigate("SquadLobby", { conversationId = p1.conversationId })
 				end,

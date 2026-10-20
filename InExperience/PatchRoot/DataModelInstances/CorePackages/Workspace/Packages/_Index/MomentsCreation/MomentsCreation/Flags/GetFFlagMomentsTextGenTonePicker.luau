@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("MomentsTextGenTonePicker", false)
 
-return function() --[[ Line: 10 ]]
+return function()
 	return game:GetFastFlag("MomentsTextGenTonePicker")
 end

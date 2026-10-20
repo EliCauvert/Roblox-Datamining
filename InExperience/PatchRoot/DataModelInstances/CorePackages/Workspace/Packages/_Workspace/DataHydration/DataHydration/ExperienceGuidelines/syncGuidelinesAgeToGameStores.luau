@@ -5,7 +5,7 @@ local FFlagLuaAppDataHydrationUpdateItem = require(DataHydration.Parent.SharedFl
 local _ = require(script.Parent.ExperienceGuidelinesStoreTypes)
 
 return {
-	syncGuidelinesAgeToGameStores = function(p1, p2) --[[ Line: 11 ]]
+	syncGuidelinesAgeToGameStores = function(p1, p2)
 		-- upvalues: FFlagLuaAppDataHydrationUpdateItem (copy), GetGameInfoStoreModule (copy), GetAgeRecommendationStoreModule (copy)
 		local AgeRecommendationDetails = p2.ageRecommendationDetails
 		local AgeRecommendationSummary = AgeRecommendationDetails and AgeRecommendationDetails.ageRecommendationSummary

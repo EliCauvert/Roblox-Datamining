@@ -2,7 +2,7 @@
 local Roact = require(script.Parent.Parent.Parent.dependencies).Roact
 local MockProvidersModule = require(script.Parent.mockProviders)
 
-return function(p1, p2) --[[ Line: 17 ]]
+return function(p1, p2)
 	-- upvalues: HttpService (copy), MockProvidersModule (copy), Roact (copy)
 	local P1 = p2 or {}
 	local Parent = P1.parent
@@ -13,7 +13,7 @@ return function(p1, p2) --[[ Line: 17 ]]
 	end
 	local MountResult = Roact.mount(MockProvidersModule(p1, P1), Parent)
 	
-	return Parent, function() --[[ Line: 28 ]]
+	return Parent, function()
 		-- upvalues: Roact (upval), MountResult (copy), Parent (ref)
 		Roact.unmount(MountResult)
 		Parent:Destroy()

@@ -7,9 +7,9 @@ local ReactModule = require(Parent.React)
 local _ = require(AppChat.types)
 local UseFoundationPresenceModule = require(script.Parent.useFoundationPresence)
 
-local function _(p1, p2, p3) --[[ Line: 14 | Named "createUserProfileNameGetter" ]]
+local function _(p1, p2, p3)
 	-- upvalues: SignalsModule (copy)
-	return SignalsModule.createComputed(function(p4) --[[ Line: 15 ]]
+	return SignalsModule.createComputed(function(p4)
 		-- upvalues: p2 (copy), p1 (copy), p3 (copy)
 		if p2(p4) then
 			return ""
@@ -21,23 +21,23 @@ local function _(p1, p2, p3) --[[ Line: 14 | Named "createUserProfileNameGetter"
 	end)
 end
 
-return function(p1) --[[ Line: 28 | Named "useUserData" ]]
+return function(p1)
 	-- upvalues: UserProfilesModule (copy), SignalsModule (copy), UseSignalBindingFunction (copy), UseFoundationPresenceModule (copy), ReactModule (copy)
 	local GetResult = UserProfilesModule.Stores.UserProfileStore.get()
 	local NamesByUserIds = if p1 and p1 ~= "" then GetResult.fetchNamesByUserIds({ p1 }) else nil
-	local Computed = SignalsModule.createComputed(function(p2): boolean --[[ Line: 31 ]]
+	local Computed = SignalsModule.createComputed(function(p2): boolean
 		-- upvalues: NamesByUserIds (copy)
 		return not NamesByUserIds or NamesByUserIds(p2).status ~= "success"
 	end)
 	local UseSignalBindingResult = UseSignalBindingFunction(Computed)
 	
-	local function v13(p2) --[[ Line: 40 ]]
+	local function v13(p2)
 		local Username = p2.getUsername(false)
 		
 		return p2.getDisplayName(false) or Username
 	end
 	
-	local UseSignalBindingResult1 = UseSignalBindingFunction((SignalsModule.createComputed(function(p2) --[[ Line: 15 ]]
+	local UseSignalBindingResult1 = UseSignalBindingFunction((SignalsModule.createComputed(function(p2)
 		-- upvalues: Computed (copy), NamesByUserIds (copy), v13 (copy)
 		if Computed(p2) then
 			return ""
@@ -48,11 +48,11 @@ return function(p1) --[[ Line: 28 | Named "useUserData" ]]
 		end
 	end)))
 	
-	local function v15(p2) --[[ Line: 47 ]]
+	local function v15(p2)
 		return p2.getUsername(false)
 	end
 	
-	local UseSignalBindingResult2 = UseSignalBindingFunction((SignalsModule.createComputed(function(p2) --[[ Line: 15 ]]
+	local UseSignalBindingResult2 = UseSignalBindingFunction((SignalsModule.createComputed(function(p2)
 		-- upvalues: Computed (copy), NamesByUserIds (copy), v15 (copy)
 		if Computed(p2) then
 			return ""
@@ -63,11 +63,11 @@ return function(p1) --[[ Line: 28 | Named "useUserData" ]]
 		end
 	end)))
 	
-	local function v17(Names) --[[ Line: 52 ]]
+	local function v17(Names)
 		return Names.getCombinedName(false)
 	end
 	
-	local UseSignalBindingResult3 = UseSignalBindingFunction((SignalsModule.createComputed(function(p2) --[[ Line: 15 ]]
+	local UseSignalBindingResult3 = UseSignalBindingFunction((SignalsModule.createComputed(function(p2)
 		-- upvalues: Computed (copy), NamesByUserIds (copy), v17 (copy)
 		if Computed(p2) then
 			return ""
@@ -79,7 +79,7 @@ return function(p1) --[[ Line: 28 | Named "useUserData" ]]
 	end)))
 	local UseFoundationPresenceModuleResult = UseFoundationPresenceModule(p1)
 	
-	return ReactModule.useMemo(function() --[[ Line: 60 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: UseSignalBindingResult (copy), p1 (copy), UseSignalBindingResult1 (copy), UseSignalBindingResult3 (copy), UseSignalBindingResult2 (copy), UseFoundationPresenceModuleResult (copy)
 		return {
 			isLoading = UseSignalBindingResult,

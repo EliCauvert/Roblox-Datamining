@@ -4,17 +4,17 @@ local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local DropdownMenu = require(Parent.UIBlox).App.Menu.DropdownMenu
 
-return function(p1) --[[ Line: 30 | Named "ReasonDropdown" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), CryoModule (copy), UseLocalizationFunction (copy), DropdownMenu (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 41 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CryoModule (upval), p1 (copy)
-		return (CryoModule.Dictionary.map(p1.options, function(p2) --[[ Line: 42 ]]
+		return (CryoModule.Dictionary.map(p1.options, function(p2)
 			return p2.descriptionLocalizationKey, p2.value
 		end))
 	end, { p1.options })
-	local UseLocalizationResult = UseLocalizationFunction((ReactModule.useMemo(function() --[[ Line: 31 ]]
+	local UseLocalizationResult = UseLocalizationFunction((ReactModule.useMemo(function()
 		-- upvalues: CryoModule (upval), p1 (copy)
-		return CryoModule.Dictionary.union(CryoModule.Dictionary.map(p1.options, function(p2) --[[ Line: 32 ]]
+		return CryoModule.Dictionary.union(CryoModule.Dictionary.map(p1.options, function(p2)
 			return p2.localizationKey, p2.value
 		end), { ChooseOne = "Feature.ReportAbuse.Label.ChooseOne" })
 	end, { p1.options })))
@@ -24,7 +24,7 @@ return function(p1) --[[ Line: 30 | Named "ReasonDropdown" ]]
 		showDropShadow = true,
 		dropdownMenuListPositionFixed = true,
 		placeholder = UseLocalizationResult.ChooseOne,
-		onChange = ReactModule.useCallback(function(p2) --[[ Line: 60 ]]
+		onChange = ReactModule.useCallback(function(p2)
 			-- upvalues: p1 (copy), UseLocalizationResult1 (copy)
 			p1.setDropdownError(false)
 			p1.onSelectedAbuseType(p2)
@@ -37,9 +37,9 @@ return function(p1) --[[ Line: 30 | Named "ReasonDropdown" ]]
 		height = UDim.new(0, p1.menuItemHeight),
 		fixedListHeight = math.min(p1.menuItemHeight * #p1.options, p1.maxHeight),
 		errorState = p1.isDropdownError,
-		cellDatas = ReactModule.useMemo(function() --[[ Line: 51 ]]
+		cellDatas = ReactModule.useMemo(function()
 			-- upvalues: CryoModule (upval), p1 (copy), UseLocalizationResult (copy)
-			return CryoModule.List.map(p1.options, function(p2) --[[ Line: 52 ]]
+			return CryoModule.List.map(p1.options, function(p2)
 				-- upvalues: UseLocalizationResult (upval)
 				return {
 					text = UseLocalizationResult[p2.value] or "",

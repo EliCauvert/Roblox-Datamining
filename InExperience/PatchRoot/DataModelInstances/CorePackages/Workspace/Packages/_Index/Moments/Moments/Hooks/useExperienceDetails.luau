@@ -8,11 +8,11 @@ local config = {
 	isCreatorVerified = false,
 	rootPlaceId = nil
 }
-local Computed = require(Parent.Signals).createComputed(function() --[[ Line: 36 ]]
+local Computed = require(Parent.Signals).createComputed(function()
 	return nil
 end)
 
-return function(p1) --[[ Line: 40 ]]
+return function(p1)
 	-- upvalues: GameGetGameInfoStoreModule (copy), Computed (copy), UseSignalStateFunction (copy), config (copy), FFlagMomentsServeEDPVideos (copy)
 	local Text = if p1 and p1 ~= 0 then tostring(p1) else nil
 	local UseSignalStateResult = UseSignalStateFunction(if Text then GameGetGameInfoStoreModule(false).getAndFetchGameInfo(Text).data else Computed)

@@ -5,7 +5,7 @@ local View = FoundationModule.View
 local Icon = FoundationModule.Icon
 local Enums = FoundationModule.Enums
 
-return function(Frame) --[[ Line: 22 | Named "VerifiedBadge" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), View (copy), Icon (copy), Enums (copy)
 	return ReactModule.createElement(View, {
 		tag = "auto-xy",

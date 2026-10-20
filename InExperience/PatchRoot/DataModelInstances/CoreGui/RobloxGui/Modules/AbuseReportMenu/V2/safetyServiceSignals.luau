@@ -1,11 +1,11 @@
 ﻿local SafetyService = game:GetService("SafetyService")
 
 return {
-	reportMenuTabOpen = function() --[[ Line: 8 ]]
+	reportMenuTabOpen = function()
 		-- upvalues: SafetyService (copy)
 		SafetyService:ReportMenuTabOpen()
 	end,
-	reportMenuTabClose = function() --[[ Line: 12 ]]
+	reportMenuTabClose = function()
 		-- upvalues: SafetyService (copy)
 		SafetyService:ReportMenuTabClose()
 	end

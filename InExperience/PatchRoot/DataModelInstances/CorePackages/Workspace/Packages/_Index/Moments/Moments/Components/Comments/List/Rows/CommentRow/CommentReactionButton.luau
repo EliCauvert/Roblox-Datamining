@@ -20,7 +20,7 @@ local config = { Transparency = 0, Color3 = Color3.new(1, 1, 1) }
 local config1 = { frequency = 5, dampingRatio = 0.5 }
 local config2 = { frequency = 6, dampingRatio = 1 }
 
-return ReactModule.memo(function(Frame) --[[ Line: 45 | Named "CommentReactionButton" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactOtterModule (copy), ReactModule (copy), config1 (copy), config2 (copy), FFlagMomentsCommentRowRedesignModule (copy), GetColorStyleWithTransparencyModule (copy), config (copy), ReactionAssets (copy), ReactionSize (copy), View (copy), Icon (copy), BuilderIconsModule (copy), IconSize (copy), Reaction (copy), ReactionType (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ReactionName: string = `moments-comment-reaction-button-{Frame.commentId}`
@@ -29,7 +29,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 45 | Named "CommentReactionBu
 		commentId = Frame.commentId,
 		isReactionSelected = Frame.isReactionSelected
 	})
-	ReactModule.useLayoutEffect(function() --[[ Line: 51 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseRefResult (copy), Frame (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config1 (upval), config2 (upval)
 		local Current = UseRefResult.current
 		UseRefResult.current = {
@@ -84,14 +84,14 @@ return ReactModule.memo(function(Frame) --[[ Line: 45 | Named "CommentReactionBu
 				}, {
 					Thumb = ReactModule.createElement(View, {
 						tag = "position-center-center anchor-center-center size-full",
-						scale = UseAnimatedBindingResult:map(function(Value: number): number --[[ Line: 70 ]]
+						scale = UseAnimatedBindingResult:map(function(Value: number): number
 							return (math.lerp(1, 0.6, (math.clamp(Value, 0, 1))))
 						end)
 					}, {
 						Icon = ReactModule.createElement(Icon, {
 							name = BuilderIconsModule.Icon.ThumbUp,
 							size = if FFlagMomentsCommentRowRedesignModule then IconSize.Small else IconSize.Medium,
-							style = UseAnimatedBindingResult:map(function(Value: number) --[[ Line: 67 ]]
+							style = UseAnimatedBindingResult:map(function(Value: number)
 								-- upvalues: GetColorStyleWithTransparencyModule (upval), Emphasis (copy)
 								return GetColorStyleWithTransparencyModule(Emphasis, (math.clamp(Value, 0, 1)))
 							end),
@@ -103,11 +103,11 @@ return ReactModule.memo(function(Frame) --[[ Line: 45 | Named "CommentReactionBu
 					Reacted = ReactModule.createElement(Reaction, {
 						reactionType = ReactionType.ThumbsUp,
 						size = ReactionSize.XSmall,
-						imageStyle = UseAnimatedBindingResult:map(function(Value: number) --[[ Line: 73 ]]
+						imageStyle = UseAnimatedBindingResult:map(function(Value: number)
 							-- upvalues: GetColorStyleWithTransparencyModule (upval), config (upval)
 							return GetColorStyleWithTransparencyModule(config, 1 - math.clamp(Value, 0, 1))
 						end),
-						scale = UseAnimatedBindingResult:map(function(Alpha: number) --[[ Line: 80 ]]
+						scale = UseAnimatedBindingResult:map(function(Alpha: number)
 							-- upvalues: SizeRatio (copy)
 							return math.lerp(0.6, 1, Alpha) * SizeRatio
 						end),
@@ -134,7 +134,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 45 | Named "CommentReactionBu
 			ZIndex = 2,
 			Position = UDim2.fromOffset(-Small, -SmallDelta),
 			Size = if FFlagMomentsCommentRowRedesignModule then UDim2.new(1, Small, 1, 2 * SmallDelta) else UDim2.new(1, Small, 1, Small),
-			cursor = ReactModule.useMemo(function() --[[ Line: 95 ]]
+			cursor = ReactModule.useMemo(function()
 				-- upvalues: UseTokensResult (copy)
 				return {
 					offset = 0,

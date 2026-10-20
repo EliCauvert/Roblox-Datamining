@@ -15,21 +15,21 @@ local Chip = FoundationModule.Chip
 local InputSize = FoundationModule.Enums.InputSize
 local InputLabelSize = FoundationModule.Enums.InputLabelSize
 
-local function UsernameSuggestionList(Frame) --[[ Line: 56 ]]
+local function UsernameSuggestionList(Frame)
 	-- upvalues: ReactModule (copy), Chip (copy), UsernameSuggestionShownFunction (copy), EventStreamConstants (copy), View (copy), Text (copy)
 	local Elements = {}
 	
 	for LayoutOrder, suggestionUsername in ipairs(Frame.suggestionUsernames) do
 		Elements[`Suggestion{LayoutOrder}`] = ReactModule.createElement(Chip, {
 			text = suggestionUsername,
-			onActivated = function() --[[ Line: 68 ]]
+			onActivated = function()
 				-- upvalues: Frame (copy), suggestionUsername (copy)
 				Frame.onUsernameSelected(suggestionUsername)
 			end,
 			LayoutOrder = LayoutOrder
 		})
 	end
-	ReactModule.useEffect(function() --[[ Line: 78 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UsernameSuggestionShownFunction (upval), Frame (copy), EventStreamConstants (upval)
 		UsernameSuggestionShownFunction(Frame.eventContext, Frame.inputUsername, Frame.suggestionUsernames, EventStreamConstants.Field.Username)
 	end, {})
@@ -52,12 +52,12 @@ local function UsernameSuggestionList(Frame) --[[ Line: 56 ]]
 	})
 end
 
-return function(Frame) --[[ Line: 109 | Named "UsernameFieldWithSuggestions" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), View (copy), CollapsingTextInputValidator (copy), UsernameValidator (copy), InputSize (copy), InputLabelSize (copy), UsernameSuggestionList (copy), FFlagAccountUpgradeOAuthTelemetryModule (copy), EventStreamConstants (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local OnSuggestionSelectedFunction = Frame.onSuggestionSelected
 	local UpdatePillClickedFunction = Frame.updatePillClicked
-	local UseResult = ReactModule.useCallback(function(Text) --[[ Line: 115 ]]
+	local UseResult = ReactModule.useCallback(function(Text)
 		-- upvalues: UpdatePillClickedFunction (copy), UseRefResult (copy), OnSuggestionSelectedFunction (copy)
 		if UpdatePillClickedFunction ~= nil then
 			UpdatePillClickedFunction()

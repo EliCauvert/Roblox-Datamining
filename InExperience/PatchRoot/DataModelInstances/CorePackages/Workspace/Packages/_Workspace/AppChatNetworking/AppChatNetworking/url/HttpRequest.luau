@@ -12,7 +12,7 @@ local AppChatNetworkResponse = require(Parent.SocialLuaAnalytics).Telemetry.new(
 	backendsList = {
 		{
 			type = "RobloxTelemetryCounter",
-			format = function(p1) --[[ Line: 23 ]]
+			format = function(p1)
 				return {
 					endpoint = string.match(string.match(p1.url, ".%w+/(.*)") or "", "([^?#]+)") or "unknown",
 					statusCode = tostring(p1.statusCode),
@@ -23,7 +23,7 @@ local AppChatNetworkResponse = require(Parent.SocialLuaAnalytics).Telemetry.new(
 	}
 })
 
-local function chunkAndLogString(CONVERSATIONSName: string) --[[ Line: 41 ]]
+local function chunkAndLogString(CONVERSATIONSName: string)
 	-- upvalues: AppChatNetworking1 (copy)
 	local List = {}
 	
@@ -37,7 +37,7 @@ end
 
 return {
 	default = require(Parent.GenericChallenges).Middleware.ChallengeRequestWrapper((HttpRequestModule.config({
-		requestFunction = function(Text: string, p1, p2) --[[ Line: 53 ]]
+		requestFunction = function(Text: string, p1, p2)
 			-- upvalues: AppChatNetworking1 (copy), GetFFlagDebugUnfilteredThreadsFunction (copy), chunkAndLogString (copy), HttpRequestModule (copy)
 			AppChatNetworking1:info(`Fetching: [ requestMethod = "{p2}", url = "{Text}" ]`)
 			
@@ -59,7 +59,7 @@ return {
 			end
 			return HttpRequestModule.requestFunctions.RequestInternal(Text, p1, p2)
 		end,
-		postRequestFunction = function(p3, p4) --[[ Line: 78 ]]
+		postRequestFunction = function(p3, p4)
 			-- upvalues: AppChatNetworking1 (copy), AppChatNetworkingTelemetryModule (copy), AppChatNetworkResponse (copy), GetFFlagDebugUnfilteredThreadsFunction (copy), HttpService (copy), chunkAndLogString (copy)
 			AppChatNetworking1:debug(`Returned: [ requestMethod = "{p5.requestMethod}", url = "{p5.url}", statusCode = {p3.StatusCode}{if p3.HttpError == Enum.HttpError.OK then "" else `, HttpError = {p3.HttpError}` or ""}]`)
 			AppChatNetworkingTelemetryModule.emit(AppChatNetworkResponse, {
@@ -69,7 +69,7 @@ return {
 			})
 			
 			if GetFFlagDebugUnfilteredThreadsFunction() then
-				local Success, Result = pcall(function() --[[ Line: 90 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: HttpService (upval), p3 (copy)
 					return HttpService:JSONDecode(p3.Body)
 				end)

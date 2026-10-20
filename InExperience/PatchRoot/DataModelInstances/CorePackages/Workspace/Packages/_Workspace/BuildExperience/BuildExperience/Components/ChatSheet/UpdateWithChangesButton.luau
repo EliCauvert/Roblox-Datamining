@@ -8,7 +8,7 @@ local Button = FoundationModule.Button
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local InputSize = FoundationModule.Enums.InputSize
 
-return function(Frame) --[[ Line: 19 | Named "UpdateWithChangesButton" ]]
+return function(Frame)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), Button (copy), InputSize (copy), ButtonVariant (copy)
 	return ReactModule.createElement(Button, {
 		text = UseLocalizationFunction({

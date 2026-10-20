@@ -20,7 +20,7 @@ return {
 			{
 				type = SupportedTelemetryBackends.RobloxTelemetryStat,
 				dynamicCustomFields = {
-					status = function(p1) --[[ Line: 29 ]]
+					status = function(p1)
 						return p1
 					end
 				}
@@ -34,7 +34,7 @@ return {
 			{
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					backgroundId = function(p1) --[[ Line: 43 ]]
+					backgroundId = function(p1)
 						return p1
 					end
 				}
@@ -48,10 +48,10 @@ return {
 			{
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					errorType = function(p1) --[[ Line: 57 ]]
+					errorType = function(p1)
 						return p1
 					end,
-					errorCode = function(p1) --[[ Line: 60 ]]
+					errorCode = function(p1)
 						return p1
 					end
 				}

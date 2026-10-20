@@ -39,7 +39,7 @@ local PartyVoiceBannerErrorUserNotEligibleURL = game:DefineFastString("PartyVoic
 local DisallowSquadLobbyBannersInlineButtons = game:DefineFastFlag("DisallowSquadLobbyBannersInlineButtons", false)
 local DisablePartyVoiceEligibilityBanner = game:DefineFastFlag("DisablePartyVoiceEligibilityBanner", false)
 
-function openWebview(p1, Url) --[[ Line: 69 ]]
+function openWebview(p1, Url)
 	-- upvalues: HttpService (copy), GuiService (copy)
 	GuiService:BroadcastNotification(HttpService:JSONEncode({
 		presentationStyle = 0,
@@ -49,7 +49,7 @@ function openWebview(p1, Url) --[[ Line: 69 ]]
 	}), 20)
 end
 
-local function v24(Frame) --[[ Line: 82 ]]
+local function v24(Frame)
 	-- upvalues: UseTokensFunction (copy), DisallowSquadLobbyBannersInlineButtons (copy), React (copy), Foundation (copy), FFlagSquadsEnableFoundationTestIdsModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local NoDisallowSquadLobbyBannersInlineButtons: boolean = Frame.isButtonInline and not DisallowSquadLobbyBannersInlineButtons
@@ -81,7 +81,7 @@ local function v24(Frame) --[[ Line: 82 ]]
 			tag = "col auto-xy gap-small wrap",
 			LayoutOrder = 1,
 			testId = Frame.testId
-		}, (React.useMemo(function() --[[ Line: 86 ]]
+		}, (React.useMemo(function()
 			-- upvalues: React (upval), Foundation (upval), UseTokensResult (copy), Frame (copy), FFlagSquadsEnableFoundationTestIdsModule (upval)
 			local Elements = {
 				React.createElement(Foundation.Text, {
@@ -141,7 +141,7 @@ local function v24(Frame) --[[ Line: 82 ]]
 	})
 end
 
-local function v25(Frame) --[[ Line: 186 ]]
+local function v25(Frame)
 	-- upvalues: UseLocalUserIdFunction (copy), UseDispatchFunction (copy), React (copy), SquadExternalContractContext (copy), GetTableAppStorageKeyFunction (copy), SQUADVOICEEUMODALSEENKEY (copy), SQUADVOICEEUMODALCONSENTGIVENKEY (copy), HttpService (copy), Default (copy), v24 (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), DisplayEuConsentPromptModule (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseDispatchResult = UseDispatchFunction()
@@ -149,7 +149,7 @@ local function v25(Frame) --[[ Line: 186 ]]
 	local UseStateResult, UseStateResult2 = React.useState(false)
 	local TableAppStorageKey = GetTableAppStorageKeyFunction(SQUADVOICEEUMODALSEENKEY)
 	local TableAppStorageKey1 = GetTableAppStorageKeyFunction(SQUADVOICEEUMODALCONSENTGIVENKEY)
-	React.useEffect(function() --[[ Line: 195 ]]
+	React.useEffect(function()
 		-- upvalues: TableAppStorageKey (copy), UseLocalUserIdResult (copy), TableAppStorageKey1 (copy), UseStateResult2 (copy)
 		if TableAppStorageKey[tostring(UseLocalUserIdResult)] and not TableAppStorageKey1[tostring(UseLocalUserIdResult)] then
 			UseStateResult2(true)
@@ -158,18 +158,18 @@ local function v25(Frame) --[[ Line: 186 ]]
 		HttpService:JSONEncode(TableAppStorageKey),
 		HttpService:JSONEncode(TableAppStorageKey1)
 	})
-	React.useEffect(function() --[[ Line: 202 ]]
+	React.useEffect(function()
 		-- upvalues: Default (upval), UseStateResult2 (copy)
-		local EventConnection = Default.VoiceEuModalConsented.Event:Connect(function() --[[ Line: 203 ]]
+		local EventConnection = Default.VoiceEuModalConsented.Event:Connect(function()
 			-- upvalues: UseStateResult2 (upval)
 			UseStateResult2(false)
 		end)
-		local EventConnection1 = Default.VoiceEuModalRefused.Event:Connect(function() --[[ Line: 208 ]]
+		local EventConnection1 = Default.VoiceEuModalRefused.Event:Connect(function()
 			-- upvalues: UseStateResult2 (upval)
 			UseStateResult2(true)
 		end)
 		
-		return function() --[[ Line: 212 ]]
+		return function()
 			-- upvalues: EventConnection (copy), EventConnection1 (copy)
 			EventConnection:Disconnect()
 			EventConnection1:Disconnect()
@@ -182,14 +182,14 @@ local function v25(Frame) --[[ Line: 186 ]]
 		isButtonInline = true,
 		LayoutOrder = Frame.LayoutOrder,
 		testId = if FFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-banner-eu-consent" else nil,
-		onActivated = function() --[[ Line: 225 ]]
+		onActivated = function()
 			-- upvalues: UseDispatchResult (copy), DisplayEuConsentPromptModule (upval), UseContextResult (copy), UseLocalUserIdResult (copy), TableAppStorageKey (copy), TableAppStorageKey1 (copy)
 			UseDispatchResult(DisplayEuConsentPromptModule(UseContextResult.setSquadPrompt, tostring(UseLocalUserIdResult), TableAppStorageKey, TableAppStorageKey1))
 		end
 	}) else nil
 end
 
-local function v26(Frame) --[[ Line: 239 ]]
+local function v26(Frame)
 	-- upvalues: UseDispatchFunction (copy), UseStoreFunction (copy), React (copy), SquadExternalContractContext (copy), UseCurrentSquadIdFunction (copy), UseVoiceStatusFunction (copy), CrossExperienceModule (copy), VoiceStatus (copy), UseLocalizationFunction (copy), VoiceStatusChangedFunction (copy), Default (copy), GetFFlagEnableCrossExpVoiceMemoryCheckFunction (copy), SquadPromptType (copy), v24 (copy), FFlagSquadsEnableFoundationTestIdsModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseStoreResult = UseStoreFunction()
@@ -202,9 +202,9 @@ local function v26(Frame) --[[ Line: 239 ]]
 		errorText = "Feature.Squads.Label.VoiceErrorGeneral",
 		errorButton = "Feature.Squads.Action.VoiceErrorGeneral"
 	})
-	local UseResult = React.useCallback(function() --[[ Line: 254 ]]
+	local UseResult = React.useCallback(function()
 		-- upvalues: UseDispatchResult (copy), VoiceStatusChangedFunction (upval), CrossExperienceModule (upval), Default (upval), UseCurrentSquadIdResult (copy), GetFFlagEnableCrossExpVoiceMemoryCheckFunction (upval), IsUseVoiceStatusResultMatch (copy), UseContextResult (copy), UseStoreResult (copy), SquadPromptType (upval), VoiceStatus (upval), UseVoiceStatusResult (copy)
-		local function v52(ShouldIgnoreMemoryWarning) --[[ Line: 255 ]]
+		local function v52(ShouldIgnoreMemoryWarning)
 			-- upvalues: UseDispatchResult (upval), VoiceStatusChangedFunction (upval), CrossExperienceModule (upval), Default (upval), UseCurrentSquadIdResult (upval)
 			UseDispatchResult(VoiceStatusChangedFunction({
 				status = CrossExperienceModule.Constants.VOICE_STATUS.RCC_CONNECTING
@@ -225,8 +225,8 @@ local function v26(Frame) --[[ Line: 239 ]]
 				UseContextResult.setSquadPrompt(UseStoreResult, {
 					hideCancelButton = false,
 					promptType = SquadPromptType.ConnectVoiceWithLowMemory,
-					onConfirm = function() --[[ Line: 276 ]] end,
-					onCancel = function() --[[ Line: 277 ]]
+					onConfirm = function() end,
+					onCancel = function()
 						-- upvalues: v52 (copy)
 						v52(true)
 					end
@@ -267,7 +267,7 @@ local function v26(Frame) --[[ Line: 239 ]]
 	}) else nil
 end
 
-local function v27(Frame) --[[ Line: 318 ]]
+local function v27(Frame)
 	-- upvalues: UseIsCurrentSquadPartyVoiceEligibleFunction (copy), UseIsLocalPlayerPartyVoiceEligibleFunction (copy), UseIsAnyOtherUserPartyVoiceEligibleModule (copy), UseLocalizationFunction (copy), UseAppPolicyFunction (copy), React (copy), PartyVoiceBannerErrorUserNotEligibleURL (copy), v24 (copy), FFlagSquadsEnableFoundationTestIdsModule (copy)
 	local UseIsCurrentSquadPartyVoiceEligibleResult = UseIsCurrentSquadPartyVoiceEligibleFunction()
 	local UseIsLocalPlayerPartyVoiceEligibleResult = UseIsLocalPlayerPartyVoiceEligibleFunction()
@@ -276,10 +276,10 @@ local function v27(Frame) --[[ Line: 318 ]]
 		errorText = "Feature.Squads.Label.VoiceErrorUserIneligible",
 		errorButton = "Feature.Squads.Action.VoiceErrorUserIneligible"
 	})
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p1) --[[ Line: 326 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p1)
 		return p1.getWebViewSupport()
 	end)
-	local UseResult = React.useCallback(function() --[[ Line: 334 ]]
+	local UseResult = React.useCallback(function()
 		-- upvalues: PartyVoiceBannerErrorUserNotEligibleURL (upval), UseLocalizationResult (copy)
 		if PartyVoiceBannerErrorUserNotEligibleURL ~= "" then
 			openWebview(UseLocalizationResult.errorButton, PartyVoiceBannerErrorUserNotEligibleURL)
@@ -296,32 +296,32 @@ local function v27(Frame) --[[ Line: 318 ]]
 	}) else nil
 end
 
-local function v28(Frame) --[[ Line: 358 ]]
+local function v28(Frame)
 	-- upvalues: UseVoiceStatusFunction (copy), UseCurrentSquadIdFunction (copy), React (copy), VoiceChatModule (copy), UseAppPolicyFunction (copy), UseLocalizationFunction (copy), VoiceStatus (copy), v24 (copy), FFlagSquadsEnableFoundationTestIdsModule (copy)
 	local UseVoiceStatusResult = UseVoiceStatusFunction()
 	local UseCurrentSquadIdResult = UseCurrentSquadIdFunction() or ""
-	local UseMemoResult = React.useMemo(function() --[[ Line: 361 ]]
+	local UseMemoResult = React.useMemo(function()
 		-- upvalues: VoiceChatModule (upval)
 		return VoiceChatModule.Utils.GetSettingsAppAvailable()
 	end, {})
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p1) --[[ Line: 365 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p1)
 		return p1
 	end)
 	local UseLocalizationResult = UseLocalizationFunction({
 		errorText = "Feature.SettingsHub.Prompt.Subtitle.AllowMicrophoneAccess",
 		errorButton = "Feature.SettingsHub.Action.OpenSettings",
-		errorSubtext1 = React.useMemo(function() --[[ Line: 369 ]]
+		errorSubtext1 = React.useMemo(function()
 			-- upvalues: UseMemoResult (copy), UseAppPolicyResult (copy)
 			return (if UseMemoResult then UseAppPolicyResult.getMicSettingsDeeplinkDirectionsLocaleKey() else UseAppPolicyResult.getMicSettingsDirectionsLocaleKey()) or nil
 		end, { UseAppPolicyResult, UseMemoResult }),
-		errorSubtext2 = React.useMemo(function() --[[ Line: 377 ]]
+		errorSubtext2 = React.useMemo(function()
 			-- upvalues: UseAppPolicyResult (copy)
 			return if UseAppPolicyResult.getRequiresAppRestartOnMicAccessChange() then "Feature.SettingsHub.Prompt.RestartOnMicAccessChange" else nil
 		end, { UseAppPolicyResult, UseMemoResult })
 	})
-	local UseResult = React.useCallback(function() --[[ Line: 395 ]]
+	local UseResult = React.useCallback(function()
 		-- upvalues: VoiceChatModule (upval)
-		pcall(function() --[[ Line: 396 ]]
+		pcall(function()
 			-- upvalues: VoiceChatModule (upval)
 			VoiceChatModule.Utils.SwitchToMicrophoneSettings()
 		end)
@@ -341,7 +341,7 @@ local function v28(Frame) --[[ Line: 358 ]]
 	}) else nil
 end
 
-local function v29(Frame) --[[ Line: 418 ]]
+local function v29(Frame)
 	-- upvalues: UseNavigationFunction (copy), UseCurrentSquadParentChannelIdFunction (copy), UseIsCurrentSquadPartyVoiceEligibleFunction (copy), UseIsLocalPlayerPartyVoiceEligibleFunction (copy), UseLocalizationFunction (copy), React (copy), v24 (copy), FFlagSquadsEnableFoundationTestIdsModule (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseCurrentSquadParentChannelIdResult = UseCurrentSquadParentChannelIdFunction() or ""
@@ -352,10 +352,10 @@ local function v29(Frame) --[[ Line: 418 ]]
 		errorText = "Feature.Squads.Label.VoiceErrorPartyNotVoiceEligible",
 		errorButton = "Feature.Squads.Action.VoiceErrorPartyNotVoiceEligible"
 	})
-	local UseResult = React.useCallback(function() --[[ Line: 429 ]]
+	local UseResult = React.useCallback(function()
 		-- upvalues: UseCurrentSquadParentChannelIdResult (copy), UseNavigationResult (copy)
 		if UseCurrentSquadParentChannelIdResult ~= "" then
-			pcall(function() --[[ Line: 431 ]]
+			pcall(function()
 				-- upvalues: UseNavigationResult (upval), UseCurrentSquadParentChannelIdResult (upval)
 				UseNavigationResult.navigate("CreateUnfilteredChatPartialModal", { conversationId = UseCurrentSquadParentChannelIdResult })
 			end)
@@ -375,7 +375,7 @@ local function v29(Frame) --[[ Line: 418 ]]
 	}) else nil
 end
 
-return function(p1) --[[ Line: 459 ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), React (copy), GetFFlagEnableCrossExpVoiceFunction (copy), v26 (copy), DisablePartyVoiceEligibilityBanner (copy), v29 (copy), v27 (copy), v28 (copy), FFlagEnableVoiceEuConsentPrompt (copy), v25 (copy)
 	local UseTokensResult = UseTokensFunction()
 	
@@ -383,7 +383,7 @@ return function(p1) --[[ Line: 459 ]]
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.fromScale(1, 0),
 		BackgroundTransparency = 1,
-		[React.Change.AbsoluteSize] = React.useCallback(function(Frame) --[[ Line: 461 ]]
+		[React.Change.AbsoluteSize] = React.useCallback(function(Frame)
 			-- upvalues: p1 (copy)
 			if Frame then
 				p1.onAbsoluteSizeChanged(Frame.AbsoluteSize)

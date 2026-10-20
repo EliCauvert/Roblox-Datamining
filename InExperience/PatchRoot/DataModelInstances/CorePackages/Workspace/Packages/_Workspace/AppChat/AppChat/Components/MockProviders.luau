@@ -27,7 +27,7 @@ local config = {
 	withApolloProvider = true
 }
 
-return function(p1) --[[ Line: 57 | Named "MockProviders" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), RealtimeProvider (copy), FoundationProvider (copy), StyleProviderWithDefaultTheme (copy), LocalizationProvider (copy), Signal (copy), LayerCollectorProvider (copy), RoactRoduxModule (copy), RoduxModule (copy), UniversalAppPolicyModule (copy), SocialPoliciesModule (copy), StyleModule (copy), MockApolloClientFunction (copy), MockUserDataModule (copy), UserProfilesModule (copy), ApolloClientModule (copy), InteractionFeedbackModule (copy), HapticFeedbackConfig (copy), RoactNavigationModule (copy), ReactModule (copy), ProviderContainer (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local List = {}
@@ -53,7 +53,7 @@ return function(p1) --[[ Line: 57 | Named "MockProviders" ]]
 		class = LocalizationProvider,
 		props = {
 			localization = {
-				Format = function(_, p2) --[[ Line: 90 ]]
+				Format = function(_, p2)
 					return p2
 				end,
 				changed = Signal.new()
@@ -67,7 +67,7 @@ return function(p1) --[[ Line: 57 | Named "MockProviders" ]]
 	table.insert(List, {
 		class = RoactRoduxModule.StoreProvider,
 		props = {
-			store = UnionResult.rodux and UnionResult.rodux.store or RoduxModule.Store.new(function() --[[ Line: 108 ]]
+			store = UnionResult.rodux and UnionResult.rodux.store or RoduxModule.Store.new(function()
 				-- upvalues: UnionResult (copy)
 				return UnionResult.rodux and UnionResult.rodux.state or {}
 			end, UnionResult.rodux and UnionResult.rodux.state, { RoduxModule.thunkMiddleware })
@@ -104,17 +104,17 @@ return function(p1) --[[ Line: 57 | Named "MockProviders" ]]
 		props = {
 			value = {
 				state = { routeName = "", key = "", params = {} },
-				dispatch = function() --[[ Line: 157 ]] end,
-				goBack = function() --[[ Line: 158 ]] end,
-				addListener = function() --[[ Line: 159 ]]
-					return { remove = function() --[[ Line: 160 ]] end }
+				dispatch = function() end,
+				goBack = function() end,
+				addListener = function()
+					return { remove = function() end }
 				end,
-				isFocused = function() --[[ Line: 162 ]] end,
-				setParams = function() --[[ Line: 163 ]] end,
-				getParam = function() --[[ Line: 164 ]] end,
-				replace = function() --[[ Line: 165 ]] end,
-				push = function() --[[ Line: 166 ]] end,
-				getScreenProps = function() --[[ Line: 167 ]] end
+				isFocused = function() end,
+				setParams = function() end,
+				getParam = function() end,
+				replace = function() end,
+				push = function() end,
+				getScreenProps = function() end
 			}
 		}
 	})

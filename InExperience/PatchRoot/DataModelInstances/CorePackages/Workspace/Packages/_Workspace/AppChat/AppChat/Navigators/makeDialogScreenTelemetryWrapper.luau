@@ -2,14 +2,14 @@
 local ChatDialogTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatDialogTelemetryLayer)
 local ReactModule = require(AppChat.Parent.React)
 
-return function(p1) --[[ Line: 10 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ChatDialogTelemetryLayerModule (copy)
-	return function(p2) --[[ Line: 11 ]]
+	return function(p2)
 		-- upvalues: ReactModule (upval), ChatDialogTelemetryLayerModule (upval), p1 (copy)
 		local ConversationIdParam = if p2.navigation then p2.navigation.getParam("conversationId") else nil
 		
 		return ReactModule.createElement(ChatDialogTelemetryLayerModule.Provider, {
-			value = ReactModule.useMemo(function() --[[ Line: 14 ]]
+			value = ReactModule.useMemo(function()
 				-- upvalues: ConversationIdParam (copy)
 				return { conversationId = ConversationIdParam }
 			end, { ConversationIdParam })

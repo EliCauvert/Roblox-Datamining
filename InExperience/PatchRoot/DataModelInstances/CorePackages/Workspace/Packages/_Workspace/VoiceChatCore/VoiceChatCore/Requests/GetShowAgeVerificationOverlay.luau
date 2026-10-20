@@ -1,6 +1,6 @@
 ﻿local ConstantsModule = require(script:FindFirstAncestor("VoiceChatCore").Constants)
 
-local function createQueryParams(List): string --[[ Line: 9 ]]
+local function createQueryParams(List): string
 	local Text = ""
 	local Count = 0
 	
@@ -11,7 +11,7 @@ local function createQueryParams(List): string --[[ Line: 9 ]]
 	return if Count == 0 then "" else "?" .. Text
 end
 
-return function(Callback, p1, PlaceId, p2) --[[ Line: 19 ]]
+return function(Callback, p1, PlaceId, p2)
 	-- upvalues: ConstantsModule (copy), createQueryParams (copy)
 	assert(type(PlaceId) == "string", "GetShowAgeVerificationOverlay request expects placeId to be a string")
 	assert(type(p1) == "string", "GetShowAgeVerificationOverlay request expects universeId to be a string")

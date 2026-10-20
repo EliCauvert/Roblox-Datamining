@@ -47,7 +47,7 @@
 	{ pattern = "is not enabled", status = "InvalidRequest" }
 }
 
-return function(p1) --[[ Line: 27 | Named "classifyPostUploadError" ]]
+return function(p1)
 	-- upvalues: list (copy)
 	local Text = tostring(p1)
 	

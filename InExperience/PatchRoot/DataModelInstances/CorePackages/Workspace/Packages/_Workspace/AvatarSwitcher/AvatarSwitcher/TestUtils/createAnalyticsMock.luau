@@ -1,6 +1,6 @@
 ﻿local Jest = require(script:FindFirstAncestor("AvatarSwitcher").Parent.Dev.JestGlobals).jest
 
-return function() --[[ Line: 7 | Named "createAnalyticsMock" ]]
+return function()
 	-- upvalues: Jest (copy)
 	local FnResult = Jest.fn()
 	

@@ -19,9 +19,9 @@ return {
 	storyRoot = ProgressLoading,
 	roact = ReactModule,
 	reactRoblox = require(Parent.ReactRoblox),
-	mapStory = function(p1) --[[ Line: 22 ]]
+	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), FoundationProvider (copy), config (copy), config1 (copy)
-		return function(p2) --[[ Line: 23 ]]
+		return function(p2)
 			-- upvalues: ReactModule (upval), FoundationProvider (upval), config (upval), config1 (upval), p1 (copy)
 			return ReactModule.createElement(FoundationProvider, {
 				colorMode = p2 and config[p2.theme] or config.Default,

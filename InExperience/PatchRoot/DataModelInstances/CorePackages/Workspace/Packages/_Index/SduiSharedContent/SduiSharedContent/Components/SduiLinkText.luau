@@ -8,7 +8,7 @@ local SduiTextModule = require(script.Parent.SduiText)
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local FFlagSduiLinkTextStyleOverrideModule = require(SduiSharedContent.Flags.FFlagSduiLinkTextStyleOverride)
 
-return function(p1) --[[ Line: 28 | Named "SduiLinkText" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), FFlagSduiLinkTextStyleOverrideModule (copy), CheckAndFormatPossibleLinkFunction (copy), ReactModule (copy), SduiTextModule (copy), CryoModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Text = p1.text

@@ -5,7 +5,7 @@ local _ = require(Parent.util.Types)
 local GetFFlagUGCValidateVersionedContentIdsModule = require(Parent.flags.getFFlagUGCValidateVersionedContentIds)
 
 return {
-	getData = function(p1) --[[ Line: 11 ]]
+	getData = function(p1)
 		-- upvalues: ConstantsModule (copy), GetFFlagUGCValidateVersionedContentIdsModule (copy), ParseContentIdsModule (copy)
 		local RootInstance = p1.rootInstance
 		local t = {}

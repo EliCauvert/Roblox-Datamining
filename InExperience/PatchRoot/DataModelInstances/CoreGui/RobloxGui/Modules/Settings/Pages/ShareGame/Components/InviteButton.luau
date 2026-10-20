@@ -17,7 +17,7 @@ local config = {
 local Translator = require(ShareGame.getTranslator)()
 local InviteButton = RoactModule.PureComponent:extend("InviteButton")
 
-function InviteButton.render(p1) --[[ Line: 30 ]]
+function InviteButton.render(p1)
 	-- upvalues: InviteStatus (copy), Immutable (copy), RoactModule (copy), RectangleButtonModule (copy), Semibold (copy), Translator (copy), TextSizeResult (copy), ConstantsModule (copy), config (copy)
 	local AnchorPoint = p1.props.anchorPoint
 	local Position = p1.props.position
@@ -39,7 +39,7 @@ function InviteButton.render(p1) --[[ Line: 30 ]]
 		TextXAlignment = Enum.TextXAlignment.Center,
 		LayoutOrder = LayoutOrder,
 		ZIndex = ZIndex
-	}) else RoactModule.createElement(RectangleButtonModule, Immutable.Set(p1.props, "onClick", function() --[[ Line: 41 ]]
+	}) else RoactModule.createElement(RectangleButtonModule, Immutable.Set(p1.props, "onClick", function()
 		-- upvalues: OnInviteFunction (copy)
 		OnInviteFunction()
 	end), {

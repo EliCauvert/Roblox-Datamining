@@ -8,7 +8,7 @@ local CloseAffordanceModule = require(Foundation.Components.CloseAffordance)
 local CloseAffordanceVariantModule = require(Foundation.Enums.CloseAffordanceVariant)
 local ViewModule = require(Foundation.Components.View)
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 19 | Named "SheetHeader" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: UseTokensModule (copy), ReactModule (copy), SheetContextModule (copy), SheetTypeModule (copy), ViewModule (copy), CloseAffordanceModule (copy), CloseAffordanceVariantModule (copy)
 	local UseTokensModuleResult = UseTokensModule()
 	local UseContextResult = ReactModule.useContext(SheetContextModule)
@@ -22,11 +22,11 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 19 |
 	local ContentStartRef = UseContextResult.contentStartRef
 	assert(InnerScrollY and (SetHasHeaderFunction and (CloseSheet and TestId)), "SheetHeader must be used within a Sheet")
 	local IsSheetTypeMatch = SheetType == SheetTypeModule.Bottom
-	ReactModule.useEffect(function() --[[ Line: 35 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SetHasHeaderFunction (copy)
 		SetHasHeaderFunction(true)
 		
-		return function() --[[ Line: 37 ]]
+		return function()
 			-- upvalues: SetHasHeaderFunction (upval)
 			SetHasHeaderFunction(false)
 		end
@@ -57,7 +57,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 19 |
 		}),
 		BottomBorder = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 2,
-			backgroundStyle = InnerScrollY:map(function(p2) --[[ Line: 71 ]]
+			backgroundStyle = InnerScrollY:map(function(p2)
 				-- upvalues: UseTokensModuleResult (copy)
 				return {
 					Color3 = UseTokensModuleResult.Color.Stroke.Default.Color3,

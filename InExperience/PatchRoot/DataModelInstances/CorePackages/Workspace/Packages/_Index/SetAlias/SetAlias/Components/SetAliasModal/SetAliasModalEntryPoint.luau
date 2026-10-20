@@ -7,7 +7,7 @@ local ConstantsModule = require(Parent.Common.Constants)
 local DefaultAnalyticsService = require(Parent.Parent.SocialLuaAnalytics).Analytics.DefaultAnalyticsService
 local SetAliasModalContainerModule = require(script.Parent.SetAliasModalContainer)
 
-return function(p1) --[[ Line: 15 ]]
+return function(p1)
 	-- upvalues: UseLocalUserIdFunction (copy), React (copy), AnalyticsModule (copy), DefaultAnalyticsService (copy), ConstantsModule (copy), SetAliasModalContainerModule (copy)
 	return React.createElement(AnalyticsModule.Context.Provider, {
 		value = {

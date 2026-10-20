@@ -7,15 +7,15 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local InputSize = FoundationModule.Enums.InputSize
 local DisabledPlaytestTooltipModule = require(script.Parent.DisabledPlaytestTooltip)
 
-return function(Frame: Frame) --[[ Line: 28 | Named "PlayButton" ]]
+return function(Frame: Frame)
 	-- upvalues: ReactModule (copy), ButtonVariant (copy), InputSize (copy), IconButton (copy), DisabledPlaytestTooltipModule (copy), View (copy)
 	local ActiveIcon = if Frame.isActive then Frame.activeIcon else Frame.inActiveIcon
 	local IsIsDisabled = Frame.isDisabled == true
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 33 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: IsIsDisabled (copy), UseStateResult2 (copy), Frame (copy)
 		if IsIsDisabled then
-			UseStateResult2(function(p1): boolean --[[ Line: 35 ]]
+			UseStateResult2(function(p1): boolean
 				return not p1
 			end)
 			
@@ -24,7 +24,7 @@ return function(Frame: Frame) --[[ Line: 28 | Named "PlayButton" ]]
 			Frame.onActivated()
 		end
 	end, { IsIsDisabled, Frame.onActivated })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 43 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {})

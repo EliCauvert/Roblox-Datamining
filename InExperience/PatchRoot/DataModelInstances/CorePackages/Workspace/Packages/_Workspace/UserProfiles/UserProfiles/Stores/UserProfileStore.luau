@@ -12,7 +12,7 @@ local UserProfileStoreQueueProcessDelay = game:DefineFastInt("UserProfileStoreQu
 local FFlagEnableVerifiedBadgeStore = SharedFlagsModule.FFlagEnableVerifiedBadgeStore
 local FFlagEnableBlackbirdCheck = SharedFlagsModule.FFlagEnableBlackbirdCheck
 local UserProfileModelModule = require(script.Parent.UserProfileModel)
-local Computed = SignalsModule.createComputed(function(_) --[[ Line: 41 ]]
+local Computed = SignalsModule.createComputed(function(_)
 	-- upvalues: Parent (copy), LumberyakModule (copy), UserProfileStoreMaxLoggingLevel (copy), UserProfileStoreHttpTimeout (copy), FFlagEnableVerifiedBadgeStore (copy), FFlagEnableBlackbirdCheck (copy), UserProfileModelModule (copy), FIntUserProfileStoreBatchSize (copy), FFlagUserProfilePlatformProfile (copy), PlatformProfileRequestModule (copy), CreateSignalFunction (copy), UserProfileStoreQueueProcessDelay (copy)
 	local UrlBuilderModule = require(Parent.UrlBuilder)
 	local UrlBuilder = UrlBuilderModule.UrlBuilder
@@ -21,7 +21,7 @@ local Computed = SignalsModule.createComputed(function(_) --[[ Line: 41 ]]
 	UserProfileStore:setContext({ prefix = "[UserProfileStore] " })
 	UserProfileStore:addSink({
 		maxLevel = UserProfileStoreMaxLoggingLevel,
-		log = function(_, _, _) --[[ Line: 59 ]] end
+		log = function(_, _, _) end
 	})
 	local HttpService = game:GetService("HttpService")
 	local Url = UrlBuilder.new({
@@ -45,7 +45,7 @@ local Computed = SignalsModule.createComputed(function(_) --[[ Line: 41 ]]
 	local t1 = {}
 	local Flag = false
 	
-	local function _(Key) --[[ Line: 90 | Named "getOrCreateByUserId" ]]
+	local function _(Key)
 		-- upvalues: CreateResults (copy), UserProfileStore (copy), UserProfileModelModule (upval)
 		local CreateResult = CreateResults[Key]
 		
@@ -62,7 +62,7 @@ local Computed = SignalsModule.createComputed(function(_) --[[ Line: 41 ]]
 		end
 	end
 	
-	local function performBatchFetch(p1, Text: string, List, p2) --[[ Line: 103 ]]
+	local function performBatchFetch(p1, Text: string, List, p2)
 		-- upvalues: UserProfileStore (copy), t (copy), FIntUserProfileStoreBatchSize (upval), FFlagUserProfilePlatformProfile (upval), PlatformProfileRequestModule (upval), HttpService (copy), Url (copy), UserProfileStoreHttpTimeout (copy), CreateResults (copy), UserProfileModelModule (upval), performBatchFetch (copy)
 		if #p1 == 0 then
 			UserProfileStore:trace("No more ids to fetch. Setting result.")
@@ -125,13 +125,13 @@ local Computed = SignalsModule.createComputed(function(_) --[[ Line: 41 ]]
 					Accept = "application/json"
 				},
 				RequestType = Enum.HttpRequestType.Default
-			}):Start(function(Enabled, p3) --[[ Line: 178 ]]
+			}):Start(function(Enabled, p3)
 				-- upvalues: HttpService (upval), UserProfileStore (upval), Json (copy), FFlagUserProfilePlatformProfile (upval), PlatformProfileRequestModule (upval), Parts (copy), t (upval), Text (copy), CreateResults (upval), UserProfileModelModule (upval), performBatchFetch (upval), List1 (copy), List (copy), p2 (copy)
 				if Enabled == true then
 					local Body = p3.Body
 					
 					if Body ~= nil then
-						local _, Result = pcall(function() --[[ Line: 182 ]]
+						local _, Result = pcall(function()
 							-- upvalues: HttpService (upval), Body (copy)
 							return HttpService:JSONDecode(Body)
 						end)
@@ -177,7 +177,7 @@ local Computed = SignalsModule.createComputed(function(_) --[[ Line: 41 ]]
 		end
 	end
 	
-	local function processQueuedRequests() --[[ Line: 213 ]]
+	local function processQueuedRequests()
 		-- upvalues: t1 (ref), UserProfileStore (copy), t (copy), performBatchFetch (copy)
 		for i, value in pairs(t1) do
 			UserProfileStore:trace("Processing requests ({}) for fields: {}", #value, i)
@@ -201,7 +201,7 @@ local Computed = SignalsModule.createComputed(function(_) --[[ Line: 41 ]]
 		t1 = {}
 	end
 	
-	local function fetchByUserIds(UserIds, List, Callback: (any) -> ()) --[[ Line: 235 ]]
+	local function fetchByUserIds(UserIds, List, Callback: (any) -> ())
 		-- upvalues: t (copy), CreateResults (copy), UserProfileStore (copy), UserProfileModelModule (upval), CreateSignalFunction (upval), t1 (ref), Flag (ref), FFlagEnableBlackbirdCheck (upval), processQueuedRequests (copy), UserProfileStoreQueueProcessDelay (upval)
 		table.sort(List)
 		local Joined = table.concat(List, ",")
@@ -266,13 +266,13 @@ local Computed = SignalsModule.createComputed(function(_) --[[ Line: 41 ]]
 				Flag = true
 				
 				if FFlagEnableBlackbirdCheck then
-					task.defer(function() --[[ Line: 298 ]]
+					task.defer(function()
 						-- upvalues: processQueuedRequests (upval), Flag (upval)
 						processQueuedRequests()
 						Flag = false
 					end)
 				else
-					task.delay(UserProfileStoreQueueProcessDelay, function() --[[ Line: 303 ]]
+					task.delay(UserProfileStoreQueueProcessDelay, function()
 						-- upvalues: processQueuedRequests (upval), Flag (upval)
 						processQueuedRequests()
 						Flag = false
@@ -286,7 +286,7 @@ local Computed = SignalsModule.createComputed(function(_) --[[ Line: 41 ]]
 		end
 	end
 	
-	local function getNameFields(p3) --[[ Line: 315 ]]
+	local function getNameFields(p3)
 		-- upvalues: config (copy), FFlagUserProfilePlatformProfile (upval), FFlagEnableVerifiedBadgeStore (upval), FFlagEnableBlackbirdCheck (upval)
 		local List = {
 			config.COMBINED_NAME, config.DISPLAY_NAME, config.USERNAME,
@@ -306,7 +306,7 @@ local Computed = SignalsModule.createComputed(function(_) --[[ Line: 41 ]]
 		return List
 	end
 	
-	local function invalidateCachedProfiles(List, List1) --[[ Line: 363 ]]
+	local function invalidateCachedProfiles(List, List1)
 		-- upvalues: t (copy)
 		table.sort(List)
 		local Entry = t[table.concat(List, ",")]
@@ -319,11 +319,11 @@ local Computed = SignalsModule.createComputed(function(_) --[[ Line: 41 ]]
 	end
 	
 	return {
-		fetchNamesByUserIds = function(UserIds, Callback, p3) --[[ Line: 341 ]]
+		fetchNamesByUserIds = function(UserIds, Callback, p3)
 			-- upvalues: fetchByUserIds (copy), getNameFields (copy)
 			return (fetchByUserIds(UserIds, getNameFields(p3), Callback))
 		end,
-		updateFromHydration = function(List) --[[ Line: 349 ]]
+		updateFromHydration = function(List)
 			-- upvalues: CreateResults (copy), UserProfileStore (copy), UserProfileModelModule (upval)
 			for i, value in List do
 				local Text = if value.userId == nil then i else tostring(value.userId)
@@ -348,11 +348,11 @@ local Computed = SignalsModule.createComputed(function(_) --[[ Line: 41 ]]
 				})
 			end
 		end,
-		getProfileByUserId = function(p3) --[[ Line: 400 ]]
+		getProfileByUserId = function(p3)
 			-- upvalues: CreateResults (copy)
 			return CreateResults[p3]
 		end,
-		invalidateCachedNamesForUserIds = function(p3) --[[ Line: 381 ]]
+		invalidateCachedNamesForUserIds = function(p3)
 			-- upvalues: FFlagUserProfilePlatformProfile (upval), invalidateCachedProfiles (copy), getNameFields (copy), config (copy)
 			if FFlagUserProfilePlatformProfile then
 				invalidateCachedProfiles(getNameFields(false), p3)
@@ -371,7 +371,7 @@ local Computed = SignalsModule.createComputed(function(_) --[[ Line: 41 ]]
 end)
 
 return {
-	get = function() --[[ Line: 413 ]]
+	get = function()
 		-- upvalues: Computed (copy)
 		return Computed(false)
 	end

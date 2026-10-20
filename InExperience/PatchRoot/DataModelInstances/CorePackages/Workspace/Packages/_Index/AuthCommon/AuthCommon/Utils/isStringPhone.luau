@@ -1,4 +1,4 @@
-﻿return function(Text: string): boolean --[[ Line: 1 ]]
+﻿return function(Text: string): boolean
 	if Text and Text ~= "" then
 		assert(Text, "")
 		local v1 = #Text:gsub("[^%d]", "") >= 6

@@ -20,18 +20,18 @@ local InputSize = FoundationModule.Enums.InputSize
 local ProgressShape = FoundationModule.Enums.ProgressShape
 local ProgressSize = FoundationModule.Enums.ProgressSize
 
-local function noop() --[[ Line: 29 ]] end
+local function noop() end
 
-local function _(p1: number): number --[[ Line: 54 | Named "clampPct" ]]
+local function _(p1: number): number
 	return if p1 < 0 then 0 elseif p1 > 100 then 100 else p1
 end
 
-local _ = function(Value: number) --[[ Line: 63 | Named "formatNumber" ]]
+local _ = function(Value: number)
 	-- upvalues: NumberLocalization (copy), LocalizationService (copy)
 	return NumberLocalization.localize(string.format("%.0f", (math.floor(Value))), LocalizationService.RobloxLocaleId)
 end
 
-local function FreeUsageCard(Frame) --[[ Line: 67 ]]
+local function FreeUsageCard(Frame)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperienceFreeTrialResetPeriodModule (copy), ReactModule (copy), View (copy), Text (copy), Progress (copy), ProgressShape (copy), ProgressSize (copy)
 	local PctUsed: number = Frame.pctUsed
 	local PctUsed1 = if PctUsed < 0 then 0 elseif PctUsed > 100 then 100 else PctUsed
@@ -95,7 +95,7 @@ local function FreeUsageCard(Frame) --[[ Line: 67 ]]
 	})
 end
 
-local function RobuxLine(Frame) --[[ Line: 150 ]]
+local function RobuxLine(Frame)
 	-- upvalues: NumberLocalization (copy), LocalizationService (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy)
 	local LocalizeResult = NumberLocalization.localize(string.format("%.0f", (math.floor(Frame.amount))), LocalizationService.RobloxLocaleId)
 	local UsedOf: number = Frame.usedOf
@@ -146,7 +146,7 @@ local function RobuxLine(Frame) --[[ Line: 150 ]]
 	})
 end
 
-local function AdditionalUsageCard(Frame) --[[ Line: 211 ]]
+local function AdditionalUsageCard(Frame)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), View (copy), Text (copy), Toggle (copy), InputSize (copy), RobuxLine (copy), Button (copy), ButtonVariant (copy), noop (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		additionalDailyUsage = LocalizationStringsModule.CREATOR_CREDIT_ADDITIONAL_DAILY_USAGE_LABEL,
@@ -189,7 +189,7 @@ local function AdditionalUsageCard(Frame) --[[ Line: 211 ]]
 				size = InputSize.Medium,
 				isChecked = Frame.additionalEnabled,
 				isDisabled = Frame.settingsDisabled == true,
-				onActivated = function(p1) --[[ Line: 268 ]]
+				onActivated = function(p1)
 					-- upvalues: Frame (copy)
 					if not Frame.settingsDisabled then
 						Frame.onToggleAdditional(p1)
@@ -273,7 +273,7 @@ local function AdditionalUsageCard(Frame) --[[ Line: 211 ]]
 	}, config)
 end
 
-return function(p1) --[[ Line: 361 | Named "CreatorCreditPageView" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), FreeUsageCard (copy), AdditionalUsageCard (copy)
 	return ReactModule.createElement(View, {
 		tag = "col gap-medium size-full-0 auto-y padding-y-xlarge",

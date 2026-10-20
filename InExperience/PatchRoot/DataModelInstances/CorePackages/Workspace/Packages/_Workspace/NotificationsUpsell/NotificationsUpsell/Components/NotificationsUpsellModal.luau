@@ -25,7 +25,7 @@ local SendEventDeferredFunction = require(Parent.NotificationsCommon).sendEventD
 local ModalEventConstantsModule = require(script.Parent.Parent.Analytics.ModalEventConstants)
 local RichTextEscapeModule = require(script.Parent.Parent.Util.RichTextEscape)
 
-return function(p1) --[[ Line: 39 ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), UseCallbackFunction (copy), SendEventDeferredFunction (copy), ModalEventConstantsModule (copy), Players (copy), FollowingsPostFollowModule (copy), ConfigResult (copy), NotificationModalsManagerModule (copy), Images (copy), UseStateFunction (copy), UseRefFunction (copy), EnableConsoleAutoFocusForUEN1 (copy), UseEffectFunction (copy), UserInputService (copy), GuiService (copy), ReactModule (copy), ReactRobloxModule (copy), InteractiveAlert (copy), RichTextEscapeModule (copy), ButtonType (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		Cancel = "CommonUI.Controls.Action.Cancel",
@@ -37,7 +37,7 @@ return function(p1) --[[ Line: 39 ]]
 		NotificationsEnabled = "Feature.Notifications.Response.NotificationsEnabled",
 		SomethingWentWrong = "Feature.Call.Error.Description.Generic"
 	})
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 52 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: SendEventDeferredFunction (upval), ModalEventConstantsModule (upval), p1 (copy)
 		SendEventDeferredFunction(ModalEventConstantsModule.ModalContext, ModalEventConstantsModule.OptInEventName, {
 			[ModalEventConstantsModule.ActionType] = ModalEventConstantsModule.Clicked,
@@ -46,7 +46,7 @@ return function(p1) --[[ Line: 39 ]]
 		})
 		p1.CloseModal()
 	end, { p1.CloseModal, p1.ExperienceId })
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 61 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: SendEventDeferredFunction (upval), ModalEventConstantsModule (upval), p1 (copy), Players (upval), FollowingsPostFollowModule (upval), ConfigResult (upval), NotificationModalsManagerModule (upval), Images (upval), UseLocalizationResult (copy)
 		SendEventDeferredFunction(ModalEventConstantsModule.ModalContext, ModalEventConstantsModule.OptInEventName, {
 			[ModalEventConstantsModule.ActionType] = ModalEventConstantsModule.Clicked,
@@ -60,7 +60,7 @@ return function(p1) --[[ Line: 39 ]]
 				[ModalEventConstantsModule.ActionType] = ModalEventConstantsModule.BackendRequested,
 				[ModalEventConstantsModule.UniverseId] = p1.ExperienceId
 			})
-			FollowingsPostFollowModule(ConfigResult, tostring(LocalPlayer.UserId), (tostring(p1.ExperienceId))):andThen(function() --[[ Line: 74 ]]
+			FollowingsPostFollowModule(ConfigResult, tostring(LocalPlayer.UserId), (tostring(p1.ExperienceId))):andThen(function()
 				-- upvalues: SendEventDeferredFunction (upval), ModalEventConstantsModule (upval), p1 (upval), NotificationModalsManagerModule (upval), Images (upval), UseLocalizationResult (upval)
 				SendEventDeferredFunction(ModalEventConstantsModule.ModalContext, ModalEventConstantsModule.OptInEventName, {
 					[ModalEventConstantsModule.ActionType] = ModalEventConstantsModule.BackendSuccess,
@@ -70,7 +70,7 @@ return function(p1) --[[ Line: 39 ]]
 					iconImage = Images["icons/common/notificationOn"],
 					toastTitle = if p1.ExperienceName then UseLocalizationResult.NotificationsEnabledForExperience:gsub("{experienceName}", p1.ExperienceName) else UseLocalizationResult.NotificationsEnabled
 				})
-			end, function() --[[ Line: 89 ]]
+			end, function()
 				-- upvalues: SendEventDeferredFunction (upval), ModalEventConstantsModule (upval), p1 (upval), NotificationModalsManagerModule (upval), Images (upval), UseLocalizationResult (upval)
 				SendEventDeferredFunction(ModalEventConstantsModule.ModalContext, ModalEventConstantsModule.OptInEventName, {
 					[ModalEventConstantsModule.ActionType] = ModalEventConstantsModule.BackendFailed,
@@ -85,17 +85,17 @@ return function(p1) --[[ Line: 39 ]]
 		p1.CloseModal()
 	end, { p1.CloseModal, p1.ExperienceId, UseLocalizationResult })
 	local UseStateResult, UseStateResult2 = UseStateFunction(Vector2.new(800, 600))
-	local UseCallbackResult2 = UseCallbackFunction(function(Frame) --[[ Line: 111 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function(Frame)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(Frame.AbsoluteSize)
 	end, { UseStateResult2 })
 	local UseRefResult = UseRefFunction(nil)
 	
 	if EnableConsoleAutoFocusForUEN1 then
-		UseEffectFunction(function() --[[ Line: 117 ]]
+		UseEffectFunction(function()
 			-- upvalues: UserInputService (upval), UseRefResult (copy), GuiService (upval)
 			if not UserInputService.GamepadEnabled then return end
-			task.delay(0.3, function() --[[ Line: 124 ]]
+			task.delay(0.3, function()
 				-- upvalues: UseRefResult (upval), GuiService (upval)
 				local Buttons = UseRefResult.current and UseRefResult.current:FindFirstChild("Buttons", true)
 				local _2 = Buttons and Buttons:FindFirstChild("2")
@@ -105,16 +105,16 @@ return function(p1) --[[ Line: 39 ]]
 				end
 			end)
 			
-			return function() --[[ Line: 132 ]]
+			return function()
 				-- upvalues: GuiService (upval)
 				GuiService.SelectedCoreObject = nil
 			end
 		end, {})
 	else
-		UseEffectFunction(function() --[[ Line: 137 ]]
+		UseEffectFunction(function()
 			-- upvalues: UserInputService (upval), UseRefResult (copy), GuiService (upval)
 			if UserInputService.GamepadEnabled then
-				task.delay(0.3, function() --[[ Line: 141 ]]
+				task.delay(0.3, function()
 					-- upvalues: UseRefResult (upval), GuiService (upval)
 					local Buttons = UseRefResult.current and UseRefResult.current:FindFirstChild("Buttons", true)
 					local _2 = Buttons and Buttons:FindFirstChild("2")

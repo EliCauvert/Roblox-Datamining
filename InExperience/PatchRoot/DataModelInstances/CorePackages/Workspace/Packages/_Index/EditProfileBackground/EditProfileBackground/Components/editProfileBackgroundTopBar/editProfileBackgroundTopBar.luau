@@ -6,7 +6,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local UseLastInputModeFunction = require(Parent.FocusNavigationUtils).useLastInputMode
 local View = require(Parent.Foundation).View
 
-return function(p1) --[[ Line: 22 | Named "EditProfileBackgroundTopBar" ]]
+return function(p1)
 	-- upvalues: UseLastInputModeFunction (copy), UseLocalizationFunction (copy), MakeBackButtonFunction (copy), ReactModule (copy), View (copy), HeaderBar (copy)
 	local IsFocus = UseLastInputModeFunction() == "Focus"
 	local UseLocalizationResult = UseLocalizationFunction({ EditBackground = "Feature.Profile.Label.EditBackground" })

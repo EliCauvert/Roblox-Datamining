@@ -1,24 +1,24 @@
 ﻿local ReactModule = require(game:GetService("CorePackages").Packages.React)
 local UseLocalPlayerModule = require(script.Parent.useLocalPlayer)
 
-return function() --[[ Line: 5 | Named "usePlayerGui" ]]
+return function()
 	-- upvalues: UseLocalPlayerModule (copy), ReactModule (copy)
 	local UseLocalPlayerModuleResult = UseLocalPlayerModule()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-	ReactModule.useEffect(function() --[[ Line: 9 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseLocalPlayerModuleResult (copy), UseStateResult2 (copy)
 		local Connection = nil
 		
 		if UseLocalPlayerModuleResult then
 			UseStateResult2(UseLocalPlayerModuleResult:FindFirstChildOfClass("PlayerGui"))
-			Connection = UseLocalPlayerModuleResult.ChildAdded:Connect(function(Child) --[[ Line: 15 ]]
+			Connection = UseLocalPlayerModuleResult.ChildAdded:Connect(function(Child)
 				-- upvalues: UseStateResult2 (upval)
 				if Child:IsA("PlayerGui") then
 					UseStateResult2(Child)
 				end
 			end)
 		end
-		return function() --[[ Line: 22 ]]
+		return function()
 			-- upvalues: Connection (ref)
 			if Connection then
 				Connection:Disconnect()

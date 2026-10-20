@@ -282,7 +282,7 @@ local list7 = {
 	{ "Right Hip", "Torso" }
 }
 
-local function indexParts(Object) --[[ Line: 238 ]]
+local function indexParts(Object)
 	local Parts = {}
 	
 	for _, Part in ipairs(Object:GetChildren()) do
@@ -297,7 +297,7 @@ local function indexParts(Object) --[[ Line: 238 ]]
 	return Parts
 end
 
-local function createRigJoints(Character, List, p1) --[[ Line: 252 ]]
+local function createRigJoints(Character, List, p1)
 	if p1 then
 		local Root = Instance.new("AnimationConstraint")
 		Root.Name = "Root"
@@ -362,7 +362,7 @@ local function createRigJoints(Character, List, p1) --[[ Line: 252 ]]
 	end
 end
 
-local function createAdditionalAttachments(Character, List) --[[ Line: 320 ]]
+local function createAdditionalAttachments(Character, List)
 	for _, value in ipairs(List) do
 		local Unpacked, Unpacked2, Unpacked3, Unpacked4 = unpack(value)
 		local CharacterEntry = Character[Unpacked]
@@ -391,7 +391,7 @@ local function createAdditionalAttachments(Character, List) --[[ Line: 320 ]]
 	end
 end
 
-local function createNoCollides(Character, List1) --[[ Line: 348 ]]
+local function createNoCollides(Character, List1)
 	local t = {}
 	
 	for _, value in ipairs(List1) do
@@ -440,11 +440,11 @@ local function createNoCollides(Character, List1) --[[ Line: 348 ]]
 	end
 end
 
-local function _(p2, Parent): boolean --[[ Line: 407 | Named "isAttachmetInPart" ]]
+local function _(p2, Parent): boolean
 	return if p2 then p2.Parent == Parent else false
 end
 
-local _ = function(Parent, Parent1, p2, p3): boolean --[[ Line: 411 | Named "checkValidAttachment" ]]
+local _ = function(Parent, Parent1, p2, p3): boolean
 	if (if p2 then p2.Parent == Parent else false) and (if p3 then p3.Parent == Parent1 else false) then
 		return true
 	elseif (if p2 then p2.Parent == Parent1 else false) and (if p3 then p3.Parent == Parent else false) then
@@ -454,7 +454,7 @@ local _ = function(Parent, Parent1, p2, p3): boolean --[[ Line: 411 | Named "che
 	end
 end
 
-local function hasValidConstraint(Parent, Parent1): boolean --[[ Line: 423 ]]
+local function hasValidConstraint(Parent, Parent1): boolean
 	for _, BallSocketConstraint in ipairs(Parent1:GetChildren()) do
 		if BallSocketConstraint:IsA("BallSocketConstraint") then
 			local Attachment0 = BallSocketConstraint.Attachment0
@@ -476,7 +476,7 @@ local function hasValidConstraint(Parent, Parent1): boolean --[[ Line: 423 ]]
 	return false
 end
 
-local function hasRagdollJoint(Object): boolean --[[ Line: 438 ]]
+local function hasRagdollJoint(Object): boolean
 	-- upvalues: AvatarJointUpgradeFeatureEngineFeature (copy), hasValidConstraint (copy)
 	if AvatarJointUpgradeFeatureEngineFeature and not Object:IsA("Motor6D") and not Object:IsA("AnimationConstraint") then
 		return false
@@ -496,7 +496,7 @@ local function hasRagdollJoint(Object): boolean --[[ Line: 438 ]]
 	return if Parent and Parent1 then if hasValidConstraint(Parent, Parent1) then true elseif hasValidConstraint(Parent1, Parent) then true else false else false
 end
 
-local function disableMotorSet(Model, List) --[[ Line: 470 ]]
+local function disableMotorSet(Model, List)
 	-- upvalues: AvatarJointUpgradeFeatureEngineFeature (copy), hasRagdollJoint (copy)
 	local List1 = {}
 	
@@ -516,7 +516,7 @@ local function disableMotorSet(Model, List) --[[ Line: 470 ]]
 end
 
 return {
-	createRagdollJoints = function(p2, HumanoidRigType, p3) --[[ Line: 486 ]]
+	createRagdollJoints = function(p2, HumanoidRigType, p3)
 		-- upvalues: indexParts (copy), createAdditionalAttachments (copy), list4 (copy), createRigJoints (copy), list5 (copy), createNoCollides (copy), list6 (copy), list (copy), list1 (copy), list2 (copy)
 		local IndexPartsResult = indexParts(p2)
 		
@@ -537,7 +537,7 @@ return {
 			error("unknown rig type", 2)
 		end
 	end,
-	disableMotors = function(Model, HumanoidRigType) --[[ Line: 501 ]]
+	disableMotors = function(Model, HumanoidRigType)
 		-- upvalues: disableMotorSet (copy), list7 (copy), list3 (copy)
 		local v1 = nil
 		
@@ -560,7 +560,7 @@ return {
 		end
 		return v1
 	end,
-	disableParticleEmittersAndFadeOut = function(Object, p2) --[[ Line: 530 ]]
+	disableParticleEmittersAndFadeOut = function(Object, p2)
 		-- upvalues: RunService (copy)
 		if RunService:IsServer() then
 			error("disableParticleEmittersAndFadeOut should not be called on the server.", 2)
@@ -584,7 +584,7 @@ return {
 			end
 		end
 	end,
-	easeNongraphicJointFriction = function(Object, p3) --[[ Line: 558 ]]
+	easeNongraphicJointFriction = function(Object, p3)
 		-- upvalues: RunService (copy)
 		local t = {}
 		
@@ -612,7 +612,7 @@ return {
 			end
 		end
 	end,
-	easeJointFriction_OLD = function(Object, p4) --[[ Line: 587 ]]
+	easeJointFriction_OLD = function(Object, p4)
 		-- upvalues: RunService (copy)
 		local t = {}
 		

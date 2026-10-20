@@ -1,4 +1,4 @@
-﻿local function StringSplit(Text: string, Pattern: string, p1: number) --[[ Line: 7 ]]
+﻿local function StringSplit(Text: string, Pattern: string, p1: number)
 	-- upvalues: StringSplit (copy)
 	if #Text == 0 then
 		return if string.find(Text, Pattern) then {} else { "" }

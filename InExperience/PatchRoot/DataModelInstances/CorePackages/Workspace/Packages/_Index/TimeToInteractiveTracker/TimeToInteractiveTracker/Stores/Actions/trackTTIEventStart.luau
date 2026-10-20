@@ -1,13 +1,13 @@
 ﻿local _ = require(script.Parent.Parent.types)
 local NowModule = require(script.Parent.Parent.Parent.Utils.now)
 
-return function(Callback) --[[ Line: 11 ]]
+return function(Callback)
 	-- upvalues: NowModule (copy)
 	local t = {}
 	
-	return function(p1, p2) --[[ Line: 17 ]]
+	return function(p1, p2)
 		-- upvalues: Callback (copy), NowModule (upval), t (copy)
-		Callback(function(Tbl) --[[ Line: 18 ]]
+		Callback(function(Tbl)
 			-- upvalues: p1 (copy), NowModule (upval), p2 (copy), t (upval)
 			local Entry = Tbl[p1]
 			local Copy = table.clone(Tbl)

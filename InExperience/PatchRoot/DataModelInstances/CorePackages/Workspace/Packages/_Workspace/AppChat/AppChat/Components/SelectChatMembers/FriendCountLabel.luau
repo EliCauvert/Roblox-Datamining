@@ -6,7 +6,7 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local BuilderIconsModule = require(Parent.BuilderIcons)
 local GetSelectedUsersStoreModule = require(AppChat.Stores.GetSelectedUsersStore)
 
-return ReactModule.memo(function() --[[ Line: 13 | Named "FriendCountLabel" ]]
+return ReactModule.memo(function()
 	-- upvalues: GetSelectedUsersStoreModule (copy), SignalsReactModule (copy), FoundationModule (copy), ReactModule (copy), BuilderIconsModule (copy)
 	local SelectedUsersStoreModule = GetSelectedUsersStoreModule(false)
 	
@@ -26,7 +26,7 @@ return ReactModule.memo(function() --[[ Line: 13 | Named "FriendCountLabel" ]]
 			Text = ReactModule.joinBindings({
 				SignalsReactModule.useSignalBinding(SelectedUsersStoreModule.getSelectedUserIdsCount()),
 				(SignalsReactModule.useSignalBinding(SelectedUsersStoreModule.getMaxSize()))
-			}):map(function(Entry): string --[[ Line: 32 ]]
+			}):map(function(Entry): string
 				return `{Entry[1]}/{Entry[2]}`
 			end)
 		})

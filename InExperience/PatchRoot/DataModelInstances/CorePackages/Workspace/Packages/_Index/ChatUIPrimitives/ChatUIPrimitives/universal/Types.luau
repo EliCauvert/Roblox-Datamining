@@ -66,7 +66,7 @@ local UnionResult = TModule.union(TModule.strictInterface({
 return {
 	isValidMessageDraft = InterfaceResult1,
 	isValidMessage = InterfaceResult2,
-	isValidMessageEnvelope = function(p1) --[[ Line: 206 ]]
+	isValidMessageEnvelope = function(p1)
 		-- upvalues: UnionResult (copy)
 		local UnionResultResult, UnionResultResult2 = UnionResult(p1)
 		

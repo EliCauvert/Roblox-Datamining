@@ -9,10 +9,10 @@ local FlagsService = PeopleServiceModule.getService("Flags")
 local GetFFlagAddPeoplePageCardLayoutFunction = FlagsService.GetFFlagAddPeoplePageCardLayout
 local FFlagEnablePeoplePageButtonOnMount = FlagsService.FFlagEnablePeoplePageButtonOnMount
 
-local function MemoizedButton(p1) --[[ Line: 21 ]]
+local function MemoizedButton(p1)
 	-- upvalues: ReactModule (copy), FFlagEnablePeoplePageButtonOnMount (copy), CoreButtonModule (copy)
 	local Config = p1.config
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 27 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy), Config (copy), FFlagEnablePeoplePageButtonOnMount (upval)
 		p1.onButtonMount(p2, Config.id)
 		
@@ -21,7 +21,7 @@ local function MemoizedButton(p1) --[[ Line: 21 ]]
 		end
 	end, { Config.onMount, p1.onButtonMount, Config.id })
 	
-	return ReactModule.useMemo(function() --[[ Line: 34 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), CoreButtonModule (upval), Config (copy), UseResult (copy)
 		return ReactModule.createElement(CoreButtonModule, {
 			text = Config.text,
@@ -40,16 +40,16 @@ local function MemoizedButton(p1) --[[ Line: 21 ]]
 	})
 end
 
-return function(Frame) --[[ Line: 62 ]]
+return function(Frame)
 	-- upvalues: CoreButtonConfigsModule (copy), ReactModule (copy), PeopleServiceModule (copy), MemoizedButton (copy), View (copy), GetFFlagAddPeoplePageCardLayoutFunction (copy)
 	local CoreButtonConfigsModuleResult = CoreButtonConfigsModule(Frame.chromeEnabled, Frame.buttonActivatedTable)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 67 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: PeopleServiceModule (upval)
 		return PeopleServiceModule.getService("FocusNavigationService")
 	end, {})
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef({})
-	local UseResult = ReactModule.useCallback(function(p1, p2) --[[ Line: 77 ]]
+	local UseResult = ReactModule.useCallback(function(p1, p2)
 		-- upvalues: UseRefResult1 (copy)
 		if p1 then
 			UseRefResult1.current[p2] = p1
@@ -59,12 +59,12 @@ return function(Frame) --[[ Line: 62 ]]
 			UseRefResult1.current[p2] = nil
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(Current) --[[ Line: 85 ]]
+	local UseResult1 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), PeopleServiceModule (upval), UseMemoResult (copy)
 		UseRefResult.current = Current
 		
 		if Current then
-			UseMemoResult.registerScrollCallback(-1, function() --[[ Line: 89 ]]
+			UseMemoResult.registerScrollCallback(-1, function()
 				-- upvalues: PeopleServiceModule (upval), UseRefResult (upval)
 				local HubRefResult = PeopleServiceModule.getService("SettingsHubService").hubRef()
 				
@@ -74,7 +74,7 @@ return function(Frame) --[[ Line: 62 ]]
 			end)
 		end
 	end, { UseMemoResult })
-	ReactModule.useEffect(function() --[[ Line: 112 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: CoreButtonConfigsModuleResult (copy), UseRefResult1 (copy), UseMemoResult (copy)
 		local List = {}
 		
@@ -88,14 +88,14 @@ return function(Frame) --[[ Line: 62 ]]
 			end
 		end
 		if #List > 0 then
-			table.sort(List, function(A, B): boolean --[[ Line: 126 ]]
+			table.sort(List, function(A, B): boolean
 				return A.LayoutOrder < B.LayoutOrder
 			end)
 			UseMemoResult.registerButtonRow(-1, List, 0)
 		end
 	end, {
 		UseMemoResult,
-		(ReactModule.useMemo(function(): string --[[ Line: 101 ]]
+		(ReactModule.useMemo(function(): string
 			-- upvalues: CoreButtonConfigsModuleResult (copy)
 			local List = {}
 			
@@ -109,15 +109,15 @@ return function(Frame) --[[ Line: 62 ]]
 			return table.concat(List, ",")
 		end, { CoreButtonConfigsModuleResult }))
 	})
-	ReactModule.useEffect(function() --[[ Line: 135 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy)
-		return function() --[[ Line: 136 ]]
+		return function()
 			-- upvalues: UseMemoResult (upval)
 			UseMemoResult.unregisterScrollCallback(-1)
 			UseMemoResult.unregisterButtonRow(-1)
 		end
 	end, { UseMemoResult })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 143 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: CoreButtonConfigsModuleResult (copy), ReactModule (upval), MemoizedButton (upval), UseResult (copy)
 		local Elements = {}
 		
@@ -136,7 +136,7 @@ return function(Frame) --[[ Line: 62 ]]
 	if #UseMemoResult1 == 0 then
 		return nil
 	end
-	local function _() --[[ Line: 169 | Named "getButtonElements" ]]
+	local function _()
 		-- upvalues: UseMemoResult1 (copy)
 		local t = {}
 		

@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.FormValidationErrorEnum)
 
-return function(p1) --[[ Line: 4 | Named "buildFormValidator" ]]
-	return function(p2) --[[ Line: 5 ]]
+return function(p1)
+	return function(p2)
 		-- upvalues: p1 (copy)
 		local v1 = nil
 		for _, value in p1 do

@@ -31,13 +31,13 @@ local config = {
 	}
 }
 
-local function upsertConversationResponse(p1, Conversation) --[[ Line: 65 ]]
+local function upsertConversationResponse(p1, Conversation)
 	-- upvalues: ConversationChannelsModule (copy), FFlagAppChatAnyServerSideConversationSearchModule (copy), SignalsExperimentalModule (copy), SearchIntroducedConversationIdsModule (copy)
 	if Conversation == nil or Conversation.status == "failed" then return end
 	local FromChannelsApiResult = ConversationChannelsModule.fromChannelsApi(Conversation)
 	
 	if FFlagAppChatAnyServerSideConversationSearchModule then
-		SignalsExperimentalModule.batch(function() --[[ Line: 75 ]]
+		SignalsExperimentalModule.batch(function()
 			-- upvalues: p1 (copy), FromChannelsApiResult (copy), SearchIntroducedConversationIdsModule (upval)
 			p1.upsertConversation(FromChannelsApiResult)
 			SearchIntroducedConversationIdsModule.remove(FromChannelsApiResult.id)
@@ -49,11 +49,11 @@ local function upsertConversationResponse(p1, Conversation) --[[ Line: 65 ]]
 	end
 end
 
-local function upsertConversationResponses(p1, ResponseBody) --[[ Line: 84 ]]
+local function upsertConversationResponses(p1, ResponseBody)
 	-- upvalues: AppChatBatchConversationPageUpsert (copy), SignalsExperimentalModule (copy), upsertConversationResponse (copy)
 	if ResponseBody == nil or ResponseBody.conversations == nil then return end
 	if AppChatBatchConversationPageUpsert then
-		SignalsExperimentalModule.batch(function() --[[ Line: 91 ]]
+		SignalsExperimentalModule.batch(function()
 			-- upvalues: ResponseBody (copy), upsertConversationResponse (upval), p1 (copy)
 			for _, conversation in ResponseBody.conversations do
 				upsertConversationResponse(p1, conversation)
@@ -67,7 +67,7 @@ local function upsertConversationResponses(p1, ResponseBody) --[[ Line: 84 ]]
 	end
 end
 
-local function _(p2, p3, p4) --[[ Line: 103 | Named "updateConversation" ]]
+local function _(p2, p3, p4)
 	-- upvalues: CryoModule (copy)
 	if p3 == nil then return end
 	local Conversation = p2.getConversation(p3, false)
@@ -79,13 +79,13 @@ local function _(p2, p3, p4) --[[ Line: 103 | Named "updateConversation" ]]
 	end
 end
 
-local _ = function(p2) --[[ Line: 114 | Named "getUnixTimestamp" ]]
+local _ = function(p2)
 	return if p2 == nil then nil elseif typeof(p2) == "DateTime" then p2.UnixTimestamp elseif type(p2) == "table" and p2.GetUnixTimestamp ~= nil then p2:GetUnixTimestamp() else nil
 end
 
-local _ = function(p2) --[[ Line: 127 | Named "getDateTimeFromIsoDate" ]]
+local _ = function(p2)
 	if type(p2) == "string" then
-		local Success, Result = pcall(function() --[[ Line: 132 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p2 (copy)
 			return DateTime.fromIsoDate(p2)
 		end)
@@ -96,12 +96,12 @@ local _ = function(p2) --[[ Line: 127 | Named "getDateTimeFromIsoDate" ]]
 	end
 end
 
-local _ = function(p2) --[[ Line: 138 | Named "getMessageSentTime" ]]
+local _ = function(p2)
 	if p2.sent == nil then
 		local CreatedAt = p2.created_at or p2.createdAt
 		
 		if type(CreatedAt) == "string" then
-			local Success1, Result1 = pcall(function() --[[ Line: 132 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: CreatedAt (copy)
 				return DateTime.fromIsoDate(CreatedAt)
 			end)
@@ -116,7 +116,7 @@ local _ = function(p2) --[[ Line: 138 | Named "getMessageSentTime" ]]
 		local Sent = p2.sent
 		
 		if type(Sent) == "string" then
-			local Success, Result = pcall(function() --[[ Line: 132 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: Sent (copy)
 				return DateTime.fromIsoDate(Sent)
 			end)
@@ -128,7 +128,7 @@ local _ = function(p2) --[[ Line: 138 | Named "getMessageSentTime" ]]
 	end
 end
 
-local function messagesFromWebResponse(p2, ChatMessages) --[[ Line: 145 ]]
+local function messagesFromWebResponse(p2, ChatMessages)
 	-- upvalues: MessageModelModule (copy)
 	if ChatMessages == nil then
 		return {}
@@ -150,11 +150,11 @@ local function messagesFromWebResponse(p2, ChatMessages) --[[ Line: 145 ]]
 	return FromWebResults
 end
 
-local _ = function(p3) --[[ Line: 165 | Named "isMessagePreviewable" ]]
+local _ = function(p3)
 	return if p3.isPreviewable == nil then p3.is_previewable ~= nil and p3.is_previewable else p3.isPreviewable
 end
 
-local function getNewestMessageUnixTime(p3) --[[ Line: 175 ]]
+local function getNewestMessageUnixTime(p3)
 	-- upvalues: GetConversationMessageViewModelStoreModule (copy)
 	if p3 == nil then
 		return 0
@@ -169,7 +169,7 @@ local function getNewestMessageUnixTime(p3) --[[ Line: 175 ]]
 			local CreatedAt = Message.created_at or Message.createdAt
 			
 			if type(CreatedAt) == "string" then
-				local Success1, Result1 = pcall(function() --[[ Line: 132 ]]
+				local Success1, Result1 = pcall(function()
 					-- upvalues: CreatedAt (copy)
 					return DateTime.fromIsoDate(CreatedAt)
 				end)
@@ -181,7 +181,7 @@ local function getNewestMessageUnixTime(p3) --[[ Line: 175 ]]
 			local Sent1 = Message.sent
 			
 			if type(Sent1) == "string" then
-				local Success, Result = pcall(function() --[[ Line: 132 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: Sent1 (copy)
 					return DateTime.fromIsoDate(Sent1)
 				end)
@@ -196,7 +196,7 @@ local function getNewestMessageUnixTime(p3) --[[ Line: 175 ]]
 	return (if Sent == nil then nil elseif typeof(Sent) == "DateTime" then Sent.UnixTimestamp elseif type(Sent) == "table" and Sent.GetUnixTimestamp ~= nil then Sent:GetUnixTimestamp() else nil) or 0
 end
 
-local function shouldMarkConversationUnreadFromMessages(ConversationId, Messages): boolean --[[ Line: 189 ]]
+local function shouldMarkConversationUnreadFromMessages(ConversationId, Messages): boolean
 	-- upvalues: getNewestMessageUnixTime (copy), Players (copy)
 	if Messages == nil then
 		return false
@@ -210,7 +210,7 @@ local function shouldMarkConversationUnreadFromMessages(ConversationId, Messages
 			local CreatedAt = message.created_at or message.createdAt
 			
 			if type(CreatedAt) == "string" then
-				local Success1, Result1 = pcall(function() --[[ Line: 132 ]]
+				local Success1, Result1 = pcall(function()
 					-- upvalues: CreatedAt (copy)
 					return DateTime.fromIsoDate(CreatedAt)
 				end)
@@ -222,7 +222,7 @@ local function shouldMarkConversationUnreadFromMessages(ConversationId, Messages
 			local Sent = message.sent
 			
 			if type(Sent) == "string" then
-				local Success, Result = pcall(function() --[[ Line: 132 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: Sent (copy)
 					return DateTime.fromIsoDate(Sent)
 				end)
@@ -243,7 +243,7 @@ local function shouldMarkConversationUnreadFromMessages(ConversationId, Messages
 	return false
 end
 
-local _ = function(p3) --[[ Line: 212 | Named "getPreviewMessageUnixTime" ]]
+local _ = function(p3)
 	-- upvalues: GetConversationMessageViewModelStoreModule (copy)
 	if p3.previewMessageId == nil then
 		return 0
@@ -256,7 +256,7 @@ local _ = function(p3) --[[ Line: 212 | Named "getPreviewMessageUnixTime" ]]
 			local CreatedAt = Message.created_at or Message.createdAt
 			
 			if type(CreatedAt) == "string" then
-				local Success1, Result1 = pcall(function() --[[ Line: 132 ]]
+				local Success1, Result1 = pcall(function()
 					-- upvalues: CreatedAt (copy)
 					return DateTime.fromIsoDate(CreatedAt)
 				end)
@@ -268,7 +268,7 @@ local _ = function(p3) --[[ Line: 212 | Named "getPreviewMessageUnixTime" ]]
 			local Sent1 = Message.sent
 			
 			if type(Sent1) == "string" then
-				local Success, Result = pcall(function() --[[ Line: 132 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: Sent1 (copy)
 					return DateTime.fromIsoDate(Sent1)
 				end)
@@ -283,7 +283,7 @@ local _ = function(p3) --[[ Line: 212 | Named "getPreviewMessageUnixTime" ]]
 	return (if Sent == nil then nil elseif typeof(Sent) == "DateTime" then Sent.UnixTimestamp elseif type(Sent) == "table" and Sent.GetUnixTimestamp ~= nil then Sent:GetUnixTimestamp() else nil) or 0
 end
 
-local function updateConversationLastUpdatedFromMessages(p3, ConversationId, Messages, ShouldMarkConversationUnread) --[[ Line: 223 ]]
+local function updateConversationLastUpdatedFromMessages(p3, ConversationId, Messages, ShouldMarkConversationUnread)
 	-- upvalues: GetConversationMessageViewModelStoreModule (copy), FFlagAppChatAnyServerSideConversationSearchModule (copy), SearchIntroducedConversationIdsModule (copy), CryoModule (copy)
 	if ConversationId == nil or Messages == nil then return end
 	local Conversation = p3.getConversation(ConversationId, false)
@@ -304,7 +304,7 @@ local function updateConversationLastUpdatedFromMessages(p3, ConversationId, Mes
 				local CreatedAt = Message.created_at or Message.createdAt
 				
 				if type(CreatedAt) == "string" then
-					local Success1, Result1 = pcall(function() --[[ Line: 132 ]]
+					local Success1, Result1 = pcall(function()
 						-- upvalues: CreatedAt (copy)
 						return DateTime.fromIsoDate(CreatedAt)
 					end)
@@ -316,7 +316,7 @@ local function updateConversationLastUpdatedFromMessages(p3, ConversationId, Mes
 				local Sent1 = Message.sent
 				
 				if type(Sent1) == "string" then
-					local Success, Result = pcall(function() --[[ Line: 132 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: Sent1 (copy)
 						return DateTime.fromIsoDate(Sent1)
 					end)
@@ -340,7 +340,7 @@ local function updateConversationLastUpdatedFromMessages(p3, ConversationId, Mes
 				local CreatedAt1 = message.created_at or message.createdAt
 				
 				if type(CreatedAt1) == "string" then
-					local Success3, Result3 = pcall(function() --[[ Line: 132 ]]
+					local Success3, Result3 = pcall(function()
 						-- upvalues: CreatedAt1 (copy)
 						return DateTime.fromIsoDate(CreatedAt1)
 					end)
@@ -352,7 +352,7 @@ local function updateConversationLastUpdatedFromMessages(p3, ConversationId, Mes
 				local Sent1 = message.sent
 				
 				if type(Sent1) == "string" then
-					local Success2, Result2 = pcall(function() --[[ Line: 132 ]]
+					local Success2, Result2 = pcall(function()
 						-- upvalues: Sent1 (copy)
 						return DateTime.fromIsoDate(Sent1)
 					end)
@@ -405,7 +405,7 @@ local function updateConversationLastUpdatedFromMessages(p3, ConversationId, Mes
 	end
 end
 
-local function hasPreviewableMessageNewerThan(List, p4): boolean --[[ Line: 281 ]]
+local function hasPreviewableMessageNewerThan(List, p4): boolean
 	-- upvalues: GetPreciseUnixTimestampModule (copy)
 	for _, value in List do
 		if value ~= nil and (if value.isPreviewable == nil then value.is_previewable ~= nil and value.is_previewable else value.isPreviewable) then
@@ -414,7 +414,7 @@ local function hasPreviewableMessageNewerThan(List, p4): boolean --[[ Line: 281 
 				local CreatedAt = value.created_at or value.createdAt
 				
 				if type(CreatedAt) == "string" then
-					local Success1, Result1 = pcall(function() --[[ Line: 132 ]]
+					local Success1, Result1 = pcall(function()
 						-- upvalues: CreatedAt (copy)
 						return DateTime.fromIsoDate(CreatedAt)
 					end)
@@ -426,7 +426,7 @@ local function hasPreviewableMessageNewerThan(List, p4): boolean --[[ Line: 281 
 				local Sent = value.sent
 				
 				if type(Sent) == "string" then
-					local Success, Result = pcall(function() --[[ Line: 132 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: Sent (copy)
 						return DateTime.fromIsoDate(Sent)
 					end)
@@ -445,7 +445,7 @@ local function hasPreviewableMessageNewerThan(List, p4): boolean --[[ Line: 281 
 	return false
 end
 
-local function updateConversationFromMessages(p5, ConversationId, Messages, ShouldMarkConversationUnread) --[[ Line: 294 ]]
+local function updateConversationFromMessages(p5, ConversationId, Messages, ShouldMarkConversationUnread)
 	-- upvalues: FFlagAppChatAnyServerSideConversationSearchModule (copy), SearchIntroducedConversationIdsModule (copy), hasPreviewableMessageNewerThan (copy), GetPreciseUnixTimestampModule (copy), CryoModule (copy)
 	if ConversationId == nil or Messages == nil then return end
 	local Conversation = p5.getConversation(ConversationId, false)
@@ -471,7 +471,7 @@ local function updateConversationFromMessages(p5, ConversationId, Messages, Shou
 	end
 end
 
-local _ = function(p5): boolean --[[ Line: 344 | Named "isInitialConversationPage" ]]
+local _ = function(p5): boolean
 	local QueryArgs = if p5 == nil then nil else p5.queryArgs
 	
 	if type(QueryArgs) ~= "table" then
@@ -485,7 +485,7 @@ local _ = function(p5): boolean --[[ Line: 344 | Named "isInitialConversationPag
 	end
 end
 
-local _ = function(p5, p6) --[[ Line: 356 | Named "applyConversationLoadSuccessStatus" ]]
+local _ = function(p5, p6)
 	-- upvalues: FFlagAppChatConversationLoadRetryModule (copy), CryoModule (copy)
 	if not FFlagAppChatConversationLoadRetryModule then return end
 	p6.error = CryoModule.None
@@ -508,7 +508,7 @@ local _ = function(p5, p6) --[[ Line: 356 | Named "applyConversationLoadSuccessS
 	end
 end
 
-local _ = function(p5, p6) --[[ Line: 367 | Named "applyConversationLoadFailureStatus" ]]
+local _ = function(p5, p6)
 	-- upvalues: FFlagAppChatConversationLoadRetryModule (copy)
 	if not FFlagAppChatConversationLoadRetryModule then return end
 	p6.isFetchingNextPage = false
@@ -530,7 +530,7 @@ local _ = function(p5, p6) --[[ Line: 367 | Named "applyConversationLoadFailureS
 	end
 end
 
-local function handleGetUserConversationsFailed(p5, p6) --[[ Line: 390 ]]
+local function handleGetUserConversationsFailed(p5, p6)
 	-- upvalues: FFlagAppChatConversationLoadRetryModule (copy)
 	local config = { isFetchingConversations = false }
 	
@@ -556,12 +556,12 @@ local function handleGetUserConversationsFailed(p5, p6) --[[ Line: 390 ]]
 	p6.setListStatus(config)
 end
 
-local function handleGetConversationDetailsSucceeded(p5, p6) --[[ Line: 398 ]]
+local function handleGetConversationDetailsSucceeded(p5, p6)
 	-- upvalues: upsertConversationResponses (copy)
 	upsertConversationResponses(p6, p5.responseBody)
 end
 
-local function handleLegacyGetUserConversationsSucceeded(p5, p6) --[[ Line: 402 ]]
+local function handleLegacyGetUserConversationsSucceeded(p5, p6)
 	-- upvalues: ConversationModule (copy), FFlagAppChatConversationLoadRetryModule (copy), CryoModule (copy)
 	local ResponseBody = p5.responseBody
 	
@@ -600,7 +600,7 @@ local function handleLegacyGetUserConversationsSucceeded(p5, p6) --[[ Line: 402 
 end
 
 local config1 = {
-	[AppChatNetworkingModule.rodux.CreateConversation.Succeeded.name] = function(p7, p8) --[[ Line: 330 ]]
+	[AppChatNetworkingModule.rodux.CreateConversation.Succeeded.name] = function(p7, p8)
 		-- upvalues: upsertConversationResponse (copy), FFlagAppChatAnyServerSideConversationSearchModule (copy), GetConversationSearchDataHydrationModule (copy)
 		local ResponseBody = p7.responseBody
 		upsertConversationResponse(p8, ResponseBody and (ResponseBody.conversations and ResponseBody.conversations[1]))
@@ -609,7 +609,7 @@ local config1 = {
 			GetConversationSearchDataHydrationModule(false).invalidate()
 		end
 	end,
-	[AppChatNetworkingModule.rodux.DuplicateConversation.Succeeded.name] = function(p7, p8) --[[ Line: 340 ]]
+	[AppChatNetworkingModule.rodux.DuplicateConversation.Succeeded.name] = function(p7, p8)
 		-- upvalues: upsertConversationResponse (copy), FFlagAppChatAnyServerSideConversationSearchModule (copy), GetConversationSearchDataHydrationModule (copy)
 		local ResponseBody = p7.responseBody
 		upsertConversationResponse(p8, ResponseBody and (ResponseBody.conversations and ResponseBody.conversations[1]))
@@ -618,7 +618,7 @@ local config1 = {
 			GetConversationSearchDataHydrationModule(false).invalidate()
 		end
 	end,
-	[AppChatNetworkingModule.rodux.GetUserConversations.Succeeded.name] = function(p7, p8) --[[ Line: 377 ]]
+	[AppChatNetworkingModule.rodux.GetUserConversations.Succeeded.name] = function(p7, p8)
 		-- upvalues: upsertConversationResponses (copy), FFlagAppChatConversationLoadRetryModule (copy), CryoModule (copy)
 		upsertConversationResponses(p8, p7.responseBody)
 		local NextCursor = p7.responseBody and p7.responseBody.next_cursor
@@ -652,7 +652,7 @@ local config1 = {
 	[AppChatNetworkingModule.rodux.GetUserConversations.Failed.name] = handleGetUserConversationsFailed,
 	[AppChatNetworkingModule.rodux.GetConversationDetails.Succeeded.name] = handleGetConversationDetailsSucceeded,
 	[AppChatNetworkingModule.rodux.MultiGetConversationDetails.Succeeded.name] = handleGetConversationDetailsSucceeded,
-	[AppChatNetworkingModule.rodux.MarkConversation.Succeeded.name] = function(p7, p8) --[[ Line: 461 ]]
+	[AppChatNetworkingModule.rodux.MarkConversation.Succeeded.name] = function(p7, p8)
 		-- upvalues: CryoModule (copy)
 		local ConversationIds = p7.postBody and p7.postBody.conversation_ids
 		
@@ -671,7 +671,7 @@ local config1 = {
 			end
 		end
 	end,
-	[AppChatNetworkingModule.rodux.GetConversationsParticipantsMetadata.Succeeded.name] = function(p9, p10) --[[ Line: 570 ]]
+	[AppChatNetworkingModule.rodux.GetConversationsParticipantsMetadata.Succeeded.name] = function(p9, p10)
 		local ResponseBody = p9.responseBody
 		
 		if ResponseBody == nil or ResponseBody.conversation_participants_metadata == nil then return end
@@ -689,7 +689,7 @@ local config1 = {
 			p10.setParticipantMetadata(i, t)
 		end
 	end,
-	[AppChatNetworkingModule.rodux.RecordModalSequenceResponse.Succeeded.name] = function(p11, p12) --[[ Line: 516 ]]
+	[AppChatNetworkingModule.rodux.RecordModalSequenceResponse.Succeeded.name] = function(p11, p12)
 		-- upvalues: ConstantsModule (copy), config (copy), ConversationChannelsModule (copy), CryoModule (copy)
 		local PostBody = p11.postBody
 		
@@ -713,7 +713,7 @@ local config1 = {
 	[NetworkingChatModule.GetUserConversations.Failed.name] = handleGetUserConversationsFailed,
 	[NetworkingChatModule.GetConversations.Succeeded.name] = handleLegacyGetUserConversationsSucceeded,
 	[NetworkingChatModule.GetConversations.Failed.name] = handleGetUserConversationsFailed,
-	[NetworkingChatModule.GetLatestMessages.Succeeded.name] = function(p11, p12) --[[ Line: 649 ]]
+	[NetworkingChatModule.GetLatestMessages.Succeeded.name] = function(p11, p12)
 		-- upvalues: FFlagAppChatDerivedConversationLatestActivityModule (copy), updateConversationFromMessages (copy), messagesFromWebResponse (copy), updateConversationLastUpdatedFromMessages (copy)
 		local ResponseBody = p11.responseBody
 		
@@ -728,7 +728,7 @@ local config1 = {
 			end
 		end
 	end,
-	[NetworkingChatModule.MarkAsRead.Succeeded.name] = function(p13, p14) --[[ Line: 473 ]]
+	[NetworkingChatModule.MarkAsRead.Succeeded.name] = function(p13, p14)
 		-- upvalues: CryoModule (copy)
 		local ConversationId = p13.postBody and p13.postBody.conversationId
 		local config = { hasUnreadMessages = false }
@@ -742,7 +742,7 @@ local config1 = {
 			return
 		end
 	end,
-	[require(AppChat.Http.NetworkingBlocking).BlockUserById.Succeeded.name] = function(p13, p14) --[[ Line: 554 ]]
+	[require(AppChat.Http.NetworkingBlocking).BlockUserById.Succeeded.name] = function(p13, p14)
 		-- upvalues: ConversationChannelsModule (copy)
 		local Users = p13.namedIds and p13.namedIds.users
 		
@@ -758,10 +758,10 @@ local config1 = {
 		end
 		p14.removeConversation(ConversationChannelsModule.getFriendConversationId({ Text }))
 	end,
-	[require(AppChat.Conversations.Actions.ReceivedConversation).name] = function(p15, p16) --[[ Line: 423 ]]
+	[require(AppChat.Conversations.Actions.ReceivedConversation).name] = function(p15, p16)
 		p16.upsertConversation(p15.conversation)
 	end,
-	[require(AppChat.Conversations).Actions.ReceivedMessages.name] = function(p15, p16) --[[ Line: 610 ]]
+	[require(AppChat.Conversations).Actions.ReceivedMessages.name] = function(p15, p16)
 		-- upvalues: FFlagAppChatDerivedConversationLatestActivityModule (copy), updateConversationFromMessages (copy), updateConversationLastUpdatedFromMessages (copy)
 		if FFlagAppChatDerivedConversationLatestActivityModule then
 			updateConversationFromMessages(p16, p15.conversationId, p15.messages, p15.shouldMarkConversationUnread)
@@ -771,12 +771,12 @@ local config1 = {
 			updateConversationLastUpdatedFromMessages(p16, p15.conversationId, p15.messages, p15.shouldMarkConversationUnread)
 		end
 	end,
-	[require(AppChat.Conversations.Actions.RemovedConversation).name] = function(p15, p16) --[[ Line: 427 ]]
+	[require(AppChat.Conversations.Actions.RemovedConversation).name] = function(p15, p16)
 		if p15.conversationId then
 			p16.removeConversation(p15.conversationId)
 		end
 	end,
-	[require(AppChat.Conversations.Actions.RenamedGroupConversation).name] = function(p15, p16) --[[ Line: 433 ]]
+	[require(AppChat.Conversations.Actions.RenamedGroupConversation).name] = function(p15, p16)
 		-- upvalues: CryoModule (copy)
 		local ConversationId = p15.conversationId
 		local config = {
@@ -794,7 +794,7 @@ local config1 = {
 			return
 		end
 	end,
-	[require(AppChat.Conversations.Actions.ChangedParticipants).name] = function(p15, p16) --[[ Line: 441 ]]
+	[require(AppChat.Conversations.Actions.ChangedParticipants).name] = function(p15, p16)
 		-- upvalues: CryoModule (copy)
 		local ConversationId = p15.conversationId
 		local config = {
@@ -812,7 +812,7 @@ local config1 = {
 			return
 		end
 	end,
-	[require(AppChat.Conversations.Actions.HasUnreadMessages).name] = function(p15, p16) --[[ Line: 449 ]]
+	[require(AppChat.Conversations.Actions.HasUnreadMessages).name] = function(p15, p16)
 		-- upvalues: CryoModule (copy)
 		local Id = p15.conversation and p15.conversation.id
 		local config = { hasUnreadMessages = true }
@@ -826,7 +826,7 @@ local config1 = {
 			return
 		end
 	end,
-	[require(AppChat.Conversations.Actions.ReadConversation).name] = function(p15, p16) --[[ Line: 455 ]]
+	[require(AppChat.Conversations.Actions.ReadConversation).name] = function(p15, p16)
 		-- upvalues: CryoModule (copy)
 		local ConversationId = p15.conversationId
 		local config = { hasUnreadMessages = false }
@@ -840,7 +840,7 @@ local config1 = {
 			return
 		end
 	end,
-	[require(AppChat.Conversations.Actions.SetUserTyping).name] = function(p15, p16) --[[ Line: 479 ]]
+	[require(AppChat.Conversations.Actions.SetUserTyping).name] = function(p15, p16)
 		local Conversation = p15.conversationId and p16.getConversation(p15.conversationId, false)
 		
 		if Conversation ~= nil then
@@ -851,7 +851,7 @@ local config1 = {
 			return
 		end
 	end,
-	[require(AppChat.Conversations.Actions.SetConversationLoadingStatus).name] = function(p15, p16) --[[ Line: 489 ]]
+	[require(AppChat.Conversations.Actions.SetConversationLoadingStatus).name] = function(p15, p16)
 		-- upvalues: CryoModule (copy)
 		local ConversationId = p15.conversationId
 		local config = { initialLoadingStatus = p15.value }
@@ -865,7 +865,7 @@ local config1 = {
 			return
 		end
 	end,
-	[require(AppChat.Conversations.Actions.SetUserLeavingConversation).name] = function(p15, p16) --[[ Line: 495 ]]
+	[require(AppChat.Conversations.Actions.SetUserLeavingConversation).name] = function(p15, p16)
 		-- upvalues: CryoModule (copy)
 		local Id = p15.id
 		local config = { isUserLeaving = p15.isLeaving }
@@ -879,7 +879,7 @@ local config1 = {
 			return
 		end
 	end,
-	[require(AppChat.Conversations.Actions.SetPinnedGameForConversation).name] = function(p15, p16) --[[ Line: 501 ]]
+	[require(AppChat.Conversations.Actions.SetPinnedGameForConversation).name] = function(p15, p16)
 		-- upvalues: CryoModule (copy)
 		local ConversationId = p15.conversationId
 		local config = {
@@ -898,7 +898,7 @@ local config1 = {
 			return
 		end
 	end,
-	[require(AppChat.Conversations.Actions.ConversationModerationTypeChanged).name] = function(p15, p16) --[[ Line: 510 ]]
+	[require(AppChat.Conversations.Actions.ConversationModerationTypeChanged).name] = function(p15, p16)
 		-- upvalues: CryoModule (copy)
 		local ConversationId = p15.conversationId
 		local config = { moderationType = p15.moderationType }
@@ -912,7 +912,7 @@ local config1 = {
 			return
 		end
 	end,
-	[require(AppChat.Conversations.Actions.FriendConversationCreated).name] = function(p15, p16) --[[ Line: 533 ]]
+	[require(AppChat.Conversations.Actions.FriendConversationCreated).name] = function(p15, p16)
 		-- upvalues: FFlagAppChatAnyServerSideConversationSearchModule (copy), GetConversationSearchDataHydrationModule (copy)
 		if p15.oldFriendConversationId then
 			p16.removeConversation(p15.oldFriendConversationId)
@@ -921,7 +921,7 @@ local config1 = {
 			GetConversationSearchDataHydrationModule(false).invalidate()
 		end
 	end,
-	[require(AppChat.Actions.FriendshipDestroyed).name] = function(p15, p16) --[[ Line: 543 ]]
+	[require(AppChat.Actions.FriendshipDestroyed).name] = function(p15, p16)
 		-- upvalues: ConversationChannelsModule (copy)
 		local UserId2 = if p15.userId1 == "localUserId" then if p15.userId2 == "localUserId" then nil else p15.userId2 else p15.userId1
 		
@@ -931,21 +931,21 @@ local config1 = {
 			return
 		end
 	end,
-	[require(AppChat.Conversations.Actions.RequestPageConversations).name] = function(_, p15) --[[ Line: 590 ]]
+	[require(AppChat.Conversations.Actions.RequestPageConversations).name] = function(_, p15)
 		p15.setListStatus({ isFetchingConversations = true })
 	end,
-	[require(AppChat.Conversations.Actions.ReceivedPageConversations).name] = function(_, p15) --[[ Line: 596 ]]
+	[require(AppChat.Conversations.Actions.ReceivedPageConversations).name] = function(_, p15)
 		p15.setListStatus({ isFetchingConversations = false })
 	end,
-	[require(AppChat.Conversations.Actions.RequestLatestMessages).name] = function(_, _) --[[ Line: 602 ]]
+	[require(AppChat.Conversations.Actions.RequestLatestMessages).name] = function(_, _)
 		-- upvalues: GetConversationListStoreModule (copy)
 		GetConversationListStoreModule(false).setLatestMessagesFetching(true)
 	end,
-	[require(AppChat.Conversations.Actions.ReceivedLatestMessages).name] = function(_, _) --[[ Line: 606 ]]
+	[require(AppChat.Conversations.Actions.ReceivedLatestMessages).name] = function(_, _)
 		-- upvalues: GetConversationListStoreModule (copy)
 		GetConversationListStoreModule(false).setLatestMessagesFetching(false)
 	end,
-	[AppChatNetworkingModule.rodux.GetNewerMessages.Succeeded.name] = function(p15, p16) --[[ Line: 628 ]]
+	[AppChatNetworkingModule.rodux.GetNewerMessages.Succeeded.name] = function(p15, p16)
 		-- upvalues: FFlagAppChatDerivedConversationLatestActivityModule (copy), updateConversationFromMessages (copy), shouldMarkConversationUnreadFromMessages (copy), updateConversationLastUpdatedFromMessages (copy)
 		local ConversationId = p15.queryArgs and p15.queryArgs.conversation_id
 		local ResponseBody = p15.responseBody
@@ -959,19 +959,19 @@ local config1 = {
 			updateConversationLastUpdatedFromMessages(p16, ConversationId, Messages, (shouldMarkConversationUnreadFromMessages(ConversationId, Messages)))
 		end
 	end,
-	[require(AppChat.Conversations.Actions.ReceivedOldestConversation).name] = function(_, p15) --[[ Line: 673 ]]
+	[require(AppChat.Conversations.Actions.ReceivedOldestConversation).name] = function(_, p15)
 		p15.setListStatus({ oldestConversationIsFetched = true })
 	end,
-	[require(AppChat.Conversations.Actions.ReceivedChannelsMigrationConflict).name] = function(_, p15) --[[ Line: 679 ]]
+	[require(AppChat.Conversations.Actions.ReceivedChannelsMigrationConflict).name] = function(_, p15)
 		-- upvalues: GetConversationListStoreModule (copy)
 		p15.clear()
 		GetConversationListStoreModule(false).setLatestMessagesFetching(false)
 	end
 }
 
-return function(Callback, _) --[[ Line: 724 | Named "SignalsConversationMiddleware" ]]
+return function(Callback, _)
 	-- upvalues: FFlagAppChatConversationStoreModule (copy), config1 (copy), GetConversationStoreModule (copy)
-	return function(p15) --[[ Line: 725 ]]
+	return function(p15)
 		-- upvalues: Callback (copy), FFlagAppChatConversationStoreModule (upval), config1 (upval), GetConversationStoreModule (upval)
 		local CallbackResult = Callback(p15)
 		

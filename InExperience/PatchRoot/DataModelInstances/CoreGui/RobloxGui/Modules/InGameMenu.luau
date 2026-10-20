@@ -36,7 +36,7 @@ local BindableEvent1 = Instance.new("BindableEvent")
 local Store = require(script.createStore)()
 
 return {
-	mountInGameMenu = function() --[[ Line: 56 ]]
+	mountInGameMenu = function()
 		-- upvalues: RegisterSetCoresModule (copy), Store (copy), BindMenuActionsModule (copy), RequestGameNameAndDescriptionModule (copy), GlobalConfigModule (copy), Roact (copy), BindableEvent (copy), BindableEvent1 (copy), Localization (copy), LocalizationService (copy), SetLocaleIdModule (copy), SetInspectMenuEnabledModule (copy), GuiService (copy), InitVoiceChatStoreModule (copy), RenderWithCoreScriptsStyleProviderModule (copy), LocalizationProvider (copy), SelectionCursorProvider (copy), GetFFlagIGMGamepadSelectionHistoryModule (copy), FocusHandlerContextProviderModule (copy), AppModule (copy), AppInteractionFeedbackProvider (copy), FeedbackManagerInjectionContextProvider (copy), ConstantsModule (copy), SetScreenSizeModule (copy), RoactRodux (copy), InGameMenuPolicyModule (copy), CoreGui (copy)
 		RegisterSetCoresModule(Store)
 		BindMenuActionsModule(Store)
@@ -48,7 +48,7 @@ return {
 		if GlobalConfigModule.elementTracing then
 			Roact.setGlobalConfig({ elementTracing = true })
 		end
-		Store.changed:connect(function(Value, p1) --[[ Line: 72 ]]
+		Store.changed:connect(function(Value, p1)
 			-- upvalues: BindableEvent (upval), BindableEvent1 (upval)
 			if Value.isMenuOpen ~= p1.isMenuOpen then
 				BindableEvent:Fire(Value.isMenuOpen)
@@ -63,13 +63,13 @@ return {
 		end)
 		local NewLocalization = Localization.new(LocalizationService.RobloxLocaleId)
 		Store:dispatch(SetLocaleIdModule(LocalizationService.RobloxLocaleId))
-		LocalizationService:GetPropertyChangedSignal("RobloxLocaleId"):Connect(function() --[[ Line: 90 ]]
+		LocalizationService:GetPropertyChangedSignal("RobloxLocaleId"):Connect(function()
 			-- upvalues: NewLocalization (copy), LocalizationService (upval), Store (upval), SetLocaleIdModule (upval)
 			NewLocalization:SetLocale(LocalizationService.RobloxLocaleId)
 			Store:dispatch(SetLocaleIdModule(LocalizationService.RobloxLocaleId))
 		end)
 		Store:dispatch(SetInspectMenuEnabledModule(GuiService:GetInspectMenuEnabled()))
-		GuiService.InspectMenuEnabledChangedSignal:Connect(function(Enabled) --[[ Line: 96 ]]
+		GuiService.InspectMenuEnabledChangedSignal:Connect(function(Enabled)
 			-- upvalues: Store (upval), SetInspectMenuEnabledModule (upval)
 			Store:dispatch(SetInspectMenuEnabledModule(Enabled))
 		end)
@@ -80,7 +80,7 @@ return {
 			DisplayOrder = ConstantsModule.DisplayOrder.RootMenu,
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
 			AutoLocalize = false,
-			[Roact.Change.AbsoluteSize] = function(Frame) --[[ Line: 128 ]]
+			[Roact.Change.AbsoluteSize] = function(Frame)
 				-- upvalues: Store (upval), SetScreenSizeModule (upval)
 				Store:dispatch(SetScreenSizeModule(Frame.AbsoluteSize))
 			end
@@ -103,59 +103,59 @@ return {
 			})
 		}), CoreGui, "InGameMenu")
 	end,
-	openInGameMenu = function(p1) --[[ Line: 145 ]]
+	openInGameMenu = function(p1)
 		-- upvalues: Store (copy), OpenMenuModule (copy), ConstantsModule (copy)
 		Store:dispatch(OpenMenuModule(ConstantsModule.AnalyticsMenuOpenTypes.TopbarButton, p1))
 	end,
-	closeInGameMenu = function() --[[ Line: 149 ]]
+	closeInGameMenu = function()
 		-- upvalues: CloseMenuModule (copy), Store (copy)
 		CloseMenuModule(Store)
 	end,
-	openReportDialog = function(p1, p2) --[[ Line: 153 ]]
+	openReportDialog = function(p1, p2)
 		-- upvalues: Store (copy), OpenMenuModule (copy), ConstantsModule (copy), TrustAndSafetyModule (copy)
 		Store:dispatch(OpenMenuModule(ConstantsModule.AnalyticsMenuOpenTypes.ReportAbuseTriggered, ConstantsModule.ReportDialogKey))
 		TrustAndSafetyModule.openReportDialogForPlayer(p1, if p2 == nil then ConstantsModule.AnalyticsInGameMenuName else p2)
 	end,
-	openGameSettingsPage = function() --[[ Line: 159 ]]
+	openGameSettingsPage = function()
 		-- upvalues: Store (copy), OpenMenuModule (copy), ConstantsModule (copy), SetCurrentPageModule (copy)
 		Store:dispatch(OpenMenuModule(ConstantsModule.AnalyticsMenuOpenTypes.SettingsTriggered))
 		Store:dispatch(SetCurrentPageModule("GameSettings"))
 	end,
-	openGameLeavePage = function() --[[ Line: 164 ]]
+	openGameLeavePage = function()
 		-- upvalues: Store (copy), OpenMenuModule (copy), ConstantsModule (copy), SetCurrentPageModule (copy)
 		Store:dispatch(OpenMenuModule(ConstantsModule.AnalyticsMenuOpenTypes.GamepadLeaveGame))
 		Store:dispatch(SetCurrentPageModule(ConstantsModule.LeaveGamePromptPageKey))
 	end,
-	openCharacterResetPage = function() --[[ Line: 169 ]]
+	openCharacterResetPage = function()
 		-- upvalues: Store (copy), OpenMenuModule (copy), ConstantsModule (copy), SetCurrentPageModule (copy), SetRespawningModule (copy)
 		Store:dispatch(OpenMenuModule(ConstantsModule.AnalyticsMenuOpenTypes.GamepadResetCharacter))
 		Store:dispatch(SetCurrentPageModule(ConstantsModule.MainPagePageKey))
 		Store:dispatch(SetRespawningModule(true))
 	end,
-	openPlayersPage = function() --[[ Line: 175 ]]
+	openPlayersPage = function()
 		-- upvalues: Store (copy), OpenMenuModule (copy), ConstantsModule (copy), SetCurrentPageModule (copy)
 		Store:dispatch(OpenMenuModule(ConstantsModule.AnalyticsMenuOpenTypes.PlayersTriggered))
 		Store:dispatch(SetCurrentPageModule("Players"))
 	end,
-	getOpenChangedEvent = function() --[[ Line: 180 ]]
+	getOpenChangedEvent = function()
 		-- upvalues: BindableEvent (copy)
 		return BindableEvent
 	end,
-	getOpen = function() --[[ Line: 184 ]]
+	getOpen = function()
 		-- upvalues: Store (copy)
 		return Store:getState().isMenuOpen
 	end,
-	getRespawnBehaviour = function() --[[ Line: 188 ]]
+	getRespawnBehaviour = function()
 		-- upvalues: Store (copy)
 		local State = Store:getState()
 		
 		return State.respawn.enabled, State.respawn.customCallback
 	end,
-	getRespawnBehaviourChangedEvent = function() --[[ Line: 193 ]]
+	getRespawnBehaviourChangedEvent = function()
 		-- upvalues: BindableEvent1 (copy)
 		return BindableEvent1
 	end,
-	setMenuIconTooltipOpen = function(p1) --[[ Line: 197 ]]
+	setMenuIconTooltipOpen = function(p1)
 		-- upvalues: Store (copy), SetMenuIconTooltipOpenModule (copy)
 		Store:dispatch(SetMenuIconTooltipOpenModule(p1))
 	end

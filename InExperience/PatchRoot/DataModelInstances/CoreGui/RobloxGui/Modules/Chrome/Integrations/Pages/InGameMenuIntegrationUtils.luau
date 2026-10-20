@@ -6,18 +6,18 @@ local Signal = require(CorePackages.Workspace.Packages.AppCommonLib).Signal
 local MappedSignal = require(script:FindFirstAncestor("Chrome").ChromeShared.Service.ChromeUtils).MappedSignal
 
 return {
-	createPageOpenSignal = function(p1) --[[ Line: 17 ]]
+	createPageOpenSignal = function(p1)
 		-- upvalues: Signal (copy), MappedSignal (copy), RobloxGui (copy)
 		local IsNameMatch = false
 		local NewSignal = Signal.new()
-		local NewMappedSignal = MappedSignal.new(NewSignal, function() --[[ Line: 20 ]]
+		local NewMappedSignal = MappedSignal.new(NewSignal, function()
 			-- upvalues: IsNameMatch (ref)
 			return IsNameMatch
 		end)
-		task.defer(function() --[[ Line: 24 ]]
+		task.defer(function()
 			-- upvalues: RobloxGui (upval), p1 (copy), IsNameMatch (ref), NewSignal (copy)
 			local SettingsHubModule = require(RobloxGui.Modules.Settings.SettingsHub)
-			SettingsHubModule.CurrentPageSignal:connect(function(Name) --[[ Line: 26 ]]
+			SettingsHubModule.CurrentPageSignal:connect(function(Name)
 				-- upvalues: SettingsHubModule (copy), p1 (upval), IsNameMatch (upval), NewSignal (upval)
 				local SettingsHubModuleInstanceEntry = SettingsHubModule.Instance[p1]
 				IsNameMatch = SettingsHubModuleInstanceEntry ~= nil and Name == SettingsHubModuleInstanceEntry.Page.Name
@@ -27,7 +27,7 @@ return {
 		
 		return NewMappedSignal
 	end,
-	toggleIGMPage = function(p1, p2) --[[ Line: 36 ]]
+	toggleIGMPage = function(p1, p2)
 		-- upvalues: RobloxGui (copy)
 		local SettingsHubModule = require(RobloxGui.Modules.Settings.SettingsHub)
 		local SettingsHubModuleInstanceEntry = SettingsHubModule.Instance[p1]
@@ -45,7 +45,7 @@ return {
 			SettingsHubModule:SwitchToPage(SettingsHubModuleInstanceEntry, true)
 		end
 	end,
-	toggleInviteFriendsPage = function() --[[ Line: 51 ]]
+	toggleInviteFriendsPage = function()
 		-- upvalues: GameInviteModalManager (copy), RobloxGui (copy), GameInviteAnalyticsManager (copy)
 		if GameInviteModalManager:isGameModalOpen() then
 			GameInviteModalManager:closeModal()

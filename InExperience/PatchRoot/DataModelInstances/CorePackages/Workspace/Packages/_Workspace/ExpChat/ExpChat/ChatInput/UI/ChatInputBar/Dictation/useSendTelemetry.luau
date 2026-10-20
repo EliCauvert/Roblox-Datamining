@@ -2,12 +2,12 @@
 local _ = require(script.Parent.DictationMode)
 local DictationAnalyticsModule = require(script.Parent.DictationAnalytics)
 
-local function classifyEditType(Text1: string, Text: string) --[[ Line: 29 ]]
+local function classifyEditType(Text1: string, Text: string)
 	-- upvalues: DictationAnalyticsModule (copy)
 	return if #Text == 0 then DictationAnalyticsModule.EditTypes.FullClear elseif #Text1 < #Text and string.sub(Text, 1, #Text1) == Text1 then DictationAnalyticsModule.EditTypes.Addition elseif #Text < #Text1 and string.sub(Text1, 1, #Text) == Text then DictationAnalyticsModule.EditTypes.Deletion else DictationAnalyticsModule.EditTypes.Mixed
 end
 
-return function(p1) --[[ Line: 42 | Named "useSendTelemetry" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), DictationAnalyticsModule (copy), classifyEditType (copy)
 	local Enabled = p1.enabled
 	local TextBoxRef = p1.textBoxRef
@@ -15,7 +15,7 @@ return function(p1) --[[ Line: 42 | Named "useSendTelemetry" ]]
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseRefResult2 = ReactModule.useRef(false)
-	local UseResult = ReactModule.useCallback(function(Current, Mode) --[[ Line: 57 ]]
+	local UseResult = ReactModule.useCallback(function(Current, Mode)
 		-- upvalues: Enabled (copy), UseRefResult1 (copy), UseRefResult (copy), DictationAnalyticsModule (upval)
 		if Enabled then
 			UseRefResult1.current = Current
@@ -28,7 +28,7 @@ return function(p1) --[[ Line: 42 | Named "useSendTelemetry" ]]
 			return
 		end
 	end, { Enabled })
-	local UseResult1 = ReactModule.useCallback(function(TextSent) --[[ Line: 69 ]]
+	local UseResult1 = ReactModule.useCallback(function(TextSent)
 		-- upvalues: Enabled (copy), UseRefResult (copy), UseRefResult2 (copy)
 		if not Enabled then
 			return nil
@@ -45,13 +45,13 @@ return function(p1) --[[ Line: 42 | Named "useSendTelemetry" ]]
 			return Current
 		end
 	end, { Enabled })
-	ReactModule.useEffect(function() --[[ Line: 83 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Enabled (copy), CustomTextBoxRef (copy), TextBoxRef (copy), UseRefResult1 (copy), UseRefResult2 (copy), UseRefResult (copy), DictationAnalyticsModule (upval), classifyEditType (upval)
 		if not Enabled then return end
 		local Current = CustomTextBoxRef.current or TextBoxRef.current
 		
 		if Current == nil then return end
-		local Connection = Current:GetPropertyChangedSignal("Text"):Connect(function() --[[ Line: 91 ]]
+		local Connection = Current:GetPropertyChangedSignal("Text"):Connect(function()
 			-- upvalues: UseRefResult1 (upval), UseRefResult2 (upval), Current (copy), UseRefResult (upval), DictationAnalyticsModule (upval), classifyEditType (upval)
 			local Current1 = UseRefResult1.current
 			
@@ -74,7 +74,7 @@ return function(p1) --[[ Line: 42 | Named "useSendTelemetry" ]]
 			})
 		end)
 		
-		return function() --[[ Line: 113 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end

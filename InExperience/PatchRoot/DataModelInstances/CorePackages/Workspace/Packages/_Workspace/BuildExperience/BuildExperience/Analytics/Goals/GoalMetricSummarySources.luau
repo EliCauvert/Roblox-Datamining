@@ -4,7 +4,7 @@ local DeriveMetricSummaryModule = require(BuildExperience.Analytics.deriveMetric
 local _ = require(BuildExperience.Analytics.Goals.GoalTypes)
 local MetricGranularity = ExperienceAnalyticsModule.MetricGranularity
 
-local function retentionRatio(p1, DurationSeconds, EndUnixDelta, EndUnix) --[[ Line: 111 ]]
+local function retentionRatio(p1, DurationSeconds, EndUnixDelta, EndUnix)
 	local NewValue: number? = nil
 	local NewValue1 = nil
 	local Values = p1.values or {}
@@ -34,7 +34,7 @@ local function retentionRatio(p1, DurationSeconds, EndUnixDelta, EndUnix) --[[ L
 end
 
 return {
-	summary = function(p2) --[[ Line: 37 ]]
+	summary = function(p2)
 		-- upvalues: DeriveMetricSummaryModule (copy)
 		return {
 			query = {
@@ -43,7 +43,7 @@ return {
 				endOffsetDays = p2.endOffsetDays,
 				filters = p2.filters
 			},
-			derive = function(p3, p4) --[[ Line: 45 ]]
+			derive = function(p3, p4)
 				-- upvalues: DeriveMetricSummaryModule (upval)
 				local DeriveMetricSummaryModuleResult = DeriveMetricSummaryModule(p3, p4)
 				
@@ -56,7 +56,7 @@ return {
 			end
 		}
 	end,
-	topBreakdown = function(p2) --[[ Line: 64 ]]
+	topBreakdown = function(p2)
 		-- upvalues: MetricGranularity (copy)
 		local Dimension = p2.dimension
 		
@@ -68,7 +68,7 @@ return {
 				filters = p2.filters,
 				breakdowns = { { dimensions = { Dimension } } }
 			},
-			derive = function(p3, _) --[[ Line: 75 ]]
+			derive = function(p3, _)
 				-- upvalues: Dimension (copy), p2 (copy)
 				local Breakdown = nil
 				local v1 = -1e999
@@ -99,7 +99,7 @@ return {
 			end
 		}
 	end,
-	firstSessionRetention = function(p4) --[[ Line: 149 ]]
+	firstSessionRetention = function(p4)
 		-- upvalues: ExperienceAnalyticsModule (copy), MetricGranularity (copy), retentionRatio (copy)
 		local DurationSeconds = p4.durationSeconds
 		
@@ -117,7 +117,7 @@ return {
 					}
 				}
 			},
-			derive = function(p5, p6) --[[ Line: 168 ]]
+			derive = function(p5, p6)
 				-- upvalues: retentionRatio (upval), DurationSeconds (copy)
 				local EndUnixDelta = p6.endUnix - p6.lookbackSeconds
 				local RetentionRatioResult: number = retentionRatio(p5, DurationSeconds, EndUnixDelta, p6.endUnix)

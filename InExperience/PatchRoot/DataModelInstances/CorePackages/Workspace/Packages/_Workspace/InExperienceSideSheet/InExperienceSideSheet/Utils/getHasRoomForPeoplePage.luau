@@ -7,7 +7,7 @@ local GetSideSheetDrawerWidthModule = require(script.Parent.getSideSheetDrawerWi
 local HasRoomForPeoplePageModule = require(script.Parent.hasRoomForPeoplePage)
 local FFlagClosePeoplePageWhenNoRoomBesideSideSheet = require(InExperienceSideSheet.Flags).FFlagClosePeoplePageWhenNoRoomBesideSideSheet
 
-return function(p1, p2) --[[ Line: 15 ]]
+return function(p1, p2)
 	-- upvalues: FFlagClosePeoplePageWhenNoRoomBesideSideSheet (copy), DisplayModule (copy), GetSideSheetDrawerWidthModule (copy), ConstantsModule (copy), HasRoomForPeoplePageModule (copy)
 	local P0 = p1 ~= nil and p1
 	local XDelta = nil

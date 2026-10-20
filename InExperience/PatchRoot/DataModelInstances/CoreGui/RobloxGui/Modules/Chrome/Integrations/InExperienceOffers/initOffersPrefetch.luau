@@ -1,5 +1,5 @@
 ﻿local CorePackages = game:GetService("CorePackages")
-task.spawn(function() --[[ Line: 8 ]]
+task.spawn(function()
 	-- upvalues: CorePackages (copy)
 	require(CorePackages.Workspace.Packages.InExperienceOffers.prefetchOffersOnGameJoin)()
 end)

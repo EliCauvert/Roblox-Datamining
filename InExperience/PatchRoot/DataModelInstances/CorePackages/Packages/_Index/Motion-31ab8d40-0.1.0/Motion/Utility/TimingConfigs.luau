@@ -17,7 +17,7 @@ local TimingConfigsModule = {
 	}
 }
 
-function TimingConfigsModule.getDefaultTransition() --[[ Line: 28 ]]
+function TimingConfigsModule.getDefaultTransition()
 	-- upvalues: TimingConfigsModule (copy), TransitionPresetModule (copy)
 	local Preset = TimingConfigsModule.presets[TransitionPresetModule.Default]
 	
@@ -28,7 +28,7 @@ function TimingConfigsModule.getDefaultTransition() --[[ Line: 28 ]]
 	}
 end
 
-function TimingConfigsModule.createDefaultTransitionState() --[[ Line: 39 ]]
+function TimingConfigsModule.createDefaultTransitionState()
 	-- upvalues: TimingConfigsModule (copy)
 	return { default = TimingConfigsModule.getDefaultTransition() }
 end

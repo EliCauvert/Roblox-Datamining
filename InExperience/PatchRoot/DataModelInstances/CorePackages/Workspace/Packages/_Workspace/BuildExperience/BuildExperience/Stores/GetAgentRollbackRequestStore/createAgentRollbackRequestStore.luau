@@ -2,14 +2,14 @@
 local PromiseModule = require(Parent.Promise)
 local SignalsModule = require(Parent.Signals)
 
-return function() --[[ Line: 70 | Named "createAgentRollbackRequestStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy), PromiseModule (copy)
 	local Count = 0
 	local t = {}
 	local Config = nil
 	local v1 = nil
 	
-	local function _(Key) --[[ Line: 76 | Named "getRequestSignal" ]]
+	local function _(Key)
 		-- upvalues: t (copy), SignalsModule (upval)
 		local Entry = t[Key]
 		
@@ -21,12 +21,12 @@ return function() --[[ Line: 70 | Named "createAgentRollbackRequestStore" ]]
 		return Entry
 	end
 	
-	local _ = function(p1): boolean --[[ Line: 93 | Named "turnStarterMatchesTarget" ]]
+	local _ = function(p1): boolean
 		-- upvalues: Config (ref)
 		return Config ~= nil and (Config.target.placeId == p1.placeId and (p1.universeId == nil or Config.target.universeId == p1.universeId))
 	end
 	
-	local _ = function(p1, p2) --[[ Line: 99 | Named "finishRequest" ]]
+	local _ = function(p1, p2)
 		-- upvalues: v1 (ref), t (copy), SignalsModule (upval)
 		if v1 ~= p1 then return end
 		v1 = nil
@@ -49,7 +49,7 @@ return function() --[[ Line: 70 | Named "createAgentRollbackRequestStore" ]]
 		end
 	end
 	
-	local function beginRequest(p1) --[[ Line: 151 ]]
+	local function beginRequest(p1)
 		-- upvalues: v1 (ref), PromiseModule (upval), Config (ref), Count (ref), t (copy), SignalsModule (upval)
 		if v1 ~= nil then
 			return nil, PromiseModule.reject("agent_rollback_busy")
@@ -58,7 +58,7 @@ return function() --[[ Line: 70 | Named "createAgentRollbackRequestStore" ]]
 			local Id: number = Count
 			local Config1 = Config
 			
-			return Id, (PromiseModule.new(function(Resolve, Reject) --[[ Line: 162 ]]
+			return Id, (PromiseModule.new(function(Resolve, Reject)
 				-- upvalues: v1 (upval), Id (copy), p1 (copy), Config1 (copy), t (upval), SignalsModule (upval)
 				v1 = {
 					id = Id,
@@ -84,7 +84,7 @@ return function() --[[ Line: 70 | Named "createAgentRollbackRequestStore" ]]
 		end
 	end
 	
-	local function setRequestData(Id, p1) --[[ Line: 177 ]]
+	local function setRequestData(Id, p1)
 		-- upvalues: v1 (ref), Config (ref), t (copy), SignalsModule (upval)
 		local v2 = v1
 		
@@ -119,7 +119,7 @@ return function() --[[ Line: 70 | Named "createAgentRollbackRequestStore" ]]
 					versionNumber = p1.versionNumber,
 					noteTitle = p1.noteTitle,
 					noteDescription = p1.noteDescription
-				}, function() --[[ Line: 199 ]]
+				}, function()
 					-- upvalues: v2 (copy), v1 (upval), t (upval), SignalsModule (upval)
 					if v1 ~= v2 then return end
 					v1 = nil
@@ -133,7 +133,7 @@ return function() --[[ Line: 70 | Named "createAgentRollbackRequestStore" ]]
 					end
 					Entry.setIsPending(false)
 					v2.resolve()
-				end, function() --[[ Line: 201 ]]
+				end, function()
 					-- upvalues: v2 (copy), v1 (upval), t (upval), SignalsModule (upval)
 					if v1 ~= v2 then return end
 					v1 = nil
@@ -183,7 +183,7 @@ return function() --[[ Line: 70 | Named "createAgentRollbackRequestStore" ]]
 	end
 	
 	return {
-		getIsPendingForPlaceId = function(Key) --[[ Line: 89 ]]
+		getIsPendingForPlaceId = function(Key)
 			-- upvalues: t (copy), SignalsModule (upval)
 			local Entry = t[Key]
 			
@@ -194,7 +194,7 @@ return function() --[[ Line: 70 | Named "createAgentRollbackRequestStore" ]]
 			end
 			return Entry.getIsPending
 		end,
-		registerTurnStarter = function(Target, Registration, StartTurn): boolean --[[ Line: 112 ]]
+		registerTurnStarter = function(Target, Registration, StartTurn): boolean
 			-- upvalues: Config (ref), v1 (ref), t (copy), SignalsModule (upval)
 			if Config ~= nil and Config.registration ~= Registration then
 				return false
@@ -222,7 +222,7 @@ return function() --[[ Line: 70 | Named "createAgentRollbackRequestStore" ]]
 			
 			return true
 		end,
-		unregisterTurnStarter = function(Registration) --[[ Line: 138 ]]
+		unregisterTurnStarter = function(Registration)
 			-- upvalues: Config (ref), v1 (ref), t (copy), SignalsModule (upval)
 			if Config == nil or Config.registration ~= Registration then return end
 			Config = nil
@@ -245,7 +245,7 @@ return function() --[[ Line: 70 | Named "createAgentRollbackRequestStore" ]]
 		end,
 		beginRequest = beginRequest,
 		setRequestData = setRequestData,
-		failRequest = function(Id): boolean --[[ Line: 210 ]]
+		failRequest = function(Id): boolean
 			-- upvalues: v1 (ref), t (copy), SignalsModule (upval)
 			local v2 = v1
 			
@@ -267,7 +267,7 @@ return function() --[[ Line: 70 | Named "createAgentRollbackRequestStore" ]]
 			end
 			return true
 		end,
-		cancelRequestForPlaceId = function(PlaceId): boolean --[[ Line: 219 ]]
+		cancelRequestForPlaceId = function(PlaceId): boolean
 			-- upvalues: v1 (ref), t (copy), SignalsModule (upval)
 			local v2 = v1
 			
@@ -289,7 +289,7 @@ return function() --[[ Line: 70 | Named "createAgentRollbackRequestStore" ]]
 			end
 			return true
 		end,
-		request = function(p1, p2) --[[ Line: 228 ]]
+		request = function(p1, p2)
 			-- upvalues: beginRequest (copy), setRequestData (copy)
 			local BeginRequestResult, BeginRequestResult2 = beginRequest(p1)
 			
@@ -298,7 +298,7 @@ return function() --[[ Line: 70 | Named "createAgentRollbackRequestStore" ]]
 			end
 			return BeginRequestResult2
 		end,
-		reset = function() --[[ Line: 236 ]]
+		reset = function()
 			-- upvalues: v1 (ref), t (copy), SignalsModule (upval), Config (ref)
 			local v2 = v1
 			

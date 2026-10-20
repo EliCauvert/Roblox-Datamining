@@ -35,11 +35,11 @@ return {
 			}
 		}
 	},
-	findRequestInTurnState = function(p1, p2) --[[ Line: 118 ]]
+	findRequestInTurnState = function(p1, p2)
 		-- upvalues: MonetizationClientToolModule (copy)
 		return MonetizationClientToolModule.findRequestInTurnState(p1, "manage_game_pass", p2)
 	end,
-	parseInput = function(p1) --[[ Line: 52 ]]
+	parseInput = function(p1)
 		-- upvalues: List (copy), MonetizationClientToolModule (copy), FFlagCreatorAgentChatMonetizationOneConsentModule (copy), MAXIMUMSAFEINTEGER (copy)
 		if typeof(p1) ~= "table" or typeof(p1.action) ~= "string" then
 			return nil, "An action is required."

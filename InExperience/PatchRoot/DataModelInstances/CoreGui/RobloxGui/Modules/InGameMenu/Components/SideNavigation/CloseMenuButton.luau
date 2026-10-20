@@ -24,7 +24,7 @@ local StrictInterfaceResult = T.strictInterface({
 	forwardRef = T.optional(T.table)
 })
 
-local function _(SelectedPressed): boolean --[[ Line: 39 | Named "isSelectedState" ]]
+local function _(SelectedPressed): boolean
 	-- upvalues: ControlState (copy)
 	return SelectedPressed == ControlState.Selected or SelectedPressed == ControlState.SelectedPressed
 end
@@ -34,15 +34,15 @@ local CloseMenuButton = nil
 if FFlagCoreUiMigrateUIBloxToFoundation then
 	CloseMenuButton = Roact.Component:extend("CloseMenuButton")
 	
-	function CloseMenuButton.init(p1) --[[ Line: 48 ]]
+	function CloseMenuButton.init(p1)
 		p1.wasSelected = false
 	end
 	
-	function CloseMenuButton.render(p1) --[[ Line: 52 ]]
+	function CloseMenuButton.render(p1)
 		-- upvalues: WithCursorMigration (copy), GlobalConfigModule (copy), StrictInterfaceResult (copy), Roact (copy), Image (copy), AssetsModule (copy), CursorType (copy), ControlState (copy)
 		local Props = p1.props
 		
-		return WithCursorMigration(function(Callback) --[[ Line: 54 ]]
+		return WithCursorMigration(function(Callback)
 			-- upvalues: GlobalConfigModule (upval), StrictInterfaceResult (upval), Props (copy), Roact (upval), Image (upval), AssetsModule (upval), CursorType (upval), ControlState (upval), p1 (copy)
 			if GlobalConfigModule.propValidation then
 				assert(StrictInterfaceResult(Props))
@@ -56,7 +56,7 @@ if FFlagCoreUiMigrateUIBloxToFoundation then
 				Image = AssetsModule.Images.CloseButton,
 				selection = { SelectionImageObject = Callback(CursorType.RoundedRect) },
 				onActivated = Props.onActivated,
-				onStateChanged = function(SelectedPressed) --[[ Line: 68 ]]
+				onStateChanged = function(SelectedPressed)
 					-- upvalues: ControlState (upval), p1 (upval), Props (upval)
 					local IsSelectedPressedMatch: boolean = SelectedPressed == ControlState.Selected or SelectedPressed == ControlState.SelectedPressed
 					
@@ -74,9 +74,9 @@ if FFlagCoreUiMigrateUIBloxToFoundation then
 		end)
 	end
 else
-	CloseMenuButton = function(Frame) --[[ Line: 86 ]]
+	CloseMenuButton = function(Frame)
 		-- upvalues: WithCursorMigration (copy), GlobalConfigModule (copy), StrictInterfaceResult (copy), Roact (copy), ImageSetButton (copy), AssetsModule (copy), CursorType (copy)
-		return WithCursorMigration(function(Callback) --[[ Line: 87 ]]
+		return WithCursorMigration(function(Callback)
 			-- upvalues: GlobalConfigModule (upval), StrictInterfaceResult (upval), Frame (copy), Roact (upval), ImageSetButton (upval), AssetsModule (upval), CursorType (upval)
 			if GlobalConfigModule.propValidation then
 				assert(StrictInterfaceResult(Frame))
@@ -97,7 +97,7 @@ else
 		end)
 	end
 end
-return Roact.forwardRef(function(p1, ForwardRef) --[[ Line: 110 ]]
+return Roact.forwardRef(function(p1, ForwardRef)
 	-- upvalues: Roact (copy), CloseMenuButton (ref), Cryo (copy)
 	return Roact.createElement(CloseMenuButton, Cryo.Dictionary.join(p1, { forwardRef = ForwardRef }))
 end)

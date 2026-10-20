@@ -24,11 +24,11 @@ local IconSizeModule = require(Parent3.App.ImageSet.Enum.IconSize)
 local ImagesModule = require(Parent3.App.ImageSet.Images)
 local UIBloxConfigModule = require(Parent3.UIBloxConfig)
 
-local function _(Vector, Vector1): Vector2 --[[ Line: 32 | Named "product" ]]
+local function _(Vector, Vector1): Vector2
 	return Vector2.new(Vector.X * Vector1.X, Vector.Y * Vector1.Y)
 end
 
-function getOffsetPosition(p1, p2, p3, X): Vector2 --[[ Line: 37 ]]
+function getOffsetPosition(p1, p2, p3, X): Vector2
 	-- upvalues: ConstantsModule (copy)
 	local ORIENTATIONVECTOREntry = ConstantsModule.ORIENTATION_VECTOR[p3]
 	local NewVector = p2 + Vector2.new(X, X)
@@ -36,25 +36,25 @@ function getOffsetPosition(p1, p2, p3, X): Vector2 --[[ Line: 37 ]]
 	return p1 + Vector2.new(ORIENTATIONVECTOREntry.X * NewVector.X, ORIENTATIONVECTOREntry.Y * NewVector.Y)
 end
 
-local _ = function(Vector): UDim2 --[[ Line: 44 | Named "vectorToPosition" ]]
+local _ = function(Vector): UDim2
 	return UDim2.fromOffset(Vector.X, Vector.Y)
 end
 
-local _ = function(p1): Vector2 --[[ Line: 50 | Named "getContentAnchorPoint" ]]
+local _ = function(p1): Vector2
 	-- upvalues: ConstantsModule (copy)
 	return Vector2.new(0.5, 0.5) - 0.5 * ConstantsModule.ORIENTATION_VECTOR[p1]
 end
 
-local _ = function(p1, p2): UDim --[[ Line: 55 | Named "convertPadding" ]]
+local _ = function(p1, p2): UDim
 	return UDim.new(0, p1 or p2)
 end
 
-local _ = function(p1, p2): Vector2 --[[ Line: 60 | Named "addOffsets" ]]
+local _ = function(p1, p2): Vector2
 	-- upvalues: TooltipOrientationModule (copy)
 	return p1 + Vector2.new(p2[TooltipOrientationModule.Left] + p2[TooltipOrientationModule.Right], p2[TooltipOrientationModule.Top] + p2[TooltipOrientationModule.Bottom])
 end
 
-local function getHotkeysAndWidth(HotkeyCodes, Largest: number, p1) --[[ Line: 68 ]]
+local function getHotkeysAndWidth(HotkeyCodes, Largest: number, p1)
 	-- upvalues: ReactModule (copy), KeyLabelModule (copy), GetKeyLabelWidthFunction (copy), ConstantsModule (copy)
 	if not HotkeyCodes or #HotkeyCodes == 0 then
 		return nil, Largest
@@ -83,7 +83,7 @@ local function getHotkeysAndWidth(HotkeyCodes, Largest: number, p1) --[[ Line: 6
 	}, Elements), Largest1
 end
 
-return ReactModule.forwardRef(function(UIPadding, Ref) --[[ Line: 104 | Named "TooltipWithRef" ]]
+return ReactModule.forwardRef(function(UIPadding, Ref)
 	-- upvalues: ReactModule (copy), UseStyleModule (copy), ConstantsModule (copy), GetTextSizeModule (copy), UIBloxConfigModule (copy), getHotkeysAndWidth (copy), LuauPolyfillModule (copy), ButtonTypeModule (copy), StandardButtonSizeModule (copy), ButtonModule (copy), TooltipOrientationModule (copy), Label (copy), StyledTextLabelModule (copy), IconButtonModule (copy), ImagesModule (copy), IconSizeModule (copy)
 	assert(UIPadding.headerText or UIPadding.bodyText, "Must supply either header or body")
 	assert(not (UIPadding.renderCustomComponents and UIPadding.buttonProps), "renderCustomComponents and buttonProps are not compatible")
@@ -235,7 +235,7 @@ return ReactModule.forwardRef(function(UIPadding, Ref) --[[ Line: 104 | Named "T
 			Position = UDim2.fromOffset(_Vector21.X, _Vector21.Y),
 			BackgroundColor3 = BackgroundColor,
 			BackgroundTransparency = ScaledPreferredTransparency,
-			[ReactModule.Change.AbsoluteSize] = function(Frame: Frame) --[[ Line: 293 ]]
+			[ReactModule.Change.AbsoluteSize] = function(Frame: Frame)
 				-- upvalues: UseStateResult2 (copy), UIPadding (copy)
 				UseStateResult2(Frame.AbsoluteSize)
 				

@@ -4,7 +4,7 @@ local AnalyticsServiceModule = require(GenericAbuseReporting.BeduiV2.Analytics.a
 local SendAnalyticsEventFunction = AnalyticsServiceModule.sendAnalyticsEvent
 local TelemetryEventType = AnalyticsServiceModule.TelemetryEventType
 
-return function(p1, p2) --[[ Line: 20 | Named "sendBoundaryErrorTelemetry" ]]
+return function(p1, p2)
 	-- upvalues: DashModule (copy), SendAnalyticsEventFunction (copy), TelemetryEventType (copy)
 	SendAnalyticsEventFunction({
 		run_id = "err",

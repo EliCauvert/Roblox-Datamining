@@ -6,7 +6,7 @@ local Text = FoundationModule.Text
 local View = FoundationModule.View
 local AvatarSize = FoundationModule.Enums.AvatarSize
 
-return function(Frame) --[[ Line: 20 | Named "AccountUpgradeIdentityHeader" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), View (copy), Avatar (copy), AvatarSize (copy), Text (copy)
 	local DisplayName = Frame.displayName
 	

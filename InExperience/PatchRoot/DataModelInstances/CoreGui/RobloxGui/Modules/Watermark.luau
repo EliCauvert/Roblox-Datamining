@@ -4,7 +4,7 @@ local WatermarkComponentModule = require(script.WatermarkComponent)
 local Module = {}
 Module.__index = Module
 
-function Module.new() --[[ Line: 11 ]]
+function Module.new()
 	-- upvalues: Module (copy), RoactModule (copy), WatermarkComponentModule (copy), CoreGui (copy)
 	local self = setmetatable({}, Module)
 	self.root = RoactModule.createElement(WatermarkComponentModule)

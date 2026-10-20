@@ -11,11 +11,11 @@ local MenuButtonModule = require(Parent.Components.MenuButton)
 local _ = require(Parent.Types)
 local UseScreenSizeModule = require(Parent.Hooks.useScreenSize)
 
-local function _(p1: number): number --[[ Line: 41 | Named "getItemsPerRow" ]]
+local function _(p1: number): number
 	return (math.clamp(math.floor(p1 / 120), 1, 4))
 end
 
-local function getGalleryItemSize(ClampedValue, XDelta: number): Vector2 --[[ Line: 45 ]]
+local function getGalleryItemSize(ClampedValue, XDelta: number): Vector2
 	local ClampedValue1 = math.clamp(math.floor(XDelta / 120), 1, 4)
 	local XDeltaDelta = XDelta - 4 * (ClampedValue1 - 1)
 	local Smallest = math.min(XDeltaDelta / ClampedValue1, XDeltaDelta)
@@ -23,7 +23,7 @@ local function getGalleryItemSize(ClampedValue, XDelta: number): Vector2 --[[ Li
 	return Vector2.new(math.floor(Smallest), (math.floor(Smallest * ClampedValue)))
 end
 
-local _ = function(p1: number, p2: number, Vector): number --[[ Line: 55 | Named "getItemsPerPage" ]]
+local _ = function(p1: number, p2: number, Vector): number
 	if p1 <= 0 then
 		return 0
 	end
@@ -35,12 +35,12 @@ local _ = function(p1: number, p2: number, Vector): number --[[ Line: 55 | Named
 	return (math.max(Floored * math.clamp(math.floor(p2 / 120), 1, 4), 8))
 end
 
-return function(p1) --[[ Line: 70 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseScreenSizeModule (copy), getGalleryItemSize (copy), DashModule (copy), View (copy), ScrollView (copy), ScrollBarVisibility (copy), GridView (copy), MenuButtonModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
 	local UseScreenSizeModuleResult = UseScreenSizeModule()
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 75 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(Frame.AbsoluteSize)
 	end, {})
@@ -49,11 +49,11 @@ return function(p1) --[[ Line: 70 ]]
 	local ClampedValue = math.clamp(UseScreenSizeModuleResult.Y / UseScreenSizeModuleResult.X, 0.42857142857142855, 1)
 	local YDelta = UseStateResult.Y - 12 - 40 - 36
 	local XDelta = UseStateResult.X - 12 - 8
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 89 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: getGalleryItemSize (upval), ClampedValue (ref), XDelta (copy)
 		return getGalleryItemSize(ClampedValue, XDelta)
 	end, { ClampedValue, XDelta })
-	local UseMemoResult1 = ReactModule.useMemo(function(): number --[[ Line: 93 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function(): number
 		-- upvalues: YDelta (copy), XDelta (copy), UseMemoResult (copy)
 		if YDelta <= 0 then
 			return 0
@@ -65,17 +65,17 @@ return function(p1) --[[ Line: 70 ]]
 		end
 		return (math.max(Floored * math.clamp(math.floor(XDelta / 120), 1, 4), 8))
 	end, { YDelta, XDelta, UseMemoResult })
-	ReactModule.useEffect(function() --[[ Line: 97 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult1 (copy), UseMemoResult1 (copy), UseStateResult2_1 (copy)
 		if UseStateResult1 < UseMemoResult1 then
 			UseStateResult2_1(UseMemoResult1)
 		end
 	end, { UseStateResult, UseMemoResult1, UseStateResult1 })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 103 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy), UseStateResult1 (copy), UseMemoResult1 (copy)
 		UseStateResult2_1(UseStateResult1 + UseMemoResult1)
 	end, { UseStateResult1, UseMemoResult1 })
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 107 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: IsUseStateResultBelow (copy), p1 (copy), UseStateResult1 (copy), DashModule (upval)
 		return if IsUseStateResultBelow then DashModule.slice(p1.captures, 1, (math.min(#p1.captures, UseStateResult1))) else p1.captures
 	end, { p1.captures, IsUseStateResultBelow, UseStateResult1 })

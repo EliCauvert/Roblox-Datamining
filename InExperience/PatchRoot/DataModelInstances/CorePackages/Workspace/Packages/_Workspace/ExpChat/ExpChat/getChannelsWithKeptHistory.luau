@@ -1,4 +1,4 @@
-﻿return function(List, p1: number) --[[ Line: 2 ]]
+﻿return function(List, p1: number)
 	local t = {}
 	
 	if p1 <= 0 then

@@ -7,10 +7,10 @@ local ExpChatSharedModule = require(Parent.ExpChatShared)
 local ConstantsModule = require(ExpChat.PresetChat.Constants)
 local EmojiUnicodeToIdModule = require(ExpChat.PresetChat.emojiUnicodeToId)
 
-return function(p1, Tbl, p2) --[[ Line: 23 | Named "useEmojiDropdownDismissAnalytics" ]]
+return function(p1, Tbl, p2)
 	-- upvalues: ReactModule (copy), EmojiUnicodeToIdModule (copy), EmojiListModule (copy), ExpChatSharedModule (copy), ConstantsModule (copy), HttpService (copy)
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 30 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), p2 (copy), EmojiUnicodeToIdModule (upval), EmojiListModule (upval), ExpChatSharedModule (upval), ConstantsModule (upval), HttpService (upval)
 		local Current = UseRefResult.current
 		
@@ -41,7 +41,7 @@ return function(p1, Tbl, p2) --[[ Line: 23 | Named "useEmojiDropdownDismissAnaly
 			preset_items = HttpService:JSONEncode(List)
 		}, ConstantsModule.Analytics.ExtendedStandardizedFields)
 	end, { p2 })
-	ReactModule.useEffect(function() --[[ Line: 63 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseResult (copy), UseRefResult (copy), p2 (copy), Tbl (copy)
 		if not p1 then
 			UseResult()
@@ -66,7 +66,7 @@ return function(p1, Tbl, p2) --[[ Line: 23 | Named "useEmojiDropdownDismissAnaly
 		end
 		Current.lastVisibleResults = table.clone(Tbl)
 	end, { p1, Tbl, p2, UseResult })
-	ReactModule.useEffect(function() --[[ Line: 88 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult (copy)
 		return UseResult
 	end, { UseResult })

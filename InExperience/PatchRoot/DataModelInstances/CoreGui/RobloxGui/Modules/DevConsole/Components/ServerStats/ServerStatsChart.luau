@@ -18,24 +18,24 @@ local NoResultSearchStr = ConstantsModule.GeneralFormatting.NoResultSearchStr
 local ConvertTimeStampModule = require(script.Parent.Parent.Parent.Util.convertTimeStamp)
 local ServerStats = RoactModule.Component:extend("ServerStats")
 
-local function formatData(p1): string --[[ Line: 29 ]]
+local function formatData(p1): string
 	return string.format("%.3f", p1)
 end
 
-local function getX(p1) --[[ Line: 32 ]]
+local function getX(p1)
 	return p1.time
 end
 
-local function getY(p1) --[[ Line: 36 ]]
+local function getY(p1)
 	return p1.value
 end
 
-function ServerStats.init(p1) --[[ Line: 40 ]]
+function ServerStats.init(p1)
 	local CurrentData = p1.props.ServerStatsData:getCurrentData()
 	
-	function p1.getOnButtonPress(ExpandedEntry) --[[ Line: 43 ]]
+	function p1.getOnButtonPress(ExpandedEntry)
 		-- upvalues: p1 (copy)
-		return function(_, _) --[[ Line: 44 ]]
+		return function(_, _)
 			-- upvalues: p1 (upval), ExpandedEntry (copy)
 			p1:setState({
 				expandedEntry = p1.state.expandedEntry ~= ExpandedEntry and ExpandedEntry
@@ -46,19 +46,19 @@ function ServerStats.init(p1) --[[ Line: 40 ]]
 	p1.state = { serverStatsData = CurrentData }
 end
 
-function ServerStats.didMount(p1) --[[ Line: 56 ]]
-	p1.statsConnector = p1.props.ServerStatsData:Signal():Connect(function(ServerStatsData) --[[ Line: 57 ]]
+function ServerStats.didMount(p1)
+	p1.statsConnector = p1.props.ServerStatsData:Signal():Connect(function(ServerStatsData)
 		-- upvalues: p1 (copy)
 		p1:setState({ serverStatsData = ServerStatsData })
 	end)
 end
 
-function ServerStats.willUnmount(p1) --[[ Line: 64 ]]
+function ServerStats.willUnmount(p1)
 	p1.statsConnector:Disconnect()
 	p1.statsConnector = nil
 end
 
-function ServerStats.render(p1) --[[ Line: 69 ]]
+function ServerStats.render(p1)
 	-- upvalues: EntryFrameHeight (copy), LineGraphHeight (copy), RoactModule (copy), BannerButtonModule (copy), CellLabelModule (copy), ValueCellWidth (copy), CellPadding (copy), ExpandArrowPadding (copy), LineWidth (copy), LineColor (copy), LineGraphModule (copy), getX (copy), getY (copy), ConvertTimeStampModule (copy), formatData (copy), ConstantsModule (copy), NoResultSearchStr (copy), HeaderFrameHeight (copy), ChartHeaderNames (copy)
 	local Frames = {}
 	local SearchTerm: string = p1.props.searchTerm

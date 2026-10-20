@@ -14,13 +14,13 @@ local Callback5 = nil
 local GraphQLError = require(Parent.GraphQL).GraphQLError
 local IsAggregateErrorFunction = require(script.Parent.AggregateError).isAggregateError
 local InspectModule = {
-	inspect = function(p1) --[[ Line: 40 ]]
+	inspect = function(p1)
 		-- upvalues: Callback (ref)
 		return Callback(p1, {})
 	end
 }
 
-Callback = function(JSON, ConcatResult) --[[ Line: 46 | Named "formatValue" ]]
+Callback = function(JSON, ConcatResult)
 	-- upvalues: Boolean (copy), Callback1 (ref)
 	local ValueType = typeof(JSON)
 	
@@ -35,12 +35,12 @@ Callback = function(JSON, ConcatResult) --[[ Line: 46 | Named "formatValue" ]]
 	end
 end
 
-local function formatError(JSON): string --[[ Line: 75 ]]
+local function formatError(JSON): string
 	-- upvalues: InstanceofFunction (copy), GraphQLError (copy)
 	return if InstanceofFunction(JSON, GraphQLError) then tostring(JSON) else ("%s: %s;\n %s"):format(tostring(JSON.name), tostring(JSON.message), (tostring(JSON.stack)))
 end
 
-Callback1 = function(JSON, p1) --[[ Line: 83 | Named "formatObjectValue" ]]
+Callback1 = function(JSON, p1)
 	-- upvalues: InstanceofFunction (copy), Error (copy), IsAggregateErrorFunction (copy), GraphQLError (copy), Callback2 (ref), formatError (copy), Boolean (copy), Array (copy), Callback3 (ref), Callback (ref), Callback4 (ref)
 	if JSON == nil then
 		return "null"
@@ -65,15 +65,15 @@ Callback1 = function(JSON, p1) --[[ Line: 83 | Named "formatObjectValue" ]]
 	return Callback4(JSON, ConcatResult)
 end
 
-Callback3 = function(JSON): boolean --[[ Line: 139 | Named "isJSONable" ]]
+Callback3 = function(JSON): boolean
 	return typeof(JSON.toJSON) == "function"
 end
 
-Callback4 = function(JSON, ConcatResult): string --[[ Line: 147 | Named "formatObject" ]]
+Callback4 = function(JSON, ConcatResult): string
 	-- upvalues: Object (copy), Callback5 (ref), Array (copy), Callback (ref)
 	local EntriesResult = Object.entries(JSON)
 	
-	return if #EntriesResult == 0 then "{}" elseif #ConcatResult > 3 then "[" .. tostring(Callback5(JSON)) .. "]" else "{ " .. tostring(Array.join(Array.map(EntriesResult, function(p1): string --[[ Line: 165 ]]
+	return if #EntriesResult == 0 then "{}" elseif #ConcatResult > 3 then "[" .. tostring(Callback5(JSON)) .. "]" else "{ " .. tostring(Array.join(Array.map(EntriesResult, function(p1): string
 		-- upvalues: Callback (upval), ConcatResult (copy)
 		local Unpacked, Unpacked2 = table.unpack(p1, 1, 2)
 		
@@ -81,7 +81,7 @@ Callback4 = function(JSON, ConcatResult): string --[[ Line: 147 | Named "formatO
 	end), ", ")) .. " }"
 end
 
-Callback2 = function(Errors, ConcatResult): string --[[ Line: 175 | Named "formatArray" ]]
+Callback2 = function(Errors, ConcatResult): string
 	-- upvalues: Callback (ref), Array (copy)
 	if #Errors == 0 then
 		return "[]"
@@ -105,7 +105,7 @@ Callback2 = function(Errors, ConcatResult): string --[[ Line: 175 | Named "forma
 	return "[" .. tostring(Array.join(List, ", ")) .. "]"
 end
 
-Callback5 = function(_): string --[[ Line: 230 | Named "getObjectTag" ]]
+Callback5 = function(_): string
 	return "Object"
 end
 

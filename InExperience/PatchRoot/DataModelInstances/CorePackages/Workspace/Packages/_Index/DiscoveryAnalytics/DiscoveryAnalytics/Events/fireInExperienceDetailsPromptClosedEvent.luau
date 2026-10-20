@@ -20,7 +20,7 @@ local config = {
 	lastUpdated = if FFlagLuaAppIedpSendPoints then { 25, 11, 19 } else { 25, 11, 11 }
 }
 
-return function(CustomFields) --[[ Line: 30 | Named "fireInExperienceDetailsPromptClosedEvent" ]]
+return function(CustomFields)
 	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), TelemetryService (copy), config (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	

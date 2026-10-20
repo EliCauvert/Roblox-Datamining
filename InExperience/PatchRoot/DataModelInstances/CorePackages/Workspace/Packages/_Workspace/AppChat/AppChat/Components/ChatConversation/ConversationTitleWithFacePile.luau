@@ -19,11 +19,11 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local FFlagUserTileUnfilteredChatIndicator = require(Parent.SharedFlags).FFlagUserTileUnfilteredChatIndicator
 local GetResult = if FFlagUserTileUnfilteredChatIndicator then DataHydrationModule.TrustedConnections.TrustedConnectionsStore.get() else nil
 
-return function(p1) --[[ Line: 33 ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseTelemetryModule (copy), ChatConversationTelemetryLayerModule (copy), ReactModule (copy), ChatConversationTelemetryEventsModule (copy), UseGetConversationFromIdModule (copy), UseLocalUserIdFunction (copy), ConversationModule (copy), GetOtherParticipantsModule (copy), UseGetUserFromIdModule (copy), FFlagUserTileUnfilteredChatIndicator (copy), SignalsModule (copy), GetResult (copy), SignalsReactModule (copy), FoundationModule (copy), ConversationFacePileModule (copy), ConversationChannelsModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseTelemetryModuleResult = UseTelemetryModule(ChatConversationTelemetryLayerModule.Context)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 36 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseTelemetryModuleResult (copy), ChatConversationTelemetryEventsModule (upval), p1 (copy)
 		UseTelemetryModuleResult.emit(ChatConversationTelemetryEventsModule.ConversationInfoBtnClicked, {})
 		p1.navigateToChatDetails()
@@ -35,9 +35,9 @@ return function(p1) --[[ Line: 33 ]]
 	local IsConversationTypeMatch: boolean = UseGetConversationFromIdModuleResult and UseGetConversationFromIdModuleResult.conversationType == ConversationModule.Type.ONE_TO_ONE_CONVERSATION
 	local OtherParticipantsModuleEntry = if IsConversationTypeMatch then GetOtherParticipantsModule(UseGetConversationFromIdModuleResult, UseLocalUserIdResult)[1] else nil
 	local UseGetUserFromIdModuleResult = UseGetUserFromIdModule(OtherParticipantsModuleEntry)
-	local UseSignalStateResult = if FFlagUserTileUnfilteredChatIndicator then SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 56 ]]
+	local UseSignalStateResult = if FFlagUserTileUnfilteredChatIndicator then SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), OtherParticipantsModuleEntry (copy), GetResult (upval)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 57 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: OtherParticipantsModuleEntry (upval), GetResult (upval)
 			return if OtherParticipantsModuleEntry == nil or OtherParticipantsModuleEntry == "" then nil else GetResult.getIsTrustedConnection(OtherParticipantsModuleEntry).data(p2)
 		end)

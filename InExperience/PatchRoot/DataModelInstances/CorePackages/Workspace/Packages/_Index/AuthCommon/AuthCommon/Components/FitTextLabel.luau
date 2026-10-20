@@ -14,14 +14,14 @@ FitTextLabel.defaultProps = {
 	fitAxis = FitChildrenModule.FitAxis.Height
 }
 
-function FitTextLabel.init(p1) --[[ Line: 24 ]]
+function FitTextLabel.init(p1)
 	-- upvalues: FitChildrenModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy)
-	function p1.onRef(Ref) --[[ Line: 25 ]]
+	function p1.onRef(Ref)
 		-- upvalues: p1 (copy)
 		p1.ref = Ref
 	end
 	
-	function p1.resize(Label) --[[ Line: 29 ]]
+	function p1.resize(Label)
 		-- upvalues: p1 (copy), FitChildrenModule (upval), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Text (upval)
 		local FitAxis = p1.props.fitAxis
 		local MaxWidth = p1.props.maxWidth
@@ -49,7 +49,7 @@ function FitTextLabel.init(p1) --[[ Line: 24 ]]
 	p1:setState({ width = nil, height = nil })
 end
 
-function FitTextLabel.render(p1) --[[ Line: 84 ]]
+function FitTextLabel.render(p1)
 	-- upvalues: FitChildrenModule (copy), FoundationFontFaceMigration (copy), Immutable (copy), RoactModule (copy), NormalizeFontFaceFunction (copy)
 	local FitAxis = p1.props.fitAxis or FitChildrenModule.FitAxis.Height
 	local FitAxis1 = if FoundationFontFaceMigration then Immutable.RemoveFromDictionary(p1.props, "fitAxis", "maxWidth", "Font", "FontFace") else Immutable.RemoveFromDictionary(p1.props, "fitAxis", "maxWidth")
@@ -75,7 +75,7 @@ function FitTextLabel.render(p1) --[[ Line: 84 ]]
 	}))
 end
 
-function FitTextLabel.didMount(p1) --[[ Line: 126 ]]
+function FitTextLabel.didMount(p1)
 	p1.resize(p1.ref)
 end
 

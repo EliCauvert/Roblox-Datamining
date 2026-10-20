@@ -57,7 +57,7 @@ local GetFFlagExpChatAlwaysRunTCSFunction = SharedFlagsModule.getFFlagExpChatAlw
 local ToastNotification = nil
 local ToastNotificationWrapper = nil
 local Toast = nil
-task.spawn(function() --[[ Line: 111 ]]
+task.spawn(function()
 	-- upvalues: ToastNotification (ref), CoreGui (copy), ToastNotificationWrapper (ref), Toast (ref)
 	ToastNotification = CoreGui:WaitForChild("ToastNotification", 3)
 	ToastNotificationWrapper = if ToastNotification == nil then nil else ToastNotification:WaitForChild("ToastNotificationWrapper", 3)
@@ -80,7 +80,7 @@ GamepadMenu.validateProps = TModule.strictInterface({
 	isGamepadMenuOpen = TModule.boolean
 })
 
-function GamepadMenu.init(p1) --[[ Line: 139 ]]
+function GamepadMenu.init(p1)
 	-- upvalues: FFlagMountCoreGuiBackpackModule (copy), StarterGui (copy), FFlagExperienceMenuGamepadExposureEnabled (copy), Default (copy), EnumGamepadMenuOptionsModule (copy), ChatSelectorModule (copy), Toast (ref), FFlagPlayerListUseFocusNavHook (copy), PlayerListManagerModule (copy), LogGamepadOpenExperienceControlsMenuFunction (copy), GamepadMenu (copy), GuiService (copy), FFlagTopBarSignalizeScreenSize (copy), DisplayModule (copy), SignalsModule (copy)
 	if FFlagMountCoreGuiBackpackModule then
 		p1:setState({
@@ -88,7 +88,7 @@ function GamepadMenu.init(p1) --[[ Line: 139 ]]
 			menuActions = {},
 			mountBackpack = StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.Backpack)
 		})
-		StarterGui.CoreGuiChangedSignal:Connect(function(CoreGuiType, MountBackpack) --[[ Line: 147 ]]
+		StarterGui.CoreGuiChangedSignal:Connect(function(CoreGuiType, MountBackpack)
 			-- upvalues: p1 (copy)
 			if CoreGuiType == Enum.CoreGuiType.Backpack or CoreGuiType == Enum.CoreGuiType.All then
 				p1:setState({ mountBackpack = MountBackpack })
@@ -103,7 +103,7 @@ function GamepadMenu.init(p1) --[[ Line: 139 ]]
 	p1.boundMenuOpenActions = false
 	p1.lastMenuButtonPress = 0
 	
-	function p1:toggleChatVisibilityAction(UserInputState, _) --[[ Line: 169 ]]
+	function p1:toggleChatVisibilityAction(UserInputState, _)
 		-- upvalues: p1 (copy), Default (upval), EnumGamepadMenuOptionsModule (upval), ChatSelectorModule (upval)
 		if UserInputState == Enum.UserInputState.Begin then
 			p1.toggleChatVisible()
@@ -115,7 +115,7 @@ function GamepadMenu.init(p1) --[[ Line: 139 ]]
 		end
 	end
 	
-	function p1:toggleMenuVisibleAction(UserInputState, _) --[[ Line: 180 ]]
+	function p1:toggleMenuVisibleAction(UserInputState, _)
 		-- upvalues: p1 (copy), Toast (upval), FFlagPlayerListUseFocusNavHook (upval), PlayerListManagerModule (upval), LogGamepadOpenExperienceControlsMenuFunction (upval)
 		if p1.props.menuOpen then
 			return Enum.ContextActionResult.Pass
@@ -142,7 +142,7 @@ function GamepadMenu.init(p1) --[[ Line: 139 ]]
 		return Enum.ContextActionResult.Sink
 	end
 	
-	function p1:closeMenuAction(UserInputState, _) --[[ Line: 211 ]]
+	function p1:closeMenuAction(UserInputState, _)
 		-- upvalues: p1 (copy)
 		if UserInputState == Enum.UserInputState.Begin then
 			p1.props.setGamepadMenuOpen(false)
@@ -153,7 +153,7 @@ function GamepadMenu.init(p1) --[[ Line: 139 ]]
 		end
 	end
 	
-	function p1:leaveGameMenuAction(UserInputState, _) --[[ Line: 221 ]]
+	function p1:leaveGameMenuAction(UserInputState, _)
 		-- upvalues: GamepadMenu (upval), p1 (copy), Default (upval), EnumGamepadMenuOptionsModule (upval)
 		if UserInputState == Enum.UserInputState.Begin then
 			GamepadMenu.leaveGame()
@@ -170,7 +170,7 @@ function GamepadMenu.init(p1) --[[ Line: 139 ]]
 		end
 	end
 	
-	function p1:respawnMenuAction(UserInputState, _) --[[ Line: 238 ]]
+	function p1:respawnMenuAction(UserInputState, _)
 		-- upvalues: GamepadMenu (upval), p1 (copy), Default (upval), EnumGamepadMenuOptionsModule (upval)
 		if UserInputState == Enum.UserInputState.Begin then
 			GamepadMenu.respawnCharacter()
@@ -189,7 +189,7 @@ function GamepadMenu.init(p1) --[[ Line: 139 ]]
 	
 	p1.lastThumbStickMove = 0
 	
-	function p1:moveSelectionAction(UserInputState, Input) --[[ Line: 257 ]]
+	function p1:moveSelectionAction(UserInputState, Input)
 		-- upvalues: p1 (copy)
 		if UserInputState == Enum.UserInputState.Begin then
 			if Input.KeyCode == Enum.KeyCode.DPadUp then
@@ -224,7 +224,7 @@ function GamepadMenu.init(p1) --[[ Line: 139 ]]
 		return Enum.ContextActionResult.Pass
 	end
 	
-	function p1:goToTopAction(UserInputState, _) --[[ Line: 299 ]]
+	function p1:goToTopAction(UserInputState, _)
 		-- upvalues: p1 (copy)
 		if UserInputState == Enum.UserInputState.Begin then
 			p1:setState({ selectedIndex = 1 })
@@ -235,7 +235,7 @@ function GamepadMenu.init(p1) --[[ Line: 139 ]]
 		end
 	end
 	
-	function p1:goToBottomAction(UserInputState, _) --[[ Line: 309 ]]
+	function p1:goToBottomAction(UserInputState, _)
 		-- upvalues: p1 (copy)
 		if UserInputState == Enum.UserInputState.Begin then
 			p1:setState({ selectedIndex = #p1.state.menuActions })
@@ -246,7 +246,7 @@ function GamepadMenu.init(p1) --[[ Line: 139 ]]
 		end
 	end
 	
-	function p1:activateSelectionAction(UserInputState, _) --[[ Line: 319 ]]
+	function p1:activateSelectionAction(UserInputState, _)
 		-- upvalues: p1 (copy), GuiService (upval), EnumGamepadMenuOptionsModule (upval), PlayerListManagerModule (upval), Default (upval)
 		if UserInputState == Enum.UserInputState.Begin then
 			local MenuAction = p1.state.menuActions[p1.state.selectedIndex]
@@ -254,7 +254,7 @@ function GamepadMenu.init(p1) --[[ Line: 139 ]]
 			GuiService:SetMenuIsOpen(false, "GamepadMenu")
 			MenuAction.onActivated()
 			
-			local function _(Leaderboard) --[[ Line: 333 | Named "isMenuOptionToggleOpenOnSelect" ]]
+			local function _(Leaderboard)
 				-- upvalues: EnumGamepadMenuOptionsModule (upval), PlayerListManagerModule (upval)
 				return Leaderboard ~= EnumGamepadMenuOptionsModule.Leaderboard or PlayerListManagerModule:GetSetVisible()
 			end
@@ -271,21 +271,21 @@ function GamepadMenu.init(p1) --[[ Line: 139 ]]
 		end
 	end
 	
-	function p1.overlayDismiss() --[[ Line: 350 ]]
+	function p1.overlayDismiss()
 		-- upvalues: p1 (copy)
 		p1.props.setGamepadMenuOpen(false)
 	end
 	
 	if FFlagTopBarSignalizeScreenSize then
 		local GetViewportSizeFunction = DisplayModule.GetDisplayStore(false).getViewportSize
-		p1.disposeScreenSize = SignalsModule.createEffect(function(p2) --[[ Line: 357 ]]
+		p1.disposeScreenSize = SignalsModule.createEffect(function(p2)
 			-- upvalues: p1 (copy), GetViewportSizeFunction (copy)
 			p1:setState({ screenSize = GetViewportSizeFunction(p2) })
 		end)
 	end
 end
 
-function GamepadMenu.openRootMenu() --[[ Line: 365 ]]
+function GamepadMenu.openRootMenu()
 	-- upvalues: IsNewInGameMenuEnabledModule (copy), Modules (copy), InGameMenuConstantsModule (copy)
 	if IsNewInGameMenuEnabledModule() then
 		require(Modules.InGameMenuInit).openInGameMenu(InGameMenuConstantsModule.MainPagePageKey)
@@ -296,30 +296,30 @@ function GamepadMenu.openRootMenu() --[[ Line: 365 ]]
 	end
 end
 
-function GamepadMenu.openUnibarMenu() --[[ Line: 376 ]]
+function GamepadMenu.openUnibarMenu()
 	-- upvalues: Modules (copy)
 	require(Modules.Chrome.Service):enableFocusNav()
 end
 
-function GamepadMenu.closeUnibarMenu() --[[ Line: 381 ]]
+function GamepadMenu.closeUnibarMenu()
 	-- upvalues: Modules (copy)
 	require(Modules.Chrome.Service):disableFocusNav()
 end
 
-function GamepadMenu.toggleChatVisible() --[[ Line: 386 ]]
+function GamepadMenu.toggleChatVisible()
 	-- upvalues: ChatSelectorModule (copy), GameSettings (copy)
 	ChatSelectorModule:ToggleVisibility()
 	GameSettings.ChatVisible = ChatSelectorModule:GetVisibility()
 end
 
-function GamepadMenu.focusChatBar() --[[ Line: 391 ]]
+function GamepadMenu.focusChatBar()
 	-- upvalues: ChatSelectorModule (copy), GameSettings (copy)
 	ChatSelectorModule:SetVisible(true)
 	GameSettings.ChatVisible = true
 	ChatSelectorModule:FocusChatBar()
 end
 
-function GamepadMenu.toggleLeaderboard() --[[ Line: 397 ]]
+function GamepadMenu.toggleLeaderboard()
 	-- upvalues: IsNewInGameMenuEnabledModule (copy), Modules (copy), PlayerListManagerModule (copy)
 	if IsNewInGameMenuEnabledModule() then
 		require(Modules.InGameMenuInit).openPlayersPage()
@@ -330,7 +330,7 @@ function GamepadMenu.toggleLeaderboard() --[[ Line: 397 ]]
 	end
 end
 
-function GamepadMenu.toggleEmotesMenu() --[[ Line: 407 ]]
+function GamepadMenu.toggleEmotesMenu()
 	-- upvalues: EmotesMenuMasterModule (copy)
 	if EmotesMenuMasterModule:isOpen() then
 		EmotesMenuMasterModule:close()
@@ -341,7 +341,7 @@ function GamepadMenu.toggleEmotesMenu() --[[ Line: 407 ]]
 	end
 end
 
-function GamepadMenu.toggleBackpack() --[[ Line: 415 ]]
+function GamepadMenu.toggleBackpack()
 	-- upvalues: FFlagEnableNewBackpack (copy), Features (copy), BackpackScriptModule (copy)
 	if FFlagEnableNewBackpack then
 		Features.toggleVisibility(Features.FeatureName.Backpack)
@@ -352,7 +352,7 @@ function GamepadMenu.toggleBackpack() --[[ Line: 415 ]]
 	end
 end
 
-function GamepadMenu.leaveGame() --[[ Line: 423 ]]
+function GamepadMenu.leaveGame()
 	-- upvalues: IsNewInGameMenuEnabledModule (copy), Modules (copy), InGameMenuConstantsModule (copy)
 	if IsNewInGameMenuEnabledModule() then
 		require(Modules.InGameMenuInit).openGameLeavePage()
@@ -364,7 +364,7 @@ function GamepadMenu.leaveGame() --[[ Line: 423 ]]
 	end
 end
 
-function GamepadMenu.respawnCharacter() --[[ Line: 440 ]]
+function GamepadMenu.respawnCharacter()
 	-- upvalues: IsNewInGameMenuEnabledModule (copy), Modules (copy), InGameMenuConstantsModule (copy)
 	if IsNewInGameMenuEnabledModule() then
 		require(Modules.InGameMenuInit).openCharacterResetPage()
@@ -376,7 +376,7 @@ function GamepadMenu.respawnCharacter() --[[ Line: 440 ]]
 	end
 end
 
-function GamepadMenu.shouldShowChatMenuOption(ChatVersion, ChatEnabled) --[[ Line: 456 ]]
+function GamepadMenu.shouldShowChatMenuOption(ChatVersion, ChatEnabled)
 	-- upvalues: TenFootInterfaceModule (copy), TextChatService (copy), GetFFlagExpChatAlwaysRunTCSFunction (copy)
 	if TenFootInterfaceModule:IsEnabled() then
 		local ChatVersion1 = ChatVersion or TextChatService.ChatVersion
@@ -387,7 +387,7 @@ function GamepadMenu.shouldShowChatMenuOption(ChatVersion, ChatEnabled) --[[ Lin
 	end
 end
 
-function GamepadMenu.getMenuActionsFromProps(p1, p2) --[[ Line: 474 ]]
+function GamepadMenu.getMenuActionsFromProps(p1, p2)
 	-- upvalues: EnumGamepadMenuOptionsModule (copy), IconsLogoBlock (copy), GamepadMenu (copy), ChatIconModule (copy), EnabledFunction (copy), IconsMenuAR (copy), TenFootInterfaceModule (copy), FFlagMountCoreGuiBackpackModule (copy), IconsActionsRespawn (copy), IconsNavigationClose (copy)
 	local List = {}
 	table.insert(List, {
@@ -463,7 +463,7 @@ function GamepadMenu.getMenuActionsFromProps(p1, p2) --[[ Line: 474 ]]
 	return List
 end
 
-function GamepadMenu.getDerivedStateFromProps(p1, p2) --[[ Line: 586 ]]
+function GamepadMenu.getDerivedStateFromProps(p1, p2)
 	-- upvalues: FFlagMountCoreGuiBackpackModule (copy), GamepadMenu (copy), CryoModule (copy)
 	local MenuActionsFromProps = if FFlagMountCoreGuiBackpackModule then GamepadMenu.getMenuActionsFromProps(p1, p2) else GamepadMenu.getMenuActionsFromProps(p1)
 	local SelectedIndex = p2.selectedIndex or 1
@@ -477,9 +477,9 @@ function GamepadMenu.getDerivedStateFromProps(p1, p2) --[[ Line: 586 ]]
 	})
 end
 
-function GamepadMenu.render(p1) --[[ Line: 605 ]]
+function GamepadMenu.render(p1)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy), MenuHeaderModule (copy), MenuCellModule (copy), FFlagTopBarSignalizeScreenSize (copy), QuickMenuControllerBarModule (copy), ImageSetLabel (copy), ComponentAssetsCircle17 (copy), _Rect (copy), EnabledFunction (copy), FFlagEnableConsoleExpControls (copy), FFlagAddMenuNavigationToggleDialog (copy), MenuNavigationToggleDialogModule (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 606 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: RoactModule (upval), MenuHeaderModule (upval), p1 (copy), MenuCellModule (upval), FFlagTopBarSignalizeScreenSize (upval), QuickMenuControllerBarModule (upval), ImageSetLabel (upval), ComponentAssetsCircle17 (upval), _Rect (upval), EnabledFunction (upval), FFlagEnableConsoleExpControls (upval), FFlagAddMenuNavigationToggleDialog (upval), MenuNavigationToggleDialogModule (upval)
 		local Theme = p2.Theme
 		local config = {
@@ -551,17 +551,17 @@ function GamepadMenu.render(p1) --[[ Line: 605 ]]
 	end)
 end
 
-function GamepadMenu.didMount(p2) --[[ Line: 703 ]]
+function GamepadMenu.didMount(p2)
 	-- upvalues: VRService (copy), ContextActionService (copy)
 	if not VRService.VREnabled then
 		ContextActionService:BindCoreAction("TopBarGamepadToggleGamepadMenu", p2.toggleMenuVisibleAction, false, Enum.KeyCode.ButtonStart)
 	end
 end
 
-function GamepadMenu.bindMenuOpenActions(p2) --[[ Line: 714 ]]
+function GamepadMenu.bindMenuOpenActions(p2)
 	-- upvalues: ContextActionService (copy)
 	p2.boundMenuOpenActions = true
-	ContextActionService:BindCoreAction("TopBarGamepadFreezeController", function() --[[ Line: 719 ]] end, false, Enum.UserInputType.Gamepad1)
+	ContextActionService:BindCoreAction("TopBarGamepadFreezeController", function() end, false, Enum.UserInputType.Gamepad1)
 	ContextActionService:BindCoreAction("TopBarGamepadCloseMenu", p2.closeMenuAction, false, Enum.KeyCode.ButtonB)
 	ContextActionService:BindCoreAction("TopBarGamepadLeaveGame", p2.leaveGameMenuAction, false, Enum.KeyCode.ButtonX)
 	ContextActionService:BindCoreAction("TopBarGamepadRespawnAction", p2.respawnMenuAction, false, Enum.KeyCode.ButtonY)
@@ -573,7 +573,7 @@ function GamepadMenu.bindMenuOpenActions(p2) --[[ Line: 714 ]]
 	ContextActionService:BindCoreAction("TopBarGamepadToggleGamepadMenu", p2.toggleMenuVisibleAction, false, Enum.KeyCode.ButtonStart)
 end
 
-function GamepadMenu.unbindMenuOpenActions(p2) --[[ Line: 759 ]]
+function GamepadMenu.unbindMenuOpenActions(p2)
 	-- upvalues: ContextActionService (copy)
 	p2.boundMenuOpenActions = false
 	ContextActionService:UnbindCoreAction("TopBarGamepadFreezeController")
@@ -587,7 +587,7 @@ function GamepadMenu.unbindMenuOpenActions(p2) --[[ Line: 759 ]]
 	ContextActionService:UnbindCoreAction("TopBarGamepadToggleChatVisibility")
 end
 
-function GamepadMenu.unbindAllActions(p2) --[[ Line: 773 ]]
+function GamepadMenu.unbindAllActions(p2)
 	-- upvalues: ContextActionService (copy)
 	if p2.boundMenuOpenActions then
 		p2:unbindMenuOpenActions()
@@ -595,7 +595,7 @@ function GamepadMenu.unbindAllActions(p2) --[[ Line: 773 ]]
 	ContextActionService:UnbindCoreAction("TopBarGamepadToggleGamepadMenu")
 end
 
-function GamepadMenu.didUpdate(p2, p3, _) --[[ Line: 781 ]]
+function GamepadMenu.didUpdate(p2, p3, _)
 	-- upvalues: GuiService (copy), EnabledFunction (copy), GamepadMenu (copy)
 	local IsGamepadMenuOpen = p2.props.isGamepadMenuOpen
 	
@@ -624,7 +624,7 @@ function GamepadMenu.didUpdate(p2, p3, _) --[[ Line: 781 ]]
 	end
 end
 
-function GamepadMenu.willUnmount(p2) --[[ Line: 814 ]]
+function GamepadMenu.willUnmount(p2)
 	-- upvalues: FFlagTopBarSignalizeScreenSize (copy)
 	p2:unbindAllActions()
 	
@@ -633,7 +633,7 @@ function GamepadMenu.willUnmount(p2) --[[ Line: 814 ]]
 	end
 end
 
-function GamepadMenu.logExperienceMenuGamepadExposure(p2) --[[ Line: 822 ]]
+function GamepadMenu.logExperienceMenuGamepadExposure(p2)
 	-- upvalues: FFlagExperienceMenuGamepadExposureEnabled (copy), IXPServiceWrapper (copy), AppUserLayers (copy)
 	if FFlagExperienceMenuGamepadExposureEnabled and not p2.loggedExperienceMenuGamepadExposure then
 		IXPServiceWrapper:LogFlagLinkedUserLayerExposure(AppUserLayers.ExperienceMenuGamepadExposureLayer)
@@ -641,7 +641,7 @@ function GamepadMenu.logExperienceMenuGamepadExposure(p2) --[[ Line: 822 ]]
 	end
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p2) --[[ Line: 829 | Named "mapStateToProps" ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p2)
 	-- upvalues: FFlagTopBarSignalizeScreenSize (copy), VRService (copy), FFlagMountCoreGuiBackpackModule (copy)
 	local TopbarEnabled = p2.displayOptions.topbarEnabled
 	
@@ -659,10 +659,10 @@ return RoactRoduxModule.UNSTABLE_connect2(function(p2) --[[ Line: 829 | Named "m
 		menuOpen = p2.displayOptions.menuOpen,
 		isGamepadMenuOpen = p2.displayOptions.isGamepadMenuOpen
 	}
-end, function(Callback) --[[ Line: 855 | Named "mapDispatchToProps" ]]
+end, function(Callback)
 	-- upvalues: SetGamepadMenuOpenModule (copy)
 	return {
-		setGamepadMenuOpen = function(p2) --[[ Line: 857 ]]
+		setGamepadMenuOpen = function(p2)
 			-- upvalues: Callback (copy), SetGamepadMenuOpenModule (upval)
 			return Callback(SetGamepadMenuOpenModule(p2))
 		end

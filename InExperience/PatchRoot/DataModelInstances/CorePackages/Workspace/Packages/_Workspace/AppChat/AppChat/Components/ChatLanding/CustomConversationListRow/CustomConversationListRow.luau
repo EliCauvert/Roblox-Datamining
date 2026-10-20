@@ -7,7 +7,7 @@ local FFlagAppChatExtendConversationListRowDividersModule = require(AppChat.Flag
 local FFlagAppChatRemoveConversationListDividerModule = require(AppChat.Flags.FFlagAppChatRemoveConversationListDivider)
 local UseCustomConversationListRowPresentationModule = require(script.Parent.useCustomConversationListRowPresentation)
 
-return ReactModule.memo(function(p1) --[[ Line: 30 | Named "CustomConversationListRow" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseCustomConversationListRowPresentationModule (copy), FoundationModule (copy), ReactModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), FFlagAppChatExtendConversationListRowDividersModule (copy), FFlagAppChatRemoveConversationListDividerModule (copy)
 	local UseCustomConversationListRowPresentationModuleResult = UseCustomConversationListRowPresentationModule({
 		entryHeight = p1.entryHeight,

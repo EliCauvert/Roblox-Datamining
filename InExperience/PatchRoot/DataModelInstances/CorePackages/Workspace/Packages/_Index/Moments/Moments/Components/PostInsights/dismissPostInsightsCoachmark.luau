@@ -2,7 +2,7 @@
 local PostInsightsCoachmarkImpressionCacheModule = require(script.Parent.postInsightsCoachmarkImpressionCache)
 local EventNames = require(script:FindFirstAncestor("Moments").Parent.MomentsCommon).Analytics.EventNames
 
-return function() --[[ Line: 18 | Named "dismissPostInsightsCoachmark" ]]
+return function()
 	-- upvalues: PostInsightsCoachmarkImpressionCacheModule (copy), FirePostInsightsCoachmarkEventModule (copy), EventNames (copy)
 	local Value: number = PostInsightsCoachmarkImpressionCacheModule.getValue()
 	

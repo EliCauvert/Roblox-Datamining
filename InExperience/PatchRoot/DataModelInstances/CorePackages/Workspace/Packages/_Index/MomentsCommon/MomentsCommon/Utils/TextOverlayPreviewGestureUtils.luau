@@ -1,5 +1,5 @@
 ﻿return {
-	getTouchLineAngleDegrees = function(Entry): number? --[[ Line: 14 ]]
+	getTouchLineAngleDegrees = function(Entry): number?
 		if #Entry < 2 then
 			return nil
 		else
@@ -8,10 +8,10 @@
 			return (math.deg((math.atan2(EntryDelta.Y, EntryDelta.X))))
 		end
 	end,
-	getTouchRotationStepDegrees = function(p1, p2): number --[[ Line: 26 ]]
+	getTouchRotationStepDegrees = function(p1, p2): number
 		return (p2 - p1 + 90) % 180 - 90
 	end,
-	touchGestureStartsOnOverlay = function(Entry, Vector, Vector1): boolean --[[ Line: 34 ]]
+	touchGestureStartsOnOverlay = function(Entry, Vector, Vector1): boolean
 		if #Entry < 2 then
 			return false
 		else

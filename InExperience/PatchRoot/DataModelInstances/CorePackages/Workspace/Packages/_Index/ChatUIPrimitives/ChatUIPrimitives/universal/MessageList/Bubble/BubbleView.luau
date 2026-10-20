@@ -6,7 +6,7 @@ local GetBubblePaddingXFunction = require(script.Parent.useBubbleMaxWidth).getBu
 local UseBubbleContentMaxWidthFunction = require(script.Parent.useBubbleMaxWidth).useBubbleContentMaxWidth
 local IndexBindableFunction = FoundationModule.Utility.indexBindable
 
-return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 26 | Named "BubbleView" ]]
+return ReactModule.forwardRef(function(Frame, Ref)
 	-- upvalues: FoundationModule (copy), GetBubblePaddingXFunction (copy), UseBubbleContentMaxWidthFunction (copy), ReactModule (copy), IndexBindableFunction (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local BubblePaddingX = GetBubblePaddingXFunction(UseTokensResult)
@@ -18,7 +18,7 @@ return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 26 | Named "Bubble
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "col align-y-center auto-xy",
 		backgroundStyle = Frame.backgroundStyle,
-		cornerRadius = ReactModule.useMemo(function() --[[ Line: 34 ]]
+		cornerRadius = ReactModule.useMemo(function()
 			-- upvalues: IndexBindableFunction (upval), CornerRadii (copy)
 			return {
 				topLeft = IndexBindableFunction(CornerRadii, "topLeft"),
@@ -27,7 +27,7 @@ return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 26 | Named "Bubble
 				bottomRight = IndexBindableFunction(CornerRadii, "bottomRight")
 			}
 		end, { CornerRadii }),
-		padding = ReactModule.useMemo(function() --[[ Line: 43 ]]
+		padding = ReactModule.useMemo(function()
 			-- upvalues: Small (copy), BubblePaddingX (copy)
 			return {
 				top = UDim.new(0, Small),
@@ -36,7 +36,7 @@ return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 26 | Named "Bubble
 				right = UDim.new(0, BubblePaddingX)
 			}
 		end, { BubblePaddingX, Small }),
-		sizeConstraint = ReactModule.useMemo(function() --[[ Line: 55 ]]
+		sizeConstraint = ReactModule.useMemo(function()
 			-- upvalues: Size1000 (copy), Small (copy), UseBubbleContentMaxWidthResult (copy)
 			return {
 				MinSize = Vector2.new(0, Size1000 - Small * 2),

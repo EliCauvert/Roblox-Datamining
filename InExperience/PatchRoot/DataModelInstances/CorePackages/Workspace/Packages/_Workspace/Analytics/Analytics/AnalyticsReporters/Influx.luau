@@ -1,7 +1,7 @@
 ﻿local InfluxModule = {}
 InfluxModule.__index = InfluxModule
 
-function InfluxModule.new(_reporter) --[[ Line: 27 ]]
+function InfluxModule.new(_reporter)
 	-- upvalues: InfluxModule (copy)
 	local ValueType = type(_reporter)
 	assert(ValueType == "table" or ValueType == "userdata", "Unexpected value for reportingService")
@@ -11,12 +11,12 @@ function InfluxModule.new(_reporter) --[[ Line: 27 ]]
 	return config
 end
 
-function InfluxModule:setEnabled(_isEnabled) --[[ Line: 40 ]]
+function InfluxModule:setEnabled(_isEnabled)
 	assert(type(_isEnabled) == "boolean", "Expected isEnabled to be a boolean")
 	self._isEnabled = _isEnabled
 end
 
-function InfluxModule:reportSeries(SeriesName, p1, ThrottlingPercentage: number) --[[ Line: 48 ]]
+function InfluxModule:reportSeries(SeriesName, p1, ThrottlingPercentage: number)
 	local P5 = p1 or {}
 	assert(type(SeriesName) == "string", "Expected seriesName to be a string")
 	assert(type(P5) == "table", "Expected additionalArgs to be a table")

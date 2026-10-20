@@ -30,7 +30,7 @@ local GetSquadExperienceInviteStoreFunction = require(Parent.SquadsCore.Stores).
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local UseGetPresenceByUserId = if FFlagSquadsPresenceStoreMigration then require(Parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
 
-return function(p1) --[[ Line: 46 | Named "SquadLobbyRegroupRow" ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), React (copy), SquadExternalContractContext (copy), UseLocalizationFunction (copy), FFlagUseSignalsForSquadExperienceInvite (copy), UseSignalStateFunction (copy), GetSquadExperienceInviteStoreFunction (copy), UseSelectorFunction (copy), UseCurrentSquadIdFunction (copy), UseIsExperienceInviteRetryBlockedFunction (copy), FFlagSquadsPresenceStoreMigration (copy), UseGetPresenceByUserId (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), Foundation (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), Image (copy), RegroupTextTruncationFix (copy), ButtonSize (copy), ButtonVariant (copy), LoggerModule (copy), CreateExperienceInviteModule (copy), SquadExperienceInviteSource (copy), EventNamesModule (copy), RbxAnalyticsService (copy), SquadToastActionsAndStates (copy), SquadRegroupEntryPoint (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseContextResult = React.useContext(SquadExternalContractContext)
@@ -39,12 +39,12 @@ return function(p1) --[[ Line: 46 | Named "SquadLobbyRegroupRow" ]]
 		Body = "Notifications.SquadRegroupPrompt.ToastLabel.JoinANewServer",
 		Join = "Notifications.SquadRegroupPrompt.ToastAction.Join"
 	})
-	local UseResult = React.useCallback(function(p2) --[[ Line: 55 ]]
+	local UseResult = React.useCallback(function(p2)
 		return p2.Squad and (p2.Squad.Squad and p2.Squad.Squad.currentExperienceInvite)
 	end, {})
 	local UseCurrentSquadIdResult = UseCurrentSquadIdFunction()
 	local UseIsExperienceInviteRetryBlockedResult = UseIsExperienceInviteRetryBlockedFunction(UseCurrentSquadIdResult)
-	local UseResult1 = React.useCallback(function(p2) --[[ Line: 64 ]]
+	local UseResult1 = React.useCallback(function(p2)
 		-- upvalues: p1 (copy)
 		return p2 and (p2.Squad and (p2.Squad.Presence and (p2.Squad.Presence.byUserId and p2.Squad.Presence.byUserId[tostring(p1.localUserId)])))
 	end, { p1.localUserId })
@@ -93,14 +93,14 @@ return function(p1) --[[ Line: 46 | Named "SquadLobbyRegroupRow" ]]
 			variant = ButtonVariant.Standard,
 			isDisabled = (if FFlagUseSignalsForSquadExperienceInvite then UseSignalStateFunction(GetSquadExperienceInviteStoreFunction(false).getHasCurrentExperienceInvite) else UseSelectorFunction(UseResult) ~= nil) or UseIsExperienceInviteRetryBlockedResult,
 			testId = if FFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-regroup-row--join-button" else nil,
-			onActivated = React.useCallback(function() --[[ Line: 139 ]]
+			onActivated = React.useCallback(function()
 				-- upvalues: RootPlaceId (copy), LoggerModule (upval), UseDispatchResult (copy), CreateExperienceInviteModule (upval), UseContextResult (copy), SquadExperienceInviteSource (upval), EventNamesModule (upval), UseCurrentSquadIdResult (copy), p1 (copy), FFlagSquadsPresenceStoreMigration (upval), UseGetPresenceByUserIdResult (copy), RbxAnalyticsService (upval), SquadToastActionsAndStates (upval), SquadRegroupEntryPoint (upval)
 				if RootPlaceId == nil then
 					LoggerModule:warning("SquadRegroupEventReceiver: Join clicked but rootPlaceId is missing from local presence")
 					
 					return
 				else
-					UseDispatchResult(CreateExperienceInviteModule(tostring(RootPlaceId), UseContextResult, SquadExperienceInviteSource.Regroup)):andThen(function(Result) --[[ Line: 151 ]]
+					UseDispatchResult(CreateExperienceInviteModule(tostring(RootPlaceId), UseContextResult, SquadExperienceInviteSource.Regroup)):andThen(function(Result)
 						-- upvalues: UseContextResult (upval), EventNamesModule (upval), UseCurrentSquadIdResult (upval), p1 (upval), FFlagSquadsPresenceStoreMigration (upval), UseGetPresenceByUserIdResult (upval), RbxAnalyticsService (upval), SquadToastActionsAndStates (upval), SquadRegroupEntryPoint (upval)
 						UseContextResult.fireSquadAnalytics(EventNamesModule.SquadRegroupButtonClicked, {
 							clientTimestamp = os.time(),

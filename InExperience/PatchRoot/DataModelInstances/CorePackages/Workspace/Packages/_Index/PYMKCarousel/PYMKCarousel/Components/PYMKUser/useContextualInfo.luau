@@ -5,7 +5,7 @@ local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalizat
 local GetRecommendationContextualInfoDisplayFunction = require(Parent1.SocialCommon).Utils.getRecommendationContextualInfoDisplay
 local _ = require(Parent1.UserList)
 
-return function(p1) --[[ Line: 29 | Named "useContextualInfo" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), React (copy), GetRecommendationContextualInfoDisplayFunction (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		singularMutualConnection = "Feature.Friends.Label.OneMutual",
@@ -18,7 +18,7 @@ return function(p1) --[[ Line: 29 | Named "useContextualInfo" ]]
 		}
 	})
 	
-	return React.useMemo(function() --[[ Line: 40 ]]
+	return React.useMemo(function()
 		-- upvalues: p1 (copy), GetRecommendationContextualInfoDisplayFunction (upval), UseLocalizationResult (copy)
 		return GetRecommendationContextualInfoDisplayFunction({
 			recommendation = {

@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("ReportAnythingAnnotationIXPLayerName", "UserBehavior.ReportAnything")
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastString("ReportAnythingAnnotationIXPLayerName")
 end

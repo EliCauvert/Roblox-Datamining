@@ -9,10 +9,10 @@ local PopoverSide = FoundationModule.Enums.PopoverSide
 local _ = require(GenericAbuseReporting.BeduiV2.Utils.Translate.translate)
 local UseArTranslationFunction = require(GenericAbuseReporting.BeduiV2.Utils.Translate.arTranslation).useArTranslation
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 32 | Named "AbuseReportTooltip" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: UseArTranslationFunction (copy), ReactModule (copy), Coachmark (copy), PopoverAlign (copy), PopoverSide (copy), ButtonVariant (copy)
 	local TranslateIntoStringFunction = UseArTranslationFunction().translateIntoString
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 35 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		p1.onClose()
 	end, { p1.onClose })

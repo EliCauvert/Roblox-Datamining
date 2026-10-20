@@ -20,7 +20,7 @@ local config = {
 	cancel = "Feature.Moments.Action.Cancel"
 }
 
-return function(p1) --[[ Line: 36 | Named "CommentDeleteConfirmationDialog" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), Dialog (copy), FoundationModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local OnCancelFunction = p1.onCancel
@@ -32,11 +32,11 @@ return function(p1) --[[ Line: 36 | Named "CommentDeleteConfirmationDialog" ]]
 			isAutoFocusRoot = true,
 			surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
 			eventMap = EventMap,
-			eventHandlers = ReactModule.useMemo(function() --[[ Line: 39 ]]
+			eventHandlers = ReactModule.useMemo(function()
 				-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), OnCancelFunction (copy)
 				return {
 					[FocusNavigationEventNameEnum.NavigateBack] = {
-						handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 42 ]]
+						handler = InputHandlersModule.onRelease(function(p2)
 							-- upvalues: OnCancelFunction (upval)
 							OnCancelFunction()
 							p2:cancel()

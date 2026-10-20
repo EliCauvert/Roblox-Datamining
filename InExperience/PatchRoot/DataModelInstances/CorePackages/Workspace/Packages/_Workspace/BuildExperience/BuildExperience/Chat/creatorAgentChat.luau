@@ -44,12 +44,12 @@ local config1 = {
 	[ErrorCodes.OutOfCredits] = LocalizationStringsModule.CHAT_ERROR_OUT_OF_CREDITS
 }
 
-local function _(p1) --[[ Line: 125 | Named "getOutOfCreditsReason" ]]
+local function _(p1)
 	-- upvalues: config (copy)
 	return if p1 == nil then nil else config[p1]
 end
 
-local function resolvePromptFailure(p1, SetupError) --[[ Line: 134 ]]
+local function resolvePromptFailure(p1, SetupError)
 	-- upvalues: FFlagBuildExperiencePromptFailureTelemetry (copy), ErrorCodes (copy), config (copy), Forbidden (copy)
 	if p1 == nil then
 		return if SetupError == nil then nil else {
@@ -79,7 +79,7 @@ local function resolvePromptFailure(p1, SetupError) --[[ Line: 134 ]]
 	return config1
 end
 
-local function getPromptFailureTelemetryParameters(p1) --[[ Line: 160 ]]
+local function getPromptFailureTelemetryParameters(p1)
 	local config = { isContentPolicy = tostring(p1.isContentPolicy) }
 	
 	if p1.errorCode ~= nil then
@@ -94,7 +94,7 @@ local function getPromptFailureTelemetryParameters(p1) --[[ Line: 160 ]]
 	return config
 end
 
-local _ = function(p1, p2) --[[ Line: 176 | Named "addPromptFailureTelemetryParameters" ]]
+local _ = function(p1, p2)
 	-- upvalues: LocalizationStringsModule (copy), config1 (copy)
 	local RequestFailure = p2.requestFailure
 	local CHATPOLICYREJECTION = nil
@@ -128,13 +128,13 @@ local _ = function(p1, p2) --[[ Line: 176 | Named "addPromptFailureTelemetryPara
 	p1.errorCopyKey = CHATPOLICYREJECTION
 end
 
-local _ = function(p1, List) --[[ Line: 188 | Named "addLifecycleTelemetryParameters" ]]
+local _ = function(p1, List)
 	for i, value in List do
 		p1[i] = value
 	end
 end
 
-local _ = function(p2) --[[ Line: 197 | Named "getAgentTurnFailureTelemetryParameters" ]]
+local _ = function(p2)
 	local config = { status = p2.status }
 	
 	if p2.stopReason ~= nil then
@@ -154,7 +154,7 @@ local config2 = {
 }
 local config3 = { tool_call_update = true, tool_call_content_chunk = true }
 
-local function trackPromptActivity(SendPromptResult, p2, Callback) --[[ Line: 225 ]]
+local function trackPromptActivity(SendPromptResult, p2, Callback)
 	-- upvalues: TurnStateReducer (copy), config2 (copy), config3 (copy), IsWaitingOnUserInputModule (copy), SignalsModule (copy)
 	local EmptyTurnState = TurnStateReducer.createEmptyTurnState("", nil)
 	local HasResponse = false
@@ -162,7 +162,7 @@ local function trackPromptActivity(SendPromptResult, p2, Callback) --[[ Line: 22
 	local TurnHandle = nil
 	local OnUpdateResult = nil
 	
-	local function _() --[[ Line: 236 | Named "reportActivity" ]]
+	local function _()
 		-- upvalues: p2 (copy), HasResponse (ref), IsWaitingOnUser (ref)
 		p2.markActivity({
 			hasResponse = HasResponse,
@@ -170,7 +170,7 @@ local function trackPromptActivity(SendPromptResult, p2, Callback) --[[ Line: 22
 		})
 	end
 	
-	local function onUpdate(p3, SequenceNumber) --[[ Line: 243 ]]
+	local function onUpdate(p3, SequenceNumber)
 		-- upvalues: config2 (upval), HasResponse (ref), config3 (upval), EmptyTurnState (ref), TurnStateReducer (upval), IsWaitingOnUser (ref), IsWaitingOnUserInputModule (upval), Callback (copy), p2 (copy)
 		if config2[p3.sessionUpdate] == true then
 			HasResponse = true
@@ -185,7 +185,7 @@ local function trackPromptActivity(SendPromptResult, p2, Callback) --[[ Line: 22
 		})
 	end
 	
-	local Effect = SignalsModule.createEffect(function(p3) --[[ Line: 255 ]]
+	local Effect = SignalsModule.createEffect(function(p3)
 		-- upvalues: SendPromptResult (copy), Callback (copy), TurnHandle (ref), OnUpdateResult (ref), onUpdate (copy), IsWaitingOnUserInputModule (upval), EmptyTurnState (ref), IsWaitingOnUser (ref), p2 (copy), HasResponse (ref)
 		local TurnHandle1 = SendPromptResult.getTurnHandle(p3)
 		local SubmittedToolCallIds = Callback(p3).submittedToolCallIds
@@ -205,7 +205,7 @@ local function trackPromptActivity(SendPromptResult, p2, Callback) --[[ Line: 22
 		end
 	end)
 	
-	return function() --[[ Line: 270 ]]
+	return function()
 		-- upvalues: Effect (copy), OnUpdateResult (ref)
 		Effect()
 		
@@ -216,11 +216,11 @@ local function trackPromptActivity(SendPromptResult, p2, Callback) --[[ Line: 22
 	end
 end
 
-local _ = function(p2): boolean --[[ Line: 279 | Named "isAgentTurnFailure" ]]
+local _ = function(p2): boolean
 	return p2.status == "failed" or p2.stopReason == "error"
 end
 
-local _ = function(p2) --[[ Line: 283 | Named "formatSetupErrorMessage" ]]
+local _ = function(p2)
 	-- upvalues: LocalizationStringsModule (copy), config1 (copy)
 	local config = {
 		isContentPolicy = false,
@@ -244,7 +244,7 @@ local _ = function(p2) --[[ Line: 283 | Named "formatSetupErrorMessage" ]]
 	return LocalizationStringsModule.CHAT_DEFAULT_FAILURE
 end
 
-local function createLocalToolControllers(p2, p3, p4) --[[ Line: 294 ]]
+local function createLocalToolControllers(p2, p3, p4)
 	-- upvalues: LocalToolOverlayModule (copy), AskUserControllerModule (copy), ProposePlanControllerModule (copy), ClientLogsControllerModule (copy), ClientDataModelControllerModule (copy), AskManageDevProductControllerModule (copy)
 	local t = {}
 	local LocalToolOverlayModuleResult = LocalToolOverlayModule()
@@ -258,7 +258,7 @@ local function createLocalToolControllers(p2, p3, p4) --[[ Line: 294 ]]
 		getOptimisticLocalTools = LocalToolOverlayModuleResult.getOptimisticLocalTools,
 		getLocalToolActions = LocalToolOverlayModuleResult.getLocalToolActions,
 		hasDisplayedAnswerStack = AskUserControllerModuleResult.hasDisplayedAnswerStack,
-		syncFromTurnState = function(p5) --[[ Line: 317 ]]
+		syncFromTurnState = function(p5)
 			-- upvalues: AskUserControllerModuleResult (copy), ProposePlanControllerModuleResult (copy), ClientLogsControllerModuleResult (copy), ClientDataModelControllerModuleResult (copy), AskManageDevProductControllerModuleResult (copy)
 			AskUserControllerModuleResult.syncAnswerStack(p5)
 			ProposePlanControllerModuleResult.syncPlanProposal(p5)
@@ -271,12 +271,12 @@ local function createLocalToolControllers(p2, p3, p4) --[[ Line: 294 ]]
 				AskManageDevProductControllerModuleResult.syncManageDevProductRequests(p5)
 			end
 		end,
-		trySubmitComposerText = function(p5) --[[ Line: 328 ]]
+		trySubmitComposerText = function(p5)
 			-- upvalues: AskUserControllerModuleResult (copy), ProposePlanControllerModuleResult (copy), AskManageDevProductControllerModuleResult (copy)
 			return AskUserControllerModuleResult.trySubmitComposerText(p5) or (ProposePlanControllerModuleResult.trySubmitComposerText(p5) or AskManageDevProductControllerModuleResult ~= nil and AskManageDevProductControllerModuleResult.trySubmitComposerText(p5))
 		end,
 		trySubmitAnswerText = AskUserControllerModuleResult.trySubmitAnswerText,
-		stopPending = function() --[[ Line: 334 ]]
+		stopPending = function()
 			-- upvalues: AskUserControllerModuleResult (copy), ProposePlanControllerModuleResult (copy), ClientDataModelControllerModuleResult (copy), AskManageDevProductControllerModuleResult (copy)
 			AskUserControllerModuleResult.stopPendingAnswer()
 			ProposePlanControllerModuleResult.stopPendingPlan()
@@ -292,7 +292,7 @@ local function createLocalToolControllers(p2, p3, p4) --[[ Line: 294 ]]
 end
 
 return {
-	createLiveAssistantTurn = function(p2, Prompt, Callback2, p3, p4, Callback) --[[ Line: 349 ]]
+	createLiveAssistantTurn = function(p2, Prompt, Callback2, p3, p4, Callback)
 		-- upvalues: createLocalToolControllers (copy), StudioAskUserTool (copy), StudioProposePlanTool (copy), StudioClientLogsTool (copy), FFlagBuildExperienceClientDataModelTools (copy), StudioClientDataModelTools (copy), FFlagBuildExperienceManageDevProductModule (copy), StudioManageDevProductTool (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), CreatePromptLifecycleTelemetryModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), resolvePromptFailure (copy), Debug (copy), getPromptFailureTelemetryParameters (copy), LocalizationStringsModule (copy), config1 (copy), trackPromptActivity (copy)
 		local LocalToolControllers = createLocalToolControllers(p2, p3, p4)
 		local UniverseId = p2.universeId
@@ -309,7 +309,7 @@ return {
 		if FFlagBuildExperienceManageDevProductModule then
 			table.insert(List, StudioManageDevProductTool.LOCAL_TOOL_DEFINITION)
 		end
-		local PromptLifecycleTelemetryModule = if FFlagBuildExperiencePromptFailureTelemetry then CreatePromptLifecycleTelemetryModule(function() --[[ Line: 384 ]]
+		local PromptLifecycleTelemetryModule = if FFlagBuildExperiencePromptFailureTelemetry then CreatePromptLifecycleTelemetryModule(function()
 			-- upvalues: UniverseId (copy), p2 (copy)
 			return {
 				universeId = UniverseId,
@@ -318,7 +318,7 @@ return {
 			}
 		end) else nil
 		
-		local function handleReceived(TurnId) --[[ Line: 402 ]]
+		local function handleReceived(TurnId)
 			-- upvalues: FFlagBuildEventsUpdate1Module (upval), SendBuildExperienceEventModule (upval), UniverseId (copy), p2 (copy), Callback (copy)
 			if FFlagBuildEventsUpdate1Module then
 				SendBuildExperienceEventModule("SEND_PROMPT_RECIEVED", {
@@ -336,7 +336,7 @@ return {
 		local SendPromptResult = nil
 		local Callback1: (() -> ())? = nil
 		
-		local function _(p5) --[[ Line: 419 | Named "finishPromptTelemetry" ]]
+		local function _(p5)
 			-- upvalues: Callback1 (ref)
 			if Callback1 ~= nil then
 				Callback1()
@@ -354,7 +354,7 @@ return {
 					providerConfig = { universeId = UniverseId }
 				}
 			},
-			onDroppedChatMessage = function(MessageId) --[[ Line: 393 ]]
+			onDroppedChatMessage = function(MessageId)
 				-- upvalues: SendBuildExperienceEventModule (upval), UniverseId (copy), p2 (copy)
 				SendBuildExperienceEventModule("DROPPED_CHAT_MESSAGE", {
 					universeId = UniverseId,
@@ -364,7 +364,7 @@ return {
 				})
 			end,
 			onReceived = if FFlagBuildEventsUpdate1Module or Callback ~= nil then handleReceived else nil,
-			onCompleted = function(p5) --[[ Line: 428 ]]
+			onCompleted = function(p5)
 				-- upvalues: resolvePromptFailure (upval), SendPromptResult (ref), Debug (upval), UniverseId (copy), p2 (copy), getPromptFailureTelemetryParameters (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), PromptLifecycleTelemetryModule (copy), LocalizationStringsModule (upval), config1 (upval), SendBuildExperienceEventModule (upval), Callback1 (ref), Callback2 (copy)
 				local ResolvePromptFailureResult = resolvePromptFailure(p5, SendPromptResult.getSetupError(false))
 				
@@ -453,7 +453,7 @@ return {
 		return {
 			getOptimisticLocalTools = LocalToolControllers.getOptimisticLocalTools,
 			getLocalToolActions = LocalToolControllers.getLocalToolActions,
-			getSetupErrorText = function(p6) --[[ Line: 484 ]]
+			getSetupErrorText = function(p6)
 				-- upvalues: SendPromptResult (ref), LocalizationStringsModule (upval), config1 (upval)
 				local SetupError = SendPromptResult.getSetupError(p6)
 				
@@ -481,7 +481,7 @@ return {
 				end
 				return LocalizationStringsModule.CHAT_DEFAULT_FAILURE
 			end,
-			start = function() --[[ Line: 489 ]]
+			start = function()
 				-- upvalues: FFlagBuildExperiencePromptFailureTelemetry (upval), PromptLifecycleTelemetryModule (copy), Callback1 (ref), trackPromptActivity (upval), SendPromptResult (ref), LocalToolControllers (copy)
 				if FFlagBuildExperiencePromptFailureTelemetry and PromptLifecycleTelemetryModule ~= nil then
 					PromptLifecycleTelemetryModule.start()
@@ -492,13 +492,13 @@ return {
 				end
 				SendPromptResult.start()
 			end,
-			stop = function() --[[ Line: 503 ]]
+			stop = function()
 				-- upvalues: LocalToolControllers (copy), SendPromptResult (ref)
 				LocalToolControllers.stopPending()
 				SendPromptResult.stop()
 			end,
 			reportUserStop = if FFlagBuildExperiencePromptFailureTelemetry and PromptLifecycleTelemetryModule ~= nil then PromptLifecycleTelemetryModule.reportUserStop else nil,
-			detach = if FFlagBuildExperiencePromptFailureTelemetry and PromptLifecycleTelemetryModule ~= nil then function() --[[ Line: 520 ]]
+			detach = if FFlagBuildExperiencePromptFailureTelemetry and PromptLifecycleTelemetryModule ~= nil then function()
 				-- upvalues: LocalToolControllers (copy), PromptLifecycleTelemetryModule (copy), Callback1 (ref)
 				LocalToolControllers.stopPending()
 				
@@ -513,7 +513,7 @@ return {
 			trySubmitAnswerText = LocalToolControllers.trySubmitAnswerText
 		}
 	end,
-	createResumedAssistantTurn = function(p6, p7, Callback, AfterSequenceId, p8, p9) --[[ Line: 531 ]]
+	createResumedAssistantTurn = function(p6, p7, Callback, AfterSequenceId, p8, p9)
 		-- upvalues: createLocalToolControllers (copy), SignalsModule (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), SendBuildExperienceEventModule (copy)
 		local LocalToolControllers = createLocalToolControllers(p6, p8, p9)
 		local Flag = false
@@ -521,7 +521,7 @@ return {
 		local StartPollingActiveTurnResult: (() -> ())? = nil
 		local Effect: (() -> ())? = nil
 		
-		local function _() --[[ Line: 553 | Named "cleanupObservers" ]]
+		local function _()
 			-- upvalues: Effect (ref), StartPollingActiveTurnResult (ref)
 			if Effect ~= nil then
 				Effect()
@@ -533,7 +533,7 @@ return {
 			end
 		end
 		
-		local function finish() --[[ Line: 564 ]]
+		local function finish()
 			-- upvalues: Flag1 (ref), Effect (ref), StartPollingActiveTurnResult (ref), FFlagBuildExperiencePromptFailureTelemetry (upval), p7 (copy), SendBuildExperienceEventModule (upval), p6 (copy), Callback (copy)
 			if Flag1 then return end
 			Flag1 = true
@@ -575,12 +575,12 @@ return {
 			getOptimisticLocalTools = LocalToolControllers.getOptimisticLocalTools,
 			getLocalToolActions = LocalToolControllers.getLocalToolActions,
 			getSetupErrorText = SignalsModule.createSignal(nil),
-			start = function() --[[ Line: 610 ]]
+			start = function()
 				-- upvalues: Flag (ref), SendBuildExperienceEventModule (upval), p6 (copy), AfterSequenceId (copy), StartPollingActiveTurnResult (ref), Effect (ref), SignalsModule (upval), p7 (copy), finish (copy)
 				if Flag then return end
 				Flag = true
 				local config = {
-					onDroppedChatMessage = function(MessageId) --[[ Line: 616 ]]
+					onDroppedChatMessage = function(MessageId)
 						-- upvalues: SendBuildExperienceEventModule (upval), p6 (upval)
 						SendBuildExperienceEventModule("DROPPED_CHAT_MESSAGE", {
 							universeId = p6.universeId,
@@ -595,14 +595,14 @@ return {
 					config.afterSequenceId = AfterSequenceId
 				end
 				StartPollingActiveTurnResult = p6.startPollingActiveTurn(config)
-				Effect = SignalsModule.createEffect(function(p10) --[[ Line: 630 ]]
+				Effect = SignalsModule.createEffect(function(p10)
 					-- upvalues: p7 (upval), finish (upval)
 					if p7.state(p10).isDone then
 						finish()
 					end
 				end)
 			end,
-			stop = function() --[[ Line: 642 ]]
+			stop = function()
 				-- upvalues: Flag1 (ref), Effect (ref), StartPollingActiveTurnResult (ref), LocalToolControllers (copy), p7 (copy)
 				Flag1 = true
 				
@@ -617,7 +617,7 @@ return {
 				LocalToolControllers.stopPending()
 				p7.cancel()
 			end,
-			reportUserStop = if FFlagBuildExperiencePromptFailureTelemetry then function() --[[ Line: 593 ]]
+			reportUserStop = if FFlagBuildExperiencePromptFailureTelemetry then function()
 				-- upvalues: Flag1 (ref), Flag2 (ref), SendBuildExperienceEventModule (upval), p6 (copy)
 				if not Flag1 and not Flag2 then
 					Flag2 = true
@@ -630,7 +630,7 @@ return {
 					return
 				end
 			end else nil,
-			detach = function() --[[ Line: 649 ]]
+			detach = function()
 				-- upvalues: Flag1 (ref), Effect (ref), StartPollingActiveTurnResult (ref), LocalToolControllers (copy)
 				Flag1 = true
 				
@@ -649,7 +649,7 @@ return {
 			trySubmitAnswerText = LocalToolControllers.trySubmitAnswerText
 		}
 	end,
-	getPromptFailureComposerError = function(p6) --[[ Line: 100 ]]
+	getPromptFailureComposerError = function(p6)
 		-- upvalues: LocalizationStringsModule (copy), config1 (copy)
 		if p6.isContentPolicy then
 			return LocalizationStringsModule.CHAT_POLICY_REJECTION
@@ -666,7 +666,7 @@ return {
 		end
 		return LocalizationStringsModule.CHAT_DEFAULT_FAILURE
 	end,
-	getToolResultFailureComposerError = function(ErrorCode) --[[ Line: 116 ]]
+	getToolResultFailureComposerError = function(ErrorCode)
 		-- upvalues: Forbidden (copy), LocalizationStringsModule (copy), config1 (copy)
 		local config = {
 			outOfCreditsReason = nil,

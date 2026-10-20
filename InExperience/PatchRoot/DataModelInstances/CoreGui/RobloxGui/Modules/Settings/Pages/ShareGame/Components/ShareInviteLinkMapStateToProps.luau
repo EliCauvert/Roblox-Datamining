@@ -2,7 +2,7 @@
 local ShareLinksNetworking = ReducerDependencies.ShareLinksNetworking
 local ShareLinksRodux = ReducerDependencies.ShareLinksRodux
 
-return function(p1) --[[ Line: 8 ]]
+return function(p1)
 	-- upvalues: ShareLinksNetworking (copy), ShareLinksRodux (copy)
 	return {
 		shareInviteLink = p1.ShareLinks.Invites.ShareInviteLink,

@@ -1,9 +1,9 @@
 ﻿local PromiseModule = require(script:FindFirstAncestor("GraphQlShared").Parent.Promise)
 
 return {
-	SuccessfulRequest = function(ResponseBody) --[[ Line: 5 ]]
+	SuccessfulRequest = function(ResponseBody)
 		-- upvalues: PromiseModule (copy)
-		return function(_, _, _, _, _) --[[ Line: 6 ]]
+		return function(_, _, _, _, _)
 			-- upvalues: ResponseBody (copy), PromiseModule (upval)
 			return PromiseModule.resolve({
 				responseCode = 200,

@@ -3,7 +3,7 @@ local _ = require(ProfilePlatform.Types.Component)
 local EnumsModule = require(ProfilePlatform.Common.Enums)
 local GetSupportedActionsForProfileTypeModule = require(ProfilePlatform.Hooks.getSupportedActionsForProfileType)
 
-return function() --[[ Line: 7 ]]
+return function()
 	-- upvalues: EnumsModule (copy), GetSupportedActionsForProfileTypeModule (copy)
 	return {
 		{ component = EnumsModule.Components.ContactProfileHeader },

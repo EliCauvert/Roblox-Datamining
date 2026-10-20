@@ -9,7 +9,7 @@ local _ = require(GameTile.GameTileTypes)
 local TileBadgeIconNamesByType = GameTileConstantsModule.TileBadgeIconNamesByType
 local TileBadgeComponentTypeValues = GameTileConstantsModule.TileBadgeComponentTypeValues
 
-local function getBadgeStyleOptions(p1, TileBadgeComponentType) --[[ Line: 20 ]]
+local function getBadgeStyleOptions(p1, TileBadgeComponentType)
 	-- upvalues: TileBadgeComponentTypeValues (copy), FlaggedMutedErrorFunction (copy)
 	local config = {
 		[TileBadgeComponentTypeValues.Pill] = {
@@ -33,13 +33,13 @@ local function getBadgeStyleOptions(p1, TileBadgeComponentType) --[[ Line: 20 ]]
 	return Entry or config[TileBadgeComponentTypeValues.Pill]
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 48 | Named "GameTileThumbnailBadges" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), GameTileConstantsModule (copy), FlaggedMutedErrorFunction (copy), TileBadgeIconNamesByType (copy), GameTileOverlayBadgeModule (copy), getBadgeStyleOptions (copy)
 	local Padding = nil
 	local UseTokensResult = UseTokensFunction()
 	Padding = p1.padding or UseTokensResult.Padding.Medium
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 56 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseBindingResult2 (copy), Padding (ref)
 		UseBindingResult2(Frame.AbsoluteSize.X - Padding * 2)
 	end, { Padding })

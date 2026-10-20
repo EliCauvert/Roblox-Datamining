@@ -5,7 +5,7 @@ local UseAXCatalogStoreContextModule = require(AvatarExperienceCatalog.Context.u
 local _ = require(AvatarExperienceCatalog.Stores.createCatalogOffersBannerStore)
 local Signal = require(Parent.Signals).createSignal(nil)
 
-return function(): boolean --[[ Line: 32 | Named "useHasAtLeastOneCatalogOffer" ]]
+return function(): boolean
 	-- upvalues: UseAXCatalogStoreContextModule (copy), Signal (copy), UseSignalStateFunction (copy)
 	local CatalogOffersBannerStore = UseAXCatalogStoreContextModule().catalogOffersBannerStore
 	local UseSignalStateResult = UseSignalStateFunction(if CatalogOffersBannerStore == nil then Signal else CatalogOffersBannerStore.getPayload)

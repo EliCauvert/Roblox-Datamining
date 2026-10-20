@@ -25,7 +25,7 @@ local NewResult = require(Chrome.ChromeShared.Service.WindowSizeSignal).new(Size
 local ConstantsModule1 = require(Chrome.ChromeShared.Unibar.Constants)
 local NewResult1 = require(RobloxGui.Modules.SelfView.Analytics).new()
 local SELFIEVIEWID = ConstantsModule1.SELFIE_VIEW_ID
-local NewResult2 = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(ServiceModule:onIntegrationStatusChanged(), function() --[[ Line: 52 ]]
+local NewResult2 = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(ServiceModule:onIntegrationStatusChanged(), function()
 	-- upvalues: ServiceModule (copy), SELFIEVIEWID (copy)
 	return ServiceModule:isWindowOpen(SELFIEVIEWID)
 end)
@@ -41,13 +41,13 @@ local RegisterResult = ServiceModule:register({
 	sideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement.BelowFold,
 	windowSize = NewResult,
 	initialAvailability = require(Chrome.ChromeShared.Service.ChromeUtils).AvailabilitySignalState.Unavailable,
-	activated = function() --[[ Line: 71 ]]
+	activated = function()
 		-- upvalues: ServiceModule (copy), SELFIEVIEWID (copy)
 		ServiceModule:toggleWindow(SELFIEVIEWID)
 	end,
 	isActivated = NewResult2,
 	components = {
-		Icon = function(_) --[[ Line: 78 ]]
+		Icon = function(_)
 			-- upvalues: FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule1 (copy), ReactModule (copy), CommonIconModule (copy), NewResult2 (copy), Module (copy), ServiceModule (copy), SELFIEVIEWID (copy)
 			local ICONSIZE = if FFlagTokenizeUnibarConstantsWithStyleProvider then UnibarStyle.use().ICON_SIZE else ConstantsModule1.ICON_SIZE
 			
@@ -59,7 +59,7 @@ local RegisterResult = ServiceModule:register({
 				CameraStatusDot = if Module.useCameraOn() and not ServiceModule:isWindowOpen(SELFIEVIEWID) then ReactModule.createElement(Module.CameraStatusDot, { ZIndex = 2, Position = UDim2.fromScale(0.8, 0.7) }) else nil
 			}, {})
 		end,
-		Window = function(_) --[[ Line: 100 ]]
+		Window = function(_)
 			-- upvalues: ServiceModule (copy), SELFIEVIEWID (copy), ReactModule (copy), Module (copy), NewResult (copy)
 			local DragConnectionResult = ServiceModule:dragConnection(SELFIEVIEWID)
 			
@@ -71,7 +71,7 @@ local RegisterResult = ServiceModule:register({
 		end
 	}
 })
-ViewportUtilModule.screenSize:connect(function(p1) --[[ Line: 112 ]]
+ViewportUtilModule.screenSize:connect(function(p1)
 	-- upvalues: ServiceModule (copy), SELFIEVIEWID (copy), SizingUtilsModule (copy), NewResult (copy)
 	if not ServiceModule:isWindowOpen(SELFIEVIEWID) then
 		local Size = SizingUtilsModule.getSize(p1, NewResult:getIsLarge())
@@ -79,7 +79,7 @@ ViewportUtilModule.screenSize:connect(function(p1) --[[ Line: 112 ]]
 	end
 end, true)
 
-local function Callback() --[[ Line: 119 ]]
+local function Callback()
 	-- upvalues: StarterGui (copy), GetFFlagChromeSelfViewIgnoreCoreGuiModule (copy), FaceChatUtilsModule (copy), RegisterResult (copy)
 	local CoreGuiEnabled = StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.SelfView)
 	
@@ -104,7 +104,7 @@ local function Callback() --[[ Line: 119 ]]
 	end
 end
 
-local function _() --[[ Line: 147 ]]
+local function _()
 	-- upvalues: FaceChatUtilsModule (copy), NewResult1 (copy)
 	local Permissions = FaceChatUtilsModule.getPermissions()
 	NewResult1:reportExperienceSettings(true, Permissions.placeCamEnabled, Permissions.placeMicEnabled)
@@ -138,7 +138,7 @@ if game:GetEngineFeature("EnableSelfViewToggleApi") then
 	if Connection1 then
 		Connection1:Disconnect()
 	end
-	local _ = SocialService.SelfViewVisible:Connect(function(SelfViewPosition) --[[ Line: 185 ]]
+	local _ = SocialService.SelfViewVisible:Connect(function(SelfViewPosition)
 		-- upvalues: ConstantsModule (copy), ServiceModule (copy), SELFIEVIEWID (copy), NewResult (copy), ViewportUtilModule (copy), ConstantsModule1 (copy), ApplyDisplayScaleResult (copy)
 		local ApplyDisplayScaleResult1 = ConstantsModule.ApplyDisplayScale(ConstantsModule.ScreenSideOffset)
 		
@@ -153,7 +153,7 @@ if game:GetEngineFeature("EnableSelfViewToggleApi") then
 			end
 		end
 	end)
-	local _ = SocialService.SelfViewHidden:Connect(function() --[[ Line: 219 ]]
+	local _ = SocialService.SelfViewHidden:Connect(function()
 		-- upvalues: ServiceModule (copy), SELFIEVIEWID (copy)
 		if ServiceModule:isWindowOpen(SELFIEVIEWID) then
 			ServiceModule:toggleWindow(SELFIEVIEWID)

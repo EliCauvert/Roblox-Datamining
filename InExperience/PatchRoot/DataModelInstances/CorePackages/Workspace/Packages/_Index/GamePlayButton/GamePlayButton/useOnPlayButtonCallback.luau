@@ -59,13 +59,13 @@ local FFlagLuaAppPlayButtonPrivatePT = require(Parent.SharedFlags).FFlagLuaAppPl
 local FFlagLuaAppPlayButtonPrivatePTEnableSingleButton = require(Parent.SharedFlags).FFlagLuaAppPlayButtonPrivatePTEnableSingleButton
 local FFlagLuaAppPlayButtonPrivatePTEnableDualButton = require(Parent.SharedFlags).FFlagLuaAppPlayButtonPrivatePTEnableDualButton
 
-return function(UniverseId, ReferralSource, Ctx, _, p1, p2, p3, Enabled) --[[ Line: 82 ]]
+return function(UniverseId, ReferralSource, Ctx, _, p1, p2, p3, Enabled)
 	-- upvalues: UseRoactServiceFunction (copy), RoactAnalytics (copy), AppUpdateService (copy), AppEventIngestService (copy), UseDispatchFunction (copy), UseSelectorFunction (copy), FFlagMigrateGameInfoToStore (copy), GameHydrationReactModule (copy), UseGameInfosSelectorFunction (copy), UseGameProductInfoSelectorFunction (copy), UseRouteNameFunction (copy), GetFFlagIsSquadEnabledFunction (copy), ReactModule (copy), SquadExternalContractContext (copy), GetFFlagLuaAppEnableVirtualEventPlaceIdFunction (copy), FFlagLuaAppPlayButtonPrivatePT (copy), UsePlayButtonLaunchGameModule (copy), FFlagLuaAppPlayableUxTreatment (copy), UsePlayButtonLaunchWithUxTreatmentModule (copy), UsePlayButtonLaunchAfterSeventeenPlusUpsellModule (copy), UseAgeVerificationOverlayCallbackModule (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy), HandleUpdateFunction (copy), CanPerformBinaryUpdateEnabledEngineFeature (copy), RoactNetworking (copy), FFlagLuaAppLaunchWhenLoadingForce (copy), FFlagLuaAppLaunchWhenLoadingEdp (copy), DiscoveryEventErrorLogger (copy), LaunchPlaytestWithLoadingStateModule (copy), FFlagLuaAppPlayButtonPrivatePTEnableSingleButton (copy), UsePrivatePlaytestLaunchWithUpsellModule (copy), JoinGamePlayButtonFunction (copy), PlayButtonReferralSourceModule (copy), GamePlayButtonShareLinkAnalyticsModule (copy), PlayButtonStatesModule (copy), CloseCentralOverlayFunction (copy), FetchGamePlayabilityAndProductInfo (copy), OpenCentralOverlayForPurchaseGameModule (copy), FFlagShipUnifiedPurchaseFlowToPaidAccess (copy), OpenCentralOverlayForUnifiedPurchasePromptModule (copy), ProductPurchaseSurface (copy), GetIsUserEligibleForUnifiedPurchaseFlowFunction (copy), FFlagLuaAppPlayButtonPrivatePTEnableDualButton (copy), ApiPostPreparePurchaseModule (copy), UnlockPlayIntentFunction (copy), InvalidPlayIntentFunction (copy), FFlagLuaAppPlayButtonLoadingDurationTelemetry (copy), CreateExperienceInviteFunction (copy), FFlagEnableSquadRegroupExperimentation (copy), SquadExperienceInviteSource (copy), FFlagEnablePrivatePartyStartJoin (copy), SquadExperienceInviteType (copy), FFlagEnableGameJoinEarlyAccess (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactAnalytics)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(AppUpdateService)
 	local UseRoactServiceResult2 = UseRoactServiceFunction(AppEventIngestService)
 	local UseDispatchResult = UseDispatchFunction()
-	local UseSelectorResult = UseSelectorFunction(function(p4) --[[ Line: 97 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p4)
 		-- upvalues: UniverseId (copy)
 		return p4.GameDetails[UniverseId]
 	end)
@@ -78,7 +78,7 @@ return function(UniverseId, ReferralSource, Ctx, _, p1, p2, p3, Enabled) --[[ Li
 		v1 = UseGameInfosSelectorFunction(UniverseId)
 	end
 	local UseGameProductInfoSelectorResult = UseGameProductInfoSelectorFunction(UniverseId)
-	local UseSelectorResult1 = UseSelectorFunction(function(p4) --[[ Line: 108 ]]
+	local UseSelectorResult1 = UseSelectorFunction(function(p4)
 		-- upvalues: UniverseId (copy)
 		return p4.PlayabilityStatus[UniverseId]
 	end)
@@ -98,12 +98,12 @@ return function(UniverseId, ReferralSource, Ctx, _, p1, p2, p3, Enabled) --[[ Li
 	local UsePlayButtonLaunchWithUxTreatmentModuleResult = if FFlagLuaAppPlayableUxTreatment then UsePlayButtonLaunchWithUxTreatmentModule(UseSelectorResult1, UniverseId, UsePlayButtonLaunchGameModuleResult, UseRouteNameResult) else nil
 	local UsePlayButtonLaunchAfterSeventeenPlusUpsellModuleResult = UsePlayButtonLaunchAfterSeventeenPlusUpsellModule(UseSelectorResult1, UniverseId, if FFlagLuaAppPlayableUxTreatment then UsePlayButtonLaunchWithUxTreatmentModuleResult else UsePlayButtonLaunchGameModuleResult, UseRouteNameResult)
 	local UseAgeVerificationOverlayCallbackModuleResult = UseAgeVerificationOverlayCallbackModule(UniverseId, UsePlayButtonLaunchGameModuleResult, UsePlayButtonLaunchAfterSeventeenPlusUpsellModuleResult)
-	local UseResult = ReactModule.useCallback(function(p4, p5) --[[ Line: 172 ]]
+	local UseResult = ReactModule.useCallback(function(p4, p5)
 		-- upvalues: UseAgeVerificationOverlayCallbackModuleResult (copy), FFlagLuaAppDemoModePlayButtonTelemetry (upval), UsePlayButtonLaunchAfterSeventeenPlusUpsellModuleResult (copy), HandleUpdateFunction (upval), UseDispatchResult (copy), UseRoactServiceResult1 (copy), CanPerformBinaryUpdateEnabledEngineFeature (upval), UseRoactServiceResult (copy), Ctx (copy)
-		HandleUpdateFunction(UseDispatchResult, UseRoactServiceResult1, CanPerformBinaryUpdateEnabledEngineFeature, UseRoactServiceResult, Ctx, if game:GetEngineFeature("VoiceChatSupported") then function() --[[ Line: 175 ]]
+		HandleUpdateFunction(UseDispatchResult, UseRoactServiceResult1, CanPerformBinaryUpdateEnabledEngineFeature, UseRoactServiceResult, Ctx, if game:GetEngineFeature("VoiceChatSupported") then function()
 			-- upvalues: UseAgeVerificationOverlayCallbackModuleResult (upval), p4 (copy), FFlagLuaAppDemoModePlayButtonTelemetry (upval), p5 (copy)
 			UseAgeVerificationOverlayCallbackModuleResult(p4, if FFlagLuaAppDemoModePlayButtonTelemetry then p5 else nil)
-		end else function() --[[ Line: 182 ]]
+		end else function()
 			-- upvalues: UsePlayButtonLaunchAfterSeventeenPlusUpsellModuleResult (upval), p4 (copy), FFlagLuaAppDemoModePlayButtonTelemetry (upval), p5 (copy)
 			UsePlayButtonLaunchAfterSeventeenPlusUpsellModuleResult(p4, if FFlagLuaAppDemoModePlayButtonTelemetry then p5 else nil)
 		end)
@@ -118,7 +118,7 @@ return function(UniverseId, ReferralSource, Ctx, _, p1, p2, p3, Enabled) --[[ Li
 	local Callback = nil
 	
 	if FFlagLuaAppPlayButtonPrivatePT then
-		local UseResult1 = ReactModule.useCallback(function(Callback: (any) -> (), p4) --[[ Line: 209 ]]
+		local UseResult1 = ReactModule.useCallback(function(Callback: (any) -> (), p4)
 			-- upvalues: P6 (ref), DiscoveryEventErrorLogger (upval), UniverseId (copy), LaunchPlaytestWithLoadingStateModule (upval), p1 (copy), FFlagLuaAppDemoModePlayButtonTelemetry (upval)
 			local Number = if P6 == nil then nil else tonumber(P6)
 			
@@ -133,7 +133,7 @@ return function(UniverseId, ReferralSource, Ctx, _, p1, p2, p3, Enabled) --[[ Li
 		end, { P6, p1, UniverseId })
 		Callback = UsePrivatePlaytestLaunchWithUpsellModule(UseSelectorResult1, tostring(UniverseId), if FFlagLuaAppPlayButtonPrivatePTEnableSingleButton then UseResult else UseResult1, Ctx, UseRouteNameResult, v2)
 	end
-	return (ReactModule.useCallback(function(PlayButtonState, p4, p5) --[[ Line: 242 ]]
+	return (ReactModule.useCallback(function(PlayButtonState, p4, p5)
 		-- upvalues: JoinGamePlayButtonFunction (upval), UseRoactServiceResult (copy), ReferralSource (copy), RootPlaceId (copy), Ctx (copy), PlayButtonReferralSourceModule (upval), GamePlayButtonShareLinkAnalyticsModule (upval), GetFFlagLuaAppEnableVirtualEventPlaceIdFunction (upval), P6 (ref), UniverseId (copy), PlayButtonStatesModule (upval), FFlagLuaAppPlayButtonPrivatePTEnableSingleButton (upval), UseSelectorResult1 (copy), Callback (ref), UseResult (copy), UseGameProductInfoSelectorResult (copy), UseDispatchResult (copy), CloseCentralOverlayFunction (upval), FetchGamePlayabilityAndProductInfo (upval), UseRoactServiceResult3 (copy), OpenCentralOverlayForPurchaseGameModule (upval), Name (copy), UseRouteNameResult (copy), FFlagShipUnifiedPurchaseFlowToPaidAccess (upval), OpenCentralOverlayForUnifiedPurchasePromptModule (upval), UseGameIconResult (copy), ProductPurchaseSurface (upval), GetIsUserEligibleForUnifiedPurchaseFlowFunction (upval), FFlagLuaAppDemoModePlayButtonTelemetry (upval), FFlagLuaAppPlayButtonPrivatePTEnableDualButton (upval), ApiPostPreparePurchaseModule (upval), UnlockPlayIntentFunction (upval), UseRoactServiceResult2 (copy), InvalidPlayIntentFunction (upval), FFlagLuaAppPlayButtonLoadingDurationTelemetry (upval), FFlagLuaAppLaunchWhenLoadingForce1 (copy), GetFFlagIsSquadEnabledFunction (upval), CreateExperienceInviteFunction (upval), UseContextResult (copy), FFlagEnableSquadRegroupExperimentation (upval), SquadExperienceInviteSource (upval), FFlagEnablePrivatePartyStartJoin (upval), SquadExperienceInviteType (upval), FFlagEnableGameJoinEarlyAccess (upval)
 		JoinGamePlayButtonFunction(UseRoactServiceResult.InfluxDb, "playButtonClicked", {
 			isUniversalApp = true,
@@ -169,17 +169,17 @@ return function(UniverseId, ReferralSource, Ctx, _, p1, p2, p3, Enabled) --[[ Li
 			local SellerId = UseGameProductInfoSelectorResult and UseGameProductInfoSelectorResult.sellerId or nil
 			local UniverseId1 = UseGameProductInfoSelectorResult and UseGameProductInfoSelectorResult.universeId or nil
 			
-			local function onFlowComplete() --[[ Line: 276 ]]
+			local function onFlowComplete()
 				-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
 				UseDispatchResult(CloseCentralOverlayFunction())
 			end
 			
-			local function onPurchaseSuccess() --[[ Line: 279 ]]
+			local function onPurchaseSuccess()
 				-- upvalues: UseDispatchResult (upval), FetchGamePlayabilityAndProductInfo (upval), UseRoactServiceResult3 (upval), UniverseId1 (copy)
 				UseDispatchResult(FetchGamePlayabilityAndProductInfo.Fetch(UseRoactServiceResult3, UniverseId1))
 			end
 			
-			local function _() --[[ Line: 282 | Named "initiateLegacyPurchaseFlow" ]]
+			local function _()
 				-- upvalues: UseDispatchResult (upval), OpenCentralOverlayForPurchaseGameModule (upval), UniverseId1 (copy), Name (upval), Price (copy), ProductId (copy), SellerId (copy), UseRouteNameResult (upval)
 				UseDispatchResult(OpenCentralOverlayForPurchaseGameModule(UniverseId1, Name, Price, ProductId, SellerId, { UseRouteNameResult }))
 			end
@@ -201,7 +201,7 @@ return function(UniverseId, ReferralSource, Ctx, _, p1, p2, p3, Enabled) --[[ Li
 				
 				return
 			else
-				GetIsUserEligibleForUnifiedPurchaseFlowFunction(UseRoactServiceResult3):andThen(function(Result) --[[ Line: 313 ]]
+				GetIsUserEligibleForUnifiedPurchaseFlowFunction(UseRoactServiceResult3):andThen(function(Result)
 					-- upvalues: UseDispatchResult (upval), OpenCentralOverlayForUnifiedPurchasePromptModule (upval), UniverseId1 (copy), Name (upval), UseGameIconResult (upval), onFlowComplete (copy), onPurchaseSuccess (copy), ProductPurchaseSurface (upval), OpenCentralOverlayForPurchaseGameModule (upval), Price (copy), ProductId (copy), SellerId (copy), UseRouteNameResult (upval)
 					if Result then
 						UseDispatchResult(OpenCentralOverlayForUnifiedPurchasePromptModule({
@@ -222,7 +222,7 @@ return function(UniverseId, ReferralSource, Ctx, _, p1, p2, p3, Enabled) --[[ Li
 					else
 						UseDispatchResult(OpenCentralOverlayForPurchaseGameModule(UniverseId1, Name, Price, ProductId, SellerId, { UseRouteNameResult }))
 					end
-				end):catch(function(_) --[[ Line: 334 ]]
+				end):catch(function(_)
 					-- upvalues: UseDispatchResult (upval), OpenCentralOverlayForPurchaseGameModule (upval), UniverseId1 (copy), Name (upval), Price (copy), ProductId (copy), SellerId (copy), UseRouteNameResult (upval)
 					UseDispatchResult(OpenCentralOverlayForPurchaseGameModule(UniverseId1, Name, Price, ProductId, SellerId, { UseRouteNameResult }))
 				end)

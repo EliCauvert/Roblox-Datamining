@@ -11,9 +11,9 @@ return {
 	storyRoot = Parent,
 	roact = ReactModule,
 	reactRoblox = require(Parent1.ReactRoblox),
-	mapStory = function(p1) --[[ Line: 16 ]]
+	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), LocalizationProvider (copy), NewResult (copy), FoundationProvider (copy), FoundationModule (copy)
-		return function(p2) --[[ Line: 17 ]]
+		return function(p2)
 			-- upvalues: ReactModule (upval), LocalizationProvider (upval), NewResult (upval), FoundationProvider (upval), FoundationModule (upval), p1 (copy)
 			return ReactModule.createElement(LocalizationProvider, { localization = NewResult }, {
 				FoundationProvider = ReactModule.createElement(FoundationProvider, { colorMode = FoundationModule.Enums.ColorMode.Dark }, { Child = ReactModule.createElement(p1, p2) })

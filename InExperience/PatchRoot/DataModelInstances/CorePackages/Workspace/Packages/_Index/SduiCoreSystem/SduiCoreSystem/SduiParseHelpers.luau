@@ -1,6 +1,6 @@
 ﻿local TutilsModule = require(script:FindFirstAncestor("SduiCoreSystem").Parent.tutils)
 
-local function hasCycle(List, p1): boolean --[[ Line: 5 ]]
+local function hasCycle(List, p1): boolean
 	-- upvalues: hasCycle (copy)
 	if p1 == nil then
 		p1 = {}
@@ -24,7 +24,7 @@ end
 
 return {
 	hasCycle = hasCycle,
-	stringifyValue = function(p2) --[[ Line: 26 ]]
+	stringifyValue = function(p2)
 		-- upvalues: hasCycle (copy), TutilsModule (copy)
 		return if typeof(p2) == "table" and hasCycle(p2) then "table-with-cycle" else TutilsModule.toString(p2)
 	end

@@ -42,11 +42,11 @@ PlayerName.TextXAlignment = Enum.TextXAlignment.Left
 PlayerName.Size = UDim2.new(1, 0, 0, 14)
 PlayerName.Parent = HealthbarContainer
 
-local function _(p1): Vector3 --[[ Line: 67 | Named "Color3ToVec3" ]]
+local function _(p1): Vector3
 	return (Vector3.new(p1.r, p1.g, p1.b))
 end
 
-local function FindChildOfType(Character, ClassName) --[[ Line: 71 ]]
+local function FindChildOfType(Character, ClassName)
 	for _, child in pairs(Character:GetChildren()) do
 		if child:IsA(ClassName) then
 			return child
@@ -60,7 +60,7 @@ local config = {
 	[Vector3.new(_Color3_3.r, _Color3_3.g, _Color3_3.b)] = 0.8
 }
 
-local function HealthbarColorTransferFunction(HealthRatio: number) --[[ Line: 87 ]]
+local function HealthbarColorTransferFunction(HealthRatio: number)
 	-- upvalues: _Color3_1 (copy), _Color3_3 (copy), config (copy)
 	if HealthRatio <= 0.1 then
 		return _Color3_1
@@ -86,7 +86,7 @@ local function HealthbarColorTransferFunction(HealthRatio: number) --[[ Line: 87
 	return Color3.new(TotalRatio.x, TotalRatio.y, TotalRatio.z)
 end
 
-local _ = function(Humanoid: Humanoid) --[[ Line: 113 | Named "UpdateHealth" ]]
+local _ = function(Humanoid: Humanoid)
 	-- upvalues: HealthbarFill (copy), HealthbarColorTransferFunction (copy)
 	local HealthRatio = Humanoid.Health / Humanoid.MaxHealth
 	
@@ -100,7 +100,7 @@ end
 local HealthChangedConnection = nil
 local AncestryChangedConnection = nil
 
-local function RegisterHumanoid(Humanoid: Humanoid) --[[ Line: 124 ]]
+local function RegisterHumanoid(Humanoid: Humanoid)
 	-- upvalues: AncestryChangedConnection (ref), HealthChangedConnection (ref), Players (copy), RegisterHumanoid (copy), HealthbarFill (copy), HealthbarColorTransferFunction (copy)
 	if AncestryChangedConnection then
 		AncestryChangedConnection:disconnect()
@@ -111,7 +111,7 @@ local function RegisterHumanoid(Humanoid: Humanoid) --[[ Line: 124 ]]
 		HealthChangedConnection = nil
 	end
 	if Humanoid then
-		AncestryChangedConnection = Humanoid.AncestryChanged:connect(function(Child, NewParent) --[[ Line: 135 ]]
+		AncestryChangedConnection = Humanoid.AncestryChanged:connect(function(Child, NewParent)
 			-- upvalues: Players (upval), Humanoid (copy), RegisterHumanoid (upval)
 			local LocalPlayer = Players.LocalPlayer
 			
@@ -119,7 +119,7 @@ local function RegisterHumanoid(Humanoid: Humanoid) --[[ Line: 124 ]]
 				RegisterHumanoid(nil)
 			end
 		end)
-		HealthChangedConnection = Humanoid.HealthChanged:connect(function() --[[ Line: 141 ]]
+		HealthChangedConnection = Humanoid.HealthChanged:connect(function()
 			-- upvalues: Humanoid (copy), HealthbarFill (upval), HealthbarColorTransferFunction (upval)
 			local HealthRatio = Humanoid.Health / Humanoid.MaxHealth
 			
@@ -139,7 +139,7 @@ local function RegisterHumanoid(Humanoid: Humanoid) --[[ Line: 124 ]]
 	end
 end
 
-local function OnCharacterChildAdded(Child: Humanoid) --[[ Line: 146 ]]
+local function OnCharacterChildAdded(Child: Humanoid)
 	-- upvalues: Players (copy), RegisterHumanoid (copy)
 	local LocalPlayer = Players.LocalPlayer
 	
@@ -150,7 +150,7 @@ end
 
 local ChildAddedConnection = nil
 
-local function OnCharacterAdded(Character) --[[ Line: 154 ]]
+local function OnCharacterAdded(Character)
 	-- upvalues: FindChildOfType (copy), RegisterHumanoid (copy), ChildAddedConnection (ref), OnCharacterChildAdded (copy)
 	local Humanoid = FindChildOfType(Character, "Humanoid")
 	
@@ -164,7 +164,7 @@ local function OnCharacterAdded(Character) --[[ Line: 154 ]]
 	ChildAddedConnection = Character.ChildAdded:connect(OnCharacterChildAdded)
 end
 
-local _ = function(Player: Player) --[[ Line: 167 | Named "OnPlayerAdded" ]]
+local _ = function(Player: Player)
 	-- upvalues: PlayerName (copy), OnCharacterAdded (copy), FindChildOfType (copy), RegisterHumanoid (copy), ChildAddedConnection (ref), OnCharacterChildAdded (copy)
 	PlayerName.Text = Player.Name
 	Player.CharacterAdded:connect(OnCharacterAdded)
@@ -203,7 +203,7 @@ if Players.LocalPlayer then
 		ChildAddedConnection = Character.ChildAdded:connect(OnCharacterChildAdded)
 	end
 else
-	spawn(function() --[[ Line: 179 ]]
+	spawn(function()
 		-- upvalues: Players (copy), PlayerName (copy), OnCharacterAdded (copy), FindChildOfType (copy), RegisterHumanoid (copy), ChildAddedConnection (ref), OnCharacterChildAdded (copy)
 		while not Players.LocalPlayer do
 			Players.ChildAdded:wait()
@@ -237,7 +237,7 @@ local CoreGuiChangedSignalConnection = nil
 local EventConnection = nil
 local EventConnection1 = nil
 
-local function OnVREnabled(Property) --[[ Line: 195 ]]
+local function OnVREnabled(Property)
 	-- upvalues: UserInputService (copy), CorePackages (copy), HealthbarBack (copy), HealthbarFill (copy), PlayerName (copy), StarterGui (copy), CoreGuiChangedSignalConnection (ref), EventConnection (ref), EventConnection1 (ref), HealthbarContainer (copy), Healthbar3DModule (copy)
 	if Property == "VREnabled" then
 		if UserInputService.VREnabled then
@@ -248,7 +248,7 @@ local function OnVREnabled(Property) --[[ Line: 195 ]]
 			Healthbar:SetType(Panel3D.Type.Fixed, { CFrame = CFrame.new(0, 0, -5) })
 			Healthbar:SetVisible(true)
 			
-			function Healthbar.PreUpdate(p1, _, _, _, _) --[[ Line: 207 ]]
+			function Healthbar.PreUpdate(p1, _, _, _, _)
 				-- upvalues: Panel3D (copy), Healthbar (copy)
 				local Backpack = Panel3D.Get("Backpack") or Panel3D.Get("Topbar3D")
 				local Topbar3D = Panel3D.Get("Topbar3D")
@@ -258,7 +258,7 @@ local function OnVREnabled(Property) --[[ Line: 195 ]]
 				end
 			end
 			
-			function Healthbar:CalculateTransparency(): number --[[ Line: 217 ]]
+			function Healthbar:CalculateTransparency(): number
 				-- upvalues: Panel3D (copy), HealthbarBack (upval), HealthbarFill (upval), PlayerName (upval)
 				local Backpack = Panel3D.Get("Backpack")
 				local Topbar3D = Panel3D.Get("Topbar3D")
@@ -272,7 +272,7 @@ local function OnVREnabled(Property) --[[ Line: 195 ]]
 			
 			local Flag = false
 			
-			local function _() --[[ Line: 232 | Named "UpdateExclusivePanelOpen" ]]
+			local function _()
 				-- upvalues: VRHub (copy), Flag (ref)
 				for _, openedModule in pairs(VRHub:GetOpenedModules()) do
 					if openedModule.VRIsExclusive then
@@ -284,16 +284,16 @@ local function OnVREnabled(Property) --[[ Line: 195 ]]
 				Flag = false
 			end
 			
-			local _ = function(): boolean --[[ Line: 242 | Named "CalculateVisibility" ]]
+			local _ = function(): boolean
 				-- upvalues: StarterGui (upval), Flag (ref)
 				return StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.Health) and not Flag
 			end
 			
-			CoreGuiChangedSignalConnection = StarterGui.CoreGuiChangedSignal:connect(function() --[[ Line: 248 ]]
+			CoreGuiChangedSignalConnection = StarterGui.CoreGuiChangedSignal:connect(function()
 				-- upvalues: Healthbar (copy), StarterGui (upval), Flag (ref)
 				Healthbar:SetVisible(StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.Health) and not Flag)
 			end)
-			EventConnection = VRHub.ModuleOpened.Event:connect(function(_) --[[ Line: 252 ]]
+			EventConnection = VRHub.ModuleOpened.Event:connect(function(_)
 				-- upvalues: VRHub (copy), Flag (ref), Healthbar (copy), StarterGui (upval)
 				Flag = false
 				
@@ -305,7 +305,7 @@ local function OnVREnabled(Property) --[[ Line: 195 ]]
 				end
 				Healthbar:SetVisible(StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.Health) and not Flag)
 			end)
-			EventConnection1 = VRHub.ModuleClosed.Event:connect(function(_) --[[ Line: 256 ]]
+			EventConnection1 = VRHub.ModuleClosed.Event:connect(function(_)
 				-- upvalues: VRHub (copy), Flag (ref), Healthbar (copy), StarterGui (upval)
 				Flag = false
 				

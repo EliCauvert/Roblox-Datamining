@@ -4,7 +4,7 @@ local QueriesModule = require(UserProfiles.Common.Queries)
 local CryoModule = require(Parent.Cryo)
 local _ = require(Parent.ApolloClient)
 
-return function(p1, List, p2) --[[ Line: 15 ]]
+return function(p1, List, p2)
 	-- upvalues: QueriesModule (copy), CryoModule (copy)
 	local Query = if p2 and p2.query then p2.query else QueriesModule.userProfilesAllNamesByUserIds
 	for Id, value in List do

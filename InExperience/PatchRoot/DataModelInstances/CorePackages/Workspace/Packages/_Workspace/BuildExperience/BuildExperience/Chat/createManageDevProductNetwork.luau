@@ -5,7 +5,7 @@ local CreatorApiHttpModule = require(Parent.DataHydration.CreatorApiHttp)
 local FFlagBuildExperienceMonetizationNativeUIModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
 local FFlagBuildExperienceManageDevProductModule = require(BuildExperience.Flags.FFlagBuildExperienceManageDevProduct) or FFlagBuildExperienceMonetizationNativeUIModule
 
-local function getHeader(Headers, Text: string) --[[ Line: 21 ]]
+local function getHeader(Headers, Text: string)
 	if Headers == nil then
 		return nil
 	end
@@ -17,31 +17,31 @@ local function getHeader(Headers, Text: string) --[[ Line: 21 ]]
 	return nil
 end
 
-local function _(p1) --[[ Line: 33 | Named "getCsrfToken" ]]
+local function _(p1)
 	-- upvalues: getHeader (copy)
 	return (getHeader(p1.headers, "x-csrf-token"))
 end
 
-local _ = function(Text: string): string --[[ Line: 37 | Named "withoutQuery" ]]
+local _ = function(Text: string): string
 	return string.match(Text, "^[^?]+") or Text
 end
 
-local _ = function(p1) --[[ Line: 41 | Named "getRequestId" ]]
+local _ = function(p1)
 	-- upvalues: getHeader (copy)
 	return getHeader(p1.headers, "x-request-id") or getHeader(p1.headers, "x-correlation-id")
 end
 
-local _ = function(Text: string) --[[ Line: 45 | Named "getResponseCode" ]]
+local _ = function(Text: string)
 	return if typeof(Text) == "table" then Text.statusCode else tonumber(string.match(Text, "status:%s*(%d%d%d)")) or tonumber(string.match(Text, "HTTP%s+(%d%d%d)"))
 end
 
-local function classifyStartFailure(p1): string --[[ Line: 52 ]]
+local function classifyStartFailure(p1): string
 	local Lowered = string.lower((tostring(p1)))
 	
 	return if string.find(Lowered, "x-api-key", 1, true) then "missing-open-cloud-api-key" elseif string.find(Lowered, "accept", 1, true) and string.find(Lowered, "header", 1, true) then "restricted-accept-header" else "request-start-failure"
 end
 
-local _ = function(p1, p2, p3) --[[ Line: 63 | Named "emit" ]]
+local _ = function(p1, p2, p3)
 	-- upvalues: FFlagBuildExperienceManageDevProductModule (copy)
 	local Log = if p1 == nil then nil else p1.log
 	
@@ -55,7 +55,7 @@ local _ = function(p1, p2, p3) --[[ Line: 63 | Named "emit" ]]
 	end
 end
 
-local _ = function(p1, p2, p3) --[[ Line: 72 | Named "reportRequestStart" ]]
+local _ = function(p1, p2, p3)
 	-- upvalues: getHeader (copy)
 	local Url: string = p2.url
 	local Message: string = `[{if p1 == nil or p1.label == nil then "DeveloperProduct" else p1.label}] request transport=RequestInternal method={p2.method} url={string.match(Url, "^[^?]+") or Url} contentType={getHeader(p2.headers, "content-type") or "<none>"} retryCount={p3}`
@@ -68,7 +68,7 @@ local _ = function(p1, p2, p3) --[[ Line: 72 | Named "reportRequestStart" ]]
 	end
 end
 
-local function reportResponse(p4, p5, p6, p7, Text: string, p8) --[[ Line: 81 ]]
+local function reportResponse(p4, p5, p6, p7, Text: string, p8)
 	-- upvalues: getHeader (copy), FFlagBuildExperienceManageDevProductModule (copy)
 	local StatusCode = if typeof(Text) == "table" then Text.statusCode else tonumber(string.match(Text, "status:%s*(%d%d%d)")) or tonumber(string.match(Text, "HTTP%s+(%d%d%d)"))
 	local Url: string = p5.url
@@ -86,7 +86,7 @@ local function reportResponse(p4, p5, p6, p7, Text: string, p8) --[[ Line: 81 ]]
 	end
 end
 
-local _ = function(p9, p10, p11, p12) --[[ Line: 106 | Named "reportStartFailure" ]]
+local _ = function(p9, p10, p11, p12)
 	-- upvalues: classifyStartFailure (copy), FFlagBuildExperienceManageDevProductModule (copy)
 	local Url: string = p10.url
 	local Message: string = `[{if p9 == nil or p9.label == nil then "DeveloperProduct" else p9.label}] request transport=RequestInternal method={p10.method} url={string.match(Url, "^[^?]+") or Url} retryCount={p11} startFailure={classifyStartFailure(p12)}`
@@ -102,15 +102,15 @@ local _ = function(p9, p10, p11, p12) --[[ Line: 106 | Named "reportStartFailure
 	end
 end
 
-local _ = function(p13, p14) --[[ Line: 122 | Named "withCsrfRetry" ]]
+local _ = function(p13, p14)
 	-- upvalues: getHeader (copy), reportResponse (copy), classifyStartFailure (copy), FFlagBuildExperienceManageDevProductModule (copy)
 	return {
-		request = function(p15, Callback) --[[ Line: 124 ]]
+		request = function(p15, Callback)
 			-- upvalues: p14 (copy), getHeader (upval), p13 (copy), reportResponse (upval), classifyStartFailure (upval), FFlagBuildExperienceManageDevProductModule (upval)
 			local Flag = false
 			local List = {}
 			
-			local function startAttempt(p16, p17) --[[ Line: 131 ]]
+			local function startAttempt(p16, p17)
 				-- upvalues: p14 (upval), getHeader (upval), p13 (upval), Flag (ref), reportResponse (upval), startAttempt (copy), Callback (copy), classifyStartFailure (upval), FFlagBuildExperienceManageDevProductModule (upval), List (copy)
 				local v1 = p14
 				local Url: string = p16.url
@@ -121,7 +121,7 @@ local _ = function(p13, p14) --[[ Line: 122 | Named "withCsrfRetry" ]]
 					pcall(Log, Message)
 				end
 				local Flag1 = false
-				local Success, Result = pcall(p13.request, p16, function(p18, p19) --[[ Line: 134 ]]
+				local Success, Result = pcall(p13.request, p16, function(p18, p19)
 					-- upvalues: Flag1 (ref), Flag (upval), p17 (copy), getHeader (upval), reportResponse (upval), p14 (upval), p16 (copy), startAttempt (upval), Callback (upval)
 					Flag1 = true
 					
@@ -174,7 +174,7 @@ local _ = function(p13, p14) --[[ Line: 122 | Named "withCsrfRetry" ]]
 			
 			startAttempt(p15, 0)
 			
-			return function() --[[ Line: 184 ]]
+			return function()
 				-- upvalues: Flag (ref), List (copy)
 				if Flag then return end
 				Flag = true
@@ -187,17 +187,17 @@ local _ = function(p13, p14) --[[ Line: 122 | Named "withCsrfRetry" ]]
 	}
 end
 
-return function(p18, p19) --[[ Line: 197 | Named "createManageDevProductNetwork" ]]
+return function(p18, p19)
 	-- upvalues: CreatorApiHttpModule (copy), getHeader (copy), reportResponse (copy), classifyStartFailure (copy), FFlagBuildExperienceManageDevProductModule (copy)
 	local WithoutRestrictedAcceptHeaderResult = CreatorApiHttpModule.withoutRestrictedAcceptHeader(p18)
 	
 	return {
-		request = function(p20, Callback) --[[ Line: 124 ]]
+		request = function(p20, Callback)
 			-- upvalues: p19 (copy), getHeader (upval), WithoutRestrictedAcceptHeaderResult (copy), reportResponse (upval), classifyStartFailure (upval), FFlagBuildExperienceManageDevProductModule (upval)
 			local Flag = false
 			local List = {}
 			
-			local function startAttempt(p21, p22) --[[ Line: 131 ]]
+			local function startAttempt(p21, p22)
 				-- upvalues: p19 (upval), getHeader (upval), WithoutRestrictedAcceptHeaderResult (upval), Flag (ref), reportResponse (upval), startAttempt (copy), Callback (copy), classifyStartFailure (upval), FFlagBuildExperienceManageDevProductModule (upval), List (copy)
 				local v2 = p19
 				local Url: string = p21.url
@@ -208,7 +208,7 @@ return function(p18, p19) --[[ Line: 197 | Named "createManageDevProductNetwork"
 					pcall(Log, Message)
 				end
 				local Flag1 = false
-				local Success, Result = pcall(WithoutRestrictedAcceptHeaderResult.request, p21, function(p23, p24) --[[ Line: 134 ]]
+				local Success, Result = pcall(WithoutRestrictedAcceptHeaderResult.request, p21, function(p23, p24)
 					-- upvalues: Flag1 (ref), Flag (upval), p22 (copy), getHeader (upval), reportResponse (upval), p19 (upval), p21 (copy), startAttempt (upval), Callback (upval)
 					Flag1 = true
 					
@@ -261,7 +261,7 @@ return function(p18, p19) --[[ Line: 197 | Named "createManageDevProductNetwork"
 			
 			startAttempt(p20, 0)
 			
-			return function() --[[ Line: 184 ]]
+			return function()
 				-- upvalues: Flag (ref), List (copy)
 				if Flag then return end
 				Flag = true

@@ -12,7 +12,7 @@ local RegisterRoactPanelModule = require(VrSpatialUi.registerRoactPanel)
 local UseHeadScaleModule = require(VrSpatialUi.Hooks.useHeadScale)
 local InExperienceUIVRIXP = require(Parent.SharedExperimentDefinition).InExperienceUIVRIXP
 
-return ReactModule.memo(function(p1) --[[ Line: 28 | Named "Panel3DInSpatialUI" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UIManagerModule (copy), InExperienceUIVRIXP (copy), ReactModule (copy), UseHeadScaleModule (copy), Panel3D (copy), Constants (copy), GuiService (copy), RegisterRoactPanelModule (copy), SubscribeToBindingFunction (copy)
 	local ScaledPartSizeInPixel = UIManagerModule.getInstance():getScaledPartSizeInPixel(p1.panelType)
 	local PanelSizeInPixel = UIManagerModule.getInstance():getPanelSizeInPixel(p1.panelType)
@@ -32,7 +32,7 @@ return ReactModule.memo(function(p1) --[[ Line: 28 | Named "Panel3DInSpatialUI" 
 		offset = CFrame.new(0, 0, 0),
 		anchoring = Constants.AnchoringTypes.PanelManaged,
 		parent = GuiService.CoreGuiFolder,
-		connectPanelManagerFunction = function(p2) --[[ Line: 47 ]]
+		connectPanelManagerFunction = function(p2)
 			-- upvalues: RegisterRoactPanelModule (upval), p1 (copy), SubscribeToBindingFunction (upval), Callback (ref), UIManagerModule (upval)
 			if p2 then
 				RegisterRoactPanelModule(p2, p1.panelType, p1.visibilityObservable, p1.keepVisibleWhenTopBarHidden)
@@ -42,7 +42,7 @@ return ReactModule.memo(function(p1) --[[ Line: 28 | Named "Panel3DInSpatialUI" 
 					local Adornee = Current.Adornee
 					local Active = Current.Active
 					local CanQuery = Adornee.CanQuery
-					local SubscribeToBindingResult = SubscribeToBindingFunction(p1.controlsVisible, function(p3) --[[ Line: 59 | Named "updateInput" ]]
+					local SubscribeToBindingResult = SubscribeToBindingFunction(p1.controlsVisible, function(p3)
 						-- upvalues: Current (copy), Active (copy), Adornee (copy), CanQuery (copy)
 						Current.Active = Active and p3
 						Adornee.CanQuery = CanQuery and p3
@@ -51,7 +51,7 @@ return ReactModule.memo(function(p1) --[[ Line: 28 | Named "Panel3DInSpatialUI" 
 					Current.Active = Active and Value
 					Adornee.CanQuery = CanQuery and Value
 					
-					Callback = function() --[[ Line: 66 ]]
+					Callback = function()
 						-- upvalues: SubscribeToBindingResult (copy), Current (copy), Adornee (copy), Active (copy), CanQuery (copy)
 						SubscribeToBindingResult()
 						Current.Active = Active

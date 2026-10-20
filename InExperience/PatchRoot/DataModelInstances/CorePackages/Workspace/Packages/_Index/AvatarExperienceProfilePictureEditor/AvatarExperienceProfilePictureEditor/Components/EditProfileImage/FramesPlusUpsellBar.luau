@@ -5,7 +5,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local PlusSubscribeBannerModule = require(Parent.AvatarExperienceCommon.PlusSubscribeBanner)
 local TextKeysModule = require(AvatarExperienceProfilePictureEditor.Common.TextKeys)
 
-return function(p1) --[[ Line: 20 | Named "FramesPlusUpsellBar" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), PlusSubscribeBannerModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		unlockBanner = TextKeysModule.ProfileFramesUnlockBanner,

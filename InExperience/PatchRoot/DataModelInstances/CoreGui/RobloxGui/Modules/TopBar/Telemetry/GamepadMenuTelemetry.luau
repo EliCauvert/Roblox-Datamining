@@ -4,19 +4,19 @@ local _ = require(script.Parent.Parent.Components.Presentation.GamepadMenu.EnumG
 local TelemetryServicePlaySessionInfoEnabledEngineFeature = game:GetEngineFeature("TelemetryServicePlaySessionInfoEnabled")
 local GamepadMenuActionThrottleHundrethsPercent = game:DefineFastInt("GamepadMenuActionThrottleHundrethsPercent", 0)
 
-local function _(p1, Callback) --[[ Line: 26 | Named "mapProp" ]]
+local function _(p1, Callback)
 	return if p1 == nil then nil else Callback(p1)
 end
 
 local GamepadMenuTelemetryModule = {}
 GamepadMenuTelemetryModule.__index = GamepadMenuTelemetryModule
 
-function GamepadMenuTelemetryModule.new() --[[ Line: 34 ]]
+function GamepadMenuTelemetryModule.new()
 	-- upvalues: GamepadMenuTelemetryModule (copy)
 	return (setmetatable({}, GamepadMenuTelemetryModule))
 end
 
-function GamepadMenuTelemetryModule:onOptionSelected() --[[ Line: 39 ]]
+function GamepadMenuTelemetryModule:onOptionSelected()
 	-- upvalues: GamepadMenuActionThrottleHundrethsPercent (copy), TelemetryServicePlaySessionInfoEnabledEngineFeature (copy), RbxAnalyticsService (copy), TelemetryService (copy)
 	local config = {
 		eventName = "coreui_gamepad_menu_action",

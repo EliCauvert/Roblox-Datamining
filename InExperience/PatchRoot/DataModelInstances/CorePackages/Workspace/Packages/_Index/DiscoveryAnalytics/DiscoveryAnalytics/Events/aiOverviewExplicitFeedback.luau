@@ -13,7 +13,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 	feedbackText = TModule.optional(TModule.string)
 })
 
-return function(CustomFields, EventContext) --[[ Line: 28 ]]
+return function(CustomFields, EventContext)
 	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), AiOverviewExplicitFeedbackThrottleHundrethsPercent (copy), TelemetryService (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	

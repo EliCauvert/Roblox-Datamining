@@ -20,17 +20,17 @@ local GetFFlagEnableToastIconSupportFunction = require(Parent1.SharedFlags).GetF
 local FFlagNotificationThumbnailUseProfileFrameThumbnail = NotificationsCommonModule.FFlagNotificationThumbnailUseProfileFrameThumbnail
 local UseNotificationCardStateModule = require(Parent.context.useNotificationCardState)
 
-local function v18(IdType) --[[ Line: 32 ]]
+local function v18(IdType)
 	-- upvalues: TypeModule (copy), UserLibConstants (copy)
 	return if IdType == TypeModule.SENDERThumbnailTypeEnum.Game then UserLibConstants.RbxthumbTypes.GameIcon elseif IdType == TypeModule.SENDERThumbnailTypeEnum.User then UserLibConstants.RbxthumbTypes.AvatarHeadShot elseif IdType == TypeModule.SENDERThumbnailTypeEnum.Group then UserLibConstants.RbxthumbTypes.GroupIcon elseif IdType == TypeModule.SENDERThumbnailTypeEnum.Asset then UserLibConstants.RbxthumbTypes.Asset elseif IdType == TypeModule.SENDERThumbnailTypeEnum.Bundle then UserLibConstants.RbxthumbTypes.BundleThumbnail else UserLibConstants.RbxthumbTypes.GameIcon
 end
 
-local IsUserThumbnail = if ToastNotificationHelperModule.isUserThumbnail then ToastNotificationHelperModule.isUserThumbnail else function(p1): boolean --[[ Line: 50 ]]
+local IsUserThumbnail = if ToastNotificationHelperModule.isUserThumbnail then ToastNotificationHelperModule.isUserThumbnail else function(p1): boolean
 	-- upvalues: TypeModule (copy)
 	return p1.idType == TypeModule.SENDERThumbnailTypeEnum.User
 end
 
-return function() --[[ Line: 54 ]]
+return function()
 	-- upvalues: UseNotificationCardStateModule (copy), UseStyleFunction (copy), IsUserThumbnail (copy), FFlagNotificationThumbnailUseProfileFrameThumbnail (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), v18 (copy), GetFFlagEnableToastIconSupportFunction (copy), TypeModule (copy), Constants (copy), React (copy), ImageSetLabel (copy), IconsCommonSafety (copy), IconsGraphicLogomarkGradientXlarge (copy), ImagePile (copy), LoadableImage (copy)
 	local Thumbnail = UseNotificationCardStateModule("thumbnail")
 	

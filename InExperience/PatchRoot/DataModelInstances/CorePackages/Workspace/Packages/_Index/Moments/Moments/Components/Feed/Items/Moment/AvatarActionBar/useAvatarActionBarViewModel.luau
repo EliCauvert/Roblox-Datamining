@@ -10,11 +10,11 @@ local UseMomentsHostFunction = require(Moments.MomentsHostContext).useMomentsHos
 local _ = require(script.Parent.AvatarActionBar)
 local FFlagAXEnableUnifiedLoggingAvatarMoment = require(Parent.SharedFlags).FFlagAXEnableUnifiedLoggingAvatarMoment
 
-local function _(p1): string --[[ Line: 29 | Named "getLookThumbnail" ]]
+local function _(p1): string
 	return `rbxthumb://type=Look&id={p1}&w={150}&h={150}`
 end
 
-return function(Frame) --[[ Line: 38 | Named "useAvatarActionBarViewModel" ]]
+return function(Frame)
 	-- upvalues: MomentContextModule (copy), UseMomentsHostFunction (copy), UseAvatarLookModule (copy), UseSignalStateFunction (copy), UseLocalizationFunction (copy), LocalizationModule (copy), LocalizationService (copy), FFlagAXEnableUnifiedLoggingAvatarMoment (copy)
 	local Store = MomentContextModule.useMoment().store
 	local Data = Store.getData(false)
@@ -41,7 +41,7 @@ return function(Frame) --[[ Line: 38 | Named "useAvatarActionBarViewModel" ]]
 		shopText = UseLocalizationResult.shop,
 		showShopButton = OpenAvatarLookTryOnFunction ~= nil,
 		isShopDisabled = UseSignalStateResult,
-		onShop = function() --[[ Line: 68 ]]
+		onShop = function()
 			-- upvalues: OpenAvatarLookTryOnFunction (copy), LookId (copy), FFlagAXEnableUnifiedLoggingAvatarMoment (upval), Data (copy), OutfitId (copy)
 			if OpenAvatarLookTryOnFunction ~= nil and LookId ~= nil then
 				if FFlagAXEnableUnifiedLoggingAvatarMoment then

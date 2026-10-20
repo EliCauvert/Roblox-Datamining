@@ -5,7 +5,7 @@ local Text = FoundationModule.Text
 local View = FoundationModule.View
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return function(p1) --[[ Line: 16 | Named "ContactsSyncWarningMessage" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), View (copy), Text (copy)
 	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y margin-y-small",

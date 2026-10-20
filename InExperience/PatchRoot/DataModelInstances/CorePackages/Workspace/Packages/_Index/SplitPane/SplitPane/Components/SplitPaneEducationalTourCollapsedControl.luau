@@ -11,7 +11,7 @@ local IsSplitPaneEducationalTourGuiObjectVisibleModule = require(script.Parent.i
 local UseTrackedRectModule = require(script.Parent.useTrackedRect)
 local GetSplitPaneEducationalTourStoreModule = require(script.Parent.Parent.Stores.getSplitPaneEducationalTourStore)
 
-local function _(p1): boolean --[[ Line: 21 | Named "isVisibleAndLaidOut" ]]
+local function _(p1): boolean
 	-- upvalues: IsSplitPaneEducationalTourGuiObjectVisibleModule (copy)
 	if IsSplitPaneEducationalTourGuiObjectVisibleModule(p1) then
 		local Parent = p1.Parent
@@ -22,15 +22,15 @@ local function _(p1): boolean --[[ Line: 21 | Named "isVisibleAndLaidOut" ]]
 	end
 end
 
-return function() --[[ Line: 29 | Named "SplitPaneEducationalTourCollapsedControl" ]]
+return function()
 	-- upvalues: ReactModule (copy), UseTrackedRectModule (copy), GetSplitPaneEducationalTourStoreModule (copy), IsSplitPaneEducationalTourGuiObjectVisibleModule (copy), UseTokensFunction (copy), View (copy), Divider (copy), Orientation (copy), Icon (copy), IconName (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseTrackedRectModuleResult = UseTrackedRectModule(UseStateResult)
 	local SplitPaneEducationalTourStoreModule = GetSplitPaneEducationalTourStoreModule(false)
-	ReactModule.useLayoutEffect(function() --[[ Line: 34 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseStateResult (copy), SplitPaneEducationalTourStoreModule (copy)
 		if UseStateResult == nil then return end
-		return function() --[[ Line: 39 ]]
+		return function()
 			-- upvalues: SplitPaneEducationalTourStoreModule (upval), UseStateResult (upval)
 			if SplitPaneEducationalTourStoreModule.getCollapsedExpandButtonInstance(false) == UseStateResult then
 				SplitPaneEducationalTourStoreModule.setCollapsedExpandButtonRect(nil)
@@ -38,7 +38,7 @@ return function() --[[ Line: 29 | Named "SplitPaneEducationalTourCollapsedContro
 			end
 		end
 	end, { UseStateResult, SplitPaneEducationalTourStoreModule })
-	ReactModule.useLayoutEffect(function() --[[ Line: 47 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseStateResult (copy), IsSplitPaneEducationalTourGuiObjectVisibleModule (upval), UseTrackedRectModuleResult (copy), SplitPaneEducationalTourStoreModule (copy)
 		if UseStateResult == nil then return end
 		local IsYAbove = nil

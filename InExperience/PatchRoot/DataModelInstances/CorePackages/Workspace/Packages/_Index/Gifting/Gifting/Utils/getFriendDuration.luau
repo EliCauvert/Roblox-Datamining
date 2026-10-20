@@ -1,4 +1,4 @@
-﻿return function(p1, p2) --[[ Line: 28 | Named "getFriendDuration" ]]
+﻿return function(p1, p2)
 	if not p1 then
 		return nil
 	end

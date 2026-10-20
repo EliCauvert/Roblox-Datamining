@@ -2,7 +2,7 @@
 local Parent = InExperienceShop.Parent
 local _ = require(InExperienceShop.Types)
 
-return function(p1) --[[ Line: 7 | Named "mapShopItemTypeToUnifiedItemType" ]]
+return function(p1)
 	-- upvalues: Parent (copy)
 	local MarketplaceUnifiedItemType = require(Parent.AvatarExperienceAnalytics).UnifiedEventLogEnums.MarketplaceUnifiedItemType
 	

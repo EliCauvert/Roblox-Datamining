@@ -10,12 +10,12 @@ local FFlagAXSduiBracedPageRequestId = AvatarExperienceFlagsModule.FFlagAXSduiBr
 local FFlagAXSduiPageVariantRequestId = AvatarExperienceFlagsModule.FFlagAXSduiPageVariantRequestId
 local FFlagAXSduiPublishRequestIdWithResponse = AvatarExperienceFlagsModule.FFlagAXSduiPublishRequestIdWithResponse
 
-local function _(p1, p2): string --[[ Line: 60 | Named "getVariantKey" ]]
+local function _(p1, p2): string
 	-- upvalues: NormalizeScreenSizeForWireFunction (copy)
 	return `{p1}|{NormalizeScreenSizeForWireFunction(p2)}`
 end
 
-return function() --[[ Line: 64 | Named "createCatalogPageRequestIdStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy), FFlagAXSduiBracedPageRequestId (copy), HttpService (copy), SendAXCounterV2Function (copy), ConstantsModule (copy), NormalizeScreenSizeForWireFunction (copy), FFlagAXSduiPageVariantRequestId (copy), FFlagAXSduiPublishRequestIdWithResponse (copy)
 	local Signal, Signal2 = SignalsModule.createSignal({})
 	local Guids = {}
@@ -23,12 +23,12 @@ return function() --[[ Line: 64 | Named "createCatalogPageRequestIdStore" ]]
 	local t = {}
 	local Guids1 = {}
 	
-	local function _() --[[ Line: 74 | Named "generateRequestId" ]]
+	local function _()
 		-- upvalues: FFlagAXSduiBracedPageRequestId (upval), HttpService (upval)
 		return if FFlagAXSduiBracedPageRequestId then HttpService:GenerateGUID(true) else HttpService:GenerateGUID(false)
 	end
 	
-	local _ = function(Key, p1) --[[ Line: 81 | Named "setIdentifierRequestId" ]]
+	local _ = function(Key, p1)
 		-- upvalues: Signal (copy), Signal2 (copy)
 		local SignalResult = Signal(false)
 		
@@ -41,7 +41,7 @@ return function() --[[ Line: 64 | Named "createCatalogPageRequestIdStore" ]]
 		end
 	end
 	
-	local function recordFetchedVariant(Key, Key1, p1) --[[ Line: 91 ]]
+	local function recordFetchedVariant(Key, Key1, p1)
 		-- upvalues: t (copy), SendAXCounterV2Function (upval), ConstantsModule (upval), NormalizeScreenSizeForWireFunction (upval)
 		local Entry = t[Key]
 		
@@ -59,7 +59,7 @@ return function() --[[ Line: 64 | Named "createCatalogPageRequestIdStore" ]]
 		Entry[Key1] = true
 	end
 	
-	local function getOrCreateVariantRequestIdForKey(Key, Key1, p1) --[[ Line: 109 ]]
+	local function getOrCreateVariantRequestIdForKey(Key, Key1, p1)
 		-- upvalues: Guids (copy), recordFetchedVariant (copy), Keys (copy), Signal (copy), FFlagAXSduiBracedPageRequestId (upval), HttpService (upval), Signal2 (copy)
 		local Guid = Guids[Key1]
 		
@@ -91,7 +91,7 @@ return function() --[[ Line: 64 | Named "createCatalogPageRequestIdStore" ]]
 		return SignalResultEntry
 	end
 	
-	local function resetPageRequestId(p1) --[[ Line: 164 ]]
+	local function resetPageRequestId(p1)
 		-- upvalues: FFlagAXSduiPageVariantRequestId (upval), Keys (copy), Guids (copy), Signal (copy), Signal2 (copy)
 		if FFlagAXSduiPageVariantRequestId then
 			local Key = Keys[p1]
@@ -115,7 +115,7 @@ return function() --[[ Line: 64 | Named "createCatalogPageRequestIdStore" ]]
 	
 	return {
 		getPageRequestIdMap = Signal,
-		getOrCreatePageRequestId = function(Key) --[[ Line: 134 ]]
+		getOrCreatePageRequestId = function(Key)
 			-- upvalues: FFlagAXSduiPageVariantRequestId (upval), Keys (copy), Guids (copy), Signal (copy), FFlagAXSduiBracedPageRequestId (upval), HttpService (upval), Signal2 (copy)
 			local v1 = nil
 			
@@ -148,11 +148,11 @@ return function() --[[ Line: 64 | Named "createCatalogPageRequestIdStore" ]]
 			return Guid
 		end,
 		resetPageRequestId = resetPageRequestId,
-		getOrCreatePageVariantRequestId = function(Key, p2) --[[ Line: 186 ]]
+		getOrCreatePageVariantRequestId = function(Key, p2)
 			-- upvalues: getOrCreateVariantRequestIdForKey (copy), NormalizeScreenSizeForWireFunction (upval)
 			return (getOrCreateVariantRequestIdForKey(Key, `{Key}|{NormalizeScreenSizeForWireFunction(p2)}`, p2))
 		end,
-		activatePageVariant = function(Key, p2) --[[ Line: 190 ]]
+		activatePageVariant = function(Key, p2)
 			-- upvalues: NormalizeScreenSizeForWireFunction (upval), getOrCreateVariantRequestIdForKey (copy), Keys (copy), Signal (copy), Signal2 (copy)
 			local Text: string = `{Key}|{NormalizeScreenSizeForWireFunction(p2)}`
 			local OrCreateVariantRequestIdForKey = getOrCreateVariantRequestIdForKey(Key, Text, p2)
@@ -169,7 +169,7 @@ return function() --[[ Line: 64 | Named "createCatalogPageRequestIdStore" ]]
 				return OrCreateVariantRequestIdForKey
 			end
 		end,
-		resetPageVariantRequestId = function(p2, p3) --[[ Line: 198 ]]
+		resetPageVariantRequestId = function(p2, p3)
 			-- upvalues: NormalizeScreenSizeForWireFunction (upval), Keys (copy), Guids (copy), FFlagAXSduiPublishRequestIdWithResponse (upval), Guids1 (copy), resetPageRequestId (copy)
 			local Text: string = `{p2}|{NormalizeScreenSizeForWireFunction(p3)}`
 			local Key = Keys[p2]
@@ -182,7 +182,7 @@ return function() --[[ Line: 64 | Named "createCatalogPageRequestIdStore" ]]
 				resetPageRequestId(p2)
 			end
 		end,
-		beginPageVariantRefresh = function(Key, p2) --[[ Line: 211 ]]
+		beginPageVariantRefresh = function(Key, p2)
 			-- upvalues: NormalizeScreenSizeForWireFunction (upval), Guids (copy), getOrCreateVariantRequestIdForKey (copy), FFlagAXSduiBracedPageRequestId (upval), HttpService (upval), Guids1 (copy)
 			local Text: string = `{Key}|{NormalizeScreenSizeForWireFunction(p2)}`
 			
@@ -195,13 +195,13 @@ return function() --[[ Line: 64 | Named "createCatalogPageRequestIdStore" ]]
 				return Guid
 			end
 		end,
-		getPageVariantRequestIdToSend = function(Key, p2) --[[ Line: 222 ]]
+		getPageVariantRequestIdToSend = function(Key, p2)
 			-- upvalues: NormalizeScreenSizeForWireFunction (upval), Guids1 (copy), getOrCreateVariantRequestIdForKey (copy)
 			local Text: string = `{Key}|{NormalizeScreenSizeForWireFunction(p2)}`
 			
 			return Guids1[Text] or getOrCreateVariantRequestIdForKey(Key, Text, p2)
 		end,
-		commitPageVariantRequestId = function(Key, p2, p3) --[[ Line: 228 ]]
+		commitPageVariantRequestId = function(Key, p2, p3)
 			-- upvalues: NormalizeScreenSizeForWireFunction (upval), Guids1 (copy), Guids (copy), Keys (copy), Signal (copy), Signal2 (copy)
 			local Text: string = `{Key}|{NormalizeScreenSizeForWireFunction(p2)}`
 			
@@ -218,7 +218,7 @@ return function() --[[ Line: 64 | Named "createCatalogPageRequestIdStore" ]]
 				Signal2(Copy)
 			end
 		end,
-		discardPageVariantRequestId = function(p2, p3, p4) --[[ Line: 240 ]]
+		discardPageVariantRequestId = function(p2, p3, p4)
 			-- upvalues: NormalizeScreenSizeForWireFunction (upval), Guids1 (copy)
 			local Text: string = `{p2}|{NormalizeScreenSizeForWireFunction(p3)}`
 			
@@ -226,7 +226,7 @@ return function() --[[ Line: 64 | Named "createCatalogPageRequestIdStore" ]]
 				Guids1[Text] = nil
 			end
 		end,
-		getPageVariantRequestId = function(p2, p3) --[[ Line: 247 ]]
+		getPageVariantRequestId = function(p2, p3)
 			-- upvalues: Guids (copy), NormalizeScreenSizeForWireFunction (upval)
 			return Guids[`{p2}|{NormalizeScreenSizeForWireFunction(p3)}`]
 		end

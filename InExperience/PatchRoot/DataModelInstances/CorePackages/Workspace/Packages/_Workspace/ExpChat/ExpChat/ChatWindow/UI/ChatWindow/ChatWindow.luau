@@ -45,7 +45,7 @@ local config = {
 	verifiedUserIds = {}
 }
 
-return (ReactModule.memo(function(p1) --[[ Line: 60 ]]
+return (ReactModule.memo(function(p1)
 	-- upvalues: Dictionary (copy), config (copy), UseInterpolatedClientSettingsModule (copy), FFlagExpChatPresetChatEnabled (copy), FFlagExpChatTopBannerForPresetChatAccessModule (copy), UseIsARButtonVisibleModule (copy), GetChatStatusStoreModule (copy), SignalsReactModule (copy), ShowChatEnabledUIModule (copy), FFlagExpChatUseUnifiedTooltipStore (copy), GetChatTooltipStoreModule (copy), GetGlobalChatTooltipStoreModule (copy), ReactModule (copy), GetFFlagMemoizeChatReportingMenuFunction (copy), FFlagExpChatEnableV2ChatWindowModule (copy), GetMessagesStoreModule (copy), List (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), GetFFlagEnableChatLineReportingFunction (copy), UseUserExperimentFunction (copy), FStringReportingIXPLayer (copy), GetFFlagChatWindowUseCallbackOptimizationsModule (copy), FFlagExpChatPerfTrackerTabName (copy), ExpChatPerfTracker (copy), FFlagExpChatRewriteInlineModule (copy), FFlagExpChatRenderHistoricalMessagesModule (copy), ConfigModule (copy), FFlagExpChatEnableFriendsTab (copy), IsChatRegionLockedModule (copy), TopBannerModule (copy), ScrollingViewModule (copy), TextChatService (copy), GlobalChatTooltipModule (copy)
 	local JoinResult = Dictionary.join(config, p1)
 	local ChatWindowSettings = JoinResult.chatWindowSettings
@@ -64,11 +64,11 @@ return (ReactModule.memo(function(p1) --[[ Line: 60 ]]
 	
 	if FFlagExpChatUseUnifiedTooltipStore then
 		local SetIsChatWindowOpenFunction = GetChatTooltipStoreModule(false).setIsChatWindowOpen
-		ReactModule.useEffect(function() --[[ Line: 87 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: SetIsChatWindowOpenFunction (copy), JoinResult (copy)
 			SetIsChatWindowOpenFunction(JoinResult.visible)
 			
-			return function() --[[ Line: 89 ]]
+			return function()
 				-- upvalues: SetIsChatWindowOpenFunction (upval)
 				SetIsChatWindowOpenFunction(false)
 			end
@@ -79,19 +79,19 @@ return (ReactModule.memo(function(p1) --[[ Line: 60 ]]
 	
 	if GetFFlagMemoizeChatReportingMenuFunction() and not FFlagExpChatEnableV2ChatWindowModule then
 		UseRefResult = ReactModule.useRef(if FFlagExpChatEnableV2ChatWindowModule then nil else JoinResult.messages)
-		ReactModule.useEffect(function() --[[ Line: 99 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRefResult (ref), FFlagExpChatEnableV2ChatWindowModule (upval), JoinResult (copy)
 			UseRefResult.current = if FFlagExpChatEnableV2ChatWindowModule then nil else JoinResult.messages
 		end, {
 			if FFlagExpChatEnableV2ChatWindowModule then nil else JoinResult.messages
 		})
-		UseResult = ReactModule.useCallback(function() --[[ Line: 103 ]]
+		UseResult = ReactModule.useCallback(function()
 			-- upvalues: UseRefResult (ref)
 			return UseRefResult.current
 		end, {})
 	end
 	if FFlagExpChatEnableV2ChatWindowModule then
-		UseResult = ReactModule.useCallback(function() --[[ Line: 109 ]]
+		UseResult = ReactModule.useCallback(function()
 			-- upvalues: GetMessagesStoreModule (upval), JoinResult (copy), List (upval), GetFFlagTextChatEnableUniverseChatTabsFunction (upval)
 			local MessagesStoreModule = GetMessagesStoreModule(false)
 			local config = {
@@ -101,19 +101,19 @@ return (ReactModule.memo(function(p1) --[[ Line: 60 ]]
 			}
 			
 			if not JoinResult.isChannelBarVisible then
-				return List.map(config.windowMessagesInOrder, function(p2) --[[ Line: 118 ]]
+				return List.map(config.windowMessagesInOrder, function(p2)
 					-- upvalues: config (copy)
 					return config.byMessageId[p2]
 				end)
 			elseif GetFFlagTextChatEnableUniverseChatTabsFunction() then
 				local Name = if JoinResult.targetTextChannel and config.windowMessagesInOrderByTabId[JoinResult.targetTextChannel.Name] then JoinResult.targetTextChannel.Name else JoinResult.selectedChannelName
 				
-				return if Name then List.map(config.windowMessagesInOrderByTabId[Name] or {}, function(p2) --[[ Line: 133 ]]
+				return if Name then List.map(config.windowMessagesInOrderByTabId[Name] or {}, function(p2)
 					-- upvalues: config (copy)
 					return config.byMessageId[p2]
 				end) else {}
 			else
-				return if JoinResult.targetTextChannel then List.map(config.windowMessagesInOrderByTabId[JoinResult.targetTextChannel.Name] or {}, function(p2) --[[ Line: 141 ]]
+				return if JoinResult.targetTextChannel then List.map(config.windowMessagesInOrderByTabId[JoinResult.targetTextChannel.Name] or {}, function(p2)
 					-- upvalues: config (copy)
 					return config.byMessageId[p2]
 				end) else {}
@@ -124,18 +124,18 @@ return (ReactModule.memo(function(p1) --[[ Line: 60 ]]
 			if GetFFlagTextChatEnableUniverseChatTabsFunction() then JoinResult.selectedChannelName else nil
 		})
 	end
-	local UseUserExperimentResult = if GetFFlagEnableChatLineReportingFunction() then UseUserExperimentFunction({ FStringReportingIXPLayer }, function(p2) --[[ Line: 159 ]]
+	local UseUserExperimentResult = if GetFFlagEnableChatLineReportingFunction() then UseUserExperimentFunction({ FStringReportingIXPLayer }, function(p2)
 		-- upvalues: FStringReportingIXPLayer (upval)
 		return (p2[FStringReportingIXPLayer] or {}).EnableChatLineReporting
 	end) else false
-	local UseResult1 = ReactModule.useCallback(function(p2, p3) --[[ Line: 165 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: JoinResult (copy)
-		return if type(p3) == "number" then JoinResult.transparencyValue else p3:map(function(p4): number --[[ Line: 170 ]]
+		return if type(p3) == "number" then JoinResult.transparencyValue else p3:map(function(p4): number
 			-- upvalues: p2 (copy)
 			return p2 + p4 * (1 - p2)
 		end)
 	end, if GetFFlagChatWindowUseCallbackOptimizationsModule() then { JoinResult.transparencyValue } else nil)
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 176 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: JoinResult (copy)
 		JoinResult.resetTargetChannel()
 		local Number: number? = tonumber(p2.userId)
@@ -149,16 +149,16 @@ return (ReactModule.memo(function(p1) --[[ Line: 60 ]]
 	} else nil)
 	local SelectedChannelName = JoinResult.selectedChannelName or "UNKNOWN_TAB"
 	local Config = if FFlagExpChatPerfTrackerTabName then { tabName = SelectedChannelName } else nil
-	ReactModule.useEffect(function() --[[ Line: 190 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ExpChatPerfTracker (upval), Config (copy)
 		ExpChatPerfTracker.finish(ExpChatPerfTracker.Events.ChatWindowMountTTI, {}, Config)
 		
-		return function() --[[ Line: 192 ]]
+		return function()
 			-- upvalues: ExpChatPerfTracker (upval)
 			ExpChatPerfTracker.cancelAll()
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 196 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ExpChatPerfTracker (upval), SelectedChannelName (copy), Config (copy)
 		ExpChatPerfTracker.finish(ExpChatPerfTracker.Events.ChatWindowTabSwitchTTI, { tabId = SelectedChannelName }, Config)
 	end, { SelectedChannelName })
@@ -183,14 +183,14 @@ return (ReactModule.memo(function(p1) --[[ Line: 60 ]]
 		Size = JoinResult.size,
 		Visible = JoinResult.visible,
 		BackgroundTransparency = if FFlagExpChatEnableFriendsTab and JoinResult.suppressBackground then 1 else UseResult1(BackgroundTransparency, JoinResult.transparencyValue),
-		[ReactModule.Change.AbsoluteSize] = if GetFFlagChatWindowUseCallbackOptimizationsModule() then ReactModule.useCallback(function(p2) --[[ Line: 267 ]]
+		[ReactModule.Change.AbsoluteSize] = if GetFFlagChatWindowUseCallbackOptimizationsModule() then ReactModule.useCallback(function(p2)
 			-- upvalues: TextChatService (upval), JoinResult (copy)
 			local ChatWindowConfiguration = TextChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 			
 			if ChatWindowConfiguration and JoinResult.onAbsoluteSizeChanged then
 				JoinResult.onAbsoluteSizeChanged(p2, ChatWindowConfiguration)
 			end
-		end, { TextChatService, JoinResult.onAbsoluteSizeChanged }) else function(p2) --[[ Line: 273 ]]
+		end, { TextChatService, JoinResult.onAbsoluteSizeChanged }) else function(p2)
 			-- upvalues: TextChatService (upval), JoinResult (copy)
 			local ChatWindowConfiguration = TextChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 			
@@ -198,14 +198,14 @@ return (ReactModule.memo(function(p1) --[[ Line: 60 ]]
 				JoinResult.onAbsoluteSizeChanged(p2, ChatWindowConfiguration)
 			end
 		end,
-		[ReactModule.Change.AbsolutePosition] = if GetFFlagChatWindowUseCallbackOptimizationsModule() then ReactModule.useCallback(function(p2) --[[ Line: 280 ]]
+		[ReactModule.Change.AbsolutePosition] = if GetFFlagChatWindowUseCallbackOptimizationsModule() then ReactModule.useCallback(function(p2)
 			-- upvalues: TextChatService (upval), JoinResult (copy)
 			local ChatWindowConfiguration = TextChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 			
 			if ChatWindowConfiguration and JoinResult.onAbsoluteSizeChanged then
 				JoinResult.onAbsolutePositionChanged(p2, ChatWindowConfiguration)
 			end
-		end, { TextChatService, JoinResult.onAbsolutePositionChanged }) else function(p2) --[[ Line: 286 ]]
+		end, { TextChatService, JoinResult.onAbsolutePositionChanged }) else function(p2)
 			-- upvalues: TextChatService (upval), JoinResult (copy)
 			local ChatWindowConfiguration = TextChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 			
@@ -226,7 +226,7 @@ return (ReactModule.memo(function(p1) --[[ Line: 60 ]]
 		contentFrame = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
-			Visible = JoinResult.textTransparency:map(function(p2): boolean --[[ Line: 220 ]]
+			Visible = JoinResult.textTransparency:map(function(p2): boolean
 				-- upvalues: ConfigModule (upval)
 				return p2 < ConfigModule.ChatWindowMessageHideRootFadeThreshold
 			end)

@@ -1,4 +1,4 @@
-﻿return function(p1) --[[ Line: 12 | Named "getCaptureVideoContent" ]]
+﻿return function(p1)
 	if typeof(p1) == "table" and p1.assetId ~= nil then
 		return Content.fromUri(`rbxassetid://{p1.assetId}`)
 	end

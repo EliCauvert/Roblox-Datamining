@@ -1,7 +1,7 @@
 ﻿local Players = game:GetService("Players")
 local StudioService = if game:GetService("RunService"):IsStudio() then game:GetService("StudioService") else nil
 
-return function(p1) --[[ Line: 5 | Named "useLocalUserId" ]]
+return function(p1)
 	-- upvalues: Players (copy), StudioService (copy)
 	local P0 = p1 or Players
 	

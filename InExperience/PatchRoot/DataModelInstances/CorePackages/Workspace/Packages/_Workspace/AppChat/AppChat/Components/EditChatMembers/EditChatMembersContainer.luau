@@ -28,39 +28,39 @@ local config = {
 	conversation = nil,
 	systemButtonText = if GetFFlagIsSquadEnabledFunction() then "Feature.Chat.Action.Create" else "Feature.Chat.Action.StartChatWithFriends",
 	pageHeaderText = if GetFFlagIsSquadEnabledFunction() then "Feature.Chat.Heading.PartyWithConnections" else "Feature.Chat.Heading.ChatWithConnections",
-	setSystemButtonActivated = function(_) --[[ Line: 70 ]] end,
-	setSystemButtonEnabled = function(_) --[[ Line: 71 ]] end
+	setSystemButtonActivated = function(_) end,
+	setSystemButtonEnabled = function(_) end
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 75 | Named "EditChatMembersContainer" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseRefFunction (copy), UseStateFunction (copy), UseAnalyticsModule (copy), UseSelectorFunction (copy), UseCallbackFunction (copy), UseDispatchFunction (copy), AppChatNetworkingModule (copy), CreateConversationModule (copy), PromiseModule (copy), ParseCreateConversationErrorsModule (copy), ConversationModule (copy), ConversationChannelsModule (copy), ExpandToGroupConversationModule (copy), UseEffectFunction (copy), ReactModule (copy), ResponseIndicator (copy), SelectChatMembersContainerModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseRefResult = UseRefFunction({})
 	local UseRefResult1 = UseRefFunction(false)
 	local UseStateResult, UseStateResult2 = UseStateFunction(false)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
-	local UseSelectorResult = UseSelectorFunction(UseCallbackFunction(function(p2) --[[ Line: 82 ]]
+	local UseSelectorResult = UseSelectorFunction(UseCallbackFunction(function(p2)
 		return p2.LocalUserId
 	end, {}))
 	local UseDispatchResult = UseDispatchFunction()
-	local UseCallbackResult = UseCallbackFunction(function(p2, p3) --[[ Line: 88 ]]
+	local UseCallbackResult = UseCallbackFunction(function(p2, p3)
 		-- upvalues: UseDispatchResult (copy), AppChatNetworkingModule (upval)
 		return UseDispatchResult(AppChatNetworkingModule.rodux.AddUserToConversation.API(p3, p2))
 	end, { UseDispatchResult })
-	local UseCallbackResult1 = UseCallbackFunction(function(p2) --[[ Line: 92 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function(p2)
 		-- upvalues: UseDispatchResult (copy), CreateConversationModule (upval), UseAnalyticsModuleResult (copy)
 		return UseDispatchResult(CreateConversationModule("group", p2, UseAnalyticsModuleResult, "userAddedParticipantToOneToOne"))
 	end, { UseDispatchResult })
-	local UseCallbackResult2 = UseCallbackFunction(function(ToastTitle) --[[ Line: 98 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function(ToastTitle)
 		-- upvalues: JoinResult (copy)
 		JoinResult.navigateToToast({
 			toastProps = { toastContent = { toastTitle = ToastTitle } }
 		})
 	end, { JoinResult.navigateToToast })
 	
-	local function SelectedUsersChanged(p2, p3) --[[ Line: 108 ]]
+	local function SelectedUsersChanged(p2, p3)
 		-- upvalues: UseRefResult (copy), CryoModule (upval), UseRefResult1 (copy), JoinResult (copy)
-		UseRefResult.current = CryoModule.List.map(p2, function(p4) --[[ Line: 109 ]]
+		UseRefResult.current = CryoModule.List.map(p2, function(p4)
 			return p4.id
 		end)
 		local Current = p3 <= #p2
@@ -71,7 +71,7 @@ return ReactModule.memo(function(p1) --[[ Line: 75 | Named "EditChatMembersConta
 		end
 	end
 	
-	local UseCallbackResult3 = UseCallbackFunction(function(p2) --[[ Line: 120 ]]
+	local UseCallbackResult3 = UseCallbackFunction(function(p2)
 		-- upvalues: UseStateResult (copy), PromiseModule (upval), JoinResult (copy), ParseCreateConversationErrorsModule (upval), UseCallbackResult2 (copy), UseStateResult2 (copy), ConversationModule (upval), UseCallbackResult (copy), UseRefResult (copy), ConversationChannelsModule (upval), CryoModule (upval), UseSelectorResult (copy), UseDispatchResult (copy), ExpandToGroupConversationModule (upval), UseAnalyticsModuleResult (copy), UseCallbackResult1 (copy)
 		if UseStateResult then
 			return PromiseModule.resolve()
@@ -79,7 +79,7 @@ return ReactModule.memo(function(p1) --[[ Line: 75 | Named "EditChatMembersConta
 		local Id = JoinResult.conversation.id
 		local ConversationType = JoinResult.conversation.conversationType
 		
-		local function v32(p3) --[[ Line: 126 ]]
+		local function v32(p3)
 			-- upvalues: ParseCreateConversationErrorsModule (upval), p2 (copy), UseCallbackResult2 (upval), UseStateResult2 (upval)
 			UseCallbackResult2(if ParseCreateConversationErrorsModule(p3) == "participant_chat_disabled" then p2.invalidParticipantText else p2.networkErrorText)
 			UseStateResult2(false)
@@ -88,7 +88,7 @@ return ReactModule.memo(function(p1) --[[ Line: 75 | Named "EditChatMembersConta
 		UseStateResult2(true)
 		
 		if ConversationType == ConversationModule.Type.MULTI_USER_CONVERSATION then
-			return UseCallbackResult(UseRefResult.current, Id):andThen(function() --[[ Line: 138 ]]
+			return UseCallbackResult(UseRefResult.current, Id):andThen(function()
 				-- upvalues: JoinResult (upval), Id (copy)
 				JoinResult.navigateToConversation(Id)
 			end, v32)
@@ -106,15 +106,15 @@ return ReactModule.memo(function(p1) --[[ Line: 75 | Named "EditChatMembersConta
 			
 			return PromiseModule.reject("Cannot expand to group chat while there is an active party if the chat has expanded chat features")
 		else
-			local FilterResult = CryoModule.List.filter(CryoModule.List.join(UseRefResult.current, JoinResult.conversation.participants), function(LocalUserId): boolean --[[ Line: 155 ]]
+			local FilterResult = CryoModule.List.filter(CryoModule.List.join(UseRefResult.current, JoinResult.conversation.participants), function(LocalUserId): boolean
 				-- upvalues: UseSelectorResult (upval)
 				return LocalUserId ~= UseSelectorResult
 			end)
 			
-			return if JoinResult.conversation.source == "channels" or JoinResult.conversation.source == "chat" then UseDispatchResult(ExpandToGroupConversationModule(Id, FilterResult, UseAnalyticsModuleResult)):andThen(function(Result) --[[ Line: 163 ]]
+			return if JoinResult.conversation.source == "channels" or JoinResult.conversation.source == "chat" then UseDispatchResult(ExpandToGroupConversationModule(Id, FilterResult, UseAnalyticsModuleResult)):andThen(function(Result)
 				-- upvalues: JoinResult (upval)
 				JoinResult.navigateToConversation(Result.id)
-			end, v32) else UseCallbackResult1(FilterResult):andThen(function(Result) --[[ Line: 167 ]]
+			end, v32) else UseCallbackResult1(FilterResult):andThen(function(Result)
 				-- upvalues: JoinResult (upval)
 				JoinResult.navigateToConversation(Result.id)
 			end, v32)
@@ -125,7 +125,7 @@ return ReactModule.memo(function(p1) --[[ Line: 75 | Named "EditChatMembersConta
 		JoinResult.conversation.conversationType, JoinResult.conversation.participants,
 		JoinResult.conversation.source, UseCallbackResult2, UseAnalyticsModuleResult
 	})
-	UseEffectFunction(function() --[[ Line: 193 ]]
+	UseEffectFunction(function()
 		-- upvalues: JoinResult (copy), UseCallbackResult3 (copy)
 		JoinResult.setSystemButtonActivated(UseCallbackResult3)
 	end, { JoinResult.setSystemButtonActivated, UseCallbackResult3 })

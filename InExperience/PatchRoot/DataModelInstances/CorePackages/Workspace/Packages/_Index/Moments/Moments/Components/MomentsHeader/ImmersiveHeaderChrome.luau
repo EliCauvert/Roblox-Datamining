@@ -6,28 +6,28 @@ local ConstantsModule = require(Moments.Constants)
 local UseChromeRatioModule = require(Moments.Hooks.useChromeRatio)
 local FFlagMomentsImmersiveHeaderFadeOutModule = require(Moments.Flags.FFlagMomentsImmersiveHeaderFadeOut)
 
-return function(p1) --[[ Line: 21 | Named "ImmersiveHeaderChrome" ]]
+return function(p1)
 	-- upvalues: UseChromeRatioModule (copy), FFlagMomentsImmersiveHeaderFadeOutModule (copy), ReactModule (copy), ConstantsModule (copy), View (copy)
 	local UseChromeRatioModuleResult = UseChromeRatioModule()
 	local NoFFlagMomentsImmersiveHeaderFadeOutModule = not FFlagMomentsImmersiveHeaderFadeOutModule
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean --[[ Line: 29 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean
 		-- upvalues: FFlagMomentsImmersiveHeaderFadeOutModule (copy), UseChromeRatioModuleResult (copy)
 		return FFlagMomentsImmersiveHeaderFadeOutModule and UseChromeRatioModuleResult:getValue() < 1
 	end)
-	ReactModule.useEffect(function() --[[ Line: 35 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagMomentsImmersiveHeaderFadeOutModule (copy), UseStateResult2 (copy), UseChromeRatioModuleResult (copy), ReactModule (upval)
 		if not FFlagMomentsImmersiveHeaderFadeOutModule then return end
-		local function applyRatio(p2: number) --[[ Line: 40 ]]
+		local function applyRatio(p2: number)
 			-- upvalues: UseStateResult2 (upval)
 			local v1 = p2 < 1
-			UseStateResult2(function(p3) --[[ Line: 42 ]]
+			UseStateResult2(function(p3)
 				-- upvalues: v1 (copy)
 				return if p3 == v1 then p3 else v1
 			end)
 		end
 		
 		local IsValueBelow = UseChromeRatioModuleResult:getValue() < 1
-		UseStateResult2(function(p2) --[[ Line: 42 ]]
+		UseStateResult2(function(p2)
 			-- upvalues: IsValueBelow (copy)
 			return if p2 == IsValueBelow then p2 else IsValueBelow
 		end)
@@ -38,14 +38,14 @@ return function(p1) --[[ Line: 21 | Named "ImmersiveHeaderChrome" ]]
 		FFlagMomentsImmersiveHeaderFadeOutModule
 	})
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 55 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseBindingResult2 (copy)
 		UseBindingResult2(Frame.AbsoluteSize.Y)
 	end, {})
 	local MapResult = ReactModule.joinBindings({
 		ratio = UseChromeRatioModuleResult,
 		height = UseBindingResult
-	}):map(function(p2): UDim2 --[[ Line: 62 ]]
+	}):map(function(p2): UDim2
 		return UDim2.new(0, 0, 0, (p2.ratio - 1) * p2.height)
 	end)
 	local config = {
@@ -54,7 +54,7 @@ return function(p1) --[[ Line: 21 | Named "ImmersiveHeaderChrome" ]]
 		LayoutOrder = p1.layoutOrder,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		Interactable = UseChromeRatioModuleResult:map(function(p2: number): boolean --[[ Line: 72 ]]
+		Interactable = UseChromeRatioModuleResult:map(function(p2: number): boolean
 			return p2 > 0.01
 		end),
 		ZIndex = ConstantsModule.DisplayOrder.FeedTopBar,
@@ -69,7 +69,7 @@ return function(p1) --[[ Line: 21 | Named "ImmersiveHeaderChrome" ]]
 	
 	if FFlagMomentsImmersiveHeaderFadeOutModule and UseStateResult then
 		v1 = "CanvasGroup"
-		config.GroupTransparency = UseChromeRatioModuleResult:map(function(p2: number): number --[[ Line: 88 ]]
+		config.GroupTransparency = UseChromeRatioModuleResult:map(function(p2: number): number
 			return 1 - p2
 		end)
 	end

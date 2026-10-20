@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("LuaIdentityGetSMSOTP", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("LuaIdentityGetSMSOTP")
 end

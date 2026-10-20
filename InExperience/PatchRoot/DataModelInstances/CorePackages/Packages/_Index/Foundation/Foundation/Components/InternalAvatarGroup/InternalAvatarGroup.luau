@@ -23,7 +23,7 @@ local config = {
 	type = require(Foundation.Enums.AvatarGroupType).Spread
 }
 
-local function AvatarOverflow(p1) --[[ Line: 61 ]]
+local function AvatarOverflow(p1)
 	-- upvalues: UseTokensModule (copy), UsePresentationContextFunction (copy), UseCumulativeBackgroundModule (copy), ColorNamespaceModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), IconModule (copy), Icon (copy), IconSizeModule (copy), TextModule (copy)
 	local TextCaptionSmall: string = if p1.isEllipsed then "text-caption-small" else "text-caption-medium"
 	local Emphasis = UseTokensModule()[UsePresentationContextFunction().colorNamespace or ColorNamespaceModule.Color].Content.Emphasis
@@ -45,7 +45,7 @@ local function AvatarOverflow(p1) --[[ Line: 61 ]]
 	}))
 end
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 96 | Named "InternalAvatarGroup" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UsePresentationContextFunction (copy), ColorNamespaceModule (copy), ReactIsModule (copy), GetBindableValueModule (copy), ReactModule (copy), AvatarOverflow (copy), ViewModule (copy), WithCommonPropsModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()

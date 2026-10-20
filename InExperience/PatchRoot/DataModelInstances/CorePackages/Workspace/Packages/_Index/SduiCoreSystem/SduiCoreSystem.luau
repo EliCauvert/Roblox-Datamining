@@ -38,40 +38,40 @@ return {
 	useUidRefString = require(script.useUidRefString),
 	validateInterface = require(script.validateInterface),
 	validateSduiComponentConfig = require(script.validateSduiComponentConfig),
-	getSduiClientBindingBuilder = function() --[[ Line: 103 ]]
+	getSduiClientBindingBuilder = function()
 		return require(script.ClientBinding.SduiClientBindingBuilder)
 	end,
-	getSduiDataBinder = function() --[[ Line: 106 ]]
+	getSduiDataBinder = function()
 		return require(script.ClientBinding.SduiDataBinder)
 	end,
-	getProtoVariableMapper = function() --[[ Line: 109 ]]
+	getProtoVariableMapper = function()
 		return require(script.ClientBinding.ProtoVariableMapper)
 	end,
-	getDefaultHydrationIdPaths = function() --[[ Line: 112 ]]
+	getDefaultHydrationIdPaths = function()
 		return require(script.ClientBinding.defaultHydrationIdPaths)
 	end,
-	createBuilderConfig = function(p1) --[[ Line: 115 ]]
+	createBuilderConfig = function(p1)
 		return require(script.ClientBinding.createBuilderConfig)(p1)
 	end,
-	getSduiActionHandlerRegistry = function() --[[ Line: 119 ]]
+	getSduiActionHandlerRegistry = function()
 		return require(script.getSduiActionHandlerRegistry)()
 	end,
-	getSduiImpressionHandlerRegistry = function() --[[ Line: 122 ]]
+	getSduiImpressionHandlerRegistry = function()
 		return require(script.getSduiImpressionHandlerRegistry)()
 	end,
-	getSduiTelemetryHandlerNameRegistry = function() --[[ Line: 125 ]]
+	getSduiTelemetryHandlerNameRegistry = function()
 		return require(script.getSduiTelemetryHandlerNameRegistry)()
 	end,
-	getSduiServiceDependenciesStore = function() --[[ Line: 128 ]]
+	getSduiServiceDependenciesStore = function()
 		return require(script.ClientBinding.getSduiServiceDependenciesStore)()
 	end,
-	getOneByTwoTileFlowIdsFromPools = function(p1) --[[ Line: 131 ]]
+	getOneByTwoTileFlowIdsFromPools = function(p1)
 		return require(script.ClientBinding.PropBuilder.SduiPoolEntryHelpers).getOneByTwoTileFlowIdsFromPools(p1)
 	end,
-	getSduiTokensStore = function() --[[ Line: 136 ]]
+	getSduiTokensStore = function()
 		return require(script.ClientBinding.getSduiTokensStore)()
 	end,
-	getSduiPolicyStore = function() --[[ Line: 139 ]]
+	getSduiPolicyStore = function()
 		return require(script.ClientBinding.getSduiPolicyStore)()
 	end,
 	getSduiComponentRegistry = require(script.getSduiComponentRegistry),

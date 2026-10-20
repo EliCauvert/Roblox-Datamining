@@ -6,13 +6,13 @@ local _ = require(MomentsCommon.Media.MediaTypes)
 local MediaPreloadProviderModule = require(MomentsCommon.Media.Components.MediaPreloadProvider)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
-return function(p1) --[[ Line: 28 | Named "useMomentMediaController" ]]
+return function(p1)
 	-- upvalues: MediaPreloadProviderModule (copy), ReactModule (copy), SignalsModule (copy), UseSignalStateFunction (copy)
 	local UseMediaControllerProviderResult = MediaPreloadProviderModule.useMediaControllerProvider()
 	
-	return UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 35 ]]
+	return UseSignalStateFunction((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), UseMediaControllerProviderResult (copy), p1 (copy)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 36 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: UseMediaControllerProviderResult (upval), p1 (upval)
 			return if UseMediaControllerProviderResult == nil then nil else UseMediaControllerProviderResult.getControllerMap(p2)[p1]
 		end)

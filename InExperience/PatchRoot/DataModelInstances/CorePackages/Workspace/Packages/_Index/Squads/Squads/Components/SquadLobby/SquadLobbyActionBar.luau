@@ -65,9 +65,9 @@ local config = {
 }
 local Search: string = if SquadCoordinationExperienceJoinExperimentation.getIsSearchIconOnExpPickerEnabled() then "icons/common/search" else "icons/common/play"
 
-local function _(p1): boolean --[[ Line: 159 | Named "getTooltipWasShownFromAppStorage" ]]
+local function _(p1): boolean
 	-- upvalues: AppStorageService (copy), SquadExperiencePickerTooltipSeenStorageValue (copy)
-	local Success, Result = pcall(function() --[[ Line: 160 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: AppStorageService (upval), p1 (copy)
 		return AppStorageService:GetItem(p1)
 	end)
@@ -75,36 +75,36 @@ local function _(p1): boolean --[[ Line: 159 | Named "getTooltipWasShownFromAppS
 	return if Success and Result ~= nil then Result == SquadExperiencePickerTooltipSeenStorageValue else false
 end
 
-local _ = function(p1) --[[ Line: 171 | Named "setTooltipWasShownFromAppStorage" ]]
+local _ = function(p1)
 	-- upvalues: AppStorageService (copy), SquadExperiencePickerTooltipSeenStorageValue (copy)
-	pcall(function() --[[ Line: 172 ]]
+	pcall(function()
 		-- upvalues: AppStorageService (upval), p1 (copy), SquadExperiencePickerTooltipSeenStorageValue (upval)
 		AppStorageService:SetItem(p1, SquadExperiencePickerTooltipSeenStorageValue)
 		AppStorageService:Flush()
 	end)
 end
 
-local function v40(p1) --[[ Line: 178 ]]
+local function v40(p1)
 	-- upvalues: ReactModule (copy), ControlState (copy), UseTokensFunction (copy), UseLastInputMethodFunction (copy), SquadCoordinationExperienceJoinExperimentation (copy), AppStorageService (copy), SquadExperiencePickerTooltipSeenStorageValue (copy), InputUtilities (copy), CoreGui (copy), ExternalEventConnection (copy), UserInputService (copy), FoundationModule (copy), WithTooltipFunction (copy), WithHoverTooltipFunction (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(ControlState.Initialize)
 	local UseTokensResult = UseTokensFunction()
 	local UseLastInputMethodResult = UseLastInputMethodFunction()
 	local config = { headerText = p1.tooltipText }
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 190 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SquadCoordinationExperienceJoinExperimentation (upval), p1 (copy), AppStorageService (upval), SquadExperiencePickerTooltipSeenStorageValue (upval), UseStateResult2 (copy)
 		if SquadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then
 			repeat
 				if p1.enableFirstTimeTooltip and p1.showFtuxCustomConditionsMet and (p1.currentHoveredButton == "" or p1.currentHoveredButton == p1.triggerPointName) then
 					local FtuxAppStorageKey = p1.ftuxAppStorageKey
-					local Success, Result = pcall(function() --[[ Line: 160 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: AppStorageService (upval), FtuxAppStorageKey (copy)
 						return AppStorageService:GetItem(FtuxAppStorageKey)
 					end)
 					
 					if not (if Success and Result ~= nil then Result == SquadExperiencePickerTooltipSeenStorageValue else false) then
 						local FtuxAppStorageKey1 = p1.ftuxAppStorageKey
-						pcall(function() --[[ Line: 172 ]]
+						pcall(function()
 							-- upvalues: AppStorageService (upval), FtuxAppStorageKey1 (copy), SquadExperiencePickerTooltipSeenStorageValue (upval)
 							AppStorageService:SetItem(FtuxAppStorageKey1, SquadExperiencePickerTooltipSeenStorageValue)
 							AppStorageService:Flush()
@@ -126,7 +126,7 @@ local function v40(p1) --[[ Line: 178 ]]
 		p1.showFtuxCustomConditionsMet,
 		p1.triggerPointName
 	})
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 221 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: InputUtilities (upval), UseLastInputMethodResult (copy), UseStateResult2 (copy)
 		if InputUtilities.isActivationInput(p2) or UseLastInputMethodResult == "Gamepad" then
 			UseStateResult2(false)
@@ -140,9 +140,9 @@ local function v40(p1) --[[ Line: 178 ]]
 		triggerPointName = p1.triggerPointName
 	}
 	
-	local function v56(p2, p3, Callback) --[[ Line: 237 ]]
+	local function v56(p2, p3, Callback)
 		-- upvalues: ReactModule (upval), ControlState (upval), SquadCoordinationExperienceJoinExperimentation (upval), p1 (copy), UseBindingResult (copy), UseBindingResult2 (copy), UseStateResult (copy), ExternalEventConnection (upval), UserInputService (upval), UseResult (copy), FoundationModule (upval), UseTokensResult (copy)
-		local UseResult1 = ReactModule.useCallback(function() --[[ Line: 255 ]]
+		local UseResult1 = ReactModule.useCallback(function()
 			-- upvalues: p1 (upval), UseStateResult (upval)
 			if p1.onActivated then
 				p1.onActivated(UseStateResult)
@@ -167,7 +167,7 @@ local function v40(p1) --[[ Line: 178 ]]
 				cornerRadius = UDim.new(0, UseTokensResult.Radius.Circle),
 				isDisabled = p1.isDisabled,
 				onActivated = if SquadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then UseResult1 else p1.onActivated,
-				onStateChanged = ReactModule.useCallback(function(p4) --[[ Line: 238 ]]
+				onStateChanged = ReactModule.useCallback(function(p4)
 					-- upvalues: ControlState (upval), SquadCoordinationExperienceJoinExperimentation (upval), p1 (upval), Callback (copy), UseBindingResult (upval), UseBindingResult2 (upval)
 					local FromRawValueResult = ControlState.fromRawValue(p4)
 					
@@ -192,12 +192,12 @@ local function v40(p1) --[[ Line: 178 ]]
 		})
 	end
 	
-	local function v57(p2) --[[ Line: 289 ]]
+	local function v57(p2)
 		-- upvalues: v56 (copy)
 		return v56(p2, p2, nil)
 	end
 	
-	local function v58(p2, p3) --[[ Line: 293 ]]
+	local function v58(p2, p3)
 		-- upvalues: v56 (copy)
 		return v56(p2, p2, p3)
 	end
@@ -205,14 +205,14 @@ local function v40(p1) --[[ Line: 178 ]]
 	return if SquadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() and UseStateResult then WithTooltipFunction(config, config1, v57) else WithHoverTooltipFunction(config, config1, v58)
 end
 
-local _ = function(p1) --[[ Line: 303 | Named "tagToSize" ]]
+local _ = function(p1)
 	return {
 		["size-600-600"] = p1.Size.Size_600,
 		["size-800-800"] = p1.Size.Size_800
 	}
 end
 
-local function renderStandardImage(IsNotSquadStateMatch, Image, Size, p1, TestId) --[[ Line: 310 ]]
+local function renderStandardImage(IsNotSquadStateMatch, Image, Size, p1, TestId)
 	-- upvalues: config (copy), ReactModule (copy), FoundationModule (copy)
 	local Entry = config[Image]
 	
@@ -243,14 +243,14 @@ local function renderStandardImage(IsNotSquadStateMatch, Image, Size, p1, TestId
 	end
 end
 
-local function getLoadingIndicatorIcon(p1, Input, p2, p3, p4) --[[ Line: 335 ]]
+local function getLoadingIndicatorIcon(p1, Input, p2, p3, p4)
 	-- upvalues: VoiceChatModule (copy)
 	local MicDark: string = if p1.Config.ColorMode.IsLight == "true" then "MicDark" else "MicLight"
 	
 	return if p2 and Input and not Input.isMuted then if p3 then VoiceChatModule.Utils.GetIcon("Unmuted", MicDark, p4) else VoiceChatModule.Utils.GetIcon("Unmuted0", MicDark) else VoiceChatModule.Utils.GetIcon("Muted", MicDark)
 end
 
-local function renderToggleAudioFocusButton(p1, TooltipText, OnActivated, p2, UseResult) --[[ Line: 353 ]]
+local function renderToggleAudioFocusButton(p1, TooltipText, OnActivated, p2, UseResult)
 	-- upvalues: ReactModule (copy), v40 (copy), SquadCoordinationExperienceJoinExperimentation (copy), FoundationModule (copy), FFlagSquadsEnableFoundationTestIdsModule (copy)
 	return ReactModule.createElement(v40, {
 		isDisabled = false,
@@ -287,7 +287,7 @@ local function renderToggleAudioFocusButton(p1, TooltipText, OnActivated, p2, Us
 	})
 end
 
-return function(p1) --[[ Line: 405 ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseLocalizationFunction (copy), SquadCoordinationExperienceJoinExperimentation (copy), UseTokensFunction (copy), UseCurrentSquadParentChannelIdFunction (copy), UseCurrentSquadSelectorFunction (copy), UseVoiceStatusFunction (copy), ReactModule (copy), UseAppPolicyFunction (copy), HttpService (copy), SquadLobbySessionProvider (copy), SquadExternalContractContext (copy), FFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), EventNamesModule (copy), SquadPartySheetActionEnumModule (copy), SessionType (copy), LeaveSquadFunction (copy), SquadState (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), v40 (copy), Badge (copy), BadgeVariant (copy), renderStandardImage (copy), Search (copy), Size (copy), GetFFlagEnableCrossExpVoiceFunction (copy), UseLocalUserIdFunction (copy), UseBackgroundExperienceFunction (copy), UseParticipantFunction (copy), UseIsVoiceConnectedFunction (copy), UseIsVoiceDisconnectedFunction (copy), UseIsVoiceFocusedFunction (copy), UseParticipantsFunction (copy), UseIsActiveParticipantFunction (copy), AudioFocusManagementEngineFeature (copy), CrossExperienceVoiceManager (copy), FFlagSquadLobbyActionBarFixMicLevelRerenderModule (copy), RunService (copy), renderToggleAudioFocusButton (copy), EnableCrossExpVoiceDebug (copy), getLoadingIndicatorIcon (copy), FoundationModule (copy), ConstantsModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -303,22 +303,22 @@ return function(p1) --[[ Line: 405 ]]
 	local UseCurrentSquadSelectorResult = UseCurrentSquadSelectorFunction()
 	local UseVoiceStatusResult = UseVoiceStatusFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState("")
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 426 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(p2)
 	end, {})
 	local CountMembers: number = if UseCurrentSquadSelectorResult and UseCurrentSquadSelectorResult.members then #UseCurrentSquadSelectorResult.members else 0
-	local UseAppPolicyResult = UseAppPolicyFunction((ReactModule.useCallback(function(p2) --[[ Line: 433 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction((ReactModule.useCallback(function(p2)
 		return p2.getCanUsePlatformChat()
 	end, {})))
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 438 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: HttpService (upval)
 		return HttpService:GenerateGUID()
 	end, {})
 	local UseContextResult = if SquadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled() then ReactModule.useContext(SquadLobbySessionProvider.Context) else nil
 	local UseContextResult1 = ReactModule.useContext(SquadExternalContractContext)
 	local NoFFlagPartyDevAPIToRespectThirdPartySettingsEnabled = not FFlagPartyDevAPIToRespectThirdPartySettingsEnabled or UseContextResult1.useIsChatEnabled()
-	local UseResult1 = ReactModule.useCallback(function(IsFtuxTooltipShown) --[[ Line: 450 ]]
+	local UseResult1 = ReactModule.useCallback(function(IsFtuxTooltipShown)
 		-- upvalues: UseContextResult1 (copy), EventNamesModule (upval), UseCurrentSquadParentChannelIdResult (copy), SquadPartySheetActionEnumModule (upval), UseVoiceStatusResult (copy), p1 (copy)
 		UseContextResult1.fireSquadAnalytics(EventNamesModule.PartySheetAction, {
 			parentChannelId = UseCurrentSquadParentChannelIdResult,
@@ -341,7 +341,7 @@ return function(p1) --[[ Line: 405 ]]
 		UseContextResult1.fireSquadAnalytics,
 		UseVoiceStatusResult
 	})
-	local UseResult2 = ReactModule.useCallback(function(IsFtuxTooltipShown) --[[ Line: 470 ]]
+	local UseResult2 = ReactModule.useCallback(function(IsFtuxTooltipShown)
 		-- upvalues: SquadCoordinationExperienceJoinExperimentation (upval), UseContextResult (copy), SessionType (upval), HttpService (upval), UseContextResult1 (copy), EventNamesModule (upval), UseCurrentSquadParentChannelIdResult (copy), SquadPartySheetActionEnumModule (upval), UseVoiceStatusResult (copy), UseDispatchResult (copy), p1 (copy)
 		if SquadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled() then
 			UseContextResult.updateMetadata(SessionType.Metadata.SquadLobbyPage.ExperiencePickerUuid, HttpService:GenerateGUID(false))
@@ -368,7 +368,7 @@ return function(p1) --[[ Line: 405 ]]
 		if SquadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled() then UseContextResult.updateMetadata else nil,
 		UseVoiceStatusResult
 	})
-	local UseResult3 = ReactModule.useCallback(function(IsFtuxTooltipShown) --[[ Line: 503 ]]
+	local UseResult3 = ReactModule.useCallback(function(IsFtuxTooltipShown)
 		-- upvalues: UseContextResult1 (copy), EventNamesModule (upval), UseCurrentSquadParentChannelIdResult (copy), SquadPartySheetActionEnumModule (upval), UseVoiceStatusResult (copy), UseDispatchResult (copy), LeaveSquadFunction (upval), p1 (copy), FFlagPartyDevAPIToRespectThirdPartySettingsEnabled (upval), NoFFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy)
 		UseContextResult1.fireSquadAnalytics(EventNamesModule.PartySheetAction, {
 			parentChannelId = UseCurrentSquadParentChannelIdResult,
@@ -376,7 +376,7 @@ return function(p1) --[[ Line: 405 ]]
 			isFtuxTooltipShown = IsFtuxTooltipShown,
 			voiceStatus = UseVoiceStatusResult
 		})
-		UseDispatchResult(LeaveSquadFunction(nil, UseContextResult1.setSquadPrompt, function() --[[ Line: 515 ]]
+		UseDispatchResult(LeaveSquadFunction(nil, UseContextResult1.setSquadPrompt, function()
 			-- upvalues: p1 (upval)
 			p1.navigateAwayFromSquad()
 		end, UseContextResult1.squadLocation, not FFlagPartyDevAPIToRespectThirdPartySettingsEnabled or NoFFlagPartyDevAPIToRespectThirdPartySettingsEnabled))
@@ -388,7 +388,7 @@ return function(p1) --[[ Line: 405 ]]
 		UseVoiceStatusResult
 	})
 	local IsNotSquadStateMatch = p1.squadState ~= SquadState.Active
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 535 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: FFlagSquadsEnableFoundationTestIdsModule (upval), ReactModule (upval), v40 (upval), SquadCoordinationExperienceJoinExperimentation (upval), UseStateResult (copy), IsNotSquadStateMatch (copy), UseResult1 (copy), UseResult (copy), UseLocalizationResult (copy), p1 (copy), Badge (upval), UseTokensResult (copy), BadgeVariant (upval), renderStandardImage (upval)
 		return ReactModule.createElement(v40, {
 			layoutOrder = 2,
@@ -417,7 +417,7 @@ return function(p1) --[[ Line: 405 ]]
 		if SquadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then UseResult else nil,
 		p1.hasUnreadMessages
 	})
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 583 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: FFlagSquadsEnableFoundationTestIdsModule (upval), p1 (copy), ReactModule (upval), v40 (upval), SquadCoordinationExperienceJoinExperimentation (upval), UseStateResult (copy), IsNotSquadStateMatch (copy), UseResult2 (copy), UseResult (copy), CountMembers (copy), UseLocalizationResult (copy), renderStandardImage (upval), Search (upval), Size (upval), UseTokensResult (copy)
 		local SocialSquadLobbyActionBarPickExperienceButtonIcon = if FFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-action-bar--pick-experience-button--icon" else nil
 		
@@ -441,7 +441,7 @@ return function(p1) --[[ Line: 405 ]]
 		if SquadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then UseResult else nil,
 		p1.isInExperience, p1.navigateToHomePage
 	})
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 632 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: IsNotSquadStateMatch (copy), UseTokensResult (copy), FFlagSquadsEnableFoundationTestIdsModule (upval), ReactModule (upval), v40 (upval), SquadCoordinationExperienceJoinExperimentation (upval), UseStateResult (copy), UseResult3 (copy), UseResult (copy), UseLocalizationResult (copy), renderStandardImage (upval)
 		return ReactModule.createElement(v40, {
 			layoutOrder = 4,
@@ -477,7 +477,7 @@ return function(p1) --[[ Line: 405 ]]
 		local UseParticipantsResult = UseParticipantsFunction()
 		local UseIsActiveParticipantResult = UseIsActiveParticipantFunction(Number)
 		local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
-		local UseResult4 = ReactModule.useCallback(function(_) --[[ Line: 687 ]]
+		local UseResult4 = ReactModule.useCallback(function(_)
 			-- upvalues: HttpService (upval), UseBackgroundExperienceResult (copy), UseParticipantResult (copy), UseParticipantsResult (copy), CrossExperienceVoiceManager (upval)
 			print("----------- CEV FOREGROUND -----------")
 			print("Experience info", HttpService:JSONEncode(UseBackgroundExperienceResult))
@@ -486,7 +486,7 @@ return function(p1) --[[ Line: 405 ]]
 			print("--------------------------------------")
 			CrossExperienceVoiceManager.default:dumpDebugData()
 		end, { UseParticipantsResult, UseParticipantResult })
-		local UseResult5 = ReactModule.useCallback(function(_) --[[ Line: 696 ]]
+		local UseResult5 = ReactModule.useCallback(function(_)
 			-- upvalues: UseParticipantResult (copy), CrossExperienceVoiceManager (upval)
 			if UseParticipantResult then
 				if UseParticipantResult.isMuted then
@@ -498,13 +498,13 @@ return function(p1) --[[ Line: 405 ]]
 			end
 		end, { UseParticipantResult })
 		local IsUseIsActiveParticipantResult: boolean = not IsNotSquadStateMatch and (UseIsVoiceConnectedResult and (UseParticipantResult ~= nil and (not UseParticipantResult.isMuted and UseIsActiveParticipantResult == true)))
-		ReactModule.useEffect(function() --[[ Line: 713 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: FFlagSquadLobbyActionBarFixMicLevelRerenderModule (upval), IsUseIsActiveParticipantResult (copy), p1 (copy), RunService (upval), UseMemoResult (copy), UseRefResult (copy), UseStateResult2_1 (copy)
 			if FFlagSquadLobbyActionBarFixMicLevelRerenderModule and not IsUseIsActiveParticipantResult then
 				return nil
 			else
 				local RenderStepService = p1.renderStepService or RunService
-				RenderStepService:BindToRenderStep(UseMemoResult, 1, function() --[[ Line: 718 ]]
+				RenderStepService:BindToRenderStep(UseMemoResult, 1, function()
 					-- upvalues: UseRefResult (upval), UseStateResult2_1 (upval)
 					if UseRefResult.current > 3 then
 						UseStateResult2_1(math.random())
@@ -516,13 +516,13 @@ return function(p1) --[[ Line: 405 ]]
 					end
 				end)
 				
-				return function() --[[ Line: 727 ]]
+				return function()
 					-- upvalues: RenderStepService (copy), UseMemoResult (upval)
 					RenderStepService:UnbindFromRenderStep(UseMemoResult)
 				end
 			end
 		end, if FFlagSquadLobbyActionBarFixMicLevelRerenderModule then { IsUseIsActiveParticipantResult, p1.renderStepService } else { p1.renderStepService })
-		UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 736 ]]
+		UseMemoResult4 = ReactModule.useMemo(function()
 			-- upvalues: IsNotSquadStateMatch (copy), AudioFocusManagementEngineFeature (copy), UseIsVoiceConnectedResult (copy), renderToggleAudioFocusButton (upval), UseTokensResult (copy), UseLocalizationResult (copy), p1 (copy), UseStateResult (copy), UseResult (copy)
 			return if IsNotSquadStateMatch or not AudioFocusManagementEngineFeature or not UseIsVoiceConnectedResult then nil else renderToggleAudioFocusButton(UseTokensResult, UseLocalizationResult.audioText, p1.toggleVoiceChatMenu, UseStateResult, UseResult)
 		end, {
@@ -532,7 +532,7 @@ return function(p1) --[[ Line: 405 ]]
 		})
 		
 		if EnableCrossExpVoiceDebug then
-			UseMemoResult5 = ReactModule.useMemo(function() --[[ Line: 759 ]]
+			UseMemoResult5 = ReactModule.useMemo(function()
 				-- upvalues: FFlagSquadsEnableFoundationTestIdsModule (upval), ReactModule (upval), v40 (upval), SquadCoordinationExperienceJoinExperimentation (upval), UseStateResult (copy), IsNotSquadStateMatch (copy), UseResult4 (copy), UseResult (copy), renderStandardImage (upval), UseTokensResult (copy)
 				return ReactModule.createElement(v40, {
 					layoutOrder = 5,
@@ -554,14 +554,14 @@ return function(p1) --[[ Line: 405 ]]
 				if SquadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then UseResult else nil
 			})
 		end
-		local UseMemoResult7 = ReactModule.useMemo(function() --[[ Line: 798 ]]
+		local UseMemoResult7 = ReactModule.useMemo(function()
 			-- upvalues: getLoadingIndicatorIcon (upval), UseTokensResult (copy), UseParticipantResult (copy), UseIsVoiceConnectedResult (copy), IsNotSquadStateMatch (copy), UseIsActiveParticipantResult (copy), UseStateResult1 (copy)
 			return getLoadingIndicatorIcon(UseTokensResult, UseParticipantResult, UseIsVoiceConnectedResult, not IsNotSquadStateMatch and UseIsActiveParticipantResult, UseStateResult1)
 		end, {
 			UseIsActiveParticipantResult, IsNotSquadStateMatch, UseIsVoiceConnectedResult,
 			UseStateResult1, UseParticipantResult, UseTokensResult
 		})
-		UseMemoResult6 = ReactModule.useMemo(function() --[[ Line: 808 ]]
+		UseMemoResult6 = ReactModule.useMemo(function()
 			-- upvalues: UseIsVoiceDisconnectedResult (copy), IsNotSquadStateMatch (copy), AudioFocusManagementEngineFeature (upval), UseIsVoiceFocusedResult (copy), UseIsVoiceConnectedResult (copy), UseParticipantResult (copy), FFlagSquadsEnableFoundationTestIdsModule (upval), ReactModule (upval), v40 (upval), SquadCoordinationExperienceJoinExperimentation (upval), UseStateResult (copy), UseResult5 (copy), UseResult (copy), UseLocalizationResult (copy), renderStandardImage (upval), UseMemoResult7 (copy), UseTokensResult (copy)
 			if UseIsVoiceDisconnectedResult then
 				return nil

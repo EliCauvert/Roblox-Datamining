@@ -5,7 +5,7 @@ local ReactModule = require(Parent.React)
 local _ = require(AvatarExperienceProfilePictureEditor.Hooks.useUserAvatarConfigurations)
 local ConstantsModule = require(AvatarExperienceProfilePictureEditor.Constants)
 
-return function(p1) --[[ Line: 34 | Named "useEditProfileImageDraft" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FFlagEditProfileFramesEnabled (copy), ConstantsModule (copy)
 	local SavedCloseupConfig = p1.savedCloseupConfig
 	local SavedFrameAssetId = p1.savedFrameAssetId
@@ -22,7 +22,7 @@ return function(p1) --[[ Line: 34 | Named "useEditProfileImageDraft" ]]
 	local UseRefResult = ReactModule.useRef(false)
 	local UseRefResult1 = ReactModule.useRef(false)
 	local UseRefResult2 = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 53 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: IsSavedConfigLoading (copy), UseStateResult2 (copy), SavedCloseupConfig (copy), UseStateResult2_2 (copy), UseStateResult2_3 (copy), FFlagEditProfileFramesEnabled (upval), ShowFrames (copy), UseStateResult2_1 (copy), SavedFrameAssetId (copy), ConstantsModule (upval)
 		if IsSavedConfigLoading then return end
 		UseStateResult2(SavedCloseupConfig.emoteAssetId)
@@ -42,7 +42,7 @@ return function(p1) --[[ Line: 34 | Named "useEditProfileImageDraft" ]]
 		IsSavedConfigLoading,
 		ShowFrames
 	})
-	ReactModule.useEffect(function() --[[ Line: 76 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), IsSavedConfigLoading (copy), SavedCloseupConfig (copy), UseStateResult2 (copy), UseStateResult2_2 (copy), UseStateResult2_3 (copy)
 		if UseRefResult.current or IsSavedConfigLoading then return end
 		UseRefResult.current = true
@@ -58,7 +58,7 @@ return function(p1) --[[ Line: 34 | Named "useEditProfileImageDraft" ]]
 		SavedCloseupConfig.distanceScale,
 		IsSavedConfigLoading
 	})
-	ReactModule.useEffect(function() --[[ Line: 96 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: InitialFrameSelectionRequestId (copy), UseRefResult2 (copy), FFlagEditProfileFramesEnabled (upval), ShowFrames (copy), UseRefResult1 (copy), IsSavedConfigLoading (copy), IsInitialFrameSelectionLoading (copy), UseStateResult2_1 (copy), InitialFrameAssetId (copy), IsInitialFrameAvailable (copy), SavedFrameAssetId (copy), ConstantsModule (upval)
 		local IsNotInitialFrameSelectionRequestIdMatch: boolean = InitialFrameSelectionRequestId ~= nil and InitialFrameSelectionRequestId ~= UseRefResult2.current
 		
@@ -80,23 +80,23 @@ return function(p1) --[[ Line: 34 | Named "useEditProfileImageDraft" ]]
 		selectedFrameId = UseStateResult1,
 		yRotDeg = UseStateResult3,
 		distanceScale = UseStateResult4,
-		onSelectEmote = ReactModule.useCallback(function(p2) --[[ Line: 128 ]]
+		onSelectEmote = ReactModule.useCallback(function(p2)
 			-- upvalues: UseStateResult2 (copy)
-			UseStateResult2(function(p3) --[[ Line: 129 ]]
+			UseStateResult2(function(p3)
 				-- upvalues: p2 (copy)
 				return if p3 == p2 then nil else p2
 			end)
 		end, {}),
-		onSelectFrame = ReactModule.useCallback(function(p2) --[[ Line: 140 ]]
+		onSelectFrame = ReactModule.useCallback(function(p2)
 			-- upvalues: UseStateResult2_1 (copy), ConstantsModule (upval)
-			UseStateResult2_1(function(p3) --[[ Line: 141 ]]
+			UseStateResult2_1(function(p3)
 				-- upvalues: p2 (copy), ConstantsModule (upval)
 				return if p3 == p2 then ConstantsModule.ProfileFrameNoneId else p2
 			end)
 		end, {}),
 		onYRotDegChanged = UseStateResult2_2,
 		onDistanceScaleChanged = UseStateResult2_3,
-		clearSelectedEmote = ReactModule.useCallback(function() --[[ Line: 149 ]]
+		clearSelectedEmote = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(nil)
 		end, {}),

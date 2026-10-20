@@ -21,7 +21,7 @@ local DataProvider = RoactModule.Component:extend("DataProvider")
 local VoiceChatDevConsoleTabEnabledEngineFeature = game:GetEngineFeature("VoiceChatDevConsoleTabEnabled")
 local DevConsoleStartDataOnMount = game:DefineFastFlag("DevConsoleStartDataOnMount", false)
 
-function DataProvider.init(p1) --[[ Line: 28 ]]
+function DataProvider.init(p1)
 	-- upvalues: LogDataModule (copy), ClientMemoryDataModule (copy), ServerMemoryDataModule (copy), NetworkDataModule (copy), ServerScriptsDataModule (copy), DataStoresDataModule (copy), ServerStatsDataModule (copy), ActionBindingsDataModule (copy), ServerJobsDataModule (copy), DebugVisualizationsDataModule (copy), LuauHeapDataModule (copy), VoiceChatDevConsoleTabEnabledEngineFeature (copy), GetFFlagVoiceDebugConsoleV2Module (copy), VoiceChatDataModule (copy), VoiceDebugDataModule (copy)
 	p1:setState({
 		DevConsoleData = {
@@ -44,7 +44,7 @@ function DataProvider.init(p1) --[[ Line: 28 ]]
 	})
 end
 
-function DataProvider.didMount(p1) --[[ Line: 54 ]]
+function DataProvider.didMount(p1)
 	-- upvalues: VoiceChatDevConsoleTabEnabledEngineFeature (copy), GetFFlagVoiceDebugConsoleV2Module (copy), DevConsoleStartDataOnMount (copy)
 	p1.state.DevConsoleData.ClientLogData:start()
 	p1.state.DevConsoleData.ClientMemoryData:start()
@@ -65,7 +65,7 @@ function DataProvider.didMount(p1) --[[ Line: 54 ]]
 	end
 end
 
-function DataProvider.willUpdate(p2, p3, _) --[[ Line: 75 ]]
+function DataProvider.willUpdate(p2, p3, _)
 	if p3.isDeveloperView and not p2.props.isDeveloperView then
 		for _, value in pairs(p2.state.DevConsoleData) do
 			if not value:isRunning() then
@@ -75,11 +75,11 @@ function DataProvider.willUpdate(p2, p3, _) --[[ Line: 75 ]]
 	end
 end
 
-function DataProvider.render(p4) --[[ Line: 85 ]]
+function DataProvider.render(p4)
 	-- upvalues: RoactModule (copy), DataContextModule (copy)
 	return RoactModule.createElement(DataContextModule.Provider, { value = p4.state.DevConsoleData }, RoactModule.oneChild(p4.props[RoactModule.Children]))
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p4, _) --[[ Line: 91 | Named "mapStateToProps" ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p4, _)
 	return { isDeveloperView = p4.MainView.isDeveloperView }
 end, nil)(DataProvider)

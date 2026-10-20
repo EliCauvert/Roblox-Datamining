@@ -25,16 +25,16 @@ for _, enumItem in Enum.AvatarAssetType:GetEnumItems() do
 		t[enumItem.Value] = true
 	end
 end
-local function _(p1) --[[ Line: 113 | Named "normalizeSaleLocationType" ]]
+local function _(p1)
 	-- upvalues: SalesLocationType (copy)
 	return if p1.saleLocationType == SalesLocationType.ShopOnly then SalesLocationType.ShopAndAllExperiences else p1.saleLocationType
 end
 
-local _ = function(p1, p2, p3) --[[ Line: 122 | Named "resolveIsOwned" ]]
+local _ = function(p1, p2, p3)
 	return if p2 and p2.quantityOwned ~= nil then p2.quantityOwned > 0 elseif p3 == nil then p1.owned == true else p3
 end
 
-local _ = function(p1) --[[ Line: 135 | Named "buildItemRestrictions" ]]
+local _ = function(p1)
 	local ItemRestrictions = p1.itemRestrictions
 	
 	if not ItemRestrictions or #ItemRestrictions == 0 then
@@ -48,7 +48,7 @@ local _ = function(p1) --[[ Line: 135 | Named "buildItemRestrictions" ]]
 	return t
 end
 
-local function buildCollectibleItemDetails(p2, p3, CollectibleLowestAvailableResaleProductId) --[[ Line: 147 ]]
+local function buildCollectibleItemDetails(p2, p3, CollectibleLowestAvailableResaleProductId)
 	local HasResellers = p2.hasResellers or (p2.unitsAvailableForConsumption or (p2.totalQuantity or (p2.lowestResalePrice or p3 and p3.quantityOwned)))
 	
 	return if HasResellers then {
@@ -61,7 +61,7 @@ local function buildCollectibleItemDetails(p2, p3, CollectibleLowestAvailableRes
 	} else nil
 end
 
-local function buildAssetsInBundle(p2, p3) --[[ Line: 173 ]]
+local function buildAssetsInBundle(p2, p3)
 	local v1 = nil
 	
 	if p3 and p3.assetsInBundle then
@@ -97,7 +97,7 @@ local function buildAssetsInBundle(p2, p3) --[[ Line: 173 ]]
 	end
 end
 
-local function computeBundleParts(p4, p5, p6) --[[ Line: 204 ]]
+local function computeBundleParts(p4, p5, p6)
 	-- upvalues: t (copy)
 	local Count = 0
 	local Ids = {}
@@ -129,16 +129,16 @@ local function computeBundleParts(p4, p5, p6) --[[ Line: 204 ]]
 	end
 end
 
-local _ = function(p7) --[[ Line: 233 | Named "extractTaxonomyName" ]]
+local _ = function(p7)
 	return if p7.taxonomy and #p7.taxonomy > 0 then p7.taxonomy[1].taxonomyName else nil
 end
 
 return {
-	isWearableAssetType = function(p7): boolean --[[ Line: 49 ]]
+	isWearableAssetType = function(p7): boolean
 		-- upvalues: t (copy)
 		return t[p7] == true
 	end,
-	expandBundleToAssetIds = function(p7) --[[ Line: 53 ]]
+	expandBundleToAssetIds = function(p7)
 		local Ids = {}
 		
 		if p7.bundledItems then
@@ -150,7 +150,7 @@ return {
 		end
 		return Ids
 	end,
-	collectBundleComponentIds = function(List, p8) --[[ Line: 69 ]]
+	collectBundleComponentIds = function(List, p8)
 		local t = {}
 		
 		for _, value in List do
@@ -164,7 +164,7 @@ return {
 		end
 		return t
 	end,
-	buildItemData = function(p9, p10, p11, p12, p13, CollectibleLowestAvailableResaleProductId) --[[ Line: 240 ]]
+	buildItemData = function(p9, p10, p11, p12, p13, CollectibleLowestAvailableResaleProductId)
 		-- upvalues: computeBundleParts (copy), SalesLocationType (copy), buildCollectibleItemDetails (copy), buildAssetsInBundle (copy)
 		local AssetType = p9.assetType or p9.bundleType
 		local BundleParts, BundleParts2 = computeBundleParts(p9, p10, p11)
@@ -209,11 +209,11 @@ return {
 		
 		return config
 	end,
-	isPurchasableStatus = function(Free): boolean --[[ Line: 85 ]]
+	isPurchasableStatus = function(Free): boolean
 		-- upvalues: PriceStatus (copy)
 		return Free == PriceStatus.Free or (Free == PriceStatus.PurchaseFromRoblox or Free == PriceStatus.PurchaseFromResale)
 	end,
-	isItemPurchasable = function(p14): boolean --[[ Line: 91 ]]
+	isItemPurchasable = function(p14): boolean
 		-- upvalues: GetPriceStatusInShopFunction (copy), PriceStatus (copy)
 		if p14.isOwned then
 			return false
@@ -223,15 +223,15 @@ return {
 			return (PriceStatusInShop == PriceStatus.Free or (PriceStatusInShop == PriceStatus.PurchaseFromRoblox or PriceStatusInShop == PriceStatus.PurchaseFromResale)) and p14.collectibleProductId ~= nil
 		end
 	end,
-	getEffectivePrice = function(p14) --[[ Line: 98 ]]
+	getEffectivePrice = function(p14)
 		-- upvalues: GetPriceStatusInShopFunction (copy), PriceStatus (copy)
 		return (if GetPriceStatusInShopFunction(p14) == PriceStatus.PurchaseFromResale then p14.collectibleItemDetails and p14.collectibleItemDetails.lowestResalePrice else p14.priceInRobux) or 0
 	end,
-	sortDisplayItems = function(List) --[[ Line: 279 ]]
+	sortDisplayItems = function(List)
 		-- upvalues: GetPriceStatusInShopFunction (copy), PriceStatus (copy)
-		table.sort(List, function(A, B): boolean --[[ Line: 280 ]]
+		table.sort(List, function(A, B): boolean
 			-- upvalues: GetPriceStatusInShopFunction (upval), PriceStatus (upval)
-			local function _(p14): number --[[ Line: 281 | Named "sortKey" ]]
+			local function _(p14): number
 				-- upvalues: GetPriceStatusInShopFunction (upval), PriceStatus (upval)
 				local PriceStatusInShop = GetPriceStatusInShopFunction(p14)
 				local IsPriceStatusInShopMatch: boolean = PriceStatusInShop == PriceStatus.Free or (PriceStatusInShop == PriceStatus.PurchaseFromRoblox or PriceStatusInShop == PriceStatus.PurchaseFromResale)
@@ -250,7 +250,7 @@ return {
 		
 		return List
 	end,
-	getPriceStatus = function(p14) --[[ Line: 45 ]]
+	getPriceStatus = function(p14)
 		-- upvalues: GetPriceStatusInShopFunction (copy)
 		return GetPriceStatusInShopFunction(p14)
 	end,

@@ -5,12 +5,12 @@ local _ = require(Parent.type)
 local React = DependenciesModule.React
 local FoundationFontFaceMigration = require(Parent.Parent.Foundation).Utility.Flags.FoundationFontFaceMigration
 local config = {
-	highlight = function(Text): string --[[ Line: 48 ]]
+	highlight = function(Text): string
 		return "<b>" .. Text .. "</b>"
 	end
 }
 
-local function formatString(p1): string --[[ Line: 53 ]]
+local function formatString(p1): string
 	-- upvalues: config (copy)
 	local Text: string = p1.text
 	local StyledElements = p1.styledElements
@@ -37,7 +37,7 @@ local function formatString(p1): string --[[ Line: 53 ]]
 			})
 		end
 	end
-	table.sort(List, function(A, B): boolean --[[ Line: 88 ]]
+	table.sort(List, function(A, B): boolean
 		return A.Position < B.Position
 	end)
 	local NewReferenceCounts = {}
@@ -69,7 +69,7 @@ local function formatString(p1): string --[[ Line: 53 ]]
 	return Text1
 end
 
-return function(Label) --[[ Line: 119 ]]
+return function(Label)
 	-- upvalues: UseStyleFunction (copy), formatString (copy), React (copy), FoundationFontFaceMigration (copy)
 	local UseStyleResult = UseStyleFunction()
 	

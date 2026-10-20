@@ -1,7 +1,7 @@
 ﻿local AssetCalculatorModule = require(script.Parent.Parent.util.AssetCalculator)
 local BodyPartsToParents = nil
 local CurveAnimationHierarchyUtils = {
-	getBodyPartToParentMap = function() --[[ Line: 9 ]]
+	getBodyPartToParentMap = function()
 		-- upvalues: BodyPartsToParents (ref), AssetCalculatorModule (copy)
 		if not BodyPartsToParents then
 			BodyPartsToParents = AssetCalculatorModule.getBodyPartsToParents()
@@ -10,7 +10,7 @@ local CurveAnimationHierarchyUtils = {
 	end,
 	humanoidRootPartName = "HumanoidRootPart",
 	FaceControlsName = "FaceControls",
-	folderHasAnimationTracks = function(Object) --[[ Line: 19 ]]
+	folderHasAnimationTracks = function(Object)
 		local Position = Object:FindFirstChild("Position")
 		local Rotation = Object:FindFirstChild("Rotation")
 		
@@ -18,12 +18,12 @@ local CurveAnimationHierarchyUtils = {
 	end
 }
 
-function CurveAnimationHierarchyUtils.isBodyPartFolderNameValid(Name): boolean --[[ Line: 26 ]]
+function CurveAnimationHierarchyUtils.isBodyPartFolderNameValid(Name): boolean
 	-- upvalues: CurveAnimationHierarchyUtils (copy)
 	return CurveAnimationHierarchyUtils.getBodyPartToParentMap()[Name] ~= nil or Name == CurveAnimationHierarchyUtils.humanoidRootPartName
 end
 
-function CurveAnimationHierarchyUtils.getBodyPartFolderRoot(Object) --[[ Line: 31 ]]
+function CurveAnimationHierarchyUtils.getBodyPartFolderRoot(Object)
 	-- upvalues: CurveAnimationHierarchyUtils (copy)
 	for _, Folder in Object:GetChildren() do
 		if Folder:IsA("Folder") and CurveAnimationHierarchyUtils.isBodyPartFolderNameValid(Folder.Name) then
@@ -33,11 +33,11 @@ function CurveAnimationHierarchyUtils.getBodyPartFolderRoot(Object) --[[ Line: 3
 	return nil
 end
 
-function CurveAnimationHierarchyUtils.areChildrenAcceptable(Object, List): boolean --[[ Line: 40 ]]
+function CurveAnimationHierarchyUtils.areChildrenAcceptable(Object, List): boolean
 	if not Object then
 		return true
 	end
-	local function findAndRemoveMatching(p1): boolean --[[ Line: 45 ]]
+	local function findAndRemoveMatching(p1): boolean
 		-- upvalues: List (copy)
 		for i, value in List do
 			if value.ClassName == p1.ClassName and value.Name == p1.Name then
@@ -57,7 +57,7 @@ function CurveAnimationHierarchyUtils.areChildrenAcceptable(Object, List): boole
 	return true
 end
 
-function CurveAnimationHierarchyUtils.calculateAcceptableChildBodyPartFolders(p2) --[[ Line: 65 ]]
+function CurveAnimationHierarchyUtils.calculateAcceptableChildBodyPartFolders(p2)
 	-- upvalues: CurveAnimationHierarchyUtils (copy)
 	local List = {}
 	
@@ -69,7 +69,7 @@ function CurveAnimationHierarchyUtils.calculateAcceptableChildBodyPartFolders(p2
 	return List
 end
 
-function CurveAnimationHierarchyUtils.calculateAcceptableCurveChildrenArray() --[[ Line: 78 ]]
+function CurveAnimationHierarchyUtils.calculateAcceptableCurveChildrenArray()
 	return {
 		{ ClassName = "FloatCurve", Name = "X" },
 		{ ClassName = "FloatCurve", Name = "Y" },
@@ -77,7 +77,7 @@ function CurveAnimationHierarchyUtils.calculateAcceptableCurveChildrenArray() --
 	}
 end
 
-function CurveAnimationHierarchyUtils.containsGrandChildren(Object): boolean --[[ Line: 95 ]]
+function CurveAnimationHierarchyUtils.containsGrandChildren(Object): boolean
 	return if Object then #Object:GetChildren() < #Object:GetDescendants() else false
 end
 

@@ -17,7 +17,7 @@ local GetAssetPickerStatusModule = require(AvatarExperienceProfilePictureEditor.
 local TextKeysModule = require(AvatarExperienceProfilePictureEditor.Common.TextKeys)
 local UseEditProfileImageActionsFunction = require(AvatarExperienceProfilePictureEditor.Context.EditProfileImageActionsContext).useEditProfileImageActions
 
-return function(p1) --[[ Line: 50 | Named "ExpandedEmotesGridContent" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseEditProfileImageActionsFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), GetAssetPickerStatusModule (copy), View (copy), SectionHeaderModule (copy), ScrollSectionModule (copy), AssetPickerGridModule (copy), Button (copy), ButtonVariant (copy), InputSize (copy), FillBehavior (copy), VirtualizedFeedContainerModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseEditProfileImageActionsResult = UseEditProfileImageActionsFunction()
@@ -27,7 +27,7 @@ return function(p1) --[[ Line: 50 | Named "ExpandedEmotesGridContent" ]]
 		recommendations = TextKeysModule.Recommendations,
 		shopForMore = TextKeysModule.ShopForMore
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 59 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseLocalizationResult (copy)
 		return { details = UseLocalizationResult.details }
 	end, { UseLocalizationResult.details })

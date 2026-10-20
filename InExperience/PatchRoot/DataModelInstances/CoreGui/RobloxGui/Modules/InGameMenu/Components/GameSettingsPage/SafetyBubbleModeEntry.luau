@@ -23,12 +23,12 @@ local config = {
 }
 local EnumItems = Enum.VRSafetyBubbleMode:GetEnumItems()
 
-local function _(p1) --[[ Line: 36 | Named "getSafetyBubbleModeIndex" ]]
+local function _(p1)
 	-- upvalues: LuauPolyfillModule (copy), EnumItems (copy)
 	return LuauPolyfillModule.Array.indexOf(EnumItems, p1)
 end
 
-local _ = function(p1) --[[ Line: 40 | Named "setSafetyBubbleModeByIndex" ]]
+local _ = function(p1)
 	-- upvalues: EnumItems (copy), GameSettings (copy), SendAnalyticsModule (copy), ConstantsModule (copy)
 	local EnumItem = EnumItems[p1]
 	GameSettings.VRSafetyBubbleMode = EnumItem
@@ -38,21 +38,21 @@ end
 local SafetyBubbleModeEntry = RoactModule.PureComponent:extend("SafetyBubbleModeEntry")
 SafetyBubbleModeEntry.validateProps = T.strictInterface({ LayoutOrder = T.optional(T.integer) })
 
-function SafetyBubbleModeEntry.init(p1) --[[ Line: 53 ]]
+function SafetyBubbleModeEntry.init(p1)
 	-- upvalues: GameSettings (copy), LuauPolyfillModule (copy), EnumItems (copy)
 	p1:setState({
 		selectedMode = LuauPolyfillModule.Array.indexOf(EnumItems, GameSettings.VRSafetyBubbleMode)
 	})
 end
 
-function SafetyBubbleModeEntry.render(p1) --[[ Line: 59 ]]
+function SafetyBubbleModeEntry.render(p1)
 	-- upvalues: WithLocalizationModule (copy), config (copy), RoactModule (copy), ExternalEventConnectionModule (copy), VRSafetyBubbleModePropertyChangedSignal (copy), GameSettings (copy), LuauPolyfillModule (copy), EnumItems (copy), InputLabelModule (copy), ThemedTextLabelModule (copy), RadioButtonList (copy), SendAnalyticsModule (copy), ConstantsModule (copy), v1 (copy)
-	return WithLocalizationModule(config)(function(p2) --[[ Line: 60 ]]
+	return WithLocalizationModule(config)(function(p2)
 		-- upvalues: RoactModule (upval), ExternalEventConnectionModule (upval), VRSafetyBubbleModePropertyChangedSignal (upval), p1 (copy), GameSettings (upval), LuauPolyfillModule (upval), EnumItems (upval), InputLabelModule (upval), config (upval), ThemedTextLabelModule (upval), RadioButtonList (upval), SendAnalyticsModule (upval), ConstantsModule (upval), v1 (upval)
 		return RoactModule.createFragment({
 			VRSafetyBubbleModeListener = RoactModule.createElement(ExternalEventConnectionModule, {
 				event = VRSafetyBubbleModePropertyChangedSignal,
-				callback = function() --[[ Line: 64 ]]
+				callback = function()
 					-- upvalues: p1 (upval), GameSettings (upval), LuauPolyfillModule (upval), EnumItems (upval)
 					p1:setState({
 						selectedMode = LuauPolyfillModule.Array.indexOf(EnumItems, GameSettings.VRSafetyBubbleMode)
@@ -98,11 +98,11 @@ function SafetyBubbleModeEntry.render(p1) --[[ Line: 59 ]]
 				RadioList = RoactModule.createElement(RadioButtonList, {
 					layoutOrder = 3,
 					automaticSize = true,
-					radioButtons = LuauPolyfillModule.Array.map(EnumItems, function(p3, _) --[[ Line: 108 ]]
+					radioButtons = LuauPolyfillModule.Array.map(EnumItems, function(p3, _)
 						-- upvalues: p2 (copy)
 						return { label = p2[tostring(p3)] }
 					end),
-					onActivated = function(p3) --[[ Line: 113 ]]
+					onActivated = function(p3)
 						-- upvalues: EnumItems (upval), GameSettings (upval), SendAnalyticsModule (upval), ConstantsModule (upval)
 						local EnumItem = EnumItems[p3]
 						GameSettings.VRSafetyBubbleMode = EnumItem

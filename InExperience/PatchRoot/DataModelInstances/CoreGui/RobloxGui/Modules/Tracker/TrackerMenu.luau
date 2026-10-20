@@ -4,7 +4,7 @@ local TrackerPromptModule = require(CoreGui:WaitForChild("RobloxGui").Modules.Tr
 local Module = {}
 Module.__index = Module
 
-function Module:showPrompt(PromptType) --[[ Line: 20 ]]
+function Module:showPrompt(PromptType)
 	-- upvalues: RoactModule (copy), TrackerPromptModule (copy), CoreGui (copy)
 	if self.trackerPrompt then
 		RoactModule.update(self.trackerPrompt, RoactModule.createElement(TrackerPromptModule, { promptType = PromptType }))
@@ -15,7 +15,7 @@ function Module:showPrompt(PromptType) --[[ Line: 20 ]]
 	end
 end
 
-function Module.new() --[[ Line: 39 ]]
+function Module.new()
 	-- upvalues: Module (copy)
 	local config = { trackerPrompt = nil }
 	setmetatable(config, Module)

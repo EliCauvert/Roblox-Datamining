@@ -5,7 +5,7 @@ local ConstantsInterfaceModule = require(Parent.ConstantsInterface)
 local R15plusUtilsModule = require(Parent.util.R15plusUtils)
 local GetAttachmentCFrameInPartSpaceModule = require(Parent.util.getAttachmentCFrameInPartSpace)
 
-return function(p1, Object, p2, AssetType, p3): boolean --[[ Line: 15 ]]
+return function(p1, Object, p2, AssetType, p3): boolean
 	-- upvalues: AssetTraversalUtilsModule (copy), ConstantsInterfaceModule (copy), R15plusUtilsModule (copy), GetAttachmentCFrameInPartSpaceModule (copy)
 	local t = {}
 	
@@ -18,7 +18,7 @@ return function(p1, Object, p2, AssetType, p3): boolean --[[ Line: 15 ]]
 		local AssetHierarchyEntry = AssetTraversalUtilsModule.assetHierarchy[AssetType]
 		AssetTraversalUtilsModule.traverseHierarchy(nil, p2, AssetType, nil, CFrame.new(), AssetHierarchyEntry.root, AssetHierarchyEntry, t, p3)
 		
-		local function moveParts(Object, ChildName, ScaledInverted, ChildName1, p4) --[[ Line: 48 ]]
+		local function moveParts(Object, ChildName, ScaledInverted, ChildName1, p4)
 			-- upvalues: ConstantsInterfaceModule (upval), AssetType (copy), R15plusUtilsModule (upval), GetAttachmentCFrameInPartSpaceModule (upval), moveParts (copy)
 			local ChildName2 = Object:FindFirstChild(ChildName1)
 			local ScaledInverted1 = ScaledInverted

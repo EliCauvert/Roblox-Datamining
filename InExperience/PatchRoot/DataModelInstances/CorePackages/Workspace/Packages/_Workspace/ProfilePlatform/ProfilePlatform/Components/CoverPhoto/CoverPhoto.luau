@@ -6,21 +6,21 @@ local View = require(Parent.Foundation).View
 local LoadableImage = require(Parent.UIBlox).App.Loading.LoadableImage
 local EnumsModule = require(ProfilePlatform.Common.Enums)
 
-local function _(p1, p2, p3) --[[ Line: 30 | Named "interpolateHeight" ]]
+local function _(p1, p2, p3)
 	return p1 + (p2 - p1) * p3
 end
 
-return function(p1) --[[ Line: 34 | Named "CoverPhoto" ]]
+return function(p1)
 	-- upvalues: EnumsModule (copy), UseScreenSizeFunction (copy), ReactModule (copy), View (copy), LoadableImage (copy)
 	local IsFormFactorMatch = p1.profileFormFactorInfo.formFactor == EnumsModule.ProfileFormFactor.Wide
 	local IsFormFactorMatch1 = p1.profileFormFactorInfo.formFactor == EnumsModule.ProfileFormFactor.PeekView
 	local IsFullView = p1.profileFormFactorInfo.isFullView
 	local UseScreenSizeResult = UseScreenSizeFunction()
-	local UseMemoResult = ReactModule.useMemo(function(): number --[[ Line: 40 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): number
 		-- upvalues: IsFormFactorMatch1 (copy)
 		return if IsFormFactorMatch1 then 393 else 456
 	end, { IsFormFactorMatch1, IsFullView, p1.peekViewOpenPercent })
-	local UseMemoResult1: number = ReactModule.useMemo(function() --[[ Line: 48 ]]
+	local UseMemoResult1: number = ReactModule.useMemo(function()
 		-- upvalues: IsFormFactorMatch1 (copy), IsFullView (copy), p1 (copy), UseMemoResult (copy)
 		return if IsFormFactorMatch1 and not IsFullView then p1.peekViewOpenPercent * 98 + 295 else UseMemoResult
 	end, {

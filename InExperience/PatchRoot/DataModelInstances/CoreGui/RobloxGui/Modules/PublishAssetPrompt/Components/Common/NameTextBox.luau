@@ -30,13 +30,13 @@ NameTextBox.defaultProps = {
 	invalidInputText = RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.InvalidName")
 }
 
-local function _(p1, p2): boolean --[[ Line: 50 | Named "isNameTooLong" ]]
+local function _(p1, p2): boolean
 	local Length = utf8.len(utf8.nfcnormalize(p1))
 	
 	return Length == nil or p2 < Length
 end
 
-function NameTextBox.init(p1) --[[ Line: 59 ]]
+function NameTextBox.init(p1)
 	p1:setState({
 		lastValidName = "",
 		isNameValid = true,
@@ -44,7 +44,7 @@ function NameTextBox.init(p1) --[[ Line: 59 ]]
 	})
 	p1.wasInitiallyFocused = false
 	
-	function p1.tryFocusTextBox() --[[ Line: 68 ]]
+	function p1.tryFocusTextBox()
 		-- upvalues: p1 (copy)
 		if p1.wasInitiallyFocused then return end
 		local Value = p1.props.nameTextBoxRef and p1.props.nameTextBoxRef:getValue()
@@ -55,7 +55,7 @@ function NameTextBox.init(p1) --[[ Line: 59 ]]
 		end
 	end
 	
-	function p1.onTextChanged(p2) --[[ Line: 80 ]]
+	function p1.onTextChanged(p2)
 		-- upvalues: p1 (copy)
 		local Text = p2.Text
 		local MaxLength: number = p1.props.maxLength
@@ -75,7 +75,7 @@ function NameTextBox.init(p1) --[[ Line: 59 ]]
 	end
 end
 
-function NameTextBox:checkIsNameValid(Text: string): boolean --[[ Line: 107 ]]
+function NameTextBox:checkIsNameValid(Text: string): boolean
 	-- upvalues: RemoveNameRegex (copy)
 	if not RemoveNameRegex then
 		if not string.match(Text, "[0-9a-zA-Z_'%s]+$") then
@@ -87,7 +87,7 @@ function NameTextBox:checkIsNameValid(Text: string): boolean --[[ Line: 107 ]]
 	return not string.match(Text, "^%s*$")
 end
 
-function NameTextBox.renderWithProviders(p1, p2, Callback) --[[ Line: 127 ]]
+function NameTextBox.renderWithProviders(p1, p2, Callback)
 	-- upvalues: RoactModule (copy), Focusable (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), CursorKind (copy)
 	local _Font = p2.Font
 	local Theme = p2.Theme
@@ -158,18 +158,18 @@ function NameTextBox.renderWithProviders(p1, p2, Callback) --[[ Line: 127 ]]
 	})
 end
 
-function NameTextBox.render(p1) --[[ Line: 209 ]]
+function NameTextBox.render(p1)
 	-- upvalues: WithStyleFunction (copy), WithSelectionCursorProviderFunction (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 210 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: WithSelectionCursorProviderFunction (upval), p1 (copy)
-		return WithSelectionCursorProviderFunction(function(p3) --[[ Line: 211 ]]
+		return WithSelectionCursorProviderFunction(function(p3)
 			-- upvalues: p1 (upval), p2 (copy)
 			return p1:renderWithProviders(p2, p3)
 		end)
 	end)
 end
 
-function NameTextBox.didMount(p1) --[[ Line: 217 ]]
+function NameTextBox.didMount(p1)
 	p1.tryFocusTextBox()
 end
 

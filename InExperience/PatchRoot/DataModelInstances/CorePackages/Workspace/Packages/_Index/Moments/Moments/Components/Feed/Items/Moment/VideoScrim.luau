@@ -6,7 +6,7 @@ local MomentContextModule = require(script.Parent.MomentContext)
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
-return ReactModule.memo(function(p1) --[[ Line: 29 | Named "VideoScrim" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), MomentContextModule (copy), UseSignalStateFunction (copy), GetColorStyleWithTransparencyModule (copy), ReactModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseMomentResult = MomentContextModule.useMoment()
@@ -15,7 +15,7 @@ return ReactModule.memo(function(p1) --[[ Line: 29 | Named "VideoScrim" ]]
 		BorderSizePixel = 0,
 		Size = UDim2.fromScale(1, 1),
 		BackgroundColor3 = UseTokensResult.Color.Common.Scrim.Color3,
-		BackgroundTransparency = UseMomentResult.animationRatio:map(function(p2: number) --[[ Line: 35 ]]
+		BackgroundTransparency = UseMomentResult.animationRatio:map(function(p2: number)
 			-- upvalues: GetColorStyleWithTransparencyModule (upval), UseTokensResult (copy)
 			return GetColorStyleWithTransparencyModule(UseTokensResult.Color.Common.Scrim, 1 - p2).Transparency or 0
 		end),

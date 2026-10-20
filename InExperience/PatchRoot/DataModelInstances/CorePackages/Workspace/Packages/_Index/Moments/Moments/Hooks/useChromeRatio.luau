@@ -11,13 +11,13 @@ local config = {
 	restingPositionLimit = 0.1
 }
 
-return function() --[[ Line: 29 | Named "useChromeRatio" ]]
+return function()
 	-- upvalues: GetImmersiveChromeStoreModule (copy), ReactOtterModule (copy), ReactModule (copy), SignalsModule (copy), config (copy)
 	local ImmersiveChromeStoreModule = GetImmersiveChromeStoreModule(false)
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1)
-	ReactModule.useEffect(function() --[[ Line: 34 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SignalsModule (upval), ImmersiveChromeStoreModule (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval)
-		return (SignalsModule.createEffect(function(p1) --[[ Line: 35 ]]
+		return (SignalsModule.createEffect(function(p1)
 			-- upvalues: ImmersiveChromeStoreModule (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval)
 			UseAnimatedBindingResult2((ReactOtterModule.spring(if ImmersiveChromeStoreModule.getChromeVisible(p1) then 1 else 0, config)))
 		end))

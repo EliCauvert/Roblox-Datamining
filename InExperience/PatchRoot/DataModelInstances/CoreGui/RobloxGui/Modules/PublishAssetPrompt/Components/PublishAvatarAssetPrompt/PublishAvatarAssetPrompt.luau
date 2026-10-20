@@ -21,11 +21,11 @@ local MakeupPartGridModule = require(Parent.Common.MakeupPartGrid)
 local GetFFlagSingleUploadMakeupSupportModule = require(Parent1.Flags.GetFFlagSingleUploadMakeupSupport)
 local _UDim = UDim.new(0, 20)
 
-return function(p1) --[[ Line: 47 | Named "PublishAvatarAssetPrompt" ]]
+return function(p1)
 	-- upvalues: Players (copy), UseSelectorFunction (copy), UseDispatchFunction (copy), ConstantsModule (copy), ReactModule (copy), GetFFlagSingleUploadMakeupSupportModule (copy), MakeupPreviewUtilsModule (copy), PublishAssetAnalytics (copy), PurchasePromptModule (copy), MutedErrorFunction (copy), SetPromptVisibilityModule (copy), RobloxTranslatorModule (copy), _UDim (copy), ObjectViewportModule (copy), LabeledTextBoxModule (copy), PublishInfoListModule (copy), MakeupPartGridModule (copy), BasePublishPromptModule (copy)
 	local LocalPlayer = Players.LocalPlayer
 	assert(LocalPlayer, "LocalPlayer must not be nil")
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 52 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		return p2.promptRequest.promptInfo
 	end)
 	local UseDispatchResult = UseDispatchFunction()
@@ -39,20 +39,20 @@ return function(p1) --[[ Line: 47 | Named "PublishAvatarAssetPrompt" ]]
 	local UseStateResult7, UseStateResult2_6 = ReactModule.useState(true)
 	local IsMakeupAssetType = if GetFFlagSingleUploadMakeupSupportModule() then MakeupPreviewUtilsModule.isMakeupAssetType(UseSelectorResult.accessoryType) else false
 	local UseStateResult8, UseStateResult2_7 = ReactModule.useState(nil)
-	ReactModule.useEffect(function() --[[ Line: 77 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsMakeupAssetType (copy), UseSelectorResult (copy), MakeupPreviewUtilsModule (upval), UseStateResult2_7 (copy)
 		if IsMakeupAssetType and UseSelectorResult.accessoryInstance then
 			local MakeupHeadPreview = MakeupPreviewUtilsModule.createMakeupHeadPreview(UseSelectorResult.accessoryInstance, UseSelectorResult.accessoryType)
 			UseStateResult2_7(MakeupHeadPreview)
 			
-			return function() --[[ Line: 86 ]]
+			return function()
 				-- upvalues: MakeupHeadPreview (copy)
 				if MakeupHeadPreview then
 					MakeupHeadPreview:Destroy()
 				end
 			end
 		else
-			return function() --[[ Line: 79 ]] end
+			return function() end
 		end
 	end, {
 		UseSelectorResult.accessoryInstance,
@@ -64,16 +64,16 @@ return function(p1) --[[ Line: 47 | Named "PublishAvatarAssetPrompt" ]]
 	local UseRefResult1 = ReactModule.useRef(false)
 	local UseRefResult2 = ReactModule.useRef(nil)
 	local UseRefResult3 = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 102 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: PublishAssetAnalytics (upval), UseStateResult2 (copy)
 		PublishAssetAnalytics.sendButtonClicked(PublishAssetAnalytics.Section.BuyCreationPage, PublishAssetAnalytics.Element.Expand)
 		UseStateResult2(true)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 107 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 111 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult3 (copy), UseStateResult5 (copy), UseSelectorResult (copy), UseStateResult7 (copy)
 		return UseStateResult3 and (UseStateResult5 and (UseSelectorResult.accessoryInstance ~= nil and UseStateResult7))
 	end, {
@@ -82,7 +82,7 @@ return function(p1) --[[ Line: 47 | Named "PublishAvatarAssetPrompt" ]]
 		UseSelectorResult.accessoryInstance,
 		UseStateResult7
 	})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 116 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: PublishAssetAnalytics (upval), UseStateResult1 (copy), UseStateResult4 (copy), PurchasePromptModule (upval), UseSelectorResult (copy), UseStateResult9 (copy), MutedErrorFunction (upval)
 		PublishAssetAnalytics.sendButtonClicked(PublishAssetAnalytics.Section.BuyCreationPage, PublishAssetAnalytics.Element.Buy)
 		local config = { name = UseStateResult1, description = UseStateResult4 }
@@ -99,7 +99,7 @@ return function(p1) --[[ Line: 47 | Named "PublishAvatarAssetPrompt" ]]
 		UseSelectorResult.accessoryInstance, UseSelectorResult.priceInRobux,
 		UseStateResult9
 	})
-	local UseResult4 = ReactModule.useCallback(function(p2, p3) --[[ Line: 138 ]]
+	local UseResult4 = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseRefResult (copy), PublishAssetAnalytics (upval)
 		UseStateResult2_1(p2)
 		UseStateResult2_2(p3)
@@ -109,7 +109,7 @@ return function(p1) --[[ Line: 47 | Named "PublishAvatarAssetPrompt" ]]
 			PublishAssetAnalytics.sendFieldTouched(PublishAssetAnalytics.Section.BuyCreationPage, PublishAssetAnalytics.Element.Name)
 		end
 	end, {})
-	local UseResult5 = ReactModule.useCallback(function(p2, p3) --[[ Line: 148 ]]
+	local UseResult5 = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: UseStateResult2_3 (copy), UseStateResult2_4 (copy), UseRefResult1 (copy), PublishAssetAnalytics (upval)
 		UseStateResult2_3(p2)
 		UseStateResult2_4(p3)
@@ -120,7 +120,7 @@ return function(p1) --[[ Line: 47 | Named "PublishAvatarAssetPrompt" ]]
 		end
 	end, {})
 	
-	local function Callback(p2) --[[ Line: 158 ]]
+	local function Callback(p2)
 		-- upvalues: UseDispatchResult (copy), SetPromptVisibilityModule (upval), UseStateResult2_5 (copy), UseStateResult2_6 (copy)
 		local IsShown = p2.isShown
 		
@@ -136,12 +136,12 @@ return function(p1) --[[ Line: 47 | Named "PublishAvatarAssetPrompt" ]]
 		end
 	end
 	
-	local function Callback1() --[[ Line: 172 ]]
+	local function Callback1()
 		-- upvalues: UseStateResult2_6 (copy)
 		UseStateResult2_6(true)
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 177 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: PurchasePromptModule (upval), UseRefResult2 (copy), Callback (copy), UseRefResult3 (copy), Callback1 (copy), MutedErrorFunction (upval), PublishAssetAnalytics (upval)
 		local WindowStateChangedEvent = PurchasePromptModule.windowStateChangedEvent
 		local PromptStateSetToNoneEvent = PurchasePromptModule.promptStateSetToNoneEvent
@@ -154,7 +154,7 @@ return function(p1) --[[ Line: 47 | Named "PublishAvatarAssetPrompt" ]]
 		end
 		PublishAssetAnalytics.sendPageLoad(PublishAssetAnalytics.Section.BuyCreationPage)
 		
-		return function() --[[ Line: 191 ]]
+		return function()
 			-- upvalues: UseRefResult2 (upval), MutedErrorFunction (upval), UseRefResult3 (upval)
 			if UseRefResult2.current then
 				UseRefResult2.current:Disconnect()
@@ -176,7 +176,7 @@ return function(p1) --[[ Line: 47 | Named "PublishAvatarAssetPrompt" ]]
 	
 	return ReactModule.createElement(BasePublishPromptModule, {
 		delayInputSeconds = 3,
-		promptBody = ReactModule.useCallback(function() --[[ Line: 215 ]]
+		promptBody = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult9 (copy), ReactModule (upval), _UDim (upval), ObjectViewportModule (upval), UseResult (copy), GetFFlagSingleUploadMakeupSupportModule (upval), IsMakeupAssetType (copy), LabeledTextBoxModule (upval), RobloxTranslatorModule (upval), UseStateResult4 (copy), UseResult5 (copy), PublishInfoListModule (upval), Text1 (copy), MakeupPartGridModule (upval), UseSelectorResult (copy), UseStateResult1 (copy), p1 (copy)
 			return ReactModule.createElement(ReactModule.Fragment, nil, {
 				UIListLayout = ReactModule.createElement("UIListLayout", {

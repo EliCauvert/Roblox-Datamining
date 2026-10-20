@@ -6,7 +6,7 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local View = require(Parent.Foundation).View
 local FFlagSideSheetFocusNav = require(Parent.SharedFlags).FFlagSideSheetFocusNav
 
-return ReactModule.memo(function(p1) --[[ Line: 25 | Named "SideSheetWidgetList" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: SignalsReactModule (copy), ReactModule (copy), FFlagSideSheetFocusNav (copy), View (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.integrationsGetter)
 	

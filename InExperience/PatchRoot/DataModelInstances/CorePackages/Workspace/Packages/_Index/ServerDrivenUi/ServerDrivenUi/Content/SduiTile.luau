@@ -25,11 +25,11 @@ local FFlagLuaAppSduiGameTileFeedback = require(Parent.SharedFlags).FFlagLuaAppS
 local SduiTileInsetImageModule = require(script.Parent.SduiTileInsetImage)
 local t = {}
 
-local function _(Text: string): boolean --[[ Line: 45 | Named "isRobloxContentUrl" ]]
+local function _(Text: string): boolean
 	return string.match(Text, "^rbxthumb://") ~= nil or string.match(Text, "^rbxasset") ~= nil
 end
 
-local function maybeLayoutForButton(p1, RightContent, Small, Offset: number, p2) --[[ Line: 147 ]]
+local function maybeLayoutForButton(p1, RightContent, Small, Offset: number, p2)
 	-- upvalues: ReactModule (copy), CryoModule (copy)
 	return if RightContent == nil or p2 then p1 else {
 		Content = ReactModule.createElement("Frame", {
@@ -64,7 +64,7 @@ local function maybeLayoutForButton(p1, RightContent, Small, Offset: number, p2)
 	}
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 200 | Named "SduiTile" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), ContentProvider (copy), TextSizeModule (copy), UseTokensFunction (copy), GetInputModeStoreFunction (copy), ResponsiveModule (copy), UseTileHoldActionModule (copy), FFlagLuaAppSduiGameTileFeedback (copy), FFlagSduiTileDisableLegacyHover (copy), SduiTileInsetImageModule (copy), FFlagSduiTileThumbnailPadding (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), ImageSetLabel (copy), FFlagLuaAppSduiVideoThumbnail (copy), SduiDefaultTileImageModule (copy), LoadableImage (copy), maybeLayoutForButton (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), CryoModule (copy), t (copy), HoldDetector (copy)
 	local LayoutOrder = p1.layoutOrder
 	local AnchorPoint = p1.anchorPoint
@@ -74,12 +74,12 @@ return ReactModule.memo(function(p1) --[[ Line: 200 | Named "SduiTile" ]]
 	local Position = p1.position
 	local BackgroundColor3 = p1.backgroundColor3
 	local SelectionOrder = p1.selectionOrder
-	ReactModule.useLayoutEffect(function() --[[ Line: 210 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: p1 (copy), ContentProvider (upval)
 		local Image: string = p1.image
 		
 		if Image and (string.match(Image, "^rbxthumb://") ~= nil or string.match(Image, "^rbxasset") ~= nil) then
-			task.spawn(function() --[[ Line: 213 ]]
+			task.spawn(function()
 				-- upvalues: ContentProvider (upval), Image (copy)
 				ContentProvider:PreloadAsync({ Image })
 			end)
@@ -109,7 +109,7 @@ return ReactModule.memo(function(p1) --[[ Line: 200 | Named "SduiTile" ]]
 	local ContainmentPadding = p1.containmentPadding or UseTokensResult.Padding.Small
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local UseStateResult3 = if p1.isHovered == nil then UseStateResult1 else p1.isHovered
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 257 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: GetInputModeStoreFunction (upval), ResponsiveModule (upval), UseStateResult2_1 (copy), p1 (copy)
 		if GetInputModeStoreFunction(false).getLastInputType(false) == ResponsiveModule.Input.Pointer then
 			UseStateResult2_1(true)
@@ -124,7 +124,7 @@ return ReactModule.memo(function(p1) --[[ Line: 200 | Named "SduiTile" ]]
 			end
 		end
 	end, { p1.onMouseEnter, p1.setCustomConditionState })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 270 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy), p1 (copy)
 		UseStateResult2_1(false)
 		
@@ -137,7 +137,7 @@ return ReactModule.memo(function(p1) --[[ Line: 200 | Named "SduiTile" ]]
 			p1.setCustomConditionState("hovered", false)
 		end
 	end, { p1.onMouseLeave, p1.setCustomConditionState })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 279 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		if p1.onSelectionGained then
 			p1.onSelectionGained()
@@ -148,7 +148,7 @@ return ReactModule.memo(function(p1) --[[ Line: 200 | Named "SduiTile" ]]
 			p1.setCustomConditionState("selected", true)
 		end
 	end, { p1.onSelectionGained, p1.setCustomConditionState })
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 287 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		if p1.onSelectionLost then
 			p1.onSelectionLost()
@@ -166,7 +166,7 @@ return ReactModule.memo(function(p1) --[[ Line: 200 | Named "SduiTile" ]]
 	
 	if FFlagLuaAppSduiGameTileFeedback then
 		local UseRefResult = ReactModule.useRef(false)
-		UseResult4 = ReactModule.useCallback(function(...) --[[ Line: 303 ]]
+		UseResult4 = ReactModule.useCallback(function(...)
 			-- upvalues: UseRefResult (copy), p1 (copy)
 			UseRefResult.current = false
 			
@@ -174,7 +174,7 @@ return ReactModule.memo(function(p1) --[[ Line: 200 | Named "SduiTile" ]]
 				p1.onGuiStateChanged(...)
 			end
 		end, { p1.onGuiStateChanged })
-		UseResult6 = ReactModule.useCallback(function() --[[ Line: 311 ]]
+		UseResult6 = ReactModule.useCallback(function()
 			-- upvalues: UseRefResult (copy), UseTileHoldActionModuleResult (copy), p1 (copy)
 			if UseRefResult.current then
 				UseRefResult.current = false
@@ -190,7 +190,7 @@ return ReactModule.memo(function(p1) --[[ Line: 200 | Named "SduiTile" ]]
 				p1.onActivated()
 			end
 		end, { UseTileHoldActionModuleResult, p1.onActivated })
-		UseResult5 = ReactModule.useCallback(function() --[[ Line: 324 ]]
+		UseResult5 = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy), UseRefResult (copy)
 			if p1.onTouchLongPress and not p1.isDisabled then
 				UseRefResult.current = true
@@ -347,13 +347,13 @@ return ReactModule.memo(function(p1) --[[ Line: 200 | Named "SduiTile" ]]
 				AutomaticSize = Enum.AutomaticSize.Y,
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 0, 0),
-				[ReactModule.Event.MouseEnter] = function() --[[ Line: 546 ]]
+				[ReactModule.Event.MouseEnter] = function()
 					-- upvalues: UseStateResult2 (copy)
 					if UseStateResult2 then
 						UseStateResult2(true)
 					end
 				end,
-				[ReactModule.Event.MouseLeave] = function() --[[ Line: 551 ]]
+				[ReactModule.Event.MouseLeave] = function()
 					-- upvalues: UseStateResult2 (copy)
 					if UseStateResult2 then
 						UseStateResult2(false)

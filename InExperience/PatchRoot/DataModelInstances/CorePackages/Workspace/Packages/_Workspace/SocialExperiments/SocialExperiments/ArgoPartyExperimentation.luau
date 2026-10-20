@@ -5,7 +5,7 @@ local ForceEnableArgoPartyChanges7 = game:DefineFastFlag("ForceEnableArgoPartyCh
 local EnableArgoPartyExperimentation7 = game:DefineFastFlag("EnableArgoPartyExperimentation7", false)
 local EnableArgoPartyChanges = game:DefineFastFlag("EnableArgoPartyChanges", false)
 
-local function _(p1) --[[ Line: 13 | Named "getIsUserInTreatment" ]]
+local function _(p1)
 	-- upvalues: ExperimentCacheManager (copy), ArgoPartyLayer (copy)
 	local LayerVariables = ExperimentCacheManager.default:getLayerVariables(ArgoPartyLayer)
 	
@@ -13,7 +13,7 @@ local function _(p1) --[[ Line: 13 | Named "getIsUserInTreatment" ]]
 end
 
 return {
-	getIsRenameEnabled = function() --[[ Line: 23 ]]
+	getIsRenameEnabled = function()
 		-- upvalues: ForceEnableArgoPartyChanges7 (copy), EnableArgoPartyChanges (copy), EnableArgoPartyExperimentation7 (copy), ArgoPartyVariant (copy), ExperimentCacheManager (copy), ArgoPartyLayer (copy)
 		local Flag: boolean = ForceEnableArgoPartyChanges7
 		

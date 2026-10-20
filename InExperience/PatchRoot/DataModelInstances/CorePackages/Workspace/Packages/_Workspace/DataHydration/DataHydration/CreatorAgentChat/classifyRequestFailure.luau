@@ -1,6 +1,6 @@
 ﻿local RequestFailureKind = require(script.Parent.types).RequestFailureKind
 
-return function(p1) --[[ Line: 11 | Named "classifyRequestFailure" ]]
+return function(p1)
 	-- upvalues: RequestFailureKind (copy)
 	if p1.status == "pending" then
 		return { kind = RequestFailureKind.Timeout }

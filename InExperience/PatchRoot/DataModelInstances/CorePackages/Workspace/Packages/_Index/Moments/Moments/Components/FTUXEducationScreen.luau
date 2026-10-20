@@ -32,23 +32,23 @@ local config = {
 if FFlagMomentsFtuxEducationScreenRefreshModule then
 	FoundationCloudAssetsModule.preloadAsset("pictograms/captures")
 end
-return function(p1) --[[ Line: 64 | Named "FTUXEducationScreen" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseFormFactorFunction (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), View (copy), FormFactor (copy), FFlagMomentsFtuxEducationScreenRefreshModule (copy), IconButton (copy), BuilderIconsModule (copy), FoundationModule (copy), Icon (copy), Image (copy), FoundationCloudAssetsModule (copy), ConstantsModule (copy), Text (copy), Button (copy), HowToCaptureModalModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseTokensResult = UseTokensFunction()
 	local UseFormFactorResult = UseFormFactorFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 73 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FireAnalyticsEventFunction (upval), EventNames (upval)
 		FireAnalyticsEventFunction(EventNames.FTUXEducationScreenImpression)
 	end, {})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 77 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FireAnalyticsEventFunction (upval), EventNames (upval), UseStateResult2 (copy)
 		FireAnalyticsEventFunction(EventNames.FTUXHowToCaptureButtonPressed)
 		UseStateResult2(true)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 82 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {})

@@ -10,7 +10,7 @@ local InlineSpanElementModule = {}
 InlineSpanElementModule.__index = InlineSpanElementModule
 InlineSpanElementModule.__type = require(Parent.Utils.InlineElementType)
 
-local function getSplitPoint(Elements, p1: number) --[[ Line: 21 ]]
+local function getSplitPoint(Elements, p1: number)
 	local Total = 0
 	
 	for i, element in Elements do
@@ -24,7 +24,7 @@ local function getSplitPoint(Elements, p1: number) --[[ Line: 21 ]]
 	return -1, -1
 end
 
-local function _(p2, p3, Text: string, p4, p5, p6) --[[ Line: 33 | Named "handleSplitTrailingElement" ]]
+local function _(p2, p3, Text: string, p4, p5, p6)
 	local v1 = nil
 	
 	if p5 then
@@ -40,7 +40,7 @@ local function _(p2, p3, Text: string, p4, p5, p6) --[[ Line: 33 | Named "handle
 	end
 end
 
-function InlineSpanElementModule.new(WrapperElement, WrapperElementProps, Elements, Count) --[[ Line: 57 ]]
+function InlineSpanElementModule.new(WrapperElement, WrapperElementProps, Elements, Count)
 	-- upvalues: InlineSpanElementModule (copy), IsInlineElementModule (copy), HardBreakElementModule (copy)
 	local self = setmetatable({}, InlineSpanElementModule)
 	self.WrapperElement = WrapperElement
@@ -63,20 +63,20 @@ function InlineSpanElementModule.new(WrapperElement, WrapperElementProps, Elemen
 	return self
 end
 
-function InlineSpanElementModule:getWidth() --[[ Line: 86 ]]
+function InlineSpanElementModule:getWidth()
 	-- upvalues: DashModule (copy)
-	return DashModule.sum(DashModule.map(self.Elements, function(p2) --[[ Line: 87 ]]
+	return DashModule.sum(DashModule.map(self.Elements, function(p2)
 		return p2:getWidth()
 	end))
 end
 
-function InlineSpanElementModule:_splitChildAtIndex(p2, p3) --[[ Line: 92 ]]
+function InlineSpanElementModule:_splitChildAtIndex(p2, p3)
 	local Parts, Parts2 = self.Elements[p2]:split(p3, false)
 	
 	return Parts, Parts2, Parts:getWidth() <= p3
 end
 
-function InlineSpanElementModule:split(p2, p3) --[[ Line: 102 ]]
+function InlineSpanElementModule:split(p2, p3)
 	-- upvalues: getSplitPoint (copy), InlineSpanElementModule (copy)
 	local List = {}
 	local Elements = {}
@@ -128,7 +128,7 @@ function InlineSpanElementModule:split(p2, p3) --[[ Line: 102 ]]
 	end
 end
 
-function InlineSpanElementModule:trimStart() --[[ Line: 150 ]]
+function InlineSpanElementModule:trimStart()
 	-- upvalues: InlineSpanElementModule (copy)
 	local TrimStartResult = nil
 	for i, element in self.Elements do
@@ -146,9 +146,9 @@ function InlineSpanElementModule:trimStart() --[[ Line: 150 ]]
 	return nil
 end
 
-function InlineSpanElementModule:render(Id, LayoutOrder) --[[ Line: 170 ]]
+function InlineSpanElementModule:render(Id, LayoutOrder)
 	-- upvalues: DashModule (copy), RenderInMeasuredFrameModule (copy), ReactModule (copy)
-	return ReactModule.createElement(self.WrapperElement, DashModule.join(self.wrapperElementProps, { id = Id, LayoutOrder = LayoutOrder }), (DashModule.map(self.Elements, function(p2, LayoutOrder) --[[ Line: 172 ]]
+	return ReactModule.createElement(self.WrapperElement, DashModule.join(self.wrapperElementProps, { id = Id, LayoutOrder = LayoutOrder }), (DashModule.map(self.Elements, function(p2, LayoutOrder)
 		-- upvalues: RenderInMeasuredFrameModule (upval), Id (copy), self (copy)
 		return RenderInMeasuredFrameModule(p2:render(`{Id}-{self.startingIndex + LayoutOrder - 1}`, LayoutOrder), p2:getWidth(), LayoutOrder)
 	end)))

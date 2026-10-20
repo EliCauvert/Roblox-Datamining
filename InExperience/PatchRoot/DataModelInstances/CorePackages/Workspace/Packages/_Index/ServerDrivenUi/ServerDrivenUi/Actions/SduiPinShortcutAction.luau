@@ -8,11 +8,11 @@ local FStringEdpPinnedShortcutsIxpLayer = require(Parent.SharedFlags).FStringEdp
 local PinExperienceAndNotifyFunction = require(Parent.PinShortcut).pinExperienceAndNotify
 local PinExperienceShortcut = SduiCoreSystemModule.SduiActionType.PinExperienceShortcut
 
-local function _() --[[ Line: 23 | Named "isPinShortcutServiceEnabled" ]]
+local function _()
 	return game:GetEngineFeature("PinShortcutServiceEnabled")
 end
 
-return function(p1, _, p2, _) --[[ Line: 27 | Named "SduiPinShortcutAction" ]]
+return function(p1, _, p2, _)
 	-- upvalues: SduiErrorType (copy), PinExperienceShortcut (copy), FFlagEdpPinnedShortcutsLogExposure (copy), IXPService (copy), FStringEdpPinnedShortcutsIxpLayer (copy), FFlagPinShortcutEnableOnCompleteCallback (copy), PinExperienceAndNotifyFunction (copy)
 	local ActionParams = if p1 then p1.actionParams else nil
 	
@@ -40,15 +40,15 @@ return function(p1, _, p2, _) --[[ Line: 27 | Named "SduiPinShortcutAction" ]]
 	
 	if not game:GetEngineFeature("PinShortcutServiceEnabled") then return end
 	if FFlagEdpPinnedShortcutsLogExposure and game:GetEngineFeature("EnableLogFlagLinkedUserLayerExposure") then
-		pcall(function() --[[ Line: 60 ]]
+		pcall(function()
 			-- upvalues: IXPService (upval), FStringEdpPinnedShortcutsIxpLayer (upval)
 			IXPService:LogFlagLinkedUserLayerExposure(FStringEdpPinnedShortcutsIxpLayer)
 		end)
 	end
-	task.spawn(function() --[[ Line: 70 ]]
+	task.spawn(function()
 		-- upvalues: FFlagPinShortcutEnableOnCompleteCallback (upval), PinExperienceAndNotifyFunction (upval), Number (copy), Number1 (copy), GameName (copy), p2 (copy), SduiErrorType (upval), PinExperienceShortcut (upval)
 		if FFlagPinShortcutEnableOnCompleteCallback then
-			local Success, Result = pcall(function() --[[ Line: 72 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: PinExperienceAndNotifyFunction (upval), Number (upval), Number1 (upval), GameName (upval), p2 (upval)
 				PinExperienceAndNotifyFunction(Number, Number1, GameName, p2.dependencies.dispatch)
 			end)
@@ -69,7 +69,7 @@ return function(p1, _, p2, _) --[[ Line: 27 | Named "SduiPinShortcutAction" ]]
 				
 				return
 			end
-			local Success2, Result2 = pcall(function() --[[ Line: 90 ]]
+			local Success2, Result2 = pcall(function()
 				-- upvalues: Result1 (copy), Number (upval), Number1 (upval), GameName (upval)
 				Result1:PinExperience(Number, Number1, GameName)
 			end)

@@ -34,7 +34,7 @@ StyledTextLabel.defaultProps = {
 	automaticSize = Enum.AutomaticSize.None
 }
 
-function StyledTextLabel.render(p1) --[[ Line: 64 ]]
+function StyledTextLabel.render(p1)
 	-- upvalues: RoactModule (copy), GenericTextLabelModule (copy)
 	return RoactModule.createElement(GenericTextLabelModule, {
 		maxSize = p1.props.maxSize,

@@ -4,7 +4,7 @@ local _ = require(Parent.Foundation)
 local SectionTitleModule = require(script.Parent.SectionTitle)
 local SectionTitleWithActionModule = require(script.Parent.SectionTitleWithAction)
 
-return function(p1) --[[ Line: 16 | Named "SectionHeader" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), SectionTitleWithActionModule (copy), SectionTitleModule (copy)
 	return if p1.onBack then ReactModule.createElement(SectionTitleWithActionModule, {
 		variant = "back",

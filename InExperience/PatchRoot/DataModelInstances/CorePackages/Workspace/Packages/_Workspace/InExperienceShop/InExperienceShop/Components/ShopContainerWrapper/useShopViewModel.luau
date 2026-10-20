@@ -23,7 +23,7 @@ local FFlagHideHeaderForBuyRobuxInExperienceShop = SharedFlagsModule.FFlagHideHe
 local config = { homeLabel = "CommonUI.Features.Label.Home" }
 local _ = require(script.Parent.ShopView)
 
-local function _(Text: string): boolean --[[ Line: 53 | Named "isQueryValid" ]]
+local function _(Text: string): boolean
 	-- upvalues: ConstantsModule (copy)
 	local _, Replaced2 = string.gsub(Text, " ", "")
 	
@@ -32,7 +32,7 @@ end
 
 local Callback = nil
 
-local function useShopViewModel(p1) --[[ Line: 73 ]]
+local function useShopViewModel(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), config (copy), GetFixRobuxTileClickInShopModule (copy), SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), ReactModule (copy), FormatPriceModule (copy), Callback (ref), IsSideSheetEnabledModule (copy), FFlagHideHeaderForBuyRobuxInExperienceShop (copy), ResolveItemForSelectionFunction (copy), ShopItemSelectionModule (copy), ConstantsModule (copy), FFlagEnableUserOffers (copy), SharedFlagsModule (copy), AbuseVectorModule (copy), UseShopReportOverflowModule (copy), UseShopOfferChipModule (copy), InExperienceOffersModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction(config)
@@ -47,9 +47,9 @@ local function useShopViewModel(p1) --[[ Line: 73 ]]
 	
 	if FFlagShopRobuxPurchaseCompletionModalModule then
 		local UseSignalStateResult6 = SignalsReactModule.useSignalState(UseSignalStateResult.getPurchasedRobuxAmount)
-		ReactModule.useEffect(function() --[[ Line: 86 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseSignalStateResult6 (copy), UseSignalStateResult (copy)
-			return if UseSignalStateResult6 == nil then nil else function() --[[ Line: 90 ]]
+			return if UseSignalStateResult6 == nil then nil else function()
 				-- upvalues: UseSignalStateResult (upval), UseSignalStateResult6 (upval)
 				if UseSignalStateResult.getPurchasedRobuxAmount(false) == UseSignalStateResult6 then
 					UseSignalStateResult.dismissRobuxPurchaseSuccess()
@@ -70,12 +70,12 @@ local function useShopViewModel(p1) --[[ Line: 73 ]]
 			}
 		end
 	end
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 113 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Callback (upval), UseSignalStateResult1 (copy), UseSignalStateResult2 (copy)
 		return Callback(UseSignalStateResult1, UseSignalStateResult2)
 	end, { UseSignalStateResult1, UseSignalStateResult2 })
 	local HomeLabel = UseLocalizationResult.homeLabel
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 121 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), HomeLabel (copy)
 		local Buffer = table.create(#UseMemoResult.categories)
 		
@@ -88,7 +88,7 @@ local function useShopViewModel(p1) --[[ Line: 73 ]]
 		return Buffer
 	end, { UseMemoResult.categories, HomeLabel })
 	local UseResult = nil
-	UseResult = ReactModule.useCallback(function() --[[ Line: 131 ]]
+	UseResult = ReactModule.useCallback(function()
 		-- upvalues: IsSideSheetEnabledModule (upval), UseMemoResult (copy)
 		if not IsSideSheetEnabledModule then
 			return nil
@@ -100,7 +100,7 @@ local function useShopViewModel(p1) --[[ Line: 73 ]]
 		end
 		return nil
 	end, { UseMemoResult.categories })
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 145 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 		-- upvalues: IsSideSheetEnabledModule (upval), UseSignalStateResult4 (copy), UseResult (ref), UseMemoResult (copy)
 		if IsSideSheetEnabledModule and UseSignalStateResult4 then
 			local UseResultResult = UseResult()
@@ -111,18 +111,18 @@ local function useShopViewModel(p1) --[[ Line: 73 ]]
 		end
 		return if #UseMemoResult.categories > 0 then UseMemoResult.categories[1].id else ""
 	end)
-	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(function() --[[ Line: 158 ]]
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(function()
 		return nil
 	end)
-	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(function() --[[ Line: 161 ]]
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(function()
 		return nil
 	end)
-	ReactModule.useEffect(function() --[[ Line: 164 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy), UseStateResult2 (copy)
 		local Categories = UseMemoResult.categories
 		
 		if #Categories ~= 0 then
-			UseStateResult2(function(Id) --[[ Line: 169 ]]
+			UseStateResult2(function(Id)
 				-- upvalues: Categories (copy)
 				for _, category in Categories do
 					if category.id == Id then
@@ -135,7 +135,7 @@ local function useShopViewModel(p1) --[[ Line: 73 ]]
 			return
 		end
 	end, { UseMemoResult.categories })
-	ReactModule.useEffect(function() --[[ Line: 181 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsSideSheetEnabledModule (upval), UseSignalStateResult4 (copy), UseMemoResult (copy), UseSignalStateResult (copy), UseResult (ref), UseStateResult2 (copy)
 		if IsSideSheetEnabledModule and UseSignalStateResult4 and #UseMemoResult.categories > 0 then
 			UseSignalStateResult.setShouldOpenToRobuxTab(false)
@@ -154,7 +154,7 @@ local function useShopViewModel(p1) --[[ Line: 73 ]]
 	local UseMemoResult2 = false
 	
 	if FFlagHideHeaderForBuyRobuxInExperienceShop then
-		UseMemoResult2 = ReactModule.useMemo(function(): boolean --[[ Line: 197 ]]
+		UseMemoResult2 = ReactModule.useMemo(function(): boolean
 			-- upvalues: UseMemoResult (copy)
 			if #UseMemoResult.categories ~= 2 then
 				return false
@@ -171,15 +171,15 @@ local function useShopViewModel(p1) --[[ Line: 73 ]]
 			end
 			return Flag and Flag1
 		end, { UseMemoResult.categories })
-		ReactModule.useEffect(function() --[[ Line: 213 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseSignalStateResult (copy)
-			return function() --[[ Line: 214 ]]
+			return function()
 				-- upvalues: UseSignalStateResult (upval)
 				UseSignalStateResult.setOpenedFromBuyRobux(false)
 			end
 		end, { UseSignalStateResult.setOpenedFromBuyRobux })
 	end
-	ReactModule.useEffect(function() --[[ Line: 222 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult1 (copy), UseStateResult3 (copy), ResolveItemForSelectionFunction (upval), UseMemoResult (copy), FixRobuxTileClickInShopModule (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy)
 		if UseStateResult1 == nil or UseStateResult3 == nil then return end
 		if ResolveItemForSelectionFunction(UseMemoResult.sections, UseStateResult1, UseStateResult3, FixRobuxTileClickInShopModule) == nil then
@@ -192,7 +192,7 @@ local function useShopViewModel(p1) --[[ Line: 73 ]]
 		UseStateResult3,
 		FixRobuxTileClickInShopModule
 	})
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 239 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: ResolveItemForSelectionFunction (upval), UseMemoResult (copy), UseStateResult1 (copy), UseStateResult3 (copy), FixRobuxTileClickInShopModule (copy)
 		return ResolveItemForSelectionFunction(UseMemoResult.sections, UseStateResult1, UseStateResult3, FixRobuxTileClickInShopModule)
 	end, {
@@ -201,7 +201,7 @@ local function useShopViewModel(p1) --[[ Line: 73 ]]
 		UseStateResult3,
 		FixRobuxTileClickInShopModule
 	})
-	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 248 ]]
+	local UseMemoResult4 = ReactModule.useMemo(function()
 		-- upvalues: ShopItemSelectionModule (upval), UseMemoResult (copy), UseStateResult1 (copy), UseStateResult3 (copy), FixRobuxTileClickInShopModule (copy)
 		return ShopItemSelectionModule.isRobuxBonusOnlySelection(UseMemoResult.sections, UseStateResult1, UseStateResult3, FixRobuxTileClickInShopModule)
 	end, {
@@ -210,13 +210,13 @@ local function useShopViewModel(p1) --[[ Line: 73 ]]
 		UseStateResult3,
 		FixRobuxTileClickInShopModule
 	})
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 258 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(p2)
 	end, {})
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState("")
 	local UseStateResult5, UseStateResult2_4 = ReactModule.useState("")
-	ReactModule.useEffect(function() --[[ Line: 270 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult4 (copy), ConstantsModule (upval), UseStateResult2_4 (copy)
 		local _, Replaced2 = string.gsub(UseStateResult4, " ", "")
 		
@@ -226,7 +226,7 @@ local function useShopViewModel(p1) --[[ Line: 73 ]]
 			return
 		end
 		local Flag = false
-		task.delay(ConstantsModule.SEARCH_DEBOUNCE_SECONDS, function() --[[ Line: 281 ]]
+		task.delay(ConstantsModule.SEARCH_DEBOUNCE_SECONDS, function()
 			-- upvalues: Flag (ref), UseStateResult2_4 (upval), UseStateResult4 (upval)
 			if not Flag then
 				UseStateResult2_4(UseStateResult4)
@@ -235,16 +235,16 @@ local function useShopViewModel(p1) --[[ Line: 73 ]]
 			end
 		end)
 		
-		return function() --[[ Line: 287 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end
 	end, { UseStateResult4 })
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 292 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_3 (copy)
 		UseStateResult2_3(p2)
 	end, {})
-	local UseResult3 = ReactModule.useCallback(function(Text: string) --[[ Line: 298 ]]
+	local UseResult3 = ReactModule.useCallback(function(Text: string)
 		-- upvalues: UseStateResult2_3 (copy), ConstantsModule (upval), UseStateResult2_4 (copy)
 		UseStateResult2_3(Text)
 		local _, Replaced2 = string.gsub(Text, " ", "")
@@ -257,7 +257,7 @@ local function useShopViewModel(p1) --[[ Line: 73 ]]
 			UseStateResult2_4("")
 		end
 	end, {})
-	local UseResult4 = ReactModule.useCallback(function(p2, p3) --[[ Line: 310 ]]
+	local UseResult4 = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: ResolveItemForSelectionFunction (upval), UseMemoResult (copy), FixRobuxTileClickInShopModule (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy)
 		if p3 == nil then return end
 		if ResolveItemForSelectionFunction(UseMemoResult.sections, p2, p3, FixRobuxTileClickInShopModule) ~= nil then
@@ -267,17 +267,17 @@ local function useShopViewModel(p1) --[[ Line: 73 ]]
 			return
 		end
 	end, { UseMemoResult.sections, FixRobuxTileClickInShopModule })
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 321 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy), UseStateResult2_2 (copy)
 		UseStateResult2_1(nil)
 		UseStateResult2_2(nil)
 	end, {})
 	local UseStateResult6, UseStateResult2_5 = ReactModule.useState(false)
-	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 328 ]]
+	local UseResult6 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_5 (copy)
 		UseStateResult2_5(true)
 	end, {})
-	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 336 ]]
+	local UseResult7 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_5 (copy), UseStateResult2_3 (copy), UseStateResult2_4 (copy)
 		UseStateResult2_5(false)
 		UseStateResult2_3("")
@@ -292,11 +292,11 @@ local function useShopViewModel(p1) --[[ Line: 73 ]]
 	else
 		UseStateResult7 = false
 		
-		UseStateResult2_6 = function(_) --[[ Line: 358 ]] end
+		UseStateResult2_6 = function(_) end
 	end
 	local UseShopReportOverflowResult = UseShopReportOverflowModule.useShopReportOverflow({
 		isReportingEnabled = SharedFlagsModule.FFlagEnableReportingFlowForExperienceShop,
-		buildReportSession = ReactModule.useCallback(function() --[[ Line: 383 ]]
+		buildReportSession = ReactModule.useCallback(function()
 			-- upvalues: AbuseVectorModule (upval)
 			return {
 				abuseVector = AbuseVectorModule.InExperienceShop,
@@ -329,7 +329,7 @@ local function useShopViewModel(p1) --[[ Line: 73 ]]
 		onItemActivated = UseResult4,
 		onDetailsClose = UseResult5,
 		itemsPerRow = UseSignalStateResult3,
-		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 363 ]]
+		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
 			-- upvalues: ConstantsModule (upval), SetItemsPerRowFunction (copy), FFlagEnableUserOffers (upval), UseStateResult2_6 (ref)
 			local X = Frame.AbsoluteSize.X
 			
@@ -354,7 +354,7 @@ local function useShopViewModel(p1) --[[ Line: 73 ]]
 	}
 end
 
-Callback = function(UseSignalStateResult, Sections) --[[ Line: 452 ]]
+Callback = function(UseSignalStateResult, Sections)
 	local t = {}
 	
 	for _, section in Sections do

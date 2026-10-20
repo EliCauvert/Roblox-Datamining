@@ -1,4 +1,4 @@
-﻿return require(script.Parent.Parent.ActionCreator)("SetPlayerIsCreator", function(Player: Player, IsCreator) --[[ Line: 4 ]]
+﻿return require(script.Parent.Parent.ActionCreator)("SetPlayerIsCreator", function(Player: Player, IsCreator)
 	return {
 		player = Player,
 		userId = Player.UserId,

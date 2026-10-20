@@ -1,7 +1,7 @@
 ﻿local UserInputService = game:GetService("UserInputService")
 local VRService = game:GetService("VRService")
 
-return function(p1) --[[ Line: 6 ]]
+return function(p1)
 	-- upvalues: UserInputService (copy), VRService (copy)
 	if p1 then
 		UserInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceShow

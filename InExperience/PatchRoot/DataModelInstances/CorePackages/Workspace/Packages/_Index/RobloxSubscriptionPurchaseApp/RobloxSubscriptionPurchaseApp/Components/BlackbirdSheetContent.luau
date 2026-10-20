@@ -45,7 +45,7 @@ local config = {
 	[PromptStateModule.SubscriptionStatusPolling] = true
 }
 
-return function() --[[ Line: 66 | Named "useBlackbirdSheetSlots" ]]
+return function()
 	-- upvalues: RobloxSubscriptionStoreModule (copy), SignalsReactModule (copy), FFlagEnablePlusReferralLandingSheet (copy), UseReferrerNameModule (copy), UseLocalizationFunction (copy), FIntPlusReferralRewardRobux (copy), IsRobloxSubscriptionProductFreeTrialModule (copy), FFlagRobloxPlusDynamicFreeTrialLengthModule (copy), GetFreeTrialOfferModule (copy), ReactModule (copy), FFlagEnableSubscriptionPurchaseFlowEventIngestModule (copy), LogSubscriptionPurchaseFlowEventModule (copy), LogRobloxSubscriptionUpsellCounterModule (copy), RobloxSubscriptionUpsellTelemetryModule (copy), PromptStateModule (copy), FinalizeRobloxSubscriptionUpsellFlowModule (copy), CompleteRobloxSubscriptionUpsellFlowModule (copy), PerformRobloxSubscriptionPurchaseModule (copy), config (copy), GuiService (copy), Sheet (copy), View (copy), Text (copy), GetIconRichTextFunction (copy), IconName (copy), HandleBackButtonActionModule (copy), PlusHeroContentModule (copy), PictogramsPlusRobux (copy), RobloxSubscriptionPriceRowModule (copy), RobloxSubscriptionFeatureListModule (copy), Button (copy), FillBehavior (copy), ButtonVariant (copy), LegalDisclosureModule (copy), FFlagSupportFreeTrialModule (copy), FFlagEnablePlusReferralLegalDisclosureModule (copy)
 	local GetResult = RobloxSubscriptionStoreModule.get()
 	local OnCtaOverride = GetResult.getOnCtaOverride()
@@ -130,7 +130,7 @@ return function() --[[ Line: 66 | Named "useBlackbirdSheetSlots" ]]
 			}, {
 				SubscribeButton = ReactModule.createElement(Button, {
 					LayoutOrder = 1,
-					ref = ReactModule.useCallback(function(p1) --[[ Line: 120 ]]
+					ref = ReactModule.useCallback(function(p1)
 						-- upvalues: FFlagEnableSubscriptionPurchaseFlowEventIngestModule (upval), LogSubscriptionPurchaseFlowEventModule (upval), LogRobloxSubscriptionUpsellCounterModule (upval), RobloxSubscriptionUpsellTelemetryModule (upval)
 						if p1 then
 							if FFlagEnableSubscriptionPurchaseFlowEventIngestModule then
@@ -140,7 +140,7 @@ return function() --[[ Line: 66 | Named "useBlackbirdSheetSlots" ]]
 						end
 					end, {}),
 					text = if UseSignalStateResult.ctaText then UseSignalStateResult.ctaText else GetFreeTrialText,
-					onActivated = function() --[[ Line: 131 ]]
+					onActivated = function()
 						-- upvalues: FFlagEnableSubscriptionPurchaseFlowEventIngestModule (upval), LogSubscriptionPurchaseFlowEventModule (upval), LogRobloxSubscriptionUpsellCounterModule (upval), RobloxSubscriptionUpsellTelemetryModule (upval), OnCtaOverride (copy), GetResult (copy), PromptStateModule (upval), FinalizeRobloxSubscriptionUpsellFlowModule (upval), CompleteRobloxSubscriptionUpsellFlowModule (upval), PerformRobloxSubscriptionPurchaseModule (upval)
 						if FFlagEnableSubscriptionPurchaseFlowEventIngestModule then
 							LogSubscriptionPurchaseFlowEventModule("SubscriptionUpsellSubscribeClicked")
@@ -149,11 +149,11 @@ return function() --[[ Line: 66 | Named "useBlackbirdSheetSlots" ]]
 						
 						if OnCtaOverride then
 							GetResult.setPromptState(PromptStateModule.SubscriptionPurchaseRequested)
-							OnCtaOverride(function() --[[ Line: 143 ]]
+							OnCtaOverride(function()
 								-- upvalues: GetResult (upval), FinalizeRobloxSubscriptionUpsellFlowModule (upval)
 								GetResult.setDidTryPurchasing(true)
 								FinalizeRobloxSubscriptionUpsellFlowModule(true)
-							end, function() --[[ Line: 146 ]]
+							end, function()
 								-- upvalues: CompleteRobloxSubscriptionUpsellFlowModule (upval)
 								CompleteRobloxSubscriptionUpsellFlowModule()
 							end)

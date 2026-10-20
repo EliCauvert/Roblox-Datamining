@@ -1,3 +1,3 @@
-﻿return function(): boolean --[[ Line: 1 ]]
+﻿return function(): boolean
 	return game:GetEngineFeature("EnableChatInputBarConfigurationAutocompleteEnabled") and not game:GetService("UserInputService").TouchEnabled
 end

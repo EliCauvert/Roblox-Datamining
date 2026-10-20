@@ -2,19 +2,19 @@
 local Players = game:GetService("Players")
 local HttpService = game:GetService("HttpService")
 
-local function _(): string --[[ Line: 5 | Named "getCurrentUser" ]]
+local function _(): string
 	-- upvalues: Players (copy)
 	return if Players.LocalPlayer and Players.LocalPlayer.UserId > 0 then tostring(Players.LocalPlayer.UserId) else "0"
 end
 
-local _ = function(p1): string --[[ Line: 14 | Named "getUserKey" ]]
+local _ = function(p1): string
 	return "u_" .. tostring(p1 or "0")
 end
 
-local function getValuesForAllUsers(Key) --[[ Line: 18 ]]
+local function getValuesForAllUsers(Key)
 	-- upvalues: AppStorageService (copy), HttpService (copy)
 	local Item = AppStorageService:GetItem(Key)
-	local Success, Result = pcall(function() --[[ Line: 20 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: HttpService (upval), Item (copy)
 		return HttpService:JSONDecode(Item)
 	end)
@@ -22,7 +22,7 @@ local function getValuesForAllUsers(Key) --[[ Line: 18 ]]
 	return if Success and type(Result) == "table" then Result else { default = Item }
 end
 
-local _ = function(Key, Input) --[[ Line: 32 | Named "setValuesForAllUsers" ]]
+local _ = function(Key, Input)
 	-- upvalues: HttpService (copy), AppStorageService (copy)
 	AppStorageService:SetItem(Key, (HttpService:JSONEncode(Input)))
 end
@@ -30,7 +30,7 @@ end
 local UserLocalStore = {}
 UserLocalStore.__index = UserLocalStore
 
-function UserLocalStore.new(p1: string) --[[ Line: 40 ]]
+function UserLocalStore.new(p1: string)
 	-- upvalues: Players (copy), UserLocalStore (copy)
 	if not p1 then
 		p1 = if Players.LocalPlayer and Players.LocalPlayer.UserId > 0 then tostring(Players.LocalPlayer.UserId) else "0"
@@ -41,7 +41,7 @@ function UserLocalStore.new(p1: string) --[[ Line: 40 ]]
 	return config
 end
 
-function UserLocalStore:GetItem(Key) --[[ Line: 52 ]]
+function UserLocalStore:GetItem(Key)
 	-- upvalues: getValuesForAllUsers (copy)
 	local ValuesForAllUsers = getValuesForAllUsers(Key)
 	local ValuesForAllUser = ValuesForAllUsers["u_" .. tostring(self.userId or "0")]
@@ -52,14 +52,14 @@ function UserLocalStore:GetItem(Key) --[[ Line: 52 ]]
 	return ValuesForAllUser
 end
 
-function UserLocalStore:SetItem(Key, Json) --[[ Line: 62 ]]
+function UserLocalStore:SetItem(Key, Json)
 	-- upvalues: getValuesForAllUsers (copy), HttpService (copy), AppStorageService (copy)
 	local ValuesForAllUsers = getValuesForAllUsers(Key)
 	ValuesForAllUsers["u_" .. tostring(self.userId or "0")] = Json
 	AppStorageService:SetItem(Key, (HttpService:JSONEncode(ValuesForAllUsers)))
 end
 
-function UserLocalStore:Flush() --[[ Line: 69 ]]
+function UserLocalStore:Flush()
 	-- upvalues: AppStorageService (copy)
 	AppStorageService:Flush()
 end

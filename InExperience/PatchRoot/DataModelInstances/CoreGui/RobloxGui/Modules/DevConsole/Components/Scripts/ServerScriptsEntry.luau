@@ -14,7 +14,7 @@ local _UDim2 = UDim2.new(0, ActivityBoxPadding, 0, 0)
 local LineGraphHeight = ConstantsModule.GeneralFormatting.LineGraphHeight
 local ConvertTimeStampModule = require(script.Parent.Parent.Parent.Util.convertTimeStamp)
 
-return function(p1) --[[ Line: 24 ]]
+return function(p1)
 	-- upvalues: RoactModule (copy), BannerButtonModule (copy), EntryFrameHeight (copy), ActivityBoxWidth (copy), ActivityBoxPadding (copy), CellLabelModule (copy), _UDim2 (copy), LineWidth (copy), LineColor (copy), LineGraphModule (copy), LineGraphHeight (copy), ConvertTimeStampModule (copy), ChartHeaderNames (copy)
 	local ScriptData = p1.scriptData
 	local ShowGraph = p1.showGraph

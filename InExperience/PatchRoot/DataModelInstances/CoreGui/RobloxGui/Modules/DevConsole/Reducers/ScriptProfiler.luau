@@ -15,11 +15,11 @@ local SetShowGCModule = require(script.Parent.Parent.Components.ScriptProfiler.A
 local SetSearchDataModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.SetSearchData)
 local _ = require(script.Parent.Parent.Components.ScriptProfiler.ProfilerDataFormatV2)
 
-local function _(p1, p2) --[[ Line: 68 | Named "GetSessionState" ]]
+local function _(p1, p2)
 	return if p1 then p2.client else p2.server
 end
 
-local function Update(IsClient, p1, p2) --[[ Line: 72 ]]
+local function Update(IsClient, p1, p2)
 	-- upvalues: ImmutableModule (copy)
 	local JoinDictionariesResult = ImmutableModule.JoinDictionaries(if IsClient then p1.client else p1.server, p2)
 	
@@ -29,7 +29,7 @@ local function Update(IsClient, p1, p2) --[[ Line: 72 ]]
 	})
 end
 
-return function(p1, p2) --[[ Line: 85 ]]
+return function(p1, p2)
 	-- upvalues: SetScriptProfilerStateModule (copy), ImmutableModule (copy), SetIsProfilingModule (copy), Update (copy), SetAverageModule (copy), SetFrequencyModule (copy), SetDataViewModule (copy), SetLiveUpdateModule (copy), SetShowPluginsModule (copy), SetShowGCModule (copy), SetSearchDataModule (copy), SetTimerStateModule (copy), SetDataModule (copy), SetThreadsModule (copy), ClearStateForNewProfilingSessionModule (copy), SetScriptProfilerRootModule (copy)
 	local Tbl = p1 or {
 		isClientView = true,

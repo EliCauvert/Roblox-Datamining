@@ -2,8 +2,8 @@
 local _ = require(Parent.GraphQL)
 local _ = require(Parent.LuauPolyfill)
 
-return function(p1) --[[ Line: 8 | Named "buildTypeResolver" ]]
-	return function(p2, p3, p4, p5) --[[ Line: 9 ]]
+return function(p1)
+	return function(p2, p3, p4, p5)
 		-- upvalues: p1 (copy)
 		local v1 = p1[p5.name]
 		

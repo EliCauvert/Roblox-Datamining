@@ -1,11 +1,11 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("InputUi").Parent.React)
 local MemStorageService = game:GetService("MemStorageService")
 
-return function(Callback1, Callback) --[[ Line: 12 | Named "useGamepadConnectedEvent" ]]
+return function(Callback1, Callback)
 	-- upvalues: ReactModule (copy), MemStorageService (copy)
-	ReactModule.useEffect(function() --[[ Line: 13 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: MemStorageService (upval), Callback (copy), Callback1 (copy)
-		local ActiveGamepadConnected = MemStorageService:BindAndFire("ActiveGamepadConnected", function(p1) --[[ Line: 14 ]]
+		local ActiveGamepadConnected = MemStorageService:BindAndFire("ActiveGamepadConnected", function(p1)
 			-- upvalues: Callback (upval), Callback1 (upval)
 			if p1 == "false" then
 				Callback()
@@ -16,7 +16,7 @@ return function(Callback1, Callback) --[[ Line: 12 | Named "useGamepadConnectedE
 			end
 		end)
 		
-		return function() --[[ Line: 22 ]]
+		return function()
 			-- upvalues: ActiveGamepadConnected (copy)
 			ActiveGamepadConnected:Disconnect()
 		end

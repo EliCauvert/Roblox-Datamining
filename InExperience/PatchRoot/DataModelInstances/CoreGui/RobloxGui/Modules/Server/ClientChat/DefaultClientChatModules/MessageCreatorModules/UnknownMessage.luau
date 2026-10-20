@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.Parent:WaitForChild("ChatSettings"))
 local UtilModule = require(script.Parent:WaitForChild("Util"))
 
-function CreateUnknownMessageLabel(p1) --[[ Line: 13 ]]
+function CreateUnknownMessageLabel(p1)
 	print("No message creator for message: " .. p1.Message)
 end
 

@@ -8,17 +8,17 @@
 	Players = { {} }
 }
 
-local function _(GroupId, p1) --[[ Line: 23 | Named "MakeIsInGroup" ]]
+local function _(GroupId, p1)
 	assert(type(p1) == "nil" or type(p1) == "number", "requiredRank must be a number or nil")
 	
-	return function(Player: Player): boolean --[[ Line: 26 ]]
+	return function(Player: Player): boolean
 		-- upvalues: p1 (copy), GroupId (copy)
 		if not Player or not Player.UserId then
 			return false
 		end
 		local _ = Player.UserId
 		local IsInGroup = false
-		local Success, Result = pcall(function() --[[ Line: 31 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p1 (upval), IsInGroup (ref), Player (copy), GroupId (upval)
 			if p1 then
 				IsInGroup = p1 < Player:GetRankInGroup(GroupId)
@@ -36,7 +36,7 @@ local function _(GroupId, p1) --[[ Line: 23 | Named "MakeIsInGroup" ]]
 	end
 end
 
-;(function() --[[ Line: 49 | Named "ConstructIsInGroups" ]]
+;(function()
 	-- upvalues: config (copy)
 	if config.Groups then
 		for _, group in pairs(config.Groups) do
@@ -44,14 +44,14 @@ end
 			local Rank = group.Rank
 			assert(type(Rank) == "nil" or type(Rank) == "number", "requiredRank must be a number or nil")
 			
-			function group.IsInGroup(Player: Player): boolean --[[ Line: 26 ]]
+			function group.IsInGroup(Player: Player): boolean
 				-- upvalues: Rank (copy), GroupId (copy)
 				if not Player or not Player.UserId then
 					return false
 				end
 				local _ = Player.UserId
 				local IsInGroup = false
-				local Success, Result = pcall(function() --[[ Line: 31 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: Rank (upval), IsInGroup (ref), Player (copy), GroupId (upval)
 					if Rank then
 						IsInGroup = Rank < Player:GetRankInGroup(GroupId)
@@ -72,7 +72,7 @@ end
 end)()
 local Players = game:GetService("Players")
 
-local function GetSpecialChatColor(ChildName) --[[ Line: 60 ]]
+local function GetSpecialChatColor(ChildName)
 	-- upvalues: config (copy), Players (copy)
 	if config.Players then
 		local ChildName1 = Players:FindFirstChild(ChildName)
@@ -94,7 +94,7 @@ local function GetSpecialChatColor(ChildName) --[[ Line: 60 ]]
 	end
 end
 
-return function(p1) --[[ Line: 80 | Named "Run" ]]
+return function(p1)
 	-- upvalues: GetSpecialChatColor (copy), Players (copy)
 	local list = {
 		Color3.new(0.9921568627450981, 0.1607843137254902, 0.2627450980392157),
@@ -106,7 +106,7 @@ return function(p1) --[[ Line: 80 | Named "Run" ]]
 		BrickColor.new("Brick yellow").Color
 	}
 	
-	local function GetNameValue(Text: string): number --[[ Line: 93 ]]
+	local function GetNameValue(Text: string): number
 		local Total = 0
 		
 		for i = 1, #Text do
@@ -124,19 +124,19 @@ return function(p1) --[[ Line: 80 | Named "Run" ]]
 		return Total
 	end
 	
-	local function _(p2) --[[ Line: 110 | Named "ComputeNameColor" ]]
+	local function _(p2)
 		-- upvalues: list (copy), GetNameValue (copy)
 		return list[(GetNameValue(p2) + 0) % #list + 1]
 	end
 	
-	local _ = function(p2) --[[ Line: 114 | Named "GetNameColor" ]]
+	local _ = function(p2)
 		-- upvalues: list (copy), GetNameValue (copy)
 		local Player = p2:GetPlayer()
 		
 		return if Player and Player.Team ~= nil then Player.TeamColor.Color else list[(GetNameValue(p2.Name) + 0) % #list + 1]
 	end
 	
-	local function onNewSpeaker(ChildName) --[[ Line: 124 ]]
+	local function onNewSpeaker(ChildName)
 		-- upvalues: p1 (copy), list (copy), GetNameValue (copy), GetSpecialChatColor (upval)
 		local Speaker = p1:GetSpeaker(ChildName)
 		
@@ -162,9 +162,9 @@ return function(p1) --[[ Line: 80 | Named "Run" ]]
 		onNewSpeaker(value)
 	end
 	local ChangedConnections = {}
-	Players.PlayerAdded:connect(function(Player) --[[ Line: 161 ]]
+	Players.PlayerAdded:connect(function(Player)
 		-- upvalues: p1 (copy), list (copy), GetNameValue (copy), ChangedConnections (copy)
-		ChangedConnections[Player] = Player.Changed:connect(function(p2) --[[ Line: 162 ]]
+		ChangedConnections[Player] = Player.Changed:connect(function(p2)
 			-- upvalues: p1 (upval), Player (copy), list (upval), GetNameValue (upval)
 			local Speaker = p1:GetSpeaker(Player.Name)
 			
@@ -174,7 +174,7 @@ return function(p1) --[[ Line: 80 | Named "Run" ]]
 			end
 		end)
 	end)
-	Players.PlayerRemoving:connect(function(Player) --[[ Line: 173 ]]
+	Players.PlayerRemoving:connect(function(Player)
 		-- upvalues: ChangedConnections (copy)
 		local ChangedConnection = ChangedConnections[Player]
 		

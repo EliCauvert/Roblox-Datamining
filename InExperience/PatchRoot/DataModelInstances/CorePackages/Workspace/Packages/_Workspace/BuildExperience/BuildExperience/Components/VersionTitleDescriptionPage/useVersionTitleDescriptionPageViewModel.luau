@@ -7,11 +7,11 @@ local GetVersionInformationStoreModule = require(BuildExperience.Stores.GetVersi
 local _ = require(script.Parent.VersionTitleDescriptionPageView)
 local DataStatus = require(Parent.DataHydration).DataStatus
 
-return function(p1) --[[ Line: 22 | Named "useVersionTitleDescriptionPageViewModel" ]]
+return function(p1)
 	-- upvalues: GetVersionInformationStoreModule (copy), PlaceVersionHistoryModule (copy), ReactModule (copy), SignalsReactModule (copy), DataStatus (copy)
 	local VersionInformationStoreModule = GetVersionInformationStoreModule()
 	local PlaceVersionHistoryStore = PlaceVersionHistoryModule.getPlaceVersionHistoryStore()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 25 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: PlaceVersionHistoryStore (copy), p1 (copy)
 		return PlaceVersionHistoryStore.fetchHistory(p1.placeId)
 	end, { p1.placeId, PlaceVersionHistoryStore })
@@ -31,7 +31,7 @@ return function(p1) --[[ Line: 22 | Named "useVersionTitleDescriptionPageViewMod
 	local UseRefResult = ReactModule.useRef("")
 	local UseRefResult1 = ReactModule.useRef("")
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-	ReactModule.useEffect(function() --[[ Line: 47 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: HasUseSignalStateResult (copy), UseBindingResult (copy), UseRefResult (copy), UseBindingResult1 (copy), UseRefResult1 (copy), UseStateResult (copy), p1 (copy), Title1 (copy), Description1 (copy), UseBindingResult2 (copy), UseBindingResult2_1 (copy), UseStateResult2 (copy)
 		if not HasUseSignalStateResult then return end
 		local IsNotValueMatch: boolean = UseBindingResult:getValue() ~= UseRefResult.current or UseBindingResult1:getValue() ~= UseRefResult1.current
@@ -49,7 +49,7 @@ return function(p1) --[[ Line: 22 | Named "useVersionTitleDescriptionPageViewMod
 		UseBindingResult1, Description1, Title1, UseStateResult,
 		HasUseSignalStateResult, p1.placeId, UseBindingResult
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 77 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult (copy), p1 (copy), UseBindingResult (copy), UseBindingResult1 (copy), UseRefResult (copy), UseRefResult1 (copy), VersionInformationStoreModule (copy)
 		if UseStateResult ~= p1.placeId then return end
 		local Value = UseBindingResult:getValue()
@@ -69,14 +69,14 @@ return function(p1) --[[ Line: 22 | Named "useVersionTitleDescriptionPageViewMod
 		UseBindingResult,
 		VersionInformationStoreModule
 	})
-	ReactModule.useEffect(function() --[[ Line: 101 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult (copy)
 		return UseResult
 	end, { UseResult })
 	
 	return {
 		isReady = UseStateResult == p1.placeId,
-		onBack = ReactModule.useCallback(function() --[[ Line: 105 ]]
+		onBack = ReactModule.useCallback(function()
 			-- upvalues: UseResult (copy), p1 (copy)
 			UseResult()
 			p1.onBack()

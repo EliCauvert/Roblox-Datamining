@@ -5,7 +5,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local ConstantsModule = require(SocialCarousel.Common.Constants)
 local TileModule = require(SocialCarousel.BaseComponents.Tile)
 
-return function(p1) --[[ Line: 19 | Named "ShareQRTile" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ConstantsModule (copy), ReactModule (copy), TileModule (copy)
 	return ReactModule.createElement(TileModule, {
 		icon = "icons/actions/friend_sort/qr_code",

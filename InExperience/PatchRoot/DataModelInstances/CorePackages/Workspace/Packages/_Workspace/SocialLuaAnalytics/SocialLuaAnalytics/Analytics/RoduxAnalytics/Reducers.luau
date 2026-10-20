@@ -2,7 +2,7 @@
 local _ = require(script.Parent.AnalyticsTypes)
 local BySessionKeyModule = require(script.bySessionKey)
 
-return function(p1) --[[ Line: 8 ]]
+return function(p1)
 	-- upvalues: Rodux (copy), BySessionKeyModule (copy)
 	return Rodux.combineReducers({ bySessionKey = BySessionKeyModule(p1) })
 end

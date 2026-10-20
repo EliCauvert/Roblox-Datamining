@@ -4,7 +4,7 @@ local BuildSduiCollectionInfoFunction = require(Parent.SduiSharedUtilities).buil
 local FFlagSduiPreferredTextSizeLineBudgets = require(Parent.SharedFlags).FFlagSduiPreferredTextSizeLineBudgets
 local _UDim = UDim.new(1, 72)
 
-return function() --[[ Line: 19 | Named "measureHomeCollectionLayout" ]]
+return function()
 	-- upvalues: CollectionViewsModule (copy), BuildSduiCollectionInfoFunction (copy), _UDim (copy), FFlagSduiPreferredTextSizeLineBudgets (copy)
 	return if CollectionViewsModule.getMainCollectionLayoutStore(false).getIsContainerMeasured(false) then BuildSduiCollectionInfoFunction("Small", _UDim, if FFlagSduiPreferredTextSizeLineBudgets then 3 else nil) else nil
 end

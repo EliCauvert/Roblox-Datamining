@@ -1,4 +1,4 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(TryingOn, AssetId, AssetTypeId) --[[ Line: 4 ]]
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(TryingOn, AssetId, AssetTypeId)
 	return {
 		tryingOn = TryingOn,
 		assetId = AssetId,

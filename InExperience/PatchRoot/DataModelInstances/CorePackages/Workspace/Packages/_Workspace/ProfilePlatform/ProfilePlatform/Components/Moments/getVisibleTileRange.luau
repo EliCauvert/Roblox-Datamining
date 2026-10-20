@@ -1,4 +1,4 @@
-﻿return function(p1, p2: number, p3: number, p4, p5, MaxValue: number) --[[ Line: 12 | Named "getVisibleTileRange" ]]
+﻿return function(p1, p2: number, p3: number, p4, p5, MaxValue: number)
 	if MaxValue <= 0 or p2 <= 0 then
 		return 1, 0
 	else

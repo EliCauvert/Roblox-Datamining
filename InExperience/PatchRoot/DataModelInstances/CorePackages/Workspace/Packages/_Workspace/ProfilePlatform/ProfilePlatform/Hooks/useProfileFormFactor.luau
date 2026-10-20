@@ -10,9 +10,9 @@ local SplitPaneStore = if FFlagEnableSplitPane then require(Parent.SplitPane).Sp
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local EnumsModule = require(ProfilePlatform.Common.Enums)
 
-return function() --[[ Line: 21 ]]
+return function()
 	-- upvalues: UseSelectorFunction (copy), FFlagEnableSplitPane (copy), UseSignalStateFunction (copy), SplitPaneStore (copy), UseProfileWrapperContextModule (copy), EnumsModule (copy), FFlagAXEnableProfileTab (copy), ReactModule (copy), FormFactor (copy)
-	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 22 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p1)
 		return p1.FormFactor
 	end)
 	local UseSignalStateResult = if FFlagEnableSplitPane then UseSignalStateFunction(SplitPaneStore.getStore().getIsSplitPaneActive) else false
@@ -21,7 +21,7 @@ return function() --[[ Line: 21 ]]
 	local IsSourceMatch = UseProfileWrapperContextModuleResult.sourceInfo.source == EnumsModule.Sources.HomepageAd
 	local IsForceFullView = (if FFlagAXEnableProfileTab then UseProfileWrapperContextModuleResult.forceFullView == true else nil) or IsProfileTypeMatch and IsSourceMatch
 	
-	return (ReactModule.useMemo(function() --[[ Line: 38 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: UseSelectorResult (copy), FormFactor (upval), UseSignalStateResult (copy), EnumsModule (upval), IsForceFullView (copy)
 		return if UseSelectorResult == FormFactor.WIDE or UseSignalStateResult then {
 			formFactor = EnumsModule.ProfileFormFactor.Wide,

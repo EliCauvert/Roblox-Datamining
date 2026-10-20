@@ -4,7 +4,7 @@ local ReactModule = require(Parent.React)
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 
-return function(p1) --[[ Line: 17 | Named "VersionHistorySection" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), Text (copy)
 	return ReactModule.createElement(View, {
 		tag = "col gap-large size-full-0 auto-y",

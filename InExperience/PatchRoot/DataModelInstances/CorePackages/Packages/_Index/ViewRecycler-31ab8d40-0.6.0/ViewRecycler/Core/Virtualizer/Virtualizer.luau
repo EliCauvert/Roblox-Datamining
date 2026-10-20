@@ -23,7 +23,7 @@ local SlotBinderModule = require(ViewRecycler.Core.Recycling.SlotBinder)
 local ViewportModule = require(ViewRecycler.Core.Virtualizer.Viewport)
 local Frozen = table.freeze({})
 
-local function _(p1) --[[ Line: 159 | Named "policyConfig" ]]
+local function _(p1)
 	return {
 		initialScrollAlignment = p1.initialScrollAlignment,
 		autoScrollOnChange = p1.autoScrollOnChange,
@@ -34,11 +34,11 @@ local function _(p1) --[[ Line: 159 | Named "policyConfig" ]]
 	}
 end
 
-local _ = function(p1) --[[ Line: 170 | Named "keyOnly" ]]
+local _ = function(p1)
 	return if p1 == nil then nil else { key = p1.key }
 end
 
-return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
+return function(p1)
 	-- upvalues: ViewportModule (copy), CreatePinnedItemPlannerModule (copy), DataPrefetchControllerModule (copy), ScrollAnchorModule (copy), ScrollPolicyModule (copy), ListRowsModule (copy), SlotBinderModule (copy), PlacementTypesModule (copy), DiagnosticsModule (copy), DataSourceChangeTypeModule (copy), Frozen (copy), PaginationEdgesModule (copy), DataPrefetchModule (copy), ScrollObservationKindModule (copy), AutoScrollModule (copy), ScrollAlignmentModule (copy), AutoScrollTargetModule (copy)
 	local DataSource = p1.dataSource
 	local Layout = p1.layout
@@ -65,11 +65,11 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 	local DataPrefetchControllerModuleResult = DataPrefetchControllerModule(DataPrefetch)
 	local ScrollAnchorModuleResult = ScrollAnchorModule({
 		viewport = ViewportModuleResult,
-		getItemSequence = function() --[[ Line: 198 ]]
+		getItemSequence = function()
 			-- upvalues: DataSource (ref)
 			return DataSource
 		end,
-		shouldPreserveUserPosition = function() --[[ Line: 201 ]]
+		shouldPreserveUserPosition = function()
 			-- upvalues: IsPreserveScrollPositionOnChange (ref)
 			return IsPreserveScrollPositionOnChange
 		end
@@ -88,7 +88,7 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 			prepareDesiredAssignment = p1.prepareDesiredAssignment
 		}),
 		getItemViewType = p1.getItemViewType,
-		getPinnedItem = function(Start) --[[ Line: 212 ]]
+		getPinnedItem = function(Start)
 			-- upvalues: PlacementTypesModule (upval), PinnedStartItem (ref), PinnedEndItem (ref)
 			return if Start == PlacementTypesModule.PinnedPosition.Start then PinnedStartItem else PinnedEndItem
 		end
@@ -100,14 +100,14 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 	local SubscribeResult: (() -> ())? = nil
 	local v1 = nil
 	
-	local function _(p2, p3) --[[ Line: 224 | Named "addDiagnostic" ]]
+	local function _(p2, p3)
 		if table.isfrozen(p2.diagnostics) then
 			p2.diagnostics = {}
 		end
 		table.insert(p2.diagnostics, p3)
 	end
 	
-	local function applyCorrection(p2, PreserveResult) --[[ Line: 231 ]]
+	local function applyCorrection(p2, PreserveResult)
 		-- upvalues: ViewportModuleResult (copy), p1 (copy), DiagnosticsModule (upval)
 		if PreserveResult == nil then return end
 		local ScrollOffset = ViewportModuleResult.getScrollOffset()
@@ -131,12 +131,12 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 		end
 	end
 	
-	local _ = function(p2) --[[ Line: 250 | Named "moveScrollPosition" ]]
+	local _ = function(p2)
 		p2.scrollPositionChanged = true
 		p2.scrollPositionFollowsCorrection = false
 	end
 	
-	local _ = function(p2, p3) --[[ Line: 255 | Named "applyPolicyTarget" ]]
+	local _ = function(p2, p3)
 		-- upvalues: ScrollAnchorModuleResult (copy), ViewportModuleResult (copy)
 		if p3 == nil or not ScrollAnchorModuleResult.allowsPolicyOffset() then return end
 		if ViewportModuleResult.scrollTo(p3) ~= ViewportModuleResult.getScrollOffset() then
@@ -145,7 +145,7 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 		end
 	end
 	
-	local function readKeys() --[[ Line: 265 ]]
+	local function readKeys()
 		-- upvalues: DataSource (ref)
 		local ItemCount = DataSource.getItemCount()
 		local Buffer = table.create(ItemCount)
@@ -156,7 +156,7 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 		return Buffer
 	end
 	
-	local _ = function(Keys) --[[ Line: 274 | Named "resetLayout" ]]
+	local _ = function(Keys)
 		-- upvalues: Layout (ref), DataSourceChangeTypeModule (upval), ViewportModuleResult (copy)
 		Layout.applyDataSourceChange({ type = DataSourceChangeTypeModule.Reset, keys = Keys })
 		ViewportModuleResult.refresh()
@@ -164,7 +164,7 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 	
 	local v2 = nil
 	
-	local _ = function() --[[ Line: 281 | Named "unsubscribe" ]]
+	local _ = function()
 		-- upvalues: SubscribeResult (ref)
 		if SubscribeResult ~= nil then
 			SubscribeResult()
@@ -174,7 +174,7 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 	
 	local t = {}
 	
-	local _ = function() --[[ Line: 291 | Named "beginTransaction" ]]
+	local _ = function()
 		-- upvalues: t (copy), ViewportModuleResult (copy), Frozen (upval)
 		t.policyEligible = true
 		t.dataChange = nil
@@ -198,14 +198,14 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 		return t
 	end
 	
-	local _ = function(p2, p3) --[[ Line: 314 | Named "checkEdges" ]]
+	local _ = function(p2, p3)
 		-- upvalues: ScrollPolicyModuleResult (copy), ViewportModuleResult (copy), DataSource (ref)
 		local CheckEdgesResult, CheckEdgesResult2 = ScrollPolicyModuleResult.checkEdges(ViewportModuleResult.scrollState(), DataSource.getItemCount(), p3)
 		p2.startReached = p2.startReached or CheckEdgesResult
 		p2.endReached = p2.endReached or CheckEdgesResult2
 	end
 	
-	local _ = function() --[[ Line: 320 | Named "policyContext" ]]
+	local _ = function()
 		-- upvalues: DataSource (ref), ViewportModuleResult (copy)
 		return {
 			itemCount = DataSource.getItemCount(),
@@ -214,7 +214,7 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 		}
 	end
 	
-	local function settlePolicy(p2) --[[ Line: 328 ]]
+	local function settlePolicy(p2)
 		-- upvalues: ViewportModuleResult (copy), ScrollPolicyModuleResult (copy), ScrollAnchorModuleResult (copy), DataSource (ref), PaginationEdgesModule (upval)
 		if ViewportModuleResult.getContentLength() ~= p2.contentLengthBefore then
 			p2.contentLengthChanged = true
@@ -282,7 +282,7 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 	local t1 = {}
 	local t2 = {}
 	
-	local function settle(p2) --[[ Line: 358 ]]
+	local function settle(p2)
 		-- upvalues: ViewportModuleResult (copy), settlePolicy (copy), p1 (copy), DiagnosticsModule (upval), Flag1 (ref), ActiveMutation (ref), t1 (copy), DataSource (ref), Layout (ref), HasIsItemStickyHeader (ref), PinnedItemPlannerModule (copy), ListRowsModuleResult (copy), t2 (copy), DataPrefetch (ref), DataPrefetchControllerModuleResult (copy)
 		ViewportModuleResult.refresh()
 		
@@ -361,11 +361,11 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 	
 	local v3 = nil
 	
-	local _ = function(Tbl) --[[ Line: 426 | Named "frozen" ]]
+	local _ = function(Tbl)
 		return if table.isfrozen(Tbl) then Tbl else table.freeze(Tbl)
 	end
 	
-	local function makeRecord(p2) --[[ Line: 430 ]]
+	local function makeRecord(p2)
 		-- upvalues: v1 (ref), ListRowsModuleResult (copy), ViewportModuleResult (copy), Layout (ref), ScrollAnchorModuleResult (copy)
 		local v4 = v1
 		local Entered = p2.entered
@@ -399,13 +399,13 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 		}))
 	end
 	
-	local function mutateAndSettle(Callback: (any, any, any) -> (), p2, p3, p4) --[[ Line: 455 ]]
+	local function mutateAndSettle(Callback: (any, any, any) -> (), p2, p3, p4)
 		-- upvalues: settle (copy)
 		Callback(p2, p3, p4)
 		settle(p2)
 	end
 	
-	local function transact(ScrollToEdgeMutation, End, p2) --[[ Line: 461 ]]
+	local function transact(ScrollToEdgeMutation, End, p2)
 		-- upvalues: Flag2 (ref), Flag1 (ref), t (copy), ViewportModuleResult (copy), Frozen (upval), mutateAndSettle (copy), v1 (ref), makeRecord (copy), p1 (copy)
 		assert(not Flag2, "Virtualizer: cannot mutate during a transaction")
 		assert(not Flag1, "Virtualizer: cannot dispatch after destruction")
@@ -449,7 +449,7 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 		return Record
 	end
 	
-	local function applyDataChange(p3, DataChange) --[[ Line: 485 ]]
+	local function applyDataChange(p3, DataChange)
 		-- upvalues: ViewportModuleResult (copy), ListRowsModuleResult (copy), applyCorrection (copy), ScrollAnchorModuleResult (copy), DiagnosticsModule (upval), Layout (ref), PinnedItemPlannerModule (copy)
 		p3.before = ViewportModuleResult.scrollState()
 		p3.dataChange = DataChange
@@ -458,7 +458,7 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 		applyCorrection(p3, ScrollAnchorModuleResult.preserve({
 			source = DiagnosticsModule.ScrollCorrectionSource.Data,
 			dataSourceChange = DataChange
-		}, function() --[[ Line: 495 ]]
+		}, function()
 			-- upvalues: DataChange (copy), ApplyDataSourceChangeResult (ref), Layout (upval), PinnedItemPlannerModule (upval), ViewportModuleResult (upval)
 			for _, change in DataChange.changes do
 				ApplyDataSourceChangeResult = Layout.applyDataSourceChange(change) or ApplyDataSourceChangeResult
@@ -472,19 +472,19 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 		end
 	end
 	
-	v3 = function(p4) --[[ Line: 508 ]]
+	v3 = function(p4)
 		-- upvalues: transact (copy), applyDataChange (copy)
 		transact(applyDataChange, p4)
 	end
 	
-	v2 = function() --[[ Line: 512 ]]
+	v2 = function()
 		-- upvalues: SubscribeResult (ref), Flag (ref), Flag1 (ref), DataSource (ref), v3 (ref)
 		if SubscribeResult == nil and Flag and not Flag1 then
 			SubscribeResult = DataSource.subscribe(v3)
 		end
 	end
 	
-	local _ = function(DataSource1) --[[ Line: 518 | Named "replaceDataSource" ]]
+	local _ = function(DataSource1)
 		-- upvalues: DataSource (ref), SubscribeResult (ref), PinnedItemPlannerModule (copy)
 		if DataSource1 ~= DataSource then
 			if SubscribeResult ~= nil then
@@ -496,7 +496,7 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 		PinnedItemPlannerModule.setItemSequence(DataSource)
 	end
 	
-	local _ = function(p4) --[[ Line: 526 | Named "replaceLayout" ]]
+	local _ = function(p4)
 		-- upvalues: Layout (ref), ViewportModuleResult (copy), ListRowsModuleResult (copy)
 		Layout = p4
 		ViewportModuleResult.setLayout(p4)
@@ -508,7 +508,7 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 		ListRowsModuleResult.invalidateLayout()
 	end
 	
-	local _ = function() --[[ Line: 536 | Named "resetData" ]]
+	local _ = function()
 		-- upvalues: ScrollAnchorModuleResult (copy), readKeys (copy), Layout (ref), DataSourceChangeTypeModule (upval), ViewportModuleResult (copy), ListRowsModuleResult (copy), v2 (ref)
 		ScrollAnchorModuleResult.reset()
 		Layout.applyDataSourceChange({
@@ -521,7 +521,7 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 		v2()
 	end
 	
-	local function submitMeasurements(p4, p5) --[[ Line: 544 ]]
+	local function submitMeasurements(p4, p5)
 		-- upvalues: ListRowsModuleResult (copy), p1 (copy), DiagnosticsModule (upval), PinnedItemPlannerModule (copy), applyCorrection (copy), ScrollAnchorModuleResult (copy), Layout (ref), ViewportModuleResult (copy)
 		local ValidateResult, ValidateResult2 = ListRowsModuleResult.validate(p5)
 		
@@ -546,7 +546,7 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 			source = DiagnosticsModule.ScrollCorrectionSource.Measurement
 		}
 		local Start = PinnedItemPlannerModule.getContentInsets().start
-		applyCorrection(p4, ScrollAnchorModuleResult.preserve(config, function() --[[ Line: 564 ]]
+		applyCorrection(p4, ScrollAnchorModuleResult.preserve(config, function()
 			-- upvalues: ValidateResult (copy), Layout (upval), Count (ref), ValidateResult2 (ref), Flag (ref), PinnedItemPlannerModule (upval), v5 (ref), config (copy), Start (copy), ViewportModuleResult (upval)
 			for _, value in ValidateResult do
 				local Index = value.index
@@ -607,7 +607,7 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 		end
 	end
 	
-	local function setPolicy(p6) --[[ Line: 619 ]]
+	local function setPolicy(p6)
 		-- upvalues: DataPrefetchModule (upval), ViewportModuleResult (copy), IsPreserveScrollPositionOnChange (ref), DataPrefetch (ref), IsItemStickyHeader (ref), PinnedStartItem (ref), PinnedEndItem (ref), PinnedItemPlannerModule (copy), HasIsItemStickyHeader (ref), ScrollPolicyModuleResult (copy)
 		DataPrefetchModule.resolve(p6.dataPrefetch)
 		local PinnedItems = p6.pinnedItems
@@ -642,7 +642,7 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 		})
 	end
 	
-	local function setActiveMutation(p6, Value) --[[ Line: 644 ]]
+	local function setActiveMutation(p6, Value)
 		-- upvalues: ActiveMutation (ref), ListRowsModuleResult (copy)
 		p6.policyEligible = false
 		
@@ -652,14 +652,14 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 		ActiveMutation = Value
 	end
 	
-	local function setScrollOffsetMutation(_, p6) --[[ Line: 652 ]]
+	local function setScrollOffsetMutation(_, p6)
 		-- upvalues: ViewportModuleResult (copy), ScrollAnchorModuleResult (copy)
 		if ViewportModuleResult.setScrollOffset(p6) then
 			ScrollAnchorModuleResult.setViewport(p6)
 		end
 	end
 	
-	local function observeScrollOffsetMutation(p6, p7) --[[ Line: 658 ]]
+	local function observeScrollOffsetMutation(p6, p7)
 		-- upvalues: ViewportModuleResult (copy), ScrollObservationKindModule (upval), ScrollAnchorModuleResult (copy)
 		local SetScrollOffsetResult = ViewportModuleResult.setScrollOffset(p7.offset)
 		
@@ -673,7 +673,7 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 		end
 	end
 	
-	local function scrollToIndexMutation(p6, p7, p8) --[[ Line: 670 ]]
+	local function scrollToIndexMutation(p6, p7, p8)
 		-- upvalues: ScrollAnchorModuleResult (copy), ViewportModuleResult (copy)
 		ScrollAnchorModuleResult.setItemTarget(p7, p8)
 		ViewportModuleResult.scrollTo(ViewportModuleResult.offsetForItem(p7, p8))
@@ -682,7 +682,7 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 		p6.scrollMoved = true
 	end
 	
-	local function scrollToOffsetMutation(p6, p7) --[[ Line: 677 ]]
+	local function scrollToOffsetMutation(p6, p7)
 		-- upvalues: ScrollAnchorModuleResult (copy), ViewportModuleResult (copy)
 		ScrollAnchorModuleResult.setViewport(ViewportModuleResult.scrollTo(p7))
 		p6.scrollPositionChanged = true
@@ -690,7 +690,7 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 		p6.scrollMoved = true
 	end
 	
-	local function scrollByMutation(p6, p7) --[[ Line: 683 ]]
+	local function scrollByMutation(p6, p7)
 		-- upvalues: ScrollAnchorModuleResult (copy), ViewportModuleResult (copy)
 		ScrollAnchorModuleResult.setViewport(ViewportModuleResult.scrollBy(p7))
 		p6.scrollPositionChanged = true
@@ -698,7 +698,7 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 		p6.scrollMoved = true
 	end
 	
-	local function scrollToEdgeMutation(p6, p7) --[[ Line: 691 ]]
+	local function scrollToEdgeMutation(p6, p7)
 		-- upvalues: ScrollAnchorModuleResult (copy), ViewportModuleResult (copy), AutoScrollModule (upval), ScrollPolicyModuleResult (copy)
 		ScrollAnchorModuleResult.setViewport(ViewportModuleResult.scrollTo(AutoScrollModule.getTargetOffset(p7, ViewportModuleResult.getContentLength(), ViewportModuleResult.getLength())))
 		ScrollPolicyModuleResult.pin(p7)
@@ -706,7 +706,7 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 		p6.scrollPositionFollowsCorrection = false
 	end
 	
-	local function setViewportSizeMutation(p6, Length, p7) --[[ Line: 699 ]]
+	local function setViewportSizeMutation(p6, Length, p7)
 		-- upvalues: ViewportModuleResult (copy), Layout (ref), ListRowsModuleResult (copy), ScrollAlignmentModule (upval), ScrollAnchorModuleResult (copy)
 		local Length1: number = ViewportModuleResult.getLength()
 		local ContentLengthDelta = ViewportModuleResult.getContentLength() - Length1 - ViewportModuleResult.getScrollOffset()
@@ -750,9 +750,9 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 	v1 = makeRecord(t)
 	
 	return {
-		activate = function() --[[ Line: 728 ]]
+		activate = function()
 			-- upvalues: transact (copy), Flag (ref), readKeys (copy), Layout (ref), DataSourceChangeTypeModule (upval), ViewportModuleResult (copy), PinnedItemPlannerModule (copy), ListRowsModuleResult (copy), v2 (ref)
-			return (transact(function(p6) --[[ Line: 729 ]]
+			return (transact(function(p6)
 				-- upvalues: Flag (upval), readKeys (upval), Layout (upval), DataSourceChangeTypeModule (upval), ViewportModuleResult (upval), PinnedItemPlannerModule (upval), ListRowsModuleResult (upval), v2 (upval)
 				if not Flag then
 					Flag = true
@@ -770,41 +770,41 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 				p6.viewportChanged = true
 			end))
 		end,
-		setActive = function(p6) --[[ Line: 745 ]]
+		setActive = function(p6)
 			-- upvalues: transact (copy), setActiveMutation (copy)
 			return (transact(setActiveMutation, p6))
 		end,
-		setScrollOffset = function(Offset) --[[ Line: 748 ]]
+		setScrollOffset = function(Offset)
 			-- upvalues: transact (copy), setScrollOffsetMutation (copy)
 			return (transact(setScrollOffsetMutation, Offset))
 		end,
-		observeScrollOffset = function(p6) --[[ Line: 751 ]]
+		observeScrollOffset = function(p6)
 			-- upvalues: transact (copy), observeScrollOffsetMutation (copy)
 			return (transact(observeScrollOffsetMutation, p6))
 		end,
-		scrollToIndex = function(p6, p7) --[[ Line: 754 ]]
+		scrollToIndex = function(p6, p7)
 			-- upvalues: transact (copy), scrollToIndexMutation (copy)
 			return (transact(scrollToIndexMutation, p6, p7))
 		end,
-		scrollToOffset = function(p6) --[[ Line: 757 ]]
+		scrollToOffset = function(p6)
 			-- upvalues: transact (copy), scrollToOffsetMutation (copy)
 			return (transact(scrollToOffsetMutation, p6))
 		end,
-		scrollToStart = function() --[[ Line: 760 ]]
+		scrollToStart = function()
 			-- upvalues: transact (copy), scrollToEdgeMutation (copy), AutoScrollTargetModule (upval)
 			return (transact(scrollToEdgeMutation, AutoScrollTargetModule.Start))
 		end,
-		scrollToEnd = function() --[[ Line: 763 ]]
+		scrollToEnd = function()
 			-- upvalues: transact (copy), scrollToEdgeMutation (copy), AutoScrollTargetModule (upval)
 			return (transact(scrollToEdgeMutation, AutoScrollTargetModule.End))
 		end,
-		scrollBy = function(p6) --[[ Line: 766 ]]
+		scrollBy = function(p6)
 			-- upvalues: transact (copy), scrollByMutation (copy)
 			return (transact(scrollByMutation, p6))
 		end,
-		restoreScrollAnchorSnapshot = function(p6) --[[ Line: 769 ]]
+		restoreScrollAnchorSnapshot = function(p6)
 			-- upvalues: transact (copy), ScrollAnchorModuleResult (copy), ViewportModuleResult (copy)
-			return (transact(function(p7) --[[ Line: 770 ]]
+			return (transact(function(p7)
 				-- upvalues: ScrollAnchorModuleResult (upval), p6 (copy), ViewportModuleResult (upval)
 				ScrollAnchorModuleResult.restore(p6, ViewportModuleResult.scrollTo(ScrollAnchorModuleResult.snapshotOffset(p6)))
 				p7.scrollPositionChanged = true
@@ -812,20 +812,20 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 				p7.scrollMoved = true
 			end))
 		end,
-		setViewportSize = function(p6, p7) --[[ Line: 776 ]]
+		setViewportSize = function(p6, p7)
 			-- upvalues: transact (copy), setViewportSizeMutation (copy)
 			return (transact(setViewportSizeMutation, p6, p7))
 		end,
-		setPolicy = function(p6) --[[ Line: 779 ]]
+		setPolicy = function(p6)
 			-- upvalues: transact (copy), setPolicy (copy)
-			return (transact(function() --[[ Line: 780 ]]
+			return (transact(function()
 				-- upvalues: setPolicy (upval), p6 (copy)
 				setPolicy(p6)
 			end))
 		end,
-		setDataSource = function(DataSource1) --[[ Line: 784 ]]
+		setDataSource = function(DataSource1)
 			-- upvalues: transact (copy), DataSource (ref), SubscribeResult (ref), PinnedItemPlannerModule (copy), ScrollAnchorModuleResult (copy), readKeys (copy), Layout (ref), DataSourceChangeTypeModule (upval), ViewportModuleResult (copy), ListRowsModuleResult (copy), v2 (ref)
-			return (transact(function(p6) --[[ Line: 785 ]]
+			return (transact(function(p6)
 				-- upvalues: DataSource1 (copy), DataSource (upval), SubscribeResult (upval), PinnedItemPlannerModule (upval), ScrollAnchorModuleResult (upval), readKeys (upval), Layout (upval), DataSourceChangeTypeModule (upval), ViewportModuleResult (upval), ListRowsModuleResult (upval), v2 (upval)
 				if DataSource1 ~= DataSource then
 					if SubscribeResult ~= nil then
@@ -847,9 +847,9 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 				p6.replaced = true
 			end))
 		end,
-		setLayout = function(p6) --[[ Line: 791 ]]
+		setLayout = function(p6)
 			-- upvalues: transact (copy), Layout (ref), ViewportModuleResult (copy), ListRowsModuleResult (copy), ScrollAnchorModuleResult (copy), readKeys (copy), DataSourceChangeTypeModule (upval)
-			return (transact(function() --[[ Line: 792 ]]
+			return (transact(function()
 				-- upvalues: p6 (copy), Layout (upval), ViewportModuleResult (upval), ListRowsModuleResult (upval), ScrollAnchorModuleResult (upval), readKeys (upval), DataSourceChangeTypeModule (upval)
 				Layout = p6
 				ViewportModuleResult.setLayout(p6)
@@ -867,9 +867,9 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 				ViewportModuleResult.refresh()
 			end))
 		end,
-		setDataSourceAndLayout = function(DataSource1, p6) --[[ Line: 798 ]]
+		setDataSourceAndLayout = function(DataSource1, p6)
 			-- upvalues: transact (copy), DataSource (ref), SubscribeResult (ref), PinnedItemPlannerModule (copy), Layout (ref), ViewportModuleResult (copy), ListRowsModuleResult (copy), ScrollAnchorModuleResult (copy), readKeys (copy), DataSourceChangeTypeModule (upval), v2 (ref)
-			return (transact(function(p7) --[[ Line: 799 ]]
+			return (transact(function(p7)
 				-- upvalues: DataSource1 (copy), DataSource (upval), SubscribeResult (upval), PinnedItemPlannerModule (upval), p6 (copy), Layout (upval), ViewportModuleResult (upval), ListRowsModuleResult (upval), ScrollAnchorModuleResult (upval), readKeys (upval), DataSourceChangeTypeModule (upval), v2 (upval)
 				if DataSource1 ~= DataSource then
 					if SubscribeResult ~= nil then
@@ -899,31 +899,31 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 				p7.replaced = true
 			end))
 		end,
-		refresh = function() --[[ Line: 806 ]]
+		refresh = function()
 			-- upvalues: transact (copy), ListRowsModuleResult (copy)
-			return (transact(function() --[[ Line: 807 ]]
+			return (transact(function()
 				-- upvalues: ListRowsModuleResult (upval)
 				ListRowsModuleResult.invalidateKeys()
 				ListRowsModuleResult.invalidatePayloads()
 			end))
 		end,
-		submitMeasurements = function(p6) --[[ Line: 812 ]]
+		submitMeasurements = function(p6)
 			-- upvalues: transact (copy), submitMeasurements (copy)
 			return (transact(submitMeasurements, p6))
 		end,
-		getCurrent = function() --[[ Line: 815 ]]
+		getCurrent = function()
 			-- upvalues: v1 (ref)
 			return v1
 		end,
-		getItemLayout = function(FirstIndex) --[[ Line: 818 ]]
+		getItemLayout = function(FirstIndex)
 			-- upvalues: Layout (ref)
 			return Layout.getItemLayout(FirstIndex)
 		end,
-		getScrollOffsetForItem = function(p6, p7) --[[ Line: 821 ]]
+		getScrollOffsetForItem = function(p6, p7)
 			-- upvalues: ViewportModuleResult (copy)
 			return ViewportModuleResult.offsetForItem(p6, p7)
 		end,
-		captureScrollAnchorSnapshot = function() --[[ Line: 824 ]]
+		captureScrollAnchorSnapshot = function()
 			-- upvalues: v1 (ref), DataSource (ref), Layout (ref)
 			local v6 = v1
 			local VisibleRange = v6.visibleRange
@@ -947,10 +947,10 @@ return function(p1) --[[ Line: 174 | Named "createVirtualizer" ]]
 				}
 			end
 		end,
-		destroy = function() --[[ Line: 846 ]]
+		destroy = function()
 			-- upvalues: Flag1 (ref), transact (copy), SubscribeResult (ref), ListRowsModuleResult (copy), DataPrefetchControllerModuleResult (copy), PinnedItemPlannerModule (copy)
 			if not Flag1 then
-				transact(function(p6) --[[ Line: 850 ]]
+				transact(function(p6)
 					-- upvalues: SubscribeResult (upval), ListRowsModuleResult (upval), DataPrefetchControllerModuleResult (upval), PinnedItemPlannerModule (upval), Flag1 (upval)
 					p6.policyEligible = false
 					

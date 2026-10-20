@@ -11,9 +11,9 @@ local FlagsService = PeopleServiceModule.getService("Flags")
 local GetFFlagAddPeoplePageCardLayoutFunction = FlagsService.GetFFlagAddPeoplePageCardLayout
 local FFlagEnablePeopleListLazyRender = FlagsService.FFlagEnablePeopleListLazyRender
 
-local function MemoizedPersonRow(p1) --[[ Line: 32 ]]
+local function MemoizedPersonRow(p1)
 	-- upvalues: ReactModule (copy), FFlagEnablePeopleListLazyRender (copy), LazyPersonRowModule (copy), PersonRowModule (copy)
-	return ReactModule.useMemo(function() --[[ Line: 37 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: FFlagEnablePeopleListLazyRender (upval), ReactModule (upval), LazyPersonRowModule (upval), p1 (copy), PersonRowModule (upval)
 		return if FFlagEnablePeopleListLazyRender then ReactModule.createElement(LazyPersonRowModule, {
 			key = tostring(p1.person.UserId),
@@ -28,7 +28,7 @@ local function MemoizedPersonRow(p1) --[[ Line: 32 ]]
 	end, { p1.person.UserId, p1.index, p1.scrollingFrameStore })
 end
 
-local function buildPersonRows(List, Current, Current1, ScrollingFrameStore) --[[ Line: 57 ]]
+local function buildPersonRows(List, Current, Current1, ScrollingFrameStore)
 	-- upvalues: ReactModule (copy), MemoizedPersonRow (copy), FFlagEnablePeopleListLazyRender (copy)
 	local Elements = {}
 	local t = {}
@@ -76,12 +76,12 @@ local function buildPersonRows(List, Current, Current1, ScrollingFrameStore) --[
 	return Elements, t
 end
 
-local function PeopleList(Frame) --[[ Line: 122 ]]
+local function PeopleList(Frame)
 	-- upvalues: ReactModule (copy), PeopleServiceModule (copy), UseSignalStateFunction (copy), buildPersonRows (copy), FFlagEnablePeopleListLazyRender (copy), View (copy), GetFFlagAddPeoplePageCardLayoutFunction (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef({})
 	local UseRefResult2 = ReactModule.useRef({})
-	UseRefResult1.current, UseRefResult2.current = buildPersonRows(UseSignalStateFunction(ReactModule.useMemo(function() --[[ Line: 123 ]]
+	UseRefResult1.current, UseRefResult2.current = buildPersonRows(UseSignalStateFunction(ReactModule.useMemo(function()
 		-- upvalues: PeopleServiceModule (upval)
 		return PeopleServiceModule.getService("PeopleListStore")
 	end, {}).people), UseRefResult1.current, UseRefResult2.current, if FFlagEnablePeopleListLazyRender then Frame.scrollingFrameStore else nil)

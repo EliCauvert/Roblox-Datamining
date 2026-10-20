@@ -13,7 +13,7 @@ local MomentsCreationFlowModule = require(script.Parent.MomentsCreationFlow)
 local PromptsModule = require(script.Parent.Prompts)
 local ToastModule = require(script.Parent.Toast)
 
-return function() --[[ Line: 36 ]]
+return function()
 	-- upvalues: RoduxModule (copy), CaptureManagerModule (copy), CapturesModule (copy), CarouselModule (copy), IsActiveModule (copy), IsCapturesCoreGuiEnabledModule (copy), IsMenuOpenModule (copy), IsOverlayActiveModule (copy), IsOverlayFlashActiveModule (copy), IsVideoCaptureActiveModule (copy), MomentsEligibilityModule (copy), MomentsCreationFlowModule (copy), PromptsModule (copy), ToastModule (copy)
 	return RoduxModule.combineReducers({
 		CaptureManager = CaptureManagerModule,

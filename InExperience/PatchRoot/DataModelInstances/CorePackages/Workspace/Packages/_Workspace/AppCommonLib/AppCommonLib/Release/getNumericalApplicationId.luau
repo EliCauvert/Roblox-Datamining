@@ -2,7 +2,7 @@
 game:DefineFastFlag("EnableContactInvitesForNonPhoneVerifiedForAll", false)
 game:DefineFastInt("EnableContactInvitesForNonPhoneVerifiedRollout", 0)
 
-return function(p1) --[[ Line: 7 ]]
+return function(p1)
 	-- upvalues: AppStorageService (copy)
 	local AppInstallationIdItem: string = (if p1 then p1 else AppStorageService):GetItem("AppInstallationId")
 	local ValueType = typeof(AppInstallationIdItem)

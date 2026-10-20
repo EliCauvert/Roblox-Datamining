@@ -1,6 +1,6 @@
 ﻿local Players = game:GetService("Players")
 
-return function(p1, p2): number --[[ Line: 11 | Named "computeImpactedUserCount" ]]
+return function(p1, p2): number
 	-- upvalues: Players (copy)
 	if not p1 or not p1.participants then
 		return 0

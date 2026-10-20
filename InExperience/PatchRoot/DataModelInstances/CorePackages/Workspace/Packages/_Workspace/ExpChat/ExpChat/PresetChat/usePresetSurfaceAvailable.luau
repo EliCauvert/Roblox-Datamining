@@ -4,7 +4,7 @@ local GetPresetChatStoreModule = require(ExpChat.Stores.GetPresetChatStore)
 local FFlagExpChatUniverseChatPresetEnabledModule = require(ExpChat.Flags.FFlagExpChatUniverseChatPresetEnabled)
 local ConstantsModule = require(ExpChat.PresetChat.Constants)
 
-return function(p1) --[[ Line: 26 | Named "usePresetSurfaceAvailable" ]]
+return function(p1)
 	-- upvalues: GetPresetChatStoreModule (copy), SignalsReactModule (copy), ConstantsModule (copy), FFlagExpChatUniverseChatPresetEnabledModule (copy)
 	local PresetChatStoreModule = GetPresetChatStoreModule(false)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(PresetChatStoreModule.getAccessLevel)

@@ -13,7 +13,7 @@ local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispa
 local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p1) --[[ Line: 32 | Named "ContactDescriptionContainer" ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), ParseSectionsFromDataFunction (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), DescriptionModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local ContactsProfileDescription = UseLocalizationFunction({
@@ -22,7 +22,7 @@ return function(p1) --[[ Line: 32 | Named "ContactDescriptionContainer" ]]
 			contactName = UseProfileJsonComponentModule(EnumsModule.Components.ContactDescription).contactName
 		}
 	}).contactsProfileDescription
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 40 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ParseSectionsFromDataFunction (upval), ContactsProfileDescription (copy), EnumsModule (upval)
 		return ParseSectionsFromDataFunction({ description = ContactsProfileDescription }, EnumsModule.ProfileTypes.Contact)
 	end, { ContactsProfileDescription })
@@ -30,7 +30,7 @@ return function(p1) --[[ Line: 32 | Named "ContactDescriptionContainer" ]]
 	return ReactModule.createElement(DescriptionModule, {
 		description = ContactsProfileDescription,
 		layoutOrder = p1.layoutOrder,
-		onActivateMoreButton = ReactModule.useCallback(function() --[[ Line: 44 ]]
+		onActivateMoreButton = ReactModule.useCallback(function()
 			-- upvalues: AppPage (upval), UseMemoResult (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 			local config = {
 				name = AppPage.AboutDetailsSheet,

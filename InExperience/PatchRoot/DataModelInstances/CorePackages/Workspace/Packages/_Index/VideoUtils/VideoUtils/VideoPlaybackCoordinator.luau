@@ -15,7 +15,7 @@ VideoPlaybackCoordinatorModule.preferredFramerateThrottling = false
 VideoPlaybackCoordinatorModule.isSettingFramerateThrottleAllowedByPolicy = false
 local Count = 0
 
-function VideoPlaybackCoordinatorModule.new() --[[ Line: 66 ]]
+function VideoPlaybackCoordinatorModule.new()
 	-- upvalues: Signal (copy), VideoPlaybackCoordinatorModule (copy)
 	local config = {
 		playingVideoKey = nil,
@@ -31,7 +31,7 @@ function VideoPlaybackCoordinatorModule.new() --[[ Line: 66 ]]
 	return config
 end
 
-function VideoPlaybackCoordinatorModule:__setRunServiceThrottleFramerateEnabled(PreferredFramerateThrottling) --[[ Line: 83 ]]
+function VideoPlaybackCoordinatorModule:__setRunServiceThrottleFramerateEnabled(PreferredFramerateThrottling)
 	-- upvalues: VideoPlaybackCoordinatorModule (copy), RunService (copy)
 	if VideoPlaybackCoordinatorModule.isSettingFramerateThrottleAllowedByPolicy then
 		RunService:setThrottleFramerateEnabled(PreferredFramerateThrottling)
@@ -40,17 +40,17 @@ function VideoPlaybackCoordinatorModule:__setRunServiceThrottleFramerateEnabled(
 	end
 end
 
-function VideoPlaybackCoordinatorModule:isPlaybackAllowed(p1, p2) --[[ Line: 94 ]]
+function VideoPlaybackCoordinatorModule:isPlaybackAllowed(p1, p2)
 	-- upvalues: FFlagLuaAppEdpMediaGalleryFullScreen (copy)
 	return (not FFlagLuaAppEdpMediaGalleryFullScreen or not p2) and p1
 end
 
-function VideoPlaybackCoordinatorModule.isPlaybackCandidate(p1, p2, p3, p4, p5, p6) --[[ Line: 106 ]]
+function VideoPlaybackCoordinatorModule.isPlaybackCandidate(p1, p2, p3, p4, p5, p6)
 	-- upvalues: GetIsInstanceVisibleModule (copy)
 	return if p1:isPlaybackAllowed(p2, p3) then GetIsInstanceVisibleModule(p4.current, p5, p6) else false
 end
 
-function VideoPlaybackCoordinatorModule:forcePlayback(PlayingVideoKey, p1, p2, p3) --[[ Line: 122 ]]
+function VideoPlaybackCoordinatorModule:forcePlayback(PlayingVideoKey, p1, p2, p3)
 	if self.playingVideoKey ~= PlayingVideoKey then
 		self:__cancelCurrentPlayback(p1, p2, nil, self.videoAnalytics)
 		self:requestPlayback(PlayingVideoKey, false, 0, p2, p3)
@@ -59,11 +59,11 @@ function VideoPlaybackCoordinatorModule:forcePlayback(PlayingVideoKey, p1, p2, p
 	end
 end
 
-function VideoPlaybackCoordinatorModule:requestPlayback(PlayingVideoKey, p1, Delay, PlayingVideoItemIndex, VideoAnalytics) --[[ Line: 139 ]]
+function VideoPlaybackCoordinatorModule:requestPlayback(PlayingVideoKey, p1, Delay, PlayingVideoItemIndex, VideoAnalytics)
 	if self.playingVideoKey == PlayingVideoKey then return end
 	if self.videoDwellTaskHandles[PlayingVideoKey] ~= nil then return end
 	if p1 then
-		self.videoDwellTaskHandles[PlayingVideoKey] = task.delay(Delay, function() --[[ Line: 158 ]]
+		self.videoDwellTaskHandles[PlayingVideoKey] = task.delay(Delay, function()
 			-- upvalues: self (copy), PlayingVideoKey (copy), PlayingVideoItemIndex (copy), VideoAnalytics (copy)
 			self.videoDwellTaskHandles[PlayingVideoKey] = nil
 			self:__startPlayback(PlayingVideoKey, PlayingVideoItemIndex, VideoAnalytics)
@@ -75,7 +75,7 @@ function VideoPlaybackCoordinatorModule:requestPlayback(PlayingVideoKey, p1, Del
 	end
 end
 
-function VideoPlaybackCoordinatorModule:__startPlayback(PlayingVideoKey, PlayingVideoItemIndex, VideoAnalytics) --[[ Line: 169 ]]
+function VideoPlaybackCoordinatorModule:__startPlayback(PlayingVideoKey, PlayingVideoItemIndex, VideoAnalytics)
 	-- upvalues: Count (ref), HttpService (copy)
 	self:__setRunServiceThrottleFramerateEnabled(false)
 	
@@ -94,7 +94,7 @@ function VideoPlaybackCoordinatorModule:__startPlayback(PlayingVideoKey, Playing
 	self.changed:fire(PlayingVideoKey)
 end
 
-function VideoPlaybackCoordinatorModule:cancelPlayback(PlayingVideoKey, p1, p2, p3) --[[ Line: 195 ]]
+function VideoPlaybackCoordinatorModule:cancelPlayback(PlayingVideoKey, p1, p2, p3)
 	-- upvalues: Count (ref), VideoPlaybackCoordinatorModule (copy)
 	if self.playingVideoKey == PlayingVideoKey then
 		self:__cancelCurrentPlayback(p1, p2, nil, p3)
@@ -107,7 +107,7 @@ function VideoPlaybackCoordinatorModule:cancelPlayback(PlayingVideoKey, p1, p2, 
 	end
 end
 
-function VideoPlaybackCoordinatorModule:reset(p1, _, p2, _) --[[ Line: 217 ]]
+function VideoPlaybackCoordinatorModule:reset(p1, _, p2, _)
 	-- upvalues: Count (ref), VideoPlaybackCoordinatorModule (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy)
 	if self.playingVideoKey ~= nil then
 		self:__cancelCurrentPlayback(p1, self.playingVideoItemIndex, p2, self.videoAnalytics)
@@ -127,7 +127,7 @@ function VideoPlaybackCoordinatorModule:reset(p1, _, p2, _) --[[ Line: 217 ]]
 	end
 end
 
-function VideoPlaybackCoordinatorModule:__cancelCurrentPlayback(p3, PlayingVideoItemIndex, p4, VideoAnalytics) --[[ Line: 246 ]]
+function VideoPlaybackCoordinatorModule:__cancelCurrentPlayback(p3, PlayingVideoItemIndex, p4, VideoAnalytics)
 	-- upvalues: ArgCheckModule (copy), Count (ref), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy)
 	local CurrentPlaybackSessionStartTime: number = self.currentPlaybackSessionStartTime
 	
@@ -154,17 +154,17 @@ function VideoPlaybackCoordinatorModule:__cancelCurrentPlayback(p3, PlayingVideo
 	end
 end
 
-function VideoPlaybackCoordinatorModule:setIsSettingFramerateThrottleAllowedByPolicy(IsSettingFramerateThrottleAllowedByPolicy) --[[ Line: 282 ]]
+function VideoPlaybackCoordinatorModule:setIsSettingFramerateThrottleAllowedByPolicy(IsSettingFramerateThrottleAllowedByPolicy)
 	-- upvalues: VideoPlaybackCoordinatorModule (copy)
 	VideoPlaybackCoordinatorModule.isSettingFramerateThrottleAllowedByPolicy = IsSettingFramerateThrottleAllowedByPolicy
 end
 
-function VideoPlaybackCoordinatorModule:setPreferredFramerateThrottling(PreferredFramerateThrottling) --[[ Line: 289 ]]
+function VideoPlaybackCoordinatorModule:setPreferredFramerateThrottling(PreferredFramerateThrottling)
 	-- upvalues: VideoPlaybackCoordinatorModule (copy)
 	VideoPlaybackCoordinatorModule.preferredFramerateThrottling = PreferredFramerateThrottling
 end
 
-function VideoPlaybackCoordinatorModule.isAnyPlaying(): boolean --[[ Line: 295 ]]
+function VideoPlaybackCoordinatorModule.isAnyPlaying(): boolean
 	-- upvalues: Count (ref)
 	return Count > 0
 end

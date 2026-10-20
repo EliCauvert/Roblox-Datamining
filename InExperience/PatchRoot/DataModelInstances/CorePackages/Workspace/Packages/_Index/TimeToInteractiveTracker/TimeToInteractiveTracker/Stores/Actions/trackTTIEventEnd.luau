@@ -8,9 +8,9 @@ local UtilModule = require(TimeToInteractiveTracker.Utils.Util)
 local GetMemoryMbModule = require(TimeToInteractiveTracker.Utils.getMemoryMb)
 local FFlagTTITrackerMemoryTrackingModule = require(TimeToInteractiveTracker.Utils.FFlagTTITrackerMemoryTracking)
 
-return function(Callback) --[[ Line: 21 ]]
+return function(Callback)
 	-- upvalues: NewResult (copy), NowModule (copy), MergeTTIEventMetadataModule (copy), UtilModule (copy), FFlagTTITrackerMemoryTrackingModule (copy), GetMemoryMbModule (copy), SendTTIStatModule (copy)
-	return function(StatName, p1) --[[ Line: 22 ]]
+	return function(StatName, p1)
 		-- upvalues: Callback (copy), NewResult (upval), NowModule (upval), MergeTTIEventMetadataModule (upval), UtilModule (upval), FFlagTTITrackerMemoryTrackingModule (upval), GetMemoryMbModule (upval), SendTTIStatModule (upval)
 		local ScaledStartTime = nil
 		local MetaData = nil
@@ -18,7 +18,7 @@ return function(Callback) --[[ Line: 21 ]]
 		local IsNotSent = false
 		local NoP1 = not p1 or p1.cleanupAfterSend == nil or p1.cleanupAfterSend
 		local SamplingRateOverride = if p1 then p1.samplingRateOverride else nil
-		Callback(function(Tbl) --[[ Line: 32 ]]
+		Callback(function(Tbl)
 			-- upvalues: StatName (copy), NewResult (upval), NowModule (upval), ScaledStartTime (ref), IsNotSent (ref), MetaData (ref), MergeTTIEventMetadataModule (upval), Milestones (ref), NoP1 (copy), UtilModule (upval)
 			local Entry = Tbl[StatName]
 			

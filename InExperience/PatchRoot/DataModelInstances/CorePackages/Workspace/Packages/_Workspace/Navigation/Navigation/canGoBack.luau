@@ -2,7 +2,7 @@
 local _ = require(script.Parent.types)
 local GetRootNavigationModule = require(script.Parent.getRootNavigation)
 
-return function(p1): boolean --[[ Line: 11 | Named "canGoBack" ]]
+return function(p1): boolean
 	-- upvalues: GetRootNavigationModule (copy), Actions (copy)
 	local RootNavigationModule = GetRootNavigationModule(p1)
 	local State = RootNavigationModule.state

@@ -14,11 +14,11 @@ local ApiFetchCountryCodesModule = require(AuthCommon.Thunks.ApiFetchCountryCode
 local CountryCodeSelectorButtonModule = require(AuthCommon.Components.CountryCodeSelectorButton)
 local CountryCodeSelector = RoactModule.PureComponent:extend("CountryCodeSelector")
 
-function CountryCodeSelector.init(p1) --[[ Line: 21 ]]
-	p1.props.fetchCountryCodes(p1.props.networking):catch(function() --[[ Line: 22 ]] end)
+function CountryCodeSelector.init(p1)
+	p1.props.fetchCountryCodes(p1.props.networking):catch(function() end)
 end
 
-function CountryCodeSelector.render(p1) --[[ Line: 27 ]]
+function CountryCodeSelector.render(p1)
 	-- upvalues: RoactModule (copy), ListSearchWidgetModule (copy), CountryCodeSelectorButtonModule (copy)
 	return RoactModule.createElement(ListSearchWidgetModule, {
 		Heading = "Authentication.SignUp.Heading.CountryCodeSelector",
@@ -30,17 +30,17 @@ function CountryCodeSelector.render(p1) --[[ Line: 27 ]]
 	})
 end
 
-local MemoResult = if FFlagUseSignalsForCountryCodeList then ReactModule.memo(function(p1) --[[ Line: 57 ]]
+local MemoResult = if FFlagUseSignalsForCountryCodeList then ReactModule.memo(function(p1)
 	-- upvalues: UseSignalState (copy), GetCountryCodeListStoreModule (copy), RoactModule (copy), MemoResult (copy), CryoModule (copy)
 	return RoactModule.createElement(MemoResult, CryoModule.Dictionary.union(p1, {
 		countryCodeList = UseSignalState(GetCountryCodeListStoreModule(false).getCountryCodeList)
 	}))
-end) else RoactRoduxModule.connect(if FFlagUseSignalsForCountryCodeList then nil else function(p1) --[[ Line: 41 ]]
+end) else RoactRoduxModule.connect(if FFlagUseSignalsForCountryCodeList then nil else function(p1)
 	return { countryCodeList = p1.CountryCodeList }
-end, function(Callback) --[[ Line: 46 ]]
+end, function(Callback)
 	-- upvalues: ApiFetchCountryCodesModule (copy)
 	return {
-		fetchCountryCodes = function(p1) --[[ Line: 48 ]]
+		fetchCountryCodes = function(p1)
 			-- upvalues: Callback (copy), ApiFetchCountryCodesModule (upval)
 			return Callback(ApiFetchCountryCodesModule.Fetch(p1))
 		end

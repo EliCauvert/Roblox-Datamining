@@ -15,7 +15,7 @@ for i, value in pairs((require(script.Parent.GetImageSetData)((game:GetService("
 	ImagesModule[i] = t
 end
 setmetatable(ImagesModule, {
-	__index = function(_, p1) --[[ Line: 30 ]]
+	__index = function(_, p1)
 		error(("%q is not a valid member of Images"):format((tostring(p1))), 2)
 	end
 })

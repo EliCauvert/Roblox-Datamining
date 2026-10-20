@@ -8,14 +8,14 @@ local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavi
 local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
 local FFlagAXFixPPEV2ConsoleSidebarNavModule = require(AvatarExperienceProfilePictureEditor.Flags.FFlagAXFixPPEV2ConsoleSidebarNav)
 
-return function(p1) --[[ Line: 18 | Named "FocusNavigatorWrapper" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FocusNavigableSurfaceWrapper (copy), FFlagAXFixPPEV2ConsoleSidebarNavModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy)
 	return ReactModule.createElement(FocusNavigableSurfaceWrapper, {
 		surfaceIdentifier = if FFlagAXFixPPEV2ConsoleSidebarNavModule then FocusNavigableSurfaceIdentifierEnum.SubRouterView else FocusNavigableSurfaceIdentifierEnum.PopUp,
 		isIsolated = not FFlagAXFixPPEV2ConsoleSidebarNavModule,
 		customEventHandlers = {
 			[FocusNavigationEventNameEnum.NavigateBack] = {
-				handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 26 ]]
+				handler = InputHandlersModule.onRelease(function(p2)
 					-- upvalues: p1 (copy)
 					p1.onClose()
 					p2:cancel()

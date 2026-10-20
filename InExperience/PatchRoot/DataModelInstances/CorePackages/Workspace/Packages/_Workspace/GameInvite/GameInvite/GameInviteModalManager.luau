@@ -15,7 +15,7 @@ local FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt = require(Parent.Shared
 local Module = {}
 Module.__index = Module
 
-function Module.new() --[[ Line: 25 ]]
+function Module.new()
 	-- upvalues: Module (copy)
 	return (setmetatable({}, Module))
 end
@@ -27,18 +27,18 @@ Module.customParams = nil
 Module.placeId = nil
 Module.openSession = 0
 
-local function openDeveloperInviteModalNonBlocking(p1, p2, p3) --[[ Line: 43 ]]
+local function openDeveloperInviteModalNonBlocking(p1, p2, p3)
 	-- upvalues: ContextActionService (copy), GetCustomizedInvitePromptParamsModule (copy), GetCanSendAndCanCustomizeInvitesModule (copy), CryoModule (copy), GameInviteAnalyticsManagerModule (copy)
 	local OpenSession = p1.openSession
 	p1.customParams = nil
 	p1.ToggleGameInviteModalEvent:Fire(true, false, p2)
-	ContextActionService:BindCoreAction("hideGameInviteModal", function(_, UserInputState) --[[ Line: 48 ]]
+	ContextActionService:BindCoreAction("hideGameInviteModal", function(_, UserInputState)
 		-- upvalues: p1 (copy)
 		if UserInputState == Enum.UserInputState.Begin then
 			p1:closeModal()
 		end
 	end, false, Enum.KeyCode.ButtonB, Enum.KeyCode.Backspace)
-	task.spawn(function() --[[ Line: 54 ]]
+	task.spawn(function()
 		-- upvalues: GetCustomizedInvitePromptParamsModule (upval), p3 (copy), p2 (copy), GetCanSendAndCanCustomizeInvitesModule (upval), p1 (copy), OpenSession (copy), CryoModule (upval), GameInviteAnalyticsManagerModule (upval)
 		local CustomizedInvitePromptParamsModule = GetCustomizedInvitePromptParamsModule(p3, p2.trigger, GetCanSendAndCanCustomizeInvitesModule)
 		
@@ -67,7 +67,7 @@ local function openDeveloperInviteModalNonBlocking(p1, p2, p3) --[[ Line: 43 ]]
 	end)
 end
 
-function Module:openModal(p1, p2) --[[ Line: 90 ]]
+function Module:openModal(p1, p2)
 	-- upvalues: FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (copy), IsTriggerDDIFunction (copy), openDeveloperInviteModalNonBlocking (copy), GetCustomizedInvitePromptParamsModule (copy), GetCanSendAndCanCustomizeInvitesModule (copy), CryoModule (copy), GameInviteAnalyticsManagerModule (copy), ContextActionService (copy)
 	if not self.isModalOpen then
 		self.isModalOpen = true
@@ -133,7 +133,7 @@ function Module:openModal(p1, p2) --[[ Line: 90 ]]
 				place_id = p1.rootPlaceId
 			})
 		end
-		ContextActionService:BindCoreAction("hideGameInviteModal", function(_, UserInputState) --[[ Line: 157 ]]
+		ContextActionService:BindCoreAction("hideGameInviteModal", function(_, UserInputState)
 			-- upvalues: self (copy)
 			if UserInputState == Enum.UserInputState.Begin then
 				self:closeModal()
@@ -146,7 +146,7 @@ function Module:openModal(p1, p2) --[[ Line: 90 ]]
 	end
 end
 
-function Module:closeModal(Max_recipient_row_number) --[[ Line: 170 ]]
+function Module:closeModal(Max_recipient_row_number)
 	-- upvalues: IsTriggerDDIFunction (copy), GameInviteAnalyticsManagerModule (copy), ContextActionService (copy), FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (copy)
 	if self.isModalOpen then
 		local IsNotLaunchDataMatch = false
@@ -181,11 +181,11 @@ function Module:closeModal(Max_recipient_row_number) --[[ Line: 170 ]]
 	self.ToggleGameInviteModalEvent:Fire(false)
 end
 
-function Module:isGameModalOpen() --[[ Line: 207 ]]
+function Module:isGameModalOpen()
 	return self.isModalOpen
 end
 
-function Module:invokeGameInvitePromptClosed() --[[ Line: 211 ]]
+function Module:invokeGameInvitePromptClosed()
 	-- upvalues: SocialService (copy), Players (copy)
 	if SocialService and Players.LocalPlayer then
 		SocialService:InvokeGameInvitePromptClosed(Players.LocalPlayer, {})

@@ -44,13 +44,13 @@ local ResponseBody = {
 }
 
 return {
-	mockGetOffersForUser = function() --[[ Line: 85 ]]
+	mockGetOffersForUser = function()
 		-- upvalues: PromiseModule (copy), ResponseBody (copy), MakeAXResponseHandlerModule (copy), NormalizeMarketplaceOffersBannerResponseModule (copy), ConstantsModule (copy)
 		local Flag = false
 		
-		return MakeAXResponseHandlerModule(PromiseModule.new(function(Callback) --[[ Line: 90 ]]
+		return MakeAXResponseHandlerModule(PromiseModule.new(function(Callback)
 			-- upvalues: Flag (ref), ResponseBody (upval)
-			task.delay(2, function() --[[ Line: 91 ]]
+			task.delay(2, function()
 				-- upvalues: Flag (upval), Callback (copy), ResponseBody (upval)
 				if Flag then
 					Callback(nil)
@@ -63,7 +63,7 @@ return {
 		end), NormalizeMarketplaceOffersBannerResponseModule, {
 			modelMismatchCounter = ConstantsModule.FETCH_MARKETPLACE_OFFERS_BANNER_MODEL_MISMATCH_COUNTER_NAME,
 			latencyCounter = ConstantsModule.FETCH_MARKETPLACE_OFFERS_BANNER_LATENCY_COUNTER_NAME
-		}), function() --[[ Line: 105 ]]
+		}), function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end

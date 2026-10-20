@@ -5,7 +5,7 @@ local ViewRecyclerModule = require(Parent.ViewRecycler)
 local MessageRowModule = require(script.Parent.MessageRow)
 
 return {
-	MessageRowType = ViewRecyclerModule.createRecyclableView(function(p1) --[[ Line: 14 | Named "RecycledMessageRow" ]]
+	MessageRowType = ViewRecyclerModule.createRecyclableView(function(p1)
 		-- upvalues: SignalsReactModule (copy), ReactModule (copy), MessageRowModule (copy)
 		local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
 		
@@ -20,7 +20,7 @@ return {
 	EndSpacerItem = ViewRecyclerModule.createPinnedItem({
 		key = "EndSpacer",
 		value = {},
-		itemType = ViewRecyclerModule.createRecyclableView(function() --[[ Line: 22 | Named "EndSpacer" ]]
+		itemType = ViewRecyclerModule.createRecyclableView(function()
 			-- upvalues: ReactModule (copy)
 			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,

@@ -1,5 +1,5 @@
 ﻿local v1 = false
-local Success, Result = pcall(function() --[[ Line: 41 ]]
+local Success, Result = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserFixOverlappingRtlChatMessages2")
 end)
 
@@ -19,33 +19,33 @@ local ChatConstantsModule = require(Parent:WaitForChild("ChatConstants"))
 local Module = {}
 Module.__index = Module
 
-function Module:GetStringTextBounds(ContentText, p1, TextSize, Vector) --[[ Line: 66 ]]
+function Module:GetStringTextBounds(ContentText, p1, TextSize, Vector)
 	-- upvalues: TextService (copy)
 	return TextService:GetTextSize(ContentText, TextSize, p1, Vector or Vector2.new(10000, 10000))
 end
 
-function Module.GetMessageHeight(p1, Label, Frame, p2) --[[ Line: 72 ]]
+function Module.GetMessageHeight(p1, Label, Frame, p2)
 	-- upvalues: v1 (ref)
 	local StringTextBounds = p1:GetStringTextBounds(if v1 then Label.ContentText else Label.Text, Label.Font, Label.TextSize, Vector2.new(p2 or Frame.AbsoluteSize.X, 1000))
 	
 	return if StringTextBounds.Y == math.floor(StringTextBounds.Y) then StringTextBounds.Y else StringTextBounds.Y + 1
 end
 
-function Module.GetNumberOfSpaces(p1, p2, p3, p4): number --[[ Line: 84 ]]
+function Module.GetNumberOfSpaces(p1, p2, p3, p4): number
 	return (math.ceil(p1:GetStringTextBounds(p2, p3, p4).X / p1:GetStringTextBounds(" ", p3, p4).X))
 end
 
-function Module:CreateLeadingSpaces(Count: number): string --[[ Line: 90 ]]
+function Module:CreateLeadingSpaces(Count: number): string
 	-- upvalues: v1 (ref)
 	return if v1 then "<font dir=\"ltr\">" .. string.rep(" ", Count) .. "</font>" else string.rep(" ", Count)
 end
 
-function Module:SanitizeForRichText(Text: string): string --[[ Line: 98 ]]
+function Module:SanitizeForRichText(Text: string): string
 	-- upvalues: v1 (ref)
 	return if v1 then string.gsub(Text, "%p", { ["<"] = "&lt;", [">"] = "&gt;", ["&"] = "&amp;" }) else Text
 end
 
-function Module.CreateBaseMessage(p1, Text, p2, TextSize, TextColor3) --[[ Line: 110 ]]
+function Module.CreateBaseMessage(p1, Text, p2, TextSize, TextColor3)
 	-- upvalues: v1 (ref)
 	local FrameFromObjectPool = p1:GetFromObjectPool("Frame")
 	FrameFromObjectPool.Selectable = false
@@ -74,7 +74,7 @@ function Module.CreateBaseMessage(p1, Text, p2, TextSize, TextColor3) --[[ Line:
 	return FrameFromObjectPool, TextLabelFromObjectPool
 end
 
-function Module.AddNameButtonToBaseMessage(p1, Label, TextColor3, Text, p2) --[[ Line: 141 ]]
+function Module.AddNameButtonToBaseMessage(p1, Label, TextColor3, Text, p2)
 	local StringTextBounds = p1:GetStringTextBounds(Text, Label.Font, Label.TextSize)
 	local TextButtonFromObjectPool = p1:GetFromObjectPool("TextButton")
 	TextButtonFromObjectPool.Selectable = false
@@ -91,12 +91,12 @@ function Module.AddNameButtonToBaseMessage(p1, Label, TextColor3, Text, p2) --[[
 	TextButtonFromObjectPool.Text = Text
 	TextButtonFromObjectPool.Visible = true
 	TextButtonFromObjectPool.Parent = Label
-	local MouseButton1ClickConnection = TextButtonFromObjectPool.MouseButton1Click:connect(function() --[[ Line: 159 ]]
+	local MouseButton1ClickConnection = TextButtonFromObjectPool.MouseButton1Click:connect(function()
 		-- upvalues: p1 (copy), TextButtonFromObjectPool (copy), p2 (copy)
 		p1:NameButtonClicked(TextButtonFromObjectPool, p2)
 	end)
 	local Connection = nil
-	Connection = TextButtonFromObjectPool.Changed:connect(function(p3) --[[ Line: 164 ]]
+	Connection = TextButtonFromObjectPool.Changed:connect(function(p3)
 		-- upvalues: MouseButton1ClickConnection (copy), Connection (ref)
 		if p3 == "Parent" then
 			MouseButton1ClickConnection:Disconnect()
@@ -107,7 +107,7 @@ function Module.AddNameButtonToBaseMessage(p1, Label, TextColor3, Text, p2) --[[
 	return TextButtonFromObjectPool
 end
 
-function Module.AddTranslationButtonToBaseMessage(p1, Label) --[[ Line: 174 ]]
+function Module.AddTranslationButtonToBaseMessage(p1, Label)
 	local Floored = math.floor(Label.TextSize * 0.9)
 	local _Vector2 = Vector2.new(Floored, Floored)
 	local ImageButtonFromObjectPool = p1:GetFromObjectPool("ImageButton")
@@ -124,7 +124,7 @@ function Module.AddTranslationButtonToBaseMessage(p1, Label) --[[ Line: 174 ]]
 	return ImageButtonFromObjectPool
 end
 
-function Module.AddChannelButtonToBaseMessage(p1, Label, TextColor3, Text, p2) --[[ Line: 191 ]]
+function Module.AddChannelButtonToBaseMessage(p1, Label, TextColor3, Text, p2)
 	local StringTextBounds = p1:GetStringTextBounds(Text, Label.Font, Label.TextSize)
 	local TextButtonFromObjectPool = p1:GetFromObjectPool("TextButton")
 	TextButtonFromObjectPool.Selectable = false
@@ -141,12 +141,12 @@ function Module.AddChannelButtonToBaseMessage(p1, Label, TextColor3, Text, p2) -
 	TextButtonFromObjectPool.Text = Text
 	TextButtonFromObjectPool.Visible = true
 	TextButtonFromObjectPool.Parent = Label
-	local MouseButton1ClickConnection = TextButtonFromObjectPool.MouseButton1Click:connect(function() --[[ Line: 209 ]]
+	local MouseButton1ClickConnection = TextButtonFromObjectPool.MouseButton1Click:connect(function()
 		-- upvalues: p1 (copy), TextButtonFromObjectPool (copy), p2 (copy)
 		p1:ChannelButtonClicked(TextButtonFromObjectPool, p2)
 	end)
 	local Connection = nil
-	Connection = TextButtonFromObjectPool.Changed:connect(function(p3) --[[ Line: 214 ]]
+	Connection = TextButtonFromObjectPool.Changed:connect(function(p3)
 		-- upvalues: MouseButton1ClickConnection (copy), Connection (ref)
 		if p3 == "Parent" then
 			MouseButton1ClickConnection:Disconnect()
@@ -157,7 +157,7 @@ function Module.AddChannelButtonToBaseMessage(p1, Label, TextColor3, Text, p2) -
 	return TextButtonFromObjectPool
 end
 
-function Module.AddTagLabelToBaseMessage(p1, Label, TextColor3, Text) --[[ Line: 224 ]]
+function Module.AddTagLabelToBaseMessage(p1, Label, TextColor3, Text)
 	local StringTextBounds = p1:GetStringTextBounds(Text, Label.Font, Label.TextSize)
 	local TextLabelFromObjectPool = p1:GetFromObjectPool("TextLabel")
 	TextLabelFromObjectPool.Selectable = false
@@ -178,12 +178,12 @@ function Module.AddTagLabelToBaseMessage(p1, Label, TextColor3, Text) --[[ Line:
 	return TextLabelFromObjectPool
 end
 
-function GetWhisperChannelPrefix() --[[ Line: 245 ]]
+function GetWhisperChannelPrefix()
 	-- upvalues: ChatConstantsModule (copy)
 	return if ChatConstantsModule.WhisperChannelPrefix then ChatConstantsModule.WhisperChannelPrefix else "To "
 end
 
-function Module.NameButtonClicked(p1, _, Text) --[[ Line: 252 ]]
+function Module.NameButtonClicked(p1, _, Text)
 	-- upvalues: ChatSettingsModule (copy), Players (copy), LocalPlayer (ref)
 	if not p1.ChatWindow then return end
 	if ChatSettingsModule.ClickOnPlayerNameToWhisper then
@@ -210,7 +210,7 @@ function Module.NameButtonClicked(p1, _, Text) --[[ Line: 252 ]]
 	end
 end
 
-function Module.ChannelButtonClicked(p1, _, TargetMessageChannel) --[[ Line: 282 ]]
+function Module.ChannelButtonClicked(p1, _, TargetMessageChannel)
 	-- upvalues: ChatSettingsModule (copy)
 	if not p1.ChatWindow then return end
 	if ChatSettingsModule.ClickOnChannelNameToSetMainChannel and p1.ChatWindow:GetChannel(TargetMessageChannel) then
@@ -224,20 +224,20 @@ function Module.ChannelButtonClicked(p1, _, TargetMessageChannel) --[[ Line: 282
 	end
 end
 
-function Module.RegisterChatWindow(p1, ChatWindow) --[[ Line: 300 ]]
+function Module.RegisterChatWindow(p1, ChatWindow)
 	p1.ChatWindow = ChatWindow
 	p1.ChatBar = ChatWindow:GetChatBar()
 end
 
-function Module.GetFromObjectPool(p1, p2) --[[ Line: 305 ]]
+function Module.GetFromObjectPool(p1, p2)
 	return if p1.ObjectPool == nil then Instance.new(p2) else p1.ObjectPool:GetInstance(p2)
 end
 
-function Module.RegisterObjectPool(p1, ObjectPool) --[[ Line: 312 ]]
+function Module.RegisterObjectPool(p1, ObjectPool)
 	p1.ObjectPool = ObjectPool
 end
 
-function Module:CreateFadeFunctions(List) --[[ Line: 332 ]]
+function Module:CreateFadeFunctions(List)
 	local t = {}
 	
 	for i, value in pairs(List) do
@@ -251,7 +251,7 @@ function Module:CreateFadeFunctions(List) --[[ Line: 332 ]]
 			}
 		end
 	end
-	local function AnimGuiObjects() --[[ Line: 363 ]]
+	local function AnimGuiObjects()
 		-- upvalues: t (copy)
 		for i, value in pairs(t) do
 			for i1, value1 in pairs(value) do
@@ -260,7 +260,7 @@ function Module:CreateFadeFunctions(List) --[[ Line: 332 ]]
 		end
 	end
 	
-	return function(p1, p2) --[[ Line: 345 | Named "FadeInFunction" ]]
+	return function(p1, p2)
 		-- upvalues: t (copy), List (copy)
 		for i, value in pairs(t) do
 			for i1, value1 in pairs(value) do
@@ -268,7 +268,7 @@ function Module:CreateFadeFunctions(List) --[[ Line: 332 ]]
 				value1.NormalizedExptValue = p2:NormalizedDefaultExptValueInSeconds(p1)
 			end
 		end
-	end, function(p3, p4) --[[ Line: 354 | Named "FadeOutFunction" ]]
+	end, function(p3, p4)
 		-- upvalues: t (copy), List (copy)
 		for i, value in pairs(t) do
 			for i1, value1 in pairs(value) do
@@ -276,7 +276,7 @@ function Module:CreateFadeFunctions(List) --[[ Line: 332 ]]
 				value1.NormalizedExptValue = p4:NormalizedDefaultExptValueInSeconds(p3)
 			end
 		end
-	end, function(p5, p6) --[[ Line: 371 | Named "UpdateAnimFunction" ]]
+	end, function(p5, p6)
 		-- upvalues: t (copy), AnimGuiObjects (copy)
 		for _, value in pairs(t) do
 			for _, Mouse in pairs(value) do
@@ -287,17 +287,17 @@ function Module:CreateFadeFunctions(List) --[[ Line: 332 ]]
 	end
 end
 
-function Module:NewBindableEvent(Name) --[[ Line: 389 ]]
+function Module:NewBindableEvent(Name)
 	local BindableEvent = Instance.new("BindableEvent")
 	BindableEvent.Name = Name
 	
 	return BindableEvent
 end
 
-function Module:RegisterGuiRoot() --[[ Line: 396 ]] end
+function Module:RegisterGuiRoot() end
 
 return ({
-	new = function() --[[ Line: 401 ]]
+	new = function()
 		-- upvalues: Module (copy)
 		local self = setmetatable({}, Module)
 		self.ObjectPool = nil

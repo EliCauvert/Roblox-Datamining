@@ -10,13 +10,13 @@ local FIntUserSeenCollectionBatchTimeMs = SharedFlagsModule.FIntUserSeenCollecti
 local FFlagLuaAppPYMKSendUserSeenCollection = SharedFlagsModule.FFlagLuaAppPYMKSendUserSeenCollection
 local FFlagLuaAppUserSeenCollectionUnifiedFields = SharedFlagsModule.FFlagLuaAppUserSeenCollectionUnifiedFields
 
-return function() --[[ Line: 49 | Named "useTilesSeenCollection" ]]
+return function()
 	-- upvalues: UseSocialCarouselAnalyticsModule (copy), FFlagLuaAppPYMKSendUserSeenCollection (copy), ReactModule (copy), Tile (copy), BuildUserSeenCollectionPayloadFunction (copy), UseBatchedImpressionsFunction (copy), FIntUserSeenCollectionBatchTimeMs (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (copy)
 	local UseSocialCarouselAnalyticsModuleResult = UseSocialCarouselAnalyticsModule()
 	
 	if FFlagLuaAppPYMKSendUserSeenCollection then
 		local TilesSeenCollectionFunction = UseSocialCarouselAnalyticsModuleResult.tilesSeenCollection
-		local UseResult = ReactModule.useCallback(function(p1, p2) --[[ Line: 83 ]]
+		local UseResult = ReactModule.useCallback(function(p1, p2)
 			-- upvalues: TilesSeenCollectionFunction (copy), BuildUserSeenCollectionPayloadFunction (upval)
 			if TilesSeenCollectionFunction then
 				TilesSeenCollectionFunction(BuildUserSeenCollectionPayloadFunction(p1, p2))
@@ -26,7 +26,7 @@ return function() --[[ Line: 49 | Named "useTilesSeenCollection" ]]
 		end, { TilesSeenCollectionFunction })
 		local UseBatchedImpressionsResult = UseBatchedImpressionsFunction({
 			batchTimeMs = FIntUserSeenCollectionBatchTimeMs,
-			mapItem = ReactModule.useCallback(function(UserId, Index, p1) --[[ Line: 54 ]]
+			mapItem = ReactModule.useCallback(function(UserId, Index, p1)
 				-- upvalues: Tile (upval)
 				return {
 					userId = UserId,
@@ -42,7 +42,7 @@ return function() --[[ Line: 49 | Named "useTilesSeenCollection" ]]
 			onFlush = if TilesSeenCollectionFunction then UseResult else nil
 		})
 		
-		return ReactModule.useMemo(function() --[[ Line: 97 ]]
+		return ReactModule.useMemo(function()
 			-- upvalues: UseBatchedImpressionsResult (copy)
 			return {
 				addTileToCollection = UseBatchedImpressionsResult.addImpression
@@ -54,7 +54,7 @@ return function() --[[ Line: 49 | Named "useTilesSeenCollection" ]]
 		local UseRefResult2 = ReactModule.useRef({})
 		local UseRefResult3 = ReactModule.useRef({})
 		local UseRefResult4 = ReactModule.useRef(0)
-		local UseResult = ReactModule.useCallback(function() --[[ Line: 111 ]]
+		local UseResult = ReactModule.useCallback(function()
 			-- upvalues: UseRefResult (copy), UseRefResult2 (copy), UseSocialCarouselAnalyticsModuleResult (copy), UseRefResult4 (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (upval), BuildUserSeenCollectionPayloadFunction (upval), UseRefResult3 (copy)
 			local Current = UseRefResult.current
 			
@@ -99,7 +99,7 @@ return function() --[[ Line: 49 | Named "useTilesSeenCollection" ]]
 			UseRefResult.current = {}
 			UseRefResult3.current = {}
 		end, { UseSocialCarouselAnalyticsModuleResult })
-		local UseResult1 = ReactModule.useCallback(function(UserId, Index, p1) --[[ Line: 170 ]]
+		local UseResult1 = ReactModule.useCallback(function(UserId, Index, p1)
 			-- upvalues: UseRefResult2 (copy), UseRefResult3 (copy), UseRefResult (copy), Tile (upval), UseRefResult1 (copy), FIntUserSeenCollectionBatchTimeMs (upval), UseResult (copy)
 			if not UserId or not Index or UseRefResult2.current[UserId] or UseRefResult3.current[UserId] then return end
 			UseRefResult3.current[UserId] = true
@@ -119,9 +119,9 @@ return function() --[[ Line: 49 | Named "useTilesSeenCollection" ]]
 			end
 			UseRefResult1.current = task.delay(FIntUserSeenCollectionBatchTimeMs * 0.001, UseResult)
 		end, { UseResult })
-		ReactModule.useEffect(function() --[[ Line: 210 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRefResult1 (copy), UseResult (copy)
-			return function() --[[ Line: 211 ]]
+			return function()
 				-- upvalues: UseRefResult1 (upval), UseResult (upval)
 				if UseRefResult1.current then
 					pcall(task.cancel, UseRefResult1.current)

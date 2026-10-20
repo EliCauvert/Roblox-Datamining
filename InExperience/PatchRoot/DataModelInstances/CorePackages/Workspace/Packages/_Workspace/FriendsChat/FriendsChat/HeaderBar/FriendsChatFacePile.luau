@@ -7,7 +7,7 @@ local EscapeRichTextFunction = require(Parent.ChatUIPrimitives).Utils.escapeRich
 local GetFacePileParticipantIdsModule = require(script.Parent.getFacePileParticipantIds)
 local UseFacePilePresenceModule = require(script.Parent.useFacePilePresence)
 
-return function(p1) --[[ Line: 35 | Named "FriendsChatFacePile" ]]
+return function(p1)
 	-- upvalues: GetFacePileParticipantIdsModule (copy), UseFacePilePresenceModule (copy), ReactModule (copy), UserTile (copy), LayoutMode (copy), FFlagAppChatSanitizeConversationTitleRichText (copy), EscapeRichTextFunction (copy)
 	local v1: boolean = p1.participantUserIds ~= nil and #p1.participantUserIds > 0
 	local FacePileParticipantIdsModule = GetFacePileParticipantIdsModule(p1.participantUserIds or {}, p1.localUserId)

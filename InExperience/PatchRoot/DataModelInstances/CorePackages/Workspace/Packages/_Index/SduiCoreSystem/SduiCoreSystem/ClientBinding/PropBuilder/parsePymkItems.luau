@@ -1,4 +1,4 @@
-﻿return function(p1) --[[ Line: 7 | Named "parsePymkItems" ]]
+﻿return function(p1)
 	if typeof(p1) ~= "table" then
 		return nil
 	end

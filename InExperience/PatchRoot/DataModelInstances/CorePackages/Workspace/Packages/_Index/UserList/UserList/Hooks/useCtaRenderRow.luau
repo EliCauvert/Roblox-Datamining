@@ -14,20 +14,20 @@ local FFlagUserListSurfaceExtensions = require(Parent.SharedFlags).FFlagUserList
 local ProfileCTAService = require(Parent.ProfileCtaService).ProfileCTAService
 local t = {}
 
-return function(Tbl, p1) --[[ Line: 30 | Named "useCtaRenderRow" ]]
+return function(Tbl, p1)
 	-- upvalues: ReactModule (copy), ProfileCTAService (copy), UseCtaActionHandlersModule (copy), FFlagUserListComposeRenderRowWithCta (copy), FFlagUserListDefaultCtaWidths (copy), ConstantsModule (copy), FFlagUserListSurfaceExtensions (copy), SurfaceJoinCtaRowModule (copy), CtaRowModule (copy), EnumsModule (copy), t (copy), FFlagUserListCanonicalCtaAnalyticsModule (copy)
-	ReactModule.useEffect(function() --[[ Line: 31 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ProfileCTAService (upval)
 		local ConnectRealTimeUpdatesResult = ProfileCTAService.connectRealTimeUpdates()
 		
-		return function() --[[ Line: 33 ]]
+		return function()
 			-- upvalues: ConnectRealTimeUpdatesResult (copy)
 			ConnectRealTimeUpdatesResult.Disconnect()
 		end
 	end, {})
 	local UseCtaActionHandlersModuleResult = UseCtaActionHandlersModule(Tbl)
 	local Callback = if FFlagUserListComposeRenderRowWithCta then p1 else nil
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 41 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FFlagUserListDefaultCtaWidths (upval), Tbl (copy), ConstantsModule (upval)
 		if FFlagUserListDefaultCtaWidths and Tbl and (Tbl.primaryCtaMinWidth == nil or Tbl.primaryCtaMaxWidth == nil) then
 			local Copy = table.clone(Tbl)
@@ -40,11 +40,11 @@ return function(Tbl, p1) --[[ Line: 30 | Named "useCtaRenderRow" ]]
 		end
 	end, { Tbl })
 	
-	return ReactModule.useMemo(function() --[[ Line: 55 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: FFlagUserListSurfaceExtensions (upval), UseMemoResult (copy), SurfaceJoinCtaRowModule (upval), CtaRowModule (upval), EnumsModule (upval), Callback (copy), t (upval), ReactModule (upval), UseCtaActionHandlersModuleResult (copy), FFlagUserListCanonicalCtaAnalyticsModule (upval), FFlagUserListComposeRenderRowWithCta (upval)
 		local SurfaceJoinCtaRowModule1 = if FFlagUserListSurfaceExtensions and UseMemoResult and UseMemoResult.join then SurfaceJoinCtaRowModule else CtaRowModule
 		
-		return function(Callback1, Entity, p2) --[[ Line: 66 ]]
+		return function(Callback1, Entity, p2)
 			-- upvalues: EnumsModule (upval), Callback (upval), t (upval), ReactModule (upval), SurfaceJoinCtaRowModule1 (copy), UseCtaActionHandlersModuleResult (upval), UseMemoResult (upval), FFlagUserListCanonicalCtaAnalyticsModule (upval), FFlagUserListComposeRenderRowWithCta (upval)
 			return if Entity.type == EnumsModule.EntityType.User then ReactModule.createElement(SurfaceJoinCtaRowModule1, {
 				createRow = Callback1,

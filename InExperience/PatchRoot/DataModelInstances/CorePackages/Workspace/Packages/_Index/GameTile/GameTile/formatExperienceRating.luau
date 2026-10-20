@@ -1,4 +1,4 @@
-﻿return function(p1, p2, p3, p4) --[[ Line: 1 | Named "formatExperienceRating" ]]
+﻿return function(p1, p2, p3, p4)
 	if p1 + p2 == 0 then
 		return p3 or "--"
 	else

@@ -15,15 +15,15 @@ local FIntVoiceChatTooltipDelayModule = require(RobloxGui.Modules.Flags.FIntVoic
 local ConstantsModule = require(RobloxGui.Modules.TopBar.Constants)
 local TopBarHeight = ConstantsModule.TopBarHeight
 
-return function(p1) --[[ Line: 33 | Named "VoiceChatTooltip" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), GuiService (copy), FIntVoiceChatTooltipDelayModule (copy), UtilityModule (copy), TopBarHeight (copy), ConstantsModule (copy), RoactModule (copy), StyledTextLabel (copy), CoreGui (copy), TooltipOrientation (copy), WithTooltipFunction (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseRefResult = ReactModule.useRef(nil)
 	local OnCloseFunction = p1.onClose
-	ReactModule.useEffect(function() --[[ Line: 39 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseRefResult (copy), GuiService (upval), OnCloseFunction (copy), FIntVoiceChatTooltipDelayModule (upval)
 		if p1.showPrompt then
-			UseRefResult.current = GuiService.MenuOpened:Connect(function() --[[ Line: 41 ]]
+			UseRefResult.current = GuiService.MenuOpened:Connect(function()
 				-- upvalues: UseRefResult (upval), OnCloseFunction (upval)
 				if UseRefResult.current then
 					UseRefResult.current:Disconnect()
@@ -31,7 +31,7 @@ return function(p1) --[[ Line: 33 | Named "VoiceChatTooltip" ]]
 					OnCloseFunction()
 				end
 			end)
-			task.delay(FIntVoiceChatTooltipDelayModule, function() --[[ Line: 48 ]]
+			task.delay(FIntVoiceChatTooltipDelayModule, function()
 				-- upvalues: UseRefResult (upval), p1 (upval), OnCloseFunction (upval)
 				if UseRefResult.current then
 					UseRefResult.current:Disconnect()
@@ -42,7 +42,7 @@ return function(p1) --[[ Line: 33 | Named "VoiceChatTooltip" ]]
 				end
 			end)
 		end
-		return function() --[[ Line: 59 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			if UseRefResult.current then
 				UseRefResult.current:Disconnect()
@@ -58,7 +58,7 @@ return function(p1) --[[ Line: 33 | Named "VoiceChatTooltip" ]]
 	return WithTooltipFunction({
 		minContentWidth = 240,
 		headerText = p1.titleText,
-		renderCustomComponents = function(_) --[[ Line: 78 ]]
+		renderCustomComponents = function(_)
 			-- upvalues: RoactModule (upval), StyledTextLabel (upval), p1 (copy), UseStyleResult (copy)
 			return RoactModule.createElement(StyledTextLabel, {
 				layoutOrder = 0,
@@ -78,7 +78,7 @@ return function(p1) --[[ Line: 33 | Named "VoiceChatTooltip" ]]
 		guiTarget = CoreGui,
 		active = p1.showPrompt,
 		preferredOrientation = TooltipOrientation.Bottom
-	}, function(p2) --[[ Line: 101 ]]
+	}, function(p2)
 		-- upvalues: RoactModule (upval), XOffset (copy), UseDisplayScaleStateResult (ref), ReactModule (upval)
 		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,

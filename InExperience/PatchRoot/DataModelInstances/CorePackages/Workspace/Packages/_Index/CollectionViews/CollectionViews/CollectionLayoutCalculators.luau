@@ -34,23 +34,23 @@ local SmallCollectionItemFractionalPercentRatio = game:DefineFastInt("SmallColle
 local XSmallCollectionItemFractionalPercentRatio = game:DefineFastInt("XSmallCollectionItemFractionalPercent", 15) / 100
 local FFlagLuaAppLayoutParamsInContext = require(Parent.SharedFlags).FFlagLuaAppLayoutParamsInContext
 
-local function _(p1, p2) --[[ Line: 58 | Named "scaleSizeForPlatform" ]]
+local function _(p1, p2)
 	-- upvalues: FFlagLuaAppLayoutParamsInContext (copy)
 	return p1 * (if FFlagLuaAppLayoutParamsInContext then p2.Config.UI.Scale else p2.Stroke.Standard)
 end
 
-local function getLegacySideMargin(p1, p2) --[[ Line: 67 ]]
+local function getLegacySideMargin(p1, p2)
 	-- upvalues: FFlagLuaAppLayoutParamsInContext (copy)
 	return if p1 < 1024 * (if FFlagLuaAppLayoutParamsInContext then p2.Config.UI.Scale else p2.Stroke.Standard) then if FFlagLuaAppLayoutParamsInContext then p2.Padding.Medium else p2.Size.Size_300 elseif p1 < 1280 * (if FFlagLuaAppLayoutParamsInContext then p2.Config.UI.Scale else p2.Stroke.Standard) then 18 * (if FFlagLuaAppLayoutParamsInContext then p2.Config.UI.Scale else p2.Stroke.Standard) elseif p1 < 1440 * (if FFlagLuaAppLayoutParamsInContext then p2.Config.UI.Scale else p2.Stroke.Standard) then if FFlagLuaAppLayoutParamsInContext then p2.Margin.Medium else p2.Size.Size_600 elseif p1 < 1920 * (if FFlagLuaAppLayoutParamsInContext then p2.Config.UI.Scale else p2.Stroke.Standard) then 34 * (if FFlagLuaAppLayoutParamsInContext then p2.Config.UI.Scale else p2.Stroke.Standard) elseif p1 < 2260 * (if FFlagLuaAppLayoutParamsInContext then p2.Config.UI.Scale else p2.Stroke.Standard) then 38 * (if FFlagLuaAppLayoutParamsInContext then p2.Config.UI.Scale else p2.Stroke.Standard) elseif FFlagLuaAppLayoutParamsInContext then p2.Margin.Large else p2.Size.Size_1200
 end
 
-local _ = function(p1: number, p2) --[[ Line: 92 | Named "getLegacyColumnGap" ]]
+local _ = function(p1: number, p2)
 	-- upvalues: FFlagLuaAppLayoutParamsInContext (copy)
 	return if p1 < 1024 then if FFlagLuaAppLayoutParamsInContext then p2.Gap.Medium else p2.Size.Size_300 elseif p1 < 1280 then 18 elseif FFlagLuaAppLayoutParamsInContext then p2.Gap.XXLarge else p2.Size.Size_600
 end
 
 return {
-	calculateNumColumns = function(p1, p2: number, p3, Small, p4) --[[ Line: 134 ]]
+	calculateNumColumns = function(p1, p2: number, p3, Small, p4)
 		-- upvalues: CollectionItemSize (copy), XLargeCollectionItemMinItemWidth (copy), FFlagLuaAppLayoutParamsInContext (copy), XLargeCollectionItemMinItemCount (copy), XLargeCollectionItemMaxItemCount (copy), LargeCollectionItemMinItemWidth (copy), LargeCollectionItemMinItemCount (copy), LargeCollectionItemMaxItemCount (copy), MediumCollectionItemMinItemWidth (copy), MediumCollectionItemMinItemCount (copy), MediumCollectionItemMaxItemCount (copy), ArgCheckModule (copy), SmallCollectionItemMinItemWidth (copy), SmallCollectionItemMinItemCount (copy), SmallCollectionItemMaxItemCount (copy), XSmallCollectionItemMinItemWidth (copy), XSmallCollectionItemMinItemCount (copy), XSmallCollectionItemMaxItemCount (copy), CalculateNumColumnsModule (copy)
 		local ScaledXLargeCollectionItemMinItemWidth = nil
 		local XLargeCollectionItemMinItemCount1 = nil
@@ -80,27 +80,27 @@ return {
 		end
 		return CalculateNumColumnsModule(ScaledXLargeCollectionItemMinItemWidth, p3, XLargeCollectionItemMinItemCount1, XLargeCollectionItemMaxItemCount1, p1 - p2 * 2)
 	end,
-	calculateSideMargin = function(_, p1, p2) --[[ Line: 108 ]]
+	calculateSideMargin = function(_, p1, p2)
 		-- upvalues: HasExtraPlatformInsetFunction (copy), FFlagLuaAppLayoutParamsInContext (copy), getLegacySideMargin (copy)
 		return if HasExtraPlatformInsetFunction() then if FFlagLuaAppLayoutParamsInContext then p1.Size.Size_1600 else p1.Size.Size_1600 else getLegacySideMargin(p2, p1)
 	end,
-	calculateColumnGap = function(_, p1, p2: number) --[[ Line: 125 ]]
+	calculateColumnGap = function(_, p1, p2: number)
 		-- upvalues: FFlagLuaAppLayoutParamsInContext (copy)
 		return if p2 < 1024 then if FFlagLuaAppLayoutParamsInContext then p1.Gap.Medium else p1.Size.Size_300 elseif p2 < 1280 then 18 elseif FFlagLuaAppLayoutParamsInContext then p1.Gap.XXLarge else p1.Size.Size_600
 	end,
-	calculateVerticalPadding = function(p1, Large) --[[ Line: 173 ]]
+	calculateVerticalPadding = function(p1, Large)
 		-- upvalues: CollectionItemSize (copy), XLargeCollectionItemVerticalGap (copy), FFlagLuaAppLayoutParamsInContext (copy), LargeCollectionItemVerticalGap (copy), MediumCollectionItemVerticalGap (copy), SmallCollectionItemVerticalGap (copy), XSmallCollectionItemVerticalGap (copy)
 		return if Large == CollectionItemSize.XLarge then XLargeCollectionItemVerticalGap * (if FFlagLuaAppLayoutParamsInContext then p1.Config.UI.Scale else p1.Stroke.Standard) elseif Large == CollectionItemSize.Large then LargeCollectionItemVerticalGap * (if FFlagLuaAppLayoutParamsInContext then p1.Config.UI.Scale else p1.Stroke.Standard) elseif Large == CollectionItemSize.Medium then MediumCollectionItemVerticalGap * (if FFlagLuaAppLayoutParamsInContext then p1.Config.UI.Scale else p1.Stroke.Standard) elseif Large == CollectionItemSize.Small then SmallCollectionItemVerticalGap * (if FFlagLuaAppLayoutParamsInContext then p1.Config.UI.Scale else p1.Stroke.Standard) else XSmallCollectionItemVerticalGap * (if FFlagLuaAppLayoutParamsInContext then p1.Config.UI.Scale else p1.Stroke.Standard)
 	end,
-	calculateFractionalItemAmount = function(Large, Directional) --[[ Line: 201 ]]
+	calculateFractionalItemAmount = function(Large, Directional)
 		-- upvalues: CollectionItemSize (copy), ResponsiveModule (copy), XLargeCollectionItemFractionalPercentRatio (copy), LargeCollectionItemFractionalPercentRatio (copy), MediumCollectionItemFractionalPercentRatio (copy), SmallCollectionItemFractionalPercentRatio (copy), XSmallCollectionItemFractionalPercentRatio (copy)
 		return if Large == CollectionItemSize.XLarge then if Directional == ResponsiveModule.Input.Directional then 0 else XLargeCollectionItemFractionalPercentRatio elseif Large == CollectionItemSize.Large then if Directional == ResponsiveModule.Input.Directional then 0 else LargeCollectionItemFractionalPercentRatio elseif Large == CollectionItemSize.Medium then if Directional == ResponsiveModule.Input.Directional then 0 else MediumCollectionItemFractionalPercentRatio elseif Large == CollectionItemSize.Small then if Directional == ResponsiveModule.Input.Directional then 0 else SmallCollectionItemFractionalPercentRatio elseif Directional == ResponsiveModule.Input.Directional then 0 else XSmallCollectionItemFractionalPercentRatio
 	end,
-	calculateMaxTilesToShow = function(Directional) --[[ Line: 192 ]]
+	calculateMaxTilesToShow = function(Directional)
 		-- upvalues: ResponsiveModule (copy)
 		return if Directional == ResponsiveModule.Input.Directional then 20 else nil
 	end,
-	calculateLoadMoreThreshold = function(p1: number): number --[[ Line: 215 ]]
+	calculateLoadMoreThreshold = function(p1: number): number
 		return (math.max(1000, p1))
 	end
 }

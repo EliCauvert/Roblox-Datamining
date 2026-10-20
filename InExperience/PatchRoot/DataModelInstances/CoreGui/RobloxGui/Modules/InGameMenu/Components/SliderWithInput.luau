@@ -37,7 +37,7 @@ SliderWithInput.validateProps = T.intersection(T.strictInterface({
 	sliderDotRef = T.optional(T.table),
 	onSelectionLost = T.callback,
 	onSelectionGained = T.callback
-}), function(p1) --[[ Line: 76 ]]
+}), function(p1)
 	if p1.max < p1.min then
 		return false, "min must be less than or equal to max"
 	elseif p1.max < p1.value or p1.value < p1.min then
@@ -47,21 +47,21 @@ SliderWithInput.validateProps = T.intersection(T.strictInterface({
 	end
 end)
 
-function SliderWithInput.init(p1) --[[ Line: 89 ]]
+function SliderWithInput.init(p1)
 	-- upvalues: Roact (copy)
 	p1.textBoxRef = Roact.createRef()
 	p1.state = { textEntryMode = false }
 end
 
-function SliderWithInput.renderFocusHandler(p1) --[[ Line: 97 ]]
+function SliderWithInput.renderFocusHandler(p1)
 	-- upvalues: Roact (copy), FocusHandlerModule (copy), GuiService (copy), ContextActionService (copy)
 	return Roact.createElement(FocusHandlerModule, {
 		isFocused = p1.props.canCaptureFocus and p1.state.textEntryMode or false,
-		didFocus = function() --[[ Line: 101 ]]
+		didFocus = function()
 			-- upvalues: GuiService (upval), p1 (copy), ContextActionService (upval)
 			GuiService.CoreGuiNavigationEnabled = false
 			local Value = p1.props.value
-			ContextActionService:BindCoreAction("LeaveTextEntryMode", function(_, UserInputState) --[[ Line: 110 ]]
+			ContextActionService:BindCoreAction("LeaveTextEntryMode", function(_, UserInputState)
 				-- upvalues: p1 (upval), Value (copy)
 				if UserInputState == Enum.UserInputState.End then
 					p1:setState({ textEntryMode = false })
@@ -75,7 +75,7 @@ function SliderWithInput.renderFocusHandler(p1) --[[ Line: 97 ]]
 				end
 			end, false, Enum.KeyCode.ButtonB)
 		end,
-		didBlur = function() --[[ Line: 122 ]]
+		didBlur = function()
 			-- upvalues: GuiService (upval), ContextActionService (upval)
 			GuiService.CoreGuiNavigationEnabled = true
 			ContextActionService:UnbindCoreAction("LeaveTextEntryMode")
@@ -83,7 +83,7 @@ function SliderWithInput.renderFocusHandler(p1) --[[ Line: 97 ]]
 	}) or nil
 end
 
-function SliderWithInput.renderWithSelectionCursor(p1, Callback) --[[ Line: 129 ]]
+function SliderWithInput.renderWithSelectionCursor(p1, Callback)
 	-- upvalues: Cryo (copy), Roact (copy), SliderModule (copy), WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), AssetImageModule (copy), NormalizeFontFaceFunction (copy), CursorType (copy), ExternalEventConnectionModule (copy), UserInputService (copy)
 	local Props = p1.props
 	
@@ -101,7 +101,7 @@ function SliderWithInput.renderWithSelectionCursor(p1, Callback) --[[ Line: 129 
 			keyboardInputStepInterval = Cryo.None,
 			NextSelectionRight = p1.textBoxRef
 		}))),
-		TextContainer = WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 147 ]]
+		TextContainer = WithFoundationOrUIBloxStyleFunction(function(p2)
 			-- upvalues: FoundationFontFaceMigration (upval)
 			return {
 				Tokens = if FoundationFontFaceMigration then p2 else nil,
@@ -128,7 +128,7 @@ function SliderWithInput.renderWithSelectionCursor(p1, Callback) --[[ Line: 129 
 					}
 				}
 			}
-		end, function(p2) --[[ Line: 173 ]]
+		end, function(p2)
 			-- upvalues: Props (copy), Roact (upval), AssetImageModule (upval), p1 (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), Callback (copy), CursorType (upval)
 			local TextMuted = Props.disabled and p2.Theme.TextMuted or p2.Theme.TextDefault
 			
@@ -160,13 +160,13 @@ function SliderWithInput.renderWithSelectionCursor(p1, Callback) --[[ Line: 129 
 					[Roact.Event.SelectionLost] = p1.props.onSelectionLost,
 					[Roact.Event.SelectionGained] = p1.props.onSelectionGained,
 					[Roact.Ref] = p1.textBoxRef,
-					[Roact.Event.Focused] = Props.disabled and function(TextBox) --[[ Line: 206 ]]
+					[Roact.Event.Focused] = Props.disabled and function(TextBox)
 						TextBox:ReleaseFocus(false)
-					end or function() --[[ Line: 208 ]]
+					end or function()
 						-- upvalues: p1 (upval)
 						p1:setState({ textEntryMode = true })
 					end,
-					[Roact.Event.FocusLost] = function(p3, _) --[[ Line: 211 ]]
+					[Roact.Event.FocusLost] = function(p3, _)
 						-- upvalues: p1 (upval), Props (upval)
 						p1:setState({ textEntryMode = false })
 						local Number: number? = tonumber(p3.Text)
@@ -196,7 +196,7 @@ function SliderWithInput.renderWithSelectionCursor(p1, Callback) --[[ Line: 129 
 		end),
 		UserInputConnection = not Props.disabled and Roact.createElement(ExternalEventConnectionModule, {
 			event = UserInputService.InputBegan,
-			callback = function(Input, _) --[[ Line: 249 ]]
+			callback = function(Input, _)
 				-- upvalues: UserInputService (upval), p1 (copy), Props (copy)
 				if Input.UserInputType ~= Enum.UserInputType.Keyboard then return end
 				if UserInputService:GetFocusedTextBox() ~= p1.textBoxRef.current then return end
@@ -222,9 +222,9 @@ function SliderWithInput.renderWithSelectionCursor(p1, Callback) --[[ Line: 129 
 	})
 end
 
-function SliderWithInput.render(p1) --[[ Line: 289 ]]
+function SliderWithInput.render(p1)
 	-- upvalues: WithCursorMigration (copy)
-	return WithCursorMigration(function(p2) --[[ Line: 290 ]]
+	return WithCursorMigration(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithSelectionCursor(p2)
 	end)

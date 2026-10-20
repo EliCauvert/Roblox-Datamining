@@ -5,7 +5,7 @@ local ExpChatEnableVirtualLocalOnlineCommand = game:DefineFastFlag("ExpChatEnabl
 return {
 	name = script.Name,
 	alias = { "/help", "/?" },
-	clientRun = function() --[[ Line: 9 ]]
+	clientRun = function()
 		-- upvalues: ExpChatLocalUserCountEnabledEngineFeature (copy), ExpChatEnableVirtualLocalOnlineCommand (copy)
 		return if ExpChatLocalUserCountEnabledEngineFeature and ExpChatEnableVirtualLocalOnlineCommand then {
 			metadata = "Roblox.Help.Info",

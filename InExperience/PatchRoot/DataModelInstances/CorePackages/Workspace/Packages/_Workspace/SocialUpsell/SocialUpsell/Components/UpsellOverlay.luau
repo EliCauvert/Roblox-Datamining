@@ -33,7 +33,7 @@ local Image = FoundationModule.Image
 local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
 local config = { isInExperience = true }
 
-local function v31(DeadlineUtcTimestamp, p1) --[[ Line: 80 ]]
+local function v31(DeadlineUtcTimestamp, p1)
 	-- upvalues: FIntMinDaysToShowCountdownLabelModule (copy), FIntMaxDaysToShowCountDownLabelModule (copy)
 	if DeadlineUtcTimestamp and DeadlineUtcTimestamp ~= 0 then
 		local Floored = math.floor((DeadlineUtcTimestamp - os.time()) / 86400)
@@ -46,7 +46,7 @@ end
 
 local GetViewportSize = if FFlagEnableAEGIS2CommsFAEUpsell then DisplayModule.GetDisplayStore(false).getViewportSize else nil
 
-return function(p1) --[[ Line: 108 ]]
+return function(p1)
 	-- upvalues: config (copy), UseSocialUpsellOverlayControllerModule (copy), ReactModule (copy), UseScaledValueFunction (copy), ReactFocusNavigationModule (copy), ReactUtilsModule (copy), HttpService (copy), SocialUpsellAnalyticsModule (copy), UpsellComponentModule (copy), UseLocalizationFunction (copy), v31 (copy), FFlagEnableAEGIS2CommsFAEUpsell (copy), SignalsReactModule (copy), GetViewportSize (ref), UseSelectorFunction (copy), MinHeightFor (copy), EventTypes (copy), ConstantsModule (copy), ButtonVariant (copy), Dialog (copy), DialogSize (copy), View (copy), Image (copy), BannerBadge (copy), FoundationModule (copy), IconName (copy), BadgeVariant (copy), Text (copy)
 	local P2 = p1 or config
 	local UseSocialUpsellOverlayControllerModuleResult = UseSocialUpsellOverlayControllerModule(P2.isInExperience)
@@ -55,7 +55,7 @@ return function(p1) --[[ Line: 108 ]]
 	local UseDefaultFocusBehaviorResult, UseDefaultFocusBehaviorResult2 = ReactFocusNavigationModule.useDefaultFocusBehavior()
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseComposedRefResult = ReactUtilsModule.useComposedRef(UseDefaultFocusBehaviorResult2, UseRefResult1)
-	ReactModule.useEffect(function() --[[ Line: 117 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy)
 		if UseRefResult1.current then
 			local ScrollingFrame = UseRefResult1.current:FindFirstChildWhichIsA("ScrollingFrame", true)
@@ -65,7 +65,7 @@ return function(p1) --[[ Line: 108 ]]
 			end
 		end
 	end, {})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 128 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: P2 (copy), HttpService (upval)
 		return P2.impressionId or HttpService:GenerateGUID(false)
 	end, {
@@ -74,7 +74,7 @@ return function(p1) --[[ Line: 108 ]]
 		P2.upsellPurpose,
 		P2.upsellEntryComponent
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 139 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: SocialUpsellAnalyticsModule (upval), P2 (copy), UpsellComponentModule (upval)
 		return SocialUpsellAnalyticsModule.evaluateUpsellStage(P2.upsellEntrySurface, UpsellComponentModule.Modal, P2.upsellEntryComponent)
 	end, { P2.upsellEntrySurface, P2.upsellEntryComponent })
@@ -82,18 +82,18 @@ return function(p1) --[[ Line: 108 ]]
 		daysLeft = "Feature.FAE.Label.DaysLeft",
 		dayLeft = "Feature.FAE.Label.DayLeft"
 	})
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 152 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: P2 (copy), v31 (upval), UseLocalizationResult (copy)
 		return if P2.countDownBadge then v31(P2.countDownBadge.deadlineUtcTimestamp, UseLocalizationResult) else nil
 	end, { P2.countDownBadge, UseLocalizationResult })
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 159 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: P2 (copy), UseMemoResult2 (copy)
 		return if P2.countDownBadge then if P2.countDownBadge.text then P2.countDownBadge.text else UseMemoResult2 else nil
 	end, { UseMemoResult2, P2.countDownBadge })
-	local IsMinHeightForBelow = MinHeightFor <= (if FFlagEnableAEGIS2CommsFAEUpsell then SignalsReactModule.useSignalState(GetViewportSize) else UseSelectorFunction(function(p2) --[[ Line: 172 ]]
+	local IsMinHeightForBelow = MinHeightFor <= (if FFlagEnableAEGIS2CommsFAEUpsell then SignalsReactModule.useSignalState(GetViewportSize) else UseSelectorFunction(function(p2)
 		return p2.ScreenSize
 	end)).Y
-	ReactModule.useEffect(function() --[[ Line: 180 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy), UseRefResult (copy), SocialUpsellAnalyticsModule (upval), EventTypes (upval), P2 (copy), UseMemoResult1 (copy), UpsellComponentModule (upval)
 		if UseMemoResult and UseRefResult.current ~= UseMemoResult then
 			SocialUpsellAnalyticsModule.logUpsellEvent(EventTypes.SocialUpsellShown, {
@@ -113,7 +113,7 @@ return function(p1) --[[ Line: 108 ]]
 		UseMemoResult1,
 		P2.upsellEntryComponent
 	})
-	local UseResult = ReactModule.useCallback(function(Btn) --[[ Line: 204 ]]
+	local UseResult = ReactModule.useCallback(function(Btn)
 		-- upvalues: SocialUpsellAnalyticsModule (upval), EventTypes (upval), P2 (copy), UseMemoResult1 (copy), UseMemoResult (copy), UpsellComponentModule (upval)
 		SocialUpsellAnalyticsModule.logUpsellEvent(EventTypes.SocialUpsellButtonClick, {
 			upsellPurpose = P2.upsellPurpose,
@@ -131,7 +131,7 @@ return function(p1) --[[ Line: 108 ]]
 		UseMemoResult1,
 		P2.upsellEntryComponent
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 226 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy), ConstantsModule (upval), P2 (copy)
 		UseResult(ConstantsModule.UPSELL_OVERLAY_BUTTON_ACTION.Primary)
 		P2.primaryAction.onActivated()
@@ -141,7 +141,7 @@ return function(p1) --[[ Line: 108 ]]
 		hasBackdrop = true,
 		closeOnClickOutside = true,
 		size = DialogSize.Medium,
-		onClose = ReactModule.useCallback(function() --[[ Line: 238 ]]
+		onClose = ReactModule.useCallback(function()
 			-- upvalues: UseResult (copy), ConstantsModule (upval), UseSocialUpsellOverlayControllerModuleResult (copy), P2 (copy)
 			UseResult(ConstantsModule.UPSELL_OVERLAY_BUTTON_ACTION.Dismiss)
 			UseSocialUpsellOverlayControllerModuleResult.closeSocialOverlay()
@@ -197,7 +197,7 @@ return function(p1) --[[ Line: 108 ]]
 		}),
 		DialogActions = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = if UseMemoResult3 then 3 else 4,
-			actions = ReactModule.useMemo(function() --[[ Line: 252 ]]
+			actions = ReactModule.useMemo(function()
 				-- upvalues: P2 (copy), ButtonVariant (upval), UseResult1 (copy), UseDefaultFocusBehaviorResult (copy)
 				local List = {}
 				table.insert(List, {

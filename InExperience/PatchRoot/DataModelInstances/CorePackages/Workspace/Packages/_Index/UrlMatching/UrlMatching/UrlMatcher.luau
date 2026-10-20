@@ -18,7 +18,7 @@ local config = {
 local UrlMatcherModule = {}
 UrlMatcherModule.__index = UrlMatcherModule
 
-function UrlMatcherModule.new(p1) --[[ Line: 66 ]]
+function UrlMatcherModule.new(p1)
 	-- upvalues: CryoModule (copy), config (copy), RegexModule (copy), ConstantsModule (copy), RegExpModule (copy), UrlMatcherModule (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1 or {})
 	local Text = RegexModule.oneOf(UnionResult.protocolPatterns) .. RegexModule.COLON .. RegexModule.SLASH .. RegexModule.SLASH
@@ -44,16 +44,16 @@ function UrlMatcherModule.new(p1) --[[ Line: 66 ]]
 	return config1
 end
 
-function UrlMatcherModule.default() --[[ Line: 108 ]]
+function UrlMatcherModule.default()
 	-- upvalues: UrlMatcherModule (copy), config (copy)
 	return UrlMatcherModule.new(config)
 end
 
-function UrlMatcherModule.match(p1, Text) --[[ Line: 119 ]]
+function UrlMatcherModule.match(p1, Text)
 	-- upvalues: MatchAllRegexModule (copy), StringTrimFunction (copy)
 	local List = {}
 	local v1 = 0
-	local Success, Result = pcall(function() --[[ Line: 122 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: MatchAllRegexModule (upval), Text (copy), p1 (copy), v1 (ref), StringTrimFunction (upval), List (copy)
 		for _, value in MatchAllRegexModule(Text:lower(), p1._urlPattern) do
 			local NewIndex = v1 + value.index

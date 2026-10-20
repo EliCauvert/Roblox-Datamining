@@ -7,7 +7,7 @@ local FoundationModule = require(Parent.Foundation)
 local TextButton = require(Parent.UIBlox).App.Button.TextButton
 local FFlagAppChatDomLocatorFoundationMigrationModule = require(AppChat.Flags.FFlagAppChatDomLocatorFoundationMigration)
 
-return function(p1) --[[ Line: 14 ]]
+return function(p1)
 	-- upvalues: ArgCheckModule (copy), RoactModule (copy), TextButton (copy), FFlagAppChatDomLocatorFoundationMigrationModule (copy), ReactModule (copy), FoundationModule (copy)
 	local LocalizedStrings = p1.localizedStrings
 	local IsDisabled = p1.isDisabled
@@ -16,7 +16,7 @@ return function(p1) --[[ Line: 14 ]]
 	local Element = RoactModule.createElement(TextButton, {
 		text = LocalizedStrings.systemButtonText,
 		isDisabled = IsDisabled,
-		onActivated = function() --[[ Line: 24 ]]
+		onActivated = function()
 			-- upvalues: IsDisabled (copy), OnActivatedFunction (copy), LocalizedStrings (copy)
 			if IsDisabled then return end
 			if OnActivatedFunction then

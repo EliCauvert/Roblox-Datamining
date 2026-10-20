@@ -1,6 +1,6 @@
 ﻿local FoundationModule = require(script:FindFirstAncestor("AvatarExperienceControlBar").Parent.Foundation)
 
-return function() --[[ Line: 6 | Named "useSemanticTokens" ]]
+return function()
 	-- upvalues: FoundationModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	

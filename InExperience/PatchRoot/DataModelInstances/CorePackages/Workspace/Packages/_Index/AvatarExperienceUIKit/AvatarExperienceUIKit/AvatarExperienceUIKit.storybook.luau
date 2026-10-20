@@ -13,18 +13,18 @@ local AppStyleProvider = require(Parent.Style).AppStyleProvider
 local AppStyleProvider1 = UIBloxModule.App.Style.AppStyleProvider
 local LocalizationProvider = require(Parent.Localization).LocalizationProvider
 
-local function createLocalization() --[[ Line: 19 ]]
+local function createLocalization()
 	return {
-		Format = function(_, p1) --[[ Line: 21 ]]
+		Format = function(_, p1)
 			return p1
 		end,
-		GetLocale = function(): string --[[ Line: 24 ]]
+		GetLocale = function(): string
 			return "locale"
 		end
 	}
 end
 
-local function createStore() --[[ Line: 30 ]]
+local function createStore()
 	-- upvalues: RoduxModule (copy)
 	return RoduxModule.Store.new(RoduxModule.createReducer({}, {}))
 end
@@ -42,9 +42,9 @@ return {
 	group = "AvatarExperience",
 	roact = ReactModule,
 	reactRoblox = require(Parent.Dev.ReactRoblox),
-	mapStory = function(p1) --[[ Line: 59 ]]
+	mapStory = function(p1)
 		-- upvalues: config (copy), ReactModule (copy), RoactRoduxModule (copy), createStore (copy), FoundationProvider (copy), config1 (copy), AppStyleProvider1 (copy), config2 (copy), AppStyleProvider (copy), DesignTokenProvider (copy), LocalizationProvider (copy), createLocalization (copy)
-		return function(p2) --[[ Line: 60 ]]
+		return function(p2)
 			-- upvalues: config (upval), ReactModule (upval), RoactRoduxModule (upval), createStore (upval), FoundationProvider (upval), config1 (upval), p1 (copy), AppStyleProvider1 (upval), config2 (upval), AppStyleProvider (upval), DesignTokenProvider (upval), LocalizationProvider (upval), createLocalization (upval)
 			local Entry = config[p2.theme]
 			

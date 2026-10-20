@@ -2,15 +2,15 @@
 local ReactModule = require(Parent.React)
 local _ = require(Parent.AppCommonLib)
 
-return function(p1, p2) --[[ Line: 15 | Named "useSignal" ]]
+return function(p1, p2)
 	-- upvalues: ReactModule (copy)
-	ReactModule.useEffect(function() --[[ Line: 16 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), p2 (copy)
 		if not p1 then return end
 		assert(p1 ~= nil, "signal is not nil")
 		local Connection = p1:connect(p2)
 		
-		return function() --[[ Line: 23 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:disconnect()
 		end

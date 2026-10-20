@@ -5,7 +5,7 @@ local _ = require(Parent.ShareLinksNetworking)
 local FFlagAppChatPlusReferralAssetCardModule = require(AppChat.Flags.FFlagAppChatPlusReferralAssetCard)
 local Text = require(Parent.Http).Url.APIS_URL .. "deeplinks/v2/resolve"
 
-local function decodeResolvedShareLink(p1) --[[ Line: 16 ]]
+local function decodeResolvedShareLink(p1)
 	-- upvalues: FFlagAppChatPlusReferralAssetCardModule (copy)
 	if type(p1) ~= "table" or type(p1.linkType) ~= "string" or type(p1.targetId) ~= "string" or type(p1.status) ~= "string" then
 		error("Malformed deeplinks/v2/resolve response")
@@ -25,7 +25,7 @@ local function decodeResolvedShareLink(p1) --[[ Line: 16 ]]
 	end
 end
 
-return function(LinkId, Network) --[[ Line: 38 | Named "fetchResolvedShareLink" ]]
+return function(LinkId, Network)
 	-- upvalues: HttpClientModule (copy), Text (copy), decodeResolvedShareLink (copy)
 	return HttpClientModule.fetch({
 		method = "POST",

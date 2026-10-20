@@ -1,7 +1,7 @@
 ﻿local UnifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
 local AvatarScreenProperties = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceNavigation).AvatarRoute.AvatarScreenProperties
 
-return function(Object, p1) --[[ Line: 10 | Named "resolveClickSurface" ]]
+return function(Object, p1)
 	-- upvalues: UnifiedEventLogConstantsModule (copy), AvatarScreenProperties (copy)
 	if Object:GetAttribute(UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "surface") ~= nil then
 		return nil

@@ -5,7 +5,7 @@ local AnalyticsWindowModule = require(BuildExperience.Analytics.AnalyticsWindow)
 local AnalyticsOverviewViewModule = require(script.Parent.AnalyticsOverviewView)
 local UseAnalyticsOverviewViewModelModule = require(script.Parent.useAnalyticsOverviewViewModel)
 
-return function(p1) --[[ Line: 24 | Named "AnalyticsOverview" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), AnalyticsWindowModule (copy), UseAnalyticsOverviewViewModelModule (copy), AnalyticsOverviewViewModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(p1.initialWindowId or AnalyticsWindowModule.DEFAULT_WINDOW_ID)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
@@ -23,7 +23,7 @@ return function(p1) --[[ Line: 24 | Named "AnalyticsOverview" ]]
 		universeId = p1.universeId,
 		window = WindowByIdEntry,
 		sheet = UseAnalyticsOverviewViewModelModuleResult.sheet,
-		onSheetClose = ReactModule.useCallback(function() --[[ Line: 37 ]]
+		onSheetClose = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2_1 (copy)
 			UseStateResult2_1(nil)
 		end, {}),

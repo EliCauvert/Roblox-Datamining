@@ -1,6 +1,6 @@
 ﻿local FontScalesModule = require(script:FindFirstAncestor("Foundation").Components.Text.FontScales)
 
-return function(Value: number, p1: number, p2: number): number --[[ Line: 5 ]]
+return function(Value: number, p1: number, p2: number): number
 	-- upvalues: FontScalesModule (copy)
 	if Value <= 0 or p1 <= 0 then
 		return 0

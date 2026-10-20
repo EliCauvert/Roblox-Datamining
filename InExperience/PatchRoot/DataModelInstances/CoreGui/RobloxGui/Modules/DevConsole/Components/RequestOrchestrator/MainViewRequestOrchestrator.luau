@@ -32,7 +32,7 @@ local config = {
 	CacheHit = { RequestOrchestratorDataModule.recordCacheHit }
 }
 
-local function makeLabel(Text, LayoutOrder) --[[ Line: 37 ]]
+local function makeLabel(Text, LayoutOrder)
 	-- upvalues: RoactModule (copy), _Color3 (copy), Mono (copy)
 	return RoactModule.createElement("TextLabel", {
 		BackgroundTransparency = 1,
@@ -47,7 +47,7 @@ local function makeLabel(Text, LayoutOrder) --[[ Line: 37 ]]
 	})
 end
 
-local function _(List) --[[ Line: 51 | Named "cloneSet" ]]
+local function _(List)
 	local t = {}
 	
 	for i, value in pairs(List) do
@@ -58,18 +58,18 @@ end
 
 local MainViewRequestOrchestrator = RoactModule.Component:extend("MainViewRequestOrchestrator")
 
-function MainViewRequestOrchestrator.init(p1) --[[ Line: 61 ]]
+function MainViewRequestOrchestrator.init(p1)
 	-- upvalues: RequestOrchestratorDataModule (copy), RoactModule (copy)
 	p1.model = RequestOrchestratorDataModule.new()
 	p1.connections = {}
 	p1.utilRef = RoactModule.createRef()
 	
-	function p1.onUtilTabHeightChanged(UtilTabHeight) --[[ Line: 66 ]]
+	function p1.onUtilTabHeightChanged(UtilTabHeight)
 		-- upvalues: p1 (copy)
 		p1:setState({ utilTabHeight = UtilTabHeight })
 	end
 	
-	function p1.onTypeToggle(Key) --[[ Line: 70 ]]
+	function p1.onTypeToggle(Key)
 		-- upvalues: p1 (copy)
 		local SelectedTypes = {}
 		
@@ -83,7 +83,7 @@ function MainViewRequestOrchestrator.init(p1) --[[ Line: 61 ]]
 	p1.state = { utilTabHeight = 0, selectedTypes = {} }
 end
 
-function MainViewRequestOrchestrator.observeType(Model, OrchestratorType) --[[ Line: 83 ]]
+function MainViewRequestOrchestrator.observeType(Model, OrchestratorType)
 	-- upvalues: RequestOrchestratorDataModule (copy)
 	local ObserveTypeResult = RequestOrchestratorDataModule.observeType(Model.model, OrchestratorType)
 	
@@ -98,11 +98,11 @@ function MainViewRequestOrchestrator.observeType(Model, OrchestratorType) --[[ L
 	end
 end
 
-function MainViewRequestOrchestrator.didMount(p2) --[[ Line: 92 ]]
+function MainViewRequestOrchestrator.didMount(p2)
 	-- upvalues: RequestOrchestratorDataModule (copy), config (copy), RunService (copy)
 	p2:setState({ utilTabHeight = p2.utilRef.current.Size.Y.Offset })
 	local RequestOrchestratorService = game:GetService("RequestOrchestratorService")
-	local Success, Result = pcall(function() --[[ Line: 101 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: RequestOrchestratorService (copy)
 		return RequestOrchestratorService:GetRegisteredOrchestrators()
 	end)
@@ -123,7 +123,7 @@ function MainViewRequestOrchestrator.didMount(p2) --[[ Line: 92 ]]
 		end
 	end
 	for i1, value1 in pairs(config) do
-		p2.connections[i1] = RequestOrchestratorService[i1]:Connect(function(p3) --[[ Line: 116 ]]
+		p2.connections[i1] = RequestOrchestratorService[i1]:Connect(function(p3)
 			-- upvalues: p2 (copy), value1 (copy)
 			local OrchestratorType = p3.orchestratorType or "Unknown"
 			p2:observeType(OrchestratorType)
@@ -134,21 +134,21 @@ function MainViewRequestOrchestrator.didMount(p2) --[[ Line: 92 ]]
 			p2:setState({})
 		end)
 	end
-	p2.connections.heartbeat = RunService.Heartbeat:Connect(function() --[[ Line: 127 ]]
+	p2.connections.heartbeat = RunService.Heartbeat:Connect(function()
 		-- upvalues: RequestOrchestratorDataModule (upval), p2 (copy)
 		RequestOrchestratorDataModule.advanceTime(p2.model)
 		p2:setState({})
 	end)
 end
 
-function MainViewRequestOrchestrator.willUnmount(p3) --[[ Line: 133 ]]
+function MainViewRequestOrchestrator.willUnmount(p3)
 	for _, connection in pairs(p3.connections) do
 		connection:Disconnect()
 	end
 	p3.connections = {}
 end
 
-function MainViewRequestOrchestrator.didUpdate(p4) --[[ Line: 140 ]]
+function MainViewRequestOrchestrator.didUpdate(p4)
 	local Offset = p4.utilRef.current.Size.Y.Offset
 	
 	if Offset ~= p4.state.utilTabHeight then
@@ -156,7 +156,7 @@ function MainViewRequestOrchestrator.didUpdate(p4) --[[ Line: 140 ]]
 	end
 end
 
-function MainViewRequestOrchestrator.render(p4) --[[ Line: 147 ]]
+function MainViewRequestOrchestrator.render(p4)
 	-- upvalues: RoactModule (copy), MainRowPadding (copy), UtilAndTabModule (copy), makeLabel (copy), DropDownModule (copy), OrchestratorRowModule (copy), ConstantsModule (copy)
 	local Size = p4.props.size
 	local SelectedTypes = p4.state.selectedTypes

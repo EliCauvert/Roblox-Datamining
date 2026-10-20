@@ -200,7 +200,7 @@ local config = {
 	}
 }
 
-local function Scan(p1, Parent, p2, p3) --[[ Line: 316 ]]
+local function Scan(p1, Parent, p2, p3)
 	-- upvalues: t (copy), NewInstances (copy), Scan (copy)
 	local NewInstance = Instance.new(p1.Type)
 	
@@ -242,7 +242,7 @@ local function Scan(p1, Parent, p2, p3) --[[ Line: 316 ]]
 	return NewInstance
 end
 
-return function(p4, p5) --[[ Line: 354 ]]
+return function(p4, p5)
 	-- upvalues: Scan (copy), config (copy)
 	return (Scan(config, nil, p4, p5))
 end

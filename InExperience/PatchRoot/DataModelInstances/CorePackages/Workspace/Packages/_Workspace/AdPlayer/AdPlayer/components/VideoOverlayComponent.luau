@@ -19,7 +19,7 @@ local AdDropdownButtonOpen = FlagsModule.GetAdDropdownButtonOpen()
 local AdPlayerExitButton = FlagsModule.GetAdPlayerExitButton()
 local _Font = Font.new("rbxasset://fonts/families/Inconsolata.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
 
-local function ExitButtonComponent(p1) --[[ Line: 30 ]]
+local function ExitButtonComponent(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Image (copy), AdPlayerExitButton (copy)
 	return ReactModule.createElement(View, {
 		tag = "size-900 radius-circle",
@@ -33,12 +33,12 @@ local function ExitButtonComponent(p1) --[[ Line: 30 ]]
 	})
 end
 
-local function TimerComponent(p1) --[[ Line: 45 ]]
+local function TimerComponent(p1)
 	-- upvalues: ReactModule (copy), Text (copy), _Font (copy)
 	return ReactModule.createElement(Text, {
 		tag = "size-0-500 auto-x content-emphasis",
 		LayoutOrder = 2,
-		Text = p1.alpha:map(function(p2: number): string --[[ Line: 49 ]]
+		Text = p1.alpha:map(function(p2: number): string
 			-- upvalues: p1 (copy)
 			local Ceiled = math.ceil((1 - p2) * p1.totalDuration)
 			
@@ -48,22 +48,22 @@ local function TimerComponent(p1) --[[ Line: 45 ]]
 	})
 end
 
-local function ScrimComponent(p1) --[[ Line: 63 ]]
+local function ScrimComponent(p1)
 	-- upvalues: UseTokensFunction (copy), ReactOtterModule (copy), ReactModule (copy), View (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
-	ReactModule.useEffect(function() --[[ Line: 67 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
 		if not p1.showScrim then
 			local Flag = false
-			task.delay(2, function() --[[ Line: 72 ]]
+			task.delay(2, function()
 				-- upvalues: Flag (ref), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval)
 				if not Flag then
 					UseAnimatedBindingResult2(ReactOtterModule.spring(1))
 				end
 			end)
 			
-			return function() --[[ Line: 78 ]]
+			return function()
 				-- upvalues: Flag (ref)
 				Flag = true
 			end
@@ -87,14 +87,14 @@ local function ScrimComponent(p1) --[[ Line: 63 ]]
 	}, Copy)
 end
 
-local function TopContainer(p1) --[[ Line: 100 ]]
+local function TopContainer(p1)
 	-- upvalues: ReactModule (copy), View (copy)
 	return ReactModule.createElement(View, {
 		tag = "size-full-1500 anchor-top-center position-top-center padding-x-medium padding-y-medium"
 	}, p1.children)
 end
 
-local function BottomContainer(p1) --[[ Line: 106 ]]
+local function BottomContainer(p1)
 	-- upvalues: ReactModule (copy), View (copy)
 	return ReactModule.createElement(View, {
 		tag = "size-full-700 anchor-bottom-center padding-x-medium",
@@ -102,7 +102,7 @@ local function BottomContainer(p1) --[[ Line: 106 ]]
 	}, p1.children)
 end
 
-local function BottomContainerListContainer(p1) --[[ Line: 113 ]]
+local function BottomContainerListContainer(p1)
 	-- upvalues: FlagsModule (copy), ReactModule (copy), View (copy)
 	return ReactModule.createElement(View, {
 		Position = if FlagsModule.GetEnableLuaRewardTimerUI() then UDim2.fromOffset(0, p1.yOffset or 0) else nil,
@@ -110,20 +110,20 @@ local function BottomContainerListContainer(p1) --[[ Line: 113 ]]
 	}, p1.children)
 end
 
-return (ReactModule.forwardRef(function(p2, p3) --[[ Line: 142 ]]
+return (ReactModule.forwardRef(function(p2, p3)
 	-- upvalues: ReactModule (copy), UseTokensFunction (copy), View (copy), StateLayerAffordance (copy), BottomContainer (copy), AdDropdownMenu (copy), BottomContainerListContainer (copy), AdLabelComponentModule (copy), AdDropdownButtonOpen (copy), AdDropdownButtonDefault (copy), FlagsModule (copy), GetRewardInComponentModule (copy), ScrimComponent (copy), LinearProgressComponentModule (copy), TimerComponent (copy), TopContainer (copy), ExitButtonComponent (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local UseTokensResult = UseTokensFunction()
 	
-	local function dismissModals() --[[ Line: 147 ]]
+	local function dismissModals()
 		-- upvalues: p2 (copy), UseStateResult2 (copy)
 		p2.setPaused(false)
 		p2.dismissModals()
 		UseStateResult2(false)
 	end
 	
-	local function handleToggleAdsModal() --[[ Line: 153 ]]
+	local function handleToggleAdsModal()
 		-- upvalues: p2 (copy), UseStateResult2 (copy), UseStateResult (copy)
 		p2.setPaused(false)
 		p2.dismissModals()
@@ -135,11 +135,11 @@ return (ReactModule.forwardRef(function(p2, p3) --[[ Line: 142 ]]
 		end
 	end
 	
-	ReactModule.useImperativeHandle(p3, function() --[[ Line: 162 ]]
+	ReactModule.useImperativeHandle(p3, function()
 		-- upvalues: dismissModals (copy)
 		return { dismissModals = dismissModals }
 	end)
-	ReactModule.useEffect(function() --[[ Line: 168 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult1 (copy), UseStateResult2_1 (copy)
 		if UseStateResult1 then
 			UseStateResult2_1(false)
@@ -148,7 +148,7 @@ return (ReactModule.forwardRef(function(p2, p3) --[[ Line: 142 ]]
 	
 	return ReactModule.createElement(View, {
 		tag = "size-full",
-		onActivated = function() --[[ Line: 176 ]]
+		onActivated = function()
 			-- upvalues: p2 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy)
 			p2.setPaused(false)
 			p2.dismissModals()

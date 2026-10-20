@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("MomentsCreationMusicSearchStateFix", false)
 
-return function() --[[ Line: 10 ]]
+return function()
 	return game:GetFastFlag("MomentsCreationMusicSearchStateFix")
 end

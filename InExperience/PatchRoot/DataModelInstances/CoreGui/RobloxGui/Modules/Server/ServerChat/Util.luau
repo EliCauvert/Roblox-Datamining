@@ -8,7 +8,7 @@ Util.__index = Util
 local Module = {}
 Module.__index = Module
 
-function Module.RebuildProcessCommandsPriorities(p1) --[[ Line: 25 ]]
+function Module.RebuildProcessCommandsPriorities(p1)
 	p1.RegisteredPriorites = {}
 	local Flag = nil
 	
@@ -23,22 +23,22 @@ function Module.RebuildProcessCommandsPriorities(p1) --[[ Line: 25 ]]
 			table.insert(p1.RegisteredPriorites, i)
 		end
 	end
-	table.sort(p1.RegisteredPriorites, function(A, B): boolean --[[ Line: 37 ]]
+	table.sort(p1.RegisteredPriorites, function(A, B): boolean
 		return B < A
 	end)
 end
 
-function Module.HasFunction(p2, p3): boolean --[[ Line: 42 ]]
+function Module.HasFunction(p2, p3): boolean
 	return p2.RegisteredFunctions[p3] ~= nil
 end
 
-function Module.RemoveFunction(p2, p3) --[[ Line: 49 ]]
+function Module.RemoveFunction(p2, p3)
 	p2.RegisteredFunctions[p3] = nil
 	p2.FunctionMap[p2.RegisteredFunctions[p3]][p3] = nil
 	p2:RebuildProcessCommandsPriorities()
 end
 
-function Module.AddFunction(p2, Text, p3, StandardPriority1) --[[ Line: 56 ]]
+function Module.AddFunction(p2, Text, p3, StandardPriority1)
 	-- upvalues: StandardPriority (ref)
 	if StandardPriority1 == nil then
 		StandardPriority1 = StandardPriority
@@ -55,12 +55,12 @@ function Module.AddFunction(p2, Text, p3, StandardPriority1) --[[ Line: 56 ]]
 	p2:RebuildProcessCommandsPriorities()
 end
 
-function Module.GetIterator(p2) --[[ Line: 75 ]]
+function Module.GetIterator(p2)
 	local Count = 1
 	local v1 = nil
 	local v2 = nil
 	
-	return function() --[[ Line: 80 ]]
+	return function()
 		-- upvalues: Count (ref), p2 (copy), v1 (ref), v2 (ref)
 		local RegisteredPriorite = nil
 		while true do
@@ -77,7 +77,7 @@ function Module.GetIterator(p2) --[[ Line: 75 ]]
 end
 
 local config = {
-	new = function() --[[ Line: 96 ]]
+	new = function()
 		-- upvalues: Module (copy)
 		local self = setmetatable({}, Module)
 		self.RegisteredFunctions = {}
@@ -88,7 +88,7 @@ local config = {
 	end
 }
 
-function Util:NewSortedFunctionContainer() --[[ Line: 107 ]]
+function Util:NewSortedFunctionContainer()
 	-- upvalues: config (copy)
 	return config.new()
 end

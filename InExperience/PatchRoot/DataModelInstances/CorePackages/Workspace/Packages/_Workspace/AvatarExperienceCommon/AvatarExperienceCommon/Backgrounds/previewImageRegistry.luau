@@ -1,15 +1,15 @@
 ﻿local t = {}
 
 return {
-	register = function(Key, p1) --[[ Line: 5 ]]
+	register = function(Key, p1)
 		-- upvalues: t (ref)
 		t[Key] = p1
 	end,
-	resolve = function(p1) --[[ Line: 9 ]]
+	resolve = function(p1)
 		-- upvalues: t (ref)
 		return t[p1]
 	end,
-	destroy = function(Key) --[[ Line: 13 ]]
+	destroy = function(Key)
 		-- upvalues: t (ref)
 		local Entry = t[Key]
 		
@@ -18,7 +18,7 @@ return {
 			Entry:Destroy()
 		end
 	end,
-	clear = function() --[[ Line: 21 ]]
+	clear = function()
 		-- upvalues: t (ref)
 		local t1 = t
 		t = {}

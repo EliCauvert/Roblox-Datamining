@@ -8,11 +8,11 @@ return require(Foundation.Parent.React).createContext({
 	anchorUri = nil,
 	isOpen = false,
 	testId = "",
-	setAnchor = function(_) --[[ Line: 13 ]]
+	setAnchor = function(_)
 		-- upvalues: LoggerModule (copy)
 		LoggerModule:warning("No PopoverProvider found for Popover")
 	end,
-	setAnchorUri = function(_) --[[ Line: 17 ]]
+	setAnchorUri = function(_)
 		-- upvalues: LoggerModule (copy)
 		LoggerModule:warning("No PopoverProvider found for Popover")
 	end

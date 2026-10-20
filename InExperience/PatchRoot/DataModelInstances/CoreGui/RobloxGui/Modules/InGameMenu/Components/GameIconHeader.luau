@@ -4,9 +4,9 @@ local Parent = script.Parent.Parent
 local ThemedTextLabelModule = require(Parent.Components.ThemedTextLabel)
 local GameIconModule = require(Parent.Components.GameIcon)
 
-return InGameMenuDependenciesModule.RoactRodux.UNSTABLE_connect2(function(p1) --[[ Line: 47 ]]
+return InGameMenuDependenciesModule.RoactRodux.UNSTABLE_connect2(function(p1)
 	return { gameName = p1.gameInfo.name }
-end)(function(p1) --[[ Line: 17 | Named "GameIconHeader" ]]
+end)(function(p1)
 	-- upvalues: Roact (copy), GameIconModule (copy), ThemedTextLabelModule (copy)
 	return Roact.createElement("ImageLabel", {
 		BackgroundTransparency = 1,

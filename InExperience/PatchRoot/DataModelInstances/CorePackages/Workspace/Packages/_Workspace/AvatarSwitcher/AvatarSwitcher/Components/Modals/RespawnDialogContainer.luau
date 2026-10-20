@@ -11,18 +11,18 @@ local RespawnAvatarModule = require(AvatarSwitcher.Utils.respawnAvatar)
 local ConstantsModule = require(AvatarSwitcher.Constants)
 local FFlagAvatarSwitcherCounters = require(Parent.AvatarExperienceFlags).FFlagAvatarSwitcherCounters
 
-return function(p1) --[[ Line: 31 | Named "RespawnDialogContainer" ]]
+return function(p1)
 	-- upvalues: SignalsReactModule (copy), GetAvatarSwitcherStoreModule (copy), ReactModule (copy), UseEventConnectionFunction (copy), FFlagAvatarSwitcherCounters (copy), SendAXCounterV2Function (copy), ConstantsModule (copy), RespawnAvatarModule (copy), RespawnChoiceDialogModule (copy), RespawnLaterDialogModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetAvatarSwitcherStoreModule)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(UseSignalStateResult.getRespawnPromptShown)
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 35 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 		-- upvalues: p1 (copy)
 		local RespawnBehaviour, _ = p1.getRespawnBehaviour()
 		
 		return RespawnBehaviour
 	end)
 	UseEventConnectionFunction(p1.respawnBehaviorChangedEvent.Event, UseStateResult2, {})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 42 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseSignalStateResult (copy), p1 (copy), FFlagAvatarSwitcherCounters (upval), SendAXCounterV2Function (upval), ConstantsModule (upval), RespawnAvatarModule (upval)
 		UseSignalStateResult.toggleRespawnPrompt(false)
 		p1.toggleWindow()
@@ -33,7 +33,7 @@ return function(p1) --[[ Line: 31 | Named "RespawnDialogContainer" ]]
 		UseSignalStateResult.switchAvatar()
 		RespawnAvatarModule(p1.getRespawnBehaviour)
 	end, { p1.getRespawnBehaviour, p1.toggleWindow })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 53 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseSignalStateResult (copy), p1 (copy), FFlagAvatarSwitcherCounters (upval), SendAXCounterV2Function (upval), ConstantsModule (upval), UseStateResult (copy)
 		UseSignalStateResult.toggleRespawnPrompt(false)
 		p1.toggleWindow()
@@ -43,7 +43,7 @@ return function(p1) --[[ Line: 31 | Named "RespawnDialogContainer" ]]
 		end
 		UseSignalStateResult.switchAvatar()
 	end, { p1.toggleWindow })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 63 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: FFlagAvatarSwitcherCounters (upval), SendAXCounterV2Function (upval), ConstantsModule (upval), UseSignalStateResult (copy)
 		if FFlagAvatarSwitcherCounters then
 			SendAXCounterV2Function(ConstantsModule.Counters.CancelSwitchAvatar)

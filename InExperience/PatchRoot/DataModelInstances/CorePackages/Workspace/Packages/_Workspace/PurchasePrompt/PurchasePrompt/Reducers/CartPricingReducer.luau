@@ -3,20 +3,20 @@ local Parent = PurchasePrompt.Parent
 local _ = require(Parent.IAPExperience)
 local config = { response = nil, isFetching = false, requestId = nil }
 
-local function clear() --[[ Line: 52 ]]
+local function clear()
 	-- upvalues: config (copy)
 	return config
 end
 
 return (require(Parent.PurchasePromptDeps).Rodux.createReducer(config, {
-	[require(PurchasePrompt.Actions.SetCartPricingFetching).name] = function(p1, p2) --[[ Line: 57 ]]
+	[require(PurchasePrompt.Actions.SetCartPricingFetching).name] = function(p1, p2)
 		return {
 			isFetching = true,
 			response = p1.response,
 			requestId = p2.requestId
 		}
 	end,
-	[require(PurchasePrompt.Actions.SetCartPricingResponse).name] = function(p1, p2) --[[ Line: 60 ]]
+	[require(PurchasePrompt.Actions.SetCartPricingResponse).name] = function(p1, p2)
 		return {
 			isFetching = false,
 			response = p2.response,

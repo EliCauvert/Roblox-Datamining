@@ -7,7 +7,7 @@ local FFlagMomentsPassFeedItemIdToBackendApis = require(Parent.SharedFlags).FFla
 local FFlagAppChatPlusReferralAssetCardModule = require(AppChat.Flags.FFlagAppChatPlusReferralAssetCard)
 local ShareLinkTargetIdType = require(Parent.MomentsTypes).Enums.ShareLinkTargetIdType
 
-local function _(p1) --[[ Line: 23 | Named "getTargetIdType" ]]
+local function _(p1)
 	-- upvalues: FFlagMomentsPassFeedItemIdToBackendApis (copy), HttpService (copy), ShareLinkTargetIdType (copy)
 	if FFlagMomentsPassFeedItemIdToBackendApis and p1 ~= "" then
 		local Success, Result = pcall(HttpService.JSONDecode, HttpService, p1)
@@ -18,7 +18,7 @@ local function _(p1) --[[ Line: 23 | Named "getTargetIdType" ]]
 	end
 end
 
-return function(p1) --[[ Line: 40 | Named "classifyShareLinkV2" ]]
+return function(p1)
 	-- upvalues: ShareLinkClassificationModule (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), HttpService (copy), ShareLinkTargetIdType (copy), FFlagAppChatPlusReferralAssetCardModule (copy)
 	if p1.status ~= "Valid" then
 		return { type = ShareLinkClassificationModule.Invalid }

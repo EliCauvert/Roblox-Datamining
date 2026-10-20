@@ -20,21 +20,21 @@ local config2 = {
 }
 
 return {
-	logAdDisclosureMenuToggled = function(IsOpened) --[[ Line: 42 ]]
+	logAdDisclosureMenuToggled = function(IsOpened)
 		-- upvalues: TelemetryService (copy), config (copy), StandardizedFields (copy)
 		TelemetryService:LogCounter(config, {
 			standardizedFields = StandardizedFields,
 			customFields = { isOpened = IsOpened }
 		}, 1)
 	end,
-	logAdDisclosureWhyThisAdToggled = function(IsOpened) --[[ Line: 50 ]]
+	logAdDisclosureWhyThisAdToggled = function(IsOpened)
 		-- upvalues: TelemetryService (copy), config1 (copy), StandardizedFields (copy)
 		TelemetryService:LogCounter(config1, {
 			standardizedFields = StandardizedFields,
 			customFields = { isOpened = IsOpened }
 		}, 1)
 	end,
-	logAdPreferencesLinkClicked = function() --[[ Line: 58 ]]
+	logAdPreferencesLinkClicked = function()
 		-- upvalues: TelemetryService (copy), config2 (copy), StandardizedFields (copy)
 		TelemetryService:LogCounter(config2, {
 			standardizedFields = StandardizedFields,

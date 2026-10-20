@@ -2,7 +2,7 @@
 local Birthday = require(Parent.AuthCommon).Models.Birthday
 local DateHelper = require(Parent.Time).DateHelper
 
-return function(Month, Day, Year, p1): boolean --[[ Line: 8 ]]
+return function(Month, Day, Year, p1): boolean
 	-- upvalues: DateHelper (copy), Birthday (copy)
 	local IsValidDate, _ = DateHelper:isValidDate(Month, Day, Year)
 	

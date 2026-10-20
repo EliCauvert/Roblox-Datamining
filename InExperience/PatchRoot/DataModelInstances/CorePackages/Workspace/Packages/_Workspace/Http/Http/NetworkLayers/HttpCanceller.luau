@@ -1,11 +1,11 @@
 ﻿local Count = 0
 
 return {
-	currentSession = function() --[[ Line: 5 ]]
+	currentSession = function()
 		-- upvalues: Count (ref)
 		return Count
 	end,
-	cancel = function() --[[ Line: 9 ]]
+	cancel = function()
 		-- upvalues: Count (ref)
 		Count += 1
 	end

@@ -52,19 +52,19 @@ ChatConversation.defaultProps = {
 	itemList = {},
 	inputBoxRef = nil,
 	wideMode = false,
-	getOlderMessages = function() --[[ Line: 72 ]] end,
+	getOlderMessages = function() end,
 	isDebugEnabled = false,
-	sendMessage = function() --[[ Line: 74 ]] end,
-	navigateToToast = function() --[[ Line: 75 ]] end,
-	markConversationAsRead = function() --[[ Line: 76 ]] end,
-	postTypingStatus = function() --[[ Line: 77 ]] end,
-	navigateBack = function() --[[ Line: 78 ]] end,
-	openViewProfile = function() --[[ Line: 79 ]] end,
-	updateConversationTitle = function() --[[ Line: 80 ]] end,
-	openGameDetailsPage = function() --[[ Line: 81 ]] end,
-	navigateToScreen = function() --[[ Line: 82 ]] end,
-	navigateToSquadLobby = function() --[[ Line: 83 ]] end,
-	onChatInputBarReady = function() --[[ Line: 84 ]] end,
+	sendMessage = function() end,
+	navigateToToast = function() end,
+	markConversationAsRead = function() end,
+	postTypingStatus = function() end,
+	navigateBack = function() end,
+	openViewProfile = function() end,
+	updateConversationTitle = function() end,
+	openGameDetailsPage = function() end,
+	navigateToScreen = function() end,
+	navigateToSquadLobby = function() end,
+	onChatInputBarReady = function() end,
 	viewProfileOnAvatarPressed = true,
 	chatInputPlaceholder = "Say something",
 	usersTyping = {},
@@ -79,24 +79,24 @@ ChatConversation.defaultProps = {
 	severalUsersTyping = "PLACEHOLDER Several users are typing...",
 	bottomModalText = "PLACEHOLDER At this time, Chat is not available with this user.",
 	readingMessagesIsEnabled = true,
-	onConversationUnmount = function() --[[ Line: 99 ]] end,
+	onConversationUnmount = function() end,
 	chatIsVisible = true,
 	moreMenuEnabled = false,
 	keyboardOffset = nil,
 	replyingToMessageId = nil,
 	replyingToMessage = nil,
-	replyingToMessageDispatch = function() --[[ Line: 106 ]] end,
+	replyingToMessageDispatch = function() end,
 	shouldShowChatInputBar = true,
 	shouldDisableChatInputBar = false,
 	shouldShowLegacyBottomModal = false,
-	telemetry = { emit = function() --[[ Line: 111 ]] end },
+	telemetry = { emit = function() end },
 	scrollToTopOnInitialOsaLoad = false,
 	isInitialMessageLoading = false,
 	displayNamesAvailable = true,
 	shouldHideMoreMenuButton = false
 }
 
-function ChatConversation.init(p1) --[[ Line: 119 ]]
+function ChatConversation.init(p1)
 	-- upvalues: RoactModule (copy), UserInputService (copy), MemoizeFunction (copy), NewResult (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), StatusCodes (copy), SendMessageErrorModule (copy), ChatConversationTelemetryEventsModule (copy), _DateTime (copy), ConversationExitTypeModule (copy), GetReplyingToStoreModule (copy), GlobalLongPressSignalModule (copy), FocusNavigationService (copy), CoreGui (copy)
 	p1.state = {
 		inputBarHeight = 0,
@@ -111,7 +111,7 @@ function ChatConversation.init(p1) --[[ Line: 119 ]]
 	p1.conversationViewRef = RoactModule.createRef()
 	p1.messageListRef = RoactModule.createRef()
 	
-	function p1.getKeyboardOffset() --[[ Line: 134 ]]
+	function p1.getKeyboardOffset()
 		-- upvalues: UserInputService (upval), p1 (copy)
 		if UserInputService.OnScreenKeyboardVisible and p1.inputBoxRef:getValue() and p1.inputBoxRef:getValue():IsFocused() then
 			if p1.props.keyboardOffset ~= nil then
@@ -126,7 +126,7 @@ function ChatConversation.init(p1) --[[ Line: 119 ]]
 		return 0
 	end
 	
-	function p1.updateKeyboardOffset() --[[ Line: 157 ]]
+	function p1.updateKeyboardOffset()
 		-- upvalues: p1 (copy)
 		if not p1.isMounted then return end
 		local KeyboardOffset = p1.getKeyboardOffset()
@@ -136,7 +136,7 @@ function ChatConversation.init(p1) --[[ Line: 119 ]]
 		end
 	end
 	
-	function p1.onKeyboardOffsetChanged(KeyboardOffset: number) --[[ Line: 169 ]]
+	function p1.onKeyboardOffsetChanged(KeyboardOffset: number)
 		-- upvalues: p1 (copy)
 		if not p1.isMounted then return end
 		if not p1.inputBoxRef:getValue() or not p1.inputBoxRef:getValue():IsFocused() then
@@ -147,28 +147,28 @@ function ChatConversation.init(p1) --[[ Line: 119 ]]
 		end
 	end
 	
-	function p1.clearKeyboardOffset() --[[ Line: 186 ]]
+	function p1.clearKeyboardOffset()
 		-- upvalues: p1 (copy)
 		p1:setState({ keyboardOffset = 0 })
 	end
 	
-	p1.loadNext = MemoizeFunction(function(Callback, p2) --[[ Line: 192 ]]
+	p1.loadNext = MemoizeFunction(function(Callback, p2)
 		-- upvalues: p1 (copy)
-		return function() --[[ Line: 193 ]]
+		return function()
 			-- upvalues: Callback (copy), p2 (copy), p1 (upval)
 			local CallbackResult = Callback(p2)
 			
 			if CallbackResult then
-				CallbackResult:catch(function() --[[ Line: 196 ]]
+				CallbackResult:catch(function()
 					-- upvalues: p1 (upval)
 					p1.showNetworkErrorToast()
 				end)
 			end
 		end
 	end)
-	p1.markAsRead = MemoizeFunction(function(Callback, p2) --[[ Line: 203 ]]
+	p1.markAsRead = MemoizeFunction(function(Callback, p2)
 		-- upvalues: p1 (copy)
-		return function() --[[ Line: 204 ]]
+		return function()
 			-- upvalues: p1 (upval), Callback (copy), p2 (copy)
 			if p1.props.readingMessagesIsEnabled then
 				Callback(p2)
@@ -176,7 +176,7 @@ function ChatConversation.init(p1) --[[ Line: 119 ]]
 		end
 	end)
 	
-	function p1.showNetworkErrorToast() --[[ Line: 211 ]]
+	function p1.showNetworkErrorToast()
 		-- upvalues: p1 (copy)
 		p1.props.navigateToToast({
 			toastProps = {
@@ -185,9 +185,9 @@ function ChatConversation.init(p1) --[[ Line: 119 ]]
 		})
 	end
 	
-	p1.onSendChat = MemoizeFunction(function(Callback1, p2, Callback3, p3, p4, Callback2, Callback, p5) --[[ Line: 222 ]]
+	p1.onSendChat = MemoizeFunction(function(Callback1, p2, Callback3, p3, p4, Callback2, Callback, p5)
 		-- upvalues: NewResult (upval), FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), AppChatPerfTrackerModule (upval), FFlagAppChatSignalsReplyStoreModule (upval), p1 (copy), StatusCodes (upval), SendMessageErrorModule (upval), ChatConversationTelemetryEventsModule (upval), _DateTime (upval)
-		return function(p6) --[[ Line: 232 ]]
+		return function(p6)
 			-- upvalues: p4 (copy), NewResult (upval), p2 (ref), Callback2 (copy), p3 (copy), Callback (copy), FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), AppChatPerfTrackerModule (upval), FFlagAppChatSignalsReplyStoreModule (upval), p1 (upval), Callback1 (copy), StatusCodes (upval), Callback3 (copy), SendMessageErrorModule (upval), p5 (copy), ChatConversationTelemetryEventsModule (upval), _DateTime (upval)
 			if p4 and p4.source == "friends" then
 				NewResult:info("Creating a conversation for friend conversation {} via onSendChat", p2)
@@ -215,7 +215,7 @@ function ChatConversation.init(p1) --[[ Line: 119 ]]
 			local CallbackResult = Callback1(p2, p6, if FFlagAppChatSignalsReplyStoreModule and p1.props.replyingToMessageId then { id = p1.props.replyingToMessageId } elseif FFlagAppChatSignalsReplyStoreModule then nil else p1.props.replyingToMessage)
 			
 			if CallbackResult then
-				CallbackResult:andThen(function(Result) --[[ Line: 277 ]]
+				CallbackResult:andThen(function(Result)
 					-- upvalues: StatusCodes (upval), p1 (upval), Callback3 (upval), p2 (upval)
 					if Result and Result.StatusCode == StatusCodes.CONFLICT then
 						p1.showNetworkErrorToast()
@@ -236,7 +236,7 @@ function ChatConversation.init(p1) --[[ Line: 119 ]]
 			}
 			
 			if CallbackResult then
-				CallbackResult:andThen(function(Result) --[[ Line: 301 ]]
+				CallbackResult:andThen(function(Result)
 					-- upvalues: SendMessageErrorModule (upval), StatusCodes (upval), _DateTime (upval), p5 (upval), ChatConversationTelemetryEventsModule (upval), p1 (upval)
 					local Id = nil
 					local Id1 = nil
@@ -283,7 +283,7 @@ function ChatConversation.init(p1) --[[ Line: 119 ]]
 						targetMessageSentAt = TargetMessageSentAt,
 						targetMessageLength = CountContent
 					})
-				end):catch(function() --[[ Line: 351 ]]
+				end):catch(function()
 					-- upvalues: p5 (upval), ChatConversationTelemetryEventsModule (upval), config (copy)
 					p5.emit(ChatConversationTelemetryEventsModule.ConversationMessageSent, config)
 				end)
@@ -294,32 +294,32 @@ function ChatConversation.init(p1) --[[ Line: 119 ]]
 			end
 		end
 	end)
-	p1.onSendBtnClicked = MemoizeFunction(function(p2) --[[ Line: 358 ]]
+	p1.onSendBtnClicked = MemoizeFunction(function(p2)
 		-- upvalues: ChatConversationTelemetryEventsModule (upval)
-		return function(SendBtnClickResult) --[[ Line: 361 ]]
+		return function(SendBtnClickResult)
 			-- upvalues: p2 (copy), ChatConversationTelemetryEventsModule (upval)
 			p2.emit(ChatConversationTelemetryEventsModule.ConversationSendBtnClicked, { sendBtnClickResult = SendBtnClickResult })
 		end
 	end)
 	
-	function p1.isMoreMenuEnabled() --[[ Line: 368 ]]
+	function p1.isMoreMenuEnabled()
 		-- upvalues: p1 (copy)
 		return p1.props.moreMenuEnabled
 	end
 	
-	p1.reportInputBarReady = if FFlagAppChatPerfTrackingModule then function(p2: number) --[[ Line: 373 ]]
+	p1.reportInputBarReady = if FFlagAppChatPerfTrackingModule then function(p2: number)
 		-- upvalues: p1 (copy)
 		if p1.props.onChatInputBarReady and p1.props.shouldShowChatInputBar and p2 > 0 then
 			p1.props.onChatInputBarReady()
 		end
 	end else nil
 	
-	function p1.onHeightChanged(Frame: Frame) --[[ Line: 380 ]]
+	function p1.onHeightChanged(Frame: Frame)
 		-- upvalues: FFlagAppChatPerfTrackingModule (upval), p1 (copy)
 		if FFlagAppChatPerfTrackingModule then
 			p1.reportInputBarReady(Frame.AbsoluteSize.Y)
 		end
-		p1:setState(function(p2, _) --[[ Line: 385 ]]
+		p1:setState(function(p2, _)
 			-- upvalues: Frame (copy)
 			return if Frame.AbsoluteSize.Y == p2.inputBarHeight then {} else { inputBarHeight = Frame.AbsoluteSize.Y }
 		end)
@@ -327,7 +327,7 @@ function ChatConversation.init(p1) --[[ Line: 119 ]]
 	
 	p1.lastTypingRequest = 0
 	
-	function p1.chatInputTextChanged() --[[ Line: 395 ]]
+	function p1.chatInputTextChanged()
 		-- upvalues: p1 (copy)
 		if p1.props.conversation and p1.props.conversation.source == "friends" then return end
 		local CurrentTime = tick()
@@ -340,20 +340,20 @@ function ChatConversation.init(p1) --[[ Line: 119 ]]
 	
 	p1.exitTypeForAnalytics = ConversationExitTypeModule.Default
 	
-	function p1.fireAnalyticsEventOnUnmount() --[[ Line: 410 ]]
+	function p1.fireAnalyticsEventOnUnmount()
 		-- upvalues: p1 (copy), ConversationExitTypeModule (upval)
 		p1.props.onConversationUnmount(p1.exitTypeForAnalytics)
 		p1.exitTypeForAnalytics = ConversationExitTypeModule.Default
 	end
 	
-	function p1.closeKeyboard() --[[ Line: 417 ]]
+	function p1.closeKeyboard()
 		-- upvalues: p1 (copy)
 		if p1.inputBoxRef:getValue() then
 			p1.inputBoxRef:getValue():ReleaseFocus()
 		end
 	end
 	
-	function p1.closeReplying() --[[ Line: 423 ]]
+	function p1.closeReplying()
 		-- upvalues: FFlagAppChatSignalsReplyStoreModule (upval), GetReplyingToStoreModule (upval), p1 (copy)
 		if FFlagAppChatSignalsReplyStoreModule then
 			GetReplyingToStoreModule(false).clear()
@@ -364,32 +364,32 @@ function ChatConversation.init(p1) --[[ Line: 119 ]]
 		end
 	end
 	
-	function p1.onPointerInput() --[[ Line: 430 ]]
+	function p1.onPointerInput()
 		-- upvalues: GlobalLongPressSignalModule (upval), p1 (copy)
 		GlobalLongPressSignalModule.dismiss()
 		p1.closeKeyboard()
 	end
 	
-	function p1.onSizeChange() --[[ Line: 435 ]]
+	function p1.onSizeChange()
 		-- upvalues: p1 (copy)
 		p1.updateKeyboardOffset()
 	end
 	
-	function p1.calculateScrollOffset(ScrollFrame) --[[ Line: 439 ]]
+	function p1.calculateScrollOffset(ScrollFrame)
 		return ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.CanvasPosition.Y - ScrollFrame.AbsoluteWindowSize.Y
 	end
 	
-	function p1.setBannerHeight(ConversationBannerHeight) --[[ Line: 446 ]]
+	function p1.setBannerHeight(ConversationBannerHeight)
 		-- upvalues: p1 (copy)
 		p1:setState({ conversationBannerHeight = ConversationBannerHeight })
 	end
 	
-	function p1.setBottomModalHeight(BottomModalHeight) --[[ Line: 452 ]]
+	function p1.setBottomModalHeight(BottomModalHeight)
 		-- upvalues: p1 (copy)
 		p1:setState({ bottomModalHeight = BottomModalHeight })
 	end
 	
-	function p1.onMessageListSizeChange(Frame) --[[ Line: 458 ]]
+	function p1.onMessageListSizeChange(Frame)
 		-- upvalues: p1 (copy)
 		p1:setState({ messageListHeight = Frame.AbsoluteSize.Y })
 	end
@@ -397,7 +397,7 @@ function ChatConversation.init(p1) --[[ Line: 119 ]]
 	p1.focusNavigationService = FocusNavigationService.new(CoreGui)
 end
 
-function ChatConversation.didMount(p1) --[[ Line: 466 ]]
+function ChatConversation.didMount(p1)
 	-- upvalues: FFlagAppChatConsoleFocusFixesModule (copy), FocusBehaviorsModule (copy), AppChatNewChatInputBarIxpEnabled (copy), IXPService (copy), AppChatNewChatInputBarIxpLayer (copy)
 	p1.isMounted = true
 	p1.markAsRead(p1.props.markConversationAsRead, p1.props.conversationId)()
@@ -412,13 +412,13 @@ function ChatConversation.didMount(p1) --[[ Line: 466 ]]
 	end
 end
 
-function ChatConversation.willUpdate(p1, p2, _) --[[ Line: 487 ]]
+function ChatConversation.willUpdate(p1, p2, _)
 	if p2.chatIsVisible ~= p1.props.chatIsVisible and not p2.chatIsVisible then
 		p1.closeKeyboard()
 	end
 end
 
-function ChatConversation.didUpdate(p1, DefaultProps, p2) --[[ Line: 493 ]]
+function ChatConversation.didUpdate(p1, DefaultProps, p2)
 	-- upvalues: FFlagAppChatConsoleFocusFixesModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), FFlagAppChatPerfTrackingModule (copy)
 	if p1.props.wideMode and p1.props.navigation.getParam("navigatedWithFocus") then
 		local Value = p1.inputBarRef:getValue()
@@ -463,7 +463,7 @@ function ChatConversation.didUpdate(p1, DefaultProps, p2) --[[ Line: 493 ]]
 	end
 end
 
-function ChatConversation.willUnmount(p1) --[[ Line: 570 ]]
+function ChatConversation.willUnmount(p1)
 	p1.fireAnalyticsEventOnUnmount()
 	p1.closeReplying()
 	p1.keyboardConnections = {}
@@ -471,7 +471,7 @@ function ChatConversation.willUnmount(p1) --[[ Line: 570 ]]
 	p1.focusNavigationService:teardown()
 end
 
-function ChatConversation.render(p1) --[[ Line: 578 ]]
+function ChatConversation.render(p1)
 	-- upvalues: SignalsMigrationConfigModule (copy), RoactModule (copy), AppChat (copy), WithRoactChatAnalyticsModule (copy), WithStyleFunction (copy), WithChatPagePaddingModule (copy), KeyboardOffsetEventHandlerModule (copy), ConversationTopModalContainerModule (copy), FFlagAppChatEnableDoubleOptIn (copy), MessageListModule (copy), UserTypingIndicatorModule (copy), ReactModule (copy), FoundationModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), FFlagAppChatSmartSuggestionsModule (copy), SmartSuggestionsChipRowContainerModule (copy), ReplyComposeBarContainerModule (copy), ChatConversationMoreMenuModule (copy), ChatInputBarModule (copy), ConversationBottomModalContainerModule (copy)
 	local DisplayNamesAvailable = #p1.props.usersTyping > 0 and p1.props.displayNamesAvailable
 	local IsFriends: boolean = if p1.props.conversation then p1.props.conversation.source == "friends" else false
@@ -500,11 +500,11 @@ function ChatConversation.render(p1) --[[ Line: 578 ]]
 		unknownUserText = p1.props.unknownUserText
 	}) else nil
 	
-	return WithRoactChatAnalyticsModule(function(p2) --[[ Line: 618 ]]
+	return WithRoactChatAnalyticsModule(function(p2)
 		-- upvalues: WithStyleFunction (upval), WithChatPagePaddingModule (upval), p1 (copy), RoactModule (upval), KeyboardOffsetEventHandlerModule (upval), ConversationTopModalContainerModule (upval), FFlagAppChatEnableDoubleOptIn (upval), Element (copy), Text (copy), MessageListModule (upval), IsFriends (copy), DisplayNamesAvailable (copy), UserTypingIndicatorModule (upval), ReactModule (upval), FoundationModule (upval), FFlagAppChatSignalsReplyStoreModule (upval), FFlagAppChatSmartSuggestionsModule (upval), SmartSuggestionsChipRowContainerModule (upval), ReplyComposeBarContainerModule (upval), ChatConversationMoreMenuModule (upval), ChatInputBarModule (upval), ConversationBottomModalContainerModule (upval)
-		return WithStyleFunction(function(p3) --[[ Line: 619 ]]
+		return WithStyleFunction(function(p3)
 			-- upvalues: WithChatPagePaddingModule (upval), p1 (upval), RoactModule (upval), KeyboardOffsetEventHandlerModule (upval), ConversationTopModalContainerModule (upval), FFlagAppChatEnableDoubleOptIn (upval), Element (upval), Text (upval), MessageListModule (upval), IsFriends (upval), DisplayNamesAvailable (upval), UserTypingIndicatorModule (upval), ReactModule (upval), FoundationModule (upval), FFlagAppChatSignalsReplyStoreModule (upval), FFlagAppChatSmartSuggestionsModule (upval), SmartSuggestionsChipRowContainerModule (upval), ReplyComposeBarContainerModule (upval), ChatConversationMoreMenuModule (upval), ChatInputBarModule (upval), p2 (copy), ConversationBottomModalContainerModule (upval)
-			return WithChatPagePaddingModule(function(p4) --[[ Line: 620 ]]
+			return WithChatPagePaddingModule(function(p4)
 				-- upvalues: p1 (upval), RoactModule (upval), p3 (copy), KeyboardOffsetEventHandlerModule (upval), ConversationTopModalContainerModule (upval), FFlagAppChatEnableDoubleOptIn (upval), Element (upval), Text (upval), MessageListModule (upval), IsFriends (upval), DisplayNamesAvailable (upval), UserTypingIndicatorModule (upval), ReactModule (upval), FoundationModule (upval), FFlagAppChatSignalsReplyStoreModule (upval), FFlagAppChatSmartSuggestionsModule (upval), SmartSuggestionsChipRowContainerModule (upval), ReplyComposeBarContainerModule (upval), ChatConversationMoreMenuModule (upval), ChatInputBarModule (upval), p2 (upval), ConversationBottomModalContainerModule (upval)
 				return RoactModule.createElement("TextButton", {
 					AutoButtonColor = false,

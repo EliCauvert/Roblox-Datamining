@@ -4,9 +4,9 @@ local Parent = script:FindFirstAncestor("GenericChallenges").Parent
 local PromiseModule = require(Parent.Promise)
 local _ = require(Parent.LuauPolyfill)
 
-return function(p1) --[[ Line: 21 ]]
+return function(p1)
 	-- upvalues: PromiseModule (copy), RenderChallengeModule (copy)
-	return PromiseModule.new(function(Resolve, Reject) --[[ Line: 22 ]]
+	return PromiseModule.new(function(Resolve, Reject)
 		-- upvalues: RenderChallengeModule (upval), p1 (copy)
 		RenderChallengeModule({
 			title = p1.title,

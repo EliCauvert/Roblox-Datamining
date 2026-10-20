@@ -15,7 +15,7 @@ else
 		BrickColor.new("Brick yellow").Color
 	}
 	
-	local function GetNameValue(Text: string): number --[[ Line: 24 ]]
+	local function GetNameValue(Text: string): number
 		local Total = 0
 		
 		for i = 1, #Text do
@@ -33,12 +33,12 @@ else
 		return Total
 	end
 	
-	ComputeNameColorFunction = function(Name) --[[ Line: 42 ]]
+	ComputeNameColorFunction = function(Name)
 		-- upvalues: list (copy), GetNameValue (copy)
 		return list[(GetNameValue(Name) + 0) % #list + 1]
 	end
 end
-return function(UserId) --[[ Line: 47 | Named "GetNameColor" ]]
+return function(UserId)
 	-- upvalues: Players (copy), ComputeNameColorFunction (ref)
 	local Player = Players:GetPlayerByUserId(UserId)
 	

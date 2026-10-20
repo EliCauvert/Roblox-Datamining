@@ -6,7 +6,7 @@ local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 
-return function(Frame) --[[ Line: 20 | Named "FilterMenuActionBar" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), Button (copy), ButtonType (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Surface100 = UseTokensResult.Color.Surface.Surface_100

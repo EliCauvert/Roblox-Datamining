@@ -5,12 +5,12 @@ local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.CommunityInfoStoreTypes)
 local CreateDataResolverModule = require(DataHydration.createDataResolver)
 
-return function() --[[ Line: 10 | Named "createCommunityInfoStore" ]]
+return function()
 	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy)
 	local DataCacheModule = CreateDataCacheModule()
 	local DataResolverModule = CreateDataResolverModule({
 		cache = DataCacheModule,
-		fetchFn = function(_) --[[ Line: 14 ]]
+		fetchFn = function(_)
 			-- upvalues: PromiseModule (upval)
 			return PromiseModule.resolve({})
 		end

@@ -10,11 +10,11 @@ local PostCancelLoginCodeModule = require(AuthCommon.Http.Requests.PostCancelLog
 local GetFFlagEnableCrossDeviceLoginUsingQRCodesFunction = require(Parent.SharedFlags).GetFFlagEnableCrossDeviceLoginUsingQRCodes
 
 return {
-	EnterCode = function(p1, p2) --[[ Line: 17 ]]
+	EnterCode = function(p1, p2)
 		-- upvalues: PostEnterLoginCodeModule (copy)
-		return function(_) --[[ Line: 18 ]]
+		return function(_)
 			-- upvalues: PostEnterLoginCodeModule (upval), p1 (copy), p2 (copy)
-			return PostEnterLoginCodeModule(p1, p2):andThen(function(Result) --[[ Line: 19 ]]
+			return PostEnterLoginCodeModule(p1, p2):andThen(function(Result)
 				local ResponseBody = Result and Result.responseBody
 				
 				return if ResponseBody then {
@@ -23,11 +23,11 @@ return {
 			end)
 		end
 	end,
-	FetchDeviceCode = function(p1) --[[ Line: 36 ]]
+	FetchDeviceCode = function(p1)
 		-- upvalues: PostCreateLoginCodeModule (copy), GetFFlagEnableCrossDeviceLoginUsingQRCodesFunction (copy)
-		return function(_) --[[ Line: 37 ]]
+		return function(_)
 			-- upvalues: PostCreateLoginCodeModule (upval), p1 (copy), GetFFlagEnableCrossDeviceLoginUsingQRCodesFunction (upval)
-			return PostCreateLoginCodeModule(p1):andThen(function(Result) --[[ Line: 38 ]]
+			return PostCreateLoginCodeModule(p1):andThen(function(Result)
 				-- upvalues: GetFFlagEnableCrossDeviceLoginUsingQRCodesFunction (upval)
 				local ResponseBody = Result and Result.responseBody
 				
@@ -39,11 +39,11 @@ return {
 			end)
 		end
 	end,
-	GetLoginStatus = function(p1, p2, p3) --[[ Line: 53 ]]
+	GetLoginStatus = function(p1, p2, p3)
 		-- upvalues: PostLoginCodeStatusModule (copy)
-		return function(_) --[[ Line: 54 ]]
+		return function(_)
 			-- upvalues: PostLoginCodeStatusModule (upval), p1 (copy), p2 (copy), p3 (copy)
-			return PostLoginCodeStatusModule(p1, p2, p3):andThen(function(Result) --[[ Line: 55 ]]
+			return PostLoginCodeStatusModule(p1, p2, p3):andThen(function(Result)
 				local ResponseBody = Result and Result.responseBody
 				
 				return if ResponseBody then {
@@ -55,30 +55,30 @@ return {
 			end)
 		end
 	end,
-	OpenLoginCodePrompt = function(p1) --[[ Line: 71 ]]
+	OpenLoginCodePrompt = function(p1)
 		-- upvalues: SetCentralOverlayFunction (copy), CentralOverlayType (copy)
-		return function(p2) --[[ Line: 72 ]]
+		return function(p2)
 			-- upvalues: SetCentralOverlayFunction (upval), CentralOverlayType (upval), p1 (copy)
 			p2:dispatch(SetCentralOverlayFunction(CentralOverlayType.CrossDeviceCodePrompt, p1))
 		end
 	end,
-	ConfirmDeviceAccess = function(p1, p2) --[[ Line: 77 ]]
+	ConfirmDeviceAccess = function(p1, p2)
 		-- upvalues: PostConfirmLoginCodeModule (copy)
-		return function(_) --[[ Line: 78 ]]
+		return function(_)
 			-- upvalues: PostConfirmLoginCodeModule (upval), p1 (copy), p2 (copy)
 			return PostConfirmLoginCodeModule(p1, p2)
 		end
 	end,
-	CancelLoginCode = function(p1, p2) --[[ Line: 83 ]]
+	CancelLoginCode = function(p1, p2)
 		-- upvalues: PostCancelLoginCodeModule (copy)
-		return function(_) --[[ Line: 84 ]]
+		return function(_)
 			-- upvalues: PostCancelLoginCodeModule (upval), p1 (copy), p2 (copy)
 			return PostCancelLoginCodeModule(p1, p2)
 		end
 	end,
-	OpenConfirmationOverlay = function(LoginSuccess, CloseCallback, RetryCallback, DeviceString) --[[ Line: 89 ]]
+	OpenConfirmationOverlay = function(LoginSuccess, CloseCallback, RetryCallback, DeviceString)
 		-- upvalues: SetCentralOverlayFunction (copy), CentralOverlayType (copy)
-		return function(p1) --[[ Line: 90 ]]
+		return function(p1)
 			-- upvalues: SetCentralOverlayFunction (upval), CentralOverlayType (upval), LoginSuccess (copy), CloseCallback (copy), RetryCallback (copy), DeviceString (copy)
 			p1:dispatch(SetCentralOverlayFunction(CentralOverlayType.CrossDeviceLoginConfirmation, {
 				loginSuccess = LoginSuccess,

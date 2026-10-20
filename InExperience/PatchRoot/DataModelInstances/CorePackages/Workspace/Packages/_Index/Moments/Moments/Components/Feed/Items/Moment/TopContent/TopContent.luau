@@ -6,7 +6,7 @@ local View = require(Parent.Foundation).View
 local ActionRailModule = require(script.Parent.ActionRail)
 local VideoInfoModule = require(script.Parent.VideoInfo)
 
-return ReactModule.memo(function(Frame) --[[ Line: 34 | Named "TopContent" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: ReactModule (copy), View (copy), VideoInfoModule (copy), FFlagMomentsServeEDPVideos (copy), ActionRailModule (copy)
 	return ReactModule.createElement(View, {
 		tag = "row align-x-left align-y-bottom gap-large size-full-0 auto-y",

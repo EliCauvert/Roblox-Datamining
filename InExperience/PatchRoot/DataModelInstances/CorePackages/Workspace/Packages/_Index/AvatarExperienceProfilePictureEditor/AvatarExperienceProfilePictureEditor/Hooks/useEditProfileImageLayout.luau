@@ -5,12 +5,12 @@ local RobloxAppHooksModule = require(AvatarExperienceProfilePictureEditor.Parent
 local UseDeviceOrientationFunction = RobloxAppHooksModule.useDeviceOrientation
 local UseScreenSizeFunction = RobloxAppHooksModule.useScreenSize
 
-local function _(p1, p2) --[[ Line: 50 | Named "computeVisiblePeekabooPreviewHeight" ]]
+local function _(p1, p2)
 	-- upvalues: ConstantsModule (copy)
 	return p1 + p2 + ConstantsModule.StackedPreviewBottomMargin
 end
 
-local function computeEditProfileImageLayout(p1) --[[ Line: 55 ]]
+local function computeEditProfileImageLayout(p1)
 	-- upvalues: ConstantsModule (copy), ComputeCutoutFieldOfViewDegModule (copy)
 	local Split: string = if p1.deviceOrientation == "Landscape" then "split" else "stacked"
 	local XDelta = p1.screenSize.X - p1.guiInset.left - p1.guiInset.right
@@ -37,7 +37,7 @@ local function computeEditProfileImageLayout(p1) --[[ Line: 55 ]]
 end
 
 return {
-	useEditProfileImageLayout = function(p1) --[[ Line: 89 ]]
+	useEditProfileImageLayout = function(p1)
 		-- upvalues: UseDeviceOrientationFunction (copy), UseScreenSizeFunction (copy), computeEditProfileImageLayout (copy)
 		return (computeEditProfileImageLayout({
 			guiInset = p1.guiInset,

@@ -11,7 +11,7 @@ local RewireTypesFunction = require(script.Parent.rewire).rewireTypes
 local Map = LuauPolyfillModule.Map
 
 return {
-	addTypes = function(p1, List) --[[ Line: 61 ]]
+	addTypes = function(p1, List)
 		-- upvalues: Map (copy), Boolean (copy), IsNamedTypeFunction (copy), IsDirectiveFunction (copy), RewireTypesFunction (copy), Object (copy), GraphQLSchema (copy), GetObjectTypeFromTypeMapFunction (copy)
 		local Config = p1:toConfig()
 		local NewMap = Map.new()

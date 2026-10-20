@@ -7,7 +7,7 @@ local FriendIconModule = require(GameTile.Footer.FriendIcon)
 local SourceSans = Enum.Font.SourceSans
 local _Color3 = Color3.fromRGB(117, 117, 117)
 
-local function NumberedIcon(p1) --[[ Line: 22 ]]
+local function NumberedIcon(p1)
 	-- upvalues: RoactModule (copy), ImageSetLabel (copy), GetImageDataFunction (copy), SourceSans (copy), _Color3 (copy)
 	local Size = p1.size
 	
@@ -33,7 +33,7 @@ end
 local UserIconList = RoactModule.PureComponent:extend("UserIconList")
 UserIconList.defaultProps = { users = {} }
 
-function UserIconList.render(p1) --[[ Line: 52 ]]
+function UserIconList.render(p1)
 	-- upvalues: RoactModule (copy), FriendIconModule (copy), NumberedIcon (copy)
 	local Width: number = p1.props.width
 	local Height: number = p1.props.height
@@ -46,7 +46,7 @@ function UserIconList.render(p1) --[[ Line: 52 ]]
 	if CountUsers <= 0 then
 		return nil
 	end
-	local function _(p2: number, p3: number): number --[[ Line: 65 | Named "GetMaxNumberOfIconsInWidth" ]]
+	local function _(p2: number, p3: number): number
 		return (math.floor((p3 + 3) / (p2 + 3)))
 	end
 	

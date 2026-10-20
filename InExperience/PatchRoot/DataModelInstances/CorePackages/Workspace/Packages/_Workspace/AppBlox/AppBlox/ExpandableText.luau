@@ -13,13 +13,13 @@ local CryoModule = require(Parent.Cryo)
 local LuaAppExpandableTextNewLineStrip = game:DefineFastFlag("LuaAppExpandableTextNewLineStrip", true)
 local config = { Selectable = true }
 
-local function v11() --[[ Line: 20 ]] end
+local function v11() end
 
 local config1 = {
 	affordance = FoundationModule.Enums.StateLayerAffordance.None
 }
 
-local function getCompactLineMeasureText(CompactNumberOfLines: number): string --[[ Line: 48 ]]
+local function getCompactLineMeasureText(CompactNumberOfLines: number): string
 	if CompactNumberOfLines <= 0 then
 		return ""
 	end
@@ -31,7 +31,7 @@ local function getCompactLineMeasureText(CompactNumberOfLines: number): string -
 	return (table.concat(List, "\n"))
 end
 
-local function _(p1: number, NewFloored: number, p2: number, p3): number --[[ Line: 63 | Named "calculateBlankLineAdjustedHeight" ]]
+local function _(p1: number, NewFloored: number, p2: number, p3): number
 	local v1 = if NewFloored > 0 and p1 > 0 then p1 / NewFloored else 0
 	
 	if v1 > 0 and p2 > 0 and math.floor(p2 / v1 + 0.5) + 1 == NewFloored then
@@ -44,10 +44,10 @@ local function _(p1: number, NewFloored: number, p2: number, p3): number --[[ Li
 	return p1
 end
 
-return ReactModule.memo(function(Frame) --[[ Line: 83 | Named "ExpandableText" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: LuaAppExpandableTextNewLineStrip (copy), SignalsReactModule (copy), TextSizeModule (copy), UseTokensFunction (copy), CryoModule (copy), ReactModule (copy), ControlState (copy), UseLocalizationFunction (copy), UsePropertyFunction (copy), View (copy), config (copy), v11 (copy), config1 (copy), Text (copy), getCompactLineMeasureText (copy)
 	local Text1 = if LuaAppExpandableTextNewLineStrip then (Frame.text or ""):gsub("[\r\n]+$", "") else Frame.text
-	local UseSignalStateResult = SignalsReactModule.useSignalState(function(p1) --[[ Line: 87 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState(function(p1)
 		-- upvalues: TextSizeModule (upval)
 		return TextSizeModule.getTextSizeStore(p1).getTextSizeOffset(p1)
 	end)
@@ -58,14 +58,14 @@ return ReactModule.memo(function(Frame) --[[ Line: 83 | Named "ExpandableText" ]
 	local CompactNumberOfLines = Frame.compactNumberOfLines or 3
 	local PressedTextStyle = Frame.pressedTextStyle or UseTokensResult.Color.Content.Muted
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(ControlState.Default)
-	local MapResult = UseBindingResult:map(function(Pressed) --[[ Line: 104 ]]
+	local MapResult = UseBindingResult:map(function(Pressed)
 		-- upvalues: ControlState (upval), PressedTextStyle (copy), TextStyle (copy)
 		return if Pressed == ControlState.Pressed or Pressed == ControlState.SelectedPressed then PressedTextStyle else TextStyle
 	end)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Frame.expandedInitially or false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 113 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), Frame (copy)
-		UseStateResult2(function(p1): boolean --[[ Line: 114 ]]
+		UseStateResult2(function(p1): boolean
 			-- upvalues: Frame (upval)
 			local NoP8 = not p1
 			
@@ -91,7 +91,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 83 | Named "ExpandableText" ]
 	local Ceiled: number = Y1
 	local UseRefResult3 = ReactModule.useRef(nil)
 	local AbsoluteSize3 = UsePropertyFunction(UseRefResult3, "AbsoluteSize")
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 150 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Frame (copy), Text1 (copy)
 		if Frame.avoidBlankLineClip then
 			local v1: number = Text1:find("\n\n")

@@ -14,7 +14,7 @@ local MenuOpenedConnection = nil
 local Flag = false
 local Flag1 = false
 
-local function enableVirtualCursor(MouseLocation) --[[ Line: 38 ]]
+local function enableVirtualCursor(MouseLocation)
 	-- upvalues: TextBox (ref), InterfaceModule (copy), GamepadService (copy), InputModule (copy), RunService (copy), MenuOpenedConnection (ref), GuiService (copy), FFlagVCWasDisabledFromMenuOpen (copy), Flag1 (ref)
 	if TextBox then
 		local MouseLocation1 = MouseLocation or TextBox.CursorPosition
@@ -25,7 +25,7 @@ local function enableVirtualCursor(MouseLocation) --[[ Line: 38 ]]
 		InputModule:EnableInput()
 		InputModule:DisablePreview()
 		RunService:BindToRenderStep("VirtualCursorStepped", Enum.RenderPriority.Input.Value + 1, TextBox.OnRenderStep)
-		MenuOpenedConnection = GuiService.MenuOpened:Connect(function() --[[ Line: 58 ]]
+		MenuOpenedConnection = GuiService.MenuOpened:Connect(function()
 			-- upvalues: FFlagVCWasDisabledFromMenuOpen (upval), Flag1 (upval), GamepadService (upval)
 			if FFlagVCWasDisabledFromMenuOpen then
 				Flag1 = true
@@ -37,7 +37,7 @@ local function enableVirtualCursor(MouseLocation) --[[ Line: 38 ]]
 	end
 end
 
-local function disableVirtualCursor() --[[ Line: 66 ]]
+local function disableVirtualCursor()
 	-- upvalues: TextBox (ref), MenuOpenedConnection (ref), InterfaceModule (copy), InputModule (copy), RunService (copy), FFlagVCWasDisabledFromMenuOpen (copy), Flag1 (ref), GuiService (copy)
 	if not TextBox.Enabled then return end
 	MenuOpenedConnection:Disconnect()
@@ -68,11 +68,11 @@ end
 local Module = {}
 Module.__index = Module
 
-function Module:GetEnabled() --[[ Line: 103 ]]
+function Module:GetEnabled()
 	return self.Enabled
 end
 
-function Module.new() --[[ Line: 107 ]]
+function Module.new()
 	-- upvalues: OnRenderStepModule (copy), LastInputTypeChangedConnection (ref), UserInputService (copy), GamepadService (copy), Flag (ref), InputModule (copy), Module (copy), TextBox (ref)
 	local config = {
 		Enabled = false,
@@ -81,12 +81,12 @@ function Module.new() --[[ Line: 107 ]]
 		CursorPosition = Vector2.new()
 	}
 	
-	function config.OnRenderStep(p1) --[[ Line: 115 ]]
+	function config.OnRenderStep(p1)
 		-- upvalues: OnRenderStepModule (upval), config (copy)
 		OnRenderStepModule(config, p1)
 	end
 	
-	LastInputTypeChangedConnection = UserInputService.LastInputTypeChanged:Connect(function(UserInputType) --[[ Line: 119 ]]
+	LastInputTypeChangedConnection = UserInputService.LastInputTypeChanged:Connect(function(UserInputType)
 		-- upvalues: GamepadService (upval), Flag (upval)
 		if UserInputType ~= Enum.UserInputType.Gamepad1 and UserInputType ~= Enum.UserInputType.Focus and GamepadService.GamepadCursorEnabled then
 			GamepadService.GamepadCursorEnabled = false
@@ -106,7 +106,7 @@ function Module.new() --[[ Line: 107 ]]
 	return config
 end
 
-GamepadService:GetPropertyChangedSignal("GamepadCursorEnabled"):Connect(function() --[[ Line: 142 ]]
+GamepadService:GetPropertyChangedSignal("GamepadCursorEnabled"):Connect(function()
 	-- upvalues: GamepadService (copy), TextBox (ref), UserInputService (copy), enableVirtualCursor (copy), disableVirtualCursor (copy)
 	local GamepadCursorEnabled = GamepadService.GamepadCursorEnabled
 	

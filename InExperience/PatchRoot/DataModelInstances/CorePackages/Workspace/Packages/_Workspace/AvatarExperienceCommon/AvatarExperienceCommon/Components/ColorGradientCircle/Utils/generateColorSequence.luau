@@ -1,4 +1,4 @@
-﻿local function deduplicateBodyColor3s(List) --[[ Line: 5 ]]
+﻿local function deduplicateBodyColor3s(List)
 	local List1 = {}
 	local t = {}
 	
@@ -13,7 +13,7 @@
 	return List1
 end
 
-return function(p1): ColorSequence --[[ Line: 23 | Named "generateColorSequence" ]]
+return function(p1): ColorSequence
 	-- upvalues: deduplicateBodyColor3s (copy)
 	local DeduplicateBodyColor3sResult = deduplicateBodyColor3s(p1)
 	local CountDeduplicateBodyColor3sResult = #DeduplicateBodyColor3sResult

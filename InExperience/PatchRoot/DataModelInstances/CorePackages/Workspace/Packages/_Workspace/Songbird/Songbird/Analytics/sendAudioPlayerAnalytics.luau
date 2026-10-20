@@ -10,7 +10,7 @@ local config = {
 	lastUpdated = { 25, 10, 24 }
 }
 
-local function createCounterEventConfig(Action) --[[ Line: 23 ]]
+local function createCounterEventConfig(Action)
 	-- upvalues: config (copy), LoggingProtocolModule (copy)
 	return {
 		eventName = `{config.eventName}_{Action}`,
@@ -22,7 +22,7 @@ local function createCounterEventConfig(Action) --[[ Line: 23 ]]
 	}
 end
 
-return function(p1) --[[ Line: 45 | Named "sendAudioPlayerAnalytics" ]]
+return function(p1)
 	-- upvalues: createCounterEventConfig (copy), LoggingProtocolModule (copy), config (copy)
 	local CounterEventConfig = createCounterEventConfig(p1.action)
 	LoggingProtocolModule.default:logRobloxTelemetryEvent(config, nil, p1)

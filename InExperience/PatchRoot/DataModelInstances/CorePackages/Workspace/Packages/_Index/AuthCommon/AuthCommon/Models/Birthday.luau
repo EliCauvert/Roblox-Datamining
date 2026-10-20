@@ -4,7 +4,7 @@ local _DateTime = require(Parent.Time).DateTime
 local t = {}
 local BirthdayModule = { [t] = true }
 
-function BirthdayModule.new(Values) --[[ Line: 20 ]]
+function BirthdayModule.new(Values)
 	-- upvalues: ArgCheckModule (copy), BirthdayModule (copy)
 	local config = { Month = 1, Day = 1, Year = 1970 }
 	
@@ -21,31 +21,31 @@ function BirthdayModule.new(Values) --[[ Line: 20 ]]
 	return config
 end
 
-function BirthdayModule:IsUnder13(): boolean --[[ Line: 41 ]]
+function BirthdayModule:IsUnder13(): boolean
 	-- upvalues: BirthdayModule (copy), _DateTime (copy)
 	local NewBirthday = BirthdayModule.new(_DateTime.now():GetValues())
 	
 	return NewBirthday.Year - 13 < self.Year or self.Year >= NewBirthday.Year - 13 and (NewBirthday.Month < self.Month or NewBirthday.Month == self.Month and NewBirthday.Day < self.Day)
 end
 
-function BirthdayModule.GetAgeInYears(p1, p2) --[[ Line: 52 ]]
+function BirthdayModule.GetAgeInYears(p1, p2)
 	-- upvalues: _DateTime (copy), BirthdayModule (copy)
 	local NewBirthday = BirthdayModule.new(if p2 then p2 else _DateTime.now():GetValues())
 	
 	return if NewBirthday.Month < p1.Month or NewBirthday.Month == p1.Month and NewBirthday.Day < p1.Day then NewBirthday.Year - p1.Year - 1 else NewBirthday.Year - p1.Year
 end
 
-function BirthdayModule:FormatForEndpoint(): string --[[ Line: 63 ]]
+function BirthdayModule:FormatForEndpoint(): string
 	return self.Year .. "-" .. self.Month .. "-" .. self.Day .. "T12:00:00.000Z"
 end
 
-function BirthdayModule:ToString(p1): string --[[ Line: 67 ]]
+function BirthdayModule:ToString(p1): string
 	local P6 = p1 or " "
 	
 	return self.Month .. P6 .. self.Day .. P6 .. self.Year
 end
 
-function BirthdayModule:is(): boolean --[[ Line: 73 ]]
+function BirthdayModule:is(): boolean
 	-- upvalues: t (copy)
 	return type(self) == "table" and self[t] == true
 end

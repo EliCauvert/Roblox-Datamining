@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.Types)
 
-return function(p1) --[[ Line: 4 ]]
-	return function(p2) --[[ Line: 5 ]]
+return function(p1)
+	return function(p2)
 		-- upvalues: p1 (copy)
 		p1:reportCounter(p2.name, p2.count or 1)
 		

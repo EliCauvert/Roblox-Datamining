@@ -14,7 +14,7 @@ local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local SduiActionType = SduiCoreSystemModule.SduiActionType
 local v1 = require(Parent.UrlBuilder).UrlBuilder.fromString("www:badges")()
 
-return function(p1, _, p2, _) --[[ Line: 32 ]]
+return function(p1, _, p2, _)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), FFlagLuaAppBadgeDetailsLogExposure (copy), IXPService (copy), FStringLuaAppBadgeDetailsIxpLayer (copy), FFlagLuaAppBadgeDetailsEnabled (copy), SduiLoadTimer (copy), FetchBadgeDetailsPageFunction (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), v1 (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	

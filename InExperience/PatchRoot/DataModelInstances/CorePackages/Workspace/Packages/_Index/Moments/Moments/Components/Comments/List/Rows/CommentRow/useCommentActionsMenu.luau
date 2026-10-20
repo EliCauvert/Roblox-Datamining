@@ -9,7 +9,7 @@ local config = {
 	delete = "Feature.Moments.Action.Delete"
 }
 
-return function(p1) --[[ Line: 39 | Named "useCommentActionsMenu" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local Report = UseLocalizationResult.report
@@ -18,7 +18,7 @@ return function(p1) --[[ Line: 39 | Named "useCommentActionsMenu" ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
 	local CommentId = p1.commentId
-	ReactModule.useLayoutEffect(function() --[[ Line: 51 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy)
 		UseStateResult2(nil)
 		UseStateResult2_1(nil)
@@ -30,7 +30,7 @@ return function(p1) --[[ Line: 39 | Named "useCommentActionsMenu" ]]
 	local HasOnReportCommentFunction: boolean = not p1.isAuthoredByViewer and (AuthorUserId ~= nil and OnReportCommentFunction ~= nil)
 	local HasOnBlockCommentAuthorFunction: boolean = not p1.isAuthoredByViewer and (AuthorUserId ~= nil and OnBlockCommentAuthorFunction ~= nil)
 	local HasOnDeleteCommentFunction: boolean = p1.isAuthoredByViewer and OnDeleteCommentFunction ~= nil
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 74 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), OnReportCommentFunction (copy), AuthorUserId (copy), CommentId (copy)
 		UseStateResult2(nil)
 		
@@ -38,7 +38,7 @@ return function(p1) --[[ Line: 39 | Named "useCommentActionsMenu" ]]
 			OnReportCommentFunction(CommentId, AuthorUserId)
 		end
 	end, { OnReportCommentFunction, CommentId, AuthorUserId })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 80 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), OnBlockCommentAuthorFunction (copy), AuthorUserId (copy), CommentId (copy)
 		UseStateResult2(nil)
 		
@@ -46,12 +46,12 @@ return function(p1) --[[ Line: 39 | Named "useCommentActionsMenu" ]]
 			OnBlockCommentAuthorFunction(CommentId, AuthorUserId)
 		end
 	end, { OnBlockCommentAuthorFunction, CommentId, AuthorUserId })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 86 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy), CommentId (copy)
 		UseStateResult2(nil)
 		UseStateResult2_1(CommentId)
 	end, { CommentId })
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 90 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy), OnDeleteCommentFunction (copy), UseStateResult1 (copy)
 		UseStateResult2_1(nil)
 		
@@ -59,13 +59,13 @@ return function(p1) --[[ Line: 39 | Named "useCommentActionsMenu" ]]
 			OnDeleteCommentFunction(UseStateResult1)
 		end
 	end, { OnDeleteCommentFunction, UseStateResult1 })
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 96 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(nil)
 	end, {})
 	
 	return {
-		items = ReactModule.useMemo(function() --[[ Line: 101 ]]
+		items = ReactModule.useMemo(function()
 			-- upvalues: HasOnReportCommentFunction (copy), Report (copy), UseResult (copy), HasOnBlockCommentAuthorFunction (copy), Block (copy), UseResult1 (copy), HasOnDeleteCommentFunction (copy), Delete (copy), UseResult2 (copy)
 			local List = {}
 			
@@ -85,17 +85,17 @@ return function(p1) --[[ Line: 39 | Named "useCommentActionsMenu" ]]
 			Delete
 		}),
 		isOpen = UseStateResult == CommentId,
-		openMenu = ReactModule.useCallback(function() --[[ Line: 63 ]]
+		openMenu = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (copy), CommentId (copy)
 			UseStateResult2(CommentId)
 		end, { CommentId }),
-		closeMenu = ReactModule.useCallback(function() --[[ Line: 66 ]]
+		closeMenu = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(nil)
 		end, {}),
-		toggleMenu = ReactModule.useCallback(function() --[[ Line: 69 ]]
+		toggleMenu = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (copy), CommentId (copy)
-			UseStateResult2(function(CommentId1) --[[ Line: 70 ]]
+			UseStateResult2(function(CommentId1)
 				-- upvalues: CommentId (upval)
 				return if CommentId1 == CommentId then nil else CommentId
 			end)

@@ -44,7 +44,7 @@ local config1 = {
 }
 
 return {
-	getStringsFromErrorCodeAndRetryNum = function(p1, p2: number) --[[ Line: 69 ]]
+	getStringsFromErrorCodeAndRetryNum = function(p1, p2: number)
 		-- upvalues: VPCErrorCodesEnum (copy), config (copy), VPCErrorCategoriesEnum (copy), VpcErrorCategoryToMessageStrings (copy)
 		if p2 >= 4 then
 			p1 = VPCErrorCodesEnum.SenderFlooded
@@ -56,7 +56,7 @@ return {
 		end
 		return VpcErrorCategoryToMessageStrings[Entry]
 	end,
-	getRetryBehaviorFromErrorCodeAndRetryNum = function(p1, p2: number) --[[ Line: 55 ]]
+	getRetryBehaviorFromErrorCodeAndRetryNum = function(p1, p2: number)
 		-- upvalues: VPCErrorCodesEnum (copy), config (copy), VPCErrorCategoriesEnum (copy), config1 (copy)
 		if p2 >= 4 then
 			p1 = VPCErrorCodesEnum.SenderFlooded

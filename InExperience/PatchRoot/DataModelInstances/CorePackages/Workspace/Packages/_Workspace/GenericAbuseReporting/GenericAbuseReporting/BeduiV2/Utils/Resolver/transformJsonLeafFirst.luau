@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("GenericAbuseReporting").BeduiV2.Types)
 
-local function transformJsonLeafFirst(List, Callback) --[[ Line: 12 ]]
+local function transformJsonLeafFirst(List, Callback)
 	-- upvalues: transformJsonLeafFirst (copy)
 	if type(List) ~= "table" then
 		return Callback(List)

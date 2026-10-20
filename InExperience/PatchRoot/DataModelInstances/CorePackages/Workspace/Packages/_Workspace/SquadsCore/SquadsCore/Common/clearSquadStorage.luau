@@ -3,7 +3,7 @@ local AppStorageService = game:GetService("AppStorageService")
 local ConstantsModule = require(SquadsCore.Common.Constants)
 local RoduxSquadsModule = require(SquadsCore.RoduxSquads)
 
-return function() --[[ Line: 8 ]]
+return function()
 	-- upvalues: AppStorageService (copy), ConstantsModule (copy), RoduxSquadsModule (copy)
 	AppStorageService:SetItem(ConstantsModule.ACTIVE_SQUAD_APP_STORAGE_KEY, "")
 	AppStorageService:Flush()

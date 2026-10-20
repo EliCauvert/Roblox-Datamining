@@ -5,7 +5,7 @@ local TweenService = game:GetService("TweenService")
 local _ = game:GetService("InsertService")
 local CurrentCamera = game:GetService("Workspace").CurrentCamera
 
-local function removeScripts(SelectedCharacterIndicator) --[[ Line: 22 ]]
+local function removeScripts(SelectedCharacterIndicator)
 	for _, ScriptObject in ipairs(SelectedCharacterIndicator:GetDescendants()) do
 		if ScriptObject:IsA("LuaSourceContainer") then
 			ScriptObject:Destroy()
@@ -13,7 +13,7 @@ local function removeScripts(SelectedCharacterIndicator) --[[ Line: 22 ]]
 	end
 end
 
-local function ApplyArrow(Object, p1) --[[ Line: 30 ]]
+local function ApplyArrow(Object, p1)
 	-- upvalues: CurrentCamera (copy), removeScripts (copy), TweenService (copy), RunService (copy)
 	local ContextMenuArrow = Instance.new("Model")
 	ContextMenuArrow.Name = "ContextMenuArrow"
@@ -35,14 +35,14 @@ local function ApplyArrow(Object, p1) --[[ Line: 30 ]]
 	local Tween = TweenService:Create(SelectedCharacterIndicator, TweenInfo.new(4, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, -1, false), { Orientation = vector.create(0, 360, 180) })
 	Tween:Play()
 	
-	local function update() --[[ Line: 59 ]]
+	local function update()
 		-- upvalues: SelectedCharacterIndicator (copy), HumanoidRootPart (copy)
 		SelectedCharacterIndicator.Position = HumanoidRootPart.Position + vector.create(0, 5, 0)
 	end
 	
 	local Flag = false
 	
-	local function kill() --[[ Line: 64 ]]
+	local function kill()
 		-- upvalues: Flag (ref), ContextMenuArrow (copy), Tween (copy), RunService (upval)
 		if not Flag then
 			Flag = true
@@ -62,9 +62,9 @@ local function ApplyArrow(Object, p1) --[[ Line: 30 ]]
 	return kill
 end
 
-function Module.ChangeSelectedPlayer(p1, Player: Player, p2) --[[ Line: 82 ]]
+function Module.ChangeSelectedPlayer(p1, Player: Player, p2)
 	-- upvalues: ApplyArrow (copy)
-	coroutine.wrap(function() --[[ Line: 83 ]]
+	coroutine.wrap(function()
 		-- upvalues: p1 (copy), Player (copy), ApplyArrow (upval), p2 (copy)
 		if p1.SelectedPlayer then
 			p1.SelectedPlayer = nil
@@ -78,7 +78,7 @@ function Module.ChangeSelectedPlayer(p1, Player: Player, p2) --[[ Line: 82 ]]
 		end
 		if Player then
 			p1.SelectedPlayer = Player
-			p1.CharacterAddedConn = Player.CharacterAdded:Connect(function(Character) --[[ Line: 96 ]]
+			p1.CharacterAddedConn = Player.CharacterAdded:Connect(function(Character)
 				-- upvalues: p1 (upval), ApplyArrow (upval), p2 (upval)
 				if p1.KillOldRenderFunction then
 					p1.KillOldRenderFunction()
@@ -93,7 +93,7 @@ function Module.ChangeSelectedPlayer(p1, Player: Player, p2) --[[ Line: 82 ]]
 	end)()
 end
 
-function Module.new() --[[ Line: 109 ]]
+function Module.new()
 	-- upvalues: Module (copy)
 	local self = setmetatable({}, Module)
 	self.KillOldRenderFunction = nil

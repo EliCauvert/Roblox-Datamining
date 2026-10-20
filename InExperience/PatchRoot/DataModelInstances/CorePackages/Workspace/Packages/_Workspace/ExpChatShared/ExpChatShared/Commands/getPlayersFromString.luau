@@ -1,6 +1,6 @@
 ﻿local Dictionary = require(script:FindFirstAncestor("ExpChatShared").Parent.llama).Dictionary
 
-return function(p1, Text: string) --[[ Line: 12 | Named "getPlayersFromCommand" ]]
+return function(p1, Text: string)
 	-- upvalues: Dictionary (copy)
 	if not Text then
 		return {}
@@ -19,7 +19,7 @@ return function(p1, Text: string) --[[ Line: 12 | Named "getPlayersFromCommand" 
 			}
 		end
 	end
-	return Dictionary.map(p1.byDisplayName[Lowered] or {}, function(p2) --[[ Line: 28 ]]
+	return Dictionary.map(p1.byDisplayName[Lowered] or {}, function(p2)
 		-- upvalues: Dictionary (upval), p1 (copy)
 		return Dictionary.join(p1.byUserId[p2], { nameToDisplay = p1.byUserId[p2].displayName })
 	end)

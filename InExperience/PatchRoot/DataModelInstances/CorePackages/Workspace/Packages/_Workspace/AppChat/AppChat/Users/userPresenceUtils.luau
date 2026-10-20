@@ -29,7 +29,7 @@ local config1 = {
 	InStudio = ComponentAssetsCircle25
 }
 
-local function v10(p1) --[[ Line: 44 ]]
+local function v10(p1)
 	-- upvalues: PresenceType (copy), UserPresenceText (copy)
 	local UserPresenceType = p1.userPresenceType
 	local LastLocation = p1.lastLocation
@@ -37,7 +37,7 @@ local function v10(p1) --[[ Line: 44 ]]
 	return if UserPresenceType == PresenceType.Offline then UserPresenceText[PresenceType.Offline] elseif UserPresenceType == PresenceType.Online then UserPresenceText[PresenceType.Online] elseif UserPresenceType == PresenceType.InGame or UserPresenceType == PresenceType.InStudio then if LastLocation then tostring(LastLocation) else UserPresenceText[PresenceType.Online] else ""
 end
 
-local function getUserPresenceTextFromStore(p1) --[[ Line: 63 ]]
+local function getUserPresenceTextFromStore(p1)
 	-- upvalues: PresenceType1 (copy), config (copy)
 	local UserPresenceType = p1.userPresenceType
 	local LastLocation = p1.lastLocation
@@ -45,7 +45,7 @@ local function getUserPresenceTextFromStore(p1) --[[ Line: 63 ]]
 	return if UserPresenceType == PresenceType1.Offline then config[PresenceType1.Offline] elseif UserPresenceType == PresenceType1.Online then config[PresenceType1.Online] elseif UserPresenceType == PresenceType1.InGame or UserPresenceType == PresenceType1.InStudio then if LastLocation and LastLocation ~= "" then tostring(LastLocation) else config[PresenceType1.Online] else ""
 end
 
-local function v12(p1, p2) --[[ Line: 82 ]]
+local function v12(p1, p2)
 	-- upvalues: UserPresenceText (copy), PresenceType (copy), UserPresenceImage (copy)
 	local config = nil
 	if not p1 then
@@ -70,7 +70,7 @@ local function v12(p1, p2) --[[ Line: 82 ]]
 	return config
 end
 
-local function getUserDisplayPresenceFromStoreData(p1, p2) --[[ Line: 99 ]]
+local function getUserDisplayPresenceFromStoreData(p1, p2)
 	-- upvalues: config (copy), PresenceType1 (copy), config1 (copy)
 	if not p1 then
 		return { text = "" }

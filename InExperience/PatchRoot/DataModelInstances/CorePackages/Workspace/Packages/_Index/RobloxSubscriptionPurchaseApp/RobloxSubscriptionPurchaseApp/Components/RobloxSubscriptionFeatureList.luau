@@ -21,7 +21,7 @@ local Icon = FoundationModule.Icon
 local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 
-local function FeatureRow(p1) --[[ Line: 39 ]]
+local function FeatureRow(p1)
 	-- upvalues: ReactModule (copy), View (copy), Icon (copy), IconSize (copy), Text (copy)
 	return ReactModule.createElement(View, {
 		tag = "row auto-y size-full-0 align-y-center align-x-left gap-medium",
@@ -35,7 +35,7 @@ local function FeatureRow(p1) --[[ Line: 39 ]]
 	})
 end
 
-local function getVirtualTransactionDiscounts(FeatureConfig) --[[ Line: 55 ]]
+local function getVirtualTransactionDiscounts(FeatureConfig)
 	if not FeatureConfig or not FeatureConfig.VirtualTransactionDiscounts then
 		return nil, nil
 	end
@@ -54,14 +54,14 @@ local function getVirtualTransactionDiscounts(FeatureConfig) --[[ Line: 55 ]]
 	return v1, v2
 end
 
-local function _(p1) --[[ Line: 83 | Named "getPrivateServerDiscount" ]]
+local function _(p1)
 	-- upvalues: Array (copy)
-	return if p1 and p1.PrivateServerDiscounts then Array.find(p1.PrivateServerDiscounts, function(p2): boolean --[[ Line: 88 ]]
+	return if p1 and p1.PrivateServerDiscounts then Array.find(p1.PrivateServerDiscounts, function(p2): boolean
 		return typeof(p2) == "table" and typeof(p2.PeriodIndex) == "number" and p2.PeriodIndex == 0
 	end) else nil
 end
 
-return function(p1) --[[ Line: 93 | Named "RobloxSubscriptionFeatureList" ]]
+return function(p1)
 	-- upvalues: RobloxSubscriptionStoreModule (copy), SignalsReactModule (copy), GetPeriodTypeDisplayLabelModule (copy), FFlagRobloxPlusTrialDiscountTimingModule (copy), GetFreeTrialOfferModule (copy), IsSupportedTrialPeriodTypeModule (copy), UseLocalizationFunction (copy), getVirtualTransactionDiscounts (copy), Array (copy), GetTrialUnlockDaysModule (copy), FeatureRow (copy), FFlagRobloxPlusEnableNewFeatureListModule (copy), IconName (copy), RobloxPlusUpdateDiscountIcons (copy), ReactModule (copy), View (copy), FFlagEnablePlusReferralLandingSheet (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(RobloxSubscriptionStoreModule.get().getRobloxSubscriptionProduct)
 	local Text: string = UseSignalStateResult and UseSignalStateResult.PeriodType and tostring(UseSignalStateResult.PeriodType) or ""
@@ -71,7 +71,7 @@ return function(p1) --[[ Line: 93 | Named "RobloxSubscriptionFeatureList" ]]
 	local UseLocalizationResult = UseLocalizationFunction({ periodType = PeriodTypeDisplayLabelModule })
 	local FeatureConfig = UseSignalStateResult and (UseSignalStateResult.ProductTypeDetails and (UseSignalStateResult.ProductTypeDetails.RobloxSubscriptionProductDetails and UseSignalStateResult.ProductTypeDetails.RobloxSubscriptionProductDetails.FeatureConfig))
 	local VirtualTransactionDiscounts, VirtualTransactionDiscounts2 = getVirtualTransactionDiscounts(FeatureConfig)
-	local FindResult = if FeatureConfig and FeatureConfig.PrivateServerDiscounts then Array.find(FeatureConfig.PrivateServerDiscounts, function(p2): boolean --[[ Line: 88 ]]
+	local FindResult = if FeatureConfig and FeatureConfig.PrivateServerDiscounts then Array.find(FeatureConfig.PrivateServerDiscounts, function(p2): boolean
 		return typeof(p2) == "table" and typeof(p2.PeriodIndex) == "number" and p2.PeriodIndex == 0
 	end) else nil
 	local TrialUnlockDaysModule = if IsSupportedTrialPeriodTypeModule1 then GetTrialUnlockDaysModule(FreeTrialOfferModule, VirtualTransactionDiscounts2 and VirtualTransactionDiscounts2.PeriodIndex, Text) else nil
@@ -97,7 +97,7 @@ return function(p1) --[[ Line: 93 | Named "RobloxSubscriptionFeatureList" ]]
 	})
 	local List = {}
 	
-	local function _(IconName, Text) --[[ Line: 153 | Named "addRow" ]]
+	local function _(IconName, Text)
 		-- upvalues: List (copy), FeatureRow (upval)
 		table.insert(List, FeatureRow({
 			layoutOrder = #List + 1,

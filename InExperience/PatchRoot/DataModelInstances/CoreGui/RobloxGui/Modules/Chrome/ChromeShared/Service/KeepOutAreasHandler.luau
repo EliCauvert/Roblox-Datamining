@@ -3,7 +3,7 @@ local GuiService = game:GetService("GuiService")
 local ReactModule = require(CorePackages.Packages.React)
 local UseSelectorFunction = require(CorePackages.Workspace.Packages.RoactUtils).Hooks.RoactRodux.useSelector
 
-local function v3(Vector, Vector1, List) --[[ Line: 27 ]]
+local function v3(Vector, Vector1, List)
 	local List1 = {}
 	local Y = Vector.Y
 	local X: number = Vector1.X
@@ -29,7 +29,7 @@ local function v3(Vector, Vector1, List) --[[ Line: 27 ]]
 	return List1
 end
 
-local function v4(p1, List): Rect --[[ Line: 79 ]]
+local function v4(p1, List): Rect
 	-- upvalues: GuiService (copy), v3 (copy)
 	local List1 = {}
 	
@@ -40,7 +40,7 @@ local function v4(p1, List): Rect --[[ Line: 79 ]]
 			position = value.position
 		})
 	end
-	table.sort(List1, function(A, B): boolean --[[ Line: 94 ]]
+	table.sort(List1, function(A, B): boolean
 		return A.position.X < B.position.X and A.position.X + A.size.X < B.size.X + B.position.X
 	end)
 	local GuiInset, _ = GuiService:GetGuiInset()
@@ -54,7 +54,7 @@ local function v4(p1, List): Rect --[[ Line: 79 ]]
 	return v1
 end
 
-local function _(p2, p3) --[[ Line: 117 ]]
+local function _(p2, p3)
 	-- upvalues: v4 (copy), GuiService (copy)
 	local TopbarInset = v4(p2, p3)
 	
@@ -63,15 +63,15 @@ local function _(p2, p3) --[[ Line: 117 ]]
 	end
 end
 
-function KeepOutAreasHandler(_) --[[ Line: 124 ]]
+function KeepOutAreasHandler(_)
 	-- upvalues: UseSelectorFunction (copy), ReactModule (copy), v4 (copy), GuiService (copy)
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 125 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		return p2.displayOptions.screenSize
 	end)
-	local UseSelectorResult1 = UseSelectorFunction(function(p2) --[[ Line: 129 ]]
+	local UseSelectorResult1 = UseSelectorFunction(function(p2)
 		return p2.displayOptions.keepOutAreas
 	end)
-	ReactModule.useEffect(function() --[[ Line: 133 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSelectorResult (copy), UseSelectorResult1 (copy), v4 (upval), GuiService (upval)
 		local TopbarInset = v4(UseSelectorResult, UseSelectorResult1)
 		

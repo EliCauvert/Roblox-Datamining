@@ -2,23 +2,23 @@
 local PromiseModule = require(Parent.Promise)
 local HttpClientModule = require(Parent.HttpClient)
 
-local function _(p1) --[[ Line: 29 | Named "toRejection" ]]
+local function _(p1)
 	return if typeof(p1) == "table" and typeof(p1.errorMessage) == "string" then p1 else { errorMessage = tostring(p1) }
 end
 
 local FetchFunction = HttpClientModule.fetch
 local AsPromiseFunction = HttpClientModule.asPromise
 
-return function(p1) --[[ Line: 53 | Named "pollAnalyticsOperation" ]]
+return function(p1)
 	-- upvalues: PromiseModule (copy), AsPromiseFunction (copy), FetchFunction (copy)
 	local Delay = p1.delay or PromiseModule.delay
 	
-	return PromiseModule.new(function(Callback2, Callback1, Callback: (any) -> ()) --[[ Line: 61 ]]
+	return PromiseModule.new(function(Callback2, Callback1, Callback: (any) -> ())
 		-- upvalues: AsPromiseFunction (upval), FetchFunction (upval), p1 (copy), Delay (copy)
 		local Flag = false
 		local v1 = nil
 		local v2 = nil
-		Callback(function() --[[ Line: 66 ]]
+		Callback(function()
 			-- upvalues: Flag (ref), v1 (ref), v2 (ref)
 			Flag = true
 			
@@ -30,7 +30,7 @@ return function(p1) --[[ Line: 53 | Named "pollAnalyticsOperation" ]]
 			end
 		end)
 		
-		local function postQuery(p2) --[[ Line: 76 ]]
+		local function postQuery(p2)
 			-- upvalues: Flag (ref), AsPromiseFunction (upval), FetchFunction (upval), p1 (upval), v1 (ref), Callback1 (copy), Delay (upval), v2 (ref), postQuery (copy), Callback2 (copy)
 			if not Flag then
 				local AsPromiseResult = AsPromiseFunction(FetchFunction({
@@ -39,12 +39,12 @@ return function(p1) --[[ Line: 53 | Named "pollAnalyticsOperation" ]]
 					url = p1.url,
 					body = p1.body,
 					analyticsKey = p1.analyticsKey,
-					decode = function(p3) --[[ Line: 86 ]]
+					decode = function(p3)
 						return p3 and p3.operation or {}
 					end
 				}))
 				v1 = AsPromiseResult
-				AsPromiseResult:andThen(function(Result) --[[ Line: 91 ]]
+				AsPromiseResult:andThen(function(Result)
 					-- upvalues: Flag (upval), p2 (copy), Callback1 (upval), p1 (upval), Delay (upval), v2 (upval), postQuery (upval), Callback2 (upval)
 					if Flag then return end
 					if Result.done == true then
@@ -74,12 +74,12 @@ return function(p1) --[[ Line: 53 | Named "pollAnalyticsOperation" ]]
 					else
 						local DelayResult = Delay(2)
 						v2 = DelayResult
-						DelayResult:andThen(function() --[[ Line: 103 ]]
+						DelayResult:andThen(function()
 							-- upvalues: postQuery (upval), p2 (upval)
 							postQuery(p2 + 1)
 						end)
 					end
-				end, function(p3) --[[ Line: 125 ]]
+				end, function(p3)
 					-- upvalues: Callback1 (upval)
 					Callback1(if typeof(p3) == "table" and typeof(p3.errorMessage) == "string" then p3 else { errorMessage = tostring(p3) })
 				end)

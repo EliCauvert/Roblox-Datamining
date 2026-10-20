@@ -1,7 +1,7 @@
 ﻿local ReactModule = require(script.Parent.Parent.Parent.Parent.React)
 local SceneViewModule = require(script.Parent.Parent.SceneView)
 
-return function(p1) --[[ Line: 8 | Named "SwitchView" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), SceneViewModule (copy)
 	local State = p1.navigation.state
 	local Descriptor = p1.descriptors[State.routes[State.index].key]

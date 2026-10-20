@@ -14,9 +14,9 @@ local Image = require(CorePackages.Packages.Foundation).Image
 local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
 local YOffset = #ControlsModule.gamepadLabels.right * 43 + 62
 
-local function verticalControlsList(Label) --[[ Line: 47 ]]
+local function verticalControlsList(Label)
 	-- upvalues: WithLocalizationModule (copy), Roact (copy), ThemedTextLabelModule (copy)
-	return WithLocalizationModule(Label.controls)(function(List) --[[ Line: 48 ]]
+	return WithLocalizationModule(Label.controls)(function(List)
 		-- upvalues: Roact (upval), ThemedTextLabelModule (upval), Label (copy)
 		local config = {
 			ListLayout = Roact.createElement("UIListLayout", {
@@ -43,7 +43,7 @@ local function verticalControlsList(Label) --[[ Line: 47 ]]
 	end)
 end
 
-return function(p1) --[[ Line: 76 | Named "GamepadControls" ]]
+return function(p1)
 	-- upvalues: UserInputService (copy), Roact (copy), ControlLayoutContainerModule (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), ImageSetLabel (copy), AssetsModule (copy), ReactModule (copy), verticalControlsList (copy), ControlsModule (copy), YOffset (copy)
 	local Platform = UserInputService:GetPlatform()
 	

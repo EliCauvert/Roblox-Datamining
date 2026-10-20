@@ -11,7 +11,7 @@ if require(Parent.SharedFlags).FFlagSharedChatEntryPointAction then
 else
 	local Flag = false
 	
-	return RoduxModule.makeActionCreator(script.Name, function(EntryPoint) --[[ Line: 28 ]]
+	return RoduxModule.makeActionCreator(script.Name, function(EntryPoint)
 		-- upvalues: FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), FFlagAppChatTTIStaleGuardModule (copy), Flag (ref)
 		if FFlagAppChatPerfTrackingModule then
 			if EntryPoint == nil then

@@ -69,7 +69,7 @@ local ServiceModule = if FFlagEnableInExperienceShop1 then require(Chrome.Servic
 local ConstantsModule1 = if FFlagEnableInExperienceShop1 then require(Chrome.ChromeShared.Unibar.Constants) else nil
 local CommonIconModule = if FFlagEnableInExperienceShop1 then require(Chrome.Integrations.CommonIcon) else nil
 local UseMappedSignal = if FFlagEnableInExperienceShop1 then require(CorePackages.Workspace.Packages.Chrome).Hooks.useMappedSignal else nil
-local NewResult = if FFlagEnableInExperienceShop1 and ServiceModule and ConstantsModule1 then require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(ServiceModule:onIntegrationStatusChanged(), function() --[[ Line: 106 ]]
+local NewResult = if FFlagEnableInExperienceShop1 and ServiceModule and ConstantsModule1 then require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(ServiceModule:onIntegrationStatusChanged(), function()
 	-- upvalues: ServiceModule (copy), ConstantsModule1 (copy)
 	return ServiceModule:isWindowOpen(ConstantsModule1.IN_EXPERIENCE_SHOP_ID)
 end) else nil
@@ -77,7 +77,7 @@ local ToggleInExperienceShopWindow = if FFlagEnableInExperienceShop1 then requir
 local SwitchServerConfirmation = SwitchServerModule.SwitchServerConfirmation
 local GetSwitchServerStoreFunction = SwitchServerModule.GetSwitchServerStore
 
-local function getShopGlobalIconEnabled(p1) --[[ Line: 119 ]]
+local function getShopGlobalIconEnabled(p1)
 	-- upvalues: FFlagEnableInExperienceShop1 (copy), InExperienceShopModule (copy)
 	if FFlagEnableInExperienceShop1 then
 		local GetShopGlobalIconStoreFunction = InExperienceShopModule.GetShopGlobalIconStore
@@ -88,7 +88,7 @@ local function getShopGlobalIconEnabled(p1) --[[ Line: 119 ]]
 	end
 end
 
-local function getShopGlobalStatusIndicatorEnabled(p1) --[[ Line: 127 ]]
+local function getShopGlobalStatusIndicatorEnabled(p1)
 	-- upvalues: FFlagEnableInExperienceShop1 (copy), InExperienceShopModule (copy)
 	if FFlagEnableInExperienceShop1 then
 		local GetShopGlobalIconStoreFunction = InExperienceShopModule.GetShopGlobalIconStore
@@ -99,7 +99,7 @@ local function getShopGlobalStatusIndicatorEnabled(p1) --[[ Line: 127 ]]
 	end
 end
 
-local function handleShopGlobalIconActivated() --[[ Line: 135 ]]
+local function handleShopGlobalIconActivated()
 	-- upvalues: FFlagEnableInExperienceShop1 (copy), FFlagCenterInExperienceShopWindow (copy), ToggleInExperienceShopWindow (copy), ServiceModule (copy), ConstantsModule1 (copy)
 	if not FFlagEnableInExperienceShop1 then return end
 	if FFlagCenterInExperienceShopWindow then
@@ -113,33 +113,33 @@ local function handleShopGlobalIconActivated() --[[ Line: 135 ]]
 	end
 end
 
-local function _(): boolean --[[ Line: 150 | Named "canShowAssistantBuild" ]]
+local function _(): boolean
 	-- upvalues: BuildModeLaunchModule (copy), VRService (copy)
 	return BuildModeLaunchModule:hasBuildMode() and not VRService.VREnabled
 end
 
-local function getShouldEnableSwitchServer(p1) --[[ Line: 154 ]]
+local function getShouldEnableSwitchServer(p1)
 	-- upvalues: FFlagShowSwitchServerButton1 (copy), GetSwitchServerStoreFunction (copy)
 	return if FFlagShowSwitchServerButton1 and GetSwitchServerStoreFunction then GetSwitchServerStoreFunction(p1).shouldEnableSwitchServer(p1) else false
 end
 
-local function getIsConfirmationOpen(p1) --[[ Line: 162 ]]
+local function getIsConfirmationOpen(p1)
 	-- upvalues: FFlagShowSwitchServerButton1 (copy), GetSwitchServerStoreFunction (copy)
 	return if FFlagShowSwitchServerButton1 and GetSwitchServerStoreFunction then GetSwitchServerStoreFunction(p1).isConfirmationOpen(p1) else false
 end
 
-return function(_) --[[ Line: 170 | Named "TopBarApp" ]]
+return function(_)
 	-- upvalues: FFlagShowGameAgeRating (copy), UniversalAppPolicyModule (copy), SignalsReactModule (copy), CoreGuiCommonModule (copy), DisplayModule (copy), FFlagEnableInExperienceShop1 (copy), FFlagTopBarShopIconV2Module (copy), getShopGlobalIconEnabled (copy), getShopGlobalStatusIndicatorEnabled (copy), handleShopGlobalIconActivated (copy), ReactModule (copy), InExperienceShopModule (copy), UseMappedSignal (copy), NewResult (copy), IsSpatialFunction (copy), FFlagExperienceAgeRatingBadge (copy), ExperienceAgeRatingPolicyModule (copy), GamepadConnectorModule (copy), VRService (copy), ConstantsModule (copy), FFlagShowSwitchServerButton1 (copy), getShouldEnableSwitchServer (copy), getIsConfirmationOpen (copy), GetSwitchServerStoreFunction (copy), View (copy), FFlagShowGameAgeRating1 (copy), IsSideSheetEnabledModule (copy), SelectionCursorProvider (copy), MenuIconModule (copy), FFlagAddTraversalBackButton (copy), TraversalBackButtonModule (copy), MenuIconContextModule (copy), UnibarModule (copy), ShopIconModule (ref), ShopGlobalIcon (copy), FFlagExperienceShopNewIconography (copy), CommonIconModule (copy), FFlagAddMenuNavigationToggleDialog (copy), MenuNavigationToggleDialogModule (copy), FFlagGamepadNavigationDialogABTestModule (copy), GamepadNavigationDialogModule (copy), SwitchServerConfirmation (copy), JoinVoiceBinderModule (copy), GetFFlagEnableCrossExpVoiceFunction (copy), PartyMicBinderModule (copy), AnalyticsModule (copy), FFlagEnablePlaytestModeUnibar (copy), PlaytestModeTooltipModule (copy), FFlagEnableTeamTestLua (copy), UnpublishedPlaytestModeTooltip (copy), ExperienceAgeRatingBadgeModule (copy), FFlagAppNavMyStatsTab (copy), BuildModeLaunchModule (copy), BuildPillMenuPortalHost (copy), HealthBar (copy), VoiceStateContextModule (copy), VRBottomUnibarModule (copy), Default (copy), IsInExperienceUIVREnabled (copy)
-	local UseAppPolicyResult = if FFlagShowGameAgeRating then UniversalAppPolicyModule.useAppPolicy(function(p1) --[[ Line: 172 ]]
+	local UseAppPolicyResult = if FFlagShowGameAgeRating then UniversalAppPolicyModule.useAppPolicy(function(p1)
 		return p1.getShowGameAgeRating()
-	end) else UniversalAppPolicyModule.useAppPolicy(function(p1) --[[ Line: 175 ]]
+	end) else UniversalAppPolicyModule.useAppPolicy(function(p1)
 		return p1.getShowBadgeOver12()
 	end)
-	local UseSignalStateResult = SignalsReactModule.useSignalState(function(p1) --[[ Line: 179 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState(function(p1)
 		-- upvalues: CoreGuiCommonModule (upval)
 		return CoreGuiCommonModule.Stores.GetKeepOutAreasStore(p1)
 	end)
-	local UseSignalStateResult1 = SignalsReactModule.useSignalState(function(p1) --[[ Line: 182 ]]
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(function(p1)
 		-- upvalues: DisplayModule (upval)
 		return DisplayModule.GetDisplayStore(p1).getUIScale(p1)
 	end)
@@ -152,11 +152,11 @@ return function(_) --[[ Line: 170 | Named "TopBarApp" ]]
 		UseSignalStateResult2 = SignalsReactModule.useSignalState(getShopGlobalIconEnabled)
 		UseSignalStateResult3 = SignalsReactModule.useSignalState(getShopGlobalStatusIndicatorEnabled)
 		OnActivated = handleShopGlobalIconActivated
-		ReactModule.useEffect(function() --[[ Line: 194 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: InExperienceShopModule (upval)
-			return InExperienceShopModule.initShopGlobalIcon and InExperienceShopModule.initShopGlobalIcon() or function() --[[ Line: 196 ]] end
+			return InExperienceShopModule.initShopGlobalIcon and InExperienceShopModule.initShopGlobalIcon() or function() end
 		end, {})
-		IsActive = (UseMappedSignal or function() --[[ Line: 198 ]] end)(NewResult)
+		IsActive = (UseMappedSignal or function() end)(NewResult)
 	end
 	local UseRefResult = ReactModule.useRef(nil)
 	local IsSpatial = IsSpatialFunction()
@@ -169,12 +169,12 @@ return function(_) --[[ Line: 170 | Named "TopBarApp" ]]
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local ShowTopBar = GamepadConnectorModule:getShowTopBar()
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(ShowTopBar:get())
-	ReactModule.useEffect(function() --[[ Line: 214 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsSpatialFunction (upval), GamepadConnectorModule (upval), VRService (upval), FFlagExperienceAgeRatingBadge (upval), Callback (ref), ShowTopBar (copy), UseBindingResult2 (copy), UseSignalStateResult (copy)
 		if not IsSpatialFunction() then
 			GamepadConnectorModule:connectToTopbar()
 		end
-		local Connection = VRService:GetPropertyChangedSignal("VREnabled"):Connect(function() --[[ Line: 218 ]]
+		local Connection = VRService:GetPropertyChangedSignal("VREnabled"):Connect(function()
 			-- upvalues: FFlagExperienceAgeRatingBadge (upval), Callback (upval), IsSpatialFunction (upval), GamepadConnectorModule (upval)
 			if FFlagExperienceAgeRatingBadge then
 				Callback(IsSpatialFunction())
@@ -187,12 +187,12 @@ return function(_) --[[ Line: 170 | Named "TopBarApp" ]]
 				GamepadConnectorModule:connectToTopbar()
 			end
 		end)
-		local Connection1 = ShowTopBar:connect(function() --[[ Line: 229 ]]
+		local Connection1 = ShowTopBar:connect(function()
 			-- upvalues: UseBindingResult2 (upval), ShowTopBar (upval)
 			UseBindingResult2(ShowTopBar:get())
 		end)
 		
-		return function() --[[ Line: 232 ]]
+		return function()
 			-- upvalues: Connection (copy), GamepadConnectorModule (upval), UseSignalStateResult (upval), Connection1 (copy)
 			if Connection then
 				Connection:Disconnect()
@@ -205,7 +205,7 @@ return function(_) --[[ Line: 170 | Named "TopBarApp" ]]
 			Connection1:disconnect()
 		end
 	end, {})
-	local UseResult = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 244 ]]
+	local UseResult = ReactModule.useCallback(function(Frame: Frame)
 		-- upvalues: UseSignalStateResult (copy), ConstantsModule (upval)
 		UseSignalStateResult.setKeepOutArea(ConstantsModule.TopBarKeepOutAreaId, Frame.AbsolutePosition, Frame.AbsoluteSize)
 	end, { UseSignalStateResult })
@@ -247,8 +247,8 @@ return function(_) --[[ Line: 170 | Named "TopBarApp" ]]
 		}, {
 			ReactModule.createElement(UnibarModule, {
 				layoutOrder = 2,
-				onMinWidthChanged = function() --[[ Line: 286 ]] end,
-				onAreaChanged = function() --[[ Line: 287 ]] end,
+				onMinWidthChanged = function() end,
+				onAreaChanged = function() end,
 				menuRef = UseRefResult
 			})
 		}),
@@ -304,7 +304,7 @@ return function(_) --[[ Line: 170 | Named "TopBarApp" ]]
 			})
 		}),
 		VRBottomBar = if VRService.VREnabled then ReactModule.createElement(VoiceStateContextModule.Provider, {}, {
-			VRBottomBar = VoiceStateContextModule.withVoiceState(function(p1) --[[ Line: 394 ]]
+			VRBottomBar = VoiceStateContextModule.withVoiceState(function(p1)
 				-- upvalues: ReactModule (upval), VRBottomUnibarModule (upval), Default (upval), IsInExperienceUIVREnabled (upval), UseAppPolicyResult (copy)
 				return ReactModule.createElement(VRBottomUnibarModule, {
 					voiceChatServiceManager = Default,

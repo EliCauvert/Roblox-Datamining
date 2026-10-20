@@ -10,7 +10,7 @@ local ButtonHoldStateEnum = FocusNavigationUtilsModule.ButtonHoldStateEnum
 local ConstantsModule = require(HoldToPlay.Constants)
 local FFlagUserSearchCancelTileActivationOnHoldIntent = require(Parent.SharedFlags).FFlagUserSearchCancelTileActivationOnHoldIntent
 
-local function HoldDetectorForSelectedObject(p1) --[[ Line: 32 ]]
+local function HoldDetectorForSelectedObject(p1)
 	-- upvalues: ReactModule (copy), UseButtonHoldFunction (copy), ConstantsModule (copy), AppShortcutBarContext (copy), ButtonHoldStateEnum (copy), FFlagUserSearchCancelTileActivationOnHoldIntent (copy), ReactFocusNavigationModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
@@ -24,7 +24,7 @@ local function HoldDetectorForSelectedObject(p1) --[[ Line: 32 ]]
 	local IsHoldStateMatch: boolean = UseButtonHoldResult.holdState == ButtonHoldStateEnum.HOLDING or (UseButtonHoldResult.holdState == ButtonHoldStateEnum.JUST_PRESSED or UseButtonHoldResult.holdState == ButtonHoldStateEnum.COMPLETED)
 	local IsHoldStateMatch1: boolean = FFlagUserSearchCancelTileActivationOnHoldIntent and (UseButtonHoldResult.holdState == ButtonHoldStateEnum.HOLDING or UseButtonHoldResult.holdState == ButtonHoldStateEnum.COMPLETED)
 	local IsDisableRegularActionOnHoldIntent: boolean = FFlagUserSearchCancelTileActivationOnHoldIntent and p1.disableRegularActionOnHoldIntent == true
-	ReactModule.useEffect(function() --[[ Line: 65 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsDisableRegularActionOnHoldIntent (copy), p1 (copy), IsHoldStateMatch1 (copy), IsHoldStateMatch (copy), FFlagUserSearchCancelTileActivationOnHoldIntent (upval)
 		if IsDisableRegularActionOnHoldIntent then
 			if p1.setDisabledForHold then
@@ -33,7 +33,7 @@ local function HoldDetectorForSelectedObject(p1) --[[ Line: 32 ]]
 		elseif not IsHoldStateMatch and p1.setDisabledForHold then
 			p1.setDisabledForHold(false)
 		end
-		return function() --[[ Line: 75 ]]
+		return function()
 			-- upvalues: p1 (upval), FFlagUserSearchCancelTileActivationOnHoldIntent (upval), IsDisableRegularActionOnHoldIntent (upval), IsHoldStateMatch1 (upval)
 			if p1.setDisabledForHold and (not FFlagUserSearchCancelTileActivationOnHoldIntent or (not IsDisableRegularActionOnHoldIntent or not IsHoldStateMatch1)) then
 				p1.setDisabledForHold(false)
@@ -44,7 +44,7 @@ local function HoldDetectorForSelectedObject(p1) --[[ Line: 32 ]]
 		p1.setDisabledForHold,
 		if IsDisableRegularActionOnHoldIntent then IsHoldStateMatch1 else false
 	})
-	ReactModule.useEffect(function() --[[ Line: 97 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), IsHoldStateMatch (copy), p1 (copy), UseDispatchButtonHoldStartedResult (copy), UseButtonHoldResult (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult1_1 (copy), UseDispatchButtonHoldEndedResult (copy), UseRefResult1 (copy)
 		if UseRefResult.current or not IsHoldStateMatch then
 			if UseRefResult.current and not IsHoldStateMatch then
@@ -75,7 +75,7 @@ local function HoldDetectorForSelectedObject(p1) --[[ Line: 32 ]]
 		p1.focusNavigationEventName, p1.keyCode, UseStateResult1_1, UseStateResult3
 	})
 	local IsNotCurrent: boolean = UseButtonHoldResult.holdState == ButtonHoldStateEnum.COMPLETED and UseRefResult1.current == false
-	ReactModule.useEffect(function() --[[ Line: 135 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsNotCurrent (copy), p1 (copy), UseRefResult1 (copy), IsDisableRegularActionOnHoldIntent (copy)
 		if IsNotCurrent and p1.onHoldDetected then
 			UseRefResult1.current = true
@@ -92,21 +92,21 @@ local function HoldDetectorForSelectedObject(p1) --[[ Line: 32 ]]
 		p1.setDisabledForHold,
 		IsDisableRegularActionOnHoldIntent
 	})
-	local UseEventHandlerMapResult = ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function() --[[ Line: 166 ]]
+	local UseEventHandlerMapResult = ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function()
 		-- upvalues: UseStateResult1_1 (copy), UseButtonHoldResult (copy)
 		return if UseStateResult1_1 then {
 			[UseStateResult1_1] = { handler = UseButtonHoldResult.eventHandler }
 		} else {}
-	end, { UseButtonHoldResult.eventHandler, UseStateResult1_1 }), (ReactFocusNavigationModule.useEventMap((ReactModule.useMemo(function() --[[ Line: 156 ]]
+	end, { UseButtonHoldResult.eventHandler, UseStateResult1_1 }), (ReactFocusNavigationModule.useEventMap((ReactModule.useMemo(function()
 		-- upvalues: UseStateResult3 (copy), UseStateResult1_1 (copy)
 		return if UseStateResult3 and UseStateResult1_1 then { [UseStateResult3] = UseStateResult1_1 } else {}
 	end, { UseStateResult3, UseStateResult1_1 })))))
-	ReactModule.useEffect(function() --[[ Line: 182 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseEventHandlerMapResult (copy), p1 (copy)
 		if UseEventHandlerMapResult then
 			UseEventHandlerMapResult(p1.guiObject)
 		end
-		return function() --[[ Line: 186 ]]
+		return function()
 			-- upvalues: UseEventHandlerMapResult (upval)
 			UseEventHandlerMapResult(nil)
 		end
@@ -115,7 +115,7 @@ local function HoldDetectorForSelectedObject(p1) --[[ Line: 32 ]]
 	return nil
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 194 | Named "HoldDetector" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseSelectedFunction (copy), ReactModule (copy), HoldDetectorForSelectedObject (copy)
 	return if UseSelectedFunction({ current = p1.guiObject }) then ReactModule.createElement(HoldDetectorForSelectedObject, p1) else nil
 end)

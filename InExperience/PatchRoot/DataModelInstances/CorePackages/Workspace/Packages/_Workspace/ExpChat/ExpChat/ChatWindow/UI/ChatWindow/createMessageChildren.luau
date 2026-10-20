@@ -8,7 +8,7 @@ local FFlagEnableVerifiedBadgeStore = require(Parent.SharedFlags).FFlagEnableVer
 local EnableInExpChatRewriteEngineFeature = game:GetEngineFeature("EnableInExpChatRewrite")
 local FFlagExpChatRewriteInlineModule = require(ExpChat.Flags.FFlagExpChatRewriteInline)
 
-return function(p1) --[[ Line: 34 | Named "createMessageChildren" ]]
+return function(p1)
 	-- upvalues: Dictionary (copy), FFlagEnableVerifiedBadgeStore (copy), GetResult (copy), ReactModule (copy), TranslatedTextMessageModule (copy), EnableInExpChatRewriteEngineFeature (copy), FFlagExpChatRewriteInlineModule (copy)
 	local VerifiedUserIds = p1.verifiedUserIds
 	local TextTransparency = p1.textTransparency
@@ -17,7 +17,7 @@ return function(p1) --[[ Line: 34 | Named "createMessageChildren" ]]
 	local ShowTranslationButton = p1.showTranslationButton
 	local IsSpatialUIEnabled = p1.isSpatialUIEnabled
 	local OnTextMessageLabelButtonActivated = p1.onTextMessageLabelButtonActivated
-	local MapResult = Dictionary.map(p1.messages, function(Message, LayoutOrder) --[[ Line: 44 ]]
+	local MapResult = Dictionary.map(p1.messages, function(Message, LayoutOrder)
 		-- upvalues: FFlagEnableVerifiedBadgeStore (upval), GetResult (upval), Dictionary (upval), VerifiedUserIds (copy), ReactModule (upval), TranslatedTextMessageModule (upval), TextTransparency (copy), EnableInExpChatRewriteEngineFeature (upval), TransparencyValue (copy), OnTextMessageLabelButtonActivated (copy), ChatWindowSettings (copy), ShowTranslationButton (copy), IsSpatialUIEnabled (copy), FFlagExpChatRewriteInlineModule (upval)
 		if Message.isVisibleInChatWindow then
 			return ReactModule.createElement(TranslatedTextMessageModule, {
@@ -30,7 +30,7 @@ return function(p1) --[[ Line: 34 | Named "createMessageChildren" ]]
 				chatWindowSettings = ChatWindowSettings,
 				showTranslationButton = ShowTranslationButton,
 				isSpatialUIEnabled = IsSpatialUIEnabled,
-				onToggle = function() --[[ Line: 64 ]] end,
+				onToggle = function() end,
 				chatWindowTransparencyBindable = if FFlagExpChatRewriteInlineModule then TransparencyValue else nil
 			}), Message.messageId
 		else

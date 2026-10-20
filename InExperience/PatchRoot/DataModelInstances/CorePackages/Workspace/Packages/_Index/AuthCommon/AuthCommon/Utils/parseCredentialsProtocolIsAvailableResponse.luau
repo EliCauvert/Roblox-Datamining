@@ -1,6 +1,6 @@
 ﻿local GetFFlagLuaAppSignupPasskeyAvailabilityPreflightFunction = require(script:FindFirstAncestor("AuthCommon").Parent.SharedFlags).GetFFlagLuaAppSignupPasskeyAvailabilityPreflight
 
-return function(p1) --[[ Line: 6 ]]
+return function(p1)
 	-- upvalues: GetFFlagLuaAppSignupPasskeyAvailabilityPreflightFunction (copy)
 	local IsSupportsPasskeyCreationOnDevice = true
 	local IsAvailable = false

@@ -1,9 +1,9 @@
 ﻿local StarterGui = game:GetService("StarterGui")
 local SetRespawnBehaviorModule = require(script.Parent.Parent.Actions.SetRespawnBehavior)
 
-return function(p1) --[[ Line: 8 | Named "registerSetCores" ]]
+return function(p1)
 	-- upvalues: StarterGui (copy), SetRespawnBehaviorModule (copy)
-	StarterGui:RegisterSetCore("ResetButtonCallback", function(BindableEvent) --[[ Line: 9 ]]
+	StarterGui:RegisterSetCore("ResetButtonCallback", function(BindableEvent)
 		-- upvalues: p1 (copy), SetRespawnBehaviorModule (upval)
 		local Flag = true
 		local v1 = nil

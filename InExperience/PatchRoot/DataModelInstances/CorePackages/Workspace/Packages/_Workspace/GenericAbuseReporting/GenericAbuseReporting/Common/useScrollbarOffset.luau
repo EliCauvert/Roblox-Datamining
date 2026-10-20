@@ -1,9 +1,9 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
 
-return function(p1, p2): number --[[ Line: 8 | Named "useScrollbarOffset" ]]
+return function(p1, p2): number
 	-- upvalues: ReactModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 11 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), p2 (copy), UseStateResult2 (copy)
 		if p2.Y < p1.Y then
 			UseStateResult2(true)

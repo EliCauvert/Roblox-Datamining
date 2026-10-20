@@ -5,15 +5,15 @@ local ReactRobloxModule = require(Parent.ReactRoblox)
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 
-return function(p1) --[[ Line: 31 | Named "AdCampaignCreatedToast" ]]
+return function(p1)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), ReactRobloxModule (copy), View (copy), Text (copy)
 	local UseOverlayResult = FoundationModule.Hooks.useOverlay()
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
-	ReactModule.useEffect(function() --[[ Line: 35 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy)
 		local DelayedThread = task.delay(5, p1.onClose)
 		
-		return function() --[[ Line: 37 ]]
+		return function()
 			-- upvalues: DelayedThread (copy)
 			task.cancel(DelayedThread)
 		end

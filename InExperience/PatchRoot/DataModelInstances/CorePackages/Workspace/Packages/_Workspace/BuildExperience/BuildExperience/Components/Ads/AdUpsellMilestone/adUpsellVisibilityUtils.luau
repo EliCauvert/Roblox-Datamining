@@ -1,5 +1,5 @@
 ﻿return {
-	isCardVisibleInScrollViewport = function(Frame, Frame1: Frame): boolean --[[ Line: 1 ]]
+	isCardVisibleInScrollViewport = function(Frame, Frame1: Frame): boolean
 		local AbsoluteWindowSize = Frame.AbsoluteWindowSize
 		local AbsoluteSize = Frame1.AbsoluteSize
 		

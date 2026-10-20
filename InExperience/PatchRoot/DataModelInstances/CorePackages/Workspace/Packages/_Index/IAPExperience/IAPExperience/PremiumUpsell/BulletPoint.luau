@@ -12,9 +12,9 @@ local WithStyleFunction = UIBloxModule.Style.withStyle
 local IconSize = UIBloxModule.App.Constant.IconSize
 local NewSmall = IconSize.Small + 16
 
-return function(p1) --[[ Line: 28 ]]
+return function(p1)
 	-- upvalues: WithStyleFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), NewSmall (copy), TextService (copy), RoactModule (copy), ImageSetLabel (copy), IconSize (copy), Images (copy), NormalizeFontFaceFunction (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 29 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: p1 (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), NewSmall (upval), TextService (upval), RoactModule (upval), ImageSetLabel (upval), IconSize (upval), Images (upval), NormalizeFontFaceFunction (upval)
 		local Theme = p2.Theme
 		local _Font = p2.Font

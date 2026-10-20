@@ -5,7 +5,7 @@ local FoundationModule = require(Parent.Foundation)
 local BadgeModule = require(AvatarExperienceInspectAndBuy.Components.Common.Badge)
 local Enums = FoundationModule.Enums
 
-return function(Frame) --[[ Line: 33 | Named "ControlBar" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), BadgeModule (copy), Enums (copy)
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "auto-xy row align-x-left align-y-center gap-small",

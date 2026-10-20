@@ -30,13 +30,13 @@ local config = {
 	} else nil
 }
 
-local function markConversationAndMessagesAsRead(p1, ConversationId) --[[ Line: 76 ]]
+local function markConversationAndMessagesAsRead(p1, ConversationId)
 	-- upvalues: Immutable (copy)
 	local v1 = p1[ConversationId]
 	
 	if v1 then
 		assert(v1, "FFlagLuauTinyControlFlowAnalysis")
-		local HasUnreadMessages = Immutable.Set(Immutable.Set(v1, "messages", (v1.messages:Map(function(p2) --[[ Line: 85 ]]
+		local HasUnreadMessages = Immutable.Set(Immutable.Set(v1, "messages", (v1.messages:Map(function(p2)
 			-- upvalues: Immutable (upval)
 			return if p2.read then p2 else Immutable.Set(p2, "read", true)
 		end))), "hasUnreadMessages", false)
@@ -49,7 +49,7 @@ local function markConversationAndMessagesAsRead(p1, ConversationId) --[[ Line: 
 	end
 end
 
-local function addMessagesToConversation(p1, ConversationId, p2) --[[ Line: 101 ]]
+local function addMessagesToConversation(p1, ConversationId, p2)
 	-- upvalues: Immutable (copy), OrderedMap (copy)
 	local v1 = p1[ConversationId]
 	
@@ -108,7 +108,7 @@ local function addMessagesToConversation(p1, ConversationId, p2) --[[ Line: 101 
 	return Immutable.Set(p1, UsersTyping.id, UsersTyping)
 end
 
-local function updateMessageContentToDisplay(p3, ConversationId, MessageId, ContentToDisplay) --[[ Line: 186 ]]
+local function updateMessageContentToDisplay(p3, ConversationId, MessageId, ContentToDisplay)
 	-- upvalues: Immutable (copy)
 	local v3 = p3[ConversationId]
 	
@@ -124,12 +124,12 @@ local function updateMessageContentToDisplay(p3, ConversationId, MessageId, Cont
 	return p3
 end
 
-local function _(p3, p4) --[[ Line: 206 | Named "messagesFromResponse" ]]
+local function _(p3, p4)
 	-- upvalues: Functional (copy), MessageModelModule (copy)
 	if p4 then
 		local Id = nil
 		
-		return (Functional.MapReverse(p4, function(p5) --[[ Line: 213 ]]
+		return (Functional.MapReverse(p4, function(p5)
 			-- upvalues: MessageModelModule (upval), p3 (copy), Id (ref)
 			local FromWebResult = MessageModelModule.fromWeb(p5, p3, Id)
 			Id = FromWebResult.id
@@ -141,7 +141,7 @@ local function _(p3, p4) --[[ Line: 206 | Named "messagesFromResponse" ]]
 	end
 end
 
-local function messagesFromResponseOfChannelsApi(ConversationId, Messages) --[[ Line: 221 ]]
+local function messagesFromResponseOfChannelsApi(ConversationId, Messages)
 	-- upvalues: MessageModelModule (copy)
 	if not Messages then
 		return {}
@@ -160,18 +160,18 @@ local function messagesFromResponseOfChannelsApi(ConversationId, Messages) --[[ 
 	return FromChannelsApiResults
 end
 
-local _ = function(p3) --[[ Line: 243 | Named "getMessagesFromConversationResponse" ]]
+local _ = function(p3)
 	return p3.messages or {}
 end
 
-local _ = function(p3): boolean --[[ Line: 249 | Named "isMessageFromSelf" ]]
+local _ = function(p3): boolean
 	-- upvalues: Players (copy)
 	local v3 = p3 and p3[#p3] or nil
 	
 	return if v3 then v3.senderTargetId == tostring(Players.LocalPlayer.UserId) else false
 end
 
-local function getShouldMarkConversationUnread(p3, Messages): boolean --[[ Line: 255 ]]
+local function getShouldMarkConversationUnread(p3, Messages): boolean
 	-- upvalues: Players (copy)
 	if not p3 or not p3.messages or not Messages then
 		return false
@@ -194,19 +194,19 @@ local function getShouldMarkConversationUnread(p3, Messages): boolean --[[ Line:
 end
 
 return require(Parent.Rodux).createReducer({}, {
-	[require(AppChat.Conversations.Actions.ReceivedConversation).name] = function(p4, p5) --[[ Line: 292 ]]
+	[require(AppChat.Conversations.Actions.ReceivedConversation).name] = function(p4, p5)
 		-- upvalues: UpdateConversationReducerModule (copy)
 		return UpdateConversationReducerModule(p4, p5.conversation)
 	end,
-	[NetworkingChatModule.StartGroupConversation.Succeeded.name] = function(p4, p5) --[[ Line: 295 ]]
+	[NetworkingChatModule.StartGroupConversation.Succeeded.name] = function(p4, p5)
 		-- upvalues: ConversationModule (copy), UpdateConversationReducerModule (copy)
 		return UpdateConversationReducerModule(p4, (ConversationModule.fromWeb(p5.responseBody.conversation)))
 	end,
-	[NetworkingChatModule.StartOneToOneConversation.Succeeded.name] = function(p4, p5) --[[ Line: 300 ]]
+	[NetworkingChatModule.StartOneToOneConversation.Succeeded.name] = function(p4, p5)
 		-- upvalues: ConversationModule (copy), UpdateConversationReducerModule (copy)
 		return UpdateConversationReducerModule(p4, (ConversationModule.fromWeb(p5.responseBody.conversation)))
 	end,
-	[AppChatNetworkingModule.rodux.CreateConversation.Succeeded.name] = function(p4, p5) --[[ Line: 305 ]]
+	[AppChatNetworkingModule.rodux.CreateConversation.Succeeded.name] = function(p4, p5)
 		-- upvalues: ConversationChannelsModule (copy), UpdateConversationReducerModule (copy)
 		local ResponseBody = p5.responseBody
 		
@@ -215,7 +215,7 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return p4
 	end,
-	[AppChatNetworkingModule.rodux.DuplicateConversation.Succeeded.name] = function(p4, p5) --[[ Line: 319 ]]
+	[AppChatNetworkingModule.rodux.DuplicateConversation.Succeeded.name] = function(p4, p5)
 		-- upvalues: ConversationChannelsModule (copy), AddConversationModule (copy)
 		local ResponseBody = p5.responseBody
 		
@@ -224,11 +224,11 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return p4
 	end,
-	[ConversationsModule.Actions.ReceivedMessages.name] = function(p4, p5) --[[ Line: 328 ]]
+	[ConversationsModule.Actions.ReceivedMessages.name] = function(p4, p5)
 		-- upvalues: addMessagesToConversation (copy)
 		return addMessagesToConversation(p4, p5.conversationId, p5)
 	end,
-	[ConversationsModule.Actions.SendingMessage.name] = function(p4, p5) --[[ Line: 331 ]]
+	[ConversationsModule.Actions.SendingMessage.name] = function(p4, p5)
 		-- upvalues: OrderedMap (copy), Immutable (copy)
 		local v3 = p4[p5.conversationId]
 		
@@ -238,7 +238,7 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return p4
 	end,
-	[ConversationsModule.Actions.SentMessage.name] = function(p4, p5) --[[ Line: 342 ]]
+	[ConversationsModule.Actions.SentMessage.name] = function(p4, p5)
 		-- upvalues: OrderedMap (copy), Immutable (copy)
 		local v3 = p4[p5.conversationId]
 		
@@ -248,7 +248,7 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return p4
 	end,
-	[require(AppChat.Conversations.Actions.RenamedGroupConversation).name] = function(p4, p5) --[[ Line: 353 ]]
+	[require(AppChat.Conversations.Actions.RenamedGroupConversation).name] = function(p4, p5)
 		-- upvalues: Immutable (copy)
 		local ConversationId = p5.conversationId
 		local v3 = p4[ConversationId]
@@ -262,7 +262,7 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return p4
 	end,
-	[require(AppChat.Conversations.Actions.HasUnreadMessages).name] = function(p4, p5) --[[ Line: 368 ]]
+	[require(AppChat.Conversations.Actions.HasUnreadMessages).name] = function(p4, p5)
 		-- upvalues: Immutable (copy)
 		local v3 = p5.conversation and p4[p5.conversation.id]
 		
@@ -271,7 +271,7 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return p4
 	end,
-	[require(AppChat.Conversations.Actions.ChangedParticipants).name] = function(p4, p5) --[[ Line: 377 ]]
+	[require(AppChat.Conversations.Actions.ChangedParticipants).name] = function(p4, p5)
 		-- upvalues: Immutable (copy)
 		local ConversationId = p5.conversationId
 		local Participants = p5.participants
@@ -286,11 +286,11 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return p4
 	end,
-	[require(AppChat.Conversations.Actions.RemovedConversation).name] = function(p4, p5) --[[ Line: 393 ]]
+	[require(AppChat.Conversations.Actions.RemovedConversation).name] = function(p4, p5)
 		-- upvalues: Immutable (copy)
 		return Immutable.Set(p4, p5.conversationId, nil)
 	end,
-	[require(AppChat.Conversations.Actions.SetUserTyping).name] = function(p4, p5) --[[ Line: 397 ]]
+	[require(AppChat.Conversations.Actions.SetUserTyping).name] = function(p4, p5)
 		-- upvalues: Immutable (copy)
 		local v3 = p4[p5.conversationId]
 		
@@ -300,7 +300,7 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return p4
 	end,
-	[require(AppChat.Conversations.Actions.FetchingOlderMessages).name] = function(p4, p5) --[[ Line: 408 ]]
+	[require(AppChat.Conversations.Actions.FetchingOlderMessages).name] = function(p4, p5)
 		-- upvalues: Immutable (copy)
 		local v3 = p4[p5.conversationId]
 		
@@ -310,7 +310,7 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return p4
 	end,
-	[require(AppChat.Conversations.Actions.FetchedOldestMessage).name] = function(p4, p5) --[[ Line: 417 ]]
+	[require(AppChat.Conversations.Actions.FetchedOldestMessage).name] = function(p4, p5)
 		-- upvalues: Immutable (copy)
 		local v3 = p4[p5.conversationId]
 		
@@ -322,11 +322,11 @@ return require(Parent.Rodux).createReducer({}, {
 			return p4
 		end
 	end,
-	[require(AppChat.Conversations.Actions.ReadConversation).name] = function(p4, p5) --[[ Line: 426 ]]
+	[require(AppChat.Conversations.Actions.ReadConversation).name] = function(p4, p5)
 		-- upvalues: markConversationAndMessagesAsRead (copy)
 		return (markConversationAndMessagesAsRead(p4, p5.conversationId))
 	end,
-	[ConversationsModule.Actions.MessageModerated.name] = function(p4, p5) --[[ Line: 429 ]]
+	[ConversationsModule.Actions.MessageModerated.name] = function(p4, p5)
 		-- upvalues: Immutable (copy)
 		local v3 = p4[p5.conversationId]
 		
@@ -340,7 +340,7 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return p4
 	end,
-	[ConversationsModule.Actions.MessageFailedToSend.name] = function(p4, p5) --[[ Line: 443 ]]
+	[ConversationsModule.Actions.MessageFailedToSend.name] = function(p4, p5)
 		-- upvalues: Immutable (copy)
 		local v3 = p4[p5.conversationId]
 		
@@ -354,7 +354,7 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return p4
 	end,
-	[require(AppChat.Conversations.Actions.SetConversationLoadingStatus).name] = function(p4, p5) --[[ Line: 457 ]]
+	[require(AppChat.Conversations.Actions.SetConversationLoadingStatus).name] = function(p4, p5)
 		-- upvalues: Immutable (copy)
 		local v3 = p4[p5.conversationId]
 		
@@ -366,7 +366,7 @@ return require(Parent.Rodux).createReducer({}, {
 			return p4
 		end
 	end,
-	[require(AppChat.Conversations.Actions.SetUserLeavingConversation).name] = function(p4, p5) --[[ Line: 466 ]]
+	[require(AppChat.Conversations.Actions.SetUserLeavingConversation).name] = function(p4, p5)
 		-- upvalues: Immutable (copy)
 		local v3 = p4[p5.id]
 		
@@ -376,7 +376,7 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return p4
 	end,
-	[require(AppChat.Conversations.Actions.SetPinnedGameForConversation).name] = function(p4, p5) --[[ Line: 474 ]]
+	[require(AppChat.Conversations.Actions.SetPinnedGameForConversation).name] = function(p4, p5)
 		-- upvalues: Immutable (copy)
 		local ConversationId = p5.conversationId
 		local v3 = p4[ConversationId]
@@ -391,14 +391,14 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return p4
 	end,
-	[NetworkingChatModule.GetUserConversations.Succeeded.name] = function(p4, p5) --[[ Line: 492 ]]
+	[NetworkingChatModule.GetUserConversations.Succeeded.name] = function(p4, p5)
 		-- upvalues: ConversationModule (copy), UpdateConversationReducerModule (copy)
 		for _, value in ipairs(p5.responseBody) do
 			p4 = UpdateConversationReducerModule(p4, (ConversationModule.fromWeb(value)))
 		end
 		return p4
 	end,
-	[AppChatNetworkingModule.rodux.GetUserConversations.Succeeded.name] = function(p6, p7) --[[ Line: 501 ]]
+	[AppChatNetworkingModule.rodux.GetUserConversations.Succeeded.name] = function(p6, p7)
 		-- upvalues: ConversationChannelsModule (copy), UpdateConversationReducerModule (copy), LuauPolyfillModule (copy), MessageModelModule (copy), addMessagesToConversation (copy)
 		local ResponseBody = p7.responseBody
 		
@@ -410,7 +410,7 @@ return require(Parent.Rodux).createReducer({}, {
 				
 				if Messages and #Messages > 0 then
 					p6 = addMessagesToConversation(p6, FromChannelsApiResult.id, {
-						messages = LuauPolyfillModule.Array.map(Messages, function(p8) --[[ Line: 511 ]]
+						messages = LuauPolyfillModule.Array.map(Messages, function(p8)
 							-- upvalues: MessageModelModule (upval), FromChannelsApiResult (copy)
 							return MessageModelModule.fromChannelsApi(p8, FromChannelsApiResult.id)
 						end)
@@ -420,14 +420,14 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return p6
 	end,
-	[NetworkingChatModule.GetConversations.Succeeded.name] = function(p8, p9) --[[ Line: 526 ]]
+	[NetworkingChatModule.GetConversations.Succeeded.name] = function(p8, p9)
 		-- upvalues: ConversationModule (copy), UpdateConversationReducerModule (copy)
 		for _, value in ipairs(p9.responseBody) do
 			p8 = UpdateConversationReducerModule(p8, (ConversationModule.fromWeb(value)))
 		end
 		return p8
 	end,
-	[AppChatNetworkingModule.rodux.GetOlderMessages.Succeeded.name] = function(p10, p11) --[[ Line: 535 ]]
+	[AppChatNetworkingModule.rodux.GetOlderMessages.Succeeded.name] = function(p10, p11)
 		-- upvalues: messagesFromResponseOfChannelsApi (copy), addMessagesToConversation (copy), Immutable (copy)
 		local ConversationId = p11.queryArgs.conversation_id
 		local ResponseBody = p11.responseBody
@@ -468,7 +468,7 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return AddMessagesToConversationResult
 	end,
-	[AppChatNetworkingModule.rodux.GetNewerMessages.Succeeded.name] = function(p10, p11) --[[ Line: 588 ]]
+	[AppChatNetworkingModule.rodux.GetNewerMessages.Succeeded.name] = function(p10, p11)
 		-- upvalues: messagesFromResponseOfChannelsApi (copy), getShouldMarkConversationUnread (copy), addMessagesToConversation (copy)
 		local ConversationId = p11.queryArgs.conversation_id
 		local ResponseBody = p11.responseBody
@@ -501,7 +501,7 @@ return require(Parent.Rodux).createReducer({}, {
 			shouldMarkConversationUnread = getShouldMarkConversationUnread(v3, MessagesFromResponseOfChannelsApiResult)
 		}))
 	end,
-	[NetworkingChatModule.GetMessages.Succeeded.name] = function(p10, p11) --[[ Line: 630 ]]
+	[NetworkingChatModule.GetMessages.Succeeded.name] = function(p10, p11)
 		-- upvalues: Functional (copy), MessageModelModule (copy), Players (copy), addMessagesToConversation (copy), Immutable (copy)
 		local ConversationId = p11.queryArgs.conversationId
 		local ResponseBody = p11.responseBody
@@ -509,7 +509,7 @@ return require(Parent.Rodux).createReducer({}, {
 		
 		if ResponseBody then
 			local Id = nil
-			MapReverseResult = Functional.MapReverse(ResponseBody, function(p12) --[[ Line: 213 ]]
+			MapReverseResult = Functional.MapReverse(ResponseBody, function(p12)
 				-- upvalues: MessageModelModule (upval), ConversationId (copy), Id (ref)
 				local FromWebResult = MessageModelModule.fromWeb(p12, ConversationId, Id)
 				Id = FromWebResult.id
@@ -542,7 +542,7 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return AddMessagesToConversationResult
 	end,
-	[NetworkingChatModule.GetLatestMessages.Succeeded.name] = function(p10, p11) --[[ Line: 656 ]]
+	[NetworkingChatModule.GetLatestMessages.Succeeded.name] = function(p10, p11)
 		-- upvalues: Functional (copy), MessageModelModule (copy), addMessagesToConversation (copy)
 		for _, value in ipairs(p11.responseBody) do
 			local Text = tostring(value.conversationId)
@@ -551,7 +551,7 @@ return require(Parent.Rodux).createReducer({}, {
 			
 			if ChatMessages then
 				local Id = nil
-				MapReverseResult = Functional.MapReverse(ChatMessages, function(p12) --[[ Line: 213 ]]
+				MapReverseResult = Functional.MapReverse(ChatMessages, function(p12)
 					-- upvalues: MessageModelModule (upval), Text (copy), Id (ref)
 					local FromWebResult = MessageModelModule.fromWeb(p12, Text, Id)
 					Id = FromWebResult.id
@@ -565,7 +565,7 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return p10
 	end,
-	[AppChatNetworkingModule.rodux.GetConversationDetails.Succeeded.name] = function(p12, p13) --[[ Line: 668 ]]
+	[AppChatNetworkingModule.rodux.GetConversationDetails.Succeeded.name] = function(p12, p13)
 		-- upvalues: ConversationChannelsModule (copy), UpdateConversationReducerModule (copy), LuauPolyfillModule (copy), MessageModelModule (copy), addMessagesToConversation (copy)
 		local Conversation = p13.responseBody.conversations[1]
 		
@@ -578,7 +578,7 @@ return require(Parent.Rodux).createReducer({}, {
 		
 		if Messages and #Messages > 0 then
 			UpdateConversationReducerModuleResult = addMessagesToConversation(UpdateConversationReducerModuleResult, FromChannelsApiResult.id, {
-				messages = LuauPolyfillModule.Array.map(Messages, function(p14) --[[ Line: 682 ]]
+				messages = LuauPolyfillModule.Array.map(Messages, function(p14)
 					-- upvalues: MessageModelModule (upval), FromChannelsApiResult (copy)
 					return MessageModelModule.fromChannelsApi(p14, FromChannelsApiResult.id)
 				end)
@@ -586,7 +586,7 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return UpdateConversationReducerModuleResult
 	end,
-	[AppChatNetworkingModule.rodux.MultiGetConversationDetails.Succeeded.name] = function(p12, p13) --[[ Line: 695 ]]
+	[AppChatNetworkingModule.rodux.MultiGetConversationDetails.Succeeded.name] = function(p12, p13)
 		-- upvalues: ConversationChannelsModule (copy), UpdateConversationReducerModule (copy), LuauPolyfillModule (copy), MessageModelModule (copy), addMessagesToConversation (copy)
 		local ResponseBody = p13.responseBody
 		
@@ -600,7 +600,7 @@ return require(Parent.Rodux).createReducer({}, {
 			
 			if Messages and #Messages > 0 then
 				p12 = addMessagesToConversation(p12, FromChannelsApiResult.id, {
-					messages = LuauPolyfillModule.Array.map(Messages, function(p14) --[[ Line: 707 ]]
+					messages = LuauPolyfillModule.Array.map(Messages, function(p14)
 						-- upvalues: MessageModelModule (upval), FromChannelsApiResult (copy)
 						return MessageModelModule.fromChannelsApi(p14, FromChannelsApiResult.id)
 					end)
@@ -609,28 +609,28 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return p12
 	end,
-	[AppChatNetworkingModule.rodux.MarkConversation.Succeeded.name] = function(p14, p15) --[[ Line: 720 ]]
+	[AppChatNetworkingModule.rodux.MarkConversation.Succeeded.name] = function(p14, p15)
 		-- upvalues: markConversationAndMessagesAsRead (copy)
 		return (markConversationAndMessagesAsRead(p14, p15.postBody.conversation_ids[1]))
 	end,
-	[NetworkingChatModule.MarkAsRead.Succeeded.name] = function(p14, p15) --[[ Line: 724 ]]
+	[NetworkingChatModule.MarkAsRead.Succeeded.name] = function(p14, p15)
 		-- upvalues: markConversationAndMessagesAsRead (copy)
 		return (markConversationAndMessagesAsRead(p14, p15.postBody.conversationId))
 	end,
-	[AppChatNetworkingModule.rodux.TranslateUserMessage.Succeeded.name] = if GetFFlagAppChatEnableManualTranslationModule() then function(p14, p15) --[[ Line: 729 ]]
+	[AppChatNetworkingModule.rodux.TranslateUserMessage.Succeeded.name] = if GetFFlagAppChatEnableManualTranslationModule() then function(p14, p15)
 		-- upvalues: updateMessageContentToDisplay (copy)
 		local ContentToDisplay = p15.responseBody.content_to_display
 		
 		return if p15.postBody.conversation_id and p15.postBody.message_id then updateMessageContentToDisplay(p14, p15.postBody.conversation_id, p15.postBody.message_id, ContentToDisplay) else p14
 	end else nil,
-	[require(AppChat.Conversations.Actions.ReceivedChannelsMigrationConflict).name] = function(_, _) --[[ Line: 745 ]]
+	[require(AppChat.Conversations.Actions.ReceivedChannelsMigrationConflict).name] = function(_, _)
 		return {}
 	end,
-	[require(AppChat.Conversations.Actions.FriendConversationCreated).name] = function(p14, p15) --[[ Line: 748 ]]
+	[require(AppChat.Conversations.Actions.FriendConversationCreated).name] = function(p14, p15)
 		-- upvalues: Immutable (copy)
 		return if p14[p15.oldFriendConversationId] then Immutable.Set(p14, p15.oldFriendConversationId, nil) else p14
 	end,
-	[require(AppChat.Actions.FriendshipDestroyed).name] = function(p14, p15) --[[ Line: 755 ]]
+	[require(AppChat.Actions.FriendshipDestroyed).name] = function(p14, p15)
 		-- upvalues: ConversationChannelsModule (copy), Immutable (copy)
 		local UserId2 = if p15.userId1 == "localUserId" then if p15.userId2 == "localUserId" then nil else p15.userId2 else p15.userId1
 		
@@ -643,7 +643,7 @@ return require(Parent.Rodux).createReducer({}, {
 			return p14
 		end
 	end,
-	[require(AppChat.Http.NetworkingBlocking).BlockUserById.Succeeded.name] = if GetFFlagAppChatPCMFixBlockingFunction() then function(SetResult, p14) --[[ Line: 773 ]]
+	[require(AppChat.Http.NetworkingBlocking).BlockUserById.Succeeded.name] = if GetFFlagAppChatPCMFixBlockingFunction() then function(SetResult, p14)
 		-- upvalues: GetOneToOneConversationIdFromFriendIdModule (copy), Immutable (copy), ConversationChannelsModule (copy)
 		local Text = tostring(p14.namedIds.users)
 		
@@ -663,7 +663,7 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return SetResult1
 	end else nil,
-	[require(AppChat.Conversations.Actions.ReloadedMessagesForConversations).name] = function(JoinResult, p14) --[[ Line: 796 ]]
+	[require(AppChat.Conversations.Actions.ReloadedMessagesForConversations).name] = function(JoinResult, p14)
 		-- upvalues: CryoModule (copy), ConversationChannelsModule (copy)
 		local JoinResult1 = JoinResult
 		
@@ -680,7 +680,7 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return JoinResult1
 	end,
-	[require(AppChat.Conversations.Actions.ConversationModerationTypeChanged).name] = if FFlagAppChatEnableDoubleOptIn then function(p15, p16) --[[ Line: 816 ]]
+	[require(AppChat.Conversations.Actions.ConversationModerationTypeChanged).name] = if FFlagAppChatEnableDoubleOptIn then function(p15, p16)
 		-- upvalues: Immutable (copy)
 		local ConversationId = p16.conversationId
 		local ModerationType = p16.moderationType
@@ -688,7 +688,7 @@ return require(Parent.Rodux).createReducer({}, {
 		
 		return if v3 then Immutable.Set(p15, ConversationId, (Immutable.Set(v3, "moderationType", ModerationType))) else p15
 	end else nil,
-	[AppChatNetworkingModule.rodux.RecordModalSequenceResponse.Succeeded.name] = function(p15, p16) --[[ Line: 827 ]]
+	[AppChatNetworkingModule.rodux.RecordModalSequenceResponse.Succeeded.name] = function(p15, p16)
 		-- upvalues: ConstantsModule (copy), config (copy), ConversationChannelsModule (copy), Immutable (copy)
 		local PostBody = p16.postBody
 		

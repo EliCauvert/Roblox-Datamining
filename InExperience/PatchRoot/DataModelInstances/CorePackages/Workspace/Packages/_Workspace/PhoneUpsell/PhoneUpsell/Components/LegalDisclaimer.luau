@@ -8,7 +8,7 @@ local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFon
 local LinkButton = UIBloxModule.App.Button.LinkButton
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 
-return function(Frame) --[[ Line: 32 ]]
+return function(Frame)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), Checkbox (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), LinkButton (copy)
 	local UseStyleResult = UseStyleFunction()
 	local BaseSize = UseStyleResult.Font.BaseSize

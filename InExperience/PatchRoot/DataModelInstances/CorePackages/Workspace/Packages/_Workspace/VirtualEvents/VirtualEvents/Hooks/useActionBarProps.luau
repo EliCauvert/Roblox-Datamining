@@ -11,7 +11,7 @@ local UseRoactServiceFunction = require(VirtualEvents.Parent.RobloxAppHooks).use
 local Images = UIBloxModule.App.ImageSet.Images
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 
-return function(p1, p2, p3, ButtonRef) --[[ Line: 65 | Named "useActionBarProps" ]]
+return function(p1, p2, p3, ButtonRef)
 	-- upvalues: UseLocalizationFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UsePlayButtonStateFunction (copy), GetEventCtaButtonStateModule (copy), ReactModule (copy), ButtonType (copy), Images (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		notifyMe = "Feature.VirtualEvents.NotifyMe",
@@ -22,7 +22,7 @@ return function(p1, p2, p3, ButtonRef) --[[ Line: 65 | Named "useActionBarProps"
 	local EventCtaButtonStateModule = GetEventCtaButtonStateModule((UsePlayButtonStateFunction(UseRoactServiceFunction(RoactNetworking), (tostring(p1.universeId)))))
 	local IsJoinEventDisabled = EventCtaButtonStateModule.isJoinEventDisabled
 	local IsRsvpDisabled = EventCtaButtonStateModule.isRsvpDisabled
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 85 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), p2 (copy), ButtonType (upval), UseLocalizationResult (copy), Images (upval), p3 (copy), ButtonRef (copy), IsRsvpDisabled (copy), IsJoinEventDisabled (copy)
 		return if p1.eventStatus == "cancelled" or p1.eventStatus == "moderated" then {
 			props = {
@@ -61,7 +61,7 @@ return function(p1, p2, p3, ButtonRef) --[[ Line: 65 | Named "useActionBarProps"
 	end, {
 		p1, p2, p3, ButtonRef, IsRsvpDisabled, IsJoinEventDisabled
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 145 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), p2 (copy), Images (upval), p3 (copy)
 		return if p1.eventStatus == "cancelled" or p1.eventStatus == "moderated" or p2 == "Elapsed" then nil else {
 			props = {
@@ -74,7 +74,7 @@ return function(p1, p2, p3, ButtonRef) --[[ Line: 65 | Named "useActionBarProps"
 		}
 	end, { p1, p2, p3 })
 	
-	return (ReactModule.useMemo(function() --[[ Line: 165 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), UseMemoResult1 (copy)
 		return { button = UseMemoResult, icons = { UseMemoResult1 } }
 	end, { UseMemoResult, UseMemoResult1 }))

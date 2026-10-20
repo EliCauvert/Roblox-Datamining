@@ -7,7 +7,7 @@ local config = {
 
 return {
 	ModalAction = ModalAction,
-	toRecordedModalAction = function(p1) --[[ Line: 23 ]]
+	toRecordedModalAction = function(p1)
 		-- upvalues: config (copy)
 		return if typeof(p1) == "string" then config[p1] else nil
 	end

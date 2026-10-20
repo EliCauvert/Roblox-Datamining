@@ -1,6 +1,6 @@
 ﻿local Roact = require(script:FindFirstAncestor("FriendsLanding").dependencies).Roact
 
-return function(Element, List) --[[ Line: 6 ]]
+return function(Element, List)
 	-- upvalues: Roact (copy)
 	local Element1 = Element
 	

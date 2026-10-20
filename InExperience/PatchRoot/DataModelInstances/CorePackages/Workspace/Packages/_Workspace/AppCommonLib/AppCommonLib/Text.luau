@@ -1,22 +1,22 @@
 ﻿local TextService = game:GetService("TextService")
 local TextModule = { PADDING = Vector2.new(2, 2) }
 
-function TextModule.GetTextBounds(String1, p1, FontSize, Vector) --[[ Line: 12 ]]
+function TextModule.GetTextBounds(String1, p1, FontSize, Vector)
 	-- upvalues: TextService (copy), TextModule (copy)
 	return TextService:GetTextSize(String1, FontSize, p1, Vector) + TextModule.PADDING
 end
 
-function TextModule.GetTextWidth(p1, p2, p3) --[[ Line: 16 ]]
+function TextModule.GetTextWidth(p1, p2, p3)
 	-- upvalues: TextModule (copy)
 	return TextModule.GetTextBounds(p1, p2, p3, Vector2.new(10000, 10000)).X
 end
 
-function TextModule.GetTextHeight(p1, p2, p3, X) --[[ Line: 20 ]]
+function TextModule.GetTextHeight(p1, p2, p3, X)
 	-- upvalues: TextModule (copy)
 	return TextModule.GetTextBounds(p1, p2, p3, Vector2.new(X, 10000)).Y
 end
 
-function TextModule.Truncate(Text: string, p1, TextSize, X, p2): string --[[ Line: 25 ]]
+function TextModule.Truncate(Text: string, p1, TextSize, X, p2): string
 	-- upvalues: TextModule (copy)
 	local P13 = p2 or ""
 	
@@ -36,40 +36,40 @@ function TextModule.Truncate(Text: string, p1, TextSize, X, p2): string --[[ Lin
 	return ""
 end
 
-function TextModule.TruncateTextLabel(Frame, p3) --[[ Line: 45 ]]
+function TextModule.TruncateTextLabel(Frame, p3)
 	-- upvalues: TextModule (copy)
 	Frame.Text = TextModule.Truncate(Frame.Text, Frame.Font, Frame.TextSize, Frame.AbsoluteSize.X, p3)
 end
 
-function TextModule.Trim(Text: string): string --[[ Line: 51 ]]
+function TextModule.Trim(Text: string): string
 	if type(Text) ~= "string" then
 		error(string.format("Text.Trim called on non-string type %s.", (type(Text))), 2)
 	end
 	return (Text:gsub("^%s*(.-)%s*$", "%1"))
 end
 
-function TextModule.RightTrim(Text: string): string --[[ Line: 59 ]]
+function TextModule.RightTrim(Text: string): string
 	if type(Text) ~= "string" then
 		error(string.format("Text.RightTrim called on non-string type %s.", (type(Text))), 2)
 	end
 	return (Text:gsub("%s+$", ""))
 end
 
-function TextModule.LeftTrim(Text: string): string --[[ Line: 67 ]]
+function TextModule.LeftTrim(Text: string): string
 	if type(Text) ~= "string" then
 		error(string.format("Text.LeftTrim called on non-string type %s.", (type(Text))), 2)
 	end
 	return (Text:gsub("^%s+", ""))
 end
 
-function TextModule.SpaceNormalize(Text: string) --[[ Line: 75 ]]
+function TextModule.SpaceNormalize(Text: string)
 	if type(Text) ~= "string" then
 		error(string.format("Text.SpaceNormalize called on non-string type %s.", (type(Text))), 2)
 	end
 	return (Text:gsub("%s+", " "):gsub("^%s+", ""):gsub("%s+$", ""))
 end
 
-function TextModule.Split(Text: string, Pattern: string) --[[ Line: 83 ]]
+function TextModule.Split(Text: string, Pattern: string)
 	if type(Text) == "string" then
 		if type(Pattern) == "string" then
 			if Pattern == "" then

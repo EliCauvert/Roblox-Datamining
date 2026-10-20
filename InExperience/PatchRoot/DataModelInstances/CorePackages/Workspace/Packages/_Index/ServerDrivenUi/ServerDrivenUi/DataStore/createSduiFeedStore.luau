@@ -8,7 +8,7 @@ local LuaAppNilApportionedItems = game:DefineFastFlag("LuaAppNilApportionedItems
 local FFlagLuaAppAddRequestIdToRfySignalApportioning = require(Parent.SharedFlags).FFlagLuaAppAddRequestIdToRfySignalApportioning
 local SduiCreateSduiFeedStoreLogDelayMsRatio = game:DefineFastInt("SduiCreateSduiFeedStoreLogDelayMs", 1000) / 1000
 
-return function() --[[ Line: 27 | Named "createSduiFeedStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy), FFlagLuaAppRfySignalApportioning (copy), FFlagLuaAppAddRequestIdToRfySignalApportioning (copy), SduiCreateSduiFeedStoreLogDelayMsRatio (copy), DiscoveryEventErrorLogger (copy), LuaAppNilApportionedItems (copy)
 	local t = {}
 	local t1 = {}
@@ -19,7 +19,7 @@ return function() --[[ Line: 27 | Named "createSduiFeedStore" ]]
 	local Signal3
 	Signal3, Signal2_2 = SignalsModule.createSignal({})
 	
-	local function _(Key, p1) --[[ Line: 57 | Named "createItemCollectionSignal" ]]
+	local function _(Key, p1)
 		-- upvalues: SignalsModule (upval), t (copy)
 		local Signal, Signal2 = SignalsModule.createSignal(p1)
 		t[Key] = { get = Signal, set = Signal2 }
@@ -27,7 +27,7 @@ return function() --[[ Line: 27 | Named "createSduiFeedStore" ]]
 		return t[Key]
 	end
 	
-	local function getItemCollection(Key, p1) --[[ Line: 66 ]]
+	local function getItemCollection(Key, p1)
 		-- upvalues: t (copy), SignalsModule (upval)
 		local Entry = t[Key]
 		
@@ -43,7 +43,7 @@ return function() --[[ Line: 27 | Named "createSduiFeedStore" ]]
 		return Entry.get
 	end
 	
-	local function getFirstItemCollectionWithFilter(Callback) --[[ Line: 81 ]]
+	local function getFirstItemCollectionWithFilter(Callback)
 		-- upvalues: t (copy)
 		for _, value in t do
 			if Callback(value.get(false)) then
@@ -53,7 +53,7 @@ return function() --[[ Line: 27 | Named "createSduiFeedStore" ]]
 		return nil
 	end
 	
-	local function setItemCollections(ItemCollections) --[[ Line: 93 ]]
+	local function setItemCollections(ItemCollections)
 		-- upvalues: t (copy), SignalsModule (upval)
 		for i, itemCollection in ItemCollections do
 			if t[i] then
@@ -72,11 +72,11 @@ return function() --[[ Line: 27 | Named "createSduiFeedStore" ]]
 	local GetApportionedItems: ((any, any, any) -> any)? = nil
 	
 	if FFlagLuaAppRfySignalApportioning then
-		local Callback = if FFlagLuaAppAddRequestIdToRfySignalApportioning then function(Text, Text1) --[[ Line: 106 ]]
+		local Callback = if FFlagLuaAppAddRequestIdToRfySignalApportioning then function(Text, Text1)
 			return if Text1 then Text .. "_" .. Text1 else Text
 		end else nil
 		
-		local function createApportioningDataSignals(Key, p2, p3) --[[ Line: 115 ]]
+		local function createApportioningDataSignals(Key, p2, p3)
 			-- upvalues: FFlagLuaAppAddRequestIdToRfySignalApportioning (upval), Callback (copy), SignalsModule (upval), t1 (copy), t2 (copy)
 			local CallbackResult = if FFlagLuaAppAddRequestIdToRfySignalApportioning then Callback(Key, p3) else Key
 			local Signal, Signal2 = SignalsModule.createSignal(p2.items)
@@ -103,7 +103,7 @@ return function() --[[ Line: 27 | Named "createSduiFeedStore" ]]
 			end
 		end
 		
-		local function v26(p2, p3) --[[ Line: 163 ]]
+		local function v26(p2, p3)
 			-- upvalues: FFlagLuaAppAddRequestIdToRfySignalApportioning (upval), Callback (copy), t1 (copy), createApportioningDataSignals (copy)
 			local CallbackResult = if FFlagLuaAppAddRequestIdToRfySignalApportioning then Callback(p2, p3) else p2
 			
@@ -113,7 +113,7 @@ return function() --[[ Line: 27 | Named "createSduiFeedStore" ]]
 			return t1[CallbackResult].get
 		end
 		
-		Callback2 = function(ApportioningData, p2) --[[ Line: 181 | Named "setApportioningData" ]]
+		Callback2 = function(ApportioningData, p2)
 			-- upvalues: FFlagLuaAppAddRequestIdToRfySignalApportioning (upval), Callback (copy), t1 (copy), createApportioningDataSignals (copy)
 			for i, value in ApportioningData do
 				local CallbackResult = if FFlagLuaAppAddRequestIdToRfySignalApportioning then Callback(i, p2) else i
@@ -135,7 +135,7 @@ return function() --[[ Line: 27 | Named "createSduiFeedStore" ]]
 			end
 		end
 		
-		local function updateGridApportioningMetadata(p3, p4) --[[ Line: 216 ]]
+		local function updateGridApportioningMetadata(p3, p4)
 			-- upvalues: v26 (copy), FFlagLuaAppAddRequestIdToRfySignalApportioning (upval), Callback (copy), SduiCreateSduiFeedStoreLogDelayMsRatio (upval), t1 (copy), DiscoveryEventErrorLogger (upval)
 			local v1 = v26(p3, if FFlagLuaAppAddRequestIdToRfySignalApportioning then p4 else nil)(false)
 			local GridApportioningMetadata = v1.getGridApportioningMetadata(false)
@@ -143,7 +143,7 @@ return function() --[[ Line: 27 | Named "createSduiFeedStore" ]]
 			
 			if #GridApportioningMetadata == 0 then
 				local CallbackResult = if FFlagLuaAppAddRequestIdToRfySignalApportioning then Callback(p3, p4) else p3
-				task.delay(SduiCreateSduiFeedStoreLogDelayMsRatio, function() --[[ Line: 232 ]]
+				task.delay(SduiCreateSduiFeedStoreLogDelayMsRatio, function()
 					-- upvalues: t1 (upval), CallbackResult (copy), DiscoveryEventErrorLogger (upval)
 					local GetResult = t1[CallbackResult].get(false)
 					
@@ -169,14 +169,14 @@ return function() --[[ Line: 27 | Named "createSduiFeedStore" ]]
 			v1.setGridApportioningMetadata(List)
 		end
 		
-		UpdateApportioningCapacity = function(p5, p6, p7, p8) --[[ Line: 272 | Named "updateApportioningCapacity" ]]
+		UpdateApportioningCapacity = function(p5, p6, p7, p8)
 			-- upvalues: v26 (copy), FFlagLuaAppAddRequestIdToRfySignalApportioning (upval), updateGridApportioningMetadata (copy)
 			local v2 = v26(p5, if FFlagLuaAppAddRequestIdToRfySignalApportioning then p8 else nil)(false)
 			v2.scheduledCapacityUpdates[p6] = p7
 			
 			if not v2.isCapacityUpdateScheduled then
 				v2.isCapacityUpdateScheduled = true
-				v2.capacityUpdateCoroutine = task.defer(function() --[[ Line: 287 ]]
+				v2.capacityUpdateCoroutine = task.defer(function()
 					-- upvalues: updateGridApportioningMetadata (upval), p5 (copy), FFlagLuaAppAddRequestIdToRfySignalApportioning (upval), p8 (copy), v2 (copy)
 					updateGridApportioningMetadata(p5, if FFlagLuaAppAddRequestIdToRfySignalApportioning then p8 else nil)
 					v2.scheduledCapacityUpdates = {}
@@ -186,14 +186,14 @@ return function() --[[ Line: 27 | Named "createSduiFeedStore" ]]
 			end
 		end
 		
-		Callback1 = function(p5, SortIndex, p6) --[[ Line: 299 | Named "getSingleGridApportioningMetadata" ]]
+		Callback1 = function(p5, SortIndex, p6)
 			-- upvalues: SignalsModule (upval), v26 (copy), FFlagLuaAppAddRequestIdToRfySignalApportioning (upval), SduiCreateSduiFeedStoreLogDelayMsRatio (upval), Callback (copy), t1 (copy), DiscoveryEventErrorLogger (upval)
-			return SignalsModule.createComputed(function(p7) --[[ Line: 300 ]]
+			return SignalsModule.createComputed(function(p7)
 				-- upvalues: v26 (upval), p5 (copy), FFlagLuaAppAddRequestIdToRfySignalApportioning (upval), p6 (copy), SduiCreateSduiFeedStoreLogDelayMsRatio (upval), Callback (upval), t1 (upval), DiscoveryEventErrorLogger (upval), SortIndex (copy)
 				local GridApportioningMetadata = v26(p5, if FFlagLuaAppAddRequestIdToRfySignalApportioning then p6 else nil)(p7).getGridApportioningMetadata(p7)
 				
 				if #GridApportioningMetadata == 0 then
-					task.delay(SduiCreateSduiFeedStoreLogDelayMsRatio, function() --[[ Line: 311 ]]
+					task.delay(SduiCreateSduiFeedStoreLogDelayMsRatio, function()
 						-- upvalues: FFlagLuaAppAddRequestIdToRfySignalApportioning (upval), Callback (upval), p5 (upval), p6 (upval), t1 (upval), DiscoveryEventErrorLogger (upval), SortIndex (upval)
 						local CallbackResult = if FFlagLuaAppAddRequestIdToRfySignalApportioning then Callback(p5, p6) else p5
 						local GetResult = t1[CallbackResult].get(false)
@@ -214,9 +214,9 @@ return function() --[[ Line: 27 | Named "createSduiFeedStore" ]]
 			end)
 		end
 		
-		GetApportionedItems = function(p8, SortIndex, p9) --[[ Line: 342 | Named "getApportionedItems" ]]
+		GetApportionedItems = function(p8, SortIndex, p9)
 			-- upvalues: SignalsModule (upval), v26 (copy), FFlagLuaAppAddRequestIdToRfySignalApportioning (upval), Callback1 (ref), Callback (copy), SduiCreateSduiFeedStoreLogDelayMsRatio (upval), t1 (copy), DiscoveryEventErrorLogger (upval), LuaAppNilApportionedItems (upval)
-			return SignalsModule.createComputed(function(p10) --[[ Line: 343 ]]
+			return SignalsModule.createComputed(function(p10)
 				-- upvalues: v26 (upval), p8 (copy), FFlagLuaAppAddRequestIdToRfySignalApportioning (upval), p9 (copy), Callback1 (upval), SortIndex (copy), Callback (upval), SduiCreateSduiFeedStoreLogDelayMsRatio (upval), t1 (upval), DiscoveryEventErrorLogger (upval), LuaAppNilApportionedItems (upval)
 				local v2 = v26(p8, if FFlagLuaAppAddRequestIdToRfySignalApportioning then p9 else nil)(p10)
 				local Items = v2.getItems(p10)
@@ -224,7 +224,7 @@ return function() --[[ Line: 27 | Named "createSduiFeedStore" ]]
 				
 				if #Items == 0 and #v2.getGridApportioningMetadata(false) == 0 then
 					local CallbackResult = if FFlagLuaAppAddRequestIdToRfySignalApportioning then Callback(p8, p9) else p8
-					task.delay(SduiCreateSduiFeedStoreLogDelayMsRatio, function() --[[ Line: 361 ]]
+					task.delay(SduiCreateSduiFeedStoreLogDelayMsRatio, function()
 						-- upvalues: t1 (upval), CallbackResult (copy), DiscoveryEventErrorLogger (upval), SortIndex (upval)
 						local GetResult = t1[CallbackResult].get(false)
 						local GridApportioningMetadata = GetResult and GetResult.getGridApportioningMetadata(false) or {}
@@ -238,7 +238,7 @@ return function() --[[ Line: 27 | Named "createSduiFeedStore" ]]
 				end
 				if not v3 then
 					local Joined = nil
-					task.delay(SduiCreateSduiFeedStoreLogDelayMsRatio, function() --[[ Line: 382 ]]
+					task.delay(SduiCreateSduiFeedStoreLogDelayMsRatio, function()
 						-- upvalues: FFlagLuaAppAddRequestIdToRfySignalApportioning (upval), Callback (upval), p8 (upval), p9 (upval), Callback1 (upval), SortIndex (upval), t1 (upval), Joined (ref), DiscoveryEventErrorLogger (upval)
 						local CallbackResult = if FFlagLuaAppAddRequestIdToRfySignalApportioning then Callback(p8, p9) else p8
 						
@@ -279,7 +279,7 @@ return function() --[[ Line: 27 | Named "createSduiFeedStore" ]]
 		updateApportioningCapacity = if FFlagLuaAppRfySignalApportioning then UpdateApportioningCapacity else nil,
 		getSingleGridApportioningMetadata = if FFlagLuaAppRfySignalApportioning then Callback1 else nil,
 		getApportionedItems = if FFlagLuaAppRfySignalApportioning then GetApportionedItems else nil,
-		updateData = function(p11, p12) --[[ Line: 431 ]]
+		updateData = function(p11, p12)
 			-- upvalues: Signal2 (copy), Signal2_1 (copy), setItemCollections (copy), Signal2_2 (ref), FFlagLuaAppRfySignalApportioning (upval), Callback2 (ref), FFlagLuaAppAddRequestIdToRfySignalApportioning (upval)
 			if p11.templates then
 				Signal2(p11.templates)

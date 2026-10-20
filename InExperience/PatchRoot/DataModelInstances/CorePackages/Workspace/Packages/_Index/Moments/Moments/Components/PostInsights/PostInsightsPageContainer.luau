@@ -6,12 +6,12 @@ local GetPostInsightsPageStoreModule = require(script.Parent.getPostInsightsPage
 local PostInsightsPageViewModule = require(script.Parent.PostInsightsPageView)
 local UsePostInsightsPageViewModelModule = require(script.Parent.usePostInsightsPageViewModel)
 
-local function PostInsightsPage(p1) --[[ Line: 22 ]]
+local function PostInsightsPage(p1)
 	-- upvalues: UsePostInsightsPageViewModelModule (copy), ReactModule (copy), PostInsightsPageViewModule (copy)
 	return ReactModule.createElement(PostInsightsPageViewModule, (UsePostInsightsPageViewModelModule(p1.context, p1.onBack)))
 end
 
-return ReactModule.memo(function() --[[ Line: 27 | Named "PostInsightsPageContainer" ]]
+return ReactModule.memo(function()
 	-- upvalues: GetPostInsightsPageStoreModule (copy), UseSignalStateFunction (copy), ReactModule (copy), PostInsightsPage (copy)
 	local PostInsightsPageStoreModule = GetPostInsightsPageStoreModule(false)
 	local UseSignalStateResult = UseSignalStateFunction(PostInsightsPageStoreModule.getIsOpen)

@@ -34,7 +34,7 @@ local FFlagProfileCurrentlyPlayingEDPFromCardModule = require(ProfilePlatform.Fl
 local FFlagProfilePlatformImproveGameDetailsAnalytics = require(Parent.SharedFlags).FFlagProfilePlatformImproveGameDetailsAnalytics
 local FFlagJoinabilityCTARefactor = require(Parent.SharedFlags).FFlagJoinabilityCTARefactor
 
-return function(p1) --[[ Line: 58 | Named "CurrentlyPlaying" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), UseDispatchFunction (copy), FFlagProfileCurrentlyPlayingEDPFromCardModule (copy), FFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule (copy), UseNavigationFunction (copy), UseProfileWrapperContextModule (copy), FFlagProfilePlatformImproveGameDetailsAnalytics (copy), UseRoactServiceFunction (copy), RoactAnalyticsCommonGameEvents (copy), FFlagJoinabilityCTARefactor (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), NetworkingGamesModule (copy), UseSelectorFunction (copy), GetDeepValueModule (copy), AppPage (copy), OpenGameDetailsFunction (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), ContentProvider (copy), HorizontalPageMargin (copy), View (copy), StateLayerAffordance (copy), Image (copy), Skeleton (copy), Radius (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.CurrentlyPlaying)
@@ -48,10 +48,10 @@ return function(p1) --[[ Line: 58 | Named "CurrentlyPlaying" ]]
 		playTogetherSoon = TextKeysModule.PlayTogetherSoon
 	}) else nil
 	local UniverseId = UseProfileJsonComponentModuleResult.universeId
-	ReactModule.useEffect(function() --[[ Line: 83 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UniverseId (copy), UseDispatchResult (copy), NetworkingGamesModule (upval)
 		if UniverseId then
-			UseDispatchResult(NetworkingGamesModule.GetExperiencesDetails.API({ (tostring(UniverseId)) })):catch(function(Err) --[[ Line: 87 ]]
+			UseDispatchResult(NetworkingGamesModule.GetExperiencesDetails.API({ (tostring(UniverseId)) })):catch(function(Err)
 				-- upvalues: UniverseId (upval)
 				warn("CurrentlyPlaying: failed to fetch experience details for universeId", UniverseId, Err)
 			end)
@@ -59,13 +59,13 @@ return function(p1) --[[ Line: 58 | Named "CurrentlyPlaying" ]]
 			return
 		end
 	end, { UniverseId, UseDispatchResult })
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 92 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: GetDeepValueModule (upval), UniverseId (copy)
 		return GetDeepValueModule(p2, `ProfilePlatform.Games.byGameId.{tostring(UniverseId)}`)
 	end)
 	local RootPlaceId = UseSelectorResult and UseSelectorResult.rootPlaceId
 	local Name = UseSelectorResult and UseSelectorResult.name or ""
-	local UseResult = if FFlagProfileCurrentlyPlayingEDPFromCardModule or FFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule then ReactModule.useCallback(function(p2) --[[ Line: 100 ]]
+	local UseResult = if FFlagProfileCurrentlyPlayingEDPFromCardModule or FFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule then ReactModule.useCallback(function(p2)
 		-- upvalues: RootPlaceId (copy), FFlagProfilePlatformImproveGameDetailsAnalytics (upval), UseRoactServiceResult (copy), UniverseId (copy), AppPage (upval), ProfileId (copy), UseDispatchResult (copy), OpenGameDetailsFunction (upval), UseNavigationResult (copy)
 		if RootPlaceId == nil then return end
 		if FFlagProfilePlatformImproveGameDetailsAnalytics then
@@ -76,26 +76,26 @@ return function(p1) --[[ Line: 58 | Named "CurrentlyPlaying" ]]
 		UniverseId, RootPlaceId, ProfileId, UseRoactServiceResult, UseDispatchResult,
 		UseNavigationResult
 	}) else nil
-	local UseResult1 = if FFlagProfileCurrentlyPlayingEDPFromCardModule then ReactModule.useCallback(function() --[[ Line: 132 ]]
+	local UseResult1 = if FFlagProfileCurrentlyPlayingEDPFromCardModule then ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy)
 		UseResult("ProfilePlatformCurrentlyPlayingCard")
 	end, { UseResult }) else nil
-	local UseResult2 = if FFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule then ReactModule.useCallback(function() --[[ Line: 138 ]]
+	local UseResult2 = if FFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule then ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy)
 		UseResult("ProfilePlatformCurrentlyPlayingThumbnail")
 	end, { UseResult }) else nil
-	local UseResult3 = if FFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule then ReactModule.useCallback(function() --[[ Line: 144 ]]
+	local UseResult3 = if FFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule then ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy)
 		UseResult("ProfilePlatformCurrentlyPlayingGameName")
 	end, { UseResult }) else nil
 	local RbxThumb = if UniverseId then GetRbxThumbFunction(ThumbnailType.GameIcon, UniverseId, ThumbnailSize.Small) else nil
 	local UseStateResult, UseStateResult2 = ReactModule.useState(if RbxThumb then ContentProvider:GetAssetFetchStatus(RbxThumb) else Enum.AssetFetchStatus.None)
-	ReactModule.useEffect(function() --[[ Line: 155 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: RbxThumb (copy), ContentProvider (upval), UseStateResult2 (copy)
 		if not RbxThumb then return end
 		local Connection = ContentProvider:GetAssetFetchStatusChangedSignal(RbxThumb):Connect(UseStateResult2)
 		
-		return function() --[[ Line: 161 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end

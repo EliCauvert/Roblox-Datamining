@@ -52,12 +52,12 @@ if game:GetEngineFeature("NewSystemInfoFeaturesEnabled") then
 end
 SystemInfoProtocolModule.__index = SystemInfoProtocolModule
 
-function SystemInfoProtocolModule.new(p1) --[[ Line: 76 ]]
+function SystemInfoProtocolModule.new(p1)
 	-- upvalues: MessageBus (copy), SystemInfoProtocolModule (copy)
 	return (setmetatable({ messageBus = p1 or MessageBus }, SystemInfoProtocolModule))
 end
 
-function SystemInfoProtocolModule:getSystemInfo(p1) --[[ Line: 97 ]]
+function SystemInfoProtocolModule:getSystemInfo(p1)
 	return self.messageBus.call(self.GET_SYSTEM_INFO_DESCRIPTOR, p1)
 end
 

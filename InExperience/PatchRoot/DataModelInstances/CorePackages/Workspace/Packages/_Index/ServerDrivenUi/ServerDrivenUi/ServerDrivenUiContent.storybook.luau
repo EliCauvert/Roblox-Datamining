@@ -6,7 +6,7 @@ local ColorMode = FoundationModule.Enums.ColorMode
 local Device = FoundationModule.Enums.Device
 local RoactRoduxModule = require(Parent.Dev.RoactRodux)
 local config = { Light = ColorMode.Light, Dark = ColorMode.Dark }
-local NewResult = require(Parent.Rodux).Store.new(function(p1) --[[ Line: 17 ]]
+local NewResult = require(Parent.Rodux).Store.new(function(p1)
 	return p1
 end, {
 	ScreenSize = Vector2.new(1920, 1080),
@@ -27,9 +27,9 @@ return {
 	name = "ServerDrivenUiContent",
 	roact = ReactModule,
 	reactRoblox = require(Parent.Dev.ReactRoblox),
-	mapStory = function(p1) --[[ Line: 34 ]]
+	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), RoactRoduxModule (copy), NewResult (copy), FoundationProvider (copy), config (copy), Device (copy)
-		return function(p2) --[[ Line: 35 ]]
+		return function(p2)
 			-- upvalues: ReactModule (upval), RoactRoduxModule (upval), NewResult (upval), FoundationProvider (upval), config (upval), Device (upval), p1 (copy)
 			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,

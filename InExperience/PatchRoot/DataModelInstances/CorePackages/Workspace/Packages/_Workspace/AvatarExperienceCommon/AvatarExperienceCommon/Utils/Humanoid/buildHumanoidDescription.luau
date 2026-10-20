@@ -5,7 +5,7 @@ local CreateHumanoidDescriptionAccessoryInfoModule = require(AvatarExperienceCom
 local SetMakeupDescriptionsModule = require(AvatarExperienceCommon.Utils.Humanoid.setMakeupDescriptions)
 local IsMakeupAssetTypeModule = require(AvatarExperienceCommon.Utils.isMakeupAssetType)
 
-local function applyCurrentAssets(HumanoidDescription, CurrentAssets) --[[ Line: 21 ]]
+local function applyCurrentAssets(HumanoidDescription, CurrentAssets)
 	-- upvalues: ConstantsModule (copy), CreateHumanoidDescriptionAccessoryInfoModule (copy), IsMakeupAssetTypeModule (copy), MutedErrorFunction (copy), SetMakeupDescriptionsModule (copy)
 	if CurrentAssets then
 		local List = {}
@@ -37,7 +37,7 @@ local function applyCurrentAssets(HumanoidDescription, CurrentAssets) --[[ Line:
 	end
 end
 
-local function _(p1, List) --[[ Line: 61 | Named "applyAvatarScales" ]]
+local function _(p1, List)
 	-- upvalues: ConstantsModule (copy)
 	if List then
 		for i, value in List do
@@ -46,7 +46,7 @@ local function _(p1, List) --[[ Line: 61 | Named "applyAvatarScales" ]]
 	end
 end
 
-local _ = function(p2, List) --[[ Line: 71 | Named "applyBodyColor3s" ]]
+local _ = function(p2, List)
 	-- upvalues: ConstantsModule (copy)
 	if List then
 		for i, value in List do
@@ -55,7 +55,7 @@ local _ = function(p2, List) --[[ Line: 71 | Named "applyBodyColor3s" ]]
 	end
 end
 
-local function applyEmotes(HumanoidDescription, EmotesSlotInfo) --[[ Line: 82 ]]
+local function applyEmotes(HumanoidDescription, EmotesSlotInfo)
 	if EmotesSlotInfo then
 		local Emotes = {}
 		local List = {}
@@ -69,7 +69,7 @@ local function applyEmotes(HumanoidDescription, EmotesSlotInfo) --[[ Line: 82 ]]
 	end
 end
 
-return function(p3) --[[ Line: 103 | Named "buildHumanoidDescription" ]]
+return function(p3)
 	-- upvalues: applyCurrentAssets (copy), ConstantsModule (copy), applyEmotes (copy)
 	local HumanoidDescription = Instance.new("HumanoidDescription")
 	applyCurrentAssets(HumanoidDescription, p3.currentAssets)

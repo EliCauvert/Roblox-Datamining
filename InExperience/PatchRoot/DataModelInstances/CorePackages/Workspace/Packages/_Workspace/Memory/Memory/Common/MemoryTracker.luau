@@ -6,14 +6,14 @@ local TelemetryService = game:GetService("TelemetryService")
 local DeviceTier = require(script:FindFirstAncestor("Memory").Parent.Devices).DeviceTier
 local MemoryScopeModule = require(script.Parent.MemoryScope)
 
-local function _() --[[ Line: 20 | Named "GetMemoryPerformanceStatsItem" ]]
+local function _()
 	-- upvalues: StatsService (copy)
 	local PerformanceStats = StatsService and StatsService:FindFirstChild("PerformanceStats")
 	
 	return if PerformanceStats then PerformanceStats:FindFirstChild("Memory") else nil
 end
 
-local function GetChildValue(Memory, Text: string): string --[[ Line: 29 ]]
+local function GetChildValue(Memory, Text: string): string
 	if Text == nil then
 		return (tostring(Memory:GetValue()))
 	end
@@ -30,13 +30,13 @@ local function GetChildValue(Memory, Text: string): string --[[ Line: 29 ]]
 	return (tostring(Object:GetValue()))
 end
 
-local _ = function(): string --[[ Line: 44 | Named "GetLuaHeapMb" ]]
+local _ = function(): string
 	local Success, Result = pcall(gcinfo)
 	
 	return if Success and Result then string.format("%.2f", Result / 1024) else "-1"
 end
 
-local function GetCorescriptMemory() --[[ Line: 52 ]]
+local function GetCorescriptMemory()
 	-- upvalues: StatsService (copy)
 	local PerformanceStats = StatsService and StatsService:FindFirstChild("PerformanceStats")
 	local Memory = if PerformanceStats then PerformanceStats:FindFirstChild("Memory") else nil
@@ -78,7 +78,7 @@ local config2 = {
 local Module = {}
 Module.__index = Module
 
-function Module.new(Context, MemoryScope) --[[ Line: 120 ]]
+function Module.new(Context, MemoryScope)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		memoryMb = 0,
@@ -92,10 +92,10 @@ function Module.new(Context, MemoryScope) --[[ Line: 120 ]]
 	}, Module))
 end
 
-function Module:start() --[[ Line: 135 ]]
+function Module:start()
 	-- upvalues: CorescriptMemoryPeriodSeconds (copy), GetCorescriptMemory (copy)
 	self.status = 1
-	self.loggingTask = task.delay(CorescriptMemoryPeriodSeconds, function() --[[ Line: 137 ]]
+	self.loggingTask = task.delay(CorescriptMemoryPeriodSeconds, function()
 		-- upvalues: GetCorescriptMemory (upval), self (copy)
 		local CorescriptMemory: number = GetCorescriptMemory()
 		
@@ -111,7 +111,7 @@ function Module:start() --[[ Line: 135 ]]
 	end)
 end
 
-function Module:pause() --[[ Line: 151 ]]
+function Module:pause()
 	if self.loggingTask then
 		task.cancel(self.loggingTask)
 		self.loggingTask = nil
@@ -119,13 +119,13 @@ function Module:pause() --[[ Line: 151 ]]
 	self.status = 2
 end
 
-function Module:resume() --[[ Line: 159 ]]
+function Module:resume()
 	if self.status == 2 then
 		self:start()
 	end
 end
 
-function Module:destroy() --[[ Line: 165 ]]
+function Module:destroy()
 	if self.loggingTask then
 		task.cancel(self.loggingTask)
 		self.loggingTask = nil
@@ -140,7 +140,7 @@ function Module:destroy() --[[ Line: 165 ]]
 	end
 end
 
-function Module:_buildCustomFields(Context) --[[ Line: 179 ]]
+function Module:_buildCustomFields(Context)
 	-- upvalues: DeviceTier (copy)
 	return {
 		deviceTier = DeviceTier.GetDeviceMemoryTier(),
@@ -149,12 +149,12 @@ function Module:_buildCustomFields(Context) --[[ Line: 179 ]]
 	}
 end
 
-function Module:report(Context, Value) --[[ Line: 187 ]]
+function Module:report(Context, Value)
 	-- upvalues: TelemetryService (copy), config (copy)
 	TelemetryService:LogStat(config, { customFields = self:_buildCustomFields(Context) }, Value)
 end
 
-function Module:reportMaxMemoryUsed(Context, MaxMemoryMb) --[[ Line: 191 ]]
+function Module:reportMaxMemoryUsed(Context, MaxMemoryMb)
 	-- upvalues: MemoryScopeModule (copy), TelemetryService (copy), config1 (copy)
 	if self.memoryScope ~= MemoryScopeModule.UniversalApp then
 		TelemetryService:LogStat(config1, { customFields = self:_buildCustomFields(Context) }, MaxMemoryMb)
@@ -163,7 +163,7 @@ function Module:reportMaxMemoryUsed(Context, MaxMemoryMb) --[[ Line: 191 ]]
 	end
 end
 
-function Module:reportAvgMemoryUsed(Context, AvgMemoryMb) --[[ Line: 202 ]]
+function Module:reportAvgMemoryUsed(Context, AvgMemoryMb)
 	-- upvalues: MemoryScopeModule (copy), TelemetryService (copy), config2 (copy)
 	if self.memoryScope ~= MemoryScopeModule.UniversalApp then
 		TelemetryService:LogStat(config2, { customFields = self:_buildCustomFields(Context) }, AvgMemoryMb)
@@ -172,7 +172,7 @@ function Module:reportAvgMemoryUsed(Context, AvgMemoryMb) --[[ Line: 202 ]]
 	end
 end
 
-function Module.getSnapshot() --[[ Line: 213 ]]
+function Module.getSnapshot()
 	-- upvalues: StatsService (copy), GetChildValue (copy), EnableMemorySnapshotCategories (copy)
 	local PerformanceStats = StatsService and StatsService:FindFirstChild("PerformanceStats")
 	local Memory = if PerformanceStats then PerformanceStats:FindFirstChild("Memory") else nil
@@ -226,7 +226,7 @@ function Module.getSnapshot() --[[ Line: 213 ]]
 	return config
 end
 
-function Module.getLuaHeapOnly() --[[ Line: 296 ]]
+function Module.getLuaHeapOnly()
 	local Success, Result = pcall(gcinfo)
 	
 	return {
@@ -236,7 +236,7 @@ end
 
 local NewResult = nil
 
-return function(Context, MemoryScope) --[[ Line: 302 ]]
+return function(Context, MemoryScope)
 	-- upvalues: FFlagEnableCorescriptMemoryTrackerModule (copy), NewResult (ref), Module (copy)
 	if not FFlagEnableCorescriptMemoryTrackerModule then
 		return nil

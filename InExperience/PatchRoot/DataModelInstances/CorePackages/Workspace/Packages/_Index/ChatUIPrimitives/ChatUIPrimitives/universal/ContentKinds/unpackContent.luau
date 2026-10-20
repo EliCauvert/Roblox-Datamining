@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.Parent.Types)
 
-return function(p1) --[[ Line: 9 | Named "unpackContent" ]]
+return function(p1)
 	if type(p1) ~= "table" then
 		return nil, nil
 	end

@@ -2,7 +2,7 @@
 local _ = require(Parent.Types)
 
 return require(Parent.Parent.Rodux).createReducer({}, {
-	[require(Parent.Actions.CapturesRetrieved).name] = function(_, p1) --[[ Line: 14 ]]
+	[require(Parent.Actions.CapturesRetrieved).name] = function(_, p1)
 		return p1.captures
 	end
 })

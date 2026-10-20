@@ -1,6 +1,6 @@
 ﻿local Players = game:GetService("Players")
 
-return function(Callback) --[[ Line: 9 | Named "respawnAvatar" ]]
+return function(Callback)
 	-- upvalues: Players (copy)
 	local CallbackResult, CallbackResult2 = Callback()
 	

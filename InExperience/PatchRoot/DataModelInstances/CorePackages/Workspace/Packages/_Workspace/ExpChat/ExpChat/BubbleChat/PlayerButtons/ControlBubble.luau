@@ -23,12 +23,12 @@ local GetFFlagExpChatEnableVoiceReverseNudgeModule = require(ExpChat.Flags.GetFF
 local GetFFlagExpChatUseVoiceParticipantsStoreFunction = SharedFlagsModule.GetFFlagExpChatUseVoiceParticipantsStore
 local GetVoiceIndicatorAssetNameModule = require(ExpChat.BubbleChat.Helpers.getVoiceIndicatorAssetName)
 
-local function createTweenShimmeringEffect(UseRefResult) --[[ Line: 53 ]]
+local function createTweenShimmeringEffect(UseRefResult)
 	-- upvalues: TweenService (copy)
 	return (TweenService:Create(UseRefResult:getValue(), TweenInfo.new(1, Enum.EasingStyle.Circular, Enum.EasingDirection.Out, -1), { Offset = Vector2.new(1, 0) }))
 end
 
-local function ControlBubble(Frame) --[[ Line: 61 ]]
+local function ControlBubble(Frame)
 	-- upvalues: FFlagExpChatMicBubbleSingleImageModule (copy), ReactModule (copy), GetVoiceIndicatorAssetNameModule (copy), Image (copy), EnableChatMicPerfBinding (copy), ImageSetLabel (copy), RunService (copy), ExpChatMicActivityHeartbeatIncrement (copy), createTweenShimmeringEffect (copy), _Vector2 (copy), GetFFlagExpChatUseVoiceParticipantsStoreFunction (copy), GetFFlagExpChatEnableVoiceReverseNudgeModule (copy), Images (copy), IsTenFootInterfaceFunction (copy), v1 (ref)
 	local UseBindingResult2 = nil
 	local IconAssetName = nil
@@ -41,7 +41,7 @@ local function ControlBubble(Frame) --[[ Line: 61 ]]
 		Image1 = Image
 	elseif EnableChatMicPerfBinding then
 		UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
-		IconAssetName = UseBindingResult:map(function(p1) --[[ Line: 70 ]]
+		IconAssetName = UseBindingResult:map(function(p1)
 			-- upvalues: Frame (copy), GetVoiceIndicatorAssetNameModule (upval)
 			return Frame.iconAssetName or GetVoiceIndicatorAssetNameModule(Frame.voiceState, p1, Frame.iconStyle, false)
 		end)
@@ -55,7 +55,7 @@ local function ControlBubble(Frame) --[[ Line: 61 ]]
 	local UseRefResult2 = ReactModule.useRef(nil)
 	UseRefResult1 = ReactModule.useRef(nil)
 	UseRefResult2 = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 88 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (ref), UseRefResult2 (ref)
 		if UseRefResult1.current then
 			local UIGradient = UseRefResult1.current:FindFirstChildWhichIsA("UIGradient", true)
@@ -65,12 +65,12 @@ local function ControlBubble(Frame) --[[ Line: 61 ]]
 			end
 		end
 	end, { UseRefResult1 })
-	ReactModule.useEffect(function() --[[ Line: 97 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy), RunService (upval), UseRefResult (copy), ExpChatMicActivityHeartbeatIncrement (upval), UseBindingResult2 (ref), UseRefResult2 (ref), createTweenShimmeringEffect (upval), _Vector2 (upval)
 		local Connection = nil
 		
 		if Frame.voiceState and Frame.voiceState == "Talking" then
-			Connection = RunService.PostSimulation:Connect(function() --[[ Line: 100 ]]
+			Connection = RunService.PostSimulation:Connect(function()
 				-- upvalues: UseRefResult (upval), ExpChatMicActivityHeartbeatIncrement (upval), UseBindingResult2 (upval)
 				UseRefResult.current = ((UseRefResult.current or 0) + 1) % ExpChatMicActivityHeartbeatIncrement
 				
@@ -79,7 +79,7 @@ local function ControlBubble(Frame) --[[ Line: 61 ]]
 				end
 			end)
 			
-			return function() --[[ Line: 109 ]]
+			return function()
 				-- upvalues: Connection (ref)
 				if Connection then
 					Connection:Disconnect()
@@ -90,7 +90,7 @@ local function ControlBubble(Frame) --[[ Line: 61 ]]
 			local TweenShimmeringEffect = createTweenShimmeringEffect(UseRefResult2)
 			TweenShimmeringEffect:Play()
 			
-			return function() --[[ Line: 119 ]]
+			return function()
 				-- upvalues: TweenShimmeringEffect (copy), UseRefResult2 (upval), _Vector2 (upval)
 				TweenShimmeringEffect:Cancel()
 				
@@ -99,7 +99,7 @@ local function ControlBubble(Frame) --[[ Line: 61 ]]
 				end
 			end
 		else
-			return function() --[[ Line: 128 ]]
+			return function()
 				-- upvalues: Connection (ref)
 				if Connection then
 					Connection:Disconnect()
@@ -113,11 +113,11 @@ local function ControlBubble(Frame) --[[ Line: 61 ]]
 	
 	if GetFFlagExpChatUseVoiceParticipantsStoreFunction() then
 		UseRefResult3 = ReactModule.useRef(Frame.voiceState)
-		ReactModule.useEffect(function() --[[ Line: 141 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRefResult3 (ref), Frame (copy)
 			UseRefResult3.current = Frame.voiceState
 		end, { Frame.voiceState })
-		UseResult = ReactModule.useCallback(function(p1) --[[ Line: 145 ]]
+		UseResult = ReactModule.useCallback(function(p1)
 			-- upvalues: Frame (copy), UseRefResult3 (ref)
 			if Frame.onActivated then
 				Frame.onActivated(p1, UseRefResult3.current)
@@ -168,7 +168,7 @@ local function ControlBubble(Frame) --[[ Line: 61 ]]
 				}),
 				ActivityGradient = FFlagExpChatMicBubbleSingleImageModule and ReactModule.createElement("UIGradient", {
 					Rotation = 0,
-					Color = UseBindingResult:map(function(p1: number): ColorSequence --[[ Line: 213 ]]
+					Color = UseBindingResult:map(function(p1: number): ColorSequence
 						return ColorSequence.new({
 							ColorSequenceKeypoint.new(0, Color3.new(1, 1, 1)),
 							ColorSequenceKeypoint.new(p1 * 0.5, Color3.new(1, 1, 1)),

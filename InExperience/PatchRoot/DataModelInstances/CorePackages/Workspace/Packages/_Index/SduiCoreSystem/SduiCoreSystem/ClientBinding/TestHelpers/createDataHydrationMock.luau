@@ -10,75 +10,75 @@ local DataHydrationTypes = {
 }
 
 return {
-	createDataHydrationMock = function(p1) --[[ Line: 30 ]]
+	createDataHydrationMock = function(p1)
 		-- upvalues: DataHydrationTypes (copy)
 		local config = {
 			Badges = p1 and p1.Badges or {
-				getBadgeInfoStore = function() --[[ Line: 51 ]]
+				getBadgeInfoStore = function()
 					return {
-						getBadgeInfo = function() --[[ Line: 53 ]]
+						getBadgeInfo = function()
 							return {
-								data = function() --[[ Line: 55 ]]
+								data = function()
 									return nil
 								end,
-								status = function(): string --[[ Line: 58 ]]
+								status = function(): string
 									return "NotReady"
 								end
 							}
 						end,
-						getBadgeInfos = function() --[[ Line: 63 ]]
+						getBadgeInfos = function()
 							return {}
 						end,
-						clear = function() --[[ Line: 66 ]] end,
-						dispose = function() --[[ Line: 67 ]] end
+						clear = function() end,
+						dispose = function() end
 					}
 				end
 			},
 			Game = p1 and p1.Game or nil,
 			SocialLink = p1 and p1.SocialLink or nil,
 			MarketplaceCatalogCategory = p1 and p1.MarketplaceCatalogCategory or {
-				getMarketplaceCatalogCategoryStore = function() --[[ Line: 74 ]]
+				getMarketplaceCatalogCategoryStore = function()
 					return {
-						getMarketplaceCatalogCategory = function() --[[ Line: 76 ]]
+						getMarketplaceCatalogCategory = function()
 							return {
-								data = function() --[[ Line: 78 ]]
+								data = function()
 									return nil
 								end,
-								status = function(): string --[[ Line: 81 ]]
+								status = function(): string
 									return "NotReady"
 								end
 							}
 						end,
-						getMarketplaceCatalogCategories = function() --[[ Line: 86 ]]
+						getMarketplaceCatalogCategories = function()
 							return {}
 						end,
-						updateMarketplaceCatalogCategories = function() --[[ Line: 89 ]] end,
-						updateMarketplaceCatalogCategory = function() --[[ Line: 90 ]] end,
-						clear = function() --[[ Line: 91 ]] end,
-						dispose = function() --[[ Line: 92 ]] end
+						updateMarketplaceCatalogCategories = function() end,
+						updateMarketplaceCatalogCategory = function() end,
+						clear = function() end,
+						dispose = function() end
 					}
 				end
 			},
 			MarketplaceCatalogSort = p1 and p1.MarketplaceCatalogSort or {
-				getMarketplaceCatalogSortStore = function() --[[ Line: 97 ]]
+				getMarketplaceCatalogSortStore = function()
 					return {
-						getMarketplaceCatalogSort = function() --[[ Line: 99 ]]
+						getMarketplaceCatalogSort = function()
 							return {
-								data = function() --[[ Line: 101 ]]
+								data = function()
 									return nil
 								end,
-								status = function(): string --[[ Line: 104 ]]
+								status = function(): string
 									return "NotReady"
 								end
 							}
 						end,
-						getMarketplaceCatalogSorts = function() --[[ Line: 109 ]]
+						getMarketplaceCatalogSorts = function()
 							return {}
 						end,
-						updateMarketplaceCatalogSorts = function() --[[ Line: 112 ]] end,
-						updateMarketplaceCatalogSort = function() --[[ Line: 113 ]] end,
-						clear = function() --[[ Line: 114 ]] end,
-						dispose = function() --[[ Line: 115 ]] end
+						updateMarketplaceCatalogSorts = function() end,
+						updateMarketplaceCatalogSort = function() end,
+						clear = function() end,
+						dispose = function() end
 					}
 				end
 			},
@@ -103,7 +103,7 @@ return {
 		end
 		return config
 	end,
-	createSduiDataBinderTransformUtilsMock = function() --[[ Line: 147 ]]
+	createSduiDataBinderTransformUtilsMock = function()
 		-- upvalues: SnakeToCamel (copy), ProtobufTimestampToLocalTimeString (copy)
 		return {
 			snakeToCamel = SnakeToCamel,

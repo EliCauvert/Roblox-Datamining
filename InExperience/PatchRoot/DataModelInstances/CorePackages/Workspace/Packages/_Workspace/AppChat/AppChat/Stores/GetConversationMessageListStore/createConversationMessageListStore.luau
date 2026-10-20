@@ -8,12 +8,12 @@ local ArraySetModule = require(AppChat.DataStructures.ArraySet)
 local FFlagAppChatBatchMessageListPagePublicationModule = require(AppChat.Flags.FFlagAppChatBatchMessageListPagePublication)
 local FFlagAppChatIncrementalPaginationProjectionModule = require(AppChat.Flags.FFlagAppChatIncrementalPaginationProjection)
 
-local function _() --[[ Line: 109 | Named "newConversationOrdering" ]]
+local function _()
 	-- upvalues: ArraySetModule (copy)
 	return { messageIds = ArraySetModule.new({}) }
 end
 
-local _ = function() --[[ Line: 115 | Named "newMessagePaginationMetadata" ]]
+local _ = function()
 	return {
 		nextPageCursor = nil,
 		isLoading = false,
@@ -21,7 +21,7 @@ local _ = function() --[[ Line: 115 | Named "newMessagePaginationMetadata" ]]
 	}
 end
 
-return function() --[[ Line: 123 | Named "createConversationMessageListStore" ]]
+return function()
 	-- upvalues: CreateProxyFunction (copy), SignalsModule (copy), ArraySetModule (copy), FFlagAppChatIncrementalPaginationProjectionModule (copy), CryoModule (copy), FFlagAppChatBatchMessageListPagePublicationModule (copy), SignalsExperimentalModule (copy)
 	local Proxy = CreateProxyFunction({})
 	local Proxy1 = CreateProxyFunction({})
@@ -29,7 +29,7 @@ return function() --[[ Line: 123 | Named "createConversationMessageListStore" ]]
 	local t1 = {}
 	local Revision = 0
 	
-	local function publishMutation(Key, Operation, Tbl, Tbl1, BoundaryMessageId) --[[ Line: 146 ]]
+	local function publishMutation(Key, Operation, Tbl, Tbl1, BoundaryMessageId)
 		-- upvalues: Revision (ref), t (copy), SignalsModule (upval), t1 (copy)
 		Revision += 1
 		
@@ -45,14 +45,14 @@ return function() --[[ Line: 123 | Named "createConversationMessageListStore" ]]
 		})
 	end
 	
-	local function _(p1) --[[ Line: 164 | Named "getOrDefaultOrdering" ]]
+	local function _(p1)
 		-- upvalues: Proxy (copy), ArraySetModule (upval)
 		local ProxyEntry = Proxy[p1]
 		
 		return if ProxyEntry == nil then { messageIds = ArraySetModule.new({}) } else ProxyEntry
 	end
 	
-	local _ = function(p1) --[[ Line: 172 | Named "getOrDefaultMetadata" ]]
+	local _ = function(p1)
 		-- upvalues: Proxy1 (copy)
 		local ProxyEntry = Proxy1[p1]
 		
@@ -63,7 +63,7 @@ return function() --[[ Line: 123 | Named "createConversationMessageListStore" ]]
 		} else ProxyEntry
 	end
 	
-	local function appendMessagesInternal(Key, List) --[[ Line: 213 ]]
+	local function appendMessagesInternal(Key, List)
 		-- upvalues: Proxy (copy), ArraySetModule (upval)
 		local ProxyEntry = Proxy[Key]
 		local Config = if ProxyEntry == nil then { messageIds = ArraySetModule.new({}) } else ProxyEntry
@@ -81,7 +81,7 @@ return function() --[[ Line: 123 | Named "createConversationMessageListStore" ]]
 		return List1, v1
 	end
 	
-	local function updatePagination(Key, p1, FetchedOldest) --[[ Line: 268 ]]
+	local function updatePagination(Key, p1, FetchedOldest)
 		-- upvalues: Proxy1 (copy), CryoModule (upval)
 		local ProxyEntry = Proxy1[Key]
 		local Config = if ProxyEntry == nil then {
@@ -96,7 +96,7 @@ return function() --[[ Line: 123 | Named "createConversationMessageListStore" ]]
 		})
 	end
 	
-	local _ = function(p1, p2, p3) --[[ Line: 277 | Named "receivePageInternal" ]]
+	local _ = function(p1, p2, p3)
 		-- upvalues: appendMessagesInternal (copy), updatePagination (copy), FFlagAppChatIncrementalPaginationProjectionModule (upval), publishMutation (copy)
 		local AppendMessagesInternalResult, AppendMessagesInternalResult2 = appendMessagesInternal(p1, p2)
 		updatePagination(p1, p3, p3 == nil or p3 == "")
@@ -109,7 +109,7 @@ return function() --[[ Line: 123 | Named "createConversationMessageListStore" ]]
 	return {
 		conversations = Proxy,
 		metadata = Proxy1,
-		getMutation = function(Key) --[[ Line: 135 ]]
+		getMutation = function(Key)
 			-- upvalues: t (copy), SignalsModule (upval), t1 (copy)
 			local Entry = t[Key]
 			
@@ -123,7 +123,7 @@ return function() --[[ Line: 123 | Named "createConversationMessageListStore" ]]
 				return Entry
 			end
 		end,
-		prependMessages = function(Key, List) --[[ Line: 182 ]]
+		prependMessages = function(Key, List)
 			-- upvalues: Proxy (copy), ArraySetModule (upval), FFlagAppChatIncrementalPaginationProjectionModule (upval), publishMutation (copy)
 			local ProxyEntry = Proxy[Key]
 			local Config = if ProxyEntry == nil then { messageIds = ArraySetModule.new({}) } else ProxyEntry
@@ -152,7 +152,7 @@ return function() --[[ Line: 123 | Named "createConversationMessageListStore" ]]
 				publishMutation(Key, "Prepend", List, {}, nil)
 			end
 		end,
-		appendMessages = function(p1, p2) --[[ Line: 231 ]]
+		appendMessages = function(p1, p2)
 			-- upvalues: appendMessagesInternal (copy), FFlagAppChatIncrementalPaginationProjectionModule (upval), publishMutation (copy)
 			local AppendMessagesInternalResult, AppendMessagesInternalResult2 = appendMessagesInternal(p1, p2)
 			
@@ -160,7 +160,7 @@ return function() --[[ Line: 123 | Named "createConversationMessageListStore" ]]
 				publishMutation(p1, "Append", p2, AppendMessagesInternalResult, AppendMessagesInternalResult2)
 			end
 		end,
-		removeMessage = function(Key, p1) --[[ Line: 239 ]]
+		removeMessage = function(Key, p1)
 			-- upvalues: Proxy (copy), FFlagAppChatIncrementalPaginationProjectionModule (upval), publishMutation (copy)
 			local ProxyEntry = Proxy[Key]
 			
@@ -172,13 +172,13 @@ return function() --[[ Line: 123 | Named "createConversationMessageListStore" ]]
 				publishMutation(Key, "Remove", { p1 }, {}, nil)
 			end
 		end,
-		publishMessageUpdates = function(p1, p2) --[[ Line: 253 ]]
+		publishMessageUpdates = function(p1, p2)
 			-- upvalues: publishMutation (copy)
 			if #p2 > 0 then
 				publishMutation(p1, "Update", p2, {}, nil)
 			end
 		end,
-		setLoading = function(Key, IsLoading) --[[ Line: 260 ]]
+		setLoading = function(Key, IsLoading)
 			-- upvalues: Proxy1 (copy), CryoModule (upval)
 			local ProxyEntry = Proxy1[Key]
 			Proxy1[Key] = CryoModule.Dictionary.union(if ProxyEntry == nil then {
@@ -188,10 +188,10 @@ return function() --[[ Line: 123 | Named "createConversationMessageListStore" ]]
 			} else ProxyEntry, { isLoading = IsLoading })
 		end,
 		updatePagination = updatePagination,
-		receivePage = function(p1, p2, p3) --[[ Line: 286 ]]
+		receivePage = function(p1, p2, p3)
 			-- upvalues: FFlagAppChatBatchMessageListPagePublicationModule (upval), SignalsExperimentalModule (upval), appendMessagesInternal (copy), updatePagination (copy), FFlagAppChatIncrementalPaginationProjectionModule (upval), publishMutation (copy)
 			if FFlagAppChatBatchMessageListPagePublicationModule then
-				SignalsExperimentalModule.batch(function() --[[ Line: 288 ]]
+				SignalsExperimentalModule.batch(function()
 					-- upvalues: p1 (copy), p2 (copy), p3 (copy), appendMessagesInternal (upval), updatePagination (upval), FFlagAppChatIncrementalPaginationProjectionModule (upval), publishMutation (upval)
 					local AppendMessagesInternalResult, AppendMessagesInternalResult2 = appendMessagesInternal(p1, p2)
 					updatePagination(p1, p3, p3 == nil or p3 == "")
@@ -210,7 +210,7 @@ return function() --[[ Line: 123 | Named "createConversationMessageListStore" ]]
 				publishMutation(p1, "AppendAndAdvanceCursor", p2, AppendMessagesInternalResult, AppendMessagesInternalResult2)
 			end
 		end,
-		clearConversation = function(Key) --[[ Line: 296 ]]
+		clearConversation = function(Key)
 			-- upvalues: Proxy (copy), Proxy1 (copy), FFlagAppChatIncrementalPaginationProjectionModule (upval), publishMutation (copy)
 			Proxy[Key] = nil
 			Proxy1[Key] = nil
@@ -219,7 +219,7 @@ return function() --[[ Line: 123 | Named "createConversationMessageListStore" ]]
 				publishMutation(Key, "Reset", {}, {}, nil)
 			end
 		end,
-		clear = function() --[[ Line: 304 ]]
+		clear = function()
 			-- upvalues: Proxy (copy), Proxy1 (copy), FFlagAppChatIncrementalPaginationProjectionModule (upval), t (copy), publishMutation (copy)
 			local List = {}
 			local t2 = {}
@@ -243,19 +243,19 @@ return function() --[[ Line: 123 | Named "createConversationMessageListStore" ]]
 				end
 			end
 		end,
-		getIndex = function(p1, p2, p3) --[[ Line: 327 ]]
+		getIndex = function(p1, p2, p3)
 			-- upvalues: Proxy (copy)
 			local ProxyResultEntry = Proxy(p3)[p1]
 			
 			return if ProxyResultEntry == nil then nil else ProxyResultEntry.messageIds:indexOf(p2)
 		end,
-		getOrderedIds = function(p1, p2) --[[ Line: 335 ]]
+		getOrderedIds = function(p1, p2)
 			-- upvalues: Proxy (copy)
 			local ProxyResultEntry = Proxy(p2)[p1]
 			
 			return if ProxyResultEntry == nil then {} else ProxyResultEntry.messageIds:values()
 		end,
-		getPrevId = function(p1, p2, p3) --[[ Line: 343 ]]
+		getPrevId = function(p1, p2, p3)
 			-- upvalues: Proxy (copy)
 			local ProxyResultEntry = Proxy(p3)[p1]
 			
@@ -267,7 +267,7 @@ return function() --[[ Line: 123 | Named "createConversationMessageListStore" ]]
 				return if IndexOfResult == nil or IndexOfResult <= 1 then nil else ProxyResultEntry.messageIds:at(IndexOfResult - 1)
 			end
 		end,
-		getNextId = function(p1, p2, p3) --[[ Line: 355 ]]
+		getNextId = function(p1, p2, p3)
 			-- upvalues: Proxy (copy)
 			local ProxyResultEntry = Proxy(p3)[p1]
 			
@@ -279,7 +279,7 @@ return function() --[[ Line: 123 | Named "createConversationMessageListStore" ]]
 				return if IndexOfResult == nil or ProxyResultEntry.messageIds:size() <= IndexOfResult then nil else ProxyResultEntry.messageIds:at(IndexOfResult + 1)
 			end
 		end,
-		getMetadata = function(p1, p2) --[[ Line: 367 ]]
+		getMetadata = function(p1, p2)
 			-- upvalues: Proxy1 (copy)
 			return Proxy1(p2)[p1]
 		end

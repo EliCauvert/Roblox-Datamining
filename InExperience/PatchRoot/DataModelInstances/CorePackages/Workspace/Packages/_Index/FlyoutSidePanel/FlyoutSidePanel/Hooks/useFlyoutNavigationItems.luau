@@ -30,7 +30,7 @@ local UseMomentsGatingFunction = MomentsCommonModule.Hooks.useMomentsGating
 local CanRenderNativeMomentsFunction = MomentsCommonModule.canRenderNativeMoments
 local FlyoutContentSettingsModule = require(script.Parent.Parent.Config.FlyoutContentSettings)
 
-local function updateNotifications(p1, p2, p3, p4) --[[ Line: 36 ]]
+local function updateNotifications(p1, p2, p3, p4)
 	-- upvalues: FlyoutContentSettingsModule (copy), FFlagLuaAppFixNotificationBadgeCountsSync (copy)
 	local NotificationCount = 0
 	
@@ -46,7 +46,7 @@ local function updateNotifications(p1, p2, p3, p4) --[[ Line: 36 ]]
 	end
 end
 
-local function shouldSkipLibraryItem(Premium, Item, p1): boolean --[[ Line: 56 ]]
+local function shouldSkipLibraryItem(Premium, Item, p1): boolean
 	-- upvalues: FFlagFlyoutHideSortDeeplinkItemsModule (copy), FlyoutContentSettingsModule (copy), FFlagFlyoutFilterWebViewsAndBrowserLinks (copy), FFlagEnableTradesEntryForNonPremium (copy), FFlagEnableBlackbird (copy), FFlagEnableBlackbirdOnFlyoutMenu (copy)
 	if Item == nil then
 		return true
@@ -76,13 +76,13 @@ local function shouldSkipLibraryItem(Premium, Item, p1): boolean --[[ Line: 56 ]
 	return false
 end
 
-return function() --[[ Line: 99 | Named "useFlyoutNavigationItems" ]]
+return function()
 	-- upvalues: ConstantsModule (copy), UseSelectorFunction (copy), FFlagLuaAppFixNotificationBadgeCountsSync (copy), FFlagLuaAppEnableSduiHomePage (copy), UseHomeSortDropDownOptionsModule (copy), ReactModule (copy), UseAppPolicyFunction (copy), FFlagFlyoutGateLearnPlace (copy), FFlagFlyoutFilterWebViewsAndBrowserLinks (copy), FFlagFlyoutSidePanelTradesEntryModule (copy), FFlagEnableBlackbirdCheck (copy), FlyoutGateMomentsTile (copy), FFlagFixMomentsExperienceFallback (copy), FFlagFlyoutRemoveMomentsForArgoEnabled (copy), UseMomentsGatingFunction (copy), FFlagEnableRMOnMorePageGUAC (copy), FlyoutContentSettingsModule (copy), shouldSkipLibraryItem (copy), updateNotifications (copy), GetFFlagPlatformEventEnabledFunction (copy), GetFStringPlatformEventUrlFunction (copy), FFlagEnableArgus (copy), FFlagArgoEnableMoments (copy), FFlagEnableRMOnMorePageForAll (copy), CanRenderNativeMomentsFunction (copy), AppPage (copy)
 	local FLYOUTDEFAULTPOLICY = ConstantsModule.FLYOUT_DEFAULT_POLICY
-	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 103 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p1)
 		return p1.NotificationBadgeCounts
 	end)
-	local UseSelectorResult1 = UseSelectorFunction(function(p1) --[[ Line: 107 ]]
+	local UseSelectorResult1 = UseSelectorFunction(function(p1)
 		-- upvalues: FFlagLuaAppFixNotificationBadgeCountsSync (upval)
 		if FFlagLuaAppFixNotificationBadgeCountsSync then
 			local FriendsCarousel = p1.FriendsCarousel
@@ -93,7 +93,7 @@ return function() --[[ Line: 99 | Named "useFlyoutNavigationItems" ]]
 			return 0
 		end
 	end)
-	local UseSelectorResult2 = UseSelectorFunction(function(p1) --[[ Line: 116 ]]
+	local UseSelectorResult2 = UseSelectorFunction(function(p1)
 		-- upvalues: FFlagLuaAppFixNotificationBadgeCountsSync (upval)
 		return FFlagLuaAppFixNotificationBadgeCountsSync and (p1.SocialTab and p1.SocialTab.UnreadConversationCount) or 0
 	end)
@@ -102,7 +102,7 @@ return function() --[[ Line: 99 | Named "useFlyoutNavigationItems" ]]
 	
 	if FFlagLuaAppEnableSduiHomePage then
 		local UseHomeSortDropDownOptionsModuleResult = UseHomeSortDropDownOptionsModule()
-		UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 128 ]]
+		UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function()
 			-- upvalues: UseHomeSortDropDownOptionsModuleResult (copy), ConstantsModule (upval)
 			local Flag: boolean? = nil
 			local Flag1: boolean? = nil
@@ -117,11 +117,11 @@ return function() --[[ Line: 99 | Named "useFlyoutNavigationItems" ]]
 			return Flag, Flag1
 		end, { UseHomeSortDropDownOptionsModuleResult })
 	else
-		local UseSelectorResult3 = UseSelectorFunction(function(p1) --[[ Line: 140 ]]
+		local UseSelectorResult3 = UseSelectorFunction(function(p1)
 			return p1.OmniRecommendations and p1.OmniRecommendations.Home
 		end)
 		local Sorts = UseSelectorResult3 and UseSelectorResult3.sorts or {}
-		UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 144 ]]
+		UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function()
 			-- upvalues: Sorts (copy), ConstantsModule (upval)
 			local Flag: boolean? = nil
 			local Flag1: boolean? = nil
@@ -136,28 +136,28 @@ return function() --[[ Line: 99 | Named "useFlyoutNavigationItems" ]]
 			return Flag, Flag1
 		end, { Sorts })
 	end
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p1) --[[ Line: 157 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p1)
 		return p1.getDisablePremiumEntrypoint() or false
 	end)
-	local UseAppPolicyResult1 = UseAppPolicyFunction(function(p1) --[[ Line: 160 ]]
+	local UseAppPolicyResult1 = UseAppPolicyFunction(function(p1)
 		return p1.getDisableBlackbirdEntrypoints() or false
 	end)
-	local UseAppPolicyResult2 = UseAppPolicyFunction(function(p1) --[[ Line: 163 ]]
+	local UseAppPolicyResult2 = UseAppPolicyFunction(function(p1)
 		return p1.getGiftCardSourceRefOverride()
 	end)
-	local UseAppPolicyResult3 = UseAppPolicyFunction(function(p1) --[[ Line: 166 ]]
+	local UseAppPolicyResult3 = UseAppPolicyFunction(function(p1)
 		return p1.getRedeemTileEnabled()
 	end)
-	local NoFFlagFlyoutGateLearnPlace = not FFlagFlyoutGateLearnPlace or UseAppPolicyFunction(function(p1) --[[ Line: 170 ]]
+	local NoFFlagFlyoutGateLearnPlace = not FFlagFlyoutGateLearnPlace or UseAppPolicyFunction(function(p1)
 		return p1.getLearnPlaceEnabled()
 	end)
-	local NoFFlagFlyoutFilterWebViewsAndBrowserLinks = not FFlagFlyoutFilterWebViewsAndBrowserLinks or UseAppPolicyFunction(function(p1) --[[ Line: 175 ]]
+	local NoFFlagFlyoutFilterWebViewsAndBrowserLinks = not FFlagFlyoutFilterWebViewsAndBrowserLinks or UseAppPolicyFunction(function(p1)
 		return p1.getWebViewSupport()
 	end)
-	local UseAppPolicyResult4 = if FFlagFlyoutFilterWebViewsAndBrowserLinks then UseAppPolicyFunction(function(p1) --[[ Line: 180 ]]
+	local UseAppPolicyResult4 = if FFlagFlyoutFilterWebViewsAndBrowserLinks then UseAppPolicyFunction(function(p1)
 		return p1.shouldUseExternalBrowserForMorePageItem()
 	end) else false
-	local UseSelectorResult4 = if FFlagFlyoutSidePanelTradesEntryModule then UseSelectorFunction(function(p1): boolean --[[ Line: 186 ]]
+	local UseSelectorResult4 = if FFlagFlyoutSidePanelTradesEntryModule then UseSelectorFunction(function(p1): boolean
 		-- upvalues: FFlagEnableBlackbirdCheck (upval)
 		local User = p1.Users[p1.LocalUserId]
 		
@@ -174,7 +174,7 @@ return function() --[[ Line: 99 | Named "useFlyoutNavigationItems" ]]
 	local NoFlyoutGateMomentsTile = not FlyoutGateMomentsTile or not FFlagEnableRMOnMorePageGUAC or IsAmpPolicyEnabled
 	local NoUseAppPolicyResult2: boolean = not UseAppPolicyResult2 or UseAppPolicyResult2 == ""
 	
-	return ReactModule.useMemo(function() --[[ Line: 208 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult2 (ref), UseMemoResult (ref), UseAppPolicyResult (copy), NoUseAppPolicyResult2 (copy), UseAppPolicyResult3 (copy), UseSelectorResult4 (copy), UseAppPolicyResult1 (copy), NoFFlagFlyoutFilterWebViewsAndBrowserLinks (copy), UseAppPolicyResult4 (copy), FLYOUTDEFAULTPOLICY (copy), FlyoutContentSettingsModule (upval), shouldSkipLibraryItem (upval), updateNotifications (upval), UseSelectorResult (copy), UseSelectorResult1 (copy), UseSelectorResult2 (copy), GetFFlagPlatformEventEnabledFunction (upval), GetFStringPlatformEventUrlFunction (upval), FFlagFlyoutGateLearnPlace (upval), NoFFlagFlyoutGateLearnPlace (copy), FlyoutGateMomentsTile (upval), FFlagFlyoutRemoveMomentsForArgoEnabled (upval), FFlagEnableArgus (upval), FFlagArgoEnableMoments (upval), UseMomentsGatingResult (copy), FFlagEnableRMOnMorePageForAll (upval), NoFlyoutGateMomentsTile (copy), FFlagFlyoutFilterWebViewsAndBrowserLinks (upval), FFlagFixMomentsExperienceFallback (upval), CanRenderNativeMomentsFunction (upval), AppPage (upval)
 		local MyLibraryItems = {}
 		local AdditionalNavigationItems = {}

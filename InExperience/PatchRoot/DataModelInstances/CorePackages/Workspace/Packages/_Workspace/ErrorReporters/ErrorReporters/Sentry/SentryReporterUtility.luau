@@ -3,13 +3,13 @@ local _ = script:FindFirstAncestor("ErrorReporters").Parent
 local SentryIncludeRolloutFlagsContext = game:DefineFastFlag("SentryIncludeRolloutFlagsContext", false)
 local SentryIncludeIxpEnrolledExperimentsContext = game:DefineFastFlag("SentryIncludeIxpEnrolledExperimentsContext", false)
 
-local function _(p1): boolean --[[ Line: 128 | Named "isJsonCompatible" ]]
+local function _(p1): boolean
 	local ValueType = typeof(p1)
 	
 	return p1 == nil or ValueType == "string" or ValueType == "boolean" or ValueType == "number" and (p1 == p1 and (p1 ~= 1e999 and p1 ~= -1e999))
 end
 
-local _ = function(p1) --[[ Line: 194 | Named "toUnsignedInt" ]]
+local _ = function(p1)
 	if p1 == nil then
 		return nil
 	else
@@ -19,7 +19,7 @@ local _ = function(p1) --[[ Line: 194 | Named "toUnsignedInt" ]]
 	end
 end
 
-local function convertErrorStackToSentryFrame(p1) --[[ Line: 254 ]]
+local function convertErrorStackToSentryFrame(p1)
 	local config = { lineno = tonumber(p1.line) or 0 }
 	
 	if p1.funcName then
@@ -45,8 +45,8 @@ local function convertErrorStackToSentryFrame(p1) --[[ Line: 254 ]]
 end
 
 local SentryReporterUtilityModule = {
-	safeGet = function(Attributes, p1) --[[ Line: 162 ]]
-		local Success, Result = pcall(function() --[[ Line: 163 ]]
+	safeGet = function(Attributes, p1)
+		local Success, Result = pcall(function()
 			-- upvalues: Attributes (copy), p1 (copy)
 			return Attributes[p1]
 		end)
@@ -60,7 +60,7 @@ local SentryReporterUtilityModule = {
 			return "unparsable"
 		end
 	end,
-	parseThreadsToSentry = function(List) --[[ Line: 356 ]]
+	parseThreadsToSentry = function(List)
 		-- upvalues: convertErrorStackToSentryFrame (copy)
 		if not List then
 			return nil
@@ -97,7 +97,7 @@ local SentryReporterUtilityModule = {
 	end
 }
 
-local function parseAppContext(p1) --[[ Line: 441 ]]
+local function parseAppContext(p1)
 	-- upvalues: SentryReporterUtilityModule (copy), SentryIncludeRolloutFlagsContext (copy), SentryIncludeIxpEnrolledExperimentsContext (copy)
 	local t = {}
 	local Attributes = p1.attributes
@@ -168,7 +168,7 @@ local function parseAppContext(p1) --[[ Line: 441 ]]
 	return t
 end
 
-local _ = function(p1) --[[ Line: 534 | Named "parseNetworkContext" ]]
+local _ = function(p1)
 	-- upvalues: SentryReporterUtilityModule (copy)
 	local t = {}
 	local NetworkType = SentryReporterUtilityModule.safeGet(p1.attributes, "networkType")
@@ -179,7 +179,7 @@ local _ = function(p1) --[[ Line: 534 | Named "parseNetworkContext" ]]
 	return t
 end
 
-local function parseOSContext(p1) --[[ Line: 569 ]]
+local function parseOSContext(p1)
 	-- upvalues: SentryReporterUtilityModule (copy)
 	local t = {}
 	local Attributes = p1.attributes
@@ -196,7 +196,7 @@ local function parseOSContext(p1) --[[ Line: 569 ]]
 	return t
 end
 
-local function parseDeviceContext(p1) --[[ Line: 638 ]]
+local function parseDeviceContext(p1)
 	-- upvalues: SentryReporterUtilityModule (copy)
 	local t = {}
 	local Attributes = p1.attributes
@@ -321,7 +321,7 @@ local function parseDeviceContext(p1) --[[ Line: 638 ]]
 	return t
 end
 
-local function parseCustomMetadataContexts(p1) --[[ Line: 737 ]]
+local function parseCustomMetadataContexts(p1)
 	local t = {}
 	local CustomMetadata = p1.customMetadata
 	
@@ -336,7 +336,7 @@ local function parseCustomMetadataContexts(p1) --[[ Line: 737 ]]
 	return t
 end
 
-function SentryReporterUtilityModule.parseErrorToContext(p2) --[[ Line: 801 ]]
+function SentryReporterUtilityModule.parseErrorToContext(p2)
 	-- upvalues: parseAppContext (copy), SentryReporterUtilityModule (copy), parseOSContext (copy), parseDeviceContext (copy), parseCustomMetadataContexts (copy)
 	local config = { app = parseAppContext(p2) }
 	local Network = {}

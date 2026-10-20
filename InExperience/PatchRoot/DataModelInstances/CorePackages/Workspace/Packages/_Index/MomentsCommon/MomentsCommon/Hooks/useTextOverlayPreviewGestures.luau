@@ -9,16 +9,16 @@ local UseCallbackFunction = ReactModule.useCallback
 local UseEffectFunction = ReactModule.useEffect
 local UseRefFunction = ReactModule.useRef
 
-local function _(p1, p2: number): number --[[ Line: 46 | Named "shapeScale" ]]
+local function _(p1, p2: number): number
 	return (math.max(0.3, p1 * (if p2 >= 1 then (p2 - 1) ^ 1.5 + 1 else 1 - (1 - p2) ^ 1.5)))
 end
 
-local _ = function(p1, Frame: Frame) --[[ Line: 51 | Named "touchesStartOnOverlay" ]]
+local _ = function(p1, Frame: Frame)
 	-- upvalues: TextOverlayPreviewGestureUtilsModule (copy)
 	return Frame ~= nil and TextOverlayPreviewGestureUtilsModule.touchGestureStartsOnOverlay(p1, Frame.AbsolutePosition, Frame.AbsoluteSize)
 end
 
-return function(p1) --[[ Line: 84 | Named "useTextOverlayPreviewGestures" ]]
+return function(p1)
 	-- upvalues: UserInputService (copy), GuiService (copy), ResponsiveModule (copy), UseRefFunction (copy), UseCallbackFunction (copy), UseEffectFunction (copy), TextOverlayPreviewGestureUtilsModule (copy)
 	local UserInputService1 = p1.userInputService or UserInputService
 	local GuiService1 = p1.guiService or GuiService
@@ -37,11 +37,11 @@ return function(p1) --[[ Line: 84 | Named "useTextOverlayPreviewGestures" ]]
 	local UseRefResult7 = UseRefFunction(0)
 	local UseRefResult8 = UseRefFunction(false)
 	local UseRefResult9 = UseRefFunction(false)
-	local UseCallbackResult = UseCallbackFunction(function(): Vector2 --[[ Line: 110 ]]
+	local UseCallbackResult = UseCallbackFunction(function(): Vector2
 		-- upvalues: GuiService1 (copy), UseDeviceInsetsResult (copy)
 		return GuiService1:GetGuiInset() + Vector2.new(UseDeviceInsetsResult.left, UseDeviceInsetsResult.top)
 	end, { UseDeviceInsetsResult, GuiService1 })
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 115 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: p1 (copy)
 		local Current = if p1.containerRef then p1.containerRef.current else nil
 		
@@ -49,15 +49,15 @@ return function(p1) --[[ Line: 84 | Named "useTextOverlayPreviewGestures" ]]
 	end, { p1.containerRef })
 	local IsPreferredInputMatch: boolean = p1.enabled and (p1.selected == true and p1.preferredInput == ResponsiveModule.Input.Touch)
 	local IsPreferredInputMatch1: boolean = p1.enabled and (p1.selected == true and p1.preferredInput == ResponsiveModule.Input.Pointer)
-	UseEffectFunction(function() --[[ Line: 127 ]]
+	UseEffectFunction(function()
 		-- upvalues: IsPreferredInputMatch (copy), p1 (copy), UserInputService1 (copy), UseRefResult2 (copy), UseRefResult8 (copy), TextOverlayPreviewGestureUtilsModule (upval), UseRefResult4 (copy), UseRefResult (copy), UseRefResult3 (copy), UseRefResult9 (copy), UseRefResult6 (copy), UseRefResult1 (copy), UseRefResult7 (copy)
 		if IsPreferredInputMatch then
-			local function _() --[[ Line: 132 | Named "overlayContainer" ]]
+			local function _()
 				-- upvalues: p1 (upval)
 				return if p1.containerRef then p1.containerRef.current else nil
 			end
 			
-			local TouchPinchConnection = UserInputService1.TouchPinch:Connect(function(...) --[[ Line: 136 ]]
+			local TouchPinchConnection = UserInputService1.TouchPinch:Connect(function(...)
 				-- upvalues: UseRefResult2 (upval), UseRefResult8 (upval), p1 (upval), TextOverlayPreviewGestureUtilsModule (upval), UseRefResult4 (upval), UseRefResult (upval)
 				local v1, v2, _, UserInputState = ...
 				local CurrentFunction: (any) -> () = UseRefResult2.current
@@ -90,7 +90,7 @@ return function(p1) --[[ Line: 84 | Named "useTextOverlayPreviewGestures" ]]
 					end
 				end
 			end)
-			local TouchRotateConnection = UserInputService1.TouchRotate:Connect(function(...) --[[ Line: 157 ]]
+			local TouchRotateConnection = UserInputService1.TouchRotate:Connect(function(...)
 				-- upvalues: UseRefResult3 (upval), TextOverlayPreviewGestureUtilsModule (upval), UseRefResult9 (upval), p1 (upval), UseRefResult6 (upval), UseRefResult1 (upval), UseRefResult7 (upval)
 				local v1, _, _, UserInputState = ...
 				local CurrentFunction: (any) -> () = UseRefResult3.current
@@ -128,7 +128,7 @@ return function(p1) --[[ Line: 84 | Named "useTextOverlayPreviewGestures" ]]
 				end
 			end)
 			
-			return function() --[[ Line: 191 ]]
+			return function()
 				-- upvalues: TouchPinchConnection (copy), TouchRotateConnection (copy), UseRefResult8 (upval), UseRefResult9 (upval)
 				TouchPinchConnection:Disconnect()
 				TouchRotateConnection:Disconnect()
@@ -149,7 +149,7 @@ return function(p1) --[[ Line: 84 | Named "useTextOverlayPreviewGestures" ]]
 	local UseRefResult13 = UseRefFunction(0)
 	local UseRefResult14 = UseRefFunction(nil)
 	local UseRefResult15 = UseRefFunction(nil)
-	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 207 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function()
 		-- upvalues: UseRefResult10 (copy), UseRefResult11 (copy), UseRefResult14 (copy), UseRefResult15 (copy)
 		UseRefResult10.current = nil
 		UseRefResult11.current = false
@@ -163,7 +163,7 @@ return function(p1) --[[ Line: 84 | Named "useTextOverlayPreviewGestures" ]]
 			UseRefResult15.current = nil
 		end
 	end, {})
-	local UseCallbackResult3 = UseCallbackFunction(function(Current) --[[ Line: 220 ]]
+	local UseCallbackResult3 = UseCallbackFunction(function(Current)
 		-- upvalues: IsPreferredInputMatch1 (copy), UseCallbackResult2 (copy), UseRefResult10 (copy), UseRefResult11 (copy), UseRefResult4 (copy), UseRefResult (copy), UseRefResult5 (copy), UseRefResult1 (copy), UseRefResult14 (copy), UserInputService1 (copy), UseCallbackResult1 (copy), UseCallbackResult (copy), UseRefResult12 (copy), UseRefResult13 (copy), UseRefResult2 (copy), UseRefResult3 (copy), UseRefResult15 (copy)
 		if IsPreferredInputMatch1 then
 			UseCallbackResult2()
@@ -171,7 +171,7 @@ return function(p1) --[[ Line: 84 | Named "useTextOverlayPreviewGestures" ]]
 			UseRefResult11.current = true
 			UseRefResult4.current = UseRefResult.current
 			UseRefResult5.current = UseRefResult1.current
-			UseRefResult14.current = UserInputService1.InputChanged:Connect(function(_) --[[ Line: 230 ]]
+			UseRefResult14.current = UserInputService1.InputChanged:Connect(function(_)
 				-- upvalues: UseRefResult10 (upval), UseCallbackResult1 (upval), UserInputService1 (upval), UseCallbackResult (upval), UseRefResult11 (upval), UseRefResult12 (upval), UseRefResult13 (upval), UseRefResult2 (upval), UseRefResult4 (upval), UseRefResult3 (upval), UseRefResult5 (upval)
 				if UseRefResult10.current == nil then return end
 				local UseCallbackResultResult = UseCallbackResult1()
@@ -203,7 +203,7 @@ return function(p1) --[[ Line: 84 | Named "useTextOverlayPreviewGestures" ]]
 					end
 				end
 			end)
-			UseRefResult15.current = UserInputService1.InputEnded:Connect(function() --[[ Line: 264 ]]
+			UseRefResult15.current = UserInputService1.InputEnded:Connect(function()
 				-- upvalues: UserInputService1 (upval), UseCallbackResult2 (upval)
 				if #UserInputService1:GetMouseButtonsPressed() == 0 then
 					UseCallbackResult2()
@@ -219,23 +219,23 @@ return function(p1) --[[ Line: 84 | Named "useTextOverlayPreviewGestures" ]]
 		UseCallbackResult2,
 		UserInputService1
 	})
-	UseEffectFunction(function() --[[ Line: 272 ]]
+	UseEffectFunction(function()
 		-- upvalues: IsPreferredInputMatch1 (copy), UseCallbackResult2 (copy)
 		if not IsPreferredInputMatch1 then
 			UseCallbackResult2()
 		end
-		return function() --[[ Line: 276 ]]
+		return function()
 			-- upvalues: UseCallbackResult2 (upval)
 			UseCallbackResult2()
 		end
 	end, { IsPreferredInputMatch1, UseCallbackResult2 })
 	
 	return {
-		onResizeHandleInputBegan = UseCallbackFunction(function(_) --[[ Line: 281 ]]
+		onResizeHandleInputBegan = UseCallbackFunction(function(_)
 			-- upvalues: UseCallbackResult3 (copy)
 			UseCallbackResult3("resize")
 		end, { UseCallbackResult3 }),
-		onRotateHandleInputBegan = UseCallbackFunction(function(_) --[[ Line: 284 ]]
+		onRotateHandleInputBegan = UseCallbackFunction(function(_)
 			-- upvalues: UseCallbackResult3 (copy)
 			UseCallbackResult3("rotate")
 		end, { UseCallbackResult3 })

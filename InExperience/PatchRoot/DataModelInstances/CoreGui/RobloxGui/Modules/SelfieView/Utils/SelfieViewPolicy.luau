@@ -2,9 +2,9 @@
 local AppPolicy = PolicyProviderModule.GetPolicyImplementations.MemStorageService("app-policy")
 local WithGetPolicyImplementationResult = PolicyProviderModule.withGetPolicyImplementation(AppPolicy)
 
-function WithGetPolicyImplementationResult.Mapper(p1) --[[ Line: 7 ]]
+function WithGetPolicyImplementationResult.Mapper(p1)
 	return {
-		eligibleForSelfieViewFeature = function() --[[ Line: 9 ]]
+		eligibleForSelfieViewFeature = function()
 			-- upvalues: p1 (copy)
 			return p1.EligibleForSelfieViewFeature or false
 		end

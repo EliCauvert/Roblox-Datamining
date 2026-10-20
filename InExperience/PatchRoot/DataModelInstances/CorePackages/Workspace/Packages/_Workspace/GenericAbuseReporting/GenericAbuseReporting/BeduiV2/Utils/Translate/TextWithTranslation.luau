@@ -11,7 +11,7 @@ local AddFontStyleToTextWithTranslation = game:DefineFastFlag("AddFontStyleToTex
 local TelemetryEventType = require(GenericAbuseReporting.BeduiV2.Analytics.analyticsService).TelemetryEventType
 local UseOptionalAbuseReportAnalyticsFunction = require(GenericAbuseReporting.BeduiV2.Analytics.AbuseReportAnalyticsContext).useOptionalAbuseReportAnalytics
 
-return ReactModule.memo(function(p1) --[[ Line: 43 | Named "TextWithTranslation" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseArTranslationFunction (copy), UseOpenLinkModule (copy), ReactModule (copy), UseOptionalAbuseReportAnalyticsFunction (copy), TelemetryEventType (copy), ControlState (copy), Text (copy), AddFontStyleToTextWithTranslation (copy)
 	local TranslateIntoStringFunction = UseArTranslationFunction().translateIntoString
 	local TranslateIntoRichTextStringFunction = UseArTranslationFunction().translateIntoRichTextString
@@ -19,11 +19,11 @@ return ReactModule.memo(function(p1) --[[ Line: 43 | Named "TextWithTranslation"
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseOptionalAbuseReportAnalyticsResult = UseOptionalAbuseReportAnalyticsFunction()
 	local SendEvent = if UseOptionalAbuseReportAnalyticsResult then UseOptionalAbuseReportAnalyticsResult.sendEvent else nil
-	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 52 ]]
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: TranslateIntoRichTextStringFunction (copy), p1 (copy)
 		return TranslateIntoRichTextStringFunction(p1.input)
 	end, { p1.input, TranslateIntoRichTextStringFunction })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 57 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseMemoResult2 (copy), SendEvent (copy), TelemetryEventType (upval), p1 (copy), UseOpenLinkModuleResult (copy), TranslateIntoStringFunction (copy)
 		local Href = if UseMemoResult2 ~= nil then UseMemoResult2.href else nil
 		
@@ -38,7 +38,7 @@ return ReactModule.memo(function(p1) --[[ Line: 43 | Named "TextWithTranslation"
 		UseMemoResult2, p1.input, UseOpenLinkModuleResult, TranslateIntoStringFunction,
 		SendEvent, p1.linkId, p1.linkSource
 	})
-	local UseResult1 = ReactModule.useCallback(function(Hover) --[[ Line: 85 ]]
+	local UseResult1 = ReactModule.useCallback(function(Hover)
 		-- upvalues: ControlState (upval), UseStateResult2 (copy)
 		if Hover == ControlState.Hover then
 			UseStateResult2(true)

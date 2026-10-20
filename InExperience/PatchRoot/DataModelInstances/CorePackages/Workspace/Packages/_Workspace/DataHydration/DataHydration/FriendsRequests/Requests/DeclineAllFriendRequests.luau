@@ -5,14 +5,14 @@ local _ = require(script.Parent.Parent.FriendsRequestsStoreTypes)
 local FetchFunction = HttpClientModule.fetch
 local AsPromiseFunction = HttpClientModule.asPromise
 
-return function() --[[ Line: 15 ]]
+return function()
 	-- upvalues: FetchFunction (copy), HttpModule (copy), AsPromiseFunction (copy)
 	return AsPromiseFunction((FetchFunction({
 		method = "POST",
 		analyticsKey = "friends.decline-all-friend-requests",
 		url = `{HttpModule.Url.FRIEND_URL}/user/friend-requests/decline-all`,
 		body = {},
-		decode = function(p1) --[[ Line: 21 ]]
+		decode = function(p1)
 			return p1
 		end
 	})))

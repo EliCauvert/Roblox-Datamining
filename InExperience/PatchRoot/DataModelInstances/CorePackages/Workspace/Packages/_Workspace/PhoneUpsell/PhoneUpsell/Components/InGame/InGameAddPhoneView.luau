@@ -29,7 +29,7 @@ local config = {
 	buttonKey = if FFlagInExperienceAddPhoneViewNewCopy then "Feature.AccountSettings.Action.Verify" else "Feature.VerificationUpsell.Action.Next"
 }
 
-local function getButtonStackProps(Text, OnActivated, IsDisabled, Text1, OnActivated1) --[[ Line: 74 ]]
+local function getButtonStackProps(Text, OnActivated, IsDisabled, Text1, OnActivated1)
 	-- upvalues: ButtonType (copy)
 	local Buttons = {
 		{
@@ -55,7 +55,7 @@ local function getButtonStackProps(Text, OnActivated, IsDisabled, Text1, OnActiv
 	return { buttonHeight = 48, buttons = Buttons }
 end
 
-return function(p1) --[[ Line: 109 | Named "InGameAddPhoneView" ]]
+return function(p1)
 	-- upvalues: MergePropsModule (copy), config (copy), FFlagInExperienceAddPhoneViewNewCopy (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), StyleModule (copy), _Vector2 (copy), Text (copy), UseExternalEventFunction (copy), UserInputService (copy), RoactModule (copy), CountryCodeButtonModule (copy), GetFFlagAddMorePhoneUpsellEventsFunction (copy), TextField (copy), NormalizeFontFaceFunction (copy), InteractiveAlert (copy), getButtonStackProps (copy), CountryCodeDropdownContainer (copy)
 	local MergePropsModuleResult = MergePropsModule(config, p1)
 	local Config = if FFlagInExperienceAddPhoneViewNewCopy then {
@@ -99,7 +99,7 @@ return function(p1) --[[ Line: 109 | Named "InGameAddPhoneView" ]]
 	local Largest = math.max((if FoundationFontFaceMigration then StyleModule.GetTextSize(Prefix, FontSize, BodyLargeFont, _Vector2).X else Text.GetTextWidth(Prefix, BodyLargeFont, FontSize)) + 24, Size1200)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(300)
 	
-	local function OnAbsoluteSizeChanged(Frame) --[[ Line: 162 ]]
+	local function OnAbsoluteSizeChanged(Frame)
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(Frame.AbsoluteSize.X)
 	end
@@ -121,7 +121,7 @@ return function(p1) --[[ Line: 109 | Named "InGameAddPhoneView" ]]
 		_Vector2_3 = UseRefResult2.current.AbsolutePosition
 	end
 	local Smallest = math.min(MergePropsModuleResult.screenSize.Y - (_Vector2_1.Y + Size1200 + Small - _Vector2_2.Y) - Small, 400)
-	UseExternalEventFunction(UserInputService.InputBegan, (ReactModule.useCallback(function(p2) --[[ Line: 192 ]]
+	UseExternalEventFunction(UserInputService.InputBegan, (ReactModule.useCallback(function(p2)
 		-- upvalues: Size1200 (copy), Small (copy), _Vector2_3 (ref), UseStateResult1 (copy), Smallest (ref), Largest (copy), UseStateResult (copy), UseStateResult2 (copy)
 		local NewSize = Size1200 + Small
 		local IsYBelow: boolean = _Vector2_3.X < p2.Position.X and (p2.Position.X < _Vector2_3.X + UseStateResult1 and _Vector2_3.Y + NewSize < p2.Position.Y) and p2.Position.Y < _Vector2_3.Y + NewSize + Smallest
@@ -165,7 +165,7 @@ return function(p1) --[[ Line: 109 | Named "InGameAddPhoneView" ]]
 			CountryCodeButton = ReactModule.createElement(CountryCodeButtonModule, {
 				layoutOrder = 1,
 				countryPrefix = "+" .. Prefix,
-				onButtonClick = function() --[[ Line: 245 ]]
+				onButtonClick = function()
 					-- upvalues: UseStateResult2 (copy), UseStateResult (copy), GetFFlagAddMorePhoneUpsellEventsFunction (upval), MergePropsModuleResult (copy)
 					UseStateResult2(not UseStateResult)
 					
@@ -184,7 +184,7 @@ return function(p1) --[[ Line: 109 | Named "InGameAddPhoneView" ]]
 				required = true,
 				LayoutOrder = 2,
 				text = MergePropsModuleResult.phoneNumber,
-				onChange = function(Text) --[[ Line: 262 ]]
+				onChange = function(Text)
 					-- upvalues: MergePropsModuleResult (copy)
 					MergePropsModuleResult.onPhoneNumberTextChange({ Text = Text })
 				end,
@@ -225,7 +225,7 @@ return function(p1) --[[ Line: 109 | Named "InGameAddPhoneView" ]]
 			title = UseLocalizationResult.titleKey,
 			onAbsoluteSizeChanged = OnAbsoluteSizeChanged,
 			onCloseClicked = MergePropsModuleResult.onClose,
-			middleContent = if FFlagInExperienceAddPhoneViewNewCopy then function() --[[ Line: 309 ]]
+			middleContent = if FFlagInExperienceAddPhoneViewNewCopy then function()
 				-- upvalues: ReactModule (upval), Tokens (copy), UseLocalizationResult (copy), BaseSize (copy), UseStyleResult (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), Frame (copy), RelativeSize (copy)
 				return ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
@@ -287,7 +287,7 @@ return function(p1) --[[ Line: 109 | Named "InGameAddPhoneView" ]]
 						})
 					})
 				})
-			end else function() --[[ Line: 377 ]]
+			end else function()
 				-- upvalues: ReactModule (upval), Tokens (copy), Frame (copy), UseLocalizationResult (copy), BaseSize (copy), RelativeSize (copy), UseStyleResult (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 				return ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
@@ -335,7 +335,7 @@ return function(p1) --[[ Line: 109 | Named "InGameAddPhoneView" ]]
 				dropdownVisible = UseStateResult,
 				position = UDim2.new(0, 0, 0, 0),
 				maxHeight = Smallest,
-				onCountryCodeSelected = function(p2) --[[ Line: 439 ]]
+				onCountryCodeSelected = function(p2)
 					-- upvalues: MergePropsModuleResult (copy), UseStateResult2 (copy)
 					MergePropsModuleResult.setCountryCode(p2)
 					UseStateResult2(false)

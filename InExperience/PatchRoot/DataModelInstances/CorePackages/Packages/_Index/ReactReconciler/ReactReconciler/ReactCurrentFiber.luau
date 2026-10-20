@@ -6,7 +6,7 @@ local GetComponentNameFunction = require(Parent.Shared).getComponentName
 local ReactDebugCurrentFrame = require(Parent.Shared).ReactSharedInternals.ReactDebugCurrentFrame
 local ReactCurrentFiberModule = { current = nil, isRendering = false }
 
-function ReactCurrentFiberModule.getCurrentFiberOwnerNameInDevOrNull() --[[ Line: 39 ]]
+function ReactCurrentFiberModule.getCurrentFiberOwnerNameInDevOrNull()
 	-- upvalues: DEV (copy), ReactCurrentFiberModule (copy), GetComponentNameFunction (copy)
 	if DEV then
 		if ReactCurrentFiberModule.current == nil then
@@ -21,12 +21,12 @@ function ReactCurrentFiberModule.getCurrentFiberOwnerNameInDevOrNull() --[[ Line
 	return nil
 end
 
-local function getCurrentFiberStackInDev() --[[ Line: 53 ]]
+local function getCurrentFiberStackInDev()
 	-- upvalues: DEV (copy), ReactCurrentFiberModule (copy), GetStackByFiberInDevAndProdFunction (copy)
 	return if DEV then if ReactCurrentFiberModule.current == nil then "" else GetStackByFiberInDevAndProdFunction(ReactCurrentFiberModule.current) else ""
 end
 
-function ReactCurrentFiberModule.resetCurrentFiber() --[[ Line: 66 ]]
+function ReactCurrentFiberModule.resetCurrentFiber()
 	-- upvalues: DEV (copy), ReactDebugCurrentFrame (copy), ReactCurrentFiberModule (copy)
 	if DEV then
 		ReactDebugCurrentFrame.getCurrentStack = nil
@@ -35,7 +35,7 @@ function ReactCurrentFiberModule.resetCurrentFiber() --[[ Line: 66 ]]
 	end
 end
 
-function ReactCurrentFiberModule.setCurrentFiber(Current) --[[ Line: 75 ]]
+function ReactCurrentFiberModule.setCurrentFiber(Current)
 	-- upvalues: DEV (copy), ReactDebugCurrentFrame (copy), getCurrentFiberStackInDev (copy), ReactCurrentFiberModule (copy)
 	if DEV then
 		ReactDebugCurrentFrame.getCurrentStack = getCurrentFiberStackInDev
@@ -44,14 +44,14 @@ function ReactCurrentFiberModule.setCurrentFiber(Current) --[[ Line: 75 ]]
 	end
 end
 
-function ReactCurrentFiberModule.setIsRendering(IsRendering) --[[ Line: 84 ]]
+function ReactCurrentFiberModule.setIsRendering(IsRendering)
 	-- upvalues: DEV (copy), ReactCurrentFiberModule (copy)
 	if DEV then
 		ReactCurrentFiberModule.isRendering = IsRendering
 	end
 end
 
-function ReactCurrentFiberModule.getIsRendering() --[[ Line: 90 ]]
+function ReactCurrentFiberModule.getIsRendering()
 	-- upvalues: DEV (copy), ReactCurrentFiberModule (copy)
 	return if DEV then ReactCurrentFiberModule.isRendering else false
 end

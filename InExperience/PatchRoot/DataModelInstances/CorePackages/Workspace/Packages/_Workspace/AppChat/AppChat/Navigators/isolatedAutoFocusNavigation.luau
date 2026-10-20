@@ -5,15 +5,15 @@ local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
 local AutoFocusNavigationModule = require(script.Parent.autoFocusNavigation)
 
-return function(p1, SurfaceIdentifier, Callback) --[[ Line: 13 | Named "isolatedAutoFocusNavigation" ]]
+return function(p1, SurfaceIdentifier, Callback)
 	-- upvalues: ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), FocusNavigationUtilsModule (copy), AutoFocusNavigationModule (copy)
-	return function(p2) --[[ Line: 18 ]]
+	return function(p2)
 		-- upvalues: ReactModule (upval), FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), Callback (copy), FocusNavigationUtilsModule (upval), SurfaceIdentifier (copy), AutoFocusNavigationModule (upval), p1 (copy)
-		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 19 ]]
+		local UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), Callback (upval), p2 (copy)
 			return {
 				[FocusNavigationEventNameEnum.NavigateBack] = {
-					handler = InputHandlersModule.onRelease(function(p3) --[[ Line: 22 ]]
+					handler = InputHandlersModule.onRelease(function(p3)
 						-- upvalues: Callback (upval), p2 (upval)
 						if Callback then
 							Callback(p2)

@@ -19,7 +19,7 @@ local config1 = {
 	[MarketplaceUnifiedAction.WIDGET_LOADED] = true
 }
 
-local function newWindow(Label, MaxSeconds, TracksPhase) --[[ Line: 91 ]]
+local function newWindow(Label, MaxSeconds, TracksPhase)
 	return {
 		keyCount = 0,
 		pendingFlush = nil,
@@ -38,7 +38,7 @@ local Long = newWindow("long", FIntAXUnifiedEventCounterImpressionFlushSeconds, 
 local NavigationOpaquePage = nil
 local t = {}
 
-local function invertEnum(MarketplaceUnifiedAction) --[[ Line: 118 ]]
+local function invertEnum(MarketplaceUnifiedAction)
 	local t = {}
 	
 	for i, value in MarketplaceUnifiedAction do
@@ -50,11 +50,11 @@ end
 local InvertEnumResult = invertEnum(MarketplaceUnifiedAction)
 local InvertEnumResult1 = invertEnum(UnifiedLoggingSurface)
 
-local function _(p1): string --[[ Line: 132 | Named "toDimensionString" ]]
+local function _(p1): string
 	return if p1 == nil or p1 == "" then "Unknown" else tostring(p1)
 end
 
-local function toElementNameDimension(ElementName): string --[[ Line: 143 ]]
+local function toElementNameDimension(ElementName): string
 	local Unknown: string = if ElementName == nil or ElementName == "" then "Unknown" else tostring(ElementName)
 	while true do
 		local Replaced = string.gsub(Unknown, "[_:%-]%d+$", "")
@@ -66,7 +66,7 @@ local function toElementNameDimension(ElementName): string --[[ Line: 143 ]]
 	return Unknown
 end
 
-local _ = function(p1, p2) --[[ Line: 156 | Named "toEnumName" ]]
+local _ = function(p1, p2)
 	if p1 == nil or p1 == "" then
 		return "Unknown"
 	else
@@ -76,16 +76,16 @@ local _ = function(p1, p2) --[[ Line: 156 | Named "toEnumName" ]]
 	end
 end
 
-local _ = function() --[[ Line: 164 | Named "debugEnabled" ]]
+local _ = function()
 	-- upvalues: FFlagAXUnifiedEventCounterDebugLogs (copy), IsRunningInStudioFunction (copy)
 	return FFlagAXUnifiedEventCounterDebugLogs and IsRunningInStudioFunction()
 end
 
-local function describe(Dimensions): string --[[ Line: 169 ]]
+local function describe(Dimensions): string
 	return string.format("action=%s surface=%s page=%s element=%s filterPass=%s", Dimensions.action, Dimensions.surface, Dimensions.navigationPage, Dimensions.elementName or "-", Dimensions.filterPass or "-")
 end
 
-local function bucketKey(Dimensions): string --[[ Line: 182 ]]
+local function bucketKey(Dimensions): string
 	return table.concat({
 		Dimensions.action,
 		Dimensions.surface,
@@ -95,19 +95,19 @@ local function bucketKey(Dimensions): string --[[ Line: 182 ]]
 	}, "|")
 end
 
-local _ = function(p1): string --[[ Line: 193 | Named "peekPhase" ]]
+local _ = function(p1): string
 	-- upvalues: t (ref)
 	return if t[p1] then "Continued" else "Initial"
 end
 
-local _ = function(Key): string --[[ Line: 199 | Named "takePhase" ]]
+local _ = function(Key): string
 	-- upvalues: t (ref)
 	t[Key] = true
 	
 	return if t[Key] then "Continued" else "Initial"
 end
 
-local function emit(Dimensions, Count, Phase) --[[ Line: 207 ]]
+local function emit(Dimensions, Count, Phase)
 	-- upvalues: FFlagAXUnifiedEventCounterDebugLogs (copy), IsRunningInStudioFunction (copy), describe (copy), SendAXCounterV2Module (copy)
 	local config = {
 		action = Dimensions.action,
@@ -130,7 +130,7 @@ local function emit(Dimensions, Count, Phase) --[[ Line: 207 ]]
 	SendAXCounterV2Module("AXUnifiedEventSent", config, Count)
 end
 
-local function flushWindow(Window) --[[ Line: 235 ]]
+local function flushWindow(Window)
 	-- upvalues: FFlagAXUnifiedEventCounterDebugLogs (copy), IsRunningInStudioFunction (copy), emit (copy), t (ref)
 	if Window.pendingFlush ~= nil then
 		task.cancel(Window.pendingFlush)
@@ -160,7 +160,7 @@ local function flushWindow(Window) --[[ Line: 235 ]]
 	end
 end
 
-local function scheduleFlush(Window) --[[ Line: 265 ]]
+local function scheduleFlush(Window)
 	-- upvalues: FIntAXUnifiedEventCounterIdleSeconds (copy), FFlagAXUnifiedEventCounterDebugLogs (copy), IsRunningInStudioFunction (copy), flushWindow (copy), scheduleFlush (copy)
 	if Window.pendingFlush ~= nil then return end
 	local Largest = math.max(FIntAXUnifiedEventCounterIdleSeconds, 1)
@@ -169,7 +169,7 @@ local function scheduleFlush(Window) --[[ Line: 265 ]]
 		print(string.format("%s SCHEDULE %s idle=%ds max=%ds", "[AXUnifiedEventCounters]", Window.label, Largest, Window.maxSeconds))
 	end
 	Window.armedAtCount = Window.recordCount
-	Window.pendingFlush = task.delay(Largest, function() --[[ Line: 279 ]]
+	Window.pendingFlush = task.delay(Largest, function()
 		-- upvalues: Window (copy), Largest (copy), FFlagAXUnifiedEventCounterDebugLogs (upval), IsRunningInStudioFunction (upval), flushWindow (upval), scheduleFlush (upval)
 		Window.pendingFlush = nil
 		Window.waitedSeconds += Largest
@@ -188,12 +188,12 @@ local function scheduleFlush(Window) --[[ Line: 265 ]]
 end
 
 return {
-	flush = function() --[[ Line: 257 ]]
+	flush = function()
 		-- upvalues: flushWindow (copy), Short (copy), Long (copy)
 		flushWindow(Short)
 		flushWindow(Long)
 	end,
-	record = function(Dimensions, p1) --[[ Line: 307 ]]
+	record = function(Dimensions, p1)
 		-- upvalues: NavigationOpaquePage (ref), t (ref), InvertEnumResult (copy), InvertEnumResult1 (copy), MarketplaceUnifiedAction (copy), toElementNameDimension (copy), config (copy), emit (copy), config1 (copy), Long (copy), Short (copy), bucketKey (copy), FFlagAXUnifiedEventCounterDebugLogs (copy), IsRunningInStudioFunction (copy), describe (copy), FIntAXUnifiedEventCounterMaxKeys (copy), flushWindow (copy), scheduleFlush (copy)
 		local Action = Dimensions.action
 		

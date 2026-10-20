@@ -50,7 +50,7 @@ local config = {
 local v1 = require(Parent.MomentsCommon.isStudio)()
 local MomentStatus = require(Parent.MomentsTypes).Enums.MomentStatus
 
-local function makeUploadedMomentItem(AssetId, Sound, Edits, Description, p1: number) --[[ Line: 87 ]]
+local function makeUploadedMomentItem(AssetId, Sound, Edits, Description, p1: number)
 	-- upvalues: Players (copy), MomentsCreationModule (copy), MomentStatus (copy)
 	local LocalPlayer = Players.LocalPlayer
 	
@@ -71,7 +71,7 @@ local function makeUploadedMomentItem(AssetId, Sound, Edits, Description, p1: nu
 	}
 end
 
-local function _(Sound, Edits, Description, p1) --[[ Line: 118 | Named "makePendingMomentItem" ]]
+local function _(Sound, Edits, Description, p1)
 	-- upvalues: makeUploadedMomentItem (copy), HttpService (copy), MomentStatus (copy)
 	local UploadedMomentItem = makeUploadedMomentItem(0, Sound, Edits, Description, p1)
 	UploadedMomentItem.momentId = HttpService:GenerateGUID(false)
@@ -84,7 +84,7 @@ local function _(Sound, Edits, Description, p1) --[[ Line: 118 | Named "makePend
 	return UploadedMomentItem
 end
 
-local function setPublishedPostOnUploadStore(p1, p2, p3) --[[ Line: 135 ]]
+local function setPublishedPostOnUploadStore(p1, p2, p3)
 	-- upvalues: FFlagMomentsOptimisticProfilePending (copy)
 	local ResolveResult = p1.resolve(p3)
 	
@@ -103,7 +103,7 @@ local function setPublishedPostOnUploadStore(p1, p2, p3) --[[ Line: 135 ]]
 	end
 end
 
-local function makeUploadStore(UploadStore, Sound: Sound, Edits, Description, ResolvedTimeLength) --[[ Line: 160 ]]
+local function makeUploadStore(UploadStore, Sound: Sound, Edits, Description, ResolvedTimeLength)
 	-- upvalues: FFlagMomentsResolvePublishedPostFeedItem (copy), GetFFlagMomentsUseUploadPostAsyncFunction (copy), CreatePublishedPostResolverModule (copy), FFlagMomentsRefreshProfileOnPostStatus (copy), FFlagMomentsOptimisticProfilePending (copy), PostLifecycleSubscriptionModule (copy), GetLocalUserIdModule (copy), makeUploadedMomentItem (copy), HttpService (copy), MomentStatus (copy), MomentsGetMomentsUserStoreModule (copy), setPublishedPostOnUploadStore (copy), FFlagMomentsHydratePublishedFeedItemModule (copy), SetPublishedMomentOnUploadStoreModule (copy), FFlagMomentsRefreshOwnMomentsAfterPublish (copy), RefreshOwnMomentsAfterPublishModule (copy)
 	local PublishedPostResolverModule = if FFlagMomentsResolvePublishedPostFeedItem and GetFFlagMomentsUseUploadPostAsyncFunction() then CreatePublishedPostResolverModule({
 		captureType = Sound.CaptureType,
@@ -115,7 +115,7 @@ local function makeUploadStore(UploadStore, Sound: Sound, Edits, Description, Re
 	local v2 = nil
 	
 	return {
-		setUploading = if FFlagMomentsRefreshProfileOnPostStatus or PublishedPostResolverModule ~= nil then function() --[[ Line: 183 ]]
+		setUploading = if FFlagMomentsRefreshProfileOnPostStatus or PublishedPostResolverModule ~= nil then function()
 			-- upvalues: FFlagMomentsRefreshProfileOnPostStatus (upval), FFlagMomentsOptimisticProfilePending (upval), PublishedPostResolverModule (copy), PostLifecycleSubscriptionModule (upval), UploadStore (copy), MomentId (ref), GetLocalUserIdModule (upval), Sound (copy), Edits (copy), Description (copy), ResolvedTimeLength (copy), makeUploadedMomentItem (upval), HttpService (upval), MomentStatus (upval), v2 (ref), MomentsGetMomentsUserStoreModule (upval)
 			if FFlagMomentsRefreshProfileOnPostStatus or FFlagMomentsOptimisticProfilePending and PublishedPostResolverModule ~= nil then
 				PostLifecycleSubscriptionModule.subscribe()
@@ -143,7 +143,7 @@ local function makeUploadStore(UploadStore, Sound: Sound, Edits, Description, Re
 				end
 			end
 		end else UploadStore.setUploading,
-		setFailed = if FFlagMomentsOptimisticProfilePending and PublishedPostResolverModule ~= nil then function(p1) --[[ Line: 207 ]]
+		setFailed = if FFlagMomentsOptimisticProfilePending and PublishedPostResolverModule ~= nil then function(p1)
 			-- upvalues: v2 (ref), MomentId (ref), MomentsGetMomentsUserStoreModule (upval), PublishedPostResolverModule (copy), UploadStore (copy)
 			if v2 ~= nil and MomentId ~= nil then
 				MomentsGetMomentsUserStoreModule(false).removePendingUserMoment(v2, MomentId)
@@ -152,7 +152,7 @@ local function makeUploadStore(UploadStore, Sound: Sound, Edits, Description, Re
 				UploadStore.setFailed(p1)
 			end
 		end else UploadStore.setFailed,
-		setSuccess = function(AssetId) --[[ Line: 216 ]]
+		setSuccess = function(AssetId)
 			-- upvalues: UploadStore (copy), FFlagMomentsOptimisticProfilePending (upval), v2 (ref), MomentId (ref), MomentsGetMomentsUserStoreModule (upval), PublishedPostResolverModule (copy), setPublishedPostOnUploadStore (upval), FFlagMomentsHydratePublishedFeedItemModule (upval), SetPublishedMomentOnUploadStoreModule (upval), makeUploadedMomentItem (upval), Sound (copy), Edits (copy), Description (copy), ResolvedTimeLength (copy), FFlagMomentsRefreshOwnMomentsAfterPublish (upval), RefreshOwnMomentsAfterPublishModule (upval)
 			if type(AssetId) ~= "number" then
 				UploadStore.setSuccess(AssetId)
@@ -162,7 +162,7 @@ local function makeUploadStore(UploadStore, Sound: Sound, Edits, Description, Re
 			if FFlagMomentsOptimisticProfilePending and v2 ~= nil and MomentId ~= nil then
 				local v3 = v2
 				local MomentId1 = MomentId
-				task.delay(300, function() --[[ Line: 225 ]]
+				task.delay(300, function()
 					-- upvalues: MomentsGetMomentsUserStoreModule (upval), v3 (copy), MomentId1 (copy)
 					local MomentsGetMomentsUserStoreModuleResult = MomentsGetMomentsUserStoreModule(false)
 					MomentsGetMomentsUserStoreModuleResult.removePendingUserMoment(v3, MomentId1)
@@ -188,20 +188,20 @@ local function makeUploadStore(UploadStore, Sound: Sound, Edits, Description, Re
 	}
 end
 
-return function(p1) --[[ Line: 254 | Named "useUploadHost" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), GetFFlagEnableMomentTextGenerationFunction (copy), ReactModule (copy), GetUploadStoreModule (copy), GetToastStoreModule (copy), GenerateMomentTextModule (copy), MomentGeneratedTextFeedbackModule (copy), MomentsCreationModule (copy), v1 (copy), PublishMomentWithUploadFunction (copy), makeUploadStore (copy)
 	local OnExit = p1.onExit
 	local CaptureSource = p1.captureSource
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseRefResult = if GetFFlagEnableMomentTextGenerationFunction() then ReactModule.useRef({}) else nil
 	
-	return (ReactModule.useMemo(function() --[[ Line: 270 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: GetUploadStoreModule (upval), GetToastStoreModule (upval), GetFFlagEnableMomentTextGenerationFunction (upval), UseRefResult (ref), OnExit (copy), CaptureSource (copy), GenerateMomentTextModule (upval), MomentGeneratedTextFeedbackModule (upval), UseLocalizationResult (copy), MomentsCreationModule (upval), v1 (upval), PublishMomentWithUploadFunction (upval), makeUploadStore (upval)
 		local UploadStoreModule = GetUploadStoreModule(false)
 		local ToastStoreModule = GetToastStoreModule(false)
 		local FFlagEnableMomentTextGeneration = GetFFlagEnableMomentTextGenerationFunction()
 		
-		local function _(p2) --[[ Line: 280 | Named "triggerGenerationToast" ]]
+		local function _(p2)
 			-- upvalues: ToastStoreModule (copy), UseRefResult (upval)
 			local TriggerToastResult = ToastStoreModule.triggerToast(p2)
 			
@@ -215,7 +215,7 @@ return function(p1) --[[ Line: 254 | Named "useUploadHost" ]]
 			captureSource = CaptureSource,
 			generateMomentText = if FFlagEnableMomentTextGeneration then GenerateMomentTextModule else nil,
 			momentGeneratedTextFeedback = if FFlagEnableMomentTextGeneration then MomentGeneratedTextFeedbackModule else nil,
-			onGenerateTextManualEditBlocked = if FFlagEnableMomentTextGeneration then function() --[[ Line: 293 ]]
+			onGenerateTextManualEditBlocked = if FFlagEnableMomentTextGeneration then function()
 				-- upvalues: UseLocalizationResult (upval), ToastStoreModule (copy), UseRefResult (upval)
 				local TriggerToastResult = ToastStoreModule.triggerToast({
 					title = UseLocalizationResult.generateInProgressTitle,
@@ -226,7 +226,7 @@ return function(p1) --[[ Line: 254 | Named "useUploadHost" ]]
 					table.insert(UseRefResult.current, TriggerToastResult)
 				end
 			end else nil,
-			onGenerateTextSuccess = if FFlagEnableMomentTextGeneration then function() --[[ Line: 301 ]]
+			onGenerateTextSuccess = if FFlagEnableMomentTextGeneration then function()
 				-- upvalues: UseLocalizationResult (upval), ToastStoreModule (copy), UseRefResult (upval)
 				local TriggerToastResult = ToastStoreModule.triggerToast({
 					title = UseLocalizationResult.generatedTitle,
@@ -237,7 +237,7 @@ return function(p1) --[[ Line: 254 | Named "useUploadHost" ]]
 					table.insert(UseRefResult.current, TriggerToastResult)
 				end
 			end else nil,
-			onGenerateTextFailure = if FFlagEnableMomentTextGeneration then function() --[[ Line: 306 ]]
+			onGenerateTextFailure = if FFlagEnableMomentTextGeneration then function()
 				-- upvalues: UseLocalizationResult (upval), ToastStoreModule (copy), UseRefResult (upval)
 				local TriggerToastResult = ToastStoreModule.triggerToast({
 					title = UseLocalizationResult.generateFailedTitle,
@@ -248,7 +248,7 @@ return function(p1) --[[ Line: 254 | Named "useUploadHost" ]]
 					table.insert(UseRefResult.current, TriggerToastResult)
 				end
 			end else nil,
-			onGenerateTextFiltered = if FFlagEnableMomentTextGeneration then function() --[[ Line: 316 ]]
+			onGenerateTextFiltered = if FFlagEnableMomentTextGeneration then function()
 				-- upvalues: UseLocalizationResult (upval), ToastStoreModule (copy), UseRefResult (upval)
 				local TriggerToastResult = ToastStoreModule.triggerToast({
 					title = UseLocalizationResult.generateFilteredTitle,
@@ -259,7 +259,7 @@ return function(p1) --[[ Line: 254 | Named "useUploadHost" ]]
 					table.insert(UseRefResult.current, TriggerToastResult)
 				end
 			end else nil,
-			onGenerateTextWillReplaceInput = if FFlagEnableMomentTextGeneration then function() --[[ Line: 324 ]]
+			onGenerateTextWillReplaceInput = if FFlagEnableMomentTextGeneration then function()
 				-- upvalues: UseLocalizationResult (upval), ToastStoreModule (copy), UseRefResult (upval)
 				local TriggerToastResult = ToastStoreModule.triggerToast({
 					title = UseLocalizationResult.generateOverrideTitle,
@@ -270,7 +270,7 @@ return function(p1) --[[ Line: 254 | Named "useUploadHost" ]]
 					table.insert(UseRefResult.current, TriggerToastResult)
 				end
 			end else nil,
-			dismissGenerationToasts = if FFlagEnableMomentTextGeneration then function() --[[ Line: 332 ]]
+			dismissGenerationToasts = if FFlagEnableMomentTextGeneration then function()
 				-- upvalues: UseRefResult (upval), ToastStoreModule (copy)
 				if UseRefResult ~= nil then
 					for _, value in UseRefResult.current do
@@ -280,9 +280,9 @@ return function(p1) --[[ Line: 254 | Named "useUploadHost" ]]
 				end
 			end else nil,
 			isTextFiltered = MomentsCreationModule.isTextFiltered,
-			createMoment = if v1 then function(_, _, p2, _, _) --[[ Line: 343 ]]
+			createMoment = if v1 then function(_, _, p2, _, _)
 				print(`[moments-creation] dev publish (not uploaded): "{p23}"`)
-			end else function(Sound, Edits, Description, CreationSessionId, ResolvedTimeLength, CommentsEnabled) --[[ Line: 352 ]]
+			end else function(Sound, Edits, Description, CreationSessionId, ResolvedTimeLength, CommentsEnabled)
 				-- upvalues: PublishMomentWithUploadFunction (upval), UseLocalizationResult (upval), makeUploadStore (upval), UploadStoreModule (copy), ToastStoreModule (copy)
 				PublishMomentWithUploadFunction(Sound, Edits, Description, {
 					localizations = UseLocalizationResult,

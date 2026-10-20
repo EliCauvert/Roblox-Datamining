@@ -12,12 +12,12 @@ local config = {
 	totalNumberOfItems = true
 }
 
-local function _(p1) --[[ Line: 20 | Named "shouldIgnoreKey" ]]
+local function _(p1)
 	-- upvalues: config (copy)
 	return config[p1]
 end
 
-return function(EntryIndexes, p1, CollectionId) --[[ Line: 24 | Named "buildItemMetadataFields" ]]
+return function(EntryIndexes, p1, CollectionId)
 	-- upvalues: config (copy), FFlagUnifiedLoggingCoerceMetadataFieldValues (copy), DiscoveryEventErrorLogger (copy)
 	local t = {}
 	

@@ -63,15 +63,15 @@ LinkButton.defaultProps = {
 	debugGetTextSize = GetTextSizeModule
 }
 
-function LinkButton.init(p1) --[[ Line: 109 ]]
+function LinkButton.init(p1)
 	-- upvalues: ControlStateModule (copy)
 	p1:setState({ controlState = ControlStateModule.Initialize })
 	
-	function p1.applyRichTextUnderline(Text): string --[[ Line: 114 ]]
+	function p1.applyRichTextUnderline(Text): string
 		return "<u>" .. Text .. "</u>"
 	end
 	
-	function p1.onStateChanged(p2, ControlState) --[[ Line: 118 ]]
+	function p1.onStateChanged(p2, ControlState)
 		-- upvalues: p1 (copy)
 		p1:setState({ controlState = ControlState })
 		
@@ -81,13 +81,13 @@ function LinkButton.init(p1) --[[ Line: 109 ]]
 	end
 end
 
-function LinkButton.render(p1) --[[ Line: 128 ]]
+function LinkButton.render(p1)
 	return p1:renderWithSelectionCursorProvider(nil, p1.props.cursor)
 end
 
-function LinkButton.renderWithSelectionCursorProvider(p1, _, SelectionImageObject) --[[ Line: 132 ]]
+function LinkButton.renderWithSelectionCursorProvider(p1, _, SelectionImageObject)
 	-- upvalues: WithStyleModule (copy), ControlStateModule (copy), GetContentStyleModule (copy), CleanRichTextTagsModule (copy), RoactModule (copy), Focusable (copy), InteractableModule (copy), GenericTextLabelModule (copy), HoverButtonBackgroundModule (copy)
-	return WithStyleModule(function(p2) --[[ Line: 133 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: p1 (copy), ControlStateModule (upval), GetContentStyleModule (upval), CleanRichTextTagsModule (upval), SelectionImageObject (copy), RoactModule (upval), Focusable (upval), InteractableModule (upval), GenericTextLabelModule (upval), HoverButtonBackgroundModule (upval)
 		local DebugControlState = p1.props.debugControlState or p1.state.controlState
 		local ContentStyleModule = GetContentStyleModule({
@@ -136,7 +136,7 @@ function LinkButton.renderWithSelectionCursorProvider(p1, _, SelectionImageObjec
 	end)
 end
 
-function LinkButtonFunctionalWrapper(p1) --[[ Line: 209 ]]
+function LinkButtonFunctionalWrapper(p1)
 	-- upvalues: UseCursorByTypeModule (copy), CursorTypeModule (copy), RoactModule (copy), LinkButton (copy), CryoModule (copy)
 	return RoactModule.createElement(LinkButton, CryoModule.Dictionary.join(p1, {
 		cursor = UseCursorByTypeModule(CursorTypeModule.RoundedRectNoInset)

@@ -1,7 +1,7 @@
 ﻿local LoggerModule = require(script:FindFirstAncestor("TextChannelWindow").Logger)
 local SendPresetModule = require(script.Parent.sendPreset)
 
-return function(p1, p2): boolean --[[ Line: 17 | Named "sendExpression" ]]
+return function(p1, p2): boolean
 	-- upvalues: SendPresetModule (copy), LoggerModule (copy)
 	if p1.kind ~= "preset" then
 		return false

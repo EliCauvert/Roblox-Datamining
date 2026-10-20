@@ -10,7 +10,7 @@ local GameInviteRewardsInfoModalModule = require(GameInvite.Components.GameInvit
 local GroupService = game:GetService("GroupService")
 local Players = game:GetService("Players")
 
-local function v10(CreatorId) --[[ Line: 29 ]]
+local function v10(CreatorId)
 	-- upvalues: GroupService (copy), Players (copy)
 	local Name = ""
 	
@@ -18,7 +18,7 @@ local function v10(CreatorId) --[[ Line: 29 ]]
 		return ""
 	end
 	if game.CreatorType == Enum.CreatorType.Group then
-		local Success, Result = pcall(function() --[[ Line: 35 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: GroupService (upval), CreatorId (copy)
 			return GroupService:GetGroupInfoAsync(CreatorId)
 		end)
@@ -33,7 +33,7 @@ local function v10(CreatorId) --[[ Line: 29 ]]
 		end
 	elseif game.CreatorType == Enum.CreatorType.User then
 		local Success1
-		Success1, Name = pcall(function() --[[ Line: 46 ]]
+		Success1, Name = pcall(function()
 			-- upvalues: Players (upval), CreatorId (copy)
 			return Players:GetNameFromUserIdAsync(CreatorId)
 		end)
@@ -45,7 +45,7 @@ local function v10(CreatorId) --[[ Line: 29 ]]
 	return Name
 end
 
-return function(p1) --[[ Line: 56 ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), MarketplaceService (copy), v10 (copy), ReactModule (copy), GameInviteRewardsInfoModalModule (copy), FoundationModule (copy), IconButton (copy), IconSize (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		rewardsModalTitle = "Roblox.ReferralRewards.RewardBannerModalTitle",
@@ -112,7 +112,7 @@ return function(p1) --[[ Line: 56 ]]
 						testId = "RewardInfoButton",
 						icon = "icons/actions/info_small",
 						size = IconSize.Small,
-						onActivated = function() --[[ Line: 140 ]]
+						onActivated = function()
 							-- upvalues: UseStateResult2 (copy)
 							UseStateResult2(true)
 						end

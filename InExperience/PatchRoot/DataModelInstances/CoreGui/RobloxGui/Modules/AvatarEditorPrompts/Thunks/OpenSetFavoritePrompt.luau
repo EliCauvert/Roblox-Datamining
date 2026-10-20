@@ -5,15 +5,15 @@ local Parent = script.Parent.Parent
 local OpenPromptModule = require(Parent.Actions.OpenPrompt)
 local PromptTypeModule = require(Parent.PromptType)
 
-return function(ItemId, ItemType, ShouldFavorite) --[[ Line: 12 ]]
+return function(ItemId, ItemType, ShouldFavorite)
 	-- upvalues: PromiseModule (copy), MarketplaceService (copy), OpenPromptModule (copy), PromptTypeModule (copy), AvatarEditorService (copy)
-	return function(p1) --[[ Line: 13 ]]
+	return function(p1)
 		-- upvalues: PromiseModule (upval), ItemType (copy), MarketplaceService (upval), ItemId (copy), OpenPromptModule (upval), PromptTypeModule (upval), ShouldFavorite (copy), AvatarEditorService (upval)
-		return PromiseModule.new(function(Callback: () -> (), Callback1: () -> ()) --[[ Line: 14 ]]
+		return PromiseModule.new(function(Callback: () -> (), Callback1: () -> ())
 			-- upvalues: ItemType (upval), MarketplaceService (upval), ItemId (upval), p1 (copy), OpenPromptModule (upval), PromptTypeModule (upval), ShouldFavorite (upval), AvatarEditorService (upval)
 			local Asset = nil
 			Asset = if ItemType == Enum.AvatarItemType.Asset then Enum.InfoType.Asset else Enum.InfoType.Bundle
-			local Success, Result = pcall(function() --[[ Line: 22 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: MarketplaceService (upval), ItemId (upval), Asset (ref)
 				return MarketplaceService:GetProductInfoAsync(ItemId, Asset)
 			end)

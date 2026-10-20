@@ -23,7 +23,7 @@ local LoadFoundationCloudAssetModule = require(AppChat.Utils.loadFoundationCloud
 local Status = require(script.Parent.AssetCardTypes).Status
 local Frozen = table.freeze({ Transparency = 1, Color3 = Color3.new(1, 1, 1) })
 
-local function ErrorContent(p1) --[[ Line: 41 ]]
+local function ErrorContent(p1)
 	-- upvalues: ReactModule (copy), LoadFoundationCloudAssetModule (copy), View (copy), Image (copy), Text (copy)
 	return ReactModule.createElement(View, {
 		tag = "col align-x-center gap-small size-full-0 auto-y padding-xxlarge",
@@ -32,7 +32,7 @@ local function ErrorContent(p1) --[[ Line: 41 ]]
 		Pictogram = ReactModule.createElement(Image, {
 			tag = "size-1600 content-system-contrast",
 			LayoutOrder = 1,
-			Image = ReactModule.useMemo(function() --[[ Line: 42 ]]
+			Image = ReactModule.useMemo(function()
 				-- upvalues: LoadFoundationCloudAssetModule (upval)
 				return (LoadFoundationCloudAssetModule("pictograms/alert"))
 			end, {}),
@@ -46,7 +46,7 @@ local function ErrorContent(p1) --[[ Line: 41 ]]
 	})
 end
 
-local function Media(Frame) --[[ Line: 67 ]]
+local function Media(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Image (copy), Frozen (copy), Icon (copy), IconSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local XScale: number = if Frame.isPictogram then 0.66 else 1
@@ -87,7 +87,7 @@ local function Media(Frame) --[[ Line: 67 ]]
 	})
 end
 
-local function SkeletonRow(Frame) --[[ Line: 131 ]]
+local function SkeletonRow(Frame)
 	-- upvalues: ReactModule (copy), View (copy), Skeleton (copy), Radius (copy)
 	return ReactModule.createElement(View, {
 		tag = `row align-y-center {Frame.heightTag}`,
@@ -101,7 +101,7 @@ local function SkeletonRow(Frame) --[[ Line: 131 ]]
 	})
 end
 
-local function Title(Frame: Frame) --[[ Line: 144 ]]
+local function Title(Frame: Frame)
 	-- upvalues: UseTokensFunction (copy), UseTextSizeOffsetFunction (copy), ReactModule (copy), SkeletonRow (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseTextSizeOffsetResult = UseTextSizeOffsetFunction()
@@ -132,7 +132,7 @@ local function Title(Frame: Frame) --[[ Line: 144 ]]
 	end
 end
 
-local function Subtitle(Frame) --[[ Line: 177 ]]
+local function Subtitle(Frame)
 	-- upvalues: ReactModule (copy), View (copy), Icon (copy), IconSize (copy), Skeleton (copy), Radius (copy), Text (copy)
 	return if Frame.isLoading or Frame.text ~= nil then ReactModule.createElement(View, {
 		testId = "AssetCardSubtitle",
@@ -162,7 +162,7 @@ local function Subtitle(Frame) --[[ Line: 177 ]]
 	}) else nil
 end
 
-local function GameStat(Frame) --[[ Line: 218 ]]
+local function GameStat(Frame)
 	-- upvalues: ReactModule (copy), View (copy), Icon (copy), IconSize (copy), Text (copy)
 	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-xsmall auto-xy",
@@ -181,7 +181,7 @@ local function GameStat(Frame) --[[ Line: 218 ]]
 	})
 end
 
-local function GameStats(Frame: Frame) --[[ Line: 236 ]]
+local function GameStats(Frame: Frame)
 	-- upvalues: ReactModule (copy), SkeletonRow (copy), View (copy), GameStat (copy), IconName (copy)
 	return if Frame.isLoading then ReactModule.createElement(SkeletonRow, {
 		heightTag = "size-full-400",
@@ -206,7 +206,7 @@ local function GameStats(Frame: Frame) --[[ Line: 236 ]]
 	})
 end
 
-local function ActionButton(Frame: Frame) --[[ Line: 271 ]]
+local function ActionButton(Frame: Frame)
 	-- upvalues: ReactModule (copy), Button (copy), ButtonVariant (copy), InputSize (copy), IconButton (copy)
 	return if Frame.label then ReactModule.createElement(Button, {
 		testId = "AssetCardAction",
@@ -229,7 +229,7 @@ local function ActionButton(Frame: Frame) --[[ Line: 271 ]]
 	})
 end
 
-return ReactModule.memo(function(Frame) --[[ Line: 306 | Named "AssetCardView" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseTokensFunction (copy), UseScaledValueFunction (copy), ConstantsModule (copy), Status (copy), GetGroupCornerRadiiModule (copy), ReactModule (copy), View (copy), ErrorContent (copy), Media (copy), Title (copy), Subtitle (copy), GameStats (copy), ActionButton (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseScaledValueResult = UseScaledValueFunction(ConstantsModule.AssetCard.WIDTH)

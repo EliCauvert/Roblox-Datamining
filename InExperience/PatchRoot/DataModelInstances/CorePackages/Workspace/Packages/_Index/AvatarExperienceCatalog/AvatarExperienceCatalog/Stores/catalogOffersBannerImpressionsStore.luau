@@ -1,15 +1,15 @@
 ﻿local t = {}
 
 return {
-	hasSeenOfferId = function(p1): boolean --[[ Line: 3 ]]
+	hasSeenOfferId = function(p1): boolean
 		-- upvalues: t (ref)
 		return t[p1] == true
 	end,
-	addOfferId = function(Key) --[[ Line: 7 ]]
+	addOfferId = function(Key)
 		-- upvalues: t (ref)
 		t[Key] = true
 	end,
-	clearOfferIds = function() --[[ Line: 11 ]]
+	clearOfferIds = function()
 		-- upvalues: t (ref)
 		t = {}
 	end

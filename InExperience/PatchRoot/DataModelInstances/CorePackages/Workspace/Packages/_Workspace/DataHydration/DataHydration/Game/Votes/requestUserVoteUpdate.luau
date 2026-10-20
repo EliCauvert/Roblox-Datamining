@@ -4,10 +4,10 @@ local HttpService = game:GetService("HttpService")
 local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 local Url = require(Parent.Http).Url
 
-return function(UniverseId, p1) --[[ Line: 13 | Named "requestUserVoteUpdate" ]]
+return function(UniverseId, p1)
 	-- upvalues: UrlBuilder (copy), Url (copy), HttpRequestModule (copy), HttpService (copy)
 	return HttpRequestModule.config({
-		requestFunction = function(p2, p3, p4) --[[ Line: 22 ]]
+		requestFunction = function(p2, p3, p4)
 			-- upvalues: HttpRequestModule (upval)
 			return HttpRequestModule.requestFunctions.RequestInternal(p2, p3, p4)
 		end

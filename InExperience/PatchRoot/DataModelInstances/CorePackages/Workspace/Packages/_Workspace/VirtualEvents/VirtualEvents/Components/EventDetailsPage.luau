@@ -29,7 +29,7 @@ local MediaGalleryPreview = AppBloxModule.MediaGalleryPreview
 local CalcMediaGallerySizesFromWidthFunction = AppBloxModule.calcMediaGallerySizesFromWidth
 local ListTable = require(VirtualEvents.Parent.UIBlox).App.Table.ListTable
 
-local function OnClose() --[[ Line: 40 ]] end
+local function OnClose() end
 
 local config = {
 	onClose = OnClose,
@@ -37,7 +37,7 @@ local config = {
 	onShare = OnClose
 }
 
-return function(p1) --[[ Line: 71 | Named "EventDetailsPage" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), UseDeviceTypeFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), FFlagLuaAppLimitEventThumbnailToOneModule (copy), FetchEventThumbnailModule (copy), GetGalleryItemsModule (copy), FetchEventThumbnailListModule (copy), UseMutationFunction (copy), RequestsModule (copy), GetEventTimerStatusModule (copy), CalcMediaGallerySizesFromWidthFunction (copy), ResponsiveModule (copy), ReactFocusNavigationModule (copy), UseCloseWithBackButtonFunction (copy), UseActionBarPropsModule (copy), ContentPosition (copy), AttendanceModule (copy), MediaGalleryPreview (copy), EventDescriptionModule (copy), ListTable (copy), EventHostedByModule (copy), DetailsPageTemplate (copy), EventTimerModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local Media = p1.virtualEvent.media
@@ -47,10 +47,10 @@ return function(p1) --[[ Line: 71 | Named "EventDetailsPage" ]]
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState({})
 	local ImageId = if UseStateResult1[1] then UseStateResult1[1].imageId else nil
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
-	ReactModule.useEffect(function() --[[ Line: 86 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagLuaAppLimitEventThumbnailToOneModule (upval), FetchEventThumbnailModule (upval), UseRoactServiceResult (copy), p1 (copy), UseStateResult2_1 (copy), GetGalleryItemsModule (upval), Media (copy), FetchEventThumbnailListModule (upval)
 		if FFlagLuaAppLimitEventThumbnailToOneModule then
-			FetchEventThumbnailModule(UseRoactServiceResult, p1.virtualEvent.id):andThen(function(Result) --[[ Line: 88 ]]
+			FetchEventThumbnailModule(UseRoactServiceResult, p1.virtualEvent.id):andThen(function(Result)
 				-- upvalues: UseStateResult2_1 (upval), GetGalleryItemsModule (upval), Media (upval)
 				local List = {}
 				
@@ -64,14 +64,14 @@ return function(p1) --[[ Line: 71 | Named "EventDetailsPage" ]]
 				else
 					UseStateResult2_1(GetGalleryItemsModule(Media))
 				end
-			end, function() --[[ Line: 105 ]]
+			end, function()
 				-- upvalues: UseStateResult2_1 (upval), GetGalleryItemsModule (upval), Media (upval)
 				UseStateResult2_1(GetGalleryItemsModule(Media))
 			end)
 			
 			return
 		else
-			FetchEventThumbnailListModule(UseRoactServiceResult, p1.virtualEvent.id):andThen(function(Result) --[[ Line: 109 ]]
+			FetchEventThumbnailListModule(UseRoactServiceResult, p1.virtualEvent.id):andThen(function(Result)
 				-- upvalues: UseStateResult2_1 (upval), GetGalleryItemsModule (upval), Media (upval)
 				local List = {}
 				
@@ -92,7 +92,7 @@ return function(p1) --[[ Line: 71 | Named "EventDetailsPage" ]]
 				else
 					UseStateResult2_1(GetGalleryItemsModule(Media))
 				end
-			end, function() --[[ Line: 130 ]]
+			end, function()
 				-- upvalues: UseStateResult2_1 (upval), GetGalleryItemsModule (upval), Media (upval)
 				UseStateResult2_1(GetGalleryItemsModule(Media))
 			end)
@@ -100,13 +100,13 @@ return function(p1) --[[ Line: 71 | Named "EventDetailsPage" ]]
 	end, { p1.virtualEvent.id, Media })
 	local UseMutationResult = UseMutationFunction(RequestsModule.UPDATE_RSVP_STATUS, {
 		variables = { virtualEventId = p1.virtualEvent.id },
-		update = function(_, p2, p3) --[[ Line: 140 ]]
+		update = function(_, p2, p3)
 			-- upvalues: CryoModule (upval)
 			local VirtualEvent = p3.data.virtualEventRsvp.virtualEvent
 			p2:modify({
 				id = p2:identify(VirtualEvent),
 				fields = {
-					rsvpCounters = function(_, p4) --[[ Line: 146 ]]
+					rsvpCounters = function(_, p4)
 						-- upvalues: VirtualEvent (copy), CryoModule (upval)
 						return CryoModule.Dictionary.join(p4, {
 							going = p4.going + (if VirtualEvent.userRsvpStatus == "going" then 1 else -1)
@@ -116,11 +116,11 @@ return function(p1) --[[ Line: 71 | Named "EventDetailsPage" ]]
 			})
 		end
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 157 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: GetEventTimerStatusModule (upval), JoinResult (copy)
 		return GetEventTimerStatusModule(JoinResult.virtualEvent, JoinResult.currentTime)
 	end, { JoinResult.virtualEvent, JoinResult.currentTime })
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 161 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: CalcMediaGallerySizesFromWidthFunction (upval), UseStateResult (copy), UseStateResult2 (copy)
 		local Offset = CalcMediaGallerySizesFromWidthFunction(Frame.AbsoluteSize.X, 5).contentSize.Y.Offset
 		
@@ -128,13 +128,13 @@ return function(p1) --[[ Line: 71 | Named "EventDetailsPage" ]]
 			UseStateResult2(Offset)
 		end
 	end, { UseStateResult })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 170 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: JoinResult (copy), UseMutationResult (copy)
 		UseMutationResult[1]({
 			variables = {
 				rsvpStatus = if JoinResult.virtualEvent.userRsvpStatus == "going" then "notGoing" else "going"
 			}
-		}):andThen(function(Result) --[[ Line: 184 ]]
+		}):andThen(function(Result)
 			-- upvalues: JoinResult (upval)
 			if JoinResult.onRsvpChanged then
 				JoinResult.onRsvpChanged(Result.data.virtualEventRsvp.virtualEvent.userRsvpStatus, Result.data.virtualEventRsvp.shouldSeeNotificationsUpsellModal)
@@ -148,7 +148,7 @@ return function(p1) --[[ Line: 71 | Named "EventDetailsPage" ]]
 	local UseCloseWithBackButtonResult = UseCloseWithBackButtonFunction(UseMostRecentOrDefaultFocusBehaviorResult2, p1.onClose)
 	local UseFocusGuiObjectResult = ReactFocusNavigationModule.useFocusGuiObject()
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 210 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_2 (copy), UseMostRecentOrDefaultFocusBehaviorResult (copy)
 		UseStateResult2_2(p2)
 		
@@ -156,7 +156,7 @@ return function(p1) --[[ Line: 71 | Named "EventDetailsPage" ]]
 			UseMostRecentOrDefaultFocusBehaviorResult(p2)
 		end
 	end, { UseMostRecentOrDefaultFocusBehaviorResult })
-	ReactModule.useEffect(function() --[[ Line: 219 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult3 (copy), UseRefResult (copy), ResponsiveModule (upval), UseFocusGuiObjectResult (copy)
 		if UseStateResult3 and UseRefResult.current == ResponsiveModule.Input.Directional then
 			UseFocusGuiObjectResult(UseStateResult3)
@@ -168,7 +168,7 @@ return function(p1) --[[ Line: 71 | Named "EventDetailsPage" ]]
 		onShare = JoinResult.onShare,
 		onRsvpChanged = UseResult1
 	}, UseResult2)
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 232 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseActionBarPropsModuleResult (copy)
 		return UseActionBarPropsModuleResult.button or #UseActionBarPropsModuleResult.icons > 0
 	end, { UseActionBarPropsModuleResult })
@@ -177,7 +177,7 @@ return function(p1) --[[ Line: 71 | Named "EventDetailsPage" ]]
 			portraitLayoutOrder = 1,
 			landscapeLayoutOrder = 1,
 			landscapePosition = ContentPosition.Left,
-			renderComponent = function() --[[ Line: 242 ]]
+			renderComponent = function()
 				-- upvalues: ReactModule (upval), AttendanceModule (upval), JoinResult (copy), UseMemoResult (copy)
 				return ReactModule.createElement(AttendanceModule, {
 					virtualEvent = JoinResult.virtualEvent,
@@ -189,7 +189,7 @@ return function(p1) --[[ Line: 71 | Named "EventDetailsPage" ]]
 			portraitLayoutOrder = 2,
 			landscapeLayoutOrder = 1,
 			landscapePosition = ContentPosition.Right,
-			renderComponent = function() --[[ Line: 254 ]]
+			renderComponent = function()
 				-- upvalues: ReactModule (upval), UseStateResult (copy), UseResult (copy), MediaGalleryPreview (upval), UseStateResult1 (copy)
 				return ReactModule.createElement("Frame", {
 					Size = UDim2.new(1, 0, 0, UseStateResult),
@@ -204,7 +204,7 @@ return function(p1) --[[ Line: 71 | Named "EventDetailsPage" ]]
 			portraitLayoutOrder = 3,
 			landscapeLayoutOrder = 2,
 			landscapePosition = ContentPosition.Left,
-			renderComponent = function() --[[ Line: 271 ]]
+			renderComponent = function()
 				-- upvalues: ReactModule (upval), EventDescriptionModule (upval), JoinResult (copy), ExperienceDetails (copy)
 				return ReactModule.createElement(EventDescriptionModule, {
 					description = JoinResult.virtualEvent.description,
@@ -218,7 +218,7 @@ return function(p1) --[[ Line: 71 | Named "EventDetailsPage" ]]
 			portraitLayoutOrder = 4,
 			landscapeLayoutOrder = 2,
 			landscapePosition = ContentPosition.Right,
-			renderComponent = function() --[[ Line: 285 ]]
+			renderComponent = function()
 				-- upvalues: ReactModule (upval), ListTable (upval), EventHostedByModule (upval), JoinResult (copy)
 				return ReactModule.createElement(ListTable, {
 					cells = {
@@ -237,7 +237,7 @@ return function(p1) --[[ Line: 71 | Named "EventDetailsPage" ]]
 		titleText = if p1.virtualEvent.eventStatus == "moderated" then "[CONTENT MODERATED]" else JoinResult.virtualEvent.title,
 		thumbnailImageUrl = ImageId,
 		thumbnailAspectRatio = Vector2.new(16, 9),
-		renderInfoContent = function() --[[ Line: 306 ]]
+		renderInfoContent = function()
 			-- upvalues: ReactModule (upval), EventTimerModule (upval), JoinResult (copy), UseMemoResult (copy)
 			return ReactModule.createElement(EventTimerModule, {
 				virtualEvent = JoinResult.virtualEvent,

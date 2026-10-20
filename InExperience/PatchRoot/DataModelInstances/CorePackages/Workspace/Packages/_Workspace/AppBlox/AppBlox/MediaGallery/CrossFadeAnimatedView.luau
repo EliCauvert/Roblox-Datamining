@@ -10,12 +10,12 @@ local config = {
 	animationConfig = { dampingRatio = 1, frequency = 6.666666666666667 }
 }
 
-return function(p1) --[[ Line: 52 | Named "CrossFadeAnimatedView" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), ReactModule (copy), ReactOtterModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local CountItems = #JoinResult.items
 	local UseStyleResult = UseStyleFunction()
-	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0, (ReactModule.useCallback(function() --[[ Line: 58 ]]
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0, (ReactModule.useCallback(function()
 		-- upvalues: JoinResult (copy)
 		if JoinResult.crossAnim.isCrossFade then
 			JoinResult.crossAnim.setCrossFade(false)
@@ -27,7 +27,7 @@ return function(p1) --[[ Line: 52 | Named "CrossFadeAnimatedView" ]]
 		JoinResult.crossAnim.setCrossFade,
 		JoinResult.crossAnim.setCurrentIndex
 	})))
-	ReactModule.useEffect(function() --[[ Line: 74 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: CountItems (copy), JoinResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
 		if CountItems < 2 then return end
 		if JoinResult.crossAnim.isCrossFade then
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 52 | Named "CrossFadeAnimatedView" ]]
 			Size = UDim2.fromScale(1, 1),
 			Image = JoinResult.items[JoinResult.crossAnim.nextIndex].imageId,
 			ScaleType = Enum.ScaleType.Crop,
-			ImageTransparency = UseAnimatedBindingResult:map(function(p2: number): number --[[ Line: 107 ]]
+			ImageTransparency = UseAnimatedBindingResult:map(function(p2: number): number
 				return 1 - p2
 			end)
 		}) else nil,

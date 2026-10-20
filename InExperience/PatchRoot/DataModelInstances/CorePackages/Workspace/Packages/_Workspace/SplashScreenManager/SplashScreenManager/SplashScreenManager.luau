@@ -2,7 +2,7 @@
 RunService = require(script:FindFirstAncestor("SplashScreenManager").Parent.MockableProxyServices).RunService
 local ColorCorrect = nil
 
-local function _() --[[ Line: 19 | Named "obfuscateEnvironment" ]]
+local function _()
 	-- upvalues: ColorCorrect (ref)
 	ColorCorrect = Instance.new("ColorCorrectionEffect")
 	
@@ -14,7 +14,7 @@ local function _() --[[ Line: 19 | Named "obfuscateEnvironment" ]]
 	end
 end
 
-local _ = function() --[[ Line: 30 | Named "unobfuscateEnvironment" ]]
+local _ = function()
 	-- upvalues: ColorCorrect (ref)
 	if ColorCorrect then
 		ColorCorrect:Destroy()
@@ -27,7 +27,7 @@ local Flag1 = true
 local Flag2 = false
 local List = {}
 
-local _ = function() --[[ Line: 43 | Named "callCallbacks" ]]
+local _ = function()
 	-- upvalues: List (copy), Flag1 (ref)
 	for _, value in List do
 		value(Flag1)
@@ -35,7 +35,7 @@ local _ = function() --[[ Line: 43 | Named "callCallbacks" ]]
 end
 
 return {
-	initialize = function(p1: number, p2, p3) --[[ Line: 50 ]]
+	initialize = function(p1: number, p2, p3)
 		-- upvalues: Flag2 (ref), Flag (ref), Flag1 (ref), ColorCorrect (ref), List (copy), RunService (ref)
 		if not Flag2 and not Flag then
 			Flag1 = false
@@ -58,7 +58,7 @@ return {
 			local Elapsed = 0
 			local Connection = nil
 			
-			local function _() --[[ Line: 65 ]]
+			local function _()
 				-- upvalues: Connection (ref), ColorCorrect (upval), Flag1 (upval), Flag2 (upval)
 				if Connection then
 					Connection:Disconnect()
@@ -71,7 +71,7 @@ return {
 				Flag2 = false
 			end
 			
-			Connection = RunService.RenderStepped:Connect(function(DeltaTime) --[[ Line: 74 ]]
+			Connection = RunService.RenderStepped:Connect(function(DeltaTime)
 				-- upvalues: Elapsed (ref), CurrentTime (copy), List1 (copy), Total (ref), P2 (copy), p2 (copy), v1 (copy), Flag1 (upval), List (upval), Connection (ref), ColorCorrect (upval), Flag2 (upval)
 				Elapsed = tick() - CurrentTime
 				table.insert(List1, DeltaTime)
@@ -106,13 +106,13 @@ return {
 			Flag2 = true
 		end
 	end,
-	addStatusChangeListener = function(p4) --[[ Line: 106 ]]
+	addStatusChangeListener = function(p4)
 		-- upvalues: List (copy)
 		table.insert(List, p4)
 		
 		return p4
 	end,
-	removeStatusChangeListener = function(p4) --[[ Line: 111 ]]
+	removeStatusChangeListener = function(p4)
 		-- upvalues: List (copy)
 		for i, value in List do
 			if value == p4 then
@@ -120,11 +120,11 @@ return {
 			end
 		end
 	end,
-	isFPSAtTarget = function() --[[ Line: 119 ]]
+	isFPSAtTarget = function()
 		-- upvalues: Flag1 (ref)
 		return Flag1
 	end,
-	__setTestMode = function() --[[ Line: 123 ]]
+	__setTestMode = function()
 		-- upvalues: Flag (ref)
 		Flag = true
 	end

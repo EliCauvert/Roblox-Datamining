@@ -7,7 +7,7 @@ local config = {
 	[ConstantsModule.ThemeName.Light:lower()] = require(Parent.LightTheme)
 }
 
-return function(Text: string) --[[ Line: 15 ]]
+return function(Text: string)
 	-- upvalues: config (copy), ConstantsModule (copy), ValidateThemeModule (copy)
 	local Entry = if Text ~= nil and #Text > 0 then config[Text:lower()] else nil
 	

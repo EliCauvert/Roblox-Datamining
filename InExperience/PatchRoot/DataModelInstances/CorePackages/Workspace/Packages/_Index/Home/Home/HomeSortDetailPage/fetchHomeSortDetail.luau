@@ -4,7 +4,7 @@ local BuildHomeSortDetailPageEntryModule = require(Home.HomeSortDetailPage.build
 local GetHomeSortDetailPageKeyModule = require(Home.HomeSortDetailPage.getHomeSortDetailPageKey)
 local HomeSortDetailConstantsModule = require(Home.HomeSortDetailPage.HomeSortDetailConstants)
 
-return function(p1, p2, LoadTimer) --[[ Line: 12 | Named "fetchHomeSortDetail" ]]
+return function(p1, p2, LoadTimer)
 	-- upvalues: GetHomeSortDetailPageKeyModule (copy), BuildHomeSortDetailPageEntryModule (copy), SduiSharedUtilitiesModule (copy), HomeSortDetailConstantsModule (copy)
 	local HomeSortDetailPageKeyModule = GetHomeSortDetailPageKeyModule(p1, p2)
 	local HomeSortDetailPageEntryModule = BuildHomeSortDetailPageEntryModule(p1, p2)

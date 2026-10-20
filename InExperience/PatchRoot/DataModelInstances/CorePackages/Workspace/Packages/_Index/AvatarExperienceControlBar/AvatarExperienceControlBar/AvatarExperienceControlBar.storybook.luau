@@ -18,9 +18,9 @@ return {
 	name = "AvatarExperienceControlBar",
 	roact = ReactModule,
 	reactRoblox = require(Parent.Dev.ReactRoblox),
-	mapStory = function(p1) --[[ Line: 38 ]]
+	mapStory = function(p1)
 		-- upvalues: config (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), FoundationProvider (copy), StyleTable (copy), config1 (copy)
-		return function(p2) --[[ Line: 39 ]]
+		return function(p2)
 			-- upvalues: config (upval), ReactModule (upval), LocalizationProvider (upval), Localization (upval), FoundationProvider (upval), StyleTable (upval), config1 (upval), p1 (copy)
 			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,

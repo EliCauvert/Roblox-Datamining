@@ -33,35 +33,35 @@ local config = {
 	graph = {
 		hint = "Graph displays the size of the objects in Luau VM aggregated by the shortest path from the root Engine references to them.\n\t\tMost important root references are ModuleScript tables and functions connected to signals or the task scheduler.",
 		headers = { "Name", "Size", "Self" },
-		initFragmentSource = function(p1) --[[ Line: 47 ]]
+		initFragmentSource = function(p1)
 			return p1:renderChildren()
 		end
 	},
 	tag = {
 		hint = "This memory breakdown displays how much memory is used by Luau VM types.",
 		headers = { "Name", "Size", "Count" },
-		initFragmentSource = function(p1) --[[ Line: 55 ]]
+		initFragmentSource = function(p1)
 			return p1:renderChildrenStats("TagBreakdown")
 		end
 	},
 	memcat = {
 		hint = "Memory separated by the category at the time of allocation.\n\t\tMemory category is assigned to the thread performing the allocation, not the script.\n\t\tDefault value is based on the script name. Custom value can be assigned using 'debug.setmemorycategory' API.",
 		headers = { "Name", "Size", "Count" },
-		initFragmentSource = function(p1) --[[ Line: 65 ]]
+		initFragmentSource = function(p1)
 			return p1:renderChildrenStats("MemcatBreakdown")
 		end
 	},
 	userdata = {
 		hint = "This breakdown shows how much memory inside Luau VM is taken by custom Roblox engine classes.\n\t\tFor DataModel classes like 'Part' this does not include the memory taken inside the engine itself.",
 		headers = { "Name", "Size", "Count" },
-		initFragmentSource = function(p1) --[[ Line: 74 ]]
+		initFragmentSource = function(p1)
 			return p1:renderChildrenStats("UserdataBreakdown")
 		end
 	},
 	[if game:GetEngineFeature("UnparentedInstances") then "UniqueRefs" else "refs"] = {
 		hint = "This view shows engine DataModel instances that are only referenced by Luau VM and are not directly parented to the DataModel.\n\t\tFor each instance, it will show the set of paths that make it accessible and prevent garbage collection.\n\t\tMost often, engine Luau references come from ModuleScript tables, active signal connections and active coroutines in the task scheduler.",
 		headers = { "Name", "Count", "Total Instances" },
-		initFragmentSource = function(p1) --[[ Line: 84 ]]
+		initFragmentSource = function(p1)
 			return p1:renderChildrenRefs()
 		end
 	}
@@ -71,14 +71,14 @@ if game:GetEngineFeature("UnparentedInstances") then
 	config.UnparentedRefs = {
 		hint = "This view shows engine DataModel instances that are not parented to any instance (and are also not unique references).\n\t\tFor each instance, it will show the set of paths that make it accessible and prevent garbage collection.\n\t\t",
 		headers = { "Name", "Count", "Total Instances" },
-		initFragmentSource = function(p1) --[[ Line: 97 ]]
+		initFragmentSource = function(p1)
 			return p1:renderUnparentedRefs()
 		end
 	}
 end
 local LuauHeapView = RoactModule.PureComponent:extend("LuauHeapView")
 
-function LuauHeapView.renderSnapshotList(p1) --[[ Line: 105 ]]
+function LuauHeapView.renderSnapshotList(p1)
 	-- upvalues: RoactModule (copy), BannerButtonModule (copy), EntryFrameHeight (copy), CellLabelModule (copy), CellPadding (copy), SnapshotHighlightSize (copy), LineColor (copy), BoxButtonModule (copy)
 	local Elements = {}
 	
@@ -89,7 +89,7 @@ function LuauHeapView.renderSnapshotList(p1) --[[ Line: 105 ]]
 			isExpandable = false,
 			size = UDim2.new(1, 0, 0, EntryFrameHeight),
 			layoutOrder = ActiveSnapshot,
-			onButtonPress = function() --[[ Line: 117 ]]
+			onButtonPress = function()
 				-- upvalues: p1 (copy), ActiveSnapshot (copy)
 				p1.props.dispatchSetLuauHeapActiveSnapshot(ActiveSnapshot)
 			end
@@ -121,7 +121,7 @@ function LuauHeapView.renderSnapshotList(p1) --[[ Line: 105 ]]
 				text = "Compare",
 				size = UDim2.new(0.3, -6, 1, -6),
 				pos = UDim2.new(0.7, 3, 0, 3),
-				onClicked = function() --[[ Line: 162 ]]
+				onClicked = function()
 					-- upvalues: p1 (copy), ActiveSnapshot (copy)
 					p1.props.dispatchSetLuauHeapCompareSnapshot(ActiveSnapshot)
 				end
@@ -131,7 +131,7 @@ function LuauHeapView.renderSnapshotList(p1) --[[ Line: 105 ]]
 	return Elements
 end
 
-function LuauHeapView.renderChildren(p2) --[[ Line: 173 ]]
+function LuauHeapView.renderChildren(p2)
 	-- upvalues: RoactModule (copy), LuauHeapViewEntryModule (copy)
 	local Entry = p2.props.data[p2.props.activeSnapshot]
 	local Entry1 = p2.props.data[p2.props.compareSnapshot]
@@ -144,7 +144,7 @@ function LuauHeapView.renderChildren(p2) --[[ Line: 173 ]]
 	})
 end
 
-function LuauHeapView.renderChildrenStats(p2, p3) --[[ Line: 185 ]]
+function LuauHeapView.renderChildrenStats(p2, p3)
 	-- upvalues: RoactModule (copy), LuauHeapViewStatEntryModule (copy)
 	local Entry = p2.props.data[p2.props.compareSnapshot]
 	local Entry1 = if Entry then Entry[p3] else nil
@@ -172,7 +172,7 @@ function LuauHeapView.renderChildrenStats(p2, p3) --[[ Line: 185 ]]
 	return Elements
 end
 
-function LuauHeapView.renderUnparentedRefs(p4) --[[ Line: 217 ]]
+function LuauHeapView.renderUnparentedRefs(p4)
 	-- upvalues: RoactModule (copy), LuauHeapViewRefEntryModule (copy)
 	local Refs = p4.props.data[p4.props.activeSnapshot].Refs
 	
@@ -196,7 +196,7 @@ function LuauHeapView.renderUnparentedRefs(p4) --[[ Line: 217 ]]
 	return Elements
 end
 
-function LuauHeapView.renderChildrenRefs(p5) --[[ Line: 242 ]]
+function LuauHeapView.renderChildrenRefs(p5)
 	-- upvalues: RoactModule (copy), LuauHeapViewRefEntryModule (copy)
 	local Refs = p5.props.data[p5.props.activeSnapshot].Refs
 	
@@ -212,27 +212,27 @@ function LuauHeapView.renderChildrenRefs(p5) --[[ Line: 242 ]]
 	return Elements
 end
 
-function LuauHeapView.createTabSelector(p6, Size, Position) --[[ Line: 267 ]]
+function LuauHeapView.createTabSelector(p6, Size, Position)
 	-- upvalues: RoactModule (copy), BoxButtonModule (copy), TabButtonWidth (copy), TabButtonHeight (copy), TabHighlightHeight (copy), ConstantsModule (copy)
-	local function _(ActiveTab) --[[ Line: 268 | Named "onTabSelected" ]]
+	local function _(ActiveTab)
 		-- upvalues: p6 (copy)
 		p6:setState({ activeTab = ActiveTab })
 	end
 	
-	local function createButton(ActiveTab, Text, p7) --[[ Line: 274 ]]
+	local function createButton(ActiveTab, Text, p7)
 		-- upvalues: RoactModule (upval), BoxButtonModule (upval), TabButtonWidth (upval), TabButtonHeight (upval), p6 (copy)
 		return RoactModule.createElement(BoxButtonModule, {
 			text = Text,
 			size = UDim2.new(0, TabButtonWidth, 0, TabButtonHeight),
 			pos = UDim2.new(0, TabButtonWidth * p7, 0, 0),
-			onClicked = function() --[[ Line: 279 ]]
+			onClicked = function()
 				-- upvalues: ActiveTab (copy), p6 (upval)
 				p6:setState({ activeTab = ActiveTab })
 			end
 		})
 	end
 	
-	local function createHighlight(ActiveTab, p7) --[[ Line: 285 ]]
+	local function createHighlight(ActiveTab, p7)
 		-- upvalues: p6 (copy), RoactModule (upval), TabButtonWidth (upval), TabHighlightHeight (upval), TabButtonHeight (upval), ConstantsModule (upval)
 		return if p6.state.activeTab == ActiveTab then RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
@@ -280,7 +280,7 @@ function LuauHeapView.createTabSelector(p6, Size, Position) --[[ Line: 267 ]]
 	})
 end
 
-function LuauHeapView.createStatsTableHeader(p6, YScale, YOffset, Entry) --[[ Line: 347 ]]
+function LuauHeapView.createStatsTableHeader(p6, YScale, YOffset, Entry)
 	-- upvalues: RoactModule (copy), SnapshotWidth (copy), HeaderFrameHeight (copy), HeaderButtonModule (copy), ValueCellWidth (copy), ValuePadding (copy), CellPadding (copy), LineColor (copy), LineWidth (copy)
 	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -331,11 +331,11 @@ function LuauHeapView.createStatsTableHeader(p6, YScale, YOffset, Entry) --[[ Li
 	})
 end
 
-function LuauHeapView.init(p6) --[[ Line: 403 ]]
+function LuauHeapView.init(p6)
 	p6.state = { activeTab = "graph" }
 end
 
-function LuauHeapView.render(p6) --[[ Line: 409 ]]
+function LuauHeapView.render(p6)
 	-- upvalues: config (copy), RoactModule (copy), ConstantsModule (copy), HeaderButtonModule (copy), SnapshotWidth (copy), CellPadding (copy), HeaderFrameHeight (copy), TabsHeight (copy), TableHintHeight (copy)
 	local LayoutOrder = p6.props.layoutOrder
 	local Size = p6.props.size
@@ -405,14 +405,14 @@ function LuauHeapView.render(p6) --[[ Line: 409 ]]
 	})
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 491 | Named "mapDispatchToProps" ]]
+return RoactRoduxModule.UNSTABLE_connect2(nil, function(Callback)
 	-- upvalues: SetLuauHeapActiveSnapshotModule (copy), SetLuauHeapCompareSnapshotModule (copy)
 	return {
-		dispatchSetLuauHeapActiveSnapshot = function(p6) --[[ Line: 493 ]]
+		dispatchSetLuauHeapActiveSnapshot = function(p6)
 			-- upvalues: Callback (copy), SetLuauHeapActiveSnapshotModule (upval)
 			Callback(SetLuauHeapActiveSnapshotModule(p6))
 		end,
-		dispatchSetLuauHeapCompareSnapshot = function(p6) --[[ Line: 496 ]]
+		dispatchSetLuauHeapCompareSnapshot = function(p6)
 			-- upvalues: Callback (copy), SetLuauHeapCompareSnapshotModule (upval)
 			Callback(SetLuauHeapCompareSnapshotModule(p6))
 		end

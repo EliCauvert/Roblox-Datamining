@@ -18,7 +18,7 @@ local config = {
 	[Enum.TeleportResult.IsTeleporting] = true
 }
 
-local function postJson(ApiUrl, Input) --[[ Line: 84 ]]
+local function postJson(ApiUrl, Input)
 	-- upvalues: HttpRbxApiService (copy), HttpService (copy)
 	local Data = HttpService:JSONDecode((HttpRbxApiService:PostAsyncFullUrl(ApiUrl, HttpService:JSONEncode(Input), Enum.ThrottlingPriority.Default, Enum.HttpContentType.ApplicationJson)))
 	
@@ -28,7 +28,7 @@ local function postJson(ApiUrl, Input) --[[ Line: 84 ]]
 	return Data
 end
 
-local function withRetry(p1, p2) --[[ Line: 98 ]]
+local function withRetry(p1, p2)
 	local v1 = nil
 	local Result = nil
 	
@@ -49,9 +49,9 @@ local function withRetry(p1, p2) --[[ Line: 98 ]]
 	return false, v1
 end
 
-local function _(ChallengeId, UserId) --[[ Line: 114 | Named "callValidate" ]]
+local function _(ChallengeId, UserId)
 	-- upvalues: withRetry (copy), postJson (copy), Text (copy)
-	return withRetry("validate", function() --[[ Line: 115 ]]
+	return withRetry("validate", function()
 		-- upvalues: postJson (upval), Text (upval), ChallengeId (copy), UserId (copy)
 		return (postJson(Text .. "validate", {
 			challengeId = ChallengeId,
@@ -61,9 +61,9 @@ local function _(ChallengeId, UserId) --[[ Line: 114 | Named "callValidate" ]]
 	end)
 end
 
-local _ = function(ChallengeId, SolvingUserId) --[[ Line: 124 | Named "callVerify" ]]
+local _ = function(ChallengeId, SolvingUserId)
 	-- upvalues: withRetry (copy), postJson (copy), Text (copy)
-	return withRetry("verify", function() --[[ Line: 125 ]]
+	return withRetry("verify", function()
 		-- upvalues: postJson (upval), Text (upval), ChallengeId (copy), SolvingUserId (copy)
 		return (postJson(Text .. "verify", {
 			challengeId = ChallengeId,
@@ -73,9 +73,9 @@ local _ = function(ChallengeId, SolvingUserId) --[[ Line: 124 | Named "callVerif
 	end)
 end
 
-local _ = function(ChallengeId) --[[ Line: 134 | Named "callGcsContinue" ]]
+local _ = function(ChallengeId)
 	-- upvalues: withRetry (copy), postJson (copy), Text1 (copy)
-	return withRetry("continue", function() --[[ Line: 135 ]]
+	return withRetry("continue", function()
 		-- upvalues: postJson (upval), Text1 (upval), ChallengeId (copy)
 		return (postJson(Text1, {
 			challengeType = "rocaptcha",
@@ -87,7 +87,7 @@ end
 
 local t = {}
 
-local function createSession(Player: Player) --[[ Line: 160 ]]
+local function createSession(Player: Player)
 	-- upvalues: RoCaptchaUtilsModule (copy)
 	local JoinData = Player:GetJoinData()
 	local ParseLaunchDataResult = RoCaptchaUtilsModule.parseLaunchData(JoinData and JoinData.LaunchData)
@@ -102,7 +102,7 @@ local function createSession(Player: Player) --[[ Line: 160 ]]
 	} else nil
 end
 
-local _ = function(Player: Player, p3) --[[ Line: 179 | Named "kick" ]]
+local _ = function(Player: Player, p3)
 	-- upvalues: t (copy)
 	warn("[RoCaptcha] Kicking player, reason:", p3)
 	t[Player] = nil
@@ -112,7 +112,7 @@ local _ = function(Player: Player, p3) --[[ Line: 179 | Named "kick" ]]
 	end
 end
 
-local function onPlayerAdded(Player: Player) --[[ Line: 187 ]]
+local function onPlayerAdded(Player: Player)
 	-- upvalues: createSession (copy), t (copy), withRetry (copy), postJson (copy), Text (copy)
 	local Session = createSession(Player)
 	
@@ -120,7 +120,7 @@ local function onPlayerAdded(Player: Player) --[[ Line: 187 ]]
 		t[Player] = Session
 		local ChallengeId = Session.challengeId
 		local UserId = Player.UserId
-		local Validate, Validate2 = withRetry("validate", function() --[[ Line: 115 ]]
+		local Validate, Validate2 = withRetry("validate", function()
 			-- upvalues: postJson (upval), Text (upval), ChallengeId (copy), UserId (copy)
 			return (postJson(Text .. "validate", {
 				challengeId = ChallengeId,
@@ -163,15 +163,15 @@ Players.PlayerAdded:Connect(onPlayerAdded)
 for _, player in Players:GetPlayers() do
 	task.spawn(onPlayerAdded, player)
 end
-Players.PlayerRemoving:Connect(function(Player) --[[ Line: 222 ]]
+Players.PlayerRemoving:Connect(function(Player)
 	-- upvalues: t (copy)
 	t[Player] = nil
 end)
 
-local function teleportBack(Player, p3) --[[ Line: 232 ]]
+local function teleportBack(Player, p3)
 	-- upvalues: TeleportService (copy)
 	p3.teleportStartedAt = os.clock()
-	local Success, Result = pcall(function() --[[ Line: 234 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: TeleportService (upval), p3 (copy), Player (copy)
 		TeleportService:TeleportAsync(p3.desiredPlaceId, { Player })
 	end)
@@ -183,18 +183,18 @@ local function teleportBack(Player, p3) --[[ Line: 232 ]]
 	return Success
 end
 
-local _ = function(p3): boolean --[[ Line: 244 | Named "isTeleporting" ]]
+local _ = function(p3): boolean
 	local TeleportStartedAt = p3.teleportStartedAt
 	
 	return TeleportStartedAt ~= nil and os.clock() - TeleportStartedAt < 30
 end
 
-local _ = function(p3, p4) --[[ Line: 251 | Named "giveUpTeleport" ]]
+local _ = function(p3, p4)
 	p3.teleportStartedAt = nil
 	warn("[RoCaptcha] Teleport back failed, reason:", p4)
 end
 
-TeleportService.TeleportInitFailed:Connect(function(Player: Player, TeleportResult, ErrorMessage) --[[ Line: 257 ]]
+TeleportService.TeleportInitFailed:Connect(function(Player: Player, TeleportResult, ErrorMessage)
 	-- upvalues: t (copy), config (copy), teleportBack (copy)
 	if not Player:IsA("Player") then return end
 	local Entry = t[Player]
@@ -232,7 +232,7 @@ end)
 local RoCaptchaVerify = Instance.new("BindableFunction")
 RoCaptchaVerify.Name = "RoCaptchaVerify"
 
-function RoCaptchaVerify.OnInvoke(Player: Player) --[[ Line: 297 ]]
+function RoCaptchaVerify.OnInvoke(Player: Player)
 	-- upvalues: t (copy), teleportBack (copy), withRetry (copy), postJson (copy), Text (copy), Text1 (copy)
 	if typeof(Player) ~= "Instance" or not Player:IsA("Player") then
 		return { success = false, reason = "invalid_player" }
@@ -257,7 +257,7 @@ function RoCaptchaVerify.OnInvoke(Player: Player) --[[ Line: 297 ]]
 	Entry.state = "Verifying"
 	local ChallengeId = Entry.challengeId
 	local UserId = Player.UserId
-	local Verify, Verify2 = withRetry("verify", function() --[[ Line: 125 ]]
+	local Verify, Verify2 = withRetry("verify", function()
 		-- upvalues: postJson (upval), Text (upval), ChallengeId (copy), UserId (copy)
 		return (postJson(Text .. "verify", {
 			challengeId = ChallengeId,
@@ -272,7 +272,7 @@ function RoCaptchaVerify.OnInvoke(Player: Player) --[[ Line: 297 ]]
 		return { success = false, reason = "verify_error" }
 	end
 	if Verify2.verified == true then
-		if not withRetry("continue", function() --[[ Line: 135 ]]
+		if not withRetry("continue", function()
 			-- upvalues: postJson (upval), Text1 (upval), ChallengeId (copy)
 			return (postJson(Text1, {
 				challengeType = "rocaptcha",

@@ -9,7 +9,7 @@ local Status = require(AppChat.Components.ChatConversation.AssetCardView.AssetCa
 local UseAbbreviatedNumberLocalizationFunction = LocalizationModule.Hooks.useAbbreviatedNumberLocalization
 local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
-return ReactModule.memo(function(Frame) --[[ Line: 35 | Named "GameAssetCard" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseAbbreviatedNumberLocalizationFunction (copy), UseLocalizationFunction (copy), Status (copy), ReactModule (copy), AssetCardViewModule (copy), IconName (copy)
 	local IsNotGameThumbnailMatch: boolean = Frame.gameThumbnail ~= nil and Frame.gameThumbnail ~= ""
 	

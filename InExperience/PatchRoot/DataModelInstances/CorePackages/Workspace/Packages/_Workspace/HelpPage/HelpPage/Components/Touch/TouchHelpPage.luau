@@ -14,19 +14,19 @@ local UseDeviceOrientationFunction = require(Parent1.RobloxAppHooks).useDeviceOr
 local DeviceOrientationMode = require(Parent1.RobloxAppEnums).DeviceOrientationMode
 local TouchHelpPageResponsiveUnits = game:DefineFastFlag("TouchHelpPageResponsiveUnits", false)
 
-local function _(p1, p2, p3) --[[ Line: 26 | Named "getTapOrRotate" ]]
+local function _(p1, p2, p3)
 	assert(not (p3[p1] and p3[p2]), "Cannot assign a position to both tap and rotate simultaneously.")
 	
 	return if p3[p1] then p1 elseif p3[p2] then p2 else nil
 end
 
-local MemoResult = ReactModule.memo(function(p1) --[[ Line: 62 ]]
+local MemoResult = ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), DeviceOrientationMode (copy), ReactModule (copy), View (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Components = p1.components
 	local IsOrientationMatch = p1.orientation == DeviceOrientationMode.Portrait
 	
-	local function createSideColumn(Center, LayoutOrder, TopComponent, BottomComponent) --[[ Line: 68 ]]
+	local function createSideColumn(Center, LayoutOrder, TopComponent, BottomComponent)
 		-- upvalues: ReactModule (upval), View (upval)
 		return ReactModule.createElement(View, {
 			tag = `align-x-{Center} auto-x col flex-y-between size-0-full`,
@@ -80,26 +80,26 @@ local MemoResult = ReactModule.memo(function(p1) --[[ Line: 62 ]]
 	})
 end)
 
-return ReactModule.memo(function() --[[ Line: 165 | Named "TouchHelpPage" ]]
+return ReactModule.memo(function()
 	-- upvalues: UseDeviceOrientationFunction (copy), UseKeybindsModule (copy), ReactModule (copy), UserGameSettings (copy), DisplayModule (copy), TouchControlsEnumModule (copy), TouchActionModule (copy), View (copy), MemoResult (copy), ConstantsModule (copy), TouchHelpPageResponsiveUnits (copy)
 	local UseDeviceOrientationResult = UseDeviceOrientationFunction()
 	local Controls = UseKeybindsModule().controls
 	local UseStateResult, UseStateResult2 = ReactModule.useState(UserGameSettings.TouchMovementMode)
 	local ViewportSize = DisplayModule.GetDisplayStore(false).getViewportSize(false)
-	ReactModule.useEffect(function() --[[ Line: 172 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UserGameSettings (upval), UseStateResult2 (copy)
-		local Connection = UserGameSettings:GetPropertyChangedSignal("TouchMovementMode"):Connect(function() --[[ Line: 173 ]]
+		local Connection = UserGameSettings:GetPropertyChangedSignal("TouchMovementMode"):Connect(function()
 			-- upvalues: UseStateResult2 (upval), UserGameSettings (upval)
 			UseStateResult2(UserGameSettings.TouchMovementMode)
 		end)
 		
-		return function() --[[ Line: 177 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end
 	end, {})
 	local IsUseStateResultMatch = UseStateResult == Enum.TouchMovementMode.ClickToMove
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 185 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Controls (copy), IsUseStateResultMatch (copy)
 		local Labels = {}
 		

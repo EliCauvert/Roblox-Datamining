@@ -15,19 +15,19 @@ local config = {
 	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-return function(Callback, p1, p2) --[[ Line: 26 | Named "useWearTimePopoverFocusNavigationBindings" ]]
+return function(Callback, p1, p2)
 	-- upvalues: ReactModule (copy), PopoverFocusRestorationContextModule (copy), UseFocusNavigableSurfaceRegistryConnectionFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), FFlagAXTimedOptionsPopoverSkipFocusOnCursor (copy), UseLastInputModeFunction (copy), GetFirstFocusableDescendantFunction (copy), GuiService (copy), ReactFocusNavigationModule (copy), config (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseContextResult = ReactModule.useContext(PopoverFocusRestorationContextModule)
-	ReactModule.useEffect(function() --[[ Line: 35 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), p1 (copy)
 		UseStateResult2(p1)
 	end, { p1 })
 	UseFocusNavigableSurfaceRegistryConnectionFunction(UseRefResult and UseRefResult.current, FocusNavigableSurfaceIdentifierEnum.PopUp, UseStateResult)
 	local UseLastInputModeResult = if FFlagAXTimedOptionsPopoverSkipFocusOnCursor then UseLastInputModeFunction() else nil
 	local UseRefResult1 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 56 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagAXTimedOptionsPopoverSkipFocusOnCursor (upval), UseLastInputModeResult (copy), UseStateResult (copy), UseRefResult1 (copy), UseRefResult (copy), GetFirstFocusableDescendantFunction (upval), GuiService (upval), UseContextResult (copy), p2 (copy)
 		local NoFFlagAXTimedOptionsPopoverSkipFocusOnCursor: boolean = not FFlagAXTimedOptionsPopoverSkipFocusOnCursor or UseLastInputModeResult == "Focus"
 		
@@ -58,11 +58,11 @@ return function(Callback, p1, p2) --[[ Line: 26 | Named "useWearTimePopoverFocus
 		UseLastInputModeResult
 	})
 	
-	return ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function() --[[ Line: 83 ]]
+	return ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function()
 		-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), Callback (copy)
 		return {
 			[FocusNavigationEventNameEnum.NavigateBack] = {
-				handler = InputHandlersModule.onRelease(function(p3) --[[ Line: 86 ]]
+				handler = InputHandlersModule.onRelease(function(p3)
 					-- upvalues: Callback (upval)
 					p3.cancelled = true
 					Callback()

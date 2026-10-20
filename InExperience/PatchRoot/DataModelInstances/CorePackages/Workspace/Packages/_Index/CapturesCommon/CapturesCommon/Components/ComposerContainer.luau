@@ -12,7 +12,7 @@ local CaptureItemModule = require(Parent.Components.CaptureItem)
 local _ = require(Parent.Types)
 local _Vector2 = Vector2.new(700, 500)
 
-return function(p1) --[[ Line: 31 ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseScreenSizeModule (copy), UseStateFunction (copy), UseCallbackFunction (copy), _Vector2 (copy), ReactModule (copy), View (copy), FoundationModule (copy), Icon (copy), CaptureItemModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseScreenSizeModuleResult = UseScreenSizeModule()
@@ -24,7 +24,7 @@ return function(p1) --[[ Line: 31 ]]
 	
 	return ReactModule.createElement(View, {
 		tag = "size-full-full bg-over-media-0",
-		onAbsoluteSizeChanged = UseCallbackFunction(function(Frame) --[[ Line: 37 ]]
+		onAbsoluteSizeChanged = UseCallbackFunction(function(Frame)
 			-- upvalues: UseStateResult2 (copy), p1 (copy)
 			UseStateResult2(Frame.AbsoluteSize)
 			p1.onAbsoluteSizeChangedCallback(Frame)
@@ -88,7 +88,7 @@ return function(p1) --[[ Line: 31 ]]
 						CapturePreview = ReactModule.createElement(CaptureItemModule, {
 							isVideoPlaying = true,
 							capture = p1.capture,
-							onActivated = function() --[[ Line: 120 ]] end,
+							onActivated = function() end,
 							scaleType = Enum.ScaleType.Fit
 						})
 					})

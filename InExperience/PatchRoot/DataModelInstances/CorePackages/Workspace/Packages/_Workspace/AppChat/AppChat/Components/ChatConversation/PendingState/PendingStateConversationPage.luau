@@ -16,22 +16,22 @@ local config = {
 	networkErrorText = "PLACEHOLDER There was a network error, please try again later",
 	shouldShowPhoneVerificationUpsell = false,
 	shouldShowIneligibleModal = false,
-	onConversationUnmount = function(_) --[[ Line: 46 ]] end,
-	navigateToToast = function(_) --[[ Line: 47 ]] end,
-	navigateBack = function() --[[ Line: 48 ]] end
+	onConversationUnmount = function(_) end,
+	navigateToToast = function(_) end,
+	navigateBack = function() end
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 56 | Named "PendingStateConversationPage" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseStateFunction (copy), UseCallbackFunction (copy), UseRefFunction (copy), ConversationExitTypeModule (copy), UseEffectFunction (copy), ReactModule (copy), PendingStateIndicatorModule (copy), PendingStateModalContainerModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseStyleResult = UseStyleFunction()
 	local Style = JoinResult.style or UseStyleResult
 	local UseStateResult, UseStateResult2 = UseStateFunction(0)
-	local UseCallbackResult = UseCallbackFunction(function(p2) --[[ Line: 62 ]]
+	local UseCallbackResult = UseCallbackFunction(function(p2)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(p2)
 	end, { UseStateResult2 })
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 66 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: JoinResult (copy)
 		JoinResult.navigateToToast({
 			toastProps = {
@@ -40,16 +40,16 @@ return ReactModule.memo(function(p1) --[[ Line: 56 | Named "PendingStateConversa
 		})
 	end, { JoinResult.navigateToToast, JoinResult.networkErrorText })
 	local UseRefResult = UseRefFunction(ConversationExitTypeModule.Default)
-	local UseCallbackResult2 = UseCallbackFunction(function(_, SwipeDirection, p2) --[[ Line: 78 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function(_, SwipeDirection, p2)
 		-- upvalues: JoinResult (copy), UseRefResult (copy), ConversationExitTypeModule (upval)
 		if not JoinResult.wideMode and SwipeDirection == Enum.SwipeDirection.Right and p2 == 1 then
 			UseRefResult.current = ConversationExitTypeModule.SwipedRight
 			JoinResult.navigateBack()
 		end
 	end, { JoinResult.wideMode, JoinResult.navigateBack })
-	UseEffectFunction(function() --[[ Line: 85 ]]
+	UseEffectFunction(function()
 		-- upvalues: JoinResult (copy), UseRefResult (copy), ConversationExitTypeModule (upval)
-		return function() --[[ Line: 86 ]]
+		return function()
 			-- upvalues: JoinResult (upval), UseRefResult (upval), ConversationExitTypeModule (upval)
 			JoinResult.onConversationUnmount(UseRefResult.current)
 			UseRefResult.current = ConversationExitTypeModule.Default

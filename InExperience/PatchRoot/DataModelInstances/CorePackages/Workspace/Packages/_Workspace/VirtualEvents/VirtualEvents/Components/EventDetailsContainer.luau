@@ -8,7 +8,7 @@ local _ = require(VirtualEvents.Parent.VirtualEventsState)
 local ConstantsModule = require(VirtualEvents.constants)
 local UseTokensFunction = require(VirtualEvents.Parent.Foundation).Hooks.useTokens
 
-return function(p1) --[[ Line: 31 | Named "EventDetailsContainer" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseScreenSizeFunction (copy), ReactModule (copy), EventDetailsBodyModule (copy), ConstantsModule (copy), EventActionBarModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseScreenSizeResult = UseScreenSizeFunction()
@@ -16,21 +16,21 @@ return function(p1) --[[ Line: 31 | Named "EventDetailsContainer" ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0.99)
 	local UseRefResult = ReactModule.useRef(0)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 40 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), p1 (copy), UseStateResult2_1 (copy)
 		if not UseRefResult.current or not p1.bottomHeight then return end
 		if p1.bottomHeight > 0 and p1.bottomHeight < UseRefResult.current then
 			UseStateResult2_1(1 - p1.bottomHeight / UseRefResult.current)
 		end
 	end, { p1.bottomHeight })
-	local UseResult1 = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 49 ]]
+	local UseResult1 = ReactModule.useCallback(function(Frame: Frame)
 		-- upvalues: UseRefResult (copy), UseResult (copy)
 		if UseRefResult.current and UseRefResult.current ~= Frame.AbsoluteSize.Y then
 			UseRefResult.current = Frame.AbsoluteSize.Y
 			UseResult()
 		end
 	end, { UseResult })
-	ReactModule.useEffect(function() --[[ Line: 56 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult (copy)
 		UseResult()
 	end, { p1.bottomHeight, UseResult })
@@ -41,11 +41,11 @@ return function(p1) --[[ Line: 31 | Named "EventDetailsContainer" ]]
 		BorderSizePixel = 0,
 		Text = "",
 		AutoButtonColor = false,
-		[ReactModule.Event.TouchTap] = function() --[[ Line: 66 ]]
+		[ReactModule.Event.TouchTap] = function()
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(false)
 		end,
-		[ReactModule.Event.Activated] = function() --[[ Line: 69 ]]
+		[ReactModule.Event.Activated] = function()
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(false)
 		end

@@ -23,11 +23,11 @@ local UseGetPresenceByUserId = if FFlagProfilePlatformPresenceStoreMigrationModu
 local RefreshProfileOnTrustedFriendsRtn = game:DefineFastFlag("RefreshProfileOnTrustedFriendsRtn", false)
 local config = { skipFetch = true }
 
-return function() --[[ Line: 40 ]]
+return function()
 	-- upvalues: UseProfileWrapperContextModule (copy), UseRoactServiceFunction (copy), AppNotificationService (copy), ReactModule (copy), RobloxEventReceiver (copy), UseDispatchFunction (copy), UseLocalUserIdFunction (copy), FFlagProfilePlatformRefreshActionsRespectPoliciesModule (copy), UseActionsComponentRequestModule (copy), FFlagProfilePlatformPresenceStoreMigrationModule (copy), UseGetPresenceByUserId (copy), config (copy), ConvertPresenceEnumModule (copy), PresenceType (copy), UseSelectorFunction (copy), PresenceModule (copy), EnumsModule (copy), RefreshProfilePlatformActionInfoModule (copy), RefreshProfilePlatformUserInfoModule (copy), RefreshProfileOnTrustedFriendsRtn (copy)
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	local UseRoactServiceResult = UseRoactServiceFunction(AppNotificationService)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 43 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: RobloxEventReceiver (upval), UseRoactServiceResult (copy)
 		return RobloxEventReceiver.new(UseRoactServiceResult)
 	end, { UseRoactServiceResult })
@@ -42,7 +42,7 @@ return function() --[[ Line: 40 ]]
 		local UseGetPresenceByUserIdResult = UseGetPresenceByUserId(ProfileId, config)
 		ConvertPresenceEnumModuleResult = ConvertPresenceEnumModule(if UseGetPresenceByUserIdResult then UseGetPresenceByUserIdResult.userPresenceType else PresenceType.Offline, if UseGetPresenceByUserIdResult and UseGetPresenceByUserIdResult.universeId ~= "" then tonumber(UseGetPresenceByUserIdResult.universeId) else nil)
 	else
-		local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 62 ]]
+		local UseSelectorResult = UseSelectorFunction(function(p1)
 			-- upvalues: PresenceModule (upval), ProfileId (copy), PresenceType (upval)
 			return PresenceModule.Selectors.getUserPresenceByUserId(p1, ProfileId) or {
 				lastLocation = "",
@@ -52,7 +52,7 @@ return function() --[[ Line: 40 ]]
 		ConvertPresenceEnumModuleResult = ConvertPresenceEnumModule(UseSelectorResult.userPresenceType, UseSelectorResult.universeId)
 	end
 	local UseRefResult = ReactModule.useRef(ConvertPresenceEnumModuleResult)
-	ReactModule.useEffect(function() --[[ Line: 72 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ProfileType (copy), EnumsModule (upval), UseRefResult (copy), ConvertPresenceEnumModuleResult (ref), UseDispatchResult (copy), RefreshProfilePlatformActionInfoModule (upval), ProfileId (copy), UseActionsComponentRequestModuleResult (copy)
 		if ProfileType ~= EnumsModule.ProfileTypes.User then return end
 		if UseRefResult.current ~= ConvertPresenceEnumModuleResult then
@@ -68,10 +68,10 @@ return function() --[[ Line: 40 ]]
 		ProfileType,
 		if FFlagProfilePlatformRefreshActionsRespectPoliciesModule then UseActionsComponentRequestModuleResult else nil
 	})
-	ReactModule.useEffect(function() --[[ Line: 93 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ProfileType (copy), EnumsModule (upval), UseMemoResult (copy), ProfileId (copy), UseDispatchResult (copy), RefreshProfilePlatformUserInfoModule (upval)
 		if ProfileType ~= EnumsModule.ProfileTypes.User then return end
-		local UserProfileNotifications = UseMemoResult:observeEvent("UserProfileNotifications", function(p1) --[[ Line: 98 ]]
+		local UserProfileNotifications = UseMemoResult:observeEvent("UserProfileNotifications", function(p1)
 			-- upvalues: ProfileId (upval), EnumsModule (upval), UseDispatchResult (upval), RefreshProfilePlatformUserInfoModule (upval)
 			local Text = tostring(p1.VieweeUserId)
 			local Type = p1.Type
@@ -81,22 +81,22 @@ return function() --[[ Line: 40 ]]
 			end
 		end)
 		
-		return function() --[[ Line: 113 ]]
+		return function()
 			-- upvalues: UserProfileNotifications (copy)
 			UserProfileNotifications:disconnect()
 		end
 	end, { UseMemoResult, UseDispatchResult, ProfileId, ProfileType })
-	ReactModule.useEffect(function() --[[ Line: 123 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ProfileType (copy), EnumsModule (upval), UseMemoResult (copy), UseLocalUserIdResult (copy), ProfileId (copy), UseDispatchResult (copy), RefreshProfilePlatformActionInfoModule (upval), UseActionsComponentRequestModuleResult (copy)
 		if ProfileType ~= EnumsModule.ProfileTypes.User then return end
-		local FriendshipNotifications = UseMemoResult:observeEvent("FriendshipNotifications", function(p1) --[[ Line: 128 ]]
+		local FriendshipNotifications = UseMemoResult:observeEvent("FriendshipNotifications", function(p1)
 			-- upvalues: UseLocalUserIdResult (upval), ProfileId (upval), UseDispatchResult (upval), RefreshProfilePlatformActionInfoModule (upval), UseActionsComponentRequestModuleResult (upval)
 			if ProfileId == (if tostring(UseLocalUserIdResult) == tostring(p1.EventArgs.UserId1) then tostring(p1.EventArgs.UserId2) else tostring(p1.EventArgs.UserId1)) then
 				UseDispatchResult(RefreshProfilePlatformActionInfoModule(ProfileId, UseActionsComponentRequestModuleResult))
 			end
 		end)
 		
-		return function() --[[ Line: 138 ]]
+		return function()
 			-- upvalues: FriendshipNotifications (copy)
 			FriendshipNotifications:disconnect()
 		end
@@ -106,17 +106,17 @@ return function() --[[ Line: 40 ]]
 	})
 	
 	if RefreshProfileOnTrustedFriendsRtn then
-		ReactModule.useEffect(function() --[[ Line: 151 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: ProfileType (copy), EnumsModule (upval), UseMemoResult (copy), UseLocalUserIdResult (copy), ProfileId (copy), UseDispatchResult (copy), RefreshProfilePlatformActionInfoModule (upval), UseActionsComponentRequestModuleResult (copy)
 			if ProfileType ~= EnumsModule.ProfileTypes.User then return end
-			local TrustedConnectionNotifications = UseMemoResult:observeEvent("TrustedConnectionNotifications", function(Mouse) --[[ Line: 156 ]]
+			local TrustedConnectionNotifications = UseMemoResult:observeEvent("TrustedConnectionNotifications", function(Mouse)
 				-- upvalues: UseLocalUserIdResult (upval), ProfileId (upval), UseDispatchResult (upval), RefreshProfilePlatformActionInfoModule (upval), UseActionsComponentRequestModuleResult (upval)
 				if ProfileId == (if tostring(UseLocalUserIdResult) == tostring(Mouse.Actor) then tostring(Mouse.Target) else tostring(Mouse.Actor)) then
 					UseDispatchResult(RefreshProfilePlatformActionInfoModule(ProfileId, UseActionsComponentRequestModuleResult))
 				end
 			end)
 			
-			return function() --[[ Line: 166 ]]
+			return function()
 				-- upvalues: TrustedConnectionNotifications (copy)
 				TrustedConnectionNotifications:disconnect()
 			end

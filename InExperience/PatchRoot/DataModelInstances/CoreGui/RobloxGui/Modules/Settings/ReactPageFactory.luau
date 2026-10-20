@@ -1,15 +1,15 @@
 ﻿local ReactModule = require(game:GetService("CorePackages").Packages.React)
 
-local function createNewPage(Name) --[[ Line: 19 ]]
+local function createNewPage(Name)
 	-- upvalues: ReactModule (copy)
 	local config = { page = nil, hubRef = nil, name = Name }
 	
-	function config:setPage(Page) --[[ Line: 26 ]]
+	function config:setPage(Page)
 		-- upvalues: config (copy)
 		config.page = Page
 	end
 	
-	function config:createPage(p1) --[[ Line: 30 ]]
+	function config:createPage(p1)
 		-- upvalues: config (copy), ReactModule (upval)
 		return if config.page then ReactModule.createElement(config.page, p1) else nil
 	end
@@ -18,7 +18,7 @@ local function createNewPage(Name) --[[ Line: 19 ]]
 end
 
 return {
-	createNewPage = function(_, Name) --[[ Line: 41 ]]
+	createNewPage = function(_, Name)
 		-- upvalues: createNewPage (copy)
 		return (createNewPage(Name))
 	end

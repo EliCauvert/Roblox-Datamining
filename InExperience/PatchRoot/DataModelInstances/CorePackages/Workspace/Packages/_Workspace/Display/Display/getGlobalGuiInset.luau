@@ -1,6 +1,6 @@
 ﻿local GuiService = game:GetService("GuiService")
 
-return function() --[[ Line: 10 | Named "getGlobalGuiInset" ]]
+return function()
 	-- upvalues: GuiService (copy)
 	local GuiInset, GuiInset2 = GuiService:GetGuiInset()
 	

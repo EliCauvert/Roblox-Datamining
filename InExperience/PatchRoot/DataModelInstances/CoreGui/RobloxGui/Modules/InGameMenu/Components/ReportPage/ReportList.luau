@@ -27,16 +27,16 @@ ReportList.validateProps = T.strictInterface({
 	currentZone = GetFFlagIGMGamepadSelectionHistoryModule() and T.optional(T.number) or nil
 })
 
-local function sortPlayers(p1, p2): boolean --[[ Line: 57 ]]
+local function sortPlayers(p1, p2): boolean
 	return p1.Name:lower() < p2.Name:lower()
 end
 
-function ReportList.init(p1) --[[ Line: 61 ]]
+function ReportList.init(p1)
 	-- upvalues: Roact (copy)
 	p1.reportGameRef = Roact.createRef()
 end
 
-function ReportList.renderListEntries(p1) --[[ Line: 65 ]]
+function ReportList.renderListEntries(p1)
 	-- upvalues: Cryo (copy), sortPlayers (copy), Roact (copy), GetFFlagIGMGamepadSelectionHistoryModule (copy), FocusHandlerModule (copy), ConstantsModule (copy), GuiService (copy), GameLabelModule (copy), TrustAndSafetyModule (copy), ReportButtonModule (copy), DividerModule (copy), PlayerLabelModule (copy)
 	local SortResult = Cryo.List.sort(p1.props.players, sortPlayers)
 	local CountSortResult = #SortResult
@@ -52,7 +52,7 @@ function ReportList.renderListEntries(p1) --[[ Line: 65 ]]
 		Elements.FocusHandler = Roact.createElement(FocusHandlerModule, {
 			isFocused = p1.props.canCaptureFocus,
 			shouldForgetPreviousSelection = p1.props.currentPage == ConstantsModule.MainPagePageKey or p1.props.currentZone == 0,
-			didFocus = function(p2) --[[ Line: 83 ]]
+			didFocus = function(p2)
 				-- upvalues: GuiService (upval), p1 (copy)
 				GuiService.SelectedCoreObject = p2 or p1.reportGameRef:getValue()
 			end
@@ -63,7 +63,7 @@ function ReportList.renderListEntries(p1) --[[ Line: 65 ]]
 		gameName = p1.props.placeName,
 		LayoutOrder = 1,
 		[Roact.Ref] = p1.reportGameRef,
-		onActivated = function() --[[ Line: 94 ]]
+		onActivated = function()
 			-- upvalues: TrustAndSafetyModule (upval), ConstantsModule (upval)
 			TrustAndSafetyModule.openReportDialogForPlace(ConstantsModule.AnalyticsInGameMenuName)
 		end
@@ -81,7 +81,7 @@ function ReportList.renderListEntries(p1) --[[ Line: 65 ]]
 			username = Player.Name,
 			userId = Player.UserId,
 			LayoutOrder = LayoutOrder,
-			onActivated = function() --[[ Line: 118 ]]
+			onActivated = function()
 				-- upvalues: TrustAndSafetyModule (upval), Player (copy), ConstantsModule (upval)
 				TrustAndSafetyModule.openReportDialogForPlayer(Player, ConstantsModule.AnalyticsInGameMenuName)
 			end
@@ -105,20 +105,20 @@ function ReportList.renderListEntries(p1) --[[ Line: 65 ]]
 	return Elements
 end
 
-function ReportList.didUpdate(p2, p3, _) --[[ Line: 144 ]]
+function ReportList.didUpdate(p2, p3, _)
 	-- upvalues: GetFFlagIGMGamepadSelectionHistoryModule (copy), GuiService (copy)
 	if not GetFFlagIGMGamepadSelectionHistoryModule() and p2.props.canCaptureFocus and not p3.canCaptureFocus then
 		GuiService.SelectedCoreObject = p2.reportGameRef:getValue()
 	end
 end
 
-function ReportList.render(p2) --[[ Line: 153 ]]
+function ReportList.render(p2)
 	-- upvalues: IsShowEUDSAIllegalContentReportingLinkFunction (copy), WithLocalizationModule (copy), Roact (copy), BarOnTopScrollingFrameModule (copy), ThemedTextLabelModule (copy)
 	local YOffset = #p2.props.players * 71 + 70
 	
 	return if IsShowEUDSAIllegalContentReportingLinkFunction() then WithLocalizationModule({
 		DSAFooterText = "CoreScripts.InGameMenu.Report.DSAFooter"
-	})(function(p3) --[[ Line: 159 ]]
+	})(function(p3)
 		-- upvalues: Roact (upval), BarOnTopScrollingFrameModule (upval), YOffset (copy), p2 (copy), ThemedTextLabelModule (upval)
 		return Roact.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -159,7 +159,7 @@ function ReportList.render(p2) --[[ Line: 153 ]]
 	}, p2:renderListEntries())
 end
 
-return RoactRodux.UNSTABLE_connect2(function(p2, _) --[[ Line: 204 ]]
+return RoactRodux.UNSTABLE_connect2(function(p2, _)
 	-- upvalues: ConstantsModule (copy), GetFFlagIGMGamepadSelectionHistoryModule (copy)
 	return {
 		placeName = p2.gameInfo.name,

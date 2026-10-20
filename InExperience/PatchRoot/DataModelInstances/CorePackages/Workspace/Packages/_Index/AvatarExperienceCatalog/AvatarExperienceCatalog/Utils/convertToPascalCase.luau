@@ -1,8 +1,8 @@
-﻿local function _(Text: string): string --[[ Line: 1 | Named "toPascalCase" ]]
+﻿local function _(Text: string): string
 	return if type(Text) == "string" then Text:gsub("^%l", string.upper) else tostring(Text)
 end
 
-local function convertToPascalCase(List) --[[ Line: 10 ]]
+local function convertToPascalCase(List)
 	-- upvalues: convertToPascalCase (copy)
 	local t = {}
 	

@@ -2,9 +2,9 @@
 local AppChatNetworkingModule = require(AppChat.Parent.AppChatNetworking)
 local IngestNewerMessagesModule = require(AppChat.Stores.Ingestion.ingestNewerMessages)
 
-return function(p1) --[[ Line: 24 | Named "fetchNewerMessages" ]]
+return function(p1)
 	-- upvalues: AppChatNetworkingModule (copy), IngestNewerMessagesModule (copy)
-	return AppChatNetworkingModule.http.GetConversationMessages(nil, p1, nil):andThen(function(Result) --[[ Line: 25 ]]
+	return AppChatNetworkingModule.http.GetConversationMessages(nil, p1, nil):andThen(function(Result)
 		-- upvalues: IngestNewerMessagesModule (upval), p1 (copy)
 		local ResponseBody = Result and Result.responseBody
 		

@@ -16,7 +16,7 @@ return {
 			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter },
 			{
 				type = SupportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ Line: 24 ]]
+				overrideName = function()
 					-- upvalues: EventTypes (copy)
 					return EventTypes.UserSeen
 				end,
@@ -34,7 +34,7 @@ return {
 			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter },
 			{
 				type = SupportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ Line: 43 ]]
+				overrideName = function()
 					-- upvalues: EventTypes (copy)
 					return EventTypes.ButtonClick
 				end,
@@ -53,7 +53,7 @@ return {
 			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter },
 			{
 				type = SupportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ Line: 63 ]]
+				overrideName = function()
 					-- upvalues: EventTypes (copy)
 					return EventTypes.ButtonClick
 				end,

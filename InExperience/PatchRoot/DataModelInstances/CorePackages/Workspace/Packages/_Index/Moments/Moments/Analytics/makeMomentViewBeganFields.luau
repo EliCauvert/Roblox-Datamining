@@ -13,7 +13,7 @@ local config = {
 	[Enum.CaptureType.Screenshot] = 2
 }
 
-local function resolveTryOnOutfitId(p1, p2) --[[ Line: 41 ]]
+local function resolveTryOnOutfitId(p1, p2)
 	-- upvalues: FFlagMomentsAvatarLookTryOn (copy), GetFFlagMomentsRenderPostAssetsModule (copy), MomentsGetPostAssetStoreModule (copy), DeriveMomentFromPostModule (copy)
 	if not FFlagMomentsAvatarLookTryOn or not p2 then
 		return 0
@@ -37,7 +37,7 @@ local function resolveTryOnOutfitId(p1, p2) --[[ Line: 41 ]]
 	end
 end
 
-return function(p1, Entry, ViewId, Enabled) --[[ Line: 70 | Named "makeMomentViewBeganFields" ]]
+return function(p1, Entry, ViewId, Enabled)
 	-- upvalues: MomentsCommonModule (copy), FFlagMomentsImpressionDestinationUniverseIdModule (copy), FFlagMomentsImpressionPrimaryEntityModule (copy), resolveTryOnOutfitId (copy), config (copy)
 	local RecommendationMetadata = p1.recommendationMetadata
 	local FeedItemId = RecommendationMetadata.feedItemId

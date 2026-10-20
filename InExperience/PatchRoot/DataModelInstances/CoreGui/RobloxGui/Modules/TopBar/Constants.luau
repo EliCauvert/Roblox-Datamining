@@ -12,7 +12,7 @@ local FFlagTopBarRefactor = require(CorePackages.Workspace.Packages.InExperience
 local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 local v1 = if EnabledFunction() then require(ChromeShared.Utility.GetStyleTokens)() else nil
 
-local function _(p1) --[[ Line: 21 | Named "withUIScale" ]]
+local function _(p1)
 	-- upvalues: TenFootInterfaceModule (copy), EnabledFunction (copy)
 	local v2: number = if TenFootInterfaceModule:IsEnabled() then 1.5 else 1
 	
@@ -31,7 +31,7 @@ else
 end
 local Size1100 = if EnabledFunction() then v1.Size.Size_1100 else 44
 
-local _ = function() --[[ Line: 31 | Named "getTopbarHeight" ]]
+local _ = function()
 	-- upvalues: IsNewTiltIconEnabledModule (copy), Size900 (copy), EnabledFunction (copy), v2 (copy)
 	return if IsNewTiltIconEnabledModule() and EnabledFunction() then v2 else Size900
 end
@@ -52,13 +52,13 @@ return {
 	TopBarKeepOutAreaId = "roblox-topbar",
 	InitialHealth = 100,
 	HealthPercentForOverlay = 0.05,
-	ApplyDisplayScale = function(p1) --[[ Line: 62 ]]
+	ApplyDisplayScale = function(p1)
 		-- upvalues: GetUIScaleFunction (copy)
 		return GetUIScaleFunction(false) * p1
 	end,
-	useDisplayScaleState = function(p1) --[[ Line: 65 ]]
+	useDisplayScaleState = function(p1)
 		-- upvalues: SignalsReactModule (copy), SignalsModule (copy), DisplayModule (copy)
-		return SignalsReactModule.useSignalState(SignalsModule.createComputed(function(p2) --[[ Line: 66 ]]
+		return SignalsReactModule.useSignalState(SignalsModule.createComputed(function(p2)
 			-- upvalues: DisplayModule (upval), p1 (copy)
 			return p1 * DisplayModule.GetDisplayStore(p2).getUIScale(p2)
 		end))

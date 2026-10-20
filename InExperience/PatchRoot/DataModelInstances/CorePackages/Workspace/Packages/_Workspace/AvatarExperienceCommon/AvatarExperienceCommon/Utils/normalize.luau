@@ -1,4 +1,4 @@
-﻿local function normalizeType(p1, ValueType) --[[ Line: 3 ]]
+﻿local function normalizeType(p1, ValueType)
 	if type(p1) == ValueType then
 		return p1
 	else
@@ -6,7 +6,7 @@
 	end
 end
 
-local function prepareValuesForError(List): string --[[ Line: 10 ]]
+local function prepareValuesForError(List): string
 	local List1 = {}
 	
 	for _, value in List do
@@ -15,7 +15,7 @@ local function prepareValuesForError(List): string --[[ Line: 10 ]]
 	return table.concat(List1, ", ")
 end
 
-local function normalizeValue(Value, List) --[[ Line: 18 ]]
+local function normalizeValue(Value, List)
 	-- upvalues: prepareValuesForError (copy)
 	if table.find(List, Value) then
 		return Value
@@ -24,12 +24,12 @@ local function normalizeValue(Value, List) --[[ Line: 18 ]]
 	end
 end
 
-local function normalizeString(p1) --[[ Line: 29 ]]
+local function normalizeString(p1)
 	-- upvalues: normalizeType (copy)
 	return normalizeType(p1, "string")
 end
 
-local function normalizeTable(p1, List) --[[ Line: 37 ]]
+local function normalizeTable(p1, List)
 	local List1 = {}
 	
 	if type(p1) ~= "table" then
@@ -57,7 +57,7 @@ local function normalizeTable(p1, List) --[[ Line: 37 ]]
 	return t, if next(List1) then table.concat(List1, " ") else nil
 end
 
-local function normalizeList(List, Callback) --[[ Line: 85 ]]
+local function normalizeList(List, Callback)
 	if type(List) ~= "table" then
 		return nil, `Type table required, got {type(List)}.`
 	end
@@ -77,7 +77,7 @@ local function normalizeList(List, Callback) --[[ Line: 85 ]]
 	return List2, if next(List1) then table.concat(List1, " ") else nil
 end
 
-local function normalizeUnion(p2, List) --[[ Line: 107 ]]
+local function normalizeUnion(p2, List)
 	local v2 = nil
 	for _, value in List do
 		local _
@@ -93,57 +93,57 @@ end
 return {
 	normalizeType = normalizeType,
 	normalizeValue = normalizeValue,
-	normalizeBoolean = function(p3) --[[ Line: 25 ]]
+	normalizeBoolean = function(p3)
 		-- upvalues: normalizeType (copy)
 		return normalizeType(p3, "boolean")
 	end,
 	normalizeString = normalizeString,
-	normalizeNumber = function(p3) --[[ Line: 33 ]]
+	normalizeNumber = function(p3)
 		-- upvalues: normalizeType (copy)
 		return normalizeType(p3, "number")
 	end,
 	normalizeTable = normalizeTable,
 	normalizeList = normalizeList,
 	normalizeUnion = normalizeUnion,
-	normalizeStringToBoolean = function(p3) --[[ Line: 118 ]]
+	normalizeStringToBoolean = function(p3)
 		if p3 then
 			return p3 == "true"
 		else
 			return nil, "value is nil"
 		end
 	end,
-	makeNormalizeTableFn = function(p3) --[[ Line: 125 ]]
+	makeNormalizeTableFn = function(p3)
 		-- upvalues: normalizeTable (copy)
-		return function(p4) --[[ Line: 128 ]]
+		return function(p4)
 			-- upvalues: normalizeTable (upval), p3 (copy)
 			return normalizeTable(p4, p3)
 		end
 	end,
-	makeNormalizeListFn = function(p3) --[[ Line: 133 ]]
+	makeNormalizeListFn = function(p3)
 		-- upvalues: normalizeList (copy)
-		return function(p4) --[[ Line: 134 ]]
+		return function(p4)
 			-- upvalues: normalizeList (upval), p3 (copy)
 			return normalizeList(p4, p3)
 		end
 	end,
-	makeNormalizeUnionFn = function(p3) --[[ Line: 139 ]]
+	makeNormalizeUnionFn = function(p3)
 		-- upvalues: normalizeUnion (copy)
-		return function(p4) --[[ Line: 140 ]]
+		return function(p4)
 			-- upvalues: normalizeUnion (upval), p3 (copy)
 			return normalizeUnion(p4, p3)
 		end
 	end,
-	makeNormalizeValueFn = function(p3) --[[ Line: 145 ]]
+	makeNormalizeValueFn = function(p3)
 		-- upvalues: normalizeValue (copy)
-		return function(p4) --[[ Line: 146 ]]
+		return function(p4)
 			-- upvalues: normalizeValue (upval), p3 (copy)
 			return normalizeValue(p4, p3)
 		end
 	end,
-	makeRequired = function(Fn) --[[ Line: 151 ]]
+	makeRequired = function(Fn)
 		return { required = true, fn = Fn }
 	end,
-	normalizeNotEmptyString = function(p3) --[[ Line: 156 ]]
+	normalizeNotEmptyString = function(p3)
 		-- upvalues: normalizeString (copy)
 		if p3 == nil or p3 == "" then
 			return nil, nil

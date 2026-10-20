@@ -8,17 +8,17 @@ local config = {
 	Offer = "OFFER"
 }
 
-local function _(p1) --[[ Line: 141 | Named "mapCartPricingDiscountType" ]]
+local function _(p1)
 	-- upvalues: DiscountType (copy)
 	return if p1 == "ROBLOX_PLUS" then DiscountType.RobloxPlusSubscription else DiscountType.Uncategorized
 end
 
-local _ = function(p1): boolean --[[ Line: 197 | Named "isOfferDiscountType" ]]
+local _ = function(p1): boolean
 	-- upvalues: FFlagCartPricingSupportGameItemOfferModule (copy)
 	return p1 == "MARKETPLACE_OFFER" or FFlagCartPricingSupportGameItemOfferModule and p1 == "OFFER"
 end
 
-local function consolidateRobloxPlusDiscounts(List) --[[ Line: 211 ]]
+local function consolidateRobloxPlusDiscounts(List)
 	-- upvalues: DiscountType (copy)
 	local List1 = {}
 	local Count: number? = nil
@@ -45,7 +45,7 @@ local function consolidateRobloxPlusDiscounts(List) --[[ Line: 211 ]]
 end
 
 return {
-	getCartLineSalePriceInRobux = function(p1) --[[ Line: 87 ]]
+	getCartLineSalePriceInRobux = function(p1)
 		if type(p1) == "table" then
 			local PriceInRobux: number = p1.priceInRobux
 			
@@ -54,7 +54,7 @@ return {
 			return nil
 		end
 	end,
-	getCartLineRegularPriceInRobux = function(p1, p2) --[[ Line: 98 ]]
+	getCartLineRegularPriceInRobux = function(p1, p2)
 		if type(p1) == "table" then
 			local RegularPriceInRobux = p1.regularPriceInRobux
 			
@@ -64,7 +64,7 @@ return {
 		end
 		return p2
 	end,
-	extractCartPricingMarketingOffers = function(p1) --[[ Line: 108 ]]
+	extractCartPricingMarketingOffers = function(p1)
 		-- upvalues: DecodeLuauUnicodeEscapesModule (copy)
 		local List = {}
 		
@@ -94,7 +94,7 @@ return {
 		end
 		return List
 	end,
-	extractDiscountRowsFromLineItems = function(List) --[[ Line: 155 ]]
+	extractDiscountRowsFromLineItems = function(List)
 		-- upvalues: config (copy), DiscountType (copy), DecodeLuauUnicodeEscapesModule (copy)
 		local List1 = {}
 		
@@ -131,7 +131,7 @@ return {
 		return List1
 	end,
 	consolidateRobloxPlusDiscounts = if require(IAPExperience.Parent.SharedFlags).FFlagPurchasePromptFetchCartPricingForLooks then consolidateRobloxPlusDiscounts else nil,
-	computePriceWithoutOffersDiscounts = function(List, Total): number --[[ Line: 241 ]]
+	computePriceWithoutOffersDiscounts = function(List, Total): number
 		-- upvalues: config (copy), FFlagCartPricingSupportGameItemOfferModule (copy)
 		local Total1: number = Total
 		
@@ -165,7 +165,7 @@ return {
 		end
 		return Total1
 	end,
-	extractCartPricingSavingsSummary = function(p2) --[[ Line: 274 ]]
+	extractCartPricingSavingsSummary = function(p2)
 		-- upvalues: DecodeLuauUnicodeEscapesModule (copy)
 		if type(p2) == "table" then
 			local SavingsSummary = p2.savingsSummary

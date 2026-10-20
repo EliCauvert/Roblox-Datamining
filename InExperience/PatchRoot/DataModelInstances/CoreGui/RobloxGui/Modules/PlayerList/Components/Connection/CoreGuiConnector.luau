@@ -10,24 +10,24 @@ local SetPlayerIsBlockedModule = require(Parent.Actions.SetPlayerIsBlocked)
 local EventConnectionModule = require(script.Parent.EventConnection)
 local CoreGuiConnector = RoactModule.PureComponent:extend("CoreGuiConnector")
 
-function CoreGuiConnector.didMount(p1) --[[ Line: 22 ]]
+function CoreGuiConnector.didMount(p1)
 	-- upvalues: UserGameSettings (copy)
 	p1.props.setPerformanceStatsVisible(UserGameSettings.PerformanceStatsVisible)
 end
 
-function CoreGuiConnector.render(p1) --[[ Line: 26 ]]
+function CoreGuiConnector.render(p1)
 	-- upvalues: RoactModule (copy), EventConnectionModule (copy), UserGameSettings (copy), BlockedStatusChangedEvent (copy), Players (copy)
 	return RoactModule.createFragment({
 		PerformanceStatsChangedConnection = RoactModule.createElement(EventConnectionModule, {
 			event = UserGameSettings.PerformanceStatsVisibleChanged,
-			callback = function(p2) --[[ Line: 30 ]]
+			callback = function(p2)
 				-- upvalues: p1 (copy)
 				p1.props.setPerformanceStatsVisible(p2)
 			end
 		}),
 		BlockedStatusChangedConnection = RoactModule.createElement(EventConnectionModule, {
 			event = BlockedStatusChangedEvent,
-			callback = function(UserId, p2) --[[ Line: 37 ]]
+			callback = function(UserId, p2)
 				-- upvalues: Players (upval), p1 (copy)
 				local Player = Players:GetPlayerByUserId(UserId)
 				
@@ -39,14 +39,14 @@ function CoreGuiConnector.render(p1) --[[ Line: 26 ]]
 	})
 end
 
-return RoactRoduxModule.connect(nil, function(Callback) --[[ Line: 47 | Named "mapDispatchToProps" ]]
+return RoactRoduxModule.connect(nil, function(Callback)
 	-- upvalues: SetPerformanceStatsVisibleModule (copy), SetPlayerIsBlockedModule (copy)
 	return {
-		setPerformanceStatsVisible = function(p1) --[[ Line: 49 ]]
+		setPerformanceStatsVisible = function(p1)
 			-- upvalues: Callback (copy), SetPerformanceStatsVisibleModule (upval)
 			return Callback(SetPerformanceStatsVisibleModule(p1))
 		end,
-		setPlayerIsBlocked = function(p1, p2) --[[ Line: 53 ]]
+		setPlayerIsBlocked = function(p1, p2)
 			-- upvalues: Callback (copy), SetPlayerIsBlockedModule (upval)
 			return Callback(SetPlayerIsBlockedModule(p1, p2))
 		end

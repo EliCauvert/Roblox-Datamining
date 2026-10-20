@@ -25,7 +25,7 @@ GameLabel.validateProps = T.strictInterface({
 	buttonRef = T.optional(T.table)
 })
 
-function GameLabel.renderButtons(p1) --[[ Line: 51 ]]
+function GameLabel.renderButtons(p1)
 	-- upvalues: Roact (copy), Cryo (copy)
 	return (Cryo.Dictionary.join(p1.props[Roact.Children] or {}, {
 		List = Roact.createElement("UIListLayout", {
@@ -38,14 +38,14 @@ function GameLabel.renderButtons(p1) --[[ Line: 51 ]]
 	}))
 end
 
-function GameLabel.renderWithSelectionCursor(p1, Callback) --[[ Line: 66 ]]
+function GameLabel.renderWithSelectionCursor(p1, Callback)
 	-- upvalues: AssetsModule (copy), WithFoundationOrUIBloxStyleFunction (copy), Roact (copy), ReactModule (copy), CursorType (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), ImageSetLabel (copy), ThemedTextLabelModule (copy)
 	local GameId = p1.props.gameId
 	local Text = if p1.props.gameId > 0 then "rbxthumb://type=GameIcon&id=" .. GameId .. "&w=150&h=150" else AssetsModule.Images.PlaceholderGameIcon
 	
-	return WithFoundationOrUIBloxStyleFunction(function(_) --[[ Line: 73 ]]
+	return WithFoundationOrUIBloxStyleFunction(function(_)
 		return {}
-	end, function(_) --[[ Line: 75 ]]
+	end, function(_)
 		-- upvalues: Roact (upval), ReactModule (upval), p1 (copy), Callback (copy), CursorType (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), Text (ref), ImageSetLabel (upval), ThemedTextLabelModule (upval)
 		return Roact.createElement("TextButton", {
 			[ReactModule.Tag] = "data-testid=experienceLabel",
@@ -90,15 +90,15 @@ function GameLabel.renderWithSelectionCursor(p1, Callback) --[[ Line: 66 ]]
 	end)
 end
 
-function GameLabel.render(p1) --[[ Line: 124 ]]
+function GameLabel.render(p1)
 	-- upvalues: WithCursorMigration (copy)
-	return WithCursorMigration(function(p2) --[[ Line: 125 ]]
+	return WithCursorMigration(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithSelectionCursor(p2)
 	end)
 end
 
-return Roact.forwardRef(function(p1, ButtonRef) --[[ Line: 130 ]]
+return Roact.forwardRef(function(p1, ButtonRef)
 	-- upvalues: Roact (copy), GameLabel (copy), Cryo (copy)
 	return Roact.createElement(GameLabel, Cryo.Dictionary.join(p1, { buttonRef = ButtonRef }))
 end)

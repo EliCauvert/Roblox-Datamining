@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("UGCValidateMeshDivisionNarrow", 45)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastInt("UGCValidateMeshDivisionNarrow")
 end

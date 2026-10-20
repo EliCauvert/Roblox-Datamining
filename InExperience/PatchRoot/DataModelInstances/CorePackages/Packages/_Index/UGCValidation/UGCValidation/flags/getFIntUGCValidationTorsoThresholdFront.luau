@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("UGCValidationTorsoThresholdFront", 50)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastInt("UGCValidationTorsoThresholdFront")
 end

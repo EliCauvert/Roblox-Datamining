@@ -4,7 +4,7 @@ local FoundationModule = require(Parent.Foundation)
 local _ = require(Parent.SduiCompat)
 local FFlagLuaAppSduiGameTileFeedback = require(Parent.SharedFlags).FFlagLuaAppSduiGameTileFeedback
 
-return function(p1) --[[ Line: 45 | Named "SduiButton" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), FFlagLuaAppSduiGameTileFeedback (copy)
 	return ReactModule.createElement(FoundationModule.Button, {
 		ref = if FFlagLuaAppSduiGameTileFeedback then p1.buttonRef else nil,

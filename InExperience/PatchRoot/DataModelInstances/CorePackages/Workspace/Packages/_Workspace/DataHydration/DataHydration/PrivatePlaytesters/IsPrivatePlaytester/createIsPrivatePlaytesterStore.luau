@@ -4,11 +4,11 @@ local CreateSingleEntityResolverModule = require(DataHydration.createSingleEntit
 local FetchIsPrivatePlaytesterModule = require(script.Parent.fetchIsPrivatePlaytester)
 local _ = require(script.Parent.IsPrivatePlaytesterStoreTypes)
 
-return function(p1) --[[ Line: 18 | Named "createIsPrivatePlaytesterStore" ]]
+return function(p1)
 	-- upvalues: CreateSingleEntityResolverModule (copy), FetchIsPrivatePlaytesterModule (copy)
 	local P0 = p1 or {}
 	local config = { network = P0.network, baseUrl = P0.baseUrl }
-	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p2) --[[ Line: 22 ]]
+	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p2)
 		-- upvalues: FetchIsPrivatePlaytesterModule (upval), config (copy)
 		return FetchIsPrivatePlaytesterModule(p2, config)
 	end)

@@ -7,7 +7,7 @@ local SduiErrors = SduiCoreSystemModule.SduiErrors
 local Accordion = require(Parent.Foundation).Accordion
 local Frozen = table.freeze({})
 
-return ReactModule.memo(function(p1) --[[ Line: 35 | Named "SduiAccordion" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: Frozen (copy), SduiBuilder (copy), SduiErrors (copy), GetSduiComponentWrapperFunction (copy), ReactModule (copy), Accordion (copy)
 	local Elements = {}
 	

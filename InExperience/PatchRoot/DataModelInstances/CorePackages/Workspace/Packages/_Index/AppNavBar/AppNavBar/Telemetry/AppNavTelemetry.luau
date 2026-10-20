@@ -50,7 +50,7 @@ local config4 = {
 }
 local Config = nil
 
-local function reportSwitchTab(Previous_page, Current_page, Duration) --[[ Line: 88 ]]
+local function reportSwitchTab(Previous_page, Current_page, Duration)
 	-- upvalues: TelemetryService (copy), config (copy), AppNavDeviceTier (copy), DeviceMemoryTier (copy), config1 (copy), StandardizedFields (copy), FFlagAppNavTelemetryLogger (copy), AppNavTelemetry (ref)
 	TelemetryService:LogStat(config, {
 		customFields = {
@@ -75,7 +75,7 @@ end
 
 local Config1 = nil
 
-local function reportVisibility(Is_visible, Duration) --[[ Line: 141 ]]
+local function reportVisibility(Is_visible, Duration)
 	-- upvalues: TelemetryService (copy), config2 (copy), AppNavDeviceTier (copy), DeviceMemoryTier (copy), config3 (copy), StandardizedFields (copy), FFlagAppNavTelemetryLogger (copy), AppNavTelemetry (ref)
 	TelemetryService:LogStat(config2, {
 		customFields = {
@@ -96,7 +96,7 @@ end
 local Previous_placement = nil
 
 return {
-	logSwitchTabStart = function(PreviousPage, NextPage) --[[ Line: 80 ]]
+	logSwitchTabStart = function(PreviousPage, NextPage)
 		-- upvalues: Config (ref)
 		Config = {
 			previousPage = PreviousPage,
@@ -104,7 +104,7 @@ return {
 			startTime = os.clock()
 		}
 	end,
-	logSwitchTabEnd = function(Current_page) --[[ Line: 115 ]]
+	logSwitchTabEnd = function(Current_page)
 		-- upvalues: Config (ref), reportSwitchTab (copy)
 		if not Config then return end
 		if Current_page == Config.nextPage then
@@ -118,11 +118,11 @@ return {
 			Config = nil
 		end
 	end,
-	logVisibilityStart = function(NextValue) --[[ Line: 134 ]]
+	logVisibilityStart = function(NextValue)
 		-- upvalues: Config1 (ref)
 		Config1 = { nextValue = NextValue, startTime = os.clock() }
 	end,
-	logVisibilityEnd = function(Is_visible) --[[ Line: 165 ]]
+	logVisibilityEnd = function(Is_visible)
 		-- upvalues: Config1 (ref), reportVisibility (copy)
 		if not Config1 then return end
 		if Is_visible == Config1.nextValue then
@@ -135,7 +135,7 @@ return {
 			Config1 = nil
 		end
 	end,
-	logPlacement = function(Current_placement) --[[ Line: 183 ]]
+	logPlacement = function(Current_placement)
 		-- upvalues: Previous_placement (ref), TelemetryService (copy), config4 (copy), FFlagAppNavTelemetryLogger (copy), AppNavTelemetry (ref)
 		if Current_placement == Previous_placement then return end
 		TelemetryService:LogCounter(config4, {
@@ -150,7 +150,7 @@ return {
 		end
 		Previous_placement = Current_placement
 	end,
-	reset = function() --[[ Line: 201 ]]
+	reset = function()
 		-- upvalues: Config (ref), Config1 (ref), Previous_placement (ref)
 		Config = nil
 		Config1 = nil

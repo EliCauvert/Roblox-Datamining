@@ -1,4 +1,4 @@
-﻿return function(p1, p2) --[[ Line: 68 | Named "createImmersiveChromeMachine" ]]
+﻿return function(p1, p2)
 	local NowFunction = p2.now
 	local Flag = true
 	local Count = 0
@@ -11,7 +11,7 @@
 	local NowResult = NowFunction()
 	local v2 = -1e999
 	
-	local function _(p3) --[[ Line: 89 | Named "applyShow" ]]
+	local function _(p3)
 		-- upvalues: ForceHide (ref), Count (ref), NowResult (ref), NowFunction (copy), Flag (ref), p2 (copy)
 		if ForceHide then return end
 		Count = 0
@@ -25,7 +25,7 @@
 		end
 	end
 	
-	local _ = function(p3) --[[ Line: 105 | Named "applyHide" ]]
+	local _ = function(p3)
 		-- upvalues: Flag (ref), v2 (ref), NowFunction (copy), p2 (copy)
 		if Flag then
 			Flag = false
@@ -36,7 +36,7 @@
 		end
 	end
 	
-	local _ = function() --[[ Line: 114 | Named "tryHide" ]]
+	local _ = function()
 		-- upvalues: ForceShow (ref), Flag (ref), Count (ref), p1 (copy), Flag2 (ref), Flag1 (ref), NowFunction (copy), NowResult (ref), v2 (ref), p2 (copy)
 		if ForceShow or not Flag then return end
 		if Count < p1.hideAfterAdvances then return end
@@ -52,7 +52,7 @@
 	end
 	
 	return {
-		onActiveUpdate = function(p3, p4, p5) --[[ Line: 167 ]]
+		onActiveUpdate = function(p3, p4, p5)
 			-- upvalues: v1 (ref), Flag1 (ref), Flag2 (ref), Count1 (ref), ForceHide (ref), Count (ref), NowResult (ref), NowFunction (copy), Flag (ref), p2 (copy), ForceShow (ref), p1 (copy), v2 (ref)
 			local v3 = v1
 			
@@ -128,7 +128,7 @@
 				return
 			end
 		end,
-		setForceShow = function(Value) --[[ Line: 134 ]]
+		setForceShow = function(Value)
 			-- upvalues: ForceShow (ref), ForceHide (ref), Count (ref), NowResult (ref), NowFunction (copy), Flag (ref), p2 (copy)
 			if Value == ForceShow then return end
 			ForceShow = Value
@@ -143,7 +143,7 @@
 				p2.setChromeVisible(true, "force")
 			end
 		end,
-		setForceHide = function(Value) --[[ Line: 145 ]]
+		setForceHide = function(Value)
 			-- upvalues: ForceHide (ref), Flag (ref), v2 (ref), NowFunction (copy), p2 (copy), Count (ref), NowResult (ref)
 			if Value == ForceHide then return end
 			ForceHide = Value
@@ -168,11 +168,11 @@
 				return
 			end
 		end,
-		setCount = function(Value) --[[ Line: 158 ]]
+		setCount = function(Value)
 			-- upvalues: Count1 (ref)
 			Count1 = Value
 		end,
-		reveal = function() --[[ Line: 245 ]]
+		reveal = function()
 			-- upvalues: ForceHide (ref), Count (ref), NowResult (ref), NowFunction (copy), Flag (ref), p2 (copy)
 			if ForceHide then return end
 			Count = 0
@@ -185,7 +185,7 @@
 				return
 			end
 		end,
-		isVisible = function() --[[ Line: 255 ]]
+		isVisible = function()
 			-- upvalues: Flag (ref)
 			return Flag
 		end

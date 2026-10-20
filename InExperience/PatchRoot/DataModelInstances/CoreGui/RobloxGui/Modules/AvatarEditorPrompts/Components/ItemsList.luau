@@ -23,7 +23,7 @@ ItemsList.validateProps = TModule.strictInterface({
 	addAnalyticsInfo = TModule.callback
 })
 
-function ItemsList.init(p1) --[[ Line: 42 ]]
+function ItemsList.init(p1)
 	-- upvalues: RoactModule (copy), GetAssetsDifferenceModule (copy)
 	p1:setState({
 		canvasSizeY = 0,
@@ -40,7 +40,7 @@ function ItemsList.init(p1) --[[ Line: 42 ]]
 	p1.noChangedAssetsRef = RoactModule.createRef()
 	p1.lastWasScrollable = nil
 	
-	function p1.checkIsScrollable() --[[ Line: 61 ]]
+	function p1.checkIsScrollable()
 		-- upvalues: p1 (copy)
 		local Value = p1.frameRef:getValue()
 		
@@ -54,12 +54,12 @@ function ItemsList.init(p1) --[[ Line: 42 ]]
 		end
 	end
 	
-	function p1.onContentSizeChanged(p2) --[[ Line: 79 ]]
+	function p1.onContentSizeChanged(p2)
 		-- upvalues: p1 (copy)
 		p1:setState({ canvasSizeY = p2.AbsoluteContentSize.Y })
 	end
 	
-	function p1.firstEntryPositionChanged(Frame) --[[ Line: 85 ]]
+	function p1.firstEntryPositionChanged(Frame)
 		-- upvalues: p1 (copy)
 		local Value = p1.frameRef:getValue()
 		
@@ -73,7 +73,7 @@ function ItemsList.init(p1) --[[ Line: 42 ]]
 		end
 	end
 	
-	function p1.lastEntryPositionChanged(Frame: Frame) --[[ Line: 98 ]]
+	function p1.lastEntryPositionChanged(Frame: Frame)
 		-- upvalues: p1 (copy)
 		local Value = p1.frameRef:getValue()
 		
@@ -87,11 +87,11 @@ function ItemsList.init(p1) --[[ Line: 42 ]]
 		end
 	end
 	
-	function p1.loadAssetNames() --[[ Line: 113 ]]
+	function p1.loadAssetNames()
 		-- upvalues: GetAssetsDifferenceModule (upval), p1 (copy)
-		coroutine.wrap(function() --[[ Line: 114 ]]
+		coroutine.wrap(function()
 			-- upvalues: GetAssetsDifferenceModule (upval), p1 (upval)
-			GetAssetsDifferenceModule(p1.props.humanoidDescription):andThen(function(Result) --[[ Line: 115 ]]
+			GetAssetsDifferenceModule(p1.props.humanoidDescription):andThen(function(Result)
 				-- upvalues: p1 (upval)
 				if p1.mounted then
 					p1.props.addAnalyticsInfo(Result.addedAssetIds, Result.removedAssetIds)
@@ -101,7 +101,7 @@ function ItemsList.init(p1) --[[ Line: 42 ]]
 						removedAssetNames = Result.removedNames
 					})
 				end
-			end, function(_) --[[ Line: 125 ]]
+			end, function(_)
 				-- upvalues: p1 (upval)
 				if p1.mounted then
 					p1:setState({ loading = false })
@@ -110,7 +110,7 @@ function ItemsList.init(p1) --[[ Line: 42 ]]
 		end)()
 	end
 	
-	function p1.onRetryLoading() --[[ Line: 135 ]]
+	function p1.onRetryLoading()
 		-- upvalues: p1 (copy)
 		p1:setState({ loading = true })
 		
@@ -124,7 +124,7 @@ function ItemsList.init(p1) --[[ Line: 42 ]]
 	end
 end
 
-function ItemsList.createEntriesList(p1) --[[ Line: 148 ]]
+function ItemsList.createEntriesList(p1)
 	-- upvalues: RobloxTranslatorModule (copy), RoactModule (copy), RoactGamepadModule (copy), ListSectionModule (copy)
 	local List = {}
 	
@@ -171,9 +171,9 @@ function ItemsList.createEntriesList(p1) --[[ Line: 148 ]]
 	return List
 end
 
-function ItemsList.renderItemsList(p1) --[[ Line: 217 ]]
+function ItemsList.renderItemsList(p1)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy), RoactGamepadModule (copy), VerticalScrollViewWithMargin (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 218 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: p1 (copy), RoactModule (upval), RoactGamepadModule (upval), VerticalScrollViewWithMargin (upval)
 		local Theme = p2.Theme
 		local EntriesList = p1:createEntriesList()
@@ -240,7 +240,7 @@ function ItemsList.renderItemsList(p1) --[[ Line: 217 ]]
 	end)
 end
 
-function ItemsList:renderLoading() --[[ Line: 294 ]]
+function ItemsList:renderLoading()
 	-- upvalues: RoactModule (copy), Skeleton (copy)
 	return RoactModule.createElement(Skeleton, {
 		Size = UDim2.fromScale(1, 1),
@@ -249,7 +249,7 @@ function ItemsList:renderLoading() --[[ Line: 294 ]]
 	})
 end
 
-function ItemsList.renderFailed(p1) --[[ Line: 302 ]]
+function ItemsList.renderFailed(p1)
 	-- upvalues: RoactModule (copy), EmptyState (copy), RobloxTranslatorModule (copy)
 	return RoactModule.createElement(EmptyState, {
 		text = RobloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.ItemsListLoadingFailed"),
@@ -258,13 +258,13 @@ function ItemsList.renderFailed(p1) --[[ Line: 302 ]]
 	})
 end
 
-function ItemsList.render(p1) --[[ Line: 310 ]]
+function ItemsList.render(p1)
 	local NoLoadingFailed: boolean = p1.state.loading and not p1.props.loadingFailed
 	
 	return if NoLoadingFailed then p1:renderLoading() elseif p1.state.addedAssetNames then p1:renderItemsList() else p1:renderFailed()
 end
 
-function ItemsList.didMount(p1) --[[ Line: 322 ]]
+function ItemsList.didMount(p1)
 	p1.mounted = true
 	
 	if p1.props.humanoidDescription then
@@ -273,7 +273,7 @@ function ItemsList.didMount(p1) --[[ Line: 322 ]]
 	p1.checkIsScrollable()
 end
 
-function ItemsList.didUpdate(p1, p2, _) --[[ Line: 331 ]]
+function ItemsList.didUpdate(p1, p2, _)
 	-- upvalues: RoactModule (copy)
 	p1.checkIsScrollable()
 	
@@ -287,14 +287,14 @@ function ItemsList.didUpdate(p1, p2, _) --[[ Line: 331 ]]
 	end
 end
 
-function ItemsList.willUnmount(p1) --[[ Line: 345 ]]
+function ItemsList.willUnmount(p1)
 	p1.mounted = false
 end
 
-return RoactRoduxModule.connect(nil, function(Callback) --[[ Line: 349 | Named "mapDispatchToProps" ]]
+return RoactRoduxModule.connect(nil, function(Callback)
 	-- upvalues: AddAnalyticsInfoModule (copy)
 	return {
-		addAnalyticsInfo = function(p1) --[[ Line: 351 ]]
+		addAnalyticsInfo = function(p1)
 			-- upvalues: Callback (copy), AddAnalyticsInfoModule (upval)
 			return Callback(AddAnalyticsInfoModule(p1))
 		end

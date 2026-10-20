@@ -7,7 +7,7 @@ if require(AppChat.Flags.FFlagAppChatPresenceStoreMigration) then
 else
 	local List = { "OFFLINE", "ONLINE", "IN_GAME", "IN_STUDIO" }
 	
-	local function convertFromOldPresenceModel(p1) --[[ Line: 23 ]]
+	local function convertFromOldPresenceModel(p1)
 		-- upvalues: RoduxPresenceModule (copy), Llama (copy), List (copy)
 		return RoduxPresenceModule.Actions.ReceivedUserPresence((RoduxPresenceModule.Models.Presence.new(Llama.Dictionary.join(p1, {
 			presence = Llama.None,
@@ -19,14 +19,14 @@ else
 	end
 	
 	local config = {
-		ReceivedUserPresence = function(p1) --[[ Line: 40 ]]
+		ReceivedUserPresence = function(p1)
 			-- upvalues: convertFromOldPresenceModel (copy)
 			return if p1.payload then p1 else { convertFromOldPresenceModel(p1) }
 		end
 	}
 	local InstallReducerResult = RoduxPresenceModule.installReducer()
 	
-	return function(p1, p2) --[[ Line: 51 ]]
+	return function(p1, p2)
 		-- upvalues: config (copy), Llama (copy), InstallReducerResult (copy)
 		local P2 = p1 or {
 			byUserId = {},

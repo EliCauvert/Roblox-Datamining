@@ -11,13 +11,13 @@ local AvatarSwitcherGridInitialNumToRender = game:DefineFastInt("AvatarSwitcherG
 local AvatarSwitcherGridOnEndReachedThresholdRatio = game:DefineFastInt("AvatarSwitcherGridOnEndReachedThreshold", 200) / 100
 local AvatarSwitcherTileSize = if require(Parent.AvatarExperienceFlags).FFlagAvatarSwitcherUiFixes then game:DefineFastInt("AvatarSwitcherTileSize", 98) else 108
 
-return function(p1) --[[ Line: 35 | Named "OutfitsGrid" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), OutfitsRowModule (copy), AvatarSwitcherTileSize (copy), FoundationModule (copy), FlatList (copy), AvatarSwitcherGridWindowSize (copy), AvatarSwitcherGridInitialNumToRender (copy), AvatarSwitcherGridOnEndReachedThresholdRatio (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(3)
-	ReactModule.useEffect(function() --[[ Line: 40 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy)
-		task.spawn(function() --[[ Line: 41 ]]
+		task.spawn(function()
 			-- upvalues: p1 (upval)
 			p1.fetchNextOutfitsPage()
 		end)
@@ -25,7 +25,7 @@ return function(p1) --[[ Line: 35 | Named "OutfitsGrid" ]]
 	
 	return (ReactModule.createElement(FoundationModule.View, {
 		tag = "size-full-full",
-		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 64 ]]
+		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
 			-- upvalues: UseStateResult2 (copy), AvatarSwitcherTileSize (upval)
 			UseStateResult2((math.max(3, (math.floor(Frame.AbsoluteSize.X / AvatarSwitcherTileSize)))))
 		end, {}),
@@ -43,7 +43,7 @@ return function(p1) --[[ Line: 35 | Named "OutfitsGrid" ]]
 			}
 		}, {
 			OutfitsList = ReactModule.createElement(FlatList, {
-				renderItem = ReactModule.useCallback(function(p2) --[[ Line: 55 ]]
+				renderItem = ReactModule.useCallback(function(p2)
 					-- upvalues: ReactModule (upval), OutfitsRowModule (upval), UseStateResult (copy), p1 (copy)
 					return ReactModule.createElement(OutfitsRowModule, {
 						outfits = p2.item,
@@ -52,7 +52,7 @@ return function(p1) --[[ Line: 35 | Named "OutfitsGrid" ]]
 						disabled = p1.disabled
 					})
 				end, { UseStateResult }),
-				data = ReactModule.useMemo(function() --[[ Line: 46 ]]
+				data = ReactModule.useMemo(function()
 					-- upvalues: p1 (copy), UseStateResult (copy)
 					local List = {}
 					

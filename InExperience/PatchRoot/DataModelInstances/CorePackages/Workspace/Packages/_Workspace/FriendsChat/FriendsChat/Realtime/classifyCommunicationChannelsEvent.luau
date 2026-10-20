@@ -16,7 +16,7 @@ local config1 = {
 	ChannelMarkedRead = "fetchConversationDetails"
 }
 
-return function(p1) --[[ Line: 66 | Named "classifyCommunicationChannelsEvent" ]]
+return function(p1)
 	-- upvalues: config (copy), CommunicationChannelsTypesModule (copy), config1 (copy)
 	if p1 == nil then
 		return config

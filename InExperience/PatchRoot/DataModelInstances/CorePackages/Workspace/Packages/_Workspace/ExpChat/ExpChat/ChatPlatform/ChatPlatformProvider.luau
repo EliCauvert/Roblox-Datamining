@@ -18,34 +18,34 @@ local ChatWindowSettings = {
 	ChatWindowMaxHeight = ConfigModule.ChatWindowMaxHeight
 }
 
-local function makeInterpolators(UseContextResult) --[[ Line: 60 ]]
+local function makeInterpolators(UseContextResult)
 	-- upvalues: ClientSettingsUtilityModule (copy)
 	return {
-		getBackgroundColor = function(p1) --[[ Line: 62 ]]
+		getBackgroundColor = function(p1)
 			-- upvalues: ClientSettingsUtilityModule (upval), UseContextResult (copy)
 			return ClientSettingsUtilityModule.getBackgroundColor(p1, UseContextResult)
 		end,
-		getBackgroundTransparency = function(p1) --[[ Line: 65 ]]
+		getBackgroundTransparency = function(p1)
 			-- upvalues: ClientSettingsUtilityModule (upval), UseContextResult (copy)
 			return ClientSettingsUtilityModule.getBackgroundTransparency(p1, UseContextResult)
 		end
 	}
 end
 
-return function(p1) --[[ Line: 71 | Named "ChatPlatformProvider" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ClientSettingsModule (copy), FFlagExpChatUseChatConfigStore (copy), SignalsReactModule (copy), GetChatConfigurationStoreModule (copy), UseSelectorFunction (copy), makeInterpolators (copy), UsePropSignalFunction (copy), ChatWindowSettings (copy), GetTransparencyStoreModule (copy), Provider (copy)
 	local UseContextResult = ReactModule.useContext(ClientSettingsModule)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 85 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: makeInterpolators (upval), UseContextResult (copy)
 		return (makeInterpolators(UseContextResult))
 	end, { UseContextResult })
-	local UsePropSignalResult = UsePropSignalFunction(if FFlagExpChatUseChatConfigStore then SignalsReactModule.useSignalState(GetChatConfigurationStoreModule(false).getChatInputBarSettings) else UseSelectorFunction(function(p2) --[[ Line: 78 ]]
+	local UsePropSignalResult = UsePropSignalFunction(if FFlagExpChatUseChatConfigStore then SignalsReactModule.useSignalState(GetChatConfigurationStoreModule(false).getChatInputBarSettings) else UseSelectorFunction(function(p2)
 		return p2.ChatLayout.ChatInputBarSettings
 	end))
 	local UsePropSignalResult1 = UsePropSignalFunction(UseMemoResult)
 	
 	return ReactModule.createElement(Provider, {
-		value = ReactModule.useMemo(function() --[[ Line: 92 ]]
+		value = ReactModule.useMemo(function()
 			-- upvalues: UsePropSignalResult (copy), ChatWindowSettings (upval), UsePropSignalResult1 (copy), GetTransparencyStoreModule (upval)
 			return {
 				getChatInputBarSettings = UsePropSignalResult,

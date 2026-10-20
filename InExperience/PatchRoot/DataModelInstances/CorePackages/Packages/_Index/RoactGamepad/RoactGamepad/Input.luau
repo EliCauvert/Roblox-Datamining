@@ -14,7 +14,7 @@ local config = {
 }
 local t = {}
 
-local function _() --[[ Line: 26 | Named "initializeEngineGamepadState" ]]
+local function _()
 	return {
 		gamepadConnectedConnection = nil,
 		gamepadDisconnectedConnection = nil,
@@ -23,7 +23,7 @@ local function _() --[[ Line: 26 | Named "initializeEngineGamepadState" ]]
 	}
 end
 
-local _ = function(Key) --[[ Line: 35 | Named "getEngineState" ]]
+local _ = function(Key)
 	-- upvalues: t (copy)
 	if t[Key] == nil then
 		t[Key] = {
@@ -36,7 +36,7 @@ local _ = function(Key) --[[ Line: 35 | Named "getEngineState" ]]
 	return t[Key]
 end
 
-local function updatePrimaryGamepad(Key) --[[ Line: 43 ]]
+local function updatePrimaryGamepad(Key)
 	-- upvalues: t (copy)
 	if t[Key] == nil then
 		t[Key] = {
@@ -63,9 +63,9 @@ local function updatePrimaryGamepad(Key) --[[ Line: 43 ]]
 	end
 end
 
-local _ = function(p1, p2) --[[ Line: 64 | Named "getInputEvent" ]]
+local _ = function(p1, p2)
 	-- upvalues: DebugPrintModule (copy)
-	return function(Input) --[[ Line: 65 ]]
+	return function(Input)
 		-- upvalues: p2 (copy), DebugPrintModule (upval), p1 (copy)
 		if p2(Input) then
 			DebugPrintModule("[EVENT] Process input: ", Input.KeyCode, "-", Input.UserInputState)
@@ -74,7 +74,7 @@ local _ = function(p1, p2) --[[ Line: 64 | Named "getInputEvent" ]]
 	end
 end
 
-local function wrapWithGamepadStateListener(Key, Connection) --[[ Line: 73 ]]
+local function wrapWithGamepadStateListener(Key, Connection)
 	-- upvalues: t (copy), updatePrimaryGamepad (copy)
 	if t[Key] == nil then
 		t[Key] = {
@@ -88,18 +88,18 @@ local function wrapWithGamepadStateListener(Key, Connection) --[[ Line: 73 ]]
 	
 	if Entry.onStepConnections == 0 then
 		updatePrimaryGamepad(Key)
-		Entry.gamepadConnectedConnection = Key.subscribeToGamepadConnected(function() --[[ Line: 78 ]]
+		Entry.gamepadConnectedConnection = Key.subscribeToGamepadConnected(function()
 			-- upvalues: updatePrimaryGamepad (upval), Key (copy)
 			updatePrimaryGamepad(Key)
 		end)
-		Entry.gamepadDisconnectedConnection = Key.subscribeToGamepadDisconnected(function() --[[ Line: 81 ]]
+		Entry.gamepadDisconnectedConnection = Key.subscribeToGamepadDisconnected(function()
 			-- upvalues: updatePrimaryGamepad (upval), Key (copy)
 			updatePrimaryGamepad(Key)
 		end)
 	end
 	Entry.onStepConnections += 1
 	
-	return function() --[[ Line: 87 ]]
+	return function()
 		-- upvalues: Connection (copy), Entry (copy)
 		Connection:Disconnect()
 		Entry.onStepConnections -= 1
@@ -113,8 +113,8 @@ local function wrapWithGamepadStateListener(Key, Connection) --[[ Line: 73 ]]
 	end
 end
 
-local _ = function(Kind) --[[ Line: 167 | Named "makeInputBinding" ]]
-	return function(KeyCode, Action, Meta) --[[ Line: 168 ]]
+local _ = function(Kind)
+	return function(KeyCode, Action, Meta)
 		-- upvalues: Kind (copy)
 		assert(typeof(KeyCode) == "EnumItem" and KeyCode.EnumType == Enum.KeyCode, "Invalid argument #1: expected a member of Enum.KeyCode")
 		assert(typeof(Action) == "function", "Invalid argument #2: expected a function")
@@ -130,7 +130,7 @@ end
 
 local Begin = InputBindingKindModule.Begin
 
-local function OnBegin(KeyCode, Action, Meta) --[[ Line: 168 ]]
+local function OnBegin(KeyCode, Action, Meta)
 	-- upvalues: Begin (copy)
 	assert(typeof(KeyCode) == "EnumItem" and KeyCode.EnumType == Enum.KeyCode, "Invalid argument #1: expected a member of Enum.KeyCode")
 	assert(typeof(Action) == "function", "Invalid argument #2: expected a function")
@@ -145,7 +145,7 @@ end
 
 local End = InputBindingKindModule.End
 
-local function OnEnd(KeyCode, Action, Meta) --[[ Line: 168 ]]
+local function OnEnd(KeyCode, Action, Meta)
 	-- upvalues: End (copy)
 	assert(typeof(KeyCode) == "EnumItem" and KeyCode.EnumType == Enum.KeyCode, "Invalid argument #1: expected a member of Enum.KeyCode")
 	assert(typeof(Action) == "function", "Invalid argument #2: expected a function")
@@ -161,12 +161,12 @@ end
 local Step = InputBindingKindModule.Step
 
 return {
-	getUniqueKey = function(p1): string --[[ Line: 191 ]]
+	getUniqueKey = function(p1): string
 		return if p1.keyCode then tostring(p1.kind) .. "-" .. tostring(p1.keyCode) else tostring(p1.kind)
 	end,
-	connectToEvent = function(p1, Key) --[[ Line: 101 ]]
+	connectToEvent = function(p1, Key)
 		-- upvalues: ConfigModule (copy), InputBindingKindModule (copy), config (copy), DebugPrintModule (copy), t (copy), wrapWithGamepadStateListener (copy)
-		local function _(Input): boolean --[[ Line: 102 | Named "matchesBindingKeyCode" ]]
+		local function _(Input): boolean
 			-- upvalues: ConfigModule (upval), p1 (copy)
 			if ConfigModule.DebugKeyboardBindings and table.find(ConfigModule.DebugKeyboardBindings[p1.keyCode] or {}, Input.KeyCode) then
 				return true
@@ -176,7 +176,7 @@ return {
 		end
 		
 		if p1.kind == InputBindingKindModule.Begin then
-			local function matchInput(Input) --[[ Line: 114 ]]
+			local function matchInput(Input)
 				-- upvalues: config (upval), ConfigModule (upval), p1 (copy)
 				local Entry = config[Input.UserInputType]
 				
@@ -194,7 +194,7 @@ return {
 			end
 			
 			local Action = p1.action
-			local SubscribeToInputBeganResult = Key.subscribeToInputBegan(function(Input) --[[ Line: 65 ]]
+			local SubscribeToInputBeganResult = Key.subscribeToInputBegan(function(Input)
 				-- upvalues: matchInput (copy), DebugPrintModule (upval), Action (copy)
 				if matchInput(Input) then
 					DebugPrintModule("[EVENT] Process input: ", Input.KeyCode, "-", Input.UserInputState)
@@ -202,13 +202,13 @@ return {
 				end
 			end)
 			
-			return function() --[[ Line: 122 ]]
+			return function()
 				-- upvalues: SubscribeToInputBeganResult (copy)
 				SubscribeToInputBeganResult:Disconnect()
 			end
 		end
 		if p1.kind == InputBindingKindModule.End then
-			local function matchInput1(Input) --[[ Line: 126 | Named "matchInput" ]]
+			local function matchInput1(Input)
 				-- upvalues: config (upval), ConfigModule (upval), p1 (copy)
 				local Entry = config[Input.UserInputType]
 				
@@ -226,7 +226,7 @@ return {
 			end
 			
 			local ActionFunction = p1.action
-			local SubscribeToInputEndedResult = Key.subscribeToInputEnded(function(Input) --[[ Line: 65 ]]
+			local SubscribeToInputEndedResult = Key.subscribeToInputEnded(function(Input)
 				-- upvalues: matchInput1 (copy), DebugPrintModule (upval), ActionFunction (copy)
 				if matchInput1(Input) then
 					DebugPrintModule("[EVENT] Process input: ", Input.KeyCode, "-", Input.UserInputState)
@@ -234,7 +234,7 @@ return {
 				end
 			end)
 			
-			return function() --[[ Line: 134 ]]
+			return function()
 				-- upvalues: SubscribeToInputEndedResult (copy)
 				SubscribeToInputEndedResult:Disconnect()
 			end
@@ -250,7 +250,7 @@ return {
 			end
 			local Entry = t[Key]
 			
-			return (wrapWithGamepadStateListener(Key, (Key.subscribeToRenderStepped(function(p2) --[[ Line: 140 ]]
+			return (wrapWithGamepadStateListener(Key, (Key.subscribeToRenderStepped(function(p2)
 				-- upvalues: p1 (copy), Entry (copy)
 				p1.action(Entry.primaryGamepadState[p1.keyCode], p2)
 			end))))
@@ -268,7 +268,7 @@ return {
 			end
 			local Entry1 = t[Key]
 			
-			return (wrapWithGamepadStateListener(Key, (Key.subscribeToRenderStepped(function(p2) --[[ Line: 149 ]]
+			return (wrapWithGamepadStateListener(Key, (Key.subscribeToRenderStepped(function(p2)
 				-- upvalues: Entry1 (copy), p1 (copy)
 				p1.action({
 					[Enum.KeyCode.Thumbstick1] = Entry1.primaryGamepadState[Enum.KeyCode.Thumbstick1],
@@ -283,7 +283,7 @@ return {
 	PublicInterface = {
 		onBegin = OnBegin,
 		onEnd = OnEnd,
-		onStep = function(KeyCode, Action, Meta) --[[ Line: 168 ]]
+		onStep = function(KeyCode, Action, Meta)
 			-- upvalues: Step (copy)
 			assert(typeof(KeyCode) == "EnumItem" and KeyCode.EnumType == Enum.KeyCode, "Invalid argument #1: expected a member of Enum.KeyCode")
 			assert(typeof(Action) == "function", "Invalid argument #2: expected a function")
@@ -295,7 +295,7 @@ return {
 				meta = Meta
 			}
 		end,
-		onMoveStep = function(Action) --[[ Line: 184 ]]
+		onMoveStep = function(Action)
 			-- upvalues: InputBindingKindModule (copy)
 			return { kind = InputBindingKindModule.MoveStep, action = Action }
 		end

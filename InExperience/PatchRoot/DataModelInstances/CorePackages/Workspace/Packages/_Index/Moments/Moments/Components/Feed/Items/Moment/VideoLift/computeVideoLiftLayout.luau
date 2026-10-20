@@ -4,14 +4,14 @@ local TweenService = game:GetService("TweenService")
 local GetFitSizeFunction = require(Moments.Parent.MomentsCommon).Utils.getFitSize
 local Quad = Enum.EasingStyle.Quad
 
-local function _(p1) --[[ Line: 39 | Named "getDisplayedHeight" ]]
+local function _(p1)
 	-- upvalues: GetFitSizeFunction (copy)
 	local Resolution = p1.resolution
 	
 	return if p1.scaleType == Enum.ScaleType.Fit and Resolution ~= nil then p1.itemSize.Y * GetFitSizeFunction(p1.itemSize, Resolution).Y.Scale else p1.itemSize.Y
 end
 
-return function(p1) --[[ Line: 49 | Named "computeVideoLiftLayout" ]]
+return function(p1)
 	-- upvalues: GetFitSizeFunction (copy), TweenService (copy), Quad (copy)
 	local Lift = p1.lift
 	local ItemSize = p1.itemSize

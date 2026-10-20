@@ -14,18 +14,18 @@ local Device = FoundationModule.Enums.Device
 UIBloxModule.init(require(Parent.Dev.RobloxAppUIBloxConfig))
 local AppStyleProvider = UIBloxModule.App.Style.AppStyleProvider
 
-local function createLocalization() --[[ Line: 23 ]]
+local function createLocalization()
 	return {
-		Format = function(_, p1) --[[ Line: 25 ]]
+		Format = function(_, p1)
 			return p1
 		end,
-		GetLocale = function(): string --[[ Line: 28 ]]
+		GetLocale = function(): string
 			return "locale"
 		end
 	}
 end
 
-local function createStore() --[[ Line: 34 ]]
+local function createStore()
 	-- upvalues: RoduxModule (copy)
 	return RoduxModule.Store.new(RoduxModule.createReducer({}, {}), nil, { RoduxModule.makeThunkMiddleware({}) })
 end
@@ -43,9 +43,9 @@ return {
 	storyRoot = AvatarExperienceInspectAndBuy,
 	roact = ReactModule,
 	reactRoblox = ReactRobloxModule,
-	mapStory = function(p1) --[[ Line: 71 ]]
+	mapStory = function(p1)
 		-- upvalues: config (copy), ReactModule (copy), LocalizationProvider (copy), createLocalization (copy), AppStyleProvider (copy), config2 (copy), RoactRoduxModule (copy), createStore (copy), DesignTokenProvider (copy), FoundationProvider (copy), config1 (copy)
-		return function(p2) --[[ Line: 72 ]]
+		return function(p2)
 			-- upvalues: config (upval), ReactModule (upval), LocalizationProvider (upval), createLocalization (upval), AppStyleProvider (upval), config2 (upval), RoactRoduxModule (upval), createStore (upval), DesignTokenProvider (upval), FoundationProvider (upval), config1 (upval), p1 (copy)
 			return ReactModule.createElement(LocalizationProvider, { localization = createLocalization() }, {
 				AppStyleProvider = ReactModule.createElement(AppStyleProvider, { style = p2 and config2[p2.theme] or config2.Default }, {

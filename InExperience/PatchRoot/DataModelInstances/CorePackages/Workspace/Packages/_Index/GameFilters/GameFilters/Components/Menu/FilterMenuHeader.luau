@@ -9,7 +9,7 @@ local ResponsiveModule = require(Parent.Responsive)
 local FFlagLuaAppChartsFilterOptionTextTag = require(Parent.SharedFlags).FFlagLuaAppChartsFilterOptionTextTag
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
-return function(Frame) --[[ Line: 21 ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), ResponsiveModule (copy), ReactModule (copy), FFlagLuaAppChartsFilterOptionTextTag (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), IconButton (copy), IconSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsUsePreferredInputResultMatch = ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Directional
@@ -20,7 +20,7 @@ return function(Frame) --[[ Line: 21 ]]
 		Size = if FFlagLuaAppChartsFilterOptionTextTag then nil else UDim2.fromScale(1, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		LayoutOrder = Frame.LayoutOrder,
-		[ReactModule.Change.AbsoluteSize] = function(Frame1) --[[ Line: 33 ]]
+		[ReactModule.Change.AbsoluteSize] = function(Frame1)
 			-- upvalues: Frame (copy)
 			Frame.onHeightChanged(Frame1.AbsoluteSize.Y)
 		end

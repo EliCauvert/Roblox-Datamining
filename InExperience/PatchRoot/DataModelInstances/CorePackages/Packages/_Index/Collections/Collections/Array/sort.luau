@@ -2,11 +2,11 @@
 local NoneModule = require(Parent.Object.None)
 local _ = require(Parent.Parent.ES7Types)
 
-local function v3(p1, p2): boolean --[[ Line: 23 ]]
+local function v3(p1, p2): boolean
 	return type(p1) .. tostring(p1) < type(p2) .. tostring(p2)
 end
 
-return function(List, Callback) --[[ Line: 27 ]]
+return function(List, Callback)
 	-- upvalues: v3 (copy), NoneModule (copy)
 	local v1: (any, any) -> boolean = v3
 	
@@ -14,7 +14,7 @@ return function(List, Callback) --[[ Line: 27 ]]
 		if typeof(Callback) ~= "function" then
 			error("invalid argument to Array.sort: compareFunction must be a function")
 		end
-		v1 = function(A, B): boolean --[[ Line: 34 ]]
+		v1 = function(A, B): boolean
 			-- upvalues: Callback (copy)
 			local CallbackResult: number = Callback(A, B)
 			

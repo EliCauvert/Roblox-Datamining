@@ -9,7 +9,7 @@ local RequestInternalWrapperFunction = require(Parent1.Http).NetworkLayers.reque
 local CoreScriptsRootProvider = require(Parent1.CoreScriptsRoactCommon).CoreScriptsRootProvider
 local GroupInExperiencePromptsModule = require(Parent.Components.CoreUI.GroupInExperiencePrompts)
 
-local function v9(p1, p2) --[[ Line: 27 ]]
+local function v9(p1, p2)
 	-- upvalues: RoactCompatModule (copy), ReactModule (copy), CoreScriptsRootProvider (copy), RoactServices (copy), RoactNetworking (copy), RequestInternalWrapperFunction (copy), HttpService (copy)
 	return RoactCompatModule.mount(ReactModule.createElement(CoreScriptsRootProvider, {}, {
 		RoactServicesProvider = ReactModule.createElement(RoactServices.ServiceProvider, {
@@ -21,18 +21,18 @@ local function v9(p1, p2) --[[ Line: 27 ]]
 end
 
 return {
-	createApp = function() --[[ Line: 41 ]]
+	createApp = function()
 		-- upvalues: v9 (copy), ReactModule (copy), GroupInExperiencePromptsModule (copy), RoactCompatModule (copy)
 		local config = { _coreUiHandle = nil }
 		
-		function config.mountCoreUI(p1) --[[ Line: 46 ]]
+		function config.mountCoreUI(p1)
 			-- upvalues: config (copy), v9 (upval), ReactModule (upval), GroupInExperiencePromptsModule (upval)
 			config._coreUiHandle = v9(p1, {
 				GroupInExperiencePrompts = ReactModule.createElement(GroupInExperiencePromptsModule)
 			})
 		end
 		
-		function config.unMountCoreUI() --[[ Line: 52 ]]
+		function config.unMountCoreUI()
 			-- upvalues: config (copy), RoactCompatModule (upval)
 			if config._coreUiHandle then
 				RoactCompatModule.unmount(config._coreUiHandle)

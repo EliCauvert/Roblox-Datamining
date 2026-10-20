@@ -1,11 +1,11 @@
 ﻿local List = {}
 
 return {
-	register = function(Value) --[[ Line: 5 ]]
+	register = function(Value)
 		-- upvalues: List (copy)
 		table.insert(List, Value)
 		
-		return function() --[[ Line: 8 ]]
+		return function()
 			-- upvalues: List (upval), Value (copy)
 			local FoundIndex: number? = table.find(List, Value)
 			
@@ -14,7 +14,7 @@ return {
 			end
 		end
 	end,
-	consume = function(): boolean --[[ Line: 16 ]]
+	consume = function(): boolean
 		-- upvalues: List (copy)
 		local Entry: () -> () = List[#List]
 		

@@ -21,17 +21,17 @@ local GetFIntThrottleInviteSendEndpointDelayModule = require(Modules.Flags.GetFI
 local GetFFlagLuaAppEnableOpenTypeSupportFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagLuaAppEnableOpenTypeSupport
 local _Rect = Rect.new(10, 10, 10, 10)
 
-return function(p1) --[[ Line: 64 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), InviteStatus (copy), Players (copy), GetFFlagEnableNewInviteSendEndpointModule (copy), GameInviteEvents (copy), GetFFlagAbuseReportAnalyticsHasLaunchDataModule (copy), GetFFlagThrottleInviteSendEndpointModule (copy), ThrottleFunctionCallModule (copy), GetFIntThrottleInviteSendEndpointDelayModule (copy), _Rect (copy), ThemeModule (copy), ReactRobloxModule (copy), SingleUserThumbnailModule (copy), PresenceUtilModule (copy), Constants (copy), AppFonts (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), OpenTypeSupport (copy), InviteButtonModule (copy)
 	local User = p1.user
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 66 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), InviteStatus (upval), User (copy), Players (upval), GetFFlagEnableNewInviteSendEndpointModule (upval), GameInviteEvents (upval), GetFFlagAbuseReportAnalyticsHasLaunchDataModule (upval)
 		local InviteUserFunction = p1.inviteUser
 		local InviteStatus1 = p1.inviteStatus
 		local Analytics = p1.analytics
 		
 		if InviteStatus1 and InviteStatus1 ~= InviteStatus.Failed then return end
-		local function v25(Result) --[[ Line: 74 ]]
+		local function v25(Result)
 			-- upvalues: User (upval), Players (upval), Analytics (copy)
 			if not Result then return end
 			local list = { User.id }
@@ -47,11 +47,11 @@ return function(p1) --[[ Line: 64 ]]
 				recipient = User.id,
 				isLaunchDataProvided = if GetFFlagAbuseReportAnalyticsHasLaunchDataModule() then IsNotLaunchDataMatch else nil
 			})
-			InviteUserFunction(User.id, Analytics, p1.trigger, p1.inviteMessageId, p1.launchData):andThen(v25, function() --[[ Line: 97 ]] end)
+			InviteUserFunction(User.id, Analytics, p1.trigger, p1.inviteMessageId, p1.launchData):andThen(v25, function() end)
 			
 			return
 		else
-			InviteUserFunction(User.id):andThen(v25, function() --[[ Line: 100 ]] end)
+			InviteUserFunction(User.id):andThen(v25, function() end)
 		end
 	end, { p1.inviteUser, p1.inviteStatus, p1.analytics, User })
 	

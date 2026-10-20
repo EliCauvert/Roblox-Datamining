@@ -29,23 +29,23 @@ local GetUserAccessStore = if FFlagUseSignalsForUserAccess then require(Parent.U
 local PersonaLivenessV2QrPollDelaySec = game:DefineFastInt("PersonaLivenessV2QrPollDelaySec", 6)
 local PersonaLivenessV2QrPollMaxRetries = game:DefineFastInt("PersonaLivenessV2QrPollMaxRetries", 60)
 
-local function defaultGetLocalUserId() --[[ Line: 72 ]]
+local function defaultGetLocalUserId()
 	-- upvalues: Players (copy)
 	local LocalPlayer = Players.LocalPlayer
 	
 	return if LocalPlayer then LocalPlayer.UserId else nil
 end
 
-local function _(p1): string --[[ Line: 82 | Named "buildDeeplink" ]]
+local function _(p1): string
 	return "https://ro.blox.com/Ebh5" .. "?pid=QR_code&c=liveness_onelink" .. "&is_retargeting=false" .. "&af_dp=" .. "roblox%3A%2F%2Fnavigation%2Faccount_unlock%3Fuser_id=" .. tostring(p1) .. "&deep_link_value=" .. "roblox%3A%2F%2Fnavigation%2Faccount_unlock%3Fuser_id=" .. tostring(p1)
 end
 
-local function PersonaLivenessQRFlow(p1) --[[ Line: 94 ]]
+local function PersonaLivenessQRFlow(p1)
 	-- upvalues: UseDispatchFunction (copy), UseRoactServiceFunction (copy), AppLogging (copy), RoactNetworking (copy), FFlagUseSignalsForUserAccess (copy), UseSignalStateFunction (copy), GetUserAccessStore (copy), UseSelectorFunction (copy), defaultGetLocalUserId (copy), UseLocalizationFunction (copy), ReactModule (copy), GetFFlagEnhancedPersonaLivenessEventsFunction (copy), BiometricChallengeEventModule (copy), ChallengeEventConstantsModule (copy), BiometricTypeEnum (copy), TelemetryReasonsModule (copy), PersonaLivenessV2QrPollMaxRetries (copy), PersonaLivenessV2QrPollDelaySec (copy), Loading (copy), IconSize (copy), FullscreenPageWithSafeArea (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigableSurfaceIdentifierEnum (copy), QRDeepLinkDialog (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(AppLogging)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(RoactNetworking)
-	local UseSignalStateResult = if FFlagUseSignalsForUserAccess then UseSignalStateFunction(GetUserAccessStore(false).getUserAccessRestrictionDetail) else UseSelectorFunction(function(p2) --[[ Line: 101 ]]
+	local UseSignalStateResult = if FFlagUseSignalsForUserAccess then UseSignalStateFunction(GetUserAccessStore(false).getUserAccessRestrictionDetail) else UseSelectorFunction(function(p2)
 		return p2.UserAccess and p2.UserAccess.restrictionDetail
 	end)
 	local v1: number = (p1.getLocalUserId or defaultGetLocalUserId)()
@@ -61,7 +61,7 @@ local function PersonaLivenessQRFlow(p1) --[[ Line: 94 ]]
 		}
 	})
 	local UseRefResult = ReactModule.useRef(false)
-	local UseResult = ReactModule.useCallback(function(Reason) --[[ Line: 127 ]]
+	local UseResult = ReactModule.useCallback(function(Reason)
 		-- upvalues: UseRefResult (copy), p1 (copy), GetFFlagEnhancedPersonaLivenessEventsFunction (upval), UseRoactServiceResult (copy), BiometricChallengeEventModule (upval), ChallengeEventConstantsModule (upval), BiometricTypeEnum (upval)
 		if UseRefResult.current then return end
 		UseRefResult.current = true
@@ -88,7 +88,7 @@ local function PersonaLivenessQRFlow(p1) --[[ Line: 94 ]]
 		p1.challengeId,
 		p1.onChallengeAbandoned
 	})
-	local UseResult1 = ReactModule.useCallback(function(p2, Reason) --[[ Line: 150 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2, Reason)
 		-- upvalues: UseRefResult (copy), p1 (copy), GetFFlagEnhancedPersonaLivenessEventsFunction (upval), UseRoactServiceResult (copy), BiometricChallengeEventModule (upval), ChallengeEventConstantsModule (upval), BiometricTypeEnum (upval)
 		if UseRefResult.current then return end
 		UseRefResult.current = true
@@ -111,7 +111,7 @@ local function PersonaLivenessQRFlow(p1) --[[ Line: 94 ]]
 			})
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 173 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Text (copy), GetFFlagEnhancedPersonaLivenessEventsFunction (upval), UseResult1 (copy), TelemetryReasonsModule (upval)
 		if not Text then
 			if GetFFlagEnhancedPersonaLivenessEventsFunction() then
@@ -122,7 +122,7 @@ local function PersonaLivenessQRFlow(p1) --[[ Line: 94 ]]
 			UseResult1("MissingLocalUserId")
 		end
 	end, { Text, UseResult1 })
-	ReactModule.useEffect(function() --[[ Line: 185 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Text (copy), UseSignalStateResult (copy), GetFFlagEnhancedPersonaLivenessEventsFunction (upval), UseRefResult (copy), UseRoactServiceResult (copy), BiometricChallengeEventModule (upval), ChallengeEventConstantsModule (upval), p1 (copy), BiometricTypeEnum (upval), TelemetryReasonsModule (upval), UseResult (copy)
 		if not Text or UseSignalStateResult ~= nil then return end
 		if not GetFFlagEnhancedPersonaLivenessEventsFunction() then
@@ -146,7 +146,7 @@ local function PersonaLivenessQRFlow(p1) --[[ Line: 94 ]]
 		UseSignalStateResult, Text, UseResult, UseRoactServiceResult, p1.challengeId,
 		p1.onChallengeAbandoned
 	})
-	ReactModule.useEffect(function() --[[ Line: 216 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Text (copy), GetFFlagEnhancedPersonaLivenessEventsFunction (upval), UseRoactServiceResult (copy), BiometricChallengeEventModule (upval), ChallengeEventConstantsModule (upval), p1 (copy), BiometricTypeEnum (upval), TelemetryReasonsModule (upval), PersonaLivenessV2QrPollMaxRetries (upval), PersonaLivenessV2QrPollDelaySec (upval), UseDispatchResult (copy), UseRoactServiceResult1 (copy), UseResult1 (copy)
 		if not Text then return end
 		if GetFFlagEnhancedPersonaLivenessEventsFunction() then
@@ -158,7 +158,7 @@ local function PersonaLivenessQRFlow(p1) --[[ Line: 94 ]]
 			})
 		end
 		local Flag = false
-		task.spawn(function() --[[ Line: 231 ]]
+		task.spawn(function()
 			-- upvalues: PersonaLivenessV2QrPollMaxRetries (upval), PersonaLivenessV2QrPollDelaySec (upval), Flag (ref), p1 (upval), UseDispatchResult (upval), UseRoactServiceResult1 (upval), GetFFlagEnhancedPersonaLivenessEventsFunction (upval), UseResult1 (upval), TelemetryReasonsModule (upval)
 			for _ = 1, PersonaLivenessV2QrPollMaxRetries do
 				task.wait(PersonaLivenessV2QrPollDelaySec)
@@ -178,7 +178,7 @@ local function PersonaLivenessQRFlow(p1) --[[ Line: 94 ]]
 			end
 		end)
 		
-		return function() --[[ Line: 252 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end
@@ -199,7 +199,7 @@ local function PersonaLivenessQRFlow(p1) --[[ Line: 94 ]]
 					title = UseLocalizationResult.title,
 					description = UseLocalizationResult.description,
 					footer = UseLocalizationResult.footer,
-					onClose = if GetFFlagEnhancedPersonaLivenessEventsFunction() then function() --[[ Line: 290 ]]
+					onClose = if GetFFlagEnhancedPersonaLivenessEventsFunction() then function()
 						-- upvalues: UseResult (copy), TelemetryReasonsModule (upval)
 						UseResult(TelemetryReasonsModule.QRUserAbandon)
 					end else UseResult
@@ -213,7 +213,7 @@ local function PersonaLivenessQRFlow(p1) --[[ Line: 94 ]]
 	})
 end
 
-return function(p2) --[[ Line: 300 | Named "PersonaLivenessContainerV2" ]]
+return function(p2)
 	-- upvalues: PersonaLivenessServiceWrapperModule (copy), ReactModule (copy), PersonaLivenessContainerModule (copy), PersonaLivenessQRFlow (copy)
 	return if PersonaLivenessServiceWrapperModule.isAvailable() then ReactModule.createElement(PersonaLivenessContainerModule, {
 		challengeId = p2.challengeId,

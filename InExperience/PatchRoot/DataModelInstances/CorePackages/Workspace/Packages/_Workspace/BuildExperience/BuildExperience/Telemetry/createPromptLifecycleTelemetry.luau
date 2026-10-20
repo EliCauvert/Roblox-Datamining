@@ -4,7 +4,7 @@ local ReportPromptFirstResponseLatencyModule = require(BuildExperience.Telemetry
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local config = { FirstResponse = "first_response", MidTurn = "mid_turn" }
 
-return function(Callback) --[[ Line: 28 | Named "createPromptLifecycleTelemetry" ]]
+return function(Callback)
 	-- upvalues: SendBuildExperienceEventModule (copy), ChatConstantsModule (copy), config (copy), ReportPromptFirstResponseLatencyModule (copy)
 	local ClockTime = nil
 	local ClockTime1 = nil
@@ -14,7 +14,7 @@ return function(Callback) --[[ Line: 28 | Named "createPromptLifecycleTelemetry"
 	local Flag1 = false
 	local DelayedThread = nil
 	
-	local function _() --[[ Line: 39 | Named "cancelStallTimer" ]]
+	local function _()
 		-- upvalues: DelayedThread (ref)
 		if DelayedThread ~= nil then
 			task.cancel(DelayedThread)
@@ -22,11 +22,11 @@ return function(Callback) --[[ Line: 28 | Named "createPromptLifecycleTelemetry"
 		end
 	end
 	
-	local _ = function(p1): number --[[ Line: 46 | Named "getMsSince" ]]
+	local _ = function(p1): number
 		return if p1 == nil then 0 else math.max(0, (math.round((os.clock() - p1) * 1000)))
 	end
 	
-	local function getLifecycleParameters() --[[ Line: 54 ]]
+	local function getLifecycleParameters()
 		-- upvalues: ClockTime (ref), v1 (ref), Flag (ref)
 		local ClockTime1 = ClockTime
 		local config = {
@@ -41,7 +41,7 @@ return function(Callback) --[[ Line: 28 | Named "createPromptLifecycleTelemetry"
 		return config
 	end
 	
-	local _ = function(p1) --[[ Line: 68 | Named "reportStall" ]]
+	local _ = function(p1)
 		-- upvalues: Flag (ref), getLifecycleParameters (copy), v1 (ref), ClockTime1 (ref), SendBuildExperienceEventModule (upval), Callback (copy)
 		Flag = true
 		local LifecycleParameters = getLifecycleParameters()
@@ -52,9 +52,9 @@ return function(Callback) --[[ Line: 28 | Named "createPromptLifecycleTelemetry"
 		SendBuildExperienceEventModule("SEND_PROMPT_STALLED", Callback(), LifecycleParameters)
 	end
 	
-	local function scheduleStallCheck(Delay) --[[ Line: 83 ]]
+	local function scheduleStallCheck(Delay)
 		-- upvalues: DelayedThread (ref), Flag1 (ref), IsWaitingOnUser (ref), ClockTime1 (ref), ChatConstantsModule (upval), scheduleStallCheck (copy), Flag (ref), getLifecycleParameters (copy), v1 (ref), config (upval), SendBuildExperienceEventModule (upval), Callback (copy)
-		DelayedThread = task.delay(Delay, function() --[[ Line: 84 ]]
+		DelayedThread = task.delay(Delay, function()
 			-- upvalues: DelayedThread (upval), Flag1 (upval), IsWaitingOnUser (upval), ClockTime1 (upval), ChatConstantsModule (upval), scheduleStallCheck (upval), Flag (upval), getLifecycleParameters (upval), v1 (upval), config (upval), SendBuildExperienceEventModule (upval), Callback (upval)
 			DelayedThread = nil
 			
@@ -79,13 +79,13 @@ return function(Callback) --[[ Line: 28 | Named "createPromptLifecycleTelemetry"
 	end
 	
 	return {
-		start = function() --[[ Line: 107 ]]
+		start = function()
 			-- upvalues: ClockTime (ref), Flag1 (ref), ClockTime1 (ref), SendBuildExperienceEventModule (upval), Callback (copy), ChatConstantsModule (upval), DelayedThread (ref), IsWaitingOnUser (ref), scheduleStallCheck (copy), Flag (ref), getLifecycleParameters (copy), v1 (ref), config (upval)
 			if ClockTime == nil and not Flag1 then
 				ClockTime = os.clock()
 				ClockTime1 = ClockTime
 				SendBuildExperienceEventModule("SEND_PROMPT_START", Callback())
-				DelayedThread = task.delay(ChatConstantsModule.PROMPT_STALL_SECONDS, function() --[[ Line: 84 ]]
+				DelayedThread = task.delay(ChatConstantsModule.PROMPT_STALL_SECONDS, function()
 					-- upvalues: DelayedThread (upval), Flag1 (upval), IsWaitingOnUser (upval), ClockTime1 (upval), ChatConstantsModule (upval), scheduleStallCheck (upval), Flag (upval), getLifecycleParameters (upval), v1 (upval), config (upval), SendBuildExperienceEventModule (upval), Callback (upval)
 					DelayedThread = nil
 					
@@ -111,7 +111,7 @@ return function(Callback) --[[ Line: 28 | Named "createPromptLifecycleTelemetry"
 				return
 			end
 		end,
-		markActivity = function(p1) --[[ Line: 119 ]]
+		markActivity = function(p1)
 			-- upvalues: ClockTime (ref), Flag1 (ref), ClockTime1 (ref), IsWaitingOnUser (ref), v1 (ref), ReportPromptFirstResponseLatencyModule (upval), Flag (ref), DelayedThread (ref), ChatConstantsModule (upval), scheduleStallCheck (copy), getLifecycleParameters (copy), config (upval), SendBuildExperienceEventModule (upval), Callback (copy)
 			if ClockTime == nil or Flag1 then return end
 			ClockTime1 = os.clock()
@@ -131,7 +131,7 @@ return function(Callback) --[[ Line: 28 | Named "createPromptLifecycleTelemetry"
 					return
 				end
 			elseif DelayedThread == nil then
-				DelayedThread = task.delay(ChatConstantsModule.PROMPT_STALL_SECONDS, function() --[[ Line: 84 ]]
+				DelayedThread = task.delay(ChatConstantsModule.PROMPT_STALL_SECONDS, function()
 					-- upvalues: DelayedThread (upval), Flag1 (upval), IsWaitingOnUser (upval), ClockTime1 (upval), ChatConstantsModule (upval), scheduleStallCheck (upval), Flag (upval), getLifecycleParameters (upval), v1 (upval), config (upval), SendBuildExperienceEventModule (upval), Callback (upval)
 					DelayedThread = nil
 					
@@ -155,7 +155,7 @@ return function(Callback) --[[ Line: 28 | Named "createPromptLifecycleTelemetry"
 				end)
 			end
 		end,
-		reportUserStop = function() --[[ Line: 141 ]]
+		reportUserStop = function()
 			-- upvalues: ClockTime (ref), Flag1 (ref), SendBuildExperienceEventModule (upval), Callback (copy), getLifecycleParameters (copy), DelayedThread (ref)
 			if ClockTime == nil or Flag1 then return end
 			SendBuildExperienceEventModule("SEND_PROMPT_STOPPED", Callback(), (getLifecycleParameters()))
@@ -166,7 +166,7 @@ return function(Callback) --[[ Line: 28 | Named "createPromptLifecycleTelemetry"
 				DelayedThread = nil
 			end
 		end,
-		finish = function() --[[ Line: 102 ]]
+		finish = function()
 			-- upvalues: Flag1 (ref), DelayedThread (ref)
 			Flag1 = true
 			

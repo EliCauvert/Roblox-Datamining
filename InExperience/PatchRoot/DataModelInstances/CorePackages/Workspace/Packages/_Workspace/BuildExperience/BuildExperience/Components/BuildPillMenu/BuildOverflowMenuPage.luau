@@ -17,12 +17,12 @@ local config = {
 	settings = "LuaApp_Build_Settings_Scroll"
 }
 
-local function _(p1) --[[ Line: 57 | Named "getPublishPreview" ]]
+local function _(p1)
 	-- upvalues: PublishLatestPreviewCardModule (copy), PublishPreviewCardModule (copy)
 	return if p1 then PublishLatestPreviewCardModule else PublishPreviewCardModule
 end
 
-local function PublishPreview(p1) --[[ Line: 61 ]]
+local function PublishPreview(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), PublishStatusModule (copy), PublishLatestPreviewCardModule (copy), PublishPreviewCardModule (copy), ReactModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({ loading = LocalizationStringsModule.BUILD_MENU_LOADING })
 	local Target = p1.target
@@ -40,7 +40,7 @@ local function PublishPreview(p1) --[[ Line: 61 ]]
 	})
 end
 
-return function(p1) --[[ Line: 82 | Named "BuildOverflowMenuPageComponent" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), PublishPreview (copy), PublishConfigurationContentContainerModule (copy), GameConfigurationContentModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), View (copy), OverflowMenuPageShellModule (copy), config (copy), PublishFooterModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		loading = LocalizationStringsModule.BUILD_MENU_LOADING,

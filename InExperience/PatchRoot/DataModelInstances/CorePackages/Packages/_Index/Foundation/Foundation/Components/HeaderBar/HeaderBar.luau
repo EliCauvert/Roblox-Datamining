@@ -17,7 +17,7 @@ local config = {
 }
 local config1 = { hasBackground = true, testId = "--foundation-header-bar" }
 
-return ReactModule.memo(function(p1) --[[ Line: 35 | Named "HeaderBar" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: WithDefaultsModule (copy), config1 (copy), UseViewportBreakpointModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), config (copy), HeaderBarContextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config1)
 	

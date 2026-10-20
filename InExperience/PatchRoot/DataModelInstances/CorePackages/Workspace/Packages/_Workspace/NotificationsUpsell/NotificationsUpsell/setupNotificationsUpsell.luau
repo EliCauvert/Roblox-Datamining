@@ -11,9 +11,9 @@ local ConfigResult = HttpRequestModule.config({
 })
 local NotificationsUpsellDisableBackgroundDismiss = game:DefineFastFlag("NotificationsUpsellDisableBackgroundDismiss", false)
 
-local function openModal(ExperienceId) --[[ Line: 22 ]]
+local function openModal(ExperienceId)
 	-- upvalues: SendEventDeferredFunction (copy), ModalEventConstantsModule (copy), NotificationModalsManagerModule (copy), GetGameNameAndDescriptionFunction (copy), ConfigResult (copy), NotificationsUpsellModalModule (copy), NotificationsUpsellDisableBackgroundDismiss (copy)
-	local function CloseCallback() --[[ Line: 23 ]]
+	local function CloseCallback()
 		-- upvalues: SendEventDeferredFunction (upval), ModalEventConstantsModule (upval), ExperienceId (copy)
 		game:GetService("ExperienceNotificationService"):InvokeOptInPromptClosed()
 		SendEventDeferredFunction(ModalEventConstantsModule.ModalContext, ModalEventConstantsModule.OptInEventName, {
@@ -22,7 +22,7 @@ local function openModal(ExperienceId) --[[ Line: 22 ]]
 		})
 	end
 	
-	local function CloseModal() --[[ Line: 30 ]]
+	local function CloseModal()
 		-- upvalues: NotificationModalsManagerModule (upval)
 		NotificationModalsManagerModule.CloseModal("UENUpsell")
 	end
@@ -31,9 +31,9 @@ local function openModal(ExperienceId) --[[ Line: 22 ]]
 	local v2 = nil
 	
 	if ExperienceId ~= "0" and ExperienceId ~= "" then
-		v1, v11 = GetGameNameAndDescriptionFunction(ConfigResult, ExperienceId):andThen(function(Result) --[[ Line: 36 ]]
+		v1, v11 = GetGameNameAndDescriptionFunction(ConfigResult, ExperienceId):andThen(function(Result)
 			return Result and Result.Name
-		end, function() --[[ Line: 38 ]]
+		end, function()
 			return nil
 		end):await()
 	end
@@ -52,9 +52,9 @@ local function openModal(ExperienceId) --[[ Line: 22 ]]
 	})
 end
 
-return function() --[[ Line: 59 ]]
+return function()
 	-- upvalues: openModal (copy)
-	game:GetService("ExperienceNotificationService").PromptOptInRequested:Connect(function() --[[ Line: 60 ]]
+	game:GetService("ExperienceNotificationService").PromptOptInRequested:Connect(function()
 		-- upvalues: openModal (upval)
 		openModal((tostring(game.GameId)))
 	end)

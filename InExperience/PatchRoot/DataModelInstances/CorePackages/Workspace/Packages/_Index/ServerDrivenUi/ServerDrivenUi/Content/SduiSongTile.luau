@@ -10,7 +10,7 @@ local ExecuteActionFunction = SduiCoreSystemModule.executeAction
 local SduiTileModule = require(ServerDrivenUi.Content.SduiTile)
 local SduiTileFooterModule = require(ServerDrivenUi.Content.SduiTileFooter)
 
-return ReactModule.memo(function(p1) --[[ Line: 28 | Named "SduiSongTile" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), UseSongAlbumArtFunction (copy), ReactModule (copy), SduiActionType (copy), ExecuteActionFunction (copy), SduiTileFooterModule (copy), SduiTileModule (copy), CryoModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local SongId = p1.songId
@@ -19,7 +19,7 @@ return ReactModule.memo(function(p1) --[[ Line: 28 | Named "SduiSongTile" ]]
 	return ReactModule.createElement(SduiTileModule, CryoModule.Dictionary.join(p1, {
 		testId = "--sdui-song-tile",
 		image = if p1.image and p1.image ~= "" then p1.image else UseSongAlbumArtResult.value,
-		onActivated = ReactModule.useCallback(function() --[[ Line: 35 ]]
+		onActivated = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy), SduiActionType (upval), SongId (copy), ExecuteActionFunction (upval)
 			if p1.onActivated then
 				p1.onActivated()
@@ -37,7 +37,7 @@ return ReactModule.memo(function(p1) --[[ Line: 28 | Named "SduiSongTile" ]]
 			p1.analyticsContext,
 			SongId
 		}),
-		footerComponent = ReactModule.useMemo(function() --[[ Line: 49 ]]
+		footerComponent = ReactModule.useMemo(function()
 			-- upvalues: p1 (copy), ReactModule (upval), SduiTileFooterModule (upval)
 			return if p1.footerComponent then p1.footerComponent else ReactModule.createElement(SduiTileFooterModule, {
 				testId = "--sdui-song-tile-footer-artist",

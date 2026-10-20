@@ -1,11 +1,11 @@
 ﻿local _ = require(script:FindFirstAncestor("Moments").Parent.MomentsCommon)
 
-return function(p1) --[[ Line: 68 | Named "swipeLatencyMachine" ]]
+return function(p1)
 	local NowFunction = p1.now
 	local Config = nil
 	local Count = 0
 	
-	local function _() --[[ Line: 76 | Named "tryComplete" ]]
+	local function _()
 		-- upvalues: Config (ref), p1 (copy)
 		local Config1 = Config
 		
@@ -23,10 +23,10 @@ return function(p1) --[[ Line: 68 | Named "swipeLatencyMachine" ]]
 	
 	local Schedule = p1.schedule or task.delay
 	
-	local _ = function(Count1) --[[ Line: 97 | Named "armCap" ]]
+	local _ = function(Count1)
 		-- upvalues: p1 (copy), Schedule (copy), Count (ref), Config (ref)
 		if p1.capMs > 0 then
-			Schedule(p1.capMs / 1000, function() --[[ Line: 101 ]]
+			Schedule(p1.capMs / 1000, function()
 				-- upvalues: Count1 (copy), Count (upval), Config (upval)
 				if Count1 == Count then
 					Config = nil
@@ -40,7 +40,7 @@ return function(p1) --[[ Line: 68 | Named "swipeLatencyMachine" ]]
 	end
 	
 	return {
-		start = function(p2, p3, Dimensions) --[[ Line: 110 ]]
+		start = function(p2, p3, Dimensions)
 			-- upvalues: Count (ref), NowFunction (copy), Config (ref), p1 (copy), Schedule (copy)
 			Count += 1
 			local NowResult = NowFunction()
@@ -53,7 +53,7 @@ return function(p1) --[[ Line: 68 | Named "swipeLatencyMachine" ]]
 			local Count1: number = Count
 			
 			if p1.capMs > 0 then
-				Schedule(p1.capMs / 1000, function() --[[ Line: 101 ]]
+				Schedule(p1.capMs / 1000, function()
 					-- upvalues: Count1 (copy), Count (upval), Config (upval)
 					if Count1 == Count then
 						Config = nil
@@ -74,7 +74,7 @@ return function(p1) --[[ Line: 68 | Named "swipeLatencyMachine" ]]
 				p1.onMeasurement(math.round((math.max(0, FrameAt - SettledAt))), math.round(math.max(FrameAt, SettledAt) - Config1.committedAt), Config1.dimensions)
 			end
 		end,
-		update = function(p2, p3) --[[ Line: 126 ]]
+		update = function(p2, p3)
 			-- upvalues: Config (ref), NowFunction (copy), p1 (copy)
 			local Config1 = Config
 			

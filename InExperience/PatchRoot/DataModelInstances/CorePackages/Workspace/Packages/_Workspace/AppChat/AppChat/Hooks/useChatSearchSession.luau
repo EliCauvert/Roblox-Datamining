@@ -9,7 +9,7 @@ local ChatLandingTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatLan
 local ChatLandingTelemetryStateModule = require(AppChat.Contexts.TelemetryState.ChatLandingTelemetryState)
 local UseTelemetryModule = require(AppChat.Telemetry.useTelemetry)
 
-return function(p1, p2) --[[ Line: 25 | Named "useChatSearchSession" ]]
+return function(p1, p2)
 	-- upvalues: ChatLandingTelemetryStateModule (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), ReactModule (copy), CryoModule (copy), HttpService (copy), ChatActiveFilterModule (copy), ChatLandingTelemetryEventsModule (copy)
 	local UseMergeStateResult: (any) -> () = ChatLandingTelemetryStateModule.useMergeState()
 	local UseTelemetryModuleResult = UseTelemetryModule(ChatLandingTelemetryLayerModule.Context)
@@ -17,7 +17,7 @@ return function(p1, p2) --[[ Line: 25 | Named "useChatSearchSession" ]]
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseRefResult2 = ReactModule.useRef(UseTelemetryModuleResult.emit)
 	UseRefResult2.current = UseTelemetryModuleResult.emit
-	local UseResult: () -> () = ReactModule.useCallback(function() --[[ Line: 35 ]]
+	local UseResult: () -> () = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UseMergeStateResult (copy), CryoModule (upval)
 		if UseRefResult.current ~= nil then
 			UseRefResult.current = nil
@@ -41,7 +41,7 @@ return function(p1, p2) --[[ Line: 25 | Named "useChatSearchSession" ]]
 	elseif not p1 then
 		UseResult()
 	end
-	ReactModule.useEffect(function() --[[ Line: 59 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseRefResult (copy), UseRefResult1 (copy), UseRefResult2 (copy), ChatLandingTelemetryEventsModule (upval)
 		if not p1 then return end
 		local Current = UseRefResult.current
@@ -53,7 +53,7 @@ return function(p1, p2) --[[ Line: 25 | Named "useChatSearchSession" ]]
 			return
 		end
 	end, { p1, p2, UseMergeStateResult, UseResult })
-	ReactModule.useEffect(function() --[[ Line: 76 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult (copy)
 		return UseResult
 	end, {})

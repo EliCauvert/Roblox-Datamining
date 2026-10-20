@@ -34,7 +34,7 @@ local config3 = {
 	cancel = UnifiedLoggingElementNameEnumsModule.SUPPORT_PANE_NO_ADDITIONAL_AVATARS_DIALOG_CANCEL_BUTTON
 }
 
-local function sendUnifiedClick(Control, Input) --[[ Line: 56 ]]
+local function sendUnifiedClick(Control, Input)
 	-- upvalues: SendUnifiedEventLogModule (copy), MarketplaceUnifiedAction (copy), UnifiedLoggingSurface (copy), HttpService (copy), FFlagSplitPaneAvatarMetrics (copy), SendAXCounterV2Module (copy), ConstantsModule (copy)
 	SendUnifiedEventLogModule({
 		action = MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
@@ -53,7 +53,7 @@ return {
 		UnsavedChanges = "unsaved_changes",
 		NoAdditionalAvatars = "no_additional_avatars"
 	},
-	logDialogShown = function(p1) --[[ Line: 73 ]]
+	logDialogShown = function(p1)
 		-- upvalues: config (copy), SendUnifiedEventLogModule (copy), MarketplaceUnifiedAction (copy), UnifiedLoggingSurface (copy), SendAXCounterV2Module (copy), ConstantsModule (copy)
 		local Entry = config[p1]
 		local config1 = { dialog = Entry }
@@ -64,7 +64,7 @@ return {
 		})
 		SendAXCounterV2Module(ConstantsModule.AVATAR_EVENT_COUNTER_NAME.SupportRegionAvatarOverlayDialogShown, config1)
 	end,
-	logPageView = function() --[[ Line: 84 ]]
+	logPageView = function()
 		-- upvalues: FFlagSplitPaneAvatarMetrics (copy), Callback (ref), Callback1 (ref), SendAXCounterV2Module (copy), ConstantsModule (copy), SendUnifiedEventLogModule (copy), MarketplaceUnifiedAction (copy), UnifiedLoggingSurface (copy), UnifiedLoggingElementNameEnumsModule (copy)
 		if FFlagSplitPaneAvatarMetrics then
 			if Callback(false) then return end
@@ -77,26 +77,26 @@ return {
 			elementName = UnifiedLoggingElementNameEnumsModule.SUPPORT_PANE_AVATAR_OVERLAY
 		})
 	end,
-	logProfileChipClick = function() --[[ Line: 99 ]]
+	logProfileChipClick = function()
 		-- upvalues: sendUnifiedClick (copy), UnifiedLoggingElementNameEnumsModule (copy)
 		sendUnifiedClick(UnifiedLoggingElementNameEnumsModule.SUPPORT_PANE_PROFILE_CHIP)
 	end,
-	logEditAvatarClick = function() --[[ Line: 103 ]]
+	logEditAvatarClick = function()
 		-- upvalues: sendUnifiedClick (copy), UnifiedLoggingElementNameEnumsModule (copy)
 		sendUnifiedClick(UnifiedLoggingElementNameEnumsModule.SUPPORT_PANE_EDIT_AVATAR_BUTTON)
 	end,
-	logChevronClick = function(Direction, Target_data_ready) --[[ Line: 107 ]]
+	logChevronClick = function(Direction, Target_data_ready)
 		-- upvalues: sendUnifiedClick (copy), config1 (copy)
 		sendUnifiedClick(config1[Direction], {
 			direction = Direction,
 			target_data_ready = Target_data_ready
 		})
 	end,
-	logUnsavedDialogClick = function(p1) --[[ Line: 114 ]]
+	logUnsavedDialogClick = function(p1)
 		-- upvalues: sendUnifiedClick (copy), config2 (copy)
 		sendUnifiedClick(config2[p1])
 	end,
-	logNoAdditionalAvatarsDialogClick = function(p1) --[[ Line: 118 ]]
+	logNoAdditionalAvatarsDialogClick = function(p1)
 		-- upvalues: sendUnifiedClick (copy), config3 (copy)
 		sendUnifiedClick(config3[p1])
 	end

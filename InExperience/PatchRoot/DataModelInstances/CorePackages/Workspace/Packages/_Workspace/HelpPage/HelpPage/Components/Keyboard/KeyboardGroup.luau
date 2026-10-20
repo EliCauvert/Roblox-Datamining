@@ -9,7 +9,7 @@ local View = FoundationModule.View
 local Text = FoundationModule.Text
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
-local MemoResult = ReactModule.memo(function(Frame) --[[ Line: 25 ]]
+local MemoResult = ReactModule.memo(function(Frame)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), Text (copy), FFlagHelpPageCCLModule (copy)
 	return ReactModule.createElement(View, {
 		tag = "col align-y-center align-x-left size-full-0 auto-y padding-x-small padding-y-small",
@@ -27,13 +27,13 @@ local MemoResult = ReactModule.memo(function(Frame) --[[ Line: 25 ]]
 	})
 end)
 
-return ReactModule.memo(function(p1) --[[ Line: 52 ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), MemoResult (copy), KeyboardActionModule (copy), View (copy)
 	return ReactModule.createElement(View, {
 		tag = "col align-y-top align-x-center size-full gap-xxsmall",
 		testId = "KeyboardGroup",
 		LayoutOrder = p1.group.layoutOrder
-	}, (ReactModule.useMemo(function() --[[ Line: 53 ]]
+	}, (ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), MemoResult (upval), p1 (copy), KeyboardActionModule (upval)
 		local Elements = {}
 		table.insert(Elements, ReactModule.createElement(MemoResult, {

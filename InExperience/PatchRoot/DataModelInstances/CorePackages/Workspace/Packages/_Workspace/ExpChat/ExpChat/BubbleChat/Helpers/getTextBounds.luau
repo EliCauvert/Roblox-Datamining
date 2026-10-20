@@ -5,7 +5,7 @@ local TextService = game:GetService("TextService")
 local GetAbsolutePaddingbyDimensionModule = require(ExpChat.BubbleChat.Helpers.getAbsolutePaddingbyDimension)
 local GetFFlagExpChatAlwaysRunTCSFunction = require(ExpChat.Parent.SharedFlags).getFFlagExpChatAlwaysRunTCS
 
-local function v5(Text, Label): Vector2 --[[ Line: 9 ]]
+local function v5(Text, Label): Vector2
 	-- upvalues: CoreGui (copy), GetAbsolutePaddingbyDimensionModule (copy)
 	local RichTextSizingLabel = Instance.new("ScreenGui")
 	RichTextSizingLabel.Enabled = false
@@ -37,7 +37,7 @@ local function v5(Text, Label): Vector2 --[[ Line: 9 ]]
 	return _Vector2 + TextBounds
 end
 
-return function(String, Label, TextChatService1) --[[ Line: 51 ]]
+return function(String, Label, TextChatService1)
 	-- upvalues: TextChatService (copy), GetFFlagExpChatAlwaysRunTCSFunction (copy), v5 (copy), TextService (copy)
 	if TextChatService1 == nil then
 		TextChatService1 = TextChatService

@@ -2,7 +2,7 @@
 local CryoModule = require(GameDetailRodux.Parent.Cryo)
 local SetAgeRecommendationModule = require(GameDetailRodux.AgeRecommendations.SetAgeRecommendation)
 
-return function(p1, p2) --[[ Line: 7 ]]
+return function(p1, p2)
 	-- upvalues: SetAgeRecommendationModule (copy), CryoModule (copy)
 	local P0 = p1 or {}
 	

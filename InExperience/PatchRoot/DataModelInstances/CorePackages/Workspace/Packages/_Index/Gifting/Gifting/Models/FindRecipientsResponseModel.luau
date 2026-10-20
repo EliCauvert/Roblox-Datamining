@@ -5,7 +5,7 @@ local GiftModelUtilsModule = require(Gifting.Models.GiftModelUtils)
 local _ = require(Gifting.Types)
 local InterfaceResult = TModule.interface({ userId = TModule.number })
 
-local function formatRecipientResult(p1) --[[ Line: 29 ]]
+local function formatRecipientResult(p1)
 	-- upvalues: InterfaceResult (copy), UserRelationshipModule (copy), GiftModelUtilsModule (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult(p1)
 	
@@ -28,7 +28,7 @@ local function formatRecipientResult(p1) --[[ Line: 29 ]]
 end
 
 return {
-	format = function(p1) --[[ Line: 51 ]]
+	format = function(p1)
 		-- upvalues: GiftModelUtilsModule (copy), formatRecipientResult (copy)
 		local Recipients, Recipients2 = GiftModelUtilsModule.formatList("recipients", p1.recipients or {}, formatRecipientResult)
 		

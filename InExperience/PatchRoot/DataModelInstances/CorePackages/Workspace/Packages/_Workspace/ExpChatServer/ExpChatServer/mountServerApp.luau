@@ -22,21 +22,21 @@ local MarkTextChannelAsDefaultFunction = ExpChatSharedModule.markTextChannelAsDe
 local ExpChatBackfillTeamChannels = game:DefineFastFlag("ExpChatBackfillTeamChannels", false)
 local ExpChatBackfillTeamChannelsParentCheck = game:DefineFastFlag("ExpChatBackfillTeamChannelsParentCheck", false)
 
-local function _(): number --[[ Line: 39 ]]
+local function _(): number
 	-- upvalues: List (copy), TextChatService (copy)
-	return #List.filter(TextChatService:GetDescendants(), function(TextChannel) --[[ Line: 40 ]]
+	return #List.filter(TextChatService:GetDescendants(), function(TextChannel)
 		return TextChannel:IsA("TextChannel")
 	end)
 end
 
-local _ = function(): number --[[ Line: 47 ]]
+local _ = function(): number
 	-- upvalues: List (copy), TextChatService (copy)
-	return #List.filter(TextChatService:GetDescendants(), function(TextChatCommand) --[[ Line: 48 ]]
+	return #List.filter(TextChatService:GetDescendants(), function(TextChatCommand)
 		return TextChatCommand:IsA("TextChatCommand")
 	end)
 end
 
-return function(p1) --[[ Line: 55 ]]
+return function(p1)
 	-- upvalues: NewResult (copy), CreateStoreModule (copy), CreateDispatchRemoteFunctionModule (copy), Analytics (copy), WatchForErrorsFunction (copy), TextChatService (copy), MarkTextChannelAsDefaultFunction (copy), FFlagExpChatAddUserAsyncNilCheck (copy), ExpChatBackfillTeamChannels (copy), ExpChatBackfillTeamChannelsParentCheck (copy), Teams (copy), Config (copy), Players (copy), Commands (copy), List (copy), GetFFlagExpChatAlwaysRunTCSFunction (copy), CountParticipantsInTextChannelFunction (copy), PlayerAddedFunction (copy), PlayerRemovedFunction (copy)
 	NewResult:trace("mountServerApp started")
 	local StoreModule = CreateStoreModule()
@@ -54,7 +54,7 @@ return function(p1) --[[ Line: 55 ]]
 		TextChannels1.Name = "TextChannels"
 		TextChannels1.Parent = TextChatService
 		
-		local function findChannel(Name) --[[ Line: 76 ]]
+		local function findChannel(Name)
 			-- upvalues: TextChatService (upval)
 			for _, TextChannel in pairs(TextChatService:GetDescendants()) do
 				if TextChannel:IsA("TextChannel") and TextChannel.Name == Name then
@@ -64,7 +64,7 @@ return function(p1) --[[ Line: 55 ]]
 			return nil
 		end
 		
-		local function _(Name) --[[ Line: 86 | Named "addChannel" ]]
+		local function _(Name)
 			-- upvalues: findChannel (copy), MarkTextChannelAsDefaultFunction (upval), TextChannels1 (copy)
 			local Channel = findChannel(Name)
 			
@@ -77,7 +77,7 @@ return function(p1) --[[ Line: 55 ]]
 			return Channel
 		end
 		
-		local function findTextSourceFromChannelWithUserId(TextChannel, UserId) --[[ Line: 99 ]]
+		local function findTextSourceFromChannelWithUserId(TextChannel, UserId)
 			for _, TextSource in pairs(TextChannel:GetChildren()) do
 				if TextSource:IsA("TextSource") and TextSource.UserId == UserId then
 					return TextSource
@@ -86,7 +86,7 @@ return function(p1) --[[ Line: 55 ]]
 			return nil
 		end
 		
-		local function createTeamChannel(Players) --[[ Line: 109 ]]
+		local function createTeamChannel(Players)
 			-- upvalues: findChannel (copy), MarkTextChannelAsDefaultFunction (upval), TextChannels1 (copy), NewResult (upval), FFlagExpChatAddUserAsyncNilCheck (upval), findTextSourceFromChannelWithUserId (copy), ExpChatBackfillTeamChannels (upval), ExpChatBackfillTeamChannelsParentCheck (upval), Teams (upval)
 			local Text = "RBXTeam" .. tostring(Players.TeamColor.Name)
 			local Channel = findChannel(Text)
@@ -98,7 +98,7 @@ return function(p1) --[[ Line: 55 ]]
 				Channel.Parent = TextChannels1
 			end
 			NewResult:debug("Creating team TextChannel: {}", Channel.Name)
-			Players.PlayerAdded:Connect(function(Player) --[[ Line: 113 ]]
+			Players.PlayerAdded:Connect(function(Player)
 				-- upvalues: Players (copy), findChannel (upval), MarkTextChannelAsDefaultFunction (upval), TextChannels1 (upval), FFlagExpChatAddUserAsyncNilCheck (upval)
 				local Text = "RBXTeam" .. tostring(Players.TeamColor.Name)
 				local Channel = findChannel(Text)
@@ -119,7 +119,7 @@ return function(p1) --[[ Line: 55 ]]
 					return
 				end
 			end)
-			Players.PlayerRemoved:Connect(function(Player) --[[ Line: 126 ]]
+			Players.PlayerRemoved:Connect(function(Player)
 				-- upvalues: Players (copy), findChannel (upval), MarkTextChannelAsDefaultFunction (upval), TextChannels1 (upval), findTextSourceFromChannelWithUserId (upval)
 				local Text = "RBXTeam" .. tostring(Players.TeamColor.Name)
 				local Channel = findChannel(Text)
@@ -161,7 +161,7 @@ return function(p1) --[[ Line: 55 ]]
 					end
 				end
 			end
-			Players:GetPropertyChangedSignal("TeamColor"):Connect(function() --[[ Line: 156 ]]
+			Players:GetPropertyChangedSignal("TeamColor"):Connect(function()
 				-- upvalues: Players (copy), findChannel (upval), MarkTextChannelAsDefaultFunction (upval), TextChannels1 (upval)
 				local Text = "RBXTeam" .. tostring(Players.TeamColor.Name)
 				local Channel = findChannel(Text)
@@ -181,13 +181,13 @@ return function(p1) --[[ Line: 55 ]]
 				createTeamChannel(team)
 			end
 		end
-		Teams.ChildAdded:Connect(function(Child) --[[ Line: 168 ]]
+		Teams.ChildAdded:Connect(function(Child)
 			-- upvalues: createTeamChannel (copy)
 			if Child:IsA("Team") then
 				createTeamChannel(Child)
 			end
 		end)
-		Teams.ChildRemoved:Connect(function(Child) --[[ Line: 174 ]]
+		Teams.ChildRemoved:Connect(function(Child)
 			-- upvalues: findChannel (copy), NewResult (upval)
 			if Child:IsA("Team") then
 				local Channel = findChannel("RBXTeam" .. tostring(Child.TeamColor.Name))
@@ -211,7 +211,7 @@ return function(p1) --[[ Line: 55 ]]
 			end
 			table.insert(TextChannels, Channel)
 		end
-		local function addPlayerTextSourceToDefaultChannels(Player: Player) --[[ Line: 189 ]]
+		local function addPlayerTextSourceToDefaultChannels(Player: Player)
 			-- upvalues: TextChannels (copy), NewResult (upval), FFlagExpChatAddUserAsyncNilCheck (upval)
 			for _, textChannel in ipairs(TextChannels) do
 				NewResult:trace("Adding user {} to TextChannel: {}", tostring(Player.UserId), textChannel.Name)
@@ -255,10 +255,10 @@ return function(p1) --[[ Line: 55 ]]
 		Analytics.FireRccAnalyticsWithEventName("DefaultCommandsCreated")
 	end
 	Analytics.FireRccAnalyticsWithEventName("ExperienceChatLoaded", {
-		loadedChannels = #List.filter(TextChatService:GetDescendants(), function(TextChannel) --[[ Line: 40 ]]
+		loadedChannels = #List.filter(TextChatService:GetDescendants(), function(TextChannel)
 			return TextChannel:IsA("TextChannel")
 		end),
-		loadedCommands = #List.filter(TextChatService:GetDescendants(), function(TextChatCommand) --[[ Line: 48 ]]
+		loadedCommands = #List.filter(TextChatService:GetDescendants(), function(TextChatCommand)
 			return TextChatCommand:IsA("TextChatCommand")
 		end)
 	})
@@ -267,12 +267,12 @@ return function(p1) --[[ Line: 55 ]]
 		Analytics.FireRccAnalyticsDeferred("AutomigratedToTCS", { universeId = game.GameId })
 	end
 	NewResult:debug("Start watching for new channels and commands")
-	TextChatService.DescendantAdded:Connect(function(Descendant) --[[ Line: 254 ]]
+	TextChatService.DescendantAdded:Connect(function(Descendant)
 		-- upvalues: Analytics (upval), List (upval), TextChatService (upval), CountParticipantsInTextChannelFunction (upval)
 		if Descendant:IsA("TextChannel") then
 			Analytics.FireRccAnalyticsWithEventName("ChannelCreated", {
 				channelName = Descendant.Name,
-				totalChannels = #List.filter(TextChatService:GetDescendants(), function(TextChannel) --[[ Line: 40 ]]
+				totalChannels = #List.filter(TextChatService:GetDescendants(), function(TextChannel)
 					return TextChannel:IsA("TextChannel")
 				end)
 			})
@@ -295,12 +295,12 @@ return function(p1) --[[ Line: 55 ]]
 			end
 		end
 	end)
-	TextChatService.DescendantRemoving:Connect(function(Descendant) --[[ Line: 275 ]]
+	TextChatService.DescendantRemoving:Connect(function(Descendant)
 		-- upvalues: Analytics (upval), List (upval), TextChatService (upval), CountParticipantsInTextChannelFunction (upval)
 		if Descendant:IsA("TextChannel") then
 			Analytics.FireRccAnalyticsWithEventName("ChannelRemoved", {
 				channelName = Descendant.Name,
-				totalChannels = #List.filter(TextChatService:GetDescendants(), function(TextChannel) --[[ Line: 40 ]]
+				totalChannels = #List.filter(TextChatService:GetDescendants(), function(TextChannel)
 					return TextChannel:IsA("TextChannel")
 				end) - 1
 			})
@@ -327,11 +327,11 @@ return function(p1) --[[ Line: 55 ]]
 	for _, player1 in pairs(Players:GetPlayers()) do
 		StoreModule:dispatch(PlayerAddedFunction(player1.UserId, player1.Name, player1.DisplayName))
 	end
-	Players.PlayerAdded:Connect(function(Player: Player) --[[ Line: 299 ]]
+	Players.PlayerAdded:Connect(function(Player: Player)
 		-- upvalues: StoreModule (copy), PlayerAddedFunction (upval)
 		StoreModule:dispatch(PlayerAddedFunction(Player.UserId, Player.Name, Player.DisplayName))
 	end)
-	Players.PlayerRemoving:Connect(function(Player) --[[ Line: 303 ]]
+	Players.PlayerRemoving:Connect(function(Player)
 		-- upvalues: StoreModule (copy), PlayerRemovedFunction (upval)
 		StoreModule:dispatch(PlayerRemovedFunction(Player.UserId))
 	end)

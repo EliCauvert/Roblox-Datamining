@@ -4,7 +4,7 @@ local t1 = {}
 local t2 = {}
 local I = nil
 
-local function to_str_arr(Text: string, p1) --[[ Line: 68 ]]
+local function to_str_arr(Text: string, p1)
 	if p1 then
 		Text = string.sub(Text, utf8.offset(Text, p1))
 	end
@@ -28,7 +28,7 @@ local function to_str_arr(Text: string, p1) --[[ Line: 68 ]]
 	return Buffer
 end
 
-local function from_str_arr(p2): string --[[ Line: 88 ]]
+local function from_str_arr(p2): string
 	local N = p2.n or #p2
 	
 	if N <= 7997 then
@@ -43,7 +43,7 @@ local function from_str_arr(p2): string --[[ Line: 88 ]]
 	return table.concat(Buffer)
 end
 
-local function _(Text: string, p3, p4): string --[[ Line: 101 | Named "utf8_sub" ]]
+local function _(Text: string, p3, p4): string
 	local OffsetResult = utf8.offset(Text, p4)
 	
 	return (string.sub(Text, utf8.offset(Text, p3), OffsetResult and OffsetResult - 1))
@@ -140,9 +140,9 @@ local list1 = { 46 }
 local list2 = { 94 }
 local list3 = { 124 }
 
-local _ = function(p3, p4, Callback) --[[ Line: 164 | Named "check_re" ]]
+local _ = function(p3, p4, Callback)
 	-- upvalues: self (copy), t (copy)
-	return if p3 == "Match" then function(...) --[[ Line: 166 ]]
+	return if p3 == "Match" then function(...)
 		-- upvalues: self (upval), p4 (copy), Callback (copy)
 		if select("#", ...) < 1 then
 			error("missing argument #1 (Match expected)", 2)
@@ -158,7 +158,7 @@ local _ = function(p3, p4, Callback) --[[ Line: 164 | Named "check_re" ]]
 			v2 = 0
 		end
 		return Callback(v1, v2)
-	end else function(...) --[[ Line: 185 ]]
+	end else function(...)
 		-- upvalues: self (upval), p4 (copy), t (upval), Callback (copy)
 		local Selected: number = select("#", ...)
 		
@@ -215,7 +215,7 @@ local _ = function(p3, p4, Callback) --[[ Line: 164 | Named "check_re" ]]
 	end
 end
 
-local function match_tostr(p3): string --[[ Line: 233 ]]
+local function match_tostr(p3): string
 	-- upvalues: self (copy)
 	local Spans = self[p3].spans
 	local SpanEntry = Spans[0][1]
@@ -231,7 +231,7 @@ local function match_tostr(p3): string --[[ Line: 233 ]]
 	end
 end
 
-local function new_match(Spans, GroupId, Source, Input) --[[ Line: 242 ]]
+local function new_match(Spans, GroupId, Source, Input)
 	-- upvalues: I (ref), t2 (ref), match_tostr (copy), self (copy)
 	Spans.source = Source
 	Spans.input = Input
@@ -245,7 +245,7 @@ local function new_match(Spans, GroupId, Source, Input) --[[ Line: 242 ]]
 	return Proxy
 end
 
-local function v20(p3, p4): string? --[[ Line: 254 ]]
+local function v20(p3, p4): string?
 	local Span = p3.spans[type(p4) == "number" and p4 or p3.group_id[p4]]
 	
 	if Span then
@@ -260,7 +260,7 @@ end
 
 local v1 = "group"
 
-function t2.group(...) --[[ Line: 166 ]]
+function t2.group(...)
 	-- upvalues: self (copy), v1 (copy), v20 (copy)
 	if select("#", ...) < 1 then
 		error("missing argument #1 (Match expected)", 2)
@@ -278,7 +278,7 @@ function t2.group(...) --[[ Line: 166 ]]
 	return v20(v2, v3)
 end
 
-local function v22(p3, p4) --[[ Line: 262 ]]
+local function v22(p3, p4)
 	local Span = p3.spans[type(p4) == "number" and p4 or p3.group_id[p4]]
 	
 	if Span then
@@ -290,7 +290,7 @@ end
 
 local v2 = "span"
 
-function t2.span(...) --[[ Line: 166 ]]
+function t2.span(...)
 	-- upvalues: self (copy), v2 (copy), v22 (copy)
 	if select("#", ...) < 1 then
 		error("missing argument #1 (Match expected)", 2)
@@ -308,7 +308,7 @@ function t2.span(...) --[[ Line: 166 ]]
 	return v22(v3, v4)
 end
 
-local function v24(p3) --[[ Line: 270 ]]
+local function v24(p3)
 	local Spans = p3.spans
 	
 	if Spans.n <= 0 then
@@ -333,7 +333,7 @@ end
 
 local v3 = "groups"
 
-function t2.groups(...) --[[ Line: 166 ]]
+function t2.groups(...)
 	-- upvalues: self (copy), v3 (copy), v24 (copy)
 	if select("#", ...) < 1 then
 		error("missing argument #1 (Match expected)", 2)
@@ -351,7 +351,7 @@ function t2.groups(...) --[[ Line: 166 ]]
 	return v24(v4, v5)
 end
 
-local function v26(p4) --[[ Line: 285 ]]
+local function v26(p4)
 	local Spans = p4.spans
 	local Segments = {}
 	
@@ -369,7 +369,7 @@ end
 
 local v4 = "groupdict"
 
-function t2.groupdict(...) --[[ Line: 166 ]]
+function t2.groupdict(...)
 	-- upvalues: self (copy), v4 (copy), v26 (copy)
 	if select("#", ...) < 1 then
 		error("missing argument #1 (Match expected)", 2)
@@ -387,7 +387,7 @@ function t2.groupdict(...) --[[ Line: 166 ]]
 	return v26(v5, v6)
 end
 
-local function v28(p5) --[[ Line: 297 ]]
+local function v28(p5)
 	local Spans = p5.spans
 	local Buffer = table.create(Spans.n)
 	
@@ -407,7 +407,7 @@ end
 
 local v5 = "groupdict"
 
-function t2.grouparr(...) --[[ Line: 166 ]]
+function t2.grouparr(...)
 	-- upvalues: self (copy), v5 (copy), v28 (copy)
 	if select("#", ...) < 1 then
 		error("missing argument #1 (Match expected)", 2)
@@ -434,14 +434,14 @@ local config5 = {
 	NUL = 5
 }
 
-local function is_newline(p6, Total: number, p7): boolean --[[ Line: 314 ]]
+local function is_newline(p6, Total: number, p7): boolean
 	local Newline = p7.newline
 	local v6 = p6[Total]
 	
 	return if Newline == 0 then v6 == 13 elseif Newline == 2 then v6 == 10 and p6[Total - 1] == 32 elseif Newline == 3 then v6 == 10 or v6 == 13 elseif Newline == 4 then v6 == 10 or (v6 == 11 or (v6 == 12 or (v6 == 13 or (v6 == 133 or (v6 == 8232 or v6 == 8233))))) elseif Newline == 5 then v6 == 0 else v6 == 10
 end
 
-local function tkn_char_match(Entry, p6, Total, p7, p8) --[[ Line: 338 ]]
+local function tkn_char_match(Entry, p6, Total, p7, p8)
 	-- upvalues: tkn_char_match (copy), config4 (copy), is_newline (copy)
 	local Count = p6[Total]
 	
@@ -549,7 +549,7 @@ local function tkn_char_match(Entry, p6, Total, p7, p8) --[[ Line: 338 ]]
 	end
 end
 
-local function find_alternation(p9, Count, NewCount: number) --[[ Line: 463 ]]
+local function find_alternation(p9, Count, NewCount: number)
 	-- upvalues: list3 (copy)
 	while true do
 		local v6 = p9[Count]
@@ -581,7 +581,7 @@ local function find_alternation(p9, Count, NewCount: number) --[[ Line: 463 ]]
 	end
 end
 
-local function re_rawfind(Token, Str_arr, Total, Flags, VerbFlags, p10) --[[ Line: 492 ]]
+local function re_rawfind(Token, Str_arr, Total, Flags, VerbFlags, p10)
 	-- upvalues: find_alternation (copy), tkn_char_match (copy), is_newline (copy)
 	local Count = 0
 	local Total1 = Total
@@ -941,14 +941,14 @@ local function re_rawfind(Token, Str_arr, Total, Flags, VerbFlags, p10) --[[ Lin
 	return Buffer
 end
 
-local function v35(p11, p12, p13) --[[ Line: 789 ]]
+local function v35(p11, p12, p13)
 	-- upvalues: re_rawfind (copy), to_str_arr (copy)
 	return (re_rawfind(p11.token, to_str_arr(p12, p13), 1, p11.flags, p11.verb_flags, true))
 end
 
 local v14 = "test"
 
-function t1.test(...) --[[ Line: 185 ]]
+function t1.test(...)
 	-- upvalues: self (copy), v14 (copy), t (copy), v35 (copy)
 	local Selected: number = select("#", ...)
 	
@@ -1004,7 +1004,7 @@ function t1.test(...) --[[ Line: 185 ]]
 	return v35(SelfEntry, v16, Largest, v17, v18, v19)
 end
 
-local function v37(p11, Input, p12, Source) --[[ Line: 793 ]]
+local function v37(p11, Input, p12, Source)
 	-- upvalues: re_rawfind (copy), to_str_arr (copy), new_match (copy)
 	local Re_rawfindResult = re_rawfind(p11.token, to_str_arr(Input, p12), 1, p11.flags, p11.verb_flags, false)
 	
@@ -1013,7 +1013,7 @@ end
 
 local v15 = "match"
 
-function t1.match(...) --[[ Line: 185 ]]
+function t1.match(...)
 	-- upvalues: self (copy), v15 (copy), t (copy), v37 (copy)
 	local Selected: number = select("#", ...)
 	
@@ -1069,12 +1069,12 @@ function t1.match(...) --[[ Line: 185 ]]
 	return v37(SelfEntry, v17, Largest, v18, v19, v20)
 end
 
-local function v39(p11, p12, p13, Source) --[[ Line: 801 ]]
+local function v39(p11, p12, p13, Source)
 	-- upvalues: to_str_arr (copy), re_rawfind (copy), new_match (copy)
 	local Str_arr = to_str_arr(p12, p13)
 	local Total = 1
 	
-	return function() --[[ Line: 804 ]]
+	return function()
 		-- upvalues: Total (ref), Str_arr (ref), re_rawfind (upval), p11 (copy), new_match (upval), Source (copy)
 		local Re_rawfindResult = Total <= Str_arr.n + 1 and re_rawfind(p11.token, Str_arr, Total, p11.flags, p11.verb_flags, false)
 		
@@ -1090,7 +1090,7 @@ end
 
 local v16 = "matchall"
 
-function t1.matchall(...) --[[ Line: 185 ]]
+function t1.matchall(...)
 	-- upvalues: self (copy), v16 (copy), t (copy), v39 (copy)
 	local Selected: number = select("#", ...)
 	
@@ -1146,7 +1146,7 @@ function t1.matchall(...) --[[ Line: 185 ]]
 	return v39(SelfEntry, v18, Largest, v19, v20, v21)
 end
 
-local function insert_tokenized_sub(p11, p12, p13, List) --[[ Line: 814 ]]
+local function insert_tokenized_sub(p11, p12, p13, List)
 	-- upvalues: insert_tokenized_sub (copy)
 	for _, value in ipairs(List) do
 		if type(value) ~= "table" then
@@ -1173,7 +1173,7 @@ local function insert_tokenized_sub(p11, p12, p13, List) --[[ Line: 814 ]]
 	return p11
 end
 
-local function v42(p14, Callback, p15, p16: number?, p17, Source) --[[ Line: 838 ]]
+local function v42(p14, Callback, p15, p16: number?, p17, Source)
 	-- upvalues: to_str_arr (copy), config2 (copy), re_rawfind (copy), insert_tokenized_sub (copy), new_match (copy), from_str_arr (copy)
 	if p17 ~= nil and type(p17) ~= "number" and type(p17) ~= "string" then
 		error(string.format("invalid argument #5 to 'sub' (string expected, got %s)", (typeof(p17))), 3)
@@ -1445,7 +1445,7 @@ end
 
 local v21 = "sub"
 
-function t1.sub(...) --[[ Line: 185 ]]
+function t1.sub(...)
 	-- upvalues: self (copy), v21 (copy), t (copy), v42 (copy)
 	local Selected: number = select("#", ...)
 	
@@ -1501,7 +1501,7 @@ function t1.sub(...) --[[ Line: 185 ]]
 	return v42(SelfEntry, v23, Largest, v24, v25, v26)
 end
 
-local function v44(p18, p19, p20: number?) --[[ Line: 1076 ]]
+local function v44(p18, p19, p20: number?)
 	-- upvalues: to_str_arr (copy), re_rawfind (copy)
 	if tonumber(p20) then
 		p20 = tonumber(p20)
@@ -1537,7 +1537,7 @@ end
 
 local v23 = "split"
 
-function t1.split(...) --[[ Line: 185 ]]
+function t1.split(...)
 	-- upvalues: self (copy), v23 (copy), t (copy), v44 (copy)
 	local Selected: number = select("#", ...)
 	
@@ -1593,12 +1593,12 @@ function t1.split(...) --[[ Line: 185 ]]
 	return v44(SelfEntry, v25, Largest, v26, v27, v28)
 end
 
-local _ = function(p21, p22) --[[ Line: 1106 | Named "re_index" ]]
+local _ = function(p21, p22)
 	-- upvalues: t1 (ref), self (copy)
 	return t1[p22] or self[p21].flags[p22]
 end
 
-local function re_tostr(p21): string --[[ Line: 1110 ]]
+local function re_tostr(p21): string
 	-- upvalues: self (copy)
 	return self[p21].pattern_repr .. self[p21].flag_repr
 end
@@ -1611,7 +1611,7 @@ local config6 = {
 	[124] = true
 }
 
-local function tokenize_ptn(List, Flags) --[[ Line: 1126 ]]
+local function tokenize_ptn(List, Flags)
 	-- upvalues: config5 (copy), config6 (copy), list3 (copy), list1 (copy), config2 (copy), config1 (copy), config3 (copy), list2 (copy), list (copy)
 	if Flags.unicode then
 		return "USE_UNICODE_DATA has always been false, so you cannot also use the unicode flag"
@@ -2477,13 +2477,13 @@ if Number then
 	end
 end
 if Number then
-	function t.pruge() --[[ Line: 1916 ]]
+	function t.pruge()
 		-- upvalues: Tbl (ref), Tbl1 (ref)
 		table.clear(Tbl)
 		table.clear(Tbl1)
 	end
 end
-local function new_re(p21, Flags, Joined, Pattern_repr) --[[ Line: 1922 ]]
+local function new_re(p21, Flags, Joined, Pattern_repr)
 	-- upvalues: Number (copy), Tbl1 (ref), Tbl (ref), tokenize_ptn (copy), self (copy), t1 (ref), re_tostr (copy), I (ref)
 	local Formatted = Number and string.format("%s|%s", p21.s, Joined)
 	local Entry = Number and Tbl1[table.find(Tbl, Formatted)]
@@ -2527,15 +2527,15 @@ local function new_re(p21, Flags, Joined, Pattern_repr) --[[ Line: 1922 ]]
 	return Proxy
 end
 
-local function escape_fslash(Text): string --[[ Line: 1953 ]]
+local function escape_fslash(Text): string
 	return (if #Text % 2 == 0 then "\\" else "") .. Text .. "."
 end
 
-local function sort_flag_chr(A: string, B: string): boolean --[[ Line: 1957 ]]
+local function sort_flag_chr(A: string, B: string): boolean
 	return A:lower() < B:lower()
 end
 
-function t.new(...) --[[ Line: 1961 ]]
+function t.new(...)
 	-- upvalues: config (copy), sort_flag_chr (copy), new_re (copy), to_str_arr (copy), escape_fslash (copy)
 	if select("#", ...) == 0 then
 		error("missing argument #1 (string expected)", 2)
@@ -2573,7 +2573,7 @@ function t.new(...) --[[ Line: 1961 ]]
 	return (new_re(to_str_arr(Text), config1, table.concat(List), string.format("/%s/", Text:gsub("(\\*)/", escape_fslash))))
 end
 
-function t.fromstring(...) --[[ Line: 1991 ]]
+function t.fromstring(...)
 	-- upvalues: to_str_arr (copy), config (copy), sort_flag_chr (copy), new_re (copy)
 	if select("#", ...) == 0 then
 		error("missing argument #1 (string expected)", 2)
@@ -2644,7 +2644,7 @@ local config7 = {
 	["\f"] = "\\f"
 }
 
-function t.escape(...) --[[ Line: 2047 ]]
+function t.escape(...)
 	-- upvalues: config7 (copy)
 	if select("#", ...) == 0 then
 		error("missing argument #1 (string expected)", 2)
@@ -2669,7 +2669,7 @@ function t.escape(...) --[[ Line: 2047 ]]
 	return (string.gsub(Text1, "[\0\f\n\r\t]", config7):gsub(string.format("[\\%s#()%%%%*+.?[%%]^{|%s]", if v34 then "%s" else "", (if Text:find("^[%%%]]$") then "%" else "") .. Text), "\\%1"))
 end
 
-function t.type(...) --[[ Line: 2070 ]]
+function t.type(...)
 	-- upvalues: self (copy)
 	if select("#", ...) == 0 then
 		error("missing argument #1", 2)
@@ -2684,7 +2684,7 @@ t1 = { __index = t1 }
 I = t.fromstring("/The\\s*metatable\\s*is\\s*(?:locked|inaccessible)(?#Nice try :])/i")
 getmetatable(I).__metatable = I
 
-local function readonly_table() --[[ Line: 2086 ]]
+local function readonly_table()
 	error("Attempt to modify a readonly table", 2)
 end
 

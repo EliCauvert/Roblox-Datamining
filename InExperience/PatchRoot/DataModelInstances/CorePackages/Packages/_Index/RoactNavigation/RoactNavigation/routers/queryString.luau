@@ -9,18 +9,18 @@ local String1 = LuauPolyfillModule.String
 local Number = LuauPolyfillModule.Number
 local RegExpModule = require(Parent1.RegExp)
 
-local function _(p1) --[[ Line: 28 | Named "TypeError" ]]
+local function _(p1)
 	return p1
 end
 
-local function encodeURIComponent(Input) --[[ Line: 32 ]]
+local function encodeURIComponent(Input)
 	-- upvalues: HttpService (copy)
 	return HttpService:UrlEncode(Input)
 end
 
-local function strictUriEncode(Input) --[[ Line: 36 ]]
+local function strictUriEncode(Input)
 	-- upvalues: HttpService (copy)
-	return HttpService:UrlEncode(Input):gsub("[!'%(%)%*]", function(Text: string) --[[ Line: 37 ]]
+	return HttpService:UrlEncode(Input):gsub("[!'%(%)%*]", function(Text: string)
 		return ("%%%x"):format(Text:byte()):upper()
 	end)
 end
@@ -30,17 +30,17 @@ local SplitOnFirstModule = require(Parent.splitOnFirst)
 local Callback = nil
 local Callback1 = nil
 
-local _ = function(p1): number --[[ Line: 51 | Named "newNumber" ]]
+local _ = function(p1): number
 	return tonumber(p1) or -(0 / 0)
 end
 
-local function encoderForArrayFormat(AssignResult) --[[ Line: 55 ]]
+local function encoderForArrayFormat(AssignResult)
 	-- upvalues: Array (copy), Callback (ref)
 	local ArrayFormat = AssignResult.arrayFormat
 	
-	return if ArrayFormat == "index" then function(p1) --[[ Line: 58 ]]
+	return if ArrayFormat == "index" then function(p1)
 		-- upvalues: AssignResult (copy), Array (upval), Callback (upval)
-		return function(p2, p3) --[[ Line: 59 ]]
+		return function(p2, p3)
 			-- upvalues: AssignResult (upval), Array (upval), Callback (upval), p1 (copy)
 			local CountP7 = #p2
 			
@@ -56,9 +56,9 @@ local function encoderForArrayFormat(AssignResult) --[[ Line: 55 ]]
 				}, "")
 			})
 		end
-	end elseif ArrayFormat == "bracket" then function(p1) --[[ Line: 88 ]]
+	end elseif ArrayFormat == "bracket" then function(p1)
 		-- upvalues: AssignResult (copy), Array (upval), Callback (upval)
-		return function(p2, p3) --[[ Line: 89 ]]
+		return function(p2, p3)
 			-- upvalues: AssignResult (upval), Array (upval), Callback (upval), p1 (copy)
 			return if AssignResult.skipNull and p3 == nil then p2 elseif p3 == nil then Array.concat(p2, { table.concat({ Callback(p1, AssignResult), "[]" }, "") }) else Array.concat(p2, {
 				table.concat({
@@ -68,9 +68,9 @@ local function encoderForArrayFormat(AssignResult) --[[ Line: 55 ]]
 				}, "")
 			})
 		end
-	end elseif ArrayFormat == "comma" or ArrayFormat == "separator" then function(p1) --[[ Line: 106 ]]
+	end elseif ArrayFormat == "comma" or ArrayFormat == "separator" then function(p1)
 		-- upvalues: Callback (upval), AssignResult (copy)
-		return function(p2, p3) --[[ Line: 107 ]]
+		return function(p2, p3)
 			-- upvalues: Callback (upval), p1 (copy), AssignResult (upval)
 			return if p3 == nil or #p3 == 0 then p2 elseif #p2 == 0 then {
 				table.concat({
@@ -82,9 +82,9 @@ local function encoderForArrayFormat(AssignResult) --[[ Line: 55 ]]
 				table.concat({ p2, Callback(p1, AssignResult) }, AssignResult.arrayFormatSeparator)
 			}
 		end
-	end else function(p1) --[[ Line: 124 ]]
+	end else function(p1)
 		-- upvalues: AssignResult (copy), Array (upval), Callback (upval)
-		return function(p2, p3) --[[ Line: 125 ]]
+		return function(p2, p3)
 			-- upvalues: AssignResult (upval), Array (upval), Callback (upval), p1 (copy)
 			return if AssignResult.skipNull and p3 == nil then p2 elseif p3 == nil then Array.concat(p2, { Callback(p1, AssignResult) }) else Array.concat(p2, {
 				table.concat({
@@ -97,12 +97,12 @@ local function encoderForArrayFormat(AssignResult) --[[ Line: 55 ]]
 	end
 end
 
-local function parserForArrayFormat(AssignResult) --[[ Line: 142 ]]
+local function parserForArrayFormat(AssignResult)
 	-- upvalues: RegExpModule (copy), Array (copy), Callback1 (ref)
 	local Entry = nil
 	local ArrayFormat = AssignResult.arrayFormat
 	
-	return if ArrayFormat == "index" then function(Text: string, p1, p2) --[[ Line: 146 ]]
+	return if ArrayFormat == "index" then function(Text: string, p1, p2)
 		-- upvalues: Entry (ref), RegExpModule (upval)
 		Entry = RegExpModule("\\[(\\d*)\\]$"):exec(Text)
 		local D = Text:gsub("%[%d*%]$", "")
@@ -116,7 +116,7 @@ local function parserForArrayFormat(AssignResult) --[[ Line: 142 ]]
 			p2[D] = {}
 		end
 		p2[D][Entry[2]] = p1
-	end elseif ArrayFormat == "bracket" then function(Text: string, p1, ConcatResults) --[[ Line: 163 ]]
+	end elseif ArrayFormat == "bracket" then function(Text: string, p1, ConcatResults)
 		-- upvalues: Entry (ref), RegExpModule (upval), Array (upval)
 		Entry = RegExpModule("(\\[\\])$"):exec(Text)
 		local v1 = Text:gsub("%[%]$", "")
@@ -133,14 +133,14 @@ local function parserForArrayFormat(AssignResult) --[[ Line: 142 ]]
 		else
 			ConcatResults[v1] = Array.concat({}, ConcatResults[v1], p1)
 		end
-	end elseif ArrayFormat == "comma" or ArrayFormat == "separator" then function(Key, Text: string, MapResults) --[[ Line: 180 ]]
+	end elseif ArrayFormat == "comma" or ArrayFormat == "separator" then function(Key, Text: string, MapResults)
 		-- upvalues: AssignResult (copy), Array (upval), Callback1 (upval)
 		local HasFoundAt: boolean = type(Text) == "string" and string.find(Text, AssignResult.arrayFormatSeparator, 1, true) ~= nil
-		MapResults[Key] = if HasFoundAt then Array.map(Text:split(AssignResult.arrayFormatSeparator), function(p1) --[[ Line: 185 ]]
+		MapResults[Key] = if HasFoundAt then Array.map(Text:split(AssignResult.arrayFormatSeparator), function(p1)
 			-- upvalues: Callback1 (upval), AssignResult (upval)
 			return Callback1(p1, AssignResult)
 		end) elseif Text == nil then nil else Callback1(Text, AssignResult)
-	end else function(Key, p1, ConcatResults) --[[ Line: 196 ]]
+	end else function(Key, p1, ConcatResults)
 		-- upvalues: Array (upval)
 		if ConcatResults[Key] == nil then
 			ConcatResults[Key] = p1
@@ -152,33 +152,33 @@ local function parserForArrayFormat(AssignResult) --[[ Line: 142 ]]
 	end
 end
 
-local _ = function(p1: string) --[[ Line: 207 | Named "validateArrayFormatSeparator" ]]
+local _ = function(p1: string)
 	if type(p1) ~= "string" or #p1 ~= 1 then
 		error("arrayFormatSeparator must be single character string")
 	end
 end
 
-Callback = function(Count, AssignResult) --[[ Line: 213 | Named "encode" ]]
+Callback = function(Count, AssignResult)
 	-- upvalues: strictUriEncode (copy), encodeURIComponent (copy)
 	return if AssignResult.encode then if AssignResult.strict then strictUriEncode(Count) else encodeURIComponent(Count) else Count
 end
 
-Callback1 = function(p1, AssignResult) --[[ Line: 225 | Named "decode" ]]
+Callback1 = function(p1, AssignResult)
 	-- upvalues: DecodeURIComponentModule (copy)
 	return if AssignResult.decode then DecodeURIComponentModule(p1) else p1
 end
 
-local function keysSorter(KeysResult) --[[ Line: 233 ]]
+local function keysSorter(KeysResult)
 	-- upvalues: Array (copy), keysSorter (copy), Object (copy)
-	return if Array.isArray(KeysResult) then Array.sort(KeysResult) elseif type(KeysResult) == "table" then Array.map(Array.sort(keysSorter(Object.keys(KeysResult)), function(p1, p2): number --[[ Line: 239 ]]
+	return if Array.isArray(KeysResult) then Array.sort(KeysResult) elseif type(KeysResult) == "table" then Array.map(Array.sort(keysSorter(Object.keys(KeysResult)), function(p1, p2): number
 		return (tonumber(p1) or -(0 / 0)) - (tonumber(p2) or -(0 / 0))
-	end), function(p1) --[[ Line: 242 ]]
+	end), function(p1)
 		-- upvalues: KeysResult (copy)
 		return KeysResult[p1]
 	end) else KeysResult
 end
 
-local _ = function(Text: string): string --[[ Line: 251 | Named "removeHash" ]]
+local _ = function(Text: string): string
 	local v1: number = Text:find("#")
 	
 	if v1 ~= nil then
@@ -187,7 +187,7 @@ local _ = function(Text: string): string --[[ Line: 251 | Named "removeHash" ]]
 	return Text
 end
 
-local _ = function(Text: string): string --[[ Line: 260 | Named "getHash" ]]
+local _ = function(Text: string): string
 	local Segment = ""
 	local v1: number = Text:find("#")
 	
@@ -197,7 +197,7 @@ local _ = function(Text: string): string --[[ Line: 260 | Named "getHash" ]]
 	return Segment
 end
 
-local function parseValue(Text, AssignResult) --[[ Line: 280 ]]
+local function parseValue(Text, AssignResult)
 	-- upvalues: Number (copy), String1 (copy)
 	if AssignResult.parseNumbers and not Number.isNaN(tonumber(Text) or -(0 / 0)) and type(Text) == "string" and String1.trim(Text) ~= "" then
 		Text = tonumber(Text) or -(0 / 0)
@@ -210,7 +210,7 @@ local function parseValue(Text, AssignResult) --[[ Line: 280 ]]
 	return Text
 end
 
-local function parse(Segment, p1) --[[ Line: 299 ]]
+local function parse(Segment, p1)
 	-- upvalues: Object (copy), parserForArrayFormat (copy), String1 (copy), SplitOnFirstModule (copy), Callback1 (ref), parseValue (copy), Array (copy), Boolean (copy), keysSorter (copy)
 	local AssignResult = Object.assign({
 		decode = true,
@@ -257,7 +257,7 @@ local function parse(Segment, p1) --[[ Line: 299 ]]
 			Entry[i1] = parseValue(Entry[i1], AssignResult)
 		end
 	end
-	return if AssignResult.sort == false then t else Array.reduce(if AssignResult.sort == true then Array.sort(Object.keys(t)) else Array.sort(Object.keys(t), AssignResult.sort), function(p2, Key) --[[ Line: 363 ]]
+	return if AssignResult.sort == false then t else Array.reduce(if AssignResult.sort == true then Array.sort(Object.keys(t)) else Array.sort(Object.keys(t), AssignResult.sort), function(p2, Key)
 		-- upvalues: t (copy), Boolean (upval), Array (upval), keysSorter (upval)
 		local Entry = t[Key]
 		
@@ -274,7 +274,7 @@ local function parse(Segment, p1) --[[ Line: 299 ]]
 end
 
 local QueryStringModule = {
-	extract = function(Url): string --[[ Line: 270 ]]
+	extract = function(Url): string
 		local Text: string = Url
 		local v4: number = Text:find("#")
 		
@@ -286,7 +286,7 @@ local QueryStringModule = {
 		return if v5 == nil then "" else Text:sub(v5 + 1)
 	end,
 	parse = parse,
-	stringify = function(Tbl, p2): string --[[ Line: 380 ]]
+	stringify = function(Tbl, p2): string
 		-- upvalues: Object (copy), encoderForArrayFormat (copy), Array (copy), Callback (ref)
 		if not Tbl then
 			return ""
@@ -308,16 +308,16 @@ local QueryStringModule = {
 		if AssignResult.sort ~= false then
 			Array.sort(KeysResult, AssignResult.sort)
 		end
-		return table.concat(Array.filter(Array.map(KeysResult, function(p3) --[[ Line: 414 ]]
+		return table.concat(Array.filter(Array.map(KeysResult, function(p3)
 			-- upvalues: Tbl (copy), Callback (upval), AssignResult (ref), Array (upval), EncoderForArrayFormatResult (copy)
 			local Entry = Tbl[p3]
 			
 			return if Entry == nil then Callback(p3, AssignResult) elseif Array.isArray(Entry) then table.concat(Array.reduce(Entry, EncoderForArrayFormatResult(p3), {}), "&") else Callback(p3, AssignResult) + "=" + Callback(Entry, AssignResult)
-		end), function(p3): boolean --[[ Line: 430 ]]
+		end), function(p3): boolean
 			return p3.length > 0
 		end), "&")
 	end,
-	parseUrl = function(p2, p3) --[[ Line: 438 ]]
+	parseUrl = function(p2, p3)
 		-- upvalues: parse (copy)
 		local t = {}
 		local Text: string = p2
@@ -340,7 +340,7 @@ local QueryStringModule = {
 	end
 }
 
-function QueryStringModule.stringifyUrl(p2, p3): string --[[ Line: 445 ]]
+function QueryStringModule.stringifyUrl(p2, p3): string
 	-- upvalues: QueryStringModule (copy), Object (copy)
 	local Url = p2.url
 	local v4: number = Url:find("#")

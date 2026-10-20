@@ -5,16 +5,16 @@ local GetAudioPlaybackStoreModule = require(MediaPlayback.Stores.getAudioPlaybac
 local UseEffectFunction = ReactModule.useEffect
 local UseMemoFunction = ReactModule.useMemo
 
-return function(p1, p2) --[[ Line: 11 | Named "useAudioStore" ]]
+return function(p1, p2)
 	-- upvalues: UseMemoFunction (copy), GetAudioPlaybackStoreModule (copy), UseEffectFunction (copy)
 	local P0 = p1 or "-1"
-	local UseMemoResult = UseMemoFunction(function() --[[ Line: 14 ]]
+	local UseMemoResult = UseMemoFunction(function()
 		-- upvalues: GetAudioPlaybackStoreModule (upval), P0 (copy), p2 (copy)
 		return GetAudioPlaybackStoreModule(false).getOrCreateAudioStore(P0, p2)
 	end, { P0, p2 })
-	UseEffectFunction(function() --[[ Line: 19 ]]
+	UseEffectFunction(function()
 		-- upvalues: GetAudioPlaybackStoreModule (upval), P0 (copy), p2 (copy)
-		return function() --[[ Line: 20 ]]
+		return function()
 			-- upvalues: GetAudioPlaybackStoreModule (upval), P0 (upval), p2 (upval)
 			GetAudioPlaybackStoreModule(false).destroyAudioStore(P0, p2)
 		end

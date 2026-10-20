@@ -8,12 +8,12 @@ local FriendRequestDeclinedModule = require(Actions.FriendRequestDeclined)
 local _ = require(Parent.roduxFriendsTypes)
 local t = {}
 
-return function(p1) --[[ Line: 17 ]]
+return function(p1)
 	-- upvalues: RoduxModule (copy), t (copy), RecommendationCreatedModule (copy), LlamaModule (copy), FriendRequestDeclinedModule (copy)
 	local FriendsNetworking = p1.friendsNetworking
 	
 	return RoduxModule.createReducer(t, {
-		[RecommendationCreatedModule.name] = function(p2, p3) --[[ Line: 21 ]]
+		[RecommendationCreatedModule.name] = function(p2, p3)
 			-- upvalues: LlamaModule (upval)
 			local RecommendedUser = p3.payload.recommendedUser
 			
@@ -21,33 +21,33 @@ return function(p1) --[[ Line: 17 ]]
 				[tostring(RecommendedUser.id)] = if RecommendedUser.hasIncomingFriendRequest then true else false
 			})
 		end,
-		[FriendsNetworking.GetFriendRecommendationsFromUserId.Succeeded.name] = function(p2, p3) --[[ Line: 33 ]]
+		[FriendsNetworking.GetFriendRecommendationsFromUserId.Succeeded.name] = function(p2, p3)
 			-- upvalues: LlamaModule (upval)
-			return LlamaModule.Dictionary.join(p2, (LlamaModule.List.reduce(LlamaModule.List.filter(p3.responseBody.data, function(p4): boolean --[[ Line: 37 ]]
+			return LlamaModule.Dictionary.join(p2, (LlamaModule.List.reduce(LlamaModule.List.filter(p3.responseBody.data, function(p4): boolean
 				return p4.contextType ~= "Contacts"
-			end, {}), function(p4, p5) --[[ Line: 41 ]]
+			end, {}), function(p4, p5)
 				p4[tostring(p5.id)] = if p5.friendRequest then true else false
 				
 				return p4
 			end, {})))
 		end,
-		[FriendsNetworking.DeclineFriendRequestFromUserId.Succeeded.name] = function(p2, p3) --[[ Line: 50 ]]
+		[FriendsNetworking.DeclineFriendRequestFromUserId.Succeeded.name] = function(p2, p3)
 			-- upvalues: LlamaModule (upval)
-			return LlamaModule.Dictionary.join(p2, (LlamaModule.List.reduce(p3.ids, function(p4, p5) --[[ Line: 55 ]]
+			return LlamaModule.Dictionary.join(p2, (LlamaModule.List.reduce(p3.ids, function(p4, p5)
 				p4[tostring(p5)] = false
 				
 				return p4
 			end, {})))
 		end,
-		[FriendRequestDeclinedModule.name] = function(p2, p3) --[[ Line: 63 ]]
+		[FriendRequestDeclinedModule.name] = function(p2, p3)
 			-- upvalues: LlamaModule (upval)
-			return LlamaModule.Dictionary.join(p2, (LlamaModule.List.reduce(p3.ids, function(p4, p5) --[[ Line: 68 ]]
+			return LlamaModule.Dictionary.join(p2, (LlamaModule.List.reduce(p3.ids, function(p4, p5)
 				p4[tostring(p5)] = false
 				
 				return p4
 			end, {})))
 		end,
-		[FriendsNetworking.DeclineAllFriendRequests.Succeeded.name] = function(_) --[[ Line: 76 ]]
+		[FriendsNetworking.DeclineAllFriendRequests.Succeeded.name] = function(_)
 			-- upvalues: t (upval)
 			return t
 		end

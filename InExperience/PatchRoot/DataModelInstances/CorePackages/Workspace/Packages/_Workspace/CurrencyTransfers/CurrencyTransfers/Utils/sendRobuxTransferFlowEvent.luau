@@ -2,7 +2,7 @@
 local Default = require(CurrencyTransfers.Parent.LoggingProtocol).default
 local RobuxTransferFlowTelemetryModule = require(CurrencyTransfers.Events.RobuxTransferFlowTelemetry)
 
-function sendRobuxTransferFlowEvent(p1) --[[ Line: 7 ]]
+function sendRobuxTransferFlowEvent(p1)
 	-- upvalues: Default (copy), RobuxTransferFlowTelemetryModule (copy)
 	Default:logRobloxTelemetryEvent(RobuxTransferFlowTelemetryModule.RobuxTransferFlowEvent, {
 		Default.StandardizedFields.addOsInfo,

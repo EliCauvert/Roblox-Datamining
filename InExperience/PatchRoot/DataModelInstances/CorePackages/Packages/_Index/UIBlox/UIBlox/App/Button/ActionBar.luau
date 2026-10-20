@@ -20,13 +20,13 @@ local ConstantsModule = require(Parent1.Style.Constants)
 local UIBloxConfigModule = require(Parent2.UIBloxConfig)
 local ActionBar = RoactModule.PureComponent:extend("ActionBar")
 
-function ActionBar.init(p1) --[[ Line: 33 ]]
+function ActionBar.init(p1)
 	-- upvalues: RoactGamepadModule (copy), RoactModule (copy)
 	p1.buttonRefs = p1.props.isRoactGamepadEnabled and RoactGamepadModule.createRefCache() or {}
 	p1.state = { frameWidth = 0 }
 	p1.frameRef = p1.props.frameRef or RoactModule.createRef()
 	
-	function p1.updateFrameSize(Frame: Frame) --[[ Line: 42 ]]
+	function p1.updateFrameSize(Frame: Frame)
 		-- upvalues: p1 (copy)
 		local X = Frame.AbsoluteSize.X
 		
@@ -38,12 +38,12 @@ function ActionBar.init(p1) --[[ Line: 33 ]]
 		end
 	end
 	
-	function p1.getGamepadNextSelectionLeft(LayoutOrder: number, _) --[[ Line: 55 ]]
+	function p1.getGamepadNextSelectionLeft(LayoutOrder: number, _)
 		-- upvalues: p1 (copy)
 		return LayoutOrder > 1 and p1.buttonRefs[LayoutOrder - 1] or nil
 	end
 	
-	function p1.getGamepadNextSelectionRight(LayoutOrder: number, p2) --[[ Line: 59 ]]
+	function p1.getGamepadNextSelectionRight(LayoutOrder: number, p2)
 		-- upvalues: p1 (copy)
 		return LayoutOrder < p2 and p1.buttonRefs[LayoutOrder + 1] or nil
 	end
@@ -84,9 +84,9 @@ ActionBar.defaultProps = {
 	horizontalAlignment = Enum.HorizontalAlignment.Center
 }
 
-function ActionBar.render(p1) --[[ Line: 136 ]]
+function ActionBar.render(p1)
 	-- upvalues: WithStyleModule (copy), GetPageMarginModule (copy), IconSizeModule (copy), ConstantsModule (copy), UIBloxConfigModule (copy), CryoModule (copy), RoactModule (copy), RoactGamepadModule (copy), ReactModule (copy), IconButtonModule (copy), TextButtonModule (copy), ComboButtonModule (copy), ButtonTypeModule (copy), ButtonModule (copy), FitFrameOnAxis (copy)
-	return WithStyleModule(function(_) --[[ Line: 137 ]]
+	return WithStyleModule(function(_)
 		-- upvalues: GetPageMarginModule (upval), p1 (copy), IconSizeModule (upval), ConstantsModule (upval), UIBloxConfigModule (upval), CryoModule (upval), RoactModule (upval), RoactGamepadModule (upval), ReactModule (upval), IconButtonModule (upval), TextButtonModule (upval), ComboButtonModule (upval), ButtonTypeModule (upval), ButtonModule (upval), FitFrameOnAxis (upval)
 		local PageMarginModule: number = GetPageMarginModule(p1.state.frameWidth)
 		local FrameWidthDelta = p1.state.frameWidth - PageMarginModule * 2
@@ -213,13 +213,13 @@ function ActionBar.render(p1) --[[ Line: 136 ]]
 	end)
 end
 
-function ActionBar.didMount(p2) --[[ Line: 352 ]]
+function ActionBar.didMount(p2)
 	if p2.frameRef.current then
 		p2.updateFrameSize(p2.frameRef.current)
 	end
 end
 
-local ForwardRefResult = RoactModule.forwardRef(function(p2, FrameRef) --[[ Line: 358 ]]
+local ForwardRefResult = RoactModule.forwardRef(function(p2, FrameRef)
 	-- upvalues: RoactModule (copy), ActionBar (copy), CryoModule (copy)
 	return RoactModule.createElement(ActionBar, CryoModule.Dictionary.join(p2, { frameRef = FrameRef }))
 end)

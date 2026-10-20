@@ -9,7 +9,7 @@ local GameTopicIds = require(Parent.DiscoveryTypes).GameTopicIds
 local OpenInfoPeekViewFunction = require(Parent.DiscoveryRouting).OpenInfoPeekView
 local OpenCloseOnlyInteractiveAlertFunction = require(Parent.DiscoveryRouting).OpenCloseOnlyInteractiveAlert
 
-local function _(p1, p2): boolean --[[ Line: 15 | Named "isSponsoredSort" ]]
+local function _(p1, p2): boolean
 	-- upvalues: GameTopicIds (copy)
 	if p2 then
 		if p1 and p1.topicId == GameTopicIds.Sponsored then
@@ -21,7 +21,7 @@ local function _(p1, p2): boolean --[[ Line: 15 | Named "isSponsoredSort" ]]
 	return false
 end
 
-return function(p1, p2, p3) --[[ Line: 31 | Named "useGameSortTooltipParams" ]]
+return function(p1, p2, p3)
 	-- upvalues: UseDispatchFunction (copy), UseLocalizationFunction (copy), UsePreferredInputFunction (copy), GameTopicIds (copy), ReactModule (copy), ResponsiveModule (copy), OpenInfoPeekViewFunction (copy), OpenCloseOnlyInteractiveAlertFunction (copy), CloseCentralOverlayFunction (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -47,14 +47,14 @@ return function(p1, p2, p3) --[[ Line: 31 | Named "useGameSortTooltipParams" ]]
 	local SponsoredDisclosure1 = if Flag and p3 == nil then SponsoredDisclosure else p3
 	local SponsoredTitle1 = if Flag then SponsoredTitle else p1 and p1.displayName or ""
 	
-	return ReactModule.useCallback(function() --[[ Line: 44 ]]
+	return ReactModule.useCallback(function()
 		-- upvalues: UsePreferredInputResult (copy), ResponsiveModule (upval), UseDispatchResult (copy), OpenInfoPeekViewFunction (upval), SponsoredTitle1 (copy), SponsoredDisclosure1 (copy), OpenCloseOnlyInteractiveAlertFunction (upval), CloseCentralOverlayFunction (upval)
 		if UsePreferredInputResult == ResponsiveModule.Input.Touch then
 			UseDispatchResult(OpenInfoPeekViewFunction(SponsoredTitle1, SponsoredDisclosure1))
 			
 			return
 		else
-			UseDispatchResult(OpenCloseOnlyInteractiveAlertFunction(SponsoredTitle1, SponsoredDisclosure1, function() --[[ Line: 48 ]]
+			UseDispatchResult(OpenCloseOnlyInteractiveAlertFunction(SponsoredTitle1, SponsoredDisclosure1, function()
 				-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
 				return UseDispatchResult(CloseCentralOverlayFunction())
 			end))

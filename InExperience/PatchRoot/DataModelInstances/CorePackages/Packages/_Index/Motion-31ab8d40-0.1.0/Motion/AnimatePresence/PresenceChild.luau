@@ -2,11 +2,11 @@
 local UseIdFallbackFunction = require(script.Parent.utils).useIdFallback
 local PresenceContextModule = require(script.Parent.PresenceContext)
 
-local function _() --[[ Line: 36 | Named "newChildrenMap" ]]
+local function _()
 	return {}
 end
 
-return function(p1) --[[ Line: 40 | Named "PresenceChild" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseIdFallbackFunction (copy), PresenceContextModule (copy)
 	if not p1.children or typeof(p1.children) == "string" then
 		error("PresenceChild: children must be a React.Element")
@@ -25,7 +25,7 @@ return function(p1) --[[ Line: 40 | Named "PresenceChild" ]]
 		id = p1.presenceId or UseIdFallbackFunction(),
 		isPresent = IsPresent ~= false,
 		passThroughData = p1.passThroughData,
-		onExitComplete = function(Key) --[[ Line: 76 ]]
+		onExitComplete = function(Key)
 			-- upvalues: Current (copy), OnExitCompleteFunction (copy)
 			Current[Key] = true
 			local Flag = true

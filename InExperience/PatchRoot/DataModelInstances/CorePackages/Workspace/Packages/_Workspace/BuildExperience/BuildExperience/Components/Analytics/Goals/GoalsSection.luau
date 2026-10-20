@@ -30,13 +30,13 @@ for _, goal in GoalsModule.Goals do
 		end
 	end
 end
-return function(p1) --[[ Line: 50 | Named "GoalsSection" ]]
+return function(p1)
 	-- upvalues: UseMetricMetadataModule (copy), List (copy), UseGoalMilestonesModule (copy), ReactModule (copy), UseGoalsSectionViewModelModule (copy), GoalsModule (copy), UseGoalLockedActionsModule (copy), GoalsSectionViewModule (copy), MetricDetailSheetModule (copy)
 	local TestId = p1.testId or "GoalsSection"
 	local UseMetricMetadataModuleResult = UseMetricMetadataModule(List)
 	local UseGoalMilestonesModuleResult = UseGoalMilestonesModule(p1.universeId)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 56 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(nil)
 	end, {})

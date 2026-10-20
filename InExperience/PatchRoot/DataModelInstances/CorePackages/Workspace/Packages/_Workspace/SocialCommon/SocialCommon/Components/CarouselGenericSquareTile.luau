@@ -16,7 +16,7 @@ local config = {
 	labelText = "",
 	tileSize = 100,
 	borderThickness = 0,
-	onActivated = function() --[[ Line: 62 ]] end,
+	onActivated = function() end,
 	iconSize = UIBloxModule.App.Constant.IconSize.Large,
 	cornerRadius = UDim.new(0, 8),
 	styleProps = {
@@ -25,7 +25,7 @@ local config = {
 	}
 }
 
-return function(p1) --[[ Line: 73 ]]
+return function(p1)
 	-- upvalues: DashModule (copy), config (copy), UseStyleFunction (copy), Text (copy), ReactModule (copy), UseImpressionsTaggerFunction (copy), ImageSetButton (copy), ImageSetLabel (copy), Colors (copy), Badge (copy), StyledTextLabel (copy)
 	local JoinResult = DashModule.join(config, p1 or {})
 	local UseStyleResult = UseStyleFunction()

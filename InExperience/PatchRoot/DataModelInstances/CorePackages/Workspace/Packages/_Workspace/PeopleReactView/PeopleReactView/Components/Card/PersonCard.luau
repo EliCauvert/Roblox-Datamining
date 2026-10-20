@@ -15,24 +15,24 @@ local GetFFlagPeoplePageLazyRenderCardsFunction = FlagsService.GetFFlagPeoplePag
 local GetFFlagFixPeoplePageCardTooltipFunction = FlagsService.GetFFlagFixPeoplePageCardTooltip
 local FFlagPeopleCardsEnableVirtualizedGrid = FlagsService.FFlagPeopleCardsEnableVirtualizedGrid
 
-return ReactModule.memo(function(p1) --[[ Line: 37 | Named "PersonCard" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: GetFFlagPeoplePageEnablePersonSignalStoreFunction (copy), SignalsReactModule (copy), SignalsModule (copy), ReactIsModule (copy), ReactModule (copy), FFlagPeopleCardsEnableVirtualizedGrid (copy), LocalPlayer (copy), View (copy), GetFFlagFixPeoplePageCardTooltipFunction (copy), CardThumbnailModule (copy), GetFFlagPeoplePageLazyRenderCardsFunction (copy), CardDetailsModule (copy), CardTooltipModule (copy)
-	local UseSignalBindingResult = if GetFFlagPeoplePageEnablePersonSignalStoreFunction() then SignalsReactModule.useSignalBinding(SignalsModule.createComputed(function(p2) --[[ Line: 39 ]]
+	local UseSignalBindingResult = if GetFFlagPeoplePageEnablePersonSignalStoreFunction() then SignalsReactModule.useSignalBinding(SignalsModule.createComputed(function(p2)
 		-- upvalues: p1 (copy)
 		return if type(p1.layoutOrder) == "function" then p1.layoutOrder(p2) else p1.layoutOrder or 0
 	end)) else nil
-	local MapResult = if ReactIsModule.isBinding(p1.width) then p1.width:map(function(XOffset): UDim2 --[[ Line: 49 ]]
+	local MapResult = if ReactIsModule.isBinding(p1.width) then p1.width:map(function(XOffset): UDim2
 		return UDim2.new(0, XOffset, 0, 0)
 	end) else UDim2.new(0, p1.width, 0, 0)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(not FFlagPeopleCardsEnableVirtualizedGrid and p1.showTooltip)
 	
 	if FFlagPeopleCardsEnableVirtualizedGrid then
-		ReactModule.useEffect(function() --[[ Line: 61 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseStateResult2 (copy), p1 (copy), LocalPlayer (upval)
 			UseStateResult2(p1.showTooltip and (LocalPlayer ~= nil and p1.person.UserId == LocalPlayer.UserId))
 		end, { p1.showTooltip, p1.person })
 	end
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 66 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), p1 (copy)
 		UseStateResult2(false)
 		p1.onDismissTooltip()

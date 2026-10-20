@@ -6,7 +6,7 @@ local _ = require(script.Parent.InteractionFeedbackContext)
 local TriggerHapticModule = require(script.Parent.triggerHaptic)
 SoundManager.init()
 
-return function(Text, p1, p2, p3, p4, p5, p6) --[[ Line: 16 | Named "triggerFeedback" ]]
+return function(Text, p1, p2, p3, p4, p5, p6)
 	-- upvalues: Sounds (copy), SoundManager (copy), SoundGroups (copy), TriggerHapticModule (copy)
 	if not p2 then
 		error("No config table was provided to InteractionFeedbackManager. Something is wrong.")

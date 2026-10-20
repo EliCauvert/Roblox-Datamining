@@ -1,6 +1,6 @@
 ﻿local ConstantsModule = require(script.Parent.Parent.Constants)
 
-return function(p1) --[[ Line: 5 | Named "waitForFlashOverlay" ]]
+return function(p1)
 	-- upvalues: ConstantsModule (copy)
 	if not p1:getState()[ConstantsModule.RoduxKey].IsOverlayFlashActive then return end
 	local CurrentTime = tick()

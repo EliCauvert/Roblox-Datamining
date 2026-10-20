@@ -13,9 +13,9 @@ local IconSize = UIBloxModule.App.ImageSet.Enum.IconSize
 local Images = UIBloxModule.App.ImageSet.Images
 local WithStyleFunction = UIBloxModule.Style.withStyle
 
-local function _(OnActivated) --[[ Line: 38 | Named "renderHeaderBarLeft" ]]
+local function _(OnActivated)
 	-- upvalues: ReactModule (copy), IconButton (copy), IconSize (copy), Images (copy)
-	return function() --[[ Line: 39 ]]
+	return function()
 		-- upvalues: ReactModule (upval), IconButton (upval), IconSize (upval), Images (upval), OnActivated (copy)
 		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -37,11 +37,11 @@ local function _(OnActivated) --[[ Line: 38 | Named "renderHeaderBarLeft" ]]
 	end
 end
 
-local _ = function(Text) --[[ Line: 60 | Named "renderHeaderBarCenter" ]]
+local _ = function(Text)
 	-- upvalues: WithStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
-	return function() --[[ Line: 61 ]]
+	return function()
 		-- upvalues: WithStyleFunction (upval), ReactModule (upval), Text (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
-		return WithStyleFunction(function(p1) --[[ Line: 62 ]]
+		return WithStyleFunction(function(p1)
 			-- upvalues: ReactModule (upval), Text (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 			local CurrentCamera = game.Workspace.CurrentCamera
 			local Theme = p1.Theme
@@ -64,9 +64,9 @@ local _ = function(Text) --[[ Line: 60 | Named "renderHeaderBarCenter" ]]
 	end
 end
 
-local _ = function() --[[ Line: 92 | Named "renderHeaderBarRight" ]]
+local _ = function()
 	-- upvalues: ReactModule (copy)
-	return function() --[[ Line: 93 ]]
+	return function()
 		-- upvalues: ReactModule (upval)
 		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -83,11 +83,11 @@ local _ = function() --[[ Line: 92 | Named "renderHeaderBarRight" ]]
 end
 
 return {
-	PortraitModeHeader = function(p1) --[[ Line: 108 ]]
+	PortraitModeHeader = function(p1)
 		-- upvalues: ReactModule (copy), HeaderBar (copy), IconButton (copy), IconSize (copy), Images (copy), WithStyleFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 		local BackAction = p1.backAction
 		
-		local function RenderLeft() --[[ Line: 39 ]]
+		local function RenderLeft()
 			-- upvalues: ReactModule (upval), IconButton (upval), IconSize (upval), Images (upval), BackAction (copy)
 			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -124,7 +124,7 @@ return {
 				margin = 12,
 				isSecondary = true,
 				renderLeft = RenderLeft,
-				renderRight = function() --[[ Line: 93 ]]
+				renderRight = function()
 					-- upvalues: ReactModule (upval)
 					return ReactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
@@ -138,9 +138,9 @@ return {
 						})
 					})
 				end,
-				renderCenter = function() --[[ Line: 61 ]]
+				renderCenter = function()
 					-- upvalues: WithStyleFunction (upval), ReactModule (upval), TitleText (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
-					return WithStyleFunction(function(p2) --[[ Line: 62 ]]
+					return WithStyleFunction(function(p2)
 						-- upvalues: ReactModule (upval), TitleText (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 						local CurrentCamera = game.Workspace.CurrentCamera
 						local Theme = p2.Theme
@@ -164,7 +164,7 @@ return {
 			})
 		})
 	end,
-	PortraitModeFooter = function(p1) --[[ Line: 129 ]]
+	PortraitModeFooter = function(p1)
 		-- upvalues: ReactModule (copy), FoundationModule (copy), Button (copy), ButtonVariant (copy), InputSize (copy)
 		return ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,

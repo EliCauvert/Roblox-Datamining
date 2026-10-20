@@ -16,10 +16,10 @@ NewPage.IsPageClipped = false
 NewPage.Page.Name = "ShareGameDummy"
 NewPage.Page.Size = UDim2.new(1, 0, 0, 0)
 
-function NewPage:ConnectHubToApp(p1, p2) --[[ Line: 37 ]]
+function NewPage:ConnectHubToApp(p1, p2)
 	-- upvalues: NewPage (copy), ConstantsModule (copy), OpenPageModule (copy), FFlagEnableConsoleExpControls (copy), EnabledResult (copy), RobloxGui (copy), ClosePageModule (copy)
 	NewPage:SetHub(p1)
-	p2.store.changed:connect(function(Value, p3) --[[ Line: 40 ]]
+	p2.store.changed:connect(function(Value, p3)
 		-- upvalues: ConstantsModule (upval), NewPage (upval)
 		local Page = Value.Page
 		local IsOpen = p3.Page.IsOpen
@@ -28,7 +28,7 @@ function NewPage:ConnectHubToApp(p1, p2) --[[ Line: 37 ]]
 			NewPage.HubRef:PopMenu(nil, true)
 		end
 	end)
-	NewPage.Displayed.Event:Connect(function() --[[ Line: 52 ]]
+	NewPage.Displayed.Event:Connect(function()
 		-- upvalues: p2 (copy), OpenPageModule (upval), ConstantsModule (upval), FFlagEnableConsoleExpControls (upval), EnabledResult (upval), RobloxGui (upval)
 		if not p2.store:getState().Page.IsOpen then
 			p2.store:dispatch(OpenPageModule(ConstantsModule.PageRoute.SETTINGS_HUB))
@@ -38,7 +38,7 @@ function NewPage:ConnectHubToApp(p1, p2) --[[ Line: 37 ]]
 			end
 		end
 	end)
-	NewPage.Hidden.Event:Connect(function() --[[ Line: 64 ]]
+	NewPage.Hidden.Event:Connect(function()
 		-- upvalues: p2 (copy), ClosePageModule (upval), ConstantsModule (upval), FFlagEnableConsoleExpControls (upval), EnabledResult (upval), RobloxGui (upval)
 		if p2.store:getState().Page.IsOpen then
 			p2.store:dispatch(ClosePageModule(ConstantsModule.PageRoute.SETTINGS_HUB))
@@ -51,7 +51,7 @@ function NewPage:ConnectHubToApp(p1, p2) --[[ Line: 37 ]]
 	p2.store:dispatch(ClosePageModule(ConstantsModule.PageRoute.SETTINGS_HUB))
 end
 
-function NewPage:ClearShareInviteLink(p1) --[[ Line: 81 ]]
+function NewPage:ClearShareInviteLink(p1)
 	-- upvalues: ClearShareInviteLinkFunction (copy)
 	if p1.store:getState().ShareLinks.Invites.ShareInviteLink ~= nil then
 		p1.store:dispatch(ClearShareInviteLinkFunction())

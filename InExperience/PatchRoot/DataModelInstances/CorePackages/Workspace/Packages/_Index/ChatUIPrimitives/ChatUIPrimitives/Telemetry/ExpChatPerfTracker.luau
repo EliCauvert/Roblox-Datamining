@@ -12,7 +12,7 @@ local ScrollIntervalTrackerModule = require(Parent.ScrollIntervalTracker)
 local FFlagExpChatMigrateScrollIntervalTrackerModule = require(ChatUIPrimitives.Flags.FFlagExpChatMigrateScrollIntervalTracker)
 local FFlagExpChatPerfTrackerTabNameModule = require(ChatUIPrimitives.Flags.FFlagExpChatPerfTrackerTabName)
 local ExpChatPerfTrackerModule = {
-	start = function(DebugName, p1, p2): boolean --[[ Line: 25 ]]
+	start = function(DebugName, p1, p2): boolean
 		-- upvalues: EventConfig (copy), EventTypes (copy), TimeToInteractiveTracker (copy), FFlagExpChatPerfTrackerTabNameModule (copy), IntervalPerformanceTracker (copy), ExpChatPerfTracker (copy)
 		local EventConfigEntry = EventConfig[DebugName] or {}
 		
@@ -44,7 +44,7 @@ local ExpChatPerfTrackerModule = {
 			return true
 		end
 	end,
-	finish = function(DebugName, p3, p4) --[[ Line: 61 ]]
+	finish = function(DebugName, p3, p4)
 		-- upvalues: EventConfig (copy), EventTypes (copy), FFlagExpChatPerfTrackerTabNameModule (copy), TimeToInteractiveTracker (copy), ExpChatPerfTracker (copy), IntervalPerformanceTracker (copy)
 		local EventConfigEntry = EventConfig[DebugName] or {}
 		
@@ -70,7 +70,7 @@ local ExpChatPerfTrackerModule = {
 			IntervalPerformanceTracker:stopAndLogTracking(EventConfigEntry.name)
 		end
 	end,
-	cancel = function(p5, p6) --[[ Line: 85 ]]
+	cancel = function(p5, p6)
 		-- upvalues: EventConfig (copy), EventTypes (copy), TimeToInteractiveTracker (copy), IntervalPerformanceTracker (copy), ExpChatPerfTracker (copy)
 		local EventConfigEntry = EventConfig[p5] or {}
 		
@@ -90,7 +90,7 @@ local ExpChatPerfTrackerModule = {
 	end
 }
 
-function ExpChatPerfTrackerModule.cancelAll() --[[ Line: 97 ]]
+function ExpChatPerfTrackerModule.cancelAll()
 	-- upvalues: EventConfig (copy), ExpChatPerfTrackerModule (copy)
 	for i, _ in EventConfig do
 		ExpChatPerfTrackerModule.cancel(i)
@@ -99,16 +99,16 @@ end
 
 ExpChatPerfTrackerModule.Events = Events
 
-function ExpChatPerfTrackerModule.startChatWindowScrollInterval(DebugName, p7, p8, p9) --[[ Line: 104 ]]
+function ExpChatPerfTrackerModule.startChatWindowScrollInterval(DebugName, p7, p8, p9)
 	-- upvalues: ExpChatPerfTrackerModule (copy), FFlagExpChatMigrateScrollIntervalTrackerModule (copy), ScrollIntervalTrackerModule (copy), SocialLuaAnalyticsModule (copy)
 	local config = { debugName = DebugName }
 	
-	local function v17(p10) --[[ Line: 113 ]]
+	local function v17(p10)
 		-- upvalues: ExpChatPerfTrackerModule (upval), DebugName (copy), p9 (copy)
 		return ExpChatPerfTrackerModule.start(DebugName, p10, p9)
 	end
 	
-	local function v18(p10) --[[ Line: 116 ]]
+	local function v18(p10)
 		-- upvalues: ExpChatPerfTrackerModule (upval), DebugName (copy)
 		ExpChatPerfTrackerModule.finish(DebugName, p10)
 	end

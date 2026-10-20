@@ -9,10 +9,10 @@ local FFlagUseAnimateScrollViewToSelectionHelper = SharedFlagsModule.FFlagUseAni
 local FFlagLuaAppMediaGalleryGamepadSupport = SharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
 local AnimateScrollViewToSelectionHelperModule = require(AppBlox.AnimateScrollViewToSelectionHelper)
 
-return function(p1, Duration, p2) --[[ Line: 14 | Named "useAnimateScrollViewToSelection" ]]
+return function(p1, Duration, p2)
 	-- upvalues: FFlagUseAnimateScrollViewToSelectionHelper (copy), ReactModule (copy), AnimateScrollViewToSelectionHelperModule (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), GamepadService (copy), UserGameSettings (copy), TweenService (copy)
 	if FFlagUseAnimateScrollViewToSelectionHelper then
-		ReactModule.useEffect(function() --[[ Line: 21 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p1 (copy), AnimateScrollViewToSelectionHelperModule (upval), Duration (copy), FFlagLuaAppMediaGalleryGamepadSupport (upval), p2 (copy)
 			local v1 = nil
 			local Connections = {}
@@ -20,7 +20,7 @@ return function(p1, Duration, p2) --[[ Line: 14 | Named "useAnimateScrollViewToS
 			if p1 then
 				Connections, v10 = AnimateScrollViewToSelectionHelperModule(p1.current, Duration, nil, if FFlagLuaAppMediaGalleryGamepadSupport then p2 else nil)
 			end
-			return function() --[[ Line: 33 ]]
+			return function()
 				-- upvalues: Connections (ref), v1 (ref)
 				for _, connection in Connections do
 					connection:Disconnect()
@@ -37,7 +37,7 @@ return function(p1, Duration, p2) --[[ Line: 14 | Named "useAnimateScrollViewToS
 		
 		return
 	else
-		ReactModule.useEffect(function() --[[ Line: 49 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p1 (copy), GamepadService (upval), UserGameSettings (upval), TweenService (upval), Duration (copy)
 			local List = {}
 			local CreateResult = nil
@@ -48,15 +48,15 @@ return function(p1, Duration, p2) --[[ Line: 14 | Named "useAnimateScrollViewToS
 				local Current = p1.current
 				Y = Current.AbsolutePosition.Y
 				Y1 = Current.AbsoluteWindowSize.Y
-				table.insert(List, Current:GetPropertyChangedSignal("AbsolutePosition"):Connect(function() --[[ Line: 61 ]]
+				table.insert(List, Current:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
 					-- upvalues: Y (ref), Current (copy)
 					Y = Current.AbsolutePosition.Y
 				end))
-				table.insert(List, Current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function() --[[ Line: 67 ]]
+				table.insert(List, Current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
 					-- upvalues: Y1 (ref), Current (copy)
 					Y1 = Current.AbsoluteWindowSize.Y
 				end))
-				table.insert(List, Current.SelectionChanged:Connect(function(_, _, Frame: Frame) --[[ Line: 73 ]]
+				table.insert(List, Current.SelectionChanged:Connect(function(_, _, Frame: Frame)
 					-- upvalues: Current (copy), GamepadService (upval), CreateResult (ref), Y1 (ref), Y (ref), UserGameSettings (upval), TweenService (upval), Duration (upval)
 					if Frame == nil or not Frame:IsDescendantOf(Current) or GamepadService.GamepadCursorEnabled then return end
 					if CreateResult then
@@ -78,7 +78,7 @@ return function(p1, Duration, p2) --[[ Line: 14 | Named "useAnimateScrollViewToS
 					end
 				end))
 			end
-			return function() --[[ Line: 113 ]]
+			return function()
 				-- upvalues: List (copy), CreateResult (ref)
 				for _, Connection in List do
 					Connection:Disconnect()

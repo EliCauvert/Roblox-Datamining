@@ -21,19 +21,19 @@ local NewXScale2: UDim = XScale2 + _UDim6
 local XScale3: UDim = NewXScale2 + _UDim7
 local TextBoxGray = ConstantsModule.Color.TextBoxGray
 
-local function _(p1: number): string --[[ Line: 37 | Named "formatHexSsrc" ]]
+local function _(p1: number): string
 	return if type(p1) == "number" and p1 == p1 and p1 % 1 == 0 then string.format("0x%08X", p1) else "—"
 end
 
-local _ = function(p1): string --[[ Line: 44 | Named "formatOrDash" ]]
+local _ = function(p1): string
 	return if p1 == nil or p1 == "" then "—" else tostring(p1)
 end
 
-local _ = function(p1): string --[[ Line: 51 | Named "formatBool" ]]
+local _ = function(p1): string
 	return if type(p1) == "boolean" then if p1 then "Yes" else "No" else "—"
 end
 
-local _ = function(p1): string --[[ Line: 58 | Named "formatBitrate" ]]
+local _ = function(p1): string
 	if p1.culled == true then
 		return "—"
 	else
@@ -43,7 +43,7 @@ local _ = function(p1): string --[[ Line: 58 | Named "formatBitrate" ]]
 	end
 end
 
-local _ = function(p1): string --[[ Line: 69 | Named "formatCodec" ]]
+local _ = function(p1): string
 	if p1.culled == true then
 		return "—"
 	else
@@ -53,7 +53,7 @@ local _ = function(p1): string --[[ Line: 69 | Named "formatCodec" ]]
 	end
 end
 
-local function HeaderCell(p1) --[[ Line: 76 ]]
+local function HeaderCell(p1)
 	-- upvalues: RoactModule (copy), ConstantsModule (copy)
 	return RoactModule.createElement("TextLabel", {
 		BackgroundTransparency = 1,
@@ -67,7 +67,7 @@ local function HeaderCell(p1) --[[ Line: 76 ]]
 	})
 end
 
-local function SubscriptionsTable(p1) --[[ Line: 89 ]]
+local function SubscriptionsTable(p1)
 	-- upvalues: RoactModule (copy), TextBoxGray (copy), CellLabelModule (copy), _UDim (copy), _UDim1 (copy), _UDim (copy), _UDim2 (copy), XScale (copy), _UDim3 (copy), NewXScale (copy), _UDim4 (copy), XScale1 (copy), _UDim5 (copy), NewXScale1 (copy), _UDim6 (copy), XScale2 (copy), _UDim7 (copy), NewXScale2 (copy), _UDim8 (copy), XScale3 (copy), HeaderCell (copy)
 	local LayoutOrder = p1.layoutOrder
 	local t = {}
@@ -241,7 +241,7 @@ local function SubscriptionsTable(p1) --[[ Line: 89 ]]
 	})
 end
 
-return function(p2) --[[ Line: 240 | Named "SubscriptionsPanel" ]]
+return function(p2)
 	-- upvalues: RoactModule (copy), CollapsibleSectionModule (copy), SubscriptionsTable (copy)
 	return RoactModule.createElement(CollapsibleSectionModule, { title = "Subscriptions", layoutOrder = p2.layoutOrder }, {
 		Table = RoactModule.createElement(SubscriptionsTable, { layoutOrder = 1, subscriptions = p2.subscriptions })

@@ -9,7 +9,7 @@ local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local UseTextSizeOffsetFunction = UIBloxModule.Core.Style.useTextSizeOffset
 local _UDim2 = UDim2.new(0, 150, 0, 210)
 
-return function(p1) --[[ Line: 28 | Named "EventDescription" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), UseLocalizationFunction (copy), UseTextSizeOffsetFunction (copy), _UDim2 (copy), ReactModule (copy), StyledTextLabel (copy), Skeleton (copy), ExperienceTileV3 (copy)
 	local UseStyleResult = UseStyleFunction()
 	

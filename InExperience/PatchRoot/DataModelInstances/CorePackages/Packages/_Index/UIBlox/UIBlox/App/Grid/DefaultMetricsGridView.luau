@@ -5,7 +5,7 @@ local CryoModule = require(Parent1.Cryo)
 local TModule = require(Parent1.t)
 local GridViewModule = require(Parent.GridView)
 
-local function validateWindowHeight(Props) --[[ Line: 15 ]]
+local function validateWindowHeight(Props)
 	if Props.windowHeight == nil or Props.maxHeight >= Props.windowHeight then
 		return true
 	else
@@ -36,14 +36,14 @@ DefaultMetricsGridView.validateProps = TModule.strictInterface({
 })
 DefaultMetricsGridView.defaultProps = { maxHeight = 1e999, isRoactGamepadEnabled = true }
 
-function DefaultMetricsGridView.init(p1) --[[ Line: 75 ]]
+function DefaultMetricsGridView.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.isMounted = false
 	p1.state = { containerWidth = 0 }
 	p1.initialSizeCheckerRef = RoactModule.createRef()
 end
 
-function DefaultMetricsGridView.render(p1) --[[ Line: 85 ]]
+function DefaultMetricsGridView.render(p1)
 	-- upvalues: validateWindowHeight (copy), RoactModule (copy), GridViewModule (copy)
 	assert(validateWindowHeight(p1.props))
 	local ItemMetrics = p1.props.getItemMetrics(p1.state.containerWidth, p1.props.itemPadding.X)
@@ -66,7 +66,7 @@ function DefaultMetricsGridView.render(p1) --[[ Line: 85 ]]
 		restorePreviousChildFocus = if p1.props.isRoactGamepadEnabled then p1.props.restorePreviousChildFocus else nil,
 		onFocusGained = if p1.props.isRoactGamepadEnabled then p1.props.onFocusGained else nil,
 		isRoactGamepadEnabled = p1.props.isRoactGamepadEnabled,
-		onWidthChanged = function(ContainerWidth) --[[ Line: 117 ]]
+		onWidthChanged = function(ContainerWidth)
 			-- upvalues: p1 (copy)
 			if p1.isMounted then
 				p1:setState({ containerWidth = ContainerWidth })
@@ -75,15 +75,15 @@ function DefaultMetricsGridView.render(p1) --[[ Line: 85 ]]
 	})
 end
 
-function DefaultMetricsGridView.didMount(p1) --[[ Line: 127 ]]
+function DefaultMetricsGridView.didMount(p1)
 	p1.isMounted = true
 end
 
-function DefaultMetricsGridView.willUnmount(p1) --[[ Line: 131 ]]
+function DefaultMetricsGridView.willUnmount(p1)
 	p1.isMounted = false
 end
 
-return RoactModule.forwardRef(function(p1, FrameRef) --[[ Line: 135 ]]
+return RoactModule.forwardRef(function(p1, FrameRef)
 	-- upvalues: RoactModule (copy), DefaultMetricsGridView (copy), CryoModule (copy)
 	return RoactModule.createElement(DefaultMetricsGridView, CryoModule.Dictionary.join(p1, { frameRef = FrameRef }))
 end)

@@ -7,10 +7,10 @@ local TypeFromASTFunction = require(Utilities.typeFromAST).typeFromAST
 local DoTypesOverlapFunction = require(Utilities.typeComparators).doTypesOverlap
 local Callback = nil
 local PossibleFragmentSpreadsRuleModule = {
-	PossibleFragmentSpreadsRule = function(p1) --[[ Line: 31 ]]
+	PossibleFragmentSpreadsRule = function(p1)
 		-- upvalues: IsCompositeTypeFunction (copy), DoTypesOverlapFunction (copy), InspectFunction (copy), GraphQLError (copy), Callback (ref)
 		return {
-			InlineFragment = function(_, p2) --[[ Line: 33 ]]
+			InlineFragment = function(_, p2)
 				-- upvalues: p1 (copy), IsCompositeTypeFunction (upval), DoTypesOverlapFunction (upval), InspectFunction (upval), GraphQLError (upval)
 				local Type = p1:getType()
 				local ParentType = p1:getParentType()
@@ -19,7 +19,7 @@ local PossibleFragmentSpreadsRuleModule = {
 					p1:reportError(GraphQLError.new(("Fragment cannot be spread here as objects of type \"%s\" can never be of type \"%s\"."):format(InspectFunction(ParentType), (InspectFunction(Type))), p2))
 				end
 			end,
-			FragmentSpread = function(_, p2) --[[ Line: 54 ]]
+			FragmentSpread = function(_, p2)
 				-- upvalues: Callback (upval), p1 (copy), DoTypesOverlapFunction (upval), InspectFunction (upval), GraphQLError (upval)
 				local Value = p2.name.value
 				local CallbackResult = Callback(p1, Value)
@@ -33,7 +33,7 @@ local PossibleFragmentSpreadsRuleModule = {
 	end
 }
 
-Callback = function(p1, p2) --[[ Line: 78 | Named "getFragmentType" ]]
+Callback = function(p1, p2)
 	-- upvalues: TypeFromASTFunction (copy), IsCompositeTypeFunction (copy)
 	local Fragment = p1:getFragment(p2)
 	

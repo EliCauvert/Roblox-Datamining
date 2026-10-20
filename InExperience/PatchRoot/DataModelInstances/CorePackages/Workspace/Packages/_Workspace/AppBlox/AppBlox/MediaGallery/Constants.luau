@@ -1,7 +1,7 @@
 ﻿local _ = require(script:FindFirstAncestor("AppBlox").Parent.UIBlox)
 
 return {
-	getDefaultStyleProps = function(p1) --[[ Line: 19 ]]
+	getDefaultStyleProps = function(p1)
 		return {
 			borderRadius = UDim.new(0, p1.Tokens.Radius.Medium),
 			contentGap = p1.Tokens.Size.Size_300,

@@ -5,14 +5,14 @@ local ReactModule = require(Parent.React)
 local UseDefaultFocusBehaviorFunction = require(Parent.ReactFocusNavigation).useDefaultFocusBehavior
 local RestoreSelectionIfStrandedModule = require(ChatUIPrimitives.Hooks.restoreSelectionIfStranded)
 
-return function(p1) --[[ Line: 29 | Named "ExpressionTrayFocusRoot" ]]
+return function(p1)
 	-- upvalues: Parent (copy), ReactModule (copy), RestoreSelectionIfStrandedModule (copy), GuiService (copy), UseDefaultFocusBehaviorFunction (copy)
 	local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 	local UseFocusRootFunction = FocusNavigationUtilsModule.useFocusRoot
 	local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 37 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), p1 (copy), RestoreSelectionIfStrandedModule (upval), GuiService (upval), UseRefResult (copy)
 		if UseRefResult1.current and not p1.isOpen then
 			RestoreSelectionIfStrandedModule(GuiService, UseRefResult.current)

@@ -9,7 +9,7 @@ local FFlagBuildAdUpsellPinnedModule = require(BuildExperience.Flags.FFlagBuildA
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 
-return function(p1) --[[ Line: 25 | Named "AdUpsellMilestoneView" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), FFlagBuildAdUpsellPinnedModule (copy), Text (copy), AdUpsellCardModule (copy), FFlagBuildAgentAdCampaignCardModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy)
 	return ReactModule.createElement(View, {
 		LayoutOrder = p1.order,

@@ -1,6 +1,6 @@
 ﻿local AppStorageService = game:GetService("AppStorageService")
 local EnableConsoleExpControlsIXP684 = game:DefineFastFlag("EnableConsoleExpControlsIXP684", false)
-local Success, Result = pcall(function() --[[ Line: 12 ]]
+local Success, Result = pcall(function()
 	-- upvalues: AppStorageService (copy)
 	return AppStorageService:GetItem("ExperienceMenuVersion")
 end)

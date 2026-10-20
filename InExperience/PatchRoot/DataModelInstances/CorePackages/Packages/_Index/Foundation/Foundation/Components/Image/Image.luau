@@ -25,20 +25,20 @@ local config = {
 	isDisabled = false
 }
 
-local function _(Vector) --[[ Line: 61 | Named "getAspectRatio" ]]
+local function _(Vector)
 	return Vector.X / Vector.Y
 end
 
 local IsDEV = _G.__DEV__ == true
 
-local _ = function(p1) --[[ Line: 67 | Named "getFoundationImageAsset" ]]
+local _ = function(p1)
 	-- upvalues: IconImagesDEPRECATED (copy), IsDEV (copy), Images (copy)
 	local IconImagesDEPRECATEDEntry = IconImagesDEPRECATED[p1]
 	
 	return if IconImagesDEPRECATEDEntry then IconImagesDEPRECATEDEntry elseif IsDEV then Images[p1] else rawget(Images, p1)
 end
 
-local _ = function(p1) --[[ Line: 83 | Named "shouldUseFoundationSlice" ]]
+local _ = function(p1)
 	-- upvalues: IsFoundationImageModule (copy), IsCloudAssetModule (copy), IconImagesDEPRECATED (copy), IsDEV (copy), Images (copy)
 	if not IsFoundationImageModule(p1) then
 		return false
@@ -52,28 +52,28 @@ local _ = function(p1) --[[ Line: 83 | Named "shouldUseFoundationSlice" ]]
 	return IsCloudAssetModule1
 end
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 94 | Named "Image" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), ReactIsModule (copy), IsCloudAssetModule (copy), IsFoundationImageModule (copy), Assets (copy), IconImagesDEPRECATED (copy), IsDEV (copy), Images (copy), GetScaledSliceModule (copy), UseDefaultTagsModule (copy), UseStyleTagsModule (copy), UseOnLoadedModule (copy), WithGuiObjectPropsModule (copy), IndexBindableModule (copy), InteractableModule (copy), GuiObjectChildrenModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local HasOnStateChanged: boolean = WithDefaultsModuleResult.onStateChanged ~= nil or WithDefaultsModuleResult.onActivated ~= nil or WithDefaultsModuleResult.onSecondaryActivated ~= nil
 	local AspectRatio = WithDefaultsModuleResult.aspectRatio
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 102 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ReactIsModule (upval), WithDefaultsModuleResult (copy), UseStateResult2 (copy), IsCloudAssetModule (upval), ReactModule (upval)
 		if not ReactIsModule.isBinding(WithDefaultsModuleResult.Image) then return end
 		local Image = WithDefaultsModuleResult.Image
 		UseStateResult2(IsCloudAssetModule(Image:getValue()))
-		local SubscribeToBindingResult = ReactModule.__subscribeToBinding(Image, function(p2) --[[ Line: 110 ]]
+		local SubscribeToBindingResult = ReactModule.__subscribeToBinding(Image, function(p2)
 			-- upvalues: UseStateResult2 (upval), IsCloudAssetModule (upval)
 			UseStateResult2(IsCloudAssetModule(p2))
 		end)
 		
-		return function() --[[ Line: 114 ]]
+		return function()
 			-- upvalues: SubscribeToBindingResult (copy)
 			SubscribeToBindingResult()
 		end
 	end, { WithDefaultsModuleResult.Image, AspectRatio })
-	local UseMemoResult, UseMemoResult2, UseMemoResult3, UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 120 ]]
+	local UseMemoResult, UseMemoResult2, UseMemoResult3, UseMemoResult4 = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy), AspectRatio (copy), ReactIsModule (upval), IsFoundationImageModule (upval), IsCloudAssetModule (upval), Assets (upval), IconImagesDEPRECATED (upval), IsDEV (upval), Images (upval), UseStateResult (copy)
 		local Image = WithDefaultsModuleResult.Image
 		local Offset = if WithDefaultsModuleResult.imageRect then WithDefaultsModuleResult.imageRect.offset else nil
@@ -81,9 +81,9 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 94 |
 		local MapResult = AspectRatio
 		
 		if ReactIsModule.isBinding(WithDefaultsModuleResult.Image) then
-			local function _(p2) --[[ Line: 131 | Named "getImageBindingValue" ]]
+			local function _(p2)
 				-- upvalues: WithDefaultsModuleResult (upval), IsFoundationImageModule (upval), IsCloudAssetModule (upval), Assets (upval), IconImagesDEPRECATED (upval), IsDEV (upval), Images (upval), AspectRatio (upval)
-				return WithDefaultsModuleResult.Image:map(function(p3) --[[ Line: 132 ]]
+				return WithDefaultsModuleResult.Image:map(function(p3)
 					-- upvalues: IsFoundationImageModule (upval), IsCloudAssetModule (upval), Assets (upval), p2 (copy), IconImagesDEPRECATED (upval), IsDEV (upval), Images (upval), AspectRatio (upval), WithDefaultsModuleResult (upval)
 					if not IsFoundationImageModule(p3) then
 						return if p2 == "Image" then p3 elseif p2 == "ImageRectOffset" and WithDefaultsModuleResult.imageRect then WithDefaultsModuleResult.imageRect.offset elseif p2 == "ImageRectSize" and WithDefaultsModuleResult.imageRect then WithDefaultsModuleResult.imageRect.size else nil
@@ -110,7 +110,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 94 |
 			
 			if UseStateResult then
 				local v1 = "AspectRatio"
-				MapResult = WithDefaultsModuleResult.Image:map(function(p2) --[[ Line: 132 ]]
+				MapResult = WithDefaultsModuleResult.Image:map(function(p2)
 					-- upvalues: IsFoundationImageModule (upval), IsCloudAssetModule (upval), Assets (upval), v1 (copy), IconImagesDEPRECATED (upval), IsDEV (upval), Images (upval), AspectRatio (upval), WithDefaultsModuleResult (upval)
 					if not IsFoundationImageModule(p2) then
 						return if v1 == "Image" then p2 elseif v1 == "ImageRectOffset" and WithDefaultsModuleResult.imageRect then WithDefaultsModuleResult.imageRect.offset elseif v1 == "ImageRectSize" and WithDefaultsModuleResult.imageRect then WithDefaultsModuleResult.imageRect.size else nil
@@ -137,7 +137,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 94 |
 				MapResult = AspectRatio
 			end
 			local v2 = "Image"
-			Image = WithDefaultsModuleResult.Image:map(function(p2) --[[ Line: 132 ]]
+			Image = WithDefaultsModuleResult.Image:map(function(p2)
 				-- upvalues: IsFoundationImageModule (upval), IsCloudAssetModule (upval), Assets (upval), v2 (copy), IconImagesDEPRECATED (upval), IsDEV (upval), Images (upval), AspectRatio (upval), WithDefaultsModuleResult (upval)
 				if not IsFoundationImageModule(p2) then
 					return if v2 == "Image" then p2 elseif v2 == "ImageRectOffset" and WithDefaultsModuleResult.imageRect then WithDefaultsModuleResult.imageRect.offset elseif v2 == "ImageRectSize" and WithDefaultsModuleResult.imageRect then WithDefaultsModuleResult.imageRect.size else nil
@@ -161,7 +161,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 94 |
 				end
 			end)
 			local v3 = "ImageRectOffset"
-			Offset = WithDefaultsModuleResult.Image:map(function(p2) --[[ Line: 132 ]]
+			Offset = WithDefaultsModuleResult.Image:map(function(p2)
 				-- upvalues: IsFoundationImageModule (upval), IsCloudAssetModule (upval), Assets (upval), v3 (copy), IconImagesDEPRECATED (upval), IsDEV (upval), Images (upval), AspectRatio (upval), WithDefaultsModuleResult (upval)
 				if not IsFoundationImageModule(p2) then
 					return if v3 == "Image" then p2 elseif v3 == "ImageRectOffset" and WithDefaultsModuleResult.imageRect then WithDefaultsModuleResult.imageRect.offset elseif v3 == "ImageRectSize" and WithDefaultsModuleResult.imageRect then WithDefaultsModuleResult.imageRect.size else nil
@@ -185,7 +185,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 94 |
 				end
 			end)
 			local v4 = "ImageRectSize"
-			Size = WithDefaultsModuleResult.Image:map(function(p2) --[[ Line: 132 ]]
+			Size = WithDefaultsModuleResult.Image:map(function(p2)
 				-- upvalues: IsFoundationImageModule (upval), IsCloudAssetModule (upval), Assets (upval), v4 (copy), IconImagesDEPRECATED (upval), IsDEV (upval), Images (upval), AspectRatio (upval), WithDefaultsModuleResult (upval)
 				if not IsFoundationImageModule(p2) then
 					return if v4 == "Image" then p2 elseif v4 == "ImageRectOffset" and WithDefaultsModuleResult.imageRect then WithDefaultsModuleResult.imageRect.offset elseif v4 == "ImageRectSize" and WithDefaultsModuleResult.imageRect then WithDefaultsModuleResult.imageRect.size else nil
@@ -245,7 +245,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 94 |
 	
 	if WithDefaultsModuleResult.slice then
 		if ReactIsModule.isBinding(WithDefaultsModuleResult.Image) then
-			local MapResult = WithDefaultsModuleResult.Image:map(function(p2) --[[ Line: 197 ]]
+			local MapResult = WithDefaultsModuleResult.Image:map(function(p2)
 				-- upvalues: IsFoundationImageModule (upval), IsCloudAssetModule (upval), IconImagesDEPRECATED (upval), IsDEV (upval), Images (upval), GetScaledSliceModule (upval), WithDefaultsModuleResult (copy)
 				local v1 = nil
 				if IsFoundationImageModule(p2) then
@@ -260,10 +260,10 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 94 |
 				end
 				return if v1 then GetScaledSliceModule(WithDefaultsModuleResult.slice.center, WithDefaultsModuleResult.slice.scale) else WithDefaultsModuleResult.slice
 			end)
-			Center = MapResult:map(function(p2) --[[ Line: 204 ]]
+			Center = MapResult:map(function(p2)
 				return p2.center
 			end)
-			Scale = MapResult:map(function(p2) --[[ Line: 207 ]]
+			Scale = MapResult:map(function(p2)
 				return p2.scale
 			end)
 		elseif typeof(WithDefaultsModuleResult.Image) == "string" then
@@ -298,9 +298,9 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 94 |
 	local WithGuiObjectPropsModuleResult = WithGuiObjectPropsModule(WithDefaultsModuleResult, {
 		AutoButtonColor = if ImageButton == "ImageButton" then WithDefaultsModuleResult.AutoButtonColor else nil,
 		Image = UseMemoResult,
-		ImageContent = ReactModule.useMemo(function() --[[ Line: 230 ]]
+		ImageContent = ReactModule.useMemo(function()
 			-- upvalues: ReactIsModule (upval), WithDefaultsModuleResult (copy)
-			return if ReactIsModule.isBinding(WithDefaultsModuleResult.ImageContent) then WithDefaultsModuleResult.ImageContent:map(function(p2) --[[ Line: 233 ]]
+			return if ReactIsModule.isBinding(WithDefaultsModuleResult.ImageContent) then WithDefaultsModuleResult.ImageContent:map(function(p2)
 				return if typeof(p2) == "string" then Content.fromUri(p2) else p2
 			end) elseif typeof(WithDefaultsModuleResult.ImageContent) == "string" then Content.fromUri(WithDefaultsModuleResult.ImageContent) else WithDefaultsModuleResult.ImageContent
 		end, { WithDefaultsModuleResult.ImageContent }),

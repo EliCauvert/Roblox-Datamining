@@ -96,13 +96,13 @@ local config2 = {
 	[Enum.UserCFrame.RightHand] = Enum.VRTouchpad.Right
 }
 
-function ViveController.new(UserCFrame) --[[ Line: 109 ]]
+function ViveController.new(UserCFrame)
 	-- upvalues: ViveController (copy), config2 (copy), VRService (copy), CreateFunction (copy), config (copy), Granite (copy)
 	local self = setmetatable({}, ViveController)
 	self.userCFrame = UserCFrame
 	self.touchpad = config2[self.userCFrame]
 	self.touchpadMode = VRService:GetTouchpadMode(self.touchpad)
-	self.onTouchpadModeChangedConn = VRService.TouchpadModeChanged:connect(function(...) --[[ Line: 114 ]]
+	self.onTouchpadModeChangedConn = VRService.TouchpadModeChanged:connect(function(...)
 		-- upvalues: self (copy)
 		self:onTouchpadModeChanged(...)
 	end)
@@ -180,7 +180,7 @@ function ViveController.new(UserCFrame) --[[ Line: 109 ]]
 	return self
 end
 
-function ViveController:setPartVisible(p1, p2) --[[ Line: 200 ]]
+function ViveController:setPartVisible(p1, p2)
 	local Part = self.parts[p1]
 	
 	if Part then
@@ -188,18 +188,18 @@ function ViveController:setPartVisible(p1, p2) --[[ Line: 200 ]]
 	end
 end
 
-function ViveController:setABXYEnabled(p1) --[[ Line: 207 ]]
+function ViveController:setABXYEnabled(p1)
 	self:setPartVisible("ButtonA", p1)
 	self:setPartVisible("ButtonB", p1)
 	self:setPartVisible("ButtonX", p1)
 	self:setPartVisible("ButtonY", p1)
 end
 
-function ViveController:setCFrame(CF) --[[ Line: 214 ]]
+function ViveController:setCFrame(CF)
 	self.model:SetPrimaryPartCFrame(CF)
 end
 
-function ViveController:setCFrameAndScale(CF, Scale) --[[ Line: 218 ]]
+function ViveController:setCFrameAndScale(CF, Scale)
 	-- upvalues: config (copy)
 	self.model:SetPrimaryPartCFrame(CF)
 	
@@ -231,7 +231,7 @@ function ViveController:setCFrameAndScale(CF, Scale) --[[ Line: 218 ]]
 	end
 end
 
-function ViveController:setButtonState(p1, p2) --[[ Line: 247 ]]
+function ViveController:setButtonState(p1, p2)
 	-- upvalues: config (copy)
 	local Entry = config[p1]
 	
@@ -269,7 +269,7 @@ function ViveController:setButtonState(p1, p2) --[[ Line: 247 ]]
 	end
 end
 
-function ViveController:setTriggerState(Z: number) --[[ Line: 284 ]]
+function ViveController:setTriggerState(Z: number)
 	-- upvalues: config (copy)
 	local Offset = config.Trigger.offset
 	local ScaledOffset = CFrame.new(Offset.p * self.scale) * (Offset - Offset.p)
@@ -284,7 +284,7 @@ function ViveController:setTriggerState(Z: number) --[[ Line: 284 ]]
 	end
 end
 
-function ViveController:setTrackpadState(Position) --[[ Line: 302 ]]
+function ViveController:setTrackpadState(Position)
 	-- upvalues: config (copy)
 	local TrackpadIndicator = self.parts.TrackpadIndicator
 	local Weld = TrackpadIndicator:FindFirstChild("Weld")
@@ -298,7 +298,7 @@ function ViveController:setTrackpadState(Position) --[[ Line: 302 ]]
 	end
 end
 
-function ViveController:onButtonInputChanged(Input, p1) --[[ Line: 318 ]]
+function ViveController:onButtonInputChanged(Input, p1)
 	if self.userCFrame == Enum.UserCFrame.RightHand and Input.KeyCode == Enum.KeyCode.ButtonR3 or self.userCFrame == Enum.UserCFrame.LeftHand and Input.KeyCode == Enum.KeyCode.ButtonL3 then
 		self:setButtonState("Trackpad", p1)
 		
@@ -339,7 +339,7 @@ function ViveController:onButtonInputChanged(Input, p1) --[[ Line: 318 ]]
 	end
 end
 
-function ViveController:onInputBegan(Input) --[[ Line: 368 ]]
+function ViveController:onInputBegan(Input)
 	self:onButtonInputChanged(Input, true)
 	
 	if self.userCFrame == Enum.UserCFrame.RightHand and Input.KeyCode == Enum.KeyCode.Thumbstick2 or self.userCFrame == Enum.UserCFrame.LeftHand and Input.KeyCode == Enum.KeyCode.Thumbstick1 then
@@ -347,7 +347,7 @@ function ViveController:onInputBegan(Input) --[[ Line: 368 ]]
 	end
 end
 
-function ViveController:onInputChanged(Input) --[[ Line: 378 ]]
+function ViveController:onInputChanged(Input)
 	if self.userCFrame == Enum.UserCFrame.RightHand and Input.KeyCode == Enum.KeyCode.ButtonR2 or self.userCFrame == Enum.UserCFrame.LeftHand and Input.KeyCode == Enum.KeyCode.ButtonL2 then
 		self:setTriggerState(Input.Position.Z)
 	end
@@ -356,7 +356,7 @@ function ViveController:onInputChanged(Input) --[[ Line: 378 ]]
 	end
 end
 
-function ViveController:onInputEnded(Input) --[[ Line: 393 ]]
+function ViveController:onInputEnded(Input)
 	self:onButtonInputChanged(Input, false)
 	
 	if self.userCFrame == Enum.UserCFrame.RightHand and Input.KeyCode == Enum.KeyCode.Thumbstick2 or self.userCFrame == Enum.UserCFrame.LeftHand and Input.KeyCode == Enum.KeyCode.Thumbstick1 then
@@ -364,7 +364,7 @@ function ViveController:onInputEnded(Input) --[[ Line: 393 ]]
 	end
 end
 
-function ViveController:onTouchpadModeChanged(Touchpad, TouchpadMode) --[[ Line: 403 ]]
+function ViveController:onTouchpadModeChanged(Touchpad, TouchpadMode)
 	if Touchpad ~= self.touchpad then return end
 	self.touchpadMode = TouchpadMode
 	
@@ -377,7 +377,7 @@ function ViveController:onTouchpadModeChanged(Touchpad, TouchpadMode) --[[ Line:
 	end
 end
 
-function ViveController:destroy() --[[ Line: 417 ]]
+function ViveController:destroy()
 	if self.onTouchpadModeChangedConn then
 		self.onTouchpadModeChangedConn:disconnect()
 		self.onTouchpadModeChangedConn = nil
@@ -385,7 +385,7 @@ function ViveController:destroy() --[[ Line: 417 ]]
 	self.model:Destroy()
 end
 
-function ViveController.getButtonPart(p1, p2) --[[ Line: 425 ]]
+function ViveController.getButtonPart(p1, p2)
 	-- upvalues: config1 (copy)
 	local Entry = config1[p2]
 	

@@ -6,9 +6,9 @@ local PromptStateModule = require(Parent.Enums.PromptState)
 local PurchaseErrorModule = require(Parent.Enums.PurchaseError)
 local ThunkModule = require(Parent.Thunk)
 
-return function(p1) --[[ Line: 13 | Named "resolveSubscriptionPromptState" ]]
+return function(p1)
 	-- upvalues: ThunkModule (copy), SubscriptionPurchaseInfoReceivedModule (copy), ErrorOccurredModule (copy), PurchaseErrorModule (copy), SetPromptStateModule (copy), PromptStateModule (copy)
-	return ThunkModule.new(script.Name, nil, function(p2, _) --[[ Line: 14 ]]
+	return ThunkModule.new(script.Name, nil, function(p2, _)
 		-- upvalues: SubscriptionPurchaseInfoReceivedModule (upval), p1 (copy), ErrorOccurredModule (upval), PurchaseErrorModule (upval), SetPromptStateModule (upval), PromptStateModule (upval)
 		p2:dispatch(SubscriptionPurchaseInfoReceivedModule(p1))
 		

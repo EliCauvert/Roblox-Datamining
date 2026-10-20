@@ -1,12 +1,12 @@
 ﻿local _ = require(script.Parent.types)
 
-return function() --[[ Line: 25 | Named "createSignal" ]]
+return function()
 	local t = {}
 	local Tbl = {}
 	local Flag = false
 	
 	return {
-		subscribe = function(_, Callback) --[[ Line: 31 ]]
+		subscribe = function(_, Callback)
 			-- upvalues: Flag (ref), t (copy), Tbl (copy)
 			local config = { unsubscribed = false, callback = Callback }
 			
@@ -16,7 +16,7 @@ return function() --[[ Line: 25 | Named "createSignal" ]]
 				t[Callback] = config
 			end
 			return {
-				unsubscribe = function(_) --[[ Line: 45 ]]
+				unsubscribe = function(_)
 					-- upvalues: config (copy), t (upval), Callback (copy), Tbl (upval)
 					config.unsubscribed = true
 					t[Callback] = nil
@@ -24,7 +24,7 @@ return function() --[[ Line: 25 | Named "createSignal" ]]
 				end
 			}
 		end
-	}, function(p1) --[[ Line: 56 | Named "fire" ]]
+	}, function(p1)
 		-- upvalues: Flag (ref), t (copy), Tbl (copy)
 		Flag = true
 		

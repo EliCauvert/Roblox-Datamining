@@ -20,7 +20,7 @@ local MultiTextLocalizerModule = require(Parent.Locale.MultiTextLocalizer)
 local FormatNumberModule = require(Parent.Utility.formatNumber)
 local IconsCommonRobux = UIBloxModule.App.ImageSet.Images["icons/common/robux"]
 
-local function renderWithProviders(p1, p2, p3, SelectionImageObject, _, p4) --[[ Line: 59 ]]
+local function renderWithProviders(p1, p2, p3, SelectionImageObject, _, p4)
 	-- upvalues: RoactModule (copy), Skeleton (copy), RoactGamepadModule (copy), ImageSetButton (copy), ImageSetLabel (copy), FitFrameHorizontal (copy), IconsCommonRobux (copy), FitTextLabel (copy), FormatNumberModule (copy), LocalizationService (copy)
 	if p1.robuxAmount == nil then
 		return RoactModule.createElement("Frame", {
@@ -51,28 +51,28 @@ local function renderWithProviders(p1, p2, p3, SelectionImageObject, _, p4) --[[
 		NextSelectionLeft = p1.nextSelectionLeft,
 		NextSelectionRight = p1.nextSelectionRight,
 		inputBindings = {
-			Activated = if p1.onActivated == nil then nil else RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonA, function() --[[ Line: 99 ]]
+			Activated = if p1.onActivated == nil then nil else RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonA, function()
 				-- upvalues: p1 (copy)
 				p1.onActivated(p1.packageId)
 			end)
 		},
-		[RoactModule.Event.Activated] = function() --[[ Line: 104 ]]
+		[RoactModule.Event.Activated] = function()
 			-- upvalues: p1 (copy)
 			p1.onActivated(p1.packageId)
 		end,
-		[RoactModule.Event.MouseMoved] = function() --[[ Line: 107 ]]
+		[RoactModule.Event.MouseMoved] = function()
 			-- upvalues: p1 (copy)
 			p1.onHover(p1.forwardRef, true)
 		end,
-		[RoactModule.Event.MouseEnter] = function() --[[ Line: 110 ]]
+		[RoactModule.Event.MouseEnter] = function()
 			-- upvalues: p1 (copy)
 			p1.onHover(p1.forwardRef, true)
 		end,
-		[RoactModule.Event.MouseLeave] = function() --[[ Line: 113 ]]
+		[RoactModule.Event.MouseLeave] = function()
 			-- upvalues: p1 (copy)
 			p1.onHover(p1.forwardRef, false)
 		end,
-		[RoactModule.Event.SelectionGained] = function() --[[ Line: 116 ]]
+		[RoactModule.Event.SelectionGained] = function()
 			-- upvalues: p1 (copy)
 			p1.onSelect(p1.forwardRef)
 		end
@@ -177,7 +177,7 @@ local function renderWithProviders(p1, p2, p3, SelectionImageObject, _, p4) --[[
 	})
 end
 
-return function(p1) --[[ Line: 242 ]]
+return function(p1)
 	-- upvalues: UseCursorFunction (copy), UseTokensFunction (copy), UseStyleMetadataFunction (copy), RoactModule (copy), MultiTextLocalizerModule (copy), FormatNumberModule (copy), LocalizationService (copy), WithStyleFunction (copy), renderWithProviders (copy)
 	local UseCursorResult = UseCursorFunction(UDim.new(0, 8))
 	local UseTokensResult = UseTokensFunction()
@@ -192,9 +192,9 @@ return function(p1) --[[ Line: 242 ]]
 				}
 			}
 		},
-		render = function(p2) --[[ Line: 258 ]]
+		render = function(p2)
 			-- upvalues: WithStyleFunction (upval), p1 (copy), renderWithProviders (upval), UseCursorResult (copy), ThemeName (copy), UseTokensResult (copy)
-			return WithStyleFunction(function(p3) --[[ Line: 259 ]]
+			return WithStyleFunction(function(p3)
 				-- upvalues: p1 (upval), renderWithProviders (upval), p2 (copy), UseCursorResult (upval), ThemeName (upval), UseTokensResult (upval)
 				if p1.scale == nil then
 					p1.scale = 0.65

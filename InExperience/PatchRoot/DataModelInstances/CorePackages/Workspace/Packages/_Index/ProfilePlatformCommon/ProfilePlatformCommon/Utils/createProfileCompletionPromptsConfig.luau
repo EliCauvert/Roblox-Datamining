@@ -5,7 +5,7 @@ local AppPage = require(Parent.RobloxAppEnums).AppPage
 local FFlagSduiAllowNoConfigsBuilt = require(Parent.SharedFlags).FFlagSduiAllowNoConfigsBuilt
 local ProfileCompletionUsePlatformSurfaceKey = game:DefineFastFlag("ProfileCompletionUsePlatformSurfaceKey", false)
 
-return function() --[[ Line: 18 ]]
+return function()
 	-- upvalues: SduiLoadTimer (copy), PromptsEntryPoint (copy), ProfileCompletionUsePlatformSurfaceKey (copy), AppPage (copy), FFlagSduiAllowNoConfigsBuilt (copy)
 	return {
 		configKey = "ProfileCompletion",

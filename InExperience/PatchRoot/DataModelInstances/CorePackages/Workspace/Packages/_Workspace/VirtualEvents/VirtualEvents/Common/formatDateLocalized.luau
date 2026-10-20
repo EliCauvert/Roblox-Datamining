@@ -1,6 +1,6 @@
 ﻿local LocalizationService = game:GetService("LocalizationService")
 
-return function(Text: string, p1) --[[ Line: 3 | Named "formatDate" ]]
+return function(Text: string, p1)
 	-- upvalues: LocalizationService (copy)
 	local RobloxLocaleId = LocalizationService.RobloxLocaleId
 	

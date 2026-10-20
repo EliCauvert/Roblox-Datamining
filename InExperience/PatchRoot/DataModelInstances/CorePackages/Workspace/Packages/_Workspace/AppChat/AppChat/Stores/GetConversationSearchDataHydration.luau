@@ -13,20 +13,20 @@ local SearchIntroducedConversationIdsModule = require(AppChat.Stores.searchIntro
 local CreateDataCacheFunction = DataHydrationModule.createDataCache
 local CreateDataResolverFunction = DataHydrationModule.createDataResolver
 
-local function _(p1): boolean --[[ Line: 39 | Named "isEmptyQuery" ]]
+local function _(p1): boolean
 	return p1 == nil or p1 == ""
 end
 
-local _ = function(p1, p2): string --[[ Line: 43 | Named "getPageId" ]]
+local _ = function(p1, p2): string
 	return `{p1}\0{if p2 == nil or p2 == "" then "__initial__" else p2}`
 end
 
-local _ = function(p3, p4): boolean --[[ Line: 51 | Named "supersedesStoredFriendPlaceholder" ]]
+local _ = function(p3, p4): boolean
 	-- upvalues: ConversationChannelsModule (copy)
 	return p4.source == ConversationChannelsModule.Source.Channels and p4.type == ConversationChannelsModule.Type.OneToOne and p4.participant_user_ids ~= nil and p3.getConversation(ConversationChannelsModule.getFriendConversationId(p4.participant_user_ids), false) ~= nil
 end
 
-local function collectSearchOnlyIds(p3, p4) --[[ Line: 71 ]]
+local function collectSearchOnlyIds(p3, p4)
 	-- upvalues: ConversationChannelsModule (copy), SearchIntroducedConversationIdsModule (copy)
 	local ConversationIds = {}
 	
@@ -48,7 +48,7 @@ local function collectSearchOnlyIds(p3, p4) --[[ Line: 71 ]]
 	return ConversationIds
 end
 
-local function getOrderedMatchedIds(p5) --[[ Line: 100 ]]
+local function getOrderedMatchedIds(p5)
 	-- upvalues: ConversationChannelsModule (copy)
 	local ConversationIds = {}
 	
@@ -73,7 +73,7 @@ local function getOrderedMatchedIds(p5) --[[ Line: 100 ]]
 	return ConversationIds
 end
 
-return SignalsModule.createComputed(function() --[[ Line: 124 | Named "createConversationSearchDataHydrationStore" ]]
+return SignalsModule.createComputed(function()
 	-- upvalues: CreateDataCacheFunction (copy), GetConversationStoreModule (copy), SignalsModule (copy), CreateDataResolverFunction (copy), NewResult (copy), AppChatNetworkingModule (copy), GetResponseBodyModule (copy), collectSearchOnlyIds (copy), SignalsExperimentalModule (copy), IngestConversationListPageModule (copy), SearchIntroducedConversationIdsModule (copy), getOrderedMatchedIds (copy)
 	local DataCache = CreateDataCacheFunction(30)
 	local ConversationStoreModule = GetConversationStoreModule(false)
@@ -87,11 +87,11 @@ return SignalsModule.createComputed(function() --[[ Line: 124 | Named "createCon
 		queueProcessDelaySec = 0,
 		replaceItems = true,
 		cache = DataCache,
-		logError = function(p6) --[[ Line: 142 ]]
+		logError = function(p6)
 			-- upvalues: NewResult (upval)
 			NewResult:warning(`Failed to fetch AppChat conversation search page: {tostring(p6)}`)
 		end,
-		fetchFn = function(Key) --[[ Line: 145 ]]
+		fetchFn = function(Key)
 			-- upvalues: t (ref), Count (ref), t1 (ref), Signal (copy), AppChatNetworkingModule (upval), GetResponseBodyModule (upval), collectSearchOnlyIds (upval), ConversationStoreModule (copy), SignalsExperimentalModule (upval), IngestConversationListPageModule (upval), SearchIntroducedConversationIdsModule (upval), getOrderedMatchedIds (upval), Callback (ref)
 			local Entry = t[Key]
 			local Query = if Entry == nil then "" else Entry.query
@@ -99,14 +99,14 @@ return SignalsModule.createComputed(function() --[[ Line: 124 | Named "createCon
 			local Count1 = Count
 			t1[Key] = Signal(false)
 			
-			return AppChatNetworkingModule.http.SearchConversations(nil, Query, Cursor):andThen(function(Result) --[[ Line: 152 ]]
+			return AppChatNetworkingModule.http.SearchConversations(nil, Query, Cursor):andThen(function(Result)
 				-- upvalues: Count1 (copy), Count (upval), GetResponseBodyModule (upval), collectSearchOnlyIds (upval), ConversationStoreModule (upval), SignalsExperimentalModule (upval), IngestConversationListPageModule (upval), SearchIntroducedConversationIdsModule (upval), getOrderedMatchedIds (upval), t1 (upval), Key (copy), Signal (upval), Callback (upval), Query (copy), Cursor (copy)
 				if Count1 ~= Count then
 					return { nextCursor = nil, matchedConversationIds = {} }
 				end
 				local ResponseBodyModule = GetResponseBodyModule(Result)
 				local CollectSearchOnlyIdsResult = collectSearchOnlyIds(ConversationStoreModule, ResponseBodyModule)
-				SignalsExperimentalModule.batch(function() --[[ Line: 170 ]]
+				SignalsExperimentalModule.batch(function()
 					-- upvalues: IngestConversationListPageModule (upval), ConversationStoreModule (upval), ResponseBodyModule (copy), CollectSearchOnlyIdsResult (copy), SearchIntroducedConversationIdsModule (upval)
 					IngestConversationListPageModule.ingestConversationResponses(ConversationStoreModule, ResponseBodyModule)
 					
@@ -118,7 +118,7 @@ return SignalsModule.createComputed(function() --[[ Line: 124 | Named "createCon
 				local NextCursor = if ResponseBodyModule == nil then nil else ResponseBodyModule.next_cursor
 				
 				if t1[Key] ~= Signal(false) then
-					task.defer(function() --[[ Line: 185 ]]
+					task.defer(function()
 						-- upvalues: Count1 (upval), Count (upval), Callback (upval), Query (upval), Cursor (upval)
 						if Count1 == Count then
 							Callback(Query, Cursor)
@@ -133,7 +133,7 @@ return SignalsModule.createComputed(function() --[[ Line: 124 | Named "createCon
 		end
 	})
 	
-	Callback = function(Query, Cursor) --[[ Line: 200 | Named "fetchPage" ]]
+	Callback = function(Query, Cursor)
 		-- upvalues: t (ref), DataResolver (copy), t1 (ref), Signal (copy)
 		if Query == nil or Query == "" then
 			return nil
@@ -141,19 +141,19 @@ return SignalsModule.createComputed(function() --[[ Line: 124 | Named "createCon
 			local Text: string = `{Query}\0{if Cursor == nil or Cursor == "" then "__initial__" else Cursor}`
 			t[Text] = { query = Query, cursor = Cursor }
 			
-			return DataResolver.getAndFetchItem(Text, function(): boolean --[[ Line: 207 ]]
+			return DataResolver.getAndFetchItem(Text, function(): boolean
 				-- upvalues: t1 (upval), Text (copy), Signal (upval)
 				return t1[Text] ~= Signal(false)
 			end)
 		end
 	end
 	
-	local function invalidate() --[[ Line: 212 ]]
+	local function invalidate()
 		-- upvalues: Signal2 (copy), Signal (copy)
 		Signal2(Signal(false) + 1)
 	end
 	
-	ConversationStoreModule.addClearListener(function() --[[ Line: 216 ]]
+	ConversationStoreModule.addClearListener(function()
 		-- upvalues: Count (ref), t (ref), t1 (ref), SearchIntroducedConversationIdsModule (upval), DataResolver (copy)
 		Count += 1
 		t = {}

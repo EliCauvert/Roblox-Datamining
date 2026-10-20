@@ -7,14 +7,14 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local config = { duration = 0.08, easingStyle = Enum.EasingStyle.Quad }
 local config1 = { duration = 0.15, easingStyle = Enum.EasingStyle.Quad }
 
-return ReactModule.memo(function(p1) --[[ Line: 28 | Named "CommentRowHighlight" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactOtterModule (copy), ReactModule (copy), CommentLongPressTimingModule (copy), config (copy), config1 (copy), FoundationModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
-	ReactModule.useEffect(function() --[[ Line: 31 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), CommentLongPressTimingModule (upval), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval), config1 (upval)
 		if p1.phase == "Charging" then
-			local DelayedThread = task.delay(CommentLongPressTimingModule.CHARGE_DELAY_SECONDS, function() --[[ Line: 34 ]]
+			local DelayedThread = task.delay(CommentLongPressTimingModule.CHARGE_DELAY_SECONDS, function()
 				-- upvalues: UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), CommentLongPressTimingModule (upval)
 				UseAnimatedBindingResult2(ReactOtterModule.ease(1, {
 					duration = CommentLongPressTimingModule.HOLD_SECONDS - CommentLongPressTimingModule.CHARGE_DELAY_SECONDS,
@@ -22,7 +22,7 @@ return ReactModule.memo(function(p1) --[[ Line: 28 | Named "CommentRowHighlight"
 				}))
 			end)
 			
-			return function() --[[ Line: 40 ]]
+			return function()
 				-- upvalues: DelayedThread (copy)
 				task.cancel(DelayedThread)
 			end
@@ -40,7 +40,7 @@ return ReactModule.memo(function(p1) --[[ Line: 28 | Named "CommentRowHighlight"
 			["size-full radius-medium"] = true,
 			["shadow-raised-100"] = p1.phase == "Active"
 		},
-		backgroundStyle = UseAnimatedBindingResult:map(function(Alpha: number) --[[ Line: 54 ]]
+		backgroundStyle = UseAnimatedBindingResult:map(function(Alpha: number)
 			-- upvalues: Shift200 (copy)
 			return {
 				Color3 = Shift200.Color3,

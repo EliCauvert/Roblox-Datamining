@@ -11,7 +11,7 @@ local ExpChatLocalUserCountEnabledEngineFeature = game:GetEngineFeature("ExpChat
 local ExpChatChatableUserCountSystemMessageMinUsers = game:DefineFastInt("ExpChatChatableUserCountSystemMessageMinUsers", 5)
 local NewResult = ExpChatSharedModule.Logger:new("ExpChat/" .. script.Name)
 
-return function(p1) --[[ Line: 32 | Named "createDisplayChatEnabledMessage" ]]
+return function(p1)
 	-- upvalues: DisplaySystemMessageModule (copy), ExpChatLocalChatEnabledMessageExperimentation (copy), ExpChatLocalUserCountEnabledEngineFeature (copy), TextChatService (copy), ExpChatReportChatEnabledUserCountMetrics (copy), Analytics (copy), NewResult (copy), FFlagExpChatUseUpdatedUserCountStrings (copy), ExpChatChatableUserCountSystemMessageMinUsers (copy)
 	local Translator = p1.translator
 	local DefaultSystemTextChannel = p1.defaultSystemTextChannel
@@ -19,9 +19,9 @@ return function(p1) --[[ Line: 32 | Named "createDisplayChatEnabledMessage" ]]
 	local DisplayVirtualSystemMessageFunction = p1.displayVirtualSystemMessage
 	local Flag = false
 	
-	return function() --[[ Line: 40 ]]
+	return function()
 		-- upvalues: DisplayVirtualSystemMessageFunction (copy), DisplaySystemMessageModule (upval), Translator (copy), DefaultSystemTextChannel (copy), ExpChatLocalChatEnabledMessageExperimentation (upval), ExpChatLocalUserCountEnabledEngineFeature (upval), TextChatService (upval), LocalPlayer (copy), ExpChatReportChatEnabledUserCountMetrics (upval), Analytics (upval), NewResult (upval), FFlagExpChatUseUpdatedUserCountStrings (upval), ExpChatChatableUserCountSystemMessageMinUsers (upval), Flag (ref)
-		local function _() --[[ Line: 44 | Named "displayControlMessage" ]]
+		local function _()
 			-- upvalues: DisplayVirtualSystemMessageFunction (upval), DisplaySystemMessageModule (upval), Translator (upval), DefaultSystemTextChannel (upval)
 			if DisplayVirtualSystemMessageFunction then
 				DisplayVirtualSystemMessageFunction("CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF", nil, "Only people in similar age groups and your trusted friends can chat with you.")
@@ -33,9 +33,9 @@ return function(p1) --[[ Line: 32 | Named "createDisplayChatEnabledMessage" ]]
 		end
 		
 		if ExpChatLocalChatEnabledMessageExperimentation.isExperimentEnabled and ExpChatLocalUserCountEnabledEngineFeature then
-			task.spawn(function() --[[ Line: 63 ]]
+			task.spawn(function()
 				-- upvalues: TextChatService (upval), LocalPlayer (upval), ExpChatReportChatEnabledUserCountMetrics (upval), Analytics (upval), NewResult (upval), DisplayVirtualSystemMessageFunction (upval), DisplaySystemMessageModule (upval), Translator (upval), DefaultSystemTextChannel (upval), ExpChatLocalChatEnabledMessageExperimentation (upval), FFlagExpChatUseUpdatedUserCountStrings (upval), ExpChatChatableUserCountSystemMessageMinUsers (upval), Flag (upval)
-				local Success, Result = pcall(function() --[[ Line: 64 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: TextChatService (upval), LocalPlayer (upval)
 					return TextChatService:GetChatableUserCountAsync(LocalPlayer.UserId, "local")
 				end)
@@ -48,7 +48,7 @@ return function(p1) --[[ Line: 32 | Named "createDisplayChatEnabledMessage" ]]
 						local SystemMessageKey = ExpChatLocalChatEnabledMessageExperimentation.getSystemMessageKey()
 						
 						if SystemMessageKey ~= nil then
-							local v1 = (function(p2) --[[ Line: 90 | Named "GetSystemMessageKey" ]]
+							local v1 = (function(p2)
 								-- upvalues: FFlagExpChatUseUpdatedUserCountStrings (upval), Result (copy), ExpChatChatableUserCountSystemMessageMinUsers (upval)
 								local config = {
 									FRIENDLY = "CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.Friendly",

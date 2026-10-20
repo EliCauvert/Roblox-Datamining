@@ -5,7 +5,7 @@ local FFlagFixResaleDisplayPriceModule = require(PurchasePrompt.Flags.FFlagFixRe
 local FFlagAXFixMISUpsellDiscountSummary = require(Parent.SharedFlags).FFlagAXFixMISUpsellDiscountSummary
 local SelectCartPricingOverrideModule = require(script.Parent.selectCartPricingOverride)
 
-return function(p1) --[[ Line: 32 | Named "selectPrice" ]]
+return function(p1)
 	-- upvalues: FFlagFixResaleDisplayPriceModule (copy), SelectCartPricingOverrideModule (copy), FFlagAXFixMISUpsellDiscountSummary (copy)
 	local ProductInfo = p1.productInfo
 	local Price = ProductInfo.price or 0

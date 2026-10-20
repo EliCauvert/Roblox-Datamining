@@ -12,14 +12,14 @@ local StateLayer = {
 	affordance = FoundationModule.Enums.StateLayerAffordance.None
 }
 
-local function LeaderboardScrimMobile() --[[ Line: 20 ]]
+local function LeaderboardScrimMobile()
 	-- upvalues: UseTokensFunction (copy), SignalsReactModule (copy), PlayerListVisibilityStoreModule (copy), ReactModule (copy), PlayerContextualMenuStoreModule (copy), View (copy), StateLayer (copy), ConstantsModule (copy)
 	return ReactModule.createElement(View, {
 		tag = "size-full",
 		ZIndex = 0,
 		backgroundStyle = UseTokensFunction().Color.Common.Scrim,
 		Visible = SignalsReactModule.useSignalBinding(PlayerListVisibilityStoreModule.getEffectiveVisible),
-		onActivated = ReactModule.useCallback(function() --[[ Line: 24 ]]
+		onActivated = ReactModule.useCallback(function()
 			-- upvalues: PlayerContextualMenuStoreModule (upval), PlayerListVisibilityStoreModule (upval)
 			PlayerContextualMenuStoreModule.closeContextMenu()
 			PlayerListVisibilityStoreModule.setVisible(false)
@@ -29,7 +29,7 @@ local function LeaderboardScrimMobile() --[[ Line: 20 ]]
 	})
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 42 | Named "LeaderboardScrim" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), LeaderboardScrimMobile (copy)
 	return if p1.isSmallTouchDevice then ReactModule.createElement(LeaderboardScrimMobile) else nil
 end)

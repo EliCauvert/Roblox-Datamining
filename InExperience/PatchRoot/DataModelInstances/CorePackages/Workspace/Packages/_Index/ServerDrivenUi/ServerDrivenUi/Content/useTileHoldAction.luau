@@ -2,25 +2,25 @@
 local ReactModule = require(Parent.React)
 local _ = require(Parent.FocusNavigationUtils)
 
-return function(p1, Callback, Callback1) --[[ Line: 44 | Named "useTileHoldAction" ]]
+return function(p1, Callback, Callback1)
 	-- upvalues: ReactModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseRefResult = ReactModule.useRef(false)
 	local v1 = p1 ~= nil
 	local OnHoldCompleted = if p1 then p1.onHoldCompleted else nil
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 76 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: OnHoldCompleted (copy)
 		if OnHoldCompleted then
 			OnHoldCompleted(nil, p2)
 		end
 	end, { OnHoldCompleted })
-	local UseResult1 = ReactModule.useCallback(function(Current) --[[ Line: 82 ]]
+	local UseResult1 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy)
 		UseRefResult.current = Current
 	end, {})
 	
 	return {
-		tileRef = ReactModule.useCallback(function(p2) --[[ Line: 53 ]]
+		tileRef = ReactModule.useCallback(function(p2)
 			-- upvalues: Callback (copy), v1 (copy), UseStateResult2 (copy)
 			if Callback then
 				Callback(p2)
@@ -29,7 +29,7 @@ return function(p1, Callback, Callback1) --[[ Line: 44 | Named "useTileHoldActio
 				UseStateResult2(p2)
 			end
 		end, { Callback, v1 }),
-		onActivated = ReactModule.useCallback(function() --[[ Line: 66 ]]
+		onActivated = ReactModule.useCallback(function()
 			-- upvalues: UseRefResult (copy), Callback1 (copy)
 			if UseRefResult.current then return end
 			if Callback1 then

@@ -9,11 +9,11 @@ local FetchAvatarBackgroundModule = require(script.Parent.fetchAvatarBackground)
 local GetAvatarBackgroundImageUrlModule = require(script.Parent.getAvatarBackgroundImageUrl)
 local _ = require(script.Parent.AvatarBackgroundStoreTypes)
 
-return function(p1) --[[ Line: 27 | Named "createAvatarBackgroundStore" ]]
+return function(p1)
 	-- upvalues: CreateSingleEntityResolverModule (copy), FetchAvatarBackgroundModule (copy), GetAvatarBackgroundImageUrlModule (copy), DataStatus (copy), PromiseModule (copy)
 	local P0 = p1 or {}
 	local config = { network = P0.network, baseUrl = P0.baseUrl }
-	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p2) --[[ Line: 32 ]]
+	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p2)
 		-- upvalues: FetchAvatarBackgroundModule (upval), config (copy)
 		return FetchAvatarBackgroundModule(p2, config)
 	end, {
@@ -22,18 +22,18 @@ return function(p1) --[[ Line: 27 | Named "createAvatarBackgroundStore" ]]
 	})
 	
 	return {
-		getAndFetchAvatarBackground = function(p2) --[[ Line: 39 ]]
+		getAndFetchAvatarBackground = function(p2)
 			-- upvalues: SingleEntityResolverModule (copy)
 			return (SingleEntityResolverModule.getAndFetch((tonumber(p2))))
 		end,
-		getAndFetchAvatarBackgroundImageUrl = function(p2, p3) --[[ Line: 43 ]]
+		getAndFetchAvatarBackgroundImageUrl = function(p2, p3)
 			-- upvalues: SingleEntityResolverModule (copy), GetAvatarBackgroundImageUrlModule (upval)
 			local DataResult = SingleEntityResolverModule.getAndFetch((tonumber(p2))).data(p3)
 			local AssetId = DataResult and DataResult.assetId
 			
 			return if AssetId then GetAvatarBackgroundImageUrlModule(AssetId) else nil
 		end,
-		awaitAvatarBackground = function(p2) --[[ Line: 49 ]]
+		awaitAvatarBackground = function(p2)
 			-- upvalues: SingleEntityResolverModule (copy), DataStatus (upval), PromiseModule (upval), FetchAvatarBackgroundModule (upval), config (copy)
 			local Number: number? = tonumber(p2)
 			local GetResult = SingleEntityResolverModule.get(Number)

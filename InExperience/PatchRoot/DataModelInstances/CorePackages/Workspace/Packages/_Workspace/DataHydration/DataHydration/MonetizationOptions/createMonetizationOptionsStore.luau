@@ -15,7 +15,7 @@ local Frozen = table.freeze({
 	errorMessage = "The local user changed while the bulk Game Pass request was running"
 })
 
-local function updateEntryPoint(Tbl, IsEnabled) --[[ Line: 59 ]]
+local function updateEntryPoint(Tbl, IsEnabled)
 	local Copy = table.clone(Tbl)
 	local List = {}
 	local Flag = false
@@ -40,11 +40,11 @@ local function updateEntryPoint(Tbl, IsEnabled) --[[ Line: 59 ]]
 	return Copy
 end
 
-return function(p1) --[[ Line: 81 | Named "createMonetizationOptionsStore" ]]
+return function(p1)
 	-- upvalues: DataHydrationUtilsModule (copy), Frozen (copy), PromiseModule (copy), CreateSingleEntityResolverModule (copy), FetchMonetizationOptionsModule (copy), CreateDataCacheModule (copy), CreateDataResolverModule (copy), updateEntryPoint (copy), GetGamePassConfigStoreModule (copy)
 	local P1 = p1 or {}
 	
-	local function logError(p2, p3) --[[ Line: 83 ]]
+	local function logError(p2, p3)
 		-- upvalues: P1 (copy)
 		if P1.logError ~= nil then
 			P1.logError(p2, p3)
@@ -70,12 +70,12 @@ return function(p1) --[[ Line: 81 | Named "createMonetizationOptionsStore" ]]
 	local GetLocalPlayerUserId = P1.getLocalPlayerUserId or DataHydrationUtilsModule.getLocalPlayerUserId
 	local Flag = false
 	local Generation = 0
-	local Callback = (P1.observeLocalPlayerUserId or DataHydrationUtilsModule.observeLocalPlayerUserId)(function() --[[ Line: 110 ]]
+	local Callback = (P1.observeLocalPlayerUserId or DataHydrationUtilsModule.observeLocalPlayerUserId)(function()
 		-- upvalues: Generation (ref)
 		Generation += 1
 	end)
 	
-	local function captureMutationToken() --[[ Line: 114 ]]
+	local function captureMutationToken()
 		-- upvalues: GetLocalPlayerUserId (copy), Generation (ref)
 		local LocalPlayerUserId = GetLocalPlayerUserId()
 		
@@ -89,17 +89,17 @@ return function(p1) --[[ Line: 81 | Named "createMonetizationOptionsStore" ]]
 		end
 	end
 	
-	local function _(p2): boolean --[[ Line: 126 | Named "isTokenCurrent" ]]
+	local function _(p2): boolean
 		-- upvalues: Flag (ref), Generation (ref), GetLocalPlayerUserId (copy)
 		return not Flag and (p2.generation == Generation and p2.userId == GetLocalPlayerUserId())
 	end
 	
-	local _ = function(p2): boolean --[[ Line: 129 | Named "isShopQueueCurrent" ]]
+	local _ = function(p2): boolean
 		-- upvalues: Flag (ref), Generation (ref), GetLocalPlayerUserId (copy)
 		return not Flag and (p2.generation == Generation and p2.userId == GetLocalPlayerUserId())
 	end
 	
-	local function bulkFetchOptions(p2) --[[ Line: 133 ]]
+	local function bulkFetchOptions(p2)
 		-- upvalues: config (copy), Flag (ref), Generation (ref), GetLocalPlayerUserId (copy)
 		return {
 			network = config.network,
@@ -107,16 +107,16 @@ return function(p1) --[[ Line: 81 | Named "createMonetizationOptionsStore" ]]
 			mutatingNetwork = config.mutatingNetwork,
 			baseUrl = config.baseUrl,
 			groupsBaseUrl = config.groupsBaseUrl,
-			isRequestCurrent = function(): boolean --[[ Line: 140 ]]
+			isRequestCurrent = function(): boolean
 				-- upvalues: p2 (copy), Flag (upval), Generation (upval), GetLocalPlayerUserId (upval)
 				return not Flag and (p2.generation == Generation and p2.userId == GetLocalPlayerUserId())
 			end
 		}
 	end
 	
-	local _ = function(p2, Promise) --[[ Line: 146 | Named "guardBulkGamePassResult" ]]
+	local _ = function(p2, Promise)
 		-- upvalues: Flag (ref), Generation (ref), GetLocalPlayerUserId (copy), Frozen (upval)
-		return Promise:andThen(function(Result) --[[ Line: 150 ]]
+		return Promise:andThen(function(Result)
 			-- upvalues: p2 (copy), Flag (upval), Generation (upval), GetLocalPlayerUserId (upval), Frozen (upval)
 			if not Flag and (p2.generation == Generation and p2.userId == GetLocalPlayerUserId()) then
 				return Result
@@ -138,7 +138,7 @@ return function(p1) --[[ Line: 81 | Named "createMonetizationOptionsStore" ]]
 		end)
 	end
 	
-	local function runBulkGamePassMutation(p3, Callback) --[[ Line: 169 ]]
+	local function runBulkGamePassMutation(p3, Callback)
 		-- upvalues: config (copy), captureMutationToken (copy), PromiseModule (upval), bulkFetchOptions (copy), Flag (ref), Generation (ref), GetLocalPlayerUserId (copy), Frozen (upval)
 		if #p3 == 0 then
 			return Callback(config), nil
@@ -148,7 +148,7 @@ return function(p1) --[[ Line: 81 | Named "createMonetizationOptionsStore" ]]
 		if CaptureMutationTokenResult == nil then
 			return PromiseModule.reject(CaptureMutationTokenResult2), nil
 		else
-			return Callback((bulkFetchOptions(CaptureMutationTokenResult))):andThen(function(Result) --[[ Line: 150 ]]
+			return Callback((bulkFetchOptions(CaptureMutationTokenResult))):andThen(function(Result)
 				-- upvalues: CaptureMutationTokenResult (copy), Flag (upval), Generation (upval), GetLocalPlayerUserId (upval), Frozen (upval)
 				if not Flag and (CaptureMutationTokenResult.generation == Generation and CaptureMutationTokenResult.userId == GetLocalPlayerUserId()) then
 					return Result
@@ -173,25 +173,25 @@ return function(p1) --[[ Line: 81 | Named "createMonetizationOptionsStore" ]]
 	
 	local Tbl = {}
 	local Tbl1 = {}
-	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p4) --[[ Line: 186 ]]
+	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p4)
 		-- upvalues: FetchMonetizationOptionsModule (upval), config (copy)
 		return FetchMonetizationOptionsModule.getManagedPricing(p4, config)
 	end, {
 		resolver = {
 			replaceItems = true,
-			logError = function(p4) --[[ Line: 192 ]]
+			logError = function(p4)
 				-- upvalues: logError (copy)
 				logError("managed_pricing", p4)
 			end
 		}
 	})
-	local SingleEntityResolverModule1 = CreateSingleEntityResolverModule(function(p4) --[[ Line: 198 ]]
+	local SingleEntityResolverModule1 = CreateSingleEntityResolverModule(function(p4)
 		-- upvalues: FetchMonetizationOptionsModule (upval), config (copy)
 		return FetchMonetizationOptionsModule.listShops(p4, config)
 	end, {
 		resolver = {
 			replaceItems = true,
-			logError = function(p4) --[[ Line: 203 ]]
+			logError = function(p4)
 				-- upvalues: logError (copy)
 				logError("shops", p4)
 			end
@@ -201,11 +201,11 @@ return function(p1) --[[ Line: 81 | Named "createMonetizationOptionsStore" ]]
 		supportsMultiGet = false,
 		replaceItems = true,
 		cache = CreateDataCacheModule(),
-		logError = function(p4) --[[ Line: 213 ]]
+		logError = function(p4)
 			-- upvalues: logError (copy)
 			logError("permission", p4)
 		end,
-		fetchFn = function(p4, _) --[[ Line: 216 ]]
+		fetchFn = function(p4, _)
 			-- upvalues: Tbl (copy), FetchMonetizationOptionsModule (upval), config (copy)
 			local Entry = Tbl[p4]
 			assert(Entry ~= nil, "Permission context must be set before fetching")
@@ -214,7 +214,7 @@ return function(p1) --[[ Line: 81 | Named "createMonetizationOptionsStore" ]]
 		end
 	})
 	
-	local _ = function(UniverseId, CreatorType, CreatorTargetId): string --[[ Line: 227 | Named "permissionKey" ]]
+	local _ = function(UniverseId, CreatorType, CreatorTargetId): string
 		-- upvalues: Tbl (copy)
 		local Text: string = `{UniverseId}:{CreatorType}:{CreatorTargetId or 0}`
 		Tbl[Text] = {
@@ -226,10 +226,10 @@ return function(p1) --[[ Line: 81 | Named "createMonetizationOptionsStore" ]]
 		return Text
 	end
 	
-	local function readBackShops(p4, p5, p6) --[[ Line: 267 ]]
+	local function readBackShops(p4, p5, p6)
 		-- upvalues: Tbl1 (copy), Flag (ref), Generation (ref), GetLocalPlayerUserId (copy), PromiseModule (upval), FetchMonetizationOptionsModule (upval), config (copy), SingleEntityResolverModule1 (copy), logError (copy)
 		if p6 == nil or Tbl1[p4] == p6 and (not Flag and (p6.generation == Generation and p6.userId == GetLocalPlayerUserId())) then
-			return FetchMonetizationOptionsModule.listShops(p4, config):andThen(function(Result) --[[ Line: 277 ]]
+			return FetchMonetizationOptionsModule.listShops(p4, config):andThen(function(Result)
 				-- upvalues: p6 (copy), Tbl1 (upval), p4 (copy), Flag (upval), Generation (upval), GetLocalPlayerUserId (upval), PromiseModule (upval), SingleEntityResolverModule1 (upval)
 				if p6 == nil or Tbl1[p4] == p6 and (not Flag and (p6.generation == Generation and p6.userId == GetLocalPlayerUserId())) then
 					SingleEntityResolverModule1.update(p4, Result)
@@ -238,7 +238,7 @@ return function(p1) --[[ Line: 81 | Named "createMonetizationOptionsStore" ]]
 				else
 					return PromiseModule.reject({ kind = "unverified", error = "Shop write was reset" })
 				end
-			end):catch(function(Err) --[[ Line: 284 ]]
+			end):catch(function(Err)
 				-- upvalues: p6 (copy), Tbl1 (upval), p4 (copy), Flag (upval), Generation (upval), GetLocalPlayerUserId (upval), PromiseModule (upval), logError (upval), SingleEntityResolverModule1 (upval), p5 (copy)
 				if p6 ~= nil and (Tbl1[p4] ~= p6 or (Flag or (p6.generation ~= Generation or p6.userId ~= GetLocalPlayerUserId()))) then
 					return PromiseModule.reject({ kind = "unverified", error = Err })
@@ -261,7 +261,7 @@ return function(p1) --[[ Line: 81 | Named "createMonetizationOptionsStore" ]]
 		end
 	end
 	
-	local function performShopGlobalIcon(Key, IsEnabled, p4) --[[ Line: 301 ]]
+	local function performShopGlobalIcon(Key, IsEnabled, p4)
 		-- upvalues: Tbl1 (copy), Flag (ref), Generation (ref), GetLocalPlayerUserId (copy), PromiseModule (upval), SingleEntityResolverModule1 (copy), FetchMonetizationOptionsModule (upval), config (copy), updateEntryPoint (upval), readBackShops (copy)
 		if Tbl1[Key] ~= p4 or (Flag or (p4.generation ~= Generation or p4.userId ~= GetLocalPlayerUserId())) then
 			return PromiseModule.reject({ kind = "unverified", error = "Shop write was reset" })
@@ -271,7 +271,7 @@ return function(p1) --[[ Line: 81 | Named "createMonetizationOptionsStore" ]]
 		local Shop = if Shops == nil then nil else Shops[1]
 		
 		if Shop == nil then
-			return FetchMonetizationOptionsModule.createShop(Key, IsEnabled, config):andThen(function(Result) --[[ Line: 315 ]]
+			return FetchMonetizationOptionsModule.createShop(Key, IsEnabled, config):andThen(function(Result)
 				-- upvalues: updateEntryPoint (upval), IsEnabled (copy), Tbl1 (upval), Key (copy), p4 (copy), Flag (upval), Generation (upval), GetLocalPlayerUserId (upval), PromiseModule (upval), SingleEntityResolverModule1 (upval), readBackShops (upval)
 				local config = {
 					shops = {
@@ -286,7 +286,7 @@ return function(p1) --[[ Line: 81 | Named "createMonetizationOptionsStore" ]]
 				else
 					return PromiseModule.reject({ kind = "unverified", error = "Shop write was reset" })
 				end
-			end, function(p5) --[[ Line: 326 ]]
+			end, function(p5)
 				-- upvalues: Tbl1 (upval), Key (copy), p4 (copy), Flag (upval), Generation (upval), GetLocalPlayerUserId (upval), PromiseModule (upval)
 				if Tbl1[Key] == p4 and (not Flag and (p4.generation == Generation and p4.userId == GetLocalPlayerUserId())) then
 					return PromiseModule.reject(p5)
@@ -301,7 +301,7 @@ return function(p1) --[[ Line: 81 | Named "createMonetizationOptionsStore" ]]
 			local config1 = { shops = Copy }
 			SingleEntityResolverModule1.update(Key, config1)
 			
-			return FetchMonetizationOptionsModule.setShopGlobalIcon(Shop.shopId, IsEnabled, config):andThen(function() --[[ Line: 342 ]]
+			return FetchMonetizationOptionsModule.setShopGlobalIcon(Shop.shopId, IsEnabled, config):andThen(function()
 				-- upvalues: p4 (copy), Flag (upval), Generation (upval), GetLocalPlayerUserId (upval), PromiseModule (upval), readBackShops (upval), Key (copy), config1 (copy)
 				local IsUserIdMatch: boolean = not Flag and (p4.generation == Generation and p4.userId == GetLocalPlayerUserId())
 				
@@ -309,7 +309,7 @@ return function(p1) --[[ Line: 81 | Named "createMonetizationOptionsStore" ]]
 					kind = "unverified",
 					error = "Shop write session changed"
 				})
-			end, function(p5) --[[ Line: 347 ]]
+			end, function(p5)
 				-- upvalues: Tbl1 (upval), Key (copy), p4 (copy), Flag (upval), Generation (upval), GetLocalPlayerUserId (upval), PromiseModule (upval), SingleEntityResolverModule1 (upval), ShopDataMustExistBeforeAnOptimisticUpdate (copy)
 				if Tbl1[Key] == p4 and (not Flag and (p4.generation == Generation and p4.userId == GetLocalPlayerUserId())) then
 					SingleEntityResolverModule1.update(Key, ShopDataMustExistBeforeAnOptimisticUpdate)
@@ -322,9 +322,9 @@ return function(p1) --[[ Line: 81 | Named "createMonetizationOptionsStore" ]]
 		end
 	end
 	
-	local function refreshGamePassInventory(p4, p5, Promise, p6) --[[ Line: 393 ]]
+	local function refreshGamePassInventory(p4, p5, Promise, p6)
 		-- upvalues: Flag (ref), Generation (ref), GetLocalPlayerUserId (copy), P1 (copy), GetGamePassConfigStoreModule (upval)
-		return if #p5 == 0 then Promise else Promise:andThen(function(Result) --[[ Line: 402 ]]
+		return if #p5 == 0 then Promise else Promise:andThen(function(Result)
 			-- upvalues: p6 (copy), Flag (upval), Generation (upval), GetLocalPlayerUserId (upval), P1 (upval), GetGamePassConfigStoreModule (upval), p4 (copy)
 			if p6 == nil or (Flag or (p6.generation ~= Generation or p6.userId ~= GetLocalPlayerUserId())) then
 				return Result
@@ -356,7 +356,7 @@ return function(p1) --[[ Line: 81 | Named "createMonetizationOptionsStore" ]]
 		getShops = SingleEntityResolverModule1.get,
 		fetchShops = SingleEntityResolverModule1.fetch,
 		getAndFetchShops = SingleEntityResolverModule1.getAndFetch,
-		getAndFetchPermission = function(UniverseId, CreatorType, CreatorTargetId) --[[ Line: 237 ]]
+		getAndFetchPermission = function(UniverseId, CreatorType, CreatorTargetId)
 			-- upvalues: DataResolverModule (copy), Tbl (copy)
 			local Text: string = `{UniverseId}:{CreatorType}:{CreatorTargetId or 0}`
 			Tbl[Text] = {
@@ -367,7 +367,7 @@ return function(p1) --[[ Line: 81 | Named "createMonetizationOptionsStore" ]]
 			
 			return DataResolverModule.getAndFetchItem(Text)
 		end,
-		fetchPermission = function(UniverseId, CreatorType, CreatorTargetId) --[[ Line: 241 ]]
+		fetchPermission = function(UniverseId, CreatorType, CreatorTargetId)
 			-- upvalues: DataResolverModule (copy), Tbl (copy)
 			local Text: string = `{UniverseId}:{CreatorType}:{CreatorTargetId or 0}`
 			Tbl[Text] = {
@@ -378,50 +378,50 @@ return function(p1) --[[ Line: 81 | Named "createMonetizationOptionsStore" ]]
 			
 			return DataResolverModule.fetchItem(Text)
 		end,
-		acceptManagedPricing = function(p7) --[[ Line: 245 ]]
+		acceptManagedPricing = function(p7)
 			-- upvalues: FetchMonetizationOptionsModule (upval), config (copy), SingleEntityResolverModule (copy)
-			return FetchMonetizationOptionsModule.acceptManagedPricing(p7, config):andThen(function(Result) --[[ Line: 246 ]]
+			return FetchMonetizationOptionsModule.acceptManagedPricing(p7, config):andThen(function(Result)
 				-- upvalues: SingleEntityResolverModule (upval), p7 (copy)
 				SingleEntityResolverModule.update(p7, { status = "Accepted" })
 				
 				return Result
 			end)
 		end,
-		ensureManagedPricingAccepted = function(p7) --[[ Line: 252 ]]
+		ensureManagedPricingAccepted = function(p7)
 			-- upvalues: FetchMonetizationOptionsModule (upval), config (copy), SingleEntityResolverModule (copy), PromiseModule (upval)
-			return FetchMonetizationOptionsModule.getManagedPricing(p7, config):andThen(function(Result) --[[ Line: 253 ]]
+			return FetchMonetizationOptionsModule.getManagedPricing(p7, config):andThen(function(Result)
 				-- upvalues: SingleEntityResolverModule (upval), p7 (copy), PromiseModule (upval), FetchMonetizationOptionsModule (upval), config (upval)
 				SingleEntityResolverModule.update(p7, Result)
 				
-				return Result.status == "Accepted" or (if Result.status == "Disabled" then PromiseModule.reject("Managed pricing is not available for this experience.") else FetchMonetizationOptionsModule.acceptManagedPricing(p7, config):andThen(function(Result) --[[ Line: 246 ]]
+				return Result.status == "Accepted" or (if Result.status == "Disabled" then PromiseModule.reject("Managed pricing is not available for this experience.") else FetchMonetizationOptionsModule.acceptManagedPricing(p7, config):andThen(function(Result)
 					-- upvalues: SingleEntityResolverModule (upval), p7 (copy)
 					SingleEntityResolverModule.update(p7, { status = "Accepted" })
 					
 					return Result
-				end):andThen(function(): boolean --[[ Line: 261 ]]
+				end):andThen(function(): boolean
 					return true
 				end))
 			end)
 		end,
-		updateDeveloperProductsManagedPricing = function(p7, p8, p9) --[[ Line: 457 ]]
+		updateDeveloperProductsManagedPricing = function(p7, p8, p9)
 			-- upvalues: FetchMonetizationOptionsModule (upval), config (copy)
 			return FetchMonetizationOptionsModule.updateDeveloperProductsManagedPricing(p7, p8, p9, config)
 		end,
-		updateGamePassesManagedPricing = function(p7, p8, p9) --[[ Line: 460 ]]
+		updateGamePassesManagedPricing = function(p7, p8, p9)
 			-- upvalues: refreshGamePassInventory (copy), runBulkGamePassMutation (copy), FetchMonetizationOptionsModule (upval)
-			return refreshGamePassInventory(p7, p8, runBulkGamePassMutation(p8, function(p10) --[[ Line: 464 ]]
+			return refreshGamePassInventory(p7, p8, runBulkGamePassMutation(p8, function(p10)
 				-- upvalues: FetchMonetizationOptionsModule (upval), p7 (copy), p8 (copy), p9 (copy)
 				return FetchMonetizationOptionsModule.updateGamePassesManagedPricing(p7, p8, p9, p10)
 			end))
 		end,
-		updateGamePassesArchived = function(p7, p8, p9) --[[ Line: 469 ]]
+		updateGamePassesArchived = function(p7, p8, p9)
 			-- upvalues: refreshGamePassInventory (copy), runBulkGamePassMutation (copy), FetchMonetizationOptionsModule (upval)
-			return refreshGamePassInventory(p7, p8, runBulkGamePassMutation(p8, function(p10) --[[ Line: 473 ]]
+			return refreshGamePassInventory(p7, p8, runBulkGamePassMutation(p8, function(p10)
 				-- upvalues: FetchMonetizationOptionsModule (upval), p7 (copy), p8 (copy), p9 (copy)
 				return FetchMonetizationOptionsModule.updateGamePassesArchived(p7, p8, p9, p10)
 			end))
 		end,
-		setShopGlobalIcon = function(Key, IsEnabled) --[[ Line: 356 ]]
+		setShopGlobalIcon = function(Key, IsEnabled)
 			-- upvalues: Tbl1 (copy), Flag (ref), Generation (ref), GetLocalPlayerUserId (copy), PromiseModule (upval), performShopGlobalIcon (copy)
 			local Entry = Tbl1[Key]
 			
@@ -444,11 +444,11 @@ return function(p1) --[[ Line: 81 | Named "createMonetizationOptionsStore" ]]
 				Entry1.overlapped = true
 			end
 			Entry1.pending += 1
-			local Promise = Entry1.tail:andThen(function() --[[ Line: 376 ]]
+			local Promise = Entry1.tail:andThen(function()
 				-- upvalues: performShopGlobalIcon (upval), Key (copy), IsEnabled (copy), Entry1 (ref)
 				return performShopGlobalIcon(Key, IsEnabled, Entry1)
 			end)
-			Entry1.tail = Promise:andThen(function() --[[ Line: 379 ]]
+			Entry1.tail = Promise:andThen(function()
 				-- upvalues: Entry1 (ref), Tbl1 (upval), Key (copy)
 				local Entry1 = Entry1
 				Entry1.pending -= 1
@@ -456,7 +456,7 @@ return function(p1) --[[ Line: 81 | Named "createMonetizationOptionsStore" ]]
 				if Entry1.pending == 0 and Tbl1[Key] == Entry1 then
 					Tbl1[Key] = nil
 				end
-			end, function() --[[ Line: 384 ]]
+			end, function()
 				-- upvalues: Entry1 (ref), Tbl1 (upval), Key (copy)
 				local Entry1 = Entry1
 				Entry1.pending -= 1
@@ -468,7 +468,7 @@ return function(p1) --[[ Line: 81 | Named "createMonetizationOptionsStore" ]]
 			
 			return Promise
 		end,
-		clear = function() --[[ Line: 427 ]]
+		clear = function()
 			-- upvalues: SingleEntityResolverModule (copy), SingleEntityResolverModule1 (copy), DataResolverModule (copy), Tbl (copy), Tbl1 (copy)
 			SingleEntityResolverModule.clear()
 			SingleEntityResolverModule1.clear()
@@ -476,7 +476,7 @@ return function(p1) --[[ Line: 81 | Named "createMonetizationOptionsStore" ]]
 			table.clear(Tbl)
 			table.clear(Tbl1)
 		end,
-		dispose = function() --[[ Line: 435 ]]
+		dispose = function()
 			-- upvalues: Flag (ref), Generation (ref), Callback (copy), SingleEntityResolverModule (copy), SingleEntityResolverModule1 (copy), DataResolverModule (copy), Tbl (copy), Tbl1 (copy)
 			Flag = true
 			Generation += 1

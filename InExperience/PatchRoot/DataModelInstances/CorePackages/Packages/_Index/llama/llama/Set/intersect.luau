@@ -1,4 +1,4 @@
-﻿return function(...) --[[ Line: 2 | Named "intersect" ]]
+﻿return function(...)
 	local t = {}
 	local Selected = select("#", ...)
 	local Flag = nil

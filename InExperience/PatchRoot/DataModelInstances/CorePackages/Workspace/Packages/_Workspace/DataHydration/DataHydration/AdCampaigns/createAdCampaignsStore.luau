@@ -6,7 +6,7 @@ local _ = require(DataHydration.DataHydrationTypes)
 local FetchAdCampaignsModule = require(script.Parent.fetchAdCampaigns)
 local _ = require(script.Parent.AdCampaignsTypes)
 
-return function(p1) --[[ Line: 33 | Named "createAdCampaignsStore" ]]
+return function(p1)
 	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), FetchAdCampaignsModule (copy)
 	local P0 = p1 or {}
 	local config = { network = P0.network, baseUrl = P0.baseUrl }
@@ -15,30 +15,30 @@ return function(p1) --[[ Line: 33 | Named "createAdCampaignsStore" ]]
 		supportsMultiGet = false,
 		replaceItems = true,
 		cache = DataCacheModule,
-		fetchFn = function(_, _) --[[ Line: 47 ]]
+		fetchFn = function(_, _)
 			-- upvalues: FetchAdCampaignsModule (upval), config (copy)
 			return FetchAdCampaignsModule.fetchAdCampaigns(config)
 		end
 	})
 	
 	return {
-		getAdCampaigns = function() --[[ Line: 53 ]]
+		getAdCampaigns = function()
 			-- upvalues: DataResolverModule (copy)
 			return DataResolverModule.getCachedItem("0")
 		end,
-		fetchAdCampaigns = function() --[[ Line: 56 ]]
+		fetchAdCampaigns = function()
 			-- upvalues: DataResolverModule (copy)
 			return DataResolverModule.fetchItem("0")
 		end,
-		getAndFetchAdCampaigns = function() --[[ Line: 59 ]]
+		getAndFetchAdCampaigns = function()
 			-- upvalues: DataResolverModule (copy)
 			return DataResolverModule.getAndFetchItem("0")
 		end,
-		isAdCampaignsRequestInQueueOrInFlight = function() --[[ Line: 62 ]]
+		isAdCampaignsRequestInQueueOrInFlight = function()
 			-- upvalues: DataResolverModule (copy)
 			return DataResolverModule.isRequestInQueueOrInFlight("0")
 		end,
-		updateAdCampaigns = function(p2) --[[ Line: 65 ]]
+		updateAdCampaigns = function(p2)
 			-- upvalues: DataCacheModule (copy)
 			DataCacheModule.replaceItem("0", p2)
 		end,

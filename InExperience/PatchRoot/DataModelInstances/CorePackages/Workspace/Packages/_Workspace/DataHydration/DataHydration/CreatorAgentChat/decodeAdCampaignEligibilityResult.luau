@@ -12,7 +12,7 @@ local InterfaceResult = TModule.interface({
 	}))
 })
 
-return function(p1) --[[ Line: 20 | Named "decodeAdCampaignEligibilityResult" ]]
+return function(p1)
 	-- upvalues: InterfaceResult (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult(p1)
 	

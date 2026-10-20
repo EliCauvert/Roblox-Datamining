@@ -1,3 +1,3 @@
-﻿return function(p1) --[[ Line: 1 | Named "postPremiumImpression" ]]
+﻿return function(p1)
 	return p1.postPremiumImpression()
 end

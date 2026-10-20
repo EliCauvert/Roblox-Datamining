@@ -5,7 +5,7 @@ local ExpChatPresetChatEmojiEffectExperimentation = require(Parent.SocialExperim
 local FFlagExpChatMessageEffectChatWindowEnlargeRolloutEnabledModule = require(ExpChat.Flags.FFlagExpChatMessageEffectChatWindowEnlargeRolloutEnabled)
 local v1 = nil
 
-return function() --[[ Line: 25 | Named "isChatWindowEnlargeEnabled" ]]
+return function()
 	-- upvalues: v1 (ref), FFlagExpChatMessageEffectChatWindowEnlargeRolloutEnabledModule (copy), ExpChatPresetChatEmojiTabExperimentation (copy), ExpChatPresetChatEmojiEffectExperimentation (copy)
 	if v1 == nil then
 		v1 = FFlagExpChatMessageEffectChatWindowEnlargeRolloutEnabledModule or (ExpChatPresetChatEmojiTabExperimentation.getIsEmphasizedRenderingEnabled() or ExpChatPresetChatEmojiEffectExperimentation.getHasChatWindowEnlargeEffect())

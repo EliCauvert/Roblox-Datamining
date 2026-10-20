@@ -9,7 +9,7 @@ local BuilderIconsModule = require(Parent.BuilderIcons)
 local IconVariant = BuilderIconsModule.IconVariant
 local _ = require(CoreScriptsPlayerFeedback.CaptureTypes)
 
-return (ReactModule.memo(function(p1) --[[ Line: 28 ]]
+return (ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), Loading (copy), IconSize (copy), Icon (copy), BuilderIconsModule (copy), IconVariant (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
@@ -25,19 +25,19 @@ return (ReactModule.memo(function(p1) --[[ Line: 28 ]]
 		Image = "",
 		LayoutOrder = p1.layoutOrder,
 		Size = UDim2.new(0, 80, 0, 80),
-		[ReactModule.Event.MouseEnter] = function() --[[ Line: 43 ]]
+		[ReactModule.Event.MouseEnter] = function()
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(true)
 		end,
-		[ReactModule.Event.MouseLeave] = function() --[[ Line: 46 ]]
+		[ReactModule.Event.MouseLeave] = function()
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(false)
 		end,
-		[ReactModule.Event.SelectionGained] = function() --[[ Line: 49 ]]
+		[ReactModule.Event.SelectionGained] = function()
 			-- upvalues: UseStateResult2_1 (copy)
 			UseStateResult2_1(true)
 		end,
-		[ReactModule.Event.SelectionLost] = function() --[[ Line: 52 ]]
+		[ReactModule.Event.SelectionLost] = function()
 			-- upvalues: UseStateResult2_1 (copy)
 			UseStateResult2_1(false)
 		end

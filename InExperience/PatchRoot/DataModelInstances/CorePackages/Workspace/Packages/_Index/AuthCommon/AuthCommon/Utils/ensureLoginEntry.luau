@@ -6,7 +6,7 @@ local Parent = AuthCommon.Parent
 local CryoModule = require(Parent.Cryo)
 local FFlagFixPreviousAccountsListEntries = require(Parent.SharedFlags).FFlagFixPreviousAccountsListEntries
 
-return function(UserId, p1): boolean --[[ Line: 15 | Named "ensureLoginEntry" ]]
+return function(UserId, p1): boolean
 	-- upvalues: AppStorageUtilitiesModule (copy), FFlagFixPreviousAccountsListEntries (copy), CryoModule (copy), PrunePreviousAccountsListModule (copy)
 	if UserId == nil or UserId == "" or UserId == "0" or UserId == "-1" then
 		return false

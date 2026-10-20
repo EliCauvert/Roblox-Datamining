@@ -3,9 +3,9 @@ local ReactHighEndMemoryCutoff = game:DefineFastInt("ReactHighEndMemoryCutoff", 
 local SystemInfoProtocol = require(script:FindFirstAncestor("Devices").Parent.SystemInfoProtocol).SystemInfoProtocol
 
 return {
-	GetDeviceMemoryTier = function() --[[ Line: 27 ]]
+	GetDeviceMemoryTier = function()
 		-- upvalues: SystemInfoProtocol (copy), ReactLowEndMemoryCutoff (copy), ReactHighEndMemoryCutoff (copy)
-		local Success, Result = pcall(function() --[[ Line: 28 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: SystemInfoProtocol (upval)
 			return SystemInfoProtocol.default:getSystemInfo({ SystemInfoProtocol.InfoNames.MAX_MEMORY })
 		end)

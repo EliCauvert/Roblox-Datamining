@@ -2,7 +2,7 @@
 local IsVRAppBuildFunction = AppCommonLibModule.IsVRAppBuild
 local IsTenFootInterfaceFunction = AppCommonLibModule.isTenFootInterface
 
-return function(): boolean --[[ Line: 8 | Named "getIsSupportedOnPlatform" ]]
+return function(): boolean
 	-- upvalues: IsVRAppBuildFunction (copy), IsTenFootInterfaceFunction (copy)
 	return not IsVRAppBuildFunction() and not IsTenFootInterfaceFunction()
 end

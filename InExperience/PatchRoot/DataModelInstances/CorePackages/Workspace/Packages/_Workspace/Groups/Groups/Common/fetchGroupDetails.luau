@@ -3,7 +3,7 @@ local HttpService = game:GetService("HttpService")
 local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 local FFlagAddCommunityDeactivatedToJoinPrompt = require(Parent.SharedFlags).FFlagAddCommunityDeactivatedToJoinPrompt
 
-return function(Callback, ProfileId) --[[ Line: 10 ]]
+return function(Callback, ProfileId)
 	-- upvalues: UrlBuilder (copy), FFlagAddCommunityDeactivatedToJoinPrompt (copy), HttpService (copy)
 	local Get = UrlBuilder.fromString("apis:profile-platform-api/v1/profiles/get")
 	local Components = {
@@ -21,7 +21,7 @@ return function(Callback, ProfileId) --[[ Line: 10 ]]
 			profileId = ProfileId,
 			components = Components
 		})
-	}):andThen(function(Result) --[[ Line: 34 ]]
+	}):andThen(function(Result)
 		return Result.responseBody
 	end)
 end

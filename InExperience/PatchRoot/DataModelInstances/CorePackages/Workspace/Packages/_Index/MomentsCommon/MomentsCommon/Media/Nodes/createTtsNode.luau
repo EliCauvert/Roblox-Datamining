@@ -5,7 +5,7 @@ local _ = require(MomentsCommon.Media.mediaNodeRegistry)
 local AudioDuckingFastIntsModule = require(MomentsCommon.Media.audioDuckingFastInts)
 local FFlagMomentsVideoPermissionContextFixModule = require(MomentsCommon.Flags.FFlagMomentsVideoPermissionContextFix)
 
-local function toAssetUri(Text: string, AssetAccessContext, p1): string --[[ Line: 59 ]]
+local function toAssetUri(Text: string, AssetAccessContext, p1): string
 	-- upvalues: HttpService (copy)
 	if typeof(Text) == "string" and string.find(Text, "://") ~= nil then
 		return Text
@@ -21,13 +21,13 @@ local function toAssetUri(Text: string, AssetAccessContext, p1): string --[[ Lin
 	end
 end
 
-local function defaultLoadSpeech(AudioTextToSpeech) --[[ Line: 85 ]]
+local function defaultLoadSpeech(AudioTextToSpeech)
 	return if game:GetEngineFeature("TextToSpeechPlatformPreview") then AudioTextToSpeech:LoadPlatformAsync() else Enum.AssetFetchStatus.Failure
 end
 
 return {
 	kind = "tts",
-	create = function(p1, p2) --[[ Line: 94 ]]
+	create = function(p1, p2)
 		-- upvalues: AudioDuckingFastIntsModule (copy), toAssetUri (copy), FFlagMomentsVideoPermissionContextFixModule (copy), defaultLoadSpeech (copy)
 		local Parent = p1.parent
 		assert(Parent ~= nil, "createTtsNode: spec.parent (the item media folder) is required")
@@ -74,16 +74,16 @@ return {
 			kind = "tts",
 			usesDecoder = false,
 			id = p1.id,
-			assets = function() --[[ Line: 154 ]]
+			assets = function()
 				-- upvalues: Content (copy)
 				return if Content == nil then {} else { Content }
 			end,
-			download = function() --[[ Line: 158 ]]
+			download = function()
 				-- upvalues: Flag1 (ref), AudioTextToSpeech (ref), Flag (ref), LoadSpeech (copy), NoAudioTextToSpeech (ref), Content (copy), p2 (copy)
 				if Flag1 then return end
 				if AudioTextToSpeech ~= nil and not Flag then
 					Flag = true
-					task.spawn(function() --[[ Line: 166 ]]
+					task.spawn(function()
 						-- upvalues: LoadSpeech (upval), AudioTextToSpeech (upval), Flag1 (upval), NoAudioTextToSpeech (upval)
 						local Success, Result = pcall(LoadSpeech, AudioTextToSpeech)
 						
@@ -100,7 +100,7 @@ return {
 					return
 				end
 			end,
-			play = function() --[[ Line: 190 ]]
+			play = function()
 				-- upvalues: Flag1 (ref), Sound (ref), Flag2 (ref)
 				if not Flag1 and Sound ~= nil then
 					Flag2 = true
@@ -108,7 +108,7 @@ return {
 					return
 				end
 			end,
-			pause = function() --[[ Line: 198 ]]
+			pause = function()
 				-- upvalues: Flag1 (ref), Sound (ref), Flag2 (ref), Flag3 (ref)
 				if not Flag1 and Sound ~= nil then
 					Flag2 = false
@@ -118,7 +118,7 @@ return {
 					return
 				end
 			end,
-			seek = function(p3) --[[ Line: 209 ]]
+			seek = function(p3)
 				-- upvalues: Flag1 (ref), Sound (ref), StartTime (copy)
 				if Flag1 or Sound == nil then return end
 				local Largest = math.max(0, p3 - StartTime)
@@ -129,7 +129,7 @@ return {
 				end
 				Sound.TimePosition = Largest
 			end,
-			realignToRegionStart = function() --[[ Line: 222 ]]
+			realignToRegionStart = function()
 				-- upvalues: Flag1 (ref), Sound (ref), Flag3 (ref)
 				if not Flag1 and Sound ~= nil then
 					Sound.PlaybackSpeed = 0
@@ -139,7 +139,7 @@ return {
 					return
 				end
 			end,
-			syncToClock = function(p3) --[[ Line: 233 ]]
+			syncToClock = function(p3)
 				-- upvalues: Flag1 (ref), Sound (ref), Flag2 (ref), NoAudioTextToSpeech (ref), v1 (ref), StartTime (copy), Flag3 (ref)
 				if Flag1 or Sound == nil or not Flag2 or not NoAudioTextToSpeech then return end
 				local v2 = v1
@@ -182,11 +182,11 @@ return {
 					Flag3 = false
 				end
 			end,
-			getRegion = function() --[[ Line: 275 ]]
+			getRegion = function()
 				-- upvalues: config (copy)
 				return config
 			end,
-			dispose = function() --[[ Line: 279 ]]
+			dispose = function()
 				-- upvalues: Flag1 (ref), Sound (ref)
 				if Flag1 then return end
 				Flag1 = true
@@ -198,7 +198,7 @@ return {
 		}
 		
 		if Sound ~= nil then
-			function config1.getAudioSource() --[[ Line: 307 ]]
+			function config1.getAudioSource()
 				-- upvalues: Sound (ref)
 				return Sound
 			end
@@ -211,7 +211,7 @@ return {
 		end
 		return config1
 	end,
-	hasAudioRemaining = function(p1, p2: number): boolean --[[ Line: 73 ]]
+	hasAudioRemaining = function(p1, p2: number): boolean
 		return p2 <= 0 or p1 < p2
 	end
 }

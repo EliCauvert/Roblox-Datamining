@@ -17,22 +17,22 @@ local MakeCommentCountFieldsModule = require(Moments.Analytics.makeCommentCountF
 local MomentImpressionMemoryModule = require(Moments.Components.Feed.Items.Moment.MomentImpressionMemory)
 local FFlagMomentsFixOverlayRemountImpressionsModule = require(Moments.Flags.FFlagMomentsFixOverlayRemountImpressions)
 
-return function(p1) --[[ Line: 30 | Named "useCommentActionImpression" ]]
+return function(p1)
 	-- upvalues: UseVerticalPagerFunction (copy), UsePagerItemFunction (copy), UseFeedOptionalFunction (copy), ReactModule (copy), SignalsModule (copy), SignalsReactModule (copy), FFlagMomentsFixOverlayRemountImpressionsModule (copy), MomentImpressionMemoryModule (copy), FFlagMomentsComments (copy), FFlagMomentsCommentsCountAnalyticsModule (copy), MakeCommentCountFieldsModule (copy), MomentsGetMomentsCommentsStoreModule (copy), MomentsCommonModule (copy), FFlagMomentsCommentsIxpEnabled (copy), FStringMomentsCommentsIxpLayerModule (copy)
 	local UseVerticalPagerResult = UseVerticalPagerFunction()
 	local UsePagerItemResult = UsePagerItemFunction()
 	local UseFeedOptionalResult = UseFeedOptionalFunction()
 	local Item = UsePagerItemResult.item
-	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 36 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), Item (copy), UseVerticalPagerResult (copy)
-		return SignalsModule.createComputed(function(p2): boolean --[[ Line: 37 ]]
+		return SignalsModule.createComputed(function(p2): boolean
 			-- upvalues: Item (upval), UseVerticalPagerResult (upval)
 			return Item ~= nil and UseVerticalPagerResult.store.getCurrentItem(p2) == Item
 		end)
 	end, { UseVerticalPagerResult, Item })))
 	local IsActiveFeed = p1 and (UseSignalStateResult and (UseFeedOptionalResult ~= nil and UseFeedOptionalResult.isActiveFeed))
 	local CommentAction = if FFlagMomentsFixOverlayRemountImpressionsModule then MomentImpressionMemoryModule.useImpressionRef("commentAction") else ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 48 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: CommentAction (copy), IsActiveFeed (copy), Item (copy), FFlagMomentsComments (upval), FFlagMomentsCommentsCountAnalyticsModule (upval), MakeCommentCountFieldsModule (upval), MomentsGetMomentsCommentsStoreModule (upval), MomentsCommonModule (upval), FFlagMomentsCommentsIxpEnabled (upval), FStringMomentsCommentsIxpLayerModule (upval)
 		local Current = CommentAction.current
 		CommentAction.current = IsActiveFeed

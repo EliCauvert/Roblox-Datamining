@@ -15,7 +15,7 @@ local LuaInExpSchedulerLookbackUseRingBuffer = game:DefineFastInt("LuaInExpSched
 local LuaInExpSchedulerDesiredFrameRate = game:DefineFastInt("LuaInExpSchedulerDesiredFrameRate", -1)
 local LuaInExpSchedulerMinimumFrameRate = game:DefineFastInt("LuaInExpSchedulerMinimumFrameRate", -1)
 
-local function buildFlags(YieldInterval, LuaAppSchedulerDeferredWork, LuaAppSchedulerHeartbeatFrameMarker, LuaAppSchedulerTargetMsByHeartbeatDelta, NumberOfLookbackFrames, LuaAppSchedulerLookbackUseRingBuffer, DesiredFrameRate, MinimumFrameRate) --[[ Line: 36 ]]
+local function buildFlags(YieldInterval, LuaAppSchedulerDeferredWork, LuaAppSchedulerHeartbeatFrameMarker, LuaAppSchedulerTargetMsByHeartbeatDelta, NumberOfLookbackFrames, LuaAppSchedulerLookbackUseRingBuffer, DesiredFrameRate, MinimumFrameRate)
 	local t = {}
 	local Flag = false
 	
@@ -55,11 +55,11 @@ local function buildFlags(YieldInterval, LuaAppSchedulerDeferredWork, LuaAppSche
 end
 
 return {
-	getApp = function() --[[ Line: 88 ]]
+	getApp = function()
 		-- upvalues: buildFlags (copy), LuaAppSchedulerYieldInterval (copy), LuaAppSchedulerDeferredWork (copy), LuaAppSchedulerHeartbeatFrameMarker (copy), LuaAppSchedulerTargetMsByHeartbeatDelta (copy), LuaAppSchedulerNumberOfLookbackFrames (copy), LuaAppSchedulerLookbackUseRingBuffer (copy), LuaAppSchedulerDesiredFrameRate (copy), LuaAppSchedulerMinimumFrameRate (copy)
 		return (buildFlags(LuaAppSchedulerYieldInterval, LuaAppSchedulerDeferredWork, LuaAppSchedulerHeartbeatFrameMarker, LuaAppSchedulerTargetMsByHeartbeatDelta, LuaAppSchedulerNumberOfLookbackFrames, LuaAppSchedulerLookbackUseRingBuffer, LuaAppSchedulerDesiredFrameRate, LuaAppSchedulerMinimumFrameRate))
 	end,
-	getInExp = function() --[[ Line: 103 ]]
+	getInExp = function()
 		-- upvalues: buildFlags (copy), LuaInExpSchedulerYieldInterval (copy), LuaInExpSchedulerDeferredWork (copy), LuaInExpSchedulerHeartbeatFrameMarker (copy), LuaInExpSchedulerTargetMsByHeartbeatDelta (copy), LuaInExpSchedulerNumberOfLookbackFrames (copy), LuaInExpSchedulerLookbackUseRingBuffer (copy), LuaInExpSchedulerDesiredFrameRate (copy), LuaInExpSchedulerMinimumFrameRate (copy)
 		return (buildFlags(LuaInExpSchedulerYieldInterval, LuaInExpSchedulerDeferredWork, LuaInExpSchedulerHeartbeatFrameMarker, LuaInExpSchedulerTargetMsByHeartbeatDelta, LuaInExpSchedulerNumberOfLookbackFrames, LuaInExpSchedulerLookbackUseRingBuffer, LuaInExpSchedulerDesiredFrameRate, LuaInExpSchedulerMinimumFrameRate))
 	end

@@ -12,11 +12,11 @@ local config = {
 	lastUpdated = { 2026, 6, 18 }
 }
 
-local function _(p1, p2) --[[ Line: 32 | Named "readPositionY" ]]
+local function _(p1, p2)
 	return p1[p2].Y
 end
 
-local function logMotionJitter(p1, Surface, p2) --[[ Line: 36 ]]
+local function logMotionJitter(p1, Surface, p2)
 	-- upvalues: Logger (copy), TelemetryService (copy), config (copy)
 	Logger:info("[useMotionJitterMetric] Logging motion jitter")
 	
@@ -32,15 +32,15 @@ local function logMotionJitter(p1, Surface, p2) --[[ Line: 36 ]]
 	end
 end
 
-return function(p1, Surface, p2, p3) --[[ Line: 52 | Named "useMotionJitterMetric" ]]
+return function(p1, Surface, p2, p3)
 	-- upvalues: ReactModule (copy), ExperienceDetailsMotionJitterHundredthsPercent (copy), Logger (copy), logMotionJitter (copy), RunService (copy)
-	ReactModule.useEffect(function() --[[ Line: 58 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ExperienceDetailsMotionJitterHundredthsPercent (upval), Logger (upval), logMotionJitter (upval), Surface (copy), RunService (upval), p1 (copy), p3 (copy), p2 (copy)
 		if ExperienceDetailsMotionJitterHundredthsPercent <= 0 then return end
 		local v1 = nil
 		local Config = nil
 		
-		local function _(Text) --[[ Line: 66 | Named "flushMotion" ]]
+		local function _(Text)
 			-- upvalues: Logger (upval), Config (ref), logMotionJitter (upval), Surface (upval)
 			Logger:info("[useMotionJitterMetric] Flushing motion metric for reason: " .. Text)
 			
@@ -51,7 +51,7 @@ return function(p1, Surface, p2, p3) --[[ Line: 52 | Named "useMotionJitterMetri
 		end
 		
 		local Connection = nil
-		Connection = RunService.RenderStepped:Connect(function() --[[ Line: 75 ]]
+		Connection = RunService.RenderStepped:Connect(function()
 			-- upvalues: p1 (upval), Logger (upval), Config (ref), Surface (upval), v1 (ref), p3 (upval), logMotionJitter (upval), Connection (ref), p2 (upval)
 			local Current = p1.current
 			
@@ -109,7 +109,7 @@ return function(p1, Surface, p2, p3) --[[ Line: 52 | Named "useMotionJitterMetri
 			end
 		end)
 		
-		return function() --[[ Line: 122 ]]
+		return function()
 			-- upvalues: Logger (upval), Config (ref), Surface (upval), Connection (ref)
 			Logger:info("[useMotionJitterMetric] Flushing motion metric for reason: unmount")
 			

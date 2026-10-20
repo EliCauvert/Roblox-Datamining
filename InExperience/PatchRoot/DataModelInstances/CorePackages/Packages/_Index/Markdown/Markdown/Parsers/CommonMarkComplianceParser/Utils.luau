@@ -10,20 +10,20 @@ local config = {
 	INLINE_CODE = { char = "`", length = 1 }
 }
 local Utils = {
-	getDelimiterInfo = function(p1) --[[ Line: 63 ]]
+	getDelimiterInfo = function(p1)
 		-- upvalues: config (copy)
 		return config[p1]
 	end,
-	causesLineBreak = function(p1): boolean --[[ Line: 67 ]]
+	causesLineBreak = function(p1): boolean
 		return p1.name ~= "TEXT" or string.find(p1.text, "\n", 0, true) ~= nil
 	end,
-	getTokenNameFromCharAndLength = function(p1, p2): string --[[ Line: 71 ]]
+	getTokenNameFromCharAndLength = function(p1, p2): string
 		return if p1 == "`" then "INLINE_CODE" elseif p1 == "~" then "STRIKE" elseif p2 == 2 then if p1 == "*" then "BOLD_2" else "ITALIC_2" elseif p1 == "*" then "BOLD" else "ITALIC"
 	end,
-	canDelimitersMatch = function(p1, p2): boolean --[[ Line: 83 ]]
+	canDelimitersMatch = function(p1, p2): boolean
 		return p1.runLength ~= 0 and p2.runLength ~= 0 and (not (p1.canOpen and p1.canClose or p2.canOpen and p2.canClose) or (p1.runLength % 3 == 0 and p2.runLength % 3 == 0 or (p1.runLength + p2.runLength) % 3 ~= 0))
 	end,
-	addDelimiterMatch = function(p1, p2) --[[ Line: 110 ]]
+	addDelimiterMatch = function(p1, p2)
 		local Matches = p1.matches or {}
 		p1.matches = Matches
 		local v1 = 1
@@ -42,37 +42,37 @@ local Utils = {
 		end
 		table.insert(Matches, NewCountMatches, p2)
 	end,
-	isWhitespace = function(Text): boolean --[[ Line: 136 ]]
+	isWhitespace = function(Text): boolean
 		-- upvalues: ConstantsModule (copy)
 		return not Text or #Text == 0 or Text:match(ConstantsModule.ASCII.WHITESPACE_PATTERN) ~= nil or (if ConstantsModule.UNICODE.WHITESPACE[utf8.codepoint(Text)] then true else false)
 	end,
-	isPunctuation = function(Text): boolean --[[ Line: 158 ]]
+	isPunctuation = function(Text): boolean
 		-- upvalues: ConstantsModule (copy)
 		return if Text and #Text ~= 0 then if Text:match(ConstantsModule.ASCII.PUNCTUATION_PATTERN) then true elseif ConstantsModule.UNICODE.PUNCTUATION[utf8.codepoint(Text)] then true else false else false
 	end
 }
 
-function Utils.isLeftFlanking(PrevChar, NextChar) --[[ Line: 179 ]]
+function Utils.isLeftFlanking(PrevChar, NextChar)
 	-- upvalues: Utils (copy)
 	return not Utils.isWhitespace(NextChar) and (not Utils.isPunctuation(NextChar) or (Utils.isWhitespace(PrevChar) or Utils.isPunctuation(PrevChar)))
 end
 
-function Utils.isRightFlanking(PrevChar, NextChar) --[[ Line: 201 ]]
+function Utils.isRightFlanking(PrevChar, NextChar)
 	-- upvalues: Utils (copy)
 	return not Utils.isWhitespace(PrevChar) and (not Utils.isPunctuation(PrevChar) or (Utils.isWhitespace(NextChar) or Utils.isPunctuation(NextChar)))
 end
 
-function Utils.canOpenEmphasis(CharacterContext) --[[ Line: 223 ]]
+function Utils.canOpenEmphasis(CharacterContext)
 	-- upvalues: Utils (copy)
 	return CharacterContext.char == "`" or (if Utils.isLeftFlanking(CharacterContext.prevChar, CharacterContext.nextChar) then CharacterContext.char ~= "_" or (not Utils.isRightFlanking(CharacterContext.prevChar, CharacterContext.nextChar) or Utils.isPunctuation(CharacterContext.prevChar)) else false)
 end
 
-function Utils.canCloseEmphasis(CharacterContext) --[[ Line: 248 ]]
+function Utils.canCloseEmphasis(CharacterContext)
 	-- upvalues: Utils (copy)
 	return CharacterContext.char == "`" or (if Utils.isRightFlanking(CharacterContext.prevChar, CharacterContext.nextChar) then CharacterContext.char ~= "_" or (not Utils.isLeftFlanking(CharacterContext.prevChar, CharacterContext.nextChar) or Utils.isPunctuation(CharacterContext.nextChar)) else false)
 end
 
-function Utils.getCharacterContext(Text, p3: number, p4: number) --[[ Line: 271 ]]
+function Utils.getCharacterContext(Text, p3: number, p4: number)
 	if #Text == 0 then
 		return {}
 	end
@@ -98,7 +98,7 @@ function Utils.getCharacterContext(Text, p3: number, p4: number) --[[ Line: 271 
 	return { prevChar = Character, nextChar = Character1 }
 end
 
-function Utils.isInsideInlineCode(p3, p4, p5): boolean --[[ Line: 305 ]]
+function Utils.isInsideInlineCode(p3, p4, p5): boolean
 	local List = {}
 	local v2 = nil
 	local P18 = p5 or #p3

@@ -16,7 +16,7 @@ local FillBehavior = FoundationModule.Enums.FillBehavior
 local InputSize = FoundationModule.Enums.InputSize
 local FFlagAXInventoryDurablesSupport = require(Parent.AvatarExperienceFlags).FFlagAXInventoryDurablesSupport
 
-local function v14(p1) --[[ Line: 40 ]]
+local function v14(p1)
 	return p1.ScreenSize
 end
 
@@ -46,9 +46,9 @@ local config = {
 	} else nil
 }
 
-return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(function(p1) --[[ Line: 95 | Named "ItemsUnavailablePrompt" ]]
+return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(function(p1)
 	-- upvalues: ReactModule (copy), SendAXCounterV2Function (copy), ConstantsModule (copy), FFlagAXInventoryDurablesSupport (copy), UseLocalizationFunction (copy), config (copy), UseSelectorFunction (copy), v14 (copy), RoactNavigationModule (copy), View (copy), Text (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy), InputSize (copy), ModalWindow (copy)
-	ReactModule.useEffect(function() --[[ Line: 96 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SendAXCounterV2Function (upval), ConstantsModule (upval), p1 (copy)
 		SendAXCounterV2Function(ConstantsModule.COUNTERS.ItemsUnavailablePromptShown, { messageType = p1.messageType })
 	end, {})
@@ -71,12 +71,12 @@ return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(fu
 	end
 	local UseLocalizationResult = UseLocalizationFunction(CategoryLocs)
 	
-	local function _(p2) --[[ Line: 121 | Named "localizeCategory" ]]
+	local function _(p2)
 		-- upvalues: UseLocalizationResult (copy)
 		return if p2.categoryLoc and UseLocalizationResult[p2.categoryLoc] then UseLocalizationResult[p2.categoryLoc] else p2.category or ""
 	end
 	
-	local function createItemListString(Items): string --[[ Line: 128 ]]
+	local function createItemListString(Items): string
 		-- upvalues: UseLocalizationResult (copy)
 		local Text = ""
 		
@@ -128,11 +128,11 @@ return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(fu
 		TitleText = config[p1.messageType].TitleText,
 		BodyText = BodyText
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 187 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), RoactNavigationModule (upval)
 		p1.navigation.dispatch(RoactNavigationModule.Actions.back(nil))
 	end, { p1.navigation })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 191 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy), p1 (copy)
 		UseResult()
 		
@@ -140,7 +140,7 @@ return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(fu
 			p1.onConfirm()
 		end
 	end, { p1.onConfirm, UseResult })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 198 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy), p1 (copy)
 		UseResult()
 		
@@ -156,7 +156,7 @@ return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(fu
 		ViewFrame = ReactModule.createElement(View, {
 			tag = "auto-y size-full-0 padding-xxlarge col align-x-left align-y-top"
 		}, {
-			ContentContainer = (function() --[[ Line: 207 ]]
+			ContentContainer = (function()
 				-- upvalues: ReactModule (upval), View (upval), Text (upval), UseLocalizationResult1 (copy)
 				return ReactModule.createElement(View, {
 					tag = "auto-y size-full-0 padding-bottom-xxlarge col align-x-left align-y-top"
@@ -174,7 +174,7 @@ return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(fu
 					})
 				})
 			end)(),
-			ButtonContainer = (function() --[[ Line: 227 ]]
+			ButtonContainer = (function()
 				-- upvalues: ReactModule (upval), View (upval), Button (upval), UseResult1 (copy), UseLocalizationResult1 (copy), ButtonVariant (upval), FillBehavior (upval), InputSize (upval), p1 (copy), UseResult2 (copy)
 				return ReactModule.createElement(View, { tag = "col gap-medium auto-y size-full-0 fill-x" }, {
 					Buttons = ReactModule.createElement(Button, {

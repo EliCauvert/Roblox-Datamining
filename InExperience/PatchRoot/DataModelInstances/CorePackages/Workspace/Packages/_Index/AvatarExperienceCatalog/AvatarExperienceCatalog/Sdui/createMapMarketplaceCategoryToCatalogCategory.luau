@@ -21,15 +21,15 @@ local config1 = {
 	HighDefinition = { CategoryFilter = "HighDefinition" }
 }
 
-local function _(Text: string): string --[[ Line: 68 | Named "widgetContextFromName" ]]
+local function _(Text: string): string
 	return `catalog-tab:{string.lower((Text:gsub(" ", "-"):gsub("%.", "-")))}`
 end
 
-return function() --[[ Line: 73 | Named "createMapMarketplaceCategoryToCatalogCategory" ]]
+return function()
 	-- upvalues: HttpService (copy), config1 (copy), FFlagAXSduiCatalogSearchShowWidgets (copy), FFlagAXM41AllCategoriesToTaxonomy (copy), config (copy)
 	local Guids = {}
 	
-	local function _(Key) --[[ Line: 82 | Named "getOrCreateSearchUuid" ]]
+	local function _(Key)
 		-- upvalues: Guids (copy), HttpService (upval)
 		local Guid = Guids[Key]
 		
@@ -45,7 +45,7 @@ return function() --[[ Line: 73 | Named "createMapMarketplaceCategoryToCatalogCa
 	
 	local _ = nil
 	
-	local function mapInternal(p1, p2, p3, p4) --[[ Line: 99 ]]
+	local function mapInternal(p1, p2, p3, p4)
 		-- upvalues: mapInternal (ref), config1 (upval), FFlagAXSduiCatalogSearchShowWidgets (upval), Guids (copy), HttpService (upval), FFlagAXM41AllCategoriesToTaxonomy (upval), config (upval)
 		p4[p1.id] = true
 		local List = nil
@@ -110,11 +110,11 @@ return function() --[[ Line: 73 | Named "createMapMarketplaceCategoryToCatalogCa
 	end
 	
 	return {
-		map = function(p5, p6, p7) --[[ Line: 189 ]]
+		map = function(p5, p6, p7)
 			-- upvalues: mapInternal (ref)
 			return mapInternal(p5, p6, p7, {})
 		end,
-		clear = function() --[[ Line: 197 ]]
+		clear = function()
 			-- upvalues: Guids (copy)
 			table.clear(Guids)
 		end

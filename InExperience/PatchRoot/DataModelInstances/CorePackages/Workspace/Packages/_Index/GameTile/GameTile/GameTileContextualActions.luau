@@ -9,7 +9,7 @@ local TileOverflowMenuItems = require(GameTile.GameTileConstants).TileOverflowMe
 local IconName = require(Parent.Foundation).Enums.IconName
 local UseLastInputFunction = ResponsiveModule.useLastInput
 
-local function _(p1): number --[[ Line: 18 | Named "countAvailableActions" ]]
+local function _(p1): number
 	-- upvalues: TileOverflowMenuItems (copy)
 	local Count = 0
 	
@@ -21,7 +21,7 @@ local function _(p1): number --[[ Line: 18 | Named "countAvailableActions" ]]
 	return Count
 end
 
-return function(p2) --[[ Line: 30 | Named "GameTileContextualActions" ]]
+return function(p2)
 	-- upvalues: UseLastInputFunction (copy), TileOverflowMenuItems (copy), ResponsiveModule (copy), ReactModule (copy), GameTileDirectActionModule (copy), CryoModule (copy), IconName (copy), GameTileOverflowMenuModule (copy)
 	local UseLastInputResult = UseLastInputFunction()
 	local AvailableMenuItems = p2.availableMenuItems

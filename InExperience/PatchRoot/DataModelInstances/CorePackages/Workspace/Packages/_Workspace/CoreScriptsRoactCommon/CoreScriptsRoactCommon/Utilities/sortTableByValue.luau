@@ -1,8 +1,8 @@
-﻿local function defaultCompareFn(p1, p2): boolean --[[ Line: 1 ]]
+﻿local function defaultCompareFn(p1, p2): boolean
 	return p1.value < p2.value
 end
 
-return function(List, p1) --[[ Line: 5 | Named "sortTableByValue" ]]
+return function(List, p1)
 	-- upvalues: defaultCompareFn (copy)
 	local List1 = {}
 	local DefaultCompareFn = if p1 then p1 else defaultCompareFn

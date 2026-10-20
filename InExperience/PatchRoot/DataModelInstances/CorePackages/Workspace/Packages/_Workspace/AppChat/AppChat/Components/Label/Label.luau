@@ -11,7 +11,7 @@ local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local config = { bodyText = "" }
 
-return ReactModule.memo(function(p1) --[[ Line: 35 | Named "Label" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), ReactModule (copy), ImageSetLabel (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseStyleResult = UseStyleFunction()

@@ -36,11 +36,11 @@ local config = {
 	systemButtonText = if GetFFlagIsSquadEnabledFunction() then "Feature.Chat.Action.Create" else "Feature.Chat.Action.StartChatWithFriends",
 	pageHeaderText = if GetFFlagIsSquadEnabledFunction() then if ArgoPartyExperimentation.getIsRenameEnabled() and UniversalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then "Feature.Chat.Title.NewChat" else "Feature.Chat.Heading.PartyWithFriends" else "Feature.Chat.Heading.ChatWithConnections",
 	conversation = require(AppChat.Models.Conversation).empty(),
-	setSystemButtonActivated = function(_) --[[ Line: 83 ]] end,
-	setSystemButtonEnabled = function(_) --[[ Line: 84 ]] end
+	setSystemButtonActivated = function(_) end,
+	setSystemButtonEnabled = function(_) end
 }
 
-function CreateNewChatContainer(p1) --[[ Line: 88 ]]
+function CreateNewChatContainer(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseRefFunction (copy), UseStateFunction (copy), FFlagAppIaScrollAway (copy), FFlagAppIaScrollAwayFixSocial (copy), UseIsInExperienceModule (copy), UseIsGroupChatEnabledModule (copy), UseDispatchFunction (copy), UseCallbackFunction (copy), UseAnalyticsModule (copy), PromiseModule (copy), CreateConversationModule (copy), ParseCreateConversationErrorsModule (copy), EventNamesModule (copy), CreateConversationErrorModule (copy), UseEffectFunction (copy), ReactModule (copy), FFlagFixPaginatedChatMembersCutoffModule (copy), AppNavBarModule (copy), ResponseIndicator (copy), SelectChatMembersContainerModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseRefResult = UseRefFunction({})
@@ -57,16 +57,16 @@ function CreateNewChatContainer(p1) --[[ Line: 88 ]]
 		CanOnlyCreateOneToOneChat = true
 	end
 	local UseDispatchResult = UseDispatchFunction()
-	local UseCallbackResult = UseCallbackFunction(function(ToastTitle) --[[ Line: 109 ]]
+	local UseCallbackResult = UseCallbackFunction(function(ToastTitle)
 		-- upvalues: JoinResult (copy)
 		JoinResult.navigateToToast({
 			toastProps = { toastContent = { toastTitle = ToastTitle } }
 		})
 	end, { JoinResult.navigateToToast })
 	
-	local function SelectedUsersChanged(p2, p3) --[[ Line: 119 ]]
+	local function SelectedUsersChanged(p2, p3)
 		-- upvalues: UseRefResult (copy), CryoModule (upval), UseRefResult1 (copy), JoinResult (copy)
-		UseRefResult.current = CryoModule.List.map(p2, function(p4) --[[ Line: 120 ]]
+		UseRefResult.current = CryoModule.List.map(p2, function(p4)
 			return p4.id
 		end)
 		local Current = p3 <= #p2
@@ -78,17 +78,17 @@ function CreateNewChatContainer(p1) --[[ Line: 88 ]]
 	end
 	
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
-	local UseCallbackResult1 = UseCallbackFunction(function(p2) --[[ Line: 133 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function(p2)
 		-- upvalues: UseStateResult (copy), UseRefResult (copy), PromiseModule (upval), UseStateResult2 (copy), UseDispatchResult (copy), CreateConversationModule (upval), UseAnalyticsModuleResult (copy), JoinResult (copy), ParseCreateConversationErrorsModule (upval), UseCallbackResult (copy), EventNamesModule (upval), CreateConversationErrorModule (upval)
 		if UseStateResult or not UseRefResult.current then
 			return PromiseModule.resolve()
 		else
 			UseStateResult2(true)
 			
-			return UseDispatchResult(CreateConversationModule(if #UseRefResult.current == 1 then "one_to_one" else "group", UseRefResult.current, UseAnalyticsModuleResult, "userCreatedNewConversation")):andThen(function(Result) --[[ Line: 154 ]]
+			return UseDispatchResult(CreateConversationModule(if #UseRefResult.current == 1 then "one_to_one" else "group", UseRefResult.current, UseAnalyticsModuleResult, "userCreatedNewConversation")):andThen(function(Result)
 				-- upvalues: JoinResult (upval)
 				JoinResult.navigateToConversation(Result.id)
-			end):catch(function(Err) --[[ Line: 158 ]]
+			end):catch(function(Err)
 				-- upvalues: ParseCreateConversationErrorsModule (upval), p2 (copy), UseCallbackResult (upval), UseStateResult2 (upval), UseAnalyticsModuleResult (upval), EventNamesModule (upval), CreateConversationErrorModule (upval)
 				UseCallbackResult(if ParseCreateConversationErrorsModule(Err) == "participant_chat_disabled" then p2.invalidParticipantText else p2.networkErrorText)
 				UseStateResult2(false)
@@ -104,7 +104,7 @@ function CreateNewChatContainer(p1) --[[ Line: 88 ]]
 		UseDispatchResult, UseStateResult, UseStateResult2, UseRefResult,
 		JoinResult.navigateToConversation, UseCallbackResult, UseAnalyticsModuleResult
 	})
-	UseEffectFunction(function() --[[ Line: 188 ]]
+	UseEffectFunction(function()
 		-- upvalues: JoinResult (copy), UseCallbackResult1 (copy)
 		JoinResult.setSystemButtonActivated(UseCallbackResult1)
 	end, { JoinResult.setSystemButtonActivated, UseCallbackResult1 })

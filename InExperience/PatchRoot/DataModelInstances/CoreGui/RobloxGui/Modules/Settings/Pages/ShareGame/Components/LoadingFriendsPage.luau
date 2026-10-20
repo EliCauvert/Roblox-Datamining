@@ -4,12 +4,12 @@ local LoadingBar = require(CorePackages.Workspace.Packages.AppBlox).LoadingBar
 local RoactModule = require(CorePackages.Packages.Roact)
 local LoadingFriendsPage = RoactModule.PureComponent:extend("LoadingFriendsPage")
 
-function LoadingFriendsPage.render(p1) --[[ Line: 14 ]]
+function LoadingFriendsPage.render(p1)
 	-- upvalues: RoactModule (copy), LoadingBar (copy)
 	local ZIndex = p1.props.ZIndex
 	local Count = 0
 	
-	local function _(): number --[[ Line: 20 | Named "incrementLayoutOrder" ]]
+	local function _(): number
 		-- upvalues: Count (ref)
 		Count += 1
 		

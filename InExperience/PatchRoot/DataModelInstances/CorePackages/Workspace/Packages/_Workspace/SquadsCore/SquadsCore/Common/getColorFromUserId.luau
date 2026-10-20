@@ -6,7 +6,7 @@
 	[5] = Color3.fromRGB(250, 212, 106)
 }
 
-return function(p1: number) --[[ Line: 9 ]]
+return function(p1: number)
 	-- upvalues: config (copy)
 	return config[p1 % #config + 1]
 end

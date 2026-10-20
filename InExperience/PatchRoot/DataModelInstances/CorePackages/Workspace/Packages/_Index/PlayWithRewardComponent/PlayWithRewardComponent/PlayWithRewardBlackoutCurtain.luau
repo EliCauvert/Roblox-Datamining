@@ -2,7 +2,7 @@
 local Object = nil
 
 return {
-	show = function() --[[ Line: 9 ]]
+	show = function()
 		-- upvalues: Object (ref), CoreGui (copy)
 		if not Object or not Object.Parent then
 			local PlayWithRewardBlackoutCurtain = Instance.new("ScreenGui")
@@ -22,7 +22,7 @@ return {
 			return
 		end
 	end,
-	hide = function() --[[ Line: 31 ]]
+	hide = function()
 		-- upvalues: Object (ref)
 		if Object then
 			Object:Destroy()

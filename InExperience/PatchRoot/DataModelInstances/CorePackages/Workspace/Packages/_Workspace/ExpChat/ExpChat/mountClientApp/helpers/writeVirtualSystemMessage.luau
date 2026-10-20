@@ -3,7 +3,7 @@ local MarkChannelUnreadForSystemMessageModule = require(ExpChat.Actions.MarkChan
 local ShouldSuppressUnreadForTabMetadataModule = require(ExpChat.shouldSuppressUnreadForTabMetadata)
 local FFlagExpChatUnreadTabIndicatorV2WindowModule = require(ExpChat.Flags.FFlagExpChatUnreadTabIndicatorV2Window)
 
-return function(p1, p2) --[[ Line: 40 | Named "writeVirtualSystemMessage" ]]
+return function(p1, p2)
 	-- upvalues: ShouldSuppressUnreadForTabMetadataModule (copy), FFlagExpChatUnreadTabIndicatorV2WindowModule (copy), MarkChannelUnreadForSystemMessageModule (copy)
 	p1.messagesStore.addSystemMessage(p2.text, p2.channelName, p2.metadata, p2.postProcessMessage, p2.isError, p2.textChannel)
 	p1.resetTextTransparency(p2.channelName)

@@ -3,7 +3,7 @@ local AppPage = require(SocialTabsPage.Parent.RobloxAppEnums).AppPage
 local Friends = {
 	tabLabelKey = "CommonUI.Features.Label.Friends",
 	id = AppPage.SocialTabsFriends,
-	getScreen = function() --[[ Line: 10 ]]
+	getScreen = function()
 		-- upvalues: SocialTabsPage (copy)
 		return require(SocialTabsPage.Components.TabContent.FriendsTabContent)
 	end
@@ -11,7 +11,7 @@ local Friends = {
 local Mutuals = {
 	tabLabelKey = "Feature.Friends.Mutuals",
 	id = AppPage.SocialTabsMutuals,
-	getScreen = function() --[[ Line: 18 ]]
+	getScreen = function()
 		-- upvalues: SocialTabsPage (copy)
 		return require(SocialTabsPage.Components.TabContent.MutualsTabContent)
 	end

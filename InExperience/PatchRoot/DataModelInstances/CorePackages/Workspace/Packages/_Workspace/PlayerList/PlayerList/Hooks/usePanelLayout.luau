@@ -15,7 +15,7 @@ local UseViewportSizeModule = require(Parent.Hooks.useViewportSize)
 local FFlagPlayerListReskinModule = require(Parent.Flags.FFlagPlayerListReskin)
 local FFlagPlayerListFixPlatformLeaderboardSizingModule = require(Parent.Flags.FFlagPlayerListFixPlatformLeaderboardSizing)
 
-return function(p1, p2: number, p3) --[[ Line: 31 | Named "usePanelLayout" ]]
+return function(p1, p2: number, p3)
 	-- upvalues: UseViewportSizeModule (copy), UseTokensFunction (copy), ReactModule (copy), LayoutValuesContextModule (copy), SignalsReactModule (copy), PanelContentHeightStoreModule (copy), ConstantsModule (copy), UseScaledValueFunction (copy), GetDeviceBottomInsetModule (copy), ComputeMobilePanelSizeModule (copy), FFlagPlayerListReskinModule (copy), FFlagPlayerListFixPlatformLeaderboardSizingModule (copy), ComputeDesktopPanelHeightModule (copy)
 	local UseViewportSizeModuleResult = UseViewportSizeModule()
 	local UseTokensResult = UseTokensFunction()

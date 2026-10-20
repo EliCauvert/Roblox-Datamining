@@ -1,4 +1,4 @@
-﻿local function cloneTokenValue(List) --[[ Line: 1 ]]
+﻿local function cloneTokenValue(List)
 	-- upvalues: cloneTokenValue (copy)
 	if type(List) ~= "table" then
 		return List
@@ -12,7 +12,7 @@
 end
 
 return {
-	getDeprecatedSemanticTokens = function(p1, p2: number) --[[ Line: 14 ]]
+	getDeprecatedSemanticTokens = function(p1, p2: number)
 		-- upvalues: cloneTokenValue (copy)
 		return (cloneTokenValue({
 			Color = {

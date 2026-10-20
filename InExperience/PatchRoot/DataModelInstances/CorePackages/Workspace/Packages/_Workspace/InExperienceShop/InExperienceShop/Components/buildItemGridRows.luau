@@ -1,10 +1,10 @@
 ﻿local _ = require(script.Parent.Parent.Types)
 
-local function _(p1, p2, Callback): number --[[ Line: 8 | Named "getItemSlotCost" ]]
+local function _(p1, p2, Callback): number
 	return if Callback(p1, p2) then 2 else 1
 end
 
-local function buildUniformRows(p1, p2: number) --[[ Line: 19 ]]
+local function buildUniformRows(p1, p2: number)
 	local List = {}
 	
 	for i = 1, #p1, p2 do
@@ -17,7 +17,7 @@ end
 
 return {
 	ROBUX_TILE_SLOT_COST = 2,
-	buildItemGridRows = function(p3, p4, Callback) --[[ Line: 33 ]]
+	buildItemGridRows = function(p3, p4, Callback)
 		-- upvalues: buildUniformRows (copy)
 		if Callback == nil then
 			return (buildUniformRows(p3, p4))

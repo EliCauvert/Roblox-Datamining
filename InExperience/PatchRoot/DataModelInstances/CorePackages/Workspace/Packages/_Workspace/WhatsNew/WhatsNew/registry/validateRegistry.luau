@@ -4,26 +4,26 @@ local EnumsModule = require(WhatsNew.Enums)
 local _ = require(WhatsNew.Types)
 local ScopeActionsModule = require(script.Parent.ScopeActions)
 
-local function _(List, p1, p2) --[[ Line: 21 | Named "appendError" ]]
+local function _(List, p1, p2)
 	table.insert(List, `{p1}:{p2}`)
 end
 
-local _ = function(p1): boolean --[[ Line: 25 | Named "isNonEmptyString" ]]
+local _ = function(p1): boolean
 	return p1 ~= nil and p1 ~= ""
 end
 
-local _ = function(p1) --[[ Line: 29 | Named "isoDateToUnix" ]]
+local _ = function(p1)
 	local _DateTime = DateTime.fromIsoDate(p1)
 	
 	return _DateTime and _DateTime.UnixTimestamp or nil
 end
 
-local _ = function(p1, WhatsNew) --[[ Line: 34 | Named "getRegistryEntries" ]]
+local _ = function(p1, WhatsNew)
 	-- upvalues: EnumsModule (copy)
 	return if WhatsNew == EnumsModule.TourType.WhatsNew then p1.whatsNew else p1.onboarding
 end
 
-local function validateConstants(p1, List) --[[ Line: 41 ]]
+local function validateConstants(p1, List)
 	-- upvalues: ConstantsModule (copy)
 	local Constants = p1.constants
 	
@@ -38,7 +38,7 @@ local function validateConstants(p1, List) --[[ Line: 41 ]]
 	end
 end
 
-local function validateScopeKeys(p2, List) --[[ Line: 56 ]]
+local function validateScopeKeys(p2, List)
 	-- upvalues: ConstantsModule (copy)
 	for i, scopeTour in p2.scopeTours do
 		if scopeTour.id ~= i then
@@ -47,7 +47,7 @@ local function validateScopeKeys(p2, List) --[[ Line: 56 ]]
 	end
 end
 
-local function validateEntrySchedule(p3, WhatsNew, List) --[[ Line: 64 ]]
+local function validateEntrySchedule(p3, WhatsNew, List)
 	-- upvalues: ConstantsModule (copy), EnumsModule (copy)
 	local Text: string = `{p3.id} ({WhatsNew})`
 	local UnixTimestamp = nil
@@ -94,9 +94,9 @@ local function validateEntrySchedule(p3, WhatsNew, List) --[[ Line: 64 ]]
 	end
 end
 
-local function validateEntryScopes(p3, List) --[[ Line: 99 ]]
+local function validateEntryScopes(p3, List)
 	-- upvalues: ConstantsModule (copy), validateEntrySchedule (copy), EnumsModule (copy)
-	local function validateEntries(WhatsNew, WhatsNew1) --[[ Line: 100 ]]
+	local function validateEntries(WhatsNew, WhatsNew1)
 		-- upvalues: p3 (copy), List (copy), ConstantsModule (upval), validateEntrySchedule (upval)
 		for _, value in WhatsNew do
 			if p3.scopeTours[value.scopeId] == nil then
@@ -124,7 +124,7 @@ local function validateEntryScopes(p3, List) --[[ Line: 99 ]]
 	end
 end
 
-local function validateUniqueEntryIds(p4, List) --[[ Line: 123 ]]
+local function validateUniqueEntryIds(p4, List)
 	-- upvalues: EnumsModule (copy), ConstantsModule (copy)
 	for _, value in EnumsModule.TourTypeList do
 		local t = {}
@@ -151,7 +151,7 @@ local function validateUniqueEntryIds(p4, List) --[[ Line: 123 ]]
 	end
 end
 
-local function scopeHasEntries(ScopeId, p5): boolean --[[ Line: 136 ]]
+local function scopeHasEntries(ScopeId, p5): boolean
 	-- upvalues: EnumsModule (copy)
 	for _, value in EnumsModule.TourTypeList do
 		local WhatsNew = nil
@@ -175,7 +175,7 @@ local function scopeHasEntries(ScopeId, p5): boolean --[[ Line: 136 ]]
 	return false
 end
 
-local function validateNestedScopeActions(p6, List) --[[ Line: 148 ]]
+local function validateNestedScopeActions(p6, List)
 	-- upvalues: scopeHasEntries (copy), ConstantsModule (copy)
 	for i, scopeTour in p6.scopeTours do
 		if scopeTour.parentScopeId ~= nil and scopeHasEntries(i, p6) then
@@ -193,7 +193,7 @@ local function validateNestedScopeActions(p6, List) --[[ Line: 148 ]]
 	end
 end
 
-local function validateKnownActionKeys(p7, ScopeActions, List) --[[ Line: 164 ]]
+local function validateKnownActionKeys(p7, ScopeActions, List)
 	-- upvalues: ScopeActionsModule (copy), ConstantsModule (copy)
 	if ScopeActions == nil then return end
 	for _, value in ScopeActionsModule.collectRegistryActionKeys(p7) do
@@ -203,7 +203,7 @@ local function validateKnownActionKeys(p7, ScopeActions, List) --[[ Line: 164 ]]
 	end
 end
 
-return function(p8, p9) --[[ Line: 180 | Named "validateRegistry" ]]
+return function(p8, p9)
 	-- upvalues: validateConstants (copy), validateScopeKeys (copy), validateEntryScopes (copy), validateUniqueEntryIds (copy), validateNestedScopeActions (copy), validateKnownActionKeys (copy)
 	local Errors = {}
 	local Warnings = {}

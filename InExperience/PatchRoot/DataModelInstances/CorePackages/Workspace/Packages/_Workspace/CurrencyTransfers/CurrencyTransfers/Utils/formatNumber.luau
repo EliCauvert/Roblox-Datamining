@@ -19,7 +19,7 @@
 	["tr-tr"] = "."
 }
 
-local function addGroupDelimiters(Text: string, p1): string --[[ Line: 35 ]]
+local function addGroupDelimiters(Text: string, p1): string
 	local Formatted = string.format("%%1%s%%2", p1)
 	repeat
 		local Replaced2
@@ -28,7 +28,7 @@ local function addGroupDelimiters(Text: string, p1): string --[[ Line: 35 ]]
 	return Text
 end
 
-return function(p1, p2) --[[ Line: 47 ]]
+return function(p1, p2)
 	-- upvalues: config (copy), addGroupDelimiters (copy)
 	return (addGroupDelimiters(p2, config[p1] or ","))
 end

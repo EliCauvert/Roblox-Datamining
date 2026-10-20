@@ -1,4 +1,4 @@
-﻿local function normalizeValue(List) --[[ Line: 10 ]]
+﻿local function normalizeValue(List)
 	-- upvalues: normalizeValue (copy)
 	if typeof(List) == "EnumItem" then
 		return List.Name

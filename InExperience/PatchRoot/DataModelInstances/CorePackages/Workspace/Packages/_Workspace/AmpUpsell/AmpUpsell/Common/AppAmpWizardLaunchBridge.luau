@@ -2,16 +2,16 @@
 local NewResult = require(script:FindFirstAncestor("AmpUpsell").Parent.AppCommonLib).Signal.new()
 
 return {
-	requestOpen = function(Params) --[[ Line: 26 ]]
+	requestOpen = function(Params)
 		-- upvalues: NewResult (copy)
 		local config = { handled = false, params = Params }
 		NewResult:fire(config)
 		
 		return config.handled
 	end,
-	subscribe = function(Callback) --[[ Line: 33 ]]
+	subscribe = function(Callback)
 		-- upvalues: NewResult (copy)
-		return NewResult:connect(function(p1) --[[ Line: 34 ]]
+		return NewResult:connect(function(p1)
 			-- upvalues: Callback (copy)
 			if not p1.handled then
 				p1.handled = true

@@ -3,7 +3,7 @@ local TypesModule = require(script.Parent.Parent.Types)
 local MaybeAssertModule = require(script.Parent.maybeAssert)
 local _ = script.Parent.Parent.Parent.Parent.Flags
 
-return function(p1, p2) --[[ Line: 12 | Named "getSettingsForMessage" ]]
+return function(p1, p2)
 	-- upvalues: MaybeAssertModule (copy), TypesModule (copy), TModule (copy)
 	MaybeAssertModule(TypesModule.IChatSettings(p1))
 	MaybeAssertModule(TModule.optional(TypesModule.IMessage)(p2))

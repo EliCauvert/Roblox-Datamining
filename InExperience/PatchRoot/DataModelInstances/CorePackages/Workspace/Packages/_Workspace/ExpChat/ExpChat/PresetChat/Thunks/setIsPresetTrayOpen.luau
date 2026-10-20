@@ -8,7 +8,7 @@ local _ = require(ExpChat.Stores.GetPresetChatStore.createPresetChatStore)
 local FFlagExpChatPresetTrayDismissAnalyticsModule = require(ExpChat.Flags.FFlagExpChatPresetTrayDismissAnalytics)
 local EmojiUnicodeToIdModule = require(ExpChat.PresetChat.emojiUnicodeToId)
 
-local function buildPresetTrayItems(CategoryGroups, PresetClickCounts, ViewedGroupIds) --[[ Line: 17 ]]
+local function buildPresetTrayItems(CategoryGroups, PresetClickCounts, ViewedGroupIds)
 	-- upvalues: FFlagExpChatPresetTrayDismissAnalyticsModule (copy), EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy), EmojiUnicodeToIdModule (copy)
 	local List = {}
 	
@@ -50,7 +50,7 @@ local function buildPresetTrayItems(CategoryGroups, PresetClickCounts, ViewedGro
 	return List
 end
 
-return function(p1, IsTrayOpen) --[[ Line: 64 | Named "setIsPresetTrayOpen" ]]
+return function(p1, IsTrayOpen)
 	-- upvalues: FFlagExpChatPresetTrayDismissAnalyticsModule (copy), ExpChatSharedModule (copy), ConstantsModule (copy), HttpService (copy), buildPresetTrayItems (copy)
 	if IsTrayOpen == p1.getIsTrayOpen(false) then return end
 	if FFlagExpChatPresetTrayDismissAnalyticsModule and IsTrayOpen then

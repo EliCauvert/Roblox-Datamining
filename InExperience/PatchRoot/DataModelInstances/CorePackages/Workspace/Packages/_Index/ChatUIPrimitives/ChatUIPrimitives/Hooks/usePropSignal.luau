@@ -3,10 +3,10 @@ local ReactModule = require(Parent.React)
 local _ = require(Parent.Signals)
 local UseStableSignalModule = require(script.Parent.useStableSignal)
 
-return function(p1) --[[ Line: 25 | Named "usePropSignal" ]]
+return function(p1)
 	-- upvalues: UseStableSignalModule (copy), ReactModule (copy)
 	local UseStableSignalModuleResult, UseStableSignalModuleResult2 = UseStableSignalModule(p1)
-	ReactModule.useEffect(function() --[[ Line: 27 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStableSignalModuleResult (copy), p1 (copy), UseStableSignalModuleResult2 (copy)
 		if UseStableSignalModuleResult(false) ~= p1 then
 			UseStableSignalModuleResult2(p1)

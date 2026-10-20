@@ -2,7 +2,7 @@
 local MomentsCommonModule = require(Parent.MomentsCommon)
 local _ = require(Parent.DataHydration.MomentsStoreTypes)
 
-local function buildTileFields(p1, SurfaceId, ParentEntity, p2, InteractionType) --[[ Line: 50 ]]
+local function buildTileFields(p1, SurfaceId, ParentEntity, p2, InteractionType)
 	-- upvalues: MomentsCommonModule (copy)
 	local RecommendationMetadata = p1.recommendationMetadata
 	local FeedItemId = if RecommendationMetadata == nil then nil else RecommendationMetadata.feedItemId
@@ -28,11 +28,11 @@ end
 
 return {
 	INTERACTION_OPEN = "open",
-	makeProfileTileImpressionFields = function(p1, SurfaceId, ParentEntity, p2) --[[ Line: 85 ]]
+	makeProfileTileImpressionFields = function(p1, SurfaceId, ParentEntity, p2)
 		-- upvalues: buildTileFields (copy)
 		return (buildTileFields(p1, SurfaceId, ParentEntity, p2, nil))
 	end,
-	makeProfileTileInteractionFields = function(p1, SurfaceId, ParentEntity, p2) --[[ Line: 96 ]]
+	makeProfileTileInteractionFields = function(p1, SurfaceId, ParentEntity, p2)
 		-- upvalues: buildTileFields (copy)
 		return (buildTileFields(p1, SurfaceId, ParentEntity, p2, "open"))
 	end

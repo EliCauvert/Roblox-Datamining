@@ -5,7 +5,7 @@ local config = {
 }
 
 return {
-	StartEvents = function(p1, p2, p3) --[[ Line: 14 ]]
+	StartEvents = function(p1, p2, p3)
 		-- upvalues: config (copy), EventsModule (copy)
 		local Entry = config[p1]
 		local EventsModuleEntry = EventsModule[p1][p2]
@@ -16,7 +16,7 @@ return {
 			end
 		end
 	end,
-	StopEvents = function(p4, p5) --[[ Line: 25 ]]
+	StopEvents = function(p4, p5)
 		-- upvalues: config (copy), EventsModule (copy)
 		local Entry = config[p4]
 		local EventsModuleEntry = EventsModule[p4][p5]

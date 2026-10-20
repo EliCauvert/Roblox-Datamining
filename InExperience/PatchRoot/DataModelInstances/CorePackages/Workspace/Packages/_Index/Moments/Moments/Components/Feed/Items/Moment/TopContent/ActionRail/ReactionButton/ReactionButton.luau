@@ -26,9 +26,9 @@ local FFlagLuaSupportMicroGamepadPreferredInput = require(Parent.SharedFlags).FF
 local ThumbUp = require(Parent.BuilderIcons).Icon.ThumbUp
 local config = { Transparency = 0, Color3 = Color3.new(1, 1, 1) }
 
-local function v25() --[[ Line: 40 ]] end
+local function v25() end
 
-return ReactModule.memo(function(Frame) --[[ Line: 48 | Named "ReactionButton" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseTokensFunction (copy), UsePreferredInputModule (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy), MomentContextModule (copy), UseReactionCommitModule (copy), UseSignalStateFunction (copy), ReactModule (copy), ReactOtterModule (copy), ReactionType (copy), UseMomentGesturesModule (copy), GetColorStyleWithTransparencyModule (copy), config (copy), Popover (copy), RailItemModule (copy), v25 (copy), View (copy), Icon (copy), ThumbUp (copy), IconSize (copy), Reaction (copy), PopoverSide (copy), PopoverAlign (copy), Radius (copy), ReactionPickerModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UsePreferredInputModuleResult = UsePreferredInputModule()
@@ -38,12 +38,12 @@ return ReactModule.memo(function(Frame) --[[ Line: 48 | Named "ReactionButton" ]
 	local UseSignalStateResult = UseSignalStateFunction(Store.getIsReactionPickerOpen)
 	local UseSignalStateResult1 = UseSignalStateFunction(Store.getSelectedReaction)
 	local HasUseSignalStateResult = UseSignalStateResult1 ~= nil
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 62 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: Store (copy)
 		Store.setReactionPickerOpen(false)
 	end, { Store })
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(if HasUseSignalStateResult then 1 else 0)
-	ReactModule.useEffect(function() --[[ Line: 67 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), HasUseSignalStateResult (copy)
 		UseAnimatedBindingResult2(ReactOtterModule.spring(if HasUseSignalStateResult then 1 else 0, { frequency = 6, dampingRatio = 1 }))
 	end, { HasUseSignalStateResult })
@@ -52,7 +52,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 48 | Named "ReactionButton" ]
 	if UseSignalStateResult1 ~= nil then
 		UseRefResult.current = UseSignalStateResult1
 	end
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 84 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: Store (copy), UseReactionCommitModuleResult (copy)
 		if Store.getIsReacted(false) then
 			UseReactionCommitModuleResult("tapButton", nil, nil)
@@ -75,7 +75,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 48 | Named "ReactionButton" ]
 						style = ReactModule.joinBindings({
 							transition = UseAnimatedBindingResult,
 							scrub = Frame.animationRatio
-						}):map(function(p1) --[[ Line: 101 ]]
+						}):map(function(p1)
 							-- upvalues: GetColorStyleWithTransparencyModule (upval), UseTokensResult (copy)
 							return GetColorStyleWithTransparencyModule(UseTokensResult.Color.Content.Emphasis, 1 - (1 - p1.transition) * (1 - p1.scrub))
 						end),
@@ -88,7 +88,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 48 | Named "ReactionButton" ]
 						imageStyle = ReactModule.joinBindings({
 							transition = UseAnimatedBindingResult,
 							scrub = Frame.animationRatio
-						}):map(function(p1) --[[ Line: 108 ]]
+						}):map(function(p1)
 							-- upvalues: GetColorStyleWithTransparencyModule (upval), config (upval)
 							return GetColorStyleWithTransparencyModule(config, 1 - p1.transition * (1 - p1.scrub))
 						end),

@@ -22,13 +22,13 @@ local GalleryGridViewModule = require(Parent.Components.CapturesGallery.GalleryG
 local FFlagUseCaptureCommonComponentsModule = require(Parent.Flags.FFlagUseCaptureCommonComponents)
 local FFlagCapturesGalleryDespawnOnMenuCloseModule = require(Parent.Flags.FFlagCapturesGalleryDespawnOnMenuClose)
 
-return function(Frame) --[[ Line: 41 ]]
+return function(Frame)
 	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseStyleFunction (copy), UseSystemMenuDetectionModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseLocalizationFunction (copy), ReactModule (copy), EventNamesModule (copy), CarouselOpenedModule (copy), FFlagCapturesGalleryDespawnOnMenuCloseModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), FFlagUseCaptureCommonComponentsModule (copy), CaptureGridView (copy), GalleryActionContainerModule (copy), CaptureItem (copy), GalleryGridViewModule (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseStyleResult = UseStyleFunction()
 	local UseSystemMenuDetectionModuleResult = UseSystemMenuDetectionModule()
-	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 47 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p1)
 		-- upvalues: ConstantsModule (upval)
 		return p1[ConstantsModule.RoduxKey].Captures
 	end)
@@ -37,9 +37,9 @@ return function(Frame) --[[ Line: 41 ]]
 		nothingHereYet = "Feature.Captures.Label.NothingHereYet",
 		title = "Feature.Captures.Title.Gallery"
 	})
-	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 58 ]]
+	local UseResult = ReactModule.useCallback(function(p1)
 		-- upvalues: UseAnalyticsModuleResult (copy), EventNamesModule (upval), UseDispatchResult (copy), CarouselOpenedModule (upval)
-		return function() --[[ Line: 59 ]]
+		return function()
 			-- upvalues: UseAnalyticsModuleResult (upval), EventNamesModule (upval), UseDispatchResult (upval), CarouselOpenedModule (upval), p1 (copy)
 			UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesCarouselOpened)
 			UseDispatchResult(CarouselOpenedModule(p1))
@@ -88,7 +88,7 @@ return function(Frame) --[[ Line: 41 ]]
 				LayoutOrder = 1,
 				itemCount = #UseSelectorResult
 			}),
-			renderItem = function(Capture, p1) --[[ Line: 125 ]]
+			renderItem = function(Capture, p1)
 				-- upvalues: ReactModule (upval), CaptureItem (upval), UseResult (copy)
 				return ReactModule.createElement(CaptureItem, { capture = Capture, onActivated = UseResult(p1) })
 			end

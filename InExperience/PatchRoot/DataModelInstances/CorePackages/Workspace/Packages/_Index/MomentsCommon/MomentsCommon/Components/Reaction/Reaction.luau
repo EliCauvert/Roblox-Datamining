@@ -10,7 +10,7 @@ local ReactionAnimationModule = require(script.Parent.ReactionAnimation)
 local ReactionAssetsModule = require(script.Parent.ReactionAssets)
 local t = {}
 
-local function _(Key) --[[ Line: 47 | Named "warnMissingAnimation" ]]
+local function _(Key)
 	-- upvalues: t (copy)
 	if not t[Key] then
 		warn(`Reaction animation missing for {Key}`)
@@ -20,7 +20,7 @@ local function _(Key) --[[ Line: 47 | Named "warnMissingAnimation" ]]
 	end
 end
 
-local function getStaticImageData(ReactionType, Size) --[[ Line: 56 ]]
+local function getStaticImageData(ReactionType, Size)
 	-- upvalues: ReactionAssetsModule (copy)
 	local StaticImageUri = ReactionAssetsModule.getStaticImageUri(ReactionType, Size)
 	
@@ -31,7 +31,7 @@ local function getStaticImageData(ReactionType, Size) --[[ Line: 56 ]]
 	}
 end
 
-local _ = function(p1, p2, p3, Callback: (any) -> (), Callback1: (any) -> ()) --[[ Line: 68 | Named "setFrame" ]]
+local _ = function(p1, p2, p3, Callback: (any) -> (), Callback1: (any) -> ())
 	-- upvalues: ReactionAnimationModule (copy)
 	local FrameRect = ReactionAnimationModule.getFrameRect(p1, p2)
 	p3.current = FrameRect.frameIndex
@@ -39,11 +39,11 @@ local _ = function(p1, p2, p3, Callback: (any) -> (), Callback1: (any) -> ()) --
 	Callback1(FrameRect.size)
 end
 
-return ReactModule.memo(ReactModule.forwardRef(function(Frame: Frame, p1) --[[ Line: 81 | Named "Reaction" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(Frame: Frame, p1)
 	-- upvalues: ReactionAssetsModule (copy), AnimationDataModule (copy), ReactModule (copy), getStaticImageData (copy), ReactionAnimationModule (copy), t (copy), RunService (copy), Image (copy)
 	local AssetKey = ReactionAssetsModule.getAssetKey(Frame.reactionType)
 	local AnimationDataModuleResult = if AssetKey == nil then nil else AnimationDataModule(AssetKey)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 84 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: getStaticImageData (upval), Frame (copy)
 		return (getStaticImageData(Frame.reactionType, Frame.size))
 	end, { Frame.reactionType, Frame.size })
@@ -58,7 +58,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Frame: Frame, p1) --[[ L
 	local UseRefResult = ReactModule.useRef(1)
 	local UseRefResult1 = ReactModule.useRef(0)
 	local UseRefResult2 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 104 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: HasAnimationDataModuleResult1 (copy), AnimationDataModuleResult (copy), UseRefResult1 (copy), UseRefResult2 (copy), UseRefResult (copy), UseBindingResult2 (copy), UseBindingResult2_1 (copy), ReactionAnimationModule (upval), UseMemoResult (copy), UseStateResult1 (copy), HasAnimationDataModuleResult (copy), AssetKey (copy), Frame (copy), t (upval)
 		if HasAnimationDataModuleResult1 and AnimationDataModuleResult ~= nil then
 			UseRefResult1.current = 0
@@ -86,10 +86,10 @@ return ReactModule.memo(ReactModule.forwardRef(function(Frame: Frame, p1) --[[ L
 		Frame.reactionType, UseStateResult1, Frame.loop, HasAnimationDataModuleResult,
 		AssetKey
 	})
-	ReactModule.useEffect(function() --[[ Line: 133 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: HasAnimationDataModuleResult1 (copy), AnimationDataModuleResult (copy), RunService (upval), UseRefResult2 (copy), UseRefResult1 (copy), Frame (copy), ReactionAnimationModule (upval), UseRefResult (copy), UseBindingResult2 (copy), UseBindingResult2_1 (copy), UseStateResult2 (copy)
 		if HasAnimationDataModuleResult1 and AnimationDataModuleResult ~= nil then
-			local HeartbeatConnection = RunService.Heartbeat:Connect(function(DeltaTime) --[[ Line: 138 ]]
+			local HeartbeatConnection = RunService.Heartbeat:Connect(function(DeltaTime)
 				-- upvalues: UseRefResult2 (upval), UseRefResult1 (upval), Frame (upval), ReactionAnimationModule (upval), AnimationDataModuleResult (upval), UseRefResult (upval), UseBindingResult2 (upval), UseBindingResult2_1 (upval), UseStateResult2 (upval)
 				if UseRefResult2.current then return end
 				UseRefResult1.current += DeltaTime
@@ -114,7 +114,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Frame: Frame, p1) --[[ L
 				end
 			end)
 			
-			return function() --[[ Line: 159 ]]
+			return function()
 				-- upvalues: HeartbeatConnection (copy)
 				HeartbeatConnection:Disconnect()
 			end
@@ -126,16 +126,16 @@ return ReactModule.memo(ReactModule.forwardRef(function(Frame: Frame, p1) --[[ L
 		AnimationDataModuleResult,
 		Frame.loop
 	})
-	ReactModule.useImperativeHandle(p1, function() --[[ Line: 164 ]]
+	ReactModule.useImperativeHandle(p1, function()
 		-- upvalues: Frame (copy), UseStateResult2 (copy)
 		return {
-			start = function() --[[ Line: 166 ]]
+			start = function()
 				-- upvalues: Frame (upval), UseStateResult2 (upval)
 				if Frame.isPlaying == nil then
 					UseStateResult2(true)
 				end
 			end,
-			stop = function() --[[ Line: 171 ]]
+			stop = function()
 				-- upvalues: Frame (upval), UseStateResult2 (upval)
 				if Frame.isPlaying == nil then
 					UseStateResult2(false)

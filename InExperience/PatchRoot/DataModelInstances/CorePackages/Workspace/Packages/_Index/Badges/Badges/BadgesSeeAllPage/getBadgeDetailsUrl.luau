@@ -5,7 +5,7 @@ local NewUrlBuilder = UrlBuilder.new({
 	base = require(Parent.Http).Url.APIS_URL
 })
 
-return function(BadgeId, UserId) --[[ Line: 12 | Named "getBadgeDetailsUrl" ]]
+return function(BadgeId, UserId)
 	-- upvalues: UrlBuilder (copy), NewUrlBuilder (copy)
 	local config = { badgeId = BadgeId }
 	

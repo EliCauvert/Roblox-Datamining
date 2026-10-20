@@ -14,11 +14,11 @@ local UseStateFunction = ReactModule.useState
 local UseToggleStateFunction = require(Parent.MomentsCommon).Hooks.useToggleState
 local LocalPlayer = game:GetService("Players").LocalPlayer
 
-local function _(p1) --[[ Line: 68 | Named "assetIdAsContent" ]]
+local function _(p1)
 	return if p1 == nil then nil else `rbxassetid://{p1}`
 end
 
-return function(p1, p2, p3) --[[ Line: 75 | Named "useAudioPlayback" ]]
+return function(p1, p2, p3)
 	-- upvalues: UseRefFunction (copy), UseToggleStateFunction (copy), FFlagMomentsCreationStartAudioOnLoadModule (copy), UseStateFunction (copy), UseMemoFunction (copy), UseCallbackFunction (copy), UseEffectFunction (copy), StartAudioOnLoadModule (copy), LocalPlayer (copy), GetFFlagMomentsTTSAudioOverlayModule (copy), FadeVolumeModule (copy), RunService (copy)
 	local P3 = p3 or {}
 	local Autoplay = P3.autoplay ~= nil and P3.autoplay
@@ -37,11 +37,11 @@ return function(p1, p2, p3) --[[ Line: 75 | Named "useAudioPlayback" ]]
 	local UseStateResult1, UseStateResult2_1 = UseStateFunction(0)
 	local UseStateResult3, UseStateResult2_2 = UseStateFunction(0)
 	local UseStateResult4, UseStateResult2_3 = UseStateFunction(0)
-	local UseMemoResult = UseMemoFunction(function() --[[ Line: 103 ]]
+	local UseMemoResult = UseMemoFunction(function()
 		-- upvalues: p2 (copy)
 		return if p2 == nil then nil else `rbxassetid://{p2}`
 	end, { p2 })
-	local UseCallbackResult = UseCallbackFunction(function(p4) --[[ Line: 107 ]]
+	local UseCallbackResult = UseCallbackFunction(function(p4)
 		-- upvalues: UseRefResult (copy), PlaybackRegion (copy), UseStateResult (copy)
 		local Current = UseRefResult.current
 		
@@ -49,7 +49,7 @@ return function(p1, p2, p3) --[[ Line: 75 | Named "useAudioPlayback" ]]
 			Current.TimePosition = math.clamp(p4 + PlaybackRegion.Min, 0, UseStateResult)
 		end
 	end, { UseStateResult, PlaybackRegion })
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 114 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: p1 (copy), UseRefResult (copy), UseStateResult2_3 (copy), PlaybackRegion (copy), UseStateResult2_1 (copy)
 		if not p1 then return end
 		local Current = UseRefResult.current
@@ -59,7 +59,7 @@ return function(p1, p2, p3) --[[ Line: 75 | Named "useAudioPlayback" ]]
 			UseStateResult2_1(Current.TimePosition)
 		end
 	end, { p1, PlaybackRegion })
-	UseEffectFunction(function() --[[ Line: 128 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseMemoResult (copy), PlaybackRegion (copy), Looping (copy), UseStateResult2 (copy), UseRefResult (copy), FFlagMomentsCreationStartAudioOnLoadModule (upval), StartAudioOnLoadModule (upval), UseRefResult1 (copy), LocalPlayer (upval)
 		if UseMemoResult == nil then return end
 		local Folder = Instance.new("Folder")
@@ -70,7 +70,7 @@ return function(p1, p2, p3) --[[ Line: 75 | Named "useAudioPlayback" ]]
 		AudioPlayer.Looping = Looping
 		AudioPlayer.Parent = Folder
 		AudioPlayer.Volume = 0.2
-		AudioPlayer:GetPropertyChangedSignal("TimeLength"):Connect(function() --[[ Line: 143 | Named "updateTimeLength" ]]
+		AudioPlayer:GetPropertyChangedSignal("TimeLength"):Connect(function()
 			-- upvalues: UseStateResult2 (upval), AudioPlayer (copy)
 			UseStateResult2(AudioPlayer.TimeLength)
 		end)
@@ -82,12 +82,12 @@ return function(p1, p2, p3) --[[ Line: 75 | Named "useAudioPlayback" ]]
 		Wire.TargetInstance = AudioDeviceOutput
 		Wire.Parent = Folder
 		UseRefResult.current = AudioPlayer
-		local StartAudioOnLoadModuleResult = if FFlagMomentsCreationStartAudioOnLoadModule then StartAudioOnLoadModule(AudioPlayer, function() --[[ Line: 160 ]]
+		local StartAudioOnLoadModuleResult = if FFlagMomentsCreationStartAudioOnLoadModule then StartAudioOnLoadModule(AudioPlayer, function()
 			-- upvalues: UseRefResult1 (upval)
 			return UseRefResult1.current
 		end) else nil
 		local Flag = false
-		task.spawn(function() --[[ Line: 167 ]]
+		task.spawn(function()
 			-- upvalues: LocalPlayer (upval), Flag (ref), Folder (copy)
 			local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 			
@@ -98,7 +98,7 @@ return function(p1, p2, p3) --[[ Line: 75 | Named "useAudioPlayback" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 175 ]]
+		return function()
 			-- upvalues: Flag (ref), StartAudioOnLoadModuleResult (ref), Folder (copy)
 			Flag = true
 			
@@ -108,7 +108,7 @@ return function(p1, p2, p3) --[[ Line: 75 | Named "useAudioPlayback" ]]
 			Folder:Destroy()
 		end
 	end, { UseMemoResult })
-	UseEffectFunction(function() --[[ Line: 184 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseRefResult (copy), PlaybackRegion (copy), FFlagMomentsCreationStartAudioOnLoadModule (upval)
 		local Current = UseRefResult.current
 		
@@ -124,11 +124,11 @@ return function(p1, p2, p3) --[[ Line: 75 | Named "useAudioPlayback" ]]
 			end
 		end
 	end, { PlaybackRegion })
-	UseEffectFunction(function() --[[ Line: 198 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseStateResult2_2 (copy), PlaybackRegion (copy), UseStateResult (copy)
 		UseStateResult2_2((math.min(PlaybackRegion.Max - PlaybackRegion.Min, UseStateResult)))
 	end, { UseStateResult, PlaybackRegion })
-	UseEffectFunction(function() --[[ Line: 205 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseRefResult (copy), FFlagMomentsCreationStartAudioOnLoadModule (upval), UseToggleStateResult (copy)
 		local Current = UseRefResult.current
 		
@@ -155,7 +155,7 @@ return function(p1, p2, p3) --[[ Line: 75 | Named "useAudioPlayback" ]]
 			end
 		end
 	end, { UseToggleStateResult.enabled, UseMemoResult })
-	UseEffectFunction(function() --[[ Line: 228 ]]
+	UseEffectFunction(function()
 		-- upvalues: GetFFlagMomentsTTSAudioOverlayModule (upval), UseRefResult (copy), UseToggleStateResult1 (copy), UseToggleStateResult (copy)
 		if GetFFlagMomentsTTSAudioOverlayModule then return end
 		local Current = UseRefResult.current
@@ -167,7 +167,7 @@ return function(p1, p2, p3) --[[ Line: 75 | Named "useAudioPlayback" ]]
 		UseToggleStateResult1.enabled,
 		UseToggleStateResult.enabled
 	})
-	UseEffectFunction(function() --[[ Line: 240 ]]
+	UseEffectFunction(function()
 		-- upvalues: GetFFlagMomentsTTSAudioOverlayModule (upval), UseRefResult (copy), UseToggleStateResult1 (copy), UseToggleStateResult (copy), FadeVolumeModule (upval), DuckScalar (copy)
 		if not GetFFlagMomentsTTSAudioOverlayModule then return end
 		local Current = UseRefResult.current
@@ -186,11 +186,11 @@ return function(p1, p2, p3) --[[ Line: 75 | Named "useAudioPlayback" ]]
 		DuckScalar,
 		UseMemoResult
 	})
-	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 256 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function()
 		-- upvalues: UseToggleStateResult (copy)
 		UseToggleStateResult.disable()
 	end, {})
-	UseEffectFunction(function() --[[ Line: 263 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseRefResult (copy), RunService (upval), UseCallbackResult1 (copy), UseCallbackResult2 (copy)
 		local List = {}
 		local Current = UseRefResult.current
@@ -199,7 +199,7 @@ return function(p1, p2, p3) --[[ Line: 75 | Named "useAudioPlayback" ]]
 			table.insert(List, RunService.RenderStepped:Connect(UseCallbackResult1))
 			table.insert(List, Current.Ended:Connect(UseCallbackResult2))
 		end
-		return function() --[[ Line: 271 ]]
+		return function()
 			-- upvalues: List (copy)
 			for _, Connection in List do
 				Connection:Disconnect()

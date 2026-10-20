@@ -2,15 +2,15 @@
 local _ = require(Parent.Signals)
 local CreateSessionScopedSignalFunction = require(Parent.SignalsUtils).createSessionScopedSignal
 
-return function() --[[ Line: 20 | Named "createVersionInformationStore" ]]
+return function()
 	-- upvalues: CreateSessionScopedSignalFunction (copy)
-	local SessionScopedSignal, SessionScopedSignal2 = CreateSessionScopedSignalFunction(function() --[[ Line: 22 ]]
+	local SessionScopedSignal, SessionScopedSignal2 = CreateSessionScopedSignalFunction(function()
 		return nil
 	end)
 	
 	return {
 		getDraft = SessionScopedSignal,
-		setDraft = function(PlaceId, Title, Description) --[[ Line: 27 ]]
+		setDraft = function(PlaceId, Title, Description)
 			-- upvalues: SessionScopedSignal2 (copy)
 			SessionScopedSignal2({
 				placeId = PlaceId,
@@ -18,7 +18,7 @@ return function() --[[ Line: 20 | Named "createVersionInformationStore" ]]
 				description = Description
 			})
 		end,
-		clearDraft = function(PlaceId) --[[ Line: 35 ]]
+		clearDraft = function(PlaceId)
 			-- upvalues: SessionScopedSignal (copy), SessionScopedSignal2 (copy)
 			local SessionScopedSignalResult = SessionScopedSignal()
 			
@@ -26,7 +26,7 @@ return function() --[[ Line: 20 | Named "createVersionInformationStore" ]]
 				SessionScopedSignal2(nil)
 			end
 		end,
-		reset = function() --[[ Line: 42 ]]
+		reset = function()
 			-- upvalues: SessionScopedSignal2 (copy)
 			SessionScopedSignal2(nil)
 		end

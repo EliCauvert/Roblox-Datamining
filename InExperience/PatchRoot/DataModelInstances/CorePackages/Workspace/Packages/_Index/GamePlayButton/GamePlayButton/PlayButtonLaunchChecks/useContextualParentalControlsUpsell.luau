@@ -47,7 +47,7 @@ local FFlagLuaAppPlayButtonOdpEventUniverseIdModule = require(GamePlayButton.Fla
 local FFlagLuaAppPlayButtonWizardCloseDelay = require(Parent.SharedFlags).FFlagLuaAppPlayButtonWizardCloseDelay
 local FIntLuaAppPlayButtonWizardCloseDelayMs = require(Parent.SharedFlags).FIntLuaAppPlayButtonWizardCloseDelayMs
 
-local function parseContentMaturityMappingString(Text: string) --[[ Line: 74 ]]
+local function parseContentMaturityMappingString(Text: string)
 	if Text == "" then
 		return {}
 	end
@@ -65,9 +65,9 @@ local function parseContentMaturityMappingString(Text: string) --[[ Line: 74 ]]
 	return t
 end
 
-local v1 = (function(p1) --[[ Line: 95 | Named "safeParseContentMaturityMappingString" ]]
+local v1 = (function(p1)
 	-- upvalues: parseContentMaturityMappingString (copy), FlaggedMutedErrorFunction (copy)
-	local Success, Result = pcall(function() --[[ Line: 96 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: parseContentMaturityMappingString (upval), p1 (copy)
 		return (parseContentMaturityMappingString(p1))
 	end)
@@ -81,12 +81,12 @@ local v1 = (function(p1) --[[ Line: 95 | Named "safeParseContentMaturityMappingS
 	end
 end)((game:DefineFastString("LuaAppUpsellMaturityRatingToSettingMapping", "mild=NinePlus,moderate=ThirteenPlus,restricted=SeventeenPlus,unrated=ThirteenPlus")))
 
-return function(UniverseId, Callback, PageName) --[[ Line: 116 ]]
+return function(UniverseId, Callback, PageName)
 	-- upvalues: UseRoactServiceFunction (copy), RoactNetworking (copy), AppEventIngestService (copy), UseDispatchFunction (copy), UseSelectorFunction (copy), FFlagMigrateGameInfoToStore (copy), GameInfosReducer (copy), GameHydrationReactModule (copy), UseLocalizationFunction (copy), FFlagLuaAppParentApprovedExperiences (copy), ReactModule (copy), OpenAmpWizardContainerFunction (copy), FFlagLuaAppPlayButtonAmpAgeCheckFlow (copy), FFlagLuaAppVpcUpsellNamespace (copy), FFlagLuaAppPlayButtonWizardCloseDelay (copy), FFlagEnablePlayButtonWizardVPCPrologueModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), OpenPlayButtonUpsellDialogFunction (copy), OpenCloseOnlyInteractiveAlertFunction (copy), NavigateBackFunction (copy), CloseCentralOverlayFunction (copy), FetchGamePlayButtonDataModule (copy), AuthButtonClickFunction (copy), PlayButtonUpsellBodyModule (copy), FFlagLuaAppPlayButtonOdpEventUniverseIdModule (copy), GetFFlagEnableAmpWizardVPCNavigationFixFunction (copy), FStringLuaAppVpcAccountManagementAmpNameSpace (copy), FStringLuaAppVpcSettingsChangeAmpNameSpace (copy), UnlockPlayIntentFunction (copy), PlayabilityStatusEnum (copy), FFlagLuaAppParentUpsellPolicy (copy), UseAppPolicyFunction (copy), FetchUserSettingsAndOptionsFunction (copy), FlaggedMutedErrorFunction (copy), v1 (copy), LoggingProtocolModule (copy), UnknownUpsellErrorEventHundredthsPercent (copy), DashModule (copy), FStringLuaAppPlayButtonAgeCheckAmpFeatureName (copy), FStringLuaAppPlayButtonAgeCheckAmpNameSpace (copy), DelayedAmpWizardCompletionCallbackOverrideModule (copy), FIntLuaAppPlayButtonWizardCloseDelayMs (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(AppEventIngestService)
 	local UseDispatchResult = UseDispatchFunction()
-	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 125 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p1)
 		-- upvalues: UniverseId (copy), FFlagMigrateGameInfoToStore (upval), GameInfosReducer (upval)
 		local AgeRecommendation = p1.AgeRecommendations[UniverseId]
 		
@@ -120,11 +120,11 @@ return function(UniverseId, Callback, PageName) --[[ Line: 116 ]]
 		consoleSelfUpdateSettingButtonText = "Feature.ExperienceDetails.UpdateMaturitySettingModal.Console.Action.Ok",
 		askYourParentToAllowGameBodyText = if FFlagLuaAppParentApprovedExperiences then "Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body" else nil
 	})
-	local UseResult = ReactModule.useCallback(function(p1, p2, p3, p4, p5, p6, p7, p8) --[[ Line: 178 ]]
+	local UseResult = ReactModule.useCallback(function(p1, p2, p3, p4, p5, p6, p7, p8)
 		-- upvalues: UseDispatchResult (copy), OpenAmpWizardContainerFunction (upval), FFlagLuaAppPlayButtonAmpAgeCheckFlow (upval), FFlagLuaAppVpcUpsellNamespace (upval), FFlagLuaAppPlayButtonWizardCloseDelay (upval), FFlagEnablePlayButtonWizardVPCPrologueModule (upval)
 		UseDispatchResult(OpenAmpWizardContainerFunction(p1, p2, p3, p4, if FFlagLuaAppPlayButtonAmpAgeCheckFlow then p5 else nil, if FFlagLuaAppPlayButtonAmpAgeCheckFlow or FFlagLuaAppVpcUpsellNamespace then p6 else nil, nil, nil, if FFlagLuaAppPlayButtonWizardCloseDelay then p7 else nil, if FFlagEnablePlayButtonWizardVPCPrologueModule and p8 then true else nil, if FFlagEnablePlayButtonWizardVPCPrologueModule then p8 else nil))
 	end, { UseDispatchResult })
-	local UseResult1 = ReactModule.useCallback(function(FeatureName, LocalizationStrings, OnCloseModal, OnCancelled) --[[ Line: 208 ]]
+	local UseResult1 = ReactModule.useCallback(function(FeatureName, LocalizationStrings, OnCloseModal, OnCancelled)
 		-- upvalues: AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 		local config = {
 			name = AppPage.AccountSettingsUpsell,
@@ -144,15 +144,15 @@ return function(UniverseId, Callback, PageName) --[[ Line: 116 ]]
 			UseDispatchResult(NavigateDownFunction(config, true))
 		end
 	end, { UseDispatchResult })
-	local UseResult2 = ReactModule.useCallback(function(p1, p2, p3, p4, p5, p6, p7) --[[ Line: 228 ]]
+	local UseResult2 = ReactModule.useCallback(function(p1, p2, p3, p4, p5, p6, p7)
 		-- upvalues: UseDispatchResult (copy), OpenPlayButtonUpsellDialogFunction (upval)
 		UseDispatchResult(OpenPlayButtonUpsellDialogFunction(p1, p2, p3, p4, p5, p6, p7))
 	end, { UseDispatchResult })
-	local UseResult3 = ReactModule.useCallback(function(p1, p2, p3, p4, p5) --[[ Line: 252 ]]
+	local UseResult3 = ReactModule.useCallback(function(p1, p2, p3, p4, p5)
 		-- upvalues: UseDispatchResult (copy), OpenCloseOnlyInteractiveAlertFunction (upval)
 		UseDispatchResult(OpenCloseOnlyInteractiveAlertFunction(p1, p2, p3, p4, p5))
 	end, { UseDispatchResult })
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 256 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval)
 		if FFlagSignalsNavP3Dispatch then
 			NavigationCommands.back(true)
@@ -162,26 +162,26 @@ return function(UniverseId, Callback, PageName) --[[ Line: 116 ]]
 			UseDispatchResult(NavigateBackFunction(true))
 		end
 	end, { UseDispatchResult })
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 264 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseDispatchResult (copy), CloseCentralOverlayFunction (upval)
 		UseDispatchResult(CloseCentralOverlayFunction())
 	end, { UseDispatchResult })
-	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 268 ]]
+	local UseResult6 = ReactModule.useCallback(function()
 		-- upvalues: UseDispatchResult (copy), FetchGamePlayButtonDataModule (upval), UseRoactServiceResult (copy), UniverseId (copy)
 		UseDispatchResult(FetchGamePlayButtonDataModule.Fetch(UseRoactServiceResult, UniverseId, true))
 	end, { UseDispatchResult, UseRoactServiceResult, UniverseId })
-	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 272 ]]
+	local UseResult7 = ReactModule.useCallback(function()
 		-- upvalues: UseResult4 (copy), UseResult6 (copy)
 		UseResult4()
 		UseResult6()
 	end, { UseResult4, UseResult6 })
-	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 279 ]]
+	local UseResult8 = ReactModule.useCallback(function()
 		-- upvalues: UseResult5 (copy), AuthButtonClickFunction (upval), UseResult6 (copy)
 		UseResult5()
 		AuthButtonClickFunction("gameJoinContentMaturityLock", "cancelAskParent")
 		UseResult6()
 	end, { UseResult5, UseResult6 })
-	local UseResult9 = if FFlagEnablePlayButtonWizardVPCPrologueModule then ReactModule.useCallback(function(BodyText) --[[ Line: 291 ]]
+	local UseResult9 = if FFlagEnablePlayButtonWizardVPCPrologueModule then ReactModule.useCallback(function(BodyText)
 		-- upvalues: UseLocalizationResult (copy), FFlagLuaAppVpcUpsellNamespace (upval), ReactModule (upval), PlayButtonUpsellBodyModule (upval), UseResult8 (copy), AuthButtonClickFunction (upval), FFlagLuaAppPlayButtonOdpEventUniverseIdModule (upval), UniverseId (copy)
 		return {
 			config = {
@@ -195,11 +195,11 @@ return function(UniverseId, Callback, PageName) --[[ Line: 116 ]]
 				confirmText = UseLocalizationResult.askYourParentActionButtonText,
 				cancelText = UseLocalizationResult.askYourParentCancelButtonText
 			},
-			onConfirm = function() --[[ Line: 307 ]]
+			onConfirm = function()
 				-- upvalues: AuthButtonClickFunction (upval)
 				AuthButtonClickFunction("gameJoinContentMaturityLock", "askParent")
 			end,
-			onCancel = function() --[[ Line: 310 ]]
+			onCancel = function()
 				-- upvalues: AuthButtonClickFunction (upval)
 				AuthButtonClickFunction("gameJoinContentMaturityLock", "cancelAskParent")
 			end,
@@ -212,7 +212,7 @@ return function(UniverseId, Callback, PageName) --[[ Line: 116 ]]
 		UseResult8,
 		if FFlagLuaAppPlayButtonOdpEventUniverseIdModule then UniverseId else nil
 	}) else nil
-	local UseResult10 = ReactModule.useCallback(function(ContentAgeRestriction, p1) --[[ Line: 328 ]]
+	local UseResult10 = ReactModule.useCallback(function(ContentAgeRestriction, p1)
 		-- upvalues: UseResult5 (copy), FFlagEnablePlayButtonWizardVPCPrologueModule (upval), AuthButtonClickFunction (upval), FFlagLuaAppParentApprovedExperiences (upval), UseResult (copy), GetFFlagEnableAmpWizardVPCNavigationFixFunction (upval), UseResult6 (copy), UseResult4 (copy), UniverseId (copy), FFlagLuaAppVpcUpsellNamespace (upval), FStringLuaAppVpcAccountManagementAmpNameSpace (upval), FStringLuaAppVpcSettingsChangeAmpNameSpace (upval)
 		UseResult5()
 		
@@ -236,7 +236,7 @@ return function(UniverseId, Callback, PageName) --[[ Line: 116 ]]
 		UseResult5,
 		if FFlagLuaAppParentApprovedExperiences or FFlagEnablePlayButtonWizardVPCPrologueModule and FFlagLuaAppPlayButtonOdpEventUniverseIdModule then UniverseId else nil
 	})
-	local UseResult11 = ReactModule.useCallback(function(UpsellName, p1) --[[ Line: 377 ]]
+	local UseResult11 = ReactModule.useCallback(function(UpsellName, p1)
 		-- upvalues: UnlockPlayIntentFunction (upval), UseRoactServiceResult1 (copy), UniverseId (copy), FFlagLuaAppParentApprovedExperiences (upval), PlayabilityStatusEnum (upval), PageName (copy)
 		UnlockPlayIntentFunction(UseRoactServiceResult1, {
 			universeId = UniverseId,
@@ -245,13 +245,13 @@ return function(UniverseId, Callback, PageName) --[[ Line: 116 ]]
 			pageName = PageName
 		})
 	end, { UseRoactServiceResult1, UniverseId, PageName })
-	local UseAppPolicyResult = if FFlagLuaAppParentUpsellPolicy then UseAppPolicyFunction(function(p1) --[[ Line: 390 ]]
+	local UseAppPolicyResult = if FFlagLuaAppParentUpsellPolicy then UseAppPolicyFunction(function(p1)
 		return p1.getShouldShowVpcPlayButtonUpsells()
 	end) else nil
-	local UseAppPolicyResult1 = UseAppPolicyFunction(function(p1) --[[ Line: 395 ]]
+	local UseAppPolicyResult1 = UseAppPolicyFunction(function(p1)
 		return p1.getWebViewSupport()
 	end)
-	local UseResult12 = if FFlagLuaAppParentApprovedExperiences then ReactModule.useCallback(function(p1) --[[ Line: 401 ]]
+	local UseResult12 = if FFlagLuaAppParentApprovedExperiences then ReactModule.useCallback(function(p1)
 		-- upvalues: FFlagLuaAppParentUpsellPolicy (upval), UseAppPolicyResult (ref), Callback (copy), UseResult11 (copy), PlayabilityStatusEnum (upval), FFlagEnablePlayButtonWizardVPCPrologueModule (upval), UseResult10 (copy), UseResult9 (ref), UseLocalizationResult (copy), UseResult2 (copy), UseResult8 (copy)
 		if FFlagLuaAppParentUpsellPolicy and not UseAppPolicyResult then
 			Callback(p1)
@@ -274,7 +274,7 @@ return function(UniverseId, Callback, PageName) --[[ Line: 116 ]]
 		if FFlagEnablePlayButtonWizardVPCPrologueModule then UseResult9 else nil
 	}) else nil
 	
-	return ReactModule.useCallback(function(p1) --[[ Line: 446 ]]
+	return ReactModule.useCallback(function(p1)
 		-- upvalues: FFlagLuaAppParentUpsellPolicy (upval), UseAppPolicyResult (ref), Callback (copy), UseResult11 (copy), FetchUserSettingsAndOptionsFunction (upval), UseRoactServiceResult (copy), UseSelectorResult1 (copy), FlaggedMutedErrorFunction (upval), v1 (upval), LoggingProtocolModule (upval), UnknownUpsellErrorEventHundredthsPercent (upval), UniverseId (copy), DashModule (upval), UseAppPolicyResult1 (copy), UseResult3 (copy), UseLocalizationResult (copy), UseResult5 (copy), UseResult1 (copy), UseResult7 (copy), FFlagEnablePlayButtonWizardVPCPrologueModule (upval), UseResult10 (copy), UseResult9 (ref), UseResult2 (copy), UseResult8 (copy), UseResult (copy), FFlagLuaAppPlayButtonAmpAgeCheckFlow (upval), FStringLuaAppPlayButtonAgeCheckAmpFeatureName (upval), UseResult6 (copy), PageName (copy), FStringLuaAppPlayButtonAgeCheckAmpNameSpace (upval), FFlagLuaAppPlayButtonWizardCloseDelay (upval), DelayedAmpWizardCompletionCallbackOverrideModule (upval), FIntLuaAppPlayButtonWizardCloseDelayMs (upval)
 		if FFlagLuaAppParentUpsellPolicy and not UseAppPolicyResult then
 			Callback(p1)
@@ -282,7 +282,7 @@ return function(UniverseId, Callback, PageName) --[[ Line: 116 ]]
 			
 			return
 		else
-			FetchUserSettingsAndOptionsFunction(UseRoactServiceResult):andThen(function(Result) --[[ Line: 455 ]]
+			FetchUserSettingsAndOptionsFunction(UseRoactServiceResult):andThen(function(Result)
 				-- upvalues: UseSelectorResult1 (upval), FlaggedMutedErrorFunction (upval), Callback (upval), p1 (copy), UseResult11 (upval), v1 (upval), LoggingProtocolModule (upval), UnknownUpsellErrorEventHundredthsPercent (upval), UniverseId (upval), DashModule (upval), UseAppPolicyResult1 (upval), UseResult3 (upval), UseLocalizationResult (upval), UseResult5 (upval), UseResult1 (upval), UseResult7 (upval), FFlagEnablePlayButtonWizardVPCPrologueModule (upval), UseResult10 (upval), UseResult9 (upval), UseResult2 (upval), UseResult8 (upval), UseResult (upval), FFlagLuaAppPlayButtonAmpAgeCheckFlow (upval), FStringLuaAppPlayButtonAgeCheckAmpFeatureName (upval), UseResult6 (upval), PageName (upval), FStringLuaAppPlayButtonAgeCheckAmpNameSpace (upval), FFlagLuaAppPlayButtonWizardCloseDelay (upval), DelayedAmpWizardCompletionCallbackOverrideModule (upval), FIntLuaAppPlayButtonWizardCloseDelayMs (upval)
 				local ContentAgeRestriction = Result.contentAgeRestriction
 				
@@ -315,7 +315,7 @@ return function(UniverseId, Callback, PageName) --[[ Line: 116 ]]
 					return
 				end
 				local OptionValue = v1[UseSelectorResult1]
-				local FindResult = DashModule.find(ContentAgeRestriction.options, function(p2): boolean --[[ Line: 498 ]]
+				local FindResult = DashModule.find(ContentAgeRestriction.options, function(p2): boolean
 					-- upvalues: OptionValue (copy)
 					return if p2 and p2.option then p2.option.optionValue == OptionValue else false
 				end)
@@ -343,7 +343,7 @@ return function(UniverseId, Callback, PageName) --[[ Line: 116 ]]
 					if FFlagEnablePlayButtonWizardVPCPrologueModule then
 						UseResult10(FindResult.option.optionValue, UseResult9(UseLocalizationResult.askYourParentBodyText))
 					else
-						UseResult2(UseLocalizationResult.askYourParentTitleText, UseLocalizationResult.askYourParentBodyText, UseLocalizationResult.askYourParentActionButtonText, UseLocalizationResult.askYourParentCancelButtonText, function() --[[ Line: 535 ]]
+						UseResult2(UseLocalizationResult.askYourParentTitleText, UseLocalizationResult.askYourParentBodyText, UseLocalizationResult.askYourParentActionButtonText, UseLocalizationResult.askYourParentCancelButtonText, function()
 							-- upvalues: UseResult10 (upval), FindResult (copy)
 							UseResult10(FindResult.option.optionValue)
 						end, UseResult8, UseResult8)
@@ -355,7 +355,7 @@ return function(UniverseId, Callback, PageName) --[[ Line: 116 ]]
 					Callback(p1)
 				end
 				UseResult11(Requirement or "GameLaunch")
-			end, function() --[[ Line: 588 ]]
+			end, function()
 				-- upvalues: Callback (upval), p1 (copy), UseResult11 (upval)
 				Callback(p1)
 				UseResult11("GameLaunch")

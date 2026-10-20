@@ -12,7 +12,7 @@ local Frozen = table.freeze({
 	errorMessage = "The local user changed while the Game Pass request was running"
 })
 
-return function(p1) --[[ Line: 37 | Named "createGamePassConfigStore" ]]
+return function(p1)
 	-- upvalues: DataHydrationUtilsModule (copy), FetchGamePassConfigModule (copy), FFlagDataHydrationPreserveIncompleteCatalogResultsModule (copy), PromiseModule (copy), CreateSingleEntityResolverModule (copy), Frozen (copy), StatusCodes (copy)
 	local P0 = p1 or {}
 	local config = { network = P0.network, baseUrl = P0.baseUrl }
@@ -20,11 +20,11 @@ return function(p1) --[[ Line: 37 | Named "createGamePassConfigStore" ]]
 	local ObserveLocalPlayerUserId = P0.observeLocalPlayerUserId or DataHydrationUtilsModule.observeLocalPlayerUserId
 	local Flag = false
 	local Generation = 0
-	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p2) --[[ Line: 47 | Named "fetchGamePasses" ]]
+	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p2)
 		-- upvalues: FetchGamePassConfigModule (upval), config (copy), FFlagDataHydrationPreserveIncompleteCatalogResultsModule (upval), PromiseModule (upval)
 		local ListResult = FetchGamePassConfigModule.list(p2, config)
 		
-		return if FFlagDataHydrationPreserveIncompleteCatalogResultsModule then ListResult:catch(function(Err) --[[ Line: 52 ]]
+		return if FFlagDataHydrationPreserveIncompleteCatalogResultsModule then ListResult:catch(function(Err)
 			-- upvalues: PromiseModule (upval)
 			return if typeof(Err) == "table" and Err.code == "IncompleteGamePassList" then {
 				isIncomplete = true,
@@ -34,18 +34,18 @@ return function(p1) --[[ Line: 37 | Named "createGamePassConfigStore" ]]
 		end) else ListResult
 	end, {
 		cache = if FFlagDataHydrationPreserveIncompleteCatalogResultsModule then {
-			ttlSecondsForItem = function(p2) --[[ Line: 67 ]]
+			ttlSecondsForItem = function(p2)
 				return if p2.isIncomplete then 60 else nil
 			end
 		} else nil,
 		resolver = { replaceItems = true }
 	})
-	local Callback = ObserveLocalPlayerUserId(function() --[[ Line: 77 ]]
+	local Callback = ObserveLocalPlayerUserId(function()
 		-- upvalues: Generation (ref)
 		Generation += 1
 	end)
 	
-	local function _(GamePass, p2, Cause) --[[ Line: 96 | Named "verificationError" ]]
+	local function _(GamePass, p2, Cause)
 		return {
 			outcome = "unverified",
 			errorMessage = (if GamePass == nil then `The Game Pass request could not be verified: {p2}. ` else `Game pass {GamePass.gamePassId} could not be verified: {p2}. `) .. "Inspect the existing game pass before retrying. Do not create another game pass.",
@@ -54,7 +54,7 @@ return function(p1) --[[ Line: 37 | Named "createGamePassConfigStore" ]]
 		}
 	end
 	
-	local function failedError(GamePassId, ErrorMessage, Cause) --[[ Line: 113 ]]
+	local function failedError(GamePassId, ErrorMessage, Cause)
 		return {
 			outcome = "failed",
 			errorMessage = `The Game Pass request was rejected: {ErrorMessage}.`,
@@ -63,7 +63,7 @@ return function(p1) --[[ Line: 37 | Named "createGamePassConfigStore" ]]
 		}
 	end
 	
-	local _ = function(GamePassId) --[[ Line: 122 | Named "captureMutationToken" ]]
+	local _ = function(GamePassId)
 		-- upvalues: GetLocalPlayerUserId (copy), Generation (ref)
 		local LocalPlayerUserId = GetLocalPlayerUserId()
 		
@@ -79,12 +79,12 @@ return function(p1) --[[ Line: 37 | Named "createGamePassConfigStore" ]]
 		end
 	end
 	
-	local _ = function(p2) --[[ Line: 133 | Named "currentTokenError" ]]
+	local _ = function(p2)
 		-- upvalues: Flag (ref), Generation (ref), GetLocalPlayerUserId (copy), Frozen (upval)
 		return if Flag or p2.generation ~= Generation or p2.userId ~= GetLocalPlayerUserId() then Frozen else nil
 	end
 	
-	local _ = function(p2) --[[ Line: 140 | Named "refreshInventory" ]]
+	local _ = function(p2)
 		-- upvalues: Flag (ref), SingleEntityResolverModule (copy)
 		if not Flag then
 			SingleEntityResolverModule.clear()
@@ -92,9 +92,9 @@ return function(p1) --[[ Line: 37 | Named "createGamePassConfigStore" ]]
 		end
 	end
 	
-	local _ = function(Promise, GamePassId) --[[ Line: 147 | Named "mutationResult" ]]
+	local _ = function(Promise, GamePassId)
 		-- upvalues: StatusCodes (upval), PromiseModule (upval), failedError (copy)
-		return Promise:catch(function(Err) --[[ Line: 148 ]]
+		return Promise:catch(function(Err)
 			-- upvalues: StatusCodes (upval), PromiseModule (upval), failedError (upval), GamePassId (copy)
 			if typeof(Err) == "table" and Err.responseCode ~= nil and StatusCodes.BAD_REQUEST <= Err.responseCode and Err.responseCode < StatusCodes.INTERNAL_SERVER_ERROR and Err.responseCode ~= StatusCodes.REQUEST_TIMEOUT then
 				return PromiseModule.reject((failedError(GamePassId, Err.errorMessage or "the service rejected the write", Err)))
@@ -111,11 +111,11 @@ return function(p1) --[[ Line: 37 | Named "createGamePassConfigStore" ]]
 		end)
 	end
 	
-	local function runMutation(p2, GamePassId, Callback) --[[ Line: 170 ]]
+	local function runMutation(p2, GamePassId, Callback)
 		-- upvalues: Flag (ref), Generation (ref), GetLocalPlayerUserId (copy), Frozen (upval), PromiseModule (upval), failedError (copy), StatusCodes (upval)
 		local Frozen1 = if Flag or p2.generation ~= Generation or p2.userId ~= GetLocalPlayerUserId() then Frozen else nil
 		
-		return if Frozen1 == nil then Callback():catch(function(Err) --[[ Line: 148 ]]
+		return if Frozen1 == nil then Callback():catch(function(Err)
 			-- upvalues: StatusCodes (upval), PromiseModule (upval), failedError (upval), GamePassId (copy)
 			if typeof(Err) == "table" and Err.responseCode ~= nil and StatusCodes.BAD_REQUEST <= Err.responseCode and Err.responseCode < StatusCodes.INTERNAL_SERVER_ERROR and Err.responseCode ~= StatusCodes.REQUEST_TIMEOUT then
 				return PromiseModule.reject((failedError(GamePassId, Err.errorMessage or "the service rejected the write", Err)))
@@ -129,7 +129,7 @@ return function(p1) --[[ Line: 37 | Named "createGamePassConfigStore" ]]
 					cause = Err
 				})
 			end
-		end):andThen(function(Result) --[[ Line: 175 ]]
+		end):andThen(function(Result)
 			-- upvalues: p2 (copy), Flag (upval), Generation (upval), GetLocalPlayerUserId (upval), Frozen (upval), GamePassId (copy), PromiseModule (upval)
 			local Frozen1 = if Flag or p2.generation ~= Generation or p2.userId ~= GetLocalPlayerUserId() then Frozen else nil
 			
@@ -148,11 +148,11 @@ return function(p1) --[[ Line: 37 | Named "createGamePassConfigStore" ]]
 		end) else PromiseModule.reject((failedError(GamePassId, Frozen1.errorMessage, Frozen1)))
 	end
 	
-	local function tokenBoundGet(p2, p3, GamePassId) --[[ Line: 189 ]]
+	local function tokenBoundGet(p2, p3, GamePassId)
 		-- upvalues: Flag (ref), Generation (ref), GetLocalPlayerUserId (copy), Frozen (upval), PromiseModule (upval), FetchGamePassConfigModule (upval), config (copy)
 		local Frozen1 = if Flag or p2.generation ~= Generation or p2.userId ~= GetLocalPlayerUserId() then Frozen else nil
 		
-		return if Frozen1 == nil then FetchGamePassConfigModule.get(p3, GamePassId, config):andThen(function(Result) --[[ Line: 198 ]]
+		return if Frozen1 == nil then FetchGamePassConfigModule.get(p3, GamePassId, config):andThen(function(Result)
 			-- upvalues: p2 (copy), Flag (upval), Generation (upval), GetLocalPlayerUserId (upval), Frozen (upval), PromiseModule (upval)
 			local Frozen1 = if Flag or p2.generation ~= Generation or p2.userId ~= GetLocalPlayerUserId() then Frozen else nil
 			
@@ -160,16 +160,16 @@ return function(p1) --[[ Line: 37 | Named "createGamePassConfigStore" ]]
 		end) else PromiseModule.reject(Frozen1)
 	end
 	
-	local function reconcileMutation(p2, Promise) --[[ Line: 204 ]]
+	local function reconcileMutation(p2, Promise)
 		-- upvalues: Flag (ref), SingleEntityResolverModule (copy), PromiseModule (upval)
-		return Promise:andThen(function(Result) --[[ Line: 205 ]]
+		return Promise:andThen(function(Result)
 			-- upvalues: p2 (copy), Flag (upval), SingleEntityResolverModule (upval)
 			if not Flag then
 				SingleEntityResolverModule.clear()
 				SingleEntityResolverModule.fetch(p2)
 			end
 			return Result
-		end, function(p3) --[[ Line: 208 ]]
+		end, function(p3)
 			-- upvalues: p2 (copy), Flag (upval), SingleEntityResolverModule (upval), PromiseModule (upval)
 			if typeof(p3) == "table" and p3.outcome == "unverified" and not Flag then
 				SingleEntityResolverModule.clear()
@@ -179,9 +179,9 @@ return function(p1) --[[ Line: 37 | Named "createGamePassConfigStore" ]]
 		end)
 	end
 	
-	local function readBackMutation(p2, p3, GamePassId, IconAssetId, IconAssetId1, IsForSale, p4) --[[ Line: 216 ]]
+	local function readBackMutation(p2, p3, GamePassId, IconAssetId, IconAssetId1, IsForSale, p4)
 		-- upvalues: tokenBoundGet (copy), PromiseModule (upval), Frozen (upval), Flag (ref), Generation (ref), GetLocalPlayerUserId (copy)
-		return tokenBoundGet(p2, p3, GamePassId):andThen(function(Result) --[[ Line: 225 ]]
+		return tokenBoundGet(p2, p3, GamePassId):andThen(function(Result)
 			-- upvalues: IconAssetId (copy), PromiseModule (upval), IconAssetId1 (copy), IsForSale (copy), p4 (copy)
 			if IconAssetId ~= nil and Result.iconAssetId ~= IconAssetId then
 				return PromiseModule.reject({
@@ -232,7 +232,7 @@ return function(p1) --[[ Line: 37 | Named "createGamePassConfigStore" ]]
 				end
 			end
 			return Result
-		end, function(Cause) --[[ Line: 255 ]]
+		end, function(Cause)
 			-- upvalues: Frozen (upval), p2 (copy), Flag (upval), Generation (upval), GetLocalPlayerUserId (upval), PromiseModule (upval), GamePassId (copy)
 			if Cause == Frozen or (if Flag or p2.generation ~= Generation or p2.userId ~= GetLocalPlayerUserId() then Frozen else nil) ~= nil then
 				local GamePass = { gamePassId = GamePassId }
@@ -256,7 +256,7 @@ return function(p1) --[[ Line: 37 | Named "createGamePassConfigStore" ]]
 		end)
 	end
 	
-	local function update(p5, GamePassId, p6) --[[ Line: 294 ]]
+	local function update(p5, GamePassId, p6)
 		-- upvalues: GetLocalPlayerUserId (copy), Generation (ref), PromiseModule (upval), runMutation (copy), FetchGamePassConfigModule (upval), config (copy), readBackMutation (copy), tokenBoundGet (copy), Frozen (upval), Flag (ref), failedError (copy), reconcileMutation (copy)
 		local LocalPlayerUserId = GetLocalPlayerUserId()
 		local v1 = nil
@@ -277,25 +277,25 @@ return function(p1) --[[ Line: 37 | Named "createGamePassConfigStore" ]]
 		if v1 == nil then
 			return PromiseModule.reject(config1)
 		else
-			local function mutate(IconAssetId) --[[ Line: 303 ]]
+			local function mutate(IconAssetId)
 				-- upvalues: runMutation (upval), v1 (copy), GamePassId (copy), FetchGamePassConfigModule (upval), p5 (copy), p6 (copy), config (upval), readBackMutation (upval)
-				return runMutation(v1, GamePassId, function() --[[ Line: 304 ]]
+				return runMutation(v1, GamePassId, function()
 					-- upvalues: FetchGamePassConfigModule (upval), p5 (upval), GamePassId (upval), p6 (upval), config (upval)
 					return FetchGamePassConfigModule.update(p5, GamePassId, p6, config)
-				end):andThen(function() --[[ Line: 306 ]]
+				end):andThen(function()
 					-- upvalues: readBackMutation (upval), v1 (upval), p5 (upval), GamePassId (upval), IconAssetId (copy), p6 (upval)
 					return readBackMutation(v1, p5, GamePassId, nil, IconAssetId, p6.isForSale, p6)
 				end)
 			end
 			
-			return reconcileMutation(p5, if p6.imageFile == nil then mutate(nil) else tokenBoundGet(v1, p5, GamePassId):andThen(function(Result) --[[ Line: 320 ]]
+			return reconcileMutation(p5, if p6.imageFile == nil then mutate(nil) else tokenBoundGet(v1, p5, GamePassId):andThen(function(Result)
 				-- upvalues: PromiseModule (upval), mutate (copy)
 				return if Result.iconAssetId == nil then PromiseModule.reject({
 					outcome = "failed",
 					errorMessage = "The existing icon could not be read. No update was sent.",
 					gamePass = Result
 				}) else mutate(Result.iconAssetId)
-			end, function(Cause) --[[ Line: 329 ]]
+			end, function(Cause)
 				-- upvalues: Frozen (upval), v1 (copy), Flag (upval), Generation (upval), GetLocalPlayerUserId (upval), PromiseModule (upval), failedError (upval), GamePassId (copy)
 				if Cause == Frozen or (if Flag or v1.generation ~= Generation or v1.userId ~= GetLocalPlayerUserId() then Frozen else nil) ~= nil then
 					return PromiseModule.reject((failedError(GamePassId, Frozen.errorMessage, Cause)))
@@ -311,19 +311,19 @@ return function(p1) --[[ Line: 37 | Named "createGamePassConfigStore" ]]
 		fetchGamePasses = SingleEntityResolverModule.fetch,
 		getAndFetchGamePasses = SingleEntityResolverModule.getAndFetch,
 		getAccountResetGeneration = SingleEntityResolverModule.getAccountResetGeneration,
-		list = function(p5) --[[ Line: 81 ]]
+		list = function(p5)
 			-- upvalues: FetchGamePassConfigModule (upval), config (copy)
 			return FetchGamePassConfigModule.list(p5, config)
 		end,
-		get = function(p5, p6) --[[ Line: 85 ]]
+		get = function(p5, p6)
 			-- upvalues: FetchGamePassConfigModule (upval), config (copy)
 			return FetchGamePassConfigModule.get(p5, p6, config)
 		end,
-		batchGet = function(p5, p6) --[[ Line: 89 ]]
+		batchGet = function(p5, p6)
 			-- upvalues: PromiseModule (upval), FetchGamePassConfigModule (upval), config (copy)
 			return if #p6 == 0 then PromiseModule.resolve({ gamePasses = {} }) else FetchGamePassConfigModule.batchGet(p5, p6, config)
 		end,
-		create = function(p5, p6) --[[ Line: 265 ]]
+		create = function(p5, p6)
 			-- upvalues: GetLocalPlayerUserId (copy), Generation (ref), PromiseModule (upval), runMutation (copy), FetchGamePassConfigModule (upval), config (copy), readBackMutation (copy), reconcileMutation (copy)
 			local LocalPlayerUserId = GetLocalPlayerUserId()
 			local v1 = nil
@@ -341,10 +341,10 @@ return function(p1) --[[ Line: 37 | Named "createGamePassConfigStore" ]]
 				v1 = { generation = Generation, userId = LocalPlayerUserId }
 				config1 = nil
 			end
-			return if v1 == nil then PromiseModule.reject(config1) else reconcileMutation(p5, (runMutation(v1, nil, function() --[[ Line: 270 ]]
+			return if v1 == nil then PromiseModule.reject(config1) else reconcileMutation(p5, (runMutation(v1, nil, function()
 				-- upvalues: FetchGamePassConfigModule (upval), p5 (copy), p6 (copy), config (upval)
 				return FetchGamePassConfigModule.create(p5, p6, config)
-			end):andThen(function(Result) --[[ Line: 272 ]]
+			end):andThen(function(Result)
 				-- upvalues: p6 (copy), PromiseModule (upval), readBackMutation (upval), v1 (copy), p5 (copy)
 				if p6.imageFile == nil or Result.iconAssetId ~= nil and Result.iconAssetId > 0 then
 					return readBackMutation(v1, p5, Result.gamePassId, if p6.imageFile == nil then nil else Result.iconAssetId, nil, p6.isForSale ~= nil and p6.isForSale, p6)
@@ -361,15 +361,15 @@ return function(p1) --[[ Line: 37 | Named "createGamePassConfigStore" ]]
 			end)))
 		end,
 		update = update,
-		activate = function(p5, GamePassId) --[[ Line: 347 ]]
+		activate = function(p5, GamePassId)
 			-- upvalues: update (copy)
 			return update(p5, GamePassId, { isForSale = true })
 		end,
-		deactivate = function(p5, GamePassId) --[[ Line: 351 ]]
+		deactivate = function(p5, GamePassId)
 			-- upvalues: update (copy)
 			return update(p5, GamePassId, { isForSale = false })
 		end,
-		setArchived = function(p5, GamePassId, IsArchived) --[[ Line: 355 ]]
+		setArchived = function(p5, GamePassId, IsArchived)
 			-- upvalues: GetLocalPlayerUserId (copy), Generation (ref), PromiseModule (upval), runMutation (copy), FetchGamePassConfigModule (upval), config (copy), readBackMutation (copy), reconcileMutation (copy)
 			local LocalPlayerUserId = GetLocalPlayerUserId()
 			local v1 = nil
@@ -387,12 +387,12 @@ return function(p1) --[[ Line: 37 | Named "createGamePassConfigStore" ]]
 				v1 = { generation = Generation, userId = LocalPlayerUserId }
 				config1 = nil
 			end
-			return if v1 == nil then PromiseModule.reject(config1) else reconcileMutation(p5, (runMutation(v1, GamePassId, function() --[[ Line: 364 ]]
+			return if v1 == nil then PromiseModule.reject(config1) else reconcileMutation(p5, (runMutation(v1, GamePassId, function()
 				-- upvalues: FetchGamePassConfigModule (upval), p5 (copy), GamePassId (copy), IsArchived (copy), config (upval)
 				return FetchGamePassConfigModule.setArchived(p5, GamePassId, IsArchived, config)
-			end):andThen(function() --[[ Line: 366 ]]
+			end):andThen(function()
 				-- upvalues: readBackMutation (upval), v1 (copy), p5 (copy), GamePassId (copy), PromiseModule (upval), IsArchived (copy)
-				return readBackMutation(v1, p5, GamePassId):andThen(function(Result) --[[ Line: 367 ]]
+				return readBackMutation(v1, p5, GamePassId):andThen(function(Result)
 					-- upvalues: PromiseModule (upval), IsArchived (upval)
 					return if Result.isArchived == nil then PromiseModule.reject({
 						outcome = "unverified",
@@ -413,15 +413,15 @@ return function(p1) --[[ Line: 37 | Named "createGamePassConfigStore" ]]
 				end)
 			end)))
 		end,
-		getSalesLimit = function(p6) --[[ Line: 383 ]]
+		getSalesLimit = function(p6)
 			-- upvalues: FetchGamePassConfigModule (upval), config (copy)
 			return FetchGamePassConfigModule.getSalesLimit(p6, config)
 		end,
-		clear = function() --[[ Line: 387 ]]
+		clear = function()
 			-- upvalues: SingleEntityResolverModule (copy)
 			SingleEntityResolverModule.clear()
 		end,
-		dispose = function() --[[ Line: 391 ]]
+		dispose = function()
 			-- upvalues: Flag (ref), Generation (ref), Callback (copy), SingleEntityResolverModule (copy)
 			Flag = true
 			Generation += 1

@@ -4,7 +4,7 @@ local HttpService = game:GetService("HttpService")
 local OpenCloudService = game:GetService("OpenCloudService")
 local RunService = game:GetService("RunService")
 
-function returnInvalidArgumentError(Message) --[[ Line: 22 ]]
+function returnInvalidArgumentError(Message)
 	-- upvalues: HttpService (copy)
 	return {
 		StatusCode = 400,
@@ -12,7 +12,7 @@ function returnInvalidArgumentError(Message) --[[ Line: 22 ]]
 	}
 end
 
-function verifyUserNotification(p1) --[[ Line: 32 ]]
+function verifyUserNotification(p1)
 	if p1.path ~= nil then
 		local VerifyStringResult = verifyString(p1.path)
 		
@@ -44,7 +44,7 @@ function verifyUserNotification(p1) --[[ Line: 32 ]]
 	return nil
 end
 
-function verifySource(p1) --[[ Line: 64 ]]
+function verifySource(p1)
 	if p1.universe ~= nil then
 		local VerifyStringResult = verifyString(p1.universe)
 		
@@ -55,7 +55,7 @@ function verifySource(p1) --[[ Line: 64 ]]
 	return nil
 end
 
-function verifyPayload(p1) --[[ Line: 75 ]]
+function verifyPayload(p1)
 	-- upvalues: OpenCloudNotificationScheduledTimeEnabled (copy)
 	if p1.type ~= nil then
 		local VerifyStringResult = verifyString(p1.type)
@@ -102,7 +102,7 @@ function verifyPayload(p1) --[[ Line: 75 ]]
 	return nil
 end
 
-function verifyJoinExperience(p1) --[[ Line: 121 ]]
+function verifyJoinExperience(p1)
 	if p1.launchData ~= nil then
 		local VerifyStringResult = verifyString(p1.launchData)
 		
@@ -113,7 +113,7 @@ function verifyJoinExperience(p1) --[[ Line: 121 ]]
 	return nil
 end
 
-function verifyAnalyticsData(p1) --[[ Line: 132 ]]
+function verifyAnalyticsData(p1)
 	if p1.category ~= nil then
 		local VerifyStringResult = verifyString(p1.category)
 		
@@ -124,7 +124,7 @@ function verifyAnalyticsData(p1) --[[ Line: 132 ]]
 	return nil
 end
 
-function verifyParameters(List) --[[ Line: 143 ]]
+function verifyParameters(List)
 	local VerifyNumberResult = nil
 	local VerifyStringResult = nil
 	for _, value in pairs(List) do
@@ -155,25 +155,25 @@ function verifyParameters(List) --[[ Line: 143 ]]
 	return nil
 end
 
-function verifyNumber(p1) --[[ Line: 168 ]]
+function verifyNumber(p1)
 	return if typeof(p1) == "number" then nil else returnInvalidArgumentError("Argument not a number.")
 end
 
-function verifyString(p1) --[[ Line: 175 ]]
+function verifyString(p1)
 	return if typeof(p1) == "string" then nil else returnInvalidArgumentError("Argument not a string.")
 end
 
-function getUrlPrefix(): string --[[ Line: 182 ]]
+function getUrlPrefix(): string
 	-- upvalues: RunService (copy)
 	return if RunService:IsStudio() then "user" else "rcc"
 end
 
-function createUserNotificationUrl(p1, _): string --[[ Line: 189 ]]
+function createUserNotificationUrl(p1, _): string
 	-- upvalues: ContentProvider (copy)
 	return (string.format("%s%s/cloud/v2/users/%d/notifications", string.gsub(string.gsub(ContentProvider.BaseUrl:lower(), "http:", "https:"), "www", "apis"), getUrlPrefix(), p1))
 end
 
-function userNotification(p1) --[[ Line: 198 ]]
+function userNotification(p1)
 	-- upvalues: HttpService (copy), OpenCloudService (copy)
 	if p1.user ~= nil then
 		local VerifyNumberResult = verifyNumber(p1.user)

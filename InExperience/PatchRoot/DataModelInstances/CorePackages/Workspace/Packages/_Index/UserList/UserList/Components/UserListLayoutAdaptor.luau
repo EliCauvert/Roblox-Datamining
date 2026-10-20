@@ -5,7 +5,7 @@ local HorizontalUserList = require(UserList.Components.HorizontalUserList).Horiz
 local EnumsModule = require(UserList.Common.Enums)
 local _ = require(UserList.Common.Types)
 
-return ReactModule.memo(function(Tbl) --[[ Line: 39 | Named "UserListLayoutAdaptor" ]]
+return ReactModule.memo(function(Tbl)
 	-- upvalues: EnumsModule (copy), VerticalUserListSection (copy), HorizontalUserList (copy), ReactModule (copy)
 	local Copy = table.clone(Tbl)
 	Copy.layoutMode = nil

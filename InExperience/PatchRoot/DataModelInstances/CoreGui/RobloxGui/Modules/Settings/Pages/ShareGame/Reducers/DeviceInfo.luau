@@ -6,7 +6,7 @@ local SetDeviceLayoutModule = require(ShareGame.Actions.SetDeviceLayout)
 local SetDeviceOrientation = require(CorePackages.Workspace.Packages.DeviceOrientationRodux).Actions.SetDeviceOrientation
 local SetIsSmallTouchScreenModule = require(ShareGame.Actions.SetIsSmallTouchScreen)
 
-return function(p1, p2) --[[ Line: 14 ]]
+return function(p1, p2)
 	-- upvalues: ConstantsModule (copy), SetDeviceOrientation (copy), Immutable (copy), SetDeviceLayoutModule (copy), SetIsSmallTouchScreenModule (copy)
 	local P0 = p1 or {
 		IsSmallTouchScreen = false,

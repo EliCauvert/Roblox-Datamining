@@ -1,6 +1,6 @@
 ﻿local CreateMomentDetailsStoreModule = require(script.createMomentDetailsStore)
 
-return require(script:FindFirstAncestor("AppChat").Parent.Signals).createComputed(function(_) --[[ Line: 9 ]]
+return require(script:FindFirstAncestor("AppChat").Parent.Signals).createComputed(function(_)
 	-- upvalues: CreateMomentDetailsStoreModule (copy)
 	return CreateMomentDetailsStoreModule()
 end)

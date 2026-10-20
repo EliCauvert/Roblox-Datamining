@@ -27,25 +27,25 @@ local config = {
 	parent = workspace
 }
 
-return function(p1) --[[ Line: 43 | Named "Panel3D" ]]
+return function(p1)
 	-- upvalues: Object (copy), config (copy), ReactModule (copy), UsePanel3DRenderStepModule (copy), ConstantsModule (copy), RoactModule (copy), CurvedSurfaceGuisEnabled (copy)
 	local AssignResult = Object.assign({}, config, p1)
 	local PartRef = AssignResult.partRef or ReactModule.useRef(nil)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	UsePanel3DRenderStepModule(AssignResult, PartRef)
-	ReactModule.useEffect(function() --[[ Line: 51 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: AssignResult (copy), ConstantsModule (upval), UseRefResult (copy)
 		if AssignResult.anchoring ~= ConstantsModule.AnchoringTypes.PanelManaged then
-			return function() --[[ Line: 53 ]] end
+			return function() end
 		elseif AssignResult.connectPanelManagerFunction == nil then
-			return function() --[[ Line: 57 ]] end
+			return function() end
 		elseif UseRefResult == nil or not AssignResult.connectPanelManagerFunction then
-			return function() --[[ Line: 68 ]] end
+			return function() end
 		else
 			AssignResult.connectPanelManagerFunction(UseRefResult)
 			
-			return function() --[[ Line: 63 ]]
+			return function()
 				-- upvalues: AssignResult (upval)
 				AssignResult.connectPanelManagerFunction(nil)
 			end

@@ -8,17 +8,17 @@ local UseStateFunction = ReactModule.useState
 local ViewModule = require(Parent.Components.View.View)
 local FlatListModule = require(script.Parent.FlatList)
 
-local function _(p1) --[[ Line: 81 | Named "_getLength" ]]
-	return function(AbsoluteSize) --[[ Line: 82 ]]
+local function _(p1)
+	return function(AbsoluteSize)
 		-- upvalues: p1 (copy)
 		return if p1 then AbsoluteSize.X else AbsoluteSize.Y
 	end
 end
 
 return {
-	BidirectionalFlatList = ReactModule.forwardRef(function(Tbl, Ref) --[[ Line: 98 ]]
+	BidirectionalFlatList = ReactModule.forwardRef(function(Tbl, Ref)
 		-- upvalues: PromiseModule (copy), UseStateFunction (copy), UseRefFunction (copy), ReactModule (copy), FlatListModule (copy), Object (copy), ViewModule (copy)
-		local function promiseFn() --[[ Line: 99 ]]
+		local function promiseFn()
 			-- upvalues: PromiseModule (upval)
 			return PromiseModule.resolve()
 		end
@@ -49,7 +49,7 @@ return {
 		local UseRefResult2 = UseRefFunction(nil)
 		local UseRefResult3 = UseRefFunction(nil)
 		
-		local function maybeCallOnStartReached() --[[ Line: 133 ]]
+		local function maybeCallOnStartReached()
 			-- upvalues: Data (copy), UseRefResult (copy), Tbl (copy), UseStateResult3 (copy), UseStateResult2 (copy), PromiseModule (upval), UseRefResult2 (copy), UseRefResult3 (copy), PromiseFn1 (copy)
 			if Data and #Data > 0 and UseRefResult.current[#Data] then return end
 			local IsUseStateResultAbove: boolean = if Tbl.inverted then UseStateResult3 >= 3 else UseStateResult3 >= 1
@@ -60,9 +60,9 @@ return {
 			end
 			UseStateResult2(true)
 			
-			local function p() --[[ Line: 151 ]]
+			local function p()
 				-- upvalues: PromiseModule (upval), UseRefResult2 (upval), UseStateResult2 (upval)
-				return PromiseModule.new(function(Callback: () -> ()) --[[ Line: 152 ]]
+				return PromiseModule.new(function(Callback: () -> ())
 					-- upvalues: UseRefResult2 (upval), UseStateResult2 (upval)
 					UseRefResult2.current = nil
 					UseStateResult2(false)
@@ -71,7 +71,7 @@ return {
 			end
 			
 			if UseRefResult3.current then
-				UseRefResult3.current:andThen(function() --[[ Line: 160 ]]
+				UseRefResult3.current:andThen(function()
 					-- upvalues: UseRefResult2 (upval), PromiseFn1 (upval), p (copy)
 					UseRefResult2.current = PromiseFn1():andThen(p)
 				end)
@@ -82,7 +82,7 @@ return {
 			end
 		end
 		
-		local function maybeCallOnEndReached() --[[ Line: 168 ]]
+		local function maybeCallOnEndReached()
 			-- upvalues: Data (copy), UseRefResult1 (copy), Tbl (copy), UseStateResult3 (copy), UseStateResult2_1 (copy), PromiseModule (upval), UseRefResult3 (copy), UseRefResult2 (copy), PromiseFn (copy)
 			if Data and #Data > 0 and UseRefResult1.current[#Data] then return end
 			local IsUseStateResultAbove: boolean = if Tbl.inverted then UseStateResult3 >= 3 else UseStateResult3 >= 1
@@ -93,9 +93,9 @@ return {
 			end
 			UseStateResult2_1(true)
 			
-			local function p() --[[ Line: 186 ]]
+			local function p()
 				-- upvalues: PromiseModule (upval), UseRefResult3 (upval), UseStateResult2_1 (upval)
-				return PromiseModule.new(function(Callback: () -> ()) --[[ Line: 187 ]]
+				return PromiseModule.new(function(Callback: () -> ())
 					-- upvalues: UseRefResult3 (upval), UseStateResult2_1 (upval)
 					UseRefResult3.current = nil
 					UseStateResult2_1(false)
@@ -104,7 +104,7 @@ return {
 			end
 			
 			if UseRefResult2.current then
-				UseRefResult2.current:andThen(function() --[[ Line: 195 ]]
+				UseRefResult2.current:andThen(function()
 					-- upvalues: UseRefResult3 (upval), PromiseFn (upval), p (copy)
 					UseRefResult3.current = PromiseFn():andThen(p)
 				end)
@@ -116,19 +116,19 @@ return {
 		end
 		
 		return ReactModule.createElement(ReactModule.Fragment, nil, ReactModule.createElement(FlatListModule, Object.assign(table.clone(Tbl), {
-			renderItem = function(p1) --[[ Line: 314 ]]
+			renderItem = function(p1)
 				-- upvalues: ReactModule (upval), ViewModule (upval), Ref (copy), Tbl (copy), EnableAutoscrollToTop (copy), AutoscrollToTopThreshold (copy)
 				local Item = p1.item
 				
 				return ReactModule.createElement(ViewModule, {
 					BorderSizePixel = 0,
 					name = "resize",
-					onLayout = function(Frame) --[[ Line: 317 ]]
+					onLayout = function(Frame)
 						-- upvalues: Ref (upval), Tbl (upval), Item (copy), EnableAutoscrollToTop (upval), AutoscrollToTopThreshold (upval)
 						local Current = if Ref and Ref.current then Ref.current._listRef._scrollRef.getNativeScrollRef()._nativeRef.current else nil
 						local Horizontal = Tbl.horizontal
 						
-						local function v50(AbsoluteSize) --[[ Line: 82 ]]
+						local function v50(AbsoluteSize)
 							-- upvalues: Horizontal (copy)
 							return if Horizontal then AbsoluteSize.X else AbsoluteSize.Y
 						end
@@ -161,7 +161,7 @@ return {
 				}, { child = Tbl.renderItem(p1) })
 			end,
 			ref = Ref,
-			ListHeaderComponent = function() --[[ Line: 247 ]]
+			ListHeaderComponent = function()
 				-- upvalues: NoShowDefaultLoadingIndicators (copy), ListHeaderComponent (copy), ReactModule (upval), UseStateResult (copy), HeaderLoadingIndicator (copy)
 				if not NoShowDefaultLoadingIndicators then
 					return if ListHeaderComponent then ReactModule.createElement(ListHeaderComponent, nil) else nil
@@ -177,7 +177,7 @@ return {
 				end
 				return nil
 			end,
-			ListFooterComponent = function() --[[ Line: 277 ]]
+			ListFooterComponent = function()
 				-- upvalues: NoShowDefaultLoadingIndicators (copy), ListFooterComponent (copy), ReactModule (upval), UseStateResult1 (copy), FooterLoadingIndicator (copy)
 				if not NoShowDefaultLoadingIndicators then
 					return if ListFooterComponent then ReactModule.createElement(ListFooterComponent, nil) else nil
@@ -194,9 +194,9 @@ return {
 				return nil
 			end,
 			onEndReached = Object.None,
-			onScroll = function(ScrollFrame) --[[ Line: 204 ]]
+			onScroll = function(ScrollFrame)
 				-- upvalues: UseStateResult2_2 (copy), OnScrollFunction (copy), Tbl (copy), OnStartReachedThreshold (copy), OnEndReachedThreshold (copy), maybeCallOnStartReached (copy), EnableRetryOnStartReached (copy), Data (copy), UseRefResult (copy), maybeCallOnEndReached (copy), EnableRetryOnEndReached (copy), UseRefResult1 (copy)
-				UseStateResult2_2(function(p1: number): number --[[ Line: 206 ]]
+				UseStateResult2_2(function(p1: number): number
 					return p1 + 1
 				end)
 				
@@ -206,7 +206,7 @@ return {
 				local Child = ScrollFrame:GetChildren()[1]
 				local Horizontal = Tbl.horizontal
 				
-				local function v42(AbsoluteSize) --[[ Line: 82 ]]
+				local function v42(AbsoluteSize)
 					-- upvalues: Horizontal (copy)
 					return if Horizontal then AbsoluteSize.X else AbsoluteSize.Y
 				end

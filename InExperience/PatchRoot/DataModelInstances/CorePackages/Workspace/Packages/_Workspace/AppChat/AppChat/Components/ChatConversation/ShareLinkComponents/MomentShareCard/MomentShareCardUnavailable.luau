@@ -5,7 +5,7 @@ local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local Alert, _ = require(AppChat.Utils.loadFoundationCloudAsset)("pictograms/alert")
 
-return ReactModule.memo(function() --[[ Line: 13 | Named "MomentShareCardUnavailable" ]]
+return ReactModule.memo(function()
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FoundationModule (copy), Alert (copy)
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "col align-x-center size-full-0 auto-xy padding-xxlarge bg-action-subtle",

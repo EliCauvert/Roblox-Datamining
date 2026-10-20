@@ -7,7 +7,7 @@ local ActivateGameNotInterestedFunction = GameTileModule.activateGameNotInterest
 local GetGameTileHiddenStoreFunction = GameTileModule.getGameTileHiddenStore
 local LocalizeStringsFunction = require(Parent.Localization).localizeStrings
 
-local function _(p1, Message, PropName) --[[ Line: 18 | Named "reportInvalidParam" ]]
+local function _(p1, Message, PropName)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy)
 	p1.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 		name = SduiActionType.SetGameTileNotInterested,
@@ -16,7 +16,7 @@ local function _(p1, Message, PropName) --[[ Line: 18 | Named "reportInvalidPara
 	}, p1.appPage)
 end
 
-return function(p1, _, p2) --[[ Line: 26 | Named "SduiSetGameTileNotInterestedAction" ]]
+return function(p1, _, p2)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), LocalizeStringsFunction (copy), ActivateGameNotInterestedFunction (copy), GetGameTileHiddenStoreFunction (copy)
 	local ActionParams = if p1 then p1.actionParams else nil
 	

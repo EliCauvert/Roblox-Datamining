@@ -12,7 +12,7 @@ local config = {
 	}
 }
 
-return function(p1) --[[ Line: 29 ]]
+return function(p1)
 	-- upvalues: config (copy)
 	return if p1 == nil then nil else config[p1]
 end

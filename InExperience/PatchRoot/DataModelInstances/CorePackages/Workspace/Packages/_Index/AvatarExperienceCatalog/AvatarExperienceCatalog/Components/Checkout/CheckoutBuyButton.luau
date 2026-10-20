@@ -5,15 +5,15 @@ local ReactOtterModule = require(Parent.ReactOtter)
 local FFlagAXMISWithBlackbird = require(Parent.SharedFlags).FFlagAXMISWithBlackbird
 local AXBuyDelayMillisecondsRatio = game:DefineFastInt("AXBuyDelayMilliseconds", 1000) / 1000
 
-return ReactModule.memo(function(Frame) --[[ Line: 22 | Named "CheckoutBuyButton" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), ReactOtterModule (copy), AXBuyDelayMillisecondsRatio (copy), FFlagAXMISWithBlackbird (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1, (ReactModule.useCallback(function() --[[ Line: 26 ]]
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1, (ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(true)
 	end, { UseStateResult })))
-	ReactModule.useEffect(function() --[[ Line: 31 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), AXBuyDelayMillisecondsRatio (upval)
 		if not UseStateResult then
 			UseAnimatedBindingResult2(ReactOtterModule.ease(0, {
@@ -44,7 +44,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 22 | Named "CheckoutBuyButton
 				Color3 = UseTokensResult.Color.Surface.Surface_0.Color3
 			},
 			Position = UDim2.fromScale(1, 0),
-			Size = UseAnimatedBindingResult:map(function(p1): UDim2 --[[ Line: 61 ]]
+			Size = UseAnimatedBindingResult:map(function(p1): UDim2
 				return UDim2.fromScale(-p1, 1)
 			end)
 		})

@@ -6,7 +6,7 @@ local SearchMode = { Substring = 0, WordStart = 1 }
 local CategoryGroups = nil
 local v1 = nil
 
-local function flatten(CategoryGroups) --[[ Line: 59 ]]
+local function flatten(CategoryGroups)
 	-- upvalues: EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy)
 	local Values = {}
 	local LowerValues = {}
@@ -35,7 +35,7 @@ local function flatten(CategoryGroups) --[[ Line: 59 ]]
 	}
 end
 
-local function getCatalog(p1) --[[ Line: 96 ]]
+local function getCatalog(p1)
 	-- upvalues: ConstantsModule (copy), v1 (ref), CategoryGroups (ref), flatten (copy)
 	if not p1.getIsEnabled(false) or p1.getAccessLevel(false) ~= ConstantsModule.AccessLevel.Enabled then
 		return nil
@@ -49,13 +49,13 @@ local function getCatalog(p1) --[[ Line: 96 ]]
 	return v1
 end
 
-local function getRank(Text: string, Pattern) --[[ Line: 110 ]]
+local function getRank(Text: string, Pattern)
 	local FoundAt: number? = string.find(Text, Pattern, 1, true)
 	
 	return if FoundAt == nil then nil elseif FoundAt == 1 then 1 elseif string.match(string.sub(Text, FoundAt - 1, FoundAt - 1), "%w") == nil then 2 else 3
 end
 
-local function getWordStartRank(Text: string, Pattern): number? --[[ Line: 131 ]]
+local function getWordStartRank(Text: string, Pattern): number?
 	local FoundAt: number? = string.find(Text, Pattern, 1, true)
 	while FoundAt ~= nil do
 		if FoundAt == 1 then
@@ -72,7 +72,7 @@ end
 return {
 	MIN_QUERY_LENGTH = 2,
 	SearchMode = SearchMode,
-	findMatchingPresets = function(p1, Text: string, p2) --[[ Line: 152 ]]
+	findMatchingPresets = function(p1, Text: string, p2)
 		-- upvalues: getCatalog (copy), SearchMode (copy), getWordStartRank (copy), getRank (copy)
 		if (utf8.len(Text) or #Text) < (if p2 and p2.minQueryLength then p2.minQueryLength else 2) then
 			return {}
@@ -98,7 +98,7 @@ return {
 				table.insert(List, { rank = WordStartRank, index = Index })
 			end
 		end
-		table.sort(List, function(A, B): boolean --[[ Line: 189 ]]
+		table.sort(List, function(A, B): boolean
 			return if A.rank == B.rank then A.index < B.index else A.rank < B.rank
 		end)
 		local Buffer = table.create(#List)
@@ -108,7 +108,7 @@ return {
 		end
 		return Buffer
 	end,
-	getPresetIdForValue = function(p3, p4) --[[ Line: 209 ]]
+	getPresetIdForValue = function(p3, p4)
 		-- upvalues: getCatalog (copy)
 		local Catalog = getCatalog(p3)
 		

@@ -10,28 +10,28 @@ return IXPUtilsModule.defineIXPTest({
 	name = "AvatarMarketplace.UA.RecentlyViewedSearchItems",
 	recordExposure = false,
 	layer = AppUserLayers.AvatarExperienceUASearchView,
-	getIsUserInExperiment = function(p1): boolean --[[ Line: 25 ]]
+	getIsUserInExperiment = function(p1): boolean
 		return p1.enableRecentlyViewedItems ~= nil and (p1.recentlyViewedSearchItemsPositionTop ~= nil and p1.recentlyViewedSearchItemsSaveInCatalog ~= nil)
 	end,
-	getDependentFlagsEnabled = function(): boolean --[[ Line: 31 ]]
+	getDependentFlagsEnabled = function(): boolean
 		return true
 	end,
-	getEnabledFlag = function() --[[ Line: 35 ]]
+	getEnabledFlag = function()
 		return game:GetFastFlag("AXRecentlyViewedSearchItemsEnabled4")
 	end,
-	getEnabledForAllFlag = function() --[[ Line: 39 ]]
+	getEnabledForAllFlag = function()
 		return game:GetFastFlag("AXRecentlyViewedSearchItemsEnabledForAll4")
 	end,
 	variables = {
-		EnabledForUser = function(p1, p2) --[[ Line: 45 ]]
+		EnabledForUser = function(p1, p2)
 			return p2 or p1.enableRecentlyViewedItems
 		end,
-		EnabledTopVariant = function(p1) --[[ Line: 48 ]]
+		EnabledTopVariant = function(p1)
 			local RecentlyViewedSearchItemsPositionTop = p1.recentlyViewedSearchItemsPositionTop
 			
 			return game:GetFastFlag("AXRecentlyViewedSearchItemsPositionTop4") or RecentlyViewedSearchItemsPositionTop == true
 		end,
-		EnabledSaveInCatalog = function(p1) --[[ Line: 52 ]]
+		EnabledSaveInCatalog = function(p1)
 			local RecentlyViewedSearchItemsSaveInCatalog = p1.recentlyViewedSearchItemsSaveInCatalog
 			
 			return game:GetFastFlag("AXRecentlyViewedSearchItemsSaveInCatalog4") or RecentlyViewedSearchItemsSaveInCatalog == true

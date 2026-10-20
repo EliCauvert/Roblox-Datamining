@@ -19,11 +19,11 @@ local UseDictationInputBarModule = require(script.Parent.Dictation.useDictationI
 local UseDictationTextAreaModule = require(script.Parent.Dictation.useDictationTextArea)
 local DictationAffordancesModule = require(script.Parent.Dictation.DictationAffordances)
 
-local function _(p1, p2, p3) --[[ Line: 45 | Named "lerp" ]]
+local function _(p1, p2, p3)
 	return p1 + (p2 - p1) * p3
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 90 | Named "ChatInputBarV2Dictation" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FoundationModule (copy), UseDictationInputBarModule (copy), DictationAffordancesModule (copy), ReactModule (copy), UseDictationTextAreaModule (copy), FFlagExpChatDictationStopReplacesSendModule (copy), FFlagExpChatInputBarV2CornerAndTruncationFixModule (copy), StopCountdownModule (copy), ChannelChipModule (copy), FFlagExpChatFixBackspaceNilTargetChannel (copy), ConfigModule (copy), FFlagExpChatPresetChatEnabled (copy), FFlagEnableConsoleExpControls (copy), FFlagExpChatComposerInputBarFigmaParityModule (copy), DictationWaveformModule (copy), FFlagExpChatDictationFTUXModule (copy), DictationFTUXModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local SetTransparencyFunction = p1.setTransparency
@@ -60,9 +60,9 @@ return ReactModule.memo(function(p1) --[[ Line: 90 | Named "ChatInputBarV2Dictat
 		listeningColor3 = UseTokensResult.Color.Shift.Shift_200.Color3,
 		listeningTransparency = UseTokensResult.Color.Shift.Shift_200.Transparency
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 133 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), DeriveBackgroundColorsResult (copy)
-		return p1.transparencyValue:map(function(p2) --[[ Line: 134 ]]
+		return p1.transparencyValue:map(function(p2)
 			-- upvalues: DeriveBackgroundColorsResult (upval)
 			local BaseTransparency: number = DeriveBackgroundColorsResult.baseTransparency
 			
@@ -77,9 +77,9 @@ return ReactModule.memo(function(p1) --[[ Line: 90 | Named "ChatInputBarV2Dictat
 		DeriveBackgroundColorsResult.baseTransparency
 	})
 	local ShouldPreventFade = DictationAffordancesModule.shouldPreventFade(UseDictationInputBarModuleResult)
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 143 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: ShouldPreventFade (copy), p1 (copy)
-		return if ShouldPreventFade then p1.transparencyValue:map(function(_): number --[[ Line: 145 ]]
+		return if ShouldPreventFade then p1.transparencyValue:map(function(_): number
 			return 0
 		end) else p1.transparencyValue
 	end, { ShouldPreventFade, p1.transparencyValue })
@@ -131,7 +131,7 @@ return ReactModule.memo(function(p1) --[[ Line: 90 | Named "ChatInputBarV2Dictat
 					TargetChannelChip = ReactModule.createElement(ChannelChipModule, {
 						transparency = SetTransparencyFunction(0, p1.transparencyValue),
 						onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged,
-						onChannelChipActivated = if FFlagExpChatFixBackspaceNilTargetChannel then function() --[[ Line: 206 ]]
+						onChannelChipActivated = if FFlagExpChatFixBackspaceNilTargetChannel then function()
 							-- upvalues: p1 (copy)
 							p1.resetTargetChannel(p1.isGlobalChatTabActive)
 						end else p1.resetTargetChannel,
@@ -147,7 +147,7 @@ return ReactModule.memo(function(p1) --[[ Line: 90 | Named "ChatInputBarV2Dictat
 						Font = ConfigModule.ChatInputBarFont,
 						Text = p1.disabledChatPlaceholderText,
 						Position = UDim2.fromScale(1, 0),
-						Size = TargetChannelWidth:map(function(p2: number): UDim2 --[[ Line: 221 ]]
+						Size = TargetChannelWidth:map(function(p2: number): UDim2
 							return UDim2.new(1, -(p2 + 8), 0, 0)
 						end),
 						TextColor3 = ShowPlaceholderText and ChatInputBarSettings.PlaceholderColor3 or ChatInputBarSettings.TextColor3,
@@ -165,7 +165,7 @@ return ReactModule.memo(function(p1) --[[ Line: 90 | Named "ChatInputBarV2Dictat
 						AnchorPoint = Vector2.new(1, 0),
 						AutomaticSize = Enum.AutomaticSize.Y,
 						Position = UDim2.fromScale(1, 0),
-						Size = TargetChannelWidth:map(function(p2: number): UDim2 --[[ Line: 256 ]]
+						Size = TargetChannelWidth:map(function(p2: number): UDim2
 							return UDim2.new(1, -(p2 + 8), 0, 0)
 						end)
 					}, {
@@ -239,7 +239,7 @@ return ReactModule.memo(function(p1) --[[ Line: 90 | Named "ChatInputBarV2Dictat
 						size = FoundationModule.Enums.InputSize.Small,
 						isDisabled = DeriveMicSendButtonResult.isDisabled,
 						Selectable = not UseLongPressOverlay and nil,
-						onActivated = if UseLongPressOverlay then function() --[[ Line: 366 ]] end else DeriveMicSendButtonResult.onActivated,
+						onActivated = if UseLongPressOverlay then function() end else DeriveMicSendButtonResult.onActivated,
 						Visible = not IsRecording and nil
 					}),
 					InputTarget = if UseLongPressOverlay and MicGestureHandlers ~= nil then ReactModule.createElement("TextButton", {

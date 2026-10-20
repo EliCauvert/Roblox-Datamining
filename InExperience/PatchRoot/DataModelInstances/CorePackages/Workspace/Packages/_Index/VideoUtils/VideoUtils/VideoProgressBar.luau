@@ -2,7 +2,7 @@
 local ReactModule = require(Parent.React)
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 
-return function(Frame: Frame) --[[ Line: 17 | Named "VideoProgressBar" ]]
+return function(Frame: Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Muted = UseTokensResult.DarkMode.Content.Muted
@@ -20,7 +20,7 @@ return function(Frame: Frame) --[[ Line: 17 | Named "VideoProgressBar" ]]
 		UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
 		ProgressFill = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = Frame.progressBinding:map(function(XScale): UDim2 --[[ Line: 37 ]]
+			Size = Frame.progressBinding:map(function(XScale): UDim2
 				return UDim2.fromScale(XScale, 1)
 			end),
 			BackgroundColor3 = Emphasis.Color3,

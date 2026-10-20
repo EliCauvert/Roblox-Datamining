@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("MacMenuBarContentUpdates", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("MacMenuBarContentUpdates")
 end

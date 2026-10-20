@@ -14,7 +14,7 @@ local SupportPaneMode = AppSplitViewModule.Enums.SupportPaneMode
 local SplitPaneSlot = AppSplitViewModule.Enums.SplitPaneSlot
 local TempRnSwitchNavigatorName = require(Parent.NavigationRodux).Constants.TempRnSwitchNavigatorName
 
-return function(Entry, p1: number) --[[ Line: 34 | Named "useSplitLayoutStatus" ]]
+return function(Entry, p1: number)
 	-- upvalues: SplitPaneStoreModule (copy), SignalsReactModule (copy), ComputeSplitEligibilityModule (copy), ReactModule (copy), SplitPaneContextModule (copy), TempRnSwitchNavigatorName (copy), SplitPaneVariantModule (copy), SupportPaneMode (copy), SplitPaneSlot (copy), ViewState (copy), RoactNavigationModule (copy), FFlagEnableSplitPaneTelemetry (copy), UseInitializeSplitPaneTelemetrySessionModule (copy)
 	local Store = SplitPaneStoreModule.getStore()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(Store.getIsBreakpointEnabled)
@@ -74,7 +74,7 @@ return function(Entry, p1: number) --[[ Line: 34 | Named "useSplitLayoutStatus" 
 			break
 		end
 	end
-	ReactModule.useEffect(function() --[[ Line: 115 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsRouteNameMatch (copy), Store (copy), SplitEligibilityModule (copy), Entry (copy), SplitPaneSlot (upval), RoactNavigationModule (upval)
 		if not IsRouteNameMatch then return end
 		local IsSplitEligible = Store.getIsSplitEligible(false)
@@ -106,7 +106,7 @@ return function(Entry, p1: number) --[[ Line: 34 | Named "useSplitLayoutStatus" 
 			end
 		end
 	end, { IsRouteNameMatch, SplitEligibilityModule, Entry, Store })
-	ReactModule.useEffect(function() --[[ Line: 152 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Flag1 (copy), IsRouteNameMatch (copy), Store (copy), Entry (copy), ViewState (upval), SplitPaneSlot (upval)
 		if Flag1 then return end
 		if IsRouteNameMatch then

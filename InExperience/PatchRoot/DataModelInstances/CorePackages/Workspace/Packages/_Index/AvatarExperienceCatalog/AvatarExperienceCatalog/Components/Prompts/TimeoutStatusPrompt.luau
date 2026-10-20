@@ -18,17 +18,17 @@ local Text = FoundationModule.Text
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local InputSize = FoundationModule.Enums.InputSize
 
-return function() --[[ Line: 31 | Named "TimeoutStatusPrompt" ]]
+return function()
 	-- upvalues: UseNavigationFunction (copy), GetTimeoutStatusStoreFunction (copy), UseSignalStateFunction (copy), ReactModule (copy), SendAXCounterV2Function (copy), ConstantsModule (copy), RoactNavigationModule (copy), LabelAbuseTypeMapping (copy), UseLocalizationFunction (copy), FormatTimeoutEndTimeFunction (copy), AXPartialPageModal (copy), ButtonVariant (copy), InputSize (copy), View (copy), Text (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseSignalStateResult = UseSignalStateFunction(GetTimeoutStatusStoreFunction().getTimeoutDetails)
-	ReactModule.useEffect(function() --[[ Line: 36 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SendAXCounterV2Function (upval), ConstantsModule (upval), UseSignalStateResult (copy)
 		SendAXCounterV2Function(ConstantsModule.COUNTERS.TimeoutStatusPromptShown, {
 			labelTranslationKey = if UseSignalStateResult then UseSignalStateResult.labelTranslationKey else ""
 		})
 	end, {})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 42 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy), RoactNavigationModule (upval)
 		UseNavigationResult.dispatch(RoactNavigationModule.Actions.back(nil))
 	end, { UseNavigationResult })

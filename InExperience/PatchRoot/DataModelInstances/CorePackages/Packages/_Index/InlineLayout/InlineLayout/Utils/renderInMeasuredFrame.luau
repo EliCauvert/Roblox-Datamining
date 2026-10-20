@@ -1,6 +1,6 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("Utils").Parent.Parent.React)
 
-return function(Element, XOffset, LayoutOrder) --[[ Line: 8 | Named "renderInMeasuredFrame" ]]
+return function(Element, XOffset, LayoutOrder)
 	-- upvalues: ReactModule (copy)
 	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

@@ -15,7 +15,7 @@ PreloadAssetFunction("pictograms/collaborators")
 PreloadAssetFunction("pictograms/alert")
 local GiftStateEnumModule = require(script.Parent.GiftStateEnum)
 
-return ReactModule.memo(function(p1) --[[ Line: 37 | Named "GiftStateView" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), GiftStateEnumModule (copy), Assets (copy), ReactModule (copy), View (copy), Loading (copy), Image (copy), Text (copy), Button (copy), ButtonVariant (copy)
 	local HasOnRetry: boolean = p1.retryLabel ~= nil and p1.onRetry ~= nil
 	local UseTokensResult = UseTokensFunction()

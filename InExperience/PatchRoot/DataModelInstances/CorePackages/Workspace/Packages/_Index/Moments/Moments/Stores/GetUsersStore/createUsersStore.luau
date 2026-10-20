@@ -4,7 +4,7 @@ local CryoModule = require(Parent.Cryo)
 local CreateSignalFunction = SignalsModule.createSignal
 local CreateComputedFunction = SignalsModule.createComputed
 
-return function() --[[ Line: 31 | Named "createUsersStore" ]]
+return function()
 	-- upvalues: CreateSignalFunction (copy), CreateComputedFunction (copy), CryoModule (copy)
 	local Signal, Signal2 = CreateSignalFunction({})
 	local t = {}
@@ -12,17 +12,17 @@ return function() --[[ Line: 31 | Named "createUsersStore" ]]
 	
 	return {
 		getUsersByUserId = Signal,
-		getUserProfile = function(Key) --[[ Line: 37 ]]
+		getUserProfile = function(Key)
 			-- upvalues: t (copy), CreateComputedFunction (upval), Signal (copy), t1 (copy)
 			if t[Key] == nil then
-				t[Key] = CreateComputedFunction(function(p1) --[[ Line: 39 ]]
+				t[Key] = CreateComputedFunction(function(p1)
 					-- upvalues: Signal (upval), Key (copy), t1 (upval)
 					return Signal(p1)[Key] or t1
 				end)
 			end
 			return t[Key]
 		end,
-		updateUsername = function(p1, Username) --[[ Line: 46 ]]
+		updateUsername = function(p1, Username)
 			-- upvalues: Signal (copy), Signal2 (copy), CryoModule (upval)
 			local Text = tostring(p1)
 			local SignalResult = Signal(false)
@@ -30,7 +30,7 @@ return function() --[[ Line: 31 | Named "createUsersStore" ]]
 				[Text] = CryoModule.Dictionary.union(SignalResult[Text] or {}, { username = Username })
 			})))
 		end,
-		updateAvatar = function(p1, AvatarThumbnailUri) --[[ Line: 57 ]]
+		updateAvatar = function(p1, AvatarThumbnailUri)
 			-- upvalues: Signal (copy), Signal2 (copy), CryoModule (upval)
 			local Text = tostring(p1)
 			local SignalResult = Signal(false)
@@ -38,7 +38,7 @@ return function() --[[ Line: 31 | Named "createUsersStore" ]]
 				[Text] = CryoModule.Dictionary.union(SignalResult[Text] or {}, { avatarThumbnailUri = AvatarThumbnailUri })
 			})))
 		end,
-		updateMomentsCount = function(p1, MomentsCount) --[[ Line: 68 ]]
+		updateMomentsCount = function(p1, MomentsCount)
 			-- upvalues: Signal (copy), Signal2 (copy), CryoModule (upval)
 			local Text = tostring(p1)
 			local SignalResult = Signal(false)
@@ -46,7 +46,7 @@ return function() --[[ Line: 31 | Named "createUsersStore" ]]
 				[Text] = CryoModule.Dictionary.union(SignalResult[Text] or {}, { momentsCount = MomentsCount })
 			})))
 		end,
-		invalidateMomentsCount = function(p1) --[[ Line: 79 ]]
+		invalidateMomentsCount = function(p1)
 			-- upvalues: Signal (copy), Signal2 (copy), CryoModule (upval)
 			local Text = tostring(p1)
 			local SignalResult = Signal(false)
@@ -60,7 +60,7 @@ return function() --[[ Line: 31 | Named "createUsersStore" ]]
 				return
 			end
 		end,
-		updateUserInfo = function(p1, DisplayName, HasVerifiedBadge) --[[ Line: 93 ]]
+		updateUserInfo = function(p1, DisplayName, HasVerifiedBadge)
 			-- upvalues: Signal (copy), Signal2 (copy), CryoModule (upval)
 			local Text = tostring(p1)
 			local SignalResult = Signal(false)

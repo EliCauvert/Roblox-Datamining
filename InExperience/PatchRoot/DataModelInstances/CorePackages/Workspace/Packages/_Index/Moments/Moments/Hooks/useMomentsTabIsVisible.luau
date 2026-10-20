@@ -11,7 +11,7 @@ local ReactModule = require(Parent.React)
 local GetLegacyNavigationStore = if FFlagSignalsNavP3hMisc then NavigationRoduxModule.GetLegacyNavigationStore else nil
 local IsNavigationAvailable = if FFlagSignalsNavP3hMisc then require(Parent.RobloxAppNavigation).isNavigationAvailable else nil
 
-local function routeContainsMoments(SelectCurrentLegacyRouteResult): boolean --[[ Line: 35 ]]
+local function routeContainsMoments(SelectCurrentLegacyRouteResult): boolean
 	-- upvalues: AppPage (copy)
 	if type(SelectCurrentLegacyRouteResult) ~= "table" then
 		return false
@@ -24,18 +24,18 @@ local function routeContainsMoments(SelectCurrentLegacyRouteResult): boolean --[
 	return false
 end
 
-return function() --[[ Line: 47 | Named "useMomentsTabIsVisible" ]]
+return function()
 	-- upvalues: FFlagSignalsNavP3hMisc (copy), GetLegacyNavigationStore (copy), ReactModule (copy), AppPage (copy), UseSignalStateFunction (copy), IsNavigationAvailable (copy), UseSelectorFunction (copy), FFlagUseNavigationSelectors (copy), routeContainsMoments (copy), Selectors (copy)
 	if FFlagSignalsNavP3hMisc then
 		local LegacyNavigationStore = GetLegacyNavigationStore(false)
-		local UseSignalStateResult = UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 50 ]]
+		local UseSignalStateResult = UseSignalStateFunction((ReactModule.useMemo(function()
 			-- upvalues: LegacyNavigationStore (copy), AppPage (upval)
 			return LegacyNavigationStore.getRouteContainsPageSignal(AppPage.Moments)
 		end, {})))
 		
 		return not IsNavigationAvailable() or UseSignalStateResult
 	else
-		return UseSelectorFunction(function(p1) --[[ Line: 60 ]]
+		return UseSelectorFunction(function(p1)
 			-- upvalues: FFlagUseNavigationSelectors (upval), routeContainsMoments (upval), Selectors (upval)
 			if not p1.Navigation then
 				return true

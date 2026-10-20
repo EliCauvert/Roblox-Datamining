@@ -17,7 +17,7 @@ local MomentsGetMomentsCommentsStoreModule = if SharedFlagsModule.FFlagMomentsCo
 local CreateSignalFunction = SignalsModule.createSignal
 local CreateComputedFunction = SignalsModule.createComputed
 
-return function(p1, p2) --[[ Line: 168 | Named "createMomentStore" ]]
+return function(p1, p2)
 	-- upvalues: CreateSignalFunction (copy), GetReactionsStoreModule (copy), GetShareCountsStoreModule (copy), MomentsGetMomentsCommentsStoreModule (copy), CreateComputedFunction (copy), FFlagMomentsHideZeroCommentCountModule (copy), FFlagMomentsOptimisticProfilePending (copy), FFlagMomentsReactToFeedItemV2Module (copy), ReactionActionModule (copy)
 	local Signal = CreateSignalFunction(p1)
 	local MomentId = p1.momentId
@@ -30,7 +30,7 @@ return function(p1, p2) --[[ Line: 168 | Named "createMomentStore" ]]
 	
 	if MomentsGetMomentsCommentsStoreModuleResult ~= nil and p1.kind == "experience" and FeedItemId ~= nil and FeedItemId ~= "" then
 		local DataFunction = MomentsGetMomentsCommentsStoreModuleResult.getCachedMomentComments(FeedItemId).data
-		Signal1 = CreateComputedFunction(function(p3) --[[ Line: 195 ]]
+		Signal1 = CreateComputedFunction(function(p3)
 			-- upvalues: DataFunction (copy), Signal1 (copy)
 			local DataResult = DataFunction(p3)
 			
@@ -38,7 +38,7 @@ return function(p1, p2) --[[ Line: 168 | Named "createMomentStore" ]]
 		end)
 	end
 	if FFlagMomentsHideZeroCommentCountModule then
-		Signal1 = CreateComputedFunction(function(p3) --[[ Line: 207 ]]
+		Signal1 = CreateComputedFunction(function(p3)
 			-- upvalues: Signal1 (copy)
 			local SignalResult: number = Signal1(p3)
 			
@@ -47,12 +47,12 @@ return function(p1, p2) --[[ Line: 168 | Named "createMomentStore" ]]
 	end
 	local Signal3, Signal2_1 = CreateSignalFunction(p1.isModerated == true)
 	local UserReactionForMoment = ReactionsStoreModule.getUserReactionForMoment(MomentId)
-	local Computed = CreateComputedFunction(function(p3): boolean --[[ Line: 220 ]]
+	local Computed = CreateComputedFunction(function(p3): boolean
 		-- upvalues: UserReactionForMoment (copy)
 		return UserReactionForMoment(p3) ~= nil
 	end)
 	local TotalReactionCountForMoment = ReactionsStoreModule.getTotalReactionCountForMoment(MomentId)
-	local Computed1 = CreateComputedFunction(function(p3) --[[ Line: 224 ]]
+	local Computed1 = CreateComputedFunction(function(p3)
 		-- upvalues: TotalReactionCountForMoment (copy)
 		local TalReactionCountForMoment: number = TotalReactionCountForMoment(p3)
 		
@@ -60,19 +60,19 @@ return function(p1, p2) --[[ Line: 168 | Named "createMomentStore" ]]
 	end)
 	local IndividualReactionCountsForMoment = ReactionsStoreModule.getIndividualReactionCountsForMoment(MomentId)
 	local ShareInfo = ShareCountsStoreModule.getShareInfo(MomentId)
-	local Computed2 = CreateComputedFunction(function(p3) --[[ Line: 234 ]]
+	local Computed2 = CreateComputedFunction(function(p3)
 		-- upvalues: ShareInfo (copy)
 		local ShareCount: number = ShareInfo(p3).shareCount
 		
 		return if ShareCount > 0 then ShareCount else nil
 	end)
 	
-	local function setShareCount(p3) --[[ Line: 238 ]]
+	local function setShareCount(p3)
 		-- upvalues: ShareInfo (copy), ShareCountsStoreModule (copy), MomentId (copy)
 		ShareCountsStoreModule.setShareCount(MomentId, p3 or 0, ShareInfo(false).hasShared)
 	end
 	
-	local function commitReaction(ReactionType) --[[ Line: 245 ]]
+	local function commitReaction(ReactionType)
 		-- upvalues: FFlagMomentsOptimisticProfilePending (upval), p1 (copy), ReactionsStoreModule (copy), MomentId (copy)
 		if FFlagMomentsOptimisticProfilePending and p1.isPending then return end
 		local ReactToFeedItemResult = ReactionsStoreModule.reactToFeedItem({
@@ -84,11 +84,11 @@ return function(p1, p2) --[[ Line: 168 | Named "createMomentStore" ]]
 		})
 		
 		if type(ReactToFeedItemResult) == "table" and ReactToFeedItemResult.catch ~= nil then
-			ReactToFeedItemResult:catch(function() --[[ Line: 263 ]] end)
+			ReactToFeedItemResult:catch(function() end)
 		end
 	end
 	
-	local function clearReaction() --[[ Line: 266 ]]
+	local function clearReaction()
 		-- upvalues: FFlagMomentsOptimisticProfilePending (upval), p1 (copy), FFlagMomentsReactToFeedItemV2Module (upval), UserReactionForMoment (copy), ReactionsStoreModule (copy), MomentId (copy), ReactionActionModule (upval)
 		if FFlagMomentsOptimisticProfilePending and p1.isPending then return end
 		if FFlagMomentsReactToFeedItemV2Module then
@@ -104,7 +104,7 @@ return function(p1, p2) --[[ Line: 168 | Named "createMomentStore" ]]
 				})
 				
 				if type(RemoveFeedItemReactionResult) == "table" and RemoveFeedItemReactionResult.catch ~= nil then
-					RemoveFeedItemReactionResult:catch(function() --[[ Line: 281 ]] end)
+					RemoveFeedItemReactionResult:catch(function() end)
 				end
 				return
 			end
@@ -116,7 +116,7 @@ return function(p1, p2) --[[ Line: 168 | Named "createMomentStore" ]]
 	end
 	
 	local Signal4, Signal2_2 = CreateSignalFunction(nil)
-	local Computed3 = CreateComputedFunction(function(p3): boolean --[[ Line: 293 ]]
+	local Computed3 = CreateComputedFunction(function(p3): boolean
 		-- upvalues: Signal4 (copy)
 		return Signal4(p3) ~= nil
 	end)

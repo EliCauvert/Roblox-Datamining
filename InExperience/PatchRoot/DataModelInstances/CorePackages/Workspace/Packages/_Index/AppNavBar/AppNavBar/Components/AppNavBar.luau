@@ -29,7 +29,7 @@ local FFlagEnableNavRailTooltipAndTruncation = require(Parent1.SharedFlags).FFla
 local AppNavBarGateFooterVisibleOnPlacement = game:DefineFastFlag("AppNavBarGateFooterVisibleOnPlacement", false)
 local AppNavBarFooterVisibleWithoutScrollAway = game:DefineFastFlag("AppNavBarFooterVisibleWithoutScrollAway", false)
 
-local function _(p1, p2, p3, p4) --[[ Line: 62 | Named "addItems" ]]
+local function _(p1, p2, p3, p4)
 	-- upvalues: CryoModule (copy)
 	return CryoModule.List.join(p1, p3, p2), p4 + #p1
 end
@@ -40,16 +40,16 @@ local config = {
 	clipsDescendants = true
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 79 | Named "AppNavBar" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), FFlagEnableNavRailTooltipAndTruncation (copy), UseTokensFunction (copy), UseAppPolicyFunction (copy), UseRoactServiceFunction (copy), RoactServiceTagsModule (copy), ReactModule (copy), StudioCTAIconModule (copy), WebViewRedesignEnabledEngineFeature (copy), ConstantsModule (copy), FFlagEnableFlyoutOnNavRail (copy), AppNavItemModule (copy), FFlagShrinkAppNavBar (copy), PopoverSide (copy), PopoverAlign (copy), GetScrollAwayEnabledModule (copy), AppNavBarFooterVisibleWithoutScrollAway (copy), VisibilityControlModule (copy), AppNavBarGateFooterVisibleOnPlacement (copy), PlacementModule (copy), AppNavTelemetryModule (copy), NavigationBar (copy), NavigationBarAlignment (copy), NavigationRailV2 (copy), NavigationRailAlignment (copy), FFlagAddGamepadBumperNavigation (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseTokensResult = if FFlagEnableNavRailTooltipAndTruncation then UseTokensFunction() else nil
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 85 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2)
 		return p2.getShowStudioCTA()
 	end)
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactServiceTagsModule.AppEventIngestService)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(RoactServiceTagsModule.AppLinking)
-	local UseResult = ReactModule.useCallback(function(_, ControlState) --[[ Line: 90 ]]
+	local UseResult = ReactModule.useCallback(function(_, ControlState)
 		-- upvalues: ReactModule (upval), StudioCTAIconModule (upval), WebViewRedesignEnabledEngineFeature (upval), p1 (copy)
 		return ReactModule.createElement(StudioCTAIconModule, {
 			controlState = ControlState,
@@ -58,7 +58,7 @@ return ReactModule.memo(function(p1) --[[ Line: 79 | Named "AppNavBar" ]]
 	end, {
 		if WebViewRedesignEnabledEngineFeature then p1.showTooltip else nil
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 96 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRoactServiceResult (copy), ConstantsModule (upval), JoinResult (copy), UseRoactServiceResult1 (copy)
 		UseRoactServiceResult:setRBXEventStream(ConstantsModule.STUDIO_CTA_EVENT_CONTEXT, ConstantsModule.STUDIO_CTA_EVENT_NAME_OPEN)
 		UseRoactServiceResult1:openURL((JoinResult.buildCreatorWebNavUrl({ utm_content = "side_bar_blue_icon" })))
@@ -100,7 +100,7 @@ return ReactModule.memo(function(p1) --[[ Line: 79 | Named "AppNavBar" ]]
 		end
 	end
 	local Element = nil
-	local UseResult2 = ReactModule.useCallback(function(Item, IsChecked) --[[ Line: 138 ]]
+	local UseResult2 = ReactModule.useCallback(function(Item, IsChecked)
 		-- upvalues: ReactModule (upval), AppNavItemModule (upval), FFlagShrinkAppNavBar (upval), JoinResult (copy), FFlagEnableNavRailTooltipAndTruncation (upval)
 		return ReactModule.createElement(AppNavItemModule, {
 			isCenterPositioned = true,
@@ -112,7 +112,7 @@ return ReactModule.memo(function(p1) --[[ Line: 79 | Named "AppNavBar" ]]
 			enableTooltip = not FFlagEnableNavRailTooltipAndTruncation and nil
 		})
 	end, { JoinResult.systemBarLabelTextSizeBinding })
-	local UseResult3 = ReactModule.useCallback(function(Item, IsChecked) --[[ Line: 150 ]]
+	local UseResult3 = ReactModule.useCallback(function(Item, IsChecked)
 		-- upvalues: ReactModule (upval), AppNavItemModule (upval), FFlagShrinkAppNavBar (upval), JoinResult (copy), FFlagEnableNavRailTooltipAndTruncation (upval), PopoverSide (upval), PopoverAlign (upval)
 		return ReactModule.createElement(AppNavItemModule, {
 			isCenterPositioned = false,
@@ -130,7 +130,7 @@ return ReactModule.memo(function(p1) --[[ Line: 79 | Named "AppNavBar" ]]
 	
 	if GetScrollAwayEnabledModule() or AppNavBarFooterVisibleWithoutScrollAway then
 		FooterBinding = VisibilityControlModule.getFooterBinding()
-		ReactModule.useEffect(function() --[[ Line: 168 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: AppNavBarGateFooterVisibleOnPlacement (upval), JoinResult (copy), PlacementModule (upval), VisibilityControlModule (upval)
 			VisibilityControlModule.setFooterVisible(if AppNavBarGateFooterVisibleOnPlacement then JoinResult.isVisible and JoinResult.placement == PlacementModule.Bottom else JoinResult.isVisible)
 		end, {
@@ -138,7 +138,7 @@ return ReactModule.memo(function(p1) --[[ Line: 79 | Named "AppNavBar" ]]
 			if AppNavBarGateFooterVisibleOnPlacement then JoinResult.placement else nil
 		})
 	end
-	ReactModule.useEffect(function() --[[ Line: 178 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagEnableFlyoutOnNavRail (upval), Items (ref), SelectedIndex (ref), JoinResult (copy), AppNavTelemetryModule (upval)
 		local Item = if FFlagEnableFlyoutOnNavRail then Items[SelectedIndex] else JoinResult.items[JoinResult.selectedIndex]
 		
@@ -146,11 +146,11 @@ return ReactModule.memo(function(p1) --[[ Line: 79 | Named "AppNavBar" ]]
 			AppNavTelemetryModule.logSwitchTabEnd(Item.page)
 		end
 	end, if FFlagEnableFlyoutOnNavRail then { Items, SelectedIndex } else { JoinResult.items, JoinResult.selectedIndex })
-	ReactModule.useEffect(function() --[[ Line: 199 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: AppNavTelemetryModule (upval), JoinResult (copy)
 		AppNavTelemetryModule.logVisibilityEnd(JoinResult.isVisible)
 	end, { JoinResult.isVisible })
-	ReactModule.useEffect(function() --[[ Line: 202 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: AppNavTelemetryModule (upval), JoinResult (copy)
 		AppNavTelemetryModule.logPlacement(JoinResult.placement)
 	end, { JoinResult.placement })

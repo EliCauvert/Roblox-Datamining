@@ -2,7 +2,7 @@
 local AddUserModule = require(script.Parent.addUser)
 local RemoveUserModule = require(script.Parent.removeUser)
 
-function difference(List, List1) --[[ Line: 8 ]]
+function difference(List, List1)
 	local t = {}
 	
 	for _, value in pairs(List) do
@@ -23,11 +23,11 @@ function difference(List, List1) --[[ Line: 8 ]]
 	return t1
 end
 
-return function(JoinResult, p1) --[[ Line: 33 ]]
+return function(JoinResult, p1)
 	-- upvalues: LlamaModule (copy), AddUserModule (copy), RemoveUserModule (copy)
 	local Text = tostring(p1.namedIds.users)
 	local JoinResultEntry = JoinResult[Text] or {}
-	local MapResult = LlamaModule.List.map(LlamaModule.Dictionary.values(p1.responseBody.data), function(p2): string --[[ Line: 37 ]]
+	local MapResult = LlamaModule.List.map(LlamaModule.Dictionary.values(p1.responseBody.data), function(p2): string
 		return (tostring(p2.id))
 	end)
 	local DifferenceResult = difference(JoinResultEntry, MapResult)

@@ -8,7 +8,7 @@ local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTra
 local FFlagFixEmotesMenuAvailabilityModule = require(Parent.Flags.FFlagFixEmotesMenuAvailability)
 local WheelText = RoactModule.PureComponent:extend("WheelText")
 
-function WheelText.getWheelText(p1) --[[ Line: 16 ]]
+function WheelText.getWheelText(p1)
 	-- upvalues: StarterPlayer (copy), FFlagFixEmotesMenuAvailabilityModule (copy), RobloxTranslatorModule (copy), ConstantsModule (copy)
 	local CurrentEmotes = p1.props.emotesPage.currentEmotes
 	local Locale = p1.props.locale
@@ -23,7 +23,7 @@ function WheelText.getWheelText(p1) --[[ Line: 16 ]]
 	end
 end
 
-function WheelText.render(p1) --[[ Line: 39 ]]
+function WheelText.render(p1)
 	-- upvalues: ConstantsModule (copy), RoactModule (copy)
 	local Layout = ConstantsModule.Layouts[p1.props.layout]
 	
@@ -43,7 +43,7 @@ function WheelText.render(p1) --[[ Line: 39 ]]
 	})
 end
 
-return RoactRoduxModule.connect(function(p1) --[[ Line: 66 | Named "mapStateToProps" ]]
+return RoactRoduxModule.connect(function(p1)
 	return {
 		emotesWheel = p1.emotesWheel,
 		emotesPage = p1.emotesPage,

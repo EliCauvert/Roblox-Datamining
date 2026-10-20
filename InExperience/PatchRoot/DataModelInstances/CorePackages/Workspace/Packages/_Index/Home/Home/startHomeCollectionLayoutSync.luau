@@ -6,11 +6,11 @@ local DisplayModule = require(Parent.Display)
 local MeasureHomeCollectionLayoutModule = require(Home.measureHomeCollectionLayout)
 local WriteHomePageSduiCollectionLayoutModule = require(Home.writeHomePageSduiCollectionLayout)
 
-return function() --[[ Line: 16 | Named "startHomeCollectionLayoutSync" ]]
+return function()
 	-- upvalues: CollectionViewsModule (copy), DisplayModule (copy), SignalsModule (copy), MeasureHomeCollectionLayoutModule (copy), WriteHomePageSduiCollectionLayoutModule (copy)
 	local MainCollectionLayoutStore = CollectionViewsModule.getMainCollectionLayoutStore(false)
 	local DisplayStore = DisplayModule.GetDisplayStore(false)
-	local Computed = SignalsModule.createComputed(function(p1) --[[ Line: 22 ]]
+	local Computed = SignalsModule.createComputed(function(p1)
 		-- upvalues: MainCollectionLayoutStore (copy), DisplayStore (copy), MeasureHomeCollectionLayoutModule (upval)
 		MainCollectionLayoutStore.getContainerWidth(p1)
 		MainCollectionLayoutStore.getIsContainerMeasured(p1)
@@ -22,14 +22,14 @@ return function() --[[ Line: 16 | Named "startHomeCollectionLayoutSync" ]]
 	end)
 	local Flag = false
 	
-	return SignalsModule.createEffect(function(p1) --[[ Line: 32 ]]
+	return SignalsModule.createEffect(function(p1)
 		-- upvalues: Computed (copy), MainCollectionLayoutStore (copy), Flag (ref), MeasureHomeCollectionLayoutModule (upval), WriteHomePageSduiCollectionLayoutModule (upval)
 		local ComputedResult = Computed(p1)
 		MainCollectionLayoutStore.getNumItemsForAllCategories(p1)
 		
 		if ComputedResult ~= nil and not Flag then
 			Flag = true
-			task.delay(1, function() --[[ Line: 41 ]]
+			task.delay(1, function()
 				-- upvalues: Flag (upval), MeasureHomeCollectionLayoutModule (upval), WriteHomePageSduiCollectionLayoutModule (upval)
 				Flag = false
 				local MeasureHomeCollectionLayoutModuleResult = MeasureHomeCollectionLayoutModule()

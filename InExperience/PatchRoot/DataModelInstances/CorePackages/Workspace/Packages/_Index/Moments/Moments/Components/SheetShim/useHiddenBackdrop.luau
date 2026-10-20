@@ -1,9 +1,9 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("Moments").Parent.React)
 local _ = require(script.Parent.getSheetStructure)
 
-return function(p1, p2) --[[ Line: 12 | Named "useHiddenBackdrop" ]]
+return function(p1, p2)
 	-- upvalues: ReactModule (copy)
-	ReactModule.useLayoutEffect(function() --[[ Line: 13 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: p1 (copy), p2 (copy)
 		local Backdrop = if p1 == nil or not p2 then nil else p1.backdrop
 		
@@ -14,7 +14,7 @@ return function(p1, p2) --[[ Line: 12 | Named "useHiddenBackdrop" ]]
 			Gradient.Transparency = NumberSequence.new(1)
 			Gradient.Parent = Backdrop
 			
-			return function() --[[ Line: 22 ]]
+			return function()
 				-- upvalues: Gradient (copy)
 				Gradient:Destroy()
 			end

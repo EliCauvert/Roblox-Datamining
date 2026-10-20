@@ -3,14 +3,14 @@ local EventTypes = SocialLuaAnalyticsModule.Analytics.Enums.EventTypes
 local EventNamesModule = require(script.Parent.EventNames)
 local BtnValuesModule = require(script.Parent.BtnValues)
 
-local function ProfileUserId(p1) --[[ Line: 10 ]]
+local function ProfileUserId(p1)
 	return p1
 end
 
 local PlayerProfile = SocialLuaAnalyticsModule.Analytics.Enums.Contexts.PlayerProfile
 local PeekView = SocialLuaAnalyticsModule.Analytics.Enums.SubPages.PeekView
 
-return function(p1) --[[ Line: 17 ]]
+return function(p1)
 	-- upvalues: PlayerProfile (copy), PeekView (copy), EventNamesModule (copy), EventTypes (copy), BtnValuesModule (copy), ProfileUserId (copy)
 	local Context = p1 and p1.context or PlayerProfile
 	local Subpage = p1 and p1.subpage or PeekView

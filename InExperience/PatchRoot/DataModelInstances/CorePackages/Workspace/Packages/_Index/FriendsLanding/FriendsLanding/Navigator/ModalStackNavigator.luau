@@ -12,9 +12,9 @@ local _ = require(FriendsLanding.Parent.React)
 local FriendsLandingContextModule = require(FriendsLanding.FriendsLandingContext)
 local ProfileQRCodePageWrapperModule = require(FriendsLanding.Navigator.ProfileQRCodePageWrapper)
 
-Roact.PureComponent:extend("DiscoverabilityWrapped").render = function(p1) --[[ Line: 18 | Named "render" ]]
+Roact.PureComponent:extend("DiscoverabilityWrapped").render = function(p1)
 	-- upvalues: FriendsLandingContextModule (copy), Roact (copy), DiscoverabilityOverlay (copy)
-	return FriendsLandingContextModule.with(function(Context) --[[ Line: 19 ]]
+	return FriendsLandingContextModule.with(function(Context)
 		-- upvalues: Roact (upval), DiscoverabilityOverlay (upval), p1 (copy)
 		return Roact.createElement(DiscoverabilityOverlay, { navigation = p1.props.navigation, context = Context })
 	end)

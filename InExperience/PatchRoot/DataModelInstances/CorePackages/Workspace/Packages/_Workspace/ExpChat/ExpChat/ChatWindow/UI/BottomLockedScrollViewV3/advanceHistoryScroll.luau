@@ -1,4 +1,4 @@
-﻿return function(p1, CanvasHeight, HistoricalCount) --[[ Line: 7 | Named "advanceHistoryScroll" ]]
+﻿return function(p1, CanvasHeight, HistoricalCount)
 	local CanvasHeight1 = p1.canvasHeight
 	local CanvasHeightDelta = if CanvasHeight1 then CanvasHeight - CanvasHeight1 else 0
 	p1.canvasHeight = CanvasHeight

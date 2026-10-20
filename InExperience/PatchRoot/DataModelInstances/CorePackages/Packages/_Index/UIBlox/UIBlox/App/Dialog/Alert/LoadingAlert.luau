@@ -21,9 +21,9 @@ LoadingAlert.validateProps = TModule.strictInterface({
 	title = TModule.string
 })
 
-function LoadingAlert.init(p1) --[[ Line: 45 ]]
+function LoadingAlert.init(p1)
 	-- upvalues: RoactModule (copy), Loading (copy), IconSize (copy)
-	function p1.renderMiddleContent() --[[ Line: 46 ]]
+	function p1.renderMiddleContent()
 		-- upvalues: RoactModule (upval), Loading (upval), IconSize (upval)
 		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -38,9 +38,9 @@ function LoadingAlert.init(p1) --[[ Line: 45 ]]
 	end
 end
 
-function LoadingAlert.render(p1) --[[ Line: 60 ]]
+function LoadingAlert.render(p1)
 	-- upvalues: WithStyleModule (copy), RoactModule (copy), AlertModule (copy), AlertTypeModule (copy), FitFrameOnAxis (copy), ImageSetComponentModule (copy)
-	return WithStyleModule(function(p2) --[[ Line: 61 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: RoactModule (upval), AlertModule (upval), p1 (copy), AlertTypeModule (upval), FitFrameOnAxis (upval), ImageSetComponentModule (upval)
 		local Theme = p2.Theme
 		
@@ -55,7 +55,7 @@ function LoadingAlert.render(p1) --[[ Line: 60 ]]
 			position = p1.props.position,
 			screenSize = p1.props.screenSize,
 			title = p1.props.title,
-			titleContent = p1.props.titleIcon and function() --[[ Line: 81 ]]
+			titleContent = p1.props.titleIcon and function()
 				-- upvalues: RoactModule (upval), FitFrameOnAxis (upval), ImageSetComponentModule (upval), p1 (upval), Theme (copy)
 				return RoactModule.createElement(FitFrameOnAxis, {
 					BackgroundTransparency = 1,

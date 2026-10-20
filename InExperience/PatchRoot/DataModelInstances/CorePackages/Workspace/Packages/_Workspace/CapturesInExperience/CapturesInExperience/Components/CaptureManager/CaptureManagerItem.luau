@@ -22,7 +22,7 @@ local _ = require(Parent.Types)
 local FFlagUseRbxstorageInGalleryModule = require(Parent.Flags.FFlagUseRbxstorageInGallery)
 local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 
-return function(p1) --[[ Line: 43 ]]
+return function(p1)
 	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), ReactModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), EventNamesModule (copy), SelectCaptureModule (copy), GetCropSizeFunction (copy), CryoModule (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), FFlagUseRbxstorageInGalleryModule (copy), GetContentFromObjectFunction (copy), Checkbox (copy), Images (copy), Text (copy), GetFormatTimeModule (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
@@ -30,29 +30,29 @@ return function(p1) --[[ Line: 43 ]]
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Vector2.new(0, 0))
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(UDim2.fromScale(1, 1))
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 51 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
 		return p2[ConstantsModule.RoduxKey].CaptureManager.SelectedCaptures
 	end)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 55 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_3 (copy), UseStateResult4 (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval), UseDispatchResult (copy), SelectCaptureModule (upval), p1 (copy)
 		UseStateResult2_3(not UseStateResult4)
 		UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesManagerItemActivated)
 		UseDispatchResult(SelectCaptureModule(p1.capture))
 	end, { UseStateResult4, p1.capture })
-	local UseResult1 = ReactModule.useCallback(function(Frame) --[[ Line: 61 ]]
+	local UseResult1 = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(Frame.AbsoluteSize)
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 65 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(p2.Resolution)
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 70 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2_2 (copy), GetCropSizeFunction (upval), UseStateResult (copy), UseStateResult1 (copy)
 		UseStateResult2_2(GetCropSizeFunction(UseStateResult, UseStateResult1))
 	end, { UseStateResult, UseStateResult1 })
-	ReactModule.useEffect(function() --[[ Line: 74 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2_3 (copy), CryoModule (upval), UseSelectorResult (copy), p1 (copy)
 		UseStateResult2_3(CryoModule.List.find(UseSelectorResult, p1.capture) ~= nil)
 	end, { UseSelectorResult, p1.capture })

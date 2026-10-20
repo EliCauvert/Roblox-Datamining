@@ -62,21 +62,21 @@ local Actions = {
 	{
 		id = "search",
 		icon = Icon.MagnifyingGlass,
-		onActivated = function() --[[ Line: 168 ]] end
+		onActivated = function() end
 	},
 	{
 		id = "robux",
 		icon = Icon.Robux,
-		onActivated = function() --[[ Line: 173 ]] end
+		onActivated = function() end
 	},
 	{
 		id = "notifications",
 		icon = Icon.Bell,
-		onActivated = function() --[[ Line: 178 ]] end
+		onActivated = function() end
 	}
 }
 
-local function slotChip(Text, XOffset, LayoutOrder, IsIsSubject) --[[ Line: 198 ]]
+local function slotChip(Text, XOffset, LayoutOrder, IsIsSubject)
 	-- upvalues: ReactModule (copy), ViewModule (copy), TextModule (copy)
 	local RowAlignXCenterAlignYCenterPaddingSmallRadiusMediumBgActionEmphasis: string = if IsIsSubject then "row align-x-center align-y-center padding-small radius-medium bg-action-emphasis" else "row align-x-center align-y-center padding-small radius-medium bg-shift-200"
 	
@@ -93,7 +93,7 @@ local function slotChip(Text, XOffset, LayoutOrder, IsIsSubject) --[[ Line: 198 
 	})
 end
 
-local function slotPlaceholders(p1, p2, p3, p4, p5) --[[ Line: 216 ]]
+local function slotPlaceholders(p1, p2, p3, p4, p5)
 	-- upvalues: ReactModule (copy), ViewModule (copy), slotChip (copy)
 	local P9 = p5 or {}
 	local ChildCount = P9.childCount or 1
@@ -121,27 +121,27 @@ local function slotPlaceholders(p1, p2, p3, p4, p5) --[[ Line: 216 ]]
 	return t
 end
 
-local function leadingSlot(Leading) --[[ Line: 253 ]]
+local function leadingSlot(Leading)
 	-- upvalues: ReactModule (copy), HeaderBarModule (copy)
 	return ReactModule.createElement(HeaderBarModule.Leading, nil, Leading)
 end
 
-local function contentSlot(Content) --[[ Line: 257 ]]
+local function contentSlot(Content)
 	-- upvalues: ReactModule (copy), HeaderBarModule (copy)
 	return ReactModule.createElement(HeaderBarModule.Content, nil, Content)
 end
 
-local function trailingSlot(Elements) --[[ Line: 261 ]]
+local function trailingSlot(Elements)
 	-- upvalues: ReactModule (copy), HeaderBarModule (copy)
 	return ReactModule.createElement(HeaderBarModule.Trailing, nil, Elements)
 end
 
-local function ForcedBreakpoint(p6) --[[ Line: 277 ]]
+local function ForcedBreakpoint(p6)
 	-- upvalues: UseResponsiveModule (copy), ReactModule (copy), Order (copy), ResponsiveProviderModule (copy)
 	local Config = UseResponsiveModule().config
 	
 	return ReactModule.createElement(ResponsiveProviderModule, {
-		config = ReactModule.useMemo(function() --[[ Line: 283 ]]
+		config = ReactModule.useMemo(function()
 			-- upvalues: Order (upval), p6 (copy), Config (copy)
 			local Widths = {}
 			local Flag = false
@@ -164,7 +164,7 @@ local function ForcedBreakpoint(p6) --[[ Line: 277 ]]
 	}, p6.children)
 end
 
-local function Shell(Frame) --[[ Line: 308 ]]
+local function Shell(Frame)
 	-- upvalues: ReactModule (copy), ViewModule (copy), HeaderBarModule (copy), slotPlaceholders (copy), ForcedBreakpoint (copy), XSmall (copy)
 	return ReactModule.createElement(ForcedBreakpoint, { breakpoint = Frame.breakpoint or XSmall }, (ReactModule.createElement(ViewModule, {
 		tag = "col auto-y stroke-default bg-surface-100",
@@ -179,7 +179,7 @@ local function Shell(Frame) --[[ Line: 308 ]]
 	})))
 end
 
-local function LabeledShell(Frame: Frame) --[[ Line: 331 ]]
+local function LabeledShell(Frame: Frame)
 	-- upvalues: ReactModule (copy), Shell (copy), LabeledCell (copy)
 	local Element = ReactModule.createElement(Shell, {
 		LayoutOrder = if Frame.label then 1 else Frame.LayoutOrder,
@@ -203,18 +203,18 @@ local _UDim = UDim.new(0, 176)
 local _UDim1 = UDim.new(0, 320)
 local _UDim2 = UDim.new(1, 0)
 
-local function noop() --[[ Line: 380 ]] end
+local function noop() end
 
-local function _(p7: number): boolean --[[ Line: 382 | Named "isCompact" ]]
+local function _(p7: number): boolean
 	return p7 <= 360
 end
 
-local _ = function(p7) --[[ Line: 386 | Named "searchWidth" ]]
+local _ = function(p7)
 	-- upvalues: _UDim (copy), _UDim1 (copy)
 	return if p7 then _UDim else _UDim1
 end
 
-local _ = function(LayoutOrder) --[[ Line: 390 | Named "pageTitle" ]]
+local _ = function(LayoutOrder)
 	-- upvalues: ReactModule (copy), TextModule (copy)
 	return ReactModule.createElement(TextModule, {
 		Text = "Page Title",
@@ -223,7 +223,7 @@ local _ = function(LayoutOrder) --[[ Line: 390 | Named "pageTitle" ]]
 	})
 end
 
-local _ = function(Icon, LayoutOrder) --[[ Line: 398 | Named "iconButton" ]]
+local _ = function(Icon, LayoutOrder)
 	-- upvalues: ReactModule (copy), IconButtonModule (copy), noop (copy)
 	return ReactModule.createElement(IconButtonModule, {
 		icon = Icon,
@@ -232,7 +232,7 @@ local _ = function(Icon, LayoutOrder) --[[ Line: 398 | Named "iconButton" ]]
 	})
 end
 
-local _ = function(LayoutOrder) --[[ Line: 406 | Named "accountAvatar" ]]
+local _ = function(LayoutOrder)
 	-- upvalues: ReactModule (copy), AvatarModule (copy), AvatarSizeModule (copy)
 	return ReactModule.createElement(AvatarModule, {
 		userId = 24813339,
@@ -241,7 +241,7 @@ local _ = function(LayoutOrder) --[[ Line: 406 | Named "accountAvatar" ]]
 	})
 end
 
-local function SearchContent(p7) --[[ Line: 414 ]]
+local function SearchContent(p7)
 	-- upvalues: ReactModule (copy), contentSlot (copy), SearchInputModule (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding("")
 	
@@ -255,12 +255,12 @@ local function SearchContent(p7) --[[ Line: 414 ]]
 	})
 end
 
-local _ = function(Width) --[[ Line: 427 | Named "searchContent" ]]
+local _ = function(Width)
 	-- upvalues: ReactModule (copy), SearchContent (copy)
 	return ReactModule.createElement(SearchContent, { width = Width })
 end
 
-local function utilityTrailing(p7) --[[ Line: 431 ]]
+local function utilityTrailing(p7)
 	-- upvalues: trailingSlot (copy), ReactModule (copy), HeaderBarModule (copy), Actions (copy), IconButtonModule (copy), noop (copy), AvatarModule (copy), AvatarSizeModule (copy)
 	if not p7 then
 		return trailingSlot({
@@ -285,7 +285,7 @@ local function utilityTrailing(p7) --[[ Line: 431 ]]
 	return trailingSlot(Elements)
 end
 
-local _ = function(p8) --[[ Line: 449 | Named "searchTrailing" ]]
+local _ = function(p8)
 	-- upvalues: trailingSlot (copy), Icon (copy), ReactModule (copy), IconButtonModule (copy), noop (copy), utilityTrailing (copy)
 	return if p8 then trailingSlot({
 		Filter = ReactModule.createElement(IconButtonModule, {
@@ -296,7 +296,7 @@ local _ = function(p8) --[[ Line: 449 | Named "searchTrailing" ]]
 	}) else utilityTrailing(true)
 end
 
-local function CompositionShell(Frame) --[[ Line: 459 ]]
+local function CompositionShell(Frame)
 	-- upvalues: ReactModule (copy), LabeledShell (copy), BreakpointModule (copy)
 	local IsWidthBelow = Frame.width <= 360
 	
@@ -311,7 +311,7 @@ local function CompositionShell(Frame) --[[ Line: 459 ]]
 	})
 end
 
-local function CompositionGroup(Frame) --[[ Line: 598 ]]
+local function CompositionGroup(Frame)
 	-- upvalues: Widths (copy), ReactModule (copy), ViewModule (copy)
 	local Elements = {}
 	
@@ -352,33 +352,33 @@ return {
 		{
 			id = "close",
 			icon = Icon.X,
-			onActivated = function() --[[ Line: 155 ]] end
+			onActivated = function() end
 		},
 		{
 			id = "back",
 			icon = Icon.ChevronLargeLeft,
-			onActivated = function() --[[ Line: 160 ]] end
+			onActivated = function() end
 		}
 	},
 	TRAILING_ACTIONS = Actions,
-	takeActions = function(p8, p9: number) --[[ Line: 182 ]]
+	takeActions = function(p8, p9: number)
 		return table.move(p8, 1, math.min(p9, #p8), 1, {})
 	end,
-	leadingPlaceholder = function(p8) --[[ Line: 265 ]]
+	leadingPlaceholder = function(p8)
 		-- upvalues: leadingSlot (copy), slotPlaceholders (copy)
 		return leadingSlot((slotPlaceholders("Leading", 96, "align-x-left", true, p8)))
 	end,
-	contentPlaceholder = function(p8) --[[ Line: 269 ]]
+	contentPlaceholder = function(p8)
 		-- upvalues: contentSlot (copy), slotPlaceholders (copy)
 		return contentSlot((slotPlaceholders("Content", 128, "align-x-center", false, p8)))
 	end,
-	trailingPlaceholder = function(p8) --[[ Line: 273 ]]
+	trailingPlaceholder = function(p8)
 		-- upvalues: trailingSlot (copy), slotPlaceholders (copy)
 		return trailingSlot((slotPlaceholders("Trailing", 96, "align-x-right", true, p8)))
 	end,
 	LabeledShell = LabeledShell,
 	Shell = Shell,
-	SlotPattern = function(Frame) --[[ Line: 616 ]]
+	SlotPattern = function(Frame)
 		-- upvalues: ReactModule (copy), ViewModule (copy), LabeledShell (copy), CompositionGroup (copy)
 		return ReactModule.createElement(ViewModule, {
 			tag = "col align-x-left gap-medium auto-xy",
@@ -395,7 +395,7 @@ return {
 			Composition = if Frame.Cell then ReactModule.createElement(CompositionGroup, { LayoutOrder = 2, Cell = Frame.Cell }) else nil
 		})
 	end,
-	tierCells = function(List) --[[ Line: 355 ]]
+	tierCells = function(List)
 		-- upvalues: ReactModule (copy), LabeledShell (copy)
 		local Elements = {}
 		
@@ -410,7 +410,7 @@ return {
 		end
 		return Elements
 	end,
-	CenteredDetailCell = function(Frame) --[[ Line: 570 ]]
+	CenteredDetailCell = function(Frame)
 		-- upvalues: ReactModule (copy), CompositionShell (copy), Icon (copy), IconButtonModule (copy), noop (copy), HeaderBarModule (copy), ViewModule (copy), TextModule (copy)
 		return ReactModule.createElement(CompositionShell, {
 			LayoutOrder = Frame.LayoutOrder,
@@ -439,7 +439,7 @@ return {
 			})
 		})
 	end,
-	ContentAndTrailingCell = function(Frame) --[[ Line: 503 ]]
+	ContentAndTrailingCell = function(Frame)
 		-- upvalues: ReactModule (copy), CompositionShell (copy), _UDim (copy), _UDim1 (copy), SearchContent (copy), Icon (copy), IconButtonModule (copy), noop (copy), HeaderBarModule (copy), utilityTrailing (copy)
 		local IsWidthBelow = Frame.width <= 360
 		
@@ -456,7 +456,7 @@ return {
 			}) else utilityTrailing(true)
 		})
 	end,
-	ContentFillCell = function(Frame) --[[ Line: 514 ]]
+	ContentFillCell = function(Frame)
 		-- upvalues: ReactModule (copy), CompositionShell (copy), TextModule (copy), HeaderBarModule (copy), _UDim2 (copy), SearchContent (copy)
 		return ReactModule.createElement(CompositionShell, {
 			LayoutOrder = Frame.LayoutOrder,
@@ -471,7 +471,7 @@ return {
 			content = ReactModule.createElement(SearchContent, { width = _UDim2 })
 		})
 	end,
-	ContentFillWithTrailingCell = function(Frame) --[[ Line: 525 ]]
+	ContentFillWithTrailingCell = function(Frame)
 		-- upvalues: ReactModule (copy), CompositionShell (copy), TextModule (copy), HeaderBarModule (copy), _UDim2 (copy), SearchContent (copy), Icon (copy), IconButtonModule (copy), noop (copy)
 		return ReactModule.createElement(CompositionShell, {
 			LayoutOrder = Frame.LayoutOrder,
@@ -493,7 +493,7 @@ return {
 			})
 		})
 	end,
-	CrowdedLeadingCell = function(Frame) --[[ Line: 539 ]]
+	CrowdedLeadingCell = function(Frame)
 		-- upvalues: ReactModule (copy), CompositionShell (copy), Icon (copy), IconButtonModule (copy), noop (copy), HeaderBarModule (copy), _UDim (copy), _UDim1 (copy), SearchContent (copy), AvatarModule (copy), AvatarSizeModule (copy)
 		local IsWidthBelow = Frame.width <= 360
 		
@@ -522,7 +522,7 @@ return {
 			})
 		})
 	end,
-	CrowdedTrailingCell = function(Frame) --[[ Line: 554 ]]
+	CrowdedTrailingCell = function(Frame)
 		-- upvalues: ReactModule (copy), CompositionShell (copy), Icon (copy), IconButtonModule (copy), noop (copy), HeaderBarModule (copy), _UDim (copy), _UDim1 (copy), SearchContent (copy), AvatarModule (copy), AvatarSizeModule (copy)
 		local IsWidthBelow = Frame.width <= 360
 		
@@ -548,7 +548,7 @@ return {
 			})
 		})
 	end,
-	GlobalNavigationCell = function(Frame) --[[ Line: 474 ]]
+	GlobalNavigationCell = function(Frame)
 		-- upvalues: ReactModule (copy), CompositionShell (copy), Icon (copy), IconButtonModule (copy), noop (copy), TextModule (copy), HeaderBarModule (copy), utilityTrailing (copy)
 		local IsWidthBelow = Frame.width <= 360
 		
@@ -570,7 +570,7 @@ return {
 			trailing = utilityTrailing(not IsWidthBelow)
 		})
 	end,
-	SearchCell = function(Frame) --[[ Line: 488 ]]
+	SearchCell = function(Frame)
 		-- upvalues: ReactModule (copy), CompositionShell (copy), Icon (copy), IconButtonModule (copy), noop (copy), TextModule (copy), HeaderBarModule (copy), _UDim (copy), _UDim1 (copy), SearchContent (copy), utilityTrailing (copy)
 		local IsWidthBelow = Frame.width <= 360
 		

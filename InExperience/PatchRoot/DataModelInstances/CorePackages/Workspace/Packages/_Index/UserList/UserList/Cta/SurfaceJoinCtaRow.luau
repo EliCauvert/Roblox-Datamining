@@ -10,7 +10,7 @@ local UseProfileCtaModule = require(UserList.Hooks.useProfileCta)
 local ComposeCtaRowModule = require(script.Parent.composeCtaRow)
 local FFlagUserListCanonicalCtaAnalyticsModule = require(UserList.Flags.FFlagUserListCanonicalCtaAnalytics)
 
-return ReactModule.memo(function(p1) --[[ Line: 36 | Named "SurfaceJoinCtaRow" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseProfileCtaModule (copy), UseGetPresenceByUserIdFunction (copy), InGame (copy), ReactModule (copy), UseCtaForRowModule (copy), FFlagUserListCanonicalCtaAnalyticsModule (copy), EnumsModule (copy), ComposeCtaRowModule (copy)
 	local Id = p1.entity.id
 	local CtaConfig = p1.ctaConfig
@@ -20,11 +20,11 @@ return ReactModule.memo(function(p1) --[[ Line: 36 | Named "SurfaceJoinCtaRow" ]
 	local UniverseId = if UseGetPresenceByUserIdResult then UseGetPresenceByUserIdResult.universeId else nil
 	local IsNotUniverseIdMatch: boolean = UseGetPresenceByUserIdResult ~= nil and (UseGetPresenceByUserIdResult.userPresenceType == InGame and (UniverseId ~= nil and UniverseId ~= ""))
 	local OnActivatedFunction = Join.onActivated
-	local UseCtaForRowModuleResult = UseCtaForRowModule(UseProfileCtaModuleResult, UseProfileCtaModuleResult2, p1.actionHandlers, Id, CtaConfig, ReactModule.useMemo(function() --[[ Line: 49 ]]
+	local UseCtaForRowModuleResult = UseCtaForRowModule(UseProfileCtaModuleResult, UseProfileCtaModuleResult2, p1.actionHandlers, Id, CtaConfig, ReactModule.useMemo(function()
 		-- upvalues: OnActivatedFunction (copy), Id (copy), IsNotUniverseIdMatch (copy)
 		return {
 			isLoading = false,
-			joinExperience = function() --[[ Line: 51 ]]
+			joinExperience = function()
 				-- upvalues: OnActivatedFunction (upval), Id (upval)
 				OnActivatedFunction(Id)
 			end,

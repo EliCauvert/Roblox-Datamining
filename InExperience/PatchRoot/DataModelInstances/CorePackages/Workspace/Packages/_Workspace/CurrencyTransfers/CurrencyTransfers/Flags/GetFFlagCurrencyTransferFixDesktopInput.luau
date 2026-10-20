@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("CurrencyTransferFixDesktopInput", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("CurrencyTransferFixDesktopInput")
 end

@@ -13,7 +13,7 @@ local FIntBlackbirdUpsellMinPriceForDiscountInclusive = require(Parent.SharedFla
 local FIntBlackbirdUpsellMaxPriceForDiscountInclusive = require(Parent.SharedFlags).FIntBlackbirdUpsellMaxPriceForDiscountInclusive
 local config = { isShopContext = true }
 
-local function _(p1, PurchaseFromRoblox) --[[ Line: 52 | Named "getDiscount" ]]
+local function _(p1, PurchaseFromRoblox)
 	-- upvalues: PriceStatusModule (copy)
 	if PurchaseFromRoblox == PriceStatusModule.PurchaseFromRoblox then
 		local DiscountInformation = p1.discountInformation
@@ -24,17 +24,17 @@ local function _(p1, PurchaseFromRoblox) --[[ Line: 52 | Named "getDiscount" ]]
 	end
 end
 
-local _ = function(p1): boolean --[[ Line: 68 | Named "isDiscountEligible" ]]
+local _ = function(p1): boolean
 	-- upvalues: FIntBlackbirdUpsellMaxPriceForDiscountInclusive (copy), FIntBlackbirdUpsellMinPriceForDiscountInclusive (copy)
 	return p1 ~= nil and (FIntBlackbirdUpsellMinPriceForDiscountInclusive < p1.originalPrice and (FIntBlackbirdUpsellMaxPriceForDiscountInclusive == 0 or p1.originalPrice < FIntBlackbirdUpsellMaxPriceForDiscountInclusive))
 end
 
-local _ = function(p1, p2) --[[ Line: 77 | Named "classifyPriceStatus" ]]
+local _ = function(p1, p2)
 	-- upvalues: FFlagAXIaBEnableShopContext (copy), GetPriceStatusInShopModule (copy), GetPriceStatusModule (copy)
 	return if FFlagAXIaBEnableShopContext and p2.isShopContext then GetPriceStatusInShopModule(p1) else GetPriceStatusModule(p1, true)
 end
 
-return function(List, p1) --[[ Line: 85 | Named "getTryOnItemsTotalPrice" ]]
+return function(List, p1)
 	-- upvalues: config (copy), FFlagAXIaBEnableShopContext (copy), GetPriceStatusInShopModule (copy), GetPriceStatusModule (copy), IsPurchasableItemFunction (copy), PriceStatusModule (copy), GetPriceInRobuxFunction (copy), FIntBlackbirdUpsellMaxPriceForDiscountInclusive (copy), FIntBlackbirdUpsellMinPriceForDiscountInclusive (copy)
 	local P6 = p1 or config
 	local TotalPrice = 0

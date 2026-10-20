@@ -10,16 +10,16 @@ local PublishToolUtils = CreatorAgentChatModule.PublishToolUtils
 local TurnStateReducer = CreatorAgentChatModule.TurnStateReducer
 local SubagentTasks = CreatorAgentChatModule.SubagentTasks
 
-local function _(p1) --[[ Line: 88 | Named "contentBlockToText" ]]
+local function _(p1)
 	return if p1 == nil or p1.type ~= "text" or typeof(p1.text) ~= "string" then "" else p1.text
 end
 
-local _ = function(p1) --[[ Line: 95 | Named "contentBlockToImage" ]]
+local _ = function(p1)
 	-- upvalues: FFlagBuildExperienceChatImageAttachmentsModule (copy)
 	return if FFlagBuildExperienceChatImageAttachmentsModule and p1 ~= nil and p1.type == "image" and typeof(p1.uri) == "string" and p1.uri ~= "" then { uri = p1.uri } else nil
 end
 
-local function contentBlockToResourceAttachment(Content) --[[ Line: 108 ]]
+local function contentBlockToResourceAttachment(Content)
 	return if Content == nil or Content.type ~= "resource_link" or typeof(Content.name) ~= "string" or Content.name == "" or typeof(Content.uri) ~= "string" or Content.uri == "" then if Content == nil or Content.type ~= "resource" or typeof(Content.resource) ~= "table" or typeof(Content.resource.uri) ~= "string" or Content.resource.uri == "" or typeof(Content.resource.text) ~= "string" then nil else { type = "resource", resource = Content.resource } else {
 		type = "resource_link",
 		name = Content.name,
@@ -28,7 +28,7 @@ local function contentBlockToResourceAttachment(Content) --[[ Line: 108 ]]
 	}
 end
 
-local function contentBlocksToText(Content): string --[[ Line: 141 ]]
+local function contentBlocksToText(Content): string
 	if typeof(Content) ~= "table" then
 		return ""
 	end
@@ -44,7 +44,7 @@ local function contentBlocksToText(Content): string --[[ Line: 141 ]]
 	return table.concat(List)
 end
 
-local function contentBlocksToImages(Content) --[[ Line: 155 ]]
+local function contentBlocksToImages(Content)
 	-- upvalues: FFlagBuildExperienceChatImageAttachmentsModule (copy)
 	local List = {}
 	
@@ -61,7 +61,7 @@ local function contentBlocksToImages(Content) --[[ Line: 155 ]]
 	return List
 end
 
-local function contentBlocksToResourceAttachments(Content) --[[ Line: 169 ]]
+local function contentBlocksToResourceAttachments(Content)
 	-- upvalues: contentBlockToResourceAttachment (copy)
 	local List = {}
 	
@@ -78,13 +78,13 @@ local function contentBlocksToResourceAttachments(Content) --[[ Line: 169 ]]
 	return List
 end
 
-local _ = function(p1) --[[ Line: 183 | Named "getSequenceId" ]]
+local _ = function(p1)
 	local SequenceId: number = p1.sequenceId
 	
 	return if typeof(SequenceId) == "number" and SequenceId >= 0 then SequenceId else nil
 end
 
-local _ = function(p1) --[[ Line: 191 | Named "asOptimisticallyCancelled" ]]
+local _ = function(p1)
 	-- upvalues: TurnStateReducer (copy)
 	return TurnStateReducer.applySessionUpdate(p1, {
 		sessionUpdate = "state_change",
@@ -93,27 +93,27 @@ local _ = function(p1) --[[ Line: 191 | Named "asOptimisticallyCancelled" ]]
 	}, nil)
 end
 
-local _ = function(p1) --[[ Line: 199 | Named "getMessageId" ]]
+local _ = function(p1)
 	local MessageId = p1.messageId
 	
 	return if typeof(MessageId) == "string" and MessageId ~= "" then MessageId else nil
 end
 
-local _ = function(p1): boolean --[[ Line: 204 | Named "isAssistantTurnUpdate" ]]
+local _ = function(p1): boolean
 	return p1 == "agent_message" or (p1 == "agent_message_chunk" or (p1 == "tool_call_update" or (p1 == "tool_call_content_chunk" or p1 == "state_change")))
 end
 
-local _ = function(p1): boolean --[[ Line: 212 | Named "hasAssistantTurnContent" ]]
+local _ = function(p1): boolean
 	return p1.assistantText ~= "" or (#p1.activityItems > 0 or p1.toolCallCount > 0)
 end
 
-local _ = function(p1): boolean --[[ Line: 220 | Named "shouldEmitAssistantTurn" ]]
+local _ = function(p1): boolean
 	return p1.assistantText ~= "" or (#p1.activityItems > 0 or p1.toolCallCount > 0) or (#p1.pendingAgentMessageContent > 0 or (p1.status == "cancelled" or (p1.stopReason == "cancelled" or p1.stopReason == "error")))
 end
 
-local _ = function(Tbl) --[[ Line: 228 | Named "orderedBySequenceId" ]]
+local _ = function(Tbl)
 	local Copy = table.clone(Tbl)
-	table.sort(Copy, function(A, B): boolean --[[ Line: 230 ]]
+	table.sort(Copy, function(A, B): boolean
 		local SequenceId: number = A.sequenceId
 		local SequenceId1: number = B.sequenceId
 		
@@ -123,7 +123,7 @@ local _ = function(Tbl) --[[ Line: 228 | Named "orderedBySequenceId" ]]
 	return Copy
 end
 
-local function parseChatItems(List, p1) --[[ Line: 240 ]]
+local function parseChatItems(List, p1)
 	-- upvalues: contentBlocksToText (copy), contentBlocksToImages (copy), FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), contentBlocksToResourceAttachments (copy), contentBlockToResourceAttachment (copy), TurnStateReducer (copy)
 	local List1 = {}
 	local ApplySessionUpdateResult = nil
@@ -132,7 +132,7 @@ local function parseChatItems(List, p1) --[[ Line: 240 ]]
 	local SequenceIds = {}
 	local Flag = false
 	
-	local function flushActiveTurn() --[[ Line: 248 ]]
+	local function flushActiveTurn()
 		-- upvalues: ApplySessionUpdateResult (ref), Flag (ref), List1 (copy), StartSequenceId (ref), EndSequenceId (ref), SequenceIds (ref)
 		if ApplySessionUpdateResult ~= nil and Flag then
 			local ApplySessionUpdateResult1 = ApplySessionUpdateResult
@@ -154,7 +154,7 @@ local function parseChatItems(List, p1) --[[ Line: 240 ]]
 		Flag = false
 	end
 	
-	local function appendUserMessage(MessageId, SequenceId, Text, Images, ResourceAttachments) --[[ Line: 265 ]]
+	local function appendUserMessage(MessageId, SequenceId, Text, Images, ResourceAttachments)
 		-- upvalues: List1 (copy)
 		if Text == "" and #Images == 0 and #ResourceAttachments == 0 then return end
 		local Entry = List1[#List1]
@@ -262,7 +262,7 @@ local function parseChatItems(List, p1) --[[ Line: 240 ]]
 	return List1
 end
 
-local function buildUserMessageItem(UserMessageItem, SessionId) --[[ Line: 361 ]]
+local function buildUserMessageItem(UserMessageItem, SessionId)
 	-- upvalues: FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperienceChatResourceAttachments (copy)
 	return {
 		kind = "user_message",
@@ -273,11 +273,11 @@ local function buildUserMessageItem(UserMessageItem, SessionId) --[[ Line: 361 ]
 	}
 end
 
-local _ = function(p2, p3) --[[ Line: 377 | Named "getEventMeta" ]]
+local _ = function(p2, p3)
 	return if p3 == nil or p2.eventMetaBySequenceId == nil then nil else p2.eventMetaBySequenceId[p3]
 end
 
-local function resolveTurnId(TurnState, p2) --[[ Line: 384 ]]
+local function resolveTurnId(TurnState, p2)
 	local EndSequenceId = p2.endSequenceId
 	local EventMetaBySequenceIdEntry = if EndSequenceId == nil or TurnState.eventMetaBySequenceId == nil then nil else TurnState.eventMetaBySequenceId[EndSequenceId]
 	
@@ -295,7 +295,7 @@ local function resolveTurnId(TurnState, p2) --[[ Line: 384 ]]
 	return nil
 end
 
-local function buildTurnFeedbackIds(p3, TurnFeedbackIds) --[[ Line: 398 ]]
+local function buildTurnFeedbackIds(p3, TurnFeedbackIds)
 	-- upvalues: PublishToolUtils (copy), resolveTurnId (copy)
 	local LatestSuccessfulResult = PublishToolUtils.getLatestSuccessfulResult(p3.turnState)
 	
@@ -310,11 +310,11 @@ local function buildTurnFeedbackIds(p3, TurnFeedbackIds) --[[ Line: 398 ]]
 	}
 end
 
-return function(Tbl, p3) --[[ Line: 411 | Named "parseSessionStream" ]]
+return function(Tbl, p3)
 	-- upvalues: parseChatItems (copy), buildUserMessageItem (copy), TurnStateReducer (copy), PublishToolUtils (copy), SubagentTasks (copy), FFlagBuildAdUpsellModule (copy), buildTurnFeedbackIds (copy), FFlagBuildExperienceSinglePlaytestCardModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), ChatTypesModule (copy), FFlagBuildExperienceChatImageAttachmentsModule (copy)
 	local SessionId = p3.sessionId
 	local Copy = table.clone(Tbl)
-	table.sort(Copy, function(A, B): boolean --[[ Line: 230 ]]
+	table.sort(Copy, function(A, B): boolean
 		local SequenceId: number = A.sequenceId
 		local SequenceId1: number = B.sequenceId
 		

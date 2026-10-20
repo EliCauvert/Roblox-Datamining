@@ -3,7 +3,7 @@ local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local MyStatsExperienceSearchDebounceMs = game:DefineFastInt("MyStatsExperienceSearchDebounceMs", 200)
 
-return function(p1) --[[ Line: 64 | Named "createSearchQueryStore" ]]
+return function(p1)
 	-- upvalues: MyStatsExperienceSearchDebounceMs (copy), SignalsModule (copy), SignalsReactModule (copy)
 	local P0 = p1 or {}
 	local DebounceMs = P0.debounceMs or MyStatsExperienceSearchDebounceMs
@@ -12,13 +12,13 @@ return function(p1) --[[ Line: 64 | Named "createSearchQueryStore" ]]
 	local Signal, Signal2 = SignalsModule.createSignal("")
 	local Signal1, Signal2_1 = SignalsModule.createSignal("")
 	local Signal3, Signal2_2 = SignalsModule.createSignal(false)
-	local Computed = SignalsModule.createComputed(function(p2): boolean --[[ Line: 76 ]]
+	local Computed = SignalsModule.createComputed(function(p2): boolean
 		-- upvalues: Signal3 (copy), Signal (copy)
 		return Signal3(p2) and Signal(p2) == ""
 	end)
 	local v1 = nil
 	
-	local function _() --[[ Line: 82 | Named "cancelPending" ]]
+	local function _()
 		-- upvalues: v1 (ref), Cancel (copy)
 		if v1 ~= nil then
 			pcall(Cancel, v1)
@@ -28,26 +28,26 @@ return function(p1) --[[ Line: 64 | Named "createSearchQueryStore" ]]
 	
 	return {
 		getDraftQuery = Signal,
-		useDraftQuery = function() --[[ Line: 136 ]]
+		useDraftQuery = function()
 			-- upvalues: SignalsReactModule (upval), Signal (copy)
 			return SignalsReactModule.useSignalState(Signal)
 		end,
 		getDebouncedQuery = Signal1,
-		useDebouncedQuery = function() --[[ Line: 140 ]]
+		useDebouncedQuery = function()
 			-- upvalues: SignalsReactModule (upval), Signal1 (copy)
 			return SignalsReactModule.useSignalState(Signal1)
 		end,
 		getIsSearchActive = Signal3,
-		useIsSearchActive = function() --[[ Line: 144 ]]
+		useIsSearchActive = function()
 			-- upvalues: SignalsReactModule (upval), Signal3 (copy)
 			return SignalsReactModule.useSignalState(Signal3)
 		end,
 		getShowEmptyState = Computed,
-		useShowEmptyState = function() --[[ Line: 148 ]]
+		useShowEmptyState = function()
 			-- upvalues: SignalsReactModule (upval), Computed (copy)
 			return SignalsReactModule.useSignalState(Computed)
 		end,
-		setQuery = function(p2) --[[ Line: 92 ]]
+		setQuery = function(p2)
 			-- upvalues: Signal2 (copy), v1 (ref), Cancel (copy), Signal1 (copy), DebounceMs (copy), Schedule (copy), Signal2_1 (copy)
 			Signal2(p2)
 			
@@ -56,7 +56,7 @@ return function(p1) --[[ Line: 64 | Named "createSearchQueryStore" ]]
 				v1 = nil
 			end
 			if p2 ~= Signal1() then
-				v1 = Schedule(DebounceMs / 1000, function() --[[ Line: 102 ]]
+				v1 = Schedule(DebounceMs / 1000, function()
 					-- upvalues: v1 (upval), Signal2_1 (upval), p2 (copy)
 					v1 = nil
 					Signal2_1(p2)
@@ -66,11 +66,11 @@ return function(p1) --[[ Line: 64 | Named "createSearchQueryStore" ]]
 			end
 		end,
 		setIsSearchActive = Signal2_2,
-		beginSearch = function() --[[ Line: 114 ]]
+		beginSearch = function()
 			-- upvalues: Signal2_2 (copy)
 			Signal2_2(true)
 		end,
-		endSearch = function() --[[ Line: 118 ]]
+		endSearch = function()
 			-- upvalues: v1 (ref), Cancel (copy), Signal2 (copy), Signal2_1 (copy), Signal2_2 (copy)
 			if v1 ~= nil then
 				pcall(Cancel, v1)
@@ -80,13 +80,13 @@ return function(p1) --[[ Line: 64 | Named "createSearchQueryStore" ]]
 			Signal2_1("")
 			Signal2_2(false)
 		end,
-		endSearchIfEmpty = function() --[[ Line: 126 ]]
+		endSearchIfEmpty = function()
 			-- upvalues: Signal (copy), Signal2_2 (copy)
 			if Signal() == "" then
 				Signal2_2(false)
 			end
 		end,
-		clear = function() --[[ Line: 108 ]]
+		clear = function()
 			-- upvalues: v1 (ref), Cancel (copy), Signal2 (copy), Signal2_1 (copy)
 			if v1 ~= nil then
 				pcall(Cancel, v1)
@@ -95,7 +95,7 @@ return function(p1) --[[ Line: 64 | Named "createSearchQueryStore" ]]
 			Signal2("")
 			Signal2_1("")
 		end,
-		destroy = function() --[[ Line: 132 ]]
+		destroy = function()
 			-- upvalues: v1 (ref), Cancel (copy)
 			if v1 ~= nil then
 				pcall(Cancel, v1)

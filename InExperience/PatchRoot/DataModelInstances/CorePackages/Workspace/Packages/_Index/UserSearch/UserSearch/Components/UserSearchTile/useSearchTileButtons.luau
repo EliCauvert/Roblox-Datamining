@@ -27,7 +27,7 @@ local GetResult = require(Parent.DataHydration).Friends.FriendsStore.get()
 local Enums1 = require(Parent.DataHydration).Friends.Enums
 local FFlagMigrateFriendshipStatusesUserSearchModule = require(UserSearch.Flags.FFlagMigrateFriendshipStatusesUserSearch) or FFlagSduiUserSearchTile
 
-return function(p1, Callback) --[[ Line: 62 ]]
+return function(p1, Callback)
 	-- upvalues: UseLocalUserIdFunction (copy), UseDispatchFunction (copy), UseRelationshipSelectorModule (copy), UseStyleFunction (copy), FFlagUserSearchHideFriendActionsForBlockedUsersModule (copy), UseIsUserBlockedModule (copy), UseJoinUserInExperienceFunction (copy), Contexts (copy), Images (copy), PresenceHelpersModule (copy), FFlagUserSearchAddFocusActionsSupport (copy), FocusNavigationEventNameEnum (copy), FFlagMigrateFriendshipStatusesUserSearchModule (copy), GetResult (copy), FriendsNetworkingModule (copy), SetCurrentToastMessageFunction (copy), EventNamesModule (copy), DashModule (copy), FFlagFixUserSearchAddFriendFocusActionModule (copy), Enums1 (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FriendsStoreChallengeNetworkModule (copy), Enums (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseDispatchResult = UseDispatchFunction()
@@ -46,7 +46,7 @@ return function(p1, Callback) --[[ Line: 62 ]]
 			isSecondary = false,
 			icon = IconsCommonPlay,
 			isDisabled = UseJoinUserInExperienceResult.isLoading,
-			onActivated = function() --[[ Line: 99 ]]
+			onActivated = function()
 				-- upvalues: UseJoinUserInExperienceResult (copy)
 				UseJoinUserInExperienceResult.joinExperience()
 			end,
@@ -60,15 +60,15 @@ return function(p1, Callback) --[[ Line: 62 ]]
 			isDisabled = false,
 			icon = IconsCommonPlusSmall,
 			focusEventName = if FFlagUserSearchAddFocusActionsSupport and p1.shouldAddFocusEventName then FocusNavigationEventNameEnum.HoldToAcceptFriendRequest else nil,
-			onActivated = function() --[[ Line: 123 ]]
+			onActivated = function()
 				-- upvalues: FFlagMigrateFriendshipStatusesUserSearchModule (upval), GetResult (upval), p1 (copy), UseDispatchResult (copy), FriendsNetworkingModule (upval), UseLocalUserIdResult (copy), SetCurrentToastMessageFunction (upval), Callback (copy), EventNamesModule (upval)
 				(if FFlagMigrateFriendshipStatusesUserSearchModule then GetResult.AcceptFriendRequest(p1.userId) else UseDispatchResult(FriendsNetworkingModule.AcceptFriendRequestFromUserId.API({
 					targetUserId = p1.userId,
 					currentUserId = UseLocalUserIdResult
-				}))):andThen(function() --[[ Line: 131 ]]
+				}))):andThen(function()
 					-- upvalues: UseDispatchResult (upval), SetCurrentToastMessageFunction (upval)
 					UseDispatchResult(SetCurrentToastMessageFunction({ toastMessage = "Feature.Friends.Action.FriendAdded" }))
-				end):catch(function() --[[ Line: 136 ]]
+				end):catch(function()
 					-- upvalues: UseDispatchResult (upval), SetCurrentToastMessageFunction (upval)
 					UseDispatchResult(SetCurrentToastMessageFunction({
 						toastMessage = "Feature.Toast.NetworkingError.SomethingIsWrong"
@@ -93,18 +93,18 @@ return function(p1, Callback) --[[ Line: 62 ]]
 			isDisabled = false,
 			icon = IconsCommonPlusSmall,
 			focusEventName = if FFlagUserSearchAddFocusActionsSupport and p1.shouldAddFocusEventName then if FFlagFixUserSearchAddFriendFocusActionModule then FocusNavigationEventNameEnum.HoldToAddFriend else FocusNavigationEventNameEnum.HoldToAcceptFriendRequest else nil,
-			onActivated = function() --[[ Line: 167 ]]
+			onActivated = function()
 				-- upvalues: FFlagMigrateFriendshipStatusesUserSearchModule (upval), GetResult (upval), p1 (copy), Enums1 (upval), FFlagEnableFriendsStoreChallengeInterceptor (upval), FriendsStoreChallengeNetworkModule (upval), UseDispatchResult (copy), FriendsNetworkingModule (upval), UseLocalUserIdResult (copy), Enums (upval), SetCurrentToastMessageFunction (upval), Callback (copy), EventNamesModule (upval)
 				(if FFlagMigrateFriendshipStatusesUserSearchModule then GetResult.RequestFriendship(p1.userId, Enums1.FriendshipOriginSourceType.PlayerSearch, nil, if FFlagEnableFriendsStoreChallengeInterceptor then FriendsStoreChallengeNetworkModule else nil) else UseDispatchResult(FriendsNetworkingModule.RequestFriendshipFromUserId.API({
 					targetUserId = p1.userId,
 					currentUserId = UseLocalUserIdResult,
 					friendshipOriginSourceType = Enums.FriendshipOriginSourceType.PlayerSearch.rawValue()
-				}))):andThen(function() --[[ Line: 181 ]]
+				}))):andThen(function()
 					-- upvalues: UseDispatchResult (upval), SetCurrentToastMessageFunction (upval)
 					UseDispatchResult(SetCurrentToastMessageFunction({
 						toastMessage = "Feature.Friends.Action.FriendRequestSent"
 					}))
-				end):catch(function() --[[ Line: 186 ]]
+				end):catch(function()
 					-- upvalues: UseDispatchResult (upval), SetCurrentToastMessageFunction (upval)
 					UseDispatchResult(SetCurrentToastMessageFunction({
 						toastMessage = "Feature.Toast.NetworkingError.SomethingIsWrong"

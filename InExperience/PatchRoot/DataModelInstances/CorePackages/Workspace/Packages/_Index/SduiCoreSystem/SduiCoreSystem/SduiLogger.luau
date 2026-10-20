@@ -49,18 +49,18 @@ local config3 = {
 	lastUpdated = { 25, 5, 27 }
 }
 
-local function _(p1, p2): string --[[ Line: 71 | Named "makeErrorKey" ]]
+local function _(p1, p2): string
 	return `{p1}_{p2.name}_{p2.componentType}_{p2.parserName}_{p2.propName}`
 end
 
 local t = {}
 
 return {
-	clearSeenErrors = function() --[[ Line: 77 ]]
+	clearSeenErrors = function()
 		-- upvalues: t (ref)
 		t = {}
 	end,
-	reportError = function(ErrorType, p1, Page, p2) --[[ Line: 81 ]]
+	reportError = function(ErrorType, p1, Page, p2)
 		-- upvalues: LoggingProtocolModule (copy), t (ref), config1 (copy), config (copy), CryoModule (copy), TutilsModule (copy)
 		local P5 = p2 or LoggingProtocolModule.default
 		assert(P5, "loggingProtocol must exist")
@@ -85,7 +85,7 @@ return {
 			warn(`Discovery server-driven ui error \n{ErrorType} \n{TutilsModule.toString(p1)}`)
 		end
 	end,
-	reportCounter = function(p1, p2, p3, p4) --[[ Line: 129 ]]
+	reportCounter = function(p1, p2, p3, p4)
 		-- upvalues: LoggingProtocolModule (copy), TutilsModule (copy)
 		local P9 = p4 or LoggingProtocolModule.default
 		assert(P9, "loggingProtocol must exist")
@@ -106,7 +106,7 @@ return {
 			warn(`Discovery server-driven ui counter \n{p1} \n{TutilsModule.toString(p2)}`)
 		end
 	end,
-	reportTimers = function(List, p1, p2) --[[ Line: 165 ]]
+	reportTimers = function(List, p1, p2)
 		-- upvalues: LoggingProtocolModule (copy), config2 (copy)
 		local P12 = p2 or LoggingProtocolModule.default
 		assert(P12, "loggingProtocol must exist")
@@ -123,7 +123,7 @@ return {
 			}, p1)
 		end
 	end,
-	reportOmniFeedStats = function(List, p3, AppPage, SduiResponseRequestId, p4, HasOneByTwo) --[[ Line: 191 ]]
+	reportOmniFeedStats = function(List, p3, AppPage, SduiResponseRequestId, p4, HasOneByTwo)
 		-- upvalues: LoggingProtocolModule (copy), FFlagLuaAppAddHasOneByTwoField (copy), config3 (copy)
 		local P17 = p4 or LoggingProtocolModule.default
 		assert(P17, "loggingProtocol must exist")
@@ -184,7 +184,7 @@ return {
 			LoggingProtocolModule.StandardizedFields.addOsInfo
 		}, t2, AppPage)
 	end,
-	reportSduiV2FeedStats = if require(Parent.SharedFlags).FFlagLuaAppSduiHomeFeedStats then function(List, AppPage, SduiResponseRequestId, p5, HasOneByTwo) --[[ Line: 256 ]]
+	reportSduiV2FeedStats = if require(Parent.SharedFlags).FFlagLuaAppSduiHomeFeedStats then function(List, AppPage, SduiResponseRequestId, p5, HasOneByTwo)
 		-- upvalues: LoggingProtocolModule (copy), FFlagLuaAppAddHasOneByTwoFieldSdui (copy), config3 (copy)
 		local P22 = p5 or LoggingProtocolModule.default
 		assert(P22, "loggingProtocol must exist")

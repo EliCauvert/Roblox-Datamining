@@ -1,6 +1,6 @@
 ﻿return {
 	SETTLE_SECONDS = 0.15,
-	initialState = function() --[[ Line: 14 ]]
+	initialState = function()
 		return {
 			canvasX = nil,
 			canvasY = nil,
@@ -8,7 +8,7 @@
 			interacting = false
 		}
 	end,
-	advance = function(p1, CanvasX, p2: number, Enabled, CanvasY) --[[ Line: 38 ]]
+	advance = function(p1, CanvasX, p2: number, Enabled, CanvasY)
 		local CanvasY1 = if CanvasY == nil then p1.canvasY else CanvasY
 		
 		if p1.canvasX == nil then
@@ -48,10 +48,10 @@
 			return p1
 		end
 	end,
-	isPointerHold = function(UserInputType): boolean --[[ Line: 23 ]]
+	isPointerHold = function(UserInputType): boolean
 		return UserInputType == Enum.UserInputType.MouseButton1 or UserInputType == Enum.UserInputType.Touch
 	end,
-	pointerIsInside = function(Vector, Vector1, Vector2): boolean --[[ Line: 28 ]]
+	pointerIsInside = function(Vector, Vector1, Vector2): boolean
 		return Vector1.X > 0 and Vector1.Y > 0 and (Vector.X <= Vector2.X and (Vector.Y <= Vector2.Y and Vector2.X <= Vector.X + Vector1.X) and Vector2.Y <= Vector.Y + Vector1.Y)
 	end
 }

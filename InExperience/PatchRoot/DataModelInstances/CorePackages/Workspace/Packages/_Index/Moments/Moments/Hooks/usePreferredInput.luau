@@ -1,17 +1,17 @@
 ﻿local UserInputService = game:GetService("UserInputService")
 local ReactModule = require(script:FindFirstAncestor("Moments").Parent.React)
 
-return function() --[[ Line: 18 ]]
+return function()
 	-- upvalues: ReactModule (copy), UserInputService (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(UserInputService.PreferredInput)
-	ReactModule.useEffect(function() --[[ Line: 21 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UserInputService (upval), UseStateResult2 (copy)
-		local Connection = UserInputService:GetPropertyChangedSignal("PreferredInput"):Connect(function() --[[ Line: 24 ]]
+		local Connection = UserInputService:GetPropertyChangedSignal("PreferredInput"):Connect(function()
 			-- upvalues: UseStateResult2 (upval), UserInputService (upval)
 			UseStateResult2(UserInputService.PreferredInput)
 		end)
 		
-		return function() --[[ Line: 28 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end

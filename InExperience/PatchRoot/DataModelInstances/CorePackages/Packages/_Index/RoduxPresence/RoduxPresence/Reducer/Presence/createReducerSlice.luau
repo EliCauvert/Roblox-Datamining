@@ -3,11 +3,11 @@ local CryoModule = require(RoduxPresence.Parent.Cryo)
 local GetDeepValueModule = require(RoduxPresence.getDeepValue)
 local ReceivedUserPresenceModule = require(RoduxPresence.Actions.ReceivedUserPresence)
 
-return function(p1, p2, p3) --[[ Line: 10 ]]
+return function(p1, p2, p3)
 	-- upvalues: GetDeepValueModule (copy), CryoModule (copy), ReceivedUserPresenceModule (copy)
 	local PresenceNetworking = p3.presenceNetworking
 	
-	local function handlePresenceModel(p4, Payload) --[[ Line: 13 ]]
+	local function handlePresenceModel(p4, Payload)
 		-- upvalues: p1 (copy), GetDeepValueModule (upval), p2 (copy), CryoModule (upval)
 		local JoinResult = p4[p1]
 		local Text = tostring(Payload.userId)
@@ -26,7 +26,7 @@ return function(p1, p2, p3) --[[ Line: 10 ]]
 		})
 	end
 	
-	return function(p4, p5) --[[ Line: 36 ]]
+	return function(p4, p5)
 		-- upvalues: ReceivedUserPresenceModule (upval), handlePresenceModel (copy), PresenceNetworking (copy), p1 (copy)
 		assert(p4, "state should not be nil")
 		

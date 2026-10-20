@@ -1,7 +1,7 @@
 ﻿local Roact = require(script:FindFirstAncestor("PurchasePrompt").Parent.PurchasePromptDeps).Roact
 local LocalizationContextConsumerModule = require(script.Parent.LocalizationContextConsumer)
 
-return function(p1) --[[ Line: 8 | Named "TextLocalizer" ]]
+return function(p1)
 	-- upvalues: Roact (copy), LocalizationContextConsumerModule (copy)
 	local LocKey = p1.locKey
 	local Params = p1.params
@@ -10,7 +10,7 @@ return function(p1) --[[ Line: 8 | Named "TextLocalizer" ]]
 	assert(typeof(RenderFunction) == "function", "Render prop must be a function")
 	
 	return Roact.createElement(LocalizationContextConsumerModule, {
-		render = function(p2) --[[ Line: 17 ]]
+		render = function(p2)
 			-- upvalues: RenderFunction (copy), LocKey (copy), Params (copy)
 			return RenderFunction(p2:Format(LocKey, Params))
 		end

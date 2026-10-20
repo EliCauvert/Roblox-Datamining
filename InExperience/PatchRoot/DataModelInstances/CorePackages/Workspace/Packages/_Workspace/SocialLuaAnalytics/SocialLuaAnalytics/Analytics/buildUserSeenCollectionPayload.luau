@@ -1,6 +1,6 @@
 ﻿local FFlagLuaAppUserSeenCollectionUnifiedFields = require(script:FindFirstAncestor("SocialLuaAnalytics").Parent.SharedFlags).FFlagLuaAppUserSeenCollectionUnifiedFields
 
-return function(List, SessionEventCount) --[[ Line: 32 | Named "buildUserSeenCollectionPayload" ]]
+return function(List, SessionEventCount)
 	-- upvalues: FFlagLuaAppUserSeenCollectionUnifiedFields (copy)
 	local List1 = {}
 	local List2 = {}

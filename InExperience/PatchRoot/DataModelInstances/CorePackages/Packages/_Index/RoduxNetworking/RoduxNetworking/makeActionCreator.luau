@@ -1,11 +1,11 @@
 ﻿local ActionModule = require(script.Parent.Action)
 
-return function(p1) --[[ Line: 5 ]]
+return function(p1)
 	-- upvalues: ActionModule (copy)
 	local Name = if type(p1) == "string" then p1 else p1.Name
 	
 	return {
-		Succeeded = ActionModule(Name .. "_Succeeded", function(Ids, ResponseBody, NamedIds, p2, AdditionalData) --[[ Line: 14 ]]
+		Succeeded = ActionModule(Name .. "_Succeeded", function(Ids, ResponseBody, NamedIds, p2, AdditionalData)
 			return {
 				ids = Ids,
 				responseBody = ResponseBody,
@@ -15,7 +15,7 @@ return function(p1) --[[ Line: 5 ]]
 				additionalData = AdditionalData
 			}
 		end),
-		Failed = ActionModule(Name .. "_Failed", function(Ids, p2, NamedIds, p3, AdditionalData) --[[ Line: 24 ]]
+		Failed = ActionModule(Name .. "_Failed", function(Ids, p2, NamedIds, p3, AdditionalData)
 			return {
 				ids = Ids,
 				error = p2,

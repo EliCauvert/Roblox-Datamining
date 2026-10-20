@@ -25,7 +25,7 @@ local config1 = {
 	}
 }
 
-return function() --[[ Line: 27 | Named "useLibraryStrings" ]]
+return function()
 	-- upvalues: LocalizationModule (copy), config (copy), ReactModule (copy), config1 (copy)
 	local UseContextResult = ReactModule.useContext(LocalizationModule.LocalizationRoactContext)
 	local Copy = table.clone((LocalizationModule.Hooks.useLocalization(config)))
@@ -33,7 +33,7 @@ return function() --[[ Line: 27 | Named "useLibraryStrings" ]]
 	for i, value in config1 do
 		local v1 = value[1]
 		local v2 = value[2]
-		local Success, Result = pcall(function() --[[ Line: 33 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: UseContextResult (copy), v1 (copy)
 			assert(UseContextResult ~= nil, "Library localization context is unavailable")
 			

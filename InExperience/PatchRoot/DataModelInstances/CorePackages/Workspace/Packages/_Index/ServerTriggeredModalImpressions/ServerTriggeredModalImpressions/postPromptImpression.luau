@@ -6,9 +6,9 @@ local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
 	base = require(Parent.UrlBuilder).UrlBase.APIS
 })
 
-return function(Callback, PromptType, PromptId) --[[ Line: 15 ]]
+return function(Callback, PromptType, PromptId)
 	-- upvalues: NewResult (copy), HttpService (copy), PromiseModule (copy)
-	local Success, Result = pcall(function() --[[ Line: 16 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: Callback (copy), NewResult (upval), HttpService (upval), PromptType (copy), PromptId (copy)
 		return Callback(NewResult(), "POST", {
 			postBody = HttpService:JSONEncode({ promptType = PromptType, promptId = PromptId })

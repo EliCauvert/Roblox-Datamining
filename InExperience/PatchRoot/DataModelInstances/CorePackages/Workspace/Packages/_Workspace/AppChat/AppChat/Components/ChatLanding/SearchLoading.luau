@@ -12,7 +12,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local _UDim2 = UDim2.fromOffset(94, 12)
 local _UDim2_1 = UDim2.fromOffset(169, 12)
 
-return function(p1) --[[ Line: 27 | Named "SearchLoading" ]]
+return function(p1)
 	-- upvalues: UseChatPagePaddingModule (copy), UseTokensFunction (copy), ReactModule (copy), View (copy), FFlagAppChatExtendConversationListRowDividersModule (copy), Skeleton (copy), Radius (copy), _UDim2 (copy), _UDim2_1 (copy), FFlagAppChatRemoveConversationListDividerModule (copy), FoundationModule (copy)
 	local UseChatPagePaddingModuleResult = UseChatPagePaddingModule()
 	local UseTokensResult = UseTokensFunction()

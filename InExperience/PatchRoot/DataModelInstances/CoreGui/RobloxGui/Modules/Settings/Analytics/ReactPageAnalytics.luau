@@ -21,12 +21,12 @@ ReactPageAnalyticsModule.configs = {
 	}
 }
 
-function ReactPageAnalyticsModule.new() --[[ Line: 52 ]]
+function ReactPageAnalyticsModule.new()
 	-- upvalues: ReactPageAnalyticsModule (copy)
 	return (setmetatable({}, ReactPageAnalyticsModule))
 end
 
-function ReactPageAnalyticsModule:_logEventWithStandardizedFields(ClosePage, EventContext, p1) --[[ Line: 57 ]]
+function ReactPageAnalyticsModule:_logEventWithStandardizedFields(ClosePage, EventContext, p1)
 	-- upvalues: TelemetryServicePlaySessionInfoEnabledEngineFeature (copy), RbxAnalyticsService (copy), TelemetryService (copy)
 	local StandardizedFields = { "addPlaceId", "addUniverseId", "addSessionInfo" }
 	local P3 = p1 or {}
@@ -43,11 +43,11 @@ function ReactPageAnalyticsModule:_logEventWithStandardizedFields(ClosePage, Eve
 	})
 end
 
-function ReactPageAnalyticsModule:openPage(p1) --[[ Line: 74 ]]
+function ReactPageAnalyticsModule:openPage(p1)
 	self:_logEventWithStandardizedFields(self.configs.openPage, `open_{p1}_page`)
 end
 
-function ReactPageAnalyticsModule:closePage(p1) --[[ Line: 79 ]]
+function ReactPageAnalyticsModule:closePage(p1)
 	self:_logEventWithStandardizedFields(self.configs.closePage, `close_{p1}_page`)
 end
 

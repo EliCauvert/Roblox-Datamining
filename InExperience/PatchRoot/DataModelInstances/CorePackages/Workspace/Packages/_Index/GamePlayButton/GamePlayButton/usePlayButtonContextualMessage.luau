@@ -15,7 +15,7 @@ local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local ExperienceDetailsNoticeType = require(Parent.DiscoveryTypes).ExperienceDetailsNoticeType
 
-local function v10(RootPlaceId, p1, p2) --[[ Line: 24 ]]
+local function v10(RootPlaceId, p1, p2)
 	-- upvalues: PlayabilityStatusEnum (copy), GetAppFeaturePoliciesFunction (copy), LaunchErrorLocalizationKeys (copy)
 	if not p1 then
 		return nil
@@ -33,7 +33,7 @@ local function v10(RootPlaceId, p1, p2) --[[ Line: 24 ]]
 	return LaunchErrorLocalizationKeys[p1.playabilityStatus]
 end
 
-local function _(p1, p2, p3) --[[ Line: 61 ]]
+local function _(p1, p2, p3)
 	-- upvalues: v10 (copy)
 	local v1, Tbl = v10(p1, p2, p3)
 	
@@ -49,18 +49,18 @@ local function _(p1, p2, p3) --[[ Line: 61 ]]
 	end
 end
 
-return function(p1, UnplayableOther, p2) --[[ Line: 80 ]]
+return function(p1, UnplayableOther, p2)
 	-- upvalues: UseAppPolicyFunction (copy), UseSelectorFunction (copy), FFlagMigrateGameInfoToStore (copy), GameHydrationReactModule (copy), UseGameInfosSelectorFunction (copy), UseGameProductInfoSelectorFunction (copy), UseLocalizationFunction (copy), PlayButtonStatesModule (copy), v10 (copy), ExperienceDetailsNoticeType (copy), FFlagEnableGameJoinEarlyAccess (copy), PlayabilityStatusEnum (copy)
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p3) --[[ Line: 81 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p3)
 		return {
 			experienceDetailsNoticeType = p3.getExperienceDetailsNoticeType()
 		}
 	end)
-	local UseSelectorResult = UseSelectorFunction(function(p3) --[[ Line: 87 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p3)
 		-- upvalues: p1 (copy)
 		return p3.PlayabilityStatus and p3.PlayabilityStatus[p1] and p3.PlayabilityStatus[p1].unplayableDisplayText or nil
 	end)
-	local UseSelectorResult1 = UseSelectorFunction(function(p3) --[[ Line: 94 ]]
+	local UseSelectorResult1 = UseSelectorFunction(function(p3)
 		-- upvalues: p1 (copy)
 		return p3.GameDetails[p1]
 	end)

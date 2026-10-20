@@ -1,7 +1,7 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("FriendsChat").Parent.React)
 local FriendsChatDependencyContextModule = require(script.Parent.FriendsChatDependencyContext)
 
-return function() --[[ Line: 8 | Named "useChatWindow" ]]
+return function()
 	-- upvalues: ReactModule (copy), FriendsChatDependencyContextModule (copy)
 	local UseContextResult = ReactModule.useContext(FriendsChatDependencyContextModule)
 	

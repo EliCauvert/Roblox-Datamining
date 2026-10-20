@@ -39,10 +39,10 @@ local GetBuilderIconForCurrentPlatformFunction = FoundationModule.Utility.getBui
 local FFlagProfilePlatformTruncateLongCustomFriendNamesModule = require(ProfilePlatform.Flags.FFlagProfilePlatformTruncateLongCustomFriendNames)
 local IconsActionsEditCopy = if FFlagProfilePlatformEnableClickToCopyUsernameModule then Images["icons/actions/edit/copy"] else nil
 
-return function(p1) --[[ Line: 80 | Named "SocialIdentity" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FFlagAddPlatformNameToProfileHeader (copy), GetBuilderIconForCurrentPlatformFunction (copy), Images (copy), FFlagProfilePlatformEnableClickToCopyUsernameModule (copy), UseDispatchFunction (copy), UseProfileAnalyticsContextModule (copy), FFlagDisableCopyUsernameOnConsole (copy), ResponsiveModule (copy), FFlagHidePremiumIconography (copy), FFlagEnableBlackbirdCheck (copy), VerifiedBadgesModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), Default (copy), Contexts (copy), EventNamesModule (copy), SetCurrentToastMessageFunction (copy), IconsActionsEditCopy (copy), HorizontalPageMargin (copy), FFlagProfilePlatformTruncateLongCustomFriendNamesModule (copy), View (copy), IconButton (copy), IconSize (copy), Tooltip (copy), TooltipOrientation (copy), Text (copy), FFlagProfilePlatformEnableRobloxAdminBadgeModule (copy), FoundationModule (copy), FFlagEnableFontStylisticAlternativesOnSocialScreens (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), OpenTypeSupport (copy), StateLayerAffordance (copy), Icon (copy), IconSize1 (copy)
 	local UseTokensResult = UseTokensFunction()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 82 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FFlagAddPlatformNameToProfileHeader (upval), GetBuilderIconForCurrentPlatformFunction (upval)
 		return if FFlagAddPlatformNameToProfileHeader then GetBuilderIconForCurrentPlatformFunction() else nil
 	end, {})
@@ -58,7 +58,7 @@ return function(p1) --[[ Line: 80 | Named "SocialIdentity" ]]
 		usernameCopied = if FFlagProfilePlatformEnableClickToCopyUsernameModule then TextKeysModule.UsernameCopied else nil,
 		trustedLabel = TextKeysModule.TrustedLabel
 	})
-	local UseResult = if FFlagProfilePlatformEnableClickToCopyUsernameModule then ReactModule.useCallback(function() --[[ Line: 118 ]]
+	local UseResult = if FFlagProfilePlatformEnableClickToCopyUsernameModule then ReactModule.useCallback(function()
 		-- upvalues: Default (upval), Contexts (upval), p1 (copy), UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), UseDispatchResult (copy), SetCurrentToastMessageFunction (upval), UseLocalizationResult (copy), IconsActionsEditCopy (upval)
 		Default:setClipboardText({ context = Contexts.ProfileCard, text = p1.username })
 		UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.UsernameCopied)
@@ -73,7 +73,7 @@ return function(p1) --[[ Line: 80 | Named "SocialIdentity" ]]
 		UseLocalizationResult.usernameCopied
 	}) else nil
 	local Text3: string = if p1.isTrustedConnection then ` • {UseLocalizationResult.trustedLabel}` else ""
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 134 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		if p1.openEditName then
 			p1.openEditName()

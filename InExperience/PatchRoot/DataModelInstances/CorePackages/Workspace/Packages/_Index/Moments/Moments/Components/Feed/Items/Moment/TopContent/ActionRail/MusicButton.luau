@@ -10,11 +10,11 @@ local UseMusicInfoModule = require(Moments.Hooks.useMusicInfo)
 local MusicModalModule = require(Moments.Components.MusicModal)
 local FFlagMomentsActionRailSpacingModule = require(Moments.Flags.FFlagMomentsActionRailSpacing)
 
-return ReactModule.memo(function(Frame) --[[ Line: 27 | Named "MusicButton" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: ReactModule (copy), UseMusicInfoModule (copy), View (copy), FFlagMomentsActionRailSpacingModule (copy), MusicThumbnailIcon (copy), MusicThumbnailIconSize (copy), MusicModalModule (copy)
 	local Moment = Frame.moment
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseMusicInfoModuleResult = UseMusicInfoModule((ReactModule.useMemo(function() --[[ Line: 31 ]]
+	local UseMusicInfoModuleResult = UseMusicInfoModule((ReactModule.useMemo(function()
 		-- upvalues: Moment (copy)
 		if Moment == nil then
 			return nil
@@ -29,11 +29,11 @@ return ReactModule.memo(function(Frame) --[[ Line: 27 | Named "MusicButton" ]]
 			return if Music == nil then nil else Music.assetId
 		end
 	end, { Moment })))
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 48 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(true)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 52 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {})

@@ -15,11 +15,11 @@ local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
 })
 
 return {
-	findAvatarHeadshotById = function(UserIds, p1) --[[ Line: 25 ]]
+	findAvatarHeadshotById = function(UserIds, p1)
 		-- upvalues: Fetch (copy), PromiseModule (copy), NewResult (copy), GraphQLError (copy)
 		local Fetch1 = if p1 then p1 else Fetch
 		
-		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 28 ]]
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 			-- upvalues: NewResult (upval), UserIds (copy), Fetch1 (copy), GraphQLError (upval)
 			local v1 = Fetch1(NewResult({ userIds = UserIds }), { method = "GET" }):expect()
 			
@@ -28,7 +28,7 @@ return {
 				
 				return
 			end
-			local v2 = v1:json():catch(function() --[[ Line: 48 ]]
+			local v2 = v1:json():catch(function()
 				return nil
 			end):expect()
 			

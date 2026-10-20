@@ -6,7 +6,7 @@ local InvariantError = require(Parent.jsutils.invariant).InvariantError
 local _ = require(script.Parent.Parent.core.types)
 
 return {
-	validateOperation = function(p1) --[[ Line: 19 ]]
+	validateOperation = function(p1)
 		-- upvalues: Object (copy), Array (copy), InvariantError (copy)
 		local list = {
 			"query",

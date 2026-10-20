@@ -5,7 +5,7 @@ local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
 	base = require(Parent.Http).Url.APIS_URL
 })
 
-return function(Callback, UniverseId) --[[ Line: 29 ]]
+return function(Callback, UniverseId)
 	-- upvalues: NewResult (copy), HttpService (copy)
 	return Callback(NewResult(), "POST", {
 		postBody = HttpService:JSONEncode({ universeId = UniverseId })

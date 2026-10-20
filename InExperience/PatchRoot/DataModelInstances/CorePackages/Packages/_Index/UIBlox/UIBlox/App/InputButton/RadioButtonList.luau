@@ -30,7 +30,7 @@ RadioButtonList.validateProps = TModule.strictInterface({
 })
 RadioButtonList.defaultProps = { isRoactGamepadEnabled = true }
 
-function RadioButtonList.init(p1) --[[ Line: 57 ]]
+function RadioButtonList.init(p1)
 	-- upvalues: RoactGamepadModule (copy)
 	p1.state = { currentValue = p1.props.initialValue or 0 }
 	local DisabledIndices = {}
@@ -40,7 +40,7 @@ function RadioButtonList.init(p1) --[[ Line: 57 ]]
 	end
 	p1.state.disabledIndices = DisabledIndices
 	
-	function p1.doLogic(CurrentValue) --[[ Line: 68 ]]
+	function p1.doLogic(CurrentValue)
 		-- upvalues: p1 (copy)
 		if not p1.state.disabledIndices[CurrentValue] then
 			p1:setState({ currentValue = CurrentValue })
@@ -53,7 +53,7 @@ function RadioButtonList.init(p1) --[[ Line: 57 ]]
 	p1.gamepadRefs = p1.props.isRoactGamepadEnabled and RoactGamepadModule.createRefCache() or {}
 end
 
-function RadioButtonList.renderWithProviders(p2, _, SelectionImageObject) --[[ Line: 81 ]]
+function RadioButtonList.renderWithProviders(p2, _, SelectionImageObject)
 	-- upvalues: RoactModule (copy), RoactGamepadModule (copy), RadioButtonModule (copy)
 	local config = {
 		layout = RoactModule.createElement("UIListLayout", {
@@ -80,7 +80,7 @@ function RadioButtonList.renderWithProviders(p2, _, SelectionImageObject) --[[ L
 			NextSelectionDown = CurrentValue < #p2.props.radioButtons and p2.gamepadRefs[CurrentValue + 1] or nil,
 			SelectionImageObject = SelectionImageObject,
 			inputBindings = if p2.props.isRoactGamepadEnabled then {
-				OnActivatedButton = RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonA, function() --[[ Line: 112 ]]
+				OnActivatedButton = RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonA, function()
 					-- upvalues: p2 (copy), CurrentValue (copy)
 					p2.doLogic(CurrentValue)
 				end)
@@ -100,11 +100,11 @@ function RadioButtonList.renderWithProviders(p2, _, SelectionImageObject) --[[ L
 	}, config)
 end
 
-function RadioButtonList.render(p3) --[[ Line: 134 ]]
+function RadioButtonList.render(p3)
 	return p3:renderWithProviders(nil, p3.props.cursor)
 end
 
-return RoactModule.forwardRef(function(p3, ForwardRef) --[[ Line: 138 ]]
+return RoactModule.forwardRef(function(p3, ForwardRef)
 	-- upvalues: UseCursorByTypeModule (copy), CursorTypeModule (copy), RoactModule (copy), RadioButtonList (copy), CryoModule (copy)
 	return RoactModule.createElement(RadioButtonList, CryoModule.Dictionary.join(p3, {
 		forwardRef = ForwardRef,

@@ -18,7 +18,7 @@ local config1 = {
 	Console = Device.Console
 }
 
-local function StyleLinkPortal(p1) --[[ Line: 29 ]]
+local function StyleLinkPortal(p1)
 	-- upvalues: UseStyleSheetFunction (copy), ReactRobloxModule (copy), ReactModule (copy)
 	return ReactRobloxModule.createPortal(ReactModule.createElement("StyleLink", { StyleSheet = UseStyleSheetFunction() }), p1.overlay)
 end
@@ -27,16 +27,16 @@ return {
 	name = AvatarExperienceGifting.Name,
 	roact = ReactModule,
 	reactRoblox = ReactRobloxModule,
-	mapStory = function(p1) --[[ Line: 39 ]]
+	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), FoundationProvider (copy), config (copy), config1 (copy), StyleLinkPortal (copy)
-		return function(p2) --[[ Line: 40 ]]
+		return function(p2)
 			-- upvalues: ReactModule (upval), FoundationProvider (upval), config (upval), config1 (upval), p1 (copy), StyleLinkPortal (upval)
 			local UseRefResult = ReactModule.useRef(Instance.new("Frame"))
 			
 			if UseRefResult.current.Parent ~= p2.focus then
 				UseRefResult.current.Parent = p2.focus
 			end
-			ReactModule.useLayoutEffect(function() --[[ Line: 46 ]]
+			ReactModule.useLayoutEffect(function()
 				-- upvalues: UseRefResult (copy)
 				UseRefResult.current.Name = "AvatarExperienceGiftingOverlay"
 				UseRefResult.current.Size = UDim2.fromScale(1, 1)

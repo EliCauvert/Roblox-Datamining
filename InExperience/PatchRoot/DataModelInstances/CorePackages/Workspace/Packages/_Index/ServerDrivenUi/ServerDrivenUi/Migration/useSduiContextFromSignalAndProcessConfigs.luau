@@ -8,11 +8,11 @@ local ProcessCollectionConfigModule = require(ServerDrivenUi.System.processColle
 local GetItemCollectionKeyModule = require(ServerDrivenUi.DataStore.getItemCollectionKey)
 local _ = require(Parent.SduiCoreSystem)
 
-return function(p1, AppPage, p2) --[[ Line: 21 | Named "useSduiContextFromSignalAndProcessConfigs" ]]
+return function(p1, AppPage, p2)
 	-- upvalues: ReactModule (copy), GetSduiFeedStoreModule (copy), SignalsReactModule (copy), UseSduiContextModule (copy), GetItemCollectionKeyModule (copy), ProcessCollectionConfigModule (copy)
-	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 26 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: p2 (copy), GetSduiFeedStoreModule (upval), p1 (copy)
-		return function(p3) --[[ Line: 27 ]]
+		return function(p3)
 			-- upvalues: p2 (upval), GetSduiFeedStoreModule (upval), p1 (upval)
 			if not p2 then
 				return {}
@@ -41,7 +41,7 @@ return function(p1, AppPage, p2) --[[ Line: 21 | Named "useSduiContextFromSignal
 		templates = UseSignalStateResult.templates,
 		dataUpdatedTimestamp = UseSignalStateResult.dataUpdatedTimestamp
 	})
-	ReactModule.useEffect(function() --[[ Line: 63 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p2 (copy), GetSduiFeedStoreModule (upval), AppPage (copy), UseSignalStateResult (copy), GetItemCollectionKeyModule (upval), ProcessCollectionConfigModule (upval), UseSduiContextModuleResult (copy)
 		if not p2 then return end
 		local SduiFeedStoreModule = GetSduiFeedStoreModule(AppPage)

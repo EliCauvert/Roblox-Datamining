@@ -1,7 +1,7 @@
 ﻿local MockAppStorageService = {}
 MockAppStorageService.__index = MockAppStorageService
 
-function MockAppStorageService.new(p1) --[[ Line: 4 ]]
+function MockAppStorageService.new(p1)
 	-- upvalues: MockAppStorageService (copy)
 	local P0 = p1 or {}
 	setmetatable(P0, { __index = MockAppStorageService })
@@ -9,14 +9,14 @@ function MockAppStorageService.new(p1) --[[ Line: 4 ]]
 	return P0
 end
 
-function MockAppStorageService:GetItem(p1) --[[ Line: 13 ]]
+function MockAppStorageService:GetItem(p1)
 	return self[p1]
 end
 
-function MockAppStorageService:SetItem(Key, p1) --[[ Line: 18 ]]
+function MockAppStorageService:SetItem(Key, p1)
 	self[Key] = tostring(p1)
 end
 
-function MockAppStorageService:flush() --[[ Line: 22 ]] end
+function MockAppStorageService:flush() end
 
 return MockAppStorageService

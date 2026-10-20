@@ -1,4 +1,4 @@
-﻿return function(Vector, p1, Vector1) --[[ Line: 7 | Named "getZoomedSizeAndOffset" ]]
+﻿return function(Vector, p1, Vector1)
 	local X = if p1 == 0 then Vector.X else Vector.X / p1
 	local Y = if p1 == 0 then Vector.Y else Vector.Y / p1
 	

@@ -31,11 +31,11 @@ AlertTitle.defaultProps = {
 	margin = { top = 0, bottom = 24, left = 24, right = 24 }
 }
 
-function AlertTitle.render(p1) --[[ Line: 57 ]]
+function AlertTitle.render(p1)
 	-- upvalues: WithStyleModule (copy), RoactModule (copy), FitFrameOnAxis (copy), ImageSetComponentModule (copy), ImagesModule (copy), GenericTextLabelModule (copy)
 	local ClampedValueDelta = math.clamp(p1.props.screenSize.X - p1.props.margin.left - p1.props.margin.right, p1.props.minWidth, p1.props.maxWidth) - p1.props.margin.left - p1.props.margin.right
 	
-	return WithStyleModule(function(p2) --[[ Line: 65 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: RoactModule (upval), FitFrameOnAxis (upval), p1 (copy), ImageSetComponentModule (upval), ImagesModule (upval), GenericTextLabelModule (upval), ClampedValueDelta (copy)
 		local Theme = p2.Theme
 		local HeadingSmall = p2.Tokens.Typography.HeadingSmall
@@ -109,7 +109,7 @@ function AlertTitle.render(p1) --[[ Line: 57 ]]
 	end)
 end
 
-return function(p1) --[[ Line: 149 | Named "AlertTitleFunctionalWrapper" ]]
+return function(p1)
 	-- upvalues: UseCursorModule (copy), _UDim (copy), RoactModule (copy), AlertTitle (copy), CryoModule (copy)
 	return RoactModule.createElement(AlertTitle, CryoModule.Dictionary.join(p1, { closeCursor = UseCursorModule(_UDim) }))
 end

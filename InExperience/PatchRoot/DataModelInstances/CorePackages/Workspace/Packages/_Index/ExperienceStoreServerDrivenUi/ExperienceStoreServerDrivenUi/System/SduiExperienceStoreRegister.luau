@@ -6,9 +6,9 @@ local FFlagSduiLocalFeedFilter = require(Parent.SharedFlags).FFlagSduiLocalFeedF
 local RegisterExperienceStoreActionsModule = require(ExperienceStoreServerDrivenUi.Actions.registerExperienceStoreActions)
 local RegisterExperienceStoreComponentsModule = require(ExperienceStoreServerDrivenUi.System.registerExperienceStoreComponents)
 
-return ReactModule.memo(function() --[[ Line: 13 | Named "SduiExperienceStoreRegister" ]]
+return ReactModule.memo(function()
 	-- upvalues: ReactModule (copy), RegisterExperienceStoreActionsModule (copy), FFlagSduiGameItemsComponent (copy), FFlagSduiLocalFeedFilter (copy), RegisterExperienceStoreComponentsModule (copy)
-	ReactModule.useEffect(function() --[[ Line: 14 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: RegisterExperienceStoreActionsModule (upval), FFlagSduiGameItemsComponent (upval), FFlagSduiLocalFeedFilter (upval), RegisterExperienceStoreComponentsModule (upval)
 		RegisterExperienceStoreActionsModule()
 		

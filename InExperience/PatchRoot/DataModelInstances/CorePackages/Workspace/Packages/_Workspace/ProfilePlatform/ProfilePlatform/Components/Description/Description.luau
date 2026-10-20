@@ -23,7 +23,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 
-return function(p1) --[[ Line: 41 | Named "Description" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseScreenSizeFunction (copy), UseDynamicSizeMarginModule (copy), UseProfileWrapperContextModule (copy), ReactModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseIsSpatialFunction (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), UseAboutSectionHeightModule (copy), FFlagProfilePlatformNewProfileHeader (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), EnumsModule (copy), View (copy), Text (copy), HorizontalPageMargin (copy), ExpandableTextArea (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseScreenSizeResult = UseScreenSizeFunction()
@@ -41,7 +41,7 @@ return function(p1) --[[ Line: 41 | Named "Description" ]]
 	local IsUsePreferredInputResultMatch = UsePreferredInputFunction() == ResponsiveModule.Input.Directional
 	local UseIsSpatialResult1 = UseIsSpatialResult or IsUsePreferredInputResultMatch
 	local UseAboutSectionHeightModuleResult, UseAboutSectionHeightModuleResult2 = UseAboutSectionHeightModule(Description, UseStateResult, UseDynamicSizeMarginModuleResult)
-	local UseAboutSectionHeightModuleResult1 = if FFlagProfilePlatformNewProfileHeader then UseAboutSectionHeightModuleResult2 else ReactModule.useMemo(function() --[[ Line: 61 ]]
+	local UseAboutSectionHeightModuleResult1 = if FFlagProfilePlatformNewProfileHeader then UseAboutSectionHeightModuleResult2 else ReactModule.useMemo(function()
 		-- upvalues: Description (ref), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), BodyMedium (copy), TextService (upval), UseIsSpatialResult1 (copy)
 		local Replaced = string.gsub(Description or "", "[\r\n]+", " ")
 		
@@ -53,7 +53,7 @@ return function(p1) --[[ Line: 41 | Named "Description" ]]
 		UseIsSpatialResult1
 	})
 	local IsUseAboutSectionHeightModuleResultBelow = if FFlagProfilePlatformNewProfileHeader then UseAboutSectionHeightModuleResult2 < UseAboutSectionHeightModuleResult else nil
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 85 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseStateResult (copy), UseDynamicSizeMarginModuleResult (copy), ReactModule (upval), UseAboutSectionHeightModuleResult1 (copy)
 		return (ReactModule.createElement("UISizeConstraint", {
 			MaxSize = Vector2.new(UseStateResult - UseDynamicSizeMarginModuleResult * 2, UseAboutSectionHeightModuleResult1)
@@ -75,7 +75,7 @@ return function(p1) --[[ Line: 41 | Named "Description" ]]
 		Size = UDim2.new(1, 0, 0, 0),
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.Y,
-		[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 106 ]]
+		[ReactModule.Change.AbsoluteSize] = function(Frame)
 			-- upvalues: UseDynamicSizeMarginModuleResult2 (copy), UseStateResult2 (copy)
 			UseDynamicSizeMarginModuleResult2(Frame)
 			UseStateResult2(Frame.AbsoluteSize.X)

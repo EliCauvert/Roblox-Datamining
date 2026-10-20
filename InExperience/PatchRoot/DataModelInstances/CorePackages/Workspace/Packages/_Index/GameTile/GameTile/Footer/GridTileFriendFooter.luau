@@ -14,7 +14,7 @@ local UseUserProfilesFetchFunction = UserProfilesModule.Hooks.useUserProfilesFet
 local SortFriendsByPresenceAndRecencyFactoryModule = require(GameTile.sortFriendsByPresenceAndRecencyFactory)
 local FFlagLuaAppMigrateGameTileActiveFriendsHydrationFix = require(Parent.SharedFlags).FFlagLuaAppMigrateGameTileActiveFriendsHydrationFix
 
-local function useFetchSortedDisplayNames(UserIds) --[[ Line: 55 ]]
+local function useFetchSortedDisplayNames(UserIds)
 	-- upvalues: UseUserProfilesFetchFunction (copy), UserProfilesModule (copy), SortFriendsByPresenceAndRecencyFactoryModule (copy)
 	local List = {}
 	local UseUserProfilesFetchResult = UseUserProfilesFetchFunction({
@@ -37,7 +37,7 @@ local function useFetchSortedDisplayNames(UserIds) --[[ Line: 55 ]]
 end
 
 return {
-	GridTileFriendFooter = function(p1) --[[ Line: 77 ]]
+	GridTileFriendFooter = function(p1)
 		-- upvalues: UseStyleFunction (copy), UseDesignTokensFunction (copy), UseTextSizeOffsetFunction (copy), UseLocalizationFunction (copy), FFlagLuaAppMigrateGameTileActiveFriendsHydrationFix (copy), useFetchSortedDisplayNames (copy), ReactModule (copy), CoPlayFooter (copy), Array (copy), Colors (copy)
 		local Body = if p1.useLargerFont then UseStyleFunction().Font.Body else UseStyleFunction().Font.CaptionHeader
 		local Size = UseDesignTokensFunction().Size
@@ -71,7 +71,7 @@ return {
 				Users[i] = UseFetchSortedDisplayNamesResult[i].userId
 			end
 			config1.users = Users
-			config1.labelText = Array.join(Array.map(UseFetchSortedDisplayNamesResult, function(p2) --[[ Line: 48 ]]
+			config1.labelText = Array.join(Array.map(UseFetchSortedDisplayNamesResult, function(p2)
 				return p2.displayName
 			end), UseLocalizationResult.friendsSeparator)
 			config1.showEmphasisBorder = p1.showOnlineBorder
@@ -108,7 +108,7 @@ return {
 				Users1[i1] = Friends[i1].userId
 			end
 			config3.users = Users1
-			config3.labelText = Array.join(Array.map(p1.friends or {}, function(p2) --[[ Line: 48 ]]
+			config3.labelText = Array.join(Array.map(p1.friends or {}, function(p2)
 				return p2.displayName
 			end), UseLocalizationResult.friendsSeparator)
 			config3.showEmphasisBorder = p1.showOnlineBorder
@@ -130,7 +130,7 @@ return {
 			return CreateElementFunction3(v2, config2, t1)
 		end
 	end,
-	getUserIdsForFacePile = function(p2) --[[ Line: 37 ]]
+	getUserIdsForFacePile = function(p2)
 		local UserIds = {}
 		
 		for i = 1, #p2 do
@@ -138,9 +138,9 @@ return {
 		end
 		return UserIds
 	end,
-	getDisplayName = function(p3, p4) --[[ Line: 46 ]]
+	getDisplayName = function(p3, p4)
 		-- upvalues: Array (copy)
-		return Array.join(Array.map(p3, function(p5) --[[ Line: 48 ]]
+		return Array.join(Array.map(p3, function(p5)
 			return p5.displayName
 		end), p4)
 	end

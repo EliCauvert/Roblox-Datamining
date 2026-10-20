@@ -11,7 +11,7 @@ local IconName = FoundationModule.Enums.IconName
 local InputSize = FoundationModule.Enums.InputSize
 local Medium = if require(MomentsCreation.Flags.FFlagMomentsTTSCompactActionBar) then InputSize.Medium else InputSize.Large
 
-return function(p1) --[[ Line: 54 | Named "VoiceActionBar" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), Button (copy), FillBehavior (copy), Medium (copy), IconButton (copy), IconName (copy), ButtonVariant (copy)
 	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-small size-full-0 auto-y",

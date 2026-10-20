@@ -2,18 +2,18 @@
 local ReactModule = require(Foundation.Parent.React)
 local UserInputService = require(Foundation.Utility.Wrappers.Services).UserInputService
 
-return function() --[[ Line: 7 | Named "usePreferredInput" ]]
+return function()
 	-- upvalues: ReactModule (copy), UserInputService (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(UserInputService.PreferredInput)
-	ReactModule.useEffect(function() --[[ Line: 10 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UserInputService (upval), UseStateResult2 (copy)
-		local Connection = UserInputService:GetPropertyChangedSignal("PreferredInput"):Connect(function() --[[ Line: 12 ]]
+		local Connection = UserInputService:GetPropertyChangedSignal("PreferredInput"):Connect(function()
 			-- upvalues: UseStateResult2 (upval), UserInputService (upval)
 			UseStateResult2(UserInputService.PreferredInput)
 		end)
 		UseStateResult2(UserInputService.PreferredInput)
 		
-		return function() --[[ Line: 18 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			if Connection then
 				Connection:Disconnect()

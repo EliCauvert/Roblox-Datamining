@@ -28,19 +28,19 @@ AssetDescriptionTextBox.validateProps = TModule.strictInterface({
 	defaultDescription = TModule.optional(TModule.string)
 })
 
-local function _(p1): number --[[ Line: 57 | Named "getStringLength" ]]
+local function _(p1): number
 	local Length = utf8.len(utf8.nfcnormalize(p1))
 	
 	return if Length == nil then 0 else Length
 end
 
-local _ = function(p1, p2): boolean --[[ Line: 66 | Named "isDescriptionTooLong" ]]
+local _ = function(p1, p2): boolean
 	local Length = utf8.len(utf8.nfcnormalize(p1))
 	
 	return p2 < (if Length == nil then 0 else Length)
 end
 
-function AssetDescriptionTextBox.init(p1) --[[ Line: 70 ]]
+function AssetDescriptionTextBox.init(p1)
 	p1:setState({
 		lastValidDescription = "",
 		descriptionLength = 0,
@@ -54,7 +54,7 @@ function AssetDescriptionTextBox.init(p1) --[[ Line: 70 ]]
 	})
 	p1.wasInitiallyFocused = false
 	
-	function p1.tryFocusTextBox() --[[ Line: 85 ]]
+	function p1.tryFocusTextBox()
 		-- upvalues: p1 (copy)
 		if p1.wasInitiallyFocused then return end
 		local Value = p1.props.descriptionTextBoxRef:getValue()
@@ -66,7 +66,7 @@ function AssetDescriptionTextBox.init(p1) --[[ Line: 70 ]]
 	end
 end
 
-function AssetDescriptionTextBox.calculateNeedsRescroll(p1, p2, CaptionBody) --[[ Line: 99 ]]
+function AssetDescriptionTextBox.calculateNeedsRescroll(p1, p2, CaptionBody)
 	-- upvalues: FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy)
 	if p1.state.cursorPosition == -1 then return end
 	local Segment = (p1.state.assetDescription or ""):sub(1, p1.state.cursorPosition - 1)
@@ -86,7 +86,7 @@ function AssetDescriptionTextBox.calculateNeedsRescroll(p1, p2, CaptionBody) --[
 	end
 end
 
-function AssetDescriptionTextBox.onTextChanged(p1, p2, p3, CaptionBody) --[[ Line: 140 ]]
+function AssetDescriptionTextBox.onTextChanged(p1, p2, p3, CaptionBody)
 	-- upvalues: GetFFlagValidateDescriptionModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy)
 	local Text = p2.Text
 	local Inverted: boolean = not GetFFlagValidateDescriptionModule() or Text ~= ""
@@ -113,7 +113,7 @@ function AssetDescriptionTextBox.onTextChanged(p1, p2, p3, CaptionBody) --[[ Lin
 	p1.props.onAssetDescriptionUpdated(Text, Inverted)
 end
 
-function AssetDescriptionTextBox.renderWithProviders(p1, p2, Callback) --[[ Line: 181 ]]
+function AssetDescriptionTextBox.renderWithProviders(p1, p2, Callback)
 	-- upvalues: GetFFlagValidateDescriptionModule (copy), RoactModule (copy), ImageSetLabel (copy), ComponentAssetsCircle17Stroke1 (copy), _Rect (copy), Focusable (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), RobloxTranslatorModule (copy), CursorKind (copy)
 	local _Font = p2.Font
 	local CaptionBody = _Font.CaptionBody
@@ -142,11 +142,11 @@ function AssetDescriptionTextBox.renderWithProviders(p1, p2, Callback) --[[ Line
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				ScrollBarThickness = 12,
 				BorderSizePixel = 0,
-				[RoactModule.Change.CanvasPosition] = function(ScrollFrame) --[[ Line: 211 ]]
+				[RoactModule.Change.CanvasPosition] = function(ScrollFrame)
 					-- upvalues: p1 (copy)
 					p1:setState({ canvasPosition = ScrollFrame.CanvasPosition.Y })
 				end,
-				[RoactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 217 ]]
+				[RoactModule.Change.AbsoluteSize] = function(Frame)
 					-- upvalues: p1 (copy), p2 (copy), CaptionBody (copy)
 					p1:setState({ scrollingFrameHeight = Frame.AbsoluteSize.Y })
 					p1:calculateNeedsRescroll(p2, CaptionBody)
@@ -175,16 +175,16 @@ function AssetDescriptionTextBox.renderWithProviders(p1, p2, Callback) --[[ Line
 					SelectionImageObject = Callback(CursorKind.InputFields),
 					[RoactModule.Ref] = p1.props.descriptionTextBoxRef,
 					[RoactModule.Event.AncestryChanged] = p1.tryFocusTextBox,
-					[RoactModule.Change.Text] = function(p3) --[[ Line: 253 ]]
+					[RoactModule.Change.Text] = function(p3)
 						-- upvalues: p1 (copy), p2 (copy), CaptionBody (copy)
 						p1:onTextChanged(p3, p2, CaptionBody)
 					end,
-					[RoactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 257 ]]
+					[RoactModule.Change.AbsoluteSize] = function(Frame)
 						-- upvalues: p1 (copy), p2 (copy), CaptionBody (copy)
 						p1:setState({ textBoxWidth = Frame.AbsoluteSize.X })
 						p1:calculateNeedsRescroll(p2, CaptionBody)
 					end,
-					[RoactModule.Change.CursorPosition] = function(TextBox) --[[ Line: 264 ]]
+					[RoactModule.Change.CursorPosition] = function(TextBox)
 						-- upvalues: p1 (copy), p2 (copy), CaptionBody (copy)
 						p1:setState({ cursorPosition = TextBox.CursorPosition })
 						p1:calculateNeedsRescroll(p2, CaptionBody)
@@ -217,21 +217,21 @@ function AssetDescriptionTextBox.renderWithProviders(p1, p2, Callback) --[[ Line
 	})
 end
 
-function AssetDescriptionTextBox.render(p1) --[[ Line: 304 ]]
+function AssetDescriptionTextBox.render(p1)
 	-- upvalues: WithStyleFunction (copy), WithSelectionCursorProviderFunction (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 305 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: WithSelectionCursorProviderFunction (upval), p1 (copy)
-		return WithSelectionCursorProviderFunction(function(p3) --[[ Line: 306 ]]
+		return WithSelectionCursorProviderFunction(function(p3)
 			-- upvalues: p1 (upval), p2 (copy)
 			return p1:renderWithProviders(p2, p3)
 		end)
 	end)
 end
 
-function AssetDescriptionTextBox.didMount(p1) --[[ Line: 312 ]]
+function AssetDescriptionTextBox.didMount(p1)
 	p1.tryFocusTextBox()
 end
 
-return RoactRoduxModule.connect(function(p1) --[[ Line: 316 | Named "mapStateToProps" ]]
+return RoactRoduxModule.connect(function(p1)
 	return { assetType = p1.promptRequest.promptInfo.assetType }
 end)(AssetDescriptionTextBox)

@@ -13,14 +13,14 @@ local DataHydrationModule = if FFlagEnableShareSheet then require(Parent.DataHyd
 local SignalsModule = if FFlagEnableShareSheet then require(Parent.Signals) else nil
 local SignalsReactModule = if FFlagEnableShareSheet then require(Parent.SignalsReact) else nil
 
-local function formatSuccessSnackbarText(Entry) --[[ Line: 30 ]]
+local function formatSuccessSnackbarText(Entry)
 	-- upvalues: LocalizationStringsModule (copy)
 	local Entry1 = Entry[1]
 	
 	return LocalizationStringsModule.formatGameSharedWithTarget(if Entry1 then Entry1.displayName else "")
 end
 
-local function sharePublishedExperience(p1, p2) --[[ Line: 35 ]]
+local function sharePublishedExperience(p1, p2)
 	-- upvalues: FFlagEnableShareSheet (copy), UniversalShareSheet (copy), formatSuccessSnackbarText (copy), LocalizationStringsModule (copy), IsSubjectToDesktopPoliciesFunction (copy), Default (copy)
 	local Url: string = `https://www.roblox.com/games/{p1}`
 	
@@ -46,16 +46,16 @@ local function sharePublishedExperience(p1, p2) --[[ Line: 35 ]]
 end
 
 return {
-	getGameShareUrl = function(p1): string --[[ Line: 26 ]]
+	getGameShareUrl = function(p1): string
 		return `https://www.roblox.com/games/{p1}`
 	end,
 	sharePublishedExperience = sharePublishedExperience,
-	useSharePublishedExperience = if FFlagEnableShareSheet then function(p1) --[[ Line: 77 ]]
+	useSharePublishedExperience = if FFlagEnableShareSheet then function(p1)
 		-- upvalues: ReactModule (copy), SignalsModule (copy), DataHydrationModule (copy), SignalsReactModule (copy), LocalizationModule (copy), LocalizationStringsModule (copy), UniversalShareSheet (copy), CreateExperienceShareLinkModule (copy)
 		local Text = if p1 then tostring(p1) else nil
-		local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 79 ]]
+		local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 			-- upvalues: SignalsModule (upval), Text (copy), DataHydrationModule (upval)
-			return SignalsModule.createComputed(function(p2) --[[ Line: 80 ]]
+			return SignalsModule.createComputed(function(p2)
 				-- upvalues: Text (upval), DataHydrationModule (upval)
 				return if Text == nil then nil else DataHydrationModule.Game.getGameInfoStore(p2).getAndFetchGameInfo(Text).data(p2)
 			end)
@@ -69,7 +69,7 @@ return {
 			}
 		})
 		local UseContextResult = ReactModule.useContext(LocalizationModule.LocalizationRoactContext)
-		local UseResult = ReactModule.useCallback(function(Entry) --[[ Line: 106 ]]
+		local UseResult = ReactModule.useCallback(function(Entry)
 			-- upvalues: UseLocalizationResult (copy), UseContextResult (copy), LocalizationStringsModule (upval)
 			local Entry1 = Entry[1]
 			
@@ -77,9 +77,9 @@ return {
 		end, { UseLocalizationResult.gameShared, UseContextResult })
 		local MessagePlaceholder = UseLocalizationResult.messagePlaceholder
 		
-		return ReactModule.useCallback(function(p2) --[[ Line: 119 ]]
+		return ReactModule.useCallback(function(p2)
 			-- upvalues: UniversalShareSheet (upval), UseResult (copy), MessagePlaceholder (copy), p1 (copy), CreateExperienceShareLinkModule (upval)
-			local function showShareSheet(Result) --[[ Line: 120 ]]
+			local function showShareSheet(Result)
 				-- upvalues: UniversalShareSheet (upval), p2 (copy), UseResult (upval), MessagePlaceholder (upval)
 				UniversalShareSheet.show({
 					context = "BuildExperienceGameShare",
@@ -101,7 +101,7 @@ return {
 				
 				return
 			else
-				CreateExperienceShareLinkModule(p1, false):andThen(showShareSheet, function() --[[ Line: 131 ]]
+				CreateExperienceShareLinkModule(p1, false):andThen(showShareSheet, function()
 					-- upvalues: UniversalShareSheet (upval), p2 (copy), UseResult (upval), MessagePlaceholder (upval)
 					UniversalShareSheet.show({
 						context = "BuildExperienceGameShare",
@@ -113,9 +113,9 @@ return {
 				end)
 			end
 		end, { UseResult, MessagePlaceholder, p1 })
-	end else function() --[[ Line: 140 ]]
+	end else function()
 		-- upvalues: ReactModule (copy), sharePublishedExperience (copy)
-		return ReactModule.useCallback(function(p1) --[[ Line: 141 ]]
+		return ReactModule.useCallback(function(p1)
 			-- upvalues: sharePublishedExperience (upval)
 			sharePublishedExperience(p1, nil)
 		end, {})

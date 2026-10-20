@@ -1,4 +1,4 @@
-﻿return function(p1): boolean --[[ Line: 9 | Named "isCallable" ]]
+﻿return function(p1): boolean
 	if typeof(p1) == "function" then
 		return true
 	end

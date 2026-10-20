@@ -15,7 +15,7 @@ local InterfaceResult = TModule.interface({
 	timelineJson = if FFlagLuaAppEnableEnhancedVideoExperienceAssetAndTimelineModule then TModule.optional(TModule.string) else nil
 })
 
-function createEnhancedVideoStore() --[[ Line: 40 ]]
+function createEnhancedVideoStore()
 	-- upvalues: CreateSignalFunction (copy), FFlagLuaAppEnableEnhancedVideoExperienceAssetAndTimelineModule (copy), ServeEnhancedVideoModule (copy), InterfaceResult (copy), FlaggedMutedErrorFunction (copy), EnhancedVideoTelemetryModule (copy)
 	local Signal, Signal2 = CreateSignalFunction("")
 	local Signal1, Signal2_1 = CreateSignalFunction(false)
@@ -31,9 +31,9 @@ function createEnhancedVideoStore() --[[ Line: 40 ]]
 		getShowAdPreferencesUrl = Signal1,
 		getVideoAssetId = Signal3,
 		getTimelineJson = if FFlagLuaAppEnableEnhancedVideoExperienceAssetAndTimelineModule then v1 else nil,
-		fetchInitialData = if FFlagLuaAppEnableEnhancedVideoExperienceAssetAndTimelineModule then function(p1, p2) --[[ Line: 51 ]]
+		fetchInitialData = if FFlagLuaAppEnableEnhancedVideoExperienceAssetAndTimelineModule then function(p1, p2)
 			-- upvalues: ServeEnhancedVideoModule (upval), InterfaceResult (upval), FlaggedMutedErrorFunction (upval), Signal2 (copy), Signal2_1 (copy), Signal2_2 (copy), Callback (ref), EnhancedVideoTelemetryModule (upval)
-			return ServeEnhancedVideoModule(p1, p2):andThen(function(Result) --[[ Line: 53 ]]
+			return ServeEnhancedVideoModule(p1, p2):andThen(function(Result)
 				-- upvalues: InterfaceResult (upval), FlaggedMutedErrorFunction (upval), p2 (copy), Signal2 (upval), Signal2_1 (upval), Signal2_2 (upval), Callback (upval)
 				local ResponseBody = Result.responseBody
 				
@@ -53,15 +53,15 @@ function createEnhancedVideoStore() --[[ Line: 40 ]]
 					
 					return nil
 				end
-			end):catch(function(Err) --[[ Line: 72 ]]
+			end):catch(function(Err)
 				-- upvalues: EnhancedVideoTelemetryModule (upval)
 				EnhancedVideoTelemetryModule.logServeEnhancedVideoError((tostring(Err)))
 				
 				return nil
 			end)
-		end else function(p3, p4) --[[ Line: 78 ]]
+		end else function(p3, p4)
 			-- upvalues: ServeEnhancedVideoModule (upval), InterfaceResult (upval), FlaggedMutedErrorFunction (upval), Signal2 (copy), Signal2_1 (copy), Signal2_2 (copy), EnhancedVideoTelemetryModule (upval)
-			ServeEnhancedVideoModule(p3, p4):andThen(function(Result) --[[ Line: 80 ]]
+			ServeEnhancedVideoModule(p3, p4):andThen(function(Result)
 				-- upvalues: InterfaceResult (upval), FlaggedMutedErrorFunction (upval), p4 (copy), Signal2 (upval), Signal2_1 (upval), Signal2_2 (upval)
 				local ResponseBody = Result.responseBody
 				
@@ -74,7 +74,7 @@ function createEnhancedVideoStore() --[[ Line: 40 ]]
 				else
 					FlaggedMutedErrorFunction("EnhancedVideo_InvalidResponseSchema", `Response does not match expected schema for universe ${p4}`)
 				end
-			end):catch(function(Err) --[[ Line: 93 ]]
+			end):catch(function(Err)
 				-- upvalues: EnhancedVideoTelemetryModule (upval)
 				EnhancedVideoTelemetryModule.logServeEnhancedVideoError((tostring(Err)))
 			end)

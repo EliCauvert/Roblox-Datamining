@@ -3,7 +3,7 @@ local CreatorCreditPageViewModule = require(script.Parent.CreatorCreditPageView)
 local DailyLimitBottomSheetModule = require(script.Parent.DailyLimitBottomSheet)
 local UseCreatorCreditPageViewModelModule = require(script.Parent.useCreatorCreditPageViewModel)
 
-return function(_) --[[ Line: 12 | Named "CreatorCreditPageContainer" ]]
+return function(_)
 	-- upvalues: UseCreatorCreditPageViewModelModule (copy), ReactModule (copy), CreatorCreditPageViewModule (copy), DailyLimitBottomSheetModule (copy)
 	local UseCreatorCreditPageViewModelModuleResult = UseCreatorCreditPageViewModelModule()
 	

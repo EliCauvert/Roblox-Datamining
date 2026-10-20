@@ -6,7 +6,7 @@ local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SduiActionType = SduiCoreSystemModule.SduiActionType
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 
-local function buildSubscriptionProductInfo(ActionParams) --[[ Line: 20 ]]
+local function buildSubscriptionProductInfo(ActionParams)
 	return {
 		isForSale = true,
 		name = ActionParams.name or "",
@@ -22,7 +22,7 @@ local function buildSubscriptionProductInfo(ActionParams) --[[ Line: 20 ]]
 	}
 end
 
-return function(p1, _, p2) --[[ Line: 36 ]]
+return function(p1, _, p2)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), buildSubscriptionProductInfo (copy), FFlagSduiSubscriptionCellPostPurchaseSync (copy), DataHydrationModule (copy), AppPage (copy)
 	local Logger = p2.dependencies.logger
 	local AppPage1 = p2.appPage
@@ -58,7 +58,7 @@ return function(p1, _, p2) --[[ Line: 36 ]]
 				isSubscribed = IsIsSubscribed,
 				creatorName = ActionParams.creatorName,
 				creatorVerified = ActionParams.creatorVerified,
-				onPurchaseSuccess = if FFlagSduiSubscriptionCellPostPurchaseSync then function() --[[ Line: 86 ]]
+				onPurchaseSuccess = if FFlagSduiSubscriptionCellPostPurchaseSync then function()
 					-- upvalues: DataHydrationModule (upval), SubscriptionId (copy)
 					DataHydrationModule.Game.getGameSubscriptionStore(false).updateGameSubscriptionInfo(SubscriptionId, { isSubscribed = true })
 				end else nil

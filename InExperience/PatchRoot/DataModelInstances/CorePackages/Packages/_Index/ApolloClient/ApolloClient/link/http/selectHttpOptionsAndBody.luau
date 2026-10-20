@@ -12,12 +12,12 @@ local SelectHttpOptionsAndBodyModule = {
 		headers = { accept = "*/*", ["content-type"] = "application/json" },
 		options = { method = "POST" }
 	},
-	selectHttpOptionsAndBody = function(Body, p1, ...) --[[ Line: 112 ]]
+	selectHttpOptionsAndBody = function(Body, p1, ...)
 		-- upvalues: Object (copy), Array (copy), Callback (ref), Boolean (copy), PrintFunction (copy)
 		local AssignResult = Object.assign({}, p1.options, { headers = p1.headers, credentials = p1.credentials })
 		local T = nil
 		T = if p1.http == nil then {} else p1.http
-		Array.forEach({ ... }, function(p2) --[[ Line: 131 ]]
+		Array.forEach({ ... }, function(p2)
 			-- upvalues: AssignResult (ref), Object (upval), Callback (upval), Boolean (upval), T (ref)
 			AssignResult = Object.assign({}, AssignResult, p2.options, {
 				headers = Object.assign({}, AssignResult.headers, Callback(p2.headers))
@@ -45,13 +45,13 @@ local SelectHttpOptionsAndBodyModule = {
 	end
 }
 
-Callback = function(Headers) --[[ Line: 163 | Named "headersToLowerCase" ]]
+Callback = function(Headers)
 	-- upvalues: Array (copy), Object (copy)
 	if Headers == nil then
 		return Headers
 	else
 		local t = {}
-		Array.forEach(Object.keys(Headers), function(Text: string) --[[ Line: 166 ]]
+		Array.forEach(Object.keys(Headers), function(Text: string)
 			-- upvalues: t (copy), Headers (copy)
 			t[string.lower(Text)] = Headers[Text]
 		end)

@@ -2,21 +2,21 @@
 local ReactModule = require(AvatarExperienceCommon.Parent.React)
 local AnimationConstantsModule = require(AvatarExperienceCommon.AnimationConstants)
 
-return function(p1) --[[ Line: 15 | Named "useSubcategoryPillAnimation" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), AnimationConstantsModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState({})
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 22 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy)
-		return function() --[[ Line: 23 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			if UseRefResult.current then
 				task.cancel(UseRefResult.current)
 			end
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 31 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseRefResult (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), AnimationConstantsModule (upval)
 		local Subcategories = if p1 and p1.Subcategories then p1.Subcategories else {}
 		
@@ -29,7 +29,7 @@ return function(p1) --[[ Line: 15 | Named "useSubcategoryPillAnimation" ]]
 		else
 			UseStateResult2_1(true)
 		end
-		UseRefResult.current = task.delay(AnimationConstantsModule.FIntAXSubcategoryPillFadeAnimationDurationMs / 1000, function() --[[ Line: 54 ]]
+		UseRefResult.current = task.delay(AnimationConstantsModule.FIntAXSubcategoryPillFadeAnimationDurationMs / 1000, function()
 			-- upvalues: Subcategories (copy), UseStateResult2 (upval), UseStateResult2_1 (upval), UseRefResult (upval)
 			if not next(Subcategories) then
 				UseStateResult2({})

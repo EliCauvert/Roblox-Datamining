@@ -36,11 +36,11 @@ local MenuOfferTooltipPriority = game:DefineFastInt("MenuOfferTooltipPriority", 
 local MenuOfferTooltipShowDelayMs = game:DefineFastInt("MenuOfferTooltipShowDelayMs", 1500)
 local MenuOfferTooltipDismissDelayMs = game:DefineFastInt("MenuOfferTooltipDismissDelayMs", 7000)
 
-local function MenuOfferTooltipContent(p1) --[[ Line: 60 ]]
+local function MenuOfferTooltipContent(p1)
 	-- upvalues: UseOffersForKeyFunction (copy), FeatureKeys (copy), UseSignalStateFunction (copy), GetOffersStoreFunction (copy), ReactModule (copy), IsNotificationEligibleFunction (copy), SelectActiveOfferFunction (copy), ConstantsModule (copy), ServiceModule (copy), ToggleInExperienceShopWindowFunction (ref), TooltipContextModule (copy), UseIsTooltipTurnModule (copy), UseMappedSignalFunction (copy), FFlagOfferNotifyOnGlobalIcon (copy), FFlagHideOfferNotificationsWhenShopEmpty (copy), UseShopHasItemsFunction (copy), MenuOfferTooltipPriority (copy), MenuOfferTooltipShowDelayMs (copy), MenuOfferTooltipDismissDelayMs (copy), GuiService (copy), ButtonVariant (copy), OverlayProvider (copy), EducationalTooltip (copy), PopoverSide (copy), PopoverAlign (copy)
 	local UseOffersForKeyResult = UseOffersForKeyFunction(FeatureKeys.RobloxShop)
 	local UseSignalStateResult = UseSignalStateFunction(GetOffersStoreFunction(false).getOfferExposureSnapshot)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 67 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseOffersForKeyResult (copy), UseSignalStateResult (copy), IsNotificationEligibleFunction (upval), SelectActiveOfferFunction (upval)
 		if UseOffersForKeyResult == nil or UseSignalStateResult == nil then
 			return nil
@@ -55,16 +55,16 @@ local function MenuOfferTooltipContent(p1) --[[ Line: 60 ]]
 		return SelectActiveOfferFunction(List, "tooltip")
 	end, { UseOffersForKeyResult, UseSignalStateResult })
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 83 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), p1 (copy)
 		UseStateResult2(p1.anchorRef ~= nil and p1.anchorRef.current ~= nil)
 	end, { p1.anchorRef })
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 89 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(true)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 93 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy), ConstantsModule (upval), ServiceModule (upval), ToggleInExperienceShopWindowFunction (upval), GetOffersStoreFunction (upval)
 		UseResult()
 		local INEXPERIENCESHOPID = ConstantsModule.IN_EXPERIENCE_SHOP_ID
@@ -84,7 +84,7 @@ local function MenuOfferTooltipContent(p1) --[[ Line: 60 ]]
 	local UseContextResult = ReactModule.useContext(TooltipContextModule)
 	local MENUOFFERTOOLTIP = UseIsTooltipTurnModule("MENU_OFFER_TOOLTIP") or false
 	local UseRefResult = ReactModule.useRef(UseContextResult)
-	ReactModule.useEffect(function() --[[ Line: 117 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseContextResult (copy)
 		UseRefResult.current = UseContextResult
 	end, { UseContextResult })
@@ -93,14 +93,14 @@ local function MenuOfferTooltipContent(p1) --[[ Line: 60 ]]
 	local UseSignalStateResult1 = if FFlagOfferNotifyOnGlobalIcon then UseSignalStateFunction(GetOffersStoreFunction(false).getHasInExperienceShopOpened) else false
 	local Inverted: boolean = FFlagHideOfferNotificationsWhenShopEmpty and not UseShopHasItemsFunction()
 	local NoUseSignalStateResult1: boolean = if FFlagOfferNotifyOnGlobalIcon then not Inverted and (Tooltip ~= nil and (p1.visible == true and (UseStateResult and (not UseStateResult1 and not UseSignalStateResult1)))) else not Inverted and (Tooltip ~= nil and (p1.visible == true and (IsUseMappedSignalResultMatch and (UseStateResult and not UseStateResult1))))
-	ReactModule.useEffect(function() --[[ Line: 144 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), NoUseSignalStateResult1 (ref), MenuOfferTooltipPriority (upval), MenuOfferTooltipShowDelayMs (upval), MenuOfferTooltipDismissDelayMs (upval)
 		local Current = UseRefResult.current
 		
 		if NoUseSignalStateResult1 and Current ~= nil then
 			Current.registerTooltip("MENU_OFFER_TOOLTIP", MenuOfferTooltipPriority, MenuOfferTooltipShowDelayMs, MenuOfferTooltipDismissDelayMs)
 			
-			return function() --[[ Line: 157 ]]
+			return function()
 				-- upvalues: Current (copy)
 				Current.unregisterTooltip("MENU_OFFER_TOOLTIP")
 			end
@@ -109,19 +109,19 @@ local function MenuOfferTooltipContent(p1) --[[ Line: 60 ]]
 		end
 	end, { NoUseSignalStateResult1, OfferId })
 	local MENUOFFERTOOLTIP1 = NoUseSignalStateResult1 and MENUOFFERTOOLTIP
-	ReactModule.useEffect(function() --[[ Line: 165 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: NoUseSignalStateResult1 (ref), ServiceModule (upval), UseResult (copy), GuiService (upval)
 		if NoUseSignalStateResult1 then
-			local Connection = ServiceModule:onIntegrationActivated():connect(function() --[[ Line: 170 ]]
+			local Connection = ServiceModule:onIntegrationActivated():connect(function()
 				-- upvalues: UseResult (upval)
 				UseResult()
 			end)
-			local MenuOpenedConnection = GuiService.MenuOpened:Connect(function() --[[ Line: 173 ]]
+			local MenuOpenedConnection = GuiService.MenuOpened:Connect(function()
 				-- upvalues: UseResult (upval)
 				UseResult()
 			end)
 			
-			return function() --[[ Line: 177 ]]
+			return function()
 				-- upvalues: Connection (copy), MenuOpenedConnection (copy)
 				Connection:disconnect()
 				MenuOpenedConnection:Disconnect()
@@ -152,13 +152,13 @@ local function MenuOfferTooltipContent(p1) --[[ Line: 60 ]]
 	})
 end
 
-return ReactModule.memo(function(p2) --[[ Line: 212 | Named "MenuOfferTooltip" ]]
+return ReactModule.memo(function(p2)
 	-- upvalues: FFlagOfferNotifyOnGlobalIcon (copy), UseSignalStateFunction (copy), GetOffersStoreFunction (copy), ServiceModule (copy), ConstantsModule (copy), UseMappedSignalFunction (copy), InExperienceShopModule (ref), ReactModule (copy), MenuOfferTooltipContent (copy)
 	if FFlagOfferNotifyOnGlobalIcon then
 		local UseSignalStateResult = UseSignalStateFunction(GetOffersStoreFunction(false).getIsInExperienceShopGlobalIconAvailable)
 		local IntegrationsResultEntry = ServiceModule:integrations()[ConstantsModule.IN_EXPERIENCE_SHOP_ID]
 		local IsUseMappedSignalResultMatch = UseMappedSignalFunction(if IntegrationsResultEntry then IntegrationsResultEntry.availability else nil) == ServiceModule.AvailabilitySignal.Available
-		local UseSignalStateResult1 = UseSignalStateFunction(function(p3) --[[ Line: 220 ]]
+		local UseSignalStateResult1 = UseSignalStateFunction(function(p3)
 			-- upvalues: InExperienceShopModule (upval)
 			local GetShopGlobalIconStoreFunction = InExperienceShopModule.GetShopGlobalIconStore
 			

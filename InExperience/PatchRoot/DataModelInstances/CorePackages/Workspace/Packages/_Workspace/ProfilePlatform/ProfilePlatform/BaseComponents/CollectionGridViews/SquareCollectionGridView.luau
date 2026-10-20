@@ -13,7 +13,7 @@ local AppPage = require(Parent.RobloxAppEnums).AppPage
 local ProfileCollectionGridConfigModule = require(script.Parent.ProfileCollectionGridConfig)
 local FFlagProfilePlatformEnableImpressions = require(Parent.SharedFlags).FFlagProfilePlatformEnableImpressions
 
-return function(p1) --[[ Line: 28 | Named "SquareCollectionsGridView" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FFlagProfilePlatformEnableImpressions (copy), UseProfileAnalyticsContextModule (copy), UseCollectionImpressionsSignalFunction (copy), ProfileCollectionGridConfigModule (copy), UseDynamicSizeMarginModule (copy), UseCollectionLayoutParamsFunction (copy), CollectionItemSize (copy), CollectionGrid (copy), ScreenSizeImpressionsTracker (copy), AppPage (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseRefResult = if FFlagProfilePlatformEnableImpressions then ReactModule.useRef(nil) else nil
@@ -24,7 +24,7 @@ return function(p1) --[[ Line: 28 | Named "SquareCollectionsGridView" ]]
 	if FFlagProfilePlatformEnableImpressions then
 		ScrollViewPositionChangedSignal, Callback = UseCollectionImpressionsSignalFunction(UseProfileAnalyticsContextModuleResult.scrollViewPositionChangedSignal)
 	end
-	ReactModule.useEffect(function() --[[ Line: 39 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult (copy), FFlagProfilePlatformEnableImpressions (upval), UseRefResult (copy)
 		if p1.setForwardRef then
 			p1.setForwardRef(UseStateResult)
@@ -37,14 +37,14 @@ return function(p1) --[[ Line: 28 | Named "SquareCollectionsGridView" ]]
 	local config = { sideMargin = 0 }
 	local UseDynamicSizeMarginModuleResult, UseDynamicSizeMarginModuleResult2 = UseDynamicSizeMarginModule()
 	local UseCollectionLayoutParamsResult = UseCollectionLayoutParamsFunction(CollectionItemSize.Small, UseStateResult, false, config)
-	local UseResult = if FFlagProfilePlatformEnableImpressions then ReactModule.useCallback(function(p2) --[[ Line: 58 ]]
+	local UseResult = if FFlagProfilePlatformEnableImpressions then ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy), Callback (ref)
 		if p1.onContainerSizeChanged then
 			p1.onContainerSizeChanged(p2)
 		end
 		Callback()
 	end, { p1.onContainerSizeChanged, Callback }) else nil
-	local UseResult1 = if FFlagProfilePlatformEnableImpressions then ReactModule.useCallback(function(p2, p3) --[[ Line: 67 ]]
+	local UseResult1 = if FFlagProfilePlatformEnableImpressions then ReactModule.useCallback(function(p2, p3)
 		-- upvalues: p1 (copy), Callback (ref)
 		if p1.onViewableItemsChanged then
 			p1.onViewableItemsChanged(p2, p3)

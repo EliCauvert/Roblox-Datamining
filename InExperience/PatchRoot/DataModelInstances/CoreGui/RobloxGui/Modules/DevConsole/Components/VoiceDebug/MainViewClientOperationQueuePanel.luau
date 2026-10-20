@@ -8,7 +8,7 @@ local VirtualListModule = require(Components.VirtualList)
 local CollapsibleSectionModule = require(script.Parent.CollapsibleSection)
 local VoiceDebugOperationLabelsModule = require(script.Parent.VoiceDebugOperationLabels)
 
-local function filterOperations(Operations, ExcludedNames, ShowCullingExclusively) --[[ Line: 21 ]]
+local function filterOperations(Operations, ExcludedNames, ShowCullingExclusively)
 	local t = {}
 	
 	for _, operation in Operations do
@@ -23,11 +23,11 @@ local function filterOperations(Operations, ExcludedNames, ShowCullingExclusivel
 	return t
 end
 
-local function isChipOn(p1, p2, p3) --[[ Line: 35 ]]
+local function isChipOn(p1, p2, p3)
 	return if p1 == "ClientCullingOperation" then p3 else not p3 and not p2[p1]
 end
 
-local function nextChipState(Key, State) --[[ Line: 42 ]]
+local function nextChipState(Key, State)
 	if Key == "ClientCullingOperation" then
 		return {
 			excludedNames = State.excludedNames,
@@ -46,7 +46,7 @@ end
 
 local ClientOperationQueuePanel = RoactModule.Component:extend("ClientOperationQueuePanel")
 
-function ClientOperationQueuePanel.init(p1) --[[ Line: 63 ]]
+function ClientOperationQueuePanel.init(p1)
 	-- upvalues: MergeObservedNamesModule (copy), nextChipState (copy)
 	local ObservedNames = {}
 	MergeObservedNamesModule((p1.props.remoteOperations or {}).operations or {}, ObservedNames, "operationType")
@@ -56,16 +56,16 @@ function ClientOperationQueuePanel.init(p1) --[[ Line: 63 ]]
 		excludedNames = {}
 	}
 	
-	function p1.onChipActivated(Key) --[[ Line: 73 ]]
+	function p1.onChipActivated(Key)
 		-- upvalues: p1 (copy), nextChipState (upval)
-		p1:setState(function(p2) --[[ Line: 74 ]]
+		p1:setState(function(p2)
 			-- upvalues: nextChipState (upval), Key (copy)
 			return (nextChipState(Key, p2))
 		end)
 	end
 end
 
-function ClientOperationQueuePanel.didUpdate(p1, p2) --[[ Line: 80 ]]
+function ClientOperationQueuePanel.didUpdate(p1, p2)
 	-- upvalues: MergeObservedNamesModule (copy)
 	if p2.remoteOperations == p1.props.remoteOperations then return end
 	local Copy = table.clone(p1.state.observedNames)
@@ -75,14 +75,14 @@ function ClientOperationQueuePanel.didUpdate(p1, p2) --[[ Line: 80 ]]
 	end
 end
 
-function ClientOperationQueuePanel.render(p1) --[[ Line: 91 ]]
+function ClientOperationQueuePanel.render(p1)
 	-- upvalues: filterOperations (copy), RoactModule (copy), FilterChipModule (copy), VoiceDebugOperationLabelsModule (copy), CollapsibleSectionModule (copy), InfoBannerModule (copy), VirtualListModule (copy), OperationRowModule (copy)
 	local RemoteOperations = p1.props.remoteOperations or {}
 	local LayoutOrder = p1.props.layoutOrder
 	local ExcludedNames = p1.state.excludedNames
 	local ShowCullingExclusively = p1.state.showCullingExclusively
 	local FilterOperationsResult = filterOperations(RemoteOperations.operations or {}, ExcludedNames, ShowCullingExclusively)
-	table.sort(FilterOperationsResult, function(A, B): boolean --[[ Line: 98 ]]
+	table.sort(FilterOperationsResult, function(A, B): boolean
 		return B.timestampSeconds < A.timestampSeconds
 	end)
 	local Elements = {}
@@ -94,7 +94,7 @@ function ClientOperationQueuePanel.render(p1) --[[ Line: 91 ]]
 			name = VoiceDebugOperationLabelsModule.labelForOperationType(observedName),
 			isOn = if observedName == "ClientCullingOperation" then ShowCullingExclusively else not ShowCullingExclusively and not ExcludedNames[observedName],
 			layoutOrder = LayoutOrder1,
-			onActivated = function() --[[ Line: 110 ]]
+			onActivated = function()
 				-- upvalues: p1 (copy), observedName (copy)
 				p1.onChipActivated(observedName)
 			end
@@ -126,7 +126,7 @@ function ClientOperationQueuePanel.render(p1) --[[ Line: 91 ]]
 			layoutOrder = 3,
 			emptyText = "No activity observed yet.",
 			items = FilterOperationsResult,
-			renderItem = function(p2, LayoutOrder) --[[ Line: 146 ]]
+			renderItem = function(p2, LayoutOrder)
 				-- upvalues: VoiceDebugOperationLabelsModule (upval), RoactModule (upval), OperationRowModule (upval)
 				return RoactModule.createElement(OperationRowModule, {
 					tag = "op",

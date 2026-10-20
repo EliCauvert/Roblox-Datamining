@@ -2,7 +2,7 @@
 local ConstantsModule = require(AvatarViewport.Constants)
 
 return {
-	getThumbstickAxis = function(Offset, p1): number --[[ Line: 9 ]]
+	getThumbstickAxis = function(Offset, p1): number
 		if Offset.Magnitude < p1 then
 			return 0
 		else
@@ -11,7 +11,7 @@ return {
 			return math.max(math.abs(Offset.X) - Magnitude, 0) / (1 - Magnitude) * math.sign(Offset.X)
 		end
 	end,
-	getThumbstickAxisY = function(Offset, p1): number --[[ Line: 23 ]]
+	getThumbstickAxisY = function(Offset, p1): number
 		if Offset.Magnitude < p1 then
 			return 0
 		else
@@ -20,7 +20,7 @@ return {
 			return math.max(math.abs(Offset.Y) - Magnitude, 0) / (1 - Magnitude) * math.sign(Offset.Y)
 		end
 	end,
-	computeYawDeltaDegrees = function(Offset, p1, p2, p3) --[[ Line: 36 ]]
+	computeYawDeltaDegrees = function(Offset, p1, p2, p3)
 		local ScaledLargest = nil
 		if Offset.Magnitude < p3 then
 			ScaledLargest = 0
@@ -30,7 +30,7 @@ return {
 		end
 		return if ScaledLargest == 0 then 0 else -ScaledLargest * p2 * p1
 	end,
-	computeZoomGestureDelta = function(Offset, p1, p2, p3, p4) --[[ Line: 55 ]]
+	computeZoomGestureDelta = function(Offset, p1, p2, p3, p4)
 		local Value = nil
 		if Offset.Magnitude < p3 then
 			Value = 0
@@ -40,7 +40,7 @@ return {
 		end
 		return if math.abs(Value) < p4 then 0 else Value * p2 * p1
 	end,
-	isRotating = function(Offset, p1): boolean --[[ Line: 51 ]]
+	isRotating = function(Offset, p1): boolean
 		local ScaledLargest = nil
 		if Offset.Magnitude < p1 then
 			ScaledLargest = 0

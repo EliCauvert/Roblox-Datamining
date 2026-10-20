@@ -9,7 +9,7 @@ local GameGetPlayabilityStoreModule = if FFlagMomentsServeEDPVideos then require
 local IsVideoEligibleForPlayability = if FFlagMomentsServeEDPVideos then require(Parent.VideoUtils).isVideoEligibleForPlayability else nil
 local ToMediaItemModule = require(script.Parent.toMediaItem)
 
-local function _(p1): boolean --[[ Line: 46 | Named "hasMedia" ]]
+local function _(p1): boolean
 	if p1.kind == "moment" then
 		local Moment = p1.moment
 		
@@ -19,10 +19,10 @@ local function _(p1): boolean --[[ Line: 46 | Named "hasMedia" ]]
 	end
 end
 
-return function(p1, GetPlaybackActive, GetCanAutoPlay) --[[ Line: 54 | Named "createFeedMediaSource" ]]
+return function(p1, GetPlaybackActive, GetCanAutoPlay)
 	-- upvalues: FFlagMomentsServeEDPVideos (copy), GameGetPlayabilityStoreModule (copy), IsVideoEligibleForPlayability (copy), ToMediaItemModule (copy), FFlagMomentsModeratedMomentPageModule (copy)
 	local T = if FFlagMomentsServeEDPVideos then {} else nil
-	local Callback = if FFlagMomentsServeEDPVideos then function(p2, p3) --[[ Line: 61 ]]
+	local Callback = if FFlagMomentsServeEDPVideos then function(p2, p3)
 		-- upvalues: T (copy), GameGetPlayabilityStoreModule (upval), IsVideoEligibleForPlayability (upval)
 		local HasMetadata = nil
 		if p2.kind == "moment" then
@@ -54,7 +54,7 @@ return function(p1, GetPlaybackActive, GetCanAutoPlay) --[[ Line: 54 | Named "cr
 		return IsVideoEligibleForPlayability(Entry.status(p3) == "Ready", Entry.data(p3))
 	end else nil
 	
-	local function v13(p2): number --[[ Line: 109 ]]
+	local function v13(p2): number
 		-- upvalues: p1 (copy), FFlagMomentsServeEDPVideos (upval), Callback (copy)
 		local Items = p1.getItems(p2)
 		local CurrentIndex: number = p1.getCurrentIndex(p2)
@@ -99,7 +99,7 @@ return function(p1, GetPlaybackActive, GetCanAutoPlay) --[[ Line: 54 | Named "cr
 	
 	return {
 		getActiveIndex = if FFlagMomentsModeratedMomentPageModule or FFlagMomentsServeEDPVideos then v13 else p1.getCurrentIndex,
-		getItems = function(p3) --[[ Line: 95 ]]
+		getItems = function(p3)
 			-- upvalues: p1 (copy), FFlagMomentsServeEDPVideos (upval), Callback (copy), ToMediaItemModule (upval)
 			local List = {}
 			

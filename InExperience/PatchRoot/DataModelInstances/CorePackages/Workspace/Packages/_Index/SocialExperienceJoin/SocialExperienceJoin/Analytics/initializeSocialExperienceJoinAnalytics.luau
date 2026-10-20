@@ -4,7 +4,7 @@ local DefaultAnalyticsService = SocialLuaAnalyticsModule.Analytics.DefaultAnalyt
 local GetEventStreamActionListModule = require(script.Parent.getEventStreamActionList)
 local TelemetryActionListModule = require(script.Parent.TelemetryActionList)
 
-return function(p1) --[[ Line: 11 ]]
+return function(p1)
 	-- upvalues: GetEventStreamActionListModule (copy), AnalyticsFactory (copy), TelemetryActionListModule (copy), DefaultAnalyticsService (copy)
 	return AnalyticsFactory.setUpAnalyticsFactory({
 		eventLists = {

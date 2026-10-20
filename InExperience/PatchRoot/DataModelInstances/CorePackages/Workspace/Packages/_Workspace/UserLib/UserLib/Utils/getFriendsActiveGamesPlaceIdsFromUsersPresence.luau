@@ -4,7 +4,7 @@ local WebPresenceMapModule = require(UserLib.Enum.WebPresenceMap)
 local ConvertUniverseIdToStringFunction = require(UserLib.Parent.SharedFlags).ConvertUniverseIdToString
 game:DefineFastFlag("LuaAppFixActiveGameLoadingCheck", false)
 
-return function(List, p1) --[[ Line: 10 ]]
+return function(List, p1)
 	-- upvalues: ConvertUniverseIdToStringFunction (copy), WebPresenceMapModule (copy), UserModule (copy)
 	local List1 = {}
 	

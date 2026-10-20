@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return function(p1) --[[ Line: 13 | Named "TopBar" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FoundationModule (copy)
 	return (ReactModule.createElement(FoundationModule.View, {
 		tag = "size-full-1200 row align-y-center gap-medium padding-x-medium"

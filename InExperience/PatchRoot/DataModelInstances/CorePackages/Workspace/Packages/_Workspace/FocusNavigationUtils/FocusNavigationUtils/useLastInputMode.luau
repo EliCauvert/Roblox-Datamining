@@ -28,7 +28,7 @@ local config1 = {
 	[Enum.KeyCode.Escape] = true
 }
 
-return function() --[[ Line: 40 ]]
+return function()
 	-- upvalues: UseLastInputMethodModule (copy), config (copy), UseFocusedTextBoxModule (copy), ReactModule (copy), GamepadService (copy), FFlagEnableFocusNavTelemetry (copy), UserInputService (copy), FFlagFixSelectionWithWebViews (copy), GuiService (copy), config1 (copy), VRService (copy)
 	local UseLastInputMethodModuleResult = UseLastInputMethodModule()
 	local Entry = config[UseLastInputMethodModuleResult]
@@ -37,9 +37,9 @@ return function() --[[ Line: 40 ]]
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(if UseLastInputMethodModuleResult == "Keyboard" then "Cursor" else Entry)
 	local UseRefResult1 = if FFlagEnableFocusNavTelemetry then ReactModule.useRef(nil) else nil
-	ReactModule.useEffect(function() --[[ Line: 54 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UserInputService (upval), FFlagFixSelectionWithWebViews (upval), GuiService (upval), config1 (upval), UseFocusedTextBoxModuleResult (copy), FFlagEnableFocusNavTelemetry (upval), UseRefResult1 (ref), UseStateResult2_1 (copy)
-		local InputBeganConnection = UserInputService.InputBegan:Connect(function(Input) --[[ Line: 55 ]]
+		local InputBeganConnection = UserInputService.InputBegan:Connect(function(Input)
 			-- upvalues: FFlagFixSelectionWithWebViews (upval), GuiService (upval), config1 (upval), UseFocusedTextBoxModuleResult (upval), FFlagEnableFocusNavTelemetry (upval), UseRefResult1 (upval), UseStateResult2_1 (upval)
 			local NoFFlagFixSelectionWithWebViews = not FFlagFixSelectionWithWebViews or GuiService.CoreGuiNavigationEnabled
 			
@@ -54,19 +54,19 @@ return function() --[[ Line: 40 ]]
 			UseStateResult2_1(true)
 		end)
 		
-		return function() --[[ Line: 69 ]]
+		return function()
 			-- upvalues: InputBeganConnection (copy)
 			InputBeganConnection:Disconnect()
 		end
 	end, { UseFocusedTextBoxModuleResult })
-	ReactModule.useEffect(function() --[[ Line: 73 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: GamepadService (upval), UseStateResult2 (copy)
-		local Connection = GamepadService:GetPropertyChangedSignal("GamepadCursorEnabled"):Connect(function() --[[ Line: 74 ]]
+		local Connection = GamepadService:GetPropertyChangedSignal("GamepadCursorEnabled"):Connect(function()
 			-- upvalues: UseStateResult2 (upval), GamepadService (upval)
 			UseStateResult2(GamepadService.GamepadCursorEnabled)
 		end)
 		
-		return function() --[[ Line: 78 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end

@@ -12,7 +12,7 @@ local AddUnifiedEventLoggingFunction = AvatarExperienceAnalyticsModule.addUnifie
 local UnifiedEventLogEnums = AvatarExperienceAnalyticsModule.UnifiedEventLogEnums
 local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
 
-return function(p1) --[[ Line: 30 | Named "RespawnLaterDialog" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), AddUnifiedEventLoggingFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), SessionService (copy), Dialog (copy), DialogSize (copy), Orientation (copy), ButtonVariant (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -20,7 +20,7 @@ return function(p1) --[[ Line: 30 | Named "RespawnLaterDialog" ]]
 		contentText = "Feature.AvatarSwitcher.Message.RespawnNotAllowed",
 		continueText = "Feature.AvatarSwitcher.Action.OK"
 	})
-	ReactModule.useEffect(function() --[[ Line: 39 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: AddUnifiedEventLoggingFunction (upval), UseRefResult (copy), UnifiedEventLogEnums (upval), UnifiedLoggingSurface (upval), SessionService (upval)
 		AddUnifiedEventLoggingFunction(UseRefResult, {
 			elementName = "DEFER_SWITCH_AVATAR_RESPAWN_DISABLED_BUTTON",

@@ -3,7 +3,7 @@ local _ = require(game:GetService("CorePackages").Workspace.Packages.RobloxTrans
 local DecoratedValueLabelModule = {}
 DecoratedValueLabelModule.__index = DecoratedValueLabelModule
 
-function DecoratedValueLabelModule.new(_statType, _valueName) --[[ Line: 19 ]]
+function DecoratedValueLabelModule.new(_statType, _valueName)
 	-- upvalues: DecoratedValueLabelModule (copy), StatsUtilsModule (copy)
 	local t = {}
 	setmetatable(t, DecoratedValueLabelModule)
@@ -31,23 +31,23 @@ function DecoratedValueLabelModule.new(_statType, _valueName) --[[ Line: 19 ]]
 	return t
 end
 
-function DecoratedValueLabelModule:SetZIndex(ZIndex) --[[ Line: 53 ]]
+function DecoratedValueLabelModule:SetZIndex(ZIndex)
 	self._frame.ZIndex = ZIndex
 	self._decorationFrame.ZIndex = ZIndex
 	self._label.ZIndex = ZIndex
 end
 
-function DecoratedValueLabelModule:PlaceInParent(Parent, Size, Position) --[[ Line: 60 ]]
+function DecoratedValueLabelModule:PlaceInParent(Parent, Size, Position)
 	self._frame.Parent = Parent
 	self._frame.Size = Size
 	self._frame.Position = Position
 end
 
-function DecoratedValueLabelModule:GetDecorationFrame() --[[ Line: 67 ]]
+function DecoratedValueLabelModule:GetDecorationFrame()
 	return self._decorationFrame
 end
 
-function DecoratedValueLabelModule:SetValue(p1) --[[ Line: 71 ]]
+function DecoratedValueLabelModule:SetValue(p1)
 	-- upvalues: StatsUtilsModule (copy)
 	self._label.Text = string.format("%s: %s", self._valueName, (StatsUtilsModule.FormatTypedValue(p1, self._statType)))
 end

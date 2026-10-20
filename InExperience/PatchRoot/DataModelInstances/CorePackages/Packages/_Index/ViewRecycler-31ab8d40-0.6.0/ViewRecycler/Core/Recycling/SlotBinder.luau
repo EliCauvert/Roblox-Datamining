@@ -2,7 +2,7 @@
 local Frozen = table.freeze({})
 local Frozen1 = table.freeze({ entered = Frozen, updated = Frozen, departed = Frozen })
 
-return function(p1) --[[ Line: 66 | Named "createSlotBinder" ]]
+return function(p1)
 	-- upvalues: Frozen1 (copy), Frozen (copy)
 	local RecyclingScope = p1.recyclingScope
 	local PrepareDesiredAssignmentFunction = p1.prepareDesiredAssignment
@@ -13,7 +13,7 @@ return function(p1) --[[ Line: 66 | Named "createSlotBinder" ]]
 	local Tbl2 = {}
 	local Tbl3 = {}
 	
-	local function makeAssignment(Key, Value) --[[ Line: 77 ]]
+	local function makeAssignment(Key, Value)
 		-- upvalues: PrepareDesiredAssignmentFunction (copy)
 		if PrepareDesiredAssignmentFunction == nil then
 			return table.freeze({ key = Key, value = Value })
@@ -27,7 +27,7 @@ return function(p1) --[[ Line: 66 | Named "createSlotBinder" ]]
 		end
 	end
 	
-	local function _(ViewType) --[[ Line: 85 | Named "requestFor" ]]
+	local function _(ViewType)
 		-- upvalues: Frozens (copy)
 		local Frozen = Frozens[ViewType]
 		
@@ -38,7 +38,7 @@ return function(p1) --[[ Line: 66 | Named "createSlotBinder" ]]
 		return Frozen
 	end
 	
-	local function apply(List1, List2) --[[ Line: 94 ]]
+	local function apply(List1, List2)
 		-- upvalues: Flag (ref), Tbl (copy), Tbl1 (copy), Tbl2 (copy), Frozens (copy), Frozen1 (upval), Frozen (upval), RecyclingScope (copy), makeAssignment (copy), Tbl3 (copy)
 		assert(not Flag, "SlotBinder: cannot apply after destruction")
 		local List3 = {}
@@ -158,7 +158,7 @@ return function(p1) --[[ Line: 66 | Named "createSlotBinder" ]]
 		}
 	end
 	
-	local function releaseAll() --[[ Line: 207 ]]
+	local function releaseAll()
 		-- upvalues: Tbl (copy), RecyclingScope (copy)
 		local Releases = {}
 		
@@ -175,7 +175,7 @@ return function(p1) --[[ Line: 66 | Named "createSlotBinder" ]]
 	
 	return {
 		apply = apply,
-		sync = function(List) --[[ Line: 221 ]]
+		sync = function(List)
 			-- upvalues: Tbl (copy), apply (copy)
 			local t = {}
 			
@@ -191,17 +191,17 @@ return function(p1) --[[ Line: 66 | Named "createSlotBinder" ]]
 			end
 			return (apply(List1, List))
 		end,
-		get = function(p2) --[[ Line: 234 ]]
+		get = function(p2)
 			-- upvalues: Tbl (copy)
 			return Tbl[p2]
 		end,
-		releaseAll = function() --[[ Line: 237 ]]
+		releaseAll = function()
 			-- upvalues: Flag (ref), releaseAll (copy)
 			assert(not Flag, "SlotBinder: cannot release after destruction")
 			
 			return (releaseAll())
 		end,
-		destroy = function() --[[ Line: 241 ]]
+		destroy = function()
 			-- upvalues: Flag (ref), releaseAll (copy)
 			if not Flag then
 				releaseAll()

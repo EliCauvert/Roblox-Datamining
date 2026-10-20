@@ -18,7 +18,7 @@ local ENTRYPOINT = PeopleServiceModule.getService("Constants").ANALYTICS.ENTRY_P
 local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
 local RbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
 
-local function VoiceVolumeSlider(p1) --[[ Line: 74 ]]
+local function VoiceVolumeSlider(p1)
 	-- upvalues: UseLocalizationFunction (copy), FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), ReactModule (copy), PeopleServiceModule (copy), FFlagVoiceChatVolumePerUserDisableInteractionWhenMutedModule (copy), ENTRYPOINT (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy), FFlagVoiceChatVolumePerUserMuteVolumeSyncModule (copy), View (copy), Text (copy), FoundationModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		volumeLabel = "CoreScripts.InGameMenu.GameSettings.Volume"
@@ -27,7 +27,7 @@ local function VoiceVolumeSlider(p1) --[[ Line: 74 ]]
 	local UseRefResult = nil
 	
 	if FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then
-		UseMemoResult = ReactModule.useMemo(function() --[[ Line: 82 ]]
+		UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: PeopleServiceModule (upval)
 			return PeopleServiceModule.getService("PeopleAnalyticsManager")
 		end, {})
@@ -36,9 +36,9 @@ local function VoiceVolumeSlider(p1) --[[ Line: 74 ]]
 	local IsIsMutedByLocalUser: boolean = FFlagVoiceChatVolumePerUserDisableInteractionWhenMutedModule and p1.isMutedByLocalUser == true
 	local UseRefResult1 = ReactModule.useRef(false)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(p1.getPlayerVoiceVolume(p1.userId))
-	ReactModule.useEffect(function() --[[ Line: 94 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseRefResult1 (copy), UseBindingResult2 (copy)
-		return p1.subscribePlayerVoiceVolume(p1.userId, function(p2) --[[ Line: 95 ]]
+		return p1.subscribePlayerVoiceVolume(p1.userId, function(p2)
 			-- upvalues: UseRefResult1 (upval), UseBindingResult2 (upval)
 			if not UseRefResult1.current then
 				UseBindingResult2(p2)
@@ -66,12 +66,12 @@ local function VoiceVolumeSlider(p1) --[[ Line: 74 ]]
 			knobVisibility = FoundationModule.Enums.Visibility.Always,
 			width = UDim.new(1, 0),
 			isDisabled = IsIsMutedByLocalUser,
-			onValueChanged = ReactModule.useCallback(function(p2) --[[ Line: 102 ]]
+			onValueChanged = ReactModule.useCallback(function(p2)
 				-- upvalues: UseBindingResult2 (copy), p1 (copy)
 				UseBindingResult2(p2)
 				p1.setPlayerVoiceVolume(p1.userId, p2)
 			end, { p1.userId, p1.setPlayerVoiceVolume }),
-			onDragStarted = ReactModule.useCallback(function() --[[ Line: 108 ]]
+			onDragStarted = ReactModule.useCallback(function()
 				-- upvalues: UseRefResult1 (copy), FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (upval), UseMemoResult (ref), UseRefResult (ref), p1 (copy), ENTRYPOINT (upval)
 				UseRefResult1.current = true
 				
@@ -91,7 +91,7 @@ local function VoiceVolumeSlider(p1) --[[ Line: 74 ]]
 				if FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then UseMemoResult else nil,
 				if FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then UseRefResult else nil
 			}),
-			onDragEnded = ReactModule.useCallback(function() --[[ Line: 139 ]]
+			onDragEnded = ReactModule.useCallback(function()
 				-- upvalues: UseRefResult1 (copy), FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (upval), UseMemoResult (ref), UseRefResult (ref), p1 (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (upval), RbxAnalyticsService (upval), ENTRYPOINT (upval), FFlagVoiceChatVolumePerUserMuteVolumeSyncModule (upval), UseBindingResult2 (copy)
 				UseRefResult1.current = false
 				
@@ -128,7 +128,7 @@ local function VoiceVolumeSlider(p1) --[[ Line: 74 ]]
 	})
 end
 
-return ReactModule.memo(function(p2) --[[ Line: 210 | Named "CardMenuWithVoiceVolume" ]]
+return ReactModule.memo(function(p2)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), BaseMenu (copy), View (copy), Text (copy), VoiceVolumeSlider (copy), FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), Popover (copy), FoundationModule (copy), Radius (copy), InputSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Standard = UseTokensResult.Stroke.Standard

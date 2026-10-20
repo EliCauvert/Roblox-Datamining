@@ -27,18 +27,18 @@ local GetAppFeaturePoliciesFunction = require(Parent.UniversalAppPolicy).getAppF
 local EnableIllegalChildAccountLinkingErrorMessageOnLoginByEmail = game:DefineFastFlag("EnableIllegalChildAccountLinkingErrorMessageOnLoginByEmail", false)
 local FFlagEnableEmailSsoConnectModule = require(AuthCommon.Flags.FFlagEnableEmailSsoConnect)
 
-local function loginRequest(p1, Cvalue, p2, p3, p4, p5) --[[ Line: 39 ]]
+local function loginRequest(p1, Cvalue, p2, p3, p4, p5)
 	-- upvalues: FFlagEnableEmailSsoConnectModule (copy), GetAppFeaturePoliciesFunction (copy), LoginRequestsModule (copy)
 	return if FFlagEnableEmailSsoConnectModule and GetAppFeaturePoliciesFunction().getUseSingleSignOn() then LoginRequestsModule.singleSignOnConnectWithCredential(p1, Cvalue, p2, "Email") else LoginRequestsModule.logByEmail(p1, Cvalue, p2, p3, p4, p5)
 end
 
-return function(p1, Cvalue, p2, CaptchaCallback, p3, SecurityQuestionsCallback, p4, p5) --[[ Line: 54 | Named "loginByEmail" ]]
+return function(p1, Cvalue, p2, CaptchaCallback, p3, SecurityQuestionsCallback, p4, p5)
 	-- upvalues: FFlagEnableEmailSsoConnectModule (copy), GetAppFeaturePoliciesFunction (copy), loginRequest (copy), LoginResultModule (copy), PromiseModule (copy), LoginErrorCodesModule (copy), GetFFlagEnableGenericTwoFAMessageFunction (copy), FFlagEnableLastLoginMethodTracking (copy), AppStorageUtilitiesModule (copy), LoginMethodsModule (copy), FFlagEnableRecordLogin (copy), RecordLoginModule (copy), HttpService (copy), GetLoginByCredentialSsoErrorMessageModule (copy), LoggingProtocolModule (copy), LoginByEmailSSOErrorsTelemetryModule (copy), GetDxBlobModule (copy), GetCaptchaDataJsonModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), GetFFlagLuaAppUsingSecurityQuestionsForLuaLoginFunction (copy), GetFFlagEnableLoginAccountSelectorFunction (copy), GetMultipleUsersPerCredentialErrorDataModule (copy), EnableIllegalChildAccountLinkingErrorMessageOnLoginByEmail (copy)
-	return function(p6) --[[ Line: 64 ]]
+	return function(p6)
 		-- upvalues: FFlagEnableEmailSsoConnectModule (upval), GetAppFeaturePoliciesFunction (upval), loginRequest (upval), p1 (copy), Cvalue (copy), p2 (copy), p3 (copy), p4 (copy), p5 (copy), LoginResultModule (upval), PromiseModule (upval), LoginErrorCodesModule (upval), GetFFlagEnableGenericTwoFAMessageFunction (upval), FFlagEnableLastLoginMethodTracking (upval), AppStorageUtilitiesModule (upval), LoginMethodsModule (upval), FFlagEnableRecordLogin (upval), RecordLoginModule (upval), HttpService (upval), GetLoginByCredentialSsoErrorMessageModule (upval), LoggingProtocolModule (upval), LoginByEmailSSOErrorsTelemetryModule (upval), SecurityQuestionsCallback (copy), GetDxBlobModule (upval), GetCaptchaDataJsonModule (upval), AppPage (upval), CaptchaCallback (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval), GetFFlagLuaAppUsingSecurityQuestionsForLuaLoginFunction (upval), GetFFlagEnableLoginAccountSelectorFunction (upval), GetMultipleUsersPerCredentialErrorDataModule (upval), EnableIllegalChildAccountLinkingErrorMessageOnLoginByEmail (upval)
 		local UseSingleSignOn = FFlagEnableEmailSsoConnectModule and GetAppFeaturePoliciesFunction().getUseSingleSignOn()
 		
-		return loginRequest(p1, Cvalue, p2, p3, p4, p5):andThen(function(Entry) --[[ Line: 67 ]]
+		return loginRequest(p1, Cvalue, p2, p3, p4, p5):andThen(function(Entry)
 			-- upvalues: LoginResultModule (upval), UseSingleSignOn (copy), GetAppFeaturePoliciesFunction (upval), PromiseModule (upval), LoginErrorCodesModule (upval), GetFFlagEnableGenericTwoFAMessageFunction (upval), FFlagEnableLastLoginMethodTracking (upval), AppStorageUtilitiesModule (upval), LoginMethodsModule (upval), FFlagEnableRecordLogin (upval), RecordLoginModule (upval), Cvalue (upval)
 			assert(Entry, "no login attempt result")
 			assert(#Entry == 1, "no result or more than one result")
@@ -59,13 +59,13 @@ return function(p1, Cvalue, p2, CaptchaCallback, p3, SecurityQuestionsCallback, 
 				AppStorageUtilitiesModule.setLastSuccessfulSignInMethod(LoginMethodsModule.Email)
 			end
 			if FFlagEnableRecordLogin then
-				pcall(function() --[[ Line: 88 ]]
+				pcall(function()
 					-- upvalues: RecordLoginModule (upval), FromJsonDataResult (copy), LoginMethodsModule (upval), Cvalue (upval)
 					RecordLoginModule(FromJsonDataResult, LoginMethodsModule.Email, Cvalue)
 				end)
 			end
 			return FromJsonDataResult
-		end, function(p7) --[[ Line: 94 ]]
+		end, function(p7)
 			-- upvalues: HttpService (upval), UseSingleSignOn (copy), GetLoginByCredentialSsoErrorMessageModule (upval), LoggingProtocolModule (upval), LoginByEmailSSOErrorsTelemetryModule (upval), PromiseModule (upval), SecurityQuestionsCallback (upval), LoginErrorCodesModule (upval), GetDxBlobModule (upval), GetCaptchaDataJsonModule (upval), AppPage (upval), CaptchaCallback (upval), Cvalue (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), p6 (copy), NavigateDownFunction (upval), GetFFlagLuaAppUsingSecurityQuestionsForLuaLoginFunction (upval), GetFFlagEnableLoginAccountSelectorFunction (upval), GetMultipleUsersPerCredentialErrorDataModule (upval), EnableIllegalChildAccountLinkingErrorMessageOnLoginByEmail (upval)
 			local Data = HttpService:JSONDecode(p7.Body)
 			local Entry = nil

@@ -55,7 +55,7 @@ local UseInterpolatedClientSettingsModule = require(Parent.ExpChatIntegration.us
 local NewResult = require(Parent.ExpChatShared).Logger:new(script.Name)
 local Autocomplete = { commands = nil, emojis = true }
 
-local function isSendResponseAccepted(p1): boolean --[[ Line: 105 ]]
+local function isSendResponseAccepted(p1): boolean
 	if p1 == nil or p1.responseBody == nil then
 		return false
 	elseif p1.responseCode ~= nil and p1.responseCode ~= 200 then
@@ -75,7 +75,7 @@ local function isSendResponseAccepted(p1): boolean --[[ Line: 105 ]]
 	end
 end
 
-return function(Frame) --[[ Line: 125 | Named "FriendsChatInputBarHost" ]]
+return function(Frame)
 	-- upvalues: FoundationModule (copy), ExpChatConversationListAdapterModule (copy), UseChatTimeoutDetailsFromHydrationModule (copy), SignalsReactModule (copy), UseChatWindowSettingsModule (copy), ReactModule (copy), UseChatInputBarSettingsModule (copy), UseInExperienceLocalizationFunction (copy), ChatUIPrimitivesModule (copy), InputTypeConstants (copy), GetConversationInputPlaceholderModule (copy), UserInputService (copy), UseLocalizationFunction (copy), UseTelemetryModule (copy), ChatConversationTelemetryLayerModule (copy), UseInterpolatedClientSettingsModule (copy), UseChatInputBarOnFocusModule (copy), GetFriendsChatNavigationStoreModule (copy), FFlagFriendsChatConversationListFocusNav (copy), UseFocusConversationInputModule (copy), UseConsumeFocusInputBarRequestModule (copy), FFlagExpChatTabShortcutNav (copy), UseFocusBackButtonOnUpModule (copy), InterventionTreatmentShownSignal (copy), Constants (copy), HttpService (copy), FFlagFriendsChatMessageSendPerfTrackingModule (copy), ExpChatPerfTracker (copy), FriendsChatTabNameModule (copy), Players (copy), NewResult (copy), CreateConversationFromFriendPlaceholderModule (copy), GetConversationMessageStoreModule (copy), GetConversationMessageListStoreModule (copy), SerializeParticipantIdsForTelemetryModule (copy), AppChatNetworkingModule (copy), ChatConversationTelemetryEventsModule (copy), GetConversationMessageSentInfoModule (copy), isSendResponseAccepted (copy), SignalsExperimentalModule (copy), IngestNewerMessagesModule (copy), SendMessageErrorModule (copy), FFlagAppChatUniversalFeatureRestriction (copy), Parent (copy), FFlagAppChatReactiveFeatureRestrictions (copy), InterventionSharedModule (copy), ChatInputBoxDisabledPressedSignal (copy), ChatInputBoxDisabledModule (copy), ResolveFadeModule (copy), LayoutConstantsModule (copy), ChatInputBarView (copy), FFlagExpChatComposerFigmaParity (copy), Autocomplete (copy), FFlagFriendsChatEnforceInputCharacterLimitModule (copy), MessageCharacterLimitModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local ConversationId = Frame.conversationId
@@ -87,7 +87,7 @@ return function(Frame) --[[ Line: 125 | Named "FriendsChatInputBarHost" ]]
 	})))
 	local IsTimedOut = UseSignalStateResult.isTimedOut
 	local UseChatWindowSettingsModuleResult = UseChatWindowSettingsModule()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 141 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseChatWindowSettingsModuleResult (copy)
 		return {
 			BackgroundColor3 = UseChatWindowSettingsModuleResult.ChatWindowBackgroundColor3,
@@ -96,7 +96,7 @@ return function(Frame) --[[ Line: 125 | Named "FriendsChatInputBarHost" ]]
 	end, { UseChatWindowSettingsModuleResult })
 	local NoIsTimedOut = not IsTimedOut
 	local UseChatInputBarSettingsModuleResult = UseChatInputBarSettingsModule()
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 152 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: Frame (copy), UseChatInputBarSettingsModuleResult (copy)
 		return if Frame.isSpatialUIEnabled and UseChatInputBarSettingsModuleResult and UseChatInputBarSettingsModuleResult.SpatialPanelTextSize then UseChatInputBarSettingsModuleResult.SpatialPanelTextSize elseif UseChatInputBarSettingsModuleResult then UseChatInputBarSettingsModuleResult.TextSize else nil
 	end, {
@@ -108,7 +108,7 @@ return function(Frame) --[[ Line: 125 | Named "FriendsChatInputBarHost" ]]
 	local IsUseLastInputGroupResultMatch = UseLastInputGroupResult == InputTypeConstants.Touch
 	local IsUseLastInputGroupResultMatch1 = UseLastInputGroupResult == InputTypeConstants.Gamepad
 	local KeyboardKeyCode = if UseChatInputBarSettingsModuleResult and UseChatInputBarSettingsModuleResult.KeyboardKeyCode then UseChatInputBarSettingsModuleResult.KeyboardKeyCode else Enum.KeyCode.Slash
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 174 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: GetConversationInputPlaceholderModule (upval), IsUseLastInputGroupResultMatch1 (copy), IsUseLastInputGroupResultMatch (copy), KeyboardKeyCode (copy), UseInExperienceLocalizationResult (copy), UserInputService (upval)
 		return GetConversationInputPlaceholderModule({
 			isGamepad = IsUseLastInputGroupResultMatch1,
@@ -128,7 +128,7 @@ return function(Frame) --[[ Line: 125 | Named "FriendsChatInputBarHost" ]]
 	local UseInterpolatedClientSettingsModuleResult = UseInterpolatedClientSettingsModule(Frame.chatWindowSettings or UseMemoResult)
 	local UseChatInputBarOnFocusModuleResult = UseChatInputBarOnFocusModule()
 	local FriendsChatNavigationStoreModule = GetFriendsChatNavigationStoreModule(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 206 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FFlagFriendsChatConversationListFocusNav (upval), FriendsChatNavigationStoreModule (copy), UseChatInputBarOnFocusModuleResult (copy)
 		if not FFlagFriendsChatConversationListFocusNav then
 			FriendsChatNavigationStoreModule.setInputBarFocused(true)
@@ -138,7 +138,7 @@ return function(Frame) --[[ Line: 125 | Named "FriendsChatInputBarHost" ]]
 		UseChatInputBarOnFocusModuleResult.onFocusGained,
 		FriendsChatNavigationStoreModule
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 212 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: FFlagFriendsChatConversationListFocusNav (upval), FriendsChatNavigationStoreModule (copy), UseChatInputBarOnFocusModuleResult (copy)
 		if not FFlagFriendsChatConversationListFocusNav then
 			FriendsChatNavigationStoreModule.setInputBarFocused(false)
@@ -159,7 +159,7 @@ return function(Frame) --[[ Line: 125 | Named "FriendsChatInputBarHost" ]]
 		UseFocusBackButtonOnUpModule(Ref, Frame.backButtonRef)
 	end
 	local UseCursorResult = if FFlagFriendsChatConversationListFocusNav then FoundationModule.Hooks.useCursor(FoundationModule.Enums.CursorType.RoundedRect) else nil
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 242 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: Ref (copy)
 		local Current = Ref.current
 		
@@ -167,16 +167,16 @@ return function(Frame) --[[ Line: 125 | Named "FriendsChatInputBarHost" ]]
 			Current:ReleaseFocus()
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 253 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult1 (copy)
-		return function() --[[ Line: 254 ]]
+		return function()
 			-- upvalues: UseResult1 (upval)
 			UseResult1()
 		end
 	end, { UseResult1 })
-	ReactModule.useEffect(function() --[[ Line: 259 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: InterventionTreatmentShownSignal (upval), Constants (upval), Ref (copy)
-		local Connection = InterventionTreatmentShownSignal:connect(function(PartyChatNudgeDialog) --[[ Line: 260 ]]
+		local Connection = InterventionTreatmentShownSignal:connect(function(PartyChatNudgeDialog)
 			-- upvalues: Constants (upval), Ref (upval)
 			if PartyChatNudgeDialog == Constants.TreatmentType.PartyChatNudgeDialog or PartyChatNudgeDialog == Constants.TreatmentType.PartyChatTimeoutDialog then
 				local Current = Ref.current
@@ -187,12 +187,12 @@ return function(Frame) --[[ Line: 125 | Named "FriendsChatInputBarHost" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 271 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:disconnect()
 		end
 	end, {})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 454 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: FFlagAppChatUniversalFeatureRestriction (upval), Parent (upval), UseResult2 (copy), FFlagAppChatReactiveFeatureRestrictions (upval), InterventionSharedModule (upval), ChatInputBoxDisabledPressedSignal (upval), UseSignalStateResult (copy)
 		if not FFlagAppChatUniversalFeatureRestriction then
 			ChatInputBoxDisabledPressedSignal:fire({
@@ -207,13 +207,13 @@ return function(Frame) --[[ Line: 125 | Named "FriendsChatInputBarHost" ]]
 		local ShowFeatureRestrictionModule: (any, any) -> () = require(Parent.UniversalFeatureRestrictions.showFeatureRestriction)
 		local config = {
 			onShown = UseResult2,
-			onAppeal = function() --[[ Line: 460 ]] end
+			onAppeal = function() end
 		}
 		
 		if FFlagAppChatReactiveFeatureRestrictions then
 			local PartyChatTimeoutReceivedSignal = InterventionSharedModule.Signals.partyChatTimeoutReceivedSignal
 			
-			function config.onAcknowledgementSuccess() --[[ Line: 464 ]]
+			function config.onAcknowledgementSuccess()
 				-- upvalues: PartyChatTimeoutReceivedSignal (copy)
 				PartyChatTimeoutReceivedSignal:fire(nil)
 			end
@@ -256,7 +256,7 @@ return function(Frame) --[[ Line: 125 | Named "FriendsChatInputBarHost" ]]
 		}),
 		inputBar = ReactModule.createElement(ChatInputBarView, {
 			showSideChip = false,
-			onSend = ReactModule.useCallback(function(p1) --[[ Line: 277 ]]
+			onSend = ReactModule.useCallback(function(p1)
 				-- upvalues: IsTimedOut (copy), HttpService (upval), FFlagFriendsChatMessageSendPerfTrackingModule (upval), ExpChatPerfTracker (upval), FriendsChatTabNameModule (upval), ConversationId (copy), Players (upval), IsFriendPlaceholder (copy), ExpChatConversationListAdapterModule (upval), NewResult (upval), CreateConversationFromFriendPlaceholderModule (upval), Frame (copy), NoIsFriendPlaceholder (copy), GetConversationMessageStoreModule (upval), GetConversationMessageListStoreModule (upval), SerializeParticipantIdsForTelemetryModule (upval), AppChatNetworkingModule (upval), UseRefResult (copy), ChatConversationTelemetryEventsModule (upval), GetConversationMessageSentInfoModule (upval), isSendResponseAccepted (upval), SignalsExperimentalModule (upval), IngestNewerMessagesModule (upval), SendMessageErrorModule (upval)
 				if IsTimedOut then return end
 				local Text = if typeof(p1) == "string" then p1 else ""
@@ -264,7 +264,7 @@ return function(Frame) --[[ Line: 125 | Named "FriendsChatInputBarHost" ]]
 				if Text ~= "" then
 					local Text1 = "sending-friends-message-" .. HttpService:GenerateGUID(false)
 					local StartResult = if FFlagFriendsChatMessageSendPerfTrackingModule then ExpChatPerfTracker.start(ExpChatPerfTracker.Events.MessageSendToWindowRenderInterval, { messageId = Text1 }, { tabName = FriendsChatTabNameModule }) else false
-					task.spawn(function() --[[ Line: 306 ]]
+					task.spawn(function()
 						-- upvalues: ConversationId (upval), Players (upval), IsFriendPlaceholder (upval), StartResult (ref), ExpChatPerfTracker (upval), Text1 (copy), ExpChatConversationListAdapterModule (upval), NewResult (upval), CreateConversationFromFriendPlaceholderModule (upval), Frame (upval), NoIsFriendPlaceholder (upval), GetConversationMessageStoreModule (upval), GetConversationMessageListStoreModule (upval), Text (copy), SerializeParticipantIdsForTelemetryModule (upval), AppChatNetworkingModule (upval), UseRefResult (upval), ChatConversationTelemetryEventsModule (upval), GetConversationMessageSentInfoModule (upval), isSendResponseAccepted (upval), SignalsExperimentalModule (upval), IngestNewerMessagesModule (upval), SendMessageErrorModule (upval)
 						local ConversationId1 = ConversationId or ""
 						local LocalPlayer = Players.LocalPlayer
@@ -322,13 +322,13 @@ return function(Frame) --[[ Line: 125 | Named "FriendsChatInputBarHost" ]]
 						local Repeated = string.rep("#", utf8.len(Text) or #Text)
 						local Conversation = ExpChatConversationListAdapterModule.getConversationStore().getConversation(ConversationId1, false)
 						local SerializeParticipantIdsForTelemetryModuleResult = SerializeParticipantIdsForTelemetryModule(if Conversation then Conversation.participants else nil, if LocalPlayer then LocalPlayer.UserId else 0)
-						AppChatNetworkingModule.http.SendChatTextMessage(nil, ConversationId1, Text):andThen(function(Result) --[[ Line: 387 ]]
+						AppChatNetworkingModule.http.SendChatTextMessage(nil, ConversationId1, Text):andThen(function(Result)
 							-- upvalues: UseRefResult (upval), ChatConversationTelemetryEventsModule (upval), GetConversationMessageSentInfoModule (upval), SerializeParticipantIdsForTelemetryModuleResult (copy), isSendResponseAccepted (upval), ConversationMessageStoreModule (copy), Text1 (upval), Repeated (copy), SignalsExperimentalModule (upval), IngestNewerMessagesModule (upval), ConversationId1 (ref), ExpChatConversationListAdapterModule (upval), LocalPlayer (copy), ConversationMessageListStoreModule (copy)
 							UseRefResult.current(ChatConversationTelemetryEventsModule.ConversationMessageSent, GetConversationMessageSentInfoModule(Result, SerializeParticipantIdsForTelemetryModuleResult))
 							
 							if isSendResponseAccepted(Result) then
 								local Messages = Result.responseBody.messages or {}
-								SignalsExperimentalModule.batch(function() --[[ Line: 404 ]]
+								SignalsExperimentalModule.batch(function()
 									-- upvalues: IngestNewerMessagesModule (upval), ConversationId1 (upval), Messages (copy), ConversationMessageStoreModule (upval), Text1 (upval), Repeated (upval), ExpChatConversationListAdapterModule (upval), LocalPlayer (upval), ConversationMessageListStoreModule (upval)
 									if #IngestNewerMessagesModule(ConversationId1, Messages) == 0 then
 										ConversationMessageStoreModule.updateMessage(Text1, { status = "Failed", content = Repeated })
@@ -348,7 +348,7 @@ return function(Frame) --[[ Line: 125 | Named "FriendsChatInputBarHost" ]]
 							else
 								ConversationMessageStoreModule.updateMessage(Text1, { status = "Failed", content = Repeated })
 							end
-						end):catch(function(Err) --[[ Line: 429 ]]
+						end):catch(function(Err)
 							-- upvalues: NewResult (upval), ConversationId1 (ref), UseRefResult (upval), ChatConversationTelemetryEventsModule (upval), SendMessageErrorModule (upval), SerializeParticipantIdsForTelemetryModuleResult (copy), ConversationMessageStoreModule (copy), Text1 (upval), Repeated (copy)
 							NewResult:warning(`Failed to send message to {ConversationId1}: {tostring(Err)}`)
 							UseRefResult.current(ChatConversationTelemetryEventsModule.ConversationMessageSent, {

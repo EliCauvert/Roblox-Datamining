@@ -9,13 +9,13 @@ local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local _ = require(BuildExperience.Chat.chatTypes)
 local _ = require(script.Parent.AnswerFormView)
 
-return function(Frame) --[[ Line: 21 | Named "useAnswerFormViewModel" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), SignalsModule (copy), SignalsReactModule (copy), FoundationModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy)
 	local State = Frame.state
 	local Draft = if State then State.draft else nil
-	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 24 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), Draft (copy)
-		return SignalsModule.createComputed(function(p1) --[[ Line: 25 ]]
+		return SignalsModule.createComputed(function(p1)
 			-- upvalues: Draft (upval)
 			return if Draft then Draft.getText(p1) else nil
 		end)
@@ -49,7 +49,7 @@ return function(Frame) --[[ Line: 21 | Named "useAnswerFormViewModel" ]]
 			title = option.title,
 			description = option.description,
 			isSelected = not IsCustom and (if typeof(SelectedOptionId) == "table" then table.find(SelectedOptionId, option.id) ~= nil else SelectedOptionId == option.id),
-			onActivated = function() --[[ Line: 62 ]]
+			onActivated = function()
 				-- upvalues: State (copy), Actions (copy), IsCustom (copy), Question (copy), option (copy)
 				if State.isSubmitting then return end
 				State.draft.setText(nil)
@@ -84,17 +84,17 @@ return function(Frame) --[[ Line: 21 | Named "useAnswerFormViewModel" ]]
 		showForward = IsMultiSelect or IsCustom,
 		isForwardDisabled = IsSubmitting,
 		footerInset = UseTokensResult.Padding.Small,
-		onCustomActivated = function() --[[ Line: 96 ]]
+		onCustomActivated = function()
 			-- upvalues: State (copy)
 			if not State.isSubmitting then
 				State.draft.setText("")
 			end
 		end,
-		onCustomChanged = function(p1) --[[ Line: 101 ]]
+		onCustomChanged = function(p1)
 			-- upvalues: State (copy)
 			State.draft.setText(p1)
 		end,
-		onForward = function() --[[ Line: 104 ]]
+		onForward = function()
 			-- upvalues: IsSubmitting (copy), IsCustom (copy), OnSubmitTextFunction (copy), State (copy), Question (copy), Match (copy), Actions (copy)
 			if IsSubmitting then return end
 			if IsCustom then

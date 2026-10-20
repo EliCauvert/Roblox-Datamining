@@ -15,7 +15,7 @@ local _ = require(CorePackages.Workspace.Packages.Chrome)
 local Signal = require(CorePackages.Packages.Signals).createSignal(nil)
 local t = {}
 
-local function _(p1, p2): boolean --[[ Line: 81 | Named "hasBeenDismissed" ]]
+local function _(p1, p2): boolean
 	-- upvalues: t (copy), LocalStoreModule (copy)
 	if t[p1] then
 		return true
@@ -31,7 +31,7 @@ local function _(p1, p2): boolean --[[ Line: 81 | Named "hasBeenDismissed" ]]
 	end
 end
 
-local _ = function(p1) --[[ Line: 99 | Named "recordView" ]]
+local _ = function(p1)
 	-- upvalues: LocalStoreModule (copy)
 	if p1.maxViewCount > 0 then
 		local Value = LocalStoreModule.getValue(p1.localStorageKey)
@@ -41,7 +41,7 @@ local _ = function(p1) --[[ Line: 99 | Named "recordView" ]]
 	end
 end
 
-local function renderBadge(Text, LayoutOrder) --[[ Line: 108 ]]
+local function renderBadge(Text, LayoutOrder)
 	-- upvalues: ReactModule (copy), View (copy), Badge (copy), BadgeVariant (copy), BadgeShape (copy)
 	return ReactModule.createElement(View, { tag = "auto-xy", LayoutOrder = LayoutOrder }, {
 		Badge = ReactModule.createElement(Badge, {
@@ -52,12 +52,12 @@ local function renderBadge(Text, LayoutOrder) --[[ Line: 108 ]]
 	})
 end
 
-return function(p1) --[[ Line: 121 | Named "MenuTrailingBadge" ]]
+return function(p1)
 	-- upvalues: FFlagEnableCustomTextInMenuTrailingBadge (copy), SignalsReactModule (copy), Signal (copy), ReactModule (copy), t (copy), LocalStoreModule (copy), UseLocalizationFunction (copy), ServiceModule (copy), renderBadge (copy)
 	local IntegrationId = p1.integrationId
 	local Config = p1.config
 	local UseSignalStateResult = if FFlagEnableCustomTextInMenuTrailingBadge then SignalsReactModule.useSignalState(Config.customText or Signal) else nil
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean --[[ Line: 141 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean
 		-- upvalues: IntegrationId (copy), Config (copy), t (upval), LocalStoreModule (upval), UseSignalStateResult (copy)
 		local Flag = nil
 		if t[IntegrationId] then
@@ -84,10 +84,10 @@ return function(p1) --[[ Line: 121 | Named "MenuTrailingBadge" ]]
 		return NoFlag
 	end)
 	local FeatureCatalogLabelNew = UseLocalizationFunction({ text = "Feature.Catalog.Label.New" })
-	ReactModule.useEffect(function() --[[ Line: 155 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), ServiceModule (upval), IntegrationId (copy), t (upval), LocalStoreModule (upval), Config (copy), UseStateResult2 (copy)
 		if not UseStateResult then return end
-		local Connection = ServiceModule:onIntegrationActivated():connect(function(IntegrationId1) --[[ Line: 160 ]]
+		local Connection = ServiceModule:onIntegrationActivated():connect(function(IntegrationId1)
 			-- upvalues: IntegrationId (upval), t (upval), LocalStoreModule (upval), Config (upval), UseStateResult2 (upval)
 			if IntegrationId1 == IntegrationId then
 				t[IntegrationId] = true
@@ -98,7 +98,7 @@ return function(p1) --[[ Line: 121 | Named "MenuTrailingBadge" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 169 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:disconnect()
 		end

@@ -31,7 +31,7 @@ local CapturePreviewTileModule = require(CoreScriptsPlayerFeedback.Components.Ca
 local CapturePickerGridModule = require(CoreScriptsPlayerFeedback.Components.CapturePickerGrid)
 local CapturePickerPreviewModule = require(CoreScriptsPlayerFeedback.Components.CapturePickerPreview)
 local GetCaptureKeyModule = require(CoreScriptsPlayerFeedback.Utils.getCaptureKey)
-local MemoResult = ReactModule.memo(function(p1) --[[ Line: 55 ]]
+local MemoResult = ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), CapturePreviewTileModule (copy), Icon (copy), BuilderIconsModule (copy), IconSize (copy), IconVariant (copy), Text (copy), View (copy), Button (copy), ButtonVariant (copy), InputSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Count = 0
@@ -70,7 +70,7 @@ local MemoResult = ReactModule.memo(function(p1) --[[ Line: 55 ]]
 	for Key, uploadStatus in p1.uploadStatuses do
 		table.insert(List, { key = Key, captureStatus = uploadStatus })
 	end
-	table.sort(List, function(A, B): boolean --[[ Line: 101 ]]
+	table.sort(List, function(A, B): boolean
 		return (A.captureStatus.order or 0) < (B.captureStatus.order or 0)
 	end)
 	local LayoutOrder = 0
@@ -83,7 +83,7 @@ local MemoResult = ReactModule.memo(function(p1) --[[ Line: 55 ]]
 			status = value.captureStatus.status,
 			failureReason = value.captureStatus.failureReason,
 			layoutOrder = LayoutOrder,
-			onRemove = function() --[[ Line: 113 ]]
+			onRemove = function()
 				-- upvalues: p1 (copy), Key1 (copy)
 				p1.onCaptureRemoved(Key1)
 			end
@@ -173,7 +173,7 @@ local MemoResult = ReactModule.memo(function(p1) --[[ Line: 55 ]]
 end)
 local PLAYERSUPPORTCATEGORIESREQUIRINGUSERID = ConstantsModule.PLAYER_SUPPORT_CATEGORIES_REQUIRING_USER_ID
 
-return (ReactModule.memo(function(p2) --[[ Line: 257 ]]
+return (ReactModule.memo(function(p2)
 	-- upvalues: UseTokensFunction (copy), FFlagEnablePlayerSupportCaptureAttachmentsModule (copy), UseCaptureUploadsModule (copy), UseGalleryCapturesModule (copy), ReactModule (copy), ConstantsModule (copy), UseLocalizationFunction (copy), FFlagEnablePlayerSupportSuggestionCategoryModule (copy), PLAYERSUPPORTCATEGORIESREQUIRINGUSERID (copy), GetCaptureKeyModule (copy), FFlagPlayerSupportPromptEventIngestModule (copy), PlayerSupportPromptTelemetryModule (copy), UseEscapeDismissModule (copy), Dialog (copy), CapturePickerPreviewModule (copy), CapturePickerGridModule (copy), View (copy), Text (copy), Dropdown (copy), InputSize (copy), InputVariant (copy), TextArea (copy), MemoResult (copy), Checkbox (copy), ButtonVariant (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Description = p2.description
@@ -276,7 +276,7 @@ return (ReactModule.memo(function(p2) --[[ Line: 257 ]]
 	local OnActivated: (() -> ())? = nil
 	
 	if FFlagEnablePlayerSupportCaptureAttachmentsModule then
-		UseResult = ReactModule.useCallback(function() --[[ Line: 364 ]]
+		UseResult = ReactModule.useCallback(function()
 			-- upvalues: Category (copy), Callback1 (ref)
 			if Category ~= "" then
 				Callback1(true)
@@ -284,7 +284,7 @@ return (ReactModule.memo(function(p2) --[[ Line: 257 ]]
 				return
 			end
 		end, { Category })
-		ReactModule.useEffect(function() --[[ Line: 371 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: v3 (ref), Callback (ref), Callback2 (ref), v1 (ref), v2 (ref)
 			if not v3 then
 				Callback({})
@@ -301,7 +301,7 @@ return (ReactModule.memo(function(p2) --[[ Line: 257 ]]
 			Callback2(nil)
 			v2.load()
 		end, { v3 })
-		UseMemoResult = ReactModule.useMemo(function() --[[ Line: 387 ]]
+		UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: v2 (ref), SelectedKeys (ref), GetCaptureKeyModule (upval)
 			local List = {}
 			
@@ -314,10 +314,10 @@ return (ReactModule.memo(function(p2) --[[ Line: 257 ]]
 		end, { v2.captures, SelectedKeys })
 		Count = #UseMemoResult
 		v4 = Count >= 5
-		UseResult1 = ReactModule.useCallback(function(p3) --[[ Line: 400 ]]
+		UseResult1 = ReactModule.useCallback(function(p3)
 			-- upvalues: GetCaptureKeyModule (upval), Callback (ref), v4 (ref)
 			local CaptureKeyModule = GetCaptureKeyModule(p3)
-			Callback(function(Tbl) --[[ Line: 402 ]]
+			Callback(function(Tbl)
 				-- upvalues: CaptureKeyModule (copy), v4 (upval)
 				local IsEntry = Tbl[CaptureKeyModule] == true
 				
@@ -339,7 +339,7 @@ return (ReactModule.memo(function(p2) --[[ Line: 257 ]]
 		end, { v4 })
 		local HasNextEntry = next(v1.uploadStatuses) ~= nil
 		
-		OnActivated = function() --[[ Line: 418 ]]
+		OnActivated = function()
 			-- upvalues: Count (ref), HasNextEntry (copy), v1 (ref), UseMemoResult (ref), Callback1 (ref)
 			if Count ~= 0 or HasNextEntry then
 				v1.onCapturesAdded(UseMemoResult)
@@ -365,7 +365,7 @@ return (ReactModule.memo(function(p2) --[[ Line: 257 ]]
 	local NoV47: boolean = MINFEEDBACKLENGTH <= #Description and (#Description <= MAXPLAYERSUPPORTLENGTH and (Category ~= "" and (if v1 then not v1.anyUploading and (not v1 or not v1.hasNonModerationFailure) else not v1 or not v1.hasNonModerationFailure)))
 	
 	if FFlagPlayerSupportPromptEventIngestModule then
-		ReactModule.useEffect(function() --[[ Line: 449 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: PlayerSupportPromptTelemetryModule (upval), Category (copy), IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1 (copy), Description (copy)
 			PlayerSupportPromptTelemetryModule.log({
 				action = PlayerSupportPromptTelemetryModule.Action.Opened,
@@ -375,7 +375,7 @@ return (ReactModule.memo(function(p2) --[[ Line: 257 ]]
 			})
 		end, {})
 	end
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 462 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: NoV47 (copy), FFlagPlayerSupportPromptEventIngestModule (upval), PlayerSupportPromptTelemetryModule (upval), Category (copy), IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1 (copy), IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry (copy), Description (copy), FFlagEnablePlayerSupportCaptureAttachmentsModule (upval), v1 (ref), p2 (copy)
 		if not NoV47 then return end
 		if FFlagPlayerSupportPromptEventIngestModule then
@@ -387,7 +387,7 @@ return (ReactModule.memo(function(p2) --[[ Line: 257 ]]
 				descriptionLength = #Description
 			})
 		end
-		pcall(function() --[[ Line: 475 ]]
+		pcall(function()
 			-- upvalues: Description (upval), Category (upval), IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1 (upval), FFlagEnablePlayerSupportCaptureAttachmentsModule (upval), v1 (upval)
 			local SocialService = game:GetService("SocialService")
 			
@@ -422,9 +422,9 @@ return (ReactModule.memo(function(p2) --[[ Line: 257 ]]
 		Description, Category, IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1, NoV47,
 		v1 or false, p2.closePrompt
 	})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 525 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: p2 (copy)
-		pcall(function() --[[ Line: 526 ]]
+		pcall(function()
 			local SocialService = game:GetService("SocialService")
 			
 			if SocialService.SignalFeedbackSubmissionPermissionDenied then
@@ -434,7 +434,7 @@ return (ReactModule.memo(function(p2) --[[ Line: 257 ]]
 		p2.onFormAbandoned()
 		p2.closePrompt()
 	end, { p2.closePrompt, p2.onFormAbandoned })
-	local UseResult4 = if FFlagPlayerSupportPromptEventIngestModule then ReactModule.useCallback(function() --[[ Line: 537 ]]
+	local UseResult4 = if FFlagPlayerSupportPromptEventIngestModule then ReactModule.useCallback(function()
 		-- upvalues: PlayerSupportPromptTelemetryModule (upval), Category (copy), IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1 (copy), Description (copy), UseResult3 (copy)
 		PlayerSupportPromptTelemetryModule.log({
 			action = PlayerSupportPromptTelemetryModule.Action.Dismissed,
@@ -450,7 +450,7 @@ return (ReactModule.memo(function(p2) --[[ Line: 257 ]]
 		IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1,
 		Description
 	}) else UseResult3
-	local UseResult5 = if FFlagPlayerSupportPromptEventIngestModule then ReactModule.useCallback(function() --[[ Line: 550 ]]
+	local UseResult5 = if FFlagPlayerSupportPromptEventIngestModule then ReactModule.useCallback(function()
 		-- upvalues: PlayerSupportPromptTelemetryModule (upval), Category (copy), IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1 (copy), Description (copy), UseResult3 (copy)
 		PlayerSupportPromptTelemetryModule.log({
 			action = PlayerSupportPromptTelemetryModule.Action.Dismissed,
@@ -466,7 +466,7 @@ return (ReactModule.memo(function(p2) --[[ Line: 257 ]]
 		IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1,
 		Description
 	}) else UseResult3
-	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 570 ]]
+	local UseResult6 = ReactModule.useCallback(function()
 		-- upvalues: FFlagPlayerSupportPromptEventIngestModule (upval), PlayerSupportPromptTelemetryModule (upval), Category (copy), IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1 (copy), Description (copy), p2 (copy)
 		if FFlagPlayerSupportPromptEventIngestModule then
 			PlayerSupportPromptTelemetryModule.log({
@@ -476,7 +476,7 @@ return (ReactModule.memo(function(p2) --[[ Line: 257 ]]
 				descriptionLength = #Description
 			})
 		end
-		pcall(function() --[[ Line: 579 ]]
+		pcall(function()
 			local SocialService = game:GetService("SocialService")
 			
 			if SocialService.SignalFeedbackSubmissionPermissionDenied then
@@ -485,7 +485,7 @@ return (ReactModule.memo(function(p2) --[[ Line: 257 ]]
 		end)
 		p2.onFormAbandoned()
 		p2.closePrompt()
-		pcall(function() --[[ Line: 587 ]]
+		pcall(function()
 			local RobloxGui = game:GetService("CoreGui"):FindFirstChild("RobloxGui")
 			local Modules = RobloxGui and RobloxGui:FindFirstChild("Modules") or nil
 			local Settings = Modules and Modules:FindFirstChild("Settings") or nil
@@ -505,7 +505,7 @@ return (ReactModule.memo(function(p2) --[[ Line: 257 ]]
 		p2.closePrompt,
 		p2.onFormAbandoned
 	} else { p2.closePrompt, p2.onFormAbandoned })
-	UseEscapeDismissModule("PlayerSupportPromptCancel", if FFlagEnablePlayerSupportCaptureAttachmentsModule then ReactModule.useCallback(function() --[[ Line: 606 ]]
+	UseEscapeDismissModule("PlayerSupportPromptCancel", if FFlagEnablePlayerSupportCaptureAttachmentsModule then ReactModule.useCallback(function()
 		-- upvalues: Capture (ref), Callback2 (ref), v3 (ref), Callback1 (ref), UseResult5 (copy)
 		if Capture then
 			Callback2(nil)
@@ -535,7 +535,7 @@ return (ReactModule.memo(function(p2) --[[ Line: 257 ]]
 				hasMore = v2.hasMore,
 				selectedKeys = SelectedKeys,
 				onToggle = UseResult1,
-				onPreview = function(p3) --[[ Line: 647 ]]
+				onPreview = function(p3)
 					-- upvalues: Callback2 (ref)
 					Callback2(p3)
 				end,
@@ -594,7 +594,7 @@ return (ReactModule.memo(function(p2) --[[ Line: 257 ]]
 							size = InputSize.Medium,
 							variant = InputVariant.Utility,
 							width = UDim.new(1, 0),
-							onItemChanged = function(p3) --[[ Line: 710 ]]
+							onItemChanged = function(p3)
 								-- upvalues: SetCategoryFunction (copy)
 								SetCategoryFunction((tostring(p3)))
 							end
@@ -662,7 +662,7 @@ return (ReactModule.memo(function(p2) --[[ Line: 257 ]]
 						label = if IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry then UseLocalizationResult.ShareUserIdLabelRequired else UseLocalizationResult.ShareUserIdLabel,
 						isChecked = IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1,
 						isDisabled = IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry,
-						onActivated = function(p3) --[[ Line: 786 ]]
+						onActivated = function(p3)
 							-- upvalues: SetShareUserIdFunction (copy)
 							SetShareUserIdFunction(p3)
 						end,
@@ -703,7 +703,7 @@ return (ReactModule.memo(function(p2) --[[ Line: 257 ]]
 				{
 					text = UseLocalizationResult.Cancel,
 					variant = ButtonVariant.Standard,
-					onActivated = function() --[[ Line: 848 ]]
+					onActivated = function()
 						-- upvalues: Callback1 (ref)
 						Callback1(false)
 					end
@@ -717,7 +717,7 @@ return (ReactModule.memo(function(p2) --[[ Line: 257 ]]
 					text = if IsSelectedKey then UseLocalizationResult.Deselect else UseLocalizationResult.Select,
 					variant = if IsSelectedKey then ButtonVariant.SoftEmphasis elseif IsSelectedKey1 then ButtonVariant.Emphasis else ButtonVariant.Standard,
 					isDisabled = not IsSelectedKey1 and not IsSelectedKey,
-					onActivated = function() --[[ Line: 822 ]]
+					onActivated = function()
 						-- upvalues: UseResult1 (ref), Capture (ref), Callback2 (ref)
 						UseResult1(Capture)
 						Callback2(nil)
@@ -726,7 +726,7 @@ return (ReactModule.memo(function(p2) --[[ Line: 257 ]]
 				{
 					text = UseLocalizationResult.Cancel,
 					variant = ButtonVariant.Standard,
-					onActivated = function() --[[ Line: 830 ]]
+					onActivated = function()
 						-- upvalues: Callback2 (ref)
 						Callback2(nil)
 					end

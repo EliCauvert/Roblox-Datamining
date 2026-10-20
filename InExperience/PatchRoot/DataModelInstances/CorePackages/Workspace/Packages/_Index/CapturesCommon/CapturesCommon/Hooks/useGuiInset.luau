@@ -4,7 +4,7 @@ local UserInputService = game:GetService("UserInputService")
 local ReactModule = require(Parent.React)
 local UseEventConnectionFunction = require(Parent.ReactUtils).useEventConnection
 
-local function _() --[[ Line: 12 ]]
+local function _()
 	-- upvalues: GuiService (copy)
 	local GuiInset, GuiInset2 = GuiService:GetGuiInset()
 	
@@ -16,7 +16,7 @@ local function _() --[[ Line: 12 ]]
 	}
 end
 
-return function() --[[ Line: 22 ]]
+return function()
 	-- upvalues: ReactModule (copy), GuiService (copy), UseEventConnectionFunction (copy), UserInputService (copy)
 	local UseStateFunction = ReactModule.useState
 	local GuiInset, GuiInset2 = GuiService:GetGuiInset()
@@ -27,7 +27,7 @@ return function() --[[ Line: 22 ]]
 		top = GuiInset.Y
 	})
 	
-	local function v11() --[[ Line: 25 ]]
+	local function v11()
 		-- upvalues: UseStateResult2 (copy), GuiService (upval)
 		local GuiInset, GuiInset2 = GuiService:GetGuiInset()
 		UseStateResult2({

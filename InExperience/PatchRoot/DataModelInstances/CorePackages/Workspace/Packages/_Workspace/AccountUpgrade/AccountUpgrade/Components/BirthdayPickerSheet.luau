@@ -12,21 +12,21 @@ local UseValidatedBirthdayFunction = AuthSignupModule.Hooks.useValidatedBirthday
 local FIntSinglePageSignupMinimumAge = require(Parent.SharedFlags).FIntSinglePageSignupMinimumAge
 local ButtonVariant = require(Parent.Foundation).Enums.ButtonVariant
 
-local function BirthdayPickerDialog(p1) --[[ Line: 46 ]]
+local function BirthdayPickerDialog(p1)
 	-- upvalues: UseValidatedBirthdayFunction (copy), FIntSinglePageSignupMinimumAge (copy), UseRequireManualSelectionModule (copy), FFlagAccountUpgradeOAuthTelemetryModule (copy), ReactModule (copy), UseLocalizationFunction (copy), AccountUpgradeDialogModule (copy), BirthdayPicker (copy), AccountUpgradeDialogActionsModule (copy), ButtonVariant (copy)
 	local UseValidatedBirthdayResult, UseValidatedBirthdayResult2 = UseValidatedBirthdayFunction(FIntSinglePageSignupMinimumAge)
 	local UseRequireManualSelectionModuleResult = UseRequireManualSelectionModule()
 	local OnAllPickedFunction = p1.onAllPicked
 	local UseRefResult = if FFlagAccountUpgradeOAuthTelemetryModule then ReactModule.useRef(false) else nil
 	local OnConfirmFunction = p1.onConfirm
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 69 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseValidatedBirthdayResult (copy), OnConfirmFunction (copy)
 		if UseValidatedBirthdayResult ~= nil then
 			OnConfirmFunction(UseValidatedBirthdayResult)
 		end
 	end, { UseValidatedBirthdayResult, OnConfirmFunction })
 	local OnCloseFunction = p1.onClose
-	local UseResult1 = ReactModule.useCallback(function(_) --[[ Line: 78 ]]
+	local UseResult1 = ReactModule.useCallback(function(_)
 		-- upvalues: OnCloseFunction (copy)
 		OnCloseFunction()
 	end, { OnCloseFunction })
@@ -46,7 +46,7 @@ local function BirthdayPickerDialog(p1) --[[ Line: 46 ]]
 				layoutOrder = 1,
 				minAgeAllowed = FIntSinglePageSignupMinimumAge,
 				requireManualSelection = UseRequireManualSelectionModuleResult,
-				updateBirthday = (if FFlagAccountUpgradeOAuthTelemetryModule then ReactModule.useCallback(function(p2, p3, p4) --[[ Line: 59 ]]
+				updateBirthday = (if FFlagAccountUpgradeOAuthTelemetryModule then ReactModule.useCallback(function(p2, p3, p4)
 					-- upvalues: UseValidatedBirthdayResult2 (copy), OnAllPickedFunction (copy), UseRefResult (copy)
 					UseValidatedBirthdayResult2(p2, p3, p4)
 					
@@ -79,7 +79,7 @@ local function BirthdayPickerDialog(p1) --[[ Line: 46 ]]
 	})
 end
 
-return function(p1) --[[ Line: 131 | Named "BirthdayPickerSheet" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), BirthdayPickerDialog (copy)
 	return if p1.isOpen then ReactModule.createElement(BirthdayPickerDialog, p1) else nil
 end

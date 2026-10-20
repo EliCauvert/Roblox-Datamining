@@ -1,29 +1,29 @@
-﻿local function _(p1, p2, p3) --[[ Line: 49 | Named "positiveInteger" ]]
+﻿local function _(p1, p2, p3)
 	local P0 = p1 or p2
 	assert(P0 >= 1 and P0 % 1 == 0, `{p3} must be a positive integer`)
 	
 	return P0
 end
 
-local _ = function(p1, p2, p3) --[[ Line: 55 | Named "nonNegativeInteger" ]]
+local _ = function(p1, p2, p3)
 	local P3 = p1 or p2
 	assert(P3 >= 0 and P3 % 1 == 0, `{p3} must be a non-negative integer`)
 	
 	return P3
 end
 
-local _ = function(p1) --[[ Line: 61 | Named "median" ]]
+local _ = function(p1)
 	local CountP6 = #p1
 	local Floored = math.floor(CountP6 / 2)
 	
 	return if CountP6 % 2 == 1 then p1[Floored + 1] else (p1[Floored] + p1[Floored + 1]) / 2
 end
 
-local _ = function(p1, p2) --[[ Line: 70 | Named "percentile" ]]
+local _ = function(p1, p2)
 	return p1[math.clamp(math.ceil(#p1 * p2), 1, #p1)]
 end
 
-local _ = function(Entry) --[[ Line: 75 | Named "medianConfidenceInterval" ]]
+local _ = function(Entry)
 	local CountEntry = #Entry
 	
 	if CountEntry < 2 then
@@ -36,7 +36,7 @@ local _ = function(Entry) --[[ Line: 75 | Named "medianConfidenceInterval" ]]
 	end
 end
 
-local function bootstrapMedianConfidenceInterval(Entry, BootstrapResamples, RandomSeed) --[[ Line: 87 ]]
+local function bootstrapMedianConfidenceInterval(Entry, BootstrapResamples, RandomSeed)
 	if #Entry < 2 or BootstrapResamples == 0 then
 		local Entry1 = Entry[1] or 0
 		
@@ -60,7 +60,7 @@ local function bootstrapMedianConfidenceInterval(Entry, BootstrapResamples, Rand
 	return Buffer[math.clamp(math.ceil(#Buffer * 0.025), 1, #Buffer)], Buffer[math.clamp(math.ceil(#Buffer * 0.975), 1, #Buffer)]
 end
 
-local function distribution(Tbl) --[[ Line: 110 ]]
+local function distribution(Tbl)
 	local Copy = table.clone(Tbl)
 	table.sort(Copy)
 	local Total = 0
@@ -88,7 +88,7 @@ local function distribution(Tbl) --[[ Line: 110 ]]
 	return Copy, TotalRatio, SquareRoot, Count
 end
 
-local function run(Callback, p1) --[[ Line: 136 ]]
+local function run(Callback, p1)
 	-- upvalues: distribution (copy), bootstrapMedianConfidenceInterval (copy)
 	local P11 = p1 or {}
 	local SampleCount = P11.sampleCount
@@ -182,7 +182,7 @@ end
 
 return {
 	run = run,
-	measure = function(Callback: () -> (), p2) --[[ Line: 213 ]]
+	measure = function(Callback: () -> (), p2)
 		-- upvalues: run (copy)
 		local P12 = p2 or {}
 		local TargetSampleMs = P12.targetSampleMs or 10
@@ -203,7 +203,7 @@ return {
 			assert(IterationsPerSample1 >= 1 and IterationsPerSample1 % 1 == 0, "iterationsPerSample must be a positive integer")
 			ClampedValue = IterationsPerSample1
 		end
-		local RunResult = run(function() --[[ Line: 231 ]]
+		local RunResult = run(function()
 			-- upvalues: Clock (copy), ClampedValue (ref), Callback (copy)
 			local ClockResult = Clock()
 			

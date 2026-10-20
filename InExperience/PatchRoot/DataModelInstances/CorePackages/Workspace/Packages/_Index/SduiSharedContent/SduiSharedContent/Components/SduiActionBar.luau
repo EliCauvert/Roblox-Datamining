@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local View = require(Parent.Foundation).View
 local GetSduiComponentWrapperFunction = require(Parent.SduiCoreSystem).getSduiComponentWrapper
 
-return ReactModule.memo(function(p1) --[[ Line: 42 | Named "SduiActionBar" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: GetSduiComponentWrapperFunction (copy), ReactModule (copy), View (copy)
 	if p1.items == nil or #p1.items == 0 then
 		return nil

@@ -1,7 +1,7 @@
 ﻿local CreateSignalFunction = require(script.Parent.Parent.Parent.Signals).createSignal
 local t = {}
 
-local function _() --[[ Line: 18 | Named "defaultRelationship" ]]
+local function _()
 	return {
 		isBlocked = false,
 		friendStatus = nil,
@@ -9,7 +9,7 @@ local function _() --[[ Line: 18 | Named "defaultRelationship" ]]
 	}
 end
 
-local _ = function(Key) --[[ Line: 26 | Named "getOrCreate" ]]
+local _ = function(Key)
 	-- upvalues: t (ref), CreateSignalFunction (copy)
 	if not t[Key] then
 		local Signal, Signal2 = CreateSignalFunction({
@@ -23,7 +23,7 @@ local _ = function(Key) --[[ Line: 26 | Named "getOrCreate" ]]
 end
 
 return {
-	getPlayerRelationshipReactive = function(Key) --[[ Line: 34 ]]
+	getPlayerRelationshipReactive = function(Key)
 		-- upvalues: t (ref), CreateSignalFunction (copy)
 		if not t[Key] then
 			local Signal, Signal2 = CreateSignalFunction({
@@ -35,7 +35,7 @@ return {
 		end
 		return t[Key].getter
 	end,
-	patchPlayerRelationship = function(Key, p1) --[[ Line: 44 ]]
+	patchPlayerRelationship = function(Key, p1)
 		-- upvalues: t (ref), CreateSignalFunction (copy)
 		if not t[Key] then
 			local Signal, Signal2 = CreateSignalFunction({
@@ -53,11 +53,11 @@ return {
 			isFollowing = if p1.isFollowing == nil then Ter.isFollowing else p1.isFollowing
 		})
 	end,
-	removePlayer = function(Key) --[[ Line: 55 ]]
+	removePlayer = function(Key)
 		-- upvalues: t (ref)
 		t[Key] = nil
 	end,
-	cleanUp = function() --[[ Line: 59 ]]
+	cleanUp = function()
 		-- upvalues: t (ref)
 		t = {}
 	end

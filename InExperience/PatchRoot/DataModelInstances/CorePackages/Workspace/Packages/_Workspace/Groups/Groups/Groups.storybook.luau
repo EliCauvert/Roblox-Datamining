@@ -12,7 +12,7 @@ local Signal = require(Parent.AppCommonLib).Signal
 UIBloxModule.init(require(Parent.Dev.RobloxAppUIBloxConfig))
 local AppStyleProvider = UIBloxModule.App.Style.AppStyleProvider
 
-local function createStore() --[[ Line: 27 ]]
+local function createStore()
 	-- upvalues: RoduxModule (copy)
 	return RoduxModule.Store.new(RoduxModule.createReducer({}, {}), nil, { RoduxModule.thunkMiddleware })
 end
@@ -23,10 +23,10 @@ local config = {
 	Dark = { themeName = "Dark", fontName = "Gotham" }
 }
 local Localization = {
-	Format = function(_, p1) --[[ Line: 48 ]]
+	Format = function(_, p1)
 		return p1
 	end,
-	GetLocale = function(): string --[[ Line: 51 ]]
+	GetLocale = function(): string
 		return "en-us"
 	end,
 	changed = Signal.new()
@@ -37,9 +37,9 @@ return {
 	storyRoot = Groups,
 	roact = ReactModule,
 	reactRoblox = ReactRobloxModule,
-	mapStory = function(p1) --[[ Line: 62 ]]
+	mapStory = function(p1)
 		-- upvalues: config (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), FoundationProvider (copy), AppStyleProvider (copy), RoactRoduxModule (copy), createStore (copy), DesignTokenProvider (copy)
-		return function(p2) --[[ Line: 63 ]]
+		return function(p2)
 			-- upvalues: config (upval), ReactModule (upval), LocalizationProvider (upval), Localization (upval), FoundationProvider (upval), AppStyleProvider (upval), RoactRoduxModule (upval), createStore (upval), DesignTokenProvider (upval), p1 (copy)
 			local Entry = p2 and config[p2.theme] or config.Default
 			

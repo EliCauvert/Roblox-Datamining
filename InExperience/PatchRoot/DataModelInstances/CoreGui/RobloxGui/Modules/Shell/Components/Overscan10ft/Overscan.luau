@@ -15,7 +15,7 @@ local UseNavigationFunction = require(CorePackages.Workspace.Packages.Navigation
 local ControllerHintModule = require(Modules.Shell.Components.Overscan.ControllerHint)
 local EdgesModule = require(script.Parent.Edges)
 
-return function(Frame) --[[ Line: 31 | Named "Overscan" ]]
+return function(Frame)
 	-- upvalues: UseNavigationFunction (copy), UseLocalizationFunction (copy), UseDesignTokensFunction (copy), UseStyleFunction (copy), ReactModule (copy), FontFaceConsoleOverscan (copy), GlobalSettingsModule (copy), NormalizeFontFaceFunction (copy), LocalizedStringsModule (copy), ControllerHintModule (copy), ButtonStack (copy), ButtonType (copy), EdgesModule (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local OnUnmount = Frame.onUnmount or UseNavigationResult.goBack
@@ -23,7 +23,7 @@ return function(Frame) --[[ Line: 31 | Named "Overscan" ]]
 		accept = "CommonUI.Controls.Action.Accept",
 		cancel = "CommonUI.Controls.Action.Cancel"
 	})
-	local UseDesignTokensResult = UseDesignTokensFunction(function(p1) --[[ Line: 41 ]]
+	local UseDesignTokensResult = UseDesignTokensFunction(function(p1)
 		return {
 			buttonHeight = p1.Size.Size_1200,
 			marginBetween = p1.Size.Size_300
@@ -90,7 +90,7 @@ return function(Frame) --[[ Line: 31 | Named "Overscan" ]]
 						props = {
 							text = UseLocalizationResult.accept,
 							fontStyle = UseStyleResult.Font.Header1,
-							onActivated = function() --[[ Line: 114 ]]
+							onActivated = function()
 								-- upvalues: UseRefResult (copy)
 								if UseRefResult.current then
 									UseRefResult.current.onAccept()

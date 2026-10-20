@@ -7,7 +7,7 @@ local ConfigResult = HttpRequestModule.config({
 })
 local PromiseModule = require(Parent.Promise)
 
-return function() --[[ Line: 14 ]]
+return function()
 	-- upvalues: PromiseModule (copy), Url (copy), ConfigResult (copy)
 	return if game.GameId == nil or game.GameId == 0 then PromiseModule.reject("GameId is nil or 0") else ConfigResult(string.format("%sreferral-reward-metadata/v1/get-reward-metadata?%s", Url.APIS_URL, (Url:makeQueryString({ UniverseId = game.GameId }))), "GET")
 end

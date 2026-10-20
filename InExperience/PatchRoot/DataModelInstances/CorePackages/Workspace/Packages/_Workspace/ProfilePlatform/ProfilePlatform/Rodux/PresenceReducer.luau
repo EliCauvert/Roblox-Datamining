@@ -3,7 +3,7 @@ local CryoModule = require(ProfilePlatform.Parent.Cryo)
 local PresenceModule = require(ProfilePlatform.Rodux.Presence)
 local List = { "OFFLINE", "ONLINE", "IN_GAME", "IN_STUDIO" }
 
-local function convertFromOldPresenceModel(p1) --[[ Line: 16 ]]
+local function convertFromOldPresenceModel(p1)
 	-- upvalues: PresenceModule (copy), CryoModule (copy), List (copy)
 	return PresenceModule.Actions.ReceivedUserPresence((PresenceModule.Models.Presence.new(CryoModule.Dictionary.join(p1, {
 		lastOnline = "",
@@ -14,7 +14,7 @@ end
 
 local InstallReducerResult = PresenceModule.installReducer()
 
-return function(p1, p2) --[[ Line: 28 ]]
+return function(p1, p2)
 	-- upvalues: convertFromOldPresenceModel (copy), InstallReducerResult (copy)
 	if p2.type == "ReceivedUserPresence" and not p2.payload then
 		p2 = convertFromOldPresenceModel(p2)

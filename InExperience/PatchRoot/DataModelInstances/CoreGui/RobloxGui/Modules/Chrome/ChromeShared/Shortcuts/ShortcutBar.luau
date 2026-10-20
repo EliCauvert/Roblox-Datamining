@@ -22,7 +22,7 @@ local FFlagSideSheetFocusNav = SharedFlagsModule.FFlagSideSheetFocusNav
 local FFlagEnableDrawerAnimatingHook = SharedFlagsModule.FFlagEnableDrawerAnimatingHook
 local GetSideSheetVisibilityFunction = require(CorePackages.Workspace.Packages.InExperienceSideSheet).getSideSheetVisibility
 
-function ChromeShortcutBar(_) --[[ Line: 34 ]]
+function ChromeShortcutBar(_)
 	-- upvalues: ReactModule (copy), UseTokensFunction (copy), UseObservableValueModule (copy), ViewportUtilModule (copy), FFlagGamepadIconSupportCheck (copy), GamepadConnectorModule (copy), ServiceModule (copy), UserInputService (copy), IsSpatialFunction (copy), FFlagEnableConsoleExpControls (copy), IsSideSheetEnabledModule (copy), FFlagSideSheetFocusNav (copy), FFlagEnableDrawerAnimatingHook (copy), GetSideSheetVisibilityFunction (copy), UseDrawerAnimatingFunction (copy), ReactRobloxModule (copy), ConstantsModule (copy), ShortcutBar (copy), CoreGui (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState({})
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState({})
@@ -31,7 +31,7 @@ function ChromeShortcutBar(_) --[[ Line: 34 ]]
 	local UseObservableValueModuleResult = UseObservableValueModule(ViewportUtilModule.screenSize)
 	local UseRefResult = ReactModule.useRef(0)
 	
-	local function checkOverflow() --[[ Line: 43 ]]
+	local function checkOverflow()
 		-- upvalues: UseRefResult (copy), UseObservableValueModuleResult (copy), UseStateResult (copy), UseStateResult2_1 (copy)
 		if UseObservableValueModuleResult.X < UseRefResult.current then
 			local Index = 1
@@ -47,14 +47,14 @@ function ChromeShortcutBar(_) --[[ Line: 34 ]]
 		end
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 60 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2_1 (copy), checkOverflow (copy)
 		UseStateResult2_1({})
 		checkOverflow()
 	end, { UseObservableValueModuleResult })
-	ReactModule.useEffect(function() --[[ Line: 65 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagGamepadIconSupportCheck (upval), GamepadConnectorModule (upval), ServiceModule (upval), UseStateResult2 (copy), UseStateResult2_1 (copy), UserInputService (upval), IsSpatialFunction (upval), FFlagEnableConsoleExpControls (upval), UseBindingResult2 (copy)
-		local function updateShortcuts() --[[ Line: 66 ]]
+		local function updateShortcuts()
 			-- upvalues: FFlagGamepadIconSupportCheck (upval), GamepadConnectorModule (upval), ServiceModule (upval), UseStateResult2 (upval), UseStateResult2_1 (upval)
 			if not FFlagGamepadIconSupportCheck or GamepadConnectorModule:getGamepadActive():get() then
 				UseStateResult2((ServiceModule:getCurrentShortcuts()))
@@ -74,7 +74,7 @@ function ChromeShortcutBar(_) --[[ Line: 34 ]]
 			local GamepadActive = GamepadConnectorModule:getGamepadActive()
 			
 			if FFlagEnableConsoleExpControls then
-				local function shouldHideShortcutBar() --[[ Line: 85 ]]
+				local function shouldHideShortcutBar()
 					-- upvalues: ShowTopBar (copy), GamepadActive (copy), ServiceModule (upval)
 					ServiceModule:setHideShortcutBar("TopBar", not ShowTopBar:get() or not GamepadActive:get())
 				end
@@ -85,7 +85,7 @@ function ChromeShortcutBar(_) --[[ Line: 34 ]]
 				
 				return
 			else
-				local function shouldShowShortcutBar() --[[ Line: 93 ]]
+				local function shouldShowShortcutBar()
 					-- upvalues: ShowTopBar (copy), GamepadActive (copy), UseBindingResult2 (upval)
 					UseBindingResult2(ShowTopBar:get() and GamepadActive:get())
 				end
@@ -99,7 +99,7 @@ function ChromeShortcutBar(_) --[[ Line: 34 ]]
 	if IsSideSheetEnabledModule and FFlagSideSheetFocusNav and FFlagEnableDrawerAnimatingHook then
 		local SideSheetVisibility = GetSideSheetVisibilityFunction(false)
 		local UseDrawerAnimatingResult = UseDrawerAnimatingFunction()
-		ReactModule.useEffect(function() --[[ Line: 110 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: ServiceModule (upval), SideSheetVisibility (copy), UseDrawerAnimatingResult (copy)
 			ServiceModule:setHideShortcutBar("SideSheet", SideSheetVisibility or UseDrawerAnimatingResult)
 		end, { SideSheetVisibility, UseDrawerAnimatingResult })
@@ -131,7 +131,7 @@ function ChromeShortcutBar(_) --[[ Line: 34 ]]
 				AnchorPoint = Vector2.new(0.5, 1),
 				BorderSizePixel = 0,
 				BackgroundTransparency = 1,
-				[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 145 ]]
+				[ReactModule.Change.AbsoluteSize] = function(Frame)
 					-- upvalues: UseRefResult (copy), checkOverflow (copy)
 					UseRefResult.current = Frame.AbsoluteSize.X
 					checkOverflow()

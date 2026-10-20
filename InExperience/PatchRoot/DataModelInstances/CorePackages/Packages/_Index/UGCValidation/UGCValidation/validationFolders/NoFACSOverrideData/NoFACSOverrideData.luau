@@ -7,7 +7,7 @@ return {
 	categories = { ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD },
 	requiredData = { ValidationEnumsModule.SharedDataMember.rootInstance },
 	fflag = require(Parent.flags.getEngineFeatureUGCValidateCheckFacsDisableOverride),
-	run = function(p1, p2) --[[ Line: 12 ]]
+	run = function(p1, p2)
 		-- upvalues: ErrorSourceStringsModule (copy)
 		local FaceControls = p2.rootInstance:FindFirstChildOfClass("FaceControls")
 		

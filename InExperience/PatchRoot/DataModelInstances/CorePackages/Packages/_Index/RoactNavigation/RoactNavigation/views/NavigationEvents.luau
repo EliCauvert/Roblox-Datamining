@@ -9,33 +9,33 @@ local config = {
 }
 local NavigationEvents = require(Parent.Parent.React).Component:extend("NavigationEvents")
 
-function NavigationEvents.didMount(p1) --[[ Line: 51 ]]
+function NavigationEvents.didMount(p1)
 	p1:subscribeAll()
 end
 
-function NavigationEvents.didUpdate(p1, p2) --[[ Line: 58 ]]
+function NavigationEvents.didUpdate(p1, p2)
 	if p1.props.navigation ~= p2.navigation then
 		p1:removeAll()
 		p1:subscribeAll()
 	end
 end
 
-function NavigationEvents.willUnmount(p1) --[[ Line: 66 ]]
+function NavigationEvents.willUnmount(p1)
 	p1:removeAll()
 end
 
-function NavigationEvents.getPropListener(p1, p2) --[[ Line: 70 ]]
+function NavigationEvents.getPropListener(p1, p2)
 	-- upvalues: config (copy)
 	return p1.props[config[p2]]
 end
 
-function NavigationEvents.subscribeAll(p1) --[[ Line: 74 ]]
+function NavigationEvents.subscribeAll(p1)
 	-- upvalues: config (copy)
 	local Navigation = p1.props.navigation
 	p1.subscriptions = {}
 	
 	for i in config do
-		p1.subscriptions[i] = Navigation.addListener(i, function(...) --[[ Line: 80 ]]
+		p1.subscriptions[i] = Navigation.addListener(i, function(...)
 			-- upvalues: p1 (copy), i (copy)
 			local PropListener: (any) -> () = p1:getPropListener(i)
 			
@@ -46,7 +46,7 @@ function NavigationEvents.subscribeAll(p1) --[[ Line: 74 ]]
 	end
 end
 
-function NavigationEvents.removeAll(p2) --[[ Line: 90 ]]
+function NavigationEvents.removeAll(p2)
 	-- upvalues: config (copy)
 	for i in config do
 		local Subscription = p2.subscriptions[i]
@@ -58,7 +58,7 @@ function NavigationEvents.removeAll(p2) --[[ Line: 90 ]]
 	end
 end
 
-function NavigationEvents:render() --[[ Line: 100 ]]
+function NavigationEvents:render()
 	return nil
 end
 

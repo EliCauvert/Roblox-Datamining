@@ -1,17 +1,17 @@
 ﻿local UserInputService = game:GetService("UserInputService")
 local ReactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
 
-return function() --[[ Line: 5 | Named "useOnScreenKeyboardVisible" ]]
+return function()
 	-- upvalues: ReactModule (copy), UserInputService (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(UserInputService.OnScreenKeyboardVisible)
-	ReactModule.useEffect(function() --[[ Line: 8 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UserInputService (upval), UseStateResult2 (copy)
-		local Connection = UserInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(function() --[[ Line: 9 ]]
+		local Connection = UserInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(function()
 			-- upvalues: UseStateResult2 (upval), UserInputService (upval)
 			UseStateResult2(UserInputService.OnScreenKeyboardVisible)
 		end)
 		
-		return function() --[[ Line: 13 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end

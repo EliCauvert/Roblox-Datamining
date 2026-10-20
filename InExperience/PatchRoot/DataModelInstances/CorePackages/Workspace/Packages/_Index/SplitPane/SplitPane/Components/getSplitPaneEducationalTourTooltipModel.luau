@@ -4,7 +4,7 @@ local GetSplitPaneEducationalTourVideoAssetIdModule = require(script.Parent.getS
 local PopoverSide = FoundationModule.Enums.PopoverSide
 local PopoverAlign = FoundationModule.Enums.PopoverAlign
 
-return function(p1) --[[ Line: 49 ]]
+return function(p1)
 	-- upvalues: PopoverSide (copy), PopoverAlign (copy), GetSplitPaneEducationalTourVideoAssetIdModule (copy)
 	local Step = p1.step
 	

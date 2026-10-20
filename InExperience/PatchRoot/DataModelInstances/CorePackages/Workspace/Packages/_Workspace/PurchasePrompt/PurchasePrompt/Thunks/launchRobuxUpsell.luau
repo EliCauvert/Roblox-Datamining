@@ -31,9 +31,9 @@ local list = {
 	PlatformInterfaceModule
 }
 
-return function() --[[ Line: 41 | Named "launchRobuxUpsell" ]]
+return function()
 	-- upvalues: ThunkModule (copy), list (copy), AnalyticsModule (copy), ExternalSettingsModule (copy), NetworkModule (copy), PlatformInterfaceModule (copy), GetUpsellFlowModule (copy), UpsellFlowModule (copy), SelectedRobuxPackageModule (copy), GetEnableConsolePreparePaymentCheckFunction (copy), PreparePaymentCheckFunction (copy), ErrorOccurredModule (copy), PurchaseErrorModule (copy), PromptStateModule (copy), PostPurchaseWarningAcknowledgeModule (copy), GetAppFeaturePoliciesFunction (copy), SetPromptStateModule (copy), GetFStringVNGWebshopUrlFunction (copy), DesktopUpsellExperiment (copy), Players (copy), PromiseModule (copy), ConstantsModule (copy), RetryAfterUpsellModule (copy)
-	return ThunkModule.new(script.Name, list, function(p1, p2) --[[ Line: 42 ]]
+	return ThunkModule.new(script.Name, list, function(p1, p2)
 		-- upvalues: AnalyticsModule (upval), ExternalSettingsModule (upval), NetworkModule (upval), PlatformInterfaceModule (upval), GetUpsellFlowModule (upval), UpsellFlowModule (upval), SelectedRobuxPackageModule (upval), GetEnableConsolePreparePaymentCheckFunction (upval), PreparePaymentCheckFunction (upval), ErrorOccurredModule (upval), PurchaseErrorModule (upval), PromptStateModule (upval), PostPurchaseWarningAcknowledgeModule (upval), GetAppFeaturePoliciesFunction (upval), SetPromptStateModule (upval), GetFStringVNGWebshopUrlFunction (upval), DesktopUpsellExperiment (upval), Players (upval), PromiseModule (upval), ConstantsModule (upval), RetryAfterUpsellModule (upval)
 		local v1 = p2[AnalyticsModule]
 		local v2 = p2[ExternalSettingsModule]
@@ -90,11 +90,11 @@ return function() --[[ Line: 41 | Named "launchRobuxUpsell" ]]
 				
 				return
 			elseif State.promptState == PromptStateModule.LeaveRobloxWarning then
-				v3.getVngShopUrl(v3):andThen(function(Result) --[[ Line: 112 ]]
+				v3.getVngShopUrl(v3):andThen(function(Result)
 					-- upvalues: v4 (copy), p1 (copy), SetPromptStateModule (upval), PromptStateModule (upval)
 					v4.openVngStore(Result.vngShopRedirectUrl)
 					p1:dispatch(SetPromptStateModule(PromptStateModule.UpsellInProgress))
-				end):catch(function() --[[ Line: 116 ]]
+				end):catch(function()
 					-- upvalues: v4 (copy), GetFStringVNGWebshopUrlFunction (upval), p1 (copy), SetPromptStateModule (upval), PromptStateModule (upval)
 					v4.openVngStore(GetFStringVNGWebshopUrlFunction())
 					p1:dispatch(SetPromptStateModule(PromptStateModule.UpsellInProgress))
@@ -126,10 +126,10 @@ return function() --[[ Line: 41 | Named "launchRobuxUpsell" ]]
 			v1.signalProductPurchaseUpsellConfirmed(ProductId1, RequestType, RobuxProductId2)
 			p1:dispatch(SetPromptStateModule(PromptStateModule.UpsellInProgress))
 			
-			return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ()) --[[ Line: 162 ]]
+			return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ())
 				-- upvalues: v4 (copy), RobuxProductId2 (copy)
 				local BeginPlatformStorePurchaseResult = nil
-				local Success, Result = pcall(function() --[[ Line: 168 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: BeginPlatformStorePurchaseResult (ref), v4 (upval), RobuxProductId2 (upval)
 					BeginPlatformStorePurchaseResult = v4.beginPlatformStorePurchase(RobuxProductId2)
 				end)
@@ -139,7 +139,7 @@ return function() --[[ Line: 41 | Named "launchRobuxUpsell" ]]
 				else
 					Callback1(Result)
 				end
-			end):andThen(function(Result) --[[ Line: 177 ]]
+			end):andThen(function(Result)
 				-- upvalues: ConstantsModule (upval), v1 (copy), ProductId1 (copy), RequestType (copy), RobuxProductId2 (copy), p1 (copy), RetryAfterUpsellModule (upval), ErrorOccurredModule (upval), PurchaseErrorModule (upval)
 				if Result == ConstantsModule.PlatformPurchaseResult.PurchaseResult_Success then
 					v1.signalXboxInGamePurchaseSuccess(ProductId1, RequestType, RobuxProductId2)

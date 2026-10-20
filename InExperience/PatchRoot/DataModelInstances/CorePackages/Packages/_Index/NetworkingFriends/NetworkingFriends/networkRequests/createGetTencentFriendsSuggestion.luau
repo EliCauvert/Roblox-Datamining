@@ -1,9 +1,9 @@
 ﻿local FRIENDSURLModule = require(script.Parent.Parent.FRIENDS_URL)
 local _ = require(script.Parent.Parent.networkingFriendsTypes)
 
-return function(p1) --[[ Line: 5 ]]
+return function(p1)
 	-- upvalues: FRIENDSURLModule (copy)
-	return p1.roduxNetworking.GET({ Name = "GetTencentFriendsSuggestion" }, function(Callback, p2) --[[ Line: 8 ]]
+	return p1.roduxNetworking.GET({ Name = "GetTencentFriendsSuggestion" }, function(Callback, p2)
 		-- upvalues: FRIENDSURLModule (upval)
 		return Callback(FRIENDSURLModule):path("v1"):path("tecent-friends-suggestion"):queryArgs({
 			userOpenId = p2.userOpenId,

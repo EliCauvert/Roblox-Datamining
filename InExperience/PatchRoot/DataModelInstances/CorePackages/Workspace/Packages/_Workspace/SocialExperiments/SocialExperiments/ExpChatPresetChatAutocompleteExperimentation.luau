@@ -8,7 +8,7 @@ local ExpChatPresetAutocompleteSearchModeOverride = game:DefineFastInt("ExpChatP
 local ExpChatPresetAutocompleteMinQueryLengthOverride = game:DefineFastInt("ExpChatPresetAutocompleteMinQueryLengthOverride", 0)
 local Flag = false
 
-local function _() --[[ Line: 38 | Named "getAutocompleteAssignment" ]]
+local function _()
 	-- upvalues: ExperimentCacheManager (copy), ExpChatPresetChatAutocompleteExperimentLayer (copy), ExpChatPresetChatAutocompleteVariable (copy)
 	local LayerVariables = ExperimentCacheManager.default:getLayerVariables(ExpChatPresetChatAutocompleteExperimentLayer)
 	
@@ -16,7 +16,7 @@ local function _() --[[ Line: 38 | Named "getAutocompleteAssignment" ]]
 end
 
 return {
-	isEnabled = function(): boolean --[[ Line: 49 ]]
+	isEnabled = function(): boolean
 		-- upvalues: ExpChatPresetAutocompleteRegularIxpOverride (copy), ExperimentCacheManager (copy), ExpChatPresetChatAutocompleteExperimentLayer (copy), ExpChatPresetChatAutocompleteVariable (copy)
 		if ExpChatPresetAutocompleteRegularIxpOverride == 1 then
 			return true
@@ -29,7 +29,7 @@ return {
 			return LayerVariable == true or LayerVariable == 1
 		end
 	end,
-	getSearchVariant = function() --[[ Line: 66 ]]
+	getSearchVariant = function()
 		-- upvalues: ExperimentCacheManager (copy), ExpChatPresetChatAutocompleteExperimentLayer (copy), ExpChatPresetAutocompleteSearchModeOverride (copy), ExpChatPresetChatAutocompleteSearchModeVariable (copy), ExpChatPresetAutocompleteMinQueryLengthOverride (copy), ExpChatPresetChatAutocompleteMinQueryLengthVariable (copy)
 		local LayerVariables = ExperimentCacheManager.default:getLayerVariables(ExpChatPresetChatAutocompleteExperimentLayer) or {}
 		local ExpChatPresetAutocompleteSearchModeOverride1 = if ExpChatPresetAutocompleteSearchModeOverride >= 0 then ExpChatPresetAutocompleteSearchModeOverride else tonumber(LayerVariables[ExpChatPresetChatAutocompleteSearchModeVariable])
@@ -43,14 +43,14 @@ return {
 			minQueryLength = ExpChatPresetAutocompleteMinQueryLengthOverride1
 		}
 	end,
-	logExposure = function() --[[ Line: 95 ]]
+	logExposure = function()
 		-- upvalues: Flag (ref), ExperimentCacheManager (copy), ExpChatPresetChatAutocompleteExperimentLayer (copy), ExpChatPresetChatAutocompleteVariable (copy)
 		if not Flag then
 			local LayerVariables = ExperimentCacheManager.default:getLayerVariables(ExpChatPresetChatAutocompleteExperimentLayer)
 			
 			if (if LayerVariables and LayerVariables[ExpChatPresetChatAutocompleteVariable] ~= nil then LayerVariables[ExpChatPresetChatAutocompleteVariable] else nil) ~= nil then
 				Flag = true
-				pcall(function() --[[ Line: 103 ]]
+				pcall(function()
 					-- upvalues: ExperimentCacheManager (upval), ExpChatPresetChatAutocompleteExperimentLayer (upval)
 					ExperimentCacheManager.default:logLayerExposure(ExpChatPresetChatAutocompleteExperimentLayer)
 				end)

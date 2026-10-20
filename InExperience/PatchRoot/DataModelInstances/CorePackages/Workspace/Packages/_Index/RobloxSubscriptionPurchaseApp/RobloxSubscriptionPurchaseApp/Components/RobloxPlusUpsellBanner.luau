@@ -1,7 +1,7 @@
 ﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
 local UseRobloxPlusUpsellBannerViewModelModule = require(RobloxSubscriptionPurchaseApp.Hooks.useRobloxPlusUpsellBannerViewModel)
 
-return require(RobloxSubscriptionPurchaseApp.Parent.React).memo(function(Frame) --[[ Line: 28 | Named "RobloxPlusUpsellBanner" ]]
+return require(RobloxSubscriptionPurchaseApp.Parent.React).memo(function(Frame)
 	-- upvalues: UseRobloxPlusUpsellBannerViewModelModule (copy)
 	return Frame.renderBanner({
 		message = Frame.message,

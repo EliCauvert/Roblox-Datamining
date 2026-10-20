@@ -93,7 +93,7 @@ local config = {
 	}
 }
 
-return function(p1) --[[ Line: 100 | Named "getAnimationData" ]]
+return function(p1)
 	-- upvalues: config (copy)
 	return config[p1]
 end

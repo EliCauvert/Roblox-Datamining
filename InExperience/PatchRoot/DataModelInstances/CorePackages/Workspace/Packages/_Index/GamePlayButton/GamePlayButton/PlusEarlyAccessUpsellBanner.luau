@@ -12,7 +12,7 @@ local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
 local UsePlayButtonStateModule = require(GamePlayButton.usePlayButtonState)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return ReactModule.memo(function(Frame) --[[ Line: 25 | Named "PlusEarlyAccessUpsellBanner" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseLocalizationFunction (copy), UseRoactServiceFunction (copy), RoactServiceTagsModule (copy), UsePlayButtonStateModule (copy), ReactModule (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		subscribe = "Feature.RobloxSubscription.Action.Subscribe",

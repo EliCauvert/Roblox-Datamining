@@ -43,7 +43,7 @@ local InputSize = FoundationModule.Enums.InputSize
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 
-local function ResetCharacterButtonsContainer(p1) --[[ Line: 83 ]]
+local function ResetCharacterButtonsContainer(p1)
 	-- upvalues: ReactModule (copy), UseLastInputFunction (copy), UseFocusGuiObjectFunction (copy), UseLocalizationFunction (copy), ConstantsModule1 (copy), FFlagRenameRespawnConfirmationPage (copy), Input (copy), UtilityModule (copy), View (copy), IsEnabled (copy), Text (copy), Button (copy), InputSize (copy), FFlagConfirmationButtonsUseGreyButtonsModule (copy), ButtonVariant (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseLastInputResult = UseLastInputFunction()
@@ -53,7 +53,7 @@ local function ResetCharacterButtonsContainer(p1) --[[ Line: 83 ]]
 		ResetCharacter = if FFlagRenameRespawnConfirmationPage then ConstantsModule1.RespawnLocalizedKey else ConstantsModule1.ResetCharacterLocalizedKey,
 		DontResetCharacter = ConstantsModule1.DontResetCharacterLocalizedKey
 	})
-	ReactModule.useEffect(function() --[[ Line: 95 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseLastInputResult (copy), Input (upval), UseFocusGuiObjectResult (copy), UseRefResult (copy)
 		if UseLastInputResult == Input.Touch then
 			UseFocusGuiObjectResult(nil)
@@ -98,7 +98,7 @@ local function ResetCharacterButtonsContainer(p1) --[[ Line: 83 ]]
 				size = InputSize.Large,
 				variant = ButtonVariant.Subtle,
 				width = UDim.new(0, if IsEnabled then 300 else 200),
-				onActivated = ReactModule.useCallback(function() --[[ Line: 103 ]]
+				onActivated = ReactModule.useCallback(function()
 					-- upvalues: p1 (copy), UtilityModule (upval)
 					p1.dontResetCharFromButton(UtilityModule:IsUsingGamepad())
 				end, { UtilityModule, p1.dontResetCharFromButton })
@@ -107,7 +107,7 @@ local function ResetCharacterButtonsContainer(p1) --[[ Line: 83 ]]
 	})
 end
 
-local function ResetCharacterContainer(p1) --[[ Line: 147 ]]
+local function ResetCharacterContainer(p1)
 	-- upvalues: Localization (copy), LocalizationService (copy), ReactModule (copy), LocalizationProvider (copy), FoundationProvider (copy), FoundationModule (copy), ReactFocusNavigationModule (copy), NewResult (copy), ResetCharacterButtonsContainer (copy)
 	return ReactModule.createElement(LocalizationProvider, {
 		localization = Localization.new(LocalizationService.RobloxLocaleId)
@@ -120,11 +120,11 @@ local function ResetCharacterContainer(p1) --[[ Line: 147 ]]
 	})
 end
 
-v1 = (function() --[[ Line: 165 | Named "Initialize" ]]
+v1 = (function()
 	-- upvalues: RobloxGui (copy), RbxAnalyticsService (copy), ConstantsModule1 (copy), FFlagRefactorMenuConfirmationButtonsModule (copy), CreateFunction (copy), FFlagRenameRespawnConfirmationPage (copy), ThemeModule (copy), IsEnabled (copy), UtilityModule (copy), Players (copy), FFlagRespawnActionChromeShortcutTelemetryModule (copy), CryoModule (copy), AvatarEditorService (copy), FFlagEnableConsoleExpControls (copy), ReactRobloxModule (copy), ReactModule (copy), ResetCharacterContainer (copy)
 	local NewPage = require(RobloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	
-	function NewPage.DontResetCharFunc(IsUserInputTypeMatch) --[[ Line: 169 ]]
+	function NewPage.DontResetCharFunc(IsUserInputTypeMatch)
 		-- upvalues: RbxAnalyticsService (upval), ConstantsModule1 (upval), NewPage (copy)
 		RbxAnalyticsService:SetRBXEventStream(ConstantsModule1.AnalyticsTargetName, ConstantsModule1.AnalyticsInGameMenuName, ConstantsModule1.AnalyticsRespawnCharacterName, {
 			confirmed = ConstantsModule1.AnalyticsCancelledName,
@@ -136,14 +136,14 @@ v1 = (function() --[[ Line: 165 | Named "Initialize" ]]
 		end
 	end
 	
-	function NewPage:DontResetCharFromHotkey(UserInputState, Input) --[[ Line: 177 ]]
+	function NewPage:DontResetCharFromHotkey(UserInputState, Input)
 		-- upvalues: NewPage (copy)
 		if UserInputState == Enum.UserInputState.Begin then
 			NewPage.DontResetCharFunc(Input.UserInputType == Enum.UserInputType.Gamepad1 or (Input.UserInputType == Enum.UserInputType.Gamepad2 or (Input.UserInputType == Enum.UserInputType.Gamepad3 or Input.UserInputType == Enum.UserInputType.Gamepad4)))
 		end
 	end
 	
-	function NewPage.DontResetCharFromButton(p1) --[[ Line: 185 ]]
+	function NewPage.DontResetCharFromButton(p1)
 		-- upvalues: NewPage (copy)
 		NewPage.DontResetCharFunc(p1)
 	end
@@ -193,7 +193,7 @@ v1 = (function() --[[ Line: 165 | Named "Initialize" ]]
 			Parent1.FontSize = Enum.FontSize.Size48
 		end
 	end
-	local function v51(p1) --[[ Line: 244 ]]
+	local function v51(p1)
 		-- upvalues: Players (upval), ConstantsModule1 (upval), FFlagRespawnActionChromeShortcutTelemetryModule (upval), CryoModule (upval), RbxAnalyticsService (upval)
 		local LocalPlayer = Players.LocalPlayer
 		
@@ -222,7 +222,7 @@ v1 = (function() --[[ Line: 165 | Named "Initialize" ]]
 	
 	NewPage.ResetBindable = true
 	
-	local function OnResetFunction(p1) --[[ Line: 267 ]]
+	local function OnResetFunction(p1)
 		-- upvalues: AvatarEditorService (upval), NewPage (copy), v51 (copy)
 		AvatarEditorService:BustAvatarFetchCache()
 		
@@ -249,7 +249,7 @@ v1 = (function() --[[ Line: 165 | Named "Initialize" ]]
 		NewPage.Page.Size = UDim2.new(1, 0, 0, DontResetCharacter.AbsolutePosition.Y + DontResetCharacter.AbsoluteSize.Y)
 	end
 	if FFlagRefactorMenuConfirmationButtonsModule then
-		function NewPage.RenderPage() --[[ Line: 297 ]]
+		function NewPage.RenderPage()
 			-- upvalues: NewPage (copy), ReactRobloxModule (upval), ReactModule (upval), ResetCharacterContainer (upval), OnResetFunction (copy)
 			NewPage.PageRoot = ReactRobloxModule.createRoot(NewPage.Page)
 			NewPage.PageRoot:render(ReactModule.createElement(ResetCharacterContainer, {
@@ -258,7 +258,7 @@ v1 = (function() --[[ Line: 165 | Named "Initialize" ]]
 			}))
 		end
 		
-		function NewPage.UnmountPage() --[[ Line: 305 ]]
+		function NewPage.UnmountPage()
 			-- upvalues: NewPage (copy)
 			if NewPage.PageRoot then
 				NewPage.PageRoot:unmount()
@@ -270,7 +270,7 @@ v1 = (function() --[[ Line: 165 | Named "Initialize" ]]
 	return NewPage
 end)()
 local Flag = false
-v1.Displayed.Event:connect(function() --[[ Line: 322 ]]
+v1.Displayed.Event:connect(function()
 	-- upvalues: Flag (ref), FFlagRefactorMenuConfirmationButtonsModule (copy), v1 (ref), GuiService (copy), FFlagEnableConsoleExpControls (copy), EnabledResult (copy), FFlagChromeShortcutRemoveLeaveOnRespawnPage (copy), ServiceModule (copy), ConstantsModule (copy), ContextActionService (copy)
 	Flag = true
 	
@@ -294,7 +294,7 @@ v1.Displayed.Event:connect(function() --[[ Line: 322 ]]
 		end
 	end
 end)
-v1.Hidden.Event:connect(function() --[[ Line: 343 ]]
+v1.Hidden.Event:connect(function()
 	-- upvalues: Flag (ref), FFlagRefactorMenuConfirmationButtonsModule (copy), v1 (ref), ContextActionService (copy)
 	Flag = false
 	
@@ -304,7 +304,7 @@ v1.Hidden.Event:connect(function() --[[ Line: 343 ]]
 	ContextActionService:UnbindCoreAction("ResetCharacterAction")
 end)
 
-function v1:SetResetCallback(Enabled) --[[ Line: 351 ]]
+function v1:SetResetCallback(Enabled)
 	-- upvalues: Flag (ref), v1 (ref)
 	if Enabled == false and Flag then
 		v1.HubRef:PopMenu(nil, true)

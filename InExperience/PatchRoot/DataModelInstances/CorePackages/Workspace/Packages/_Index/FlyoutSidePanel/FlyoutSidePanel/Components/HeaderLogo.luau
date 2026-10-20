@@ -7,7 +7,7 @@ local Images = require(Parent.FoundationImages).Images
 local ConstantsModule = require(script.Parent.Parent.Constants)
 local XRatio = Images["icons/logo/letterform_classic"].ImageRectSize.X / Images["icons/logo/letterform_classic"].ImageRectSize.Y
 
-return function() --[[ Line: 19 | Named "HeaderLogo" ]]
+return function()
 	-- upvalues: UseTokensFunction (copy), ThemeName (copy), Images (copy), XRatio (copy), ConstantsModule (copy), ReactModule (copy), FoundationModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsNameMatch = UseTokensResult.Config.Theme.Name == ThemeName.Classic

@@ -1,6 +1,6 @@
 ﻿local GetSduiClientPageScopeFunction = require(script:FindFirstAncestor("PromptsServerDrivenUi").Parent.SduiCoreSystem).getSduiClientPageScope
 
-return function(p1, Key) --[[ Line: 8 | Named "setPromptDismissedInPageScope" ]]
+return function(p1, Key)
 	-- upvalues: GetSduiClientPageScopeFunction (copy)
 	local SduiClientPageScope = GetSduiClientPageScopeFunction(p1)
 	local DismissedPromptTypes = SduiClientPageScope.get("dismissedPromptTypes")

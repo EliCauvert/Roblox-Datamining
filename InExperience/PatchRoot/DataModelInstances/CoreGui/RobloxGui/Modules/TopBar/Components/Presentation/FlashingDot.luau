@@ -9,13 +9,13 @@ local Default = require(Modules.VoiceChat.VoiceChatServiceManager).default
 local GetCamMicPermissionsModule = require(Modules.Settings.getCamMicPermissions)
 local FlashingDot = RoactModule.PureComponent:extend("FlashingDot")
 
-local function _(p1, p2, p3) --[[ Line: 26 | Named "lerpNum" ]]
+local function _(p1, p2, p3)
 	return p1 + (p2 - p1) * p3
 end
 
 FlashingDot.validateProps = require(CorePackages.Packages.t).strictInterface({})
 
-function FlashingDot.init(p1) --[[ Line: 32 ]]
+function FlashingDot.init(p1)
 	-- upvalues: RoactModule (copy), Default (copy), FaceAnimatorService (copy), VideoCaptureService (copy)
 	p1:setState({
 		Visible = false,
@@ -27,7 +27,7 @@ function FlashingDot.init(p1) --[[ Line: 32 ]]
 	p1.prevSinTime = 1
 	p1.transparencyBinding, p1.updateTransparencyBinding = RoactModule.createBinding(0)
 	
-	function p1.checkNewVisibility() --[[ Line: 44 ]]
+	function p1.checkNewVisibility()
 		-- upvalues: p1 (copy), Default (upval), FaceAnimatorService (upval), VideoCaptureService (upval)
 		local NoLocalMuted: boolean = p1.state.hasMicPermissions and (Default.localMuted ~= nil and not Default.localMuted)
 		local Active = p1.state.hasCameraPermissions and (FaceAnimatorService.VideoAnimationEnabled and VideoCaptureService.Active)
@@ -38,7 +38,7 @@ function FlashingDot.init(p1) --[[ Line: 32 ]]
 		end
 	end
 	
-	function p1.animationConnection(p2) --[[ Line: 66 ]]
+	function p1.animationConnection(p2)
 		-- upvalues: p1 (copy)
 		local NewPrevTime = p1.prevTime + p2
 		local Sine = math.sin(NewPrevTime * 3)
@@ -48,10 +48,10 @@ function FlashingDot.init(p1) --[[ Line: 32 ]]
 	end
 end
 
-function FlashingDot.didMount(p1) --[[ Line: 77 ]]
+function FlashingDot.didMount(p1)
 	-- upvalues: GetCamMicPermissionsModule (copy)
 	p1.isMounted = true
-	GetCamMicPermissionsModule(function(p2) --[[ Line: 79 ]]
+	GetCamMicPermissionsModule(function(p2)
 		-- upvalues: p1 (copy)
 		if p1.isMounted then
 			p1:setState({
@@ -65,13 +65,13 @@ function FlashingDot.didMount(p1) --[[ Line: 77 ]]
 	p1.checkNewVisibility()
 end
 
-function FlashingDot.didUpdate(p1, p2, _) --[[ Line: 93 ]]
+function FlashingDot.didUpdate(p1, p2, _)
 	if p1.state.hasMicPermissions ~= p2.hasMicPermissions or p1.state.hasCameraPermissions ~= p2.hasCameraPermissions then
 		p1.checkNewVisibility()
 	end
 end
 
-function FlashingDot.render(p1) --[[ Line: 102 ]]
+function FlashingDot.render(p1)
 	-- upvalues: RoactModule (copy), EventConnection (copy), Default (copy), FaceAnimatorService (copy), RunService (copy)
 	return RoactModule.createElement("Frame", {
 		ZIndex = 2,
@@ -104,7 +104,7 @@ function FlashingDot.render(p1) --[[ Line: 102 ]]
 	})
 end
 
-function FlashingDot.willUnmount(p1) --[[ Line: 138 ]]
+function FlashingDot.willUnmount(p1)
 	p1.isMounted = false
 end
 

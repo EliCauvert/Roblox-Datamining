@@ -5,7 +5,7 @@ local FindAnalyticsFieldInAncestorsFunction = SduiCoreSystemModule.findAnalytics
 local GameTileOverflowMenuActionFunction = require(Parent.DiscoveryAnalytics).Events.gameTileOverflowMenuAction
 local GetActionTelemetryFieldValueFunction = SduiCoreSystemModule.getActionTelemetryFieldValue
 
-return function(p1, p2, p3) --[[ Line: 16 | Named "SduiGameTileOverflowMenuTelemetryHandler" ]]
+return function(p1, p2, p3)
 	-- upvalues: GetActionTelemetryFieldValueFunction (copy), FFlagSduiGameTileDirectAction (copy), FindAnalyticsFieldInAncestorsFunction (copy), GameTileOverflowMenuActionFunction (copy)
 	local MenuItemId = GetActionTelemetryFieldValueFunction(p1, p2, "menuItemId")
 	

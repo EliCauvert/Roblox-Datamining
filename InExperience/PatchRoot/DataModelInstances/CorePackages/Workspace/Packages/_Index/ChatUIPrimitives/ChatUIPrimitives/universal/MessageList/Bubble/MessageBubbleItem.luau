@@ -16,12 +16,12 @@ local config = {
 	preset = WithMessageContentModule(require(script.Parent.Parent.Parent.ContentKinds.Preset.PresetBubble), require(script.Parent.Parent.Parent.ContentKinds.Preset.PresetContentModel).getDetail)
 }
 
-return function(p1) --[[ Line: 34 | Named "MessageBubbleItem" ]]
+return function(p1)
 	-- upvalues: UseMessageBubbleViewModelModule (copy), FoundationModule (copy), CreateNextOrderFunction (copy), ReactModule (copy), GetBubbleToneModule (copy), BubbleStyleContextModule (copy), config (copy), BubbleUsernameModule (copy), BubbleViewModule (copy), BubbleAvatarModule (copy)
 	local UseMessageBubbleViewModelModuleResult = UseMessageBubbleViewModelModule(p1.itemSignal)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local NextOrder = CreateNextOrderFunction()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 38 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: GetBubbleToneModule (upval), UseMessageBubbleViewModelModuleResult (copy), UseTokensResult (copy), BubbleStyleContextModule (upval)
 		return {
 			backgroundStyle = GetBubbleToneModule(UseMessageBubbleViewModelModuleResult.isObservingUser, UseTokensResult).backgroundStyle,

@@ -5,12 +5,12 @@ local SidePositionerModule = require(Graphing.Components.SidePositioner)
 local GridUtilModule = require(Graphing.Util.GridUtil)
 local StyleUtilModule = require(Graphing.Util.StyleUtil)
 
-local function _(SIDEBOTTOM): boolean --[[ Line: 39 | Named "isX" ]]
+local function _(SIDEBOTTOM): boolean
 	-- upvalues: TypesModule (copy)
 	return SIDEBOTTOM == TypesModule.SIDE_TOP or SIDEBOTTOM == TypesModule.SIDE_BOTTOM
 end
 
-function ScaleTick(Label) --[[ Line: 43 ]]
+function ScaleTick(Label)
 	-- upvalues: StyleUtilModule (copy), GridUtilModule (copy), TypesModule (copy), ReactModule (copy), SidePositionerModule (copy)
 	local Length = Label.Length
 	local Thickness = Label.Thickness or StyleUtilModule.SCALE_TICK_THICKNESS

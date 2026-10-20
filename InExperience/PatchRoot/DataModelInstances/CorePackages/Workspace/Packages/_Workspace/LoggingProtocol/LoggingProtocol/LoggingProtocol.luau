@@ -10,7 +10,7 @@ local CallOncePerDMModule = require(Parent.callOncePerDM)
 local Signal = AppCommonLibModule.Signal
 game:DefineFastFlag("EnableTelemetryProtocol", false)
 
-function getDomainName(): string --[[ Line: 82 ]]
+function getDomainName(): string
 	return if game:GetFastFlag("EnableTelemetryProtocol") then "Telemetry" else "Logging"
 end
 
@@ -62,7 +62,7 @@ local LoggingProtocolModule = {
 }
 LoggingProtocolModule.__index = LoggingProtocolModule
 
-function LoggingProtocolModule.new(p1) --[[ Line: 150 ]]
+function LoggingProtocolModule.new(p1)
 	-- upvalues: MessageBus (copy), Signal (copy), LoggingProtocolModule (copy)
 	local config = {
 		messageBus = p1 or MessageBus,
@@ -73,11 +73,11 @@ function LoggingProtocolModule.new(p1) --[[ Line: 150 ]]
 	return config
 end
 
-function LoggingProtocolModule:setDurationLoggerListener(p1) --[[ Line: 159 ]]
+function LoggingProtocolModule:setDurationLoggerListener(p1)
 	return self.durationLoggerSignal:connect(p1)
 end
 
-function LoggingProtocolModule:logEventWithTimestamp(EventName, Timestamp, Metadata) --[[ Line: 163 ]]
+function LoggingProtocolModule:logEventWithTimestamp(EventName, Timestamp, Metadata)
 	-- upvalues: ArgCheckModule (copy)
 	ArgCheckModule.isType(EventName, "string", "eventName")
 	ArgCheckModule.isType(Timestamp, "number", "timestamp")
@@ -89,36 +89,36 @@ function LoggingProtocolModule:logEventWithTimestamp(EventName, Timestamp, Metad
 	self.durationLoggerSignal:fire(EventName)
 end
 
-function LoggingProtocolModule:logEvent(EventName, Metadata) --[[ Line: 175 ]]
+function LoggingProtocolModule:logEvent(EventName, Metadata)
 	-- upvalues: ArgCheckModule (copy)
 	ArgCheckModule.isType(EventName, "string", "eventName")
 	self:logEventWithTimestamp(EventName, 0, Metadata)
 end
 
-function LoggingProtocolModule.logEventOnce(p1, p2, p3) --[[ Line: 180 ]]
+function LoggingProtocolModule.logEventOnce(p1, p2, p3)
 	-- upvalues: ArgCheckModule (copy), CallOncePerDMModule (copy), CallOnceFunction (copy)
 	ArgCheckModule.isType(p2, "string", "eventName")
 	
 	if game:DefineFastFlag("LuaAppSendTTIEventsPerDM", false) then
-		CallOncePerDMModule(string.format("logging_protocol_key-%s", p2), function() --[[ Line: 184 ]]
+		CallOncePerDMModule(string.format("logging_protocol_key-%s", p2), function()
 			-- upvalues: p1 (copy), p2 (copy), p3 (copy)
 			p1:logEvent(p2, p3)
 		end)
 		
 		return
 	else
-		CallOnceFunction(string.format("logging_protocol_key-%s", p2), function() --[[ Line: 188 ]]
+		CallOnceFunction(string.format("logging_protocol_key-%s", p2), function()
 			-- upvalues: p1 (copy), p2 (copy), p3 (copy)
 			p1:logEvent(p2, p3)
 		end)
 	end
 end
 
-function LoggingProtocolModule:getTimestamp() --[[ Line: 195 ]]
+function LoggingProtocolModule:getTimestamp()
 	return self.messageBus.call(self.GET_TIMESTAMP_DESCRIPTOR, {})
 end
 
-function LoggingProtocolModule:logRobloxTelemetryCounter(Config, IncrementValue, CustomFields) --[[ Line: 199 ]]
+function LoggingProtocolModule:logRobloxTelemetryCounter(Config, IncrementValue, CustomFields)
 	self.messageBus.call(self.LOG_EVENT_FROM_LUA_DESCRIPTOR, {
 		eventType = "RobloxTelemetryCounter",
 		config = Config,
@@ -129,7 +129,7 @@ function LoggingProtocolModule:logRobloxTelemetryCounter(Config, IncrementValue,
 	})
 end
 
-function LoggingProtocolModule:logRobloxTelemetryStat(Config, StatValue, CustomFields) --[[ Line: 221 ]]
+function LoggingProtocolModule:logRobloxTelemetryStat(Config, StatValue, CustomFields)
 	self.messageBus.call(self.LOG_EVENT_FROM_LUA_DESCRIPTOR, {
 		eventType = "RobloxTelemetryStat",
 		config = Config,
@@ -137,7 +137,7 @@ function LoggingProtocolModule:logRobloxTelemetryStat(Config, StatValue, CustomF
 	})
 end
 
-function LoggingProtocolModule:logRobloxTelemetryEvent(Config, StandardizedFields, CustomFields, EventContext) --[[ Line: 237 ]]
+function LoggingProtocolModule:logRobloxTelemetryEvent(Config, StandardizedFields, CustomFields, EventContext)
 	self.messageBus.call(self.LOG_EVENT_FROM_LUA_DESCRIPTOR, {
 		eventType = "RobloxTelemetry",
 		config = Config,
@@ -149,7 +149,7 @@ function LoggingProtocolModule:logRobloxTelemetryEvent(Config, StandardizedField
 	})
 end
 
-function LoggingProtocolModule:logEphemeralCounterEvent(Config, IncrementValue) --[[ Line: 255 ]]
+function LoggingProtocolModule:logEphemeralCounterEvent(Config, IncrementValue)
 	self.messageBus.call(self.LOG_EVENT_FROM_LUA_DESCRIPTOR, {
 		eventType = "EphemeralCounter",
 		config = Config,
@@ -157,7 +157,7 @@ function LoggingProtocolModule:logEphemeralCounterEvent(Config, IncrementValue) 
 	})
 end
 
-function LoggingProtocolModule:logEphemeralStatEvent(Config, StatValue) --[[ Line: 269 ]]
+function LoggingProtocolModule:logEphemeralStatEvent(Config, StatValue)
 	self.messageBus.call(self.LOG_EVENT_FROM_LUA_DESCRIPTOR, {
 		eventType = "EphemeralStat",
 		config = Config,

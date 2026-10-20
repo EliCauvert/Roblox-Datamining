@@ -26,13 +26,13 @@ local List = if FFlagLuaAppSduiVideoThumbnail then nil else {
 	PlayabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser
 }
 
-return function(p1, p2) --[[ Line: 45 | Named "useIsVideoEligible" ]]
+return function(p1, p2)
 	-- upvalues: UseSelectorFunction (copy), FetchGamePlayabilityAndProductInfo (copy), FFlagLuaAppSduiVideoThumbnail (copy), IsVideoEligibleForPlayabilityFunction (copy), RetrievalStatus (copy), FFlagLuaAppUsePrevalidatedVideoGamePlayability (copy), CryoModule (copy), List (ref)
-	local UseSelectorResult = UseSelectorFunction(function(p3) --[[ Line: 46 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p3)
 		-- upvalues: FetchGamePlayabilityAndProductInfo (upval), p1 (copy)
 		return FetchGamePlayabilityAndProductInfo.GetFetchingStatus(p3, p1)
 	end)
-	local UseSelectorResult1 = UseSelectorFunction(function(p3) --[[ Line: 50 ]]
+	local UseSelectorResult1 = UseSelectorFunction(function(p3)
 		-- upvalues: p1 (copy)
 		return p3.PlayabilityStatus and p3.PlayabilityStatus[p1] or nil
 	end)

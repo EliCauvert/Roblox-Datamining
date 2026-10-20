@@ -13,27 +13,27 @@ local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local UseItemSelectionStoreFunction = require(AvatarExperienceInspectAndBuy.Contexts.ItemSelectionStoreContext).useItemSelectionStore
 local _ = require(AvatarExperienceInspectAndBuy.Stores.createItemSelectionStore)
 
-local function v11(p1) --[[ Line: 43 ]]
+local function v11(p1)
 	return { assets = p1.assets, bundles = p1.bundles }
 end
 
-local function v12(p1) --[[ Line: 50 ]]
+local function v12(p1)
 	return p1.collectibleResellableInstances
 end
 
-return function(p1, p2) --[[ Line: 54 ]]
+return function(p1, p2)
 	-- upvalues: UseSelectorFunction (copy), v11 (copy), TutilsModule (copy), v12 (copy), UseItemSelectionStoreFunction (copy), UseSignalStateFunction (copy), ReactModule (copy), BulkPurchaseUtilsModule (copy), RobloxReplicatedStorage (copy), ItemTypeEnum (copy), BuildBulkPurchaseAnalyticsPayloadModule (copy), FIntBulkPurchaseRequestLimit (copy)
 	local UseSelectorResult = UseSelectorFunction(v11, TutilsModule.deepEqual)
 	local UseSelectorResult1 = UseSelectorFunction(v12, TutilsModule.deepEqual)
 	local UseSignalStateResult = UseSignalStateFunction(UseItemSelectionStoreFunction().getItemDataMap)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 61 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: BulkPurchaseUtilsModule (upval), p1 (copy), UseSelectorResult (copy), UseSignalStateResult (copy)
 		return BulkPurchaseUtilsModule.getBulkPurchaseEligibleItems(p1, UseSelectorResult, UseSignalStateResult)
 	end, { p1, UseSelectorResult, UseSignalStateResult })
 	
-	return ReactModule.useCallback(function() --[[ Line: 67 ]]
+	return ReactModule.useCallback(function()
 		-- upvalues: RobloxReplicatedStorage (upval), UseMemoResult (copy), ItemTypeEnum (upval), UseSignalStateResult (copy), BuildBulkPurchaseAnalyticsPayloadModule (upval), UseSelectorResult (copy), UseSelectorResult1 (copy), p2 (copy)
-		coroutine.wrap(function() --[[ Line: 68 ]]
+		coroutine.wrap(function()
 			-- upvalues: RobloxReplicatedStorage (upval), UseMemoResult (upval), ItemTypeEnum (upval), UseSignalStateResult (upval), BuildBulkPurchaseAnalyticsPayloadModule (upval), UseSelectorResult (upval), UseSelectorResult1 (upval), p2 (upval)
 			RobloxReplicatedStorage:WaitForChild("ServerSideBulkPurchaseEvent", 1e999):FireServer(UseMemoResult.requestedItems)
 			
@@ -60,7 +60,7 @@ return function(p1, p2) --[[ Line: 54 ]]
 		UseSelectorResult,
 		UseSelectorResult1,
 		p2.reportPurchaseAttemptUnifiedEvent
-	}), ReactModule.useMemo(function(): boolean --[[ Line: 106 ]]
+	}), ReactModule.useMemo(function(): boolean
 		-- upvalues: UseMemoResult (copy), FIntBulkPurchaseRequestLimit (upval)
 		local Flag = nil
 		if UseMemoResult.requestedItems then

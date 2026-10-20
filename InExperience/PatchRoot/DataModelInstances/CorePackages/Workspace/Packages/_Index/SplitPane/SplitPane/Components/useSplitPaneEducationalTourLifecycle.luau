@@ -4,16 +4,16 @@ local _ = require(script.Parent.Parent.Stores.getSplitPaneEducationalTourStore)
 local _ = require(script.Parent.Parent.Stores.SplitPaneStore)
 local SupportPaneMode = require(Parent.AppSplitView).Enums.SupportPaneMode
 
-return function(p1) --[[ Line: 30 | Named "useSplitPaneEducationalTourLifecycle" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), SupportPaneMode (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(false)
-	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 35 ]]
+	local UseResult = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), p1 (copy)
 		UseRefResult.current = Current
 		p1.splitPaneStore.setTemporarySupportPaneMode(Current)
 	end, { p1.splitPaneStore })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 39 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), p1 (copy)
 		local Current = UseRefResult.current
 		
@@ -22,27 +22,27 @@ return function(p1) --[[ Line: 30 | Named "useSplitPaneEducationalTourLifecycle"
 		end
 		UseRefResult.current = nil
 	end, { p1.splitPaneStore })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 50 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), SupportPaneMode (upval), UseResult (copy)
 		UseResult(if p1.splitPaneStore.getSupportPaneMode(false) == SupportPaneMode.Expanded then SupportPaneMode.Expanded else SupportPaneMode.Normal)
 	end, { p1.splitPaneStore, UseResult })
-	ReactModule.useEffect(function() --[[ Line: 58 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseResult2 (copy)
 		if p1.stepIndex == p1.totalSteps then
 			UseResult2()
 		end
 	end, { p1.stepIndex, p1.totalSteps, UseResult2 })
 	local UseRefResult2 = ReactModule.useRef(p1.supportPaneMode)
-	ReactModule.useEffect(function() --[[ Line: 66 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult (copy), UseRefResult2 (copy), UseResult1 (copy)
 		UseResult(UseRefResult2.current)
 		
-		return function() --[[ Line: 68 ]]
+		return function()
 			-- upvalues: UseResult1 (upval)
 			UseResult1()
 		end
 	end, { UseResult, UseResult1 })
-	ReactModule.useEffect(function() --[[ Line: 73 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseResult1 (copy)
 		if not p1.isSupportSurfaceEligible then
 			UseResult1()
@@ -52,7 +52,7 @@ return function(p1) --[[ Line: 30 | Named "useSplitPaneEducationalTourLifecycle"
 		end
 	end, { p1.isSupportSurfaceEligible, UseResult1, p1.tourStore })
 	local UseRefResult3 = ReactModule.useRef(p1.shouldDefaultToCollapsed)
-	ReactModule.useEffect(function() --[[ Line: 84 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult3 (copy), p1 (copy), UseResult2 (copy)
 		local Current = UseRefResult3.current
 		UseRefResult3.current = p1.shouldDefaultToCollapsed
@@ -63,7 +63,7 @@ return function(p1) --[[ Line: 30 | Named "useSplitPaneEducationalTourLifecycle"
 	end, { p1.shouldDefaultToCollapsed, UseResult2 })
 	
 	return {
-		endTour = ReactModule.useCallback(function() --[[ Line: 92 ]]
+		endTour = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy), UseRefResult1 (copy), SupportPaneMode (upval), UseResult1 (copy)
 			local SupportPaneMode1 = p1.splitPaneStore.getSupportPaneMode(false)
 			
@@ -73,7 +73,7 @@ return function(p1) --[[ Line: 30 | Named "useSplitPaneEducationalTourLifecycle"
 			UseResult1()
 			p1.tourStore.discardPendingTour()
 		end, { p1.splitPaneStore, p1.tourStore, UseResult1 }),
-		handleNext = ReactModule.useCallback(function() --[[ Line: 104 ]]
+		handleNext = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy), UseRefResult1 (copy), UseResult (copy), SupportPaneMode (upval)
 			local StepIndex: number = p1.tourStore.getStepIndex(false)
 			

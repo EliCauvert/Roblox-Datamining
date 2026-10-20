@@ -8,7 +8,7 @@ local _ = require(RobloxSubscriptionPurchaseApp.Enums.ErrorReason)
 local FFlagEnablePlusReferralTelemetryModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagEnablePlusReferralTelemetry)
 local FFlagEnablePlusReferralEntrypointTelemetry = require(Parent.SharedFlags).FFlagEnablePlusReferralEntrypointTelemetry
 
-function logRobloxSubscriptionUpsellCounter(p1) --[[ Line: 17 ]]
+function logRobloxSubscriptionUpsellCounter(p1)
 	-- upvalues: RobloxSubscriptionStoreModule (copy), SurfaceNameModule (copy), FFlagEnablePlusReferralTelemetryModule (copy), FFlagEnablePlusReferralEntrypointTelemetry (copy), LoggingProtocolModule (copy)
 	local GetResult = RobloxSubscriptionStoreModule.get()
 	local EntryContext = GetResult.getEntryContext()

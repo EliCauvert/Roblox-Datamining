@@ -19,12 +19,12 @@ local FFlagLuaAppIedpOverlayAndNavigationFix = require(Parent.SharedFlags).FFlag
 local FFlagLuaAppIedpFixPlayButton = require(Parent.SharedFlags).FFlagLuaAppIedpFixPlayButton
 local InExperienceDetailsPromptClose = if FFlagLuaAppIedpOverlayAndNavigationFix then "InExperienceDetailsPromptClose" else nil
 
-local function _(Failed, p1) --[[ Line: 43 | Named "getGameDetailErrorType" ]]
+local function _(Failed, p1)
 	-- upvalues: DataHydrationModule (copy), EnumGameDetailErrorTypes (copy)
 	return if Failed == DataHydrationModule.DataStatus.Failed then EnumGameDetailErrorTypes.NetworkError elseif p1 and p1.isUnavailable == true then EnumGameDetailErrorTypes.ExperienceUnavailable else nil
 end
 
-return function(p1) --[[ Line: 58 | Named "InExperienceDetailsPromptContainer" ]]
+return function(p1)
 	-- upvalues: Game1 (copy), SignalsReactModule (copy), DataHydrationModule (copy), EnumGameDetailErrorTypes (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), ReactModule (copy), FireInExperienceDetailsPromptClosedEventFunction (copy), FireInExperienceDetailsPromptPlayButtonClickedEventFunction (copy), FFlagLuaAppIedpOverlayAndNavigationFix (copy), InExperienceDetailsPromptClose (copy), DiscoveryEventErrorLogger (copy), ContextActionService (copy), FireInExperienceDetailsPromptLoadedEventFunction (copy), InExperienceDetailsPromptModule (copy), VotesUtils (copy), FFlagLuaAppIedpFixPlayButton (copy)
 	local AndFetchGameInfo = Game1.getGameInfoStore(false).getAndFetchGameInfo(p1.universeId)
 	local AndFetchPlayability = Game1.getPlayabilityStore(false).getAndFetchPlayability(p1.universeId)
@@ -41,7 +41,7 @@ return function(p1) --[[ Line: 58 | Named "InExperienceDetailsPromptContainer" ]
 		isAutoFocusRoot = true,
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 88 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), Number (copy), FireInExperienceDetailsPromptClosedEventFunction (upval), UseSignalStateResult4 (copy), DataHydrationModule (upval), UseSignalStateResult5 (copy), UseSignalStateResult2 (copy), NetworkError (copy), FireInExperienceDetailsPromptPlayButtonClickedEventFunction (upval)
 		if p1.onJoin then
 			p1.onJoin(Number)
@@ -68,7 +68,7 @@ return function(p1) --[[ Line: 58 | Named "InExperienceDetailsPromptContainer" ]
 	})
 	local IsPlayable = UseSignalStateResult2 and UseSignalStateResult2.isPlayable
 	local PlayabilityStatus = UseSignalStateResult2 and UseSignalStateResult2.playabilityStatus
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 130 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), FireInExperienceDetailsPromptClosedEventFunction (upval), Number (copy), NetworkError (copy), IsPlayable (copy), PlayabilityStatus (copy), UseSignalStateResult4 (copy), DataHydrationModule (upval), UseSignalStateResult5 (copy)
 		p1.onClose()
 		FireInExperienceDetailsPromptClosedEventFunction({
@@ -88,9 +88,9 @@ return function(p1) --[[ Line: 58 | Named "InExperienceDetailsPromptContainer" ]
 	
 	if FFlagLuaAppIedpOverlayAndNavigationFix then
 		UseRefResult = ReactModule.useRef(nil)
-		ReactModule.useEffect(function() --[[ Line: 159 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: InExperienceDetailsPromptClose (upval), UseRefResult (ref), DiscoveryEventErrorLogger (upval), p1 (copy), ContextActionService (upval)
-			ContextActionService:BindCoreAction(InExperienceDetailsPromptClose, function(InExperienceDetailsPromptClose1, UserInputState) --[[ Line: 160 ]]
+			ContextActionService:BindCoreAction(InExperienceDetailsPromptClose, function(InExperienceDetailsPromptClose1, UserInputState)
 				-- upvalues: InExperienceDetailsPromptClose (upval), UseRefResult (upval), DiscoveryEventErrorLogger (upval), p1 (upval)
 				if InExperienceDetailsPromptClose1 == InExperienceDetailsPromptClose and UserInputState == Enum.UserInputState.Begin then
 					if UseRefResult.current and UseRefResult.current.close then
@@ -102,14 +102,14 @@ return function(p1) --[[ Line: 58 | Named "InExperienceDetailsPromptContainer" ]
 				return Enum.ContextActionResult.Pass
 			end, false, Enum.KeyCode.ButtonB, Enum.KeyCode.Escape, Enum.KeyCode.ButtonStart)
 			
-			return function() --[[ Line: 185 ]]
+			return function()
 				-- upvalues: ContextActionService (upval), InExperienceDetailsPromptClose (upval)
 				ContextActionService:UnbindCoreAction(InExperienceDetailsPromptClose)
 			end
 		end, { p1.universeId })
 	end
 	local UseRefResult1 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 193 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), UseSignalStateResult4 (copy), DataHydrationModule (upval), UseSignalStateResult5 (copy), FireInExperienceDetailsPromptLoadedEventFunction (upval), p1 (copy), Number (copy), IsPlayable (copy), PlayabilityStatus (copy), NetworkError (copy)
 		if not UseRefResult1.current and UseSignalStateResult4 ~= DataHydrationModule.DataStatus.NotReady and UseSignalStateResult5 ~= DataHydrationModule.DataStatus.NotReady then
 			FireInExperienceDetailsPromptLoadedEventFunction({

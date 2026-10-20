@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("InGameAssetReporting").Analysis.Types)
 
-function extractAssetIdsFromInstance(Object) --[[ Line: 5 ]]
+function extractAssetIdsFromInstance(Object)
 	local config = {
 		Package = {},
 		Model = {},

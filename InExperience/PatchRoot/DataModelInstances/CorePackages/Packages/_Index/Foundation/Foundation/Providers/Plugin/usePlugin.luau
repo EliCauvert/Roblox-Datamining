@@ -3,7 +3,7 @@ local UseContextFunction = ReactModule.useContext
 local PluginContextModule = require(script.Parent.PluginContext)
 local IsPluginElevatedModule = require(script.Parent.isPluginElevated)
 
-return function() --[[ Line: 10 | Named "usePlugin" ]]
+return function()
 	-- upvalues: UseContextFunction (copy), PluginContextModule (copy), ReactModule (copy), IsPluginElevatedModule (copy)
 	local UseContextResult = UseContextFunction(PluginContextModule)
 	

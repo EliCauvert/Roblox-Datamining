@@ -5,7 +5,7 @@ local _ = require(ProfilePlatform.Types.Component)
 local FFlagProfilePlatformAddCurrentlyPlayingModule = require(ProfilePlatform.Flags.FFlagProfilePlatformAddCurrentlyPlaying)
 local FFlagProfilePlatformRefreshActionsRespectPoliciesModule = require(ProfilePlatform.Flags.FFlagProfilePlatformRefreshActionsRespectPolicies)
 
-function GetProfilePlatform(ProfileId, p1) --[[ Line: 15 ]]
+function GetProfilePlatform(ProfileId, p1)
 	-- upvalues: FFlagProfilePlatformRefreshActionsRespectPoliciesModule (copy), EnumsModule (copy), FFlagProfilePlatformAddCurrentlyPlayingModule (copy), GetProfilePlatformModule (copy)
 	local Components = {
 		{ component = EnumsModule.Components.UserProfileHeader },

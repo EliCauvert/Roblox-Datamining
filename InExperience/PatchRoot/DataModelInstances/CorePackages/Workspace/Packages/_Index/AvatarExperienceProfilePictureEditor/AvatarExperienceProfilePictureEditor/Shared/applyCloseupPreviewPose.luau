@@ -1,6 +1,6 @@
 ﻿local EmoteUtility = require(script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent.Thumbnailing).EmoteUtility
 
-return function(Object, p1) --[[ Line: 10 | Named "applyCloseupPreviewPose" ]]
+return function(Object, p1)
 	-- upvalues: EmoteUtility (copy)
 	local KeyframesForPose = EmoteUtility.LoadKeyframesForPose(Object, if p1 then tonumber(p1) else nil, nil, true, true)
 	

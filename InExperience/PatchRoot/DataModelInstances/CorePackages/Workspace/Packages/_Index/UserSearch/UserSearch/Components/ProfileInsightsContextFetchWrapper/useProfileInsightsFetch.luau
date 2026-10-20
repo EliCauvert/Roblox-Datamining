@@ -4,7 +4,7 @@ local UseQueryFunction = require(Parent.ApolloClient).useQuery
 local ProfilesInsightsQueryModule = require(UserSearch.Apollo.ProfilesInsightsQuery)
 local FFlagPlayerSearchEnableOnlineFrequents = require(Parent.SharedFlags).FFlagPlayerSearchEnableOnlineFrequents
 
-return function(UserIds, p1, p2) --[[ Line: 11 ]]
+return function(UserIds, p1, p2)
 	-- upvalues: ProfilesInsightsQueryModule (copy), UseQueryFunction (copy), FFlagPlayerSearchEnableOnlineFrequents (copy)
 	return (UseQueryFunction(ProfilesInsightsQueryModule.query, {
 		errorPolicy = "all",

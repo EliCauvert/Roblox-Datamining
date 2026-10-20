@@ -9,10 +9,10 @@ local _ = require(SduiCoreSystem.SduiComponentType)
 local BuildConfigForComponent = require(SduiCoreSystem.ClientBinding.SduiClientBindingBuilder).buildConfigForComponent
 
 return {
-	makeStub = function(p1, p2, p3, p4, p5, p6) --[[ Line: 44 ]]
+	makeStub = function(p1, p2, p3, p4, p5, p6)
 		-- upvalues: BuildConfigForComponent (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), SduiParseHelpersModule (copy)
 		return (setmetatable({ isBlank = false }, {
-			__index = function(p7, p8) --[[ Line: 60 ]]
+			__index = function(p7, p8)
 				-- upvalues: BuildConfigForComponent (upval), p1 (copy), p2 (copy), p3 (copy), p4 (copy), p5 (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), SduiParseHelpersModule (upval), p6 (copy)
 				setmetatable(p7, nil)
 				local Success, Result = pcall(BuildConfigForComponent, p1, p2, p3, p4, nil, p5, p7)

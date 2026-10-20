@@ -5,7 +5,7 @@ local Skeleton = FoundationModule.Skeleton
 local View = FoundationModule.View
 local Radius = FoundationModule.Enums.Radius
 
-return function(Frame) --[[ Line: 16 | Named "CartPricingLoading" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), View (copy), Skeleton (copy), Radius (copy)
 	return if Frame.isLoading then ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y padding-xxsmall",

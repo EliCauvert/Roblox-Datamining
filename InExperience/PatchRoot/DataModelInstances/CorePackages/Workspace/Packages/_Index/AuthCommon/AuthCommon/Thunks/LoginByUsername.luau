@@ -27,18 +27,18 @@ local EnableIllegalChildAccountLinkingErrorMessageOnLoginByUsername = game:Defin
 local EnableLoginNetworkingErrorToast = game:DefineFastFlag("EnableLoginNetworkingErrorToast", false)
 local SetNetworkingErrorToastFunction = require(Parent.RobloxAppToastsRodux).Thunks.SetNetworkingErrorToast
 
-local function _(p1, p2, p3, p4, p5) --[[ Line: 40 | Named "loginRequest" ]]
+local function _(p1, p2, p3, p4, p5)
 	-- upvalues: GetAppFeaturePoliciesFunction (copy), LoginRequestsModule (copy)
 	return if GetAppFeaturePoliciesFunction().getUseSingleSignOn() then LoginRequestsModule.singleSignOnConnectWithCredential(p1, p2, p3, "Username") else LoginRequestsModule.logByUsername(p1, p2, p3, p4, p5)
 end
 
-return function(p1, Cvalue, p2, CaptchaCallback, p3, SecurityQuestionsCallback, p4) --[[ Line: 50 | Named "loginByUsername" ]]
+return function(p1, Cvalue, p2, CaptchaCallback, p3, SecurityQuestionsCallback, p4)
 	-- upvalues: GetAppFeaturePoliciesFunction (copy), LoginRequestsModule (copy), LoginResultModule (copy), PromiseModule (copy), LoginErrorCodesModule (copy), GetFFlagEnableGenericTwoFAMessageFunction (copy), FFlagEnableLastLoginMethodTracking (copy), AppStorageUtilitiesModule (copy), LoginMethodsModule (copy), FFlagEnableRecordLogin (copy), RecordLoginModule (copy), EnableLoginNetworkingErrorToast (copy), SetNetworkingErrorToastFunction (copy), HttpService (copy), GetDxBlobModule (copy), GetCaptchaDataJsonModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), GetFFlagLuaAppUsingSecurityQuestionsForLuaLoginFunction (copy), EnableIllegalChildAccountLinkingErrorMessageOnLoginByUsername (copy), EnablePasskeyOnlyUserErrorMessage (copy), GetLoginByUsernameErrorMessageModule (copy), LoggingProtocolModule (copy), LoginByUsernameSSOErrorsTelemetryModule (copy)
-	return function(p5) --[[ Line: 59 ]]
+	return function(p5)
 		-- upvalues: GetAppFeaturePoliciesFunction (upval), p1 (copy), Cvalue (copy), p2 (copy), p3 (copy), p4 (copy), LoginRequestsModule (upval), LoginResultModule (upval), PromiseModule (upval), LoginErrorCodesModule (upval), GetFFlagEnableGenericTwoFAMessageFunction (upval), FFlagEnableLastLoginMethodTracking (upval), AppStorageUtilitiesModule (upval), LoginMethodsModule (upval), FFlagEnableRecordLogin (upval), RecordLoginModule (upval), EnableLoginNetworkingErrorToast (upval), SetNetworkingErrorToastFunction (upval), HttpService (upval), GetDxBlobModule (upval), GetCaptchaDataJsonModule (upval), AppPage (upval), CaptchaCallback (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval), GetFFlagLuaAppUsingSecurityQuestionsForLuaLoginFunction (upval), EnableIllegalChildAccountLinkingErrorMessageOnLoginByUsername (upval), EnablePasskeyOnlyUserErrorMessage (upval), GetLoginByUsernameErrorMessageModule (upval), LoggingProtocolModule (upval), LoginByUsernameSSOErrorsTelemetryModule (upval), SecurityQuestionsCallback (copy)
 		local UseSingleSignOn = GetAppFeaturePoliciesFunction().getUseSingleSignOn()
 		
-		return (if GetAppFeaturePoliciesFunction().getUseSingleSignOn() then LoginRequestsModule.singleSignOnConnectWithCredential(p1, Cvalue, p2, "Username") else LoginRequestsModule.logByUsername(p1, Cvalue, p2, p3, p4)):andThen(function(Entry) --[[ Line: 61 ]]
+		return (if GetAppFeaturePoliciesFunction().getUseSingleSignOn() then LoginRequestsModule.singleSignOnConnectWithCredential(p1, Cvalue, p2, "Username") else LoginRequestsModule.logByUsername(p1, Cvalue, p2, p3, p4)):andThen(function(Entry)
 			-- upvalues: LoginResultModule (upval), GetAppFeaturePoliciesFunction (upval), UseSingleSignOn (copy), PromiseModule (upval), LoginErrorCodesModule (upval), GetFFlagEnableGenericTwoFAMessageFunction (upval), FFlagEnableLastLoginMethodTracking (upval), AppStorageUtilitiesModule (upval), LoginMethodsModule (upval), FFlagEnableRecordLogin (upval), RecordLoginModule (upval), Cvalue (upval)
 			assert(Entry, "no login attempt result")
 			assert(#Entry == 1, "no result or more than one result")
@@ -56,13 +56,13 @@ return function(p1, Cvalue, p2, CaptchaCallback, p3, SecurityQuestionsCallback, 
 				AppStorageUtilitiesModule.setLastSuccessfulSignInMethod(LoginMethodsModule.Username)
 			end
 			if FFlagEnableRecordLogin then
-				pcall(function() --[[ Line: 87 ]]
+				pcall(function()
 					-- upvalues: RecordLoginModule (upval), FromJsonDataResult (copy), LoginMethodsModule (upval), Cvalue (upval)
 					RecordLoginModule(FromJsonDataResult, LoginMethodsModule.Username, Cvalue)
 				end)
 			end
 			return FromJsonDataResult
-		end, function(p6) --[[ Line: 93 ]]
+		end, function(p6)
 			-- upvalues: EnableLoginNetworkingErrorToast (upval), p5 (copy), SetNetworkingErrorToastFunction (upval), PromiseModule (upval), HttpService (upval), LoginErrorCodesModule (upval), GetDxBlobModule (upval), GetCaptchaDataJsonModule (upval), AppPage (upval), CaptchaCallback (upval), Cvalue (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval), GetFFlagLuaAppUsingSecurityQuestionsForLuaLoginFunction (upval), EnableIllegalChildAccountLinkingErrorMessageOnLoginByUsername (upval), EnablePasskeyOnlyUserErrorMessage (upval), UseSingleSignOn (copy), GetLoginByUsernameErrorMessageModule (upval), LoggingProtocolModule (upval), LoginByUsernameSSOErrorsTelemetryModule (upval), SecurityQuestionsCallback (upval)
 			if EnableLoginNetworkingErrorToast and p6.Body == nil and p6.HttpError ~= nil and p6.HttpError ~= Enum.HttpError.OK then
 				p5:dispatch(SetNetworkingErrorToastFunction(p6))

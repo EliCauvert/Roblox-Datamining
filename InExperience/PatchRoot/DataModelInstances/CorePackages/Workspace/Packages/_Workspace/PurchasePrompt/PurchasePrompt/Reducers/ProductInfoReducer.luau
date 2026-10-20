@@ -14,7 +14,7 @@ local FFlagPurchasePromptFetchCartPricingForLooks = require(PurchasePrompt.Paren
 local FFlagLuaAppsEnablePromptVIPServerPurchase = require(PurchasePrompt.Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 
 return (require(PurchasePrompt.Parent.PurchasePromptDeps).Rodux.createReducer({}, {
-	[require(PurchasePrompt.Actions.ProductInfoReceived).name] = function(_, p1) --[[ Line: 33 ]]
+	[require(PurchasePrompt.Actions.ProductInfoReceived).name] = function(_, p1)
 		-- upvalues: FFlagUnifiedPurchaseOptimizeTTIMarketplace (copy), ConstantsModule (copy), GetFFlagTranslateDevProductsModule (copy), NormalizePriceDiscountDetailsModule (copy), FFlagAXFixMISUpsellDiscountSummary (copy), GetPreviewImageUrlModule (copy), GetFFlagEnableCreatorStorePurchasingCutoverModule (copy), FFlagPurchasePromptFetchCartPricingForLooks (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), ProductTypeEnum (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy)
 		local ProductInfo = p1.productInfo
 		local CollectibleItemId = ""
@@ -50,7 +50,7 @@ return (require(PurchasePrompt.Parent.PurchasePromptDeps).Rodux.createReducer({}
 			isMonthlyPrice = if FFlagLuaAppsEnablePromptVIPServerPurchase then ProductInfo.IsMonthlyPrice else nil
 		}
 	end,
-	[require(PurchasePrompt.Actions.BundleProductInfoReceived).name] = function(_, p1) --[[ Line: 97 ]]
+	[require(PurchasePrompt.Actions.BundleProductInfoReceived).name] = function(_, p1)
 		-- upvalues: GetFFlagFixBundlePromptThumbnailModule (copy), ItemTypeModule (copy), FFlagUnifiedPurchaseOptimizeTTIMarketplace (copy), NormalizePriceDiscountDetailsModule (copy), GetPreviewImageUrlModule (copy)
 		local BundleProductInfo = p1.bundleProductInfo
 		local Id = nil
@@ -77,7 +77,7 @@ return (require(PurchasePrompt.Parent.PurchasePromptDeps).Rodux.createReducer({}
 			itemType = BundleProductInfo.itemType
 		}
 	end,
-	[require(PurchasePrompt.Actions.CompleteRequest).name] = function(_, _) --[[ Line: 134 ]]
+	[require(PurchasePrompt.Actions.CompleteRequest).name] = function(_, _)
 		return {}
 	end
 }))

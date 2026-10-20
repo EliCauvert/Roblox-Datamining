@@ -8,7 +8,7 @@ local UseCumulativeBackgroundFunction = FoundationModule.Hooks.useCumulativeBack
 local UserPresence = FoundationModule.Enums.UserPresence
 local GetStandardSizeAvatarHeadShotRbxthumbFunction = require(Parent.UserLib).Utils.getStandardSizeAvatarHeadShotRbxthumb
 
-return function(p1) --[[ Line: 24 | Named "AvatarPile" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), UseCumulativeBackgroundFunction (copy), ReactModule (copy), View (copy), Image (copy), UserPresence (copy)
 	local UseTokensResult = UseTokensFunction()
 	local StandardSizeAvatarHeadShotRbxthumb = GetStandardSizeAvatarHeadShotRbxthumbFunction(p1.primaryUserId)

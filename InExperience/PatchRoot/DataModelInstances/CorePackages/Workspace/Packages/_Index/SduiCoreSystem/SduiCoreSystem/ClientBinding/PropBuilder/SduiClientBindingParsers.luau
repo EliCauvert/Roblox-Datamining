@@ -11,7 +11,7 @@ local FFlagSduiPropParsersShouldHandleTokens = require(Parent.SharedFlags).FFlag
 local FFlagSduiUnwrapStructPropEnvelope = require(Parent.SharedFlags).FFlagSduiUnwrapStructPropEnvelope
 local FFlagSduiParseProtoGradientFields = require(Parent.SharedFlags).FFlagSduiParseProtoGradientFields
 
-local function resolveTokenValueToNumber(Tokens, Text: string) --[[ Line: 21 ]]
+local function resolveTokenValueToNumber(Tokens, Text: string)
 	-- upvalues: SplitDottedPathModule (copy)
 	local IsSegmentMatch = string.sub(Text, 1, 1) == "-"
 	local Segment: string = if IsSegmentMatch then string.sub(Text, 2) else Text
@@ -33,7 +33,7 @@ local function resolveTokenValueToNumber(Tokens, Text: string) --[[ Line: 21 ]]
 	return if IsSegmentMatch then Tokens1 * -1 else Tokens1
 end
 
-local function getTokenOrNumber(p1, p2, p3, p4) --[[ Line: 45 ]]
+local function getTokenOrNumber(p1, p2, p3, p4)
 	-- upvalues: GetSduiTokensStoreModule (copy), resolveTokenValueToNumber (copy)
 	local Number: number? = tonumber(p1)
 	
@@ -50,7 +50,7 @@ local function getTokenOrNumber(p1, p2, p3, p4) --[[ Line: 45 ]]
 		
 		return
 	else
-		local Success, Result = pcall(function() --[[ Line: 60 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: resolveTokenValueToNumber (upval), GetSduiTokensStoreModule (upval), p2 (copy), p4 (copy), p1 (copy)
 			return (resolveTokenValueToNumber(GetSduiTokensStoreModule().getTokens(p2, p4), p1))
 		end)
@@ -63,9 +63,9 @@ local function getTokenOrNumber(p1, p2, p3, p4) --[[ Line: 45 ]]
 	end
 end
 
-local Callback = if FFlagSduiPropParsersShouldHandleTokens then function(Text, p1, p2) --[[ Line: 77 ]]
+local Callback = if FFlagSduiPropParsersShouldHandleTokens then function(Text, p1, p2)
 	-- upvalues: getTokenOrNumber (copy)
-	local Success, Result = pcall(function(): UDim2? --[[ Line: 78 ]]
+	local Success, Result = pcall(function(): UDim2?
 		-- upvalues: Text (copy), getTokenOrNumber (upval), p1 (copy), p2 (copy)
 		local Parts = string.split(Text, ",")
 		
@@ -81,9 +81,9 @@ local Callback = if FFlagSduiPropParsersShouldHandleTokens then function(Text, p
 	else
 		error(if typeof(Result) == "string" then Result else nil)
 	end
-end else function(Text, p1, p2) --[[ Line: 95 ]]
+end else function(Text, p1, p2)
 	-- upvalues: GetSduiTokensStoreModule (copy)
-	local Success, Result = pcall(function(): UDim2? --[[ Line: 96 ]]
+	local Success, Result = pcall(function(): UDim2?
 		-- upvalues: Text (copy), p2 (copy), GetSduiTokensStoreModule (upval), p1 (copy)
 		local Parts = string.split(Text, ",")
 		
@@ -109,9 +109,9 @@ end else function(Text, p1, p2) --[[ Line: 95 ]]
 		error(if typeof(Result) == "string" then Result else nil)
 	end
 end
-local Callback1 = if FFlagSduiPropParsersShouldHandleTokens then function(Text, p1, p2) --[[ Line: 123 ]]
+local Callback1 = if FFlagSduiPropParsersShouldHandleTokens then function(Text, p1, p2)
 	-- upvalues: getTokenOrNumber (copy)
-	local Success, Result = pcall(function(): UDim? --[[ Line: 124 ]]
+	local Success, Result = pcall(function(): UDim?
 		-- upvalues: Text (copy), getTokenOrNumber (upval), p1 (copy), p2 (copy)
 		local Parts = string.split(Text, ",")
 		
@@ -127,9 +127,9 @@ local Callback1 = if FFlagSduiPropParsersShouldHandleTokens then function(Text, 
 	else
 		error(if typeof(Result) == "string" then Result else nil)
 	end
-end else function(Text, p1, p2) --[[ Line: 140 ]]
+end else function(Text, p1, p2)
 	-- upvalues: GetSduiTokensStoreModule (copy)
-	local Success, Result = pcall(function(): UDim? --[[ Line: 141 ]]
+	local Success, Result = pcall(function(): UDim?
 		-- upvalues: Text (copy), p2 (copy), GetSduiTokensStoreModule (upval), p1 (copy)
 		local Parts = string.split(Text, ",")
 		
@@ -154,9 +154,9 @@ end else function(Text, p1, p2) --[[ Line: 140 ]]
 	end
 end
 
-local function parseNumber(p1, p2, p3) --[[ Line: 166 ]]
+local function parseNumber(p1, p2, p3)
 	-- upvalues: GetSduiTokensStoreModule (copy)
-	local Success, Result = pcall(function(): number --[[ Line: 171 ]]
+	local Success, Result = pcall(function(): number
 		-- upvalues: p1 (copy)
 		return (tonumber(p1))
 	end)
@@ -177,7 +177,7 @@ end
 
 local Callback2 = nil
 
-local function isStructEnvelope(List): boolean --[[ Line: 211 ]]
+local function isStructEnvelope(List): boolean
 	local Fields = List.fields
 	
 	if typeof(Fields) ~= "table" then
@@ -200,7 +200,7 @@ local function isStructEnvelope(List): boolean --[[ Line: 211 ]]
 	return Flag or next(Fields) == nil
 end
 
-local function parseStruct(List) --[[ Line: 235 ]]
+local function parseStruct(List)
 	-- upvalues: FFlagSduiUnwrapStructPropEnvelope (copy), isStructEnvelope (copy), Callback2 (ref), ProtoVariableMapperModule (copy), parseStruct (copy)
 	if typeof(List) ~= "table" then
 		return List
@@ -219,7 +219,7 @@ end
 
 local Callback3 = nil
 
-local function unwrapStructList(p1) --[[ Line: 254 ]]
+local function unwrapStructList(p1)
 	-- upvalues: Callback3 (ref)
 	local t = {}
 	local Values = if typeof(p1) == "table" then p1.values else nil
@@ -233,7 +233,7 @@ local function unwrapStructList(p1) --[[ Line: 254 ]]
 	return t
 end
 
-Callback3 = function(p2) --[[ Line: 274 | Named "unwrapStructValue" ]]
+Callback3 = function(p2)
 	-- upvalues: parseStruct (copy), unwrapStructList (copy)
 	if typeof(p2) == "table" then
 		local Kind = p2.kind
@@ -244,7 +244,7 @@ Callback3 = function(p2) --[[ Line: 274 | Named "unwrapStructValue" ]]
 	end
 end
 
-Callback2 = function(p2) --[[ Line: 302 | Named "unwrapStruct" ]]
+Callback2 = function(p2)
 	-- upvalues: ProtoVariableMapperModule (copy), Callback3 (ref)
 	local MapPropNameFunction = ProtoVariableMapperModule.mapPropName
 	local t = {}
@@ -255,11 +255,11 @@ Callback2 = function(p2) --[[ Line: 302 | Named "unwrapStruct" ]]
 	return t
 end
 
-local function parseColor3(EndColor) --[[ Line: 346 ]]
+local function parseColor3(EndColor)
 	if typeof(EndColor) == "Color3" then
 		return EndColor
 	elseif typeof(EndColor) == "string" then
-		local Success, Result = pcall(function(): Color3 --[[ Line: 351 ]]
+		local Success, Result = pcall(function(): Color3
 			-- upvalues: EndColor (copy)
 			return Color3.fromHex(EndColor)
 		end)
@@ -280,7 +280,7 @@ local config = {
 	endColor = Color3.new(0, 0, 0)
 }
 
-local function parseGradient(p3) --[[ Line: 373 ]]
+local function parseGradient(p3)
 	-- upvalues: parseStruct (copy), config (copy), parseColor3 (copy)
 	local ParseStructResult = parseStruct(p3)
 	
@@ -315,23 +315,23 @@ return {
 	parseUDim = Callback1,
 	parseUDim2 = Callback,
 	parseNumber = parseNumber,
-	applyTokenScaling = function(p3, p4) --[[ Line: 16 ]]
+	applyTokenScaling = function(p3, p4)
 		return p3 * (p4 and p4.Config.UI.Scale or 1)
 	end,
-	parseUiScaledNumber = function(p3, p4) --[[ Line: 185 ]]
+	parseUiScaledNumber = function(p3, p4)
 		-- upvalues: parseNumber (copy)
 		return parseNumber(p3, p4, true)
 	end,
-	parseUiScaledUDim = function(p3, p4) --[[ Line: 189 ]]
+	parseUiScaledUDim = function(p3, p4)
 		-- upvalues: Callback1 (copy)
 		return Callback1(p3, p4, true)
 	end,
-	parseUiScaledUDim2 = function(p3, p4) --[[ Line: 193 ]]
+	parseUiScaledUDim2 = function(p3, p4)
 		-- upvalues: Callback (copy)
 		return Callback(p3, p4, true)
 	end,
 	parseStruct = parseStruct,
-	parseArrayOfStruct = function(List) --[[ Line: 314 ]]
+	parseArrayOfStruct = function(List)
 		-- upvalues: parseStruct (copy)
 		if typeof(List) ~= "table" then
 			return List
@@ -344,18 +344,18 @@ return {
 		return t
 	end,
 	parsePymkItems = require(SduiCoreSystem.ClientBinding.PropBuilder.parsePymkItems),
-	parseStringArray = function(p3) --[[ Line: 336 ]]
+	parseStringArray = function(p3)
 		return if typeof(p3) == "table" then p3.items or p3 else nil
 	end,
-	parseToString = function(p3) --[[ Line: 325 ]]
+	parseToString = function(p3)
 		return if p3 == nil then nil else tostring(p3)
 	end,
 	parseColor3 = parseColor3,
 	parseGradient = if FFlagSduiParseProtoGradientFields then parseGradient else nil,
-	parseColorPropLegacy = function(p3) --[[ Line: 406 ]]
+	parseColorPropLegacy = function(p3)
 		return if typeof(p3) == "string" then Color3.fromHex(p3) else p3
 	end,
-	parseFocusNavActions = function(p3) --[[ Line: 416 ]]
+	parseFocusNavActions = function(p3)
 		-- upvalues: InputHandlersModule (copy)
 		if typeof(p3) ~= "table" then
 			return nil

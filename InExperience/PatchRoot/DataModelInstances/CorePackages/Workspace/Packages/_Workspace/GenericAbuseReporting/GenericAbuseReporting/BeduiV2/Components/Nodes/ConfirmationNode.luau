@@ -30,7 +30,7 @@ local FFlagAbuseReportImproveErrorEventsModule = require(GenericAbuseReporting.F
 local FFlagAbuseReportOptimisticBlockToggleModule = require(GenericAbuseReporting.Flags.FFlagAbuseReportOptimisticBlockToggle)
 local FFlagSupportSubmissionOnAllReportNodes = require(Parent.SharedFlags).FFlagSupportSubmissionOnAllReportNodes
 
-local function useBlockToggle(BlockToggle) --[[ Line: 73 ]]
+local function useBlockToggle(BlockToggle)
 	-- upvalues: ReactModule (copy), FFlagAbuseReportOptimisticBlockToggleModule (copy), UseAbuseReportAnalyticsFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), IsBlockedUserFunction (copy), TelemetryEventType (copy), FFlagAbuseReportImproveErrorEventsModule (copy), FormatErrorDetailForAnalyticsFunction (copy), DashModule (copy), UnblockUserFunction (copy), BlockUserFunction (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(if BlockToggle then "Loading" else "Hidden")
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
@@ -42,13 +42,13 @@ local function useBlockToggle(BlockToggle) --[[ Line: 73 ]]
 	end
 	local SendEventFunction = UseAbuseReportAnalyticsFunction().sendEvent
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
-	ReactModule.useEffect(function() --[[ Line: 85 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: BlockToggle (copy), IsBlockedUserFunction (upval), UseRoactServiceResult (copy), UseStateResult2 (copy), SendEventFunction (copy), TelemetryEventType (upval), FFlagAbuseReportImproveErrorEventsModule (upval), FormatErrorDetailForAnalyticsFunction (upval), DashModule (upval)
 		if BlockToggle and BlockToggle.userId then
-			IsBlockedUserFunction(UseRoactServiceResult, BlockToggle.userId):andThen(function(Result) --[[ Line: 88 ]]
+			IsBlockedUserFunction(UseRoactServiceResult, BlockToggle.userId):andThen(function(Result)
 				-- upvalues: UseStateResult2 (upval)
 				UseStateResult2(if Result.responseBody then "Hidden" else "Visible")
-			end):catch(function(Err) --[[ Line: 92 ]]
+			end):catch(function(Err)
 				-- upvalues: UseStateResult2 (upval), SendEventFunction (upval), TelemetryEventType (upval), FFlagAbuseReportImproveErrorEventsModule (upval), FormatErrorDetailForAnalyticsFunction (upval), DashModule (upval)
 				UseStateResult2("Hidden")
 				SendEventFunction({
@@ -72,7 +72,7 @@ local function useBlockToggle(BlockToggle) --[[ Line: 73 ]]
 	
 	return {
 		blockToggleState = UseStateResult,
-		handleBlockToggleChange = ReactModule.useCallback(function() --[[ Line: 114 ]]
+		handleBlockToggleChange = ReactModule.useCallback(function()
 			-- upvalues: BlockToggle (copy), FFlagAbuseReportOptimisticBlockToggleModule (upval), IsBlockRequestInFlight (ref), Callback (ref), UseStateResult2_1 (copy), UseStateResult1 (copy), UnblockUserFunction (upval), UseRoactServiceResult (copy), UseStateResult2 (copy), SendEventFunction (copy), TelemetryEventType (upval), FFlagAbuseReportImproveErrorEventsModule (upval), FormatErrorDetailForAnalyticsFunction (upval), DashModule (upval), BlockUserFunction (upval)
 			if BlockToggle == nil or BlockToggle.userId == nil then return end
 			if FFlagAbuseReportOptimisticBlockToggleModule then
@@ -84,10 +84,10 @@ local function useBlockToggle(BlockToggle) --[[ Line: 73 ]]
 			end
 			local Promise = nil
 			if UseStateResult1 then
-				Promise = UnblockUserFunction(UseRoactServiceResult, BlockToggle.userId):andThen(function() --[[ Line: 133 ]]
+				Promise = UnblockUserFunction(UseRoactServiceResult, BlockToggle.userId):andThen(function()
 					-- upvalues: UseStateResult2_1 (upval)
 					UseStateResult2_1(false)
-				end):catch(function(Err) --[[ Line: 136 ]]
+				end):catch(function(Err)
 					-- upvalues: FFlagAbuseReportOptimisticBlockToggleModule (upval), UseStateResult2_1 (upval), UseStateResult2 (upval), SendEventFunction (upval), TelemetryEventType (upval), FFlagAbuseReportImproveErrorEventsModule (upval), FormatErrorDetailForAnalyticsFunction (upval), DashModule (upval)
 					if FFlagAbuseReportOptimisticBlockToggleModule then
 						UseStateResult2_1(true)
@@ -102,13 +102,13 @@ local function useBlockToggle(BlockToggle) --[[ Line: 73 ]]
 				end)
 				SendEventFunction({ sub_event_type = TelemetryEventType.DidUnblockUser })
 			else
-				Promise = BlockUserFunction(UseRoactServiceResult, BlockToggle.userId):andThen(function() --[[ Line: 157 ]]
+				Promise = BlockUserFunction(UseRoactServiceResult, BlockToggle.userId):andThen(function()
 					-- upvalues: FFlagAbuseReportOptimisticBlockToggleModule (upval), SendEventFunction (upval), TelemetryEventType (upval), UseStateResult2_1 (upval)
 					if not FFlagAbuseReportOptimisticBlockToggleModule then
 						SendEventFunction({ sub_event_type = TelemetryEventType.DidBlockUser })
 					end
 					UseStateResult2_1(true)
-				end):catch(function(Err) --[[ Line: 163 ]]
+				end):catch(function(Err)
 					-- upvalues: FFlagAbuseReportOptimisticBlockToggleModule (upval), UseStateResult2_1 (upval), UseStateResult2 (upval), SendEventFunction (upval), TelemetryEventType (upval), FFlagAbuseReportImproveErrorEventsModule (upval), FormatErrorDetailForAnalyticsFunction (upval), DashModule (upval)
 					if FFlagAbuseReportOptimisticBlockToggleModule then
 						UseStateResult2_1(false)
@@ -127,7 +127,7 @@ local function useBlockToggle(BlockToggle) --[[ Line: 73 ]]
 				end
 			end
 			if FFlagAbuseReportOptimisticBlockToggleModule then
-				Promise:finally(function() --[[ Line: 186 ]]
+				Promise:finally(function()
 					-- upvalues: Callback (upval)
 					if Callback then
 						Callback(false)
@@ -146,7 +146,7 @@ local function useBlockToggle(BlockToggle) --[[ Line: 73 ]]
 	}
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 208 | Named "ConfirmationNode" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseArTranslationFunction (copy), UseOpenLinkModule (copy), UseAbuseReportAnalyticsFunction (copy), useBlockToggle (copy), UseLayoutSlotsFunction (copy), ReactModule (copy), TelemetryEventType (copy), EyebrowModule (copy), TextWithTranslationModule (copy), View (copy), Toggle (copy), Button (copy), ButtonVariant (copy), FooterModule (copy), FillBehavior (copy), FFlagSupportSubmissionOnAllReportNodes (copy)
 	local TranslateIntoStringFunction = UseArTranslationFunction().translateIntoString
 	local UseOpenLinkModuleResult = UseOpenLinkModule()
@@ -159,19 +159,19 @@ return ReactModule.memo(function(p1) --[[ Line: 208 | Named "ConfirmationNode" ]
 	local UseLayoutSlotsResult = UseLayoutSlotsFunction()
 	local Title = UseLayoutSlotsResult.Title
 	local Layout = UseLayoutSlotsResult.Layout
-	ReactModule.useEffect(function() --[[ Line: 225 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), SendEventFunction (copy), TelemetryEventType (upval)
 		if p1.helpline and p1.helpline.href then
 			SendEventFunction({ sub_event_type = TelemetryEventType.HelplineShown })
 		end
 	end, { p1.helpline and p1.helpline.href, SendEventFunction })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 231 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		if p1.onNext then
 			p1.onNext()
 		end
 	end, { p1.onNext })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 238 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), UseOpenLinkModuleResult (copy), TranslateIntoStringFunction (copy), SendEventFunction (copy), TelemetryEventType (upval)
 		if p1.helpline and p1.helpline.href then
 			UseOpenLinkModuleResult(TranslateIntoStringFunction(p1.helpline.heading or ""), p1.helpline.href)

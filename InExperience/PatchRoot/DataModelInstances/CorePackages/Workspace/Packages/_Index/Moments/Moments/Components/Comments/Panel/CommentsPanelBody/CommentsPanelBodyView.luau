@@ -8,7 +8,7 @@ local CommentsPanelStateViewModule = require(script.Parent.Parent.CommentsPanelS
 local CommentsReadOnlyNoticeViewModule = require(script.Parent.Parent.CommentsReadOnlyNoticeView)
 local _ = require(script.Parent.Parent.getCommentsPanelState)
 
-return function(p1) --[[ Line: 28 | Named "CommentsPanelBodyView" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), CommentsListContainerModule (copy), FFlagMomentsCommentsRevealAfterMeasureModule (copy), CommentsPanelStateViewModule (copy), FoundationModule (copy), CommentsReadOnlyNoticeViewModule (copy)
 	local FeedItemId = p1.feedItemId
 	local HasFeedItemId: boolean = p1.contentState == "list" and FeedItemId ~= nil
@@ -39,7 +39,7 @@ return function(p1) --[[ Line: 28 | Named "CommentsPanelBodyView" ]]
 		},
 		sizeConstraint = if HasFeedItemId then nil else {
 			MaxSize = nil,
-			MinSize = p1.stateMinHeight:map(function(Y): Vector2 --[[ Line: 74 ]]
+			MinSize = p1.stateMinHeight:map(function(Y): Vector2
 				return Vector2.new(0, Y)
 			end)
 		}

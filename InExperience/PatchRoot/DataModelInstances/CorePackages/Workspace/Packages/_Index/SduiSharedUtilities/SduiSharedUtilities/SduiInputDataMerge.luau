@@ -2,23 +2,23 @@
 local FFlagLuaAppEnableSduiHomePage = require(SduiSharedUtilities.Parent.SharedFlags).FFlagLuaAppEnableSduiHomePage
 local _ = require(SduiSharedUtilities.SduiIntegrationTypes)
 
-local function _(p1): boolean --[[ Line: 19 | Named "isArrayLike" ]]
+local function _(p1): boolean
 	return typeof(p1) == "table" and #p1 > 0
 end
 
-local _ = function(p1, List) --[[ Line: 23 | Named "shallowAssignFromNew" ]]
+local _ = function(p1, List)
 	for i, value in List do
 		p1[i] = value
 	end
 end
 
-local _ = function(List, List1) --[[ Line: 29 | Named "appendArray" ]]
+local _ = function(List, List1)
 	for _, value in List1 do
 		table.insert(List, value)
 	end
 end
 
-local function mergeInto(p2, List3, Callback, List) --[[ Line: 35 ]]
+local function mergeInto(p2, List3, Callback, List)
 	-- upvalues: FFlagLuaAppEnableSduiHomePage (copy), mergeInto (copy)
 	for i, value in List3 do
 		if typeof(value) ~= "table" then
@@ -80,7 +80,7 @@ local function mergeInto(p2, List3, Callback, List) --[[ Line: 35 ]]
 end
 
 return {
-	merge = function(Tbl, p3, p4) --[[ Line: 87 ]]
+	merge = function(Tbl, p3, p4)
 		-- upvalues: mergeInto (copy)
 		local Copy = table.clone(Tbl)
 		mergeInto(Copy, p3, p4, {})

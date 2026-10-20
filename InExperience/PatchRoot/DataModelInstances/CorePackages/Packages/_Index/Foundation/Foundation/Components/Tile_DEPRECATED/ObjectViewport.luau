@@ -6,19 +6,19 @@ local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local RunService = require(Foundation.Utility.Wrappers).Services.RunService
 
-local function _(Degrees: number, Vector): number --[[ Line: 19 | Named "getCameraDistance" ]]
+local function _(Degrees: number, Vector): number
 	local Z: number = Vector.Z
 	
 	return math.max(Vector.X, Vector.Y, Z) * (1 / math.tan(math.rad(Degrees) / 2)) + Z / 2
 end
 
-local _ = function(p1, Angle, Axis) --[[ Line: 29 | Named "rotateVectorAround" ]]
+local _ = function(p1, Angle, Axis)
 	return CFrame.fromAxisAngle(Axis, Angle):VectorToWorldSpace(p1)
 end
 
 local config = { rotationSpeed = 0.01, fieldOfView = 70 }
 
-return function(p1) --[[ Line: 44 | Named "ObjectViewport" ]]
+return function(p1)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), EventConnection (copy), RunService (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
@@ -30,19 +30,19 @@ return function(p1) --[[ Line: 44 | Named "ObjectViewport" ]]
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(CFrame.new())
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState((Vector3.new()))
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(0)
-	ReactModule.useEffect(function() --[[ Line: 59 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), UseStateResult (copy)
 		if UseRefResult1.current and UseStateResult ~= nil then
 			UseStateResult.Parent = UseRefResult1.current
 		end
-		return function() --[[ Line: 64 ]]
+		return function()
 			-- upvalues: UseStateResult (upval)
 			if UseStateResult ~= nil then
 				UseStateResult.Parent = nil
 			end
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 71 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseStateResult2_3 (copy), WithDefaultsModuleResult (copy)
 		if UseStateResult ~= nil then
 			local Pivot = UseStateResult:GetPivot()
@@ -53,7 +53,7 @@ return function(p1) --[[ Line: 44 | Named "ObjectViewport" ]]
 			UseStateResult2_3(math.max(ExtentsSize.X, ExtentsSize.Y, Z) * (1 / math.tan(math.rad(WithDefaultsModuleResult.fieldOfView) / 2)) + Z / 2)
 		end
 	end, { UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 82 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), WithDefaultsModuleResult (copy), UseRefResult1 (copy), UseStateResult2 (copy)
 		if UseStateResult ~= nil then
 			UseStateResult.Parent = nil
@@ -94,7 +94,7 @@ return function(p1) --[[ Line: 44 | Named "ObjectViewport" ]]
 			WorldModel = ReactModule.createElement("WorldModel", { ref = UseRefResult1 }),
 			RenderSteppedConnection = ReactModule.createElement(EventConnection, {
 				event = RunService.RenderStepped,
-				callback = function() --[[ Line: 132 ]]
+				callback = function()
 					-- upvalues: UseBindingResult2_1 (copy), UseBindingResult1 (copy), WithDefaultsModuleResult (copy), UseStateResult3 (copy), UseStateResult1 (copy), UseStateResult4 (copy), UseBindingResult2 (copy)
 					UseBindingResult2_1(UseBindingResult1:getValue() + WithDefaultsModuleResult.rotationSpeed or 0)
 					UseBindingResult2((CFrame.new(UseStateResult1.Position + CFrame.fromAxisAngle(vector.create(0, 1, 0), (UseBindingResult1:getValue())):VectorToWorldSpace(UseStateResult3) * UseStateResult4, UseStateResult1.Position)))

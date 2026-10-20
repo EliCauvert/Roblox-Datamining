@@ -21,14 +21,14 @@ local TCOpenAmpInGame = game:DefineFastFlag("TCOpenAmpInGame", false)
 local FFlagEnableTrustedFriendsWizardVPCPrologueModule = require(TrustedContacts.Flags.FFlagEnableTrustedFriendsWizardVPCPrologue)
 local _ = require(TrustedContacts.Common.Types)
 
-return function(p1) --[[ Line: 45 | Named "useExternalNavigationSetUp" ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseSocialUpsellOverlayControllerFunction (copy), ReactModule (copy), NotificationModalsManagerModule (copy), UseOpenWebViewFunction (copy), TCOpenAmpInGame (copy), GetFFlagEnableAmpWizardVPCNavigationFixFunction (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), FFlagEnableTrustedFriendsWizardVPCPrologueModule (copy), InExpAmpWizardController (copy), OpenAmpWizardContainerFunction (copy), Default (copy), UpsellEntrySurfaceType (copy), SocialUpsellType (copy), UpsellComponent (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local IsNotGameIdMatch = nil
 	local UseSocialUpsellOverlayControllerResult = nil
 	IsNotGameIdMatch = game.GameId ~= 0
 	UseSocialUpsellOverlayControllerResult = UseSocialUpsellOverlayControllerFunction(IsNotGameIdMatch)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 127 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		if p1.onClosed then
 			p1.onClosed()
@@ -42,9 +42,9 @@ return function(p1) --[[ Line: 45 | Named "useExternalNavigationSetUp" ]]
 	
 	return {
 		closeModal = UseResult,
-		openAmpWizard = ReactModule.useCallback(function(p2) --[[ Line: 61 ]]
+		openAmpWizard = ReactModule.useCallback(function(p2)
 			-- upvalues: TCOpenAmpInGame (upval), GetFFlagEnableAmpWizardVPCNavigationFixFunction (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval), FFlagEnableTrustedFriendsWizardVPCPrologueModule (upval), InExpAmpWizardController (upval), OpenAmpWizardContainerFunction (upval)
-			local function v22(p3, p4) --[[ Line: 62 ]]
+			local function v22(p3, p4)
 				-- upvalues: TCOpenAmpInGame (upval), GetFFlagEnableAmpWizardVPCNavigationFixFunction (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateBackFunction (upval), p2 (copy)
 				if not TCOpenAmpInGame and not GetFFlagEnableAmpWizardVPCNavigationFixFunction() then
 					if FFlagSignalsNavP3Dispatch then
@@ -74,7 +74,7 @@ return function(p1) --[[ Line: 45 | Named "useExternalNavigationSetUp" ]]
 				UseDispatchResult(OpenAmpWizardContainerFunction(p2.featureName, v22, p2.recourseData, p2.entryPointEventCtx, p2.extraParameters, p2.nameSpace))
 			end
 		end, { UseDispatchResult }),
-		openFacialAgeEstimationUpsell = ReactModule.useCallback(function(p2) --[[ Line: 139 ]]
+		openFacialAgeEstimationUpsell = ReactModule.useCallback(function(p2)
 			-- upvalues: IsNotGameIdMatch (ref), UpsellEntrySurfaceType (upval), UseSocialUpsellOverlayControllerResult (ref), SocialUpsellType (upval), UpsellComponent (upval), UseResult (copy)
 			local TrustedFriendsInExperience = if IsNotGameIdMatch then UpsellEntrySurfaceType.TrustedFriendsInExperience else UpsellEntrySurfaceType.TrustedFriends
 			UseSocialUpsellOverlayControllerResult.openSocialOverlay(SocialUpsellType.FacialAgeEstimation, {
@@ -92,7 +92,7 @@ return function(p1) --[[ Line: 45 | Named "useExternalNavigationSetUp" ]]
 			IsNotGameIdMatch,
 			UseSocialUpsellOverlayControllerResult.openSocialOverlay
 		}),
-		showToast = ReactModule.useCallback(function(ToastTitle) --[[ Line: 52 ]]
+		showToast = ReactModule.useCallback(function(ToastTitle)
 			-- upvalues: NotificationModalsManagerModule (upval)
 			NotificationModalsManagerModule.SetUIBloxToast({
 				sequenceNumber = DateTime.now().UnixTimestamp,
@@ -100,7 +100,7 @@ return function(p1) --[[ Line: 45 | Named "useExternalNavigationSetUp" ]]
 			})
 		end, {}),
 		openWebView = UseOpenWebViewFunction(),
-		shareUrl = ReactModule.useCallback(function(p2) --[[ Line: 135 ]]
+		shareUrl = ReactModule.useCallback(function(p2)
 			-- upvalues: Default (upval)
 			Default:shareUrl(p2)
 		end, {})

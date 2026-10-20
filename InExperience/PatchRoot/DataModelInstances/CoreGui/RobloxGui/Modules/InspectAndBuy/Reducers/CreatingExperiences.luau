@@ -2,7 +2,7 @@
 local CryoModule = require(CorePackages.Packages.Cryo)
 
 return require(CorePackages.Packages.Rodux).createReducer({}, {
-	[require(script.Parent.Parent.Actions.SetExperienceInfo).name] = function(p1, p2) --[[ Line: 12 ]]
+	[require(script.Parent.Parent.Actions.SetExperienceInfo).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		local ExperienceInfo = p2.experienceInfo
 		local UniverseId = ExperienceInfo.universeId

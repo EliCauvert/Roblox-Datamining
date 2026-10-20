@@ -2,13 +2,13 @@
 local _ = require(script.Parent.types)
 local t = {}
 
-return function(Callback, Callback1: (any) -> (), Callback2: (any, any) -> ()) --[[ Line: 25 | Named "onTerminal" ]]
+return function(Callback, Callback1: (any) -> (), Callback2: (any, any) -> ())
 	-- upvalues: t (copy), CreateEffectFunction (copy)
 	local t1 = {}
 	local Flag = false
 	local Flag1 = false
 	
-	local function _() --[[ Line: 34 | Named "cleanupEffect" ]]
+	local function _()
 		-- upvalues: Flag1 (ref), t (upval), t1 (copy)
 		if Flag1 then return end
 		Flag1 = true
@@ -20,7 +20,7 @@ return function(Callback, Callback1: (any) -> (), Callback2: (any, any) -> ()) -
 		end
 	end
 	
-	local _ = function(p1) --[[ Line: 46 | Named "settle" ]]
+	local _ = function(p1)
 		-- upvalues: Flag (ref), Flag1 (ref), t (upval), t1 (copy), Callback1 (copy), Callback2 (copy)
 		if Flag then return end
 		Flag = true
@@ -47,7 +47,7 @@ return function(Callback, Callback1: (any) -> (), Callback2: (any, any) -> ()) -
 	local CallbackResult = Callback(false)
 	
 	if CallbackResult.status == "pending" then
-		local Effect: () -> () = CreateEffectFunction(function(p1) --[[ Line: 67 ]]
+		local Effect: () -> () = CreateEffectFunction(function(p1)
 			-- upvalues: Callback (copy), Flag (ref), Flag1 (ref), t (upval), t1 (copy), Callback1 (copy), Callback2 (copy)
 			local CallbackResult = Callback(p1)
 			

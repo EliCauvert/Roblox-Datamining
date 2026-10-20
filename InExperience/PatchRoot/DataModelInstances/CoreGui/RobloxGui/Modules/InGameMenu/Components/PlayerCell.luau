@@ -40,8 +40,8 @@ PlayerCell.validateProps = T.strictInterface({
 })
 PlayerCell.defaultProps = { Visible = true, UserInputService = UserInputService }
 
-function PlayerCell.init(p1) --[[ Line: 71 ]]
-	function p1.onActivated() --[[ Line: 72 ]]
+function PlayerCell.init(p1)
+	function p1.onActivated()
 		-- upvalues: p1 (copy)
 		if p1.props.onActivated and p1.props.userId then
 			p1.props.onActivated(p1.props.userId)
@@ -49,7 +49,7 @@ function PlayerCell.init(p1) --[[ Line: 71 ]]
 	end
 end
 
-function PlayerCell.renderButtons(p1) --[[ Line: 79 ]]
+function PlayerCell.renderButtons(p1)
 	-- upvalues: Roact (copy), Cryo (copy)
 	return (Cryo.Dictionary.join(p1.props[Roact.Children] or {}, {
 		List = Roact.createElement("UIListLayout", {
@@ -62,12 +62,12 @@ function PlayerCell.renderButtons(p1) --[[ Line: 79 ]]
 	}))
 end
 
-function PlayerCell.renderWithSelectionCursor(p1, _) --[[ Line: 94 ]]
+function PlayerCell.renderWithSelectionCursor(p1, _)
 	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), Roact (copy), _UDim (copy), LoadableImage (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), ImageSetLabel (copy), Images (copy), AssetsModule (copy), Cell (copy), VerifiedBadgesModule (copy), ThemedTextLabelModule (copy)
 	local Props = p1.props
 	local Username = if Props.displayName == "" then Props.username else Props.displayName or Props.username
 	
-	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 104 ]]
+	return WithFoundationOrUIBloxStyleFunction(function(p2)
 		return {
 			Theme = {
 				BackgroundContrast = {
@@ -84,7 +84,7 @@ function PlayerCell.renderWithSelectionCursor(p1, _) --[[ Line: 94 ]]
 				}
 			}
 		}
-	end, function(p2) --[[ Line: 112 ]]
+	end, function(p2)
 		-- upvalues: p1 (copy), Roact (upval), _UDim (upval), LoadableImage (upval), Props (copy), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), ImageSetLabel (upval), Images (upval), AssetsModule (upval), Cell (upval), VerifiedBadgesModule (upval), ThemedTextLabelModule (upval), Username (copy)
 		local BackgroundContrast = p2.Theme.BackgroundContrast
 		local v1 = 1.1
@@ -114,7 +114,7 @@ function PlayerCell.renderWithSelectionCursor(p1, _) --[[ Line: 94 ]]
 				Size = UDim2.fromScale(1, 1),
 				ImageColor3 = Props.isOnline and Color3.fromRGB(255, 255, 255) or Color3.fromRGB(115, 115, 115),
 				Image = Props.userId > 0 and "rbxthumb://type=AvatarHeadShot&id=" .. Props.userId .. "&w=60&h=60" or "",
-				renderOnFailed = function() --[[ Line: 152 ]]
+				renderOnFailed = function()
 					-- upvalues: FFlagCoreUiMigrateUIBloxToFoundation (upval), Roact (upval), Image (upval), _UDim (upval), ImageSetLabel (upval), Images (upval)
 					return if FFlagCoreUiMigrateUIBloxToFoundation then Roact.createElement(Image, {
 						Image = "icons/common/user",
@@ -238,15 +238,15 @@ function PlayerCell.renderWithSelectionCursor(p1, _) --[[ Line: 94 ]]
 	end)
 end
 
-function PlayerCell.render(p1) --[[ Line: 291 ]]
+function PlayerCell.render(p1)
 	-- upvalues: WithCursorMigration (copy)
-	return WithCursorMigration(function(p2) --[[ Line: 292 ]]
+	return WithCursorMigration(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithSelectionCursor(p2)
 	end)
 end
 
-return ReactModule.memo(PlayerCell, function(p1, p2): boolean --[[ Line: 297 ]]
+return ReactModule.memo(PlayerCell, function(p1, p2): boolean
 	-- upvalues: Roact (copy)
 	return p1.isSelected == p2.isSelected and (p1.isOnline == p2.isOnline and (p1[Roact.Change.AbsolutePosition] == p2[Roact.Change.AbsolutePosition] and (p1.forwardRef == p2.forwardRef and p1.memoKey == p2.memoKey))) and p1.loadingStrategy == p2.loadingStrategy
 end)

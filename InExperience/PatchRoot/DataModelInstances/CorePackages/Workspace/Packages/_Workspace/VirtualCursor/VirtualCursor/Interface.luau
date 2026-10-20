@@ -20,14 +20,14 @@ local CreateResult3 = nil
 local CompletedConnection = nil
 local config1 = { Default = 2, Activated = 1.7 }
 
-local function getCursorSize(p1): UDim2 --[[ Line: 43 ]]
+local function getCursorSize(p1): UDim2
 	-- upvalues: config1 (copy), PropertiesModule (copy)
 	local ScaledEntry = config1[p1] * PropertiesModule.CursorRadius
 	
 	return UDim2.fromOffset(ScaledEntry, ScaledEntry)
 end
 
-local function _(p1) --[[ Line: 48 | Named "setCursorHighlight" ]]
+local function _(p1)
 	-- upvalues: Image (ref)
 	if p1 then
 		Image.Image = "rbxasset://textures/ui/VirtualCursor/cursorHover.png"
@@ -38,12 +38,12 @@ local function _(p1) --[[ Line: 48 | Named "setCursorHighlight" ]]
 	end
 end
 
-local _ = function(Vector) --[[ Line: 56 | Named "setCursorPosition" ]]
+local _ = function(Vector)
 	-- upvalues: Image (ref)
 	Image.Position = UDim2.fromOffset(Vector.x, Vector.y)
 end
 
-local function getOrCreateVirtualCursorContainer() --[[ Line: 60 ]]
+local function getOrCreateVirtualCursorContainer()
 	-- upvalues: ScreenGui (ref), Image (ref), config1 (copy), PropertiesModule (copy), CoreGui (copy), CreateResult (ref), TweenService (copy), CreateResult1 (ref)
 	if ScreenGui == nil then
 		ScreenGui = Instance.new("ScreenGui")
@@ -74,14 +74,14 @@ local function getOrCreateVirtualCursorContainer() --[[ Line: 60 ]]
 	return ScreenGui
 end
 
-local function tweenCursorOpacity(Enabled) --[[ Line: 91 ]]
+local function tweenCursorOpacity(Enabled)
 	-- upvalues: CompletedConnection (ref), CreateResult3 (ref), TweenService (copy), Image (ref), getOrCreateVirtualCursorContainer (copy)
 	if CompletedConnection then
 		CompletedConnection:Disconnect()
 		CompletedConnection = nil
 	end
 	CreateResult3 = TweenService:Create(Image, TweenInfo.new(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0), { ImageTransparency = if Enabled then 0 else 1 })
-	CompletedConnection = CreateResult3.Completed:Connect(function() --[[ Line: 100 ]]
+	CompletedConnection = CreateResult3.Completed:Connect(function()
 		-- upvalues: Image (upval), Enabled (copy), getOrCreateVirtualCursorContainer (upval)
 		Image.Visible = Enabled
 		getOrCreateVirtualCursorContainer().Enabled = Enabled
@@ -89,26 +89,26 @@ local function tweenCursorOpacity(Enabled) --[[ Line: 91 ]]
 	CreateResult3:Play()
 end
 
-local function tweenCursorPosition(Vector) --[[ Line: 108 ]]
+local function tweenCursorPosition(Vector)
 	-- upvalues: CreateResult2 (ref), TweenService (copy), Image (ref)
 	CreateResult2 = TweenService:Create(Image, TweenInfo.new(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0), { Position = UDim2.fromOffset(Vector.x, Vector.y) })
 	CreateResult2:Play()
 end
 
 local InterfaceModule = {
-	GetCursorSize = function(_, p1) --[[ Line: 115 ]]
+	GetCursorSize = function(_, p1)
 		-- upvalues: getCursorSize (copy)
 		return getCursorSize(p1)
 	end,
-	PlayCursorTweenActivate = function(_) --[[ Line: 119 ]]
+	PlayCursorTweenActivate = function(_)
 		-- upvalues: CreateResult (ref)
 		CreateResult:Play()
 	end,
-	PlayCursorTweenDefault = function(_) --[[ Line: 123 ]]
+	PlayCursorTweenDefault = function(_)
 		-- upvalues: CreateResult1 (ref)
 		CreateResult1:Play()
 	end,
-	SetCursorHighlight = function(_, p1) --[[ Line: 127 ]]
+	SetCursorHighlight = function(_, p1)
 		-- upvalues: Image (ref), config (copy)
 		if p1 then
 			Image.Image = config.Hover
@@ -118,19 +118,19 @@ local InterfaceModule = {
 			Image.Image = config.Default
 		end
 	end,
-	SetCursorPosition = function(_, Vector) --[[ Line: 131 ]]
+	SetCursorPosition = function(_, Vector)
 		-- upvalues: Image (ref)
 		Image.Position = UDim2.fromOffset(Vector.x, Vector.y)
 	end,
-	TweenCursorPosition = function(_, p1) --[[ Line: 135 ]]
+	TweenCursorPosition = function(_, p1)
 		-- upvalues: tweenCursorPosition (copy)
 		tweenCursorPosition(p1)
 	end,
-	TweenCursorOpacity = function(_, Enabled) --[[ Line: 139 ]]
+	TweenCursorOpacity = function(_, Enabled)
 		-- upvalues: tweenCursorOpacity (copy)
 		tweenCursorOpacity(Enabled)
 	end,
-	SetArrow = function(_, p1, p2) --[[ Line: 143 ]]
+	SetArrow = function(_, p1, p2)
 		-- upvalues: Image (ref)
 		if p1 == -1 and p2 == 0 then
 			Image.Rotation = 90
@@ -146,7 +146,7 @@ local InterfaceModule = {
 	end
 }
 
-function InterfaceModule:EnableUI(Vector) --[[ Line: 159 ]]
+function InterfaceModule:EnableUI(Vector)
 	-- upvalues: VRService (copy), getOrCreateVirtualCursorContainer (copy), Image (ref), config1 (copy), PropertiesModule (copy), InterfaceModule (copy)
 	local NoVREnabled = not VRService.VREnabled
 	getOrCreateVirtualCursorContainer().Enabled = NoVREnabled
@@ -157,7 +157,7 @@ function InterfaceModule:EnableUI(Vector) --[[ Line: 159 ]]
 	InterfaceModule:TweenCursorOpacity(true)
 end
 
-function InterfaceModule:DisableUI() --[[ Line: 170 ]]
+function InterfaceModule:DisableUI()
 	-- upvalues: Image (ref), config (copy), InterfaceModule (copy)
 	Image.Image = config.Default
 	InterfaceModule:TweenCursorOpacity(false)

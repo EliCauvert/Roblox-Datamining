@@ -20,29 +20,29 @@ ResultModal.validateProps = TModule.strictInterface({
 	closeResultModal = TModule.callback
 })
 
-local function _(p1): boolean --[[ Line: 46 | Named "isGamepadInput" ]]
+local function _(p1): boolean
 	-- upvalues: GetInputGroupFunction (copy), InputTypeModule (copy)
 	return GetInputGroupFunction(p1) == InputTypeModule.InputTypeConstants.Gamepad
 end
 
-function ResultModal.init(p1) --[[ Line: 51 ]]
+function ResultModal.init(p1)
 	-- upvalues: UserInputService (copy), GetInputGroupFunction (copy), InputTypeModule (copy)
 	p1:setState({
 		isGamepad = GetInputGroupFunction((UserInputService:GetLastInputType())) == InputTypeModule.InputTypeConstants.Gamepad
 	})
 end
 
-function ResultModal:getLocalizedStringForResultPrompt(ResultModalType) --[[ Line: 57 ]]
+function ResultModal:getLocalizedStringForResultPrompt(ResultModalType)
 	-- upvalues: PromptCreatePlatformContentResult (copy), RobloxTranslatorModule (copy)
 	return if ResultModalType == PromptCreatePlatformContentResult.Success then RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishSuccessMessage") elseif ResultModalType == PromptCreatePlatformContentResult.UploadFailed then RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishFailed") elseif ResultModalType == PromptCreatePlatformContentResult.NoUserInput then RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.NoUserInput") else RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.UndefinedError", { RESULT_TYPE = tostring(ResultModalType) })
 end
 
-function ResultModal:getLocalizedTitleForResultPrompt(ResultModalType) --[[ Line: 72 ]]
+function ResultModal:getLocalizedTitleForResultPrompt(ResultModalType)
 	-- upvalues: PromptCreatePlatformContentResult (copy), RobloxTranslatorModule (copy)
 	return if ResultModalType == PromptCreatePlatformContentResult.Success then RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishSuccessTitle") else RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishFailedTitle")
 end
 
-function ResultModal.render(p1) --[[ Line: 80 ]]
+function ResultModal.render(p1)
 	-- upvalues: RoactModule (copy), InteractiveAlert (copy), ButtonType (copy), GetFFlagValidateDescriptionModule (copy), RobloxTranslatorModule (copy), IconsControlsKeysXboxA (copy)
 	return RoactModule.createElement(InteractiveAlert, {
 		title = p1:getLocalizedTitleForResultPrompt(p1.props.resultModalType),
@@ -63,12 +63,12 @@ function ResultModal.render(p1) --[[ Line: 80 ]]
 	})
 end
 
-return RoactRoduxModule.connect(function(p1) --[[ Line: 102 | Named "mapStateToProps" ]]
+return RoactRoduxModule.connect(function(p1)
 	return { resultModalType = p1.promptRequest.resultModalType }
-end, function(Callback) --[[ Line: 108 | Named "mapDispatchToProps" ]]
+end, function(Callback)
 	-- upvalues: CloseResultModalModule (copy)
 	return {
-		closeResultModal = function() --[[ Line: 110 ]]
+		closeResultModal = function()
 			-- upvalues: Callback (copy), CloseResultModalModule (upval)
 			return Callback(CloseResultModalModule)
 		end

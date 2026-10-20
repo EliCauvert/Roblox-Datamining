@@ -1,6 +1,6 @@
 ﻿local FFlagAXOutfitDetailsV4Module = require(script.Parent.FFlagAXOutfitDetailsV4)
 local AXBackgroundsOutfitPersistence = game:DefineFastFlag("AXBackgroundsOutfitPersistence", false)
-local Success = pcall(function() --[[ Line: 10 ]]
+local Success = pcall(function()
 	return Enum.AvatarAssetType.AvatarBackground
 end)
 

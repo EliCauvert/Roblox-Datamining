@@ -6,7 +6,7 @@ local IconButton = FoundationModule.IconButton
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(Frame) --[[ Line: 24 | Named "TextFontButton" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), IconButton (copy), BuilderIconsModule (copy), FoundationModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	

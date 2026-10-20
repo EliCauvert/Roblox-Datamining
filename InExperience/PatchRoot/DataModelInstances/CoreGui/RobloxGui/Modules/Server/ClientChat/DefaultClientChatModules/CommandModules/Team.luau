@@ -1,7 +1,7 @@
 ﻿local Players = game:GetService("Players")
 local list = { "/team ", "/t ", "% " }
 
-function IsTeamCommand(Text: string): boolean --[[ Line: 10 ]]
+function IsTeamCommand(Text: string): boolean
 	-- upvalues: list (copy)
 	for i = 1, #list do
 		local Entry = list[i]
@@ -17,7 +17,7 @@ local Module = {}
 Module.__index = Module
 local UtilModule = require(script.Parent:WaitForChild("Util"))
 
-function Module.EnterTeamChat(p1) --[[ Line: 27 ]]
+function Module.EnterTeamChat(p1)
 	p1.TeamChatEntered = true
 	p1.MessageModeButton.Size = UDim2.new(0, 1000, 1, 0)
 	p1.MessageModeButton.Text = "[Team]"
@@ -30,7 +30,7 @@ function Module.EnterTeamChat(p1) --[[ Line: 27 ]]
 	p1.TextBox.Text = " "
 end
 
-function Module.TextUpdated(p1) --[[ Line: 41 ]]
+function Module.TextUpdated(p1)
 	local Text = p1.TextBox.Text
 	
 	if p1.TeamChatEntered then
@@ -51,20 +51,20 @@ function Module.TextUpdated(p1) --[[ Line: 41 ]]
 	end
 end
 
-function Module.GetMessage(p1) --[[ Line: 64 ]]
+function Module.GetMessage(p1)
 	return if p1.TeamChatEntered then "/t " .. p1.TextBox.Text else p1.TextBox.Text
 end
 
-function Module:ProcessCompletedMessage(): boolean --[[ Line: 71 ]]
+function Module:ProcessCompletedMessage(): boolean
 	return false
 end
 
-function Module.Destroy(p1) --[[ Line: 75 ]]
+function Module.Destroy(p1)
 	p1.MessageModeConnection:disconnect()
 	p1.Destroyed = true
 end
 
-function Module.GetTeamChatColor(p1) --[[ Line: 80 ]]
+function Module.GetTeamChatColor(p1)
 	-- upvalues: Players (copy)
 	local LocalPlayer = Players.LocalPlayer
 	
@@ -72,7 +72,7 @@ function Module.GetTeamChatColor(p1) --[[ Line: 80 ]]
 end
 
 local config = {
-	new = function(ChatWindow, ChatBar, ChatSettings) --[[ Line: 91 ]]
+	new = function(ChatWindow, ChatBar, ChatSettings)
 		-- upvalues: Module (copy)
 		local self = setmetatable({}, Module)
 		self.Destroyed = false
@@ -83,7 +83,7 @@ local config = {
 		self.MessageModeButton = ChatBar:GetMessageModeTextButton()
 		self.OriginalTeamText = ""
 		self.TeamChatEntered = false
-		self.MessageModeConnection = self.MessageModeButton.MouseButton1Click:connect(function() --[[ Line: 102 ]]
+		self.MessageModeConnection = self.MessageModeButton.MouseButton1Click:connect(function()
 			-- upvalues: self (copy)
 			local Text = self.TextBox.Text
 			
@@ -100,7 +100,7 @@ local config = {
 	end
 }
 
-function ProcessMessage(p1, ChatWindow, ChatBar, ChatSettings) --[[ Line: 117 ]]
+function ProcessMessage(p1, ChatWindow, ChatBar, ChatSettings)
 	-- upvalues: config (copy)
 	if ChatBar.TargetChannel == "Team" then return end
 	return if IsTeamCommand(p1) then config.new(ChatWindow, ChatBar, ChatSettings) else nil

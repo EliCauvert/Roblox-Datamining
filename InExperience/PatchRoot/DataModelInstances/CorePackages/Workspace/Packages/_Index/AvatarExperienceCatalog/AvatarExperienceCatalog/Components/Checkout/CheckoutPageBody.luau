@@ -15,7 +15,7 @@ local UseTimedOptionsFtuxModule = require(AvatarExperienceCatalog.Hooks.useTimed
 local FFlagAXMISWithBlackbird = require(Parent.SharedFlags).FFlagAXMISWithBlackbird
 local FFlagAXDurables2Option = require(Parent.AvatarExperienceFlags).FFlagAXDurables2Option
 
-local function filterCartItems(CartItems, Callback) --[[ Line: 30 ]]
+local function filterCartItems(CartItems, Callback)
 	-- upvalues: GetTryOnItemReducerKeyFunction (copy), ReactModule (copy), CheckoutRowItemCardModule (copy), CryoModule (copy)
 	local Elements = {}
 	local LayoutOrder = 0
@@ -29,7 +29,7 @@ local function filterCartItems(CartItems, Callback) --[[ Line: 30 ]]
 	return Elements
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 50 | Named "CheckoutPageBody" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FFlagAXDurables2Option (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), UseTimedOptionsFtuxModule (copy), ReactModule (copy), filterCartItems (copy), Constants (copy), TutilsModule (copy), FoundationModule (copy), FFlagAXMISWithBlackbird (copy), CheckoutErrorBannerModule (copy)
 	local UseTokensResult = if FFlagAXDurables2Option then UseTokensFunction() else nil
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -44,29 +44,29 @@ return ReactModule.memo(function(p1) --[[ Line: 50 | Named "CheckoutPageBody" ]]
 	if FFlagAXDurables2Option then
 		local UseTimedOptionsFtuxModuleResult = UseTimedOptionsFtuxModule()
 		v1, UseStateResult2 = ReactModule.useState(UseTimedOptionsFtuxModuleResult.shouldShow2OptionToolTipInCheckoutPage())
-		UseResult = ReactModule.useCallback(function() --[[ Line: 64 ]]
+		UseResult = ReactModule.useCallback(function()
 			-- upvalues: UseTimedOptionsFtuxModuleResult (copy), UseStateResult2 (ref)
 			UseTimedOptionsFtuxModuleResult.hide2OptionToolTipInCheckoutPage()
 			UseStateResult2(false)
 		end, { UseTimedOptionsFtuxModuleResult })
 	end
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 72 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: filterCartItems (upval), p1 (copy), Constants (upval)
-		return (filterCartItems(p1.cartItems, function(p2): boolean --[[ Line: 73 ]]
+		return (filterCartItems(p1.cartItems, function(p2): boolean
 			-- upvalues: Constants (upval)
 			return Constants.MAKEUP_LOOK_ASSET_TYPES[p2.itemSubType] ~= nil
 		end))
 	end, { p1.cartItems })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 78 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: filterCartItems (upval), p1 (copy), Constants (upval)
-		return (filterCartItems(p1.cartItems, function(p2): boolean --[[ Line: 79 ]]
+		return (filterCartItems(p1.cartItems, function(p2): boolean
 			-- upvalues: Constants (upval)
 			return not Constants.MAKEUP_LOOK_ASSET_TYPES[p2.itemSubType]
 		end))
 	end, { p1.cartItems })
 	local IsFieldCountResultAbove = TutilsModule.fieldCount(UseMemoResult) > 0
 	local IsFieldCountResultAbove1 = TutilsModule.fieldCount(UseMemoResult1) > 0
-	local UseMemoResult2 = ReactModule.useMemo(function(): boolean --[[ Line: 86 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function(): boolean
 		-- upvalues: p1 (copy)
 		for _, cartItem in p1.cartItems do
 			if cartItem.timedOptions and (not cartItem.isOwned or cartItem.expirationTime ~= nil) then

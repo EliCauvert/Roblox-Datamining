@@ -11,9 +11,9 @@ local TextLineEntryModule = require(script.Parent.TextLineEntry)
 local BubbleEntryModule = require(script.Parent.BubbleEntry)
 local _ = require(ChatUIPrimitives.Types)
 
-local function _(p1, p2, FontFace, SelectableRows, SelectionCursor, IsTranslationSettingEnabled, p3, ReportLatestUsername) --[[ Line: 38 | Named "createSlotElementFactory" ]]
+local function _(p1, p2, FontFace, SelectableRows, SelectionCursor, IsTranslationSettingEnabled, p3, ReportLatestUsername)
 	-- upvalues: ReactModule (copy)
-	return function(p4) --[[ Line: 48 ]]
+	return function(p4)
 		-- upvalues: ReactModule (upval), p1 (copy), p2 (copy), FontFace (copy), SelectableRows (copy), SelectionCursor (copy), IsTranslationSettingEnabled (copy), p3 (copy), ReportLatestUsername (copy)
 		return ReactModule.createElement(p1, {
 			getMessageId = p4.getMessageId,
@@ -32,12 +32,12 @@ end
 local Signal = SignalsModule.createSignal({})
 local config = { left = UDim.new(0, 8), right = UDim.new(0, 8) }
 
-return ReactModule.memo(function(p1) --[[ Line: 89 | Named "MessageLayoutContainer" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: Signal (copy), ReactModule (copy), SignalsModule (copy), UseMessagesMapModule (copy), BubbleEntryModule (copy), TextLineEntryModule (copy), UseMessagePoolModule (copy), SignalsReactModule (copy), FoundationModule (copy), BottomLockedScrollViewModule (copy), config (copy)
 	local MessagesSignal = p1.messagesSignal or Signal
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 93 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), MessagesSignal (copy)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 94 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: MessagesSignal (upval)
 			local MessageIds = {}
 			
@@ -47,9 +47,9 @@ return ReactModule.memo(function(p1) --[[ Line: 89 | Named "MessageLayoutContain
 			return MessageIds
 		end)
 	end, { MessagesSignal })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 108 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), SignalsModule (upval), UseMemoResult (copy)
-		return if p1.selectableRows then SignalsModule.createComputed(function(p2) --[[ Line: 112 ]]
+		return if p1.selectableRows then SignalsModule.createComputed(function(p2)
 			-- upvalues: UseMemoResult (upval)
 			local UseMemoResultResult = UseMemoResult(p2)
 			
@@ -60,7 +60,7 @@ return ReactModule.memo(function(p1) --[[ Line: 89 | Named "MessageLayoutContain
 	local BubbleEntryModule1 = if p1.layoutStyle == "bubble" then BubbleEntryModule else TextLineEntryModule
 	local UseSignalStateResult = SignalsReactModule.useSignalState((UseMessagePoolModule({
 		messageIdsSignal = UseMemoResult,
-		createSlotElement = ReactModule.useMemo(function() --[[ Line: 127 ]]
+		createSlotElement = ReactModule.useMemo(function()
 			-- upvalues: BubbleEntryModule1 (copy), UseMessagesMapModuleResult (copy), p1 (copy), UseMemoResult1 (copy), ReactModule (upval)
 			local FontFace = p1.fontFace
 			local SelectableRows = p1.selectableRows
@@ -68,7 +68,7 @@ return ReactModule.memo(function(p1) --[[ Line: 89 | Named "MessageLayoutContain
 			local IsTranslationSettingEnabled = p1.isTranslationSettingEnabled
 			local OnLatestUsernameChanged = p1.onLatestUsernameChanged
 			
-			return function(p2) --[[ Line: 48 ]]
+			return function(p2)
 				-- upvalues: ReactModule (upval), BubbleEntryModule1 (copy), UseMessagesMapModuleResult (copy), FontFace (copy), SelectableRows (copy), SelectionCursor (copy), IsTranslationSettingEnabled (copy), UseMemoResult1 (copy), OnLatestUsernameChanged (copy)
 				return ReactModule.createElement(BubbleEntryModule1, {
 					getMessageId = p2.getMessageId,
@@ -97,7 +97,7 @@ return ReactModule.memo(function(p1) --[[ Line: 89 | Named "MessageLayoutContain
 		scrollView = ReactModule.createElement(BottomLockedScrollViewModule, {
 			Size = UDim2.fromScale(1, 1),
 			contentPadding = p1.contentPadding or config,
-			children = ReactModule.useMemo(function() --[[ Line: 162 ]]
+			children = ReactModule.useMemo(function()
 				-- upvalues: UseSignalStateResult (copy), ReactModule (upval)
 				local Copy = table.clone(UseSignalStateResult)
 				Copy["$layout"] = ReactModule.createElement("UIListLayout", {

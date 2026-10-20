@@ -2,14 +2,14 @@
 local Players = game:GetService("Players")
 local UtilModule = require(script.Parent:WaitForChild("Util"))
 local ChatLocalizationModule = nil
-pcall(function() --[[ Line: 13 ]]
+pcall(function()
 	-- upvalues: ChatLocalizationModule (ref), Chat (copy)
 	ChatLocalizationModule = require(Chat.ClientChatModules.ChatLocalization)
 end)
 
 if ChatLocalizationModule == nil then
 	ChatLocalizationModule = {
-		Get = function(_, _, InGameChatResponseEmotesTemporarilyUnavailable) --[[ Line: 14 ]]
+		Get = function(_, _, InGameChatResponseEmotesTemporarilyUnavailable)
 			return InGameChatResponseEmotesTemporarilyUnavailable
 		end
 	}
@@ -34,18 +34,18 @@ local config1 = {
 }
 local _Color3 = Color3.fromRGB(245, 50, 50)
 
-local function _(Text: string) --[[ Line: 48 | Named "getEmoteName" ]]
+local function _(Text: string)
 	return if string.sub(Text, 1, 3) == "/e " then string.sub(Text, 4) elseif string.sub(Text, 1, 7) == "/emote " then string.sub(Text, 8) else nil
 end
 
-local _ = function(p1, p2) --[[ Line: 58 | Named "sendErrorMessage" ]]
+local _ = function(p1, p2)
 	-- upvalues: ChatLocalizationModule (ref), config1 (copy), _Color3 (copy), UtilModule (copy)
 	UtilModule:SendSystemMessageToSelf(ChatLocalizationModule:Get(p2, config1[p2]), p1, { ChatColor = _Color3 })
 end
 
 return {
 	[UtilModule.KEY_COMMAND_PROCESSOR_TYPE] = UtilModule.COMPLETED_MESSAGE_PROCESSOR,
-	[UtilModule.KEY_PROCESSOR_FUNCTION] = function(Text: string, p1, _): boolean --[[ Line: 67 ]]
+	[UtilModule.KEY_PROCESSOR_FUNCTION] = function(Text: string, p1, _): boolean
 		-- upvalues: config (copy), LocalPlayer (copy), ChatLocalizationModule (ref), config1 (copy), _Color3 (copy), UtilModule (copy)
 		local Segment = if string.sub(Text, 1, 3) == "/e " then string.sub(Text, 4) elseif string.sub(Text, 1, 7) == "/emote " then string.sub(Text, 8) else nil
 		
@@ -115,9 +115,9 @@ return {
 		local Entry = t[string.lower(Segment)]
 		
 		if Entry then
-			spawn(function() --[[ Line: 143 ]]
+			spawn(function()
 				-- upvalues: Humanoid (copy), Entry (ref), CurrentChannel (copy), ChatLocalizationModule (upval), config1 (upval), _Color3 (upval), UtilModule (upval)
-				local Success, Result = pcall(function() --[[ Line: 144 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: Humanoid (upval), Entry (upval)
 					return Humanoid:PlayEmote(Entry)
 				end)

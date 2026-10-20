@@ -5,7 +5,7 @@ local FFlagAppChatPresenceStoreMigrationModule = require(AppChat.Flags.FFlagAppC
 local FFlagAppChatUnreadMessageCountStoreModule = require(AppChat.Flags.FFlagAppChatUnreadMessageCountStore)
 local FFlagAppChatRemoveToggleChatPaused = require(Parent.SharedFlags).FFlagAppChatRemoveToggleChatPaused
 
-return function() --[[ Line: 9 ]]
+return function()
 	-- upvalues: RoduxModule (copy), Parent (copy), AppChat (copy), FFlagAppChatPresenceStoreMigrationModule (copy), FFlagAppChatRemoveToggleChatPaused (copy), FFlagAppChatUnreadMessageCountStoreModule (copy)
 	return RoduxModule.combineReducers({
 		PlaceInfos = require(Parent.PlaceInfoRodux).Reducers.PlaceInfosReducer,

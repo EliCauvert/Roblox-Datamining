@@ -8,7 +8,7 @@ local ControlStateModule = require(Core.Control.Enum.ControlState)
 local SetDefaultModule = require(Parent.Utility.setDefault)
 local _UDim = UDim.new(0, 8)
 
-return function(p1) --[[ Line: 33 | Named "TileOverlay" ]]
+return function(p1)
 	-- upvalues: SetDefaultModule (copy), UseControlStateModule (copy), UseStyleModule (copy), ControlStateModule (copy), ReactModule (copy), _UDim (copy), InteractableModule (copy)
 	local OnActivated = p1.onActivated
 	local SetDefaultModuleResult = SetDefaultModule(p1.isVisible, true)

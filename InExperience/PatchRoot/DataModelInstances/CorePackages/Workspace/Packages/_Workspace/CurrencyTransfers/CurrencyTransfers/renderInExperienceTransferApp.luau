@@ -20,15 +20,15 @@ local InExperienceTransferAppModule = require(CurrencyTransfers.Components.InExp
 local NetworkContext = require(Parent.EconomyCommonCoreScriptHooks).NetworkContext
 local Style = { themeName = "dark", fontName = "gotham" }
 
-local function _() --[[ Line: 31 | Named "createFocusNavigationService" ]]
+local function _()
 	-- upvalues: ReactFocusNavigationModule (copy)
 	return ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
 end
 
-local function createNetworkImpl() --[[ Line: 35 ]]
+local function createNetworkImpl()
 	-- upvalues: HttpRequestModule (copy)
 	return HttpRequestModule.config({
-		requestFunction = function(p1, p2, p3) --[[ Line: 37 ]]
+		requestFunction = function(p1, p2, p3)
 			-- upvalues: HttpRequestModule (upval)
 			return (HttpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3))
 		end,
@@ -37,7 +37,7 @@ local function createNetworkImpl() --[[ Line: 35 ]]
 	})
 end
 
-return function() --[[ Line: 46 | Named "renderInExperienceTransferApp" ]]
+return function()
 	-- upvalues: CoreGui (copy), createNetworkImpl (copy), ReactFocusNavigationModule (copy), RoduxModule (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), AppStyleProvider (copy), Style (copy), NetworkContext (copy), RoactRoduxModule (copy), DesignTokenProvider (copy), SelectionCursorProvider (copy), CursorProvider (copy), Provider (copy), InExperienceTransferAppModule (copy), ReactRobloxModule (copy)
 	local InExperienceTransferApp = Instance.new("Folder")
 	InExperienceTransferApp.Name = "InExperienceTransferApp"
@@ -49,7 +49,7 @@ return function() --[[ Line: 46 | Named "renderInExperienceTransferApp" ]]
 		StyleProvider = ReactModule.createElement(AppStyleProvider, { style = Style }, {
 			NetworkProvider = ReactModule.createElement(NetworkContext.Provider, { value = createNetworkImpl() }, {
 				StoreProvider = ReactModule.createElement(RoactRoduxModule.StoreProvider, {
-					store = RoduxModule.Store.new(function(p1) --[[ Line: 55 ]]
+					store = RoduxModule.Store.new(function(p1)
 						return p1 or {}
 					end)
 				}, {

@@ -1,6 +1,6 @@
 ﻿local GetPlayersFromServiceModule = require(script.Parent.getPlayersFromService)
 
-return function(Text: string, UserId, Key) --[[ Line: 15 | Named "resolvePlayerTarget" ]]
+return function(Text: string, UserId, Key)
 	-- upvalues: GetPlayersFromServiceModule (copy)
 	if not Text or Text == "" then
 		return {

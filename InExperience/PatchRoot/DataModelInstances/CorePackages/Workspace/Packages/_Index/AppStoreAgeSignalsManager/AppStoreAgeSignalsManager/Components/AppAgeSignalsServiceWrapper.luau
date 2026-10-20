@@ -4,19 +4,19 @@ local AppAgeSignalsTelemetryConfigsModule = require(AppStoreAgeSignalsManager.Te
 local EnableAppAgeSignalsService = game:DefineFastFlag("EnableAppAgeSignalsService", false)
 
 return {
-	isAvailable = function() --[[ Line: 10 ]]
+	isAvailable = function()
 		-- upvalues: EnableAppAgeSignalsService (copy), AppAgeSignalsTelemetryConfigsModule (copy)
 		if not EnableAppAgeSignalsService then
 			return false
 		end
-		local Success, Result = pcall(function() --[[ Line: 14 ]]
+		local Success, Result = pcall(function()
 			return game:GetService("AppAgeSignalsService")
 		end)
 		
 		if not Success or not Result then
 			return false
 		end
-		local Success1, Result1 = pcall(function() --[[ Line: 20 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: Result (copy)
 			return Result:IsAvailable()
 		end)
@@ -32,10 +32,10 @@ return {
 			return false
 		end
 	end,
-	getAppAgeSignalsAsync = function() --[[ Line: 32 ]]
+	getAppAgeSignalsAsync = function()
 		-- upvalues: PromiseModule (copy)
-		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 33 ]]
-			local Success, Result = pcall(function() --[[ Line: 34 ]]
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
+			local Success, Result = pcall(function()
 				return game:GetService("AppAgeSignalsService"):GetAppAgeSignalsAsync()
 			end)
 			

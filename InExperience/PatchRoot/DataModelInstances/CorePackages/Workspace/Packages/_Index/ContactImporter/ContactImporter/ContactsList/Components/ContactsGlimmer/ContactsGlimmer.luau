@@ -4,11 +4,11 @@ local Skeleton = DependenciesModule.Foundation.Skeleton
 local WithStyleFunction = DependenciesModule.UIBlox.Style.withStyle
 local ContactsGlimmer = Roact.PureComponent:extend("ContactsGlimmer")
 
-function ContactsGlimmer.render(p1) --[[ Line: 25 ]]
+function ContactsGlimmer.render(p1)
 	-- upvalues: WithStyleFunction (copy), Roact (copy), Skeleton (copy)
 	local Props = p1.props
 	
-	return WithStyleFunction(function(p2) --[[ Line: 28 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: Roact (upval), Props (copy), p1 (copy), Skeleton (upval)
 		return Roact.createElement("Frame", {
 			BackgroundTransparency = 1,

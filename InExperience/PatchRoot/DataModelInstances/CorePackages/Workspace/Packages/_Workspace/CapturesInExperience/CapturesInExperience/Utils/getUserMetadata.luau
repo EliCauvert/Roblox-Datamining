@@ -9,7 +9,7 @@ local CaptureMetadataMaxAvatars = game:DefineFastInt("CaptureMetadataMaxAvatars"
 local CaptureMetadataMinAvatarBoundingBoxPixels = game:DefineFastInt("CaptureMetadataMinAvatarBoundingBoxPixels", 200)
 local CaptureMetadataMinHitRatePercentage = game:DefineFastInt("CaptureMetadataMinHitRatePercentage", 50)
 
-local function _() --[[ Line: 17 | Named "getViewportSize" ]]
+local function _()
 	local CurrentCamera = workspace.CurrentCamera
 	
 	if not CurrentCamera then return end
@@ -18,12 +18,12 @@ end
 
 local RoundFunction = math.round
 
-local _ = function(Vector) --[[ Line: 28 | Named "vec2ToTable" ]]
+local _ = function(Vector)
 	-- upvalues: RoundFunction (copy)
 	return { x = RoundFunction(Vector.X), y = RoundFunction(Vector.Y) }
 end
 
-return function() --[[ Line: 32 ]]
+return function()
 	-- upvalues: CaptureMetadataGetAvatarsTimeoutMs (copy), AvatarIdentification (copy), DashModule (copy), GuiService (copy), CaptureMetadataMaxAvatars (copy), CaptureMetadataMinHitRatePercentage (copy), CaptureMetadataMinAvatarBoundingBoxPixels (copy), GetAvatarAssetsModule (copy), RoundFunction (copy)
 	local CurrentCamera = workspace.CurrentCamera
 	local ViewportSize = if CurrentCamera then CurrentCamera.ViewportSize else nil
@@ -38,7 +38,7 @@ return function() --[[ Line: 32 ]]
 		value.boundingBox.min = value.boundingBox.min * ViewportSize * RawScreenScale
 		value.boundingBox.max = value.boundingBox.max * ViewportSize * RawScreenScale
 	end
-	table.sort(ValuesResult, function(A, B): boolean --[[ Line: 50 ]]
+	table.sort(ValuesResult, function(A, B): boolean
 		return (B.boundingBox.max - B.boundingBox.min).Magnitude < (A.boundingBox.max - A.boundingBox.min).Magnitude
 	end)
 	local Count = 0

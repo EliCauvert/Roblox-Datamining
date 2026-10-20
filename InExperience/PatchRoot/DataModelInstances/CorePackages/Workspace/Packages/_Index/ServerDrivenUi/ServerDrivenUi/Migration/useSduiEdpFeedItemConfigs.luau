@@ -9,7 +9,7 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local GetSduiFeedStoreModule = require(ServerDrivenUi.DataStore.getSduiFeedStore)
 local _ = require(ServerDrivenUi.DataStore.SduiFeedStoreTypes)
 
-local function _(LayoutOrder, p1, p2, ItemKey, Callback: (any) -> ()) --[[ Line: 28 | Named "getLayoutOrder" ]]
+local function _(LayoutOrder, p1, p2, ItemKey, Callback: (any) -> ())
 	if LayoutOrder and p2[LayoutOrder] then
 		Callback({
 			layoutOrder = LayoutOrder,
@@ -23,11 +23,11 @@ local function _(LayoutOrder, p1, p2, ItemKey, Callback: (any) -> ()) --[[ Line:
 	end
 end
 
-return function(p1) --[[ Line: 65 | Named "useSduiEdpFeedItemConfigs" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), GetSduiFeedStoreModule (copy), SignalsReactModule (copy), SduiErrors (copy), SduiComponent (copy)
-	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 66 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), GetSduiFeedStoreModule (upval)
-		return function(p2) --[[ Line: 67 ]]
+		return function(p2)
 			-- upvalues: p1 (upval), GetSduiFeedStoreModule (upval)
 			if not p1.shouldInterleaveSdui then
 				return {}
@@ -45,7 +45,7 @@ return function(p1) --[[ Line: 65 | Named "useSduiEdpFeedItemConfigs" ]]
 			return t
 		end
 	end, { p1.storeKey, p1.shouldInterleaveSdui })))
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 89 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		local t = {}
 		
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 65 | Named "useSduiEdpFeedItemConfigs" ]]
 		end
 		return t
 	end, { p1.portraitLayoutConfig, p1.shouldInterleaveSdui })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 100 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		local t = {}
 		
@@ -69,7 +69,7 @@ return function(p1) --[[ Line: 65 | Named "useSduiEdpFeedItemConfigs" ]]
 		end
 		return t
 	end, { p1.landscapeLayoutConfig, p1.shouldInterleaveSdui })
-	local UseResult = ReactModule.useCallback(function(p3, ItemKey, p4) --[[ Line: 112 ]]
+	local UseResult = ReactModule.useCallback(function(p3, ItemKey, p4)
 		-- upvalues: p1 (copy), UseMemoResult (copy), UseMemoResult1 (copy)
 		if not p1.shouldInterleaveSdui then
 			return {}
@@ -111,7 +111,7 @@ return function(p1) --[[ Line: 65 | Named "useSduiEdpFeedItemConfigs" ]]
 		p1.shouldInterleaveSdui
 	})
 	
-	return ReactModule.useMemo(function() --[[ Line: 153 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), UseSignalStateResult (copy), UseResult (copy), SduiErrors (upval), ReactModule (upval), SduiComponent (upval)
 		if not p1.shouldInterleaveSdui then
 			return {}
@@ -134,7 +134,7 @@ return function(p1) --[[ Line: 65 | Named "useSduiEdpFeedItemConfigs" ]]
 				t[i] = {
 					portraitLayoutOrder = UseResultResult.portrait,
 					landscapeLayoutOrder = UseResultResult.landscape,
-					renderComponent = function() --[[ Line: 176 ]]
+					renderComponent = function()
 						-- upvalues: ReactModule (upval), SduiComponent (upval), SduiEdpFeedItemName (copy), SduiConfig (copy), p1 (upval)
 						return ReactModule.createElement(SduiComponent, {
 							debugName = SduiEdpFeedItemName,

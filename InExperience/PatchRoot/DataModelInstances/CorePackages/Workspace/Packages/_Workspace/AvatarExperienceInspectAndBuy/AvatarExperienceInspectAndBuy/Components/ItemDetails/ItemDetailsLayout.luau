@@ -9,14 +9,14 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local ViewTypeModule = require(AvatarExperienceInspectAndBuy.Enums.ViewType)
 local CryoModule = require(Parent.Cryo)
 
-return function(p1) --[[ Line: 21 | Named "ItemDetailsLayout" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), CryoModule (copy), ViewTypeModule (copy), FoundationModule (copy), ItemDetailsViewModule (copy), BuyActionBarLayoutModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Size2700 = UseTokensResult.Size.Size_2700
 	local IsViewMatch = p1.view == ViewTypeModule.Compact
 	
 	return ReactModule.createElement(FoundationModule.View, { tag = "size-full" }, {
-		ItemDetailsView = ReactModule.createElement(ItemDetailsViewModule, (ReactModule.useMemo(function() --[[ Line: 27 ]]
+		ItemDetailsView = ReactModule.createElement(ItemDetailsViewModule, (ReactModule.useMemo(function()
 			-- upvalues: CryoModule (upval), p1 (copy), Size2700 (copy)
 			return CryoModule.Dictionary.join(p1.itemDetailsViewProps, { buyActionBarOffset = Size2700 })
 		end, { p1.itemDetailsViewProps, Size2700 }))),

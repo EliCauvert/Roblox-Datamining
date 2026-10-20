@@ -2,7 +2,7 @@
 local ReactModule = require(Parent.React)
 local CompositionStyleSheet = require(Parent.AppComposition).CompositionStyleSheet
 
-return function() --[[ Line: 9 | Named "BuildExperienceCompositionStyleSheet" ]]
+return function()
 	-- upvalues: CompositionStyleSheet (copy), ReactModule (copy)
 	return if CompositionStyleSheet then ReactModule.createElement(CompositionStyleSheet) else nil
 end

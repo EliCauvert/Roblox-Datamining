@@ -127,7 +127,7 @@ local config18 = {
 	lastUpdated = { 25, 9, 24 }
 }
 
-local function _(Action, PlayWithRewardFlowId, UniverseId, ProductId) --[[ Line: 241 | Named "getCoachmarkCustomFields" ]]
+local function _(Action, PlayWithRewardFlowId, UniverseId, ProductId)
 	return {
 		action = Action,
 		playWithRewardFlowId = PlayWithRewardFlowId,
@@ -137,7 +137,7 @@ local function _(Action, PlayWithRewardFlowId, UniverseId, ProductId) --[[ Line:
 end
 
 return {
-	logPlayWithRewardAdRequested = function(PlayWithRewardFlowId, UniverseId, p1) --[[ Line: 250 ]]
+	logPlayWithRewardAdRequested = function(PlayWithRewardFlowId, UniverseId, p1)
 		-- upvalues: FFlagSduiPlayWithRewardRefactor (copy), TelemetryService (copy), config (copy), StandardizedFields (copy), config10 (copy), StandardizedFields1 (copy)
 		TelemetryService:LogEvent(config, {
 			standardizedFields = StandardizedFields,
@@ -152,7 +152,7 @@ return {
 			customFields = {}
 		}, 1)
 	end,
-	logPlayWithRewardAdReceived = function(PlayWithRewardFlowId, UniverseId, IsSuccessful, AdAvailabilityResult, FetchLatencyMs, ProductId, p1) --[[ Line: 275 ]]
+	logPlayWithRewardAdReceived = function(PlayWithRewardFlowId, UniverseId, IsSuccessful, AdAvailabilityResult, FetchLatencyMs, ProductId, p1)
 		-- upvalues: FFlagSduiPlayWithRewardRefactor (copy), TelemetryService (copy), config1 (copy), StandardizedFields (copy), config11 (copy), StandardizedFields1 (copy), config18 (copy)
 		TelemetryService:LogEvent(config1, {
 			standardizedFields = StandardizedFields,
@@ -181,7 +181,7 @@ return {
 			}, FetchLatencyMs)
 		end
 	end,
-	logPlayWithRewardBannerShown = function(PlayWithRewardFlowId, UniverseId, ShowState, ProductId, ExperimentUiVariant) --[[ Line: 320 ]]
+	logPlayWithRewardBannerShown = function(PlayWithRewardFlowId, UniverseId, ShowState, ProductId, ExperimentUiVariant)
 		-- upvalues: TelemetryService (copy), config2 (copy), StandardizedFields (copy), config12 (copy), StandardizedFields1 (copy)
 		TelemetryService:LogEvent(config2, {
 			standardizedFields = StandardizedFields,
@@ -198,7 +198,7 @@ return {
 			customFields = {}
 		}, 1)
 	end,
-	logPlayWithRewardButtonClicked = function(PlayWithRewardFlowId, UniverseId, ProductId) --[[ Line: 349 ]]
+	logPlayWithRewardButtonClicked = function(PlayWithRewardFlowId, UniverseId, ProductId)
 		-- upvalues: TelemetryService (copy), config3 (copy), StandardizedFields (copy), config13 (copy), StandardizedFields1 (copy)
 		TelemetryService:LogEvent(config3, {
 			standardizedFields = StandardizedFields,
@@ -213,7 +213,7 @@ return {
 			customFields = {}
 		}, 1)
 	end,
-	logPlayWithRewardAdPlaybackAttempted = function(PlayWithRewardFlowId, UniverseId, ProductId) --[[ Line: 370 ]]
+	logPlayWithRewardAdPlaybackAttempted = function(PlayWithRewardFlowId, UniverseId, ProductId)
 		-- upvalues: TelemetryService (copy), config4 (copy), StandardizedFields (copy), config14 (copy), StandardizedFields1 (copy)
 		TelemetryService:LogEvent(config4, {
 			standardizedFields = StandardizedFields,
@@ -228,7 +228,7 @@ return {
 			customFields = {}
 		}, 1)
 	end,
-	logPlayWithRewardAdPlaybackStopped = function(PlayWithRewardFlowId, UniverseId, AdPlaybackStatus, ProductId) --[[ Line: 395 ]]
+	logPlayWithRewardAdPlaybackStopped = function(PlayWithRewardFlowId, UniverseId, AdPlaybackStatus, ProductId)
 		-- upvalues: TelemetryService (copy), config5 (copy), StandardizedFields (copy), config15 (copy), StandardizedFields1 (copy)
 		TelemetryService:LogEvent(config5, {
 			standardizedFields = StandardizedFields,
@@ -244,7 +244,7 @@ return {
 			customFields = { adPlaybackStatus = AdPlaybackStatus }
 		}, 1)
 	end,
-	logPlayWithRewardGameJoinInitiated = function(PlayWithRewardFlowId, UniverseId, ProductId) --[[ Line: 422 ]]
+	logPlayWithRewardGameJoinInitiated = function(PlayWithRewardFlowId, UniverseId, ProductId)
 		-- upvalues: TelemetryService (copy), config6 (copy), StandardizedFields (copy), config16 (copy), StandardizedFields1 (copy)
 		TelemetryService:LogEvent(config6, {
 			standardizedFields = StandardizedFields,
@@ -259,7 +259,7 @@ return {
 			customFields = {}
 		}, 1)
 	end,
-	logPlayWithRewardBlackoutCurtainAction = function(PlayWithRewardFlowId, UniverseId, Action, ProductId) --[[ Line: 447 ]]
+	logPlayWithRewardBlackoutCurtainAction = function(PlayWithRewardFlowId, UniverseId, Action, ProductId)
 		-- upvalues: TelemetryService (copy), config7 (copy), StandardizedFields (copy)
 		TelemetryService:LogEvent(config7, {
 			standardizedFields = StandardizedFields,
@@ -271,7 +271,7 @@ return {
 			}
 		})
 	end,
-	logPlayWithRewardShimmerShown = function(PlayWithRewardFlowId, UniverseId) --[[ Line: 466 ]]
+	logPlayWithRewardShimmerShown = function(PlayWithRewardFlowId, UniverseId)
 		-- upvalues: TelemetryService (copy), config8 (copy), StandardizedFields (copy)
 		TelemetryService:LogEvent(config8, {
 			standardizedFields = StandardizedFields,
@@ -281,7 +281,7 @@ return {
 			}
 		})
 	end,
-	logPlayWithRewardCoachmark = function(Action, PlayWithRewardFlowId, UniverseId, ProductId) --[[ Line: 478 ]]
+	logPlayWithRewardCoachmark = function(Action, PlayWithRewardFlowId, UniverseId, ProductId)
 		-- upvalues: TelemetryService (copy), config9 (copy), StandardizedFields (copy), config17 (copy), StandardizedFields1 (copy)
 		TelemetryService:LogEvent(config9, {
 			standardizedFields = StandardizedFields,

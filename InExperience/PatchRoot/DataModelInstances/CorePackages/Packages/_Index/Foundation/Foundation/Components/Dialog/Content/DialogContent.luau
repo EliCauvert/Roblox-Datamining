@@ -8,7 +8,7 @@ local UseScrollBarPaddingModule = require(script.Parent.useScrollBarPadding)
 local UseDialogVariantsFunction = require(script.Parent.Parent.useDialogVariants).useDialogVariants
 local UseDialogModule = require(script.Parent.Parent.useDialog)
 
-return function(Gui) --[[ Line: 19 | Named "DialogContent" ]]
+return function(Gui)
 	-- upvalues: UseScrollBarPaddingModule (copy), UseDialogVariantsFunction (copy), UseDialogModule (copy), ReactModule (copy), ScrollViewModule (copy), WithCommonPropsModule (copy), VisibilityModule (copy)
 	local UseScrollBarPaddingModuleResult, UseScrollBarPaddingModuleResult2, UseScrollBarPaddingModuleResult3 = UseScrollBarPaddingModule()
 	local UseDialogVariantsResult = UseDialogVariantsFunction()
@@ -37,7 +37,7 @@ return function(Gui) --[[ Line: 19 | Named "DialogContent" ]]
 		tag = UseDialogVariantsResult.content.tag
 	}), {
 		ScrollPadding = ReactModule.createElement("UIPadding", {
-			PaddingRight = UseScrollBarPaddingModuleResult2:map(function(Offset): UDim --[[ Line: 55 ]]
+			PaddingRight = UseScrollBarPaddingModuleResult2:map(function(Offset): UDim
 				return UDim.new(0, Offset)
 			end)
 		}),

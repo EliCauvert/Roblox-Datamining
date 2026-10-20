@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("FixSettingshubImportOrder", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("FixSettingshubImportOrder")
 end

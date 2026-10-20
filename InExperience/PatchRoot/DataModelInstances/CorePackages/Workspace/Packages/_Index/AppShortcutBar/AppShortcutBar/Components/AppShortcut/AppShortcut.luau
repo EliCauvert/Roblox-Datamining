@@ -16,7 +16,7 @@ local Shortcut = UIBloxModule.App.Navigation.Shortcut
 local IconWithHoldAnimationModule = require(script.Parent.IconWithHoldAnimation)
 local ShortcutUseDispatchSyntheticEvent = game:DefineFastFlag("ShortcutUseDispatchSyntheticEvent", false)
 
-local function _(List, p1): number --[[ Line: 27 | Named "getKeyLabelsWidth" ]]
+local function _(List, p1): number
 	-- upvalues: KeyLabelUtilities (copy)
 	local NewKeyLabelWidth = 0
 	
@@ -26,13 +26,13 @@ local function _(List, p1): number --[[ Line: 27 | Named "getKeyLabelsWidth" ]]
 	return NewKeyLabelWidth
 end
 
-local function useOnShortcutActivated(Item) --[[ Line: 35 ]]
+local function useOnShortcutActivated(Item)
 	-- upvalues: ShortcutUseDispatchSyntheticEvent (copy), ReactModule (copy), ReactFocusNavigationModule (copy)
 	if ShortcutUseDispatchSyntheticEvent then
 		local UseContextResult = ReactModule.useContext(ReactFocusNavigationModule.FocusNavigationContext)
 		local UseDispatchSyntheticEventResult = ReactFocusNavigationModule.useDispatchSyntheticEvent()
 		
-		return (ReactModule.useCallback(function() --[[ Line: 40 ]]
+		return (ReactModule.useCallback(function()
 			-- upvalues: Item (copy), UseDispatchSyntheticEventResult (copy), UseContextResult (copy)
 			if Item.hasProgress then
 				UseDispatchSyntheticEventResult(Item.eventName, UseContextResult.focusedGuiObject:getValue(), {
@@ -61,9 +61,9 @@ local function useOnShortcutActivated(Item) --[[ Line: 35 ]]
 	else
 		local UseContextResult1 = ReactModule.useContext(ReactFocusNavigationModule.FocusNavigationContext)
 		
-		return (ReactModule.useMemo(function() --[[ Line: 61 ]]
+		return (ReactModule.useMemo(function()
 			-- upvalues: UseContextResult1 (copy), Item (copy)
-			return function() --[[ Line: 62 ]]
+			return function()
 				-- upvalues: UseContextResult1 (upval), Item (upval)
 				local Selection = UseContextResult1._engineInterface.getSelection()
 				
@@ -88,7 +88,7 @@ local function useOnShortcutActivated(Item) --[[ Line: 35 ]]
 	end
 end
 
-function AppShortcut(p2) --[[ Line: 85 ]]
+function AppShortcut(p2)
 	-- upvalues: UseStyleFunction (copy), UseTokensFunction (copy), KeyLabelUtilities (copy), ReactModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), KeyLabel (copy), IconWithHoldAnimationModule (copy), Icon (copy), useOnShortcutActivated (copy), Shortcut (copy), StateLayer (copy)
 	local LayoutOrder = p2.layoutOrder
 	local Item = p2.item
@@ -114,14 +114,14 @@ function AppShortcut(p2) --[[ Line: 85 ]]
 		SizeRatio = UseTokensResult.Size.Size_600
 		SizeRatio1 = UseTokensResult.Size.Size_600
 	end
-	local UseMemoResult = ReactModule.useMemo(function(): UDim2 --[[ Line: 107 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): UDim2
 		-- upvalues: UseTokensResult (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Item (copy), TextService (upval), SizeRatio (ref)
 		local LabelMedium = UseTokensResult.Typography.LabelMedium
 		local _Vector2 = Vector2.new(1e999, 1e999)
 		
 		return UDim2.new(0, SizeRatio + UseTokensResult.Gap.XSmall + (if FoundationFontFaceMigration then GetTextSizeFunction(Item.text, math.floor(LabelMedium.FontSize), LabelMedium.Font, _Vector2, { addTemporaryPadding = false }) else TextService:GetTextSize(Item.text, math.floor(LabelMedium.FontSize), LabelMedium.Font, _Vector2)).X, 1, 0)
 	end, { UseTokensResult, SizeRatio, Item.text })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 124 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: IsTable (copy), ReactModule (upval), Item (copy), KeyLabel (upval)
 		if not IsTable then
 			return nil
@@ -162,7 +162,7 @@ function AppShortcut(p2) --[[ Line: 85 ]]
 				labelTextSize = UseTokensResult.Typography.LabelMedium.FontSize,
 				labelColorStyle = UseTokensResult.Color.Label,
 				labelFontStyle = UseTokensResult.Typography.LabelMedium,
-				renderIcon = ReactModule.useCallback(function(p3) --[[ Line: 146 ]]
+				renderIcon = ReactModule.useCallback(function(p3)
 					-- upvalues: Item (copy), ReactModule (upval), IconWithHoldAnimationModule (upval), SizeRatio (ref), SizeRatio1 (ref), UseTokensResult (copy), IsTable (copy), UseMemoResult1 (copy), Icon (upval)
 					return if Item.hasProgress then ReactModule.createElement(IconWithHoldAnimationModule, {
 						layoutOrder = p3.layoutOrder,
@@ -192,7 +192,7 @@ function AppShortcut(p2) --[[ Line: 85 ]]
 			selectable = false,
 			zIndex = 1,
 			cornerRadius = UDim.new(0, UseTokensResult.Radius.Medium),
-			size = ReactModule.useMemo(function(): UDim2 --[[ Line: 120 ]]
+			size = ReactModule.useMemo(function(): UDim2
 				-- upvalues: UseMemoResult (copy), UseTokensResult (copy)
 				return UseMemoResult + UDim2.fromOffset(UseTokensResult.Size.Size_100 * 2, 0)
 			end, { UseMemoResult, UseTokensResult }),

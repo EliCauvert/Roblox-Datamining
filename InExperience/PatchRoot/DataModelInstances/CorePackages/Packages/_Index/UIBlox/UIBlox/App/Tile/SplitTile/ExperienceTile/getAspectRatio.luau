@@ -4,7 +4,7 @@ local config = {
 	[AspectRatioModeModule.Square] = 1
 }
 
-return function(p1) --[[ Line: 14 | Named "getAspectRatio" ]]
+return function(p1)
 	-- upvalues: config (copy)
 	local Entry = config[p1]
 	

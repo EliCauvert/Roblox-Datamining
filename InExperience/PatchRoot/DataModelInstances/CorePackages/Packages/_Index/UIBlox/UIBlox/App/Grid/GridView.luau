@@ -28,7 +28,7 @@ GridView.validateProps = TModule.strictInterface({
 	isRoactGamepadEnabled = TModule.optional(TModule.boolean)
 })
 
-function GridView.itemsAreVisible(p1): boolean --[[ Line: 60 ]]
+function GridView.itemsAreVisible(p1): boolean
 	return p1.state.isInDataModel and (p1.state.containerWidth ~= 0 and p1.props.itemSize.X ~= 0)
 end
 
@@ -38,7 +38,7 @@ GridView.defaultProps = {
 	isRoactGamepadEnabled = true
 }
 
-function GridView.init(p1) --[[ Line: 74 ]]
+function GridView.init(p1)
 	-- upvalues: RoactModule (copy), RoactGamepadModule (copy)
 	p1.currentItemsPerRow = -1
 	p1.frameRef = RoactModule.createRef()
@@ -50,10 +50,10 @@ function GridView.init(p1) --[[ Line: 74 ]]
 	}
 	p1.focusableRefs = p1.props.isRoactGamepadEnabled and RoactGamepadModule.createRefCache() or {}
 	
-	function p1.onAncestryChanged(Frame: Frame) --[[ Line: 87 ]]
+	function p1.onAncestryChanged(Frame: Frame)
 		-- upvalues: p1 (copy)
 		if Frame:IsDescendantOf(game) then
-			p1:setState(function(State) --[[ Line: 89 ]]
+			p1:setState(function(State)
 				-- upvalues: Frame (copy)
 				return if State.isInDataModel and State.containerWidth == Frame.AbsoluteSize.X then nil else {
 					isInDataModel = true,
@@ -64,7 +64,7 @@ function GridView.init(p1) --[[ Line: 74 ]]
 	end
 end
 
-function GridView.render(p1) --[[ Line: 102 ]]
+function GridView.render(p1)
 	-- upvalues: RoactModule (copy), RoactGamepadModule (copy), UIBloxConfigModule (copy)
 	local Items = p1.props.items
 	local CountItems = #Items
@@ -100,14 +100,14 @@ function GridView.render(p1) --[[ Line: 102 ]]
 		Smallest = math.min(CountItems, (math.min(Smallest1, Floored2 + (math.floor((p1.props.windowHeight + ItemPadding.Y) / (ItemSize.Y + ItemPadding.Y)) + 2)) + 1) * Floored)
 		YOffset = Floored2 * ItemSize.Y + Floored2 * ItemPadding.Y
 	end
-	local function _(p2: number, p3: number) --[[ Line: 152 | Named "getItemIndexRef" ]]
+	local function _(p2: number, p3: number)
 		-- upvalues: Floored (ref), Largest (ref), Smallest (ref), p1 (copy)
 		local NewFloored = 1 + ((p2 - 1) * Floored + (p3 - 1))
 		
 		return Largest <= NewFloored and NewFloored <= Smallest and (p2 > 0 and p3 > 0 and p3 <= Floored) and p1.focusableRefs[NewFloored] or nil
 	end
 	
-	local function renderItem(DefaultChildIndex: number) --[[ Line: 161 ]]
+	local function renderItem(DefaultChildIndex: number)
 		-- upvalues: Floored (ref), p1 (copy), RoactModule (upval), RoactGamepadModule (upval), XOffset (ref), YOffset (ref), ItemSize (copy), Largest (ref), Smallest (ref), Items (copy), UIBloxConfigModule (upval)
 		local NewFloored = math.floor((DefaultChildIndex - 1) / Floored) + 1
 		local NewDefaultChildIndex = 1 + (DefaultChildIndex - 1) % Floored
@@ -168,7 +168,7 @@ function GridView.render(p1) --[[ Line: 102 ]]
 		BackgroundTransparency = 1,
 		LayoutOrder = p1.props.LayoutOrder,
 		Size = UDim2.new(1, 0, 0, NewSmallest),
-		[RoactModule.Change.AbsolutePosition] = if p1.props.windowHeight == nil then nil else function(Frame) --[[ Line: 238 ]]
+		[RoactModule.Change.AbsolutePosition] = if p1.props.windowHeight == nil then nil else function(Frame)
 			-- upvalues: p1 (copy)
 			if p1.isMounted then
 				p1:setState({
@@ -176,7 +176,7 @@ function GridView.render(p1) --[[ Line: 102 ]]
 				})
 			end
 		end or nil,
-		[RoactModule.Change.AbsoluteSize] = function(Frame: Frame) --[[ Line: 245 ]]
+		[RoactModule.Change.AbsoluteSize] = function(Frame: Frame)
 			-- upvalues: p1 (copy)
 			if p1.isMounted then
 				if p1.state.isInDataModel then
@@ -198,13 +198,13 @@ function GridView.render(p1) --[[ Line: 102 ]]
 	}, t)
 end
 
-function GridView.didMount(p2) --[[ Line: 273 ]]
+function GridView.didMount(p2)
 	p2.isMounted = true
 	local FrameRef = p2.props.frameRef or p2.frameRef
 	
 	if FrameRef:getValue() and FrameRef:getValue().AbsoluteSize.X ~= 0 then
 		if FrameRef:getValue():IsDescendantOf(game) then
-			p2:setState(function(_) --[[ Line: 283 ]]
+			p2:setState(function(_)
 				-- upvalues: FrameRef (copy)
 				return if FrameRef:getValue() then {
 					isInDataModel = true,
@@ -213,7 +213,7 @@ function GridView.didMount(p2) --[[ Line: 273 ]]
 			end)
 		end
 		if p2.props.onWidthChanged ~= nil then
-			delay(0, function() --[[ Line: 296 ]]
+			delay(0, function()
 				-- upvalues: FrameRef (copy), p2 (copy)
 				if FrameRef:getValue() then
 					p2.props.onWidthChanged(FrameRef:getValue().AbsoluteSize.X)
@@ -223,11 +223,11 @@ function GridView.didMount(p2) --[[ Line: 273 ]]
 	end
 end
 
-function GridView.willUnmount(p2) --[[ Line: 305 ]]
+function GridView.willUnmount(p2)
 	p2.isMounted = false
 end
 
-return RoactModule.forwardRef(function(p2, FrameRef) --[[ Line: 309 ]]
+return RoactModule.forwardRef(function(p2, FrameRef)
 	-- upvalues: RoactModule (copy), GridView (copy), CryoModule (copy)
 	return RoactModule.createElement(GridView, CryoModule.Dictionary.join(p2, { frameRef = FrameRef }))
 end)

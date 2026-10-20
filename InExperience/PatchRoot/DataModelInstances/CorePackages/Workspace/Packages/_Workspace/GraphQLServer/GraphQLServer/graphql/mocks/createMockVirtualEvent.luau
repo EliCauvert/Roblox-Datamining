@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("GraphQLServer").graphql.generatedTypes)
 
-return function(Id) --[[ Line: 5 | Named "createMockVirtualEvent" ]]
+return function(Id)
 	local _DateTime = DateTime.now()
 	local _DateTime1 = DateTime.fromUnixTimestamp(_DateTime.UnixTimestamp + 86400)
 	

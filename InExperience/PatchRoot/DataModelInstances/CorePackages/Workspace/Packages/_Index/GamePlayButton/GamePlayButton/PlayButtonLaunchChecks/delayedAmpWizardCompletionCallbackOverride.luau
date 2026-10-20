@@ -7,13 +7,13 @@ local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3D
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 local GetLegacyNavigationStore = if FFlagSignalsNavP3Dispatch then require(Parent.NavigationRodux).GetLegacyNavigationStore else nil
 
-return function(Callback, p1: number) --[[ Line: 16 ]]
+return function(Callback, p1: number)
 	-- upvalues: AccessResponseEnum (copy), FFlagSignalsNavP3Dispatch (copy), GetLegacyNavigationStore (copy), Selectors (copy), AppPage (copy), NavigationCommands (copy), NavigateBackFunction (copy)
-	return if p1 and p1 > 0 then function(p2, Granted, p3) --[[ Line: 24 ]]
+	return if p1 and p1 > 0 then function(p2, Granted, p3)
 		-- upvalues: AccessResponseEnum (upval), p1 (copy), FFlagSignalsNavP3Dispatch (upval), GetLegacyNavigationStore (upval), Selectors (upval), AppPage (upval), NavigationCommands (upval), NavigateBackFunction (upval), Callback (copy)
 		if not p2 or not p2.getState or not p2.dispatch then return end
 		if Granted == AccessResponseEnum.Granted then
-			task.delay(p1 / 1000, function() --[[ Line: 30 ]]
+			task.delay(p1 / 1000, function()
 				-- upvalues: FFlagSignalsNavP3Dispatch (upval), GetLegacyNavigationStore (upval), Selectors (upval), p2 (copy), AppPage (upval), NavigationCommands (upval), NavigateBackFunction (upval), Callback (upval), Granted (copy), p3 (copy)
 				if (if FFlagSignalsNavP3Dispatch then GetLegacyNavigationStore(false).getCurrentPageName(false) else Selectors.selectCurrentPageName(p2:getState())) == AppPage.AmpWizardContainer then
 					if FFlagSignalsNavP3Dispatch then

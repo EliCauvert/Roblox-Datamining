@@ -31,34 +31,34 @@ local DefaultSubscriptionObserverErrorCallback = nil
 local Flag = false
 local self = setmetatable({}, { __index = Observable })
 
-function self.__index(p1, p2) --[[ Line: 89 ]]
+function self.__index(p1, p2)
 	-- upvalues: self (copy)
 	return if p2 == "variables" then p1.options.variables elseif rawget(p1, p2) then rawget(p1, p2) elseif rawget(self, p2) then rawget(self, p2) else getmetatable(self).__index[p2]
 end
 
-function self.__newindex(p1, p2, p3) --[[ Line: 103 ]]
+function self.__newindex(p1, p2, p3)
 	if p2 == "variables" then
 		error("setting getter-only property 'variables'")
 	end
 	rawset(p1, p2, p3)
 end
 
-function self.new(p1) --[[ Line: 110 ]]
+function self.new(p1)
 	-- upvalues: Observable (copy), Boolean (copy), DefaultSubscriptionObserverErrorCallback (ref), self (copy), Set (copy), IterateObserversSafelyFunction (copy), Object (copy), NetworkStatus (copy), GetOperationDefinitionFunction (copy)
 	local QueryManager = p1.queryManager
 	local QueryInfo = p1.queryInfo
 	local Options = p1.options
 	local v1 = nil
-	v1 = setmetatable(Observable.new(function(p2) --[[ Line: 120 ]]
+	v1 = setmetatable(Observable.new(function(p2)
 		-- upvalues: Boolean (upval), DefaultSubscriptionObserverErrorCallback (upval), v1 (ref)
-		xpcall(function() --[[ Line: 123 ]]
+		xpcall(function()
 			-- upvalues: p2 (copy), Boolean (upval), DefaultSubscriptionObserverErrorCallback (upval)
 			local Observer = p2._subscription._observer
 			
 			if Boolean.toJSBoolean(Observer) and not Boolean.toJSBoolean(Observer.error) then
 				Observer.error = DefaultSubscriptionObserverErrorCallback
 			end
-		end, function() --[[ Line: 128 ]] end)
+		end, function() end)
 		local Inverted = not Boolean.toJSBoolean(v1.observers.size)
 		v1.observers:add(p2)
 		
@@ -70,9 +70,9 @@ function self.new(p1) --[[ Line: 110 ]]
 			p2:next(v1.lastResult)
 		end
 		if Inverted then
-			v1:reobserve():catch(function() --[[ Line: 151 ]] end)
+			v1:reobserve():catch(function() end)
 		end
-		return function() --[[ Line: 154 ]]
+		return function()
 			-- upvalues: v1 (upval), p2 (copy), Boolean (upval)
 			if v1.observers:delete(p2) and not Boolean.toJSBoolean(v1.observers.size) then
 				v1:tearDownQuery()
@@ -82,14 +82,14 @@ function self.new(p1) --[[ Line: 110 ]]
 	v1.observers = Set.new()
 	v1.subscriptions = Set.new()
 	v1.observer = {
-		next = function(_, LastResult) --[[ Line: 167 ]]
+		next = function(_, LastResult)
 			-- upvalues: Boolean (upval), v1 (ref), IterateObserversSafelyFunction (upval)
 			if Boolean.toJSBoolean(v1.lastError) or v1:isDifferentFromLastResult(LastResult) then
 				v1:updateLastResult(LastResult)
 				IterateObserversSafelyFunction(v1.observers, "next", LastResult)
 			end
 		end,
-		error = function(_, LastError) --[[ Line: 173 ]]
+		error = function(_, LastError)
 			-- upvalues: v1 (ref), Object (upval), NetworkStatus (upval), IterateObserversSafelyFunction (upval)
 			v1:updateLastResult((Object.assign({}, v1.lastResult, {
 				error = LastError,
@@ -122,14 +122,14 @@ function self.new(p1) --[[ Line: 110 ]]
 	return v1
 end
 
-function self.result(p1) --[[ Line: 215 ]]
+function self.result(p1)
 	-- upvalues: PromiseModule (copy), Boolean (copy), SetTimeoutFunction (copy)
-	return PromiseModule.new(function(Callback, Callback1) --[[ Line: 216 ]]
+	return PromiseModule.new(function(Callback, Callback1)
 		-- upvalues: p1 (copy), Boolean (upval), SetTimeoutFunction (upval)
 		local SubscribeResult = nil
 		local v1 = nil
 		v1 = {
-			next = function(_, p2) --[[ Line: 225 ]]
+			next = function(_, p2)
 				-- upvalues: Callback (copy), p1 (upval), v1 (ref), Boolean (upval), SetTimeoutFunction (upval), SubscribeResult (ref)
 				Callback(p2)
 				p1.observers:delete(v1)
@@ -137,12 +137,12 @@ function self.result(p1) --[[ Line: 215 ]]
 				if not Boolean.toJSBoolean(p1.observers.size) then
 					p1.queryManager:removeQuery(p1.queryId)
 				end
-				SetTimeoutFunction(function() --[[ Line: 242 ]]
+				SetTimeoutFunction(function()
 					-- upvalues: SubscribeResult (upval)
 					SubscribeResult:unsubscribe()
 				end, 0)
 			end,
-			error = function(_, p2) --[[ Line: 246 ]]
+			error = function(_, p2)
 				-- upvalues: Callback1 (copy)
 				Callback1(p2)
 			end
@@ -151,7 +151,7 @@ function self.result(p1) --[[ Line: 215 ]]
 	end)
 end
 
-function self:getCurrentResult(p1: boolean) --[[ Line: 255 ]]
+function self:getCurrentResult(p1: boolean)
 	-- upvalues: Boolean (copy), NetworkStatus (copy), Object (copy), IsNetworkRequestInFlightFunction (copy), ApolloError (copy)
 	if p1 == nil then
 		p1 = true
@@ -191,31 +191,31 @@ function self:getCurrentResult(p1: boolean) --[[ Line: 255 ]]
 	return AssignResult
 end
 
-function self:isDifferentFromLastResult(p1): boolean --[[ Line: 335 ]]
+function self:isDifferentFromLastResult(p1): boolean
 	-- upvalues: EqualModule (copy)
 	return not EqualModule(self.lastResultSnapshot, p1)
 end
 
-function self:getLastResult() --[[ Line: 341 ]]
+function self:getLastResult()
 	return self.lastResult
 end
 
-function self:getLastError() --[[ Line: 345 ]]
+function self:getLastError()
 	return self.lastError
 end
 
-function self:resetLastResults() --[[ Line: 349 ]]
+function self:resetLastResults()
 	self.lastResult = nil
 	self.lastResultSnapshot = nil
 	self.lastError = nil
 	self.isTornDown = false
 end
 
-function self:resetQueryStoreErrors() --[[ Line: 356 ]]
+function self:resetQueryStoreErrors()
 	self.queryManager:resetErrors(self.queryId)
 end
 
-function self:refetch(p1) --[[ Line: 367 ]]
+function self:refetch(p1)
 	-- upvalues: Boolean (copy), EqualModule (copy), Object (copy), NetworkStatus (copy)
 	local config = { pollInterval = 0 }
 	local FetchPolicy = self.options.fetchPolicy
@@ -234,7 +234,7 @@ function self:refetch(p1) --[[ Line: 367 ]]
 	return self:reobserve(config, NetworkStatus.refetch)
 end
 
-function self:fetchMore(p1) --[[ Line: 393 ]]
+function self:fetchMore(p1)
 	-- upvalues: Object (copy), Boolean (copy), NetworkStatus (copy), Flag (ref), InvariantFunction (copy)
 	local AssignResult = Object.assign({}, if Boolean.toJSBoolean(p1.query) then p1 else Object.assign({}, self.options, p1, {
 		variables = Object.assign({}, self.options.variables, p1.variables)
@@ -245,7 +245,7 @@ function self:fetchMore(p1) --[[ Line: 393 ]]
 		self.queryInfo.networkStatus = NetworkStatus.fetchMore
 		self:observe()
 	end
-	return self.queryManager:fetchQuery(QueryId, AssignResult, NetworkStatus.fetchMore):andThen(function(Result) --[[ Line: 431 ]]
+	return self.queryManager:fetchQuery(QueryId, AssignResult, NetworkStatus.fetchMore):andThen(function(Result)
 		-- upvalues: p1 (copy), Boolean (upval), Flag (upval), InvariantFunction (upval), self (copy), AssignResult (copy)
 		local Data = Result.data
 		local UpdateQueryFunction = p1.updateQuery
@@ -264,7 +264,7 @@ function self:fetchMore(p1) --[[ Line: 393 ]]
 			Flag = true
 			_G.__WARNED_ABOUT_OBSERVABLE_QUERY_UPDATE_QUERY__ = Flag
 		end
-		self:updateQuery(function(p2) --[[ Line: 456 ]]
+		self:updateQuery(function(p2)
 			-- upvalues: UpdateQueryFunction (copy), p1 (upval), Data (copy), AssignResult (upval)
 			return UpdateQueryFunction(p1, p2, {
 				fetchMoreResult = Data,
@@ -273,13 +273,13 @@ function self:fetchMore(p1) --[[ Line: 393 ]]
 		end)
 		
 		return Result
-	end):andThen(function(Result) --[[ Line: 479 ]]
+	end):andThen(function(Result)
 		-- upvalues: self (copy), QueryId (copy)
 		self.queryManager:stopQuery(QueryId)
 		self:reobserve()
 		
 		return Result
-	end):catch(function(Err) --[[ Line: 484 ]]
+	end):catch(function(Err)
 		-- upvalues: self (copy), QueryId (copy)
 		self.queryManager:stopQuery(QueryId)
 		self:reobserve()
@@ -287,19 +287,19 @@ function self:fetchMore(p1) --[[ Line: 393 ]]
 	end)
 end
 
-function self:subscribeToMore(p1) --[[ Line: 494 ]]
+function self:subscribeToMore(p1)
 	-- upvalues: Boolean (copy), InvariantFunction (copy)
 	local SubscribeResult = self.queryManager:startGraphQLSubscription({
 		query = p1.document,
 		variables = p1.variables,
 		context = p1.context
 	}):subscribe({
-		next = function(_, SubscriptionData) --[[ Line: 508 ]]
+		next = function(_, SubscriptionData)
 			-- upvalues: p1 (copy), Boolean (upval), self (copy)
 			local UpdateQueryFunction = p1.updateQuery
 			
 			if Boolean.toJSBoolean(UpdateQueryFunction) then
-				self:updateQuery(function(p2, p3) --[[ Line: 511 ]]
+				self:updateQuery(function(p2, p3)
 					-- upvalues: UpdateQueryFunction (copy), SubscriptionData (copy)
 					return UpdateQueryFunction(p2, {
 						subscriptionData = SubscriptionData,
@@ -308,7 +308,7 @@ function self:subscribeToMore(p1) --[[ Line: 494 ]]
 				end)
 			end
 		end,
-		error = function(_, p2) --[[ Line: 520 ]]
+		error = function(_, p2)
 			-- upvalues: Boolean (upval), p1 (copy), InvariantFunction (upval)
 			if Boolean.toJSBoolean(p1.onError) then
 				p1:onError(p2)
@@ -321,7 +321,7 @@ function self:subscribeToMore(p1) --[[ Line: 494 ]]
 	})
 	self.subscriptions:add(SubscribeResult)
 	
-	return function() --[[ Line: 531 ]]
+	return function()
 		-- upvalues: Boolean (upval), self (copy), SubscribeResult (copy)
 		if Boolean.toJSBoolean(self.subscriptions:delete(SubscribeResult)) then
 			SubscribeResult:unsubscribe()
@@ -329,11 +329,11 @@ function self:subscribeToMore(p1) --[[ Line: 494 ]]
 	end
 end
 
-function self:setOptions(p1) --[[ Line: 538 ]]
+function self:setOptions(p1)
 	return self:reobserve(p1)
 end
 
-function self:setVariables(Variables) --[[ Line: 564 ]]
+function self:setVariables(Variables)
 	-- upvalues: EqualModule (copy), Boolean (copy), PromiseModule (copy), NetworkStatus (copy)
 	if EqualModule(self.variables, Variables) then
 		return if Boolean.toJSBoolean(self.observers.size) then self:result() else PromiseModule.resolve()
@@ -347,7 +347,7 @@ function self:setVariables(Variables) --[[ Line: 564 ]]
 	end
 end
 
-function self:updateQuery(Callback) --[[ Line: 590 ]]
+function self:updateQuery(Callback)
 	-- upvalues: Boolean (copy)
 	local QueryManager = self.queryManager
 	local CallbackResult = Callback(QueryManager.cache:diff({
@@ -368,23 +368,23 @@ function self:updateQuery(Callback) --[[ Line: 590 ]]
 	end
 end
 
-function self:startPolling(PollInterval) --[[ Line: 623 ]]
+function self:startPolling(PollInterval)
 	self.options.pollInterval = PollInterval
 	self:updatePolling()
 end
 
-function self:stopPolling() --[[ Line: 628 ]]
+function self:stopPolling()
 	self.options.pollInterval = 0
 	self:updatePolling()
 end
 
-function self:fetch(AssignResult, SetVariables) --[[ Line: 633 ]]
+function self:fetch(AssignResult, SetVariables)
 	self.queryManager:setObservableQuery(self)
 	
 	return self.queryManager:fetchQueryObservable(self.queryId, AssignResult, SetVariables)
 end
 
-function self:updatePolling() --[[ Line: 642 ]]
+function self:updatePolling()
 	-- upvalues: Boolean (copy), ClearTimeoutFunction (copy), InvariantFunction (copy), IsNetworkRequestInFlightFunction (copy), NetworkStatus (copy), SetTimeoutFunction (copy)
 	local Callback = nil
 	
@@ -407,7 +407,7 @@ function self:updatePolling() --[[ Line: 642 ]]
 		until true
 		PollingInfo1.interval = PollInterval
 		
-		local function maybeFetch() --[[ Line: 673 ]]
+		local function maybeFetch()
 			-- upvalues: Boolean (upval), self (copy), IsNetworkRequestInFlightFunction (upval), NetworkStatus (upval), Callback (ref)
 			if Boolean.toJSBoolean(self.pollingInfo) then
 				if not IsNetworkRequestInFlightFunction(self.queryInfo.networkStatus) then
@@ -419,7 +419,7 @@ function self:updatePolling() --[[ Line: 642 ]]
 			end
 		end
 		
-		Callback = function() --[[ Line: 685 | Named "poll" ]]
+		Callback = function()
 			-- upvalues: self (copy), Boolean (upval), ClearTimeoutFunction (upval), SetTimeoutFunction (upval), maybeFetch (copy)
 			local PollingInfo = self.pollingInfo
 			
@@ -440,7 +440,7 @@ function self:updatePolling() --[[ Line: 642 ]]
 	end
 end
 
-function self:updateLastResult(LastResult) --[[ Line: 699 ]]
+function self:updateLastResult(LastResult)
 	-- upvalues: Boolean (copy), CloneDeepFunction (copy), IsNonEmptyArrayFunction (copy)
 	local LastResult1 = self.lastResult
 	self.lastResult = LastResult
@@ -456,7 +456,7 @@ function self:updateLastResult(LastResult) --[[ Line: 699 ]]
 	return LastResult1
 end
 
-function self:reobserve(p1, Poll) --[[ Line: 715 ]]
+function self:reobserve(p1, Poll)
 	-- upvalues: NetworkStatus (copy), CompactFunction (copy), Object (copy), Boolean (copy), EqualModule (copy)
 	self.isTornDown = false
 	local IsPollMatch: boolean = Poll == NetworkStatus.refetch or (Poll == NetworkStatus.fetchMore or Poll == NetworkStatus.poll)
@@ -487,15 +487,15 @@ function self:reobserve(p1, Poll) --[[ Line: 715 ]]
 	return FetchResult.promise
 end
 
-function self:observe() --[[ Line: 785 ]]
+function self:observe()
 	self.observer:next(self:getCurrentResult(false))
 end
 
-function self:hasObservers(): boolean --[[ Line: 793 ]]
+function self:hasObservers(): boolean
 	return self.observers.size > 0
 end
 
-function self:tearDownQuery() --[[ Line: 797 ]]
+function self:tearDownQuery()
 	-- upvalues: Boolean (copy)
 	if Boolean.toJSBoolean(self.isTornDown) then return end
 	if Boolean.toJSBoolean(self.concast) then
@@ -503,7 +503,7 @@ function self:tearDownQuery() --[[ Line: 797 ]]
 		self.concast = nil
 	end
 	self:stopPolling()
-	self.subscriptions:forEach(function(p1) --[[ Line: 809 ]]
+	self.subscriptions:forEach(function(p1)
 		return p1:unsubscribe()
 	end)
 	self.subscriptions:clear()
@@ -515,12 +515,12 @@ end
 FixObservableSubclassFunction(self)
 ObservableQueryModule.ObservableQuery = self
 
-DefaultSubscriptionObserverErrorCallback = function(_, p1) --[[ Line: 825 | Named "defaultSubscriptionObserverErrorCallback" ]]
+DefaultSubscriptionObserverErrorCallback = function(_, p1)
 	-- upvalues: InvariantFunction (copy)
 	InvariantFunction.error("Unhandled error", p1.message, p1.stack)
 end
 
-function ObservableQueryModule.applyNextFetchPolicy(p1) --[[ Line: 833 ]]
+function ObservableQueryModule.applyNextFetchPolicy(p1)
 	-- upvalues: Boolean (copy), IsCallableModule (copy)
 	local CacheFirst = if p1.fetchPolicy == nil then "cache-first" else p1.fetchPolicy
 	local NextFetchPolicyFunction = p1.nextFetchPolicy

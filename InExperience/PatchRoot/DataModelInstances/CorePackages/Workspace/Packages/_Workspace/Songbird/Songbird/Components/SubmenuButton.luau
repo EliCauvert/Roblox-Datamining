@@ -7,7 +7,7 @@ local CreateNextOrderFunction = require(Songbird.Parent.ReactUtils).createNextOr
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local config = { iconSize = FoundationModule.Enums.IconSize.Medium }
 
-return function(p1) --[[ Line: 31 | Named "SubmenuButton" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), CreateNextOrderFunction (copy), UseTokensFunction (copy), UseCallbackFunction (copy), FoundationModule (copy), ReactModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local NextOrder = CreateNextOrderFunction()
@@ -15,7 +15,7 @@ return function(p1) --[[ Line: 31 | Named "SubmenuButton" ]]
 	
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "size-full-0 auto-y row gap-small padding-small align-y-center radius-medium",
-		onStateChanged = UseCallbackFunction(function(Pressed) --[[ Line: 37 ]]
+		onStateChanged = UseCallbackFunction(function(Pressed)
 			-- upvalues: FoundationModule (upval), JoinResult (copy)
 			if Pressed == FoundationModule.Enums.ControlState.Pressed and JoinResult.onActivated then
 				JoinResult.onActivated()

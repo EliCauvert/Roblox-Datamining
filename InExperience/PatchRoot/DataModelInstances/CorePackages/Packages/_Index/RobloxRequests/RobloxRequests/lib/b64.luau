@@ -1,5 +1,5 @@
-﻿function enc(Text: string): string --[[ Line: 6 ]]
-	return (Text:gsub(".", function(Text: string): string --[[ Line: 7 ]]
+﻿function enc(Text: string): string
+	return (Text:gsub(".", function(Text: string): string
 		local Text1 = ""
 		local ByteValue: number = Text:byte()
 		
@@ -7,7 +7,7 @@
 			Text1 ..= if ByteValue % 2 ^ i - ByteValue % 2 ^ (i - 1) > 0 then "1" else "0"
 		end
 		return Text1
-	end) .. "0000"):gsub("%d%d%d?%d?%d?%d?", function(Text: string): string --[[ Line: 11 ]]
+	end) .. "0000"):gsub("%d%d%d?%d?%d?%d?", function(Text: string): string
 		if #Text < 6 then
 			return ""
 		end
@@ -20,8 +20,8 @@
 	end) .. ({ "", "==", "=" })[#Text % 3 + 1]
 end
 
-function dec(Text: string) --[[ Line: 20 ]]
-	return (string.gsub(Text, "[^ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=]", ""):gsub(".", function(p1): string --[[ Line: 22 ]]
+function dec(Text: string)
+	return (string.gsub(Text, "[^ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=]", ""):gsub(".", function(p1): string
 		if p1 == "=" then
 			return ""
 		end
@@ -32,7 +32,7 @@ function dec(Text: string) --[[ Line: 20 ]]
 			Text ..= if StartIndexDelta % 2 ^ i - StartIndexDelta % 2 ^ (i - 1) > 0 then "1" else "0"
 		end
 		return Text
-	end):gsub("%d%d%d?%d?%d?%d?%d?%d?", function(Text: string): string --[[ Line: 27 ]]
+	end):gsub("%d%d%d?%d?%d?%d?%d?%d?", function(Text: string): string
 		if #Text ~= 8 then
 			return ""
 		end
@@ -45,7 +45,7 @@ function dec(Text: string) --[[ Line: 20 ]]
 	end))
 end
 
-function safe_enc(Text: string, p2: boolean): string --[[ Line: 35 ]]
+function safe_enc(Text: string, p2: boolean): string
 	if p2 == nil then
 		p2 = true
 	end

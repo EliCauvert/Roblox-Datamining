@@ -5,11 +5,11 @@ local FFlagExpChatGlobalTabDefaultModule = require(ExpChat.Flags.FFlagExpChatGlo
 local Analytics = require(Parent.ExpChatShared).Analytics
 local JoinResult = require(Parent.Cryo).List.join(Analytics.DefaultStandardizedFields, { "addPlaceInstanceId" }, if require(ExpChat.Flags.FFlagGlobalTextChatAddPlaySessionField) then { "addPlaySessionId" } else {})
 
-return function(p1) --[[ Line: 32 | Named "useTabImpression" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), Analytics (copy), FFlagExpChatGlobalTabDefaultModule (copy), JoinResult (copy)
 	local TabType = p1.tabType or "Unknown"
 	local Badge_count: number = if p1.hasUnreadMessages then 1 else 0
-	ReactModule.useEffect(function() --[[ Line: 37 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), Analytics (upval), TabType (copy), Badge_count (copy), FFlagExpChatGlobalTabDefaultModule (upval), JoinResult (upval)
 		if p1.enabled then
 			Analytics:TelemetryLogEvent(Analytics.ExpChatTabImpressionConfig, {

@@ -6,7 +6,7 @@ local UserModel = require(Parent.UserLib).Models.UserModel
 local AddUsersFunction = require(Parent.UserLib).Actions.AddUsers
 local FFlagAppChatPresenceStoreMigrationModule = require(AppChat.Flags.FFlagAppChatPresenceStoreMigration)
 
-local function extractConversationsAndUsers(List, Users) --[[ Line: 10 ]]
+local function extractConversationsAndUsers(List, Users)
 	-- upvalues: UserModel (copy), Llama (copy)
 	local Ids = {}
 	local FromDataTableResults = {}
@@ -54,16 +54,16 @@ local function extractConversationsAndUsers(List, Users) --[[ Line: 10 ]]
 	return Ids, FromDataTableResults, (Llama.Dictionary.keys(FromDataTableResults))
 end
 
-return function(p1) --[[ Line: 63 ]]
+return function(p1)
 	-- upvalues: extractConversationsAndUsers (copy), AddUsersFunction (copy), FFlagAppChatPresenceStoreMigrationModule (copy), NetworkingPresenceModule (copy)
-	return function(p2) --[[ Line: 64 ]]
+	return function(p2)
 		-- upvalues: p1 (copy), extractConversationsAndUsers (upval), AddUsersFunction (upval), FFlagAppChatPresenceStoreMigrationModule (upval), NetworkingPresenceModule (upval)
 		if not p1 then return end
 		local _, ExtractConversationsAndUsersResult2, ExtractConversationsAndUsersResult3 = extractConversationsAndUsers(p1, p2:getState().Users or {})
 		p2:dispatch(AddUsersFunction(ExtractConversationsAndUsersResult2))
 		
 		if not FFlagAppChatPresenceStoreMigrationModule then
-			p2:dispatch(NetworkingPresenceModule.GetPresencesFromUserIds.API(ExtractConversationsAndUsersResult3)):catch(function(Err) --[[ Line: 74 ]]
+			p2:dispatch(NetworkingPresenceModule.GetPresencesFromUserIds.API(ExtractConversationsAndUsersResult3)):catch(function(Err)
 				warn("NetworkingPresence failure in processConversations, Status: " .. tostring(Err))
 			end)
 		end

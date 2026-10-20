@@ -18,7 +18,7 @@ local SearchBarModule = require(Parent.SearchBar)
 local GetFFlagVoiceDebugConsoleV2Module = require(Parent.VoiceDebug.GetFFlagVoiceDebugConsoleV2)
 local UtilAndTab = RoactModule.Component:extend("UtilAndTab")
 
-function UtilAndTab.init(p1) --[[ Line: 30 ]]
+function UtilAndTab.init(p1)
 	-- upvalues: TextService (copy), ConstantsModule (copy), RoactModule (copy)
 	local NewX = 0
 	local TotalTabCount = 0
@@ -27,12 +27,12 @@ function UtilAndTab.init(p1) --[[ Line: 30 ]]
 		NewX += TextService:GetTextSize(i, ConstantsModule.DefaultFontSize.TabBar, ConstantsModule.Font.TabBar, Vector2.new(0, 0)).X
 		TotalTabCount += 1
 	end
-	function p1.showSearchBar() --[[ Line: 42 ]]
+	function p1.showSearchBar()
 		-- upvalues: p1 (copy)
 		p1:setState({ activeSearchTerm = true })
 	end
 	
-	function p1:cancelInput(Input) --[[ Line: 48 ]]
+	function p1:cancelInput(Input)
 		-- upvalues: p1 (copy)
 		if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch and Input.UserInputState == Enum.UserInputState.End then
 			if p1.searchRef.current then
@@ -47,7 +47,7 @@ function UtilAndTab.init(p1) --[[ Line: 30 ]]
 		end
 	end
 	
-	function p1.focusLost(p2, p3, _) --[[ Line: 69 ]]
+	function p1.focusLost(p2, p3, _)
 		-- upvalues: p1 (copy)
 		if p3 then
 			local Text = p2.text
@@ -73,7 +73,7 @@ function UtilAndTab.init(p1) --[[ Line: 30 ]]
 	p1.searchRef = RoactModule.createRef()
 end
 
-function UtilAndTab.render(p2) --[[ Line: 95 ]]
+function UtilAndTab.render(p2)
 	-- upvalues: TabOverlapThreshold (copy), ConstantsModule (copy), SmallFrameHeight (copy), FrameHeight1 (copy), RoactModule (copy), ClientServerButtonWidth (copy), MainRowPadding (copy), SmallUtilPadding (copy), TabDropDownWidth (copy), ClientServerDropDownWidth (copy), TextService (copy), TabRowContainerModule (copy), ClientServerButtonModule (copy), CheckboxContainerModule (copy), GetFFlagVoiceDebugConsoleV2Module (copy), SearchBarModule (copy), FrameHeight (copy)
 	local WindowWidth: number = p2.props.windowWidth
 	local FormFactor = p2.props.formFactor

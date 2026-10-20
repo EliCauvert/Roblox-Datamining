@@ -1,16 +1,16 @@
 ﻿local ContextActionService = game:GetService("ContextActionService")
 local ReactModule = require(script:FindFirstAncestor("BulkPurchaseApp").Parent.React)
 
-return function(ActionName, Current) --[[ Line: 12 | Named "useCloseOnEscapeEffect" ]]
+return function(ActionName, Current)
 	-- upvalues: ReactModule (copy), ContextActionService (copy)
 	local UseRefResult = ReactModule.useRef(Current)
-	ReactModule.useEffect(function() --[[ Line: 15 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), Current (copy)
 		UseRefResult.current = Current
 	end, { Current })
-	ReactModule.useEffect(function() --[[ Line: 19 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ContextActionService (upval), ActionName (copy), UseRefResult (copy)
-		ContextActionService:BindCoreAction(ActionName, function(_, UserInputState) --[[ Line: 20 ]]
+		ContextActionService:BindCoreAction(ActionName, function(_, UserInputState)
 			-- upvalues: UseRefResult (upval)
 			if UserInputState == Enum.UserInputState.Begin then
 				UseRefResult.current()
@@ -18,7 +18,7 @@ return function(ActionName, Current) --[[ Line: 12 | Named "useCloseOnEscapeEffe
 			return Enum.ContextActionResult.Pass
 		end, false, Enum.KeyCode.Escape)
 		
-		return function() --[[ Line: 28 ]]
+		return function()
 			-- upvalues: ContextActionService (upval), ActionName (upval)
 			ContextActionService:UnbindCoreAction(ActionName)
 		end

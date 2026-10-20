@@ -13,7 +13,7 @@ local InputSize = FoundationModule.Enums.InputSize
 local MediaSelectorModule = require(script.Parent.MediaSelector)
 local _ = require(script.Parent.types)
 
-return function(p1) --[[ Line: 27 | Named "IconThumbnailsSheet" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), Text (copy), MediaSelectorModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	
@@ -28,7 +28,7 @@ return function(p1) --[[ Line: 27 | Named "IconThumbnailsSheet" ]]
 				LayoutOrder = 1,
 				isCircular = true,
 				icon = IconName.ChevronLargeLeft,
-				onActivated = ReactModule.useCallback(function() --[[ Line: 34 ]]
+				onActivated = ReactModule.useCallback(function()
 					-- upvalues: UseRefResult (copy), p1 (copy)
 					if UseRefResult.current then
 						UseRefResult.current()

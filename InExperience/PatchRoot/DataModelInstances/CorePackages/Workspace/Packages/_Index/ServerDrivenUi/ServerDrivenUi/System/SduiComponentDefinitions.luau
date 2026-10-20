@@ -50,7 +50,7 @@ local t = {}
 local SduiComponentDefinitionsModule = {}
 SduiComponentDefinitionsModule.__index = SduiComponentDefinitionsModule
 
-function SduiComponentDefinitionsModule.new() --[[ Line: 83 ]]
+function SduiComponentDefinitionsModule.new()
 	-- upvalues: ParseVector2Prop (copy), GetEngineEnumParserFunction (copy), ParseColor3Prop (copy), ParseNumberProp (copy), ParseIntegerProp (copy), ParseUDim2Prop (copy), CryoModule (copy), ParseBooleanProp (copy), ParseStringProp (copy), SduiComponentType (copy), Parent (copy), FFlagSduiAttributionRowV2 (copy), ParseCallbackProp (copy), ParseUiComponentProp (copy), ParseTypographyTokenProp (copy), ParseColorTokenProp (copy), GetLuaTableEnumParserFunction (copy), FoundationModule (copy), ParseImageStringProp (copy), TModule (copy), ParseIconProp (copy), ParseUDimProp (copy), ServerDrivenUi (copy), CollectionItemSize (copy), ItemHeightModeModule (copy), FFlagSduiCollectionCarouselOverrides (copy), FFlagLuaAppRespectClipAncestorImpressions (copy), GetArrayMetatableParserFunction (copy), ParseLazyUiComponentProp (copy), FFlagSduiCollectionCarouselPlaceholderItem (copy), FFlagSduiOptionSelectorCollection (copy), FFlagSduiCollectionGridRevealRows (copy), ParseFocusNavActionsProp (copy), ReactModule (copy), ParseGradientProp (copy), FFlagLuaAppSduiSearchAutocompleteSuggestionComponent (copy), ParseImageSetOrImageProp (copy), FFlagSduiTileDisableLegacyHover (copy), FFlagLuaAppSduiGameTileFeedback (copy), FFlagSduiGameTileDirectAction (copy), FFlagSduiEnableHeroUnitBottomRow (copy), FFlagSduiChipAccessoryProps (copy), FFlagSduiExperienceDetailsSocialProof (copy), FFlagSduiIndividualFeedItemSpacing (copy), FFlagLuaAppDismissUnlockUpsell (copy), SduiComponentDefinitionsModule (copy)
 	local IconOverrides = {
 		anchorPoint = ParseVector2Prop,
@@ -875,31 +875,31 @@ function SduiComponentDefinitionsModule.new() --[[ Line: 83 ]]
 	return config
 end
 
-function SduiComponentDefinitionsModule:getComponentDefinition(p1) --[[ Line: 969 ]]
+function SduiComponentDefinitionsModule:getComponentDefinition(p1)
 	-- upvalues: GetSduiComponentRegistryFunction (copy)
 	return self._registeredComponents[p1] or GetSduiComponentRegistryFunction().getComponentDefinition(p1)
 end
 
-function SduiComponentDefinitionsModule:doesComponentManageChildren(p1) --[[ Line: 977 ]]
+function SduiComponentDefinitionsModule:doesComponentManageChildren(p1)
 	local ComponentDefinition = self:getComponentDefinition(p1)
 	
 	return ComponentDefinition and ComponentDefinition.doesManageChildren or false
 end
 
-function SduiComponentDefinitionsModule:getComponent(p1) --[[ Line: 985 ]]
+function SduiComponentDefinitionsModule:getComponent(p1)
 	local ComponentDefinition = self:getComponentDefinition(p1)
 	
 	return ComponentDefinition and ComponentDefinition.component
 end
 
-function SduiComponentDefinitionsModule:getPropParsers(p1) --[[ Line: 990 ]]
+function SduiComponentDefinitionsModule:getPropParsers(p1)
 	-- upvalues: t (copy)
 	local ComponentDefinition = self:getComponentDefinition(p1)
 	
 	return ComponentDefinition and ComponentDefinition.propParsers or t
 end
 
-function SduiComponentDefinitionsModule:getPropInterface(p1) --[[ Line: 998 ]]
+function SduiComponentDefinitionsModule:getPropInterface(p1)
 	local ComponentDefinition = self:getComponentDefinition(p1)
 	
 	return ComponentDefinition and ComponentDefinition.propInterface or nil
@@ -911,12 +911,12 @@ local config = {
 	[ParseFocusNavActionsProp] = true
 }
 
-function SduiComponentDefinitionsModule:doesParserRequireRenderContext(p1): boolean --[[ Line: 1009 ]]
+function SduiComponentDefinitionsModule:doesParserRequireRenderContext(p1): boolean
 	-- upvalues: config (copy)
 	return if p1 and config[p1] then true else typeof(p1) == "table"
 end
 
-function SduiComponentDefinitionsModule:registerComponent(p1, p2) --[[ Line: 1024 ]]
+function SduiComponentDefinitionsModule:registerComponent(p1, p2)
 	self._registeredComponents[p1] = p2
 end
 

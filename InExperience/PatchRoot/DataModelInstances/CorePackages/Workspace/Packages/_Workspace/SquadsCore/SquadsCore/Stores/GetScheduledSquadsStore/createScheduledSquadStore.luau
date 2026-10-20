@@ -7,42 +7,42 @@ local GetSubscribedScheduledSquadsFunction = require(SquadsCore.NetworkRequests)
 local GetScheduledSquadStatusFunction = require(SquadsCore.NetworkRequests).getScheduledSquadStatus
 local _ = require(SquadsCore.Types)
 
-return function() --[[ Line: 25 ]]
+return function()
 	-- upvalues: SignalsModule (copy), CreateComputedFunction (copy), GetSubscribedScheduledSquadsFunction (copy), CryoModule (copy), GetScheduledSquadStatusFunction (copy)
 	local Signal, Signal2 = SignalsModule.createSignal({})
 	local Signal1, Signal2_1 = SignalsModule.createSignal({})
 	
-	local function _(p1) --[[ Line: 44 ]]
+	local function _(p1)
 		-- upvalues: Signal1 (copy), Signal2_1 (copy), CryoModule (upval)
 		Signal2_1(CryoModule.Dictionary.join(Signal1(false), { [p1.scheduledGroupUpId] = p1 }))
 	end
 	
 	return {
-		getSubscribedScheduledSquads = CreateComputedFunction(function(p1) --[[ Line: 30 ]]
+		getSubscribedScheduledSquads = CreateComputedFunction(function(p1)
 			-- upvalues: Signal (copy)
 			return Signal(p1)
 		end),
-		getScheduledSquadsStatus = CreateComputedFunction(function(p1) --[[ Line: 34 ]]
+		getScheduledSquadsStatus = CreateComputedFunction(function(p1)
 			-- upvalues: Signal1 (copy)
 			return Signal1(p1)
 		end),
-		fetchSubscribedScheduledSquads = function() --[[ Line: 38 ]]
+		fetchSubscribedScheduledSquads = function()
 			-- upvalues: GetSubscribedScheduledSquadsFunction (upval), Signal2 (copy)
-			GetSubscribedScheduledSquadsFunction(function(p1) --[[ Line: 39 ]]
+			GetSubscribedScheduledSquadsFunction(function(p1)
 				-- upvalues: Signal2 (upval)
 				Signal2(p1)
 			end, nil)
 		end,
-		fetchAndCacheScheduledSquadStatus = function(p1, Callback) --[[ Line: 49 ]]
+		fetchAndCacheScheduledSquadStatus = function(p1, Callback)
 			-- upvalues: GetScheduledSquadStatusFunction (upval), Signal1 (copy), Signal2_1 (copy), CryoModule (upval)
-			GetScheduledSquadStatusFunction(p1, function(p2) --[[ Line: 50 ]]
+			GetScheduledSquadStatusFunction(p1, function(p2)
 				-- upvalues: Signal1 (upval), Signal2_1 (upval), CryoModule (upval), Callback (copy)
 				Signal2_1(CryoModule.Dictionary.join(Signal1(false), { [p2.scheduledGroupUpId] = p2 }))
 				
 				if Callback then
 					Callback()
 				end
-			end, function() --[[ Line: 55 ]]
+			end, function()
 				-- upvalues: Callback (copy)
 				if Callback then
 					Callback()

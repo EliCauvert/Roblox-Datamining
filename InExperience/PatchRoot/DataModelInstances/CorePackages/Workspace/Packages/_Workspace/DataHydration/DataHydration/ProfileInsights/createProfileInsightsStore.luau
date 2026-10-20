@@ -9,14 +9,14 @@ local MultiGetProfileInsightsModule = require(script.Parent.Requests.MultiGetPro
 local _ = require(script.Parent.ProfileInsightsStoreTypes)
 local ProfileInsightsStoreProcessDelaySec = game:DefineFastInt("ProfileInsightsStoreProcessDelaySec", 0)
 
-return function() --[[ Line: 23 | Named "createProfileInsightsStore" ]]
+return function()
 	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), ProfileInsightsStoreProcessDelaySec (copy), CryoModule (copy), MultiGetProfileInsightsModule (copy), ProfileInsightsModel (copy)
 	local DataCacheModule = CreateDataCacheModule()
 	local t = {}
 	local DataResolverModule = CreateDataResolverModule({
 		cache = DataCacheModule,
 		queueProcessDelaySec = ProfileInsightsStoreProcessDelaySec,
-		fetchFn = function(p1) --[[ Line: 35 ]]
+		fetchFn = function(p1)
 			-- upvalues: CryoModule (upval), t (copy), MultiGetProfileInsightsModule (upval), ProfileInsightsModel (upval)
 			local KeysResult = CryoModule.Dictionary.keys(p1)
 			local RankingStrategy = nil
@@ -39,7 +39,7 @@ return function() --[[ Line: 23 | Named "createProfileInsightsStore" ]]
 				userIds = KeysResult,
 				count = Count,
 				rankingStrategy = RankingStrategy
-			}):andThen(function(Result) --[[ Line: 58 ]]
+			}):andThen(function(Result)
 				-- upvalues: ProfileInsightsModel (upval), KeysResult (copy)
 				local ProfileInsightsList = ProfileInsightsModel.createProfileInsightsList(if Result then Result.userInsights else nil)
 				local t = {}
@@ -62,7 +62,7 @@ return function() --[[ Line: 23 | Named "createProfileInsightsStore" ]]
 	})
 	
 	return {
-		GetProfileInsight = function(Key, p2) --[[ Line: 82 ]]
+		GetProfileInsight = function(Key, p2)
 			-- upvalues: DataResolverModule (copy), t (copy)
 			if p2 and p2.skipFetch then
 				return DataResolverModule.getCachedItem(Key)

@@ -7,7 +7,7 @@ local Text = FoundationModule.Text
 local Image = FoundationModule.Image
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(Frame) --[[ Line: 27 | Named "Footer" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), Text (copy), Image (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Size300: number = UseTokensResult.Size.Size_300

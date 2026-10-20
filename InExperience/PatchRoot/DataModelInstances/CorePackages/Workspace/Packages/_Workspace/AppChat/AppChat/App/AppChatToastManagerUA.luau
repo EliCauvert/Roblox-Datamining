@@ -8,13 +8,13 @@ local SocialCommonModule = require(Parent.SocialCommon)
 local OverlayHostModule = require(AppChat.Components.OSA.OverlayHost)
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 
-function AppChatToastManagerUA() --[[ Line: 16 ]]
+function AppChatToastManagerUA()
 	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), NavigateIntoChatModule (copy), EnteredChatFromEntryPointModule (copy), SocialCommonModule (copy), AppChatToastEventReceiverModule (copy), OverlayHostModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	
 	return ReactModule.createElement(ReactModule.Fragment, nil, {
 		ToastEventReceiver = ReactModule.createElement(AppChatToastEventReceiverModule, {
-			navigateToChat = ReactModule.useCallback(function(ConversationId) --[[ Line: 19 ]]
+			navigateToChat = ReactModule.useCallback(function(ConversationId)
 				-- upvalues: UseDispatchResult (copy), NavigateIntoChatModule (upval), EnteredChatFromEntryPointModule (upval), SocialCommonModule (upval)
 				UseDispatchResult(NavigateIntoChatModule({ conversationId = ConversationId }, true))
 				UseDispatchResult(EnteredChatFromEntryPointModule(SocialCommonModule.Enums.ChatEntryPointNames.ToastUniversalApp))

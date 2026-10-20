@@ -2,7 +2,7 @@
 local GetCaptureMetadataModule = require(Parent.Utils.getCaptureMetadata)
 local _ = require(Parent.Types)
 
-return function(p1) --[[ Line: 6 ]]
+return function(p1)
 	-- upvalues: GetCaptureMetadataModule (copy)
 	local CaptureMetadataModule = GetCaptureMetadataModule(p1)
 	

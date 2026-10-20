@@ -38,23 +38,23 @@ local CountSplitPaneEducationalTourStepsModule = #SplitPaneEducationalTourStepsM
 local Smallest = math.min(require(script.Parent.Parent.Flags.FIntSplitPaneEducationalTourStartDelayMs), 3000)
 local IsSmallestAbove = Smallest > 0
 
-local function selectStatusBarHeight(p1) --[[ Line: 75 ]]
+local function selectStatusBarHeight(p1)
 	return if p1.TopBar == nil then 0 else p1.TopBar.statusBarHeight
 end
 
-local function selectIsCentralOverlayOpen(p1): boolean --[[ Line: 79 ]]
+local function selectIsCentralOverlayOpen(p1): boolean
 	return p1.CentralOverlay ~= nil and p1.CentralOverlay.OverlayType ~= nil
 end
 
-local function _(Current) --[[ Line: 83 | Named "useAnchorRef" ]]
+local function _(Current)
 	-- upvalues: ReactModule (copy)
-	return ReactModule.useMemo(function() --[[ Line: 84 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: Current (copy)
 		return if Current == nil then nil else { current = Current }
 	end, { Current })
 end
 
-local function SplitPaneEducationalTourBody(p1) --[[ Line: 100 ]]
+local function SplitPaneEducationalTourBody(p1)
 	-- upvalues: SupportPaneMode (copy), SplitPaneStoreModule (copy), UseSignalStateFunction (copy), ReactModule (copy), UseSelectorFunction (copy), selectStatusBarHeight (copy), UseTrackedRectModule (copy), UseOverlayFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), UseScaledValueFunction (copy), Flags (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), UseDefaultFocusBehaviorFunction (copy), ReactFocusNavigationModule (copy), UsePreferredInputFunction (copy), Input (copy), UseFocusOnMountFunction (copy), IsSplitPaneEducationalTourGuiObjectVisibleModule (copy), GetSplitPaneEducationalTourPresentationModule (copy), UseSplitPaneEducationalTourLifecycleModule (copy), CountSplitPaneEducationalTourStepsModule (copy), IsSmallestAbove (copy), Smallest (copy), GuiService (copy), SplitPaneEducationalTourStepsModule (copy), GetSplitPaneEducationalTourTooltipModelModule (copy), SplitPaneEducationalTourViewModule (copy)
 	local SupportPaneRef = p1.supportPaneRef
 	local SupportPaneMode1 = p1.supportPaneMode
@@ -66,7 +66,7 @@ local function SplitPaneEducationalTourBody(p1) --[[ Line: 100 ]]
 	local UseSignalStateResult = UseSignalStateFunction(Store.getShouldDefaultToCollapsed)
 	local UseSignalStateResult1 = UseSignalStateFunction(TourStore.getCollapsedExpandButtonRect)
 	local UseSignalStateResult2 = UseSignalStateFunction(TourStore.getCollapsedExpandButtonInstance)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 84 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult2 (copy)
 		return if UseSignalStateResult2 == nil then nil else { current = UseSignalStateResult2 }
 	end, { UseSignalStateResult2 })
@@ -76,28 +76,28 @@ local function SplitPaneEducationalTourBody(p1) --[[ Line: 100 ]]
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(nil)
 	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(nil)
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 84 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseStateResult (copy)
 		return if UseStateResult == nil then nil else { current = UseStateResult }
 	end, { UseStateResult })
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 84 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: UseStateResult1 (copy)
 		return if UseStateResult1 == nil then nil else { current = UseStateResult1 }
 	end, { UseStateResult1 })
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 84 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: UseStateResult3 (copy)
 		return if UseStateResult3 == nil then nil else { current = UseStateResult3 }
 	end, { UseStateResult3 })
-	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 84 ]]
+	local UseMemoResult4 = ReactModule.useMemo(function()
 		-- upvalues: UseStateResult4 (copy)
 		return if UseStateResult4 == nil then nil else { current = UseStateResult4 }
 	end, { UseStateResult4 })
-	local UseMemoResult5 = ReactModule.useMemo(function() --[[ Line: 84 ]]
+	local UseMemoResult5 = ReactModule.useMemo(function()
 		-- upvalues: UseStateResult5 (copy)
 		return if UseStateResult5 == nil then nil else { current = UseStateResult5 }
 	end, { UseStateResult5 })
 	local UseStateResult6, UseStateResult2_5 = ReactModule.useState(nil)
-	ReactModule.useLayoutEffect(function() --[[ Line: 131 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseStateResult2_5 (copy), SupportPaneRef (copy)
 		UseStateResult2_5(if SupportPaneRef == nil then nil else SupportPaneRef.current)
 	end, { SupportPaneRef })
@@ -124,7 +124,7 @@ local function SplitPaneEducationalTourBody(p1) --[[ Line: 100 ]]
 		shouldRestoreFocus = false,
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp
 	})))
-	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 162 ]]
+	local UseResult = ReactModule.useCallback(function(Current)
 		-- upvalues: UseDefaultFocusBehaviorResult2 (copy)
 		if typeof(UseDefaultFocusBehaviorResult2) == "function" then
 			UseDefaultFocusBehaviorResult2(Current)
@@ -142,24 +142,24 @@ local function SplitPaneEducationalTourBody(p1) --[[ Line: 100 ]]
 	local UseStateResult7, UseStateResult2_6 = ReactModule.useState(nil)
 	local UseStateResult8, UseStateResult2_7 = ReactModule.useState(false)
 	local UseFocusOnMountResult = UseFocusOnMountFunction(UseDefaultFocusBehaviorResult)
-	local UseResult1 = ReactModule.useCallback(function(Current) --[[ Line: 176 ]]
+	local UseResult1 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), UseFocusOnMountResult (copy)
 		UseRefResult.current = Current
 		UseFocusOnMountResult(Current)
 	end, { UseFocusOnMountResult })
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 180 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_6 (copy), UseResult (copy)
 		UseStateResult2_6(p2)
 		UseResult(p2)
 	end, { UseResult })
-	ReactModule.useLayoutEffect(function() --[[ Line: 184 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseStateResult7 (copy), UseStateResult2_7 (copy), IsSplitPaneEducationalTourGuiObjectVisibleModule (upval)
 		if UseStateResult7 == nil then
 			UseStateResult2_7(false)
 			
 			return
 		end
-		local function updateVisibility() --[[ Line: 189 ]]
+		local function updateVisibility()
 			-- upvalues: UseStateResult2_7 (upval), IsSplitPaneEducationalTourGuiObjectVisibleModule (upval), UseStateResult7 (upval)
 			UseStateResult2_7(IsSplitPaneEducationalTourGuiObjectVisibleModule(UseStateResult7))
 		end
@@ -167,7 +167,7 @@ local function SplitPaneEducationalTourBody(p1) --[[ Line: 100 ]]
 		UseStateResult2_7(IsSplitPaneEducationalTourGuiObjectVisibleModule(UseStateResult7))
 		local Connections = {}
 		
-		local function observeVisibleAncestors() --[[ Line: 194 ]]
+		local function observeVisibleAncestors()
 			-- upvalues: Connections (ref), UseStateResult7 (upval), updateVisibility (copy), UseStateResult2_7 (upval), IsSplitPaneEducationalTourGuiObjectVisibleModule (upval)
 			for _, connection in Connections do
 				connection:Disconnect()
@@ -186,7 +186,7 @@ local function SplitPaneEducationalTourBody(p1) --[[ Line: 100 ]]
 		observeVisibleAncestors()
 		local AncestryChangedConnection = UseStateResult7.AncestryChanged:Connect(observeVisibleAncestors)
 		
-		return function() --[[ Line: 210 ]]
+		return function()
 			-- upvalues: AncestryChangedConnection (copy), Connections (ref)
 			AncestryChangedConnection:Disconnect()
 			
@@ -224,34 +224,34 @@ local function SplitPaneEducationalTourBody(p1) --[[ Line: 100 ]]
 		splitPaneStore = Store
 	})
 	local UseStateResult9, UseStateResult2_8 = ReactModule.useState(not IsSmallestAbove)
-	ReactModule.useEffect(function() --[[ Line: 249 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsSmallestAbove (upval), Smallest (upval), UseStateResult2_8 (copy)
 		if not IsSmallestAbove then return end
 		local Flag = false
-		task.delay(Smallest / 1000, function() --[[ Line: 254 ]]
+		task.delay(Smallest / 1000, function()
 			-- upvalues: Flag (ref), UseStateResult2_8 (upval)
 			if not Flag then
 				UseStateResult2_8(true)
 			end
 		end)
 		
-		return function() --[[ Line: 259 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 265 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult8 (copy), UseStateResult9 (copy), UseSplitPaneEducationalTourLifecycleModuleResult (copy)
 		if UseStateResult8 or not UseStateResult9 then return end
 		local Flag = false
-		task.delay(5, function() --[[ Line: 270 ]]
+		task.delay(5, function()
 			-- upvalues: Flag (ref), UseSplitPaneEducationalTourLifecycleModuleResult (upval)
 			if not Flag then
 				UseSplitPaneEducationalTourLifecycleModuleResult.endTour()
 			end
 		end)
 		
-		return function() --[[ Line: 275 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end
@@ -260,7 +260,7 @@ local function SplitPaneEducationalTourBody(p1) --[[ Line: 100 ]]
 		UseStateResult9,
 		UseSplitPaneEducationalTourLifecycleModuleResult.endTour
 	})
-	ReactModule.useEffect(function() --[[ Line: 279 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UsePreferredInputResult (copy), Input (upval), GuiService (upval), UseFocusGuiObjectResult (copy)
 		if UseRefResult.current ~= nil and (UsePreferredInputResult == Input.Directional or GuiService.SelectedCoreObject ~= nil) then
 			UseFocusGuiObjectResult(UseRefResult.current)
@@ -281,14 +281,14 @@ local function SplitPaneEducationalTourBody(p1) --[[ Line: 100 ]]
 		localized = UseLocalizationResult
 	}) else nil
 	local UseStateResult10, UseStateResult2_9 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 303 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult8 (copy), UseStateResult2_9 (copy)
 		if UseStateResult8 then
 			UseStateResult2_9(true)
 		end
 	end, { UseStateResult8 })
 	local UseRefResult1 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 310 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), SplitPaneEducationalTourStepsModuleEntry (copy), UseStateResult7 (copy), UseStateResult8 (copy), TourStore (copy)
 		if not UseRefResult1.current and SplitPaneEducationalTourStepsModuleEntry ~= nil and UseStateResult7 ~= nil and UseStateResult8 then
 			UseRefResult1.current = true
@@ -336,7 +336,7 @@ for _, value in string.split(require(script.Parent.Parent.Flags.FStringSplitPane
 		table.insert(List, Match)
 	end
 end
-local function isKeepOnDeepLink(Text: string): boolean --[[ Line: 355 ]]
+local function isKeepOnDeepLink(Text: string): boolean
 	-- upvalues: List (copy)
 	local Part = string.split(string.lower(Text), "?")[1]
 	
@@ -350,7 +350,7 @@ local function isKeepOnDeepLink(Text: string): boolean --[[ Line: 355 ]]
 	return false
 end
 
-return function(p2) --[[ Line: 367 | Named "SplitPaneEducationalTour" ]]
+return function(p2)
 	-- upvalues: GetSplitPaneEducationalTourStoreModule (copy), UseSignalStateFunction (copy), LocalUserIdStore (copy), UseSelectorFunction (copy), selectIsCentralOverlayOpen (copy), FFlagSplitPaneEducationalTourPreloadVideosModule (copy), UseSplitPaneEducationalTourVideoPreloadModule (copy), FFlagDebugSplitPaneEducationalTourAutoStartModule (copy), FFlagSplitPaneEducationalTourSkipOnDeepLinkModule (copy), DeepLinkLuaReceiverStatusStore (copy), isKeepOnDeepLink (copy), ReactModule (copy), SplitPaneEducationalTourBody (copy)
 	local SplitPaneEducationalTourStoreModule = GetSplitPaneEducationalTourStoreModule(false)
 	local UseSignalStateResult = UseSignalStateFunction(SplitPaneEducationalTourStoreModule.getStepIndex)
@@ -366,7 +366,7 @@ return function(p2) --[[ Line: 367 | Named "SplitPaneEducationalTour" ]]
 	local UseSignalStateResult4 = if FFlagSplitPaneEducationalTourSkipOnDeepLinkModule then UseSignalStateFunction(DeepLinkLuaReceiverStatusStore(false).getLastDetectedPostAuthUrl) else nil
 	local Inverted: boolean = UseSignalStateResult4 ~= nil and (UseSignalStateResult4 ~= "" and not isKeepOnDeepLink(UseSignalStateResult4))
 	local UseRefResult = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 390 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult1 (copy), UseSignalStateResult2 (copy), UseSignalStateResult3 (copy), SplitPaneEducationalTourStoreModule (copy), Inverted (copy), UseSignalStateResult (copy), UseRefResult (copy), NoUseSelectorResult (copy)
 		if UseSignalStateResult1 and UseSignalStateResult2 ~= UseSignalStateResult3 then
 			SplitPaneEducationalTourStoreModule.discardPendingTour()
@@ -396,7 +396,7 @@ return function(p2) --[[ Line: 367 | Named "SplitPaneEducationalTour" ]]
 		SplitPaneEducationalTourStoreModule.discardPendingTour
 	})
 	local UseRefResult1 = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 425 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagDebugSplitPaneEducationalTourAutoStartModule (upval), NoUseSelectorResult (copy), Inverted (copy), UseRefResult1 (copy), SplitPaneEducationalTourStoreModule (copy)
 		if FFlagDebugSplitPaneEducationalTourAutoStartModule and NoUseSelectorResult and not Inverted and not UseRefResult1.current then
 			UseRefResult1.current = true
@@ -407,9 +407,9 @@ return function(p2) --[[ Line: 367 | Named "SplitPaneEducationalTour" ]]
 		Inverted,
 		SplitPaneEducationalTourStoreModule.setStepIndex
 	})
-	ReactModule.useEffect(function() --[[ Line: 440 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SplitPaneEducationalTourStoreModule (copy)
-		return function() --[[ Line: 441 ]]
+		return function()
 			-- upvalues: SplitPaneEducationalTourStoreModule (upval)
 			SplitPaneEducationalTourStoreModule.discardPendingTour()
 		end

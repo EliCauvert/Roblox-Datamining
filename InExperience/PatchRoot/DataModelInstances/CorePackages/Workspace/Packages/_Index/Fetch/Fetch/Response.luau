@@ -4,7 +4,7 @@ local Body = require(script.Parent.Body).Body
 local self = setmetatable({}, { __index = Body })
 self.__index = self
 
-function self.new(Body1, p1) --[[ Line: 44 ]]
+function self.new(Body1, p1)
 	-- upvalues: Body (copy), self (copy), Headers (copy)
 	local P1 = p1 or {}
 	local self1 = setmetatable(Body.new(Body1), self)
@@ -20,7 +20,7 @@ function self.new(Body1, p1) --[[ Line: 44 ]]
 	return self1
 end
 
-function self.error() --[[ Line: 59 ]]
+function self.error()
 	-- upvalues: self (copy)
 	local NewResult = self.new(nil, { status = 0 })
 	NewResult.type = "error"
@@ -28,15 +28,15 @@ function self.error() --[[ Line: 59 ]]
 	return NewResult
 end
 
-function self:redirect(_) --[[ Line: 67 ]]
+function self:redirect(_)
 	error("Response.redirect not implemented")
 end
 
-function self:STATIC_json(_) --[[ Line: 75 ]]
+function self:STATIC_json(_)
 	error("Response.json static method not implemented")
 end
 
-function self:clone() --[[ Line: 79 ]]
+function self:clone()
 	-- upvalues: self (copy)
 	return self.new(self.body, {
 		status = self.status,

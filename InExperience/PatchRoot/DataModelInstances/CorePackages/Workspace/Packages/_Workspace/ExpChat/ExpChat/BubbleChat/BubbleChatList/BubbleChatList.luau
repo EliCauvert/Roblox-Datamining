@@ -15,14 +15,14 @@ local GetFFlagExpChatUseUpdatedMessageRenderedModule = require(ExpChat.Flags.get
 local FFlagExpChatPresetChatEnabled = require(Parent.ExpChatShared).Flags.FFlagExpChatPresetChatEnabled
 local IsBorderlessBubbleChatEnabledModule = require(ExpChat.isBorderlessBubbleChatEnabled)
 
-function BubbleChatList.getDerivedStateFromProps(p1, p2) --[[ Line: 25 ]]
+function BubbleChatList.getDerivedStateFromProps(p1, p2)
 	-- upvalues: IsBorderlessBubbleChatEnabledModule (copy), List (copy), IsBorderlessBubbleChatMessageModule (copy), GetFFlagChatTranslationUIEnabledBubbleChatModule (copy), FFlagExpChatPresetChatEnabled (copy), GetFFlagExpChatUseUpdatedMessageRenderedModule (copy), GetBubbleChatDisplayTextModule (copy), GetBubbleChatStartTimeMillisModule (copy)
 	local List1 = {}
 	local Message = if IsBorderlessBubbleChatEnabledModule() then p1.messages[#p1.messages] else nil
 	
 	if p2.bubbles then
 		for _, bubble in ipairs(p2.bubbles) do
-			if not List.findWhere(p1.messages, function(p3, _): boolean --[[ Line: 33 ]]
+			if not List.findWhere(p1.messages, function(p3, _): boolean
 				-- upvalues: bubble (copy)
 				return p3.messageId == bubble.messageId
 			end) and (not IsBorderlessBubbleChatEnabledModule() or (Message == nil or not bubble.isBorderless and not IsBorderlessBubbleChatMessageModule(Message))) then
@@ -56,16 +56,16 @@ function BubbleChatList.getDerivedStateFromProps(p1, p2) --[[ Line: 25 ]]
 	return { bubbles = List1 }
 end
 
-function BubbleChatList.init(p3, p4) --[[ Line: 88 ]]
+function BubbleChatList.init(p3, p4)
 	-- upvalues: List (copy)
 	p3.state = {}
 	
 	if (not p4.messages or #p4.messages == 0) and p4.onLastBubbleFadeOut then
 		p4.onLastBubbleFadeOut()
 	end
-	function p3.onBubbleFadeOut(MessageId) --[[ Line: 97 ]]
+	function p3.onBubbleFadeOut(MessageId)
 		-- upvalues: List (upval), p3 (copy)
-		local FilterResult = List.filter(p3.state.bubbles, function(p5): boolean --[[ Line: 98 ]]
+		local FilterResult = List.filter(p3.state.bubbles, function(p5): boolean
 			-- upvalues: MessageId (copy)
 			return p5.messageId ~= MessageId
 		end)
@@ -80,7 +80,7 @@ function BubbleChatList.init(p3, p4) --[[ Line: 88 ]]
 	end
 end
 
-function BubbleChatList.render(p3) --[[ Line: 113 ]]
+function BubbleChatList.render(p3)
 	-- upvalues: RoactModule (copy), GlobalFlagsModule (copy), IsBorderlessBubbleChatEnabledModule (copy), ApplyBubbleChatMessagePropertiesTextModule (copy), BorderlessBubbleChatModule (copy), ChatBubbleModule (copy), GetFFlagChatTranslationUIEnabledBubbleChatModule (copy), FFlagExpChatPresetChatEnabled (copy), GetFFlagExpChatUseUpdatedMessageRenderedModule (copy)
 	local ChatSettings = p3.props.chatSettings
 	local Elements = {

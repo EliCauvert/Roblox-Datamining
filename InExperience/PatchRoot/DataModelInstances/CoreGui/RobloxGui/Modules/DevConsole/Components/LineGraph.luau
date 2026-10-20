@@ -14,16 +14,16 @@ local InnerScaleY = ConstantsModule.Graph.InnerScaleY
 local TextPadding = ConstantsModule.Graph.TextPadding
 local LineGraph = RoactModule.Component:extend("LineGraph")
 
-function LineGraph.init(p1) --[[ Line: 24 ]]
+function LineGraph.init(p1)
 	-- upvalues: RoactModule (copy)
-	function p1:onGraphInputChanged(Input) --[[ Line: 25 ]]
+	function p1:onGraphInputChanged(Input)
 		-- upvalues: p1 (copy)
 		if Input.UserInputType == Enum.UserInputType.MouseMovement and not p1.state.holdPos then
 			p1:setState({ inputPosition = Input.Position })
 		end
 	end
 	
-	function p1:onGraphInputEnded(Input) --[[ Line: 35 ]]
+	function p1:onGraphInputEnded(Input)
 		-- upvalues: p1 (copy)
 		if Input.UserInputType == Enum.UserInputType.MouseMovement then
 			if not p1.state.holdPos then
@@ -40,7 +40,7 @@ function LineGraph.init(p1) --[[ Line: 24 ]]
 	p1.state = { selectedTimeStamps = {} }
 end
 
-function LineGraph.didUpdate(p1) --[[ Line: 55 ]]
+function LineGraph.didUpdate(p1)
 	if p1.state.absGraphSize ~= p1.graphRef.current.AbsoluteSize then
 		p1:setState({
 			absGraphSize = p1.graphRef.current.AbsoluteSize,
@@ -49,14 +49,14 @@ function LineGraph.didUpdate(p1) --[[ Line: 55 ]]
 	end
 end
 
-function LineGraph.didMount(p1) --[[ Line: 67 ]]
+function LineGraph.didMount(p1)
 	p1:setState({
 		absGraphSize = p1.graphRef.current.AbsoluteSize,
 		absGraphPos = p1.graphRef.current.AbsolutePosition
 	})
 end
 
-function LineGraph.render(p1) --[[ Line: 77 ]]
+function LineGraph.render(p1)
 	-- upvalues: InnerScaleY (copy), RoactModule (copy), LineWidth (copy), InnerPaddingY (copy), HighlightBlue (copy), PointWidth (copy), PointOffset (copy), LineGraphHoverDisplayModule (copy), TextPadding (copy), LineColor (copy), Text (copy), Padding (copy), Scale (copy)
 	local Size = p1.props.size
 	local Pos = p1.props.pos

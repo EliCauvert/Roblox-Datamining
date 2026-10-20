@@ -9,7 +9,7 @@ local UserProfileStore = require(Parent.UserProfiles).Stores.UserProfileStore
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 local UseCurrentSquadSelectorFunction = require(Parent.RoduxSquads).Hooks.useCurrentSquadSelector
 
-return function() --[[ Line: 18 ]]
+return function()
 	-- upvalues: UseCurrentSquadSelectorFunction (copy), UseLocalUserIdFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), UseSelectorFunction (copy), CryoModule (copy), GuiService (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), UserProfileStore (copy)
 	local UseCurrentSquadSelectorResult = UseCurrentSquadSelectorFunction()
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
@@ -19,15 +19,15 @@ return function() --[[ Line: 18 ]]
 		multiplePeopleJoinedYourPartyText = "Feature.Squads.Label.MultiplePeopleJoinedYourParty",
 		twoFriendsJoinedYourPartyText = "Feature.Squads.Label.TwoFriendsJoinedYourParty"
 	})
-	local UseSelectorResult = UseSelectorFunction((ReactModule.useCallback(function(p1) --[[ Line: 29 ]]
+	local UseSelectorResult = UseSelectorFunction((ReactModule.useCallback(function(p1)
 		return p1.Squad.UserBlocking.isBlockedByMe
 	end, {})))
-	ReactModule.useEffect(function() --[[ Line: 34 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseCurrentSquadSelectorResult (copy), UseRefResult (copy), CryoModule (upval), UseLocalUserIdResult (copy), UseSelectorResult (copy), GuiService (upval), UseLocalizationResult (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (upval), UserProfileStore (upval)
 		local Members = if UseCurrentSquadSelectorResult then UseCurrentSquadSelectorResult.members else nil
 		
 		if UseRefResult.current and Members then
-			local Set = CryoModule.List.toSet(CryoModule.List.map(UseRefResult.current, function(p1): string --[[ Line: 39 ]]
+			local Set = CryoModule.List.toSet(CryoModule.List.map(UseRefResult.current, function(p1): string
 				return (tostring(p1.userId))
 			end))
 			local List = {}
@@ -48,7 +48,7 @@ return function() --[[ Line: 18 ]]
 						Icon = GetStandardSizeAvatarHeadShotRbxthumbFunction(List[1])
 					})
 				else
-					UserProfileStore.get().fetchNamesByUserIds(List, function(p1) --[[ Line: 63 ]]
+					UserProfileStore.get().fetchNamesByUserIds(List, function(p1)
 						-- upvalues: CountList (copy), UseLocalizationResult (upval), GetStandardSizeAvatarHeadShotRbxthumbFunction (upval), List (copy), GuiService (upval)
 						if #p1.data > 0 and p1.status == "success" then
 							GuiService:SendNotification({

@@ -4,10 +4,10 @@ local _ = require(script.Parent.VirtualizedFeedView)
 local _ = require(script.Parent.AssetPickerTile)
 local GetGridMetricsModule = require(AvatarExperienceProfilePictureEditor.Utils.getGridMetrics)
 
-return function(Frame) --[[ Line: 33 | Named "useAssetPickerVirtualizedFeedViewModel" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), GetGridMetricsModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Frame.initialContainerWidth)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 36 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: GetGridMetricsModule (upval), UseStateResult (copy), Frame (copy)
 		return GetGridMetricsModule({
 			containerWidth = UseStateResult,
@@ -26,7 +26,7 @@ return function(Frame) --[[ Line: 33 | Named "useAssetPickerVirtualizedFeedViewM
 	local UseRefResult = ReactModule.useRef(nil)
 	
 	return {
-		rows = ReactModule.useMemo(function() --[[ Line: 54 ]]
+		rows = ReactModule.useMemo(function()
 			-- upvalues: Frame (copy), UseMemoResult (copy)
 			local t = {}
 			
@@ -48,11 +48,11 @@ return function(Frame) --[[ Line: 33 | Named "useAssetPickerVirtualizedFeedViewM
 		onSelect = Frame.onSelect,
 		onDetailsActivated = Frame.onDetailsActivated,
 		labels = Frame.labels,
-		onContainerWidthChanged = ReactModule.useCallback(function(p1) --[[ Line: 68 ]]
+		onContainerWidthChanged = ReactModule.useCallback(function(p1)
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(p1)
 		end, {}),
-		onEndReached = ReactModule.useCallback(function() --[[ Line: 74 ]]
+		onEndReached = ReactModule.useCallback(function()
 			-- upvalues: Frame (copy), UseRefResult (copy)
 			if Frame.hasMoreItems and not Frame.isLoadingMore and not Frame.hasLoadMoreError and UseRefResult.current ~= Frame.items then
 				UseRefResult.current = Frame.items

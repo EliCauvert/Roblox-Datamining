@@ -9,7 +9,7 @@ local TModule = require(Parent.t)
 local FlaggedMutedErrorFunction = require(Parent.Loggers).flaggedMutedError
 local _ = require(PlayerFeedback.Types)
 
-local function _(Text): string --[[ Line: 14 | Named "fetchKeymapper" ]]
+local function _(Text): string
 	return "luaapp.asset-review-api.channels" .. Text
 end
 
@@ -18,7 +18,7 @@ local config = {
 	[VoteStatus.VotedDown] = "Downvote"
 }
 
-local _ = function(List, Type) --[[ Line: 23 | Named "findCategoryByType" ]]
+local _ = function(List, Type)
 	for _, value in ipairs(List) do
 		if value.type == Type then
 			return value
@@ -53,11 +53,11 @@ local InterfaceResult = TModule.interface({
 })
 
 return {
-	Get = function(p1, _, RootPlaceId, p2) --[[ Line: 62 ]]
+	Get = function(p1, _, RootPlaceId, p2)
 		-- upvalues: PerformFetch (copy), GameGetPlayerFeedbackMetadataModule (copy), FeedbackChannelModule (copy), InterfaceResult (copy), FlaggedMutedErrorFunction (copy), PromiseModule (copy), config (copy)
-		return PerformFetch.Single("luaapp.asset-review-api.channels" .. RootPlaceId, function(_) --[[ Line: 63 ]]
+		return PerformFetch.Single("luaapp.asset-review-api.channels" .. RootPlaceId, function(_)
 			-- upvalues: GameGetPlayerFeedbackMetadataModule (upval), p1 (copy), FeedbackChannelModule (upval), RootPlaceId (copy), InterfaceResult (upval), FlaggedMutedErrorFunction (upval), PromiseModule (upval), config (upval), p2 (copy)
-			return GameGetPlayerFeedbackMetadataModule(p1, FeedbackChannelModule.ExperienceDiscoveryPage, RootPlaceId):andThen(function(Result) --[[ Line: 65 ]]
+			return GameGetPlayerFeedbackMetadataModule(p1, FeedbackChannelModule.ExperienceDiscoveryPage, RootPlaceId):andThen(function(Result)
 				-- upvalues: InterfaceResult (upval), FlaggedMutedErrorFunction (upval), PromiseModule (upval), config (upval), p2 (upval), RootPlaceId (upval)
 				local ResponseBody = Result and Result.responseBody
 				local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult(ResponseBody)
@@ -91,13 +91,13 @@ return {
 						metadata = ResponseBody.metadata
 					})
 				end
-			end, function(p3) --[[ Line: 94 ]]
+			end, function(p3)
 				-- upvalues: PromiseModule (upval)
 				return PromiseModule.reject(p3)
 			end)
 		end)
 	end,
-	GetFetchingStatus = function(p3, Text) --[[ Line: 100 ]]
+	GetFetchingStatus = function(p3, Text)
 		-- upvalues: PerformFetch (copy)
 		return PerformFetch.GetStatus(p3, "luaapp.asset-review-api.channels" .. Text)
 	end

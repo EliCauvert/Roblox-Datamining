@@ -22,7 +22,7 @@ local Frozen = table.freeze({
 	Leaving = "Leaving"
 })
 
-local function _(List): boolean --[[ Line: 44 | Named "wasCancelled" ]]
+local function _(List): boolean
 	-- upvalues: ActionStatusEnum (copy)
 	if List == nil then
 		return false
@@ -37,9 +37,9 @@ end
 
 return {
 	Status = Frozen,
-	useBuildPageEligibility = function(p1) --[[ Line: 58 ]]
+	useBuildPageEligibility = function(p1)
 		-- upvalues: UniversalAppPolicyModule (copy), UseDispatchFunction (copy), UseNavigationFocusFunction (copy), ReactModule (copy), Frozen (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), BuildPolicyRefreshTimeoutMs (copy), AccessResponseEnum (copy), ActionStatusEnum (copy), OpenAmpWizardContainerFunction (copy), FStringTriggerAgeCheckUpsellIncludingVPCAmpFeature (copy), FStringCoreContentAmpNameSpace (copy)
-		local UseAppPolicyResult, UseAppPolicyResult2 = UniversalAppPolicyModule.useAppPolicy(function(p2) --[[ Line: 59 ]]
+		local UseAppPolicyResult, UseAppPolicyResult2 = UniversalAppPolicyModule.useAppPolicy(function(p2)
 			-- upvalues: p1 (copy)
 			if p1 then
 				return p2.getCanViewBuild(), p2.getCanUseBuild()
@@ -54,7 +54,7 @@ return {
 		local UseRefResult2 = ReactModule.useRef(0)
 		local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 		local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Frozen.Prompting)
-		local UseResult = ReactModule.useCallback(function() --[[ Line: 73 ]]
+		local UseResult = ReactModule.useCallback(function()
 			-- upvalues: UseRefResult (copy), UseRefResult2 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), Frozen (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval)
 			UseRefResult.current = false
 			UseRefResult2.current += 1
@@ -69,13 +69,13 @@ return {
 				UseDispatchResult(NavigateBackFunction(true))
 			end
 		end, { UseDispatchResult })
-		local UseResult1 = ReactModule.useCallback(function() --[[ Line: 85 ]]
+		local UseResult1 = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy), Frozen (upval), UseRefResult2 (copy), BuildPolicyRefreshTimeoutMs (upval), UniversalAppPolicyModule (upval)
 			UseStateResult2(false)
 			UseStateResult2_1(Frozen.Refreshing)
 			UseRefResult2.current += 1
 			local Current = UseRefResult2.current
-			task.delay(BuildPolicyRefreshTimeoutMs / 1000, function() --[[ Line: 91 ]]
+			task.delay(BuildPolicyRefreshTimeoutMs / 1000, function()
 				-- upvalues: UseRefResult2 (upval), Current (copy), UniversalAppPolicyModule (upval), UseStateResult2 (upval), UseStateResult2_1 (upval), Frozen (upval)
 				if UseRefResult2.current ~= Current then return end
 				local AppFeaturePolicies = UniversalAppPolicyModule.getAppFeaturePolicies()
@@ -95,7 +95,7 @@ return {
 				end
 			end)
 		end, {})
-		local UseResult2 = ReactModule.useCallback(function(Granted, List) --[[ Line: 110 ]]
+		local UseResult2 = ReactModule.useCallback(function(Granted, List)
 			-- upvalues: AccessResponseEnum (upval), UseResult1 (copy), ActionStatusEnum (upval), UseResult (copy), UseStateResult2_1 (copy), Frozen (upval)
 			if Granted == AccessResponseEnum.Granted then
 				UseResult1()
@@ -123,7 +123,7 @@ return {
 				UseStateResult2_1(Frozen.Error)
 			end
 		end, { UseResult1, UseResult })
-		ReactModule.useEffect(function() --[[ Line: 120 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRefResult1 (copy), UseNavigationFocusResult (copy), UseStateResult1 (copy), Frozen (upval), UseRefResult (copy), UseStateResult2_1 (copy)
 			local Current = UseRefResult1.current
 			UseRefResult1.current = UseNavigationFocusResult
@@ -138,7 +138,7 @@ return {
 				UseStateResult2_1(Frozen.Prompting)
 			end
 		end, { UseNavigationFocusResult, UseStateResult1 })
-		ReactModule.useEffect(function() --[[ Line: 132 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p1 (copy), UseAppPolicyResult2 (copy), UseRefResult2 (copy), UseRefResult (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), Frozen (upval), UseAppPolicyResult (copy)
 			if not p1 then return end
 			if UseAppPolicyResult2 then
@@ -155,7 +155,7 @@ return {
 				UseStateResult2_1(Frozen.Ineligible)
 			end
 		end, { UseAppPolicyResult, UseAppPolicyResult2, p1 })
-		ReactModule.useEffect(function() --[[ Line: 150 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p1 (copy), UseNavigationFocusResult (copy), UseStateResult1 (copy), Frozen (upval), UseAppPolicyResult2 (copy), UseAppPolicyResult (copy), UseRefResult (copy), UseDispatchResult (copy), OpenAmpWizardContainerFunction (upval), FStringTriggerAgeCheckUpsellIncludingVPCAmpFeature (upval), UseResult2 (copy), FStringCoreContentAmpNameSpace (upval)
 			if p1 and UseNavigationFocusResult and UseStateResult1 == Frozen.Prompting and not UseAppPolicyResult2 and UseAppPolicyResult and not UseRefResult.current then
 				UseRefResult.current = true
@@ -167,9 +167,9 @@ return {
 			UseAppPolicyResult, UseAppPolicyResult2, UseDispatchResult, p1, UseResult2,
 			UseNavigationFocusResult, UseStateResult1
 		})
-		ReactModule.useEffect(function() --[[ Line: 185 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRefResult2 (copy)
-			return function() --[[ Line: 186 ]]
+			return function()
 				-- upvalues: UseRefResult2 (upval)
 				UseRefResult2.current += 1
 			end

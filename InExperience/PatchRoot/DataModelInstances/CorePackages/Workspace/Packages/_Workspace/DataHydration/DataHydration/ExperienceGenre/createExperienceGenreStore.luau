@@ -13,12 +13,12 @@ local config = {
 	includeNotifyGenreChange = true
 }
 
-return function(p1) --[[ Line: 31 | Named "createExperienceGenreStore" ]]
+return function(p1)
 	-- upvalues: config (copy), CreateSingleEntityResolverModule (copy), FetchExperienceGenreModule (copy), SyncExperienceGenreToGameInfoFunction (copy)
 	local P0 = p1 or {}
 	local config1 = { network = P0.network, baseUrl = P0.baseUrl }
 	local DefaultGetOptions = P0.defaultGetOptions or config
-	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p2) --[[ Line: 36 ]]
+	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p2)
 		-- upvalues: FetchExperienceGenreModule (upval), DefaultGetOptions (copy), config1 (copy)
 		return FetchExperienceGenreModule.fetchExperienceGenre(p2, DefaultGetOptions, config1)
 	end)
@@ -27,9 +27,9 @@ return function(p1) --[[ Line: 31 | Named "createExperienceGenreStore" ]]
 		getExperienceGenre = SingleEntityResolverModule.get,
 		fetchExperienceGenre = SingleEntityResolverModule.fetch,
 		getAndFetchExperienceGenre = SingleEntityResolverModule.getAndFetch,
-		setExperienceGenre = function(p2) --[[ Line: 40 ]]
+		setExperienceGenre = function(p2)
 			-- upvalues: FetchExperienceGenreModule (upval), config1 (copy), SingleEntityResolverModule (copy), SyncExperienceGenreToGameInfoFunction (upval)
-			return FetchExperienceGenreModule.setExperienceGenre(p2, config1):andThen(function(Result) --[[ Line: 41 ]]
+			return FetchExperienceGenreModule.setExperienceGenre(p2, config1):andThen(function(Result)
 				-- upvalues: SingleEntityResolverModule (upval), p2 (copy), SyncExperienceGenreToGameInfoFunction (upval)
 				SingleEntityResolverModule.update(p2.universeId, Result)
 				SyncExperienceGenreToGameInfoFunction(p2.universeId, nil, Result.genre)

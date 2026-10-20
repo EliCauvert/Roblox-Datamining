@@ -17,12 +17,12 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagSduiTemplateApiPostRequest = SharedFlagsModule.FFlagSduiTemplateApiPostRequest
 local FFlagSduiAdvertiseRuntimeSupportSets = SharedFlagsModule.FFlagSduiAdvertiseRuntimeSupportSets
 
-local function _(): string --[[ Line: 50 | Named "getTemplatesUrl" ]]
+local function _(): string
 	-- upvalues: UrlBuilderModule (copy)
 	return `{UrlBuilderModule.UrlBase.APIS}/landing-page-api/v1/templates`
 end
 
-local function resolveSurfaceKey(Value, p1) --[[ Line: 54 ]]
+local function resolveSurfaceKey(Value, p1)
 	-- upvalues: SduiSurfaceToDisplayLocationModule (copy), SduiLogger (copy), SduiErrors (copy), DisplayLocation (copy)
 	local SduiSurfaceToDisplayLocationModuleEntry = SduiSurfaceToDisplayLocationModule[Value]
 	
@@ -59,7 +59,7 @@ local function resolveSurfaceKey(Value, p1) --[[ Line: 54 ]]
 	end
 end
 
-local function resolveSurfaceKeys(SurfaceKeys) --[[ Line: 92 ]]
+local function resolveSurfaceKeys(SurfaceKeys)
 	-- upvalues: resolveSurfaceKey (copy), SduiLogger (copy), SduiErrors (copy)
 	local config = {
 		displayLocationNumbers = {},
@@ -84,7 +84,7 @@ local function resolveSurfaceKeys(SurfaceKeys) --[[ Line: 92 ]]
 	return nil
 end
 
-local _ = function(List) --[[ Line: 116 | Named "getDisplayLocationValues" ]]
+local _ = function(List)
 	local Buffer = table.create(#List)
 	
 	for _, value in List do
@@ -93,7 +93,7 @@ local _ = function(List) --[[ Line: 116 | Named "getDisplayLocationValues" ]]
 	return Buffer
 end
 
-local function buildGetUrl(DisplayLocationNumbers, Locale, Capabilities) --[[ Line: 124 ]]
+local function buildGetUrl(DisplayLocationNumbers, Locale, Capabilities)
 	-- upvalues: SduiCapabilities (copy), UrlBuilderModule (copy)
 	local config = { platform = "App" }
 	local ConcatFunction = table.concat
@@ -109,7 +109,7 @@ local function buildGetUrl(DisplayLocationNumbers, Locale, Capabilities) --[[ Li
 	return UrlBuilderModule.UrlBuilder.addQueryString(`{UrlBuilderModule.UrlBase.APIS}/landing-page-api/v1/templates`, config)
 end
 
-local function buildCachedComponentMappings(DisplayLocationNumbers, SurfaceKeysByDisplayLocation) --[[ Line: 134 ]]
+local function buildCachedComponentMappings(DisplayLocationNumbers, SurfaceKeysByDisplayLocation)
 	-- upvalues: GetSduiTemplateStoreModule (copy), DisplayLocation (copy), TemplateApiMessages (copy)
 	local List = {}
 	local SduiTemplateStoreModule = GetSduiTemplateStoreModule()
@@ -132,7 +132,7 @@ local function buildCachedComponentMappings(DisplayLocationNumbers, SurfaceKeysB
 	return List
 end
 
-local function buildPostConfig(p2, Locale, Capabilities) --[[ Line: 162 ]]
+local function buildPostConfig(p2, Locale, Capabilities)
 	-- upvalues: ServiceContractsProtoModule (copy), TemplateApiMessages (copy), SduiCapabilities (copy), buildCachedComponentMappings (copy), SduiApiStorePostConfigModule (copy)
 	return {
 		contentType = SduiApiStorePostConfigModule.SduiApiStorePostConfigContentType.Proto,
@@ -149,7 +149,7 @@ local function buildPostConfig(p2, Locale, Capabilities) --[[ Line: 162 ]]
 	}
 end
 
-local function buildPostConfigWithRuntimeSupport(p2, Locale, Client_capabilities) --[[ Line: 192 ]]
+local function buildPostConfigWithRuntimeSupport(p2, Locale, Client_capabilities)
 	-- upvalues: TemplateApiMessages (copy), buildCachedComponentMappings (copy), SduiApiStorePostConfigModule (copy)
 	return {
 		contentType = SduiApiStorePostConfigModule.SduiApiStorePostConfigContentType.Proto,
@@ -163,7 +163,7 @@ local function buildPostConfigWithRuntimeSupport(p2, Locale, Client_capabilities
 	}
 end
 
-local _ = function(p2) --[[ Line: 259 | Named "getDisplayLocationName" ]]
+local _ = function(p2)
 	-- upvalues: DisplayLocation (copy)
 	if type(p2) == "number" then
 		local Success, Result = pcall(DisplayLocation.fromNumber, p2)
@@ -174,7 +174,7 @@ local _ = function(p2) --[[ Line: 259 | Named "getDisplayLocationName" ]]
 	end
 end
 
-local function extractTemplates(p2) --[[ Line: 268 ]]
+local function extractTemplates(p2)
 	local Templates = {}
 	
 	if p2.templates then
@@ -188,7 +188,7 @@ local function extractTemplates(p2) --[[ Line: 268 ]]
 end
 
 return {
-	createRequest = function(p3) --[[ Line: 215 ]]
+	createRequest = function(p3)
 		-- upvalues: resolveSurfaceKeys (copy), LocalizationService (copy), SduiCapabilities (copy), FFlagSduiAdvertiseRuntimeSupportSets (copy), FFlagSduiTemplateApiPostRequest (copy), UrlBuilderModule (copy), buildGetUrl (copy), buildPostConfigWithRuntimeSupport (copy), TemplateApiMessages (copy), buildPostConfig (copy)
 		local ResolveSurfaceKeysResult = resolveSurfaceKeys(p3.surfaceKeys)
 		
@@ -241,7 +241,7 @@ return {
 			return config1
 		end
 	end,
-	parseResponseForSurface = function(p4, p5) --[[ Line: 280 ]]
+	parseResponseForSurface = function(p4, p5)
 		-- upvalues: SduiSurfaceToDisplayLocationModule (copy), extractTemplates (copy), DisplayLocation (copy), GetSduiTemplateStoreModule (copy)
 		local SduiSurfaceToDisplayLocationModuleEntry = SduiSurfaceToDisplayLocationModule[p5]
 		local ExtractTemplatesResult = extractTemplates(p4)
@@ -276,7 +276,7 @@ return {
 		end
 		return ExtractTemplatesResult, t, RobloxComponentToTemplateId
 	end,
-	storeResponse = function(p6, p7) --[[ Line: 309 ]]
+	storeResponse = function(p6, p7)
 		-- upvalues: GetSduiTemplateStoreModule (copy), extractTemplates (copy), DisplayLocation (copy), SduiLogger (copy), SduiErrors (copy)
 		local SduiTemplateStoreModule = GetSduiTemplateStoreModule()
 		SduiTemplateStoreModule.addTemplates((extractTemplates(p6)))

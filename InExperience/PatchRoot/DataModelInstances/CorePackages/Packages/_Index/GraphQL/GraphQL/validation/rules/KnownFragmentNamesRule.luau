@@ -1,10 +1,10 @@
 ﻿local GraphQLError = require(script.Parent.Parent.Parent.error.GraphQLError).GraphQLError
 
 return {
-	KnownFragmentNamesRule = function(p1) --[[ Line: 19 ]]
+	KnownFragmentNamesRule = function(p1)
 		-- upvalues: GraphQLError (copy)
 		return {
-			FragmentSpread = function(_, p2) --[[ Line: 21 ]]
+			FragmentSpread = function(_, p2)
 				-- upvalues: p1 (copy), GraphQLError (upval)
 				local Value = p2.name.value
 				

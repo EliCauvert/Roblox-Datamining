@@ -10,17 +10,17 @@ local View = FoundationModule.View
 local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
 local UseSurveyFocusRefsModule = require(OnPlatformSurveys.Hooks.useSurveyFocusRefs)
 
-return ReactModule.memo(function(p1) --[[ Line: 29 | Named "SurveyModal" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), UseScaledValueFunction (copy), UseSurveyFocusRefsModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), Sheet (copy), DialogSize (copy), Text (copy), View (copy)
 	local IsIsOpen = p1.isOpen ~= false
 	local OnClose = p1.onClose
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 35 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(Frame.AbsoluteSize.Y)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(Frame) --[[ Line: 38 ]]
+	local UseResult1 = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(Frame.AbsoluteSize.Y)
 	end, {})
@@ -32,7 +32,7 @@ return ReactModule.memo(function(p1) --[[ Line: 29 | Named "SurveyModal" ]]
 		onClose = OnClose,
 		size = DialogSize.Large,
 		centerSheetHeight = NewUseScaledValueResult,
-		snapPoints = ReactModule.useMemo(function() --[[ Line: 47 ]]
+		snapPoints = ReactModule.useMemo(function()
 			-- upvalues: NewUseScaledValueResult (copy)
 			return { NewUseScaledValueResult }
 		end, { NewUseScaledValueResult }),

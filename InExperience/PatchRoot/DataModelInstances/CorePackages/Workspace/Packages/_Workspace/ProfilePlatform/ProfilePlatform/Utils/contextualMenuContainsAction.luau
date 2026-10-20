@@ -2,7 +2,7 @@
 local _ = require(ProfilePlatform.Components.CTARow.Types)
 local _ = require(ProfilePlatform.Common.Enums)
 
-return function(List, Id): boolean --[[ Line: 5 | Named "contextualMenuContainsAction" ]]
+return function(List, Id): boolean
 	if not List then
 		return false
 	end

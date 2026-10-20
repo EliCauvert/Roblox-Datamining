@@ -15,7 +15,7 @@ local FFlagAvatarSwitcherAccurateAvatarWarning = require(Parent.AvatarExperience
 local FFlagAvatarSwitcherWarningLayoutFix = require(Parent.AvatarExperienceFlags).FFlagAvatarSwitcherWarningLayoutFix
 local FFlagAvatarSwitcherExpiredItemsWarning = require(Parent.AvatarExperienceFlags).FFlagAvatarSwitcherExpiredItemsWarning
 
-return function(p1) --[[ Line: 33 | Named "PreviewPanel" ]]
+return function(p1)
 	-- upvalues: SignalsReactModule (copy), GetAvatarSwitcherStoreModule (copy), UseTokensFunction (copy), ReactModule (copy), FFlagAvatarSwitcherAccurateAvatarWarning (copy), OutfitViewportUtilsModule (copy), FFlagAvatarSwitcherExpiredItemsWarning (copy), InventoryItemAvailability (copy), FoundationModule (copy), FFlagAvatarSwitcherWarningLayoutFix (copy), AvatarPreviewModule (copy), ExperienceAvatarSupportTypeModule (copy), SwitchAvatarButtonModule (copy), AvatarCompatibilityWarningModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetAvatarSwitcherStoreModule)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(UseSignalStateResult.getSelectedOutfitId)
@@ -23,7 +23,7 @@ return function(p1) --[[ Line: 33 | Named "PreviewPanel" ]]
 	local UseSignalStateResult3 = SignalsReactModule.useSignalState(UseSignalStateResult.getExperienceAvatarSupportType)
 	local UseSignalStateResult4 = SignalsReactModule.useSignalState(UseSignalStateResult.getExperienceAvatarType)
 	local UseTokensResult = UseTokensFunction()
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 41 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseSignalStateResult (copy)
 		UseSignalStateResult.toggleRespawnPrompt(true)
 	end, {})
@@ -33,12 +33,12 @@ return function(p1) --[[ Line: 33 | Named "PreviewPanel" ]]
 	
 	if FFlagAvatarSwitcherAccurateAvatarWarning then
 		v1, UseStateResult2 = ReactModule.useState(false)
-		UseResult1 = ReactModule.useCallback(function(p2, p3) --[[ Line: 48 ]]
+		UseResult1 = ReactModule.useCallback(function(p2, p3)
 			-- upvalues: UseSignalStateResult2 (copy), OutfitViewportUtilsModule (upval), UseStateResult2 (ref)
 			local HasMissingAccessoriesInHumanoid = OutfitViewportUtilsModule.hasMissingAccessoriesInHumanoid(p2, p3)
 			UseStateResult2(OutfitViewportUtilsModule.hasMissingAssetsInDescription(p3, if UseSignalStateResult2 and UseSignalStateResult2.assetIds then UseSignalStateResult2.assetIds else {}) or HasMissingAccessoriesInHumanoid)
 		end, { UseSignalStateResult2 })
-		ReactModule.useEffect(function() --[[ Line: 60 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseStateResult2 (ref)
 			UseStateResult2(false)
 		end, { UseSignalStateResult1 })

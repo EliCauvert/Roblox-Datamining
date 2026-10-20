@@ -6,7 +6,7 @@ local _ = require(script.Parent.Interfaces)
 local String = require(Parent.LuauPolyfill).String
 
 return {
-	forEachField = function(p1, Callback: (any, any, any) -> ()) --[[ Line: 25 ]]
+	forEachField = function(p1, Callback: (any, any, any) -> ())
 		-- upvalues: String (copy), GetNamedTypeFunction (copy), IsObjectTypeFunction (copy)
 		local TypeMap = p1:getTypeMap()
 		

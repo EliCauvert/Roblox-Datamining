@@ -32,18 +32,18 @@ ShowMoreWrapper.defaultProps = {
 	sectionType = require(FriendsLanding.Enums.ShowMoreSectionTypeEnum).Friends
 }
 
-function ShowMoreWrapper.init(p1) --[[ Line: 49 ]]
+function ShowMoreWrapper.init(p1)
 	-- upvalues: Dictionary (copy), FilterStatesModule (copy), UpdateFriendsWithWidthModule (copy), FriendsPerLoadGroupModule (copy), ButtonClickEventsModule (copy), FriendsPerRowModule (copy), LoadFriendGroupModule (copy), MemoizeFunction (copy), LimitFriendsModule (copy), Roact (copy), ShowMoreButtonModule (copy)
 	p1.state = {
 		width = 100,
 		selectedItemIndex = nil,
-		filterFriendCounts = Dictionary.map(FilterStatesModule, function() --[[ Line: 52 ]]
+		filterFriendCounts = Dictionary.map(FilterStatesModule, function()
 			-- upvalues: p1 (copy)
 			return p1.props.visibleRows
 		end)
 	}
 	
-	function p1.updateWidth(Frame: Frame) --[[ Line: 58 ]]
+	function p1.updateWidth(Frame: Frame)
 		-- upvalues: p1 (copy), UpdateFriendsWithWidthModule (upval)
 		p1:setState(UpdateFriendsWithWidthModule(Frame.AbsoluteSize.X))
 		
@@ -52,9 +52,9 @@ function ShowMoreWrapper.init(p1) --[[ Line: 49 ]]
 		end
 	end
 	
-	function p1.reset() --[[ Line: 66 ]]
+	function p1.reset()
 		-- upvalues: p1 (copy), Dictionary (upval), FriendsPerLoadGroupModule (upval)
-		p1:setState(function(p2, p3) --[[ Line: 67 ]]
+		p1:setState(function(p2, p3)
 			-- upvalues: Dictionary (upval), p1 (upval), FriendsPerLoadGroupModule (upval)
 			return {
 				filterFriendCounts = Dictionary.join(p1.state.filterFriendCounts, { [p1.props.filter] = FriendsPerLoadGroupModule(p2, p3) })
@@ -62,7 +62,7 @@ function ShowMoreWrapper.init(p1) --[[ Line: 49 ]]
 		end)
 	end
 	
-	function p1.showMore() --[[ Line: 77 ]]
+	function p1.showMore()
 		-- upvalues: p1 (copy), ButtonClickEventsModule (upval), FriendsPerRowModule (upval), Dictionary (upval), LoadFriendGroupModule (upval)
 		if p1.props.analytics then
 			p1.props.analytics:buttonClick(ButtonClickEventsModule.LoadMoreUsers, { sectionType = p1.props.sectionType })
@@ -75,7 +75,7 @@ function ShowMoreWrapper.init(p1) --[[ Line: 49 ]]
 			
 			return
 		else
-			p1:setState(function(p2, p3) --[[ Line: 95 ]]
+			p1:setState(function(p2, p3)
 				-- upvalues: Dictionary (upval), LoadFriendGroupModule (upval)
 				return Dictionary.join(LoadFriendGroupModule(p2, p3), { selectedItemIndex = p2.filterFriendCounts[p3.filter] + 1 })
 			end)
@@ -83,9 +83,9 @@ function ShowMoreWrapper.init(p1) --[[ Line: 49 ]]
 	end
 	
 	p1.limitFriends = MemoizeFunction(LimitFriendsModule)
-	p1.renderShowMore = MemoizeFunction(function(p2, p3, Callback) --[[ Line: 108 ]]
+	p1.renderShowMore = MemoizeFunction(function(p2, p3, Callback)
 		-- upvalues: Roact (upval), ShowMoreButtonModule (upval), p1 (copy)
-		return function(LayoutOrder) --[[ Line: 109 ]]
+		return function(LayoutOrder)
 			-- upvalues: Callback (copy), p3 (copy), p2 (copy), Roact (upval), ShowMoreButtonModule (upval), p1 (upval)
 			local CallbackResult = Callback and Callback(p3)
 			
@@ -102,7 +102,7 @@ function ShowMoreWrapper.init(p1) --[[ Line: 49 ]]
 		end
 	end)
 	
-	function p1.checkAndResetIfNeeded(DefaultProps) --[[ Line: 130 ]]
+	function p1.checkAndResetIfNeeded(DefaultProps)
 		-- upvalues: p1 (copy)
 		if #p1.props.friends ~= #DefaultProps.friends or DefaultProps.visibleRows ~= p1.props.visibleRows then
 			p1.reset()
@@ -110,11 +110,11 @@ function ShowMoreWrapper.init(p1) --[[ Line: 49 ]]
 	end
 end
 
-function ShowMoreWrapper.didUpdate(p1, p2) --[[ Line: 137 ]]
+function ShowMoreWrapper.didUpdate(p1, p2)
 	p1.checkAndResetIfNeeded(p2)
 end
 
-function ShowMoreWrapper.render(p1) --[[ Line: 141 ]]
+function ShowMoreWrapper.render(p1)
 	-- upvalues: Roact (copy), Dictionary (copy)
 	local FilterFriendCount = p1.state.filterFriendCounts[p1.props.filter]
 	
@@ -129,14 +129,14 @@ function ShowMoreWrapper.render(p1) --[[ Line: 141 ]]
 	}))
 end
 
-return function(p1) --[[ Line: 159 | Named "ShowMoreWrapperFn" ]]
+return function(p1)
 	-- upvalues: UseDesignTokensFunction (copy), UseUiModeInfoFunction (copy), UiMode (copy), React (copy), GridMetrics (copy), ShowMoreWrapper (copy), Llama (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local IsUiModeMatch = UseUiModeInfoFunction().uiMode == UiMode.TenFoot
 	local GridViewItemMetrics = UseDesignTokensResult.LuaApps.FriendsLanding.FriendsLandingPage.GridViewItemMetrics
 	local GridHorizontalSpacing = UseDesignTokensResult.LuaApps.FriendsLanding.FriendsLandingPage.GridHorizontalSpacing
 	local GridVerticalSpacing = UseDesignTokensResult.LuaApps.FriendsLanding.FriendsLandingPage.GridVerticalSpacing
-	local UseMemoResult = React.useMemo(function() --[[ Line: 168 ]]
+	local UseMemoResult = React.useMemo(function()
 		-- upvalues: IsUiModeMatch (copy), GridMetrics (upval), GridViewItemMetrics (copy)
 		return if IsUiModeMatch then GridMetrics.makeCustomMetricsGetter(GridViewItemMetrics) else nil
 	end, { IsUiModeMatch, GridViewItemMetrics })
@@ -144,7 +144,7 @@ return function(p1) --[[ Line: 159 | Named "ShowMoreWrapperFn" ]]
 	
 	return React.createElement(ShowMoreWrapper, Llama.Dictionary.join({
 		onWidthUpdated = if IsUiModeMatch then UseStateResult2 else nil,
-		itemSize = React.useMemo(function() --[[ Line: 177 ]]
+		itemSize = React.useMemo(function()
 			-- upvalues: IsUiModeMatch (copy), UseMemoResult (copy), GridHorizontalSpacing (copy), UseStateResult (copy)
 			return if IsUiModeMatch and UseMemoResult and GridHorizontalSpacing then UseMemoResult(UseStateResult, GridHorizontalSpacing).itemWidth else nil
 		end, {

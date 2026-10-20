@@ -12,11 +12,11 @@ local BrowserService = game:GetService("BrowserService")
 local HttpService = game:GetService("HttpService")
 local WebViewService = game:GetService("WebViewService")
 
-return function() --[[ Line: 32 | Named "useOpenWebView" ]]
+return function()
 	-- upvalues: UseRefFunction (copy), UseCallbackFunction (copy), FFlagUseWebViewSessionInOpenWebViewModule (copy), OpenWebViewSessionModule (copy), FFlagAppNavMyStatsTab (copy), GetFFlagEnableUnifiedWebViewsFunction (copy), WebViewService (copy), BrowserService (copy), HttpService (copy), UseEffectFunction (copy)
 	local UseRefResult = UseRefFunction(nil)
 	local UseRefResult1 = UseRefFunction(nil)
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 36 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
 		if UseRefResult.current then
 			UseRefResult.current:Disconnect()
@@ -27,7 +27,7 @@ return function() --[[ Line: 32 | Named "useOpenWebView" ]]
 			UseRefResult1.current = nil
 		end
 	end, { UseRefResult, UseRefResult1 })
-	local UseCallbackResult1 = UseCallbackFunction(function(Url, Title, Callback) --[[ Line: 47 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function(Url, Title, Callback)
 		-- upvalues: FFlagUseWebViewSessionInOpenWebViewModule (upval), UseCallbackResult (copy), OpenWebViewSessionModule (upval), FFlagAppNavMyStatsTab (upval), UseRefResult1 (copy), GetFFlagEnableUnifiedWebViewsFunction (upval), UseRefResult (copy), WebViewService (upval), BrowserService (upval), HttpService (upval)
 		if FFlagUseWebViewSessionInOpenWebViewModule then
 			UseCallbackResult()
@@ -38,7 +38,7 @@ return function() --[[ Line: 32 | Named "useOpenWebView" ]]
 		end
 		if GetFFlagEnableUnifiedWebViewsFunction() then
 			UseCallbackResult()
-			UseRefResult.current = WebViewService.OnWindowClosed:Connect(function() --[[ Line: 60 ]]
+			UseRefResult.current = WebViewService.OnWindowClosed:Connect(function()
 				-- upvalues: WebViewService (upval), UseCallbackResult (upval), FFlagAppNavMyStatsTab (upval), Callback (copy)
 				WebViewService:CloseWindow()
 				UseCallbackResult()
@@ -61,9 +61,9 @@ return function() --[[ Line: 32 | Named "useOpenWebView" ]]
 			}))
 		end
 	end, { UseCallbackResult })
-	UseEffectFunction(function() --[[ Line: 82 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseCallbackResult (copy)
-		return function() --[[ Line: 83 ]]
+		return function()
 			-- upvalues: UseCallbackResult (upval)
 			UseCallbackResult()
 		end

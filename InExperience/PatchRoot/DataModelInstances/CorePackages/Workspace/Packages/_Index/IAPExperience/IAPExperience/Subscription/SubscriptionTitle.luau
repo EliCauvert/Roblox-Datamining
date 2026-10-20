@@ -19,9 +19,9 @@ SubscriptionTitle.validateProps = TModule.strictInterface({
 	itemIcon = TModule.any
 })
 
-local function _(p1, p2) --[[ Line: 56 | Named "createSubscriptionInfo" ]]
+local function _(p1, p2)
 	-- upvalues: WithStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
-	return WithStyleFunction(function(p3) --[[ Line: 57 ]]
+	return WithStyleFunction(function(p3)
 		-- upvalues: ReactModule (upval), p1 (copy), p2 (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 		local Theme = p3.Theme
 		local BodyFont = p3.Font.Body.Font
@@ -127,7 +127,7 @@ local function _(p1, p2) --[[ Line: 56 | Named "createSubscriptionInfo" ]]
 	end)
 end
 
-local function createCompactSubscriptionTitle(Props) --[[ Line: 175 ]]
+local function createCompactSubscriptionTitle(Props)
 	-- upvalues: ReactModule (copy), ImageSetLabel (copy), WithStyleFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local v1 = true
 	
@@ -151,7 +151,7 @@ local function createCompactSubscriptionTitle(Props) --[[ Line: 175 ]]
 			AutomaticSize = Enum.AutomaticSize.X,
 			Image = Props.itemIcon
 		}),
-		SubscriptionInfo = WithStyleFunction(function(p1) --[[ Line: 57 ]]
+		SubscriptionInfo = WithStyleFunction(function(p1)
 			-- upvalues: ReactModule (upval), Props (copy), v1 (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 			local Theme = p1.Theme
 			local BodyFont = p1.Font.Body.Font
@@ -258,7 +258,7 @@ local function createCompactSubscriptionTitle(Props) --[[ Line: 175 ]]
 	})
 end
 
-local function createNormalSubscriptionTitle(Props) --[[ Line: 200 ]]
+local function createNormalSubscriptionTitle(Props)
 	-- upvalues: ReactModule (copy), ImageSetLabel (copy), WithStyleFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local v1 = false
 	
@@ -282,7 +282,7 @@ local function createNormalSubscriptionTitle(Props) --[[ Line: 200 ]]
 			AutomaticSize = Enum.AutomaticSize.X,
 			Image = Props.itemIcon
 		}),
-		SubscriptionInfo = WithStyleFunction(function(p1) --[[ Line: 57 ]]
+		SubscriptionInfo = WithStyleFunction(function(p1)
 			-- upvalues: ReactModule (upval), Props (copy), v1 (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 			local Theme = p1.Theme
 			local BodyFont = p1.Font.Body.Font
@@ -389,11 +389,11 @@ local function createNormalSubscriptionTitle(Props) --[[ Line: 200 ]]
 	})
 end
 
-function SubscriptionTitle:getTitleHeight(p1: number): number --[[ Line: 225 ]]
+function SubscriptionTitle:getTitleHeight(p1: number): number
 	return if p1 > 216 then 216 else 96
 end
 
-function SubscriptionTitle.render(p1) --[[ Line: 233 ]]
+function SubscriptionTitle.render(p1)
 	-- upvalues: createNormalSubscriptionTitle (copy), createCompactSubscriptionTitle (copy)
 	return if p1.props.contentHeight > 216 then createNormalSubscriptionTitle(p1.props) else createCompactSubscriptionTitle(p1.props)
 end

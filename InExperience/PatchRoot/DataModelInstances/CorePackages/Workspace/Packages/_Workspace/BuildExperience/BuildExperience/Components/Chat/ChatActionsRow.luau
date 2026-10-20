@@ -10,13 +10,13 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local IconName = FoundationModule.Enums.IconName
 local InputSize = FoundationModule.Enums.InputSize
 
-local function constantSource(): number --[[ Line: 32 ]]
+local function constantSource(): number
 	return 0
 end
 
-return function(Frame) --[[ Line: 36 | Named "ChatActionsRow" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), constantSource (copy), SignalsReactModule (copy), FFlagBuildExperienceConfirmStopModule (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), StopAssistantResponseDialogModule (copy)
-	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useCallback(function(Callback: (any) -> ()) --[[ Line: 37 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useCallback(function(Callback: (any) -> ())
 		-- upvalues: Frame (copy), constantSource (upval)
 		if Frame.getIsComposerEmpty ~= nil then
 			return Frame.getIsComposerEmpty(Callback)
@@ -37,16 +37,16 @@ return function(Frame) --[[ Line: 36 | Named "ChatActionsRow" ]]
 		local UseStateResult2 = nil
 		v1, UseStateResult2 = ReactModule.useState(false)
 		Callback = UseStateResult2
-		UseResult = ReactModule.useCallback(function() --[[ Line: 60 ]]
+		UseResult = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (ref)
 			UseStateResult2(false)
 		end, {})
-		UseResult1 = ReactModule.useCallback(function() --[[ Line: 63 ]]
+		UseResult1 = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (ref), Frame (copy)
 			UseStateResult2(false)
 			Frame.onStop()
 		end, { Frame.onStop })
-		ReactModule.useEffect(function() --[[ Line: 68 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: IsNotCanSendWhileResponding (copy), UseStateResult2 (ref)
 			if not IsNotCanSendWhileResponding then
 				UseStateResult2(false)
@@ -60,7 +60,7 @@ return function(Frame) --[[ Line: 36 | Named "ChatActionsRow" ]]
 		size = InputSize.Small,
 		variant = if IsNotCanSendWhileResponding then ButtonVariant.Standard elseif UseSignalStateResult and Frame.hasAttachments ~= true then ButtonVariant.Standard else ButtonVariant.Emphasis,
 		isDisabled = IsNotHasAttachments,
-		onActivated = function() --[[ Line: 85 ]]
+		onActivated = function()
 			-- upvalues: IsNotCanSendWhileResponding (copy), FFlagBuildExperienceConfirmStopModule (upval), Callback (ref), Frame (copy)
 			if not IsNotCanSendWhileResponding then
 				Frame.onSend()

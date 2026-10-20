@@ -16,11 +16,11 @@ return {
 		order = if MomentsCommonModule.Flags.GetFFlagEnableMomentTextGeneration() then 5 else 4
 	},
 	supportedCaptureTypes = { Enum.CaptureType.Video },
-	isAvailable = function(p1): boolean --[[ Line: 27 ]]
+	isAvailable = function(p1): boolean
 		-- upvalues: GetFFlagMomentsGenerateTextInTextOverlayModule (copy)
 		return not GetFFlagMomentsGenerateTextInTextOverlayModule() and p1.canGenerateText == true
 	end,
-	apply = function(p1) --[[ Line: 35 ]]
+	apply = function(p1)
 		-- upvalues: GetFFlagMomentsTextGenTonePickerModule (copy), DialogTypeModule (copy)
 		local IsStudio = game:GetService("RunService"):IsStudio()
 		local CaptureServiceMomentTextToneEngineFeature = GetFFlagMomentsTextGenTonePickerModule() and (game:GetEngineFeature("CaptureServiceMomentTextTone") or IsStudio)
@@ -30,7 +30,7 @@ return {
 				modalType = DialogTypeModule.GenerateTextOptions,
 				modalProps = {
 					showTone = CaptureServiceMomentTextToneEngineFeature,
-					onSelect = function(p2) --[[ Line: 50 ]]
+					onSelect = function(p2)
 						-- upvalues: p1 (copy)
 						p1.dismissModal()
 						p1.generateText(p2)

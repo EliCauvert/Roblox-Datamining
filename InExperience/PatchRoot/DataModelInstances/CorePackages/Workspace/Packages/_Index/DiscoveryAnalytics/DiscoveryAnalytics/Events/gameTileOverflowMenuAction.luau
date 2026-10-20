@@ -15,7 +15,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 	isDirectAction = if SharedFlagsModule.FFlagLuaAppGameTileDirectActionTelemetry or FFlagSduiGameTileDirectAction then TModule.optional(TModule.boolean) else nil
 })
 
-return function(CustomFields, EventContext) --[[ Line: 28 ]]
+return function(CustomFields, EventContext)
 	-- upvalues: DiscoveryEventErrorLogger (copy), StrictInterfaceResult (copy), GameTileOverflowMenuActionThrottleHundrethsPercent (copy), TelemetryService (copy)
 	if not EventContext then
 		DiscoveryEventErrorLogger.reportError("GameTileOverflowMenuActionInvalidInterface", "event is missing context")

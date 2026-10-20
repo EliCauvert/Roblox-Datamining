@@ -7,12 +7,12 @@ local BuildPlacementPlanModule = require(ViewRecycler.Core.PinnedItems.buildPlac
 local StickyIndexResolverModule = require(ViewRecycler.Core.PinnedItems.StickyIndexResolver)
 local Frozen = table.freeze({ "key", "value", "itemViewType" })
 
-local function _(p1, p2) --[[ Line: 45 | Named "sameItem" ]]
+local function _(p1, p2)
 	-- upvalues: ShallowTableModule (copy), Frozen (copy)
 	return p1 == p2 or p1 ~= nil and (p2 ~= nil and ShallowTableModule.containsEqual(p1, p2, Frozen))
 end
 
-return function(p1, Options) --[[ Line: 49 | Named "createPinnedItemPlanner" ]]
+return function(p1, Options)
 	-- upvalues: StickyIndexResolverModule (copy), ShallowTableModule (copy), Frozen (copy), BuildPlacementPlanModule (copy), PlacementTypesModule (copy)
 	local Options1 = Options
 	local StickyIndexResolverModuleResult = StickyIndexResolverModule(p1, Options1.isItemStickyHeader)
@@ -23,7 +23,7 @@ return function(p1, Options) --[[ Line: 49 | Named "createPinnedItemPlanner" ]]
 	}
 	local config1 = { revision = 1, length = 0, item = Options1.pinnedEndItem }
 	
-	local function _(p2, Item): boolean --[[ Line: 66 | Named "setItem" ]]
+	local function _(p2, Item): boolean
 		-- upvalues: ShallowTableModule (upval), Frozen (upval)
 		local Item1 = p2.item
 		
@@ -38,7 +38,7 @@ return function(p1, Options) --[[ Line: 49 | Named "createPinnedItemPlanner" ]]
 		end
 	end
 	
-	local _ = function(p2, Position) --[[ Line: 83 | Named "resolvedItem" ]]
+	local _ = function(p2, Position)
 		local Item = p2.item
 		
 		return if Item == nil then nil else {
@@ -52,14 +52,14 @@ return function(p1, Options) --[[ Line: 49 | Named "createPinnedItemPlanner" ]]
 	end
 	
 	return {
-		getContentInsets = function() --[[ Line: 76 ]]
+		getContentInsets = function()
 			-- upvalues: config (copy), config1 (copy)
 			return {
 				start = if config.item == nil then 0 else config.length,
 				finish = if config1.item == nil then 0 else config1.length
 			}
 		end,
-		update = function(p2) --[[ Line: 103 ]]
+		update = function(p2)
 			-- upvalues: StickyIndexResolverModuleResult (copy), BuildPlacementPlanModule (upval), config (copy), PlacementTypesModule (upval), config1 (copy)
 			StickyIndexResolverModuleResult.setDataSource(p2.dataSource)
 			local Start = PlacementTypesModule.PinnedPosition.Start
@@ -93,11 +93,11 @@ return function(p1, Options) --[[ Line: 49 | Named "createPinnedItemPlanner" ]]
 				}
 			})
 		end,
-		applyDataSourceChange = function(p2) --[[ Line: 116 ]]
+		applyDataSourceChange = function(p2)
 			-- upvalues: StickyIndexResolverModuleResult (copy)
 			StickyIndexResolverModuleResult.applyDataSourceChange(p2)
 		end,
-		updatePinnedMeasurement = function(Start, Key, Revision, Length: number) --[[ Line: 119 ]]
+		updatePinnedMeasurement = function(Start, Key, Revision, Length: number)
 			-- upvalues: PlacementTypesModule (upval), config (copy), config1 (copy)
 			assert(Length >= 0 and Length < 1e999, "PinnedItems: measured length must be finite and non-negative")
 			local Config = if Start == PlacementTypesModule.PinnedPosition.Start then config else config1
@@ -114,7 +114,7 @@ return function(p1, Options) --[[ Line: 49 | Named "createPinnedItemPlanner" ]]
 				}
 			end
 		end,
-		setOptions = function(Value) --[[ Line: 129 ]]
+		setOptions = function(Value)
 			-- upvalues: Options1 (ref), StickyIndexResolverModuleResult (copy), config (copy), ShallowTableModule (upval), Frozen (upval), config1 (copy)
 			Options1 = Value
 			local SetPredicateResult = StickyIndexResolverModuleResult.setPredicate(Value.isItemStickyHeader)
@@ -146,6 +146,6 @@ return function(p1, Options) --[[ Line: 49 | Named "createPinnedItemPlanner" ]]
 			return Flag2 or Flag1
 		end,
 		setDataSource = StickyIndexResolverModuleResult.setDataSource,
-		destroy = function() --[[ Line: 137 ]] end
+		destroy = function() end
 	}
 end

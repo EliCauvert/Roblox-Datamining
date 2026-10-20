@@ -1,14 +1,14 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("Moments").Parent.React)
 
-return function(p1, Frame: Frame) --[[ Line: 11 | Named "useVisibleContentHeight" ]]
+return function(p1, Frame: Frame)
 	-- upvalues: ReactModule (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
-	ReactModule.useEffect(function() --[[ Line: 17 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), Frame (copy), UseBindingResult2 (copy)
 		local Current = p1.current
 		
 		if Current == nil then return end
-		local function update() --[[ Line: 23 ]]
+		local function update()
 			-- upvalues: Current (copy), Frame (upval), UseBindingResult2 (upval)
 			local Y: number = Current.AbsolutePosition.Y
 			local NewY = Y + Current.AbsoluteWindowSize.Y
@@ -34,7 +34,7 @@ return function(p1, Frame: Frame) --[[ Line: 11 | Named "useVisibleContentHeight
 		if Frame ~= nil then
 			table.insert(List, Frame:GetPropertyChangedSignal("AbsolutePosition"):Connect(update))
 		end
-		return function() --[[ Line: 40 ]]
+		return function()
 			-- upvalues: List (copy)
 			for _, Connection in List do
 				Connection:Disconnect()

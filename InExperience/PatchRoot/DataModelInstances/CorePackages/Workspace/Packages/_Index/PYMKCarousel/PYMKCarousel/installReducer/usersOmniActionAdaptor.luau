@@ -5,7 +5,7 @@ local TransformOmniRecommendationsToActionsModule = require(script.Parent.transf
 local _ = require(PYMKCarousel.Common.OmniTypes)
 local ContextualInfoTypes = DependenciesModule.SocialCommon.Enums.ContextualInfoTypes
 
-local function v6(p1) --[[ Line: 10 ]]
+local function v6(p1)
 	-- upvalues: ContextualInfoTypes (copy), RoduxUsers (copy)
 	return RoduxUsers.Actions.UserUpdated(if p1.contextType == ContextualInfoTypes.Contacts then {
 		id = p1.ContactId or tostring(p1.userId),
@@ -18,13 +18,13 @@ local function v6(p1) --[[ Line: 10 ]]
 	})
 end
 
-return function(p1) --[[ Line: 25 ]]
+return function(p1)
 	-- upvalues: TransformOmniRecommendationsToActionsModule (copy), v6 (copy)
 	return {
-		AddContentMetadata = function(p2) --[[ Line: 27 ]]
+		AddContentMetadata = function(p2)
 			return { p2 }
 		end,
-		AddOmniRecommendations = function(p2) --[[ Line: 32 ]]
+		AddOmniRecommendations = function(p2)
 			-- upvalues: TransformOmniRecommendationsToActionsModule (upval), p1 (copy), v6 (upval)
 			return TransformOmniRecommendationsToActionsModule(p2.recommendations or {}, p1, v6)
 		end

@@ -12,12 +12,12 @@ local config = {
 	sendStatusUnknown = "Feature.Moments.Label.CommentSendStatusUnknown"
 }
 
-return function(Frame) --[[ Line: 34 | Named "PendingCommentRowView" ]]
+return function(Frame)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), FoundationModule (copy), InputSize (copy), ButtonVariant (copy), CommentRowViewModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local v1: number = if Frame.status == "Sending" then 0.5 else 0
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(v1)
-	ReactModule.useEffect(function() --[[ Line: 38 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseBindingResult2 (copy), v1 (copy)
 		UseBindingResult2(v1)
 	end, { v1 })

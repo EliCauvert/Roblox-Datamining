@@ -1,19 +1,19 @@
 ﻿local HttpService = game:GetService("HttpService")
 
-local function _(Text: string): string --[[ Line: 11 | Named "replaceLeadingQuote" ]]
+local function _(Text: string): string
 	local Replaced = string.gsub(Text, "\n\"", "\n`")
 	
 	return if Replaced.sub(Replaced, 1, 1) == "\"" then "`" .. string.sub(Replaced, 2) else Replaced
 end
 
-local _ = function(Text: string): string --[[ Line: 19 | Named "replaceTrailingQuote" ]]
+local _ = function(Text: string): string
 	local Replaced = string.gsub(Text, "\"\n", "`\n")
 	
 	return if Replaced.sub(Replaced, -1) == "\"" then string.sub(Replaced, 1, -2) .. "`" else Replaced
 end
 
 return {
-	inspectStr = function(Input): string --[[ Line: 30 ]]
+	inspectStr = function(Input): string
 		-- upvalues: HttpService (copy)
 		if Input == nil then
 			return "nil"

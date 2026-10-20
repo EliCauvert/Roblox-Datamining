@@ -3,7 +3,7 @@ local SafeAppStorageService = require(script:FindFirstAncestor("AvatarExperience
 local AXTimedOptionsFtuxUseMemStorage = game:DefineFastFlag("AXTimedOptionsFtuxUseMemStorage", false)
 local AXDisableTimedOptionsFtux = game:DefineFastFlag("AXDisableTimedOptionsFtux", false)
 
-local function getStorage() --[[ Line: 21 ]]
+local function getStorage()
 	-- upvalues: SafeAppStorageService (copy), AXTimedOptionsFtuxUseMemStorage (copy), HttpService (copy)
 	local AXSlotBasedEditorCustomizeFtuxItem = SafeAppStorageService.getItem("AXSlotBasedEditorCustomizeFtux", AXTimedOptionsFtuxUseMemStorage)
 	
@@ -11,7 +11,7 @@ local function getStorage() --[[ Line: 21 ]]
 		AXSlotBasedEditorCustomizeFtuxItem = "{}"
 	end
 	local t = {}
-	pcall(function() --[[ Line: 28 ]]
+	pcall(function()
 		-- upvalues: t (ref), HttpService (upval), AXSlotBasedEditorCustomizeFtuxItem (ref)
 		t = HttpService:JSONDecode(AXSlotBasedEditorCustomizeFtuxItem)
 	end)
@@ -19,55 +19,55 @@ local function getStorage() --[[ Line: 21 ]]
 	return t
 end
 
-local function _(p1) --[[ Line: 36 | Named "setStorage" ]]
+local function _(p1)
 	-- upvalues: HttpService (copy), SafeAppStorageService (copy), AXTimedOptionsFtuxUseMemStorage (copy)
-	pcall(function() --[[ Line: 37 ]]
+	pcall(function()
 		-- upvalues: HttpService (upval), p1 (copy), SafeAppStorageService (upval), AXTimedOptionsFtuxUseMemStorage (upval)
 		SafeAppStorageService.setItem("AXSlotBasedEditorCustomizeFtux", HttpService:JSONEncode(p1), AXTimedOptionsFtuxUseMemStorage)
 		SafeAppStorageService.flush()
 	end)
 end
 
-return function() --[[ Line: 44 | Named "useTimedOptionsFtux" ]]
+return function()
 	-- upvalues: AXDisableTimedOptionsFtux (copy), getStorage (copy), HttpService (copy), SafeAppStorageService (copy), AXTimedOptionsFtuxUseMemStorage (copy)
 	return {
-		shouldShow2OptionToolTipOnBuyActionBar = function(): boolean --[[ Line: 45 ]]
+		shouldShow2OptionToolTipOnBuyActionBar = function(): boolean
 			-- upvalues: AXDisableTimedOptionsFtux (upval), getStorage (upval)
 			return not AXDisableTimedOptionsFtux and not getStorage().hide2OptionToolTipOnBuyActionBar
 		end,
-		hide2OptionToolTipOnBuyActionBar = function() --[[ Line: 55 ]]
+		hide2OptionToolTipOnBuyActionBar = function()
 			-- upvalues: getStorage (upval), HttpService (upval), SafeAppStorageService (upval), AXTimedOptionsFtuxUseMemStorage (upval)
 			local Storage = getStorage()
 			Storage.hide2OptionToolTipOnBuyActionBar = true
-			pcall(function() --[[ Line: 37 ]]
+			pcall(function()
 				-- upvalues: HttpService (upval), Storage (copy), SafeAppStorageService (upval), AXTimedOptionsFtuxUseMemStorage (upval)
 				SafeAppStorageService.setItem("AXSlotBasedEditorCustomizeFtux", HttpService:JSONEncode(Storage), AXTimedOptionsFtuxUseMemStorage)
 				SafeAppStorageService.flush()
 			end)
 		end,
-		shouldShow2OptionToolTipInCheckoutPage = function(): boolean --[[ Line: 62 ]]
+		shouldShow2OptionToolTipInCheckoutPage = function(): boolean
 			-- upvalues: AXDisableTimedOptionsFtux (upval), getStorage (upval)
 			return not AXDisableTimedOptionsFtux and not getStorage().hide2OptionToolTipInCheckoutPage
 		end,
-		hide2OptionToolTipInCheckoutPage = function() --[[ Line: 72 ]]
+		hide2OptionToolTipInCheckoutPage = function()
 			-- upvalues: getStorage (upval), HttpService (upval), SafeAppStorageService (upval), AXTimedOptionsFtuxUseMemStorage (upval)
 			local Storage = getStorage()
 			Storage.hide2OptionToolTipInCheckoutPage = true
-			pcall(function() --[[ Line: 37 ]]
+			pcall(function()
 				-- upvalues: HttpService (upval), Storage (copy), SafeAppStorageService (upval), AXTimedOptionsFtuxUseMemStorage (upval)
 				SafeAppStorageService.setItem("AXSlotBasedEditorCustomizeFtux", HttpService:JSONEncode(Storage), AXTimedOptionsFtuxUseMemStorage)
 				SafeAppStorageService.flush()
 			end)
 		end,
-		shouldShow2OptionOfferPillTooltip = function(): boolean --[[ Line: 79 ]]
+		shouldShow2OptionOfferPillTooltip = function(): boolean
 			-- upvalues: AXDisableTimedOptionsFtux (upval), getStorage (upval)
 			return not AXDisableTimedOptionsFtux and not getStorage().hide2OptionOfferPillTooltip
 		end,
-		hide2OptionOfferPillTooltip = function() --[[ Line: 89 ]]
+		hide2OptionOfferPillTooltip = function()
 			-- upvalues: getStorage (upval), HttpService (upval), SafeAppStorageService (upval), AXTimedOptionsFtuxUseMemStorage (upval)
 			local Storage = getStorage()
 			Storage.hide2OptionOfferPillTooltip = true
-			pcall(function() --[[ Line: 37 ]]
+			pcall(function()
 				-- upvalues: HttpService (upval), Storage (copy), SafeAppStorageService (upval), AXTimedOptionsFtuxUseMemStorage (upval)
 				SafeAppStorageService.setItem("AXSlotBasedEditorCustomizeFtux", HttpService:JSONEncode(Storage), AXTimedOptionsFtuxUseMemStorage)
 				SafeAppStorageService.flush()

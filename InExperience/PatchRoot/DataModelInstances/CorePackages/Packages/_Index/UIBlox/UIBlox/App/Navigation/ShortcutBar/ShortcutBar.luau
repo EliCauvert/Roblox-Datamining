@@ -28,7 +28,7 @@ local config1 = {
 	items = {}
 }
 
-return function(p1) --[[ Line: 71 | Named "ShortcutBar" ]]
+return function(p1)
 	-- upvalues: Object (copy), config1 (copy), UseStyleModule (copy), FoundationModule (copy), UIBloxConfigModule (copy), ReactModule (copy), UseInputTypeModule (copy), ReactOtterModule (copy), UseDelayedActionHandlerFunction (copy), config (copy), UtilitiesModule (copy), UseEventConnectionFunction (copy), UserInputService (copy), ShortcutModule (copy)
 	local AssignResult = Object.assign({}, config1, p1)
 	local UseStyleModuleResult = UseStyleModule()
@@ -67,12 +67,12 @@ return function(p1) --[[ Line: 71 | Named "ShortcutBar" ]]
 	}
 	local UseInputTypeModuleResult = UseInputTypeModule()
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
-	local UseDelayedActionHandlerResult = UseDelayedActionHandlerFunction(if AssignResult.transitionDelaySeconds then AssignResult.transitionDelaySeconds else 0, 0.1, function() --[[ Line: 114 ]]
+	local UseDelayedActionHandlerResult = UseDelayedActionHandlerFunction(if AssignResult.transitionDelaySeconds then AssignResult.transitionDelaySeconds else 0, 0.1, function()
 		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval)
 		UseAnimatedBindingResult2(ReactOtterModule.spring(0, config))
 	end)
 	
-	local function onInputChanged() --[[ Line: 119 ]]
+	local function onInputChanged()
 		-- upvalues: AssignResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval), UseDelayedActionHandlerResult (copy)
 		if AssignResult.transitionDelaySeconds then
 			UseAnimatedBindingResult2(ReactOtterModule.spring(1, config))
@@ -82,7 +82,7 @@ return function(p1) --[[ Line: 71 | Named "ShortcutBar" ]]
 	
 	local UseStateResult, UseStateResult2 = ReactModule.useState(UtilitiesModule.filterItems(AssignResult.items, UseInputTypeModuleResult))
 	UseEventConnectionFunction(UserInputService.InputChanged, onInputChanged)
-	ReactModule.useEffect(function() --[[ Line: 129 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), UtilitiesModule (upval), AssignResult (copy), UseInputTypeModuleResult (copy)
 		UseStateResult2(UtilitiesModule.filterItems(AssignResult.items, UseInputTypeModuleResult))
 	end, { UseInputTypeModuleResult, AssignResult.items })

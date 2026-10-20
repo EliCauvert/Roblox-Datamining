@@ -6,7 +6,7 @@ local CreateInspectAndBuyKeyMapperModule = require(Parent.createInspectAndBuyKey
 local GetAssetFavoriteCount = CreateInspectAndBuyKeyMapperModule("getAssetFavoriteCount")
 local GetBundleFavoriteCount = CreateInspectAndBuyKeyMapperModule("getBundleFavoriteCount")
 
-return function(p1): boolean --[[ Line: 14 ]]
+return function(p1): boolean
 	-- upvalues: IsDetailsItemPartOfBundleAndOffsaleModule (copy), UtilityFunctionsModule (copy), GetBundleFavoriteCount (copy), RetrievalStatus (copy), GetAssetFavoriteCount (copy)
 	local AssetId = p1.detailsInformation.assetId
 	

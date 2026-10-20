@@ -61,7 +61,7 @@ local config = {
 	}
 }
 
-return function(p1) --[[ Line: 70 | Named "reportBulkPurchaseRequestCounters" ]]
+return function(p1)
 	-- upvalues: LoggingProtocolModule (copy), config (copy), FFlagAXAddPlusUpsellToBulkPurchaseModule (copy)
 	LoggingProtocolModule.default:logRobloxTelemetryCounter(config[p1], 1, {
 		FFlagAXAddPlusUpsellToBulkPurchase = tostring(FFlagAXAddPlusUpsellToBulkPurchaseModule)

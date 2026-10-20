@@ -10,15 +10,15 @@ local _ = require(AvatarExperienceCatalog.Stores.createCatalogOffersBannerStore)
 local CatalogOffersBannerImpressionsStoreModule = require(AvatarExperienceCatalog.Stores.catalogOffersBannerImpressionsStore)
 local GetLocalUserIdModule = require(AvatarExperienceCatalog.Utils.getLocalUserId)
 
-return function(p1, p2) --[[ Line: 56 | Named "useCatalogOffersBannerOffersFetch" ]]
+return function(p1, p2)
 	-- upvalues: FFlagAXCatalogOffersClearOnLogout (copy), ReactModule (copy), GetLocalUserIdModule (copy), Players (copy), FFlagAXOfferBannerImpressionOnlyOnStartup (copy), CatalogOffersBannerImpressionsStoreModule (copy), UseAvatarRouteFunction (copy)
 	if FFlagAXCatalogOffersClearOnLogout then
-		ReactModule.useEffect(function() --[[ Line: 61 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p1 (copy), p2 (copy), GetLocalUserIdModule (upval), Players (upval), FFlagAXOfferBannerImpressionOnlyOnStartup (upval), CatalogOffersBannerImpressionsStoreModule (upval)
 			local Offers: (() -> ())? = if p1.getHasCompletedOffersFetch(false) or p1.getOffersFetchInProgress(false) then nil else p1.fetchOffers(p2)
 			local LocalUserIdModule = GetLocalUserIdModule(Players)
 			
-			local function handle() --[[ Line: 81 ]]
+			local function handle()
 				-- upvalues: GetLocalUserIdModule (upval), Players (upval), LocalUserIdModule (ref), Offers (ref), p1 (upval), FFlagAXOfferBannerImpressionOnlyOnStartup (upval), CatalogOffersBannerImpressionsStoreModule (upval), p2 (upval)
 				local LocalUserIdModule1 = GetLocalUserIdModule(Players)
 				
@@ -42,7 +42,7 @@ return function(p1, p2) --[[ Line: 56 | Named "useCatalogOffersBannerOffersFetch
 			
 			local Connection = nil
 			
-			local function _() --[[ Line: 107 | Named "bindUserIdSignal" ]]
+			local function _()
 				-- upvalues: Connection (ref), Players (upval), handle (copy)
 				if Connection then
 					Connection:Disconnect()
@@ -64,7 +64,7 @@ return function(p1, p2) --[[ Line: 56 | Named "useCatalogOffersBannerOffersFetch
 			if LocalPlayer ~= nil then
 				Connection = LocalPlayer:GetPropertyChangedSignal("UserId"):Connect(handle)
 			end
-			local Connection1 = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function() --[[ Line: 120 ]]
+			local Connection1 = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
 				-- upvalues: Connection (ref), Players (upval), handle (copy)
 				if Connection then
 					Connection:Disconnect()
@@ -78,7 +78,7 @@ return function(p1, p2) --[[ Line: 56 | Named "useCatalogOffersBannerOffersFetch
 				handle()
 			end)
 			
-			return function() --[[ Line: 125 ]]
+			return function()
 				-- upvalues: Offers (ref), Connection (ref), Connection1 (copy)
 				if Offers then
 					Offers()
@@ -92,14 +92,14 @@ return function(p1, p2) --[[ Line: 56 | Named "useCatalogOffersBannerOffersFetch
 			end
 		end, { p1, p2 })
 	else
-		ReactModule.useEffect(function() --[[ Line: 138 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p1 (copy), p2 (copy)
-			return if p1.getHasCompletedOffersFetch(false) or p1.getOffersFetchInProgress(false) then function() --[[ Line: 143 ]] end else p1.fetchOffers(p2)
+			return if p1.getHasCompletedOffersFetch(false) or p1.getOffersFetchInProgress(false) then function() end else p1.fetchOffers(p2)
 		end, { p2, p1 })
 	end
 	local UseRefResult = ReactModule.useRef(true)
 	local UseAvatarRouteResult = UseAvatarRouteFunction()
-	ReactModule.useEffect(function() --[[ Line: 152 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseAvatarRouteResult (copy), UseRefResult (copy), p1 (copy), p2 (copy)
 		local IsVisible = UseAvatarRouteResult ~= nil and UseAvatarRouteResult.isVisible
 		

@@ -1,11 +1,11 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
 
-return function(p1) --[[ Line: 13 | Named "useInputConnections" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy)
 	local UseRefResult = ReactModule.useRef(false)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseRefResult2 = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 18 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult1 (copy), UseRefResult2 (copy), UseRefResult (copy)
 		if UseRefResult1.current then
 			UseRefResult1.current:Disconnect()
@@ -17,7 +17,7 @@ return function(p1) --[[ Line: 13 | Named "useInputConnections" ]]
 		end
 		UseRefResult.current = false
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 32 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), p1 (copy), UseRefResult2 (copy), UseResult (copy)
 		if p2 and not UseRefResult.current then
 			UseRefResult1.current = p1.userInputService.InputBegan:Connect(p1.onInputBegan)
@@ -39,9 +39,9 @@ return function(p1) --[[ Line: 13 | Named "useInputConnections" ]]
 		UseResult,
 		p1.onFocusLost
 	})
-	ReactModule.useEffect(function() --[[ Line: 53 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseResult (copy)
-		return function() --[[ Line: 54 ]]
+		return function()
 			-- upvalues: UseRefResult (upval), UseResult (upval)
 			if UseRefResult.current then
 				UseResult()

@@ -9,23 +9,23 @@ local FFlagTopBarSignalizeKeepOutAreas = CoreGuiCommonModule.Flags.FFlagTopBarSi
 local FIntLuaUIOcclusionMetricsReportingPeriodSeconds = require(CorePackages.Workspace.Packages.SharedFlags).GetFIntLuaUIOcclusionMetricsReportingPeriodSeconds()
 local GuiServiceSendUIOcclusionMetricsForQueryRegionEngineFeature = game:GetEngineFeature("GuiServiceSendUIOcclusionMetricsForQueryRegion")
 
-local function _(p1) --[[ Line: 28 | Named "convertCoreUIPointToHardwareSafeAreaPoint" ]]
+local function _(p1)
 	-- upvalues: GuiService (copy)
 	return p1 + GuiService:GetGuiInset()
 end
 
-local _ = function(Vector): UDim2 --[[ Line: 33 | Named "vector2ToUDim2" ]]
+local _ = function(Vector): UDim2
 	return UDim2.fromOffset(Vector.X, Vector.Y)
 end
 
-local _ = function(p1) --[[ Line: 37 | Named "reportOcclusionMetrics" ]]
+local _ = function(p1)
 	-- upvalues: GuiService (copy)
 	local NewPosition = p1.position + GuiService:GetGuiInset()
 	local Size = p1.size
 	GuiService:SendUIOcclusionMetricsForQueryRegion(UDim2.fromOffset(NewPosition.X, NewPosition.Y), UDim2.fromOffset(Size.X, Size.Y), "currentSizeTR")
 end
 
-return function() --[[ Line: 46 | Named "OcclusionMetricsManager" ]]
+return function()
 	-- upvalues: GuiServiceSendUIOcclusionMetricsForQueryRegionEngineFeature (copy), ReactModule (copy), ConstantsModule (copy), FFlagTopBarSignalizeKeepOutAreas (copy), CoreGuiCommonModule (copy), SignalsModule (copy), UseSelectorFunction (copy), GuiService (copy), FIntLuaUIOcclusionMetricsReportingPeriodSeconds (copy)
 	if not GuiServiceSendUIOcclusionMetricsForQueryRegionEngineFeature then return end
 	local Callback = nil
@@ -37,23 +37,23 @@ return function() --[[ Line: 46 | Named "OcclusionMetricsManager" ]]
 	
 	if FFlagTopBarSignalizeKeepOutAreas then
 		local KeepOutAreasStore = CoreGuiCommonModule.Stores.GetKeepOutAreasStore(false)
-		Callback = SignalsModule.createEffect(function(_) --[[ Line: 63 ]]
+		Callback = SignalsModule.createEffect(function(_)
 			-- upvalues: UseRefResult (copy), KeepOutAreasStore (copy), ConstantsModule (upval)
 			UseRefResult.current = KeepOutAreasStore.getKeepOutAreas(false)[ConstantsModule.UNIBAR_KEEP_OUT_AREA_ID]
 		end)
 	else
-		local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 67 ]]
+		local UseSelectorResult = UseSelectorFunction(function(p1)
 			-- upvalues: ConstantsModule (upval)
 			return p1.displayOptions.keepOutAreas[ConstantsModule.UNIBAR_KEEP_OUT_AREA_ID]
 		end)
-		ReactModule.useEffect(function() --[[ Line: 71 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRefResult (copy), UseSelectorResult (copy)
 			UseRefResult.current = UseSelectorResult
 		end, { UseSelectorResult })
 	end
-	ReactModule.useEffect(function() --[[ Line: 76 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), GuiService (upval), FIntLuaUIOcclusionMetricsReportingPeriodSeconds (upval), FFlagTopBarSignalizeKeepOutAreas (upval), Callback (ref)
-		local SpawnedThread = task.spawn(function() --[[ Line: 78 ]]
+		local SpawnedThread = task.spawn(function()
 			-- upvalues: UseRefResult (upval), GuiService (upval), FIntLuaUIOcclusionMetricsReportingPeriodSeconds (upval)
 			while true do
 				if UseRefResult.current then
@@ -66,7 +66,7 @@ return function() --[[ Line: 46 | Named "OcclusionMetricsManager" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 87 ]]
+		return function()
 			-- upvalues: SpawnedThread (copy), FFlagTopBarSignalizeKeepOutAreas (upval), Callback (upval)
 			task.cancel(SpawnedThread)
 			

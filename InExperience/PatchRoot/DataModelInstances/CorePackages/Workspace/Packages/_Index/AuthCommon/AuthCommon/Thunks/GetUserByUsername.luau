@@ -2,11 +2,11 @@
 local PromiseModule = require(AuthCommon.Parent.Promise)
 local PostGetUserByUsernameModule = require(AuthCommon.Http.Requests.PostGetUserByUsername)
 
-return function(p1, p2) --[[ Line: 7 ]]
+return function(p1, p2)
 	-- upvalues: PostGetUserByUsernameModule (copy), PromiseModule (copy)
-	return function() --[[ Line: 8 ]]
+	return function()
 		-- upvalues: PostGetUserByUsernameModule (upval), p1 (copy), p2 (copy), PromiseModule (upval)
-		return PostGetUserByUsernameModule(p1, p2):andThen(function(Result) --[[ Line: 9 ]]
+		return PostGetUserByUsernameModule(p1, p2):andThen(function(Result)
 			-- upvalues: PromiseModule (upval)
 			if Result and Result.responseBody then
 				local Data = Result.responseBody.data

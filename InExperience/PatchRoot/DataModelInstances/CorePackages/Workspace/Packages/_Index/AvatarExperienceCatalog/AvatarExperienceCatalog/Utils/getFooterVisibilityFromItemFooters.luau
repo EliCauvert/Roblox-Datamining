@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("AvatarExperienceCatalog").Models.WidgetListInfo)
 
-return function(List) --[[ Line: 11 | Named "getFooterVisibilityFromItemFooters" ]]
+return function(List)
 	local config = {
 		isCreatorNameVisible = false,
 		isTitleVisible = false,

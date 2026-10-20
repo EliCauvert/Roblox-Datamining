@@ -11,7 +11,7 @@ local config = { Transparency = 0, Color3 = Color3.fromRGB(66, 49, 17) }
 local config1 = { Transparency = 0, Color3 = Color3.fromRGB(255, 222, 128) }
 local _Color3 = Color3.fromRGB(255, 205, 77)
 
-local function PickerRow(Frame) --[[ Line: 50 ]]
+local function PickerRow(Frame)
 	-- upvalues: ReactModule (copy), View (copy), config (copy), _Color3 (copy), Icon (copy), IconName (copy), config1 (copy), Text (copy)
 	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-small size-full-0 auto-y padding-small radius-small",
@@ -58,7 +58,7 @@ local function PickerRow(Frame) --[[ Line: 50 ]]
 	})
 end
 
-return ReactModule.memo(function(Frame) --[[ Line: 98 | Named "PopForcePickerView" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: PopForcePickerModelModule (copy), ReactModule (copy), PickerRow (copy), View (copy), config (copy), _Color3 (copy), Text (copy), config1 (copy), Icon (copy), IconName (copy), Popover (copy), FoundationModule (copy)
 	local Tokens = Frame.tokens
 	local IsNotForcedPopMatch = Frame.forcedPop ~= ""
@@ -71,7 +71,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 98 | Named "PopForcePickerVie
 			testId = "pop-picker-auto",
 			selected = not IsNotForcedPopMatch,
 			tokens = Tokens,
-			onActivated = function() --[[ Line: 110 ]]
+			onActivated = function()
 				-- upvalues: Frame (copy)
 				Frame.onSelect("")
 			end
@@ -88,7 +88,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 98 | Named "PopForcePickerVie
 			selected = row.popCode == Frame.forcedPop,
 			tokens = Tokens,
 			testId = "pop-picker-row-" .. row.popCode,
-			onActivated = function() --[[ Line: 130 ]]
+			onActivated = function()
 				-- upvalues: Frame (copy), row (copy)
 				Frame.onSelect(row.popCode)
 			end

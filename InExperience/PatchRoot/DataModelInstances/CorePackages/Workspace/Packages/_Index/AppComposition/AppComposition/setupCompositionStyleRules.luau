@@ -53,7 +53,7 @@ local config = {
 	[`.{if FFlagEnableSplitPane then CompositionTagsModule.SupportRegion.Collapsed else nil}`] = if FFlagEnableSplitPane then { Size = UDim2.new(0, 0, 1, 0) } else nil
 }
 
-local function applyRules(Parent, List) --[[ Line: 134 ]]
+local function applyRules(Parent, List)
 	-- upvalues: config (copy)
 	for Name, value in config do
 		local StyleRule = Instance.new("StyleRule")
@@ -65,18 +65,18 @@ local function applyRules(Parent, List) --[[ Line: 134 ]]
 	end
 end
 
-local function setupReactiveAttributes(Object, p1) --[[ Line: 148 ]]
+local function setupReactiveAttributes(Object, p1)
 	-- upvalues: SignalsModule (copy), GetGlobalViewportBreakpointModule (copy), CompositionConfigModule (copy), FFlagEnableSplitPane (copy), AppCompositionEnumsModule (copy), LuaAppScaleDiscoveryWidth (copy), LuaAppScaleDetailWidth (copy), DisplayModule (copy), CompositionSupportMinSize (copy), CompositionSupportMaxSize (copy)
-	local Computed = SignalsModule.createComputed(function(p2) --[[ Line: 149 ]]
+	local Computed = SignalsModule.createComputed(function(p2)
 		-- upvalues: GetGlobalViewportBreakpointModule (upval), CompositionConfigModule (upval), p1 (copy)
 		return CompositionConfigModule.getBaseConfig(GetGlobalViewportBreakpointModule(p2), p1).margin
 	end)
-	local Computed1 = if FFlagEnableSplitPane then SignalsModule.createComputed(function(p2) --[[ Line: 155 ]]
+	local Computed1 = if FFlagEnableSplitPane then SignalsModule.createComputed(function(p2)
 		-- upvalues: GetGlobalViewportBreakpointModule (upval), CompositionConfigModule (upval), AppCompositionEnumsModule (upval), p1 (copy)
 		return CompositionConfigModule.getRegionLayout(AppCompositionEnumsModule.RegionName.SupportRegion, GetGlobalViewportBreakpointModule(p2), p1)
 	end) else nil
 	
-	return SignalsModule.createEffect(function(p2) --[[ Line: 161 ]]
+	return SignalsModule.createEffect(function(p2)
 		-- upvalues: Computed (copy), Object (copy), LuaAppScaleDiscoveryWidth (upval), LuaAppScaleDetailWidth (upval), DisplayModule (upval), FFlagEnableSplitPane (upval), Computed1 (copy), CompositionSupportMinSize (upval), CompositionSupportMaxSize (upval)
 		local ComputedResult: number = Computed(p2)
 		local ScaledComputedResult = ComputedResult * 2
@@ -107,13 +107,13 @@ local function setupReactiveAttributes(Object, p1) --[[ Line: 148 ]]
 	end)
 end
 
-return function(Parent, p1) --[[ Line: 225 | Named "setupCompositionStyleRules" ]]
+return function(Parent, p1)
 	-- upvalues: applyRules (copy), setupReactiveAttributes (copy)
 	local t = {}
 	applyRules(Parent, t)
 	local SetupReactiveAttributesResult = setupReactiveAttributes(Parent, p1)
 	
-	return function() --[[ Line: 232 ]]
+	return function()
 		-- upvalues: SetupReactiveAttributesResult (copy), t (copy)
 		SetupReactiveAttributesResult()
 		

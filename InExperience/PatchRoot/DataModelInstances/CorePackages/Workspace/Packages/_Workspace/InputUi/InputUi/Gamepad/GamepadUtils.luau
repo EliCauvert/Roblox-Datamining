@@ -1,6 +1,6 @@
 ﻿local AXSetAngularVelocityIsOptional = game:DefineFastFlag("AXSetAngularVelocityIsOptional", false)
 local GamepadUtils = {
-	normalizeStickByDeadzone = function(Direction, p1) --[[ Line: 18 ]]
+	normalizeStickByDeadzone = function(Direction, p1)
 		local Magnitude: number = Direction.Magnitude
 		local P1 = p1 or 0.2
 		
@@ -8,7 +8,7 @@ local GamepadUtils = {
 	end
 }
 
-function GamepadUtils.rotateAndZoom(p1, p2, Callback: (any) -> (), Callback1: (any) -> (), Callback2: (any) -> ()) --[[ Line: 28 ]]
+function GamepadUtils.rotateAndZoom(p1, p2, Callback: (any) -> (), Callback1: (any) -> (), Callback2: (any) -> ())
 	-- upvalues: GamepadUtils (copy), AXSetAngularVelocityIsOptional (copy)
 	local NormalizeStickByDeadzoneResult = GamepadUtils.normalizeStickByDeadzone(Vector2.new(p1.Position.X, p1.Position.Y))
 	
@@ -28,7 +28,7 @@ function GamepadUtils.rotateAndZoom(p1, p2, Callback: (any) -> (), Callback1: (a
 	end
 end
 
-function GamepadUtils.mapPositionToDirection(Direction) --[[ Line: 56 ]]
+function GamepadUtils.mapPositionToDirection(Direction)
 	-- upvalues: GamepadUtils (copy)
 	local NormalizeStickByDeadzoneResult = GamepadUtils.normalizeStickByDeadzone(Direction)
 	local X: number = NormalizeStickByDeadzoneResult.X

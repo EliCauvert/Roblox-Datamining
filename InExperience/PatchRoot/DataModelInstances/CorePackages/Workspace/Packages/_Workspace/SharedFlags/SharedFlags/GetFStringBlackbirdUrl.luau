@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("BlackbirdUrl", "")
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastString("BlackbirdUrl")
 end

@@ -3,7 +3,7 @@ local ConstantsModule = require(InExperienceShop.Constants)
 local _ = require(InExperienceShop.Types)
 local FFlagIdentifyTopPicksByCategoryTypeModule = require(InExperienceShop.Flags.FFlagIdentifyTopPicksByCategoryType)
 
-return function(List) --[[ Line: 16 | Named "findTopPicksSectionIndex" ]]
+return function(List)
 	-- upvalues: FFlagIdentifyTopPicksByCategoryTypeModule (copy), ConstantsModule (copy)
 	for i, value in List do
 		if FFlagIdentifyTopPicksByCategoryTypeModule then

@@ -5,7 +5,7 @@ local NotificationModalBaseModule = require(script.Parent.Components.Notificatio
 local Root = nil
 local t = {}
 
-local function _(p1) --[[ Line: 13 | Named "UpdateRoot" ]]
+local function _(p1)
 	-- upvalues: t (ref), Root (ref), ReactModule (copy), NotificationModalBaseModule (copy)
 	if t and t.ModalKey ~= p1.ModalKey and t.Params and t.Params.CloseCallback then
 		t.Params.CloseCallback()
@@ -15,7 +15,7 @@ local function _(p1) --[[ Line: 13 | Named "UpdateRoot" ]]
 end
 
 return {
-	OpenModal = function(ModalKey, Component, Params): boolean --[[ Line: 28 ]]
+	OpenModal = function(ModalKey, Component, Params): boolean
 		-- upvalues: Root (ref), ReactRobloxModule (copy), t (ref), ReactModule (copy), NotificationModalBaseModule (copy)
 		if not Root then
 			local NotificationModals = Instance.new("Folder")
@@ -27,7 +27,7 @@ return {
 			ModalKey = ModalKey,
 			Component = Component,
 			Params = Params,
-			CloseModal = function() --[[ Line: 40 ]]
+			CloseModal = function()
 				-- upvalues: ModalKey (copy), Root (upval), t (upval), ReactModule (upval), NotificationModalBaseModule (upval)
 				if Root and ModalKey == t.ModalKey then
 					local t1 = {}
@@ -49,7 +49,7 @@ return {
 		
 		return true
 	end,
-	CloseModal = function(ModalKey) --[[ Line: 22 ]]
+	CloseModal = function(ModalKey)
 		-- upvalues: Root (ref), t (ref), ReactModule (copy), NotificationModalBaseModule (copy)
 		if Root and ModalKey == t.ModalKey then
 			local t1 = {}

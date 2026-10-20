@@ -1,15 +1,15 @@
-﻿local function _(Value: number, MinValue: number, MaxValue: number): number --[[ Line: 11 | Named "clampAxis" ]]
+﻿local function _(Value: number, MinValue: number, MaxValue: number): number
 	return if MaxValue <= MinValue then (MinValue + MaxValue) / 2 else math.clamp(Value, MinValue, MaxValue)
 end
 
 return {
-	hasPositiveSize = function(Vector): boolean --[[ Line: 3 ]]
+	hasPositiveSize = function(Vector): boolean
 		return Vector.X > 0 and Vector.Y > 0
 	end,
-	resolveCenter = function(Vector, Vector1): Vector2 --[[ Line: 7 ]]
+	resolveCenter = function(Vector, Vector1): Vector2
 		return Vector2.new(Vector.X.Scale * Vector1.X + Vector.X.Offset, Vector.Y.Scale * Vector1.Y + Vector.Y.Offset)
 	end,
-	clampCenter = function(Vector, Vector1, p1: number): Vector2 --[[ Line: 18 ]]
+	clampCenter = function(Vector, Vector1, p1: number): Vector2
 		local Vector3 = p1 / 2
 		local X: number = Vector.X
 		local X1: number = Vector3.X

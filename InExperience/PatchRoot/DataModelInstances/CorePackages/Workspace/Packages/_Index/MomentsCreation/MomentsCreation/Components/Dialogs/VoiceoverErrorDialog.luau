@@ -4,7 +4,7 @@ local ReactModule = require(Parent.React)
 local Dialog = FoundationModule.Dialog
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return function(p1) --[[ Line: 24 | Named "VoiceoverErrorDialog" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), Dialog (copy), FoundationModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		title = "CommonUI.Messages.Response.SomethingWentWrong",

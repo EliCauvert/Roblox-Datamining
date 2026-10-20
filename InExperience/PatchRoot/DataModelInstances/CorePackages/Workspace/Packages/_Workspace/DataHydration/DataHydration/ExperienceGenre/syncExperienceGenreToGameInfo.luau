@@ -3,7 +3,7 @@ local GetGameInfoStoreModule = require(DataHydration.Game.GameInfo.getGameInfoSt
 local FFlagLuaAppDataHydrationUpdateItem = require(DataHydration.Parent.SharedFlags).FFlagLuaAppDataHydrationUpdateItem
 
 return {
-	syncExperienceGenreToGameInfo = function(p1, GenreL1, GenreL2) --[[ Line: 8 ]]
+	syncExperienceGenreToGameInfo = function(p1, GenreL1, GenreL2)
 		-- upvalues: FFlagLuaAppDataHydrationUpdateItem (copy), GetGameInfoStoreModule (copy)
 		if not FFlagLuaAppDataHydrationUpdateItem then return end
 		if GenreL1 or GenreL2 then

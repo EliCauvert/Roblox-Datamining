@@ -15,7 +15,7 @@ local _ = require(script.Parent.Types)
 local GetTelemetryFieldsModule = require(script.Parent.getTelemetryFields)
 
 return {
-	[UserCtaAction.Chat] = function(p1) --[[ Line: 23 ]]
+	[UserCtaAction.Chat] = function(p1)
 		-- upvalues: UserCtaAction (copy), ButtonVariant (copy), InputSize (copy), UseGameJoinCardAnalyticsModule (copy), GameJoinCardButtonAction (copy), GetTelemetryFieldsModule (copy), FFlagGameJoinCardChatEntryPointModule (copy), EnteredChatFromEntryPointFunction (copy), ChatEntryPointNames (copy), NotificationType (copy)
 		return {
 			id = UserCtaAction.Chat,
@@ -23,7 +23,7 @@ return {
 			inputSize = InputSize.Medium,
 			width = UDim.new(1, 0),
 			text = p1.localized[UserCtaAction.Chat],
-			onActivated = function() --[[ Line: 30 ]]
+			onActivated = function()
 				-- upvalues: p1 (copy), UseGameJoinCardAnalyticsModule (upval), GameJoinCardButtonAction (upval), GetTelemetryFieldsModule (upval), FFlagGameJoinCardChatEntryPointModule (upval), EnteredChatFromEntryPointFunction (upval), ChatEntryPointNames (upval), NotificationType (upval)
 				if p1.userId == "" then return end
 				UseGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(GameJoinCardButtonAction.Chat, GetTelemetryFieldsModule(p1))

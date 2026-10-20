@@ -13,14 +13,14 @@ local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 local UseEventConnectionFunction = require(Parent1.ReactUtils).useEventConnection
 local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 
-return function(_) --[[ Line: 23 ]]
+return function(_)
 	-- upvalues: UseDispatchFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseCallbackFunction (copy), MakeVideoCaptureStartFailedHandlerModule (copy), UseEventConnectionFunction (copy), CaptureService (copy), MakeVideoCaptureFailedHandlerModule (copy), ReactModule (copy), CaptureControlsViewModule (copy), ToastContainerModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
-	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 26 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p1)
 		-- upvalues: ConstantsModule (upval)
 		return p1[ConstantsModule.RoduxKey].Carousel.IsOpen
 	end)
-	local UseSelectorResult1 = UseSelectorFunction(function(p1) --[[ Line: 30 ]]
+	local UseSelectorResult1 = UseSelectorFunction(function(p1)
 		-- upvalues: ConstantsModule (upval)
 		return p1[ConstantsModule.RoduxKey].IsCapturesCoreGuiEnabled
 	end)

@@ -6,16 +6,16 @@ local GameJoinCardButtonAction = require(script.Parent.AnalyticsConstants).GameJ
 local UseGameJoinCardAnalyticsModule = require(script.Parent.useGameJoinCardAnalytics)
 
 return {
-	useAgeCheckCompletionLogger = function(p1) --[[ Line: 49 ]]
+	useAgeCheckCompletionLogger = function(p1)
 		-- upvalues: ReactModule (copy), UseGameJoinCardAnalyticsModule (copy)
 		local UniverseId = if p1 == "" then nil else p1
 		
-		return ReactModule.useCallback(function(Outcome) --[[ Line: 53 ]]
+		return ReactModule.useCallback(function(Outcome)
 			-- upvalues: UseGameJoinCardAnalyticsModule (upval), UniverseId (copy)
 			UseGameJoinCardAnalyticsModule.logJoinCardAgeCheckVerificationOutcome({ universeId = UniverseId, outcome = Outcome })
 		end, { UniverseId })
 	end,
-	useAgeCheckPressLogger = function(p1) --[[ Line: 61 ]]
+	useAgeCheckPressLogger = function(p1)
 		-- upvalues: ReactModule (copy), UseGameJoinCardAnalyticsModule (copy), GameJoinCardButtonAction (copy), FFlagGameJoinCardAnalyticsCardId (copy), DependencyArrayFunction (copy)
 		local UserId = p1.userId
 		local AbsolutePosition = p1.absolutePosition
@@ -23,7 +23,7 @@ return {
 		local JoinAgeCheckUpsellFlowFunction = p1.joinAgeCheckUpsellFlow
 		local UniverseId = if p1.universeId == "" then nil else p1.universeId
 		
-		return ReactModule.useCallback(function() --[[ Line: 69 ]]
+		return ReactModule.useCallback(function()
 			-- upvalues: UseGameJoinCardAnalyticsModule (upval), GameJoinCardButtonAction (upval), UserId (copy), UniverseId (copy), AbsolutePosition (copy), FFlagGameJoinCardAnalyticsCardId (upval), JoinGameCardId (copy), JoinAgeCheckUpsellFlowFunction (copy)
 			UseGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(GameJoinCardButtonAction.AgeCheckUnlock, {
 				friendId = UserId,

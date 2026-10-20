@@ -3,28 +3,28 @@ local GetFFlagExpChatProtectedChatInternalAPIsFunction = require(ExpChat.Parent.
 local GetTextAndTranslationModule = require(ExpChat.getTextAndTranslation)
 local IsFullyFilteredTextModule = require(script.Parent.isFullyFilteredText)
 
-local function _(p1) --[[ Line: 29 | Named "getMessageText" ]]
+local function _(p1)
 	-- upvalues: GetFFlagExpChatProtectedChatInternalAPIsFunction (copy)
 	return (if GetFFlagExpChatProtectedChatInternalAPIsFunction() then p1.TextInternal else p1.Text) or ""
 end
 
-local _ = function(p1) --[[ Line: 38 | Named "getDisplayedText" ]]
+local _ = function(p1)
 	-- upvalues: GetTextAndTranslationModule (copy)
 	return GetTextAndTranslationModule(p1) or ""
 end
 
-local _ = function(Text: string): string --[[ Line: 43 | Named "trim" ]]
+local _ = function(Text: string): string
 	return (string.gsub(Text, "^%s*(.-)%s*$", "%1"))
 end
 
-return function(p1) --[[ Line: 47 | Named "createDictationSafetyReminder" ]]
+return function(p1)
 	-- upvalues: GetFFlagExpChatProtectedChatInternalAPIsFunction (copy), IsFullyFilteredTextModule (copy), GetTextAndTranslationModule (copy)
 	local Clock = p1.clock or os.clock
 	local Flag = false
 	local List = {}
 	local Tbl = {}
 	
-	local function prune(At) --[[ Line: 53 ]]
+	local function prune(At)
 		-- upvalues: List (copy), Tbl (copy)
 		for i = #List, 1, -1 do
 			if At - List[i].at > 30 then
@@ -39,7 +39,7 @@ return function(p1) --[[ Line: 47 | Named "createDictationSafetyReminder" ]]
 	end
 	
 	return {
-		trackContinuousSend = function(Text: string) --[[ Line: 66 ]]
+		trackContinuousSend = function(Text: string)
 			-- upvalues: Flag (ref), Clock (copy), prune (copy), List (copy)
 			if not Flag then
 				local ClockResult = Clock()
@@ -52,7 +52,7 @@ return function(p1) --[[ Line: 47 | Named "createDictationSafetyReminder" ]]
 				return
 			end
 		end,
-		onOutgoingMessage = function(p2) --[[ Line: 75 ]]
+		onOutgoingMessage = function(p2)
 			-- upvalues: Flag (ref), List (copy), GetFFlagExpChatProtectedChatInternalAPIsFunction (upval), Tbl (copy)
 			if Flag or #List == 0 then return end
 			local Replaced = string.gsub((if GetFFlagExpChatProtectedChatInternalAPIsFunction() then p2.TextInternal else p2.Text) or "", "^%s*(.-)%s*$", "%1")
@@ -65,7 +65,7 @@ return function(p1) --[[ Line: 47 | Named "createDictationSafetyReminder" ]]
 				end
 			end
 		end,
-		onIncomingMessage = function(p3) --[[ Line: 89 ]]
+		onIncomingMessage = function(p3)
 			-- upvalues: Tbl (copy), Flag (ref), IsFullyFilteredTextModule (upval), GetTextAndTranslationModule (upval), List (copy), p1 (copy)
 			local Entry = Tbl[p3.MessageId]
 			

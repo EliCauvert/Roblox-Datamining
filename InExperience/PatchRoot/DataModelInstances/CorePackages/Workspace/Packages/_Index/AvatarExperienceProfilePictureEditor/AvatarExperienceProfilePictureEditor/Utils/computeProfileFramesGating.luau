@@ -1,8 +1,8 @@
-﻿local function _(p1, p2, p3) --[[ Line: 18 | Named "shouldShowProfileFrames" ]]
+﻿local function _(p1, p2, p3)
 	return if p1 then not p2 or p3 else false
 end
 
-return function(p1, p2, p3, p4, AmpAccessError) --[[ Line: 34 | Named "computeProfileFramesGating" ]]
+return function(p1, p2, p3, p4, AmpAccessError)
 	local NoP4 = if p1 then not p2 or p3 else false
 	
 	return {

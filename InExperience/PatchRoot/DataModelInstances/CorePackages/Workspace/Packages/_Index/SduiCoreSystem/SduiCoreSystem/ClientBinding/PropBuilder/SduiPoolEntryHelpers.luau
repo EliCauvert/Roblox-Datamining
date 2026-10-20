@@ -17,7 +17,7 @@ local FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui = require(Parent.SharedFl
 local FFlagSduiSamePoolFeedItemSpacing = require(Parent.SharedFlags).FFlagSduiSamePoolFeedItemSpacing
 local T = if FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui then {} else nil
 
-local function getOneByTwoTileFlowId(p1, p2, p3, Kind) --[[ Line: 33 ]]
+local function getOneByTwoTileFlowId(p1, p2, p3, Kind)
 	-- upvalues: T (copy), HttpService (copy)
 	local NativeAdData = p3.native_ad_data
 	local Formatted = string.format("%s:%s:%s:%s", tostring(p1), tostring(p2), tostring(p3.universe_id or ""), if typeof(NativeAdData) == "string" then NativeAdData else "")
@@ -32,7 +32,7 @@ local function getOneByTwoTileFlowId(p1, p2, p3, Kind) --[[ Line: 33 ]]
 	return Entry, if typeof(NativeAdData) == "string" and NativeAdData ~= "" then NativeAdData else nil, if Type == "universe" then "Game" elseif Type == "ad_link" then "AdLink" else nil
 end
 
-local function getOneByTwoTileFlowIdsFromPools(List) --[[ Line: 58 ]]
+local function getOneByTwoTileFlowIdsFromPools(List)
 	-- upvalues: getOneByTwoTileFlowId (copy)
 	local List1 = {}
 	
@@ -64,7 +64,7 @@ local function getOneByTwoTileFlowIdsFromPools(List) --[[ Line: 58 ]]
 	return List1
 end
 
-local Callback = if FFlagSduiSkipFeedAnalyticsPosition then function(p1): boolean --[[ Line: 107 ]]
+local Callback = if FFlagSduiSkipFeedAnalyticsPosition then function(p1): boolean
 	-- upvalues: AnalyticsConstantsModule (copy)
 	if typeof(p1) == "table" then
 		local Value = p1.kind and p1.kind.value
@@ -79,7 +79,7 @@ local Callback = if FFlagSduiSkipFeedAnalyticsPosition then function(p1): boolea
 	end
 end else nil
 
-local function normalizePoolData(List) --[[ Line: 178 ]]
+local function normalizePoolData(List)
 	-- upvalues: FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui (copy), getOneByTwoTileFlowId (copy)
 	if List == nil or next(List) == nil then
 		return nil
@@ -145,7 +145,7 @@ local function normalizePoolData(List) --[[ Line: 178 ]]
 	return t
 end
 
-local function poolSectionFromEntry(p1, p2) --[[ Line: 251 ]]
+local function poolSectionFromEntry(p1, p2)
 	-- upvalues: FFlagSduiPerSectionPoolSizing (copy), FFlagSduiSamePoolFeedItemSpacing (copy), FFlagSduiSkipFeedAnalyticsPosition (copy), Callback (copy)
 	local Identifier = p1.identifier
 	
@@ -197,7 +197,7 @@ local function poolSectionFromEntry(p1, p2) --[[ Line: 251 ]]
 	}
 end
 
-local function applyPoolEntryConfigs(p1, List) --[[ Line: 332 ]]
+local function applyPoolEntryConfigs(p1, List)
 	-- upvalues: FFlagSduiPerSectionPoolSizing (copy)
 	if FFlagSduiPerSectionPoolSizing or List == nil then return end
 	for i, value in List do
@@ -209,7 +209,7 @@ local function applyPoolEntryConfigs(p1, List) --[[ Line: 332 ]]
 	end
 end
 
-local function ingestPoolSections(p2, p3, p4, p5) --[[ Line: 350 ]]
+local function ingestPoolSections(p2, p3, p4, p5)
 	-- upvalues: SduiPoolStoreModule (copy), normalizePoolData (copy), applyPoolEntryConfigs (copy)
 	local ConfigKey = p4.configKey
 	
@@ -228,20 +228,20 @@ local function ingestPoolSections(p2, p3, p4, p5) --[[ Line: 350 ]]
 end
 
 return {
-	resolvePoolDataGetter = function(p2, p3, p4, p5) --[[ Line: 123 ]]
+	resolvePoolDataGetter = function(p2, p3, p4, p5)
 		-- upvalues: SduiPropUtilsModule (copy)
 		if p2 == nil or p2 == "" then
 			return nil
 		else
 			local DynamicBindingPropValue = SduiPropUtilsModule.generateDynamicBindingPropValue(p2, p3, p4, p5)
 			
-			return function(p6) --[[ Line: 138 ]]
+			return function(p6)
 				-- upvalues: DynamicBindingPropValue (copy)
 				return DynamicBindingPropValue(p6).data
 			end
 		end
 	end,
-	buildPoolEntryConfigs = function(p2) --[[ Line: 149 ]]
+	buildPoolEntryConfigs = function(p2)
 		if typeof(p2) ~= "table" then
 			return nil
 		end
@@ -270,7 +270,7 @@ return {
 	normalizePoolData = normalizePoolData,
 	getOneByTwoTileFlowIdsFromPools = if FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui then getOneByTwoTileFlowIdsFromPools else nil,
 	poolSectionFromEntry = poolSectionFromEntry,
-	computePoolSections = function(List, p3) --[[ Line: 307 ]]
+	computePoolSections = function(List, p3)
 		-- upvalues: poolSectionFromEntry (copy), FFlagSduiPerSectionPoolSizing (copy)
 		local List1 = {}
 		
@@ -283,7 +283,7 @@ return {
 		end
 		return List1
 	end,
-	sectionsHaveMultiRow = function(List): boolean --[[ Line: 320 ]]
+	sectionsHaveMultiRow = function(List): boolean
 		for _, value in List do
 			if value.numberOfRows ~= 1 then
 				return true
@@ -292,7 +292,7 @@ return {
 		return false
 	end,
 	ingestPoolSections = ingestPoolSections,
-	createPoolEntryFns = function(List, p4, p5, p6, p7, p8, p9) --[[ Line: 375 ]]
+	createPoolEntryFns = function(List, p4, p5, p6, p7, p8, p9)
 		-- upvalues: ingestPoolSections (copy), FFlagSduiSamePoolFeedItemSpacing (copy), FFlagSduiVerticalFeedProgressiveFillOnScroll (copy), FFlagSduiCollectionGridRevealRows (copy), SduiListEntryRendererModule (copy)
 		local IngestPoolSectionsResult = ingestPoolSections(List, p8, p6, p9)
 		local v2: ((any) -> any)? = nil
@@ -315,7 +315,7 @@ return {
 					end
 				end
 			end
-			v2 = function(p10) --[[ Line: 406 ]]
+			v2 = function(p10)
 				-- upvalues: t (copy), IngestPoolSectionsResult (copy)
 				local Identifier = p10.identifier
 				
@@ -326,7 +326,7 @@ return {
 				} else nil
 			end
 			
-			EntryConfigExtrasFn = function(p10, _) --[[ Line: 418 ]]
+			EntryConfigExtrasFn = function(p10, _)
 				-- upvalues: IngestPoolSectionsResult (copy), FFlagSduiVerticalFeedProgressiveFillOnScroll (upval), FFlagSduiCollectionGridRevealRows (upval), FFlagSduiSamePoolFeedItemSpacing (upval), t2 (copy)
 				local Identifier = p10.identifier
 				
@@ -334,7 +334,7 @@ return {
 					_requiresDataBinding = true,
 					startRowGetter = IngestPoolSectionsResult.getSectionStartRow(Identifier),
 					numberOfRowsGetter = if FFlagSduiVerticalFeedProgressiveFillOnScroll then IngestPoolSectionsResult.getSectionRowCount(Identifier) else nil,
-					setDisplayedRowCount = if FFlagSduiCollectionGridRevealRows then function(p11) --[[ Line: 429 ]]
+					setDisplayedRowCount = if FFlagSduiCollectionGridRevealRows then function(p11)
 						-- upvalues: IngestPoolSectionsResult (upval), Identifier (copy)
 						IngestPoolSectionsResult.setSectionDisplayedRowCount(Identifier, p11)
 					end else nil,

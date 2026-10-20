@@ -15,7 +15,7 @@ local DelayAudioFocusReplication = game:DefineFastFlag("DelayAudioFocusReplicati
 local PlayerAudioFocusReplicationTimeoutSeconds = game:DefineFastInt("PlayerAudioFocusReplicationTimeoutSeconds", 10)
 local UserId = if FStringTimeoutLoadingLocalPlayerInBackgroundDM == LOCALPLAYERLOADINGTIMEOUTENUM.Disable then Players.LocalPlayer and Players.LocalPlayer.UserId or -1 else nil
 
-local function sendAnalyticsEvent(EventName, p1) --[[ Line: 30 ]]
+local function sendAnalyticsEvent(EventName, p1)
 	-- upvalues: GetMemStorageKeyFunction (copy), CEVJOINATTEMPTIDKEY (copy), FStringTimeoutLoadingLocalPlayerInBackgroundDM (copy), LOCALPLAYERLOADINGTIMEOUTENUM (copy), UserId (ref), RbxAnalyticsService (copy)
 	local P1 = p1 or {}
 	P1.cevJoinAttemptId = GetMemStorageKeyFunction(CEVJOINATTEMPTIDKEY)
@@ -29,18 +29,18 @@ if FStringTimeoutLoadingLocalPlayerInBackgroundDM ~= LOCALPLAYERLOADINGTIMEOUTEN
 end
 local NewResult = CrossExperienceModule.EventManager.new(CrossExperienceModule.Constants.EXPERIENCE_TYPE_VOICE, true)
 
-local function _(Status, Detail) --[[ Line: 51 | Named "notifyVoiceStatusChange" ]]
+local function _(Status, Detail)
 	-- upvalues: NewResult (copy), CrossExperienceModule (copy)
 	NewResult:notify(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_STATUS_CHANGED, { status = Status, detail = Detail })
 end
 
-local function ensureLocalPlayerWithTimeout() --[[ Line: 59 ]]
+local function ensureLocalPlayerWithTimeout()
 	-- upvalues: Players (copy), PromiseModule (copy), BackgroundDMLocalPlayerLoadingTimeoutSeconds (copy), sendAnalyticsEvent (copy), CrossExperienceModule (copy), NewResult (copy)
 	local LocalPlayer = Players.LocalPlayer
 	
 	if not LocalPlayer then
 		PromiseModule.race({
-			PromiseModule.new(function(Callback: (any) -> ()) --[[ Line: 63 ]]
+			PromiseModule.new(function(Callback: (any) -> ())
 				-- upvalues: Players (upval)
 				if Players.LocalPlayer then
 					Callback("loaded")
@@ -48,7 +48,7 @@ local function ensureLocalPlayerWithTimeout() --[[ Line: 59 ]]
 					return
 				else
 					local Connection = nil
-					Connection = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function() --[[ Line: 68 ]]
+					Connection = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
 						-- upvalues: Players (upval), Connection (ref), Callback (copy)
 						if Players.LocalPlayer then
 							Connection:Disconnect()
@@ -57,10 +57,10 @@ local function ensureLocalPlayerWithTimeout() --[[ Line: 59 ]]
 					end)
 				end
 			end),
-			(PromiseModule.delay(BackgroundDMLocalPlayerLoadingTimeoutSeconds):andThen(function(): string --[[ Line: 78 ]]
+			(PromiseModule.delay(BackgroundDMLocalPlayerLoadingTimeoutSeconds):andThen(function(): string
 				return "timeout"
 			end))
-		}):andThen(function(Result) --[[ Line: 83 ]]
+		}):andThen(function(Result)
 			-- upvalues: LocalPlayer (ref), Players (upval), sendAnalyticsEvent (upval), BackgroundDMLocalPlayerLoadingTimeoutSeconds (upval), CrossExperienceModule (upval), NewResult (upval)
 			if Result == "loaded" then
 				LocalPlayer = Players.LocalPlayer
@@ -82,7 +82,7 @@ local function ensureLocalPlayerWithTimeout() --[[ Line: 59 ]]
 		end):await()
 	end
 	if not LocalPlayer then
-		PromiseModule.new(function() --[[ Line: 110 ]] end):await()
+		PromiseModule.new(function() end):await()
 	end
 	return LocalPlayer.UserId
 end
@@ -147,7 +147,7 @@ local PersistenceMiddleware = CreatePersistenceMiddlewareFunction({
 sendAnalyticsEvent("partyVoicePersistenceMiddlewareCreated")
 local Default2 = CrossExperienceModule.PartyAudioPlayer.default
 
-local function v53() --[[ Line: 202 ]]
+local function v53()
 	-- upvalues: RoduxModule (copy), CrossExperienceModule (copy)
 	return RoduxModule.combineReducers({
 		Squad = RoduxModule.combineReducers({
@@ -158,12 +158,12 @@ end
 
 sendAnalyticsEvent("partyVoiceCrossExperienceReducerLoaded")
 
-local function v54(Callback) --[[ Line: 213 ]]
+local function v54(Callback)
 	-- upvalues: Default1 (copy), NewResult1 (copy)
-	Default1:asyncInit():andThen(function() --[[ Line: 215 ]]
+	Default1:asyncInit():andThen(function()
 		-- upvalues: Callback (copy)
 		Callback()
-	end):catch(function(Err) --[[ Line: 218 ]]
+	end):catch(function(Err)
 		-- upvalues: NewResult1 (upval)
 		NewResult1:info("CoreVoiceManager did not initialize {}", Err)
 	end)
@@ -176,7 +176,7 @@ local AddObserverResult = nil
 
 if CevReadinessSyncEngineFeature then
 	NewResult1:info("Registering early observer for foreground readiness signal.")
-	AddObserverResult = NewResult:addObserver(CrossExperienceModule.Constants.EVENTS.FOREGROUND_UI_READY, function() --[[ Line: 234 ]]
+	AddObserverResult = NewResult:addObserver(CrossExperienceModule.Constants.EVENTS.FOREGROUND_UI_READY, function()
 		-- upvalues: Flag (ref), NewResult1 (copy), BindableEvent (copy)
 		if not Flag then
 			NewResult1:info("Received foreground UI readiness signal.")
@@ -210,7 +210,7 @@ NewResult:notify(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_EXPERIENCE_J
 if DelayAudioFocusReplication then
 	local v1 = nil
 	local Flag1 = false
-	ObserveCurrentContextIdFunction(function(p1) --[[ Line: 276 ]]
+	ObserveCurrentContextIdFunction(function(p1)
 		-- upvalues: v1 (ref), Flag1 (ref), RemoteEvent (ref)
 		v1 = p1
 		print("CurrentContextId changed to", p1, "isReplicationReady:", Flag1)
@@ -226,7 +226,7 @@ if DelayAudioFocusReplication then
 	if RemoteEvent then
 		print("PlayerAudioFocusChanged replicated successfully.")
 		sendAnalyticsEvent("partyVoicePlayerAudioFocusChangedLoaded")
-		RemoteEvent.OnClientEvent:Connect(function(UserId, ContextId, ContextIds) --[[ Line: 298 ]]
+		RemoteEvent.OnClientEvent:Connect(function(UserId, ContextId, ContextIds)
 			-- upvalues: NewResult (copy), CrossExperienceModule (copy)
 			print("Received PlayerAudioFocusChanged OnClientEvent:", UserId, ContextId)
 			NewResult:notify(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_PARTICIPANT_AUDIO_FOCUS_CHANGED, {
@@ -248,11 +248,11 @@ if DelayAudioFocusReplication then
 		})
 	end
 else
-	ObserveCurrentContextIdFunction(function(p1) --[[ Line: 324 ]]
+	ObserveCurrentContextIdFunction(function(p1)
 		-- upvalues: RemoteEvent (ref)
 		RemoteEvent:FireServer(p1)
 	end)
-	RemoteEvent.OnClientEvent:Connect(function(UserId, ContextId, ContextIds) --[[ Line: 328 ]]
+	RemoteEvent.OnClientEvent:Connect(function(UserId, ContextId, ContextIds)
 		-- upvalues: NewResult (copy), CrossExperienceModule (copy)
 		NewResult:notify(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_PARTICIPANT_AUDIO_FOCUS_CHANGED, {
 			userId = UserId,
@@ -261,7 +261,7 @@ else
 		})
 	end)
 end
-local function v62(Player: Player) --[[ Line: 337 ]]
+local function v62(Player: Player)
 	-- upvalues: NewResult (copy), CrossExperienceModule (copy), UserId (ref), FFlagEnablePartyVoiceChangersInLua (copy)
 	NewResult:notify(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_PARTICIPANT_ADDED, {
 		userId = Player.UserId,
@@ -274,7 +274,7 @@ local function v62(Player: Player) --[[ Line: 337 ]]
 	})
 end
 
-local function Callback(Player: Player) --[[ Line: 355 ]]
+local function Callback(Player: Player)
 	-- upvalues: NewResult (copy), CrossExperienceModule (copy), UserId (ref), Default2 (copy)
 	NewResult:notify(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_PARTICIPANT_REMOVED, {
 		userId = Player.UserId,
@@ -283,12 +283,12 @@ local function Callback(Player: Player) --[[ Line: 355 ]]
 	Default2:playSound("leave")
 end
 
-local function Callback1(ActivityInfo) --[[ Line: 363 ]]
+local function Callback1(ActivityInfo)
 	-- upvalues: CrossExperienceModule (copy), NewResult (copy), UserId (ref)
 	NewResult:notify(if ActivityInfo.isActive then CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_PARTICIPANT_IS_ACTIVE else CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_PARTICIPANT_IS_INACTIVE, { isLocalUser = true, userId = UserId })
 end
 
-local function Callback2(PreviousMutedState) --[[ Line: 373 ]]
+local function Callback2(PreviousMutedState)
 	-- upvalues: EnableCEVPersistMuteStateForAFM (copy), config (ref), CrossExperienceModule (copy), PartyVoiceExecuteVoiceActionsPostAsyncInit (copy), v54 (copy), NewResult (copy), UserId (ref)
 	if not EnableCEVPersistMuteStateForAFM then
 		config.previousMutedState = PreviousMutedState
@@ -296,7 +296,7 @@ local function Callback2(PreviousMutedState) --[[ Line: 373 ]]
 	local PARTYVOICEPARTICIPANTWASMUTED = if PreviousMutedState then CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_PARTICIPANT_WAS_MUTED else CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_PARTICIPANT_WAS_UNMUTED
 	
 	if PartyVoiceExecuteVoiceActionsPostAsyncInit then
-		v54(function() --[[ Line: 382 ]]
+		v54(function()
 			-- upvalues: NewResult (upval), PARTYVOICEPARTICIPANTWASMUTED (copy), UserId (upval)
 			NewResult:notify(PARTYVOICEPARTICIPANTWASMUTED, { isLocalUser = true, userId = UserId })
 		end)
@@ -307,17 +307,17 @@ local function Callback2(PreviousMutedState) --[[ Line: 373 ]]
 	end
 end
 
-local function onLocalVoiceChangerChanged(p1) --[[ Line: 396 ]]
+local function onLocalVoiceChangerChanged(p1)
 	-- upvalues: CrossExperienceModule (copy), NewResult (copy), UserId (ref)
 	NewResult:notify(if p1 then CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_CHANGER_WAS_ENABLED else CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_CHANGER_WAS_DISABLED, { isLocalUser = true, userId = UserId })
 end
 
-local function onLocalVoiceChangerHearMyselfChanged(p1) --[[ Line: 407 ]]
+local function onLocalVoiceChangerHearMyselfChanged(p1)
 	-- upvalues: CrossExperienceModule (copy), NewResult (copy), UserId (ref)
 	NewResult:notify(if p1 then CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_CHANGER_FEEDBACK_WAS_ENABLED else CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_CHANGER_FEEDBACK_WAS_DISABLED, { isLocalUser = true, userId = UserId })
 end
 
-local function Callback3(List) --[[ Line: 418 ]]
+local function Callback3(List)
 	-- upvalues: FFlagEnablePartyVoiceChangersInLua (copy), CrossExperienceModule (copy), UserId (ref), NewResult (copy)
 	for UserId1, value in pairs(List) do
 		local IsSignalActive = value.isSignalActive
@@ -335,13 +335,13 @@ local function Callback3(List) --[[ Line: 418 ]]
 	end
 end
 
-local function v69(p1) --[[ Line: 451 ]]
+local function v69(p1)
 	-- upvalues: UserId (ref), PartyVoiceExecuteVoiceActionsPostAsyncInit (copy), v54 (copy), EnableCEVPersistMuteStateForAFM (copy), config (ref), Default1 (copy)
 	local Number: number? = tonumber(p1.userId)
 	local IsUserIdMatch = UserId == Number
 	
 	if PartyVoiceExecuteVoiceActionsPostAsyncInit then
-		v54(function() --[[ Line: 456 ]]
+		v54(function()
 			-- upvalues: IsUserIdMatch (copy), EnableCEVPersistMuteStateForAFM (upval), config (upval), Default1 (upval), Number (copy)
 			if not IsUserIdMatch then
 				Default1:ToggleMutePlayer(Number)
@@ -365,7 +365,7 @@ local function v69(p1) --[[ Line: 451 ]]
 	end
 end
 
-local function setVoicePack(p1) --[[ Line: 475 ]]
+local function setVoicePack(p1)
 	-- upvalues: Default1 (copy), NewResult (copy), CrossExperienceModule (copy), UserId (ref)
 	local VoicePackName = p1.voicePackName
 	Default1:SetVoicePack(VoicePackName)
@@ -376,7 +376,7 @@ local function setVoicePack(p1) --[[ Line: 475 ]]
 	})
 end
 
-local function toggleVoiceChanger(p1) --[[ Line: 485 ]]
+local function toggleVoiceChanger(p1)
 	-- upvalues: UserId (ref), Default1 (copy)
 	local Number: number? = tonumber(p1.userId)
 	
@@ -389,7 +389,7 @@ local function toggleVoiceChanger(p1) --[[ Line: 485 ]]
 	end
 end
 
-local function toggleVoiceChangerHearMyself(p1) --[[ Line: 496 ]]
+local function toggleVoiceChangerHearMyself(p1)
 	-- upvalues: UserId (ref), Default1 (copy)
 	local Number: number? = tonumber(p1.userId)
 	
@@ -402,9 +402,9 @@ local function toggleVoiceChangerHearMyself(p1) --[[ Line: 496 ]]
 	end
 end
 
-function handleParticipants() --[[ Line: 507 ]]
+function handleParticipants()
 	-- upvalues: Players (copy), v62 (copy), Default2 (copy), Callback (copy), UserId (ref)
-	Players.PlayerAdded:Connect(function(Player) --[[ Line: 508 ]]
+	Players.PlayerAdded:Connect(function(Player)
 		-- upvalues: v62 (upval), Default2 (upval)
 		v62(Player)
 		Default2:playSound("join")
@@ -422,14 +422,14 @@ function handleParticipants() --[[ Line: 507 ]]
 	end
 end
 
-function handleMicrophone() --[[ Line: 524 ]]
+function handleMicrophone()
 	-- upvalues: Default1 (copy), Callback2 (copy), NewResult (copy), CrossExperienceModule (copy), v69 (copy)
 	Default1.muteChanged.Event:Connect(Callback2)
 	NewResult:addObserver(CrossExperienceModule.Constants.EVENTS.MUTE_PARTY_VOICE_PARTICIPANT, v69)
 	NewResult:addObserver(CrossExperienceModule.Constants.EVENTS.UNMUTE_PARTY_VOICE_PARTICIPANT, v69)
 end
 
-function handleVoiceChanger() --[[ Line: 530 ]]
+function handleVoiceChanger()
 	-- upvalues: Default1 (copy), onLocalVoiceChangerChanged (copy), NewResult (copy), CrossExperienceModule (copy), toggleVoiceChanger (copy), setVoicePack (copy), onLocalVoiceChangerHearMyselfChanged (copy), toggleVoiceChangerHearMyself (copy)
 	Default1.voiceChangerChanged.Event:Connect(onLocalVoiceChangerChanged)
 	NewResult:addObserver(CrossExperienceModule.Constants.EVENTS.ENABLE_PARTY_VOICE_CHANGER, toggleVoiceChanger)
@@ -440,12 +440,12 @@ function handleVoiceChanger() --[[ Line: 530 ]]
 	NewResult:addObserver(CrossExperienceModule.Constants.EVENTS.DISABLE_PARTY_VOICE_CHANGER_FEEDBACK, toggleVoiceChangerHearMyself)
 end
 
-local function v73(p1) --[[ Line: 546 ]]
+local function v73(p1)
 	-- upvalues: Players (copy), BlockingUtilityModule (copy), NewResult1 (copy)
 	local Player = Players:GetPlayerByUserId(tonumber(p1.userId) or 0)
 	
 	if Player then
-		coroutine.wrap(function() --[[ Line: 550 ]]
+		coroutine.wrap(function()
 			-- upvalues: BlockingUtilityModule (upval), Player (copy), NewResult1 (upval)
 			if BlockingUtilityModule:AddPlayerToBlockList(Player) then
 				NewResult1:info("Participant {} was blocked from party voice", Player.DisplayName)
@@ -454,12 +454,12 @@ local function v73(p1) --[[ Line: 546 ]]
 	end
 end
 
-local function v74(p1) --[[ Line: 559 ]]
+local function v74(p1)
 	-- upvalues: Players (copy), BlockingUtilityModule (copy), NewResult1 (copy)
 	local Player = Players:GetPlayerByUserId(tonumber(p1.userId) or 0)
 	
 	if Player then
-		coroutine.wrap(function() --[[ Line: 563 ]]
+		coroutine.wrap(function()
 			-- upvalues: BlockingUtilityModule (upval), Player (copy), NewResult1 (upval)
 			if BlockingUtilityModule:RemovePlayerFromBlockList(Player) then
 				NewResult1:info("Participant {} was unblocked from party voice", Player.DisplayName)
@@ -468,53 +468,53 @@ local function v74(p1) --[[ Line: 559 ]]
 	end
 end
 
-local function v75() --[[ Line: 572 ]]
+local function v75()
 	-- upvalues: GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction (copy), CaptureService (copy)
 	return GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction() and (CaptureService and CaptureService:IsCapturingVideo())
 end
 
-local _ = function(p1, p2): boolean --[[ Line: 580 | Named "isAuthorizedPermission" ]]
+local _ = function(p1, p2): boolean
 	-- upvalues: CryoModule (copy)
 	return if p1.missingPermissions then not CryoModule.List.find(p1.missingPermissions, p2) else false
 end
 
-local _ = function(p1) --[[ Line: 587 | Named "requestPermissions" ]]
+local _ = function(p1)
 	-- upvalues: PromiseModule (copy), Default (copy), CryoModule (copy)
 	local config = { hasMicPermissions = false }
 	
-	return PromiseModule.new(function(Callback, _) --[[ Line: 592 ]]
+	return PromiseModule.new(function(Callback, _)
 		-- upvalues: Default (upval), p1 (copy), config (copy), CryoModule (upval)
-		Default:requestPermissions(p1):andThen(function(Result) --[[ Line: 594 ]]
+		Default:requestPermissions(p1):andThen(function(Result)
 			-- upvalues: config (upval), Default (upval), CryoModule (upval), Callback (copy)
 			local MICROPHONEACCESS = Default.Permissions.MICROPHONE_ACCESS
 			config.hasMicPermissions = if Result.missingPermissions then not CryoModule.List.find(Result.missingPermissions, MICROPHONEACCESS) else false
 			Callback(config)
-		end):catch(function() --[[ Line: 599 ]]
+		end):catch(function()
 			-- upvalues: Callback (copy), config (upval)
 			Callback(config)
 		end)
 	end)
 end
 
-local _ = function() --[[ Line: 605 | Named "initializeParticipantBlockListener" ]]
+local _ = function()
 	-- upvalues: NewResult (copy), CrossExperienceModule (copy), v73 (copy), v74 (copy)
 	NewResult:addObserver(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_BLOCK_PARTICIPANT, v73)
 	NewResult:addObserver(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_UNBLOCK_PARTICIPANT, v74)
 end
 
-function onCoreVoiceManagerInitialized() --[[ Line: 616 ]]
+function onCoreVoiceManagerInitialized()
 	-- upvalues: Default1 (copy), Callback1 (copy), Callback3 (copy)
 	Default1:getService().PlayerMicActivitySignalChange:Connect(Callback1)
 	Default1.participantsUpdate.Event:Connect(Callback3)
 end
 
-local _ = function() --[[ Line: 626 | Named "unmuteMicrophoneOnce" ]]
+local _ = function()
 	-- upvalues: Default1 (copy), PartyVoiceExecuteVoiceActionsPostAsyncInit (copy), v54 (copy)
-	Default1.muteChanged.Event:Once(function(p1) --[[ Line: 627 ]]
+	Default1.muteChanged.Event:Once(function(p1)
 		-- upvalues: PartyVoiceExecuteVoiceActionsPostAsyncInit (upval), v54 (upval), Default1 (upval)
 		if p1 ~= nil then
 			if PartyVoiceExecuteVoiceActionsPostAsyncInit then
-				v54(function() --[[ Line: 630 ]]
+				v54(function()
 					-- upvalues: Default1 (upval)
 					Default1:ToggleMic("BackgroundDM")
 				end)
@@ -526,7 +526,7 @@ local _ = function() --[[ Line: 626 | Named "unmuteMicrophoneOnce" ]]
 	end)
 end
 
-local function initializeDefaultChannel(IsMicMuted) --[[ Line: 640 ]]
+local function initializeDefaultChannel(IsMicMuted)
 	-- upvalues: Default1 (copy), NewResult1 (copy), NewResult2 (copy)
 	local Service = Default1:getService()
 	
@@ -547,7 +547,7 @@ local function initializeDefaultChannel(IsMicMuted) --[[ Line: 640 ]]
 	end
 end
 
-local function validateSetup(): boolean --[[ Line: 659 ]]
+local function validateSetup(): boolean
 	-- upvalues: NotificationServiceIsConnectedAvailableEngineFeature (copy), UseNotificationServiceIsConnected (copy), NotificationService (copy), NewResult1 (copy), VoiceChatService (copy), Players (copy), VoiceServiceEnableDefaultVoiceAvailableEngineFeature (copy), DefaultChannelEnableDefaultVoice (copy), NewResult2 (copy), Constants (copy), NewResult (copy), CrossExperienceModule (copy)
 	if NotificationServiceIsConnectedAvailableEngineFeature and UseNotificationServiceIsConnected then
 		if not NotificationService.IsConnected then
@@ -583,7 +583,7 @@ local function validateSetup(): boolean --[[ Line: 659 ]]
 	return true
 end
 
-local function getPlayerUsersIds(): string --[[ Line: 691 ]]
+local function getPlayerUsersIds(): string
 	-- upvalues: Players (copy)
 	local List = {}
 	
@@ -593,13 +593,13 @@ local function getPlayerUsersIds(): string --[[ Line: 691 ]]
 	return table.concat(List, ", ")
 end
 
-local _ = function(p1) --[[ Line: 699 | Named "getPermissions" ]]
+local _ = function(p1)
 	-- upvalues: PromiseModule (copy), Default (copy), CryoModule (copy)
 	local config = { hasMicPermissions = false }
 	
-	return PromiseModule.new(function(Callback, _) --[[ Line: 704 ]]
+	return PromiseModule.new(function(Callback, _)
 		-- upvalues: Default (upval), p1 (copy), config (copy), CryoModule (upval), PromiseModule (upval)
-		Default:hasPermissions(p1):andThen(function(Result) --[[ Line: 706 ]]
+		Default:hasPermissions(p1):andThen(function(Result)
 			-- upvalues: config (upval), Default (upval), CryoModule (upval), p1 (upval), PromiseModule (upval), Callback (copy)
 			local MICROPHONEACCESS = Default.Permissions.MICROPHONE_ACCESS
 			config.hasMicPermissions = if Result.missingPermissions then not CryoModule.List.find(Result.missingPermissions, MICROPHONEACCESS) else false
@@ -610,20 +610,20 @@ local _ = function(p1) --[[ Line: 699 | Named "getPermissions" ]]
 				return
 			else
 				local config = { hasMicPermissions = false }
-				PromiseModule.new(function(Callback, _) --[[ Line: 592 ]]
+				PromiseModule.new(function(Callback, _)
 					-- upvalues: Default (upval), p1 (copy), config (copy), CryoModule (upval)
-					Default:requestPermissions(p1):andThen(function(Result) --[[ Line: 594 ]]
+					Default:requestPermissions(p1):andThen(function(Result)
 						-- upvalues: config (upval), Default (upval), CryoModule (upval), Callback (copy)
 						local MICROPHONEACCESS = Default.Permissions.MICROPHONE_ACCESS
 						config.hasMicPermissions = if Result.missingPermissions then not CryoModule.List.find(Result.missingPermissions, MICROPHONEACCESS) else false
 						Callback(config)
-					end):catch(function() --[[ Line: 599 ]]
+					end):catch(function()
 						-- upvalues: Callback (copy), config (upval)
 						Callback(config)
 					end)
 				end):andThen(Callback)
 			end
-		end):catch(function() --[[ Line: 715 ]]
+		end):catch(function()
 			-- upvalues: Callback (copy), config (upval)
 			Callback(config)
 		end)
@@ -632,7 +632,7 @@ end
 
 local Flag2 = false
 
-local function setupListeners() --[[ Line: 723 ]]
+local function setupListeners()
 	-- upvalues: Flag2 (ref), NewResult1 (copy), Default1 (copy), FFlagFixPartyVoiceGetPermissions (copy), PromiseModule (copy), Default (copy), CryoModule (copy), FFlagEnablePartyVoiceChangersInLua (copy), FFlagPartyVoiceBlockSync (copy), NewResult (copy), CrossExperienceModule (copy), v73 (copy), v74 (copy), GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction (copy), v54 (copy), EnableCrossExpVoiceDebug (copy), HttpService (copy), NewResult3 (copy), Constants (copy), getPlayerUsersIds (copy), UserId (ref), RbxAnalyticsService (copy), Players (copy), GetMemStorageKeyFunction (copy), CEVJOINATTEMPTIDKEY (copy), config (ref)
 	if Flag2 then
 		NewResult1:debug("listeners already registered, skipping duplicate setup")
@@ -641,13 +641,13 @@ local function setupListeners() --[[ Line: 723 ]]
 	end
 	Flag2 = true
 	NewResult1:debug("setting up listeners for the first time")
-	Default1:subscribe("GetPermissions", function(Callback: (any) -> (), p1) --[[ Line: 732 ]]
+	Default1:subscribe("GetPermissions", function(Callback: (any) -> (), p1)
 		-- upvalues: FFlagFixPartyVoiceGetPermissions (upval), PromiseModule (upval), Default (upval), CryoModule (upval)
 		if FFlagFixPartyVoiceGetPermissions then
 			local config = { hasMicPermissions = false }
-			PromiseModule.new(function(Callback, _) --[[ Line: 704 ]]
+			PromiseModule.new(function(Callback, _)
 				-- upvalues: Default (upval), p1 (copy), config (copy), CryoModule (upval), PromiseModule (upval)
-				Default:hasPermissions(p1):andThen(function(Result) --[[ Line: 706 ]]
+				Default:hasPermissions(p1):andThen(function(Result)
 					-- upvalues: config (upval), Default (upval), CryoModule (upval), p1 (upval), PromiseModule (upval), Callback (copy)
 					local MICROPHONEACCESS = Default.Permissions.MICROPHONE_ACCESS
 					config.hasMicPermissions = if Result.missingPermissions then not CryoModule.List.find(Result.missingPermissions, MICROPHONEACCESS) else false
@@ -658,20 +658,20 @@ local function setupListeners() --[[ Line: 723 ]]
 						return
 					else
 						local config = { hasMicPermissions = false }
-						PromiseModule.new(function(Callback, _) --[[ Line: 592 ]]
+						PromiseModule.new(function(Callback, _)
 							-- upvalues: Default (upval), p1 (copy), config (copy), CryoModule (upval)
-							Default:requestPermissions(p1):andThen(function(Result) --[[ Line: 594 ]]
+							Default:requestPermissions(p1):andThen(function(Result)
 								-- upvalues: config (upval), Default (upval), CryoModule (upval), Callback (copy)
 								local MICROPHONEACCESS = Default.Permissions.MICROPHONE_ACCESS
 								config.hasMicPermissions = if Result.missingPermissions then not CryoModule.List.find(Result.missingPermissions, MICROPHONEACCESS) else false
 								Callback(config)
-							end):catch(function() --[[ Line: 599 ]]
+							end):catch(function()
 								-- upvalues: Callback (copy), config (upval)
 								Callback(config)
 							end)
 						end):andThen(Callback)
 					end
-				end):catch(function() --[[ Line: 715 ]]
+				end):catch(function()
 					-- upvalues: Callback (copy), config (upval)
 					Callback(config)
 				end)
@@ -693,23 +693,23 @@ local function setupListeners() --[[ Line: 723 ]]
 		NewResult:addObserver(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_UNBLOCK_PARTICIPANT, v74)
 	end
 	if GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction() then
-		NewResult:addObserver(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_MUTE_ALL, function(p1) --[[ Line: 756 ]]
+		NewResult:addObserver(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_MUTE_ALL, function(p1)
 			-- upvalues: v54 (upval), Default1 (upval)
-			v54(function() --[[ Line: 757 ]]
+			v54(function()
 				-- upvalues: Default1 (upval), p1 (copy)
 				Default1:MuteAll(true, p1.context)
 			end)
 		end)
-		NewResult:addObserver(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_UNMUTE_ALL, function(p1) --[[ Line: 761 ]]
+		NewResult:addObserver(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_UNMUTE_ALL, function(p1)
 			-- upvalues: v54 (upval), Default1 (upval)
-			v54(function() --[[ Line: 762 ]]
+			v54(function()
 				-- upvalues: Default1 (upval), p1 (copy)
 				Default1:MuteAll(false, p1.context)
 			end)
 		end)
 	end
 	if EnableCrossExpVoiceDebug then
-		NewResult:addObserver(CrossExperienceModule.Constants.EVENTS.DEBUG_COMMAND, function(p1) --[[ Line: 769 ]]
+		NewResult:addObserver(CrossExperienceModule.Constants.EVENTS.DEBUG_COMMAND, function(p1)
 			-- upvalues: HttpService (upval), NewResult3 (upval), Default1 (upval)
 			if p1.name == "dump_session" then
 				print("----------- CEV BACKGROUND -----------")
@@ -735,35 +735,35 @@ local function setupListeners() --[[ Line: 723 ]]
 			end
 		end)
 	end
-	Default1:subscribe("OnRequestMicPermissionRejected", function() --[[ Line: 801 ]]
+	Default1:subscribe("OnRequestMicPermissionRejected", function()
 		-- upvalues: Constants (upval), NewResult (upval), CrossExperienceModule (upval)
 		NewResult:notify(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_STATUS_CHANGED, {
 			detail = nil,
 			status = Constants.VOICE_STATUS.ERROR_VOICE_MIC_REJECTED
 		})
 	end)
-	Default1:subscribe("OnPlayerModerated", function() --[[ Line: 805 ]]
+	Default1:subscribe("OnPlayerModerated", function()
 		-- upvalues: Constants (upval), NewResult (upval), CrossExperienceModule (upval)
 		NewResult:notify(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_STATUS_CHANGED, {
 			detail = "On Player Moderated",
 			status = Constants.VOICE_STATUS.ERROR_VOICE_MODERATED
 		})
 	end)
-	Default1:subscribe("OnInitialJoinFailed", function() --[[ Line: 809 ]]
+	Default1:subscribe("OnInitialJoinFailed", function()
 		-- upvalues: Constants (upval), NewResult (upval), CrossExperienceModule (upval)
 		NewResult:notify(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_STATUS_CHANGED, {
 			detail = "Initial Join failed",
 			status = Constants.VOICE_STATUS.ERROR_VOICE_JOIN
 		})
 	end)
-	Default1:subscribe("OnRetryRequested", function() --[[ Line: 813 ]]
+	Default1:subscribe("OnRetryRequested", function()
 		-- upvalues: Constants (upval), NewResult (upval), CrossExperienceModule (upval)
 		NewResult:notify(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_STATUS_CHANGED, {
 			detail = "Retry requested",
 			status = Constants.VOICE_STATUS.VOICE_RECONNECTING
 		})
 	end)
-	Default1:subscribe("OnStateChanged", function(_, VoiceChatState) --[[ Line: 817 ]]
+	Default1:subscribe("OnStateChanged", function(_, VoiceChatState)
 		-- upvalues: Default1 (upval), getPlayerUsersIds (upval), NewResult (upval), CrossExperienceModule (upval), UserId (upval), Constants (upval), RbxAnalyticsService (upval), Players (upval), GetMemStorageKeyFunction (upval), CEVJOINATTEMPTIDKEY (upval), config (upval)
 		if VoiceChatState == Enum.VoiceChatState.Joined then
 			NewResult:notify(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_STATUS_CHANGED, {
@@ -795,7 +795,7 @@ local function setupListeners() --[[ Line: 723 ]]
 			})
 		end
 	end)
-	Default1:subscribe("OnReportJoinFailed", function(Detail) --[[ Line: 846 ]]
+	Default1:subscribe("OnReportJoinFailed", function(Detail)
 		-- upvalues: NewResult1 (upval), Constants (upval), NewResult (upval), CrossExperienceModule (upval)
 		NewResult1:error("CEV OnReportJoinFailed " .. Detail)
 		NewResult:notify(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_STATUS_CHANGED, {
@@ -805,10 +805,10 @@ local function setupListeners() --[[ Line: 723 ]]
 	end)
 end
 
-function initializeAFM() --[[ Line: 853 ]]
+function initializeAFM()
 	-- upvalues: AudioFocusManagementEngineFeature (copy), CrossExperienceModule (copy), FIntPartyVoiceUndeafenDelayMS (copy), DelayedThread (ref), PartyVoiceFixCaptureVideoCheck (copy), GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction (copy), CaptureService (copy), v75 (copy), Default1 (copy), EnableCEVPersistMuteStateForAFM (copy), config (ref), NewResult1 (copy), PartyVoiceExecuteVoiceActionsPostAsyncInit (copy), v54 (copy), PromiseModule (copy)
 	if AudioFocusManagementEngineFeature then
-		local Success, Result = pcall(function() --[[ Line: 855 ]]
+		local Success, Result = pcall(function()
 			return game:GetService("AudioFocusService")
 		end)
 		
@@ -817,7 +817,7 @@ function initializeAFM() --[[ Line: 853 ]]
 			local FOCUSPRIORITY = CrossExperienceModule.Constants.AUDIO_FOCUS_MANAGEMENT.CEV.FOCUS_PRIORITY
 			Result:RegisterContextIdFromLua(CONTEXTID)
 			
-			local function v119() --[[ Line: 863 ]]
+			local function v119()
 				-- upvalues: FIntPartyVoiceUndeafenDelayMS (upval), DelayedThread (upval), PartyVoiceFixCaptureVideoCheck (upval), GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction (upval), CaptureService (upval), v75 (upval), Default1 (upval), EnableCEVPersistMuteStateForAFM (upval), config (upval)
 				if FIntPartyVoiceUndeafenDelayMS > 0 and DelayedThread then
 					task.cancel(DelayedThread)
@@ -831,7 +831,7 @@ function initializeAFM() --[[ Line: 853 ]]
 				end
 			end
 			
-			local function v120() --[[ Line: 884 ]]
+			local function v120()
 				-- upvalues: FIntPartyVoiceUndeafenDelayMS (upval), DelayedThread (upval), PartyVoiceFixCaptureVideoCheck (upval), GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction (upval), CaptureService (upval), v75 (upval), Default1 (upval), NewResult1 (upval), PartyVoiceExecuteVoiceActionsPostAsyncInit (upval), v54 (upval), EnableCEVPersistMuteStateForAFM (upval), config (upval)
 				if FIntPartyVoiceUndeafenDelayMS > 0 and DelayedThread then
 					task.cancel(DelayedThread)
@@ -842,11 +842,11 @@ function initializeAFM() --[[ Line: 853 ]]
 				end
 				if Default1.localMuted == nil then
 					NewResult1:info("CEV undeafenAll - Voice not connected yet - calling unmuteMicrophoneOnce")
-					Default1.muteChanged.Event:Once(function(p1) --[[ Line: 627 ]]
+					Default1.muteChanged.Event:Once(function(p1)
 						-- upvalues: PartyVoiceExecuteVoiceActionsPostAsyncInit (upval), v54 (upval), Default1 (upval)
 						if p1 ~= nil then
 							if PartyVoiceExecuteVoiceActionsPostAsyncInit then
-								v54(function() --[[ Line: 630 ]]
+								v54(function()
 									-- upvalues: Default1 (upval)
 									Default1:ToggleMic("BackgroundDM")
 								end)
@@ -865,7 +865,7 @@ function initializeAFM() --[[ Line: 853 ]]
 				end
 			end
 			
-			Result.OnDeafenVoiceAudio:Connect(function(ContextId) --[[ Line: 909 ]]
+			Result.OnDeafenVoiceAudio:Connect(function(ContextId)
 				-- upvalues: CONTEXTID (copy), FIntPartyVoiceUndeafenDelayMS (upval), DelayedThread (upval), NewResult1 (upval), v119 (copy)
 				if ContextId == CONTEXTID then
 					if FIntPartyVoiceUndeafenDelayMS > 0 and DelayedThread then
@@ -876,7 +876,7 @@ function initializeAFM() --[[ Line: 853 ]]
 					v119()
 				end
 			end)
-			Result.OnUndeafenVoiceAudio:Connect(function(ContextId) --[[ Line: 920 ]]
+			Result.OnUndeafenVoiceAudio:Connect(function(ContextId)
 				-- upvalues: CONTEXTID (copy), NewResult1 (upval), FIntPartyVoiceUndeafenDelayMS (upval), DelayedThread (upval), v120 (copy)
 				if ContextId == CONTEXTID then
 					NewResult1:info("CEV OnUndeafenVoiceAudio fired for context: {} - expected: {}", ContextId, CONTEXTID)
@@ -885,7 +885,7 @@ function initializeAFM() --[[ Line: 853 ]]
 						if DelayedThread then
 							task.cancel(DelayedThread)
 						end
-						DelayedThread = task.delay(FIntPartyVoiceUndeafenDelayMS / 1000, function() --[[ Line: 931 ]]
+						DelayedThread = task.delay(FIntPartyVoiceUndeafenDelayMS / 1000, function()
 							-- upvalues: DelayedThread (upval), NewResult1 (upval), ContextId (copy), v120 (upval)
 							DelayedThread = nil
 							NewResult1:info("CEV OnUndeafenVoiceAudio fired delayed" .. ContextId)
@@ -900,11 +900,11 @@ function initializeAFM() --[[ Line: 853 ]]
 				end
 			end)
 			
-			local function _(p1, p2) --[[ Line: 943 ]]
+			local function _(p1, p2)
 				-- upvalues: NewResult1 (upval), PromiseModule (upval), Result (copy)
 				NewResult1:info("CEV requestAudioFocusWithPromise - id: {} - priority: {}", p1, p2)
 				
-				return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ()) --[[ Line: 945 ]]
+				return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ())
 					-- upvalues: Result (upval), p1 (copy), p2 (copy), NewResult1 (upval)
 					local Success, Result1 = pcall(Result.RequestFocus, Result, p1, p2)
 					
@@ -921,7 +921,7 @@ function initializeAFM() --[[ Line: 853 ]]
 			end
 			
 			NewResult1:info("CEV requestAudioFocusWithPromise - id: {} - priority: {}", CONTEXTID, FOCUSPRIORITY)
-			PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ()) --[[ Line: 945 ]]
+			PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ())
 				-- upvalues: Result (copy), CONTEXTID (copy), FOCUSPRIORITY (copy), NewResult1 (upval)
 				local Success, Result1 = pcall(Result.RequestFocus, Result, CONTEXTID, FOCUSPRIORITY)
 				
@@ -934,11 +934,11 @@ function initializeAFM() --[[ Line: 853 ]]
 					NewResult1:info("CEV requestAudioFocusWithPromise - rejected")
 					Callback1("Failed to call RequestFocus due to an error")
 				end
-			end):andThen(function(Result) --[[ Line: 959 ]]
+			end):andThen(function(Result)
 				-- upvalues: NewResult1 (upval), Default1 (upval), PartyVoiceFixCaptureVideoCheck (upval), GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction (upval), CaptureService (upval), v75 (upval)
 				if Result then
 					NewResult1:info("CEV audio focus request granted, preparing to undeafen.")
-					Default1.muteChanged.Event:Once(function(p1) --[[ Line: 962 ]]
+					Default1.muteChanged.Event:Once(function(p1)
 						-- upvalues: PartyVoiceFixCaptureVideoCheck (upval), GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction (upval), CaptureService (upval), v75 (upval), Default1 (upval)
 						if p1 ~= nil and PartyVoiceFixCaptureVideoCheck and (not GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction() or (not CaptureService or not CaptureService:IsCapturingVideo())) or not v75 then
 							Default1:MuteAll(false, "AudioFocusManagement CEV")
@@ -948,14 +948,14 @@ function initializeAFM() --[[ Line: 853 ]]
 					return
 				else
 					NewResult1:info("CEV audio focus request denied, preparing to deafen.")
-					Default1.muteChanged.Event:Once(function(p1) --[[ Line: 972 ]]
+					Default1.muteChanged.Event:Once(function(p1)
 						-- upvalues: PartyVoiceFixCaptureVideoCheck (upval), GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction (upval), CaptureService (upval), v75 (upval), Default1 (upval)
 						if p1 ~= nil and PartyVoiceFixCaptureVideoCheck and (not GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction() or (not CaptureService or not CaptureService:IsCapturingVideo())) or not v75 then
 							Default1:MuteAll(true, "AudioFocusManagement CEV")
 						end
 					end)
 				end
-			end):catch(function() --[[ Line: 982 ]]
+			end):catch(function()
 				-- upvalues: NewResult1 (upval)
 				NewResult1:info("[CEV] Error requesting focus inside CEV")
 			end)
@@ -967,13 +967,13 @@ function initializeAFM() --[[ Line: 853 ]]
 	end
 end
 
-function initializeVoice() --[[ Line: 991 ]]
+function initializeVoice()
 	-- upvalues: Constants (copy), NewResult (copy), CrossExperienceModule (copy), Default1 (copy), initializeDefaultChannel (copy), NewResult1 (copy)
 	NewResult:notify(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_STATUS_CHANGED, {
 		detail = nil,
 		status = Constants.VOICE_STATUS.VOICE_CONNECTING
 	})
-	Default1:asyncInit():andThen(function() --[[ Line: 994 ]]
+	Default1:asyncInit():andThen(function()
 		-- upvalues: initializeDefaultChannel (upval), Constants (upval), NewResult (upval), CrossExperienceModule (upval)
 		if initializeDefaultChannel(false) == false then
 			NewResult:notify(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_STATUS_CHANGED, {
@@ -984,7 +984,7 @@ function initializeVoice() --[[ Line: 991 ]]
 			onCoreVoiceManagerInitialized()
 		end
 		initializeAFM()
-	end):catch(function(Err) --[[ Line: 1003 ]]
+	end):catch(function(Err)
 		-- upvalues: NewResult1 (upval), Constants (upval), NewResult (upval), CrossExperienceModule (upval)
 		NewResult1:info("CoreVoiceManager did not initialize {}", Err)
 		NewResult:notify(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_STATUS_CHANGED, {
@@ -994,7 +994,7 @@ function initializeVoice() --[[ Line: 991 ]]
 	end)
 end
 
-function rejoinVoice() --[[ Line: 1017 ]]
+function rejoinVoice()
 	-- upvalues: Constants (copy), NewResult (copy), CrossExperienceModule (copy), GetFFlagVoiceChatClientRewriteMasterLuaFunction (copy), Default1 (copy), config (ref)
 	NewResult:notify(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_STATUS_CHANGED, {
 		detail = nil,
@@ -1009,7 +1009,7 @@ function rejoinVoice() --[[ Line: 1017 ]]
 	config = { previousGroupId = nil, previousMutedState = nil }
 end
 
-function startVoice() --[[ Line: 1030 ]]
+function startVoice()
 	-- upvalues: validateSetup (copy), FStringTimeoutLoadingLocalPlayerInBackgroundDM (copy), LOCALPLAYERLOADINGTIMEOUTENUM (copy), UserId (ref), ensureLocalPlayerWithTimeout (copy), NewResult1 (copy), setupListeners (copy)
 	if validateSetup() then
 		if FStringTimeoutLoadingLocalPlayerInBackgroundDM ~= LOCALPLAYERLOADINGTIMEOUTENUM.Disable then
@@ -1021,7 +1021,7 @@ function startVoice() --[[ Line: 1030 ]]
 	end
 end
 
-NewResult:addObserver(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_RECONNECT_REQUESTED, function() --[[ Line: 1042 ]]
+NewResult:addObserver(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_RECONNECT_REQUESTED, function()
 	-- upvalues: NewResult3 (copy), VOICESTATUS (copy), FFlagFixPartyVoiceGetPermissions (copy)
 	local VoiceStatus = NewResult3:getState().Squad.CrossExperienceVoice.Experience.voiceStatus
 	
@@ -1041,7 +1041,7 @@ NewResult:addObserver(CrossExperienceModule.Constants.EVENTS.PARTY_VOICE_RECONNE
 end)
 local Flag3 = false
 
-local _ = function() --[[ Line: 1065 | Named "doStartVoice" ]]
+local _ = function()
 	-- upvalues: Flag3 (ref), AddObserverResult (ref), NewResult (copy), CrossExperienceModule (copy), NewResult1 (copy)
 	if Flag3 then return end
 	Flag3 = true
@@ -1073,17 +1073,17 @@ if CevReadinessSyncEngineFeature then
 	else
 		NewResult1:info("Waiting for foreground UI readiness signal (with promise race)...")
 		PromiseModule.race({
-			PromiseModule.new(function(Callback) --[[ Line: 1090 ]]
+			PromiseModule.new(function(Callback)
 				-- upvalues: BindableEvent (copy)
-				BindableEvent.Event:Once(function() --[[ Line: 1091 ]]
+				BindableEvent.Event:Once(function()
 					-- upvalues: Callback (copy)
 					Callback("signal")
 				end)
 			end),
-			(PromiseModule.delay(VoiceJoinTimeoutInSeconds):andThen(function(): string --[[ Line: 1097 ]]
+			(PromiseModule.delay(VoiceJoinTimeoutInSeconds):andThen(function(): string
 				return "timeout"
 			end))
-		}):andThen(function(Result) --[[ Line: 1101 ]]
+		}):andThen(function(Result)
 			-- upvalues: NewResult1 (copy), sendAnalyticsEvent (copy), VoiceJoinTimeoutInSeconds (copy), Flag3 (ref), AddObserverResult (ref), NewResult (copy), CrossExperienceModule (copy)
 			if Result == "signal" then
 				NewResult1:info("Readiness signal received within timeout.")

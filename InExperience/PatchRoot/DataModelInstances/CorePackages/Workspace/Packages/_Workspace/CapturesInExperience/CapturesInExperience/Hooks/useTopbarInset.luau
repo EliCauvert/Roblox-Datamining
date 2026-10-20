@@ -3,10 +3,10 @@ local GuiService = game:GetService("GuiService")
 local ReactModule = require(Parent.React)
 local UseEventConnectionFunction = require(Parent.ReactUtils).useEventConnection
 
-return function() --[[ Line: 11 ]]
+return function()
 	-- upvalues: ReactModule (copy), GuiService (copy), UseEventConnectionFunction (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(GuiService.TopbarInset)
-	UseEventConnectionFunction(GuiService:GetPropertyChangedSignal("TopbarInset"), function() --[[ Line: 14 ]]
+	UseEventConnectionFunction(GuiService:GetPropertyChangedSignal("TopbarInset"), function()
 		-- upvalues: UseStateResult2 (copy), GuiService (upval)
 		UseStateResult2(GuiService.TopbarInset)
 	end)

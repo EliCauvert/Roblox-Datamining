@@ -1,4 +1,4 @@
-﻿return function(Object) --[[ Line: 5 | Named "getMakeupDescriptionsFromHumanoidDescription" ]]
+﻿return function(Object)
 	local List = {}
 	
 	for _, MakeupDescription in Object:GetChildren() do

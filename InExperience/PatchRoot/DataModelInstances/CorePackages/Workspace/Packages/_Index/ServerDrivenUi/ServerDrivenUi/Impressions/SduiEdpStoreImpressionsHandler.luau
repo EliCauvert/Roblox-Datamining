@@ -9,7 +9,7 @@ local SduiLogger = SduiCoreSystemModule.SduiLogger
 local FindAnalyticsFieldInAncestorsFunction = SduiCoreSystemModule.findAnalyticsFieldInAncestors
 local SduiMarketplaceItemImpressionsHandlerModule = require(ServerDrivenUi.Impressions.SduiMarketplaceItemImpressionsHandler)
 
-return function(p1, List, p2, AnalyticsData, p3, p4) --[[ Line: 27 | Named "SduiEdpStoreImpressionsHandler" ]]
+return function(p1, List, p2, AnalyticsData, p3, p4)
 	-- upvalues: SduiMarketplaceItemImpressionsHandlerModule (copy), FindAnalyticsFieldInAncestorsFunction (copy), SduiLogger (copy), SduiErrors (copy), EdpStoreAnalyticsLogger (copy), StoreEnums (copy)
 	if SduiMarketplaceItemImpressionsHandlerModule(p1, List, p2, AnalyticsData, p3, p4) == 0 then return end
 	local config = { analyticsData = AnalyticsData }

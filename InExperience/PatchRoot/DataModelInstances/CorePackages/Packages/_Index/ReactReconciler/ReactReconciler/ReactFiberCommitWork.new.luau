@@ -1,4 +1,4 @@
-﻿local function unimplemented(Text) --[[ Line: 11 ]]
+﻿local function unimplemented(Text)
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -9,7 +9,7 @@ end
 
 local Count = 0
 
-local function _(p1): boolean --[[ Line: 25 | Named "isCallable" ]]
+local function _(p1): boolean
 	if typeof(p1) == "function" then
 		return true
 	end
@@ -121,7 +121,7 @@ local CommitHydratedSuspenseInstanceFunction = ReactFiberHostConfigModule.commit
 local ClearContainerFunction = ReactFiberHostConfigModule.clearContainer
 local ReactFiberWorkLoopNewModule = nil
 
-local function resolveRetryWakeable(p1, Promise) --[[ Line: 199 ]]
+local function resolveRetryWakeable(p1, Promise)
 	-- upvalues: ReactFiberWorkLoopNewModule (ref)
 	if not ReactFiberWorkLoopNewModule then
 		ReactFiberWorkLoopNewModule = require(script.Parent["ReactFiberWorkLoop.new"])
@@ -129,7 +129,7 @@ local function resolveRetryWakeable(p1, Promise) --[[ Line: 199 ]]
 	ReactFiberWorkLoopNewModule.resolveRetryWakeable(p1, Promise)
 end
 
-local _ = function() --[[ Line: 206 | Named "markCommitTimeOfFallback" ]]
+local _ = function()
 	-- upvalues: ReactFiberWorkLoopNewModule (ref)
 	if not ReactFiberWorkLoopNewModule then
 		ReactFiberWorkLoopNewModule = require(script.Parent["ReactFiberWorkLoop.new"])
@@ -137,12 +137,12 @@ local _ = function() --[[ Line: 206 | Named "markCommitTimeOfFallback" ]]
 	ReactFiberWorkLoopNewModule.markCommitTimeOfFallback()
 end
 
-local function schedulePassiveEffectCallback() --[[ Line: 214 ]]
+local function schedulePassiveEffectCallback()
 	-- upvalues: Console (copy)
 	Console.warn("ReactFiberCommitWork: schedulePassiveEffectCallback causes a dependency cycle\n" .. debug.traceback())
 end
 
-local function captureCommitPhaseError(_, _, p1) --[[ Line: 222 ]]
+local function captureCommitPhaseError(_, _, p1)
 	-- upvalues: Console (copy)
 	Console.warn("ReactFiberCommitWork: captureCommitPhaseError causes a dependency cycle")
 	error(p1)
@@ -154,7 +154,7 @@ local Layout = ReactHookEffectTagsModule.Layout
 local Passive = ReactHookEffectTagsModule.Passive
 local DidWarnAboutReassigningProps = nil
 
-local function v74() --[[ Line: 240 ]]
+local function v74()
 	-- upvalues: DidWarnAboutReassigningProps (ref)
 	if not DidWarnAboutReassigningProps then
 		DidWarnAboutReassigningProps = require(script.Parent["ReactFiberBeginWork.new"]).didWarnAboutReassigningProps
@@ -174,13 +174,13 @@ local commitNestedUnmounts = nil
 local commitUnmount = nil
 local v1 = nil
 
-local function callComponentWillUnmountWithTimer(p1, p2) --[[ Line: 265 ]]
+local function callComponentWillUnmountWithTimer(p1, p2)
 	-- upvalues: EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), ProfileMode (copy), StartLayoutEffectTimerFunction (copy), DescribeError (copy), RecordLayoutEffectDurationFunction (copy)
 	p2.props = p1.memoizedProps
 	p2.state = p1.memoizedState
 	
 	if EnableProfilerTimer and EnableProfilerCommitHooks and bit32.band(p1.mode, ProfileMode) ~= 0 then
-		local Success, Result = xpcall(function() --[[ Line: 274 ]]
+		local Success, Result = xpcall(function()
 			-- upvalues: StartLayoutEffectTimerFunction (upval), p2 (copy)
 			StartLayoutEffectTimerFunction()
 			p2:componentWillUnmount()
@@ -197,7 +197,7 @@ local function callComponentWillUnmountWithTimer(p1, p2) --[[ Line: 265 ]]
 	end
 end
 
-function safelyCallComponentWillUnmount(p1, p2, p3) --[[ Line: 292 ]]
+function safelyCallComponentWillUnmount(p1, p2, p3)
 	-- upvalues: callComponentWillUnmountWithTimer (copy), DescribeError (copy), captureCommitPhaseError (ref)
 	local Success, Result = xpcall(callComponentWillUnmountWithTimer, DescribeError, p1, p2)
 	
@@ -206,7 +206,7 @@ function safelyCallComponentWillUnmount(p1, p2, p3) --[[ Line: 292 ]]
 	end
 end
 
-local _ = function(p1, p2) --[[ Line: 306 | Named "safelyDetachRef" ]]
+local _ = function(p1, p2)
 	-- upvalues: DescribeError (copy), captureCommitPhaseError (ref)
 	local Ref = p1.ref
 	
@@ -225,7 +225,7 @@ local _ = function(p1, p2) --[[ Line: 306 | Named "safelyDetachRef" ]]
 	end
 end
 
-local function safelyCallDestroy(p1, p2, p3) --[[ Line: 322 ]]
+local function safelyCallDestroy(p1, p2, p3)
 	-- upvalues: DescribeError (copy), captureCommitPhaseError (ref)
 	local Success, Result = xpcall(p3, DescribeError)
 	
@@ -234,7 +234,7 @@ local function safelyCallDestroy(p1, p2, p3) --[[ Line: 322 ]]
 	end
 end
 
-local function commitBeforeMutationLifeCycles(p1, p2) --[[ Line: 334 ]]
+local function commitBeforeMutationLifeCycles(p1, p2)
 	-- upvalues: FunctionComponent (copy), ForwardRef (copy), SimpleMemoComponent (copy), Block (copy), ClassComponent (copy), Snapshot (copy), DEV (copy), v74 (copy), Console (copy), GetComponentNameFunction (copy), ResolveDefaultPropsFunction (copy), HostRoot (copy), SupportsMutation (copy), ClearContainerFunction (copy), HostComponent (copy), HostText (copy), HostPortal (copy), IncompleteClassComponent (copy), InvariantFunction (copy)
 	if p2.tag == FunctionComponent or p2.tag == ForwardRef or p2.tag == SimpleMemoComponent or p2.tag == Block then return end
 	if p2.tag == ClassComponent then
@@ -267,7 +267,7 @@ local function commitBeforeMutationLifeCycles(p1, p2) --[[ Line: 334 ]]
 	end
 end
 
-local function commitHookEffectListUnmount(Mask: number, Child, Return) --[[ Line: 427 ]]
+local function commitHookEffectListUnmount(Mask: number, Child, Return)
 	-- upvalues: ReactFeatureFlags (copy), DescribeError (copy), captureCommitPhaseError (ref)
 	local UpdateQueue = Child.updateQueue
 	local LastEffect = if UpdateQueue ~= nil then UpdateQueue.lastEffect else nil
@@ -303,7 +303,7 @@ local function commitHookEffectListUnmount(Mask: number, Child, Return) --[[ Lin
 	end
 end
 
-local function commitHookEffectListMount(Mask: number, p1) --[[ Line: 463 ]]
+local function commitHookEffectListMount(Mask: number, p1)
 	-- upvalues: ReactFeatureFlags (copy), DEV (copy), Console (copy)
 	local UpdateQueue = p1.updateQueue
 	local LastEffect = if UpdateQueue == nil then nil else UpdateQueue.lastEffect
@@ -337,7 +337,7 @@ local function commitHookEffectListMount(Mask: number, p1) --[[ Line: 463 ]]
 	end
 end
 
-function commitProfilerPassiveEffect(p1, p2) --[[ Line: 511 ]]
+function commitProfilerPassiveEffect(p1, p2)
 	-- upvalues: EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), Profiler (copy), GetCommitTimeFunction (copy), EnableSchedulerTracing (copy)
 	if EnableProfilerTimer and EnableProfilerCommitHooks and p2.tag == Profiler then
 		local PassiveEffectDuration = p2.stateNode.passiveEffectDuration
@@ -356,7 +356,7 @@ function commitProfilerPassiveEffect(p1, p2) --[[ Line: 511 ]]
 	end
 end
 
-local function recursivelyCommitLayoutEffects(Child, p1, CaptureCommitPhaseError, SchedulePassiveEffectCallback) --[[ Line: 544 ]]
+local function recursivelyCommitLayoutEffects(Child, p1, CaptureCommitPhaseError, SchedulePassiveEffectCallback)
 	-- upvalues: captureCommitPhaseError (ref), schedulePassiveEffectCallback (ref), Profiler (copy), EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), v1 (ref), ReactFeatureFlags (copy), LayoutMask (copy), NoFlags (copy), DEV (copy), Current (copy), SetCurrentFiberFunction (copy), InvokeGuardedCallbackFunction (copy), recursivelyCommitLayoutEffects (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy), ResetCurrentFiberFunction (copy), DescribeError (copy), Update (copy), Callback7 (copy), ReactCurrentFiberModule (copy), Count (ref), YOLO (copy), FunctionComponent (copy), ForwardRef (copy), SimpleMemoComponent (copy), Block (copy), ProfileMode (copy), StartLayoutEffectTimerFunction (copy), commitHookEffectListMount (copy), Layout (copy), HasEffect (copy), RecordLayoutEffectDurationFunction (copy), PassiveMask (copy), ClassComponent (copy), Callback2 (ref), HostRoot (copy), Callback1 (ref), HostComponent (copy), Callback3 (ref), SuspenseComponent (copy), FundamentalComponent (copy), HostPortal (copy), HostText (copy), IncompleteClassComponent (copy), LegacyHiddenComponent (copy), OffscreenComponent (copy), ScopeComponent (copy), SuspenseListComponent (copy), InvariantFunction (copy), Ref (copy)
 	if CaptureCommitPhaseError ~= nil then
 		captureCommitPhaseError = CaptureCommitPhaseError
@@ -548,7 +548,7 @@ local function recursivelyCommitLayoutEffects(Child, p1, CaptureCommitPhaseError
 		if bit32.band(Flags, (bit32.bor(Update, Callback7))) ~= NoFlags then
 			if Tag == FunctionComponent or (Tag == ForwardRef or Tag == SimpleMemoComponent or Tag == Block) then
 				if EnableProfilerTimer and (EnableProfilerCommitHooks and bit32.band(Child.mode, ProfileMode) ~= 0) then
-					local Success3, Result3 = xpcall(function() --[[ Line: 915 ]]
+					local Success3, Result3 = xpcall(function()
 						-- upvalues: StartLayoutEffectTimerFunction (upval), commitHookEffectListMount (upval), Layout (upval), HasEffect (upval), Child (copy)
 						StartLayoutEffectTimerFunction()
 						commitHookEffectListMount(bit32.bor(Layout, HasEffect), Child)
@@ -582,7 +582,7 @@ local function recursivelyCommitLayoutEffects(Child, p1, CaptureCommitPhaseError
 	end
 end
 
-function commitLayoutEffectsForProfiler(p2, p3) --[[ Line: 980 ]]
+function commitLayoutEffectsForProfiler(p2, p3)
 	-- upvalues: EnableProfilerTimer (copy), GetCommitTimeFunction (copy), Update (copy), Callback7 (copy), NoFlags (copy), EnableSchedulerTracing (copy), EnableProfilerCommitHooks (copy)
 	if EnableProfilerTimer then
 		local Flags: number = p2.flags
@@ -654,7 +654,7 @@ function commitLayoutEffectsForProfiler(p2, p3) --[[ Line: 980 ]]
 	end
 end
 
-Callback2 = function(p2) --[[ Line: 1048 | Named "commitLayoutEffectsForClassComponent" ]]
+Callback2 = function(p2)
 	-- upvalues: Update (copy), DEV (copy), v74 (copy), Console (copy), GetComponentNameFunction (copy), EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), ProfileMode (copy), StartLayoutEffectTimerFunction (copy), DescribeError (copy), RecordLayoutEffectDurationFunction (copy), ResolveDefaultPropsFunction (copy), CommitUpdateQueueFunction (copy)
 	local StateNode = p2.stateNode
 	local Alternate = p2.alternate
@@ -670,7 +670,7 @@ Callback2 = function(p2) --[[ Line: 1048 | Named "commitLayoutEffectsForClassCom
 				end
 			end
 			if EnableProfilerTimer and EnableProfilerCommitHooks and bit32.band(p2.mode, ProfileMode) ~= 0 then
-				local Success, Result = xpcall(function() --[[ Line: 1088 ]]
+				local Success, Result = xpcall(function()
 					-- upvalues: StartLayoutEffectTimerFunction (upval), StateNode (copy)
 					StartLayoutEffectTimerFunction()
 					StateNode:componentDidMount()
@@ -696,7 +696,7 @@ Callback2 = function(p2) --[[ Line: 1048 | Named "commitLayoutEffectsForClassCom
 				end
 			end
 			if EnableProfilerTimer and EnableProfilerCommitHooks and bit32.band(p2.mode, ProfileMode) ~= 0 then
-				local Success1, Result1 = xpcall(function() --[[ Line: 1142 ]]
+				local Success1, Result1 = xpcall(function()
 					-- upvalues: StartLayoutEffectTimerFunction (upval), StateNode (copy), MemoizedProps (copy), MemoizedState (copy)
 					StartLayoutEffectTimerFunction()
 					StateNode:componentDidUpdate(MemoizedProps, MemoizedState, StateNode.__reactInternalSnapshotBeforeUpdate)
@@ -726,7 +726,7 @@ Callback2 = function(p2) --[[ Line: 1048 | Named "commitLayoutEffectsForClassCom
 	end
 end
 
-Callback1 = function(p2) --[[ Line: 1205 | Named "commitLayoutEffectsForHostRoot" ]]
+Callback1 = function(p2)
 	-- upvalues: HostComponent (copy), GetPublicInstanceFunction (copy), ClassComponent (copy), CommitUpdateQueueFunction (copy)
 	local UpdateQueue = p2.updateQueue
 	
@@ -746,7 +746,7 @@ Callback1 = function(p2) --[[ Line: 1205 | Named "commitLayoutEffectsForHostRoot
 	end
 end
 
-Callback3 = function(p2) --[[ Line: 1224 | Named "commitLayoutEffectsForHostComponent" ]]
+Callback3 = function(p2)
 	-- upvalues: Update (copy), CommitMountFunction (copy)
 	local StateNode = p2.stateNode
 	
@@ -755,7 +755,7 @@ Callback3 = function(p2) --[[ Line: 1224 | Named "commitLayoutEffectsForHostComp
 	end
 end
 
-local function hideOrUnhideAllChildren(Child, HasMemoizedState) --[[ Line: 1239 ]]
+local function hideOrUnhideAllChildren(Child, HasMemoizedState)
 	-- upvalues: SupportsMutation (copy), HostComponent (copy), HideInstanceFunction (copy), UnhideInstanceFunction (copy), HostText (copy), HideTextInstanceFunction (copy), UnhideTextInstanceFunction (copy), OffscreenComponent (copy), LegacyHiddenComponent (copy)
 	if SupportsMutation then
 		local Child1 = Child
@@ -792,7 +792,7 @@ local function hideOrUnhideAllChildren(Child, HasMemoizedState) --[[ Line: 1239 
 	end
 end
 
-function commitAttachRef(p2) --[[ Line: 1289 ]]
+function commitAttachRef(p2)
 	-- upvalues: HostComponent (copy), GetPublicInstanceFunction (copy), DEV (copy), Console (copy), GetComponentNameFunction (copy)
 	local RefFunction: (any) -> () = p2.ref
 	
@@ -814,7 +814,7 @@ function commitAttachRef(p2) --[[ Line: 1289 ]]
 	end
 end
 
-function commitDetachRef(p2) --[[ Line: 1328 ]]
+function commitDetachRef(p2)
 	local RefFunction: (any) -> () = p2.ref
 	
 	if RefFunction ~= nil then
@@ -827,7 +827,7 @@ function commitDetachRef(p2) --[[ Line: 1328 ]]
 	end
 end
 
-commitUnmount = function(p2, Child, p3, p4) --[[ Line: 1342 | Named "commitUnmount" ]]
+commitUnmount = function(p2, Child, p3, p4)
 	-- upvalues: OnCommitUnmountFunction (copy), FunctionComponent (copy), ForwardRef (copy), MemoComponent (copy), SimpleMemoComponent (copy), Block (copy), Layout (copy), NoFlags1 (copy), EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), ProfileMode (copy), StartLayoutEffectTimerFunction (copy), DescribeError (copy), captureCommitPhaseError (ref), RecordLayoutEffectDurationFunction (copy), ClassComponent (copy), HostComponent (copy), HostPortal (copy), SupportsMutation (copy), Callback4 (ref), SupportsPersistence (copy), unimplemented (copy)
 	OnCommitUnmountFunction(Child)
 	
@@ -911,7 +911,7 @@ commitUnmount = function(p2, Child, p3, p4) --[[ Line: 1342 | Named "commitUnmou
 	end
 end
 
-commitNestedUnmounts = function(p2, Child, p3, p4) --[[ Line: 1449 | Named "commitNestedUnmounts" ]]
+commitNestedUnmounts = function(p2, Child, p3, p4)
 	-- upvalues: commitUnmount (ref), SupportsMutation (copy), HostPortal (copy)
 	local Child1 = Child
 	while true do
@@ -932,7 +932,7 @@ commitNestedUnmounts = function(p2, Child, p3, p4) --[[ Line: 1449 | Named "comm
 	end
 end
 
-local _ = function(p5) --[[ Line: 1489 | Named "detachFiberMutation" ]]
+local _ = function(p5)
 	-- upvalues: EnableNewTreeCleanupPath (copy)
 	local Alternate = p5.alternate
 	
@@ -946,7 +946,7 @@ local _ = function(p5) --[[ Line: 1489 | Named "detachFiberMutation" ]]
 	p5.return_ = nil
 end
 
-local function getHostParentFiber(p5) --[[ Line: 1558 ]]
+local function getHostParentFiber(p5)
 	-- upvalues: Callback5 (ref), Error1 (copy)
 	local Return = p5.return_
 	while Return ~= nil do
@@ -958,12 +958,12 @@ local function getHostParentFiber(p5) --[[ Line: 1558 ]]
 	error(Error1.new("Expected to find a host parent. This error is likely caused by a bug in React. Please file an issue."))
 end
 
-Callback5 = function(Return): boolean --[[ Line: 1576 | Named "isHostParent" ]]
+Callback5 = function(Return): boolean
 	-- upvalues: HostComponent (copy), HostRoot (copy), HostPortal (copy)
 	return Return.tag == HostComponent or (Return.tag == HostRoot or Return.tag == HostPortal)
 end
 
-getHostSibling = function(Child) --[[ Line: 1580 | Named "getHostSibling" ]]
+getHostSibling = function(Child)
 	-- upvalues: Callback5 (ref), HostComponent (copy), HostText (copy), DehydratedFragment (copy), Placement (copy), HostPortal (copy)
 	local Child1 = Child
 	local Flag = nil
@@ -996,7 +996,7 @@ getHostSibling = function(Child) --[[ Line: 1580 | Named "getHostSibling" ]]
 	end
 end
 
-local function commitPlacement(p6) --[[ Line: 1634 ]]
+local function commitPlacement(p6)
 	-- upvalues: SupportsMutation (copy), getHostParentFiber (copy), HostComponent (copy), HostRoot (copy), HostPortal (copy), InvariantFunction (copy), ContentReset (copy), ResetTextContentFunction (copy), IsNotSupportsChildOrdering (copy), getHostSibling (ref), Callback6 (ref), Callback (ref)
 	if not SupportsMutation then return end
 	local HostParentFiber = getHostParentFiber(p6)
@@ -1031,7 +1031,7 @@ local function commitPlacement(p6) --[[ Line: 1634 ]]
 	end
 end
 
-Callback6 = function(Child, p6, ContainerInfo) --[[ Line: 1691 | Named "insertOrAppendPlacementNodeIntoContainer" ]]
+Callback6 = function(Child, p6, ContainerInfo)
 	-- upvalues: HostComponent (copy), HostText (copy), InsertInContainerBeforeFunction (copy), AppendChildToContainerFunction (copy), HostPortal (copy), Callback6 (ref)
 	local Tag = Child.tag
 	
@@ -1062,7 +1062,7 @@ Callback6 = function(Child, p6, ContainerInfo) --[[ Line: 1691 | Named "insertOr
 	end
 end
 
-Callback = function(Child, p7, ContainerInfo) --[[ Line: 1723 | Named "insertOrAppendPlacementNode" ]]
+Callback = function(Child, p7, ContainerInfo)
 	-- upvalues: HostComponent (copy), HostText (copy), InsertBeforeFunction (copy), AppendChildFunction (copy), HostPortal (copy), Callback (ref)
 	local Tag = Child.tag
 	
@@ -1093,7 +1093,7 @@ Callback = function(Child, p7, ContainerInfo) --[[ Line: 1723 | Named "insertOrA
 	end
 end
 
-Callback4 = function(p8, Child, p9, p10) --[[ Line: 1751 | Named "unmountHostComponents" ]]
+Callback4 = function(p8, Child, p9, p10)
 	-- upvalues: Error1 (copy), HostComponent (copy), HostRoot (copy), HostPortal (copy), HostText (copy), commitNestedUnmounts (ref), RemoveChildFromContainerFunction (copy), RemoveChildFunction (copy), commitUnmount (ref)
 	local Child1 = Child
 	local Flag = false
@@ -1166,7 +1166,7 @@ Callback4 = function(p8, Child, p9, p10) --[[ Line: 1751 | Named "unmountHostCom
 	end
 end
 
-local function commitDeletion(p11, Child, p12, p13) --[[ Line: 1929 ]]
+local function commitDeletion(p11, Child, p12, p13)
 	-- upvalues: Callback4 (ref), EnableNewTreeCleanupPath (copy)
 	Callback4(p11, Child, p12, p13)
 	local Alternate = if EnableNewTreeCleanupPath then nil else Child.alternate
@@ -1195,7 +1195,7 @@ local function commitDeletion(p11, Child, p12, p13) --[[ Line: 1929 ]]
 	end
 end
 
-local function commitWork(p11, Child) --[[ Line: 1964 ]]
+local function commitWork(p11, Child)
 	-- upvalues: FunctionComponent (copy), ForwardRef (copy), MemoComponent (copy), SimpleMemoComponent (copy), Block (copy), EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), ProfileMode (copy), StartLayoutEffectTimerFunction (copy), commitHookEffectListUnmount (copy), Layout (copy), HasEffect (copy), DescribeError (copy), RecordLayoutEffectDurationFunction (copy), ClassComponent (copy), HostComponent (copy), CommitUpdateFunction (copy), HostText (copy), InvariantFunction (copy), CommitTextUpdateFunction (copy), HostRoot (copy), SupportsHydration (copy), unimplemented (copy), Profiler (copy), SuspenseComponent (copy), SuspenseListComponent (copy), IncompleteClassComponent (copy), OffscreenComponent (copy), LegacyHiddenComponent (copy), hideOrUnhideAllChildren (copy)
 	if Child.tag ~= FunctionComponent and Child.tag ~= ForwardRef and Child.tag ~= MemoComponent and Child.tag ~= SimpleMemoComponent and Child.tag ~= Block then
 		if Child.tag == ClassComponent then return end
@@ -1260,7 +1260,7 @@ local function commitWork(p11, Child) --[[ Line: 1964 ]]
 			return
 		end
 	elseif EnableProfilerTimer and EnableProfilerCommitHooks and bit32.band(Child.mode, ProfileMode) ~= 0 then
-		local Success, Result = xpcall(function() --[[ Line: 2053 ]]
+		local Success, Result = xpcall(function()
 			-- upvalues: StartLayoutEffectTimerFunction (upval), commitHookEffectListUnmount (upval), Layout (upval), HasEffect (upval), Child (copy)
 			StartLayoutEffectTimerFunction()
 			commitHookEffectListUnmount(bit32.bor(Layout, HasEffect), Child, Child.return_)
@@ -1277,7 +1277,7 @@ local function commitWork(p11, Child) --[[ Line: 1964 ]]
 	end
 end
 
-function commitSuspenseComponent(p11) --[[ Line: 2179 ]]
+function commitSuspenseComponent(p11)
 	-- upvalues: ReactFiberWorkLoopNewModule (ref), SupportsMutation (copy), hideOrUnhideAllChildren (copy), EnableSuspenseCallback (copy), DEV (copy), Console (copy)
 	local MemoizedState = p11.memoizedState
 	
@@ -1308,7 +1308,7 @@ function commitSuspenseComponent(p11) --[[ Line: 2179 ]]
 	end
 end
 
-function commitSuspenseHydrationCallbacks(p11, p12) --[[ Line: 2218 ]]
+function commitSuspenseHydrationCallbacks(p11, p12)
 	-- upvalues: SupportsHydration (copy), CommitHydratedSuspenseInstanceFunction (copy), EnableSuspenseCallback (copy)
 	if not SupportsHydration then return end
 	if p12.memoizedState == nil then
@@ -1340,7 +1340,7 @@ function commitSuspenseHydrationCallbacks(p11, p12) --[[ Line: 2218 ]]
 	end
 end
 
-function attachSuspenseRetryListeners(p11) --[[ Line: 2246 ]]
+function attachSuspenseRetryListeners(p11)
 	-- upvalues: Set (copy), resolveRetryWakeable (copy), EnableSchedulerTracing (copy), UnstableWrapFunction (copy)
 	local UpdateQueue = p11.updateQueue
 	
@@ -1353,7 +1353,7 @@ function attachSuspenseRetryListeners(p11) --[[ Line: 2246 ]]
 			StateNode = p11.stateNode
 		end
 		for Promise, _ in UpdateQueue do
-			local function v238() --[[ Line: 2260 ]]
+			local function v238()
 				-- upvalues: resolveRetryWakeable (upval), p11 (copy), Promise (copy)
 				return resolveRetryWakeable(p11, Promise)
 			end
@@ -1363,10 +1363,10 @@ function attachSuspenseRetryListeners(p11) --[[ Line: 2246 ]]
 					v238 = UnstableWrapFunction(v238)
 				end
 				StateNode:add(Promise)
-				Promise:andThen(function() --[[ Line: 2271 ]]
+				Promise:andThen(function()
 					-- upvalues: v238 (ref)
 					return v238()
-				end, function() --[[ Line: 2273 ]]
+				end, function()
 					-- upvalues: v238 (ref)
 					return v238()
 				end)
@@ -1375,7 +1375,7 @@ function attachSuspenseRetryListeners(p11) --[[ Line: 2246 ]]
 	end
 end
 
-function isSuspenseBoundaryBeingHidden(p12, p13): boolean --[[ Line: 2284 ]]
+function isSuspenseBoundaryBeingHidden(p12, p13): boolean
 	if p12 ~= nil then
 		local MemoizedState = p12.memoizedState
 		
@@ -1388,7 +1388,7 @@ function isSuspenseBoundaryBeingHidden(p12, p13): boolean --[[ Line: 2284 ]]
 	return false
 end
 
-function commitResetTextContent(p12) --[[ Line: 2296 ]]
+function commitResetTextContent(p12)
 	-- upvalues: SupportsMutation (copy), ResetTextContentFunction (copy)
 	if SupportsMutation then
 		ResetTextContentFunction(p12.stateNode)
@@ -1397,7 +1397,7 @@ function commitResetTextContent(p12) --[[ Line: 2296 ]]
 	end
 end
 
-local function commitPassiveUnmount(p12) --[[ Line: 2303 ]]
+local function commitPassiveUnmount(p12)
 	-- upvalues: FunctionComponent (copy), ForwardRef (copy), SimpleMemoComponent (copy), Block (copy), EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), ProfileMode (copy), StartPassiveEffectTimerFunction (copy), commitHookEffectListUnmount (copy), Passive (copy), HasEffect (copy), RecordPassiveEffectDurationFunction (copy)
 	if p12.tag == FunctionComponent or p12.tag == ForwardRef or p12.tag == SimpleMemoComponent or p12.tag == Block then
 		if EnableProfilerTimer and EnableProfilerCommitHooks and bit32.band(p12.mode, ProfileMode) ~= 0 then
@@ -1412,7 +1412,7 @@ local function commitPassiveUnmount(p12) --[[ Line: 2303 ]]
 	end
 end
 
-local function commitPassiveUnmountInsideDeletedTree(p12, p13) --[[ Line: 2332 ]]
+local function commitPassiveUnmountInsideDeletedTree(p12, p13)
 	-- upvalues: FunctionComponent (copy), ForwardRef (copy), SimpleMemoComponent (copy), Block (copy), EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), ProfileMode (copy), StartPassiveEffectTimerFunction (copy), commitHookEffectListUnmount (copy), Passive (copy), RecordPassiveEffectDurationFunction (copy)
 	if p12.tag == FunctionComponent or p12.tag == ForwardRef or p12.tag == SimpleMemoComponent or p12.tag == Block then
 		if EnableProfilerTimer and EnableProfilerCommitHooks and bit32.band(p12.mode, ProfileMode) ~= 0 then
@@ -1427,7 +1427,7 @@ local function commitPassiveUnmountInsideDeletedTree(p12, p13) --[[ Line: 2332 ]
 	end
 end
 
-local function commitPassiveMount(p12, p13) --[[ Line: 2356 ]]
+local function commitPassiveMount(p12, p13)
 	-- upvalues: FunctionComponent (copy), ForwardRef (copy), SimpleMemoComponent (copy), Block (copy), EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), ProfileMode (copy), StartPassiveEffectTimerFunction (copy), commitHookEffectListMount (copy), DescribeError (copy), Passive (copy), HasEffect (copy), RecordPassiveEffectDurationFunction (copy), Profiler (copy)
 	if p13.tag == FunctionComponent or p13.tag == ForwardRef or p13.tag == SimpleMemoComponent or p13.tag == Block then
 		if not EnableProfilerTimer or not EnableProfilerCommitHooks or bit32.band(p13.mode, ProfileMode) == 0 then
@@ -1449,7 +1449,7 @@ local function commitPassiveMount(p12, p13) --[[ Line: 2356 ]]
 	end
 end
 
-function invokeLayoutEffectMountInDEV(p12) --[[ Line: 2389 ]]
+function invokeLayoutEffectMountInDEV(p12)
 	-- upvalues: DEV (copy), EnableDoubleInvokingEffects (copy), FunctionComponent (copy), ForwardRef (copy), SimpleMemoComponent (copy), Block (copy), InvokeGuardedCallbackFunction (copy), commitHookEffectListMount (copy), Layout (copy), HasEffect (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy), captureCommitPhaseError (ref), ClassComponent (copy)
 	if DEV and EnableDoubleInvokingEffects then
 		if p12.tag == FunctionComponent or p12.tag == ForwardRef or p12.tag == SimpleMemoComponent or p12.tag == Block then
@@ -1471,7 +1471,7 @@ function invokeLayoutEffectMountInDEV(p12) --[[ Line: 2389 ]]
 	end
 end
 
-function invokePassiveEffectMountInDEV(p12) --[[ Line: 2421 ]]
+function invokePassiveEffectMountInDEV(p12)
 	-- upvalues: DEV (copy), EnableDoubleInvokingEffects (copy), FunctionComponent (copy), ForwardRef (copy), SimpleMemoComponent (copy), Block (copy), InvokeGuardedCallbackFunction (copy), commitHookEffectListMount (copy), Passive (copy), HasEffect (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy), captureCommitPhaseError (ref)
 	if not DEV or not EnableDoubleInvokingEffects or p12.tag ~= FunctionComponent and p12.tag ~= ForwardRef and p12.tag ~= SimpleMemoComponent and p12.tag ~= Block then return end
 	InvokeGuardedCallbackFunction(nil, commitHookEffectListMount, nil, bit32.bor(Passive, HasEffect), p12)
@@ -1481,7 +1481,7 @@ function invokePassiveEffectMountInDEV(p12) --[[ Line: 2421 ]]
 	end
 end
 
-function invokeLayoutEffectUnmountInDEV(p12) --[[ Line: 2445 ]]
+function invokeLayoutEffectUnmountInDEV(p12)
 	-- upvalues: DEV (copy), EnableDoubleInvokingEffects (copy), FunctionComponent (copy), ForwardRef (copy), SimpleMemoComponent (copy), Block (copy), InvokeGuardedCallbackFunction (copy), commitHookEffectListUnmount (copy), Layout (copy), HasEffect (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy), captureCommitPhaseError (ref), ClassComponent (copy)
 	if DEV and EnableDoubleInvokingEffects then
 		if p12.tag == FunctionComponent or p12.tag == ForwardRef or p12.tag == SimpleMemoComponent or p12.tag == Block then
@@ -1502,7 +1502,7 @@ function invokeLayoutEffectUnmountInDEV(p12) --[[ Line: 2445 ]]
 	end
 end
 
-function invokePassiveEffectUnmountInDEV(p12) --[[ Line: 2476 ]]
+function invokePassiveEffectUnmountInDEV(p12)
 	-- upvalues: DEV (copy), EnableDoubleInvokingEffects (copy), FunctionComponent (copy), ForwardRef (copy), SimpleMemoComponent (copy), Block (copy), InvokeGuardedCallbackFunction (copy), commitHookEffectListUnmount (copy), Passive (copy), HasEffect (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy), captureCommitPhaseError (ref)
 	if not DEV or not EnableDoubleInvokingEffects or p12.tag ~= FunctionComponent and p12.tag ~= ForwardRef and p12.tag ~= SimpleMemoComponent and p12.tag ~= Block then return end
 	InvokeGuardedCallbackFunction(nil, commitHookEffectListUnmount, nil, bit32.bor(Passive, HasEffect), p12, p12.return_)

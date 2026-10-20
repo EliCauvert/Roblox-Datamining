@@ -9,7 +9,7 @@ local Text = FoundationModule.Text
 local View = FoundationModule.View
 local FFlagSocialCarouselShareQREnabled = require(Parent.SharedFlags).FFlagSocialCarouselShareQREnabled
 
-return function(p1) --[[ Line: 21 | Named "FriendsHintTile" ]]
+return function(p1)
 	-- upvalues: UseSocialCarouselContextModule (copy), FFlagSocialCarouselShareQREnabled (copy), ConstantsModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), Text (copy)
 	local UseSocialCarouselContextModuleResult = UseSocialCarouselContextModule()
 	local UseLocalizationResult = UseLocalizationFunction(if FFlagSocialCarouselShareQREnabled then {
@@ -19,7 +19,7 @@ return function(p1) --[[ Line: 21 | Named "FriendsHintTile" ]]
 		friendsHintTitle = ConstantsModule.LOCALIZATION.FRIENDS_HINT_TITLE,
 		friendsHintBody = ConstantsModule.LOCALIZATION.FRIENDS_HINT_BODY
 	})
-	ReactModule.useEffect(function() --[[ Line: 36 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSocialCarouselContextModuleResult (copy), ConstantsModule (upval)
 		UseSocialCarouselContextModuleResult.onSuccessfulRender(ConstantsModule.ANALYTICS.UI_LOADING_EVENTS.EMPTY_HINT)
 	end, {})

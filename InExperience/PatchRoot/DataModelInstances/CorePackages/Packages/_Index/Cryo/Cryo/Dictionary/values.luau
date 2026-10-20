@@ -1,4 +1,4 @@
-﻿return function(List) --[[ Line: 5 | Named "values" ]]
+﻿return function(List)
 	local t = {}
 	local Count = 1
 	

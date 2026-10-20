@@ -5,7 +5,7 @@ local _ = require(Parent.types)
 local UnifiedPurchaseTelemetryModule = require(Parent.Events.UnifiedPurchaseTelemetry)
 local LogUnifiedPurchaseTelemetryCounterModule = require(Parent.Utils.logUnifiedPurchaseTelemetryCounter)
 
-local function buildRequestBody(UserId, FeatureKey, Items, List) --[[ Line: 26 ]]
+local function buildRequestBody(UserId, FeatureKey, Items, List)
 	local config = { userId = UserId, featureKey = FeatureKey, items = Items }
 	
 	if List ~= nil and #List > 0 then
@@ -22,14 +22,14 @@ local function buildRequestBody(UserId, FeatureKey, Items, List) --[[ Line: 26 ]
 	return config
 end
 
-return function(p1, UserId, FeatureKey, Items, p2, p3, p4) --[[ Line: 52 | Named "postInGameItemCartPricing" ]]
+return function(p1, UserId, FeatureKey, Items, p2, p3, p4)
 	-- upvalues: PromiseModule (copy), buildRequestBody (copy), LogUnifiedPurchaseTelemetryCounterModule (copy), UnifiedPurchaseTelemetryModule (copy)
-	return if Items == nil or #Items == 0 or p1.postInGameItemCartPricing == nil then PromiseModule.resolve(nil) else p1.postInGameItemCartPricing((buildRequestBody(UserId, FeatureKey, Items, p2))):andThen(function(Result) --[[ Line: 72 ]]
+	return if Items == nil or #Items == 0 or p1.postInGameItemCartPricing == nil then PromiseModule.resolve(nil) else p1.postInGameItemCartPricing((buildRequestBody(UserId, FeatureKey, Items, p2))):andThen(function(Result)
 		-- upvalues: LogUnifiedPurchaseTelemetryCounterModule (upval), UnifiedPurchaseTelemetryModule (upval), p3 (copy), p4 (copy)
 		LogUnifiedPurchaseTelemetryCounterModule(UnifiedPurchaseTelemetryModule.UnifiedCartPricingFetchSucceededCounter, p3, p4)
 		
 		return Result
-	end):catch(function(Err) --[[ Line: 80 ]]
+	end):catch(function(Err)
 		-- upvalues: LogUnifiedPurchaseTelemetryCounterModule (upval), UnifiedPurchaseTelemetryModule (upval), p3 (copy), p4 (copy)
 		LogUnifiedPurchaseTelemetryCounterModule(UnifiedPurchaseTelemetryModule.UnifiedCartPricingFetchFailedCounter, p3, p4)
 		warn(string.format("postInGameItemCartPricing failed: %s", (tostring(Err))))

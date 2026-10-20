@@ -7,7 +7,7 @@ local _ = require(Foundation.Providers.Style.Tokens)
 local _ = require(Foundation.Components.Types)
 local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(_) --[[ Line: 29 ]]
+local function variantsFactory(_)
 	-- upvalues: OptionSelectorGroupSizeModule (copy), InputLabelSizeModule (copy), OrientationModule (copy)
 	return {
 		common = {
@@ -26,7 +26,7 @@ local function variantsFactory(_) --[[ Line: 29 ]]
 	}
 end
 
-return function(p1, p2, p3) --[[ Line: 75 ]]
+return function(p1, p2, p3)
 	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
 	local OptionSelectorGroup = VariantsContextModule.useVariants("OptionSelectorGroup", variantsFactory, p1)
 	

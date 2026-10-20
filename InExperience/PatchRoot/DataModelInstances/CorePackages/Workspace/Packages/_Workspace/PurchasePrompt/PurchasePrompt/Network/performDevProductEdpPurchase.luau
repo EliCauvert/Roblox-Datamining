@@ -13,7 +13,7 @@ local ParseDevProductPurchaseErrorModule = require(PurchasePrompt.Utils.parseDev
 local FFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase = require(Parent.SharedFlags).FFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase
 local _ = require(PurchasePrompt.types)
 local config = {
-	new = function() --[[ Line: 32 ]]
+	new = function()
 		return {
 			price = 0,
 			productId = 0,
@@ -25,7 +25,7 @@ local config = {
 	end
 }
 
-function config.fromJsonData(p1) --[[ Line: 43 ]]
+function config.fromJsonData(p1)
 	-- upvalues: config (copy), ArgCheckModule (copy)
 	local NewConfig = config.new()
 	ArgCheckModule.isType(p1, "table", "PurchaseDeveloperProductModel.fromJsonData's jsonData")
@@ -45,9 +45,9 @@ function config.fromJsonData(p1) --[[ Line: 43 ]]
 	return NewConfig
 end
 
-return function(p1, p2, p3) --[[ Line: 68 | Named "performDevProductEdpPurchase" ]]
+return function(p1, p2, p3)
 	-- upvalues: Logging (copy), PromiseModule (copy), PurchaseErrorModule (copy), IsEconomicRestrictionResponseFunction (copy), FFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase (copy), ParseDevProductPurchaseErrorModule (copy), config (copy)
-	return p1.performDevProductEdpPurchase(p2, p3):andThen(function(Result) --[[ Line: 69 ]]
+	return p1.performDevProductEdpPurchase(p2, p3):andThen(function(Result)
 		-- upvalues: Logging (upval), PromiseModule (upval), PurchaseErrorModule (upval), IsEconomicRestrictionResponseFunction (upval), FFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase (upval), ParseDevProductPurchaseErrorModule (upval), config (upval)
 		if type(Result) ~= "table" then
 			Logging.warn("Response from PurchaseDeveloperProduct is malformed!")
@@ -67,7 +67,7 @@ return function(p1, p2, p3) --[[ Line: 68 | Named "performDevProductEdpPurchase"
 		local FromJsonDataResult = config.fromJsonData(Result)
 		
 		return if FromJsonDataResult.purchased then PromiseModule.resolve(FromJsonDataResult) else PromiseModule.reject(PurchaseErrorModule.UnknownFailure)
-	end, function(p4) --[[ Line: 94 ]]
+	end, function(p4)
 		-- upvalues: PromiseModule (upval)
 		return PromiseModule.reject(p4)
 	end)

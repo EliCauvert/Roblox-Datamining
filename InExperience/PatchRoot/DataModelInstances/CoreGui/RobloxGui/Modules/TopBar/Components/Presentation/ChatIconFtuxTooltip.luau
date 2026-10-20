@@ -15,22 +15,22 @@ local SetTimeoutFunction = LuauPolyfillModule.setTimeout
 local config = {
 	showDelay = 1000,
 	dismissDelay = 7000,
-	onDismissed = function(_, _) --[[ Line: 26 ]] end
+	onDismissed = function(_, _) end
 }
 
-return function(p1) --[[ Line: 41 ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), SetTimeoutFunction (copy), AppStorageService (copy), UseLocalizationFunction (copy), GuiService (copy), ClearTimeoutFunction (copy), WithTooltipFunction (copy), CoreGui (copy), TooltipOrientation (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
-	local UseRefResult = ReactModule.useRef(SetTimeoutFunction(function() --[[ Line: 45 ]] end, UnionResult.showDelay))
-	local UseRefResult1 = ReactModule.useRef(SetTimeoutFunction(function() --[[ Line: 46 ]] end, UnionResult.dismissDelay))
-	local Inverted = not (ReactModule.useMemo(function(): boolean --[[ Line: 48 ]]
+	local UseRefResult = ReactModule.useRef(SetTimeoutFunction(function() end, UnionResult.showDelay))
+	local UseRefResult1 = ReactModule.useRef(SetTimeoutFunction(function() end, UnionResult.dismissDelay))
+	local Inverted = not (ReactModule.useMemo(function(): boolean
 		-- upvalues: UnionResult (copy), AppStorageService (upval)
 		local Flag = false
 		
 		if UnionResult.localStorageKey then
-			local Success, Result = pcall(function() --[[ Line: 51 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: AppStorageService (upval), UnionResult (upval)
 				return AppStorageService:GetItem(UnionResult.localStorageKey)
 			end)
@@ -47,23 +47,23 @@ return function(p1) --[[ Line: 41 ]]
 		headerText = UnionResult.headerKey,
 		bodyText = UnionResult.bodyKey
 	})
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 66 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UnionResult (copy), Inverted1 (copy), UseStateResult2_1 (copy)
 		if UnionResult.onDismissed then
 			UnionResult.onDismissed(Inverted1, p2)
 		end
 		UseStateResult2_1(true)
 	end, { UseStateResult2_1, Inverted1 })
-	ReactModule.useEffect(function() --[[ Line: 75 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: GuiService (upval), Inverted (copy), UseResult (copy), UnionResult (copy)
 		local Connections = {
-			GuiService.MenuOpened:Connect(function() --[[ Line: 77 ]]
+			GuiService.MenuOpened:Connect(function()
 				-- upvalues: Inverted (upval), UseResult (upval)
 				if Inverted then
 					UseResult("menuOpened")
 				end
 			end),
-			UnionResult.iconClickedSignal:connect(function() --[[ Line: 82 ]]
+			UnionResult.iconClickedSignal:connect(function()
 				-- upvalues: Inverted (upval), UseResult (upval)
 				if Inverted then
 					UseResult("chatIconClicked")
@@ -71,7 +71,7 @@ return function(p1) --[[ Line: 41 ]]
 			end)
 		}
 		
-		return function() --[[ Line: 89 ]]
+		return function()
 			-- upvalues: Connections (copy)
 			for _, connection in Connections do
 				if connection.disconnect then
@@ -87,12 +87,12 @@ return function(p1) --[[ Line: 41 ]]
 		Inverted,
 		UseResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 101 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ClearTimeoutFunction (upval), UseRefResult (copy), Inverted (copy), SetTimeoutFunction (upval), UseStateResult2 (copy), UnionResult (copy)
 		ClearTimeoutFunction(UseRefResult.current)
 		
 		if Inverted then
-			UseRefResult.current = SetTimeoutFunction(function() --[[ Line: 104 ]]
+			UseRefResult.current = SetTimeoutFunction(function()
 				-- upvalues: Inverted (upval), UseStateResult2 (upval)
 				if Inverted then
 					UseStateResult2(true)
@@ -100,21 +100,21 @@ return function(p1) --[[ Line: 41 ]]
 			end, UnionResult.showDelay)
 		end
 	end, { Inverted, UseRefResult })
-	ReactModule.useEffect(function() --[[ Line: 113 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ClearTimeoutFunction (upval), UseRefResult1 (copy), UseStateResult (copy), SetTimeoutFunction (upval), UseResult (copy), UnionResult (copy)
 		ClearTimeoutFunction(UseRefResult1.current)
 		
 		if UseStateResult then
-			UseRefResult1.current = SetTimeoutFunction(function() --[[ Line: 116 ]]
+			UseRefResult1.current = SetTimeoutFunction(function()
 				-- upvalues: UseResult (upval)
 				UseResult("timeout")
 			end, UnionResult.dismissDelay)
 		end
 	end, { UseStateResult, UseRefResult1 })
-	ReactModule.useEffect(function() --[[ Line: 122 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Inverted1 (copy), UnionResult (copy), AppStorageService (upval)
 		if Inverted1 and UnionResult.localStorageKey then
-			pcall(function() --[[ Line: 124 ]]
+			pcall(function()
 				-- upvalues: AppStorageService (upval), UnionResult (upval)
 				AppStorageService:SetItem(UnionResult.localStorageKey, "true")
 			end)
@@ -129,7 +129,7 @@ return function(p1) --[[ Line: 41 ]]
 		active = Inverted1,
 		guiTarget = CoreGui,
 		preferredOrientation = TooltipOrientation.Bottom
-	}, function(p2) --[[ Line: 139 ]]
+	}, function(p2)
 		-- upvalues: ReactModule (upval)
 		return ReactModule.createElement("Frame", {
 			Size = UDim2.new(1, 0, 1, 0),

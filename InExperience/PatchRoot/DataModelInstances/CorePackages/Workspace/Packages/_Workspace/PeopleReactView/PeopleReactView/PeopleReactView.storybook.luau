@@ -26,17 +26,17 @@ local config1 = {
 	["Feature.SettingsHub.Action.Ok"] = "Ok"
 }
 local Localization = {
-	Format = function(_, p1) --[[ Line: 40 ]]
+	Format = function(_, p1)
 		-- upvalues: config1 (copy)
 		return config1[p1] or p1
 	end,
 	changed = require(Parent.AppCommonLib).Signal.new(),
-	GetLocale = function(): string --[[ Line: 44 ]]
+	GetLocale = function(): string
 		return "en-us"
 	end
 }
 
-local function StyleLinkPortal(p1) --[[ Line: 49 ]]
+local function StyleLinkPortal(p1)
 	-- upvalues: UseStyleSheetFunction (copy), ReactRobloxModule (copy), ReactModule (copy)
 	return ReactRobloxModule.createPortal(ReactModule.createElement("StyleLink", { StyleSheet = UseStyleSheetFunction() }), p1.overlay)
 end
@@ -46,16 +46,16 @@ return {
 	storyRoot = PeopleReactView,
 	roact = ReactModule,
 	reactRoblox = ReactRobloxModule,
-	mapStory = function(p1) --[[ Line: 60 ]]
+	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), LocalizationProvider (copy), Localization (copy), FoundationProvider (copy), FoundationModule (copy), config (copy), StyleLinkPortal (copy)
-		return function(p2) --[[ Line: 61 ]]
+		return function(p2)
 			-- upvalues: ReactModule (upval), LocalizationProvider (upval), Localization (upval), FoundationProvider (upval), FoundationModule (upval), config (upval), p1 (copy), StyleLinkPortal (upval)
 			local UseRefResult = ReactModule.useRef(Instance.new("Frame"))
 			
 			if UseRefResult.current.Parent ~= p2.focus then
 				UseRefResult.current.Parent = p2.focus
 			end
-			ReactModule.useLayoutEffect(function() --[[ Line: 67 ]]
+			ReactModule.useLayoutEffect(function()
 				-- upvalues: UseRefResult (copy)
 				UseRefResult.current.Size = UDim2.fromScale(1, 1)
 				UseRefResult.current.BackgroundTransparency = 1

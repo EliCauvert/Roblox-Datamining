@@ -3,7 +3,7 @@ local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local UsePostInsightsCoachmarkViewModelModule = require(script.Parent.usePostInsightsCoachmarkViewModel)
 
-return function(p1) --[[ Line: 18 | Named "PostInsightsCoachmark" ]]
+return function(p1)
 	-- upvalues: UsePostInsightsCoachmarkViewModelModule (copy), Parent (copy), ReactModule (copy), FoundationModule (copy)
 	local UsePostInsightsCoachmarkViewModelModuleResult = UsePostInsightsCoachmarkViewModelModule(p1)
 	

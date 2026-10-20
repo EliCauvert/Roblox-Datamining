@@ -10,9 +10,9 @@ local FFlagEnableGameJoinEarlyAccess = SharedFlagsModule.FFlagEnableGameJoinEarl
 local ButtonHeightSizeKeyByInputSizeModule = require(script.Parent.ButtonHeightSizeKeyByInputSize)
 local PlayButtonViewModule = require(script.Parent.PlayButtonView)
 
-local function v11() --[[ Line: 21 ]] end
+local function v11() end
 
-local function makePlayButtonProps(Frame, PlayButtonState, OnPlayButtonActivated, PlayButtonCaptureRef, LoadingCaptureRef, Fill, LayoutOrder, TestId, Tag, ShowEarlyAccessTooltip) --[[ Line: 29 ]]
+local function makePlayButtonProps(Frame, PlayButtonState, OnPlayButtonActivated, PlayButtonCaptureRef, LoadingCaptureRef, Fill, LayoutOrder, TestId, Tag, ShowEarlyAccessTooltip)
 	-- upvalues: FFlagEnableGameJoinEarlyAccess (copy)
 	return {
 		tag = Tag,
@@ -47,7 +47,7 @@ local function makePlayButtonProps(Frame, PlayButtonState, OnPlayButtonActivated
 	}
 end
 
-return ReactModule.memo(function(Frame) --[[ Line: 74 | Named "PlayButtonGroupView" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: InputSize (copy), FFlagLuaAppUseTokenHeightForPlayButton (copy), ButtonHeightSizeKeyByInputSizeModule (copy), FillBehavior (copy), ReactModule (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), PlayButtonViewModule (copy), makePlayButtonProps (copy), FFlagEnableGameJoinEarlyAccess (copy), SharedFlagsModule (copy), v11 (copy)
 	local Tokens = Frame.tokens
 	local ButtonSize = Frame.buttonSize or InputSize.Medium

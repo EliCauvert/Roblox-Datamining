@@ -6,16 +6,16 @@ local RecyclableViewRegistryModule = require(script.Parent.RecyclableViewRegistr
 local SignalsModule = require(ViewRecyclerReact.Parent.Signals)
 local Frozen = table.freeze({})
 
-local function _(p1, p2): string --[[ Line: 102 | Named "compositeKey" ]]
+local function _(p1, p2): string
 	return `{#p1}:{p1}:{p2}`
 end
 
 return {
-	new = function(RecyclingScope) --[[ Line: 106 ]]
+	new = function(RecyclingScope)
 		-- upvalues: ViewRecyclerModule (copy), RecyclableViewRegistryModule (copy), PlacementKindModule (copy), SignalsModule (copy), Frozen (copy)
 		local SlotBinder = ViewRecyclerModule.Adapter.createSlotBinder({
 			recyclingScope = RecyclingScope,
-			prepareDesiredAssignment = function(p1) --[[ Line: 111 ]]
+			prepareDesiredAssignment = function(p1)
 				local Value = p1.value
 				local Key = Value.parentAssignment.key
 				
@@ -42,7 +42,7 @@ return {
 		local v2 = nil
 		local CompositionPlacement = nil
 		
-		local function _(p1) --[[ Line: 136 | Named "notify" ]]
+		local function _(p1)
 			-- upvalues: Tbl4 (copy)
 			local Entry = Tbl4[p1]
 			
@@ -53,7 +53,7 @@ return {
 			end
 		end
 		
-		local function detachDependency(Key) --[[ Line: 145 ]]
+		local function detachDependency(Key)
 			-- upvalues: self1 (copy), Tbl3 (copy), Tbl4 (copy)
 			local SelfEntry = self1[Key]
 			
@@ -77,7 +77,7 @@ return {
 			end
 		end
 		
-		local function attachDependency(ParentAssignment, Placement, Key) --[[ Line: 161 ]]
+		local function attachDependency(ParentAssignment, Placement, Key)
 			-- upvalues: RecyclableViewRegistryModule (upval), self1 (copy), Tbl3 (copy), Tbl4 (copy)
 			local Metadata = RecyclableViewRegistryModule.getMetadata(Placement.viewType)
 			
@@ -144,7 +144,7 @@ return {
 			end
 		end
 		
-		local function desiredFor(PlacementId) --[[ Line: 185 ]]
+		local function desiredFor(PlacementId)
 			-- upvalues: Tbl (copy)
 			local Entry = Tbl[PlacementId]
 			
@@ -164,7 +164,7 @@ return {
 			end
 		end
 		
-		local function makeState(p2, Assignment) --[[ Line: 204 ]]
+		local function makeState(p2, Assignment)
 			-- upvalues: PlacementKindModule (upval), CompositionPlacement (ref), attachDependency (copy), detachDependency (copy)
 			local ParentAssignment = p2.parentAssignment
 			local Placement = p2.placement
@@ -178,7 +178,7 @@ return {
 					placeholder = p2.placeholder,
 					automaticSize = Enum.AutomaticSize.XY,
 					compositionPlacement = CompositionPlacement,
-					attachMeasurementDependency = function(Key) --[[ Line: 213 ]]
+					attachMeasurementDependency = function(Key)
 						-- upvalues: attachDependency (upval), ParentAssignment (copy), Placement (copy)
 						attachDependency(ParentAssignment, Placement, Key)
 					end,
@@ -187,7 +187,7 @@ return {
 			})
 		end
 		
-		local function reconcileDirty() --[[ Line: 225 ]]
+		local function reconcileDirty()
 			-- upvalues: Tbl2 (copy), desiredFor (copy), Tbl1 (copy), SlotBinder (copy), Flag1 (ref), makeState (copy)
 			local List = {}
 			
@@ -264,12 +264,12 @@ return {
 			Flag1 = false
 		end
 		
-		Flush = function() --[[ Line: 311 ]]
+		Flush = function()
 			-- upvalues: Flag2 (ref), Flag (ref), Flag1 (ref), Tbl2 (copy), reconcileDirty (copy)
 			if Flag2 or Flag then return end
 			assert(not Flag1, "CompositionPlacement: cannot flush after a publication failure")
 			Flag = true
-			local Success, Result = pcall(function() --[[ Line: 317 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: Tbl2 (upval), reconcileDirty (upval)
 				while next(Tbl2) ~= nil do
 					reconcileDirty()
@@ -282,14 +282,14 @@ return {
 			end
 		end
 		
-		v1 = function() --[[ Line: 328 ]]
+		v1 = function()
 			-- upvalues: Flag2 (ref), Tbl2 (copy), Count1 (ref), Flag (ref), Flush (ref)
 			if not Flag2 and next(Tbl2) ~= nil and Count1 == 0 and not Flag then
 				Flush()
 			end
 		end
 		
-		local _ = function(Key) --[[ Line: 334 | Named "markDirty" ]]
+		local _ = function(Key)
 			-- upvalues: Flag2 (ref), Tbl2 (copy), v1 (ref)
 			if not Flag2 then
 				Tbl2[Key] = true
@@ -297,7 +297,7 @@ return {
 			end
 		end
 		
-		v2 = function(p2) --[[ Line: 341 ]]
+		v2 = function(p2)
 			-- upvalues: Count1 (ref), v1 (ref)
 			Count1 += 1
 			local Packed = table.pack(pcall(p2))
@@ -312,9 +312,9 @@ return {
 		end
 		
 		CompositionPlacement = {
-			register = function(ViewType, p2, Callback, ItemSignal, Placeholder, Active) --[[ Line: 353 ]]
+			register = function(ViewType, p2, Callback, ItemSignal, Placeholder, Active)
 				-- upvalues: v2 (ref), Flag2 (ref), self (copy), Count (ref), Tbl (copy), SignalsModule (upval), Tbl2 (copy), v1 (ref)
-				return v2(function() --[[ Line: 354 ]]
+				return v2(function()
 					-- upvalues: Flag2 (upval), self (upval), p2 (copy), Count (upval), Tbl (upval), ViewType (copy), Callback (copy), ItemSignal (copy), Placeholder (copy), Active (copy), SignalsModule (upval), Tbl2 (upval), v1 (upval), v2 (upval)
 					assert(not Flag2, "CompositionPlacement: cannot register after destroy")
 					local SelfEntry = self[p2]
@@ -336,10 +336,10 @@ return {
 					}
 					Tbl[SelfEntry] = config
 					
-					local function _() --[[ Line: 373 | Named "subscribeActive" ]]
+					local function _()
 						-- upvalues: config (copy), SignalsModule (upval), SelfEntry (ref), Flag2 (upval), Tbl2 (upval), v1 (upval)
 						if type(config.active) == "function" then
-							config.disposeActiveEffect = SignalsModule.createEffect(function(p3) --[[ Line: 375 ]]
+							config.disposeActiveEffect = SignalsModule.createEffect(function(p3)
 								-- upvalues: config (upval), SelfEntry (upval), Flag2 (upval), Tbl2 (upval), v1 (upval)
 								config.active(p3)
 								local v3 = SelfEntry
@@ -353,7 +353,7 @@ return {
 					end
 					
 					if type(config.active) == "function" then
-						config.disposeActiveEffect = SignalsModule.createEffect(function(p3) --[[ Line: 375 ]]
+						config.disposeActiveEffect = SignalsModule.createEffect(function(p3)
 							-- upvalues: config (copy), SelfEntry (ref), Flag2 (upval), Tbl2 (upval), v1 (upval)
 							config.active(p3)
 							local v3 = SelfEntry
@@ -366,7 +366,7 @@ return {
 					end
 					local v3 = nil
 					local Flag = false
-					config.disposeParentAssignmentEffect = SignalsModule.createEffect(function(p3) --[[ Line: 384 ]]
+					config.disposeParentAssignmentEffect = SignalsModule.createEffect(function(p3)
 						-- upvalues: Callback (upval), Flag (ref), v3 (ref), SelfEntry (ref), Flag2 (upval), Tbl2 (upval), v1 (upval)
 						local CallbackResult = Callback(p3)
 						
@@ -390,9 +390,9 @@ return {
 					local Flag1 = true
 					
 					return {
-						setActive = function(Active) --[[ Line: 396 ]]
+						setActive = function(Active)
 							-- upvalues: v2 (upval), Flag1 (ref), Flag2 (upval), config (copy), SignalsModule (upval), SelfEntry (ref), Tbl2 (upval), v1 (upval)
-							v2(function() --[[ Line: 397 ]]
+							v2(function()
 								-- upvalues: Flag1 (upval), Flag2 (upval), config (upval), Active (copy), SignalsModule (upval), SelfEntry (upval), Tbl2 (upval), v1 (upval)
 								if not Flag1 or Flag2 or config.active == Active then return end
 								if config.disposeActiveEffect ~= nil then
@@ -402,7 +402,7 @@ return {
 								config.active = Active
 								
 								if type(config.active) == "function" then
-									config.disposeActiveEffect = SignalsModule.createEffect(function(p3) --[[ Line: 375 ]]
+									config.disposeActiveEffect = SignalsModule.createEffect(function(p3)
 										-- upvalues: config (upval), SelfEntry (upval), Flag2 (upval), Tbl2 (upval), v1 (upval)
 										config.active(p3)
 										local v4 = SelfEntry
@@ -421,9 +421,9 @@ return {
 								end
 							end)
 						end,
-						setPlaceholder = function(Placeholder) --[[ Line: 410 ]]
+						setPlaceholder = function(Placeholder)
 							-- upvalues: v2 (upval), Flag1 (ref), Flag2 (upval), config (copy), SelfEntry (ref), Tbl2 (upval), v1 (upval)
-							v2(function() --[[ Line: 411 ]]
+							v2(function()
 								-- upvalues: Flag1 (upval), Flag2 (upval), config (upval), Placeholder (copy), SelfEntry (upval), Tbl2 (upval), v1 (upval)
 								if Flag1 and not Flag2 and config.placeholder ~= Placeholder then
 									config.placeholder = Placeholder
@@ -436,9 +436,9 @@ return {
 								end
 							end)
 						end,
-						setItemSignal = function(ItemSignal) --[[ Line: 418 ]]
+						setItemSignal = function(ItemSignal)
 							-- upvalues: v2 (upval), Flag1 (ref), Flag2 (upval), config (copy), SelfEntry (ref), Tbl2 (upval), v1 (upval)
-							v2(function() --[[ Line: 419 ]]
+							v2(function()
 								-- upvalues: Flag1 (upval), Flag2 (upval), config (upval), ItemSignal (copy), SelfEntry (upval), Tbl2 (upval), v1 (upval)
 								if Flag1 and not Flag2 and config.itemSignal ~= ItemSignal then
 									config.itemSignal = ItemSignal
@@ -451,9 +451,9 @@ return {
 								end
 							end)
 						end,
-						unregister = function() --[[ Line: 426 ]]
+						unregister = function()
 							-- upvalues: v2 (upval), Flag1 (ref), Flag2 (upval), config (copy), Tbl (upval), SelfEntry (ref), Tbl2 (upval), v1 (upval)
-							v2(function() --[[ Line: 427 ]]
+							v2(function()
 								-- upvalues: Flag1 (upval), Flag2 (upval), config (upval), Tbl (upval), SelfEntry (upval), Tbl2 (upval), v1 (upval)
 								if not Flag1 then return end
 								Flag1 = false
@@ -477,7 +477,7 @@ return {
 					}
 				end)
 			end,
-			getMeasurementDependencies = function(p2) --[[ Line: 448 ]]
+			getMeasurementDependencies = function(p2)
 				-- upvalues: Tbl3 (copy), Frozen (upval)
 				local Entry = Tbl3[p2]
 				
@@ -491,7 +491,7 @@ return {
 				end
 				return List
 			end,
-			subscribeMeasurementDependencies = function(Key, Key1) --[[ Line: 459 ]]
+			subscribeMeasurementDependencies = function(Key, Key1)
 				-- upvalues: Flag2 (ref), Tbl4 (copy)
 				assert(not Flag2, "CompositionPlacement: cannot subscribe after destroy")
 				local Entry = Tbl4[Key]
@@ -503,7 +503,7 @@ return {
 				Entry[Key1] = true
 				local Flag = true
 				
-				return function() --[[ Line: 468 ]]
+				return function()
 					-- upvalues: Flag (ref), Entry (ref), Key1 (copy), Tbl4 (upval), Key (copy)
 					if Flag then
 						Flag = false
@@ -516,7 +516,7 @@ return {
 				end
 			end,
 			flush = Flush,
-			destroy = function() --[[ Line: 479 ]]
+			destroy = function()
 				-- upvalues: Flag2 (ref), Tbl2 (copy), Tbl (copy), Tbl1 (copy), SlotBinder (copy), Tbl3 (copy), Tbl4 (copy), self1 (copy)
 				if Flag2 then return end
 				Flag2 = true

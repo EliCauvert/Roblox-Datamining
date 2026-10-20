@@ -9,7 +9,7 @@ local config = {
 	userPresenceType = require(Parent.DataHydration).Presence.PresenceEnums.PresenceType.Offline
 }
 
-return require(Parent.React).memo(function(p1) --[[ Line: 30 | Named "RowDataProvider" ]]
+return require(Parent.React).memo(function(p1)
 	-- upvalues: UseGetPresenceByUserIdFunction (copy), config (copy), UseJoinUserInExperienceFunction (copy), UseCTAForRowModule (copy)
 	local UseGetPresenceByUserIdResult = UseGetPresenceByUserIdFunction(p1.entity.id) or config
 	

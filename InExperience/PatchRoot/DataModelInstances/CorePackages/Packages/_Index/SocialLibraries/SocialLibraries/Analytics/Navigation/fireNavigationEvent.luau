@@ -4,7 +4,7 @@ local DiagEventListModule = require(script.Parent.DiagEventList)
 local EventStreamEventListModule = require(script.Parent.EventStreamEventList)
 local _ = require(script.Parent.Parent.FireEvent.Types)
 
-return function(p1) --[[ Line: 8 ]]
+return function(p1)
 	-- upvalues: FireEventStreamModule (copy), EventStreamEventListModule (copy), FireDiagCounterModule (copy), DiagEventListModule (copy)
 	local FireEventStreamModuleResult = FireEventStreamModule({
 		eventStreamImpl = p1.analytics.EventStream,
@@ -18,7 +18,7 @@ return function(p1) --[[ Line: 8 ]]
 		loggerImpl = p1.loggerImpl
 	})
 	
-	return function(p2, p3) --[[ Line: 21 ]]
+	return function(p2, p3)
 		-- upvalues: EventStreamEventListModule (upval), FireEventStreamModuleResult (copy), DiagEventListModule (upval), FireDiagCounterModuleResult (copy)
 		if EventStreamEventListModule[p2] then
 			FireEventStreamModuleResult(p2, p3)

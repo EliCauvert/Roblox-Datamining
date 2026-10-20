@@ -10,7 +10,7 @@ local Rules = require(script.Parent.CommonConfigs.StandardBreakpoints).rules
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(List) --[[ Line: 61 ]]
+function Module1.new(List)
 	-- upvalues: Module1 (copy)
 	local config = {
 		_hasSizeRules = false,
@@ -32,23 +32,23 @@ function Module1.new(List) --[[ Line: 61 ]]
 	return (setmetatable(config, Module1))
 end
 
-function Module1:hasSizeRules() --[[ Line: 97 ]]
+function Module1:hasSizeRules()
 	return self._hasSizeRules
 end
 
-function Module1:hasInputRules() --[[ Line: 100 ]]
+function Module1:hasInputRules()
 	return self._hasInputRules
 end
 
-function Module1:currentRule() --[[ Line: 104 ]]
+function Module1:currentRule()
 	return self._currentRule
 end
 
-function Module1:currentKey() --[[ Line: 107 ]]
+function Module1:currentKey()
 	return self._currentKey
 end
 
-function Module1:resolve(p1, p2, PreferredInput, LastInput, Spatial): boolean --[[ Line: 113 ]]
+function Module1:resolve(p1, p2, PreferredInput, LastInput, Spatial): boolean
 	local Key = "Default"
 	local _currentRule = {}
 	local v1 = p1 / p2
@@ -70,7 +70,7 @@ function Module1:resolve(p1, p2, PreferredInput, LastInput, Spatial): boolean --
 	end
 end
 
-function Module.new() --[[ Line: 153 ]]
+function Module.new()
 	-- upvalues: VRService (copy), Signal (copy), Module (copy), InputModeModule (copy)
 	local config = {
 		_layerCollectorSizeConnection = nil,
@@ -85,13 +85,13 @@ function Module.new() --[[ Line: 153 ]]
 		_configResolvers = { default = {} }
 	}
 	local self = setmetatable(config, Module)
-	config._inputModeConnection = InputModeModule.connect(function() --[[ Line: 181 ]]
+	config._inputModeConnection = InputModeModule.connect(function()
 		-- upvalues: config (copy), self (copy)
 		if config._hasInputRules then
 			self:resolve()
 		end
 	end)
-	config._vrEnabledConnection = VRService:GetPropertyChangedSignal("VREnabled"):Connect(function() --[[ Line: 187 ]]
+	config._vrEnabledConnection = VRService:GetPropertyChangedSignal("VREnabled"):Connect(function()
 		-- upvalues: config (copy), VRService (upval), self (copy)
 		config._vrEnabled = VRService.VREnabled
 		self:resolve()
@@ -100,11 +100,11 @@ function Module.new() --[[ Line: 153 ]]
 	return self
 end
 
-function Module:incRef() --[[ Line: 195 ]]
+function Module:incRef()
 	self._refCount += 1
 end
 
-function Module:destroy() --[[ Line: 200 ]]
+function Module:destroy()
 	-- upvalues: self (copy)
 	if self._refCount > 1 then
 		self._refCount -= 1
@@ -132,27 +132,27 @@ function Module:destroy() --[[ Line: 200 ]]
 	end
 end
 
-function Module:connect(p3) --[[ Line: 227 ]]
+function Module:connect(p3)
 	if self._changed == nil then
 		error("Connecting to dead signal!")
 	end
 	return self._changed:connect(p3)
 end
 
-function Module:currentRule(p3) --[[ Line: 235 ]]
+function Module:currentRule(p3)
 	return self._configResolvers[p3 or "default"]:currentRule()
 end
 
-function Module:currentKey(p3) --[[ Line: 240 ]]
+function Module:currentKey(p3)
 	return self._configResolvers[p3 or "default"]:currentKey()
 end
 
-function Module:updateAbsoluteSize(LayerCollector) --[[ Line: 246 ]]
+function Module:updateAbsoluteSize(LayerCollector)
 	-- upvalues: GuiService (copy)
 	local AbsoluteSize = LayerCollector.AbsoluteSize
 	
 	if LayerCollector:IsA("LayerCollector") then
-		local Success, Result = pcall(function() --[[ Line: 250 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: LayerCollector (copy)
 			return LayerCollector.IgnoreGuiInset
 		end)
@@ -171,7 +171,7 @@ function Module:updateAbsoluteSize(LayerCollector) --[[ Line: 246 ]]
 	end
 end
 
-function Module:resolve() --[[ Line: 269 ]]
+function Module:resolve()
 	-- upvalues: InputModeModule (copy)
 	if not self._configResolvers then return end
 	local X = self._absoluteSize.X or 1
@@ -191,11 +191,11 @@ function Module:resolve() --[[ Line: 269 ]]
 	end
 end
 
-function is_array(Entry): boolean --[[ Line: 292 ]]
+function is_array(Entry): boolean
 	return type(Entry) == "table" and Entry[1] ~= nil
 end
 
-function Module:setConfig(Default) --[[ Line: 299 ]]
+function Module:setConfig(Default)
 	-- upvalues: Module1 (copy)
 	if is_array(Default) then
 		Default = { default = Default }
@@ -217,7 +217,7 @@ function Module:setConfig(Default) --[[ Line: 299 ]]
 	self:resolve()
 end
 
-function Module:setLocalInstance(Key: Instance, Key1) --[[ Line: 327 ]]
+function Module:setLocalInstance(Key: Instance, Key1)
 	-- upvalues: FindFirstAncestorWithTagModule (copy)
 	if typeof(Key) ~= "Instance" then
 		error("setLocalInstance arg1 expects Instance")
@@ -235,7 +235,7 @@ function Module:setLocalInstance(Key: Instance, Key1) --[[ Line: 327 ]]
 		self._layerCollectorSizeConnection = nil
 	end
 	if FirstAncestorWithTagModule then
-		self._layerCollectorSizeConnection = FirstAncestorWithTagModule:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 353 ]]
+		self._layerCollectorSizeConnection = FirstAncestorWithTagModule:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 			-- upvalues: self (copy), FirstAncestorWithTagModule (ref)
 			self:updateAbsoluteSize(FirstAncestorWithTagModule)
 		end)
@@ -245,7 +245,7 @@ end
 
 return {
 	DefaultKey = "Default",
-	bindContainer = function(Key, p3) --[[ Line: 362 ]]
+	bindContainer = function(Key, p3)
 		-- upvalues: self (copy), Module (copy), Rules (copy)
 		local SelfEntry = self[Key]
 		local v2 = p3 == nil

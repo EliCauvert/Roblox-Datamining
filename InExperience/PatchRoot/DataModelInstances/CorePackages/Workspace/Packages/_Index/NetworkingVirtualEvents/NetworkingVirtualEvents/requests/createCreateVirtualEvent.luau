@@ -2,9 +2,9 @@
 local HttpModule = require(NetworkingVirtualEvents.Parent.Http)
 local _ = require(NetworkingVirtualEvents.types)
 
-return function(p1) --[[ Line: 6 ]]
+return function(p1)
 	-- upvalues: HttpModule (copy)
-	return (p1.POST(script.Name, function(Callback, p2) --[[ Line: 9 ]]
+	return (p1.POST(script.Name, function(Callback, p2)
 		-- upvalues: HttpModule (upval)
 		return Callback(HttpModule.Url.APIS_URL):path("virtual-events"):path("v1"):path("virtual-events"):path("create"):body({
 			title = p2.title,

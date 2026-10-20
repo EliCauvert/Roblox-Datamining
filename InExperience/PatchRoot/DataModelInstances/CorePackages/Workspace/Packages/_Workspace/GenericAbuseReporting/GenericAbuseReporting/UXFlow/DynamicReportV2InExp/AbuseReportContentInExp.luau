@@ -17,7 +17,7 @@ local LoaderProvider = require(GenericAbuseReporting.BeduiV2.Loaders.LoaderConte
 local FFlagAbuseReportInExpPlayerListV3 = SharedFlagsModule.FFlagAbuseReportInExpPlayerListV3
 local FFlagAbuseReportVoiceMute = SharedFlagsModule.FFlagAbuseReportVoiceMute
 
-return function(p1) --[[ Line: 53 | Named "AbuseReportContentInExp" ]]
+return function(p1)
 	-- upvalues: UseAbuseSheetFlowModule (copy), ReactModule (copy), ArTranslationProvider (copy), AbuseReportAnalyticsProvider (copy), LayoutSlotsProvider (copy), InlineSlots (copy), OverlaidControlsProvider (copy), LoaderProvider (copy), AbuseReportInlineModule (copy), FFlagAbuseReportInExpPlayerListV3 (copy), FFlagAbuseReportVoiceMute (copy), VoiceSpeakingSignalsModule (copy)
 	local UseAbuseSheetFlowModuleResult = UseAbuseSheetFlowModule(p1.rawConfig, {
 		open = true,
@@ -30,7 +30,7 @@ return function(p1) --[[ Line: 53 | Named "AbuseReportContentInExp" ]]
 		attemptTrigger = p1.attemptTrigger,
 		inlineAlertController = p1.inlineAlertController
 	})
-	ReactModule.useEffect(function() --[[ Line: 66 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseAbuseSheetFlowModuleResult (copy), p1 (copy)
 		if not UseAbuseSheetFlowModuleResult then
 			p1.onResolveError()

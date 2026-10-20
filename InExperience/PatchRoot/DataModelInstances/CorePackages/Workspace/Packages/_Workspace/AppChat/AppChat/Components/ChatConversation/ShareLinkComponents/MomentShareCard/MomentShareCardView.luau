@@ -19,11 +19,11 @@ local GameCardErrorModule = require(script.Parent.Parent.GameCardComponents.Game
 local MomentDetailsStatusModule = require(script.Parent.MomentDetailsStatus)
 local MomentShareCardUnavailableModule = require(script.Parent.MomentShareCardUnavailable)
 
-local function _(Offset) --[[ Line: 54 | Named "toUDim" ]]
+local function _(Offset)
 	return if type(Offset) == "number" then UDim.new(0, Offset) else Offset
 end
 
-local function roundedCorner(CornerRadii) --[[ Line: 58 ]]
+local function roundedCorner(CornerRadii)
 	-- upvalues: ReactModule (copy)
 	if CornerRadii == nil then
 		return nil
@@ -45,7 +45,7 @@ local function roundedCorner(CornerRadii) --[[ Line: 58 ]]
 	end
 end
 
-return ReactModule.memo(function(Frame) --[[ Line: 70 | Named "MomentShareCardView" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: MomentDetailsStatusModule (copy), ReactModule (copy), GameCardErrorModule (copy), MomentShareCardUnavailableModule (copy), View (copy), roundedCorner (copy), Skeleton (copy), Radius (copy), FFlagAppChatMomentShareCardUseFoundationImageModule1 (copy), Image (copy), Icon (copy), IconName (copy), IconSize (copy), FFlagAppChatNativeFoundationCornerRadiiModule (copy), FFlagAppChatMomentShareCardLoadingSkeletonsModule (copy), Text (copy), FFlagAppChatMomentShareCardHideMomentsGlyphModule (copy)
 	return if Frame.status == MomentDetailsStatusModule.Error then ReactModule.createElement(GameCardErrorModule) elseif Frame.status == MomentDetailsStatusModule.Unavailable or Frame.status == MomentDetailsStatusModule.Locked then ReactModule.createElement(MomentShareCardUnavailableModule) else ReactModule.createElement(View, {
 		tag = "col auto-y",

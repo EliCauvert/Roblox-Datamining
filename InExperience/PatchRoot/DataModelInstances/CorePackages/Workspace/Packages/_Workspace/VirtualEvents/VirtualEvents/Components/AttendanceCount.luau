@@ -10,7 +10,7 @@ local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local IconsStatusGamesPeoplePlayingSmall = UIBloxModule.App.ImageSet.Images["icons/status/games/people-playing_small"]
 local _UDim = UDim.new(0, 6)
 
-return function(p1) --[[ Line: 25 | Named "AttendanceCount" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), _UDim (copy), ImageSetLabel (copy), IconsStatusGamesPeoplePlayingSmall (copy), StyledTextLabel (copy), FormatNumberWithShortUnitsModule (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseLocalizationResult = UseLocalizationFunction({

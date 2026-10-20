@@ -87,23 +87,23 @@ local config = {
 	visibility = nil,
 	unitTestTouchEnabled = false,
 	Font = Enum.Font.Gotham,
-	openViewProfile = function() --[[ Line: 101 ]]
+	openViewProfile = function()
 		-- upvalues: LoggerModule (copy)
 		LoggerModule:warning("openViewProfile was not passed to ChatMessage")
 	end,
-	renderMessage = function() --[[ Line: 104 ]]
+	renderMessage = function()
 		-- upvalues: LoggerModule (copy)
 		LoggerModule:warning("renderMessage was not passed to ChatMessage")
 	end,
-	closeKeyboard = function() --[[ Line: 107 ]] end
+	closeKeyboard = function() end
 }
 local TextButton: string = if GetFFlagDebugAppChatModule() then "TextButton" else "Frame"
 
-function ChatMessageContainer(p1) --[[ Line: 122 ]]
+function ChatMessageContainer(p1)
 	-- upvalues: CryoModule (copy), config (copy), MessageModelModule (copy), ReactModule (copy), FFlagAppChatConsoleFocusFixesModule (copy), UseStyleFunction (copy), UseChatPagePaddingModule (copy), FoundationModule (copy), AppChatUseSymmetricSwipe (copy), SwipeDirectionModule (copy), _UDim2 (copy), _UDim2_1 (copy), AppChatReplyIconSwipeOffset (copy), _Vector2 (copy), _Vector2_1 (copy), UseTelemetryModule (copy), ChatConversationTelemetryLayerModule (copy), UseTriggerFeedbackFunction (copy), UseDescendantSelectedFunction (copy), ReactFocusNavigationModule (copy), GlobalLongPressSignalModule (copy), MessageFtuxTooltipDismissSignal (copy), MessageFtuxTooltipVariant (copy), ChatConversationTelemetryEventsModule (copy), UseNavigationFunction (copy), UseGetConversationFromIdModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), GetReplyingToStoreModule (copy), ShouldReadMessageListFromSignalsStore (copy), GetConversationMessageViewModelStoreModule (copy), UseReplyingToMessageDispatchModule (copy), UseLocalUserIdFunction (copy), HapticFeedbackContext (copy), HapticFeedbackType (copy), UseSwipeGestureModule (copy), EnumScreensModule (copy), SetTimeoutFunction (copy), AppChatMessageLongPressDistanceThreshold (copy), UserInputService (copy), FFlagAppChatEnableMessageContextMenuModule (copy), ChatMessageContainerConstantsModule (copy), OptionsEnumModule (copy), ConversationModule (copy), GetReplyLabelDescriptorModule (copy), UserProfilesModule (copy), UseLocalizationFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), GetFFlagDebugAppChatModule (copy), OptionsModule (copy), FFlagAppChatAlignAvatarToMessageGroupBottomModule (copy), UserTile (copy), LayoutMode (copy), UserPresence (copy), NormalizeFontFaceFunction (copy), Skeleton (copy), MessageFtuxTooltip (copy), AppChatEnableRepliesUIIxpEnabled2 (copy), IXPService (copy), AppChatEnableRepliesUIIxpLayer1 (copy), TextButton (copy), SystemMessageModule (copy), NoticeTextModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local IsVisibilityMatch: boolean = if JoinResult.visibility then JoinResult.visibility == MessageModelModule.VisibilityTypes.Hidden else false
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 127 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: JoinResult (copy)
 		if JoinResult.viewProfileOnAvatarPressed then
 			JoinResult.openViewProfile(JoinResult.senderUserId)
@@ -123,7 +123,7 @@ function ChatMessageContainer(p1) --[[ Line: 122 ]]
 	local UseGetConversationFromIdModuleResult = nil
 	local UseLocalUserIdResult = nil
 	local UseSwipeGestureModuleResult = nil
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 152 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: AppChatUseSymmetricSwipe (upval), JoinResult (copy), SwipeDirectionModule (upval), FoundationModule (upval), _UDim2 (upval), _UDim2_1 (upval), AppChatReplyIconSwipeOffset (upval), _Vector2 (upval), _Vector2_1 (upval)
 		return if AppChatUseSymmetricSwipe then {
 			direction = if JoinResult.isIncoming then SwipeDirectionModule.Right else SwipeDirectionModule.Left,
@@ -165,7 +165,7 @@ function ChatMessageContainer(p1) --[[ Line: 122 ]]
 	
 	if FFlagAppChatConsoleFocusFixesModule then
 		local UseFocusGuiObjectResult = ReactFocusNavigationModule.useFocusGuiObject()
-		UseResult1 = ReactModule.useCallback(function() --[[ Line: 205 ]]
+		UseResult1 = ReactModule.useCallback(function()
 			-- upvalues: UseRefResult1 (copy), UseFocusGuiObjectResult (copy)
 			local Current = UseRefResult1.current
 			
@@ -174,19 +174,19 @@ function ChatMessageContainer(p1) --[[ Line: 122 ]]
 			end
 		end, { UseRefResult1, UseFocusGuiObjectResult })
 	end
-	ReactModule.useEffect(function() --[[ Line: 212 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: GlobalLongPressSignalModule (upval), UseStateResult2_2 (copy)
-		local DismissedConnection = GlobalLongPressSignalModule.dismissed:connect(function() --[[ Line: 213 ]]
+		local DismissedConnection = GlobalLongPressSignalModule.dismissed:connect(function()
 			-- upvalues: UseStateResult2_2 (upval)
 			UseStateResult2_2(false)
 		end)
 		
-		return function() --[[ Line: 216 ]]
+		return function()
 			-- upvalues: DismissedConnection (copy)
 			DismissedConnection:disconnect()
 		end
 	end)
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 222 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: JoinResult (copy)
 		return {
 			conversationId = JoinResult.conversationId,
@@ -200,20 +200,20 @@ function ChatMessageContainer(p1) --[[ Line: 122 ]]
 		JoinResult.conversationId, JoinResult.senderUserId, JoinResult.messageId,
 		JoinResult.sent, JoinResult.content, JoinResult.visibility
 	})
-	UseMemoResult2 = if FFlagAppChatConsoleFocusFixesModule then ReactModule.useMemo(function() --[[ Line: 243 ]]
+	UseMemoResult2 = if FFlagAppChatConsoleFocusFixesModule then ReactModule.useMemo(function()
 		-- upvalues: IsVisibilityMatch (copy), UseStateResult1 (copy), v1 (ref)
 		return not IsVisibilityMatch and (UseStateResult1 or v1)
-	end, { UseStateResult1, IsVisibilityMatch, v1 }) else ReactModule.useMemo(function() --[[ Line: 247 ]]
+	end, { UseStateResult1, IsVisibilityMatch, v1 }) else ReactModule.useMemo(function()
 		-- upvalues: IsVisibilityMatch (copy), UseStateResult1 (copy)
 		return not IsVisibilityMatch and UseStateResult1
 	end, { UseStateResult1, IsVisibilityMatch })
-	ReactModule.useEffect(function() --[[ Line: 253 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult2 (ref), JoinResult (copy), MessageFtuxTooltipDismissSignal (upval), MessageFtuxTooltipVariant (upval)
 		if UseMemoResult2 and JoinResult.isLastIncomingChatMessage then
 			MessageFtuxTooltipDismissSignal.dismiss(MessageFtuxTooltipVariant.Replies)
 		end
 	end, { UseMemoResult2, JoinResult.isLastIncomingChatMessage })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 258 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseTelemetryModuleResult (copy), ChatConversationTelemetryEventsModule (upval), UseMemoResult1 (copy)
 		UseTelemetryModuleResult.emit(ChatConversationTelemetryEventsModule.ConversationMessageReplyIconImpression, UseMemoResult1)
 	end, { UseTelemetryModuleResult, UseMemoResult1 })
@@ -231,13 +231,13 @@ function ChatMessageContainer(p1) --[[ Line: 122 ]]
 	local UseReplyingToMessageDispatchModuleResult = UseReplyingToMessageDispatchModule()
 	UseLocalUserIdResult = UseLocalUserIdFunction()
 	UseSwipeGestureModuleResult = UseSwipeGestureModule({
-		onSwipeThresholdReached = ReactModule.useCallback(function() --[[ Line: 282 ]]
+		onSwipeThresholdReached = ReactModule.useCallback(function()
 			-- upvalues: IsVisibilityMatch (copy), UseTriggerFeedbackResult (copy), HapticFeedbackContext (upval), HapticFeedbackType (upval)
 			if not IsVisibilityMatch then
 				UseTriggerFeedbackResult(HapticFeedbackContext.Default, HapticFeedbackType.Press)
 			end
 		end, { IsVisibilityMatch, UseTriggerFeedbackResult }),
-		onSwipeComplete = ReactModule.useCallback(function() --[[ Line: 289 ]]
+		onSwipeComplete = ReactModule.useCallback(function()
 			-- upvalues: UseTelemetryModuleResult (copy), ChatConversationTelemetryEventsModule (upval), UseMemoResult1 (copy), IsVisibilityMatch (copy), FFlagAppChatSignalsReplyStoreModule (upval), ReplyingToStoreModule (copy), JoinResult (copy), UseReplyingToMessageDispatchModuleResult (copy), FromChannelsApiResult (ref)
 			UseTelemetryModuleResult.emit(ChatConversationTelemetryEventsModule.ConversationMessageSwiped, UseMemoResult1)
 			
@@ -257,7 +257,7 @@ function ChatMessageContainer(p1) --[[ Line: 122 ]]
 		}),
 		direction = UseMemoResult.direction
 	})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 316 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (ref), EnumScreensModule (upval), JoinResult (copy)
 		UseNavigationResult.navigate(EnumScreensModule.MessageContextMenu, {
 			messageId = JoinResult.messageId,
@@ -270,12 +270,12 @@ function ChatMessageContainer(p1) --[[ Line: 122 ]]
 		JoinResult.conversationId,
 		JoinResult.inputBoxRef
 	})
-	local UseResult4 = ReactModule.useCallback(function(p2, Input, p3) --[[ Line: 325 ]]
+	local UseResult4 = ReactModule.useCallback(function(p2, Input, p3)
 		-- upvalues: UseRefResult2 (copy), SetTimeoutFunction (upval), AppChatMessageLongPressDistanceThreshold (upval), Callback (ref)
 		if Input then
 			UseRefResult2.current = Vector2.new(Input.Position.X, Input.Position.Y)
 		end
-		SetTimeoutFunction(function() --[[ Line: 329 ]]
+		SetTimeoutFunction(function()
 			-- upvalues: Input (copy), UseRefResult2 (upval), AppChatMessageLongPressDistanceThreshold (upval), Callback (upval), p2 (copy)
 			local Distance = if Input then (Vector2.new(Input.Position.X, Input.Position.Y) - UseRefResult2.current).Magnitude else 0
 			
@@ -284,7 +284,7 @@ function ChatMessageContainer(p1) --[[ Line: 122 ]]
 			end
 		end, p3)
 	end, { Callback })
-	Callback = ReactModule.useCallback(function(Activated, p2, MessageContextMenu) --[[ Line: 352 ]]
+	Callback = ReactModule.useCallback(function(Activated, p2, MessageContextMenu)
 		-- upvalues: JoinResult (copy), UserInputService (upval), ReactModule (upval), UseStateResult2_1 (copy), UseTelemetryModuleResult (copy), ChatConversationTelemetryEventsModule (upval), UseMemoResult1 (copy), IsVisibilityMatch (copy), UseStateResult2_2 (copy), FFlagAppChatEnableMessageContextMenuModule (upval), UseResult3 (copy), UseResult4 (copy), ChatMessageContainerConstantsModule (upval), UseStateResult3 (copy), GlobalLongPressSignalModule (upval), OptionsEnumModule (upval), UseTriggerFeedbackResult (copy), HapticFeedbackContext (upval), HapticFeedbackType (upval), FFlagAppChatSignalsReplyStoreModule (upval), ReplyingToStoreModule (copy), UseReplyingToMessageDispatchModuleResult (copy), FromChannelsApiResult (ref)
 		if JoinResult.isPending then return end
 		if UserInputService.MouseEnabled then
@@ -354,7 +354,7 @@ function ChatMessageContainer(p1) --[[ Line: 122 ]]
 		if FFlagAppChatSignalsReplyStoreModule then nil else FromChannelsApiResult,
 		if FFlagAppChatSignalsReplyStoreModule then JoinResult.messageId else nil
 	})
-	UseResult5 = ReactModule.useCallback(function(p2, p3) --[[ Line: 451 ]]
+	UseResult5 = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: UserInputService (upval), UseSwipeGestureModuleResult (ref), MessageFtuxTooltipDismissSignal (upval), MessageFtuxTooltipVariant (upval), UseResult4 (copy), ReactModule (upval), ChatMessageContainerConstantsModule (upval)
 		if UserInputService.TouchEnabled and UseSwipeGestureModuleResult then
 			UseSwipeGestureModuleResult.onInputBegan(p2, p3)
@@ -362,29 +362,29 @@ function ChatMessageContainer(p1) --[[ Line: 122 ]]
 		end
 		UseResult4(ReactModule.Event.InputBegan, p3, ChatMessageContainerConstantsModule.INPUT_BEGAN_DELAY_MILLISEC)
 	end, { UseResult4, UseSwipeGestureModuleResult })
-	UseResult6 = ReactModule.useCallback(function(_) --[[ Line: 460 ]]
+	UseResult6 = ReactModule.useCallback(function(_)
 		-- upvalues: Callback (ref), ReactModule (upval)
 		Callback(ReactModule.Event.InputEnded)
 	end, { Callback })
-	UseResult7 = ReactModule.useCallback(function(_) --[[ Line: 464 ]]
+	UseResult7 = ReactModule.useCallback(function(_)
 		-- upvalues: Callback (ref), ReactModule (upval)
 		Callback(ReactModule.Event.MouseEnter)
 	end, { Callback })
-	UseResult8 = ReactModule.useCallback(function(_) --[[ Line: 468 ]]
+	UseResult8 = ReactModule.useCallback(function(_)
 		-- upvalues: Callback (ref), ReactModule (upval)
 		Callback(ReactModule.Event.MouseLeave)
 	end, { Callback })
-	UseResult9 = ReactModule.useCallback(function(_) --[[ Line: 472 ]]
+	UseResult9 = ReactModule.useCallback(function(_)
 		-- upvalues: Callback (ref), ReactModule (upval)
 		Callback(ReactModule.Event.TouchTap)
 	end, { Callback })
-	UseResult10 = ReactModule.useCallback(function(_) --[[ Line: 476 ]]
+	UseResult10 = ReactModule.useCallback(function(_)
 		-- upvalues: Callback (ref), ReactModule (upval)
 		Callback(ReactModule.Event.MouseButton1Down)
 	end, { Callback })
 	local SenderTargetId = JoinResult.repliesTo and JoinResult.repliesTo.senderTargetId
 	
-	local function getDisplayNameText(SenderName, RepliedToName) --[[ Line: 482 ]]
+	local function getDisplayNameText(SenderName, RepliedToName)
 		-- upvalues: UseLocalUserIdResult (ref), JoinResult (copy), SenderTargetId (copy), UseGetConversationFromIdModuleResult (ref), ConversationModule (upval), GetReplyLabelDescriptorModule (upval)
 		local IsUseLocalUserIdResultMatch = UseLocalUserIdResult == JoinResult.senderUserId
 		local IsSenderUserIdMatch = JoinResult.senderUserId == JoinResult.repliesTo.senderTargetId
@@ -427,7 +427,7 @@ function ChatMessageContainer(p1) --[[ Line: 122 ]]
 		DisplayNameText = nil
 	end
 	local DisplayName = UseLocalizationFunction(if SenderTargetId then { displayName = DisplayNameText } else {}).displayName or DisplayNameText
-	local UseResult11 = ReactModule.useCallback(function(): UDim2 --[[ Line: 549 ]]
+	local UseResult11 = ReactModule.useCallback(function(): UDim2
 		-- upvalues: JoinResult (copy), ChatMessageContainerConstantsModule (upval), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), DisplayName (ref), UseStyleResult (copy), UseTokensResult (copy), TextService (upval)
 		local _Vector2 = Vector2.new(math.max(1, JoinResult.messageMaxWidth - ChatMessageContainerConstantsModule.TAIL_WIDTH), 1e999)
 		local TextSize = if FoundationFontFaceMigration then GetTextSizeFunction(DisplayName, UseStyleResult.Font.BaseSize * UseStyleResult.Font.Footer.RelativeSize, UseTokensResult.Typography.CaptionSmall.Font, _Vector2, { addTemporaryPadding = false }) else TextService:GetTextSize(DisplayName, UseStyleResult.Font.BaseSize * UseStyleResult.Font.Footer.RelativeSize, UseStyleResult.Font.Footer.Font, _Vector2)
@@ -445,17 +445,17 @@ function ChatMessageContainer(p1) --[[ Line: 122 ]]
 	local NewLeft = Left + UseTokensResult.Size.Size_700
 	local Left1 = JoinResult.isIncoming and Enum.HorizontalAlignment.Left or Enum.HorizontalAlignment.Right
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
-	local UseResult12 = ReactModule.useCallback(function() --[[ Line: 586 ]]
+	local UseResult12 = ReactModule.useCallback(function()
 		-- upvalues: GetFFlagDebugAppChatModule (upval), UseStateResult2_3 (copy)
 		if GetFFlagDebugAppChatModule() then
-			UseStateResult2_3(function(p2): boolean --[[ Line: 588 ]]
+			UseStateResult2_3(function(p2): boolean
 				return not p2
 			end)
 		end
 	end, { UseStateResult2_3 })
 	local UseStateResult4_1 = UseStateResult4 or (JoinResult.moderated or (JoinResult.filteredForReceivers or IsVisibilityMatch))
 	local MessageId = if UseStateResult4 then JoinResult.messageId elseif IsVisibilityMatch then JoinResult.messageHiddenNoticeText else JoinResult.moderated and JoinResult.messageModeratedNoticeText or JoinResult.messageDefaultNoticeText
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 600 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), FoundationModule (upval), UseTokensResult (copy), JoinResult (copy)
 		return ReactModule.createElement(FoundationModule.Icon, {
 			name = FoundationModule.Enums.IconName.TriangleExclamation,
@@ -472,23 +472,23 @@ function ChatMessageContainer(p1) --[[ Line: 122 ]]
 		emitImpressionTelemetryEvent = UseResult2
 	}) else nil
 	local IsIncoming = JoinResult.isIncoming
-	local MapResult = if UseSwipeGestureModuleResult and UseSwipeGestureModuleResult.swipeProgress then UseSwipeGestureModuleResult.swipeProgress:map(function(p2: number) --[[ Line: 626 ]]
+	local MapResult = if UseSwipeGestureModuleResult and UseSwipeGestureModuleResult.swipeProgress then UseSwipeGestureModuleResult.swipeProgress:map(function(p2: number)
 		-- upvalues: UseTokensResult (copy)
 		return {
 			Color3 = UseTokensResult.Color.Content.Default.Color3,
 			Transparency = 1 - math.pow(p2, 3)
 		}
 	end) else nil
-	local MapResult1 = if UseSwipeGestureModuleResult and UseSwipeGestureModuleResult.swipeOffset then UseSwipeGestureModuleResult.swipeOffset:map(function(p2): UDim2 --[[ Line: 637 ]]
+	local MapResult1 = if UseSwipeGestureModuleResult and UseSwipeGestureModuleResult.swipeOffset then UseSwipeGestureModuleResult.swipeOffset:map(function(p2): UDim2
 		-- upvalues: UseMemoResult (copy), SwipeDirectionModule (upval)
 		return UDim2.new(0, if UseMemoResult.direction == SwipeDirectionModule.Right then p2 else -p2, 0, 0)
 	end) else nil
-	local MapResult2 = if UseSwipeGestureModuleResult and UseSwipeGestureModuleResult.swipeProgress then UseSwipeGestureModuleResult.swipeProgress:map(function(p2): UDim2 --[[ Line: 645 ]]
+	local MapResult2 = if UseSwipeGestureModuleResult and UseSwipeGestureModuleResult.swipeProgress then UseSwipeGestureModuleResult.swipeProgress:map(function(p2): UDim2
 		-- upvalues: UseMemoResult (copy)
 		return UseMemoResult.messagePosition + UDim2.new(0, p2 * UseMemoResult.iconOffset, 0, 0)
 	end) else nil
 	
-	local function renderMessage() --[[ Line: 652 ]]
+	local function renderMessage()
 		-- upvalues: ReactModule (upval), MapResult1 (copy), UseResult7 (ref), UseResult8 (ref), NewMessageTypePaddingOffset (ref), JoinResult (copy), Left (copy), NewLeft (copy), UseChatPagePaddingModuleResult (copy), Left1 (copy), FoundationModule (upval), FFlagAppChatAlignAvatarToMessageGroupBottomModule (upval), UserTile (upval), LayoutMode (upval), UserPresence (upval), UseResult (copy), UseTokensResult (copy), ShouldShowName (copy), ChatMessageContainerConstantsModule (upval), IsIncoming (copy), SenderTargetId (copy), Flag (ref), FoundationFontFaceMigration (upval), UseStyleResult (copy), NormalizeFontFaceFunction (upval), UseResult11 (copy), DisplayName (ref), Skeleton (upval), FFlagAppChatConsoleFocusFixesModule (upval), IsVisibilityMatch (copy), v2 (ref), UseResult1 (ref), UseResult5 (ref), UseResult6 (ref), UseResult9 (ref), UseResult10 (ref), UseStateResult (ref), UseMemoResult4 (ref), UseRefResult1 (copy), UseRefResult (copy), MessageFtuxTooltip (upval), MessageFtuxTooltipVariant (upval), UseMemoResult (copy), MapResult2 (copy), MapResult (copy)
 		local Frame = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -633,7 +633,7 @@ function ChatMessageContainer(p1) --[[ Line: 122 ]]
 		})
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 820 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: AppChatEnableRepliesUIIxpEnabled2 (upval), JoinResult (copy), IXPService (upval), AppChatEnableRepliesUIIxpLayer1 (upval)
 		if AppChatEnableRepliesUIIxpEnabled2 and JoinResult.isLastIncomingChatMessage then
 			IXPService:LogFlagLinkedUserLayerExposure(AppChatEnableRepliesUIIxpLayer1)

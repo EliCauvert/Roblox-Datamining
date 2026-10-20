@@ -9,7 +9,7 @@ local InputSize = FoundationModule.Enums.InputSize
 local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 local config = { placeholder = "Feature.Moments.Label.WriteComment" }
 
-return function(p1) --[[ Line: 29 | Named "CommentsComposerView" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), ComposerModule (copy), InputSize (copy), FoundationModule (copy), StateLayerAffordance (copy), IconName (copy), ButtonVariant (copy)
 	return ReactModule.createElement(ComposerModule, {
 		minLines = 1,

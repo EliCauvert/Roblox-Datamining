@@ -14,19 +14,19 @@ local FFlagEnablePlusReferralLegalDisclosureModule = require(RobloxSubscriptionP
 local RobloxSubscriptionTermsOfUseLink = game:DefineFastString("RobloxSubscriptionTermsOfUseLink", "https://en.help.roblox.com/hc/articles/46804865425300")
 local PlusReferralProgramTermsURL2 = game:DefineFastString("PlusReferralProgramTermsURL2", "https://en.help.roblox.com/hc/en-us/articles/52737229124628")
 
-local function _(Text: string): string --[[ Line: 23 | Named "decodeLuauUnicodeEscapes" ]]
-	return (Text:gsub("\\u{(%x+)}", function(p1): string --[[ Line: 25 ]]
+local function _(Text: string): string
+	return (Text:gsub("\\u{(%x+)}", function(p1): string
 		local Number: number? = tonumber(p1, 16)
 		
 		return if Number == nil or Number < 0 or Number > 1114111 then "" else utf8.char(Number)
 	end))
 end
 
-local function decodeInlineRichTextEntities(UX: string) --[[ Line: 37 ]]
+local function decodeInlineRichTextEntities(UX: string)
 	return UX:gsub("&amp;lt;", "<"):gsub("&amp;gt;", ">"):gsub("&amp;quot;", "\""):gsub("&amp;apos;", "'"):gsub("&amp;amp;", "&"):gsub("&lt;", "<"):gsub("&gt;", ">"):gsub("&quot;", "\""):gsub("&apos;", "'"):gsub("&amp;", "&")
 end
 
-local function replaceQuotesOutsideTags(Text: string): string --[[ Line: 53 ]]
+local function replaceQuotesOutsideTags(Text: string): string
 	local List = {}
 	local Flag = false
 	local v1 = true
@@ -50,20 +50,20 @@ local function replaceQuotesOutsideTags(Text: string): string --[[ Line: 53 ]]
 	return table.concat(List)
 end
 
-local _ = function(Text: string) --[[ Line: 75 | Named "prepareTermsAgreementRichText" ]]
+local _ = function(Text: string)
 	-- upvalues: FFlagSupportFreeTrialModule (copy), replaceQuotesOutsideTags (copy), decodeInlineRichTextEntities (copy)
-	return if FFlagSupportFreeTrialModule then replaceQuotesOutsideTags(decodeInlineRichTextEntities((Text:gsub("\\u{(%x+)}", function(p1): string --[[ Line: 25 ]]
+	return if FFlagSupportFreeTrialModule then replaceQuotesOutsideTags(decodeInlineRichTextEntities((Text:gsub("\\u{(%x+)}", function(p1): string
 		local Number: number? = tonumber(p1, 16)
 		
 		return if Number == nil or Number < 0 or Number > 1114111 then "" else utf8.char(Number)
-	end)))) else decodeInlineRichTextEntities((Text:gsub("\\u{(%x+)}", function(p1): string --[[ Line: 25 ]]
+	end)))) else decodeInlineRichTextEntities((Text:gsub("\\u{(%x+)}", function(p1): string
 		local Number: number? = tonumber(p1, 16)
 		
 		return if Number == nil or Number < 0 or Number > 1114111 then "" else utf8.char(Number)
 	end)))
 end
 
-return function(p1) --[[ Line: 95 | Named "LegalDisclosure" ]]
+return function(p1)
 	-- upvalues: FoundationModule (copy), FFlagSupportFreeTrialModule (copy), FFlagRobloxPlusDynamicFreeTrialLengthModule (copy), IsSupportedTrialPeriodTypeModule (copy), GetPeriodTypeDisplayLabelModule (copy), UseLocalizationFunction (copy), RobloxSubscriptionTermsOfUseLink (copy), FFlagEnablePlusReferralLegalDisclosureModule (copy), PlusReferralProgramTermsURL2 (copy), ReactModule (copy), LinkBehavior (copy), Renderer (copy), replaceQuotesOutsideTags (copy), decodeInlineRichTextEntities (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local TrialDuration = p1.trialDuration or 1
@@ -111,21 +111,21 @@ return function(p1) --[[ Line: 95 | Named "LegalDisclosure" ]]
 	local ReferralTermsAgreement = if FFlagEnablePlusReferralLegalDisclosureModule and p1.isReferral then UseLocalizationResult1.referralTermsAgreement elseif p1.shortenFreeTrialTerms then UseLocalizationResult1.shortFreeTrialTermsAgreement elseif IsSupportedTrialPeriodTypeModule1 then UseLocalizationResult1.freeTrialTermsAgreementV3 elseif FFlagSupportFreeTrialModule and p1.isFreeTrial then UseLocalizationResult1.freeTrialTermsAgreement else UseLocalizationResult1.termsAgreement
 	
 	return ReactModule.createElement(Renderer, {
-		text = if FFlagSupportFreeTrialModule then replaceQuotesOutsideTags(decodeInlineRichTextEntities((ReferralTermsAgreement:gsub("\\u{(%x+)}", function(p2): string --[[ Line: 25 ]]
+		text = if FFlagSupportFreeTrialModule then replaceQuotesOutsideTags(decodeInlineRichTextEntities((ReferralTermsAgreement:gsub("\\u{(%x+)}", function(p2): string
 			local Number: number? = tonumber(p2, 16)
 			
 			return if Number == nil or Number < 0 or Number > 1114111 then "" else utf8.char(Number)
-		end)))) else decodeInlineRichTextEntities((ReferralTermsAgreement:gsub("\\u{(%x+)}", function(p2): string --[[ Line: 25 ]]
+		end)))) else decodeInlineRichTextEntities((ReferralTermsAgreement:gsub("\\u{(%x+)}", function(p2): string
 			local Number: number? = tonumber(p2, 16)
 			
 			return if Number == nil or Number < 0 or Number > 1114111 then "" else utf8.char(Number)
 		end))),
 		textStyle = UseTokensResult.Color.Content.Default,
 		fontStyle = UseTokensResult.Typography.BodySmall,
-		linkerOptions = ReactModule.useMemo(function() --[[ Line: 154 ]]
+		linkerOptions = ReactModule.useMemo(function()
 			-- upvalues: LinkBehavior (upval)
 			return {
-				evaluateLinkBehavior = function(_, _) --[[ Line: 156 ]]
+				evaluateLinkBehavior = function(_, _)
 					-- upvalues: LinkBehavior (upval)
 					return LinkBehavior.Webview
 				end

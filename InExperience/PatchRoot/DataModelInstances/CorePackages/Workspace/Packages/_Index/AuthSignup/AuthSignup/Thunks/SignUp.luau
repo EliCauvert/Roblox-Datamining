@@ -20,14 +20,14 @@ local CredentialsProtocolModule = require(Parent.CredentialsProtocol)
 local Constants = CredentialsProtocolModule.Constants
 local Default = CredentialsProtocolModule.CredentialsProtocol.default
 
-local function _(p1, p2) --[[ Line: 32 | Named "signUpRequest" ]]
+local function _(p1, p2)
 	-- upvalues: SignUpRequestsModule (copy)
 	return SignUpRequestsModule.signUpV2(p1, p2, {})
 end
 
-return function(p1, _, GuiService, _, _, p2, Enabled, _, _) --[[ Line: 37 ]]
+return function(p1, _, GuiService, _, _, p2, Enabled, _, _)
 	-- upvalues: SignUpRequestsModule (copy), NotificationType (copy), ReportEphemeralCounterFunction (copy), AppSignupCounterNamesModule (copy), FFlagLuaAppSkipDuplicateIosPasswordSavePrompt (copy), ShouldSkipLegacyPasswordSaveEventFunction (copy), FFlagDisableMemStorageServicePasswordEvent (copy), MemStorageService (copy), AuthMemStorageKeys (copy), HttpService (copy), Default (copy), Constants (copy), Logger (copy), PromiseModule (copy), SignUpV2ErrorCodesModule (copy), StatusCodes (copy)
-	return SignUpRequestsModule.signUpV2(p1, p2, {}):andThen(function(Result) --[[ Line: 48 ]]
+	return SignUpRequestsModule.signUpV2(p1, p2, {}):andThen(function(Result)
 		-- upvalues: GuiService (copy), NotificationType (upval), ReportEphemeralCounterFunction (upval), AppSignupCounterNamesModule (upval), p2 (copy), FFlagLuaAppSkipDuplicateIosPasswordSavePrompt (upval), ShouldSkipLegacyPasswordSaveEventFunction (upval), Enabled (copy), FFlagDisableMemStorageServicePasswordEvent (upval), MemStorageService (upval), AuthMemStorageKeys (upval), HttpService (upval), Default (upval), Constants (upval), Logger (upval), PromiseModule (upval)
 		GuiService:BroadcastNotification("", NotificationType.DID_SIGN_UP)
 		ReportEphemeralCounterFunction(AppSignupCounterNamesModule.Success, 1)
@@ -42,7 +42,7 @@ return function(p1, _, GuiService, _, _, p2, Enabled, _, _) --[[ Line: 37 ]]
 			}))
 		end
 		if Enabled and p2.password and #p2.password > 0 then
-			Default:registerCredentials(Default.CredentialsTypes.password, HttpService:JSONEncode({ username = p2.username, password = p2.password }), Constants.Defaults.PASSWORD_REGISTRATION_CREDENTIALSPROTOCOL_TIMEOUT):andThen(function(Result) --[[ Line: 90 ]]
+			Default:registerCredentials(Default.CredentialsTypes.password, HttpService:JSONEncode({ username = p2.username, password = p2.password }), Constants.Defaults.PASSWORD_REGISTRATION_CREDENTIALSPROTOCOL_TIMEOUT):andThen(function(Result)
 				-- upvalues: HttpService (upval), Logger (upval)
 				local Data = if Result then HttpService:JSONDecode(Result) else {}
 				
@@ -53,15 +53,15 @@ return function(p1, _, GuiService, _, _, p2, Enabled, _, _) --[[ Line: 37 ]]
 				else
 					Logger:warning("Error registering password: " .. tostring(Data.errorMsg))
 				end
-			end, function(p3) --[[ Line: 98 ]]
+			end, function(p3)
 				-- upvalues: Logger (upval)
 				Logger:warning("Error registering password: " .. tostring(p3))
 			end):await()
 		end
 		return PromiseModule.resolve(Result)
-	end, function(p3) --[[ Line: 105 ]]
+	end, function(p3)
 		-- upvalues: HttpService (upval), ReportEphemeralCounterFunction (upval), AppSignupCounterNamesModule (upval), SignUpV2ErrorCodesModule (upval), StatusCodes (upval), PromiseModule (upval)
-		local Success, Result = pcall(function() --[[ Line: 106 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: HttpService (upval), p3 (copy)
 			return HttpService:JSONDecode(p3.Body)
 		end)

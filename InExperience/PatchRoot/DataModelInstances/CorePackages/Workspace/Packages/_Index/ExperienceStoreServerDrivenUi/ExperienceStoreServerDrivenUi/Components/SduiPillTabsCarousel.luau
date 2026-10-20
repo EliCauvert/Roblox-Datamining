@@ -14,7 +14,7 @@ local Scroll = {
 	scrollBarVisibility = FoundationModule.Enums.Visibility.None
 }
 local Selection = { Selectable = false }
-local MemoResult = ReactModule.memo(function(p1) --[[ Line: 78 | Named "PillTab" ]]
+local MemoResult = ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), Chip (copy)
 	local OptionId = p1.optionId
 	local OnSelectFunction = p1.onSelect
@@ -24,14 +24,14 @@ local MemoResult = ReactModule.memo(function(p1) --[[ Line: 78 | Named "PillTab"
 		isChecked = p1.isChecked,
 		size = p1.chipSize,
 		LayoutOrder = p1.layoutOrder,
-		onActivated = ReactModule.useCallback(function() --[[ Line: 82 ]]
+		onActivated = ReactModule.useCallback(function()
 			-- upvalues: OnSelectFunction (copy), OptionId (copy)
 			OnSelectFunction(OptionId)
 		end, { OnSelectFunction, OptionId })
 	})
 end)
 
-return ReactModule.memo(function(p1) --[[ Line: 97 | Named "SduiPillTabsCarousel" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ChipSize (copy), FFlagSduiLocalFeedFilter (copy), ReactModule (copy), MemoResult (copy), ScrollView (copy), Scroll (copy), Selection (copy), View (copy)
 	local Options = p1.options
 	local OnOptionActivated = p1.onOptionActivated
@@ -46,11 +46,11 @@ return ReactModule.memo(function(p1) --[[ Line: 97 | Named "SduiPillTabsCarousel
 		SelectedOption = "all"
 	end
 	local UseRefResult = ReactModule.useRef(OnOptionActivated)
-	ReactModule.useEffect(function() --[[ Line: 112 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), OnOptionActivated (copy)
 		UseRefResult.current = OnOptionActivated
 	end, { OnOptionActivated })
-	ReactModule.useEffect(function() --[[ Line: 116 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), FFlagSduiLocalFeedFilter (upval), UseRefResult (copy)
 		local DefaultOption = p1.defaultOption
 		
@@ -62,7 +62,7 @@ return ReactModule.memo(function(p1) --[[ Line: 97 | Named "SduiPillTabsCarousel
 			end
 		end
 	end, { p1.defaultOption, p1.selectedOption })
-	local UseResult = ReactModule.useCallback(function(SelectedCategoryId) --[[ Line: 131 ]]
+	local UseResult = ReactModule.useCallback(function(SelectedCategoryId)
 		-- upvalues: UseRefResult (copy)
 		local CurrentFunction: (any, any, any) -> () = UseRefResult.current
 		
@@ -70,7 +70,7 @@ return ReactModule.memo(function(p1) --[[ Line: 97 | Named "SduiPillTabsCarousel
 			CurrentFunction(nil, nil, { selectedCategoryId = SelectedCategoryId })
 		end
 	end, {})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 138 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Options (copy), ReactModule (upval), MemoResult (upval), SelectedOption (ref), ChipSize1 (copy), UseResult (copy)
 		local Elements = {}
 		
@@ -90,7 +90,7 @@ return ReactModule.memo(function(p1) --[[ Line: 97 | Named "SduiPillTabsCarousel
 		end
 		return Elements
 	end, { Options, SelectedOption, UseResult, ChipSize1 })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 157 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		local config = { ["size-full-0 auto-y"] = true }
 		

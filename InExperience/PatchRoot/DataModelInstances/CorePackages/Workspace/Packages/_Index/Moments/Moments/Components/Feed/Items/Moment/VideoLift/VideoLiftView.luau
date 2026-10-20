@@ -4,7 +4,7 @@ local View = require(Parent.Foundation).View
 local MediaSurfaceContext = require(Parent.MomentsCommon).Media.MediaSurfaceContext
 local _Vector2 = Vector2.new(0.5, 0.5)
 
-return function(p1) --[[ Line: 23 | Named "VideoLiftView" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), _Vector2 (copy), MediaSurfaceContext (copy)
 	return ReactModule.createElement(View, {
 		tag = "size-full",

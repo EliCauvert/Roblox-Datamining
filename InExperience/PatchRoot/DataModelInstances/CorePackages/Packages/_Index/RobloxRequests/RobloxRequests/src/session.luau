@@ -6,7 +6,7 @@ local CookiesModule = require(Src.cookies)
 local RatelimitModule = require(Src.ratelimit)
 local UtilModule = require(Src.util)
 
-local function randomString(p1): string --[[ Line: 15 ]]
+local function randomString(p1): string
 	local Text = ""
 	
 	for _ = 1, p1 do
@@ -18,7 +18,7 @@ end
 local SessionModule = {}
 SessionModule.__index = SessionModule
 
-function SessionModule.new(p2) --[[ Line: 28 ]]
+function SessionModule.new(p2)
 	-- upvalues: SessionModule (copy), CookiesModule (copy)
 	local self = setmetatable({}, SessionModule)
 	self.headers = {}
@@ -34,7 +34,7 @@ function SessionModule.new(p2) --[[ Line: 28 ]]
 	return self
 end
 
-function SessionModule:set_ratelimit(p2, p3) --[[ Line: 52 ]]
+function SessionModule:set_ratelimit(p2, p3)
 	-- upvalues: RatelimitModule (copy), randomString (copy)
 	if not p2 then
 		self:disable_ratelimit()
@@ -47,7 +47,7 @@ function SessionModule:set_ratelimit(p2, p3) --[[ Line: 52 ]]
 	self._ratelimit = RatelimitModule.get("http.session-" .. randomString(12), p2, P4)
 end
 
-function SessionModule:disable_ratelimit() --[[ Line: 70 ]]
+function SessionModule:disable_ratelimit()
 	-- upvalues: RatelimitModule (copy)
 	if self._ratelimit then
 		RatelimitModule.ratelimit[self._ratelimit.id] = nil
@@ -55,14 +55,14 @@ function SessionModule:disable_ratelimit() --[[ Line: 70 ]]
 	end
 end
 
-function SessionModule:set_headers(Headers) --[[ Line: 79 ]]
+function SessionModule:set_headers(Headers)
 	for i, header in pairs(Headers) do
 		self.headers[i] = header
 	end
 	return self
 end
 
-function SessionModule:Request(p2, Text: string, p3) --[[ Line: 89 ]]
+function SessionModule:Request(p2, Text: string, p3)
 	-- upvalues: RequestModule (copy)
 	local P11 = p3 or {}
 	
@@ -84,7 +84,7 @@ function SessionModule:Request(p2, Text: string, p3) --[[ Line: 89 ]]
 	end
 	NewRequest:set_headers(P11.headers or {})
 	
-	function NewRequest._callback(p4) --[[ Line: 122 ]]
+	function NewRequest._callback(p4)
 		-- upvalues: self (copy)
 		for _, cooky in ipairs(p4.cookies.cookies) do
 			table.insert(self.cookies.cookies, cooky)
@@ -94,13 +94,13 @@ function SessionModule:Request(p2, Text: string, p3) --[[ Line: 89 ]]
 	return NewRequest
 end
 
-function SessionModule:request(p4, p5, p6) --[[ Line: 131 ]]
+function SessionModule:request(p4, p5, p6)
 	return self:Request(p4, p5, p6 or {}):send()
 end
 
 SessionModule.send = UtilModule.deprecate(SessionModule.request, "0.5", "Session:send")
 
-function SessionModule:promise_request(p4, p5, p6) --[[ Line: 149 ]]
+function SessionModule:promise_request(p4, p5, p6)
 	return self:Request(p4, p5, p6 or {}):send(true)
 end
 
@@ -109,12 +109,12 @@ SessionModule.promise_send = UtilModule.deprecate(SessionModule.promise_request,
 for _, Text in pairs({
 	"GET", "POST", "HEAD", "OPTIONS", "PUT", "DELETE", "PATCH"
 }) do
-	SessionModule[Text:lower()] = function(p4, p5, p6) --[[ Line: 161 ]]
+	SessionModule[Text:lower()] = function(p4, p5, p6)
 		-- upvalues: Text (copy)
 		return p4:send(Text, p5, p6)
 	end
 	
-	SessionModule["promise_" .. Text:lower()] = function(p4, p5, p6) --[[ Line: 165 ]]
+	SessionModule["promise_" .. Text:lower()] = function(p4, p5, p6)
 		-- upvalues: Text (copy)
 		return p4:promise_send(Text, p5, p6)
 	end

@@ -5,7 +5,7 @@ local Size100x100 = Enum.ThumbnailSize.Size100x100
 local AvatarThumbnail = Enum.ThumbnailType.AvatarThumbnail
 
 return {
-	GetPlayerImage = function(p1, ThumbnailSize, ThumbnailType, _) --[[ Line: 23 ]]
+	GetPlayerImage = function(p1, ThumbnailSize, ThumbnailType, _)
 		-- upvalues: Size100x100 (copy), AvatarThumbnail (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy)
 		if not ThumbnailSize then
 			ThumbnailSize = Size100x100

@@ -10,7 +10,7 @@ local GetEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule = r
 local GetEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(Parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
 local GetFFlagUGCValidationEyebrowEyelashSupportModule = require(Parent.flags.getFFlagUGCValidationEyebrowEyelashSupport)
 
-local function joinTables(...) --[[ Line: 25 ]]
+local function joinTables(...)
 	local t = {}
 	
 	for i = 1, select("#", ...) do
@@ -143,13 +143,13 @@ if GetEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule() then
 	AnalyticsModule.ErrorType.validateFACSJointTransformsWithinBounds_OOB = "validateFACSJointTransformsWithinBounds_OOB"
 end
 setmetatable(AnalyticsModule.ErrorType, {
-	__index = function(_, p1): string --[[ Line: 170 ]]
+	__index = function(_, p1): string
 		return `UNREGISTERED_{p1}`
 	end
 })
 AnalyticsModule.metadata = {}
 
-function AnalyticsModule.setMetadata(List) --[[ Line: 177 ]]
+function AnalyticsModule.setMetadata(List)
 	-- upvalues: AnalyticsModule (copy)
 	local Metadata = {}
 	
@@ -159,19 +159,19 @@ function AnalyticsModule.setMetadata(List) --[[ Line: 177 ]]
 	AnalyticsModule.metadata = Metadata
 end
 
-function AnalyticsModule.shouldReportIECTelemetry(p1) --[[ Line: 185 ]]
+function AnalyticsModule.shouldReportIECTelemetry(p1)
 	-- upvalues: GetEngineFeatureEngineUGCValidationIECTelemetryModule (copy), RunService (copy)
 	return if GetEngineFeatureEngineUGCValidationIECTelemetryModule() and p1 then not RunService:IsStudio() and p1.allowEditableInstances and p1.isServer else false
 end
 
-function AnalyticsModule.reportCounter(Success, ValidationType, p1) --[[ Line: 201 ]]
+function AnalyticsModule.reportCounter(Success, ValidationType, p1)
 	-- upvalues: AnalyticsModule (copy), UGCValidationService (copy)
 	if AnalyticsModule.shouldReportIECTelemetry(p1) then
 		UGCValidationService:ReportUGCValidationCounter(Success, ValidationType)
 	end
 end
 
-function AnalyticsModule.reportFailure(ErrorType, p1, p2) --[[ Line: 207 ]]
+function AnalyticsModule.reportFailure(ErrorType, p1, p2)
 	-- upvalues: RunService (copy), joinTables (copy), AnalyticsModule (copy), RbxAnalyticsService (copy), StudioService (copy), UGCValidationService (copy)
 	RbxAnalyticsService:SendEventDeferred(if RunService:IsStudio() then "studio" else "rcc", "ugcValidation", "failure", (joinTables(AnalyticsModule.metadata, p1 or {}, {
 		errorType = ErrorType,
@@ -186,7 +186,7 @@ function AnalyticsModule.reportFailure(ErrorType, p1, p2) --[[ Line: 207 ]]
 	end
 end
 
-function AnalyticsModule.reportThumbnailing(Time, p1) --[[ Line: 227 ]]
+function AnalyticsModule.reportThumbnailing(Time, p1)
 	-- upvalues: RunService (copy), joinTables (copy), AnalyticsModule (copy), RbxAnalyticsService (copy), StudioService (copy)
 	RbxAnalyticsService:SendEventDeferred(if RunService:IsStudio() then "studio" else "rcc", "ugcValidation", "thumbnailing", (joinTables(AnalyticsModule.metadata, p1 or {}, {
 		time = Time,
@@ -197,7 +197,7 @@ function AnalyticsModule.reportThumbnailing(Time, p1) --[[ Line: 227 ]]
 	})))
 end
 
-function AnalyticsModule.recordScriptTime(Key, p1, p2) --[[ Line: 239 ]]
+function AnalyticsModule.recordScriptTime(Key, p1, p2)
 	-- upvalues: GetEngineFeatureEngineUGCValidationReportScriptTimeModule (copy)
 	if not GetEngineFeatureEngineUGCValidationReportScriptTimeModule() then return end
 	if not p2.scriptTimes then
@@ -211,7 +211,7 @@ function AnalyticsModule.recordScriptTime(Key, p1, p2) --[[ Line: 239 ]]
 	ScriptTimes[Key] += tick() - p1
 end
 
-function AnalyticsModule.reportScriptTimes(p1) --[[ Line: 257 ]]
+function AnalyticsModule.reportScriptTimes(p1)
 	-- upvalues: GetEngineFeatureEngineUGCValidationReportScriptTimeModule (copy), RunService (copy), AnalyticsModule (copy), UGCValidationService (copy)
 	if not GetEngineFeatureEngineUGCValidationReportScriptTimeModule() then return end
 	if p1.isServer and not RunService:IsStudio() and p1.scriptTimes then

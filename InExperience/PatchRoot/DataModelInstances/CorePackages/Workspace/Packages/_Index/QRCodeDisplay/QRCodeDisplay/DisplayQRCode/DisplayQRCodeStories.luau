@@ -4,7 +4,7 @@ local ReactModule = require(QRCodeDisplay.Parent.React)
 local ECLevelsModule = require(QRCodeDisplay.Common.ECLevels)
 
 return {
-	SimpleMatrix = function() --[[ Line: 8 ]]
+	SimpleMatrix = function()
 		-- upvalues: ReactModule (copy), DisplayQRCodeModule (copy), ECLevelsModule (copy)
 		return ReactModule.createElement(DisplayQRCodeModule, {
 			sideLength = 100,
@@ -12,7 +12,7 @@ return {
 			ecLevel = ECLevelsModule.EC_LEVEL_1
 		})
 	end,
-	LoadingMatrix = function() --[[ Line: 16 ]]
+	LoadingMatrix = function()
 		-- upvalues: ReactModule (copy), DisplayQRCodeModule (copy), ECLevelsModule (copy)
 		return ReactModule.createElement(DisplayQRCodeModule, {
 			isLoading = true,
@@ -21,7 +21,7 @@ return {
 			ecLevel = ECLevelsModule.EC_LEVEL_1
 		})
 	end,
-	SuperComplexMatrix = function() --[[ Line: 25 ]]
+	SuperComplexMatrix = function()
 		-- upvalues: ReactModule (copy), DisplayQRCodeModule (copy), ECLevelsModule (copy)
 		return ReactModule.createElement(DisplayQRCodeModule, {
 			sideLength = 400,

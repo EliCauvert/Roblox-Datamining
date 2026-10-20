@@ -6,12 +6,12 @@ local _ = require(AppChat.Models.ConversationChannels)
 local ReloadedMessagesForConversationsModule = require(AppChat.Conversations.Actions.ReloadedMessagesForConversations)
 local MultiGetConversationDetailsModule = require(AppChat.Conversations.Thunks.multiGetConversationDetails)
 
-return function(p1) --[[ Line: 10 | Named "reloadMessagesForConversations" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), PromiseModule (copy), ReloadedMessagesForConversationsModule (copy), MultiGetConversationDetailsModule (copy)
-	return function(p2) --[[ Line: 11 ]]
+	return function(p2)
 		-- upvalues: CryoModule (upval), p1 (copy), PromiseModule (upval), ReloadedMessagesForConversationsModule (upval), MultiGetConversationDetailsModule (upval)
 		local Conversations = p2:getState().ChatAppReducer.Conversations
-		local FilterResult = CryoModule.List.filter(p1, function(p3): boolean --[[ Line: 15 ]]
+		local FilterResult = CryoModule.List.filter(p1, function(p3): boolean
 			-- upvalues: Conversations (copy)
 			local Conversation = Conversations[p3]
 			

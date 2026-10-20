@@ -3,7 +3,7 @@ local ReactModule = require(script:FindFirstAncestor("TextChannelWindow").Parent
 local _ = require(script.Parent.SelectionInputs)
 local Current = 0
 
-return function(p1) --[[ Line: 36 | Named "useCoreActionBind" ]]
+return function(p1)
 	-- upvalues: ContextActionService (copy), ReactModule (copy), Current (ref)
 	local ContextActionService1 = p1.contextActionService or ContextActionService
 	local UseRefResult = ReactModule.useRef(nil)
@@ -19,10 +19,10 @@ return function(p1) --[[ Line: 36 | Named "useCoreActionBind" ]]
 	local OnActionFunction = p1.onAction
 	local ShouldBindFunction = p1.shouldBind
 	local RebindSignal = p1.rebindSignal
-	ReactModule.useEffect(function() --[[ Line: 54 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Enabled (copy), Active (copy), OnActionFunction (copy), ShouldBindFunction (copy), ContextActionService1 (copy), Text (copy), Inputs (copy), RebindSignal (copy)
 		if not Enabled or not Active then return end
-		local function handler(_, p2) --[[ Line: 59 ]]
+		local function handler(_, p2)
 			-- upvalues: OnActionFunction (upval)
 			return OnActionFunction(p2)
 		end
@@ -30,7 +30,7 @@ return function(p1) --[[ Line: 36 | Named "useCoreActionBind" ]]
 		local Connection = nil
 		
 		if ShouldBindFunction then
-			local function refresh() --[[ Line: 65 ]]
+			local function refresh()
 				-- upvalues: ShouldBindFunction (upval), ContextActionService1 (upval), Text (upval), handler (copy), Inputs (upval)
 				if ShouldBindFunction() then
 					ContextActionService1:BindCoreAction(Text, handler, false, table.unpack(Inputs))
@@ -52,7 +52,7 @@ return function(p1) --[[ Line: 36 | Named "useCoreActionBind" ]]
 		else
 			ContextActionService1:BindCoreAction(Text, handler, false, table.unpack(Inputs))
 		end
-		return function() --[[ Line: 80 ]]
+		return function()
 			-- upvalues: Connection (ref), ContextActionService1 (upval), Text (upval)
 			if Connection then
 				Connection:Disconnect()

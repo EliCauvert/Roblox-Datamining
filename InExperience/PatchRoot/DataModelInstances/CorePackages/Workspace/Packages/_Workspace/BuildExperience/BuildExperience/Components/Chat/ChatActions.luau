@@ -12,7 +12,7 @@ local FFlagBuildExperienceChatResourceAttachments = require(Parent.SharedFlags).
 local ChatResourceAttachmentListModule = if FFlagBuildExperienceChatResourceAttachments then require(script.Parent.ChatResourceAttachmentList) else nil
 local View = require(Parent.Foundation).View
 
-return function(Frame) --[[ Line: 64 | Named "ChatActions" ]]
+return function(Frame)
 	-- upvalues: FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), ReactModule (copy), IsImageAttachmentSupportedModule (copy), CreateGalleryCaptureSourceModule (copy), View (copy), ChatResourceAttachmentListModule (copy), ChatImagePreviewListModule (copy), ChatComposerModule (copy), ChatCaptureGalleryContainerModule (copy)
 	local Images = Frame.images or {}
 	local ResourceAttachments = Frame.resourceAttachments or {}
@@ -30,7 +30,7 @@ return function(Frame) --[[ Line: 64 | Named "ChatActions" ]]
 	end
 	local IsImageAttachmentSupportedModule1 = FFlagBuildExperienceChatImageAttachmentsModule and (Frame.allowImageAttachments ~= false and IsImageAttachmentSupportedModule())
 	
-	local function setCapturedImages(Captures) --[[ Line: 85 ]]
+	local function setCapturedImages(Captures)
 		-- upvalues: Frame (copy), Images (copy)
 		if Frame.onImagesChanged == nil then return end
 		local List = {}
@@ -50,7 +50,7 @@ return function(Frame) --[[ Line: 64 | Named "ChatActions" ]]
 		Frame.onImagesChanged(List)
 	end
 	
-	local function openCaptureGallery() --[[ Line: 103 ]]
+	local function openCaptureGallery()
 		-- upvalues: UseRefResult (ref), UseRefResult1 (ref), Callback (ref), CreateGalleryCaptureSourceModule (upval)
 		if UseRefResult ~= nil and UseRefResult1 ~= nil and Callback ~= nil then
 			UseRefResult1.current = true
@@ -61,14 +61,14 @@ return function(Frame) --[[ Line: 64 | Named "ChatActions" ]]
 		end
 	end
 	
-	local function _() --[[ Line: 112 | Named "requestCloseCaptureGallery" ]]
+	local function _()
 		-- upvalues: Callback (ref)
 		if Callback ~= nil then
 			Callback("closing")
 		end
 	end
 	
-	local function confirmCaptureGallery(p1) --[[ Line: 118 ]]
+	local function confirmCaptureGallery(p1)
 		-- upvalues: setCapturedImages (copy), Callback (ref)
 		setCapturedImages(p1)
 		
@@ -77,14 +77,14 @@ return function(Frame) --[[ Line: 64 | Named "ChatActions" ]]
 		end
 	end
 	
-	local function handleCaptureGalleryClosed() --[[ Line: 123 ]]
+	local function handleCaptureGalleryClosed()
 		-- upvalues: Callback (ref)
 		if Callback ~= nil then
 			Callback("unmounted")
 		end
 	end
 	
-	local function removeImage(Index) --[[ Line: 129 ]]
+	local function removeImage(Index)
 		-- upvalues: Frame (copy), Images (copy)
 		if Frame.onImagesChanged ~= nil then
 			local Copy = table.clone(Images)

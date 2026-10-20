@@ -13,19 +13,19 @@ local config = {
 }
 local _Random = Random.new()
 
-return function(p1) --[[ Line: 34 | Named "AnimatedBar" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), UseCallbackFunction (copy), _Random (copy), ReactOtterModule (copy), UseEffectFunction (copy), ReactModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseTokensResult = UseTokensFunction()
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 38 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: _Random (upval), JoinResult (copy)
 		return _Random:NextNumber(JoinResult.heightRange.Min, JoinResult.heightRange.Max)
 	end, { JoinResult.heightRange })
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(UseCallbackResult())
-	UseEffectFunction(function() --[[ Line: 44 ]]
+	UseEffectFunction(function()
 		-- upvalues: JoinResult (copy), UseCallbackResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
 		local Flag = true
-		task.spawn(function() --[[ Line: 47 ]]
+		task.spawn(function()
 			-- upvalues: Flag (ref), JoinResult (upval), UseCallbackResult (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval)
 			while Flag do
 				UseAnimatedBindingResult2(ReactOtterModule.ease(if JoinResult.isMoving then UseCallbackResult() else JoinResult.staticHeight, { duration = 0.25, easingStyle = Enum.EasingStyle.Linear }))
@@ -33,7 +33,7 @@ return function(p1) --[[ Line: 34 | Named "AnimatedBar" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 60 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = false
 		end
@@ -46,7 +46,7 @@ return function(p1) --[[ Line: 34 | Named "AnimatedBar" ]]
 	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		LayoutOrder = JoinResult.layoutOrder,
-		Size = UseAnimatedBindingResult:map(function(Scale): UDim2 --[[ Line: 67 ]]
+		Size = UseAnimatedBindingResult:map(function(Scale): UDim2
 			-- upvalues: JoinResult (copy)
 			return UDim2.new(JoinResult.width, UDim.new(Scale, 0))
 		end),

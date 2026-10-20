@@ -9,9 +9,9 @@ local FormatNumberModule = require(Parent.Utility.formatNumber)
 local FFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(Parent.Parent.SharedFlags).FFlagUnifiedPurchaseFlowMarketplaceUIImprovements
 local UseRobuxTextModule = require(Parent.Generic.Hooks.useRobuxText)
 
-return function(p1) --[[ Line: 28 | Named "UnifiedPurchaseModalHeader" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FormatNumberModule (copy), LocalizationService (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), UseRobuxTextModule (copy), View (copy), Text (copy)
-	local UseRobuxTextModuleResult = if FFlagUnifiedPurchaseFlowMarketplaceUIImprovements then UseRobuxTextModule(p1.robuxBalanceAmount or 0) else ReactModule.useMemo(function(): string --[[ Line: 29 ]]
+	local UseRobuxTextModuleResult = if FFlagUnifiedPurchaseFlowMarketplaceUIImprovements then UseRobuxTextModule(p1.robuxBalanceAmount or 0) else ReactModule.useMemo(function(): string
 		-- upvalues: FormatNumberModule (upval), LocalizationService (upval), p1 (copy)
 		return utf8.char(57346) .. " " .. FormatNumberModule(LocalizationService.RobloxLocaleId, p1.robuxBalanceAmount or 0)
 	end, {

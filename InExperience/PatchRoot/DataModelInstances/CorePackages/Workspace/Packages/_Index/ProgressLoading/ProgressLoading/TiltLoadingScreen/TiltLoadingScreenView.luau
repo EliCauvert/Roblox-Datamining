@@ -18,7 +18,7 @@ local TiltLoadingScreenStatusPanelModule = require(script.Parent.Components.Tilt
 local FFlagTiltLoadingScreenConsoleHints = require(Parent.SharedFlags).FFlagTiltLoadingScreenConsoleHints
 local _ = require(script.Parent.Types)
 
-return ReactModule.memo(function(p1) --[[ Line: 27 | Named "TiltLoadingScreenView" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), FFlagTiltLoadingScreenConsoleHints (copy), ReactModule (copy), View (copy), IsPioneerLaunchFunction (copy), IconButton (copy), Enums (copy), Icon (copy), IconSize (copy), Text (copy), TiltLockupModule (copy), Badge (copy), TiltLoadingScreenStatusPanelModule (copy), Progress (copy), ProgressShape (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -29,7 +29,7 @@ return ReactModule.memo(function(p1) --[[ Line: 27 | Named "TiltLoadingScreenVie
 	return ReactModule.createElement(View, {
 		tag = "size-full bg-surface-0",
 		testId = "tilt-loading-screen-root",
-		GroupTransparency = p1.chromeReveal:map(function(p2: number): number --[[ Line: 36 ]]
+		GroupTransparency = p1.chromeReveal:map(function(p2: number): number
 			return 1 - p2
 		end)
 	}, {
@@ -101,7 +101,7 @@ return ReactModule.memo(function(p1) --[[ Line: 27 | Named "TiltLoadingScreenVie
 					AutoTranslate = if p1.isAutoTranslated then ReactModule.createElement(View, {
 						LayoutOrder = 2,
 						tag = "auto-xy",
-						GroupTransparency = p1.animation.creator.reveal:map(function(p2: number): number --[[ Line: 118 ]]
+						GroupTransparency = p1.animation.creator.reveal:map(function(p2: number): number
 							return 1 - p2
 						end)
 					}, {

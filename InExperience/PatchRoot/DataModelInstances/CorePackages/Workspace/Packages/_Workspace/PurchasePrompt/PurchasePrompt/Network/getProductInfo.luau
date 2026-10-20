@@ -28,28 +28,28 @@ local ResolveRefreshedExpectedPriceModule = require(Parent.Utils.resolveRefreshe
 local FFlagFixTimedOptionRefreshModule = require(Parent.Flags.FFlagFixTimedOptionRefresh)
 local ResolveRefreshedProductInfoModule = require(Parent.Utils.resolveRefreshedProductInfo)
 
-local function fetchRefreshedPrice(p1, p2, p3, p4) --[[ Line: 56 ]]
+local function fetchRefreshedPrice(p1, p2, p3, p4)
 	-- upvalues: PromiseModule (copy), GetCatalogItemDetailsModule (copy), GetResellersModule (copy), FFlagFixTimedOptionRefreshModule (copy), ResolveRefreshedProductInfoModule (copy), ResolveRefreshedExpectedPriceModule (copy)
 	local CollectibleItemId = p4.collectibleItemId
 	local CollectibleItemInstanceId = p4.collectibleItemInstanceId
 	
 	return PromiseModule.all({
-		catalogItemDetails = GetCatalogItemDetailsModule(p1, p2, p3):catch(function() --[[ Line: 60 ]]
+		catalogItemDetails = GetCatalogItemDetailsModule(p1, p2, p3):catch(function()
 			return nil
 		end),
-		resellersData = if CollectibleItemInstanceId and CollectibleItemInstanceId ~= "" and CollectibleItemId and CollectibleItemId ~= "" then GetResellersModule(p1, CollectibleItemId, 10):catch(function() --[[ Line: 67 ]]
+		resellersData = if CollectibleItemInstanceId and CollectibleItemInstanceId ~= "" and CollectibleItemId and CollectibleItemId ~= "" then GetResellersModule(p1, CollectibleItemId, 10):catch(function()
 			return nil
 		end) else PromiseModule.resolve(nil)
-	}):andThen(function(Result) --[[ Line: 71 ]]
+	}):andThen(function(Result)
 		-- upvalues: FFlagFixTimedOptionRefreshModule (upval), ResolveRefreshedProductInfoModule (upval), CollectibleItemInstanceId (copy), p4 (copy), ResolveRefreshedExpectedPriceModule (upval)
 		return if FFlagFixTimedOptionRefreshModule then ResolveRefreshedProductInfoModule(Result.catalogItemDetails, Result.resellersData, CollectibleItemInstanceId, p4.timedOptionDays) else ResolveRefreshedExpectedPriceModule(Result.catalogItemDetails, Result.resellersData, CollectibleItemInstanceId, p4.timedOptionDays)
 	end)
 end
 
-return function(p1, p2, InfoType, p3, p4, Callback) --[[ Line: 89 | Named "getProductInfo" ]]
+return function(p1, p2, InfoType, p3, p4, Callback)
 	-- upvalues: GetAssetInfoModule (copy), GetAssetInfoUtilModule (copy), PromiseModule (copy), PurchaseErrorModule (copy), IsCreatorStoreAssetTypeModule (copy), GetCreatorStoreProductInfoModule (copy), GetCreatorStoreProductInfoUtilModule (copy), FFlagEnableFetchCartPricingDuringInExperience (copy), FFlagRefreshPriceOnRetryAfterUpsellModule (copy), fetchRefreshedPrice (copy), FFlagFixTimedOptionRefreshModule (copy), ProductTypeEnum (copy), FFlagExperiencePurchaseFallbackToGameIconModule (copy), GetExperienceProductInfoUtilModule (copy), GetExperienceProductImageUrlModule (copy), FFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule (copy), HandleLooksProductInfoResultModule (copy), FFlagRefreshLookPriceOnRetryAfterUpsellModule (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), GetFFlagDiscountInfoForSubscriptionPurchaseModalLuaFunction (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), GetUniversePrivateServerSettingsModule (copy), IAPExperienceModule (copy)
 	if InfoType == Enum.InfoType.Asset then
-		local ProductInfo = GetAssetInfoModule(p1, p2):andThen(function(Result) --[[ Line: 99 ]]
+		local ProductInfo = GetAssetInfoModule(p1, p2):andThen(function(Result)
 			-- upvalues: GetAssetInfoUtilModule (upval), PromiseModule (upval), PurchaseErrorModule (upval), IsCreatorStoreAssetTypeModule (upval), GetCreatorStoreProductInfoModule (upval), p1 (copy), p2 (copy), GetCreatorStoreProductInfoUtilModule (upval), FFlagEnableFetchCartPricingDuringInExperience (upval), InfoType (copy), Callback (copy)
 			local FromAssetResult = nil
 			
@@ -61,7 +61,7 @@ return function(p1, p2, InfoType, p3, p4, Callback) --[[ Line: 89 | Named "getPr
 			end
 			local Type = FromAssetResult and FromAssetResult.type or ""
 			
-			return if IsCreatorStoreAssetTypeModule(Type) then GetCreatorStoreProductInfoModule(p1, p2, Type):andThen(function(Result) --[[ Line: 110 ]]
+			return if IsCreatorStoreAssetTypeModule(Type) then GetCreatorStoreProductInfoModule(p1, p2, Type):andThen(function(Result)
 				-- upvalues: GetCreatorStoreProductInfoUtilModule (upval), FromAssetResult (ref), Type (copy)
 				local FromProductResult = GetCreatorStoreProductInfoUtilModule.fromProduct(Result)
 				
@@ -81,23 +81,23 @@ return function(p1, p2, InfoType, p3, p4, Callback) --[[ Line: 89 | Named "getPr
 					Name = FromAssetResult.name,
 					ProductId = FromAssetResult.id
 				}
-			end) elseif FFlagEnableFetchCartPricingDuringInExperience then p1.getProductInfo(p2, InfoType):andThen(function(Result) --[[ Line: 137 ]]
+			end) elseif FFlagEnableFetchCartPricingDuringInExperience then p1.getProductInfo(p2, InfoType):andThen(function(Result)
 				-- upvalues: Callback (upval)
-				return if Result.CollectibleItemId and Callback then Callback(Result.CollectibleItemId):andThen(function() --[[ Line: 140 ]]
+				return if Result.CollectibleItemId and Callback then Callback(Result.CollectibleItemId):andThen(function()
 					-- upvalues: Result (copy)
 					return Result
-				end):catch(function() --[[ Line: 143 ]]
+				end):catch(function()
 					-- upvalues: Result (copy)
 					return Result
 				end) else Result
-			end):catch(function(_) --[[ Line: 149 ]]
+			end):catch(function(_)
 				-- upvalues: PromiseModule (upval), PurchaseErrorModule (upval)
 				return PromiseModule.reject(PurchaseErrorModule.UnknownFailureNoItemName)
-			end) else p1.getProductInfo(p2, InfoType):catch(function(_) --[[ Line: 153 ]]
+			end) else p1.getProductInfo(p2, InfoType):catch(function(_)
 				-- upvalues: PromiseModule (upval), PurchaseErrorModule (upval)
 				return PromiseModule.reject(PurchaseErrorModule.UnknownFailureNoItemName)
 			end)
-		end):catch(function(_) --[[ Line: 159 ]]
+		end):catch(function(_)
 			-- upvalues: PromiseModule (upval), PurchaseErrorModule (upval)
 			return PromiseModule.reject(PurchaseErrorModule.UnknownFailureNoItemName)
 		end)
@@ -105,7 +105,7 @@ return function(p1, p2, InfoType, p3, p4, Callback) --[[ Line: 89 | Named "getPr
 		return if FFlagRefreshPriceOnRetryAfterUpsellModule and p4 then PromiseModule.all({
 			productInfo = ProductInfo,
 			refreshedPrice = fetchRefreshedPrice(p1, p2, "asset", p4)
-		}):andThen(function(Result) --[[ Line: 173 ]]
+		}):andThen(function(Result)
 			-- upvalues: FFlagFixTimedOptionRefreshModule (upval)
 			local ProductInfo = Result.productInfo
 			
@@ -124,7 +124,7 @@ return function(p1, p2, InfoType, p3, p4, Callback) --[[ Line: 89 | Named "getPr
 			return ProductInfo
 		end) else ProductInfo
 	else
-		return if InfoType == ProductTypeEnum.Experience then p1.getExperienceProductInfo(p2):andThen(function(Result) --[[ Line: 195 ]]
+		return if InfoType == ProductTypeEnum.Experience then p1.getExperienceProductInfo(p2):andThen(function(Result)
 			-- upvalues: p3 (copy), FFlagExperiencePurchaseFallbackToGameIconModule (upval), GetExperienceProductInfoUtilModule (upval), GetExperienceProductImageUrlModule (upval), p2 (copy), PromiseModule (upval), PurchaseErrorModule (upval)
 			if Result and Result.data and Result.data[1] and p3.name and (FFlagExperiencePurchaseFallbackToGameIconModule or p3.imageUrl) then
 				local FromProductResult = GetExperienceProductInfoUtilModule.fromProduct(Result.data[1])
@@ -140,10 +140,10 @@ return function(p1, p2, InfoType, p3, p4, Callback) --[[ Line: 89 | Named "getPr
 			else
 				return PromiseModule.reject(PurchaseErrorModule.UnknownFailureNoItemName)
 			end
-		end):catch(function(_) --[[ Line: 219 ]]
+		end):catch(function(_)
 			-- upvalues: PromiseModule (upval), PurchaseErrorModule (upval)
 			return PromiseModule.reject(PurchaseErrorModule.UnknownFailureNoItemName)
-		end) elseif InfoType == ProductTypeEnum.Look then if FFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule then p1.GetLookDetailsV2ProductInfo(p2):andThen(function(Result) --[[ Line: 226 ]]
+		end) elseif InfoType == ProductTypeEnum.Look then if FFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule then p1.GetLookDetailsV2ProductInfo(p2):andThen(function(Result)
 			-- upvalues: HandleLooksProductInfoResultModule (upval), p3 (copy), PromiseModule (upval), PurchaseErrorModule (upval), FFlagRefreshLookPriceOnRetryAfterUpsellModule (upval)
 			local HandleLooksProductInfoResultModuleResult = HandleLooksProductInfoResultModule(Result, p3)
 			
@@ -154,14 +154,14 @@ return function(p1, p2, InfoType, p3, p4, Callback) --[[ Line: 89 | Named "getPr
 				HandleLooksProductInfoResultModuleResult.refreshedExpectedPrice = HandleLooksProductInfoResultModuleResult.PriceInRobux
 			end
 			return HandleLooksProductInfoResultModuleResult
-		end):catch(function() --[[ Line: 237 ]]
+		end):catch(function()
 			-- upvalues: PromiseModule (upval), PurchaseErrorModule (upval)
 			return PromiseModule.reject(PurchaseErrorModule.UnknownFailureNoItemName)
 		end) else PromiseModule.resolve({
 			IsForSale = true,
 			Name = "Looks",
 			PriceInRobux = p3.expectedPrice
-		}) elseif FFlagEnableUnifiedPurchaseFlowForDevSubs and InfoType == ProductTypeEnum.DeveloperSubscription then p1.getSubscriptionProductInfo(p2):andThen(function(Result) --[[ Line: 249 ]]
+		}) elseif FFlagEnableUnifiedPurchaseFlowForDevSubs and InfoType == ProductTypeEnum.DeveloperSubscription then p1.getSubscriptionProductInfo(p2):andThen(function(Result)
 			-- upvalues: GetFFlagDiscountInfoForSubscriptionPurchaseModalLuaFunction (upval), ProductTypeEnum (upval), PromiseModule (upval), PurchaseErrorModule (upval)
 			if Result and Result.Name then
 				local FFlagDiscountInfoForSubscriptionPurchaseModalLua = GetFFlagDiscountInfoForSubscriptionPurchaseModalLuaFunction()
@@ -182,10 +182,10 @@ return function(p1, p2, InfoType, p3, p4, Callback) --[[ Line: 89 | Named "getPr
 			else
 				return PromiseModule.reject(PurchaseErrorModule.UnknownFailureNoItemName)
 			end
-		end):catch(function(_) --[[ Line: 270 ]]
+		end):catch(function(_)
 			-- upvalues: PromiseModule (upval), PurchaseErrorModule (upval)
 			return PromiseModule.reject(PurchaseErrorModule.UnknownFailureNoItemName)
-		end) elseif FFlagLuaAppsEnablePromptVIPServerPurchase and InfoType == ProductTypeEnum.VIPServer then GetUniversePrivateServerSettingsModule(p1, p2):andThen(function(Result) --[[ Line: 274 ]]
+		end) elseif FFlagLuaAppsEnablePromptVIPServerPurchase and InfoType == ProductTypeEnum.VIPServer then GetUniversePrivateServerSettingsModule(p1, p2):andThen(function(Result)
 			-- upvalues: IAPExperienceModule (upval), p1 (copy), GetExperienceProductImageUrlModule (upval), p2 (copy), PromiseModule (upval), PurchaseErrorModule (upval)
 			local PrivateServerData = Result.privateServerData
 			local NewRobux = 0
@@ -211,7 +211,7 @@ return function(p1, p2, InfoType, p3, p4, Callback) --[[ Line: 89 | Named "getPr
 					}
 				}
 			end
-			return p1.getProductInfo(Result.rootPlaceId, Enum.InfoType.Asset):andThen(function(Result) --[[ Line: 302 ]]
+			return p1.getProductInfo(Result.rootPlaceId, Enum.InfoType.Asset):andThen(function(Result)
 				-- upvalues: PrivateServerData (copy), UserBasePriceInRobux (ref), PriceDiscountDetails (ref), GetExperienceProductImageUrlModule (upval), p2 (upval), IsNewRobuxAbove (copy)
 				return {
 					IsForSale = true,
@@ -228,11 +228,11 @@ return function(p1, p2, InfoType, p3, p4, Callback) --[[ Line: 89 | Named "getPr
 						CreatorTargetId = game.CreatorId
 					}
 				}
-			end):catch(function() --[[ Line: 320 ]]
+			end):catch(function()
 				-- upvalues: PromiseModule (upval), PurchaseErrorModule (upval)
 				return PromiseModule.reject(PurchaseErrorModule.UnknownFailureNoItemName)
 			end)
-		end) else p1.getProductInfo(p2, InfoType):catch(function(_) --[[ Line: 325 ]]
+		end) else p1.getProductInfo(p2, InfoType):catch(function(_)
 			-- upvalues: PromiseModule (upval), PurchaseErrorModule (upval)
 			return PromiseModule.reject(PurchaseErrorModule.UnknownFailureNoItemName)
 		end)

@@ -10,14 +10,14 @@ local config = {
 	[tostring(Enum.AssetType.DressSkirtAccessory.Value)] = "LCBottoms"
 }
 
-function getTryOnItemComparisonData(p1) --[[ Line: 17 ]]
+function getTryOnItemComparisonData(p1)
 	-- upvalues: config (copy), ItemTypeEnum (copy)
 	local AssetTypes = {}
 	local LayeredClothingCategories = {}
 	local IsClassicHeadOrFace = false
 	local IsDynamicHead = false
 	
-	local function _(Key) --[[ Line: 27 | Named "addAssetTypeAndLayeredClothingCategory" ]]
+	local function _(Key)
 		-- upvalues: AssetTypes (copy), config (upval), LayeredClothingCategories (copy)
 		AssetTypes[Key] = true
 		local Entry = config[Key]

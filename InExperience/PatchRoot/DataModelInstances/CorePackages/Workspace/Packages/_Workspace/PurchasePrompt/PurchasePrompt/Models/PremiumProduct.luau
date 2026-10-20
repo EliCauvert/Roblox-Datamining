@@ -14,7 +14,7 @@ local InterfaceResult = T.interface({
 	})
 })
 
-return function(p1) --[[ Line: 29 ]]
+return function(p1)
 	-- upvalues: InterfaceResult (copy)
 	local InterfaceResultResult, _ = InterfaceResult(p1)
 	

@@ -5,11 +5,11 @@ local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
 local BuildHomeSortDropDownOptionsModule = require(Home.HomeSortDetailPage.buildHomeSortDropDownOptions)
 local HomeConstantsModule = require(Home.HomeConstants)
 
-return function() --[[ Line: 10 | Named "useHomeSortDropDownOptions" ]]
+return function()
 	-- upvalues: SduiSharedUtilitiesModule (copy), HomeConstantsModule (copy), ReactModule (copy), BuildHomeSortDropDownOptionsModule (copy)
 	local UseInputDataResult = SduiSharedUtilitiesModule.useInputData(HomeConstantsModule.ConfigKey, HomeConstantsModule.ContentIdentifier)
 	
-	return ReactModule.useMemo(function() --[[ Line: 12 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: BuildHomeSortDropDownOptionsModule (upval), UseInputDataResult (copy)
 		return BuildHomeSortDropDownOptionsModule(UseInputDataResult)
 	end, { UseInputDataResult })

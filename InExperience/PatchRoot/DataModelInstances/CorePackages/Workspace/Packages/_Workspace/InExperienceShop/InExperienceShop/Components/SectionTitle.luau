@@ -7,7 +7,7 @@ local Icon = FoundationModule.Icon
 local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 
-return function(Frame) --[[ Line: 19 | Named "SectionTitle" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), View (copy), Text (copy), Icon (copy), IconName (copy), IconSize (copy)
 	return ReactModule.createElement(View, {
 		tag = "col size-full-0 auto-y",

@@ -27,18 +27,18 @@ local FFlagHomePageRefetchOnDataHydrationAccountReset = require(Parent.SharedFla
 local FFlagLuaAppSduiHomeSponsoredAdViewabilityModule = require(Home.Flags.FFlagLuaAppSduiHomeSponsoredAdViewability)
 local FFlagAppThemeHalloween2026HomeBackground = require(Parent.SharedFlags).FFlagAppThemeHalloween2026HomeBackground
 
-local function _(p1, p2) --[[ Line: 50 | Named "getFromPropsOrNavigationParams" ]]
+local function _(p1, p2)
 	return p1[p2] or p1.navigation and p1.navigation.getParam(p2)
 end
 
-local function getCommittedHomeSessionId(p1) --[[ Line: 55 ]]
+local function getCommittedHomeSessionId(p1)
 	-- upvalues: HomePageSessionModule (copy)
 	local v1 = HomePageSessionModule:GetCommittedSignal()(p1)
 	
 	return if v1 then v1.sessionId else nil
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 60 | Named "HomeContentEntryPoint" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: HomeConstantsModule (copy), FFlagLuaAppAddHomeExtraTopPadding (copy), UseEntrySurfacingFunction (copy), FFlagSduiDismissPromptPageScope (copy), UsePageScopeRefFunction (copy), ReactModule (copy), SduiSharedUtilitiesModule (copy), AppPage (copy), FFlagHomePageRefetchOnDataHydrationAccountReset (copy), FetchHomePageModule (copy), Home (copy), UseHomeCollectionLayoutSyncModule (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), ResponsiveModule (copy), VideoUtilsModule (copy), FFlagLuaAppSduiVideoThumbnail (copy), FFlagLuaAppSduiHomeSponsoredAdViewabilityModule (copy), SignalsReactModule (copy), getCommittedHomeSessionId (copy), UseSponsoredAdViewabilityDetectorFunction (copy), AppLifecycleObserverService (copy), SduiPageWrapperEntryPoint (copy), RefreshHomePageModule (copy), FFlagAppPageShellScrollToTopFocus (copy), FFlagLuaAppsDefaultSelection (copy), FFlagAppThemeHalloween2026HomeBackground (copy)
 	local ConfigKey = HomeConstantsModule.ConfigKey
 	local v1 = nil
@@ -51,12 +51,12 @@ return ReactModule.memo(function(p1) --[[ Line: 60 | Named "HomeContentEntryPoin
 		UsePageScopeRefFunction(ConfigKey)
 	end
 	local PageTimer = p1.pageTimer or p1.navigation and p1.navigation.getParam("pageTimer")
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 74 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: PageTimer (copy), SduiSharedUtilitiesModule (upval), AppPage (upval)
 		return PageTimer or SduiSharedUtilitiesModule.SduiLoadTimer.createLoadTimer(AppPage.Home)
 	end, { ConfigKey, PageTimer })
 	local UseDataHydrationAccountGenerationResult = if FFlagHomePageRefetchOnDataHydrationAccountReset then SduiSharedUtilitiesModule.useDataHydrationAccountGeneration() else nil
-	ReactModule.useEffect(function() --[[ Line: 84 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FetchHomePageModule (upval), UseMemoResult (copy)
 		FetchHomePageModule(UseMemoResult)
 	end, {
@@ -64,7 +64,7 @@ return ReactModule.memo(function(p1) --[[ Line: 60 | Named "HomeContentEntryPoin
 		UseMemoResult,
 		if FFlagHomePageRefetchOnDataHydrationAccountReset then UseDataHydrationAccountGenerationResult else nil
 	})
-	ReactModule.useEffect(function() --[[ Line: 94 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Home (upval)
 		return require(Home.getHomePageAutoRefreshStore)(false).start()
 	end, {})
@@ -76,7 +76,7 @@ return ReactModule.memo(function(p1) --[[ Line: 60 | Named "HomeContentEntryPoin
 		UseFeedVideoPlaybackContextResult = VideoUtilsModule.useFeedVideoPlaybackContext(nil, nil, nil, nil, (VideoUtilsModule.getPlaybackDetectionMethod(UsePreferredInputResult, UsePreferredInputResult == ResponsiveModule.Input.Pointer)))
 	elseif FFlagLuaAppSduiVideoThumbnail then
 		local IsUsePreferredInputResultMatch = ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Touch
-		UseFeedVideoPlaybackContextResult = ReactModule.useMemo(function() --[[ Line: 112 ]]
+		UseFeedVideoPlaybackContextResult = ReactModule.useMemo(function()
 			-- upvalues: VideoUtilsModule (upval), IsUsePreferredInputResultMatch (copy)
 			return VideoUtilsModule.FeedVideoPlaybackContext.new(IsUsePreferredInputResultMatch)
 		end, { IsUsePreferredInputResultMatch })

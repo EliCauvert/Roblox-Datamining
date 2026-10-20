@@ -7,7 +7,7 @@ local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local TextKeysModule = require(SocialExperienceJoin.Common.TextKeys)
 
-return function(p1) --[[ Line: 22 ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), InteractiveAlert (copy), ButtonType (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		titleText = TextKeysModule.PurchaseExperienceModalTitle,

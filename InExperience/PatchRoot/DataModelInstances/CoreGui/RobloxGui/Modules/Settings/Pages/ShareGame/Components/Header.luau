@@ -8,7 +8,7 @@ local SearchAreaModule = require(ShareGame.Components.SearchArea)
 local Translator = require(ShareGame.getTranslator)()
 local Header = RoactModule.PureComponent:extend("Header")
 
-function Header.render(p1) --[[ Line: 20 ]]
+function Header.render(p1)
 	-- upvalues: ConstantsModule (copy), BackButtonModule (copy), RoactModule (copy), Translator (copy), ThemeModule (copy), SearchAreaModule (copy)
 	local DeviceLayout = p1.props.deviceLayout
 	local ZIndex = p1.props.zIndex

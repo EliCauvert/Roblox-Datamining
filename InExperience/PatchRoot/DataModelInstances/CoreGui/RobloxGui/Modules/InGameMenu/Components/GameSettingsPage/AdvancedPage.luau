@@ -37,7 +37,7 @@ AdvancedPage.validateProps = T.strictInterface({
 	currentZone = GetFFlagIGMGamepadSelectionHistoryModule() and T.optional(T.number) or nil
 })
 
-function AdvancedPage.init(p1) --[[ Line: 63 ]]
+function AdvancedPage.init(p1)
 	-- upvalues: UserGameSettings (copy), Roact (copy)
 	p1:setState({
 		microProfilerEnabled = UserGameSettings.OnScreenProfilerEnabled,
@@ -48,16 +48,16 @@ function AdvancedPage.init(p1) --[[ Line: 63 ]]
 end
 
 if not GetFFlagIGMGamepadSelectionHistoryModule() then
-	function AdvancedPage.didUpdate(p1, p2) --[[ Line: 74 ]]
+	function AdvancedPage.didUpdate(p1, p2)
 		-- upvalues: GuiService (copy)
 		if p1.props.canCaptureFocus and not p2.canCaptureFocus then
 			GuiService.SelectedCoreObject = p1.performanceToggleRef:getValue()
 		end
 	end
 end
-function AdvancedPage.renderWithSelectionCursor(p1, Callback) --[[ Line: 81 ]]
+function AdvancedPage.renderWithSelectionCursor(p1, Callback)
 	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), Roact (copy), PageModule (copy), GetFFlagIGMGamepadSelectionHistoryModule (copy), FocusHandlerModule (copy), ConstantsModule (copy), GuiService (copy), CategoryHeaderModule (copy), ToggleEntryModule (copy), UserGameSettings (copy), SendAnalyticsModule (copy), WithLocalizationModule (copy), NormalizeFontFaceFunction (copy), CursorType (copy), DevConsoleMasterModule (copy), DividerModule (copy), VersionReporterModule (copy), ExternalEventConnectionModule (copy), OnScreenProfilerEnabledPropertyChangedSignal (copy)
-	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 82 ]]
+	return WithFoundationOrUIBloxStyleFunction(function(p2)
 		-- upvalues: FoundationFontFaceMigration (upval)
 		return {
 			Tokens = if FoundationFontFaceMigration then p2 else nil,
@@ -75,7 +75,7 @@ function AdvancedPage.renderWithSelectionCursor(p1, Callback) --[[ Line: 81 ]]
 				}
 			}
 		}
-	end, function(p2) --[[ Line: 99 ]]
+	end, function(p2)
 		-- upvalues: Roact (upval), PageModule (upval), p1 (copy), GetFFlagIGMGamepadSelectionHistoryModule (upval), FocusHandlerModule (upval), ConstantsModule (upval), GuiService (upval), CategoryHeaderModule (upval), ToggleEntryModule (upval), UserGameSettings (upval), SendAnalyticsModule (upval), WithLocalizationModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), Callback (copy), CursorType (upval), DevConsoleMasterModule (upval), DividerModule (upval), VersionReporterModule (upval), ExternalEventConnectionModule (upval), OnScreenProfilerEnabledPropertyChangedSignal (upval)
 		return Roact.createElement(PageModule, {
 			zIndex = 2,
@@ -87,7 +87,7 @@ function AdvancedPage.renderWithSelectionCursor(p1, Callback) --[[ Line: 81 ]]
 			FocusHandler = GetFFlagIGMGamepadSelectionHistoryModule() and Roact.createElement(FocusHandlerModule, {
 				isFocused = p1.props.canCaptureFocus,
 				shouldForgetPreviousSelection = p1.props.currentPage ~= ConstantsModule.advancedSettingsPageKey or p1.props.currentZone == 0,
-				didFocus = function(p3) --[[ Line: 112 ]]
+				didFocus = function(p3)
 					-- upvalues: GuiService (upval), p1 (upval)
 					GuiService.SelectedCoreObject = p3 or p1.performanceToggleRef:getValue()
 				end
@@ -105,7 +105,7 @@ function AdvancedPage.renderWithSelectionCursor(p1, Callback) --[[ Line: 81 ]]
 				LayoutOrder = 2,
 				labelKey = "CoreScripts.InGameMenu.GameSettings.ShowPerfStats",
 				checked = p1.state.performanceStatsEnabled,
-				onToggled = function() --[[ Line: 130 ]]
+				onToggled = function()
 					-- upvalues: UserGameSettings (upval), SendAnalyticsModule (upval), ConstantsModule (upval)
 					UserGameSettings.PerformanceStatsVisible = not UserGameSettings.PerformanceStatsVisible
 					SendAnalyticsModule(ConstantsModule.AnalyticsSettingsChangeName, nil, {}, true)
@@ -117,7 +117,7 @@ function AdvancedPage.renderWithSelectionCursor(p1, Callback) --[[ Line: 81 ]]
 				LayoutOrder = 3,
 				labelKey = "CoreScripts.InGameMenu.GameSettings.ShowMicroProfiler",
 				checked = p1.state.microProfilerEnabled,
-				onToggled = function() --[[ Line: 141 ]]
+				onToggled = function()
 					-- upvalues: UserGameSettings (upval), SendAnalyticsModule (upval), ConstantsModule (upval)
 					UserGameSettings.OnScreenProfilerEnabled = not UserGameSettings.OnScreenProfilerEnabled
 					SendAnalyticsModule(ConstantsModule.AnalyticsSettingsChangeName, nil, {}, true)
@@ -125,7 +125,7 @@ function AdvancedPage.renderWithSelectionCursor(p1, Callback) --[[ Line: 81 ]]
 			}),
 			DeveloperConsole = WithLocalizationModule({
 				text = "CoreScripts.InGameMenu.GameSettings.DeveloperConsole"
-			})(function(p3) --[[ Line: 148 ]]
+			})(function(p3)
 				-- upvalues: Roact (upval), p2 (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), Callback (upval), CursorType (upval), DevConsoleMasterModule (upval), p1 (upval)
 				return Roact.createElement("TextButton", {
 					BackgroundTransparency = 1,
@@ -138,7 +138,7 @@ function AdvancedPage.renderWithSelectionCursor(p1, Callback) --[[ Line: 81 ]]
 					TextXAlignment = Enum.TextXAlignment.Left,
 					LayoutOrder = 4,
 					SelectionImageObject = Callback(CursorType.Square),
-					[Roact.Event.Activated] = function() --[[ Line: 162 ]]
+					[Roact.Event.Activated] = function()
 						-- upvalues: DevConsoleMasterModule (upval), p1 (upval)
 						DevConsoleMasterModule:SetVisibility(true)
 						p1.props.closeMenu()
@@ -151,7 +151,7 @@ function AdvancedPage.renderWithSelectionCursor(p1, Callback) --[[ Line: 81 ]]
 			VersionReporter = Roact.createElement(VersionReporterModule, { LayoutOrder = 6 }),
 			MicroProfilerVisibilityListener = Roact.createElement(ExternalEventConnectionModule, {
 				event = OnScreenProfilerEnabledPropertyChangedSignal,
-				callback = function() --[[ Line: 182 ]]
+				callback = function()
 					-- upvalues: p1 (upval), UserGameSettings (upval)
 					p1:setState({
 						microProfilerEnabled = UserGameSettings.OnScreenProfilerEnabled
@@ -160,7 +160,7 @@ function AdvancedPage.renderWithSelectionCursor(p1, Callback) --[[ Line: 81 ]]
 			}),
 			PerformanceStatsVisibilityListener = Roact.createElement(ExternalEventConnectionModule, {
 				event = UserGameSettings.PerformanceStatsVisibleChanged,
-				callback = function() --[[ Line: 190 ]]
+				callback = function()
 					-- upvalues: p1 (upval), UserGameSettings (upval)
 					p1:setState({
 						performanceStatsEnabled = UserGameSettings.PerformanceStatsVisible
@@ -171,25 +171,25 @@ function AdvancedPage.renderWithSelectionCursor(p1, Callback) --[[ Line: 81 ]]
 	end)
 end
 
-function AdvancedPage.render(p1) --[[ Line: 200 ]]
+function AdvancedPage.render(p1)
 	-- upvalues: WithCursorMigration (copy)
-	return WithCursorMigration(function(p2) --[[ Line: 201 ]]
+	return WithCursorMigration(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithSelectionCursor(p2)
 	end)
 end
 
-return RoactRodux.UNSTABLE_connect2(function(p1) --[[ Line: 206 ]]
+return RoactRodux.UNSTABLE_connect2(function(p1)
 	-- upvalues: ConstantsModule (copy), GetFFlagIGMGamepadSelectionHistoryModule (copy)
 	return {
 		canCaptureFocus = p1.menuPage == "AdvancedGameSettings" and p1.displayOptions.inputType == ConstantsModule.InputType.Gamepad and (not p1.respawn.dialogOpen and p1.currentZone == 1),
 		currentPage = GetFFlagIGMGamepadSelectionHistoryModule() and p1.menuPage or nil,
 		currentZone = if GetFFlagIGMGamepadSelectionHistoryModule() then p1.currentZone else nil
 	}
-end, function(Callback) --[[ Line: 222 ]]
+end, function(Callback)
 	-- upvalues: CloseMenuModule (copy)
 	return {
-		closeMenu = function() --[[ Line: 224 ]]
+		closeMenu = function()
 			-- upvalues: Callback (copy), CloseMenuModule (upval)
 			Callback(CloseMenuModule)
 		end

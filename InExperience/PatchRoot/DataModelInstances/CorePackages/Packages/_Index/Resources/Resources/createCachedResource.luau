@@ -1,9 +1,9 @@
 ﻿local _ = require(script.Parent.types)
 
-local function _(p1) --[[ Line: 5 | Named "once" ]]
+local function _(p1)
 	local v1 = false
 	
-	return function() --[[ Line: 7 | Named "notAgain" ]]
+	return function()
 		-- upvalues: v1 (ref), p1 (copy)
 		if not v1 then
 			v1 = true
@@ -12,12 +12,12 @@ local function _(p1) --[[ Line: 5 | Named "once" ]]
 	end
 end
 
-return function(Callback) --[[ Line: 16 | Named "createCachedResource" ]]
+return function(Callback)
 	local v1 = nil
 	local v2 = nil
 	local Count = 0
 	
-	local function disposeResource() --[[ Line: 21 ]]
+	local function disposeResource()
 		-- upvalues: Count (ref), v1 (ref), v2 (ref)
 		Count -= 1
 		
@@ -32,12 +32,12 @@ return function(Callback) --[[ Line: 16 | Named "createCachedResource" ]]
 		end
 	end
 	
-	local function constructResource() --[[ Line: 33 ]]
+	local function constructResource()
 		-- upvalues: v2 (ref), v1 (ref), Callback (copy)
 		v2, v3 = Callback()
 	end
 	
-	local function handleError(Success, ...) --[[ Line: 37 ]]
+	local function handleError(Success, ...)
 		-- upvalues: Count (ref), v1 (ref), v2 (ref)
 		if not Success then
 			Count -= 1
@@ -55,7 +55,7 @@ return function(Callback) --[[ Line: 16 | Named "createCachedResource" ]]
 		end
 	end
 	
-	return function() --[[ Line: 44 | Named "cachedResource" ]]
+	return function()
 		-- upvalues: Count (ref), handleError (copy), constructResource (copy), disposeResource (copy), v1 (ref)
 		Count += 1
 		
@@ -64,7 +64,7 @@ return function(Callback) --[[ Line: 16 | Named "createCachedResource" ]]
 		end
 		local v3 = false
 		
-		return function() --[[ Line: 7 | Named "notAgain" ]]
+		return function()
 			-- upvalues: v3 (ref), disposeResource (copy)
 			if not v3 then
 				v3 = true

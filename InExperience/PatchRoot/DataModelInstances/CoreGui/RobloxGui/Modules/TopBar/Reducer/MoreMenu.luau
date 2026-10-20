@@ -14,23 +14,23 @@ else
 		emotesOpen = false,
 		emotesEnabled = true
 	}, {
-		[require(Actions.SetMoreMenuOpen).name] = function(p1, p2) --[[ Line: 30 ]]
+		[require(Actions.SetMoreMenuOpen).name] = function(p1, p2)
 			-- upvalues: CryoModule (copy)
 			return CryoModule.Dictionary.join(p1, { open = p2.open })
 		end,
-		[require(Actions.SetBackpackOpen).name] = function(p1, p2) --[[ Line: 36 ]]
+		[require(Actions.SetBackpackOpen).name] = function(p1, p2)
 			-- upvalues: CryoModule (copy)
 			return CryoModule.Dictionary.join(p1, { open = false, backpackOpen = p2.open })
 		end,
-		[require(Actions.SetEmotesOpen).name] = function(p1, p2) --[[ Line: 43 ]]
+		[require(Actions.SetEmotesOpen).name] = function(p1, p2)
 			-- upvalues: CryoModule (copy)
 			return CryoModule.Dictionary.join(p1, { open = false, emotesOpen = p2.open })
 		end,
-		[require(Actions.SetEmotesEnabled).name] = function(p1, p2) --[[ Line: 50 ]]
+		[require(Actions.SetEmotesEnabled).name] = function(p1, p2)
 			-- upvalues: CryoModule (copy)
 			return CryoModule.Dictionary.join(p1, { emotesEnabled = p2.enabled })
 		end,
-		[require(Actions.SetLeaderboardOpen).name] = function(p1, p2) --[[ Line: 56 ]]
+		[require(Actions.SetLeaderboardOpen).name] = function(p1, p2)
 			-- upvalues: CryoModule (copy)
 			return CryoModule.Dictionary.join(p1, { open = false, leaderboardOpen = p2.open })
 		end

@@ -10,11 +10,11 @@ local IsItemPurchasableFunction = InspectAvatarUtilsModule.isItemPurchasable
 local GetPriceStatusFunction = InspectAvatarUtilsModule.getPriceStatus
 local PriceStatusEnum = InspectAvatarUtilsModule.PriceStatusEnum
 
-return function(p1) --[[ Line: 40 | Named "useRecentActivityPurchaseSelection" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), IsItemPurchasableFunction (copy), DashModule (copy), FFlagProfileUnifiedPurchaseLoggingModule (copy), InspectAvatarUtilsModule (copy), GetPriceStatusFunction (copy), PriceStatusEnum (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState({})
 	local UseRefResult = ReactModule.useRef({})
-	ReactModule.useEffect(function() --[[ Line: 46 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), IsItemPurchasableFunction (upval), UseRefResult (copy), UseStateResult2 (copy), DashModule (upval)
 		if #p1 == 0 then return end
 		local t = {}
@@ -30,7 +30,7 @@ return function(p1) --[[ Line: 40 | Named "useRecentActivityPurchaseSelection" ]
 			end
 		end
 		if Flag then
-			UseStateResult2(function(p2) --[[ Line: 63 ]]
+			UseStateResult2(function(p2)
 				-- upvalues: DashModule (upval), t (copy)
 				return DashModule.join(p2, t)
 			end)
@@ -41,14 +41,14 @@ return function(p1) --[[ Line: 40 | Named "useRecentActivityPurchaseSelection" ]
 	
 	return {
 		selectedItems = UseStateResult,
-		onToggleItem = ReactModule.useCallback(function(p2) --[[ Line: 68 ]]
+		onToggleItem = ReactModule.useCallback(function(p2)
 			-- upvalues: UseStateResult2 (copy), DashModule (upval)
-			UseStateResult2(function(p3) --[[ Line: 69 ]]
+			UseStateResult2(function(p3)
 				-- upvalues: DashModule (upval), p2 (copy)
 				return DashModule.join(p3, { [p2] = not p3[p2] })
 			end)
 		end, {}),
-		purchaseData = ReactModule.useMemo(function() --[[ Line: 74 ]]
+		purchaseData = ReactModule.useMemo(function()
 			-- upvalues: FFlagProfileUnifiedPurchaseLoggingModule (upval), p1 (copy), UseStateResult (copy), IsItemPurchasableFunction (upval), InspectAvatarUtilsModule (upval), GetPriceStatusFunction (upval), PriceStatusEnum (upval)
 			local LineItems = {}
 			local T = if FFlagProfileUnifiedPurchaseLoggingModule then {} else nil

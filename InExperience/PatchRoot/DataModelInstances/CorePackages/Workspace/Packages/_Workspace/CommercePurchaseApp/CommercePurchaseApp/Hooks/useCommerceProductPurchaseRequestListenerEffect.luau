@@ -10,23 +10,23 @@ local SelectPromptStateModule = require(CommercePurchaseApp.Store.Selectors.sele
 local InitiateCommercePurchaseFlowModule = require(CommercePurchaseApp.Store.Thunks.InitiateCommercePurchaseFlow)
 local FFlagAddCommerceErrorsModule = require(CommercePurchaseApp.Flags.FFlagAddCommerceErrors)
 
-return function() --[[ Line: 15 | Named "useCommercePurchaseRequestListenerEffect" ]]
+return function()
 	-- upvalues: UseDispatchFunction (copy), UseSelectorFunction (copy), SelectPromptStateModule (copy), UseLocalizationFunction (copy), FFlagAddCommerceErrorsModule (copy), ReactModule (copy), CommerceService (copy), CommercePurchasePromptStateEnumModule (copy), InitiateCommercePurchaseFlowModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseSelectorResult = UseSelectorFunction(SelectPromptStateModule)
 	local UseLocalizationResult = UseLocalizationFunction({
 		genericError = if FFlagAddCommerceErrorsModule then "CoreScripts.CommercePurchasePrompt.ErrorPrompt.Body.ErrorLoading" else "CoreScripts.CommercePurchasePrompt.ErrorPrompt.GenericError"
 	})
-	ReactModule.useEffect(function() --[[ Line: 24 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseDispatchResult (copy), CommerceService (upval), UseSelectorResult (copy), CommercePurchasePromptStateEnumModule (upval), InitiateCommercePurchaseFlowModule (upval), UseLocalizationResult (copy)
-		local PromptCommerceProductPurchaseRequestedConnection = if UseDispatchResult then CommerceService.PromptCommerceProductPurchaseRequested:Connect(function(CommerceProductId) --[[ Line: 28 ]]
+		local PromptCommerceProductPurchaseRequestedConnection = if UseDispatchResult then CommerceService.PromptCommerceProductPurchaseRequested:Connect(function(CommerceProductId)
 			-- upvalues: UseSelectorResult (upval), CommercePurchasePromptStateEnumModule (upval), UseDispatchResult (upval), InitiateCommercePurchaseFlowModule (upval), UseLocalizationResult (upval)
 			if UseSelectorResult == CommercePurchasePromptStateEnumModule.None then
 				UseDispatchResult(InitiateCommercePurchaseFlowModule(CommerceProductId, UseLocalizationResult.genericError))
 			end
 		end) else nil
 		
-		return function() --[[ Line: 35 ]]
+		return function()
 			-- upvalues: PromptCommerceProductPurchaseRequestedConnection (ref)
 			if PromptCommerceProductPurchaseRequestedConnection then
 				PromptCommerceProductPurchaseRequestedConnection:Disconnect()

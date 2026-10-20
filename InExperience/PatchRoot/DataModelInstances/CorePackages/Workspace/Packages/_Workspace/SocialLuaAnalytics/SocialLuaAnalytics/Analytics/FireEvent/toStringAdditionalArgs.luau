@@ -2,7 +2,7 @@
 local Tutils = DependenciesModule.tutils
 local Llama = DependenciesModule.llama
 
-return function(p1) --[[ Line: 6 ]]
+return function(p1)
 	-- upvalues: Llama (copy), Tutils (copy)
 	if Llama.isEmpty(p1) then
 		return "{}"

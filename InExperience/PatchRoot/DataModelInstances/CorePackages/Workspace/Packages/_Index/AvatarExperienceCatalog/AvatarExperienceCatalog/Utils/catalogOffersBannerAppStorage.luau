@@ -11,7 +11,7 @@ local GetMarketplaceOffersBannerOfferDisplayTitleFunction = MarketplaceOffersBan
 local AXCatalogOffersDismissed: string = if require(Parent.AvatarExperienceFlags).FFlagAXCatalogOffersDismissedStorageKeyFix then "AXCatalogOffersDismissed" else "AXCatalogOffersBannerDismissed"
 local AXCatalogOffersBannerAppStorageUseMemStorage = game:DefineFastFlag("AXCatalogOffersBannerAppStorageUseMemStorage", false)
 
-local function coerceDecodedToOfferIdMapStorage(List) --[[ Line: 61 ]]
+local function coerceDecodedToOfferIdMapStorage(List)
 	if typeof(List) ~= "table" then
 		return nil
 	end
@@ -34,12 +34,12 @@ local function coerceDecodedToOfferIdMapStorage(List) --[[ Line: 61 ]]
 	return if Flag then t else nil
 end
 
-local function readStorageRecord(AXCatalogOffersDismissed, Callback) --[[ Line: 85 ]]
+local function readStorageRecord(AXCatalogOffersDismissed, Callback)
 	-- upvalues: SafeAppStorageService (copy), AXCatalogOffersBannerAppStorageUseMemStorage (copy), HttpService (copy)
 	local Item = SafeAppStorageService.getItem(AXCatalogOffersDismissed, AXCatalogOffersBannerAppStorageUseMemStorage)
 	
 	if Item and Item ~= "" then
-		local Success, Result = pcall(function() --[[ Line: 90 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: HttpService (upval), Item (copy)
 			return HttpService:JSONDecode(Item)
 		end)
@@ -50,7 +50,7 @@ local function readStorageRecord(AXCatalogOffersDismissed, Callback) --[[ Line: 
 	end
 end
 
-local function resolveVisibleOffer(p1) --[[ Line: 118 ]]
+local function resolveVisibleOffer(p1)
 	-- upvalues: GetLocalUserIdModule (copy), Players (copy), readStorageRecord (copy), AXCatalogOffersDismissed (copy), coerceDecodedToOfferIdMapStorage (copy), GetMarketplaceOffersBannerOfferDisplayTitleFunction (copy), GetMarketplaceOffersBannerOfferDisplayIdFunction (copy)
 	local LocalUserIdModule = GetLocalUserIdModule(Players)
 	local t = {}
@@ -79,31 +79,31 @@ end
 return {
 	SHEET_FTUX_STORAGE_KEY = "AXCatalogOffersSheetFTUX",
 	STORAGE_KEY = AXCatalogOffersDismissed,
-	readDismissStorage = function() --[[ Line: 99 ]]
+	readDismissStorage = function()
 		-- upvalues: readStorageRecord (copy), AXCatalogOffersDismissed (copy), coerceDecodedToOfferIdMapStorage (copy)
 		return readStorageRecord(AXCatalogOffersDismissed, coerceDecodedToOfferIdMapStorage)
 	end,
-	readSheetFtuxStorage = function() --[[ Line: 103 ]]
+	readSheetFtuxStorage = function()
 		-- upvalues: readStorageRecord (copy), coerceDecodedToOfferIdMapStorage (copy)
 		return readStorageRecord("AXCatalogOffersSheetFTUX", coerceDecodedToOfferIdMapStorage)
 	end,
-	dismissRecordMatchesPayload = function(p2, p3): boolean --[[ Line: 107 ]]
+	dismissRecordMatchesPayload = function(p2, p3): boolean
 		local OfferId = p3.offerId or ""
 		
 		return p2[p3.userId] ~= nil and p2[p3.userId][OfferId] == true
 	end,
-	dismissedOfferIdsContains = function(p2, p3): boolean --[[ Line: 57 ]]
+	dismissedOfferIdsContains = function(p2, p3): boolean
 		return p2[p3] == true
 	end,
-	normalizeOfferIdForStorage = function(p2) --[[ Line: 53 ]]
+	normalizeOfferIdForStorage = function(p2)
 		return p2 or ""
 	end,
 	resolveVisibleOffer = resolveVisibleOffer,
-	shouldHydrateDismissed = function(p2): boolean --[[ Line: 142 ]]
+	shouldHydrateDismissed = function(p2): boolean
 		-- upvalues: GetLocalUserIdModule (copy), Players (copy), resolveVisibleOffer (copy)
 		return GetLocalUserIdModule(Players) ~= nil and resolveVisibleOffer(p2) == nil
 	end,
-	shouldAutoOpenOfferSheetForCurrentOffer = function(p2): boolean --[[ Line: 169 ]]
+	shouldAutoOpenOfferSheetForCurrentOffer = function(p2): boolean
 		-- upvalues: GetLocalUserIdModule (copy), Players (copy), readStorageRecord (copy), coerceDecodedToOfferIdMapStorage (copy)
 		local LocalUserIdModule = GetLocalUserIdModule(Players)
 		
@@ -115,7 +115,7 @@ return {
 			return AXCatalogOffersSheetFTUX == nil or AXCatalogOffersSheetFTUX[LocalUserIdModule] == nil or not (AXCatalogOffersSheetFTUX[LocalUserIdModule][p2 or ""] == true)
 		end
 	end,
-	writeDismissedForCurrentOffer = function(p2) --[[ Line: 149 ]]
+	writeDismissedForCurrentOffer = function(p2)
 		-- upvalues: GetLocalUserIdModule (copy), Players (copy), readStorageRecord (copy), AXCatalogOffersDismissed (copy), coerceDecodedToOfferIdMapStorage (copy), HttpService (copy), SafeAppStorageService (copy), AXCatalogOffersBannerAppStorageUseMemStorage (copy)
 		local LocalUserIdModule = GetLocalUserIdModule(Players)
 		
@@ -129,13 +129,13 @@ return {
 			StorageRecord[LocalUserIdModule] = StorageRecordEntry
 		end
 		StorageRecordEntry[P9] = true
-		pcall(function() --[[ Line: 162 ]]
+		pcall(function()
 			-- upvalues: HttpService (upval), StorageRecord (copy), SafeAppStorageService (upval), AXCatalogOffersDismissed (upval), AXCatalogOffersBannerAppStorageUseMemStorage (upval)
 			SafeAppStorageService.setItem(AXCatalogOffersDismissed, HttpService:JSONEncode(StorageRecord), AXCatalogOffersBannerAppStorageUseMemStorage)
 			SafeAppStorageService.flush()
 		end)
 	end,
-	writeSeenOfferSheetForCurrentOffer = function(p2) --[[ Line: 181 ]]
+	writeSeenOfferSheetForCurrentOffer = function(p2)
 		-- upvalues: GetLocalUserIdModule (copy), Players (copy), readStorageRecord (copy), coerceDecodedToOfferIdMapStorage (copy), HttpService (copy), SafeAppStorageService (copy), AXCatalogOffersBannerAppStorageUseMemStorage (copy)
 		local LocalUserIdModule = GetLocalUserIdModule(Players)
 		
@@ -149,7 +149,7 @@ return {
 			AXCatalogOffersSheetFTUX[LocalUserIdModule] = AXCatalogOffersSheetFTUXEntry
 		end
 		AXCatalogOffersSheetFTUXEntry[P11] = true
-		pcall(function() --[[ Line: 194 ]]
+		pcall(function()
 			-- upvalues: HttpService (upval), AXCatalogOffersSheetFTUX (copy), SafeAppStorageService (upval), AXCatalogOffersBannerAppStorageUseMemStorage (upval)
 			SafeAppStorageService.setItem("AXCatalogOffersSheetFTUX", HttpService:JSONEncode(AXCatalogOffersSheetFTUX), AXCatalogOffersBannerAppStorageUseMemStorage)
 			SafeAppStorageService.flush()

@@ -10,25 +10,25 @@ local OtterModule = require(Parent.Otter)
 local config = { restingPositionLimit = 1, restingVelocityLimit = 10 }
 local ScrollViewNativeComponent = ReactModule.Component:extend("ScrollViewNativeComponent")
 
-function ScrollViewNativeComponent.init(p1, Props) --[[ Line: 62 ]]
+function ScrollViewNativeComponent.init(p1, Props)
 	-- upvalues: ReactModule (copy), config (copy), OtterModule (copy)
 	p1.props = Props
 	p1._nativeRef = ReactModule.createRef()
 	p1.lastScrollEventTime = 0
 	p1.animationConfig = if p1.props.animationConfig then p1.props.animationConfig else config
 	p1.motor = OtterModule.createGroupMotor({ x = 0, y = 0 })
-	p1.motorStepDisconnect = p1.motor:onStep(function(Vector) --[[ Line: 74 ]]
+	p1.motorStepDisconnect = p1.motor:onStep(function(Vector)
 		-- upvalues: p1 (copy)
 		p1._nativeRef.current.CanvasPosition = Vector2.new(Vector.x, Vector.y)
 	end)
 	
-	function p1._nativeRef.animateScrollTo(p2, p3) --[[ Line: 78 ]]
+	function p1._nativeRef.animateScrollTo(p2, p3)
 		-- upvalues: p1 (copy)
 		p1:_startAnimatedScroll(p2, p3)
 	end
 end
 
-function ScrollViewNativeComponent._validateAnimatedScrollInputs(p1, p2: number, p3: number) --[[ Line: 83 ]]
+function ScrollViewNativeComponent._validateAnimatedScrollInputs(p1, p2: number, p3: number)
 	-- upvalues: Console (copy)
 	if not p1._nativeRef.current then
 		Console.error("scrollTo animation failed: ScrollViewNativeComponent._nativeRef instance is undefined")
@@ -55,7 +55,7 @@ function ScrollViewNativeComponent._validateAnimatedScrollInputs(p1, p2: number,
 	end
 end
 
-function ScrollViewNativeComponent._startAnimatedScroll(p1, p2, p3) --[[ Line: 113 ]]
+function ScrollViewNativeComponent._startAnimatedScroll(p1, p2, p3)
 	-- upvalues: OtterModule (copy)
 	if _G.__DEV__ then
 		p1:_validateAnimatedScrollInputs(p2, p3)
@@ -72,7 +72,7 @@ function ScrollViewNativeComponent._startAnimatedScroll(p1, p2, p3) --[[ Line: 1
 	})
 end
 
-function ScrollViewNativeComponent.render(p1) --[[ Line: 136 ]]
+function ScrollViewNativeComponent.render(p1)
 	-- upvalues: Array (copy), Object (copy), Change (copy), Event (copy), ReactModule (copy)
 	return ReactModule.createElement("ScrollingFrame", Object.assign({
 		Name = "RCTScrollView",
@@ -84,7 +84,7 @@ function ScrollViewNativeComponent.render(p1) --[[ Line: 136 ]]
 		ScrollBarThickness = if p1.props.horizontal and p1.props.showsHorizontalScrollIndicator == false then 0 elseif p1.props.horizontal or p1.props.showsVerticalScrollIndicator ~= false then nil else 0,
 		ref = p1._nativeRef,
 		[Change.AbsoluteWindowSize] = p1.props.onLayout,
-		[Change.CanvasPosition] = function(p2) --[[ Line: 157 ]]
+		[Change.CanvasPosition] = function(p2)
 			-- upvalues: p1 (copy)
 			local ScaledClockTime = os.clock() * 1000
 			
@@ -93,7 +93,7 @@ function ScrollViewNativeComponent.render(p1) --[[ Line: 136 ]]
 				p1.lastScrollEventTime = ScaledClockTime
 			end
 		end,
-		[Event.InputBegan] = function(p2, Input) --[[ Line: 165 ]]
+		[Event.InputBegan] = function(p2, Input)
 			-- upvalues: p1 (copy)
 			if (Input.UserInputType == Enum.UserInputType.MouseWheel or Input.UserInputType == Enum.UserInputType.Touch) and p1.motor ~= nil then
 				p1.motor:stop()
@@ -102,23 +102,23 @@ function ScrollViewNativeComponent.render(p1) --[[ Line: 136 ]]
 				p1.props.onTouchStart(p2, Input)
 			end
 		end,
-		[Event.InputEnded] = function(p2, Input) --[[ Line: 179 ]]
+		[Event.InputEnded] = function(p2, Input)
 			-- upvalues: p1 (copy)
 			if Input.UserInputType == Enum.UserInputType.Touch then
 				p1.props.onTouchEnd(p2, Input)
 			end
 		end,
-		[Event.InputChanged] = function(p2, Input) --[[ Line: 184 ]]
+		[Event.InputChanged] = function(p2, Input)
 			-- upvalues: p1 (copy)
 			if Input.UserInputType == Enum.UserInputType.Touch then
 				p1.props.onTouchMove(p2, Input)
 			end
 		end,
-		[Event.SelectionChanged] = if p1.props.onSelectionChanged then function(p2, p3, p4, p5) --[[ Line: 190 ]]
+		[Event.SelectionChanged] = if p1.props.onSelectionChanged then function(p2, p3, p4, p5)
 			-- upvalues: p1 (copy)
 			p1.props.onSelectionChanged(p2, p3, p4, p5)
 		end else nil
-	}, if Array.isArray(p1.props.style) then Array.reduce(p1.props.style, function(p2, p3) --[[ Line: 138 ]]
+	}, if Array.isArray(p1.props.style) then Array.reduce(p1.props.style, function(p2, p3)
 		-- upvalues: Object (upval)
 		return Object.assign(p2, p3)
 	end, {}) else p1.props.style), {
@@ -130,7 +130,7 @@ function ScrollViewNativeComponent.render(p1) --[[ Line: 136 ]]
 	})
 end
 
-function ScrollViewNativeComponent.willUnmount(p1) --[[ Line: 212 ]]
+function ScrollViewNativeComponent.willUnmount(p1)
 	if p1.motor ~= nil then
 		p1.motor:destroy()
 	end

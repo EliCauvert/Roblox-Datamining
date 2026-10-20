@@ -17,7 +17,7 @@ local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
 local IconsActionsCycleLeft = Images["icons/actions/cycleLeft"]
 local IconsActionsCycleRight = Images["icons/actions/cycleRight"]
 
-return function(p1) --[[ Line: 39 ]]
+return function(p1)
 	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseStyleFunction (copy), ReactModule (copy), ConstantsModule (copy), IconsActionsCycleLeft (copy), IconsActionsCycleRight (copy), InputUtilities (copy), EventNamesModule (copy), CarouselNavigatedModule (copy), RunService (copy), UseEventConnectionFunction (copy), UserInputService (copy), ImageSetLabel (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
@@ -27,9 +27,9 @@ return function(p1) --[[ Line: 39 ]]
 	local _Vector2: Vector2 = if IsDirectionMatch then Vector2.new(0, 0.5) else Vector2.new(1, 0.5)
 	local IconsActionsCycleLeft1 = if IsDirectionMatch then IconsActionsCycleLeft else IconsActionsCycleRight
 	local _UDim2: UDim2 = if IsDirectionMatch then UDim2.fromScale(0, 0.5) else UDim2.fromScale(1, 0.5)
-	ReactModule.useEffect(function() --[[ Line: 52 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy)
-		return function() --[[ Line: 53 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			if UseRefResult.current then
 				UseRefResult.current:Disconnect()
@@ -37,14 +37,14 @@ return function(p1) --[[ Line: 39 ]]
 			end
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 61 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseRefResult (copy)
 		if p1.isDisabled and UseRefResult.current then
 			UseRefResult.current:Disconnect()
 			UseRefResult.current = nil
 		end
 	end, { p1.isDisabled })
-	local UseResult = ReactModule.useCallback(function(_, Input) --[[ Line: 68 ]]
+	local UseResult = ReactModule.useCallback(function(_, Input)
 		-- upvalues: p1 (copy), InputUtilities (upval), UseRefResult (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval), UseDispatchResult (copy), CarouselNavigatedModule (upval), RunService (upval)
 		if p1.isDisabled then return end
 		if Input.UserInputState ~= Enum.UserInputState.Begin then return end
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 39 ]]
 		UseDispatchResult(CarouselNavigatedModule(p1.direction))
 		local CurrentTime = tick()
 		local CurrentTime1: number = CurrentTime
-		UseRefResult.current = RunService.RenderStepped:Connect(function(_) --[[ Line: 94 ]]
+		UseRefResult.current = RunService.RenderStepped:Connect(function(_)
 			-- upvalues: CurrentTime1 (copy), CurrentTime (ref), UseAnalyticsModuleResult (upval), EventNamesModule (upval), p1 (upval), UseDispatchResult (upval), CarouselNavigatedModule (upval)
 			if math.max(0.5 / (tick() - CurrentTime1), 0.15) < tick() - CurrentTime then
 				UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesCarouselNavigated, { direction = p1.direction })
@@ -66,14 +66,14 @@ return function(p1) --[[ Line: 39 ]]
 			end
 		end)
 	end, { p1.isDisabled })
-	local UseResult1 = ReactModule.useCallback(function(_, p2) --[[ Line: 108 ]]
+	local UseResult1 = ReactModule.useCallback(function(_, p2)
 		-- upvalues: InputUtilities (upval), UseRefResult (copy)
 		if InputUtilities.isActivationInput(p2) and UseRefResult.current then
 			UseRefResult.current:Disconnect()
 			UseRefResult.current = nil
 		end
 	end, {})
-	UseEventConnectionFunction(UserInputService.InputEnded, function(p2) --[[ Line: 117 ]]
+	UseEventConnectionFunction(UserInputService.InputEnded, function(p2)
 		-- upvalues: InputUtilities (upval), UseRefResult (copy)
 		if InputUtilities.isActivationInput(p2) and UseRefResult.current then
 			UseRefResult.current:Disconnect()

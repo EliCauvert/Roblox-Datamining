@@ -20,12 +20,12 @@ local config = {
 	[ConstantsModule.BACKGROUND_ASSET_IDS[8]] = Color3.fromRGB(238, 244, 255)
 }
 
-local function _(BACKGROUNDASSETID1, p1) --[[ Line: 38 | Named "getButtonColor" ]]
+local function _(BACKGROUNDASSETID1, p1)
 	-- upvalues: BACKGROUNDASSETID (copy), _Color3_3 (copy), _Color3_4 (copy), config (copy)
 	return if BACKGROUNDASSETID1 == BACKGROUNDASSETID then if p1 == "dark" then _Color3_3 else _Color3_4 else config[BACKGROUNDASSETID1]
 end
 
-return function(Frame) --[[ Line: 53 | Named "ProfileBackgroundButton" ]]
+return function(Frame)
 	-- upvalues: UseSelectedThemeFunction (copy), ReactModule (copy), BACKGROUNDASSETID (copy), _Color3_3 (copy), _Color3_4 (copy), config (copy), _Color3 (copy), _Color3_1 (copy), _Color3_2 (copy), Image (copy)
 	local ButtonSize: number = Frame.buttonSize
 	local UseSelectedThemeResult = UseSelectedThemeFunction()
@@ -39,7 +39,7 @@ return function(Frame) --[[ Line: 53 | Named "ProfileBackgroundButton" ]]
 		BorderSizePixel = if Frame.selected then 3 else 0,
 		BorderColor3 = if Frame.selected then _Color3 else _Color3_1,
 		LayoutOrder = Frame.LayoutOrder,
-		[ReactModule.Event.Activated] = ReactModule.useCallback(function() --[[ Line: 57 ]]
+		[ReactModule.Event.Activated] = ReactModule.useCallback(function()
 			-- upvalues: Frame (copy)
 			if Frame.selected then return end
 			if Frame.onActivated then

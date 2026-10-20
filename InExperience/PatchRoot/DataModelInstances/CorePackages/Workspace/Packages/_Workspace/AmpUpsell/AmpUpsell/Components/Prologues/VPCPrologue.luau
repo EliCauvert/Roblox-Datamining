@@ -11,7 +11,7 @@ local VpcPrologueStrings = require(AmpUpsell.Common.LocalizationStrings).vpcProl
 local _ = require(AmpUpsell.Common.Types)
 local GetFFlagEnableReusableVPCPrologueModule = require(AmpUpsell.Flags.GetFFlagEnableReusableVPCPrologue)
 
-local function _(p1) --[[ Line: 27 | Named "getBodyLocalizationKey" ]]
+local function _(p1)
 	-- upvalues: VpcPrologueStrings (copy)
 	if p1 then
 		if p1.enablePurchases == true then
@@ -25,7 +25,7 @@ local function _(p1) --[[ Line: 27 | Named "getBodyLocalizationKey" ]]
 	return VpcPrologueStrings.bodyGeneric
 end
 
-local function ConfigurableVPCPrologue(p1) --[[ Line: 40 ]]
+local function ConfigurableVPCPrologue(p1)
 	-- upvalues: UseLocalizationFunction (copy), VpcPrologueStrings (copy), ButtonVariant (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), Orientation (copy)
 	local Config = p1.config or {}
 	local RecourseData = p1.recourseData
@@ -73,7 +73,7 @@ local function ConfigurableVPCPrologue(p1) --[[ Line: 40 ]]
 	})
 end
 
-local function LegacyVPCPrologue(p1) --[[ Line: 94 ]]
+local function LegacyVPCPrologue(p1)
 	-- upvalues: VpcPrologueStrings (copy), UseLocalizationFunction (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), ButtonVariant (copy)
 	local RecourseData = p1.recourseData
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -106,7 +106,7 @@ local function LegacyVPCPrologue(p1) --[[ Line: 94 ]]
 	})
 end
 
-return function(p1) --[[ Line: 131 | Named "VPCPrologue" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), GetFFlagEnableReusableVPCPrologueModule (copy), ConfigurableVPCPrologue (copy), LegacyVPCPrologue (copy)
 	return ReactModule.createElement(if GetFFlagEnableReusableVPCPrologueModule() then ConfigurableVPCPrologue else LegacyVPCPrologue, p1)
 end

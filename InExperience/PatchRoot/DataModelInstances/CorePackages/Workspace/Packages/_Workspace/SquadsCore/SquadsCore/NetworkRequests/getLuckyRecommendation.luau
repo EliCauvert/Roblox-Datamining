@@ -8,7 +8,7 @@ local _ = require(SquadsCore.Types)
 local UrlBuilder = UrlBuilderModule.UrlBuilder
 local UrlBase = UrlBuilderModule.UrlBase
 
-return function(PickRequestId, Callback1, Callback) --[[ Line: 20 ]]
+return function(PickRequestId, Callback1, Callback)
 	-- upvalues: UrlBuilder (copy), UrlBase (copy), HttpService (copy), LoggerModule (copy), SerializeTableModule (copy), SquadLuckyRecommendationErrorModule (copy)
 	local RequestInternalResult = HttpService:RequestInternal({
 		Method = "GET",
@@ -23,7 +23,7 @@ return function(PickRequestId, Callback1, Callback) --[[ Line: 20 ]]
 		})()
 	})
 	local Flag = false
-	RequestInternalResult:Start(function(_, p1) --[[ Line: 44 ]]
+	RequestInternalResult:Start(function(_, p1)
 		-- upvalues: Flag (ref), HttpService (upval), LoggerModule (upval), SerializeTableModule (upval), Callback (copy), SquadLuckyRecommendationErrorModule (upval), Callback1 (copy)
 		if Flag then return end
 		if p1 == nil or p1.StatusCode ~= 200 then
@@ -56,7 +56,7 @@ return function(PickRequestId, Callback1, Callback) --[[ Line: 20 ]]
 		end
 	end)
 	
-	return function() --[[ Line: 84 ]]
+	return function()
 		-- upvalues: Flag (ref), RequestInternalResult (copy)
 		Flag = true
 		RequestInternalResult:Cancel()

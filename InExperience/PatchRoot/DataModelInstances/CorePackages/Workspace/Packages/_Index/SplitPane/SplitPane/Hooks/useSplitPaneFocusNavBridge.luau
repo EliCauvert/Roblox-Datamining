@@ -7,7 +7,7 @@ local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local UseRegistryEntryFunction = FocusNavigationUtilsModule.FocusNavigableSurfaceRegistry.useRegistryEntry
 
-local function getSelectionGroupRowContainer(Frame) --[[ Line: 44 ]]
+local function getSelectionGroupRowContainer(Frame)
 	local Parent = Frame.Parent
 	while Parent ~= nil do
 		if Parent:IsA("ScrollingFrame") then
@@ -21,7 +21,7 @@ local function getSelectionGroupRowContainer(Frame) --[[ Line: 44 ]]
 	return nil
 end
 
-local function getRowBandContainer(Frame: Frame, Current) --[[ Line: 63 ]]
+local function getRowBandContainer(Frame: Frame, Current)
 	local Y = Frame.AbsolutePosition.Y
 	local NewY = Y + Frame.AbsoluteSize.Y
 	local Y1 = Frame.AbsoluteSize.Y
@@ -39,12 +39,12 @@ local function getRowBandContainer(Frame: Frame, Current) --[[ Line: 63 ]]
 	return v1
 end
 
-local function _(Frame, Ancestor, p1) --[[ Line: 84 | Named "getFocusRowContainer" ]]
+local function _(Frame, Ancestor, p1)
 	-- upvalues: getSelectionGroupRowContainer (copy), getRowBandContainer (copy)
 	return if Ancestor == nil or not Frame:IsDescendantOf(Ancestor) then if Frame:FindFirstAncestorWhichIsA("ScrollingFrame") == nil then getRowBandContainer(Frame, p1) else getSelectionGroupRowContainer(Frame) else Ancestor
 end
 
-local function hasSelectableToTheRight(Frame: Frame, Object): boolean --[[ Line: 97 ]]
+local function hasSelectableToTheRight(Frame: Frame, Object): boolean
 	local X: number = Frame.AbsolutePosition.X
 	local Y = Frame.AbsolutePosition.Y
 	local NewY = Y + Frame.AbsoluteSize.Y
@@ -62,15 +62,15 @@ local function hasSelectableToTheRight(Frame: Frame, Object): boolean --[[ Line:
 	return false
 end
 
-return function(p1) --[[ Line: 125 | Named "useSplitPaneFocusNavBridge" ]]
+return function(p1)
 	-- upvalues: SplitPaneStoreModule (copy), SignalsReactModule (copy), UseRegistryEntryFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), ReactModule (copy), GuiService (copy), getSelectionGroupRowContainer (copy), getRowBandContainer (copy), hasSelectableToTheRight (copy)
 	local Store = SplitPaneStoreModule.getStore()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(Store.getSupportPaneEntryTarget)
 	local UseRegistryEntryResult = UseRegistryEntryFunction(FocusNavigableSurfaceIdentifierEnum.HeaderView)
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 134 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), Store (copy), p1 (copy), GuiService (upval), UseSignalStateResult (copy), UseRegistryEntryResult (copy), getSelectionGroupRowContainer (upval), getRowBandContainer (upval), hasSelectableToTheRight (upval)
-		local function _() --[[ Line: 135 | Named "clearOverride" ]]
+		local function _()
 			-- upvalues: UseRefResult (upval)
 			local Current = UseRefResult.current
 			
@@ -82,7 +82,7 @@ return function(p1) --[[ Line: 125 | Named "useSplitPaneFocusNavBridge" ]]
 			end
 		end
 		
-		local function onSelectedCoreObjectChanged() --[[ Line: 146 ]]
+		local function onSelectedCoreObjectChanged()
 			-- upvalues: Store (upval), p1 (upval), GuiService (upval), UseSignalStateResult (upval), UseRefResult (upval), UseRegistryEntryResult (upval), getSelectionGroupRowContainer (upval), getRowBandContainer (upval), hasSelectableToTheRight (upval)
 			local Current = p1.current
 			local SelectedCoreObject = GuiService.SelectedCoreObject
@@ -138,7 +138,7 @@ return function(p1) --[[ Line: 125 | Named "useSplitPaneFocusNavBridge" ]]
 		onSelectedCoreObjectChanged()
 		local Connection = GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(onSelectedCoreObjectChanged)
 		
-		return function() --[[ Line: 187 ]]
+		return function()
 			-- upvalues: Connection (copy), UseRefResult (upval)
 			Connection:Disconnect()
 			local Current = UseRefResult.current

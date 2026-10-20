@@ -7,7 +7,7 @@ local PerspectiveTooltip = nil
 
 return {
 	Name = "PerspectiveTooltipEvent",
-	StartEvent = function() --[[ Line: 27 ]]
+	StartEvent = function()
 		-- upvalues: RoactModule (copy), VRFTUXToolTipsModule (copy), RenderWithCoreScriptsStyleProviderModule (copy), PerspectiveTooltip (ref), CoreGui (copy)
 		PerspectiveTooltip = RoactModule.mount(RenderWithCoreScriptsStyleProviderModule({
 			(RoactModule.createElement(VRFTUXToolTipsModule, {
@@ -21,7 +21,7 @@ return {
 			}))
 		}), CoreGui:FindFirstChild("FTUXMenu"), "PerspectiveTooltip")
 	end,
-	StopEvent = function() --[[ Line: 48 ]]
+	StopEvent = function()
 		-- upvalues: PerspectiveTooltip (ref), RoactModule (copy)
 		if PerspectiveTooltip then
 			RoactModule.unmount(PerspectiveTooltip)

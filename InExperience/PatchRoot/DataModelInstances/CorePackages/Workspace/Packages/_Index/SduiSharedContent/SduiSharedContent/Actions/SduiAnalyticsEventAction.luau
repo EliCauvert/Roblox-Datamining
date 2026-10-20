@@ -1,12 +1,12 @@
 ﻿local _ = require(script:FindFirstAncestor("SduiSharedContent").Parent.SduiCoreSystem)
 
-local function _(p1): boolean --[[ Line: 11 | Named "isScalar" ]]
+local function _(p1): boolean
 	local ValueType = typeof(p1)
 	
 	return ValueType == "string" or (ValueType == "number" or ValueType == "boolean")
 end
 
-local function mergeScalars(p1, ActionParams, p2) --[[ Line: 16 ]]
+local function mergeScalars(p1, ActionParams, p2)
 	if ActionParams == nil then return end
 	for i, actionParam in ActionParams do
 		if not p2 or not p2[i] then
@@ -21,7 +21,7 @@ end
 
 local config = { eventName = true, eventFields = true }
 
-return function(p3, p4, p5) --[[ Line: 32 | Named "SduiAnalyticsEventAction" ]]
+return function(p3, p4, p5)
 	-- upvalues: mergeScalars (copy), config (copy)
 	local ActionParams = p3 and p3.actionParams or nil
 	

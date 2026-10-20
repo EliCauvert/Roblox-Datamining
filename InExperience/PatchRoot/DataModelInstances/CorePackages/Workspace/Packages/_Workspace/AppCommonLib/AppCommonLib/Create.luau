@@ -1,5 +1,5 @@
-﻿return function(p1) --[[ Line: 21 | Named "create" ]]
-	return function(List) --[[ Line: 22 ]]
+﻿return function(p1)
+	return function(List)
 		-- upvalues: p1 (copy)
 		local NewInstance = Instance.new(p1)
 		local Parent = nil

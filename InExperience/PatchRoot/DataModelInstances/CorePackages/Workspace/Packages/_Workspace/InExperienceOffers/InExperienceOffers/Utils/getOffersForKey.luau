@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("InExperienceOffers").Types)
 
-return function(p1, p2, OfferStatus) --[[ Line: 15 | Named "getOffersForKey" ]]
+return function(p1, p2, OfferStatus)
 	if p1 == nil then
 		return nil
 	end

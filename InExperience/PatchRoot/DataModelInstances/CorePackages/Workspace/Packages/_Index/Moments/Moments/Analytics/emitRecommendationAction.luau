@@ -10,7 +10,7 @@ local config = {
 	lastUpdated = { 26, 6, 2 }
 }
 
-return function(p1) --[[ Line: 34 | Named "emitRecommendationAction" ]]
+return function(p1)
 	-- upvalues: ConstantsModule (copy), config (copy), FFlagMomentsRecommendationClientEventTimestampModule (copy), FFlagMomentsComments (copy)
 	local HttpService = game:GetService("HttpService")
 	local Guid = if p1.actionType == ConstantsModule.RecommendationActionType.Play then HttpService:GenerateGUID(false) else nil

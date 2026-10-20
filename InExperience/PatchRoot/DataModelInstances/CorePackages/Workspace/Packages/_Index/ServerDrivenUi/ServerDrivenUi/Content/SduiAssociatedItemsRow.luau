@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local View = require(Parent.Foundation).View
 local GetSduiComponentWrapperFunction = require(Parent.SduiCoreSystem).getSduiComponentWrapper
 
-return ReactModule.memo(function(p1) --[[ Line: 25 | Named "SduiAssociatedItemsRow" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: GetSduiComponentWrapperFunction (copy), ReactModule (copy), View (copy)
 	local LayoutOrder = p1.layoutOrder
 	local Elements = {}

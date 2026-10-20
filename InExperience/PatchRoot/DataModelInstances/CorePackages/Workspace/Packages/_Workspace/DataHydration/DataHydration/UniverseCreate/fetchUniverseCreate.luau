@@ -6,7 +6,7 @@ local UrlBase = require(Parent.UrlBuilder).UrlBase
 local WithCsrfRetryModule = require(DataHydration.withCsrfRetry)
 local _ = require(script.Parent.UniverseCreateStoreTypes)
 
-local function _(Buf) --[[ Line: 15 | Named "tryJsonDecode" ]]
+local function _(Buf)
 	-- upvalues: HttpService (copy)
 	if Buf == nil or Buf == "" then
 		return nil
@@ -17,7 +17,7 @@ local function _(Buf) --[[ Line: 15 | Named "tryJsonDecode" ]]
 	end
 end
 
-local function decode(p1) --[[ Line: 25 ]]
+local function decode(p1)
 	-- upvalues: HttpService (copy)
 	local ResponseBody = p1.responseBody
 	local v1 = nil
@@ -37,7 +37,7 @@ local function decode(p1) --[[ Line: 25 ]]
 	end
 end
 
-return function(Body, p1) --[[ Line: 43 | Named "fetchUniverseCreate" ]]
+return function(Body, p1)
 	-- upvalues: WithCsrfRetryModule (copy), HttpClientModule (copy), UrlBase (copy), decode (copy)
 	local P2 = p1 or {}
 	

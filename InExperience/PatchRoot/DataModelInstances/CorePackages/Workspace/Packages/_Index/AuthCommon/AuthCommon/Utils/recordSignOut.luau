@@ -5,7 +5,7 @@ local UserModule = require(AuthCommon.Thunks.User)
 local CryoModule = require(AuthCommon.Parent.Cryo)
 local PrunePreviousAccountsListModule = require(AuthCommon.Utils.prunePreviousAccountsList)
 
-return function(p1, p2): boolean? --[[ Line: 16 | Named "recordSignOut" ]]
+return function(p1, p2): boolean?
 	-- upvalues: UserModule (copy), AppStorageUtilitiesModule (copy), CryoModule (copy), PrunePreviousAccountsListModule (copy)
 	local P1 = p2 or true
 	local config = nil

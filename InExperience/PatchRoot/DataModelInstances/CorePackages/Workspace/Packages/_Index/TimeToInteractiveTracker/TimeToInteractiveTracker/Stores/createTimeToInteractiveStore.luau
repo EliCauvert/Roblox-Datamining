@@ -18,7 +18,7 @@ local ConstantsModule = require(TimeToInteractiveTracker.Milestones.constants)
 local UseTTIRenderAndMountedTrackingModule = require(TimeToInteractiveTracker.Hooks.useTTIRenderAndMountedTracking)
 local _ = require(script.Parent.types)
 
-return function() --[[ Line: 31 ]]
+return function()
 	-- upvalues: CreateSignalFunction (copy), FFlagTTITrackerDropEventsOnAppHideModule (copy), GetAppLifecycleObserverServiceModule (copy), DropInFlightTTIEventsModule (copy), UpdateTTIEventMetadataModule (copy), TrackTTIEventStartModule (copy), TrackTTIEventEndModule (copy), TrackMilestoneModule (copy), TrackSubphaseModule (copy), TrackRequestModule (copy), FFlagEnableTTIRecordWebViewMilestones (copy), RecordWebViewMilestonesModule (copy), ResetTTIEventModule (copy), DestroyTTIEventModule (copy), ConstantsModule (copy), UseTTIRenderAndMountedTrackingModule (copy)
 	local Signal, Signal2 = CreateSignalFunction({})
 	

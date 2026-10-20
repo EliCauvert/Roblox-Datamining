@@ -1,4 +1,4 @@
-﻿return function(List, p1): boolean --[[ Line: 2 | Named "includes" ]]
+﻿return function(List, p1): boolean
 	local ValueType = type(List)
 	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)
 	

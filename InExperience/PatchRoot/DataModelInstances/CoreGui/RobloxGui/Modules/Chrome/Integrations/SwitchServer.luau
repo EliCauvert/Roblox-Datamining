@@ -11,11 +11,11 @@ local IsPioneerLaunchFunction = require(CorePackages.Workspace.Packages.PioneerU
 local SignalsUtilsModule = require(CorePackages.Workspace.Packages.SignalsUtils)
 local IsConfirmationOpen = false
 local NewResult = require(CorePackages.Workspace.Packages.AppCommonLib).Signal.new()
-local NewResult1 = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(NewResult, function() --[[ Line: 27 ]]
+local NewResult1 = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(NewResult, function()
 	-- upvalues: IsConfirmationOpen (ref)
 	return IsConfirmationOpen
 end)
-SignalsUtilsModule.createDetachedEffect(function(p1) --[[ Line: 31 ]]
+SignalsUtilsModule.createDetachedEffect(function(p1)
 	-- upvalues: SwitchServerStore (copy), IsConfirmationOpen (ref), NewResult (copy)
 	local IsConfirmationOpen1 = SwitchServerStore.isConfirmationOpen(p1)
 	
@@ -29,19 +29,19 @@ local RegisterResult = ServiceModule:register({
 	id = ConstantsModule.SWITCH_SERVER_ID,
 	label = Constants.BUTTON.LABEL,
 	sideSheetPlacement = if IsPioneerLaunchFunction() then SideSheetPlacement.SessionAction else SideSheetPlacement.BelowFold,
-	activated = function() --[[ Line: 44 ]]
+	activated = function()
 		-- upvalues: SwitchServerStore (copy)
 		SwitchServerStore.setConfirmationOpen(true)
 	end,
 	isActivated = NewResult1,
 	components = {
-		Icon = function(_) --[[ Line: 49 ]]
+		Icon = function(_)
 			-- upvalues: CommonIconModule (copy), NewResult1 (copy)
 			return CommonIconModule("TwoLocationPinsConnectingArrow", nil, NewResult1)
 		end
 	}
 })
-SignalsUtilsModule.createDetachedEffect(function(p1) --[[ Line: 55 ]]
+SignalsUtilsModule.createDetachedEffect(function(p1)
 	-- upvalues: SwitchServerStore (copy), IsPioneerLaunchFunction (copy), RegisterResult (copy)
 	if SwitchServerStore.shouldEnableSwitchServer(p1) or IsPioneerLaunchFunction() then
 		RegisterResult.availability:available()

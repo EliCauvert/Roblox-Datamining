@@ -3,7 +3,7 @@ local SignalsModule = require(Parent.Signals)
 local CreateSignalMapFunction = require(Parent.CoreScriptsRoactCommon).Utilities.createSignalMap
 local _ = require(script.Parent.LeaderboardStoreTypes)
 
-return function(p1, _) --[[ Line: 40 | Named "createTeamStore" ]]
+return function(p1, _)
 	-- upvalues: CreateSignalMapFunction (copy), SignalsModule (copy)
 	local Connections = {}
 	local Signal2 = nil
@@ -27,7 +27,7 @@ return function(p1, _) --[[ Line: 40 | Named "createTeamStore" ]]
 		Neutral, Signal2 = SignalsModule.createSignal(p1.Name)
 		Signal, Signal2_1 = SignalsModule.createSignal(p1.TeamColor.Color)
 		Signal1, Signal2_2 = SignalsModule.createSignal(p1.ChildOrder)
-		Connections.teamPropChanged = p1.Changed:Connect(function(p2) --[[ Line: 72 ]]
+		Connections.teamPropChanged = p1.Changed:Connect(function(p2)
 			-- upvalues: Signal2 (ref), p1 (copy), Signal2_1 (ref), Signal2_2 (ref)
 			if p2 == "Name" then
 				Signal2(p1.Name)
@@ -44,10 +44,10 @@ return function(p1, _) --[[ Line: 40 | Named "createTeamStore" ]]
 			end
 		end)
 	end
-	local function _() --[[ Line: 108 | Named "updateAllStats" ]]
+	local function _()
 		-- upvalues: t (ref), SignalsModule (upval), SignalMap1 (copy), SignalMap (copy)
 		for i, value in pairs(t) do
-			SignalMap.setData(i, SignalsModule.createComputed(function(p2) --[[ Line: 85 ]]
+			SignalMap.setData(i, SignalsModule.createComputed(function(p2)
 				-- upvalues: SignalMap1 (upval), value (copy), i (copy)
 				local Total = nil
 				local AllData = SignalMap1.getAllData(p2)
@@ -77,9 +77,9 @@ return function(p1, _) --[[ Line: 40 | Named "createTeamStore" ]]
 		getOrder = Signal1,
 		getStats = SignalMap,
 		getPlayers = SignalMap1,
-		updateStat = function(Key, p2) --[[ Line: 84 ]]
+		updateStat = function(Key, p2)
 			-- upvalues: SignalsModule (upval), SignalMap1 (copy), SignalMap (copy), t (ref)
-			SignalMap.setData(Key, SignalsModule.createComputed(function(p3) --[[ Line: 85 ]]
+			SignalMap.setData(Key, SignalsModule.createComputed(function(p3)
 				-- upvalues: SignalMap1 (upval), p2 (copy), Key (copy)
 				local Total = nil
 				local AllData = SignalMap1.getAllData(p3)
@@ -101,17 +101,17 @@ return function(p1, _) --[[ Line: 40 | Named "createTeamStore" ]]
 			end), false)
 			t[Key] = p2
 		end,
-		removeStat = function(Key) --[[ Line: 115 ]]
+		removeStat = function(Key)
 			-- upvalues: SignalMap (copy), t (ref)
 			SignalMap.removeData(Key, false)
 			t[Key] = nil
 		end,
-		addPlayer = function(Player) --[[ Line: 122 ]]
+		addPlayer = function(Player)
 			-- upvalues: SignalMap1 (copy), t (ref), SignalsModule (upval), SignalMap (copy)
 			SignalMap1.setData(Player, Player.UserId, false)
 			
 			for i, value in pairs(t) do
-				SignalMap.setData(i, SignalsModule.createComputed(function(p3) --[[ Line: 85 ]]
+				SignalMap.setData(i, SignalsModule.createComputed(function(p3)
 					-- upvalues: SignalMap1 (upval), value (copy), i (copy)
 					local Total = nil
 					local AllData = SignalMap1.getAllData(p3)
@@ -134,12 +134,12 @@ return function(p1, _) --[[ Line: 40 | Named "createTeamStore" ]]
 				t[i] = value
 			end
 		end,
-		removePlayer = function(p3) --[[ Line: 128 ]]
+		removePlayer = function(p3)
 			-- upvalues: SignalMap1 (copy), t (ref), SignalsModule (upval), SignalMap (copy)
 			SignalMap1.removeData(p3, false)
 			
 			for i, value in pairs(t) do
-				SignalMap.setData(i, SignalsModule.createComputed(function(p4) --[[ Line: 85 ]]
+				SignalMap.setData(i, SignalsModule.createComputed(function(p4)
 					-- upvalues: SignalMap1 (upval), value (copy), i (copy)
 					local Total = nil
 					local AllData = SignalMap1.getAllData(p4)
@@ -162,7 +162,7 @@ return function(p1, _) --[[ Line: 40 | Named "createTeamStore" ]]
 				t[i] = value
 			end
 		end,
-		destroy = function() --[[ Line: 134 ]]
+		destroy = function()
 			-- upvalues: Connections (ref), t (ref)
 			for _, connection in pairs(Connections) do
 				if connection.Disconnect then

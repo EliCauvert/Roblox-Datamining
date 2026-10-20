@@ -1,6 +1,6 @@
 ﻿local SetTabBarVisibleModule = require(script:FindFirstAncestor("AppTabBarRodux").Actions.SetTabBarVisible)
 
-return function(IsVisible, p1) --[[ Line: 6 ]]
+return function(IsVisible, p1)
 	-- upvalues: SetTabBarVisibleModule (copy)
 	if IsVisible == nil then
 		IsVisible = false

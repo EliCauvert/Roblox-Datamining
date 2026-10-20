@@ -10,7 +10,7 @@ local FillBehavior = FoundationModule.Enums.FillBehavior
 local InputSize = FoundationModule.Enums.InputSize
 local FFlagShareSheetPeoplePickerEnabledModule = require(ShareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
 
-return function(Frame) --[[ Line: 27 | Named "ShareSendRow" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), View (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), TextInput (copy), InputSize (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState("")
 	
@@ -42,7 +42,7 @@ return function(Frame) --[[ Line: 27 | Named "ShareSendRow" ]]
 			fillBehavior = if FFlagShareSheetPeoplePickerEnabledModule and Frame.shouldFillButton == false then nil else FillBehavior.Fill,
 			isLoading = Frame.isLoading,
 			size = InputSize.Medium,
-			onActivated = ReactModule.useCallback(function() --[[ Line: 29 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: Frame (copy), UseStateResult (copy)
 				Frame.onActivated(UseStateResult)
 			end, { UseStateResult, Frame.onActivated }),

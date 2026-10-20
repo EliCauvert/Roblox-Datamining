@@ -1,4 +1,4 @@
-﻿local function readFrameLength(Text: string, StartIndex: number) --[[ Line: 27 ]]
+﻿local function readFrameLength(Text: string, StartIndex: number)
 	local Total = 0
 	local v1 = 1
 	
@@ -18,10 +18,10 @@
 end
 
 return {
-	isEmptyResponseBody = function(Buf): boolean --[[ Line: 9 ]]
+	isEmptyResponseBody = function(Buf): boolean
 		return Buf == nil or (if typeof(Buf) == "string" then Buf == "" else typeof(Buf) == "buffer" and buffer.len(Buf) == 0)
 	end,
-	extractFrames = function(Text: string) --[[ Line: 51 ]]
+	extractFrames = function(Text: string)
 		-- upvalues: readFrameLength (copy)
 		local List = {}
 		local StartIndex1 = 1

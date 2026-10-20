@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("GenericAbuseReporting").Bedui.Provider.AbuseReportBeduiTypes)
 
-return function(Text: string, p1): string --[[ Line: 20 ]]
+return function(Text: string, p1): string
 	if p1 == nil then
 		return Text
 	end

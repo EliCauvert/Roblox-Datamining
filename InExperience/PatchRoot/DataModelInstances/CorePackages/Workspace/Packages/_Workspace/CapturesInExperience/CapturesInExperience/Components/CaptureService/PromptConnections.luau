@@ -13,16 +13,16 @@ local CaptureTypeModule = require(Parent.Enums.CaptureType)
 local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 local FFlagCapturesEnableDownloadPromptForU13Module = require(Parent.Flags.FFlagCapturesEnableDownloadPromptForU13)
 
-return (require(Parent.App.CapturesPolicy).connect(function(p1) --[[ Line: 105 ]]
+return (require(Parent.App.CapturesPolicy).connect(function(p1)
 	return { enableShareCaptureCTA = p1.enableShareCaptureCTA() }
-end)(function(p1) --[[ Line: 30 ]]
+end)(function(p1)
 	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), PromptTriggeredModule (copy), PromptTypeModule (copy), UseEventConnectionFunction (copy), CaptureServiceModule (copy), FFlagCapturesEnableDownloadPromptForU13Module (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), ToastTriggeredModule (copy), CapturesToastTypeModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
-	UseEventConnectionFunction(CaptureServiceModule.OpenSaveCapturesPrompt, (ReactModule.useCallback(function(p2, Contents) --[[ Line: 33 ]]
+	UseEventConnectionFunction(CaptureServiceModule.OpenSaveCapturesPrompt, (ReactModule.useCallback(function(p2, Contents)
 		-- upvalues: UseDispatchResult (copy), PromptTriggeredModule (upval), PromptTypeModule (upval)
 		UseDispatchResult(PromptTriggeredModule(p2, PromptTypeModule.SaveCaptures, { contents = Contents }))
 	end, {})))
-	UseEventConnectionFunction(CaptureServiceModule.OpenShareCapturePrompt, (ReactModule.useCallback(function(p2, Content, LaunchData) --[[ Line: 43 ]]
+	UseEventConnectionFunction(CaptureServiceModule.OpenShareCapturePrompt, (ReactModule.useCallback(function(p2, Content, LaunchData)
 		-- upvalues: FFlagCapturesEnableDownloadPromptForU13Module (upval), p1 (copy), UseDispatchResult (copy), PromptTriggeredModule (upval), PromptTypeModule (upval), CaptureServiceModule (upval), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (upval), CaptureTypeModule (upval), ToastTriggeredModule (upval), CapturesToastTypeModule (upval)
 		local config = {
 			content = Content,
@@ -34,7 +34,7 @@ end)(function(p1) --[[ Line: 30 ]]
 		if FFlagCapturesEnableDownloadPromptForU13Module or p1.enableShareCaptureCTA then
 			UseDispatchResult(PromptTriggeredModule(p2, PromptTypeModule.ShareCapture, config))
 		else
-			Connection = CaptureServiceModule.CaptureSavedInternal:Connect(function(CaptureInfo) --[[ Line: 55 ]]
+			Connection = CaptureServiceModule.CaptureSavedInternal:Connect(function(CaptureInfo)
 				-- upvalues: Content (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (upval), CaptureTypeModule (upval), Connection (ref), CaptureServiceModule (upval), UseDispatchResult (upval), ToastTriggeredModule (upval), CapturesToastTypeModule (upval)
 				if Content.Object ~= nil then
 					if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then
@@ -52,7 +52,7 @@ end)(function(p1) --[[ Line: 30 ]]
 			CaptureServiceModule:GetCaptureFilePathAsync(Content)
 		end
 	end, { p1.enableShareCaptureCTA })))
-	local UseResult = ReactModule.useCallback(function(p2, _) --[[ Line: 93 ]]
+	local UseResult = ReactModule.useCallback(function(p2, _)
 		-- upvalues: UseDispatchResult (copy), PromptTriggeredModule (upval), PromptTypeModule (upval)
 		UseDispatchResult(PromptTriggeredModule(p2, PromptTypeModule.CapturePermissions, {}))
 	end, {})

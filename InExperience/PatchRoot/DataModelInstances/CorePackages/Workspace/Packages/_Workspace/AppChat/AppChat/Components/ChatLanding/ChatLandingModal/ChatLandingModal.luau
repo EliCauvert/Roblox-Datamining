@@ -17,7 +17,7 @@ local FFlagAppChatLandingModalThemedBackgroundModule = require(AppChat.Flags.FFl
 local IconsActionsFavoriteOn = UIBloxModule.App.ImageSet.Images["icons/actions/favoriteOn"]
 local X = FoundationModule.Enums.IconName.X
 local config = {
-	[AppChatNetworkingModule.Constants.ModalContentType.Link] = function(p1) --[[ Line: 35 ]]
+	[AppChatNetworkingModule.Constants.ModalContentType.Link] = function(p1)
 		-- upvalues: UseStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 		local UseStyleResult = UseStyleFunction()
 		
@@ -38,7 +38,7 @@ local config = {
 			[ReactModule.Event.Activated] = p1.content.onActivated
 		})
 	end,
-	[AppChatNetworkingModule.Constants.ModalContentType.Text] = function(p1) --[[ Line: 56 ]]
+	[AppChatNetworkingModule.Constants.ModalContentType.Text] = function(p1)
 		-- upvalues: UseStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 		local UseStyleResult = UseStyleFunction()
 		
@@ -66,11 +66,11 @@ local config1 = {
 	hideActionButton = false,
 	additionalContent = {},
 	buttonType = UIBloxModule.App.Button.Enum.ButtonType.PrimarySystem,
-	onActivated = function() --[[ Line: 108 ]] end,
-	onDismissed = function() --[[ Line: 109 ]] end
+	onActivated = function() end,
+	onDismissed = function() end
 }
 
-return ReactModule.forwardRef(function(p1, Ref) --[[ Line: 112 ]]
+return ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: CryoModule (copy), config1 (copy), UseStyleFunction (copy), UseChatPagePaddingModule (copy), FoundationModule (copy), ReactModule (copy), config (copy), NewResult (copy), FFlagAppChatLandingModalThemedBackgroundModule (copy), LabelModule (copy), IconsActionsFavoriteOn (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), X (copy), ButtonStack (copy)
 	local JoinResult = CryoModule.Dictionary.join(config1, p1)
 	local UseStyleResult = UseStyleFunction()
@@ -80,9 +80,9 @@ return ReactModule.forwardRef(function(p1, Ref) --[[ Line: 112 ]]
 	local Size1000 = Style.Tokens.Size.Size_1000
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local Size600 = UseTokensResult.Size.Size_600
-	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 123 ]]
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: CryoModule (upval), JoinResult (copy), config (upval), ReactModule (upval), NewResult (upval)
-		local MapResult = CryoModule.Dictionary.map(JoinResult.additionalContent, function(Content, p2: number) --[[ Line: 124 ]]
+		local MapResult = CryoModule.Dictionary.map(JoinResult.additionalContent, function(Content, p2: number)
 			-- upvalues: config (upval), ReactModule (upval), NewResult (upval)
 			local Entry = config[Content.type]
 			local LayoutOrder = p2 + 2

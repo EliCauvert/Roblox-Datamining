@@ -12,7 +12,7 @@ local ProtoVariableMapperModule = require(SduiCoreSystem.ClientBinding.ProtoVari
 local SduiParseHelpersModule = require(SduiCoreSystem.SduiParseHelpers)
 local FFlagSduiExperimentalComponent = require(Parent.SharedFlags).FFlagSduiExperimentalComponent
 
-local function buildProp(IsComponentFiltered, Computed, p1, p2, AnalyticsContext) --[[ Line: 31 ]]
+local function buildProp(IsComponentFiltered, Computed, p1, p2, AnalyticsContext)
 	-- upvalues: buildProp (copy)
 	if IsComponentFiltered.oneof_prop and IsComponentFiltered.oneof_prop.value then
 		return buildProp(IsComponentFiltered.oneof_prop.value, Computed, p1, p2, AnalyticsContext)
@@ -41,7 +41,7 @@ local function buildProp(IsComponentFiltered, Computed, p1, p2, AnalyticsContext
 	return PropBuilderResult, PropBuilderResult2, PropBuilderResult3
 end
 
-local function buildPropTable(AnalyticsData, Computed, p3, p4, AnalyticsContext) --[[ Line: 89 ]]
+local function buildPropTable(AnalyticsData, Computed, p3, p4, AnalyticsContext)
 	-- upvalues: ProtoVariableMapperModule (copy), buildProp (copy), PropResultCategory (copy), SduiLoggerModule (copy), SduiErrorsModule (copy)
 	local t = {}
 	
@@ -55,7 +55,7 @@ local function buildPropTable(AnalyticsData, Computed, p3, p4, AnalyticsContext)
 	
 	for i, Value in AnalyticsData do
 		local MapPropNameResult = ProtoVariableMapperModule.mapPropName(i)
-		local Success, Result = pcall(function() --[[ Line: 108 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: buildProp (upval), Value (copy), Computed (copy), p3 (copy), p4 (copy), AnalyticsContext (copy), PropResultCategory (upval), T (ref), MapPropNameResult (copy), T1 (ref), T2 (ref), t (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), CurrentComponentType (copy)
 			local Prop, Prop2, Prop3 = buildProp(Value, Computed, p3, p4, AnalyticsContext)
 			
@@ -131,12 +131,12 @@ local function buildPropTable(AnalyticsData, Computed, p3, p4, AnalyticsContext)
 end
 
 local config = {
-	__index = function(p5, p6) --[[ Line: 174 ]]
+	__index = function(p5, p6)
 		return if p6 == "analyticsData" then p5.analyticsContext and p5.analyticsContext.analyticsData else nil
 	end
 }
 
-local function resolveComponentType(p5) --[[ Line: 183 ]]
+local function resolveComponentType(p5)
 	-- upvalues: FFlagSduiExperimentalComponent (copy), SduiComponentTypeModule (copy), ProtoVariableMapperModule (copy)
 	if FFlagSduiExperimentalComponent then
 		local MapUiComponentTypeToLuaResult = nil
@@ -167,7 +167,7 @@ end
 return {
 	buildPropTable = buildPropTable,
 	buildProp = buildProp,
-	buildConfigForComponent = function(p5, Callback, p6, p7, _, p8, p9) --[[ Line: 207 ]]
+	buildConfigForComponent = function(p5, Callback, p6, p7, _, p8, p9)
 		-- upvalues: resolveComponentType (copy), SignalsModule (copy), BuildDataBindingSourcesForTemplateModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), SduiParseHelpersModule (copy), config (copy), buildPropTable (copy), BuildAnalyticsContextForClientBindingModule (copy), buildProp (copy), PropResultCategory (copy)
 		if not p5 or not next(p5) then
 			error("Attempt to buildConfigForComponent with nil template")
@@ -179,9 +179,9 @@ return {
 		
 		if p8 == nil then
 			local Data = Value.shared and Value.shared.data or {}
-			Computed = SignalsModule.createComputed(function(p10) --[[ Line: 241 ]]
+			Computed = SignalsModule.createComputed(function(p10)
 				-- upvalues: BuildDataBindingSourcesForTemplateModule (upval), Callback (copy), Data (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), p6 (copy), ResolveComponentTypeResult (copy), SduiParseHelpersModule (upval)
-				local Success, Result = pcall(function() --[[ Line: 242 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: BuildDataBindingSourcesForTemplateModule (upval), Callback (upval), p10 (copy), Data (upval)
 					return BuildDataBindingSourcesForTemplateModule(Callback(p10), Data)
 				end)
@@ -230,7 +230,7 @@ return {
 		end
 		if Value.shared and Value.shared.is_component_filtered then
 			local IsComponentFiltered = Value.shared.is_component_filtered
-			local Success, Result, Result3, Result4 = pcall(function() --[[ Line: 305 ]]
+			local Success, Result, Result3, Result4 = pcall(function()
 				-- upvalues: buildProp (upval), IsComponentFiltered (copy), Computed (ref), Callback (copy), p6 (copy), P18 (copy)
 				return buildProp(IsComponentFiltered, Computed, Callback, p6, P18.analyticsContext)
 			end)
@@ -239,7 +239,7 @@ return {
 				if Result3 == PropResultCategory.PropSignal then
 					P18.isComponentFilteredSignal = Result
 				elseif Result3 == PropResultCategory.Literal then
-					function P18.isComponentFilteredSignal() --[[ Line: 330 ]]
+					function P18.isComponentFilteredSignal()
 						-- upvalues: Result (copy)
 						return { data = Result }
 					end

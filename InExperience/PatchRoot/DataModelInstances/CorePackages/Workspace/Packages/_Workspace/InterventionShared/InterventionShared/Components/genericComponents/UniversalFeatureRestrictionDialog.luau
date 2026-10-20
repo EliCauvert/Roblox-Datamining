@@ -16,7 +16,7 @@ local FFlagUFRAppealsAndModNoteFixModule = require(InterventionShared.Flags.FFla
 local FFlagUFRFriendsChatIXPExposureModule = require(InterventionShared.Flags.FFlagUFRFriendsChatIXPExposure)
 local FFlagUFRImprovementsModule = require(InterventionShared.Flags.FFlagUFRImprovements)
 
-return ReactModule.memo(function(p1) --[[ Line: 57 | Named "UniversalFeatureRestrictionDialog" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FFlagUFRAppealsAndModNoteFixModule (copy), ConstantsModule (copy), DetermineUFRInterventionTypeModule (copy), UseParsedBadUtterancesModule (copy), UseRestrictionEndDateInfoModule (copy), DetermineAppealsStateModule (copy), UseEffectFunction (copy), FFlagUFRFriendsChatIXPExposureModule (copy), IXPService (copy), AppUserLayers (copy), FFlagUFRImprovementsModule (copy), UseCallbackFunction (copy), ReactModule (copy), GenericInterventionDialogModule (copy)
 	local ModerationDetail = p1.moderationDetail
 	local ConsequenceTransparencyMessage = ModerationDetail.consequenceTransparencyMessage
@@ -37,7 +37,7 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "UniversalFeatureRest
 		endDate = ModerationDetail.endDate,
 		acknowledgeable = Acknowledgeable
 	})
-	UseEffectFunction(function() --[[ Line: 92 ]]
+	UseEffectFunction(function()
 		-- upvalues: FFlagUFRFriendsChatIXPExposureModule (upval), p1 (copy), ConstantsModule (upval), IXPService (upval), AppUserLayers (upval), FFlagUFRImprovementsModule (upval)
 		if FFlagUFRFriendsChatIXPExposureModule and p1.abuseVector == ConstantsModule.AbuseVectorType.PartyChat and game:GetEngineFeature("EnableLogFlagLinkedUserLayerExposure") then
 			IXPService:LogFlagLinkedUserLayerExposure(AppUserLayers.FriendsChatRestrictionUserIDLayer)
@@ -55,7 +55,7 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "UniversalFeatureRest
 		isAppealable = DetermineAppealsStateModuleResult.isAppealable,
 		evidence = Joined,
 		violationReason = Joined1,
-		onDismiss = UseCallbackFunction(function() --[[ Line: 107 ]]
+		onDismiss = UseCallbackFunction(function()
 			-- upvalues: p1 (copy)
 			p1.onDismiss()
 			

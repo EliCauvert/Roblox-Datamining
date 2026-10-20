@@ -7,7 +7,7 @@ local PurchaseErrorModule = require(PurchasePrompt.Enums.PurchaseError)
 local FFlagFixPurchasingErrorCounterModule = require(PurchasePrompt.Flags.FFlagFixPurchasingErrorCounter)
 local FFlagAddSurfaceAndProductTypeToPromptCounterModule = require(PurchasePrompt.Flags.FFlagAddSurfaceAndProductTypeToPromptCounter)
 
-return function(Error, p1, p2, p3) --[[ Line: 12 | Named "logProductPurchasePromptCounter" ]]
+return function(Error, p1, p2, p3)
 	-- upvalues: FFlagFixPurchasingErrorCounterModule (copy), Default (copy), ProductPurchasePromptCounter (copy), PurchaseErrorModule (copy), FFlagAddSurfaceAndProductTypeToPromptCounterModule (copy), PromptStateModule (copy)
 	if FFlagFixPurchasingErrorCounterModule then
 		Default:logRobloxTelemetryCounter(ProductPurchasePromptCounter, 1, {

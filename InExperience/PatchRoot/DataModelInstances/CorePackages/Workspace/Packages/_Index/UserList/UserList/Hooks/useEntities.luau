@@ -3,9 +3,9 @@ local ReactModule = require(UserList.Parent.React)
 local _ = require(UserList.Common.Enums)
 local _ = require(UserList.Common.Types)
 
-return function(p1) --[[ Line: 19 | Named "useEntities" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy)
-	return (ReactModule.useMemo(function() --[[ Line: 20 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		local EntitiesMap = {}
 		

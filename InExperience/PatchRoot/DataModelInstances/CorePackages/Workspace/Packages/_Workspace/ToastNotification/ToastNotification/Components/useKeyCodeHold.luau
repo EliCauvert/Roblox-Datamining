@@ -2,39 +2,39 @@
 local RunService = game:GetService("RunService")
 local ReactModule = require(script:FindFirstAncestor("ToastNotification").Parent.React)
 
-return function(KeyCode, p1, p2, Callback, p3) --[[ Line: 14 | Named "useKeyCodeHold" ]]
+return function(KeyCode, p1, p2, Callback, p3)
 	-- upvalues: ReactModule (copy), UserInputService (copy), RunService (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 25 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p3 (copy), UserInputService (upval), KeyCode (copy), UseStateResult2 (copy)
 		if p3 then return end
-		local InputBeganConnection = UserInputService.InputBegan:Connect(function(Input, GameProcessed) --[[ Line: 30 ]]
+		local InputBeganConnection = UserInputService.InputBegan:Connect(function(Input, GameProcessed)
 			-- upvalues: KeyCode (upval), UseStateResult2 (upval)
 			if GameProcessed then return end
 			if Input.KeyCode == KeyCode then
 				UseStateResult2(true)
 			end
 		end)
-		local InputEndedConnection = UserInputService.InputEnded:Connect(function(Input) --[[ Line: 40 ]]
+		local InputEndedConnection = UserInputService.InputEnded:Connect(function(Input)
 			-- upvalues: KeyCode (upval), UseStateResult2 (upval)
 			if Input.KeyCode == KeyCode then
 				UseStateResult2(false)
 			end
 		end)
 		
-		return function() --[[ Line: 46 ]]
+		return function()
 			-- upvalues: InputBeganConnection (copy), InputEndedConnection (copy), UseStateResult2 (upval)
 			InputBeganConnection:Disconnect()
 			InputEndedConnection:Disconnect()
 			UseStateResult2(false)
 		end
 	end, { p3, KeyCode })
-	ReactModule.useEffect(function() --[[ Line: 53 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseRefResult (copy), RunService (upval), p1 (copy), p2 (copy), Callback (copy), UseBindingResult2 (copy)
 		if not UseStateResult then return end
-		local function _() --[[ Line: 58 | Named "disconnect" ]]
+		local function _()
 			-- upvalues: UseRefResult (upval)
 			if UseRefResult.current then
 				UseRefResult.current:Disconnect()
@@ -43,7 +43,7 @@ return function(KeyCode, p1, p2, Callback, p3) --[[ Line: 14 | Named "useKeyCode
 		end
 		
 		local Total = 0
-		UseRefResult.current = RunService.Heartbeat:Connect(function(DeltaTime) --[[ Line: 66 ]]
+		UseRefResult.current = RunService.Heartbeat:Connect(function(DeltaTime)
 			-- upvalues: Total (ref), p1 (upval), p2 (upval), UseRefResult (upval), Callback (upval), UseBindingResult2 (upval)
 			Total += DeltaTime
 			
@@ -70,7 +70,7 @@ return function(KeyCode, p1, p2, Callback, p3) --[[ Line: 14 | Named "useKeyCode
 			end
 		end)
 		
-		return function() --[[ Line: 89 ]]
+		return function()
 			-- upvalues: UseRefResult (upval), UseBindingResult2 (upval)
 			if UseRefResult.current then
 				UseRefResult.current:Disconnect()

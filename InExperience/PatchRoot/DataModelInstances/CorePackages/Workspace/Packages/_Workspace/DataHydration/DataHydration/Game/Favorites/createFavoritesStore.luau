@@ -14,19 +14,19 @@ local FavoritesUrlBuilderModule = require(script.Parent.FavoritesUrlBuilder)
 local _ = require(Parent.LuauPolyfill)
 local FFlagLuaAppDataHydrationUpdateItem = require(Parent.SharedFlags).FFlagLuaAppDataHydrationUpdateItem
 
-return function() --[[ Line: 22 | Named "createFavoritesStore" ]]
+return function()
 	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), LogResponseErrorFunction (copy), FavoritesUrlBuilderModule (copy), FetchFavoriteModule (copy), FavoritesStoreTypesModule (copy), DiscoveryEventErrorLogger (copy), SignalsModule (copy), RequestFavoriteUpdateModule (copy), FFlagLuaAppDataHydrationUpdateItem (copy)
 	local DataCacheModule = CreateDataCacheModule()
 	local DataResolverModule = CreateDataResolverModule({
 		supportsMultiGet = false,
 		cache = DataCacheModule,
-		logError = function(p1) --[[ Line: 27 ]]
+		logError = function(p1)
 			-- upvalues: LogResponseErrorFunction (upval), FavoritesUrlBuilderModule (upval)
 			LogResponseErrorFunction(FavoritesUrlBuilderModule.FAVORITE_URL, p1)
 		end,
-		fetchFn = function(UniverseId, _) --[[ Line: 30 ]]
+		fetchFn = function(UniverseId, _)
 			-- upvalues: FetchFavoriteModule (upval), FavoritesStoreTypesModule (upval), DiscoveryEventErrorLogger (upval)
-			return FetchFavoriteModule(UniverseId):andThen(function(Result) --[[ Line: 34 ]]
+			return FetchFavoriteModule(UniverseId):andThen(function(Result)
 				-- upvalues: FavoritesStoreTypesModule (upval), DiscoveryEventErrorLogger (upval), UniverseId (copy)
 				local ResponseBody = Result.responseBody
 				
@@ -46,15 +46,15 @@ return function() --[[ Line: 22 | Named "createFavoritesStore" ]]
 		getFavorites = DataResolverModule.getCachedItems,
 		getAndFetchFavorite = DataResolverModule.getAndFetchItem,
 		getAndFetchFavorites = DataResolverModule.getAndFetchItems,
-		updateFavorite = function(UniverseId, IsFavorited) --[[ Line: 49 ]]
+		updateFavorite = function(UniverseId, IsFavorited)
 			-- upvalues: SignalsModule (upval), DataCacheModule (copy), RequestFavoriteUpdateModule (upval), DiscoveryEventErrorLogger (upval), LogResponseErrorFunction (upval), FavoritesUrlBuilderModule (upval)
 			local Signal, Signal2 = SignalsModule.createSignal(nil)
 			local DataResult = DataCacheModule.getItem(UniverseId).data(false)
 			DataCacheModule.updateItem(UniverseId, { isFavorited = IsFavorited })
-			RequestFavoriteUpdateModule(UniverseId, IsFavorited):andThen(function(_) --[[ Line: 62 ]]
+			RequestFavoriteUpdateModule(UniverseId, IsFavorited):andThen(function(_)
 				-- upvalues: Signal2 (copy), IsFavorited (copy)
 				Signal2({ type = "success", isFavorited = IsFavorited })
-			end):catch(function(Err) --[[ Line: 68 ]]
+			end):catch(function(Err)
 				-- upvalues: DataCacheModule (upval), UniverseId (copy), DataResult (copy), DiscoveryEventErrorLogger (upval), LogResponseErrorFunction (upval), FavoritesUrlBuilderModule (upval), Signal2 (copy)
 				DataCacheModule.updateItem(UniverseId, DataResult)
 				local StatusCode = if type(Err) == "table" and Err.StatusCode then Err.StatusCode else nil
@@ -71,12 +71,12 @@ return function() --[[ Line: 22 | Named "createFavoritesStore" ]]
 		end,
 		updateItem = if FFlagLuaAppDataHydrationUpdateItem then DataCacheModule.updateItem else nil,
 		updateItems = DataCacheModule.updateItems,
-		clear = function() --[[ Line: 91 ]]
+		clear = function()
 			-- upvalues: DataCacheModule (copy), DataResolverModule (copy)
 			DataCacheModule.clear()
 			DataResolverModule.clear()
 		end,
-		dispose = function() --[[ Line: 96 ]]
+		dispose = function()
 			-- upvalues: DataResolverModule (copy)
 			DataResolverModule.dispose()
 		end

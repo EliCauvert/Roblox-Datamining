@@ -12,7 +12,7 @@ local ColorMode = FoundationModule.Enums.ColorMode
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local config = { withUiModeSupport = true, withDarkTheme = true }
 
-return function(p1) --[[ Line: 35 ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), ReactModule (copy), UiModeStyleProviderModule (copy), AppStyleProvider (copy), ColorMode (copy), Constants (copy), FoundationProvider (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local HasConfig = UseTokensFunction().Config ~= nil

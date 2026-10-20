@@ -25,7 +25,7 @@ local ReportCategories = {
 	}
 }
 
-function buildReport(p1, Data, Data1, Data2, Data3) --[[ Line: 54 ]]
+function buildReport(p1, Data, Data1, Data2, Data3)
 	-- upvalues: HttpService (copy)
 	return HttpService:JSONEncode({
 		tags = {
@@ -41,7 +41,7 @@ function buildReport(p1, Data, Data1, Data2, Data3) --[[ Line: 54 ]]
 	})
 end
 
-function ReportAdPopup(p1) --[[ Line: 109 ]]
+function ReportAdPopup(p1)
 	-- upvalues: HttpService (copy), GetAppFeaturePoliciesFunction (copy), Default (copy), LoggingProtocolModule (copy), FlagsModule (copy), ReactModule (copy), EnableHideReportAdModalDuringScreenshot (copy), ScreenshotManager (copy), Players (copy), AdsInteractivityTelemetryModule (copy), RoactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), AppStyleProvider (copy), DefaultTwoStepReportFlowModule (copy), ReportCategories (copy), ReportAdFooterModule (copy), AdsDisplayOrderModule (copy)
 	local Report = ""
 	local Input = { table.clone(p1.adInfo) }
@@ -96,7 +96,7 @@ function ReportAdPopup(p1) --[[ Line: 109 ]]
 						isReportCategoryReadonly = true,
 						onCloseProps = {
 							hasPreviousSteps = false,
-							onAbandon = function() --[[ Line: 175 ]]
+							onAbandon = function()
 								-- upvalues: AdsInteractivityTelemetryModule (upval), p1 (copy)
 								AdsInteractivityTelemetryModule.logReportAdEvent("close")
 								p1.onClose()
@@ -104,12 +104,12 @@ function ReportAdPopup(p1) --[[ Line: 109 ]]
 						},
 						onSubmitProps = {
 							hasNextSteps = false,
-							onSubmit = ReactModule.useCallback(function(p2, p3): boolean --[[ Line: 139 ]]
+							onSubmit = ReactModule.useCallback(function(p2, p3): boolean
 								-- upvalues: EnableHideReportAdModalDuringScreenshot (upval), p1 (copy), ScreenshotManager (upval), Players (upval), Report (ref), Json (copy), AdsInteractivityTelemetryModule (upval)
 								if EnableHideReportAdModalDuringScreenshot then
 									p1.onClose()
 								end
-								ScreenshotManager:TakeScreenshotWithCallback(function(p4) --[[ Line: 143 ]]
+								ScreenshotManager:TakeScreenshotWithCallback(function(p4)
 									-- upvalues: Players (upval), Report (upval), p2 (copy), p3 (copy), Json (upval), AdsInteractivityTelemetryModule (upval)
 									local LocalPlayer = Players.LocalPlayer
 									
@@ -135,7 +135,7 @@ function ReportAdPopup(p1) --[[ Line: 109 ]]
 							completeDescription = "Feature.ReportAbuse.Label.SelectInSceneComplete"
 						},
 						scaleDialog = { X = 0.8, Y = 1 },
-						footerContent = function() --[[ Line: 198 ]]
+						footerContent = function()
 							-- upvalues: v1 (ref), RoactModule (upval), ReportAdFooterModule (upval), Input (copy)
 							return if v1 then RoactModule.createElement(ReportAdFooterModule, { assetId = Input[1].assetId }) else nil
 						end

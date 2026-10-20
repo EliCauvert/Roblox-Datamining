@@ -6,8 +6,8 @@ local config = {
 	Failed = "Failed"
 }
 setmetatable(EnumNetworkStatusModule, {
-	__newindex = function(_, _, _) --[[ Line: 12 ]] end,
-	__index = function(_, p1) --[[ Line: 14 ]]
+	__newindex = function(_, _, _) end,
+	__index = function(_, p1)
 		-- upvalues: config (copy)
 		assert(config[p1] ~= nil, "EnumNetworkStatus has no value: " .. tostring(p1))
 		

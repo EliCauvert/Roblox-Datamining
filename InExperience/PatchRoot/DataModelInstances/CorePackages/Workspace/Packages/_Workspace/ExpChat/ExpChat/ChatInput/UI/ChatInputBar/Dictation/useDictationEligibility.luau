@@ -1,3 +1,3 @@
-﻿return function(): boolean --[[ Line: 6 | Named "useDictationEligibility" ]]
+﻿return function(): boolean
 	return true
 end

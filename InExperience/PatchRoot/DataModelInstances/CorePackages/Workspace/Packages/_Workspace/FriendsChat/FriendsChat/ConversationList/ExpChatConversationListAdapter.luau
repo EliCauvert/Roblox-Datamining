@@ -5,9 +5,9 @@ local FetchConversationListPageToSignalsModule = require(Parent.AppChat.fetchCon
 local GetConversationStoreModule = require(Parent.AppChat.GetConversationStore)
 local Logger = require(Parent.AppChat).Components.ChatConversation.logger
 
-local function _(p1) --[[ Line: 75 | Named "getMessageTimestamp" ]]
+local function _(p1)
 	if type(p1.created_at) == "string" then
-		local Success, Result = pcall(function() --[[ Line: 77 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p1 (copy)
 			return DateTime.fromIsoDate(p1.created_at)
 		end)
@@ -19,19 +19,19 @@ local function _(p1) --[[ Line: 75 | Named "getMessageTimestamp" ]]
 	return nil
 end
 
-local _ = function(p1) --[[ Line: 88 | Named "getUnixTime" ]]
+local _ = function(p1)
 	return if p1 == nil then nil elseif typeof(p1) == "DateTime" then p1.UnixTimestamp elseif type(p1) == "table" and p1.GetUnixTimestamp ~= nil then p1:GetUnixTimestamp() else nil
 end
 
-local _ = function(p1) --[[ Line: 101 | Named "getPreviewContent" ]]
+local _ = function(p1)
 	return p1.preview_content or p1.content
 end
 
-local _ = function(p1) --[[ Line: 105 | Named "getMessageUnixTime" ]]
+local _ = function(p1)
 	local v1 = nil
 	repeat
 		if type(p1.created_at) == "string" then
-			local Success, Result = pcall(function() --[[ Line: 77 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: p1 (copy)
 				return DateTime.fromIsoDate(p1.created_at)
 			end)
@@ -46,11 +46,11 @@ local _ = function(p1) --[[ Line: 105 | Named "getMessageUnixTime" ]]
 	return if v1 == nil then nil else v1.UnixTimestamp
 end
 
-local _ = function(p1): boolean --[[ Line: 110 | Named "isPreviewableMessage" ]]
+local _ = function(p1): boolean
 	return p1 ~= nil and (p1.id ~= nil and (p1.is_previewable == true and (p1.preview_content or p1.content) ~= nil))
 end
 
-local function getNewestPreviewableMessage(List) --[[ Line: 119 ]]
+local function getNewestPreviewableMessage(List)
 	local v1 = nil
 	local v2 = nil
 	local Result = nil
@@ -63,7 +63,7 @@ local function getNewestPreviewableMessage(List) --[[ Line: 119 ]]
 		repeat
 			if type(value.created_at) == "string" then
 				local Success
-				Success, Result = pcall(function() --[[ Line: 77 ]]
+				Success, Result = pcall(function()
 					-- upvalues: value (copy)
 					return DateTime.fromIsoDate(value.created_at)
 				end)
@@ -88,7 +88,7 @@ local function getNewestPreviewableMessage(List) --[[ Line: 119 ]]
 	return v1
 end
 
-local _ = function(p1, p2): boolean --[[ Line: 138 | Named "shouldUpdatePreview" ]]
+local _ = function(p1, p2): boolean
 	if p2 == nil then
 		return true
 	else
@@ -99,7 +99,7 @@ local _ = function(p1, p2): boolean --[[ Line: 138 | Named "shouldUpdatePreview"
 	end
 end
 
-local _ = function(p1, p2): boolean --[[ Line: 151 | Named "isUnreadCandidateMessage" ]]
+local _ = function(p1, p2): boolean
 	if p1 == nil or p1.is_badgeable ~= true then
 		return false
 	else
@@ -109,7 +109,7 @@ local _ = function(p1, p2): boolean --[[ Line: 151 | Named "isUnreadCandidateMes
 	end
 end
 
-local function hasNewerUnreadMessage(List, p1): boolean --[[ Line: 172 ]]
+local function hasNewerUnreadMessage(List, p1): boolean
 	if p1 == nil or p1.hasUnreadMessages ~= true then
 		return false
 	end
@@ -127,7 +127,7 @@ local function hasNewerUnreadMessage(List, p1): boolean --[[ Line: 172 ]]
 		if v4 then
 			local v5 = nil
 			if type(value.created_at) == "string" then
-				local Success, Result = pcall(function() --[[ Line: 77 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: value (copy)
 					return DateTime.fromIsoDate(value.created_at)
 				end)
@@ -153,12 +153,12 @@ return {
 	createConversationFromFriendPlaceholder = require(Parent.AppChat.createConversationFromFriendPlaceholder),
 	fetchConversationDetailsToSignals = require(Parent.AppChat.fetchConversationDetailsToSignals),
 	fetchConversationListPageToSignals = FetchConversationListPageToSignalsModule,
-	getConversationStore = function() --[[ Line: 29 ]]
+	getConversationStore = function()
 		-- upvalues: GetConversationStoreModule (copy)
 		return GetConversationStoreModule(false)
 	end,
 	getConversationTitle = require(Parent.AppChat.getConversationTitle),
-	isFriendPlaceholder = function(Text: string, p2): boolean --[[ Line: 33 ]]
+	isFriendPlaceholder = function(Text: string, p2): boolean
 		-- upvalues: GetConversationStoreModule (copy), ConversationChannelsModule (copy)
 		if Text == nil or Text == "" then
 			return false
@@ -168,7 +168,7 @@ return {
 			return if Conversation == nil then string.sub(Text, 1, 8) == "friends:" else Conversation.source == ConversationChannelsModule.Source.Friends
 		end
 	end,
-	markConversationRead = function(p2, Enabled) --[[ Line: 44 ]]
+	markConversationRead = function(p2, Enabled)
 		-- upvalues: GetConversationStoreModule (copy), AppChatNetworkingModule (copy), Logger (copy)
 		local ConversationStoreModule = GetConversationStoreModule(false)
 		local Conversation = ConversationStoreModule.getConversation(p2, false)
@@ -183,23 +183,23 @@ return {
 			end
 		elseif not IsEnabled then return end
 		if not IsEnabled then return end
-		return AppChatNetworkingModule.http.MarkConversationRead(nil, p2):catch(function(Err) --[[ Line: 63 ]]
+		return AppChatNetworkingModule.http.MarkConversationRead(nil, p2):catch(function(Err)
 			-- upvalues: Logger (upval), p2 (copy)
 			Logger:warning(`Failed to mark conversation read for {p2}: {tostring(Err)}`)
 		end)
 	end,
-	removeConversation = function(p3) --[[ Line: 71 ]]
+	removeConversation = function(p3)
 		-- upvalues: GetConversationStoreModule (copy)
 		GetConversationStoreModule(false).removeConversation(p3)
 	end,
-	updateConversationPreviewFromMessages = function(p3, p4, p5) --[[ Line: 197 ]]
+	updateConversationPreviewFromMessages = function(p3, p4, p5)
 		-- upvalues: GetConversationStoreModule (copy), FetchConversationListPageToSignalsModule (copy), Logger (copy), hasNewerUnreadMessage (copy), getNewestPreviewableMessage (copy)
 		local ConversationStoreModule = GetConversationStoreModule(false)
 		local Conversation = ConversationStoreModule.getConversation(p3, false)
 		
 		if Conversation == nil then
 			if p5 ~= nil and p5.refreshListOnMissingConversation == true then
-				FetchConversationListPageToSignalsModule():catch(function(Err) --[[ Line: 206 ]]
+				FetchConversationListPageToSignalsModule():catch(function(Err)
 					-- upvalues: Logger (upval)
 					Logger:warning(`Failed to refresh conversation list after realtime update: {tostring(Err)}`)
 				end)
@@ -213,7 +213,7 @@ return {
 				if NewestPreviewableMessage == nil then break end
 				repeat
 					if type(NewestPreviewableMessage.created_at) == "string" then
-						local Success, Result = pcall(function() --[[ Line: 77 ]]
+						local Success, Result = pcall(function()
 							-- upvalues: NewestPreviewableMessage (copy)
 							return DateTime.fromIsoDate(NewestPreviewableMessage.created_at)
 						end)

@@ -12,7 +12,7 @@ local config = {
 	policy = "Feature.Moments.Action.GenerateTextFeedbackPolicy"
 }
 
-return function(p1) --[[ Line: 33 | Named "TextFeedbackReasonDialog" ]]
+return function(p1)
 	-- upvalues: UseCreationFlowStringsModule (copy), UseLocalizationFunction (copy), config (copy), ReactModule (copy), Dialog (copy), FoundationModule (copy), Text (copy)
 	local UseCreationFlowStringsModuleResult = UseCreationFlowStringsModule()
 	local UseLocalizationResult = UseLocalizationFunction(config)

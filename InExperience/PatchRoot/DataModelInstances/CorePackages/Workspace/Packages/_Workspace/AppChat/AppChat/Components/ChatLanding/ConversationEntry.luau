@@ -47,10 +47,10 @@ local _ = require(AppChat.types)
 local config = {
 	entryHeight = 64,
 	boldTitle = true,
-	onSquadJoinButtonActivated = function() --[[ Line: 77 ]] end
+	onSquadJoinButtonActivated = function() end
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 81 | Named "ConversationEntry" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseTokensFunction (copy), UseTextSizeOffsetFunction (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), UseIsUserPendingModule (copy), GetBoldTextThemeModule (copy), UseDispatchFunction (copy), UseChatPlacementContextFunction (copy), UseChatPagePaddingModule (copy), UseRelativeTimestampBindingModule (copy), UseMemoFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), FFlagAppChatTimestampInSubtitleModule (copy), ReactModule (copy), UseNavigationFunction (copy), GetOverlayStoreModule (copy), EnumScreensModule (copy), OverlayTypesModule (copy), ConversationModule (copy), RemovedConversationModule (copy), ShouldShowU13ChatOptInForConversationModule (copy), ConstantsModule (copy), ShouldShowOSAForConversationModule (copy), HttpService (copy), FFlagAppChatSquadJoinButtonU13OSAModule (copy), FFlagAppChatUseActivationOnFocus (copy), UseActivationOnFocusFunction (copy), ReactFocusNavigationModule (copy), UseCanAccessPartyModule (copy), SquadComponentAccessWrapperModule (copy), SquadJoinButtonModule (copy), SquadButtonSourceEnum (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), ConversationCell (copy), GetFFlagDebugAppChatModule (copy), ConversationRelativeTimestampModule (copy), FoundationModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseStyleResult = UseStyleFunction()
@@ -70,7 +70,7 @@ return ReactModule.memo(function(p1) --[[ Line: 81 | Named "ConversationEntry" ]
 	local ScaledBaseSize = BoldTextThemeModule.Font.BaseSize * CaptionSubHeader.RelativeSize
 	local ShortRelativeTime = JoinResult.conversation.shortRelativeTime or ""
 	local UseRelativeTimestampBindingModuleResult = UseRelativeTimestampBindingModule(JoinResult.conversation.unixTime)
-	local UseMemoResult = UseMemoFunction(function() --[[ Line: 106 ]]
+	local UseMemoResult = UseMemoFunction(function()
 		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), ShortRelativeTime (copy), ScaledBaseSize (copy), UseTokensResult (copy), Text (upval), CaptionSubHeader (copy)
 		return if FoundationFontFaceMigration then GetTextSizeFunction(ShortRelativeTime, ScaledBaseSize, UseTokensResult.Typography.CaptionLarge.Font, Vector2.new(10000, 10000)).X else Text.GetTextWidth(ShortRelativeTime, CaptionSubHeader.Font, ScaledBaseSize)
 	end, {
@@ -88,26 +88,26 @@ return ReactModule.memo(function(p1) --[[ Line: 81 | Named "ConversationEntry" ]
 	if UseNavigationResult.getScreenProps then
 		WideModeScreenProps = UseNavigationResult.getScreenProps("wideMode", WideModeScreenProps)
 	end
-	ReactModule.useEffect(function() --[[ Line: 125 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: JoinResult (copy)
 		JoinResult.fireImpressionEvent(JoinResult.conversation)
 	end, {})
 	local UseResult1 = nil
 	local OverlayStoreModule = GetOverlayStoreModule(false)
-	local UseResult = ReactModule.useCallback(function(ConversationId) --[[ Line: 133 ]]
+	local UseResult = ReactModule.useCallback(function(ConversationId)
 		-- upvalues: UseNavigationResult (copy), EnumScreensModule (upval)
 		UseNavigationResult.navigate(EnumScreensModule.ChatConversation, {
 			isNavigatedFromGroupOSAJoin = true,
 			conversationId = ConversationId
 		})
 	end, { UseNavigationResult })
-	UseResult1 = ReactModule.useCallback(function(ConversationId, ImpressionId, ModalVariant, MULTIUSERCONVERSATION, Callback) --[[ Line: 141 ]]
+	UseResult1 = ReactModule.useCallback(function(ConversationId, ImpressionId, ModalVariant, MULTIUSERCONVERSATION, Callback)
 		-- upvalues: OverlayStoreModule (copy), OverlayTypesModule (upval), UseResult (copy), ConversationModule (upval), UseDispatchResult (copy), RemovedConversationModule (upval)
 		OverlayStoreModule.showOverlay(OverlayTypesModule.GroupOSADialog, {
 			conversationId = ConversationId,
 			impressionId = ImpressionId,
 			modalVariant = ModalVariant,
-			onJoin = function() --[[ Line: 152 ]]
+			onJoin = function()
 				-- upvalues: OverlayStoreModule (upval), Callback (copy), ConversationId (copy), UseResult (upval)
 				OverlayStoreModule.dismissOverlay()
 				
@@ -119,7 +119,7 @@ return ReactModule.memo(function(p1) --[[ Line: 81 | Named "ConversationEntry" ]
 					UseResult(ConversationId)
 				end
 			end,
-			onDecline = function() --[[ Line: 160 ]]
+			onDecline = function()
 				-- upvalues: ConversationId (copy), MULTIUSERCONVERSATION (copy), ConversationModule (upval), UseDispatchResult (upval), RemovedConversationModule (upval), OverlayStoreModule (upval)
 				if ConversationId and MULTIUSERCONVERSATION == ConversationModule.Type.MULTI_USER_CONVERSATION then
 					UseDispatchResult(RemovedConversationModule(ConversationId))
@@ -129,7 +129,7 @@ return ReactModule.memo(function(p1) --[[ Line: 81 | Named "ConversationEntry" ]
 		})
 	end, { UseResult, UseDispatchResult })
 	local OnSquadJoinButtonActivatedFunction = JoinResult.onSquadJoinButtonActivated
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 204 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: ShouldShowOSAForConversationModule (upval), Conversation (copy), ConstantsModule (upval), FFlagAppChatSquadJoinButtonU13OSAModule (upval), ShouldShowU13ChatOptInForConversationModule (upval), ConversationModule (upval), UseResult1 (ref), HttpService (upval), OnSquadJoinButtonActivatedFunction (copy)
 		local ChatOptInInfoCard = nil
 		
@@ -151,7 +151,7 @@ return ReactModule.memo(function(p1) --[[ Line: 81 | Named "ConversationEntry" ]
 		Conversation,
 		OnSquadJoinButtonActivatedFunction
 	})
-	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 175 ]]
+	local UseResult3 = ReactModule.useCallback(function(p2)
 		-- upvalues: ShouldShowU13ChatOptInForConversationModule (upval), ConstantsModule (upval), ShouldShowOSAForConversationModule (upval), HttpService (upval), UseResult1 (ref), JoinResult (copy), UseTelemetryModuleResult (copy)
 		local Guid = nil
 		local ChatOptInInfoCard = nil
@@ -176,33 +176,33 @@ return ReactModule.memo(function(p1) --[[ Line: 81 | Named "ConversationEntry" ]
 	})
 	
 	if FFlagAppChatUseActivationOnFocus then
-		UseActivationOnFocusFunction(WideModeScreenProps, UseRefResult, function() --[[ Line: 238 ]]
+		UseActivationOnFocusFunction(WideModeScreenProps, UseRefResult, function()
 			-- upvalues: UseResult3 (copy), Conversation (copy)
 			UseResult3(Conversation)
-		end, function(p2) --[[ Line: 240 ]]
+		end, function(p2)
 			return if p2 then p2.cell else nil
-		end, function() --[[ Line: 242 ]]
+		end, function()
 			-- upvalues: Conversation (copy)
 			return Conversation and Conversation.id
 		end)
 	else
 		local UseContextResult = ReactModule.useContext(ReactFocusNavigationModule.FocusNavigationContext)
-		ReactModule.useEffect(function() --[[ Line: 247 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: WideModeScreenProps (ref), UseResult3 (copy), UseContextResult (copy), UseRefResult (copy), Conversation (copy)
 			if WideModeScreenProps and UseResult3 and UseContextResult then
-				local SubscribeResult = UseContextResult.focusedGuiObject:subscribe(function(Cell) --[[ Line: 249 ]]
+				local SubscribeResult = UseContextResult.focusedGuiObject:subscribe(function(Cell)
 					-- upvalues: UseRefResult (upval), UseResult3 (upval), Conversation (upval)
 					if UseRefResult.current and Cell == UseRefResult.current.cell then
 						UseResult3(Conversation)
 					end
 				end)
 				
-				return function() --[[ Line: 254 ]]
+				return function()
 					-- upvalues: SubscribeResult (copy)
 					SubscribeResult:unsubscribe()
 				end
 			else
-				return function() --[[ Line: 258 ]] end
+				return function() end
 			end
 		end, { UseResult3, WideModeScreenProps, UseContextResult })
 	end

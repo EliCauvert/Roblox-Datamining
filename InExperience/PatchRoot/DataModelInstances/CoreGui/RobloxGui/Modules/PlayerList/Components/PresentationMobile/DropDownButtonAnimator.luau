@@ -25,7 +25,7 @@ DropDownAnimator.validateProps = TModule.strictInterface({
 	forwardRef = TModule.optional(TModule.callback)
 })
 
-function DropDownAnimator.init(p1) --[[ Line: 46 ]]
+function DropDownAnimator.init(p1)
 	-- upvalues: RoactModule (copy), OtterModule (copy), config (copy)
 	p1.state = {
 		lastButtonProps = nil,
@@ -36,7 +36,7 @@ function DropDownAnimator.init(p1) --[[ Line: 46 ]]
 	p1.currentButtonPosition, p1.updateCurrentButtonPosition = RoactModule.createBinding(UDim2.new(0, 0, 0, 0))
 	p1.lastButtonPosition, p1.updateLastButtonPosition = RoactModule.createBinding(UDim2.new(0, 0, 0, 0))
 	p1.positionMotor = OtterModule.createSingleMotor(0)
-	p1.positionMotor:onStep(function(XScale: number) --[[ Line: 58 ]]
+	p1.positionMotor:onStep(function(XScale: number)
 		-- upvalues: p1 (copy)
 		p1.updateCurrentButtonPosition(UDim2.new(XScale, 0, 0, 0))
 		
@@ -48,7 +48,7 @@ function DropDownAnimator.init(p1) --[[ Line: 46 ]]
 			p1.updateLastButtonPosition(UDim2.new(XScale - 1, 0, 0, 0))
 		end
 	end)
-	p1.positionMotor:onComplete(function(p2) --[[ Line: 66 ]]
+	p1.positionMotor:onComplete(function(p2)
 		-- upvalues: p1 (copy), RoactModule (upval)
 		if p2 == 0 then
 			p1:setState({
@@ -59,11 +59,11 @@ function DropDownAnimator.init(p1) --[[ Line: 46 ]]
 		end
 	end)
 	p1.overlayMotor = OtterModule.createSingleMotor(0)
-	p1.overlayMotor:onStep(function(OverlayPercentage) --[[ Line: 77 ]]
+	p1.overlayMotor:onStep(function(OverlayPercentage)
 		-- upvalues: p1 (copy)
 		p1:setState({ overlayPercentage = OverlayPercentage })
 	end)
-	p1.overlayMotor:onComplete(function(p2) --[[ Line: 82 ]]
+	p1.overlayMotor:onComplete(function(p2)
 		-- upvalues: p1 (copy), OtterModule (upval), config (upval)
 		if p2 == 1 then
 			p1.positionMotor:setGoal(OtterModule.spring(0, config))
@@ -71,7 +71,7 @@ function DropDownAnimator.init(p1) --[[ Line: 46 ]]
 	end)
 end
 
-function DropDownAnimator.getButtonProps(p1, LastButtonProps, p2) --[[ Line: 89 ]]
+function DropDownAnimator.getButtonProps(p1, LastButtonProps, p2)
 	local config = {
 		text = LastButtonProps.text,
 		icon = LastButtonProps.icon,
@@ -82,7 +82,7 @@ function DropDownAnimator.getButtonProps(p1, LastButtonProps, p2) --[[ Line: 89 
 	
 	if p1.state.lastButtonProps == nil then
 		if LastButtonProps.onActivated and (LastButtonProps.onDecline or p1.props.forceShowOptions) then
-			function config.onActivated() --[[ Line: 106 ]]
+			function config.onActivated()
 				-- upvalues: p1 (copy), LastButtonProps (copy)
 				p1:setState({ onActivatedCalled = true, onDeclineCalled = false })
 				LastButtonProps.onActivated()
@@ -91,7 +91,7 @@ function DropDownAnimator.getButtonProps(p1, LastButtonProps, p2) --[[ Line: 89 
 			config.onActivated = LastButtonProps.onActivated
 		end
 		if LastButtonProps.onDecline then
-			function config.onDecline() --[[ Line: 117 ]]
+			function config.onDecline()
 				-- upvalues: p1 (copy), LastButtonProps (copy)
 				p1:setState({ onActivatedCalled = false, onDeclineCalled = true })
 				LastButtonProps.onDecline()
@@ -107,9 +107,9 @@ function DropDownAnimator.getButtonProps(p1, LastButtonProps, p2) --[[ Line: 89 
 	return config
 end
 
-function DropDownAnimator.render(p1) --[[ Line: 130 ]]
+function DropDownAnimator.render(p1)
 	-- upvalues: WithLayoutValuesFunction (copy), RoactModule (copy), DropDownButtonModule (copy)
-	return WithLayoutValuesFunction(function(_) --[[ Line: 131 ]]
+	return WithLayoutValuesFunction(function(_)
 		-- upvalues: p1 (copy), RoactModule (upval), DropDownButtonModule (upval)
 		local LayoutValues = p1.props.layoutValues
 		local config = {
@@ -142,7 +142,7 @@ function DropDownAnimator.render(p1) --[[ Line: 130 ]]
 	end)
 end
 
-function DropDownAnimator.didUpdate(p1, LastButtonProps, p2) --[[ Line: 167 ]]
+function DropDownAnimator.didUpdate(p1, LastButtonProps, p2)
 	-- upvalues: OtterModule (copy), config1 (copy), RoactModule (copy)
 	local HasOnDecline = LastButtonProps.onDecline ~= nil or p1.props.forceShowOptions
 	local OnDeclineCalled = p1.state.onDeclineCalled or p1.state.onActivatedCalled
@@ -174,14 +174,14 @@ function DropDownAnimator.didUpdate(p1, LastButtonProps, p2) --[[ Line: 167 ]]
 	end
 end
 
-function DropDownAnimator.willUnmount(p1) --[[ Line: 209 ]]
+function DropDownAnimator.willUnmount(p1)
 	p1.positionMotor:destroy()
 	p1.positionMotor = nil
 	p1.overlayMotor:destroy()
 	p1.overlayMotor = nil
 end
 
-return function(p1) --[[ Line: 216 ]]
+return function(p1)
 	-- upvalues: UseLayoutValuesFunction (copy), RoactModule (copy), DropDownAnimator (copy), CryoModule (copy)
 	return RoactModule.createElement(DropDownAnimator, CryoModule.Dictionary.join(p1, { layoutValues = UseLayoutValuesFunction() }))
 end

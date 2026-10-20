@@ -11,7 +11,7 @@ local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local GetFFlagAddMorePhoneUpsellEventsFunction = require(Parent.SharedFlags).GetFFlagAddMorePhoneUpsellEvents
 
-local function getButtonStackProps(Text, OnActivated, IsDisabled, Text1, OnActivated1) --[[ Line: 38 ]]
+local function getButtonStackProps(Text, OnActivated, IsDisabled, Text1, OnActivated1)
 	-- upvalues: ButtonType (copy)
 	local Buttons = {
 		{
@@ -41,7 +41,7 @@ local function getButtonStackProps(Text, OnActivated, IsDisabled, Text1, OnActiv
 	}
 end
 
-return function(p1) --[[ Line: 75 | Named "InGameVerifyPhoneView" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), InteractiveAlert (copy), getButtonStackProps (copy), TextField (copy), GetFFlagAddMorePhoneUpsellEventsFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseStyleResult = UseStyleFunction()
 	local Tokens = UseStyleResult.Tokens
@@ -63,7 +63,7 @@ return function(p1) --[[ Line: 75 | Named "InGameVerifyPhoneView" ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
 	local IsNotUseStateResultMatch = UseStateResult ~= 0
 	
-	local function _(Text: string): string --[[ Line: 100 | Named "getBodyText" ]]
+	local function _(Text: string): string
 		-- upvalues: p1 (copy)
 		return Text:gsub("{phoneNumber}", "+" .. p1.prefix .. p1.phoneNumber)
 	end
@@ -73,13 +73,13 @@ return function(p1) --[[ Line: 75 | Named "InGameVerifyPhoneView" ]]
 	return ReactModule.createElement(InteractiveAlert, {
 		title = UseLocalizationResult.titleKey,
 		screenSize = p1.screenSize,
-		buttonStackInfo = getButtonStackProps(if IsNotUseStateResultMatch then UseLocalizationResult.buttonDisabledKey .. " (" .. UseStateResult .. ")" else UseLocalizationResult.buttonKey, function() --[[ Line: 104 | Named "handleResendButtonClick" ]]
+		buttonStackInfo = getButtonStackProps(if IsNotUseStateResultMatch then UseLocalizationResult.buttonDisabledKey .. " (" .. UseStateResult .. ")" else UseLocalizationResult.buttonKey, function()
 			-- upvalues: p1 (copy), UseStateResult2 (copy)
 			p1.onResendPhoneCode()
 			UseStateResult2(10)
 			local CurrentTime = tick()
 			
-			local function countDown() --[[ Line: 109 ]]
+			local function countDown()
 				-- upvalues: CurrentTime (copy), UseStateResult2 (upval), countDown (copy)
 				local Value = 10 - (tick() - CurrentTime)
 				
@@ -107,7 +107,7 @@ return function(p1) --[[ Line: 75 | Named "InGameVerifyPhoneView" ]]
 		onCloseClicked = p1.onClose,
 		position = p1.isKeyboardShowing and UDim2.new(0.5, 0, 1, -p1.keyboardHeight) or nil,
 		anchorPoint = p1.isKeyboardShowing and Vector2.new(0.5, 1) or nil,
-		middleContent = function() --[[ Line: 142 ]]
+		middleContent = function()
 			-- upvalues: ReactModule (upval), Tokens (copy), TextField (upval), p1 (copy), IsNotErrorMessageMatch (copy), GetFFlagAddMorePhoneUpsellEventsFunction (upval), FoundationFontFaceMigration (upval), UseStyleResult (copy), NormalizeFontFaceFunction (upval), UseLocalizationResult (copy)
 			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -135,7 +135,7 @@ return function(p1) --[[ Line: 75 | Named "InGameVerifyPhoneView" ]]
 						required = true,
 						LayoutOrder = 1,
 						text = p1.code,
-						onChange = function(Text) --[[ Line: 168 ]]
+						onChange = function(Text)
 							-- upvalues: p1 (upval)
 							p1.onCodeTextChange({ Text = Text })
 						end,

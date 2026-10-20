@@ -6,7 +6,7 @@ local _ = require(DataHydration.DataHydrationTypes)
 local FetchShareLinkMetadataModule = require(script.Parent.fetchShareLinkMetadata)
 local _ = require(script.Parent.ShareLinkMetadataStoreTypes)
 
-return function(p1) --[[ Line: 22 | Named "createShareLinkMetadataStore" ]]
+return function(p1)
 	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), FetchShareLinkMetadataModule (copy)
 	local P0 = p1 or {}
 	local T = {}
@@ -15,7 +15,7 @@ return function(p1) --[[ Line: 22 | Named "createShareLinkMetadataStore" ]]
 		replaceItems = true,
 		cache = CreateDataCacheModule(P0.ttlSeconds, P0.failedTtlSeconds),
 		logError = P0.logError,
-		fetchFn = function(p2, _) --[[ Line: 32 ]]
+		fetchFn = function(p2, _)
 			-- upvalues: T (ref), FetchShareLinkMetadataModule (upval), P0 (copy)
 			local Entry = T[p2]
 			
@@ -26,7 +26,7 @@ return function(p1) --[[ Line: 22 | Named "createShareLinkMetadataStore" ]]
 		end
 	})
 	
-	local function _(Key, p3) --[[ Line: 47 | Named "setLinkType" ]]
+	local function _(Key, p3)
 		-- upvalues: T (ref)
 		T[Key] = p3
 		
@@ -35,24 +35,24 @@ return function(p1) --[[ Line: 22 | Named "createShareLinkMetadataStore" ]]
 	
 	return {
 		getShareLinkMetadata = DataResolverModule.getCachedItem,
-		fetchShareLinkMetadata = function(Key, p3) --[[ Line: 64 ]]
+		fetchShareLinkMetadata = function(Key, p3)
 			-- upvalues: DataResolverModule (copy), T (ref)
 			T[Key] = p3
 			
 			return DataResolverModule.fetchItem(Key)
 		end,
-		getAndFetchShareLinkMetadata = function(Key, p3) --[[ Line: 67 ]]
+		getAndFetchShareLinkMetadata = function(Key, p3)
 			-- upvalues: DataResolverModule (copy), T (ref)
 			T[Key] = p3
 			
 			return DataResolverModule.getAndFetchItem(Key)
 		end,
-		clear = function() --[[ Line: 52 ]]
+		clear = function()
 			-- upvalues: T (ref), DataResolverModule (copy)
 			T = {}
 			DataResolverModule.clear()
 		end,
-		dispose = function() --[[ Line: 57 ]]
+		dispose = function()
 			-- upvalues: T (ref), DataResolverModule (copy)
 			T = {}
 			DataResolverModule.dispose()

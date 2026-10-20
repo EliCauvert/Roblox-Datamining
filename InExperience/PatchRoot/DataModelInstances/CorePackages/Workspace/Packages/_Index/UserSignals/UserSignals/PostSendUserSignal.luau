@@ -8,7 +8,7 @@ local Url = require(Parent.Http).Url
 local _ = require(UserSignals.UserSignalTypes)
 local FFlagLuaAppAddSessionIdToUserSignals = require(Parent.SharedFlags).FFlagLuaAppAddSessionIdToUserSignals
 
-return function(Callback, SignalValue, SignalEntity, SignalValueType, SignalType) --[[ Line: 82 ]]
+return function(Callback, SignalValue, SignalEntity, SignalValueType, SignalType)
 	-- upvalues: FFlagLuaAppAddSessionIdToUserSignals (copy), SessionService (copy), SessionType (copy), Url (copy), HttpService (copy)
 	local Metadata = if FFlagLuaAppAddSessionIdToUserSignals then SessionService:GetMetadata(SessionType.StructuralIdentifier.HomePageSessionInfo, SessionType.Metadata.HomePageSessionInfo.OmniSessionId) else nil
 	

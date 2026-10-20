@@ -15,7 +15,7 @@ local config = {
 	tags = { container = "col auto-y" }
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 48 | Named "Banner" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), Button (copy), FoundationModule (copy), BannerBadgeModule (copy), IconButton (copy), View (copy), Icon (copy), Image (copy), Text (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local Tag = "col auto-y"
@@ -25,7 +25,7 @@ return ReactModule.memo(function(p1) --[[ Line: 48 | Named "Banner" ]]
 	end
 	local v1: boolean = JoinResult.badges and #JoinResult.badges > 0
 	local NoOnDismiss: boolean = JoinResult.buttons and (#JoinResult.buttons < 2 and (not JoinResult.image and (not JoinResult.body and (not v1 and not JoinResult.onDismiss))))
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 63 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: JoinResult (copy), ReactModule (upval), Button (upval), CryoModule (upval), FoundationModule (upval)
 		local Elements = {}
 		
@@ -40,7 +40,7 @@ return ReactModule.memo(function(p1) --[[ Line: 48 | Named "Banner" ]]
 		end
 		return Elements
 	end, { JoinResult.buttons })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 80 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: JoinResult (copy), ReactModule (upval), BannerBadgeModule (upval), CryoModule (upval)
 		local Elements = {}
 		
@@ -51,7 +51,7 @@ return ReactModule.memo(function(p1) --[[ Line: 48 | Named "Banner" ]]
 		end
 		return Elements
 	end, { JoinResult.badges })
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 96 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: JoinResult (copy), ReactModule (upval), IconButton (upval), v1 (copy), FoundationModule (upval)
 		return if JoinResult.onDismiss then ReactModule.createElement(IconButton, {
 			isCircular = true,

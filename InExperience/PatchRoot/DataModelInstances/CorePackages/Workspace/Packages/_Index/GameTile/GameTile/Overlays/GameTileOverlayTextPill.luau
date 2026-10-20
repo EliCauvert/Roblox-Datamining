@@ -9,7 +9,7 @@ local LightTheme = StyleModule.Themes.LightTheme
 local GetTextSizeFunction = StyleModule.GetTextSize
 local UseDesignTokensFunction = StyleModule.useDesignTokens
 
-return function(Frame) --[[ Line: 22 | Named "GameTileOverlayTextPill" ]]
+return function(Frame)
 	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy), GetTextSizeFunction (copy), Colors (copy), LightTheme (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	if Frame.text and string.len(Frame.text) ~= 0 then
 		local UseDesignTokensResult = UseDesignTokensFunction()
@@ -17,7 +17,7 @@ return function(Frame) --[[ Line: 22 | Named "GameTileOverlayTextPill" ]]
 		local Size150 = UseDesignTokensResult.Size.Size_150
 		local HeadingLargeFont = UseDesignTokensResult.Typography.HeadingLarge.Font
 		local FontSize300 = UseDesignTokensResult.FontSize.FontSize_300
-		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 35 ]]
+		local UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: GetTextSizeFunction (upval), Frame (copy), FontSize300 (copy), HeadingLargeFont (copy)
 			return GetTextSizeFunction(Frame.text, FontSize300, HeadingLargeFont, Vector2.new(1e999, 1e999))
 		end, { Frame.text, FontSize300, HeadingLargeFont })
@@ -50,7 +50,7 @@ return function(Frame) --[[ Line: 22 | Named "GameTileOverlayTextPill" ]]
 				TextTruncate = Enum.TextTruncate.AtEnd
 			}, {
 				UISizeConstraint = ReactModule.createElement("UISizeConstraint", {
-					MaxSize = Frame.maxWidthBinding:map(function(p1) --[[ Line: 69 ]]
+					MaxSize = Frame.maxWidthBinding:map(function(p1)
 						-- upvalues: Size200 (copy), UseMemoResult (copy)
 						local X = p1 - Size200 * 2
 						

@@ -3,7 +3,7 @@ local _ = require(BulkPurchaseApp.Store.Types)
 local _ = require(script.Parent.Parent.BulkPurchaseRequestOwnedItem)
 local GetThumbnailUrlModule = require(BulkPurchaseApp.Utils.getThumbnailUrl)
 
-return function(p1) --[[ Line: 10 | Named "createOwnedItem" ]]
+return function(p1)
 	-- upvalues: GetThumbnailUrlModule (copy)
 	return {
 		id = p1.id,

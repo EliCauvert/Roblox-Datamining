@@ -78,7 +78,7 @@ local DestinationType = {
 	PlaceLaunch = "PlaceLaunch"
 }
 
-local function getCommunitiesContext() --[[ Line: 114 ]]
+local function getCommunitiesContext()
 	-- upvalues: CommunityListRouting (copy), AppPage (copy), DestinationType (copy), UrlBuilder (copy)
 	return if CommunityListRouting.getShouldUseLuaCommunityList() then {
 		appPage = AppPage.Groups,
@@ -89,19 +89,19 @@ local function getCommunitiesContext() --[[ Line: 114 ]]
 	}
 end
 
-local function _(p1) --[[ Line: 120 | Named "getResolvedItemContext" ]]
+local function _(p1)
 	-- upvalues: FFlagFlyoutResolveItemContextOnActivationModule (copy)
 	return if FFlagFlyoutResolveItemContextOnActivationModule and p1.getContext then p1.getContext() else p1.context
 end
 
-local _ = function(p1) --[[ Line: 124 | Named "getDestinationType" ]]
+local _ = function(p1)
 	-- upvalues: FFlagFlyoutResolveItemContextOnActivationModule (copy)
 	local Context = if FFlagFlyoutResolveItemContextOnActivationModule and p1.getContext then p1.getContext() else p1.context
 	
 	return if Context then Context.destinationType else nil
 end
 
-local function itemRequiresWebView(p1, p2): boolean --[[ Line: 129 ]]
+local function itemRequiresWebView(p1, p2): boolean
 	-- upvalues: FFlagFlyoutResolveItemContextOnActivationModule (copy), DestinationType (copy)
 	local Context = if FFlagFlyoutResolveItemContextOnActivationModule and p1.getContext then p1.getContext() else p1.context
 	local DestinationType1 = if Context then Context.destinationType else nil
@@ -109,7 +109,7 @@ local function itemRequiresWebView(p1, p2): boolean --[[ Line: 129 ]]
 	return DestinationType1 == DestinationType.WebView or DestinationType1 == DestinationType.WebLink and not p2
 end
 
-local function itemIsGameSortDeeplink(p1): boolean --[[ Line: 135 ]]
+local function itemIsGameSortDeeplink(p1): boolean
 	-- upvalues: FFlagFlyoutResolveItemContextOnActivationModule (copy), DestinationType (copy)
 	local Context = if FFlagFlyoutResolveItemContextOnActivationModule and p1.getContext then p1.getContext() else p1.context
 	
@@ -141,7 +141,7 @@ local ItemInfo = {
 		textKey = ItemTextKey[ItemType.Inventory],
 		icon = BuilderIconsModule.Icon.Backpack,
 		context = {
-			urlGenerator = function(UserId) --[[ Line: 165 ]]
+			urlGenerator = function(UserId)
 				-- upvalues: UrlBuilder (copy)
 				return UserId and UrlBuilder.user.inventory({ userId = UserId }) or nil
 			end,
@@ -229,7 +229,7 @@ local ItemInfo = {
 		textKey = ItemTextKey[ItemType.CreateGames],
 		icon = BuilderIconsModule.Icon.Studio,
 		context = {
-			urlGenerator = function(Callback) --[[ Line: 249 ]]
+			urlGenerator = function(Callback)
 				return Callback({ utm_content = "side_panel" })
 			end,
 			destinationType = if FFlagFlyoutFilterWebViewsAndBrowserLinks then DestinationType.WebLink else DestinationType.WebView
@@ -249,7 +249,7 @@ local ItemInfo = {
 		textKey = ItemTextKey[ItemType.GiftCards],
 		icon = BuilderIconsModule.Icon.GiftCard,
 		context = {
-			urlGenerator = function(p1) --[[ Line: 271 ]]
+			urlGenerator = function(p1)
 				-- upvalues: UrlBuilder (copy)
 				return UrlBuilder.static.giftCards(p1)
 			end,
@@ -287,7 +287,7 @@ local ItemInfo = {
 		itemType = ItemType.Terms,
 		textKey = ItemTextKey[ItemType.Terms],
 		context = {
-			urlGenerator = function(_, p1) --[[ Line: 314 ]]
+			urlGenerator = function(_, p1)
 				-- upvalues: UrlBuilder (copy)
 				local TermsOfUseLink = if p1 then p1.getTermsOfUseLink() else nil
 				
@@ -303,7 +303,7 @@ local ItemInfo = {
 		itemType = ItemType.Privacy,
 		textKey = ItemTextKey[ItemType.Privacy],
 		context = {
-			urlGenerator = function(_, p1) --[[ Line: 333 ]]
+			urlGenerator = function(_, p1)
 				-- upvalues: UrlBuilder (copy)
 				local PrivacyPolicyLink = if p1 then p1.getPrivacyPolicyLink() else nil
 				

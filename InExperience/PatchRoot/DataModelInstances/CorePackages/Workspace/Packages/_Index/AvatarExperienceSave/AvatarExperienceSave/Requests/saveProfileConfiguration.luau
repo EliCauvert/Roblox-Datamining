@@ -13,9 +13,9 @@ local AVATAREDITORSERVICECOUNTERSTATUS = AvatarExperienceAnalyticsModule.Constan
 local FFlagAXAvatarEditorServiceTelemetryV2 = AvatarExperienceFlagsModule.FFlagAXAvatarEditorServiceTelemetryV2
 local FFlagAXDeprecateAvatarEditorServiceTelemetryV1 = AvatarExperienceFlagsModule.FFlagAXDeprecateAvatarEditorServiceTelemetryV1
 
-return function(BackgroundAssetId) --[[ Line: 40 | Named "saveProfileConfiguration" ]]
+return function(BackgroundAssetId)
 	-- upvalues: PromiseModule (copy), AvatarExperienceFlagsModule (copy), BuildProfileConfigurationApplyConfigModule (copy), FFlagAXAvatarEditorServiceTelemetryV2 (copy), ReportAvatarEditorServiceCounterFunction (copy), AVATAREDITORSERVICEEVENTS (copy), AVATAREDITORSERVICECOUNTERSTATUS (copy), AvatarEditorService (copy), FFlagAXDeprecateAvatarEditorServiceTelemetryV1 (copy), ReportAvatarEventCounterNoAnalyticsArgumentFunction (copy), AVATAREDITORSERVICEERRORS (copy)
-	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ()) --[[ Line: 43 ]]
+	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ())
 		-- upvalues: AvatarExperienceFlagsModule (upval), BuildProfileConfigurationApplyConfigModule (upval), BackgroundAssetId (copy), FFlagAXAvatarEditorServiceTelemetryV2 (upval), ReportAvatarEditorServiceCounterFunction (upval), AVATAREDITORSERVICEEVENTS (upval), AVATAREDITORSERVICECOUNTERSTATUS (upval), AvatarEditorService (upval), FFlagAXDeprecateAvatarEditorServiceTelemetryV1 (upval), ReportAvatarEventCounterNoAnalyticsArgumentFunction (upval), AVATAREDITORSERVICEERRORS (upval)
 		local ProfileConfigurationApplyConfigModule = if AvatarExperienceFlagsModule.FFlagAXProfileConfigurationMultiFieldApply then BuildProfileConfigurationApplyConfigModule(BackgroundAssetId) else { BackgroundAssetId = BackgroundAssetId }
 		

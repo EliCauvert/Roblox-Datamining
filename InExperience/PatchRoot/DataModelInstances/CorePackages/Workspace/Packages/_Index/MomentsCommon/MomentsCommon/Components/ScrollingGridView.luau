@@ -8,7 +8,7 @@ local ScrollView = FoundationModule.ScrollView
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function GridItems(Frame) --[[ Line: 33 ]]
+local function GridItems(Frame)
 	-- upvalues: ReactModule (copy), View (copy)
 	local Elements = {}
 	
@@ -35,20 +35,20 @@ local function GridItems(Frame) --[[ Line: 33 ]]
 	})
 end
 
-return function(p1) --[[ Line: 93 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseTokensFunction (copy), DashModule (copy), View (copy), ScrollView (copy), ScrollBarVisibility (copy), GridItems (copy), Button (copy), FoundationModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
 	local UseTokensResult = UseTokensFunction()
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 99 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(Frame.AbsoluteSize)
 	end, {})
-	local UseMemoResult = ReactModule.useMemo(function(): number --[[ Line: 103 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): number
 		-- upvalues: UseStateResult (copy), p1 (copy)
 		return (math.clamp(math.floor(UseStateResult.X / p1.itemConfig.minItemWidth), 1, p1.itemConfig.maxItemsPerRow))
 	end, { UseStateResult, p1.itemConfig })
-	local UseMemoResult1 = ReactModule.useMemo(function(): Vector2 --[[ Line: 111 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function(): Vector2
 		-- upvalues: UseStateResult (copy), p1 (copy), UseMemoResult (copy)
 		local XDelta = UseStateResult.X - p1.itemConfig.padding * (UseMemoResult - 1)
 		local Smallest = math.min(XDelta / UseMemoResult, XDelta)
@@ -60,7 +60,7 @@ return function(p1) --[[ Line: 93 ]]
 		p1.aspectRatio,
 		p1.itemConfig
 	})
-	local UseMemoResult2 = ReactModule.useMemo(function(): number --[[ Line: 121 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function(): number
 		-- upvalues: UseStateResult (copy), UseMemoResult1 (copy), UseMemoResult (copy), p1 (copy)
 		return if UseStateResult.Y <= 0 then 0 else math.max(math.floor(UseStateResult.Y / UseMemoResult1.Y) * UseMemoResult, p1.itemConfig.minItemsPerPage)
 	end, {
@@ -71,13 +71,13 @@ return function(p1) --[[ Line: 93 ]]
 	})
 	local IsYAbove: boolean = UseStateResult.X > 0 and UseStateResult.Y > 0
 	local ShouldShowShowMoreButton = p1.shouldShowShowMoreButton or UseStateResult1 < #p1.items
-	ReactModule.useEffect(function() --[[ Line: 135 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult1 (copy), UseMemoResult2 (copy), UseStateResult2_1 (copy)
 		if UseStateResult1 < UseMemoResult2 then
 			UseStateResult2_1(UseMemoResult2)
 		end
 	end, { UseStateResult, UseMemoResult2, UseStateResult1 })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 142 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult1 (copy), UseMemoResult2 (copy), p1 (copy), UseStateResult2_1 (copy)
 		if #p1.items < UseStateResult1 + UseMemoResult2 and p1.shouldShowShowMoreButton then
 			p1.onShowMoreCallback()
@@ -90,11 +90,11 @@ return function(p1) --[[ Line: 93 ]]
 		p1.onShowMoreCallback,
 		p1.shouldShowShowMoreButton
 	})
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 153 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: ShouldShowShowMoreButton (copy), p1 (copy), UseStateResult1 (copy), DashModule (upval)
 		return if ShouldShowShowMoreButton then DashModule.slice(p1.items, 1, (math.min(#p1.items, UseStateResult1))) else p1.items
 	end, { p1.items, ShouldShowShowMoreButton, UseStateResult1 })
-	ReactModule.useEffect(function() --[[ Line: 162 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), ShouldShowShowMoreButton (copy), UseStateResult (copy), UseMemoResult1 (copy), UseMemoResult (copy), UseStateResult1 (copy), UseMemoResult3 (copy), UseResult1 (copy)
 		if not p1.enableInfiniteScroll or not ShouldShowShowMoreButton then return end
 		if UseStateResult.Y <= 0 or UseMemoResult1.Y <= 0 or UseMemoResult <= 0 then return end
@@ -106,7 +106,7 @@ return function(p1) --[[ Line: 93 ]]
 		UseStateResult, UseMemoResult3, ShouldShowShowMoreButton,
 		p1.enableInfiniteScroll, p1.items, UseMemoResult, UseMemoResult1, UseResult1
 	})
-	local UseResult2 = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 193 ]]
+	local UseResult2 = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: ShouldShowShowMoreButton (copy), UseMemoResult1 (copy), UseResult1 (copy)
 		if not ShouldShowShowMoreButton then return end
 		if ScrollFrame.AbsoluteCanvasSize.Y - UseMemoResult1.Y <= ScrollFrame.CanvasPosition.Y + ScrollFrame.AbsoluteSize.Y then

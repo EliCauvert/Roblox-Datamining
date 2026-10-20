@@ -9,9 +9,9 @@ local CryoModule = require(Parent.Cryo)
 local GetFFlagSocialContextToastEventStreamFunction = require(Parent.SharedFlags).GetFFlagSocialContextToastEventStream
 local GetFFlagEnableReferredPlayerJoinRemoteEventFunction = require(Parent.SharedFlags).GetFFlagEnableReferredPlayerJoinRemoteEvent
 
-return function(p1) --[[ Line: 44 | Named "ToastRoot" ]]
+return function(p1)
 	-- upvalues: UseSelectorFunction (copy), GetFFlagSocialContextToastEventStreamFunction (copy), CryoModule (copy), ToastTypesModule (copy), ReactModule (copy), ToastWrapperModule (copy), ButtonType (copy), GetFFlagEnableReferredPlayerJoinRemoteEventFunction (copy)
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 45 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		return p2.ToastContent
 	end)
 	local JoinResult = if GetFFlagSocialContextToastEventStreamFunction() then CryoModule.Dictionary.join(p1.analyticsProps, { toastType = UseSelectorResult.toastType }) else nil

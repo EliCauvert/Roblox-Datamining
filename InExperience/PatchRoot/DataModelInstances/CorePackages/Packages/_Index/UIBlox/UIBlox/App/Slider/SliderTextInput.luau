@@ -24,14 +24,14 @@ SliderTextInput.validateProps = TModule.strictInterface({
 })
 SliderTextInput.defaultProps = { disabled = false }
 
-function SliderTextInput.init(p1) --[[ Line: 41 ]]
+function SliderTextInput.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.textBoxRef = RoactModule.createRef()
 end
 
-function SliderTextInput.render(p1) --[[ Line: 45 ]]
+function SliderTextInput.render(p1)
 	-- upvalues: WithStyleModule (copy), DivideTransparencyModule (copy), RoactModule (copy), ImageSetComponentModule (copy), ImagesModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), EventConnection (copy), UserInputService (copy)
-	return WithStyleModule(function(p2) --[[ Line: 46 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: p1 (copy), DivideTransparencyModule (upval), RoactModule (upval), ImageSetComponentModule (upval), ImagesModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), EventConnection (upval), UserInputService (upval)
 		local v1: number = if p1.props.disabled then 2 else 1
 		
@@ -70,10 +70,10 @@ function SliderTextInput.render(p1) --[[ Line: 45 ]]
 				TextScaled = true,
 				TextEditable = not p1.props.disabled,
 				ZIndex = 2,
-				[RoactModule.Event.Focused] = p1.props.disabled and function(TextBox) --[[ Line: 91 ]]
+				[RoactModule.Event.Focused] = p1.props.disabled and function(TextBox)
 					TextBox:ReleaseFocus()
 				end or nil,
-				[RoactModule.Event.FocusLost] = function(p3, _) --[[ Line: 94 ]]
+				[RoactModule.Event.FocusLost] = function(p3, _)
 					-- upvalues: p1 (upval)
 					local Number: number? = tonumber(p3.Text)
 					
@@ -93,7 +93,7 @@ function SliderTextInput.render(p1) --[[ Line: 45 ]]
 			}),
 			UserInputConnection = not p1.props.disabled and RoactModule.createElement(EventConnection, {
 				event = UserInputService.InputBegan,
-				callback = function(Input, _) --[[ Line: 118 ]]
+				callback = function(Input, _)
 					-- upvalues: UserInputService (upval), p1 (upval)
 					if Input.UserInputType ~= Enum.UserInputType.Keyboard then return end
 					if UserInputService:GetFocusedTextBox() ~= p1.textBoxRef.current then return end
@@ -120,8 +120,8 @@ function SliderTextInput.render(p1) --[[ Line: 45 ]]
 	end)
 end
 
-function SliderTextInput.didMount(p1) --[[ Line: 159 ]]
-	pcall(function() --[[ Line: 162 ]]
+function SliderTextInput.didMount(p1)
+	pcall(function()
 		-- upvalues: p1 (copy)
 		p1.textBoxRef.current.TextInputType = Enum.TextInputType.Number
 	end)

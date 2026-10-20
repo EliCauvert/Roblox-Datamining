@@ -4,7 +4,7 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local _ = require(ChatUIPrimitives.Types)
 
-return ReactModule.memo(function(Frame) --[[ Line: 18 | Named "RewriteToggle" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: FoundationModule (copy), ReactModule (copy)
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "col gap-xsmall auto-y",
@@ -16,7 +16,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 18 | Named "RewriteToggle" ]]
 			tag = "row align-y-center gap-xsmall auto-xy",
 			LayoutOrder = 1,
 			backgroundStyle = { Transparency = 1, Color3 = Color3.new(0, 0, 0) },
-			Visible = Frame.messageBinding:map(function(p1): boolean --[[ Line: 27 ]]
+			Visible = Frame.messageBinding:map(function(p1): boolean
 				return p1 ~= nil and p1.wasRewritten == true
 			end)
 		}, {
@@ -41,7 +41,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 18 | Named "RewriteToggle" ]]
 				Transparency = 0.7,
 				Color3 = FoundationModule.Hooks.useTokens().Color.Common.Scrim.Color3
 			},
-			Visible = Frame.messageBinding:map(function(p1) --[[ Line: 38 ]]
+			Visible = Frame.messageBinding:map(function(p1)
 				-- upvalues: Frame (copy)
 				return p1 ~= nil and (p1.wasRewritten == true and Frame.showOriginal)
 			end)
@@ -50,7 +50,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 18 | Named "RewriteToggle" ]]
 				tag = "text-caption-medium text-wrap text-align-x-left content-muted",
 				RichText = true,
 				LayoutOrder = 1,
-				Text = Frame.messageBinding:map(function(p1): string --[[ Line: 31 ]]
+				Text = Frame.messageBinding:map(function(p1): string
 					return if p1 and p1.originalText then `<s>{p1.originalText}</s>` else ""
 				end),
 				Size = UDim2.new(1, 0, 0, 0),

@@ -5,9 +5,9 @@ local IXPServiceWrapper = require(Parent.IxpServiceWrapper).IXPServiceWrapper
 local FStringEnableStickyShortcutBarOnAllPlatformsIxpLayer = require(AppShortcutBar.Flags).FStringEnableStickyShortcutBarOnAllPlatformsIxpLayer
 local Flag = false
 
-return function(p1) --[[ Line: 12 | Named "useStickyShortcutBarExposureLogging" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), Flag (ref), IXPServiceWrapper (copy), FStringEnableStickyShortcutBarOnAllPlatformsIxpLayer (copy)
-	ReactModule.useEffect(function() --[[ Line: 13 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Flag (upval), p1 (copy), IXPServiceWrapper (upval), FStringEnableStickyShortcutBarOnAllPlatformsIxpLayer (upval)
 		if not Flag and p1 then
 			Flag = true

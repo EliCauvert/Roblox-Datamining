@@ -22,7 +22,7 @@ local _ = require(Parent.SduiCoreSystem)
 local SduiFocusNavActionsModule = require(ServerDrivenUi.FocusNavigation.SduiFocusNavActions)
 local UseSduiReportExperienceLaunchedFunction = require(Parent.SduiSharedContent).useSduiReportExperienceLaunched
 
-return ReactModule.memo(function(p1) --[[ Line: 50 | Named "SduiHoldToPlay" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), UseButtonHoldFunction (copy), Constants (copy), ButtonHoldStateEnum (copy), AppShortcutBarContext (copy), GuiService (copy), GetInputModeStoreFunction (copy), ResponsiveModule (copy), FocusNavigationEventNameEnum (copy), UsePlayButtonStateFunction (copy), UseOnPlayButtonCallbackFunction (copy), HoldToPlayLauncher (copy), UseSduiReportExperienceLaunchedFunction (copy), SetGamePlaySessionFunction (copy), SessionType (copy), PlayButtonStates (copy), SduiFocusNavActionsModule (copy)
 	local Dependencies = p1.sduiContext.dependencies
 	local Networking = Dependencies.networking
@@ -33,12 +33,12 @@ return ReactModule.memo(function(p1) --[[ Line: 50 | Named "SduiHoldToPlay" ]]
 	local IsHoldStateMatch1 = UseButtonHoldResult.holdState == ButtonHoldStateEnum.COMPLETED
 	local UseDispatchButtonHoldStartedResult = AppShortcutBarContext.useDispatchButtonHoldStarted()
 	local UseDispatchButtonHoldEndedResult = AppShortcutBarContext.useDispatchButtonHoldEnded()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 65 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), GuiService (upval)
 		return if p1.guiObject then p1.guiObject else GuiService.SelectedCoreObject
 	end, { p1.guiObject })
 	local IsHoldStateMatch2: boolean = UseButtonHoldResult.holdState == ButtonHoldStateEnum.HOLDING or UseButtonHoldResult.holdState == ButtonHoldStateEnum.COMPLETED
-	ReactModule.useEffect(function() --[[ Line: 76 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsHoldStateMatch2 (copy), GetInputModeStoreFunction (upval), p1 (copy), ResponsiveModule (upval)
 		if IsHoldStateMatch2 then
 			local LastInputType = GetInputModeStoreFunction(false).getLastInputType(false)
@@ -47,14 +47,14 @@ return ReactModule.memo(function(p1) --[[ Line: 50 | Named "SduiHoldToPlay" ]]
 				p1.setDisabledForHold(true)
 			end
 		end
-		return function() --[[ Line: 84 ]]
+		return function()
 			-- upvalues: p1 (upval)
 			if p1.setDisabledForHold then
 				p1.setDisabledForHold(false)
 			end
 		end
 	end, { IsHoldStateMatch2, p1.setDisabledForHold })
-	ReactModule.useEffect(function() --[[ Line: 96 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), IsHoldStateMatch (copy), UseDispatchButtonHoldStartedResult (copy), FocusNavigationEventNameEnum (upval), UseButtonHoldResult (copy), UseDispatchButtonHoldEndedResult (copy)
 		if not UseRefResult.current and IsHoldStateMatch then
 			UseRefResult.current = true
@@ -75,7 +75,7 @@ return ReactModule.memo(function(p1) --[[ Line: 50 | Named "SduiHoldToPlay" ]]
 	local UsePlayButtonStateResult = UsePlayButtonStateFunction(Networking, p1.universeId)
 	local UseOnPlayButtonCallbackResult = UseOnPlayButtonCallbackFunction(p1.universeId, nil, HoldToPlayLauncher, nil, nil)
 	local UseSduiReportExperienceLaunchedResult = UseSduiReportExperienceLaunchedFunction(p1.sduiContext, p1.analyticsContext, p1.universeId, p1.placeId)
-	ReactModule.useEffect(function() --[[ Line: 112 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsHoldStateMatch1 (copy), UsePlayButtonStateResult (copy), SetGamePlaySessionFunction (upval), SessionService (copy), SessionType (upval), UseOnPlayButtonCallbackResult (copy), UseSduiReportExperienceLaunchedResult (copy), UseButtonHoldResult (copy), PlayButtonStates (upval)
 		if IsHoldStateMatch1 then
 			local PlayButtonState = UsePlayButtonStateResult.playButtonState
@@ -93,7 +93,7 @@ return ReactModule.memo(function(p1) --[[ Line: 50 | Named "SduiHoldToPlay" ]]
 	})
 	
 	return ReactModule.createElement(SduiFocusNavActionsModule, {
-		focusNavActions = ReactModule.useMemo(function() --[[ Line: 132 ]]
+		focusNavActions = ReactModule.useMemo(function()
 			-- upvalues: FocusNavigationEventNameEnum (upval), UseButtonHoldResult (copy)
 			return {
 				keys = {

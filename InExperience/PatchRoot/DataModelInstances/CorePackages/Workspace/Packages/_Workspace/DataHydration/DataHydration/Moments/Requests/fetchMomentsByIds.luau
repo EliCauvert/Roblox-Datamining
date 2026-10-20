@@ -16,7 +16,7 @@ local FFlagMomentsPassFeedItemIdToBackendApis = SharedFlagsModule.FFlagMomentsPa
 local MomentGetIdType = MomentsTypesModule.Enums.MomentGetIdType
 local ShareLinkTargetIdType = MomentsTypesModule.Enums.ShareLinkTargetIdType
 
-return function(List, Network, FeedItemId) --[[ Line: 30 | Named "fetchMomentsByIds" ]]
+return function(List, Network, FeedItemId)
 	-- upvalues: ConstructApiUrlModule (copy), MomentsFixBatchedGetMomentsQueryParams (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), ShareLinkTargetIdType (copy), MomentGetIdType (copy), HttpModule (copy), HttpClientModule (copy), ConvertApiMomentsToMomentItemsModule (copy), ExtractReactionsByMomentIdModule (copy), ExtractShareInfoByMomentIdModule (copy), FFlagMomentsComments (copy), ExtractCommentsByFeedItemIdModule (copy)
 	local GetMoments, GetMoments2 = ConstructApiUrlModule("content-captures-api/v2/moments/get-moments")
 	local config = { Ids = table.concat(List, ",") }
@@ -33,7 +33,7 @@ return function(List, Network, FeedItemId) --[[ Line: 30 | Named "fetchMomentsBy
 		url = `{GetMoments}?{HttpModule.Url:makeQueryString(config)}`,
 		headers = GetMoments2,
 		network = Network,
-		decode = function(p1) --[[ Line: 54 ]]
+		decode = function(p1)
 			-- upvalues: ConvertApiMomentsToMomentItemsModule (upval), ExtractReactionsByMomentIdModule (upval), ExtractShareInfoByMomentIdModule (upval), FFlagMomentsComments (upval), ExtractCommentsByFeedItemIdModule (upval)
 			return {
 				moments = ConvertApiMomentsToMomentItemsModule(p1.items),

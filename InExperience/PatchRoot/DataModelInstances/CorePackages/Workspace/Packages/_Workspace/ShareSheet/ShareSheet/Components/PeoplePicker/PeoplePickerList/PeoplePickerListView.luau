@@ -11,7 +11,7 @@ local LayoutMode = UserTileModule.LayoutMode
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
 return {
-	getItemLayoutMetrics = function(p1) --[[ Line: 30 ]]
+	getItemLayoutMetrics = function(p1)
 		local Size1400 = p1.Size.Size_1400
 		local Small: number = p1.Padding.Small
 		local XSmall: number = p1.Padding.XSmall
@@ -23,7 +23,7 @@ return {
 			estimatedRowHeight = Size1400 + 2 * Small + 2 * XSmall
 		}
 	end,
-	Item = function(p1) --[[ Line: 61 ]]
+	Item = function(p1)
 		-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), UserTile (copy), LayoutMode (copy), Text (copy)
 		local UseTokensResult = UseTokensFunction()
 		local Size1400 = UseTokensResult.Size.Size_1400

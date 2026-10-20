@@ -11,7 +11,7 @@ local UseCurrentSquadIdFunction = require(Parent.SquadsCore.Hooks).useCurrentSqu
 local IconButton = FoundationModule.IconButton
 local ScheduledSquadsListSheet = require(Parent.Squads.Components).ScheduledSquadsListSheet
 
-return function(p1) --[[ Line: 32 ]]
+return function(p1)
 	-- upvalues: UseCurrentSquadIdFunction (copy), ReactModule (copy), SquadExternalContractContext (copy), EventNamesModule (copy), ScheduledSquadActionEnum (copy), IconButton (copy), FoundationModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), ScheduledSquadsListSheet (copy)
 	local UseCurrentSquadIdResult = UseCurrentSquadIdFunction()
 	local UseContextResult = ReactModule.useContext(SquadExternalContractContext)
@@ -21,7 +21,7 @@ return function(p1) --[[ Line: 32 ]]
 		ScheduledSquadsListButton = ReactModule.createElement(IconButton, {
 			icon = FoundationModule.Enums.IconName.Calendar,
 			LayoutOrder = p1.layoutOrder,
-			onActivated = ReactModule.useCallback(function() --[[ Line: 38 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: UseContextResult (copy), EventNamesModule (upval), ScheduledSquadActionEnum (upval), p1 (copy), UseCurrentSquadIdResult (copy), UseStateResult2 (copy)
 				UseContextResult.fireSquadAnalytics(EventNamesModule.ScheduledSquadAction, {
 					actionType = ScheduledSquadActionEnum.ViewSubscribedScheduledSquadsList,
@@ -40,7 +40,7 @@ return function(p1) --[[ Line: 32 ]]
 		}),
 		ScheduledSquadsListSheet = ReactModule.createElement(ScheduledSquadsListSheet, {
 			isOpen = UseStateResult,
-			onClose = ReactModule.useCallback(function() --[[ Line: 54 ]]
+			onClose = ReactModule.useCallback(function()
 				-- upvalues: UseStateResult2 (copy)
 				UseStateResult2(false)
 			end, { UseStateResult2 })

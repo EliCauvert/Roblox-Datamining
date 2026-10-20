@@ -4,7 +4,7 @@ local ConstantsModule = require(VirtualEvents.constants)
 local _ = require(VirtualEvents.Parent.AppBlox)
 local FFlagLuaAppLimitEventThumbnailToOneModule = require(VirtualEvents.Flags.FFlagLuaAppLimitEventThumbnailToOne)
 
-return function(List) --[[ Line: 21 | Named "getGalleryItems" ]]
+return function(List)
 	-- upvalues: FFlagLuaAppLimitEventThumbnailToOneModule (copy), ConstantsModule (copy)
 	local List1 = {}
 	

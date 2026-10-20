@@ -3,7 +3,7 @@ local FFlagExpChatEnableFriendsTab = require(AppChat.Parent.SharedFlags).FFlagEx
 local GetFFlagAppChatRequestedRouteModule = require(AppChat.Flags.getFFlagAppChatRequestedRoute)
 game:DefineFastFlag("AppChatEnableRootedNavigation2", false)
 
-return function() --[[ Line: 9 ]]
+return function()
 	-- upvalues: FFlagExpChatEnableFriendsTab (copy), GetFFlagAppChatRequestedRouteModule (copy)
 	return game:GetFastFlag("AppChatEnableRootedNavigation2") and (FFlagExpChatEnableFriendsTab and GetFFlagAppChatRequestedRouteModule())
 end

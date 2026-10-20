@@ -11,7 +11,7 @@ local UseToggleStateModule = require(MomentsCommon.Hooks.useToggleState)
 local _ = require(MomentsCommon.Types)
 local LocalPlayer = game:GetService("Players").LocalPlayer
 
-local function _(p1) --[[ Line: 22 | Named "assetIdAsContent" ]]
+local function _(p1)
 	return if p1 then `rbxassetid://{p1}` else nil
 end
 
@@ -21,7 +21,7 @@ local config = {
 	playbackRegion = NumberRange.new(0, 1e999)
 }
 
-return function(p1, Asset, p2) --[[ Line: 46 | Named "useAudioPlayback" ]]
+return function(p1, Asset, p2)
 	-- upvalues: CryoModule (copy), config (copy), UseRefFunction (copy), UseToggleStateModule (copy), UseStateFunction (copy), UseCallbackFunction (copy), UseMemoFunction (copy), UseEffectFunction (copy), LocalPlayer (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p2 or {})
 	local UseRefResult = UseRefFunction(nil)
@@ -31,7 +31,7 @@ return function(p1, Asset, p2) --[[ Line: 46 | Named "useAudioPlayback" ]]
 	local UseStateResult1, UseStateResult2_1 = UseStateFunction(0)
 	local UseStateResult3, UseStateResult2_2 = UseStateFunction(0)
 	local UseStateResult4, UseStateResult2_3 = UseStateFunction(0)
-	local UseCallbackResult = UseCallbackFunction(function(p3) --[[ Line: 64 ]]
+	local UseCallbackResult = UseCallbackFunction(function(p3)
 		-- upvalues: UseRefResult (copy), UnionResult (copy), UseStateResult (copy)
 		local Current = UseRefResult.current
 		
@@ -39,7 +39,7 @@ return function(p1, Asset, p2) --[[ Line: 46 | Named "useAudioPlayback" ]]
 			Current.TimePosition = math.clamp(p3 + UnionResult.playbackRegion.Min, 0, UseStateResult)
 		end
 	end, { UseStateResult, UnionResult.playbackRegion })
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 72 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: p1 (copy), UseRefResult (copy), UseStateResult2_3 (copy), UnionResult (copy), UseStateResult2_1 (copy)
 		if not p1 then return end
 		local Current = UseRefResult.current
@@ -49,13 +49,13 @@ return function(p1, Asset, p2) --[[ Line: 46 | Named "useAudioPlayback" ]]
 			UseStateResult2_1(Current.TimePosition)
 		end
 	end, { p1, Asset, UnionResult.playbackRegion })
-	Asset = UseMemoFunction(function() --[[ Line: 87 ]]
+	Asset = UseMemoFunction(function()
 		-- upvalues: Asset (ref)
 		local Asset1 = Asset
 		
 		return if Asset1 then `rbxassetid://{Asset1}` else nil
 	end, { Asset })
-	UseEffectFunction(function() --[[ Line: 91 ]]
+	UseEffectFunction(function()
 		-- upvalues: Asset (ref), UnionResult (copy), UseStateResult2 (copy), UseRefResult (copy), LocalPlayer (upval)
 		if not Asset then return end
 		local Folder = Instance.new("Folder")
@@ -66,7 +66,7 @@ return function(p1, Asset, p2) --[[ Line: 46 | Named "useAudioPlayback" ]]
 		AudioPlayer.Looping = UnionResult.looping or false
 		AudioPlayer.Parent = Folder
 		AudioPlayer.Volume = 0.2
-		AudioPlayer:GetPropertyChangedSignal("TimeLength"):Connect(function() --[[ Line: 106 | Named "updateTimeLength" ]]
+		AudioPlayer:GetPropertyChangedSignal("TimeLength"):Connect(function()
 			-- upvalues: UseStateResult2 (upval), AudioPlayer (copy)
 			UseStateResult2(AudioPlayer.TimeLength)
 		end)
@@ -78,17 +78,17 @@ return function(p1, Asset, p2) --[[ Line: 46 | Named "useAudioPlayback" ]]
 		Wire.TargetInstance = AudioDeviceOutput
 		Wire.Parent = Folder
 		UseRefResult.current = AudioPlayer
-		task.spawn(function() --[[ Line: 123 ]]
+		task.spawn(function()
 			-- upvalues: Folder (copy), LocalPlayer (upval)
 			Folder.Parent = LocalPlayer:WaitForChild("PlayerGui")
 		end)
 		
-		return function() --[[ Line: 127 ]]
+		return function()
 			-- upvalues: Folder (copy)
 			Folder:Destroy()
 		end
 	end, { Asset })
-	UseEffectFunction(function() --[[ Line: 132 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseRefResult (copy), UnionResult (copy)
 		local Current = UseRefResult.current
 		
@@ -97,11 +97,11 @@ return function(p1, Asset, p2) --[[ Line: 46 | Named "useAudioPlayback" ]]
 			Current.TimePosition = 0
 		end
 	end, { UnionResult.playbackRegion })
-	UseEffectFunction(function() --[[ Line: 140 ]]
+	UseEffectFunction(function()
 		-- upvalues: UnionResult (copy), UseStateResult2_2 (copy), UseStateResult (copy)
 		UseStateResult2_2((math.min(UnionResult.playbackRegion.Max - UnionResult.playbackRegion.Min, UseStateResult)))
 	end, { UseStateResult, UnionResult.playbackRegion })
-	UseEffectFunction(function() --[[ Line: 145 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseRefResult (copy), UseToggleStateModuleResult (copy)
 		local Current = UseRefResult.current
 		
@@ -123,7 +123,7 @@ return function(p1, Asset, p2) --[[ Line: 46 | Named "useAudioPlayback" ]]
 			end
 		end
 	end, { Asset, UseToggleStateModuleResult.enabled })
-	UseEffectFunction(function() --[[ Line: 163 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseRefResult (copy), UseToggleStateModuleResult1 (copy), UseToggleStateModuleResult (copy)
 		local Current = UseRefResult.current
 		
@@ -139,11 +139,11 @@ return function(p1, Asset, p2) --[[ Line: 46 | Named "useAudioPlayback" ]]
 		UseToggleStateModuleResult1.enabled,
 		UseToggleStateModuleResult.enabled
 	})
-	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 180 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function()
 		-- upvalues: UseToggleStateModuleResult (copy)
 		UseToggleStateModuleResult.disable()
 	end, {})
-	UseEffectFunction(function() --[[ Line: 184 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseRefResult (copy), UseCallbackResult1 (copy), UseCallbackResult2 (copy)
 		local List = {}
 		
@@ -151,7 +151,7 @@ return function(p1, Asset, p2) --[[ Line: 46 | Named "useAudioPlayback" ]]
 			table.insert(List, game:GetService("RunService").RenderStepped:Connect(UseCallbackResult1))
 			table.insert(List, UseRefResult.current.Ended:Connect(UseCallbackResult2))
 		end
-		return function() --[[ Line: 192 ]]
+		return function()
 			-- upvalues: List (copy)
 			for _, Connection in List do
 				Connection:Disconnect()

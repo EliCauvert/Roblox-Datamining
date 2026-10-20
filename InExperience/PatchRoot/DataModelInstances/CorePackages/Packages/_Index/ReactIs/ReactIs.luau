@@ -17,13 +17,13 @@ local REACTSUSPENSELISTTYPE = ReactSymbols.REACT_SUSPENSE_LIST_TYPE
 local REACTBINDINGTYPE = ReactSymbols.REACT_BINDING_TYPE
 local v1 = require(Parent.SafeFlags).createGetFFlag("ReactIsProtectedTypeOf", false)()
 
-local function typeOf(p1) --[[ Line: 50 ]]
+local function typeOf(p1)
 	-- upvalues: v1 (copy), REACTELEMENTTYPE (copy), REACTFRAGMENTTYPE (copy), REACTPROFILERTYPE (copy), REACTSTRICTMODETYPE (copy), REACTSUSPENSETYPE (copy), REACTSUSPENSELISTTYPE (copy), REACTCONTEXTTYPE (copy), REACTFORWARDREFTYPE (copy), REACTLAZYTYPE (copy), REACTMEMOTYPE (copy), REACTPROVIDERTYPE (copy), REACTPORTALTYPE (copy), REACTBINDINGTYPE (copy)
 	if typeof(p1) == "table" and p1 ~= nil then
 		local Result = nil
 		if v1 then
 			local Success
-			Success, Result = pcall(function() --[[ Line: 58 ]]
+			Success, Result = pcall(function()
 				-- upvalues: p1 (copy)
 				return p1["$$typeof"]
 			end)
@@ -69,7 +69,7 @@ return {
 	Suspense = REACTSUSPENSETYPE,
 	Binding = ReactSymbols.REACT_BINDING_TYPE,
 	isValidElementType = require(Parent.Shared).isValidElementType,
-	isAsyncMode = function(_): boolean --[[ Line: 183 ]]
+	isAsyncMode = function(_): boolean
 		-- upvalues: ReactGlobalsModule (copy), Flag (ref), Console (copy)
 		if ReactGlobalsModule.__DEV__ and not Flag then
 			Flag = true
@@ -77,7 +77,7 @@ return {
 		end
 		return false
 	end,
-	isConcurrentMode = function(_): boolean --[[ Line: 200 ]]
+	isConcurrentMode = function(_): boolean
 		-- upvalues: ReactGlobalsModule (copy), Flag1 (ref), Console (copy)
 		if ReactGlobalsModule.__DEV__ and not Flag1 then
 			Flag1 = true
@@ -85,51 +85,51 @@ return {
 		end
 		return false
 	end,
-	isContextConsumer = function(p1): boolean --[[ Line: 217 ]]
+	isContextConsumer = function(p1): boolean
 		-- upvalues: typeOf (copy), REACTCONTEXTTYPE (copy)
 		return typeOf(p1) == REACTCONTEXTTYPE
 	end,
-	isContextProvider = function(p1): boolean --[[ Line: 221 ]]
+	isContextProvider = function(p1): boolean
 		-- upvalues: typeOf (copy), REACTPROVIDERTYPE (copy)
 		return typeOf(p1) == REACTPROVIDERTYPE
 	end,
-	isElement = function(p1): boolean --[[ Line: 225 ]]
+	isElement = function(p1): boolean
 		-- upvalues: REACTELEMENTTYPE (copy)
 		return typeof(p1) == "table" and (p1 ~= nil and p1["$$typeof"] == REACTELEMENTTYPE)
 	end,
-	isForwardRef = function(p1): boolean --[[ Line: 231 ]]
+	isForwardRef = function(p1): boolean
 		-- upvalues: typeOf (copy), REACTFORWARDREFTYPE (copy)
 		return typeOf(p1) == REACTFORWARDREFTYPE
 	end,
-	isFragment = function(p1): boolean --[[ Line: 235 ]]
+	isFragment = function(p1): boolean
 		-- upvalues: typeOf (copy), REACTFRAGMENTTYPE (copy)
 		return typeOf(p1) == REACTFRAGMENTTYPE
 	end,
-	isLazy = function(p1): boolean --[[ Line: 239 ]]
+	isLazy = function(p1): boolean
 		-- upvalues: typeOf (copy), REACTLAZYTYPE (copy)
 		return typeOf(p1) == REACTLAZYTYPE
 	end,
-	isMemo = function(p1): boolean --[[ Line: 243 ]]
+	isMemo = function(p1): boolean
 		-- upvalues: typeOf (copy), REACTMEMOTYPE (copy)
 		return typeOf(p1) == REACTMEMOTYPE
 	end,
-	isPortal = function(p1): boolean --[[ Line: 247 ]]
+	isPortal = function(p1): boolean
 		-- upvalues: typeOf (copy), REACTPORTALTYPE (copy)
 		return typeOf(p1) == REACTPORTALTYPE
 	end,
-	isProfiler = function(p1): boolean --[[ Line: 251 ]]
+	isProfiler = function(p1): boolean
 		-- upvalues: typeOf (copy), REACTPROFILERTYPE (copy)
 		return typeOf(p1) == REACTPROFILERTYPE
 	end,
-	isStrictMode = function(p1): boolean --[[ Line: 255 ]]
+	isStrictMode = function(p1): boolean
 		-- upvalues: typeOf (copy), REACTSTRICTMODETYPE (copy)
 		return typeOf(p1) == REACTSTRICTMODETYPE
 	end,
-	isSuspense = function(p1): boolean --[[ Line: 259 ]]
+	isSuspense = function(p1): boolean
 		-- upvalues: typeOf (copy), REACTSUSPENSETYPE (copy)
 		return typeOf(p1) == REACTSUSPENSETYPE
 	end,
-	isBinding = function(p1): boolean --[[ Line: 264 ]]
+	isBinding = function(p1): boolean
 		-- upvalues: typeOf (copy), REACTBINDINGTYPE (copy)
 		return typeOf(p1) == REACTBINDINGTYPE
 	end

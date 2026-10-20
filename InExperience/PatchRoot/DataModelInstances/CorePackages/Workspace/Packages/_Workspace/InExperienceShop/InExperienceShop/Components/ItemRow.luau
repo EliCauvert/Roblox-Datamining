@@ -8,7 +8,7 @@ local ShopItemTileModule = require(InExperienceShop.Components.ShopItemTile)
 local _ = require(InExperienceShop.Types)
 local ComputeShopRowTileWidthsFunction = require(InExperienceShop.Components.computeShopRowTileWidths).computeShopRowTileWidths
 
-local function defaultRenderTile(p1, GridPositionColumn, _, UseMemoResult, OnItemActivated, CategoryId, ShopPageType) --[[ Line: 40 ]]
+local function defaultRenderTile(p1, GridPositionColumn, _, UseMemoResult, OnItemActivated, CategoryId, ShopPageType)
 	-- upvalues: ReactModule (copy), ShopItemTileModule (copy)
 	return ReactModule.createElement(ShopItemTileModule, {
 		itemId = p1.id,
@@ -27,7 +27,7 @@ local function defaultRenderTile(p1, GridPositionColumn, _, UseMemoResult, OnIte
 	})
 end
 
-local function buildTileLayoutContext(Items, ColumnCount, RowWidth, Gap, GridPositionRow, Callback) --[[ Line: 68 ]]
+local function buildTileLayoutContext(Items, ColumnCount, RowWidth, Gap, GridPositionRow, Callback)
 	-- upvalues: ComputeShopRowTileWidthsFunction (copy)
 	local Flag = false
 	
@@ -49,15 +49,15 @@ local function buildTileLayoutContext(Items, ColumnCount, RowWidth, Gap, GridPos
 	}
 end
 
-local function _(p1): string --[[ Line: 102 | Named "makeChildKey" ]]
+local function _(p1): string
 	return "Item:" .. tostring(p1.itemType) .. ":" .. p1.id
 end
 
-return ReactModule.memo(function(Frame) --[[ Line: 106 | Named "ItemRow" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), buildTileLayoutContext (copy), defaultRenderTile (copy), View (copy)
 	local Medium = UseTokensFunction().Gap.Medium
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 111 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2 (copy)
 		local X = Frame.AbsoluteSize.X
 		
@@ -67,10 +67,10 @@ return ReactModule.memo(function(Frame) --[[ Line: 106 | Named "ItemRow" ]]
 			return
 		end
 	end, {})
-	local IsFeaturedDoubleWidthRobux = Frame.isFeaturedDoubleWidthRobux or function(_, _): boolean --[[ Line: 120 ]]
+	local IsFeaturedDoubleWidthRobux = Frame.isFeaturedDoubleWidthRobux or function(_, _): boolean
 		return false
 	end
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 124 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: buildTileLayoutContext (upval), Frame (copy), UseStateResult (copy), Medium (copy), IsFeaturedDoubleWidthRobux (copy)
 		return (buildTileLayoutContext(Frame.items, Frame.columnCount, UseStateResult, Medium, Frame.rowIndex, IsFeaturedDoubleWidthRobux))
 	end, {

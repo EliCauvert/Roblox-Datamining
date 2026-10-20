@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("UGCValidateAQScoreWarnings", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("UGCValidateAQScoreWarnings")
 end

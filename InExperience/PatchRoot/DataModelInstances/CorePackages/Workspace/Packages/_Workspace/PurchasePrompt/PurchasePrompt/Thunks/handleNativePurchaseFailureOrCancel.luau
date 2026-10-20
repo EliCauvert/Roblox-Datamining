@@ -11,9 +11,9 @@ local list = {
 	(require(PurchasePrompt.Services.ExternalSettings))
 }
 
-return function() --[[ Line: 21 | Named "handleNativePurchaseFailureOrCancel" ]]
+return function()
 	-- upvalues: ThunkModule (copy), list (copy), PromptStateModule (copy), ErrorOccurredModule (copy), PurchaseErrorModule (copy), SendCounterModule (copy), CounterModule (copy)
-	return ThunkModule.new(script.Name, list, function(p1, _) --[[ Line: 22 ]]
+	return ThunkModule.new(script.Name, list, function(p1, _)
 		-- upvalues: PromptStateModule (upval), ErrorOccurredModule (upval), PurchaseErrorModule (upval), SendCounterModule (upval), CounterModule (upval)
 		if p1:getState().promptState ~= PromptStateModule.BlackbirdUpsellInProgress then
 			p1:dispatch(ErrorOccurredModule(PurchaseErrorModule.InvalidFundsUnknown))

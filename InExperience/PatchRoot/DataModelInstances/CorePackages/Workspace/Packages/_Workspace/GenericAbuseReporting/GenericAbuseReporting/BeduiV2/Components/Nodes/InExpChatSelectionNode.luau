@@ -36,9 +36,9 @@ local UseAbuseReportAnalyticsFunction = require(GenericAbuseReporting.BeduiV2.An
 local UseLayoutSlotsFunction = require(GenericAbuseReporting.BeduiV2.Components.LayoutSlots).useLayoutSlots
 local FixChatSelectorDropdownPadding = game:DefineFastFlag("FixChatSelectorDropdownPadding", false)
 
-local function _(Id, p1) --[[ Line: 50 | Named "useScrollToSelected" ]]
+local function _(Id, p1)
 	-- upvalues: ReactModule (copy), ScrollToItemModule (copy)
-	ReactModule.useEffect(function() --[[ Line: 53 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Id (copy), p1 (copy), ScrollToItemModule (upval)
 		if not Id then return end
 		local CurrentEntry = p1.current[Id]
@@ -51,7 +51,7 @@ local function _(Id, p1) --[[ Line: 50 | Named "useScrollToSelected" ]]
 		local config = { current = ScrollingFrame.Parent }
 		local config1 = { current = CurrentEntry }
 		
-		local function _() --[[ Line: 75 | Named "performScroll" ]]
+		local function _()
 			-- upvalues: Flag (ref), ScrollToItemModule (upval), config (copy), config1 (copy)
 			if not Flag then
 				ScrollToItemModule(config, config1)
@@ -66,7 +66,7 @@ local function _(Id, p1) --[[ Line: 50 | Named "useScrollToSelected" ]]
 			end
 		else
 			local Connection = nil
-			Connection = CurrentEntry:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 87 ]]
+			Connection = CurrentEntry:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: CurrentEntry (copy), Connection (ref), Flag (ref), ScrollToItemModule (upval), config (copy), config1 (copy)
 				if CurrentEntry.AbsoluteSize.Y > 0 then
 					Connection:Disconnect()
@@ -75,14 +75,14 @@ local function _(Id, p1) --[[ Line: 50 | Named "useScrollToSelected" ]]
 					ScrollToItemModule(config, config1)
 				end
 			end)
-			task.delay(2, function() --[[ Line: 94 ]]
+			task.delay(2, function()
 				-- upvalues: Connection (ref)
 				if Connection.Connected then
 					Connection:Disconnect()
 				end
 			end)
 		end
-		return function() --[[ Line: 101 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end
@@ -91,12 +91,12 @@ end
 
 local REPORTMESSAGENOTSHOWNITEMID = require(GenericAbuseReporting.BeduiV2.Hooks.useInExpCustomSubmit).REPORT_MESSAGE_NOT_SHOWN_ITEM_ID
 
-local function LoadingContent() --[[ Line: 141 ]]
+local function LoadingContent()
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Sheet (copy), View (copy), DashModule (copy), Skeleton (copy), Radius (copy)
 	local UseTokensResult = UseTokensFunction()
 	
 	return ReactModule.createElement(Sheet.Content, nil, {
-		SkeletonContainer = ReactModule.createElement(View, { tag = "col gap-medium size-full-0 auto-y" }, DashModule.map(table.create(5, true), function(_, p1) --[[ Line: 148 ]]
+		SkeletonContainer = ReactModule.createElement(View, { tag = "col gap-medium size-full-0 auto-y" }, DashModule.map(table.create(5, true), function(_, p1)
 			-- upvalues: ReactModule (upval), Skeleton (upval), Radius (upval), UseTokensResult (copy)
 			return ReactModule.createElement(Skeleton, {
 				key = tostring(p1),
@@ -107,7 +107,7 @@ local function LoadingContent() --[[ Line: 141 ]]
 	})
 end
 
-local function ErrorContent(p1) --[[ Line: 159 ]]
+local function ErrorContent(p1)
 	-- upvalues: UseArTranslationFunction (copy), ReactModule (copy), Sheet (copy), View (copy), Text (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
 	local TranslateIntoStringFunction = UseArTranslationFunction().translateIntoString
 	
@@ -124,13 +124,13 @@ local function ErrorContent(p1) --[[ Line: 159 ]]
 				text = TranslateIntoStringFunction(p1.retryButtonText),
 				variant = ButtonVariant.Standard,
 				fillBehavior = FillBehavior.Fit,
-				onActivated = p1.retry or function() --[[ Line: 179 ]] end
+				onActivated = p1.retry or function() end
 			})
 		})
 	})
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 189 | Named "InExpChatSelectionNode" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), UseArTranslationFunction (copy), UseAbuseReportAnalyticsFunction (copy), UseLayoutSlotsFunction (copy), UseGroupedListLoaderFunction (copy), ScrollToItemModule (copy), TelemetryEventType (copy), FFlagAbuseReportImproveErrorEventsModule (copy), FormatErrorDetailForAnalyticsFunction (copy), DashModule (copy), REPORTMESSAGENOTSHOWNITEMID (copy), UseInExpFocusNavigationRefsModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), LoadingContent (copy), ErrorContent (copy), Sheet (copy), View (copy), TextWithTranslationModule (copy), Text (copy), FixChatSelectorDropdownPadding (copy), InExpDropdownWithPopoverModule (copy), List (copy), Icon (copy), IconName (copy), IconVariant (copy), ListItemInputType (copy), FooterModule (copy), DialogSize (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(p1.initialValue or nil)
 	local UseRefResult = ReactModule.useRef(nil)
@@ -148,7 +148,7 @@ return ReactModule.memo(function(p1) --[[ Line: 189 | Named "InExpChatSelectionN
 	local Layout = UseLayoutSlotsFunction().Layout
 	local UseGroupedListLoaderResult = UseGroupedListLoaderFunction(p1.items)
 	local Data = UseGroupedListLoaderResult.data or {}
-	ReactModule.useEffect(function() --[[ Line: 53 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseRefResult1 (copy), ScrollToItemModule (upval)
 		if not UseStateResult then return end
 		local CurrentEntry = UseRefResult1.current[UseStateResult]
@@ -161,7 +161,7 @@ return ReactModule.memo(function(p1) --[[ Line: 189 | Named "InExpChatSelectionN
 		local config = { current = ScrollingFrame.Parent }
 		local config1 = { current = CurrentEntry }
 		
-		local function _() --[[ Line: 75 | Named "performScroll" ]]
+		local function _()
 			-- upvalues: Flag (ref), ScrollToItemModule (upval), config (copy), config1 (copy)
 			if not Flag then
 				ScrollToItemModule(config, config1)
@@ -176,7 +176,7 @@ return ReactModule.memo(function(p1) --[[ Line: 189 | Named "InExpChatSelectionN
 			end
 		else
 			local Connection = nil
-			Connection = CurrentEntry:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 87 ]]
+			Connection = CurrentEntry:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: CurrentEntry (copy), Connection (ref), Flag (ref), ScrollToItemModule (upval), config (copy), config1 (copy)
 				if CurrentEntry.AbsoluteSize.Y > 0 then
 					Connection:Disconnect()
@@ -185,19 +185,19 @@ return ReactModule.memo(function(p1) --[[ Line: 189 | Named "InExpChatSelectionN
 					ScrollToItemModule(config, config1)
 				end
 			end)
-			task.delay(2, function() --[[ Line: 94 ]]
+			task.delay(2, function()
 				-- upvalues: Connection (ref)
 				if Connection.Connected then
 					Connection:Disconnect()
 				end
 			end)
 		end
-		return function() --[[ Line: 101 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end
 	end, { UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 213 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult5 (copy), UseRefResult3 (copy), UseRefResult4 (copy)
 		local Current = UseRefResult5.current
 		
@@ -205,12 +205,12 @@ return ReactModule.memo(function(p1) --[[ Line: 189 | Named "InExpChatSelectionN
 		local ScrollingFrame = Current:FindFirstChildWhichIsA("ScrollingFrame", true)
 		
 		if not ScrollingFrame then return end
-		local function checkScrollbar() --[[ Line: 224 ]]
+		local function checkScrollbar()
 			-- upvalues: UseRefResult3 (upval), ScrollingFrame (copy)
 			UseRefResult3.current = ScrollingFrame.AbsoluteWindowSize.Y < ScrollingFrame.AbsoluteCanvasSize.Y
 		end
 		
-		local function onScroll() --[[ Line: 228 ]]
+		local function onScroll()
 			-- upvalues: ScrollingFrame (copy), UseRefResult4 (upval)
 			if ScrollingFrame.CanvasPosition.Y > 0 then
 				UseRefResult4.current = true
@@ -222,14 +222,14 @@ return ReactModule.memo(function(p1) --[[ Line: 189 | Named "InExpChatSelectionN
 		local Connection1 = ScrollingFrame:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(checkScrollbar)
 		local Connection2 = ScrollingFrame:GetPropertyChangedSignal("CanvasPosition"):Connect(onScroll)
 		
-		return function() --[[ Line: 241 ]]
+		return function()
 			-- upvalues: Connection (copy), Connection1 (copy), Connection2 (copy)
 			Connection:Disconnect()
 			Connection1:Disconnect()
 			Connection2:Disconnect()
 		end
 	end, { UseGroupedListLoaderResult.loading })
-	ReactModule.useEffect(function() --[[ Line: 248 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseGroupedListLoaderResult (copy), UseRefResult6 (copy), SendEventFunction (copy), TelemetryEventType (upval), FFlagAbuseReportImproveErrorEventsModule (upval), FormatErrorDetailForAnalyticsFunction (upval)
 		if UseGroupedListLoaderResult.error and not UseRefResult6.current then
 			UseRefResult6.current = true
@@ -242,7 +242,7 @@ return ReactModule.memo(function(p1) --[[ Line: 189 | Named "InExpChatSelectionN
 		end
 	end, { UseGroupedListLoaderResult.error, SendEventFunction })
 	local v1 = #Data > 1
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 261 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseStateResult1 (copy), UseStateResult (copy), Data (copy)
 		if UseStateResult1 then
 			return UseStateResult1
@@ -258,12 +258,12 @@ return ReactModule.memo(function(p1) --[[ Line: 189 | Named "InExpChatSelectionN
 		end
 		return Data[1] and Data[1].id or nil
 	end, { UseStateResult1, UseStateResult, Data })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 277 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: Data (copy), DashModule (upval), UseMemoResult (copy), p1 (copy), REPORTMESSAGENOTSHOWNITEMID (upval)
 		if #Data == 0 then
 			return {}
 		end
-		local FindResult = DashModule.find(Data, function(p2): boolean --[[ Line: 281 ]]
+		local FindResult = DashModule.find(Data, function(p2): boolean
 			-- upvalues: UseMemoResult (upval)
 			return p2.id == UseMemoResult
 		end)
@@ -281,7 +281,7 @@ return ReactModule.memo(function(p1) --[[ Line: 189 | Named "InExpChatSelectionN
 		return List
 	end, { Data, UseMemoResult, p1.reportMessageNotShownText })
 	local Id = UseMemoResult1[#UseMemoResult1] and UseMemoResult1[#UseMemoResult1].id or nil
-	ReactModule.useEffect(function() --[[ Line: 302 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), Id (copy), UseRefResult1 (copy), ScrollToItemModule (upval), UseRefResult5 (copy)
 		if UseStateResult then return end
 		if not Id then return end
@@ -290,7 +290,7 @@ return ReactModule.memo(function(p1) --[[ Line: 189 | Named "InExpChatSelectionN
 		if not CurrentEntry then return end
 		local Flag = false
 		
-		local function _() --[[ Line: 317 | Named "performScroll" ]]
+		local function _()
 			-- upvalues: Flag (ref), ScrollToItemModule (upval), UseRefResult5 (upval), CurrentEntry (copy)
 			if not Flag then
 				ScrollToItemModule(UseRefResult5, { current = CurrentEntry })
@@ -305,7 +305,7 @@ return ReactModule.memo(function(p1) --[[ Line: 189 | Named "InExpChatSelectionN
 			end
 		else
 			local Connection = nil
-			Connection = CurrentEntry:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 328 ]]
+			Connection = CurrentEntry:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: CurrentEntry (copy), Connection (ref), Flag (ref), ScrollToItemModule (upval), UseRefResult5 (upval)
 				if CurrentEntry.AbsoluteSize.Y > 0 then
 					Connection:Disconnect()
@@ -314,19 +314,19 @@ return ReactModule.memo(function(p1) --[[ Line: 189 | Named "InExpChatSelectionN
 					ScrollToItemModule(UseRefResult5, { current = CurrentEntry })
 				end
 			end)
-			task.delay(2, function() --[[ Line: 336 ]]
+			task.delay(2, function()
 				-- upvalues: Connection (ref)
 				if Connection.Connected then
 					Connection:Disconnect()
 				end
 			end)
 		end
-		return function() --[[ Line: 343 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end
 	end, { Id, UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 348 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseGroupedListLoaderResult (copy), UseMemoResult1 (copy), UseRefResult7 (copy), SendEventFunction (copy), TelemetryEventType (upval)
 		if not UseGroupedListLoaderResult.loading and not UseGroupedListLoaderResult.error and #UseMemoResult1 == 0 and not UseRefResult7.current then
 			UseRefResult7.current = true
@@ -338,23 +338,23 @@ return ReactModule.memo(function(p1) --[[ Line: 189 | Named "InExpChatSelectionN
 		UseMemoResult1,
 		SendEventFunction
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 362 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult2 (copy), UseStateResult2_2 (copy)
 		UseRefResult2.current = true
 		UseStateResult2_2(false)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 367 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_2 (copy)
 		UseStateResult2_2(false)
 	end, {})
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 382 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: DashModule (upval), Data (copy)
-		return DashModule.map(Data, function(Current) --[[ Line: 383 ]]
+		return DashModule.map(Data, function(Current)
 			return { id = Current.id, text = Current.label }
 		end)
 	end, { Data })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 388 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), REPORTMESSAGENOTSHOWNITEMID (upval), UseRefResult (copy), p1 (copy), UseResult (copy)
 		UseStateResult2(REPORTMESSAGENOTSHOWNITEMID)
 		UseRefResult.current = {
@@ -373,7 +373,7 @@ return ReactModule.memo(function(p1) --[[ Line: 189 | Named "InExpChatSelectionN
 			isOpen = UseStateResult3,
 			size = DialogSize.Medium,
 			snapPoints = { 0.9 },
-			onClose = function() --[[ Line: 544 ]]
+			onClose = function()
 				-- upvalues: UseRefResult2 (copy), p1 (copy), UseStateResult (copy), UseRefResult (copy)
 				if UseRefResult2.current then
 					UseRefResult2.current = false
@@ -420,7 +420,7 @@ return ReactModule.memo(function(p1) --[[ Line: 189 | Named "InExpChatSelectionN
 					value = UseMemoResult,
 					items = UseMemoResult2,
 					onOpenChange = UseStateResult2_3,
-					onItemChanged = function(p2) --[[ Line: 440 ]]
+					onItemChanged = function(p2)
 						-- upvalues: UseMemoResult (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), SendEventFunction (copy), TelemetryEventType (upval), Data (copy)
 						local UseMemoResult1 = UseMemoResult or ""
 						local Text = tostring(p2)
@@ -440,7 +440,7 @@ return ReactModule.memo(function(p1) --[[ Line: 189 | Named "InExpChatSelectionN
 					value = UseMemoResult,
 					items = UseMemoResult2,
 					onOpenChange = UseStateResult2_3,
-					onItemChanged = function(p2) --[[ Line: 461 ]]
+					onItemChanged = function(p2)
 						-- upvalues: UseMemoResult (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), SendEventFunction (copy), TelemetryEventType (upval), Data (copy)
 						local UseMemoResult1 = UseMemoResult or ""
 						local Text = tostring(p2)
@@ -461,7 +461,7 @@ return ReactModule.memo(function(p1) --[[ Line: 189 | Named "InExpChatSelectionN
 					hasDivider = { hasDivider = true, isInset = false },
 					isContained = { isContained = false, hasMargin = true }
 				}, {
-					DashModule.map(UseMemoResult1, function(Current, LayoutOrder) --[[ Line: 488 ]]
+					DashModule.map(UseMemoResult1, function(Current, LayoutOrder)
 						-- upvalues: ReactModule (upval), Icon (upval), IconName (upval), IconVariant (upval), List (upval), TranslateIntoStringFunction (copy), UseStateResult2 (copy), UseRefResult (copy), SendEventFunction (copy), TelemetryEventType (upval), UseMemoResult1 (copy), UseRefResult3 (copy), UseRefResult4 (copy), ListItemInputType (upval), UseStateResult (copy), UseRefResult1 (copy)
 						return ReactModule.createElement(List.Item, {
 							description = TranslateIntoStringFunction(Current.label),
@@ -470,7 +470,7 @@ return ReactModule.memo(function(p1) --[[ Line: 189 | Named "InExpChatSelectionN
 								variant = IconVariant.Filled
 							}) else nil,
 							onActivated = {
-								onActivated = function() --[[ Line: 501 ]]
+								onActivated = function()
 									-- upvalues: UseStateResult2 (upval), Current (copy), UseRefResult (upval), SendEventFunction (upval), TelemetryEventType (upval), LayoutOrder (copy), UseMemoResult1 (upval), UseRefResult3 (upval), UseRefResult4 (upval)
 									UseStateResult2(Current.id)
 									UseRefResult.current = Current
@@ -489,7 +489,7 @@ return ReactModule.memo(function(p1) --[[ Line: 189 | Named "InExpChatSelectionN
 								isChecked = UseStateResult == Current.id
 							},
 							LayoutOrder = LayoutOrder,
-							ref = function(p2) --[[ Line: 519 ]]
+							ref = function(p2)
 								-- upvalues: UseRefResult1 (upval), Current (copy)
 								UseRefResult1.current[Current.id] = p2
 							end,

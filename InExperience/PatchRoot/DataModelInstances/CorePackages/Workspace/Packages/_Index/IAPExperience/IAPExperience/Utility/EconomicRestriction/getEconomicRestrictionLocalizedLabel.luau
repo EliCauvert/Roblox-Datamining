@@ -2,7 +2,7 @@
 local EconomicRestrictionsViolationTypeModule = require(IAPExperience.Enums.EconomicRestrictionsViolationType)
 local LoggerModule = require(IAPExperience.Utility.logger)
 
-return function(p1, ViolationType) --[[ Line: 9 ]]
+return function(p1, ViolationType)
 	-- upvalues: EconomicRestrictionsViolationTypeModule (copy), LoggerModule (copy)
 	if ViolationType == EconomicRestrictionsViolationTypeModule.Chargeback then
 		return p1.chargebackViolationLabel

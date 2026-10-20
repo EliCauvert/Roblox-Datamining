@@ -7,17 +7,17 @@ local ClearTimeoutFunction = LuauPolyfillModule.clearTimeout
 local Snackbar = require(Parent.Foundation).Snackbar
 local GenericInterventionSnackbarAutoDismissDelaySeconds = game:DefineFastInt("GenericInterventionSnackbarAutoDismissDelaySeconds", 4)
 
-return ReactModule.memo(function(p1) --[[ Line: 27 | Named "GenericInterventionSnackbar" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseEffectFunction (copy), GenericInterventionSnackbarAutoDismissDelaySeconds (copy), SetTimeoutFunction (copy), ClearTimeoutFunction (copy), ReactModule (copy), Snackbar (copy)
-	UseEffectFunction(function() --[[ Line: 28 ]]
+	UseEffectFunction(function()
 		-- upvalues: p1 (copy), GenericInterventionSnackbarAutoDismissDelaySeconds (upval), SetTimeoutFunction (upval), ClearTimeoutFunction (upval)
 		local SetTimeoutResult = nil
-		SetTimeoutResult = SetTimeoutFunction(function() --[[ Line: 32 ]]
+		SetTimeoutResult = SetTimeoutFunction(function()
 			-- upvalues: p1 (upval)
 			p1.onDismiss()
 		end, (p1.autoDismissDelaySeconds or GenericInterventionSnackbarAutoDismissDelaySeconds) * 1000)
 		
-		return function() --[[ Line: 36 ]]
+		return function()
 			-- upvalues: SetTimeoutResult (ref), ClearTimeoutFunction (upval)
 			if SetTimeoutResult then
 				ClearTimeoutFunction(SetTimeoutResult)

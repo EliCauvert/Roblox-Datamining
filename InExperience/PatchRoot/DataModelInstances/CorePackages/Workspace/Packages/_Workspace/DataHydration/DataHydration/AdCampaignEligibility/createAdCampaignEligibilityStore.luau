@@ -9,7 +9,7 @@ local FFlagBuildAgentAdCampaignRefreshEligibility = require(Parent.SharedFlags).
 local FetchAdCampaignEligibilityModule = require(script.Parent.fetchAdCampaignEligibility)
 local _ = require(script.Parent.AdCampaignEligibilityStoreTypes)
 
-return function(p1) --[[ Line: 30 | Named "createAdCampaignEligibilityStore" ]]
+return function(p1)
 	-- upvalues: FetchAdCampaignEligibilityModule (copy), CreateDataCacheModule (copy), CreateDataResolverModule (copy), FFlagBuildAgentAdCampaignRefreshEligibility (copy), SignalsModule (copy), Players (copy)
 	local FetchEligibility = if p1 and p1.fetchEligibility then p1.fetchEligibility else FetchAdCampaignEligibilityModule
 	local Callback = nil
@@ -18,11 +18,11 @@ return function(p1) --[[ Line: 30 | Named "createAdCampaignEligibilityStore" ]]
 		replaceItems = true,
 		cache = CreateDataCacheModule(),
 		ignoreResponsesAfterTimeout = FFlagBuildAgentAdCampaignRefreshEligibility,
-		onClear = if FFlagBuildAgentAdCampaignRefreshEligibility then function() --[[ Line: 45 ]]
+		onClear = if FFlagBuildAgentAdCampaignRefreshEligibility then function()
 			-- upvalues: Callback (ref)
 			Callback()
 		end else nil,
-		fetchFn = function(p2, _) --[[ Line: 49 ]]
+		fetchFn = function(p2, _)
 			-- upvalues: FetchEligibility (ref)
 			return FetchEligibility((tonumber(p2)))
 		end
@@ -30,7 +30,7 @@ return function(p1) --[[ Line: 30 | Named "createAdCampaignEligibilityStore" ]]
 	local Effects = {}
 	local T = if FFlagBuildAgentAdCampaignRefreshEligibility then {} else nil
 	
-	Callback = function() --[[ Line: 141 ]]
+	Callback = function()
 		-- upvalues: FFlagBuildAgentAdCampaignRefreshEligibility (upval), T (copy), Effects (copy)
 		if FFlagBuildAgentAdCampaignRefreshEligibility then
 			for i, value in T do
@@ -50,7 +50,7 @@ return function(p1) --[[ Line: 30 | Named "createAdCampaignEligibilityStore" ]]
 	end
 	
 	local LocalPlayer = Players.LocalPlayer
-	local Connection = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function() --[[ Line: 157 ]]
+	local Connection = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
 		-- upvalues: Players (upval), LocalPlayer (ref), Callback (ref)
 		if Players.LocalPlayer ~= LocalPlayer then
 			LocalPlayer = Players.LocalPlayer
@@ -59,11 +59,11 @@ return function(p1) --[[ Line: 30 | Named "createAdCampaignEligibilityStore" ]]
 	end)
 	
 	return {
-		getEligibility = function(p2) --[[ Line: 165 ]]
+		getEligibility = function(p2)
 			-- upvalues: DataResolverModule (copy)
 			return DataResolverModule.getCachedItem((tostring(p2)))
 		end,
-		fetchEligibility = function(p2, p3) --[[ Line: 59 ]]
+		fetchEligibility = function(p2, p3)
 			-- upvalues: FFlagBuildAgentAdCampaignRefreshEligibility (upval), DataResolverModule (copy), T (copy), SignalsModule (upval), Effects (copy)
 			if FFlagBuildAgentAdCampaignRefreshEligibility then
 				local Text = tostring(p2)
@@ -90,7 +90,7 @@ return function(p1) --[[ Line: 30 | Named "createAdCampaignEligibilityStore" ]]
 					if not IsRequestInQueueOrInFlight then
 						DataResolverModule.fetchItem(Text)
 					end
-					config.dispose = SignalsModule.createEffect(function(p4) --[[ Line: 88 ]]
+					config.dispose = SignalsModule.createEffect(function(p4)
 						-- upvalues: CachedItem (copy), DataResolverModule (upval), Text (copy), config (copy), T (upval)
 						local DataResult = CachedItem.data(p4)
 						local StatusResult = CachedItem.status(p4)
@@ -133,7 +133,7 @@ return function(p1) --[[ Line: 30 | Named "createAdCampaignEligibilityStore" ]]
 				local CachedItem1 = DataResolverModule.getCachedItem(Text1)
 				
 				if Effects[Text1] == nil then
-					Effects[Text1] = SignalsModule.createEffect(function(p4) --[[ Line: 122 ]]
+					Effects[Text1] = SignalsModule.createEffect(function(p4)
 						-- upvalues: CachedItem1 (copy), DataResolverModule (upval), Text1 (copy), Effects (upval)
 						CachedItem1.data(p4)
 						CachedItem1.status(p4)
@@ -151,16 +151,16 @@ return function(p1) --[[ Line: 30 | Named "createAdCampaignEligibilityStore" ]]
 				return CachedItem1
 			end
 		end,
-		getAndFetchEligibility = function(p4) --[[ Line: 169 ]]
+		getAndFetchEligibility = function(p4)
 			-- upvalues: DataResolverModule (copy)
 			return DataResolverModule.getAndFetchItem((tostring(p4)))
 		end,
-		clear = function() --[[ Line: 172 ]]
+		clear = function()
 			-- upvalues: Callback (ref), DataResolverModule (copy)
 			Callback()
 			DataResolverModule.clear()
 		end,
-		dispose = function() --[[ Line: 176 ]]
+		dispose = function()
 			-- upvalues: Callback (ref), Connection (ref), DataResolverModule (copy)
 			Callback()
 			

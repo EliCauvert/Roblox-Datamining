@@ -8,7 +8,7 @@ local UseStateFunction = ReactModule.useState
 local DependencyArrayFunction = require(Parent.RoactUtils).Hooks.dependencyArray
 local NewResult = require(Parent.RobloxAppLocales).Localization.new(LocalizationService.RobloxLocaleId)
 
-local function formatCountdown(Largest: number) --[[ Line: 37 ]]
+local function formatCountdown(Largest: number)
 	-- upvalues: NewResult (copy), LocalizationService (copy)
 	if Largest <= 0 then
 		return nil
@@ -26,18 +26,18 @@ local function formatCountdown(Largest: number) --[[ Line: 37 ]]
 	end
 end
 
-return function(p1) --[[ Line: 70 | Named "useRestrictionEndDateInfo" ]]
+return function(p1)
 	-- upvalues: UseMemoFunction (copy), LocalizationService (copy), DependencyArrayFunction (copy), UseStateFunction (copy), formatCountdown (copy), UseEffectFunction (copy), RunService (copy)
 	local _DateTime = if p1 and p1 ~= "" then DateTime.fromIsoDate(p1) else nil
-	local UseMemoResult = UseMemoFunction(function() --[[ Line: 73 ]]
+	local UseMemoResult = UseMemoFunction(function()
 		-- upvalues: _DateTime (copy), LocalizationService (upval)
 		return if _DateTime then _DateTime:FormatLocalTime("LLL", LocalizationService.RobloxLocaleId) else nil
 	end, DependencyArrayFunction(_DateTime))
-	local UseStateResult, UseStateResult2 = UseStateFunction(function() --[[ Line: 77 ]]
+	local UseStateResult, UseStateResult2 = UseStateFunction(function()
 		-- upvalues: _DateTime (copy), formatCountdown (upval)
 		return if _DateTime == nil then nil else formatCountdown((math.max(_DateTime.UnixTimestamp - DateTime.now().UnixTimestamp, 0)))
 	end)
-	UseEffectFunction(function() --[[ Line: 86 ]]
+	UseEffectFunction(function()
 		-- upvalues: _DateTime (copy), UseStateResult2 (copy), formatCountdown (upval), RunService (upval)
 		if _DateTime == nil then
 			UseStateResult2(nil)
@@ -54,7 +54,7 @@ return function(p1) --[[ Line: 70 | Named "useRestrictionEndDateInfo" ]]
 		UseStateResult2(formatCountdown(UnixTimestampDelta))
 		local v1 = 0
 		local Connection = nil
-		Connection = RunService.Heartbeat:Connect(function() --[[ Line: 107 ]]
+		Connection = RunService.Heartbeat:Connect(function()
 			-- upvalues: v1 (ref), _DateTime (upval), UseStateResult2 (upval), formatCountdown (upval), Connection (ref)
 			local ClockTime = os.clock()
 			
@@ -69,7 +69,7 @@ return function(p1) --[[ Line: 70 | Named "useRestrictionEndDateInfo" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 125 ]]
+		return function()
 			-- upvalues: Connection (ref)
 			if Connection then
 				Connection:Disconnect()

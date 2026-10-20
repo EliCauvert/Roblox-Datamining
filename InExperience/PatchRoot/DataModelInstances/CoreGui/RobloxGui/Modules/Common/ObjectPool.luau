@@ -1,7 +1,7 @@
 ﻿local Module = {}
 Module.__index = Module
 
-function Module.GetInstance(p1, p2) --[[ Line: 14 ]]
+function Module.GetInstance(p1, p2)
 	if p1.InstancePoolsByClass[p2] == nil then
 		p1.InstancePoolsByClass[p2] = {}
 	end
@@ -17,7 +17,7 @@ function Module.GetInstance(p1, p2) --[[ Line: 14 ]]
 	end
 end
 
-function Module.ReturnInstance(p1, Object) --[[ Line: 27 ]]
+function Module.ReturnInstance(p1, Object)
 	if p1.InstancePoolsByClass[Object.ClassName] == nil then
 		p1.InstancePoolsByClass[Object.ClassName] = {}
 	end
@@ -31,7 +31,7 @@ function Module.ReturnInstance(p1, Object) --[[ Line: 27 ]]
 end
 
 return {
-	new = function(PoolSizePerType) --[[ Line: 41 ]]
+	new = function(PoolSizePerType)
 		-- upvalues: Module (copy)
 		local ObjectPool = setmetatable({}, Module)
 		ObjectPool.InstancePoolsByClass = {}

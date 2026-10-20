@@ -1,4 +1,4 @@
-﻿return function(Object, ClassName) --[[ Line: 1 ]]
+﻿return function(Object, ClassName)
 	local Success, _ = pcall(Instance.new, ClassName)
 	assert(Success, `{ClassName} does not exist. Did you make a typo?`)
 	local Descendants = Object:GetDescendants()

@@ -2,7 +2,7 @@
 local BulkPurchaseRequestModule = require(script.Parent.BulkPurchaseRequest)
 local UseBulkPurchaseRequestPropsModule = require(script.Parent.useBulkPurchaseRequestProps)
 
-return function() --[[ Line: 8 | Named "BulkPurchaseRequestContainer" ]]
+return function()
 	-- upvalues: UseBulkPurchaseRequestPropsModule (copy), ReactModule (copy), BulkPurchaseRequestModule (copy)
 	return ReactModule.createElement(BulkPurchaseRequestModule, (UseBulkPurchaseRequestPropsModule()))
 end

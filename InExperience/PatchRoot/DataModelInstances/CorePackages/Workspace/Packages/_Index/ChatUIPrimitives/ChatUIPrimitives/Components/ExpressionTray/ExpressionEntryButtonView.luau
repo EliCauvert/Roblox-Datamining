@@ -3,7 +3,7 @@ local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local config = { name = "lightning-bolt", variant = "Regular" }
 
-return ReactModule.memo(function(p1) --[[ Line: 31 | Named "ExpressionEntryButtonView" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), config (copy)
 	if p1.isFullWidth then
 		return ReactModule.createElement(FoundationModule.Button, {

@@ -10,7 +10,7 @@ local ColorTextButtonModule = require(AvatarExperienceControlBar.Components.Butt
 local AXDisableControlBarMenuAnimation = game:DefineFastFlag("AXDisableControlBarMenuAnimation", false)
 local config = { dampingRatio = 1, frequency = 5 }
 
-return function(Frame: Frame) --[[ Line: 30 | Named "IconTextMenu" ]]
+return function(Frame: Frame)
 	-- upvalues: UseSemanticTokensModule (copy), ReactModule (copy), ReactOtterModule (copy), config (copy), IconTextButtonModule (copy), ColorTextButtonModule (copy), FoundationModule (copy), AXDisableControlBarMenuAnimation (copy)
 	local UseSemanticTokensModuleResult = UseSemanticTokensModule()
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
@@ -18,13 +18,13 @@ return function(Frame: Frame) --[[ Line: 30 | Named "IconTextMenu" ]]
 	local v1 = #Frame.items > 0
 	local UseRefResult = ReactModule.useRef(nil)
 	local Radius = Frame.radius or UseSemanticTokensModuleResult.defaultIconTextMenuRadius
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 41 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseBindingResult2 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), v1 (copy), config (upval)
 		local AbsoluteSize = Frame.AbsoluteSize
 		UseBindingResult2(AbsoluteSize.X)
 		UseAnimatedBindingResult2(ReactOtterModule.spring(if v1 then AbsoluteSize.Y else 0, config))
 	end, { v1 })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 47 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Frame (copy), ReactModule (upval), IconTextButtonModule (upval), ColorTextButtonModule (upval)
 		local Elements = {}
 		
@@ -35,7 +35,7 @@ return function(Frame: Frame) --[[ Line: 30 | Named "IconTextMenu" ]]
 					text = item.text,
 					iconSize = item.iconSize,
 					disabled = item.disabled,
-					onActivated = function() --[[ Line: 56 ]]
+					onActivated = function()
 						-- upvalues: Frame (upval), item (copy)
 						if Frame.onItemActivated then
 							Frame.onItemActivated(item.id)
@@ -54,7 +54,7 @@ return function(Frame: Frame) --[[ Line: 30 | Named "IconTextMenu" ]]
 					size = item.size,
 					text = item.text,
 					disabled = item.disabled,
-					onActivated = function() --[[ Line: 74 ]]
+					onActivated = function()
 						-- upvalues: Frame (upval), item (copy)
 						if Frame.onItemActivated then
 							Frame.onItemActivated(item.id)
@@ -74,7 +74,7 @@ return function(Frame: Frame) --[[ Line: 30 | Named "IconTextMenu" ]]
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "clip",
 		Name = "IconTextMenu-Animation-Container",
-		Size = if AXDisableControlBarMenuAnimation then nil else ReactModule.joinBindings({ X = UseBindingResult, Y = UseAnimatedBindingResult }):map(function(Vector): UDim2 --[[ Line: 95 ]]
+		Size = if AXDisableControlBarMenuAnimation then nil else ReactModule.joinBindings({ X = UseBindingResult, Y = UseAnimatedBindingResult }):map(function(Vector): UDim2
 			return UDim2.fromOffset(Vector.X, (math.round(Vector.Y)))
 		end),
 		AutomaticSize = if AXDisableControlBarMenuAnimation then Enum.AutomaticSize.XY else nil,

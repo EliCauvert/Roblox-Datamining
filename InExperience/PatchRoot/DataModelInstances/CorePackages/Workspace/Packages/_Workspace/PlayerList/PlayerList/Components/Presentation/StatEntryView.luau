@@ -11,7 +11,7 @@ local UseLayoutValuesModule = require(Parent.Common.useLayoutValues)
 local FFlagRemoveNewPlayerListOverlayModule = require(Parent.Flags.FFlagRemoveNewPlayerListOverlay)
 local FFlagEnableMobilePlayerListOnConsoleModule = require(Parent.Flags.FFlagEnableMobilePlayerListOnConsole)
 
-return ReactModule.memo(function(p1) --[[ Line: 41 ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseStyleFunction (copy), UseLayoutValuesModule (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), NormalizeFontFaceFunction (copy), FFlagEnableMobilePlayerListOnConsoleModule (copy), ReactModule (copy), FormatStatStringModule (copy), FFlagRemoveNewPlayerListOverlayModule (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseLayoutValuesModuleResult = UseLayoutValuesModule()
@@ -32,11 +32,11 @@ return ReactModule.memo(function(p1) --[[ Line: 41 ]]
 		NormalizeFontFaceResult = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.CaptionLarge.Font) else UseStyleResult.Font.CaptionHeader.Font
 		StatTextSize = if FFlagEnableMobilePlayerListOnConsoleModule then UseLayoutValuesModuleResult.StatTextSize else UseStyleResult.Font.CaptionHeader.RelativeSize * UseStyleResult.Font.BaseSize
 	end
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 73 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), FormatStatStringModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceResult (ref), StatTextSize (ref), Color (copy), Transparency (copy), StrokeColor (copy), StrokeTransparency (copy)
 		return {
 			BackgroundTransparency = 1,
-			Text = p1.statValue:map(function(p2) --[[ Line: 75 ]]
+			Text = p1.statValue:map(function(p2)
 				-- upvalues: FormatStatStringModule (upval)
 				return FormatStatStringModule(p2)
 			end),

@@ -9,7 +9,7 @@ local ThumbnailModule = require(script.Parent.Thumbnail)
 local UseUpsellContentVariantsModule = require(script.Parent.useUpsellContentVariants)
 local Icon = require(Parent.BuilderIcons).Icon
 
-return function(p1) --[[ Line: 30 | Named "UpsellContent" ]]
+return function(p1)
 	-- upvalues: UseTokensModule (copy), UseUpsellContentVariantsModule (copy), ReactModule (copy), ViewModule (copy), ThumbnailModule (copy), TextModule (copy), IconModule (copy), Icon (copy)
 	local UseUpsellContentVariantsModuleResult = UseUpsellContentVariantsModule(UseTokensModule(), p1.density)
 	

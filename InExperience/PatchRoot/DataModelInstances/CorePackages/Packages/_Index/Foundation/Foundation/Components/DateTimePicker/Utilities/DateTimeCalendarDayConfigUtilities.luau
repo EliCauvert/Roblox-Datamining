@@ -7,20 +7,20 @@ local NUMELEMENTSINDATESGRID = DateTimeCalendarConstantsModule.NUM_ELEMENTS_IN_D
 local NUMNONDAYELEMENTS = DateTimeCalendarConstantsModule.NUM_NON_DAY_ELEMENTS
 local NUMWEEKDAYHEADERS = DateTimeCalendarConstantsModule.NUM_WEEKDAY_HEADERS
 
-local function _(p1, p2) --[[ Line: 51 | Named "countLeadingPadDays" ]]
+local function _(p1, p2)
 	-- upvalues: DateTimeUtilitiesModule (copy), DAYSPERWEEK (copy)
 	local FirstDayOfWeek = DateTimeUtilitiesModule.getFirstDayOfWeek(p1, p2)
 	
 	return if FirstDayOfWeek == 0 then DAYSPERWEEK else FirstDayOfWeek
 end
 
-local _ = function(p1, p2): number --[[ Line: 57 | Named "countTrailingEmptyDays" ]]
+local _ = function(p1, p2): number
 	-- upvalues: DAYSPERWEEK (copy)
 	return (DAYSPERWEEK - (p1 + p2) % DAYSPERWEEK) % DAYSPERWEEK
 end
 
 return {
-	buildCalendarDayConfigs = function(p1) --[[ Line: 61 ]]
+	buildCalendarDayConfigs = function(p1)
 		-- upvalues: NUMWEEKDAYHEADERS (copy), DateTimeUtilitiesModule (copy), DAYSPERWEEK (copy), DateTimePickerCalendarDayKeyPrefixModule (copy), NUMNONDAYELEMENTS (copy), NUMELEMENTSINDATESGRID (copy)
 		local List = {}
 		local NewNUMWEEKDAYHEADERS = NUMWEEKDAYHEADERS + 1
@@ -69,7 +69,7 @@ return {
 		end
 		return List
 	end,
-	buildTwoMonthPaneCellConfigs = function(Month, Year) --[[ Line: 116 ]]
+	buildTwoMonthPaneCellConfigs = function(Month, Year)
 		-- upvalues: NUMWEEKDAYHEADERS (copy), DateTimeUtilitiesModule (copy), DAYSPERWEEK (copy)
 		local List = {}
 		local NewNUMWEEKDAYHEADERS = NUMWEEKDAYHEADERS + 1

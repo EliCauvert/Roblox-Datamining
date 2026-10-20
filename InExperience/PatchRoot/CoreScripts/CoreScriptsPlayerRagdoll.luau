@@ -21,7 +21,7 @@ if not AvatarJointUpgradeFeatureEngineFeature then
 	
 	if not RemoteEvent or not RemoteEvent:IsA("RemoteEvent") then return end
 end
-local function onOwnedHumanoidDeath(p1, Humanoid: Humanoid) --[[ Line: 36 ]]
+local function onOwnedHumanoidDeath(p1, Humanoid: Humanoid)
 	-- upvalues: AvatarJointUpgradeFeatureEngineFeature (copy), DeathType (copy), RagdollRiggingModule (copy), RemoteEvent (ref)
 	if not AvatarJointUpgradeFeatureEngineFeature then
 		local DisableMotorsResult = RagdollRiggingModule.disableMotors(p1, Humanoid.RigType)
@@ -40,24 +40,24 @@ local function onOwnedHumanoidDeath(p1, Humanoid: Humanoid) --[[ Line: 36 ]]
 	end
 end
 
-HumanoidReadyUtilModule.registerHumanoidReady(function(Player, p1, Humanoid: Humanoid) --[[ Line: 91 ]]
+HumanoidReadyUtilModule.registerHumanoidReady(function(Player, p1, Humanoid: Humanoid)
 	-- upvalues: DeathType (copy), RagdollRiggingModule (copy), LocalPlayer (ref), onOwnedHumanoidDeath (copy)
 	local Connection = nil
 	local Connection1 = nil
 	
-	local function _() --[[ Line: 94 | Named "disconnect" ]]
+	local function _()
 		-- upvalues: Connection (ref), Connection1 (ref)
 		Connection:Disconnect()
 		Connection1:Disconnect()
 	end
 	
-	Connection1 = Humanoid.Died:Connect(function() --[[ Line: 100 ]]
+	Connection1 = Humanoid.Died:Connect(function()
 		-- upvalues: Connection (ref), Connection1 (ref), DeathType (upval), RagdollRiggingModule (upval), p1 (copy), Player (copy), LocalPlayer (upval), onOwnedHumanoidDeath (upval), Humanoid (copy)
 		Connection:Disconnect()
 		Connection1:Disconnect()
 		
 		if DeathType.Value == "Ragdoll" then
-			delay(2, function() --[[ Line: 105 ]]
+			delay(2, function()
 				-- upvalues: RagdollRiggingModule (upval), p1 (upval)
 				RagdollRiggingModule.disableParticleEmittersAndFadeOut(p1, 0.4)
 			end)
@@ -66,7 +66,7 @@ HumanoidReadyUtilModule.registerHumanoidReady(function(Player, p1, Humanoid: Hum
 			onOwnedHumanoidDeath(p1, Humanoid)
 		end
 	end)
-	Connection = Player.CharacterRemoving:Connect(function(Character) --[[ Line: 117 ]]
+	Connection = Player.CharacterRemoving:Connect(function(Character)
 		-- upvalues: p1 (copy), Connection (ref), Connection1 (ref)
 		if Character == p1 then
 			Connection:Disconnect()

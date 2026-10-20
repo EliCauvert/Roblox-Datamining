@@ -12,11 +12,11 @@ local View = FoundationModule.View
 local InputSize = FoundationModule.Enums.InputSize
 local Radius = FoundationModule.Enums.Radius
 
-local function _(Text: string): string --[[ Line: 41 | Named "trim" ]]
+local function _(Text: string): string
 	return (string.gsub(Text, "^%s*(.-)%s*$", "%1"))
 end
 
-local function renderSkeletonRow(LayoutOrder, TestId) --[[ Line: 47 ]]
+local function renderSkeletonRow(LayoutOrder, TestId)
 	-- upvalues: ReactModule (copy), View (copy), Skeleton (copy), Radius (copy)
 	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-medium size-full-0 auto-y padding-y-small",
@@ -43,7 +43,7 @@ local function renderSkeletonRow(LayoutOrder, TestId) --[[ Line: 47 ]]
 	})
 end
 
-return function(p1) --[[ Line: 76 | Named "UserPickerList" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), renderSkeletonRow (copy), ReactModule (copy), View (copy), Text (copy), UserPickerRowModule (copy), List (copy), InputSize (copy)
 	local NoResults = UseLocalizationFunction({
 		noResults = LocalizationStringsModule.USER_PICKER_NO_RESULTS
@@ -86,7 +86,7 @@ return function(p1) --[[ Line: 76 | Named "UserPickerList" ]]
 				userId = userId,
 				isSelected = p1.isSelected(userId),
 				isDisabled = not p1.canSelect(userId),
-				onToggle = function() --[[ Line: 121 ]]
+				onToggle = function()
 					-- upvalues: p1 (copy), userId (copy)
 					p1.toggleSelected(userId)
 				end,

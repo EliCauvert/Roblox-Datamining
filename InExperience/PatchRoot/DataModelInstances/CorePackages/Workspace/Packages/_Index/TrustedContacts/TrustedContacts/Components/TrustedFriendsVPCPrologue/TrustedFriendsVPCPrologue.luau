@@ -14,7 +14,7 @@ local FStringConnectionGraphCoreAmpNameSpace = require(Parent.SharedFlags).FStri
 local FFlagTCUpdateProfileCTAButton = require(Parent.SharedFlags).FFlagTCUpdateProfileCTAButton
 local _ = require(TrustedContacts.Common.Types)
 
-local function TrustedFriendsVPCPrologue(p1) --[[ Line: 32 ]]
+local function TrustedFriendsVPCPrologue(p1)
 	-- upvalues: UseLocalizationFunction (copy), UseTCAnalyticsFunction (copy), ReactModule (copy), EventNames (copy), FFlagTCUpdateProfileCTAButton (copy), Contexts (copy), FStringConnectionGraphCoreAmpNameSpace (copy), Dialog (copy), DialogSize (copy), ButtonVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		cancel = "CommonUI.Controls.Action.Cancel",
@@ -23,11 +23,11 @@ local function TrustedFriendsVPCPrologue(p1) --[[ Line: 32 ]]
 		vpcRequired = "Feature.Friends.Label.AddFriendVPC"
 	})
 	local FireAnalyticsEventFunction = UseTCAnalyticsFunction({ friendId = p1.userId }).fireAnalyticsEvent
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 44 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		p1.externalNavigation.closeModal()
 	end, { p1.externalNavigation })
-	local UseResult1 = ReactModule.useCallback(function(_, _) --[[ Line: 53 ]]
+	local UseResult1 = ReactModule.useCallback(function(_, _)
 		-- upvalues: FFlagTCUpdateProfileCTAButton (upval), p1 (copy)
 		if FFlagTCUpdateProfileCTAButton and p1.completionCallback then
 			p1.completionCallback()
@@ -50,7 +50,7 @@ local function TrustedFriendsVPCPrologue(p1) --[[ Line: 32 ]]
 				{
 					text = UseLocalizationResult.ask,
 					variant = ButtonVariant.Emphasis,
-					onActivated = ReactModule.useCallback(function() --[[ Line: 62 ]]
+					onActivated = ReactModule.useCallback(function()
 						-- upvalues: FireAnalyticsEventFunction (copy), EventNames (upval), UseResult (copy), p1 (copy), UseResult1 (copy), Contexts (upval), FStringConnectionGraphCoreAmpNameSpace (upval)
 						FireAnalyticsEventFunction(EventNames.TrustedFriendsVPCAskClicked)
 						UseResult()
@@ -75,7 +75,7 @@ local function TrustedFriendsVPCPrologue(p1) --[[ Line: 32 ]]
 				{
 					text = UseLocalizationResult.cancel,
 					variant = ButtonVariant.Standard,
-					onActivated = ReactModule.useCallback(function() --[[ Line: 48 ]]
+					onActivated = ReactModule.useCallback(function()
 						-- upvalues: FireAnalyticsEventFunction (copy), EventNames (upval), UseResult (copy)
 						FireAnalyticsEventFunction(EventNames.TrustedFriendsVPCCancelClicked)
 						UseResult()
@@ -87,7 +87,7 @@ local function TrustedFriendsVPCPrologue(p1) --[[ Line: 32 ]]
 end
 
 return {
-	Screen = function(p2) --[[ Line: 112 ]]
+	Screen = function(p2)
 		-- upvalues: ReactModule (copy), TrustedFriendsVPCPrologue (copy)
 		return ReactModule.createElement(TrustedFriendsVPCPrologue, {
 			userId = p2.navigation.getParam("userId"),

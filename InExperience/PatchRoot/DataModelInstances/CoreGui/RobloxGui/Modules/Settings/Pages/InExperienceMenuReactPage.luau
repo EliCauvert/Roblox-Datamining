@@ -8,27 +8,27 @@ local PortalWithFoundationStylelinkModule = require(Parent.Components.PortalWith
 local ReactPageSignalModule = require(Parent.ReactPageSignal)
 local TraversalHistoryPage = require(Parent.Components.Traversal).TraversalHistoryPage
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, _) --[[ Line: 25 | Named "InExperienceMenuReactPage" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, _)
 	-- upvalues: ReactPageSignalModule (copy), SignalsReactModule (copy), EnumReactPageModule (copy), ReactModule (copy), TraversalHistoryPage (copy), SettingsShowSignal (copy), PortalWithFoundationStylelinkModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactPageSignalModule(false).currentReactPage)
 	local Element = if UseSignalStateResult == EnumReactPageModule.TraversalHistory then ReactModule.createElement(TraversalHistoryPage) else nil
-	ReactModule.useEffect(function() --[[ Line: 34 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult (copy), p1 (copy)
 		if not UseSignalStateResult then return end
 		p1.onMount()
 		
 		return p1.onUnmount
 	end, { UseSignalStateResult })
-	ReactModule.useEffect(function() --[[ Line: 42 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: SettingsShowSignal (upval), p1 (copy)
-		local Connection = SettingsShowSignal:connect(function(p2) --[[ Line: 43 ]]
+		local Connection = SettingsShowSignal:connect(function(p2)
 			-- upvalues: p1 (upval)
 			if not p2 then
 				p1.onUnmount()
 			end
 		end)
 		
-		return function() --[[ Line: 48 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end

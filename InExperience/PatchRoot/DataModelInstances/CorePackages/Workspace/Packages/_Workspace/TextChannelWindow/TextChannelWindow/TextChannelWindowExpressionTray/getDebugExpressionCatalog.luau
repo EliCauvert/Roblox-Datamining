@@ -58,7 +58,7 @@
 	}
 }
 
-return function() --[[ Line: 31 | Named "getDebugExpressionCatalog" ]]
+return function()
 	-- upvalues: config (copy)
 	return config
 end

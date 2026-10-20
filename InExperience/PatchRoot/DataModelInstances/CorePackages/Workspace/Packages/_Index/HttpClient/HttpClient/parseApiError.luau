@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.types)
 
-return function(p1) --[[ Line: 6 | Named "parseApiError" ]]
+return function(p1)
 	if typeof(p1) == "table" then
 		local Code = p1.code
 		local Message = p1.message

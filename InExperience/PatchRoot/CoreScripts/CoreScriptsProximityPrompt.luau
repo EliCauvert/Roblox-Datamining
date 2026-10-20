@@ -78,7 +78,7 @@ local _TweenInfo = TweenInfo.new(0.06, Enum.EasingStyle.Linear, Enum.EasingDirec
 local _TweenInfo1 = TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
 local _TweenInfo2 = TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
 
-local function _() --[[ Line: 99 | Named "getScreenGui" ]]
+local function _()
 	-- upvalues: PlayerGui (copy)
 	local ProximityPrompts = PlayerGui:FindFirstChild("ProximityPrompts")
 	
@@ -92,7 +92,7 @@ local function _() --[[ Line: 99 | Named "getScreenGui" ]]
 	return ProximityPrompts
 end
 
-local function createProgressBarGradient(Frame, p1, List, List1) --[[ Line: 112 ]]
+local function createProgressBarGradient(Frame, p1, List, List1)
 	-- upvalues: TweenService (copy), _TweenInfo (copy)
 	local Frame1 = Instance.new("Frame")
 	Frame1.Size = UDim2.fromScale(0.5, 1)
@@ -122,7 +122,7 @@ local function createProgressBarGradient(Frame, p1, List, List1) --[[ Line: 112 
 	return Gradient, Frame1
 end
 
-local function createCircularProgressBar(CreateResults, CreateResults1) --[[ Line: 144 ]]
+local function createCircularProgressBar(CreateResults, CreateResults1)
 	-- upvalues: createProgressBarGradient (copy)
 	local CircularProgressBar = Instance.new("Frame")
 	CircularProgressBar.Name = "CircularProgressBar"
@@ -135,7 +135,7 @@ local function createCircularProgressBar(CreateResults, CreateResults1) --[[ Lin
 	local Progress = Instance.new("NumberValue")
 	Progress.Name = "Progress"
 	Progress.Parent = CircularProgressBar
-	Progress.Changed:Connect(function(Value: number) --[[ Line: 158 ]]
+	Progress.Changed:Connect(function(Value: number)
 		-- upvalues: ProgressBarGradient2 (copy), Progress (copy), ProgressBarGradient (copy), ProgressBarGradient2_1 (copy), ProgressBarGradient1 (copy)
 		local ClampedValue = math.clamp(Value * 360, 0, 360)
 		ProgressBarGradient2.Visible = Progress.Value > 0.5
@@ -147,7 +147,7 @@ local function createCircularProgressBar(CreateResults, CreateResults1) --[[ Lin
 	return CircularProgressBar
 end
 
-local function createPrompt(Prompt, ProximityPromptInputType, Parent) --[[ Line: 169 ]]
+local function createPrompt(Prompt, ProximityPromptInputType, Parent)
 	-- upvalues: _Color3 (copy), TweenService (copy), _TweenInfo2 (copy), AppFonts (copy), _Color3_1 (copy), _Color3_2 (copy), _TweenInfo (copy), UserInputService (copy), config (copy), config1 (copy), config2 (copy), config3 (copy), createCircularProgressBar (copy), _TweenInfo1 (copy), RunService (copy)
 	local CreateResults = {}
 	local CreateResults1 = {}
@@ -346,14 +346,14 @@ local function createPrompt(Prompt, ProximityPromptInputType, Parent) --[[ Line:
 		Button.Parent = Prompt1
 		Button.Selectable = false
 		local Flag = false
-		Button.InputBegan:Connect(function(Input) --[[ Line: 399 ]]
+		Button.InputBegan:Connect(function(Input)
 			-- upvalues: Prompt (copy), Flag (ref)
 			if (Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.MouseButton1) and Input.UserInputState ~= Enum.UserInputState.Change then
 				Prompt:InputHoldBegin()
 				Flag = true
 			end
 		end)
-		Button.InputEnded:Connect(function(Input) --[[ Line: 406 ]]
+		Button.InputEnded:Connect(function(Input)
 			-- upvalues: Flag (ref), Prompt (copy)
 			if (Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.MouseButton1) and Flag then
 				Flag = false
@@ -374,33 +374,33 @@ local function createPrompt(Prompt, ProximityPromptInputType, Parent) --[[ Line:
 	local TriggerEndedConnection = nil
 	
 	if Prompt.HoldDuration > 0 then
-		Connection = Prompt.PromptButtonHoldBegan:Connect(function() --[[ Line: 431 ]]
+		Connection = Prompt.PromptButtonHoldBegan:Connect(function()
 			-- upvalues: CreateResults (copy)
 			for _, createResult in ipairs(CreateResults) do
 				createResult:Play()
 			end
 		end)
-		Connection1 = Prompt.PromptButtonHoldEnded:Connect(function() --[[ Line: 437 ]]
+		Connection1 = Prompt.PromptButtonHoldEnded:Connect(function()
 			-- upvalues: CreateResults1 (copy)
 			for _, value in ipairs(CreateResults1) do
 				value:Play()
 			end
 		end)
 	end
-	TriggeredConnection = Prompt.Triggered:Connect(function() --[[ Line: 444 ]]
+	TriggeredConnection = Prompt.Triggered:Connect(function()
 		-- upvalues: CreateResults2 (copy)
 		for _, value in ipairs(CreateResults2) do
 			value:Play()
 		end
 	end)
-	TriggerEndedConnection = Prompt.TriggerEnded:Connect(function() --[[ Line: 450 ]]
+	TriggerEndedConnection = Prompt.TriggerEnded:Connect(function()
 		-- upvalues: CreateResults3 (copy)
 		for _, value in ipairs(CreateResults3) do
 			value:Play()
 		end
 	end)
 	
-	local function updateUIFromPrompt() --[[ Line: 456 ]]
+	local function updateUIFromPrompt()
 		-- upvalues: Prompt (copy), ActionText (copy), ObjectText (copy), Padding (copy), Prompt1 (copy), RunService (upval), Frame (copy)
 		local X = 72
 		local v1 = 24
@@ -422,7 +422,7 @@ local function createPrompt(Prompt, ProximityPromptInputType, Parent) --[[ Line:
 		ObjectText.Position = UDim2.new(0, 0, 0, -10)
 		Prompt1.Size = UDim2.fromOffset(X, 72)
 		Prompt1.SizeOffset = Vector2.new(Prompt.UIOffset.X / Prompt1.Size.Width.Offset, Prompt.UIOffset.Y / Prompt1.Size.Height.Offset)
-		task.defer(function() --[[ Line: 492 ]]
+		task.defer(function()
 			-- upvalues: RunService (upval), X (ref), Frame (upval), Prompt1 (upval), Prompt (upval)
 			RunService.RenderStepped:Wait()
 			RunService.RenderStepped:Wait()
@@ -436,7 +436,7 @@ local function createPrompt(Prompt, ProximityPromptInputType, Parent) --[[ Line:
 	updateUIFromPrompt()
 	Prompt1.Adornee = Prompt.Parent
 	Prompt1.Parent = Parent
-	local AncestryChangedConnection = Prompt.AncestryChanged:Connect(function() --[[ Line: 509 | Named "updateUIAncestry" ]]
+	local AncestryChangedConnection = Prompt.AncestryChanged:Connect(function()
 		-- upvalues: Prompt1 (copy), Prompt (copy)
 		Prompt1.Adornee = Prompt.Parent
 	end)
@@ -444,7 +444,7 @@ local function createPrompt(Prompt, ProximityPromptInputType, Parent) --[[ Line:
 	for _, value in ipairs(CreateResults3) do
 		value:Play()
 	end
-	return function() --[[ Line: 518 | Named "cleanup" ]]
+	return function()
 		-- upvalues: Connection (ref), Connection1 (ref), TriggeredConnection (ref), TriggerEndedConnection (ref), ChangedConnection (copy), AncestryChangedConnection (copy), CreateResults2 (copy), Prompt1 (copy)
 		if Connection then
 			Connection:Disconnect()
@@ -465,7 +465,7 @@ local function createPrompt(Prompt, ProximityPromptInputType, Parent) --[[ Line:
 	end
 end
 
-local function createIndicator(p1, Parent) --[[ Line: 544 ]]
+local function createIndicator(p1, Parent)
 	-- upvalues: _Color3 (copy), _Color3_1 (copy), TweenService (copy), _TweenInfo (copy)
 	local CreateResults = {}
 	local CreateResults1 = {}
@@ -494,7 +494,7 @@ local function createIndicator(p1, Parent) --[[ Line: 544 ]]
 	table.insert(CreateResults1, TweenService:Create(Stroke, _TweenInfo, { Transparency = 0.2 }))
 	Indicator.Adornee = p1.Parent
 	Indicator.Parent = Parent
-	local AncestryChangedConnection = p1.AncestryChanged:Connect(function() --[[ Line: 579 | Named "updateUIAncestry" ]]
+	local AncestryChangedConnection = p1.AncestryChanged:Connect(function()
 		-- upvalues: Indicator (copy), p1 (copy)
 		Indicator.Adornee = p1.Parent
 	end)
@@ -502,7 +502,7 @@ local function createIndicator(p1, Parent) --[[ Line: 544 ]]
 	for _, value in ipairs(CreateResults1) do
 		value:Play()
 	end
-	return function() --[[ Line: 588 | Named "cleanup" ]]
+	return function()
 		-- upvalues: AncestryChangedConnection (copy), CreateResults (copy), Indicator (copy)
 		AncestryChangedConnection:Disconnect()
 		
@@ -514,9 +514,9 @@ local function createIndicator(p1, Parent) --[[ Line: 544 ]]
 	end
 end
 
-;(function() --[[ Line: 603 | Named "onLoad" ]]
+;(function()
 	-- upvalues: ProximityPromptService (copy), PlayerGui (copy), createPrompt (copy), createIndicator (copy)
-	ProximityPromptService.PromptShown:Connect(function(Prompt, ProximityPromptInputType) --[[ Line: 604 ]]
+	ProximityPromptService.PromptShown:Connect(function(Prompt, ProximityPromptInputType)
 		-- upvalues: PlayerGui (upval), createPrompt (upval)
 		if Prompt.Style == Enum.ProximityPromptStyle.Custom then return end
 		local ProximityPrompts = PlayerGui:FindFirstChild("ProximityPrompts")
@@ -530,11 +530,11 @@ end
 		end
 		local Prompt1: () -> () = createPrompt(Prompt, ProximityPromptInputType, ProximityPrompts)
 		local BindableEvent = Instance.new("BindableEvent")
-		local PromptHiddenConnection = Prompt.PromptHidden:Connect(function() --[[ Line: 615 ]]
+		local PromptHiddenConnection = Prompt.PromptHidden:Connect(function()
 			-- upvalues: BindableEvent (copy)
 			BindableEvent:Fire()
 		end)
-		local DestroyingConnection = Prompt.Destroying:Connect(function() --[[ Line: 618 ]]
+		local DestroyingConnection = Prompt.Destroying:Connect(function()
 			-- upvalues: BindableEvent (copy)
 			BindableEvent:Fire()
 		end)
@@ -543,7 +543,7 @@ end
 		DestroyingConnection:Disconnect()
 		Prompt1()
 	end)
-	ProximityPromptService.IndicatorShown:Connect(function(p2) --[[ Line: 628 ]]
+	ProximityPromptService.IndicatorShown:Connect(function(p2)
 		-- upvalues: PlayerGui (upval), createIndicator (upval)
 		if p2.Style == Enum.ProximityPromptStyle.Custom then return end
 		local ProximityPrompts = PlayerGui:FindFirstChild("ProximityPrompts")
@@ -557,11 +557,11 @@ end
 		end
 		local Indicator: () -> () = createIndicator(p2, ProximityPrompts)
 		local BindableEvent = Instance.new("BindableEvent")
-		local IndicatorHiddenConnection = p2.IndicatorHidden:Connect(function() --[[ Line: 639 ]]
+		local IndicatorHiddenConnection = p2.IndicatorHidden:Connect(function()
 			-- upvalues: BindableEvent (copy)
 			BindableEvent:Fire()
 		end)
-		local DestroyingConnection = p2.Destroying:Connect(function() --[[ Line: 642 ]]
+		local DestroyingConnection = p2.Destroying:Connect(function()
 			-- upvalues: BindableEvent (copy)
 			BindableEvent:Fire()
 		end)

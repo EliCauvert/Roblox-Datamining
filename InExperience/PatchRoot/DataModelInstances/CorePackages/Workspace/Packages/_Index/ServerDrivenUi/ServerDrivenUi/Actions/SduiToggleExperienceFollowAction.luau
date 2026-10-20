@@ -11,7 +11,7 @@ local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local GameFollowFunction = require(Parent.DiscoveryAnalytics).Events.gameFollow
 local GetSduiPageEntrySnackbarStoreFunction = require(Parent.SduiSharedUtilities).getSduiPageEntrySnackbarStore
 
-return function(p1, _, p2, _) --[[ Line: 26 | Named "SduiToggleExperienceFollowAction" ]]
+return function(p1, _, p2, _)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), Game1 (copy), Players (copy), GameFollowFunction (copy), FFlagLuaAppAddUniverseIdToEngagementEvents (copy), SignalsModule (copy), GetSduiPageEntrySnackbarStoreFunction (copy), FoundationModule (copy), LocalizeStringsFunction (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	
@@ -48,7 +48,7 @@ return function(p1, _, p2, _) --[[ Line: 26 | Named "SduiToggleExperienceFollowA
 		local UpdateFollowingResult = FollowingsStore.updateFollowing(UniverseId, Inverted)
 		local Localization = p2.dependencies.localization
 		local t = {}
-		t.dispose = SignalsModule.createEffect(function(p3) --[[ Line: 73 ]]
+		t.dispose = SignalsModule.createEffect(function(p3)
 			-- upvalues: UpdateFollowingResult (copy), p2 (copy), Localization (copy), GetSduiPageEntrySnackbarStoreFunction (upval), FoundationModule (upval), LocalizeStringsFunction (upval), GameName (copy), t (copy)
 			local UpdateFollowingResultResult = UpdateFollowingResult(p3)
 			

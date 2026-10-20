@@ -4,9 +4,9 @@ local SharedFlagsModule = require(script:FindFirstAncestor("GenericAbuseReportin
 local FStringReportMenuIXPLayer = SharedFlagsModule.FStringReportMenuIXPLayer
 local FStringSelectInSceneIXPField = SharedFlagsModule.FStringSelectInSceneIXPField
 
-local function _() --[[ Line: 13 | Named "isInSelectInSceneExperiment" ]]
+local function _()
 	-- upvalues: IXPService (copy), FStringReportMenuIXPLayer (copy), FStringSelectInSceneIXPField (copy)
-	local Success, Result = pcall(function() --[[ Line: 14 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: IXPService (upval), FStringReportMenuIXPLayer (upval)
 		return IXPService:GetUserLayerVariables(FStringReportMenuIXPLayer)
 	end)
@@ -20,7 +20,7 @@ local function _() --[[ Line: 13 | Named "isInSelectInSceneExperiment" ]]
 	end
 end
 
-return function() --[[ Line: 33 | Named "getIsInExpSceneSelectionAvailable" ]]
+return function()
 	-- upvalues: ExperienceStateCaptureService (copy), IXPService (copy), FStringReportMenuIXPLayer (copy), FStringSelectInSceneIXPField (copy)
 	if not game:GetEngineFeature("SafetyServiceCaptureModeReportProp") then
 		return false
@@ -31,7 +31,7 @@ return function() --[[ Line: 33 | Named "getIsInExpSceneSelectionAvailable" ]]
 	elseif game:GetEngineFeature("ExperienceStateCaptureMinMemEnabled") and not ExperienceStateCaptureService:CanEnterCaptureMode() then
 		return false
 	else
-		local Success, Result = pcall(function() --[[ Line: 14 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: IXPService (upval), FStringReportMenuIXPLayer (upval)
 			return IXPService:GetUserLayerVariables(FStringReportMenuIXPLayer)
 		end)

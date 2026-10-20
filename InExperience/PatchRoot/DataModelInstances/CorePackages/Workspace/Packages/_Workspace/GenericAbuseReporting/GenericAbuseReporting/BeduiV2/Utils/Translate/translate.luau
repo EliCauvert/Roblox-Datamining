@@ -4,7 +4,7 @@ local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
 local IconName = FoundationModule.Enums.IconName
 local FFlagUpdateTranslateInReportRevamp = require(Parent.SharedFlags).FFlagUpdateTranslateInReportRevamp
 
-local function getWrappedText(p1, Text: string) --[[ Line: 65 ]]
+local function getWrappedText(p1, Text: string)
 	-- upvalues: GetIconRichTextFunction (copy), IconName (copy)
 	local Text1 = "{" .. p1.type .. "Start}"
 	local Text2 = "{" .. p1.type .. "End}"
@@ -26,7 +26,7 @@ end
 
 local Callback = nil
 
-local function resolveParams(p1, Params) --[[ Line: 89 ]]
+local function resolveParams(p1, Params)
 	-- upvalues: Callback (ref)
 	if Params == nil then
 		return nil
@@ -43,7 +43,7 @@ local function resolveParams(p1, Params) --[[ Line: 89 ]]
 	return t
 end
 
-Callback = function(p2, p3) --[[ Line: 169 ]]
+Callback = function(p2, p3)
 	-- upvalues: FFlagUpdateTranslateInReportRevamp (copy), resolveParams (copy)
 	if p3 == nil then
 		return ""
@@ -65,7 +65,7 @@ Callback = function(p2, p3) --[[ Line: 169 ]]
 end
 
 return {
-	mergeTranslationParams = function(p2, List) --[[ Line: 37 ]]
+	mergeTranslationParams = function(p2, List)
 		if type(p2) == "string" then
 			return p2
 		end
@@ -86,7 +86,7 @@ return {
 		}
 	end,
 	translateIntoString = Callback,
-	translateIntoRichTextString = function(p3, p4) --[[ Line: 114 ]]
+	translateIntoRichTextString = function(p3, p4)
 		-- upvalues: FFlagUpdateTranslateInReportRevamp (copy), resolveParams (copy), getWrappedText (copy)
 		if p4 == nil then
 			return "", nil

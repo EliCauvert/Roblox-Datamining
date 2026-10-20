@@ -59,12 +59,12 @@ BaseMenu.defaultProps = {
 	position = UDim2.new(0, 0, 0, 0)
 }
 
-function BaseMenu.init(p1) --[[ Line: 98 ]]
+function BaseMenu.init(p1)
 	-- upvalues: RoactGamepadModule (copy)
 	p1.gamepadRefs = p1.props.isRoactGamepadEnabled and RoactGamepadModule.createRefCache() or {}
 end
 
-function BaseMenu:renderFixedHeightMenu(DefaultProps, p1, p2) --[[ Line: 102 ]]
+function BaseMenu:renderFixedHeightMenu(DefaultProps, p1, p2)
 	-- upvalues: SetDefaultModule (copy), RoactModule (copy), ImageSetComponentModule (copy), ComponentAssetsDropshadow178 (copy), VerticalScrollViewModule (copy)
 	local FixedListHeight = DefaultProps.fixedListHeight
 	local SetDefaultModuleResult = SetDefaultModule(DefaultProps.borderCornerRadius, 8)
@@ -119,7 +119,7 @@ function BaseMenu:renderFixedHeightMenu(DefaultProps, p1, p2) --[[ Line: 102 ]]
 	})
 end
 
-function BaseMenu.render(p1) --[[ Line: 157 ]]
+function BaseMenu.render(p1)
 	-- upvalues: CryoModule (copy), RoactModule (copy), CursorKindModule (copy), WithSelectionCursorProviderModule (copy), RoactGamepadModule (copy), CellModule (copy), WithStyleModule (copy), SetDefaultModule (copy), ImageSetComponentModule (copy), ComponentAssetsDropshadow178 (copy), RoundedFrameModule (copy)
 	local HeaderHeight = p1.props.headerHeight
 	local NewElementHeight = p1.props.elementHeight * 7.5 + HeaderHeight
@@ -161,7 +161,7 @@ function BaseMenu.render(p1) --[[ Line: 157 ]]
 			cursorKind = RoundedRectNoInset,
 			selectionOrder = p1.props.selectionOrder
 		})
-		t["cell " .. LayoutOrder] = WithSelectionCursorProviderModule(function(Callback) --[[ Line: 212 ]]
+		t["cell " .. LayoutOrder] = WithSelectionCursorProviderModule(function(Callback)
 			-- upvalues: RoactModule (upval), p1 (copy), RoactGamepadModule (upval), LayoutOrder (copy), buttonProp (copy), RoundedRectNoInset (ref), CellModule (upval), JoinResult1 (ref)
 			return RoactModule.createElement(if p1.props.isRoactGamepadEnabled then RoactGamepadModule.Focusable.Frame else "Frame", {
 				Size = UDim2.new(p1.props.width, UDim.new(0, p1.props.elementHeight)),
@@ -185,7 +185,7 @@ function BaseMenu.render(p1) --[[ Line: 157 ]]
 		SortOrder = Enum.SortOrder.LayoutOrder
 	})
 	
-	return WithStyleModule(function(p2) --[[ Line: 245 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: SetDefaultModule (upval), p1 (copy), Flag (ref), t (copy), RoactModule (upval), NewElementHeight1 (ref), ImageSetComponentModule (upval), ComponentAssetsDropshadow178 (upval), RoundedFrameModule (upval), HeaderHeight (copy)
 		local Theme = p2.Theme
 		local BackgroundUIDefault = Theme.BackgroundUIDefault
@@ -260,7 +260,7 @@ function BaseMenu.render(p1) --[[ Line: 157 ]]
 	end)
 end
 
-return function(JoinResult) --[[ Line: 341 | Named "BaseMenuFn" ]]
+return function(JoinResult)
 	-- upvalues: UseStyleModule (copy), CryoModule (copy), StyleDefaultsModule (copy), ReactModule (copy), BaseMenu (copy)
 	local JoinResult1 = JoinResult
 	

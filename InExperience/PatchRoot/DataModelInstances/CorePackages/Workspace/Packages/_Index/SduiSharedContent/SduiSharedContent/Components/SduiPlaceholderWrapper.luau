@@ -16,19 +16,19 @@ local config = {
 	analyticsContext = true
 }
 
-local function PlaceholderHost(p1) --[[ Line: 36 ]]
+local function PlaceholderHost(p1)
 	-- upvalues: ReactModule (copy), ReactOtterModule (copy), Sine (copy)
 	local FadeOut = p1.fadeOut
 	local DurationSeconds = p1.durationSeconds
 	local OnFadeCompleteFunction = p1.onFadeComplete
-	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(if FadeOut then 1 else 0, (ReactModule.useCallback(function(p2: number) --[[ Line: 43 ]]
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(if FadeOut then 1 else 0, (ReactModule.useCallback(function(p2: number)
 		-- upvalues: OnFadeCompleteFunction (copy)
 		if p2 >= 1 then
 			OnFadeCompleteFunction()
 		end
 	end, { OnFadeCompleteFunction })))
 	local UseRefResult = ReactModule.useRef(FadeOut)
-	ReactModule.useEffect(function() --[[ Line: 53 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), FadeOut (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), DurationSeconds (copy), Sine (upval)
 		UseRefResult.current = FadeOut
 		
@@ -45,18 +45,18 @@ local function PlaceholderHost(p1) --[[ Line: 36 ]]
 	})
 end
 
-return ReactModule.memo(function(List) --[[ Line: 83 | Named "SduiPlaceholderWrapper" ]]
+return ReactModule.memo(function(List)
 	-- upvalues: ReactModule (copy), config (copy), PlaceholderHost (copy)
 	local IsIsPlaceholder = List.isPlaceholder == true
 	local TransitionDurationSeconds = List.transitionDurationSeconds or 0.15
 	local UseStateResult, UseStateResult2 = ReactModule.useState(IsIsPlaceholder)
-	ReactModule.useEffect(function() --[[ Line: 89 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsIsPlaceholder (copy), UseStateResult (copy), UseStateResult2 (copy)
 		if IsIsPlaceholder and not UseStateResult then
 			UseStateResult2(true)
 		end
 	end, { IsIsPlaceholder, UseStateResult })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 95 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {})

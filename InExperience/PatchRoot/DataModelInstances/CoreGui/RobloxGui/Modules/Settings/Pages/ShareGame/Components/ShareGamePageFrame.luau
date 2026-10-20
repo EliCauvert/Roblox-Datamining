@@ -28,31 +28,31 @@ end
 local ShareGamePageFrame = RoactModule.PureComponent:extend("ShareGamePageFrame")
 local ErrorToasterModule = require(ShareGame.Components.ErrorToaster)
 
-function ShareGamePageFrame.init(p1) --[[ Line: 43 ]]
+function ShareGamePageFrame.init(p1)
 	p1.state = { serverType = nil }
 end
 
-function ShareGamePageFrame.shouldShowInviteLink(p1, GameInfo): boolean --[[ Line: 49 ]]
+function ShareGamePageFrame.shouldShowInviteLink(p1, GameInfo): boolean
 	-- upvalues: Constants (copy), UtilityModule (copy)
 	return if p1.props.experienceInviteShareLinkEnabled and p1.state.serverType == Constants.STANDARD_SERVER and UtilityModule:IsExperienceOlderThanOneWeek(GameInfo) then true else false
 end
 
-function ShareGamePageFrame.didMount(p1) --[[ Line: 61 ]]
+function ShareGamePageFrame.didMount(p1)
 	-- upvalues: PromiseModule (copy), RobloxReplicatedStorage (copy)
 	p1.props.fetchGameInfo()
 	
 	if p1.state.serverType == nil then
-		PromiseModule.try(function() --[[ Line: 64 ]]
+		PromiseModule.try(function()
 			-- upvalues: RobloxReplicatedStorage (upval)
 			return RobloxReplicatedStorage:WaitForChild("GetServerType", 1e999):InvokeServer()
-		end):andThen(function(Result) --[[ Line: 67 ]]
+		end):andThen(function(Result)
 			-- upvalues: p1 (copy)
 			p1:setState({ serverType = Result })
 		end)
 	end
 end
 
-function ShareGamePageFrame.render(p1) --[[ Line: 73 ]]
+function ShareGamePageFrame.render(p1)
 	-- upvalues: ConstantsModule (copy), BackButtonModule (copy), YOffset (ref), RoactModule (copy), CoreGui (copy), ErrorToasterModule (copy), HeaderModule (copy), ShareInviteLinkModule (copy), ConversationListModule (copy), v1 (ref)
 	local Analytics = p1.props.analytics
 	local DeviceLayout = p1.props.deviceLayout
@@ -115,18 +115,18 @@ function ShareGamePageFrame.render(p1) --[[ Line: 73 ]]
 	})
 end
 
-return (RoactAppPolicy.connect(function(p1) --[[ Line: 158 ]]
+return (RoactAppPolicy.connect(function(p1)
 	return {
 		experienceInviteShareLinkEnabled = p1.getExperienceInviteShareLinkEnabled()
 	}
-end)((RoactRoduxModule.connect(function(p1) --[[ Line: 143 ]]
+end)((RoactRoduxModule.connect(function(p1)
 	return { gameInfo = p1.GameInfo }
-end, function(Callback) --[[ Line: 147 ]]
+end, function(Callback)
 	-- upvalues: HttpRequestModule (copy), HttpRbxApiService (copy), GetGameNameAndDescriptionFunction (copy), SetGameInfoCreatedModule (copy)
 	return {
-		fetchGameInfo = function() --[[ Line: 149 ]]
+		fetchGameInfo = function()
 			-- upvalues: HttpRequestModule (upval), HttpRbxApiService (upval), GetGameNameAndDescriptionFunction (upval), Callback (copy), SetGameInfoCreatedModule (upval)
-			GetGameNameAndDescriptionFunction(HttpRequestModule(HttpRbxApiService), game.GameId):andThen(function(Result) --[[ Line: 151 ]]
+			GetGameNameAndDescriptionFunction(HttpRequestModule(HttpRbxApiService), game.GameId):andThen(function(Result)
 				-- upvalues: Callback (upval), SetGameInfoCreatedModule (upval)
 				Callback(SetGameInfoCreatedModule(Result.Created))
 			end)

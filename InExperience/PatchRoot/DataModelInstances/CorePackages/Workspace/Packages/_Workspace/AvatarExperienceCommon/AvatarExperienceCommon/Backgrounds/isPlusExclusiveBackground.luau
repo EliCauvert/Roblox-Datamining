@@ -1,6 +1,6 @@
 ﻿local GetTemporaryPlusBackgroundIdsModule = require(script.Parent.getTemporaryPlusBackgroundIds)
 
-return function(p1, p2) --[[ Line: 3 | Named "isPlusExclusiveBackground" ]]
+return function(p1, p2)
 	-- upvalues: GetTemporaryPlusBackgroundIdsModule (copy)
 	if p2 == nil then
 		local TemporaryPlusBackgroundIdsModule, TemporaryPlusBackgroundIdsModule2 = GetTemporaryPlusBackgroundIdsModule()

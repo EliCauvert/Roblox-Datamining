@@ -6,10 +6,10 @@ local ReactModule = require(Parent.React)
 local FFlagAppChatReactiveFeatureRestrictions = require(Parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
 local NewLocalization = if FFlagAppChatReactiveFeatureRestrictions then Localization.new(LocalizationService.RobloxLocaleId) else nil
 
-return function(p1, p2) --[[ Line: 24 | Named "useCountdownBinding" ]]
+return function(p1, p2)
 	-- upvalues: ReactModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy), NewLocalization (copy), LocalizationService (copy), RunService (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(p2 or "")
-	local UseResult = ReactModule.useCallback(function(): number --[[ Line: 26 ]]
+	local UseResult = ReactModule.useCallback(function(): number
 		-- upvalues: p1 (copy), FFlagAppChatReactiveFeatureRestrictions (upval), NewLocalization (upval), LocalizationService (upval), UseBindingResult2 (copy), p2 (copy)
 		if p1 == nil then
 			UseBindingResult2(p2 or "")
@@ -29,11 +29,11 @@ return function(p1, p2) --[[ Line: 24 | Named "useCountdownBinding" ]]
 		
 		return Largest
 	end, { p2, p1 })
-	ReactModule.useEffect(function() --[[ Line: 63 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult (copy)
 		UseResult()
 	end, { UseResult })
-	ReactModule.useEffect(function() --[[ Line: 68 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), RunService (upval), UseResult (copy)
 		local Connection = nil
 		
@@ -42,7 +42,7 @@ return function(p1, p2) --[[ Line: 24 | Named "useCountdownBinding" ]]
 			
 			if v1 > 0 then
 				local v2 = 0
-				Connection = RunService.Heartbeat:Connect(function() --[[ Line: 77 ]]
+				Connection = RunService.Heartbeat:Connect(function()
 					-- upvalues: v2 (ref), v1 (ref), UseResult (upval), Connection (ref)
 					local ClockTime = os.clock()
 					
@@ -57,7 +57,7 @@ return function(p1, p2) --[[ Line: 24 | Named "useCountdownBinding" ]]
 				end)
 			end
 		end
-		return function() --[[ Line: 91 ]]
+		return function()
 			-- upvalues: Connection (ref)
 			if Connection ~= nil then
 				Connection:Disconnect()

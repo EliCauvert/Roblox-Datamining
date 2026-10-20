@@ -27,7 +27,7 @@ InviteFriendsPage.validateProps = T.strictInterface({
 })
 InviteFriendsPage.defaultProps = { PlayersService = Players }
 
-function InviteFriendsPage.init(p1) --[[ Line: 43 ]]
+function InviteFriendsPage.init(p1)
 	-- upvalues: Roact (copy)
 	p1.backButtonRef = Roact.createRef()
 	p1.searchBoxRef = Roact.createRef()
@@ -38,9 +38,9 @@ function InviteFriendsPage.init(p1) --[[ Line: 43 ]]
 	}
 end
 
-function InviteFriendsPage:renderLoadingPage() --[[ Line: 54 ]]
+function InviteFriendsPage:renderLoadingPage()
 	-- upvalues: WithLocalizationModule (copy), Roact (copy), ThemedTextLabelModule (copy)
-	return WithLocalizationModule({ loading = "CoreScripts.InGameMenu.InviteFriends.Loading" })(function(p1) --[[ Line: 57 ]]
+	return WithLocalizationModule({ loading = "CoreScripts.InGameMenu.InviteFriends.Loading" })(function(p1)
 		-- upvalues: Roact (upval), ThemedTextLabelModule (upval)
 		return Roact.createElement(ThemedTextLabelModule, {
 			fontKey = "Header1",
@@ -51,10 +51,10 @@ function InviteFriendsPage:renderLoadingPage() --[[ Line: 54 ]]
 	end)
 end
 
-function InviteFriendsPage.renderError(p1) --[[ Line: 68 ]]
+function InviteFriendsPage.renderError(p1)
 	-- upvalues: Roact (copy), LoadingFriendsErrorModule (copy)
 	return Roact.createElement(LoadingFriendsErrorModule, {
-		onRetry = function() --[[ Line: 70 ]]
+		onRetry = function()
 			-- upvalues: p1 (copy)
 			p1:setState({ loadingFriends = true, loadingFriendsError = false })
 			p1:loadFriends()
@@ -63,16 +63,16 @@ function InviteFriendsPage.renderError(p1) --[[ Line: 68 ]]
 	})
 end
 
-function InviteFriendsPage.renderNoFriends(p1) --[[ Line: 81 ]]
+function InviteFriendsPage.renderNoFriends(p1)
 	-- upvalues: Roact (copy), AddFriendsNowModule (copy)
 	return Roact.createElement(AddFriendsNowModule, { canCaptureFocus = p1.props.canCaptureFocus })
 end
 
-local function sortFriends(p1, p2): boolean --[[ Line: 87 ]]
+local function sortFriends(p1, p2): boolean
 	return if p1.IsOnline == p2.IsOnline then p1.Username:lower() < p2.Username:lower() else p1.IsOnline and not p2.IsOnline
 end
 
-function InviteFriendsPage.renderFriends(p1) --[[ Line: 95 ]]
+function InviteFriendsPage.renderFriends(p1)
 	-- upvalues: Roact (copy), InviteFriendsListModule (copy)
 	return Roact.createElement(InviteFriendsListModule, {
 		friends = p1.state.friends,
@@ -81,13 +81,13 @@ function InviteFriendsPage.renderFriends(p1) --[[ Line: 95 ]]
 	})
 end
 
-function InviteFriendsPage.render(p1) --[[ Line: 103 ]]
+function InviteFriendsPage.render(p1)
 	-- upvalues: Roact (copy), PageNavigationWatcherModule (copy), RootedConnectionModule (copy), FocusHandlerModule (copy), GetFFlagIGMGamepadSelectionHistoryModule (copy), GuiService (copy), PageModule (copy)
 	local State = p1.state
 	local config = {
 		Watcher = Roact.createElement(PageNavigationWatcherModule, {
 			desiredPage = "InviteFriends",
-			onNavigateTo = function() --[[ Line: 108 ]]
+			onNavigateTo = function()
 				-- upvalues: p1 (copy)
 				p1:loadFriends()
 			end
@@ -104,12 +104,12 @@ function InviteFriendsPage.render(p1) --[[ Line: 103 ]]
 		config.FriendsList = p1:renderFriends()
 	end
 	return Roact.createElement(RootedConnectionModule, {
-		render = function(p2) --[[ Line: 125 ]]
+		render = function(p2)
 			-- upvalues: Roact (upval), FocusHandlerModule (upval), GetFFlagIGMGamepadSelectionHistoryModule (upval), p1 (copy), State (copy), GuiService (upval), PageModule (upval), config (copy)
 			return Roact.createElement(FocusHandlerModule, {
 				shouldForgetPreviousSelection = GetFFlagIGMGamepadSelectionHistoryModule() and p1.props.menuPage ~= "InviteFriends" or nil,
 				isFocused = p1.props.canCaptureFocus and (State.loadingFriends and p2),
-				didFocus = function() --[[ Line: 132 ]]
+				didFocus = function()
 					-- upvalues: GuiService (upval), p1 (upval)
 					GuiService.SelectedCoreObject = p1.backButtonRef:getValue()
 				end
@@ -124,19 +124,19 @@ function InviteFriendsPage.render(p1) --[[ Line: 103 ]]
 	})
 end
 
-function InviteFriendsPage.didMount(p1) --[[ Line: 146 ]]
+function InviteFriendsPage.didMount(p1)
 	p1.mounted = true
 	p1:loadFriends()
 end
 
-function InviteFriendsPage.loadFriends(p1) --[[ Line: 151 ]]
+function InviteFriendsPage.loadFriends(p1)
 	-- upvalues: PromiseModule (copy), Cryo (copy), sortFriends (copy)
-	PromiseModule.new(function(Callback1, Callback) --[[ Line: 152 ]]
+	PromiseModule.new(function(Callback1, Callback)
 		-- upvalues: p1 (copy), Cryo (upval), sortFriends (upval)
-		coroutine.wrap(function() --[[ Line: 153 ]]
+		coroutine.wrap(function()
 			-- upvalues: p1 (upval), Callback (copy), Cryo (upval), sortFriends (upval), Callback1 (copy)
 			local LocalPlayer = p1.props.PlayersService.LocalPlayer
-			local Success, Result = pcall(function() --[[ Line: 155 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: p1 (upval), LocalPlayer (copy)
 				return p1.props.PlayersService:GetFriendsAsync(LocalPlayer.UserId)
 			end)
@@ -158,19 +158,19 @@ function InviteFriendsPage.loadFriends(p1) --[[ Line: 151 ]]
 					}
 				end
 				if Result.IsFinished then break end
-				if pcall(function() --[[ Line: 178 ]]
+				if pcall(function()
 					-- upvalues: Result (copy)
 					Result:AdvanceToNextPageAsync()
 				end) then continue end
 			end
 			Callback1((Cryo.List.sort(t, sortFriends)))
 		end)()
-	end):andThen(function(Result) --[[ Line: 194 ]]
+	end):andThen(function(Result)
 		-- upvalues: p1 (copy)
 		if p1.mounted then
 			p1:setState({ loadingFriends = false, friends = Result })
 		end
-	end):catch(function() --[[ Line: 202 ]]
+	end):catch(function()
 		-- upvalues: p1 (copy)
 		if p1.mounted then
 			p1:setState({ loadingFriends = false, loadingFriendsError = true })
@@ -178,11 +178,11 @@ function InviteFriendsPage.loadFriends(p1) --[[ Line: 151 ]]
 	end)
 end
 
-function InviteFriendsPage.willUnmount(p2) --[[ Line: 212 ]]
+function InviteFriendsPage.willUnmount(p2)
 	p2.mounted = false
 end
 
-return RoactRodux.connect(function(p2, _) --[[ Line: 216 ]]
+return RoactRodux.connect(function(p2, _)
 	-- upvalues: ConstantsModule (copy), GetFFlagIGMGamepadSelectionHistoryModule (copy)
 	return {
 		canCaptureFocus = p2.menuPage == "InviteFriends" and (p2.isMenuOpen and (p2.displayOptions.inputType == ConstantsModule.InputType.Gamepad and (not p2.respawn.dialogOpen and p2.currentZone == 1))),

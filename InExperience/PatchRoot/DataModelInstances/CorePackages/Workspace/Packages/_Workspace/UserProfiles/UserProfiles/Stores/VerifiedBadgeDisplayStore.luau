@@ -4,7 +4,7 @@ local CreateComputedFunction = SignalsModule.createComputed
 local t = {}
 local GetResult = require(script.Parent.UserProfileStore).get()
 
-local function _(Key) --[[ Line: 22 | Named "getOrCreateUserSignal" ]]
+local function _(Key)
 	-- upvalues: t (ref), CreateSignalFunction (copy)
 	if not t[Key] then
 		local Signal, Signal2 = CreateSignalFunction(false)
@@ -13,7 +13,7 @@ local function _(Key) --[[ Line: 22 | Named "getOrCreateUserSignal" ]]
 	return t[Key]
 end
 
-local function hasUserVerifiedBadge(Key, p1) --[[ Line: 35 ]]
+local function hasUserVerifiedBadge(Key, p1)
 	-- upvalues: GetResult (copy)
 	local Success, Result = pcall(GetResult.fetchNamesByUserIds({ (tostring(Key)) }), p1)
 	
@@ -24,7 +24,7 @@ local function hasUserVerifiedBadge(Key, p1) --[[ Line: 35 ]]
 end
 
 local config = {
-	setBadgeVisibility = function(Key, p1) --[[ Line: 30 ]]
+	setBadgeVisibility = function(Key, p1)
 		-- upvalues: t (ref), CreateSignalFunction (copy)
 		if not t[Key] then
 			local Signal, Signal2 = CreateSignalFunction(false)
@@ -32,7 +32,7 @@ local config = {
 		end
 		t[Key].setter(p1)
 	end,
-	getBadgeVisibilitySignal = function(Key) --[[ Line: 51 ]]
+	getBadgeVisibilitySignal = function(Key)
 		-- upvalues: t (ref), CreateSignalFunction (copy), CreateComputedFunction (copy), hasUserVerifiedBadge (copy)
 		if not t[Key] then
 			local Signal, Signal2 = CreateSignalFunction(false)
@@ -40,14 +40,14 @@ local config = {
 		end
 		local Entry = t[Key]
 		
-		return CreateComputedFunction(function(p1) --[[ Line: 54 ]]
+		return CreateComputedFunction(function(p1)
 			-- upvalues: hasUserVerifiedBadge (upval), Key (copy), Entry (copy)
 			local Ter = Entry.getter(p1)
 			
 			return hasUserVerifiedBadge(Key, p1) and Ter
 		end)
 	end,
-	isBadgeVisible = function(Key) --[[ Line: 61 ]]
+	isBadgeVisible = function(Key)
 		-- upvalues: hasUserVerifiedBadge (copy), t (ref), CreateSignalFunction (copy)
 		local HasUserVerifiedBadge = hasUserVerifiedBadge(Key, false)
 		
@@ -59,14 +59,14 @@ local config = {
 		
 		return HasUserVerifiedBadge and Ter
 	end,
-	reset = function() --[[ Line: 69 ]]
+	reset = function()
 		-- upvalues: t (ref)
 		t = {}
 	end
 }
 
 return {
-	get = function() --[[ Line: 81 ]]
+	get = function()
 		-- upvalues: config (copy)
 		return config
 	end

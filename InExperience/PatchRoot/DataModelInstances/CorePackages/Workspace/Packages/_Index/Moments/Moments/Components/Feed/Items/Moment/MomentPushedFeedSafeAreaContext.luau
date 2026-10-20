@@ -3,7 +3,7 @@ local Context = ReactModule.createContext(nil)
 
 return {
 	Context = Context,
-	useMomentPushedFeedSafeArea = function() --[[ Line: 16 ]]
+	useMomentPushedFeedSafeArea = function()
 		-- upvalues: ReactModule (copy), Context (copy)
 		return ReactModule.useContext(Context)
 	end

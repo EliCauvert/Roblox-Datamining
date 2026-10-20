@@ -5,7 +5,7 @@ local GetSduiApiStoreModule = require(SduiSharedUtilities.getSduiApiStore)
 local UiStatus = require(SduiSharedUtilities.SduiIntegrationTypes).UiStatus
 local DataHydrationTypes = require(Parent.DataHydration).DataHydrationTypes
 
-return function(p1) --[[ Line: 14 | Named "useUiStatus" ]]
+return function(p1)
 	-- upvalues: SignalsReactModule (copy), GetSduiApiStoreModule (copy), DataHydrationTypes (copy), UiStatus (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetSduiApiStoreModule().getData(p1).status)
 	

@@ -4,15 +4,15 @@ local CreatorApiHttpModule = require(DataHydration.creatorApiHttp)
 local _ = require(script.Parent.GamePassConfigTypes)
 local FFlagDataHydrationPreserveIncompleteCatalogResultsModule = require(DataHydration.Flags.FFlagDataHydrationPreserveIncompleteCatalogResults)
 
-local function collectionUrl(BaseUrlResult, p1): string --[[ Line: 17 ]]
+local function collectionUrl(BaseUrlResult, p1): string
 	return ("%s/game-passes/v1/universes/%d/game-passes"):format(BaseUrlResult, p1)
 end
 
-local function passUrl(BaseUrlResult, p1, GamePassId): string --[[ Line: 21 ]]
+local function passUrl(BaseUrlResult, p1, GamePassId): string
 	return ("%s/%d"):format(("%s/game-passes/v1/universes/%d/game-passes"):format(BaseUrlResult, p1), GamePassId)
 end
 
-local function requestParts(p1) --[[ Line: 25 ]]
+local function requestParts(p1)
 	-- upvalues: CreatorApiHttpModule (copy)
 	local List = {}
 	
@@ -40,23 +40,23 @@ local function requestParts(p1) --[[ Line: 25 ]]
 	return List
 end
 
-local function listPage(p1, PageToken, p2) --[[ Line: 50 ]]
+local function listPage(p1, PageToken, p2)
 	-- upvalues: CreatorApiHttpModule (copy), collectionUrl (copy)
-	return CreatorApiHttpModule.get(p2, CreatorApiHttpModule.withQuery(("%s/creator"):format(collectionUrl(CreatorApiHttpModule.baseUrl(p2), p1)), { pageToken = PageToken }), "game-pass.list", function(p3) --[[ Line: 59 ]]
+	return CreatorApiHttpModule.get(p2, CreatorApiHttpModule.withQuery(("%s/creator"):format(collectionUrl(CreatorApiHttpModule.baseUrl(p2), p1)), { pageToken = PageToken }), "game-pass.list", function(p3)
 		return p3
 	end)
 end
 
 return {
-	list = function(p1, p2) --[[ Line: 64 ]]
+	list = function(p1, p2)
 		-- upvalues: listPage (copy), FFlagDataHydrationPreserveIncompleteCatalogResultsModule (copy), PromiseModule (copy)
 		local GamePasses = {}
 		local t = {}
 		local t1 = {}
 		
-		local function fetchNext(NextPageToken, p3) --[[ Line: 69 ]]
+		local function fetchNext(NextPageToken, p3)
 			-- upvalues: listPage (upval), p1 (copy), p2 (copy), FFlagDataHydrationPreserveIncompleteCatalogResultsModule (upval), t1 (copy), GamePasses (copy), t (copy), PromiseModule (upval), fetchNext (copy)
-			return listPage(p1, NextPageToken, p2):andThen(function(Result) --[[ Line: 70 ]]
+			return listPage(p1, NextPageToken, p2):andThen(function(Result)
 				-- upvalues: FFlagDataHydrationPreserveIncompleteCatalogResultsModule (upval), t1 (upval), GamePasses (upval), t (upval), p3 (copy), PromiseModule (upval), fetchNext (upval)
 				for _, gamePass in Result.gamePasses do
 					if FFlagDataHydrationPreserveIncompleteCatalogResultsModule then
@@ -86,18 +86,18 @@ return {
 		
 		return fetchNext(nil, 1)
 	end,
-	get = function(p3, CreatorName, p4) --[[ Line: 103 ]]
+	get = function(p3, CreatorName, p4)
 		-- upvalues: CreatorApiHttpModule (copy), passUrl (copy)
-		return CreatorApiHttpModule.get(p4, ("%s/creator"):format(passUrl(CreatorApiHttpModule.baseUrl(p4), p3, CreatorName)), "game-pass.get", function(p5) --[[ Line: 112 ]]
+		return CreatorApiHttpModule.get(p4, ("%s/creator"):format(passUrl(CreatorApiHttpModule.baseUrl(p4), p3, CreatorName)), "game-pass.get", function(p5)
 			-- upvalues: CreatorName (copy)
 			assert(p5.gamePassId == CreatorName, "Game Pass response ID does not match the requested ID")
 			
 			return p5
 		end)
 	end,
-	batchGet = function(p3, GamePassIds, p4) --[[ Line: 120 ]]
+	batchGet = function(p3, GamePassIds, p4)
 		-- upvalues: CreatorApiHttpModule (copy), collectionUrl (copy)
-		return CreatorApiHttpModule.json(CreatorApiHttpModule.mutatingNetwork(p4), "POST", ("%s/creator:batchGet"):format(collectionUrl(CreatorApiHttpModule.baseUrl(p4), p3)), { gamePassIds = GamePassIds }, "game-pass.batch-get", CreatorApiHttpModule.jsonDecoder(function(p5) --[[ Line: 131 ]]
+		return CreatorApiHttpModule.json(CreatorApiHttpModule.mutatingNetwork(p4), "POST", ("%s/creator:batchGet"):format(collectionUrl(CreatorApiHttpModule.baseUrl(p4), p3)), { gamePassIds = GamePassIds }, "game-pass.batch-get", CreatorApiHttpModule.jsonDecoder(function(p5)
 			-- upvalues: GamePassIds (copy)
 			local t = {}
 			
@@ -111,7 +111,7 @@ return {
 			return p5
 		end))
 	end,
-	create = function(p6, p7, p8) --[[ Line: 146 ]]
+	create = function(p6, p7, p8)
 		-- upvalues: requestParts (copy), CreatorApiHttpModule (copy)
 		return CreatorApiHttpModule.multipart(CreatorApiHttpModule.mutatingNetwork(p8), "POST", ("%s/game-passes/v1/universes/%d/game-passes"):format(CreatorApiHttpModule.baseUrl(p8), p6), requestParts({
 			name = p7.name,
@@ -120,28 +120,28 @@ return {
 			isForSale = p7.isForSale ~= nil and p7.isForSale,
 			isManagedPricingEnabled = p7.isManagedPricingEnabled,
 			imageFile = p7.imageFile
-		}), "game-pass.create", CreatorApiHttpModule.jsonDecoder(function(p9) --[[ Line: 165 ]]
+		}), "game-pass.create", CreatorApiHttpModule.jsonDecoder(function(p9)
 			assert(type(p9.gamePassId) == "number" and p9.gamePassId % 1 == 0 and p9.gamePassId > 0, "Created Game Pass response has an invalid ID")
 			
 			return p9
 		end))
 	end,
-	update = function(p6, GamePassId, p7, p8) --[[ Line: 176 ]]
+	update = function(p6, GamePassId, p7, p8)
 		-- upvalues: CreatorApiHttpModule (copy), requestParts (copy)
-		return CreatorApiHttpModule.multipart(CreatorApiHttpModule.mutatingNetwork(p8), "PATCH", ("%s/%d"):format(("%s/game-passes/v1/universes/%d/game-passes"):format(CreatorApiHttpModule.baseUrl(p8), p6), GamePassId), requestParts(p7), "game-pass.update", CreatorApiHttpModule.noContentDecoder(function() --[[ Line: 188 ]]
+		return CreatorApiHttpModule.multipart(CreatorApiHttpModule.mutatingNetwork(p8), "PATCH", ("%s/%d"):format(("%s/game-passes/v1/universes/%d/game-passes"):format(CreatorApiHttpModule.baseUrl(p8), p6), GamePassId), requestParts(p7), "game-pass.update", CreatorApiHttpModule.noContentDecoder(function()
 			-- upvalues: GamePassId (copy)
 			return { gamePassId = GamePassId }
 		end))
 	end,
-	setArchived = function(p6, p7, p8, p9) --[[ Line: 194 ]]
+	setArchived = function(p6, p7, p8, p9)
 		-- upvalues: CreatorApiHttpModule (copy)
-		return CreatorApiHttpModule.multipart(CreatorApiHttpModule.mutatingNetwork(p9), "PATCH", ("%s/%d"):format(("%s/game-passes/v1/universes/%d/game-passes"):format(CreatorApiHttpModule.baseUrl(p9), p6), p7), { { name = "isArchived", value = tostring(p8) } }, "game-pass.set-archived", CreatorApiHttpModule.noContentDecoder(function() --[[ Line: 206 ]]
+		return CreatorApiHttpModule.multipart(CreatorApiHttpModule.mutatingNetwork(p9), "PATCH", ("%s/%d"):format(("%s/game-passes/v1/universes/%d/game-passes"):format(CreatorApiHttpModule.baseUrl(p9), p6), p7), { { name = "isArchived", value = tostring(p8) } }, "game-pass.set-archived", CreatorApiHttpModule.noContentDecoder(function()
 			return nil
 		end))
 	end,
-	getSalesLimit = function(p6, p7) --[[ Line: 212 ]]
+	getSalesLimit = function(p6, p7)
 		-- upvalues: CreatorApiHttpModule (copy)
-		return CreatorApiHttpModule.get(p7, ("%s/game-passes/v1/game-passes/universes/%d/sales-limit"):format(CreatorApiHttpModule.baseUrl(p7), p6), "game-pass.sales-limit", function(p8) --[[ Line: 217 ]]
+		return CreatorApiHttpModule.get(p7, ("%s/game-passes/v1/game-passes/universes/%d/sales-limit"):format(CreatorApiHttpModule.baseUrl(p7), p6), "game-pass.sales-limit", function(p8)
 			return p8
 		end)
 	end

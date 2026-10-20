@@ -12,10 +12,10 @@ local AppPage = require(Parent.RobloxAppEnums).AppPage
 local ConstantsModule = require(UserList.Common.Constants)
 local UserRowWrapperModule = require(script.Parent.UserRowWrapper)
 
-return function(p1) --[[ Line: 26 | Named "UserList" ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), AppPage (copy), ConstantsModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), FFlagUserListPresenceStoreMigrationModule (copy), NetworkingPresenceModule (copy), View (copy), UserRowWrapperModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
-	local UseResult = ReactModule.useCallback(function(Detail) --[[ Line: 29 ]]
+	local UseResult = ReactModule.useCallback(function(Detail)
 		-- upvalues: p1 (copy), AppPage (upval), ConstantsModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 		if p1.onUserSelected then
 			p1.onUserSelected(Detail)
@@ -36,7 +36,7 @@ return function(p1) --[[ Line: 26 | Named "UserList" ]]
 			UseDispatchResult(NavigateDownFunction(config))
 		end
 	end, { p1.onUserSelected, UseDispatchResult })
-	ReactModule.useEffect(function() --[[ Line: 50 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagUserListPresenceStoreMigrationModule (upval), p1 (copy), UseDispatchResult (copy), NetworkingPresenceModule (upval)
 		if not FFlagUserListPresenceStoreMigrationModule and #p1.userIds > 0 then
 			UseDispatchResult(NetworkingPresenceModule.GetPresencesFromUserIds.API(p1.userIds))
@@ -47,7 +47,7 @@ return function(p1) --[[ Line: 26 | Named "UserList" ]]
 		tag = "size-full-0 auto-y col gap-large",
 		LayoutOrder = p1.layoutOrder or 0
 	}, {
-		UserRows = ReactModule.createElement(ReactModule.Fragment, {}, unpack(ReactModule.useMemo(function() --[[ Line: 67 ]]
+		UserRows = ReactModule.createElement(ReactModule.Fragment, {}, unpack(ReactModule.useMemo(function()
 			-- upvalues: p1 (copy), ReactModule (upval), UserRowWrapperModule (upval), UseResult (copy)
 			local Elements = {}
 			

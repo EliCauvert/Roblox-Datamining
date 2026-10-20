@@ -12,7 +12,7 @@ local config = {
 	dateTime = DateTime.fromLocalTime(2000, 1, 1, 0, 0, 0)
 }
 
-return function(p1) --[[ Line: 36 | Named "TimeSelector" ]]
+return function(p1)
 	-- upvalues: WithDefaultsModule (copy), config (copy), DateTimeUtilitiesModule (copy), UseScaledValueModule (copy), LocalizationService (copy), ReactModule (copy), DropdownModule (copy), TranslatorModule (copy), InputSizeModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local RoundDownToNearestMinuteResult = DateTimeUtilitiesModule.roundDownToNearestMinute(WithDefaultsModuleResult.dateTime)
@@ -20,7 +20,7 @@ return function(p1) --[[ Line: 36 | Named "TimeSelector" ]]
 	
 	return ReactModule.createElement(DropdownModule.Root, {
 		label = "",
-		items = (function() --[[ Line: 44 ]]
+		items = (function()
 			-- upvalues: LocalTime (copy), RoundDownToNearestMinuteResult (copy), LocalizationService (upval)
 			local List = {}
 			local IsNotMinuteMatch = LocalTime.Minute % 30 ~= 0

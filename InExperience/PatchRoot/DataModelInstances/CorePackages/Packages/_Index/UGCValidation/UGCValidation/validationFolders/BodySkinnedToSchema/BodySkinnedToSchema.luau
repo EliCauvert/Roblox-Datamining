@@ -9,7 +9,7 @@ return {
 	fflag = require(Parent.flags.getFFlagUGCValidationEnableR15plusSkinning),
 	categories = { ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS },
 	requiredData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
-	run = function(p1, p2) --[[ Line: 13 ]]
+	run = function(p1, p2)
 		-- upvalues: R15plusUtilsModule (copy), UGCValidationService (copy), ErrorSourceStringsModule (copy)
 		local JointNameWhitelist = R15plusUtilsModule.getJointNameWhitelist()
 		

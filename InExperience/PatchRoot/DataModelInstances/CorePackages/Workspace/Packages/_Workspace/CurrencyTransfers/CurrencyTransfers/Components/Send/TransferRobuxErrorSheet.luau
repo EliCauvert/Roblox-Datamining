@@ -34,7 +34,7 @@ local GetFFlagEnableLimitHit2SVUpsellModule = require(CurrencyTransfers.Flags.Ge
 local TransferRobuxHeaderModule = require(CurrencyTransfers.Components.Generic.TransferRobuxHeader)
 local UseTransferStoreModule = require(CurrencyTransfers.Hooks.useTransferStore)
 
-local function getErrorMessageAndButton(FailureReason, p1, TargetName, p2, p3, IsEligibleForElevatedLimitUpsell) --[[ Line: 58 ]]
+local function getErrorMessageAndButton(FailureReason, p1, TargetName, p2, p3, IsEligibleForElevatedLimitUpsell)
 	-- upvalues: GetFFlagEnableLimitHit2SVUpsellModule (copy), FailureReasonModule (copy), GetFFlagCurrencyTransferReceiveLimitExceededErrorModule (copy), TransferLocaleFormatModule (copy)
 	if not FailureReason then
 		return p1.GenericError, p1.TryAgain
@@ -105,7 +105,7 @@ end
 local GetFFlagCurrencyTransferFocusNavigationModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferFocusNavigation)
 local UseTransferSheetFocusModule = require(CurrencyTransfers.Hooks.useTransferSheetFocus)
 
-return function(_) --[[ Line: 166 | Named "TransferRobuxErrorSheet" ]]
+return function(_)
 	-- upvalues: UseTransferStoreModule (copy), UseTokensFunction (copy), SignalsReactModule (copy), GetFFlagCurrencyTransferFocusNavigationModule (copy), UseTransferSheetFocusModule (copy), GetFFlagEnableLimitHit2SVUpsellModule (copy), UseDispatchFunction (copy), FailureReasonModule (copy), UseUserNameFromUserIdModule (copy), Enums (copy), TransferOriginationModule (copy), ContentProvider (copy), WebViewServiceWrapperModule (copy), NavigateDownFunction (copy), AppPage (copy), UrlBuilder (copy), ReactModule (copy), GetBalanceRequestModule (copy), UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), GetFFlagCurrencyTransferUseBackendTransferLimitsModule (copy), GetFIntCurrencyTransferMinAmountModule (copy), GetFIntCurrencyTransferMaxAmountModule (copy), getErrorMessageAndButton (copy), Sheet (copy), UseScaledValueFunction (copy), TransferRobuxHeaderModule (copy), View (copy), Icon (copy), Text (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
 	local UseTransferStoreModuleResult = UseTransferStoreModule()
 	local UseTokensResult = UseTokensFunction()
@@ -130,7 +130,7 @@ return function(_) --[[ Line: 166 | Named "TransferRobuxErrorSheet" ]]
 		local IsEligibleForElevatedLimitUpsell1 = if FailureReason == FailureReasonModule.TransferDailyLimitExceeded then IsEligibleForElevatedLimitUpsell else FailureReason == FailureReasonModule.TransferMonthlyLimitExceeded and IsEligibleForElevatedLimitUpsell
 		local CircleArrowUp = if IsEligibleForElevatedLimitUpsell1 then Enums.IconName.CircleArrowUp else Enums.IconName.TriangleExclamation
 		
-		local function handleButtonActivated() --[[ Line: 202 ]]
+		local function handleButtonActivated()
 			-- upvalues: TriggerOnCloseFunction (copy), IsEligibleForElevatedLimitUpsell1 (copy), UseTransferStoreModuleResult (copy), TransferOriginationModule (upval), ContentProvider (upval), WebViewServiceWrapperModule (upval), UseDispatchResult (copy), NavigateDownFunction (upval), AppPage (upval), UrlBuilder (upval)
 			TriggerOnCloseFunction()
 			
@@ -151,14 +151,14 @@ return function(_) --[[ Line: 166 | Named "TransferRobuxErrorSheet" ]]
 			end
 		end
 		
-		ReactModule.useEffect(function() --[[ Line: 231 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: BalanceReceivedFromApi (copy), GetBalanceRequestModule (upval), UseTransferStoreModuleResult (copy)
 			if not BalanceReceivedFromApi then
-				GetBalanceRequestModule(nil, UseTransferStoreModuleResult.getNetworkImpl()):andThen(function(Result) --[[ Line: 236 ]]
+				GetBalanceRequestModule(nil, UseTransferStoreModuleResult.getNetworkImpl()):andThen(function(Result)
 					-- upvalues: UseTransferStoreModuleResult (upval)
 					UseTransferStoreModuleResult.setRobuxBalanceAmount(Result)
 					UseTransferStoreModuleResult.setBalanceReceivedFromApi(true)
-				end):catch(function() --[[ Line: 240 ]] end)
+				end):catch(function() end)
 				
 				return
 			end
@@ -222,14 +222,14 @@ return function(_) --[[ Line: 166 | Named "TransferRobuxErrorSheet" ]]
 		local FailureReason = if ErrorTransferModel then ErrorTransferModel.failureReason else nil
 		local IsNotRecipientUserIdMatch: boolean = FailureReason == FailureReasonModule.ReceiverNotAllowed and (not Recipient and (RecipientUserId and RecipientUserId ~= 0))
 		local UseUserNameFromUserIdModuleResult = UseUserNameFromUserIdModule(if IsNotRecipientUserIdMatch and RecipientUserId and RecipientUserId ~= 0 then RecipientUserId else nil)
-		ReactModule.useEffect(function() --[[ Line: 349 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: BalanceReceivedFromApi (copy), GetBalanceRequestModule (upval), UseTransferStoreModuleResult (copy)
 			if not BalanceReceivedFromApi then
-				GetBalanceRequestModule(nil, UseTransferStoreModuleResult.getNetworkImpl()):andThen(function(Result) --[[ Line: 354 ]]
+				GetBalanceRequestModule(nil, UseTransferStoreModuleResult.getNetworkImpl()):andThen(function(Result)
 					-- upvalues: UseTransferStoreModuleResult (upval)
 					UseTransferStoreModuleResult.setRobuxBalanceAmount(Result)
 					UseTransferStoreModuleResult.setBalanceReceivedFromApi(true)
-				end):catch(function() --[[ Line: 358 ]] end)
+				end):catch(function() end)
 				
 				return
 			end

@@ -18,7 +18,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 	totalNumberOfRows = TModule.number
 })
 
-return function(EventContext, CustomFields) --[[ Line: 28 ]]
+return function(EventContext, CustomFields)
 	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), TelemetryService (copy), config (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	

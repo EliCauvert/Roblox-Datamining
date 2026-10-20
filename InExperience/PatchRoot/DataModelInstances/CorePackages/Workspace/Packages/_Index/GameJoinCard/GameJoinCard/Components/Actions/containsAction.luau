@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("GameJoinCard").Parent.DataHydration)
 
-return function(p1, Type): boolean --[[ Line: 8 | Named "containsAction" ]]
+return function(p1, Type): boolean
 	if p1 == nil or p1.actions == nil then
 		return false
 	end

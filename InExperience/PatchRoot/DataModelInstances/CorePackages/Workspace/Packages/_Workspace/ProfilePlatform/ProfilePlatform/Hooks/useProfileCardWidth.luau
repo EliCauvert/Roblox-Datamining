@@ -6,9 +6,9 @@ local GetSafeAreaSizeFunction = require(Parent.InputUi).getSafeAreaSize
 local UseNavBarSizeFunction = require(Parent.AppNavBar).useNavBarSize
 local ConstantsModule = require(ProfilePlatform.Common.Constants)
 
-return function(p1): number --[[ Line: 13 ]]
+return function(p1): number
 	-- upvalues: UseScreenSizeFunction (copy), UseSelectorFunction (copy), GetSafeAreaSizeFunction (copy), UseNavBarSizeFunction (copy), ConstantsModule (copy)
-	local SafeAreaSize = GetSafeAreaSizeFunction(UseScreenSizeFunction(), (UseSelectorFunction(function(p2) --[[ Line: 15 ]]
+	local SafeAreaSize = GetSafeAreaSizeFunction(UseScreenSizeFunction(), (UseSelectorFunction(function(p2)
 		return p2.GlobalGuiInset
 	end)))
 	local UseNavBarSizeResult = UseNavBarSizeFunction()

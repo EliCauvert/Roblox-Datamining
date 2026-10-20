@@ -46,22 +46,22 @@ local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebu
 local GetRootedNavigationStoreModule = require(AppChat.Stores.GetRootedNavigationStore)
 local DomLocatorsModule = require(AppChat.Utils.DomLocators)
 
-local function _() --[[ Line: 63 | Named "getEnumScreens" ]]
+local function _()
 	-- upvalues: AppChat (copy)
 	return require(AppChat.EnumScreens)
 end
 
-return function(p1) --[[ Line: 75 ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseContextFunction (copy), ParentContainerContextModule (copy), UseStateFunction (copy), UseExternalNavigationByScreenModule (copy), UseMemoFunction (copy), Signal (copy), RobloxEventReceiver (copy), NotificationService (copy), ReactModule (copy), ResponsiveModule (copy), FIntAppChatWideBreakpointMinWidthModule (copy), FIntAppChatWideBreakpointMinHeightModule (copy), FFlagAppChatInExpSelectChatMembersMobileHeightModule (copy), UseAppChatIsWideModeModule (copy), GetFFlagAppChatRequestedRouteModule (copy), GetFFlagAppChatEnableRootedNavigationModule (copy), AppChat (copy), UseRefFunction (copy), UseSignalStateFunction (copy), GetRootedNavigationStoreModule (copy), UseEffectFunction (copy), PartyPageCarouselExperimentation (copy), SetFormFactorFunction (copy), FormFactorModule (copy), UseParentContainerExtentsModule (copy), UseCallbackFunction (copy), AppChatInExperienceMountMinLoadingTimeMs (copy), AppChatEntryPointModule (copy), LocalPlayer (copy), ChatPlacementContextModule (copy), Loading (copy), IconSize (copy), IconButton (copy), IconName (copy), ButtonSize (copy), ButtonVariant (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), ChatEventReceiverModule (copy), ChatExternalEventReceiverModule (copy), ContainerModule (copy), FFlagSquadAppChatRTNFix (copy), SquadAppChatEventReceiver (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local HideParentContainerFunction = UseContextFunction(ParentContainerContextModule).hideParentContainer
 	local UseStateResult, UseStateResult2 = UseStateFunction(0)
 	local UseExternalNavigationByScreenModuleResult, UseExternalNavigationByScreenModuleResult2 = UseExternalNavigationByScreenModule()
-	local UseMemoResult = UseMemoFunction(function() --[[ Line: 80 ]]
+	local UseMemoResult = UseMemoFunction(function()
 		-- upvalues: Signal (upval)
 		return Signal.new()
 	end, {})
-	local UseMemoResult1 = UseMemoFunction(function() --[[ Line: 84 ]]
+	local UseMemoResult1 = UseMemoFunction(function()
 		-- upvalues: RobloxEventReceiver (upval), NotificationService (upval)
 		return RobloxEventReceiver.new(NotificationService)
 	end, {})
@@ -85,7 +85,7 @@ return function(p1) --[[ Line: 75 ]]
 	end
 	local NoFFlagAppChatInExpSelectChatMembersMobileHeightModule1 = not UseRefResult1.current and NoFFlagAppChatInExpSelectChatMembersMobileHeightModule
 	local UseSignalStateResult = if FFlagAppChatEnableRootedNavigationModule then UseSignalStateFunction(GetRootedNavigationStoreModule(false).getIsNavigationPending) else false
-	UseEffectFunction(function() --[[ Line: 127 ]]
+	UseEffectFunction(function()
 		-- upvalues: PartyPageCarouselExperimentation (upval), NoFFlagAppChatInExpSelectChatMembersMobileHeightModule1 (copy), UseDispatchResult (copy), SetFormFactorFunction (upval), FormFactorModule (upval)
 		if PartyPageCarouselExperimentation.getAppChatFormFactorEnabled() then
 			if NoFFlagAppChatInExpSelectChatMembersMobileHeightModule1 then
@@ -103,19 +103,19 @@ return function(p1) --[[ Line: 75 ]]
 	local IsUseOrientationResultMatch = UseOrientationResult == ResponsiveModule.DefaultKey
 	local UseStateResult1, UseStateResult2_1 = UseStateFunction(IsUseOrientationResultMatch)
 	local UseRefResult2 = UseRefFunction(os.clock())
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 143 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: p1 (copy), HideParentContainerFunction (copy)
 		p1.hideAppChat()
 		HideParentContainerFunction()
 	end, { HideParentContainerFunction, p1.hideAppChat })
-	UseEffectFunction(function() --[[ Line: 148 ]]
+	UseEffectFunction(function()
 		-- upvalues: IsUseOrientationResultMatch (copy), UseRefResult2 (copy), AppChatInExperienceMountMinLoadingTimeMs (upval), UseStateResult2_1 (copy)
 		if not IsUseOrientationResultMatch then
 			local Elapsed = os.clock() - UseRefResult2.current
 			local AppChatInExperienceMountMinLoadingTimeMsRatio = AppChatInExperienceMountMinLoadingTimeMs / 1000
 			
 			if Elapsed < AppChatInExperienceMountMinLoadingTimeMsRatio then
-				delay(AppChatInExperienceMountMinLoadingTimeMsRatio - Elapsed, function() --[[ Line: 154 ]]
+				delay(AppChatInExperienceMountMinLoadingTimeMsRatio - Elapsed, function()
 					-- upvalues: UseStateResult2_1 (upval)
 					UseStateResult2_1(false)
 				end)
@@ -143,10 +143,10 @@ return function(p1) --[[ Line: 75 ]]
 		AppChatWindow = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BackgroundColor3 = Color3.new(0, 0, 0),
-			Size = UseParentContainerExtentsModuleResult:map(function(Vector): UDim2 --[[ Line: 181 ]]
+			Size = UseParentContainerExtentsModuleResult:map(function(Vector): UDim2
 				return UDim2.fromOffset(Vector.X, Vector.Y)
 			end),
-			Position = UseParentContainerExtentsModuleResult2:map(function(Vector): UDim2 --[[ Line: 184 ]]
+			Position = UseParentContainerExtentsModuleResult2:map(function(Vector): UDim2
 				return UDim2.fromOffset(Vector.X, Vector.Y)
 			end),
 			ref = UseRefResult

@@ -5,7 +5,7 @@ local config = {
 	[AccountUpgradeFlowModule.PioneerU13] = GetPioneerAccountUpgradeAvailabilityModule
 }
 
-return function(p1) --[[ Line: 17 | Named "getAvailability" ]]
+return function(p1)
 	-- upvalues: config (copy)
 	local Entry = config[p1]
 	assert(Entry ~= nil, `Unsupported account upgrade flow: {p1}`)

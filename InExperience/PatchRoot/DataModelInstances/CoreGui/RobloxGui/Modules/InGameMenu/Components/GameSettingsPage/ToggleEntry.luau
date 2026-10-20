@@ -22,11 +22,11 @@ ToggleEntry.validateProps = T.strictInterface({
 	NextSelectionUp = T.optional(T.union(T.Instance, T.table))
 })
 
-function ToggleEntry.init(p1) --[[ Line: 31 ]]
+function ToggleEntry.init(p1)
 	p1.state = { isSelectable = true }
 end
 
-function ToggleEntry.render(p1) --[[ Line: 37 ]]
+function ToggleEntry.render(p1)
 	-- upvalues: Roact (copy), GuiService (copy), InputLabelModule (copy), DeveloperLockLabelModule (copy), WithLocalizationModule (copy), ThemedTextLabelModule (copy), ToggleSwitchModule (copy)
 	local ButtonRef = p1.props.buttonRef or Roact.createRef()
 	
@@ -35,7 +35,7 @@ function ToggleEntry.render(p1) --[[ Line: 37 ]]
 		LayoutOrder = p1.props.LayoutOrder,
 		Size = UDim2.new(1, 0, 0, 56),
 		Selectable = p1.state.isSelectable,
-		[Roact.Event.SelectionGained] = function() --[[ Line: 45 ]]
+		[Roact.Event.SelectionGained] = function()
 			-- upvalues: GuiService (upval), ButtonRef (copy), p1 (copy)
 			GuiService.SelectedCoreObject = ButtonRef:getValue()
 			p1:setState({ isSelectable = false })
@@ -51,7 +51,7 @@ function ToggleEntry.render(p1) --[[ Line: 37 ]]
 			Position = UDim2.new(0, 0, 1, 0),
 			AnchorPoint = Vector2.new(0, 1)
 		}),
-		SubtextLabel = p1.props.subtextEnabled and WithLocalizationModule({ text = p1.props.subtextKey })(function(p2) --[[ Line: 66 ]]
+		SubtextLabel = p1.props.subtextEnabled and WithLocalizationModule({ text = p1.props.subtextKey })(function(p2)
 			-- upvalues: Roact (upval), ThemedTextLabelModule (upval)
 			return Roact.createElement(ThemedTextLabelModule, {
 				themeKey = "TextDefault",
@@ -72,11 +72,11 @@ function ToggleEntry.render(p1) --[[ Line: 37 ]]
 			onToggled = p1.props.onToggled,
 			disabled = p1.props.lockedToOff or p1.props.isDisabled,
 			buttonRef = ButtonRef,
-			onSelectionLost = function() --[[ Line: 86 ]]
+			onSelectionLost = function()
 				-- upvalues: p1 (copy)
 				p1:setState({ isSelectable = true })
 			end,
-			onSelectionGained = function() --[[ Line: 91 ]]
+			onSelectionGained = function()
 				-- upvalues: p1 (copy)
 				p1:setState({ isSelectable = false })
 			end,

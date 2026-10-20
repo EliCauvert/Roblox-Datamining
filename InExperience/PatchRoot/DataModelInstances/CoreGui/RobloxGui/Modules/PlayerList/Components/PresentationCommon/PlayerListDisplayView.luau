@@ -35,7 +35,7 @@ local LegacyTwoTabsBody = PlayerListModule.Presentation.LegacyTwoTabsBody
 local NoDisablePlayerListDisplayCloseBtn: boolean = EnabledFunction() and not DisablePlayerListDisplayCloseBtn
 local config = { dampingRatio = 1, frequency = 4 }
 
-return ReactModule.memo(function(p1) --[[ Line: 89 | Named "PlayerListDisplayView" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseLayoutValuesFunction (copy), UseStyleFunction (copy), UseFocusGuiObjectFunction (copy), FFlagPlayerListUseFocusNavHook (copy), UseFocusedGuiObjectFunction (copy), UsePlayerListFocusNavigationFunction (copy), ReactModule (copy), OtterModule (copy), config (copy), FFlagAddNewPlayerListFocusNav (copy), GuiService (copy), UserInputService (copy), FFlagAddNewPlayerListMobileFocusNav (copy), LocalPlayer (copy), PlayerEntryContainerModule (copy), TitleBarContainerModule (copy), TeamListContainerModule (copy), FFlagPlayerListFixMobileScrollingModule (copy), FFlagPlayerListTwoTabsOnLegacy (copy), EnabledFunction (copy), LegacyTwoTabsBody (copy), PlayerDropDownModule (copy), NoDisablePlayerListDisplayCloseBtn (copy), IconSize1 (copy), IconButton (copy), IconSize (copy), Images (copy)
 	local UseLayoutValuesResult = UseLayoutValuesFunction()
 	local UseStyleResult = UseStyleFunction()
@@ -60,28 +60,28 @@ return ReactModule.memo(function(p1) --[[ Line: 89 | Named "PlayerListDisplayVie
 	local Binding, Binding2 = ReactModule.createBinding(0)
 	local Binding1, Binding2_1 = ReactModule.createBinding(0)
 	local Binding3, Binding2_2 = ReactModule.createBinding(0)
-	local MapResult = ReactModule.joinBindings({ Binding, Binding1, Binding3 }):map(function(Entry) --[[ Line: 132 ]]
+	local MapResult = ReactModule.joinBindings({ Binding, Binding1, Binding3 }):map(function(Entry)
 		local Entry1 = Entry[2]
 		
 		return Entry1 + (Entry[3] - Entry1) * Entry[1]
 	end)
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 140 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2_6 (copy)
 		UseStateResult2_6(Frame.AbsoluteSize.Y)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(Frame) --[[ Line: 144 ]]
+	local UseResult1 = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(Frame.AbsoluteSize.Y)
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 148 ]]
+	local UseResult2 = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(ScrollFrame.CanvasPosition)
 	end, {})
-	local UseResult3 = ReactModule.useCallback(function(Frame) --[[ Line: 152 ]]
+	local UseResult3 = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2_2 (copy)
 		UseStateResult2_2(Frame.AbsolutePosition.Y)
 	end, {})
-	local UseResult4 = ReactModule.useCallback(function(): boolean --[[ Line: 156 ]]
+	local UseResult4 = ReactModule.useCallback(function(): boolean
 		-- upvalues: p1 (copy)
 		if p1.isSmallTouchDevice then
 			local IsGameStatsCountAbove = p1.gameStatsCount > 0
@@ -91,17 +91,17 @@ return ReactModule.memo(function(p1) --[[ Line: 89 | Named "PlayerListDisplayVie
 			return false
 		end
 	end, { p1.gameStatsCount, p1.isSmallTouchDevice, p1.teamList })
-	ReactModule.useEffect(function() --[[ Line: 167 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult4 (copy), Binding2 (copy), UseStateResult2_3 (copy)
 		UseRefResult4.current:onStep(Binding2)
-		UseRefResult4.current:onComplete(function(p2) --[[ Line: 169 ]]
+		UseRefResult4.current:onComplete(function(p2)
 			-- upvalues: UseStateResult2_3 (upval)
 			if p2 == 0 then
 				UseStateResult2_3(true)
 			end
 		end)
 	end, { Binding2 })
-	ReactModule.useEffect(function() --[[ Line: 176 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult2_3 (copy), UseRefResult4 (copy), OtterModule (upval), config (upval)
 		if p1.isSmallTouchDevice then
 			UseStateResult2_3(not p1.isMinimized)
@@ -119,7 +119,7 @@ return ReactModule.memo(function(p1) --[[ Line: 89 | Named "PlayerListDisplayVie
 		p1.isMinimized,
 		UseRefResult4.current
 	})
-	ReactModule.useEffect(function() --[[ Line: 191 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult1 (copy), p1 (copy), UseLayoutValuesResult (copy), UseStateResult7 (copy), UseStateResult2_5 (copy)
 		local UseStateResultDelta = UseStateResult1 - 8
 		
@@ -133,7 +133,7 @@ return ReactModule.memo(function(p1) --[[ Line: 89 | Named "PlayerListDisplayVie
 		p1.gameStatsCount,
 		UseLayoutValuesResult.TitleBarSizeY
 	})
-	ReactModule.useEffect(function() --[[ Line: 202 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult5 (copy), UseRefResult (copy), p1 (copy), UseStateResult2_7 (copy), UseStateResult2_8 (copy)
 		local X = UseStateResult5.X
 		local Y = UseStateResult5.Y
@@ -164,7 +164,7 @@ return ReactModule.memo(function(p1) --[[ Line: 89 | Named "PlayerListDisplayVie
 	})
 	
 	if not FFlagPlayerListUseFocusNavHook then
-		ReactModule.useEffect(function() --[[ Line: 226 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: FFlagAddNewPlayerListFocusNav (upval), p1 (copy), GuiService (upval), UseRefResult1 (copy), UserInputService (upval), UseRefResult (copy)
 			if not FFlagAddNewPlayerListFocusNav then
 				if p1.isVisible then
@@ -197,7 +197,7 @@ return ReactModule.memo(function(p1) --[[ Line: 89 | Named "PlayerListDisplayVie
 			p1.isVisible, p1.isSmallTouchDevice, p1.isDirectionalPreferred,
 			p1.isUsingGamepad, UseRefResult1.current, UseRefResult.current
 		})
-		ReactModule.useEffect(function() --[[ Line: 268 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: FFlagAddNewPlayerListFocusNav (upval), p1 (copy), UseRefResult (copy), UseFocusGuiObjectResult (copy), UserInputService (upval)
 			if FFlagAddNewPlayerListFocusNav and p1.isVisible and UseRefResult.current then
 				if p1.isDirectionalPreferred and p1.isUsingGamepad then
@@ -217,7 +217,7 @@ return ReactModule.memo(function(p1) --[[ Line: 89 | Named "PlayerListDisplayVie
 			UseFocusGuiObjectResult, p1.isVisible, p1.isSmallTouchDevice,
 			p1.isDirectionalPreferred, p1.isUsingGamepad, UseRefResult.current
 		})
-		ReactModule.useEffect(function() --[[ Line: 298 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: FFlagAddNewPlayerListMobileFocusNav (upval), p1 (copy), UseRefResult (copy), LocalPlayer (upval), UseFocusGuiObjectResult (copy)
 			if FFlagAddNewPlayerListMobileFocusNav and p1.isVisible and p1.isSmallTouchDevice and p1.isUsingGamepad and UseRefResult.current then
 				local Flag = false
@@ -239,7 +239,7 @@ return ReactModule.memo(function(p1) --[[ Line: 89 | Named "PlayerListDisplayVie
 			UseFocusGuiObjectResult, p1.isVisible, p1.dropDownVisible, p1.dropDownPlayer,
 			p1.isSmallTouchDevice, p1.isUsingGamepad, UseRefResult.current
 		})
-		ReactModule.useEffect(function() --[[ Line: 343 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: FFlagAddNewPlayerListFocusNav (upval), p1 (copy), UseRefResult (copy), FFlagAddNewPlayerListMobileFocusNav (upval), UserInputService (upval), UseFocusedGuiObjectResult (copy), UseFocusGuiObjectResult (copy)
 			if FFlagAddNewPlayerListFocusNav and not p1.isVisible and UseRefResult.current then
 				if (FFlagAddNewPlayerListMobileFocusNav and p1.isSmallTouchDevice or p1.isDirectionalPreferred) and p1.isUsingGamepad then
@@ -257,7 +257,7 @@ return ReactModule.memo(function(p1) --[[ Line: 89 | Named "PlayerListDisplayVie
 			p1.isSmallTouchDevice, p1.isDirectionalPreferred, p1.isUsingGamepad,
 			UseRefResult.current
 		})
-		ReactModule.useEffect(function() --[[ Line: 375 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: FFlagAddNewPlayerListFocusNav (upval), p1 (copy), UseFocusedGuiObjectResult (copy), UseRefResult3 (copy), UseRefResult (copy), UseFocusGuiObjectResult (copy), UseRefResult2 (copy)
 			if FFlagAddNewPlayerListFocusNav and p1.isVisible and not UseFocusedGuiObjectResult and UseRefResult3.current and UseRefResult.current then
 				local Child = UseRefResult.current:FindFirstChild("PlayerEntry_" .. UseRefResult3.current, true)
@@ -277,7 +277,7 @@ return ReactModule.memo(function(p1) --[[ Line: 89 | Named "PlayerListDisplayVie
 		})
 	end
 	if FFlagPlayerListUseFocusNavHook then
-		ReactModule.useEffect(function() --[[ Line: 418 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p1 (copy), UsePlayerListFocusNavigationResult (copy)
 			if p1.isVisible and p1.isSmallTouchDevice and p1.isUsingGamepad and not p1.dropDownVisible then
 				UsePlayerListFocusNavigationResult.getFocus()
@@ -289,18 +289,18 @@ return ReactModule.memo(function(p1) --[[ Line: 89 | Named "PlayerListDisplayVie
 			p1.isUsingGamepad,
 			p1.dropDownVisible
 		})
-		ReactModule.useEffect(function() --[[ Line: 438 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p1 (copy), UseRefResult (copy), GuiService (upval), UsePlayerListFocusNavigationResult (copy)
 			if not p1.isVisible then
 				UsePlayerListFocusNavigationResult.cleanup(UseRefResult.current and (GuiService.SelectedCoreObject and GuiService.SelectedCoreObject:IsDescendantOf(UseRefResult.current)))
 			end
 		end, { UsePlayerListFocusNavigationResult, p1.isVisible })
 	end
-	local UseResult5 = if FFlagPlayerListUseFocusNavHook then ReactModule.useCallback(function(_, p2, _) --[[ Line: 450 ]]
+	local UseResult5 = if FFlagPlayerListUseFocusNavHook then ReactModule.useCallback(function(_, p2, _)
 		-- upvalues: UsePlayerListFocusNavigationResult (copy)
 		UsePlayerListFocusNavigationResult.setTitlePlayerInstance(p2)
 	end, { UsePlayerListFocusNavigationResult }) else nil
-	local UseResult6 = if FFlagPlayerListUseFocusNavHook then ReactModule.useCallback(function(_) --[[ Line: 456 ]]
+	local UseResult6 = if FFlagPlayerListUseFocusNavHook then ReactModule.useCallback(function(_)
 		-- upvalues: UsePlayerListFocusNavigationResult (copy)
 		UsePlayerListFocusNavigationResult.setTitlePlayerInstance(nil)
 	end, { UsePlayerListFocusNavigationResult }) else nil
@@ -352,7 +352,7 @@ return ReactModule.memo(function(p1) --[[ Line: 89 | Named "PlayerListDisplayVie
 	end
 	if p1.teamListCount > 0 then
 		local OrderResult = 1e999
-		p1.teamList.iterateData(function(p2, TeamData) --[[ Line: 513 ]]
+		p1.teamList.iterateData(function(p2, TeamData)
 			-- upvalues: FFlagAddNewPlayerListFocusNav (upval), OrderResult (ref), config1 (copy), ReactModule (upval), TeamListContainerModule (upval), p1 (copy), FFlagPlayerListUseFocusNavHook (upval), UseRefResult1 (copy), UseStateResult2_4 (copy), UseRefResult2 (copy), UseRefResult3 (copy), UsePlayerListFocusNavigationResult (copy)
 			local Flag = false
 			
@@ -529,7 +529,7 @@ return ReactModule.memo(function(p1) --[[ Line: 89 | Named "PlayerListDisplayVie
 				AnchorPoint = Vector2.new(0.5, 0.5)
 			}, {
 				UIScale = ReactModule.createElement("UIScale", {
-					Scale = Binding:map(function(p2): number --[[ Line: 758 ]]
+					Scale = Binding:map(function(p2): number
 						-- upvalues: FadedBackgroundScaleDelta (copy)
 						return 1 - FadedBackgroundScaleDelta * p2
 					end)

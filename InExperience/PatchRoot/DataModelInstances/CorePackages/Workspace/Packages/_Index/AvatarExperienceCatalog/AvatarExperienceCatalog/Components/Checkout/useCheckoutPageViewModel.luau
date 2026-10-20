@@ -69,78 +69,78 @@ local FIntBlackbirdUpsellMinPriceForDiscountInclusive = SharedFlagsModule.FIntBl
 local FIntBlackbirdUpsellMaxPriceForDiscountInclusive = SharedFlagsModule.FIntBlackbirdUpsellMaxPriceForDiscountInclusive
 local ReportBackgroundUserActionCounter = AvatarExperienceAnalyticsModule.reportBackgroundUserActionCounter
 
-local function selectTryOnLookId(p1) --[[ Line: 98 ]]
+local function selectTryOnLookId(p1)
 	return p1.AvatarExperience.AvatarScene.OutfitTryOn.LookId
 end
 
-local v1 = if FFlagAXCatalogMakeupSupport then function(p1) --[[ Line: 104 ]]
+local v1 = if FFlagAXCatalogMakeupSupport then function(p1)
 	return p1.AvatarExperience.AvatarScene.OutfitTryOn.MakeupLookId
 end else nil
 local v2: ((any) -> any)? = nil
 local v3: ((any) -> any)? = nil
 
 if FFlagAXMISEnableMultiShoppingUnifiedEvents then
-	v2 = function(p1) --[[ Line: 111 ]]
+	v2 = function(p1)
 		return p1.AvatarExperience.AvatarScene.OutfitTryOn.LookAnalyticsInfo
 	end
 	
-	v3 = function(p1) --[[ Line: 115 ]]
+	v3 = function(p1)
 		return p1.AvatarExperience.AvatarScene.OutfitTryOn.MakeupLookAnalyticsInfo
 	end
 end
-local function selectAvatarSceneLooks(p1) --[[ Line: 120 ]]
+local function selectAvatarSceneLooks(p1)
 	return p1.AvatarExperience.AvatarScene.Looks
 end
 
-local function selectTryOnItems(p1) --[[ Line: 124 ]]
+local function selectTryOnItems(p1)
 	return p1.AvatarExperience.AvatarScene.OutfitTryOn.TryOnItems
 end
 
-local function selectTryOnBodyColor3s(p1) --[[ Line: 128 ]]
+local function selectTryOnBodyColor3s(p1)
 	return p1.AvatarExperience.AvatarScene.OutfitTryOn.BodyColor3s
 end
 
-local function selectTryOnBodyScales(p1) --[[ Line: 132 ]]
+local function selectTryOnBodyScales(p1)
 	return p1.AvatarExperience.AvatarScene.OutfitTryOn.Scale
 end
 
-local function selectTryOnBodyPartColorRangeIds(p1) --[[ Line: 136 ]]
+local function selectTryOnBodyPartColorRangeIds(p1)
 	return p1.AvatarExperience.AvatarScene.OutfitTryOn.BodyPartColorRangeIds
 end
 
-local function _(p1) --[[ Line: 140 | Named "selectAssetInfos" ]]
+local function _(p1)
 	return p1.AvatarExperience.Common.AssetInfos or {}
 end
 
-local _ = function(p1) --[[ Line: 144 | Named "selectBundleInfos" ]]
+local _ = function(p1)
 	return p1.AvatarExperience.Common.BundleInfos or {}
 end
 
-local _ = function(p1) --[[ Line: 148 | Named "selectCollectibles" ]]
+local _ = function(p1)
 	return p1.AvatarExperience.Common.Collectibles or {}
 end
 
-local function selectLocalUserId(p1) --[[ Line: 152 ]]
+local function selectLocalUserId(p1)
 	return p1.LocalUserId
 end
 
-local function selectShouldTryOnWithoutEquippedItems(p1) --[[ Line: 156 ]]
+local function selectShouldTryOnWithoutEquippedItems(p1)
 	return p1.AvatarExperience.AvatarScene.OutfitTryOn.ShouldTryOnWithoutEquippedItems
 end
 
-local function selectUserRobux(p1) --[[ Line: 160 ]]
+local function selectUserRobux(p1)
 	local LocalUserId = p1.LocalUserId
 	
 	return if LocalUserId and p1.UserRobux then p1.UserRobux[LocalUserId] else nil
 end
 
-local function v67(p1) --[[ Line: 168 ]]
+local function v67(p1)
 	local LocalUserId = p1.LocalUserId
 	
 	return if LocalUserId and p1.Users then p1.Users[LocalUserId].hasRobloxSubscription else false
 end
 
-local function selectItemInfoForTryOnItems(p1) --[[ Line: 180 ]]
+local function selectItemInfoForTryOnItems(p1)
 	-- upvalues: Constants (copy), FFlagAXDurablesForMIS (copy)
 	local AssetInfos = p1.AvatarExperience.Common.AssetInfos or {}
 	local BundleInfos = p1.AvatarExperience.Common.BundleInfos or {}
@@ -178,7 +178,7 @@ local function selectItemInfoForTryOnItems(p1) --[[ Line: 180 ]]
 	return List
 end
 
-local function v69(JoinResults, DiscountedItemsFromOffers) --[[ Line: 228 ]]
+local function v69(JoinResults, DiscountedItemsFromOffers)
 	-- upvalues: FFlagAXMISOffersChip (copy)
 	local List = {}
 	
@@ -195,7 +195,7 @@ local function v69(JoinResults, DiscountedItemsFromOffers) --[[ Line: 228 ]]
 	return List
 end
 
-return function(p2) --[[ Line: 262 | Named "useCheckoutPageViewModel" ]]
+return function(p2)
 	-- upvalues: Parent (copy), UseAXCatalogStoreContextModule (copy), UseNavigationFunction (copy), UseAvatarRouteFunction (copy), UseNetworkingFunction (copy), UseDispatchFunction (copy), FFlagAXMISWithOffers (copy), UseSaveOptionsStoredValuesModule (copy), UseSignalStateFunction (copy), FFlagAXMISWithBlackbird (copy), ReactModule (copy), UseSelectorFunction (copy), selectTryOnItems (copy), TutilsModule (copy), selectTryOnBodyColor3s (copy), selectTryOnBodyScales (copy), selectTryOnBodyPartColorRangeIds (copy), selectTryOnLookId (copy), FFlagAXCatalogMakeupSupport (copy), v1 (ref), FFlagAXMISEnableMultiShoppingUnifiedEvents (copy), v2 (ref), v3 (ref), selectAvatarSceneLooks (copy), selectItemInfoForTryOnItems (copy), selectShouldTryOnWithoutEquippedItems (copy), selectLocalUserId (copy), selectUserRobux (copy), v67 (copy), UseLocalizationFunction (copy), LocalizationRoactContext (copy), UseAppPolicyFunction (copy), UseNavigationFocusFunction (copy), FFlagAXEnableExpiredUserLookCheckout (copy), RobloxEventReceiver (copy), NotificationService (copy), AvatarScreen (copy), GetRobloxSubscriptionProductsFunction (copy), MutedErrorFunction (copy), UseOffersCartPricingCalculationsForCartItemsModule (copy), CryoModule (copy), Constants (copy), FFlagAXBackgroundsEquipTryOnCounters (copy), ReportBackgroundUserActionCounter (copy), UnifiedEventLogEnums (copy), SendUnifiedEventForDeferredActionFunction (copy), CartIdService (copy), FFlagAXDurablesForMIS (copy), SetSelectedTimedOptionModule (copy), v69 (copy), FIntBlackbirdUpsellMinPriceForDiscountInclusive (copy), FIntBlackbirdUpsellMaxPriceForDiscountInclusive (copy), ToastType (copy), SetCurrentToastMessageFunction (copy), GetTryOnItemsContainsOnlyMakeupTypesModule (copy), FFlagAXMISSaveWearFix (copy), SaveAsMakeupLookThunkModule (copy), SaveAsAvatarThunkModule (copy), GetTryOnItemReducerKeyFunction (copy), FFlagAXRevertEquippedAssetsAfterLayeringTryOnMakeup (copy), AvatarLastEquippedStateStore (copy), GetEquippableAssetsFromTryOnItemsModule (copy), PurchaseItemsSuccessThunkModule (copy), DiscountTypeEnum (copy), FFlagAXFixMISUpsellDiscountSummary (copy), CloseCentralOverlayFunction (copy), PromiseModule (copy), AvatarScreenProperties (copy), SendUnifiedEventsForMultiItemShoppingFunction (copy), GetUnifiedEventsForMISFunction (copy), PurchaseItemsModule (copy), MapPurchaseItemsResponseModule (copy), GetIsInsufficientRobuxErrorFunction (copy)
 	local PurchasePromptLiteModule = require(Parent.PurchasePromptLite)
 	local ShoppingCartStore = UseAXCatalogStoreContextModule().shoppingCartStore
@@ -257,10 +257,10 @@ return function(p2) --[[ Line: 262 | Named "useCheckoutPageViewModel" ]]
 		}
 	})
 	local UseContextResult = ReactModule.useContext(LocalizationRoactContext)
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p3) --[[ Line: 333 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p3)
 		return p3.getDisableResellingCollectiblesForCompliance()
 	end)
-	local UseAppPolicyResult1 = if FFlagAXMISWithBlackbird then UseAppPolicyFunction(function(p3) --[[ Line: 337 ]]
+	local UseAppPolicyResult1 = if FFlagAXMISWithBlackbird then UseAppPolicyFunction(function(p3)
 		return p3.getDisableBlackbirdEntrypoints()
 	end) else nil
 	local UseRefResult = ReactModule.useRef(false)
@@ -268,14 +268,14 @@ return function(p2) --[[ Line: 262 | Named "useCheckoutPageViewModel" ]]
 	local UseRefResult1 = nil
 	
 	if FFlagAXEnableExpiredUserLookCheckout then
-		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 351 ]]
+		local UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: RobloxEventReceiver (upval), NotificationService (upval)
 			return RobloxEventReceiver.new(NotificationService)
 		end, {})
 		UseRefResult1 = ReactModule.useRef(nil)
 		
 		if UseMemoResult ~= nil then
-			UseRefResult1.current = UseMemoResult:observeEvent("AvatarAssetOwnershipNotifications", function() --[[ Line: 359 ]]
+			UseRefResult1.current = UseMemoResult:observeEvent("AvatarAssetOwnershipNotifications", function()
 				-- upvalues: FFlagAXEnableExpiredUserLookCheckout (upval), UseAvatarRouteResult (copy), AvatarScreen (upval), UseNavigationResult (copy)
 				if (if FFlagAXEnableExpiredUserLookCheckout then UseAvatarRouteResult and (UseAvatarRouteResult.current and UseAvatarRouteResult.current.name) else nil) == AvatarScreen.ExpiredUserLookCheckout then
 					UseNavigationResult.pop(2)
@@ -283,21 +283,21 @@ return function(p2) --[[ Line: 262 | Named "useCheckoutPageViewModel" ]]
 			end)
 		end
 	end
-	ReactModule.useEffect(function() --[[ Line: 373 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p2 (copy), UseSelectorResult12 (copy), FFlagAXMISWithBlackbird (upval), GetRobloxSubscriptionProductsFunction (upval), Callback2 (ref), MutedErrorFunction (upval), FFlagAXEnableExpiredUserLookCheckout (upval), UseRefResult1 (ref)
 		if p2.fetchUserRobux and not UseSelectorResult12 then
 			p2.fetchUserRobux()
 		end
 		if FFlagAXMISWithBlackbird then
-			GetRobloxSubscriptionProductsFunction():andThen(function(Result) --[[ Line: 381 ]]
+			GetRobloxSubscriptionProductsFunction():andThen(function(Result)
 				-- upvalues: Callback2 (upval)
 				Callback2(Result)
-			end):catch(function(Err) --[[ Line: 384 ]]
+			end):catch(function(Err)
 				-- upvalues: MutedErrorFunction (upval)
 				MutedErrorFunction("CheckoutPageViewModel", "Failed to fetch Roblox subscription products: " .. tostring(Err))
 			end)
 		end
-		return function() --[[ Line: 392 ]]
+		return function()
 			-- upvalues: FFlagAXEnableExpiredUserLookCheckout (upval), UseRefResult1 (upval)
 			if FFlagAXEnableExpiredUserLookCheckout and UseRefResult1.current ~= nil then
 				UseRefResult1.current:disconnect()
@@ -305,14 +305,14 @@ return function(p2) --[[ Line: 262 | Named "useCheckoutPageViewModel" ]]
 			end
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 404 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseNavigationFocusResult (copy), UseRefResult (copy), p2 (copy)
 		if UseNavigationFocusResult and UseRefResult.current and p2.fetchUserRobux then
 			p2.fetchUserRobux()
 			UseRefResult.current = false
 		end
 	end, { UseNavigationFocusResult, p2.fetchUserRobux })
-	ReactModule.useLayoutEffect(function() --[[ Line: 413 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: ShoppingCartStore (copy), UseSelectorResult9 (copy), UseAppPolicyResult (copy), FFlagAXMISWithOffers (upval), Callback (ref), FFlagAXEnableExpiredUserLookCheckout (upval), UseAvatarRouteResult (copy), AvatarScreen (upval), UseNavigationResult (copy)
 		ShoppingCartStore.syncFromTryOns(UseSelectorResult9, UseAppPolicyResult)
 		
@@ -337,18 +337,18 @@ return function(p2) --[[ Line: 262 | Named "useCheckoutPageViewModel" ]]
 		UseNavigationResult,
 		if FFlagAXEnableExpiredUserLookCheckout then UseAvatarRouteResult else nil
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function(): boolean --[[ Line: 449 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function(): boolean
 		-- upvalues: UseAvatarRouteResult (copy), FFlagAXEnableExpiredUserLookCheckout (upval), AvatarScreen (upval)
 		local Name = UseAvatarRouteResult and (UseAvatarRouteResult.current and UseAvatarRouteResult.current.name)
 		
 		return FFlagAXEnableExpiredUserLookCheckout and Name == AvatarScreen.ExpiredUserLookCheckout or Name == AvatarScreen.Checkout
 	end, { UseAvatarRouteResult })
 	local UseOffersCartPricingCalculationsForCartItemsModuleResult = if FFlagAXMISWithOffers then UseOffersCartPricingCalculationsForCartItemsModule(UseSignalStateResult, UseMemoResult1, v5) else nil
-	local UseMemoResult2 = if FFlagAXEnableExpiredUserLookCheckout then ReactModule.useMemo(function(): boolean --[[ Line: 562 ]]
+	local UseMemoResult2 = if FFlagAXEnableExpiredUserLookCheckout then ReactModule.useMemo(function(): boolean
 		-- upvalues: UseAvatarRouteResult (copy), AvatarScreen (upval)
 		return (UseAvatarRouteResult and (UseAvatarRouteResult.current and UseAvatarRouteResult.current.name)) == AvatarScreen.ExpiredUserLookCheckout
 	end, { UseAvatarRouteResult }) else nil
-	local UseMemoResult3 = if FFlagAXMISWithBlackbird then ReactModule.useMemo(function(): boolean --[[ Line: 570 ]]
+	local UseMemoResult3 = if FFlagAXMISWithBlackbird then ReactModule.useMemo(function(): boolean
 		-- upvalues: UseSelectorResult13 (copy), UseAppPolicyResult1 (copy), FFlagAXMISWithOffers (upval), CryoModule (upval), UseOffersCartPricingCalculationsForCartItemsModuleResult (ref), UseSignalStateResult (copy), FIntBlackbirdUpsellMinPriceForDiscountInclusive (upval), FIntBlackbirdUpsellMaxPriceForDiscountInclusive (upval)
 		if not UseSelectorResult13 and not UseAppPolicyResult1 and (not FFlagAXMISWithOffers or FFlagAXMISWithOffers and #CryoModule.Dictionary.keys(UseOffersCartPricingCalculationsForCartItemsModuleResult.offersAvailable) == 0) then
 			for _, value in UseSignalStateResult do
@@ -364,7 +364,7 @@ return function(p2) --[[ Line: 262 | Named "useCheckoutPageViewModel" ]]
 		UseSignalStateResult,
 		if FFlagAXMISWithOffers then UseOffersCartPricingCalculationsForCartItemsModuleResult.offersAvailable else nil
 	}) else nil
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 637 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseSignalStateResult (copy), Constants (upval), FFlagAXMISWithOffers (upval), UseOffersCartPricingCalculationsForCartItemsModuleResult (ref), FFlagAXDurablesForMIS (upval)
 		local List = {}
 		
@@ -385,7 +385,7 @@ return function(p2) --[[ Line: 262 | Named "useCheckoutPageViewModel" ]]
 		UseSignalStateResult,
 		if FFlagAXMISWithOffers then UseOffersCartPricingCalculationsForCartItemsModuleResult else nil
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 670 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseLocalizationResult (copy), ToastType (upval), UseDispatchResult (copy), SetCurrentToastMessageFunction (upval)
 		UseDispatchResult(SetCurrentToastMessageFunction({
 			isLocalized = true,
@@ -394,7 +394,7 @@ return function(p2) --[[ Line: 262 | Named "useCheckoutPageViewModel" ]]
 			toastType = ToastType.SuccessConfirmation
 		}))
 	end, { UseDispatchResult, UseLocalizationResult })
-	local UseResult2 = ReactModule.useCallback(function(p3) --[[ Line: 680 ]]
+	local UseResult2 = ReactModule.useCallback(function(p3)
 		-- upvalues: FFlagAXCatalogMakeupSupport (upval), GetTryOnItemsContainsOnlyMakeupTypesModule (upval), UseSelectorResult8 (copy), UseSelectorResult5 (copy), UseSelectorResult4 (copy), FFlagAXMISSaveWearFix (upval), UseDispatchResult (copy), SaveAsMakeupLookThunkModule (upval), UseNetworkingResult (copy), p2 (copy), SaveAsAvatarThunkModule (upval), UseResult1 (copy)
 		if not FFlagAXCatalogMakeupSupport then
 			UseDispatchResult(SaveAsAvatarThunkModule(if UseSelectorResult8 and UseSelectorResult8[UseSelectorResult4] and UseSelectorResult8[UseSelectorResult4].name then UseSelectorResult8[UseSelectorResult4].name else "Avatar", p2.getCombinedHumanoidDescriptionFromEquippedAndOutfitTryOn, p3, UseResult1))
@@ -423,7 +423,7 @@ return function(p2) --[[ Line: 262 | Named "useCheckoutPageViewModel" ]]
 		if FFlagAXCatalogMakeupSupport then UseNetworkingResult else nil,
 		if FFlagAXCatalogMakeupSupport then UseSelectorResult5 else nil
 	})
-	local UseResult3 = ReactModule.useCallback(function(p3, p4) --[[ Line: 745 ]]
+	local UseResult3 = ReactModule.useCallback(function(p3, p4)
 		-- upvalues: ShoppingCartStore (copy), FFlagAXMISEnableMultiShoppingUnifiedEvents (upval), UseSelectorResult8 (copy), UseSelectorResult4 (copy), UseSelectorResult5 (copy), p2 (copy), UseDispatchResult (copy), SetCurrentToastMessageFunction (upval), UseContextResult (copy), ToastType (upval), GetTryOnItemReducerKeyFunction (upval), UseStateResult1 (copy), UseResult2 (copy), FFlagAXMISSaveWearFix (upval), FFlagAXRevertEquippedAssetsAfterLayeringTryOnMakeup (upval), AvatarLastEquippedStateStore (upval), UseStateResult (copy), GetEquippableAssetsFromTryOnItemsModule (upval), PurchaseItemsSuccessThunkModule (upval), UseSelectorResult10 (copy), UseSelectorResult1 (copy), UseSelectorResult2 (copy), UseSelectorResult3 (copy)
 		local UpdateCartFromPurchaseResponseResult = ShoppingCartStore.updateCartFromPurchaseResponse(p3)
 		local BoughtItems = UpdateCartFromPurchaseResponseResult.boughtItems
@@ -505,7 +505,7 @@ return function(p2) --[[ Line: 262 | Named "useCheckoutPageViewModel" ]]
 		if FFlagAXMISEnableMultiShoppingUnifiedEvents then UseSelectorResult8 else nil,
 		if FFlagAXMISSaveWearFix then p2.getCombinedHumanoidDescriptionFromEquippedAndOutfitTryOn else nil
 	})
-	local UseResult4 = if FFlagAXMISWithBlackbird then ReactModule.useCallback(function() --[[ Line: 879 ]]
+	local UseResult4 = if FFlagAXMISWithBlackbird then ReactModule.useCallback(function()
 		-- upvalues: UseSignalStateResult1 (copy), DiscountTypeEnum (upval), FFlagAXFixMISUpsellDiscountSummary (upval), UseSignalStateResult4 (copy), UseSignalStateResult3 (copy), UseOffersCartPricingCalculationsForCartItemsModuleResult (ref), UseDispatchResult (copy), PurchasePromptLiteModule (copy), CloseCentralOverlayFunction (upval), PromiseModule (upval), UseRefResult (copy)
 		local v7 = nil
 		
@@ -541,11 +541,11 @@ return function(p2) --[[ Line: 262 | Named "useCheckoutPageViewModel" ]]
 		UseDispatchResult(PurchasePromptLiteModule.Thunks.OpenCentralOverlayForUnifiedPurchasePrompt({
 			productPayload = { kind = "RobuxUpsell" },
 			purchaseCallbacks = {
-				onFlowComplete = function() --[[ Line: 916 ]]
+				onFlowComplete = function()
 					-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
 					UseDispatchResult(CloseCentralOverlayFunction())
 				end,
-				fetchProductInfo = function() --[[ Line: 919 ]]
+				fetchProductInfo = function()
 					-- upvalues: PromiseModule (upval), FFlagAXFixMISUpsellDiscountSummary (upval), UseSignalStateResult3 (upval), UseOffersCartPricingCalculationsForCartItemsModuleResult (upval), v7 (ref), UseSignalStateResult4 (upval), List (copy)
 					return PromiseModule.resolve({
 						IsForSale = true,
@@ -569,12 +569,12 @@ return function(p2) --[[ Line: 262 | Named "useCheckoutPageViewModel" ]]
 		UseNavigationResult, UseDispatchResult, UseSignalStateResult3,
 		UseSignalStateResult4, UseSignalStateResult1,
 		if FFlagAXFixMISUpsellDiscountSummary then UseOffersCartPricingCalculationsForCartItemsModuleResult else nil
-	}) else ReactModule.useCallback(function() --[[ Line: 959 ]]
+	}) else ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), UseRefResult (copy)
 		UseNavigationResult.navigate(AvatarScreen.InsufficientRobuxPrompt)
 		UseRefResult.current = true
 	end, { UseNavigationResult })
-	local UseMemoResult4 = if FFlagAXMISWithBlackbird then ReactModule.useMemo(function() --[[ Line: 967 ]]
+	local UseMemoResult4 = if FFlagAXMISWithBlackbird then ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult1 (copy), DiscountTypeEnum (upval), FFlagAXMISWithOffers (upval), UseOffersCartPricingCalculationsForCartItemsModuleResult (ref), UseSignalStateResult4 (copy), UseSignalStateResult3 (copy)
 		local v8 = nil
 		
@@ -624,11 +624,11 @@ return function(p2) --[[ Line: 262 | Named "useCheckoutPageViewModel" ]]
 		if FFlagAXMISWithOffers then UseOffersCartPricingCalculationsForCartItemsModuleResult.totalSelectedOffersDiscount else nil,
 		if FFlagAXMISWithOffers then UseOffersCartPricingCalculationsForCartItemsModuleResult.savingsSummary else nil
 	}) else nil
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 1038 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_2 (copy), FFlagAXMISEnableMultiShoppingUnifiedEvents (upval), UseSelectorResult8 (copy), UseSelectorResult4 (copy), UseSelectorResult5 (copy), UseSelectorResult6 (copy), UseSelectorResult7 (copy), UseAvatarRouteResult (copy), AvatarScreenProperties (upval), SendUnifiedEventsForMultiItemShoppingFunction (upval), GetUnifiedEventsForMISFunction (upval), UseSignalStateResult (copy), UseSelectorResult (copy), UnifiedEventLogEnums (upval), MutedErrorFunction (upval), PurchaseItemsModule (upval), UseNetworkingResult (copy), UseSelectorResult11 (copy), UseResult (copy), MapPurchaseItemsResponseModule (upval), UseResult3 (copy), TutilsModule (upval), PurchasePromptLiteModule (copy), p2 (copy), GetIsInsufficientRobuxErrorFunction (upval), UseResult4 (copy), UseNavigationResult (copy), AvatarScreen (upval), UseLocalizationResult (copy)
 		UseStateResult2_2(true)
 		
-		if FFlagAXMISEnableMultiShoppingUnifiedEvents and not pcall(function() --[[ Line: 1042 ]]
+		if FFlagAXMISEnableMultiShoppingUnifiedEvents and not pcall(function()
 			-- upvalues: UseSelectorResult8 (upval), UseSelectorResult4 (upval), UseSelectorResult5 (upval), UseSelectorResult6 (upval), UseSelectorResult7 (upval), UseAvatarRouteResult (upval), AvatarScreenProperties (upval), SendUnifiedEventsForMultiItemShoppingFunction (upval), GetUnifiedEventsForMISFunction (upval), UseSignalStateResult (upval), UseSelectorResult (upval), UnifiedEventLogEnums (upval)
 			local UseSelectorResultEntry = UseSelectorResult8[UseSelectorResult4]
 			
@@ -659,7 +659,7 @@ return function(p2) --[[ Line: 262 | Named "useCheckoutPageViewModel" ]]
 			lookId = UseSelectorResult4,
 			makeupLookId = if FFlagAXMISEnableMultiShoppingUnifiedEvents then UseSelectorResult5 else nil,
 			lineItems = UseResult()
-		}):andThen(function(Result) --[[ Line: 1096 ]]
+		}):andThen(function(Result)
 			-- upvalues: MapPurchaseItemsResponseModule (upval), UseResult3 (upval), TutilsModule (upval), UseSelectorResult (upval), PurchasePromptLiteModule (upval), p2 (upval)
 			if Result.isJSONValid and Result.responseCode == 200 then
 				UseResult3(MapPurchaseItemsResponseModule(Result.responseBody), TutilsModule.deepCopy(UseSelectorResult))
@@ -669,7 +669,7 @@ return function(p2) --[[ Line: 262 | Named "useCheckoutPageViewModel" ]]
 					p2.fetchUserRobux()
 				end
 			end
-		end):catch(function(Err) --[[ Line: 1112 ]]
+		end):catch(function(Err)
 			-- upvalues: GetIsInsufficientRobuxErrorFunction (upval), UseResult4 (upval), UseNavigationResult (upval), AvatarScreen (upval), UseSignalStateResult (upval), UseLocalizationResult (upval)
 			if GetIsInsufficientRobuxErrorFunction(Err) then
 				UseResult4()
@@ -682,7 +682,7 @@ return function(p2) --[[ Line: 262 | Named "useCheckoutPageViewModel" ]]
 					buttonText = UseLocalizationResult.purchaseFailedButton
 				})
 			end
-		end):finally(function() --[[ Line: 1125 ]]
+		end):finally(function()
 			-- upvalues: UseStateResult2_2 (upval)
 			UseStateResult2_2(false)
 		end)
@@ -701,20 +701,20 @@ return function(p2) --[[ Line: 262 | Named "useCheckoutPageViewModel" ]]
 	
 	return {
 		canPurchase = UseSignalStateResult2,
-		cartItems = ReactModule.useMemo(function() --[[ Line: 465 ]]
+		cartItems = ReactModule.useMemo(function()
 			-- upvalues: UseSignalStateResult (copy), CryoModule (upval), Constants (upval), p2 (copy), FFlagAXBackgroundsEquipTryOnCounters (upval), ReportBackgroundUserActionCounter (upval), FFlagAXMISEnableMultiShoppingUnifiedEvents (upval), UnifiedEventLogEnums (upval), SendUnifiedEventForDeferredActionFunction (upval), CartIdService (upval), FFlagAXDurablesForMIS (upval), ShoppingCartStore (copy), UseDispatchResult (copy), SetSelectedTimedOptionModule (upval), FFlagAXMISWithOffers (upval), UseOffersCartPricingCalculationsForCartItemsModuleResult (ref), v69 (upval)
 			local JoinResults = {}
 			
 			for _, value in UseSignalStateResult do
 				table.insert(JoinResults, CryoModule.Dictionary.join(value, {
-					onActivated = function() --[[ Line: 471 ]]
+					onActivated = function()
 						-- upvalues: value (copy), Constants (upval), p2 (upval)
 						if value.itemId == Constants.AVATAR_BLOCKY_DEFAULT_BUNDLE_ID then return end
 						if p2.onOpenItemDetailsPage then
 							p2.onOpenItemDetailsPage(value.itemId, value.itemType, value.itemSubType)
 						end
 					end,
-					onRemove = function() --[[ Line: 480 ]]
+					onRemove = function()
 						-- upvalues: p2 (upval), FFlagAXBackgroundsEquipTryOnCounters (upval), ReportBackgroundUserActionCounter (upval), value (copy), FFlagAXMISEnableMultiShoppingUnifiedEvents (upval), UnifiedEventLogEnums (upval), SendUnifiedEventForDeferredActionFunction (upval), CartIdService (upval)
 						if p2.onRemoveItem then
 							if FFlagAXBackgroundsEquipTryOnCounters then
@@ -734,14 +734,14 @@ return function(p2) --[[ Line: 262 | Named "useCheckoutPageViewModel" ]]
 							end
 						end
 					end,
-					onTimedOptionPriceChanged = if FFlagAXDurablesForMIS then function(p5, Days) --[[ Line: 512 ]]
+					onTimedOptionPriceChanged = if FFlagAXDurablesForMIS then function(p5, Days)
 						-- upvalues: ShoppingCartStore (upval), value (copy), CryoModule (upval), UseDispatchResult (upval), SetSelectedTimedOptionModule (upval)
 						if ShoppingCartStore.updateItemPrice then
 							if value.timedOptions then
 								UseDispatchResult(SetSelectedTimedOptionModule({
 									itemId = value.itemId,
 									itemType = value.itemType,
-									selectedTimedOptionIndex = CryoModule.List.findWhere(value.timedOptions, function(p6): boolean --[[ Line: 517 ]]
+									selectedTimedOptionIndex = CryoModule.List.findWhere(value.timedOptions, function(p6): boolean
 										-- upvalues: Days (copy)
 										return p6.days == Days
 									end) or #value.timedOptions
@@ -771,7 +771,7 @@ return function(p2) --[[ Line: 262 | Named "useCheckoutPageViewModel" ]]
 		isWearAfterPurchaseChecked = UseStateResult,
 		isAddToMyAvatarsChecked = UseStateResult1,
 		isSaveOptionsOpen = IsSaveOptionsOpen,
-		onCheckoutButtonActivated = ReactModule.useCallback(function() --[[ Line: 1151 ]]
+		onCheckoutButtonActivated = ReactModule.useCallback(function()
 			-- upvalues: FFlagAXMISWithOffers (upval), UseSignalStateResult3 (copy), UseOffersCartPricingCalculationsForCartItemsModuleResult (ref), UseSelectorResult12 (copy), UseResult4 (copy), UseResult5 (copy)
 			local UseSignalStateResultDelta = if FFlagAXMISWithOffers then UseSignalStateResult3 - UseOffersCartPricingCalculationsForCartItemsModuleResult.totalSelectedOffersDiscount else UseSignalStateResult3
 			
@@ -789,23 +789,23 @@ return function(p2) --[[ Line: 262 | Named "useCheckoutPageViewModel" ]]
 			UseResult4,
 			if FFlagAXMISWithOffers then UseOffersCartPricingCalculationsForCartItemsModuleResult.totalSelectedOffersDiscount else nil
 		}),
-		onOpenItemDetailsPage = ReactModule.useCallback(function(p5, p6, p7) --[[ Line: 607 ]]
+		onOpenItemDetailsPage = ReactModule.useCallback(function(p5, p6, p7)
 			-- upvalues: p2 (copy)
 			if p2.onOpenItemDetailsPage then
 				p2.onOpenItemDetailsPage(p5, p6, p7)
 			end
 		end, { p2.onOpenItemDetailsPage }),
-		onRemoveItem = ReactModule.useCallback(function(p5, p6, _) --[[ Line: 601 ]]
+		onRemoveItem = ReactModule.useCallback(function(p5, p6, _)
 			-- upvalues: p2 (copy)
 			if p2.onRemoveItem then
 				p2.onRemoveItem(p5, p6)
 			end
 		end, { p2.onRemoveItem, UseSelectorResult, UseNavigationResult }),
-		onUnavailableButtonActivated = ReactModule.useCallback(function() --[[ Line: 613 ]]
+		onUnavailableButtonActivated = ReactModule.useCallback(function()
 			-- upvalues: UseNavigationResult (copy), AvatarScreen (upval)
 			UseNavigationResult.navigate(AvatarScreen.CartUnavailableItemsPrompt)
 		end, { UseNavigationResult }),
-		onWearAfterPurchaseToggle = ReactModule.useCallback(function() --[[ Line: 617 ]]
+		onWearAfterPurchaseToggle = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (copy), UseStateResult (copy), FFlagAXMISWithOffers (upval), UseSaveOptionsStoredValuesModuleResult (copy)
 			UseStateResult2(not UseStateResult)
 			
@@ -816,7 +816,7 @@ return function(p2) --[[ Line: 262 | Named "useCheckoutPageViewModel" ]]
 			UseStateResult,
 			if FFlagAXMISWithOffers then UseSaveOptionsStoredValuesModuleResult else nil
 		}),
-		onAddToMyAvatarsToggle = ReactModule.useCallback(function() --[[ Line: 624 ]]
+		onAddToMyAvatarsToggle = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2_1 (copy), UseStateResult1 (copy), FFlagAXMISWithOffers (upval), UseSaveOptionsStoredValuesModuleResult (copy)
 			UseStateResult2_1(not UseStateResult1)
 			
@@ -827,7 +827,7 @@ return function(p2) --[[ Line: 262 | Named "useCheckoutPageViewModel" ]]
 			UseStateResult1,
 			if FFlagAXMISWithOffers then UseSaveOptionsStoredValuesModuleResult else nil
 		}),
-		onSaveOptionsOpenToggle = if FFlagAXMISWithOffers then ReactModule.useCallback(function() --[[ Line: 632 ]]
+		onSaveOptionsOpenToggle = if FFlagAXMISWithOffers then ReactModule.useCallback(function()
 			-- upvalues: Callback1 (ref), IsSaveOptionsOpen (ref)
 			Callback1(not IsSaveOptionsOpen)
 		end, { IsSaveOptionsOpen }) else nil,

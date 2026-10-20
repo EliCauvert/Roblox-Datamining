@@ -6,17 +6,17 @@ local PromiseModule = require(Parent.Promise)
 local Url = require(Parent.Http).Url
 local PasskeyConstantsModule = require(AuthCommon.Common.PasskeyConstants)
 
-local function _(): string --[[ Line: 14 | Named "getFinishRegistrationUrl" ]]
+local function _(): string
 	-- upvalues: Url (copy)
 	return string.format("%sv1/passkey/finish-preauth-registration", Url.AUTH_URL)
 end
 
-local function finishPreauthPasskeyRegistration(Callback, PostBody) --[[ Line: 18 ]]
+local function finishPreauthPasskeyRegistration(Callback, PostBody)
 	-- upvalues: Url (copy), PromiseModule (copy), HttpService (copy), PasskeyConstantsModule (copy)
-	return Callback(string.format("%sv1/passkey/finish-preauth-registration", Url.AUTH_URL), "POST", { postBody = PostBody }):andThen(function(Result) --[[ Line: 19 ]]
+	return Callback(string.format("%sv1/passkey/finish-preauth-registration", Url.AUTH_URL), "POST", { postBody = PostBody }):andThen(function(Result)
 		-- upvalues: PromiseModule (upval)
 		return PromiseModule.resolve(Result)
-	end, function(Input) --[[ Line: 21 ]]
+	end, function(Input)
 		-- upvalues: HttpService (upval), PromiseModule (upval), PasskeyConstantsModule (upval)
 		return PromiseModule.reject({
 			body = if type(Input) == "table" then HttpService:JSONEncode(Input) else nil,
@@ -25,7 +25,7 @@ local function finishPreauthPasskeyRegistration(Callback, PostBody) --[[ Line: 1
 	end)
 end
 
-return function(p1, SessionId, Input) --[[ Line: 27 | Named "attemptFinishPreauthPasskeyRegistration" ]]
+return function(p1, SessionId, Input)
 	-- upvalues: HttpService (copy), Base64Module (copy), finishPreauthPasskeyRegistration (copy)
 	local Data = HttpService:JSONDecode(Input)
 	Data.id = Base64Module.ToUrlSafeBase64(Data.id)

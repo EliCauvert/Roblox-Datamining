@@ -15,7 +15,7 @@ local config = {
 	placement = require(Foundation.Enums.InputPlacement).Start
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 29 | Named "InternalInputGroup" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseInputGroupVariantsModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), InputGroupContextModule (copy), TextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseInputGroupVariantsModuleResult = UseInputGroupVariantsModule(UseTokensModule(), WithDefaultsModuleResult.size)
@@ -25,7 +25,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 29 |
 		ref = Ref
 	}), {
 		InputGroupContext = ReactModule.createElement(InputGroupContextModule.Provider, {
-			value = ReactModule.useMemo(function() --[[ Line: 34 ]]
+			value = ReactModule.useMemo(function()
 				-- upvalues: WithDefaultsModuleResult (copy)
 				return {
 					size = WithDefaultsModuleResult.size,

@@ -37,23 +37,23 @@ local config4 = {
 }
 
 return {
-	logAdMenuEvent = function(State) --[[ Line: 72 ]]
+	logAdMenuEvent = function(State)
 		-- upvalues: Default (copy), config (copy)
 		Default:logRobloxTelemetryCounter(config, 1, { state = State })
 	end,
-	logWhyThisAdEvent = function() --[[ Line: 78 ]]
+	logWhyThisAdEvent = function()
 		-- upvalues: Default (copy), config1 (copy)
 		Default:logRobloxTelemetryCounter(config1, 1)
 	end,
-	logReportAdEvent = function(State) --[[ Line: 88 ]]
+	logReportAdEvent = function(State)
 		-- upvalues: Default (copy), config2 (copy)
 		Default:logRobloxTelemetryCounter(config2, 1, { state = State })
 	end,
-	logImmersiveBrandedAdButtonClickCounter = function(ButtonName) --[[ Line: 94 ]]
+	logImmersiveBrandedAdButtonClickCounter = function(ButtonName)
 		-- upvalues: Default (copy), config3 (copy)
 		Default:logRobloxTelemetryCounter(config3, 1, { buttonName = ButtonName })
 	end,
-	logImmersiveBrandedAdLinkingFailedCounter = function(LinkName) --[[ Line: 102 ]]
+	logImmersiveBrandedAdLinkingFailedCounter = function(LinkName)
 		-- upvalues: Default (copy), config4 (copy)
 		Default:logRobloxTelemetryCounter(config4, 1, { linkName = LinkName })
 	end

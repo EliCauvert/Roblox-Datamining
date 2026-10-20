@@ -4,18 +4,18 @@ local _ = require(Parent.HttpClient)
 local IsChallengeHttpResponseModule = require(script.Parent.IsChallengeHttpResponse)
 local InterceptChallengeModule = require(script.Parent.InterceptChallenge)
 
-return function(p1, p2) --[[ Line: 16 ]]
+return function(p1, p2)
 	-- upvalues: InterceptChallengeModule (copy), PromiseModule (copy), IsChallengeHttpResponseModule (copy)
 	local P1 = p2 or InterceptChallengeModule
 	
 	return {
-		request = function(Tbl, Callback) --[[ Line: 22 ]]
+		request = function(Tbl, Callback)
 			-- upvalues: PromiseModule (upval), p1 (copy), IsChallengeHttpResponseModule (upval), P1 (copy)
 			local Flag = false
 			local Flag1 = false
 			local RequestResult = nil
 			
-			local function _(p3, p4) --[[ Line: 31 | Named "settle" ]]
+			local function _(p3, p4)
 				-- upvalues: Flag (ref), Flag1 (ref), Callback (copy)
 				if not Flag and not Flag1 then
 					Flag1 = true
@@ -25,9 +25,9 @@ return function(p1, p2) --[[ Line: 16 ]]
 				end
 			end
 			
-			local function retryWithChallengeHeaders(p3) --[[ Line: 39 ]]
+			local function retryWithChallengeHeaders(p3)
 				-- upvalues: Flag (ref), PromiseModule (upval), Tbl (copy), RequestResult (ref), p1 (upval)
-				return if Flag then PromiseModule.reject() else PromiseModule.new(function(Callback) --[[ Line: 43 ]]
+				return if Flag then PromiseModule.reject() else PromiseModule.new(function(Callback)
 					-- upvalues: Tbl (upval), p3 (copy), RequestResult (upval), p1 (upval)
 					local Copy = if Tbl.headers then table.clone(Tbl.headers) else {}
 					for i, value in p3 do
@@ -35,14 +35,14 @@ return function(p1, p2) --[[ Line: 16 ]]
 					end
 					local Copy1 = table.clone(Tbl)
 					Copy1.headers = Copy
-					RequestResult = p1.request(Copy1, function(Success, Response) --[[ Line: 51 ]]
+					RequestResult = p1.request(Copy1, function(Success, Response)
 						-- upvalues: Callback (copy)
 						Callback({ success = Success, response = Response })
 					end)
 				end)
 			end
 			
-			RequestResult = p1.request(Tbl, function(p4, p5) --[[ Line: 57 ]]
+			RequestResult = p1.request(Tbl, function(p4, p5)
 				-- upvalues: RequestResult (ref), Flag (ref), Flag1 (ref), Callback (copy), IsChallengeHttpResponseModule (upval), P1 (upval), retryWithChallengeHeaders (copy)
 				RequestResult = nil
 				
@@ -57,7 +57,7 @@ return function(p1, p2) --[[ Line: 16 ]]
 						})
 						
 						if Success then
-							Result:andThen(function(Result) --[[ Line: 84 ]]
+							Result:andThen(function(Result)
 								-- upvalues: Flag (upval), Flag1 (upval), Callback (upval)
 								local Success = Result.success
 								local Response = Result.response
@@ -67,7 +67,7 @@ return function(p1, p2) --[[ Line: 16 ]]
 									Flag1 = true
 									Callback(Success, Response)
 								end
-							end):catch(function() --[[ Line: 87 ]]
+							end):catch(function()
 								-- upvalues: p4 (copy), p5 (copy), Flag (upval), Flag1 (upval), Callback (upval)
 								if not Flag then
 									if Flag1 then return end
@@ -97,7 +97,7 @@ return function(p1, p2) --[[ Line: 16 ]]
 				end
 			end)
 			
-			return function() --[[ Line: 93 ]]
+			return function()
 				-- upvalues: Flag (ref), RequestResult (ref)
 				Flag = true
 				

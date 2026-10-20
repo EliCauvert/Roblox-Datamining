@@ -1,7 +1,7 @@
 ﻿local UserModule = require(script.Parent.User)
 local Count = 0
 
-local function _(): string --[[ Line: 7 ]]
+local function _(): string
 	-- upvalues: Count (ref)
 	Count += 1
 	
@@ -11,7 +11,7 @@ end
 local MockUserModule = {}
 MockUserModule.__index = MockUserModule
 
-function MockUserModule.new() --[[ Line: 15 ]]
+function MockUserModule.new()
 	-- upvalues: UserModule (copy), Count (ref)
 	local NewUser = UserModule.new()
 	Count += 1
@@ -38,7 +38,7 @@ function MockUserModule.new() --[[ Line: 15 ]]
 	return NewUser
 end
 
-function MockUserModule.mockEndpointResponse() --[[ Line: 45 ]]
+function MockUserModule.mockEndpointResponse()
 	return {
 		created = "0001-01-01T06:00:00Z",
 		displayName = "DN+12345",

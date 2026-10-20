@@ -2,12 +2,12 @@
 local JUMPTO = require(script.Parent.Parent.NavigationSymbol)("JUMP_TO")
 local SwitchActionsModule = { JumpTo = JUMPTO }
 setmetatable(SwitchActionsModule, {
-	__index = function(_, p1) --[[ Line: 16 ]]
+	__index = function(_, p1)
 		error(("%q is not a valid member of SwitchActions"):format((tostring(p1))), 2)
 	end
 })
 
-function SwitchActionsModule.jumpTo(p1) --[[ Line: 22 ]]
+function SwitchActionsModule.jumpTo(p1)
 	-- upvalues: JUMPTO (copy), Object (copy)
 	local config = { preserveFocus = true, type = JUMPTO }
 	

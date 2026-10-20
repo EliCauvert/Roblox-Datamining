@@ -1,19 +1,19 @@
-﻿local function strict(p1, p2) --[[ Line: 2 ]]
+﻿local function strict(p1, p2)
 	local P1 = p2 or tostring(p1)
 	
 	return (setmetatable(p1, {
-		__index = function(_, p3) --[[ Line: 6 ]]
+		__index = function(_, p3)
 			-- upvalues: P1 (copy)
 			error(("%q (%s) is not a valid member of %s"):format(tostring(p3), typeof(p3), P1), 2)
 		end,
-		__newindex = function(_, p3, _) --[[ Line: 12 ]]
+		__newindex = function(_, p3, _)
 			-- upvalues: P1 (copy)
 			error(("%q (%s) is not a valid member of %s"):format(tostring(p3), typeof(p3), P1), 2)
 		end
 	}))
 end
 
-local function addEnumValue(Proxies, Proxies1, p1, Key, Key1) --[[ Line: 20 ]]
+local function addEnumValue(Proxies, Proxies1, p1, Key, Key1)
 	-- upvalues: strict (copy)
 	local IsString = typeof(Key) == "string"
 	assert(IsString, "Only string names are supported for enums!")
@@ -28,13 +28,13 @@ local function addEnumValue(Proxies, Proxies1, p1, Key, Key1) --[[ Line: 20 ]]
 	local Proxy = newproxy(true)
 	local Meta = getmetatable(Proxy)
 	
-	function Meta.__tostring(): string --[[ Line: 34 ]]
+	function Meta.__tostring(): string
 		-- upvalues: p1 (copy), Key (copy)
 		return ("%s.%s"):format(p1, Key)
 	end
 	
 	Meta.__index = strict({
-		rawValue = function() --[[ Line: 39 ]]
+		rawValue = function()
 			-- upvalues: Key1 (copy)
 			return Key1
 		end
@@ -43,7 +43,7 @@ local function addEnumValue(Proxies, Proxies1, p1, Key, Key1) --[[ Line: 20 ]]
 	Proxies1[Key1] = Proxy
 end
 
-return function(p1, Entry) --[[ Line: 51 | Named "enumerate" ]]
+return function(p1, Entry)
 	-- upvalues: addEnumValue (copy), strict (copy)
 	assert(typeof(p1) == "string", "Bad argument #1 - enums must be created using a string name!")
 	assert(typeof(Entry) == "table", "Bad argument #2 - enums must be created using a table!")
@@ -59,12 +59,12 @@ return function(p1, Entry) --[[ Line: 51 | Named "enumerate" ]]
 			addEnumValue(t, t1, p1, value, value)
 		end
 	end
-	function t.fromRawValue(p2) --[[ Line: 69 ]]
+	function t.fromRawValue(p2)
 		-- upvalues: t1 (copy)
 		return t1[p2]
 	end
 	
-	function t.isEnumValue(p2): boolean --[[ Line: 73 ]]
+	function t.isEnumValue(p2): boolean
 		-- upvalues: t (copy)
 		if typeof(p2) ~= "userdata" then
 			return false
@@ -77,7 +77,7 @@ return function(p1, Entry) --[[ Line: 51 | Named "enumerate" ]]
 		return false
 	end
 	
-	function t.allValues() --[[ Line: 87 ]]
+	function t.allValues()
 		-- upvalues: t1 (copy)
 		local List = {}
 		
@@ -91,7 +91,7 @@ return function(p1, Entry) --[[ Line: 51 | Named "enumerate" ]]
 	local Meta = getmetatable(Proxy)
 	Meta.__index = strict(t, p1)
 	
-	function Meta.__tostring() --[[ Line: 100 ]]
+	function Meta.__tostring()
 		-- upvalues: p1 (copy)
 		return p1
 	end

@@ -18,7 +18,7 @@ BubbleChatList.validateProps = TModule.strictInterface({
 })
 BubbleChatList.defaultProps = { theme = "Light" }
 
-function BubbleChatList.getDerivedStateFromProps(p1, p2) --[[ Line: 32 ]]
+function BubbleChatList.getDerivedStateFromProps(p1, p2)
 	-- upvalues: CryoModule (copy)
 	local List = {}
 	
@@ -35,14 +35,14 @@ function BubbleChatList.getDerivedStateFromProps(p1, p2) --[[ Line: 32 ]]
 	return { bubbles = List }
 end
 
-function BubbleChatList.init(p3, p4) --[[ Line: 60 ]]
+function BubbleChatList.init(p3, p4)
 	-- upvalues: CryoModule (copy)
 	if (not p4.messageIds or #p4.messageIds == 0) and p4.onLastBubbleFadeOut then
 		p4.onLastBubbleFadeOut()
 	end
-	function p3.onBubbleFadeOut(MessageId) --[[ Line: 67 ]]
+	function p3.onBubbleFadeOut(MessageId)
 		-- upvalues: CryoModule (upval), p3 (copy)
-		local FilterResult = CryoModule.List.filter(p3.state.bubbles, function(p5): boolean --[[ Line: 68 ]]
+		local FilterResult = CryoModule.List.filter(p3.state.bubbles, function(p5): boolean
 			-- upvalues: MessageId (copy)
 			return p5.messageId ~= MessageId
 		end)
@@ -57,7 +57,7 @@ function BubbleChatList.init(p3, p4) --[[ Line: 60 ]]
 	end
 end
 
-function BubbleChatList.render(p3) --[[ Line: 83 ]]
+function BubbleChatList.render(p3)
 	-- upvalues: RoactModule (copy), ChatBubbleModule (copy)
 	local ChatSettings = p3.props.chatSettings
 	local config = {
@@ -91,6 +91,6 @@ function BubbleChatList.render(p3) --[[ Line: 83 ]]
 	}, config)
 end
 
-return RoactRoduxModule.connect(function(p4, p5) --[[ Line: 127 | Named "mapStateToProps" ]]
+return RoactRoduxModule.connect(function(p4, p5)
 	return { messageIds = p4.userMessages[p5.userId] or {} }
 end)(BubbleChatList)

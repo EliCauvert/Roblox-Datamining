@@ -25,7 +25,7 @@ local FocusRoot = FocusNavigationUtilsModule.FocusRoot
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local NewResult = ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
 
-function ChatTimeoutCustomDialog(p1) --[[ Line: 39 ]]
+function ChatTimeoutCustomDialog(p1)
 	-- upvalues: UseLayerCollectorFunction (copy), ReactModule (copy), UseTokensFunction (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), Constants (copy), UsePropertyFunction (copy), InExperienceInterventionAnalyticsModule (copy), PartialPageModal (copy), ScrollView (copy), ScrollBarVisibility (copy), ReactFocusNavigationModule (copy), NewResult (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), View (copy), Text (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy), InterventionContestFeedbackFooterModule (copy)
 	local UseLayerCollectorResult = UseLayerCollectorFunction()
 	local UseRefResult = ReactModule.useRef(DateTime.now().UnixTimestampMillis)
@@ -35,16 +35,16 @@ function ChatTimeoutCustomDialog(p1) --[[ Line: 39 ]]
 	local UseStyleResult = UseStyleFunction()
 	local UseLocalizationResult = UseLocalizationFunction(Constants.localizationKeys)
 	local AbsoluteSize = UsePropertyFunction(UseRefResult1, "AbsoluteSize")
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 53 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: InExperienceInterventionAnalyticsModule (upval), UseRefResult (copy), p1 (copy)
 		InExperienceInterventionAnalyticsModule.sendAnalyticsEvent(InExperienceInterventionAnalyticsModule.Constants.EventTypes.CtaClicked, InExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Timeout, UseRefResult.current, p1.eventId, p1.violatingChatLine, p1.duration)
 		p1.onDismiss()
 	end, { UseRefResult })
-	ReactModule.useEffect(function() --[[ Line: 65 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: InExperienceInterventionAnalyticsModule (upval), UseRefResult (copy), p1 (copy)
 		InExperienceInterventionAnalyticsModule.sendAnalyticsEvent(InExperienceInterventionAnalyticsModule.Constants.EventTypes.ModalAppeared, InExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Timeout, UseRefResult.current, p1.eventId, p1.violatingChatLine, p1.duration)
 	end, { UseRefResult })
-	ReactModule.useEffect(function() --[[ Line: 76 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: AbsoluteSize (copy), UseLayerCollectorResult (copy), Constants (upval), UseStateResult2 (copy)
 		UseStateResult2((math.min(UseLayerCollectorResult.absoluteSize.Y - Constants.UNIBAR_HEIGHT - Constants.DIALOG_HEADER_HEIGHT, if AbsoluteSize then AbsoluteSize.Y else 0)))
 	end, { UseLayerCollectorResult.absoluteSize.Y, AbsoluteSize })

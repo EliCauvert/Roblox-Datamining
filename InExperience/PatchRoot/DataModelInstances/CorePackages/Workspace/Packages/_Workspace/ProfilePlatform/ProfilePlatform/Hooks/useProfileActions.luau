@@ -42,7 +42,7 @@ local FFlagProfilePlatformEnableUserFollowModule = require(ProfilePlatform.Flags
 local Text = tostring(DateTime.now().UnixTimestampMillis)
 local config = { skipFetch = true }
 
-return function(ButtonSurface) --[[ Line: 67 ]]
+return function(ButtonSurface)
 	-- upvalues: UseLocalUserIdFunction (copy), UseDispatchFunction (copy), UseNavigationFunction (copy), UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseShortUrlFunction (copy), UseGetOrGenerateLinkUrlFunction (copy), UseEffectOnceFunction (copy), ReactModule (copy), Text (copy), TextKeysModule (copy), UseLocalizationFunction (copy), EnumsModule (copy), FFlagProfilePlatformAddTC (copy), FFlagProfilePlatformEnableEditAppearanceMenuModule (copy), FFlagProfilePlatformEditBackgroundMenuItemModule (copy), FFlagProfilePlatformEnableEditLookModule (copy), FFlagJoinabilityCTARefactor (copy), FFlagProfilePlatformNewProfileHeader (copy), FFlagEnablePlatformProfileContextualMenuOption (copy), FFlagProfilePlatformEnableCurrencyTransfer (copy), FFlagProfilePlatformEnableTradeItemsModule (copy), FFlagProfilePlatformEnableUserFollowModule (copy), FFlagProfilePlatformPresenceStoreMigrationModule (copy), UseGetPresenceByUserId (copy), config (copy), FFlagProfilePlatformPassPresenceToJoinUserInExperience (copy), UseSelectorFunction (copy), PresenceModule (copy), UseAboutSectionsModule (copy), FFlagProfileAboutDetailsUseSheet (copy), FFlagProfilePlatformRefreshActionsRespectPoliciesModule (copy), UseActionsComponentRequestModule (copy), UseJoinUserInExperienceFunction (copy), UseProfileShareLinkFunction (copy), Contexts (copy), ProfileActionsModule (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseDispatchResult = UseDispatchFunction()
@@ -52,7 +52,7 @@ return function(ButtonSurface) --[[ Line: 67 ]]
 	local UseProfileAnalyticsContextModuleResult = UseProfileAnalyticsContextModule()
 	local UseShortUrlResult = UseShortUrlFunction()
 	UseEffectOnceFunction(UseGetOrGenerateLinkUrlFunction(), not (UseShortUrlResult ~= nil))
-	local UseMemoResult = ReactModule.useMemo(function(): string --[[ Line: 81 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): string
 		-- upvalues: UseShortUrlResult (copy), Text (upval)
 		return string.format("%s&source=ProfileShare&stamp=%s", UseShortUrlResult or "", Text)
 	end, { UseShortUrlResult })
@@ -127,7 +127,7 @@ return function(ButtonSurface) --[[ Line: 67 ]]
 		userNotPassedCaptchaError = TextKeysModule.UserNotPassedCaptchaError,
 		tooManyRequestsError = TextKeysModule.TooManyRequestsError
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 179 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseProfileWrapperContextModuleResult (copy)
 		UseProfileWrapperContextModuleResult.navigateTo.previousView(true)
 	end, {
@@ -135,7 +135,7 @@ return function(ButtonSurface) --[[ Line: 67 ]]
 	})
 	local ProfileId = UseProfileWrapperContextModuleResult.profileId
 	local ProfileType = UseProfileWrapperContextModuleResult.profileType
-	local UseGetPresenceByUserIdResult = if FFlagProfilePlatformPresenceStoreMigrationModule then UseGetPresenceByUserId(ProfileId, config) elseif FFlagProfilePlatformPassPresenceToJoinUserInExperience then UseSelectorFunction(function(p1) --[[ Line: 191 ]]
+	local UseGetPresenceByUserIdResult = if FFlagProfilePlatformPresenceStoreMigrationModule then UseGetPresenceByUserId(ProfileId, config) elseif FFlagProfilePlatformPassPresenceToJoinUserInExperience then UseSelectorFunction(function(p1)
 		-- upvalues: PresenceModule (upval), ProfileId (copy)
 		return PresenceModule.Selectors.getUserPresenceByUserId(p1, ProfileId) or {
 			lastLocation = "",
@@ -181,7 +181,7 @@ return function(ButtonSurface) --[[ Line: 67 ]]
 		actionsComponentRequest = if FFlagProfilePlatformRefreshActionsRespectPoliciesModule then UseActionsComponentRequestModuleResult else nil
 	}
 	
-	return (ReactModule.useMemo(function() --[[ Line: 254 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: ProfileActionsModule (upval), config1 (copy)
 		local t = {}
 		

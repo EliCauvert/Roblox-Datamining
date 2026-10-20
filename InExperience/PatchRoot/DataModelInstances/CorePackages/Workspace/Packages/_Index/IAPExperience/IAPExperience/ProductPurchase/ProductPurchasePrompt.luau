@@ -65,7 +65,7 @@ ExtendResult.defaultProps = {
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function ExtendResult.init(p1) --[[ Line: 102 ]]
+function ExtendResult.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.contentRef = RoactModule.createRef()
 	p1.footerRef = RoactModule.createRef()
@@ -74,14 +74,14 @@ function ExtendResult.init(p1) --[[ Line: 102 ]]
 		footerSize = Vector2.new(0, 0)
 	}
 	
-	function p1.changeContentSize(Frame: Frame) --[[ Line: 110 ]]
+	function p1.changeContentSize(Frame: Frame)
 		-- upvalues: p1 (copy)
 		if p1.state.contentSize ~= Frame.AbsoluteSize then
 			p1:setState({ contentSize = Frame.AbsoluteSize })
 		end
 	end
 	
-	function p1.changeFooterSize(Frame: Frame) --[[ Line: 118 ]]
+	function p1.changeFooterSize(Frame: Frame)
 		-- upvalues: p1 (copy)
 		if p1.state.footerSize ~= Frame.AbsoluteSize then
 			p1:setState({ footerSize = Frame.AbsoluteSize })
@@ -89,7 +89,7 @@ function ExtendResult.init(p1) --[[ Line: 102 ]]
 	end
 end
 
-function ExtendResult.render(p1) --[[ Line: 127 ]]
+function ExtendResult.render(p1)
 	-- upvalues: ShouldShowNewUpsellModalExperimentModule (copy), DesktopUpsellExperimentModule (copy), RoactModule (copy), ProductPurchaseModalModule (copy), MultiTextLocalizerModule (copy)
 	local IAPExperiencePurchasePromptTextBuyItemQuestionIncludingWarning: string = if p1.props.isLuobu then "IAPExperience.PurchasePrompt.Text.BuyItemQuestionIncludingWarning" else "IAPExperience.PurchasePrompt.Text.BuyItemQuestion"
 	local IsGamePass = p1.props.isGamePass
@@ -127,14 +127,14 @@ function ExtendResult.render(p1) --[[ Line: 127 ]]
 			ButtonCancel = { key = "IAPExperience.PurchasePrompt.Action.Cancel" },
 			LoadingText = { key = "IAPExperience.PurchasePrompt.Text.Loading" }
 		},
-		render = function(p2) --[[ Line: 180 ]]
+		render = function(p2)
 			-- upvalues: p1 (copy)
 			return p1:renderAlert(p2)
 		end
 	})
 end
 
-function ExtendResult.renderAlert(p1, p2) --[[ Line: 186 ]]
+function ExtendResult.renderAlert(p1, p2)
 	-- upvalues: LoggerModule (copy), GetAppContextModule (copy), Default (copy), PurchaseModalV1ShownCounter (copy), WithStyleFunction (copy), Character (copy), RoactModule (copy), ModelViewportModule (copy), ImageSetLabel (copy), InteractiveAlert (copy), FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (copy), FitFrameVertical (copy), FitTextLabel (copy), ButtonType (copy), IconsCommonRobux (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local Props = p1.props
 	LoggerModule.debug({
@@ -151,7 +151,7 @@ function ExtendResult.renderAlert(p1, p2) --[[ Line: 186 ]]
 		appContext = GetAppContextModule()
 	})
 	
-	return WithStyleFunction(function(p3) --[[ Line: 203 ]]
+	return WithStyleFunction(function(p3)
 		-- upvalues: p1 (copy), p2 (copy), Character (upval), RoactModule (upval), ModelViewportModule (upval), ImageSetLabel (upval), InteractiveAlert (upval), FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (upval), FitFrameVertical (upval), FitTextLabel (upval), ButtonType (upval), IconsCommonRobux (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 		local Theme = p3.Theme
 		local _Font = p3.Font
@@ -179,7 +179,7 @@ function ExtendResult.renderAlert(p1, p2) --[[ Line: 186 ]]
 			position = p1.props.position,
 			anchorPoint = p1.props.anchorPoint,
 			title = p2.BuyItemTitle,
-			middleContent = function() --[[ Line: 247 ]]
+			middleContent = function()
 				-- upvalues: RoactModule (upval), FitFrameVertical (upval), p1 (upval), Element (copy), FitTextLabel (upval), _Font (copy), p2 (upval), Theme (copy)
 				return RoactModule.createElement(FitFrameVertical, {
 					BackgroundTransparency = 1,
@@ -233,7 +233,7 @@ function ExtendResult.renderAlert(p1, p2) --[[ Line: 186 ]]
 					}
 				}
 			},
-			footerContent = function() --[[ Line: 305 ]]
+			footerContent = function()
 				-- upvalues: p1 (upval), RoactModule (upval), FitFrameVertical (upval), ScaledX (copy), FoundationFontFaceMigration (upval), _Font (copy), NormalizeFontFaceFunction (upval), p3 (copy), Formatted (copy), Theme (copy), FitTextLabel (upval), p2 (upval)
 				return if p1.props.currentBalanceValid then if p1.props.testPurchase then RoactModule.createElement(FitFrameVertical, {
 					BackgroundTransparency = 1,
@@ -285,7 +285,7 @@ function ExtendResult.renderAlert(p1, p2) --[[ Line: 186 ]]
 end
 
 if FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then
-	ExtendResult = function(p1) --[[ Line: 369 ]]
+	ExtendResult = function(p1)
 		-- upvalues: UseDefaultFocusBehavior (copy), RoactModule (copy), ExtendResult (copy), CryoModule (copy)
 		local DefaultFocusRef, ContainerRef = UseDefaultFocusBehavior()
 		

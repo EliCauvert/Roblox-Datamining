@@ -13,7 +13,7 @@ local _ = require(OnPlatformSurveys.Types.InlineSurveyTypes)
 local t = {}
 local t1 = {}
 
-return ReactModule.memo(function(p1) --[[ Line: 33 | Named "MultipleChoiceQuestion" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: InlineQuestionTypeModule (copy), t1 (copy), ReactModule (copy), t (copy), List (copy), FFlagInlineSurveyChoiceTextEntry (copy), InlineSurveyHelpersModule (copy), ListItemInputType (copy), TextInput (copy), View (copy)
 	local Question = p1.question
 	local Answer = p1.answer
@@ -21,7 +21,7 @@ return ReactModule.memo(function(p1) --[[ Line: 33 | Named "MultipleChoiceQuesti
 	local IsIsDisabled = p1.isDisabled == true
 	local IsTypeMatch = Question.type == InlineQuestionTypeModule.MultipleChoiceMulti
 	local Choices = Question.choices or t1
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 41 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Answer (copy), t (upval)
 		local t2 = {}
 		local ChoiceIds = Answer.choiceIds or t
@@ -41,7 +41,7 @@ return ReactModule.memo(function(p1) --[[ Line: 33 | Named "MultipleChoiceQuesti
 			LayoutOrder = 1,
 			hasDivider = { hasDivider = true, isInset = false },
 			isContained = { isContained = false, hasMargin = false }
-		}, (ReactModule.useMemo(function() --[[ Line: 53 ]]
+		}, (ReactModule.useMemo(function()
 			-- upvalues: Choices (copy), ReactModule (upval), List (upval), FFlagInlineSurveyChoiceTextEntry (upval), IsIsDisabled (copy), OnAnswerChangedFunction (copy), InlineSurveyHelpersModule (upval), Answer (copy), IsTypeMatch (copy), ListItemInputType (upval), UseMemoResult (copy), TextInput (upval), UseRefResult (copy)
 			local Elements = {}
 			
@@ -51,7 +51,7 @@ return ReactModule.memo(function(p1) --[[ Line: 33 | Named "MultipleChoiceQuesti
 					title = choice.label,
 					LayoutOrder = if FFlagInlineSurveyChoiceTextEntry then i * 2 else i,
 					onActivated = {
-						onActivated = function() --[[ Line: 63 ]]
+						onActivated = function()
 							-- upvalues: IsIsDisabled (upval), OnAnswerChangedFunction (upval), InlineSurveyHelpersModule (upval), Answer (upval), Id (copy), IsTypeMatch (upval), FFlagInlineSurveyChoiceTextEntry (upval)
 							if not IsIsDisabled then
 								OnAnswerChangedFunction({
@@ -74,7 +74,7 @@ return ReactModule.memo(function(p1) --[[ Line: 33 | Named "MultipleChoiceQuesti
 						width = UDim.new(1, 0),
 						isDisabled = IsIsDisabled,
 						LayoutOrder = i * 2 + 1,
-						onChanged = function(p2) --[[ Line: 85 ]]
+						onChanged = function(p2)
 							-- upvalues: IsIsDisabled (upval), UseRefResult (upval), Id (copy), OnAnswerChangedFunction (upval)
 							if not IsIsDisabled then
 								local Current = UseRefResult.current

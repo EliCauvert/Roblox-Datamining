@@ -14,7 +14,7 @@ return {
 	},
 	requiredData = { ValidationEnumsModule.SharedDataMember.rootInstance },
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 22 ]]
+	run = function(p1, p2)
 		-- upvalues: ConstantsModule (copy), ErrorSourceStringsModule (copy)
 		local RootInstance = p2.rootInstance
 		

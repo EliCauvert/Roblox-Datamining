@@ -9,7 +9,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 	eventContext = TModule.string
 })
 
-return function(p1, p2, p3) --[[ Line: 20 ]]
+return function(p1, p2, p3)
 	-- upvalues: GetActionTelemetryFieldValueFunction (copy), StrictInterfaceResult (copy), SduiErrorType (copy), SendRequestRefundClickEventFunction (copy)
 	local PlaceId = GetActionTelemetryFieldValueFunction(p1, p2, "placeId")
 	local EventContext = GetActionTelemetryFieldValueFunction(p1, p2, "eventContext")

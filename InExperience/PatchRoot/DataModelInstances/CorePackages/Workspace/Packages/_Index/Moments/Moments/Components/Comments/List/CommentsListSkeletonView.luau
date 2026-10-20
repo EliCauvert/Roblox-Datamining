@@ -5,7 +5,7 @@ local CommentRowSkeletonViewModule = require(script.Parent.Rows.CommentRowSkelet
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function getRowShapes(p1) --[[ Line: 25 ]]
+local function getRowShapes(p1)
 	local Size = p1.Size
 	
 	return {
@@ -52,7 +52,7 @@ local function getRowShapes(p1) --[[ Line: 25 ]]
 	}
 end
 
-return function(Frame) --[[ Line: 39 | Named "CommentsListSkeletonView" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), getRowShapes (copy), ReactModule (copy), CommentRowSkeletonViewModule (copy), View (copy)
 	local Elements = {}
 	

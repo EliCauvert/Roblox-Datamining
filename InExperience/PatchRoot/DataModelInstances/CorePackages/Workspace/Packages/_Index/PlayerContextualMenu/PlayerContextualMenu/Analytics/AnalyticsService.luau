@@ -5,11 +5,11 @@ local GetPlatformTargetFunction = AnalyticsModule.getPlatformTarget
 return {
 	Diag = AnalyticsModule.Analytics.new((game:GetService("RbxAnalyticsService"))).Diag,
 	EventStream = {
-		setRBXEventStream = function(_, EventContext, EventName, p1) --[[ Line: 14 ]]
+		setRBXEventStream = function(_, EventContext, EventName, p1)
 			-- upvalues: EventIngestService (copy), GetPlatformTargetFunction (copy)
 			EventIngestService:SetRBXEventStream(GetPlatformTargetFunction(), EventContext, EventName, p1 or {})
 		end,
-		sendEventDeferred = function(_, EventContext, EventName, p1) --[[ Line: 19 ]]
+		sendEventDeferred = function(_, EventContext, EventName, p1)
 			-- upvalues: EventIngestService (copy), GetPlatformTargetFunction (copy)
 			EventIngestService:SendEventDeferred(GetPlatformTargetFunction(), EventContext, EventName, p1 or {})
 		end

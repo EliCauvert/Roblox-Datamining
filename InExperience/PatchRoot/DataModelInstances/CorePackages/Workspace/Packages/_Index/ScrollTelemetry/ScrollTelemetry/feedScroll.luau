@@ -27,7 +27,7 @@ local StrictInterfaceResult1 = TModule.strictInterface({
 	gameSetTargetId = TModule.optional(TModule.number)
 })
 
-return function(p1, p2, ScrollingDirection, p3) --[[ Line: 33 ]]
+return function(p1, p2, ScrollingDirection, p3)
 	-- upvalues: ArgCheckModule (copy), StrictInterfaceResult (copy), StrictInterfaceResult1 (copy), MutedErrorFunction (copy), CryoModule (copy)
 	ArgCheckModule.isType(p2, "string", "eventContext")
 	local Direction = "unknown"

@@ -8,7 +8,7 @@ local _ = require(Foundation.Enums.Breakpoint)
 local _ = require(Foundation.Enums.BreakpointShortName)
 local UseResponsiveModule = require(Foundation.Providers.Responsive.useResponsive)
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 19 | Named "GridDebugStyleSheet" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 	-- upvalues: UseResponsiveModule (copy), UseStyleSheetFunction (copy), ReactModule (copy), UseForwardRefFunction (copy), StyleRuleModule (copy)
 	local UseResponsiveModuleResult = UseResponsiveModule()
 	local UseStyleSheetResult = UseStyleSheetFunction()
@@ -18,7 +18,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 19 | 
 	local Grid = UseResponsiveModuleResult.config.grid
 	local OrderEntry = Breakpoint.order[#Breakpoint.order]
 	local Breakpoint1 = p1.breakpoint or OrderEntry
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 31 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Breakpoint (copy), Breakpoint1 (copy), Grid (copy), ReactModule (upval), StyleRuleModule (upval)
 		local ShortName = Breakpoint.shortNames[Breakpoint1]
 		local Column: number = Grid.columns[Breakpoint1]
@@ -34,7 +34,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 19 | 
 		end
 		return Elements
 	end, { Breakpoint1, Breakpoint, Grid })
-	ReactModule.useLayoutEffect(function() --[[ Line: 54 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseStateResult (copy), UseStyleSheetResult (copy)
 		if UseStateResult then
 			UseStateResult:SetDerives({ UseStyleSheetResult })

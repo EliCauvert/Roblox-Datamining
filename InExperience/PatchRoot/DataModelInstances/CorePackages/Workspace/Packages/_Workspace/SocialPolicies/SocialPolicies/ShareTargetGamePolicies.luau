@@ -1,6 +1,6 @@
-﻿return function(p1) --[[ Line: 2 | Named "ShareTargetGamePolicies" ]]
+﻿return function(p1)
 	return {
-		shouldShowCreatorName = function() --[[ Line: 4 ]]
+		shouldShowCreatorName = function()
 			-- upvalues: p1 (copy)
 			local ShowShareTargetGameCreator = p1.ShowShareTargetGameCreator
 			

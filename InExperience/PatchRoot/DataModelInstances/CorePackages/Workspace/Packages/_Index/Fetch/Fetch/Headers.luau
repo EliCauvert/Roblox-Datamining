@@ -2,7 +2,7 @@
 local Module = {}
 Module.__index = Module
 
-function Module.new(List) --[[ Line: 36 ]]
+function Module.new(List)
 	-- upvalues: Array (copy), Module (copy)
 	local t = {}
 	local HeaderList = nil
@@ -23,14 +23,14 @@ function Module.new(List) --[[ Line: 36 ]]
 	return t
 end
 
-function Module:append(p1, p2) --[[ Line: 56 ]]
+function Module:append(p1, p2)
 	if self.guard == "immutable" then
 		error("TypeError: tried to append header to immutable Headers object")
 	end
 	self.headerList[p1] = p2
 end
 
-function Module:delete(p1) --[[ Line: 64 ]]
+function Module:delete(p1)
 	if self.guard == "immutable" then
 		error("TypeError: tried to delete key on immutable Headers object")
 	end
@@ -41,22 +41,22 @@ function Module:delete(p1) --[[ Line: 64 ]]
 	end
 end
 
-function Module:get(p1) --[[ Line: 76 ]]
+function Module:get(p1)
 	return self.headerList[p1]
 end
 
-function Module:has(p1): boolean --[[ Line: 80 ]]
+function Module:has(p1): boolean
 	return self.headerList[p1] ~= nil
 end
 
-function Module:set(p1, p2) --[[ Line: 84 ]]
+function Module:set(p1, p2)
 	if self.guard == "immutable" then
 		error("TypeError: tried to set key on immutable Headers object")
 	end
 	self.headerList[p1] = p2
 end
 
-function Module:__iter() --[[ Line: 91 ]]
+function Module:__iter()
 	return next, self.headerList
 end
 

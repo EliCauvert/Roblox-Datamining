@@ -1,11 +1,11 @@
 ﻿local Analytics = script:FindFirstAncestor("Analytics")
 local UserInputService = game:GetService("UserInputService")
 local GetPlatformTargetModule = nil
-GetPlatformTargetModule = if require(Analytics.Parent.SharedFlags).GetFFlagShareGetPlatformTargetImpl() then require(Analytics.getPlatformTarget) else function(): string --[[ Line: 19 | Named "getPlatformTarget" ]]
+GetPlatformTargetModule = if require(Analytics.Parent.SharedFlags).GetFFlagShareGetPlatformTargetImpl() then require(Analytics.getPlatformTarget) else function(): string
 	-- upvalues: UserInputService (copy)
 	local v1 = "unknownLua"
 	local None = Enum.Platform.None
-	pcall(function() --[[ Line: 25 ]]
+	pcall(function()
 		-- upvalues: None (ref), UserInputService (upval)
 		None = UserInputService:GetPlatform()
 	end)
@@ -18,7 +18,7 @@ end
 local EventIngestModule = {}
 EventIngestModule.__index = EventIngestModule
 
-function EventIngestModule.new(_eventIngest) --[[ Line: 61 ]]
+function EventIngestModule.new(_eventIngest)
 	-- upvalues: EventIngestModule (copy)
 	local ValueType = type(_eventIngest)
 	assert(ValueType == "table" or ValueType == "userdata", "Unexpected value for eventIngestService")
@@ -28,7 +28,7 @@ function EventIngestModule.new(_eventIngest) --[[ Line: 61 ]]
 	return config
 end
 
-function EventIngestModule:setRBXEvent(EventContext, EventName, p1) --[[ Line: 76 ]]
+function EventIngestModule:setRBXEvent(EventContext, EventName, p1)
 	-- upvalues: GetPlatformTargetModule (ref)
 	local PlatformTargetModule = GetPlatformTargetModule()
 	local P4 = p1 or {}
@@ -38,7 +38,7 @@ function EventIngestModule:setRBXEvent(EventContext, EventName, p1) --[[ Line: 7
 	self._eventIngest:SetRBXEvent(PlatformTargetModule, EventContext, EventName, P4)
 end
 
-function EventIngestModule:setRBXEventStream(EventContext, EventName, p1) --[[ Line: 90 ]]
+function EventIngestModule:setRBXEventStream(EventContext, EventName, p1)
 	-- upvalues: GetPlatformTargetModule (ref)
 	local PlatformTargetModule = GetPlatformTargetModule()
 	local P8 = p1 or {}
@@ -48,7 +48,7 @@ function EventIngestModule:setRBXEventStream(EventContext, EventName, p1) --[[ L
 	self._eventIngest:SetRBXEventStream(PlatformTargetModule, EventContext, EventName, P8)
 end
 
-function EventIngestModule:sendEventDeferred(EventContext, EventName, p1) --[[ Line: 104 ]]
+function EventIngestModule:sendEventDeferred(EventContext, EventName, p1)
 	-- upvalues: GetPlatformTargetModule (ref)
 	local PlatformTargetModule = GetPlatformTargetModule()
 	local P12 = p1 or {}
@@ -58,7 +58,7 @@ function EventIngestModule:sendEventDeferred(EventContext, EventName, p1) --[[ L
 	self._eventIngest:SendEventDeferred(PlatformTargetModule, EventContext, EventName, P12)
 end
 
-function EventIngestModule:sendEventImmediately(EventContext, EventName, p1) --[[ Line: 119 ]]
+function EventIngestModule:sendEventImmediately(EventContext, EventName, p1)
 	-- upvalues: GetPlatformTargetModule (ref)
 	local PlatformTargetModule = GetPlatformTargetModule()
 	local P16 = p1 or {}

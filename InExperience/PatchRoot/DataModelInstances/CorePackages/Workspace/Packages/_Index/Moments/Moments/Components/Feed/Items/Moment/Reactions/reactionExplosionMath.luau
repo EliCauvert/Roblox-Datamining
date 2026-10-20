@@ -1,28 +1,28 @@
-﻿local function _(p1: number, p2: number, p3: number): number --[[ Line: 52 | Named "clamp" ]]
+﻿local function _(p1: number, p2: number, p3: number): number
 	return (math.max(p2, (math.min(p3, p1))))
 end
 
-local _ = function(p1, p2, p3) --[[ Line: 56 | Named "lerp" ]]
+local _ = function(p1, p2, p3)
 	return p1 + (p2 - p1) * p3
 end
 
-local _ = function(p1: number): number --[[ Line: 60 | Named "easeOutQuint" ]]
+local _ = function(p1: number): number
 	return 1 - (1 - p1) ^ 5
 end
 
-local _ = function(p1: number): number --[[ Line: 64 | Named "easeOutQuad" ]]
+local _ = function(p1: number): number
 	return 1 - (1 - p1) ^ 2
 end
 
-local _ = function(p1) --[[ Line: 68 | Named "easeInQuad" ]]
+local _ = function(p1)
 	return p1 * p1
 end
 
-local _ = function(p1: number): number --[[ Line: 73 | Named "popScale" ]]
+local _ = function(p1: number): number
 	return if p1 <= 0 then 0 elseif p1 < 0.15 then (1 - (1 - p1 / 0.15) ^ 2) * 1.15 + 0 elseif p1 < 0.35 then (p1 - 0.15) / 0.19999999999999998 * -0.1499999999999999 + 1.15 else 1
 end
 
-local _ = function(p1: number): number --[[ Line: 85 | Named "fadeTransparency" ]]
+local _ = function(p1: number): number
 	if p1 <= 0.55 then
 		return 0
 	else
@@ -50,7 +50,7 @@ return {
 	MAX_PARTICLES = 16,
 	FADE_START = 0.55,
 	OVERSHOOT = 1.15,
-	solveParticle = function(p1: number, p2) --[[ Line: 92 ]]
+	solveParticle = function(p1: number, p2)
 		local Largest = math.max(0, (math.min(1, p1)))
 		local ScaledReach = p2.reach * (1 - (1 - Largest) ^ 5)
 		local ScaledSine = math.sin(p2.angle) * ScaledReach

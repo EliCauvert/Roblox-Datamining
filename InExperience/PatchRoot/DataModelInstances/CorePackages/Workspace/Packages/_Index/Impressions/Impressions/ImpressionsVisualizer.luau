@@ -25,7 +25,7 @@ local config1 = { BackgroundTransparency = 0.65, BorderSizePixel = 8 }
 local ImpressionsVisualizerModule = {}
 ImpressionsVisualizerModule.__index = ImpressionsVisualizerModule
 
-local function getTaggedInstances(Tag) --[[ Line: 82 ]]
+local function getTaggedInstances(Tag)
 	-- upvalues: CollectionService (copy), ConstantsModule (copy)
 	local Guis = {}
 	
@@ -39,14 +39,14 @@ local function getTaggedInstances(Tag) --[[ Line: 82 ]]
 	return Guis
 end
 
-function ImpressionsVisualizerModule.new(ImpressionsTag, p1) --[[ Line: 95 ]]
+function ImpressionsVisualizerModule.new(ImpressionsTag, p1)
 	-- upvalues: list (copy), Count (ref), ImpressionsVisualizerModule (copy), DebugEnableImpressionsVisualizer (copy), RunService (copy)
 	local config = {
 		impressionsTag = ImpressionsTag,
 		highlightedInstances = {},
 		originalInstances = {},
 		highlightColor = list[Count],
-		customKeyMapper = p1 or function(p2) --[[ Line: 101 ]]
+		customKeyMapper = p1 or function(p2)
 			return p2
 		end
 	}
@@ -60,7 +60,7 @@ function ImpressionsVisualizerModule.new(ImpressionsTag, p1) --[[ Line: 95 ]]
 		end
 		if ImpressionsTag then
 			local Connection = nil
-			Connection = RunService.RenderStepped:Connect(function(DeltaTime) --[[ Line: 115 ]]
+			Connection = RunService.RenderStepped:Connect(function(DeltaTime)
 				-- upvalues: config (copy), Connection (ref)
 				if config then
 					config:_step(DeltaTime)
@@ -77,13 +77,13 @@ function ImpressionsVisualizerModule.new(ImpressionsTag, p1) --[[ Line: 95 ]]
 	return config
 end
 
-function ImpressionsVisualizerModule:destroy() --[[ Line: 131 ]]
+function ImpressionsVisualizerModule:destroy()
 	if self.renderConnection then
 		self.renderConnection:Disconnect()
 	end
 end
 
-function ImpressionsVisualizerModule:_startHighlightState(p1, HighlightState, Duration, List, DoLerp) --[[ Line: 137 ]]
+function ImpressionsVisualizerModule:_startHighlightState(p1, HighlightState, Duration, List, DoLerp)
 	local HighlightedInstance = self.highlightedInstances[p1]
 	
 	if HighlightedInstance == nil then
@@ -117,7 +117,7 @@ function ImpressionsVisualizerModule:_startHighlightState(p1, HighlightState, Du
 	self.highlightedInstances[p1] = HighlightedInstance
 end
 
-function ImpressionsVisualizerModule:_step(p2) --[[ Line: 172 ]]
+function ImpressionsVisualizerModule:_step(p2)
 	-- upvalues: config1 (copy), getTaggedInstances (copy), config (copy)
 	assert(self.impressionsTag, "impressionsTag is nil")
 	
@@ -185,7 +185,7 @@ function ImpressionsVisualizerModule:_step(p2) --[[ Line: 172 ]]
 	end
 end
 
-function ImpressionsVisualizerModule:_highlightImpression(CustomKeyMapperResult) --[[ Line: 260 ]]
+function ImpressionsVisualizerModule:_highlightImpression(CustomKeyMapperResult)
 	-- upvalues: CryoModule (copy), config (copy)
 	if self.highlightedInstances[CustomKeyMapperResult] == nil or self.highlightedInstances[CustomKeyMapperResult].highlightState == "None" then
 		self:_startHighlightState(CustomKeyMapperResult, "Highlight", 1, CryoModule.Dictionary.join(config, {
@@ -197,11 +197,11 @@ function ImpressionsVisualizerModule:_highlightImpression(CustomKeyMapperResult)
 	end
 end
 
-function ImpressionsVisualizerModule:_clearImpression(CustomKeyMapperResult) --[[ Line: 275 ]]
+function ImpressionsVisualizerModule:_clearImpression(CustomKeyMapperResult)
 	self.highlightedInstances[CustomKeyMapperResult] = nil
 end
 
-function ImpressionsVisualizerModule:onSendImpressions(List) --[[ Line: 279 ]]
+function ImpressionsVisualizerModule:onSendImpressions(List)
 	-- upvalues: DebugEnableImpressionsVisualizer (copy)
 	if not DebugEnableImpressionsVisualizer then return end
 	if not self.impressionsTag or List == nil or #List <= 0 then return end
@@ -210,7 +210,7 @@ function ImpressionsVisualizerModule:onSendImpressions(List) --[[ Line: 279 ]]
 	end
 end
 
-function ImpressionsVisualizerModule:onClearImpressions(List) --[[ Line: 294 ]]
+function ImpressionsVisualizerModule:onClearImpressions(List)
 	-- upvalues: DebugEnableImpressionsVisualizer (copy)
 	if not DebugEnableImpressionsVisualizer then return end
 	if not self.impressionsTag or List == nil or #List <= 0 then return end
@@ -219,7 +219,7 @@ function ImpressionsVisualizerModule:onClearImpressions(List) --[[ Line: 294 ]]
 	end
 end
 
-function ImpressionsVisualizerModule:onClearAllImpressions() --[[ Line: 309 ]]
+function ImpressionsVisualizerModule:onClearAllImpressions()
 	-- upvalues: DebugEnableImpressionsVisualizer (copy)
 	if not DebugEnableImpressionsVisualizer then return end
 	if not self.impressionsTag then return end
@@ -232,13 +232,13 @@ function ImpressionsVisualizerModule:onClearAllImpressions() --[[ Line: 309 ]]
 	self.originalInstances = {}
 end
 
-function ImpressionsVisualizerModule:setCustomKeyMapper(p3) --[[ Line: 329 ]]
-	self.customKeyMapper = p3 or function(p4) --[[ Line: 330 ]]
+function ImpressionsVisualizerModule:setCustomKeyMapper(p3)
+	self.customKeyMapper = p3 or function(p4)
 		return p4
 	end
 end
 
-function ImpressionsVisualizerModule:setImpressionsTag(ImpressionsTag) --[[ Line: 335 ]]
+function ImpressionsVisualizerModule:setImpressionsTag(ImpressionsTag)
 	self.impressionsTag = ImpressionsTag
 end
 

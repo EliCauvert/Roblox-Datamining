@@ -2,7 +2,7 @@
 local _ = require(BuildExperience.Parent.DataHydration.ExperienceAnalytics)
 local _ = require(BuildExperience.Analytics.Goals.GoalTypes)
 
-return function(p1) --[[ Line: 24 | Named "useGoalsSectionViewModel" ]]
+return function(p1)
 	local List = {}
 	local v1 = false
 	
@@ -12,7 +12,7 @@ return function(p1) --[[ Line: 24 | Named "useGoalsSectionViewModel" ]]
 		local OnGoalSelectedFunction = p1.onGoalSelected
 		
 		if OnGoalSelectedFunction ~= nil and goal.charts ~= nil and #goal.charts > 0 then
-			OnActivated = function() --[[ Line: 33 ]]
+			OnActivated = function()
 				-- upvalues: OnGoalSelectedFunction (copy), goal (copy)
 				OnGoalSelectedFunction(goal)
 			end

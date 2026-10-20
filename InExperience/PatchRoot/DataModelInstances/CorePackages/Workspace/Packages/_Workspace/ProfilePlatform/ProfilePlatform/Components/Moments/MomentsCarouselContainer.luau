@@ -22,7 +22,7 @@ local FFlagProfileMomentsFeedRootRoute = SharedFlagsModule.FFlagProfileMomentsFe
 local FFlagProfileMomentsLoadFailureAnalyticsModule = require(ProfilePlatform.Flags.FFlagProfileMomentsLoadFailureAnalytics)
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p1) --[[ Line: 42 | Named "MomentsCarouselContainer" ]]
+return function(p1)
 	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseNavigationFunction (copy), FFlagProfileMomentsFeedRootRoute (copy), UseDispatchFunction (copy), UseUserMomentsModule (copy), FFlagProfileMomentsLoadFailureAnalyticsModule (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), EventNamesModule (copy), EnumsModule (copy), MakeProfileTileFieldsModule (copy), FFlagMomentsOptimisticProfilePending (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), MomentsCarouselModule (copy)
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	local UseProfileAnalyticsContextModuleResult = UseProfileAnalyticsContextModule()
@@ -33,14 +33,14 @@ return function(p1) --[[ Line: 42 | Named "MomentsCarouselContainer" ]]
 	local Moments = UseUserMomentsModuleResult.moments
 	
 	if FFlagProfileMomentsLoadFailureAnalyticsModule then
-		ReactModule.useEffect(function() --[[ Line: 53 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseUserMomentsModuleResult (copy), ProfileId (copy), FireAnalyticsEventFunction (upval), EventNames (upval)
 			if UseUserMomentsModuleResult.hasFailed and ProfileId ~= nil then
 				FireAnalyticsEventFunction(EventNames.ProfileLoadFailed, { userId = ProfileId })
 			end
 		end, { UseUserMomentsModuleResult.hasFailed, ProfileId })
 	end
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 62 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), UseNavigationResult (copy), EnumsModule (upval), ProfileId (copy)
 		UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.MomentsSeeAll)
 		UseNavigationResult.navigate(EnumsModule.Screens.MomentsAll, { extraProps = { profileId = ProfileId } })
@@ -49,7 +49,7 @@ return function(p1) --[[ Line: 42 | Named "MomentsCarouselContainer" ]]
 		UseNavigationResult,
 		ProfileId
 	})
-	local UseResult1 = ReactModule.useCallback(function(InitialIndex) --[[ Line: 71 ]]
+	local UseResult1 = ReactModule.useCallback(function(InitialIndex)
 		-- upvalues: Moments (copy), ProfileId (copy), MakeProfileTileFieldsModule (upval), FireAnalyticsEventFunction (upval), EventNames (upval), FFlagMomentsOptimisticProfilePending (upval), FFlagProfileMomentsFeedRootRoute (upval), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval), UseNavigationResult (copy), EnumsModule (upval)
 		local Moment = Moments[InitialIndex]
 		
@@ -90,7 +90,7 @@ return function(p1) --[[ Line: 42 | Named "MomentsCarouselContainer" ]]
 		ProfileId,
 		Moments
 	})
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 106 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: Moments (copy), ProfileId (copy), MakeProfileTileFieldsModule (upval), FireAnalyticsEventFunction (upval), EventNames (upval)
 		local Moment = Moments[p2]
 		

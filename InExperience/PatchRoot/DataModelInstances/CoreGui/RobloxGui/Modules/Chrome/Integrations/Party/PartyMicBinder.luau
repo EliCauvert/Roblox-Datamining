@@ -8,15 +8,15 @@ local ConstantsModule = require(Chrome.Integrations.Party.Constants)
 local UseIsVoiceFocusedFunction = CrossExperienceVoiceModule.Hooks.useIsVoiceFocused
 local UseIsVoiceConnectedFunction = CrossExperienceVoiceModule.Hooks.useIsVoiceConnected
 
-return function() --[[ Line: 15 | Named "PartyMicBinder" ]]
+return function()
 	-- upvalues: UseIsVoiceFocusedFunction (copy), UseIsVoiceConnectedFunction (copy), ReactModule (copy), ServiceModule (copy), ConstantsModule (copy), AudioFocusManagementEngineFeature (copy)
 	local UseIsVoiceFocusedResult = UseIsVoiceFocusedFunction()
 	local UseIsVoiceConnectedResult = UseIsVoiceConnectedFunction()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 18 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ServiceModule (upval), ConstantsModule (upval)
 		return if ServiceModule then ServiceModule:integrations()[ConstantsModule.TOGGLE_MIC_INTEGRATION_ID] else nil
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 25 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy), UseIsVoiceConnectedResult (copy), UseIsVoiceFocusedResult (copy), AudioFocusManagementEngineFeature (upval)
 		if UseMemoResult then
 			if UseIsVoiceConnectedResult and (UseIsVoiceFocusedResult or not AudioFocusManagementEngineFeature) then

@@ -4,10 +4,10 @@ local ReactModule = require(Parent1.React)
 local View = require(Parent1.Foundation).View
 local UseZoomControllerModule = require(Parent.Hooks.useZoomController)
 
-return function(p1) --[[ Line: 17 ]]
+return function(p1)
 	-- upvalues: UseZoomControllerModule (copy), ReactModule (copy), View (copy)
 	local UseZoomControllerModuleResult, UseZoomControllerModuleResult2 = UseZoomControllerModule(p1.active == nil or p1.active)
-	ReactModule.useEffect(function() --[[ Line: 22 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseZoomControllerModuleResult (copy)
 		if p1.onZoomStatusChanged then
 			p1.onZoomStatusChanged(UseZoomControllerModuleResult)

@@ -14,13 +14,13 @@ local v1 = require(RobloxGui.Modules.VoiceChat.Logger)(script.Name)
 local VOICESTATE = nil
 VOICESTATE = if require(RobloxGui.Modules.Flags.FFlagEnableVoiceChatStorybookFix)() then Constants.VOICE_STATE else Default.VOICE_STATE
 
-local function _(p1): string --[[ Line: 28 | Named "shorten" ]]
+local function _(p1): string
 	return "..." .. string.sub(tostring(p1), -4)
 end
 
 local Config = nil
 
-local function setVoiceEnabled(VoiceChatState, p1) --[[ Line: 34 ]]
+local function setVoiceEnabled(VoiceChatState, p1)
 	-- upvalues: Players (copy), VoiceEnabledChangedModule (copy), Config (ref), v1 (copy), VoiceStateChangedModule (copy), VOICESTATE (ref), GetFFlagLocalMutedNilFix (copy), Default (copy)
 	local Text = tostring(Players.LocalPlayer.UserId)
 	p1:dispatch(VoiceEnabledChangedModule(VoiceChatState ~= Enum.VoiceChatState.Ended))
@@ -45,7 +45,7 @@ local function setVoiceEnabled(VoiceChatState, p1) --[[ Line: 34 ]]
 	end
 end
 
-local function v18(p2) --[[ Line: 64 ]]
+local function v18(p2)
 	-- upvalues: Config (ref), VOICESTATE (ref), Default (copy), v1 (copy), Players (copy), ParticipantAddedModule (copy), PlayerRemovedModule (copy), ParticipantRemovedModule (copy), VoiceStateChangedModule (copy), BlockingUtilityModule (copy), setVoiceEnabled (copy)
 	Config = {
 		[Enum.VoiceChatState.Idle] = VOICESTATE.HIDDEN,
@@ -69,24 +69,24 @@ local function v18(p2) --[[ Line: 64 ]]
 		v1:trace("Adding existing player {}", "..." .. string.sub(tostring(player.UserId), -4))
 		p2:dispatch(ParticipantAddedModule((tostring(player.UserId))))
 	end
-	Players.PlayerAdded:Connect(function(Player) --[[ Line: 88 ]]
+	Players.PlayerAdded:Connect(function(Player)
 		-- upvalues: v1 (upval), p2 (copy), ParticipantAddedModule (upval)
 		v1:trace("Adding joining player {}", "..." .. string.sub(tostring(Player.UserId), -4))
 		p2:dispatch(ParticipantAddedModule((tostring(Player.userId))))
 	end)
-	Players.PlayerRemoving:Connect(function(Player) --[[ Line: 93 ]]
+	Players.PlayerRemoving:Connect(function(Player)
 		-- upvalues: v1 (upval), p2 (copy), PlayerRemovedModule (upval), ParticipantRemovedModule (upval)
 		v1:trace("Removing player {}", "..." .. string.sub(tostring(Player.UserId), -4))
 		p2:dispatch(PlayerRemovedModule((tostring(Player.userId))))
 		p2:dispatch(ParticipantRemovedModule((tostring(Player.userId))))
 	end)
 	p2:dispatch(VoiceStateChangedModule(UserId, VOICESTATE.HIDDEN))
-	Default.muteChanged.Event:Connect(function(p3) --[[ Line: 101 ]]
+	Default.muteChanged.Event:Connect(function(p3)
 		-- upvalues: v1 (upval), VOICESTATE (upval), p2 (copy), VoiceStateChangedModule (upval), UserId (copy)
 		v1:debug("Mute changed to {}", p3)
 		p2:dispatch(VoiceStateChangedModule(UserId, p3 and VOICESTATE.MUTED or VOICESTATE.INACTIVE))
 	end)
-	Default.participantsUpdate.Event:Connect(function(List) --[[ Line: 107 ]]
+	Default.participantsUpdate.Event:Connect(function(List)
 		-- upvalues: VOICESTATE (upval), v1 (upval), p2 (copy), VoiceStateChangedModule (upval)
 		for i, value in pairs(List) do
 			local ERROR = if value.subscriptionFailed then VOICESTATE.ERROR elseif value.subscriptionCompleted then if value.isMutedLocally then VOICESTATE.LOCAL_MUTED elseif value.isMuted then VOICESTATE.MUTED elseif value.isSignalActive then VOICESTATE.TALKING else VOICESTATE.INACTIVE else VOICESTATE.CONNECTING
@@ -94,7 +94,7 @@ local function v18(p2) --[[ Line: 64 ]]
 			p2:dispatch(VoiceStateChangedModule(i, ERROR))
 		end
 	end)
-	Default.talkingChanged.Event:Connect(function(p3) --[[ Line: 128 ]]
+	Default.talkingChanged.Event:Connect(function(p3)
 		-- upvalues: p2 (copy), VoiceStateChangedModule (upval), UserId (copy), VOICESTATE (upval)
 		if p3 then
 			p2:dispatch(VoiceStateChangedModule(UserId, VOICESTATE.TALKING))
@@ -104,7 +104,7 @@ local function v18(p2) --[[ Line: 64 ]]
 			p2:dispatch(VoiceStateChangedModule(UserId, VOICESTATE.INACTIVE))
 		end
 	end)
-	BlockingUtilityModule:GetBlockedStatusChangedEvent():Connect(function(p3, p4) --[[ Line: 139 ]]
+	BlockingUtilityModule:GetBlockedStatusChangedEvent():Connect(function(p3, p4)
 		-- upvalues: p2 (copy), ParticipantRemovedModule (upval), ParticipantAddedModule (upval)
 		if p4 then
 			p2:dispatch(ParticipantRemovedModule((tostring(p3))))
@@ -116,21 +116,21 @@ local function v18(p2) --[[ Line: 64 ]]
 	end)
 	v1:debug("Initial voice state is {}", Service.VoiceChatState)
 	setVoiceEnabled(Service.VoiceChatState, p2)
-	Service.StateChanged:Connect(function(_, NewState) --[[ Line: 149 ]]
+	Service.StateChanged:Connect(function(_, NewState)
 		-- upvalues: v1 (upval), setVoiceEnabled (upval), p2 (copy)
 		v1:debug("Voice state changed to {}", NewState)
 		setVoiceEnabled(NewState, p2)
 	end)
 end
 
-return function(p3) --[[ Line: 155 ]]
+return function(p3)
 	-- upvalues: Default (copy), v18 (copy), v1 (copy)
 	if game:GetEngineFeature("VoiceChatSupported") then
-		Default:asyncInit():andThen(function() --[[ Line: 158 ]]
+		Default:asyncInit():andThen(function()
 			-- upvalues: Default (upval), v18 (upval), p3 (copy)
 			Default:SetupParticipantListeners()
 			v18(p3)
-		end):catch(function() --[[ Line: 162 ]]
+		end):catch(function()
 			-- upvalues: v1 (upval)
 			v1:warning("Failed to init VoiceChatServiceManager")
 		end)

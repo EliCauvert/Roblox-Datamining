@@ -1,15 +1,15 @@
 ﻿local Snapshot = nil
 
 return {
-	setSnapshot = function(Value) --[[ Line: 10 ]]
+	setSnapshot = function(Value)
 		-- upvalues: Snapshot (ref)
 		Snapshot = Value
 	end,
-	getSnapshot = function() --[[ Line: 14 ]]
+	getSnapshot = function()
 		-- upvalues: Snapshot (ref)
 		return Snapshot
 	end,
-	clearSnapshot = function() --[[ Line: 18 ]]
+	clearSnapshot = function()
 		-- upvalues: Snapshot (ref)
 		Snapshot = nil
 	end

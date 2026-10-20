@@ -5,7 +5,7 @@ local VoiceChatService = game:GetService("VoiceChatService")
 local Number: number = tonumber(settings():GetFVariable("NewDevConsoleMaxGraphCount")) or 60
 local GetFFlagVoiceDebugConsoleV2Module = require(script.Parent.GetFFlagVoiceDebugConsoleV2)
 
-local function parseCodecFromSdp(Text: string) --[[ Line: 107 ]]
+local function parseCodecFromSdp(Text: string)
 	if Text and Text ~= "" then
 		local _, Match2, Match3, Match4 = string.match(Text, "a=rtpmap:(%d+) (%a+)/(%d+)/(%d+)")
 		
@@ -15,11 +15,11 @@ local function parseCodecFromSdp(Text: string) --[[ Line: 107 ]]
 	end
 end
 
-local function computeBitrateKbps(p1, p2, p3: number) --[[ Line: 118 ]]
+local function computeBitrateKbps(p1, p2, p3: number)
 	return if type(p1) == "number" and type(p2) == "number" and type(p3) == "number" and p3 > 0 then if p1 < p2 then nil else (p1 - p2) * 8 / p3 / 1000 else nil
 end
 
-local function computeSubscriptionBitrates(Subscriptions, PrevSubscriptionBytesBySsrc, p1: number) --[[ Line: 138 ]]
+local function computeSubscriptionBitrates(Subscriptions, PrevSubscriptionBytesBySsrc, p1: number)
 	local t = {}
 	
 	for i, subscription in Subscriptions do
@@ -44,7 +44,7 @@ local function computeSubscriptionBitrates(Subscriptions, PrevSubscriptionBytesB
 	end
 end
 
-local function computeLossPercent(p2, p3) --[[ Line: 162 ]]
+local function computeLossPercent(p2, p3)
 	if type(p2) == "number" and type(p3) == "number" then
 		local v1 = p2 + p3
 		
@@ -54,19 +54,19 @@ local function computeLossPercent(p2, p3) --[[ Line: 162 ]]
 	end
 end
 
-local function deltaSince(p2, p3) --[[ Line: 177 ]]
+local function deltaSince(p2, p3)
 	return if type(p2) == "number" and type(p3) == "number" and p2 >= p3 then p2 - p3 else nil
 end
 
-local function nativeSecondsToWallClockSeconds(p2, p3, p4) --[[ Line: 184 ]]
+local function nativeSecondsToWallClockSeconds(p2, p3, p4)
 	return p4 + (p2 - p3)
 end
 
-local function formatWallClockTime(p2): string --[[ Line: 188 ]]
+local function formatWallClockTime(p2): string
 	return (os.date("%H:%M:%S", p2))
 end
 
-local function decorateOperationEntries(Operations, NativeNowSeconds, Timestamp) --[[ Line: 192 ]]
+local function decorateOperationEntries(Operations, NativeNowSeconds, Timestamp)
 	local Buffer = table.create(#Operations)
 	
 	for i, operation in Operations do
@@ -83,7 +83,7 @@ end
 local VoiceDebugDataModule = {}
 VoiceDebugDataModule.__index = VoiceDebugDataModule
 
-function VoiceDebugDataModule.new() --[[ Line: 211 ]]
+function VoiceDebugDataModule.new()
 	-- upvalues: VoiceDebugDataModule (copy), SignalModule (copy)
 	local t = {}
 	setmetatable(t, VoiceDebugDataModule)
@@ -99,19 +99,19 @@ function VoiceDebugDataModule.new() --[[ Line: 211 ]]
 	return t
 end
 
-function VoiceDebugDataModule:Signal() --[[ Line: 226 ]]
+function VoiceDebugDataModule:Signal()
 	return self._statsUpdated
 end
 
-function VoiceDebugDataModule:getCurrentData() --[[ Line: 230 ]]
+function VoiceDebugDataModule:getCurrentData()
 	return self._statsData
 end
 
-function VoiceDebugDataModule:getSeries() --[[ Line: 234 ]]
+function VoiceDebugDataModule:getSeries()
 	return self._series
 end
 
-function VoiceDebugDataModule.getSeriesSnapshot(p2) --[[ Line: 241 ]]
+function VoiceDebugDataModule.getSeriesSnapshot(p2)
 	local t = {}
 	
 	for i, sery in p2._series do
@@ -124,23 +124,23 @@ function VoiceDebugDataModule.getSeriesSnapshot(p2) --[[ Line: 241 ]]
 	return t
 end
 
-function VoiceDebugDataModule:isRunning() --[[ Line: 253 ]]
+function VoiceDebugDataModule:isRunning()
 	return self._isRunning
 end
 
-function VoiceDebugDataModule:getConnectivity() --[[ Line: 257 ]]
+function VoiceDebugDataModule:getConnectivity()
 	return self._connectivityData
 end
 
-function VoiceDebugDataModule:getSubscriptions() --[[ Line: 261 ]]
+function VoiceDebugDataModule:getSubscriptions()
 	return self._subscriptionsData.subscriptions or {}
 end
 
-function VoiceDebugDataModule:getRemoteOperations() --[[ Line: 265 ]]
+function VoiceDebugDataModule:getRemoteOperations()
 	return self._remoteOperationsData
 end
 
-function VoiceDebugDataModule:_updateSeriesValue(p3, Value, Time) --[[ Line: 269 ]]
+function VoiceDebugDataModule:_updateSeriesValue(p3, Value, Time)
 	-- upvalues: CircularBufferModule (copy), Number (copy)
 	if not self._series[p3] then
 		local NewCircularBuffer = CircularBufferModule.new(Number)
@@ -175,10 +175,10 @@ function VoiceDebugDataModule:_updateSeriesValue(p3, Value, Time) --[[ Line: 269
 	Sery.min = Min < Value and Min or Value
 end
 
-function VoiceDebugDataModule:start() --[[ Line: 321 ]]
+function VoiceDebugDataModule:start()
 	-- upvalues: VoiceChatService (copy), GetFFlagVoiceDebugConsoleV2Module (copy), decorateOperationEntries (copy), computeSubscriptionBitrates (copy), VoiceDebugFieldMetaModule (copy)
 	if VoiceChatService and not self._statsListenerConnection then
-		self._statsListenerConnection = VoiceChatService.VoiceChatStatsCollected:Connect(function() --[[ Line: 323 ]]
+		self._statsListenerConnection = VoiceChatService.VoiceChatStatsCollected:Connect(function()
 			-- upvalues: self (copy), VoiceChatService (upval), GetFFlagVoiceDebugConsoleV2Module (upval), decorateOperationEntries (upval), computeSubscriptionBitrates (upval), VoiceDebugFieldMetaModule (upval)
 			self._statsData = VoiceChatService:lastVoiceChatStats()
 			self._connectivityData = VoiceChatService:lastVoiceChatConnectivity()
@@ -257,7 +257,7 @@ function VoiceDebugDataModule:start() --[[ Line: 321 ]]
 	end
 end
 
-function VoiceDebugDataModule:stop() --[[ Line: 383 ]]
+function VoiceDebugDataModule:stop()
 	self._isRunning = false
 	
 	if self._statsListenerConnection then

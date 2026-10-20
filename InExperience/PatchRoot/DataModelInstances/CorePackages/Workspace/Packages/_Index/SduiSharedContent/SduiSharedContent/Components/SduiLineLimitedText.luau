@@ -7,7 +7,7 @@ local GetPreferredTextSizeLineBudgetFunction = require(Parent.SduiSharedUtilitie
 local SduiTextModule = require(script.Parent.SduiText)
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 
-return function(p1) --[[ Line: 21 | Named "SduiLineLimitedText" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), SignalsReactModule (copy), TextSizeModule (copy), GetPreferredTextSizeLineBudgetFunction (copy), ReactModule (copy), SduiTextModule (copy), CryoModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Largest = math.max(p1.maxLines or 1, 1)
@@ -16,7 +16,7 @@ return function(p1) --[[ Line: 21 | Named "SduiLineLimitedText" ]]
 	return ReactModule.createElement(SduiTextModule, CryoModule.Dictionary.join(p1, {
 		automaticSize = CryoModule.None,
 		maxLines = CryoModule.None,
-		size = UDim2.new(if p1.size then p1.size.X else UDim.new(1, 0), UDim.new(0, (math.ceil(Largest * FontStyle.FontSize * FontStyle.LineHeight + GetPreferredTextSizeLineBudgetFunction(SignalsReactModule.useSignalState(function(p2) --[[ Line: 23 ]]
+		size = UDim2.new(if p1.size then p1.size.X else UDim.new(1, 0), UDim.new(0, (math.ceil(Largest * FontStyle.FontSize * FontStyle.LineHeight + GetPreferredTextSizeLineBudgetFunction(SignalsReactModule.useSignalState(function(p2)
 			-- upvalues: TextSizeModule (upval)
 			return TextSizeModule.getTextSizeStore(p2).getTextSizeOffset(p2)
 		end), Largest))))),

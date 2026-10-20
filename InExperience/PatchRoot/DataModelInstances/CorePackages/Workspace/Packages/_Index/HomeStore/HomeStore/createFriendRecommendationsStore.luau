@@ -2,18 +2,18 @@
 local _ = require(script.Parent.FriendRecommendationTypes)
 local RecommendationTypeModule = require(script.Parent.RecommendationType)
 
-return function() --[[ Line: 16 | Named "createFriendRecommendationsStore" ]]
+return function()
 	-- upvalues: DataHydrationModule (copy), RecommendationTypeModule (copy)
 	local DataCache = DataHydrationModule.createDataCache()
 	local T = {}
 	
 	return {
-		getFriendRecommendation = function(p1) --[[ Line: 20 ]]
+		getFriendRecommendation = function(p1)
 			-- upvalues: DataCache (copy), RecommendationTypeModule (upval)
 			local Item = DataCache.getItem(p1)
 			
 			return {
-				data = function(p2) --[[ Line: 23 ]]
+				data = function(p2)
 					-- upvalues: Item (copy), RecommendationTypeModule (upval)
 					local DataResult = Item.data(p2)
 					
@@ -22,7 +22,7 @@ return function() --[[ Line: 16 | Named "createFriendRecommendationsStore" ]]
 				status = Item.status
 			}
 		end,
-		replaceFriendRecommendations = function(List) --[[ Line: 31 ]]
+		replaceFriendRecommendations = function(List)
 			-- upvalues: T (ref), DataCache (copy), RecommendationTypeModule (upval)
 			for i in T do
 				if List[i] == nil then
@@ -36,7 +36,7 @@ return function() --[[ Line: 16 | Named "createFriendRecommendationsStore" ]]
 				T[i1] = true
 			end
 		end,
-		dispose = function() --[[ Line: 48 ]]
+		dispose = function()
 			-- upvalues: T (ref), DataCache (copy)
 			T = {}
 			DataCache.dispose()

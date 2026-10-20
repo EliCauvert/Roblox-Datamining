@@ -7,27 +7,27 @@ local SignalsModule = require(ViewRecyclerReact.Parent.Signals)
 local SignalsExperimentalModule = require(ViewRecyclerReact.Parent.SignalsExperimental)
 local CreateRecyclableViewModule = require(ViewRecyclerReact.ReactAdapter.createRecyclableView)
 
-local function _() --[[ Line: 13 | Named "viewType" ]]
+local function _()
 	-- upvalues: CreateRecyclableViewModule (copy)
-	return CreateRecyclableViewModule(function() --[[ Line: 14 ]]
+	return CreateRecyclableViewModule(function()
 		return nil
 	end, { readiness = "ReadyOnAssignment" })
 end
 
 return {
-	recyclingScopeHighWater = function(p1, Callback) --[[ Line: 21 ]]
+	recyclingScopeHighWater = function(p1, Callback)
 		-- upvalues: RecyclingRootModule (copy), CreateRecyclableViewModule (copy)
 		local HostChanges = 0
-		local NewRecyclingRoot = RecyclingRootModule.new(function() --[[ Line: 23 ]]
+		local NewRecyclingRoot = RecyclingRootModule.new(function()
 			-- upvalues: HostChanges (ref)
 			HostChanges += 1
 		end)
 		local Scope = NewRecyclingRoot.getScope({})
 		local IsScopeMatch = Scope == NewRecyclingRoot.getScope({})
-		local RecyclableViewModule = CreateRecyclableViewModule(function() --[[ Line: 14 ]]
+		local RecyclableViewModule = CreateRecyclableViewModule(function()
 			return nil
 		end, { readiness = "ReadyOnAssignment" })
-		local RecyclableViewModule1 = CreateRecyclableViewModule(function() --[[ Line: 29 ]]
+		local RecyclableViewModule1 = CreateRecyclableViewModule(function()
 			return nil
 		end, { readiness = "ReadyOnAssignment" })
 		local CallbackResult = Callback()
@@ -47,7 +47,7 @@ return {
 		local CreatedHosts = #Acquired + #Acquired1
 		local PublishedHosts = 0
 		
-		for _ in NewRecyclingRoot.getPortalChildren(function() --[[ Line: 56 ]]
+		for _ in NewRecyclingRoot.getPortalChildren(function()
 			return nil
 		end) do
 			PublishedHosts += 1
@@ -65,19 +65,19 @@ return {
 			completionPhaseCounts = { scopePublication = { synchronousBatch = 1 } }
 		}
 	end,
-	compositionChurn = function(p2) --[[ Line: 80 ]]
+	compositionChurn = function(p2)
 		-- upvalues: ViewRecyclerModule (copy), RecyclableViewModule (copy), SignalsExperimentalModule (copy), CompositionPlacementModule (copy), CreateRecyclableViewModule (copy), SignalsModule (copy)
 		local Count = 1
 		local Count1 = 0
 		local RecyclingScope = ViewRecyclerModule.Adapter.createRecyclingScope({
 			adapter = {
-				create = function(p3) --[[ Line: 85 ]]
+				create = function(p3)
 					-- upvalues: RecyclableViewModule (upval), Count (ref), Count1 (ref)
 					local RecyclableViewModuleResult = RecyclableViewModule(Count, p3, nil)
 					Count += 1
 					local TransitionFunction = RecyclableViewModuleResult.transition
 					
-					function RecyclableViewModuleResult.transition(p4) --[[ Line: 89 ]]
+					function RecyclableViewModuleResult.transition(p4)
 						-- upvalues: Count1 (upval), TransitionFunction (copy)
 						Count1 += 1
 						TransitionFunction(p4)
@@ -85,12 +85,12 @@ return {
 					
 					return RecyclableViewModuleResult
 				end,
-				destroy = function() --[[ Line: 95 ]] end,
+				destroy = function() end,
 				batch = SignalsExperimentalModule.batch
 			}
 		})
 		local NewCompositionPlacement = CompositionPlacementModule.new(RecyclingScope)
-		local RecyclableViewModule1 = CreateRecyclableViewModule(function() --[[ Line: 14 ]]
+		local RecyclableViewModule1 = CreateRecyclableViewModule(function()
 			return nil
 		end, { readiness = "ReadyOnAssignment" })
 		local Buffer = table.create(p2)
@@ -113,9 +113,9 @@ return {
 		local v1 = 1
 		
 		return {
-			run = function() --[[ Line: 124 ]]
+			run = function()
 				-- upvalues: SignalsExperimentalModule (upval), p2 (copy), Buffer (copy), v1 (ref), Buffer3 (copy), NewCompositionPlacement (copy), Count2 (ref)
-				SignalsExperimentalModule.batch(function() --[[ Line: 125 ]]
+				SignalsExperimentalModule.batch(function()
 					-- upvalues: p2 (upval), Buffer (upval), v1 (upval), Buffer3 (upval)
 					for i = 1, p2 do
 						Buffer[v1].setItemSignal(Buffer3[i])
@@ -125,10 +125,10 @@ return {
 				Count2 += 1
 				v1 = v1 % p2 + 1
 			end,
-			runBatchSettlement = function() --[[ Line: 134 ]]
+			runBatchSettlement = function()
 				-- upvalues: Count3 (ref), SignalsExperimentalModule (upval), p2 (copy), Buffer1 (copy), NewCompositionPlacement (copy), Count2 (ref)
 				Count3 += 1
-				SignalsExperimentalModule.batch(function() --[[ Line: 136 ]]
+				SignalsExperimentalModule.batch(function()
 					-- upvalues: p2 (upval), Buffer1 (upval), Count3 (upval)
 					for i = 1, p2 do
 						Buffer1[i]({ key = `parent{i}-revision{Count3}`, value = i })
@@ -137,18 +137,18 @@ return {
 				NewCompositionPlacement.flush()
 				Count2 += 1
 			end,
-			getAssignmentUpdates = function() --[[ Line: 147 ]]
+			getAssignmentUpdates = function()
 				-- upvalues: Count1 (ref)
 				return Count1
 			end,
-			getFlushes = function() --[[ Line: 150 ]]
+			getFlushes = function()
 				-- upvalues: Count2 (ref)
 				return Count2
 			end,
-			getReactInvalidations = function(): number --[[ Line: 153 ]]
+			getReactInvalidations = function(): number
 				return 0
 			end,
-			destroy = function() --[[ Line: 156 ]]
+			destroy = function()
 				-- upvalues: NewCompositionPlacement (copy), RecyclingScope (copy), Buffer2 (copy)
 				NewCompositionPlacement.destroy()
 				RecyclingScope.dispose()

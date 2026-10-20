@@ -27,7 +27,7 @@ local GetFFlagPeoplePageLazyRenderCardsFunction = require(Parent.PeopleService).
 local PeoplePageCardMenuUseVisibleProperty = game:DefineFastFlag("PeoplePageCardMenuUseVisibleProperty", false)
 local PeoplePageFixCardMenuZIndex = game:DefineFastFlag("PeoplePageFixCardMenuZIndex", false)
 
-return ReactModule.memo(function(p1) --[[ Line: 55 | Named "CardThumbnail" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), GetFFlagPeoplePageLazyRenderCardsFunction (copy), UsePreferredInputFunction (copy), UseLastInputModeFunction (copy), UseGetPeopleServiceModule (copy), PersonButtonConfigsModule (copy), FFlagPeoplePageAvatarBackgroundModule (copy), UseAvatarBackgroundImageModule (copy), SignalsReactModule (copy), FFlagSideSheetOpenPeoplePage (copy), UseIsComponentInputEndedModule (copy), ControlState (copy), Input (copy), View (copy), StateLayerAffordance (copy), Image (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), PeoplePageFixCardMenuZIndex (copy), PeoplePageCardMenuUseVisibleProperty (copy), CardMenuModule (copy), ConnectButtonModule (copy), InputSize (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UsePreferredInputResult = if GetFFlagPeoplePageLazyRenderCardsFunction() then nil else UsePreferredInputFunction()
@@ -36,7 +36,7 @@ return ReactModule.memo(function(p1) --[[ Line: 55 | Named "CardThumbnail" ]]
 	local PeopleVoiceChatStore = UseGetPeopleServiceModule("PeopleVoiceChatStore")
 	local PersonButtonConfigsModuleResult = PersonButtonConfigsModule(p1.person.UserId)
 	local UseAvatarBackgroundImageModuleResult = if FFlagPeoplePageAvatarBackgroundModule then UseAvatarBackgroundImageModule(p1.person.UserId) else nil
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 71 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: PersonButtonConfigsModuleResult (copy), Constants (copy)
 		return PersonButtonConfigsModuleResult[Constants.PERSON_BUTTONS.INSPECT]
 	end, { PersonButtonConfigsModuleResult })
@@ -51,15 +51,15 @@ return ReactModule.memo(function(p1) --[[ Line: 55 | Named "CardThumbnail" ]]
 	end
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
 	local UseIsComponentInputEndedModuleResult = UseIsComponentInputEndedModule(UseRefResult)
-	local UseResult = ReactModule.useCallback(function(Hover) --[[ Line: 90 ]]
+	local UseResult = ReactModule.useCallback(function(Hover)
 		-- upvalues: UseStateResult2_1 (copy), ControlState (upval)
 		UseStateResult2_1(Hover == ControlState.Hover)
 	end, {})
-	local UseResult1 = if FFlagSideSheetOpenPeoplePage then ReactModule.useCallback(function(Hover) --[[ Line: 95 ]]
+	local UseResult1 = if FFlagSideSheetOpenPeoplePage then ReactModule.useCallback(function(Hover)
 		-- upvalues: Callback (ref), ControlState (upval)
 		Callback(Hover == ControlState.Hover or Hover == ControlState.Pressed)
 	end, {}) else nil
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 100 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: GetFFlagPeoplePageLazyRenderCardsFunction (upval), p1 (copy), UseLastInputModeResult (copy), UsePreferredInputResult (copy), Input (upval), UseStateResult (copy), UseStateResult3 (copy), UseSignalStateResult (copy)
 		local ShouldShowMenu = if GetFFlagPeoplePageLazyRenderCardsFunction() then p1.shouldShowMenu else UseLastInputModeResult == "Focus" or UsePreferredInputResult ~= Input.Pointer
 		
@@ -68,7 +68,7 @@ return ReactModule.memo(function(p1) --[[ Line: 55 | Named "CardThumbnail" ]]
 		UseStateResult, UseStateResult3, UseSignalStateResult, UsePreferredInputResult,
 		UseLastInputModeResult, p1.shouldShowMenu
 	})
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 109 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: FFlagSideSheetOpenPeoplePage (upval), UseStateResult1 (copy), v1 (ref), UseStateResult3 (copy), UseIsComponentInputEndedModuleResult (copy)
 		return (if FFlagSideSheetOpenPeoplePage then UseStateResult1 or v1 else UseStateResult1) or (UseStateResult3 or UseIsComponentInputEndedModuleResult)
 	end, if FFlagSideSheetOpenPeoplePage then {
@@ -81,7 +81,7 @@ return ReactModule.memo(function(p1) --[[ Line: 55 | Named "CardThumbnail" ]]
 		UseStateResult3,
 		UseIsComponentInputEndedModuleResult
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 120 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseMemoResult (copy), Constants (copy)
 		UseMemoResult.onActivated(Constants.ANALYTICS.ENTRY_POINT.PEOPLE_CARD)
 	end, { UseMemoResult.onActivated })
@@ -94,7 +94,7 @@ return ReactModule.memo(function(p1) --[[ Line: 55 | Named "CardThumbnail" ]]
 			affordance = if UseMemoResult2 then StateLayerAffordance.None else StateLayerAffordance.Background
 		},
 		onActivated = if UseMemoResult.shouldShow() then UseResult2 else nil,
-		onStateChanged = ReactModule.useCallback(function(Hover) --[[ Line: 86 ]]
+		onStateChanged = ReactModule.useCallback(function(Hover)
 			-- upvalues: UseStateResult2 (copy), ControlState (upval)
 			UseStateResult2(Hover == ControlState.Hover)
 		end, {}),

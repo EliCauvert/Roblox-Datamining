@@ -17,7 +17,7 @@ local ConnectAvatarEditorServiceEventsModule = require(script.ConnectAvatarEdito
 local Module = {}
 Module.__index = Module
 
-function Module.new() --[[ Line: 30 ]]
+function Module.new()
 	-- upvalues: Module (copy), RoactGlobalConfigModule (copy), RoactModule (copy), RoduxModule (copy), ReducerModule (copy), GetGameNameModule (copy), RoactRoduxModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), FoundationModule (copy), AvatarEditorPromptsPolicyModule (copy), RenderWithCoreScriptsStyleProviderModule (copy), AvatarEditorPromptsAppModule (copy), CoreGui (copy), ConnectAvatarEditorServiceEventsModule (copy)
 	local self = setmetatable({}, Module)
 	

@@ -6,10 +6,10 @@ local SetCurrentToastMessageFunction = require(Parent.ToastRodux).Actions.SetCur
 local Images = require(Parent.UIBlox).App.ImageSet.Images
 local FFlagMomentsBlockingModalInOverlay = require(Parent.SharedFlags).FFlagMomentsBlockingModalInOverlay
 
-return function(p1) --[[ Line: 36 | Named "useOpenBlockingModal" ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), AppPage (copy), FFlagMomentsBlockingModalInOverlay (copy), SetCurrentToastMessageFunction (copy), Images (copy)
 	local UseDispatchResult = UseDispatchFunction()
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 38 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy), AppPage (upval), FFlagMomentsBlockingModalInOverlay (upval), UseDispatchResult (copy), SetCurrentToastMessageFunction (upval), Images (upval)
 		p1.push(AppPage.BlockingModal, {
 			navProps = {
@@ -18,7 +18,7 @@ return function(p1) --[[ Line: 36 | Named "useOpenBlockingModal" ]]
 				onBlockFailed = p2.onBlockFailed,
 				openReportUser = p2.openReportUser,
 				presentInOverlay = if FFlagMomentsBlockingModalInOverlay then true else nil,
-				onBlockSuccess = function() --[[ Line: 47 ]]
+				onBlockSuccess = function()
 					-- upvalues: UseDispatchResult (upval), SetCurrentToastMessageFunction (upval), Images (upval), p2 (copy)
 					UseDispatchResult(SetCurrentToastMessageFunction({
 						toastMessage = "Feature.Profile.Action.UserBlocked",

@@ -16,7 +16,7 @@ local DeviceAccessChallengeEventModule = require(script.Parent.DeviceAccessChall
 local ChallengeEventConstantsModule = require(GenericChallenges.Utils.ChallengeEventConstants)
 local GetFFlagLuaAppChallengeMoreTelemetryEnabledModule = require(GenericChallenges.Middleware.Flags.GetFFlagLuaAppChallengeMoreTelemetryEnabled)
 
-return function(p1) --[[ Line: 34 | Named "DeviceAccessTokenChallenge" ]]
+return function(p1)
 	-- upvalues: UseRoactServiceFunction (copy), AppLogging (copy), HttpService (copy), GetFFlagLuaAppChallengeMoreTelemetryEnabledModule (copy), UseStateFunction (copy), UseEffectFunction (copy), DeviceAccessChallengeEventModule (copy), ChallengeEventConstantsModule (copy), UseSelectorFunction (copy), RoactModule (copy), Loading (copy), IconSize (copy), RoactNavigationModule (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(AppLogging)
 	local v1 = nil
@@ -29,7 +29,7 @@ return function(p1) --[[ Line: 34 | Named "DeviceAccessTokenChallenge" ]]
 		v1, Callback = UseStateFunction(false)
 		v2, Callback1 = UseStateFunction(false)
 	end
-	UseEffectFunction(function() --[[ Line: 46 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseRoactServiceResult (copy), DeviceAccessChallengeEventModule (upval), ChallengeEventConstantsModule (upval), p1 (copy), Data (copy), HttpService (upval), GetFFlagLuaAppChallengeMoreTelemetryEnabledModule (upval), Callback (ref), Callback1 (ref)
 		UseRoactServiceResult:logRobloxTelemetryEvent(DeviceAccessChallengeEventModule, {}, {
 			context = ChallengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeInitialized,
@@ -70,7 +70,7 @@ return function(p1) --[[ Line: 34 | Named "DeviceAccessTokenChallenge" ]]
 			errorCode = ErrorCode
 		})
 	end, {})
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 86 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		return { screenSize = p2.ScreenSize }
 	end)
 	
@@ -85,7 +85,7 @@ return function(p1) --[[ Line: 34 | Named "DeviceAccessTokenChallenge" ]]
 			size = IconSize.Large
 		}),
 		NavigationEvents = if GetFFlagLuaAppChallengeMoreTelemetryEnabledModule() then RoactModule.createElement(RoactNavigationModule.NavigationEvents, {
-			onWillBlur = function() --[[ Line: 106 ]]
+			onWillBlur = function()
 				-- upvalues: v1 (ref), v2 (ref), UseRoactServiceResult (copy), DeviceAccessChallengeEventModule (upval), ChallengeEventConstantsModule (upval), p1 (copy), Data (copy)
 				if not v1 and not v2 then
 					UseRoactServiceResult:logRobloxTelemetryEvent(DeviceAccessChallengeEventModule, {}, {

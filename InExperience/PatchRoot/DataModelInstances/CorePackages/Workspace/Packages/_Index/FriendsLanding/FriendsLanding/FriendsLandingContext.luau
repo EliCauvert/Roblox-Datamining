@@ -9,7 +9,7 @@ return {
 	Consumer = ContextModule.Consumer,
 	with = Context.getWith(ContextModule),
 	connect = Context.getConnect(ContextModule),
-	useContext = function() --[[ Line: 14 ]]
+	useContext = function()
 		-- upvalues: React (copy), ContextModule (copy)
 		return (React.useContext(ContextModule))
 	end

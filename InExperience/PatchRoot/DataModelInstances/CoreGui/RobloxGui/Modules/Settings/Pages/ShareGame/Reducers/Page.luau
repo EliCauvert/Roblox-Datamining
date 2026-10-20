@@ -4,7 +4,7 @@ local ConstantsModule = require(ShareGame.Constants)
 local OpenPageModule = require(ShareGame.Actions.OpenPage)
 local ClosePageModule = require(ShareGame.Actions.ClosePage)
 
-return function(p1, p2) --[[ Line: 11 ]]
+return function(p1, p2)
 	-- upvalues: ConstantsModule (copy), OpenPageModule (copy), Immutable (copy), ClosePageModule (copy)
 	local P0 = p1 or { IsOpen = false, Route = ConstantsModule.PageRoute.NONE }
 	

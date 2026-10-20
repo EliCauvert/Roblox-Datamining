@@ -15,7 +15,7 @@ local config = {
 	[Enum.KeyCode.RightBracket] = FocusNavigationEventNameEnum.ScrollDown
 }
 
-local function _(p1, p2) --[[ Line: 35 | Named "scrollFocusedContainer" ]]
+local function _(p1, p2)
 	-- upvalues: ScrollFrameUtilsModule (copy), GuiService (copy)
 	if p2 ~= nil then
 		ScrollFrameUtilsModule.scrollByIncrement(ScrollFrameUtilsModule.resolveScrollTarget(GuiService.SelectedCoreObject, p2), p1)
@@ -24,15 +24,15 @@ local function _(p1, p2) --[[ Line: 35 | Named "scrollFocusedContainer" ]]
 	end
 end
 
-return function(p1) --[[ Line: 47 | Named "useScrollNavigationBindings" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), config (copy), t (copy), t1 (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), ScrollFrameUtilsModule (copy), GuiService (copy), ReactFocusNavigationModule (copy), UseThumbstickScrollModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local v1 = p1 == nil or p1.includeDiscreteScroll == nil or p1.includeDiscreteScroll
-	local UseEventHandlerMapResult = ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function() --[[ Line: 57 ]]
+	local UseEventHandlerMapResult = ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function()
 		-- upvalues: v1 (copy), t1 (upval), FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), ScrollFrameUtilsModule (upval), UseRefResult (copy), GuiService (upval)
 		return if v1 then {
 			[FocusNavigationEventNameEnum.ScrollDown] = {
-				handler = InputHandlersModule.onRelease(function(_) --[[ Line: 64 ]]
+				handler = InputHandlersModule.onRelease(function(_)
 					-- upvalues: ScrollFrameUtilsModule (upval), UseRefResult (upval), GuiService (upval)
 					local SCROLLINCREMENT = ScrollFrameUtilsModule.SCROLL_INCREMENT
 					local Current = UseRefResult.current
@@ -45,7 +45,7 @@ return function(p1) --[[ Line: 47 | Named "useScrollNavigationBindings" ]]
 				end)
 			},
 			[FocusNavigationEventNameEnum.ScrollUp] = {
-				handler = InputHandlersModule.onRelease(function(_) --[[ Line: 69 ]]
+				handler = InputHandlersModule.onRelease(function(_)
 					-- upvalues: ScrollFrameUtilsModule (upval), UseRefResult (upval), GuiService (upval)
 					local Negated = -ScrollFrameUtilsModule.SCROLL_INCREMENT
 					local Current = UseRefResult.current
@@ -58,7 +58,7 @@ return function(p1) --[[ Line: 47 | Named "useScrollNavigationBindings" ]]
 				end)
 			}
 		} else t1
-	end, { v1 }), (ReactFocusNavigationModule.useEventMap(ReactModule.useMemo(function() --[[ Line: 53 ]]
+	end, { v1 }), (ReactFocusNavigationModule.useEventMap(ReactModule.useMemo(function()
 		-- upvalues: v1 (copy), config (upval), t (upval)
 		return if v1 then config else t
 	end, { v1 }), UseRefResult)))

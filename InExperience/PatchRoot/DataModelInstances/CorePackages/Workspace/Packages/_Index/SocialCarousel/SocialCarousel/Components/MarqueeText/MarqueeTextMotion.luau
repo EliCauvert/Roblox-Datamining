@@ -4,17 +4,17 @@ return {
 	DEFAULT_SPEED = 25,
 	DEFAULT_MAX_LOOPS = 2,
 	GAP = 24,
-	textDirectionFromLocale = function(Text: string) --[[ Line: 19 ]]
+	textDirectionFromLocale = function(Text: string)
 		-- upvalues: config (copy)
 		return if config[string.lower(string.match(Text, "^([^%-]+)") or Text)] then Enum.TextDirection.RightToLeft else Enum.TextDirection.LeftToRight
 	end,
-	travelDistance = function(p1: number, p2: number): number --[[ Line: 29 ]]
+	travelDistance = function(p1: number, p2: number): number
 		return if p1 <= 0 or p2 <= 0 then 0 else math.max(p1 + 24, p2)
 	end,
-	overflows = function(p1, p2: number): boolean --[[ Line: 37 ]]
+	overflows = function(p1, p2: number): boolean
 		return p2 > 0 and p2 < p1
 	end,
-	advance = function(p1, Amount: number, p2: number, p3: number, p4: number) --[[ Line: 41 ]]
+	advance = function(p1, Amount: number, p2: number, p3: number, p4: number)
 		if p1.finished or Amount <= 0 or p4 <= 0 then
 			return {
 				offset = 0,
@@ -41,7 +41,7 @@ return {
 			loopsCompleted = LoopsCompleted
 		}
 	end,
-	signedOffset = function(p5, TextDirection) --[[ Line: 82 ]]
+	signedOffset = function(p5, TextDirection)
 		return if TextDirection == Enum.TextDirection.RightToLeft then p5 else -p5
 	end
 }

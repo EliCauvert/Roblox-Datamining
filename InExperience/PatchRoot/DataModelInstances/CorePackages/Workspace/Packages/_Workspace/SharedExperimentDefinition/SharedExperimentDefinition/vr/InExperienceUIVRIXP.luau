@@ -17,7 +17,7 @@ local EnableSpatialUIPlaceFilter = game:DefineFastFlag("EnableSpatialUIPlaceFilt
 local Module = {}
 Module.__index = Module
 
-function Module.new() --[[ Line: 40 ]]
+function Module.new()
 	-- upvalues: Module (copy)
 	local config = { _layer_data = nil }
 	setmetatable(config, Module)
@@ -25,7 +25,7 @@ function Module.new() --[[ Line: 40 ]]
 	return config
 end
 
-function Module:getIXPVariant() --[[ Line: 48 ]]
+function Module:getIXPVariant()
 	-- upvalues: ExperimentCacheManager (copy), LuaAppIECVRLayerName (copy), LuaAppIECVRVariantKey (copy), LuaAppIECVRVariantNoSpatialUI (copy)
 	if self._layer_data == nil then
 		self._layer_data = ExperimentCacheManager.default:getLayerVariables(LuaAppIECVRLayerName) or {}
@@ -35,17 +35,17 @@ function Module:getIXPVariant() --[[ Line: 48 ]]
 	return if Layer == nil then LuaAppIECVRVariantNoSpatialUI else tonumber(Layer)
 end
 
-function Module.isDependencyFlagsEnabled(): boolean --[[ Line: 60 ]]
+function Module.isDependencyFlagsEnabled(): boolean
 	-- upvalues: FFlagEnableUIManagerPackgify (copy), EnableSpatialUIPlaceFilter (copy)
 	return FFlagEnableUIManagerPackgify and not EnableSpatialUIPlaceFilter
 end
 
-function Module.isInExperienceUIVREnabled(p1): boolean --[[ Line: 64 ]]
+function Module.isInExperienceUIVREnabled(p1): boolean
 	-- upvalues: LuaAppIECVREnabled8 (copy), LuaAppIECVRIxpEnabled8 (copy), LuaAppIECVRVariantNoSpatialUI (copy)
 	return if p1:isDependencyFlagsEnabled() then if LuaAppIECVREnabled8 then true elseif LuaAppIECVRIxpEnabled8 then p1:getIXPVariant() ~= LuaAppIECVRVariantNoSpatialUI else false else false
 end
 
-function Module:isDraggingAllowed() --[[ Line: 78 ]]
+function Module:isDraggingAllowed()
 	-- upvalues: SpatialUIEnableDrag8 (copy), SpatialUIEnableMovePanelToCenter8 (copy), LuaAppIECVRVariantSpatialUIWithDragging (copy), LuaAppIECVRVariantSpatialUIWithoutDragging (copy), LuaAppIECVRVariantSpatialUIMovePanelToCenter (copy)
 	if not self:isInExperienceUIVREnabled() then
 		return false
@@ -60,17 +60,17 @@ function Module:isDraggingAllowed() --[[ Line: 78 ]]
 	end
 end
 
-function Module.isMovePanelToCenter(p1): boolean --[[ Line: 101 ]]
+function Module.isMovePanelToCenter(p1): boolean
 	-- upvalues: SpatialUIEnableMovePanelToCenter8 (copy), LuaAppIECVRVariantSpatialUIMovePanelToCenter (copy)
 	return if p1:isInExperienceUIVREnabled() then if SpatialUIEnableMovePanelToCenter8 then true else p1:getIXPVariant() == LuaAppIECVRVariantSpatialUIMovePanelToCenter else false
 end
 
-function Module:isSpatialUICameraTypeFixEnabled() --[[ Line: 112 ]]
+function Module:isSpatialUICameraTypeFixEnabled()
 	-- upvalues: EnableSpatialUICameraTypeFix8 (copy)
 	return EnableSpatialUICameraTypeFix8
 end
 
-function Module:isSpatialUIScalingFixEnabled() --[[ Line: 116 ]]
+function Module:isSpatialUIScalingFixEnabled()
 	-- upvalues: EnableSpatialUIScalingFix (copy)
 	return EnableSpatialUIScalingFix
 end

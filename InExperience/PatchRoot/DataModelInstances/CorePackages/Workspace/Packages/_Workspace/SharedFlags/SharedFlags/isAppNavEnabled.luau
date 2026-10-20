@@ -1,3 +1,3 @@
-﻿return function(): boolean --[[ Line: 1 ]]
+﻿return function(): boolean
 	return true
 end

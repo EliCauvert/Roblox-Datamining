@@ -5,7 +5,7 @@ local _ = require(Foundation.Providers.Style.Tokens)
 local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 local _ = require(Foundation.Components.Types)
 
-local function variantsFactory(_) --[[ Line: 22 ]]
+local function variantsFactory(_)
 	-- upvalues: InputSizeModule (copy)
 	return {
 		common = {
@@ -35,7 +35,7 @@ local function variantsFactory(_) --[[ Line: 22 ]]
 	}
 end
 
-return function(p1, p2) --[[ Line: 77 | Named "useInputGroupVariants" ]]
+return function(p1, p2)
 	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
 	local InputGroup = VariantsContextModule.useVariants("InputGroup", variantsFactory, p1)
 	

@@ -7,10 +7,10 @@ local AppearanceContext = StyleModule.AppearanceContext
 local ColorMode = require(CorePackages.Packages.Foundation).Enums.ColorMode
 local UseIsPlaytestModeModule = require(script.Parent.Parent.Hooks.useIsPlaytestMode)
 
-local function ThemeSwitcher(p1) --[[ Line: 23 ]]
+local function ThemeSwitcher(p1)
 	-- upvalues: ReactModule (copy), AppearanceContext (copy)
 	local UseContextResult = ReactModule.useContext(AppearanceContext)
-	ReactModule.useLayoutEffect(function() --[[ Line: 26 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseContextResult (copy), p1 (copy)
 		UseContextResult.setTheme(p1.themeName)
 	end, { p1.themeName, UseContextResult })
@@ -18,7 +18,7 @@ local function ThemeSwitcher(p1) --[[ Line: 23 ]]
 	return ReactModule.createElement(ReactModule.Fragment, nil, p1.children)
 end
 
-return function(p1) --[[ Line: 33 | Named "PlaytestModeThemeProvider" ]]
+return function(p1)
 	-- upvalues: UseIsPlaytestModeModule (copy), ColorMode (copy), ReactModule (copy), UiModeStyleProvider (copy), Constants (copy), ThemeSwitcher (copy)
 	local Light = if UseIsPlaytestModeModule() then ColorMode.Light else ColorMode.Dark
 	

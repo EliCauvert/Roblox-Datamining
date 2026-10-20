@@ -11,10 +11,10 @@ local ReportFailedDialogModule = require(GenericAbuseReporting.Dialogs.ReportFai
 local _ = require(GenericAbuseReporting.Analytics.submitAnalytics)
 local UseActiveDialogModule = require(script.Parent.useActiveDialog)
 
-return function(p1) --[[ Line: 52 | Named "AREntrypoint" ]]
+return function(p1)
 	-- upvalues: UseActiveDialogModule (copy), ReactModule (copy), LayerCollectorProvider (copy), FoundationProvider (copy), AnalyticsProviderModule (copy), LocalizationKeysProviderModule (copy), DualDropdownReportModule (copy), ReportCompleteDialogModule (copy), ReportFailedDialogModule (copy)
 	local UseActiveDialogModuleResult, UseActiveDialogModuleResult2 = UseActiveDialogModule()
-	local UseResult = ReactModule.useCallback(function(p2, p3, p4) --[[ Line: 55 ]]
+	local UseResult = ReactModule.useCallback(function(p2, p3, p4)
 		-- upvalues: p1 (copy), UseActiveDialogModuleResult2 (copy)
 		local OnProceedToNextStepResult = if p1.onSubmitProps.hasNextSteps then p1.onSubmitProps.onProceedToNextStep(p2, p3, p4) else p1.onSubmitProps.onSubmit(p2, p3, p4)
 		
@@ -28,11 +28,11 @@ return function(p1) --[[ Line: 52 | Named "AREntrypoint" ]]
 			return OnProceedToNextStepResult
 		end
 	end, { p1.onSubmitProps })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 67 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseActiveDialogModuleResult2 (copy)
 		UseActiveDialogModuleResult2("Form")
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 71 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		if p1.onComplete then
 			p1.onComplete()

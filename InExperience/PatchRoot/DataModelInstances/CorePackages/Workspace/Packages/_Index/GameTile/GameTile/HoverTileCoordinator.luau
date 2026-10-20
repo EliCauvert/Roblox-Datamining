@@ -2,7 +2,7 @@
 local HoverTileCoordinatorModule = {}
 HoverTileCoordinatorModule.__index = HoverTileCoordinatorModule
 
-function HoverTileCoordinatorModule.new() --[[ Line: 24 ]]
+function HoverTileCoordinatorModule.new()
 	-- upvalues: Signal (copy), HoverTileCoordinatorModule (copy)
 	local config = {
 		hoveredKey = nil,
@@ -14,7 +14,7 @@ function HoverTileCoordinatorModule.new() --[[ Line: 24 ]]
 	return config
 end
 
-function HoverTileCoordinatorModule:requestHover(HoveredKey) --[[ Line: 34 ]]
+function HoverTileCoordinatorModule:requestHover(HoveredKey)
 	if self.hoveredKey == HoveredKey then return end
 	if self.waitingForHover == HoveredKey then return end
 	if self.hoveredKey == nil or self.waitingForHover ~= nil then
@@ -28,7 +28,7 @@ function HoverTileCoordinatorModule:requestHover(HoveredKey) --[[ Line: 34 ]]
 	end
 end
 
-function HoverTileCoordinatorModule:cancelHover(HoveredKey) --[[ Line: 57 ]]
+function HoverTileCoordinatorModule:cancelHover(HoveredKey)
 	if self.hoveredKey == HoveredKey then
 		if self.waitingForHover == nil then
 			self.hoveredKey = nil
@@ -44,7 +44,7 @@ function HoverTileCoordinatorModule:cancelHover(HoveredKey) --[[ Line: 57 ]]
 	end
 end
 
-function HoverTileCoordinatorModule:reset() --[[ Line: 72 ]]
+function HoverTileCoordinatorModule:reset()
 	self.waitingForHover = nil
 	self.hoveredKey = nil
 	

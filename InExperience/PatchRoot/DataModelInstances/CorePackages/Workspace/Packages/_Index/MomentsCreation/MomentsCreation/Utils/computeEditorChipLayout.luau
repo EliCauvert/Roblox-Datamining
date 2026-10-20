@@ -3,7 +3,7 @@ local TextService = game:GetService("TextService")
 local ConstantsModule = require(MomentsCreation.Constants)
 local FitTextOverlayFontSizeModule = require(MomentsCreation.Utils.fitTextOverlayFontSize)
 
-return function(p1) --[[ Line: 52 | Named "computeEditorChipLayout" ]]
+return function(p1)
 	-- upvalues: ConstantsModule (copy), FitTextOverlayFontSizeModule (copy), TextService (copy)
 	local Smallest = math.min(p1.itemWidth / 2, p1.maxChipWidth - p1.chipPadding * 2)
 	local MinFontSize: number = ConstantsModule.TextOverlay.MinFontSize

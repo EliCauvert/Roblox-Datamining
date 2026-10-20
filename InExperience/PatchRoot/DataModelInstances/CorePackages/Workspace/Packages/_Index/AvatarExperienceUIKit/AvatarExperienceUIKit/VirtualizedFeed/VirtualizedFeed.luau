@@ -25,7 +25,7 @@ local Style = {
 }
 local config = { backToTop = "Feature.GamePage.Action.BackToTop" }
 
-local function _(p1) --[[ Line: 51 | Named "getNativeScrollingFrameRef" ]]
+local function _(p1)
 	if p1.current ~= nil then
 		local NativeScrollRef = p1.current:getNativeScrollRef()
 		
@@ -36,7 +36,7 @@ local function _(p1) --[[ Line: 51 | Named "getNativeScrollingFrameRef" ]]
 	return nil
 end
 
-local function VirtualizedFeedBackToTopButton(p1) --[[ Line: 66 ]]
+local function VirtualizedFeedBackToTopButton(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), Button (copy), ButtonVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	
@@ -49,25 +49,25 @@ end
 
 local RowAlignXCenterAlignYCenterSizeFull0AutoYPaddingXlarge: string = if FFlagAXSduiFeedBackToTopAndNavClearance then "row align-x-center align-y-center size-full-0 auto-y padding-xlarge" else "row align-y-center align-x-center padding-xlarge"
 
-local function VirtualizedFeedFooterLayout(p1) --[[ Line: 84 ]]
+local function VirtualizedFeedFooterLayout(p1)
 	-- upvalues: ReactModule (copy), View (copy), RowAlignXCenterAlignYCenterSizeFull0AutoYPaddingXlarge (copy)
 	return ReactModule.createElement(View, {
 		tag = RowAlignXCenterAlignYCenterSizeFull0AutoYPaddingXlarge
 	}, p1.children)
 end
 
-local _ = function(p1) --[[ Line: 137 | Named "createFooterComponent" ]]
+local _ = function(p1)
 	-- upvalues: ReactModule (copy), VirtualizedFeedFooterLayout (copy)
 	return if p1.shouldWrap then ReactModule.createElement(VirtualizedFeedFooterLayout, {}, p1.footerContent) else p1.footerContent
 end
 
-return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 146 | Named "VirtualizedFeed" ]]
+return ReactModule.forwardRef(function(Frame, Ref)
 	-- upvalues: FFlagAXVirtualizedFeedVerticalPadding (copy), FFlagVirtualizedFeedFooterWrapperProp (copy), ReactModule (copy), FFlagAXSduiFeedBackToTopAndNavClearance (copy), UserGameSettings (copy), IsFeedContentScrollableModule (copy), VirtualizedFeedBackToTopButton (copy), Loading (copy), IconSize (copy), View (copy), VirtualizedFeedFooterLayout (copy), FlatList (copy), ContentContainerStyle (copy), Style (copy)
 	local HorizontalPadding = Frame.horizontalPadding or 0
 	local VerticalPadding = FFlagAXVirtualizedFeedVerticalPadding and Frame.verticalPadding or 0
 	local NoFFlagVirtualizedFeedFooterWrapperProp: boolean = not FFlagVirtualizedFeedFooterWrapperProp or Frame.shouldWrapFooter ~= false
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 152 ]]
+	local UseResult = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), Frame (copy)
 		UseRefResult.current = Current
 		local FlatListRefFunction: (any) -> () = Frame.flatListRef
@@ -93,12 +93,12 @@ return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 146 | Named "Virtu
 	if FFlagAXSduiFeedBackToTopAndNavClearance then
 		v1, UseStateResult2_1 = ReactModule.useState(0)
 		v2, Callback = ReactModule.useState(0)
-		UseResult1 = ReactModule.useCallback(function(_, p1) --[[ Line: 182 ]]
+		UseResult1 = ReactModule.useCallback(function(_, p1)
 			-- upvalues: UseStateResult2_1 (ref)
 			UseStateResult2_1(p1)
 		end, {})
 	end
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 187 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UserGameSettings (upval)
 		if UseRefResult.current then
 			UseRefResult.current:scrollToOffset({
@@ -121,11 +121,11 @@ return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 146 | Named "Virtu
 			end
 			NativeRef = nil
 		until true
-		ReactModule.useEffect(function() --[[ Line: 199 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: NativeRef (copy), UseStateResult2 (copy)
 			local List = {}
 			
-			local function sizeChangeHandler() --[[ Line: 202 ]]
+			local function sizeChangeHandler()
 				-- upvalues: NativeRef (upval), UseStateResult2 (upval)
 				if NativeRef ~= nil and NativeRef.current ~= nil then
 					local Current = NativeRef.current
@@ -144,7 +144,7 @@ return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 146 | Named "Virtu
 					UseStateResult2(Current.AbsoluteWindowSize.Y < Current.AbsoluteCanvasSize.Y)
 				end
 			end
-			return function() --[[ Line: 220 ]]
+			return function()
 				-- upvalues: List (copy)
 				for _, Connection in List do
 					Connection:Disconnect()
@@ -158,7 +158,7 @@ return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 146 | Named "Virtu
 		local IsIsEndOfList: boolean = IsFeedContentScrollableModule(v1 or 0, v2 or 0, VerticalPadding) and Frame.isEndOfList == true
 		local ListFooterComponent = if Frame.ListFooterComponent then Frame.ListFooterComponent elseif IsIsEndOfList then ReactModule.createElement(VirtualizedFeedBackToTopButton, { text = Frame.scrollToTopLabel, onActivated = UseResult2 }) elseif Frame.isLoading then ReactModule.createElement(Loading, { size = IconSize.Medium }) else nil
 		local EndOfListBottomPadding = Frame.endOfListBottomPadding or 0
-		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 248 ]]
+		local UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: EndOfListBottomPadding (copy)
 			return if EndOfListBottomPadding <= 0 then nil else { bottom = UDim.new(0, EndOfListBottomPadding) }
 		end, { EndOfListBottomPadding })
@@ -219,7 +219,7 @@ return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 146 | Named "Virtu
 		Size = Frame.Size or UDim2.new(1, 0, 1, 0),
 		ClipsDescendants = Frame.clipsDescendants == nil or Frame.clipsDescendants,
 		LayoutOrder = Frame.LayoutOrder,
-		[ReactModule.Change.AbsoluteSize] = ReactModule.useCallback(function(Frame1: Frame) --[[ Line: 312 ]]
+		[ReactModule.Change.AbsoluteSize] = ReactModule.useCallback(function(Frame1: Frame)
 			-- upvalues: Frame (copy), FFlagAXSduiFeedBackToTopAndNavClearance (upval), Callback (ref)
 			if Frame.onContainerWidthChanged then
 				Frame.onContainerWidthChanged(Frame1.AbsoluteSize.X)
@@ -249,7 +249,7 @@ return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 146 | Named "Virtu
 			ref = UseResult,
 			contentContainerStyle = ContentContainerStyle,
 			style = Style,
-			onScroll = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 306 ]]
+			onScroll = ReactModule.useCallback(function(ScrollFrame)
 				-- upvalues: Frame (copy)
 				if Frame.onScroll then
 					Frame.onScroll(ScrollFrame.CanvasPosition.Y)

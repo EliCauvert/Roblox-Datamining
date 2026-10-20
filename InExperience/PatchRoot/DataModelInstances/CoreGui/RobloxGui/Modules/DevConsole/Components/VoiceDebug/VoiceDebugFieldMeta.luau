@@ -74,7 +74,7 @@ v1 = {
 		group = "Incoming",
 		thresholds = { warn = 3, error = 1e999 }
 	},
-	getFieldSeverity = function(p1, p2) --[[ Line: 32 ]]
+	getFieldSeverity = function(p1, p2)
 		-- upvalues: v1 (ref)
 		local v2 = v1[p1]
 		local Thresholds = v2 and v2.thresholds

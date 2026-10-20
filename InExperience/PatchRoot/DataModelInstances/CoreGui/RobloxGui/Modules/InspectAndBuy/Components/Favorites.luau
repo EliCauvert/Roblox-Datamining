@@ -10,7 +10,7 @@ local GotCurrentFavoriteCountModule = require(Parent.Selectors.GotCurrentFavorit
 local GetSelectionImageObjectRegularModule = require(Parent.getSelectionImageObjectRegular)
 local Favorites = RoactModule.PureComponent:extend("Favorites")
 
-function Favorites.setText(p1) --[[ Line: 22 ]]
+function Favorites.setText(p1)
 	-- upvalues: UtilityFunctionsModule (copy)
 	local AssetInfo = p1.props.assetInfo or {}
 	local BundleInfo = p1.props.bundleInfo
@@ -28,13 +28,13 @@ function Favorites.setText(p1) --[[ Line: 22 ]]
 	end
 end
 
-function Favorites.init(p1) --[[ Line: 38 ]]
+function Favorites.init(p1)
 	-- upvalues: GetSelectionImageObjectRegularModule (copy)
 	p1.numFavorites = ""
 	p1.selectionImageObject = GetSelectionImageObjectRegularModule()
 end
 
-function Favorites.willUpdate(p1, p2) --[[ Line: 43 ]]
+function Favorites.willUpdate(p1, p2)
 	-- upvalues: UtilityFunctionsModule (copy)
 	local GetAssetFavoriteCountFunction = p1.props.getAssetFavoriteCount
 	local GetBundleFavoriteCountFunction = p1.props.getBundleFavoriteCount
@@ -44,7 +44,7 @@ function Favorites.willUpdate(p1, p2) --[[ Line: 43 ]]
 		local HasParentBundleId = AssetInfo.parentBundleId ~= nil
 		
 		if not p2.gotCurrentFavoriteCount then
-			coroutine.wrap(function() --[[ Line: 58 ]]
+			coroutine.wrap(function()
 				-- upvalues: HasParentBundleId (copy), GetAssetFavoriteCountFunction (copy), AssetInfo (copy), UtilityFunctionsModule (upval), GetBundleFavoriteCountFunction (copy)
 				if HasParentBundleId then
 					GetBundleFavoriteCountFunction((UtilityFunctionsModule.getBundleId(AssetInfo)))
@@ -58,7 +58,7 @@ function Favorites.willUpdate(p1, p2) --[[ Line: 43 ]]
 	end
 end
 
-function Favorites.render(p1) --[[ Line: 70 ]]
+function Favorites.render(p1)
 	-- upvalues: RoactModule (copy), AppFonts (copy)
 	p1:setText()
 	
@@ -87,11 +87,11 @@ function Favorites.render(p1) --[[ Line: 70 ]]
 	})
 end
 
-function Favorites:shouldUpdate(p1): boolean --[[ Line: 98 ]]
+function Favorites:shouldUpdate(p1): boolean
 	return if p1.detailsInformation.viewingDetails then true else false
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 106 ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	-- upvalues: GotCurrentFavoriteCountModule (copy)
 	return {
 		detailsInformation = p1.detailsInformation,
@@ -99,14 +99,14 @@ return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 106 ]]
 		bundleInfo = p1.bundles,
 		gotCurrentFavoriteCount = GotCurrentFavoriteCountModule(p1)
 	}
-end, function(Callback) --[[ Line: 115 ]]
+end, function(Callback)
 	-- upvalues: GetAssetFavoriteCountModule (copy), GetBundleFavoriteCountModule (copy)
 	return {
-		getAssetFavoriteCount = function(p1) --[[ Line: 117 ]]
+		getAssetFavoriteCount = function(p1)
 			-- upvalues: Callback (copy), GetAssetFavoriteCountModule (upval)
 			Callback(GetAssetFavoriteCountModule(p1))
 		end,
-		getBundleFavoriteCount = function(p1) --[[ Line: 120 ]]
+		getBundleFavoriteCount = function(p1)
 			-- upvalues: Callback (copy), GetBundleFavoriteCountModule (upval)
 			Callback(GetBundleFavoriteCountModule(p1))
 		end

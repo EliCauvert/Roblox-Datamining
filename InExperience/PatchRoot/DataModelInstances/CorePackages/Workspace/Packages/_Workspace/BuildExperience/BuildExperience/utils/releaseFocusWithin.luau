@@ -1,6 +1,6 @@
 ﻿local UserInputService = game:GetService("UserInputService")
 
-return function(Ancestor, p1): boolean --[[ Line: 7 | Named "releaseFocusWithin" ]]
+return function(Ancestor, p1): boolean
 	-- upvalues: UserInputService (copy)
 	local FocusedTextBox = (p1 or UserInputService):GetFocusedTextBox()
 	

@@ -12,20 +12,20 @@ local DecodeEmojiSetsModule = require(script.Parent.Util.decodeEmojiSets)
 local ResolveMomentsEmojiCatalogModule = require(script.Parent.Util.resolveMomentsEmojiCatalog)
 local ValidateMomentsEmojiCatalogModule = require(script.Parent.Util.validateMomentsEmojiCatalog)
 
-local function shouldRefreshCachedEmojiSets(p1): boolean --[[ Line: 26 ]]
+local function shouldRefreshCachedEmojiSets(p1): boolean
 	return p1 == nil
 end
 
-return function(p1) --[[ Line: 30 | Named "createMomentsEmojiSetsStore" ]]
+return function(p1)
 	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), HttpClientModule (copy), GetEmojiSetsModule (copy), ValidateMomentsEmojiCatalogModule (copy), PromiseModule (copy), shouldRefreshCachedEmojiSets (copy), ResolveMomentsEmojiCatalogModule (copy), DecodeEmojiSetsModule (copy)
 	local P1 = p1 or {}
 	local DataResolverModule = CreateDataResolverModule({
 		supportsMultiGet = false,
 		replaceItems = true,
 		cache = CreateDataCacheModule(),
-		fetchFn = function(_, _) --[[ Line: 37 ]]
+		fetchFn = function(_, _)
 			-- upvalues: HttpClientModule (upval), GetEmojiSetsModule (upval), P1 (copy), ValidateMomentsEmojiCatalogModule (upval), PromiseModule (upval)
-			return HttpClientModule.asPromise(GetEmojiSetsModule(P1.network)):andThen(function(Result) --[[ Line: 42 ]]
+			return HttpClientModule.asPromise(GetEmojiSetsModule(P1.network)):andThen(function(Result)
 				-- upvalues: ValidateMomentsEmojiCatalogModule (upval), PromiseModule (upval)
 				return if ValidateMomentsEmojiCatalogModule.isValidCachedGetEmojiSetsResponse(Result) then Result else PromiseModule.reject("Moments emoji-api returned an invalid or empty catalog")
 			end)
@@ -33,15 +33,15 @@ return function(p1) --[[ Line: 30 | Named "createMomentsEmojiSetsStore" ]]
 	})
 	
 	return {
-		getAndFetchEmojiSets = function() --[[ Line: 51 ]]
+		getAndFetchEmojiSets = function()
 			-- upvalues: DataResolverModule (copy), shouldRefreshCachedEmojiSets (upval)
 			return DataResolverModule.getAndFetchItem("emoji-sets", shouldRefreshCachedEmojiSets)
 		end,
-		getEmojis = function(p2) --[[ Line: 57 ]]
+		getEmojis = function(p2)
 			-- upvalues: DataResolverModule (copy), ResolveMomentsEmojiCatalogModule (upval)
 			return ResolveMomentsEmojiCatalogModule.resolveMomentsEmojiCatalog((DataResolverModule.getCachedItem("emoji-sets").data(p2))).emojis
 		end,
-		getCachedEmojiCatalog = function(p2) --[[ Line: 62 ]]
+		getCachedEmojiCatalog = function(p2)
 			-- upvalues: DataResolverModule (copy), ValidateMomentsEmojiCatalogModule (upval), DecodeEmojiSetsModule (upval)
 			local EmojiSetsCachedItem = DataResolverModule.getCachedItem("emoji-sets")
 			local DataResult = EmojiSetsCachedItem.data(p2)
@@ -56,7 +56,7 @@ return function(p1) --[[ Line: 30 | Named "createMomentsEmojiSetsStore" ]]
 				status = EmojiSetsCachedItem.status(p2)
 			}
 		end,
-		dispose = function() --[[ Line: 79 ]]
+		dispose = function()
 			-- upvalues: DataResolverModule (copy)
 			DataResolverModule.dispose()
 		end

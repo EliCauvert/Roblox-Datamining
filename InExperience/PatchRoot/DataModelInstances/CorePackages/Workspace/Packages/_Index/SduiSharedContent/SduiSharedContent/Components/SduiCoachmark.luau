@@ -16,20 +16,20 @@ local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local StreamNotificationStore = require(Parent.StreamNotifications).StreamNotificationStore
 local CollectionService = game:GetService("CollectionService")
 
-return ReactModule.memo(function(p1) --[[ Line: 49 | Named "SduiCoachmark" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), LuaAppUseNavFocusInSduiCoachmark (copy), UseNavigationFocusFunction (copy), LuaAppHideSduiCoachmarkWhenFlyoutOpen (copy), UseDrawerVisibleFunction (copy), LuaAppHideSduiCoachmarkWhenCentralOverlayOpen (copy), UseSelectorFunction (copy), LuaAppHideSduiCoachmarkWhenNotificationStreamOpen (copy), UseSignalStateFunction (copy), StreamNotificationStore (copy), CollectionService (copy), LuaAppCoachmarkImpression (copy), FFlagPromptsCoachmarkImpressionOnShow (copy), SendCoachmarkImpressionModule (copy), Coachmark (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local UseNavigationFocusResult = if LuaAppUseNavFocusInSduiCoachmark then UseNavigationFocusFunction() else nil
 	local UseDrawerVisibleResult = if LuaAppHideSduiCoachmarkWhenFlyoutOpen then UseDrawerVisibleFunction() else false
-	local UseSelectorResult = if LuaAppHideSduiCoachmarkWhenCentralOverlayOpen then UseSelectorFunction(function(p2): boolean --[[ Line: 56 ]]
+	local UseSelectorResult = if LuaAppHideSduiCoachmarkWhenCentralOverlayOpen then UseSelectorFunction(function(p2): boolean
 		return p2.CentralOverlay.OverlayType ~= nil
 	end) else nil
 	local UseSignalStateResult = if LuaAppHideSduiCoachmarkWhenNotificationStreamOpen then UseSignalStateFunction(StreamNotificationStore.getStreamPresented) else nil
-	ReactModule.useEffect(function() --[[ Line: 64 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseStateResult2_1 (copy), CollectionService (upval), p1 (copy)
-		local function onTagAdded(Tagged) --[[ Line: 65 ]]
+		local function onTagAdded(Tagged)
 			-- upvalues: UseRefResult (upval), UseStateResult2_1 (upval)
 			if Tagged:IsA("GuiObject") then
 				UseRefResult.current = Tagged
@@ -39,7 +39,7 @@ return ReactModule.memo(function(p1) --[[ Line: 49 | Named "SduiCoachmark" ]]
 			end
 		end
 		
-		local function onTagRemoved(_) --[[ Line: 73 ]]
+		local function onTagRemoved(_)
 			-- upvalues: UseRefResult (upval), UseStateResult2_1 (upval)
 			UseRefResult.current = nil
 			UseStateResult2_1(false)
@@ -58,13 +58,13 @@ return ReactModule.memo(function(p1) --[[ Line: 49 | Named "SduiCoachmark" ]]
 		local Connection = CollectionService:GetInstanceAddedSignal(p1.collectionServiceAnchorTag):Connect(onTagAdded)
 		local Connection1 = CollectionService:GetInstanceRemovedSignal(p1.collectionServiceAnchorTag):Connect(onTagRemoved)
 		
-		return function() --[[ Line: 90 ]]
+		return function()
 			-- upvalues: Connection (copy), Connection1 (copy)
 			Connection:Disconnect()
 			Connection1:Disconnect()
 		end
 	end, { p1.collectionServiceAnchorTag })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 96 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), p1 (copy)
 		UseStateResult2(true)
 		
@@ -76,7 +76,7 @@ return ReactModule.memo(function(p1) --[[ Line: 49 | Named "SduiCoachmark" ]]
 	if LuaAppCoachmarkImpression or FFlagPromptsCoachmarkImpressionOnShow then
 		local UseRefResult1 = ReactModule.useRef(false)
 		local Inverted: boolean = UseStateResult1 and (not UseStateResult and (not (LuaAppUseNavFocusInSduiCoachmark and not UseNavigationFocusResult) and (not (LuaAppHideSduiCoachmarkWhenFlyoutOpen and UseDrawerVisibleResult) and (not (LuaAppHideSduiCoachmarkWhenCentralOverlayOpen and UseSelectorResult) and not (LuaAppHideSduiCoachmarkWhenNotificationStreamOpen and UseSignalStateResult)))))
-		ReactModule.useEffect(function() --[[ Line: 113 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: Inverted (copy), UseRefResult1 (copy), FFlagPromptsCoachmarkImpressionOnShow (upval), p1 (copy), LuaAppCoachmarkImpression (upval), SendCoachmarkImpressionModule (upval)
 			if not Inverted or UseRefResult1.current then return end
 			if FFlagPromptsCoachmarkImpressionOnShow and p1.onShown then

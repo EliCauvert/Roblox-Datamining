@@ -2,7 +2,7 @@
 local MomentsCommonModule = require(Parent.MomentsCommon)
 local _ = require(Parent.MomentsTypes)
 
-return function(p1, Entry) --[[ Line: 33 | Named "makeJoinImpressionFields" ]]
+return function(p1, Entry)
 	-- upvalues: MomentsCommonModule (copy)
 	local RecommendationMetadata = p1.recommendationMetadata
 	local FeedItemId = if RecommendationMetadata == nil then nil else RecommendationMetadata.feedItemId

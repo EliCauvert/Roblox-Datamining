@@ -13,7 +13,7 @@ local EntryFrameHeight = ConstantsModule.GeneralFormatting.EntryFrameHeight
 local DepthIndent = ConstantsModule.MemoryFormatting.DepthIndent
 local ConvertTimeStampModule = require(script.Parent.Parent.Parent.Util.convertTimeStamp)
 
-return function(p1) --[[ Line: 22 ]]
+return function(p1)
 	-- upvalues: DepthIndent (copy), ValueCellWidth (copy), RoactModule (copy), BannerButtonModule (copy), EntryFrameHeight (copy), CellLabelModule (copy), CellPadding (copy), LineWidth (copy), LineColor (copy), ValuePadding (copy), LineGraphModule (copy), ConvertTimeStampModule (copy)
 	local ShowGraph = p1.showGraph
 	local DataStats = p1.dataStats

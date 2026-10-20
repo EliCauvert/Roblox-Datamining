@@ -26,7 +26,7 @@ local config1 = {
 	}
 }
 
-return function(p1) --[[ Line: 39 | Named "CommercePurchaseError" ]]
+return function(p1)
 	-- upvalues: UseScreenSizeFunction (copy), UseLocalizationFunction (copy), FFlagAddCommerceErrorsModule (copy), config1 (copy), config (copy), ReactModule (copy), InteractiveAlert (copy), Images (copy)
 	local UseScreenSizeResult = UseScreenSizeFunction()
 	local UseLocalizationResult = UseLocalizationFunction({

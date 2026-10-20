@@ -34,7 +34,7 @@ local FFlagBuildExperienceChatSheetReversedContentModule = require(BuildExperien
 local LocalizationProvider = require(Parent.Localization).LocalizationProvider
 local AppInteractionFeedbackProvider = if FFlagBuildExperienceUserMessageHapticFeedbackModule then require(Parent.RobloxAppInteractionFeedbackConfig).AppInteractionFeedbackProvider else nil
 
-local function _(p1) --[[ Line: 60 | Named "createAppLocalization" ]]
+local function _(p1)
 	-- upvalues: Parent (copy)
 	return require(Parent.InExperienceLocales).Localization.new(p1)
 end
@@ -43,9 +43,9 @@ local FIntInGameBuildChatSheetSnapPoint: number = game:DefineFastInt("FIntInGame
 local list = { FIntInGameBuildChatSheetSnapPoint / 100 }
 local list1 = { FIntInGameBuildChatSheetSnapPoint / 100, 1 }
 
-local function beginInstanceSelection() --[[ Line: 77 ]]
+local function beginInstanceSelection()
 	-- upvalues: InstanceSelectionProtocolModule (copy), ClientDataModelCollectorModule (copy), GetPlayButtonStoreModule (copy), LibraryTypesModule (copy)
-	InstanceSelectionProtocolModule.beginSelection(function(p1) --[[ Line: 78 ]]
+	InstanceSelectionProtocolModule.beginSelection(function(p1)
 		-- upvalues: ClientDataModelCollectorModule (upval), GetPlayButtonStoreModule (upval), LibraryTypesModule (upval)
 		if p1.status ~= "selected" or p1.path == nil or p1.className == nil then return end
 		local ResolveInstancePathResult = ClientDataModelCollectorModule.resolveInstancePath(p1.path, p1.className)
@@ -64,11 +64,11 @@ local function beginInstanceSelection() --[[ Line: 77 ]]
 	end)
 end
 
-local function ConnectedChatSheet(p1) --[[ Line: 101 ]]
+local function ConnectedChatSheet(p1)
 	-- upvalues: GetPlayButtonStoreModule (copy), IsImageAttachmentSupportedModule1 (copy), UseCaptureToChatModule (copy), TeamCreateUtilsModule (copy), BuildModeLaunchModule (copy), FFlagReportBuildUIVisibilityModule (copy), TrackBuildOpenSafetyServiceModule (copy), ReactModule (copy), BuildExperience (copy), ChatSheetModule (copy), list (copy), FFlagBuildExperienceChatSheetReversedContentModule (copy), list1 (copy), FIntInGameBuildChatSheetSnapPoint (copy), FFlagBuildExperienceInGameShell (copy), GetAssistantBuildStoreModule (copy), DisplayModule (copy), SignalsReactModule (copy), InGameBuildShellModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), beginInstanceSelection (copy)
 	local PlayButtonStoreModule = GetPlayButtonStoreModule()
 	local UseIsActiveResult = PlayButtonStoreModule.useIsActive()
-	local UseCaptureToChatModuleResult = if IsImageAttachmentSupportedModule1 then UseCaptureToChatModule(function() --[[ Line: 107 ]]
+	local UseCaptureToChatModuleResult = if IsImageAttachmentSupportedModule1 then UseCaptureToChatModule(function()
 		-- upvalues: PlayButtonStoreModule (copy)
 		PlayButtonStoreModule.setIsActive(true)
 	end, p1.takeCapture) else nil
@@ -87,7 +87,7 @@ local function ConnectedChatSheet(p1) --[[ Line: 101 ]]
 	local Element = ReactModule.createElement(if IsViewer then require(BuildExperience.Components.Library.LibraryChatSheet) else ChatSheetModule, {
 		defaultSnapPointIndex = 1,
 		isOpen = UseIsActiveResult,
-		onClose = ReactModule.useCallback(function() --[[ Line: 127 ]]
+		onClose = ReactModule.useCallback(function()
 			-- upvalues: PlayButtonStoreModule (copy)
 			PlayButtonStoreModule.setIsActive(false)
 		end, { PlayButtonStoreModule }),
@@ -108,14 +108,14 @@ local function ConnectedChatSheet(p1) --[[ Line: 101 ]]
 			Shell = ReactModule.createElement(InGameBuildShellModule, {
 				isVisible = SignalsReactModule.useSignalState(GetAssistantBuildStoreModule().getIsOverlayVisible),
 				isLibraryMode = IsViewer,
-				onActivated = function() --[[ Line: 171 ]]
+				onActivated = function()
 					-- upvalues: PlayButtonStoreModule (copy)
 					PlayButtonStoreModule.setIsActive(true)
 				end,
 				onCaptureActivated = if UseCaptureToChatModuleResult == nil then nil else UseCaptureToChatModuleResult.onCaptureActivated,
-				onInsetsChanged = ReactModule.useCallback(function(Left, Right, Bottom) --[[ Line: 155 ]]
+				onInsetsChanged = ReactModule.useCallback(function(Left, Right, Bottom)
 					-- upvalues: DisplayStore (copy)
-					DisplayStore.setGuiInset(function(p2) --[[ Line: 156 ]]
+					DisplayStore.setGuiInset(function(p2)
 						-- upvalues: Left (copy), Right (copy), Bottom (copy)
 						return {
 							left = Left,
@@ -133,12 +133,12 @@ local function ConnectedChatSheet(p1) --[[ Line: 101 ]]
 	end
 end
 
-local LazyComponent = require(Parent.RoactUtils).Components.createLazyComponent(function() --[[ Line: 183 ]]
+local LazyComponent = require(Parent.RoactUtils).Components.createLazyComponent(function()
 	-- upvalues: ConnectedChatSheet (copy)
 	return ConnectedChatSheet
 end)
 
-return function(p1) --[[ Line: 187 | Named "mountChatSheet" ]]
+return function(p1)
 	-- upvalues: ClientLogsCollectorModule (copy), FFlagBuildExperienceInGameShell (copy), CoreGui (copy), ReactRobloxModule (copy), LocalizationService (copy), Parent (copy), ReactModule (copy), BuildExperienceCompositionStyleSheetModule (copy), LazyComponent (copy), TeamCreateUtilsModule (copy), LibraryThemeProviderModule (copy), FoundationModule (copy), FFlagBuildExperienceUserMessageHapticFeedbackModule (copy), AppInteractionFeedbackProvider (copy), LocalizationProvider (copy)
 	ClientLogsCollectorModule.startServerLogCollection()
 	local BuildExperienceChatSheet = Instance.new("ScreenGui")

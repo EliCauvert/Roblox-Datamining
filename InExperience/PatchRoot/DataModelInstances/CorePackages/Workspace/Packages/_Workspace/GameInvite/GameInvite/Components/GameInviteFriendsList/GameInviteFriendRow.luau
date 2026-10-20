@@ -12,7 +12,7 @@ local config = {
 	[UserModel.PresenceType.OFFLINE] = "Offline"
 }
 
-return function(p1) --[[ Line: 37 | Named "GameInviteFriendRow" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), FriendMetadataLineModule (copy), ReactModule (copy), GameInviteInviteButtonModule (copy), config (copy)
 	local Friend = p1.friend
 	local Id = Friend.id
@@ -20,12 +20,12 @@ return function(p1) --[[ Line: 37 | Named "GameInviteFriendRow" ]]
 	local ContextText = FriendMetadataLineModule.getContextText(Friend, (UseLocalizationFunction({ inStudio = "Common.Presence.Label.RobloxStudio" })))
 	
 	return p1.createRow({
-		contextualInfo = ReactModule.useMemo(function() --[[ Line: 47 ]]
+		contextualInfo = ReactModule.useMemo(function()
 			-- upvalues: ContextText (copy)
 			return if ContextText == nil then nil else { text = ContextText }
 		end, { ContextText }),
 		presence = config[Friend.presence],
-		trailingContent = ReactModule.useMemo(function() --[[ Line: 50 ]]
+		trailingContent = ReactModule.useMemo(function()
 			-- upvalues: ReactModule (upval), GameInviteInviteButtonModule (upval), Id (copy), RowNumber (copy)
 			return ReactModule.createElement(GameInviteInviteButtonModule, { userId = Id, rowNumber = RowNumber })
 		end, { Id, RowNumber })

@@ -6,13 +6,13 @@ local UrlBuilderModule = require(Parent.UrlBuilder)
 local UrlBase = UrlBuilderModule.UrlBase
 local WithCsrfRetryModule = require(DataHydration.withCsrfRetry)
 local CreatorApiHttpModule = {
-	baseUrl = function(p1) --[[ Line: 45 ]]
+	baseUrl = function(p1)
 		-- upvalues: UrlBase (copy)
 		return (p1 or {}).baseUrl or UrlBase.APIS
 	end,
-	withoutRestrictedAcceptHeader = function(MutatingNetwork) --[[ Line: 50 ]]
+	withoutRestrictedAcceptHeader = function(MutatingNetwork)
 		return {
-			request = function(Tbl, p1) --[[ Line: 52 ]]
+			request = function(Tbl, p1)
 				-- upvalues: MutatingNetwork (copy)
 				local Headers = nil
 				
@@ -35,7 +35,7 @@ local CreatorApiHttpModule = {
 	end
 }
 
-function CreatorApiHttpModule.readNetwork(p1) --[[ Line: 74 ]]
+function CreatorApiHttpModule.readNetwork(p1)
 	-- upvalues: CreatorApiHttpModule (copy), HttpClientModule (copy)
 	local P3 = p1 or {}
 	local ReadNetwork = P3.readNetwork or P3.network
@@ -49,14 +49,14 @@ function CreatorApiHttpModule.readNetwork(p1) --[[ Line: 74 ]]
 	end
 end
 
-function CreatorApiHttpModule.mutatingNetwork(p1) --[[ Line: 86 ]]
+function CreatorApiHttpModule.mutatingNetwork(p1)
 	-- upvalues: CreatorApiHttpModule (copy), WithCsrfRetryModule (copy), HttpClientModule (copy)
 	local P4 = p1 or {}
 	
 	return CreatorApiHttpModule.withoutRestrictedAcceptHeader(P4.mutatingNetwork or (P4.network or WithCsrfRetryModule(HttpClientModule.createRequestInternalNetwork())))
 end
 
-function CreatorApiHttpModule.imagePart(p1) --[[ Line: 93 ]]
+function CreatorApiHttpModule.imagePart(p1)
 	return {
 		name = "imageFile",
 		value = p1.content,
@@ -65,7 +65,7 @@ function CreatorApiHttpModule.imagePart(p1) --[[ Line: 93 ]]
 	}
 end
 
-function CreatorApiHttpModule.buildMultipartBody(List): string --[[ Line: 102 ]]
+function CreatorApiHttpModule.buildMultipartBody(List): string
 	local List1 = {}
 	
 	for _, value in List do
@@ -76,7 +76,7 @@ function CreatorApiHttpModule.buildMultipartBody(List): string --[[ Line: 102 ]]
 	return table.concat(List1)
 end
 
-local function _(Buf) --[[ Line: 118 | Named "tryJsonDecode" ]]
+local function _(Buf)
 	-- upvalues: HttpService (copy)
 	if Buf == nil or Buf == "" then
 		return nil
@@ -87,11 +87,11 @@ local function _(Buf) --[[ Line: 118 | Named "tryJsonDecode" ]]
 	end
 end
 
-local _ = function(p1: number): boolean --[[ Line: 127 | Named "isOk" ]]
+local _ = function(p1: number): boolean
 	return p1 >= 200 and p1 < 300
 end
 
-function CreatorApiHttpModule.errorFrom(p1) --[[ Line: 131 ]]
+function CreatorApiHttpModule.errorFrom(p1)
 	-- upvalues: HttpService (copy)
 	local ResponseBody = p1.responseBody
 	local v1 = nil
@@ -112,9 +112,9 @@ function CreatorApiHttpModule.errorFrom(p1) --[[ Line: 131 ]]
 	return ("http %d: %s"):format(p1.statusCode, if typeof(p1.responseBody) == "buffer" then buffer.tostring(p1.responseBody) else p1.responseBody or ""), p1.statusCode
 end
 
-function CreatorApiHttpModule.jsonDecoder(Callback) --[[ Line: 146 ]]
+function CreatorApiHttpModule.jsonDecoder(Callback)
 	-- upvalues: CreatorApiHttpModule (copy), HttpService (copy)
-	return function(p1) --[[ Line: 147 ]]
+	return function(p1)
 		-- upvalues: CreatorApiHttpModule (upval), Callback (copy), HttpService (upval)
 		local StatusCode: number = p1.statusCode
 		
@@ -136,9 +136,9 @@ function CreatorApiHttpModule.jsonDecoder(Callback) --[[ Line: 146 ]]
 	end
 end
 
-function CreatorApiHttpModule.noContentDecoder(Callback) --[[ Line: 156 ]]
+function CreatorApiHttpModule.noContentDecoder(Callback)
 	-- upvalues: CreatorApiHttpModule (copy)
-	return function(p1) --[[ Line: 157 ]]
+	return function(p1)
 		-- upvalues: CreatorApiHttpModule (upval), Callback (copy)
 		local StatusCode: number = p1.statusCode
 		
@@ -152,7 +152,7 @@ function CreatorApiHttpModule.noContentDecoder(Callback) --[[ Line: 156 ]]
 	end
 end
 
-function CreatorApiHttpModule.multipart(NetworkImpl, Method, Url, p1, AnalyticsKey, Decode) --[[ Line: 166 ]]
+function CreatorApiHttpModule.multipart(NetworkImpl, Method, Url, p1, AnalyticsKey, Decode)
 	-- upvalues: HttpClientModule (copy), CreatorApiHttpModule (copy)
 	return HttpClientModule.asPromise(HttpClientModule.createRequest({
 		networkImpl = NetworkImpl,
@@ -166,7 +166,7 @@ function CreatorApiHttpModule.multipart(NetworkImpl, Method, Url, p1, AnalyticsK
 	}))
 end
 
-function CreatorApiHttpModule.json(NetworkImpl, Method, Url, Body, AnalyticsKey, Decode) --[[ Line: 186 ]]
+function CreatorApiHttpModule.json(NetworkImpl, Method, Url, Body, AnalyticsKey, Decode)
 	-- upvalues: HttpClientModule (copy)
 	return HttpClientModule.asPromise(HttpClientModule.createRequest({
 		networkImpl = NetworkImpl,
@@ -179,7 +179,7 @@ function CreatorApiHttpModule.json(NetworkImpl, Method, Url, Body, AnalyticsKey,
 	}))
 end
 
-function CreatorApiHttpModule.get(p1, Url, AnalyticsKey, p2) --[[ Line: 205 ]]
+function CreatorApiHttpModule.get(p1, Url, AnalyticsKey, p2)
 	-- upvalues: HttpClientModule (copy), CreatorApiHttpModule (copy)
 	return HttpClientModule.asPromise(HttpClientModule.createRequest({
 		method = "GET",
@@ -192,7 +192,7 @@ function CreatorApiHttpModule.get(p1, Url, AnalyticsKey, p2) --[[ Line: 205 ]]
 	}))
 end
 
-function CreatorApiHttpModule.withQuery(p1, List) --[[ Line: 222 ]]
+function CreatorApiHttpModule.withQuery(p1, List)
 	-- upvalues: UrlBuilderModule (copy)
 	local t = {}
 	

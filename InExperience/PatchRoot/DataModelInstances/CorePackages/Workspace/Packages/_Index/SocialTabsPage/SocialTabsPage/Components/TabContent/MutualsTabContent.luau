@@ -18,19 +18,19 @@ local UseCTAActionHandlersModule = require(SocialTabsPage.Hooks.useCTAActionHand
 local SocialTabsCtaConfigModule = require(SocialTabsPage.Common.SocialTabsCtaConfig)
 local FFlagUserListCtaIntegrationEnabled = require(Parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
 
-return function() --[[ Line: 24 | Named "MutualsTabContent" ]]
+return function()
 	-- upvalues: UseSocialTabsContextModule (copy), UseMutualsListModule (copy), ReactModule (copy), DashModule (copy), EntityType (copy), UseSortedEntitiesByPresenceModule (copy), FFlagUserListCtaIntegrationEnabled (copy), UseUserListCTAsModule (copy), UseCTAActionHandlersModule (copy), RowDataProviderModule (copy), View (copy), Loading (copy), UserListLayoutAdaptor (copy), LayoutMode (copy), SocialTabsCtaConfigModule (copy)
 	local UseMutualsListModuleResult = UseMutualsListModule(UseSocialTabsContextModule().profileId)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 30 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: DashModule (upval), UseMutualsListModuleResult (copy), EntityType (upval)
-		return DashModule.map(UseMutualsListModuleResult.mutualFriends, function(p1) --[[ Line: 31 ]]
+		return DashModule.map(UseMutualsListModuleResult.mutualFriends, function(p1)
 			-- upvalues: EntityType (upval)
 			return { id = p1.id, type = EntityType.User }
 		end)
 	end, { UseMutualsListModuleResult.mutualFriends })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 36 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: DashModule (upval), UseMemoResult (copy)
-		return DashModule.map(UseMemoResult, function(p1) --[[ Line: 37 ]]
+		return DashModule.map(UseMemoResult, function(p1)
 			return p1.id
 		end)
 	end, { UseMemoResult })
@@ -40,7 +40,7 @@ return function() --[[ Line: 24 | Named "MutualsTabContent" ]]
 	if not FFlagUserListCtaIntegrationEnabled then
 		local UseUserListCTAsModuleResult = UseUserListCTAsModule(UseMemoResult1)
 		local UseCTAActionHandlersModuleResult = UseCTAActionHandlersModule()
-		UseResult = ReactModule.useCallback(function(CreateRow, Entity, _) --[[ Line: 49 ]]
+		UseResult = ReactModule.useCallback(function(CreateRow, Entity, _)
 			-- upvalues: ReactModule (upval), RowDataProviderModule (upval), UseUserListCTAsModuleResult (copy), UseCTAActionHandlersModuleResult (copy)
 			return ReactModule.createElement(RowDataProviderModule, {
 				createRow = CreateRow,

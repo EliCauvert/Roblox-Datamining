@@ -10,11 +10,11 @@ local FriendRequestDeclinedModule = require(Actions.FriendRequestDeclined)
 local _ = require(Parent.roduxFriendsTypes)
 local t = {}
 
-local function _(p1) --[[ Line: 18 | Named "mapFriendshipStatusToEnum" ]]
+local function _(p1)
 	return if p1 == "NotFriends" then Enum.FriendStatus.NotFriend elseif p1 == "Friends" then Enum.FriendStatus.Friend elseif p1 == "RequestSent" then Enum.FriendStatus.FriendRequestSent elseif p1 == "RequestReceived" then Enum.FriendStatus.FriendRequestReceived else Enum.FriendStatus.Unknown
 end
 
-local function difference(List, KeysResult) --[[ Line: 32 ]]
+local function difference(List, KeysResult)
 	local t = {}
 	
 	for _, value in pairs(List) do
@@ -35,12 +35,12 @@ local function difference(List, KeysResult) --[[ Line: 32 ]]
 	return t1
 end
 
-return function(p1) --[[ Line: 54 ]]
+return function(p1)
 	-- upvalues: RoduxModule (copy), t (copy), LlamaModule (copy), difference (copy), FriendshipDestroyedModule (copy), FriendshipCreatedModule (copy), FriendRequestCreatedModule (copy), FriendRequestDeclinedModule (copy)
 	local FriendsNetworking = p1.friendsNetworking
 	
 	return RoduxModule.createReducer(t, {
-		[FriendsNetworking.GetFriendshipStatus.Succeeded.name] = function(p2, p3) --[[ Line: 58 ]]
+		[FriendsNetworking.GetFriendshipStatus.Succeeded.name] = function(p2, p3)
 			-- upvalues: LlamaModule (upval)
 			local NotFriends = {}
 			
@@ -50,7 +50,7 @@ return function(p1) --[[ Line: 54 ]]
 			end
 			return LlamaModule.Dictionary.join(p2, NotFriends)
 		end,
-		[FriendsNetworking.GetExtendedFriendshipStatus.Succeeded.name] = function(p4, p5) --[[ Line: 66 ]]
+		[FriendsNetworking.GetExtendedFriendshipStatus.Succeeded.name] = function(p4, p5)
 			-- upvalues: LlamaModule (upval)
 			local Status = p5.responseBody.status
 			
@@ -58,12 +58,12 @@ return function(p1) --[[ Line: 54 ]]
 				[tostring(p5.ids[1])] = if Status == "NotFriends" then Enum.FriendStatus.NotFriend elseif Status == "Friends" then Enum.FriendStatus.Friend elseif Status == "RequestSent" then Enum.FriendStatus.FriendRequestSent elseif Status == "RequestReceived" then Enum.FriendStatus.FriendRequestReceived else Enum.FriendStatus.Unknown
 			})
 		end,
-		[FriendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(JoinResult, p4) --[[ Line: 71 ]]
+		[FriendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(JoinResult, p4)
 			-- upvalues: LlamaModule (upval), difference (upval)
-			local KeysResult = LlamaModule.Dictionary.keys(LlamaModule.Dictionary.filter(JoinResult, function(FriendStatus): boolean --[[ Line: 72 ]]
+			local KeysResult = LlamaModule.Dictionary.keys(LlamaModule.Dictionary.filter(JoinResult, function(FriendStatus): boolean
 				return FriendStatus == Enum.FriendStatus.Friend
 			end))
-			local MapResult = LlamaModule.List.map(LlamaModule.Dictionary.values(p4.responseBody.data), function(p5): string --[[ Line: 75 ]]
+			local MapResult = LlamaModule.List.map(LlamaModule.Dictionary.values(p4.responseBody.data), function(p5): string
 				return (tostring(p5.id))
 			end)
 			local DifferenceResult = difference(MapResult, KeysResult)
@@ -77,17 +77,17 @@ return function(p1) --[[ Line: 54 ]]
 			end
 			return JoinResult
 		end,
-		[FriendsNetworking.UnfriendTargetUserId.Succeeded.name] = function(p5, p6) --[[ Line: 94 ]]
+		[FriendsNetworking.UnfriendTargetUserId.Succeeded.name] = function(p5, p6)
 			-- upvalues: LlamaModule (upval)
 			return LlamaModule.Dictionary.join(p5, {
 				[tostring(p6.namedIds.users)] = Enum.FriendStatus.NotFriend
 			})
 		end,
-		[FriendsNetworking.AcceptFriendRequestFromUserId.Succeeded.name] = function(p5, p6) --[[ Line: 101 ]]
+		[FriendsNetworking.AcceptFriendRequestFromUserId.Succeeded.name] = function(p5, p6)
 			-- upvalues: LlamaModule (upval)
 			return LlamaModule.Dictionary.join(p5, { [tostring(p6.ids[1])] = Enum.FriendStatus.Friend })
 		end,
-		[FriendsNetworking.DeclineFriendRequestFromUserId.Succeeded.name] = function(p5, p6) --[[ Line: 108 ]]
+		[FriendsNetworking.DeclineFriendRequestFromUserId.Succeeded.name] = function(p5, p6)
 			-- upvalues: LlamaModule (upval)
 			local NotFriends = {}
 			
@@ -96,7 +96,7 @@ return function(p1) --[[ Line: 54 ]]
 			end
 			return LlamaModule.Dictionary.join(p5, NotFriends)
 		end,
-		[FriendsNetworking.GetFriendRequests.Succeeded.name] = function(p7, p8) --[[ Line: 117 ]]
+		[FriendsNetworking.GetFriendRequests.Succeeded.name] = function(p7, p8)
 			-- upvalues: LlamaModule (upval)
 			local t = {}
 			
@@ -105,7 +105,7 @@ return function(p1) --[[ Line: 54 ]]
 			end
 			return LlamaModule.Dictionary.join(p7, t)
 		end,
-		[FriendsNetworking.DeclineAllFriendRequests.Succeeded.name] = function(FriendStatuses) --[[ Line: 126 ]]
+		[FriendsNetworking.DeclineAllFriendRequests.Succeeded.name] = function(FriendStatuses)
 			-- upvalues: LlamaModule (upval)
 			local NotFriends = {}
 			
@@ -116,37 +116,37 @@ return function(p1) --[[ Line: 54 ]]
 			end
 			return LlamaModule.Dictionary.join(FriendStatuses, NotFriends)
 		end,
-		[FriendsNetworking.RequestFriendshipFromUserId.Succeeded.name] = function(p9, p10) --[[ Line: 136 ]]
+		[FriendsNetworking.RequestFriendshipFromUserId.Succeeded.name] = function(p9, p10)
 			-- upvalues: LlamaModule (upval)
 			return LlamaModule.Dictionary.join(p9, {
 				[tostring(p10.namedIds.users)] = Enum.FriendStatus.FriendRequestSent
 			})
 		end,
-		[FriendsNetworking.RequestFriendshipFromContactId.Succeeded.name] = function(p9, p10) --[[ Line: 143 ]]
+		[FriendsNetworking.RequestFriendshipFromContactId.Succeeded.name] = function(p9, p10)
 			-- upvalues: LlamaModule (upval)
 			return LlamaModule.Dictionary.join(p9, {
 				[tostring(p10.namedIds.contacts)] = Enum.FriendStatus.FriendRequestSent
 			})
 		end,
-		[FriendshipDestroyedModule.name] = function(p9, p10) --[[ Line: 150 ]]
+		[FriendshipDestroyedModule.name] = function(p9, p10)
 			-- upvalues: LlamaModule (upval)
 			return LlamaModule.Dictionary.join(p9, {
 				[tostring(p10.payload.userId1)] = Enum.FriendStatus.NotFriend
 			})
 		end,
-		[FriendshipCreatedModule.name] = function(p9, p10) --[[ Line: 157 ]]
+		[FriendshipCreatedModule.name] = function(p9, p10)
 			-- upvalues: LlamaModule (upval)
 			return LlamaModule.Dictionary.join(p9, {
 				[tostring(p10.payload.userId1)] = Enum.FriendStatus.Friend
 			})
 		end,
-		[FriendRequestCreatedModule.name] = function(p9, p10) --[[ Line: 164 ]]
+		[FriendRequestCreatedModule.name] = function(p9, p10)
 			-- upvalues: LlamaModule (upval)
 			return LlamaModule.Dictionary.join(p9, {
 				[tostring(p10.requesteeId)] = Enum.FriendStatus.FriendRequestReceived
 			})
 		end,
-		[FriendRequestDeclinedModule.name] = function(p9, p10) --[[ Line: 171 ]]
+		[FriendRequestDeclinedModule.name] = function(p9, p10)
 			-- upvalues: LlamaModule (upval)
 			local NotFriends = {}
 			

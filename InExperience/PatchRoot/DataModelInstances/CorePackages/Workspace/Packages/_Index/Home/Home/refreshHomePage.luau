@@ -5,7 +5,7 @@ local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
 local FetchHomePageModule = require(Home.fetchHomePage)
 local GetSiteMessageStoreFunction = require(Parent.SiteMessageStore).GetSiteMessageStore
 
-return function(RequestIntent, ContextualFeatures, Enabled) --[[ Line: 11 | Named "refreshHomePage" ]]
+return function(RequestIntent, ContextualFeatures, Enabled)
 	-- upvalues: GetSiteMessageStoreFunction (copy), SduiSharedUtilitiesModule (copy), AppPage (copy), FetchHomePageModule (copy)
 	if Enabled ~= false then
 		GetSiteMessageStoreFunction(false).refreshSiteAlertInfo()
@@ -18,7 +18,7 @@ return function(RequestIntent, ContextualFeatures, Enabled) --[[ Line: 11 | Name
 		contextualFeatures = ContextualFeatures
 	})
 	
-	return if HomePageModule then HomePageModule:finally(function() --[[ Line: 30 ]]
+	return if HomePageModule then HomePageModule:finally(function()
 		-- upvalues: LoadTimer (copy)
 		LoadTimer.logRefreshComplete()
 	end) else nil

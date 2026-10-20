@@ -46,11 +46,11 @@ local config4 = {
 	lastUpdated = { 2026, 5, 19 }
 }
 
-local function _(p1) --[[ Line: 79 | Named "optionalInt64FromString" ]]
+local function _(p1)
 	return if p1 == nil or p1 == "" then nil else tonumber(p1)
 end
 
-local function buildGameJoinCardCommonFields(p1) --[[ Line: 87 ]]
+local function buildGameJoinCardCommonFields(p1)
 	-- upvalues: Players (copy), FFlagGameJoinCardAnalyticsCardId (copy)
 	local t = {}
 	local LocalPlayer = Players.LocalPlayer
@@ -81,7 +81,7 @@ local function buildGameJoinCardCommonFields(p1) --[[ Line: 87 ]]
 end
 
 return {
-	logGameJoinCardButtonEvent = function(ButtonAction, p1) --[[ Line: 118 ]]
+	logGameJoinCardButtonEvent = function(ButtonAction, p1)
 		-- upvalues: buildGameJoinCardCommonFields (copy), TelemetryService (copy), config (copy)
 		local GameJoinCardCommonFields = buildGameJoinCardCommonFields(p1 or {})
 		GameJoinCardCommonFields.buttonAction = ButtonAction
@@ -91,7 +91,7 @@ return {
 			standardizedFields = { "addSessionInfo" }
 		})
 	end,
-	logGameJoinCardPageLoaded = function(p1) --[[ Line: 129 ]]
+	logGameJoinCardPageLoaded = function(p1)
 		-- upvalues: buildGameJoinCardCommonFields (copy), TelemetryService (copy), config1 (copy)
 		TelemetryService:LogEvent(config1, {
 			eventContext = "gameJoinCard",
@@ -99,7 +99,7 @@ return {
 			standardizedFields = { "addSessionInfo" }
 		})
 	end,
-	logJoinCardAgeCheckUpsellImpression = function(p1) --[[ Line: 143 ]]
+	logJoinCardAgeCheckUpsellImpression = function(p1)
 		-- upvalues: TelemetryService (copy), config2 (copy)
 		local CustomFields = {}
 		local UniverseId = p1.universeId
@@ -114,7 +114,7 @@ return {
 			standardizedFields = { "addSessionInfo" }
 		})
 	end,
-	logJoinCardAgeCheckVerificationOutcome = function(CustomFields) --[[ Line: 171 ]]
+	logJoinCardAgeCheckVerificationOutcome = function(CustomFields)
 		-- upvalues: AgeCheckUpsellOutcome (copy), TelemetryService (copy), config3 (copy)
 		local CustomFields1 = { outcome = AgeCheckUpsellOutcome[CustomFields.outcome] }
 		local UniverseId = CustomFields.universeId
@@ -129,7 +129,7 @@ return {
 			standardizedFields = { "addSessionInfo" }
 		})
 	end,
-	logJoinCardCtaLoadTime = function(p1) --[[ Line: 194 ]]
+	logJoinCardCtaLoadTime = function(p1)
 		-- upvalues: TelemetryService (copy), config4 (copy)
 		TelemetryService:LogEvent(config4, {
 			eventContext = "gameJoinCard",

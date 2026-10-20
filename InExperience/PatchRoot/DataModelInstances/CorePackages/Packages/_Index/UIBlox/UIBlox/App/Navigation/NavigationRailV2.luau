@@ -15,7 +15,7 @@ local config = {
 	animationConfig = { dampingRatio = 1, frequency = 3 }
 }
 
-return function(p1) --[[ Line: 64 | Named "NavigationRail" ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleModule (copy), NavigationRailAlignmentModule (copy), ReactModule (copy), ReactOtterModule (copy)
 	assert(#p1.items > 0, "At least one item should be present!")
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
@@ -34,14 +34,14 @@ return function(p1) --[[ Line: 64 | Named "NavigationRail" ]]
 		error("NavigationRail alignment type is incorrect!")
 	end
 	local UseStateResult, UseStateResult2 = ReactModule.useState(if JoinResult.size then JoinResult.size.X.Offset else 0)
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 88 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: JoinResult (copy), UseStateResult2 (copy)
 		if JoinResult.animated then
 			UseStateResult2(Frame.AbsoluteSize.X)
 		end
 	end, { JoinResult.animated })
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(if JoinResult.animated and not JoinResult.isVisible then -UseStateResult else 0)
-	ReactModule.useEffect(function() --[[ Line: 95 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: JoinResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseStateResult (copy)
 		if JoinResult.animated then
 			if JoinResult.isVisible then
@@ -86,7 +86,7 @@ return function(p1) --[[ Line: 64 | Named "NavigationRail" ]]
 			config1[tostring(i)] = JoinResult.renderItem(item, IsSelectionMatch)
 		end
 	end
-	local MapResult = UseAnimatedBindingResult:map(function(p2: number): UDim2 --[[ Line: 134 ]]
+	local MapResult = UseAnimatedBindingResult:map(function(p2: number): UDim2
 		return UDim2.new(0, math.floor(p2 + 0.5), 0, 0)
 	end)
 	

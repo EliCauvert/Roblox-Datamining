@@ -3,9 +3,9 @@ local CryoModule = require(Parent.Cryo)
 local Url = require(Parent.Http).Url
 local _ = require(script.Parent.Parent.networkingSquadTypes)
 
-return function(p1) --[[ Line: 9 ]]
+return function(p1)
 	-- upvalues: CryoModule (copy), Url (copy)
-	return (p1.roduxNetworking.POST("SendSquadVoiceAbuseReport", function(Callback, p2) --[[ Line: 14 ]]
+	return (p1.roduxNetworking.POST("SendSquadVoiceAbuseReport", function(Callback, p2)
 		-- upvalues: CryoModule (upval), Url (upval)
 		assert(p2.voiceChannelId, "Missing voiceChannelId")
 		
@@ -18,7 +18,7 @@ return function(p1) --[[ Line: 9 ]]
 				REPORTER_COMMENT = { valueList = { { data = p2.abuseComment } } },
 				IS_PLACE_VOICE_ENABLED = { valueList = { { data = "true" } } },
 				VOICE_USER_IDS_FROM_CLIENT = {
-					valueList = CryoModule.List.map(p2.voiceUserIds, function(p3) --[[ Line: 17 ]]
+					valueList = CryoModule.List.map(p2.voiceUserIds, function(p3)
 						return { data = tostring(p3) }
 					end)
 				},

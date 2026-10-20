@@ -18,7 +18,7 @@ local CreateSignalFunction = SignalsModule.createSignal
 local config = { kind = "skeleton" }
 local config1 = { kind = "endState" }
 
-return function(p1, Callback, p2, p3) --[[ Line: 108 | Named "createFeedStore" ]]
+return function(p1, Callback, p2, p3)
 	-- upvalues: CreatePagerStoreModule (copy), FFlagMomentsOptimisticProfilePending (copy), CreatePendingFeedOverlayModule (copy), CreateSignalFunction (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), FFlagMomentsContentStatsTelemetry (copy), Analytics (copy), config1 (copy), SignalsExperimentalModule (copy), config (copy), MomentsSurfaceLoadManager (copy), FFlagMomentsLoadMoreKeepsPositionModule (copy), FFlagMomentsModeratedMomentPageModule (copy), SignalsModule (copy), GetDeletedMomentsStoreModule (copy)
 	local PagerStoreModule = CreatePagerStoreModule()
 	local PendingFeedOverlayModule = if FFlagMomentsOptimisticProfilePending and p1.getPendingItems ~= nil then CreatePendingFeedOverlayModule() else nil
@@ -46,7 +46,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 108 | Named "createFeedStore" ]
 	end
 	local Tbl = {}
 	
-	local function _() --[[ Line: 164 | Named "stripTrailingSkeleton" ]]
+	local function _()
 		-- upvalues: PagerStoreModule (copy)
 		local Items = PagerStoreModule.getItems(false)
 		local Item = Items[#Items]
@@ -56,7 +56,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 108 | Named "createFeedStore" ]
 		end
 	end
 	
-	local function dedupeAndTrack(Items) --[[ Line: 184 ]]
+	local function dedupeAndTrack(Items)
 		-- upvalues: Callback (copy), t (ref), FFlagMomentsContentStatsTelemetry (upval), Analytics (upval), RecommendationSource (copy)
 		if Callback == nil then
 			return Items
@@ -85,7 +85,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 108 | Named "createFeedStore" ]
 		return List
 	end
 	
-	local _ = function(List): number --[[ Line: 211 | Named "countRealItems" ]]
+	local _ = function(List): number
 		local Count = 0
 		
 		for _, value in List do
@@ -96,7 +96,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 108 | Named "createFeedStore" ]
 		return Count
 	end
 	
-	local _ = function() --[[ Line: 221 | Named "publishStatus" ]]
+	local _ = function()
 		-- upvalues: Status (ref), PendingFeedOverlayModule (copy), PagerStoreModule (copy), Loading2 (copy)
 		local LoadingMore: string = Status
 		
@@ -117,7 +117,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 108 | Named "createFeedStore" ]
 		Loading2(LoadingMore)
 	end
 	
-	local _ = function(Value) --[[ Line: 233 | Named "setStatus" ]]
+	local _ = function(Value)
 		-- upvalues: Status (ref), PendingFeedOverlayModule (copy), PagerStoreModule (copy), Loading2 (copy)
 		Status = Value
 		local LoadingMore: string = Status
@@ -139,7 +139,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 108 | Named "createFeedStore" ]
 		Loading2(LoadingMore)
 	end
 	
-	local _ = function() --[[ Line: 238 | Named "getRetainedItems" ]]
+	local _ = function()
 		-- upvalues: PagerStoreModule (copy), Tbl (copy)
 		local Copy = table.clone(PagerStoreModule.getItems(false))
 		
@@ -149,7 +149,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 108 | Named "createFeedStore" ]
 		return Copy
 	end
 	
-	local function maybeAppendEndState() --[[ Line: 249 ]]
+	local function maybeAppendEndState()
 		-- upvalues: v2 (ref), Signal5 (copy), PagerStoreModule (copy), Tbl (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (upval), v3 (ref), Signal3 (copy), Signal2_4 (copy), config1 (upval)
 		if v2 == nil or Signal5(false) then return end
 		local Items = PagerStoreModule.getItems(false)
@@ -191,7 +191,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 108 | Named "createFeedStore" ]
 		PagerStoreModule.addItems({ config1 })
 	end
 	
-	local function commitItems(p4) --[[ Line: 287 ]]
+	local function commitItems(p4)
 		-- upvalues: PendingFeedOverlayModule (copy), PagerStoreModule (copy), Tbl (copy), SignalsExperimentalModule (upval), Callback (copy), t (ref)
 		if PendingFeedOverlayModule == nil then
 			PagerStoreModule.setItems(p4)
@@ -208,7 +208,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 108 | Named "createFeedStore" ]
 		end
 		RetireMissingFunction(Copy)
 		local MergeResult = PendingFeedOverlayModule.merge(p4)
-		SignalsExperimentalModule.batch(function() --[[ Line: 296 ]]
+		SignalsExperimentalModule.batch(function()
 			-- upvalues: PagerStoreModule (upval), MergeResult (copy), PendingFeedOverlayModule (upval), IdentityResult (copy)
 			PagerStoreModule.setItems(MergeResult)
 			
@@ -234,7 +234,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 108 | Named "createFeedStore" ]
 		end
 	end
 	
-	local function findMomentIndex(InitialMomentId) --[[ Line: 318 ]]
+	local function findMomentIndex(InitialMomentId)
 		-- upvalues: PendingFeedOverlayModule (copy), PagerStoreModule (copy)
 		if InitialMomentId == nil then
 			return nil
@@ -251,7 +251,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 108 | Named "createFeedStore" ]
 		return nil
 	end
 	
-	local _ = function(p5) --[[ Line: 334 | Named "resolveInitialIndex" ]]
+	local _ = function(p5)
 		-- upvalues: findMomentIndex (copy), p1 (copy), Signal2 (copy)
 		local MomentIndex = findMomentIndex(p1.initialMomentId)
 		
@@ -260,7 +260,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 108 | Named "createFeedStore" ]
 		end
 	end
 	
-	local function runFetch(IsCountMatch, p5) --[[ Line: 343 ]]
+	local function runFetch(IsCountMatch, p5)
 		-- upvalues: Flag1 (ref), Signal3 (copy), Count (ref), Flag (ref), Signal2_3 (copy), Analytics (upval), RecommendationSource (copy), Signal2_1 (copy), commitItems (copy), config (upval), PendingFeedOverlayModule (copy), findMomentIndex (copy), p1 (copy), Signal2 (copy), Status (ref), PagerStoreModule (copy), Loading2 (copy), v2 (ref), p3 (copy), Signal2_4 (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (upval), v3 (ref), Tbl (copy), p2 (copy), MomentsSurfaceLoadManager (upval), FFlagMomentsLoadMoreKeepsPositionModule (upval), NextCursor (ref), t (ref), dedupeAndTrack (copy), v1 (ref), Signal2_2 (copy), FFlagMomentsModeratedMomentPageModule (upval), maybeAppendEndState (copy)
 		if Flag1 then return end
 		if not IsCountMatch and not Signal3(false) then return end
@@ -340,7 +340,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 108 | Named "createFeedStore" ]
 			Loading2(LoadingMore)
 		end
 		local NextCursor1 = if IsCountMatch then nil else NextCursor
-		task.spawn(function() --[[ Line: 406 ]]
+		task.spawn(function()
 			-- upvalues: p1 (upval), NextCursor1 (copy), Flag1 (upval), Count1 (copy), Count (upval), Flag (upval), p2 (upval), IsCountMatch (copy), SessionGeneration (ref), MomentsSurfaceLoadManager (upval), t (upval), dedupeAndTrack (upval), commitItems (upval), PendingFeedOverlayModule (upval), findMomentIndex (upval), Signal2 (upval), PagerStoreModule (upval), NextCursor (upval), v1 (upval), Signal2_2 (upval), Status (upval), Loading2 (upval), Analytics (upval), RecommendationSource (upval), FFlagMomentsModeratedMomentPageModule (upval), FFlagMomentsNonInfiniteScrollEndStateFixesModule (upval), p3 (upval), maybeAppendEndState (upval), Signal2_1 (upval), Signal2_3 (upval)
 			local Success, Result = pcall(p1.fetchAsync, NextCursor1)
 			
@@ -497,12 +497,12 @@ return function(p1, Callback, p2, p3) --[[ Line: 108 | Named "createFeedStore" ]
 		end)
 	end
 	
-	local function loadInitial() --[[ Line: 544 ]]
+	local function loadInitial()
 		-- upvalues: runFetch (copy)
 		runFetch(true)
 	end
 	
-	local function loadMore() --[[ Line: 548 ]]
+	local function loadMore()
 		-- upvalues: PendingFeedOverlayModule (copy), Count (ref), Signal1 (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (upval), p3 (copy), Signal5 (copy), Flag (ref), Signal4 (copy), Flag1 (ref), Signal3 (copy), Signal2_3 (copy), Analytics (upval), RecommendationSource (copy), FFlagMomentsLoadMoreKeepsPositionModule (upval), PagerStoreModule (copy), config (upval), Status (ref), Loading2 (copy), NextCursor (ref), p1 (copy), p2 (copy), MomentsSurfaceLoadManager (upval), t (ref), dedupeAndTrack (copy), commitItems (copy), findMomentIndex (copy), Signal2 (copy), v1 (ref), Signal2_2 (copy), FFlagMomentsModeratedMomentPageModule (upval), maybeAppendEndState (copy), Signal2_1 (copy)
 		if PendingFeedOverlayModule ~= nil and (Count == 0 or Signal1(false) ~= nil) then return end
 		if FFlagMomentsNonInfiniteScrollEndStateFixesModule then
@@ -538,7 +538,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 108 | Named "createFeedStore" ]
 		Loading2(LoadingMore)
 		local NextCursor1 = NextCursor
 		local v8 = false
-		task.spawn(function() --[[ Line: 406 ]]
+		task.spawn(function()
 			-- upvalues: p1 (upval), NextCursor1 (copy), Flag1 (upval), Count1 (copy), Count (upval), Flag (upval), p2 (upval), v8 (copy), v7 (ref), MomentsSurfaceLoadManager (upval), t (upval), dedupeAndTrack (upval), commitItems (upval), PendingFeedOverlayModule (upval), findMomentIndex (upval), Signal2 (upval), PagerStoreModule (upval), NextCursor (upval), v1 (upval), Signal2_2 (upval), Status (upval), Loading2 (upval), Analytics (upval), RecommendationSource (upval), FFlagMomentsModeratedMomentPageModule (upval), FFlagMomentsNonInfiniteScrollEndStateFixesModule (upval), p3 (upval), maybeAppendEndState (upval), Signal2_1 (upval), Signal2_3 (upval)
 			local Success, Result = pcall(p1.fetchAsync, NextCursor1)
 			
@@ -695,7 +695,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 108 | Named "createFeedStore" ]
 		end)
 	end
 	
-	local function loadBeyondLimit() --[[ Line: 577 ]]
+	local function loadBeyondLimit()
 		-- upvalues: Flag1 (ref), p3 (copy), Signal5 (copy), Signal3 (copy), Tbl (copy), PagerStoreModule (copy), FFlagMomentsLoadMoreKeepsPositionModule (upval), v2 (ref), Signal2_4 (copy), maybeAppendEndState (copy), config (upval), Count (ref), Flag (ref), Signal2_3 (copy), Analytics (upval), RecommendationSource (copy), Status (ref), PendingFeedOverlayModule (copy), Loading2 (copy), NextCursor (ref), p1 (copy), p2 (copy), MomentsSurfaceLoadManager (upval), t (ref), dedupeAndTrack (copy), commitItems (copy), findMomentIndex (copy), Signal2 (copy), v1 (ref), Signal2_2 (copy), FFlagMomentsModeratedMomentPageModule (upval), FFlagMomentsNonInfiniteScrollEndStateFixesModule (upval), Signal2_1 (copy)
 		if Flag1 or p3 == nil or not Signal5(false) then return end
 		if not Signal3(false) and #Tbl == 0 then return end
@@ -788,7 +788,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 108 | Named "createFeedStore" ]
 		Loading2(LoadingMore)
 		local NextCursor1 = NextCursor
 		local v12 = false
-		task.spawn(function() --[[ Line: 406 ]]
+		task.spawn(function()
 			-- upvalues: p1 (upval), NextCursor1 (copy), Flag1 (upval), Count3 (copy), Count (upval), Flag (upval), p2 (upval), v12 (copy), SessionGeneration (ref), MomentsSurfaceLoadManager (upval), t (upval), dedupeAndTrack (upval), commitItems (upval), PendingFeedOverlayModule (upval), findMomentIndex (upval), Signal2 (upval), PagerStoreModule (upval), NextCursor (upval), v1 (upval), Signal2_2 (upval), Status (upval), Loading2 (upval), Analytics (upval), RecommendationSource (upval), FFlagMomentsModeratedMomentPageModule (upval), FFlagMomentsNonInfiniteScrollEndStateFixesModule (upval), p3 (upval), maybeAppendEndState (upval), Signal2_1 (upval), Signal2_3 (upval)
 			local Success, Result = pcall(p1.fetchAsync, NextCursor1)
 			
@@ -945,7 +945,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 108 | Named "createFeedStore" ]
 		end)
 	end
 	
-	local function prependItem(p6) --[[ Line: 636 ]]
+	local function prependItem(p6)
 		-- upvalues: dedupeAndTrack (copy), PagerStoreModule (copy), Loading (copy), Status (ref), PendingFeedOverlayModule (copy), Loading2 (copy)
 		local DedupeAndTrackResult = dedupeAndTrack({ p6 })
 		
@@ -974,7 +974,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 108 | Named "createFeedStore" ]
 		end
 	end
 	
-	local function retry() --[[ Line: 650 ]]
+	local function retry()
 		-- upvalues: PendingFeedOverlayModule (copy), Signal1 (copy), runFetch (copy), PagerStoreModule (copy)
 		if PendingFeedOverlayModule == nil or Signal1(false) == nil then
 			runFetch(PagerStoreModule.getCount(false) == 0)
@@ -985,7 +985,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 108 | Named "createFeedStore" ]
 		end
 	end
 	
-	local function dispose() --[[ Line: 658 ]]
+	local function dispose()
 		-- upvalues: Flag1 (ref), Callback1 (ref), p1 (copy), PagerStoreModule (copy)
 		Flag1 = true
 		
@@ -1003,7 +1003,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 108 | Named "createFeedStore" ]
 			Signal2(1e999)
 		end
 		local GetPendingItemsFunction = p1.getPendingItems
-		Callback1 = SignalsModule.createEffect(function(p7) --[[ Line: 676 ]]
+		Callback1 = SignalsModule.createEffect(function(p7)
 			-- upvalues: PendingFeedOverlayModule (copy), GetPendingItemsFunction (copy), GetDeletedMomentsStoreModule (upval), PagerStoreModule (copy), Tbl (copy), SignalsExperimentalModule (upval), commitItems (copy), findMomentIndex (copy), p1 (copy), Signal2 (copy), Signal2_4 (copy), maybeAppendEndState (copy), Status (ref), PendingFeedOverlayModule (copy), Loading2 (copy)
 			local UpdateResult = PendingFeedOverlayModule.update(GetPendingItemsFunction(p7), GetDeletedMomentsStoreModule(false).getDeletedIds(p7))
 			local Copy = table.clone(PagerStoreModule.getItems(false))
@@ -1016,7 +1016,7 @@ return function(p1, Callback, p2, p3) --[[ Line: 108 | Named "createFeedStore" ]
 					table.remove(Copy, i)
 				end
 			end
-			SignalsExperimentalModule.batch(function() --[[ Line: 684 ]]
+			SignalsExperimentalModule.batch(function()
 				-- upvalues: commitItems (upval), Copy (copy), Tbl (upval), findMomentIndex (upval), p1 (upval), Signal2 (upval), Signal2_4 (upval), maybeAppendEndState (upval), Status (upval), PendingFeedOverlayModule (upval), PagerStoreModule (upval), Loading2 (upval), UpdateResult (copy)
 				commitItems(Copy)
 				table.clear(Tbl)

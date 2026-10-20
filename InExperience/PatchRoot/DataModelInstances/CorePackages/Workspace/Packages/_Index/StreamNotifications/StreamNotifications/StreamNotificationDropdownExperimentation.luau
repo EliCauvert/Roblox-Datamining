@@ -6,14 +6,14 @@ local ConstantsModule = require(StreamNotifications.constants)
 local StreamNotificationUXExposureLayer = game:DefineFastString("StreamNotificationUXExposureLayer", "Notifications.StreamNotificationUXExposure")
 local StreamNotificationUXDropdownVariant = game:DefineFastString("StreamNotificationUXDropdownVariant", "enableStreamDropdown")
 
-local function _(): boolean --[[ Line: 20 | Named "getIsLargeScreen" ]]
+local function _(): boolean
 	-- upvalues: ConstantsModule (copy)
 	local CurrentCamera = workspace.CurrentCamera
 	
 	return CurrentCamera ~= nil and ConstantsModule.Modal.WidthLimit <= CurrentCamera.ViewportSize.X
 end
 
-local _ = function(): boolean --[[ Line: 25 | Named "getIsUserInTreatment" ]]
+local _ = function(): boolean
 	-- upvalues: IxpHelper (copy), StreamNotificationUXExposureLayer (copy), StreamNotificationUXDropdownVariant (copy)
 	local IxpLayerData = IxpHelper.getIxpLayerData(StreamNotificationUXExposureLayer)
 	
@@ -21,7 +21,7 @@ local _ = function(): boolean --[[ Line: 25 | Named "getIsUserInTreatment" ]]
 end
 
 return {
-	getDropdownEnabled = function(): boolean --[[ Line: 36 ]]
+	getDropdownEnabled = function(): boolean
 		-- upvalues: FFlagStreamNotificationUXDropdown (copy), ConstantsModule (copy), IxpHelper (copy), StreamNotificationUXExposureLayer (copy), StreamNotificationUXDropdownVariant (copy)
 		local IsXAbove: boolean = FFlagStreamNotificationUXDropdown
 		
@@ -40,7 +40,7 @@ return {
 		end
 		return IsXAbove
 	end,
-	logExposure = function() --[[ Line: 43 ]]
+	logExposure = function()
 		-- upvalues: FFlagStreamNotificationUXDropdown (copy), ConstantsModule (copy), IxpHelper (copy), StreamNotificationUXExposureLayer (copy), StreamNotificationUXDropdownVariant (copy)
 		if FFlagStreamNotificationUXDropdown then
 			local CurrentCamera = workspace.CurrentCamera

@@ -6,7 +6,7 @@ local PaddedScrollFrameModule = require(Parent.Components.PaddedScrollFrame)
 local ControlEntryModule = require(script.Parent.Parent.ControlEntry)
 local ControlEntryHeaderModule = require(script.Parent.Parent.ControlEntryHeader)
 
-return function(_) --[[ Line: 26 | Named "KeyboardControls" ]]
+return function(_)
 	-- upvalues: Roact (copy), ControlsModule (copy), ControlEntryHeaderModule (copy), ControlEntryModule (copy), ControlLayoutContainerModule (copy), PaddedScrollFrameModule (copy)
 	local Elements = {
 		ListLayout = Roact.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),

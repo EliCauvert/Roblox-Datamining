@@ -7,7 +7,7 @@ local FFlagSduiMarketplaceCatalogSortSupport = require(Parent.SharedFlags).FFlag
 local FFlagAXSduiSeeAllPageRequestId = require(Parent.AvatarExperienceFlags).FFlagAXSduiSeeAllPageRequestId
 local _ = require(AvatarExperienceCatalog.Models.WidgetListInfo)
 
-local function mapCardFootersToItemFooters(CardFooters) --[[ Line: 46 ]]
+local function mapCardFootersToItemFooters(CardFooters)
 	if not CardFooters then
 		return nil
 	end
@@ -19,11 +19,11 @@ local function mapCardFootersToItemFooters(CardFooters) --[[ Line: 46 ]]
 	return List
 end
 
-local function _(p1) --[[ Line: 59 | Named "mapCardStyle" ]]
+local function _(p1)
 	return if p1 then { thumbnailAspectRatio = p1.thumbnailAspectRatio } else nil
 end
 
-local function buildTemplate(Template, Template1) --[[ Line: 71 ]]
+local function buildTemplate(Template, Template1)
 	-- upvalues: mapCardFootersToItemFooters (copy)
 	local CardStyle = Template.cardStyle
 	
@@ -40,7 +40,7 @@ local function buildTemplate(Template, Template1) --[[ Line: 71 ]]
 	}
 end
 
-return function(Id, Text, p1, p2) --[[ Line: 93 | Named "buildFocusedSortWidgetInfo" ]]
+return function(Id, Text, p1, p2)
 	-- upvalues: Logging (copy), DataHydrationModule (copy), FFlagSduiMarketplaceCatalogSortSupport (copy), buildTemplate (copy), FFlagAXSduiSeeAllPageRequestId (copy), HttpService (copy)
 	if Id == nil or Id == "" then
 		Logging.warn("buildFocusedSortWidgetInfo: missing sortId; bailing")

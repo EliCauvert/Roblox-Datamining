@@ -5,7 +5,7 @@ local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStri
 local FetchAllDesiredDataModule = require(Parent.validationSystem.dataFetchModules.FetchAllDesiredData)
 local config = { ColorMap = true, NormalMap = true }
 
-local function getIsOpaque(Editable): boolean --[[ Line: 26 ]]
+local function getIsOpaque(Editable): boolean
 	local PixelsBuffer = Editable:ReadPixelsBuffer(Vector2.new(0, 0), Editable.Size)
 	
 	for i = 0, buffer.len(PixelsBuffer) - 1, 4 do
@@ -21,7 +21,7 @@ return {
 	requiredData = {},
 	conditionalData = { ValidationEnumsModule.SharedDataMember.meshTextures },
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 37 ]]
+	run = function(p1, p2)
 		-- upvalues: FetchAllDesiredDataModule (copy), ErrorSourceStringsModule (copy), config (copy), getIsOpaque (copy)
 		local RootInstance = p2.rootInstance
 		local MeshTextures = p2.meshTextures

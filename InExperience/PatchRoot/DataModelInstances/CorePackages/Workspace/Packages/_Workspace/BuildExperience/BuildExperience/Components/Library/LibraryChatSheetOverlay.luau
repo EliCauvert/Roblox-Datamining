@@ -5,7 +5,7 @@ local ReactRobloxModule = require(Parent.ReactRoblox)
 local GuiService = game:GetService("GuiService")
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function _(List, p1): boolean --[[ Line: 39 | Named "sameSnapPoints" ]]
+local function _(List, p1): boolean
 	if #List ~= #p1 then
 		return false
 	end
@@ -17,11 +17,11 @@ local function _(List, p1): boolean --[[ Line: 39 | Named "sameSnapPoints" ]]
 	return true
 end
 
-local function useSheetBounds(p2, Frame: Frame, Frame1: Frame, Frame2: Frame, p3, Callback) --[[ Line: 51 ]]
+local function useSheetBounds(p2, Frame: Frame, Frame1: Frame, Frame2: Frame, p3, Callback)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local OnBoundsChangedFunction = p2.onBoundsChanged
-	ReactModule.useEffect(function() --[[ Line: 61 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p2 (copy), Frame1 (copy), Frame2 (copy), Frame (copy), OnBoundsChangedFunction (copy), Callback (copy), UseTokensResult (copy), p3 (copy)
 		if not p2.isOpen or Frame1 == nil or Frame2 == nil or Frame == nil then
 			OnBoundsChangedFunction(nil, nil)
@@ -29,7 +29,7 @@ local function useSheetBounds(p2, Frame: Frame, Frame1: Frame, Frame2: Frame, p3
 			
 			return nil
 		end
-		local function updateBounds() --[[ Line: 67 ]]
+		local function updateBounds()
 			-- upvalues: Frame (upval), Frame1 (upval), OnBoundsChangedFunction (upval), Callback (upval), Frame2 (upval), UseTokensResult (upval), p3 (upval)
 			local AbsolutePosition = Frame.AbsolutePosition
 			
@@ -60,7 +60,7 @@ local function useSheetBounds(p2, Frame: Frame, Frame1: Frame, Frame2: Frame, p3
 			table.insert(List, Object:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateBounds))
 			table.insert(List, Object:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateBounds))
 		end
-		return function() --[[ Line: 94 ]]
+		return function()
 			-- upvalues: List (copy), OnBoundsChangedFunction (upval), Callback (upval)
 			for _, Connection in List do
 				Connection:Disconnect()
@@ -74,20 +74,20 @@ local function useSheetBounds(p2, Frame: Frame, Frame1: Frame, Frame2: Frame, p3
 	})
 end
 
-return function(p4) --[[ Line: 104 | Named "LibraryChatSheetOverlay" ]]
+return function(p4)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), GuiService (copy), useSheetBounds (copy), ReactRobloxModule (copy)
 	local UseOverlayResult = FoundationModule.Hooks.useOverlay()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState({})
-	ReactModule.useLayoutEffect(function() --[[ Line: 109 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseOverlayResult (copy), UseStateResult2 (copy), GuiService (upval)
 		if UseOverlayResult == nil then
 			return nil
 		else
 			local ScreenGui = UseOverlayResult:FindFirstAncestorWhichIsA("ScreenGui") or UseOverlayResult
 			
-			local function updateLayout() --[[ Line: 114 ]]
+			local function updateLayout()
 				-- upvalues: UseStateResult2 (upval), UseOverlayResult (upval), ScreenGui (copy), GuiService (upval)
 				UseStateResult2({
 					originY = UseOverlayResult.AbsolutePosition.Y,
@@ -105,7 +105,7 @@ return function(p4) --[[ Line: 104 | Named "LibraryChatSheetOverlay" ]]
 				GuiService:GetPropertyChangedSignal("ViewportDisplaySize"):Connect(updateLayout)
 			}
 			
-			return function() --[[ Line: 130 ]]
+			return function()
 				-- upvalues: Connections (copy)
 				for _, connection in Connections do
 					connection:Disconnect()
@@ -115,7 +115,7 @@ return function(p4) --[[ Line: 104 | Named "LibraryChatSheetOverlay" ]]
 	end, { UseOverlayResult })
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(nil)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(nil)
-	local UseResult = ReactModule.useCallback(function(Sheet, Content) --[[ Line: 138 ]]
+	local UseResult = ReactModule.useCallback(function(Sheet, Content)
 		-- upvalues: UseStateResult2_2 (copy)
 		UseStateResult2_2({ sheet = Sheet, content = Content })
 	end, {})
@@ -167,10 +167,10 @@ return function(p4) --[[ Line: 104 | Named "LibraryChatSheetOverlay" ]]
 		}, {
 			Window = ReactModule.createElement(FoundationModule.View, {
 				tag = "clip",
-				Position = UseBindingResult:map(function(p5): UDim2 --[[ Line: 178 ]]
+				Position = UseBindingResult:map(function(p5): UDim2
 					return if p5 then UDim2.fromOffset(p5.rect.Min.X, p5.rect.Min.Y) else UDim2.new()
 				end),
-				Size = UseBindingResult:map(function(p5): UDim2 --[[ Line: 181 ]]
+				Size = UseBindingResult:map(function(p5): UDim2
 					return if p5 then UDim2.fromOffset(p5.rect.Width, p5.rect.Height) else UDim2.fromScale(1, 1)
 				end),
 				backgroundStyle = { Transparency = 1 }
@@ -178,10 +178,10 @@ return function(p4) --[[ Line: 104 | Named "LibraryChatSheetOverlay" ]]
 				Host = ReactModule.createElement(FoundationModule.View, {
 					testId = "Library.ChatOverlay",
 					ref = UseStateResult2_1,
-					Position = UseBindingResult:map(function(p5): UDim2 --[[ Line: 191 ]]
+					Position = UseBindingResult:map(function(p5): UDim2
 						return if p5 then UDim2.fromOffset(-p5.rect.Min.X, -p5.rect.Min.Y) else UDim2.new()
 					end),
-					Size = UseBindingResult:map(function(p5): UDim2 --[[ Line: 196 ]]
+					Size = UseBindingResult:map(function(p5): UDim2
 						return if p5 then UDim2.fromOffset(p5.areaSize.X, p5.areaSize.Y) else UDim2.fromScale(1, 1)
 					end),
 					backgroundStyle = { Transparency = 1 }

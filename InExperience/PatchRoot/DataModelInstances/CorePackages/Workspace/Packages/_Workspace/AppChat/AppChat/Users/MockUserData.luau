@@ -86,7 +86,7 @@ local config = {
 	}
 }
 
-function createMockUserProfile(p1) --[[ Line: 107 ]]
+function createMockUserProfile(p1)
 	-- upvalues: SignalsModule (copy)
 	local CreateSignalFunction = SignalsModule.createSignal
 	local Signal, _ = CreateSignalFunction(p1.username or "")
@@ -111,7 +111,7 @@ function createMockUserProfile(p1) --[[ Line: 107 ]]
 	}
 end
 
-function createMockUserProfileStore() --[[ Line: 133 ]]
+function createMockUserProfileStore()
 	-- upvalues: config (copy), CryoModule (copy), SignalsModule (copy)
 	local MockUserProfiles = {}
 	
@@ -119,11 +119,11 @@ function createMockUserProfileStore() --[[ Line: 133 ]]
 		MockUserProfiles[i] = createMockUserProfile(value)
 	end
 	return {
-		fetchNamesByUserIds = function(p1) --[[ Line: 141 ]]
+		fetchNamesByUserIds = function(p1)
 			-- upvalues: CryoModule (upval), MockUserProfiles (copy), config (upval), SignalsModule (upval)
 			return SignalsModule.createSignal({
 				status = "success",
-				data = CryoModule.List.filterMap(p1, function(Key) --[[ Line: 142 ]]
+				data = CryoModule.List.filterMap(p1, function(Key)
 					-- upvalues: MockUserProfiles (upval), config (upval)
 					local MockUserProfile = MockUserProfiles[Key]
 					
@@ -135,11 +135,11 @@ function createMockUserProfileStore() --[[ Line: 133 ]]
 				end)
 			})
 		end,
-		invalidateCachedNamesForUserIds = function() --[[ Line: 164 ]] end
+		invalidateCachedNamesForUserIds = function() end
 	}
 end
 
-function createMockPresenceData() --[[ Line: 169 ]]
+function createMockPresenceData()
 	-- upvalues: config (copy)
 	local t = {}
 	
@@ -152,7 +152,7 @@ function createMockPresenceData() --[[ Line: 169 ]]
 	return t
 end
 
-function createMockApolloProfiles() --[[ Line: 183 ]]
+function createMockApolloProfiles()
 	-- upvalues: config (copy)
 	local t = {}
 	
@@ -168,9 +168,9 @@ function createMockApolloProfiles() --[[ Line: 183 ]]
 	return t
 end
 
-function getUserProfilesFetchData() --[[ Line: 200 ]]
+function getUserProfilesFetchData()
 	-- upvalues: CryoModule (copy), config (copy)
-	return CryoModule.List.map(config, function(p1) --[[ Line: 201 ]]
+	return CryoModule.List.map(config, function(p1)
 		return p1
 	end)
 end

@@ -6,7 +6,7 @@ local ChatConstantsModule = require(ClientChatModules:WaitForChild("ChatConstant
 local ChatSettingsModule = require(ClientChatModules:WaitForChild("ChatSettings"))
 local DisplayNameHelpersModule = require(Chat:WaitForChild("ChatModules").Utility.DisplayNameHelpers)
 local ChatLocalizationModule = nil
-pcall(function() --[[ Line: 17 ]]
+pcall(function()
 	-- upvalues: ChatLocalizationModule (ref)
 	ChatLocalizationModule = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
@@ -15,7 +15,7 @@ if ChatLocalizationModule == nil then
 	ChatLocalizationModule = {}
 end
 if not ChatLocalizationModule.FormatMessageToSend or not ChatLocalizationModule.LocalizeFormattedMessage then
-	function ChatLocalizationModule:FormatMessageToSend(_, Formatted) --[[ Line: 20 ]]
+	function ChatLocalizationModule:FormatMessageToSend(_, Formatted)
 		return Formatted
 	end
 end
@@ -23,26 +23,26 @@ local config = {
 	ChatColor = ChatSettingsModule.ErrorMessageTextColor or Color3.fromRGB(245, 50, 50)
 }
 local v1 = false
-local Success, Result = pcall(function() --[[ Line: 27 ]]
+local Success, Result = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserUseNewDirectChatAPI")
 end)
 
 if Success then
 	v1 = Result
 end
-local function _() --[[ Line: 35 | Named "GetWhisperChannelPrefix" ]]
+local function _()
 	-- upvalues: ChatConstantsModule (copy)
 	return if ChatConstantsModule.WhisperChannelPrefix then ChatConstantsModule.WhisperChannelPrefix else "To "
 end
 
-local _ = function(Text): string --[[ Line: 42 | Named "GetWhisperChannelId" ]]
+local _ = function(Text): string
 	-- upvalues: ChatConstantsModule (copy)
 	return (if ChatConstantsModule.WhisperChannelPrefix then ChatConstantsModule.WhisperChannelPrefix else "To ") .. Text
 end
 
-return function(p1) --[[ Line: 46 | Named "Run" ]]
+return function(p1)
 	-- upvalues: RunService (copy), v1 (ref), TextChatService (copy), Chat (copy), ChatSettingsModule (copy), DisplayNameHelpersModule (copy), ChatLocalizationModule (ref), config (copy), ChatConstantsModule (copy)
-	local function CanCommunicate(Speaker, Speaker1) --[[ Line: 48 ]]
+	local function CanCommunicate(Speaker, Speaker1)
 		-- upvalues: RunService (upval), v1 (upval), TextChatService (upval), Chat (upval)
 		if RunService:IsStudio() then
 			return true
@@ -53,14 +53,14 @@ return function(p1) --[[ Line: 46 | Named "Run" ]]
 		if not Player or not Player1 then
 			return false
 		elseif v1 then
-			local Success, Result = pcall(function() --[[ Line: 56 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: TextChatService (upval), Player (copy), Player1 (copy)
 				return TextChatService:CanUsersDirectChatAsync(Player.UserId, { Player1.UserId })
 			end)
 			
 			return Success and #Result > 0
 		else
-			local Success1, Result1 = pcall(function() --[[ Line: 61 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: Chat (upval), Player (copy), Player1 (copy)
 				return Chat:CanUsersChatAsync(Player.UserId, Player1.UserId)
 			end)
@@ -69,7 +69,7 @@ return function(p1) --[[ Line: 46 | Named "Run" ]]
 		end
 	end
 	
-	local function DoWhisperCommand(p2, Text: string, p3) --[[ Line: 70 ]]
+	local function DoWhisperCommand(p2, Text: string, p3)
 		-- upvalues: p1 (copy), ChatSettingsModule (upval), DisplayNameHelpersModule (upval), ChatLocalizationModule (upval), config (upval), ChatConstantsModule (upval), CanCommunicate (copy)
 		local Speaker = p1:GetSpeaker(p2)
 		local Text1: string = Text
@@ -140,7 +140,7 @@ return function(p1) --[[ Line: 46 | Named "Run" ]]
 		end
 	end
 	
-	local function PrivateMessageReplicationFunction(Text1, p2, Text: string): boolean --[[ Line: 163 ]]
+	local function PrivateMessageReplicationFunction(Text1, p2, Text: string): boolean
 		-- upvalues: p1 (copy), ChatConstantsModule (upval)
 		local Speaker = p1:GetSpeaker(Text1)
 		local ExtraData = Speaker.ExtraData
@@ -157,14 +157,14 @@ return function(p1) --[[ Line: 46 | Named "Run" ]]
 		return true
 	end
 	
-	local function PrivateMessageAddTypeFunction(_, p2, _) --[[ Line: 181 ]]
+	local function PrivateMessageAddTypeFunction(_, p2, _)
 		-- upvalues: ChatConstantsModule (upval)
 		if ChatConstantsModule.MessageTypeWhisper then
 			p2.MessageType = ChatConstantsModule.MessageTypeWhisper
 		end
 	end
 	
-	p1:RegisterProcessCommandsFunction("whisper_commands", function(p2, Text: string, p3): boolean --[[ Line: 147 | Named "WhisperCommandsFunction" ]]
+	p1:RegisterProcessCommandsFunction("whisper_commands", function(p2, Text: string, p3): boolean
 		-- upvalues: DoWhisperCommand (copy)
 		local Flag = false
 		
@@ -181,12 +181,12 @@ return function(p1) --[[ Line: 46 | Named "Run" ]]
 		return Flag
 	end, ChatConstantsModule.StandardPriority)
 	
-	local function _() --[[ Line: 189 | Named "GetWhisperChanneNameColor" ]]
+	local function _()
 		-- upvalues: ChatSettingsModule (upval)
 		return if ChatSettingsModule.WhisperChannelNameColor then ChatSettingsModule.WhisperChannelNameColor else Color3.fromRGB(102, 14, 102)
 	end
 	
-	p1.SpeakerAdded:connect(function(Text) --[[ Line: 196 ]]
+	p1.SpeakerAdded:connect(function(Text)
 		-- upvalues: p1 (copy), ChatSettingsModule (upval), ChatConstantsModule (upval), ChatLocalizationModule (upval), PrivateMessageReplicationFunction (copy), PrivateMessageAddTypeFunction (copy)
 		local Speaker = p1:GetSpeaker(Text)
 		local Text1 = if ChatSettingsModule.PlayerDisplayNamesEnabled and Speaker:GetPlayer() then Speaker:GetNameForDisplay() .. "(@" .. Text .. ")" else Text
@@ -205,7 +205,7 @@ return function(p1) --[[ Line: 46 | Named "Run" ]]
 		AddChannelResult:RegisterProcessCommandsFunction("replication_function", PrivateMessageReplicationFunction, ChatConstantsModule.LowPriority)
 		AddChannelResult:RegisterFilterMessageFunction("message_type_function", PrivateMessageAddTypeFunction)
 	end)
-	p1.SpeakerRemoved:connect(function(Text) --[[ Line: 228 ]]
+	p1.SpeakerRemoved:connect(function(Text)
 		-- upvalues: ChatConstantsModule (upval), p1 (copy)
 		local Text1 = (if ChatConstantsModule.WhisperChannelPrefix then ChatConstantsModule.WhisperChannelPrefix else "To ") .. Text
 		

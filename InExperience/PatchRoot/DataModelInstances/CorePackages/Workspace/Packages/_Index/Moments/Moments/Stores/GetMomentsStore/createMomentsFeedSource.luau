@@ -29,8 +29,8 @@ local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
 local MomentsGetMomentsCommentsStoreModule = if FFlagMomentsComments then require(Parent.DataHydration.MomentsGetMomentsCommentsStore) else nil
 local MomentStatus = require(Parent.MomentsTypes).Enums.MomentStatus
 
-local function _(OnAccepted, p1, p2, p3) --[[ Line: 55 | Named "withCommentsSeeding" ]]
-	return if p1 == nil or p2 == nil or p3 == nil then OnAccepted else function() --[[ Line: 67 ]]
+local function _(OnAccepted, p1, p2, p3)
+	return if p1 == nil or p2 == nil or p3 == nil then OnAccepted else function()
 		-- upvalues: OnAccepted (copy), p1 (copy), p3 (copy), p2 (copy)
 		if OnAccepted ~= nil then
 			OnAccepted()
@@ -39,15 +39,15 @@ local function _(OnAccepted, p1, p2, p3) --[[ Line: 55 | Named "withCommentsSeed
 	end
 end
 
-local function defaultFetchDeepLinkedMoments(p1, p2) --[[ Line: 96 ]]
+local function defaultFetchDeepLinkedMoments(p1, p2)
 	-- upvalues: PromiseModule (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), FetchMomentsByIdsModule (copy)
-	return PromiseModule.resolve():andThen(function() --[[ Line: 97 ]]
+	return PromiseModule.resolve():andThen(function()
 		-- upvalues: FFlagMomentsPassFeedItemIdToBackendApis (upval), FetchMomentsByIdsModule (upval), p1 (copy), p2 (copy)
 		return if FFlagMomentsPassFeedItemIdToBackendApis then FetchMomentsByIdsModule({ p1 }, p2) else FetchMomentsByIdsModule({ p1 })
 	end)
 end
 
-local _ = function(p1, List) --[[ Line: 111 | Named "mergeCommentsByFeedItemId" ]]
+local _ = function(p1, List)
 	if List == nil then
 		return p1
 	end
@@ -58,7 +58,7 @@ local _ = function(p1, List) --[[ Line: 111 | Named "mergeCommentsByFeedItemId" 
 	return P6
 end
 
-local _ = function(p2, FeedItemId): boolean --[[ Line: 125 | Named "hasDeepLinkIdentity" ]]
+local _ = function(p2, FeedItemId): boolean
 	if p2.momentId == FeedItemId then
 		return true
 	else
@@ -68,7 +68,7 @@ local _ = function(p2, FeedItemId): boolean --[[ Line: 125 | Named "hasDeepLinkI
 	end
 end
 
-local _ = function(List, FeedItemId) --[[ Line: 133 | Named "findDeepLinkTarget" ]]
+local _ = function(List, FeedItemId)
 	for _, value in List do
 		local IsFeedItemIdMatch = nil
 		if value.momentId == FeedItemId then
@@ -84,7 +84,7 @@ local _ = function(List, FeedItemId) --[[ Line: 133 | Named "findDeepLinkTarget"
 	return nil
 end
 
-local function makeUnavailableMomentItem(TargetId, Moments, Moments1) --[[ Line: 144 ]]
+local function makeUnavailableMomentItem(TargetId, Moments, Moments1)
 	-- upvalues: MomentStatus (copy)
 	local v1 = nil
 	
@@ -125,13 +125,13 @@ local function makeUnavailableMomentItem(TargetId, Moments, Moments1) --[[ Line:
 	}
 end
 
-local function loadDeepLinkedMomentsForUnavailableDialog(Callback, DeepLinkedMomentId, DeepLinkedMomentTargetIdType, DeepLinkFetchTimeoutSeconds) --[[ Line: 156 ]]
+local function loadDeepLinkedMomentsForUnavailableDialog(Callback, DeepLinkedMomentId, DeepLinkedMomentTargetIdType, DeepLinkFetchTimeoutSeconds)
 	-- upvalues: FFlagMomentsPassFeedItemIdToBackendApis (copy), PromiseModule (copy)
 	local v2, v3 = PromiseModule.race({
-		(if FFlagMomentsPassFeedItemIdToBackendApis then Callback(DeepLinkedMomentId, DeepLinkedMomentTargetIdType) else Callback(DeepLinkedMomentId)):catch(function() --[[ Line: 165 ]]
+		(if FFlagMomentsPassFeedItemIdToBackendApis then Callback(DeepLinkedMomentId, DeepLinkedMomentTargetIdType) else Callback(DeepLinkedMomentId)):catch(function()
 			return nil
 		end),
-		(PromiseModule.delay(DeepLinkFetchTimeoutSeconds):andThen(function() --[[ Line: 168 ]]
+		(PromiseModule.delay(DeepLinkFetchTimeoutSeconds):andThen(function()
 			return nil
 		end))
 	}):await()
@@ -139,7 +139,7 @@ local function loadDeepLinkedMomentsForUnavailableDialog(Callback, DeepLinkedMom
 	return if v2 and type(v3) == "table" then v3 else nil
 end
 
-return function(Callback, p2) --[[ Line: 179 | Named "createMomentsFeedSource" ]]
+return function(Callback, p2)
 	-- upvalues: MomentsGetMomentsTrendingStoreModule (copy), FFlagMomentsComments (copy), MomentsGetMomentsCommentsStoreModule (copy), GetDeepLinkStoreModule (copy), defaultFetchDeepLinkedMoments (copy), FFlagMomentsOptimisticProfilePending (copy), GetLocalUserIdModule (copy), CreatePendingFeedGetterModule (copy), MomentsGetMomentsUserStoreModule (copy), RecommendationSource (copy), GetReactionsStoreModule (copy), GetShareCountsStoreModule (copy), GetFFlagMomentsShareDeeplinkReliableOpenModule (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), ShouldShowMomentInFeedModule (copy), loadDeepLinkedMomentsForUnavailableDialog (copy), FFlagMomentsModeratedMomentPageModule (copy), makeUnavailableMomentItem (copy), FFlagMomentsContentStatsTelemetry (copy), Analytics (copy), ReportUnavailableFeedItemModule (copy)
 	local P18 = p2 or {}
 	local MomentsGetMomentsTrendingStoreModuleResult = if P18.trendingStore == nil then MomentsGetMomentsTrendingStoreModule(false) else P18.trendingStore
@@ -169,7 +169,7 @@ return function(Callback, p2) --[[ Line: 179 | Named "createMomentsFeedSource" ]
 		id = "trending",
 		getPendingItems = GetPendingItems,
 		recommendationSource = RecommendationSource.Trending,
-		fetchAsync = function(p3) --[[ Line: 212 ]]
+		fetchAsync = function(p3)
 			-- upvalues: CommentsStore (ref), NextCursor (ref), P18 (copy), MomentsGetMomentsTrendingStoreModuleResult (copy), Callback (copy), GetReactionsStoreModule (upval), GetShareCountsStoreModule (upval), GetFFlagMomentsShareDeeplinkReliableOpenModule (upval), DeepLinkStore (copy), FFlagMomentsPassFeedItemIdToBackendApis (upval), ShouldShowMomentInFeedModule (upval), loadDeepLinkedMomentsForUnavailableDialog (upval), FetchDeepLinkedMoments (copy), DeepLinkFetchTimeoutSeconds (copy), FFlagMomentsModeratedMomentPageModule (upval), makeUnavailableMomentItem (upval), FFlagMomentsComments (upval), FFlagMomentsOptimisticProfilePending (upval), FFlagMomentsContentStatsTelemetry (upval), Analytics (upval), RecommendationSource (upval), ReportUnavailableFeedItemModule (upval)
 			local OwnerGeneration = if CommentsStore == nil then nil else CommentsStore.getOwnerGeneration(false)
 			local SignalTracker = P18.signalTracker
@@ -281,7 +281,7 @@ return function(Callback, p2) --[[ Line: 179 | Named "createMomentsFeedSource" ]
 						if Flag or v5 then
 							local NoFFlagMomentsModeratedMomentPageModule: boolean = v5 and not FFlagMomentsModeratedMomentPageModule
 							
-							Callback1 = function() --[[ Line: 326 ]]
+							Callback1 = function()
 								-- upvalues: DeepLinkStore (upval), DeepLinkedMomentId (copy), NoFFlagMomentsModeratedMomentPageModule (copy), P18 (upval)
 								if DeepLinkStore.getDeepLinkedMomentId(false) == DeepLinkedMomentId then
 									DeepLinkStore.setDeepLinkedMomentId(nil)
@@ -377,7 +377,7 @@ return function(Callback, p2) --[[ Line: 179 | Named "createMomentsFeedSource" ]
 			end
 			if FFlagMomentsComments then
 				local CommentsStore1 = CommentsStore
-				Callback1 = if CommentsStore1 == nil or OwnerGeneration == nil or v4 == nil then Callback1 else function() --[[ Line: 67 ]]
+				Callback1 = if CommentsStore1 == nil or OwnerGeneration == nil or v4 == nil then Callback1 else function()
 					-- upvalues: Callback1 (copy), CommentsStore1 (copy), v4 (copy), OwnerGeneration (copy)
 					if Callback1 ~= nil then
 						Callback1()

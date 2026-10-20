@@ -2,12 +2,12 @@
 local ExpChatLargerSingularEmojiBlacklist = game:DefineFastString("ExpChatLargerSingularEmojiBlacklist", "")
 local Character = utf8.char(65039)
 
-local function _(Text: string): string --[[ Line: 26 | Named "stripPresentationSelectors" ]]
+local function _(Text: string): string
 	-- upvalues: Character (copy)
 	return (string.gsub(Text, Character, ""))
 end
 
-local _ = function() --[[ Line: 30 | Named "getBlacklistedEmojiNames" ]]
+local _ = function()
 	-- upvalues: ExpChatLargerSingularEmojiBlacklist (copy)
 	local t = {}
 	
@@ -19,7 +19,7 @@ end
 
 local v1 = nil
 
-local function getSupportedEmojis() --[[ Line: 40 ]]
+local function getSupportedEmojis()
 	-- upvalues: v1 (ref), ExpChatLargerSingularEmojiBlacklist (copy), EmojiListModule (copy), Character (copy)
 	if not v1 then
 		local t = {}
@@ -39,7 +39,7 @@ local function getSupportedEmojis() --[[ Line: 40 ]]
 	return v1
 end
 
-return function(Text: string): boolean --[[ Line: 54 | Named "isSingleSupportedEmoji" ]]
+return function(Text: string): boolean
 	-- upvalues: getSupportedEmojis (copy), Character (copy)
 	return getSupportedEmojis()[string.gsub(string.match(Text, "^%s*(.-)%s*$"), Character, "")] == true
 end

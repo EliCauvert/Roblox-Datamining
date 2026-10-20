@@ -11,7 +11,7 @@ local PresenceReducerModule = if ProfilePlatformFixPresenceReducer then require(
 local ProfilesModule = require(ProfilePlatform.Rodux.Profiles)
 local FFlagProfilePlatformPresenceStoreMigrationModule = require(ProfilePlatform.Flags.FFlagProfilePlatformPresenceStoreMigration)
 
-return function() --[[ Line: 23 ]]
+return function()
 	-- upvalues: RoduxModule (copy), GamesModule (copy), ItemDetailsModule (copy), BundleDetailsModule (copy), AssetDetailsModule (copy), MyRoduxNetworkingModule (copy), FFlagProfilePlatformPresenceStoreMigrationModule (copy), ProfilePlatformFixPresenceReducer (copy), PresenceReducerModule (copy), PresenceModule (copy), ProfilesModule (copy)
 	return RoduxModule.combineReducers({
 		Games = GamesModule.installReducer(),

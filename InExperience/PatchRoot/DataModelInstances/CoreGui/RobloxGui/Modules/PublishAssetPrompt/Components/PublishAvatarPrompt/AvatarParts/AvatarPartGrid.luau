@@ -8,7 +8,7 @@ local AvatarItemCardModule = require(script.Parent.AvatarItemCard)
 local ItemTile = UIBloxModule.Tile.ItemTile
 local _Vector2 = Vector2.new(20, 20)
 
-local function _(List) --[[ Line: 33 | Named "createObjectsFolder" ]]
+local function _(List)
 	local R15ArtistIntent = Instance.new("Folder")
 	R15ArtistIntent.Name = "R15ArtistIntent"
 	
@@ -18,11 +18,11 @@ local function _(List) --[[ Line: 33 | Named "createObjectsFolder" ]]
 	return { [1] = R15ArtistIntent }
 end
 
-local _ = function(Object, ChildName) --[[ Line: 43 | Named "getPart" ]]
+local _ = function(Object, ChildName)
 	return (Object:FindFirstChild(ChildName))
 end
 
-local function getItems(Object, _) --[[ Line: 47 ]]
+local function getItems(Object, _)
 	local Asset = nil
 	local Asset1 = nil
 	local Asset2 = nil
@@ -118,10 +118,10 @@ local function getItems(Object, _) --[[ Line: 47 ]]
 	return List
 end
 
-return function(Frame) --[[ Line: 132 | Named "AvatarPartGrid" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), getItems (copy), ConstantsModule (copy), AvatarItemCardModule (copy), ItemTile (copy), DefaultMetricsGridView (copy), GridMetrics (copy), _Vector2 (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState({})
-	ReactModule.useEffect(function() --[[ Line: 134 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy), UseStateResult2 (copy), getItems (upval)
 		if Frame.humanoidModel then
 			UseStateResult2((getItems(Frame.humanoidModel:Clone(), Frame.name)))
@@ -135,7 +135,7 @@ return function(Frame) --[[ Line: 132 | Named "AvatarPartGrid" ]]
 		end
 		UseStateResult2(t)
 	end, { Frame.humanoidModel })
-	ReactModule.useEffect(function() --[[ Line: 150 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseStateResult2 (copy)
 		if UseStateResult[1] and UseStateResult[1].asset then
 			local t = {}
@@ -156,14 +156,14 @@ return function(Frame) --[[ Line: 132 | Named "AvatarPartGrid" ]]
 		LayoutOrder = Frame.LayoutOrder
 	}, {
 		Grid = ReactModule.createElement(DefaultMetricsGridView, {
-			getItemHeight = function(p1: number): number --[[ Line: 190 ]]
+			getItemHeight = function(p1: number): number
 				return p1 * 1.3333333333333333
 			end,
 			getItemMetrics = GridMetrics.makeCustomMetricsGetter({
 				minimumItemsPerRow = 2,
 				minimumItemWidth = ItemCardWidthPortrait
 			}),
-			renderItem = ReactModule.useCallback(function(p1) --[[ Line: 168 ]]
+			renderItem = ReactModule.useCallback(function(p1)
 				-- upvalues: ReactModule (upval), AvatarItemCardModule (upval), Frame (copy), ItemCardWidthPortrait (copy), ItemTile (upval)
 				return if p1.asset then ReactModule.createElement(AvatarItemCardModule, {
 					asset = p1.asset,

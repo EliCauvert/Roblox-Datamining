@@ -15,13 +15,13 @@ GameCell.validateProps = TModule.strictInterface({
 	onActivated = TModule.optional(TModule.callback)
 })
 
-function GameCell.renderWithSelectionCursor(p1, _) --[[ Line: 27 ]]
+function GameCell.renderWithSelectionCursor(p1, _)
 	-- upvalues: WithLocalizationModule (copy), RoactModule (copy), Cell (copy), GameIconModule (copy), ThemedTextLabelModule (copy)
 	local Props = p1.props
 	
 	return WithLocalizationModule({
 		labelText = "CoreScripts.InGameMenu.Report.ReportExperience"
-	})(function(p2) --[[ Line: 31 ]]
+	})(function(p2)
 		-- upvalues: RoactModule (upval), Cell (upval), Props (copy), GameIconModule (upval), ThemedTextLabelModule (upval)
 		return RoactModule.createElement(Cell, {
 			onActivated = Props.onActivated,
@@ -59,9 +59,9 @@ function GameCell.renderWithSelectionCursor(p1, _) --[[ Line: 27 ]]
 	end)
 end
 
-function GameCell.render(p1) --[[ Line: 69 ]]
+function GameCell.render(p1)
 	-- upvalues: WithSelectionCursorProviderFunction (copy)
-	return WithSelectionCursorProviderFunction(function(p2) --[[ Line: 70 ]]
+	return WithSelectionCursorProviderFunction(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithSelectionCursor(p2)
 	end)

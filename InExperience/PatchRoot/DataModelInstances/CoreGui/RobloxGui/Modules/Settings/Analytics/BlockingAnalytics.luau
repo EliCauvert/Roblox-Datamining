@@ -9,7 +9,7 @@ while not LocalPlayer do
 	Players:GetPropertyChangedSignal("LocalPlayer"):Wait()
 	LocalPlayer = Players.LocalPlayer
 end
-function Module.new(p1, p2) --[[ Line: 20 ]]
+function Module.new(p1, p2)
 	-- upvalues: LocalPlayer (ref), RbxAnalyticsService (copy), Module (copy)
 	local P0 = p1 or LocalPlayer.UserId
 	assert(P0, "BlockingAnalytics must be passed the ID of the local user")
@@ -22,7 +22,7 @@ function Module.new(p1, p2) --[[ Line: 20 ]]
 	return config
 end
 
-function Module:action(EventContext, EventName, p1) --[[ Line: 37 ]]
+function Module:action(EventContext, EventName, p1)
 	-- upvalues: CryoModule (copy)
 	self._eventStreamImpl:SendEventDeferred("AccountSettingsApi", EventContext, EventName, (CryoModule.Dictionary.join(p1 or {}, { blockerUserId = self.localUserId })))
 end

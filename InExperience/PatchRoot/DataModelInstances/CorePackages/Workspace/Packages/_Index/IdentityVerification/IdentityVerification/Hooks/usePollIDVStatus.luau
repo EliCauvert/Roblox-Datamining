@@ -9,25 +9,25 @@ local v1 = require(script.Parent.Parent.Flags.GetFIntIDVPollDelay)()
 local v2 = require(script.Parent.Parent.Flags.GetFIntIDVMaxRetries)()
 local v3 = require(script.Parent.Parent.Flags.GetFFlagIDVGuardStartPollingAfterUnmount)()
 
-local function _(Expired): boolean --[[ Line: 31 | Named "isFailure" ]]
+local function _(Expired): boolean
 	-- upvalues: IDVSessionStatusEnum (copy)
 	return Expired == IDVSessionStatusEnum.RequiresManualReview or (Expired == IDVSessionStatusEnum.RequiresRetry or Expired == IDVSessionStatusEnum.Expired)
 end
 
-return function(p1) --[[ Line: 37 | Named "usePollIDVStatus" ]]
+return function(p1)
 	-- upvalues: v2 (copy), v1 (copy), ReactModule (copy), IDVSessionStatusEnum (copy), IDVApiProviderModule (copy), IDVSessionErrorEnum (copy), PromiseModule (copy), v3 (copy)
 	local Retries = p1.retries or v2
 	local Delay = p1.delay or v1
 	local OnStatusUpdateFunction = p1.onStatusUpdate
 	local Callback = nil
-	Callback = ReactModule.useCallback(function(p2, RetriesLeft, Callback2, Callback1: (any) -> ()) --[[ Line: 44 ]]
+	Callback = ReactModule.useCallback(function(p2, RetriesLeft, Callback2, Callback1: (any) -> ())
 		-- upvalues: IDVSessionStatusEnum (upval), IDVApiProviderModule (upval), OnStatusUpdateFunction (copy), IDVSessionErrorEnum (upval), Delay (copy), Callback (ref)
 		if RetriesLeft == 0 then
 			Callback1({ sessionStatus = IDVSessionStatusEnum.Expired })
 			
 			return
 		else
-			IDVApiProviderModule.getVerifiedStatus(p2):andThen(function(Result) --[[ Line: 51 ]]
+			IDVApiProviderModule.getVerifiedStatus(p2):andThen(function(Result)
 				-- upvalues: OnStatusUpdateFunction (upval), RetriesLeft (copy), IDVSessionStatusEnum (upval), IDVSessionErrorEnum (upval), Callback1 (copy), Callback2 (copy), Delay (upval), Callback (upval), p2 (copy)
 				local IsVerified = Result.isVerified
 				local SessionStatus = Result.sessionStatus
@@ -44,7 +44,7 @@ return function(p1) --[[ Line: 37 | Named "usePollIDVStatus" ]]
 					
 					return
 				else
-					task.spawn(function() --[[ Line: 71 ]]
+					task.spawn(function()
 						-- upvalues: Delay (upval), Callback (upval), p2 (upval), RetriesLeft (upval), Callback2 (upval), Callback1 (upval)
 						task.wait(Delay)
 						
@@ -53,16 +53,16 @@ return function(p1) --[[ Line: 37 | Named "usePollIDVStatus" ]]
 						end
 					end)
 				end
-			end):catch(function(_) --[[ Line: 79 ]]
+			end):catch(function(_)
 				-- upvalues: Callback1 (copy), IDVSessionStatusEnum (upval)
 				Callback1({ sessionStatus = IDVSessionStatusEnum.RequiresRetry })
 			end)
 		end
 	end, { Delay, OnStatusUpdateFunction })
 	
-	return ReactModule.useCallback(function(p2) --[[ Line: 84 ]]
+	return ReactModule.useCallback(function(p2)
 		-- upvalues: PromiseModule (upval), v3 (upval), Callback (ref), Retries (copy)
-		return PromiseModule.new(function(Callback1: () -> (), p3) --[[ Line: 85 ]]
+		return PromiseModule.new(function(Callback1: () -> (), p3)
 			-- upvalues: v3 (upval), Callback (upval), p2 (copy), Retries (upval)
 			if not v3 then
 				Callback(p2, Retries, Callback1, p3)
@@ -77,7 +77,7 @@ return function(p1) --[[ Line: 37 | Named "usePollIDVStatus" ]]
 				Callback1()
 			end
 		end)
-	end, { Callback, Retries }), (ReactModule.useCallback(function() --[[ Line: 98 ]]
+	end, { Callback, Retries }), (ReactModule.useCallback(function()
 		-- upvalues: Callback (ref)
 		Callback = nil
 	end, {}))

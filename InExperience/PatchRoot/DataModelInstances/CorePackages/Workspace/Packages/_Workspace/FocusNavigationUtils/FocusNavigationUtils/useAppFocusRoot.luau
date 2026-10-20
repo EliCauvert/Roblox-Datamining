@@ -8,7 +8,7 @@ local UseDefaultAppEventHandlersModule = require(FocusNavigationUtils.useDefault
 local FocusNavigationDefaultEventMapModule = require(FocusNavigationUtils.FocusNavigationDefaultEventMap)
 local t = {}
 
-return function(p1) --[[ Line: 23 | Named "useAppFocusRoot" ]]
+return function(p1)
 	-- upvalues: t (copy), NavigationModule (copy), UseDefaultAppEventHandlersModule (copy), CryoModule (copy), FocusNavigationDefaultEventMapModule (copy), UseFocusRootModule (copy)
 	local UseNavigationFocusResult = NavigationModule.useNavigationFocus()
 	

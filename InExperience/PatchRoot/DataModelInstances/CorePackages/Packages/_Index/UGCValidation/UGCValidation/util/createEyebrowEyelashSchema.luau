@@ -1,4 +1,4 @@
-﻿return function(Name) --[[ Line: 2 | Named "createEyebrowEyelashSchema" ]]
+﻿return function(Name)
 	assert(Name, "attachmentName cannot be nil")
 	
 	return {

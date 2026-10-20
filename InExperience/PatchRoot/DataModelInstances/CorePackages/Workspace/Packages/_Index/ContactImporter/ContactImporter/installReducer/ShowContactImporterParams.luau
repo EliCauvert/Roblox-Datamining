@@ -10,7 +10,7 @@ return DependenciesModule.Rodux.createReducer({
 	isPhoneVerified = false,
 	isDiscoverabilityUnset = false
 }, {
-	[require(Parent.Actions.SetContactImporterDisplayLogic).name] = function(_, p1) --[[ Line: 40 ]]
+	[require(Parent.Actions.SetContactImporterDisplayLogic).name] = function(_, p1)
 		-- upvalues: ConstantsModule (copy)
 		local HasOSPermissions = p1.hasOSPermissions
 		local ShouldShowContactImporterUpsellAgain = p1.shouldShowContactImporterUpsellAgain
@@ -23,18 +23,18 @@ return DependenciesModule.Rodux.createReducer({
 			isDiscoverabilityUnset = p1.phoneNumberDiscoverability == ConstantsModule.DISCOVERABILITY_UNSET
 		}
 	end,
-	[DependenciesModule.SocialModalsCommon.Actions.UpdateContactImporterModalLogic.name] = function(p1, p2) --[[ Line: 60 ]]
+	[DependenciesModule.SocialModalsCommon.Actions.UpdateContactImporterModalLogic.name] = function(p1, p2)
 		-- upvalues: Llama (copy), ConstantsModule (copy)
 		return (Llama.Dictionary.join(p1, {
 			hasOSPermissions = p2.hasOSPermissions,
 			[ConstantsModule.SHOULD_SHOW_CONTACT_IMPORTER_UPSELL_MODAL] = p2[ConstantsModule.SHOULD_SHOW_CONTACT_IMPORTER_UPSELL_MODAL]
 		}))
 	end,
-	[require(Parent.Actions.SetIsPhoneVerified).name] = function(p1, p2) --[[ Line: 68 ]]
+	[require(Parent.Actions.SetIsPhoneVerified).name] = function(p1, p2)
 		-- upvalues: Llama (copy)
 		return Llama.Dictionary.join(p1, { isPhoneVerified = p2.isPhoneVerified })
 	end,
-	[DependenciesModule.SocialModalsCommon.Actions.UpdateIsDiscoverabilityUnset.name] = function(p1, p2) --[[ Line: 73 ]]
+	[DependenciesModule.SocialModalsCommon.Actions.UpdateIsDiscoverabilityUnset.name] = function(p1, p2)
 		-- upvalues: Llama (copy)
 		return Llama.Dictionary.join(p1, { isDiscoverabilityUnset = p2.isDiscoverabilityUnset })
 	end

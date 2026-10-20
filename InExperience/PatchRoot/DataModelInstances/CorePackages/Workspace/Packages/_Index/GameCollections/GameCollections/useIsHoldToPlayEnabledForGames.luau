@@ -7,17 +7,17 @@ local ResponsiveModule = require(Parent.Responsive)
 local FFlagLuaAppResponsiveEnginePreferredInput = require(Parent.SharedFlags).FFlagLuaAppResponsiveEnginePreferredInput
 local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 
-return function() --[[ Line: 14 | Named "useIsHoldToPlayEnabledForGames" ]]
+return function()
 	-- upvalues: UseUserExperimentFunction (copy), AppUserLayers (copy), ResponsiveModule (copy), UseUiModeInfoFunction (copy), UseAppPolicyFunction (copy), FFlagLuaAppResponsiveEnginePreferredInput (copy), UiMode (copy)
 	local UseUserExperimentResult = UseUserExperimentFunction({
 		AppUserLayers.PlatformExcellenceQualityImprovementConsoles
-	}, function(p1) --[[ Line: 17 ]]
+	}, function(p1)
 		-- upvalues: AppUserLayers (upval)
 		return (p1[AppUserLayers.PlatformExcellenceQualityImprovementConsoles] or {}).enableHoldToPlay
 	end)
 	local UseLastInputResult = ResponsiveModule.useLastInput()
 	local UseUiModeInfoResult = UseUiModeInfoFunction()
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p1) --[[ Line: 28 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p1)
 		return p1.getStickyShortcutBarEnabled()
 	end)
 	local UsePreferredInputResult = if FFlagLuaAppResponsiveEnginePreferredInput then ResponsiveModule.usePreferredInput() else nil

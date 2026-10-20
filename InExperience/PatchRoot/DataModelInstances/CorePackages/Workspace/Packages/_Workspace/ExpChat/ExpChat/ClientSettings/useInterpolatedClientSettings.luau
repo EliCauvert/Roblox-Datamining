@@ -4,7 +4,7 @@ local ParentModule = require(script.Parent)
 local ClientSettingsUtilityModule = require(script.Parent.ClientSettingsUtility)
 local FFlagExpChatAddressFrame0Flash = require(Parent.ChatUIPrimitives).Flags.FFlagExpChatAddressFrame0Flash
 
-return function(p1) --[[ Line: 11 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ParentModule (copy), FFlagExpChatAddressFrame0Flash (copy), ClientSettingsUtilityModule (copy)
 	local UseContextResult = ReactModule.useContext(ParentModule)
 	local UseStateResult, UseStateResult2 = ReactModule.useState({
@@ -12,7 +12,7 @@ return function(p1) --[[ Line: 11 ]]
 		BackgroundColor = if FFlagExpChatAddressFrame0Flash then nil else ClientSettingsUtilityModule.getBackgroundColor(p1, UseContextResult),
 		BackgroundTransparency = ClientSettingsUtilityModule.getBackgroundTransparency(p1, UseContextResult)
 	})
-	ReactModule.useEffect(function() --[[ Line: 24 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), ClientSettingsUtilityModule (upval), p1 (copy), UseContextResult (copy)
 		UseStateResult2({
 			BackgroundColor3 = ClientSettingsUtilityModule.getBackgroundColor(p1, UseContextResult),

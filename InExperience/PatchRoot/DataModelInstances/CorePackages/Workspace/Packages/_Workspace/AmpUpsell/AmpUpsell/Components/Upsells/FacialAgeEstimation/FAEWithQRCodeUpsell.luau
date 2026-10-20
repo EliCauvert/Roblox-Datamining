@@ -4,7 +4,7 @@ local QRDeepLinkDialog = require(Parent.IdentityVerification).QRDeepLinkDialog
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local AuthButtonClickFunction = require(Parent.AuthAnalytics).Events.authButtonClick
 
-return function(p1) --[[ Line: 19 | Named "FAEWithQRCodeUpsell" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), AuthButtonClickFunction (copy), QRDeepLinkDialog (copy)
 	local AppsFlyerLink = p1.appsFlyerLink
 	local OnCancelFunction = p1.onCancel
@@ -21,7 +21,7 @@ return function(p1) --[[ Line: 19 | Named "FAEWithQRCodeUpsell" ]]
 		title = AmpFAEUpsellModalQRCodeTitle.title,
 		description = AmpFAEUpsellModalQRCodeTitle.description,
 		footer = AmpFAEUpsellModalQRCodeTitle.footer,
-		onClose = ReactModule.useCallback(function() --[[ Line: 31 ]]
+		onClose = ReactModule.useCallback(function()
 			-- upvalues: AuthButtonClickFunction (upval), EntryPointEventCtx (copy), SessionId (copy), OnCancelFunction (copy)
 			AuthButtonClickFunction(EntryPointEventCtx, "closeFaeQR", SessionId)
 			OnCancelFunction()

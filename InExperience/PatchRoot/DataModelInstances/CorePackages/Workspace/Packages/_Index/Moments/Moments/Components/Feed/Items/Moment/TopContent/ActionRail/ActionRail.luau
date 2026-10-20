@@ -34,7 +34,7 @@ local UseCommentActionImpressionModule = require(script.Parent.useCommentActionI
 local ArrowThickToRight = BuilderIconsModule.Icon.ArrowThickToRight
 local SpeechBubbleAlignLeft = BuilderIconsModule.Icon.SpeechBubbleAlignLeft
 
-return ReactModule.memo(function(Frame) --[[ Line: 68 | Named "ActionRail" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: ReactUtilsModule (copy), MomentContextModule (copy), FFlagMomentsEngagementMetricsFeature (copy), UseSignalStateFunction (copy), GetMomentsCapabilitiesFunction (copy), FFlagMomentsReactFeatureGate (copy), UseShareMomentModule (copy), UseSignalBindingFunction (copy), FFlagMomentsComments (copy), FFlagMomentsOptimisticProfilePending (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), UseConfigurationModule (copy), UseMomentsSessionFunction (copy), GetMomentsPreferencesStoreModule (copy), UseCommentCapabilitiesModule (copy), FFlagMomentsServeEDPVideos (copy), FFlagMomentsCommentsIxpEnabled (copy), UseCommentActionImpressionModule (copy), ReactModule (copy), ReactionButtonModule (copy), RailItemModule (copy), SpeechBubbleAlignLeft (copy), ArrowThickToRight (copy), ContextualMenuModule (copy), FFlagMomentsCreatorAnalyticsModule (copy), FFlagMomentsActionRailSpacingModule (copy), FFlagMomentsActionRailNarrowWidthModule (copy), View (copy)
 	local NextOrder = ReactUtilsModule.createNextOrder()
 	local UseMomentResult = MomentContextModule.useMoment()
@@ -65,7 +65,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 68 | Named "ActionRail" ]]
 		UseCommentActionImpressionModule(NoComments and Frame.moment ~= nil)
 	end
 	local UseSignalStateResult3 = UseSignalStateFunction(MomentsPreferencesStoreModule.getFeedGlobalMute)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 133 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult3 (copy), MomentsPreferencesStoreModule (copy)
 		return {
 			isMuted = UseSignalStateResult3,
@@ -93,7 +93,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 68 | Named "ActionRail" ]]
 			countIsCapped = Comments ~= nil and Comments.countIsCapped == true,
 			animationRatio = AnimationRatio,
 			isDisabled = UseSignalStateResult1_1,
-			onActivated = function() --[[ Line: 160 ]]
+			onActivated = function()
 				-- upvalues: UseSignalStateResult1_1 (copy), FeedItemId (copy), Frame (copy)
 				if not UseSignalStateResult1_1 and FeedItemId ~= nil and FeedItemId ~= "" and Frame.onOpenComments ~= nil then
 					Frame.onOpenComments()

@@ -34,21 +34,21 @@ local config = {
 	verified = { reveal = ReactModule.createBinding(1) }
 }
 
-local function _(Value: number): number --[[ Line: 50 | Named "clamp01" ]]
+local function _(Value: number): number
 	return (math.clamp(Value, 0, 1))
 end
 
-local _ = function(p1): number --[[ Line: 54 | Named "clipWindowHeight" ]]
+local _ = function(p1): number
 	return (math.ceil(p1.FontSize * p1.LineHeight))
 end
 
-local _ = function(p1) --[[ Line: 58 | Named "clippingFromReveal" ]]
-	return p1:map(function(p2: number): boolean --[[ Line: 59 ]]
+local _ = function(p1)
+	return p1:map(function(p2: number): boolean
 		return p2 < 0.999
 	end)
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 64 | Named "TiltLockup" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), config (copy), FFlagLoadingScreenMilestones (copy), ReactModule (copy), View (copy), TiltKeyartModule (copy), Text (copy), FFlagUnifyVerifiedBadgeComponent (copy), VerifiedBadgeModule1 (copy), VerifiedBadgeModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Animation = p1.animation or config
@@ -57,14 +57,14 @@ return ReactModule.memo(function(p1) --[[ Line: 64 | Named "TiltLockup" ]]
 	local EmphasisColor3_1 = UseTokensResult.Color.System.Emphasis.Color3
 	local HeadingLarge = UseTokensResult.Typography.HeadingLarge
 	local BodyMedium = UseTokensResult.Typography.BodyMedium
-	local MapResult = Animation.verified.reveal:map(function(Value: number) --[[ Line: 85 ]]
+	local MapResult = Animation.verified.reveal:map(function(Value: number)
 		-- upvalues: EmphasisColor3_1 (copy)
 		return {
 			Color3 = EmphasisColor3_1,
 			Transparency = 1 - math.clamp(Value, 0, 1)
 		}
 	end)
-	local MapResult1 = Animation.verified.reveal:map(function(Value: number) --[[ Line: 89 ]]
+	local MapResult1 = Animation.verified.reveal:map(function(Value: number)
 		-- upvalues: UseTokensResult (copy)
 		return {
 			Color3 = UseTokensResult.Color.Content.Emphasis.Color3,
@@ -95,7 +95,7 @@ return ReactModule.memo(function(p1) --[[ Line: 64 | Named "TiltLockup" ]]
 			}, {
 				TitleWrap = ReactModule.createElement(View, {
 					LayoutOrder = 1,
-					ClipsDescendants = Animation.title.reveal:map(function(p2: number): boolean --[[ Line: 59 ]]
+					ClipsDescendants = Animation.title.reveal:map(function(p2: number): boolean
 						return p2 < 0.999
 					end),
 					Size = UDim2.new(1, 0, 0, (math.ceil(HeadingLarge.FontSize * HeadingLarge.LineHeight))),
@@ -104,7 +104,7 @@ return ReactModule.memo(function(p1) --[[ Line: 64 | Named "TiltLockup" ]]
 					Title = ReactModule.createElement(Text, {
 						tag = "size-full text-heading-large text-no-wrap text-align-x-center text-align-y-center text-truncate-end",
 						Text = p1.gameName or "",
-						textStyle = Animation.title.reveal:map(function(Value: number) --[[ Line: 77 ]]
+						textStyle = Animation.title.reveal:map(function(Value: number)
 							-- upvalues: EmphasisColor3 (copy)
 							return {
 								Color3 = EmphasisColor3,
@@ -116,7 +116,7 @@ return ReactModule.memo(function(p1) --[[ Line: 64 | Named "TiltLockup" ]]
 				SubWrap = ReactModule.createElement(View, {
 					tag = "col align-x-center align-y-center",
 					LayoutOrder = 2,
-					ClipsDescendants = Animation.creator.reveal:map(function(p2: number): boolean --[[ Line: 59 ]]
+					ClipsDescendants = Animation.creator.reveal:map(function(p2: number): boolean
 						return p2 < 0.999
 					end),
 					Size = UDim2.new(1, 0, 0, (math.ceil(BodyMedium.FontSize * BodyMedium.LineHeight))),
@@ -129,7 +129,7 @@ return ReactModule.memo(function(p1) --[[ Line: 64 | Named "TiltLockup" ]]
 							tag = "shrink auto-xy text-body-medium text-no-wrap text-truncate-end",
 							LayoutOrder = 1,
 							Text = p1.creatorName or "",
-							textStyle = Animation.creator.reveal:map(function(Value: number) --[[ Line: 81 ]]
+							textStyle = Animation.creator.reveal:map(function(Value: number)
 								-- upvalues: DefaultColor3 (copy)
 								return {
 									Color3 = DefaultColor3,

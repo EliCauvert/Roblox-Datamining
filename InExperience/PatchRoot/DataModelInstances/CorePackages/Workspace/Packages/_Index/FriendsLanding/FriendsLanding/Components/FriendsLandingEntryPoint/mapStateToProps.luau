@@ -2,7 +2,7 @@
 local GetDeepValueFunction = DependenciesModule.SocialLibraries.Dictionary.getDeepValue
 local FriendsNetworking = DependenciesModule.FriendsNetworking
 
-return function(p1) --[[ Line: 8 ]]
+return function(p1)
 	-- upvalues: GetDeepValueFunction (copy), FriendsNetworking (copy)
 	local DeepValue = GetDeepValueFunction(p1, string.format("FriendsLanding.Friends.byUserId.%s", p1.LocalUserId))
 	

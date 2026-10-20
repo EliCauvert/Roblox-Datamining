@@ -1,7 +1,7 @@
-﻿return function(Callback) --[[ Line: 1 | Named "createSpy" ]]
+﻿return function(Callback)
 	local config = { callCount = 0, valuesLength = 0, values = {} }
 	
-	function config.value(...) --[[ Line: 8 ]]
+	function config.value(...)
 		-- upvalues: config (copy), Callback (copy)
 		config.callCount += 1
 		config.values = { ... }
@@ -11,7 +11,7 @@
 		return Callback(...)
 	end
 	
-	function config:assertCalledWith(...) --[[ Line: 18 ]]
+	function config:assertCalledWith(...)
 		-- upvalues: config (copy)
 		local Selected = select("#", ...)
 		assert(config.valuesLength, Selected, "length of expected values differs from stored values")
@@ -22,7 +22,7 @@
 	end
 	
 	setmetatable(config, {
-		__index = function(_, p1) --[[ Line: 30 ]]
+		__index = function(_, p1)
 			error(("%q is not a valid member of spy"):format(p1))
 		end
 	})

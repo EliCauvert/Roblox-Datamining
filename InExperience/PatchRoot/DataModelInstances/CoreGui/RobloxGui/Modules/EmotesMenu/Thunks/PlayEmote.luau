@@ -10,12 +10,12 @@ local HideErrorModule = require(Actions.HideError)
 local ShowErrorModule = require(Actions.ShowError)
 local WithEventStreamResult = require(Parent.Analytics).new():withEventStream(require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.EventStream.new((game:GetService("RbxAnalyticsService"))))
 
-local function handlePlayFailure(p1, TemporarilyUnavailable, p2, EmoteId) --[[ Line: 29 ]]
+local function handlePlayFailure(p1, TemporarilyUnavailable, p2, EmoteId)
 	-- upvalues: WithEventStreamResult (copy), ConstantsModule (copy), RobloxTranslatorModule (copy), ShowErrorModule (copy), HideErrorModule (copy), HideMenuModule (copy)
 	if TemporarilyUnavailable then
 		WithEventStreamResult:onEmoteFailed(p2, EmoteId, TemporarilyUnavailable)
 		p1:dispatch(ShowErrorModule((RobloxTranslatorModule:FormatByKeyForLocale(ConstantsModule.LocalizationKeys.ErrorMessages[TemporarilyUnavailable], p1:getState().locale))))
-		delay(ConstantsModule.ErrorDisplayTimeSeconds, function() --[[ Line: 38 ]]
+		delay(ConstantsModule.ErrorDisplayTimeSeconds, function()
 			-- upvalues: p1 (copy), HideErrorModule (upval)
 			p1:dispatch(HideErrorModule())
 		end)
@@ -23,17 +23,17 @@ local function handlePlayFailure(p1, TemporarilyUnavailable, p2, EmoteId) --[[ L
 	p1:dispatch(HideMenuModule())
 end
 
-return function(_, p1, EmoteId, _, _) --[[ Line: 46 | Named "PlayEmote" ]]
+return function(_, p1, EmoteId, _, _)
 	-- upvalues: LocalPlayer (copy), MaybeSendEmoteFailureAnalyticsFromPlayerModule (copy), handlePlayFailure (copy), HideMenuModule (copy), WithEventStreamResult (copy), ConstantsModule (copy)
-	return function(p2) --[[ Line: 47 ]]
+	return function(p2)
 		-- upvalues: LocalPlayer (upval), MaybeSendEmoteFailureAnalyticsFromPlayerModule (upval), handlePlayFailure (upval), p1 (copy), EmoteId (copy), HideMenuModule (upval), WithEventStreamResult (upval), ConstantsModule (upval)
-		if MaybeSendEmoteFailureAnalyticsFromPlayerModule(LocalPlayer, function(p3) --[[ Line: 49 ]]
+		if MaybeSendEmoteFailureAnalyticsFromPlayerModule(LocalPlayer, function(p3)
 			-- upvalues: handlePlayFailure (upval), p2 (copy), p1 (upval), EmoteId (upval)
 			handlePlayFailure(p2, p3, p1, EmoteId)
 		end) then return end
 		p2:dispatch(HideMenuModule())
 		local Humanoid = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-		local Success, Result, _ = pcall(function() --[[ Line: 59 ]]
+		local Success, Result, _ = pcall(function()
 			-- upvalues: Humanoid (copy), EmoteId (upval)
 			return Humanoid:PlayEmoteAndGetAnimTrackById(EmoteId)
 		end)

@@ -8,9 +8,9 @@ local ResponsiveModule = require(Parent.Responsive)
 local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(Touch) --[[ Line: 16 ]]
+return function(Touch)
 	-- upvalues: ResponsiveModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy)
-	return function(p1) --[[ Line: 17 ]]
+	return function(p1)
 		-- upvalues: Touch (copy), ResponsiveModule (upval), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval), SetCentralOverlayFunction (upval), CentralOverlayType (upval)
 		if Touch ~= ResponsiveModule.Input.Touch then
 			p1:dispatch(SetCentralOverlayFunction(CentralOverlayType.SponsoredTooltip))

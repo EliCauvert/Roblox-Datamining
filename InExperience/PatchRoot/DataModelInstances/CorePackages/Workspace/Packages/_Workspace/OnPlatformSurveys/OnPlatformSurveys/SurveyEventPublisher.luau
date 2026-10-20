@@ -11,7 +11,7 @@ local config = {
 }
 
 return {
-	publishSurveyEvent = function(EventType) --[[ Line: 30 ]]
+	publishSurveyEvent = function(EventType)
 		-- upvalues: MessageBus (copy), config (copy)
 		MessageBus.publish(config, { eventType = EventType })
 	end,

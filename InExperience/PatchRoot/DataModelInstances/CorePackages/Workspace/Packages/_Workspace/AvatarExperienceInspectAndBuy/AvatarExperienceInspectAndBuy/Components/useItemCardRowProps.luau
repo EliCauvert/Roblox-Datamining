@@ -31,18 +31,18 @@ local UseItemSelectionStoreFunction = require(AvatarExperienceInspectAndBuy.Cont
 local FFlagAXMarketplaceLicensingItemCards = require(Parent.AvatarExperienceFlags).FFlagAXMarketplaceLicensingItemCards
 local CatalogItemCardStatusIconTypeEnum = require(Parent.AXCommon).Components.CatalogItemCard.CatalogItemCardStatusIconTypeEnum
 
-return function(p1, LayoutOrder, _, Callback, XOffset) --[[ Line: 54 ]]
+return function(p1, LayoutOrder, _, Callback, XOffset)
 	-- upvalues: UseTokensFunction (copy), UseConvertedItemDataModule (copy), ItemTypeEnum (copy), BundleLocalizationKeys (copy), AssetLocalizationKeys (copy), CryoModule (copy), PriceStatusLocalizationKeys (copy), UseLocalizationFunction (copy), UseItemSelectionStoreFunction (copy), UseSignalStateFunction (copy), ReactModule (copy), GetPriceStatusModule (copy), PriceStatusModule (copy), GetPriceInRobuxFunction (copy), GetItemThumbnailUrlModule (copy), GetCatalogCardItemTypeModule (copy), CatalogItemCardStatusIconTypeEnum (copy), RetrievalStatus (copy), GetPriceLineContentModule (copy), AddUnifiedEventLoggingFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), SessionService (copy), ItemCardThumbnail (copy), FFlagAXMarketplaceLicensingItemCards (copy), WearTimeSelectedOptionInList (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseConvertedItemDataModuleResult, UseConvertedItemDataModuleResult2 = UseConvertedItemDataModule(p1)
 	local UseLocalizationResult = UseLocalizationFunction((CryoModule.Dictionary.join(if p1.itemType == ItemTypeEnum.Bundle then BundleLocalizationKeys else AssetLocalizationKeys, PriceStatusLocalizationKeys)))
 	local UseItemSelectionStoreResult = UseItemSelectionStoreFunction()
 	local UseSignalStateResult = UseSignalStateFunction(UseItemSelectionStoreResult.getItemData(p1.id))
-	local UseMemoResult = ReactModule.useMemo(function(): boolean --[[ Line: 73 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): boolean
 		-- upvalues: GetPriceStatusModule (upval), UseConvertedItemDataModuleResult (copy), PriceStatusModule (upval)
 		return GetPriceStatusModule(UseConvertedItemDataModuleResult) == PriceStatusModule.Owned
 	end, { UseConvertedItemDataModuleResult })
-	ReactModule.useEffect(function() --[[ Line: 81 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseConvertedItemDataModuleResult (copy), GetPriceInRobuxFunction (upval), GetPriceStatusModule (upval), UseItemSelectionStoreResult (copy), p1 (copy)
 		if UseConvertedItemDataModuleResult and UseConvertedItemDataModuleResult.timedOptions then
 			local Copy = table.clone(UseConvertedItemDataModuleResult.timedOptions)
@@ -60,7 +60,7 @@ return function(p1, LayoutOrder, _, Callback, XOffset) --[[ Line: 54 ]]
 		p1.id,
 		UseItemSelectionStoreResult
 	})
-	local UseResult = ReactModule.useCallback(function(Price, Days) --[[ Line: 97 ]]
+	local UseResult = ReactModule.useCallback(function(Price, Days)
 		-- upvalues: UseSignalStateResult (copy), UseItemSelectionStoreResult (copy), p1 (copy)
 		if not UseSignalStateResult or not UseSignalStateResult.timedOptions then return end
 		local TimedOptions = {}
@@ -75,7 +75,7 @@ return function(p1, LayoutOrder, _, Callback, XOffset) --[[ Line: 54 ]]
 		UseItemSelectionStoreResult.setItemData(p1.id, { timedOptions = TimedOptions })
 	end, { p1.id, UseSignalStateResult, UseItemSelectionStoreResult })
 	local TimedOptions = UseSignalStateResult and UseSignalStateResult.timedOptions or nil
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 117 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: TimedOptions (copy)
 		if not TimedOptions then
 			return nil
@@ -102,7 +102,7 @@ return function(p1, LayoutOrder, _, Callback, XOffset) --[[ Line: 54 ]]
 			verified = UseConvertedItemDataModuleResult.creator.creatorHasVerifiedBadge
 		} else nil
 		local UseRefResult = ReactModule.useRef(nil)
-		ReactModule.useEffect(function() --[[ Line: 151 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: AddUnifiedEventLoggingFunction (upval), UseRefResult (copy), UnifiedEventLogEnums (upval), UnifiedLoggingSurface (upval), p1 (copy), SessionService (upval)
 			AddUnifiedEventLoggingFunction(UseRefResult, {
 				action = UnifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
@@ -124,7 +124,7 @@ return function(p1, LayoutOrder, _, Callback, XOffset) --[[ Line: 54 ]]
 			headerSize = UDim2.fromOffset(XOffset, XOffset),
 			footerAutomaticSize = Enum.AutomaticSize.XY,
 			AutomaticSize = Enum.AutomaticSize.XY,
-			onActivated = ReactModule.useCallback(function() --[[ Line: 161 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: Callback (copy), p1 (copy)
 				Callback(p1)
 			end, { Callback, p1 }),

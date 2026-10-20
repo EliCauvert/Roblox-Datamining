@@ -1,6 +1,6 @@
 ﻿local AvatarExperienceActionsModule = { ClearScreens = "ClearScreens" }
 
-function AvatarExperienceActionsModule.clearScreens(RouteNames) --[[ Line: 9 ]]
+function AvatarExperienceActionsModule.clearScreens(RouteNames)
 	-- upvalues: AvatarExperienceActionsModule (copy)
 	return {
 		type = AvatarExperienceActionsModule.ClearScreens,

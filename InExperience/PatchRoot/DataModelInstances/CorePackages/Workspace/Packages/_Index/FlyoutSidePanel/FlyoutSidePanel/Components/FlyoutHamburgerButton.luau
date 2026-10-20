@@ -29,7 +29,7 @@ local FFlagFlyoutUseOpenHook = require(Parent.SharedFlags).FFlagFlyoutUseOpenHoo
 local FFlagFlyoutHeaderFixPadding = require(Parent.SharedFlags).FFlagFlyoutHeaderFixPadding
 local FFlagLuaAppAddTestIdsForArrow = require(Parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
 
-local function getTotalNotificationCount(p1, Amount: number, Amount1: number): number --[[ Line: 42 ]]
+local function getTotalNotificationCount(p1, Amount: number, Amount1: number): number
 	-- upvalues: FFlagLuaAppFixNotificationBadgeCountsSync (copy)
 	local Total = 0
 	
@@ -56,11 +56,11 @@ local function getTotalNotificationCount(p1, Amount: number, Amount1: number): n
 	return Total
 end
 
-return function(p1) --[[ Line: 69 | Named "FlyoutHamburgerButton" ]]
+return function(p1)
 	-- upvalues: UseSelectorFunction (copy), FFlagLuaAppFixNotificationBadgeCountsSync (copy), getTotalNotificationCount (copy), UseTokensFunction (copy), FFlagFlyoutUseOpenHook (copy), UseOpenFlyoutSidePanelModule (copy), UseSetDrawerVisibleFunction (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), ReactModule (copy), FlyoutAnalyticsModule (copy), FlyoutTooltipManagerModule (copy), UseLocalizationFunction (copy), CoreGui (copy), TooltipOrientation (copy), UserInputService (copy), FFlagEnableFlyoutOnNavRail (copy), FFlagFlyoutHeaderFixPadding (copy), FFlagLuaAppAddTestIdsForArrow (copy), GetTestIdFunction (copy), FoundationModule (copy), StatusIndicator (copy), StatusIndicatorVariant (copy), FlyoutAlternateEntryPointModule (copy), Icon (copy), BuilderIconsModule (copy), IconSize (copy), WithTooltipFunction (copy)
-	local TotalNotificationCount: number = getTotalNotificationCount(UseSelectorFunction(function(p2) --[[ Line: 70 ]]
+	local TotalNotificationCount: number = getTotalNotificationCount(UseSelectorFunction(function(p2)
 		return p2.NotificationBadgeCounts or {}
-	end), UseSelectorFunction(function(p2) --[[ Line: 73 ]]
+	end), UseSelectorFunction(function(p2)
 		-- upvalues: FFlagLuaAppFixNotificationBadgeCountsSync (upval)
 		if FFlagLuaAppFixNotificationBadgeCountsSync then
 			local FriendsCarousel = p2.FriendsCarousel
@@ -70,7 +70,7 @@ return function(p1) --[[ Line: 69 | Named "FlyoutHamburgerButton" ]]
 		else
 			return 0
 		end
-	end), (UseSelectorFunction(function(p2) --[[ Line: 81 ]]
+	end), (UseSelectorFunction(function(p2)
 		-- upvalues: FFlagLuaAppFixNotificationBadgeCountsSync (upval)
 		return FFlagLuaAppFixNotificationBadgeCountsSync and (p2.SocialTab and p2.SocialTab.UnreadConversationCount) or 0
 	end)))
@@ -82,7 +82,7 @@ return function(p1) --[[ Line: 69 | Named "FlyoutHamburgerButton" ]]
 	else
 		local UseSetDrawerVisibleResult = UseSetDrawerVisibleFunction()
 		local UseRoactServiceResult = UseRoactServiceFunction(AppEventIngestService)
-		UseOpenFlyoutSidePanelModuleResult = ReactModule.useCallback(function() --[[ Line: 97 ]]
+		UseOpenFlyoutSidePanelModuleResult = ReactModule.useCallback(function()
 			-- upvalues: FlyoutAnalyticsModule (upval), UseRoactServiceResult (copy), p1 (copy), UseSetDrawerVisibleResult (copy), FlyoutTooltipManagerModule (upval)
 			FlyoutAnalyticsModule.sendPageLoadEvent(UseRoactServiceResult, p1.titleText)
 			UseSetDrawerVisibleResult(true)
@@ -115,14 +115,14 @@ return function(p1) --[[ Line: 69 | Named "FlyoutHamburgerButton" ]]
 			textAlignment = Enum.TextXAlignment.Left
 		}
 	end
-	local UseResult = ReactModule.useCallback(function(_) --[[ Line: 130 ]]
+	local UseResult = ReactModule.useCallback(function(_)
 		-- upvalues: UseStateResult (copy), UseStateResult2 (copy), FlyoutAnalyticsModule (upval)
 		if UseStateResult then
 			UseStateResult2(false)
 			FlyoutAnalyticsModule.onFlyoutTooltipDismissed({ source = "click" })
 		end
 	end, { UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 138 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), FlyoutTooltipManagerModule (upval), FlyoutAnalyticsModule (upval), UserInputService (upval), UseResult (copy)
 		local Connection = nil
 		
@@ -130,7 +130,7 @@ return function(p1) --[[ Line: 69 | Named "FlyoutHamburgerButton" ]]
 			FlyoutAnalyticsModule.onFlyoutTooltipShown({ count = FlyoutTooltipManagerModule:getTooltipCount() })
 			Connection = UserInputService.InputBegan:Connect(UseResult)
 		end
-		return function() --[[ Line: 145 ]]
+		return function()
 			-- upvalues: Connection (ref)
 			if Connection then
 				Connection:Disconnect()
@@ -168,7 +168,7 @@ return function(p1) --[[ Line: 69 | Named "FlyoutHamburgerButton" ]]
 				name = BuilderIconsModule.Icon.ThreeBarsHorizontal,
 				size = IconSize.Large
 			}),
-			Tooltip = if UseStateResult then WithTooltipFunction(v2, v1, function(p2) --[[ Line: 216 ]]
+			Tooltip = if UseStateResult then WithTooltipFunction(v2, v1, function(p2)
 				-- upvalues: ReactModule (upval)
 				return ReactModule.createElement("Frame", {
 					Visible = false,

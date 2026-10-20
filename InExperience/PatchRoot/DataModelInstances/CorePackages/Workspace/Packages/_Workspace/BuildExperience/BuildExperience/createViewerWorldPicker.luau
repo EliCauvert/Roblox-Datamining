@@ -1,8 +1,8 @@
-﻿local function toScreenPoint(Input): Vector2 --[[ Line: 20 ]]
+﻿local function toScreenPoint(Input): Vector2
 	return Vector2.new(Input.Position.X, Input.Position.Y)
 end
 
-local function raycast(Camera: Camera, World, Vector) --[[ Line: 24 ]]
+local function raycast(Camera: Camera, World, Vector)
 	local v1 = Camera:ScreenPointToRay(Vector.X, Vector.Y)
 	local List = {}
 	local Terrain = World:FindFirstChildWhichIsA("Terrain")
@@ -32,11 +32,11 @@ local function raycast(Camera: Camera, World, Vector) --[[ Line: 24 ]]
 	return nil
 end
 
-return function(p1) --[[ Line: 49 | Named "createViewerWorldPicker" ]]
+return function(p1)
 	-- upvalues: raycast (copy), toScreenPoint (copy)
 	local Tbl = {}
 	
-	local function _(p2) --[[ Line: 52 | Named "pick" ]]
+	local function _(p2)
 		-- upvalues: raycast (upval), p1 (copy), toScreenPoint (upval)
 		local RaycastResult = raycast(p1.camera, p1.world, toScreenPoint(p2))
 		
@@ -51,7 +51,7 @@ return function(p1) --[[ Line: 49 | Named "createViewerWorldPicker" ]]
 	end
 	
 	local Connections = {
-		p1.userInputService.InputBegan:Connect(function(Input, GameProcessed) --[[ Line: 62 ]]
+		p1.userInputService.InputBegan:Connect(function(Input, GameProcessed)
 			-- upvalues: p1 (copy), raycast (upval), toScreenPoint (upval), Tbl (copy)
 			if Input.UserInputType ~= Enum.UserInputType.MouseButton1 then
 				if Input.UserInputType == Enum.UserInputType.Touch then
@@ -79,7 +79,7 @@ return function(p1) --[[ Line: 49 | Named "createViewerWorldPicker" ]]
 				end
 			end
 		end),
-		p1.userInputService.InputChanged:Connect(function(Input) --[[ Line: 75 ]]
+		p1.userInputService.InputChanged:Connect(function(Input)
 			-- upvalues: Tbl (copy)
 			local Entry = Tbl[Input]
 			
@@ -87,7 +87,7 @@ return function(p1) --[[ Line: 49 | Named "createViewerWorldPicker" ]]
 				Entry.isGesture = true
 			end
 		end),
-		p1.userInputService.InputEnded:Connect(function(Input, GameProcessed) --[[ Line: 81 ]]
+		p1.userInputService.InputEnded:Connect(function(Input, GameProcessed)
 			-- upvalues: Tbl (copy), p1 (copy), raycast (upval), toScreenPoint (upval)
 			local Entry = Tbl[Input]
 			
@@ -108,7 +108,7 @@ return function(p1) --[[ Line: 49 | Named "createViewerWorldPicker" ]]
 		end)
 	}
 	
-	return function() --[[ Line: 100 ]]
+	return function()
 		-- upvalues: Connections (copy), Tbl (copy)
 		for _, connection in Connections do
 			connection:Disconnect()

@@ -7,7 +7,7 @@ local Text = FoundationModule.Text
 local Icon = FoundationModule.Icon
 local Enums = FoundationModule.Enums
 
-return function(p1) --[[ Line: 18 | Named "WearTimePurchaseSubtitleText" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), View (copy), Icon (copy), Enums (copy), Text (copy)
 	local TimedOptionDays = p1.timedOptionDays
 	local UseLocalizationResult = UseLocalizationFunction({

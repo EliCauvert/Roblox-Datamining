@@ -7,12 +7,12 @@ local _ = require(Parent1.LeaderboardStore)
 local LeaderboardTextCellModule = require(script.Parent.LeaderboardTextCell)
 local FormatStatStringModule = require(Parent.Common.FormatStatString)
 
-return ReactModule.memo(function(p1) --[[ Line: 14 | Named "StatCell" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), SignalsModule (copy), FormatStatStringModule (copy), SignalsReactModule (copy), LeaderboardTextCellModule (copy)
 	return ReactModule.createElement(LeaderboardTextCellModule, {
-		text = SignalsReactModule.useSignalBinding((ReactModule.useMemo(function() --[[ Line: 22 ]]
+		text = SignalsReactModule.useSignalBinding((ReactModule.useMemo(function()
 			-- upvalues: SignalsModule (upval), p1 (copy), FormatStatStringModule (upval)
-			return SignalsModule.createComputed(function(p2) --[[ Line: 23 ]]
+			return SignalsModule.createComputed(function(p2)
 				-- upvalues: p1 (upval), FormatStatStringModule (upval)
 				return if p1.playerStat then FormatStatStringModule((p1.playerStat(p2))) else "-"
 			end)

@@ -1,7 +1,7 @@
 ﻿local CryoModule = require(game:GetService("CorePackages").Packages.Cryo)
 local Timestamp = 0
 
-return function(p1) --[[ Line: 7 | Named "createMockMessage" ]]
+return function(p1)
 	-- upvalues: Timestamp (ref), CryoModule (copy)
 	Timestamp += 1
 	

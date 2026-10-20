@@ -1,7 +1,7 @@
 ﻿local CreateButtonsTimeModule = require(script.Parent.CreateButtonsTime)
 
 return {
-	createHelpText = function(p1) --[[ Line: 7 ]]
+	createHelpText = function(p1)
 		-- upvalues: CreateButtonsTimeModule (copy)
 		p1.HelpRevealer = Instance.new("TextLabel")
 		p1.HelpRevealer.Name = "HelpRevealer"
@@ -42,12 +42,12 @@ return {
 		Padding1.PaddingLeft = UDim.new(0.02, 0)
 		Padding1.PaddingBottom = UDim.new(0.02, 0)
 		Padding1.Parent = p1.HelpDescription
-		p1.HelpRevealer.MouseEnter:Connect(function() --[[ Line: 55 ]]
+		p1.HelpRevealer.MouseEnter:Connect(function()
 			-- upvalues: p1 (copy), CreateButtonsTimeModule (upval)
 			p1.HelpRevealer.TextColor3 = CreateButtonsTimeModule.hoverColor
 			p1.HelpDescription.Visible = true
 		end)
-		p1.HelpRevealer.MouseLeave:Connect(function() --[[ Line: 60 ]]
+		p1.HelpRevealer.MouseLeave:Connect(function()
 			-- upvalues: p1 (copy), CreateButtonsTimeModule (upval)
 			p1.HelpRevealer.TextColor3 = CreateButtonsTimeModule.regularColor
 			p1.HelpDescription.Visible = false

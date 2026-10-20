@@ -1,9 +1,9 @@
 ﻿local JavascriptHybridModule = require(script:FindFirstAncestor("GenericChallenges").Types.JavascriptHybrid)
 local HttpService = game:GetService("HttpService")
 
-return function(p1) --[[ Line: 29 ]]
+return function(p1)
 	-- upvalues: HttpService (copy), JavascriptHybridModule (copy)
-	return function(Input) --[[ Line: 30 ]]
+	return function(Input)
 		-- upvalues: HttpService (upval), JavascriptHybridModule (upval), p1 (copy)
 		local Data = HttpService:JSONDecode(Input)
 		

@@ -28,15 +28,15 @@ ToggleSwitch.validateProps = T.strictInterface({
 	onSelectionGained = T.optional(T.callback)
 })
 
-function ToggleSwitch.init(p1) --[[ Line: 49 ]]
+function ToggleSwitch.init(p1)
 	-- upvalues: Roact (copy), DivideTransparencyModule (copy), _UDim2 (copy), _UDim2_1 (copy), Otter (copy)
 	local v1: number = if p1.props.checked then 1 else 0
 	p1.progress, p1.setProgress = Roact.createBinding(v1)
-	p1.fillTransparency = p1.progress:map(function(p2: number) --[[ Line: 53 ]]
+	p1.fillTransparency = p1.progress:map(function(p2: number)
 		-- upvalues: DivideTransparencyModule (upval), p1 (copy)
 		return DivideTransparencyModule(1 - p2, if p1.props.disabled then 4 else 1)
 	end)
-	p1.knobPosition = p1.progress:map(function(p2) --[[ Line: 57 ]]
+	p1.knobPosition = p1.progress:map(function(p2)
 		-- upvalues: _UDim2 (upval), _UDim2_1 (upval)
 		return _UDim2:lerp(_UDim2_1, p2)
 	end)
@@ -44,9 +44,9 @@ function ToggleSwitch.init(p1) --[[ Line: 49 ]]
 	p1.motor:onStep(p1.setProgress)
 end
 
-function ToggleSwitch.renderWithSelectionCursor(p1, Callback) --[[ Line: 65 ]]
+function ToggleSwitch.renderWithSelectionCursor(p1, Callback)
 	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), Roact (copy), AssetImageModule (copy), DivideTransparencyModule (copy), CursorType (copy)
-	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 66 ]]
+	return WithFoundationOrUIBloxStyleFunction(function(p2)
 		return {
 			Theme = {
 				SecondaryDefault = {
@@ -59,7 +59,7 @@ function ToggleSwitch.renderWithSelectionCursor(p1, Callback) --[[ Line: 65 ]]
 				}
 			}
 		}
-	end, function(p2) --[[ Line: 73 ]]
+	end, function(p2)
 		-- upvalues: Roact (upval), AssetImageModule (upval), p1 (copy), DivideTransparencyModule (upval), Callback (copy), CursorType (upval)
 		return Roact.createElement(AssetImageModule.Button, {
 			Size = UDim2.new(0, 60, 0, 36),
@@ -97,20 +97,20 @@ function ToggleSwitch.renderWithSelectionCursor(p1, Callback) --[[ Line: 65 ]]
 	end)
 end
 
-function ToggleSwitch.render(p1) --[[ Line: 113 ]]
+function ToggleSwitch.render(p1)
 	-- upvalues: WithCursorMigration (copy)
-	return WithCursorMigration(function(p2) --[[ Line: 114 ]]
+	return WithCursorMigration(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithSelectionCursor(p2)
 	end)
 end
 
-function ToggleSwitch.didUpdate(p1) --[[ Line: 119 ]]
+function ToggleSwitch.didUpdate(p1)
 	-- upvalues: Otter (copy), config (copy)
 	p1.motor:setGoal(Otter.spring(if p1.props.checked then 1 else 0, config))
 end
 
-function ToggleSwitch.willUnmount(p1) --[[ Line: 124 ]]
+function ToggleSwitch.willUnmount(p1)
 	p1.motor:destroy()
 end
 

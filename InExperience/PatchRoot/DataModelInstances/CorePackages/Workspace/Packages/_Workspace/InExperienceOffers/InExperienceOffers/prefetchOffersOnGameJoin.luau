@@ -6,7 +6,7 @@ local _ = require(InExperienceOffers.Enums.FeatureKey)
 local WhenJoinSettlesModule = require(InExperienceOffers.JoinLifecycle.whenJoinSettles)
 local SchedulePrefetchDelayModule = require(InExperienceOffers.JoinLifecycle.schedulePrefetchDelay)
 local OffersDebugLoggerModule = require(InExperienceOffers.Internal.OffersDebugLogger)
-local v1 = (function(Text: string) --[[ Line: 21 | Named "parseFeatureKeys" ]]
+local v1 = (function(Text: string)
 	local List = {}
 	
 	for _, value in string.split(Text, ",") do
@@ -19,7 +19,7 @@ local v1 = (function(Text: string) --[[ Line: 21 | Named "parseFeatureKeys" ]]
 	return List
 end)((require(InExperienceOffers.Flags.FStringOffersPrefetchFeatureKeys)))
 
-local function triggerFetch() --[[ Line: 34 ]]
+local function triggerFetch()
 	-- upvalues: v1 (copy), GetOffersStoreModule (copy)
 	if #v1 ~= 0 then
 		GetOffersStoreModule(false).fetchOffers(v1)
@@ -28,13 +28,13 @@ local function triggerFetch() --[[ Line: 34 ]]
 	end
 end
 
-return function() --[[ Line: 46 | Named "prefetchOffersOnGameJoin" ]]
+return function()
 	-- upvalues: FFlagEnableOffersPrefetch (copy), OffersDebugLoggerModule (copy), WhenJoinSettlesModule (copy), FIntOffersPrefetchDelayMsModule (copy), v1 (copy), GetOffersStoreModule (copy), SchedulePrefetchDelayModule (copy), triggerFetch (copy)
 	if FFlagEnableOffersPrefetch then
 		OffersDebugLoggerModule.log("prefetchOffersOnGameJoin: waiting for join to settle")
-		WhenJoinSettlesModule(function(p1) --[[ Line: 51 ]]
+		WhenJoinSettlesModule(function(p1)
 			-- upvalues: OffersDebugLoggerModule (upval), FIntOffersPrefetchDelayMsModule (upval), v1 (upval), GetOffersStoreModule (upval), SchedulePrefetchDelayModule (upval), triggerFetch (upval)
-			OffersDebugLoggerModule.logLazy(function(): string --[[ Line: 52 ]]
+			OffersDebugLoggerModule.logLazy(function(): string
 				-- upvalues: p1 (copy)
 				return "prefetchOffersOnGameJoin: join settled path=" .. p1
 			end)

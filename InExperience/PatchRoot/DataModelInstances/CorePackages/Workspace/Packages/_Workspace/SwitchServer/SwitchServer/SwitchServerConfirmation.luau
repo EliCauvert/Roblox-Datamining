@@ -28,7 +28,7 @@ local SwitchServerTelemetryModule = require(SwitchServer.Telemetry.SwitchServerT
 local FFlagUseTeleportForLuaSwitchServerImplModule = require(SwitchServer.Flags.FFlagUseTeleportForLuaSwitchServerImpl)
 local FFlagUseMultipleServerIdsForSwitchServerModule = require(SwitchServer.Flags.FFlagUseMultipleServerIdsForSwitchServer)
 
-local function _() --[[ Line: 54 | Named "simpleLeaveGame" ]]
+local function _()
 	-- upvalues: GuiService (copy), RunService (copy)
 	GuiService.SelectedCoreObject = nil
 	RunService.RenderStepped:Wait()
@@ -36,7 +36,7 @@ local function _() --[[ Line: 54 | Named "simpleLeaveGame" ]]
 	game:Shutdown()
 end
 
-local function SwitchServerConfirmationDialog(p1) --[[ Line: 62 ]]
+local function SwitchServerConfirmationDialog(p1)
 	-- upvalues: UseLocalizationFunction (copy), ConstantsModule (copy), ReactModule (copy), SwitchServerTelemetryModule (copy), FFlagUseTeleportForLuaSwitchServerImplModule (copy), FFlagUseMultipleServerIdsForSwitchServerModule (copy), CallTeleportSwitchServerModule (copy), RecentServerHistoryModule (copy), LaunchGameFunction (copy), Default (copy), GuiService (copy), RunService (copy), ContextActionService (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), Dialog (copy), DialogSize (copy), Orientation (copy), ButtonVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		title = ConstantsModule.CONFIRMATION.TITLE,
@@ -44,7 +44,7 @@ local function SwitchServerConfirmationDialog(p1) --[[ Line: 62 ]]
 		confirm = ConstantsModule.CONFIRMATION.CONFIRM,
 		cancel = ConstantsModule.CONFIRMATION.CANCEL
 	})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 70 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: SwitchServerTelemetryModule (upval), p1 (copy), FFlagUseTeleportForLuaSwitchServerImplModule (upval), FFlagUseMultipleServerIdsForSwitchServerModule (upval), CallTeleportSwitchServerModule (upval), RecentServerHistoryModule (upval), LaunchGameFunction (upval), ConstantsModule (upval), Default (upval), GuiService (upval), RunService (upval)
 		SwitchServerTelemetryModule.sendSwitchServerConfirmationActions({ event_type = "confirm" })
 		p1.setSwitchServerConfirmationOpen(false)
@@ -70,7 +70,7 @@ local function SwitchServerConfirmationDialog(p1) --[[ Line: 62 ]]
 		game.JobId
 	})
 	local UseRefResult = ReactModule.useRef(false)
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 95 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), SwitchServerTelemetryModule (upval), p1 (copy)
 		if not UseRefResult.current then
 			UseRefResult.current = true
@@ -80,9 +80,9 @@ local function SwitchServerConfirmationDialog(p1) --[[ Line: 62 ]]
 			return
 		end
 	end, { p1.setSwitchServerConfirmationOpen })
-	ReactModule.useEffect(function() --[[ Line: 108 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ContextActionService (upval), UseResult1 (copy)
-		ContextActionService:BindCoreAction("SwitchServerConfirmationCloseOnBack", function(_, UserInputState) --[[ Line: 109 ]]
+		ContextActionService:BindCoreAction("SwitchServerConfirmationCloseOnBack", function(_, UserInputState)
 			-- upvalues: UseResult1 (upval)
 			if UserInputState == Enum.UserInputState.Begin then
 				UseResult1()
@@ -90,16 +90,16 @@ local function SwitchServerConfirmationDialog(p1) --[[ Line: 62 ]]
 			return Enum.ContextActionResult.Sink
 		end, false, Enum.KeyCode.Escape, Enum.KeyCode.ButtonB)
 		
-		return function() --[[ Line: 117 ]]
+		return function()
 			-- upvalues: ContextActionService (upval)
 			ContextActionService:UnbindCoreAction("SwitchServerConfirmationCloseOnBack")
 		end
 	end, { UseResult1 })
-	ReactModule.useEffect(function() --[[ Line: 122 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: GuiService (upval)
 		GuiService:SetMenuIsOpen(true, "SwitchServerConfirmation")
 		
-		return function() --[[ Line: 124 ]]
+		return function()
 			-- upvalues: GuiService (upval)
 			GuiService:SetMenuIsOpen(false, "SwitchServerConfirmation")
 		end
@@ -112,11 +112,11 @@ local function SwitchServerConfirmationDialog(p1) --[[ Line: 62 ]]
 			isAutoFocusRoot = true,
 			surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
 			eventMap = EventMap,
-			eventHandlers = ReactModule.useMemo(function() --[[ Line: 129 ]]
+			eventHandlers = ReactModule.useMemo(function()
 				-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), UseResult1 (copy)
 				return {
 					[FocusNavigationEventNameEnum.NavigateBack] = {
-						handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 132 ]]
+						handler = InputHandlersModule.onRelease(function(p2)
 							-- upvalues: UseResult1 (upval)
 							UseResult1()
 							p2:cancel()
@@ -151,15 +151,15 @@ local function SwitchServerConfirmationDialog(p1) --[[ Line: 62 ]]
 	})
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 187 | Named "SwitchServerConfirmation" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), ReactFocusNavigationModule (copy), SwitchServerConfirmationDialog (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 188 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ReactFocusNavigationModule (upval)
 		return ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 192 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy)
-		return function() --[[ Line: 193 ]]
+		return function()
 			-- upvalues: UseMemoResult (upval)
 			UseMemoResult:teardown()
 		end

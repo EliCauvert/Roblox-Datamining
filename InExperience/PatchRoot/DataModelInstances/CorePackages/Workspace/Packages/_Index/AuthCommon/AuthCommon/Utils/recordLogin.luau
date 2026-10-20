@@ -5,7 +5,7 @@ local _ = require(AuthCommon.Utils.PreviousAccountEntry)
 local PrunePreviousAccountsListModule = require(AuthCommon.Utils.prunePreviousAccountsList)
 local CryoModule = require(AuthCommon.Parent.Cryo)
 
-return function(p1, LoginMethod, Name): boolean --[[ Line: 10 | Named "recordLogin" ]]
+return function(p1, LoginMethod, Name): boolean
 	-- upvalues: AppStorageUtilitiesModule (copy), LoginResultModule (copy), CryoModule (copy), PrunePreviousAccountsListModule (copy)
 	if p1.user.id == nil or p1.user.id == "0" then
 		return false

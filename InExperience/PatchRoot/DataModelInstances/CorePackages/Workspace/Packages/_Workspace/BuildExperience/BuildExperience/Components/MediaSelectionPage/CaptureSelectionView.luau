@@ -10,12 +10,12 @@ local CaptureGridItemModule = require(script.Parent.CaptureGridItem)
 local UseCaptureSelectionViewModelModule = require(script.Parent.useCaptureSelectionViewModel)
 local ScrollingGridView = require(Parent.MomentsCommon).ScrollingGridView
 
-local function renderEmptyState() --[[ Line: 26 ]]
+local function renderEmptyState()
 	-- upvalues: ReactModule (copy), View (copy)
 	return ReactModule.createElement(View, { tag = "align-x-center align-y-center size-full" })
 end
 
-local function CaptureSelectionView(p1) --[[ Line: 37 ]]
+local function CaptureSelectionView(p1)
 	-- upvalues: ReactModule (copy), CaptureGridItemModule (copy), View (copy), MediaPreviewModule (copy), ScrollingGridView (copy), renderEmptyState (copy), Button (copy), FoundationModule (copy), InputSize (copy), ButtonVariant (copy)
 	return ReactModule.createElement(View, { tag = "col gap-medium size-full padding-large" }, {
 		Preview = ReactModule.createElement(View, {
@@ -43,7 +43,7 @@ local function CaptureSelectionView(p1) --[[ Line: 37 ]]
 				items = p1.captures,
 				onShowMoreCallback = p1.onShowMore,
 				renderEmptyState = renderEmptyState,
-				renderItem = ReactModule.useCallback(function(Capture, _) --[[ Line: 38 ]]
+				renderItem = ReactModule.useCallback(function(Capture, _)
 					-- upvalues: ReactModule (upval), CaptureGridItemModule (upval), p1 (copy)
 					return ReactModule.createElement(CaptureGridItemModule, {
 						capture = Capture,
@@ -67,7 +67,7 @@ local function CaptureSelectionView(p1) --[[ Line: 37 ]]
 	})
 end
 
-return function(p1) --[[ Line: 99 | Named "CaptureSelectionContainer" ]]
+return function(p1)
 	-- upvalues: UseCaptureSelectionViewModelModule (copy), ReactModule (copy), CaptureSelectionView (copy)
 	return ReactModule.createElement(CaptureSelectionView, (UseCaptureSelectionViewModelModule({
 		captureSource = p1.captureSource,

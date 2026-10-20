@@ -10,7 +10,7 @@ local config = {
 	lastUpdated = { 25, 6, 10 }
 }
 
-return function(p1) --[[ Line: 22 ]]
+return function(p1)
 	-- upvalues: TelemetryServicePlaySessionInfoEnabledEngineFeature (copy), RbxAnalyticsService (copy), TelemetryService (copy), config (copy)
 	local StandardizedFields = nil
 	local CustomFields = nil

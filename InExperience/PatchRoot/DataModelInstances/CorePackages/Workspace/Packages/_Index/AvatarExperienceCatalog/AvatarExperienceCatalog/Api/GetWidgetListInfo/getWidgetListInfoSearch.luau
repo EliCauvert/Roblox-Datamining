@@ -7,7 +7,7 @@ local ConstantsModule = require(script.Parent.constants)
 local _ = require(AvatarExperienceCatalog.Models.WidgetListInfo)
 local MakeAXResponseHandlerModule = require(AvatarExperienceCatalog.Utils.makeAXResponseHandler)
 
-return function(Callback, RequestId, Query) --[[ Line: 16 | Named "getWidgetListInfoSearch" ]]
+return function(Callback, RequestId, Query)
 	-- upvalues: Url (copy), MakeAXResponseHandlerModule (copy), NormalizeWidgetListInfoResponseToWidgetListInfoModule (copy), ConstantsModule (copy)
 	local GET, GET2 = Callback(`{Url.APIS_URL}marketplace-widgets/v1/widgets/search?{Url:makeQueryString({ requestId = RequestId, query = Query })}`, "GET")
 	

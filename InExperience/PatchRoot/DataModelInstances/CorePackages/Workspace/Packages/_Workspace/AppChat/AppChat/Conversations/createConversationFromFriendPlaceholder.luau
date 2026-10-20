@@ -8,7 +8,7 @@ local GetConversationStoreModule = require(AppChat.Stores.GetConversationStore)
 local GetConversationSearchDataHydrationModule = require(AppChat.Stores.GetConversationSearchDataHydration)
 local FFlagAppChatAnyServerSideConversationSearchModule = require(AppChat.Flags.FFlagAppChatAnyServerSideConversationSearch)
 
-return function(p1, p2) --[[ Line: 19 ]]
+return function(p1, p2)
 	-- upvalues: GetOtherParticipantsModule (copy), GetConversationStoreModule (copy), AppChatNetworkingModule (copy), ConversationChannelsModule (copy), SignalsExperimentalModule (copy), FFlagAppChatAnyServerSideConversationSearchModule (copy), GetConversationSearchDataHydrationModule (copy)
 	local OtherParticipantsModule = GetOtherParticipantsModule(p1, p2)
 	
@@ -16,7 +16,7 @@ return function(p1, p2) --[[ Line: 19 ]]
 		local OtherParticipantsModuleEntry = OtherParticipantsModule[1]
 		local ConversationStoreModule = GetConversationStoreModule(false)
 		
-		return AppChatNetworkingModule.http.CreateConversation(nil, "one_to_one", { OtherParticipantsModuleEntry }):andThen(function(Result) --[[ Line: 27 ]]
+		return AppChatNetworkingModule.http.CreateConversation(nil, "one_to_one", { OtherParticipantsModuleEntry }):andThen(function(Result)
 			-- upvalues: ConversationChannelsModule (upval), SignalsExperimentalModule (upval), ConversationStoreModule (copy), p1 (copy), FFlagAppChatAnyServerSideConversationSearchModule (upval), GetConversationSearchDataHydrationModule (upval)
 			local ResponseBody = Result and Result.responseBody
 			local Conversation = ResponseBody and (ResponseBody.conversations and ResponseBody.conversations[1])
@@ -25,7 +25,7 @@ return function(p1, p2) --[[ Line: 19 ]]
 				return nil
 			end
 			local FromChannelsApiResult = ConversationChannelsModule.fromChannelsApi(Conversation)
-			SignalsExperimentalModule.batch(function() --[[ Line: 35 ]]
+			SignalsExperimentalModule.batch(function()
 				-- upvalues: ConversationStoreModule (upval), FromChannelsApiResult (copy), p1 (upval)
 				ConversationStoreModule.upsertConversation(FromChannelsApiResult, false)
 				ConversationStoreModule.removeConversation(p1.id)

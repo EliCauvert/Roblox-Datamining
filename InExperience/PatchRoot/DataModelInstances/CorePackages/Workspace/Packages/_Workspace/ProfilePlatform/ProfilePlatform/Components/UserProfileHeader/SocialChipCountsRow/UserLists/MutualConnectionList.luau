@@ -26,13 +26,13 @@ local FFlagEnableSplitPane = require(Parent.SharedFlags).FFlagEnableSplitPane
 local SplitPaneModule = if FFlagEnableSplitPane then require(Parent.SplitPane) else nil
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
-return function(_) --[[ Line: 43 | Named "MutualConnectionList" ]]
+return function(_)
 	-- upvalues: UseDispatchFunction (copy), UseNavigationPropsFunction (copy), UseScreenSizeFunction (copy), UseSelectorFunction (copy), GetSafeAreaSizeFunction (copy), FFlagProfilePlatformNewProfileHeader (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), FFlagSwitchProfileWidthHookToSocialCommon (copy), UseProfileCardWidthFunction (copy), UseProfileCardWidthModule (copy), ConstantsModule (copy), FFlagEnableSplitPane (copy), SplitPaneModule (copy), UseSignalStateFunction (copy), FFlagMutualConnectionsListPagination (copy), ReactModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UserListViewAdaptor (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
 	local UseDispatchResult = UseDispatchFunction()
-	local UseNavigationPropsResult = UseNavigationPropsFunction(function(_, p1) --[[ Line: 45 ]]
+	local UseNavigationPropsResult = UseNavigationPropsFunction(function(_, p1)
 		return { mutualFriendIds = p1.mutualFriendIds }
 	end)
-	local SafeAreaSize = GetSafeAreaSizeFunction(UseScreenSizeFunction(), (UseSelectorFunction(function(p1) --[[ Line: 53 ]]
+	local SafeAreaSize = GetSafeAreaSizeFunction(UseScreenSizeFunction(), (UseSelectorFunction(function(p1)
 		return p1.GlobalGuiInset
 	end)))
 	local IsFormFactorMatch: boolean = if FFlagProfilePlatformNewProfileHeader then UseProfileFormFactorModule().formFactor == EnumsModule.ProfileFormFactor.Wide else false
@@ -55,18 +55,18 @@ return function(_) --[[ Line: 43 | Named "MutualConnectionList" ]]
 	
 	if FFlagMutualConnectionsListPagination then
 		local UseStateResult, UseStateResult2 = ReactModule.useState(25)
-		ReactModule.useEffect(function() --[[ Line: 94 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(25)
 		end, { MutualFriendIds })
-		UseResult = ReactModule.useCallback(function() --[[ Line: 98 ]]
+		UseResult = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (copy), MutualFriendIds (copy)
-			UseStateResult2(function(p1: number): number --[[ Line: 99 ]]
+			UseStateResult2(function(p1: number): number
 				-- upvalues: MutualFriendIds (upval)
 				return (math.min(p1 + 25, #MutualFriendIds))
 			end)
 		end, { MutualFriendIds })
-		MutualFriendIds1 = ReactModule.useMemo(function() --[[ Line: 104 ]]
+		MutualFriendIds1 = ReactModule.useMemo(function()
 			-- upvalues: UseStateResult (copy), MutualFriendIds (copy)
 			if UseStateResult >= #MutualFriendIds then
 				return MutualFriendIds
@@ -92,7 +92,7 @@ return function(_) --[[ Line: 43 | Named "MutualConnectionList" ]]
 		users = if FFlagMutualConnectionsListPagination then MutualFriendIds1 else MutualFriendIds,
 		title = if #MutualFriendIds == 1 then UseLocalizationResult.mutualConnection else UseLocalizationResult.mutualConnections,
 		wideModePeekViewLayout = WideModePeekViewLayout,
-		onUserSelected = function(Detail) --[[ Line: 136 ]]
+		onUserSelected = function(Detail)
 			-- upvalues: AppPage (upval), EnumsModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 			local config = {
 				name = AppPage.ProfilePlatform,

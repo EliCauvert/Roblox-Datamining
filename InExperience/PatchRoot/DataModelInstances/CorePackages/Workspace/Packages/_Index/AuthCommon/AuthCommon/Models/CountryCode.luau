@@ -1,10 +1,10 @@
 ﻿local CountryCodeModule = {
-	new = function() --[[ Line: 4 ]]
+	new = function()
 		return {}
 	end
 }
 
-function CountryCodeModule.fromJSON(p1) --[[ Line: 10 ]]
+function CountryCodeModule.fromJSON(p1)
 	-- upvalues: CountryCodeModule (copy)
 	local NewCountryCode = CountryCodeModule.new()
 	NewCountryCode.name = p1.name

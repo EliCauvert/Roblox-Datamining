@@ -13,15 +13,15 @@ local GetAppPolicyStore = if FFlagExpChatFriendsTabUsePolicy then require(Parent
 local GetResult = if FFlagFriendsChatHasFriendsGate then require(Parent.DataHydration).Friends.FriendsStore.get() else nil
 local Exposure = require(AppChat.Utils.IXPNavigationUtils).createExposureHandler((require(AppChat.Flags.FStringAppChatFriendsTabIxpLayer)))
 
-return function() --[[ Line: 31 | Named "FriendsChatExperimentExposureEventReceiver" ]]
+return function()
 	-- upvalues: GetFriendsChatSettingsStoreModule (copy), ReactModule (copy), SignalsModule (copy), FFlagExpChatFriendsTabUsePolicy (copy), GetAppPolicyStore (ref), FFlagFriendsChatHasFriendsGate (copy), Players (copy), GetResult (ref), FFlagExpChatFriendsTabRequireDefaultChannels (copy), SignalsReactModule (copy), Exposure (copy)
 	local FriendsChatSettingsStoreModule = GetFriendsChatSettingsStoreModule(false)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 36 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		return game:GetService("TextChatService").CreateDefaultTextChannels
 	end, {})
-	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 39 ]]
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), FFlagExpChatFriendsTabUsePolicy (upval), GetAppPolicyStore (upval), FFlagFriendsChatHasFriendsGate (upval), Players (upval), GetResult (upval), FriendsChatSettingsStoreModule (copy), FFlagExpChatFriendsTabRequireDefaultChannels (upval), UseMemoResult (copy)
-		return SignalsModule.createComputed(function(p1) --[[ Line: 40 ]]
+		return SignalsModule.createComputed(function(p1)
 			-- upvalues: FFlagExpChatFriendsTabUsePolicy (upval), GetAppPolicyStore (upval), FFlagFriendsChatHasFriendsGate (upval), Players (upval), GetResult (upval), FriendsChatSettingsStoreModule (upval), FFlagExpChatFriendsTabRequireDefaultChannels (upval), UseMemoResult (upval)
 			local NoFFlagExpChatFriendsTabUsePolicy = not FFlagExpChatFriendsTabUsePolicy or GetAppPolicyStore(false).getAppPolicy(p1).getCanSeeFriendsTab()
 			local Flag = true
@@ -39,7 +39,7 @@ return function() --[[ Line: 31 | Named "FriendsChatExperimentExposureEventRecei
 			return NoFFlagExpChatFriendsTabUsePolicy and (Flag and (FriendsChatSettingsStoreModule.getChatEnabled(p1) and (FriendsChatSettingsStoreModule.getChatUserMessagesEnabled(p1) ~= false and (not FFlagExpChatFriendsTabRequireDefaultChannels or UseMemoResult))))
 		end)
 	end, { FriendsChatSettingsStoreModule, UseMemoResult })))
-	ReactModule.useEffect(function() --[[ Line: 71 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSignalStateResult (copy), Exposure (upval)
 		if UseSignalStateResult then
 			Exposure()

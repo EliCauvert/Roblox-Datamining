@@ -6,7 +6,7 @@ local Object = LuauPolyfillModule.Object
 local _ = require(Parent.GraphQL)
 local MergeDeepFunction = require(Parent.Utils).mergeDeep
 
-local function applyExtensionObject(GetResult, Extensions) --[[ Line: 48 ]]
+local function applyExtensionObject(GetResult, Extensions)
 	-- upvalues: MergeDeepFunction (copy), Boolean (copy)
 	if GetResult then
 		GetResult.extensions = MergeDeepFunction({
@@ -20,11 +20,11 @@ end
 
 return {
 	extractExtensionsFromSchema = require(Parent.Utils).extractExtensionsFromSchema,
-	mergeExtensions = function(p1) --[[ Line: 44 ]]
+	mergeExtensions = function(p1)
 		-- upvalues: MergeDeepFunction (copy)
 		return MergeDeepFunction(p1)
 	end,
-	applyExtensions = function(p1, p2) --[[ Line: 69 ]]
+	applyExtensions = function(p1, p2)
 		-- upvalues: applyExtensionObject (copy), Object (copy), Boolean (copy), Array (copy)
 		applyExtensionObject(p1, p2.schemaExtensions)
 		local EntriesFunction = Object.entries
@@ -46,7 +46,7 @@ return {
 							
 							for _, value2 in Object.entries(v2.arguments) do
 								local Unpacked, Unpacked2 = table.unpack(value2, 1, 2)
-								applyExtensionObject(Array.find(GetResult.args, function(p3): boolean --[[ Line: 107 ]]
+								applyExtensionObject(Array.find(GetResult.args, function(p3): boolean
 									-- upvalues: Unpacked (copy)
 									return p3.name == Unpacked
 								end), Unpacked2)

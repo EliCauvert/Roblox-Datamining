@@ -4,18 +4,18 @@ local PromiseModule = require(Parent.Promise)
 local CreateSingleEntityResolverModule = require(DataHydration.createSingleEntityResolver)
 local _ = require(script.Parent.MomentsStoreTypes)
 
-return function(p1) --[[ Line: 18 | Named "createPostAssetStore" ]]
+return function(p1)
 	-- upvalues: CreateSingleEntityResolverModule (copy), PromiseModule (copy), Parent (copy)
 	local P0 = p1 or {}
 	local MomentsService = P0.momentsService or game:GetService("MomentsService")
 	local PostDecoder = P0.postDecoder
-	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(AssetId) --[[ Line: 24 ]]
+	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(AssetId)
 		-- upvalues: PromiseModule (upval), PostDecoder (ref), Parent (upval), MomentsService (copy)
-		return PromiseModule.new(function(Callback, Callback1) --[[ Line: 25 ]]
+		return PromiseModule.new(function(Callback, Callback1)
 			-- upvalues: PostDecoder (upval), Parent (upval), MomentsService (upval), AssetId (copy)
-			task.spawn(function() --[[ Line: 26 ]]
+			task.spawn(function()
 				-- upvalues: PostDecoder (upval), Parent (upval), MomentsService (upval), AssetId (upval), Callback (copy), Callback1 (copy)
-				local Packed = table.pack(pcall(function() --[[ Line: 27 ]]
+				local Packed = table.pack(pcall(function()
 					-- upvalues: PostDecoder (upval), Parent (upval), MomentsService (upval), AssetId (upval)
 					if PostDecoder == nil then
 						PostDecoder = require(Parent.ServiceContractsProto).posts.postasset.post.Post

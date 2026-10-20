@@ -7,14 +7,14 @@ local OpenGameDetailsFunction = require(Parent.GameDetail).OpenGameDetails
 local ExperienceTileModule = require(ProfilePlatform.BaseComponents.Tiles.ExperienceTile)
 local _ = require(ProfilePlatform.Common.Types)
 
-return function(ImpressionsTag, p1, Callback, ShowFooter) --[[ Line: 19 | Named "useRenderExperienceTile" ]]
+return function(ImpressionsTag, p1, Callback, ShowFooter)
 	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), ReactModule (copy), OpenGameDetailsFunction (copy), ExperienceTileModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseNavigationResult = UseNavigationFunction()
 	local P1 = p1 or "ProfileExperienceTile_"
-	local UseResult = ReactModule.useCallback(function(p2, p3, p4) --[[ Line: 29 ]]
+	local UseResult = ReactModule.useCallback(function(p2, p3, p4)
 		-- upvalues: Callback (copy), UseDispatchResult (copy), OpenGameDetailsFunction (upval), UseNavigationResult (copy)
-		return function() --[[ Line: 30 ]]
+		return function()
 			-- upvalues: Callback (upval), p2 (copy), p3 (copy), p4 (copy), UseDispatchResult (upval), OpenGameDetailsFunction (upval), UseNavigationResult (upval)
 			if Callback then
 				Callback(p2, p3, p4)
@@ -23,7 +23,7 @@ return function(ImpressionsTag, p1, Callback, ShowFooter) --[[ Line: 19 | Named 
 		end
 	end, { Callback, UseDispatchResult, UseNavigationResult })
 	
-	return (ReactModule.useCallback(function(Item, Index, _, p2) --[[ Line: 51 ]]
+	return (ReactModule.useCallback(function(Item, Index, _, p2)
 		-- upvalues: ReactModule (upval), ExperienceTileModule (upval), UseResult (copy), ImpressionsTag (copy), ShowFooter (copy), P1 (ref)
 		return ReactModule.createElement(ExperienceTileModule, {
 			item = Item,

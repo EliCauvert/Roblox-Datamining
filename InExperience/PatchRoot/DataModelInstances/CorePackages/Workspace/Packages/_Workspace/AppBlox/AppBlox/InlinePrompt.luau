@@ -16,7 +16,7 @@ local ImageSetLabel = Core.ImageSet.ImageSetLabel
 local GetIconSizeFunction = App.ImageSet.getIconSize
 local IconsNavigationClose = App.ImageSet.Images["icons/navigation/close"]
 
-return function(p1) --[[ Line: 57 | Named "InlinePrompt" ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), GetIconSizeFunction (copy), IconSize (copy), ReactModule (copy), ResponsiveModule (copy), ImageSetLabel (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), Button (copy), CryoModule (copy), IconButton (copy), IconsNavigationClose (copy)
 	local UseStyleResult = UseStyleFunction()
 	local Tokens = UseStyleResult.Tokens

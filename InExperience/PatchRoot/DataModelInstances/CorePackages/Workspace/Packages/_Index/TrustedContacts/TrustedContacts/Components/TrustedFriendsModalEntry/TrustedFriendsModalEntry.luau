@@ -6,10 +6,10 @@ local TrustedFriendsModalNavigatorModule = require(script.Parent.TrustedFriendsM
 local UseExternalNavigationSetUpModule = require(script.Parent.useExternalNavigationSetUp)
 local _ = require(TrustedContacts.Common.Types)
 
-local function TrustedFriendsModalEntry(p1) --[[ Line: 19 ]]
+local function TrustedFriendsModalEntry(p1)
 	-- upvalues: ReactModule (copy), RoactNavigationModule (copy), TrustedFriendsModalNavigatorModule (copy), UseExternalNavigationSetUpModule (copy)
 	local Navigation = p1.navigation
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 22 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: RoactNavigationModule (upval), TrustedFriendsModalNavigatorModule (upval)
 		return RoactNavigationModule.createAppContainer(TrustedFriendsModalNavigatorModule)
 	end, {})
@@ -37,7 +37,7 @@ end
 
 local ClassWrapper = ReactModule.PureComponent:extend("classWrapper")
 
-function ClassWrapper.render(p1) --[[ Line: 59 ]]
+function ClassWrapper.render(p1)
 	-- upvalues: ReactModule (copy), TrustedFriendsModalEntry (copy)
 	return ReactModule.createElement(TrustedFriendsModalEntry, p1.props)
 end

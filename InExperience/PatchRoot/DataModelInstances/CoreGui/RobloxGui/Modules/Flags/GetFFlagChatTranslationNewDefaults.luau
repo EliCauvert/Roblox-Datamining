@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("ChatTranslationNewDefaults", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("ChatTranslationNewDefaults")
 end

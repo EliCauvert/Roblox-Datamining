@@ -1,7 +1,7 @@
 ﻿local AvatarEditorService = game:GetService("AvatarEditorService")
 local Players = game:GetService("Players")
 
-return function(OutfitId, RigType) --[[ Line: 10 | Named "applyOutfit" ]]
+return function(OutfitId, RigType)
 	-- upvalues: Players (copy), AvatarEditorService (copy)
 	AvatarEditorService:NoPromptSaveAvatar(Players:GetHumanoidDescriptionFromOutfitIdAsync(OutfitId), RigType, {
 		BodyColors = true,

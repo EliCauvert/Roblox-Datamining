@@ -6,7 +6,7 @@ local DependenciesModule = require(Squads.dependencies)
 local React = DependenciesModule.React
 local Foundation = DependenciesModule.Foundation
 
-return function(p1) --[[ Line: 14 | Named "SquadVoiceAbuseReportScreen" ]]
+return function(p1)
 	-- upvalues: React (copy), Foundation (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), SquadVoiceAbuseReportModule (copy)
 	local Navigation = p1.navigation
 	local ReportDataParam = Navigation.getParam("reportData", nil)

@@ -7,9 +7,9 @@ local OpenReportSentDialogModule = require(Parent.Actions.OpenReportSentDialog)
 local EndReportFlowModule = require(Parent.Actions.EndReportFlow)
 local ReportManagerModule = require(Parent.Utility.ReportManager)
 
-return function(Place, AbusingPlayer, Reason, Comment, ReportCategory, p1, p2) --[[ Line: 15 ]]
+return function(Place, AbusingPlayer, Reason, Comment, ReportCategory, p1, p2)
 	-- upvalues: ConstantsModule (copy), ReportManagerModule (copy), OpenReportSentDialogModule (copy), ShowToastModule (copy), EndReportFlowModule (copy)
-	return function(p3) --[[ Line: 16 ]]
+	return function(p3)
 		-- upvalues: Place (copy), ConstantsModule (upval), ReportManagerModule (upval), ReportCategory (copy), AbusingPlayer (copy), Reason (copy), Comment (copy), OpenReportSentDialogModule (upval), ShowToastModule (upval), p1 (copy), p2 (copy), EndReportFlowModule (upval)
 		local State = p3:getState()
 		
@@ -21,7 +21,7 @@ return function(Place, AbusingPlayer, Reason, Comment, ReportCategory, p1, p2) -
 				comment = Comment,
 				beginningTimestamp = State.report.beginningTimestamp,
 				sortedUserIds = State.report.sortedUserIds
-			}, function() --[[ Line: 26 ]]
+			}, function()
 				-- upvalues: p3 (copy), OpenReportSentDialogModule (upval), Place (upval), AbusingPlayer (upval)
 				p3:dispatch(OpenReportSentDialogModule(Place, AbusingPlayer))
 			end)
@@ -35,7 +35,7 @@ return function(Place, AbusingPlayer, Reason, Comment, ReportCategory, p1, p2) -
 				placeDescription = State.placeInfo.description,
 				reason = Reason,
 				comment = Comment
-			}, function() --[[ Line: 36 ]]
+			}, function()
 				-- upvalues: p3 (copy), ShowToastModule (upval), p1 (upval), p2 (upval)
 				p3:dispatch(ShowToastModule(p1, p2))
 			end)

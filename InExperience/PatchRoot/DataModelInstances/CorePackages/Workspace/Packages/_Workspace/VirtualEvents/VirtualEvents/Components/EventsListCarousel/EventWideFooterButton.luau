@@ -8,7 +8,7 @@ local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local FooterCornerButtonStyle = require(Parent.GameTile).FooterCornerButtonStyle
 
-return function(p1) --[[ Line: 21 ]]
+return function(p1)
 	-- upvalues: UseDesignTokensFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), FooterCornerButtonStyle (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local UseTokensResult = UseTokensFunction()

@@ -7,17 +7,17 @@ local SearchIntroducedConversationIdsModule = require(AppChat.Stores.searchIntro
 local FFlagAppChatAnyServerSideConversationSearchModule = require(AppChat.Flags.FFlagAppChatAnyServerSideConversationSearch)
 local FFlagAppChatDerivedConversationLatestActivityModule = require(AppChat.Flags.FFlagAppChatDerivedConversationLatestActivity)
 
-local function _(p1) --[[ Line: 30 | Named "getLastUpdatedUnixTime" ]]
+local function _(p1)
 	local LastUpdated = p1.lastUpdated
 	
 	return if LastUpdated == nil then nil elseif typeof(LastUpdated) == "DateTime" then LastUpdated.UnixTimestamp elseif type(LastUpdated) == "table" and LastUpdated.GetUnixTimestamp ~= nil then LastUpdated:GetUnixTimestamp() else nil
 end
 
-local _ = function(p1, p2, p3, p4): boolean --[[ Line: 44 | Named "compareConversations" ]]
+local _ = function(p1, p2, p3, p4): boolean
 	return if p3 == nil or p4 == nil then if p3 == nil and p4 == nil then string.lower(p1.title or "") < string.lower(p2.title or "") else p3 ~= nil else p4 < p3
 end
 
-local function compareByServerLastUpdated(A, B): boolean --[[ Line: 58 ]]
+local function compareByServerLastUpdated(A, B): boolean
 	local LastUpdated = A.lastUpdated
 	local UnixTimestamp = if LastUpdated == nil then nil elseif typeof(LastUpdated) == "DateTime" then LastUpdated.UnixTimestamp elseif type(LastUpdated) == "table" and LastUpdated.GetUnixTimestamp ~= nil then LastUpdated:GetUnixTimestamp() else nil
 	local LastUpdated1 = B.lastUpdated
@@ -26,13 +26,13 @@ local function compareByServerLastUpdated(A, B): boolean --[[ Line: 58 ]]
 	return if UnixTimestamp == nil or UnixTimestamp1 == nil then if UnixTimestamp == nil and UnixTimestamp1 == nil then string.lower(A.title or "") < string.lower(B.title or "") else UnixTimestamp ~= nil else UnixTimestamp1 < UnixTimestamp
 end
 
-local function sortByLatestActivity(List, p1, p2) --[[ Line: 63 ]]
+local function sortByLatestActivity(List, p1, p2)
 	local t = {}
 	
 	for _, value in List do
 		t[value.id] = p1.getUnixTime(value.id)(p2)
 	end
-	table.sort(List, function(A, B): boolean --[[ Line: 72 ]]
+	table.sort(List, function(A, B): boolean
 		-- upvalues: t (copy)
 		local Entry = t[A.id]
 		local Entry1 = t[B.id]
@@ -41,7 +41,7 @@ local function sortByLatestActivity(List, p1, p2) --[[ Line: 63 ]]
 	end)
 end
 
-local function containsAllFrozenConversations(List, List1): boolean --[[ Line: 77 ]]
+local function containsAllFrozenConversations(List, List1): boolean
 	for _, value in List1 do
 		if table.find(List, value) == nil then
 			return false
@@ -50,7 +50,7 @@ local function containsAllFrozenConversations(List, List1): boolean --[[ Line: 7
 	return true
 end
 
-local function excludeSearchIntroduced(Conversations) --[[ Line: 86 ]]
+local function excludeSearchIntroduced(Conversations)
 	-- upvalues: SearchIntroducedConversationIdsModule (copy)
 	local List = {}
 	
@@ -62,7 +62,7 @@ local function excludeSearchIntroduced(Conversations) --[[ Line: 86 ]]
 	return List
 end
 
-local _ = function(p3, p4, p5) --[[ Line: 96 | Named "getSortedConversations" ]]
+local _ = function(p3, p4, p5)
 	-- upvalues: FFlagAppChatAnyServerSideConversationSearchModule (copy), excludeSearchIntroduced (copy), FFlagAppChatDerivedConversationLatestActivityModule (copy), sortByLatestActivity (copy), compareByServerLastUpdated (copy)
 	local Conversations = p3.getConversations(p5)
 	
@@ -80,17 +80,17 @@ local _ = function(p3, p4, p5) --[[ Line: 96 | Named "getSortedConversations" ]]
 	end
 end
 
-return function(p3, p4) --[[ Line: 114 | Named "createConversationListStore" ]]
+return function(p3, p4)
 	-- upvalues: SignalsModule (copy), FFlagAppChatAnyServerSideConversationSearchModule (copy), excludeSearchIntroduced (copy), FFlagAppChatDerivedConversationLatestActivityModule (copy), sortByLatestActivity (copy), compareByServerLastUpdated (copy), GetConversationIdsModule (copy), containsAllFrozenConversations (copy)
 	local v1 = nil
 	local Signal, Signal2 = SignalsModule.createSignal(false)
-	p3.addClearListener(function() --[[ Line: 121 ]]
+	p3.addClearListener(function()
 		-- upvalues: v1 (ref), Signal2 (copy)
 		v1 = nil
 		Signal2(false)
 	end)
 	
-	local function getOrderedConversationIds(p5) --[[ Line: 126 ]]
+	local function getOrderedConversationIds(p5)
 		-- upvalues: p3 (copy), p4 (copy), FFlagAppChatAnyServerSideConversationSearchModule (upval), excludeSearchIntroduced (upval), FFlagAppChatDerivedConversationLatestActivityModule (upval), sortByLatestActivity (upval), compareByServerLastUpdated (upval), GetConversationIdsModule (upval), Signal (copy), v1 (ref), containsAllFrozenConversations (upval)
 		local Conversations = p3.getConversations(p5)
 		
@@ -126,7 +126,7 @@ return function(p3, p4) --[[ Line: 114 | Named "createConversationListStore" ]]
 	
 	return {
 		getOrderedConversationIds = getOrderedConversationIds,
-		getConversations = function(p5) --[[ Line: 147 ]]
+		getConversations = function(p5)
 			-- upvalues: getOrderedConversationIds (copy), p3 (copy)
 			local Conversations = {}
 			
@@ -139,11 +139,11 @@ return function(p3, p4) --[[ Line: 114 | Named "createConversationListStore" ]]
 			end
 			return Conversations
 		end,
-		getListStatus = function(p6) --[[ Line: 158 ]]
+		getListStatus = function(p6)
 			-- upvalues: p3 (copy)
 			return p3.getListStatus(p6)
 		end,
-		setLatestMessagesFetching = function(p6) --[[ Line: 162 ]]
+		setLatestMessagesFetching = function(p6)
 			-- upvalues: Signal2 (copy)
 			Signal2(p6)
 		end

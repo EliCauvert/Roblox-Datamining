@@ -8,7 +8,7 @@ local _ = require(script.Parent.MarketplaceOffersBannerTypes)
 local ConstantsModule = require(script.Parent.constants)
 
 return {
-	getMarketplaceOffersBanner = function(UserId, Callback, p1) --[[ Line: 20 ]]
+	getMarketplaceOffersBanner = function(UserId, Callback, p1)
 		-- upvalues: ConstantsModule (copy), Url (copy), MakeAXResponseHandlerModule (copy), NormalizeMarketplaceOffersBannerResponseModule (copy)
 		local GET, GET2 = Callback(`{Url.APIS_URL}{ConstantsModule.OFFERS_V1_RELATIVE_PATH}?{Url:makeQueryString({
 			userId = UserId,

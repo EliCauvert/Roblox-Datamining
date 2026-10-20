@@ -1,4 +1,4 @@
-﻿local function _(Text) --[[ Line: 14 | Named "unimplemented" ]]
+﻿local function _(Text)
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. tostring(Text))
@@ -122,7 +122,7 @@ local config = {
 	shouldSuspendRef = nil
 }
 
-local _ = function(p1) --[[ Line: 189 | Named "shouldSuspend" ]]
+local _ = function(p1)
 	-- upvalues: config (copy)
 	if not config.shouldSuspendRef then
 		config.shouldSuspendRef = require(script.Parent.ReactFiberReconciler).shouldSuspend
@@ -130,14 +130,14 @@ local _ = function(p1) --[[ Line: 189 | Named "shouldSuspend" ]]
 	return config.shouldSuspendRef(p1)
 end
 
-local _ = function() --[[ Line: 198 | Named "initReactFiberHooks" ]]
+local _ = function()
 	-- upvalues: config (copy)
 	local ReactFiberHooksNewModule = require(script.Parent["ReactFiberHooks.new"])
 	config.renderWithHooksRef = ReactFiberHooksNewModule.renderWithHooks
 	config.bailoutHooksRef = ReactFiberHooksNewModule.bailoutHooks
 end
 
-local function renderWithHooks(...) --[[ Line: 205 ]]
+local function renderWithHooks(...)
 	-- upvalues: config (copy)
 	if not config.renderWithHooksRef then
 		local ReactFiberHooksNewModule = require(script.Parent["ReactFiberHooks.new"])
@@ -147,7 +147,7 @@ local function renderWithHooks(...) --[[ Line: 205 ]]
 	return config.renderWithHooksRef(...)
 end
 
-local function bailoutHooks(...) --[[ Line: 213 ]]
+local function bailoutHooks(...)
 	-- upvalues: config (copy)
 	if not config.bailoutHooksRef then
 		local ReactFiberHooksNewModule = require(script.Parent["ReactFiberHooks.new"])
@@ -227,7 +227,7 @@ if DEV then
 	ReactFiberBeginWorkModule.didWarnAboutReassigningProps = false
 	config1.didWarnAboutDefaultPropsOnFunctionComponent = {}
 end
-local function reconcileChildren(p1, Current, Children, p2) --[[ Line: 314 ]]
+local function reconcileChildren(p1, Current, Children, p2)
 	-- upvalues: MountChildFibersFunction (copy), ReactFeatureFlags (copy), ReconcileChildFibersFunction (copy)
 	if p1 == nil then
 		Current.child = MountChildFibersFunction(Current, nil, Children, p2)
@@ -247,13 +247,13 @@ local function reconcileChildren(p1, Current, Children, p2) --[[ Line: 314 ]]
 	end
 end
 
-local _ = function(p1, p2, p3, p4) --[[ Line: 357 | Named "forceUnmountCurrentAndReconcile" ]]
+local _ = function(p1, p2, p3, p4)
 	-- upvalues: ReconcileChildFibersFunction (copy)
 	p2.child = ReconcileChildFibersFunction(p2, p1.child, nil, p4)
 	p2.child = ReconcileChildFibersFunction(p2, nil, p3, p4)
 end
 
-local function updateForwardRef(p1, Current, InitResult, p2, BaseLanes) --[[ Line: 381 ]]
+local function updateForwardRef(p1, Current, InitResult, p2, BaseLanes)
 	-- upvalues: DEV (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), PrepareToReadContextFunction (copy), ReactFiberBeginWorkModule (copy), ReactCurrentOwner (copy), SetIsRenderingFunction (copy), renderWithHooks (copy), DebugRenderPhaseSideEffectsForStrictMode (copy), StrictMode (copy), DisableLogsFunction (copy), DescribeError (copy), ReenableLogsFunction (copy), IsNotBitsMatch (ref), bailoutHooks (copy), Callback2 (ref), PerformedWork (copy), reconcileChildren (copy)
 	if (DEV or DISABLEALLWARNINGSEXCEPTPROPVALIDATION) and Current.type ~= Current.elementType then
 		local PropTypes = InitResult.propTypes
@@ -302,7 +302,7 @@ local function updateForwardRef(p1, Current, InitResult, p2, BaseLanes) --[[ Lin
 	end
 end
 
-local function updateMemoComponent(p1, Return_, InitResult, p2, Lanes, BaseLanes) --[[ Line: 468 ]]
+local function updateMemoComponent(p1, Return_, InitResult, p2, Lanes, BaseLanes)
 	-- upvalues: IsSimpleFunctionComponentFunction (copy), DEV (copy), ResolveFunctionForHotReloadingFunction (copy), SimpleMemoComponent (copy), Callback3 (ref), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), CreateFiberFromTypeAndPropsFunction (copy), ReactFiberLaneModule (copy), ShallowEqualFunction (copy), Callback2 (ref), PerformedWork (copy), CreateWorkInProgressFunction (copy)
 	if p1 == nil then
 		local Type1 = InitResult.type
@@ -373,7 +373,7 @@ local function updateMemoComponent(p1, Return_, InitResult, p2, Lanes, BaseLanes
 	end
 end
 
-Callback3 = function(p1, Current, Type1, PendingProps, Lanes, BaseLanes) --[[ Line: 589 | Named "updateSimpleMemoComponent" ]]
+Callback3 = function(p1, Current, Type1, PendingProps, Lanes, BaseLanes)
 	-- upvalues: DEV (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), REACTLAZYTYPE (copy), DescribeError (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), ShallowEqualFunction (copy), IsNotBitsMatch (ref), ReactFiberLaneModule (copy), Callback2 (ref), ForceUpdateForLegacySuspense (copy), NoFlags (copy), Callback4 (ref)
 	if (DEV or DISABLEALLWARNINGSEXCEPTPROPVALIDATION) and Current.type ~= Current.elementType then
 		local ElementType = Current.elementType
@@ -412,7 +412,7 @@ Callback3 = function(p1, Current, Type1, PendingProps, Lanes, BaseLanes) --[[ Li
 	return Callback4(p1, Current, Type1, PendingProps, BaseLanes)
 end
 
-local function updateOffscreenComponent(p1, Current, BaseLanes) --[[ Line: 691 ]]
+local function updateOffscreenComponent(p1, Current, BaseLanes)
 	-- upvalues: ConcurrentMode (copy), NoMode (copy), ReactFiberLaneModule (copy), PushRenderLanesFunction (copy), EnableSchedulerTracing (copy), MarkSpawnedWorkFunction (copy), reconcileChildren (copy)
 	local PendingProps = Current.pendingProps
 	local Children = PendingProps.children
@@ -453,21 +453,21 @@ local function updateOffscreenComponent(p1, Current, BaseLanes) --[[ Line: 691 ]
 	return Current.child
 end
 
-function updateFragment(p1, p2, p3) --[[ Line: 793 ]]
+function updateFragment(p1, p2, p3)
 	-- upvalues: reconcileChildren (copy)
 	reconcileChildren(p1, p2, p2.pendingProps, p3)
 	
 	return p2.child
 end
 
-function updateMode(p1, p2, p3) --[[ Line: 799 ]]
+function updateMode(p1, p2, p3)
 	-- upvalues: reconcileChildren (copy)
 	reconcileChildren(p1, p2, p2.pendingProps.children, p3)
 	
 	return p2.child
 end
 
-function updateProfiler(p1, p2, p3) --[[ Line: 805 ]]
+function updateProfiler(p1, p2, p3)
 	-- upvalues: EnableProfilerTimer (copy), reconcileChildren (copy)
 	if EnableProfilerTimer then
 		local StateNode = p2.stateNode
@@ -480,7 +480,7 @@ function updateProfiler(p1, p2, p3) --[[ Line: 805 ]]
 end
 
 do
-	local _ = function(p1, p2) --[[ Line: 819 | Named "markRef" ]]
+	local _ = function(p1, p2)
 		-- upvalues: Ref (copy)
 		local Ref1 = p2.ref
 		
@@ -489,7 +489,7 @@ do
 		end
 	end
 
-	Callback4 = function(p1, Current, Callback, p2, BaseLanes) --[[ Line: 830 | Named "updateFunctionComponent" ]]
+	Callback4 = function(p1, Current, Callback, p2, BaseLanes)
 		-- upvalues: DEV (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), DisableLegacyContext (copy), GetUnmaskedContextFunction (copy), GetMaskedContextFunction (copy), PrepareToReadContextFunction (copy), ReactFiberBeginWorkModule (copy), ReactCurrentOwner (copy), SetIsRenderingFunction (copy), renderWithHooks (copy), DebugRenderPhaseSideEffectsForStrictMode (copy), StrictMode (copy), DisableLogsFunction (copy), DescribeError (copy), ReenableLogsFunction (copy), IsNotBitsMatch (ref), bailoutHooks (copy), Callback2 (ref), PerformedWork (copy), reconcileChildren (copy)
 		if (DEV or DISABLEALLWARNINGSEXCEPTPROPVALIDATION) and (type(Callback) ~= "function" and Current.type ~= Current.elementType) then
 			local PropTypes = nil
@@ -539,7 +539,7 @@ do
 		end
 	end
 
-	local function updateClassComponent(p1, Current, InitResult, Props, BaseLanes) --[[ Line: 1009 ]]
+	local function updateClassComponent(p1, Current, InitResult, Props, BaseLanes)
 		-- upvalues: DEV (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), IsContextProviderFunction (copy), PushContextProviderFunction (copy), PrepareToReadContextFunction (copy), ReactFiberBeginWorkModule (copy), Placement (copy), ConstructClassInstanceFunction (copy), MountClassInstanceFunction (copy), ResumeMountClassInstanceFunction (copy), UpdateClassInstanceFunction (copy), Console (copy)
 		if (DEV or DISABLEALLWARNINGSEXCEPTPROPVALIDATION) and Current.type ~= Current.elementType then
 			local PropTypes = InitResult.propTypes
@@ -586,7 +586,7 @@ do
 		return FinishClassComponentResult
 	end
 
-	function finishClassComponent(p1, Current, p2, p3, p4, p5) --[[ Line: 1106 ]]
+	function finishClassComponent(p1, Current, p2, p3, p4, p5)
 		-- upvalues: Ref (copy), DidCapture (copy), NoFlags (copy), InvalidateContextProviderFunction (copy), Callback2 (ref), ReactCurrentOwner (copy), EnableProfilerTimer (copy), StopProfilerTimerIfRunningFunction (copy), DEV (copy), SetIsRenderingFunction (copy), DebugRenderPhaseSideEffectsForStrictMode (copy), StrictMode (copy), DisableLogsFunction (copy), DescribeError (copy), ReenableLogsFunction (copy), PerformedWork (copy), ReconcileChildFibersFunction (copy), reconcileChildren (copy)
 		local Ref1 = Current.ref
 		
@@ -645,7 +645,7 @@ do
 		end
 	end
 
-	local _ = function(p1) --[[ Line: 1204 | Named "pushHostRootContext" ]]
+	local _ = function(p1)
 		-- upvalues: PushTopLevelContextObjectFunction (copy), PushHostContainerFunction (copy)
 		local StateNode = p1.stateNode
 		
@@ -657,7 +657,7 @@ do
 		PushHostContainerFunction(p1, StateNode.containerInfo)
 	end
 
-	local function updateHostRoot(p1, Current, BaseLanes) --[[ Line: 1220 ]]
+	local function updateHostRoot(p1, Current, BaseLanes)
 		-- upvalues: PushTopLevelContextObjectFunction (copy), PushHostContainerFunction (copy), InvariantFunction (copy), CloneUpdateQueueFunction (copy), ProcessUpdateQueueFunction (copy), ResetHydrationStateFunction (copy), Callback2 (ref), EnterHydrationStateFunction (copy), SupportsHydration (copy), SetWorkInProgressVersionFunction (copy), MountChildFibersFunction (copy), Placement (copy), Hydrating (copy), reconcileChildren (copy)
 		local StateNode = Current.stateNode
 		
@@ -707,7 +707,7 @@ do
 		return Current.child
 	end
 
-	local function updateHostComponent(p2, Current, BaseLanes) --[[ Line: 1297 ]]
+	local function updateHostComponent(p2, Current, BaseLanes)
 		-- upvalues: PushHostContextFunction (copy), TryToClaimNextHydratableInstanceFunction (copy), ShouldSetTextContentFunction (copy), ContentReset (copy), PerformedWork (copy), Ref (copy), reconcileChildren (copy)
 		PushHostContextFunction(Current)
 		
@@ -735,7 +735,7 @@ do
 		return Current.child
 	end
 
-	local _ = function(p2, p3) --[[ Line: 1338 | Named "updateHostText" ]]
+	local _ = function(p2, p3)
 		-- upvalues: TryToClaimNextHydratableInstanceFunction (copy)
 		if p2 == nil then
 			TryToClaimNextHydratableInstanceFunction(p3)
@@ -743,7 +743,7 @@ do
 		return nil
 	end
 
-	local function mountLazyComponent(p2, Current, ElementType, Lanes, BaseLanes) --[[ Line: 1347 ]]
+	local function mountLazyComponent(p2, Current, ElementType, Lanes, BaseLanes)
 		-- upvalues: Placement (copy), ResolveLazyComponentTagFunction (copy), ResolveDefaultPropsFunction (copy), FunctionComponent (copy), DEV (copy), ResolveFunctionForHotReloadingFunction (copy), Callback4 (ref), ClassComponent (copy), ResolveClassForHotReloadingFunction (copy), updateClassComponent (copy), ForwardRef (copy), ResolveForwardRefForHotReloadingFunction (copy), updateForwardRef (copy), MemoComponent (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), updateMemoComponent (copy), REACTLAZYTYPE (copy), InspectFunction (copy), InvariantFunction (copy)
 		if p2 ~= nil then
 			p2.alternate = nil
@@ -804,7 +804,7 @@ do
 		end
 	end
 
-	function mountIncompleteClassComponent(p2, p3, p4, p5, p6) --[[ Line: 1478 ]]
+	function mountIncompleteClassComponent(p2, p3, p4, p5, p6)
 		-- upvalues: Placement (copy), ClassComponent (copy), IsContextProviderFunction (copy), PushContextProviderFunction (copy), PrepareToReadContextFunction (copy), ReactFiberBeginWorkModule (copy), ConstructClassInstanceFunction (copy), MountClassInstanceFunction (copy)
 		if p2 ~= nil then
 			p2.alternate = nil
@@ -827,7 +827,7 @@ do
 		return finishClassComponent(nil, p3, p4, true, Flag, p6)
 	end
 
-	local function mountIndeterminateComponent(p2, Current, Callback, BaseLanes) --[[ Line: 1530 ]]
+	local function mountIndeterminateComponent(p2, Current, Callback, BaseLanes)
 		-- upvalues: Placement (copy), DisableLegacyContext (copy), GetUnmaskedContextFunction (copy), GetMaskedContextFunction (copy), PrepareToReadContextFunction (copy), ReactFiberBeginWorkModule (copy), DEV (copy), GetComponentNameFunction (copy), config1 (copy), Console (copy), StrictMode (copy), ReactStrictModeWarningsNewModule (copy), SetIsRenderingFunction (copy), ReactCurrentOwner (copy), renderWithHooks (copy), PerformedWork (copy), DisableModulePatternComponents (copy), ClassComponent (copy), IsContextProviderFunction (copy), PushContextProviderFunction (copy), InitializeUpdateQueueFunction (copy), ApplyDerivedStateFromPropsFunction (copy), AdoptClassInstanceFunction (copy), MountClassInstanceFunction (copy), FunctionComponent (copy), DebugRenderPhaseSideEffectsForStrictMode (copy), DisableLogsFunction (copy), DescribeError (copy), ReenableLogsFunction (copy), MountChildFibersFunction (copy)
 		if p2 ~= nil then
 			p2.alternate = nil
@@ -928,7 +928,7 @@ do
 		end
 	end
 
-	function validateFunctionComponentInDev(p2, Callback) --[[ Line: 1747 ]]
+	function validateFunctionComponentInDev(p2, Callback)
 		-- upvalues: DEV (copy), GetCurrentFiberOwnerNameInDevOrNullFunction (copy), config1 (copy), Console (copy), WarnAboutDefaultPropsOnFunctionComponents (copy), GetComponentNameFunction (copy)
 		if DEV then
 			if p2.ref ~= nil then
@@ -981,23 +981,23 @@ do
 		retryLane = ReactFiberLaneModule.NoLane
 	}
 
-	local _ = function(BaseLanes) --[[ Line: 1844 | Named "mountSuspenseOffscreenState" ]]
+	local _ = function(BaseLanes)
 		return { baseLanes = BaseLanes }
 	end
 
-	local _ = function(p2, p3) --[[ Line: 1850 | Named "updateSuspenseOffscreenState" ]]
+	local _ = function(p2, p3)
 		-- upvalues: ReactFiberLaneModule (copy)
 		return {
 			baseLanes = ReactFiberLaneModule.mergeLanes(p2.baseLanes, p3)
 		}
 	end
 
-	local _ = function(p2, p3, _, _) --[[ Line: 1860 | Named "shouldRemainOnFallback" ]]
+	local _ = function(p2, p3, _, _)
 		-- upvalues: HasSuspenseContextFunction (copy), ForceSuspenseFallback (copy)
 		return (p3 == nil or p3.memoizedState ~= nil) and HasSuspenseContextFunction(p2, ForceSuspenseFallback)
 	end
 
-	local _ = function(p2, p3) --[[ Line: 1884 | Named "getRemainingWorkInPrimaryTree" ]]
+	local _ = function(p2, p3)
 		-- upvalues: ReactFiberLaneModule (copy)
 		return ReactFiberLaneModule.removeLanes(p2.childLanes, p3)
 	end
@@ -1008,7 +1008,7 @@ do
 	local Callback5 = nil
 	local Callback = nil
 
-	local function updateSuspenseComponent(p2, Return, BaseLanes) --[[ Line: 1896 ]]
+	local function updateSuspenseComponent(p2, Return, BaseLanes)
 		-- upvalues: DEV (copy), config (copy), DidCapture (copy), SuspenseStackCursor (copy), NoFlags (copy), HasSuspenseContextFunction (copy), ForceSuspenseFallback (copy), AddSubtreeSuspenseContextFunction (copy), InvisibleParentSuspenseContext (copy), SetDefaultShallowSuspenseContextFunction (copy), PushSuspenseContextFunction (copy), TryToClaimNextHydratableInstanceFunction (copy), EnableSuspenseServerRenderer (copy), Callback6 (ref), MemoizedState (copy), ReactFiberLaneModule (copy), EnableSchedulerTracing (copy), MarkSpawnedWorkFunction (copy), Callback1 (ref), Callback (ref), Callback5 (ref), Callback7 (ref)
 		local PendingProps = Return.pendingProps
 		
@@ -1137,7 +1137,7 @@ do
 		end
 	end
 
-	Callback1 = function(Return, Children, BaseLanes) --[[ Line: 2181 | Named "mountSuspensePrimaryChildren" ]]
+	Callback1 = function(Return, Children, BaseLanes)
 		-- upvalues: CreateFiberFromOffscreenFunction (copy)
 		local FiberFromOffscreen = CreateFiberFromOffscreenFunction({ mode = "visible", children = Children }, Return.mode, BaseLanes, nil)
 		FiberFromOffscreen.return_ = Return
@@ -1146,7 +1146,7 @@ do
 		return FiberFromOffscreen
 	end
 
-	function mountSuspenseFallbackChildren(Return_, Children, p2, p3) --[[ Line: 2194 ]]
+	function mountSuspenseFallbackChildren(Return_, Children, p2, p3)
 		-- upvalues: BlockingMode (copy), NoMode (copy), ReactFiberLaneModule (copy), EnableProfilerTimer (copy), ProfileMode (copy), CreateFiberFromFragmentFunction (copy), CreateFiberFromOffscreenFunction (copy)
 		local Mode: number = Return_.mode
 		local Child = Return_.child
@@ -1178,12 +1178,12 @@ do
 		return FiberFromFragment
 	end
 
-	local _ = function(p2, p3) --[[ Line: 2244 | Named "createWorkInProgressOffscreenFiber" ]]
+	local _ = function(p2, p3)
 		-- upvalues: CreateWorkInProgressFunction (copy)
 		return CreateWorkInProgressFunction(p2, p3)
 	end
 
-	Callback7 = function(p2, Return, Children, BaseLanes) --[[ Line: 2253 | Named "updateSuspensePrimaryChildren" ]]
+	Callback7 = function(p2, Return, Children, BaseLanes)
 		-- upvalues: CreateWorkInProgressFunction (copy), BlockingMode (copy), NoMode (copy), Deletion (copy)
 		local Child = p2.child
 		local Sibling = Child.sibling
@@ -1210,7 +1210,7 @@ do
 		return WorkInProgress
 	end
 
-	Callback5 = function(p2, Return_, Children, Fallback, BaseLanes) --[[ Line: 2288 | Named "updateSuspenseFallbackChildren" ]]
+	Callback5 = function(p2, Return_, Children, Fallback, BaseLanes)
 		-- upvalues: BlockingMode (copy), NoMode (copy), ReactFiberLaneModule (copy), EnableProfilerTimer (copy), ProfileMode (copy), CreateWorkInProgressFunction (copy), StaticMask (copy), CreateFiberFromFragmentFunction (copy), Placement (copy)
 		local Mode: number = Return_.mode
 		local Child = p2.child
@@ -1249,7 +1249,7 @@ do
 		return WorkInProgress1
 	end
 
-	local _ = function(p2, Return, p3) --[[ Line: 2371 | Named "retrySuspenseComponentWithoutHydrating" ]]
+	local _ = function(p2, Return, p3)
 		-- upvalues: ReconcileChildFibersFunction (copy), Callback1 (ref), Placement (copy)
 		ReconcileChildFibersFunction(Return, p2.child, nil, p3)
 		local CallbackResult = Callback1(Return, Return.pendingProps.children, p3)
@@ -1259,7 +1259,7 @@ do
 		return CallbackResult
 	end
 
-	function mountSuspenseFallbackAfterRetryWithoutHydrating(p2, Return_, p3, p4, p5) --[[ Line: 2392 ]]
+	function mountSuspenseFallbackAfterRetryWithoutHydrating(p2, Return_, p3, p4, p5)
 		-- upvalues: CreateFiberFromOffscreenFunction (copy), ReactFiberLaneModule (copy), CreateFiberFromFragmentFunction (copy), Placement (copy), BlockingMode (copy), NoMode (copy), ReconcileChildFibersFunction (copy)
 		local Mode = Return_.mode
 		local FiberFromOffscreen = CreateFiberFromOffscreenFunction(p3, Mode, ReactFiberLaneModule.NoLanes, nil)
@@ -1276,7 +1276,7 @@ do
 		return FiberFromFragment
 	end
 
-	Callback6 = function(p2, Dehydrated, _) --[[ Line: 2422 | Named "mountDehydratedSuspenseComponent" ]]
+	Callback6 = function(p2, Dehydrated, _)
 		-- upvalues: BlockingMode (copy), NoMode (copy), DEV (copy), Console (copy), ReactFiberLaneModule (copy), IsSuspenseInstanceFallbackFunction (copy), EnableSchedulerTracing (copy), MarkSpawnedWorkFunction (copy)
 		if bit32.band(p2.mode, BlockingMode) == NoMode then
 			if DEV then
@@ -1298,7 +1298,7 @@ do
 		return nil
 	end
 
-	Callback = function(p2, Return, Dehydrated, MemoizedState, BaseLanes) --[[ Line: 2469 | Named "updateDehydratedSuspenseComponent" ]]
+	Callback = function(p2, Return, Dehydrated, MemoizedState, BaseLanes)
 		-- upvalues: WarnIfHydratingFunction (copy), GetExecutionContextFunction (copy), RetryAfterError (copy), NoContext (copy), ReconcileChildFibersFunction (copy), Callback1 (ref), Placement (copy), BlockingMode (copy), NoMode (copy), IsSuspenseInstanceFallbackFunction (copy), ReactFiberLaneModule (copy), IsNotBitsMatch (ref), GetWorkInProgressRootFunction (copy), ScheduleUpdateOnFiberFunction (copy), RenderDidSuspendDelayIfPossibleFunction (copy), IsSuspenseInstancePendingFunction (copy), DidCapture (copy), RetryDehydratedSuspenseBoundaryFunction (copy), EnableSchedulerTracing (copy), UnstableWrap (ref), Parent (copy), RegisterSuspenseInstanceRetryFunction (copy), ReenterHydrationStateFromDehydratedSuspenseInstanceFunction (copy), Hydrating (copy)
 		WarnIfHydratingFunction()
 		
@@ -1357,7 +1357,7 @@ do
 			Return.flags = bit32.bor(Return.flags, DidCapture)
 			Return.child = p2.child
 			
-			local function v260() --[[ Line: 2565 ]]
+			local function v260()
 				-- upvalues: RetryDehydratedSuspenseBoundaryFunction (upval), p2 (copy)
 				return RetryDehydratedSuspenseBoundaryFunction(p2)
 			end
@@ -1374,7 +1374,7 @@ do
 		end
 	end
 
-	function updatePortalComponent(p2, p3, p4) --[[ Line: 2978 ]]
+	function updatePortalComponent(p2, p3, p4)
 		-- upvalues: PushHostContainerFunction (copy), ReconcileChildFibersFunction (copy), reconcileChildren (copy)
 		PushHostContainerFunction(p3, p3.stateNode.containerInfo)
 		local PendingProps = p3.pendingProps
@@ -1389,7 +1389,7 @@ do
 
 	local Flag = false
 
-	local function updateContextProvider(p2, Current, BaseLanes) --[[ Line: 3001 ]]
+	local function updateContextProvider(p2, Current, BaseLanes)
 		-- upvalues: DEV (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), Array (copy), Object (copy), Flag (ref), Console (copy), CheckPropTypesFunction (copy), PushProviderFunction (copy), CalculateChangedBitsFunction (copy), HasContextChangedFunction (copy), Callback2 (ref), PropagateContextChangeFunction (copy), reconcileChildren (copy)
 		local Context = Current.type._context
 		local PendingProps = Current.pendingProps
@@ -1429,7 +1429,7 @@ do
 		usingLegacyConsumer = false
 	}
 
-	function updateContextConsumer(p2, Current, p3) --[[ Line: 3069 ]]
+	function updateContextConsumer(p2, Current, p3)
 		-- upvalues: DEV (copy), config2 (copy), Console (copy), COMPATWARNINGS (copy), PrepareToReadContextFunction (copy), ReactFiberBeginWorkModule (copy), ReadContextFunction (copy), ReactCurrentOwner (copy), SetIsRenderingFunction (copy), PerformedWork (copy), reconcileChildren (copy)
 		local Type1 = Current.type
 		
@@ -1476,12 +1476,12 @@ do
 		return Current.child
 	end
 
-	function ReactFiberBeginWorkModule.markWorkInProgressReceivedUpdate() --[[ Line: 3179 ]]
+	function ReactFiberBeginWorkModule.markWorkInProgressReceivedUpdate()
 		-- upvalues: IsNotBitsMatch (ref)
 		IsNotBitsMatch = true
 	end
 
-	Callback2 = function(p2, Current, BaseLanes) --[[ Line: 3183 | Named "bailoutOnAlreadyFinishedWork" ]]
+	Callback2 = function(p2, Current, BaseLanes)
 		-- upvalues: EnableProfilerTimer (copy), StopProfilerTimerIfRunningFunction (copy), MarkSkippedUpdateLanesFunction (copy), ReactFiberLaneModule (copy), CloneChildFibersFunction (copy)
 		if p2 then
 			Current.dependencies = p2.dependencies
@@ -1500,7 +1500,7 @@ do
 		end
 	end
 
-	function remountFiber(p2, Child, Child1) --[[ Line: 3214 ]]
+	function remountFiber(p2, Child, Child1)
 		-- upvalues: DEV (copy), Deletion (copy), Placement (copy)
 		if not DEV then
 			error("Did not expect this call in production. This is a bug in React. Please file an issue.")
@@ -1551,7 +1551,7 @@ do
 		return Child1
 	end
 
-	function ReactFiberBeginWorkModule.beginWork(p3, Current, BaseLanes) --[[ Line: 3283 ]]
+	function ReactFiberBeginWorkModule.beginWork(p3, Current, BaseLanes)
 		-- upvalues: DEV (copy), CreateFiberFromTypeAndPropsFunction (copy), HasContextChangedFunction (copy), IsNotBitsMatch (ref), ReactFiberLaneModule (copy), HostRoot (copy), PushTopLevelContextObjectFunction (copy), PushHostContainerFunction (copy), ResetHydrationStateFunction (copy), HostComponent (copy), PushHostContextFunction (copy), ClassComponent (copy), IsContextProviderFunction (copy), PushContextProviderFunction (copy), HostPortal (copy), ContextProvider (copy), PushProviderFunction (copy), Profiler (copy), EnableProfilerTimer (copy), SuspenseComponent (copy), EnableSuspenseServerRenderer (copy), PushSuspenseContextFunction (copy), SetDefaultShallowSuspenseContextFunction (copy), SuspenseStackCursor (copy), DidCapture (copy), updateSuspenseComponent (copy), Callback2 (ref), SuspenseListComponent (copy), OffscreenComponent (copy), LegacyHiddenComponent (copy), updateOffscreenComponent (copy), ForceUpdateForLegacySuspense (copy), NoFlags (copy), ReactWorkTagsModule (copy), mountIndeterminateComponent (copy), LazyComponent (copy), mountLazyComponent (copy), FunctionComponent (copy), ResolveDefaultPropsFunction (copy), Callback4 (ref), updateClassComponent (copy), updateHostRoot (copy), updateHostComponent (copy), HostText (copy), TryToClaimNextHydratableInstanceFunction (copy), ForwardRef (copy), updateForwardRef (copy), Fragment (copy), Mode (copy), updateContextProvider (copy), ContextConsumer (copy), MemoComponent (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), updateMemoComponent (copy), SimpleMemoComponent (copy), Callback3 (ref), IncompleteClassComponent (copy), updateOffscreenComponent (copy), InvariantFunction (copy)
 		local Lanes = Current.lanes
 		

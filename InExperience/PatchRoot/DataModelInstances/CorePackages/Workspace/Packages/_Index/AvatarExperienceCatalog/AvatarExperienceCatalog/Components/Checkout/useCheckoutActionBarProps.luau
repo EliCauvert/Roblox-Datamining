@@ -15,11 +15,11 @@ local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelec
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local FFlagStackedBottomNavMarketplaceCTA = require(Parent.SharedFlags).FFlagStackedBottomNavMarketplaceCTA
 
-local function selectTryOnItems(p1) --[[ Line: 30 ]]
+local function selectTryOnItems(p1)
 	return p1.AvatarExperience.AvatarScene.OutfitTryOn.TryOnItems
 end
 
-return function(p1, Ref) --[[ Line: 34 | Named "useCheckoutActionBarProps" ]]
+return function(p1, Ref)
 	-- upvalues: UseNavigationFunction (copy), UseDispatchFunction (copy), UseMultiItemShoppingFtuxModule (copy), UseAvatarRouteFunction (copy), ReactModule (copy), UseSelectorFunction (copy), selectTryOnItems (copy), TutilsModule (copy), AvatarScreen (copy), ClearTryOnsFunction (copy), AXCheckoutButtonTooltipFtuxDelay (copy), AXCheckoutButtonTooltipExpireTime (copy), FFlagStackedBottomNavMarketplaceCTA (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseDispatchResult = UseDispatchFunction()
@@ -30,14 +30,14 @@ return function(p1, Ref) --[[ Line: 34 | Named "useCheckoutActionBarProps" ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(nil)
 	local FieldCountResult = TutilsModule.fieldCount((UseSelectorFunction(selectTryOnItems, TutilsModule.deepEqual)))
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 51 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), UseMultiItemShoppingFtuxModuleResult (copy), UseNavigationResult (copy), AvatarScreen (upval), UseDispatchResult (copy), ClearTryOnsFunction (upval)
 		if p1.onClearButtonActivated then
 			p1.onClearButtonActivated()
 		end
 		if UseMultiItemShoppingFtuxModuleResult.shouldShowClearAllItemsPrompt() then
 			UseNavigationResult.navigate(AvatarScreen.ClearAllItemsOnAvatarPrompt, {
-				onConfirm = function(p2) --[[ Line: 58 ]]
+				onConfirm = function(p2)
 					-- upvalues: UseDispatchResult (upval), ClearTryOnsFunction (upval), UseMultiItemShoppingFtuxModuleResult (upval)
 					UseDispatchResult(ClearTryOnsFunction())
 					
@@ -57,7 +57,7 @@ return function(p1, Ref) --[[ Line: 34 | Named "useCheckoutActionBarProps" ]]
 		UseMultiItemShoppingFtuxModuleResult,
 		UseDispatchResult
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 72 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy), p1 (copy), UseMultiItemShoppingFtuxModuleResult (copy), UseRefResult (copy), UseStateResult2 (copy)
 		UseNavigationResult.navigate("Checkout")
 		
@@ -76,7 +76,7 @@ return function(p1, Ref) --[[ Line: 34 | Named "useCheckoutActionBarProps" ]]
 		UseNavigationResult,
 		UseMultiItemShoppingFtuxModuleResult
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 88 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseMultiItemShoppingFtuxModuleResult (copy), UseRefResult (copy), UseStateResult2 (copy)
 		UseMultiItemShoppingFtuxModuleResult.setSeenTooltipOnCheckoutButton()
 		
@@ -85,19 +85,19 @@ return function(p1, Ref) --[[ Line: 34 | Named "useCheckoutActionBarProps" ]]
 		end
 		UseStateResult2(false)
 	end, {})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 97 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: AXCheckoutButtonTooltipFtuxDelay (upval), UseStateResult2 (copy), AXCheckoutButtonTooltipExpireTime (upval), UseMultiItemShoppingFtuxModuleResult (copy)
-		return task.delay(AXCheckoutButtonTooltipFtuxDelay / 1000, function() --[[ Line: 98 ]]
+		return task.delay(AXCheckoutButtonTooltipFtuxDelay / 1000, function()
 			-- upvalues: UseStateResult2 (upval), AXCheckoutButtonTooltipExpireTime (upval), UseMultiItemShoppingFtuxModuleResult (upval)
 			UseStateResult2(true)
-			task.delay(AXCheckoutButtonTooltipExpireTime / 1000, function() --[[ Line: 101 ]]
+			task.delay(AXCheckoutButtonTooltipExpireTime / 1000, function()
 				-- upvalues: UseMultiItemShoppingFtuxModuleResult (upval), UseStateResult2 (upval)
 				UseMultiItemShoppingFtuxModuleResult.setSeenTooltipOnCheckoutButton()
 				UseStateResult2(false)
 			end)
 		end)
 	end, { UseMultiItemShoppingFtuxModuleResult })
-	ReactModule.useEffect(function() --[[ Line: 109 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMultiItemShoppingFtuxModuleResult (copy), UseAvatarRouteResult (copy), Name (copy), AvatarScreen (upval), RouteName (copy), UseRefResult (copy), UseResult3 (copy)
 		if UseMultiItemShoppingFtuxModuleResult.shouldShowTooltipOnCheckoutButton() and UseAvatarRouteResult.isVisible and (Name == AvatarScreen.Catalog or Name == AvatarScreen.CatalogSearch) and RouteName == Name then
 			UseRefResult.current = UseResult3()
@@ -108,7 +108,7 @@ return function(p1, Ref) --[[ Line: 34 | Named "useCheckoutActionBarProps" ]]
 		RouteName,
 		UseAvatarRouteResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 130 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), RouteName (copy), Name (copy), UseAvatarRouteResult (copy), UseStateResult2 (copy)
 		if not p1.Visible or RouteName ~= Name or not UseAvatarRouteResult.isVisible then
 			UseStateResult2(false)

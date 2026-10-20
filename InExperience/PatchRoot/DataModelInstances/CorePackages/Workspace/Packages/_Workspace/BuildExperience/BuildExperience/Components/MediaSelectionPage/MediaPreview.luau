@@ -16,23 +16,23 @@ local ProgressSize = FoundationModule.Enums.ProgressSize
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local _ = require(script.Parent.types)
 
-return function(Frame: Frame) --[[ Line: 36 | Named "MediaPreview" ]]
+return function(Frame: Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), RunService (copy), View (copy), Skeleton (copy), FoundationModule (copy), Icon (copy), IconName (copy), IconSize (copy), IconButton (copy), InputSize (copy), Progress (copy), ProgressShape (copy), ProgressSize (copy), Image (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	local AspectRatio: number = if Frame.isIcon then 1 else 1.7777777777777777
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 44 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
 		UseStateResult2(not UseStateResult)
 	end, { UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 48 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy), UseRefResult (copy), RunService (upval), UseBindingResult2 (copy)
 		if Frame.mediaType ~= "video" then
 			return nil
 		elseif UseRefResult.current then
-			local RenderSteppedConnection = RunService.RenderStepped:Connect(function() --[[ Line: 58 ]]
+			local RenderSteppedConnection = RunService.RenderStepped:Connect(function()
 				-- upvalues: UseRefResult (upval), UseBindingResult2 (upval)
 				local Current = UseRefResult.current
 				
@@ -41,7 +41,7 @@ return function(Frame: Frame) --[[ Line: 36 | Named "MediaPreview" ]]
 				end
 			end)
 			
-			return function() --[[ Line: 65 ]]
+			return function()
 				-- upvalues: RenderSteppedConnection (copy)
 				RenderSteppedConnection:Disconnect()
 			end

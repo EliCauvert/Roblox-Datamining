@@ -5,16 +5,16 @@ local t = {}
 local Count = 0
 
 return {
-	bind = function(Object, p1) --[[ Line: 16 ]]
+	bind = function(Object, p1)
 		-- upvalues: Count (ref), t (copy), ConstantsModule (copy), CollectionService (copy)
 		local IsVideo = p1.mediaType == "video"
 		
 		if p1.mediaType ~= "image" and not IsVideo then
-			return function() --[[ Line: 20 ]] end
+			return function() end
 		elseif IsVideo ~= (p1.videoPlaybackStateRef ~= nil) then
-			return function() --[[ Line: 23 ]] end
+			return function() end
 		elseif p1.isFullscreen == true and not IsVideo then
-			return function() --[[ Line: 26 ]] end
+			return function() end
 		else
 			Count += 1
 			local Text = tostring(Count)
@@ -22,7 +22,7 @@ return {
 			Object:SetAttribute(ConstantsModule.ViewabilityTargetIdAttribute, Text)
 			CollectionService:AddTag(Object, ConstantsModule.CandidateTag)
 			
-			return function() --[[ Line: 34 ]]
+			return function()
 				-- upvalues: Object (copy), ConstantsModule (upval), Text (copy), CollectionService (upval), t (upval)
 				if Object:GetAttribute(ConstantsModule.ViewabilityTargetIdAttribute) == Text then
 					CollectionService:RemoveTag(Object, ConstantsModule.CandidateTag)
@@ -32,17 +32,17 @@ return {
 			end
 		end
 	end,
-	get = function(p1) --[[ Line: 44 ]]
+	get = function(p1)
 		-- upvalues: t (copy)
 		return t[p1]
 	end,
-	_clear = function() --[[ Line: 48 ]]
+	_clear = function()
 		-- upvalues: t (copy)
 		for i in t do
 			t[i] = nil
 		end
 	end,
-	_size = function(): number --[[ Line: 54 ]]
+	_size = function(): number
 		-- upvalues: t (copy)
 		local Count = 0
 		

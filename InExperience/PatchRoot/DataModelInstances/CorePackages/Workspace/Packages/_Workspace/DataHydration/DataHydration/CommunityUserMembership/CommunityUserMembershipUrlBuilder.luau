@@ -3,7 +3,7 @@ local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 local Url = require(Parent.Http).Url
 
 return {
-	buildJoinCommunityUrl = function(CommunityId) --[[ Line: 9 ]]
+	buildJoinCommunityUrl = function(CommunityId)
 		-- upvalues: UrlBuilder (copy), Url (copy)
 		return UrlBuilder.new({
 			path = "v1/groups/{communityId}/users",

@@ -5,7 +5,7 @@ local ProductTypeEnum = require(PurchasePrompt.types).ProductTypeEnum
 local RequestTypeModule = require(PurchasePrompt.Enums.RequestType)
 local FFlagEnableInExperienceOffersPurchaseFlow = require(Parent.SharedFlags).FFlagEnableInExperienceOffersPurchaseFlow
 
-local function _(p1, GamePass): boolean --[[ Line: 45 | Named "isCartPricingKind" ]]
+local function _(p1, GamePass): boolean
 	-- upvalues: ProductTypeEnum (copy), FFlagEnableInExperienceOffersPurchaseFlow (copy), RequestTypeModule (copy)
 	if type(p1) == "table" then
 		local Kind = p1.kind
@@ -17,7 +17,7 @@ local function _(p1, GamePass): boolean --[[ Line: 45 | Named "isCartPricingKind
 	return FFlagEnableInExperienceOffersPurchaseFlow and (GamePass == RequestTypeModule.GamePass or GamePass == RequestTypeModule.Product) or false
 end
 
-return function(p1) --[[ Line: 61 | Named "selectCartPricingOverride" ]]
+return function(p1)
 	-- upvalues: ProductTypeEnum (copy), FFlagEnableInExperienceOffersPurchaseFlow (copy), RequestTypeModule (copy), DeriveCartPricingViewFunction (copy)
 	if p1 == nil then
 		return nil

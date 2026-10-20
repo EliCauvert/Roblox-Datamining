@@ -12,7 +12,7 @@ local EventNames = AnalyticsModule.EventNames
 local UseUserSearchAnalyticsFunction = AnalyticsModule.useUserSearchAnalytics
 local FFlagLuaAppsDefaultSelection = require(Parent.SharedFlags).FFlagLuaAppsDefaultSelection
 
-return function(p1) --[[ Line: 35 | Named "UserSearchScreen" ]]
+return function(p1)
 	-- upvalues: UseNavigationFunction (copy), UseStyleFunction (copy), FFlagLuaAppsDefaultSelection (copy), ReactModule (copy), HttpService (copy), UseUserSearchAnalyticsFunction (copy), EventNames (copy), AppPage (copy), FullscreenPageWithSafeArea (copy), UserSearchHeaderBarModule (copy)
 	local RenderUserSearchResultsFunction = p1.renderUserSearchResults
 	local UseNavigationResult = UseNavigationFunction()
@@ -34,7 +34,7 @@ return function(p1) --[[ Line: 35 | Named "UserSearchScreen" ]]
 		UseUserSearchAnalyticsResult = UseUserSearchAnalyticsFunction({ currentPage = EntryPointParam })
 		UseRefResult = UseUserSearchAnalyticsResult.getInfoForAllEvents().userSearchSessionId
 	end
-	ReactModule.useEffect(function() --[[ Line: 61 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ShouldShowUserSearchLandingPageParam (copy), UseUserSearchAnalyticsResult (ref), EventNames (upval)
 		if ShouldShowUserSearchLandingPageParam then
 			UseUserSearchAnalyticsResult.fireAnalyticsEvent(EventNames.UserSearchBarOpen)
@@ -50,12 +50,12 @@ return function(p1) --[[ Line: 35 | Named "UserSearchScreen" ]]
 		UserSearchHeaderBar = ReactModule.createElement(UserSearchHeaderBarModule, {
 			searchKeyword = SearchKeywordParam,
 			focusOnSearchInput = ShouldShowUserSearchLandingPageParam,
-			onSubmitSearch = ReactModule.useCallback(function(Kwd) --[[ Line: 67 ]]
+			onSubmitSearch = ReactModule.useCallback(function(Kwd)
 				-- upvalues: UseNavigationResult (copy), AppPage (upval), EntryPointParam (copy), UseUserSearchAnalyticsResult (ref), EventNames (upval)
 				UseNavigationResult.replace(AppPage.UserSearch, { searchKeyword = Kwd, entryPoint = EntryPointParam })
 				UseUserSearchAnalyticsResult.fireAnalyticsEvent(EventNames.UserSearchBarSubmit, { kwd = Kwd })
 			end, { EntryPointParam }),
-			onBackClick = ReactModule.useCallback(function() --[[ Line: 76 ]]
+			onBackClick = ReactModule.useCallback(function()
 				-- upvalues: UseNavigationResult (copy), UseUserSearchAnalyticsResult (ref), EventNames (upval)
 				UseNavigationResult.pop()
 				UseUserSearchAnalyticsResult.fireAnalyticsEvent(EventNames.UserSearchBarCancel)
@@ -67,7 +67,7 @@ return function(p1) --[[ Line: 35 | Named "UserSearchScreen" ]]
 			Position = UDim2.new(0, 0, 0, Tokens.Size.Size_1200),
 			Size = UDim2.new(1, 0, 1, -Tokens.Size.Size_1200)
 		}, {
-			UserSearchPage = ReactModule.useMemo(function() --[[ Line: 83 ]]
+			UserSearchPage = ReactModule.useMemo(function()
 				-- upvalues: RenderUserSearchResultsFunction (copy), SearchKeywordParam (copy), ShouldShowUserSearchLandingPageParam (copy), FFlagLuaAppsDefaultSelection (upval), UseRefResult (ref)
 				return RenderUserSearchResultsFunction({
 					searchKeyword = SearchKeywordParam,

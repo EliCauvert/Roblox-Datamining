@@ -19,7 +19,7 @@ local IconSize = FoundationModule.Enums.IconSize
 local Radius = FoundationModule.Enums.Radius
 local ScrollBarVisibility = FoundationModule.Enums.ScrollBarVisibility
 
-local function renderLoadingTiles(CategoryKey, Offset, XOffset, UseTokensResult) --[[ Line: 38 ]]
+local function renderLoadingTiles(CategoryKey, Offset, XOffset, UseTokensResult)
 	-- upvalues: ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), ScrollView (copy), ScrollBarVisibility (copy)
 	local Elements = {}
 	
@@ -59,7 +59,7 @@ local function renderLoadingTiles(CategoryKey, Offset, XOffset, UseTokensResult)
 	})
 end
 
-local function renderCategory(p1, LayoutOrder, Offset, XOffset, UseTokensResult) --[[ Line: 82 ]]
+local function renderCategory(p1, LayoutOrder, Offset, XOffset, UseTokensResult)
 	-- upvalues: ReactModule (copy), LibraryTileModule (copy), renderLoadingTiles (copy), ScrollView (copy), ScrollBarVisibility (copy), View (copy), FoundationModule (copy), Text (copy), Icon (copy), IconName (copy), IconSize (copy)
 	local NewXOffset = XOffset + UseTokensResult.Size.Size_1000
 	local Elements = {}
@@ -142,7 +142,7 @@ local function renderCategory(p1, LayoutOrder, Offset, XOffset, UseTokensResult)
 	})
 end
 
-return function(p2) --[[ Line: 176 | Named "LibraryBrowserView" ]]
+return function(p2)
 	-- upvalues: AppCompositionModule (copy), UseHardwareInsetsModule (copy), FoundationModule (copy), SignalsReactModule (copy), DisplayModule (copy), renderCategory (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), renderLoadingTiles (copy), Text (copy), LibraryWorldCutoutViewModule (copy), ScrollView (copy)
 	local Margin = AppCompositionModule.useCompositionLayout().margin
 	local Bottom = UseHardwareInsetsModule().bottom

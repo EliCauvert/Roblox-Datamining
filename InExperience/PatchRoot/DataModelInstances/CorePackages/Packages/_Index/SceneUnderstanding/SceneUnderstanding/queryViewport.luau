@@ -1,6 +1,6 @@
 ﻿local ViewportQueryOptionsModule = require(script:FindFirstAncestor("SceneUnderstanding").options.ViewportQueryOptions)
 
-return function(Camera: Camera, Callback, p1) --[[ Line: 8 | Named "queryViewport" ]]
+return function(Camera: Camera, Callback, p1)
 	-- upvalues: ViewportQueryOptionsModule (copy)
 	local NewViewportQueryOptions = ViewportQueryOptionsModule.new(p1)
 	local Total = 0

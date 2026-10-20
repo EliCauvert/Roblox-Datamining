@@ -5,20 +5,20 @@ local BannerButtonModule = require(Components.BannerButton)
 local MainRowPadding = require(script.Parent.Parent.Parent.Constants).GeneralFormatting.MainRowPadding
 local CollapsibleSection = RoactModule.PureComponent:extend("CollapsibleSection")
 
-function CollapsibleSection.init(p1) --[[ Line: 15 ]]
+function CollapsibleSection.init(p1)
 	p1.state = {
 		expanded = p1.props.defaultExpanded == nil or p1.props.defaultExpanded
 	}
 	
-	function p1.onButtonPress() --[[ Line: 20 ]]
+	function p1.onButtonPress()
 		-- upvalues: p1 (copy)
-		p1:setState(function(p2) --[[ Line: 21 ]]
+		p1:setState(function(p2)
 			return { expanded = not p2.expanded }
 		end)
 	end
 end
 
-function CollapsibleSection.render(p1) --[[ Line: 27 ]]
+function CollapsibleSection.render(p1)
 	-- upvalues: RoactModule (copy), MainRowPadding (copy), BannerButtonModule (copy), CellLabelModule (copy)
 	local Expanded = p1.state.expanded
 	

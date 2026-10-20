@@ -4,14 +4,14 @@ local FoundationModule = require(AppChat.Parent.Foundation)
 local GetRbxThumbFunction = FoundationModule.Utility.getRbxThumb
 local ThumbnailType = FoundationModule.Enums.ThumbnailType
 
-local function _(p1, CaptureType, p2): string --[[ Line: 23 | Named "getMediaContentUri" ]]
+local function _(p1, CaptureType, p2): string
 	-- upvalues: AppChat (copy)
 	local AssetId: string = `rbxassetid://{p1}`
 	
 	return if CaptureType == Enum.CaptureType.Video and p2 ~= nil then if require(AppChat.Flags.FFlagAppChatMomentShareCardPermissionContextFix) and game.GameId == 0 then `{AssetId}&accessContext={p2}` else `{AssetId}&accessContext={p2}&permissionContext=ignoreUniverse` else AssetId
 end
 
-return function(p1) --[[ Line: 38 | Named "buildMomentShareCardMedia" ]]
+return function(p1)
 	-- upvalues: HttpService (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), AppChat (copy)
 	local AssetId: number = p1.assetId
 	local CaptureType = p1.captureType

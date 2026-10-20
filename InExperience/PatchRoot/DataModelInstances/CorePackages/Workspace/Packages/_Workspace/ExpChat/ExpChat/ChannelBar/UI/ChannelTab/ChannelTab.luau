@@ -36,7 +36,7 @@ local config = {
 	setTransparency = nil
 }
 
-local function createUnreadDot(Position, SetTransparencyResult) --[[ Line: 72 ]]
+local function createUnreadDot(Position, SetTransparencyResult)
 	-- upvalues: ReactModule (copy), ConfigModule (copy)
 	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -50,7 +50,7 @@ local function createUnreadDot(Position, SetTransparencyResult) --[[ Line: 72 ]]
 	})
 end
 
-return function(p1) --[[ Line: 87 | Named "ChannelTab" ]]
+return function(p1)
 	-- upvalues: Dictionary (copy), config (copy), UseTabImpressionModule (copy), FFlagExpChatGlobalTabDefaultModule (copy), LocalizationModule (copy), FFlagExpChatUseSharedChannelTabDisplayLabel (copy), ChannelTabDisplayLabel (copy), FFlagExpChatEnableFriendsTab (copy), UnreachableFunction (copy), Players (copy), GetOtherDisplayNameInWhisperChannelModule (copy), ReactModule (copy), UseSelectionCursorFunction (copy), CursorKind (copy), FFlagExpChatChannelTabSizingUpdateModule (copy), TextService (copy), GetUnreadIndicatorLayoutModule (copy), Offset (copy), Interactable (copy), createUnreadDot (copy), _Color3 (copy), ConfigModule (copy)
 	local JoinResult = Dictionary.join(config, p1)
 	UseTabImpressionModule({
@@ -115,25 +115,25 @@ return function(p1) --[[ Line: 87 | Named "ChannelTab" ]]
 		local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(nil)
 		local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(nil)
 		
-		v1 = function(Frame) --[[ Line: 161 ]]
+		v1 = function(Frame)
 			-- upvalues: UseBindingResult2_1 (copy)
 			UseBindingResult2_1(Frame.AbsoluteSize.X)
 		end
 		
-		ReactModule.useEffect(function() --[[ Line: 166 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseBindingResult2 (copy), JoinResult (copy), Text (copy), TextService (upval)
 			UseBindingResult2(nil)
 			
 			if not JoinResult.hasUnreadMessages or JoinResult.isTabCollapsed then return end
 			local Flag = false
-			task.spawn(function() --[[ Line: 173 ]]
+			task.spawn(function()
 				-- upvalues: Text (upval), JoinResult (upval), TextService (upval), Flag (ref), UseBindingResult2 (upval)
 				local GetTextBoundsParams = Instance.new("GetTextBoundsParams")
 				GetTextBoundsParams.Text = Text
 				GetTextBoundsParams.Font = JoinResult.channelTabsSettings.FontFace
 				GetTextBoundsParams.Size = JoinResult.channelTabsSettings.TextSize
 				GetTextBoundsParams.Width = 1e999
-				local Success, Result = pcall(function() --[[ Line: 180 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: TextService (upval), GetTextBoundsParams (copy)
 					return TextService:GetTextBoundsAsync(GetTextBoundsParams)
 				end)
@@ -143,7 +143,7 @@ return function(p1) --[[ Line: 87 | Named "ChannelTab" ]]
 				end
 			end)
 			
-			return function() --[[ Line: 188 ]]
+			return function()
 				-- upvalues: Flag (ref)
 				Flag = true
 			end
@@ -159,15 +159,15 @@ return function(p1) --[[ Line: 87 | Named "ChannelTab" ]]
 			local MapResult2 = ReactModule.joinBindings({
 				naturalTextWidth = UseBindingResult,
 				tabWidth = UseBindingResult1
-			}):map(function(p2) --[[ Line: 205 ]]
+			}):map(function(p2)
 				-- upvalues: GetUnreadIndicatorLayoutModule (upval), JoinResult (copy), Offset (upval)
 				return GetUnreadIndicatorLayoutModule(JoinResult.hasUnreadMessages, JoinResult.isTabCollapsed, p2.tabWidth, p2.naturalTextWidth, Offset, 8, 8)
 			end)
-			MapResult = MapResult2:map(function(p2): UDim2 --[[ Line: 216 ]]
+			MapResult = MapResult2:map(function(p2): UDim2
 				-- upvalues: Offset (upval)
 				return if p2 then UDim2.new(0, p2.textWidth, 1, 0) else UDim2.new(1, -(Offset * 2 + 8 + 8), 1, 0)
 			end)
-			MapResult1 = MapResult2:map(function(p2): UDim2 --[[ Line: 221 ]]
+			MapResult1 = MapResult2:map(function(p2): UDim2
 				-- upvalues: Offset (upval)
 				return if p2 then UDim2.fromOffset(p2.textLeft, 0) else UDim2.fromOffset(Offset + 8 + 8, 0)
 			end)
@@ -180,16 +180,16 @@ return function(p1) --[[ Line: 87 | Named "ChannelTab" ]]
 		BorderSizePixel = 0,
 		ref = JoinResult.tabRef,
 		SelectionImageObject = UseSelectionCursorResult,
-		onStateChanged = function() --[[ Line: 238 ]] end,
+		onStateChanged = function() end,
 		[ReactModule.Change.AbsoluteSize] = v1,
 		[ReactModule.Event.Activated] = JoinResult.onTabSelected,
-		[ReactModule.Event.MouseEnter] = function() --[[ Line: 241 ]]
+		[ReactModule.Event.MouseEnter] = function()
 			-- upvalues: JoinResult (copy), UseStateResult2 (copy)
 			if JoinResult.isTabCollapsed then
 				UseStateResult2(JoinResult.channelTabsSettings.HoverBackgroundColor3)
 			end
 		end,
-		[ReactModule.Event.MouseLeave] = function() --[[ Line: 246 ]]
+		[ReactModule.Event.MouseLeave] = function()
 			-- upvalues: JoinResult (copy), UseStateResult2 (copy)
 			if JoinResult.isTabCollapsed then
 				UseStateResult2(JoinResult.channelTabsSettings.BackgroundColor3)

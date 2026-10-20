@@ -2,7 +2,7 @@
 local SetVoiceChatOptInStatusModule = require(VoiceChat.OptInStatus.SetVoiceChatOptInStatus)
 local CryoModule = require(VoiceChat.Parent.Cryo)
 
-return function(p1, p2) --[[ Line: 6 ]]
+return function(p1, p2)
 	-- upvalues: SetVoiceChatOptInStatusModule (copy), CryoModule (copy)
 	local P0 = p1 or {}
 	

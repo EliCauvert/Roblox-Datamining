@@ -9,7 +9,7 @@ local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local ControlStateModule = require(Foundation.Enums.ControlState)
 local InputLabelSizeModule = require(Foundation.Enums.InputLabelSize)
 
-local function _(InputLabel, None) --[[ Line: 43 | Named "labelText" ]]
+local function _(InputLabel, None)
 	-- upvalues: ReactModule (copy), TranslatorModule (copy)
 	return if None == nil or None == ReactModule.None then InputLabel elseif None then InputLabel .. " *" else TranslatorModule:FormatByKey("CommonUI.Controls.Input.Optional", { inputLabel = InputLabel })
 end
@@ -19,12 +19,12 @@ local config = {
 	size = InputLabelSizeModule.Medium
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 58 | Named "InputLabel" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), ControlStateModule (copy), TextModule (copy), WithCommonPropsModule (copy), TranslatorModule (copy), StateLayerAffordanceModule (copy), InputLabelSizeModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 60 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy), ControlStateModule (upval)
-		return if WithDefaultsModuleResult.onHover == nil then nil else function(Hover) --[[ Line: 62 ]]
+		return if WithDefaultsModuleResult.onHover == nil then nil else function(Hover)
 			-- upvalues: WithDefaultsModuleResult (upval), ControlStateModule (upval)
 			WithDefaultsModuleResult.onHover(Hover == ControlStateModule.Hover)
 		end

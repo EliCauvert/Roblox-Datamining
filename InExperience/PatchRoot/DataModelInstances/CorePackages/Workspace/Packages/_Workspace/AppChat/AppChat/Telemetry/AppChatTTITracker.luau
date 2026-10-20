@@ -17,7 +17,7 @@ local Tbl = {
 }
 local t = {}
 
-local function _(Key) --[[ Line: 62 | Named "getTTIState" ]]
+local function _(Key)
 	-- upvalues: t (copy), Tbl (copy)
 	if not t[Key] then
 		t[Key] = table.clone(Tbl)
@@ -30,7 +30,7 @@ local t1 = {}
 local JoinResult = { category = AppChatPerfEventInfoModule.TTI_CATEGORY }
 local Callback = nil
 
-local function matchConversation(p1) --[[ Line: 107 ]]
+local function matchConversation(p1)
 	-- upvalues: ConversationId (ref)
 	if p1.conversationId and ConversationId and p1.conversationId ~= ConversationId then
 		return false, "conversation_id_mismatch"
@@ -42,22 +42,22 @@ end
 local MessageReceiveTTI = {
 	useBaseName = true,
 	noInteractiveState = true,
-	getColdStart = function(_): boolean --[[ Line: 125 ]]
+	getColdStart = function(_): boolean
 		return false
 	end,
 	isContextMatching = matchConversation
 }
 local config = {
 	ChatLandingTTI = {
-		getColdStart = function(p1): boolean --[[ Line: 138 ]]
+		getColdStart = function(p1): boolean
 			return p1.coldStart == true
 		end,
-		isContextMatching = function(_) --[[ Line: 103 ]]
+		isContextMatching = function(_)
 			return true, nil
 		end
 	},
 	ChatConversationTTI = {
-		getColdStart = function(p1): boolean --[[ Line: 144 ]]
+		getColdStart = function(p1): boolean
 			-- upvalues: t1 (copy)
 			local ConversationId = p1.conversationId
 			local Inverted: boolean = ConversationId ~= nil and not t1[ConversationId]
@@ -68,7 +68,7 @@ local config = {
 			return Inverted
 		end,
 		isContextMatching = matchConversation,
-		onStart = function(p1) --[[ Line: 114 ]]
+		onStart = function(p1)
 			-- upvalues: ConversationId (ref), Callback (ref)
 			local ConversationId1 = p1.conversationId
 			
@@ -85,7 +85,7 @@ local config = {
 	MessageReceiveTTI = MessageReceiveTTI
 }
 
-local function buildTTIMetadata(Key, JoinResult1) --[[ Line: 164 ]]
+local function buildTTIMetadata(Key, JoinResult1)
 	-- upvalues: AppChatPerfEventInfoModule (copy), CryoModule (copy), JoinResult (ref)
 	local TTIPage = AppChatPerfEventInfoModule.getTTIPage(Key)
 	
@@ -93,20 +93,20 @@ local function buildTTIMetadata(Key, JoinResult1) --[[ Line: 164 ]]
 end
 
 return {
-	setSharedContext = function(p1) --[[ Line: 178 ]]
+	setSharedContext = function(p1)
 		-- upvalues: JoinResult (ref), CryoModule (copy), AppChatPerf (copy)
 		JoinResult = CryoModule.Dictionary.join(JoinResult, p1)
 		AppChatPerf:debug("Shared context updated: placement={}, entryPoint={}, hasActiveParty={}", p1.placement or "nil", p1.entryPoint or "nil", p1.hasActiveParty or false)
 	end,
-	getSharedContext = function() --[[ Line: 188 ]]
+	getSharedContext = function()
 		-- upvalues: JoinResult (ref)
 		return JoinResult
 	end,
-	setOnConversationSwitch = function(Value) --[[ Line: 194 ]]
+	setOnConversationSwitch = function(Value)
 		-- upvalues: Callback (ref)
 		Callback = Value
 	end,
-	start = function(Key, p1): boolean --[[ Line: 198 ]]
+	start = function(Key, p1): boolean
 		-- upvalues: t (copy), AppChatPerf (copy), config (copy), AppChatPerfEventInfoModule (copy), JoinResult (ref), TimeToInteractiveTracker (copy), buildTTIMetadata (copy), CryoModule (copy)
 		local Entry = t[Key]
 		
@@ -134,7 +134,7 @@ return {
 		
 		return true
 	end,
-	finish = function(Key, p1): boolean --[[ Line: 245 ]]
+	finish = function(Key, p1): boolean
 		-- upvalues: config (copy), t (copy), Tbl (copy), AppChatPerf (copy), TimeToInteractiveTracker (copy), buildTTIMetadata (copy), Milestone (copy), FFlagEnablePLTPrefetchCallbacks (copy), PageGateModule (copy)
 		local Entry = config[Key]
 		
@@ -182,7 +182,7 @@ return {
 		
 		return true
 	end,
-	cancel = function(Key, _): boolean --[[ Line: 291 ]]
+	cancel = function(Key, _): boolean
 		-- upvalues: t (copy), Tbl (copy), AppChatPerf (copy), TimeToInteractiveTracker (copy)
 		if not t[Key] then
 			t[Key] = table.clone(Tbl)
@@ -211,7 +211,7 @@ return {
 			return true
 		end
 	end,
-	isActive = function(Key, p1) --[[ Line: 315 ]]
+	isActive = function(Key, p1)
 		-- upvalues: config (copy), t (copy), Tbl (copy)
 		local Entry = config[Key]
 		
@@ -220,7 +220,7 @@ return {
 		end
 		return if t[Key].started then Entry.isContextMatching(p1) else false
 	end,
-	trackMilestone = function(EventName, SurfaceReady, p1): boolean --[[ Line: 329 ]]
+	trackMilestone = function(EventName, SurfaceReady, p1): boolean
 		-- upvalues: TimeToInteractiveTracker (copy), config (copy), t (copy), Tbl (copy), AppChatPerf (copy)
 		if not TimeToInteractiveTracker.trackMilestone then
 			return false
@@ -243,7 +243,7 @@ return {
 			return false
 		end
 	end,
-	trackSubphase = function(EventName, p1, p2, p3): boolean --[[ Line: 347 ]]
+	trackSubphase = function(EventName, p1, p2, p3): boolean
 		-- upvalues: TimeToInteractiveTracker (copy), config (copy), t (copy), Tbl (copy), AppChatPerf (copy)
 		if not TimeToInteractiveTracker.trackSubphase then
 			return false
@@ -266,7 +266,7 @@ return {
 			return false
 		end
 	end,
-	trackRequest = function(EventName, p1, p2, p3): boolean --[[ Line: 370 ]]
+	trackRequest = function(EventName, p1, p2, p3): boolean
 		-- upvalues: TimeToInteractiveTracker (copy), config (copy), t (copy), Tbl (copy), AppChatPerf (copy)
 		if not TimeToInteractiveTracker.trackRequest then
 			return false
@@ -289,7 +289,7 @@ return {
 			return false
 		end
 	end,
-	getEventName = function(Key) --[[ Line: 395 ]]
+	getEventName = function(Key)
 		-- upvalues: t (copy), Tbl (copy)
 		if not t[Key] then
 			t[Key] = table.clone(Tbl)
@@ -300,14 +300,14 @@ return {
 	end,
 	Milestone = Milestone,
 	Hooks = TimeToInteractiveTracker.Hooks,
-	isInteractive = function(Key) --[[ Line: 407 ]]
+	isInteractive = function(Key)
 		-- upvalues: t (copy), Tbl (copy)
 		if not t[Key] then
 			t[Key] = table.clone(Tbl)
 		end
 		return t[Key].interactive
 	end,
-	getInteractiveTimestamp = function(Key) --[[ Line: 411 ]]
+	getInteractiveTimestamp = function(Key)
 		-- upvalues: t (copy), Tbl (copy)
 		if not t[Key] then
 			t[Key] = table.clone(Tbl)

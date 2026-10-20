@@ -4,14 +4,14 @@ local NewResult = nil
 return {
 	["jest.config"] = script["jest.config"],
 	PlatformLeaderboardClientStore = PlatformLeaderboardClientStoreModule,
-	getPlatformLeaderboardClientStore = function() --[[ Line: 11 ]]
+	getPlatformLeaderboardClientStore = function()
 		-- upvalues: NewResult (ref), PlatformLeaderboardClientStoreModule (copy)
 		if NewResult == nil and PlatformLeaderboardClientStoreModule ~= nil then
 			NewResult = PlatformLeaderboardClientStoreModule.new()
 		end
 		return NewResult
 	end,
-	reset = function() --[[ Line: 18 ]]
+	reset = function()
 		-- upvalues: NewResult (ref)
 		if NewResult ~= nil then
 			NewResult:destroy()

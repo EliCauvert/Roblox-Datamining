@@ -4,7 +4,7 @@ local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
 	base = require(Parent.Http).Url.APIS_URL
 })
 
-return function() --[[ Line: 15 | Named "getChartsPagePostUrl" ]]
+return function()
 	-- upvalues: NewResult (copy)
 	return NewResult()
 end

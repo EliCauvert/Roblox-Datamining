@@ -11,21 +11,21 @@ local LibraryChatSheetOverlayModule = require(script.Parent.LibraryChatSheetOver
 local UseLibraryChatSheetViewModelModule = require(script.Parent.useLibraryChatSheetViewModel)
 local TokenOverrides = { ["Color.Common.Backdrop"] = "Color.None" }
 
-local function onBoundsChanged(p1, p2) --[[ Line: 17 ]]
+local function onBoundsChanged(p1, p2)
 	-- upvalues: GetLibraryStoreModule (copy)
 	local LibraryStoreModule = GetLibraryStoreModule()
 	LibraryStoreModule.setWorldChatTop(p1)
 	LibraryStoreModule.setWorldChatLeft(p2)
 end
 
-local Computed = require(Parent.Signals).createComputed(function(p1) --[[ Line: 23 ]]
+local Computed = require(Parent.Signals).createComputed(function(p1)
 	-- upvalues: GetLibraryStoreModule (copy)
 	local WorldViewportRect = GetLibraryStoreModule().getWorldViewportRect(p1)
 	
 	return if WorldViewportRect == nil then nil else WorldViewportRect.Min.Y
 end)
 
-local function ViewportTopOverlay(Tbl) --[[ Line: 30 ]]
+local function ViewportTopOverlay(Tbl)
 	-- upvalues: SignalsReactModule (copy), Computed (copy), ReactModule (copy), LibraryChatSheetOverlayModule (copy)
 	local Copy = table.clone(Tbl)
 	Copy.top = SignalsReactModule.useSignalState(Computed)
@@ -33,7 +33,7 @@ local function ViewportTopOverlay(Tbl) --[[ Line: 30 ]]
 	return ReactModule.createElement(LibraryChatSheetOverlayModule, Copy)
 end
 
-return function(p1) --[[ Line: 37 | Named "LibraryChatSheet" ]]
+return function(p1)
 	-- upvalues: RoactUtilsModule (copy), FoundationModule (copy), UseLibraryChatSheetViewModelModule (copy), ReactModule (copy), TokenOverrides (copy), ViewportTopOverlay (copy), onBoundsChanged (copy), ChatSheetViewModule (copy)
 	local UseSelectedThemeResult = RoactUtilsModule.Hooks.useSelectedTheme()
 	local UseOverlayResult = FoundationModule.Hooks.useOverlay()
@@ -51,7 +51,7 @@ return function(p1) --[[ Line: 37 | Named "LibraryChatSheet" ]]
 			isOpen = UseLibraryChatSheetViewModelModuleResult.isOpen,
 			snapPoints = UseLibraryChatSheetViewModelModuleResult.snapPoints,
 			onBoundsChanged = onBoundsChanged,
-			renderSheet = function(SnapPoints, OnFramesChanged, OnSnapPointChanged) --[[ Line: 53 ]]
+			renderSheet = function(SnapPoints, OnFramesChanged, OnSnapPointChanged)
 				-- upvalues: UseLibraryChatSheetViewModelModuleResult (copy), ReactModule (upval), ChatSheetViewModule (upval)
 				local Copy = table.clone(UseLibraryChatSheetViewModelModuleResult)
 				Copy.snapPoints = SnapPoints

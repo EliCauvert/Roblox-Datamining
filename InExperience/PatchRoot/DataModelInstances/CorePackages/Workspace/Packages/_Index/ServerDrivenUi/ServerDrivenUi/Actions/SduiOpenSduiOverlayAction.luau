@@ -5,7 +5,7 @@ local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
 local SetCentralOverlayFunction = require(Parent.CentralOverlay).Actions.SetCentralOverlay
 
-return function(p1, _, p2) --[[ Line: 14 | Named "SduiOpenSduiOverlayAction" ]]
+return function(p1, _, p2)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	

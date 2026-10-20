@@ -5,25 +5,25 @@ local EnableMessageBusUnSubscribeErrorTelemetry = game:DefineFastFlag("EnableMes
 local MessageBusModule = {}
 MessageBusModule.__index = MessageBusModule
 
-function MessageBusModule.publish(p1, p2) --[[ Line: 41 ]]
+function MessageBusModule.publish(p1, p2)
 	-- upvalues: MessageBusService (copy)
 	assert(p1.validateParams(p2))
 	MessageBusService:Publish(p1.mid, p2)
 end
 
-function MessageBusModule.publishProtocolMethodRequest(p1, Message, CustomTelemetryData) --[[ Line: 46 ]]
+function MessageBusModule.publishProtocolMethodRequest(p1, Message, CustomTelemetryData)
 	-- upvalues: MessageBusService (copy)
 	assert(p1.validateParams(Message))
 	MessageBusService:PublishProtocolMethodRequest(p1.protocolName, p1.methodName, Message, CustomTelemetryData)
 end
 
-function MessageBusModule.publishProtocolMethodResponse(p1, Message, ResponseCode, CustomTelemetryData) --[[ Line: 55 ]]
+function MessageBusModule.publishProtocolMethodResponse(p1, Message, ResponseCode, CustomTelemetryData)
 	-- upvalues: MessageBusService (copy)
 	assert(p1.validateParams(Message))
 	MessageBusService:PublishProtocolMethodResponse(p1.protocolName, p1.methodName, Message, ResponseCode, CustomTelemetryData)
 end
 
-function MessageBusModule.getLast(p1) --[[ Line: 71 ]]
+function MessageBusModule.getLast(p1)
 	-- upvalues: MessageBusService (copy)
 	local Last = MessageBusService:GetLast(p1.mid)
 	
@@ -36,22 +36,22 @@ function MessageBusModule.getLast(p1) --[[ Line: 71 ]]
 	end
 end
 
-function MessageBusModule.getMessageId(DomainName, MessageName) --[[ Line: 80 ]]
+function MessageBusModule.getMessageId(DomainName, MessageName)
 	-- upvalues: MessageBusService (copy)
 	return MessageBusService:GetMessageId(DomainName, MessageName)
 end
 
-function MessageBusModule.getProtocolMethodRequestMessageId(ProtocolName, MethodName) --[[ Line: 84 ]]
+function MessageBusModule.getProtocolMethodRequestMessageId(ProtocolName, MethodName)
 	-- upvalues: MessageBusService (copy)
 	return MessageBusService:GetProtocolMethodRequestMessageId(ProtocolName, MethodName)
 end
 
-function MessageBusModule.getProtocolMethodResponseMessageId(ProtocolName, MethodName) --[[ Line: 88 ]]
+function MessageBusModule.getProtocolMethodResponseMessageId(ProtocolName, MethodName)
 	-- upvalues: MessageBusService (copy)
 	return MessageBusService:GetProtocolMethodResponseMessageId(ProtocolName, MethodName)
 end
 
-function MessageBusModule.call(p1, Input) --[[ Line: 92 ]]
+function MessageBusModule.call(p1, Input)
 	-- upvalues: MessageBusService (copy)
 	assert(p1.validateParams(Input))
 	
@@ -61,12 +61,12 @@ end
 local Module = {}
 Module.__index = Module
 
-function Module.new() --[[ Line: 100 ]]
+function Module.new()
 	-- upvalues: Module (copy)
 	return (setmetatable({ connections = {} }, Module))
 end
 
-function Module.getSubscriptionCount(p1): number --[[ Line: 107 ]]
+function Module.getSubscriptionCount(p1): number
 	local Count = 0
 	
 	for _ in pairs(p1.connections) do
@@ -75,7 +75,7 @@ function Module.getSubscriptionCount(p1): number --[[ Line: 107 ]]
 	return Count
 end
 
-function Module:subscribe(p2, Callback, p3, p4) --[[ Line: 115 ]]
+function Module:subscribe(p2, Callback, p3, p4)
 	-- upvalues: MessageBusService (copy)
 	local Sticky = p3 == nil or p3
 	local P23 = p4 ~= nil and p4
@@ -87,7 +87,7 @@ function Module:subscribe(p2, Callback, p3, p4) --[[ Line: 115 ]]
 	self.connections[Mid] = MessageBusService:Subscribe(Mid, Callback, P23, Sticky)
 end
 
-function Module:subscribeProtocolMethodRequest(p2, Callback, p3, p4) --[[ Line: 128 ]]
+function Module:subscribeProtocolMethodRequest(p2, Callback, p3, p4)
 	-- upvalues: MessageBusModule (copy), MessageBusService (copy)
 	local Sticky = p3 == nil or p3
 	local P28 = p4 ~= nil and p4
@@ -101,7 +101,7 @@ function Module:subscribeProtocolMethodRequest(p2, Callback, p3, p4) --[[ Line: 
 	self.connections[ProtocolMethodRequestMessageId] = MessageBusService:SubscribeToProtocolMethodRequest(ProtocolName, MethodName, Callback, P28, Sticky)
 end
 
-function Module:subscribeProtocolMethodResponse(p2, Callback, p3, p4) --[[ Line: 148 ]]
+function Module:subscribeProtocolMethodResponse(p2, Callback, p3, p4)
 	-- upvalues: MessageBusModule (copy), MessageBusService (copy)
 	local Sticky = p3 == nil or p3
 	local P33 = p4 ~= nil and p4
@@ -115,21 +115,21 @@ function Module:subscribeProtocolMethodResponse(p2, Callback, p3, p4) --[[ Line:
 	self.connections[ProtocolMethodResponseMessageId] = MessageBusService:SubscribeToProtocolMethodResponse(ProtocolName, MethodName, Callback, P33, Sticky)
 end
 
-function Module:unsubscribeToProtocolMethodRequest(p2) --[[ Line: 168 ]]
+function Module:unsubscribeToProtocolMethodRequest(p2)
 	-- upvalues: MessageBusService (copy)
 	self:unsubscribeWithMsgId(MessageBusService:GetProtocolMethodRequestMessageId(p2.protocolName, p2.methodName))
 end
 
-function Module:unsubscribeToProtocolMethodResponse(p2) --[[ Line: 172 ]]
+function Module:unsubscribeToProtocolMethodResponse(p2)
 	-- upvalues: MessageBusService (copy)
 	self:unsubscribeWithMsgId(MessageBusService:GetProtocolMethodResponseMessageId(p2.protocolName, p2.methodName))
 end
 
-function Module:unsubscribe(p2) --[[ Line: 176 ]]
+function Module:unsubscribe(p2)
 	self:unsubscribeWithMsgId(p2.mid)
 end
 
-function Module:unsubscribeWithMsgId(ProtocolMethodRequestMessageId) --[[ Line: 180 ]]
+function Module:unsubscribeWithMsgId(ProtocolMethodRequestMessageId)
 	-- upvalues: DisableMessageBusUnSubscribeError (copy), EnableMessageBusUnSubscribeErrorTelemetry (copy), MessageBusService (copy)
 	local Connection = self.connections[ProtocolMethodRequestMessageId]
 	
@@ -164,7 +164,7 @@ function Module:unsubscribeWithMsgId(ProtocolMethodRequestMessageId) --[[ Line: 
 	Connection:Disconnect()
 end
 
-function Module:unsubscribeFromAllMessages() --[[ Line: 223 ]]
+function Module:unsubscribeFromAllMessages()
 	for i, connection in pairs(self.connections) do
 		self.connections[i] = nil
 		connection:Disconnect()

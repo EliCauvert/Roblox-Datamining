@@ -1,14 +1,14 @@
 ﻿local TextChatService = game:GetService("TextChatService")
 local FFlagExpChatUniverseChatPresetEnabledModule = require(script:FindFirstAncestor("ExpChat").Flags.FFlagExpChatUniverseChatPresetEnabled)
 
-local function _() --[[ Line: 23 | Named "getRBXGeneralChannel" ]]
+local function _()
 	-- upvalues: TextChatService (copy)
 	local RBXGeneral = TextChatService:FindFirstChild("RBXGeneral", true)
 	
 	return if RBXGeneral and RBXGeneral:IsA("TextChannel") then RBXGeneral else nil
 end
 
-return function(PresetId, TextChannel): string --[[ Line: 31 | Named "sendPreset" ]]
+return function(PresetId, TextChannel): string
 	-- upvalues: TextChatService (copy), FFlagExpChatUniverseChatPresetEnabledModule (copy)
 	local TextChannel1 = TextChannel
 	
@@ -16,10 +16,10 @@ return function(PresetId, TextChannel): string --[[ Line: 31 | Named "sendPreset
 		local RBXGeneral = TextChatService:FindFirstChild("RBXGeneral", true)
 		TextChannel1 = if RBXGeneral and RBXGeneral:IsA("TextChannel") then RBXGeneral else nil
 	end
-	return if TextChannel1 then if pcall(function() --[[ Line: 52 ]]
+	return if TextChannel1 then if pcall(function()
 		-- upvalues: TextChannel1 (ref), PresetId (copy)
 		TextChannel1:SendPresetAsync(PresetId)
-	end) then "Sent" else "SendFailed" elseif FFlagExpChatUniverseChatPresetEnabledModule then if pcall(function() --[[ Line: 46 ]]
+	end) then "Sent" else "SendFailed" elseif FFlagExpChatUniverseChatPresetEnabledModule then if pcall(function()
 		-- upvalues: TextChatService (upval), PresetId (copy)
 		TextChatService:SendUniverseChatPresetAsync(PresetId)
 	end) then "Sent" else "SendFailed" else "NoChannel"

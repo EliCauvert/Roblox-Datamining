@@ -5,7 +5,7 @@ local GetFFlagEnableAppStorageJsonCacheInABTestModule = require(script.Parent.Ge
 local ExperienceReactDeferredSchedulerLayerName = game:DefineFastString("ExperienceReactDeferredScheduler_LayerName", "UIEcosystem.User")
 local EnableReactSchedulerIXP = game:DefineFastFlag("EnableReactSchedulerIXP", false)
 
-return function() --[[ Line: 28 ]]
+return function()
 	-- upvalues: EnableReactSchedulerIXP (copy), GetFFlagEnableAppStorageJsonCacheInABTestModule (copy), AppStorageJsonCacheUtils (copy), ExperienceReactDeferredSchedulerLayerName (copy), AppStorageService (copy), HttpService (copy)
 	if not EnableReactSchedulerIXP then
 		return nil
@@ -17,13 +17,13 @@ return function() --[[ Line: 28 ]]
 			return ExperimentCacheCachedJsonForKey[ExperienceReactDeferredSchedulerLayerName]
 		end
 	else
-		local Success, Result = pcall(function() --[[ Line: 39 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: AppStorageService (upval)
 			return AppStorageService:GetItem("ExperimentCache")
 		end)
 		
 		if Success then
-			local Success1, Result1 = pcall(function() --[[ Line: 43 ]]
+			local Success1, Result1 = pcall(function()
 				-- upvalues: HttpService (upval), Result (copy)
 				return HttpService:JSONDecode(Result)
 			end)

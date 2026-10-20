@@ -23,9 +23,9 @@ local FFlagDebugAppChatEnableDomLocators = SharedFlags.FFlagDebugAppChatEnableDo
 local GetFFlagEnableCrossExpVoiceFunction = SharedFlags.GetFFlagEnableCrossExpVoice
 local UseLastActiveParticipant = if GetFFlagEnableCrossExpVoiceFunction() then require(Parent.CrossExperienceVoice).Hooks.useLastActiveParticipant else nil
 
-function SquadTopBanner(p1) --[[ Line: 56 ]]
+function SquadTopBanner(p1)
 	-- upvalues: React (copy), SquadCoordinationUIChangesExperimentation (copy), FFlagIntroduceTopBannerPartyStatesModule (copy), GetFFlagEnableCrossExpVoiceFunction (copy), UseLastActiveParticipant (ref), UseTokensFunction (copy), UseCurrentSquadParentChannelIdFunction (copy), SquadExternalContractContext (copy), UseLocalUserIdFunction (copy), ConstantsModule (copy), UserProfilesModule (copy), UseLocalizationFunction (copy), CryoModule (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), Foundation (copy), FFlagDebugAppChatEnableDomLocators (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), View (copy), HorizontalFacepileGroupModule (copy)
-	React.useEffect(function() --[[ Line: 57 ]]
+	React.useEffect(function()
 		-- upvalues: SquadCoordinationUIChangesExperimentation (upval)
 		SquadCoordinationUIChangesExperimentation.logExposure()
 	end, {})
@@ -38,7 +38,7 @@ function SquadTopBanner(p1) --[[ Line: 56 ]]
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local CombinedNameFromId = nil
 	local NoParentChannelType = false
-	local UseMemoResult = React.useMemo(function() --[[ Line: 82 ]]
+	local UseMemoResult = React.useMemo(function()
 		-- upvalues: p1 (copy), ConstantsModule (upval), UseLocalUserIdResult (copy)
 		if p1.parentChannelType == ConstantsModule.CONVERSATION_CHANNEL_ONE_TO_ONE_TYPE and p1.parentChannelParticipants then
 			for _, parentChannelParticipant in ipairs(p1.parentChannelParticipants) do
@@ -72,7 +72,7 @@ function SquadTopBanner(p1) --[[ Line: 56 ]]
 			loading = "Feature.Squads.Label.Loading",
 			waitingForCombinedName = "Feature.Squads.Label.WaitingForCombinedName"
 		})
-		UseMemoResult1 = React.useMemo(function() --[[ Line: 123 ]]
+		UseMemoResult1 = React.useMemo(function()
 			-- upvalues: NoParentChannelType (ref), UseLocalizationResult (copy), p1 (copy), ConstantsModule (upval), CombinedNameFromId (ref)
 			return if NoParentChannelType then UseLocalizationResult.loading elseif p1.parentChannelType == ConstantsModule.CONVERSATION_CHANNEL_ONE_TO_ONE_TYPE and CombinedNameFromId and #p1.squadMemberList < 2 then UseLocalizationResult.waitingForCombinedName:gsub("{(.-)}", { combinedName = CombinedNameFromId }) elseif p1.parentChannelType == ConstantsModule.CONVERSATION_CHANNEL_GROUP_TYPE and #p1.squadMemberList < 2 then UseLocalizationResult.waitingForOthers else UseLocalizationResult.numberInTheParty:gsub("{(.-)}", { partyCount = tostring(#p1.squadMemberList) })
 		end, {
@@ -82,7 +82,7 @@ function SquadTopBanner(p1) --[[ Line: 56 ]]
 			p1.parentChannelType,
 			p1.squadMemberList
 		})
-		local UseResult = React.useCallback(function() --[[ Line: 149 ]]
+		local UseResult = React.useCallback(function()
 			-- upvalues: UseLocalUserIdResult (copy), p1 (copy)
 			local List = {}
 			
@@ -98,9 +98,9 @@ function SquadTopBanner(p1) --[[ Line: 56 ]]
 			
 			return List
 		end, { p1.squadMemberList })
-		UseMemoResult11 = React.useMemo(function() --[[ Line: 167 ]]
+		UseMemoResult11 = React.useMemo(function()
 			-- upvalues: UseResult (copy), CryoModule (upval), GetStandardSizeAvatarHeadShotRbxthumbFunction (upval)
-			return CryoModule.List.map(UseResult(), function(p2) --[[ Line: 170 ]]
+			return CryoModule.List.map(UseResult(), function(p2)
 				-- upvalues: GetStandardSizeAvatarHeadShotRbxthumbFunction (upval)
 				return GetStandardSizeAvatarHeadShotRbxthumbFunction(p2)
 			end)

@@ -7,7 +7,7 @@ local PlaytestersRequestsModule = require(script.Parent.playtestersRequests)
 local _ = require(script.Parent.PrivatePlaytestersStoreTypes)
 local CreatePlayersGetterCacheModule = require(script.Parent.createPlayersGetterCache)
 
-return function(p1) --[[ Line: 38 | Named "createPrivatePlaytestersStore" ]]
+return function(p1)
 	-- upvalues: CreateDataCacheModule (copy), CreatePlayersGetterCacheModule (copy), CreateDataResolverModule (copy), PlaytestersRequestsModule (copy), PromiseModule (copy)
 	local P0 = p1 or {}
 	local config = { network = P0.network, baseUrl = P0.baseUrl }
@@ -17,7 +17,7 @@ return function(p1) --[[ Line: 38 | Named "createPrivatePlaytestersStore" ]]
 		supportsMultiGet = false,
 		replaceItems = true,
 		cache = DataCacheModule,
-		fetchFn = function(p2, _) --[[ Line: 57 ]]
+		fetchFn = function(p2, _)
 			-- upvalues: PlaytestersRequestsModule (upval), config (copy)
 			return PlaytestersRequestsModule.fetchPlaytesters(tonumber(p2), config)
 		end,
@@ -26,7 +26,7 @@ return function(p1) --[[ Line: 38 | Named "createPrivatePlaytestersStore" ]]
 	
 	return {
 		MAX_INVITES = 10,
-		getAndFetchInvitedPlayers = function(p2) --[[ Line: 66 ]]
+		getAndFetchInvitedPlayers = function(p2)
 			-- upvalues: DataResolverModule (copy), PlayersGetterCacheModule (copy)
 			local AndFetchItem = DataResolverModule.getAndFetchItem((tostring(p2)))
 			
@@ -35,9 +35,9 @@ return function(p1) --[[ Line: 38 | Named "createPrivatePlaytestersStore" ]]
 				status = AndFetchItem.status
 			}
 		end,
-		sendInvites = function(p2, p3, _) --[[ Line: 84 ]]
+		sendInvites = function(p2, p3, _)
 			-- upvalues: PlaytestersRequestsModule (upval), config (copy), DataCacheModule (copy), PromiseModule (upval)
-			return PlaytestersRequestsModule.fetchPlaytesters(p2, config):andThen(function(List) --[[ Line: 85 ]]
+			return PlaytestersRequestsModule.fetchPlaytesters(p2, config):andThen(function(List)
 				-- upvalues: p3 (copy), DataCacheModule (upval), p2 (copy), PromiseModule (upval), PlaytestersRequestsModule (upval), config (upval)
 				local Largest = math.max(0, 10 - #List)
 				local List1 = {}
@@ -53,7 +53,7 @@ return function(p1) --[[ Line: 38 | Named "createPrivatePlaytestersStore" ]]
 					
 					return PromiseModule.resolve({ added = {}, rejected = {} })
 				else
-					return PlaytestersRequestsModule.addPlaytester(p2, List1, config):andThen(function(List) --[[ Line: 117 ]]
+					return PlaytestersRequestsModule.addPlaytester(p2, List1, config):andThen(function(List)
 						-- upvalues: DataCacheModule (upval), p2 (upval), List1 (copy)
 						DataCacheModule.replaceItem(tostring(p2), List)
 						local Added = {}
@@ -71,9 +71,9 @@ return function(p1) --[[ Line: 38 | Named "createPrivatePlaytestersStore" ]]
 				end
 			end)
 		end,
-		removeInvite = function(p4, p5) --[[ Line: 133 ]]
+		removeInvite = function(p4, p5)
 			-- upvalues: PlaytestersRequestsModule (upval), config (copy), DataCacheModule (copy)
-			return PlaytestersRequestsModule.removePlaytester(p4, p5, config):andThen(function(Result) --[[ Line: 136 ]]
+			return PlaytestersRequestsModule.removePlaytester(p4, p5, config):andThen(function(Result)
 				-- upvalues: DataCacheModule (upval), p4 (copy)
 				DataCacheModule.replaceItem(tostring(p4), Result)
 				

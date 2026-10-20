@@ -38,7 +38,7 @@ local config = {
 }
 
 return {
-	accountSettingsUpsellStringsFn = function(p1) --[[ Line: 53 ]]
+	accountSettingsUpsellStringsFn = function(p1)
 		-- upvalues: ActionTypeEnum (copy), config (copy), AccountSettingsUpsellStrings (copy)
 		local Action = p1.action
 		

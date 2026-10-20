@@ -2,7 +2,7 @@
 local ReactModule = require(Parent.React)
 local UseFocusGuiObjectFunction = require(Parent.ReactFocusNavigation).useFocusGuiObject
 local config = {
-	registered = function(Tbl, p1) --[[ Line: 31 ]]
+	registered = function(Tbl, p1)
 		local Entry = Tbl[p1.name] or {}
 		for _, value in Entry do
 			if value == p1.guiObject then
@@ -16,7 +16,7 @@ local config = {
 		
 		return Copy
 	end,
-	deRegistered = function(Tbl, p2) --[[ Line: 46 ]]
+	deRegistered = function(Tbl, p2)
 		local Entry = Tbl[p2.name]
 		
 		if not Entry or #Entry == 0 then
@@ -43,7 +43,7 @@ local config = {
 	end
 }
 
-local function registryReducer(p3, p4) --[[ Line: 70 ]]
+local function registryReducer(p3, p4)
 	-- upvalues: config (copy)
 	local Entry = config[p4.type]
 	
@@ -57,7 +57,7 @@ end
 local Context = ReactModule.createContext(nil)
 
 return {
-	Provider = function(p3) --[[ Line: 80 ]]
+	Provider = function(p3)
 		-- upvalues: ReactModule (copy), registryReducer (copy), Context (copy)
 		local UseReducerResult, UseReducerResult2 = ReactModule.useReducer(registryReducer, {})
 		
@@ -66,12 +66,12 @@ return {
 		}, p3.children)
 	end,
 	registryContext = Context,
-	useRegisterFocusNavigableSurface = function() --[[ Line: 115 ]]
+	useRegisterFocusNavigableSurface = function()
 		-- upvalues: ReactModule (copy), Context (copy)
 		local UseContextResult = ReactModule.useContext(Context)
 		local Dispatch = if UseContextResult then UseContextResult.dispatch else nil
 		
-		return ReactModule.useCallback(function(Name, GuiObject) --[[ Line: 118 ]]
+		return ReactModule.useCallback(function(Name, GuiObject)
 			-- upvalues: Dispatch (copy)
 			if Dispatch then
 				Dispatch({
@@ -81,12 +81,12 @@ return {
 			end
 		end, { Dispatch })
 	end,
-	useDeRegisterFocusNavigableSurface = function() --[[ Line: 131 ]]
+	useDeRegisterFocusNavigableSurface = function()
 		-- upvalues: ReactModule (copy), Context (copy)
 		local UseContextResult = ReactModule.useContext(Context)
 		local Dispatch = if UseContextResult then UseContextResult.dispatch else nil
 		
-		return ReactModule.useCallback(function(Name, GuiObject) --[[ Line: 134 ]]
+		return ReactModule.useCallback(function(Name, GuiObject)
 			-- upvalues: Dispatch (copy)
 			if Dispatch then
 				Dispatch({
@@ -96,7 +96,7 @@ return {
 			end
 		end, { Dispatch })
 	end,
-	useRegistryEntry = function(p3) --[[ Line: 87 ]]
+	useRegistryEntry = function(p3)
 		-- upvalues: ReactModule (copy), Context (copy)
 		local UseContextResult = ReactModule.useContext(Context)
 		
@@ -108,13 +108,13 @@ return {
 			return if StateEntry == nil or #StateEntry == 0 then nil else StateEntry[#StateEntry]
 		end
 	end,
-	useRegistryEntries = function(p3) --[[ Line: 105 ]]
+	useRegistryEntries = function(p3)
 		-- upvalues: ReactModule (copy), Context (copy)
 		local UseContextResult = ReactModule.useContext(Context)
 		
 		return if UseContextResult == nil then nil else UseContextResult.state[p3]
 	end,
-	useFocusRegistryEntry = function(p3) --[[ Line: 147 ]]
+	useFocusRegistryEntry = function(p3)
 		-- upvalues: UseFocusGuiObjectFunction (copy), ReactModule (copy), Context (copy)
 		local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
 		local UseContextResult = ReactModule.useContext(Context)
@@ -126,7 +126,7 @@ return {
 			local StateEntry = UseContextResult.state[p3]
 			v1 = if StateEntry == nil or #StateEntry == 0 then nil else StateEntry[#StateEntry]
 		end
-		return ReactModule.useCallback(function() --[[ Line: 150 ]]
+		return ReactModule.useCallback(function()
 			-- upvalues: v1 (copy), UseFocusGuiObjectResult (copy)
 			if v1 then
 				UseFocusGuiObjectResult(v1)

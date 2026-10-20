@@ -3,12 +3,12 @@ local ReactModule = require(Parent.React)
 local FetchConversationListPageToSignalsFunction = require(script.Parent.ExpChatConversationListAdapter).fetchConversationListPageToSignals
 local NewResult = require(Parent.ExpChatShared).Logger:new(script.Name)
 
-return function(p1, p2) --[[ Line: 22 | Named "useConversationListPagination" ]]
+return function(p1, p2)
 	-- upvalues: ReactModule (copy), FetchConversationListPageToSignalsFunction (copy), NewResult (copy)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 24 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), p2 (copy), FetchConversationListPageToSignalsFunction (upval), NewResult (upval)
 		if p1 and p2.isFetchingConversations ~= true then
-			FetchConversationListPageToSignalsFunction():catch(function(Err) --[[ Line: 29 ]]
+			FetchConversationListPageToSignalsFunction():catch(function(Err)
 				-- upvalues: NewResult (upval)
 				NewResult:warning(`Failed to retry FriendsChat conversation list fetch: {tostring(Err)}`)
 			end)
@@ -16,14 +16,14 @@ return function(p1, p2) --[[ Line: 22 | Named "useConversationListPagination" ]]
 			return
 		end
 	end, { p1, p2.isFetchingConversations })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 40 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), p2 (copy), FetchConversationListPageToSignalsFunction (upval), NewResult (upval)
 		if not p1 then return end
 		if p2.isFetchingConversations == true or p2.isExhausted == true then return end
 		local NextCursor = p2.nextCursor
 		
 		if NextCursor ~= nil and NextCursor ~= "" then
-			FetchConversationListPageToSignalsFunction({ cursor = NextCursor }):catch(function(Err) --[[ Line: 54 ]]
+			FetchConversationListPageToSignalsFunction({ cursor = NextCursor }):catch(function(Err)
 				-- upvalues: NewResult (upval)
 				NewResult:warning(`Failed to fetch next FriendsChat conversation list page: {tostring(Err)}`)
 			end)
@@ -36,7 +36,7 @@ return function(p1, p2) --[[ Line: 22 | Named "useConversationListPagination" ]]
 		p2.isExhausted,
 		p2.nextCursor
 	})
-	ReactModule.useEffect(function() --[[ Line: 67 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), p2 (copy), FetchConversationListPageToSignalsFunction (upval), NewResult (upval)
 		if not p1 then
 			return nil
@@ -45,7 +45,7 @@ return function(p1, p2) --[[ Line: 22 | Named "useConversationListPagination" ]]
 		elseif p2.hasFetchedInitialPage == true or p2.error ~= nil then
 			return nil
 		else
-			FetchConversationListPageToSignalsFunction():catch(function(Err) --[[ Line: 78 ]]
+			FetchConversationListPageToSignalsFunction():catch(function(Err)
 				-- upvalues: NewResult (upval)
 				NewResult:warning(`Failed to fetch initial FriendsChat conversation list page: {tostring(Err)}`)
 			end)

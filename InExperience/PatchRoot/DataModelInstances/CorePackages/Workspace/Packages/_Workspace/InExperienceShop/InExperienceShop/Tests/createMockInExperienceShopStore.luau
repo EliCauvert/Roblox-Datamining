@@ -6,7 +6,7 @@ local ConstantsModule = require(InExperienceShop.Constants)
 local _ = require(InExperienceShop.Types)
 local _ = require(InExperienceShop.Api.BonusPromotionEligibility)
 
-return function() --[[ Line: 75 | Named "createMockInExperienceShopStore" ]]
+return function()
 	-- upvalues: SignalsModule (copy), ConstantsModule (copy), Jest (copy)
 	local Signal, Signal2 = SignalsModule.createSignal({})
 	local Signal1, Signal2_1 = SignalsModule.createSignal({})
@@ -35,7 +35,7 @@ return function() --[[ Line: 75 | Named "createMockInExperienceShopStore" ]]
 			getShouldOpenToRobuxTab = Signal10,
 			getOpenedFromBuyRobux = Signal11,
 			getPurchasedRobuxAmount = Signal12,
-			dismissRobuxPurchaseSuccess = function() --[[ Line: 111 ]]
+			dismissRobuxPurchaseSuccess = function()
 				-- upvalues: Signal2_11 (copy)
 				Signal2_11(nil)
 			end,

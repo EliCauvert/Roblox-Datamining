@@ -1,6 +1,6 @@
 ﻿local TModule = require(script:FindFirstAncestor("SduiCoreSystem").Parent.t)
 
-return function(p1, p2, p3: boolean) --[[ Line: 11 | Named "validateInterface" ]]
+return function(p1, p2, p3: boolean)
 	-- upvalues: TModule (copy)
 	if p3 == nil then
 		p3 = true

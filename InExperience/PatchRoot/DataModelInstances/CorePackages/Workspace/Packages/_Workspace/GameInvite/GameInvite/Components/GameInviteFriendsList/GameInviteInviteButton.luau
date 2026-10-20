@@ -30,24 +30,24 @@ local config = {
 	[InviteStatus.Pending] = "Feature.SettingsHub.Label.Sending"
 }
 
-return function(p1) --[[ Line: 48 | Named "GameInviteInviteButton" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FriendsMenuModule (copy), FFlagUseSignalsForGameInvitesStatus (copy), SignalsModule (copy), GetGameInvitesStatusStore (copy), UseSignalStateFunction (copy), UseSelectorFunction (copy), GetLocalizedStringsFunction (copy), config (copy), FFlagGameInviteInExpJoinCtaModule (copy), InviteStatus (copy), Button (copy), ButtonVariant (copy), InputSize (copy), FillBehavior (copy), Text (copy), View (copy), SizeConstraint (copy)
 	local UserId = p1.userId
 	local RowNumber = p1.rowNumber
 	local IsFetchingFriends = ReactModule.useContext(FriendsMenuModule.FriendsListContext).isFetchingFriends
 	local InviteSingleFriendFunction = ReactModule.useContext(FriendsMenuModule.InviteFriendContext).inviteSingleFriend
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 53 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: InviteSingleFriendFunction (copy), UserId (copy), RowNumber (copy)
 		InviteSingleFriendFunction(UserId, RowNumber)
 	end, { InviteSingleFriendFunction, UserId, RowNumber })
-	local UseMemoResult = if FFlagUseSignalsForGameInvitesStatus then ReactModule.useMemo(function() --[[ Line: 58 ]]
+	local UseMemoResult = if FFlagUseSignalsForGameInvitesStatus then ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), GetGameInvitesStatusStore (upval), UserId (copy)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 59 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: GetGameInvitesStatusStore (upval), UserId (upval)
 			return GetGameInvitesStatusStore(false).getGameInvitesStatus(p2)[UserId]
 		end)
 	end, { UserId }) else nil
-	local UseSignalStateResult = if FFlagUseSignalsForGameInvitesStatus then UseSignalStateFunction(UseMemoResult) else UseSelectorFunction(function(p2) --[[ Line: 66 ]]
+	local UseSignalStateResult = if FFlagUseSignalsForGameInvitesStatus then UseSignalStateFunction(UseMemoResult) else UseSelectorFunction(function(p2)
 		-- upvalues: UserId (copy)
 		return p2.GameInvitesStatus[UserId]
 	end)

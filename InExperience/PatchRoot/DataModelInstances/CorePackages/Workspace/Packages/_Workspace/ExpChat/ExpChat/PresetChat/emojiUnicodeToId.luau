@@ -1,4 +1,4 @@
-﻿return function(p1): string --[[ Line: 2 | Named "emojiUnicodeToId" ]]
+﻿return function(p1): string
 	local List = {}
 	
 	for _, value in utf8.codes(p1) do

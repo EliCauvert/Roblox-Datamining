@@ -1,7 +1,7 @@
 ﻿local HttpService = game:GetService("HttpService")
 local Url = require(script:FindFirstAncestor("VoiceChat").Parent.Http).Url
 
-return function(Callback, IsUserOptIn, IsOptedInThroughUpsell) --[[ Line: 15 ]]
+return function(Callback, IsUserOptIn, IsOptedInThroughUpsell)
 	-- upvalues: Url (copy), HttpService (copy)
 	assert(type(IsUserOptIn) == "boolean", "UserOptIn request expects isUserOptIn to be a boolean")
 	local Formatted = string.format("%sv1/settings/user-opt-in/", Url.VOICE_URL)

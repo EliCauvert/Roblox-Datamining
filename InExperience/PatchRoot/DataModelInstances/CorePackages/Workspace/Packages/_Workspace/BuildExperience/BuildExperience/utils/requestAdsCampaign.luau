@@ -3,7 +3,7 @@ local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local GetAdsCampaignDeepLinkStoreModule = require(BuildExperience.Stores.GetAdsCampaignDeepLinkStore)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 
-return function(UniverseId) --[[ Line: 6 | Named "requestAdsCampaign" ]]
+return function(UniverseId)
 	-- upvalues: HttpService (copy), GetAdsCampaignDeepLinkStoreModule (copy), SendBuildExperienceEventModule (copy)
 	local Guid = HttpService:GenerateGUID(false)
 	GetAdsCampaignDeepLinkStoreModule(false).begin(Guid, UniverseId)

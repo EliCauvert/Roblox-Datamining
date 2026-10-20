@@ -1,6 +1,6 @@
 ﻿local SharedFlagsModule = require(script:FindFirstAncestor("SduiCoreSystem").Parent.SharedFlags)
 
-local function _() --[[ Line: 13 | Named "isPinShortcutServiceEnabled" ]]
+local function _()
 	return game:GetEngineFeature("PinShortcutServiceEnabled")
 end
 
@@ -11,7 +11,7 @@ return {
 	CAPABILITY_SUPPORTS_EDP_COMMUNITY_SECTION = SharedFlagsModule.FFlagSduiCommunitySectionSupport,
 	CAPABILITY_SUPPORTS_EDP_BUILD_TAG = SharedFlagsModule.FFlagLuaAppEdpShowBuildTag,
 	CAPABILITY_SUPPORTS_OPEN_EXPERIENCE_STORE_SEE_ALL_WITH_WEBVIEW_FALLBACK_ACTION = SharedFlagsModule.FFlagSduiCapabilityDevStoreSeeAllWebviewFallback,
-	CAPABILITY_SUPPORTS_PIN_SHORTCUT_ACTION = (function(): boolean --[[ Line: 17 | Named "isPinShortcutAvailable" ]]
+	CAPABILITY_SUPPORTS_PIN_SHORTCUT_ACTION = (function(): boolean
 		-- upvalues: SharedFlagsModule (copy)
 		if not SharedFlagsModule.FFlagSduiPinShortcutAction then
 			return false
@@ -19,7 +19,7 @@ return {
 			return false
 		else
 			local PinShortcutService = nil
-			pcall(function() --[[ Line: 26 ]]
+			pcall(function()
 				-- upvalues: PinShortcutService (ref)
 				PinShortcutService = game:GetService("PinShortcutService")
 			end)
@@ -27,7 +27,7 @@ return {
 			if PinShortcutService == nil then
 				return false
 			else
-				local Success, Result = pcall(function() --[[ Line: 32 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: PinShortcutService (ref)
 					return PinShortcutService:IsAvailable()
 				end)

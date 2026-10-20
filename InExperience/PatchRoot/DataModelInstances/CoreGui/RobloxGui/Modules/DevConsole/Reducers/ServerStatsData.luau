@@ -1,7 +1,7 @@
 ﻿local ImmutableModule = require(script.Parent.Parent.Immutable)
 local ServerStatsUpdateSearchFilterModule = require(script.Parent.Parent.Actions.ServerStatsUpdateSearchFilter)
 
-return function(p1, p2) --[[ Line: 9 ]]
+return function(p1, p2)
 	-- upvalues: ServerStatsUpdateSearchFilterModule (copy), ImmutableModule (copy)
 	local P0 = p1 or { statsSearchTerm = "" }
 	

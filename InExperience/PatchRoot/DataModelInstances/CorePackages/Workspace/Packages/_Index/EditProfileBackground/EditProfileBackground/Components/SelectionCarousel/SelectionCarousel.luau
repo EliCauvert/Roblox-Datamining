@@ -5,10 +5,10 @@ local View = require(Parent.Foundation).View
 local ProfileBackgroundButtonModule = require(EditProfileBackground.Components.ProfileBackgroundButton)
 local ConstantsModule = require(EditProfileBackground.Common.Constants)
 
-return function(p1) --[[ Line: 19 | Named "SelectionCarousel" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ConstantsModule (copy), ProfileBackgroundButtonModule (copy), View (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(p1.currentBackgroundId or ConstantsModule.BACKGROUND_ASSET_IDS[1])
-	ReactModule.useEffect(function() --[[ Line: 23 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseStateResult2 (copy)
 		if p1.currentBackgroundId then
 			UseStateResult2(p1.currentBackgroundId)
@@ -18,10 +18,10 @@ return function(p1) --[[ Line: 19 | Named "SelectionCarousel" ]]
 	local ButtonsPerRow = p1.buttonsPerRow
 	local NumRows = p1.numRows
 	local ButtonSize = p1.buttonSize
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 38 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2 (copy), p1 (copy)
 		UseStateResult2(p2)
-		task.delay(0.1, function() --[[ Line: 42 ]]
+		task.delay(0.1, function()
 			-- upvalues: p1 (upval), p2 (copy)
 			if p1.onBackgroundSelected then
 				p1.onBackgroundSelected(p2)
@@ -29,7 +29,7 @@ return function(p1) --[[ Line: 19 | Named "SelectionCarousel" ]]
 		end)
 	end, { p1.onBackgroundSelected })
 	
-	local function renderRow(LayoutOrder, Total, ButtonsPerRow) --[[ Line: 49 ]]
+	local function renderRow(LayoutOrder, Total, ButtonsPerRow)
 		-- upvalues: ReactModule (upval), BACKGROUNDASSETIDS (copy), UseStateResult (copy), ProfileBackgroundButtonModule (upval), UseResult (copy), ButtonSize (copy), View (upval), ButtonSize (copy)
 		local List = {}
 		table.insert(List, ReactModule.createElement("UIListLayout", {
@@ -62,7 +62,7 @@ return function(p1) --[[ Line: 19 | Named "SelectionCarousel" ]]
 	return ReactModule.createElement(View, {
 		tag = "bg-surface-0",
 		Size = UDim2.new(1, 0, 0, p1.height)
-	}, (ReactModule.useMemo(function() --[[ Line: 93 ]]
+	}, (ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), View (upval), NumRows (copy), renderRow (copy), ButtonsPerRow (copy)
 		local List = {}
 		table.insert(List, ReactModule.createElement("UIListLayout", {

@@ -4,12 +4,12 @@ local ResponsiveModule = require(Parent.Responsive)
 local SplitPaneEducationalTourStepsModule = require(script.Parent.SplitPaneEducationalTourSteps)
 local GetSplitPaneEducationalTourVideoAssetIdModule = require(script.Parent.getSplitPaneEducationalTourVideoAssetId)
 
-local function getPreloadAssetIds(IsUsePreferredInputResultMatch) --[[ Line: 17 ]]
+local function getPreloadAssetIds(IsUsePreferredInputResultMatch)
 	-- upvalues: SplitPaneEducationalTourStepsModule (copy), GetSplitPaneEducationalTourVideoAssetIdModule (copy)
 	local List = {}
 	local t = {}
 	
-	local function _(Key) --[[ Line: 20 | Named "add" ]]
+	local function _(Key)
 		-- upvalues: t (copy), List (copy)
 		if not t[Key] then
 			t[Key] = true
@@ -36,19 +36,19 @@ local function getPreloadAssetIds(IsUsePreferredInputResultMatch) --[[ Line: 17 
 	return List
 end
 
-return function(p1, p2) --[[ Line: 35 | Named "useSplitPaneEducationalTourVideoPreload" ]]
+return function(p1, p2)
 	-- upvalues: ResponsiveModule (copy), ReactModule (copy), getPreloadAssetIds (copy)
 	local IsUsePreferredInputResultMatch = ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Directional
 	local UseRefResult = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 40 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseRefResult (copy), p2 (copy), getPreloadAssetIds (upval), IsUsePreferredInputResultMatch (copy)
 		if p1 and not UseRefResult.current then
 			UseRefResult.current = true
 			local P3 = p2 or game:GetService("ContentProvider")
 			local PreloadAssetIds = getPreloadAssetIds(IsUsePreferredInputResultMatch)
-			task.spawn(function() --[[ Line: 48 ]]
+			task.spawn(function()
 				-- upvalues: P3 (copy), PreloadAssetIds (copy)
-				pcall(function() --[[ Line: 49 ]]
+				pcall(function()
 					-- upvalues: P3 (upval), PreloadAssetIds (upval)
 					P3:PreloadAsync(PreloadAssetIds)
 				end)

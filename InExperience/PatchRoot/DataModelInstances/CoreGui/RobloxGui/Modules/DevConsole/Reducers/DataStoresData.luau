@@ -1,7 +1,7 @@
 ﻿local ImmutableModule = require(script.Parent.Parent.Immutable)
 local DataStoresUpdateSearchFilterModule = require(script.Parent.Parent.Actions.DataStoresUpdateSearchFilter)
 
-return function(p1, p2) --[[ Line: 9 ]]
+return function(p1, p2)
 	-- upvalues: DataStoresUpdateSearchFilterModule (copy), ImmutableModule (copy)
 	local P0 = p1 or { storesSearchTerm = "" }
 	

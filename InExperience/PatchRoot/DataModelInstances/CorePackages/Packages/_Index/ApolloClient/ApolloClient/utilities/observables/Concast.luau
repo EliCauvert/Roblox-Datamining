@@ -10,7 +10,7 @@ local Observable = require(script.Parent.Observable).Observable
 local IterateObserversSafelyFunction = require(script.Parent.iteration).iterateObserversSafely
 local FixObservableSubclassFunction: (any) -> () = require(script.Parent.subclassing).fixObservableSubclass
 
-local function _(p1): boolean --[[ Line: 50 | Named "isPromiseLike" ]]
+local function _(p1): boolean
 	-- upvalues: Boolean (copy)
 	return Boolean.toJSBoolean(p1) and typeof(p1.andThen) == "function"
 end
@@ -18,14 +18,14 @@ end
 local self = setmetatable({}, { __index = Observable })
 self.__index = self
 
-function self.new(Promise) --[[ Line: 125 ]]
+function self.new(Promise)
 	-- upvalues: Observable (copy), self (copy), Set (copy), Sub (copy), PromiseModule (copy), IterateObserversSafelyFunction (copy), Boolean (copy)
 	local v1 = nil
-	v1 = setmetatable(Observable.new(function(p1) --[[ Line: 129 ]]
+	v1 = setmetatable(Observable.new(function(p1)
 		-- upvalues: v1 (ref)
 		v1:addObserver(p1)
 		
-		return function() --[[ Line: 131 ]]
+		return function()
 			-- upvalues: v1 (upval), p1 (copy)
 			return v1:removeObserver(p1)
 		end
@@ -35,33 +35,33 @@ function self.new(Promise) --[[ Line: 125 ]]
 	v1.source = {}
 	v1.latest = nil
 	v1.addCount = 0
-	v1.promise = PromiseModule.new(function(Callback, Callback1) --[[ Line: 163 ]]
+	v1.promise = PromiseModule.new(function(Callback, Callback1)
 		-- upvalues: v1 (ref)
-		function v1:resolve(...) --[[ Line: 164 ]]
+		function v1:resolve(...)
 			-- upvalues: Callback (copy)
 			Callback(...)
 		end
 		
-		function v1:reject(...) --[[ Line: 167 ]]
+		function v1:reject(...)
 			-- upvalues: Callback1 (copy)
 			Callback1(...)
 		end
 	end)
 	v1.handlers = {
-		next = function(_, p1) --[[ Line: 175 ]]
+		next = function(_, p1)
 			-- upvalues: v1 (ref), IterateObserversSafelyFunction (upval)
 			if v1.sub ~= nil then
 				v1.latest = { "next", p1 }
 				IterateObserversSafelyFunction(v1.observers, "next", p1)
 			end
 		end,
-		error = function(_, p1) --[[ Line: 181 ]]
+		error = function(_, p1)
 			-- upvalues: v1 (ref), Boolean (upval), PromiseModule (upval), IterateObserversSafelyFunction (upval)
 			local Sub = v1.sub
 			
 			if Sub ~= nil then
 				if Boolean.toJSBoolean(Sub) then
-					PromiseModule.delay(0):andThen(function() --[[ Line: 188 ]]
+					PromiseModule.delay(0):andThen(function()
 						-- upvalues: Sub (copy)
 						return Sub:unsubscribe()
 					end)
@@ -72,7 +72,7 @@ function self.new(Promise) --[[ Line: 125 ]]
 				IterateObserversSafelyFunction(v1.observers, "error", p1)
 			end
 		end,
-		complete = function(_) --[[ Line: 198 ]]
+		complete = function(_)
 			-- upvalues: v1 (ref), Boolean (upval), IterateObserversSafelyFunction (upval)
 			if v1.sub ~= nil then
 				local Removed = table.remove(v1.sources, 1)
@@ -89,7 +89,7 @@ function self.new(Promise) --[[ Line: 125 ]]
 					
 					return
 				elseif Boolean.toJSBoolean(Removed) and typeof(Removed.andThen) == "function" then
-					Removed:andThen(function(Result) --[[ Line: 216 ]]
+					Removed:andThen(function(Result)
 						-- upvalues: v1 (upval)
 						v1.sub = Result:subscribe(v1.handlers)
 					end)
@@ -102,23 +102,23 @@ function self.new(Promise) --[[ Line: 125 ]]
 		end
 	}
 	
-	function v1:cancel(p1) --[[ Line: 227 ]]
+	function v1:cancel(p1)
 		-- upvalues: v1 (ref)
 		v1:reject(p1)
 		v1.sources = {}
 		v1.handlers:complete()
 	end
 	
-	v1.promise:catch(function() --[[ Line: 236 ]] end)
+	v1.promise:catch(function() end)
 	
 	if typeof(Promise) == "function" then
 		Promise = { Observable.new(Promise) }
 	end
 	if Boolean.toJSBoolean(Promise) and typeof(Promise.andThen) == "function" then
-		Promise:andThen(function(Result) --[[ Line: 246 ]]
+		Promise:andThen(function(Result)
 			-- upvalues: v1 (ref)
 			v1:start(Result)
-		end, function(...) --[[ Line: 248 ]]
+		end, function(...)
 			-- upvalues: v1 (ref)
 			v1.handlers:error(...)
 		end)
@@ -128,7 +128,7 @@ function self.new(Promise) --[[ Line: 125 ]]
 	return v1
 end
 
-function self:start(Promise) --[[ Line: 261 ]]
+function self:start(Promise)
 	-- upvalues: Sub (copy), Array (copy)
 	if self.sub == Sub then
 		self.sources = Array.from(Promise)
@@ -138,7 +138,7 @@ function self:start(Promise) --[[ Line: 261 ]]
 	end
 end
 
-function self:deliverLastMessage(p1) --[[ Line: 278 ]]
+function self:deliverLastMessage(p1)
 	-- upvalues: Boolean (copy)
 	if Boolean.toJSBoolean(self.latest) then
 		local LatestEntry = self.latest[1]
@@ -153,7 +153,7 @@ function self:deliverLastMessage(p1) --[[ Line: 278 ]]
 	end
 end
 
-function self:addObserver(p1) --[[ Line: 296 ]]
+function self:addObserver(p1)
 	if not self.observers:has(p1) then
 		self:deliverLastMessage(p1)
 		self.observers:add(p1)
@@ -161,7 +161,7 @@ function self:addObserver(p1) --[[ Line: 296 ]]
 	end
 end
 
-function self:removeObserver(p1, p2) --[[ Line: 306 ]]
+function self:removeObserver(p1, p2)
 	-- upvalues: Error (copy)
 	if self.observers:delete(p1) then
 		self.addCount -= 1
@@ -172,11 +172,11 @@ function self:removeObserver(p1, p2) --[[ Line: 306 ]]
 	end
 end
 
-function self:cleanup(Callback) --[[ Line: 322 ]]
+function self:cleanup(Callback)
 	local Flag = false
 	local v1 = nil
 	
-	local function once() --[[ Line: 325 ]]
+	local function once()
 		-- upvalues: Flag (ref), self (copy), v1 (ref), Callback (copy)
 		if not Flag then
 			Flag = true
@@ -191,12 +191,12 @@ function self:cleanup(Callback) --[[ Line: 322 ]]
 	self.addCount = AddCount
 end
 
-function self.of(...) --[[ Line: 345 ]]
+function self.of(...)
 	-- upvalues: Observable (copy), self (copy)
 	return Observable.of(self, ...)
 end
 
-function self.from(...) --[[ Line: 349 ]]
+function self.from(...)
 	-- upvalues: Observable (copy), self (copy)
 	return Observable.from(self, ...)
 end

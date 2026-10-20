@@ -4,7 +4,7 @@ local UseViewportBoundsFunction = require(Parent.ViewportUtils).useViewportBound
 local SponsoredAdViewabilityDetectorModule = require(script.Parent.SponsoredAdViewabilityDetector)
 local SponsoredAdViewabilityTelemetryModule = require(script.Parent.sponsoredAdViewabilityTelemetry)
 
-return function(p1, Current, AppLifecycleObserverService) --[[ Line: 16 | Named "useSponsoredAdViewabilityDetector" ]]
+return function(p1, Current, AppLifecycleObserverService)
 	-- upvalues: UseViewportBoundsFunction (copy), ReactModule (copy), SponsoredAdViewabilityDetectorModule (copy), SponsoredAdViewabilityTelemetryModule (copy)
 	local UseViewportBoundsResult = UseViewportBoundsFunction()
 	local UseRefResult = ReactModule.useRef(nil)
@@ -17,7 +17,7 @@ return function(p1, Current, AppLifecycleObserverService) --[[ Line: 16 | Named 
 			onUnload = SponsoredAdViewabilityTelemetryModule.logSponsoredAdUnload
 		})
 	end
-	ReactModule.useEffect(function() --[[ Line: 34 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseViewportBoundsResult (copy)
 		local Current = UseRefResult.current
 		
@@ -25,7 +25,7 @@ return function(p1, Current, AppLifecycleObserverService) --[[ Line: 16 | Named 
 			Current:setViewportBounds(UseViewportBoundsResult)
 		end
 	end, { UseViewportBoundsResult })
-	ReactModule.useEffect(function() --[[ Line: 44 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), p1 (copy)
 		local Current = UseRefResult.current
 		
@@ -35,29 +35,29 @@ return function(p1, Current, AppLifecycleObserverService) --[[ Line: 16 | Named 
 		if p1 == nil then return end
 		Current:start()
 		
-		return function() --[[ Line: 57 ]]
+		return function()
 			-- upvalues: Current (copy)
 			Current:reset()
 		end
 	end, { p1 })
-	ReactModule.useEffect(function() --[[ Line: 62 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: AppLifecycleObserverService (copy), UseRefResult (copy)
 		if AppLifecycleObserverService == nil then return end
 		local Current = UseRefResult.current
 		
 		if Current == nil then return end
 		local Connections = {
-			AppLifecycleObserverService.OnHide:Connect(function() --[[ Line: 72 ]]
+			AppLifecycleObserverService.OnHide:Connect(function()
 				-- upvalues: Current (copy)
 				Current:pause()
 			end),
-			AppLifecycleObserverService.OnUnhide:Connect(function() --[[ Line: 75 ]]
+			AppLifecycleObserverService.OnUnhide:Connect(function()
 				-- upvalues: Current (copy)
 				Current:resume()
 			end)
 		}
 		
-		return function() --[[ Line: 79 ]]
+		return function()
 			-- upvalues: Connections (copy)
 			for _, connection in Connections do
 				connection:Disconnect()
@@ -65,7 +65,7 @@ return function(p1, Current, AppLifecycleObserverService) --[[ Line: 16 | Named 
 		end
 	end, { AppLifecycleObserverService })
 	local UseRefResult1 = ReactModule.useRef(Current)
-	ReactModule.useEffect(function() --[[ Line: 90 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), Current (copy)
 		local Current1 = UseRefResult.current
 		local Current2 = UseRefResult1.current

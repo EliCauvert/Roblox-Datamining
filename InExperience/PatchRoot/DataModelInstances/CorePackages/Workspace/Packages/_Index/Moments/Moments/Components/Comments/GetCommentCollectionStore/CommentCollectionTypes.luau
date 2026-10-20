@@ -7,10 +7,10 @@ return {
 		Success = "Success",
 		Failed = "Failed"
 	},
-	pendingSentinel = function(p1): string --[[ Line: 55 ]]
+	pendingSentinel = function(p1): string
 		return `pending:{p1}`
 	end,
-	isPendingSentinel = function(Text: string): boolean --[[ Line: 59 ]]
+	isPendingSentinel = function(Text: string): boolean
 		return string.sub(Text, 1, 8) == "pending:"
 	end
 }

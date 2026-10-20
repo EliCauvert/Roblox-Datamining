@@ -6,14 +6,14 @@ local Invariant = require(Parent.jsutils.invariant).invariant
 local _ = require(script.Parent.Parent.Parent.utilities)
 
 return {
-	toPromise = function(p1) --[[ Line: 23 ]]
+	toPromise = function(p1)
 		-- upvalues: PromiseModule (copy), Invariant (copy)
 		local Flag = false
 		
-		return PromiseModule.new(function(Callback, Callback1) --[[ Line: 25 ]]
+		return PromiseModule.new(function(Callback, Callback1)
 			-- upvalues: p1 (copy), Flag (ref), Invariant (upval)
 			p1:subscribe({
-				next = function(_, p2) --[[ Line: 27 ]]
+				next = function(_, p2)
 					-- upvalues: Flag (upval), Invariant (upval), Callback (copy)
 					if Flag then
 						Invariant.warn("Promise Wrapper does not support multiple results from Observable")
@@ -24,12 +24,12 @@ return {
 						Callback(p2)
 					end
 				end,
-				error = function(_, p2) --[[ Line: 35 ]]
+				error = function(_, p2)
 					-- upvalues: Callback1 (copy)
 					Callback1(p2)
 				end
 			})
-		end):andThen(function(Result) --[[ Line: 41 ]]
+		end):andThen(function(Result)
 			-- upvalues: PromiseModule (upval)
 			return PromiseModule.delay(0):andThenReturn(Result)
 		end)

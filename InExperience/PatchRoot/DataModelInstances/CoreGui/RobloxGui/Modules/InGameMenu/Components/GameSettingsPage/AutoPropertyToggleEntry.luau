@@ -26,7 +26,7 @@ AutoPropertyToggleEntry.defaultProps = {
 	subtextKey = ""
 }
 
-function AutoPropertyToggleEntry.init(p1, DefaultProps) --[[ Line: 37 ]]
+function AutoPropertyToggleEntry.init(p1, DefaultProps)
 	-- upvalues: SendAnalyticsModule (copy), ConstantsModule (copy)
 	local DefaultPropsInstanceEntry = DefaultProps.instance[DefaultProps.valueKey]
 	p1.changeEvent = DefaultProps.instance:GetPropertyChangedSignal(DefaultProps.valueKey)
@@ -34,14 +34,14 @@ function AutoPropertyToggleEntry.init(p1, DefaultProps) --[[ Line: 37 ]]
 		checked = not DefaultProps.lockedToOff and DefaultPropsInstanceEntry == DefaultProps.onValue
 	})
 	
-	function p1.onExternalChange() --[[ Line: 45 ]]
+	function p1.onExternalChange()
 		-- upvalues: DefaultProps (copy), p1 (copy)
 		p1:setState({
 			checked = DefaultProps.instance[DefaultProps.valueKey] == DefaultProps.onValue
 		})
 	end
 	
-	function p1.onToggled() --[[ Line: 52 ]]
+	function p1.onToggled()
 		-- upvalues: p1 (copy), DefaultProps (copy), SendAnalyticsModule (upval), ConstantsModule (upval)
 		if p1.props.lockedToOff then return end
 		if DefaultProps.instance[DefaultProps.valueKey] == DefaultProps.onValue then
@@ -53,7 +53,7 @@ function AutoPropertyToggleEntry.init(p1, DefaultProps) --[[ Line: 37 ]]
 	end
 end
 
-function AutoPropertyToggleEntry.render(p1) --[[ Line: 69 ]]
+function AutoPropertyToggleEntry.render(p1)
 	-- upvalues: Roact (copy), ToggleEntryModule (copy), ExternalEventConnectionModule (copy)
 	local Props = p1.props
 	

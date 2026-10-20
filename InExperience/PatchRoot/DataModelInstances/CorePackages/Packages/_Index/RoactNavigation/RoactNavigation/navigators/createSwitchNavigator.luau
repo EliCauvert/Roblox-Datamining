@@ -3,7 +3,7 @@ local CreateNavigatorModule = require(script.Parent.createNavigator)
 local SwitchRouterModule = require(Parent.routers.SwitchRouter)
 local SwitchViewModule = require(Parent.views.SwitchView.SwitchView)
 
-return function(p1, p2) --[[ Line: 7 ]]
+return function(p1, p2)
 	-- upvalues: SwitchRouterModule (copy), CreateNavigatorModule (copy), SwitchViewModule (copy)
 	if p2 == nil then
 		p2 = {}

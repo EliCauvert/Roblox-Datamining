@@ -1,6 +1,6 @@
 ﻿local RecyclableViewRegistryModule = require(script:FindFirstAncestor("ViewRecyclerReact").ReactAdapter.Private.RecyclableViewRegistry)
 
-return function(p1) --[[ Line: 11 | Named "createPinnedItem" ]]
+return function(p1)
 	-- upvalues: RecyclableViewRegistryModule (copy)
 	assert(p1.key ~= "", "createPinnedItem: `key` must not be empty")
 	assert(RecyclableViewRegistryModule.isRegistered(p1.itemType), "createPinnedItem: `itemType` must be a Recyclable view type")

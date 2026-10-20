@@ -3,14 +3,14 @@ local ReactModule = require(Parent.React)
 local DashModule = require(Parent.Dash)
 local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 
-return function(Tbl) --[[ Line: 23 | Named "FlexLayout" ]]
+return function(Tbl)
 	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy), DashModule (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local Margin = if Tbl.flexSlot and Tbl.rigidSlot then Tbl.margin or UseDesignTokensResult.Size.Size_400 else 0
 	local FlexDirection = Tbl.flexDirection or Enum.FillDirection.Horizontal
 	local Reverse = Tbl.reverse or false
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.new(0, 0))
-	local UseResult = ReactModule.useCallback(function(Vector): UDim2 --[[ Line: 31 ]]
+	local UseResult = ReactModule.useCallback(function(Vector): UDim2
 		-- upvalues: FlexDirection (copy), Margin (copy)
 		return if FlexDirection == Enum.FillDirection.Horizontal then UDim2.new(1, -(Vector.X + Margin), 1, 0) else UDim2.new(1, 0, 1, -(Vector.Y + Margin))
 	end, { FlexDirection, Margin })
@@ -51,7 +51,7 @@ return function(Tbl) --[[ Line: 23 | Named "FlexLayout" ]]
 			BorderSizePixel = 0,
 			Size = if FlexDirection == Enum.FillDirection.Horizontal then UDim2.new(0, 0, 1, 0) else UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.XY,
-			[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 90 ]]
+			[ReactModule.Change.AbsoluteSize] = function(Frame)
 				-- upvalues: UseBindingResult2 (copy)
 				UseBindingResult2(Frame.AbsoluteSize)
 			end

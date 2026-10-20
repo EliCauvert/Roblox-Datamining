@@ -4,7 +4,7 @@ local GuiService = game:GetService("GuiService")
 local UserInputService = game:GetService("UserInputService")
 local ReactModule = require(Parent.React)
 
-local function computeGuiInset() --[[ Line: 17 ]]
+local function computeGuiInset()
 	-- upvalues: SharedFlagsModule (copy), GuiService (copy), UserInputService (copy)
 	local FFlagLuaAppSupportDeviceSafeInsets = SharedFlagsModule.FFlagLuaAppUseDeviceSafeInsetsForAppContainer and SharedFlagsModule.FFlagLuaAppSupportDeviceSafeInsets
 	local GuiInset, GuiInset2 = GuiService:GetGuiInset()
@@ -20,12 +20,12 @@ local function computeGuiInset() --[[ Line: 17 ]]
 end
 
 return {
-	useGuiInset = function() --[[ Line: 32 ]]
+	useGuiInset = function()
 		-- upvalues: ReactModule (copy), computeGuiInset (copy), GuiService (copy), UserInputService (copy)
 		local UseStateResult, UseStateResult2 = ReactModule.useState(computeGuiInset)
-		ReactModule.useEffect(function() --[[ Line: 35 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseStateResult2 (copy), computeGuiInset (upval), GuiService (upval), UserInputService (upval)
-			local function updateGuiInset() --[[ Line: 36 ]]
+			local function updateGuiInset()
 				-- upvalues: UseStateResult2 (upval), computeGuiInset (upval)
 				UseStateResult2((computeGuiInset()))
 			end
@@ -37,7 +37,7 @@ return {
 				UserInputService:GetPropertyChangedSignal("RightBarSize"):Connect(updateGuiInset)
 			}
 			
-			return function() --[[ Line: 47 ]]
+			return function()
 				-- upvalues: Connections (copy)
 				for _, connection in Connections do
 					connection:Disconnect()

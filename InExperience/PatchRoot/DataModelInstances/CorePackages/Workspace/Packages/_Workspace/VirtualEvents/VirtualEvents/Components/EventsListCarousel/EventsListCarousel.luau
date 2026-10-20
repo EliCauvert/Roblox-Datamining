@@ -19,17 +19,17 @@ local UseEffectFunction = ReactModule.useEffect
 local FFlagLuaAppSduiEventDetailsEnabled = require(VirtualEvents.Parent.SharedFlags).FFlagLuaAppSduiEventDetailsEnabled
 local FFlagLuaAppGameViewTileBackgroundColorOverride = require(VirtualEvents.Parent.SharedFlags).FFlagLuaAppGameViewTileBackgroundColorOverride
 
-return function(p1) --[[ Line: 51 ]]
+return function(p1)
 	-- upvalues: UseTextSizeOffsetFunction (copy), UseDesignTokensFunction (copy), ResponsiveModule (copy), ReactModule (copy), HttpService (copy), FFlagLuaAppGameViewTileBackgroundColorOverride (copy), UseCallbackFunction (copy), EventTileModule (copy), FFlagLuaAppSduiEventDetailsEnabled (copy), UseGetGameTileHeightFunction (copy), UseLocalizationFunction (copy), SortEventsByStartDateModule (copy), DiscoveryEventErrorLogger (copy), UseCollectionImpressionsSignalFunction (copy), UseEffectFunction (copy), CollectionCarousel (copy), FrameBoundsImpressionsTracker (copy)
 	local UseTextSizeOffsetResult = UseTextSizeOffsetFunction()
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local IsUsePreferredInputResultMatch = ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Directional
-	local UseMemoResult = ReactModule.useMemo(function(): string --[[ Line: 56 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): string
 		-- upvalues: p1 (copy), HttpService (upval)
 		return `EventsListCarousel_{p1.universeId}{HttpService:GenerateGUID()}`
 	end, { p1.universeId })
 	local Surface200 = if FFlagLuaAppGameViewTileBackgroundColorOverride and p1.peekViewFormat then UseDesignTokensResult.Color.Surface.Surface_200 else nil
-	local UseCallbackResult = UseCallbackFunction(function(Event, LayoutOrder, Size, _) --[[ Line: 68 ]]
+	local UseCallbackResult = UseCallbackFunction(function(Event, LayoutOrder, Size, _)
 		-- upvalues: ReactModule (upval), EventTileModule (upval), p1 (copy), Surface200 (copy), UseMemoResult (copy), IsUsePreferredInputResultMatch (copy), FFlagLuaAppSduiEventDetailsEnabled (upval)
 		return ReactModule.createElement(EventTileModule, {
 			Event = Event,
@@ -54,7 +54,7 @@ return function(p1) --[[ Line: 51 ]]
 	local UseLocalizationResult = UseLocalizationFunction({ title = "Feature.VirtualEvents.EventsListTitle" })
 	local SortEventsByStartDateModuleResult = SortEventsByStartDateModule(p1.virtualEvents)
 	local UseRefResult = ReactModule.useRef({})
-	local UseCallbackResult1 = UseCallbackFunction(function(Indexes) --[[ Line: 117 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function(Indexes)
 		-- upvalues: SortEventsByStartDateModuleResult (copy), UseRefResult (copy), p1 (copy), DiscoveryEventErrorLogger (upval)
 		for _, index in Indexes do
 			local SortEventsByStartDateModuleResultEntry = SortEventsByStartDateModuleResult[index]
@@ -74,7 +74,7 @@ return function(p1) --[[ Line: 51 ]]
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseCollectionImpressionsSignalResult, UseCollectionImpressionsSignalResult2 = UseCollectionImpressionsSignalFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(os.clock())
-	UseEffectFunction(function() --[[ Line: 148 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(os.clock())
 	end, { p1.virtualEvents })

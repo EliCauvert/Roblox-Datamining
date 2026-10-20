@@ -35,7 +35,7 @@ local FFlagSduiOptionSelectorHeaderComponent = SharedFlagsModule.FFlagSduiOption
 local FFlagSduiOptionSelectorAnchorTag = SharedFlagsModule.FFlagSduiOptionSelectorAnchorTag
 local t = {}
 
-return ReactModule.memo(function(p1) --[[ Line: 102 | Named "SduiVariableItemWidthCarousel" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FFlagLuaAppCompositionAlways (copy), t (copy), UseTokensFunction (copy), ReactModule (copy), FFlagLuaAppLayoutParamsInContext (copy), SignalsReactModule (copy), UseCollectionLayoutParamsFunction (copy), FindAnalyticsFieldFunction (copy), SduiBuilder (copy), SduiComponentType (copy), UseCollectionAnalyticsContextFunction (copy), UseCollectionImpressionsSignalFunction (copy), GetImpressionsTagModule (copy), SduiParseHelpers (copy), SduiErrors (copy), ReportUnifiedLoggingImpressionsFunction (copy), UseScrollTelemetryCallbackModule (copy), SduiCollectionAnalyticsBuilder (copy), GetSduiComponentWrapperFunction (copy), SduiCollectionItemModule (copy), FFlagSduiOptionSelectorAnchorTag (copy), VariableItemWidthCarousel (copy), FFlagSduiOptionSelectorHeaderComponent (copy), WaitForPropWrapper (copy), FFlagLuaAppUseFrameBoundsImpressions (copy), FrameBoundsImpressionsTracker (copy), ScreenSizeImpressionsTracker (copy), FFlagLuaAppRespectClipAncestorImpressions (copy), ScrollDetector (copy)
 	local SduiContext = p1.sduiContext
 	local FFlagLuaAppCompositionAlways1 = FFlagLuaAppCompositionAlways or (p1.appCompositionEnabled or SduiContext.appCompositionEnabled)
@@ -46,7 +46,7 @@ return ReactModule.memo(function(p1) --[[ Line: 102 | Named "SduiVariableItemWid
 	local ItemPadding = p1.itemPadding or UseTokensResult.Padding.XSmall
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local config = { sideMargin = p1.pageSideMargin }
-	local UseSignalStateResult = if FFlagLuaAppCompositionAlways then nil elseif FFlagLuaAppLayoutParamsInContext then SignalsReactModule.useSignalState((ReactModule.useCallback(function(p2) --[[ Line: 128 ]]
+	local UseSignalStateResult = if FFlagLuaAppCompositionAlways then nil elseif FFlagLuaAppLayoutParamsInContext then SignalsReactModule.useSignalState((ReactModule.useCallback(function(p2)
 		-- upvalues: SduiContext (copy)
 		return SduiContext.getPageLayoutConfig("Small")(p2)
 	end, { SduiContext.getPageLayoutConfig }))) else UseCollectionLayoutParamsFunction("Small", UseStateResult, false, config)
@@ -57,12 +57,12 @@ return ReactModule.memo(function(p1) --[[ Line: 102 | Named "SduiVariableItemWid
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseCollectionImpressionsSignalResult, UseCollectionImpressionsSignalResult2 = UseCollectionImpressionsSignalFunction(p1.scrollViewPositionChangedSignal)
 	local ImpressionsTagModule = GetImpressionsTagModule(p1.index, UseCollectionAnalyticsContextResult2.current, SduiContext, p1.debugName)
-	local UseResult = ReactModule.useCallback(function(p2, Frame) --[[ Line: 168 ]]
+	local UseResult = ReactModule.useCallback(function(p2, Frame)
 		-- upvalues: UseStateResult2_1 (copy)
 		local X: number = Frame.AbsoluteSize.X
 		
 		if X > 0 then
-			UseStateResult2_1(function(Tbl) --[[ Line: 175 ]]
+			UseStateResult2_1(function(Tbl)
 				-- upvalues: p2 (copy), X (copy)
 				if Tbl[p2] == X then
 					return Tbl
@@ -86,7 +86,7 @@ return ReactModule.memo(function(p1) --[[ Line: 102 | Named "SduiVariableItemWid
 			title = p1.title or "",
 			subtitle = p1.subtitle,
 			headerComponent = if FFlagSduiOptionSelectorHeaderComponent then p1.headerComponent else nil,
-			calculateItemWidth = ReactModule.useCallback(function(p2) --[[ Line: 186 ]]
+			calculateItemWidth = ReactModule.useCallback(function(p2)
 				-- upvalues: UseStateResult1 (copy)
 				return UseStateResult1[p2] or 0
 			end, { UseStateResult1 }),
@@ -96,7 +96,7 @@ return ReactModule.memo(function(p1) --[[ Line: 102 | Named "SduiVariableItemWid
 			itemHeight = ItemHeight,
 			itemPadding = ItemPadding,
 			onCanvasPositionChanged = UseCollectionImpressionsSignalResult2,
-			renderItem = ReactModule.useCallback(function(ComponentConfig, Index) --[[ Line: 232 ]]
+			renderItem = ReactModule.useCallback(function(ComponentConfig, Index)
 				-- upvalues: SduiContext (copy), SduiErrors (upval), ImpressionsTagModule (copy), ReactModule (upval), FindAnalyticsFieldFunction (upval), t (upval), SduiBuilder (upval), UseRefResult (copy), SduiCollectionAnalyticsBuilder (upval), GetSduiComponentWrapperFunction (upval), UseCollectionAnalyticsContextResult (copy), p1 (copy), SduiCollectionItemModule (upval), ItemHeight (copy), UseResult (copy), FFlagSduiOptionSelectorAnchorTag (upval)
 				if not ComponentConfig then
 					SduiContext.dependencies.logger.reportError(SduiErrors.SduiErrorType.NilItem, {
@@ -165,7 +165,7 @@ return ReactModule.memo(function(p1) --[[ Line: 102 | Named "SduiVariableItemWid
 				pageContext = SduiContext.routeName or SduiContext.appPage,
 				impressionsTag = ImpressionsTagModule,
 				scrollViewPositionChangedSignal = UseCollectionImpressionsSignalResult,
-				sendImpressions = ReactModule.useCallback(function(List) --[[ Line: 191 ]]
+				sendImpressions = ReactModule.useCallback(function(List)
 					-- upvalues: CountItems (copy), UseCollectionAnalyticsContextResult (copy), SduiParseHelpers (upval), SduiContext (copy), SduiErrors (upval), ImpressionsTagModule (copy), ReportUnifiedLoggingImpressionsFunction (upval), UseRefResult (copy), UseCollectionAnalyticsContextResult2 (copy), p1 (copy)
 					if CountItems ~= 0 then
 						ReportUnifiedLoggingImpressionsFunction(SduiContext, List, UseRefResult.current, UseCollectionAnalyticsContextResult2.current, p1.startRow, p1.impressionEventName, p1.skipItemImpressionsLog)

@@ -9,7 +9,7 @@ local config = {
 }
 
 return {
-	logDecisionPublished = function(Trigger, ApplySharingFilter) --[[ Line: 33 ]]
+	logDecisionPublished = function(Trigger, ApplySharingFilter)
 		-- upvalues: TelemetryService (copy), config (copy), StandardizedFields (copy)
 		TelemetryService:LogCounter(config, {
 			standardizedFields = StandardizedFields,

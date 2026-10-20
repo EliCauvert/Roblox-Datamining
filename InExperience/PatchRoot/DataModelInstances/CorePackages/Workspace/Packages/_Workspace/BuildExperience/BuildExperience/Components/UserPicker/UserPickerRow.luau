@@ -13,7 +13,7 @@ local AccessoryType = FoundationModule.Enums.AccessoryType
 local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 
-return function(p1) --[[ Line: 36 | Named "UserPickerRow" ]]
+return function(p1)
 	-- upvalues: UseUserProfileInfoModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseTokensFunction (copy), ReactModule (copy), Icon (copy), IconName (copy), IconSize (copy), List (copy), AccessoryType (copy), View (copy)
 	local UseUserProfileInfoModuleResult = UseUserProfileInfoModule(p1.userId)
 	local UseLocalizationResult = UseLocalizationFunction({

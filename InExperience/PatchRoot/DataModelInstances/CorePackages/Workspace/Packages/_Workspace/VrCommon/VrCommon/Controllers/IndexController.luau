@@ -5,7 +5,7 @@ local Scale: vector = if OpenXrForWin32EngineFeature then vector.create(3.400000
 local IndexController = {}
 IndexController.__index = IndexController
 
-function IndexController.new(UserCFrame) --[[ Line: 15 ]]
+function IndexController.new(UserCFrame)
 	-- upvalues: IndexController (copy), CreateFunction (copy), Granite (copy), Scale (copy)
 	local self = setmetatable({}, IndexController)
 	self.userCFrame = UserCFrame
@@ -52,7 +52,7 @@ function IndexController.new(UserCFrame) --[[ Line: 15 ]]
 	return self
 end
 
-function IndexController:setCFrame(p1) --[[ Line: 70 ]]
+function IndexController:setCFrame(p1)
 	-- upvalues: OpenXrForWin32EngineFeature (copy)
 	if OpenXrForWin32EngineFeature then
 		if self.userCFrame == Enum.UserCFrame.RightHand then
@@ -73,7 +73,7 @@ function IndexController:setCFrame(p1) --[[ Line: 70 ]]
 	end
 end
 
-function IndexController:setCFrameAndScale(p1, p2: number) --[[ Line: 94 ]]
+function IndexController:setCFrameAndScale(p1, p2: number)
 	-- upvalues: OpenXrForWin32EngineFeature (copy), Scale (copy)
 	local v1: number = if self.userCFrame == Enum.UserCFrame.RightHand then 1 else -1
 	
@@ -85,18 +85,18 @@ function IndexController:setCFrameAndScale(p1, p2: number) --[[ Line: 94 ]]
 	self.mesh.Scale = Scale * p2
 end
 
-function IndexController:onButtonInputChanged(_, _) --[[ Line: 112 ]] end
+function IndexController:onButtonInputChanged(_, _) end
 
-function IndexController:onInputBegan(p1) --[[ Line: 114 ]]
+function IndexController:onInputBegan(p1)
 	self:onButtonInputChanged(p1, true)
 end
 
-function IndexController:onInputChanged(_) --[[ Line: 118 ]] end
+function IndexController:onInputChanged(_) end
 
-function IndexController:onInputEnded(p1) --[[ Line: 120 ]]
+function IndexController:onInputEnded(p1)
 	self:onButtonInputChanged(p1, false)
 end
 
-function IndexController:onTouchpadModeChanged(_, _) --[[ Line: 124 ]] end
+function IndexController:onTouchpadModeChanged(_, _) end
 
 return IndexController

@@ -1,11 +1,11 @@
-﻿local function pack(...) --[[ Line: 12 ]]
+﻿local function pack(...)
 	return select("#", ...), { ... }
 end
 
-local function wpcallPacked(Callback, ...) --[[ Line: 25 ]]
+local function wpcallPacked(Callback, ...)
 	-- upvalues: pack (copy)
 	local PackResult, PackResult2 = pack(...)
-	local PackResult1, PackResult2_1 = pack(xpcall(function() --[[ Line: 28 ]]
+	local PackResult1, PackResult2_1 = pack(xpcall(function()
 		-- upvalues: Callback (copy), PackResult2 (copy), PackResult (copy)
 		return Callback(unpack(PackResult2, 1, PackResult))
 	end, debug.traceback))
@@ -13,9 +13,9 @@ local function wpcallPacked(Callback, ...) --[[ Line: 25 ]]
 	return PackResult1, PackResult2_1
 end
 
-local function _(p1, p2, p3) --[[ Line: 48 | Named "createAdvancer" ]]
+local function _(p1, p2, p3)
 	-- upvalues: wpcallPacked (copy)
-	return function(...) --[[ Line: 49 ]]
+	return function(...)
 		-- upvalues: wpcallPacked (upval), p1 (copy), p2 (copy), p3 (copy)
 		local v1, v2 = wpcallPacked(p1, ...)
 		
@@ -29,7 +29,7 @@ local function _(p1, p2, p3) --[[ Line: 48 | Named "createAdvancer" ]]
 	end
 end
 
-local _ = function(p1): boolean --[[ Line: 61 | Named "isEmpty" ]]
+local _ = function(p1): boolean
 	return next(p1) == nil
 end
 
@@ -41,7 +41,7 @@ PromiseModule.Status = {
 	Rejected = "Rejected"
 }
 
-function PromiseModule.new(p1) --[[ Line: 93 ]]
+function PromiseModule.new(p1)
 	-- upvalues: PromiseModule (copy), wpcallPacked (copy)
 	local config = {
 		_type = "Promise",
@@ -55,12 +55,12 @@ function PromiseModule.new(p1) --[[ Line: 93 ]]
 	}
 	setmetatable(config, PromiseModule)
 	
-	local function reject(...) --[[ Line: 125 ]]
+	local function reject(...)
 		-- upvalues: config (copy)
 		config:_reject(...)
 	end
 	
-	local _, WpcallPackedResult2 = wpcallPacked(p1, function(...) --[[ Line: 121 | Named "resolve" ]]
+	local _, WpcallPackedResult2 = wpcallPacked(p1, function(...)
 		-- upvalues: config (copy)
 		config:_resolve(...)
 	end, reject)
@@ -72,30 +72,30 @@ function PromiseModule.new(p1) --[[ Line: 93 ]]
 	return config
 end
 
-function PromiseModule.resolve(p1) --[[ Line: 143 ]]
+function PromiseModule.resolve(p1)
 	-- upvalues: PromiseModule (copy)
-	return PromiseModule.new(function(Callback: (any) -> ()) --[[ Line: 144 ]]
+	return PromiseModule.new(function(Callback: (any) -> ())
 		-- upvalues: p1 (copy)
 		Callback(p1)
 	end)
 end
 
-function PromiseModule.reject(p1) --[[ Line: 152 ]]
+function PromiseModule.reject(p1)
 	-- upvalues: PromiseModule (copy)
-	return PromiseModule.new(function(_, Callback: (any) -> ()) --[[ Line: 153 ]]
+	return PromiseModule.new(function(_, Callback: (any) -> ())
 		-- upvalues: p1 (copy)
 		Callback(p1)
 	end)
 end
 
-function PromiseModule.all(...) --[[ Line: 163 ]]
+function PromiseModule.all(...)
 	-- upvalues: PromiseModule (copy)
 	local Promises = { ... }
 	
 	if type(Promises[1]) == "table" and Promises[1]._type ~= "Promise" then
 		Promises = Promises[1]
 	end
-	return PromiseModule.new(function(Callback: (any) -> (), Callback1) --[[ Line: 172 ]]
+	return PromiseModule.new(function(Callback: (any) -> (), Callback1)
 		-- upvalues: Promises (ref), PromiseModule (upval)
 		local Flag = false
 		local t = {}
@@ -105,7 +105,7 @@ function PromiseModule.all(...) --[[ Line: 163 ]]
 		for _ in pairs(Promises) do
 			Count1 += 1
 		end
-		local function _(Key, p1) --[[ Line: 184 | Named "promiseCompleted" ]]
+		local function _(Key, p1)
 			-- upvalues: Flag (ref), t (copy), Count (ref), Count1 (ref), Callback (copy)
 			if Flag then return end
 			t[Key] = p1
@@ -125,7 +125,7 @@ function PromiseModule.all(...) --[[ Line: 163 ]]
 		end
 		for i, promis in pairs(Promises) do
 			if promis._status == PromiseModule.Status.Started then
-				promis:andThen(function(Result) --[[ Line: 208 ]]
+				promis:andThen(function(Result)
 					-- upvalues: i (copy), Flag (ref), t (copy), Count (ref), Count1 (ref), Callback (copy)
 					if Flag then return end
 					t[i] = Result
@@ -135,7 +135,7 @@ function PromiseModule.all(...) --[[ Line: 163 ]]
 						Callback(t)
 						Flag = true
 					end
-				end):catch(function(Err) --[[ Line: 211 ]]
+				end):catch(function(Err)
 					-- upvalues: Flag (ref), Callback1 (copy)
 					Flag = true
 					Callback1(Err)
@@ -153,7 +153,7 @@ function PromiseModule.all(...) --[[ Line: 163 ]]
 					end
 				end
 			else
-				promis:catch(function(_) --[[ Line: 224 ]]
+				promis:catch(function(_)
 					-- upvalues: Flag (ref), Callback1 (copy), promis (copy)
 					Flag = true
 					Callback1(unpack(promis._values))
@@ -163,20 +163,20 @@ function PromiseModule.all(...) --[[ Line: 163 ]]
 	end)
 end
 
-function PromiseModule:is(): boolean --[[ Line: 236 ]]
+function PromiseModule:is(): boolean
 	return type(self) == "table" and self._type == "Promise"
 end
 
-function PromiseModule.promisify(p1) --[[ Line: 247 ]]
+function PromiseModule.promisify(p1)
 	-- upvalues: PromiseModule (copy)
-	return function(...) --[[ Line: 248 ]]
+	return function(...)
 		-- upvalues: PromiseModule (upval), p1 (copy)
 		local list = { ... }
 		local Selected = select("#", ...)
 		
-		return PromiseModule.new(function(Callback, Callback1) --[[ Line: 252 ]]
+		return PromiseModule.new(function(Callback, Callback1)
 			-- upvalues: p1 (upval), list (copy), Selected (copy)
-			spawn(function() --[[ Line: 253 ]]
+			spawn(function()
 				-- upvalues: p1 (upval), list (upval), Selected (upval), Callback (copy), Callback1 (copy)
 				local Success, Result = pcall(p1, unpack(list, 1, Selected))
 				
@@ -192,17 +192,17 @@ function PromiseModule.promisify(p1) --[[ Line: 247 ]]
 	end
 end
 
-function PromiseModule:getStatus() --[[ Line: 266 ]]
+function PromiseModule:getStatus()
 	return self._status
 end
 
-function PromiseModule:andThen(p1, p2) --[[ Line: 274 ]]
+function PromiseModule:andThen(p1, p2)
 	-- upvalues: PromiseModule (copy), wpcallPacked (copy)
 	self._unhandledRejection = false
 	
-	return PromiseModule.new(function(Callback2, Callback3) --[[ Line: 278 ]]
+	return PromiseModule.new(function(Callback2, Callback3)
 		-- upvalues: p1 (copy), wpcallPacked (upval), p2 (copy), self (copy), PromiseModule (upval)
-		local Callback: (any) -> () = if p1 then function(...) --[[ Line: 49 ]]
+		local Callback: (any) -> () = if p1 then function(...)
 			-- upvalues: wpcallPacked (upval), p1 (copy), Callback2 (copy), Callback3 (copy)
 			local v1, v2 = wpcallPacked(p1, ...)
 			
@@ -214,7 +214,7 @@ function PromiseModule:andThen(p1, p2) --[[ Line: 274 ]]
 				Callback3(unpack(v2, 2, v1))
 			end
 		end else Callback2
-		local Callback1: (any) -> () = if p2 then function(...) --[[ Line: 49 ]]
+		local Callback1: (any) -> () = if p2 then function(...)
 			-- upvalues: wpcallPacked (upval), p2 (copy), Callback2 (copy), Callback3 (copy)
 			local v1, v2 = wpcallPacked(p2, ...)
 			
@@ -244,11 +244,11 @@ function PromiseModule:andThen(p1, p2) --[[ Line: 274 ]]
 	end)
 end
 
-function PromiseModule:catch(p1) --[[ Line: 309 ]]
+function PromiseModule:catch(p1)
 	return self:andThen(nil, p1)
 end
 
-function PromiseModule:await() --[[ Line: 317 ]]
+function PromiseModule:await()
 	-- upvalues: PromiseModule (copy)
 	self._unhandledRejection = false
 	
@@ -256,12 +256,12 @@ function PromiseModule:await() --[[ Line: 317 ]]
 		local List = nil
 		local Selected = nil
 		local BindableEvent = Instance.new("BindableEvent")
-		self:andThen(function(...) --[[ Line: 325 ]]
+		self:andThen(function(...)
 			-- upvalues: List (ref), Selected (ref), BindableEvent (copy)
 			List = { ... }
 			Selected = select("#", ...)
 			BindableEvent:Fire(true)
-		end, function(...) --[[ Line: 329 ]]
+		end, function(...)
 			-- upvalues: List (ref), Selected (ref), BindableEvent (copy)
 			List = { ... }
 			Selected = select("#", ...)
@@ -295,7 +295,7 @@ function PromiseModule:await() --[[ Line: 317 ]]
 	return List, Selected(self._values, 1, self._valuesLength)
 end
 
-function PromiseModule:_resolve(...) --[[ Line: 346 ]]
+function PromiseModule:_resolve(...)
 	-- upvalues: PromiseModule (copy)
 	if self._status ~= PromiseModule.Status.Started then return end
 	local Selected: number = select("#", ...)
@@ -304,10 +304,10 @@ function PromiseModule:_resolve(...) --[[ Line: 346 ]]
 		if Selected > 1 then
 			warn((("When returning a Promise from andThen, extra arguments are discarded! See:\n\n%s"):format(self._source)))
 		end;
-		(...):andThen(function(...) --[[ Line: 363 ]]
+		(...):andThen(function(...)
 			-- upvalues: self (copy)
 			self:_resolve(...)
-		end, function(...) --[[ Line: 365 ]]
+		end, function(...)
 			-- upvalues: self (copy)
 			self:_reject(...)
 		end)
@@ -324,7 +324,7 @@ function PromiseModule:_resolve(...) --[[ Line: 346 ]]
 	end
 end
 
-function PromiseModule:_reject(...) --[[ Line: 382 ]]
+function PromiseModule:_reject(...)
 	-- upvalues: PromiseModule (copy)
 	if self._status ~= PromiseModule.Status.Started then return end
 	self._status = PromiseModule.Status.Rejected
@@ -334,7 +334,7 @@ function PromiseModule:_reject(...) --[[ Line: 382 ]]
 	if next(self._queuedReject) == nil then
 		self._unhandledRejection = true
 		local Text = tostring((...))
-		spawn(function() --[[ Line: 406 ]]
+		spawn(function()
 			-- upvalues: self (copy), Text (copy)
 			if self._unhandledRejection then
 				warn((("Unhandled promise rejection:\n\n%s\n\n%s"):format(Text, self._source)))

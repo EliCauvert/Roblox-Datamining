@@ -7,7 +7,7 @@ local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local UseIndicatorScrollAnimationModule = require(MediaGallery.Hooks.useIndicatorScrollAnimation)
 local MAXVISIBLEINDICATORS = require(MediaGallery.MediaGalleryConstants).MAX_VISIBLE_INDICATORS
 
-local function getDotAnchorPointAtIndex(CurrentItemIndex, PreviousItemIndex, CurrentItemIndex1): Vector2 --[[ Line: 30 ]]
+local function getDotAnchorPointAtIndex(CurrentItemIndex, PreviousItemIndex, CurrentItemIndex1): Vector2
 	if CurrentItemIndex1 < PreviousItemIndex then
 		if CurrentItemIndex == PreviousItemIndex then
 			return Vector2.new(1, 0.5)
@@ -24,7 +24,7 @@ local function getDotAnchorPointAtIndex(CurrentItemIndex, PreviousItemIndex, Cur
 	return Vector2.new(0.5, 0.5)
 end
 
-local function getDotPositionAtIndex(CurrentItemIndex, PreviousItemIndex, CurrentItemIndex1): UDim2 --[[ Line: 48 ]]
+local function getDotPositionAtIndex(CurrentItemIndex, PreviousItemIndex, CurrentItemIndex1): UDim2
 	if CurrentItemIndex1 < PreviousItemIndex then
 		if CurrentItemIndex == PreviousItemIndex then
 			return UDim2.fromScale(1, 0.5)
@@ -41,7 +41,7 @@ local function getDotPositionAtIndex(CurrentItemIndex, PreviousItemIndex, Curren
 	return UDim2.fromScale(0.5, 0.5)
 end
 
-return ReactModule.memo(function(Frame) --[[ Line: 66 | Named "MediaGalleryPageIndicators" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseTokensFunction (copy), UseIndicatorScrollAnimationModule (copy), MAXVISIBLEINDICATORS (copy), ReactModule (copy), getDotAnchorPointAtIndex (copy), getDotPositionAtIndex (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Size100 = UseTokensResult.Size.Size_100
@@ -61,12 +61,12 @@ return ReactModule.memo(function(Frame) --[[ Line: 66 | Named "MediaGalleryPageI
 		indicatorPadding = Small
 	})
 	local Smallest = math.min(Frame.numberOfItems, MAXVISIBLEINDICATORS)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 92 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Smallest (copy), Size200 (copy), Small (copy), Size800 (copy)
 		return (Smallest - 1) * (Size200 + Small) + Size800
 	end, { Smallest, Size200, Small, Size800 })
 	local UseRefResult = ReactModule.useRef({})
-	local UseResult = ReactModule.useCallback(function(CurrentItemIndex): UDim2 --[[ Line: 99 ]]
+	local UseResult = ReactModule.useCallback(function(CurrentItemIndex): UDim2
 		-- upvalues: UseIndicatorScrollAnimationModuleResult (copy), Smallest (copy), Frame (copy), Size800 (copy), Size200 (copy), Size100 (copy), Size150 (copy)
 		local Smallest1 = math.min(UseIndicatorScrollAnimationModuleResult.firstVisibleIndex + Smallest - 1, Frame.numberOfItems)
 		local IsFirstVisibleIndexAbove = UseIndicatorScrollAnimationModuleResult.firstVisibleIndex > 1
@@ -99,7 +99,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 66 | Named "MediaGalleryPageI
 		UseIndicatorScrollAnimationModuleResult.currentItemIndex, Size100, Size150,
 		Size200, Size800
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 144 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: Frame (copy), UseRefResult (copy), UseResult (copy), ReactModule (upval), UseIndicatorScrollAnimationModuleResult (copy), Size800 (copy), Size200 (copy), getDotAnchorPointAtIndex (upval), getDotPositionAtIndex (upval), Muted (copy), Emphasis (copy)
 		local Frames = {}
 		
@@ -116,7 +116,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 66 | Named "MediaGalleryPageI
 					BorderSizePixel = 0,
 					AnchorPoint = getDotAnchorPointAtIndex(i, UseIndicatorScrollAnimationModuleResult.previousItemIndex, UseIndicatorScrollAnimationModuleResult.currentItemIndex),
 					Position = getDotPositionAtIndex(i, UseIndicatorScrollAnimationModuleResult.previousItemIndex, UseIndicatorScrollAnimationModuleResult.currentItemIndex),
-					Size = UseIndicatorScrollAnimationModuleResult.animationProgressBinding:map(function(Alpha) --[[ Line: 178 ]]
+					Size = UseIndicatorScrollAnimationModuleResult.animationProgressBinding:map(function(Alpha)
 						-- upvalues: CurrentEntry (copy), UseResultResult (copy)
 						return if CurrentEntry == nil then UseResultResult else CurrentEntry:Lerp(UseResultResult, Alpha)
 					end),
@@ -126,7 +126,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 66 | Named "MediaGalleryPageI
 					UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
 					ProgressBar = if i == UseIndicatorScrollAnimationModuleResult.currentItemIndex and Frame.currentItemProgressBinding then ReactModule.createElement("Frame", {
 						BorderSizePixel = 0,
-						Size = Frame.currentItemProgressBinding:map(function(p1): UDim2 --[[ Line: 196 ]]
+						Size = Frame.currentItemProgressBinding:map(function(p1): UDim2
 							-- upvalues: Size200 (upval), Size800 (upval)
 							return UDim2.fromOffset(Size200 + p1 * (Size800 - Size200), Size200)
 						end),
@@ -146,7 +146,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 66 | Named "MediaGalleryPageI
 		Size800, Muted, Emphasis,
 		UseIndicatorScrollAnimationModuleResult.animationProgressBinding
 	})
-	ReactModule.useEffect(function() --[[ Line: 232 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy), UseRefResult (copy), UseResult (copy)
 		for i = 1, Frame.numberOfItems do
 			UseRefResult.current[i] = UseResult(i)

@@ -6,7 +6,7 @@ local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFon
 local ImageSetLabel = require(Parent.UIBlox).Core.ImageSet.ImageSetLabel
 local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 
-return function(Frame) --[[ Line: 26 ]]
+return function(Frame)
 	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ImageSetLabel (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local IconSize = Frame.iconSize or 18

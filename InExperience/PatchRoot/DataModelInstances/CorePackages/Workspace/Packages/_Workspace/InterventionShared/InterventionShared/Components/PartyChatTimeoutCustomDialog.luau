@@ -19,12 +19,12 @@ local InterventionTreatmentShownSignalModule = require(InterventionShared.Signal
 local InterventionDialogModule = require(InterventionShared.Components.InterventionDialog)
 local FFlagUFRFriendsChatIXPExposureModule = require(InterventionShared.Flags.FFlagUFRFriendsChatIXPExposure)
 
-return ReactModule.memo(function(p1) --[[ Line: 34 ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ConstantsModule (copy), Localization (copy), LocalizationService (copy), ReactModule (copy), FFlagUFRFriendsChatIXPExposureModule (copy), IXPService (copy), AppUserLayers (copy), InterventionTreatmentShownSignalModule (copy), UseCountdownBindingModule (copy), SetTimeoutFunction (copy), ClearTimeoutFunction (copy), InterventionDialogModule (copy), IconSize (copy), InterventionAnalyticsModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction(ConstantsModule.localizationKeys)
 	local NewLocalization = Localization.new(LocalizationService.RobloxLocaleId)
-	ReactModule.useEffect(function() --[[ Line: 38 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagUFRFriendsChatIXPExposureModule (upval), IXPService (upval), AppUserLayers (upval), InterventionTreatmentShownSignalModule (upval), ConstantsModule (upval)
 		if FFlagUFRFriendsChatIXPExposureModule and game:GetEngineFeature("EnableLogFlagLinkedUserLayerExposure") then
 			IXPService:LogFlagLinkedUserLayerExposure(AppUserLayers.FriendsChatRestrictionUserIDLayer)
@@ -32,14 +32,14 @@ return ReactModule.memo(function(p1) --[[ Line: 34 ]]
 		InterventionTreatmentShownSignalModule:fire(ConstantsModule.TreatmentType.PartyChatTimeoutDialog)
 	end, {})
 	local _000 = UseCountdownBindingModule(p1.endTimestamp, "0:00")
-	ReactModule.useEffect(function() --[[ Line: 47 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), SetTimeoutFunction (upval), ClearTimeoutFunction (upval)
-		local SetTimeoutResult = if p1.endTimestamp == nil then nil else SetTimeoutFunction(function() --[[ Line: 50 ]]
+		local SetTimeoutResult = if p1.endTimestamp == nil then nil else SetTimeoutFunction(function()
 			-- upvalues: p1 (upval)
 			p1.onDismiss()
 		end, math.max(p1.endTimestamp - DateTime.now().UnixTimestamp + 1, 1) * 1000)
 		
-		return function() --[[ Line: 54 ]]
+		return function()
 			-- upvalues: SetTimeoutResult (ref), ClearTimeoutFunction (upval)
 			if SetTimeoutResult then
 				ClearTimeoutFunction(SetTimeoutResult)
@@ -49,7 +49,7 @@ return ReactModule.memo(function(p1) --[[ Line: 34 ]]
 	
 	return ReactModule.createElement(InterventionDialogModule, {
 		iconName = "icons/status/error_large",
-		titleText = _000:map(function(RemainingTime) --[[ Line: 62 ]]
+		titleText = _000:map(function(RemainingTime)
 			-- upvalues: NewLocalization (copy), ConstantsModule (upval)
 			return NewLocalization:Format(ConstantsModule.localizationKeys.PartyChatSuspendedText, { remainingTime = RemainingTime })
 		end),

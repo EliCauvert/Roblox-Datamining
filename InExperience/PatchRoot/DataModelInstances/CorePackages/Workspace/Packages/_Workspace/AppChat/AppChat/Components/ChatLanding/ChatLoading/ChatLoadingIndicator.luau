@@ -6,11 +6,11 @@ local TextPlaceholdersModule = require(script.Parent.TextPlaceholders)
 local ChatLoadingIndicator = RoactModule.PureComponent:extend("ChatLoadingIndicator")
 ChatLoadingIndicator.defaultProps = { cellHeight = 64, avatarCellWidth = 60 }
 
-function ChatLoadingIndicator.init(p1) --[[ Line: 19 ]]
+function ChatLoadingIndicator.init(p1)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy), LoadingAvatarModule (copy), TextPlaceholdersModule (copy)
-	function p1.singleConversationPlaceholder(LayoutOrder, p2) --[[ Line: 20 ]]
+	function p1.singleConversationPlaceholder(LayoutOrder, p2)
 		-- upvalues: WithStyleFunction (upval), RoactModule (upval), p1 (copy), LoadingAvatarModule (upval), TextPlaceholdersModule (upval)
-		return WithStyleFunction(function(p3) --[[ Line: 21 ]]
+		return WithStyleFunction(function(p3)
 			-- upvalues: RoactModule (upval), LayoutOrder (copy), p1 (upval), LoadingAvatarModule (upval), TextPlaceholdersModule (upval), p2 (copy)
 			return RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
@@ -66,7 +66,7 @@ function ChatLoadingIndicator.init(p1) --[[ Line: 19 ]]
 		end)
 	end
 	
-	function p1.allConversationPlaceholdersList() --[[ Line: 78 ]]
+	function p1.allConversationPlaceholdersList()
 		-- upvalues: RoactModule (upval), p1 (copy)
 		local List = {
 			UIList = RoactModule.createElement("UIListLayout", {
@@ -82,9 +82,9 @@ function ChatLoadingIndicator.init(p1) --[[ Line: 19 ]]
 	end
 end
 
-function ChatLoadingIndicator.render(p1) --[[ Line: 92 ]]
+function ChatLoadingIndicator.render(p1)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 93 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: RoactModule (upval), p1 (copy)
 		return RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,

@@ -50,7 +50,7 @@ if IsInExperienceUIVREnabled then
 end
 local CustomEventHandlers = {
 	[FocusNavigationEventNameEnum.NavigateBack] = {
-		handler = InputHandlersModule.onRelease(function(p1) --[[ Line: 71 ]]
+		handler = InputHandlersModule.onRelease(function(p1)
 			-- upvalues: GameInviteModalManagerModule (copy)
 			GameInviteModalManagerModule:closeModal()
 			p1:cancel()
@@ -58,7 +58,7 @@ local CustomEventHandlers = {
 	}
 }
 
-return function(p1) --[[ Line: 82 ]]
+return function(p1)
 	-- upvalues: FFlagLuaAppForceVrAppPanelWidthRollout (copy), GetFFlagVRPanelWidthIXPEnabledFunction (copy), IxpUtilsModule (copy), VRPanelWidthIXP (copy), ReactModule (copy), RunService (copy), GameInviteConstantsModule (copy), UseDispatchFunction (copy), IsInExperienceUIVREnabled (copy), ResponsiveModule (ref), FFlagEnableInExperienceUIPCVRFix (copy), Callback (ref), FFlagUseSignalsForGameInvitesStatus (copy), GetGameInvitesStatusStore (copy), ResetUserInviteStatusModule (copy), GameInviteModalManagerModule (copy), GuiService (copy), PromiseModule (copy), RobloxReplicatedStorage (copy), GetGameNameAndDescriptionFunction (copy), NetworkImpl (copy), GameInviteModalWindowModule (copy), GameInviteContentWrapperModule (copy), GetFFlagEnableGameInviteModalVRSupportFunction (copy), VRReadyWrapper (copy), VRConstants (copy), GameInviteModalLayoutProviderModule (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigableSurfaceIdentifierEnum (copy), CustomEventHandlers (copy), UIManager (ref), PanelType (ref), ReactRobloxModule (copy)
 	if not game:GetFastFlag("LuaEnableGameInviteModal2023V5") then
 		return nil
@@ -81,7 +81,7 @@ return function(p1) --[[ Line: 82 ]]
 		UseIsSpatialResult = ResponsiveModule.useIsSpatial()
 		StyleSheet = if FFlagEnableInExperienceUIPCVRFix then Callback() else nil
 	end
-	local function Callback1(p2, p3, p4) --[[ Line: 117 ]]
+	local function Callback1(p2, p3, p4)
 		-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), FFlagUseSignalsForGameInvitesStatus (upval), IsRenderLocationMatch1 (copy), GetGameInvitesStatusStore (upval), UseDispatchResult (copy), ResetUserInviteStatusModule (upval)
 		UseStateResult2(p2)
 		UseStateResult2_1(p3 or false)
@@ -100,47 +100,47 @@ return function(p1) --[[ Line: 82 ]]
 		end
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 134 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: GameInviteModalManagerModule (upval), Callback1 (copy)
 		local EventConnection = GameInviteModalManagerModule.ToggleGameInviteModalEvent.Event:Connect(Callback1)
 		
-		return function() --[[ Line: 136 ]]
+		return function()
 			-- upvalues: EventConnection (copy)
 			EventConnection:Disconnect()
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 142 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsRenderLocationMatch (copy), GuiService (upval), UseStateResult (copy), GameInviteModalManagerModule (upval)
 		if IsRenderLocationMatch then
-			local MenuOpenedConnection = GuiService.MenuOpened:Connect(function() --[[ Line: 144 ]]
+			local MenuOpenedConnection = GuiService.MenuOpened:Connect(function()
 				-- upvalues: UseStateResult (upval), GameInviteModalManagerModule (upval)
 				if UseStateResult then
 					GameInviteModalManagerModule:closeModal()
 				end
 			end)
 			
-			return function() --[[ Line: 149 ]]
+			return function()
 				-- upvalues: MenuOpenedConnection (copy)
 				MenuOpenedConnection:Disconnect()
 			end
 		else
-			return function() --[[ Line: 153 ]] end
+			return function() end
 		end
 	end, { UseStateResult, IsRenderLocationMatch })
-	ReactModule.useEffect(function() --[[ Line: 158 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Inverted (copy), UseStateResult (copy), IsRenderLocationMatch (copy), UseStateResult5 (copy), PromiseModule (upval), RobloxReplicatedStorage (upval), UseStateResult2_4 (copy), GetGameNameAndDescriptionFunction (upval), UseStateResult4 (copy), NetworkImpl (upval), UseStateResult2_3 (copy)
 		if Inverted and UseStateResult and IsRenderLocationMatch then
 			if UseStateResult5 == "" then
-				PromiseModule.try(function() --[[ Line: 162 ]]
+				PromiseModule.try(function()
 					-- upvalues: RobloxReplicatedStorage (upval)
 					return RobloxReplicatedStorage:WaitForChild("GetServerType", 2):InvokeServer()
-				end):andThen(function(Result) --[[ Line: 165 ]]
+				end):andThen(function(Result)
 					-- upvalues: UseStateResult2_4 (upval)
 					UseStateResult2_4(Result)
 				end)
 			end
 			if GetGameNameAndDescriptionFunction and not UseStateResult4.Created then
-				GetGameNameAndDescriptionFunction(NetworkImpl, game.GameId):andThen(function(Result) --[[ Line: 171 ]]
+				GetGameNameAndDescriptionFunction(NetworkImpl, game.GameId):andThen(function(Result)
 					-- upvalues: UseStateResult2_3 (upval)
 					UseStateResult2_3(Result)
 				end)

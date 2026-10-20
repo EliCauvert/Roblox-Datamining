@@ -1,7 +1,7 @@
 ﻿local TModule = require(script:FindFirstAncestor("SquadsCore").Parent.t)
 local ScheduledSquadModelModule = {}
 
-function ScheduledSquadModelModule.new(p1) --[[ Line: 8 ]]
+function ScheduledSquadModelModule.new(p1)
 	-- upvalues: ScheduledSquadModelModule (copy)
 	assert(ScheduledSquadModelModule.isValid(p1))
 	ScheduledSquadModelModule.__index = ScheduledSquadModelModule
@@ -10,7 +10,7 @@ function ScheduledSquadModelModule.new(p1) --[[ Line: 8 ]]
 	return p1
 end
 
-function ScheduledSquadModelModule.mock(p1) --[[ Line: 20 ]]
+function ScheduledSquadModelModule.mock(p1)
 	-- upvalues: ScheduledSquadModelModule (copy)
 	local P1 = p1 or {}
 	
@@ -26,7 +26,7 @@ function ScheduledSquadModelModule.mock(p1) --[[ Line: 20 ]]
 	}))
 end
 
-function ScheduledSquadModelModule.format(p1) --[[ Line: 37 ]]
+function ScheduledSquadModelModule.format(p1)
 	-- upvalues: ScheduledSquadModelModule (copy)
 	return (ScheduledSquadModelModule.new({
 		createdAtTime = p1.scheduledGroupUp.createdAtTime,

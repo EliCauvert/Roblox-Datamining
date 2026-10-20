@@ -2,7 +2,7 @@
 local MigrateUserSearchHttpRequestToRequestInternal = game:DefineFastFlag("MigrateUserSearchHttpRequestToRequestInternal", false)
 
 return (HttpRequest.config({
-	requestFunction = function(p1, p2, p3) --[[ Line: 10 ]]
+	requestFunction = function(p1, p2, p3)
 		-- upvalues: MigrateUserSearchHttpRequestToRequestInternal (copy), HttpRequest (copy)
 		return if MigrateUserSearchHttpRequestToRequestInternal then HttpRequest.requestFunctions.RequestInternal(p1, p2, p3) else HttpRequest.requestFunctions.HttpRbxApi(p1, p2, p3)
 	end,

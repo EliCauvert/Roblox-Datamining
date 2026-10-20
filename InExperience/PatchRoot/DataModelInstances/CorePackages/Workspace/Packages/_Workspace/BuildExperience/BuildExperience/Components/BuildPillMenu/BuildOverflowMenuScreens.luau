@@ -50,7 +50,7 @@ end
 if FFlagBuildExperienceAnalytics then
 	config.stats = Screens.BuildStats
 end
-local function _(TargetWithGameInfo) --[[ Line: 83 | Named "normalizeTarget" ]]
+local function _(TargetWithGameInfo)
 	return if TargetWithGameInfo == nil then nil else {
 		universeId = TargetWithGameInfo.universeId,
 		placeId = TargetWithGameInfo.placeId,
@@ -61,7 +61,7 @@ local function _(TargetWithGameInfo) --[[ Line: 83 | Named "normalizeTarget" ]]
 	}
 end
 
-local function getTargetWithGameInfo(TargetWithGameInfo, UseGameInfoResult, Loading) --[[ Line: 98 ]]
+local function getTargetWithGameInfo(TargetWithGameInfo, UseGameInfoResult, Loading)
 	-- upvalues: GameInfoUtilsModule (copy)
 	if TargetWithGameInfo == nil then
 		return TargetWithGameInfo
@@ -83,7 +83,7 @@ local function getTargetWithGameInfo(TargetWithGameInfo, UseGameInfoResult, Load
 	end
 end
 
-local function BuildFullscreenPage(p1) --[[ Line: 128 ]]
+local function BuildFullscreenPage(p1)
 	-- upvalues: UseBuildPageLayoutModule (copy), ReactModule (copy), FullscreenPageWithSafeArea (copy)
 	local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
 	
@@ -95,7 +95,7 @@ local function BuildFullscreenPage(p1) --[[ Line: 128 ]]
 	}, { Page = p1.pageContent })
 end
 
-local function BuildSheetPage(p1) --[[ Line: 141 ]]
+local function BuildSheetPage(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy)
 	local UseTokensResult = UseTokensFunction()
 	
@@ -106,7 +106,7 @@ local function BuildSheetPage(p1) --[[ Line: 141 ]]
 	}, { Page = p1.pageContent })
 end
 
-local function ConfigurationScreen(p1, Page, TestId) --[[ Line: 153 ]]
+local function ConfigurationScreen(p1, Page, TestId)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), BuildNavigationParamsModule (copy), GameInfoUtilsModule (copy), getTargetWithGameInfo (copy), ReactModule (copy), Screens (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), BuildOverflowMenuPageModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy), PrivateInvitesPickerHostModule (copy), BuildExperience (copy)
 	local Navigation = p1.navigation
 	local ScreenProps = p1.screenProps or {}
@@ -123,7 +123,7 @@ local function ConfigurationScreen(p1, Page, TestId) --[[ Line: 153 ]]
 	local TargetWithGameInfo = getTargetWithGameInfo(Config, UseGameInfoResult, UseLocalizationFunction({ loading = LocalizationStringsModule.BUILD_MENU_LOADING }).loading)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 166 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: ScreenProps (copy), Navigation (copy)
 		if ScreenProps.onClose then
 			ScreenProps.onClose()
@@ -133,7 +133,7 @@ local function ConfigurationScreen(p1, Page, TestId) --[[ Line: 153 ]]
 			Navigation.goBack()
 		end
 	end, { Navigation, ScreenProps.onClose })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 173 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: ScreenProps (copy), Navigation (copy), Screens (upval), TargetWithGameInfo (copy)
 		if ScreenProps.onOpenAudiencePage then
 			ScreenProps.onOpenAudiencePage()
@@ -147,7 +147,7 @@ local function ConfigurationScreen(p1, Page, TestId) --[[ Line: 153 ]]
 		ScreenProps.onOpenAudiencePage,
 		TargetWithGameInfo
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 182 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: GameInfoUtilsModule (upval), UseGameInfoResult (copy), ScreenProps (copy), Navigation (copy), Screens (upval), TargetWithGameInfo (copy)
 		if not GameInfoUtilsModule.isTitleDescriptionReady(UseGameInfoResult) then return end
 		if ScreenProps.onOpenTitleDescriptionPage then
@@ -163,7 +163,7 @@ local function ConfigurationScreen(p1, Page, TestId) --[[ Line: 153 ]]
 		ScreenProps.onOpenTitleDescriptionPage,
 		TargetWithGameInfo
 	})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 194 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: ScreenProps (copy), Navigation (copy), Screens (upval), TargetWithGameInfo (copy)
 		if ScreenProps.onOpenMediaSelectionPage then
 			ScreenProps.onOpenMediaSelectionPage()
@@ -177,7 +177,7 @@ local function ConfigurationScreen(p1, Page, TestId) --[[ Line: 153 ]]
 		ScreenProps.onOpenMediaSelectionPage,
 		TargetWithGameInfo
 	})
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 203 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: TargetWithGameInfo (copy), ScreenProps (copy), Navigation (copy), Screens (upval)
 		if TargetWithGameInfo == nil or TargetWithGameInfo.placeId == nil then return end
 		if ScreenProps.onOpenVersionTitleDescriptionPage then
@@ -192,7 +192,7 @@ local function ConfigurationScreen(p1, Page, TestId) --[[ Line: 153 ]]
 		ScreenProps.onOpenVersionTitleDescriptionPage,
 		TargetWithGameInfo
 	})
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 215 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: TargetWithGameInfo (copy), ScreenProps (copy), UseStateResult2_1 (copy)
 		if TargetWithGameInfo == nil or TargetWithGameInfo.placeId == nil then return end
 		if ScreenProps.onOpenVersionHistory then
@@ -203,32 +203,32 @@ local function ConfigurationScreen(p1, Page, TestId) --[[ Line: 153 ]]
 			UseStateResult2_1(true)
 		end
 	end, { ScreenProps.onOpenVersionHistory, TargetWithGameInfo })
-	local UseResult6 = if FFlagBuildExperienceMonetizationNativeUIModule then ReactModule.useCallback(function() --[[ Line: 226 ]]
+	local UseResult6 = if FFlagBuildExperienceMonetizationNativeUIModule then ReactModule.useCallback(function()
 		-- upvalues: Navigation (copy), Screens (upval), TargetWithGameInfo (copy)
 		Navigation.navigate(Screens.BuildMonetization, { target = TargetWithGameInfo })
 	end, { Navigation, TargetWithGameInfo }) else nil
-	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 230 ]]
+	local UseResult7 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(false)
 	end, {})
-	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 233 ]]
+	local UseResult8 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy), UseResult (copy)
 		UseStateResult2_1(false)
 		UseResult()
 	end, { UseResult })
-	local UseResult9 = ReactModule.useCallback(function() --[[ Line: 237 ]]
+	local UseResult9 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(true)
 	end, {})
-	local UseResult10 = ReactModule.useCallback(function() --[[ Line: 240 ]]
+	local UseResult10 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {})
-	local UseResult11 = ReactModule.useCallback(function() --[[ Line: 243 ]]
+	local UseResult11 = ReactModule.useCallback(function()
 		-- upvalues: Navigation (copy), Screens (upval), TargetWithGameInfo (copy)
 		Navigation.navigate(Screens.BuildPlaytestInviteManagement, { target = TargetWithGameInfo })
 	end, { Navigation, TargetWithGameInfo })
-	local UseResult12 = ReactModule.useCallback(function() --[[ Line: 250 ]]
+	local UseResult12 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), UseResult11 (copy)
 		UseStateResult2(false)
 		UseResult11()
@@ -268,12 +268,12 @@ local function ConfigurationScreen(p1, Page, TestId) --[[ Line: 153 ]]
 	})
 end
 
-local _ = function(p1, p2) --[[ Line: 323 | Named "resolveSubPageDismiss" ]]
+local _ = function(p1, p2)
 	-- upvalues: FFlagBuildPublishNavigationSheetModule (copy), BuildNavigationParamsModule (copy)
 	return if FFlagBuildPublishNavigationSheetModule and p2 ~= nil and BuildNavigationParamsModule.getShouldDismissOnBack(p1) then p2 else p1.goBack
 end
 
-local function BuildTitleDescriptionContent(p1) --[[ Line: 487 ]]
+local function BuildTitleDescriptionContent(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), GameInfoUtilsModule (copy), getTargetWithGameInfo (copy), ReactModule (copy), TitleDescriptionPageModule (copy)
 	local Loading = UseLocalizationFunction({ loading = LocalizationStringsModule.BUILD_MENU_LOADING }).loading
 	local UseGameInfoResult = GameInfoUtilsModule.useGameInfo(p1.target.universeId)
@@ -296,15 +296,15 @@ end
 return {
 	Screens = Screens,
 	SCREEN_BY_PAGE = config,
-	BuildPublishScreen = function(p1) --[[ Line: 313 ]]
+	BuildPublishScreen = function(p1)
 		-- upvalues: ConfigurationScreen (copy)
 		return ConfigurationScreen(p1, "publish", "BuildPage.publish.Page")
 	end,
-	BuildSettingsScreen = function(p1) --[[ Line: 317 ]]
+	BuildSettingsScreen = function(p1)
 		-- upvalues: ConfigurationScreen (copy)
 		return ConfigurationScreen(p1, "settings", "BuildPage.settings.Page")
 	end,
-	BuildMonetizationScreen = function(p1) --[[ Line: 334 ]]
+	BuildMonetizationScreen = function(p1)
 		-- upvalues: BuildNavigationParamsModule (copy), FFlagBuildPublishNavigationSheetModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), ReactModule (copy), MonetizationPageContainerModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy)
 		local Navigation = p1.navigation
 		local ScreenProps = p1.screenProps or {}
@@ -329,7 +329,7 @@ return {
 		
 		return if ScreenProps.onClose then ReactModule.createElement(BuildSheetPage, { pageContent = Element }) else ReactModule.createElement(BuildFullscreenPage, { pageContent = Element })
 	end,
-	BuildStatsScreen = function(p1) --[[ Line: 594 ]]
+	BuildStatsScreen = function(p1)
 		-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), BuildNavigationParamsModule (copy), ReactModule (copy), BuildExperience (copy), OverflowMenuPageShellModule (copy), FFlagBuildBackButtonChevronModule (copy), IconName (copy), BuildSheetPage (copy), BuildFullscreenPage (copy)
 		local Stats = UseLocalizationFunction({ stats = LocalizationStringsModule.BUILD_MENU_STATS }).stats
 		local Navigation = p1.navigation
@@ -343,7 +343,7 @@ return {
 			gameIcon = Target.gameIcon,
 			isNewGameTarget = Target.isNewGameTarget
 		}
-		local UseResult = ReactModule.useCallback(function() --[[ Line: 603 ]]
+		local UseResult = ReactModule.useCallback(function()
 			-- upvalues: ScreenProps (copy), Navigation (copy)
 			if ScreenProps.onClose then
 				ScreenProps.onClose()
@@ -353,7 +353,7 @@ return {
 				Navigation.goBack()
 			end
 		end, { Navigation, ScreenProps.onClose })
-		local UseResult1 = ReactModule.useCallback(function(InitialPrompt) --[[ Line: 611 ]]
+		local UseResult1 = ReactModule.useCallback(function(InitialPrompt)
 			-- upvalues: ScreenProps (copy), Navigation (copy), BuildNavigationParamsModule (upval), Config (copy)
 			if ScreenProps.onOpenChat == nil then
 				Navigation.navigate(BuildNavigationParamsModule.BUILD_CHAT_SCREEN, { target = Config, initialPrompt = InitialPrompt })
@@ -375,7 +375,7 @@ return {
 		
 		return if ScreenProps.onClose then ReactModule.createElement(BuildSheetPage, { pageContent = Element }) else ReactModule.createElement(BuildFullscreenPage, { pageContent = Element })
 	end,
-	BuildAudienceScreen = function(p1) --[[ Line: 361 ]]
+	BuildAudienceScreen = function(p1)
 		-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), BuildNavigationParamsModule (copy), ReactModule (copy), OverflowMenuPageShellModule (copy), FFlagBuildBackButtonChevronModule (copy), IconName (copy), AudienceConfigurationContentModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy)
 		local UseLocalizationResult = UseLocalizationFunction({ audience = LocalizationStringsModule.BUILD_MENU_AUDIENCE })
 		local Navigation = p1.navigation
@@ -389,7 +389,7 @@ return {
 			gameIcon = Target.gameIcon,
 			isNewGameTarget = Target.isNewGameTarget
 		}
-		local UseResult = ReactModule.useCallback(function() --[[ Line: 369 ]]
+		local UseResult = ReactModule.useCallback(function()
 			-- upvalues: Navigation (copy)
 			Navigation.goBack()
 		end, { Navigation })
@@ -404,7 +404,7 @@ return {
 		
 		return if ScreenProps.onClose then ReactModule.createElement(BuildSheetPage, { pageContent = Element }) else ReactModule.createElement(BuildFullscreenPage, { pageContent = Element })
 	end,
-	BuildPrivateInvitesPickerScreen = function(p1) --[[ Line: 401 ]]
+	BuildPrivateInvitesPickerScreen = function(p1)
 		-- upvalues: BuildNavigationParamsModule (copy), ReactModule (copy), PrivateInvitesPickerContainerModule (copy)
 		local Navigation = p1.navigation
 		local ScreenProps = p1.screenProps or {}
@@ -417,7 +417,7 @@ return {
 			gameIcon = Target.gameIcon,
 			isNewGameTarget = Target.isNewGameTarget
 		}
-		local UseResult = ReactModule.useCallback(function() --[[ Line: 406 ]]
+		local UseResult = ReactModule.useCallback(function()
 			-- upvalues: ScreenProps (copy), Navigation (copy)
 			if ScreenProps.onClose then
 				ScreenProps.onClose()
@@ -434,7 +434,7 @@ return {
 			onInvitesSent = UseResult
 		})
 	end,
-	BuildPlaytestInviteManagementScreen = function(p1) --[[ Line: 425 ]]
+	BuildPlaytestInviteManagementScreen = function(p1)
 		-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), BuildNavigationParamsModule (copy), ReactModule (copy), OverflowMenuPageShellModule (copy), FFlagBuildBackButtonChevronModule (copy), IconName (copy), PrivateInvitesManagementContainerModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy), PrivateInvitesPickerHostModule (copy)
 		local PageTitle = UseLocalizationFunction({
 			pageTitle = LocalizationStringsModule.PRIVATE_INVITES_PAGE_TITLE
@@ -451,15 +451,15 @@ return {
 			isNewGameTarget = Target.isNewGameTarget
 		}
 		local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-		local UseResult = ReactModule.useCallback(function() --[[ Line: 435 ]]
+		local UseResult = ReactModule.useCallback(function()
 			-- upvalues: Navigation (copy)
 			Navigation.goBack()
 		end, { Navigation })
-		local UseResult1 = ReactModule.useCallback(function() --[[ Line: 438 ]]
+		local UseResult1 = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(true)
 		end, {})
-		local UseResult2 = ReactModule.useCallback(function() --[[ Line: 441 ]]
+		local UseResult2 = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(false)
 		end, {})
@@ -483,7 +483,7 @@ return {
 			}) else nil
 		})
 	end,
-	BuildTitleDescriptionScreen = function(p1) --[[ Line: 513 ]]
+	BuildTitleDescriptionScreen = function(p1)
 		-- upvalues: BuildNavigationParamsModule (copy), UseOnScreenKeyboardVisibleModule (copy), ReactModule (copy), BuildTitleDescriptionContent (copy), FFlagBuildPublishNavigationSheetModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy)
 		local Navigation = p1.navigation
 		local ScreenProps = p1.screenProps or {}
@@ -514,7 +514,7 @@ return {
 			pageContent = PageContent
 		})
 	end,
-	BuildVersionTitleDescriptionScreen = function(p1) --[[ Line: 539 ]]
+	BuildVersionTitleDescriptionScreen = function(p1)
 		-- upvalues: BuildNavigationParamsModule (copy), UseOnScreenKeyboardVisibleModule (copy), ReactModule (copy), BuildExperience (copy), FFlagBuildPublishNavigationSheetModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy)
 		local Navigation = p1.navigation
 		local ScreenProps = p1.screenProps or {}
@@ -545,7 +545,7 @@ return {
 			pageContent = PageContent
 		})
 	end,
-	BuildMediaSelectionScreen = function(p1) --[[ Line: 568 ]]
+	BuildMediaSelectionScreen = function(p1)
 		-- upvalues: BuildNavigationParamsModule (copy), FFlagBuildPublishNavigationSheetModule (copy), ReactModule (copy), MediaSelectionPageModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy)
 		local Navigation = p1.navigation
 		local ScreenProps = p1.screenProps or {}

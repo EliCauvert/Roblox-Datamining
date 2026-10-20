@@ -1,6 +1,6 @@
 ﻿local InterventionTypes = require(script:FindFirstAncestor("InterventionShared").InterventionAnalytics).Constants.InterventionTypes
 
-return function(Text: string) --[[ Line: 13 ]]
+return function(Text: string)
 	-- upvalues: InterventionTypes (copy)
 	local Lowered = if Text then Text:lower() else ""
 	

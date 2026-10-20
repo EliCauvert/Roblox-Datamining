@@ -3,7 +3,7 @@ local _ = require(Parent.React)
 local MotionModule = require(Parent.Motion)
 local TransitionPreset = MotionModule.TransitionPreset
 
-return function() --[[ Line: 24 | Named "useSpinnerMotionStates" ]]
+return function()
 	-- upvalues: MotionModule (copy), TransitionPreset (copy)
 	return {
 		Default = MotionModule.createState({ scale = 0, transparency = 1 }, {

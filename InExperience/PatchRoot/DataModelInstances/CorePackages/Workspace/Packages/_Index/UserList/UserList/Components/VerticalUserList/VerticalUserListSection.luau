@@ -11,7 +11,7 @@ local UserListTightHeaderSpacing = game:DefineFastFlag("UserListTightHeaderSpaci
 local FFlagUserListCtaIntegrationEnabled = require(Parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
 local FFlagUserListSurfaceExtensions = require(Parent.SharedFlags).FFlagUserListSurfaceExtensions
 
-return function(p1) --[[ Line: 45 | Named "VerticalUserListSection" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), UserListTightHeaderSpacing (copy), UserListHeaderModule (copy), UserListFooterModule (copy), VerticalUserListModule (copy), FFlagUserListCtaIntegrationEnabled (copy), FFlagUserListSurfaceExtensions (copy)
 	local Element = if p1.header then ReactModule.createElement(View, {
 		tag = {

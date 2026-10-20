@@ -15,7 +15,7 @@ local _UDim2_5 = UDim2.new(1, -StatsUtilsModule.TextPanelLeftMarginPix * 2, 0, S
 local StatsTextPanelModule = {}
 StatsTextPanelModule.__index = StatsTextPanelModule
 
-function StatsTextPanelModule.new(StatType) --[[ Line: 59 ]]
+function StatsTextPanelModule.new(StatType)
 	-- upvalues: StatsTextPanelModule (copy), StatsUtilsModule (copy), _UDim2_4 (copy), _UDim2 (copy)
 	local t = {}
 	setmetatable(t, StatsTextPanelModule)
@@ -39,7 +39,7 @@ function StatsTextPanelModule.new(StatType) --[[ Line: 59 ]]
 	return t
 end
 
-function StatsTextPanelModule:_getTarget() --[[ Line: 92 ]]
+function StatsTextPanelModule:_getTarget()
 	if self._performanceStats == nil then
 		return 0
 	else
@@ -49,7 +49,7 @@ function StatsTextPanelModule:_getTarget() --[[ Line: 92 ]]
 	end
 end
 
-function StatsTextPanelModule:_addCurrentValueWidget() --[[ Line: 108 ]]
+function StatsTextPanelModule:_addCurrentValueWidget()
 	-- upvalues: DecoratedValueLabelModule (copy), _UDim2_5 (copy), _UDim2_1 (copy), StatsUtilsModule (copy)
 	self._currentValueWidget = DecoratedValueLabelModule.new(self._statType, "Current")
 	self._currentValueWidget:PlaceInParent(self._frame, _UDim2_5, _UDim2_1)
@@ -64,7 +64,7 @@ function StatsTextPanelModule:_addCurrentValueWidget() --[[ Line: 108 ]]
 	self._currentValueDecoration = Image
 end
 
-function StatsTextPanelModule:_addTargetValueWidget() --[[ Line: 129 ]]
+function StatsTextPanelModule:_addTargetValueWidget()
 	-- upvalues: DecoratedValueLabelModule (copy), _UDim2_5 (copy), _UDim2_2 (copy), StatsUtilsModule (copy)
 	self._targetValueWidget = DecoratedValueLabelModule.new(self._statType, "Target")
 	self._targetValueWidget:PlaceInParent(self._frame, _UDim2_5, _UDim2_2)
@@ -77,7 +77,7 @@ function StatsTextPanelModule:_addTargetValueWidget() --[[ Line: 129 ]]
 	Image.Image = "rbxasset://textures/ui/PerformanceStats/TargetKey.png"
 end
 
-function StatsTextPanelModule:_addAverageValueWidget() --[[ Line: 148 ]]
+function StatsTextPanelModule:_addAverageValueWidget()
 	-- upvalues: DecoratedValueLabelModule (copy), _UDim2_5 (copy), _UDim2_3 (copy), StatsUtilsModule (copy)
 	self._averageValueWidget = DecoratedValueLabelModule.new(self._statType, "Average")
 	self._averageValueWidget:PlaceInParent(self._frame, _UDim2_5, _UDim2_3)
@@ -89,18 +89,18 @@ function StatsTextPanelModule:_addAverageValueWidget() --[[ Line: 148 ]]
 	StatsUtilsModule.StyleAverageLine(Frame)
 end
 
-function StatsTextPanelModule:_getTitle() --[[ Line: 165 ]]
+function StatsTextPanelModule:_getTitle()
 	-- upvalues: StatsUtilsModule (copy)
 	return StatsUtilsModule.TypeToName[self._statType]
 end
 
-function StatsTextPanelModule:PlaceInParent(Parent, Size, Position) --[[ Line: 169 ]]
+function StatsTextPanelModule:PlaceInParent(Parent, Size, Position)
 	self._frame.Position = Position
 	self._frame.Size = Size
 	self._frame.Parent = Parent
 end
 
-function StatsTextPanelModule:SetStatsAggregator(_aggregator) --[[ Line: 176 ]]
+function StatsTextPanelModule:SetStatsAggregator(_aggregator)
 	if self._aggregator then
 		self._aggregator:RemoveListener(self._listenerId)
 		self._listenerId = nil
@@ -110,17 +110,17 @@ function StatsTextPanelModule:SetStatsAggregator(_aggregator) --[[ Line: 176 ]]
 	self:_refreshVisibility()
 end
 
-function StatsTextPanelModule:SetVisible(Visible) --[[ Line: 188 ]]
+function StatsTextPanelModule:SetVisible(Visible)
 	self._frame.Visible = Visible
 	self:_refreshVisibility()
 end
 
-function StatsTextPanelModule._shouldBeVisible(p1) --[[ Line: 193 ]]
+function StatsTextPanelModule._shouldBeVisible(p1)
 	-- upvalues: StatsUtilsModule (copy)
 	return if StatsUtilsModule.PerformanceStatsShouldBeVisible() then p1._frame.Visible else false
 end
 
-function StatsTextPanelModule:_refreshVisibility() --[[ Line: 201 ]]
+function StatsTextPanelModule:_refreshVisibility()
 	if self:_shouldBeVisible() then
 		self:_startListening()
 		self:_updateFromAggregator()
@@ -131,11 +131,11 @@ function StatsTextPanelModule:_refreshVisibility() --[[ Line: 201 ]]
 	end
 end
 
-function StatsTextPanelModule:OnPerformanceStatsShouldBeVisibleChanged() --[[ Line: 210 ]]
+function StatsTextPanelModule:OnPerformanceStatsShouldBeVisibleChanged()
 	self:_refreshVisibility()
 end
 
-function StatsTextPanelModule:_stopListening() --[[ Line: 214 ]]
+function StatsTextPanelModule:_stopListening()
 	if self._aggregator == nil then return end
 	if self._listenerId ~= nil then
 		self._aggregator:RemoveListener(self._listenerId)
@@ -145,10 +145,10 @@ function StatsTextPanelModule:_stopListening() --[[ Line: 214 ]]
 	end
 end
 
-function StatsTextPanelModule:_startListening() --[[ Line: 227 ]]
+function StatsTextPanelModule:_startListening()
 	if self._aggregator == nil then return end
 	if self._listenerId == nil then
-		self._listenerId = self._aggregator:AddListener(function() --[[ Line: 236 ]]
+		self._listenerId = self._aggregator:AddListener(function()
 			-- upvalues: self (copy)
 			self:_updateFromAggregator()
 		end)
@@ -157,7 +157,7 @@ function StatsTextPanelModule:_startListening() --[[ Line: 227 ]]
 	end
 end
 
-function StatsTextPanelModule:_updateFromAggregator() --[[ Line: 241 ]]
+function StatsTextPanelModule:_updateFromAggregator()
 	-- upvalues: StatsUtilsModule (copy)
 	local LatestValue = 0
 	local Average = 0
@@ -174,7 +174,7 @@ function StatsTextPanelModule:_updateFromAggregator() --[[ Line: 241 ]]
 	self._currentValueDecoration.ImageColor3 = StatsUtilsModule.GetColorForValue(LatestValue, Target)
 end
 
-function StatsTextPanelModule:SetZIndex(ZIndex) --[[ Line: 260 ]]
+function StatsTextPanelModule:SetZIndex(ZIndex)
 	self._frame.ZIndex = ZIndex
 	self._titleLabel.ZIndex = ZIndex
 	self._currentValueWidget:SetZIndex(ZIndex)

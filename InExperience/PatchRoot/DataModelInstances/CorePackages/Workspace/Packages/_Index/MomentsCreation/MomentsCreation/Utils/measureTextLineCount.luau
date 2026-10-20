@@ -1,6 +1,6 @@
 ﻿local TextService = game:GetService("TextService")
 
-return function(String, X: number, FontSize, p1, MaxValue: number): number --[[ Line: 9 | Named "measureTextLineCount" ]]
+return function(String, X: number, FontSize, p1, MaxValue: number): number
 	-- upvalues: TextService (copy)
 	if String == "" or X <= 0 then
 		return 1

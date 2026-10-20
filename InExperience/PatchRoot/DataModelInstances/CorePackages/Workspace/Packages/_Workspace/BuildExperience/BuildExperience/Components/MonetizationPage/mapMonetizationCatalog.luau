@@ -4,15 +4,15 @@ local _ = require(Parent.DataHydration.GamePassConfig)
 local _ = require(script.Parent.MonetizationPageView)
 local MapDeveloperProductsToMonetizationProductsModule = require(script.Parent.mapDeveloperProductsToMonetizationProducts)
 
-local function _(p1, p2): string --[[ Line: 29 | Named "identity" ]]
+local function _(p1, p2): string
 	return `{p1}:{p2}`
 end
 
-local _ = function(p1, p2) --[[ Line: 33 | Named "robuxPrice" ]]
+local _ = function(p1, p2)
 	return if p1 == nil then p2 else tostring(p1), p1 ~= nil
 end
 
-local function mapGamePasses(GamePasses, p1, List) --[[ Line: 37 ]]
+local function mapGamePasses(GamePasses, p1, List)
 	if GamePasses == nil then return end
 	for _, gamePass in GamePasses.gamePasses do
 		local Text = tostring(gamePass.gamePassId)
@@ -37,7 +37,7 @@ local function mapGamePasses(GamePasses, p1, List) --[[ Line: 37 ]]
 	end
 end
 
-return function(p2, p3) --[[ Line: 64 | Named "mapMonetizationCatalog" ]]
+return function(p2, p3)
 	-- upvalues: MapDeveloperProductsToMonetizationProductsModule (copy), mapGamePasses (copy)
 	local MapDeveloperProductsToMonetizationProductsModuleResult = MapDeveloperProductsToMonetizationProductsModule(p2.developerProducts, {
 		formatDefaultProductName = p3.formatDefaultProductName,

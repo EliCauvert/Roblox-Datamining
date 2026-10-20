@@ -6,7 +6,7 @@ local AppChatPerfChatMembersPaginationWindowSize = game:DefineFastInt("AppChatPe
 local AppChatPerfChatMembersPaginationInitialRender = game:DefineFastInt("AppChatPerfChatMembersPaginationInitialRender", 8)
 local AppChatPerfChatMembersPaginationOnEndReachedUnits = game:DefineFastInt("AppChatPerfChatMembersPaginationOnEndReachedUnits", 1)
 
-local function KeyExtractor(p1, p2): string --[[ Line: 22 ]]
+local function KeyExtractor(p1, p2): string
 	return (tostring(p1 or p2))
 end
 
@@ -17,10 +17,10 @@ local Style = {
 }
 local ContentContainerStyle = { BackgroundTransparency = 1 }
 
-return ReactModule.memo(function(p1) --[[ Line: 35 | Named "PaginatedChatMembers" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), AppChatPerfChatMembersPaginationWindowSize (copy), AppChatPerfChatMembersPaginationInitialRender (copy), AppChatPerfChatMembersPaginationOnEndReachedUnits (copy), FoundationModule (copy), FlatList (copy), Style (copy), ContentContainerStyle (copy), KeyExtractor (copy)
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 38 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy)
 		if UseRefResult.current then
 			local NativeScrollRef = UseRefResult.current:getNativeScrollRef()
@@ -46,7 +46,7 @@ return ReactModule.memo(function(p1) --[[ Line: 35 | Named "PaginatedChatMembers
 				windowSize = AppChatPerfChatMembersPaginationWindowSize,
 				initialNumToRender = AppChatPerfChatMembersPaginationInitialRender,
 				onEndReachedThreshold = AppChatPerfChatMembersPaginationOnEndReachedUnits,
-				onEndReached = ReactModule.useCallback(function() --[[ Line: 51 ]]
+				onEndReached = ReactModule.useCallback(function()
 					-- upvalues: p1 (copy)
 					if p1.fetchMoreFriends then
 						p1.fetchMoreFriends()

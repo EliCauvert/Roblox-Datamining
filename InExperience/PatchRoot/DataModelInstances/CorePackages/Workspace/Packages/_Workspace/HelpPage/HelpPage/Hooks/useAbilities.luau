@@ -4,7 +4,7 @@ local ReactModule = require(Parent.Parent.React)
 local BindingConfigsModule = require(Parent.Configs.BindingConfigs)
 local _ = require(Parent.Configs.ConfigTypes)
 local ConstantsModule = require(Parent.Constants)
-local v1 = (function(): number --[[ Line: 21 | Named "getStaticCharacterMovementControlCount" ]]
+local v1 = (function(): number
 	-- upvalues: BindingConfigsModule (copy)
 	local Count = 0
 	
@@ -16,14 +16,14 @@ local v1 = (function(): number --[[ Line: 21 | Named "getStaticCharacterMovement
 	return Count
 end)()
 
-local function _(Text: string) --[[ Line: 36 | Named "getAbilityLayoutOrder" ]]
+local function _(Text: string)
 	-- upvalues: v1 (copy)
 	local Number: number? = tonumber((string.sub(Text, 14)))
 	
 	return if Number == nil then nil else v1 + Number
 end
 
-local _ = function(Object) --[[ Line: 45 | Named "getCharacterContext" ]]
+local _ = function(Object)
 	if Object == nil then
 		return nil
 	end
@@ -38,7 +38,7 @@ local _ = function(Object) --[[ Line: 45 | Named "getCharacterContext" ]]
 	end
 end
 
-local function getKeyboardCombo(Input) --[[ Line: 63 ]]
+local function getKeyboardCombo(Input)
 	local List = {}
 	local PrimaryModifier = Input.PrimaryModifier
 	local SecondaryModifier = Input.SecondaryModifier
@@ -56,7 +56,7 @@ local function getKeyboardCombo(Input) --[[ Line: 63 ]]
 	return if #List == 0 then nil else List
 end
 
-local function readAction(InputAction) --[[ Line: 84 ]]
+local function readAction(InputAction)
 	-- upvalues: v1 (copy), ConstantsModule (copy), getKeyboardCombo (copy), BindingConfigsModule (copy)
 	local Number: number? = tonumber((string.sub(InputAction.Name, 14)))
 	local NewNumber = if Number == nil then nil else v1 + Number
@@ -105,7 +105,7 @@ local function readAction(InputAction) --[[ Line: 84 ]]
 	return config
 end
 
-local function readAbilities(Object) --[[ Line: 139 ]]
+local function readAbilities(Object)
 	-- upvalues: readAction (copy)
 	local Object1 = nil
 	if Object == nil then
@@ -137,18 +137,18 @@ local function readAbilities(Object) --[[ Line: 139 ]]
 	return if next(t) == nil then nil else t
 end
 
-local _ = function(Tbl) --[[ Line: 161 | Named "disconnectAll" ]]
+local _ = function(Tbl)
 	for _, Connection in Tbl do
 		Connection:Disconnect()
 	end
 	table.clear(Tbl)
 end
 
-return function(p1) --[[ Line: 168 | Named "useAbilities" ]]
+return function(p1)
 	-- upvalues: Players (copy), ReactModule (copy), readAbilities (copy)
 	local P4 = p1 or Players.LocalPlayer
 	local UseStateResult, UseStateResult2 = ReactModule.useState((readAbilities(P4)))
-	ReactModule.useEffect(function() --[[ Line: 172 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: P4 (copy), UseStateResult2 (copy), readAbilities (upval)
 		if P4 == nil then return end
 		local List = {}
@@ -156,7 +156,7 @@ return function(p1) --[[ Line: 168 | Named "useAbilities" ]]
 		local List2 = {}
 		local List3 = {}
 		
-		local function refresh() --[[ Line: 182 ]]
+		local function refresh()
 			-- upvalues: UseStateResult2 (upval), readAbilities (upval), P4 (upval)
 			UseStateResult2((readAbilities(P4)))
 		end
@@ -164,7 +164,7 @@ return function(p1) --[[ Line: 168 | Named "useAbilities" ]]
 		local _ = nil
 		local _ = nil
 		
-		local function v43() --[[ Line: 189 ]]
+		local function v43()
 			-- upvalues: List3 (copy), P4 (upval), refresh (copy), v43 (ref), UseStateResult2 (upval), readAbilities (upval)
 			for _, Connection in List3 do
 				Connection:Disconnect()
@@ -188,12 +188,12 @@ return function(p1) --[[ Line: 168 | Named "useAbilities" ]]
 			for _, InputAction in Object:GetChildren() do
 				if InputAction:IsA("InputAction") and string.match(InputAction.Name, "^AbilityAction%d+$") then
 					table.insert(List3, InputAction.Changed:Connect(refresh))
-					table.insert(List3, InputAction.ChildAdded:Connect(function() --[[ Line: 206 ]]
+					table.insert(List3, InputAction.ChildAdded:Connect(function()
 						-- upvalues: v43 (upval), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
 						v43()
 						UseStateResult2((readAbilities(P4)))
 					end))
-					table.insert(List3, InputAction.ChildRemoved:Connect(function() --[[ Line: 213 ]]
+					table.insert(List3, InputAction.ChildRemoved:Connect(function()
 						-- upvalues: v43 (upval), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
 						v43()
 						UseStateResult2((readAbilities(P4)))
@@ -208,7 +208,7 @@ return function(p1) --[[ Line: 168 | Named "useAbilities" ]]
 			end
 		end
 		
-		local function v44() --[[ Line: 227 ]]
+		local function v44()
 			-- upvalues: List1 (copy), List2 (copy), List3 (copy), P4 (upval), v44 (ref), UseStateResult2 (upval), readAbilities (upval), refresh (copy), v43 (ref)
 			for _, Connection in List1 do
 				Connection:Disconnect()
@@ -227,12 +227,12 @@ return function(p1) --[[ Line: 168 | Named "useAbilities" ]]
 			local InputContexts = P4:FindFirstChild("InputContexts")
 			
 			if InputContexts == nil then return end
-			table.insert(List1, InputContexts.ChildAdded:Connect(function() --[[ Line: 239 ]]
+			table.insert(List1, InputContexts.ChildAdded:Connect(function()
 				-- upvalues: v44 (upval), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
 				v44()
 				UseStateResult2((readAbilities(P4)))
 			end))
-			table.insert(List1, InputContexts.ChildRemoved:Connect(function() --[[ Line: 246 ]]
+			table.insert(List1, InputContexts.ChildRemoved:Connect(function()
 				-- upvalues: v44 (upval), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
 				v44()
 				UseStateResult2((readAbilities(P4)))
@@ -253,12 +253,12 @@ return function(p1) --[[ Line: 168 | Named "useAbilities" ]]
 			end
 			if v2 ~= nil then
 				table.insert(List2, v2.Changed:Connect(refresh))
-				table.insert(List2, v2.ChildAdded:Connect(function() --[[ Line: 260 ]]
+				table.insert(List2, v2.ChildAdded:Connect(function()
 					-- upvalues: v43 (upval), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
 					v43()
 					UseStateResult2((readAbilities(P4)))
 				end))
-				table.insert(List2, v2.ChildRemoved:Connect(function() --[[ Line: 267 ]]
+				table.insert(List2, v2.ChildRemoved:Connect(function()
 					-- upvalues: v43 (upval), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
 					v43()
 					UseStateResult2((readAbilities(P4)))
@@ -269,14 +269,14 @@ return function(p1) --[[ Line: 168 | Named "useAbilities" ]]
 			end
 		end
 		
-		table.insert(List, P4.ChildAdded:Connect(function(Child) --[[ Line: 277 ]]
+		table.insert(List, P4.ChildAdded:Connect(function(Child)
 			-- upvalues: v44 (ref), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
 			if Child.Name == "InputContexts" then
 				v44()
 				UseStateResult2((readAbilities(P4)))
 			end
 		end))
-		table.insert(List, P4.ChildRemoved:Connect(function(Child) --[[ Line: 286 ]]
+		table.insert(List, P4.ChildRemoved:Connect(function(Child)
 			-- upvalues: v44 (ref), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
 			if Child.Name == "InputContexts" then
 				v44()
@@ -286,7 +286,7 @@ return function(p1) --[[ Line: 168 | Named "useAbilities" ]]
 		v44()
 		UseStateResult2((readAbilities(P4)))
 		
-		return function() --[[ Line: 297 ]]
+		return function()
 			-- upvalues: List (copy), List1 (copy), List2 (copy), List3 (copy)
 			for _, Connection in List do
 				Connection:Disconnect()

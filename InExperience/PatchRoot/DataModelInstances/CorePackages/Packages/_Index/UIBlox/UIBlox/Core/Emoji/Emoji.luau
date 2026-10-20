@@ -7,12 +7,12 @@ local EmojiModule = require(Parent.Enum.Emoji)
 local ConstantsModule = require(Parent.constants)
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
-local function _(p1) --[[ Line: 24 | Named "getEmojiString" ]]
+local function _(p1)
 	-- upvalues: EmojiModule (copy), ConstantsModule (copy)
 	return if EmojiModule.isEnumValue(p1) then ConstantsModule[p1.rawValue()] else ""
 end
 
-return function(p1) --[[ Line: 32 | Named "Emoji" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), EmojiModule (copy), ConstantsModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local Emoji = p1.emoji
 	

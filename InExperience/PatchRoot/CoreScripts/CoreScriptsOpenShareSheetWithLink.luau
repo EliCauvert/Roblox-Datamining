@@ -10,7 +10,7 @@ if DifferentiateSharingBaseOnPlatform then
 	local ReadResult = AppPolicy.read()
 	EligibleForCapturesFeature = ReadResult and ReadResult.EnableShareCaptureCTA and ReadResult.EligibleForCapturesFeature or false
 end
-SocialService.OpenShareSheetWithLink:Connect(function(Text) --[[ Line: 21 ]]
+SocialService.OpenShareSheetWithLink:Connect(function(Text)
 	-- upvalues: Default (copy), DifferentiateSharingBaseOnPlatform (copy), EligibleForCapturesFeature (ref), IsContentSharingAllowed (copy)
 	if not Default then return end
 	assert(Default ~= nil, "ExternalContentSharingProtocol is required")

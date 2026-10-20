@@ -34,12 +34,12 @@ local config1 = {
 	colorNamespace = require(Foundation.Enums.ColorNamespace).Inverse
 }
 
-local function _(Current, Total) --[[ Line: 89 | Named "stepsText" ]]
+local function _(Current, Total)
 	-- upvalues: TranslatorModule (copy)
 	return TranslatorModule:FormatByKey("CommonUI.Controls.Label.PageCount", { current = Current, total = Total })
 end
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 93 | Named "Coachmark" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseScaledValueModule (copy), FlagsModule (copy), ConstantsModule (copy), ReactModule (copy), LoggerModule (copy), InputSizeModule (copy), FillBehaviorModule (copy), DashModule (copy), ButtonModule (copy), PopoverModule (copy), WithCommonPropsModule (copy), RadiusModule (copy), PresentationContextModule (copy), config1 (copy), ViewModule (copy), CloseAffordanceModule (copy), CloseAffordanceVariantModule (copy), TextModule (copy), TranslatorModule (copy), ButtonGroupModule (copy), OrientationModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
@@ -49,7 +49,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 93 |
 	local Config = if FlagsModule.FoundationEducationalTooltipMinMediaWidth then nil elseif WithDefaultsModuleResult.onClose then {
 		MaxSize = Vector2.new(UseScaledValueModuleResult - UseTokensModuleResult.Size.Size_1200, 1e999)
 	} else nil
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 112 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy), FlagsModule (upval), LoggerModule (upval), InputSizeModule (upval), FillBehaviorModule (upval), DashModule (upval), ReactModule (upval), ButtonModule (upval)
 		local Elements = {}
 		

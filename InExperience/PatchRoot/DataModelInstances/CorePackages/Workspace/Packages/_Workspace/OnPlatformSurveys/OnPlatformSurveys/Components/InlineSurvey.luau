@@ -24,13 +24,13 @@ local SurveyModalModule = require(OnPlatformSurveys.Components.SurveyModal)
 local _ = require(OnPlatformSurveys.Types.InlineSurveyTypes)
 local UseInlineSurveyFlowModule = require(OnPlatformSurveys.Hooks.useInlineSurveyFlow)
 
-local function noop() --[[ Line: 48 ]] end
+local function noop() end
 
-return ReactModule.memo(function(p1) --[[ Line: 50 | Named "InlineSurvey" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseRoactServiceFunction (copy), RoactNetworking (copy), InlineEventTypeModule (copy), ReactModule (copy), MakeDevSurveyRequestImplModule (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), InlineSurveyLocalizationKeysModule (copy), FFlagInlineSurveyEnhancements (copy), InlineSurveyPresetsModule (copy), UseInlineSurveyFlowModule (copy), PhaseModule (copy), SurfaceWrapperModule (copy), SurfaceModule (copy), noop (copy), SurveyModalModule (copy), SurveyPhaseSlotsModule (copy), Button (copy), FillBehavior (copy), InviteBannerModule (copy), SurveyCardModule (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
 	local IsEventTypeMatch = p1.eventType == InlineEventTypeModule.DevDoNotPushToProd
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 53 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: IsEventTypeMatch (copy), MakeDevSurveyRequestImplModule (upval), UseRoactServiceResult (copy)
 		return if IsEventTypeMatch then MakeDevSurveyRequestImplModule.makeRequestImpl() else UseRoactServiceResult
 	end, { IsEventTypeMatch, UseRoactServiceResult })
@@ -59,7 +59,7 @@ return ReactModule.memo(function(p1) --[[ Line: 50 | Named "InlineSurvey" ]]
 	local UseRefResult = ReactModule.useRef(false)
 	local DismissFunction = UseInlineSurveyFlowModuleResult.dismiss
 	local ErrorType = UseInlineSurveyFlowModuleResult.state.errorType
-	ReactModule.useEffect(function() --[[ Line: 88 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Phase (copy), PhaseModule (upval), ErrorType (copy), DismissFunction (copy)
 		if Phase == PhaseModule.Error and ErrorType == "fetch" then
 			DismissFunction()

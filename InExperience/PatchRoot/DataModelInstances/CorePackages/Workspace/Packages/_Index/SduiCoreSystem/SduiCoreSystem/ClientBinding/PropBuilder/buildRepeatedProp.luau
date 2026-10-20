@@ -11,7 +11,7 @@ local SduiLoggerModule = require(SduiCoreSystem.SduiLogger)
 local SduiParseHelpersModule = require(SduiCoreSystem.SduiParseHelpers)
 local _ = require(SduiCoreSystem.SduiComponentType)
 
-local function buildRepeatedProp(p1, p2, p3, p4, p5, p6, p7) --[[ Line: 33 ]]
+local function buildRepeatedProp(p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: SduiPropUtilsModule (copy), SduiClientBindingBuilderModule (copy), PropResultCategory (copy), SignalsModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), SduiParseHelpersModule (copy), TutilsModule (copy), buildRepeatedProp (copy)
 	local CurrentComponentType = p5.currentComponentType
 	local CurrentParserName = p5.currentParserName
@@ -31,7 +31,7 @@ local function buildRepeatedProp(p1, p2, p3, p4, p5, p6, p7) --[[ Line: 33 ]]
 		return SduiPropUtilsModule.generateTablePropSignalValue(Array, p3, p5, p6, p4, SduiClientBindingBuilderModule.buildPropTable, p7), PropResultCategory.PropSignal
 	else
 		if p1 == "binding_path" then
-			return SduiPropUtilsModule.generateDynamicBindingPropValue(p2, p3, p5, p4, function(p8, p9) --[[ Line: 73 | Named "evaluatePropArray" ]]
+			return SduiPropUtilsModule.generateDynamicBindingPropValue(p2, p3, p5, p4, function(p8, p9)
 				-- upvalues: SduiClientBindingBuilderModule (upval), p3 (copy), p4 (copy), p5 (copy), p6 (copy), SduiPropUtilsModule (upval)
 				local PropTable, PropTable2, PropTable3 = SduiClientBindingBuilderModule.buildPropTable(p8, p3, p4, p5, p6)
 				
@@ -47,9 +47,9 @@ local function buildRepeatedProp(p1, p2, p3, p4, p5, p6, p7) --[[ Line: 33 ]]
 			if FieldMap == nil then
 				error("buildRepeatedProp array_map: missing field_map")
 			end
-			return SignalsModule.createComputed(function(p8) --[[ Line: 113 ]]
+			return SignalsModule.createComputed(function(p8)
 				-- upvalues: SduiPropUtilsModule (upval), Type (copy), Value (copy), p3 (copy), p4 (copy), p5 (copy), ItemHydrationSpecs (copy), FieldMap (copy), p6 (copy), SduiClientBindingBuilderModule (upval), SduiLoggerModule (upval), SduiErrorsModule (upval), SduiParseHelpersModule (upval), CurrentComponentType (copy), CurrentParserName (copy)
-				local Success, Result = pcall(function() --[[ Line: 114 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: SduiPropUtilsModule (upval), Type (upval), Value (upval), p8 (copy), p3 (upval), p4 (upval), p5 (upval), ItemHydrationSpecs (upval), FieldMap (upval), p6 (upval), SduiClientBindingBuilderModule (upval)
 					local ResolveSourceArrayResult = SduiPropUtilsModule.resolveSourceArray(Type, Value, p8, p3, p4, p5)
 					

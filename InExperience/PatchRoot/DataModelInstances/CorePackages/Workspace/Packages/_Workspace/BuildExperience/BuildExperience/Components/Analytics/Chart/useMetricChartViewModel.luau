@@ -35,7 +35,7 @@ local list = {
 	AnalyticsKeysModule.ANALYTICS_MONTH_DEC
 }
 
-return function(p1) --[[ Line: 86 | Named "useMetricChartViewModel" ]]
+return function(p1)
 	-- upvalues: FoundationModule (copy), LocalizationService (copy), FoundationFontFaceMigration (copy), ReactModule (copy), AnalyticsKeysModule (copy), FFlagBuildAnalyticsGoalsModule (copy), AnalyticsUnitModule (copy), list (copy), UseLocalizationFunction (copy), FillMetricSeriesGapsModule (copy), DeriveChartAxesModule (copy), FormatMetricValueModule (copy), ScaleValueToUnitModule (copy), FormatMetricTimestampModule (copy), NoDataPlaceholderModule (copy), MetricValueRoundsToZeroModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local RobloxLocaleId = LocalizationService.RobloxLocaleId
@@ -67,7 +67,7 @@ return function(p1) --[[ Line: 86 | Named "useMetricChartViewModel" ]]
 		percent = UseLocalizationResult.percent,
 		duration = UseLocalizationResult.duration
 	}
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 139 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), FillMetricSeriesGapsModule (upval)
 		local v1 = nil
 		
@@ -83,12 +83,12 @@ return function(p1) --[[ Line: 86 | Named "useMetricChartViewModel" ]]
 		end
 		return FillMetricSeriesGapsModule(p1.series, v1)
 	end, { p1.series, p1.window, p1.latestAvailableTime })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 149 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: DeriveChartAxesModule (upval), UseMemoResult (copy)
 		return DeriveChartAxesModule(UseMemoResult)
 	end, { UseMemoResult })
 	local CountPoints = #UseMemoResult1.points
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 154 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: CountPoints (copy), UseStateResult2 (copy)
 		if CountPoints ~= 0 then
 			UseStateResult2((math.clamp(math.round(p2.X) + 1, 1, CountPoints)))
@@ -96,18 +96,18 @@ return function(p1) --[[ Line: 86 | Named "useMetricChartViewModel" ]]
 			return
 		end
 	end, { CountPoints })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 161 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult1 (copy), UseStateResult2 (copy)
 		if not UseStateResult1 then
 			UseStateResult2(nil)
 		end
 	end, { UseStateResult1 })
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 167 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_1 (copy), UseResult (copy)
 		UseStateResult2_1(true)
 		UseResult(p2)
 	end, { UseResult })
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 174 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy), UseStateResult2 (copy)
 		UseStateResult2_1(false)
 		UseStateResult2(nil)

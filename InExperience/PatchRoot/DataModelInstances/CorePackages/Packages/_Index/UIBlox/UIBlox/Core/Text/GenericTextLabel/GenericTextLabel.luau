@@ -24,12 +24,12 @@ GenericTextLabel.defaultProps = {
 	maxSize = Vector2.new(10000, 10000)
 }
 
-function GenericTextLabel.render(p1) --[[ Line: 52 ]]
+function GenericTextLabel.render(p1)
 	-- upvalues: WithStyleModule (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy), CryoModule (copy), RoactModule (copy), NormalizeFontFaceFunction (copy), UIBloxConfigModule (copy)
 	local Text = p1.props.Text
 	local FluidSizing = p1.props.fluidSizing
 	
-	return WithStyleModule(function(p2) --[[ Line: 56 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: p1 (copy), FoundationFontFaceMigration (upval), GetFontFromFontStyleModule (upval), Text (copy), GetTextSizeModule (upval), CryoModule (upval), RoactModule (upval), NormalizeFontFaceFunction (upval), FluidSizing (copy), UIBloxConfigModule (upval)
 		local FontStyle = p1.props.fontStyle
 		local ColorStyle = p1.props.colorStyle

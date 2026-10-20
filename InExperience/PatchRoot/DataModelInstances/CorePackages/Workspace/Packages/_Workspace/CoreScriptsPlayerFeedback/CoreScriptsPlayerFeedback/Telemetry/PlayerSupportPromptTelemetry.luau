@@ -34,7 +34,7 @@ local config1 = {
 	TICKET_CREATION_GIBBERISH_ERROR = TicketResult.Rejected
 }
 
-local function _(p1): string --[[ Line: 69 | Named "fieldString" ]]
+local function _(p1): string
 	return if p1 == nil then "" else tostring(p1)
 end
 
@@ -42,9 +42,9 @@ local PlayerSupportPromptTelemetryModule = {
 	Action = Action,
 	DismissMethod = { Escape = "escape", DialogClose = "dialog_close" },
 	TicketResult = TicketResult,
-	log = function(p1) --[[ Line: 82 ]]
+	log = function(p1)
 		-- upvalues: TelemetryService (ref), config (copy), StandardizedFields (copy)
-		pcall(function() --[[ Line: 83 ]]
+		pcall(function()
 			-- upvalues: TelemetryService (upval), config (upval), StandardizedFields (upval), p1 (copy)
 			local ShareUserId = p1.shareUserId
 			local Text: string = if ShareUserId == nil then "" else tostring(ShareUserId)
@@ -69,7 +69,7 @@ local PlayerSupportPromptTelemetryModule = {
 	end
 }
 
-function PlayerSupportPromptTelemetryModule.logTicketResult(Reason, p1) --[[ Line: 101 ]]
+function PlayerSupportPromptTelemetryModule.logTicketResult(Reason, p1)
 	-- upvalues: config1 (copy), PlayerSupportPromptTelemetryModule (copy), Action (copy)
 	local Entry = config1[Reason]
 	
@@ -88,7 +88,7 @@ function PlayerSupportPromptTelemetryModule.logTicketResult(Reason, p1) --[[ Lin
 	end
 end
 
-function PlayerSupportPromptTelemetryModule.logUnavailableShown(Text: string) --[[ Line: 119 ]]
+function PlayerSupportPromptTelemetryModule.logUnavailableShown(Text: string)
 	-- upvalues: config1 (copy), Action (copy), PlayerSupportPromptTelemetryModule (copy)
 	if not config1[Text] then
 		PlayerSupportPromptTelemetryModule.log({
@@ -100,7 +100,7 @@ function PlayerSupportPromptTelemetryModule.logUnavailableShown(Text: string) --
 	end
 end
 
-function PlayerSupportPromptTelemetryModule._setServicesForTesting(p1) --[[ Line: 132 ]]
+function PlayerSupportPromptTelemetryModule._setServicesForTesting(p1)
 	-- upvalues: TelemetryService (ref)
 	TelemetryService = p1
 end

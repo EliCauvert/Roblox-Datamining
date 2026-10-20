@@ -29,10 +29,10 @@ local config = {
 	isRepliedTo = false,
 	isPressed = false,
 	isLastMessageInMessageGroup = false,
-	[ReactModule.Change.AbsoluteSize] = function(_) --[[ Line: 52 ]] end
+	[ReactModule.Change.AbsoluteSize] = function(_) end
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 55 | Named "ChatBubbleContainer" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), UseCursorFunction (copy), FFlagAppChatConsoleFocusFixesModule (copy), FoundationModule (copy), UseStyleFunction (copy), UseSelectedThemeFunction (copy), ReactModule (copy), FFlagAppChatBubbleThemeTokensModule (copy), ColorMode (copy), ColorSystem (copy), FFlagAppChatBlueSentBubblesModule (copy), UnfilteredMessageColorConfigModule (copy), BUBBLEVARIANTS (copy), ChatBubbleEnumModule (copy), ChatBubbleGroupableModule (copy), RepliedToMarkerModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseTokensResult = UseTokensFunction()
@@ -45,7 +45,7 @@ return ReactModule.memo(function(p1) --[[ Line: 55 | Named "ChatBubbleContainer"
 	local UseSelectedThemeResult = UseSelectedThemeFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(UseStyleResult.Theme.UIDefault)
 	
-	local function setBubbleStyle() --[[ Line: 74 ]]
+	local function setBubbleStyle()
 		-- upvalues: JoinResult (copy), FFlagAppChatBubbleThemeTokensModule (upval), UseTokensResult (copy), UseSelectedThemeResult (copy), ColorMode (upval), ColorSystem (upval), IsIncoming (copy), IsUnfiltered (copy), FFlagAppChatBlueSentBubblesModule (upval), UseStateResult2 (copy)
 		UseStateResult2(if JoinResult.isRepliedTo and FFlagAppChatBubbleThemeTokensModule then {
 			Color = UseTokensResult.Color.Shift.Shift_200.Color3,
@@ -68,7 +68,7 @@ return ReactModule.memo(function(p1) --[[ Line: 55 | Named "ChatBubbleContainer"
 		})
 	end
 	
-	local function setPressedBubbleStyle() --[[ Line: 118 ]]
+	local function setPressedBubbleStyle()
 		-- upvalues: JoinResult (copy), FFlagAppChatBubbleThemeTokensModule (upval), IsIncoming (copy), UseTokensResult (copy), IsUnfiltered (copy), FFlagAppChatBlueSentBubblesModule (upval), UseStateResult2 (copy), UseSelectedThemeResult (copy), ColorMode (upval), ColorSystem (upval), UnfilteredMessageColorConfigModule (upval)
 		if JoinResult.isRepliedTo or JoinResult.isPending then return end
 		if not FFlagAppChatBubbleThemeTokensModule then
@@ -104,7 +104,7 @@ return ReactModule.memo(function(p1) --[[ Line: 55 | Named "ChatBubbleContainer"
 		UseStateResult2(config)
 	end
 	
-	ReactModule.useLayoutEffect(function() --[[ Line: 183 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: JoinResult (copy), setPressedBubbleStyle (copy), setBubbleStyle (copy)
 		if JoinResult.isPressed then
 			setPressedBubbleStyle()
@@ -118,7 +118,7 @@ return ReactModule.memo(function(p1) --[[ Line: 55 | Named "ChatBubbleContainer"
 		IsIncoming, IsPending, IsUnfiltered, JoinResult.isAssetCard
 	})
 	
-	local function _(p2, p3, p4) --[[ Line: 201 | Named "getBubbleVariant" ]]
+	local function _(p2, p3, p4)
 		-- upvalues: BUBBLEVARIANTS (upval)
 		return if p2 and p3 or p4 then BUBBLEVARIANTS.SINGLE elseif p2 then BUBBLEVARIANTS.TOP elseif p3 then BUBBLEVARIANTS.BOTTOM else BUBBLEVARIANTS.MIDDLE
 	end

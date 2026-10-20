@@ -34,13 +34,13 @@ local FFlagPlayerListIgnoreDevGamepadBindings = PlayerListModule.Flags.FFlagPlay
 local FFlagPlayerListRemoveTopStatModule = require(Parent1.Flags.FFlagPlayerListRemoveTopStat)
 local config = { dampingRatio = 1, frequency = 4 }
 
-local function _(p1, p2, p3, p4, p5) --[[ Line: 63 | Named "map" ]]
+local function _(p1, p2, p3, p4, p5)
 	return (p1 - p2) * (p5 - p4) / (p3 - p2) + p4
 end
 
 local PlayerListApp = RoactModule.PureComponent:extend("PlayerListApp")
 
-local function playerListSizeFromViewportSize(p1, Vector, UiScale, PlayerListSizeMin, PlayerListSizeMax): UDim2 --[[ Line: 69 ]]
+local function playerListSizeFromViewportSize(p1, Vector, UiScale, PlayerListSizeMin, PlayerListSizeMax): UDim2
 	-- upvalues: FFlagEnableMobilePlayerListOnConsole (copy), EnabledResult (copy), ConstantsModule (copy)
 	local Smallest = math.min(Vector.x, Vector.y)
 	local Largest = math.max(Vector.x, Vector.y)
@@ -61,7 +61,7 @@ local function playerListSizeFromViewportSize(p1, Vector, UiScale, PlayerListSiz
 	return UDim2.fromOffset(XOffset, YOffset)
 end
 
-local _ = function(List): boolean --[[ Line: 115 | Named "shouldShowNeutralTeam" ]]
+local _ = function(List): boolean
 	for _, Player in ipairs(List) do
 		if Player.Team == nil then
 			return true
@@ -70,7 +70,7 @@ local _ = function(List): boolean --[[ Line: 115 | Named "shouldShowNeutralTeam"
 	return false
 end
 
-local function getTeamCount(Teams, Players): number --[[ Line: 124 ]]
+local function getTeamCount(Teams, Players): number
 	local t = {}
 	local Count = 0
 	
@@ -96,10 +96,10 @@ local function getTeamCount(Teams, Players): number --[[ Line: 124 ]]
 	return Count
 end
 
-function PlayerListApp.init(p1) --[[ Line: 139 ]]
+function PlayerListApp.init(p1)
 	-- upvalues: SignalsModule (copy), DisplayModule (copy), RoactModule (copy), OtterModule (copy)
 	p1.state = { visible = false }
-	p1.disposeUiScaleEffect = SignalsModule.createEffect(function(p2) --[[ Line: 144 ]]
+	p1.disposeUiScaleEffect = SignalsModule.createEffect(function(p2)
 		-- upvalues: DisplayModule (upval), p1 (copy)
 		p1:setState({
 			UiScale = DisplayModule.GetDisplayStore(p2).getUIScale(p2)
@@ -107,12 +107,12 @@ function PlayerListApp.init(p1) --[[ Line: 139 ]]
 	end)
 	p1.bodyTransparency, p1.updateBodyTransparency = RoactModule.createBinding(0.5)
 	p1.bodyTransparencyMotor = OtterModule.createSingleMotor(1)
-	p1.bodyTransparencyMotor:onStep(function(p2: number) --[[ Line: 153 ]]
+	p1.bodyTransparencyMotor:onStep(function(p2: number)
 		-- upvalues: p1 (copy)
 		p1.updateBodyTransparency(p2)
 		p1.props.setLayerCollectorEnabled(p2 < 0.99 or p1.props.displayOptions.isVisible)
 	end)
-	p1.bodyTransparencyMotor:onComplete(function() --[[ Line: 157 ]]
+	p1.bodyTransparencyMotor:onComplete(function()
 		-- upvalues: p1 (copy)
 		if not p1.props.displayOptions.isVisible then
 			p1:setState({ visible = false })
@@ -123,7 +123,7 @@ function PlayerListApp.init(p1) --[[ Line: 139 ]]
 	p1.bgTransparencyMotor:onStep(p1.updateBgTransparency)
 	p1.frameScale, p1.updateFrameScale = RoactModule.createBinding(1)
 	p1.frameScaleMotor = OtterModule.createSingleMotor(0)
-	p1.frameScaleMotor:onStep(function(p2) --[[ Line: 171 ]]
+	p1.frameScaleMotor:onStep(function(p2)
 		-- upvalues: p1 (copy)
 		p1.updateFrameScale(p2)
 	end)
@@ -131,7 +131,7 @@ function PlayerListApp.init(p1) --[[ Line: 139 ]]
 	p1.closeRef = RoactModule.createRef()
 end
 
-function PlayerListApp.renderBodyChildren(p1, _, p2) --[[ Line: 179 ]]
+function PlayerListApp.renderBodyChildren(p1, _, p2)
 	-- upvalues: RoactModule (copy), AppFonts (copy), RobloxTranslatorModule (copy)
 	local Visible = p1.state.visible
 	local IsDropDownVisible = p1.props.isDropDownVisible
@@ -164,7 +164,7 @@ function PlayerListApp.renderBodyChildren(p1, _, p2) --[[ Line: 179 ]]
 			Visible = Visible and not IsDropDownVisible,
 			ZIndex = 0,
 			[RoactModule.Ref] = p1.closeRef,
-			[RoactModule.Event.Activated] = function() --[[ Line: 220 ]]
+			[RoactModule.Event.Activated] = function()
 				-- upvalues: p1 (copy)
 				p1.props.setPlayerListVisible(false)
 			end
@@ -180,9 +180,9 @@ function PlayerListApp.renderBodyChildren(p1, _, p2) --[[ Line: 179 ]]
 	}
 end
 
-function PlayerListApp.render(p1) --[[ Line: 236 ]]
+function PlayerListApp.render(p1)
 	-- upvalues: RoactModule (copy), ContextActionsBinderModule (copy), WithLayoutValuesFunction (copy), FFlagEnableMobilePlayerListOnConsole (copy), Players (copy), getTeamCount (copy), ConstantsModule (copy), PlayerListDisplayContainerModule (copy), FFlagAddNewPlayerListFocusNav (copy), EventConnectionsModule (copy), FFlagPlayerListRemoveTopStatModule (copy), TopStatConnectorModule (copy), FFlagPlayerListFixMobileScrollingModule (copy), PlayerDropDownModule (copy), EnabledResult (copy), playerListSizeFromViewportSize (copy)
-	return if p1.state.visible then WithLayoutValuesFunction(function(p2) --[[ Line: 240 ]]
+	return if p1.state.visible then WithLayoutValuesFunction(function(p2)
 		-- upvalues: FFlagEnableMobilePlayerListOnConsole (upval), p1 (copy), Players (upval), getTeamCount (upval), ConstantsModule (upval), RoactModule (upval), PlayerListDisplayContainerModule (upval), FFlagAddNewPlayerListFocusNav (upval), EventConnectionsModule (upval), ContextActionsBinderModule (upval), FFlagPlayerListRemoveTopStatModule (upval), TopStatConnectorModule (upval), FFlagPlayerListFixMobileScrollingModule (upval), PlayerDropDownModule (upval), EnabledResult (upval), playerListSizeFromViewportSize (upval)
 		if FFlagEnableMobilePlayerListOnConsole then
 			p2 = p1.props.layoutValues
@@ -227,7 +227,7 @@ function PlayerListApp.render(p1) --[[ Line: 236 ]]
 			AutoButtonColor = false,
 			Selectable = not FFlagPlayerListFixMobileScrollingModule,
 			Image = "",
-			[RoactModule.Event.Activated] = function() --[[ Line: 294 ]]
+			[RoactModule.Event.Activated] = function()
 				-- upvalues: p1 (upval)
 				p1.props.setPlayerListVisible(false)
 			end
@@ -250,12 +250,12 @@ function PlayerListApp.render(p1) --[[ Line: 236 ]]
 	end) else RoactModule.createElement(ContextActionsBinderModule)
 end
 
-function PlayerListApp.didMount(p1) --[[ Line: 328 ]]
+function PlayerListApp.didMount(p1)
 	p1.props.setLayerCollectorEnabled(false)
 	p1:setState({ visible = p1.props.displayOptions.isVisible })
 end
 
-function PlayerListApp.willUnmount(p1) --[[ Line: 335 ]]
+function PlayerListApp.willUnmount(p1)
 	p1.props.setLayerCollectorEnabled(true)
 	
 	if p1.disposeUiScaleEffect then
@@ -263,7 +263,7 @@ function PlayerListApp.willUnmount(p1) --[[ Line: 335 ]]
 	end
 end
 
-function PlayerListApp.didUpdate(p1, p2, _) --[[ Line: 342 ]]
+function PlayerListApp.didUpdate(p1, p2, _)
 	-- upvalues: FFlagPlayerListIgnoreDevGamepadBindings (copy), GuiService (copy), Constants (copy), UserInputService (copy), OtterModule (copy), config (copy)
 	local IsVisible = p1.props.displayOptions.isVisible
 	local IsDropDownVisible = p1.props.isDropDownVisible
@@ -283,7 +283,7 @@ function PlayerListApp.didUpdate(p1, p2, _) --[[ Line: 342 ]]
 	p1.bodyTransparencyMotor:setGoal(OtterModule.spring(if IsVisible1 then 0.8 * p1.props.preferredTransparency elseif IsVisible then 0.2 * p1.props.preferredTransparency else 1, config))
 end
 
-return RoactRoduxModule.connect(function(p1) --[[ Line: 388 | Named "mapStateToProps" ]]
+return RoactRoduxModule.connect(function(p1)
 	return {
 		isDropDownVisible = p1.playerDropDown.isVisible,
 		screenSizeX = p1.screenSize.X,
@@ -297,19 +297,19 @@ return RoactRoduxModule.connect(function(p1) --[[ Line: 388 | Named "mapStateToP
 		gameStats = p1.gameStats,
 		teams = p1.teams
 	}
-end, function(Callback) --[[ Line: 408 | Named "mapDispatchToProps" ]]
+end, function(Callback)
 	-- upvalues: SetPlayerListVisibilityModule (copy), SetIsUsingGamepadModule (copy)
 	return {
-		setPlayerListVisible = function(p1) --[[ Line: 410 ]]
+		setPlayerListVisible = function(p1)
 			-- upvalues: Callback (copy), SetPlayerListVisibilityModule (upval)
 			return Callback(SetPlayerListVisibilityModule(p1))
 		end,
-		setIsUsingGamepad = function(p1) --[[ Line: 413 ]]
+		setIsUsingGamepad = function(p1)
 			-- upvalues: Callback (copy), SetIsUsingGamepadModule (upval)
 			return Callback(SetIsUsingGamepadModule(p1))
 		end
 	}
-end)(function(p1) --[[ Line: 419 ]]
+end)(function(p1)
 	-- upvalues: FFlagEnableMobilePlayerListOnConsole (copy), UseLayoutValuesFunction (copy), UseTokensFunction (copy), RoactModule (copy), PlayerListApp (copy), CryoModule (copy)
 	local UseLayoutValuesResult = if FFlagEnableMobilePlayerListOnConsole then UseLayoutValuesFunction() else nil
 	

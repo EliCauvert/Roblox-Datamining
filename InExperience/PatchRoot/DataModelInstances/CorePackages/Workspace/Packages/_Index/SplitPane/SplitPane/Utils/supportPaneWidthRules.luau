@@ -12,16 +12,16 @@ local config = {
 	[Breakpoint.XXLarge] = 6
 }
 
-local function _(p1, p2): boolean --[[ Line: 30 | Named "isBreakpointAtLeast" ]]
+local function _(p1, p2): boolean
 	-- upvalues: config (copy)
 	return (config[p2] or 0) <= (config[p1] or 0)
 end
 
 return {
-	isSplitEnabledForWidth = function(p1: number): boolean --[[ Line: 34 ]]
+	isSplitEnabledForWidth = function(p1: number): boolean
 		return p1 >= 800
 	end,
-	shouldDefaultToCollapsed = function(p1): boolean --[[ Line: 38 ]]
+	shouldDefaultToCollapsed = function(p1): boolean
 		-- upvalues: FFlagEnableSplitPane (copy), ResolveBreakpointFunction (copy), Large (copy), config (copy)
 		return if FFlagEnableSplitPane then not ((config[Large] or 0) <= (config[ResolveBreakpointFunction(p1)] or 0)) else false
 	end

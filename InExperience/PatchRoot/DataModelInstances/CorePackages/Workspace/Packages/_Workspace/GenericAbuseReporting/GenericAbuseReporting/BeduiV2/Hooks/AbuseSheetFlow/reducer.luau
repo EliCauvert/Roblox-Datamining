@@ -3,7 +3,7 @@ local LocalPlayer = game:GetService("Players").LocalPlayer
 local DashModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.Dash)
 local _ = require(script.Parent.AbuseSheetFlowTypes)
 
-local function getInitialState(RunId, EnterTime, NodeId) --[[ Line: 30 ]]
+local function getInitialState(RunId, EnterTime, NodeId)
 	-- upvalues: LocalPlayer (copy)
 	return {
 		navigationState = "idle",
@@ -17,11 +17,11 @@ end
 
 return {
 	getInitialState = getInitialState,
-	getNewRunId = function() --[[ Line: 84 ]]
+	getNewRunId = function()
 		-- upvalues: HttpService (copy)
 		return HttpService:GenerateGUID(false)
 	end,
-	selectStore = function(p1) --[[ Line: 88 ]]
+	selectStore = function(p1)
 		local t = {}
 		
 		for _, value in p1.stack do
@@ -33,7 +33,7 @@ return {
 		end
 		return t
 	end,
-	reducer = function(InitialState, p2) --[[ Line: 100 ]]
+	reducer = function(InitialState, p2)
 		-- upvalues: DashModule (copy), getInitialState (copy)
 		local JoinResult = nil
 		

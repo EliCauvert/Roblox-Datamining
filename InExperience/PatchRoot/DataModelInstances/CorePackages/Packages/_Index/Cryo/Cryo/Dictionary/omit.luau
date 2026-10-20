@@ -1,4 +1,4 @@
-﻿return function(Tbl, ...) --[[ Line: 6 | Named "omit" ]]
+﻿return function(Tbl, ...)
 	local Copy = table.clone(Tbl)
 	
 	for _, value in { ... } do

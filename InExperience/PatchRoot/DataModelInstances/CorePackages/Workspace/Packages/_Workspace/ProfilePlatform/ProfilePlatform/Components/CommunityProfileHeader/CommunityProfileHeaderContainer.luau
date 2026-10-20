@@ -12,7 +12,7 @@ local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfi
 local FFlagEnablePressingCommunityOwnerInPeekViewModule = require(ProfilePlatform.Flags.FFlagEnablePressingCommunityOwnerInPeekView)
 local CommunityProfileHeaderModule = require(ProfilePlatform.Components.CommunityProfileHeader.CommunityProfileHeader)
 
-return function(p1) --[[ Line: 36 | Named "CommunityProfileHeaderContainer" ]]
+return function(p1)
 	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), VerifiedBadgesModule (copy), GetDeepValueModule (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), FFlagEnablePressingCommunityOwnerInPeekViewModule (copy), ReactModule (copy), CommunityProfileHeaderModule (copy)
 	local ProfileId = UseProfileWrapperContextModule().profileId
 	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.CommunityProfileHeader)

@@ -3,7 +3,7 @@ local Rodux = DependenciesModule.Rodux
 local RoduxNetworking = DependenciesModule.RoduxNetworking
 local RoduxUserPermissions = DependenciesModule.RoduxUserPermissions
 
-return function() --[[ Line: 8 ]]
+return function()
 	-- upvalues: Rodux (copy), RoduxUserPermissions (copy), RoduxNetworking (copy)
 	return Rodux.combineReducers({
 		UserPermissions = RoduxUserPermissions.installReducer(),

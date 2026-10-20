@@ -2,7 +2,7 @@
 local ReactModule = require(MusicPicker.Parent.React)
 local _ = require(MusicPicker.Types.MusicPickerTypes)
 
-return function(p1) --[[ Line: 47 | Named "useMusicPickerViewModel" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy)
 	local Tabs = p1.tabs
 	local OnQueryChangedFunction = p1.onQueryChanged
@@ -11,7 +11,7 @@ return function(p1) --[[ Line: 47 | Named "useMusicPickerViewModel" ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(InitialQuery)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(InitialQuery)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(if #Tabs > 0 then Tabs[1].id else nil)
-	ReactModule.useEffect(function() --[[ Line: 61 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Tabs (copy), UseStateResult3 (copy), UseStateResult2_2 (copy)
 		local Flag = false
 		
@@ -25,7 +25,7 @@ return function(p1) --[[ Line: 47 | Named "useMusicPickerViewModel" ]]
 			UseStateResult2_2(if #Tabs > 0 then Tabs[1].id else nil)
 		end
 	end, { Tabs, UseStateResult3 })
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 74 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy), OnQueryChangedFunction (copy)
 		UseStateResult2(p2)
 		
@@ -37,7 +37,7 @@ return function(p1) --[[ Line: 47 | Named "useMusicPickerViewModel" ]]
 			end
 		end
 	end, { OnQueryChangedFunction })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 87 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult (copy), UseStateResult1 (copy), UseStateResult2_1 (copy), OnQueryChangedFunction (copy)
 		if UseStateResult == UseStateResult1 then return end
 		UseStateResult2_1(UseStateResult)
@@ -46,13 +46,13 @@ return function(p1) --[[ Line: 47 | Named "useMusicPickerViewModel" ]]
 			OnQueryChangedFunction(UseStateResult)
 		end
 	end, { OnQueryChangedFunction, UseStateResult, UseStateResult1 })
-	ReactModule.useEffect(function() --[[ Line: 100 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseStateResult1 (copy), UseStateResult2_1 (copy), OnQueryChangedFunction (copy)
 		if UseStateResult == "" or UseStateResult == UseStateResult1 then
 			return nil
 		else
 			local Flag = false
-			task.delay(0.3, function() --[[ Line: 105 ]]
+			task.delay(0.3, function()
 				-- upvalues: Flag (ref), UseStateResult2_1 (upval), UseStateResult (upval), OnQueryChangedFunction (upval)
 				if Flag then return end
 				UseStateResult2_1(UseStateResult)
@@ -62,7 +62,7 @@ return function(p1) --[[ Line: 47 | Named "useMusicPickerViewModel" ]]
 				end
 			end)
 			
-			return function() --[[ Line: 114 ]]
+			return function()
 				-- upvalues: Flag (ref)
 				Flag = true
 			end
@@ -76,7 +76,7 @@ return function(p1) --[[ Line: 47 | Named "useMusicPickerViewModel" ]]
 		activeTabId = UseStateResult3,
 		onSearchChanged = UseResult,
 		onSubmitSearch = UseResult1,
-		onTabSelected = ReactModule.useCallback(function(p2) --[[ Line: 119 ]]
+		onTabSelected = ReactModule.useCallback(function(p2)
 			-- upvalues: UseStateResult2_2 (copy), OnTabChangedFunction (copy)
 			UseStateResult2_2(p2)
 			

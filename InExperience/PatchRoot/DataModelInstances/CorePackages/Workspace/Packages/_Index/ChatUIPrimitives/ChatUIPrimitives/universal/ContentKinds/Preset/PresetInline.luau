@@ -8,10 +8,10 @@ local EscapeRichTextModule = require(ChatUIPrimitives.Utils.escapeRichText)
 local _ = require(script.Parent.PresetTypes)
 local GetPresetIconRichTextModule = require(script.Parent.getPresetIconRichText)
 
-return function(Frame) --[[ Line: 18 | Named "PresetInline" ]]
+return function(Frame)
 	-- upvalues: FoundationModule (copy), SignalsReactModule (copy), ReactModule (copy), GetPresetIconRichTextModule (copy), EscapeRichTextModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 21 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: GetPresetIconRichTextModule (upval), UseTokensResult (copy)
 		return GetPresetIconRichTextModule(UseTokensResult.Typography.BodyLarge.FontSize)
 	end, { UseTokensResult })
@@ -19,7 +19,7 @@ return function(Frame) --[[ Line: 18 | Named "PresetInline" ]]
 	return ReactModule.createElement(FoundationModule.Text, {
 		tag = "size-full-0 auto-y text-wrap text-align-x-left text-align-y-top",
 		RichText = true,
-		Text = SignalsReactModule.useSignalBinding(Frame.getContent):map(function(p1): string --[[ Line: 27 ]]
+		Text = SignalsReactModule.useSignalBinding(Frame.getContent):map(function(p1): string
 			-- upvalues: EscapeRichTextModule (upval), UseMemoResult (copy)
 			return `{EscapeRichTextModule(p1.displayText)} {UseMemoResult}`
 		end),

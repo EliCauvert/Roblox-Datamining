@@ -11,9 +11,9 @@ local config = {
 	upsellType = SocialUpsellTypeModule.Unknown
 }
 
-return function(p1) --[[ Line: 27 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), CryoModule (copy), config (copy), FFlagEnableAEGIS2CommsFAEUpsell (copy), SocialUpsellTypeModule (copy), FAEUpsellOverlayModule (copy)
-	return (ReactModule.useMemo(function() --[[ Line: 28 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: CryoModule (upval), config (upval), p1 (copy), FFlagEnableAEGIS2CommsFAEUpsell (upval), SocialUpsellTypeModule (upval), ReactModule (upval), FAEUpsellOverlayModule (upval)
 		local Element = nil
 		local UnionResult = CryoModule.Dictionary.union(config, p1.data or {})

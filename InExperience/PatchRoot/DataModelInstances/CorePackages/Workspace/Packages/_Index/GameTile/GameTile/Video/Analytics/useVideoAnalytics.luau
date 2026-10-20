@@ -19,11 +19,11 @@ local FFlagLuaAppHomeMomentVideoFallback = require(Parent.SharedFlags).FFlagLuaA
 local FFlagLuaAppDiscoveryMomentVideoTelemetry = require(Parent.SharedFlags).FFlagLuaAppDiscoveryMomentVideoTelemetry
 local OmniRecommendationsContentType = require(Parent.DiscoveryTypes).OmniRecommendationsContentType
 
-local function _(p1, p2) --[[ Line: 34 | Named "getGameSortId" ]]
+local function _(p1, p2)
 	return if p1 == nil then nil elseif p2 then p1.topicId else p1.gameSetTypeId
 end
 
-local _ = function(p1, p2) --[[ Line: 46 | Named "getVideoAssetId" ]]
+local _ = function(p1, p2)
 	-- upvalues: FFlagLuaAppEnableHomepageOneByTwoTile (copy), GetGameTileLayoutDataModule (copy), FFlagLuaAppHomeMomentVideoFallback (copy), GetLayoutDataVideoModule (copy)
 	if p1 and p1.primaryWideVideoAssetId then
 		return p1.primaryWideVideoAssetId
@@ -42,7 +42,7 @@ local _ = function(p1, p2) --[[ Line: 46 | Named "getVideoAssetId" ]]
 	end
 end
 
-local _ = function(p1, p2) --[[ Line: 65 | Named "getVideoAssetIdAndIsMoment" ]]
+local _ = function(p1, p2)
 	-- upvalues: FFlagLuaAppEnableHomepageOneByTwoTile (copy), GetGameTileLayoutDataModule (copy), GetLayoutDataVideoModule (copy)
 	if FFlagLuaAppEnableHomepageOneByTwoTile and p1 and p1.primaryVideoAssetId then
 		return p1.primaryVideoAssetId, false
@@ -53,10 +53,10 @@ local _ = function(p1, p2) --[[ Line: 65 | Named "getVideoAssetIdAndIsMoment" ]]
 	end
 end
 
-return function(p1, p2, PageContext, SortPos, p3) --[[ Line: 79 | Named "useVideoAnalytics" ]]
+return function(p1, p2, PageContext, SortPos, p3)
 	-- upvalues: ReactModule (copy), MutedErrorFunction (copy), FFlagLuaAppDiscoveryMomentVideoTelemetry (copy), FFlagLuaAppEnableHomepageOneByTwoTile (copy), GetGameTileLayoutDataModule (copy), GetLayoutDataVideoModule (copy), FFlagLuaAppHomeMomentVideoFallback (copy), DiscoveryVideoPlayEventFunction (copy), FFlagLuaAppBroadenVideoAnalytics (copy), OmniRecommendationsContentType (copy), DiscoveryEventErrorLogger (copy), DiscoveryVideoLoadEventFunction (copy), VideoLogger (copy), VideoActions (copy), DiscoveryVideoLoopEventFunction (copy), DiscoveryVideoEndEventFunction (copy)
 	local TopicId = if p1 == nil then nil elseif p2 then p1.topicId else p1.gameSetTypeId
-	local UseResult = ReactModule.useCallback(function(p4, p5) --[[ Line: 88 ]]
+	local UseResult = ReactModule.useCallback(function(p4, p5)
 		-- upvalues: p3 (copy), MutedErrorFunction (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), TopicId (copy), FFlagLuaAppEnableHomepageOneByTwoTile (upval), GetGameTileLayoutDataModule (upval), GetLayoutDataVideoModule (upval), FFlagLuaAppHomeMomentVideoFallback (upval), DiscoveryVideoPlayEventFunction (upval), PageContext (copy), SortPos (copy), FFlagLuaAppBroadenVideoAnalytics (upval)
 		if p4 ~= nil and p3 ~= nil then
 			local v1 = p3[p4]
@@ -111,7 +111,7 @@ return function(p1, p2, PageContext, SortPos, p3) --[[ Line: 79 | Named "useVide
 			})
 		end
 	end, { PageContext, p3, TopicId, SortPos })
-	local UseResult1 = ReactModule.useCallback(function(Index, p4, TotalDuration, LoadTime) --[[ Line: 121 ]]
+	local UseResult1 = ReactModule.useCallback(function(Index, p4, TotalDuration, LoadTime)
 		-- upvalues: p3 (copy), MutedErrorFunction (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), TopicId (copy), FFlagLuaAppEnableHomepageOneByTwoTile (upval), GetGameTileLayoutDataModule (upval), GetLayoutDataVideoModule (upval), FFlagLuaAppHomeMomentVideoFallback (upval), OmniRecommendationsContentType (upval), DiscoveryEventErrorLogger (upval), PageContext (copy), DiscoveryVideoLoadEventFunction (upval), SortPos (copy), FFlagLuaAppBroadenVideoAnalytics (upval), VideoLogger (upval), VideoActions (upval)
 		if Index ~= nil and p3 ~= nil then
 			local v1 = p3[Index]
@@ -199,7 +199,7 @@ return function(p1, p2, PageContext, SortPos, p3) --[[ Line: 79 | Named "useVide
 			end
 		end
 	end, { PageContext, p3, TopicId, SortPos })
-	local UseResult2 = ReactModule.useCallback(function(p5, p6) --[[ Line: 196 ]]
+	local UseResult2 = ReactModule.useCallback(function(p5, p6)
 		-- upvalues: p3 (copy), MutedErrorFunction (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), TopicId (copy), FFlagLuaAppEnableHomepageOneByTwoTile (upval), GetGameTileLayoutDataModule (upval), GetLayoutDataVideoModule (upval), FFlagLuaAppHomeMomentVideoFallback (upval), DiscoveryVideoLoopEventFunction (upval), PageContext (copy), SortPos (copy), FFlagLuaAppBroadenVideoAnalytics (upval)
 		if p5 ~= nil and p3 ~= nil then
 			local v3 = p3[p5]
@@ -254,7 +254,7 @@ return function(p1, p2, PageContext, SortPos, p3) --[[ Line: 79 | Named "useVide
 			})
 		end
 	end, { PageContext, p3, TopicId, SortPos })
-	local UseResult3 = ReactModule.useCallback(function(p5, EndReason, p6, PlaybackTime, TargetUniverseId) --[[ Line: 229 ]]
+	local UseResult3 = ReactModule.useCallback(function(p5, EndReason, p6, PlaybackTime, TargetUniverseId)
 		-- upvalues: p3 (copy), MutedErrorFunction (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), TopicId (copy), FFlagLuaAppEnableHomepageOneByTwoTile (upval), GetGameTileLayoutDataModule (upval), GetLayoutDataVideoModule (upval), FFlagLuaAppHomeMomentVideoFallback (upval), DiscoveryVideoEndEventFunction (upval), PageContext (copy), SortPos (copy), FFlagLuaAppBroadenVideoAnalytics (upval)
 		if p5 ~= nil and p3 ~= nil then
 			local v3 = p3[p5]
@@ -313,7 +313,7 @@ return function(p1, p2, PageContext, SortPos, p3) --[[ Line: 79 | Named "useVide
 		end
 	end, { PageContext, p3, TopicId, SortPos })
 	
-	return (ReactModule.useMemo(function() --[[ Line: 271 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: UseResult (copy), UseResult1 (copy), UseResult2 (copy), UseResult3 (copy)
 		return {
 			reportVideoPlay = UseResult,

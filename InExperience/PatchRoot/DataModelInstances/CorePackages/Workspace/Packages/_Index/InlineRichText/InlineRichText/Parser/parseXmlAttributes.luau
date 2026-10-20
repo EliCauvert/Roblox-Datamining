@@ -1,4 +1,4 @@
-﻿return function(Text: string) --[[ Line: 1 | Named "parseXmlAttributes" ]]
+﻿return function(Text: string)
 	local SAZaZ09S = Text:gmatch("%s*([A-Za-z0-9_-]+)='([^']*)'%s*")
 	local t = {}
 	

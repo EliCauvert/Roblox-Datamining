@@ -9,10 +9,10 @@ local FFlagBuildAgentAdCampaignToolCallStatusFallbackModule = require(BuildExper
 local UseAgentAdCampaignToolCallStatusFallbackModule = require(script.Parent.useAgentAdCampaignToolCallStatusFallback)
 local FFlagBuildAgentAdCampaignRefreshEligibilityModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignRefreshEligibility)
 
-return function(p1, p2) --[[ Line: 32 | Named "useAgentAdCampaignTurnCards" ]]
+return function(p1, p2)
 	-- upvalues: ReactModule (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (copy), FFlagBuildAgentAdCampaignToolCallStatusFallbackModule (copy), UseAgentAdCampaignToolCallStatusFallbackModule (copy), AdCampaignEligibilityUtilsModule (copy), SendBuildExperienceEventModule (copy), GetAgentAdCampaignStoreModule (copy), AdUpsellVisibilityUtilsModule (copy)
 	local UseRefResult = ReactModule.useRef({})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 34 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (upval)
 		local States = {}
 		local Missing = {}
@@ -39,7 +39,7 @@ return function(p1, p2) --[[ Line: 32 | Named "useAgentAdCampaignTurnCards" ]]
 		table.sort(Missing)
 		v1 = UseAgentAdCampaignToolCallStatusFallbackModule(Missing, p2)
 	end
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 61 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), States (copy), v1 (ref), FFlagBuildAgentAdCampaignRefreshEligibilityModule (upval), AdCampaignEligibilityUtilsModule (upval), UseRefResult (copy), ReactModule (upval), SendBuildExperienceEventModule (upval)
 		local t = {}
 		
@@ -62,7 +62,7 @@ return function(p1, p2) --[[ Line: 32 | Named "useAgentAdCampaignTurnCards" ]]
 					fundingType = Paid,
 					isCreateDisabled = NoOnOfferSelected,
 					cardRef = UseRefResult.current[ToolCallId],
-					onCreate = function() --[[ Line: 91 ]]
+					onCreate = function()
 						-- upvalues: FFlagBuildAgentAdCampaignRefreshEligibilityModule (upval), State (ref), NoOnOfferSelected (copy), segment (copy), p1 (upval), SendBuildExperienceEventModule (upval), ToolCallId (copy), Paid (copy)
 						local HasCampaignId: boolean = if FFlagBuildAgentAdCampaignRefreshEligibilityModule then State ~= nil and State.campaignId ~= nil else State ~= nil
 						
@@ -88,7 +88,7 @@ return function(p1, p2) --[[ Line: 32 | Named "useAgentAdCampaignTurnCards" ]]
 		p1.segments, p1.onOfferSelected, p1.isPageVisible, p1.isCreateDisabled,
 		p1.universeId, p1.sessionId, States, v1
 	})
-	ReactModule.useEffect(function() --[[ Line: 126 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), GetAgentAdCampaignStoreModule (upval), UseMemoResult1 (copy), AdUpsellVisibilityUtilsModule (upval), SendBuildExperienceEventModule (upval)
 		local Current = if p1.scrollingFrameRef == nil then nil else p1.scrollingFrameRef.current
 		
@@ -102,7 +102,7 @@ return function(p1, p2) --[[ Line: 32 | Named "useAgentAdCampaignTurnCards" ]]
 				local Current1 = UseMemoResultEntry.cardRef.current
 				
 				if UseMemoResultEntry.state == nil and not UseMemoResultEntry.isPending and Current1 ~= nil then
-					local function reportIfVisible() --[[ Line: 142 ]]
+					local function reportIfVisible()
 						-- upvalues: Current1 (copy), Current (copy), AdUpsellVisibilityUtilsModule (upval), AgentAdCampaignStoreModule (copy), p1 (upval), segment (copy), SendBuildExperienceEventModule (upval), UseMemoResultEntry (copy)
 						if Current1:IsDescendantOf(Current) and AdUpsellVisibilityUtilsModule.isCardVisibleInScrollViewport(Current, Current1) and AgentAdCampaignStoreModule.markImpressed(p1.sessionId, segment.toolCallId) then
 							SendBuildExperienceEventModule("AD_UPSELL_IMPRESSION", {
@@ -130,7 +130,7 @@ return function(p1, p2) --[[ Line: 32 | Named "useAgentAdCampaignTurnCards" ]]
 				end
 			end
 		end
-		return function() --[[ Line: 167 ]]
+		return function()
 			-- upvalues: List (copy)
 			for _, Connection in List do
 				Connection:Disconnect()

@@ -18,10 +18,10 @@ local config = {
 	shouldShowDots = false,
 	dotsSize = UDim2.new(0, 36, 0, 36),
 	image = UIBloxModule.App.ImageSet.Images["icons/common/more"],
-	onDotsActivated = function() --[[ Line: 42 ]] end
+	onDotsActivated = function() end
 }
 
-function ParticipantEntryRightFrame(p1) --[[ Line: 48 ]]
+function ParticipantEntryRightFrame(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), GetFFlagAppChatParticipantDialogFoundationMenuModule (copy), ReactModule (copy), LabelModule (copy), IconButton (copy), IconName (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), IconSize (copy), ButtonVariant (copy), ImageSetLabel (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseStyleResult = UseStyleFunction()

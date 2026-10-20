@@ -4,7 +4,7 @@ local AmpApiProvider = require(Parent.AmpUpsell).AmpApiProvider
 local AccessResponseEnum = require(Parent.AmpUpsell).AmpEnums.AccessResponseEnum
 local ProfileFrameAmpConstantsModule = require(AvatarExperienceProfilePictureEditor.Common.ProfileFrameAmpConstants)
 
-return function() --[[ Line: 26 | Named "getProfileFrameAmpAccess" ]]
+return function()
 	-- upvalues: AmpApiProvider (copy), ProfileFrameAmpConstantsModule (copy), AccessResponseEnum (copy)
 	local Access = AmpApiProvider.upsellFeatureAccess(ProfileFrameAmpConstantsModule.FEATURE_NAME, {}, ProfileFrameAmpConstantsModule.NAME_SPACE).access
 	

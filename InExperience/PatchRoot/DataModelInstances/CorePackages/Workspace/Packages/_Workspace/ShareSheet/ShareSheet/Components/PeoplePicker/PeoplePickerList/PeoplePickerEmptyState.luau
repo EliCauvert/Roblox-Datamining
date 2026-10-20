@@ -9,7 +9,7 @@ local Assets = FoundationCloudAssetsModule.Assets
 FoundationCloudAssetsModule.preloadAsset("pictograms/find_people")
 local PictogramsFindPeople = Assets["pictograms/find_people"] or {}
 
-return function(p1) --[[ Line: 25 | Named "PeoplePickerEmptyState" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Image (copy), PictogramsFindPeople (copy)
 	local UseTokensResult = UseTokensFunction()
 	local TestId = p1.testId or "people-picker-empty-state"

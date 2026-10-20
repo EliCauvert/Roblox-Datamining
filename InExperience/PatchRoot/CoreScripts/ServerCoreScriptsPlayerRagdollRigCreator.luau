@@ -4,14 +4,14 @@ local Common = game:GetService("CoreGui"):FindFirstChild("RobloxGui"):FindFirstC
 local AvatarJointUpgradeFeatureEngineFeature = game:GetEngineFeature("AvatarJointUpgradeFeature")
 local AvatarJointUpgradeDefaultOnFeatureEngineFeature = game:GetEngineFeature("AvatarJointUpgradeDefaultOnFeature")
 
-local function _() --[[ Line: 11 | Named "jointUpgradeActive" ]]
+local function _()
 	-- upvalues: AvatarJointUpgradeFeatureEngineFeature (copy), AvatarJointUpgradeDefaultOnFeatureEngineFeature (copy)
 	return AvatarJointUpgradeFeatureEngineFeature and AvatarJointUpgradeDefaultOnFeatureEngineFeature
 end
 
 local RagdollRiggingModule = require(Common:FindFirstChild("RagdollRigging"))
 local HumanoidReadyUtilModule = require(Common:FindFirstChild("HumanoidReadyUtil"))
-local Value = (function() --[[ Line: 23 | Named "getDefaultDeathType" ]]
+local Value = (function()
 	if not game:GetEngineFeature("PolicyInfoForServerRobloxOnlyAsyncEnabled") then
 		return game:DefineFastString("DeathTypeValue", "Classic")
 	end
@@ -33,7 +33,7 @@ local Humanoids = {}
 if not AvatarJointUpgradeFeatureEngineFeature then
 	local OnRagdoll = Instance.new("RemoteEvent")
 	OnRagdoll.Name = "OnRagdoll"
-	OnRagdoll.OnServerEvent:Connect(function(Player, Humanoid) --[[ Line: 62 ]]
+	OnRagdoll.OnServerEvent:Connect(function(Player, Humanoid)
 		-- upvalues: Humanoids (copy), RagdollRiggingModule (copy)
 		if Humanoid and Humanoids[Player] == Humanoid then
 			local Parent = Humanoid and Humanoid.Parent
@@ -46,7 +46,7 @@ if not AvatarJointUpgradeFeatureEngineFeature then
 	end)
 	OnRagdoll.Parent = RobloxReplicatedStorage
 end
-HumanoidReadyUtilModule.registerHumanoidReady(function(Player, p1, Humanoid: Humanoid) --[[ Line: 75 ]]
+HumanoidReadyUtilModule.registerHumanoidReady(function(Player, p1, Humanoid: Humanoid)
 	-- upvalues: AvatarJointUpgradeFeatureEngineFeature (copy), AvatarJointUpgradeDefaultOnFeatureEngineFeature (copy), RagdollRiggingModule (copy), Value (copy), Humanoids (copy)
 	if AvatarJointUpgradeFeatureEngineFeature then
 		if Humanoid.RigType == Enum.HumanoidRigType.R15 and (AvatarJointUpgradeFeatureEngineFeature and AvatarJointUpgradeDefaultOnFeatureEngineFeature) then
@@ -58,7 +58,7 @@ HumanoidReadyUtilModule.registerHumanoidReady(function(Player, p1, Humanoid: Hum
 	if Value ~= "Ragdoll" then return end
 	local Connection = nil
 	
-	local function _() --[[ Line: 89 | Named "disconnect" ]]
+	local function _()
 		-- upvalues: Connection (ref), Humanoids (upval), Player (copy), Humanoid (copy)
 		Connection:Disconnect()
 		
@@ -67,7 +67,7 @@ HumanoidReadyUtilModule.registerHumanoidReady(function(Player, p1, Humanoid: Hum
 		end
 	end
 	
-	Connection = Player.CharacterRemoving:Connect(function(Character) --[[ Line: 97 ]]
+	Connection = Player.CharacterRemoving:Connect(function(Character)
 		-- upvalues: p1 (copy), Connection (ref), Humanoids (upval), Player (copy), Humanoid (copy)
 		if Character == p1 then
 			Connection:Disconnect()
@@ -85,7 +85,7 @@ HumanoidReadyUtilModule.registerHumanoidReady(function(Player, p1, Humanoid: Hum
 	Humanoids[Player] = Humanoid
 	
 	if AvatarJointUpgradeFeatureEngineFeature then
-		Humanoid.Died:Connect(function() --[[ Line: 114 ]]
+		Humanoid.Died:Connect(function()
 			-- upvalues: Humanoids (upval), Player (copy), Humanoid (copy), RagdollRiggingModule (upval), AvatarJointUpgradeFeatureEngineFeature (upval), AvatarJointUpgradeDefaultOnFeatureEngineFeature (upval)
 			Humanoids[Player] = nil
 			local Parent = Humanoid.Parent

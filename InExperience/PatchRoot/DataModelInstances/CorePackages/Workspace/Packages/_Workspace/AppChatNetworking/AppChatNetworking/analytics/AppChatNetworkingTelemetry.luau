@@ -6,7 +6,7 @@ return require(Parent.SocialLuaAnalytics).Telemetry.createEmitter({
 		links = "",
 		throttlingThousandths = game:DefineFastInt("AppChatNetworkingTelemetryThrottlingThousandths", 800)
 	},
-	getSharedInfo = function() --[[ Line: 13 ]]
+	getSharedInfo = function()
 		return {}
 	end
 })

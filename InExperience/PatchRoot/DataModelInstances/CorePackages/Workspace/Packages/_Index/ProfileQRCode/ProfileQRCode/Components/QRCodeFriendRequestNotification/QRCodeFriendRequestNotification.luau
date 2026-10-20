@@ -19,7 +19,7 @@ local EventNamesModule = require(ProfileQRCode.Analytics.EventNames)
 local IconsMenuScanqr = Images["icons/menu/scanqr"]
 local IconsNavigationClose = Images["icons/navigation/close"]
 
-return function(p1) --[[ Line: 44 ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), UseStyleFunction (copy), UseLocalUserInfoModule (copy), UseAnalyticsModule (copy), ReactModule (copy), EventNamesModule (copy), ImageSetLabel (copy), IconsMenuScanqr (copy), StyledTextLabel (copy), IconButton (copy), IconsNavigationClose (copy), IconSize (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		notificationRequest = TextKeysModule.NotificationRequestText,
@@ -29,7 +29,7 @@ return function(p1) --[[ Line: 44 ]]
 	local UseLocalUserInfoModuleResult = UseLocalUserInfoModule(p1.userId)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 55 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseAnalyticsModuleResult (copy), EventNamesModule (upval), p1 (copy)
 		UseAnalyticsModuleResult.fireEvent(EventNamesModule.QRPageFriendRequestBannerShown, { qrCodeBannerQueueSize = p1.notificationQueueSize })
 	end, { p1.userId })
@@ -147,7 +147,7 @@ return function(p1) --[[ Line: 44 ]]
 			text = UseLocalizationResult.acceptFriend,
 			fontStyle = UseStyleResult.Font.CaptionBody,
 			isDisabled = UseStateResult,
-			onActivated = function() --[[ Line: 182 ]]
+			onActivated = function()
 				-- upvalues: UseStateResult2 (copy), p1 (copy)
 				UseStateResult2(true)
 				p1.onAccept(p1.userId)

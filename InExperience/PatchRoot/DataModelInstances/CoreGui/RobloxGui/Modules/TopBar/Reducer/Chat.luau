@@ -11,7 +11,7 @@ else
 		lastReadMessages = 0,
 		unreadMessages = 0
 	}, {
-		[require(Actions.UpdateUnreadMessagesBadge).name] = function(p1, p2) --[[ Line: 28 ]]
+		[require(Actions.UpdateUnreadMessagesBadge).name] = function(p1, p2)
 			return if p1.visible then {
 				visible = true,
 				lastReadMessages = 0,
@@ -24,7 +24,7 @@ else
 				unreadMessages = p2.messages
 			}
 		end,
-		[require(Actions.UpdateChatMessages).name] = function(p1, p2) --[[ Line: 46 ]]
+		[require(Actions.UpdateChatMessages).name] = function(p1, p2)
 			return if p1.visible then {
 				visible = true,
 				unreadMessages = 0,
@@ -37,7 +37,7 @@ else
 				unreadMessages = p2.messages - p1.lastReadMessages
 			}
 		end,
-		[require(Actions.UpdateChatVisible).name] = function(p1, p2) --[[ Line: 64 ]]
+		[require(Actions.UpdateChatVisible).name] = function(p1, p2)
 			return if p2.visible then {
 				visible = true,
 				unreadMessages = 0,
@@ -50,7 +50,7 @@ else
 				unreadMessages = p1.unreadMessages
 			}
 		end,
-		[require(Actions.SetCanChat).name] = function(p1, p2) --[[ Line: 82 ]]
+		[require(Actions.SetCanChat).name] = function(p1, p2)
 			return {
 				canChat = p2.canChat,
 				visible = p1.visible,

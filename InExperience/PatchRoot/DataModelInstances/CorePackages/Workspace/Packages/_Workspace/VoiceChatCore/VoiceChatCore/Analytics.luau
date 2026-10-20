@@ -16,7 +16,7 @@ AnalyticsModule.INFO = "info"
 AnalyticsModule.WARNING = "warning"
 AnalyticsModule.ERROR = "error"
 
-function AnalyticsModule.new(_impl) --[[ Line: 158 ]]
+function AnalyticsModule.new(_impl)
 	-- upvalues: RbxAnalyticsService (copy), AnalyticsModule (copy)
 	if not _impl then
 		_impl = RbxAnalyticsService
@@ -26,9 +26,9 @@ function AnalyticsModule.new(_impl) --[[ Line: 158 ]]
 	return (setmetatable({ _impl = _impl }, AnalyticsModule))
 end
 
-local function stub() --[[ Line: 171 ]] end
+local function stub() end
 
-function AnalyticsModule.stubService() --[[ Line: 173 ]]
+function AnalyticsModule.stubService()
 	-- upvalues: stub (copy)
 	return {
 		SetRBXEvent = stub,
@@ -40,11 +40,11 @@ function AnalyticsModule.stubService() --[[ Line: 173 ]]
 	}
 end
 
-function AnalyticsModule:setImpl(_impl) --[[ Line: 184 ]]
+function AnalyticsModule:setImpl(_impl)
 	self._impl = _impl
 end
 
-function AnalyticsModule:_report(Text, Text1, Text2, AdditionalArgs) --[[ Line: 188 ]]
+function AnalyticsModule:_report(Text, Text1, Text2, AdditionalArgs)
 	local Text3 = Text .. "-" .. Text1
 	
 	if game:GetFastFlag("LuaVoiceChatAnalyticsUsePointsV2") then
@@ -68,7 +68,7 @@ function AnalyticsModule:_report(Text, Text1, Text2, AdditionalArgs) --[[ Line: 
 	end
 end
 
-function AnalyticsModule:reportVoiceChatJoinResult(Success, Result, p1) --[[ Line: 210 ]]
+function AnalyticsModule:reportVoiceChatJoinResult(Success, Result, p1)
 	-- upvalues: AnalyticsModule (copy)
 	self:_report("voiceChat", "defaultChannelJoinResults", Result, {
 		success = Success,
@@ -77,13 +77,13 @@ function AnalyticsModule:reportVoiceChatJoinResult(Success, Result, p1) --[[ Lin
 	})
 end
 
-function AnalyticsModule:reportBanMessageEvent(Text) --[[ Line: 218 ]]
+function AnalyticsModule:reportBanMessageEvent(Text)
 	if game:GetFastFlag("LuaVoiceChatAnalyticsBanMessage") then
 		self._impl:ReportCounter("voiceChat-reportBanMessage" .. Text, 1)
 	end
 end
 
-function AnalyticsModule:reportBanMessageEventV2(EventType, BanReason, UserId, VoiceSessionId) --[[ Line: 224 ]]
+function AnalyticsModule:reportBanMessageEventV2(EventType, BanReason, UserId, VoiceSessionId)
 	self:_report("voiceChat", "reportBanEvent", nil, {
 		eventType = EventType,
 		banReason = BanReason,
@@ -92,17 +92,17 @@ function AnalyticsModule:reportBanMessageEventV2(EventType, BanReason, UserId, V
 	})
 end
 
-function AnalyticsModule:reportReconnectDueToMissedSequence() --[[ Line: 233 ]]
+function AnalyticsModule:reportReconnectDueToMissedSequence()
 	if game:GetFastFlag("LuaVoiceChatReconnectMissedSequence") then
 		self._impl:ReportCounter("voiceChat-reconnectMissedSequence", 1)
 	end
 end
 
-function AnalyticsModule:reportOutOfOrderSequence() --[[ Line: 239 ]]
+function AnalyticsModule:reportOutOfOrderSequence()
 	self._impl:ReportCounter("voiceChat-outOfOrderSequence", 1)
 end
 
-function AnalyticsModule:reportReceivedNudge(p1, UserId, VoiceSessionId) --[[ Line: 243 ]]
+function AnalyticsModule:reportReceivedNudge(p1, UserId, VoiceSessionId)
 	local UnixTimestampMillisDelta = DateTime.now().UnixTimestampMillis - DateTime.fromIsoDate(p1.deliveryTime).UnixTimestampMillis
 	self._impl:ReportCounter("voicechat-receivednudge", 1)
 	self._impl:ReportCounter("voicechat-receivednudgeduration", UnixTimestampMillisDelta)
@@ -114,7 +114,7 @@ function AnalyticsModule:reportReceivedNudge(p1, UserId, VoiceSessionId) --[[ Li
 	})
 end
 
-function AnalyticsModule:reportClosedNudge(UserId, VoiceSessionId) --[[ Line: 260 ]]
+function AnalyticsModule:reportClosedNudge(UserId, VoiceSessionId)
 	self._impl:ReportCounter("voicechat-closednudge", 1)
 	self._impl:SendEventDeferred("client", "voiceChat", "closedNudge", {
 		closeType = "CLOSED",
@@ -123,7 +123,7 @@ function AnalyticsModule:reportClosedNudge(UserId, VoiceSessionId) --[[ Line: 26
 	})
 end
 
-function AnalyticsModule:reportAcknowledgedNudge(UserId, VoiceSessionId) --[[ Line: 269 ]]
+function AnalyticsModule:reportAcknowledgedNudge(UserId, VoiceSessionId)
 	self._impl:ReportCounter("voicechat-acknowledgednudge", 1)
 	self._impl:SendEventDeferred("client", "voiceChat", "closedNudge", {
 		closeType = "ACKNOWLEDGED",
@@ -132,7 +132,7 @@ function AnalyticsModule:reportAcknowledgedNudge(UserId, VoiceSessionId) --[[ Li
 	})
 end
 
-function AnalyticsModule:reportDeniedNudge(UserId, VoiceSessionId) --[[ Line: 278 ]]
+function AnalyticsModule:reportDeniedNudge(UserId, VoiceSessionId)
 	self._impl:ReportCounter("voicechat-deniednudge", 1)
 	self._impl:SendEventDeferred("client", "voiceChat", "closedNudge", {
 		closeType = "DENIED",
@@ -141,7 +141,7 @@ function AnalyticsModule:reportDeniedNudge(UserId, VoiceSessionId) --[[ Line: 27
 	})
 end
 
-function AnalyticsModule:reportVoiceMuteIndividual(p1) --[[ Line: 287 ]]
+function AnalyticsModule:reportVoiceMuteIndividual(p1)
 	self._impl:SendEventDeferred("client", "voice", "voiceUIMuteUnmuteIndividual", {
 		user_id = p1.userId,
 		client_session_id = p1.clientSessionId,
@@ -152,7 +152,7 @@ function AnalyticsModule:reportVoiceMuteIndividual(p1) --[[ Line: 287 ]]
 	})
 end
 
-function AnalyticsModule:reportVoiceMuteGroup(p1) --[[ Line: 298 ]]
+function AnalyticsModule:reportVoiceMuteGroup(p1)
 	self._impl:SendEventDeferred("client", "voice", "voiceUIMuteUnmuteGroup", {
 		user_id = p1.userId,
 		client_session_id = p1.clientSessionId,
@@ -163,7 +163,7 @@ function AnalyticsModule:reportVoiceMuteGroup(p1) --[[ Line: 298 ]]
 	})
 end
 
-function AnalyticsModule:reportVoiceMuteSelf(p1) --[[ Line: 309 ]]
+function AnalyticsModule:reportVoiceMuteSelf(p1)
 	self._impl:SendEventDeferred("client", "voice", "voiceUIMuteUnmuteSelf", {
 		user_id = p1.userId,
 		client_session_id = p1.clientSessionId,
@@ -173,7 +173,7 @@ function AnalyticsModule:reportVoiceMuteSelf(p1) --[[ Line: 309 ]]
 	})
 end
 
-function AnalyticsModule:reportJoinVoiceButtonEvent(EventType, UniverseId, PlaceId, PlaySessionId, ButtonContext, ButtonConsequence) --[[ Line: 319 ]]
+function AnalyticsModule:reportJoinVoiceButtonEvent(EventType, UniverseId, PlaceId, PlaySessionId, ButtonContext, ButtonConsequence)
 	self._impl:SendEventDeferred("client", "voice", "joinVoiceButtonEvent", {
 		eventType = EventType,
 		universeId = UniverseId,
@@ -184,7 +184,7 @@ function AnalyticsModule:reportJoinVoiceButtonEvent(EventType, UniverseId, Place
 	})
 end
 
-function AnalyticsModule:reportJoinVoiceButtonEventWithVoiceSessionId(EventType, UniverseId, PlaceId, PlaySessionId, VoiceSessionId, ButtonContext, ButtonConsequence) --[[ Line: 337 ]]
+function AnalyticsModule:reportJoinVoiceButtonEventWithVoiceSessionId(EventType, UniverseId, PlaceId, PlaySessionId, VoiceSessionId, ButtonContext, ButtonConsequence)
 	self._impl:SendEventDeferred("client", "voice", "joinVoiceButtonEvent", {
 		eventType = EventType,
 		universeId = UniverseId,
@@ -196,7 +196,7 @@ function AnalyticsModule:reportJoinVoiceButtonEventWithVoiceSessionId(EventType,
 	})
 end
 
-function AnalyticsModule:reportJoinVoiceUpsellEvent(Text, PlaySessionId, User_is_age_verified, Button_context, Button_consequence) --[[ Line: 357 ]]
+function AnalyticsModule:reportJoinVoiceUpsellEvent(Text, PlaySessionId, User_is_age_verified, Button_context, Button_consequence)
 	-- upvalues: SessionService (copy), TelemetryService (copy)
 	TelemetryService:LogEvent({
 		description = "Event fired when user sees or interacts with Join Voice button",
@@ -219,7 +219,7 @@ function AnalyticsModule:reportJoinVoiceUpsellEvent(Text, PlaySessionId, User_is
 	})
 end
 
-function AnalyticsModule:reportLeaveVoiceButtonEvent(EventType, UniverseId, PlaceId, PlaySessionId, VoiceSessionId) --[[ Line: 390 ]]
+function AnalyticsModule:reportLeaveVoiceButtonEvent(EventType, UniverseId, PlaceId, PlaySessionId, VoiceSessionId)
 	self._impl:SendEventDeferred("client", "voice", "leaveVoiceButtonEvent", {
 		eventType = EventType,
 		universeId = UniverseId,
@@ -229,7 +229,7 @@ function AnalyticsModule:reportLeaveVoiceButtonEvent(EventType, UniverseId, Plac
 	})
 end
 
-function AnalyticsModule:reportInExpConsent(EventType, Entry, UniverseId, PlaceId, PlaySessionId) --[[ Line: 406 ]]
+function AnalyticsModule:reportInExpConsent(EventType, Entry, UniverseId, PlaceId, PlaySessionId)
 	self._impl:SendEventDeferred("client", "voiceChat", "inExpConsentModalEvent", {
 		eventType = EventType,
 		entry = Entry,
@@ -239,7 +239,7 @@ function AnalyticsModule:reportInExpConsent(EventType, Entry, UniverseId, PlaceI
 	})
 end
 
-function AnalyticsModule:reportDevicePermissionsModalEvent(EventType, VoiceSessionId, UniverseId, PlaceId, Text: string) --[[ Line: 422 ]]
+function AnalyticsModule:reportDevicePermissionsModalEvent(EventType, VoiceSessionId, UniverseId, PlaceId, Text: string)
 	self._impl:SendEventDeferred("client", "voiceChat", "devicePermissionsModalEvent", {
 		eventType = EventType,
 		universeId = UniverseId,
@@ -249,15 +249,15 @@ function AnalyticsModule:reportDevicePermissionsModalEvent(EventType, VoiceSessi
 	})
 end
 
-function AnalyticsModule:reportConnectDisconnectEvents(EventName, AdditionalArgs) --[[ Line: 441 ]]
+function AnalyticsModule:reportConnectDisconnectEvents(EventName, AdditionalArgs)
 	self._impl:SendEventDeferred("client", "voiceChat", EventName, AdditionalArgs)
 end
 
-function AnalyticsModule:reportVoiceEvents(EventName, AdditionalArgs) --[[ Line: 445 ]]
+function AnalyticsModule:reportVoiceEvents(EventName, AdditionalArgs)
 	self._impl:SendEventDeferred("client", "voice", EventName, AdditionalArgs)
 end
 
-function AnalyticsModule:reportVoiceVolumeEligibility(p1) --[[ Line: 449 ]]
+function AnalyticsModule:reportVoiceVolumeEligibility(p1)
 	-- upvalues: TelemetryService (copy)
 	TelemetryService:LogEvent({
 		eventName = "VoiceVolumeControlsEligibility",
@@ -279,7 +279,7 @@ function AnalyticsModule:reportVoiceVolumeEligibility(p1) --[[ Line: 449 ]]
 	})
 end
 
-function AnalyticsModule:reportVoiceVolumeImpressions(p1) --[[ Line: 470 ]]
+function AnalyticsModule:reportVoiceVolumeImpressions(p1)
 	-- upvalues: TelemetryService (copy)
 	TelemetryService:LogEvent({
 		eventName = "VoiceVolumeControlsImpressions",

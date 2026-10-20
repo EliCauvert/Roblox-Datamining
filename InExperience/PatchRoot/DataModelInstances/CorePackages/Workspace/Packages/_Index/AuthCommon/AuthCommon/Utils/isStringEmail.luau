@@ -1,4 +1,4 @@
-﻿return function(Text: string): boolean --[[ Line: 2 ]]
+﻿return function(Text: string): boolean
 	if Text and Text ~= "" then
 		assert(Text, "")
 		

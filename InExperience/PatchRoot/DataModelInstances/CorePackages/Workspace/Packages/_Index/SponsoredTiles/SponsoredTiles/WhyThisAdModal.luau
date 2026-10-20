@@ -25,22 +25,22 @@ local OmniRecommendationsContentType = require(Parent.DiscoveryTypes).OmniRecomm
 local FStringLuaAppAdPreferencesUrl = require(Parent.SharedFlags).FStringLuaAppAdPreferencesUrl
 local FFlagLuaAppEnableHomepageOneByTwoTile = require(Parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile
 
-local function useCreatorName(UniverseId) --[[ Line: 49 ]]
+local function useCreatorName(UniverseId)
 	-- upvalues: UseDispatchFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), FFlagLuaAppEnableHomepageOneByTwoTile (copy), UseSelectorFunction (copy), ApiFetchGameDetails (copy), ReactModule (copy), RetrievalStatus (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
 	
 	if FFlagLuaAppEnableHomepageOneByTwoTile then
 		local IsNotUniverseIdMatch: boolean = UniverseId ~= nil and UniverseId ~= ""
-		local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 56 ]]
+		local UseSelectorResult = UseSelectorFunction(function(p1)
 			-- upvalues: IsNotUniverseIdMatch (copy), ApiFetchGameDetails (upval), UniverseId (copy)
 			return IsNotUniverseIdMatch and ApiFetchGameDetails.GetFetchingStatus(p1, UniverseId) or nil
 		end)
-		local UseSelectorResult1 = UseSelectorFunction(function(p1) --[[ Line: 60 ]]
+		local UseSelectorResult1 = UseSelectorFunction(function(p1)
 			-- upvalues: IsNotUniverseIdMatch (copy), UniverseId (copy)
 			return IsNotUniverseIdMatch and p1.GameDetails[UniverseId] or nil
 		end)
-		ReactModule.useEffect(function() --[[ Line: 64 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: IsNotUniverseIdMatch (copy), UseSelectorResult1 (copy), UseSelectorResult (copy), RetrievalStatus (upval), UseDispatchResult (copy), ApiFetchGameDetails (upval), UseRoactServiceResult (copy), UniverseId (copy)
 			if IsNotUniverseIdMatch and not UseSelectorResult1 and UseSelectorResult ~= RetrievalStatus.Fetching then
 				UseDispatchResult(ApiFetchGameDetails.Fetch(UseRoactServiceResult, { UniverseId }))
@@ -52,15 +52,15 @@ local function useCreatorName(UniverseId) --[[ Line: 49 ]]
 		
 		return UseSelectorResult1 and UseSelectorResult1.creator and UseSelectorResult1.creator.name or nil, UseSelectorResult
 	else
-		local UseSelectorResult2 = UseSelectorFunction(function(p1) --[[ Line: 74 ]]
+		local UseSelectorResult2 = UseSelectorFunction(function(p1)
 			-- upvalues: UniverseId (copy), ApiFetchGameDetails (upval)
 			return UniverseId and ApiFetchGameDetails.GetFetchingStatus(p1, UniverseId) or nil
 		end)
-		local UseSelectorResult3 = UseSelectorFunction(function(p1) --[[ Line: 78 ]]
+		local UseSelectorResult3 = UseSelectorFunction(function(p1)
 			-- upvalues: UniverseId (copy)
 			return UniverseId and p1.GameDetails[UniverseId] or nil
 		end)
-		ReactModule.useEffect(function() --[[ Line: 82 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UniverseId (copy), UseSelectorResult3 (copy), UseSelectorResult2 (copy), RetrievalStatus (upval), UseDispatchResult (copy), ApiFetchGameDetails (upval), UseRoactServiceResult (copy)
 			if UniverseId and not UseSelectorResult3 and UseSelectorResult2 ~= RetrievalStatus.Fetching then
 				UseDispatchResult(ApiFetchGameDetails.Fetch(UseRoactServiceResult, { UniverseId }))
@@ -77,17 +77,17 @@ local function useCreatorName(UniverseId) --[[ Line: 49 ]]
 	end
 end
 
-local function _(EighteenPlusNonPersonalized): string --[[ Line: 92 | Named "getSponsoredDisclosureTranslationKey" ]]
+local function _(EighteenPlusNonPersonalized): string
 	-- upvalues: SponsoredUserCohortModule (copy)
 	return if EighteenPlusNonPersonalized == SponsoredUserCohortModule.UnderEighteen then "Feature.GameDetails.Message.SponsoredDisclosure.U18" elseif EighteenPlusNonPersonalized == SponsoredUserCohortModule.EighteenPlusPersonalized then "Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink" elseif EighteenPlusNonPersonalized == SponsoredUserCohortModule.EighteenPlusNonPersonalized then "Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink" else "Feature.GameDetails.Message.SponsoredDisclosure.U18"
 end
 
-local _ = function(EighteenPlusNonPersonalized): string --[[ Line: 104 | Named "getSponsoredDisclosureNoUniverseTranslationKey" ]]
+local _ = function(EighteenPlusNonPersonalized): string
 	-- upvalues: SponsoredUserCohortModule (copy)
 	return if EighteenPlusNonPersonalized == SponsoredUserCohortModule.UnderEighteen then "Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18" elseif EighteenPlusNonPersonalized == SponsoredUserCohortModule.EighteenPlusPersonalized then "Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18PersonalizedNoLink" elseif EighteenPlusNonPersonalized == SponsoredUserCohortModule.EighteenPlusNonPersonalized then "Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18NonPersonalNoLink" else "Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18"
 end
 
-local function resolveSponsoredDisclosure(PayerName, IsContentTypeMatch, IsNotUniverseIdMatch, CreatorName, SponsoredUserCohort, p1) --[[ Line: 123 ]]
+local function resolveSponsoredDisclosure(PayerName, IsContentTypeMatch, IsNotUniverseIdMatch, CreatorName, SponsoredUserCohort, p1)
 	-- upvalues: FlaggedMutedErrorFunction (copy), SponsoredUserCohortModule (copy)
 	if PayerName == nil or PayerName == "" then
 		FlaggedMutedErrorFunction("WhyThisAdDisclosureError", "Missing payerName in WhyThisAdModal")
@@ -114,7 +114,7 @@ local function resolveSponsoredDisclosure(PayerName, IsContentTypeMatch, IsNotUn
 	end
 end
 
-return function(p1) --[[ Line: 161 | Named "WhyThisAdModal" ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), useCreatorName (copy), UseLocalizationFunction (copy), SponsoredUserCohortModule (copy), FFlagLuaAppEnableHomepageOneByTwoTile (copy), ReactModule (copy), CloseCentralOverlayFunction (copy), AppPage (copy), FStringLuaAppAdPreferencesUrl (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), RetrievalStatus (copy), OmniRecommendationsContentType (copy), resolveSponsoredDisclosure (copy), FlaggedMutedErrorFunction (copy), Dialog (copy), View (copy), Button (copy), ButtonVariant (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseCreatorNameResult, UseCreatorNameResult2 = useCreatorName(p1.universeId)
@@ -142,11 +142,11 @@ return function(p1) --[[ Line: 161 | Named "WhyThisAdModal" ]]
 	end
 	config.sponsoredDisclosureNoUniverse = SponsoredDisclosureNoUniverse
 	local UseLocalizationResult = UseLocalizationFunction(config)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 182 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseDispatchResult (copy), CloseCentralOverlayFunction (upval)
 		UseDispatchResult(CloseCentralOverlayFunction())
 	end, { UseDispatchResult })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 186 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseDispatchResult (copy), CloseCentralOverlayFunction (upval), AppPage (upval), FStringLuaAppAdPreferencesUrl (upval), UseLocalizationResult (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval)
 		UseDispatchResult(CloseCentralOverlayFunction())
 		local config = {

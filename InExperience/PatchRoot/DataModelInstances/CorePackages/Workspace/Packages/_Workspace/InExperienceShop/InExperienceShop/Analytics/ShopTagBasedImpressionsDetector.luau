@@ -4,15 +4,15 @@ local ReactModule = require(Parent.React)
 local UnifiedEventLogConstants = require(Parent.AvatarExperienceAnalytics).UnifiedEventLogConstants
 local ShopScreenSizeImpressionsDetectorModule = require(script.Parent.ShopScreenSizeImpressionsDetector)
 
-return function(p1) --[[ Line: 21 | Named "ShopTagBasedImpressionsDetector" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), CollectionService (copy), UnifiedEventLogConstants (copy), ShopScreenSizeImpressionsDetectorModule (copy)
 	local UseRefResult = ReactModule.useRef({})
 	local UseRefResult1 = ReactModule.useRef({})
-	local UseResult = ReactModule.useCallback(function(Object): boolean --[[ Line: 25 ]]
+	local UseResult = ReactModule.useCallback(function(Object): boolean
 		-- upvalues: UseRefResult (copy)
 		return not UseRefResult.current[Object:GetFullName()]
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(List) --[[ Line: 29 ]]
+	local UseResult1 = ReactModule.useCallback(function(List)
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), p1 (copy)
 		local VisibleInstances = {}
 		
@@ -23,7 +23,7 @@ return function(p1) --[[ Line: 21 | Named "ShopTagBasedImpressionsDetector" ]]
 				VisibleInstances[FullName] = value
 				
 				if not UseRefResult1.current[FullName] then
-					UseRefResult1.current[FullName] = value.AncestryChanged:Connect(function() --[[ Line: 39 ]]
+					UseRefResult1.current[FullName] = value.AncestryChanged:Connect(function()
 						-- upvalues: value (copy), UseRefResult (upval), FullName (copy), UseRefResult1 (upval)
 						if not value.Parent then
 							UseRefResult.current[FullName] = nil
@@ -46,9 +46,9 @@ return function(p1) --[[ Line: 21 | Named "ShopTagBasedImpressionsDetector" ]]
 			end
 		end
 	end, { p1.extensions })
-	ReactModule.useEffect(function() --[[ Line: 63 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy)
-		return function() --[[ Line: 64 ]]
+		return function()
 			-- upvalues: UseRefResult1 (upval)
 			for _, Connection in UseRefResult1.current do
 				if Connection then
@@ -65,7 +65,7 @@ return function(p1) --[[ Line: 21 | Named "ShopTagBasedImpressionsDetector" ]]
 		onRequestImpressionsSignal = p1.requestImpressionsSignal,
 		filterImpressionFunc = UseResult,
 		onImpressionsDetected = UseResult1,
-		collectObjectsFunc = ReactModule.useCallback(function() --[[ Line: 74 ]]
+		collectObjectsFunc = ReactModule.useCallback(function()
 			-- upvalues: CollectionService (upval), UnifiedEventLogConstants (upval)
 			return CollectionService:GetTagged(UnifiedEventLogConstants.TAG_NAME)
 		end, {})

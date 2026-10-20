@@ -2,7 +2,7 @@
 local ReactModule = require(Parent.Parent.React)
 local LeaderboardStoreContextModule = require(Parent.Common.LeaderboardStoreContext)
 
-return function() --[[ Line: 8 | Named "useLeaderboardStore" ]]
+return function()
 	-- upvalues: ReactModule (copy), LeaderboardStoreContextModule (copy)
 	return (ReactModule.useContext(LeaderboardStoreContextModule))
 end

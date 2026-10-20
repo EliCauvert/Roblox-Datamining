@@ -23,15 +23,15 @@ local Layout = {
 local BackgroundStyle1 = { Transparency = 1 }
 local config = { dampingRatio = 1, frequency = 5 }
 
-local function getActiveTabPosition(XOffset): UDim2 --[[ Line: 70 ]]
+local function getActiveTabPosition(XOffset): UDim2
 	return UDim2.new(0, XOffset, 1, 0)
 end
 
-local function getActiveTabSize(XOffset): UDim2 --[[ Line: 74 ]]
+local function getActiveTabSize(XOffset): UDim2
 	return UDim2.new(0, XOffset, 0, 3)
 end
 
-return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 78 | Named "TabGroup" ]]
+return ReactModule.forwardRef(function(Frame: Frame, Ref)
 	-- upvalues: UseTokensFunction (copy), UseAnimatedBindingFunction (copy), ReactModule (copy), FFlagAXCategoryMenuVisualFixes (copy), MakeOtterSpringValueModule (copy), config (copy), ReactOtterModule (copy), FFlagAXScrollHighlightedTabIntoView (copy), GetCenterScrollOffsetModule (copy), GamepadService (copy), TabGroupTabModule (copy), getActiveTabPosition (copy), getActiveTabSize (copy), View (copy), BackgroundStyle1 (copy), Layout (copy), ScrollingFrameWithIndicatorsModule (copy), BackgroundStyle (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = UseAnimatedBindingFunction(0)
@@ -39,7 +39,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 78 | Named 
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseRefResult2 = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function(p1, p2, p3) --[[ Line: 87 ]]
+	local UseResult = ReactModule.useCallback(function(p1, p2, p3)
 		-- upvalues: FFlagAXCategoryMenuVisualFixes (upval), UseAnimatedBindingResult1 (copy), UseAnimatedBindingResult2 (copy), MakeOtterSpringValueModule (upval), config (upval), UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval)
 		if not p3 and (not FFlagAXCategoryMenuVisualFixes or UseAnimatedBindingResult1:getValue() > 0) then
 			UseAnimatedBindingResult2(MakeOtterSpringValueModule(p1, config))
@@ -51,7 +51,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 78 | Named 
 			UseAnimatedBindingResult2_1(ReactOtterModule.instant(p2))
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 100 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult2 (copy), UseRefResult (copy), UseRefResult1 (copy)
 		local Current = UseRefResult2.current
 		local Current1 = UseRefResult.current
@@ -77,7 +77,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 78 | Named 
 			Current.scrollToOffset(NewXDelta - X)
 		end
 	end, {})
-	local UseResult2 = if FFlagAXScrollHighlightedTabIntoView then ReactModule.useCallback(function(Frame: Frame) --[[ Line: 137 ]]
+	local UseResult2 = if FFlagAXScrollHighlightedTabIntoView then ReactModule.useCallback(function(Frame: Frame)
 		-- upvalues: UseRefResult2 (copy), GetCenterScrollOffsetModule (upval)
 		local Current = UseRefResult2.current
 		
@@ -95,7 +95,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 78 | Named 
 			return
 		end
 	end, {}) else nil
-	local UseResult3 = ReactModule.useCallback(function(Current) --[[ Line: 167 ]]
+	local UseResult3 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), Frame (copy), UseResult (copy), FFlagAXScrollHighlightedTabIntoView (upval), UseResult2 (ref), UseResult1 (copy)
 		local Current1 = UseRefResult.current
 		UseRefResult1.current = Current
@@ -122,7 +122,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 78 | Named 
 		UseResult2,
 		UseResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 198 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseResult (copy), FFlagAXCategoryMenuVisualFixes (upval), FFlagAXScrollHighlightedTabIntoView (upval), UseResult2 (ref), UseResult1 (copy)
 		local Current = UseRefResult.current
 		local Current1 = UseRefResult1.current
@@ -140,7 +140,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 78 | Named 
 	end, { UseResult1, UseResult2, UseResult })
 	
 	if FFlagAXScrollHighlightedTabIntoView then
-		ReactModule.useEffect(function() --[[ Line: 220 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseRefResult2 (copy), GamepadService (upval), UseResult2 (ref)
 			local Current = UseRefResult2.current
 			
@@ -148,7 +148,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 78 | Named 
 			local ScrollingFrame = Current.getScrollingFrame()
 			
 			if not ScrollingFrame then return end
-			local SelectionChangedConnection = ScrollingFrame.SelectionChanged:Connect(function(_, _, p1) --[[ Line: 232 ]]
+			local SelectionChangedConnection = ScrollingFrame.SelectionChanged:Connect(function(_, _, p1)
 				-- upvalues: GamepadService (upval), UseResult2 (upval)
 				if GamepadService.GamepadCursorEnabled then return end
 				if UseResult2 then
@@ -156,14 +156,14 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 78 | Named 
 				end
 			end)
 			
-			return function() --[[ Line: 244 ]]
+			return function()
 				-- upvalues: SelectionChangedConnection (copy)
 				SelectionChangedConnection:Disconnect()
 			end
 		end, {})
 	end
 	if FFlagAXCategoryMenuVisualFixes then
-		ReactModule.useEffect(function() --[[ Line: 257 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: Frame (copy), UseRefResult1 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseAnimatedBindingResult2_1 (copy)
 			local Flag = false
 			
@@ -181,10 +181,10 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 78 | Named 
 				UseAnimatedBindingResult2_1(ReactOtterModule.instant(0))
 			end
 		end, { Frame.activeTabId, Frame.items })
-		ReactModule.useImperativeHandle(Frame.controllerRef, function() --[[ Line: 276 ]]
+		ReactModule.useImperativeHandle(Frame.controllerRef, function()
 			-- upvalues: UseRefResult2 (copy)
 			return {
-				scrollToOffset = function(XDelta) --[[ Line: 278 ]]
+				scrollToOffset = function(XDelta)
 					-- upvalues: UseRefResult2 (upval)
 					local Current = UseRefResult2.current
 					
@@ -192,7 +192,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 78 | Named 
 						Current.scrollToOffset(XDelta)
 					end
 				end,
-				setOffset = function(p1) --[[ Line: 284 ]]
+				setOffset = function(p1)
 					-- upvalues: UseRefResult2 (upval)
 					local Current = UseRefResult2.current
 					
@@ -200,7 +200,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 78 | Named 
 						Current.setOffset(p1)
 					end
 				end,
-				getScrollingFrame = function() --[[ Line: 290 ]]
+				getScrollingFrame = function()
 					-- upvalues: UseRefResult2 (upval)
 					local Current = UseRefResult2.current
 					
@@ -216,7 +216,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 78 | Named 
 		Elements[item.id] = ReactModule.createElement(TabGroupTabModule, {
 			ref = if IsActiveTabIdMatch then UseResult3 else item.ref,
 			text = item.text,
-			onActivated = if Frame.onTabActivated then function() --[[ Line: 305 ]]
+			onActivated = if Frame.onTabActivated then function()
 				-- upvalues: Frame (copy), item (copy)
 				Frame.onTabActivated(item.id)
 			end else nil,
@@ -238,11 +238,11 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 78 | Named 
 	}, Elements)
 	local Frame1 = ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		Position = ReactModule.useMemo(function() --[[ Line: 318 ]]
+		Position = ReactModule.useMemo(function()
 			-- upvalues: UseAnimatedBindingResult (copy), getActiveTabPosition (upval)
 			return UseAnimatedBindingResult:map(getActiveTabPosition)
 		end, {}),
-		Size = ReactModule.useMemo(function() --[[ Line: 322 ]]
+		Size = ReactModule.useMemo(function()
 			-- upvalues: UseAnimatedBindingResult1 (copy), getActiveTabSize (upval)
 			return UseAnimatedBindingResult1:map(getActiveTabSize)
 		end, {}),

@@ -35,7 +35,7 @@ local LogRobuxTransferFlowEventModule = require(CurrencyTransfers.Utils.logRobux
 local GetFFlagCurrencyTransferFocusNavigationModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferFocusNavigation)
 local UseTransferSheetFocusModule = require(CurrencyTransfers.Hooks.useTransferSheetFocus)
 
-return function(p1) --[[ Line: 63 | Named "TransferFAEBlockSheet" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), UseTransferStoreModule (copy), UseDispatchFunction (copy), GetFFlagCurrencyTransferUseAmpWizardContainerForInAppModule (copy), TransferOriginationModule (copy), UseScaledValueFunction (copy), ReactModule (copy), LogCurrencyTransferCounterModule (copy), CurrencyTransferTelemetryModule (copy), SharedFlagsModule (copy), LogRobuxTransferFlowEventModule (copy), RobuxTransferFlowEventNameModule (copy), TransferDirectionModule (copy), GetFFlagCurrencyTransferFocusNavigationModule (copy), UseTransferSheetFocusModule (copy), Sheet (copy), View (copy), Text (copy), GetIconRichTextFunction (copy), Enums (copy), Button (copy), PromptStateModule (copy), GetCounterUserIdModule (copy), AccessResponseEnum (copy), AcceptTransferModule (copy), ProcessTransferModule (copy), InExpAmpWizardController (copy), AmpWizardTransferConstantsModule (copy), OpenAmpWizardContainerFunction (copy), ButtonVariant (copy), FillBehavior (copy)
 	local UseLocalizationResult = UseLocalizationFunction(TransferLocalizationKeysModule.Presets.TransferFAEBlockSheet)
 	local UseTransferStoreModuleResult = UseTransferStoreModule()
@@ -45,7 +45,7 @@ return function(p1) --[[ Line: 63 | Named "TransferFAEBlockSheet" ]]
 	local SelectedAmount = UseTransferStoreModuleResult.getSelectedAmount(false)
 	local IsInExperienceMatch = (if GetFFlagCurrencyTransferUseAmpWizardContainerForInAppModule() then UseTransferStoreModuleResult.getTransferOrigination(false) else nil) == TransferOriginationModule.InExperience
 	local UseScaledValueResult = UseScaledValueFunction(420)
-	ReactModule.useEffect(function() --[[ Line: 77 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: LogCurrencyTransferCounterModule (upval), UseTransferStoreModuleResult (copy), CurrencyTransferTelemetryModule (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval)
 		LogCurrencyTransferCounterModule(UseTransferStoreModuleResult, CurrencyTransferTelemetryModule.CurrencyTransferFAEBlockSheetShownCounter, { recourseSurface = "fae" })
 		
@@ -136,7 +136,7 @@ return function(p1) --[[ Line: 63 | Named "TransferFAEBlockSheet" ]]
 					ReactModule.createElement(Button, {
 						ref = Ref1,
 						text = UseLocalizationResult.Continue,
-						onActivated = function() --[[ Line: 178 ]]
+						onActivated = function()
 							-- upvalues: LogCurrencyTransferCounterModule (upval), UseTransferStoreModuleResult (copy), CurrencyTransferTelemetryModule (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval), p1 (copy), PromptStateModule (upval), GetCounterUserIdModule (upval), Direction (copy), AccessResponseEnum (upval), TransferDirectionModule (upval), AcceptTransferModule (upval), ProcessTransferModule (upval), SelectedAmount (copy), TriggerOnCloseFunction (copy), IsInExperienceMatch (copy), GetFFlagCurrencyTransferUseAmpWizardContainerForInAppModule (upval), InExpAmpWizardController (upval), AmpWizardTransferConstantsModule (upval), UseDispatchResult (copy), OpenAmpWizardContainerFunction (upval)
 							LogCurrencyTransferCounterModule(UseTransferStoreModuleResult, CurrencyTransferTelemetryModule.CurrencyTransferFAEBlockContinueClickedCounter, { recourseSurface = "fae" })
 							
@@ -160,7 +160,7 @@ return function(p1) --[[ Line: 63 | Named "TransferFAEBlockSheet" ]]
 								}
 							} else nil
 							
-							local function v44(Granted, _) --[[ Line: 203 ]]
+							local function v44(Granted, _)
 								-- upvalues: UseTransferStoreModuleResult (upval), AccessResponseEnum (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval), Direction (upval), TransferDirectionModule (upval), AcceptTransferModule (upval), ProcessTransferModule (upval), SelectedAmount (upval), TriggerOnCloseFunction (upval)
 								local PreviousPromptState = UseTransferStoreModuleResult.getPreviousPromptState(false)
 								

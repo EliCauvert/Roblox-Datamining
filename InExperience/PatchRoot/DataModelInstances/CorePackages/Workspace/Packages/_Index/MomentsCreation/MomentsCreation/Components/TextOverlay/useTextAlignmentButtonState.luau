@@ -25,7 +25,7 @@ local config = {
 	[Enum.TextXAlignment.Right.Name] = BuilderIconsModule.Icon.FourBarsHorizontalLeftAligned
 }
 
-local function _(p1) --[[ Line: 41 | Named "nextAlignment" ]]
+local function _(p1)
 	-- upvalues: TextXAlignments (copy)
 	for i, textXAlignment in TextXAlignments do
 		if textXAlignment == p1 then
@@ -35,12 +35,12 @@ local function _(p1) --[[ Line: 41 | Named "nextAlignment" ]]
 	return Enum.TextXAlignment.Center
 end
 
-return function(p2) --[[ Line: 55 | Named "useTextAlignmentButtonState" ]]
+return function(p2)
 	-- upvalues: UseMemoFunction (copy), SignalsModule (copy), UseSignalStateFunction (copy), UseCallbackFunction (copy), TextXAlignments (copy), DashModule (copy), FFlagMomentsTextOverlayV2Redesign (copy), FireAnalyticsEventModule (copy), EventNames (copy), MakeCreationEventFieldsModule (copy), config (copy), BuilderIconsModule (copy)
 	return {
-		icon = config[UseSignalStateFunction((UseMemoFunction(function() --[[ Line: 57 ]]
+		icon = config[UseSignalStateFunction((UseMemoFunction(function()
 			-- upvalues: SignalsModule (upval), p2 (copy)
-			return SignalsModule.createComputed(function(p3) --[[ Line: 58 ]]
+			return SignalsModule.createComputed(function(p3)
 				-- upvalues: p2 (upval)
 				local ActiveSession = p2.getActiveSession(p3)
 				local Draft = if ActiveSession == nil then nil else ActiveSession.getDraft(p3)
@@ -49,7 +49,7 @@ return function(p2) --[[ Line: 55 | Named "useTextAlignmentButtonState" ]]
 				return if DraftEntry == nil then Enum.TextXAlignment.Center else DraftEntry.textOverlayStyle.textXAlignment
 			end)
 		end, { p2 }))).Name] or BuilderIconsModule.Icon.FourBarsHorizontalCenterAligned,
-		onActivated = UseCallbackFunction(function() --[[ Line: 67 ]]
+		onActivated = UseCallbackFunction(function()
 			-- upvalues: p2 (copy), TextXAlignments (upval), DashModule (upval), FFlagMomentsTextOverlayV2Redesign (upval), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval)
 			local ActiveSession = p2.getActiveSession(false)
 			

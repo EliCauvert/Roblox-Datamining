@@ -6,14 +6,14 @@ local EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint = require(Parent.S
 local _ = require(ExpChat.Stores.GetPresetChatStore.createPresetChatStore)
 local InitializePresetChat = require(Parent.ExpChatShared).Logger:new("ExpChat/PresetChat/initializePresetChat")
 
-local function getPresetsFromEngine() --[[ Line: 18 ]]
+local function getPresetsFromEngine()
 	-- upvalues: TextChatService (copy)
 	return TextChatService:GetPresetsAsync()
 end
 
-local function _(p1, p2, p3) --[[ Line: 22 | Named "fetchPresets" ]]
+local function _(p1, p2, p3)
 	-- upvalues: InitializePresetChat (copy), EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy)
-	task.spawn(function() --[[ Line: 23 ]]
+	task.spawn(function()
 		-- upvalues: p3 (copy), p2 (copy), InitializePresetChat (upval), p1 (copy), EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (upval)
 		local Success, Result = pcall(p3)
 		
@@ -59,10 +59,10 @@ local function _(p1, p2, p3) --[[ Line: 22 | Named "fetchPresets" ]]
 	end)
 end
 
-return function(p1, p2, p3) --[[ Line: 71 | Named "initializePresetChat" ]]
+return function(p1, p2, p3)
 	-- upvalues: getPresetsFromEngine (copy), InitializePresetChat (copy), EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy), GameSettings (copy)
 	local P5 = p3 or getPresetsFromEngine
-	task.spawn(function() --[[ Line: 23 ]]
+	task.spawn(function()
 		-- upvalues: P5 (copy), p2 (copy), InitializePresetChat (upval), p1 (copy), EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (upval)
 		local Success, Result = pcall(P5)
 		
@@ -106,12 +106,12 @@ return function(p1, p2, p3) --[[ Line: 71 | Named "initializePresetChat" ]]
 			InitializePresetChat:warning("GetPresetsAsync failed: {}", (tostring(Result)))
 		end
 	end)
-	GameSettings:GetPropertyChangedSignal("ChatTranslationLocale"):Connect(function() --[[ Line: 75 ]]
+	GameSettings:GetPropertyChangedSignal("ChatTranslationLocale"):Connect(function()
 		-- upvalues: p2 (copy), p1 (copy), P5 (copy), InitializePresetChat (upval), EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (upval)
 		if not p2 then
 			p1.setIsLoading(true)
 		end
-		task.spawn(function() --[[ Line: 23 ]]
+		task.spawn(function()
 			-- upvalues: P5 (copy), p2 (copy), InitializePresetChat (upval), p1 (copy), EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (upval)
 			local Success, Result = pcall(P5)
 			
@@ -156,12 +156,12 @@ return function(p1, p2, p3) --[[ Line: 71 | Named "initializePresetChat" ]]
 			end
 		end)
 	end)
-	GameSettings:GetPropertyChangedSignal("ChatTranslationEnabled"):Connect(function() --[[ Line: 82 ]]
+	GameSettings:GetPropertyChangedSignal("ChatTranslationEnabled"):Connect(function()
 		-- upvalues: p2 (copy), p1 (copy), P5 (copy), InitializePresetChat (upval), EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (upval)
 		if not p2 then
 			p1.setIsLoading(true)
 		end
-		task.spawn(function() --[[ Line: 23 ]]
+		task.spawn(function()
 			-- upvalues: P5 (copy), p2 (copy), InitializePresetChat (upval), p1 (copy), EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (upval)
 			local Success, Result = pcall(P5)
 			

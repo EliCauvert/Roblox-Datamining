@@ -21,7 +21,7 @@ GameIconButton.validateProps = T.strictInterface({
 	forwardRef = T.optional(T.table)
 })
 
-function GameIconButton.renderWithSelectionCursor(p1, Callback) --[[ Line: 37 ]]
+function GameIconButton.renderWithSelectionCursor(p1, Callback)
 	-- upvalues: Roact (copy), CursorType (copy), GameIconModule (copy), _UDim (copy)
 	return Roact.createElement("TextButton", {
 		Text = "",
@@ -44,15 +44,15 @@ function GameIconButton.renderWithSelectionCursor(p1, Callback) --[[ Line: 37 ]]
 	})
 end
 
-function GameIconButton.render(p1) --[[ Line: 60 ]]
+function GameIconButton.render(p1)
 	-- upvalues: WithCursorMigration (copy)
-	return WithCursorMigration(function(p2) --[[ Line: 61 ]]
+	return WithCursorMigration(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithSelectionCursor(p2)
 	end)
 end
 
-return Roact.forwardRef(function(p1, ForwardRef) --[[ Line: 66 ]]
+return Roact.forwardRef(function(p1, ForwardRef)
 	-- upvalues: Roact (copy), GameIconButton (copy), Cryo (copy)
 	return Roact.createElement(GameIconButton, Cryo.Dictionary.join(p1, { forwardRef = ForwardRef }))
 end)

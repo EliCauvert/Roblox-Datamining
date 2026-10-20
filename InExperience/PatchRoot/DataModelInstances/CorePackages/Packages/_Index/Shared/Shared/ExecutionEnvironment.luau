@@ -1,5 +1,5 @@
 ﻿return {
-	canUseDOM = function(): boolean --[[ Line: 13 ]]
+	canUseDOM = function(): boolean
 		return false
 	end
 }

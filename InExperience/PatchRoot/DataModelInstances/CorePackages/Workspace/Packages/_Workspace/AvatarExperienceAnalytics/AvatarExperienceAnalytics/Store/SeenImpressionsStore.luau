@@ -1,6 +1,6 @@
 ﻿local Tbl = {}
 
-local function _(Key) --[[ Line: 20 | Named "getOrCreateCategory" ]]
+local function _(Key)
 	-- upvalues: Tbl (copy)
 	if not Tbl[Key] then
 		Tbl[Key] = {}
@@ -13,24 +13,24 @@ return {
 		WidgetItems = "WidgetItems",
 		UnifiedImpressions = "UnifiedImpressions"
 	},
-	hasSeen = function(p1, p2): boolean --[[ Line: 27 ]]
+	hasSeen = function(p1, p2): boolean
 		-- upvalues: Tbl (copy)
 		local Entry = Tbl[p1]
 		
 		return Entry ~= nil and Entry[p2] == true
 	end,
-	markSeen = function(Key, p1) --[[ Line: 32 ]]
+	markSeen = function(Key, p1)
 		-- upvalues: Tbl (copy)
 		if not Tbl[Key] then
 			Tbl[Key] = {}
 		end
 		Tbl[Key][p1] = true
 	end,
-	clearCategory = function(Key) --[[ Line: 36 ]]
+	clearCategory = function(Key)
 		-- upvalues: Tbl (copy)
 		Tbl[Key] = nil
 	end,
-	clear = function() --[[ Line: 40 ]]
+	clear = function()
 		-- upvalues: Tbl (copy)
 		table.clear(Tbl)
 	end

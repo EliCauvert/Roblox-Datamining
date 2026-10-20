@@ -3,7 +3,7 @@ local SetActiveTabModule = require(script.Parent.Parent.Actions.SetActiveTab)
 local SetTabListModule = require(script.Parent.Parent.Actions.SetTabList)
 local FFlagDevConsoleTabReselectKeepsClientViewModule = require(script.Parent.Flags.FFlagDevConsoleTabReselectKeepsClientView)
 
-return function(p1, p2) --[[ Line: 16 ]]
+return function(p1, p2)
 	-- upvalues: SetActiveTabModule (copy), FFlagDevConsoleTabReselectKeepsClientViewModule (copy), ImmutableModule (copy), SetTabListModule (copy)
 	local P0 = p1 or {
 		isDeveloperView = false,

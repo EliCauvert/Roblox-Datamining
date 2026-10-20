@@ -16,7 +16,7 @@ local FFlagSduiPageCanvasCollectionLayout = SharedFlagsModule.FFlagSduiPageCanva
 local IsSubjectToDesktopPoliciesFunction = SharedFlagsModule.isSubjectToDesktopPolicies
 local Frozen = table.freeze({ Selectable = false })
 
-return ReactModule.memo(function(p1) --[[ Line: 57 | Named "PageWholeContent" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FFlagSduiFeedScrollBarFixes (copy), FFlagSduiPageCanvasCollectionLayout (copy), ReactModule (copy), UseAnimateScrollViewToSelectionFunction (copy), UseLastInputModeFunction (copy), UseTokensFunction (copy), IsSubjectToDesktopPoliciesFunction (copy), View (copy), CollectionLayoutStoreProvider (copy), ScrollView (copy), Frozen (copy)
 	local ScrollStore = p1.scrollStore
 	local Slots = p1.slots
@@ -40,7 +40,7 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "PageWholeContent" ]]
 		v2 = UseTokensFunction()
 		ScrollBarThickness = if IsSubjectToDesktopPoliciesFunction() then 4 else 0
 	else
-		UseMemoResult = ReactModule.useMemo(function() --[[ Line: 79 ]]
+		UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: IsNotCursor (copy)
 			return table.freeze({
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
@@ -54,12 +54,12 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "PageWholeContent" ]]
 	local UseResult = nil
 	
 	if not FFlagSduiFeedScrollBarFixes then
-		Callback = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 92 ]]
+		Callback = ReactModule.useCallback(function(ScrollFrame)
 			-- upvalues: ScrollStore (copy)
 			ScrollStore.setViewportHeight(ScrollFrame.AbsoluteWindowSize.Y)
 			ScrollStore.setContentHeight(ScrollFrame.AbsoluteCanvasSize.Y)
 		end, { ScrollStore })
-		UseResult = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 97 ]]
+		UseResult = ReactModule.useCallback(function(ScrollFrame)
 			-- upvalues: Callback (ref), ScrollStore (copy)
 			if Callback ~= nil then
 				Callback(ScrollFrame)
@@ -67,14 +67,14 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "PageWholeContent" ]]
 			ScrollStore.setCanvasPosition(ScrollFrame.CanvasPosition.Y)
 		end, { ScrollStore, Callback })
 	end
-	local UseResult1 = ReactModule.useCallback(function(Current) --[[ Line: 106 ]]
+	local UseResult1 = ReactModule.useCallback(function(Current)
 		-- upvalues: ScrollStore (copy), ScrollingFrameRef (copy)
 		ScrollStore.setScrollingFrame(Current)
 		ScrollingFrameRef.current = Current
 	end, { ScrollStore, ScrollingFrameRef })
-	local UseMemoResult1 = if FFlagSduiFeedScrollBarFixes then ReactModule.useMemo(function() --[[ Line: 126 ]]
+	local UseMemoResult1 = if FFlagSduiFeedScrollBarFixes then ReactModule.useMemo(function()
 		-- upvalues: ChromeDisplacement (copy), ContentTopPadding (copy)
-		return if ChromeDisplacement == nil then UDim2.new(1, 0, 0, ContentTopPadding or 0) else ChromeDisplacement:map(function(p2): UDim2 --[[ Line: 130 ]]
+		return if ChromeDisplacement == nil then UDim2.new(1, 0, 0, ContentTopPadding or 0) else ChromeDisplacement:map(function(p2): UDim2
 			-- upvalues: ContentTopPadding (upval)
 			return UDim2.new(1, 0, 0, (ContentTopPadding or 0) + p2)
 		end)
@@ -91,7 +91,7 @@ return ReactModule.memo(function(p1) --[[ Line: 57 | Named "PageWholeContent" ]]
 			LayoutOrder = 1,
 			Size = if FFlagSduiFeedScrollBarFixes then UseMemoResult1 else UDim2.new(1, 0, 0, ContentTopPadding)
 		}),
-		Content = ReactModule.createElement(View, { tag = "col size-full-0 auto-y", LayoutOrder = 2 }, (ReactModule.useMemo(function() --[[ Line: 113 ]]
+		Content = ReactModule.createElement(View, { tag = "col size-full-0 auto-y", LayoutOrder = 2 }, (ReactModule.useMemo(function()
 			-- upvalues: Slots (copy)
 			if Slots == nil then
 				return nil

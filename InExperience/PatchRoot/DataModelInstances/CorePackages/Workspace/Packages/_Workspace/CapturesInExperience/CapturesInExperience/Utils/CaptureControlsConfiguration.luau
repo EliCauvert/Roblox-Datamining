@@ -13,12 +13,12 @@ local v1 = require(Parent.Utils.getLocalUserId)((game:GetService("Players")))
 local CaptureControlsStoredAnchorPoints = game:DefineFastInt("CaptureControlsStoredAnchorPoints", 100)
 
 return {
-	getStoredSnapAnchorPoint = function() --[[ Line: 28 ]]
+	getStoredSnapAnchorPoint = function()
 		-- upvalues: CaptureControlsAppStorageEnabledEngineFeature (copy), v1 (copy), _Vector2 (copy), AppStorageService (copy), ConstantsModule (copy), HttpService (copy), t (ref), GetDeepValueFunction (copy), Text (copy)
 		if not CaptureControlsAppStorageEnabledEngineFeature or not v1 then
 			return _Vector2
 		end
-		local Success, Result = pcall(function() --[[ Line: 33 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: AppStorageService (upval), ConstantsModule (upval)
 			return AppStorageService:GetItem(ConstantsModule.CaptureControlsPositionStorageKey)
 		end)
@@ -26,7 +26,7 @@ return {
 		if not Success then
 			return _Vector2
 		end
-		local Success1, Result1 = pcall(function() --[[ Line: 41 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: HttpService (upval), Result (copy)
 			return HttpService:JSONDecode(Result)
 		end)
@@ -40,7 +40,7 @@ return {
 			return _Vector2
 		end
 	end,
-	setStoredSnapAnchorPoint = function(Vector) --[[ Line: 62 ]]
+	setStoredSnapAnchorPoint = function(Vector)
 		-- upvalues: CaptureControlsAppStorageEnabledEngineFeature (copy), v1 (copy), t (ref), Text (copy), CryoModule (copy), CaptureControlsStoredAnchorPoints (copy), AppStorageService (copy), ConstantsModule (copy), HttpService (copy)
 		if not CaptureControlsAppStorageEnabledEngineFeature or not v1 then return end
 		local Entry = t[v1] or {}
@@ -48,12 +48,12 @@ return {
 		local KeysResult = CryoModule.Dictionary.keys(Entry)
 		
 		if CaptureControlsStoredAnchorPoints < #KeysResult then
-			local SortResult = CryoModule.List.sort(KeysResult, function(p1, p2): boolean --[[ Line: 79 ]]
+			local SortResult = CryoModule.List.sort(KeysResult, function(p1, p2): boolean
 				-- upvalues: Entry (ref)
 				return Entry[p2].timestamp < Entry[p1].timestamp
 			end)
 			local Set = CryoModule.List.toSet(CryoModule.List.removeRange(SortResult, CaptureControlsStoredAnchorPoints + 1, #SortResult))
-			Entry = CryoModule.Dictionary.filter(Entry, function(_, p1) --[[ Line: 86 ]]
+			Entry = CryoModule.Dictionary.filter(Entry, function(_, p1)
 				-- upvalues: Set (copy)
 				return Set[p1]
 			end)

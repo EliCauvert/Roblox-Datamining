@@ -4,7 +4,7 @@ local Roact = DependenciesModule.Roact
 local Llama = DependenciesModule.llama
 local FriendsWithPresenceModule = require(script.Parent.friendsWithPresence)
 
-return function(p1) --[[ Line: 10 ]]
+return function(p1)
 	-- upvalues: Roact (copy), ParentModule (copy), Llama (copy), FriendsWithPresenceModule (copy)
 	return Roact.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
 		frame = Roact.createElement("Frame", {

@@ -5,7 +5,7 @@ local _ = require(script.Parent.Parent.createPageTracker)
 local Signal = require(script.Parent.Parent.Parent.AppCommonLib).Signal
 local FFlagLuaAppEnableChatMilestones = require(Parent.SharedFlags).FFlagLuaAppEnableChatMilestones
 
-local function createNoOpTracker() --[[ Line: 11 ]]
+local function createNoOpTracker()
 	-- upvalues: Signal (copy)
 	return {
 		pageName = "",
@@ -16,22 +16,22 @@ local function createNoOpTracker() --[[ Line: 11 ]]
 		numLoads = 0,
 		onCompleteSignal = Signal.new(),
 		sentMilestones = {},
-		start = function() --[[ Line: 22 ]] end,
-		logMilestone = function() --[[ Line: 23 ]] end,
-		stop = function() --[[ Line: 24 ]] end,
-		onComponentAdded = function() --[[ Line: 25 ]] end,
-		complete = function() --[[ Line: 26 ]] end,
-		sendMilestone = function() --[[ Line: 27 ]] end
+		start = function() end,
+		logMilestone = function() end,
+		stop = function() end,
+		onComponentAdded = function() end,
+		complete = function() end,
+		sendMilestone = function() end
 	}
 end
 
-return function() --[[ Line: 31 | Named "usePageTracker" ]]
+return function()
 	-- upvalues: ReactModule (copy), PageTrackerContextModule (copy), FFlagLuaAppEnableChatMilestones (copy), createNoOpTracker (copy)
 	local UseContextResult = ReactModule.useContext(PageTrackerContextModule)
 	
 	if UseContextResult == nil then
 		if FFlagLuaAppEnableChatMilestones then
-			return ReactModule.useMemo(function() --[[ Line: 36 ]]
+			return ReactModule.useMemo(function()
 				-- upvalues: createNoOpTracker (upval)
 				return (createNoOpTracker())
 			end, {})

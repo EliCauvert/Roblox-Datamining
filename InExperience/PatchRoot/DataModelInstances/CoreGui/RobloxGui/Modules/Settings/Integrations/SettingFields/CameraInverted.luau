@@ -4,10 +4,10 @@ local ValueChangedSignal = SettingsServiceModule.ValueChangedSignal
 local AvailabilitySignal = SettingsServiceModule.AvailabilitySignal
 local LAYOUTORDER = require(script:FindFirstAncestor("Settings").Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER
 
-local function _() --[[ Line: 22 | Named "CameraInvertedValue" ]]
+local function _()
 	-- upvalues: ValueChangedSignal (copy), GameSettings (copy)
 	local NewValueChangedSignal = ValueChangedSignal.new(GameSettings.CameraYInverted)
-	NewValueChangedSignal:connect(function(CameraYInverted) --[[ Line: 25 ]]
+	NewValueChangedSignal:connect(function(CameraYInverted)
 		-- upvalues: GameSettings (upval)
 		if GameSettings.CameraYInverted ~= CameraYInverted then
 			GameSettings.CameraYInverted = CameraYInverted
@@ -19,10 +19,10 @@ local function _() --[[ Line: 22 | Named "CameraInvertedValue" ]]
 	return NewValueChangedSignal
 end
 
-local _ = function() --[[ Line: 36 | Named "CameraInvertedAvailability" ]]
+local _ = function()
 	-- upvalues: AvailabilitySignal (copy), GameSettings (copy)
 	local NewAvailabilitySignal = AvailabilitySignal.new(GameSettings.IsUsingCameraYInverted)
-	GameSettings.Changed:Connect(function(p1) --[[ Line: 39 ]]
+	GameSettings.Changed:Connect(function(p1)
 		-- upvalues: NewAvailabilitySignal (copy), GameSettings (upval)
 		if p1 == "IsUsingCameraYInverted" then
 			NewAvailabilitySignal:set(GameSettings.IsUsingCameraYInverted)
@@ -39,7 +39,7 @@ local CameraInvertedModule = {
 	field_type = SettingsServiceModule.SettingEnum.Toggle
 }
 local NewValueChangedSignal = ValueChangedSignal.new(GameSettings.CameraYInverted)
-NewValueChangedSignal:connect(function(CameraYInverted) --[[ Line: 25 ]]
+NewValueChangedSignal:connect(function(CameraYInverted)
 	-- upvalues: GameSettings (copy)
 	if GameSettings.CameraYInverted ~= CameraYInverted then
 		GameSettings.CameraYInverted = CameraYInverted
@@ -49,7 +49,7 @@ NewValueChangedSignal:connect(function(CameraYInverted) --[[ Line: 25 ]]
 end, true)
 CameraInvertedModule.onChanged = NewValueChangedSignal
 local NewAvailabilitySignal = AvailabilitySignal.new(GameSettings.IsUsingCameraYInverted)
-GameSettings.Changed:Connect(function(p1) --[[ Line: 39 ]]
+GameSettings.Changed:Connect(function(p1)
 	-- upvalues: NewAvailabilitySignal (copy), GameSettings (copy)
 	if p1 == "IsUsingCameraYInverted" then
 		NewAvailabilitySignal:set(GameSettings.IsUsingCameraYInverted)

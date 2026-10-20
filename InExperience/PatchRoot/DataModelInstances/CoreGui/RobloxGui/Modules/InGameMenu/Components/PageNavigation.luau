@@ -23,16 +23,16 @@ local SendAnalyticsModule = require(Parent.Utility.SendAnalytics)
 local ConstantsModule = require(Parent.Resources.Constants)
 local NavigationButton = Roact.PureComponent:extend("NavigationButton")
 
-function NavigationButton.init(p1, p2) --[[ Line: 55 ]]
+function NavigationButton.init(p1, p2)
 	-- upvalues: Roact (copy), Otter (copy)
 	local FillProgress: number = if p2.selected then 1 else 0
 	local Binding, Binding2 = Roact.createBinding(FillProgress)
-	p1.fillSize = Binding:map(function(XScale): UDim2 --[[ Line: 59 ]]
+	p1.fillSize = Binding:map(function(XScale): UDim2
 		return UDim2.new(XScale, 0, 1, 0)
 	end)
 	p1.hoverTransparency, p1.setHoverTransparency = Roact.createBinding(0)
 	p1.motor = Otter.createGroupMotor({ hoverTransparency = 0, fillProgress = FillProgress })
-	p1.motor:onStep(function(p3) --[[ Line: 71 ]]
+	p1.motor:onStep(function(p3)
 		-- upvalues: Binding2 (copy), p1 (copy)
 		Binding2(p3.fillProgress)
 		p1.setHoverTransparency(p3.hoverTransparency)
@@ -40,13 +40,13 @@ function NavigationButton.init(p1, p2) --[[ Line: 55 ]]
 	p1:setState({ hovering = false, pressing = false })
 end
 
-function NavigationButton.renderWithSelectionCursor(p1, Callback) --[[ Line: 82 ]]
+function NavigationButton.renderWithSelectionCursor(p1, Callback)
 	-- upvalues: WithLocalizationModule (copy), WithFoundationOrUIBloxStyleFunction (copy), Roact (copy), CursorType (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Icon (copy), IconSize (copy), DivideTransparencyModule (copy), ImageSetLabel (copy), ThemedTextLabelModule (copy)
 	local Props = p1.props
 	
-	return WithLocalizationModule({ text = Props.text })(function(p2) --[[ Line: 87 ]]
+	return WithLocalizationModule({ text = Props.text })(function(p2)
 		-- upvalues: WithFoundationOrUIBloxStyleFunction (upval), p1 (copy), Props (copy), Roact (upval), Callback (copy), CursorType (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Icon (upval), IconSize (upval), DivideTransparencyModule (upval), ImageSetLabel (upval), ThemedTextLabelModule (upval)
-		return WithFoundationOrUIBloxStyleFunction(function(p3) --[[ Line: 88 ]]
+		return WithFoundationOrUIBloxStyleFunction(function(p3)
 			return {
 				Theme = {
 					BackgroundOnPress = {
@@ -71,7 +71,7 @@ function NavigationButton.renderWithSelectionCursor(p1, Callback) --[[ Line: 82 
 					}
 				}
 			}
-		end, function(p3) --[[ Line: 98 ]]
+		end, function(p3)
 			-- upvalues: p1 (upval), Props (upval), Roact (upval), Callback (upval), CursorType (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Icon (upval), IconSize (upval), DivideTransparencyModule (upval), ImageSetLabel (upval), ThemedTextLabelModule (upval), p2 (copy)
 			local NoSelected: boolean = p1.state.pressing and not Props.selected
 			local BackgroundOnPress = if p1.state.pressing then p3.Theme.BackgroundOnPress elseif p1.state.hovering then p3.Theme.BackgroundOnHover else { Transparency = 1, Color = Color3.new(1, 1, 1) }
@@ -87,21 +87,21 @@ function NavigationButton.renderWithSelectionCursor(p1, Callback) --[[ Line: 82 
 				SelectionImageObject = Callback(CursorType.Square),
 				[Roact.Event.Activated] = Props.onActivated,
 				[Roact.Ref] = Props.LayoutOrder == 1 and Props.mainPageFirstButtonRef or nil,
-				[Roact.Event.MouseEnter] = function() --[[ Line: 122 ]]
+				[Roact.Event.MouseEnter] = function()
 					-- upvalues: p1 (upval)
 					p1:setState({ hovering = true })
 				end,
-				[Roact.Event.MouseLeave] = function() --[[ Line: 127 ]]
+				[Roact.Event.MouseLeave] = function()
 					-- upvalues: p1 (upval)
 					p1:setState({ hovering = false, pressing = false })
 				end,
-				[Roact.Event.InputBegan] = function(_, Input) --[[ Line: 133 ]]
+				[Roact.Event.InputBegan] = function(_, Input)
 					-- upvalues: p1 (upval)
 					if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
 						p1:setState({ pressing = true })
 					end
 				end,
-				[Roact.Event.InputEnded] = function(_, Input) --[[ Line: 143 ]]
+				[Roact.Event.InputEnded] = function(_, Input)
 					-- upvalues: p1 (upval)
 					if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
 						p1:setState({ pressing = false })
@@ -158,15 +158,15 @@ function NavigationButton.renderWithSelectionCursor(p1, Callback) --[[ Line: 82 
 	end)
 end
 
-function NavigationButton.render(p1) --[[ Line: 213 ]]
+function NavigationButton.render(p1)
 	-- upvalues: WithCursorMigration (copy)
-	return WithCursorMigration(function(p2) --[[ Line: 214 ]]
+	return WithCursorMigration(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithSelectionCursor(p2)
 	end)
 end
 
-function NavigationButton.didUpdate(p1) --[[ Line: 219 ]]
+function NavigationButton.didUpdate(p1)
 	-- upvalues: Otter (copy)
 	p1.motor:setGoal({
 		fillProgress = Otter.spring(if p1.props.selected then 1 else 0, { frequency = 2.5 }),
@@ -174,18 +174,18 @@ function NavigationButton.didUpdate(p1) --[[ Line: 219 ]]
 	})
 end
 
-return RoactRodux.UNSTABLE_connect2(function(p1, _) --[[ Line: 275 ]]
+return RoactRodux.UNSTABLE_connect2(function(p1, _)
 	return { currentPage = p1.menuPage }
-end, function(Callback) --[[ Line: 279 ]]
+end, function(Callback)
 	-- upvalues: SetCurrentPageModule (copy), SendAnalyticsModule (copy), ConstantsModule (copy)
 	return {
-		setCurrentPage = function(Key) --[[ Line: 281 ]]
+		setCurrentPage = function(Key)
 			-- upvalues: Callback (copy), SetCurrentPageModule (upval), SendAnalyticsModule (upval), ConstantsModule (upval)
 			Callback(SetCurrentPageModule(Key))
 			SendAnalyticsModule("open_" .. Key .. "_tab", ConstantsModule.AnalyticsMenuActionName, {})
 		end
 	}
-end)(function(p1) --[[ Line: 230 | Named "PageNavigation" ]]
+end)(function(p1)
 	-- upvalues: Roact (copy), PagesModule (copy), ConstantsModule (copy), NavigationButton (copy), DividerModule (copy)
 	local Elements = {
 		Layout = Roact.createElement("UIListLayout", {
@@ -203,7 +203,7 @@ end)(function(p1) --[[ Line: 230 | Named "PageNavigation" ]]
 				LayoutOrder = LayoutOrder,
 				selected = p1.currentPage == value.key,
 				text = value.title,
-				onActivated = function() --[[ Line: 248 ]]
+				onActivated = function()
 					-- upvalues: p1 (copy), value (copy)
 					p1.setCurrentPage(value.key)
 				end,

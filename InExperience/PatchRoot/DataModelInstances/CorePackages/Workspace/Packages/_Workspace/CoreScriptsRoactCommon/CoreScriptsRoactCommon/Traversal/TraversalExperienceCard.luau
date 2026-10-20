@@ -7,12 +7,12 @@ local Image = FoundationModule.Image
 local ImpressionsTagUtility = require(Parent.Impressions).ImpressionsTagUtility
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Callback) --[[ Line: 25 | Named "TraversalExperienceCard" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Callback)
 	-- upvalues: FoundationModule (copy), UseLocalizationFunction (copy), ReactModule (copy), ImpressionsTagUtility (copy), View (copy), Image (copy), Text (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local Foreground = UseTokensResult.Color.ActionStandard.Foreground
 	local Size2500 = UseTokensResult.Size.Size_2500
-	local MapResult = if typeof(p1.width) == "table" then p1.width:map(function(p2): UDim2 --[[ Line: 31 ]]
+	local MapResult = if typeof(p1.width) == "table" then p1.width:map(function(p2): UDim2
 		-- upvalues: Size2500 (copy)
 		return UDim2.fromOffset(p2 or Size2500, 0)
 	end) else UDim2.fromOffset(p1.width or Size2500, 0)
@@ -23,7 +23,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Callback) --[[ Line:
 		}
 	}) else nil
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 46 ]]
+	local UseResult = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), Callback (copy)
 		UseRefResult.current = Current
 		
@@ -36,12 +36,12 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Callback) --[[ Line:
 			Callback.current = Current
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 55 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), p1 (copy), ImpressionsTagUtility (upval)
 		if not UseRefResult.current or not p1.impressionTag or not p1.impressionIndex then return end
 		ImpressionsTagUtility.AddTag(UseRefResult, p1.impressionTag, p1.impressionIndex)
 		
-		return function() --[[ Line: 61 ]]
+		return function()
 			-- upvalues: ImpressionsTagUtility (upval), UseRefResult (upval), p1 (upval)
 			ImpressionsTagUtility.RemoveTag(UseRefResult, p1.impressionTag, p1.impressionIndex)
 		end

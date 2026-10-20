@@ -13,14 +13,14 @@ local config = {
 	variant = MessageFtuxTooltipVariantModule.None
 }
 
-local function v10(p1) --[[ Line: 33 ]]
+local function v10(p1)
 	-- upvalues: CryoModule (copy), config (copy), FoundationModule (copy), UseMessageFtuxTooltipModule (copy), ReactModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), Enums (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseMessageFtuxTooltipModuleResult = UseMessageFtuxTooltipModule(UnionResult.variant)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 40 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseTokensResult (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), UseMessageFtuxTooltipModuleResult (copy), Text (upval), UseStateResult2 (copy), UnionResult (copy), UseStateResult2_1 (copy)
 		local TitleSmall = UseTokensResult.Typography.TitleSmall
 		local NewX = if FoundationFontFaceMigration then GetTextSizeFunction(UseMessageFtuxTooltipModuleResult.text, TitleSmall.FontSize, TitleSmall.Font, Vector2.new(10000, 10000)).X + UseTokensResult.Padding.Small * 2 else Text.GetTextWidth(UseMessageFtuxTooltipModuleResult.text, TitleSmall.Font, TitleSmall.FontSize) + UseTokensResult.Padding.Small * 2
@@ -31,7 +31,7 @@ local function v10(p1) --[[ Line: 33 ]]
 		UseTokensResult,
 		UnionResult.messageRef
 	})
-	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 53 ]]
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: UseStateResult (copy), UnionResult (copy), Enums (upval), UseTokensResult (copy)
 		local Start = if UseStateResult then if UnionResult.isReversed then Enums.PopoverAlign.Start else Enums.PopoverAlign.End elseif UnionResult.isReversed then Enums.PopoverAlign.End else Enums.PopoverAlign.Start
 		
@@ -65,7 +65,7 @@ local function v10(p1) --[[ Line: 33 ]]
 	})
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 93 ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: config (copy), MessageFtuxTooltipVariantModule (copy), ReactModule (copy), v10 (copy)
 	local Variant = p1.variant or config.variant
 	

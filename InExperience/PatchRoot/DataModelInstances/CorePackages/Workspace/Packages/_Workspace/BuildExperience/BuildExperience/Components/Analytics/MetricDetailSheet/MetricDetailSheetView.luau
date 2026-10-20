@@ -17,7 +17,7 @@ local _ = require(BuildExperience.Analytics.AnalyticsWindow)
 local _ = require(Parent.DataHydration.ExperienceAnalytics)
 local MetricChartContainerModule = require(BuildExperience.Components.Analytics.Chart.MetricChartContainer)
 
-return function(p1) --[[ Line: 58 | Named "MetricDetailSheetView" ]]
+return function(p1)
 	-- upvalues: FFlagBuildAnalyticsGoalsModule (copy), ReactModule (copy), View (copy), Text (copy), MetricChartContainerModule (copy), Sheet (copy), IconButton (copy), IconName (copy), InputSize (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
 	local TestId = p1.testId or "MetricDetailSheetView"
 	local Navigation = if FFlagBuildAnalyticsGoalsModule then p1.navigation else nil

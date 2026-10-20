@@ -7,16 +7,16 @@ local ToastRoduxModule = require(Parent.ToastRodux)
 local ToastType = ToastRoduxModule.Enums.ToastType
 local SetCurrentToastMessageFunction = ToastRoduxModule.Actions.SetCurrentToastMessage
 
-return function() --[[ Line: 13 | Named "useBenefitStatusReceivedListenerEffect" ]]
+return function()
 	-- upvalues: UseDispatchFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), CommerceService (copy), ToastType (copy), SetCurrentToastMessageFunction (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
 		granted = "CoreScripts.CommercePurchasePrompt.SuccessToast.Granted",
 		pending = "CoreScripts.CommercePurchasePrompt.SuccessToast.GrantPending"
 	})
-	ReactModule.useEffect(function() --[[ Line: 19 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseDispatchResult (copy), CommerceService (upval), ToastType (upval), UseLocalizationResult (copy), SetCurrentToastMessageFunction (upval)
-		local BenefitStatusReceivedConnection = if UseDispatchResult then CommerceService.BenefitStatusReceived:Connect(function(IsGranted) --[[ Line: 22 ]]
+		local BenefitStatusReceivedConnection = if UseDispatchResult then CommerceService.BenefitStatusReceived:Connect(function(IsGranted)
 			-- upvalues: ToastType (upval), UseLocalizationResult (upval), UseDispatchResult (upval), SetCurrentToastMessageFunction (upval)
 			UseDispatchResult(SetCurrentToastMessageFunction(if IsGranted then {
 				toastType = ToastType.SuccessConfirmation,
@@ -27,7 +27,7 @@ return function() --[[ Line: 13 | Named "useBenefitStatusReceivedListenerEffect"
 			}))
 		end) else nil
 		
-		return function() --[[ Line: 29 ]]
+		return function()
 			-- upvalues: BenefitStatusReceivedConnection (ref)
 			if BenefitStatusReceivedConnection then
 				BenefitStatusReceivedConnection:Disconnect()

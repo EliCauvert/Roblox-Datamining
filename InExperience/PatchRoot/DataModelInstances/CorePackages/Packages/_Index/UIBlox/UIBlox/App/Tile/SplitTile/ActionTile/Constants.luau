@@ -3,7 +3,7 @@ local _ = require(Parent.Style.StyleTypes)
 local _ = require(Parent.Style.Fonts)
 
 return {
-	getDefaultStyleProps = function(p1) --[[ Line: 34 ]]
+	getDefaultStyleProps = function(p1)
 		assert(p1.Tokens ~= nil, "Design token support is not enabled!")
 		
 		return {

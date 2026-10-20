@@ -9,23 +9,23 @@ local config = {
 	free_text = "free_text"
 }
 
-local function _(Text: string): boolean --[[ Line: 81 | Named "valueLooksLikeToolName" ]]
+local function _(Text: string): boolean
 	-- upvalues: AskUser (copy)
 	return typeof(Text) == "string" and string.lower(Text) == AskUser
 end
 
-local _ = function(Entry) --[[ Line: 85 | Named "getQuestionsPayload" ]]
+local _ = function(Entry)
 	return if typeof(Entry) == "table" then if typeof(Entry[1]) == "table" then Entry elseif typeof(Entry.questions) == "table" then Entry.questions elseif typeof(Entry.data) == "table" then Entry.data else nil else nil
 end
 
-local _ = function(p1, p2: number) --[[ Line: 105 | Named "resolveResponseType" ]]
+local _ = function(p1, p2: number)
 	-- upvalues: config (copy)
 	local Entry = if typeof(p1) == "string" then config[p1] else nil
 	
 	return if Entry == nil then if p2 > 0 then "single_select" else "free_text" else Entry
 end
 
-local function toAnswerQuestions(Entry) --[[ Line: 116 ]]
+local function toAnswerQuestions(Entry)
 	-- upvalues: config (copy)
 	local Entry1 = if typeof(Entry) == "table" then if typeof(Entry[1]) == "table" then Entry elseif typeof(Entry.questions) == "table" then Entry.questions elseif typeof(Entry.data) == "table" then Entry.data else nil else nil
 	
@@ -64,7 +64,7 @@ local function toAnswerQuestions(Entry) --[[ Line: 116 ]]
 	return if #List > 0 then List else nil
 end
 
-local function extractQuestionsFromToolCall(ToolCall) --[[ Line: 153 ]]
+local function extractQuestionsFromToolCall(ToolCall)
 	-- upvalues: toAnswerQuestions (copy), AskUser (copy), FFlagCreatorAgentChatStrictAskUserToolNameModule (copy)
 	local AnswerQuestions = toAnswerQuestions(ToolCall.rawInput)
 	
@@ -95,14 +95,14 @@ local function extractQuestionsFromToolCall(ToolCall) --[[ Line: 153 ]]
 	return AnswerQuestions
 end
 
-local _ = function(p1) --[[ Line: 181 | Named "decodePersistedToolResultText" ]]
+local _ = function(p1)
 	-- upvalues: HttpService (copy)
 	local Success, Result = pcall(HttpService.JSONDecode, HttpService, p1)
 	
 	return if Success and typeof(Result) == "table" and typeof(Result.text) == "string" then Result.text else nil
 end
 
-local function getPersistedToolResultText(ToolCall) --[[ Line: 191 ]]
+local function getPersistedToolResultText(ToolCall)
 	-- upvalues: HttpService (copy)
 	if ToolCall.content == nil then
 		return nil
@@ -126,7 +126,7 @@ local function getPersistedToolResultText(ToolCall) --[[ Line: 191 ]]
 	return if #List > 0 then table.concat(List) else nil
 end
 
-local function formatToolResultText(List) --[[ Line: 252 ]]
+local function formatToolResultText(List)
 	-- upvalues: HttpService (copy)
 	local List1 = {}
 	
@@ -163,7 +163,7 @@ local function formatToolResultText(List) --[[ Line: 252 ]]
 	return HttpService:JSONEncode({ answers = List1 })
 end
 
-local _ = function(p1, Id) --[[ Line: 293 | Named "findSelectedOptionById" ]]
+local _ = function(p1, Id)
 	if Id == nil then
 		return nil
 	end
@@ -175,7 +175,7 @@ local _ = function(p1, Id) --[[ Line: 293 | Named "findSelectedOptionById" ]]
 	return nil
 end
 
-local function findSelectedOptionsByIds(Question, SelectedOptionId) --[[ Line: 305 ]]
+local function findSelectedOptionsByIds(Question, SelectedOptionId)
 	local t = {}
 	
 	for _, option in Question.options do
@@ -194,7 +194,7 @@ local function findSelectedOptionsByIds(Question, SelectedOptionId) --[[ Line: 3
 	return List
 end
 
-local function normalizeSelectedOptionId(SelectedOptionId) --[[ Line: 322 ]]
+local function normalizeSelectedOptionId(SelectedOptionId)
 	if typeof(SelectedOptionId) == "string" then
 		return SelectedOptionId
 	end
@@ -212,7 +212,7 @@ local function normalizeSelectedOptionId(SelectedOptionId) --[[ Line: 322 ]]
 	return if #List > 0 then List else nil
 end
 
-local function getAnswersByQuestionId(p2) --[[ Line: 340 ]]
+local function getAnswersByQuestionId(p2)
 	-- upvalues: HttpService (copy), normalizeSelectedOptionId (copy)
 	local t = {}
 	local Success, Result = pcall(HttpService.JSONDecode, HttpService, p2)
@@ -237,7 +237,7 @@ local function getAnswersByQuestionId(p2) --[[ Line: 340 ]]
 	return t
 end
 
-local function getPromptFromToolResult(Question, p3, ToolCallId, CallOrder) --[[ Line: 367 ]]
+local function getPromptFromToolResult(Question, p3, ToolCallId, CallOrder)
 	-- upvalues: findSelectedOptionsByIds (copy)
 	if p3 == nil then
 		return nil
@@ -274,7 +274,7 @@ local function getPromptFromToolResult(Question, p3, ToolCallId, CallOrder) --[[
 	} else nil
 end
 
-local function getToolCallOrder(p4, ToolCallId) --[[ Line: 406 ]]
+local function getToolCallOrder(p4, ToolCallId)
 	if p4.activityItems ~= nil then
 		for i, activityItem in p4.activityItems do
 			if activityItem.kind == "tool_call" and activityItem.toolCallId == ToolCallId then
@@ -329,7 +329,7 @@ return {
 		}
 	},
 	extractQuestionsFromToolCall = extractQuestionsFromToolCall,
-	findQuestionsInTurnState = function(p5, p6) --[[ Line: 219 ]]
+	findQuestionsInTurnState = function(p5, p6)
 		-- upvalues: FFlagCreatorAgentChatFilterTerminalClientToolsModule (copy), getPersistedToolResultText (copy), extractQuestionsFromToolCall (copy)
 		local List = {}
 		
@@ -360,11 +360,11 @@ return {
 		return nil, nil, nil, nil, nil
 	end,
 	formatToolResultText = formatToolResultText,
-	formatToolResultContent = function(p7) --[[ Line: 287 ]]
+	formatToolResultContent = function(p7)
 		-- upvalues: formatToolResultText (copy)
 		return { text = formatToolResultText(p7) }
 	end,
-	getAnsweredPromptsFromTurnState = function(p7) --[[ Line: 429 ]]
+	getAnsweredPromptsFromTurnState = function(p7)
 		-- upvalues: extractQuestionsFromToolCall (copy), getPersistedToolResultText (copy), getAnswersByQuestionId (copy), getPromptFromToolResult (copy), getToolCallOrder (copy)
 		local List = {}
 		local List1 = {}
@@ -393,7 +393,7 @@ return {
 		end
 		return List
 	end,
-	formatCancellationContent = function() --[[ Line: 465 ]]
+	formatCancellationContent = function()
 		return { text = "User cancelled answering the question" }
 	end
 }

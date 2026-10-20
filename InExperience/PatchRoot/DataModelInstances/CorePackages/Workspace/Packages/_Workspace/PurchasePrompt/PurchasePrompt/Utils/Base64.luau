@@ -1,5 +1,5 @@
 ﻿local Base64Module = {
-	MakeEncoder = function(p1, p2, p3) --[[ Line: 8 ]]
+	MakeEncoder = function(p1, p2, p3)
 		local ByteValues = {}
 		
 		for i, Text in pairs({
@@ -79,7 +79,7 @@ local CharFunction = string.char
 local ConcatFunction = table.concat
 local ExtractFunction = bit32.extract
 
-function Base64Module.Encode(Text: string, p4, p5) --[[ Line: 88 ]]
+function Base64Module.Encode(Text: string, p4, p5)
 	-- upvalues: Encoder (copy), ExtractFunction (copy), CharFunction (copy), ConcatFunction (copy)
 	local P4 = p4 or Encoder
 	local t = {}

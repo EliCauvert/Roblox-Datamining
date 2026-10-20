@@ -3,24 +3,24 @@ local Parent = CoreScriptsPlayerFeedback.Parent
 local ReactModule = require(Parent.React)
 local UseEventConnectionFunction = require(Parent.ReactUtils).useEventConnection
 local v1 = require(CoreScriptsPlayerFeedback.Flags.GetFFlagEnablePlayerSupportPrompt)()
-local MemoResult = ReactModule.memo(function(p1) --[[ Line: 21 ]]
+local MemoResult = ReactModule.memo(function(p1)
 	-- upvalues: UseEventConnectionFunction (copy)
 	UseEventConnectionFunction(p1.event, p1.handler)
 	
 	return nil
 end)
 
-return (ReactModule.memo(function(p1) --[[ Line: 26 ]]
+return (ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), v1 (copy), MemoResult (copy)
 	local SocialService = game:GetService("SocialService")
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 29 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		p1.openFeedbackPrompt()
 	end, { p1.openFeedbackPrompt })
-	local UseResult1 = ReactModule.useCallback(function(FeedbackType) --[[ Line: 32 ]]
+	local UseResult1 = ReactModule.useCallback(function(FeedbackType)
 		-- upvalues: p1 (copy)
 		local IsPlayerSupportMatch = false
-		pcall(function() --[[ Line: 34 ]]
+		pcall(function()
 			-- upvalues: IsPlayerSupportMatch (ref), FeedbackType (copy)
 			IsPlayerSupportMatch = FeedbackType == Enum.FeedbackType.PlayerSupport
 		end)
@@ -34,16 +34,16 @@ return (ReactModule.memo(function(p1) --[[ Line: 26 ]]
 		end
 	end, { p1.openFeedbackPrompt, p1.openPlayerSupportPrompt })
 	local UseResult2 = if v1 then UseResult1 else UseResult
-	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 51 ]]
+	local UseResult3 = ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy)
 		if p1.openUnavailablePrompt then
 			p1.openUnavailablePrompt(p2)
 		end
 	end, { p1.openUnavailablePrompt })
-	local UseResult31 = ReactModule.useCallback(function(p2, FeedbackType) --[[ Line: 56 ]]
+	local UseResult31 = ReactModule.useCallback(function(p2, FeedbackType)
 		-- upvalues: p1 (copy)
 		local IsPlayerSupportMatch = false
-		pcall(function() --[[ Line: 58 ]]
+		pcall(function()
 			-- upvalues: IsPlayerSupportMatch (ref), FeedbackType (copy)
 			IsPlayerSupportMatch = FeedbackType == Enum.FeedbackType.PlayerSupport
 		end)
@@ -64,7 +64,7 @@ return (ReactModule.memo(function(p1) --[[ Line: 26 ]]
 	local Event1 = nil
 	
 	if SocialService then
-		local Success, Result = pcall(function() --[[ Line: 79 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: SocialService (copy)
 			return SocialService.ShowPromptFeedbackSubmission
 		end)
@@ -72,7 +72,7 @@ return (ReactModule.memo(function(p1) --[[ Line: 26 ]]
 		if Success then
 			Event = Result
 		end
-		local Success1, Result1 = pcall(function() --[[ Line: 86 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: SocialService (copy)
 			return SocialService.ShowPromptFeedbackUnavailable
 		end)

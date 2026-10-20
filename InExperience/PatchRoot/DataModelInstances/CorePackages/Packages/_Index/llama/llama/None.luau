@@ -1,6 +1,6 @@
 ﻿local Proxy = newproxy(true)
 
-getmetatable(Proxy).__tostring = function(): string --[[ Line: 4 ]]
+getmetatable(Proxy).__tostring = function(): string
 	return "Llama.None"
 end
 

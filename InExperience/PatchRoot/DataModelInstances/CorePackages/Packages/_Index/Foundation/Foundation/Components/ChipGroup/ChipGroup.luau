@@ -31,7 +31,7 @@ local config = {
 	variant = require(Foundation.Enums.ChipGroupVariant).Row
 }
 
-local function Scrim(Frame) --[[ Line: 84 ]]
+local function Scrim(Frame)
 	-- upvalues: UseBackgroundStyleFunction (copy), ReactModule (copy), ViewModule (copy)
 	return ReactModule.createElement(ViewModule, {
 		LayoutOrder = Frame.LayoutOrder,
@@ -43,7 +43,7 @@ local function Scrim(Frame) --[[ Line: 84 ]]
 	})
 end
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 104 | Named "ChipGroup" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseChipGroupVariantsModule (copy), FlagsModule (copy), ReactModule (copy), ChipModule (copy), ViewModule (copy), WithCommonPropsModule (copy), OverflowScrollContainerModule (copy), UseClippingRectModule (copy), ScrollViewModule (copy), VisibilityModule (copy), Scrim (copy), NumberSequence1 (copy), NumberSequence2 (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseChipGroupVariantsModuleResult = UseChipGroupVariantsModule(UseTokensModule(), WithDefaultsModuleResult.variant, WithDefaultsModuleResult.size)
@@ -80,7 +80,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 104 
 		local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(false)
 		local UseRefResult = ReactModule.useRef(nil)
 		local UseClippingRectModuleResult = UseClippingRectModule(UseRefResult)
-		local UseResult = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 161 ]]
+		local UseResult = ReactModule.useCallback(function(ScrollFrame)
 			-- upvalues: UseChipGroupVariantsModuleResult (copy), UseBindingResult2 (copy), UseBindingResult2_1 (copy)
 			if UseChipGroupVariantsModuleResult.hasScrim and ScrollFrame.AbsoluteWindowSize.X ~= 0 then
 				UseBindingResult2(ScrollFrame.CanvasPosition.X ~= 0)
@@ -89,7 +89,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 104 
 				return
 			end
 		end, { UseChipGroupVariantsModuleResult.hasScrim })
-		local UseResult1 = ReactModule.useCallback(function() --[[ Line: 173 ]]
+		local UseResult1 = ReactModule.useCallback(function()
 			-- upvalues: UseRefResult (copy), UseResult (copy)
 			if UseRefResult.current then
 				UseResult(UseRefResult.current)
@@ -98,7 +98,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 104 
 			WithDefaultsModuleResult.onAbsoluteSizeChanged,
 			UseResult
 		})
-		local UseResult2 = ReactModule.useCallback(function() --[[ Line: 179 ]]
+		local UseResult2 = ReactModule.useCallback(function()
 			-- upvalues: UseRefResult (copy), UseResult (copy)
 			if UseRefResult.current then
 				UseResult(UseRefResult.current)
@@ -153,7 +153,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 104 
 			ScrimWrapper = if UseChipGroupVariantsModuleResult.hasScrim then ReactModule.createElement(ViewModule, {
 				tag = "row flex-between",
 				ZIndex = 2,
-				Size = UseClippingRectModuleResult:map(function(p2): UDim2 --[[ Line: 235 ]]
+				Size = UseClippingRectModuleResult:map(function(p2): UDim2
 					-- upvalues: ScrimWidth (copy)
 					return UDim2.fromOffset(p2.Max.X - p2.Min.X, ScrimWidth)
 				end),

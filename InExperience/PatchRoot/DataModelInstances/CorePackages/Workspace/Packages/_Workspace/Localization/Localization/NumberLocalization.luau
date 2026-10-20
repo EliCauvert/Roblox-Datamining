@@ -126,22 +126,22 @@ config["en-gb"] = config["en-us"]
 config["es-mx"] = config["es-es"]
 config["th-th"] = config["en-us"]
 
-local function _(Text: string): number --[[ Line: 172 | Named "findDecimalPointIndex" ]]
+local function _(Text: string): number
 	return string.find(Text, "%.") or #Text + 1
 end
 
-local _ = function(Value: number) --[[ Line: 177 | Named "findDecimalOffset" ]]
+local _ = function(Value: number)
 	return if Value == 0 then 0 else -(math.floor((math.log10((math.abs(Value))))) + 1)
 end
 
-local _ = function(Value: number, p1, Truncate): number --[[ Line: 186 | Named "roundToSignificantDigits" ]]
+local _ = function(Value: number, p1, Truncate): number
 	-- upvalues: RoundingBehaviourModule (copy)
 	local v1 = 10 ^ (p1 + (if Value == 0 then 0 else -(math.floor((math.log10((math.abs(Value))))) + 1)))
 	
 	return (if Truncate == RoundingBehaviourModule.Truncate then math.modf(Value * v1) else math.floor(Value * v1 + 0.5)) / v1
 end
 
-local function addGroupDelimiters(Segment, GroupDelimiter): string --[[ Line: 198 ]]
+local function addGroupDelimiters(Segment, GroupDelimiter): string
 	local Text: string = Segment
 	local Formatted = string.format("%%1%s%%2", GroupDelimiter)
 	repeat
@@ -151,7 +151,7 @@ local function addGroupDelimiters(Segment, GroupDelimiter): string --[[ Line: 19
 	return Text
 end
 
-local function findDenominationEntry(Entry, Value: number, RoundToClosest) --[[ Line: 211 ]]
+local function findDenominationEntry(Entry, Value: number, RoundToClosest)
 	-- upvalues: RoundingBehaviourModule (copy)
 	local Entry1 = Entry[1]
 	local Magnitude = math.abs(Value)
@@ -170,7 +170,7 @@ local function findDenominationEntry(Entry, Value: number, RoundToClosest) --[[ 
 end
 
 return {
-	localize = function(p1, p2) --[[ Line: 232 ]]
+	localize = function(p1, p2)
 		-- upvalues: config (copy), LoggerModule (copy), addGroupDelimiters (copy)
 		if p1 == 0 then
 			return "0"
@@ -183,7 +183,7 @@ return {
 		end
 		return if Entry.groupDelimiter then addGroupDelimiters(p1, Entry.groupDelimiter) else p1
 	end,
-	abbreviate = function(p1, p2, Truncate, p3: number): string --[[ Line: 257 ]]
+	abbreviate = function(p1, p2, Truncate, p3: number): string
 		-- upvalues: RoundingBehaviourModule (copy), config (copy), LoggerModule (copy), findDenominationEntry (copy), addGroupDelimiters (copy)
 		if p1 == 0 then
 			return "0"
@@ -219,7 +219,7 @@ return {
 		end
 		return if #Segment1 > 0 then Segment .. Entry.decimalSeparator .. Segment1 .. DenominationEntry1 else Segment .. DenominationEntry1
 	end,
-	localizeDecimal = function(Value: number, p1, p2: number): string --[[ Line: 327 ]]
+	localizeDecimal = function(Value: number, p1, p2: number): string
 		-- upvalues: config (copy), LoggerModule (copy), addGroupDelimiters (copy)
 		if Value == 0 then
 			return "0"

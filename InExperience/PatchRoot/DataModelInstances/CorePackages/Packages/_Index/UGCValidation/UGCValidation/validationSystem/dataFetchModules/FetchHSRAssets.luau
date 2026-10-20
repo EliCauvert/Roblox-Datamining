@@ -5,7 +5,7 @@ local _ = require(Parent.util.Types)
 local GetFFlagUGCValidateVersionedContentIdsModule = require(Parent.flags.getFFlagUGCValidateVersionedContentIds)
 
 return {
-	getData = function(Object, p1) --[[ Line: 11 ]]
+	getData = function(Object, p1)
 		-- upvalues: ValidationEnumsModule (copy), GetFFlagUGCValidateVersionedContentIdsModule (copy), ParseContentIdsModule (copy)
 		if p1.consumerEnv == ValidationEnumsModule.ConsumerEnv.IEC then
 			return {}
@@ -32,7 +32,7 @@ return {
 						if PreloadedHsrAsset then
 							PreloadedHsrAssets[ReferenceKey] = PreloadedHsrAsset
 						else
-							local Success, Result = pcall(function() --[[ Line: 57 ]]
+							local Success, Result = pcall(function()
 								-- upvalues: HSRAssetId (copy)
 								return game:GetObjectsAllOrNone(HSRAssetId)
 							end)

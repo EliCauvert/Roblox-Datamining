@@ -5,16 +5,16 @@ local FindMeFunction = UserConnectorModule.findMe
 return {
 	default = {
 		User = {
-			__resolveType = function(): string --[[ Line: 8 ]]
+			__resolveType = function(): string
 				return "Player"
 			end
 		},
 		Query = {
-			me = function(_, _, p1) --[[ Line: 14 ]]
+			me = function(_, _, p1)
 				-- upvalues: FindMeFunction (copy)
 				return FindMeFunction(p1.fetchImpl)
 			end,
-			user = function(_, p1, p2) --[[ Line: 17 ]]
+			user = function(_, p1, p2)
 				-- upvalues: FindUserByIdFunction (copy)
 				return FindUserByIdFunction(p1.id, p2.fetchImpl)
 			end

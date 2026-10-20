@@ -6,7 +6,7 @@ local FetchFunction = HttpClientModule.fetch
 local AsPromiseFunction = HttpClientModule.asPromise
 
 return {
-	fetchDetailedGuidelines = function(UniverseId, p1) --[[ Line: 21 ]]
+	fetchDetailedGuidelines = function(UniverseId, p1)
 		-- upvalues: UrlBase (copy), FetchFunction (copy), AsPromiseFunction (copy)
 		local P1 = p1 or {}
 		
@@ -16,7 +16,7 @@ return {
 			network = P1.network,
 			url = (P1.baseUrl or UrlBase.APIS) .. "/experience-guidelines-service/v1beta1/detailed-guidelines",
 			body = { universeId = UniverseId },
-			decode = function(p2) --[[ Line: 33 ]]
+			decode = function(p2)
 				return p2
 			end
 		})))

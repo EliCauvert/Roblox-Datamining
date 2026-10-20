@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("CurrencyTransferCenterRobuxIcon", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("CurrencyTransferCenterRobuxIcon")
 end

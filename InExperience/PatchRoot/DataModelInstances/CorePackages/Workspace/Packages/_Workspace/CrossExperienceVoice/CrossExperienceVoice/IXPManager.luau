@@ -11,7 +11,7 @@ local config = {
 	CrossExpVoiceDebugVariant_1 = { partyVoiceExp = true }
 }
 
-function IXPManager.new() --[[ Line: 47 ]]
+function IXPManager.new()
 	-- upvalues: IXPManager (copy)
 	local config = { initialized = false, variant = {} }
 	setmetatable(config, IXPManager)
@@ -19,7 +19,7 @@ function IXPManager.new() --[[ Line: 47 ]]
 	return config
 end
 
-function IXPManager:initialize() --[[ Line: 58 ]]
+function IXPManager:initialize()
 	-- upvalues: ExperimentCacheManager (copy), CrossExpVoiceIXPLayer (copy), DebugCrossExpVoiceIXPLayer (copy), config (copy)
 	local LayerVariables = ExperimentCacheManager.default:getLayerVariables(CrossExpVoiceIXPLayer)
 	
@@ -33,12 +33,12 @@ function IXPManager:initialize() --[[ Line: 58 ]]
 	end
 end
 
-function IXPManager:logLayerExposure() --[[ Line: 72 ]]
+function IXPManager:logLayerExposure()
 	-- upvalues: ExperimentCacheManager (copy), CrossExpVoiceIXPLayer (copy)
 	ExperimentCacheManager.default:logLayerExposure(CrossExpVoiceIXPLayer)
 end
 
-function IXPManager.getHasPartyVoiceVolume() --[[ Line: 76 ]]
+function IXPManager.getHasPartyVoiceVolume()
 	-- upvalues: PartyVoiceVolumeEngineFeature (copy), IXPManager (copy)
 	return PartyVoiceVolumeEngineFeature and IXPManager.default.variant.partyVoiceExp
 end

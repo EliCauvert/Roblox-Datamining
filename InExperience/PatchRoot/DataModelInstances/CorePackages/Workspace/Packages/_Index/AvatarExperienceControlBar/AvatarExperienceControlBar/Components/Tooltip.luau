@@ -11,7 +11,7 @@ local _ = require(AvatarExperienceControlBar.ControlBarTypes)
 local CompactTooltipContentModule = require(script.Parent.CompactTooltipContent)
 local FFlagMeProfileEntryTooltipEnabled = require(Parent.AvatarExperienceFlags).FFlagMeProfileEntryTooltipEnabled
 
-return function(Frame) --[[ Line: 17 | Named "Tooltip" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), FFlagMeProfileEntryTooltipEnabled (copy), PopoverSide (copy), ReactModule (copy), Popover (copy), PopoverAlign (copy), Radius (copy), CompactTooltipContentModule (copy), FoundationModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsCompact: boolean = FFlagMeProfileEntryTooltipEnabled and Frame.compact == true
@@ -19,11 +19,11 @@ return function(Frame) --[[ Line: 17 | Named "Tooltip" ]]
 	local UseMemoResult = nil
 	
 	if FFlagMeProfileEntryTooltipEnabled then
-		UseMemoResult = ReactModule.useMemo(function() --[[ Line: 23 ]]
+		UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: Side (copy), UseTokensResult (copy)
 			return { position = Side, offset = UseTokensResult.Size.Size_150 }
 		end, { Side, UseTokensResult.Size.Size_150 })
-		ReactModule.useEffect(function() --[[ Line: 26 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: Frame (copy)
 			if Frame.open and Frame.onShown then
 				Frame.onShown()

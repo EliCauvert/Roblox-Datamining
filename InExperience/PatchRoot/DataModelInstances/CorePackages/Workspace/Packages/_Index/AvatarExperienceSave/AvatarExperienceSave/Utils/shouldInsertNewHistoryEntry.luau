@@ -8,7 +8,7 @@ local AssetOrderRelativelyEqualModule = require(AvatarExperienceSave.Utils.asset
 local Constants = require(Parent.AvatarExperienceCommon).Constants
 local _ = require(Parent.AvatarExperienceRodux)
 
-return function(p1, p2): boolean --[[ Line: 19 | Named "shouldInsertNewHistoryEntry" ]]
+return function(p1, p2): boolean
 	-- upvalues: GetSubstateToTrackForChangesModule (copy), TutilsModule (copy), AssetOrderRelativelyEqualModule (copy), Constants (copy), ItemTypeEnum (copy)
 	local SubstateToTrackForChangesModule = GetSubstateToTrackForChangesModule(p1, true)
 	local SubstateToTrackForChangesModule1 = GetSubstateToTrackForChangesModule(p2, true)

@@ -10,12 +10,12 @@ local ToastRoduxModule = require(CommercePurchaseApp.Parent.ToastRodux)
 local ToastType = ToastRoduxModule.Enums.ToastType
 local SetCurrentToastMessageFunction = ToastRoduxModule.Actions.SetCurrentToastMessage
 
-local function convertErrorMessageToErrorCode(p1) --[[ Line: 16 ]]
+local function convertErrorMessageToErrorCode(p1)
 	-- upvalues: FFlagAddCommerceErrorsModule (copy), ErrorCodeEnumModule (copy)
 	return if FFlagAddCommerceErrorsModule then if p1 == "DeviceTypeNotAllowed" or p1 == "PurchasePlatformNotSupported" then ErrorCodeEnumModule.DeviceNotSupported elseif p1 == "UniverseNotAllowed" or p1 == "ProductContentModerated" or p1 == "ProductNotFound" then ErrorCodeEnumModule.NotPurchasable elseif p1 == "UserNotAllowed" or p1 == "AccountCountryNotSupported" or p1 == "UserAgeNotAllowed" then ErrorCodeEnumModule.AccountNotSupported else ErrorCodeEnumModule.Generic elseif p1 == "NotPurchasable" then ErrorCodeEnumModule.NotPurchasable else ErrorCodeEnumModule.Generic
 end
 
-local function handleError(p1, p2, ToastTitle) --[[ Line: 44 ]]
+local function handleError(p1, p2, ToastTitle)
 	-- upvalues: convertErrorMessageToErrorCode (copy), ErrorCodeEnumModule (copy), SetCurrentToastMessageFunction (copy), ToastType (copy), CommercePurchaseEndedModule (copy), CommercePurchaseFailedModule (copy)
 	local ConvertErrorMessageToErrorCodeResult = convertErrorMessageToErrorCode(p1)
 	
@@ -32,12 +32,12 @@ local function handleError(p1, p2, ToastTitle) --[[ Line: 44 ]]
 	end
 end
 
-return function(CommerceProductId, ToastTitle) --[[ Line: 58 | Named "InitiateCommercePurchaseFlow" ]]
+return function(CommerceProductId, ToastTitle)
 	-- upvalues: CommercePurchaseStartedModule (copy), CommerceService (copy), CommercePurchaseCheckoutModule (copy), handleError (copy)
-	return function(p1) --[[ Line: 59 ]]
+	return function(p1)
 		-- upvalues: CommercePurchaseStartedModule (upval), CommerceProductId (copy), CommerceService (upval), CommercePurchaseCheckoutModule (upval), handleError (upval), ToastTitle (copy)
 		p1:dispatch(CommercePurchaseStartedModule(CommerceProductId))
-		local Success, Result = pcall(function() --[[ Line: 61 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: CommerceService (upval), CommerceProductId (upval)
 			return CommerceService:PrepareCommerceProductPurchase(CommerceProductId)
 		end)

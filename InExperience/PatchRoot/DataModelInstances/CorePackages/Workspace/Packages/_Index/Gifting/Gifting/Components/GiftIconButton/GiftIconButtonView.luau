@@ -6,7 +6,7 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local IconName = FoundationModule.Enums.IconName
 local InputSize = FoundationModule.Enums.InputSize
 
-return ReactModule.memo(function(Frame) --[[ Line: 19 | Named "GiftIconButtonView" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: ReactModule (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy)
 	return ReactModule.createElement(IconButton, {
 		testId = "gift-icon-button",

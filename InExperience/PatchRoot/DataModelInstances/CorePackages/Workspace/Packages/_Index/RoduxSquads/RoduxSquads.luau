@@ -12,7 +12,7 @@ local FFlagUseSignalsForSquadExperienceInvite = require(Parent.SharedFlags).FFla
 
 return {
 	["jest.config"] = script["jest.config"],
-	config = function(p1) --[[ Line: 27 ]]
+	config = function(p1)
 		-- upvalues: CryoModule (copy), NetworkingSquadsModule (copy), RoduxNetworkingModule (copy), ReducersModule (copy), RoduxModule (copy), FFlagUseSignalsForSquadExperienceInvite (copy), FFlagUseSignalsForSquadExperienceInviteStatus (copy), ActionsModule (copy), ModelsModule (copy), EnumsModule (copy)
 		local JoinResult = CryoModule.Dictionary.join(p1, {
 			NetworkingSquads = NetworkingSquadsModule.config({ roduxNetworking = RoduxNetworkingModule.mock() })
@@ -20,7 +20,7 @@ return {
 		local CurrentSquadResult, CurrentSquadResult2, CurrentSquadResult3 = ReducersModule.currentSquad(JoinResult)
 		
 		return {
-			installReducer = function() --[[ Line: 36 ]]
+			installReducer = function()
 				-- upvalues: RoduxModule (upval), CurrentSquadResult (copy), CurrentSquadResult2 (copy), FFlagUseSignalsForSquadExperienceInvite (upval), ReducersModule (upval), JoinResult (ref), FFlagUseSignalsForSquadExperienceInviteStatus (upval)
 				return RoduxModule.combineReducers({
 					currentSquad = CurrentSquadResult,

@@ -6,7 +6,7 @@ local ControlsModule = require(Parent.Resources.Controls)
 local SetControlLayoutModule = require(Parent.Actions.SetControlLayout)
 local ControlLayoutSetter = InGameMenuDependenciesModule.Roact.PureComponent:extend("ControlLayoutSetter")
 
-function ControlLayoutSetter.init(p1) --[[ Line: 16 ]]
+function ControlLayoutSetter.init(p1)
 	-- upvalues: ControlsModule (copy), UserInputService (copy)
 	local InputToControlType = ControlsModule.inputToControlTypeMap[UserInputService:GetLastInputType()]
 	
@@ -15,13 +15,13 @@ function ControlLayoutSetter.init(p1) --[[ Line: 16 ]]
 	end
 end
 
-function ControlLayoutSetter:render() --[[ Line: 23 ]]
+function ControlLayoutSetter:render()
 	return nil
 end
 
-function ControlLayoutSetter.didMount(p1) --[[ Line: 27 ]]
+function ControlLayoutSetter.didMount(p1)
 	-- upvalues: UserInputService (copy), ControlsModule (copy)
-	p1.inputChangedConnection = UserInputService.LastInputTypeChanged:Connect(function(LastInputType) --[[ Line: 28 ]]
+	p1.inputChangedConnection = UserInputService.LastInputTypeChanged:Connect(function(LastInputType)
 		-- upvalues: ControlsModule (upval), p1 (copy)
 		local InputToControlType = ControlsModule.inputToControlTypeMap[LastInputType]
 		
@@ -31,16 +31,16 @@ function ControlLayoutSetter.didMount(p1) --[[ Line: 27 ]]
 	end)
 end
 
-function ControlLayoutSetter.willUnmount(p1) --[[ Line: 39 ]]
+function ControlLayoutSetter.willUnmount(p1)
 	if p1.inputChangedConnection then
 		p1.inputChangedConnection:Disconnect()
 	end
 end
 
-return RoactRodux.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 45 ]]
+return RoactRodux.UNSTABLE_connect2(nil, function(Callback)
 	-- upvalues: SetControlLayoutModule (copy)
 	return {
-		dispatchSetControlLayout = function(p1) --[[ Line: 47 ]]
+		dispatchSetControlLayout = function(p1)
 			-- upvalues: Callback (copy), SetControlLayoutModule (upval)
 			Callback(SetControlLayoutModule(p1))
 		end

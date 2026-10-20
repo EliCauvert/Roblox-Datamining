@@ -2,7 +2,7 @@
 local _ = require(Markdown.Types)
 local NodeTypeModule = require(Markdown.Enums.NodeType)
 
-return function(p1, p2) --[[ Line: 8 | Named "getNodeType" ]]
+return function(p1, p2)
 	-- upvalues: NodeTypeModule (copy)
 	local NodeConfigurationEntry = p2.nodeConfiguration[p1]
 	

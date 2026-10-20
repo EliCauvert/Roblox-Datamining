@@ -5,7 +5,7 @@ local InterfaceResult = TModule.interface({
 	fundingSource = TModule.union(TModule.literal("ad_credit"), TModule.literal("robux"), TModule.literal("none"))
 })
 
-return function(p1) --[[ Line: 13 | Named "decodeAdCampaignCheckFundsResult" ]]
+return function(p1)
 	-- upvalues: InterfaceResult (copy)
 	local InterfaceResultResult, InterfaceResultResult2 = InterfaceResult(p1)
 	

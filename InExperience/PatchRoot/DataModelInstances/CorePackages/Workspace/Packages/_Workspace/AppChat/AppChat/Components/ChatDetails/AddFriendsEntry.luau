@@ -17,7 +17,7 @@ local config = {
 	style = nil
 }
 
-function AddFriendsEntry(p1) --[[ Line: 36 ]]
+function AddFriendsEntry(p1)
 	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), IconWithTextCellModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	

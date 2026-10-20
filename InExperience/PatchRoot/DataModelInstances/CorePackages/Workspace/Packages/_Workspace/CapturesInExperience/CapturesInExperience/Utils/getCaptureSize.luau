@@ -1,8 +1,8 @@
 ﻿local CaptureService = game:GetService("CaptureService")
 
-return function(CaptureContent) --[[ Line: 3 | Named "getCaptureSize" ]]
+return function(CaptureContent)
 	-- upvalues: CaptureService (copy)
-	local Success, Result = pcall(function() --[[ Line: 4 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: CaptureService (upval), CaptureContent (copy)
 		return CaptureService:GetCaptureSizeAsync(CaptureContent)
 	end)

@@ -7,7 +7,7 @@ local FailureReasonsAccumulatorModule = require(Parent.util.FailureReasonsAccumu
 local CreateLimbsAndTorsoSchemaModule = require(Parent.util.createLimbsAndTorsoSchema)
 local _ = require(Parent.util.Types)
 
-local function _(List, Name) --[[ Line: 13 | Named "getInstance" ]]
+local function _(List, Name)
 	for _, value in pairs(List) do
 		if value.Name == Name then
 			return value
@@ -16,7 +16,7 @@ local function _(List, Name) --[[ Line: 13 | Named "getInstance" ]]
 	return nil
 end
 
-local function areTopLevelFoldersCorrect(Instances, List): boolean --[[ Line: 22 ]]
+local function areTopLevelFoldersCorrect(Instances, List): boolean
 	if #Instances ~= #List then
 		return false
 	end
@@ -37,7 +37,7 @@ local function areTopLevelFoldersCorrect(Instances, List): boolean --[[ Line: 22
 	return true
 end
 
-local _ = function(Object, Text): string --[[ Line: 36 | Named "getFullNameWithoutRootFolder" ]]
+local _ = function(Object, Text): string
 	local FullName: string = Object:GetFullName()
 	local StartIndex, EndIndex = string.find(FullName, Text .. "%.")
 	assert(StartIndex and EndIndex)
@@ -45,7 +45,7 @@ local _ = function(Object, Text): string --[[ Line: 36 | Named "getFullNameWitho
 	return (string.sub(FullName, EndIndex + 1, #FullName))
 end
 
-local function compareFolderInfo(List, p1, p2) --[[ Line: 43 ]]
+local function compareFolderInfo(List, p1, p2)
 	-- upvalues: FailureReasonsAccumulatorModule (copy), AnalyticsModule (copy)
 	local NewFailureReasonsAccumulator = FailureReasonsAccumulatorModule.new()
 	
@@ -60,7 +60,7 @@ local function compareFolderInfo(List, p1, p2) --[[ Line: 43 ]]
 	return NewFailureReasonsAccumulator:getFinalResults()
 end
 
-local function validateFolderAssetIdsMatch(Instances, List, p3) --[[ Line: 65 ]]
+local function validateFolderAssetIdsMatch(Instances, List, p3)
 	-- upvalues: FailureReasonsAccumulatorModule (copy), ConstantsModule (copy), compareFolderInfo (copy)
 	if #List == 1 then
 		return true
@@ -105,7 +105,7 @@ local function validateFolderAssetIdsMatch(Instances, List, p3) --[[ Line: 65 ]]
 	return NewFailureReasonsAccumulator:getFinalResults()
 end
 
-local function validateR6Folder(Object, AssetTypeEnum, p4) --[[ Line: 108 ]]
+local function validateR6Folder(Object, AssetTypeEnum, p4)
 	-- upvalues: FailureReasonsAccumulatorModule (copy), AnalyticsModule (copy), ValidateTagsModule (copy)
 	local NewFailureReasonsAccumulator = FailureReasonsAccumulatorModule.new()
 	
@@ -120,7 +120,7 @@ local function validateR6Folder(Object, AssetTypeEnum, p4) --[[ Line: 108 ]]
 	return NewFailureReasonsAccumulator:getFinalResults()
 end
 
-return function(p4) --[[ Line: 130 | Named "validateLimbsAndTorso" ]]
+return function(p4)
 	-- upvalues: ConstantsModule (copy), areTopLevelFoldersCorrect (copy), AnalyticsModule (copy), validateR6Folder (copy), ValidateMeshPartBodyPartModule (copy), CreateLimbsAndTorsoSchemaModule (copy), validateFolderAssetIdsMatch (copy)
 	assert(p4.instances ~= nil, "instances required in validationContext for validateLimbsAndTorso")
 	local Instances = p4.instances

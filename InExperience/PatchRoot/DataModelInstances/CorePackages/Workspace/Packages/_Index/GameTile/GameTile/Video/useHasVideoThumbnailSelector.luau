@@ -6,9 +6,9 @@ local GetGameTileLayoutDataModule = require(GameTile.getGameTileLayoutData)
 local GetLayoutDataVideoModule = require(GameTile.getLayoutDataVideo)
 local FFlagLuaAppHomeMomentVideoFallback = require(Parent.SharedFlags).FFlagLuaAppHomeMomentVideoFallback
 
-return function(p1, p2): boolean --[[ Line: 13 | Named "useHasVideoThumbnailSelector" ]]
+return function(p1, p2): boolean
 	-- upvalues: UseSelectorFunction (copy), GameInfosReducer (copy), GetGameTileLayoutDataModule (copy), FFlagLuaAppHomeMomentVideoFallback (copy), GetLayoutDataVideoModule (copy)
-	local GameTileLayoutDataModule = GetGameTileLayoutDataModule(UseSelectorFunction(function(p3) --[[ Line: 14 ]]
+	local GameTileLayoutDataModule = GetGameTileLayoutDataModule(UseSelectorFunction(function(p3)
 		-- upvalues: GameInfosReducer (upval), p1 (copy)
 		return p3.Personalization[GameInfosReducer.key][p1]
 	end), p2)

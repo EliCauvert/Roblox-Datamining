@@ -3,7 +3,7 @@
 return {
 	getBodyContentHeight = Signal,
 	setBodyContentHeight = Signal2,
-	reset = function() --[[ Line: 21 ]]
+	reset = function()
 		-- upvalues: Signal2 (copy)
 		Signal2(0)
 	end

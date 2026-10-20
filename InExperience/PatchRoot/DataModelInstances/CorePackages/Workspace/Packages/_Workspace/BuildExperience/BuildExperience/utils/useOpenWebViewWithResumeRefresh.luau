@@ -3,12 +3,12 @@ local Parent = script:FindFirstAncestor("BuildExperience").Parent
 local ReactModule = require(Parent.React)
 local UseOpenWebViewFunction = require(Parent.WebViewUtils).useOpenWebView
 
-return function(p1, p2, Callback, p3) --[[ Line: 13 | Named "useOpenWebViewWithResumeRefresh" ]]
+return function(p1, p2, Callback, p3)
 	-- upvalues: UseOpenWebViewFunction (copy), ReactModule (copy), AppLifecycleObserverService (copy)
 	local UseOpenWebViewResult = UseOpenWebViewFunction()
 	local UseRefResult = ReactModule.useRef(false)
 	local UseRefResult1 = ReactModule.useRef(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 22 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), Callback (copy)
 		if not UseRefResult.current then return end
 		UseRefResult.current = false
@@ -17,7 +17,7 @@ return function(p1, p2, Callback, p3) --[[ Line: 13 | Named "useOpenWebViewWithR
 			Callback()
 		end
 	end, { Callback })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 31 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult1 (copy), UseRefResult (copy), Callback (copy)
 		if not UseRefResult1.current then return end
 		UseRefResult1.current = false
@@ -27,14 +27,14 @@ return function(p1, p2, Callback, p3) --[[ Line: 13 | Named "useOpenWebViewWithR
 			Callback()
 		end
 	end, { Callback })
-	ReactModule.useEffect(function() --[[ Line: 42 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Callback (copy), p3 (copy), AppLifecycleObserverService (upval), UseResult (copy), UseRefResult (copy), UseRefResult1 (copy)
 		if Callback == nil then
-			return function() --[[ Line: 44 ]] end
+			return function() end
 		else
 			local OnUnhideConnection = (p3 or AppLifecycleObserverService).OnUnhide:Connect(UseResult)
 			
-			return function() --[[ Line: 48 ]]
+			return function()
 				-- upvalues: UseRefResult (upval), UseRefResult1 (upval), OnUnhideConnection (copy)
 				UseRefResult.current = false
 				UseRefResult1.current = false
@@ -43,7 +43,7 @@ return function(p1, p2, Callback, p3) --[[ Line: 13 | Named "useOpenWebViewWithR
 		end
 	end, { p3, UseResult, Callback })
 	
-	return ReactModule.useCallback(function() --[[ Line: 55 ]]
+	return ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), Callback (copy), UseRefResult1 (copy), UseOpenWebViewResult (copy), p1 (copy), p2 (copy), UseResult1 (copy)
 		UseRefResult.current = Callback ~= nil
 		UseRefResult1.current = Callback ~= nil

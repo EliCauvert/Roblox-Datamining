@@ -2,7 +2,7 @@
 local GetHeadersModule = require(script.Parent.Util.getHeaders)
 local GetPostBodyModule = require(script.Parent.Util.getPostBody)
 
-return function(Url, Method, p1) --[[ Line: 6 ]]
+return function(Url, Method, p1)
 	-- upvalues: HttpService (copy), GetPostBodyModule (copy), GetHeadersModule (copy)
 	return HttpService:RequestInternal({
 		Url = Url,

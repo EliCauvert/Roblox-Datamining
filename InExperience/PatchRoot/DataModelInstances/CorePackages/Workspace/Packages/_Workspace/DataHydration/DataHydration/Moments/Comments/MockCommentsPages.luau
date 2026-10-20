@@ -141,15 +141,15 @@ local list = {
 	}
 }
 
-local function _(p1, p2) --[[ Line: 170 | Named "createdAtAgo" ]]
+local function _(p1, p2)
 	return DateTime.fromUnixTimestamp((p2 or DateTime.now().UnixTimestamp) - p1):ToIsoDate()
 end
 
-local _ = function(p1, p2): string --[[ Line: 175 | Named "namespacedCommentId" ]]
+local _ = function(p1, p2): string
 	return `{p1}:{p2}`
 end
 
-local function page1(FeedItemId, p1) --[[ Line: 179 ]]
+local function page1(FeedItemId, p1)
 	-- upvalues: CommentFixturesModule (copy)
 	return {
 		nextCursor = "page-empty",
@@ -173,7 +173,7 @@ local function page1(FeedItemId, p1) --[[ Line: 179 ]]
 	}
 end
 
-local function reactionPage(FeedItemId, p1) --[[ Line: 210 ]]
+local function reactionPage(FeedItemId, p1)
 	-- upvalues: CommentFixturesModule (copy)
 	local REACTIONIDS = CommentFixturesModule.REACTION_IDS
 	
@@ -210,7 +210,7 @@ local function reactionPage(FeedItemId, p1) --[[ Line: 210 ]]
 	}
 end
 
-local function page3(FeedItemId, p1) --[[ Line: 249 ]]
+local function page3(FeedItemId, p1)
 	-- upvalues: list (copy), CommentFixturesModule (copy)
 	local Buffer = table.create(#list)
 	
@@ -231,11 +231,11 @@ return {
 	PAGE_3_CURSOR = "page-3",
 	page1 = page1,
 	reactionPage = reactionPage,
-	emptyHasMorePage = function() --[[ Line: 202 ]]
+	emptyHasMorePage = function()
 		return { nextCursor = "page-3", hasMore = true, comments = {} }
 	end,
 	page3 = page3,
-	pageForCursor = function(FeedItemId, p2, p3) --[[ Line: 270 ]]
+	pageForCursor = function(FeedItemId, p2, p3)
 		-- upvalues: CommentFixturesModule (copy), reactionPage (copy), page1 (copy), page3 (copy)
 		return if (p2 == nil or p2 == "") and (FeedItemId == CommentFixturesModule.REACTION_IDS.feedItemId or FeedItemId == CommentFixturesModule.REACTION_IDS.otherFeedItemId) then reactionPage(FeedItemId, p3) elseif p2 == nil or p2 == "" then page1(FeedItemId, p3) elseif p2 == "page-empty" then { nextCursor = "page-3", hasMore = true, comments = {} } elseif p2 == "page-3" then page3(FeedItemId, p3) else { nextCursor = nil, hasMore = false, comments = {} }
 	end

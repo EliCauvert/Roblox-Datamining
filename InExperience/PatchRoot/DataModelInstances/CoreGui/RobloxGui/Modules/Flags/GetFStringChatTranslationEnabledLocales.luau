@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("ChatTranslationEnabledLocales", "")
 
-return function() --[[ Line: 6 ]]
+return function()
 	return game:GetFastString("ChatTranslationEnabledLocales")
 end

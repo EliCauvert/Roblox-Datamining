@@ -14,7 +14,7 @@ local MomentsFunnelStep = SocialLuaAnalyticsModule.Telemetry.new({
 		{
 			type = "EventIngest",
 			standardizedFields = { "addSessionInfo", "addSessionId" },
-			format = function(p1, _) --[[ Line: 65 ]]
+			format = function(p1, _)
 				-- upvalues: CryoModule (copy)
 				return CryoModule.Dictionary.join(p1.customFields or {}, {
 					funnelName = p1.funnelName,
@@ -27,7 +27,7 @@ local MomentsFunnelStep = SocialLuaAnalyticsModule.Telemetry.new({
 	}
 })
 
-return function(FunnelName, p1, FunnelSessionId, CustomFields) --[[ Line: 83 | Named "fireFunnelAnalyticsEvent" ]]
+return function(FunnelName, p1, FunnelSessionId, CustomFields)
 	-- upvalues: FunnelEventNamesModule (copy), TelemetryEmitterModule (copy), MomentsFunnelStep (copy)
 	local FunnelStep = FunnelEventNamesModule.FunnelSteps[FunnelName]
 	

@@ -33,28 +33,28 @@ local _Vector2 = Vector2.new(120, 16)
 local config = { Transparency = 0, Color3 = Color3.new(1, 1, 1) }
 local Character = utf8.char(57344)
 
-return ReactModule.memo(function(Frame) --[[ Line: 65 | Named "CreatorAttribution" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseTokensFunction (copy), MomentContextModule (copy), ReactModule (copy), ReactOtterModule (copy), UseUsernameModule (copy), GetFFlagMomentsCreatorVerifiedBadgeModule (copy), UseCreatorVerifiedModule (copy), UseMomentsHostFunction (copy), FFlagMomentsFlushDwellBeforeNavigationModule (copy), FeedContextModule (copy), MakeFeedActionFieldsModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), FFlagMomentsNavigationEventModule (copy), NavigationDestinationTypeModule (copy), Character (copy), View (copy), StateLayerAffordance (copy), ControlState (copy), ImageWithSkeletonModule (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), Radius (copy), GetColorStyleWithTransparencyModule (copy), config (copy), Text (copy), Skeleton (copy), _Vector2 (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseMomentResult = MomentContextModule.useMoment()
 	local Data = UseMomentResult.store.getData(false)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
-	ReactModule.useEffect(function() --[[ Line: 74 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseStateResult (copy)
 		UseAnimatedBindingResult2(ReactOtterModule.ease(if UseStateResult then 0.6 else 0, {
 			duration = if UseStateResult then 0.05 else 0.03,
 			easingStyle = Enum.EasingStyle.Quad
 		}))
 	end, { UseStateResult })
-	local MapResult = ReactModule.joinBindings({ UseMomentResult.animationRatio, UseAnimatedBindingResult }):map(function(Entry): number --[[ Line: 82 ]]
+	local MapResult = ReactModule.joinBindings({ UseMomentResult.animationRatio, UseAnimatedBindingResult }):map(function(Entry): number
 		return 1 - (1 - Entry[1]) * (1 - Entry[2])
 	end)
 	local UseUsernameModuleResult = UseUsernameModule(Data.creatorId)
 	local UseCreatorVerifiedModuleResult = if GetFFlagMomentsCreatorVerifiedBadgeModule() then UseCreatorVerifiedModule(Data.creatorId) else Data.creatorIsVerified
 	local OpenProfileFunction = UseMomentsHostFunction().openProfile
 	local UseFeedOptionalResult = if FFlagMomentsFlushDwellBeforeNavigationModule then FeedContextModule.useFeedOptional() else nil
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 112 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: OpenProfileFunction (copy), MakeFeedActionFieldsModule (upval), Data (copy), FireAnalyticsEventFunction (upval), EventNames (upval), FFlagMomentsFlushDwellBeforeNavigationModule (upval), UseFeedOptionalResult (ref), FFlagMomentsNavigationEventModule (upval), NavigationDestinationTypeModule (upval)
 		if OpenProfileFunction ~= nil then
 			local FeedActionFieldsModule = MakeFeedActionFieldsModule(Data.momentId, Data.feedItemId, Data.feedSessionId)
@@ -86,7 +86,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 65 | Named "CreatorAttributio
 		testId = if FFlagMomentsFlushDwellBeforeNavigationModule then "--moments-creator-attribution" else nil,
 		stateLayer = { affordance = StateLayerAffordance.None },
 		onActivated = if OpenProfileFunction == nil then nil else UseResult,
-		onStateChanged = function(Pressed) --[[ Line: 145 ]]
+		onStateChanged = function(Pressed)
 			-- upvalues: UseStateResult2 (copy), ControlState (upval)
 			UseStateResult2(Pressed == ControlState.Pressed or Pressed == ControlState.SelectedPressed)
 		end
@@ -96,11 +96,11 @@ return ReactModule.memo(function(Frame) --[[ Line: 65 | Named "CreatorAttributio
 			Image = GetRbxThumbFunction(ThumbnailType.AvatarHeadShot, Data.creatorId, ThumbnailSize.Medium),
 			Size = UDim2.fromOffset(Size800, Size800),
 			radius = Radius.Circle,
-			backgroundStyle = MapResult:map(function(p1) --[[ Line: 156 ]]
+			backgroundStyle = MapResult:map(function(p1)
 				-- upvalues: GetColorStyleWithTransparencyModule (upval), UseTokensResult (copy)
 				return GetColorStyleWithTransparencyModule(UseTokensResult.Color.Shift.Shift_300, p1)
 			end),
-			imageStyle = MapResult:map(function(p1) --[[ Line: 159 ]]
+			imageStyle = MapResult:map(function(p1)
 				-- upvalues: GetColorStyleWithTransparencyModule (upval), config (upval)
 				return GetColorStyleWithTransparencyModule(config, p1)
 			end)
@@ -109,7 +109,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 65 | Named "CreatorAttributio
 			LayoutOrder = 2,
 			tag = "auto-xy text-title-large text-align-x-left text-align-y-center text-truncate-end content-emphasis",
 			Text = Text1,
-			textStyle = MapResult:map(function(p1) --[[ Line: 169 ]]
+			textStyle = MapResult:map(function(p1)
 				-- upvalues: GetColorStyleWithTransparencyModule (upval), UseTokensResult (copy)
 				return GetColorStyleWithTransparencyModule(UseTokensResult.Color.Content.Emphasis, p1)
 			end)

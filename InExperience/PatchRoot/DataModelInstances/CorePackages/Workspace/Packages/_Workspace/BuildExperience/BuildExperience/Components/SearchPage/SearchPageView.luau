@@ -12,7 +12,7 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local IconName = FoundationModule.Enums.IconName
 local InputSize = FoundationModule.Enums.InputSize
 
-return function(p1) --[[ Line: 38 | Named "SearchPageView" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), SearchEmptyStateModule (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), SearchBarContainerModule (copy), HeaderBar (copy), RefreshScrollingFrame (copy)
 	return ReactModule.createElement(View, { tag = "col size-full", testId = "SearchPage" }, {
 		Header = ReactModule.createElement(HeaderBar.Root, { LayoutOrder = 1, testId = "SearchPage.Header" }, {

@@ -12,7 +12,7 @@ local UIBloxConfigModule = require(Parent1.UIBloxConfig)
 local _Vector2 = Vector2.new(36, 36)
 local Small = require(Parent1.Core.Button.Enum.StandardButtonSize).Small
 
-local function _(p1, p2, p3, X) --[[ Line: 47 | Named "getTextHeight" ]]
+local function _(p1, p2, p3, X)
 	-- upvalues: GetTextSizeModule (copy)
 	return GetTextSizeModule(p1, p3, p2, (Vector2.new(X, 10000))).Y
 end
@@ -51,7 +51,7 @@ ToastContainer.defaultProps = {
 	}
 }
 
-function ToastContainer.init(p1) --[[ Line: 90 ]]
+function ToastContainer.init(p1)
 	-- upvalues: RoactModule (copy), ImagesModule (copy), _Vector2 (copy), GetTextSizeModule (copy), UIBloxConfigModule (copy), MemoizeModule (copy), FoundationButtonUtilsModule (copy), Small (copy)
 	p1.containerRef = RoactModule.createRef()
 	p1.isMounted = false
@@ -62,7 +62,7 @@ function ToastContainer.init(p1) --[[ Line: 90 ]]
 		titleHeight = 0
 	}
 	
-	function p1.getIconSize() --[[ Line: 101 ]]
+	function p1.getIconSize()
 		-- upvalues: p1 (copy), ImagesModule (upval), _Vector2 (upval)
 		local IconSize = p1.props.iconSize
 		local IconImage = p1.props.iconImage
@@ -71,21 +71,21 @@ function ToastContainer.init(p1) --[[ Line: 90 ]]
 		return if IconImage then if IconSize then IconSize elseif IconImage.ImageRectSize and ImagesResolutionScale and ImagesResolutionScale > 0 then IconImage.ImageRectSize / ImagesResolutionScale else _Vector2 else Vector2.new(0, 0)
 	end
 	
-	function p1:onButtonInputBegan(Input) --[[ Line: 117 ]]
+	function p1:onButtonInputBegan(Input)
 		-- upvalues: p1 (copy)
 		if Input.UserInputState == Enum.UserInputState.Begin and (Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.MouseButton1) and not p1.state.pressed then
 			p1:setState({ pressed = true })
 		end
 	end
 	
-	function p1.onButtonInputEnded() --[[ Line: 133 ]]
+	function p1.onButtonInputEnded()
 		-- upvalues: p1 (copy)
 		if p1.state.pressed then
 			p1:setState({ pressed = false })
 		end
 	end
 	
-	function p1.getTextHeights(p2) --[[ Line: 141 ]]
+	function p1.getTextHeights(p2)
 		-- upvalues: p1 (copy), GetTextSizeModule (upval)
 		local IconSize = p1.getIconSize()
 		local ButtonText = p1.props.buttonText
@@ -107,22 +107,22 @@ function ToastContainer.init(p1) --[[ Line: 90 ]]
 		return if ToastSubtitle then math.max(0, GetTextSizeModule(ToastSubtitle, CaptionBody.RelativeSize * _Font.BaseSize, CaptionBody.Font, (Vector2.new(ContainerWidthDelta, 10000))).Y) else 0, (math.max(0, GetTextSizeModule(ToastTitle, Header2.RelativeSize * _Font.BaseSize, Header2.Font, (Vector2.new(ContainerWidthDelta, 10000))).Y))
 	end
 	
-	function p1.showCompactToast(): boolean --[[ Line: 177 ]]
+	function p1.showCompactToast(): boolean
 		-- upvalues: p1 (copy)
 		return p1.state.containerWidth < 400
 	end
 	
-	function p1.getButtonGap() --[[ Line: 184 ]]
+	function p1.getButtonGap()
 		-- upvalues: UIBloxConfigModule (upval), p1 (copy)
 		return if UIBloxConfigModule.useFoundationToastButtonSizing then p1.props.padding else 0
 	end
 	
-	function p1.showPressed() --[[ Line: 188 ]]
+	function p1.showPressed()
 		-- upvalues: p1 (copy)
 		return if p1.props.buttonText or not p1.props.onActivated then nil else p1.state.pressed
 	end
 	
-	p1.getButtonDimensions = MemoizeModule(function(p2) --[[ Line: 196 ]]
+	p1.getButtonDimensions = MemoizeModule(function(p2)
 		-- upvalues: p1 (copy), UIBloxConfigModule (upval), FoundationButtonUtilsModule (upval), Small (upval), GetTextSizeModule (upval)
 		local ButtonText = p1.props.buttonText
 		local OnActivated = p1.props.onActivated
@@ -138,7 +138,7 @@ function ToastContainer.init(p1) --[[ Line: 90 ]]
 	end)
 end
 
-function ToastContainer.render(p1) --[[ Line: 226 ]]
+function ToastContainer.render(p1)
 	-- upvalues: WithStyleModule (copy), RoactModule (copy)
 	local IconImage = p1.props.iconImage
 	local IconSize = p1.getIconSize()
@@ -146,7 +146,7 @@ function ToastContainer.render(p1) --[[ Line: 226 ]]
 	local ToastSubtitle = p1.props.toastSubtitle
 	local ToastTitle = p1.props.toastTitle
 	
-	return WithStyleModule(function(p2) --[[ Line: 232 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: p1 (copy), IconSize (copy), Padding (copy), RoactModule (upval), IconImage (copy), ToastSubtitle (copy), ToastTitle (copy)
 		local TextHeights, TextHeights2 = p1.getTextHeights(p2)
 		local YOffset = TextHeights2 + TextHeights
@@ -167,7 +167,7 @@ function ToastContainer.render(p1) --[[ Line: 226 ]]
 			Position = p1.props.position,
 			Size = Size,
 			Text = "",
-			[RoactModule.Change.AbsoluteSize] = function(Frame: Frame) --[[ Line: 264 ]]
+			[RoactModule.Change.AbsoluteSize] = function(Frame: Frame)
 				-- upvalues: p1 (upval)
 				if p1.state.containerWidth ~= Frame.AbsoluteSize.X then
 					p1:setState({ containerWidth = Frame.AbsoluteSize.X })
@@ -215,7 +215,7 @@ function ToastContainer.render(p1) --[[ Line: 226 ]]
 	end)
 end
 
-function ToastContainer.didMount(p1) --[[ Line: 317 ]]
+function ToastContainer.didMount(p1)
 	p1:setState({
 		containerWidth = p1.containerRef.current and p1.containerRef.current.AbsoluteSize.X or 0
 	})

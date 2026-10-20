@@ -2,7 +2,7 @@
 local BuildSubscriptionPurchaseFlowPayloadModule = require(RobloxSubscriptionPurchaseApp.Utils.buildSubscriptionPurchaseFlowPayload)
 local SendSubscriptionPurchaseFlowEventModule = require(RobloxSubscriptionPurchaseApp.Utils.sendSubscriptionPurchaseFlowEvent)
 
-return function(p1, List) --[[ Line: 11 | Named "logSubscriptionPurchaseFlowEvent" ]]
+return function(p1, List)
 	-- upvalues: BuildSubscriptionPurchaseFlowPayloadModule (copy), SendSubscriptionPurchaseFlowEventModule (copy)
 	local SubscriptionPurchaseFlowPayloadModule = BuildSubscriptionPurchaseFlowPayloadModule(p1)
 	

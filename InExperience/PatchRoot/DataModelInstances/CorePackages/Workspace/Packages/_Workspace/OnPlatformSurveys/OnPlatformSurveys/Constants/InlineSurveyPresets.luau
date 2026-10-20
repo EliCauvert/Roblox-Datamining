@@ -26,7 +26,7 @@ local config = {
 
 return {
 	DEFAULT_PRESET = "NoInviteModal",
-	getPresentationConfig = function(p1) --[[ Line: 29 ]]
+	getPresentationConfig = function(p1)
 		-- upvalues: config (copy)
 		return config[p1 or "NoInviteModal"] or config.NoInviteModal
 	end

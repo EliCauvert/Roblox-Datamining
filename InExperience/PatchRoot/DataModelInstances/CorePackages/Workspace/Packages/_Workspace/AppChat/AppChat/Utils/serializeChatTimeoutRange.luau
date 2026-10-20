@@ -2,7 +2,7 @@
 local _ = require(Parent.AppChatNetworking)
 local FFlagAppChatReactiveFeatureRestrictions = require(Parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
 
-return function(p1, p2) --[[ Line: 18 | Named "serializeChatTimeoutRange" ]]
+return function(p1, p2)
 	-- upvalues: FFlagAppChatReactiveFeatureRestrictions (copy)
 	local _DateTime = DateTime.now()
 	

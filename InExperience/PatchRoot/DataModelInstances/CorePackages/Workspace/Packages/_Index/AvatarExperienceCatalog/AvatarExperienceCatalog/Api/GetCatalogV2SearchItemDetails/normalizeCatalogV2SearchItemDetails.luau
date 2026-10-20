@@ -17,7 +17,7 @@ local config = {
 	[4] = "DynamicHead"
 }
 
-local function _(p1) --[[ Line: 33 | Named "normalizeBundledItem" ]]
+local function _(p1)
 	-- upvalues: NormalizeNumberFunction (copy), NormalizeStringFunction (copy)
 	return {
 		Id = NormalizeNumberFunction(p1.id),
@@ -26,7 +26,7 @@ local function _(p1) --[[ Line: 33 | Named "normalizeBundledItem" ]]
 	}
 end
 
-local function normalizeBundledItems(BundledItems) --[[ Line: 41 ]]
+local function normalizeBundledItems(BundledItems)
 	-- upvalues: NormalizeNumberFunction (copy), NormalizeStringFunction (copy)
 	if typeof(BundledItems) ~= "table" then
 		return nil
@@ -43,7 +43,7 @@ local function normalizeBundledItems(BundledItems) --[[ Line: 41 ]]
 	return List
 end
 
-local function normalizeTimedOptions(p1) --[[ Line: 54 ]]
+local function normalizeTimedOptions(p1)
 	-- upvalues: NormalizeNumberFunction (copy), NormalizeBooleanFunction (copy)
 	local List = nil
 	
@@ -62,7 +62,7 @@ local function normalizeTimedOptions(p1) --[[ Line: 54 ]]
 	return List
 end
 
-local function normalizeItem(p2) --[[ Line: 70 ]]
+local function normalizeItem(p2)
 	-- upvalues: ASSETTYPEIDSTRINGTONAME (copy), config (copy), GetRawItemLicensingInfoFunction (copy), NormalizeStringFunction (copy), normalizeBundledItems (copy), NormalizeBooleanFunction (copy), NormalizeNumberFunction (copy), normalizeTimedOptions (copy), FFlagAXMarketplaceLicensing (copy), ConvertToPascalCaseModule (copy)
 	if type(p2) == "table" then
 		local RawItemLicensingInfo = GetRawItemLicensingInfoFunction(p2)
@@ -105,7 +105,7 @@ local function normalizeItem(p2) --[[ Line: 70 ]]
 end
 
 return (Normalize.makeNormalizeTableFn({
-	data = function(List) --[[ Line: 125 ]]
+	data = function(List)
 		-- upvalues: normalizeItem (copy)
 		if typeof(List) ~= "table" then
 			return nil, nil

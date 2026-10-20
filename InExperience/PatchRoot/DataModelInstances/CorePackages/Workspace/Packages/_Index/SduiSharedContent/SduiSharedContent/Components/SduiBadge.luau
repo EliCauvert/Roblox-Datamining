@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local _ = require(Parent.SduiCompat)
 local Badge = require(Parent.Foundation).Badge
 
-return ReactModule.memo(function(p1) --[[ Line: 28 | Named "SduiBadge" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), Badge (copy)
 	return ReactModule.createElement(Badge, {
 		text = p1.text,

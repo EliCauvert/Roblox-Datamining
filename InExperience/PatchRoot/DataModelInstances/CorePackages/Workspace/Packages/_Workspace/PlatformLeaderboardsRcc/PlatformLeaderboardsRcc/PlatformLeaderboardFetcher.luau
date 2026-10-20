@@ -12,9 +12,9 @@ local ConfigResult = HttpRequestModule.config({
 	maxRetryCount = game:DefineFastInt("PlatformLeaderboardFetcherHttpRetryCount", 0)
 })
 
-local function get(ConfigName) --[[ Line: 32 ]]
+local function get(ConfigName)
 	-- upvalues: ConfigResult (copy), FFlagPlatformLeaderboardDebugLogging (copy), HttpService (copy)
-	local Success, Result, Result3 = pcall(function() --[[ Line: 33 ]]
+	local Success, Result, Result3 = pcall(function()
 		-- upvalues: ConfigResult (upval), ConfigName (copy)
 		return ConfigResult(ConfigName, "GET"):await()
 	end)
@@ -49,7 +49,7 @@ local function get(ConfigName) --[[ Line: 32 ]]
 	end
 end
 
-local function formatEntry(UserScore) --[[ Line: 63 ]]
+local function formatEntry(UserScore)
 	-- upvalues: PlatformLeaderboardDisplayNameEnabled (copy), PlatformLeaderboardBadgeMetadataEnabled (copy)
 	if typeof(UserScore) ~= "table" then
 		return nil
@@ -86,7 +86,7 @@ local function formatEntry(UserScore) --[[ Line: 63 ]]
 	}
 end
 
-local function formatEntries(List) --[[ Line: 104 ]]
+local function formatEntries(List)
 	-- upvalues: formatEntry (copy)
 	local List1 = {}
 	
@@ -100,7 +100,7 @@ local function formatEntries(List) --[[ Line: 104 ]]
 	return List1
 end
 
-local function formatConfig(p1) --[[ Line: 115 ]]
+local function formatConfig(p1)
 	if p1 == nil or p1.leaderboardId == nil then
 		return nil
 	end
@@ -118,7 +118,7 @@ local function formatConfig(p1) --[[ Line: 115 ]]
 	end
 end
 
-local function fetchLeaderboard(_, Friends, p1, p2) --[[ Line: 155 ]]
+local function fetchLeaderboard(_, Friends, p1, p2)
 	-- upvalues: PlatformLeaderboardFetcherDefaultCount (copy), LeaderboardType (copy), LeaderboardName (copy), FFlagPlatformLeaderboardDebugLogging (copy), get (copy), formatConfig (copy), formatEntries (copy)
 	local P7 = p2 or PlatformLeaderboardFetcherDefaultCount
 	local FriendsName: string? = nil
@@ -169,7 +169,7 @@ local function fetchLeaderboard(_, Friends, p1, p2) --[[ Line: 155 ]]
 end
 
 return {
-	fetchConfig = function() --[[ Line: 132 ]]
+	fetchConfig = function()
 		-- upvalues: LeaderboardName (copy), get (copy), FFlagPlatformLeaderboardDebugLogging (copy), formatConfig (copy)
 		local GetResult, GetResult2 = get(`{LeaderboardName}/config`)
 		
@@ -193,15 +193,15 @@ return {
 			return false, nil
 		end
 	end,
-	fetchGlobalLeaderboard = function(p1, p2) --[[ Line: 204 ]]
+	fetchGlobalLeaderboard = function(p1, p2)
 		-- upvalues: fetchLeaderboard (copy), LeaderboardType (copy)
 		return fetchLeaderboard(p1, LeaderboardType.Global, nil, p2)
 	end,
-	fetchFriendsLeaderboard = function(p1, p2, p3) --[[ Line: 211 ]]
+	fetchFriendsLeaderboard = function(p1, p2, p3)
 		-- upvalues: fetchLeaderboard (copy), LeaderboardType (copy)
 		return fetchLeaderboard(p1, LeaderboardType.Friends, p2, p3)
 	end,
-	fetchUserScore = function(_, p1) --[[ Line: 219 ]]
+	fetchUserScore = function(_, p1)
 		-- upvalues: LeaderboardName (copy), get (copy), FFlagPlatformLeaderboardDebugLogging (copy), formatEntry (copy)
 		local GetResult, GetResult2 = get(`{LeaderboardName}/{p1}/score`)
 		

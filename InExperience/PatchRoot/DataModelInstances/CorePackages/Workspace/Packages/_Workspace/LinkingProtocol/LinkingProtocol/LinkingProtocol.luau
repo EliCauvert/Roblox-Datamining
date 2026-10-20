@@ -11,11 +11,11 @@ local LinkingProtocolModule = {}
 LinkingProtocolModule.__index = LinkingProtocolModule
 LinkingProtocolModule.DeepLinkSource = require(script.Parent.Enums.DeepLinkSource)
 
-local function getEngineFeature(Name) --[[ Line: 35 ]]
+local function getEngineFeature(Name)
 	return game:GetEngineFeature(Name)
 end
 
-function LinkingProtocolModule.new(p1) --[[ Line: 39 ]]
+function LinkingProtocolModule.new(p1)
 	-- upvalues: getEngineFeature (copy), LinkingProtocolModule (copy)
 	return (setmetatable({
 		isListeningForURLs = false,
@@ -24,42 +24,42 @@ function LinkingProtocolModule.new(p1) --[[ Line: 39 ]]
 	}, LinkingProtocolModule))
 end
 
-function LinkingProtocolModule:registerURL(Url) --[[ Line: 55 ]]
+function LinkingProtocolModule:registerURL(Url)
 	-- upvalues: LinkingService (copy)
 	LinkingService:RegisterLuaUrl(Url)
 end
 
-function LinkingProtocolModule:getUID() --[[ Line: 70 ]]
+function LinkingProtocolModule:getUID()
 	-- upvalues: PromiseModule (copy), MessageBusService (copy)
-	return if game:GetEngineFeature("EnableAppflyerUIDReporting") then PromiseModule.new(function(Callback, _) --[[ Line: 75 ]]
+	return if game:GetEngineFeature("EnableAppflyerUIDReporting") then PromiseModule.new(function(Callback, _)
 		-- upvalues: MessageBusService (upval)
-		MessageBusService:MakeRequest("Linking", "getUID", {}, function(p1) --[[ Line: 76 ]]
+		MessageBusService:MakeRequest("Linking", "getUID", {}, function(p1)
 			-- upvalues: Callback (copy)
 			Callback(p1.uid)
 		end, {})
 	end) else PromiseModule.resolve("")
 end
 
-function LinkingProtocolModule:detectURL(Url) --[[ Line: 90 ]]
+function LinkingProtocolModule:detectURL(Url)
 	-- upvalues: LinkingService (copy)
 	LinkingService:DetectUrl(Url)
 end
 
-function LinkingProtocolModule:isInternalDlicEnabled() --[[ Line: 97 ]]
+function LinkingProtocolModule:isInternalDlicEnabled()
 	return self._getEngineFeature("EnableDLICInternalIngressSeeding")
 end
 
-function LinkingProtocolModule:createInternalDlic(p1, p2) --[[ Line: 108 ]]
+function LinkingProtocolModule:createInternalDlic(p1, p2)
 	-- upvalues: LinkingService (copy)
 	return LinkingService:CreateInternalDlic(p1, p2)
 end
 
-function LinkingProtocolModule:detectDeeplinkIntent(p1) --[[ Line: 118 ]]
+function LinkingProtocolModule:detectDeeplinkIntent(p1)
 	-- upvalues: LinkingService (copy)
 	LinkingService:DetectDlic(p1)
 end
 
-function LinkingProtocolModule:adConsentResolved(p1) --[[ Line: 136 ]]
+function LinkingProtocolModule:adConsentResolved(p1)
 	-- upvalues: GetFFlagEnableAdConsentAttributionModule (copy), MessageBusService (copy)
 	if GetFFlagEnableAdConsentAttributionModule() then
 		MessageBusService:Publish("Linking.adConsentResolved", p1)
@@ -68,15 +68,15 @@ function LinkingProtocolModule:adConsentResolved(p1) --[[ Line: 136 ]]
 	end
 end
 
-function LinkingProtocolModule:getLastLuaURL() --[[ Line: 152 ]]
+function LinkingProtocolModule:getLastLuaURL()
 	-- upvalues: LinkingService (copy)
 	return LinkingService:GetLastLuaUrl()
 end
 
-function LinkingProtocolModule:listenForLuaURLs(Callback: (any, any) -> (), _) --[[ Line: 164 ]]
+function LinkingProtocolModule:listenForLuaURLs(Callback: (any, any) -> (), _)
 	-- upvalues: LinkingService (copy)
 	self:stopListeningForLuaURLs()
-	self.urlConnection = LinkingService.OnLuaUrl:Connect(function(Url, _, AttributionUrl) --[[ Line: 166 ]]
+	self.urlConnection = LinkingService.OnLuaUrl:Connect(function(Url, _, AttributionUrl)
 		-- upvalues: Callback (copy)
 		Callback(Url, AttributionUrl)
 	end)
@@ -88,7 +88,7 @@ function LinkingProtocolModule:listenForLuaURLs(Callback: (any, any) -> (), _) -
 	end
 end
 
-function LinkingProtocolModule:stopListeningForLuaURLs() --[[ Line: 181 ]]
+function LinkingProtocolModule:stopListeningForLuaURLs()
 	-- upvalues: LinkingService (copy)
 	if self.isListeningForURLs then
 		self.urlConnection:Disconnect()
@@ -97,43 +97,43 @@ function LinkingProtocolModule:stopListeningForLuaURLs() --[[ Line: 181 ]]
 	end
 end
 
-function LinkingProtocolModule:openURL(Url) --[[ Line: 205 ]]
+function LinkingProtocolModule:openURL(Url)
 	-- upvalues: PromiseModule (copy), LinkingService (copy)
-	return PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 206 ]]
+	return PromiseModule.new(function(Callback: (any) -> (), _)
 		-- upvalues: LinkingService (upval), Url (copy)
 		Callback(LinkingService:OpenUrl(Url))
 	end)
 end
 
-function LinkingProtocolModule:isURLRegistered(Url) --[[ Line: 234 ]]
+function LinkingProtocolModule:isURLRegistered(Url)
 	-- upvalues: PromiseModule (copy), LinkingService (copy)
-	return PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 235 ]]
+	return PromiseModule.new(function(Callback: (any) -> (), _)
 		-- upvalues: LinkingService (upval), Url (copy)
 		Callback(LinkingService:IsUrlRegistered(Url))
 	end)
 end
 
-function LinkingProtocolModule:getAndClearLastPendingURL() --[[ Line: 249 ]]
+function LinkingProtocolModule:getAndClearLastPendingURL()
 	-- upvalues: PromiseModule (copy), LinkingService (copy)
-	return if game:GetEngineFeature("LinkingProtocolGetLastPendingUrlEnabled") then PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 256 ]]
+	return if game:GetEngineFeature("LinkingProtocolGetLastPendingUrlEnabled") then PromiseModule.new(function(Callback: (any) -> (), _)
 		-- upvalues: LinkingService (upval)
 		Callback(LinkingService:GetAndClearLastPendingUrl())
 	end) else PromiseModule.resolve({ hasPendingUrl = false })
 end
 
-function LinkingProtocolModule:switchToSettingsApp(p1) --[[ Line: 267 ]]
+function LinkingProtocolModule:switchToSettingsApp(p1)
 	-- upvalues: GetFFlagEnableToSwitchToSettingsAppWithRouteLuaModule (copy), PromiseModule (copy), LinkingService (copy)
 	local Route = if GetFFlagEnableToSwitchToSettingsAppWithRouteLuaModule() then p1 else nil
 	
-	return PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 269 ]]
+	return PromiseModule.new(function(Callback: (any) -> (), _)
 		-- upvalues: LinkingService (upval), Route (copy)
 		Callback(LinkingService:SwitchToSettingsApp(Route))
 	end)
 end
 
-function LinkingProtocolModule:supportsSwitchToSettingsApp(_) --[[ Line: 281 ]]
+function LinkingProtocolModule:supportsSwitchToSettingsApp(_)
 	-- upvalues: PromiseModule (copy), LinkingService (copy)
-	return PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 282 ]]
+	return PromiseModule.new(function(Callback: (any) -> (), _)
 		-- upvalues: LinkingService (upval)
 		Callback(LinkingService:SupportsSwitchToSettingsApp())
 	end)

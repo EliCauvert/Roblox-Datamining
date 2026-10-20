@@ -7,7 +7,7 @@ local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local _ = require(Parent.AvatarExperienceCommon)
 local FFlagAXDurablesForMIS = require(Parent.AvatarExperienceFlags).FFlagAXDurablesForMIS
 
-local function _(List) --[[ Line: 52 | Named "getPermanentPrice" ]]
+local function _(List)
 	for _, value in List do
 		if value.days == 0 then
 			return value.price
@@ -16,15 +16,15 @@ local function _(List) --[[ Line: 52 | Named "getPermanentPrice" ]]
 	return 0
 end
 
-return function(p1) --[[ Line: 62 | Named "useWearTimeSelectedOptionViewModel" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Localization (copy), LocalizationService (copy), FFlagAXDurablesForMIS (copy), UseLocalizationFunction (copy)
 	local UseTokensResult = UseTokensFunction()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 65 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Localization (upval), LocalizationService (upval)
 		return Localization.new(LocalizationService.RobloxLocaleId)
 	end, {})
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-	ReactModule.useEffect(function() --[[ Line: 72 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagAXDurablesForMIS (upval), p1 (copy), UseStateResult2 (copy)
 		if FFlagAXDurablesForMIS and p1.selectedTimedOptionIndexInReducer ~= nil then
 			UseStateResult2(p1.selectedTimedOptionIndexInReducer)
@@ -101,7 +101,7 @@ return function(p1) --[[ Line: 62 | Named "useWearTimeSelectedOptionViewModel" ]
 		price = Price,
 		subLabelText = Infinite,
 		listLabelText = Infinite1,
-		handleOptionActivated = ReactModule.useCallback(function(p2) --[[ Line: 113 ]]
+		handleOptionActivated = ReactModule.useCallback(function(p2)
 			-- upvalues: UseStateResult2 (copy), p1 (copy), UseStateResult2_1 (copy)
 			UseStateResult2(p2)
 			
@@ -110,7 +110,7 @@ return function(p1) --[[ Line: 62 | Named "useWearTimeSelectedOptionViewModel" ]
 			end
 			UseStateResult2_1(false)
 		end, { p1.onOptionActivated }),
-		updatedOptions = ReactModule.useMemo(function() --[[ Line: 121 ]]
+		updatedOptions = ReactModule.useMemo(function()
 			-- upvalues: p1 (copy), UseStateResult (copy)
 			local t = {}
 			

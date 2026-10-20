@@ -24,7 +24,7 @@ local IconsStatusGamesRatingSmall = Images["icons/status/games/rating_small"]
 local IconsStatusGamesPeoplePlayingSmall = Images["icons/status/games/people-playing_small"]
 local _Vector2 = Vector2.new(1e999, 1e999)
 
-return function(Frame) --[[ Line: 64 | Named "GridTileGameStats" ]]
+return function(Frame)
 	-- upvalues: UseDesignTokensFunction (copy), UseTextSizeOffsetFunction (copy), UseTokensFunction (copy), FFlagLuaAppFixSmallScreenFooterStatsOverlap (copy), UseBreakpointXOrSmallerFunction (copy), ResponsiveModule (copy), GameTileTypesModule (copy), FFlagLuaAppMigrateGameTileFooterValueFixes (copy), GetGameTileMetadataFontModule (copy), ReactModule (copy), FFlagLuaAppNarrowTileHideRating (copy), FoundationFontFaceMigration (copy), StyleModule (copy), _Vector2 (copy), TextService (copy), ImageSetLabel (copy), IconsStatusGamesRatingSmall (copy), NormalizeFontFaceFunction (copy), FFlagLuaAppNarrowTileHidePlayerCount (copy), IconsStatusGamesPeoplePlayingSmall (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local UseTextSizeOffsetResult: number = UseTextSizeOffsetFunction()
@@ -42,7 +42,7 @@ return function(Frame) --[[ Line: 64 | Named "GridTileGameStats" ]]
 	local IsGameTileLayoutTypeMatch1_1: boolean = UseTextSizeOffsetResult > 0 and IsGameTileLayoutTypeMatch1
 	local XOffset = FontSize / 1.26
 	local RatingText = Frame.ratingText
-	local UseMemoResult: number = ReactModule.useMemo(function() --[[ Line: 112 ]]
+	local UseMemoResult: number = ReactModule.useMemo(function()
 		-- upvalues: FFlagLuaAppNarrowTileHideRating (upval), Frame (copy), RatingText (copy), FoundationFontFaceMigration (upval), StyleModule (upval), FontSize (copy), GameTileMetadataFontModuleFont (copy), _Vector2 (upval), TextService (upval)
 		return if FFlagLuaAppNarrowTileHideRating and Frame.hideRating or RatingText == nil or RatingText == "" then 0 elseif FoundationFontFaceMigration then StyleModule.GetTextSize(RatingText, FontSize, GameTileMetadataFontModuleFont, _Vector2, { addTemporaryPadding = false }).X else TextService:GetTextSize(RatingText, FontSize, GameTileMetadataFontModuleFont, _Vector2).X
 	end, {

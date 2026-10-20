@@ -9,7 +9,7 @@ local TextWithTranslationModule = require(GenericAbuseReporting.BeduiV2.Utils.Tr
 local _ = require(GenericAbuseReporting.BeduiV2.Utils.Translate.translate)
 local LinkOpenedSource = require(GenericAbuseReporting.BeduiV2.Analytics.analyticsService).LinkOpenedSource
 
-return ReactModule.memo(function(p1) --[[ Line: 32 | Named "Footer" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseDefaultTagsFunction (copy), ReactModule (copy), TextWithTranslationModule (copy), LinkOpenedSource (copy), View (copy)
 	local ColGapSmallSizeFull0AutoY = UseDefaultTagsFunction(p1.additionalTag, "col gap-small size-full-0 auto-y")
 	

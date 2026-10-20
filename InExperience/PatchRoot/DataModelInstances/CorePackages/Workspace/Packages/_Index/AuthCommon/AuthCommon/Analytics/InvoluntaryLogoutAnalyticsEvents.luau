@@ -3,7 +3,7 @@ local NewResult = require(AuthCommon.dependencies).Analytics.AnalyticsReporters.
 local EventStreamConstants = require(AuthCommon.Parent.AuthAnalytics).EventStreamConstants
 
 return {
-	sendImmediatelyPageLoadEvent = function(Origin, p1) --[[ Line: 10 ]]
+	sendImmediatelyPageLoadEvent = function(Origin, p1)
 		-- upvalues: EventStreamConstants (copy), NewResult (copy)
 		NewResult:sendEventImmediately(EventStreamConstants.Context.InvoluntaryLogout, EventStreamConstants.AuthEventName.AuthPageLoad, {
 			origin = Origin,

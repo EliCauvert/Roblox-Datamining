@@ -4,7 +4,7 @@ local _ = require(script.Parent.custom_options)
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 86 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		name = if p1 == nil or p1.name == nil then "" else p1.name,
@@ -13,7 +13,7 @@ function Module.new(p1) --[[ Line: 86 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 96 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -36,7 +36,7 @@ function Module:encode() --[[ Line: 96 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 120 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -79,7 +79,7 @@ function Module.decode(Buf) --[[ Line: 120 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 173 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.name ~= nil and self.name ~= "" then
@@ -94,7 +94,7 @@ function Module:jsonEncode() --[[ Line: 173 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 191 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy)
 	local NewModule = Module.new()
 	
@@ -122,7 +122,7 @@ TypeRegistryModule.default:register(config.AgeRecommendationDescriptor)
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(p1) --[[ Line: 227 ]]
+function Module1.new(p1)
 	-- upvalues: Module1 (copy)
 	return (setmetatable({
 		display_name = if p1 == nil or p1.display_name == nil then "" else p1.display_name,
@@ -134,7 +134,7 @@ function Module1.new(p1) --[[ Line: 227 ]]
 	}, Module1))
 end
 
-function Module1:encode() --[[ Line: 244 ]]
+function Module1:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -172,7 +172,7 @@ function Module1:encode() --[[ Line: 244 ]]
 	return Buf1
 end
 
-function Module1.decode(Buf) --[[ Line: 286 ]]
+function Module1.decode(Buf)
 	-- upvalues: Module1 (copy), ProtoModule (copy), config (copy)
 	local NewModule = Module1.new()
 	local v2 = 0
@@ -225,7 +225,7 @@ function Module1.decode(Buf) --[[ Line: 286 ]]
 	return NewModule
 end
 
-function Module1:jsonEncode() --[[ Line: 354 ]]
+function Module1:jsonEncode()
 	local t = {}
 	
 	if self.display_name ~= nil and self.display_name ~= "" then
@@ -254,7 +254,7 @@ function Module1:jsonEncode() --[[ Line: 354 ]]
 	return t
 end
 
-function Module1:jsonDecode() --[[ Line: 388 ]]
+function Module1:jsonDecode()
 	-- upvalues: Module1 (copy), config (copy)
 	local NewModule = Module1.new()
 	

@@ -2,12 +2,12 @@
 local Players = game:GetService("Players")
 local NewResults = {}
 local AvatarModelPrefetchModule = {
-	prefetch = function(Key) --[[ Line: 11 ]]
+	prefetch = function(Key)
 		-- upvalues: NewResults (copy), PromiseModule (copy), Players (copy)
 		if not NewResults[Key] then
-			NewResults[Key] = PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 16 ]]
+			NewResults[Key] = PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 				-- upvalues: Players (upval), Key (copy)
-				local Success, Result = pcall(function() --[[ Line: 17 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: Players (upval), Key (upval)
 					return Players:CreateHumanoidModelFromUserIdAsync(Key)
 				end)
@@ -26,7 +26,7 @@ local AvatarModelPrefetchModule = {
 	end
 }
 
-function AvatarModelPrefetchModule.get(p1) --[[ Line: 28 ]]
+function AvatarModelPrefetchModule.get(p1)
 	-- upvalues: NewResults (copy), AvatarModelPrefetchModule (copy)
 	if NewResults[p1] then
 		return NewResults[p1]
@@ -37,7 +37,7 @@ function AvatarModelPrefetchModule.get(p1) --[[ Line: 28 ]]
 	end
 end
 
-function AvatarModelPrefetchModule.clear(Key) --[[ Line: 37 ]]
+function AvatarModelPrefetchModule.clear(Key)
 	-- upvalues: NewResults (copy)
 	NewResults[Key] = nil
 end

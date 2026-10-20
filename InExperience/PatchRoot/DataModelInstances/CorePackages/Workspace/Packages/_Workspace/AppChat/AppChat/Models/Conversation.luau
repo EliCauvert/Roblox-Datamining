@@ -7,15 +7,15 @@ local _DateTime = require(Parent.Time).DateTime
 local AppChatNetworkingModule = require(Parent.AppChatNetworking)
 local Players = game:GetService("Players")
 
-local function getMessageId(p1) --[[ Line: 13 ]]
+local function getMessageId(p1)
 	return p1.id
 end
 
-local function messageSortPredicate(p1, p2): boolean --[[ Line: 17 ]]
+local function messageSortPredicate(p1, p2): boolean
 	return p1.sent:GetUnixTimestamp() < p2.sent:GetUnixTimestamp()
 end
 
-local function sendingMessageSortPredicate(p1, p2): boolean --[[ Line: 24 ]]
+local function sendingMessageSortPredicate(p1, p2): boolean
 	return p1.order < p2.order
 end
 
@@ -28,7 +28,7 @@ local ConversationModule = {
 	UserOptedIntoChatMessagesStatus = AppChatNetworkingModule.Constants.UserOptedIntoChatMessagesStatusResponse
 }
 
-function ConversationModule.IdForFakeOneOnOne(List) --[[ Line: 38 ]]
+function ConversationModule.IdForFakeOneOnOne(List)
 	-- upvalues: ConversationModule (copy)
 	local ONETOONECONVERSATION = ConversationModule.Type.ONE_TO_ONE_CONVERSATION
 	table.sort(List)
@@ -39,11 +39,11 @@ function ConversationModule.IdForFakeOneOnOne(List) --[[ Line: 38 ]]
 	return ONETOONECONVERSATION
 end
 
-function ConversationModule.new() --[[ Line: 50 ]]
+function ConversationModule.new()
 	return {}
 end
 
-function ConversationModule.fromUser(p1) --[[ Line: 56 ]]
+function ConversationModule.fromUser(p1)
 	-- upvalues: ConversationModule (copy), OrderedMap (copy), getMessageId (copy), messageSortPredicate (copy), sendingMessageSortPredicate (copy), GenerateStringIdFunction (copy), Players (copy), ConstantsModule (copy)
 	local NewConversation = ConversationModule.new()
 	NewConversation.messages = OrderedMap.new(getMessageId, messageSortPredicate)
@@ -66,7 +66,7 @@ function ConversationModule.fromUser(p1) --[[ Line: 56 ]]
 	return NewConversation
 end
 
-function ConversationModule.empty(List) --[[ Line: 82 ]]
+function ConversationModule.empty(List)
 	-- upvalues: ConversationModule (copy), OrderedMap (copy), getMessageId (copy), messageSortPredicate (copy), sendingMessageSortPredicate (copy), ConstantsModule (copy), _DateTime (copy)
 	local NewConversation = ConversationModule.new()
 	NewConversation.id = "-1"
@@ -95,7 +95,7 @@ function ConversationModule.empty(List) --[[ Line: 82 ]]
 	return NewConversation
 end
 
-function ConversationModule.fromWeb(p1, p2) --[[ Line: 116 ]]
+function ConversationModule.fromWeb(p1, p2)
 	-- upvalues: ConversationModule (copy), OrderedMap (copy), getMessageId (copy), messageSortPredicate (copy), sendingMessageSortPredicate (copy), GenerateStringIdFunction (copy), ConstantsModule (copy), _DateTime (copy)
 	local NewConversation = ConversationModule.new()
 	NewConversation.messages = OrderedMap.new(getMessageId, messageSortPredicate)

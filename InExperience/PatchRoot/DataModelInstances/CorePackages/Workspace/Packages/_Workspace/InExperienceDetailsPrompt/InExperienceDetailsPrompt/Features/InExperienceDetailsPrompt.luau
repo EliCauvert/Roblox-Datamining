@@ -12,7 +12,7 @@ local InExperienceDetailsPromptActionsModule = require(InExperienceDetailsPrompt
 local FFlagLuaAppIedpOverlayAndNavigationFix = require(Parent.SharedFlags).FFlagLuaAppIedpOverlayAndNavigationFix
 local FFlagLuaAppIedpFixPlayButton = require(Parent.SharedFlags).FFlagLuaAppIedpFixPlayButton
 
-local function sheetChildren(p1) --[[ Line: 42 ]]
+local function sheetChildren(p1)
 	-- upvalues: ReactModule (copy), Sheet (copy), InExperienceDetailsPromptErrorContentModule (copy), InExperienceDetailsPromptHeaderModule (copy), InExperienceDetailsPromptContentModule (copy), InExperienceDetailsPromptActionsModule (copy), FFlagLuaAppIedpFixPlayButton (copy)
 	return if p1.errorType then {
 		Content = ReactModule.createElement(Sheet.Content, nil, {
@@ -39,7 +39,7 @@ local function sheetChildren(p1) --[[ Line: 42 ]]
 	}
 end
 
-return function(p1) --[[ Line: 74 | Named "InExperienceDetailsPrompt" ]]
+return function(p1)
 	-- upvalues: UseScaledValueFunction (copy), ReactModule (copy), Sheet (copy), FFlagLuaAppIedpOverlayAndNavigationFix (copy), sheetChildren (copy)
 	return ReactModule.createElement(Sheet.Root, {
 		preferCenterSheet = true,

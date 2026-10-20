@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local UseFocusNavigableSurfaceRegistryConnectionFunction = require(Parent.FocusNavigationUtils).useFocusNavigableSurfaceRegistryConnection
 local FocusNavigableSurfaceIdentifierEnum = require(Parent.FocusNavigationUtils).FocusNavigableSurfaceIdentifierEnum
 
-return function(Tbl) --[[ Line: 8 | Named "Overlay" ]]
+return function(Tbl)
 	-- upvalues: ReactModule (copy), UseFocusNavigableSurfaceRegistryConnectionFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	UseFocusNavigableSurfaceRegistryConnectionFunction(UseStateResult, FocusNavigableSurfaceIdentifierEnum.CentralOverlay)

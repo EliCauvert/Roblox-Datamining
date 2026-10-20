@@ -44,12 +44,12 @@ local _ = require(script.Parent.writeToStore_types)
 GetStoreKeyNameFunction:setStringify(require(script.Parent["object-canon"]).canonicalStringify)
 local _ = require(script.Parent.policies_types)
 
-local function _(FieldFunctionOptions) --[[ Line: 145 | Named "argsFromFieldSpecifier" ]]
+local function _(FieldFunctionOptions)
 	-- upvalues: ArgumentsObjectFromFieldFunction (copy)
 	return if FieldFunctionOptions.args == nil then if FieldFunctionOptions.field then ArgumentsObjectFromFieldFunction(FieldFunctionOptions.field, FieldFunctionOptions.variables) else nil else FieldFunctionOptions.args
 end
 
-local function defaultDataIdFromObject(_, p1, p2): string? --[[ Line: 159 ]]
+local function defaultDataIdFromObject(_, p1, p2): string?
 	-- upvalues: HttpService (copy)
 	local Typename = p1.__typename
 	local Id = p1.id
@@ -81,30 +81,30 @@ end
 
 PoliciesModule.defaultDataIdFromObject = defaultDataIdFromObject
 
-local function nullKeyFieldsFn(_) --[[ Line: 191 ]]
+local function nullKeyFieldsFn(_)
 	return nil
 end
 
-local function simpleKeyArgsFn(_, p1) --[[ Line: 194 ]]
+local function simpleKeyArgsFn(_, p1)
 	return p1.fieldName
 end
 
 local mergeTrueFn = nil
 
-mergeTrueFn = function(_, p1, p2, p3) --[[ Line: 201 | Named "mergeTrueFn" ]]
+mergeTrueFn = function(_, p1, p2, p3)
 	return p3:mergeObjects(p1, p2)
 end
 
 local mergeFalseFn = nil
 
-mergeFalseFn = function(_, _, p1) --[[ Line: 205 | Named "mergeFalseFn" ]]
+mergeFalseFn = function(_, _, p1)
 	return p1
 end
 
 local Module = {}
 Module.__index = Module
 
-function Module.new(Config) --[[ Line: 312 ]]
+function Module.new(Config)
 	-- upvalues: Module (copy), Map (copy), Object (copy), defaultDataIdFromObject (copy)
 	local self = setmetatable({}, Module)
 	self.typePolicies = {}
@@ -131,7 +131,7 @@ function Module.new(Config) --[[ Line: 312 ]]
 	return self
 end
 
-function Module:identify(p1, SelectionSet, FragmentMap) --[[ Line: 353 ]]
+function Module:identify(p1, SelectionSet, FragmentMap)
 	-- upvalues: GetTypenameFromResultFunction (copy), Callback1 (ref)
 	local TypenameFromResult = if SelectionSet and FragmentMap then GetTypenameFromResultFunction(p1, SelectionSet, FragmentMap) else p1.__typename
 	
@@ -162,9 +162,9 @@ function Module:identify(p1, SelectionSet, FragmentMap) --[[ Line: 353 ]]
 	return if config.keyObject then { Text, config.keyObject } else { Text }
 end
 
-function Module.addTypePolicies(p2, TypePolicies) --[[ Line: 425 ]]
+function Module.addTypePolicies(p2, TypePolicies)
 	-- upvalues: ObjectKeysForEachModule (copy), Object (copy), HasOwnPropertyModule (copy)
-	ObjectKeysForEachModule(TypePolicies, function(p3) --[[ Line: 427 ]]
+	ObjectKeysForEachModule(TypePolicies, function(p3)
 		-- upvalues: TypePolicies (copy), Object (upval), p2 (copy), HasOwnPropertyModule (upval)
 		local TypePolicy = TypePolicies[p3]
 		local MutationType = TypePolicy.mutationType
@@ -194,13 +194,13 @@ function Module.addTypePolicies(p2, TypePolicies) --[[ Line: 425 ]]
 	end)
 end
 
-function Module:updateTypePolicy(p2, p3) --[[ Line: 471 ]]
+function Module:updateTypePolicy(p2, p3)
 	-- upvalues: IsCallableModule (copy), mergeTrueFn (ref), mergeFalseFn (ref), nullKeyFieldsFn (copy), Callback1 (ref), ObjectKeysForEachModule (copy), simpleKeyArgsFn (copy), Callback (ref)
 	local TypePolicy = self:getTypePolicy(p2)
 	local KeyFields = p3.keyFields
 	local Fields = p3.fields
 	
-	local function _(p4, Enabled) --[[ Line: 475 | Named "setMerge" ]]
+	local function _(p4, Enabled)
 		-- upvalues: IsCallableModule (upval), mergeTrueFn (upval), mergeFalseFn (upval)
 		if IsCallableModule(Enabled) then
 			p4.merge = Enabled
@@ -246,7 +246,7 @@ function Module:updateTypePolicy(p2, p3) --[[ Line: 471 ]]
 		end
 	end
 	if Fields then
-		ObjectKeysForEachModule(Fields, function(p4) --[[ Line: 530 ]]
+		ObjectKeysForEachModule(Fields, function(p4)
 			-- upvalues: self (copy), p2 (copy), Fields (copy), simpleKeyArgsFn (upval), Callback (upval), IsCallableModule (upval), mergeTrueFn (upval), mergeFalseFn (upval)
 			local FieldPolicy = self:getFieldPolicy(p2, p4, true)
 			local Field = Fields[p4]
@@ -291,7 +291,7 @@ function Module:updateTypePolicy(p2, p3) --[[ Line: 471 ]]
 	end
 end
 
-function Module:setRootTypename(Text: string, p2) --[[ Line: 588 ]]
+function Module:setRootTypename(Text: string, p2)
 	-- upvalues: InvariantFunction (copy)
 	local RootTypenamesByIdEntry: string = p2
 	
@@ -315,13 +315,13 @@ function Module:setRootTypename(Text: string, p2) --[[ Line: 588 ]]
 	end
 end
 
-function Module:addPossibleTypes(PossibleTypes) --[[ Line: 617 ]]
+function Module:addPossibleTypes(PossibleTypes)
 	-- upvalues: ObjectKeysForEachModule (copy), Array (copy), TypeOrFieldNameRegExp (copy), LuauRegExpModule (copy)
 	self.usingPossibleTypes = true
-	ObjectKeysForEachModule(PossibleTypes, function(p2) --[[ Line: 620 ]]
+	ObjectKeysForEachModule(PossibleTypes, function(p2)
 		-- upvalues: self (copy), Array (upval), PossibleTypes (copy), TypeOrFieldNameRegExp (upval), LuauRegExpModule (upval)
 		self:getSupertypeSet(p2, true)
-		Array.forEach(PossibleTypes[p2], function(p3) --[[ Line: 627 ]]
+		Array.forEach(PossibleTypes[p2], function(p3)
 			-- upvalues: self (upval), p2 (copy), TypeOrFieldNameRegExp (upval), LuauRegExpModule (upval)
 			self:getSupertypeSet(p3, true):add(p2)
 			local ExecResult = TypeOrFieldNameRegExp:exec(p3)
@@ -333,7 +333,7 @@ function Module:addPossibleTypes(PossibleTypes) --[[ Line: 617 ]]
 	end)
 end
 
-function Module:getTypePolicy(Typename) --[[ Line: 639 ]]
+function Module:getTypePolicy(Typename)
 	-- upvalues: HasOwnPropertyModule (copy), Object (copy), Array (copy)
 	if not HasOwnPropertyModule(self.typePolicies, Typename) then
 		self.typePolicies[Typename] = {}
@@ -342,7 +342,7 @@ function Module:getTypePolicy(Typename) --[[ Line: 639 ]]
 		local GetResult = self.supertypeMap:get(Typename)
 		
 		if GetResult and GetResult.size > 0 then
-			GetResult:forEach(function(p2) --[[ Line: 673 ]]
+			GetResult:forEach(function(p2)
 				-- upvalues: self (copy), Object (upval), TypePolicy (copy)
 				local TypePolicy1 = self:getTypePolicy(p2)
 				local Fields = TypePolicy1.fields
@@ -354,7 +354,7 @@ function Module:getTypePolicy(Typename) --[[ Line: 639 ]]
 	local ToBeAddedEntry = self.toBeAdded[Typename]
 	
 	if ToBeAddedEntry and #ToBeAddedEntry > 0 then
-		Array.forEach(Array.splice(ToBeAddedEntry, 1), function(p2) --[[ Line: 690 ]]
+		Array.forEach(Array.splice(ToBeAddedEntry, 1), function(p2)
 			-- upvalues: self (copy), Typename (copy)
 			self:updateTypePolicy(Typename, p2)
 		end)
@@ -362,7 +362,7 @@ function Module:getTypePolicy(Typename) --[[ Line: 639 ]]
 	return self.typePolicies[Typename]
 end
 
-function Module:getFieldPolicy(Typename, FieldName, p2) --[[ Line: 698 ]]
+function Module:getFieldPolicy(Typename, FieldName, p2)
 	if not Typename then
 		return nil
 	end
@@ -379,7 +379,7 @@ function Module:getFieldPolicy(Typename, FieldName, p2) --[[ Line: 698 ]]
 	end
 end
 
-function Module:getSupertypeSet(p2, p3) --[[ Line: 725 ]]
+function Module:getSupertypeSet(p2, p3)
 	-- upvalues: Set (copy)
 	local GetResult = self.supertypeMap:get(p2)
 	
@@ -390,7 +390,7 @@ function Module:getSupertypeSet(p2, p3) --[[ Line: 725 ]]
 	return GetResult
 end
 
-function Module:fragmentMatches(p2, p3, p4, p5): boolean --[[ Line: 736 ]]
+function Module:fragmentMatches(p2, p3, p4, p5): boolean
 	-- upvalues: Array (copy), InvariantFunction (copy), SelectionSetMatchesResultFunction (copy)
 	if not p2.typeCondition then
 		return true
@@ -407,7 +407,7 @@ function Module:fragmentMatches(p2, p3, p4, p5): boolean --[[ Line: 736 ]]
 		local SupertypeSet = self:getSupertypeSet(p3, true)
 		local List = { SupertypeSet }
 		
-		local function maybeEnqueue(p6) --[[ Line: 767 ]]
+		local function maybeEnqueue(p6)
 			-- upvalues: self (copy), Array (upval), List (copy)
 			local SupertypeSet = self:getSupertypeSet(p6, false)
 			
@@ -436,7 +436,7 @@ function Module:fragmentMatches(p2, p3, p4, p5): boolean --[[ Line: 736 ]]
 				if IsSizeAbove and i == #List and SelectionSetMatchesResultFunction(p2.selectionSet, p4, p5) then
 					IsSizeAbove = false
 					Flag = true
-					Array.forEach(self.fuzzySubtypes:entries(), function(Entry): number --[[ Line: 834 ]]
+					Array.forEach(self.fuzzySubtypes:entries(), function(Entry): number
 						-- upvalues: p3 (copy), self (copy), Array (upval), List (copy)
 						local Entry1 = Entry[1]
 						local ExecResult = Entry[2]:exec(p3)
@@ -458,13 +458,13 @@ function Module:fragmentMatches(p2, p3, p4, p5): boolean --[[ Line: 736 ]]
 	return false
 end
 
-function Module:hasKeyArgs(p6, p7): boolean --[[ Line: 852 ]]
+function Module:hasKeyArgs(p6, p7): boolean
 	local FieldPolicy = self:getFieldPolicy(p6, p7, false)
 	
 	return FieldPolicy ~= nil and FieldPolicy.keyFn ~= nil
 end
 
-function Module:getStoreFieldName(FieldFunctionOptions) --[[ Line: 859 ]]
+function Module:getStoreFieldName(FieldFunctionOptions)
 	-- upvalues: ArgumentsObjectFromFieldFunction (copy), Callback (ref), StoreKeyNameFromFieldFunction (copy), GetStoreKeyNameFunction (copy), FieldNameFromStoreNameFunction (copy)
 	local Typename = FieldFunctionOptions.typename
 	local FieldName = FieldFunctionOptions.fieldName
@@ -498,7 +498,7 @@ function Module:getStoreFieldName(FieldFunctionOptions) --[[ Line: 859 ]]
 	return if Enabled == false then FieldName elseif FieldName == FieldNameFromStoreNameFunction(Enabled) then Enabled else FieldName .. ":" .. Enabled
 end
 
-function Module:readField(FieldFunctionOptions, p6) --[[ Line: 930 ]]
+function Module:readField(FieldFunctionOptions, p6)
 	-- upvalues: FieldNameFromStoreNameFunction (copy), Callback2 (ref), CacheSlot (copy)
 	local From = FieldFunctionOptions.from
 	
@@ -522,7 +522,7 @@ function Module:readField(FieldFunctionOptions, p6) --[[ Line: 930 ]]
 	}) else FieldValue
 end
 
-function Module:getMergeFunction(p6, p7, p8) --[[ Line: 990 ]]
+function Module:getMergeFunction(p6, p7, p8)
 	local FieldPolicy = self:getFieldPolicy(p6, p7, false)
 	local Merge = if FieldPolicy then FieldPolicy.merge else FieldPolicy
 	
@@ -537,7 +537,7 @@ function Module:getMergeFunction(p6, p7, p8) --[[ Line: 990 ]]
 	return Merge
 end
 
-function Module.runMergeFunction(p6, p7, p8, p9, p10, p11) --[[ Line: 1021 ]]
+function Module.runMergeFunction(p6, p7, p8, p9, p10, p11)
 	-- upvalues: mergeTrueFn (ref), Callback3 (ref), mergeFalseFn (ref), Callback2 (ref)
 	local Field = p9.field
 	local Typename = p9.typename
@@ -562,7 +562,7 @@ end
 
 PoliciesModule.Policies = Module
 
-Callback2 = function(p6, From, FieldFunctionOptions, p7, Storage) --[[ Line: 1081 | Named "makeFieldFunctionOptions" ]]
+Callback2 = function(p6, From, FieldFunctionOptions, p7, Storage)
 	-- upvalues: FieldNameFromStoreNameFunction (copy), ArgumentsObjectFromFieldFunction (copy), IsReferenceFunction (copy), Object (copy), HasOwnPropertyModule (copy), InvariantFunction (copy), StringifyForDisplayFunction (copy), Array (copy), Callback3 (ref)
 	local StoreFieldName = p6:getStoreFieldName(FieldFunctionOptions)
 	local Variables = FieldFunctionOptions.variables or p7.variables
@@ -573,7 +573,7 @@ Callback2 = function(p6, From, FieldFunctionOptions, p7, Storage) --[[ Line: 108
 		fieldName = FieldNameFromStoreNameFunction(StoreFieldName),
 		storeFieldName = StoreFieldName,
 		variables = Variables,
-		isReference = function(_, ...) --[[ Line: 1101 ]]
+		isReference = function(_, ...)
 			-- upvalues: IsReferenceFunction (upval)
 			return IsReferenceFunction(...)
 		end,
@@ -581,7 +581,7 @@ Callback2 = function(p6, From, FieldFunctionOptions, p7, Storage) --[[ Line: 108
 		storage = Storage,
 		cache = p6.cache,
 		canRead = p7.store.canRead,
-		readField = function(_, Tbl, ...) --[[ Line: 1108 ]]
+		readField = function(_, Tbl, ...)
 			-- upvalues: Object (upval), From (copy), HasOwnPropertyModule (upval), InvariantFunction (upval), StringifyForDisplayFunction (upval), Array (upval), Variables (copy), p6 (copy), p7 (copy)
 			local ValueType = type(Tbl)
 			local list = {
@@ -619,9 +619,9 @@ Callback2 = function(p6, From, FieldFunctionOptions, p7, Storage) --[[ Line: 108
 	}
 end
 
-Callback3 = function(Store) --[[ Line: 1175 | Named "makeMergeObjectsFunction" ]]
+Callback3 = function(Store)
 	-- upvalues: Array (copy), InvariantError (copy), IsNonNullObjectFunction (copy), IsReferenceFunction (copy), StoreValueIsStoreObjectFunction (copy), Object (copy)
-	return function(_, p8, p9) --[[ Line: 1176 ]]
+	return function(_, p8, p9)
 		-- upvalues: Array (upval), InvariantError (upval), IsNonNullObjectFunction (upval), Store (copy), IsReferenceFunction (upval), StoreValueIsStoreObjectFunction (upval), Object (upval)
 		if Array.isArray(p8) or Array.isArray(p9) then
 			error(InvariantError.new("Cannot automatically merge arrays"))
@@ -648,31 +648,31 @@ Callback3 = function(Store) --[[ Line: 1175 | Named "makeMergeObjectsFunction" ]
 	end
 end
 
-local function keyObjEncode(KeyObject, p8): string --[[ Line: 1226 ]]
+local function keyObjEncode(KeyObject, p8): string
 	-- upvalues: Array (copy), keyObjEncode (copy), HttpService (copy)
 	assert(typeof(p8) == "table", "specifier must be an array")
 	
-	return if next(p8) then "{" .. Array.join(Array.filter(Array.map(p8, function(Input, p9: number): string --[[ Line: 1236 ]]
+	return if next(p8) then "{" .. Array.join(Array.filter(Array.map(p8, function(Input, p9: number): string
 		-- upvalues: Array (upval), KeyObject (copy), p8 (copy), keyObjEncode (upval), HttpService (upval)
 		return if Array.isArray(Input) then "" elseif KeyObject[Input] then if p9 < #p8 then HttpService:JSONEncode(Input) .. ":" .. (if Array.isArray(p8[p9 + 1]) then keyObjEncode(KeyObject[Input], p8[p9 + 1]) else HttpService:JSONEncode(KeyObject[Input])) else HttpService:JSONEncode(Input) .. ":" .. HttpService:JSONEncode(KeyObject[Input]) else ""
-	end), function(p9): boolean --[[ Line: 1259 ]]
+	end), function(p9): boolean
 		return p9 ~= ""
 	end), ",") .. "}" else "[]"
 end
 
-Callback = function(KeyArgs) --[[ Line: 1268 | Named "keyArgsFnFromSpecifier" ]]
+Callback = function(KeyArgs)
 	-- upvalues: keyObjEncode (copy), Callback4 (ref)
-	return function(p8, p9) --[[ Line: 1269 ]]
+	return function(p8, p9)
 		-- upvalues: keyObjEncode (upval), Callback4 (upval), KeyArgs (copy)
 		return if p8 then ("%s:%s"):format(p9.fieldName, (keyObjEncode(Callback4(p8, KeyArgs, false), KeyArgs))) else p9.fieldName
 	end
 end
 
-Callback1 = function(KeyFields) --[[ Line: 1281 | Named "keyFieldsFnFromSpecifier" ]]
+Callback1 = function(KeyFields)
 	-- upvalues: Trie (copy), CanUseWeakMap (copy), Callback5 (ref), Callback4 (ref), keyObjEncode (copy)
 	local NewTrie = Trie.new(CanUseWeakMap)
 	
-	return function(_, p8, p9): string --[[ Line: 1283 ]]
+	return function(_, p8, p9): string
 		-- upvalues: NewTrie (copy), Callback5 (upval), Callback4 (upval), KeyFields (copy), keyObjEncode (upval)
 		local AliasMap = nil
 		
@@ -692,13 +692,13 @@ Callback1 = function(KeyFields) --[[ Line: 1281 | Named "keyFieldsFnFromSpecifie
 	end
 end
 
-Callback5 = function(SelectionSet, FragmentMap) --[[ Line: 1311 | Named "makeAliasMap" ]]
+Callback5 = function(SelectionSet, FragmentMap)
 	-- upvalues: Set (copy), Array (copy), IsFieldFunction (copy), Callback5 (ref), GetFragmentFromSelectionFunction (copy)
 	local t = {}
 	local NewSet = Set.new({ SelectionSet })
 	
 	for _, value in NewSet do
-		Array.forEach(value.selections, function(p8) --[[ Line: 1316 ]]
+		Array.forEach(value.selections, function(p8)
 			-- upvalues: IsFieldFunction (upval), t (copy), Callback5 (upval), FragmentMap (copy), GetFragmentFromSelectionFunction (upval), NewSet (copy)
 			if IsFieldFunction(p8) then
 				if p8.alias then
@@ -740,7 +740,7 @@ Callback5 = function(SelectionSet, FragmentMap) --[[ Line: 1311 | Named "makeAli
 	return t
 end
 
-Callback4 = function(p8, List, p9, AliasMap) --[[ Line: 1361 | Named "computeKeyObject" ]]
+Callback4 = function(p8, List, p9, AliasMap)
 	-- upvalues: Callback4 (ref), HasOwnPropertyModule (copy), InvariantFunction (copy)
 	local t = {}
 	local v2 = nil

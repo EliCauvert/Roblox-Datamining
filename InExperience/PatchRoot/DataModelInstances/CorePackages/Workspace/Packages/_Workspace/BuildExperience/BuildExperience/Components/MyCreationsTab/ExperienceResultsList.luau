@@ -22,7 +22,7 @@ local InputSize = FoundationModule.Enums.InputSize
 local ListItemInputType = FoundationModule.Enums.ListItemInputType
 local IconRichText = FoundationModule.Utility.getIconRichText(FoundationModule.Enums.IconName.TwoPeople)
 
-local function _(p1, p2, p3) --[[ Line: 79 | Named "descriptionWithGroupIcon" ]]
+local function _(p1, p2, p3)
 	-- upvalues: EscapeRichTextModule (copy), IconRichText (copy)
 	if p2 then
 		local P0 = p1 or (if p3 == nil then nil else EscapeRichTextModule(p3))
@@ -33,7 +33,7 @@ local function _(p1, p2, p3) --[[ Line: 79 | Named "descriptionWithGroupIcon" ]]
 	end
 end
 
-local function useRowActionsMenu() --[[ Line: 87 ]]
+local function useRowActionsMenu()
 	-- upvalues: UseMeasurableRefFunction (copy), ReactModule (copy)
 	local UseMeasurableRefResult = UseMeasurableRefFunction(Vector2.zero, Vector2.zero)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
@@ -43,22 +43,22 @@ local function useRowActionsMenu() --[[ Line: 87 ]]
 		rowActions = UseStateResult,
 		anchor = UseMeasurableRefResult.current,
 		isOpen = UseStateResult1,
-		open = ReactModule.useCallback(function(Target, p1, IsAtPointer) --[[ Line: 92 ]]
+		open = ReactModule.useCallback(function(Target, p1, IsAtPointer)
 			-- upvalues: UseMeasurableRefResult (copy), UseStateResult2 (copy), UseStateResult2_1 (copy)
 			UseMeasurableRefResult.current:SetPosition(p1)
 			UseStateResult2({ target = Target, isAtPointer = IsAtPointer })
 			UseStateResult2_1(true)
 		end, { UseMeasurableRefResult }),
-		close = ReactModule.useCallback(function() --[[ Line: 100 ]]
+		close = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2_1 (copy)
 			UseStateResult2_1(false)
 		end, {})
 	}
 end
 
-local MemoResult = ReactModule.memo(function(Frame) --[[ Line: 112 | Named "ExperienceListItem" ]]
+local MemoResult = ReactModule.memo(function(Frame)
 	-- upvalues: ReactModule (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), View (copy), Badge (copy), BadgeShape (copy), BadgeSize (copy), BadgeVariant (copy), List (copy), EscapeRichTextModule (copy), IconRichText (copy), ListItemInputType (copy)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 121 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: Frame (copy)
 		Frame.onOpenChat({
 			universeId = Frame.universeId,
@@ -73,7 +73,7 @@ local MemoResult = ReactModule.memo(function(Frame) --[[ Line: 112 | Named "Expe
 		Frame.placeId, Frame.sessionId, Frame.universeId
 	})
 	local OnLongPressFunction = Frame.onLongPress
-	local UseResult1 = if FFlagBuildExperienceMyCreationsLongPressMenuModule then ReactModule.useCallback(function(Frame1: Frame, Input) --[[ Line: 145 ]]
+	local UseResult1 = if FFlagBuildExperienceMyCreationsLongPressMenuModule then ReactModule.useCallback(function(Frame1: Frame, Input)
 		-- upvalues: OnLongPressFunction (copy), Frame (copy)
 		if OnLongPressFunction == nil then return end
 		local config = {
@@ -96,7 +96,7 @@ local MemoResult = ReactModule.memo(function(Frame) --[[ Line: 112 | Named "Expe
 		OnLongPressFunction, Frame.creatorName, Frame.experienceName, Frame.gameIcon,
 		Frame.placeId, Frame.sessionId, Frame.universeId
 	}) else nil
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 176 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Frame (copy), ReactModule (upval), View (upval), Badge (upval), BadgeShape (upval), BadgeSize (upval), BadgeVariant (upval)
 		return if Frame.visibilityLabel == nil then nil else ReactModule.createElement(View, { tag = "row align-y-center auto-xy" }, {
 			VisibilityBadge = ReactModule.createElement(Badge, {
@@ -117,7 +117,7 @@ local MemoResult = ReactModule.memo(function(Frame) --[[ Line: 112 | Named "Expe
 	local Item = List.Item
 	local config = {
 		LayoutOrder = Frame.LayoutOrder,
-		leading = ReactModule.useMemo(function() --[[ Line: 113 ]]
+		leading = ReactModule.useMemo(function()
 			-- upvalues: Frame (copy)
 			return { type = nil, iconVariant = nil, iconName = Frame.gameIcon }
 		end, { Frame.gameIcon }),
@@ -143,7 +143,7 @@ local MemoResult = ReactModule.memo(function(Frame) --[[ Line: 112 | Named "Expe
 	return CreateElementFunction(Item, config)
 end)
 
-return ReactModule.memo(function(p1) --[[ Line: 211 | Named "ExperienceResultsList" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), FFlagBuildExperienceStableMyCreationsListItemsModule (copy), useRowActionsMenu (copy), FFlagBuildExperienceMyCreationsUseUniverseListModule (copy), ReactModule (copy), MemoResult (copy), List (copy), EscapeRichTextModule (copy), IconRichText (copy), View (copy), Badge (copy), BadgeShape (copy), BadgeSize (copy), BadgeVariant (copy), ExperienceResultsLoadingSkeletonModule (copy), ExperienceRowActionsMenuModule (copy), InputSize (copy)
 	local TestIdPrefix = p1.testIdPrefix or "MyCreationsTab"
 	local FirstResultLayoutOrder = p1.firstResultLayoutOrder or 1
@@ -207,7 +207,7 @@ return ReactModule.memo(function(p1) --[[ Line: 211 | Named "ExperienceResultsLi
 			config.description = Description1
 			config.testId = `{TestIdPrefix}.ExperienceRow.{item.universeId}`
 			
-			function config.onActivated() --[[ Line: 261 ]]
+			function config.onActivated()
 				-- upvalues: p1 (copy), item (copy), PlaceId (copy), ExperienceName (copy), GameIcon (copy)
 				p1.onOpenChat({
 					universeId = item.universeId,

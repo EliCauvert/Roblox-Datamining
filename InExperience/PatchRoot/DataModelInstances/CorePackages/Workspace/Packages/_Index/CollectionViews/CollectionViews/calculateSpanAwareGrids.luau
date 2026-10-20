@@ -12,7 +12,7 @@ local config = {
 	[GameCollectionItemTypes.GameCollectionItemType.TwoByOneTile] = { colSpan = 2, rowSpan = 1 }
 }
 
-local function defaultGetSpanConfig(p1) --[[ Line: 76 ]]
+local function defaultGetSpanConfig(p1)
 	-- upvalues: FFlagLuaAppEnableNxMRoduxApportioning (copy), SpanForItemType (copy), config (copy)
 	local SpanForItemTypeEntry = p1 and (if FFlagLuaAppEnableNxMRoduxApportioning then SpanForItemType[p1.componentType] else config[p1.componentType])
 	
@@ -24,7 +24,7 @@ local function defaultGetSpanConfig(p1) --[[ Line: 76 ]]
 	} else nil
 end
 
-local function processOneGrid(p1, NextStartIndex, PendingSpanTiles, ItemsPerRow: number, MaxRows, Callback, p2) --[[ Line: 95 ]]
+local function processOneGrid(p1, NextStartIndex, PendingSpanTiles, ItemsPerRow: number, MaxRows, Callback, p2)
 	-- upvalues: DiscoveryEventErrorLogger (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), FFlagLuaAppEnableNxMApportioningExtraLogging (copy), ApportioningDiagnosticTelemetry (copy), LuaAppFixApportioningTileTailConflict (copy), defaultGetSpanConfig (copy)
 	local ScaledMaxRows = MaxRows * ItemsPerRow
 	local List = {}
@@ -33,7 +33,7 @@ local function processOneGrid(p1, NextStartIndex, PendingSpanTiles, ItemsPerRow:
 	local NextAllowedRow = 1
 	local t = {}
 	
-	local function nextFreePosition(NextScanPosition: number): number --[[ Line: 120 ]]
+	local function nextFreePosition(NextScanPosition: number): number
 		-- upvalues: ItemsPerRow (copy), t (copy)
 		repeat
 			local NewFloored = math.floor(NextScanPosition / ItemsPerRow) + 1
@@ -45,7 +45,7 @@ local function processOneGrid(p1, NextStartIndex, PendingSpanTiles, ItemsPerRow:
 		return NextScanPosition
 	end
 	
-	local function writeLayoutCell(NewFloored, Col, Index) --[[ Line: 134 ]]
+	local function writeLayoutCell(NewFloored, Col, Index)
 		-- upvalues: MaxRows (copy), DiscoveryEventErrorLogger (upval), ItemsPerRow (copy), t (copy)
 		if MaxRows < NewFloored then
 			DiscoveryEventErrorLogger.reportError("CalculateSpanAwareGrids_LayoutWritePastMaxRows", "writeLayoutCell attempted to write past maxRows", {
@@ -63,7 +63,7 @@ local function processOneGrid(p1, NextStartIndex, PendingSpanTiles, ItemsPerRow:
 		t[NewFloored][Col] = Index
 	end
 	
-	local function tryPlaceSpanTile(OriginalIndex, SpanConfig): boolean --[[ Line: 154 ]]
+	local function tryPlaceSpanTile(OriginalIndex, SpanConfig): boolean
 		-- upvalues: FFlagLuaAppEnableNxMRoduxApportioning (upval), p2 (copy), nextFreePosition (copy), NextScanPosition (ref), ItemsPerRow (copy), NextAllowedRow (ref), FFlagLuaAppEnableNxMApportioningExtraLogging (upval), ApportioningDiagnosticTelemetry (upval), MaxRows (copy), ScaledMaxRows (copy), p1 (copy), LuaAppFixApportioningTileTailConflict (upval), t (copy), writeLayoutCell (copy), List (copy)
 		local ColSpan: number = SpanConfig.colSpan
 		local RowSpan = if FFlagLuaAppEnableNxMRoduxApportioning or p2 then SpanConfig.rowSpan else nil
@@ -247,7 +247,7 @@ local function processOneGrid(p1, NextStartIndex, PendingSpanTiles, ItemsPerRow:
 		end
 	end
 	
-	local function tryPlaceDeferredSpanTiles() --[[ Line: 359 ]]
+	local function tryPlaceDeferredSpanTiles()
 		-- upvalues: List1 (copy), tryPlaceSpanTile (copy)
 		while #List1 > 0 do
 			local Entry = List1[1]
@@ -326,7 +326,7 @@ local function processOneGrid(p1, NextStartIndex, PendingSpanTiles, ItemsPerRow:
 end
 
 return {
-	calculateSpanAwareGrids = function(p3, List, ItemsPerRow: number, p4, p5) --[[ Line: 461 ]]
+	calculateSpanAwareGrids = function(p3, List, ItemsPerRow: number, p4, p5)
 		-- upvalues: DiscoveryEventErrorLogger (copy), processOneGrid (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy)
 		if not p3 then
 			DiscoveryEventErrorLogger.reportError("CalculateSpanAwareGrids_MissingEntries", "calculateSpanAwareGrids called without entries", { gridConfigsCount = #List, itemsPerRow = ItemsPerRow })

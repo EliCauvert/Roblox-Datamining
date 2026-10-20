@@ -11,7 +11,7 @@ local CryoModule = require(CorePackages.Packages.Cryo)
 local HighlightModeVariants = require(CorePackages.Workspace.Packages.InGameAssetReporting).HighlightModeVariants
 local NewResult = if require(CorePackages.Workspace.Packages.SharedFlags).FFlagHighlightModePreciseSelectionEnabled then require(CorePackages.Workspace.Packages.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId) else nil
 
-local function v11(Variant, p1) --[[ Line: 30 ]]
+local function v11(Variant, p1)
 	-- upvalues: RobloxTranslatorModule (copy), HighlightModeVariants (copy), NewResult (ref), CryoModule (copy), ReactModule (copy), StyledTextLabel (copy)
 	local config = {
 		Layout = ReactModule.createElement("UIListLayout", {
@@ -29,7 +29,7 @@ local function v11(Variant, p1) --[[ Line: 30 ]]
 		NewResult:Format("Feature.ReportAbuse.Label.SelectInSceneDescriptionPrecise1"),
 		RobloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription2"),
 		RobloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription3")
-	}, function(Text, LayoutOrder) --[[ Line: 45 ]]
+	}, function(Text, LayoutOrder)
 		-- upvalues: ReactModule (upval), StyledTextLabel (upval), p1 (copy)
 		return ReactModule.createElement(StyledTextLabel, {
 			text = "• " .. Text,
@@ -50,7 +50,7 @@ local function v11(Variant, p1) --[[ Line: 30 ]]
 	}, config)
 end
 
-return function(p2) --[[ Line: 73 | Named "SelectInSceneReportMenu" ]]
+return function(p2)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), StyledTextLabel (copy), RobloxTranslatorModule (copy), v11 (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy)
 	local UseStyleResult = UseStyleFunction()
 	
@@ -115,14 +115,14 @@ return function(p2) --[[ Line: 73 | Named "SelectInSceneReportMenu" ]]
 			standardSize = StandardButtonSize.Small,
 			position = UDim2.new(0.5, 0, 0, 0),
 			anchorPoint = Vector2.new(0.5, 0),
-			onActivated = function() --[[ Line: 144 ]]
+			onActivated = function()
 				-- upvalues: p2 (copy)
 				local SafetyService = game:GetService("SafetyService")
 				local ExperienceStateCaptureService = game:GetService("ExperienceStateCaptureService")
 				
 				if game:GetEngineFeature("ExperienceStateCaptureIsInBackground") then
 					local Connection = nil
-					Connection = ExperienceStateCaptureService:GetPropertyChangedSignal("IsInBackground"):Connect(function() --[[ Line: 151 ]]
+					Connection = ExperienceStateCaptureService:GetPropertyChangedSignal("IsInBackground"):Connect(function()
 						-- upvalues: Connection (ref), ExperienceStateCaptureService (copy), p2 (upval)
 						if not Connection.Connected then return end
 						if not ExperienceStateCaptureService.IsInBackground then

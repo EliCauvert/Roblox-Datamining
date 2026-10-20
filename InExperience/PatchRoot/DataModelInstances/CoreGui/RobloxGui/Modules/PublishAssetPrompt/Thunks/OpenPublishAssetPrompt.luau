@@ -2,9 +2,9 @@
 local OpenPublishAssetPromptModule = require(Parent.Actions.OpenPublishAssetPrompt)
 local PromptTypeModule = require(Parent.PromptType)
 
-return function(Object, p1, p2, p3) --[[ Line: 12 ]]
+return function(Object, p1, p2, p3)
 	-- upvalues: OpenPublishAssetPromptModule (copy), PromptTypeModule (copy)
-	return function(p4) --[[ Line: 13 ]]
+	return function(p4)
 		-- upvalues: Object (ref), OpenPublishAssetPromptModule (upval), PromptTypeModule (upval), p1 (copy), p2 (copy), p3 (copy)
 		if Object:IsA("Accessory") then
 			local Model = Instance.new("Model")

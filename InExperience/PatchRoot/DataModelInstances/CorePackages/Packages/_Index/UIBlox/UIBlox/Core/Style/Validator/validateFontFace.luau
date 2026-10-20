@@ -1,4 +1,4 @@
-﻿return function(p1) --[[ Line: 5 ]]
+﻿return function(p1)
 	if typeof(p1) == "Font" then
 		return true
 	else

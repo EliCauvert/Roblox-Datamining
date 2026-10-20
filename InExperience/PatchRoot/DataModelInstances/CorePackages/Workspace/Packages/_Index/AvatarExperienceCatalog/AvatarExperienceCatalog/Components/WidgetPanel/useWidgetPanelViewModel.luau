@@ -22,15 +22,15 @@ local UseOnRequestImpressionsSignalModule = require(AvatarExperienceCatalog.Comp
 local UseCatalogPageMonolithDependenciesModule = require(AvatarExperienceCatalog.Providers.useCatalogPageMonolithDependencies)
 local _ = require(script.Parent.WidgetPanelView)
 
-return function(Frame) --[[ Line: 61 | Named "useWidgetPanelViewModel" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), GetUIScaleFromTokensModule (copy), ReactModule (copy), GetBreakpointFromRowWidthModule (copy), UseCatalogPageMonolithDependenciesModule (copy), UseNetworkingFunction (copy), UseOnRequestImpressionsSignalModule (copy), UseAvatarRouteFunction (copy), Constants (copy), WidgetConstantsModule (copy), CollectionService (copy), UseWidgetListInfoViewModelModule (copy), GetOrderedWidgetsModule (copy), GridMetrics (copy), ConstantsModule (copy), GetWidgetItemIdsFromWidgetInfoModule (copy), View (copy)
 	local Context = Frame.context
 	local UIScaleFromTokensModule = GetUIScaleFromTokensModule((UseTokensFunction()))
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 72 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy)
-		return function() --[[ Line: 73 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			if UseRefResult.current then
 				task.cancel(UseRefResult.current)
@@ -38,7 +38,7 @@ return function(Frame) --[[ Line: 61 | Named "useWidgetPanelViewModel" ]]
 			end
 		end
 	end, {})
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 81 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
 		if not Frame then return end
 		local X = Frame.AbsoluteSize.X
@@ -46,7 +46,7 @@ return function(Frame) --[[ Line: 61 | Named "useWidgetPanelViewModel" ]]
 		if UseRefResult.current then
 			task.cancel(UseRefResult.current)
 		end
-		UseRefResult.current = task.delay(0.2, function() --[[ Line: 89 ]]
+		UseRefResult.current = task.delay(0.2, function()
 			-- upvalues: UseRefResult (upval), UseStateResult2 (upval), X (copy)
 			UseRefResult.current = nil
 			UseStateResult2(X)
@@ -59,7 +59,7 @@ return function(Frame) --[[ Line: 61 | Named "useWidgetPanelViewModel" ]]
 	local FetchWidgetInfoFunction = UseCatalogPageMonolithDependenciesModuleResult.fetchWidgetInfo
 	local CatalogAnalytics = UseCatalogPageMonolithDependenciesModuleResult.catalogAnalytics
 	local UseNetworkingResult = UseNetworkingFunction()
-	ReactModule.useEffect(function() --[[ Line: 109 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FetchWidgetInfoFunction (copy), UseNetworkingResult (copy), Context (copy)
 		FetchWidgetInfoFunction(UseNetworkingResult, nil, Context)
 	end, { Context, UseNetworkingResult, FetchWidgetInfoFunction })
@@ -71,13 +71,13 @@ return function(Frame) --[[ Line: 61 | Named "useWidgetPanelViewModel" ]]
 	if UseRefResult2.current == nil then
 		UseRefResult2.current = UseAvatarRouteResult.current.key
 	end
-	local UseResult1 = ReactModule.useCallback(function(): boolean --[[ Line: 121 ]]
+	local UseResult1 = ReactModule.useCallback(function(): boolean
 		-- upvalues: UseAvatarRouteResult (copy), UseRefResult2 (copy)
 		return UseAvatarRouteResult.current.key == UseRefResult2.current
 	end, { UseAvatarRouteResult })
 	local UseRefResult3 = ReactModule.useRef({})
 	local UseRefResult4 = ReactModule.useRef({})
-	local UseResult2 = ReactModule.useCallback(function(List) --[[ Line: 131 ]]
+	local UseResult2 = ReactModule.useCallback(function(List)
 		-- upvalues: UseRefResult3 (copy), UseRefResult4 (copy), Constants (upval), CatalogAnalytics (copy), WidgetConstantsModule (upval)
 		local Current = UseRefResult3.current
 		local Current1 = UseRefResult4.current
@@ -97,7 +97,7 @@ return function(Frame) --[[ Line: 61 | Named "useWidgetPanelViewModel" ]]
 			end
 		end
 	end, { CatalogAnalytics })
-	local UseResult3 = ReactModule.useCallback(function(Ancestor) --[[ Line: 152 ]]
+	local UseResult3 = ReactModule.useCallback(function(Ancestor)
 		-- upvalues: CollectionService (upval), WidgetConstantsModule (upval)
 		local Tagged = CollectionService:GetTagged(WidgetConstantsModule.WidgetExposureMetadata.TagName)
 		

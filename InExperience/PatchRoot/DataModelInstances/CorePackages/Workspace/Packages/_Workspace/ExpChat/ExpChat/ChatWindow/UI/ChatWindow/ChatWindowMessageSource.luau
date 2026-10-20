@@ -14,11 +14,11 @@ local GetFFlagTextChatEnableUniverseChatTabsFunction = require(Parent.ExpChatSha
 local FFlagExpChatDisableNameTapActionInGlobalChatModule = require(ExpChat.Flags.FFlagExpChatDisableNameTapActionInGlobalChat)
 local IsGlobalChatMessageModule = require(ExpChat.isGlobalChatMessage)
 
-return function(p1) --[[ Line: 67 | Named "ChatWindowMessageSource" ]]
+return function(p1)
 	-- upvalues: UseStableSignalFunction (copy), ReactModule (copy), FFlagExpChatDisableNameTapActionInGlobalChatModule (copy), IsGlobalChatMessageModule (copy), GetFFlagChatWindowUseCallbackOptimizationsModule (copy), GetMessagesStoreModule (copy), FFlagExpChatEnableV2ChatWindowModule (copy), UseV2MessagePoolModule (copy), FFlagExpChatRewriteInlineModule (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), CreateMessageChildrenModule (copy), ChatWindowModule (copy), Dictionary (copy)
 	local UseStableSignalResult, UseStableSignalResult2 = UseStableSignalFunction({})
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 72 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: FFlagExpChatDisableNameTapActionInGlobalChatModule (upval), IsGlobalChatMessageModule (upval), p1 (copy)
 		if FFlagExpChatDisableNameTapActionInGlobalChatModule and IsGlobalChatMessageModule(p2) then return end
 		p1.resetTargetChannel()
@@ -45,7 +45,7 @@ return function(p1) --[[ Line: 67 | Named "ChatWindowMessageSource" ]]
 		chatWindowTransparencyBindable = if FFlagExpChatRewriteInlineModule then p1.transparencyValue else nil,
 		selectedChannelName = if GetFFlagTextChatEnableUniverseChatTabsFunction() then p1.selectedChannelName else nil
 	}).children else nil
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 113 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FFlagExpChatEnableV2ChatWindowModule (upval), CreateMessageChildrenModule (upval), p1 (copy), TextTransparency (copy), UseResult (copy)
 		return if FFlagExpChatEnableV2ChatWindowModule then nil else CreateMessageChildrenModule({
 			messages = p1.messages or {},

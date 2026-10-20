@@ -8,7 +8,7 @@ local GetBadgesSeeAllUrlModule = require(Badges.BadgesSeeAllPage.getBadgesSeeAll
 local GetBadgesSeeAllPageKeyModule = require(Badges.BadgesSeeAllPage.getBadgesSeeAllPageKey)
 local FFlagSduiExtendedCapabilitiesDiscovery = require(Parent.SharedFlags).FFlagSduiExtendedCapabilitiesDiscovery
 
-return function(p1, LoadTimer, p2) --[[ Line: 18 | Named "fetchBadgesSeeAllPageIfNeeded" ]]
+return function(p1, LoadTimer, p2)
 	-- upvalues: FFlagSduiExtendedCapabilitiesDiscovery (copy), GetBadgesSeeAllPageKeyModule (copy), Parent (copy), Badges (copy), SduiSharedUtilitiesModule (copy), GetSduiApiStoreFunction (copy), SduiResponseType (copy), AppPage (copy), GetBadgesSeeAllUrlModule (copy)
 	if FFlagSduiExtendedCapabilitiesDiscovery then
 		local ServiceContractsProtoModule = require(Parent.ServiceContractsProto)
@@ -18,7 +18,7 @@ return function(p1, LoadTimer, p2) --[[ Line: 18 | Named "fetchBadgesSeeAllPageI
 		local Url = require(Badges.BadgesSeeAllPage.getBadgesSeeAllPostUrl)()
 		local PageEntryFormat = ServiceContractsProtoModule.apppageplatform.shared.page_entry_content.PageEntryFormat
 		
-		local function buildBody(p3) --[[ Line: 36 ]]
+		local function buildBody(p3)
 			-- upvalues: BadgesSeeAll (copy), p1 (copy), BadgesSeeAllPageConstantsModule (copy), PageEntryFormat (copy), SduiCapabilities (copy)
 			return (BadgesSeeAll.BadgesSeeAllRequest.new({
 				universe_id = tonumber(p1),
@@ -29,7 +29,7 @@ return function(p1, LoadTimer, p2) --[[ Line: 18 | Named "fetchBadgesSeeAllPageI
 			}))
 		end
 		
-		local function _(p3) --[[ Line: 47 | Named "nextCursor" ]]
+		local function _(p3)
 			local NextCursor = p3 and (p3.pagination and p3.pagination.next_cursor)
 			
 			return if NextCursor and NextCursor ~= "" then NextCursor else nil
@@ -47,14 +47,14 @@ return function(p1, LoadTimer, p2) --[[ Line: 18 | Named "fetchBadgesSeeAllPageI
 				protoMessage = BadgesSeeAll.BadgesSeeAllRequest,
 				body = buildBody(nil)
 			},
-			buildNextPageUrl = function(p3) --[[ Line: 67 ]]
+			buildNextPageUrl = function(p3)
 				-- upvalues: Url (copy)
 				local NextCursor = p3 and (p3.pagination and p3.pagination.next_cursor)
 				local NextCursor1 = if NextCursor and NextCursor ~= "" then NextCursor else nil
 				
 				return if NextCursor1 then Url else nil
 			end,
-			buildNextPagePostBody = function(p3) --[[ Line: 70 ]]
+			buildNextPagePostBody = function(p3)
 				-- upvalues: buildBody (copy)
 				local NextCursor = p3 and (p3.pagination and p3.pagination.next_cursor)
 				local NextCursor1 = if NextCursor and NextCursor ~= "" then NextCursor else nil
@@ -73,7 +73,7 @@ return function(p1, LoadTimer, p2) --[[ Line: 18 | Named "fetchBadgesSeeAllPageI
 			configKey = GetBadgesSeeAllPageKeyModule(p1),
 			loadTimer = LoadTimer,
 			apiProto = require(Parent.ServiceContractsProto).apppageplatform.badges.badges_see_all.BadgesSeeAllV2Response,
-			buildNextPageUrl = function(p3) --[[ Line: 92 ]]
+			buildNextPageUrl = function(p3)
 				-- upvalues: GetBadgesSeeAllUrlModule (upval), p1 (copy)
 				local NextCursor = p3 and (p3.pagination and p3.pagination.next_cursor)
 				

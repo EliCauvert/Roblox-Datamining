@@ -4,11 +4,11 @@ local ReactModule = require(ViewRecyclerReact.Parent.React)
 local ScrollbarOverlay = require(ViewRecyclerReact.Parent.ViewRecyclerRoblox).Internal.ScrollbarOverlay
 local CreateElementFunction = ReactModule.createElement
 
-return function(p1) --[[ Line: 21 | Named "VirtualListShell" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ScrollbarOverlay (copy), Axis (copy), CreateElementFunction (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	
-	local function _() --[[ Line: 23 | Named "refreshScrollBar" ]]
+	local function _()
 		-- upvalues: UseRefResult (copy), p1 (copy), ScrollbarOverlay (upval)
 		local CurrentFunction: () -> () = UseRefResult.current
 		
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 21 | Named "VirtualListShell" ]]
 	if config.ZIndex ~= nil then
 		config1.ZIndex = config.ZIndex
 	end
-	config.ref = ReactModule.useCallback(function(Current) --[[ Line: 73 ]]
+	config.ref = ReactModule.useCallback(function(Current)
 		-- upvalues: p1 (copy), UseRefResult (copy), ScrollbarOverlay (upval)
 		p1.internalRef.current = Current
 		p1.onScrollingFrameChanged(Current)
@@ -89,7 +89,7 @@ return function(p1) --[[ Line: 21 | Named "VirtualListShell" ]]
 			Name = "ViewRecyclerOverlay",
 			Selectable = false,
 			ZIndex = config.ZIndex,
-			ref = ReactModule.useCallback(function(Current) --[[ Line: 80 ]]
+			ref = ReactModule.useCallback(function(Current)
 				-- upvalues: p1 (copy), UseRefResult (copy), ScrollbarOverlay (upval)
 				p1.viewportOverlayRef.current = Current
 				p1.onViewportOverlayChanged(Current)

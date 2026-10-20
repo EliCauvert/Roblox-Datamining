@@ -5,7 +5,7 @@ local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXMarketplaceItemCardIndicatorStack = AvatarExperienceFlagsModule.FFlagAXMarketplaceItemCardIndicatorStack
 local FFlagAXMarketplaceLicensingItemCards = AvatarExperienceFlagsModule.FFlagAXMarketplaceLicensingItemCards
 
-local function CornerSlot(Frame) --[[ Line: 21 ]]
+local function CornerSlot(Frame)
 	-- upvalues: FFlagAXMarketplaceLicensingItemCards (copy), ReactModule (copy)
 	local ConstrainedWidth = if FFlagAXMarketplaceLicensingItemCards then Frame.constrainedWidth else nil
 	
@@ -21,7 +21,7 @@ local function CornerSlot(Frame) --[[ Line: 21 ]]
 	}, Frame.children)
 end
 
-local function ItemCardHeaderCornersOverlay(p1) --[[ Line: 46 ]]
+local function ItemCardHeaderCornersOverlay(p1)
 	-- upvalues: UseTokensFunction (copy), FFlagAXMarketplaceItemCardIndicatorStack (copy), ReactModule (copy), CornerSlot (copy)
 	local Small: number = UseTokensFunction().Gap.Small
 	local NewSmall = if FFlagAXMarketplaceItemCardIndicatorStack then Small + (p1.bottomInset or 0) else Small

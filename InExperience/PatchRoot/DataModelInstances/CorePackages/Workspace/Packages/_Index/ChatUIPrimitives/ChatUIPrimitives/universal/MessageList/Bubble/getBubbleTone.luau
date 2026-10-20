@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("ChatUIPrimitives").Parent.Foundation)
 
-return function(p1, p2) --[[ Line: 13 | Named "getBubbleTone" ]]
+return function(p1, p2)
 	return if p1 then {
 		backgroundStyle = p2.Color.System.Emphasis,
 		textStyle = p2.Color.ActionEmphasis.Foreground

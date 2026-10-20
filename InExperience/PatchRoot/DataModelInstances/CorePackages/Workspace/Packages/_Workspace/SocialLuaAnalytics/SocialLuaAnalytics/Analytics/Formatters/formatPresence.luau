@@ -8,7 +8,7 @@ local config = {
 	[PresenceType.Online] = PresenceTypes.Online
 }
 
-return function(p1) --[[ Line: 15 ]]
+return function(p1)
 	-- upvalues: PresenceTypes (copy), config (copy)
 	return if p1 then if type(p1) == "string" and p1 ~= "" then PresenceTypes[p1] else config[p1] else nil
 end

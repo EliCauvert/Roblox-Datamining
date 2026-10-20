@@ -1,7 +1,7 @@
 ﻿local GetProfileInsightsByUserIdFromDataModule = require(script.Parent.getProfileInsightsByUserIdFromData)
 local _ = require(script:FindFirstAncestor("ApolloProfileInsights").Parent.GraphQLServer)
 
-return function(p1, p2) --[[ Line: 11 ]]
+return function(p1, p2)
 	-- upvalues: GetProfileInsightsByUserIdFromDataModule (copy)
 	local ProfileInsightsByUserIdFromDataModule = GetProfileInsightsByUserIdFromDataModule(p1, p2)
 	local MutualFriends = nil

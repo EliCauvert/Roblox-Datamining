@@ -9,7 +9,7 @@ local config = {
 	ok = "Feature.Moments.Action.Ok"
 }
 
-return function(p1) --[[ Line: 22 | Named "MomentUnavailableDialog" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), Dialog (copy), FoundationModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	

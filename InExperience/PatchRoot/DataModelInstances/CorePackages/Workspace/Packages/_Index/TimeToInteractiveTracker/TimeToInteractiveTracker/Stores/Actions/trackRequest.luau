@@ -6,9 +6,9 @@ local _ = require(script.Parent.Parent.types)
 local NowModule = require(TimeToInteractiveTracker.Utils.now)
 local UtilModule = require(TimeToInteractiveTracker.Utils.Util)
 
-return function(Callback, Callback1) --[[ Line: 21 ]]
+return function(Callback, Callback1)
 	-- upvalues: NowModule (copy), FFlagTimeToInteractiveTrackerWarningsRequireDebugModule (copy), FFlagDebugTimeToInteractiveTrackerModule (copy), NewResult (copy), UtilModule (copy)
-	return function(p1, p2, Name) --[[ Line: 22 ]]
+	return function(p1, p2, Name)
 		-- upvalues: NowModule (upval), Callback (copy), FFlagTimeToInteractiveTrackerWarningsRequireDebugModule (upval), FFlagDebugTimeToInteractiveTrackerModule (upval), NewResult (upval), Callback1 (copy), UtilModule (upval)
 		local NowModuleResult = NowModule()
 		local CallbackResultEntry = Callback(false)[p1]
@@ -19,7 +19,7 @@ return function(Callback, Callback1) --[[ Line: 21 ]]
 				timestamp = NowModuleResult,
 				deltaMs = (NowModuleResult - CallbackResultEntry.startTime) * 1000
 			}
-			Callback1(function(Tbl) --[[ Line: 45 ]]
+			Callback1(function(Tbl)
 				-- upvalues: p1 (copy), UtilModule (upval), p2 (copy), FFlagTimeToInteractiveTrackerWarningsRequireDebugModule (upval), FFlagDebugTimeToInteractiveTrackerModule (upval), NewResult (upval), config (copy)
 				local Entry = Tbl[p1]
 				

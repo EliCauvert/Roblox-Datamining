@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return (ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 29 ]]
+return (ReactModule.forwardRef(function(Frame, Ref)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FoundationModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	

@@ -10,10 +10,10 @@ local Text = FoundationModule.Text
 local Image = FoundationModule.Image
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1) --[[ Line: 23 ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ThirdPartyUserService (copy), UseLocalizationFunction (copy), View (copy), DividerWithTextModule (copy), Image (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 25 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), ThirdPartyUserService (upval)
 		if p1.onActivated then
 			p1.onActivated()

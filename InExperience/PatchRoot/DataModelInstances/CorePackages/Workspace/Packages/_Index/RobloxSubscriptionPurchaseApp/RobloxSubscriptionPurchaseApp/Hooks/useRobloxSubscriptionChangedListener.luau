@@ -5,22 +5,22 @@ local RobloxSubscriptionStoreModule = require(RobloxSubscriptionPurchaseApp.Stor
 local FinalizeRobloxSubscriptionUpsellFlowModule = require(RobloxSubscriptionPurchaseApp.Actions.finalizeRobloxSubscriptionUpsellFlow)
 local PromptStateModule = require(RobloxSubscriptionPurchaseApp.Enums.PromptState)
 
-return function(p1) --[[ Line: 18 | Named "useRobloxSubscriptionChangedListener" ]]
+return function(p1)
 	-- upvalues: RobloxSubscriptionStoreModule (copy), ReactModule (copy), Players (copy), PromptStateModule (copy), FinalizeRobloxSubscriptionUpsellFlowModule (copy)
 	local UseRefResult = ReactModule.useRef((RobloxSubscriptionStoreModule.get()))
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 22 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), Players (upval)
-		return if p1 then p1 else function() --[[ Line: 26 ]]
+		return if p1 then p1 else function()
 			-- upvalues: Players (upval)
 			return Players.LocalPlayer
 		end
 	end, { p1 })
-	ReactModule.useEffect(function() --[[ Line: 31 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy), UseRefResult (copy), PromptStateModule (upval), FinalizeRobloxSubscriptionUpsellFlowModule (upval)
 		local UseMemoResultResult = UseMemoResult()
 		
 		if UseMemoResultResult then
-			local Connection = UseMemoResultResult:GetPropertyChangedSignal("HasRobloxSubscription"):Connect(function() --[[ Line: 37 | Named "onHasRobloxSubscriptionChanged" ]]
+			local Connection = UseMemoResultResult:GetPropertyChangedSignal("HasRobloxSubscription"):Connect(function()
 				-- upvalues: UseMemoResultResult (copy), UseRefResult (upval), PromptStateModule (upval), FinalizeRobloxSubscriptionUpsellFlowModule (upval)
 				if UseMemoResultResult.HasRobloxSubscription ~= true then return end
 				if UseRefResult.current.getPromptState() == PromptStateModule.SubscriptionStatusPolling then
@@ -28,7 +28,7 @@ return function(p1) --[[ Line: 18 | Named "useRobloxSubscriptionChangedListener"
 				end
 			end)
 			
-			return function() --[[ Line: 52 ]]
+			return function()
 				-- upvalues: Connection (copy)
 				if Connection then
 					Connection:Disconnect()

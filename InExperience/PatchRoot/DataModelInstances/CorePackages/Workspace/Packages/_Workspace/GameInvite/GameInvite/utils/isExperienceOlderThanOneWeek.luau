@@ -1,6 +1,6 @@
 ﻿local Workspace = game:GetService("Workspace")
 
-return function(p1): boolean --[[ Line: 7 ]]
+return function(p1): boolean
 	-- upvalues: Workspace (copy)
 	if p1 ~= nil and p1.Created ~= nil then
 		local _DateTime = DateTime.fromIsoDate(p1.Created)

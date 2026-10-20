@@ -6,13 +6,13 @@ local UseViewportBindingModule = require(Graphing.Util.useViewportBinding)
 local UseViewportBindingFunction = UseViewportBindingModule.useViewportBinding
 local UseViewportVisibilityFunction = UseViewportBindingModule.useViewportVisibility
 
-function GridLine(p1) --[[ Line: 38 ]]
+function GridLine(p1)
 	-- upvalues: TypesModule (copy), StyleUtilModule (copy), UseViewportBindingFunction (copy), UseViewportVisibilityFunction (copy), ReactModule (copy)
 	assert(p1.Orientation == TypesModule.ORIENTATION_VERTICAL or p1.Orientation == TypesModule.ORIENTATION_HORIZONTAL, `Invalid orientation {p1.Orientation}`)
 	local _Color3 = p1.Color3 or StyleUtilModule.GRID_LINE_COLOR3
 	local Transparency = p1.Transparency or StyleUtilModule.GRID_LINE_TRANSPARENCY
 	local Thickness = p1.Thickness or StyleUtilModule.GRID_LINE_THICKNESS
-	local UseViewportBindingResult = UseViewportBindingFunction(function(p2) --[[ Line: 48 ]]
+	local UseViewportBindingResult = UseViewportBindingFunction(function(p2)
 		-- upvalues: p1 (copy), TypesModule (upval), Thickness (copy)
 		local PlotToViewXResult = if p1.Orientation == TypesModule.ORIENTATION_VERTICAL then p2.plotToViewX(p1.Position) else p2.plotToViewY(p1.Position)
 		local PlotToViewXResult1 = 0
@@ -44,16 +44,16 @@ function GridLine(p1) --[[ Line: 38 ]]
 		Thickness
 	})
 	
-	return if UseViewportVisibilityFunction(function(p2) --[[ Line: 76 ]]
+	return if UseViewportVisibilityFunction(function(p2)
 		-- upvalues: p1 (copy), TypesModule (upval)
 		return if p1.OppositeAxisBounds then if p1.Orientation == TypesModule.ORIENTATION_VERTICAL then p2.isRectInViewport(Rect.new(p1.Position, p1.OppositeAxisBounds.Min, p1.Position, p1.OppositeAxisBounds.Max)) else p2.isRectInViewport(Rect.new(p1.OppositeAxisBounds.Min, p1.Position, p1.OppositeAxisBounds.Max, p1.Position)) elseif p1.Orientation == TypesModule.ORIENTATION_VERTICAL then p2.isPointInViewportX(p1.Position) else p2.isPointInViewportY(p1.Position)
 	end, { p1.Orientation, p1.Position, p1.OppositeAxisBounds }) then ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		AnchorPoint = Vector2.new(0.5, 0.5),
-		Position = UseViewportBindingResult:map(function(p2) --[[ Line: 98 ]]
+		Position = UseViewportBindingResult:map(function(p2)
 			return p2.position
 		end),
-		Size = UseViewportBindingResult:map(function(p2) --[[ Line: 101 ]]
+		Size = UseViewportBindingResult:map(function(p2)
 			return p2.size
 		end),
 		BackgroundColor3 = _Color3,

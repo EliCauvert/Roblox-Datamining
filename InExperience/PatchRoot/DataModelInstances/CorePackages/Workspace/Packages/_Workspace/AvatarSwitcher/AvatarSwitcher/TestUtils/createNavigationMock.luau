@@ -1,4 +1,4 @@
-﻿return function() --[[ Line: 1 | Named "createNavigationMock" ]]
+﻿return function()
 	return {
 		Enums = {
 			UnifiedLoggingSurface = {

@@ -3,18 +3,18 @@ local _ = require(script.Parent.Parent.ChatSession.sessionDeps)
 local _ = require(script.Parent.Parent.types)
 
 return {
-	createSessionRegistry = function(p1) --[[ Line: 20 ]]
+	createSessionRegistry = function(p1)
 		-- upvalues: CreateChatSessionModule (copy)
 		local t = {}
 		local Keys = {}
 		local Keys1 = {}
 		
-		local function _(p2, p3, p4): string --[[ Line: 45 | Named "projectKey" ]]
+		local function _(p2, p3, p4): string
 			return if typeof(p4) == "string" and p4 ~= "" and (p2 == nil or p3 == nil) then `session:{p4}` elseif p2 == nil or p3 == nil then "anonymous" else `{p2}:{p3}`
 		end
 		
 		return {
-			getSessionForProject = function(p2, p3, Key) --[[ Line: 55 ]]
+			getSessionForProject = function(p2, p3, Key)
 				-- upvalues: Keys (copy), t (copy), Keys1 (copy), CreateChatSessionModule (upval), p1 (copy)
 				local SessionName: string = if typeof(Key) == "string" and Key ~= "" and (p2 == nil or p3 == nil) then `session:{Key}` elseif p2 == nil or p3 == nil then "anonymous" else `{p2}:{p3}`
 				
@@ -41,7 +41,7 @@ return {
 						ingestSessionHistory = p1.ingestSessionHistory,
 						submitToolResult = p1.submitToolResult,
 						getActiveTurnHandle = p1.getActiveTurnHandle,
-						onCasSessionIdChanged = function(Key) --[[ Line: 85 ]]
+						onCasSessionIdChanged = function(Key)
 							-- upvalues: v1 (ref), Keys1 (upval), Keys (upval)
 							if v1 ~= nil then
 								local v2 = v1
@@ -108,7 +108,7 @@ return {
 					return Entry
 				end
 			end,
-			registerCasSession = function(Key, Key1) --[[ Line: 25 ]]
+			registerCasSession = function(Key, Key1)
 				-- upvalues: Keys1 (copy), Keys (copy)
 				if typeof(Key1) ~= "string" or Key1 == "" then return end
 				local Key2 = Keys1[Key]
@@ -124,7 +124,7 @@ return {
 				Keys[Key1] = Key
 				Keys1[Key] = Key1
 			end,
-			getSessionByCasSessionId = function(CasSessionId) --[[ Line: 100 ]]
+			getSessionByCasSessionId = function(CasSessionId)
 				-- upvalues: Keys (copy)
 				local Key = Keys[CasSessionId]
 				

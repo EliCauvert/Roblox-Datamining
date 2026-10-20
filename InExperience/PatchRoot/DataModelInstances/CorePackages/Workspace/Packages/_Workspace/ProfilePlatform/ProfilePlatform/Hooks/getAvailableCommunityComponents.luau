@@ -8,7 +8,7 @@ local FFlagAddCommunityLockedToCommunityProfile = require(Parent.SharedFlags).FF
 local FFlagAddEventsToCommunityProfileModule = require(ProfilePlatform.Flags.FFlagAddEventsToCommunityProfile)
 local FFlagGroupAnnouncementsSdui = require(Parent.SharedFlags).FFlagGroupAnnouncementsSdui
 
-return function() --[[ Line: 13 ]]
+return function()
 	-- upvalues: EnumsModule (copy), GetSupportedActionsForProfileTypeModule (copy), FFlagAddSocialLinksToCommunityProfile (copy), FFlagAddCommunityLockedToCommunityProfile (copy), FFlagAddEventsToCommunityProfileModule (copy), FFlagGroupAnnouncementsSdui (copy)
 	local List = {
 		{

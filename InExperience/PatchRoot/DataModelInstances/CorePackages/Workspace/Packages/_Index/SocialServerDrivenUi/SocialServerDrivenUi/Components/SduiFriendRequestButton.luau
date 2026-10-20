@@ -21,13 +21,13 @@ local FFlagSduiFriendRequestButtonHideForSelfModule = require(SocialServerDriven
 local Small = Enums.InputSize.Small
 local RawValueResult = require(Parent.FriendsNetworking).Enums.FriendshipOriginSourceType.PlayerSearch.rawValue()
 
-return ReactModule.memo(function(p1) --[[ Line: 67 | Named "SduiFriendRequestButton" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseDispatchFunction (copy), SignalsReactModule (copy), FriendsStore (copy), ReactModule (copy), FFlagSduiRequestFriendshipActionHandler (copy), SduiRequestFriendshipActionModule (copy), SduiActionType (copy), RawValueResult (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FriendsStoreChallengeNetworkModule (copy), SetCurrentToastMessageFunction (copy), FFlagSduiSearchPeoplePlayerTileTelemetry (copy), FirePlayerFriendAddTelemetryModule (copy), FFlagSduiFriendRequestButtonHideForSelfModule (copy), GetCurrentUserIdModule (copy), IconButton (copy), Enums (copy), Small (copy)
 	local UserId = p1.userId
 	local UseDispatchResult = UseDispatchFunction()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(FriendsStore.get().GetFriendshipStatus(UserId or "").data)
 	local IsUseSignalStateResultMatch: boolean = UseSignalStateResult == Enum.FriendStatus.FriendRequestSent or UseSignalStateResult == Enum.FriendStatus.FriendRequestReceived
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 82 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: IsUseSignalStateResultMatch (copy), UserId (copy), FFlagSduiRequestFriendshipActionHandler (upval), p1 (copy), SduiRequestFriendshipActionModule (upval), SduiActionType (upval), RawValueResult (upval), FriendsStore (upval), FFlagEnableFriendsStoreChallengeInterceptor (upval), FriendsStoreChallengeNetworkModule (upval), UseDispatchResult (copy), SetCurrentToastMessageFunction (upval), FFlagSduiSearchPeoplePlayerTileTelemetry (upval), FirePlayerFriendAddTelemetryModule (upval)
 		if IsUseSignalStateResultMatch or UserId == nil then return end
 		if FFlagSduiRequestFriendshipActionHandler and p1.sduiContext then
@@ -38,13 +38,13 @@ return ReactModule.memo(function(p1) --[[ Line: 67 | Named "SduiFriendRequestBut
 			
 			return
 		end
-		FriendsStore.get().RequestFriendship(UserId, if typeof(p1.source) == "string" and p1.source ~= "" then p1.source else RawValueResult, nil, if FFlagEnableFriendsStoreChallengeInterceptor then FriendsStoreChallengeNetworkModule else nil):andThen(function() --[[ Line: 106 ]]
+		FriendsStore.get().RequestFriendship(UserId, if typeof(p1.source) == "string" and p1.source ~= "" then p1.source else RawValueResult, nil, if FFlagEnableFriendsStoreChallengeInterceptor then FriendsStoreChallengeNetworkModule else nil):andThen(function()
 			-- upvalues: UseDispatchResult (upval), SetCurrentToastMessageFunction (upval)
 			UseDispatchResult(SetCurrentToastMessageFunction({
 				toastMessage = "Feature.Friends.Action.FriendRequestSent",
 				isLocalized = false
 			}))
-		end):catch(function(_) --[[ Line: 112 ]]
+		end):catch(function(_)
 			-- upvalues: UseDispatchResult (upval), SetCurrentToastMessageFunction (upval)
 			UseDispatchResult(SetCurrentToastMessageFunction({
 				toastMessage = "Feature.Toast.NetworkingError.SomethingIsWrong",

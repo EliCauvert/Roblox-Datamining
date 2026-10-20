@@ -3,7 +3,7 @@ local _ = require(CurrencyTransfers.types)
 local TModule = require(CurrencyTransfers.Parent.t)
 local AcceptTransferModelModule = {}
 
-function AcceptTransferModelModule.new(p1) --[[ Line: 15 ]]
+function AcceptTransferModelModule.new(p1)
 	-- upvalues: AcceptTransferModelModule (copy)
 	assert(AcceptTransferModelModule.isValid(p1))
 	AcceptTransferModelModule.__index = AcceptTransferModelModule
@@ -12,7 +12,7 @@ function AcceptTransferModelModule.new(p1) --[[ Line: 15 ]]
 	return p1
 end
 
-function AcceptTransferModelModule.mock(p1) --[[ Line: 27 ]]
+function AcceptTransferModelModule.mock(p1)
 	-- upvalues: CurrencyTransfers (copy), AcceptTransferModelModule (copy)
 	local P1 = p1 or {}
 	local TransferStatusModule = require(CurrencyTransfers.Enums.TransferStatus)
@@ -41,7 +41,7 @@ function AcceptTransferModelModule.mock(p1) --[[ Line: 27 ]]
 	}))
 end
 
-function AcceptTransferModelModule.format(p1) --[[ Line: 57 ]]
+function AcceptTransferModelModule.format(p1)
 	-- upvalues: CurrencyTransfers (copy), AcceptTransferModelModule (copy)
 	local RobuxTransfer = p1.robuxTransfer or p1.RobuxTransfer
 	local IsIsAlreadyAccepted = if p1.isAlreadyAccepted == nil then p1.IsAlreadyAccepted == true else p1.isAlreadyAccepted

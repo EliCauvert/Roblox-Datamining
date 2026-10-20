@@ -4,7 +4,7 @@ local AnimatedFrame = require(Parent.UIBlox).Utility.SpringAnimatedItem.Animated
 local DashModule = require(Parent.Dash)
 local SpringOptions = { dampingRatio = 1, frequency = 3.5 }
 
-local function ExpandingFrame(Frame) --[[ Line: 38 ]]
+local function ExpandingFrame(Frame)
 	-- upvalues: ReactModule (copy), AnimatedFrame (copy), SpringOptions (copy)
 	return ReactModule.createElement(AnimatedFrame, {
 		regularProps = {
@@ -23,7 +23,7 @@ local function ExpandingFrame(Frame) --[[ Line: 38 ]]
 			yOffset = if Frame.isExpanded then Frame.Size.Y.Offset else 0,
 			yScale = if Frame.isExpanded then Frame.Size.Y.Scale else 0
 		},
-		mapValuesToProps = function(p1) --[[ Line: 58 ]]
+		mapValuesToProps = function(p1)
 			-- upvalues: Frame (copy)
 			return {
 				Size = UDim2.new(Frame.Size.X.Scale, Frame.Size.X.Offset, p1.yScale, p1.yOffset)
@@ -33,7 +33,7 @@ local function ExpandingFrame(Frame) --[[ Line: 38 ]]
 	}, Frame.children)
 end
 
-return ReactModule.forwardRef(function(p1, FrameRef) --[[ Line: 68 ]]
+return ReactModule.forwardRef(function(p1, FrameRef)
 	-- upvalues: ReactModule (copy), ExpandingFrame (copy), DashModule (copy)
 	return ReactModule.createElement(ExpandingFrame, DashModule.join(p1, { frameRef = FrameRef }))
 end)

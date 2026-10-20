@@ -3,7 +3,7 @@ local TypeRegistryModule = require(script.Parent.Parent.Parent.proto.typeRegistr
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 41 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		seconds = if p1 == nil or p1.seconds == nil then 0 else p1.seconds,
@@ -11,7 +11,7 @@ function Module.new(p1) --[[ Line: 41 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 48 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -30,7 +30,7 @@ function Module:encode() --[[ Line: 48 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 67 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -63,11 +63,11 @@ function Module.decode(Buf) --[[ Line: 67 ]]
 	return NewModule
 end
 
-local function serializeFractionalNanos(Nanos: number): string --[[ Line: 115 ]]
+local function serializeFractionalNanos(Nanos: number): string
 	return if Nanos % 1000000 == 0 then string.format(".%03d", Nanos) elseif Nanos % 1000 == 0 then string.format(".%06d", Nanos) else string.format(".%09d", Nanos)
 end
 
-local function _(p1) --[[ Line: 125 | Named "deserializeFractionalNanos" ]]
+local function _(p1)
 	local InvalidNanosStringReceivedCouldnTTurnIntoANumber = assert(tonumber(p1), "Invalid nanos string received, couldn't turn into a number")
 	
 	for i = #p1 + 1, 9 do
@@ -76,7 +76,7 @@ local function _(p1) --[[ Line: 125 | Named "deserializeFractionalNanos" ]]
 	return InvalidNanosStringReceivedCouldnTTurnIntoANumber
 end
 
-function Module:jsonEncode(): string --[[ Line: 134 ]]
+function Module:jsonEncode(): string
 	-- upvalues: serializeFractionalNanos (copy)
 	if self.seconds > 253402300799 then
 		error("Invalid timestamp provided: years after 9999 are not supported")
@@ -92,7 +92,7 @@ function Module:jsonEncode(): string --[[ Line: 134 ]]
 	return string.format("%04d-%02d-%02dT%02d:%02d:%02d%sZ", DateInfo.year, DateInfo.month, DateInfo.day, DateInfo.hour, DateInfo.min, DateInfo.sec, if self.nanos == 0 then "" else serializeFractionalNanos(self.nanos))
 end
 
-function Module.jsonDecode(Text: string) --[[ Line: 160 ]]
+function Module.jsonDecode(Text: string)
 	-- upvalues: Module (copy)
 	local Match, Match2, Match3, Match4, Match5, Match6, Match7 = string.match(Text, "^([0-9]+)-([0-9]+)-([0-9]+)T([0-9]+):([0-9]+):([0-9]+)(.*)Z$")
 	

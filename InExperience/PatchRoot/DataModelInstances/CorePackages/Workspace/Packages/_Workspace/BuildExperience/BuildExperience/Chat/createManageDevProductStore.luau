@@ -3,7 +3,7 @@ local DeveloperProductModule = require(Parent.DataHydration.DeveloperProduct)
 local HttpClientModule = require(Parent.HttpClient)
 local CreateManageDevProductNetworkModule = require(script.Parent.createManageDevProductNetwork)
 
-return function() --[[ Line: 10 | Named "createManageDevProductStore" ]]
+return function()
 	-- upvalues: DeveloperProductModule (copy), CreateManageDevProductNetworkModule (copy), HttpClientModule (copy)
 	return DeveloperProductModule.createDeveloperProductStore({
 		network = CreateManageDevProductNetworkModule(HttpClientModule.createRequestInternalNetwork())

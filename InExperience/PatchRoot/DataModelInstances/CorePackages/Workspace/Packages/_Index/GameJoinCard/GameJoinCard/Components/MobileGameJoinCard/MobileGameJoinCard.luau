@@ -47,7 +47,7 @@ local _ = require(GameJoinCard.Components.Actions.Types)
 local BuildJoinCardActionsComponentModule = require(GameJoinCard.Components.Actions.buildJoinCardActionsComponent)
 local UserCtaAction = require(Parent.UserCtaCommon).Enums.UserCtaAction
 
-return function(p1) --[[ Line: 94 | Named "MobileGameJoinCard" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FFlagMobileGameJoinCardThumbnailModule (copy), FoundationModule (copy), GuiService (copy), FFlagMobileGameJoinCardGamepadSupport (copy), UseGameJoinCardGamepadNavigationFunction (ref), FFlagGameJoinCardOptionalActions (copy), GameJoinCardTTIModule (copy), ViewProfileSourceValues (copy), FFlagMobileGameJoinCardEDPFromThumbnailModule (copy), ViewEDPsourceValues (copy), FFlagMobileGameJoinCardEDPFromTitleModule (copy), FFlagJoinabilityCTARefactor (copy), UserCtaAction (copy), UseJoinCardCtaLoadTimeModule (copy), CtaType (copy), UseLocalizationFunction (copy), Skeleton (copy), AssignPrimaryFocusRefFunction (ref), BuildJoinCardActionsComponentModule (copy), Button (copy), OverlayProvider (copy), Sheet (copy), View (copy), MobileGameJoinCardHideUserAvatar (copy), Image (copy), StateLayerAffordance (copy), MobileGameJoinCardShowExperienceNameOnly (copy), Text (copy), UserTile (copy), LayoutMode (copy), AgeCheckUpsellCTAModule (copy), ButtonVariant (copy), InputSize (copy), MobileGameCardDontShowChatWith (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
@@ -65,7 +65,7 @@ return function(p1) --[[ Line: 94 | Named "MobileGameJoinCard" ]]
 	local UseGameJoinCardGamepadNavigationResult = if FFlagMobileGameJoinCardGamepadSupport then UseGameJoinCardGamepadNavigationFunction(p1.onClose, p1.isNavigationFocused ~= false) else nil
 	local RootRef = if UseGameJoinCardGamepadNavigationResult then UseGameJoinCardGamepadNavigationResult.rootRef else nil
 	local PrimaryButtonFocusRef = if UseGameJoinCardGamepadNavigationResult then UseGameJoinCardGamepadNavigationResult.primaryButtonFocusRef else nil
-	local UseResult = ReactModule.useCallback(function(AssetFetchStatus) --[[ Line: 115 ]]
+	local UseResult = ReactModule.useCallback(function(AssetFetchStatus)
 		-- upvalues: UseStateResult2 (copy), FFlagGameJoinCardOptionalActions (upval), p1 (copy), GameJoinCardTTIModule (upval)
 		if AssetFetchStatus == Enum.AssetFetchStatus.Success then
 			UseStateResult2(true)
@@ -76,7 +76,7 @@ return function(p1) --[[ Line: 94 | Named "MobileGameJoinCard" ]]
 	end, {
 		if FFlagGameJoinCardOptionalActions then p1.disableAppTelemetry else nil
 	})
-	local UseResult1 = if FFlagMobileGameJoinCardThumbnailModule then ReactModule.useCallback(function(AssetFetchStatus) --[[ Line: 126 ]]
+	local UseResult1 = if FFlagMobileGameJoinCardThumbnailModule then ReactModule.useCallback(function(AssetFetchStatus)
 		-- upvalues: Callback (ref)
 		if AssetFetchStatus == Enum.AssetFetchStatus.Success then
 			Callback(true)
@@ -84,7 +84,7 @@ return function(p1) --[[ Line: 94 | Named "MobileGameJoinCard" ]]
 	end, {}) else nil
 	local NoUseStateResult: boolean = FFlagMobileGameJoinCardThumbnailModule and (ThumbnailImageUrl ~= nil and not UseStateResult)
 	local NoV42: boolean = if FFlagMobileGameJoinCardThumbnailModule then not UseStateResult and not v1 else not UseStateResult
-	ReactModule.useEffect(function() --[[ Line: 137 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagGameJoinCardOptionalActions (upval), p1 (copy), GameJoinCardTTIModule (upval)
 		if not FFlagGameJoinCardOptionalActions or not p1.disableAppTelemetry then
 			GameJoinCardTTIModule.trackCardMounted()
@@ -94,7 +94,7 @@ return function(p1) --[[ Line: 94 | Named "MobileGameJoinCard" ]]
 	end, {
 		if FFlagGameJoinCardOptionalActions then p1.disableAppTelemetry else nil
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 144 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: FFlagGameJoinCardOptionalActions (upval), p1 (copy), ViewProfileSourceValues (upval)
 		if not FFlagGameJoinCardOptionalActions or p1.onViewProfile ~= nil then
 			p1.onViewProfile(ViewProfileSourceValues.UserTile)
@@ -102,7 +102,7 @@ return function(p1) --[[ Line: 94 | Named "MobileGameJoinCard" ]]
 			return
 		end
 	end, { p1 })
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 151 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: FFlagGameJoinCardOptionalActions (upval), p1 (copy), ViewProfileSourceValues (upval)
 		if not FFlagGameJoinCardOptionalActions or p1.onViewProfile ~= nil then
 			p1.onViewProfile(ViewProfileSourceValues.ViewProfileButton)
@@ -110,7 +110,7 @@ return function(p1) --[[ Line: 94 | Named "MobileGameJoinCard" ]]
 			return
 		end
 	end, { p1 })
-	local UseResult4 = if FFlagMobileGameJoinCardEDPFromThumbnailModule then ReactModule.useCallback(function() --[[ Line: 159 ]]
+	local UseResult4 = if FFlagMobileGameJoinCardEDPFromThumbnailModule then ReactModule.useCallback(function()
 		-- upvalues: FFlagGameJoinCardOptionalActions (upval), p1 (copy), ViewEDPsourceValues (upval)
 		if not FFlagGameJoinCardOptionalActions or p1.onViewExperienceDetails ~= nil then
 			p1.onViewExperienceDetails(ViewEDPsourceValues.Thumbnail)
@@ -118,7 +118,7 @@ return function(p1) --[[ Line: 94 | Named "MobileGameJoinCard" ]]
 			return
 		end
 	end, { p1.onViewExperienceDetails }) else nil
-	local UseResult5 = if FFlagMobileGameJoinCardEDPFromTitleModule then ReactModule.useCallback(function() --[[ Line: 168 ]]
+	local UseResult5 = if FFlagMobileGameJoinCardEDPFromTitleModule then ReactModule.useCallback(function()
 		-- upvalues: FFlagGameJoinCardOptionalActions (upval), p1 (copy), ViewEDPsourceValues (upval)
 		if not FFlagGameJoinCardOptionalActions or p1.onViewExperienceDetails ~= nil then
 			p1.onViewExperienceDetails(ViewEDPsourceValues.Title)
@@ -181,12 +181,12 @@ return function(p1) --[[ Line: 94 | Named "MobileGameJoinCard" ]]
 				playTogether = UseLocalizationResult.playTogether,
 				playTogetherSoon = UseLocalizationResult.playTogetherSoon,
 				differentServer = UseLocalizationResult.differentServer
-			}, p1.onClose, function(p2, LayoutOrder) --[[ Line: 243 ]]
+			}, p1.onClose, function(p2, LayoutOrder)
 				-- upvalues: ReactModule (upval), Button (upval)
 				return ReactModule.createElement(Button, {
 					ref = p2.focusRef,
 					text = p2.text,
-					onActivated = function() --[[ Line: 247 ]]
+					onActivated = function()
 						-- upvalues: p2 (copy)
 						p2.onActivated()
 					end,
@@ -312,7 +312,7 @@ return function(p1) --[[ Line: 94 | Named "MobileGameJoinCard" ]]
 						}, if FFlagJoinabilityCTARefactor then t else {
 							PrimaryButton = if Flag1 then ReactModule.createElement(AgeCheckUpsellCTAModule, {
 								LayoutOrder = 1,
-								onUnlockPressed = p1.onAgeCheckPressed or function() --[[ Line: 443 ]] end,
+								onUnlockPressed = p1.onAgeCheckPressed or function() end,
 								focusRef = if FFlagMobileGameJoinCardGamepadSupport then PrimaryButtonFocusRef else nil
 							}) else ReactModule.createElement(Button, {
 								LayoutOrder = 1,

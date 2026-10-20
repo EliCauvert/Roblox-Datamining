@@ -16,7 +16,7 @@ local StrictInterfaceResult = T.strictInterface({
 	LayoutOrder = T.integer
 })
 
-local function renderHorizontalSpacer(Text, LayoutOrder, p1) --[[ Line: 30 ]]
+local function renderHorizontalSpacer(Text, LayoutOrder, p1)
 	-- upvalues: Roact (copy), ThemedTextLabelModule (copy)
 	return Roact.createElement(ThemedTextLabelModule, {
 		themeKey = "TextEmphasis",
@@ -28,7 +28,7 @@ local function renderHorizontalSpacer(Text, LayoutOrder, p1) --[[ Line: 30 ]]
 	})
 end
 
-local function renderKey(Input, LayoutOrder) --[[ Line: 44 ]]
+local function renderKey(Input, LayoutOrder)
 	-- upvalues: Roact (copy), KeyLabel (copy), PointerLabelModule (copy)
 	return if Input.EnumType == Enum.KeyCode then Roact.createElement(KeyLabel, {
 		textThemeKey = "TextEmphasis",
@@ -37,7 +37,7 @@ local function renderKey(Input, LayoutOrder) --[[ Line: 44 ]]
 	}) else Roact.createElement(PointerLabelModule, { input = Input, LayoutOrder = LayoutOrder })
 end
 
-local function renderInputIconContainer(Inputs, IsList) --[[ Line: 60 ]]
+local function renderInputIconContainer(Inputs, IsList)
 	-- upvalues: Roact (copy), renderKey (copy), renderHorizontalSpacer (copy), ThemedTextLabelModule (copy)
 	local Elements = {
 		ListLayout = Roact.createElement("UIListLayout", {
@@ -96,12 +96,12 @@ local function renderInputIconContainer(Inputs, IsList) --[[ Line: 60 ]]
 	}, Elements)
 end
 
-return function(Frame) --[[ Line: 115 | Named "ControlEntry" ]]
+return function(Frame)
 	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), WithLocalizationModule (copy), Roact (copy), ThemedTextLabelModule (copy), DividerModule (copy), renderInputIconContainer (copy)
 	if GlobalConfigModule.propValidation then
 		assert(StrictInterfaceResult(Frame))
 	end
-	return WithLocalizationModule({ actionDescription = Frame.actionDescription })(function(p1) --[[ Line: 122 ]]
+	return WithLocalizationModule({ actionDescription = Frame.actionDescription })(function(p1)
 		-- upvalues: Roact (upval), Frame (copy), ThemedTextLabelModule (upval), DividerModule (upval), renderInputIconContainer (upval)
 		return Roact.createElement("Frame", {
 			BackgroundTransparency = 1,

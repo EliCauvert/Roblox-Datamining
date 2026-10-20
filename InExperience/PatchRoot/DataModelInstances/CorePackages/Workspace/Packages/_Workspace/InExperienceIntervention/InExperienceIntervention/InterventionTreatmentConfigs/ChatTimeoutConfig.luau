@@ -8,19 +8,19 @@ local InExperienceInterventionAnalyticsModule = require(InExperienceIntervention
 
 return {
 	configName = "ChatTimeout",
-	shouldTriggerVisualTreatment = function(p1): boolean --[[ Line: 14 ]]
+	shouldTriggerVisualTreatment = function(p1): boolean
 		-- upvalues: Constants (copy)
 		return p1.type == Constants.NotificationDialogType.ChatTimeout and p1.abuseVector == Constants.AbuseVectorType.ExperienceChat and not p1.acknowledgeable
 	end,
-	shouldTriggerBehavioralTreatment = function(p1): boolean --[[ Line: 19 ]]
+	shouldTriggerBehavioralTreatment = function(p1): boolean
 		-- upvalues: Constants (copy)
 		return p1.type == Constants.NotificationDialogType.ChatTimeout and p1.abuseVector == Constants.AbuseVectorType.ExperienceChat
 	end,
-	shouldTriggerEventReceived = function(p1): boolean --[[ Line: 23 ]]
+	shouldTriggerEventReceived = function(p1): boolean
 		-- upvalues: Constants (copy)
 		return p1.type == Constants.NotificationDialogType.ChatTimeout and p1.abuseVector == Constants.AbuseVectorType.ExperienceChat
 	end,
-	onTriggerVisualTreatment = function(Callback: (any) -> (), Detail) --[[ Line: 27 ]]
+	onTriggerVisualTreatment = function(Callback: (any) -> (), Detail)
 		-- upvalues: Constants (copy), FFlagExpChatDictationStopOnSafetyIntervention (copy), ExperienceChatInterventionShownSignal (copy)
 		Callback({
 			isShown = true,
@@ -33,8 +33,8 @@ return {
 			ExperienceChatInterventionShownSignal:fire()
 		end
 	end,
-	onTriggerBehavioralTreatment = function(_) --[[ Line: 38 ]] end,
-	onTriggerEventReceived = function(p1) --[[ Line: 41 ]]
+	onTriggerBehavioralTreatment = function(_) end,
+	onTriggerEventReceived = function(p1)
 		-- upvalues: InExperienceInterventionAnalyticsModule (copy)
 		InExperienceInterventionAnalyticsModule.sendAnalyticsEvent(InExperienceInterventionAnalyticsModule.Constants.EventTypes.ModalMessageReceived, InExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Timeout, DateTime.now().UnixTimestampMillis, p1.decisionEventId, p1.evidence, p1.timeoutDurationSeconds)
 	end

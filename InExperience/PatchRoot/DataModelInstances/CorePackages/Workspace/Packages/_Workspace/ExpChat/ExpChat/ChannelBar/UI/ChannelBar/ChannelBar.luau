@@ -29,7 +29,7 @@ local _Color3_1 = Color3.fromRGB(100, 100, 100)
 local ExpChatTabNavFocusPollDelayFrames = game:DefineFastInt("ExpChatTabNavFocusPollDelayFrames", 3)
 local ExpChatTabNavFocusPollFrames = game:DefineFastInt("ExpChatTabNavFocusPollFrames", 4)
 
-local function _(List): number --[[ Line: 90 | Named "countAllChannelTabs" ]]
+local function _(List): number
 	local Count = 0
 	
 	for _ in pairs(List) do
@@ -38,14 +38,14 @@ local function _(List): number --[[ Line: 90 | Named "countAllChannelTabs" ]]
 	return Count
 end
 
-local function setTransparency(p1, TransparencyValue) --[[ Line: 98 ]]
-	return TransparencyValue:map(function(p2): number --[[ Line: 99 ]]
+local function setTransparency(p1, TransparencyValue)
+	return TransparencyValue:map(function(p2): number
 		-- upvalues: p1 (copy)
 		return if p1 == nil then 1 else p1 + p2 * (1 - p1)
 	end)
 end
 
-return function(p1) --[[ Line: 104 | Named "ChannelBar" ]]
+return function(p1)
 	-- upvalues: ConfigModule (copy), ReactModule (copy), SignalsReactModule (copy), GetChatLayoutStoreModule (copy), v1 (copy), ReactFocusNavigationModule (copy), UseSelectionCursorFunction (copy), CursorKind (copy), FFlagExpChatTabShortcutNav (copy), UserInputService (copy), CreateEffectFunction (copy), FFlagExpChatUseChannelTabsStore (copy), ExpChatTabNavFocusPollDelayFrames (copy), RunService (copy), ExpChatTabNavFocusPollFrames (copy), FFlagExpChatEnableFriendsTab (copy), ChannelTabModule (copy), ExpChatPerfTracker (copy), FFlagExpChatPerfTrackerTabName (copy), Analytics (copy), JoinResult (copy), setTransparency (copy), TextChatService (copy), UseInterpolatedClientSettingsModule (copy), _Color3_1 (copy), ImageSetLabel (copy), IconsNavigationCycleDown (copy), _Color3 (copy)
 	local Count = 0
 	
@@ -84,37 +84,37 @@ return function(p1) --[[ Line: 104 | Named "ChannelBar" ]]
 	local Floored = if IsUseSignalStateResultBelow then math.floor((UseSignalStateResult2 - ConfigModule.ChannelTabsSettings.DropdownIconContainerWidth) / ConfigModule.ChannelTabsSettings.MinTabWidth) else Count1 or math.floor((UseSignalStateResult2 - ConfigModule.ChannelTabsSettings.DropdownIconContainerWidth) / ConfigModule.ChannelTabsSettings.MinTabWidth)
 	local XOffset = (UseSignalStateResult2 - (IsUseSignalStateResultBelow and ConfigModule.ChannelTabsSettings.DropdownIconContainerWidth or 0)) / Floored
 	local YOffset = (Count1 - Floored) * 40
-	ReactModule.useEffect(function() --[[ Line: 153 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagExpChatTabShortcutNav (upval), v1 (upval), p1 (copy)
 		if not FFlagExpChatTabShortcutNav then return end
 		v1.setTabBarVisible(p1.visible)
 		
-		return function() --[[ Line: 158 ]]
+		return function()
 			-- upvalues: v1 (upval)
 			v1.setTabBarVisible(false)
 		end
 	end, { p1.visible })
-	ReactModule.useEffect(function() --[[ Line: 163 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagExpChatTabShortcutNav (upval), v1 (upval), v2 (ref)
 		if not FFlagExpChatTabShortcutNav then return end
 		v1.setTabBarRoot(v2)
 		
-		return function() --[[ Line: 168 ]]
+		return function()
 			-- upvalues: v1 (upval)
 			v1.setTabBarRoot(nil)
 		end
 	end, { v2 })
 	
-	local function _(): boolean --[[ Line: 173 | Named "somethingElseHoldsFocus" ]]
+	local function _(): boolean
 		-- upvalues: v1 (upval), UserInputService (upval)
 		return v1.getIsChatFocused() and not v1.getIsTabBarFocused() or UserInputService:GetFocusedTextBox() ~= nil
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 182 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagExpChatTabShortcutNav (upval), CreateEffectFunction (upval), v1 (upval), p1 (copy), FFlagExpChatUseChannelTabsStore (upval), UseStateResult2_1 (copy), Floored (copy), ExpChatTabNavFocusPollDelayFrames (upval), RunService (upval), ExpChatTabNavFocusPollFrames (upval), UserInputService (upval), Callback (ref)
 		if not FFlagExpChatTabShortcutNav then return end
 		local Flag = false
-		local Effect = CreateEffectFunction(function(p2) --[[ Line: 188 ]]
+		local Effect = CreateEffectFunction(function(p2)
 			-- upvalues: v1 (upval), p1 (upval), FFlagExpChatUseChannelTabsStore (upval), UseStateResult2_1 (upval), Floored (upval), Flag (ref), ExpChatTabNavFocusPollDelayFrames (upval), RunService (upval), ExpChatTabNavFocusPollFrames (upval), UserInputService (upval), Callback (upval)
 			local TabNavFocusRequestTime = v1.getTabNavFocusRequestTime(p2)
 			local TabNavFocusTabName = v1.getTabNavFocusTabName(p2)
@@ -129,12 +129,12 @@ return function(p1) --[[ Line: 104 | Named "ChannelBar" ]]
 			else
 				UseStateResult2_1(Floored < (if FFlagExpChatUseChannelTabsStore then AllChannelTab.tabIndex else AllChannelTab.TabIndex))
 				
-				local function _() --[[ Line: 211 | Named "superseded" ]]
+				local function _()
 					-- upvalues: Flag (upval), v1 (upval), TabNavFocusRequestTime (copy)
 					return Flag or v1.getTabNavFocusRequestTime(false) ~= TabNavFocusRequestTime
 				end
 				
-				task.spawn(function() --[[ Line: 219 ]]
+				task.spawn(function()
 					-- upvalues: ExpChatTabNavFocusPollDelayFrames (upval), RunService (upval), Flag (upval), v1 (upval), TabNavFocusRequestTime (copy), ExpChatTabNavFocusPollFrames (upval), UserInputService (upval), Callback (upval), TabNavFocusTabName (copy)
 					for _ = 1, ExpChatTabNavFocusPollDelayFrames do
 						RunService.Heartbeat:Wait()
@@ -160,13 +160,13 @@ return function(p1) --[[ Line: 104 | Named "ChannelBar" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 244 ]]
+		return function()
 			-- upvalues: Flag (ref), Effect (copy)
 			Flag = true
 			Effect()
 		end
 	end, { Floored, p1.allChannelTabs })
-	ReactModule.useEffect(function() --[[ Line: 253 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagExpChatTabShortcutNav (upval), v4 (ref), v1 (upval), UserInputService (upval), Callback (ref), UseRefResult1 (copy), UseFocusGuiObjectResult (copy), p1 (copy)
 		if not FFlagExpChatTabShortcutNav or v4 == nil then return end
 		if v1.getIsChatFocused() and not v1.getIsTabBarFocused() or UserInputService:GetFocusedTextBox() ~= nil then
@@ -191,7 +191,7 @@ return function(p1) --[[ Line: 104 | Named "ChannelBar" ]]
 		p1.allChannelTabs,
 		UseFocusGuiObjectResult
 	})
-	local UseMemoResult = ReactModule.useMemo(function(): boolean --[[ Line: 274 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): boolean
 		-- upvalues: p1 (copy), FFlagExpChatUseChannelTabsStore (upval), Floored (copy)
 		for _, allChannelTab in pairs(p1.allChannelTabs) do
 			if Floored < (if FFlagExpChatUseChannelTabsStore then allChannelTab.tabIndex else allChannelTab.TabIndex) and allChannelTab.HasUnreadMessages then
@@ -230,11 +230,11 @@ return function(p1) --[[ Line: 104 | Named "ChannelBar" ]]
 			tabIndex = TabIndex,
 			isTabVisibleToUser = IsTabIndexBelow or UseStateResult1,
 			isLayoutReady = UseStateResult4,
-			tabRef = if FFlagExpChatTabShortcutNav then function(p3) --[[ Line: 317 ]]
+			tabRef = if FFlagExpChatTabShortcutNav then function(p3)
 				-- upvalues: UseRefResult1 (copy), ChannelName (copy)
 				UseRefResult1.current[ChannelName] = p3
 			end else nil,
-			onTabSelected = function() --[[ Line: 321 ]]
+			onTabSelected = function()
 				-- upvalues: ExpChatPerfTracker (upval), ChannelName (copy), FFlagExpChatPerfTrackerTabName (upval), IsTabIndexBelow (copy), UseSignalStateResult1 (copy), UseRefResult (copy), UseFocusGuiObjectResult (copy), Analytics (upval), Type (copy), TabIndex (copy), allChannelTab (copy), p1 (copy), JoinResult (upval), AllTextChannel (copy), UseStateResult2_1 (copy)
 				ExpChatPerfTracker.cancelAll()
 				ExpChatPerfTracker.start(ExpChatPerfTracker.Events.ChatWindowTabSwitchTTI, { tabId = ChannelName }, if FFlagExpChatPerfTrackerTabName then { tabName = ChannelName } else nil)
@@ -253,7 +253,7 @@ return function(p1) --[[ Line: 104 | Named "ChannelBar" ]]
 				p1.onTabSelected(AllTextChannel, not IsTabIndexBelow, ChannelName, Type)
 				UseStateResult2_1(false)
 			end,
-			setTransparency = function(p3) --[[ Line: 341 ]]
+			setTransparency = function(p3)
 				-- upvalues: setTransparency (upval), p1 (copy)
 				return setTransparency(p3, p1.transparencyValue)
 			end
@@ -289,7 +289,7 @@ return function(p1) --[[ Line: 104 | Named "ChannelBar" ]]
 		ref = if FFlagExpChatTabShortcutNav then v3 else nil,
 		[ReactModule.Event.MouseEnter] = p1.onHovered,
 		[ReactModule.Event.MouseLeave] = p1.onUnhovered,
-		[ReactModule.Change.AbsoluteSize] = function(Frame: Frame) --[[ Line: 380 ]]
+		[ReactModule.Change.AbsoluteSize] = function(Frame: Frame)
 			-- upvalues: UseStateResult2_2 (copy), UseStateResult2_3 (ref), ChannelTabsConfiguration (copy)
 			UseStateResult2_2(Frame.AbsoluteSize.X)
 			UseStateResult2_3(true)
@@ -298,7 +298,7 @@ return function(p1) --[[ Line: 104 | Named "ChannelBar" ]]
 				ChannelTabsConfiguration:SetAbsoluteSize(Frame.AbsoluteSize)
 			end
 		end,
-		[ReactModule.Change.AbsolutePosition] = function(Frame) --[[ Line: 387 ]]
+		[ReactModule.Change.AbsolutePosition] = function(Frame)
 			-- upvalues: ChannelTabsConfiguration (copy)
 			if ChannelTabsConfiguration then
 				ChannelTabsConfiguration:SetAbsolutePosition(Frame.AbsolutePosition)
@@ -324,7 +324,7 @@ return function(p1) --[[ Line: 104 | Named "ChannelBar" ]]
 				BorderSizePixel = 0,
 				Selectable = true,
 				ImageColor3 = BackgroundColor3,
-				ImageTransparency = p1.transparencyValue:map(function(p3): number --[[ Line: 99 ]]
+				ImageTransparency = p1.transparencyValue:map(function(p3): number
 					-- upvalues: BackgroundTransparency (copy)
 					return if BackgroundTransparency == nil then 1 else BackgroundTransparency + p3 * (1 - BackgroundTransparency)
 				end),
@@ -339,7 +339,7 @@ return function(p1) --[[ Line: 104 | Named "ChannelBar" ]]
 				Size = UDim2.new(1, 0, 0, 1),
 				Position = UDim2.new(0, 0, 1, -1),
 				BackgroundColor3 = ConfigModule.ChannelTabsSettings.BorderColor3,
-				BackgroundTransparency = p1.transparencyValue:map(function(p3): number --[[ Line: 99 ]]
+				BackgroundTransparency = p1.transparencyValue:map(function(p3): number
 					-- upvalues: BorderTransparency (copy)
 					return if BorderTransparency == nil then 1 else BorderTransparency + p3 * (1 - BorderTransparency)
 				end)
@@ -349,7 +349,7 @@ return function(p1) --[[ Line: 104 | Named "ChannelBar" ]]
 				Size = UDim2.new(1, 0, 0, ConfigModule.ChannelTabsSettings.HorizontalBarHeight - 8 - 1),
 				Position = UDim2.new(0, 0, 0, 8),
 				BackgroundColor3 = BackgroundColor3,
-				BackgroundTransparency = p1.transparencyValue:map(function(p3): number --[[ Line: 99 ]]
+				BackgroundTransparency = p1.transparencyValue:map(function(p3): number
 					-- upvalues: BackgroundTransparency (copy)
 					return if BackgroundTransparency == nil then 1 else BackgroundTransparency + p3 * (1 - BackgroundTransparency)
 				end)
@@ -376,7 +376,7 @@ return function(p1) --[[ Line: 104 | Named "ChannelBar" ]]
 				AnchorPoint = Vector2.new(1, 0.5),
 				Position = UDim2.new(1, -ConfigModule.ChannelTabsSettings.DropdownIconPadding / 2, 0.5, -4),
 				Size = UDim2.new(0, 27, 0, 27),
-				BackgroundTransparency = p1.transparencyValue:map(function(p3): number --[[ Line: 99 ]]
+				BackgroundTransparency = p1.transparencyValue:map(function(p3): number
 					-- upvalues: v7 (copy)
 					return if v7 == nil then 1 else v7 + p3 * (1 - v7)
 				end),
@@ -386,15 +386,15 @@ return function(p1) --[[ Line: 104 | Named "ChannelBar" ]]
 				Selectable = true,
 				SelectionImageObject = UseSelectionCursorResult1,
 				ref = UseRefResult,
-				[ReactModule.Event.MouseEnter] = function() --[[ Line: 464 ]]
+				[ReactModule.Event.MouseEnter] = function()
 					-- upvalues: UseStateResult2 (copy)
 					UseStateResult2(true)
 				end,
-				[ReactModule.Event.MouseLeave] = function() --[[ Line: 467 ]]
+				[ReactModule.Event.MouseLeave] = function()
 					-- upvalues: UseStateResult2 (copy)
 					UseStateResult2(false)
 				end,
-				[ReactModule.Event.Activated] = function() --[[ Line: 470 ]]
+				[ReactModule.Event.Activated] = function()
 					-- upvalues: UseStateResult2_1 (copy), UseStateResult1 (copy)
 					UseStateResult2_1(not UseStateResult1)
 				end
@@ -408,7 +408,7 @@ return function(p1) --[[ Line: 104 | Named "ChannelBar" ]]
 					Size = UDim2.fromScale(0.6, 0.6),
 					Image = IconsNavigationCycleDown,
 					ImageColor3 = _Color3,
-					ImageTransparency = p1.transparencyValue:map(function(p3): number --[[ Line: 99 ]]
+					ImageTransparency = p1.transparencyValue:map(function(p3): number
 						-- upvalues: v8 (copy)
 						return if v8 == nil then 1 else v8 + p3 * (1 - v8)
 					end),
@@ -426,7 +426,7 @@ return function(p1) --[[ Line: 104 | Named "ChannelBar" ]]
 				Position = UDim2.new(0, 18, 0.5, -4),
 				AnchorPoint = Vector2.new(1, 0.5),
 				BackgroundColor3 = ConfigModule.ChannelTabsSettings.UnreadDotColor3,
-				BackgroundTransparency = p1.transparencyValue:map(function(p3): number --[[ Line: 99 ]]
+				BackgroundTransparency = p1.transparencyValue:map(function(p3): number
 					-- upvalues: v9 (copy)
 					return if v9 == nil then 1 else v9 + p3 * (1 - v9)
 				end)
@@ -443,7 +443,7 @@ return function(p1) --[[ Line: 104 | Named "ChannelBar" ]]
 	if Frame1 then
 		local BorderTransparency1 = ConfigModule.ChannelTabsSettings.BorderTransparency
 		local v10 = 0
-		local MapResult = p1.transparencyValue:map(function(p3): number --[[ Line: 99 ]]
+		local MapResult = p1.transparencyValue:map(function(p3): number
 			-- upvalues: v10 (copy)
 			return if v10 == nil then 1 else v10 + p3 * (1 - v10)
 		end)
@@ -459,7 +459,7 @@ return function(p1) --[[ Line: 104 | Named "ChannelBar" ]]
 			Border = ReactModule.createElement("UIStroke", {
 				ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
 				Color = ConfigModule.ChannelTabsSettings.BorderColor3,
-				Transparency = p1.transparencyValue:map(function(p3): number --[[ Line: 99 ]]
+				Transparency = p1.transparencyValue:map(function(p3): number
 					-- upvalues: BorderTransparency1 (copy)
 					return if BorderTransparency1 == nil then 1 else BorderTransparency1 + p3 * (1 - BorderTransparency1)
 				end)
@@ -472,7 +472,7 @@ return function(p1) --[[ Line: 104 | Named "ChannelBar" ]]
 				Size = UDim2.fromScale(1, 1),
 				CanvasSize = UDim2.new(0, 150, 0, YOffset),
 				BackgroundTransparency = MapResult,
-				ScrollBarImageTransparency = p1.transparencyValue:map(function(p3): number --[[ Line: 99 ]]
+				ScrollBarImageTransparency = p1.transparencyValue:map(function(p3): number
 					-- upvalues: v11 (copy)
 					return if v11 == nil then 1 else v11 + p3 * (1 - v11)
 				end),

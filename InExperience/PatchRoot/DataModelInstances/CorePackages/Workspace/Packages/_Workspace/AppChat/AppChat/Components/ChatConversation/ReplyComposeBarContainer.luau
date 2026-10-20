@@ -22,10 +22,10 @@ local config = {
 	unknownUserKey = "Feature.Chat.Label.UnknownUser",
 	replyingToYourselfKey = "Feature.Chat.Label.ReplyingToYourself",
 	replyingToOthersKey = "Feature.Chat.Label.ReplyingToOthers",
-	close = function() --[[ Line: 48 ]] end
+	close = function() end
 }
 
-function getTargetMessageInfo(p1) --[[ Line: 57 ]]
+function getTargetMessageInfo(p1)
 	return if p1 then {
 		targetMessageSenderId = p1.senderTargetId,
 		targetMessageId = p1.id,
@@ -34,7 +34,7 @@ function getTargetMessageInfo(p1) --[[ Line: 57 ]]
 	} else {}
 end
 
-local function _(TargetMessageSenderId, TargetMessageId, p1) --[[ Line: 69 | Named "getTargetMessageInfoFromSignals" ]]
+local function _(TargetMessageSenderId, TargetMessageId, p1)
 	return {
 		targetMessageSenderId = TargetMessageSenderId,
 		targetMessageId = TargetMessageId,
@@ -42,7 +42,7 @@ local function _(TargetMessageSenderId, TargetMessageId, p1) --[[ Line: 69 | Nam
 	}
 end
 
-function ReplyComposeBarContainer(p1) --[[ Line: 77 ]]
+function ReplyComposeBarContainer(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseLocalUserIdFunction (copy), UseTelemetryModule (copy), ChatConversationTelemetryLayerModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), GetReplyingToStoreModule (copy), GetConversationMessageStoreModule (copy), UseSignalStateFunction (copy), ReactModule (copy), ChatConversationTelemetryEventsModule (copy), UseSelectorFunction (copy), PopulateUserWithStateModule (copy), UserProfilesModule (copy), UseLocalizationFunction (copy), ReplyComposeBarModule (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
@@ -52,13 +52,13 @@ function ReplyComposeBarContainer(p1) --[[ Line: 77 ]]
 		local ReplyingToStoreModule = GetReplyingToStoreModule(false)
 		local ConversationMessageStoreModule = GetConversationMessageStoreModule(false)
 		local UseSignalStateResult = UseSignalStateFunction(ReplyingToStoreModule.getMessageId)
-		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 87 ]]
+		local UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: UseSignalStateResult (copy), ConversationMessageStoreModule (copy)
 			return if UseSignalStateResult == nil then nil else ConversationMessageStoreModule.messages(false)[UseSignalStateResult]
 		end, { UseSignalStateResult, ConversationMessageStoreModule })
 		local Text = if UseMemoResult and UseMemoResult.sender_user_id then tostring(UseMemoResult.sender_user_id) else nil
 		local Content = if UseMemoResult then UseMemoResult.content else nil
-		ReactModule.useEffect(function() --[[ Line: 101 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseTelemetryModuleResult (copy), ChatConversationTelemetryEventsModule (upval), Text (copy), UseSignalStateResult (copy), Content (copy)
 			UseTelemetryModuleResult.emit(ChatConversationTelemetryEventsModule.ConversationInputBarReplyComposeRendered, {
 				targetMessageSenderId = Text,
@@ -66,9 +66,9 @@ function ReplyComposeBarContainer(p1) --[[ Line: 77 ]]
 				targetMessageLength = if Content then #Content else nil
 			})
 			
-			return function() --[[ Line: 106 ]] end
+			return function() end
 		end, {})
-		local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 110 ]]
+		local UseSelectorResult = UseSelectorFunction(function(p2)
 			-- upvalues: Text (copy), PopulateUserWithStateModule (upval)
 			local User = if p2 and p2.Users and Text then p2.Users[Text] else nil
 			
@@ -92,7 +92,7 @@ function ReplyComposeBarContainer(p1) --[[ Line: 77 ]]
 			}).replyingToUserText,
 			replyingToUserContent = Content,
 			replyingToUserId = if IsUseLocalUserIdResultMatch or not UseSelectorResult.targetUser then nil else Text,
-			onCloseActivated = ReactModule.useCallback(function() --[[ Line: 152 ]]
+			onCloseActivated = ReactModule.useCallback(function()
 				-- upvalues: UseTelemetryModuleResult (copy), ChatConversationTelemetryEventsModule (upval), Text (copy), UseSignalStateResult (copy), Content (copy), UnionResult (copy)
 				UseTelemetryModuleResult.emit(ChatConversationTelemetryEventsModule.ConversationInputBarReplyComposeCancelBtnActivated, {
 					targetMessageSenderId = Text,
@@ -109,13 +109,13 @@ function ReplyComposeBarContainer(p1) --[[ Line: 77 ]]
 			})
 		})
 	else
-		ReactModule.useEffect(function() --[[ Line: 174 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseTelemetryModuleResult (copy), ChatConversationTelemetryEventsModule (upval), UnionResult (copy)
 			UseTelemetryModuleResult.emit(ChatConversationTelemetryEventsModule.ConversationInputBarReplyComposeRendered, getTargetMessageInfo(UnionResult.message))
 			
-			return function() --[[ Line: 179 ]] end
+			return function() end
 		end, {})
-		local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 183 ]]
+		local UseSelectorResult = UseSelectorFunction(function(p2)
 			-- upvalues: UnionResult (copy), PopulateUserWithStateModule (upval)
 			local User = if p2 and p2.Users and UnionResult.message.senderTargetId then p2.Users[UnionResult.message.senderTargetId] else nil
 			
@@ -139,7 +139,7 @@ function ReplyComposeBarContainer(p1) --[[ Line: 77 ]]
 			}).replyingToUserText,
 			replyingToUserContent = UnionResult.message.content,
 			replyingToUserId = if IsUseLocalUserIdResultMatch or not UseSelectorResult.targetUser then nil else UnionResult.message.senderTargetId,
-			onCloseActivated = ReactModule.useCallback(function() --[[ Line: 237 ]]
+			onCloseActivated = ReactModule.useCallback(function()
 				-- upvalues: UseTelemetryModuleResult (copy), ChatConversationTelemetryEventsModule (upval), UnionResult (copy)
 				UseTelemetryModuleResult.emit(ChatConversationTelemetryEventsModule.ConversationInputBarReplyComposeCancelBtnActivated, getTargetMessageInfo(UnionResult.message))
 				UnionResult.close()

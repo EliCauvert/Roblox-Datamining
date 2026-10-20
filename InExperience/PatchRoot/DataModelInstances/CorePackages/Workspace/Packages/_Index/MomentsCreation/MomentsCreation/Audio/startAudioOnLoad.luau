@@ -1,5 +1,5 @@
-﻿return function(Sound: Sound, Callback) --[[ Line: 5 | Named "startAudioOnLoad" ]]
-	local Connection = Sound:GetPropertyChangedSignal("IsReady"):Connect(function() --[[ Line: 6 | Named "startIfLoaded" ]]
+﻿return function(Sound: Sound, Callback)
+	local Connection = Sound:GetPropertyChangedSignal("IsReady"):Connect(function()
 		-- upvalues: Sound (copy), Callback (copy)
 		if not Sound.IsReady then return end
 		Sound.TimePosition = Sound.PlaybackRegion.Min

@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.LibraryTypes)
 
-local function getFolderPreview(p1, List) --[[ Line: 3 ]]
+local function getFolderPreview(p1, List)
 	-- upvalues: getFolderPreview (copy)
 	if p1.className ~= "Folder" then
 		return nil

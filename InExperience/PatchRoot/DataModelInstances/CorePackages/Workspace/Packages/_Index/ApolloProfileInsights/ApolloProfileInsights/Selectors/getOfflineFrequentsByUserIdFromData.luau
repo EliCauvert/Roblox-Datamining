@@ -1,6 +1,6 @@
 ﻿local GetProfileInsightsByUserIdFromDataModule = require(script.Parent.getProfileInsightsByUserIdFromData)
 
-return function(p1, p2) --[[ Line: 3 ]]
+return function(p1, p2)
 	-- upvalues: GetProfileInsightsByUserIdFromDataModule (copy)
 	local ProfileInsightsByUserIdFromDataModule = GetProfileInsightsByUserIdFromDataModule(p1, p2)
 	

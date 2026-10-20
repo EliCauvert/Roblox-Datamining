@@ -8,7 +8,7 @@ local Captured = {
 	dialogActionsProps = nil
 }
 
-local function renderChildren(DialogRootProps) --[[ Line: 31 ]]
+local function renderChildren(DialogRootProps)
 	-- upvalues: ReactModule (copy)
 	return ReactModule.createElement("Frame", nil, DialogRootProps.children or DialogRootProps[ReactModule.Children])
 end
@@ -36,25 +36,25 @@ local PriceStatus = {
 	QuantityLimitReached = "QuantityLimitReached"
 }
 
-local function getPriceStatusInShop(p1) --[[ Line: 118 ]]
+local function getPriceStatusInShop(p1)
 	-- upvalues: PriceStatus (copy)
 	return if p1 then if p1.isOwned then PriceStatus.Owned elseif p1.isOffSale then PriceStatus.OffSale elseif p1.collectibleItemDetails then PriceStatus.PurchaseFromResale elseif p1.priceInRobux == 0 then PriceStatus.Free elseif p1.priceInRobux then PriceStatus.PurchaseFromRoblox else PriceStatus.Unavailable else PriceStatus.Unavailable
 end
 
 return {
 	captured = Captured,
-	resetCaptured = function() --[[ Line: 24 ]]
+	resetCaptured = function()
 		-- upvalues: Captured (copy)
 		Captured.sheetRootProps = nil
 		Captured.dialogRootProps = nil
 		Captured.dialogTitleProps = nil
 		Captured.dialogActionsProps = nil
 	end,
-	createFoundationMock = function(p1) --[[ Line: 35 ]]
+	createFoundationMock = function(p1)
 		-- upvalues: Captured (copy), renderChildren (copy), ReactModule (copy)
 		return (setmetatable({
 			Sheet = {
-				Root = function(SheetRootProps) --[[ Line: 36 ]]
+				Root = function(SheetRootProps)
 					-- upvalues: Captured (upval), renderChildren (upval)
 					Captured.sheetRootProps = SheetRootProps
 					
@@ -65,20 +65,20 @@ return {
 				Actions = renderChildren
 			},
 			Dialog = {
-				Root = function(DialogRootProps) --[[ Line: 41 ]]
+				Root = function(DialogRootProps)
 					-- upvalues: Captured (upval), renderChildren (upval)
 					Captured.dialogRootProps = DialogRootProps
 					
 					return renderChildren(DialogRootProps)
 				end,
-				Title = function(DialogTitleProps) --[[ Line: 46 ]]
+				Title = function(DialogTitleProps)
 					-- upvalues: Captured (upval), ReactModule (upval)
 					Captured.dialogTitleProps = DialogTitleProps
 					
 					return ReactModule.createElement("Frame")
 				end,
 				Content = renderChildren,
-				Actions = function(DialogActionsProps) --[[ Line: 51 ]]
+				Actions = function(DialogActionsProps)
 					-- upvalues: Captured (upval), ReactModule (upval)
 					Captured.dialogActionsProps = DialogActionsProps
 					
@@ -87,11 +87,11 @@ return {
 			}
 		}, { __index = p1 }))
 	end,
-	createLocalizationMock = function() --[[ Line: 86 ]]
+	createLocalizationMock = function()
 		-- upvalues: config (copy)
 		return {
 			Hooks = {
-				useLocalization = function(List) --[[ Line: 89 ]]
+				useLocalization = function(List)
 					-- upvalues: config (upval)
 					local t = {}
 					
@@ -103,19 +103,19 @@ return {
 				end
 			},
 			NumberLocalization = {
-				localize = function(p1, _): string --[[ Line: 99 ]]
+				localize = function(p1, _): string
 					return (tostring(p1))
 				end
 			}
 		}
 	end,
-	createInspectAndBuyMock = function(p1) --[[ Line: 140 ]]
+	createInspectAndBuyMock = function(p1)
 		-- upvalues: getPriceStatusInShop (copy), PriceStatus (copy)
 		return {
 			Components = p1 or {},
 			Utils = {
 				getPriceStatusInShop = getPriceStatusInShop,
-				getPriceLineContent = function(_, _, _) --[[ Line: 145 ]]
+				getPriceLineContent = function(_, _, _)
 					return {}
 				end
 			},
@@ -127,16 +127,16 @@ return {
 			}
 		}
 	end,
-	createMockStore = function() --[[ Line: 160 ]]
+	createMockStore = function()
 		-- upvalues: RoduxModule (copy)
-		return RoduxModule.Store.new(function() --[[ Line: 161 ]]
+		return RoduxModule.Store.new(function()
 			return {
 				ScreenSize = Vector2.new(800, 600),
 				TopBar = { statusBarHeight = 0 }
 			}
 		end, {}, { RoduxModule.thunkMiddleware })
 	end,
-	makeDisplayItem = function(List) --[[ Line: 169 ]]
+	makeDisplayItem = function(List)
 		local config = {
 			id = "1",
 			name = "Test Item",

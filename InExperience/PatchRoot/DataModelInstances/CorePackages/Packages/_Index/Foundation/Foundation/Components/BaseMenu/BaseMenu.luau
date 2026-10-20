@@ -19,7 +19,7 @@ local config1 = {
 	[RadiusModule.Medium] = "radius-medium"
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 69 | Named "BaseMenu" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: ReactModule (copy), config (copy), WithDefaultsModule (copy), UseBindableModule (copy), UseScaledValueModule (copy), UseSubmenuHoverModule (copy), FlagsModule (copy), DeclarativeBaseMenuContentModule (copy), config1 (copy), BaseMenuContextModule (copy), BaseMenuScrollContainerModule (copy), WithCommonPropsModule (copy), ViewModule (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(false)
 	local Copy = table.clone(config)
@@ -31,27 +31,27 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 69 |
 	local UseScaledValueModuleResult1 = UseScaledValueModule(320)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseSubmenuHoverModuleResult = UseSubmenuHoverModule()
-	ReactModule.useEffect(function() --[[ Line: 81 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseBindingResult2 (copy)
-		task.delay(0, function() --[[ Line: 82 ]]
+		task.delay(0, function()
 			-- upvalues: UseBindingResult2 (upval)
 			UseBindingResult2(true)
 		end)
 	end, {})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 87 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(true)
 	end, {})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 92 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseBindableModuleResult (copy), FlagsModule (upval), UseScaledValueModuleResult (copy)
-		return UseBindableModuleResult:map(function(p2) --[[ Line: 93 ]]
+		return UseBindableModuleResult:map(function(p2)
 			-- upvalues: FlagsModule (upval), UseScaledValueModuleResult (upval)
 			return if p2 then p2.Offset elseif FlagsModule.FoundationBaseMenuContentSizing then 0 else UseScaledValueModuleResult
 		end)
 	end, { UseBindableModuleResult, UseScaledValueModuleResult })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 101 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseBindableModuleResult (copy), FlagsModule (upval), WithDefaultsModuleResult (copy), UseScaledValueModuleResult1 (copy)
-		return UseBindableModuleResult:map(function(p2): boolean --[[ Line: 102 ]]
+		return UseBindableModuleResult:map(function(p2): boolean
 			-- upvalues: FlagsModule (upval), WithDefaultsModuleResult (upval), UseScaledValueModuleResult1 (upval)
 			return if FlagsModule.FoundationBaseMenuContentSizing then not p2 or WithDefaultsModuleResult.couldGrow == true else not p2 or WithDefaultsModuleResult.couldGrow == true and p2.Offset < UseScaledValueModuleResult1
 		end)
@@ -60,16 +60,16 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 69 |
 		UseScaledValueModuleResult1,
 		WithDefaultsModuleResult.couldGrow
 	})
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 110 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), UseMemoResult1 (copy), UseMemoResult (copy), FlagsModule (upval), UseScaledValueModuleResult1 (copy)
 		return {
-			MinSize = ReactModule.joinBindings({ UseMemoResult1, UseMemoResult }):map(function(Entry) --[[ Line: 112 ]]
+			MinSize = ReactModule.joinBindings({ UseMemoResult1, UseMemoResult }):map(function(Entry)
 				-- upvalues: FlagsModule (upval)
 				local Entry1 = Entry[2]
 				
 				return if Entry[1] then if FlagsModule.FoundationBaseMenuContentSizing and Entry1 == 0 then nil else Vector2.new(Entry1, 0) else nil
 			end),
-			MaxSize = if FlagsModule.FoundationBaseMenuContentSizing then nil else UseMemoResult1:map(function(p2) --[[ Line: 124 ]]
+			MaxSize = if FlagsModule.FoundationBaseMenuContentSizing then nil else UseMemoResult1:map(function(p2)
 				-- upvalues: UseScaledValueModuleResult1 (upval)
 				return if p2 then Vector2.new(UseScaledValueModuleResult1, 1e999) else nil
 			end)
@@ -89,7 +89,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 69 |
 	end
 	local Entry = if WithDefaultsModuleResult.radius == nil then "" else config1[WithDefaultsModuleResult.radius]
 	local Element = ReactModule.createElement(BaseMenuContextModule.Provider, {
-		value = ReactModule.useMemo(function() --[[ Line: 141 ]]
+		value = ReactModule.useMemo(function()
 			-- upvalues: WithDefaultsModuleResult (copy), UseStateResult (copy), UseResult (copy), UseSubmenuHoverModuleResult (copy)
 			return {
 				depth = 1,
@@ -126,10 +126,10 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 69 |
 		})
 	}, Element) else ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
 		tag = `col stroke-standard stroke-default {Entry}`,
-		AutomaticSize = UseMemoResult1:map(function(p2) --[[ Line: 190 ]]
+		AutomaticSize = UseMemoResult1:map(function(p2)
 			return if p2 then Enum.AutomaticSize.XY else Enum.AutomaticSize.Y
 		end),
-		Size = ReactModule.joinBindings({ UseMemoResult1, UseBindableModuleResult }):map(function(Entry) --[[ Line: 193 ]]
+		Size = ReactModule.joinBindings({ UseMemoResult1, UseBindableModuleResult }):map(function(Entry)
 			local Entry1 = Entry[2]
 			
 			return if Entry[1] then nil else UDim2.new(Entry1, UDim.new())

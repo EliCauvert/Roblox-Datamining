@@ -4,7 +4,7 @@ local FireEventStreamFunction = SocialLuaAnalyticsModule.Analytics.FireEvent.fir
 local FireDiagCounterFunction = SocialLuaAnalyticsModule.Analytics.FireEvent.fireDiagCounter
 local EventStreamActionListModule = require(script.Parent.EventStreamActionList)
 
-return function(p1) --[[ Line: 10 ]]
+return function(p1)
 	-- upvalues: FireEventStreamFunction (copy), EventStreamActionListModule (copy), FireDiagCounterFunction (copy), DiagActionListModule (copy)
 	local FireEventStreamResult = FireEventStreamFunction({
 		eventStreamImpl = p1.analytics.EventStream,
@@ -16,7 +16,7 @@ return function(p1) --[[ Line: 10 ]]
 		eventList = DiagActionListModule
 	})
 	
-	return function(p2, p3) --[[ Line: 26 ]]
+	return function(p2, p3)
 		-- upvalues: DiagActionListModule (upval), FireDiagCounterResult (copy), FireEventStreamResult (copy)
 		if DiagActionListModule[p2] then
 			FireDiagCounterResult(p2)

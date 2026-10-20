@@ -11,7 +11,7 @@ local LayoutMode = UserTileModule.LayoutMode
 local PromptFriendRequestModalRevampFriendsRename = game:DefineFastFlag("PromptFriendRequestModalRevampFriendsRename", false)
 local PromptFriendRequestModalInputDelayMs = game:DefineFastInt("PromptFriendRequestModalInputDelayMs", 1000)
 
-return function(p1) --[[ Line: 30 | Named "PromptFriendRequestModal" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), PromptFriendRequestModalRevampFriendsRename (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), FoundationModule (copy), UserTile (copy), LayoutMode (copy), ButtonVariant (copy), PromptFriendRequestModalInputDelayMs (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		sendText = "InGame.FriendPlayerPrompt.Action.Send",

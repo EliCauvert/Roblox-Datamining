@@ -8,7 +8,7 @@ local StrictInterfaceResult1 = TModule.strictInterface({
 	params = TModule.optional(TModule.table)
 })
 
-return function(p1) --[[ Line: 19 | Named "MultiTextLocalizer" ]]
+return function(p1)
 	-- upvalues: StrictInterfaceResult (copy), StrictInterfaceResult1 (copy), RoactModule (copy), LocaleRoactContextModule (copy)
 	assert(StrictInterfaceResult(p1))
 	
@@ -18,7 +18,7 @@ return function(p1) --[[ Line: 19 | Named "MultiTextLocalizer" ]]
 	local RenderFunction = p1.render
 	
 	return RoactModule.createElement(LocaleRoactContextModule.Consumer, {
-		render = function(p2) --[[ Line: 28 ]]
+		render = function(p2)
 			-- upvalues: p1 (copy), RenderFunction (copy)
 			local FormatResults = {}
 			

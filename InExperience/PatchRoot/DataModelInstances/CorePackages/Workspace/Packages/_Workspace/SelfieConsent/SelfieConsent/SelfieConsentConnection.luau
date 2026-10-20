@@ -8,9 +8,9 @@ local FocusRoot = FocusNavigationUtilsModule.FocusRoot
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local UseEventConnectionFunction = require(Parent1.ReactUtils).useEventConnection
 
-local function v8(p1) --[[ Line: 21 ]]
+local function v8(p1)
 	-- upvalues: ReactModule (copy), UseEventConnectionFunction (copy), AvatarCreationService (copy)
-	UseEventConnectionFunction(AvatarCreationService.OpenSelfieConsent, (ReactModule.useCallback(function() --[[ Line: 22 ]]
+	UseEventConnectionFunction(AvatarCreationService.OpenSelfieConsent, (ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		p1.displaySelfieConsent(true)
 	end)))
@@ -18,7 +18,7 @@ local function v8(p1) --[[ Line: 21 ]]
 	return ReactModule.createElement(ReactModule.Fragment, {}, {})
 end
 
-return function(_) --[[ Line: 29 ]]
+return function(_)
 	-- upvalues: ReactModule (copy), SelfieConsentPromptModule (copy), v8 (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local Element = if UseStateResult then ReactModule.createElement(SelfieConsentPromptModule, { displaySelfieConsent = UseStateResult2 }) else nil

@@ -2,25 +2,25 @@
 local ReactModule = require(Parent.React)
 local ArgCheckModule = require(Parent.ArgCheck)
 
-return function(p1) --[[ Line: 17 | Named "VideoPlayerWrapper" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ArgCheckModule (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 18 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		return Content.fromUri(p1.video)
 	end, { p1.video })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 22 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		if p1.onVideoLooped then
 			p1.onVideoLooped()
 		end
 	end, { p1.onVideoLooped })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 28 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		if p1.onVideoEnded then
 			p1.onVideoEnded()
 		end
 	end, { p1.onVideoEnded })
-	ReactModule.useEffect(function() --[[ Line: 34 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), ArgCheckModule (upval)
 		local Current = p1.videoPlayerRef.current
 		local Current1 = p1.videoDisplayRef.current
@@ -37,7 +37,7 @@ return function(p1) --[[ Line: 17 | Named "VideoPlayerWrapper" ]]
 		Wire1.TargetInstance = VideoAudioOutput
 		Wire1.Parent = Current
 		
-		return function() --[[ Line: 55 ]]
+		return function()
 			-- upvalues: Wire1 (copy), VideoAudioOutput (copy), Wire (copy)
 			Wire1:Destroy()
 			VideoAudioOutput:Destroy()

@@ -8,7 +8,7 @@ StatsAggregatorManager.SecondsBetweenUpdate = 1
 StatsAggregatorManager.NumSamplesToKeep = 20
 local NewResult = nil
 
-function StatsAggregatorManager.getSingleton() --[[ Line: 26 ]]
+function StatsAggregatorManager.getSingleton()
 	-- upvalues: NewResult (ref), StatsAggregatorManager (copy), GetFFlagLazyPerfStatsInitModule (copy)
 	if NewResult == nil then
 		NewResult = StatsAggregatorManager.__new()
@@ -20,7 +20,7 @@ function StatsAggregatorManager.getSingleton() --[[ Line: 26 ]]
 	return NewResult
 end
 
-function StatsAggregatorManager.__new() --[[ Line: 36 ]]
+function StatsAggregatorManager.__new()
 	-- upvalues: StatsAggregatorManager (copy), StatsUtilsModule (copy), StatsAggregatorModule (copy)
 	local t = {}
 	setmetatable(t, StatsAggregatorManager)
@@ -32,19 +32,19 @@ function StatsAggregatorManager.__new() --[[ Line: 36 ]]
 	return t
 end
 
-function StatsAggregatorManager.StartListening(p1) --[[ Line: 53 ]]
+function StatsAggregatorManager.StartListening(p1)
 	for _, statsAggregator in pairs(p1._statsAggregators) do
 		statsAggregator:StartListening()
 	end
 end
 
-function StatsAggregatorManager.StopListening(p2) --[[ Line: 59 ]]
+function StatsAggregatorManager.StopListening(p2)
 	for _, statsAggregator in pairs(p2._statsAggregators) do
 		statsAggregator:StopListening()
 	end
 end
 
-function StatsAggregatorManager.GetAggregator(p3, p4) --[[ Line: 65 ]]
+function StatsAggregatorManager.GetAggregator(p3, p4)
 	return p3._statsAggregators[p4]
 end
 

@@ -5,7 +5,7 @@ local WebViewService = game:GetService("WebViewService")
 local WebViewServiceWrapperModule = {}
 WebViewServiceWrapperModule.__index = WebViewServiceWrapperModule
 
-function WebViewServiceWrapperModule.new(p1) --[[ Line: 47 ]]
+function WebViewServiceWrapperModule.new(p1)
 	-- upvalues: GetFFlagEnableUnifiedWebViewsFunction (copy), WebViewService (copy), WebViewServiceWrapperModule (copy)
 	local t = {}
 	
@@ -16,15 +16,15 @@ function WebViewServiceWrapperModule.new(p1) --[[ Line: 47 ]]
 	t.url = p1.url
 	t.closeCallbackConnection = nil
 	local self = setmetatable(t, WebViewServiceWrapperModule)
-	self:setCloseCallback(p1.closeCallback or function() --[[ Line: 62 ]] end)
+	self:setCloseCallback(p1.closeCallback or function() end)
 	
 	return self
 end
 
-function WebViewServiceWrapperModule:setCloseCallback(Callback) --[[ Line: 67 ]]
+function WebViewServiceWrapperModule:setCloseCallback(Callback)
 	-- upvalues: GetFFlagEnableUnifiedWebViewsFunction (copy)
 	if GetFFlagEnableUnifiedWebViewsFunction() then
-		function self.closeCallback() --[[ Line: 72 ]]
+		function self.closeCallback()
 			-- upvalues: self (copy), Callback (copy)
 			self:close()
 			
@@ -39,11 +39,11 @@ function WebViewServiceWrapperModule:setCloseCallback(Callback) --[[ Line: 67 ]]
 	end
 end
 
-function WebViewServiceWrapperModule:setOpenCallback(OpenCallback) --[[ Line: 85 ]]
+function WebViewServiceWrapperModule:setOpenCallback(OpenCallback)
 	self.openCallback = OpenCallback
 end
 
-function WebViewServiceWrapperModule:open() --[[ Line: 89 ]]
+function WebViewServiceWrapperModule:open()
 	-- upvalues: GetFFlagEnableUnifiedWebViewsFunction (copy), BrowserService (copy), HttpService (copy)
 	if self.openCallback ~= nil then
 		self.openCallback()
@@ -70,7 +70,7 @@ function WebViewServiceWrapperModule:open() --[[ Line: 89 ]]
 	end
 end
 
-function WebViewServiceWrapperModule:close() --[[ Line: 117 ]]
+function WebViewServiceWrapperModule:close()
 	-- upvalues: GetFFlagEnableUnifiedWebViewsFunction (copy)
 	if GetFFlagEnableUnifiedWebViewsFunction() then
 		self.webViewService:CloseWindow()

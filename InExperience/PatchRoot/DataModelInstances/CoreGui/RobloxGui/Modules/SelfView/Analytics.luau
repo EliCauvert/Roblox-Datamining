@@ -1,4 +1,4 @@
-﻿function debugPrint(_) --[[ Line: 4 ]] end
+﻿function debugPrint(_) end
 
 debugPrint("Self View Analytics 10-19-2022__1")
 local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
@@ -11,7 +11,7 @@ AnalyticsModule.WARNING = "warning"
 AnalyticsModule.ERROR = "error"
 local LastCtx = "SelfView"
 
-function AnalyticsModule.new(_impl) --[[ Line: 76 ]]
+function AnalyticsModule.new(_impl)
 	-- upvalues: RbxAnalyticsService (copy), AnalyticsModule (copy)
 	if not _impl then
 		_impl = RbxAnalyticsService
@@ -21,9 +21,9 @@ function AnalyticsModule.new(_impl) --[[ Line: 76 ]]
 	return (setmetatable({ _impl = _impl }, AnalyticsModule))
 end
 
-local function stub() --[[ Line: 91 ]] end
+local function stub() end
 
-function AnalyticsModule.stubService() --[[ Line: 93 ]]
+function AnalyticsModule.stubService()
 	-- upvalues: stub (copy)
 	return {
 		SetRBXEvent = stub,
@@ -36,16 +36,16 @@ function AnalyticsModule.stubService() --[[ Line: 93 ]]
 	}
 end
 
-function AnalyticsModule:setImpl(_impl) --[[ Line: 105 ]]
+function AnalyticsModule:setImpl(_impl)
 	self._impl = _impl
 end
 
-function AnalyticsModule:_report(LastCtx, EventName, _, AdditionalArgs) --[[ Line: 109 ]]
+function AnalyticsModule:_report(LastCtx, EventName, _, AdditionalArgs)
 	-- upvalues: RunService (copy)
 	self._impl:SendEventDeferred(if RunService:IsStudio() then "studio" else "client", LastCtx, EventName, AdditionalArgs)
 end
 
-function AnalyticsModule:reportMicState(State) --[[ Line: 119 ]]
+function AnalyticsModule:reportMicState(State)
 	-- upvalues: Players (copy), LastCtx (ref)
 	debugPrint("Self View: Analytics:reportMicState, newState: " .. tostring(State) .. ",universeid: " .. tostring(game.GameId) .. ",pid: " .. tostring(game.PlaceId) .. ",uid: " .. tostring(Players.LocalPlayer.UserId) .. ",sessionid: " .. tostring(self._impl:GetSessionId()))
 	self:_report(LastCtx, "inExperienceMicState", tostring(State), {
@@ -57,7 +57,7 @@ function AnalyticsModule:reportMicState(State) --[[ Line: 119 ]]
 	})
 end
 
-function AnalyticsModule:reportCamState(State) --[[ Line: 130 ]]
+function AnalyticsModule:reportCamState(State)
 	-- upvalues: Players (copy), LastCtx (ref)
 	debugPrint("Self View: Analytics:reporCamState, newState: " .. tostring(State) .. ",universeid: " .. tostring(game.GameId) .. ",pid: " .. tostring(game.PlaceId) .. ",uid: " .. tostring(Players.LocalPlayer.UserId) .. ",sessionid: " .. tostring(self._impl:GetSessionId()))
 	self:_report(LastCtx, "inExperienceCamState", tostring(State), {
@@ -69,7 +69,7 @@ function AnalyticsModule:reportCamState(State) --[[ Line: 130 ]]
 	})
 end
 
-function AnalyticsModule:reportSelfViewEnabledInCoreGuiState(State) --[[ Line: 141 ]]
+function AnalyticsModule:reportSelfViewEnabledInCoreGuiState(State)
 	debugPrint("Self View: Analytics:reportSelfViewEnabledInCoreGuiState, newState: " .. tostring(State) .. ",universeid: " .. tostring(game.GameId) .. ",pid: " .. tostring(game.PlaceId) .. ",sessionid: " .. tostring(self._impl:GetSessionId()))
 	self:_report("SelfView", "enabledinCoreGuiState", tostring(State), {
 		state = State,
@@ -79,7 +79,7 @@ function AnalyticsModule:reportSelfViewEnabledInCoreGuiState(State) --[[ Line: 1
 	})
 end
 
-function AnalyticsModule:reportSelfViewSessionStarted(p1, p2, p3, p4, p5, p6, p7, p8) --[[ Line: 151 ]]
+function AnalyticsModule:reportSelfViewSessionStarted(p1, p2, p3, p4, p5, p6, p7, p8)
 	-- upvalues: RbxAnalyticsService (copy)
 	debugPrint("Self View: Analytics:reportSelfViewSessionStarted,universeid: " .. tostring(game.GameId) .. ",pid: " .. tostring(game.PlaceId) .. ",sessionid: " .. tostring(self._impl:GetSessionId()) .. ",x: " .. tostring(p1) .. ",y: " .. tostring(p2) .. ",width: " .. tostring(p3) .. ",height: " .. tostring(p4) .. ",x_relative: " .. tostring(p5) .. ",y_relative: " .. tostring(p6) .. ",width_relative: " .. tostring(p7) .. ",height_relative: " .. tostring(p8))
 	self:_report("SelfView", "sessionStarted", "true", {
@@ -98,7 +98,7 @@ function AnalyticsModule:reportSelfViewSessionStarted(p1, p2, p3, p4, p5, p6, p7
 	RbxAnalyticsService:AddGlobalPointsField("feature/avatarChat/selfViewOn", 1)
 end
 
-function AnalyticsModule:reportSelfViewSessionStopped() --[[ Line: 170 ]]
+function AnalyticsModule:reportSelfViewSessionStopped()
 	-- upvalues: RbxAnalyticsService (copy)
 	debugPrint("Self View: Analytics:reportSelfViewSessionStopped,universeid: " .. tostring(game.GameId) .. ",pid: " .. tostring(game.PlaceId) .. ",sessionid: " .. tostring(self._impl:GetSessionId()))
 	self:_report("SelfView", "sessionStopped", "true", {
@@ -109,7 +109,7 @@ function AnalyticsModule:reportSelfViewSessionStopped() --[[ Line: 170 ]]
 	RbxAnalyticsService:AddGlobalPointsField("feature/avatarChat/selfViewOn", 0)
 end
 
-function AnalyticsModule:reportUserAccountSettings(p1, p2) --[[ Line: 181 ]]
+function AnalyticsModule:reportUserAccountSettings(p1, p2)
 	debugPrint("Self View: Analytics:reportUserAccountSettings,universeid: " .. tostring(game.GameId) .. ",pid: " .. tostring(game.PlaceId) .. ",sessionid: " .. tostring(self._impl:GetSessionId()) .. ",userAccount_videoEnabled: " .. tostring(p1) .. ",userAccount_audioEnabled: " .. tostring(p2))
 	self:_report("SelfView", "userAccountSettings", "true", {
 		universeid = tostring(game.GameId),
@@ -120,7 +120,7 @@ function AnalyticsModule:reportUserAccountSettings(p1, p2) --[[ Line: 181 ]]
 	})
 end
 
-function AnalyticsModule:reportExperienceSettings(p1, p2, p3) --[[ Line: 192 ]]
+function AnalyticsModule:reportExperienceSettings(p1, p2, p3)
 	debugPrint("Self View: Analytics:reportExperienceSettings,universeid: " .. tostring(game.GameId) .. ",pid: " .. tostring(game.PlaceId) .. ",sessionid: " .. tostring(self._impl:GetSessionId()) .. ",experienceSettings_placeEnabled: " .. tostring(p1) .. ",experienceSettings_videoEnabled: " .. tostring(p2) .. ",experienceSettings_audioEnabled: " .. tostring(p3))
 	self:_report("SelfView", "experienceSettings", "true", {
 		universeid = tostring(game.GameId),
@@ -132,7 +132,7 @@ function AnalyticsModule:reportExperienceSettings(p1, p2, p3) --[[ Line: 192 ]]
 	})
 end
 
-function AnalyticsModule:setLastCtx(Value) --[[ Line: 204 ]]
+function AnalyticsModule:setLastCtx(Value)
 	-- upvalues: LastCtx (ref)
 	LastCtx = Value
 end

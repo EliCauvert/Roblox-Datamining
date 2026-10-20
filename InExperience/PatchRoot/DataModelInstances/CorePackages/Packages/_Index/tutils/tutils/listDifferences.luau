@@ -1,6 +1,6 @@
 ﻿local TableDifferenceModule = require(script.Parent.tableDifference)
 
-local function _(p1) --[[ Line: 8 | Named "membershipTable" ]]
+local function _(p1)
 	local t = {}
 	
 	for i = 1, #p1 do
@@ -9,7 +9,7 @@ local function _(p1) --[[ Line: 8 | Named "membershipTable" ]]
 	return t
 end
 
-local _ = function(List) --[[ Line: 20 | Named "listOfKeys" ]]
+local _ = function(List)
 	local List1 = {}
 	
 	for i, _ in pairs(List) do
@@ -18,7 +18,7 @@ local _ = function(List) --[[ Line: 20 | Named "listOfKeys" ]]
 	return List1
 end
 
-return function(p2, p3) --[[ Line: 33 ]]
+return function(p2, p3)
 	-- upvalues: TableDifferenceModule (copy)
 	local t = {}
 	

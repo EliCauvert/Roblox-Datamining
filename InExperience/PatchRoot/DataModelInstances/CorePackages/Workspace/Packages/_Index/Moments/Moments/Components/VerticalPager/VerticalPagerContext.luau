@@ -4,7 +4,7 @@ local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(script.Parent.Types)
 
-local function noop() --[[ Line: 24 ]] end
+local function noop() end
 
 local Signal = SignalsModule.createSignal(false)
 local Context = ReactModule.createContext({
@@ -27,15 +27,15 @@ local Context1 = ReactModule.createContext({
 return {
 	VerticalPagerContext = Context,
 	PagerItemContext = Context1,
-	useVerticalPager = function() --[[ Line: 61 ]]
+	useVerticalPager = function()
 		-- upvalues: ReactModule (copy), Context (copy)
 		return (ReactModule.useContext(Context))
 	end,
-	usePagerItem = function() --[[ Line: 75 ]]
+	usePagerItem = function()
 		-- upvalues: ReactModule (copy), Context1 (copy)
 		return (ReactModule.useContext(Context1))
 	end,
-	useIsPagerItemActive = function() --[[ Line: 84 ]]
+	useIsPagerItemActive = function()
 		-- upvalues: ReactModule (copy), Context1 (copy), SignalsReactModule (copy)
 		return SignalsReactModule.useSignalState(ReactModule.useContext(Context1).getIsActive)
 	end

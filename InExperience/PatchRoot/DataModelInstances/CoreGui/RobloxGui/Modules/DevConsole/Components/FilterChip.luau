@@ -15,7 +15,7 @@ local config = {
 local _UDim = UDim.new(0, 9)
 local _UDim1 = UDim.new(0, 8)
 
-return function(p1) --[[ Line: 25 | Named "FilterChip" ]]
+return function(p1)
 	-- upvalues: config (copy), RoactModule (copy), ConstantsModule (copy), _UDim (copy), _UDim1 (copy)
 	local On = p1.isOn and config.on or config.off
 	

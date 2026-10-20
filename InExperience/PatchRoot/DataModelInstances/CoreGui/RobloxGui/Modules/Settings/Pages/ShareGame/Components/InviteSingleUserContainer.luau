@@ -34,19 +34,19 @@ local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local _Color3 = Color3.fromRGB(41, 41, 41)
 
-local function v34(p1) --[[ Line: 61 ]]
+local function v34(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), FFlagFixPromptGameInviteUIMissingDisplayName (copy), UserProfileStore (copy), SignalsModule (copy), SignalsReactModule (copy), ConstantsModule (copy), GameInviteEvents (copy), InviteStatus (copy), GetFFlagAbuseReportAnalyticsHasLaunchDataModule (copy), Players (copy), GetFFlagSingleUserInvitePageKeybindModule (copy), ContextActionService (copy), GetFFlagThrottleInviteSendEndpointModule (copy), ThrottleFunctionCallModule (copy), GetFIntThrottleInviteSendEndpointDelayModule (copy), RetrievalStatus (copy), LoadingModalModule (copy), _Color3 (copy), StyledTextLabel (copy), Translator (copy), COLORS (copy), SingleUserThumbnailModule (copy), Button (copy), ButtonType (copy)
 	local Friend = p1.friends[tostring(p1.inviteUserId)]
 	local Invite = Friend and p1.invites[Friend.id]
 	local UseStyleResult = UseStyleFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseMemoResult = if FFlagFixPromptGameInviteUIMissingDisplayName then ReactModule.useMemo(function() --[[ Line: 71 ]]
+	local UseMemoResult = if FFlagFixPromptGameInviteUIMissingDisplayName then ReactModule.useMemo(function()
 		-- upvalues: UserProfileStore (upval), p1 (copy)
 		return UserProfileStore.get().fetchNamesByUserIds({ (tostring(p1.inviteUserId)) })
 	end, { p1.inviteUserId }) else nil
-	local UseMemoResult1 = if FFlagFixPromptGameInviteUIMissingDisplayName then ReactModule.useMemo(function() --[[ Line: 77 ]]
+	local UseMemoResult1 = if FFlagFixPromptGameInviteUIMissingDisplayName then ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), UseMemoResult (copy)
-		return SignalsModule.createComputed(function(p2) --[[ Line: 78 ]]
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: UseMemoResult (upval)
 			local UseMemoResultResult = UseMemoResult(p2)
 			local Entry = UseMemoResultResult and (UseMemoResultResult.data and UseMemoResultResult.data[1])
@@ -67,13 +67,13 @@ local function v34(p1) --[[ Line: 61 ]]
 		end)
 	end, { UseMemoResult }) else nil
 	local UseSignalStateResult = if FFlagFixPromptGameInviteUIMissingDisplayName then SignalsReactModule.useSignalState(UseMemoResult1) else nil
-	ReactModule.useEffect(function() --[[ Line: 102 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), ConstantsModule (upval), GameInviteEvents (upval)
 		if p1.promptMessage and p1.analytics then
 			p1.analytics:sendEvent(ConstantsModule.Triggers.DeveloperSingle, GameInviteEvents.CustomTextShown)
 		end
 	end, {})
-	local UseResult: () -> () = ReactModule.useCallback(function() --[[ Line: 109 ]]
+	local UseResult: () -> () = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
 		p1.closePage()
 		
@@ -81,12 +81,12 @@ local function v34(p1) --[[ Line: 61 ]]
 			p1.onAfterClosePage()
 		end
 	end, { p1.closePage, p1.onAfterClosePage })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 121 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), ConstantsModule (upval), GameInviteEvents (upval), UseResult (copy)
 		p1.analytics:sendEvent(ConstantsModule.Triggers.DeveloperSingle, GameInviteEvents.CancelInvite)
 		UseResult()
 	end, { UseResult })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 129 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), p1 (copy), Invite (copy), InviteStatus (upval), ConstantsModule (upval), GameInviteEvents (upval), Friend (copy), GetFFlagAbuseReportAnalyticsHasLaunchDataModule (upval), Players (upval), UseResult (copy)
 		UseStateResult2(true)
 		local InviteUserFunction = p1.inviteUser
@@ -98,7 +98,7 @@ local function v34(p1) --[[ Line: 61 ]]
 				recipient = Friend.id,
 				isLaunchDataProvided = if GetFFlagAbuseReportAnalyticsHasLaunchDataModule() then IsNotLaunchDataMatch else nil
 			})
-			InviteUserFunction(tostring(Friend.id), Analytics, p1.inviteMessageId, p1.launchData):andThen(function(Result) --[[ Line: 145 ]]
+			InviteUserFunction(tostring(Friend.id), Analytics, p1.inviteMessageId, p1.launchData):andThen(function(Result)
 				-- upvalues: UseStateResult2 (upval), Friend (upval), Players (upval), Analytics (copy), UseResult (upval)
 				UseStateResult2(false)
 				
@@ -119,23 +119,23 @@ local function v34(p1) --[[ Line: 61 ]]
 	})
 	
 	if GetFFlagSingleUserInvitePageKeybindModule() then
-		ReactModule.useEffect(function() --[[ Line: 179 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p1 (copy), ContextActionService (upval), UseResult2 (ref), UseResult1 (copy)
 			if p1.isVisible then
-				ContextActionService:BindCoreAction("ProductPurchaseConfirmButtonBind", function(_, UserInputState, _) --[[ Line: 181 ]]
+				ContextActionService:BindCoreAction("ProductPurchaseConfirmButtonBind", function(_, UserInputState, _)
 					-- upvalues: UseResult2 (upval)
 					if UserInputState == Enum.UserInputState.Begin then
 						UseResult2()
 					end
 				end, false, Enum.KeyCode.ButtonA)
-				ContextActionService:BindCoreAction("ProductPurchaseCancelButtonBind", function(_, UserInputState, _) --[[ Line: 186 ]]
+				ContextActionService:BindCoreAction("ProductPurchaseCancelButtonBind", function(_, UserInputState, _)
 					-- upvalues: UseResult1 (upval)
 					if UserInputState == Enum.UserInputState.Begin then
 						UseResult1()
 					end
 				end, false, Enum.KeyCode.ButtonB)
 				
-				return function() --[[ Line: 191 ]]
+				return function()
 					-- upvalues: ContextActionService (upval)
 					ContextActionService:UnbindCoreAction("ProductPurchaseConfirmButtonBind")
 					ContextActionService:UnbindCoreAction("ProductPurchaseCancelButtonBind")
@@ -245,17 +245,17 @@ local function v34(p1) --[[ Line: 61 ]]
 	end
 end
 
-return require(CorePackages.Packages.RoactRodux).connect(function(p1) --[[ Line: 330 ]]
+return require(CorePackages.Packages.RoactRodux).connect(function(p1)
 	-- upvalues: Players (copy)
 	return {
 		friends = p1.Users,
 		friendsRetrievalStatus = Players.LocalPlayer and p1.Friends.retrievalStatus[tostring(Players.LocalPlayer.UserId)],
 		invites = p1.Invites
 	}
-end, function(Callback) --[[ Line: 337 ]]
+end, function(Callback)
 	-- upvalues: HttpRequestModule (copy), HttpRbxApiService (copy), GetFFlagEnableNewInviteSendEndpointModule (copy), InviteUserIdToPlaceIdCustomizedModule (copy), ConstantsModule (copy), InviteUserIdToPlaceIdModule (copy)
 	return {
-		inviteUser = function(p1, p2, p3, p4) --[[ Line: 339 ]]
+		inviteUser = function(p1, p2, p3, p4)
 			-- upvalues: HttpRequestModule (upval), HttpRbxApiService (upval), GetFFlagEnableNewInviteSendEndpointModule (upval), Callback (copy), InviteUserIdToPlaceIdCustomizedModule (upval), ConstantsModule (upval), InviteUserIdToPlaceIdModule (upval)
 			local HttpRequestModuleResult = HttpRequestModule(HttpRbxApiService)
 			local Text = tostring(game.PlaceId)
@@ -263,7 +263,7 @@ end, function(Callback) --[[ Line: 337 ]]
 			return if GetFFlagEnableNewInviteSendEndpointModule() then Callback(InviteUserIdToPlaceIdCustomizedModule(HttpRequestModuleResult, p1, Text, p2, ConstantsModule.Triggers.DeveloperSingle, p3, p4)) else Callback(InviteUserIdToPlaceIdModule(HttpRequestModuleResult, p1, Text))
 		end
 	}
-end)(function(p1) --[[ Line: 360 ]]
+end)(function(p1)
 	-- upvalues: RenderWithCoreScriptsStyleProviderModule (copy), ReactModule (copy), v34 (copy)
 	return RenderWithCoreScriptsStyleProviderModule({ SingleUserInvite = ReactModule.createElement(v34, p1) })
 end)

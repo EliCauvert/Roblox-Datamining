@@ -2,7 +2,7 @@
 local ReactModule = require(Parent.React)
 local PromiseModule = require(Parent.Promise)
 
-return function(Current, Current1) --[[ Line: 20 | Named "useThrottledCallback" ]]
+return function(Current, Current1)
 	-- upvalues: ReactModule (copy), PromiseModule (copy)
 	local UseRefResult = ReactModule.useRef(Current)
 	local UseRefResult1 = ReactModule.useRef(Current1)
@@ -10,12 +10,12 @@ return function(Current, Current1) --[[ Line: 20 | Named "useThrottledCallback" 
 	UseRefResult1.current = Current1
 	local UseRefResult2 = ReactModule.useRef(nil)
 	local UseRefResult3 = ReactModule.useRef(0)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 30 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult2 (copy), UseRefResult1 (copy), UseRefResult3 (copy), UseRefResult (copy), PromiseModule (upval)
 		if UseRefResult2.current then return end
 		local CurrentDelta = UseRefResult3.current + (UseRefResult1.current or 0) - tick()
 		
-		local function runCallback() --[[ Line: 39 ]]
+		local function runCallback()
 			-- upvalues: UseRefResult (upval), UseRefResult3 (upval), UseRefResult2 (upval)
 			UseRefResult.current()
 			UseRefResult3.current = tick()
@@ -32,9 +32,9 @@ return function(Current, Current1) --[[ Line: 20 | Named "useThrottledCallback" 
 			UseRefResult2.current = nil
 		end
 	end)
-	ReactModule.useEffect(function() --[[ Line: 53 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult2 (copy), UseRefResult (copy)
-		return function() --[[ Line: 54 ]]
+		return function()
 			-- upvalues: UseRefResult2 (upval), UseRefResult (upval)
 			local Current = UseRefResult2.current
 			

@@ -4,7 +4,7 @@ local Contexts = EnumsModule.Contexts
 local EventTypes = EnumsModule.EventTypes
 local BtnValuesModule = require(script.Parent.BtnValues)
 
-local function Uid(p1): string --[[ Line: 10 ]]
+local function Uid(p1): string
 	return (tostring(p1))
 end
 

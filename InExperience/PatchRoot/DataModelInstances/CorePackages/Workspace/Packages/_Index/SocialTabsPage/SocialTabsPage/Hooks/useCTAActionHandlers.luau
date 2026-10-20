@@ -14,7 +14,7 @@ local _ = require(SocialTabsPage.Common.Types)
 local FriendingActionsModule = require(SocialTabsPage.Utils.friendingActions)
 local NotificationTypeList = GuiService:GetNotificationTypeList()
 
-return function() --[[ Line: 31 | Named "useCTAActionHandlers" ]]
+return function()
 	-- upvalues: UseDispatchFunction (copy), UseLocalUserIdFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ButtonTypes (copy), EnteredChatFromEntryPointModule (copy), ChatEntryPointNames (copy), GuiService (copy), NotificationTypeList (copy), FriendingActionsModule (copy), FriendshipOriginSourceType (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
@@ -34,15 +34,15 @@ return function() --[[ Line: 31 | Named "useCTAActionHandlers" ]]
 		defaultFriendingError = TextKeysModule.DefaultFriendingError
 	})
 	
-	return ReactModule.useMemo(function() --[[ Line: 51 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: ButtonTypes (upval), UseDispatchResult (copy), EnteredChatFromEntryPointModule (upval), ChatEntryPointNames (upval), GuiService (upval), NotificationTypeList (upval), UseRefResult (copy), FriendingActionsModule (upval), UseLocalUserIdResult (copy), FriendshipOriginSourceType (upval), UseLocalizationResult (copy)
 		return {
-			[ButtonTypes.Chat] = function(Data) --[[ Line: 53 ]]
+			[ButtonTypes.Chat] = function(Data)
 				-- upvalues: UseDispatchResult (upval), EnteredChatFromEntryPointModule (upval), ChatEntryPointNames (upval), GuiService (upval), NotificationTypeList (upval)
 				UseDispatchResult(EnteredChatFromEntryPointModule(ChatEntryPointNames.SocialTab))
 				GuiService:BroadcastNotification(Data, NotificationTypeList.LAUNCH_CONVERSATION)
 			end,
-			[ButtonTypes.Add] = function(TargetUserId) --[[ Line: 58 ]]
+			[ButtonTypes.Add] = function(TargetUserId)
 				-- upvalues: UseRefResult (upval), FriendingActionsModule (upval), UseDispatchResult (upval), UseLocalUserIdResult (upval), FriendshipOriginSourceType (upval), UseLocalizationResult (upval)
 				if not UseRefResult.current[TargetUserId] then
 					UseRefResult.current[TargetUserId] = true
@@ -52,7 +52,7 @@ return function() --[[ Line: 31 | Named "useCTAActionHandlers" ]]
 						targetUserId = TargetUserId,
 						friendshipOriginSourceType = FriendshipOriginSourceType.UserProfile.rawValue(),
 						localized = UseLocalizationResult
-					}):finally(function() --[[ Line: 71 ]]
+					}):finally(function()
 						-- upvalues: UseRefResult (upval), TargetUserId (copy)
 						UseRefResult.current[TargetUserId] = nil
 					end)
@@ -60,7 +60,7 @@ return function() --[[ Line: 31 | Named "useCTAActionHandlers" ]]
 					return
 				end
 			end,
-			[ButtonTypes.Accept] = function(TargetUserId) --[[ Line: 76 ]]
+			[ButtonTypes.Accept] = function(TargetUserId)
 				-- upvalues: UseRefResult (upval), FriendingActionsModule (upval), UseDispatchResult (upval), UseLocalUserIdResult (upval), UseLocalizationResult (upval)
 				if not UseRefResult.current[TargetUserId] then
 					UseRefResult.current[TargetUserId] = true
@@ -69,7 +69,7 @@ return function() --[[ Line: 31 | Named "useCTAActionHandlers" ]]
 						currentUserId = UseLocalUserIdResult,
 						targetUserId = TargetUserId,
 						localized = UseLocalizationResult
-					}):finally(function() --[[ Line: 88 ]]
+					}):finally(function()
 						-- upvalues: UseRefResult (upval), TargetUserId (copy)
 						UseRefResult.current[TargetUserId] = nil
 					end)

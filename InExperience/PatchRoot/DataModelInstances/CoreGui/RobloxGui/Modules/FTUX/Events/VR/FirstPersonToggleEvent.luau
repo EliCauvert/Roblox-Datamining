@@ -4,7 +4,7 @@ local _ = require(script.Parent.Parent.EventType)
 local Flag = false
 local RenderSteppedConnection = nil
 
-local function onFirstPersonToggleInput(p1, UserInputState, _) --[[ Line: 16 ]]
+local function onFirstPersonToggleInput(p1, UserInputState, _)
 	-- upvalues: Flag (ref)
 	if p1 == "FirstPersonToggleAction" and UserInputState == Enum.UserInputState.Begin then
 		Flag = true
@@ -12,22 +12,22 @@ local function onFirstPersonToggleInput(p1, UserInputState, _) --[[ Line: 16 ]]
 	return Enum.ContextActionResult.Pass
 end
 
-function startFirstPersonToggleListener() --[[ Line: 26 ]]
+function startFirstPersonToggleListener()
 	-- upvalues: ContextActionService (copy), onFirstPersonToggleInput (copy)
 	ContextActionService:BindCoreAction("FirstPersonToggleAction", onFirstPersonToggleInput, false, Enum.KeyCode.ButtonR3)
 end
 
-function stopFirstPersonToggleListener() --[[ Line: 35 ]]
+function stopFirstPersonToggleListener()
 	-- upvalues: ContextActionService (copy)
 	ContextActionService:UnbindAction("FirstPersonToggleAction")
 end
 
 return {
 	Name = "FirstPersonToggleEvent",
-	StartEvent = function(Callback) --[[ Line: 39 ]]
+	StartEvent = function(Callback)
 		-- upvalues: Flag (ref), RenderSteppedConnection (ref), RunService (copy)
 		startFirstPersonToggleListener()
-		RenderSteppedConnection = RunService.RenderStepped:Connect(function(_) --[[ Line: 44 | Named "onRenderStepped" ]]
+		RenderSteppedConnection = RunService.RenderStepped:Connect(function(_)
 			-- upvalues: Flag (upval), Callback (copy), RenderSteppedConnection (upval)
 			if Flag then
 				stopFirstPersonToggleListener()
@@ -41,7 +41,7 @@ return {
 			end
 		end)
 	end,
-	StopEvent = function() --[[ Line: 64 ]]
+	StopEvent = function()
 		-- upvalues: RenderSteppedConnection (ref)
 		if RenderSteppedConnection then
 			RenderSteppedConnection:Disconnect()

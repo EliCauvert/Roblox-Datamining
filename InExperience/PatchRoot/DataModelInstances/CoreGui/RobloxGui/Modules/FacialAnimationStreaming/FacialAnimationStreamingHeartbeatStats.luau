@@ -12,7 +12,7 @@ local t = {}
 local v1 = nil
 local Tbl = {}
 
-local function _() --[[ Line: 41 | Named "updateTrackingTimes" ]]
+local function _()
 	-- upvalues: v1 (ref), t (copy), None (ref)
 	local ClockTime = os.clock()
 	
@@ -23,7 +23,7 @@ local function _() --[[ Line: 41 | Named "updateTrackingTimes" ]]
 	v1 = ClockTime
 end
 
-local function reportHeartbeat() --[[ Line: 52 ]]
+local function reportHeartbeat()
 	-- upvalues: RbxAnalyticsService (copy), Players (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), None (ref), v1 (ref), t (copy), Default (copy), AvatarChatHeartbeatStatsModule (copy)
 	local config = {
 		pid = tostring(game.PlaceId),
@@ -51,13 +51,13 @@ local function reportHeartbeat() --[[ Line: 52 ]]
 	Default:logRobloxTelemetryEvent(AvatarChatHeartbeatStatsModule, nil, config)
 end
 
-local _ = function() --[[ Line: 76 | Named "startHeartbeat" ]]
+local _ = function()
 	-- upvalues: GetFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule (copy), Flag (ref), reportHeartbeat (copy)
 	local FIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule: number = GetFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule()
 	
 	if FIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule > 0 and not Flag then
 		Flag = true
-		task.spawn(function() --[[ Line: 80 ]]
+		task.spawn(function()
 			-- upvalues: Flag (upval), reportHeartbeat (upval), FIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule (copy)
 			while Flag do
 				reportHeartbeat()
@@ -68,7 +68,7 @@ local _ = function() --[[ Line: 76 | Named "startHeartbeat" ]]
 	end
 end
 
-local _ = function() --[[ Line: 90 | Named "updateTrackingMode" ]]
+local _ = function()
 	-- upvalues: v1 (ref), t (copy), None (ref), FaceAnimatorService (copy), config (copy)
 	local ClockTime = os.clock()
 	
@@ -98,13 +98,13 @@ local _ = function() --[[ Line: 90 | Named "updateTrackingMode" ]]
 end
 
 return {
-	Initialize = function() --[[ Line: 104 ]]
+	Initialize = function()
 		-- upvalues: GetFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule (copy), config (copy), t (copy), Tbl (copy), FaceAnimatorService (copy), v1 (ref), None (ref), Flag (ref), reportHeartbeat (copy)
 		if GetFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule() <= 0 then return end
 		for _, value in config do
 			t[value] = 0
 		end
-		Tbl.videoAnimationEnabled = FaceAnimatorService:GetPropertyChangedSignal("VideoAnimationEnabled"):Connect(function() --[[ Line: 113 ]]
+		Tbl.videoAnimationEnabled = FaceAnimatorService:GetPropertyChangedSignal("VideoAnimationEnabled"):Connect(function()
 			-- upvalues: v1 (upval), t (upval), None (upval), FaceAnimatorService (upval), config (upval)
 			local ClockTime = os.clock()
 			
@@ -132,7 +132,7 @@ return {
 				None = config.None
 			end
 		end)
-		Tbl.audioAnimationEnabled = FaceAnimatorService:GetPropertyChangedSignal("AudioAnimationEnabled"):Connect(function() --[[ Line: 117 ]]
+		Tbl.audioAnimationEnabled = FaceAnimatorService:GetPropertyChangedSignal("AudioAnimationEnabled"):Connect(function()
 			-- upvalues: v1 (upval), t (upval), None (upval), FaceAnimatorService (upval), config (upval)
 			local ClockTime = os.clock()
 			
@@ -172,7 +172,7 @@ return {
 		
 		if FIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule > 0 and not Flag then
 			Flag = true
-			task.spawn(function() --[[ Line: 80 ]]
+			task.spawn(function()
 				-- upvalues: Flag (upval), reportHeartbeat (upval), FIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule (copy)
 				while Flag do
 					reportHeartbeat()
@@ -182,7 +182,7 @@ return {
 			end)
 		end
 	end,
-	Cleanup = function() --[[ Line: 125 ]]
+	Cleanup = function()
 		-- upvalues: GetFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule (copy), Tbl (copy), Flag (ref)
 		if GetFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule() <= 0 then return end
 		for _, Connection in pairs(Tbl) do

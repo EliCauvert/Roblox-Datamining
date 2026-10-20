@@ -19,13 +19,13 @@ local GetOverflowMenuSignalStoreModule = require(AppBlox.OverflowMenu.getOverflo
 local UseOverflowMenuOpenModule = require(AppBlox.OverflowMenu.useOverflowMenuOpen)
 local FFlagLuaAppSduiGameTileFeedback = require(Parent.SharedFlags).FFlagLuaAppSduiGameTileFeedback
 
-return ReactModule.memo(function(p1) --[[ Line: 58 | Named "OverflowMenu" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), GetOverflowMenuSignalStoreModule (copy), UseOverflowMenuOpenModule (copy), CryoModule (copy), UseFocusNavigableSurfaceRegistryConnectionFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), View (copy), FFlagLuaAppSduiGameTileFeedback (copy), IconButton (copy), ThreeDotsHorizontal (copy), IconSize (copy), ButtonVariant (copy), Menu (copy), PopoverAlign (copy), PopoverSide (copy), InputSize (copy)
 	local MenuKey = p1.menuKey
 	local UseRefResult = ReactModule.useRef(nil)
 	local OverflowMenuSignalStoreModule = GetOverflowMenuSignalStoreModule()
 	local UseOverflowMenuOpenModuleResult = UseOverflowMenuOpenModule(MenuKey)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 65 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseOverflowMenuOpenModuleResult (copy), OverflowMenuSignalStoreModule (copy), MenuKey (copy), p1 (copy)
 		OverflowMenuSignalStoreModule.toggleMenu(MenuKey)
 		
@@ -38,7 +38,7 @@ return ReactModule.memo(function(p1) --[[ Line: 58 | Named "OverflowMenu" ]]
 		UseOverflowMenuOpenModuleResult,
 		p1.onMenuOpenChanged
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 81 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: OverflowMenuSignalStoreModule (copy), MenuKey (copy), p1 (copy)
 		OverflowMenuSignalStoreModule.closeMenu(MenuKey)
 		
@@ -50,17 +50,17 @@ return ReactModule.memo(function(p1) --[[ Line: 58 | Named "OverflowMenu" ]]
 		OverflowMenuSignalStoreModule,
 		p1.onMenuOpenChanged
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 96 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CryoModule (upval), p1 (copy), OverflowMenuSignalStoreModule (copy), MenuKey (copy)
-		return CryoModule.List.map(p1.menuItems, function(p2) --[[ Line: 97 ]]
+		return CryoModule.List.map(p1.menuItems, function(p2)
 			-- upvalues: OverflowMenuSignalStoreModule (upval), MenuKey (upval), p1 (upval)
 			return {
 				icon = p2.icon,
 				id = p2.id,
 				text = p2.text,
-				onActivated = function() --[[ Line: 102 ]]
+				onActivated = function()
 					-- upvalues: p2 (copy), OverflowMenuSignalStoreModule (upval), MenuKey (upval), p1 (upval)
-					task.spawn(function() --[[ Line: 103 ]]
+					task.spawn(function()
 						-- upvalues: p2 (upval)
 						p2.onActivated()
 					end)
@@ -79,7 +79,7 @@ return ReactModule.memo(function(p1) --[[ Line: 58 | Named "OverflowMenu" ]]
 		p1.onMenuOpenChanged
 	})
 	local UseRefResult1 = ReactModule.useRef(MenuKey)
-	ReactModule.useEffect(function() --[[ Line: 124 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), MenuKey (copy), OverflowMenuSignalStoreModule (copy)
 		if UseRefResult1.current ~= MenuKey and OverflowMenuSignalStoreModule then
 			UseRefResult1.current = MenuKey
@@ -87,7 +87,7 @@ return ReactModule.memo(function(p1) --[[ Line: 58 | Named "OverflowMenu" ]]
 		end
 	end, { MenuKey, OverflowMenuSignalStoreModule })
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 132 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2 (copy), p1 (copy)
 		UseStateResult2(p2)
 		

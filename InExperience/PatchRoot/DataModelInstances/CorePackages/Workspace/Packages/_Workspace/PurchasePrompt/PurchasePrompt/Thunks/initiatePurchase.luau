@@ -62,9 +62,9 @@ local GetRobloxSubscriptionProductsFunction = require(Parent.RobloxSubscriptionP
 local PurchaseFlowUUIDTelemetryModule = require(PurchasePrompt.Events.PurchaseFlowUUIDTelemetry)
 local list = { NetworkModule, ExternalSettingsModule }
 
-return function(SubscriptionId, InfoType, p1, p2, p3, p4, CollectibleItemId, CollectibleItemInstanceId, p5, p6, p7, p8) --[[ Line: 95 | Named "initiatePurchase" ]]
+return function(SubscriptionId, InfoType, p1, p2, p3, p4, CollectibleItemId, CollectibleItemInstanceId, p5, p6, p7, p8)
 	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), ExternalSettingsModule (copy), HasPendingRequestModule (copy), FFlagEnablePurchaseFlowUUIDMigrationModule (copy), HttpService (copy), SetPurchaseFlowUUIDModule (copy), LoggingProtocolModule (copy), PurchaseFlowUUIDTelemetryModule (copy), RequestAssetPurchaseModule (copy), RequestGamepassPurchaseModule (copy), RequestProductPurchaseModule (copy), ProductTypeEnum (copy), RequestExperiencePurchaseModule (copy), RequestLookPurchaseModule (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), RequestDeveloperSubscriptionPurchaseModule (copy), FFlagAXMISWithBlackbird (copy), RequestRobuxUpsellPurchaseModule (copy), RequestVIPServerPurchaseModule (copy), ErrorOccurredModule (copy), PurchaseErrorModule (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), FFlagEnableInExperiencePurchaseModalMetricsModule (copy), TrackInExperiencePurchaseStartModule (copy), FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), FFlagAddPurchaseOptionForProvidingBalance (copy), FFlagUnifiedPurchaseAddSkeleton (copy), SetIsUserEligibleForUnifiedPurchaseFlowModule (copy), SetPromptStateModule (copy), PromptStateModule (copy), FFlagRefreshPriceOnRetryAfterUpsellModule (copy), FFlagEnableFetchCartPricingDuringInExperience (copy), FetchCartPricingModule (copy), FFlagAXFetchCartPricingDuringInExperienceExposure (copy), IXPServiceWrapper (copy), FStringAXFetchCartPricingDuringInExperienceLayerName (copy), FFlagMockCartPricingResponseInStudioModule (copy), AppContextModule (copy), FFlagEnableInExperienceOffersPurchaseFlow (copy), FetchInGameItemCartPricingModule (copy), PromiseModule (copy), GetFFlagEnableCreatorStorePurchasingCutoverModule (copy), GetProductInfoModule (copy), DeprecatedGetProductInfoModule (copy), Players (copy), GetIsAlreadyOwnedModule (copy), GetBalanceInfoModule (copy), GetUnifiedPurchaseFlowEligibilityModule (copy), GetRobloxSubscriptionProductsFunction (copy), SetProductPayloadModule (copy), BuildProductPayloadFromInitiateArgsModule (copy), FFlagRefreshLookPriceOnRetryAfterUpsellModule (copy), RefreshDevSubPriceOnRetryAfterUpsell2 (copy), ApplyRefreshedPriceModule (copy), ResolvePromptStateModule (copy), FFlagFixPurchasingErrorCounterModule (copy)
-	return ThunkModule.new(script.Name, list, function(p9, p10) --[[ Line: 109 ]]
+	return ThunkModule.new(script.Name, list, function(p9, p10)
 		-- upvalues: NetworkModule (upval), ExternalSettingsModule (upval), HasPendingRequestModule (upval), p8 (copy), FFlagEnablePurchaseFlowUUIDMigrationModule (upval), HttpService (upval), SetPurchaseFlowUUIDModule (upval), LoggingProtocolModule (upval), PurchaseFlowUUIDTelemetryModule (upval), InfoType (copy), RequestAssetPurchaseModule (upval), SubscriptionId (copy), p1 (copy), p2 (copy), p3 (copy), p4 (copy), CollectibleItemId (copy), CollectibleItemInstanceId (copy), p5 (copy), p6 (copy), RequestGamepassPurchaseModule (upval), RequestProductPurchaseModule (upval), ProductTypeEnum (upval), RequestExperiencePurchaseModule (upval), RequestLookPurchaseModule (upval), FFlagEnableUnifiedPurchaseFlowForDevSubs (upval), RequestDeveloperSubscriptionPurchaseModule (upval), FFlagAXMISWithBlackbird (upval), RequestRobuxUpsellPurchaseModule (upval), RequestVIPServerPurchaseModule (upval), ErrorOccurredModule (upval), PurchaseErrorModule (upval), FFlagLuaAppsEnablePromptVIPServerPurchase (upval), FFlagEnableInExperiencePurchaseModalMetricsModule (upval), TrackInExperiencePurchaseStartModule (upval), FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (upval), FFlagAddPurchaseOptionForProvidingBalance (upval), FFlagUnifiedPurchaseAddSkeleton (upval), p7 (copy), SetIsUserEligibleForUnifiedPurchaseFlowModule (upval), SetPromptStateModule (upval), PromptStateModule (upval), FFlagRefreshPriceOnRetryAfterUpsellModule (upval), FFlagEnableFetchCartPricingDuringInExperience (upval), FetchCartPricingModule (upval), FFlagAXFetchCartPricingDuringInExperienceExposure (upval), IXPServiceWrapper (upval), FStringAXFetchCartPricingDuringInExperienceLayerName (upval), FFlagMockCartPricingResponseInStudioModule (upval), AppContextModule (upval), FFlagEnableInExperienceOffersPurchaseFlow (upval), FetchInGameItemCartPricingModule (upval), PromiseModule (upval), GetFFlagEnableCreatorStorePurchasingCutoverModule (upval), GetProductInfoModule (upval), DeprecatedGetProductInfoModule (upval), Players (upval), GetIsAlreadyOwnedModule (upval), GetBalanceInfoModule (upval), GetUnifiedPurchaseFlowEligibilityModule (upval), GetRobloxSubscriptionProductsFunction (upval), SetProductPayloadModule (upval), BuildProductPayloadFromInitiateArgsModule (upval), FFlagRefreshLookPriceOnRetryAfterUpsellModule (upval), RefreshDevSubPriceOnRetryAfterUpsell2 (upval), ApplyRefreshedPriceModule (upval), ResolvePromptStateModule (upval), FFlagFixPurchasingErrorCounterModule (upval)
 		local v1 = p10[NetworkModule]
 		local v2 = p10[ExternalSettingsModule]
@@ -153,7 +153,7 @@ return function(SubscriptionId, InfoType, p1, p2, p3, p4, CollectibleItemId, Col
 		if FFlagAXFetchCartPricingDuringInExperienceExposure and InfoType == Enum.InfoType.Asset and not p9:getState().purchaseOptions.shouldFetchCartPricing and not p8 then
 			IXPServiceWrapper:LogFlagLinkedUserLayerExposure(FStringAXFetchCartPricingDuringInExperienceLayerName)
 		end
-		local v4 = if FFlagEnableFetchCartPricingDuringInExperience and InfoType == Enum.InfoType.Asset and not p9:getState().purchaseOptions.shouldFetchCartPricing and not p8 then function(p11) --[[ Line: 257 ]]
+		local v4 = if FFlagEnableFetchCartPricingDuringInExperience and InfoType == Enum.InfoType.Asset and not p9:getState().purchaseOptions.shouldFetchCartPricing and not p8 then function(p11)
 			-- upvalues: p9 (copy), FetchCartPricingModule (upval)
 			return p9:dispatch(FetchCartPricingModule(nil, p11))
 		end else nil
@@ -168,12 +168,12 @@ return function(SubscriptionId, InfoType, p1, p2, p3, p4, CollectibleItemId, Col
 			alreadyOwned = GetIsAlreadyOwnedModule(v1, SubscriptionId, InfoType, Flag),
 			balanceInfo = GetBalanceInfoModule(v1, v2, false, true, ProvidedRobuxBalance),
 			isUserEligibleForUnifiedPurchaseFlow = GetUnifiedPurchaseFlowEligibilityModule(v1, InfoType),
-			robloxSubscriptionProducts = GetRobloxSubscriptionProductsFunction():catch(function() --[[ Line: 301 ]]
+			robloxSubscriptionProducts = GetRobloxSubscriptionProductsFunction():catch(function()
 				return nil
 			end),
 			cartPricingResponse = DispatchResult,
 			inGameItemCartPricingResponse = if FFlagEnableInExperienceOffersPurchaseFlow then DispatchResult1 else nil
-		}):andThen(function(Result) --[[ Line: 312 ]]
+		}):andThen(function(Result)
 			-- upvalues: FFlagEnableUnifiedPurchaseFlowForDevSubs (upval), ProductTypeEnum (upval), p9 (copy), SetProductPayloadModule (upval), SubscriptionId (upval), BuildProductPayloadFromInitiateArgsModule (upval), InfoType (upval), p1 (upval), p2 (upval), p3 (upval), p4 (upval), CollectibleItemId (upval), CollectibleItemInstanceId (upval), p5 (upval), p6 (upval), p7 (copy), FFlagRefreshPriceOnRetryAfterUpsellModule (upval), FFlagRefreshLookPriceOnRetryAfterUpsellModule (upval), p8 (upval), RefreshDevSubPriceOnRetryAfterUpsell2 (upval), ApplyRefreshedPriceModule (upval), ResolvePromptStateModule (upval)
 			if FFlagEnableUnifiedPurchaseFlowForDevSubs and Result.productInfo.ProductType == ProductTypeEnum.DeveloperSubscription and (p9:getState().productPayload == nil or p9:getState().productPayload.kind == nil) then
 				p9:dispatch(SetProductPayloadModule({
@@ -204,7 +204,7 @@ return function(SubscriptionId, InfoType, p1, p2, p3, p4, CollectibleItemId, Col
 				end
 			end
 			p9:dispatch(ResolvePromptStateModule(Result.productInfo, Result.accountInfo, Result.balanceInfo, Result.alreadyOwned, p2, v5, Result.isUserEligibleForUnifiedPurchaseFlow, Result.robloxSubscriptionProducts))
-		end):catch(function(Err) --[[ Line: 383 ]]
+		end):catch(function(Err)
 			-- upvalues: FFlagFixPurchasingErrorCounterModule (upval), PurchaseErrorModule (upval), p9 (copy), ErrorOccurredModule (upval)
 			if not FFlagFixPurchasingErrorCounterModule then
 				p9:dispatch(ErrorOccurredModule(Err))

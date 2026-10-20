@@ -1,6 +1,6 @@
 ﻿local Cryo = require(script:FindFirstAncestor("CrossExperience").dependencies).Cryo
 
-return function(p1) --[[ Line: 6 ]]
+return function(p1)
 	-- upvalues: Cryo (copy)
 	local t = {}
 	

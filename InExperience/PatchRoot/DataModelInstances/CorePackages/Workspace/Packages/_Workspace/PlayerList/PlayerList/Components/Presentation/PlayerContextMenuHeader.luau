@@ -8,7 +8,7 @@ local Image = FoundationModule.Image
 local PlayerVerifiedBadgeModule = require(Parent.Components.Presentation.PlayerVerifiedBadge)
 local ConstantsModule = require(Parent.Common.Constants)
 
-return ReactModule.memo(function(p1) --[[ Line: 14 | Named "PlayerContextMenuHeader" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), Text (copy), PlayerVerifiedBadgeModule (copy), View (copy), ConstantsModule (copy), Image (copy)
 	local Header = p1.header
 	local config = {

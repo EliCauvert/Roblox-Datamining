@@ -5,14 +5,14 @@ local CommonUtilModule = require(CoreGui.RobloxGui.Modules.Common.CommonUtil)
 local StatsUtilsModule = require(CoreGui.RobloxGui.Modules.Stats.StatsUtils)
 local TreeViewItemModule = require(CoreGui.RobloxGui.Modules.Stats.TreeViewItem)
 
-local function _() --[[ Line: 19 | Named "__GetMemoryPerformanceStatsItem" ]]
+local function _()
 	-- upvalues: StatsService (copy), StatsUtilsModule (copy)
 	local PerformanceStats = StatsService and StatsService:FindFirstChild("PerformanceStats")
 	
 	return if PerformanceStats == nil then nil else PerformanceStats:FindFirstChild(StatsUtilsModule.StatNames[StatsUtilsModule.StatType_Memory])
 end
 
-local function __FillInMemoryUsageTreeRecursive(OrMakeChildById, Child) --[[ Line: 30 ]]
+local function __FillInMemoryUsageTreeRecursive(OrMakeChildById, Child)
 	-- upvalues: StatsUtilsModule (copy), CommonUtilModule (copy), __FillInMemoryUsageTreeRecursive (copy)
 	OrMakeChildById:setLabelAndValue(StatsUtilsModule.GetMemoryAnalyzerStatName(Child.Name), (Child:GetValue()))
 	
@@ -25,7 +25,7 @@ local ClientMemoryAnalyzerModule = {}
 setmetatable(ClientMemoryAnalyzerModule, BaseMemoryAnalyzerModule)
 ClientMemoryAnalyzerModule.__index = ClientMemoryAnalyzerModule
 
-function ClientMemoryAnalyzerModule.new(p1) --[[ Line: 61 ]]
+function ClientMemoryAnalyzerModule.new(p1)
 	-- upvalues: BaseMemoryAnalyzerModule (copy), ClientMemoryAnalyzerModule (copy)
 	local NewBaseMemoryAnalyzer = BaseMemoryAnalyzerModule.new(p1)
 	setmetatable(NewBaseMemoryAnalyzer, ClientMemoryAnalyzerModule)
@@ -36,12 +36,12 @@ function ClientMemoryAnalyzerModule.new(p1) --[[ Line: 61 ]]
 	return NewBaseMemoryAnalyzer
 end
 
-function ClientMemoryAnalyzerModule:startListeningForUpdates() --[[ Line: 86 ]]
+function ClientMemoryAnalyzerModule:startListeningForUpdates()
 	self._shouldListenForUpdates = true
 	
 	if not self._spawnedLoopScheduled then
 		self._spawnedLoopScheduled = true
-		spawn(function() --[[ Line: 95 ]]
+		spawn(function()
 			-- upvalues: self (copy)
 			while self._shouldListenForUpdates do
 				self:refreshMemoryUsageTree()
@@ -55,11 +55,11 @@ function ClientMemoryAnalyzerModule:startListeningForUpdates() --[[ Line: 86 ]]
 	end
 end
 
-function ClientMemoryAnalyzerModule:stopListeningForUpdates() --[[ Line: 107 ]]
+function ClientMemoryAnalyzerModule:stopListeningForUpdates()
 	self._shouldListenForUpdates = false
 end
 
-function ClientMemoryAnalyzerModule:refreshMemoryUsageTree() --[[ Line: 112 ]]
+function ClientMemoryAnalyzerModule:refreshMemoryUsageTree()
 	-- upvalues: TreeViewItemModule (copy), StatsService (copy), StatsUtilsModule (copy), __FillInMemoryUsageTreeRecursive (copy)
 	if self._rootTreeViewItem == nil then
 		self._rootTreeViewItem = TreeViewItemModule.new("root", nil)
@@ -74,7 +74,7 @@ function ClientMemoryAnalyzerModule:refreshMemoryUsageTree() --[[ Line: 112 ]]
 	end
 end
 
-function ClientMemoryAnalyzerModule:getMemoryUsageTree() --[[ Line: 125 ]]
+function ClientMemoryAnalyzerModule:getMemoryUsageTree()
 	return self._rootTreeViewItem
 end
 

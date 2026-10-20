@@ -5,16 +5,16 @@ local HttpRequestModule = require(script.Parent.HttpRequest)
 local RobloxPlusAmpFeatureName = game:DefineFastString("RobloxPlusAmpFeatureName", "IsRobloxPlusSubscribed")
 local RobloxPlusAmpNamespace = game:DefineFastString("RobloxPlusAmpNamespace", "subscriptions/PlusSubscription")
 
-return function() --[[ Line: 12 | Named "getAmpFeatureAccess" ]]
+return function()
 	-- upvalues: Url (copy), RobloxPlusAmpFeatureName (copy), RobloxPlusAmpNamespace (copy), HttpRequestModule (copy), PromiseModule (copy)
 	return HttpRequestModule.new():get(Url.APIS_URL .. "access-management/v1/feature-access?" .. Url:makeQueryString({
 		featureNames = RobloxPlusAmpFeatureName,
 		namespace = RobloxPlusAmpNamespace
-	})):andThen(function(Result) --[[ Line: 23 ]]
+	})):andThen(function(Result)
 		local Features = Result and Result.features
 		
 		return if type(Features) == "table" and #Features > 0 then Features[1].access else nil
-	end):catch(function() --[[ Line: 30 ]]
+	end):catch(function()
 		-- upvalues: PromiseModule (upval)
 		return PromiseModule.resolve(nil)
 	end)

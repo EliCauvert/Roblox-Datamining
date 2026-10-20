@@ -18,12 +18,12 @@ local FFlagSduiCapabilityDevStoreSeeAllWebviewFallback = SharedFlagsModule.FFlag
 local FFlagSignalsNavP3Dispatch = SharedFlagsModule.FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-local function _() --[[ Line: 38 | Named "getIsCompactTouch" ]]
+local function _()
 	-- upvalues: DisplayModule (copy), ResponsiveModule (copy)
 	return ResponsiveModule.getIsCompactTouch(DisplayModule.GetDisplayStore(false).getViewportSize(false), (ResponsiveModule.GetInputModeStore(false).getPreferredInputType(false)))
 end
 
-return function(p1, _, p2, _) --[[ Line: 51 ]]
+return function(p1, _, p2, _)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), FFlagLuaAppDevStoreSeeAllSduiLogExposure (copy), IXPService (copy), FStringLuaAppDevStoreSeeAllSduiIxpLayer (copy), FFlagLuaAppDevStoreSeeAllSduiEnabled (copy), NavigateToDevStoreSeeAllFunction (copy), FFlagSduiCapabilityDevStoreSeeAllWebviewFallback (copy), DisplayModule (copy), ResponsiveModule (copy), OpenSduiWebLinkModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	

@@ -4,7 +4,7 @@ local PromiseModule = require(Parent.Promise)
 local Response = require(script.Parent.Response).Response
 local Request = require(script.Parent.Request).Request
 
-local function _(p1) --[[ Line: 34 | Named "parseResponse" ]]
+local function _(p1)
 	-- upvalues: Response (copy)
 	return Response.new(p1.Body, {
 		status = p1.StatusCode,
@@ -13,13 +13,13 @@ local function _(p1) --[[ Line: 34 | Named "parseResponse" ]]
 	})
 end
 
-return function(HttpService) --[[ Line: 44 | Named "buildFetch" ]]
+return function(HttpService)
 	-- upvalues: PromiseModule (copy), Request (copy), Error (copy), Response (copy)
-	return function(p1, p2) --[[ Line: 45 | Named "fetch" ]]
+	return function(p1, p2)
 		-- upvalues: PromiseModule (upval), Request (upval), Error (upval), HttpService (copy), Response (upval)
-		return PromiseModule.new(function(Callback1, Callback: (any) -> ()) --[[ Line: 46 ]]
+		return PromiseModule.new(function(Callback1, Callback: (any) -> ())
 			-- upvalues: Request (upval), p1 (copy), p2 (copy), Error (upval), HttpService (upval), Response (upval)
-			local Success, Result = pcall(function() --[[ Line: 47 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: Request (upval), p1 (upval), p2 (upval)
 				return Request.new(p1, p2)
 			end)
@@ -31,7 +31,7 @@ return function(HttpService) --[[ Line: 44 | Named "buildFetch" ]]
 					Body = Result.body,
 					Headers = Result.headers.headerList,
 					CachePolicy = Result.cache
-				}):Start(function(p3, p4) --[[ Line: 66 ]]
+				}):Start(function(p3, p4)
 					-- upvalues: Result (copy), Callback (copy), Error (upval), Response (upval), Callback1 (copy)
 					if p3 then
 						Callback1((Response.new(p4.Body, {

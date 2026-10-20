@@ -7,7 +7,7 @@ local DialogSize = FoundationModule.Enums.DialogSize
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local FFlagTCShareLinkErrorModalTextRename = require(Parent.SharedFlags).FFlagTCShareLinkErrorModalTextRename
 
-return function(p1) --[[ Line: 24 | Named "TrustedFriendsShareLinkErrorModal" ]]
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), FFlagTCShareLinkErrorModalTextRename (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), ButtonVariant (copy)
 	local Navigation = p1.navigation
 	local ExtraPropsParam = Navigation.getParam("extraProps")
@@ -34,7 +34,7 @@ return function(p1) --[[ Line: 24 | Named "TrustedFriendsShareLinkErrorModal" ]]
 				{
 					text = UseLocalizationResult.ok,
 					variant = ButtonVariant.Emphasis,
-					onActivated = ReactModule.useCallback(function() --[[ Line: 38 ]]
+					onActivated = ReactModule.useCallback(function()
 						-- upvalues: Navigation (copy), ExtraPropsParam (copy)
 						Navigation.pop()
 						ExtraPropsParam.closeModal()

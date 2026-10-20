@@ -11,12 +11,12 @@ local GetPriceLineContentModule = require(AvatarExperienceInspectAndBuy.Utils.ge
 local GetPriceStatusModule = require(AvatarExperienceInspectAndBuy.Utils.getPriceStatus)
 local _ = require(script.Parent.SelectableItemCardRowView)
 
-return function(Frame) --[[ Line: 38 | Named "useSelectableRowViewModel" ]]
+return function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), GetPriceStatusModule (copy), PriceStatusModule (copy), GetItemThumbnailUrlModule (copy), ItemCardThumbnail (copy), GetCatalogCardItemTypeModule (copy), GetPriceLineContentModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ItemData = Frame.itemData
 	local ItemCardWidthDelta = if Frame.isSelectionEnabled then Frame.itemCardWidth - (UseTokensResult.Size.Size_400 + UseTokensResult.Gap.Medium) else Frame.itemCardWidth
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 50 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ItemData (copy), GetItemThumbnailUrlModule (upval)
 		return if ItemData.id == nil or ItemData.itemType == nil then nil else GetItemThumbnailUrlModule({ id = ItemData.id, itemType = ItemData.itemType })
 	end, { ItemData })
@@ -36,11 +36,11 @@ return function(Frame) --[[ Line: 38 | Named "useSelectableRowViewModel" ]]
 				verified = ItemData.creator.creatorHasVerifiedBadge
 			} else nil,
 			priceLineContent = GetPriceLineContentModule(ItemData, UseTokensResult, Frame.priceStatusLabels, Frame.priceOptions),
-			isOwned = ReactModule.useMemo(function(): boolean --[[ Line: 46 ]]
+			isOwned = ReactModule.useMemo(function(): boolean
 				-- upvalues: GetPriceStatusModule (upval), ItemData (copy), PriceStatusModule (upval)
 				return GetPriceStatusModule(ItemData) == PriceStatusModule.Owned
 			end, { ItemData }),
-			onActivated = ReactModule.useCallback(function() --[[ Line: 58 ]]
+			onActivated = ReactModule.useCallback(function()
 				-- upvalues: OnItemCardActivatedFunction (copy), ItemData (copy)
 				OnItemCardActivatedFunction(ItemData)
 			end, { ItemData, OnItemCardActivatedFunction }),
@@ -50,7 +50,7 @@ return function(Frame) --[[ Line: 38 | Named "useSelectableRowViewModel" ]]
 		},
 		isSelectionEnabled = Frame.isSelectionEnabled,
 		isSelected = IsSelected,
-		onSelectionToggled = ReactModule.useCallback(function() --[[ Line: 65 ]]
+		onSelectionToggled = ReactModule.useCallback(function()
 			-- upvalues: OnSelectionChangedFunction (copy), ItemData (copy), IsSelected (copy)
 			OnSelectionChangedFunction(ItemData, not IsSelected)
 		end, { ItemData, IsSelected, OnSelectionChangedFunction }),

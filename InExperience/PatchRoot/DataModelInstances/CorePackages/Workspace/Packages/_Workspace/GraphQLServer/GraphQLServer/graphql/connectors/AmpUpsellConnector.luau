@@ -41,13 +41,13 @@ local NewUrlBuilder1 = UrlBuilder.new({
 })
 
 return {
-	getFeatureAccessFromFeatureNamesList = function(List, p1) --[[ Line: 27 ]]
+	getFeatureAccessFromFeatureNamesList = function(List, p1)
 		-- upvalues: Fetch (copy), PromiseModule (copy), NewUrlBuilder (copy), Response (copy), GraphQLError (copy)
 		local Fetch1 = if p1 then p1 else Fetch
 		
-		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 33 ]]
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 			-- upvalues: List (copy), NewUrlBuilder (upval), Fetch1 (copy), Response (upval), GraphQLError (upval)
-			local v1 = Fetch1(NewUrlBuilder({ featureNames = table.concat(List, ",") }), { method = "GET" }):catch(function() --[[ Line: 37 ]]
+			local v1 = Fetch1(NewUrlBuilder({ featureNames = table.concat(List, ",") }), { method = "GET" }):catch(function()
 				-- upvalues: Response (upval)
 				return Response.error()
 			end):expect()
@@ -62,7 +62,7 @@ return {
 				
 				return
 			end
-			local v2 = v1:json():catch(function() --[[ Line: 55 ]]
+			local v2 = v1:json():catch(function()
 				return nil
 			end):expect()
 			
@@ -82,18 +82,18 @@ return {
 			Callback1({ features = Features })
 		end)
 	end,
-	getUpsellFeatureAccessFromFeatureName = function(FeatureName, List, p2, NameSpace, ExtraParameters) --[[ Line: 93 ]]
+	getUpsellFeatureAccessFromFeatureName = function(FeatureName, List, p2, NameSpace, ExtraParameters)
 		-- upvalues: Fetch (copy), PromiseModule (copy), NewUrlBuilder1 (copy), Response (copy), GraphQLError (copy)
 		local Fetch1 = if p2 then p2 else Fetch
 		
-		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 102 ]]
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
 			-- upvalues: List (copy), NewUrlBuilder1 (upval), FeatureName (copy), NameSpace (copy), ExtraParameters (copy), Fetch1 (copy), Response (upval), GraphQLError (upval)
 			local v1 = Fetch1(NewUrlBuilder1({
 				featureName = FeatureName,
 				successfulActions = table.concat(List, ","),
 				nameSpace = NameSpace,
 				extraParameters = ExtraParameters
-			}), { method = "GET" }):catch(function() --[[ Line: 111 ]]
+			}), { method = "GET" }):catch(function()
 				-- upvalues: Response (upval)
 				return Response.error()
 			end):expect()
@@ -108,7 +108,7 @@ return {
 				
 				return
 			end
-			local v2 = v1:json():catch(function() --[[ Line: 129 ]]
+			local v2 = v1:json():catch(function()
 				return nil
 			end):expect()
 			

@@ -12,7 +12,7 @@ local VoiceStateModule = require(Parent.Parent.VoiceChat.Reducers.voiceState)
 local ConstantsModule = require(Parent.Resources.Constants)
 local ControlsModule = require(Parent.Resources.Controls)
 local config = {
-	[require(Parent.Actions.SetMenuOpen).name] = function(p1, p2) --[[ Line: 36 ]]
+	[require(Parent.Actions.SetMenuOpen).name] = function(p1, p2)
 		-- upvalues: Cryo (copy)
 		return Cryo.Dictionary.join(p1, {
 			isMenuOpen = p2.isMenuOpen,
@@ -20,19 +20,19 @@ local config = {
 			currentZone = if p1.isMenuOpen == p2.isMenuOpen then nil else 1
 		})
 	end,
-	[require(Parent.Actions.SetMainPageMoreMenuOpen).name] = function(p1, p2) --[[ Line: 49 ]]
+	[require(Parent.Actions.SetMainPageMoreMenuOpen).name] = function(p1, p2)
 		-- upvalues: Cryo (copy)
 		return Cryo.Dictionary.join(p1, { isMainPageMoreMenuOpen = p2.isMainPageMoreMenuOpen })
 	end,
-	[require(Parent.Actions.StartLeavingGame).name] = function(p1, _) --[[ Line: 54 ]]
+	[require(Parent.Actions.StartLeavingGame).name] = function(p1, _)
 		-- upvalues: Cryo (copy)
 		return Cryo.Dictionary.join(p1, { leavingGame = true })
 	end,
-	[require(Parent.Actions.CancelLeavingGame).name] = function(p1, _) --[[ Line: 59 ]]
+	[require(Parent.Actions.CancelLeavingGame).name] = function(p1, _)
 		-- upvalues: Cryo (copy)
 		return Cryo.Dictionary.join(p1, { leavingGame = false })
 	end,
-	[require(Parent.Actions.SetCurrentPage).name] = function(p1, p2) --[[ Line: 64 ]]
+	[require(Parent.Actions.SetCurrentPage).name] = function(p1, p2)
 		-- upvalues: Cryo (copy), ConstantsModule (copy)
 		return Cryo.Dictionary.join(p1, {
 			isMainPageMoreMenuOpen = false,
@@ -40,39 +40,39 @@ local config = {
 			currentZone = if p2.newPage == ConstantsModule.InitalPageKey then 0 else 1
 		})
 	end,
-	[require(Parent.Actions.SetControlLayout).name] = function(p1, p2) --[[ Line: 72 ]]
+	[require(Parent.Actions.SetControlLayout).name] = function(p1, p2)
 		-- upvalues: Cryo (copy)
 		return Cryo.Dictionary.join(p1, { controlLayout = p2.controlLayout })
 	end,
-	[require(Parent.Actions.SetScreenSize).name] = function(p1, p2) --[[ Line: 79 ]]
+	[require(Parent.Actions.SetScreenSize).name] = function(p1, p2)
 		-- upvalues: Cryo (copy)
 		return Cryo.Dictionary.join(p1, { screenSize = p2.newScreenSize })
 	end,
-	[require(Parent.Actions.SetRespawning).name] = function(p1, p2) --[[ Line: 84 ]]
+	[require(Parent.Actions.SetRespawning).name] = function(p1, p2)
 		-- upvalues: Cryo (copy)
 		return Cryo.Dictionary.join(p1, {
 			isMainPageMoreMenuOpen = not p2.respawning and p1.isMainPageMoreMenuOpen
 		})
 	end,
-	[require(Parent.Actions.SetCurrentZone).name] = function(p1, p2) --[[ Line: 96 ]]
+	[require(Parent.Actions.SetCurrentZone).name] = function(p1, p2)
 		-- upvalues: Cryo (copy)
 		return Cryo.Dictionary.join(p1, { currentZone = p2.zone })
 	end,
-	[require(Parent.Actions.SetControllerBarHeight).name] = function(p1, p2) --[[ Line: 101 ]]
+	[require(Parent.Actions.SetControllerBarHeight).name] = function(p1, p2)
 		-- upvalues: Cryo (copy)
 		return Cryo.Dictionary.join(p1, { controllerBarHeight = p2.controllerBarHeight })
 	end,
-	[require(Parent.Actions.IncrementControllerBar).name] = function(p1, _) --[[ Line: 106 ]]
+	[require(Parent.Actions.IncrementControllerBar).name] = function(p1, _)
 		-- upvalues: Cryo (copy)
 		return Cryo.Dictionary.join(p1, { controllerBarCount = p1.controllerBarCount + 1 })
 	end,
-	[require(Parent.Actions.DecrementControllerBar).name] = function(p1, _) --[[ Line: 111 ]]
+	[require(Parent.Actions.DecrementControllerBar).name] = function(p1, _)
 		-- upvalues: Cryo (copy)
 		return Cryo.Dictionary.join(p1, { controllerBarCount = p1.controllerBarCount - 1 })
 	end
 }
 
-return function(p1, p2) --[[ Line: 118 | Named "reducer" ]]
+return function(p1, p2)
 	-- upvalues: ControlsModule (copy), ConstantsModule (copy), InvitesModule (copy), RespawnModule (copy), GameInfoModule (copy), FriendsModule (copy), DisplayOptionsModule (copy), NativeClosePromptModule (copy), config (copy), NavigationReducerModule (copy), VoiceStateModule (copy), ReportModule (copy)
 	if p1 == nil then
 		p1 = {

@@ -1,6 +1,6 @@
 ﻿local SignalsModule = require(script:FindFirstAncestor("AuthCommon").Parent.Signals)
 
-return function() --[[ Line: 16 ]]
+return function()
 	-- upvalues: SignalsModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(false)
 	local Signal1, Signal2_1 = SignalsModule.createSignal(false)
@@ -13,7 +13,7 @@ return function() --[[ Line: 16 ]]
 		setSavedPasswordAfterLogin = Signal2_1,
 		getPasswordManagerMediatedSignup = Signal3,
 		setPasswordManagerMediatedSignup = Signal2_2,
-		resetAll = function() --[[ Line: 21 ]]
+		resetAll = function()
 			-- upvalues: Signal2 (copy), Signal2_1 (copy), Signal2_2 (copy)
 			Signal2(false)
 			Signal2_1(false)

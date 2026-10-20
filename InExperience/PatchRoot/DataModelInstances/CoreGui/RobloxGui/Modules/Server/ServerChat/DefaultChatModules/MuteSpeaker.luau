@@ -4,7 +4,7 @@ local ChatConstantsModule = require(ClientChatModules:WaitForChild("ChatConstant
 local ChatSettingsModule = require(ClientChatModules:WaitForChild("ChatSettings"))
 local DisplayNameHelpersModule = require(Chat:WaitForChild("ChatModules").Utility.DisplayNameHelpers)
 local ChatLocalizationModule = nil
-pcall(function() --[[ Line: 15 ]]
+pcall(function()
 	-- upvalues: ChatLocalizationModule (ref)
 	ChatLocalizationModule = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
@@ -13,7 +13,7 @@ if ChatLocalizationModule == nil then
 	ChatLocalizationModule = {}
 end
 if not ChatLocalizationModule.FormatMessageToSend or not ChatLocalizationModule.LocalizeFormattedMessage then
-	function ChatLocalizationModule:FormatMessageToSend(_, Formatted) --[[ Line: 18 ]]
+	function ChatLocalizationModule:FormatMessageToSend(_, Formatted)
 		return Formatted
 	end
 end
@@ -21,9 +21,9 @@ local config = {
 	ChatColor = ChatSettingsModule.ErrorMessageTextColor or Color3.fromRGB(245, 50, 50)
 }
 
-return function(p1) --[[ Line: 24 | Named "Run" ]]
+return function(p1)
 	-- upvalues: ChatSettingsModule (copy), DisplayNameHelpersModule (copy), ChatLocalizationModule (ref), config (copy), ChatConstantsModule (copy)
-	local function _(Text: string): string --[[ Line: 26 | Named "GetSpeakerNameFromMessage" ]]
+	local function _(Text: string): string
 		local Segment: string = Text
 		
 		if string.sub(Text, 1, 1) == "\"" then
@@ -44,7 +44,7 @@ return function(p1) --[[ Line: 24 | Named "Run" ]]
 		return Segment
 	end
 	
-	local function DoMuteCommand(p2, Text: string, p3) --[[ Line: 42 ]]
+	local function DoMuteCommand(p2, Text: string, p3)
 		-- upvalues: p1 (copy), ChatSettingsModule (upval), DisplayNameHelpersModule (upval), ChatLocalizationModule (upval), config (upval)
 		local Segment: string = Text
 		
@@ -99,7 +99,7 @@ return function(p1) --[[ Line: 24 | Named "Run" ]]
 		end
 	end
 	
-	local function DoUnmuteCommand(p2, Text: string, p3) --[[ Line: 94 ]]
+	local function DoUnmuteCommand(p2, Text: string, p3)
 		-- upvalues: p1 (copy), ChatSettingsModule (upval), DisplayNameHelpersModule (upval), ChatLocalizationModule (upval), config (upval)
 		local Segment: string = Text
 		
@@ -156,7 +156,7 @@ return function(p1) --[[ Line: 24 | Named "Run" ]]
 		end
 	end
 	
-	p1:RegisterProcessCommandsFunction("mute_commands", function(p2, Text: string, p3): boolean --[[ Line: 149 | Named "MuteCommandsFunction" ]]
+	p1:RegisterProcessCommandsFunction("mute_commands", function(p2, Text: string, p3): boolean
 		-- upvalues: DoMuteCommand (copy), DoUnmuteCommand (copy)
 		local Flag = false
 		

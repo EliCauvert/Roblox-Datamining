@@ -2,30 +2,30 @@
 local BuildHistoryLoadTriggerViewportHeightPercent = game:DefineFastInt("BuildHistoryLoadTriggerViewportHeightPercent", 100)
 
 return {
-	getBottomCanvasPosition = function(ScrollFrame): number --[[ Line: 6 ]]
+	getBottomCanvasPosition = function(ScrollFrame): number
 		return (math.max(0, ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y))
 	end,
-	getDistanceFromBottom = function(ScrollFrame): number --[[ Line: 10 ]]
+	getDistanceFromBottom = function(ScrollFrame): number
 		return (math.max(0, math.max(0, ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y) - ScrollFrame.CanvasPosition.Y))
 	end,
-	getOffsetInViewport = function(Frame, Frame1) --[[ Line: 27 ]]
+	getOffsetInViewport = function(Frame, Frame1)
 		return Frame1.AbsolutePosition.Y - Frame.AbsolutePosition.Y
 	end,
-	isScrolledToBottom = function(ScrollFrame): boolean --[[ Line: 14 ]]
+	isScrolledToBottom = function(ScrollFrame): boolean
 		-- upvalues: ChatConstantsModule (copy)
 		return math.max(0, math.max(0, ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y) - ScrollFrame.CanvasPosition.Y) <= ChatConstantsModule.BOTTOM_SCROLL_THRESHOLD
 	end,
-	isScrolledToTop = function(ScrollFrame): boolean --[[ Line: 18 ]]
+	isScrolledToTop = function(ScrollFrame): boolean
 		return ScrollFrame.CanvasPosition.Y <= 0
 	end,
-	isScrolledNearTop = function(ScrollFrame): boolean --[[ Line: 22 ]]
+	isScrolledNearTop = function(ScrollFrame): boolean
 		-- upvalues: BuildHistoryLoadTriggerViewportHeightPercent (copy)
 		return ScrollFrame.CanvasPosition.Y / ScrollFrame.AbsoluteWindowSize.Y <= BuildHistoryLoadTriggerViewportHeightPercent / 100
 	end,
-	scrollToBottom = function(ScrollFrame) --[[ Line: 31 ]]
+	scrollToBottom = function(ScrollFrame)
 		ScrollFrame.CanvasPosition = Vector2.new(0, (math.max(0, ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y)))
 	end,
-	syncScrollFromBottom = function(ScrollFrame, p1: number) --[[ Line: 36 ]]
+	syncScrollFromBottom = function(ScrollFrame, p1: number)
 		-- upvalues: ChatConstantsModule (copy)
 		local Largest = math.max(0, ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y)
 		

@@ -2,12 +2,12 @@
 local ReactModule = require(script.Parent.Parent.React)
 local GetInputMethodModule = require(script.Parent.getInputMethod)
 
-return function() --[[ Line: 11 | Named "useLastInputMethod" ]]
+return function()
 	-- upvalues: GetInputMethodModule (copy), UserInputService (copy), ReactModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(GetInputMethodModule(UserInputService:GetLastInputType()) or "None")
-	ReactModule.useEffect(function() --[[ Line: 14 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UserInputService (upval), GetInputMethodModule (upval), UseStateResult2 (copy)
-		local LastInputTypeChangedConnection = UserInputService.LastInputTypeChanged:Connect(function(LastInputType) --[[ Line: 15 ]]
+		local LastInputTypeChangedConnection = UserInputService.LastInputTypeChanged:Connect(function(LastInputType)
 			-- upvalues: GetInputMethodModule (upval), UseStateResult2 (upval)
 			local InputMethodModule = GetInputMethodModule(LastInputType)
 			
@@ -16,7 +16,7 @@ return function() --[[ Line: 11 | Named "useLastInputMethod" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 22 ]]
+		return function()
 			-- upvalues: LastInputTypeChangedConnection (copy)
 			LastInputTypeChangedConnection:Disconnect()
 		end

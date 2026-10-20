@@ -5,7 +5,7 @@ local WaveformModule = require(script.Parent.Parent.Waveform)
 local _ = require(script.Parent.useTranscribedSamples)
 local Binding = ReactModule.createBinding({})
 
-local function _(List, p1): boolean --[[ Line: 34 | Named "isItemTranscribed" ]]
+local function _(List, p1): boolean
 	for _, value in List do
 		if value.startIdx <= p1 and p1 <= value.endIdx then
 			return true
@@ -14,15 +14,15 @@ local function _(List, p1): boolean --[[ Line: 34 | Named "isItemTranscribed" ]]
 	return false
 end
 
-local _ = function(p2, p3): number --[[ Line: 43 | Named "fadeInTransparency" ]]
+local _ = function(p2, p3): number
 	return if p3 <= p2 then 0 else 1 - p2 / p3
 end
 
-local _ = function(p2: number, p3): number --[[ Line: 50 | Named "compositeWithFade" ]]
+local _ = function(p2: number, p3): number
 	return p2 + p3 * (1 - p2)
 end
 
-return ReactModule.memo(function(p2) --[[ Line: 63 | Named "DictationWaveform" ]]
+return ReactModule.memo(function(p2)
 	-- upvalues: UseTokensFunction (copy), Binding (copy), ReactModule (copy), WaveformModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local EmphasisColor3 = UseTokensResult.Color.Content.Emphasis.Color3
@@ -36,14 +36,14 @@ return ReactModule.memo(function(p2) --[[ Line: 63 | Named "DictationWaveform" ]
 		isActive = p2.isActive,
 		audioDeviceInput = p2.audioDeviceInput,
 		onSample = p2.onSample,
-		bindBarStyle = ReactModule.useCallback(function(Sample) --[[ Line: 74 ]]
+		bindBarStyle = ReactModule.useCallback(function(Sample)
 			-- upvalues: TranscribedSamplesBinding (copy), TransparencyValue (copy), ReactModule (upval), MutedColor3 (copy), SuccessColor3 (copy), FadeInTicks (copy), EmphasisColor3 (copy)
 			local config = { sample = Sample, transcribed = TranscribedSamplesBinding }
 			
 			if TransparencyValue ~= nil then
 				config.fade = TransparencyValue
 			end
-			return ReactModule.joinBindings(config):map(function(p3) --[[ Line: 82 ]]
+			return ReactModule.joinBindings(config):map(function(p3)
 				-- upvalues: MutedColor3 (upval), SuccessColor3 (upval), FadeInTicks (upval), EmphasisColor3 (upval)
 				local Sample = p3.sample
 				local Transcribed = p3.transcribed

@@ -1,6 +1,6 @@
 ﻿local HttpService = game:GetService("HttpService")
 
-local function getDeepLink(p1) --[[ Line: 6 ]]
+local function getDeepLink(p1)
 	if typeof(p1) == "table" and typeof(p1.type) == "string" and string.lower(p1.type) == "ads" then
 		local UniverseId = p1.universeId
 		local Number = if typeof(UniverseId) == "number" or typeof(UniverseId) == "string" then tonumber(UniverseId) else nil
@@ -15,9 +15,9 @@ return {
 	NotificationType = "BuildAdsCampaign",
 	EventName = "BuildAdsCampaign",
 	getDeepLink = getDeepLink,
-	connect = function(p1, Callback1, Callback) --[[ Line: 18 ]]
+	connect = function(p1, Callback1, Callback)
 		-- upvalues: HttpService (copy), getDeepLink (copy)
-		return p1:RegisterCallback(p1.ToastEvents.UserAction, "BuildAdsCampaign", function(p2) --[[ Line: 22 ]]
+		return p1:RegisterCallback(p1.ToastEvents.UserAction, "BuildAdsCampaign", function(p2)
 			-- upvalues: HttpService (upval), getDeepLink (upval), Callback (copy), Callback1 (copy)
 			if typeof(p2) ~= "table" or p2.userActionType ~= "click" or typeof(p2.visualItem) ~= "table" or p2.visualItem.eventName ~= "BuildAdsCampaign" or typeof(p2.visualItem.actionEventParams) ~= "string" or typeof(p2.notificationData) ~= "table" or typeof(p2.notificationData.id) ~= "string" then return end
 			local Success, Result = pcall(HttpService.JSONDecode, HttpService, p2.visualItem.actionEventParams)

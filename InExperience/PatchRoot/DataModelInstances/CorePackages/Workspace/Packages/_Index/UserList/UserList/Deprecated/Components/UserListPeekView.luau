@@ -16,11 +16,11 @@ local View = FoundationModule.View
 local Text = FoundationModule.Text
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return function(p1) --[[ Line: 34 ]]
+return function(p1)
 	-- upvalues: UseTopBarHeightFunction (copy), UseDispatchFunction (copy), ReactModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), PeekViewState (copy), UseLocalizationFunction (copy), PeekViewWithTopBar (copy), UserListPeekViewTopBarModule (copy), View (copy), Text (copy), UserListModule (copy), Button (copy)
 	local UseTopBarHeightResult = UseTopBarHeightFunction()
 	local UseDispatchResult = UseDispatchFunction()
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 39 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval)
 		if FFlagSignalsNavP3Dispatch then
 			NavigationCommands.back(true)
@@ -30,7 +30,7 @@ return function(p1) --[[ Line: 34 ]]
 			UseDispatchResult(NavigateBackFunction(true))
 		end
 	end, { UseDispatchResult })
-	local UseResult1 = ReactModule.useCallback(function(Closed, _, _) --[[ Line: 47 ]]
+	local UseResult1 = ReactModule.useCallback(function(Closed, _, _)
 		-- upvalues: PeekViewState (upval), UseResult (copy)
 		if Closed == PeekViewState.Closed then
 			UseResult()

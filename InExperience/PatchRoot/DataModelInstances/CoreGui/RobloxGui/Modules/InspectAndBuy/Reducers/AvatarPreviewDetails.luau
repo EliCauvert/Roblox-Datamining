@@ -6,11 +6,11 @@ local ItemTypeEnum = require(CorePackages.Workspace.Packages.AvatarExperienceMod
 local FFlagAXEnableFetchAvatarPreviewModule = require(Parent.Flags.FFlagAXEnableFetchAvatarPreview)
 
 return require(CorePackages.Packages.Rodux).createReducer({}, {
-	[require(Parent.Actions.UpdateBulkPuchaseResults).name] = if require(CorePackages.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndBuyBulkPurchase then function(p1, p2) --[[ Line: 31 ]]
+	[require(Parent.Actions.UpdateBulkPuchaseResults).name] = if require(CorePackages.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndBuyBulkPurchase then function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, { totalPrice = p1.totalPrice - p2.result.RobuxSpent })
 	end else nil,
-	[require(Parent.Actions.SetAvatarPreviewDetails).name] = if FFlagAXEnableFetchAvatarPreviewModule then function(p1, p2) --[[ Line: 41 ]]
+	[require(Parent.Actions.SetAvatarPreviewDetails).name] = if FFlagAXEnableFetchAvatarPreviewModule then function(p1, p2)
 		-- upvalues: CryoModule (copy), ItemTypeEnum (copy)
 		local MapResult = {}
 		local TotalPrice = nil
@@ -22,7 +22,7 @@ return require(CorePackages.Packages.Rodux).createReducer({}, {
 			TotalValue = Look.totalValue
 			
 			if Look.items then
-				MapResult = CryoModule.List.map(Look.items, function(p3) --[[ Line: 53 ]]
+				MapResult = CryoModule.List.map(Look.items, function(p3)
 					-- upvalues: ItemTypeEnum (upval)
 					return {
 						id = tostring(p3.id),

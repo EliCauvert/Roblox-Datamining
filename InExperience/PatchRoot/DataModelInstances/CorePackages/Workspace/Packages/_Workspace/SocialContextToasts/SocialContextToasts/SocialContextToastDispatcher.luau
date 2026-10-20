@@ -25,24 +25,24 @@ local GetFIntMaxReferredPlayerJoinToastsFunction = require(Parent.SharedFlags).G
 local FFlagEnablePartyNudgeAfterJoin = require(Parent.SharedFlags).FFlagEnablePartyNudgeAfterJoin
 local FFlagShowFriendJoinedYouToastForNonReferredJoins = require(Parent.SharedFlags).FFlagShowFriendJoinedYouToastForNonReferredJoins
 local SocialContextToastDelay = game:DefineFastInt("SocialContextToastDelay", 10)
-local Callback = if GetFFlagEnableReferredPlayerJoinRemoteEventFunction() then function(): boolean --[[ Line: 58 ]]
+local Callback = if GetFFlagEnableReferredPlayerJoinRemoteEventFunction() then function(): boolean
 	-- upvalues: GetFFlagEnableReferredPlayerJoinRemoteEventForAllFunction (copy)
 	return if GetFFlagEnableReferredPlayerJoinRemoteEventForAllFunction() then true else false
 end else nil
 
-local function getNames(ApolloClient, p1) --[[ Line: 67 ]]
+local function getNames(ApolloClient, p1)
 	-- upvalues: PromiseModule (copy), FFlagUserProfilePlatformProfile (copy), UserProfilesModule (copy), GetCombinedNameFromIdFunction (copy)
 	local UserIds = {}
 	
 	for i = 1, #p1 do
 		UserIds[i] = tostring(p1[i])
 	end
-	return PromiseModule.new(function(Callback, _) --[[ Line: 72 ]]
+	return PromiseModule.new(function(Callback, _)
 		-- upvalues: ApolloClient (copy), FFlagUserProfilePlatformProfile (upval), UserProfilesModule (upval), UserIds (copy), p1 (copy), GetCombinedNameFromIdFunction (upval)
 		ApolloClient:query({
 			query = if FFlagUserProfilePlatformProfile then UserProfilesModule.Queries.userProfilesBasicNamesByUserIds else UserProfilesModule.Queries.userProfilesAllNamesByUserIds,
 			variables = { userIds = UserIds }
-		}):andThen(function(Result) --[[ Line: 82 ]]
+		}):andThen(function(Result)
 			-- upvalues: p1 (upval), GetCombinedNameFromIdFunction (upval), Callback (copy)
 			local List = {}
 			
@@ -57,7 +57,7 @@ local function getNames(ApolloClient, p1) --[[ Line: 67 ]]
 	end)
 end
 
-local function _(p2, p3, p4) --[[ Line: 95 | Named "sortFriendsList" ]]
+local function _(p2, p3, p4)
 	-- upvalues: CryoModule (copy)
 	if p4 then
 		local RemoveValueResult = CryoModule.List.removeValue(p2, p3)
@@ -69,7 +69,7 @@ local function _(p2, p3, p4) --[[ Line: 95 | Named "sortFriendsList" ]]
 	end
 end
 
-local function showYouJoinedFriendsToast(Services, Callback, FollowUserId: number, List, p2, UniverseId, PlaceId) --[[ Line: 105 ]]
+local function showYouJoinedFriendsToast(Services, Callback, FollowUserId: number, List, p2, UniverseId, PlaceId)
 	-- upvalues: SetToastContentModule (copy), SocialContextToastDiagKeysModule (copy), GetFFlagSocialContextToastEventStreamFunction (copy), SocialContextToastEventsModule (copy), ToastTypesModule (copy), SocialContextToastAnalyticsActionTypesModule (copy), CryoModule (copy), getNames (copy)
 	if #List == 0 then
 		return Callback(SetToastContentModule(nil))
@@ -96,7 +96,7 @@ local function showYouJoinedFriendsToast(Services, Callback, FollowUserId: numbe
 			List = List1
 		end
 	end
-	return getNames(Services.apolloClient, List):andThen(function(Result) --[[ Line: 132 ]]
+	return getNames(Services.apolloClient, List):andThen(function(Result)
 		-- upvalues: Callback (copy), SetToastContentModule (upval), ToastTypesModule (upval)
 		Callback(SetToastContentModule({
 			toastType = ToastTypesModule.YouJoinedFriends,
@@ -105,10 +105,10 @@ local function showYouJoinedFriendsToast(Services, Callback, FollowUserId: numbe
 	end)
 end
 
-local function handleFollowedPlayerDisconnected(Services, Callback, JoinerUserId, _, UniverseId, PlaceId) --[[ Line: 140 ]]
+local function handleFollowedPlayerDisconnected(Services, Callback, JoinerUserId, _, UniverseId, PlaceId)
 	-- upvalues: UsersGetPresenceFunction (copy), SocialContextToastDiagKeysModule (copy), GetFFlagSocialContextToastEventStreamFunction (copy), SocialContextToastEventsModule (copy), ToastTypesModule (copy), SocialContextToastAnalyticsActionTypesModule (copy), getNames (copy), SetToastContentModule (copy), SetConfirmationModalModule (copy), JoinExperienceFunction (copy), PostSendExperienceInviteFunction (copy)
 	local Analytics = Services.analytics
-	UsersGetPresenceFunction(Services.networking, { JoinerUserId }):andThen(function(Result) --[[ Line: 143 ]]
+	UsersGetPresenceFunction(Services.networking, { JoinerUserId }):andThen(function(Result)
 		-- upvalues: UniverseId (copy), Analytics (copy), SocialContextToastDiagKeysModule (upval), GetFFlagSocialContextToastEventStreamFunction (upval), SocialContextToastEventsModule (upval), Services (copy), ToastTypesModule (upval), JoinerUserId (copy), PlaceId (copy), SocialContextToastAnalyticsActionTypesModule (upval), getNames (upval), Callback (copy), SetToastContentModule (upval), SetConfirmationModalModule (upval), JoinExperienceFunction (upval), PostSendExperienceInviteFunction (upval)
 		if not Result.responseBody or not Result.responseBody.userPresences or #Result.responseBody.userPresences == 0 then return end
 		local UserPresence = Result.responseBody.userPresences[1]
@@ -126,7 +126,7 @@ local function handleFollowedPlayerDisconnected(Services, Callback, JoinerUserId
 					actionType = SocialContextToastAnalyticsActionTypesModule.Shown
 				})
 			end
-			return getNames(Services.apolloClient, { JoinerUserId }):andThen(function(Entry) --[[ Line: 168 ]]
+			return getNames(Services.apolloClient, { JoinerUserId }):andThen(function(Entry)
 				-- upvalues: Callback (upval), SetToastContentModule (upval), ToastTypesModule (upval), JoinerUserId (upval)
 				if #Entry ~= 0 then
 					Callback(SetToastContentModule({
@@ -150,7 +150,7 @@ local function handleFollowedPlayerDisconnected(Services, Callback, JoinerUserId
 					actionType = SocialContextToastAnalyticsActionTypesModule.Shown
 				})
 			end
-			local function onInviteBackButtonClick() --[[ Line: 246 ]]
+			local function onInviteBackButtonClick()
 				-- upvalues: Analytics (upval), SocialContextToastDiagKeysModule (upval), GetFFlagSocialContextToastEventStreamFunction (upval), SocialContextToastEventsModule (upval), Services (upval), ToastTypesModule (upval), JoinerUserId (upval), UniverseId (upval), PlaceId (upval), SocialContextToastAnalyticsActionTypesModule (upval), PostSendExperienceInviteFunction (upval), Callback (upval), SetToastContentModule (upval)
 				Analytics.Diag:reportCounter(SocialContextToastDiagKeysModule.InviteBackButtonClicked, 1)
 				
@@ -163,16 +163,16 @@ local function handleFollowedPlayerDisconnected(Services, Callback, JoinerUserId
 						actionType = SocialContextToastAnalyticsActionTypesModule.ButtonClicked
 					})
 				end
-				PostSendExperienceInviteFunction(Services.networking, tostring(JoinerUserId), tostring(PlaceId), "SocialContextToast"):andThen(function(_) --[[ Line: 262 ]]
+				PostSendExperienceInviteFunction(Services.networking, tostring(JoinerUserId), tostring(PlaceId), "SocialContextToast"):andThen(function(_)
 					-- upvalues: Callback (upval), SetToastContentModule (upval), ToastTypesModule (upval)
 					Callback(SetToastContentModule({ toastType = ToastTypesModule.InviteSuccess }))
-				end, function(_) --[[ Line: 266 ]]
+				end, function(_)
 					-- upvalues: Callback (upval), SetToastContentModule (upval), ToastTypesModule (upval)
 					Callback(SetToastContentModule({ toastType = ToastTypesModule.InviteFailure }))
 				end)
 			end
 			
-			return getNames(Services.apolloClient, { JoinerUserId }):andThen(function(Entry) --[[ Line: 274 ]]
+			return getNames(Services.apolloClient, { JoinerUserId }):andThen(function(Entry)
 				-- upvalues: Callback (upval), SetToastContentModule (upval), ToastTypesModule (upval), JoinerUserId (upval), onInviteBackButtonClick (copy)
 				if #Entry ~= 0 then
 					Callback(SetToastContentModule({
@@ -197,7 +197,7 @@ local function handleFollowedPlayerDisconnected(Services, Callback, JoinerUserId
 					actionType = SocialContextToastAnalyticsActionTypesModule.Shown
 				})
 			end
-			local function closeCallback(p2) --[[ Line: 189 ]]
+			local function closeCallback(p2)
 				-- upvalues: Callback (upval), SetConfirmationModalModule (upval), Analytics (upval), SocialContextToastDiagKeysModule (upval), GetFFlagSocialContextToastEventStreamFunction (upval), SocialContextToastEventsModule (upval), Services (upval), JoinerUserId (upval), UniverseId (upval), PlaceId (upval), SocialContextToastAnalyticsActionTypesModule (upval), UserPresence (copy), JoinExperienceFunction (upval)
 				if not p2 then
 					Callback(SetConfirmationModalModule(false))
@@ -218,7 +218,7 @@ local function handleFollowedPlayerDisconnected(Services, Callback, JoinerUserId
 				JoinExperienceFunction(string.format("roblox://userid=%s&placeid=%s", tostring(JoinerUserId), UserPresence.placeId), true)
 			end
 			
-			local function onJoinFriendButtonClick() --[[ Line: 209 ]]
+			local function onJoinFriendButtonClick()
 				-- upvalues: Analytics (upval), SocialContextToastDiagKeysModule (upval), GetFFlagSocialContextToastEventStreamFunction (upval), SocialContextToastEventsModule (upval), Services (upval), ToastTypesModule (upval), JoinerUserId (upval), UniverseId (upval), PlaceId (upval), SocialContextToastAnalyticsActionTypesModule (upval), Callback (upval), SetConfirmationModalModule (upval), closeCallback (copy)
 				Analytics.Diag:reportCounter(SocialContextToastDiagKeysModule.JoinFriendButtonClicked, 1)
 				
@@ -234,7 +234,7 @@ local function handleFollowedPlayerDisconnected(Services, Callback, JoinerUserId
 				Callback(SetConfirmationModalModule(true, closeCallback))
 			end
 			
-			return getNames(Services.apolloClient, { JoinerUserId }):andThen(function(Entry) --[[ Line: 223 ]]
+			return getNames(Services.apolloClient, { JoinerUserId }):andThen(function(Entry)
 				-- upvalues: Callback (upval), SetToastContentModule (upval), ToastTypesModule (upval), JoinerUserId (upval), UserPresence (copy), onJoinFriendButtonClick (copy)
 				if #Entry ~= 0 then
 					Callback(SetToastContentModule({
@@ -249,13 +249,13 @@ local function handleFollowedPlayerDisconnected(Services, Callback, JoinerUserId
 				end
 			end)
 		end
-	end, function(_) --[[ Line: 287 ]]
+	end, function(_)
 		-- upvalues: Analytics (copy), SocialContextToastDiagKeysModule (upval)
 		Analytics.Diag:reportCounter(SocialContextToastDiagKeysModule.ErrorFetchingPresence, 1)
 	end)
 end
 
-function SocialContextToastDispatcher(p2) --[[ Line: 293 ]]
+function SocialContextToastDispatcher(p2)
 	-- upvalues: ReactModule (copy), GetFFlagEnableReferredPlayerJoinRemoteEventFunction (copy), UseDispatchFunction (copy), DEPRECATEDFriendsGetFriendStatusesFunction (copy), handleFollowedPlayerDisconnected (copy), showYouJoinedFriendsToast (copy), SocialContextToastDiagKeysModule (copy), GetFFlagSocialContextToastEventStreamFunction (copy), SocialContextToastEventsModule (copy), ToastTypesModule (copy), SocialContextToastAnalyticsActionTypesModule (copy), getNames (copy), SetToastContentModule (copy), FFlagEnablePartyNudgeAfterJoin (copy), UseOneToOnePartyNudgeStartPartyRejectedFunction (copy), GetFIntMaxReferredPlayerJoinToastsFunction (copy), FFlagShowFriendJoinedYouToastForNonReferredJoins (copy), SocialContextToastDelay (copy), Callback (ref)
 	local Services = p2.services
 	local Analytics = Services.analytics
@@ -268,7 +268,7 @@ function SocialContextToastDispatcher(p2) --[[ Line: 293 ]]
 	local UseRefResult3 = if GetFFlagEnableReferredPlayerJoinRemoteEventFunction() then ReactModule.useRef(0) else nil
 	local UseDispatchResult = UseDispatchFunction()
 	
-	local function showToastOnJoin() --[[ Line: 312 ]]
+	local function showToastOnJoin()
 		-- upvalues: PlayersService (copy), DEPRECATEDFriendsGetFriendStatusesFunction (upval), Networking (copy), handleFollowedPlayerDisconnected (upval), Services (copy), UseDispatchResult (copy), p2 (copy), showYouJoinedFriendsToast (upval)
 		local FollowUserId = PlayersService.LocalPlayer.FollowUserId
 		local Flag = false
@@ -278,7 +278,7 @@ function SocialContextToastDispatcher(p2) --[[ Line: 293 ]]
 		for _, player in pairs(PlayersService:GetPlayers()) do
 			table.insert(List, player.UserId)
 		end
-		DEPRECATEDFriendsGetFriendStatusesFunction(Networking, List):andThen(function(Result) --[[ Line: 324 ]]
+		DEPRECATEDFriendsGetFriendStatusesFunction(Networking, List):andThen(function(Result)
 			-- upvalues: FollowUserId (copy), Flag (ref), Ids (copy), handleFollowedPlayerDisconnected (upval), Services (upval), UseDispatchResult (upval), p2 (upval), showYouJoinedFriendsToast (upval)
 			if not Result or not Result.responseBody or not Result.responseBody.data then return end
 			for _, entry in pairs(Result.responseBody.data) do
@@ -295,12 +295,12 @@ function SocialContextToastDispatcher(p2) --[[ Line: 293 ]]
 		end)
 	end
 	
-	local function onPlayerAdded(Player: Player) --[[ Line: 360 ]]
+	local function onPlayerAdded(Player: Player)
 		-- upvalues: PlayersService (copy), Analytics (copy), SocialContextToastDiagKeysModule (upval), GetFFlagSocialContextToastEventStreamFunction (upval), SocialContextToastEventsModule (upval), Services (copy), ToastTypesModule (upval), p2 (copy), SocialContextToastAnalyticsActionTypesModule (upval), getNames (upval), UseDispatchResult (copy), SetToastContentModule (upval)
 		local LocalPlayer = PlayersService.LocalPlayer
 		
 		if Player.FollowUserId == LocalPlayer.UserId then
-			local Success, Result = pcall(function() --[[ Line: 363 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: LocalPlayer (copy), Player (copy)
 				return LocalPlayer:IsFriendsWithAsync(Player.UserId)
 			end)
@@ -317,7 +317,7 @@ function SocialContextToastDispatcher(p2) --[[ Line: 293 ]]
 						actionType = SocialContextToastAnalyticsActionTypesModule.Shown
 					})
 				end
-				getNames(Services.apolloClient, { Player.UserId }):andThen(function(Entry) --[[ Line: 381 ]]
+				getNames(Services.apolloClient, { Player.UserId }):andThen(function(Entry)
 					-- upvalues: Player (copy), UseDispatchResult (upval), SetToastContentModule (upval), ToastTypesModule (upval)
 					local Name = Entry[1].name
 					
@@ -335,7 +335,7 @@ function SocialContextToastDispatcher(p2) --[[ Line: 293 ]]
 	end
 	
 	if FFlagEnablePartyNudgeAfterJoin then
-		UseOneToOnePartyNudgeStartPartyRejectedFunction(function(p3) --[[ Line: 399 ]]
+		UseOneToOnePartyNudgeStartPartyRejectedFunction(function(p3)
 			-- upvalues: PlayersService (copy), onPlayerAdded (copy)
 			if p3 and p3.inviterId then
 				local Player = PlayersService:GetPlayerByUserId(p3.inviterId)
@@ -346,7 +346,7 @@ function SocialContextToastDispatcher(p2) --[[ Line: 293 ]]
 			end
 		end)
 	end
-	local UseResult = if GetFFlagEnableReferredPlayerJoinRemoteEventFunction() then ReactModule.useCallback(function(Player: Player) --[[ Line: 411 ]]
+	local UseResult = if GetFFlagEnableReferredPlayerJoinRemoteEventFunction() then ReactModule.useCallback(function(Player: Player)
 		-- upvalues: UseRefResult3 (copy), GetFIntMaxReferredPlayerJoinToastsFunction (upval), UseDispatchResult (copy), SetToastContentModule (upval), ToastTypesModule (upval)
 		if GetFIntMaxReferredPlayerJoinToastsFunction() > UseRefResult3.current then
 			UseRefResult3.current += 1
@@ -361,18 +361,18 @@ function SocialContextToastDispatcher(p2) --[[ Line: 293 ]]
 	end, {
 		if FFlagShowFriendJoinedYouToastForNonReferredJoins then UseDispatchResult else nil
 	}) else nil
-	ReactModule.useEffect(function() --[[ Line: 426 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FFlagEnablePartyNudgeAfterJoin (upval), Services (copy), UseRefResult1 (copy), SocialContextToastDelay (upval), Ref (copy), PlayersService (copy), showToastOnJoin (copy), FFlagShowFriendJoinedYouToastForNonReferredJoins (upval), UseRefResult (copy), onPlayerAdded (copy), GetFFlagEnableReferredPlayerJoinRemoteEventFunction (upval), Callback (upval), UseRefResult2 (copy), UseResult (ref)
 		local Flag = true
 		
 		if FFlagEnablePartyNudgeAfterJoin and Services.showPlayerJoinedFriendsToastRemoteEvent then
 			Flag = false
-			UseRefResult1.current = Services.showPlayerJoinedFriendsToastRemoteEvent.OnClientEvent:Connect(function() --[[ Line: 431 ]]
+			UseRefResult1.current = Services.showPlayerJoinedFriendsToastRemoteEvent.OnClientEvent:Connect(function()
 				-- upvalues: Flag (ref)
 				Flag = true
 			end)
 		end
-		task.delay(SocialContextToastDelay, function() --[[ Line: 439 ]]
+		task.delay(SocialContextToastDelay, function()
 			-- upvalues: Ref (upval), PlayersService (upval), Flag (ref), showToastOnJoin (upval), FFlagEnablePartyNudgeAfterJoin (upval), FFlagShowFriendJoinedYouToastForNonReferredJoins (upval), Services (upval), UseRefResult (upval), onPlayerAdded (upval), GetFFlagEnableReferredPlayerJoinRemoteEventFunction (upval), Callback (upval), UseRefResult2 (upval), UseResult (upval)
 			if not Ref.current then
 				if #PlayersService:GetPlayers() > 0 and Flag then
@@ -391,7 +391,7 @@ function SocialContextToastDispatcher(p2) --[[ Line: 293 ]]
 			end
 		end)
 		
-		return function() --[[ Line: 466 ]]
+		return function()
 			-- upvalues: Ref (upval), UseRefResult (upval), FFlagEnablePartyNudgeAfterJoin (upval), UseRefResult1 (upval), GetFFlagEnableReferredPlayerJoinRemoteEventFunction (upval), UseRefResult2 (upval)
 			Ref.current = true
 			

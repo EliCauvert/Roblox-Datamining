@@ -19,7 +19,7 @@ return {
 	fflag = require(Parent.flags.getFFlagUGCValidateIndividualMeshPartBounds),
 	expectedFailures = {},
 	prereqTests = {},
-	run = function(p1, p2) --[[ Line: 28 ]]
+	run = function(p1, p2)
 		-- upvalues: GetEngineFeatureEngineUGCValidateMeshPartBoundsFromRulesModule (copy), ValidationRulesUtilModule (copy), ErrorSourceStringsModule (copy)
 		local RootInstance = p2.rootInstance
 		local RenderMeshesData = p2.renderMeshesData
@@ -37,7 +37,7 @@ return {
 		for PartName, value in RenderMeshesData do
 			local ScaledOriginalSize = value.originalSize * value.scale
 			
-			local function checkAxis(Axis, X) --[[ Line: 45 ]]
+			local function checkAxis(Axis, X)
 				-- upvalues: MeshPartBoundsMin (ref), p1 (copy), ErrorSourceStringsModule (upval), PartName (copy), RootInstance (copy), MeshPartBoundsMax (ref)
 				if X < MeshPartBoundsMin then
 					p1:fail(ErrorSourceStringsModule.Keys.MeshPartBounds_TooSmall, {

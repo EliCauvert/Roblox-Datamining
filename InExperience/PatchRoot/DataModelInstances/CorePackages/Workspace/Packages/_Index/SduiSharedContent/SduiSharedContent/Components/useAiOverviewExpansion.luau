@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local ReactOtterModule = require(Parent.ReactOtter)
 local config = { dampingRatio = 0.9, frequency = 6 }
 
-return function(p1) --[[ Line: 32 | Named "useAiOverviewExpansion" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ReactOtterModule (copy), config (copy)
 	local SectionGap = if p1.hasHeader and p1.hasExpandableBody then p1.sectionGap else 0
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
@@ -11,11 +11,11 @@ return function(p1) --[[ Line: 32 | Named "useAiOverviewExpansion" ]]
 	local UseRefResult = ReactModule.useRef(false)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(nil)
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 40 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2_3 (copy)
 		UseStateResult2_3(Frame.AbsoluteSize.Y)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(Frame) --[[ Line: 43 ]]
+	local UseResult1 = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2_2 (copy)
 		UseStateResult2_2(Frame.AbsoluteSize.Y)
 	end, {})
@@ -36,14 +36,14 @@ return function(p1) --[[ Line: 32 | Named "useAiOverviewExpansion" ]]
 	local Inverted2: boolean = Inverted or NoUseStateResult
 	local ReducedMotion = p1.reducedMotion
 	local UseStateResult5 = if UseStateResult then UseStateResult3_1 elseif Inverted1 then Largest else 0
-	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(UseStateResult5, (ReactModule.useCallback(function() --[[ Line: 78 ]]
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(UseStateResult5, (ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UseStateResult2_1 (copy)
 		if UseRefResult.current then
 			UseRefResult.current = false
 			UseStateResult2_1(true)
 		end
 	end, {})))
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 88 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), IsLargestBelow (copy), ReducedMotion (copy), UseRefResult (copy), UseStateResult2_1 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseStateResult3_1 (copy), config (upval)
 		UseStateResult2(true)
 		
@@ -65,7 +65,7 @@ return function(p1) --[[ Line: 32 | Named "useAiOverviewExpansion" ]]
 		ReducedMotion,
 		UseAnimatedBindingResult2
 	})
-	ReactModule.useLayoutEffect(function() --[[ Line: 110 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: NoUseStateResult1 (copy), UseRefResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseStateResult5 (copy)
 		if not NoUseStateResult1 then
 			UseRefResult.current = false

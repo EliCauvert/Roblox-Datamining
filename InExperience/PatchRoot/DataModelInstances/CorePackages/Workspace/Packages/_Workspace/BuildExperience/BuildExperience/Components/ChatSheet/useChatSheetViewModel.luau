@@ -21,9 +21,9 @@ local FFlagBuildExperienceChatResourceAttachments = SharedFlagsModule.FFlagBuild
 local FFlagBuildExperienceChatImageAttachmentsModule = require(BuildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
 local FFlagBuildExperienceChatImageAttachmentsModule1 = SharedFlagsModule.FFlagBuildExperienceInGameCaptureToChat and FFlagBuildExperienceChatImageAttachmentsModule
 
-local function noop() --[[ Line: 47 ]] end
+local function noop() end
 
-return function(p1) --[[ Line: 49 | Named "useChatSheetViewModel" ]]
+return function(p1)
 	-- upvalues: noop (copy), GetAssistantBuildStoreModule (copy), SignalsReactModule (copy), GetCreatorAgentResumeStoreModule (copy), GetCurrentExperienceProjectModule (copy), UseChatSessionCoreModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), UseBuildPromptDraftModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), UseChatPlaytestFooterModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), GetPlayButtonStoreModule (copy), ReactModule (copy), ChatTypesModule (copy), FFlagBuildExperienceChatImageAttachmentsModule1 (copy), FFlagBuildExperienceAnalytics (copy), FFlagBuildExperienceAnswerFormModule (copy)
 	local OnClose = p1.onClose or noop
 	local NoIsOpen = p1.isOpen == nil or p1.isOpen
@@ -48,7 +48,7 @@ return function(p1) --[[ Line: 49 | Named "useChatSheetViewModel" ]]
 	if FFlagBuildExperienceChatResourceAttachments then
 		local PlayButtonStoreModule = GetPlayButtonStoreModule()
 		local UseSignalStateResult1 = SignalsReactModule.useSignalState(PlayButtonStoreModule.getPendingResourceAttachment)
-		ReactModule.useEffect(function() --[[ Line: 85 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseSignalStateResult1 (copy), ChatTypesModule (upval), UseChatSessionCoreModuleResult (copy), PlayButtonStoreModule (copy)
 			if UseSignalStateResult1 == nil then return end
 			if UseChatSessionCoreModuleResult.findComposerResourceAttachmentIndexByUri((ChatTypesModule.getResourceAttachmentUri(UseSignalStateResult1))) == nil then
@@ -63,7 +63,7 @@ return function(p1) --[[ Line: 49 | Named "useChatSheetViewModel" ]]
 	end
 	if FFlagBuildExperienceChatImageAttachmentsModule1 then
 		local UseRefResult = ReactModule.useRef(nil)
-		ReactModule.useEffect(function() --[[ Line: 108 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p1 (copy), UseRefResult (copy), UseChatSessionCoreModuleResult (copy)
 			if p1.captureToAttach == nil or UseRefResult.current == p1.captureToAttach then return end
 			UseRefResult.current = p1.captureToAttach
@@ -89,12 +89,12 @@ return function(p1) --[[ Line: 49 | Named "useChatSheetViewModel" ]]
 	
 	if FFlagBuildExperienceAnalytics then
 		local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-		UseResult = ReactModule.useCallback(function(p2) --[[ Line: 141 ]]
+		UseResult = ReactModule.useCallback(function(p2)
 			-- upvalues: UseChatSessionCoreModuleResult (copy), UseStateResult2 (copy)
 			UseChatSessionCoreModuleResult.setComposerText(p2)
 			UseStateResult2(p2)
 		end, { UseChatSessionCoreModuleResult.setComposerText })
-		ReactModule.useEffect(function() --[[ Line: 147 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseStateResult (copy), UseChatSessionCoreModuleResult (copy), UseStateResult2 (copy)
 			if UseStateResult == nil then return end
 			UseChatSessionCoreModuleResult.setComposerText(UseStateResult)
@@ -108,13 +108,13 @@ return function(p1) --[[ Line: 49 | Named "useChatSheetViewModel" ]]
 			UseChatSessionCoreModuleResult.setComposerText
 		})
 	end
-	ReactModule.useEffect(function() --[[ Line: 163 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: NoIsOpen (copy), UseSignalStateResult (copy), OnClose (copy)
 		if NoIsOpen and UseSignalStateResult then
 			OnClose()
 		end
 	end, { NoIsOpen, UseSignalStateResult, OnClose })
-	ReactModule.useEffect(function() --[[ Line: 169 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: NoIsOpen (copy), CreatorAgentResumeStoreModule (copy), UniverseId (copy), p1 (copy)
 		if not NoIsOpen then
 			CreatorAgentResumeStoreModule.setActiveTarget(nil)
@@ -123,7 +123,7 @@ return function(p1) --[[ Line: 49 | Named "useChatSheetViewModel" ]]
 		end
 		CreatorAgentResumeStoreModule.setActiveTarget({ universeId = UniverseId, sessionId = p1.sessionId })
 		
-		return function() --[[ Line: 178 ]]
+		return function()
 			-- upvalues: CreatorAgentResumeStoreModule (upval)
 			CreatorAgentResumeStoreModule.setActiveTarget(nil)
 		end

@@ -1,9 +1,9 @@
-﻿local function _(p1): boolean --[[ Line: 65 | Named "isNaN" ]]
+﻿local function _(p1): boolean
 	return p1 ~= p1
 end
 
 return {
-	estimateVelocity = function(Entry) --[[ Line: 74 ]]
+	estimateVelocity = function(Entry)
 		local CountEntry = #Entry
 		
 		if CountEntry < 2 then
@@ -21,7 +21,7 @@ return {
 			return if PositionRatio ~= PositionRatio then 0 else PositionRatio
 		end
 	end,
-	planTargets = function(p1, p2, p3, p4) --[[ Line: 97 ]]
+	planTargets = function(p1, p2, p3, p4)
 		local Granularity: number = p4.granularity
 		
 		if p1 ~= p1 or Granularity <= 0 or #p4.bands == 0 or p4.maxSamples <= 0 then
@@ -32,7 +32,7 @@ return {
 		local ScaledMaxLeadFraction = p4.maxLeadFraction * (p3.max - p3.min)
 		local Rounded = math.round((p1 + math.clamp(v2 * p4.predictionLead, -ScaledMaxLeadFraction, ScaledMaxLeadFraction)) / Granularity)
 		
-		local function _(p5) --[[ Line: 111 | Named "strideForDistance" ]]
+		local function _(p5)
 			-- upvalues: p4 (copy)
 			for _, band in p4.bands do
 				if p5 <= band.radius + 0.000000001 then
@@ -46,7 +46,7 @@ return {
 		local List = {}
 		local t = {}
 		
-		local function consider(Value: number) --[[ Line: 126 ]]
+		local function consider(Value: number)
 			-- upvalues: List (copy), p4 (copy), Granularity (copy), Rounded (copy), p3 (copy), t (copy)
 			if p4.maxSamples <= #List then return end
 			local ScaledMagnitude = math.abs(Value) * Granularity
@@ -97,7 +97,7 @@ return {
 		
 		return List
 	end,
-	diff = function(List, List1) --[[ Line: 160 ]]
+	diff = function(List, List1)
 		local t = {}
 		local Fetch = {}
 		
@@ -119,7 +119,7 @@ return {
 		
 		return { fetch = Fetch, evict = List2 }
 	end,
-	selectFrameTime = function(p6, List) --[[ Line: 185 ]]
+	selectFrameTime = function(p6, List)
 		local v3 = nil
 		local v4 = 1e999
 		

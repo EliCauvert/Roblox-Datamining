@@ -7,7 +7,7 @@ local Icon = FoundationModule.Icon
 local _Color3 = Color3.fromHex("121215")
 local Style = { Transparency = 0.2, Color3 = Color3.new(1, 1, 1) }
 
-return ReactModule.forwardRef(function(p1, Ref) --[[ Line: 41 | Named "TextOverlayTrashZone" ]]
+return ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: ReactModule (copy), View (copy), _Color3 (copy), FoundationModule (copy), Icon (copy), BuilderIconsModule (copy), Style (copy)
 	return ReactModule.createElement(View, {
 		Active = false,

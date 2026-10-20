@@ -15,7 +15,7 @@ return {
 		backendsList = {
 			{
 				type = SupportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ Line: 22 ]]
+				overrideName = function()
 					-- upvalues: EventTypes (copy)
 					return EventTypes.UserSeen
 				end,
@@ -30,7 +30,7 @@ return {
 		backendsList = {
 			{
 				type = SupportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ Line: 40 ]]
+				overrideName = function()
 					-- upvalues: EventTypes (copy)
 					return EventTypes.ButtonClick
 				end,
@@ -48,7 +48,7 @@ return {
 		backendsList = {
 			{
 				type = SupportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ Line: 59 ]]
+				overrideName = function()
 					-- upvalues: EventTypes (copy)
 					return EventTypes.ButtonClick
 				end,
@@ -66,7 +66,7 @@ return {
 		backendsList = {
 			{
 				type = SupportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ Line: 78 ]]
+				overrideName = function()
 					-- upvalues: EventTypes (copy)
 					return EventTypes.ButtonClick
 				end,

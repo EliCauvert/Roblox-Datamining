@@ -1,10 +1,10 @@
 ﻿local DevConsoleFixTimestampDST = game:DefineFastFlag("DevConsoleFixTimestampDST", false)
 
-local function _(Text: number): string --[[ Line: 4 | Named "numberWithZero" ]]
+local function _(Text: number): string
 	return (if Text < 10 then "0" else "") .. Text
 end
 
-return function(p1): string --[[ Line: 8 | Named "convertTimeStamp" ]]
+return function(p1): string
 	-- upvalues: DevConsoleFixTimestampDST (copy)
 	local Hour = nil
 	local Min = nil

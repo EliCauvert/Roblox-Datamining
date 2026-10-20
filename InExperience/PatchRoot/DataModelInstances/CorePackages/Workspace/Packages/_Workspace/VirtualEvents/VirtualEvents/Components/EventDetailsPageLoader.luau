@@ -19,7 +19,7 @@ local AppStyleProvider = UIBloxModule.App.Style.AppStyleProvider
 local FFlagLuaAppCreatorSuccessVirtualEventsLayerUseRoactExperimentModule = require(VirtualEvents.Flags.FFlagLuaAppCreatorSuccessVirtualEventsLayerUseRoactExperiment)
 local FFlagLuaAppFixEventNotFoundErrorStateExitModule = require(VirtualEvents.Flags.FFlagLuaAppFixEventNotFoundErrorStateExit)
 
-return function(p1) --[[ Line: 33 | Named "EventDetailsPageLoader" ]]
+return function(p1)
 	-- upvalues: UseQueryFunction (copy), RequestsModule (copy), GetRetrievalStatusFromApolloQueryModule (copy), UseLocalizationFunction (copy), FFlagLuaAppCreatorSuccessVirtualEventsLayerUseRoactExperimentModule (copy), UseUserExperimentFunction (copy), AppUserLayers (copy), ReactModule (copy), LoadingStateContainer (copy), RetrievalStatus (copy), CryoModule (copy), FoundationModule (copy), AppStyleProvider (copy), EventDetailsVerticalPageModule (copy), EventDetailsPageModule (copy), FFlagLuaAppFixEventNotFoundErrorStateExitModule (copy), EventNotFoundModalModule (copy), EmptyState (copy)
 	local UseQueryResult = UseQueryFunction(RequestsModule.GET_VIRTUAL_EVENT, { variables = { virtualEventId = p1.virtualEventId } })
 	local RetrievalStatusFromApolloQueryModule = GetRetrievalStatusFromApolloQueryModule(UseQueryResult)
@@ -32,7 +32,7 @@ return function(p1) --[[ Line: 33 | Named "EventDetailsPageLoader" ]]
 	local v2 = nil
 	
 	if FFlagLuaAppCreatorSuccessVirtualEventsLayerUseRoactExperimentModule then
-		v1, v21 = UseUserExperimentFunction({ AppUserLayers.CreatorSuccessVirtualEvents }, function(p2) --[[ Line: 54 ]]
+		v1, v21 = UseUserExperimentFunction({ AppUserLayers.CreatorSuccessVirtualEvents }, function(p2)
 			-- upvalues: AppUserLayers (upval)
 			local v3 = p2[AppUserLayers.CreatorSuccessVirtualEvents] or {}
 			
@@ -41,7 +41,7 @@ return function(p1) --[[ Line: 33 | Named "EventDetailsPageLoader" ]]
 	end
 	return ReactModule.createElement(LoadingStateContainer, {
 		dataStatus = RetrievalStatus.fromRawValue(RetrievalStatusFromApolloQueryModule),
-		renderOnLoaded = function() --[[ Line: 64 ]]
+		renderOnLoaded = function()
 			-- upvalues: CryoModule (upval), p1 (copy), UseQueryResult (copy), FFlagLuaAppCreatorSuccessVirtualEventsLayerUseRoactExperimentModule (upval), v2 (ref), v1 (ref), ReactModule (upval), FoundationModule (upval), AppStyleProvider (upval), EventDetailsVerticalPageModule (upval), EventDetailsPageModule (upval)
 			local JoinResult = CryoModule.Dictionary.join(p1, {
 				virtualEvent = UseQueryResult.data.virtualEvent,
@@ -59,7 +59,7 @@ return function(p1) --[[ Line: 33 | Named "EventDetailsPageLoader" ]]
 				EventDetailsPage = ReactModule.createElement(EventDetailsPageModule, JoinResult)
 			})
 		end,
-		renderOnFailed = function() --[[ Line: 98 ]]
+		renderOnFailed = function()
 			-- upvalues: FFlagLuaAppFixEventNotFoundErrorStateExitModule (upval), ReactModule (upval), EventNotFoundModalModule (upval), p1 (copy), EmptyState (upval), UseLocalizationResult (copy)
 			return if FFlagLuaAppFixEventNotFoundErrorStateExitModule then ReactModule.createElement(EventNotFoundModalModule, { onClose = p1.onClose }) else ReactModule.createElement(ReactModule.Fragment, nil, {
 				EventNotFound = ReactModule.createElement(EmptyState, { text = UseLocalizationResult.notFound })

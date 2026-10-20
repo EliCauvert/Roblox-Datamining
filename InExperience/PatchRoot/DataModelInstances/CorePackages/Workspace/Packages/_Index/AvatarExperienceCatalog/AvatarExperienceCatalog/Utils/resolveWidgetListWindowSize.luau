@@ -3,7 +3,7 @@ local AXWidgetListWindowSizeLow = game:DefineFastInt("AXWidgetListWindowSizeLow"
 local AXWidgetListWindowSizeMid = game:DefineFastInt("AXWidgetListWindowSizeMid", 8)
 local AXWidgetListWindowSizeHigh = game:DefineFastInt("AXWidgetListWindowSizeHigh", 11)
 
-return function(p1) --[[ Line: 26 | Named "resolveWidgetListWindowSize" ]]
+return function(p1)
 	-- upvalues: DeviceTier (copy), AXWidgetListWindowSizeLow (copy), AXWidgetListWindowSizeMid (copy), AXWidgetListWindowSizeHigh (copy)
 	local DeviceMemoryTier = DeviceTier.GetDeviceMemoryTier()
 	

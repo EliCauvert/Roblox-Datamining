@@ -12,7 +12,7 @@ local BindableEvent = nil
 local Keys = {}
 local ImageButtons = {}
 
-local function getSortedCarouselButtons() --[[ Line: 34 ]]
+local function getSortedCarouselButtons()
 	-- upvalues: Frame (ref)
 	local t = {}
 	local List = {}
@@ -23,7 +23,7 @@ local function getSortedCarouselButtons() --[[ Line: 34 ]]
 			t[Gui] = i
 		end
 	end
-	table.sort(List, function(A: Frame, B: Frame): boolean --[[ Line: 43 ]]
+	table.sort(List, function(A: Frame, B: Frame): boolean
 		-- upvalues: t (copy)
 		return if A.LayoutOrder == B.LayoutOrder then t[A] < t[B] else A.LayoutOrder < B.LayoutOrder
 	end)
@@ -31,7 +31,7 @@ local function getSortedCarouselButtons() --[[ Line: 34 ]]
 	return List
 end
 
-local function CreateMenuCarousel(p1) --[[ Line: 52 ]]
+local function CreateMenuCarousel(p1)
 	-- upvalues: Frame (ref), PageLayout (ref), BindableEvent (ref), getSortedCarouselButtons (copy), _Color3_1 (copy), GuiService (copy), _Color3 (copy), Keys (ref), UserInputService (copy)
 	local PlayerCarousel = Instance.new("Frame")
 	PlayerCarousel.Name = "PlayerCarousel"
@@ -72,7 +72,7 @@ local function CreateMenuCarousel(p1) --[[ Line: 52 ]]
 	BindableEvent = Instance.new("BindableEvent")
 	BindableEvent.Name = "PlayerChanged"
 	local CurrentPage = nil
-	PageLayout:GetPropertyChangedSignal("CurrentPage"):Connect(function() --[[ Line: 98 ]]
+	PageLayout:GetPropertyChangedSignal("CurrentPage"):Connect(function()
 		-- upvalues: PageLayout (upval), getSortedCarouselButtons (upval), CurrentPage (ref), _Color3_1 (upval), GuiService (upval), _Color3 (upval), BindableEvent (upval), Keys (upval)
 		if PageLayout.CurrentPage then
 			if PageLayout.CurrentPage.Name == "_CarouselDivider" then
@@ -121,7 +121,7 @@ local function CreateMenuCarousel(p1) --[[ Line: 52 ]]
 	PrevButton.Selectable = false
 	PrevButton.Parent = PlayerCarousel
 	
-	local function _(p2) --[[ Line: 146 | Named "moveChangePage" ]]
+	local function _(p2)
 		-- upvalues: PageLayout (upval)
 		if p2 then
 			PageLayout:Next()
@@ -132,16 +132,16 @@ local function CreateMenuCarousel(p1) --[[ Line: 52 ]]
 		end
 	end
 	
-	NextButton.MouseButton1Click:Connect(function() --[[ Line: 154 ]]
+	NextButton.MouseButton1Click:Connect(function()
 		-- upvalues: PageLayout (upval)
 		PageLayout:Next()
 	end)
-	PrevButton.MouseButton1Click:Connect(function() --[[ Line: 155 ]]
+	PrevButton.MouseButton1Click:Connect(function()
 		-- upvalues: PageLayout (upval)
 		PageLayout:Previous()
 	end)
 	
-	local function checkButtonVisibility() --[[ Line: 159 ]]
+	local function checkButtonVisibility()
 		-- upvalues: UserInputService (upval), PrevButton (copy), Frame (upval), NextButton (copy)
 		local IsLastInputTypeMatch = UserInputService:GetLastInputType() == Enum.UserInputType.Touch
 		PrevButton.Visible = not IsLastInputTypeMatch and #Frame:GetChildren() > 3
@@ -156,7 +156,7 @@ local function CreateMenuCarousel(p1) --[[ Line: 52 ]]
 	return PlayerCarousel
 end
 
-function PlayerCarouselModule:UpdateGuiTheme(p1) --[[ Line: 170 ]]
+function PlayerCarouselModule:UpdateGuiTheme(p1)
 	self.rbxGui.NextButton.Image = p1.ScrollRightImage
 	
 	if p1.ScrollLeftImage == "" then
@@ -169,7 +169,7 @@ function PlayerCarouselModule:UpdateGuiTheme(p1) --[[ Line: 170 ]]
 	end
 end
 
-function PlayerCarouselModule:FadeTowardsEdges() --[[ Line: 181 ]]
+function PlayerCarouselModule:FadeTowardsEdges()
 	-- upvalues: PageLayout (ref), getSortedCarouselButtons (copy)
 	if not PageLayout.CurrentPage then return end
 	local SortedCarouselButtons = getSortedCarouselButtons()
@@ -194,7 +194,7 @@ function PlayerCarouselModule:FadeTowardsEdges() --[[ Line: 181 ]]
 	end
 end
 
-function PlayerCarouselModule:AddCarouselDivider() --[[ Line: 209 ]]
+function PlayerCarouselModule:AddCarouselDivider()
 	-- upvalues: Frame (ref)
 	local CarouselDivider = Frame:FindFirstChild("_CarouselDivider")
 	
@@ -226,7 +226,7 @@ function PlayerCarouselModule:AddCarouselDivider() --[[ Line: 209 ]]
 	end
 end
 
-function PlayerCarouselModule:RemovePlayerEntry(Key) --[[ Line: 244 ]]
+function PlayerCarouselModule:RemovePlayerEntry(Key)
 	-- upvalues: ImageButtons (ref), Keys (ref), PageLayout (ref)
 	local ImageButton = ImageButtons[Key]
 	
@@ -242,7 +242,7 @@ function PlayerCarouselModule:RemovePlayerEntry(Key) --[[ Line: 244 ]]
 	end
 end
 
-function PlayerCarouselModule:ClearPlayerEntries() --[[ Line: 259 ]]
+function PlayerCarouselModule:ClearPlayerEntries()
 	-- upvalues: Keys (ref), ImageButtons (ref)
 	for key in pairs(Keys) do
 		key:Destroy()
@@ -251,7 +251,7 @@ function PlayerCarouselModule:ClearPlayerEntries() --[[ Line: 259 ]]
 	ImageButtons = {}
 end
 
-function PlayerCarouselModule:CreatePlayerEntry(Key, LayoutOrder) --[[ Line: 268 ]]
+function PlayerCarouselModule:CreatePlayerEntry(Key, LayoutOrder)
 	-- upvalues: ImageButtons (ref), _Color3_1 (copy), _Color3 (copy), TweenService (copy), Keys (ref), PageLayout (ref), Frame (ref), AvatarContextMenu (copy), GuiService (copy)
 	local ImageButton = ImageButtons[Key]
 	
@@ -267,11 +267,11 @@ function PlayerCarouselModule:CreatePlayerEntry(Key, LayoutOrder) --[[ Line: 268
 		ImageButton1.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 		ImageButton1.BackgroundTransparency = 0
 		ImageButton1.Size = UDim2.new(1, 0, 1, 0)
-		ImageButton1.SelectionLost:connect(function() --[[ Line: 283 ]]
+		ImageButton1.SelectionLost:connect(function()
 			-- upvalues: ImageButton1 (copy), _Color3_1 (upval)
 			ImageButton1.BackgroundColor3 = _Color3_1
 		end)
-		ImageButton1.SelectionGained:connect(function() --[[ Line: 284 ]]
+		ImageButton1.SelectionGained:connect(function()
 			-- upvalues: ImageButton1 (copy), _Color3 (upval)
 			ImageButton1.BackgroundColor3 = _Color3
 		end)
@@ -280,12 +280,12 @@ function PlayerCarouselModule:CreatePlayerEntry(Key, LayoutOrder) --[[ Line: 268
 		Tween:Play()
 		Keys[ImageButton1] = Key
 		ImageButtons[Key] = ImageButton1
-		ImageButton1.MouseButton1Click:Connect(function() --[[ Line: 298 ]]
+		ImageButton1.MouseButton1Click:Connect(function()
 			-- upvalues: PageLayout (upval), ImageButton1 (copy)
 			PageLayout:JumpTo(ImageButton1)
 		end)
 		ImageButton1.Parent = Frame
-		spawn(function() --[[ Line: 304 ]]
+		spawn(function()
 			-- upvalues: AvatarContextMenu (upval), ImageButton1 (copy), Key (copy), Tween (ref), GuiService (upval), _Color3 (upval), _Color3_1 (upval)
 			ImageButton1.Image = require(AvatarContextMenu:WaitForChild("ContextMenuUtil")):GetHeadshotForPlayer(Key)
 			Tween:Cancel()
@@ -302,7 +302,7 @@ function PlayerCarouselModule:CreatePlayerEntry(Key, LayoutOrder) --[[ Line: 268
 	end
 end
 
-function PlayerCarouselModule:SwitchToPlayerEntry(p1, p2) --[[ Line: 317 ]]
+function PlayerCarouselModule:SwitchToPlayerEntry(p1, p2)
 	-- upvalues: ImageButtons (ref), PageLayout (ref)
 	if not p1 then return end
 	local ImageButton = ImageButtons[p1]
@@ -315,13 +315,13 @@ function PlayerCarouselModule:SwitchToPlayerEntry(p1, p2) --[[ Line: 317 ]]
 		PageLayout.TweenTime = 0
 	end
 	PageLayout:JumpTo(ImageButton)
-	spawn(function() --[[ Line: 330 ]]
+	spawn(function()
 		-- upvalues: PageLayout (upval)
 		PageLayout.TweenTime = 0.25
 	end)
 end
 
-function PlayerCarouselModule:OffsetPlayerEntry(p1: number) --[[ Line: 335 ]]
+function PlayerCarouselModule:OffsetPlayerEntry(p1: number)
 	-- upvalues: PageLayout (ref)
 	if p1 == 0 then return end
 	if p1 > 0 then
@@ -333,17 +333,17 @@ function PlayerCarouselModule:OffsetPlayerEntry(p1: number) --[[ Line: 335 ]]
 	end
 end
 
-function PlayerCarouselModule:GetSelectedPlayer() --[[ Line: 345 ]]
+function PlayerCarouselModule:GetSelectedPlayer()
 	-- upvalues: Keys (ref), PageLayout (ref)
 	return Keys[PageLayout.CurrentPage]
 end
 
-function PlayerCarouselModule.new(p1) --[[ Line: 349 ]]
+function PlayerCarouselModule.new(p1)
 	-- upvalues: PlayerCarouselModule (copy), CreateMenuCarousel (copy), BindableEvent (ref)
 	local self = setmetatable({}, PlayerCarouselModule)
 	self.rbxGui = CreateMenuCarousel(p1)
 	self.PlayerChanged = BindableEvent.Event
-	BindableEvent.Event:Connect(function() --[[ Line: 355 ]]
+	BindableEvent.Event:Connect(function()
 		-- upvalues: self (copy)
 		self:FadeTowardsEdges()
 	end)

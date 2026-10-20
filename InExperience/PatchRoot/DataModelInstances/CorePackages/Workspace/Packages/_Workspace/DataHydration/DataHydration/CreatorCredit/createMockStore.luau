@@ -4,7 +4,7 @@ local PromiseModule = require(Parent.Promise)
 local CreateDataCacheModule = require(script.Parent.Parent.createDataCache)
 local _ = require(script.Parent.types)
 
-local function _() --[[ Line: 30 | Named "defaultDailyLimit" ]]
+local function _()
 	return {
 		additionalUsageEnabled = false,
 		dailyLimitSet = true,
@@ -12,7 +12,7 @@ local function _() --[[ Line: 30 | Named "defaultDailyLimit" ]]
 	}
 end
 
-local _ = function() --[[ Line: 38 | Named "defaultQuota" ]]
+local _ = function()
 	return {
 		freeTrialDailyAllowance = 100,
 		freeTrialRemaining = 72,
@@ -30,7 +30,7 @@ local _ = function() --[[ Line: 38 | Named "defaultQuota" ]]
 	}
 end
 
-return function(p1) --[[ Line: 52 | Named "createMockStore" ]]
+return function(p1)
 	-- upvalues: CreateDataCacheModule (copy), LuauPolyfillModule (copy), PromiseModule (copy)
 	local P0 = p1 or {}
 	local DataCacheModule = CreateDataCacheModule(300, 300)
@@ -45,7 +45,7 @@ return function(p1) --[[ Line: 52 | Named "createMockStore" ]]
 	local v1 = nil
 	local v2 = 0
 	
-	local function _() --[[ Line: 67 | Named "scheduleAutoPopulate" ]]
+	local function _()
 		-- upvalues: v1 (ref), v2 (ref), DataCacheModule (copy), LuauPolyfillModule (upval)
 		if v1 == nil then return end
 		local v3 = v1
@@ -55,7 +55,7 @@ return function(p1) --[[ Line: 52 | Named "createMockStore" ]]
 			
 			return
 		else
-			LuauPolyfillModule.setTimeout(function() --[[ Line: 76 ]]
+			LuauPolyfillModule.setTimeout(function()
 				-- upvalues: DataCacheModule (upval), v3 (copy)
 				DataCacheModule.replaceItem("current-user", v3)
 			end, v2 * 1000)
@@ -63,7 +63,7 @@ return function(p1) --[[ Line: 52 | Named "createMockStore" ]]
 	end
 	
 	return {
-		getQuotaSummary = function() --[[ Line: 81 ]]
+		getQuotaSummary = function()
 			-- upvalues: DataCacheModule (copy), v1 (ref), v2 (ref), LuauPolyfillModule (upval)
 			local CurrentUserItem, CurrentUserItem2 = DataCacheModule.getItem("current-user")
 			
@@ -78,18 +78,18 @@ return function(p1) --[[ Line: 52 | Named "createMockStore" ]]
 					
 					return CurrentUserItem
 				end
-				LuauPolyfillModule.setTimeout(function() --[[ Line: 76 ]]
+				LuauPolyfillModule.setTimeout(function()
 					-- upvalues: DataCacheModule (upval), v3 (copy)
 					DataCacheModule.replaceItem("current-user", v3)
 				end, v2 * 1000)
 			end
 			return CurrentUserItem
 		end,
-		getQuotaSummarySignals = function() --[[ Line: 89 ]]
+		getQuotaSummarySignals = function()
 			-- upvalues: DataCacheModule (copy)
 			return (DataCacheModule.getItem("current-user"))
 		end,
-		refreshQuotaSummary = function() --[[ Line: 94 ]]
+		refreshQuotaSummary = function()
 			-- upvalues: DataCacheModule (copy), v1 (ref), PromiseModule (upval)
 			local DataResult = DataCacheModule.getItem("current-user").data(false)
 			local V10 = v1 or (DataResult or {
@@ -111,7 +111,7 @@ return function(p1) --[[ Line: 52 | Named "createMockStore" ]]
 			
 			return PromiseModule.resolve(V10)
 		end,
-		getDailyLimit = function() --[[ Line: 101 ]]
+		getDailyLimit = function()
 			-- upvalues: DataCacheModule1 (copy)
 			if DataCacheModule1.getItem("current-user").data(false) == nil then
 				DataCacheModule1.replaceItem("current-user", {
@@ -122,11 +122,11 @@ return function(p1) --[[ Line: 52 | Named "createMockStore" ]]
 			end
 			return (DataCacheModule1.getItem("current-user"))
 		end,
-		getDailyLimitSignals = function() --[[ Line: 109 ]]
+		getDailyLimitSignals = function()
 			-- upvalues: DataCacheModule1 (copy)
 			return (DataCacheModule1.getItem("current-user"))
 		end,
-		refreshDailyLimit = function() --[[ Line: 114 ]]
+		refreshDailyLimit = function()
 			-- upvalues: DataCacheModule1 (copy), PromiseModule (upval)
 			local DataResult = DataCacheModule1.getItem("current-user").data(false) or {
 				additionalUsageEnabled = false,
@@ -137,39 +137,39 @@ return function(p1) --[[ Line: 52 | Named "createMockStore" ]]
 			
 			return PromiseModule.resolve(DataResult)
 		end,
-		setDailyLimit = function(p2) --[[ Line: 120 ]]
+		setDailyLimit = function(p2)
 			-- upvalues: DataCacheModule1 (copy), PromiseModule (upval)
 			DataCacheModule1.replaceItem("current-user", p2)
 			
 			return PromiseModule.resolve(p2)
 		end,
-		clear = function() --[[ Line: 125 ]]
+		clear = function()
 			-- upvalues: DataCacheModule (copy), DataCacheModule1 (copy)
 			DataCacheModule.clear()
 			DataCacheModule1.clear()
 		end,
-		dispose = function() --[[ Line: 130 ]]
+		dispose = function()
 			-- upvalues: DataCacheModule (copy), DataCacheModule1 (copy)
 			DataCacheModule.dispose()
 			DataCacheModule1.dispose()
 		end,
-		_setQuota = function(p2) --[[ Line: 145 ]]
+		_setQuota = function(p2)
 			-- upvalues: DataCacheModule (copy)
 			DataCacheModule.replaceItem("current-user", p2)
 		end,
-		_setDailyLimit = function(p2) --[[ Line: 148 ]]
+		_setDailyLimit = function(p2)
 			-- upvalues: DataCacheModule1 (copy)
 			DataCacheModule1.replaceItem("current-user", p2)
 		end,
-		_setError = function() --[[ Line: 151 ]]
+		_setError = function()
 			-- upvalues: DataCacheModule (copy)
 			DataCacheModule.markItemsAsFailed({ "current-user" })
 		end,
-		_setLoading = function() --[[ Line: 154 ]]
+		_setLoading = function()
 			-- upvalues: DataCacheModule (copy)
 			DataCacheModule.clear()
 		end,
-		_setAutoPopulate = function(p2, p3) --[[ Line: 157 ]]
+		_setAutoPopulate = function(p2, p3)
 			-- upvalues: v1 (ref), v2 (ref)
 			v1 = p2 or {
 				freeTrialDailyAllowance = 100,

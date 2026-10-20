@@ -7,7 +7,7 @@ local SponsoredGamesRecordClickFunction = DiscoveryAnalyticsModule.Requests.spon
 local FindAnalyticsFieldInAncestorsFunction = require(Parent.SduiCoreSystem).findAnalyticsFieldInAncestors
 local FFlagLuaAppDemoModePlayButtonTelemetry = require(Parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
 
-return function(p1) --[[ Line: 32 | Named "sduiReportGamePlayIntent" ]]
+return function(p1)
 	-- upvalues: FindAnalyticsFieldInAncestorsFunction (copy), SetGamePlaySessionFunction (copy), SponsoredGamesRecordClickFunction (copy), CalculateRowPositionFieldsFunction (copy), GamePlayIntentFunction (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy)
 	local SduiContext = p1.sduiContext
 	local AnalyticsContext = p1.analyticsContext

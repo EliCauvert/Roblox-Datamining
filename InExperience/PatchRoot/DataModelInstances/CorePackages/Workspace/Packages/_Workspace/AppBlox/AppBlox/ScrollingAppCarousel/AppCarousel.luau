@@ -1,7 +1,7 @@
 ﻿local RoactModule = require(script:FindFirstAncestor("AppBlox").Parent.Roact)
 local AppCarousel = RoactModule.PureComponent:extend("AppCarousel")
 
-function AppCarousel.render(p1) --[[ Line: 9 ]]
+function AppCarousel.render(p1)
 	-- upvalues: RoactModule (copy)
 	local CarouselHeight = p1.props.carouselHeight
 	local ShouldExpandToFitContentHeight = p1.props.shouldExpandToFitContentHeight

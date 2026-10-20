@@ -3,13 +3,13 @@ local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local Context = ReactModule.createContext(nil)
 
-local function createVoiceSpeakingStore() --[[ Line: 17 ]]
+local function createVoiceSpeakingStore()
 	-- upvalues: SignalsModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal({})
 	local t = {}
 	local ClockTimes = {}
 	
-	local function _() --[[ Line: 22 | Named "pruneCache" ]]
+	local function _()
 		-- upvalues: ClockTimes (copy), t (copy)
 		local ClockTime = os.clock()
 		
@@ -22,19 +22,19 @@ local function createVoiceSpeakingStore() --[[ Line: 17 ]]
 	end
 	
 	return {
-		getIsSpeaking = function(Key) --[[ Line: 32 ]]
+		getIsSpeaking = function(Key)
 			-- upvalues: ClockTimes (copy), t (copy), SignalsModule (upval), Signal (copy)
 			ClockTimes[Key] = os.clock()
 			
 			if not t[Key] then
-				t[Key] = SignalsModule.createComputed(function(p1): boolean --[[ Line: 35 ]]
+				t[Key] = SignalsModule.createComputed(function(p1): boolean
 					-- upvalues: Signal (upval), Key (copy)
 					return Signal(p1)[Key] == true
 				end)
 			end
 			return t[Key]
 		end,
-		setParticipants = function(p1) --[[ Line: 43 ]]
+		setParticipants = function(p1)
 			-- upvalues: ClockTimes (copy), t (copy), Signal2 (copy)
 			local ClockTime = os.clock()
 			
@@ -49,7 +49,7 @@ local function createVoiceSpeakingStore() --[[ Line: 17 ]]
 	}
 end
 
-local function buildParticipantsMap(Participants) --[[ Line: 54 ]]
+local function buildParticipantsMap(Participants)
 	local t = {}
 	
 	for i, participant in pairs(Participants) do
@@ -59,7 +59,7 @@ local function buildParticipantsMap(Participants) --[[ Line: 54 ]]
 end
 
 return {
-	useVoiceSpeakingStore = function() --[[ Line: 62 ]]
+	useVoiceSpeakingStore = function()
 		-- upvalues: ReactModule (copy), Context (copy), createVoiceSpeakingStore (copy), buildParticipantsMap (copy)
 		local UseContextResult = ReactModule.useContext(Context)
 		local UseRefResult = ReactModule.useRef(nil)
@@ -68,18 +68,18 @@ return {
 			UseRefResult.current = createVoiceSpeakingStore()
 		end
 		local Current = UseRefResult.current
-		ReactModule.useEffect(function() --[[ Line: 71 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseContextResult (copy), Current (copy), buildParticipantsMap (upval)
 			if not UseContextResult then return end
 			if UseContextResult.participants then
 				Current.setParticipants((buildParticipantsMap(UseContextResult.participants)))
 			end
-			local EventConnection = UseContextResult.participantsUpdate.Event:Connect(function(p1) --[[ Line: 80 ]]
+			local EventConnection = UseContextResult.participantsUpdate.Event:Connect(function(p1)
 				-- upvalues: Current (upval), buildParticipantsMap (upval)
 				Current.setParticipants((buildParticipantsMap(p1)))
 			end)
 			
-			return function() --[[ Line: 84 ]]
+			return function()
 				-- upvalues: EventConnection (copy)
 				EventConnection:Disconnect()
 			end

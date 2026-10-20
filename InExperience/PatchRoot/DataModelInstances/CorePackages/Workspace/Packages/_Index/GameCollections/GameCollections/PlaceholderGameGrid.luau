@@ -14,13 +14,13 @@ local GetGameTileCollectionItemSizeFunction = require(Parent.GameTile).getGameTi
 local FFlagLuaAppCompositionAlways = require(Parent.SharedFlags).FFlagLuaAppCompositionAlways
 local t = {}
 
-local function renderItem(_, _, _, _) --[[ Line: 41 ]]
+local function renderItem(_, _, _, _)
 	return nil, "placeholder"
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 48 | Named "PlaceholderGameGrid" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseAppPolicyFunction (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), FFlagLuaAppCompositionAlways (copy), GetGameTileCollectionItemSizeFunction (copy), ReactModule (copy), UseGameCollectionLayoutParamsModule (copy), UseCollectionLayoutFunction (copy), GameTileConstants (copy), UseGetGameTileHeightModule (copy), t (copy), CollectionGrid (copy), renderItem (copy)
-	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 50 ]]
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2)
 		return p2.useGridPageLayout()
 	end)
 	local UsePreferredInputResult = UsePreferredInputFunction()
@@ -37,7 +37,7 @@ return ReactModule.memo(function(p1) --[[ Line: 48 | Named "PlaceholderGameGrid"
 	
 	if not FFlagLuaAppCompositionAlways then
 		local UseRefResult = ReactModule.useRef(0)
-		ReactModule.useEffect(function() --[[ Line: 101 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: FFlagLuaAppCompositionAlways1 (copy), UseGameCollectionLayoutParamsModuleResult (copy), UseRefResult (copy), p1 (copy)
 			if not FFlagLuaAppCompositionAlways1 and UseGameCollectionLayoutParamsModuleResult.numColumns ~= UseRefResult.current then
 				UseRefResult.current = UseGameCollectionLayoutParamsModuleResult.numColumns
@@ -63,7 +63,7 @@ return ReactModule.memo(function(p1) --[[ Line: 48 | Named "PlaceholderGameGrid"
 			headerComponent = p1.headerComponent,
 			containerRef = UseStateResult2,
 			verticalScrollingFrameRef = p1.verticalScrollingFrameRef,
-			items = ReactModule.useMemo(function() --[[ Line: 124 ]]
+			items = ReactModule.useMemo(function()
 				-- upvalues: ItemsPerRow1 (copy), ClampedValue (copy), t (upval)
 				local List = {}
 				

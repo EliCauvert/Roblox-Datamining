@@ -5,9 +5,9 @@ local _ = require(Parent.util.Types)
 local PcallDeferredModule = require(Parent.util.pcallDeferred)
 local GetFIntUGCLCCagingRelevancyMinimumModule = require(Parent.flags.getFIntUGCLCCagingRelevancyMinimum)
 
-return function(p1, p2, p3, OffsetInner, OffsetOuter, p4) --[[ Line: 11 | Named "validateLCCagingRelevancy" ]]
+return function(p1, p2, p3, OffsetInner, OffsetOuter, p4)
 	-- upvalues: PcallDeferredModule (copy), UGCValidationService (copy), AnalyticsModule (copy), GetFIntUGCLCCagingRelevancyMinimumModule (copy)
-	local PcallDeferredModuleResult, PcallDeferredModuleResult2, PcallDeferredModuleResult3 = PcallDeferredModule(function() --[[ Line: 19 ]]
+	local PcallDeferredModuleResult, PcallDeferredModuleResult2, PcallDeferredModuleResult3 = PcallDeferredModule(function()
 		-- upvalues: UGCValidationService (upval), p1 (copy), p2 (copy), p3 (copy), OffsetInner (copy), OffsetOuter (copy)
 		return UGCValidationService:GetEditableCagingRelevancyMetrics(p1.editableMesh, p2.editableMesh, p3.editableMesh, OffsetInner, OffsetOuter)
 	end, p4)

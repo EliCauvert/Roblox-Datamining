@@ -73,30 +73,30 @@ Cell.defaultProps = {
 	textPadding = { left = 12, right = 12 }
 }
 
-function Cell.init(p1) --[[ Line: 134 ]]
+function Cell.init(p1)
 	-- upvalues: ControlStateModule (copy)
 	p1.state = {
 		keyLabelWidth = 0,
 		controlState = ControlStateModule.Default
 	}
 	
-	function p1.keyLabelSizeChanged(Frame) --[[ Line: 141 ]]
+	function p1.keyLabelSizeChanged(Frame)
 		-- upvalues: p1 (copy)
 		p1:setState({ keyLabelWidth = Frame.AbsoluteSize.X })
 	end
 	
-	function p1.setControlState(ControlState) --[[ Line: 147 ]]
+	function p1.setControlState(ControlState)
 		-- upvalues: p1 (copy)
 		p1:setState({ controlState = ControlState })
 	end
 	
-	function p1:onStateChanged(ControlState) --[[ Line: 153 ]]
+	function p1:onStateChanged(ControlState)
 		-- upvalues: p1 (copy)
 		p1.setControlState(ControlState)
 	end
 end
 
-function Cell.getImageProperties(p1) --[[ Line: 158 ]]
+function Cell.getImageProperties(p1)
 	-- upvalues: ComponentAssetsCircle17 (copy), ImagesModule (copy)
 	local ImageRectSize = ComponentAssetsCircle17.ImageRectSize
 	local ImageRectOffset = ComponentAssetsCircle17.ImageRectOffset
@@ -117,7 +117,7 @@ function Cell.getImageProperties(p1) --[[ Line: 158 ]]
 	end
 end
 
-function Cell.renderRoundedBackground(p1, ZIndex, Background) --[[ Line: 192 ]]
+function Cell.renderRoundedBackground(p1, ZIndex, Background)
 	-- upvalues: RoactModule (copy), RoundedFrameModule (copy)
 	local _UDim = UDim.new(0, p1.props.borderCornerRadius)
 	
@@ -129,9 +129,9 @@ function Cell.renderRoundedBackground(p1, ZIndex, Background) --[[ Line: 192 ]]
 	})
 end
 
-function Cell.renderWithSelectionCursor(p1, _) --[[ Line: 202 ]]
+function Cell.renderWithSelectionCursor(p1, _)
 	-- upvalues: WithStyleModule (copy), ControlStateModule (copy), DivideTransparencyModule (copy), Object (copy), RoactModule (copy), ImageSetComponentModule (copy), GenericTextLabelModule (copy), KeyLabelModule (copy), ImagesModule (copy), InteractableModule (copy)
-	return WithStyleModule(function(p2) --[[ Line: 203 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: p1 (copy), ControlStateModule (upval), DivideTransparencyModule (upval), Object (upval), RoactModule (upval), ImageSetComponentModule (upval), GenericTextLabelModule (upval), KeyLabelModule (upval), ImagesModule (upval), InteractableModule (upval)
 		local Theme = p2.Theme
 		local _Font = p2.Font
@@ -276,9 +276,9 @@ function Cell.renderWithSelectionCursor(p1, _) --[[ Line: 202 ]]
 	end)
 end
 
-function Cell.render(p1) --[[ Line: 417 ]]
+function Cell.render(p1)
 	-- upvalues: WithSelectionCursorProviderModule (copy)
-	return WithSelectionCursorProviderModule(function(p2) --[[ Line: 418 ]]
+	return WithSelectionCursorProviderModule(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithSelectionCursor(p2)
 	end)

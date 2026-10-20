@@ -8,12 +8,12 @@ local RealtimeDeliveryModule = require(Parent.RealtimeDelivery)
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local FFlagSquadAppChatRTNFix = require(Parent.SharedFlags).FFlagSquadAppChatRTNFix
 
-return function(p1) --[[ Line: 20 | Named "SquadAppChatEventReceiver" ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), SquadExternalContractContextModule (copy), FFlagSquadAppChatRTNFix (copy), UseCurrentSquadParentChannelIdModule (copy), RealtimeDeliveryModule (copy), ConstantsModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseContextResult = ReactModule.useContext(SquadExternalContractContextModule)
 	local UseCurrentSquadParentChannelIdModuleResult = if FFlagSquadAppChatRTNFix then UseCurrentSquadParentChannelIdModule() else p1.conversationId
-	RealtimeDeliveryModule.useRealtimeNamespace(ConstantsModule.COMMUNICATION_CHANNEL_RTN_NAMESPACE, function(p2) --[[ Line: 28 ]]
+	RealtimeDeliveryModule.useRealtimeNamespace(ConstantsModule.COMMUNICATION_CHANNEL_RTN_NAMESPACE, function(p2)
 		-- upvalues: FFlagSquadAppChatRTNFix (upval), p1 (copy), ConstantsModule (upval), UseCurrentSquadParentChannelIdModuleResult (copy), UseContextResult (copy), UseDispatchResult (copy)
 		local IsConversationIdMatch: boolean = not FFlagSquadAppChatRTNFix and (p1.conversationId and p1.conversationId == p2.ChannelId)
 		

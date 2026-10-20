@@ -9,7 +9,7 @@ local FillBehavior = FoundationModule.Enums.FillBehavior
 local IconName = FoundationModule.Enums.IconName
 local InputSize = FoundationModule.Enums.InputSize
 
-return function(p1) --[[ Line: 30 | Named "LatestVersionCardView" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), Text (copy), Button (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy)
 	local TestId = p1.testId or "LatestVersionCardView"
 	

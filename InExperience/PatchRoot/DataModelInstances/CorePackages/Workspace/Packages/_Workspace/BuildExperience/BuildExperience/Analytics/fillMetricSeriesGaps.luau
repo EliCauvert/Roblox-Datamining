@@ -1,10 +1,10 @@
 ﻿local MetricGranularity = require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.ExperienceAnalytics).MetricGranularity
 
-local function _(p1) --[[ Line: 25 | Named "toIsoDay" ]]
+local function _(p1)
 	return DateTime.fromUnixTimestamp(p1):ToIsoDate()
 end
 
-return function(p1, p2) --[[ Line: 29 | Named "fillMetricSeriesGaps" ]]
+return function(p1, p2)
 	-- upvalues: MetricGranularity (copy)
 	if p1 == nil or p2 == nil or p1.granularity ~= MetricGranularity.OneDay then
 		return p1

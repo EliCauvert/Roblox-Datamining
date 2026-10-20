@@ -3,7 +3,7 @@ local _ = require(Parent.React)
 local UserCtaAction = require(Parent.UserCtaCommon).Enums.UserCtaAction
 local _ = require(script.Parent.Types)
 
-return function(List, p1, Callback1, Callback) --[[ Line: 17 | Named "buildJoinCardActionsComponent" ]]
+return function(List, p1, Callback1, Callback)
 	-- upvalues: UserCtaAction (copy)
 	local RenderResults = {}
 	local Config = nil
@@ -24,7 +24,7 @@ return function(List, p1, Callback1, Callback) --[[ Line: 17 | Named "buildJoinC
 		if not value.keepOpenOnActivate then
 			value1 = table.clone(value)
 			
-			function value1.onActivated(...) --[[ Line: 43 ]]
+			function value1.onActivated(...)
 				-- upvalues: value (copy), Callback1 (copy)
 				value.onActivated(...)
 				Callback1()

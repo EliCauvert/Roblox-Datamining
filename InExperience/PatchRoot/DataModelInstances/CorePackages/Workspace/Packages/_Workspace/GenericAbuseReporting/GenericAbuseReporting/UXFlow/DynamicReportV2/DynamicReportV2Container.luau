@@ -36,7 +36,7 @@ local FFlagSurvBloxEventTypeEnabled = require(Parent.SharedFlags).FFlagSurvBloxE
 local FFlagAbuseReportAttributes = require(Parent.SharedFlags).FFlagAbuseReportAttributes
 local FFlagAbuseReportImproveErrorEventsModule = require(GenericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
 
-return ReactModule.memo(function(p1) --[[ Line: 73 | Named "DynamicReportV2Container" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseRoactServiceFunction (copy), RoactNetworking (copy), ReactModule (copy), FFlagAbuseReportAttributes (copy), FFlagEnableInlineSurveyOnUserReport (copy), DashModule (copy), FetchConfigWithAttributesModule (copy), SendAnalyticsEventFunction (copy), TelemetryEventType (copy), GetNewRunIdFunction (copy), FFlagAbuseReportImproveErrorEventsModule (copy), FormatErrorDetailForAnalyticsFunction (copy), FFlagSurvBloxEventTypeEnabled (copy), SurveyEventPublisherModule (copy), WebViewEventTypeModule (copy), AbuseVectorModule (copy), SendBoundaryErrorTelemetryModule (copy), UseFocusNavigationRefsModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), CoreGui (copy), UseIsSpatialFunction (copy), FixDynamicReportV2VRAsync (copy), UseVrOverlayModule (copy), Sheet (copy), DialogSize (copy), AbuseReportErrorBoundaryModule (copy), AbuseReportContentModule (copy), DynamicReportV2LoadingModule (copy), DynamicReportV2ErrorModule (copy), OverlayProvider (copy), InlineSurveyModule (copy), InlineEventTypeModule (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
@@ -67,11 +67,11 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "DynamicReportV2Conta
 		end
 		Attributes = UseRefResult2.current or false
 	end
-	ReactModule.useEffect(function() --[[ Line: 106 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: FetchConfigWithAttributesModule (upval), UseRoactServiceResult (copy), p1 (copy), FFlagAbuseReportAttributes (upval), UseStateResult2 (copy), SendAnalyticsEventFunction (upval), UseRefResult (ref), TelemetryEventType (upval), UseStateResult2_1 (copy), GetNewRunIdFunction (upval), FFlagAbuseReportImproveErrorEventsModule (upval), FormatErrorDetailForAnalyticsFunction (upval), DashModule (upval)
 		local Flag = false
 		local UnixTimestampMillis = DateTime.now().UnixTimestampMillis
-		FetchConfigWithAttributesModule(UseRoactServiceResult, p1.abuseVector, if FFlagAbuseReportAttributes then p1.attributes else { targetId = p1.targetId }):andThen(function(Result) --[[ Line: 118 ]]
+		FetchConfigWithAttributesModule(UseRoactServiceResult, p1.abuseVector, if FFlagAbuseReportAttributes then p1.attributes else { targetId = p1.targetId }):andThen(function(Result)
 			-- upvalues: Flag (ref), UnixTimestampMillis (copy), UseStateResult2 (upval), SendAnalyticsEventFunction (upval), p1 (upval), FFlagAbuseReportAttributes (upval), UseRefResult (upval), TelemetryEventType (upval)
 			if not Flag then
 				local ResponseBody = Result.responseBody
@@ -95,7 +95,7 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "DynamicReportV2Conta
 				
 				return
 			end
-		end):catch(function(Err) --[[ Line: 143 ]]
+		end):catch(function(Err)
 			-- upvalues: Flag (ref), UseStateResult2_1 (upval), SendAnalyticsEventFunction (upval), p1 (upval), FFlagAbuseReportAttributes (upval), UseRefResult (upval), GetNewRunIdFunction (upval), TelemetryEventType (upval), FFlagAbuseReportImproveErrorEventsModule (upval), FormatErrorDetailForAnalyticsFunction (upval), DashModule (upval)
 			if not Flag then
 				warn("Failed to fetch Dynamic Report V2 config:", Err)
@@ -117,7 +117,7 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "DynamicReportV2Conta
 			end
 		end)
 		
-		return function() --[[ Line: 165 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end
@@ -132,7 +132,7 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "DynamicReportV2Conta
 	
 	if FFlagEnableInlineSurveyOnUserReport then
 		UseRefResult5 = ReactModule.useRef(false)
-		UseResult = ReactModule.useCallback(function(p2) --[[ Line: 189 ]]
+		UseResult = ReactModule.useCallback(function(p2)
 			-- upvalues: UseRefResult5 (ref), p1 (copy)
 			if p2.didSubmit then
 				UseRefResult5.current = true
@@ -142,17 +142,17 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "DynamicReportV2Conta
 				end
 			end
 		end, { p1.onSubmit })
-		Callback = ReactModule.useCallback(function() --[[ Line: 198 ]]
+		Callback = ReactModule.useCallback(function()
 			-- upvalues: FFlagSurvBloxEventTypeEnabled (upval), SurveyEventPublisherModule (upval), WebViewEventTypeModule (upval)
 			if FFlagSurvBloxEventTypeEnabled then
 				SurveyEventPublisherModule.publishSurveyEvent(WebViewEventTypeModule.ReportSubmitted)
 			end
 		end, {})
-		UseResult1 = ReactModule.useCallback(function() --[[ Line: 204 ]]
+		UseResult1 = ReactModule.useCallback(function()
 			-- upvalues: UseRefResult1 (ref)
 			UseRefResult1.current = true
 		end, {})
-		UseResult2 = ReactModule.useCallback(function() --[[ Line: 208 ]]
+		UseResult2 = ReactModule.useCallback(function()
 			-- upvalues: UseRefResult1 (ref), Callback (ref), p1 (copy)
 			if not UseRefResult1.current then
 				Callback()
@@ -160,12 +160,12 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "DynamicReportV2Conta
 			p1.onClose()
 		end, { Callback, p1.onClose })
 	end
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 216 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult4 (copy), UseStateResult2_2 (copy)
 		UseRefResult4.current = true
 		UseStateResult2_2(false)
 	end, {})
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 224 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult4 (copy), UseRefResult3 (copy), UseStateResult2_2 (copy), FFlagEnableInlineSurveyOnUserReport (upval), UseRefResult5 (ref), p1 (copy), AbuseVectorModule (upval), Callback1 (ref), Callback (ref)
 		if not UseRefResult4.current and UseRefResult3.current then
 			UseRefResult3.current.requestClose()
@@ -187,11 +187,11 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "DynamicReportV2Conta
 		end
 		p1.onClose()
 	end, { p1.onClose, p1.abuseVector, Callback })
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 248 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(true)
 	end, {})
-	local UseResult6 = ReactModule.useCallback(function(p2) --[[ Line: 252 ]]
+	local UseResult6 = ReactModule.useCallback(function(p2)
 		-- upvalues: SendBoundaryErrorTelemetryModule (upval), p1 (copy), AnalyticsTargetId (copy), UseStateResult2_1 (copy)
 		warn("AbuseReportErrorBoundary caught:", p2)
 		SendBoundaryErrorTelemetryModule(p2, {
@@ -200,16 +200,16 @@ return ReactModule.memo(function(p1) --[[ Line: 73 | Named "DynamicReportV2Conta
 		})
 		UseStateResult2_1(true)
 	end, { p1.abuseVector, AnalyticsTargetId })
-	local UseFocusNavigationRefsModuleResult = UseFocusNavigationRefsModule(FocusNavigableSurfaceIdentifierEnum.CentralOverlay, function() --[[ Line: 261 ]]
+	local UseFocusNavigationRefsModuleResult = UseFocusNavigationRefsModule(FocusNavigableSurfaceIdentifierEnum.CentralOverlay, function()
 		-- upvalues: UseStateResult2_2 (copy)
 		UseStateResult2_2(false)
 	end)
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(true)
-	local UseResult7 = ReactModule.useCallback(function(p2) --[[ Line: 265 ]]
+	local UseResult7 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_3 (copy)
 		UseStateResult2_3(not p2)
 	end, {})
-	local UseResult8 = ReactModule.useCallback(function(p2) --[[ Line: 268 ]]
+	local UseResult8 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult4 (copy), UseFocusNavigationRefsModuleResult (copy)
 		local Current = if UseStateResult4 then p2 else nil
 		

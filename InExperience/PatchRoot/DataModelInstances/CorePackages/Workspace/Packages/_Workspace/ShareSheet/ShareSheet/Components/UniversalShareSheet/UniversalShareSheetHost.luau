@@ -9,34 +9,34 @@ local ShareSheetSnackbarAutoDismissSeconds = game:DefineFastInt("ShareSheetSnack
 local UseOverlayFunction = FoundationModule.Hooks.useOverlay
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function UniversalShareSheetContent(p1) --[[ Line: 20 ]]
+local function UniversalShareSheetContent(p1)
 	-- upvalues: UseShareSheetViewModelModule (copy), ReactModule (copy), ShareSheetViewModule (copy)
 	return ReactModule.createElement(ShareSheetViewModule, (UseShareSheetViewModelModule(p1)))
 end
 
-return ReactModule.memo(function() --[[ Line: 25 | Named "UniversalShareSheetHost" ]]
+return ReactModule.memo(function()
 	-- upvalues: ReactModule (copy), UseOverlayFunction (copy), UseTokensFunction (copy), UseUniversalShareSheetViewModelModule (copy), ShareSheetSnackbarAutoDismissSeconds (copy), UniversalShareSheetContent (copy), ReactRobloxModule (copy), FoundationModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseOverlayResult = UseOverlayFunction()
 	local UseTokensResult = UseTokensFunction()
 	local UseUniversalShareSheetViewModelModuleResult = UseUniversalShareSheetViewModelModule()
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 31 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(nil)
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 34 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), ShareSheetSnackbarAutoDismissSeconds (upval), UseResult (copy)
 		if UseStateResult == nil then return end
 		local DelayedThread = task.delay(ShareSheetSnackbarAutoDismissSeconds, UseResult)
 		
-		return function() --[[ Line: 40 ]]
+		return function()
 			-- upvalues: DelayedThread (copy)
 			task.cancel(DelayedThread)
 		end
 	end, { UseStateResult, UseResult })
 	local Action = if UseStateResult then UseStateResult.action else nil
 	local Config = if Action then {
-		onActivated = function() --[[ Line: 47 ]]
+		onActivated = function()
 			-- upvalues: UseResult (copy), Action (copy)
 			UseResult()
 			Action.onActivated()

@@ -5,7 +5,7 @@ local ImpressionsTagUtility = require(Parent.Impressions).ImpressionsTagUtility
 local CombineReactTagsFunction = require(Parent.RoactUtils).combineReactTags
 local FFlagSduiOptionSelectorAnchorTag = require(Parent.SharedFlags).FFlagSduiOptionSelectorAnchorTag
 
-return ReactModule.memo(function(p1) --[[ Line: 37 | Named "SduiCollectionItem" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), ImpressionsTagUtility (copy), CryoModule (copy), FFlagSduiOptionSelectorAnchorTag (copy), CombineReactTagsFunction (copy)
 	local LayoutOrder = p1.layoutOrder
 	local Size = p1.size
@@ -15,16 +15,16 @@ return ReactModule.memo(function(p1) --[[ Line: 37 | Named "SduiCollectionItem" 
 	local AutomaticSize = p1.automaticSize
 	local InnerWrapperSize = p1.innerWrapperSize
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 46 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ImpressionsTagUtility (upval), UseRefResult (copy), p1 (copy)
 		ImpressionsTagUtility.AddTag(UseRefResult, p1.impressionsTag, p1.index)
 		
-		return function() --[[ Line: 48 ]]
+		return function()
 			-- upvalues: ImpressionsTagUtility (upval), UseRefResult (upval), p1 (upval)
 			ImpressionsTagUtility.RemoveTag(UseRefResult, p1.impressionsTag, p1.index)
 		end
 	end, { UseRefResult, p1.impressionsTag, p1.index })
-	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 53 ]]
+	local UseResult = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), ImpressionsTagUtility (upval), p1 (copy)
 		UseRefResult.current = Current
 		
@@ -32,7 +32,7 @@ return ReactModule.memo(function(p1) --[[ Line: 37 | Named "SduiCollectionItem" 
 			ImpressionsTagUtility.AddTag(UseRefResult, p1.impressionsTag, p1.index)
 		end
 	end, { p1.impressionsTag, p1.index })
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 60 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy)
 		if p1.onItemSizeChanged then
 			p1.onItemSizeChanged(p1.index, p2)
@@ -50,7 +50,7 @@ return ReactModule.memo(function(p1) --[[ Line: 37 | Named "SduiCollectionItem" 
 	if p1.minHeightBinding then
 		Children = CryoModule.Dictionary.join(Children or {}, {
 			SizeConstraint = ReactModule.createElement("UISizeConstraint", {
-				MinSize = p1.minHeightBinding:map(function(p2: number): Vector2 --[[ Line: 87 ]]
+				MinSize = p1.minHeightBinding:map(function(p2: number): Vector2
 					return Vector2.new(0, if p2 and p2 > 0 then p2 else 0)
 				end)
 			})

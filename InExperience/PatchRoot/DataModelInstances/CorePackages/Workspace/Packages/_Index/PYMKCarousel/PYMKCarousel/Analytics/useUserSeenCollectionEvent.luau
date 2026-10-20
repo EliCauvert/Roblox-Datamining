@@ -22,30 +22,30 @@ local FFlagLuaAppEnableSduiHomePage = SharedFlagsModule.FFlagLuaAppEnableSduiHom
 local GetResult = if FFlagPymkCarouselPresenceStoreMigrationModule then DataHydrationModule.Presence.PresenceStore.get() else nil
 local GetResult1 = if FFlagMigrateFriendshipStatusesPYMKModule then DataHydrationModule.Friends.FriendsStore.get() else nil
 
-local function _(p1) --[[ Line: 61 | Named "getHydratedFriendshipStatus" ]]
+local function _(p1)
 	-- upvalues: GetResult1 (copy)
 	local FriendshipStatus = GetResult1.GetFriendshipStatus(p1, { skipFetch = true })
 	
 	return if FriendshipStatus then FriendshipStatus.data(false) else nil
 end
 
-return function(Callback, p1) --[[ Line: 73 ]]
+return function(Callback, p1)
 	-- upvalues: FFlagMigrateFriendshipStatusesPYMKModule (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), ConstantsModule (copy), FFlagLuaAppEnableSduiHomePage (copy), FFlagPymkCarouselPresenceStoreMigrationModule (copy), React (copy), BuildUserSeenCollectionPayloadFunction (copy), EventNamesModule (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (copy), HttpService (copy), RepeatValueFunction (copy), GetResult (copy), GetFriendStatusModule (copy), GetResult1 (copy), FormatRecommendationContextTypeFunction (copy), UseBatchedImpressionsFunction (copy), FIntUserSeenCollectionBatchTimeMs (copy)
-	local UseSelectorResult = if FFlagMigrateFriendshipStatusesPYMKModule then nil else UseSelectorFunction(function(p2) --[[ Line: 79 ]]
+	local UseSelectorResult = if FFlagMigrateFriendshipStatusesPYMKModule then nil else UseSelectorFunction(function(p2)
 		-- upvalues: GetDeepValueFunction (upval), ConstantsModule (upval)
 		return GetDeepValueFunction(p2, string.format("%s.Friends.friendshipStatus", ConstantsModule.RODUX_KEY)) or {}
 	end)
-	local UseSelectorResult1 = if FFlagLuaAppEnableSduiHomePage then nil else UseSelectorFunction(function(p2) --[[ Line: 85 ]]
+	local UseSelectorResult1 = if FFlagLuaAppEnableSduiHomePage then nil else UseSelectorFunction(function(p2)
 		-- upvalues: GetDeepValueFunction (upval), ConstantsModule (upval)
 		return GetDeepValueFunction(p2, string.format("%s.Friends.recommendations.hasIncomingFriendRequest", ConstantsModule.RODUX_KEY)) or {}
 	end)
-	local UseSelectorResult2 = if FFlagPymkCarouselPresenceStoreMigrationModule then nil else UseSelectorFunction(function(p2) --[[ Line: 93 ]]
+	local UseSelectorResult2 = if FFlagPymkCarouselPresenceStoreMigrationModule then nil else UseSelectorFunction(function(p2)
 		-- upvalues: GetDeepValueFunction (upval)
 		return GetDeepValueFunction(p2, "PYMKCarousel.Presence.byUserId") or {}
 	end)
 	local UseBatchedImpressionsResult = UseBatchedImpressionsFunction({
 		batchTimeMs = FIntUserSeenCollectionBatchTimeMs,
-		mapItem = React.useCallback(function(UserId, p2, p3) --[[ Line: 146 ]]
+		mapItem = React.useCallback(function(UserId, p2, p3)
 			-- upvalues: FFlagPymkCarouselPresenceStoreMigrationModule (upval), GetResult (upval), UseSelectorResult2 (copy), GetFriendStatusModule (upval), FFlagMigrateFriendshipStatusesPYMKModule (upval), GetResult1 (upval), UseSelectorResult (ref), FFlagLuaAppEnableSduiHomePage (upval), UseSelectorResult1 (ref), FormatRecommendationContextTypeFunction (upval)
 			if not p3 or p3.isButtonTile or p3.isTooltip then
 				return nil
@@ -77,7 +77,7 @@ return function(Callback, p1) --[[ Line: 73 ]]
 			UseSelectorResult1,
 			if FFlagPymkCarouselPresenceStoreMigrationModule then nil else UseSelectorResult2
 		}),
-		onFlush = React.useCallback(function(p2, p3) --[[ Line: 99 ]]
+		onFlush = React.useCallback(function(p2, p3)
 			-- upvalues: BuildUserSeenCollectionPayloadFunction (upval), Callback (copy), EventNamesModule (upval), FFlagLuaAppUserSeenCollectionUnifiedFields (upval), HttpService (upval), p1 (copy), RepeatValueFunction (upval)
 			local UserSeenCollectionPayload = BuildUserSeenCollectionPayloadFunction(p2, p3)
 			Callback(EventNamesModule.UserSeenCollection, {
@@ -109,7 +109,7 @@ return function(Callback, p1) --[[ Line: 73 ]]
 		})
 	})
 	
-	return React.useMemo(function() --[[ Line: 191 ]]
+	return React.useMemo(function()
 		-- upvalues: UseBatchedImpressionsResult (copy)
 		return {
 			addTileToCollection = UseBatchedImpressionsResult.addImpression

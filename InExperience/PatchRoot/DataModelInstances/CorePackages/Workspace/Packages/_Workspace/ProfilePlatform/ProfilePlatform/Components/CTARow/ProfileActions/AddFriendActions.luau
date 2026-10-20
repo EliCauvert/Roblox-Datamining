@@ -20,9 +20,9 @@ local GetResult = require(Parent.DataHydration).Friends.FriendsStore.get()
 local USERFRIENDINGERRORS = ConstantsModule.USER_FRIENDING_ERRORS
 local STATUSCODES = ConstantsModule.STATUS_CODES
 
-local function setErrorToast(p1, AddFriend, p2) --[[ Line: 32 ]]
+local function setErrorToast(p1, AddFriend, p2)
 	-- upvalues: EnumsModule (copy), STATUSCODES (copy), USERFRIENDINGERRORS (copy), HttpService (copy), SetCurrentToastMessageFunction (copy)
-	local function getErrorToastMessage(StatusCode, Code) --[[ Line: 33 ]]
+	local function getErrorToastMessage(StatusCode, Code)
 		-- upvalues: AddFriend (copy), EnumsModule (upval), STATUSCODES (upval), USERFRIENDINGERRORS (upval), p1 (copy)
 		if AddFriend == EnumsModule.ProfileActions.AddFriend or AddFriend == EnumsModule.ProfileActions.AddFriendFromContacts then
 			if StatusCode == STATUSCODES.BAD_REQUEST then
@@ -68,13 +68,13 @@ local function setErrorToast(p1, AddFriend, p2) --[[ Line: 32 ]]
 end
 
 return {
-	[EnumsModule.ProfileActions.AddFriend] = function(p1) --[[ Line: 84 ]]
+	[EnumsModule.ProfileActions.AddFriend] = function(p1)
 		-- upvalues: EnumsModule (copy), ButtonVariant (copy), ProfileTypes (copy), EventNamesModule (copy), SetCurrentToastMessageFunction (copy), Images (copy), FFlagMigrateFriendshipStatusesRemainingActions (copy), GetResult (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FriendsStoreChallengeNetworkModule (copy), NetworkingFriendsModule (copy), RefreshProfilePlatformActionInfoModule (copy), setErrorToast (copy)
 		return {
 			text = p1.localized[EnumsModule.ProfileActions.AddFriend],
 			variant = ButtonVariant.Emphasis,
 			onActivated = {
-				[ProfileTypes.User] = function() --[[ Line: 89 ]]
+				[ProfileTypes.User] = function()
 					-- upvalues: p1 (copy), EventNamesModule (upval), EnumsModule (upval), SetCurrentToastMessageFunction (upval), Images (upval), FFlagMigrateFriendshipStatusesRemainingActions (upval), GetResult (upval), FFlagEnableFriendsStoreChallengeInterceptor (upval), FriendsStoreChallengeNetworkModule (upval), NetworkingFriendsModule (upval), RefreshProfilePlatformActionInfoModule (upval), setErrorToast (upval)
 					p1.analytics.fireAnalyticsEvent(EventNamesModule.CTAButtonAddFriend, {
 						buttonSurface = p1.buttonSurface,
@@ -97,10 +97,10 @@ return {
 						targetUserId = p1.profileId,
 						currentUserId = p1.localUserId,
 						friendshipOriginSourceType = p1.profileWrapperContext.sourceInfo.friendshipOriginSourceType
-					}))):andThen(function() --[[ Line: 121 ]]
+					}))):andThen(function()
 						-- upvalues: p1 (upval), RefreshProfilePlatformActionInfoModule (upval)
 						return p1.dispatch(RefreshProfilePlatformActionInfoModule(p1.profileId, p1.actionsComponentRequest))
-					end):catch(function(Err) --[[ Line: 126 ]]
+					end):catch(function(Err)
 						-- upvalues: setErrorToast (upval), p1 (upval), EnumsModule (upval)
 						setErrorToast(p1, EnumsModule.ProfileActions.AddFriend, Err)
 					end)
@@ -108,13 +108,13 @@ return {
 			}
 		}
 	end,
-	[EnumsModule.ProfileActions.AddFriendFromContacts] = function(p1) --[[ Line: 134 ]]
+	[EnumsModule.ProfileActions.AddFriendFromContacts] = function(p1)
 		-- upvalues: ButtonVariant (copy), EnumsModule (copy), ProfileTypes (copy), SetCurrentToastMessageFunction (copy), Images (copy), FFlagMigrateFriendshipStatusesRemainingActions (copy), GetResult (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FriendsStoreChallengeNetworkModule (copy), NetworkingFriendsModule (copy), ContextualInfoTypes (copy), RefreshProfilePlatformModule (copy), setErrorToast (copy)
 		return {
 			variant = ButtonVariant.Emphasis,
 			text = p1.localized[EnumsModule.ProfileActions.AddFriendFromContacts],
 			onActivated = {
-				[ProfileTypes.Contact] = function() --[[ Line: 139 ]]
+				[ProfileTypes.Contact] = function()
 					-- upvalues: p1 (copy), SetCurrentToastMessageFunction (upval), Images (upval), FFlagMigrateFriendshipStatusesRemainingActions (upval), GetResult (upval), FFlagEnableFriendsStoreChallengeInterceptor (upval), FriendsStoreChallengeNetworkModule (upval), NetworkingFriendsModule (upval), ContextualInfoTypes (upval), RefreshProfilePlatformModule (upval), EnumsModule (upval), setErrorToast (upval)
 					p1.dispatch(SetCurrentToastMessageFunction({
 						isLocalized = true,
@@ -126,7 +126,7 @@ return {
 						currentUserId = p1.localUserId,
 						contactId = p1.profileId,
 						contextType = ContextualInfoTypes.Contacts
-					}))):andThen(function() --[[ Line: 158 ]]
+					}))):andThen(function()
 						-- upvalues: p1 (upval), RefreshProfilePlatformModule (upval), EnumsModule (upval)
 						return p1.dispatch(RefreshProfilePlatformModule({
 							profileType = p1.profileType,
@@ -137,7 +137,7 @@ return {
 								EnumsModule.Components.ContactDescription
 							}
 						}))
-					end):catch(function(Err) --[[ Line: 169 ]]
+					end):catch(function(Err)
 						-- upvalues: setErrorToast (upval), p1 (upval), EnumsModule (upval)
 						setErrorToast(p1, EnumsModule.ProfileActions.AddFriendFromContacts, Err)
 					end)
@@ -145,23 +145,23 @@ return {
 			}
 		}
 	end,
-	[EnumsModule.ProfileActions.AddFriendFromContactsSent] = function(p1) --[[ Line: 177 ]]
+	[EnumsModule.ProfileActions.AddFriendFromContactsSent] = function(p1)
 		-- upvalues: ButtonVariant (copy), EnumsModule (copy), ProfileTypes (copy)
 		return {
 			isDisabled = true,
 			variant = ButtonVariant.Subtle,
 			text = p1.localized[EnumsModule.ProfileActions.AddFriendFromContactsSent],
 			onActivated = {
-				[ProfileTypes.Contact] = function() --[[ Line: 182 ]] end
+				[ProfileTypes.Contact] = function() end
 			}
 		}
 	end,
-	[EnumsModule.ProfileActions.CannotAddFriend] = function(p1) --[[ Line: 188 ]]
+	[EnumsModule.ProfileActions.CannotAddFriend] = function(p1)
 		-- upvalues: EnumsModule (copy), ProfileTypes (copy)
 		return {
 			isDisabled = true,
 			text = p1.localized[EnumsModule.ProfileActions.CannotAddFriend],
-			onActivated = { [ProfileTypes.User] = function() --[[ Line: 192 ]] end }
+			onActivated = { [ProfileTypes.User] = function() end }
 		}
 	end
 }

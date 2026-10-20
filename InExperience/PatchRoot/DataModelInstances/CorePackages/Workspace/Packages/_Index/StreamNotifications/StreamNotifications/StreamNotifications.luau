@@ -21,23 +21,23 @@ local AnalyticsConstantsModule = require(StreamNotifications.analytics.analytics
 local FFlagLuaAppSupportDeviceSafeInsets = require(Parent.SharedFlags).FFlagLuaAppSupportDeviceSafeInsets
 local StreamNotificationDropdownExperimentationModule = require(StreamNotifications.StreamNotificationDropdownExperimentation)
 
-local function _(p1): number --[[ Line: 36 | Named "calculateDropdownHeight" ]]
+local function _(p1): number
 	-- upvalues: ConstantsModule (copy)
 	return (math.min(ConstantsModule.Dropdown.MaxHeight, (math.max(p1 - ConstantsModule.Dropdown.VerticalMargin, ConstantsModule.Dropdown.MinHeight))))
 end
 
-return function(p1) --[[ Line: 43 ]]
+return function(p1)
 	-- upvalues: UseStyleFunction (copy), StreamNotificationDropdownExperimentationModule (copy), ReactModule (copy), CurrentCamera (copy), ConstantsModule (copy), InputHandlersModule (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy), StreamNotificationsHeaderModule (copy), StreamNotificationsContentModule (copy), ReactRobloxModule (copy), FFlagLuaAppSupportDeviceSafeInsets (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigableSurfaceIdentifierEnum (copy), FocusNavigationEventNameEnum (copy), CoreGui (copy)
 	local UseStyleResult = UseStyleFunction()
 	local DropdownEnabled = StreamNotificationDropdownExperimentationModule.getDropdownEnabled()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(if DropdownEnabled then math.min(ConstantsModule.Dropdown.MaxHeight, (math.max(CurrentCamera.ViewportSize.Y - ConstantsModule.Dropdown.VerticalMargin, ConstantsModule.Dropdown.MinHeight))) else 0)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(CurrentCamera.ViewportSize.X < ConstantsModule.Modal.WidthLimit)
-	ReactModule.useEffect(function() --[[ Line: 56 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: DropdownEnabled (copy), UseStateResult2 (copy), CurrentCamera (upval), ConstantsModule (upval), UseStateResult2_1 (copy)
 		if DropdownEnabled then
 			UseStateResult2((math.min(ConstantsModule.Dropdown.MaxHeight, (math.max(CurrentCamera.ViewportSize.Y - ConstantsModule.Dropdown.VerticalMargin, ConstantsModule.Dropdown.MinHeight)))))
 		end
-		local Connection = CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function() --[[ Line: 60 ]]
+		local Connection = CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
 			-- upvalues: DropdownEnabled (upval), UseStateResult2 (upval), CurrentCamera (upval), ConstantsModule (upval), UseStateResult2_1 (upval)
 			if DropdownEnabled then
 				UseStateResult2((math.min(ConstantsModule.Dropdown.MaxHeight, (math.max(CurrentCamera.ViewportSize.Y - ConstantsModule.Dropdown.VerticalMargin, ConstantsModule.Dropdown.MinHeight)))))
@@ -51,21 +51,21 @@ return function(p1) --[[ Line: 43 ]]
 			end
 		end)
 		
-		return function() --[[ Line: 70 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end
 	end, { DropdownEnabled })
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(true)
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 76 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_2 (copy)
 		UseStateResult2_2(p2)
 	end)
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(true)
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 83 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: InputHandlersModule (upval), p1 (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval)
-		return InputHandlersModule.onRelease(function(p2) --[[ Line: 84 ]]
+		return InputHandlersModule.onRelease(function(p2)
 			-- upvalues: p1 (upval), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval)
 			p1.displayStream(false)
 			NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.click, AnalyticsConstantsModule.EventNames.closeContent, {
@@ -95,9 +95,9 @@ return function(p1) --[[ Line: 43 ]]
 		Header = ReactModule.createElement(StreamNotificationsHeaderModule, { isSmallScreen = false, displayStream = p1.displayStream }),
 		StreamNotificationsContent = ReactModule.createElement(StreamNotificationsContentModule, {
 			isSmallScreen = false,
-			showOverlay = function() --[[ Line: 126 ]] end,
+			showOverlay = function() end,
 			displayStream = p1.displayStream,
-			setDisplayScreenGuiEnabled = function() --[[ Line: 129 ]] end,
+			setDisplayScreenGuiEnabled = function() end,
 			dropdownHeight = UseStateResult
 		})
 	}) else ReactRobloxModule.createPortal({
@@ -127,7 +127,7 @@ return function(p1) --[[ Line: 43 ]]
 					AutoButtonColor = false,
 					BorderSizePixel = 0,
 					Text = "",
-					[ReactModule.Event.Activated] = function() --[[ Line: 147 ]]
+					[ReactModule.Event.Activated] = function()
 						-- upvalues: p1 (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval)
 						p1.displayStream(false)
 						NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.click, AnalyticsConstantsModule.EventNames.closeContent, {

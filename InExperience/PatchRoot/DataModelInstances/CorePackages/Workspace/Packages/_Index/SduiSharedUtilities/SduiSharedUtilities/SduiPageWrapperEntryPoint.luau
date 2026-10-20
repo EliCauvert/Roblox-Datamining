@@ -32,7 +32,7 @@ local FFlagAppPageShellScrollToTopFocus = require(Parent.SharedFlags).FFlagAppPa
 local FFlagLuaAppsDefaultSelection = require(Parent.SharedFlags).FFlagLuaAppsDefaultSelection
 local FFlagAppThemeHalloween2026HomeBackground = require(Parent.SharedFlags).FFlagAppThemeHalloween2026HomeBackground
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 128 | Named "SduiPageWrapperEntryPoint" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), UseComponentConfigModule (copy), UseUiStatusModule (copy), UiStatus (copy), UseLocalAnalyticsDataModule (copy), ReactModule (copy), Signal (copy), UseStatefulRefModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), ReactFocusNavigationModule (copy), UseCloseWithBackButtonFunction (copy), FFlagAppPageShellScrollToTopFocus (copy), UsePageEntrySnackbarModule (copy), UseDataUpdatedTimestampModule (copy), UseCreateClientBindingSduiContextModule (copy), UseSduiPageContentModule (copy), FFlagLuaAppsDefaultSelection (copy), GetSduiComponentWrapperFunction (copy), FoundationModule (copy), Loading (copy), SduiPageErrorStateModule (copy), VisibilityControl (copy), Page (copy), FFlagAppThemeHalloween2026HomeBackground (copy), ReactRobloxModule (copy), Snackbar (copy), CoreGui (copy)
 	local AppPage = p1.appPage
 	local ConfigKey = p1.configKey or AppPage
@@ -44,19 +44,19 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 128 |
 	local IsUseUiStatusModuleResultMatch = UseUiStatusModuleResult == UiStatus.Loading
 	local IsUseUiStatusModuleResultMatch1 = UseUiStatusModuleResult == UiStatus.Error
 	local UseLocalAnalyticsDataModuleResult = UseLocalAnalyticsDataModule(ConfigKey, AppPage, p1.additionalAnalyticsData)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 142 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Signal (upval)
 		return Signal.new()
 	end, {})
 	local RefreshFunction = p1.refresh
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 146 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseMemoResult (copy), RefreshFunction (copy)
 		UseMemoResult:fire()
 		
 		return if RefreshFunction then RefreshFunction() else nil
 	end, { UseMemoResult, RefreshFunction })
 	local _, UseStatefulRefModuleResult2 = UseStatefulRefModule(p2)
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 156 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval)
 		if p1.onCloseActivated then
 			p1.onCloseActivated()
@@ -77,7 +77,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 128 |
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseCreateClientBindingSduiContextModuleResult = UseCreateClientBindingSduiContextModule(AppPage, UseStateResult, nil, UseDataUpdatedTimestampModule(ConfigKey, p1.contentIdentifier), ConfigKey, nil, p1.routeName, p1.scrollAway, p1.videoPlaybackContext)
 	local LocalStickyHeaderSlot = p1.localStickyHeaderSlot
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 204 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), UseComponentConfigModuleResult (copy), GetSduiComponentWrapperFunction (upval), ReactModule (upval), SduiPageWrapperEntryPointName (copy), UseCreateClientBindingSduiContextModuleResult (copy), UseLocalAnalyticsDataModuleResult (copy), LocalStickyHeaderSlot (copy)
 		local Element = if p1.stickyIdentifier ~= nil and UseComponentConfigModuleResult ~= nil then ReactModule.createElement(GetSduiComponentWrapperFunction(UseComponentConfigModuleResult), {
 			debugName = `{SduiPageWrapperEntryPointName}-sticky`,
@@ -145,7 +145,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 128 |
 				}),
 				stickyHeaderSlot = UseMemoResult1,
 				composition = p1.composition,
-				chrome = ReactModule.useMemo(function() --[[ Line: 264 ]]
+				chrome = ReactModule.useMemo(function()
 					-- upvalues: PageTopPadding (copy), ScrollAway (copy), VisibilityControl (upval)
 					local PageTopPadding1 = PageTopPadding or 0
 					
@@ -156,7 +156,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 128 |
 					
 					if HeaderHeightBinding == nil and ScrollAway and ScrollAway.scrollAwayHeight then
 						local ScrollAwayHeight = ScrollAway.scrollAwayHeight
-						HeaderHeightBinding = VisibilityControl.getHeaderBinding():map(function(p3) --[[ Line: 272 ]]
+						HeaderHeightBinding = VisibilityControl.getHeaderBinding():map(function(p3)
 							-- upvalues: ScrollAwayHeight (copy)
 							return p3 * ScrollAwayHeight
 						end)

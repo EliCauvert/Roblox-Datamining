@@ -16,7 +16,7 @@ local FireAnalyticsEventModule = require(MomentsCreation.Analytics.fireAnalytics
 local MakeCreationEventFieldsModule = require(MomentsCreation.Analytics.makeCreationEventFields)
 local EventNames = MomentsCommonModule.Analytics.EventNames
 
-return function() --[[ Line: 39 | Named "VoiceBackControls" ]]
+return function()
 	-- upvalues: UseCreationControllerFunction (copy), UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseToggleStateFunction (copy), UseLocalizationFunction (copy), FireAnalyticsEventModule (copy), EventNames (copy), MakeCreationEventFieldsModule (copy), ReactModule (copy), View (copy), Menu (copy), FoundationModule (copy), Icon (copy), BuilderIconsModule (copy)
 	local UseCreationControllerResult = UseCreationControllerFunction()
 	local UseTokensResult = UseTokensFunction()
@@ -27,7 +27,7 @@ return function() --[[ Line: 39 | Named "VoiceBackControls" ]]
 		keep = "Feature.Moments.Action.KeepEditing"
 	})
 	
-	local function _() --[[ Line: 55 | Named "fireContinueEditing" ]]
+	local function _()
 		-- upvalues: FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval)
 		FireAnalyticsEventModule(EventNames.EditingFlowVoiceContinueEditingPressed, MakeCreationEventFieldsModule.makeVoiceEventFields())
 	end
@@ -44,7 +44,7 @@ return function() --[[ Line: 39 | Named "VoiceBackControls" ]]
 			isOpen = UseToggleStateResult.enabled,
 			side = FoundationModule.Enums.PopoverSide.Bottom,
 			align = FoundationModule.Enums.PopoverAlign.Start,
-			onPressedOutside = function() --[[ Line: 74 ]]
+			onPressedOutside = function()
 				-- upvalues: UseToggleStateResult (copy), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval)
 				if UseToggleStateResult.enabled then
 					UseToggleStateResult.disable()
@@ -53,7 +53,7 @@ return function() --[[ Line: 39 | Named "VoiceBackControls" ]]
 					return
 				end
 			end,
-			onActivated = function(p1) --[[ Line: 82 ]]
+			onActivated = function(p1)
 				-- upvalues: UseToggleStateResult (copy), UseCreationControllerResult (copy), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval)
 				UseToggleStateResult.disable()
 				
@@ -73,7 +73,7 @@ return function() --[[ Line: 39 | Named "VoiceBackControls" ]]
 		}, {
 			BackButton = ReactModule.createElement(View, {
 				tag = "auto-xy padding-small radius-circle",
-				onActivated = function() --[[ Line: 94 ]]
+				onActivated = function()
 					-- upvalues: FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval), UseCreationControllerResult (copy), UseToggleStateResult (copy)
 					FireAnalyticsEventModule(EventNames.EditingFlowVoiceBackButtonPressed, MakeCreationEventFieldsModule.makeVoiceEventFields())
 					local ActiveSession = UseCreationControllerResult.getActiveSession(false)

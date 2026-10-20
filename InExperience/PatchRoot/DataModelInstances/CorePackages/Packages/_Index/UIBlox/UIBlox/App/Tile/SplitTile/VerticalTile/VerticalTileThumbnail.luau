@@ -4,7 +4,7 @@ local LoadableImageModule = require(Parent.Loading.LoadableImage)
 local _ = require(Parent.Style.StyleTypes)
 local _UDim = UDim.new(0, 8)
 
-return function(p1) --[[ Line: 27 | Named "VerticalTileThumbnail" ]]
+return function(p1)
 	-- upvalues: _UDim (copy), ReactModule (copy), LoadableImageModule (copy)
 	local AspectRatio = p1.aspectRatio
 	local IsTopRounded = p1.isTopRounded

@@ -15,7 +15,7 @@ local MetricUnitTemplateModule = require(BuildExperience.Analytics.metricUnitTem
 local NoDataPlaceholderModule = require(BuildExperience.Components.Analytics.noDataPlaceholder)
 local _ = require(script.Parent.GoalMetricRowView)
 
-local function getNumberValueText(Summary, p1) --[[ Line: 63 ]]
+local function getNumberValueText(Summary, p1)
 	-- upvalues: LocalizationService (copy), FormatStatNumberModule (copy), MetricUnitTemplateModule (copy)
 	local Regular = FormatStatNumberModule(p1.value, Summary.format.unit, "Regular", LocalizationService.RobloxLocaleId)
 	local TemplateForResult = MetricUnitTemplateModule.templateFor(Summary.format.unit)
@@ -27,7 +27,7 @@ local function getNumberValueText(Summary, p1) --[[ Line: 63 ]]
 	}
 end
 
-local function getBreakdownValueText(Summary, p1) --[[ Line: 78 ]]
+local function getBreakdownValueText(Summary, p1)
 	local Format = Summary.format
 	
 	if Format.type == "custom" then
@@ -42,7 +42,7 @@ local function getBreakdownValueText(Summary, p1) --[[ Line: 78 ]]
 	end
 end
 
-local function getNumberDelta(Summary, p1) --[[ Line: 95 ]]
+local function getNumberDelta(Summary, p1)
 	-- upvalues: LocalizationService (copy), MetricValueRoundsToZeroModule (copy), ScaleValueToUnitModule (copy), AnalyticsUnitModule (copy), RoundToDecimalsModule (copy)
 	local RobloxLocaleId = LocalizationService.RobloxLocaleId
 	local PriorValue = p1.priorValue
@@ -62,7 +62,7 @@ local function getNumberDelta(Summary, p1) --[[ Line: 95 ]]
 	end
 end
 
-local function getDeltaValueText(p1) --[[ Line: 120 ]]
+local function getDeltaValueText(p1)
 	-- upvalues: LocalizationService (copy), FormatStatNumberModule (copy), AnalyticsUnitModule (copy), MetricUnitTemplateModule (copy)
 	local Regular = FormatStatNumberModule(p1.magnitude, AnalyticsUnitModule.Percent, "Regular", LocalizationService.RobloxLocaleId)
 	local TemplateForResult = MetricUnitTemplateModule.templateFor(AnalyticsUnitModule.Percent)
@@ -74,7 +74,7 @@ local function getDeltaValueText(p1) --[[ Line: 120 ]]
 	}
 end
 
-local function buildLocalizationRequest(List) --[[ Line: 132 ]]
+local function buildLocalizationRequest(List)
 	local Keys = {}
 	
 	for i, value in List do
@@ -95,7 +95,7 @@ local function buildLocalizationRequest(List) --[[ Line: 132 ]]
 	return Keys
 end
 
-return function(p1) --[[ Line: 149 | Named "useGoalMetricRowViewModel" ]]
+return function(p1)
 	-- upvalues: UseGoalMetricSummaryModule (copy), DataStatus (copy), getNumberValueText (copy), getBreakdownValueText (copy), getNumberDelta (copy), getDeltaValueText (copy), UseLocalizationFunction (copy), buildLocalizationRequest (copy), NoDataPlaceholderModule (copy)
 	local Summary = p1.summary
 	local UseGoalMetricSummaryModuleResult = UseGoalMetricSummaryModule(p1.universeId, Summary.source, p1.window, p1.latestAvailableTime)

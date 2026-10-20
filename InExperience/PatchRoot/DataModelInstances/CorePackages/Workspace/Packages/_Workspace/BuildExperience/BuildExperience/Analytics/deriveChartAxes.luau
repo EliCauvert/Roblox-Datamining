@@ -8,7 +8,7 @@ local config = {
 	yTicks = {}
 }
 
-local function _(p1: number, p2): number --[[ Line: 34 | Named "niceNum" ]]
+local function _(p1: number, p2): number
 	if p1 <= 0 then
 		return 1
 	else
@@ -19,7 +19,7 @@ local function _(p1: number, p2): number --[[ Line: 34 | Named "niceNum" ]]
 	end
 end
 
-local function computeYAxis(Value: number, Largest: number) --[[ Line: 65 ]]
+local function computeYAxis(Value: number, Largest: number)
 	if Largest == Value then
 		local ScaledMagnitude: number = if Value == 0 then 1 else math.abs(Value) * 0.5
 		
@@ -48,7 +48,7 @@ local function computeYAxis(Value: number, Largest: number) --[[ Line: 65 ]]
 	}
 end
 
-return function(p1) --[[ Line: 89 | Named "deriveChartAxes" ]]
+return function(p1)
 	-- upvalues: config (copy), computeYAxis (copy)
 	local DataPoints = if p1 == nil then nil else p1.dataPoints
 	

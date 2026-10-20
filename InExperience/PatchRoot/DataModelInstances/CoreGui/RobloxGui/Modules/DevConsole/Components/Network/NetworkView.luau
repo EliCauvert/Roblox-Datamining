@@ -12,12 +12,12 @@ local NetworkSummaryModule = require(Components.Network.NetworkSummary)
 local NetworkChartModule = require(Components.Network.NetworkChart)
 local NetworkView = RoactModule.Component:extend("NetworkView")
 
-function NetworkView.init(p1, p2) --[[ Line: 22 ]]
+function NetworkView.init(p1, p2)
 	-- upvalues: RoactModule (copy)
 	assert(p2.targetNetworkData, "Make sure the NetworkData is assigned for this NetworkView")
 	local CurrentData = p2.targetNetworkData:getCurrentData()
 	
-	function p1.onSortChanged(SortType) --[[ Line: 27 ]]
+	function p1.onSortChanged(SortType)
 		-- upvalues: p2 (copy), p1 (copy)
 		if SortType == p2.targetNetworkData:getSortType() then
 			p1:setState({ reverseSort = not p1.state.reverseSort })
@@ -29,12 +29,12 @@ function NetworkView.init(p1, p2) --[[ Line: 22 ]]
 		end
 	end
 	
-	function p1:onSummaryButton(_) --[[ Line: 41 ]]
+	function p1:onSummaryButton(_)
 		-- upvalues: p1 (copy)
 		p1:setState({ summaryExpanded = not p1.state.summaryExpanded })
 	end
 	
-	function p1:onDetailButton(_) --[[ Line: 47 ]]
+	function p1:onDetailButton(_)
 		-- upvalues: p1 (copy)
 		p1:setState({ entriesExpanded = not p1.state.entriesExpanded })
 	end
@@ -52,14 +52,14 @@ function NetworkView.init(p1, p2) --[[ Line: 22 ]]
 	}
 end
 
-function NetworkView.didUpdate(p1) --[[ Line: 67 ]]
+function NetworkView.didUpdate(p1)
 	if p1.ref.current and p1.state.absWidth ~= p1.ref.current.AbsoluteSize.X then
 		p1:setState({ absWidth = p1.ref.current.AbsoluteSize.X })
 	end
 end
 
-function NetworkView.didMount(p1) --[[ Line: 77 ]]
-	p1.httpEntryAddedConnector = p1.props.targetNetworkData:Signal():Connect(function(HttpSummaryTable, HttpSummaryCount, HttpEntryList) --[[ Line: 79 ]]
+function NetworkView.didMount(p1)
+	p1.httpEntryAddedConnector = p1.props.targetNetworkData:Signal():Connect(function(HttpSummaryTable, HttpSummaryCount, HttpEntryList)
 		-- upvalues: p1 (copy)
 		p1:setState({
 			httpSummaryTable = HttpSummaryTable,
@@ -73,12 +73,12 @@ function NetworkView.didMount(p1) --[[ Line: 77 ]]
 	end
 end
 
-function NetworkView.willUnmount(p1) --[[ Line: 94 ]]
+function NetworkView.willUnmount(p1)
 	p1.httpEntryAddedConnector:Disconnect()
 	p1.httpEntryAddedConnector = nil
 end
 
-function NetworkView.render(p1) --[[ Line: 99 ]]
+function NetworkView.render(p1)
 	-- upvalues: MinFrameWidth (copy), SummaryButtonHeight (copy), EntryFrameHeight (copy), HeaderFrameHeight (copy), RoactModule (copy), BannerButtonModule (copy), ConstantsModule (copy), MainWindow (copy), MainWindowHeader (copy), NetworkSummaryModule (copy), NetworkChartModule (copy)
 	local LayoutOrder = p1.props.layoutOrder
 	local SearchTerm = p1.props.searchTerm

@@ -1,5 +1,5 @@
-﻿return function(p1, p2) --[[ Line: 2 | Named "getToolAsset" ]]
-	return p1.loadAssetForEquip(p2):andThen(function(Result: Tool) --[[ Line: 5 ]]
+﻿return function(p1, p2)
+	return p1.loadAssetForEquip(p2):andThen(function(Result: Tool)
 		if Result:IsA("Tool") then
 			return Result
 		end
@@ -8,7 +8,7 @@
 				return Tool
 			end
 		end
-	end):catch(function(_) --[[ Line: 17 ]]
+	end):catch(function(_)
 		return nil
 	end)
 end

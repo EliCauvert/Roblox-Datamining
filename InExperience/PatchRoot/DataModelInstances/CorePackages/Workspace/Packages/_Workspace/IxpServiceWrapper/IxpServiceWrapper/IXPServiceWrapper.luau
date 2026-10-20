@@ -2,9 +2,9 @@
 local IXPService = game:GetService("IXPService")
 
 return {
-	InitializeAsync = function(_, UserId, UserLayers) --[[ Line: 30 ]]
+	InitializeAsync = function(_, UserId, UserLayers)
 		-- upvalues: RunService (copy), IXPService (copy)
-		local Success, Result = pcall(function() --[[ Line: 31 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: RunService (upval), IXPService (upval), UserLayers (copy), UserId (copy)
 			if RunService:IsStudio() then
 				IXPService:ClearUserLayers()
@@ -21,7 +21,7 @@ return {
 		
 		return Success, Result
 	end,
-	WaitForInitialization = function(_) --[[ Line: 55 ]]
+	WaitForInitialization = function(_)
 		-- upvalues: IXPService (copy)
 		local UserLayerLoadingStatus = IXPService:GetUserLayerLoadingStatus()
 		while UserLayerLoadingStatus == Enum.IXPLoadingStatus.None or UserLayerLoadingStatus == Enum.IXPLoadingStatus.Pending do
@@ -30,42 +30,42 @@ return {
 		end
 		return UserLayerLoadingStatus
 	end,
-	GetLayerData = function(_, LayerName) --[[ Line: 73 ]]
+	GetLayerData = function(_, LayerName)
 		-- upvalues: IXPService (copy)
-		local Success, Result = pcall(function() --[[ Line: 74 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: IXPService (upval), LayerName (copy)
 			return IXPService:GetUserLayerVariables(LayerName)
 		end)
 		
 		return Success and Result or nil
 	end,
-	GetBTIDLayerData = function(_, LayerName) --[[ Line: 89 ]]
+	GetBTIDLayerData = function(_, LayerName)
 		-- upvalues: IXPService (copy)
-		local Success, Result = pcall(function() --[[ Line: 90 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: IXPService (upval), LayerName (copy)
 			return IXPService:GetBrowserTrackerLayerVariables(LayerName)
 		end)
 		
 		return Success and Result or nil
 	end,
-	LogUserLayerExposure = function(_, LayerName) --[[ Line: 102 ]]
+	LogUserLayerExposure = function(_, LayerName)
 		-- upvalues: IXPService (copy)
-		pcall(function() --[[ Line: 103 ]]
+		pcall(function()
 			-- upvalues: IXPService (upval), LayerName (copy)
 			IXPService:LogUserLayerExposure(LayerName)
 		end)
 	end,
-	LogBrowserTrackerLayerExposure = function(_, LayerName) --[[ Line: 113 ]]
+	LogBrowserTrackerLayerExposure = function(_, LayerName)
 		-- upvalues: IXPService (copy)
-		pcall(function() --[[ Line: 114 ]]
+		pcall(function()
 			-- upvalues: IXPService (upval), LayerName (copy)
 			IXPService:LogBrowserTrackerLayerExposure(LayerName)
 		end)
 	end,
-	LogFlagLinkedUserLayerExposure = function(_, LayerName) --[[ Line: 124 ]]
+	LogFlagLinkedUserLayerExposure = function(_, LayerName)
 		-- upvalues: IXPService (copy)
 		if game:GetEngineFeature("EnableLogFlagLinkedUserLayerExposure") then
-			pcall(function() --[[ Line: 126 ]]
+			pcall(function()
 				-- upvalues: IXPService (upval), LayerName (copy)
 				IXPService:LogFlagLinkedUserLayerExposure(LayerName)
 			end)

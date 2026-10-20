@@ -5,13 +5,13 @@ local CreateCreationControllerModule = require(MomentsCreation.CreationControlle
 local GetCreationFlowStoreModule = require(MomentsCreation.Stores.GetCreationFlowStore)
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
 
-return function(p1) --[[ Line: 24 | Named "CreationControllerProvider" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), CreateCreationControllerModule (copy), GetCreationFlowStoreModule (copy), CreationControllerContextModule (copy)
 	local Host = p1.host
 	local ExcludeGallery = p1.excludeGallery
 	
 	return ReactModule.createElement(CreationControllerContextModule.Provider, {
-		value = ReactModule.useMemo(function() --[[ Line: 28 ]]
+		value = ReactModule.useMemo(function()
 			-- upvalues: CreateCreationControllerModule (upval), GetCreationFlowStoreModule (upval), Host (copy), ExcludeGallery (copy)
 			return CreateCreationControllerModule({
 				store = GetCreationFlowStoreModule(false),

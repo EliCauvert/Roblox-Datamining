@@ -27,7 +27,7 @@ local FFlagSduiUseHttpClientModule = require(SduiSharedUtilities.Flags.FFlagSdui
 local FFlagLuaAppSduiHomePageSupport = require(Parent.SharedFlags).FFlagLuaAppSduiHomePageSupport
 local CryoModule = require(Parent.Cryo)
 
-local function mergeTables(p1, List) --[[ Line: 57 ]]
+local function mergeTables(p1, List)
 	-- upvalues: mergeTables (copy)
 	for i, value in List do
 		if typeof(value) ~= "table" then
@@ -47,7 +47,7 @@ local function mergeTables(p1, List) --[[ Line: 57 ]]
 	end
 end
 
-return function(p2) --[[ Line: 91 | Named "handleSduiApiResponse" ]]
+return function(p2)
 	-- upvalues: FFlagSduiAllowNoConfigsBuilt (copy), FFlagLuaAppEnableSduiHomePage (copy), FFlagSduiStreamingRefreshReplacesInputData (copy), FFlagSduiUseHttpClientModule (copy), SduiRequestStatus (copy), SduiLogger (copy), SduiErrors (copy), GetSduiDataBinderFunction (copy), GetSduiTemplateStoreModule (copy), RecordTemplateUsage (copy), SduiUsageRecorder (copy), SduiProtobufResponseHelpersModule (copy), FFlagSduiAlwaysCacheWithIdentifier (copy), FFlagLuaAppSduiStreamingChunkedResponses (copy), SduiInputDataMergeModule (copy), CreateBuilderConfigFunction (copy), GetSduiClientBindingBuilderFunction (copy), FFlagLuaAppSduiHomePageSupport (copy), FFlagEnableSduiV2HomepagePrompts (copy), FFlagPromptsHandlerEnabled (copy), FFlagEnableHomepagePromptsForModalsAndBanners (copy), CryoModule (copy), ProcessClientHintsModule (copy)
 	local Response = p2.response
 	local DecodeResponseFunction = p2.decodeResponse
@@ -69,7 +69,7 @@ return function(p2) --[[ Line: 91 | Named "handleSduiApiResponse" ]]
 	assert(ConfigCacheKey, "configCacheKey must exist")
 	LoadTimer.logNetRequestStats(if FFlagSduiUseHttpClientModule then Response.stats or {} else Response.Stats)
 	LoadTimer.logResponseDecodeBegin()
-	local Success, Result = pcall(function() --[[ Line: 152 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: DecodeResponseFunction (copy), FFlagSduiUseHttpClientModule (upval), Response (copy)
 		return (DecodeResponseFunction(if FFlagSduiUseHttpClientModule then Response.responseBody else Response.Body))
 	end)
@@ -83,7 +83,7 @@ return function(p2) --[[ Line: 91 | Named "handleSduiApiResponse" ]]
 	LoadTimer.logResponseDataUpdateBegin()
 	
 	if ParseHydrationDataFromResponseFunction then
-		local Success1, Result1 = pcall(function() --[[ Line: 176 ]]
+		local Success1, Result1 = pcall(function()
 			-- upvalues: ParseHydrationDataFromResponseFunction (copy), Result (copy), GetSduiDataBinderFunction (upval)
 			local ParseHydrationDataFromResponseResult = ParseHydrationDataFromResponseFunction(Result)
 			
@@ -99,7 +99,7 @@ return function(p2) --[[ Line: 91 | Named "handleSduiApiResponse" ]]
 	local t = {}
 	
 	if ParseTemplateEntriesFromResponseFunction then
-		local Success2, Result2 = pcall(function() --[[ Line: 194 ]]
+		local Success2, Result2 = pcall(function()
 			-- upvalues: t (ref), ParseTemplateEntriesFromResponseFunction (copy), Result (copy), EnableTemplateCache (copy), GetSduiTemplateStoreModule (upval), SurfaceKey (copy), RecordTemplateUsage (upval), SduiUsageRecorder (upval)
 			local ParseTemplateEntriesFromResponseResult, ParseTemplateEntriesFromResponseResult2, ParseTemplateEntriesFromResponseResult3 = ParseTemplateEntriesFromResponseFunction(Result, EnableTemplateCache)
 			t = ParseTemplateEntriesFromResponseResult2
@@ -125,7 +125,7 @@ return function(p2) --[[ Line: 91 | Named "handleSduiApiResponse" ]]
 	local ParsePageEntriesFromResponseResult = if ParsePageEntriesFromResponseFunction then ParsePageEntriesFromResponseFunction(Result) else {}
 	local ParseLocalizedLiteralsFromResponseResult = if ParseLocalizedLiteralsFromResponseFunction then ParseLocalizedLiteralsFromResponseFunction(Result) else SduiProtobufResponseHelpersModule.parseLocalizedLiteralsFromResponse(Result)
 	
-	local function resolveTemplateForRobloxComponent(Name) --[[ Line: 250 ]]
+	local function resolveTemplateForRobloxComponent(Name)
 		-- upvalues: t (ref), GetSduiTemplateStoreModule (upval), SurfaceKey (copy), SduiLogger (upval), SduiErrors (upval)
 		local Entry = t[Name]
 		
@@ -180,12 +180,12 @@ return function(p2) --[[ Line: 91 | Named "handleSduiApiResponse" ]]
 				end
 				continue
 			end
-			local Success3, Result3 = pcall(function() --[[ Line: 338 ]]
+			local Success3, Result3 = pcall(function()
 				-- upvalues: CreateBuilderConfigFunction (upval), SurfaceKey (copy), ConfigCacheKey (copy), EnableTemplateCache (copy), resolveTemplateForRobloxComponent (copy), t (ref), ParseLocalizedLiteralsFromResponseResult (copy), GetSduiClientBindingBuilderFunction (upval), ResolveTemplateForRobloxComponentResult (copy), FFlagLuaAppSduiHomePageSupport (upval), value (copy), InputDataSignalsForRequest (copy)
 				return (GetSduiClientBindingBuilderFunction().buildConfigForComponent(ResolveTemplateForRobloxComponentResult, if FFlagLuaAppSduiHomePageSupport and value.componentInputDataGetter then value.componentInputDataGetter else InputDataSignalsForRequest.get, (CreateBuilderConfigFunction({
 					appPage = SurfaceKey,
 					debugName = ConfigCacheKey,
-					getTemplateForRobloxComponent = function(Name) --[[ Line: 342 ]]
+					getTemplateForRobloxComponent = function(Name)
 						-- upvalues: EnableTemplateCache (upval), resolveTemplateForRobloxComponent (upval), t (upval)
 						return if EnableTemplateCache then resolveTemplateForRobloxComponent(Name) else t[Name]
 					end,
@@ -236,12 +236,12 @@ return function(p2) --[[ Line: 91 | Named "handleSduiApiResponse" ]]
 	end
 	LoadTimer.logSduiTreeBuildEnd()
 	
-	local function getTemplateForRobloxComponent(Name) --[[ Line: 426 ]]
+	local function getTemplateForRobloxComponent(Name)
 		-- upvalues: EnableTemplateCache (copy), resolveTemplateForRobloxComponent (copy), t (ref)
 		return if EnableTemplateCache then resolveTemplateForRobloxComponent(Name) else t[Name]
 	end
 	
-	local function getKnownTemplates() --[[ Line: 436 ]]
+	local function getKnownTemplates()
 		-- upvalues: t (ref), EnableTemplateCache (copy), GetSduiTemplateStoreModule (upval), SurfaceKey (copy)
 		local List = {}
 		
@@ -263,7 +263,7 @@ return function(p2) --[[ Line: 91 | Named "handleSduiApiResponse" ]]
 	end
 	
 	LoadTimer.logSduiClientHintsBegin()
-	local Success4, Result4 = pcall(function() --[[ Line: 454 ]]
+	local Success4, Result4 = pcall(function()
 		-- upvalues: ProcessClientHintsModule (upval), ParsePageEntriesFromResponseResult (copy), getTemplateForRobloxComponent (copy), getKnownTemplates (copy)
 		ProcessClientHintsModule({
 			pageEntries = ParsePageEntriesFromResponseResult,

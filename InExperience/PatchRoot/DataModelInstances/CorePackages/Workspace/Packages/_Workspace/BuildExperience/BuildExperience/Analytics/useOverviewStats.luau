@@ -4,9 +4,9 @@ local AnalyticsMetricModule = require(BuildExperience.Analytics.AnalyticsMetric)
 local _ = require(BuildExperience.Analytics.AnalyticsWindow)
 local UseExperienceMetricSeriesModule = require(BuildExperience.Analytics.useExperienceMetricSeries)
 
-return function(p1, p2, p3) --[[ Line: 23 | Named "useOverviewStats" ]]
+return function(p1, p2, p3)
 	-- upvalues: UseExperienceMetricSeriesModule (copy), AnalyticsMetricModule (copy)
-	local function _(p4) --[[ Line: 28 | Named "latestFor" ]]
+	local function _(p4)
 		-- upvalues: p3 (copy)
 		return if p3 == nil then nil else p3[p4.id]
 	end

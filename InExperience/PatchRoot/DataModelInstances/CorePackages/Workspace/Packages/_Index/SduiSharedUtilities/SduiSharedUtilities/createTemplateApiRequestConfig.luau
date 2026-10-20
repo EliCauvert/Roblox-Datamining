@@ -5,7 +5,7 @@ local _ = require(SduiSharedUtilities.SduiLoadTimer)
 local SduiProtobufResponseHelpersModule = require(SduiSharedUtilities.SduiProtobufResponseHelpers)
 local SduiTemplateApiModule = require(SduiSharedUtilities.SduiTemplateApi)
 
-return function(p1) --[[ Line: 24 | Named "createTemplateApiRequestConfig" ]]
+return function(p1)
 	-- upvalues: SduiTemplateApiModule (copy), SduiIntegrationTypesModule (copy), SduiProtobufResponseHelpersModule (copy)
 	local Request = SduiTemplateApiModule.createRequest({
 		surfaceKeys = { p1.surfaceKey },
@@ -24,11 +24,11 @@ return function(p1) --[[ Line: 24 | Named "createTemplateApiRequestConfig" ]]
 		allowNoConfigsBuilt = p1.allowNoConfigsBuilt,
 		onSuccess = p1.onSuccess,
 		postConfig = Request.postConfig,
-		parsePageEntriesFromResponse = function() --[[ Line: 45 ]]
+		parsePageEntriesFromResponse = function()
 			-- upvalues: p1 (copy)
 			return p1.pageEntries
 		end,
-		parseTemplateEntriesFromResponse = function(p2) --[[ Line: 48 ]]
+		parseTemplateEntriesFromResponse = function(p2)
 			-- upvalues: SduiTemplateApiModule (upval), p1 (copy)
 			return SduiTemplateApiModule.parseResponseForSurface(p2, p1.surfaceKey)
 		end,

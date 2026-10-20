@@ -1,4 +1,4 @@
-﻿return function(p1) --[[ Line: 1 | Named "mapCatalogDiscountInfoToPriceDiscountDetails" ]]
+﻿return function(p1)
 	if type(p1) ~= "table" or type(p1.discounts) ~= "table" or #p1.discounts == 0 then
 		return nil
 	end

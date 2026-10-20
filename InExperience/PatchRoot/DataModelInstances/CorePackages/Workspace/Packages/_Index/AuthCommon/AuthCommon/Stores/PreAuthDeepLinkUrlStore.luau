@@ -1,11 +1,11 @@
 ﻿local Url = nil
 
 return {
-	getUrl = function() --[[ Line: 4 ]]
+	getUrl = function()
 		-- upvalues: Url (ref)
 		return Url
 	end,
-	setUrl = function(Value) --[[ Line: 8 ]]
+	setUrl = function(Value)
 		-- upvalues: Url (ref)
 		Url = Value
 	end

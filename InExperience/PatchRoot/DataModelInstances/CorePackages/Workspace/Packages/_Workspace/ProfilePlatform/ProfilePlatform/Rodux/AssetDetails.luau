@@ -5,7 +5,7 @@ local AssetInfoModule = require(ProfilePlatform.Common.AssetInfo)
 local EnumsModule = require(ProfilePlatform.Common.Enums)
 
 return require(Parent.Rodux).createReducer({}, {
-	[require(ProfilePlatform.Networking.NetworkingCatalog).GetItemAndBundleDetails.Succeeded.name] = function(p1, p2) --[[ Line: 23 ]]
+	[require(ProfilePlatform.Networking.NetworkingCatalog).GetItemAndBundleDetails.Succeeded.name] = function(p1, p2)
 		-- upvalues: EnumsModule (copy), AssetInfoModule (copy), CryoModule (copy)
 		local FromAssetResults = {}
 		

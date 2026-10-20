@@ -10,7 +10,7 @@ local FFlagFriendsRequestsRemoveRedundantParamsModule = require(DataHydration.Fl
 local FetchFunction = HttpClientModule.fetch
 local AsPromiseFunction = HttpClientModule.asPromise
 
-return function(Cursor, Limit, p1) --[[ Line: 22 ]]
+return function(Cursor, Limit, p1)
 	-- upvalues: UrlBuilderModule (copy), HttpModule (copy), FFlagFriendsRequestsRemoveRedundantParamsModule (copy), FFlagAddFriendsPageHighlightUnseenRequests (copy), FFlagAddFriendsSessionId (copy), FetchFunction (copy), AsPromiseFunction (copy)
 	return AsPromiseFunction((FetchFunction({
 		method = "GET",
@@ -23,7 +23,7 @@ return function(Cursor, Limit, p1) --[[ Line: 22 ]]
 			uprankUnseen = if FFlagAddFriendsPageHighlightUnseenRequests then "true" else nil,
 			sessionId = if FFlagAddFriendsSessionId then p1 else nil
 		}),
-		decode = function(p2) --[[ Line: 40 ]]
+		decode = function(p2)
 			return p2
 		end
 	})))

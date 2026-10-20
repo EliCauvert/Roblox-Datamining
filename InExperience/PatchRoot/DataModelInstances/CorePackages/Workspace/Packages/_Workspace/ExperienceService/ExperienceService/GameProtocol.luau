@@ -21,19 +21,19 @@ local GameProtocolModule = {
 			referredByPlayerId = TModule.optional(TModule.number),
 			joinAttemptOrigin = TModule.optional(TModule.string),
 			joinAttemptId = TModule.string
-		}), function(p1) --[[ Line: 45 | Named "checkRequiredParams" ]]
+		}), function(p1)
 			return p1.placeId or p1.userId
 		end)
 	}
 }
 GameProtocolModule.__index = GameProtocolModule
 
-function GameProtocolModule.new() --[[ Line: 57 ]]
+function GameProtocolModule.new()
 	-- upvalues: MessageBus (copy), GameProtocolModule (copy)
 	return (setmetatable({ subscriber = MessageBus.Subscriber.new() }, GameProtocolModule))
 end
 
-function GameProtocolModule:launchGame(p1, p2, Callback: (any) -> ()) --[[ Line: 64 ]]
+function GameProtocolModule:launchGame(p1, p2, Callback: (any) -> ())
 	-- upvalues: HttpService (copy), CryoModule (copy), GetFFlagMoveLuaExpLaunchBeginModule (copy), Default (copy), MessageBus (copy)
 	if type(p1.placeId) == "string" then
 		p1.placeId = tonumber(p1.placeId)

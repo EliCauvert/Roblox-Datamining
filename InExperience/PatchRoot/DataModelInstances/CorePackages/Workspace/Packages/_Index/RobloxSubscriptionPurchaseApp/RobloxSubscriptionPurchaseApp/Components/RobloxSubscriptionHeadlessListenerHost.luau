@@ -6,10 +6,10 @@ local UseRobloxSubscriptionChangedListenerModule = require(RobloxSubscriptionPur
 local UseSubscriptionPollingTimeoutGuardModule = require(RobloxSubscriptionPurchaseApp.Hooks.useSubscriptionPollingTimeoutGuard)
 local UseHeadlessSubscriptionErrorCompletionModule = require(RobloxSubscriptionPurchaseApp.Hooks.useHeadlessSubscriptionErrorCompletion)
 
-return function() --[[ Line: 15 | Named "RobloxSubscriptionHeadlessListenerHost" ]]
+return function()
 	-- upvalues: FFlagEnableHeadlessSubscriptionNativePurchaseCancelCallbackModule (copy), UseNativePurchaseFinishedListenerModule (copy), CompleteRobloxSubscriptionUpsellFlowModule (copy), UseRobloxSubscriptionChangedListenerModule (copy), UseSubscriptionPollingTimeoutGuardModule (copy), UseHeadlessSubscriptionErrorCompletionModule (copy)
 	if FFlagEnableHeadlessSubscriptionNativePurchaseCancelCallbackModule then
-		UseNativePurchaseFinishedListenerModule(nil, nil, function() --[[ Line: 17 ]]
+		UseNativePurchaseFinishedListenerModule(nil, nil, function()
 			-- upvalues: CompleteRobloxSubscriptionUpsellFlowModule (upval)
 			CompleteRobloxSubscriptionUpsellFlowModule()
 		end)

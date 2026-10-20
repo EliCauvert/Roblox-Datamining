@@ -14,7 +14,7 @@ return {
 	},
 	requiredData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 31 ]]
+	run = function(p1, p2)
 		-- upvalues: ValidationEnumsModule (copy), UGCValidationService (copy), ErrorSourceStringsModule (copy)
 		local UploadCategory = p2.uploadCategory
 		local IsUploadCategoryMatch: boolean = UploadCategory == ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS or UploadCategory == ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD

@@ -2,7 +2,7 @@
 local ReactModule = require(Parent.React)
 local Text = require(Parent.Foundation).Text
 
-return function(Frame) --[[ Line: 15 | Named "AccountUpgradeFieldError" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), Text (copy)
 	return if Frame.text == nil or Frame.text == "" then nil else ReactModule.createElement(Text, {
 		tag = "size-full-0 auto-y text-body-small text-wrap text-align-x-left content-system-alert",

@@ -6,7 +6,7 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local DialogSize = FoundationModule.Enums.DialogSize
 local Orientation = FoundationModule.Enums.Orientation
 
-return ReactModule.memo(function(p1) --[[ Line: 26 | Named "GiftRejectConfirmationView" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ButtonVariant (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), Orientation (copy)
 	return if p1.isOpen then ReactModule.createElement(Dialog.Root, {
 		hasBackdrop = true,

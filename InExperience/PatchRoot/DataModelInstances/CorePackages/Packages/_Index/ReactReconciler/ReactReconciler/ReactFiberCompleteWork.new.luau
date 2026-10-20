@@ -1,4 +1,4 @@
-﻿local function _(Text) --[[ Line: 11 | Named "unimplemented" ]]
+﻿local function _(Text)
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. tostring(Text))
@@ -106,17 +106,17 @@ local IncludesSomeLaneFunction = ReactFiberLaneModule.includesSomeLane
 local MergeLanesFunction = ReactFiberLaneModule.mergeLanes
 local TransferActualDurationFunction = require(script.Parent["ReactProfilerTimer.new"]).transferActualDuration
 
-local _ = function(p1) --[[ Line: 190 | Named "markUpdate" ]]
+local _ = function(p1)
 	-- upvalues: Update (copy)
 	p1.flags = bit32.bor(p1.flags, Update)
 end
 
-local _ = function(p1) --[[ Line: 196 | Named "markRef" ]]
+local _ = function(p1)
 	-- upvalues: Ref (copy)
 	p1.flags = bit32.bor(p1.flags, Ref)
 end
 
-local function hadNoMutationsEffects(p1, p2): boolean --[[ Line: 202 ]]
+local function hadNoMutationsEffects(p1, p2): boolean
 	-- upvalues: MutationMask (copy), NoFlags (copy)
 	if p1 ~= nil and p1.child == p2.child then
 		return true
@@ -140,7 +140,7 @@ local Callback: ((any, any, any, any, any) -> ())? = nil
 local Callback2: ((any, any, any, any) -> ())? = nil
 
 if SupportsMutation then
-	Callback1 = function(StateNode, Return, _, _) --[[ Line: 228 ]]
+	Callback1 = function(StateNode, Return, _, _)
 		-- upvalues: HostComponent (copy), HostText (copy), AppendInitialChildFunction (copy), EnableFundamentalAPI (copy), FundamentalComponent (copy), HostPortal (copy)
 		local Child = Return.child
 		while Child ~= nil do
@@ -163,9 +163,9 @@ if SupportsMutation then
 		end
 	end
 	
-	UpdateHostContainer = function(_, _) --[[ Line: 266 ]] end
+	UpdateHostContainer = function(_, _) end
 	
-	Callback = function(p3, Return, Type, PendingProps, p4) --[[ Line: 269 | Named "updateHostComponent" ]]
+	Callback = function(p3, Return, Type, PendingProps, p4)
 		-- upvalues: GetHostContextFunction (copy), PrepareUpdateFunction (copy), ReactFeatureFlags (copy), HostUpdate (copy), Update (copy)
 		local MemoizedProps = p3.memoizedProps
 		
@@ -189,28 +189,28 @@ if SupportsMutation then
 		end
 	end
 	
-	Callback2 = function(_, Return, MemoizedProps, PendingProps) --[[ Line: 323 | Named "updateHostText" ]]
+	Callback2 = function(_, Return, MemoizedProps, PendingProps)
 		-- upvalues: Update (copy)
 		if MemoizedProps ~= PendingProps then
 			Return.flags = bit32.bor(Return.flags, Update)
 		end
 	end
 elseif SupportsPersistence then
-	Callback1 = function(_, _, _, _) --[[ Line: 336 ]]
+	Callback1 = function(_, _, _, _)
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		print("UNIMPLEMENTED ERROR: " .. tostring("appendAllChildren"))
 		error("FIXME (roblox): appendAllChildren is unimplemented", 2)
 	end
 	
-	local _ = function(_, _, _, _) --[[ Line: 431 | Named "appendAllChildrenToContainer" ]]
+	local _ = function(_, _, _, _)
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		print("UNIMPLEMENTED ERROR: " .. tostring("appendAllChildrenToContainer"))
 		error("FIXME (roblox): appendAllChildrenToContainer is unimplemented", 2)
 	end
 	
-	UpdateHostContainer = function(p3, p4) --[[ Line: 525 | Named "updateHostContainer" ]]
+	UpdateHostContainer = function(p3, p4)
 		-- upvalues: hadNoMutationsEffects (copy), CreateContainerChildSetFunction (copy), Update (copy), FinalizeContainerChildrenFunction (copy)
 		local StateNode = p4.stateNode
 		
@@ -229,9 +229,9 @@ elseif SupportsPersistence then
 		end
 	end
 else
-	UpdateHostContainer = function(_, _) --[[ Line: 641 ]] end
+	UpdateHostContainer = function(_, _) end
 end
-local function bubbleProperties(Return): boolean --[[ Line: 734 ]]
+local function bubbleProperties(Return): boolean
 	-- upvalues: NoLanes (copy), NoFlags (copy), EnableProfilerTimer (copy), ProfileMode (copy), NoMode (copy), MergeLanesFunction (copy), StaticMask (copy)
 	local IsChildMatch: boolean = Return.alternate ~= nil and Return.alternate.child == Return.child
 	local Value = NoLanes
@@ -289,7 +289,7 @@ local function bubbleProperties(Return): boolean --[[ Line: 734 ]]
 end
 
 return {
-	completeWork = function(p3, Return, Lanes) --[[ Line: 873 ]]
+	completeWork = function(p3, Return, Lanes)
 		-- upvalues: IndeterminateComponent (copy), LazyComponent (copy), SimpleMemoComponent (copy), FunctionComponent (copy), ForwardRef (copy), Fragment (copy), Mode (copy), ContextConsumer (copy), MemoComponent (copy), bubbleProperties (copy), ClassComponent (copy), IsContextProviderFunction (copy), PopContextFunction (copy), HostRoot (copy), PopHostContainerFunction (copy), PopTopLevelContextObjectFunction (copy), ResetWorkInProgressVersionsFunction (copy), PopHydrationStateFunction (copy), Update (copy), Snapshot (copy), UpdateHostContainer (ref), HostComponent (copy), PopHostContextFunction (copy), GetRootHostContainerFunction (copy), Callback (ref), Ref (copy), InvariantFunction (copy), GetHostContextFunction (copy), PrepareToHydrateHostInstanceFunction (copy), CreateInstanceFunction (copy), Callback1 (ref), FinalizeInitialChildrenFunction (copy), HostText (copy), Callback2 (ref), PrepareToHydrateHostTextInstanceFunction (copy), CreateTextInstanceFunction (copy), Profiler (copy), Callback3 (copy), Passive (copy), PerformedWork (copy), NoFlags (copy), ReactFeatureFlags (copy), LayoutMask (copy), Deletion (copy), HostUpdate (copy), PassiveMask (copy), SuspenseComponent (copy), PopSuspenseContextFunction (copy), EnableSuspenseServerRenderer (copy), PrepareToHydrateHostSuspenseInstanceFunction (copy), EnableSchedulerTracing (copy), MarkSpawnedWorkFunction (copy), OffscreenLane (copy), EnableProfilerTimer (copy), ProfileMode (copy), NoMode (copy), ResetHydrationStateFunction (copy), DidCapture (copy), TransferActualDurationFunction (copy), BlockingMode (copy), HasSuspenseContextFunction (copy), SuspenseStackCursor (copy), InvisibleParentSuspenseContext (copy), RenderDidSuspendFunction (copy), RenderDidSuspendDelayIfPossibleFunction (copy), SupportsPersistence (copy), SupportsMutation (copy), EnableSuspenseCallback (copy), HostPortal (copy), PreparePortalMountFunction (copy), ContextProvider (copy), PopProviderFunction (copy), IncompleteClassComponent (copy), SuspenseListComponent (copy), FundamentalComponent (copy), ScopeComponent (copy), Block (copy), OffscreenComponent (copy), LegacyHiddenComponent (copy), PopRenderLanesFunction (copy), IncludesSomeLaneFunction (copy), ReactFiberWorkLoopNewModule (copy), ConcurrentMode (copy)
 		local PendingProps = Return.pendingProps
 		

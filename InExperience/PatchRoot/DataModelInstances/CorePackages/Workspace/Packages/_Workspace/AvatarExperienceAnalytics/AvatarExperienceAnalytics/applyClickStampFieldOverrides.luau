@@ -1,6 +1,6 @@
 ﻿local UnifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
 
-return function(p1, p2) --[[ Line: 3 | Named "applyClickStampFieldOverrides" ]]
+return function(p1, p2)
 	-- upvalues: UnifiedEventLogConstantsModule (copy)
 	if p2[UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "selectedItemIndex"] ~= nil then
 		p1.selectedItemIndex = nil

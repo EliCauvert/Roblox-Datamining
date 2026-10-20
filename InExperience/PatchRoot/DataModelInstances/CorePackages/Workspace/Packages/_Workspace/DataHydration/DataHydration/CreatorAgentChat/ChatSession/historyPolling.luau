@@ -4,9 +4,9 @@ local HistoryPageUtilsModule = require(script.Parent.historyPageUtils)
 local _ = require(script.Parent.sessionDeps)
 
 return {
-	createHistoryPolling = function(p1) --[[ Line: 23 ]]
+	createHistoryPolling = function(p1)
 		-- upvalues: HistoryPageUtilsModule (copy), ConstantsModule (copy)
-		local function pollSessionHistory(CasSessionId, AfterSequenceId, Callback1: (any) -> (), Callback): boolean --[[ Line: 24 ]]
+		local function pollSessionHistory(CasSessionId, AfterSequenceId, Callback1: (any) -> (), Callback): boolean
 			-- upvalues: p1 (copy), HistoryPageUtilsModule (upval)
 			if Callback() then
 				return false
@@ -41,7 +41,7 @@ return {
 			return not Callback() and #IngestSessionHistoryResult > 0
 		end
 		
-		local function startPollingTurnFromHistory(CasSessionId, ActiveTurnHandle, p2) --[[ Line: 66 ]]
+		local function startPollingTurnFromHistory(CasSessionId, ActiveTurnHandle, p2)
 			-- upvalues: HistoryPageUtilsModule (upval), ConstantsModule (upval), p1 (copy), pollSessionHistory (copy)
 			local P5 = p2 or {}
 			local ResolveNonNegativeNumberResult = HistoryPageUtilsModule.resolveNonNegativeNumber(P5.rtnIdleFallbackSeconds, ConstantsModule.getRtnIdleFallbackSeconds())
@@ -70,14 +70,14 @@ return {
 			local Count1 = 0
 			local Count2 = 0
 			
-			local function shouldStopPolling() --[[ Line: 110 ]]
+			local function shouldStopPolling()
 				-- upvalues: Flag (ref), ActiveTurnHandle (copy), p1 (upval), CasSessionId (copy)
 				return Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId)
 			end
 			
 			local Callback = nil
 			
-			local function _() --[[ Line: 116 | Named "stopPolling" ]]
+			local function _()
 				-- upvalues: Flag1 (ref), Smallest (ref), ResolvePositiveNumberResult (copy), Count2 (ref)
 				if Flag1 then
 					Flag1 = false
@@ -88,7 +88,7 @@ return {
 				end
 			end
 			
-			local _ = function() --[[ Line: 125 | Named "startPolling" ]]
+			local _ = function()
 				-- upvalues: Flag1 (ref), Flag (ref), ActiveTurnHandle (copy), p1 (upval), CasSessionId (copy), Smallest (ref), ResolvePositiveNumberResult (copy), Callback (ref)
 				if not Flag1 and (not Flag and (not ActiveTurnHandle.state(false).isDone and p1.getCasSessionId() == CasSessionId)) then
 					Flag1 = true
@@ -99,7 +99,7 @@ return {
 				end
 			end
 			
-			local _ = function() --[[ Line: 134 | Named "updatePollingState" ]]
+			local _ = function()
 				-- upvalues: Flag (ref), ActiveTurnHandle (copy), p1 (upval), CasSessionId (copy), Flag1 (ref), Smallest (ref), ResolvePositiveNumberResult (copy), Count2 (ref), Flag2 (ref), Flag3 (ref), Callback (ref)
 				if Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId) then
 					if Flag1 then
@@ -127,7 +127,7 @@ return {
 				Count2 += 1
 			end
 			
-			local function refreshSequenceGapState() --[[ Line: 144 ]]
+			local function refreshSequenceGapState()
 				-- upvalues: ActiveTurnHandle (copy), v1 (ref), Flag3 (ref), Count1 (ref), ResolveNonNegativeNumberResult1 (copy), Flag (ref), p1 (upval), CasSessionId (copy), Flag1 (ref), Smallest (ref), ResolvePositiveNumberResult (copy), Count2 (ref), Flag2 (ref), Callback (ref)
 				local HasSequenceGapFunction = ActiveTurnHandle.hasSequenceGap
 				local HasSequenceGap = HasSequenceGapFunction ~= nil and HasSequenceGapFunction()
@@ -139,7 +139,7 @@ return {
 				local Count: number = Count1
 				
 				if HasSequenceGap then
-					task.delay(ResolveNonNegativeNumberResult1, function() --[[ Line: 156 ]]
+					task.delay(ResolveNonNegativeNumberResult1, function()
 						-- upvalues: Count (copy), Count1 (upval), Flag (upval), ActiveTurnHandle (upval), p1 (upval), CasSessionId (upval), v1 (upval), Flag3 (upval), Flag1 (upval), Smallest (upval), ResolvePositiveNumberResult (upval), Count2 (upval), Flag2 (upval), Callback (upval)
 						if Count ~= Count1 or (Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId) or not v1) then return end
 						Flag3 = true
@@ -198,12 +198,12 @@ return {
 			
 			local _ = nil
 			
-			local function v33(Delay) --[[ Line: 168 ]]
+			local function v33(Delay)
 				-- upvalues: Flag4 (ref), Count (ref), Flag (ref), ActiveTurnHandle (copy), p1 (upval), CasSessionId (copy), ResolveNonNegativeNumberResult (copy), ClockTime (ref), v33 (ref), Flag2 (ref), Flag1 (ref), Smallest (ref), ResolvePositiveNumberResult (copy), Count2 (ref), Flag3 (ref), Callback (ref)
 				if not Flag4 then
 					Flag4 = true
 					local Count1 = Count
-					task.delay(Delay, function() --[[ Line: 174 ]]
+					task.delay(Delay, function()
 						-- upvalues: Flag4 (upval), Count1 (copy), Count (upval), Flag (upval), ActiveTurnHandle (upval), p1 (upval), CasSessionId (upval), ResolveNonNegativeNumberResult (upval), ClockTime (upval), v33 (upval), Flag2 (upval), Flag1 (upval), Smallest (upval), ResolvePositiveNumberResult (upval), Count2 (upval), Flag3 (upval), Callback (upval)
 						Flag4 = false
 						
@@ -247,7 +247,7 @@ return {
 				end
 			end
 			
-			local _ = function() --[[ Line: 190 | Named "noteRtnActivity" ]]
+			local _ = function()
 				-- upvalues: ClockTime (ref), Flag2 (ref), Flag (ref), ActiveTurnHandle (copy), p1 (upval), CasSessionId (copy), Flag1 (ref), Smallest (ref), ResolvePositiveNumberResult (copy), Count2 (ref), Flag3 (ref), Callback (ref), v33 (ref), ResolveNonNegativeNumberResult (copy)
 				ClockTime = os.clock()
 				Flag2 = false
@@ -272,11 +272,11 @@ return {
 				v33(ResolveNonNegativeNumberResult)
 			end
 			
-			Callback = function(Delay) --[[ Line: 197 ]]
+			Callback = function(Delay)
 				-- upvalues: Count2 (ref), Flag1 (ref), Flag (ref), ActiveTurnHandle (copy), p1 (upval), CasSessionId (copy), pollSessionHistory (upval), AfterSequenceId (copy), P5 (copy), shouldStopPolling (copy), Smallest (ref), ResolvePositiveNumberResult (copy), refreshSequenceGapState (copy), Flag2 (ref), Flag3 (ref), Callback (ref), ResolvePositiveNumberResult1 (ref), ConstantsModule (upval)
 				Count2 += 1
 				local Count: number = Count2
-				task.delay(Delay, function() --[[ Line: 200 ]]
+				task.delay(Delay, function()
 					-- upvalues: Count (copy), Count2 (upval), Flag1 (upval), Flag (upval), ActiveTurnHandle (upval), p1 (upval), CasSessionId (upval), pollSessionHistory (upval), AfterSequenceId (upval), P5 (upval), shouldStopPolling (upval), Smallest (upval), ResolvePositiveNumberResult (upval), refreshSequenceGapState (upval), Flag2 (upval), Flag3 (upval), Callback (upval), ResolvePositiveNumberResult1 (upval), ConstantsModule (upval)
 					if Count ~= Count2 or not Flag1 or (Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId)) then return end
 					local PollSessionHistoryResult = pollSessionHistory(CasSessionId, AfterSequenceId, P5.onDroppedChatMessage, shouldStopPolling)
@@ -321,7 +321,7 @@ return {
 				end)
 			end
 			
-			local OnNotificationResult = ActiveTurnHandle.onNotification(function() --[[ Line: 232 ]]
+			local OnNotificationResult = ActiveTurnHandle.onNotification(function()
 				-- upvalues: ClockTime (ref), Flag2 (ref), Flag (ref), ActiveTurnHandle (copy), p1 (upval), CasSessionId (copy), Flag1 (ref), Smallest (ref), ResolvePositiveNumberResult (copy), Count2 (ref), Flag3 (ref), Callback (ref), v33 (ref), ResolveNonNegativeNumberResult (copy), refreshSequenceGapState (copy)
 				ClockTime = os.clock()
 				Flag2 = false
@@ -369,7 +369,7 @@ return {
 			end
 			v33(ResolveNonNegativeNumberResult)
 			
-			return function() --[[ Line: 240 ]]
+			return function()
 				-- upvalues: Flag (ref), Count (ref), Count1 (ref), Count2 (ref), OnNotificationResult (copy)
 				Flag = true
 				Count += 1
@@ -381,11 +381,11 @@ return {
 		
 		return {
 			startPollingTurnFromHistory = startPollingTurnFromHistory,
-			startPollingActiveTurn = function(CasSessionId, p2) --[[ Line: 249 ]]
+			startPollingActiveTurn = function(CasSessionId, p2)
 				-- upvalues: p1 (copy), startPollingTurnFromHistory (copy)
 				local ActiveTurnHandle = p1.deps.getActiveTurnHandle(CasSessionId)
 				
-				return if ActiveTurnHandle == nil then function() --[[ Line: 252 ]] end else startPollingTurnFromHistory(CasSessionId, ActiveTurnHandle, p2)
+				return if ActiveTurnHandle == nil then function() end else startPollingTurnFromHistory(CasSessionId, ActiveTurnHandle, p2)
 			end
 		}
 	end

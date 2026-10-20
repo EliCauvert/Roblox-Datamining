@@ -1,4 +1,4 @@
-﻿return function(p1, p2): boolean --[[ Line: 4 | Named "isTapRelease" ]]
+﻿return function(p1, p2): boolean
 	if p1 == nil or p2 == nil then
 		return true
 	else

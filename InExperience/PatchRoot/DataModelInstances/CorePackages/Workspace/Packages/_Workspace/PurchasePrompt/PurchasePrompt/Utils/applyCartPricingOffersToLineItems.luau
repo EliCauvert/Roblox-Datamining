@@ -2,7 +2,7 @@
 local _ = require(PurchasePrompt.Parent.IAPExperience)
 local _ = require(PurchasePrompt.types)
 
-return function(List, p1, List1) --[[ Line: 18 | Named "applyCartPricingOffersToLineItems" ]]
+return function(List, p1, List1)
 	local t = {}
 	
 	for _, value in List1 do

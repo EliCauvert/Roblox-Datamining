@@ -15,7 +15,7 @@ local FillBehavior = FoundationModule.Enums.FillBehavior
 local IconName = FoundationModule.Enums.IconName
 local InputSize = FoundationModule.Enums.InputSize
 
-return function(Frame) --[[ Line: 61 | Named "MyCreationsFilterView" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), RadioGroup (copy), InputSize (copy), CreatorGroupRowModule (copy), View (copy), Text (copy), IconButton (copy), IconName (copy), ButtonVariant (copy), Sheet (copy), SearchInput (copy), List (copy), Button (copy), FillBehavior (copy)
 	local TestId = Frame.testId or "MyCreationsFilterView"
 	local Elements = {}

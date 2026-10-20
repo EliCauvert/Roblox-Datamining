@@ -3,7 +3,7 @@ local _ = require(InExperienceShop.Types)
 local _ = require(InExperienceShop.Api.promoteBonusRobuxPackageToTopPicks)
 local BonusPromotionEligibilityModule = require(InExperienceShop.Api.BonusPromotionEligibility)
 
-return function(p1, Enabled, Ineligible) --[[ Line: 19 | Named "getRobuxPackageBonusPresentation" ]]
+return function(p1, Enabled, Ineligible)
 	-- upvalues: BonusPromotionEligibilityModule (copy)
 	local BonusItemDetails = p1.bonusItemDetails
 	

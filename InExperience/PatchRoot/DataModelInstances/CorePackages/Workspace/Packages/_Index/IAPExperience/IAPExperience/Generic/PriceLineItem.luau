@@ -8,7 +8,7 @@ local CombineReactTagsFunction = require(Parent.RoactUtils).combineReactTags
 local FFlagAXFixDiscountSummaryTextWrapPlusModule = require(IAPExperience.Flags.FFlagAXFixDiscountSummaryTextWrapPlus)
 local RowSizeFull0AutoYAlignYTopPaddingXXsmall: string = if FFlagAXFixDiscountSummaryTextWrapPlusModule then "row size-full-0 auto-y align-y-top padding-x-xsmall" else "row size-full-0 auto-y align-y-center padding-x-xsmall"
 
-return function(Frame) --[[ Line: 28 | Named "PriceLineItem" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), FFlagAXFixDiscountSummaryTextWrapPlusModule (copy), CombineReactTagsFunction (copy), View (copy), RowSizeFull0AutoYAlignYTopPaddingXXsmall (copy), Text (copy)
 	local TextStyle = Frame.textStyle or "text-body-small content-emphasis"
 	
@@ -21,7 +21,7 @@ return function(Frame) --[[ Line: 28 | Named "PriceLineItem" ]]
 			RichText = true,
 			Text = Frame.label,
 			Size = if FFlagAXFixDiscountSummaryTextWrapPlusModule then UDim2.new(0.8, 0, 0, 0) else UDim2.new(0.5, 0, 0, 0),
-			tag = ReactModule.useMemo(function() --[[ Line: 30 ]]
+			tag = ReactModule.useMemo(function()
 				-- upvalues: FFlagAXFixDiscountSummaryTextWrapPlusModule (upval), CombineReactTagsFunction (upval), TextStyle (copy)
 				return if FFlagAXFixDiscountSummaryTextWrapPlusModule then CombineReactTagsFunction("auto-y", TextStyle, "content-emphasis", "text-align-x-left", "text-wrap") else CombineReactTagsFunction("auto-y", TextStyle, "content-emphasis", "text-align-x-left")
 			end, { TextStyle })
@@ -31,7 +31,7 @@ return function(Frame) --[[ Line: 28 | Named "PriceLineItem" ]]
 			RichText = true,
 			Text = Frame.amount,
 			Size = if FFlagAXFixDiscountSummaryTextWrapPlusModule then UDim2.new(0.2, 0, 0, 0) else UDim2.new(0.5, 0, 0, 0),
-			tag = ReactModule.useMemo(function() --[[ Line: 36 ]]
+			tag = ReactModule.useMemo(function()
 				-- upvalues: CombineReactTagsFunction (upval), TextStyle (copy)
 				return CombineReactTagsFunction("auto-y", TextStyle, "content-emphasis", "text-align-x-right")
 			end, { TextStyle })

@@ -5,11 +5,11 @@ local _ = require(script.Parent.AdUpsellMilestoneView)
 local FFlagBuildAgentAdCampaignCardModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignCard)
 local FFlagBuildAdUpsellPinnedModule = require(BuildExperience.Flags.FFlagBuildAdUpsellPinned)
 
-return function(p1) --[[ Line: 27 | Named "useAdUpsellMilestoneViewModel" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), FFlagBuildAdUpsellPinnedModule (copy), AdUpsellVisibilityUtilsModule (copy), FFlagBuildAgentAdCampaignCardModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 32 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseRefResult1 (copy), UseRefResult (copy), FFlagBuildAdUpsellPinnedModule (upval), AdUpsellVisibilityUtilsModule (upval)
 		if p1.isImpressed then
 			UseRefResult1.current = p1.anchorId
@@ -26,7 +26,7 @@ return function(p1) --[[ Line: 27 | Named "useAdUpsellMilestoneViewModel" ]]
 			local Tbl = {}
 			local Flag = false
 			
-			local function disconnectListeners() --[[ Line: 56 ]]
+			local function disconnectListeners()
 				-- upvalues: Flag (ref), Tbl (ref)
 				if Flag then return end
 				Flag = true
@@ -37,7 +37,7 @@ return function(p1) --[[ Line: 27 | Named "useAdUpsellMilestoneViewModel" ]]
 				table.clear(Tbl)
 			end
 			
-			local function reportIfVisible() --[[ Line: 66 ]]
+			local function reportIfVisible()
 				-- upvalues: UseRefResult1 (upval), p1 (upval), Current (copy), Current1 (copy), AdUpsellVisibilityUtilsModule (upval), Flag (ref), Tbl (ref)
 				if UseRefResult1.current ~= p1.anchorId and p1.isPageVisible and Current:IsDescendantOf(Current1) and AdUpsellVisibilityUtilsModule.isCardVisibleInScrollViewport(Current1, Current) then
 					UseRefResult1.current = p1.anchorId

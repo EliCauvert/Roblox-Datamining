@@ -38,7 +38,7 @@ HealthBar.validateProps = TModule.strictInterface({
 	removeKeepOutArea = if FFlagTopBarSignalizeKeepOutAreas then nil else TModule.callback
 })
 
-local function _(p1): Vector3 --[[ Line: 63 | Named "color3ToVector3" ]]
+local function _(p1): Vector3
 	return (Vector3.new(p1.r, p1.g, p1.b))
 end
 
@@ -55,7 +55,7 @@ local config = {
 local HealthRedColor1 = ConstantsModule.HealthRedColor
 local HealthGreenColor1 = ConstantsModule.HealthGreenColor
 
-local function getHealthBarColor(ClampedValue: number) --[[ Line: 77 ]]
+local function getHealthBarColor(ClampedValue: number)
 	-- upvalues: HealthRedColor1 (copy), HealthGreenColor1 (copy), config (copy)
 	if ClampedValue <= 0.1 then
 		return HealthRedColor1
@@ -81,7 +81,7 @@ local function getHealthBarColor(ClampedValue: number) --[[ Line: 77 ]]
 	return Color3.new(TotalRatio.x, TotalRatio.y, TotalRatio.z)
 end
 
-function HealthBar.init(p1) --[[ Line: 102 ]]
+function HealthBar.init(p1)
 	-- upvalues: RoactModule (copy), FFlagTopBarSignalizeHealthBar (copy), ConstantsModule (copy), CoreGuiCommonModule (copy), SignalsModule (copy), StarterGui (copy), FFlagTopBarSignalizeKeepOutAreas (copy), FFlagTopBarSignalizeScreenSize (copy), DisplayModule (copy), TenFootInterfaceModule (copy), _UDim2_3 (copy), EnabledResult (copy), _UDim2_1 (copy), _UDim2_2 (copy), _UDim2 (ref)
 	p1.rootRef = RoactModule.createRef()
 	
@@ -89,7 +89,7 @@ function HealthBar.init(p1) --[[ Line: 102 ]]
 		p1.health, p1.setHealth = RoactModule.createBinding(ConstantsModule.InitialHealth)
 		p1.maxHealth, p1.setMaxHealth = RoactModule.createBinding(ConstantsModule.InitialHealth)
 		p1.isDead, p1.setIsDead = RoactModule.createBinding(false)
-		p1.healthPercent = RoactModule.joinBindings({ p1.health, p1.maxHealth, p1.isDead }):map(function(Entry): number --[[ Line: 108 ]]
+		p1.healthPercent = RoactModule.joinBindings({ p1.health, p1.maxHealth, p1.isDead }):map(function(Entry): number
 			local Entry1 = Entry[1]
 			local Entry2: number = Entry[2]
 			local ClampedValue = 1
@@ -104,13 +104,13 @@ function HealthBar.init(p1) --[[ Line: 102 ]]
 			end
 			return ClampedValue
 		end)
-		p1.healthVisible = RoactModule.joinBindings({ p1.health, p1.maxHealth }):map(function(Entry): boolean --[[ Line: 122 ]]
+		p1.healthVisible = RoactModule.joinBindings({ p1.health, p1.maxHealth }):map(function(Entry): boolean
 			return Entry[1] < Entry[2]
 		end)
 		
 		if CoreGuiCommonModule.Stores.GetLocalHumanoidStore then
 			p1.localHumanoidStore = CoreGuiCommonModule.Stores.GetLocalHumanoidStore(false)
-			p1.disposeHealthConnection = SignalsModule.createEffect(function(p2) --[[ Line: 128 ]]
+			p1.disposeHealthConnection = SignalsModule.createEffect(function(p2)
 				-- upvalues: p1 (copy), ConstantsModule (upval)
 				local HealthValue = p1.localHumanoidStore.getHealthValue(p2)
 				p1.setHealth(HealthValue.health or ConstantsModule.InitialHealth)
@@ -118,12 +118,12 @@ function HealthBar.init(p1) --[[ Line: 102 ]]
 				p1.setIsDead(HealthValue.isDead)
 			end)
 		end
-		local function _() --[[ Line: 137 | Named "getHealthEnabled" ]]
+		local function _()
 			-- upvalues: StarterGui (upval)
 			return StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.Health)
 		end
 		
-		p1.coreGuiChangedSignalConn = StarterGui.CoreGuiChangedSignal:Connect(function(CoreGuiType, MountHealthBar) --[[ Line: 142 ]]
+		p1.coreGuiChangedSignalConn = StarterGui.CoreGuiChangedSignal:Connect(function(CoreGuiType, MountHealthBar)
 			-- upvalues: p1 (copy)
 			if CoreGuiType == Enum.CoreGuiType.Health or CoreGuiType == Enum.CoreGuiType.All then
 				p1:setState({ mountHealthBar = MountHealthBar })
@@ -139,18 +139,18 @@ function HealthBar.init(p1) --[[ Line: 102 ]]
 	if FFlagTopBarSignalizeScreenSize then
 		local GetViewportSizeFunction = DisplayModule.GetDisplayStore(false).getViewportSize
 		p1.screenSizeBinding, p1.setScreenSizeBinding = RoactModule.createBinding(GetViewportSizeFunction(false))
-		p1.disposeScreenSize = SignalsModule.createEffect(function(p2) --[[ Line: 162 ]]
+		p1.disposeScreenSize = SignalsModule.createEffect(function(p2)
 			-- upvalues: p1 (copy), GetViewportSizeFunction (copy)
 			p1.setScreenSizeBinding(GetViewportSizeFunction(p2))
 		end)
-		p1.healthbarSizeBinding = p1.screenSizeBinding:map(function(Vector) --[[ Line: 166 ]]
+		p1.healthbarSizeBinding = p1.screenSizeBinding:map(function(Vector)
 			-- upvalues: TenFootInterfaceModule (upval), _UDim2_3 (upval), EnabledResult (upval), _UDim2_1 (upval), _UDim2_2 (upval), _UDim2 (upval)
 			return if TenFootInterfaceModule:IsEnabled() then _UDim2_3 elseif EnabledResult and Vector.X <= 320 then _UDim2_1 elseif EnabledResult and Vector.X <= 393 then _UDim2_2 else _UDim2
 		end)
 	end
 end
 
-function HealthBar.onUnmount(p1) --[[ Line: 180 ]]
+function HealthBar.onUnmount(p1)
 	-- upvalues: FFlagTopBarSignalizeHealthBar (copy), FFlagTopBarSignalizeScreenSize (copy)
 	if FFlagTopBarSignalizeHealthBar then
 		p1.coreGuiChangedSignalConn:Disconnect()
@@ -161,7 +161,7 @@ function HealthBar.onUnmount(p1) --[[ Line: 180 ]]
 	end
 end
 
-function HealthBar.renderHealth(p1) --[[ Line: 189 ]]
+function HealthBar.renderHealth(p1)
 	-- upvalues: FFlagTopBarSignalizeHealthBar (copy), FFlagTopBarSignalizeScreenSize (copy), EnabledResult (copy), _UDim2_1 (copy), _UDim2_2 (copy), _UDim2 (ref), TenFootInterfaceModule (copy), _UDim2_3 (copy), FFlagTopBarSignalizeKeepOutAreas (copy), ConstantsModule (copy), getHealthBarColor (copy), RoactModule (copy), EnabledFunction (copy)
 	local IsHealthBelow = if FFlagTopBarSignalizeHealthBar then nil else p1.props.healthEnabled and p1.props.health < p1.props.maxHealth
 	local XScale = 1
@@ -194,7 +194,7 @@ function HealthBar.renderHealth(p1) --[[ Line: 189 ]]
 			_Rect = Rect.new(8, 8, 9, 9)
 		end
 	end
-	local function v52(Frame: Frame) --[[ Line: 249 ]]
+	local function v52(Frame: Frame)
 		-- upvalues: EnabledResult (upval), FFlagTopBarSignalizeHealthBar (upval), p1 (copy), IsHealthBelow (ref), FFlagTopBarSignalizeKeepOutAreas (upval), ConstantsModule (upval)
 		if not EnabledResult then
 			if (FFlagTopBarSignalizeHealthBar and p1.healthVisible or not FFlagTopBarSignalizeHealthBar and IsHealthBelow) and Frame then
@@ -225,7 +225,7 @@ function HealthBar.renderHealth(p1) --[[ Line: 189 ]]
 		Position = if EnabledResult then UDim2.new(1, 0, 0, 0) else nil,
 		Visible = if FFlagTopBarSignalizeHealthBar then p1.healthVisible else IsHealthBelow,
 		BackgroundTransparency = 1,
-		Size = if FFlagTopBarSignalizeScreenSize then p1.healthbarSizeBinding:map(function(p2): UDim2 --[[ Line: 277 ]]
+		Size = if FFlagTopBarSignalizeScreenSize then p1.healthbarSizeBinding:map(function(p2): UDim2
 			return UDim2.new(p2.X, UDim.new(1, 0))
 		end) else UDim2.new(_UDim.X, UDim.new(1, 0)),
 		LayoutOrder = p1.props.layoutOrder,
@@ -249,7 +249,7 @@ function HealthBar.renderHealth(p1) --[[ Line: 189 ]]
 				ImageColor3 = if FFlagTopBarSignalizeHealthBar then p1.healthPercent:map(getHealthBarColor) else getHealthBarColor(XScale),
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = _Rect,
-				Size = if FFlagTopBarSignalizeHealthBar then p1.healthPercent:map(function(XScale): UDim2 --[[ Line: 305 ]]
+				Size = if FFlagTopBarSignalizeHealthBar then p1.healthPercent:map(function(XScale): UDim2
 					return UDim2.fromScale(XScale, 1)
 				end) else UDim2.fromScale(XScale, 1)
 			})
@@ -257,26 +257,26 @@ function HealthBar.renderHealth(p1) --[[ Line: 189 ]]
 	})
 end
 
-function HealthBar.render(p1) --[[ Line: 313 ]]
+function HealthBar.render(p1)
 	-- upvalues: FFlagTopBarSignalizeHealthBar (copy)
 	return if FFlagTopBarSignalizeHealthBar then if p1.state.mountHealthBar then p1:renderHealth() else nil else p1:renderHealth()
 end
 
-local function mapDispatchToProps(Callback) --[[ Line: 330 ]]
+local function mapDispatchToProps(Callback)
 	-- upvalues: FFlagTopBarSignalizeKeepOutAreas (copy), SetKeepOutAreaModule (copy), RemoveKeepOutAreaModule (copy)
 	return if FFlagTopBarSignalizeKeepOutAreas then {} else {
-		setKeepOutArea = function(p1, p2, p3) --[[ Line: 335 ]]
+		setKeepOutArea = function(p1, p2, p3)
 			-- upvalues: Callback (copy), SetKeepOutAreaModule (upval)
 			return Callback(SetKeepOutAreaModule(p1, p2, p3))
 		end,
-		removeKeepOutArea = function(p1) --[[ Line: 338 ]]
+		removeKeepOutArea = function(p1)
 			-- upvalues: Callback (copy), RemoveKeepOutAreaModule (upval)
 			return Callback(RemoveKeepOutAreaModule(p1))
 		end
 	}
 end
 
-return RoactRoduxModule.UNSTABLE_connect2(function(p1) --[[ Line: 321 | Named "mapStateToProps" ]]
+return RoactRoduxModule.UNSTABLE_connect2(function(p1)
 	-- upvalues: FFlagTopBarSignalizeScreenSize (copy), FFlagTopBarSignalizeHealthBar (copy)
 	return {
 		screenSize = if FFlagTopBarSignalizeScreenSize then nil else p1.displayOptions.screenSize,

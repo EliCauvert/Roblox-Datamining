@@ -14,7 +14,7 @@ local InputSize = FoundationModule.Enums.InputSize
 local ProgressShape = FoundationModule.Enums.ProgressShape
 local ProgressSize = FoundationModule.Enums.ProgressSize
 
-return ReactModule.memo(function(Frame) --[[ Line: 32 | Named "ChatImagePreviewList" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), Progress (copy), ProgressShape (copy), ProgressSize (copy), Icon (copy), IconName (copy), IconSize (copy), IconButton (copy), InputSize (copy), ButtonVariant (copy), View (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local ImageLabels = {}
@@ -64,7 +64,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 32 | Named "ChatImagePreviewL
 				isCircular = true,
 				ZIndex = 3,
 				icon = IconName.ArrowSpinClockwise,
-				onActivated = function() --[[ Line: 88 ]]
+				onActivated = function()
 					-- upvalues: Frame (copy), LayoutOrder (copy)
 					Frame.onRetry(LayoutOrder)
 				end,
@@ -79,7 +79,7 @@ return ReactModule.memo(function(Frame) --[[ Line: 32 | Named "ChatImagePreviewL
 				ZIndex = 2,
 				AnchorPoint = Vector2.new(1, 0),
 				icon = IconName.X,
-				onActivated = function() --[[ Line: 104 ]]
+				onActivated = function()
 					-- upvalues: Frame (copy), LayoutOrder (copy)
 					Frame.onRemove(LayoutOrder)
 				end,

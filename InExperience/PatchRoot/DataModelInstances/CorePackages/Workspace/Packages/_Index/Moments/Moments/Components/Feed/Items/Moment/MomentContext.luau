@@ -10,10 +10,10 @@ local Context = ReactModule.createContext(nil)
 
 return table.freeze({
 	Context = Context,
-	Provider = function(p1) --[[ Line: 54 ]]
+	Provider = function(p1)
 		-- upvalues: ReactModule (copy), CreateMomentStoreModule (copy), GetFFlagMomentsRenderPostAssetsModule (copy), MediaPreloadProvider (copy), SignalsModule (copy), ReactOtterModule (copy), config (copy), Context (copy)
 		local Data = p1.data
-		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 60 ]]
+		local UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: CreateMomentStoreModule (upval), Data (copy)
 			return CreateMomentStoreModule(Data)
 		end, {
@@ -21,9 +21,9 @@ return table.freeze({
 		})
 		local UseMediaControllerProviderResult = MediaPreloadProvider.useMediaControllerProvider()
 		local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-		ReactModule.useEffect(function() --[[ Line: 67 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: SignalsModule (upval), UseMediaControllerProviderResult (copy), Data (copy), UseStateResult2 (copy)
-			return (SignalsModule.createEffect(function(p2) --[[ Line: 68 ]]
+			return (SignalsModule.createEffect(function(p2)
 				-- upvalues: UseMediaControllerProviderResult (upval), Data (upval), UseStateResult2 (upval)
 				if UseMediaControllerProviderResult == nil then return end
 				local Controller = UseMediaControllerProviderResult.getControllerMap(p2)[Data.momentId]
@@ -36,16 +36,16 @@ return table.freeze({
 			end))
 		end, { Data.momentId, UseMediaControllerProviderResult })
 		local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
-		ReactModule.useEffect(function() --[[ Line: 86 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: SignalsModule (upval), UseMemoResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval)
-			return (SignalsModule.createEffect(function(p2) --[[ Line: 87 ]]
+			return (SignalsModule.createEffect(function(p2)
 				-- upvalues: UseMemoResult (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval)
 				UseAnimatedBindingResult2(ReactOtterModule.ease(if UseMemoResult.getIsScrubbing(p2) then 1 else 0, config))
 			end))
 		end, { UseMemoResult })
 		
 		return ReactModule.createElement(Context.Provider, {
-			value = ReactModule.useMemo(function() --[[ Line: 95 ]]
+			value = ReactModule.useMemo(function()
 				-- upvalues: Data (copy), UseStateResult (copy), UseMemoResult (copy), UseAnimatedBindingResult (copy)
 				return {
 					momentId = Data.momentId,
@@ -61,7 +61,7 @@ return table.freeze({
 			})
 		}, p1.children)
 	end,
-	useMoment = function() --[[ Line: 114 ]]
+	useMoment = function()
 		-- upvalues: ReactModule (copy), Context (copy)
 		local UseContextResult = ReactModule.useContext(Context)
 		

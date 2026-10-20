@@ -18,14 +18,14 @@ local FFlagPlayerListLocalizeGameTextModule = require(Parent.Flags.FFlagPlayerLi
 local FFlagPlayerListTwoTabsOnLegacyPerformanceModule = require(Parent.Flags.FFlagPlayerListTwoTabsOnLegacyPerformance)
 local FFlagPlatformLeaderboardsExposure3EnabledModule = require(Parent.Flags.FFlagPlatformLeaderboardsExposure3Enabled)
 
-return ReactModule.memo(function(p1) --[[ Line: 41 | Named "LegacyTwoTabsBody" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), FFlagPlayerListLocalizeGameTextModule (copy), InExperienceLocalesModule (copy), LocalizationService (copy), FFlagPlayerListTwoTabsOnLegacyPerformanceModule (copy), UseLegacyVisibilityMirrorModule (copy), SignalsReactModule (copy), FFlagPlayerListFixPlatformLeaderboardSizingModule (copy), ConstantsModule (copy), View (copy), PlatformLeaderboardViewModule (copy), LeaderboardTabsModule (copy), FFlagPlatformLeaderboardsExposure3EnabledModule (copy), LocalizationProvider (copy), FoundationProvider (copy), Theme (copy)
 	local Server, Server2 = ReactModule.useState("server")
-	local UseMemoResult = if FFlagPlayerListLocalizeGameTextModule then ReactModule.useMemo(function() --[[ Line: 46 ]]
+	local UseMemoResult = if FFlagPlayerListLocalizeGameTextModule then ReactModule.useMemo(function()
 		-- upvalues: InExperienceLocalesModule (upval), LocalizationService (upval)
 		return InExperienceLocalesModule.Localization.new(LocalizationService.RobloxLocaleId)
 	end, {}) else nil
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 51 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: Server2 (copy)
 		Server2("server")
 	end, {})
